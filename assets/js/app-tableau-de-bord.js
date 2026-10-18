@@ -287,6 +287,15 @@
             if(wrap.dataset.mediaBound)return;wrap.dataset.mediaBound='1';
             const originInput=wrap.closest('[data-dashboard-widget-editor]')?.querySelector('[data-dashboard-media-origin]');
             const set=(sel,v)=>{const el=wrap.querySelector(sel);if(el)el.value=v;};
+            // E4 : une image glissée (ou collée) sur le champ entre dans les médias et devient l'image favorite
+            const field=wrap.querySelector('[data-media-field]');
+            if(field&&window.LCNDA_UI?.bindFileDrop&&window.LCNDA_APP.importMediaFile){
+                window.LCNDA_UI.bindFileDrop(wrap,async files=>{
+                    try{const it=await window.LCNDA_APP.importMediaFile(files[0],['image']);window.LCNDA_PICKER.mediaSet(field,it);field.dispatchEvent(new CustomEvent('media-change',{bubbles:true,detail:{kind:'media',item:it,value:it.id}}));window.LCNDA_APP.toast(`« ${it.title||'Image'} » est rangée dans les médias : enregistre le widget pour la garder.`);}
+                    catch(error){window.LCNDA_APP.toast(error.message,'error');}
+                },{accept:'image/*'});
+                if(!wrap.querySelector('.dashboard-media-drophint'))wrap.insertAdjacentHTML('beforeend','<small class="muted dashboard-media-drophint">📁 ou glisse une image ici, ou colle-la (⌘V).</small>');
+            }
             wrap.addEventListener('media-change',async event=>{
                 const media=event.detail.item;
                 const title=media?(media.title||media.filename||'Média'):'';

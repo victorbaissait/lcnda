@@ -148,7 +148,7 @@
                 <h4>Couleurs</h4><div class="form-grid h-bk-colors">${color('cover', 'Couverture')}${color('cover_ink', 'Texte de la couverture')}${color('page', 'Pages')}${color('ink', 'Texte')}${color('title', 'Titres')}${color('rule', 'Filets, cadres')}</div>
                 <h4>Polices</h4><div class="form-grid"><label>Titres ${fontSelect('title_font', g.title_font)}</label><label>Texte ${fontSelect('font', g.font)}</label>
                     <label>Taille du texte <span class="h-bd-num"><input type="range" name="size" min="8" max="40" value="${Math.min(40, g.size || 15)}" data-bk-sync="size"><input type="number" class="h-bd-numbox" min="8" max="60" value="${g.size || 15}" data-bk-num="size"><small>px</small></span></label><label>Taille des titres <span class="h-bd-num"><input type="range" name="title_size" min="8" max="80" value="${Math.min(80, g.title_size || 18)}" data-bk-sync="title_size"><input type="number" class="h-bd-numbox" min="8" max="120" value="${g.title_size || 18}" data-bk-num="title_size"><small>px</small></span></label>
-                    <p class="span-2"><button type="button" class="button small secondary" data-bk-localfonts>🔤 Voir toutes les polices de mon ordinateur</button> <small class="muted" data-bk-fontmsg></small></p></div>
+                    <p class="span-2"><button type="button" class="button small secondary" data-bk-fontpick="title_font">Aa Toutes les polices pour les titres…</button> <button type="button" class="button small secondary" data-bk-fontpick="font">Aa Toutes les polices pour le texte…</button></p></div>
                 <h4>Mise en page</h4><div class="form-grid"><label>Disposition <select name="layout"><option value="2" ${g.layout !== '1' ? 'selected' : ''}>deux pages côte à côte</option><option value="1" ${g.layout === '1' ? 'selected' : ''}>une page sous l’autre</option></select></label>
                     <label>Cadre des pages <select name="frame">${[['double', 'double filet'], ['single', 'simple filet'], ['thick', 'gros cadre'], ['none', 'sans cadre']].map(([k, l]) => `<option value="${k}" ${(g.frame || 'double') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                     <label>Coins <select name="corners"><option value="square" ${g.corners !== 'round' ? 'selected' : ''}>droits</option><option value="round" ${g.corners === 'round' ? 'selected' : ''}>arrondis</option></select></label>
@@ -186,19 +186,14 @@
                     const mv = e.target.closest('[data-bk-move]');
                     if (mv) { const li = mv.closest('li'); if (mv.dataset.bkMove === '-1' && li.previousElementSibling) li.parentElement.insertBefore(li, li.previousElementSibling); else if (mv.dataset.bkMove === '1' && li.nextElementSibling) li.parentElement.insertBefore(li.nextElementSibling, li); read(); return; }
                     if (e.target.closest('[data-bk-reset]')) { g = {...PRESETS.bleu}; dl.close(); applyDesign(pageEl, g); try { await api('save_booklet_design', {}, {method: 'POST', body: {id, design: {}}}); } catch (_) {} toast('Apparence de départ remise.'); done?.(); return; }
-                    if (e.target.closest('[data-bk-localfonts]')) {
-                        const msg = dl.querySelector('[data-bk-fontmsg]');
-                        if (typeof window.queryLocalFonts !== 'function') { msg.textContent = 'Ce navigateur ne sait pas lister les polices de l’ordinateur (l’application Electron le peut).'; return; }
-                        try {
-                            const families = [...new Set((await window.queryLocalFonts()).map(f => f.family))].sort((a, b) => a.localeCompare(b, 'fr'));
-                            for (const name of ['font', 'title_font']) {
-                                const sel = form.elements[name], cur = sel.value;
-                                sel.querySelector('optgroup[data-local-fonts]')?.remove();
-                                sel.insertAdjacentHTML('beforeend', `<optgroup label="— Polices de votre ordinateur —" data-local-fonts>${families.map(f => `<option value="local:${esc(f)}" style="font-family:'${esc(f)}'">${esc(f)}</option>`).join('')}</optgroup>`);
-                                sel.value = cur;
-                            }
-                            msg.textContent = families.length ? `${A().plural(families.length, 'police trouvée', 'polices trouvées')} : elles sont à la fin des deux listes.` : 'Aucune police trouvée : autorise l’accès aux polices si l’app te le demande.';
-                        } catch (_) { msg.textContent = 'Accès aux polices refusé ou indisponible.'; }
+                    // E5 : la liste de polices commune (recherche, récentes, polices de l'app et de l'ordinateur)
+                    const fp = e.target.closest('[data-bk-fontpick]');
+                    if (fp && window.LCNDA_UI?.openFontPicker) {
+                        const sel = form.elements[fp.dataset.bkFontpick], v0 = sel.value, cur = v0.startsWith('local:') ? v0.slice(6) : (FONTS.find(x => x[0] === v0)?.[1] || '');
+                        const f = await window.LCNDA_UI.openFontPicker({value: cur, sample: 'Livret de famille'}); if (!f) return;
+                        const known = FONTS.find(x => x[1].toLowerCase() === f.toLowerCase()), v = known ? known[0] : `local:${f}`;
+                        if (![...sel.options].some(o => o.value === v)) { let gr = sel.querySelector('optgroup[data-local-fonts]'); if (!gr) { sel.insertAdjacentHTML('beforeend', '<optgroup label="— Polices de votre ordinateur —" data-local-fonts></optgroup>'); gr = sel.querySelector('optgroup[data-local-fonts]'); } gr.insertAdjacentHTML('beforeend', `<option value="${esc(v)}" style="font-family:'${esc(f)}'">${esc(f)}</option>`); }
+                        sel.value = v; sel.dispatchEvent(new Event('input', {bubbles: true})); sel.dispatchEvent(new Event('change', {bubbles: true}));
                     }
                 });
             },

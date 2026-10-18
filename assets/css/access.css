@@ -5,9 +5,11 @@
 /* sur <html> le filtre ne casse pas les éléments « position: fixed » ; les fenêtres (top layer) ne sont pas
    couvertes par celui de <html> : elles reçoivent le leur */
 html.a11y-filter { filter: var(--a11y-filter); }
+/* (une fenêtre non modale, un iframe, un canvas WebGL — maison 3D — ou un élément qui a déjà son filtre restent sous celui de <html> :
+   pas de double correction) */
 html.a11y-filter dialog:modal,
 html.a11y-filter :popover-open:not(.a11y-banner),
-html.a11y-filter :fullscreen { filter: var(--a11y-filter); }
+html.a11y-filter :fullscreen:not(html) { filter: var(--a11y-filter) !important; }
 
 /* bandeau « Simulation » */
 .a11y-banner { position: fixed; inset: 0 0 auto 0; margin: 0; width: auto; max-width: none; border: 0; border-bottom: 3px solid #111; padding: 8px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;

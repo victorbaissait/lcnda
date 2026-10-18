@@ -6,6 +6,11 @@
  * pièce peut garder ses souvenirs (« la chambre où est née… »). 🕰 Ses époques : une version du plan par année ou par date, à
  * faire défiler (▶), chacune rattachable à un recensement. Ailleurs : le bloc « 🏠 Maisons » de la fiche d'une personne, et
  * « 🏠 Maison » dans la fenêtre d'un recensement. Serveur : lib/houses.php.
+ * Éléments communs (app-ui.js) : barre du haut E1 (« ✓ Enregistré »), sections E2, fenêtre d'export E3 (PNG, JPG, PDF, SVG, impression,
+ * vue 3D, fichier .json de la maison), dépôt de fichier E4, police E5, bulles « ? » ; 💾 réglages enregistrés (🧲 Aimants) exportables.
+ * 📐 Plan ancien (cadastre napoléonien) pris dans les médias : à l'échelle (mètres, toises, pieds…), redressé, tourné, verrouillé, à décalquer.
+ * ✦ Souvenirs posés sur un meuble ou une pièce (photo, récit, personne, souvenir de famille), en 2D, en 3D et pendant la visite.
+ * ☀️ Lumière du jour et 🚶 visite à la première personne : heritage-house3d.js.
  * Listes → « 🏠 Maisons de famille », ou Listes → Outils de modification → « 🏠 Plan de maison ».
  */
 (() => {
@@ -30,10 +35,74 @@
     /* les aimants (gardés pour toutes les maisons) */
     const SNAP_KEY = 'genealogie-house-snap', SNAP0 = {grid: true, corner: true, mid: true, wall: true, angle: true, align: true, step: 45};
     const snapPrefs = () => { try { return {...SNAP0, ...(JSON.parse(localStorage.getItem(SNAP_KEY) || '{}') || {})}; } catch (_) { return {...SNAP0}; } };
+    /* les éléments communs (assets/js/app-ui.js) : sections repliables, fenêtre d'export, dépôt de fichier, police, « ✓ Enregistré » */
+    const UI = () => window.LCNDA_UI || A()?.ui || null;
+    /** une police sûre pour le style (E5 : la police d'un texte posé sur le plan) */
+    const cssFont = f => { const v = String(f || '').replace(/[^\w\s,'\-À-ÿ.]/g, '').trim(); return v ? (v.includes(',') || /^(serif|sans-serif|monospace|cursive|system-ui)$/.test(v) ? v : `'${v.replace(/'/g, '')}', Georgia, serif`) : 'inherit'; };
+    const sec = (title, key, body, open = true) => UI()?.panelSection ? UI().panelSection({title, key: `hs-${key}`, open, body}) : `<details class="ui-section" ${open ? 'open' : ''}><summary>${esc(title)}</summary><div class="ui-section-body">${body}</div></details>`;
+    const plural = (n, w) => A()?.plural ? A().plural(n, w) : `${n} ${w}${n > 1 ? 's' : ''}`;
+    /* 💾 réglages enregistrés de l'outil (aimants, grille, murs, visite, lumière) : sous un nom, exportables et importables */
+    const SETS_KEY = 'genealogie-house-sets', SETS_TOOL = 'maison';
+    const setsList = () => { try { const v = JSON.parse(localStorage.getItem(SETS_KEY) || '[]'); return Array.isArray(v) ? v.filter(x => x && typeof x.name === 'string' && x.v && typeof x.v === 'object') : []; } catch (_) { return []; } };
+    const setsSave = l => { try { localStorage.setItem(SETS_KEY, JSON.stringify(l.slice(0, 60))); return true; } catch (_) { toast('Plus de place pour enregistrer ce réglage.', 'error'); return false; } };
+    const downloadText = (text, fname2, type = 'application/json') => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = fname2; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
+    const slug = s => (A()?.safeExportFilename ? A().safeExportFilename(s, 'reglage') : String(s || 'reglage').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'reglage');
+    const pickFile = accept => new Promise(res => { const inp = Object.assign(document.createElement('input'), {type: 'file', accept}); inp.onchange = () => res(inp.files?.[0] || null); inp.click(); });
+    /* 📐 les mesures d'autrefois (cadastre napoléonien, plans anciens) → centimètres */
+    const OLD_UNITS = [['m', 'mètres', 100], ['cm', 'centimètres', 1], ['toise', 'toises (1,949 m)', 194.9], ['pied', 'pieds du roi (32,48 cm)', 32.48], ['aune', 'aunes de Paris (1,188 m)', 118.8], ['perche', 'perches de Paris (18 pieds, 5,847 m)', 584.7], ['percheR', 'perches royales (22 pieds, 7,146 m)', 714.6], ['pas', 'pas (environ 75 cm)', 75]];
+    /** ✦ les souvenirs posés : ce qu'on peut rattacher */
+    const MEM_ICON = {media: '🖼', text: '✍', person: '👤', memory: '📜', object: '🏺'};
+    /** 📄 un PDF d'une page avec une image JPEG (A4, à la française ou à l'italienne, image ajustée) */
+    function jpegPdf(dataUrl, w, h, title) {
+        const bin = atob(dataUrl.split(',')[1]), land = w > h, PW = land ? 842 : 595, PH = land ? 595 : 842, m = 28, k = Math.min((PW - 2 * m) / w, (PH - 2 * m) / h), dw = w * k, dh = h * k, dx = (PW - dw) / 2, dy = (PH - dh) / 2;
+        const enc = new TextEncoder(), parts = [], offs = []; let len = 0; const push = x => { const u = typeof x === 'string' ? enc.encode(x) : x; parts.push(u); len += u.length; };
+        const img = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) img[i] = bin.charCodeAt(i);
+        const content = `q ${dw.toFixed(2)} 0 0 ${dh.toFixed(2)} ${dx.toFixed(2)} ${dy.toFixed(2)} cm /Im0 Do Q`, safeTitle = String(title || 'Maison').replace(/[^\x20-\x7e]/g, '_').replace(/[()\\]/g, '');
+        push('%PDF-1.4\n%\xe2\xe3\xcf\xd3\n'); const obj = (n, body) => { offs[n] = len; push(`${n} 0 obj\n`); body(); push('\nendobj\n'); };
+        obj(1, () => push('<< /Type /Catalog /Pages 2 0 R >>')); obj(2, () => push('<< /Type /Pages /Kids [3 0 R] /Count 1 >>'));
+        obj(3, () => push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PW} ${PH}] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>`));
+        obj(4, () => { push(`<< /Type /XObject /Subtype /Image /Width ${w} /Height ${h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${img.length} >>\nstream\n`); push(img); push('\nendstream'); });
+        obj(5, () => push(`<< /Length ${content.length} >>\nstream\n${content}\nendstream`)); obj(6, () => push(`<< /Title (${safeTitle}) /Producer (LCNDA) >>`));
+        const xref = len; push(`xref\n0 7\n0000000000 65535 f \n${[1, 2, 3, 4, 5, 6].map(n => String(offs[n]).padStart(10, '0') + ' 00000 n \n').join('')}trailer\n<< /Size 7 /Root 1 0 R /Info 6 0 R >>\nstartxref\n${xref}\n%%EOF`);
+        return new Blob(parts, {type: 'application/pdf'});
+    }
+    /* les styles des nouveautés (barre du haut, ✦ souvenirs, ☀️ lumière, 🚶 visite, 📐 cadastre), clair et sombre */
+    const HS_CSS = `@media (min-width:1001px){.h-hs-dlg .h-hs-top{justify-content:flex-end;row-gap:6px}}.h-hs-hist{display:inline-flex;gap:3px}.h-hs-msg{font-size:12px;color:#667;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-hs-memk{cursor:pointer}.h-hs-memk circle{fill:#c9962a;stroke:#fff}.h-hs-memk text{fill:#fff;font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none}.h-hs-memk:hover circle{fill:#a8781a}
+.h-hs-compass{position:absolute;right:12px;bottom:34px;width:46px;height:46px;border-radius:50%;background:#ffffffe0;border:1px solid #d6dbe2;display:grid;place-items:center;cursor:pointer;z-index:2;padding:0}.h-hs-compass svg{width:40px;height:40px}
+.h-hs-stage.is-tracing .h-hs-room path{fill-opacity:.18}.h-hs-stage.is-tracing .h-hs-wall{opacity:.8}
+.h-hs-sunbox{position:absolute;right:10px;top:64px;z-index:4;width:300px;max-width:calc(100% - 20px);background:#fffffff4;border:1px solid #d6dbe2;border-radius:10px;padding:8px 10px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:12px;display:grid;gap:7px}
+.h-hs-sunhd{display:flex;justify-content:space-between;align-items:center}.h-hs-sxrow{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:6px;align-items:center}.h-hs-sxrow output{min-width:64px;text-align:right;font-weight:600}
+.h-hs-sxbtns{display:flex;flex-wrap:wrap;gap:4px}.h-hs-sxinfo{color:#556;line-height:1.35}
+.h-hs-walkhud{position:absolute;left:10px;top:64px;z-index:4;background:#fffffff2;border:1px solid #d6dbe2;border-radius:10px;padding:6px 10px;display:grid;gap:4px;font-size:12px;max-width:calc(100% - 20px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.h-hs-wkrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.h-hs-wkeye{display:inline-flex;gap:4px;align-items:center}.h-hs-wkeye input{width:64px;padding:2px 4px;border:1px solid #c9ced6;border-radius:5px;font:inherit}
+.h-hs-wkstair{background:#fff4cc;border:1px solid #e6c65a;border-radius:7px;padding:4px 8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.h-hs-3d canvas.h-hs-minimap{position:absolute;right:10px;bottom:30px;width:170px;height:170px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:3;cursor:pointer}
+.h-hs-cross{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;pointer-events:none;z-index:2}.h-hs-cross::before,.h-hs-cross::after{content:"";position:absolute;background:#fff;box-shadow:0 0 2px #000}.h-hs-cross::before{left:7px;top:0;width:2px;height:16px}.h-hs-cross::after{top:7px;left:0;height:2px;width:16px}
+.h-hs-joy{position:absolute;left:18px;bottom:36px;width:124px;height:124px;border-radius:50%;background:rgba(255,255,255,.35);border:2px solid rgba(255,255,255,.85);z-index:4;touch-action:none;box-shadow:0 2px 10px rgba(0,0,0,.2)}.h-hs-joy i{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(42,125,225,.88);pointer-events:none}
+.h-hs-memlist{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:4px}.h-hs-memlist li{display:flex;gap:6px;align-items:center;border:1px solid #e3e3e8;border-radius:7px;padding:4px 6px;background:#fafafa}.h-hs-memlist li>button.link-button{flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.h-hs-memlist img{width:34px;height:34px;object-fit:cover;border-radius:4px}.h-hs-memlist small{color:#778}
+.h-hs-memv{display:grid;gap:12px}.h-hs-memcard{border:1px solid #e3e3e8;border-radius:10px;padding:10px;display:grid;gap:6px}.h-hs-memcard img{max-width:100%;max-height:58vh;border-radius:6px;justify-self:center;background:#eee}.h-hs-memcard p{white-space:pre-wrap;margin:0;line-height:1.5}
+.h-hs-memopts{display:grid;gap:6px}.h-hs-memopts button{text-align:left;padding:9px 11px}.h-hs-fmlist{max-height:46vh;overflow:auto;display:grid;gap:4px;margin-top:6px}.h-hs-fmlist button{text-align:left;border:1px solid #e3e3e8;background:#fff;border-radius:7px;padding:6px 9px;cursor:pointer;font:inherit;color:inherit}.h-hs-fmlist button:hover,.h-hs-fmlist button.is-active{border-color:#2a7de1;background:#eef4fd}
+.h-hs-fmwrap,.h-hs-fmwrap .ui-search,.h-hs-fmwrap input{width:100%;box-sizing:border-box}.h-hs-fmwrap .ui-search{display:flex}
+.h-hs-sets{border-top:1px solid #e3e3e8;margin-top:8px;padding-top:8px;display:grid;gap:6px}.h-hs-sets select{width:100%}.h-hs-sets .h-hs-row{display:flex;gap:4px;flex-wrap:wrap}
+.h-hs-dlg .ui-num>input.ui-num-input.ui-num-input{width:48px!important;flex:none}.h-hs-form label>input[type=range]{width:calc(100% - 100px);vertical-align:middle;margin-right:8px}.h-hs-form label>.ui-range-pair input[type=range]{width:auto}
+.h-hs-face{border:1px solid #e3e3e8;border-radius:8px;padding:4px 8px 6px;margin:0 0 8px}.h-hs-face legend{font-weight:600;font-size:12px;padding:0 4px}.h-hs-faceapply{gap:4px;align-items:center;margin-top:4px}:root[data-theme="dark"] .h-hs-face{border-color:#3a3f46}
+.h-hs-refbar{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}.h-hs-pane .ui-section{margin:0 0 6px}.h-hs-fontbtn{font-family:var(--hs-font,inherit)}
+.h-hs-stage:has(.h-hs-3d.is-walking) .h-hs-hint{display:none}.h-hs-stage.is-drag-over{outline:3px dashed #2a7de1;outline-offset:-6px}
+@media (max-width:700px){.h-hs-sunbox{left:8px;right:8px;width:auto;top:auto!important;bottom:8px}.h-hs-3d canvas.h-hs-minimap{width:110px;height:110px;bottom:8px;right:8px}.h-hs-walkhud{padding:5px 8px}.h-hs-wkrow>small,.h-hs-walkhud>small{font-size:11px}.h-hs-msg{display:none}}
+:root[data-theme="dark"] .h-hs-msg,:root[data-theme="dark"] .h-hs-sxinfo,:root[data-theme="dark"] .h-hs-memlist small{color:#aab}
+:root[data-theme="dark"] .h-hs-sunbox,:root[data-theme="dark"] .h-hs-walkhud,:root[data-theme="dark"] .h-hs-compass{background:#24272cf2;border-color:#3a3f46;color:#e6e6e6}
+:root[data-theme="dark"] .h-hs-wkeye input{background:#1c1e22;border-color:#4a4a4f;color:#e6e6e6}:root[data-theme="dark"] .h-hs-wkstair{background:#3a3218;border-color:#7a6420;color:#f2e6c0}
+:root[data-theme="dark"] .h-hs-memlist li,:root[data-theme="dark"] .h-hs-memcard,:root[data-theme="dark"] .h-hs-fmlist button{background:#24272c;border-color:#3a3f46;color:#e6e6e6}:root[data-theme="dark"] .h-hs-fmlist button:hover,:root[data-theme="dark"] .h-hs-fmlist button.is-active{background:#192333;border-color:#4a8be8}
+:root[data-theme="dark"] .h-hs-sets{border-color:#3a3f46}:root[data-theme="dark"] .h-hs-sunbox .h-hs-chip{background:#2d3138;border-color:#4a4f57;color:#e6e6e6}:root[data-theme="dark"] .h-hs-sxrow output{color:#e6e6e6}`;
+    const injectCss = () => { if (document.getElementById('h-hs-css2')) return; const st = document.createElement('style'); st.id = 'h-hs-css2'; st.textContent = HS_CSS; document.head.appendChild(st); };
 
     /* ═════════ Matériaux et mobilier ═════════ */
     const WALL_MATS = [['platre', 'Plâtre blanc', '#f2efe8'], ['chaux', 'Enduit à la chaux', '#e9e1cf'], ['pierre', 'Pierre apparente', '#b9ac97'], ['brique', 'Brique', '#a9583e'], ['colombage', 'Colombage (pans de bois)', '#efe6cf'],
-        ['lambris', 'Lambris de bois', '#b88a5a'], ['papier', 'Papier peint', '#c9b6a0'], ['carrelage', 'Carrelage', '#e6e9ea'], ['beton', 'Béton', '#a7a7a7'], ['torchis', 'Torchis', '#c9ad84']];
+        ['lambris', 'Lambris de bois', '#b88a5a'], ['papier', 'Papier peint', '#c9b6a0'], ['carrelage', 'Carrelage', '#e6e9ea'], ['beton', 'Béton', '#a7a7a7'], ['torchis', 'Torchis', '#c9ad84'],
+        ['crepi', 'Enduit, crépi', '#e3dccb'], ['pierretaille', 'Pierre de taille', '#d8cfbd'], ['rayures', 'Papier peint à rayures', '#d9c9a8'], ['fleurs', 'Papier peint à fleurs', '#ece2cf'], ['jouy', 'Toile de Jouy', '#f1ebdd']];
+    /** 🧱 le motif léger d'un revêtement sur le plan 2D (pointillés le long de la face) */
+    const WALL_DASH = {pierre: '9 3 4 3', pierretaille: '14 3', brique: '6 2', colombage: '2 7', lambris: '12 2', papier: '3 3', rayures: '1.5 3', fleurs: '2 2 6 2', jouy: '4 2 1 2', carrelage: '7 1', crepi: '1 1.5', torchis: '5 4', beton: ''};
     const FLOOR_MATS = [['parquet', 'Parquet', '#b98b5c'], ['point', 'Parquet à bâtons rompus', '#a87b4d'], ['tomettes', 'Tomettes', '#b4553a'], ['carreaux', 'Carreaux de ciment', '#d9d2c4'], ['damier', 'Damier noir et blanc', '#dddddd'],
         ['dalles', 'Dalles de pierre', '#a9a296'], ['terre', 'Terre battue', '#8a6a4a'], ['tapis', 'Moquette, tapis', '#7a8fa6'], ['beton', 'Béton', '#9c9c9c'], ['herbe', 'Herbe (extérieur)', '#7aa35a'], ['gravier', 'Gravier, cour', '#c2b8a3']];
     // la matière d'un objet (vue 3D) : [clé, nom, couleur proposée, texture, brillance métallique, rugosité, opacité]
@@ -136,8 +205,8 @@
 
     /* un plan ouvert depuis la base (ou une base reçue d'ailleurs) : seuls des nombres, des couleurs, des images sûres et
        des mots-clés simples ; le texte libre (noms, notes) est toujours échappé à l'affichage */
-    const H_FREE = new Set(['name', 'note', 'text', 'title', 'label', 'period', 'place', 'place_text', 'caption', 'date', 'short']);
-    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape', 'axis', 's2', 's3', 'matl', 'feet', 'ver']);
+    const H_FREE = new Set(['name', 'note', 'text', 'title', 'label', 'period', 'place', 'place_text', 'caption', 'date', 'short', 'font']);
+    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape', 'axis', 's2', 's3', 'matl', 'feet', 'ver', 'lMat', 'rMat', 'ceil']);
     const H_COLOR = /^(color2?|.*Color)$/, H_IMG = /^(src|img|image|href|top|thumb|tex|texture)$/;
     const imgSafe = v => /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(v) || /^media\/[\w.%-]+$/.test(v) || /^api\.php\?action=house_model_file&id=\d+$/.test(v);
     function cleanHouse(v, key = '') {
@@ -156,38 +225,43 @@
 
     /* ═════════ L'éditeur ═════════ */
     async function open(ctx = {}) {
-        let id = 0, name = ctx.preset?.name || 'Maison de famille', placeId = 0, placeText = ctx.preset?.placeText || '', period = ctx.preset?.period || '', H = newHouse();
-        if (ctx.id) { try { const r = await api('house', {id: ctx.id}); id = r.id; name = r.name; placeId = r.place_id; placeText = r.place_text; period = r.period; H = {...newHouse(), ...cleanHouse(r.house || {})}; if (!Array.isArray(H.floors) || !H.floors.length) H.floors = [newFloor(0)]; } catch (e) { return toast(e.message, 'error'); } }
+        injectCss();
+        let id = 0, name = ctx.preset?.name || 'Maison de famille', placeId = 0, placeText = ctx.preset?.placeText || '', period = ctx.preset?.period || '', H = newHouse(), geo = null; // geo : les coordonnées du lieu (☀️ lumière du jour)
+        if (ctx.id) { try { const r = await api('house', {id: ctx.id}); id = r.id; name = r.name; placeId = r.place_id; placeText = r.place_text; period = r.period; if (r.place_lat != null && r.place_lon != null) geo = {lat: Number(r.place_lat), lon: Number(r.place_lon)}; H = {...newHouse(), ...cleanHouse(r.house || {})}; if (!Array.isArray(H.floors) || !H.floors.length) H.floors = [newFloor(0)]; } catch (e) { return toast(e.message, 'error'); } }
         if (Array.isArray(H.versions) && H.versions.length && !H.versions.some(v => v.id === H.ver)) { const v0 = {id: uid('v'), label: 'Époque sans nom', date: ''}; H.versions.push(v0); H.ver = v0.id; } // une époque perdue : le plan dessiné en devient une
         if (!H.meta || typeof H.meta !== 'object') H.meta = {people: [], note: ''};
         if (ctx.preset?.census && !ctx.id) H.meta.census = [ctx.preset.census]; // une nouvelle maison, depuis un recensement : déjà rattachée
         let fi = H.floors.findIndex(f => f.level === 0); if (fi < 0) fi = 0;
-        let exporting = false, tool = 'select', zoom = .6, panX = 80, panY = 80, sel = null, drag = null, draft = null, hover = null, dirty = false, hist = [], hpos = -1, view3d = null, tab = 'props', libCat = 'Chambre', libQ = '', mine = [];
+        let tracing = false, exporting = false, tool = 'select', zoom = .6, panX = 80, panY = 80, sel = null, drag = null, draft = null, hover = null, dirty = false, hist = [], hpos = -1, view3d = null, tab = 'props', libCat = 'Chambre', libQ = '', mine = [];
         const F = () => H.floors[fi];
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-hs-dlg';
         dlg.innerHTML = `<div class="h-hs">
-            <header class="h-hs-top"><span class="h-hs-logo">🏠</span><input class="h-hs-name" data-hs-name value="${esc(name)}" maxlength="200">
+            <header class="h-hs-top"><span class="h-hs-logo" aria-hidden="true">🏠</span><input class="h-hs-name" data-hs-name value="${esc(name)}" maxlength="200" aria-label="Nom de la maison">
                 <nav class="h-hs-floors" data-hs-floors></nav><span class="h-hs-vers" data-hs-vers></span>
                 <span class="segmented h-hs-mode"><button type="button" class="is-active" data-hs-mode="2d">Plan 2D</button><button type="button" data-hs-mode="3d">Vue 3D</button></span>
-                <span class="spacer"></span><span class="muted" data-hs-status></span>
-                <span class="h-hs-acts" data-tbg="hs-top" data-tbg-label="Barre du haut"><button type="button" class="button small secondary" data-hs-cmd="undo" title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="button small secondary" data-hs-cmd="redo" title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button>
-                <details class="h-hs-menu h-hs-snapm"><summary class="button small secondary" title="Aimants et précision">🧲 Aimants</summary><div data-hs-snapbox></div></details>
-                <details class="h-hs-menu"><summary class="button small secondary">📥 Importer</summary><div><button type="button" data-hs-cmd="import3d">🧊 Un objet 3D (OBJ, STL, glTF, GLB)…</button><button type="button" data-hs-cmd="importimg">🖼️ Un objet en image (vue de dessus)…</button><button type="button" data-hs-cmd="importplan">📐 Un plan scanné, à calquer…</button></div></details>
-                <details class="h-hs-menu"><summary class="button small secondary">⤓ Exporter</summary><div><button type="button" data-hs-cmd="png">🖼️ Plan en image (PNG)</button><button type="button" data-hs-cmd="svg">✒️ Plan en SVG</button><button type="button" data-hs-cmd="print">🖨️ Imprimer le plan</button><button type="button" data-hs-cmd="shot3d">📷 Capture de la vue 3D</button></div></details>
-                <button type="button" class="button small" data-hs-cmd="save" data-shortcut="⌘S">💾 Enregistrer</button>${ext.tbButton ? ext.tbButton('house') : ''}</span>${ext.fullButton ? ext.fullButton('house') : ''}<button type="button" class="icon-button" data-hs-cmd="close">×</button></header>
+                <span class="h-hs-hist"><button type="button" class="icon-button small" data-hs-cmd="undo" title="Annuler" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-hs-cmd="redo" title="Rétablir" data-shortcut="⇧⌘Z">↷</button></span>
+                <span class="h-hs-acts" data-tbg="hs-top" data-tbg-label="Barre du haut">
+                <details class="h-hs-menu h-hs-snapm"><summary class="button small secondary" title="Aimants, précision et 💾 réglages enregistrés">🧲 Aimants</summary><div data-hs-snapbox></div></details>
+                <details class="h-hs-menu"><summary class="button small secondary">📥 Importer</summary><div><button type="button" data-hs-cmd="importplan">📐 Un plan ancien, un cadastre, à calquer…</button><button type="button" data-hs-cmd="importimg">🖼️ Un objet en image (vue de dessus)…</button><button type="button" data-hs-cmd="import3d">🧊 Un objet 3D (OBJ, STL, glTF, GLB)…</button><button type="button" data-hs-cmd="importhouse">🏠 Une maison (fichier .json)…</button></div></details></span>
+                <span class="spacer"></span><span class="h-hs-msg" data-hs-msg></span><span class="ui-status" data-ui-status></span>
+                ${ext.tbButton ? ext.tbButton('house') : ''}<button type="button" class="button small secondary" data-hs-cmd="export" title="Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison">⤓ Exporter</button><button type="button" class="button small" data-hs-cmd="save" data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('house') : ''}<button type="button" class="icon-button" data-hs-cmd="close" title="Fermer" aria-label="Fermer">×</button></header>
             <div class="h-hs-main">
                 <nav class="h-hs-tools" data-tbg="hs-tools" data-tbg-label="Outils (colonne de gauche)">${[['select', '➤', 'Choisir, déplacer (V)'], ['pan', '✋', 'Déplacer la vue, ou barre d’espace (H)'], ['room', '⬚', 'Pièce rectangulaire, murs compris (R) : glisser'], ['wall', '▬', 'Mur (W) : un clic par coin, double-clic ou Entrée pour finir'], ['zone', '▱', 'Pièce de forme libre, sans murs (P) : un clic par coin'], ['door', '🚪', 'Porte (D) : clic sur un mur'], ['window', '🪟', 'Fenêtre (F) : clic sur un mur'], ['dim', '📏', 'Cote, mesure (M) : deux clics'], ['text', 'T', 'Texte (T)']].map(([k, i, l]) => { const sc = ({select: 'V', pan: 'H', wall: 'W', zone: 'P', door: 'D', window: 'F', dim: 'M', text: 'T', room: 'R'})[k] || ''; return `<button type="button" data-hs-tool="${k}" title="${esc(sc ? l.replace(` (${sc})`, '') : l)}" data-shortcut="${sc}">${i}</button>`; }).join('')}</nav>
-                <section class="h-hs-stage" data-hs-stage tabindex="-1"><svg data-hs-svg><defs data-hs-defs></defs><g data-hs-world></g></svg><div class="h-hs-3d" data-hs-3d hidden></div><div class="h-hs-3dbar" data-h3bar data-tbg="hs-3d" data-tbg-label="Barre de la vue 3D" hidden><label class="checkbox-line" data-tb="h3-all"><input type="checkbox" data-h3="all" checked> Tous les étages</label><label class="checkbox-line" data-tb="h3-roof"><input type="checkbox" data-h3="roof"> Toit</label><label class="checkbox-line" data-tb="h3-cut"><input type="checkbox" data-h3="cut"> Murs coupés (voir dedans)</label><label class="checkbox-line" data-tb="h3-dims"><input type="checkbox" data-h3="dims"> Cotes</label><button type="button" class="button small secondary" data-h3="measure" title="Deux clics sur la maison : la distance (et la hauteur entre les deux points)">📏 Mesurer</button><span class="segmented" data-tb="h3-views" data-tb-label="Vues dessus / face / côté"><button type="button" data-h3="view" data-v="top" title="Vue de dessus">Dessus</button><button type="button" data-h3="view" data-v="front" title="Vue de face">Face</button><button type="button" data-h3="view" data-v="side" title="Vue de côté">Côté</button></span><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div><div class="h-hs-hint" data-hs-hint></div><div class="h-hs-verbadge" data-hs-verbadge hidden></div><div class="h-hs-pbar" data-hs-pbar><span data-hs-xy>X — · Y —</span><span data-hs-seg></span><input data-hs-num autocomplete="off" spellcheck="false" hidden></div></section>
+                <section class="h-hs-stage" data-hs-stage tabindex="-1"><svg data-hs-svg><defs data-hs-defs></defs><g data-hs-world></g></svg><div class="h-hs-3d" data-hs-3d hidden></div><div class="h-hs-3dbar" data-h3bar data-tbg="hs-3d" data-tbg-label="Barre de la vue 3D" hidden><label class="checkbox-line" data-tb="h3-all"><input type="checkbox" data-h3="all" checked> Tous les étages</label><label class="checkbox-line" data-tb="h3-roof"><input type="checkbox" data-h3="roof"> Toit</label><label class="checkbox-line" data-tb="h3-cut"><input type="checkbox" data-h3="cut"> Murs coupés (voir dedans)</label><label class="checkbox-line" data-tb="h3-dims"><input type="checkbox" data-h3="dims"> Cotes</label><button type="button" class="button small secondary" data-h3="measure" title="Deux clics sur la maison : la distance (et la hauteur entre les deux points)">📏 Mesurer</button><span class="segmented" data-tb="h3-views" data-tb-label="Vues dessus / face / côté"><button type="button" data-h3="view" data-v="top" title="Vue de dessus">Dessus</button><button type="button" data-h3="view" data-v="front" title="Vue de face">Face</button><button type="button" data-h3="view" data-v="side" title="Vue de côté">Côté</button></span><button type="button" class="button small secondary" data-h3="sun" title="Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes">☀️ Lumière</button><button type="button" class="button small secondary" data-h3="walk" title="Visiter la maison à hauteur d’yeux">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div><div class="h-hs-hint" data-hs-hint></div><div class="h-hs-verbadge" data-hs-verbadge hidden></div><div class="h-hs-pbar" data-hs-pbar><span data-hs-xy>X — · Y —</span><span data-hs-seg></span><input data-hs-num autocomplete="off" spellcheck="false" hidden></div></section>
                 <aside class="h-hs-side"><nav class="segmented h-hs-tabs" data-tbg="hs-tabs" data-tbg-label="Onglets du panneau de droite">${[['props', 'Propriétés'], ['lib', 'Mobilier'], ['floor', 'Étage'], ['house', 'Maison']].map(([k, l]) => `<button type="button" data-hs-tab="${k}">${l}</button>`).join('')}</nav><div class="h-hs-pane" data-hs-pane></div></aside>
             </div></div>`;
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'house', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const $ = s => dlg.querySelector(s), svg = $('[data-hs-svg]'), world = $('[data-hs-world]'), stage = $('[data-hs-stage]'), pane = $('[data-hs-pane]');
         dlg.addEventListener('pointerdown', e => dlg.querySelectorAll('details.h-hs-menu[open]').forEach(d => { if (!d.contains(e.target)) d.removeAttribute('open'); })); // un menu ouvert se ferme quand on clique ailleurs
-        const status = s => { $('[data-hs-status]').textContent = s || ''; };
+        // E1 : « ✓ Enregistré » (ou « • modifié ») toujours au même endroit, sans toast ; la dernière action en petit à côté
+        let msgT = 0, shownSt = null, saving = false;
+        const status = s => { const m = $('[data-hs-msg]'); if (!m) return; m.textContent = s || ''; clearTimeout(msgT); if (s) msgT = setTimeout(() => { m.textContent = ''; }, 6000); };
+        const savedSt = st => { if (shownSt === st) return; shownSt = st; const el = $('[data-ui-status]'); if (!el) return; if (!st) { el.innerHTML = ''; return; } if (UI()?.savedStatus) UI().savedStatus(el, st); else el.textContent = {saved: '✓ Enregistré', dirty: '• modifié', saving: 'Enregistrement…', error: '⚠️ Pas enregistré'}[st] || ''; };
+        const syncSt = () => { if (!saving) savedSt(dirty ? 'dirty' : id ? 'saved' : ''); };
         const hint = s => { $('[data-hs-hint]').textContent = s || ''; };
         /* ─── historique ─── */
         const snap0 = () => JSON.stringify(H);
-        const commit = (label = '') => { hist = hist.slice(0, hpos + 1); hist.push(snap0()); if (hist.length > 120) hist.shift(); hpos = hist.length - 1; dirty = true; status(label ? `✓ ${label}` : 'modifié'); render(); };
+        const commit = (label = '') => { hist = hist.slice(0, hpos + 1); hist.push(snap0()); if (hist.length > 120) hist.shift(); hpos = hist.length - 1; dirty = true; status(label); render(); };
         const restore = i => { if (i < 0 || i >= hist.length) return; hpos = i; H = JSON.parse(hist[hpos]); fi = clamp(fi, 0, H.floors.length - 1); sel = null; dirty = true; render(); };
         /* ─── vue ─── */
         const toW = e => { const r = svg.getBoundingClientRect(); return [(e.clientX - r.left - panX) / zoom, (e.clientY - r.top - panY) / zoom]; };
@@ -222,6 +296,21 @@
         const rectClose = pts => { if (pts.length !== 3) return null; const [A, B, C] = pts, u = [B[0] - A[0], B[1] - A[1]], v = [C[0] - B[0], C[1] - B[1]], lu = Math.hypot(...u), lv = Math.hypot(...v);
             if (lu < 1 || lv < 1 || Math.abs(u[0] * v[0] + u[1] * v[1]) / (lu * lv) > .02) return null; return [r1(A[0] + C[0] - B[0]), r1(A[1] + C[1] - B[1])]; };
         const wallLen = w => Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]);
+        /* 🧱 les deux faces d'un mur : « l » (du côté de sa normale (−dy, dx)) et « r » ; la pièce qui est de chaque côté (sinon : l'extérieur) */
+        const inPoly = (x, y, p) => { let c = false; for (let i = 0, j = p.length - 1; i < p.length; j = i++) if ((p[i][1] > y) !== (p[j][1] > y) && x < (p[j][0] - p[i][0]) * (y - p[i][1]) / (p[j][1] - p[i][1]) + p[i][0]) c = !c; return c; };
+        const faceRooms = (f, w) => { const L = wallLen(w) || 1, nx = -(w.b[1] - w.a[1]) / L, ny = (w.b[0] - w.a[0]) / L, off = (w.t || f.wallT) / 2 + 12; // un mur long peut border plusieurs pièces : 3 points le long du mur
+            const at = sg => [...new Set([.2, .5, .8].map(t => f.rooms.find(r => r.pts?.length > 2 && inPoly(w.a[0] + (w.b[0] - w.a[0]) * t + nx * off * sg, w.a[1] + (w.b[1] - w.a[1]) * t + ny * off * sg, r.pts))).filter(Boolean))];
+            const l = at(1), r = at(-1); return {l: l[0] || null, r: r[0] || null, lAll: l, rAll: r, nx, ny}; };
+        const faceOf = (w, side) => { const k = w[side + 'Mat'] || w.mat || 'platre', base = WALL_MATS.find(m => m[0] === k)?.[2] || '#eeeeee'; return [k, w[side + 'Color'] || (w[side + 'Mat'] ? base : w.color || base)]; };
+        const setFace = (w, side, k, v) => { if (k === 'mat') { if (!WALL_MATS.some(m => m[0] === v)) return; w[side + 'Mat'] = v; delete w[side + 'Color']; } else if (/^#[0-9a-f]{6}$/i.test(v)) w[side + 'Color'] = v; };
+        /** le même revêtement sur d'autres faces : la pièce, les pièces (ou les façades) de l'étage, de toute la maison */
+        function applyFace(w, side, scope) {
+            const f = F(), room = faceRooms(f, w)[side], inside = !!room, [k, c] = faceOf(w, side), out = [];
+            (scope === 'house' ? H.floors : [f]).forEach(fl => fl.walls.forEach(q => { const fr = faceRooms(fl, q); ['l', 'r'].forEach(sd => { if (scope === 'room' ? fr[sd + 'All'].includes(room) : !!fr[sd] === inside) out.push([q, sd]); }); }));
+            out.forEach(([q, sd]) => { q[sd + 'Mat'] = k; q[sd + 'Color'] = c; if (w.tsc) q.tsc = w.tsc; else delete q.tsc; });
+            commit(`Revêtement sur ${plural(out.length, 'face')} de mur`);
+        }
+        const roomWalls = (f, rm) => f.walls.flatMap(q => { const fr = faceRooms(f, q); return [...(fr.lAll.includes(rm) ? [[q, 'l']] : []), ...(fr.rAll.includes(rm) ? [[q, 'r']] : [])]; });
         /** le point d'un mur le plus proche : {w, t (0..1), d (distance)} */
         const nearestWall = (x, y) => { let best = null; F().walls.forEach(w => { const dx = w.b[0] - w.a[0], dy = w.b[1] - w.a[1], L2 = dx * dx + dy * dy || 1, t = clamp(((x - w.a[0]) * dx + (y - w.a[1]) * dy) / L2, 0, 1), px = w.a[0] + dx * t, py = w.a[1] + dy * t, d = Math.hypot(x - px, y - py); if (!best || d < best.d) best = {w, t, d, px, py}; }); return best; };
         /* ─── dessin du plan ─── */
@@ -235,14 +324,16 @@
             return s + `<rect x="${-half}" y="${-th / 2 - 6}" width="${o.w}" height="${th + 12}" fill="transparent"/></g>`;
         }
         function render() {
-            if (view3d && !exporting) { view3d.update?.(H, fi); paintSide(); paintFloors(); return; }
+            if (view3d && !exporting) { view3d.update?.(H, fi); paintSide(); paintFloors(); syncSt(); return; }
             const f = F(), d = defs(); $('[data-hs-defs]').innerHTML = d.html;
             const g = H.grid || 10, r = stage.getBoundingClientRect(); let step = g; while (step * zoom < 8) step *= step % 2 && step < 10 ? 2 : 5;
             const vx0 = -panX / zoom, vy0 = -panY / zoom, vx1 = vx0 + r.width / zoom, vy1 = vy0 + r.height / zoom;
             let h = '';
             if (!exporting) for (let x = Math.floor(vx0 / step) * step; x < vx1; x += step) h += `<path d="M${x} ${vy0}V${vy1}" class="${x % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
             if (!exporting) for (let y = Math.floor(vy0 / step) * step; y < vy1; y += step) h += `<path d="M${vx0} ${y}H${vx1}" class="${y % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
-            if (H.ref?.src && H.ref.show !== false && (H.ref.floor ?? f.id) === f.id) h += `<image href="${esc(H.ref.src)}" x="${H.ref.x}" y="${H.ref.y}" width="${H.ref.w}" height="${H.ref.h}" opacity="${H.ref.op ?? .45}" preserveAspectRatio="none" style="pointer-events:none"/>`;
+            // 📐 le plan ancien (cadastre) en fond : tourné, transparent ; pas dans les exports
+            if (H.ref?.src && H.ref.show !== false && (H.ref.floor ?? f.id) === f.id && !exporting) { const R = H.ref, cx = R.x + R.w / 2, cy = R.y + R.h / 2;
+                h += `<g transform="rotate(${Number(R.rot) || 0} ${cx} ${cy})" style="pointer-events:none"><image href="${esc(R.src)}" x="${R.x}" y="${R.y}" width="${R.w}" height="${R.h}" opacity="${R.op ?? .45}" preserveAspectRatio="none"/>${R.moving && !R.lock ? `<rect x="${R.x}" y="${R.y}" width="${R.w}" height="${R.h}" fill="none" stroke="#2a7de1" stroke-width="2" stroke-dasharray="10 6" vector-effect="non-scaling-stroke"/>` : ''}</g>`; }
             // 👻 calque : l'étage du dessous et/ou du dessus en transparence, pour caler celui-ci (murs et contours des pièces)
             const below = H.floors.filter(q => q.level < f.level).sort((a, b) => b.level - a.level)[0], above = H.floors.filter(q => q.level > f.level).sort((a, b) => a.level - b.level)[0];
             const gm = ghostOf(f), gop = clamp(Number(H.ghostOp ?? .3), .05, .9);
@@ -255,6 +346,10 @@
             // les murs : un trait sombre, puis un plus clair par-dessus (les angles se raccordent)
             h += f.walls.map(w => `<path d="M${w.a[0]} ${w.a[1]}L${w.b[0]} ${w.b[1]}" stroke="#2f2b27" stroke-width="${w.t || f.wallT}" stroke-linecap="square"/>`).join('');
             h += f.walls.map(w => { const isSel = sel?.type === 'wall' && sel.id === w.id, mc = WALL_MATS.find(m => m[0] === (w.mat || 'platre'))?.[2] || '#bbb'; return `<path data-hs="wall:${w.id}" class="h-hs-wall${isSel ? ' is-sel' : ''}" d="M${w.a[0]} ${w.a[1]}L${w.b[0]} ${w.b[1]}" stroke="${isSel ? '#7fb2f0' : mc}" stroke-width="${Math.max(2, (w.t || f.wallT) - 6)}" stroke-linecap="square"/>`; }).join('');
+            // 🧱 le revêtement de chaque face (s'il n'est pas le plâtre de départ) : un trait de sa couleur, en pointillés selon le motif
+            h += f.walls.map(w => { const L = wallLen(w); if (L < 1) return ''; const t = w.t || f.wallT, nx = -(w.b[1] - w.a[1]) / L, ny = (w.b[0] - w.a[0]) / L;
+                return ['l', 'r'].map((sd, i) => { if (!w[sd + 'Mat'] && !w[sd + 'Color'] && (!w.mat || w.mat === 'platre')) return ''; const [k, c] = faceOf(w, sd), o = (t / 2 - 3.5) * (i ? -1 : 1), d = (WALL_DASH[k] || '').split(' ').filter(Boolean).map(v => Number(v) * 3).join(' ');
+                    return `<path d="M${w.a[0] + nx * o} ${w.a[1] + ny * o}L${w.b[0] + nx * o} ${w.b[1] + ny * o}" stroke="${esc(c)}" stroke-width="6" ${d ? `stroke-dasharray="${d}"` : ''} style="pointer-events:none" class="h-hs-wface"/>`; }).join(''); }).join('');
             h += f.openings.map(o => { const w = f.walls.find(q => q.id === o.wall); return w ? openingSvg(o, w) : ''; }).join('');
             f.items.forEach(it => { const isSel = sel?.type === 'item' && sel.id === it.id;
                 h += `<g data-hs="item:${it.id}" class="h-hs-item${isSel ? ' is-sel' : ''}" transform="translate(${it.x} ${it.y}) rotate(${it.rot || 0})">${sym2d(it)}${isSel ? `<rect x="${-it.w / 2 - 4}" y="${-it.d / 2 - 4}" width="${it.w + 8}" height="${it.d + 8}" fill="none" stroke="#2a7de1" stroke-width="1.5" stroke-dasharray="5 3" vector-effect="non-scaling-stroke"/><circle cy="${-it.d / 2 - 26 / zoom}" r="${7 / zoom}" fill="#2a7de1" data-hs-rot="1"/><path d="M0 ${-it.d / 2 - 4}V${-it.d / 2 - 20 / zoom}" stroke="#2a7de1" vector-effect="non-scaling-stroke"/>` : ''}</g>`;
@@ -264,7 +359,11 @@
                 return `<g class="h-hs-dim ${cls}"><path d="M${a[0] + nx} ${a[1] + ny}L${b[0] + nx} ${b[1] + ny}" marker-start="url(#hsarr)" marker-end="url(#hsarr)"/><text x="${mx}" y="${my - 5 / zoom}" font-size="${12 / zoom}" transform="rotate(${flip ? ang + 180 : ang} ${mx} ${my})">${fmtLen(L)}</text></g>`; };
             f.dims.forEach(dm => { h += `<g data-hs="dim:${dm.id}">${dim(dm.a, dm.b, 0, sel?.type === 'dim' && sel.id === dm.id ? 'is-sel' : '')}</g>`; });
             if (f.showDims !== false) f.walls.forEach(w => { h += dim(w.a, w.b, (w.t || f.wallT) / 2 + 22 / zoom, 'is-auto'); });
-            f.labels.forEach(lb => { h += `<text data-hs="label:${lb.id}" x="${lb.x}" y="${lb.y}" font-size="${lb.size || 24}" class="h-hs-label${sel?.type === 'label' && sel.id === lb.id ? ' is-sel' : ''}">${esc(lb.text)}</text>`; });
+            f.labels.forEach(lb => { h += `<text data-hs="label:${lb.id}" x="${lb.x}" y="${lb.y}" font-size="${lb.size || 24}" class="h-hs-label${sel?.type === 'label' && sel.id === lb.id ? ' is-sel' : ''}"${lb.font ? ` style="font-family:${esc(cssFont(lb.font))}"` : ''}>${esc(lb.text)}</text>`; });
+            // ✦ les souvenirs posés (un clic : la photo, le récit)
+            const mk = (x, y, ref, n) => `<g class="h-hs-memk" data-hs-memat="${ref}" transform="translate(${x} ${y})"><title>${n} souvenir${n > 1 ? 's' : ''} : clic pour voir</title><circle r="${12 / zoom}" stroke-width="${2 / zoom}"/><text font-size="${14 / zoom}">✦</text></g>`;
+            f.items.forEach(it => { if (it.mem?.length) h += mk(it.x + it.w / 2 * .7, it.y - it.d / 2 * .7, `item:${it.id}`, it.mem.length); });
+            f.rooms.forEach(rm => { if (!rm.mem?.length) return; const [cx, cy] = centroid(rm.pts), fs = clamp(Math.sqrt(area(rm.pts)) / 9, 14, 60); h += mk(cx, cy - fs * 1.5, `room:${rm.id}`, rm.mem.length); });
             // la sélection : poignées des murs et des pièces
             if (sel?.type === 'wall') { const w = f.walls.find(q => q.id === sel.id); if (w) h += [w.a, w.b].map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="${7 / zoom}" class="h-hs-handle" data-hs-wp="${i}"/>`).join(''); }
             if (sel?.type === 'room') { const rm = f.rooms.find(q => q.id === sel.id); if (rm) h += rm.pts.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="${6 / zoom}" class="h-hs-handle" data-hs-rp="${i}"/>`).join(''); }
@@ -279,7 +378,7 @@
             if (draft?.kind === 'room' && draft.b) { const [a, b] = [draft.a, draft.b], x = Math.min(a[0], b[0]), y = Math.min(a[1], b[1]), w = Math.abs(b[0] - a[0]), hh = Math.abs(b[1] - a[1]);
                 h += `<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="#2a7de11a" stroke="#2a7de1" stroke-width="${f.wallT}" stroke-opacity=".5"/>` + dim([x, y], [x + w, y], -f.wallT / 2 - 20 / zoom, 'is-live') + dim([x + w, y], [x + w, y + hh], -f.wallT / 2 - 20 / zoom, 'is-live') + `<text x="${x + w / 2}" y="${y + hh / 2}" font-size="${14 / zoom}" class="h-hs-rarea">${String(r1(w * hh / 10000)).replace('.', ',')} m²</text>`; }
             if (hover && ['wall', 'zone', 'dim', 'room'].includes(tool)) { h += guides.map(q => q.pt && q.close ? `<circle cx="${q.pt[0]}" cy="${q.pt[1]}" r="${11 / zoom}" class="h-hs-snapclose"/>` : q.pt ? `<rect x="${q.pt[0] - 6 / zoom}" y="${q.pt[1] - 6 / zoom}" width="${12 / zoom}" height="${12 / zoom}" class="h-hs-snapmk${q.mid ? ' is-mid' : ''}" transform="${q.mid ? `rotate(45 ${q.pt[0]} ${q.pt[1]})` : ''}"/>` : `<path d="M${q.a[0]} ${q.a[1]}L${q.b[0]} ${q.b[1]}" class="h-hs-guide${q.ang ? ' is-ang' : ''}"/>`).join(''); h += `<circle cx="${hover[0]}" cy="${hover[1]}" r="${4 / zoom}" fill="#2a7de1"/>`; }
-            world.innerHTML = h; applyView(); paintSide(); paintFloors(); if (lastXY) readout(...lastXY);
+            world.innerHTML = h; applyView(); paintSide(); paintFloors(); if (lastXY) readout(...lastXY); syncSt(); paintCompass();
         }
         /* ─── étages ─── */
         const ghostOf = f => f.ghost || (f.showBelow === false ? 'none' : 'below');
@@ -305,74 +404,97 @@
                 return;
             }
             if (tab === 'floor') {
-                const below = H.floors.some(q => q.level < f.level);
-                pane.innerHTML = `<div class="h-hs-form"><label>Nom de l’étage<input data-hs-f="name" value="${esc(f.name)}"></label><div class="h-hs-g2c"><label>Niveau<input type="number" data-hs-f="level" value="${f.level}" min="-3" max="9"></label><label>Hauteur sous plafond (cm)<input type="number" data-hs-f="height" value="${f.height}" min="150" max="800"></label></div>
-                    <label>Épaisseur des nouveaux murs (cm)<input type="number" data-hs-f="wallT" value="${f.wallT}" min="5" max="120"></label>
-                    <label class="checkbox-line"><input type="checkbox" data-hs-f="showDims" ${f.showDims !== false ? 'checked' : ''}> Cotes des murs</label>${H.floors.length > 1 ? `<label>Calque d’un autre étage (pour caler celui-ci)${ghostSel(f)}</label><label>Transparence du calque<input type="range" min="5" max="90" step="5" data-hs-ghostop value="${Math.round(clamp(Number(H.ghostOp ?? .3), .05, .9) * 100)}"></label>` : ''}
-                    <div class="h-hs-g2c"><label>Pas de la grille (cm)<select data-hs-h="grid">${[1, 2, 5, 10, 25, 50, 100].map(v => `<option ${H.grid === v ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label>Épaisseur des planchers (cm)<input type="number" data-hs-h="slab" value="${H.slab ?? 20}" min="0" max="120"></label></div>
-                    <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="dupfloor">⧉ Dupliquer cet étage (murs)</button><button type="button" class="button small danger" data-hs-cmd="delfloor">Supprimer l’étage</button></div>
-                    <h4>Toit (vue 3D)</h4><label class="checkbox-line"><input type="checkbox" data-hs-roof="on" ${H.roof?.on ? 'checked' : ''}> Un toit sur l’étage le plus haut</label>
+                const R = H.ref, onThis = R?.src && (R.floor ?? f.id) === f.id, refFloor = R?.src && !onThis ? H.floors.find(q => q.id === R.floor) : null;
+                pane.innerHTML = `<div class="h-hs-form">${sec('Position et taille', 'fl-pos', `<label>Nom de l’étage<input data-hs-f="name" value="${esc(f.name)}"></label><div class="h-hs-g2c"><label>Niveau<input type="number" data-hs-f="level" value="${f.level}" min="-3" max="9"></label><label>Hauteur sous plafond (cm)<input type="number" data-hs-f="height" value="${f.height}" min="150" max="800"></label></div>
+                    <div class="h-hs-g2c"><label>Épaisseur des nouveaux murs (cm)<input type="number" data-hs-f="wallT" value="${f.wallT}" min="5" max="120"></label><label>Épaisseur des planchers (cm)<input type="number" data-hs-h="slab" value="${H.slab ?? 20}" min="0" max="120"></label></div>
+                    <label>Pas de la grille (cm)<select data-hs-h="grid">${[1, 2, 5, 10, 25, 50, 100].map(v => `<option ${H.grid === v ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
+                    <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="dupfloor">⧉ Dupliquer cet étage (murs)</button><button type="button" class="button small danger" data-hs-cmd="delfloor">Supprimer l’étage</button></div>`)}
+                    ${sec('Affichage', 'fl-view', `<label class="checkbox-line"><input type="checkbox" data-hs-f="showDims" ${f.showDims !== false ? 'checked' : ''}> Cotes des murs</label>
+                        <div class="h-hs-g2c"><label>Plafond (visite 3D)<select data-hs-f="ceil">${opt([['none', 'Aucun (ouvert)'], ['plafond', 'Plafond uni'], ['poutres', 'Poutres apparentes']], f.ceil || 'none')}</select></label><label>Couleur du plafond<input type="color" data-hs-f="ceilColor" value="${esc(/^#[0-9a-f]{6}$/i.test(f.ceilColor || '') ? f.ceilColor : '#f1ece2')}"></label></div>${H.floors.length > 1 ? `<label><span data-help="L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée." data-help-faq="plan de maison étages">Calque d’un autre étage</span>${ghostSel(f)}</label><label>Transparence du calque<input type="range" min="5" max="90" step="5" data-hs-ghostop data-unit="%" value="${Math.round(clamp(Number(H.ghostOp ?? .3), .05, .9) * 100)}"></label>` : ''}`)}
+                    ${sec('📐 Plan ancien, cadastre', 'fl-ref', !R?.src ? `<p class="muted">Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus.</p><div class="h-hs-refbar"><button type="button" class="button small secondary" data-hs-cmd="importplan">🖼 Choisir l’image…</button></div>`
+                        : `${refFloor ? `<p class="muted">Posé sous l’étage « ${esc(refFloor.name)} ». <button type="button" class="link-button" data-hs-cmd="refhere">Le mettre sous cet étage</button></p>` : ''}
+                        <label>Transparence<input type="range" min="5" max="100" data-unit="%" value="${Math.round((R.op ?? .45) * 100)}" data-hs-ref="op"></label>
+                        <label>Rotation<input type="range" min="-180" max="180" step="0.5" data-unit="°" data-default="0" value="${Number(R.rot) || 0}" data-hs-ref="rot" ${R.lock ? 'disabled' : ''}></label>
+                        <div class="h-hs-row"><label class="checkbox-line"><input type="checkbox" data-hs-ref="show" ${R.show !== false ? 'checked' : ''}> Visible</label><label class="checkbox-line"><input type="checkbox" data-hs-ref="lock" ${R.lock ? 'checked' : ''}> 🔒 Verrouillé</label></div>
+                        <div class="h-hs-refbar"><button type="button" class="button small secondary" data-hs-cmd="calib" ${R.lock ? 'disabled' : ''} data-help="Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls)." data-help-faq="cadastre">📏 Mettre à l’échelle</button><button type="button" class="button small secondary" data-hs-cmd="refalign" ${R.lock ? 'disabled' : ''} title="Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical)">↻ Redresser</button><button type="button" class="button small secondary${R.moving ? ' is-on' : ''}" data-hs-cmd="refmove" ${R.lock ? 'disabled' : ''}>✥ Déplacer</button></div>
+                        <div class="h-hs-refbar"><button type="button" class="button small${tracing ? '' : ' secondary'}" data-hs-cmd="trace">${tracing ? '✓ Fin du décalque' : '✏️ Décalquer les murs'}</button><button type="button" class="button small secondary" data-hs-cmd="importplan">🖼 Changer d’image…</button><button type="button" class="button small danger" data-hs-cmd="refdel">Retirer</button></div>`)}
+                    ${sec('🏠 Toit (vue 3D)', 'fl-roof', `<label class="checkbox-line"><input type="checkbox" data-hs-roof="on" ${H.roof?.on ? 'checked' : ''}> Un toit sur l’étage le plus haut</label>
                     ${H.roof?.on ? `<div class="h-hs-g2c"><label>Forme<select data-hs-roof="shape">${opt([['gable', 'Deux pans (pignons)'], ['hip', 'Quatre pans (croupes)'], ['pyramid', 'Pavillon (pointe)'], ['shed', 'Un pan (appentis)'], ['mansard', 'Mansardé'], ['flat', 'Plat (toit-terrasse)']], H.roof?.shape || 'gable')}</select></label><label>Faîtage<select data-hs-roof="axis">${opt([['long', 'Dans la longueur'], ['short', 'Dans la largeur'], ['x', 'Est – ouest'], ['z', 'Nord – sud']], H.roof?.axis || 'long')}</select></label>
                         <label>Pente (°)<input type="number" data-hs-roof="pitch" value="${H.roof?.pitch ?? 40}" min="2" max="75"></label><label>Débord (cm)<input type="number" data-hs-roof="over" value="${H.roof?.over ?? 35}" min="0" max="200"></label>
                         <label>Couverture<select data-hs-roof="kind">${opt([['tuiles', 'Tuiles canal'], ['tuilesplates', 'Tuiles plates'], ['vernies', 'Tuiles vernissées'], ['ardoises', 'Ardoises'], ['lauzes', 'Lauzes (pierre)'], ['chaume', 'Chaume'], ['zinc', 'Zinc'], ['bacacier', 'Bac acier']], H.roof?.kind || 'tuiles')}</select></label><label>Couleur<input type="color" data-hs-roof="color" value="${esc(/^#[0-9a-f]{6}$/i.test(H.roof?.color || '') ? H.roof.color : ({tuiles: '#8a4b3a', tuilesplates: '#9a4a32', ardoises: '#4a5058', chaume: '#b8995a', zinc: '#9aa3a8', lauzes: '#7d7a72', bacacier: '#5b6670', vernies: '#9a3b23'})[H.roof?.kind || 'tuiles'] || '#8a4b3a')}"></label>
                         <label>Pignons, acrotères<input type="color" data-hs-roof="gableColor" value="${esc(/^#[0-9a-f]{6}$/i.test(H.roof?.gableColor || '') ? H.roof.gableColor : '#e9e1cf')}"></label><label class="checkbox-line"><input type="checkbox" data-hs-roof="parapet" ${H.roof?.parapet !== false ? 'checked' : ''}> Acrotère (toit plat)</label>
-                        <label class="checkbox-line"><input type="checkbox" data-hs-roof="chimney" ${H.roof?.chimney ? 'checked' : ''}> Une cheminée</label><label>Place de la cheminée<input type="range" data-hs-roof="chimneyPos" min="0" max="100" value="${H.roof?.chimneyPos ?? 30}"></label></div>` : ''}
-                    ${H.ref?.src ? `<h4>Plan scanné</h4><label>Transparence<input type="range" min="5" max="100" value="${Math.round((H.ref.op ?? .45) * 100)}" data-hs-ref="op"></label><div class="h-hs-row"><label class="checkbox-line"><input type="checkbox" data-hs-ref="show" ${H.ref.show !== false ? 'checked' : ''}> Visible</label><button type="button" class="button small secondary" data-hs-cmd="calib">📏 Mettre à l’échelle (2 points)</button><button type="button" class="button small secondary" data-hs-cmd="refmove">✥ Déplacer</button><button type="button" class="button small danger" data-hs-cmd="refdel">Retirer</button></div>` : ''}</div>`;
+                        <label class="checkbox-line"><input type="checkbox" data-hs-roof="chimney" ${H.roof?.chimney ? 'checked' : ''}> Une cheminée</label><label>Place de la cheminée<input type="range" data-hs-roof="chimneyPos" min="0" max="100" data-unit="%" value="${H.roof?.chimneyPos ?? 30}"></label></div>` : ''}`, false)}</div>`;
                 return;
             }
             if (tab === 'house') {
-                const m = H.meta, cs = m.census || [], vl = verList(), cur = verCur(), roomP = [];
+                const m = H.meta, cs = m.census || [], vl = verList(), cur = verCur(), roomP = [], sn = sunOf(), mems = allMems();
                 H.floors.forEach(fl => fl.rooms.forEach(rm => (rm.people || []).forEach(p => { if (!roomP.some(q => q.id === p.id) && !(m.people || []).some(q => q.id === p.id)) roomP.push({...p, room: rm.name || 'Pièce'}); })));
                 const chips = [...(m.people || []).map(p => `<button type="button" class="h-hs-chip" data-hs-popen="${p.id}" title="Habitant${p.role ? ` : ${esc(p.role)}` : ''} — ouvrir la fiche">👤 ${esc(p.label)}</button>`), ...roomP.map(p => `<button type="button" class="h-hs-chip" data-hs-popen="${p.id}" title="Liée à la pièce « ${esc(p.room)} » — ouvrir la fiche">🕯 ${esc(p.label)}</button>`),
                     ...cs.map((c, i) => `<button type="button" class="h-hs-chip is-census" data-hs-copen="${i}" title="${esc(c.label)}${c.ver ? ` — époque : ${esc(verName((H.versions || []).find(v => v.id === c.ver) || {}))}` : ''} — ouvrir la fiche où il est">📋 ${esc(c.short || c.label)}</button>`)];
-                pane.innerHTML = `<div class="h-hs-form"><h4>🔗 Rattachée à</h4><div class="h-hs-links">${chips.join('') || '<span class="muted">Rien pour l’instant : ajoute des habitants et des recensements (plus bas).</span>'}</div>
-                    <div data-hs-placepk><span class="pk-lab">Lieu</span>${PK().pickerField({name: 'hs_place', kind: 'place', allowFree: true, value: placeId ? {id: placeId, title: placeText || `#${placeId}`, name: String(placeText || '').split(',')[0] || `#${placeId}`} : placeText ? 'txt:' + placeText : null})}</div>
-                    <label>Époque (en quelques mots)<input data-hs-m="period" value="${esc(period)}" placeholder="ex. 1850 – 1930"></label>
-                    <h4>👥 Les habitants</h4><ul class="h-hs-people">${(m.people || []).map((p, i) => `<li><button type="button" class="link-button" data-hs-popen="${p.id}">${esc(p.label)}</button><input data-hs-prole="${i}" value="${esc(p.role || '')}" placeholder="rôle, années (né ici, 1880–1920…)"><button type="button" class="icon-button" data-hs-pdel="${i}" title="Retirer">×</button></li>`).join('') || '<li class="muted">Personne pour l’instant.</li>'}</ul>
-                    <button type="button" class="button small secondary" data-hs-cmd="addpeople">＋ Un habitant…</button>
-                    <h4>📋 Les recensements</h4><ul class="h-hs-people h-hs-clist">${cs.map((c, i) => `<li><button type="button" class="link-button" data-hs-copen="${i}" title="Ouvrir la fiche où est ce recensement">📋 ${esc(c.label)}</button>${vl.length ? `<select data-hs-cver="${i}" title="L’époque de la maison qui correspond à ce recensement" aria-label="Époque"><option value="">— époque —</option>${vl.map(v => `<option value="${esc(v.id)}" ${c.ver === v.id ? 'selected' : ''}>🕰 ${esc(verName(v))}</option>`).join('')}</select>` : ''}<button type="button" class="icon-button" data-hs-cdel="${i}" title="Retirer">×</button></li>`).join('') || '<li class="muted">Aucun recensement rattaché.</li>'}</ul>
-                    <button type="button" class="button small secondary" data-hs-cmd="addcensus">＋ Un recensement…</button>
-                    <h4 data-hs-versec>🕰 Les époques</h4>${vl.length ? `<ul class="h-hs-vlist">${vl.map(v => `<li class="${v === cur ? 'is-on' : ''}"><button type="button" class="link-button" data-hs-vgo="${esc(v.id)}" title="Montrer la maison à cette époque">${v === cur ? '● ' : ''}${esc(verName(v))}</button><button type="button" class="icon-button" data-hs-vedit="${esc(v.id)}" title="Renommer, changer la date, rattacher à un recensement">✎</button><button type="button" class="icon-button" data-hs-vdel="${esc(v.id)}" title="Supprimer cette époque">×</button>${verCensus(v).length ? `<small class="muted">${verCensus(v).map(c => `📋 ${esc(c.short || c.label)}`).join(' · ')}</small>` : ''}</li>`).join('')}</ul>`
+                pane.innerHTML = `<div class="h-hs-form">${sec('🔗 Rattachée à', 'h-links', `<div class="h-hs-links">${chips.join('') || '<span class="muted">Rien pour l’instant : ajoute des habitants et des recensements (plus bas).</span>'}</div>`)}
+                    ${sec('📍 Lieu et époque', 'h-place', `<div data-hs-placepk><span class="pk-lab">Lieu</span>${PK().pickerField({name: 'hs_place', kind: 'place', allowFree: true, value: placeId ? {id: placeId, title: placeText || `#${placeId}`, name: String(placeText || '').split(',')[0] || `#${placeId}`} : placeText ? 'txt:' + placeText : null})}</div>
+                        <label>Époque (en quelques mots)<input data-hs-m="period" value="${esc(period)}" placeholder="ex. 1850 – 1930"></label>`)}
+                    ${sec(`🏷 Les souvenirs de la maison${mems.length ? ` (${mems.length})` : ''}`, 'h-mems', mems.length ? `<ul class="h-hs-memlist">${mems.map(x => `<li>${memThumb(x.m)}<button type="button" class="link-button" data-hs-memgo="${esc(x.ref)}" title="Aller à « ${esc(x.where)} » et voir le souvenir">${esc(memTitle(x.m))}<br><small>${esc(x.where)}</small></button></li>`).join('')}</ul>`
+                        : A().emptyState({icon: '✦', text: 'Aucun souvenir posé pour l’instant', hint: 'Clic sur un meuble ou une pièce, puis « 🏷 Rattacher un souvenir » : une photo, un récit, une personne, un souvenir de famille.'}))}
+                    ${sec('☀️ Orientation et lumière', 'h-sun', `<label><span data-help="Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent." data-help-faq="lumière du jour">Nord du plan</span><input type="range" min="0" max="359" step="1" data-unit="°" data-default="0" data-hs-sun="north" value="${sn.north}"></label>
+                        <label>Heure (vue 3D)<input type="range" min="0" max="24" step="0.25" data-ui-off data-hs-sun="hour" value="${sn.hour}"><small class="muted" data-hs-sunout="hour">${esc(ext.house3d?.hourLabel?.(sn.hour) || sn.hour)}</small></label>
+                        <label>Jour de l’année<input type="range" min="1" max="365" step="1" data-ui-off data-hs-sun="day" value="${sn.day}"><small class="muted" data-hs-sunout="day">${esc(ext.house3d?.dayLabel?.(sn.day) || sn.day)}</small></label>
+                        <p class="muted small">${geo ? `Soleil calculé pour ${esc(placeText || 'le lieu de la maison')} (${String(Number(geo.lat).toFixed(2)).replace('.', ',')}° N).` : 'Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France.'} La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière).</p>
+                        <label><span data-help="La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant." data-help-faq="visiter la maison">Hauteur des yeux pour la visite (cm)</span><input type="number" min="80" max="220" step="5" data-hs-walk="eye" value="${clamp(Number(H.walk?.eye) || 160, 80, 220)}"></label>`, false)}
+                    ${sec('👥 Les habitants', 'h-people', `<ul class="h-hs-people">${(m.people || []).map((p, i) => `<li><button type="button" class="link-button" data-hs-popen="${p.id}">${esc(p.label)}</button><input data-hs-prole="${i}" value="${esc(p.role || '')}" placeholder="rôle, années (né ici, 1880–1920…)"><button type="button" class="icon-button" data-hs-pdel="${i}" title="Retirer">×</button></li>`).join('') || '<li class="muted">Personne pour l’instant.</li>'}</ul>
+                        <button type="button" class="button small secondary" data-hs-cmd="addpeople">＋ Ajouter un habitant…</button>`)}
+                    ${sec('📋 Les recensements', 'h-census', `<ul class="h-hs-people h-hs-clist">${cs.map((c, i) => `<li><button type="button" class="link-button" data-hs-copen="${i}" title="Ouvrir la fiche où est ce recensement">📋 ${esc(c.label)}</button>${vl.length ? `<select data-hs-cver="${i}" title="L’époque de la maison qui correspond à ce recensement" aria-label="Époque"><option value="">— époque —</option>${vl.map(v => `<option value="${esc(v.id)}" ${c.ver === v.id ? 'selected' : ''}>🕰 ${esc(verName(v))}</option>`).join('')}</select>` : ''}<button type="button" class="icon-button" data-hs-cdel="${i}" title="Retirer">×</button></li>`).join('') || '<li class="muted">Aucun recensement rattaché.</li>'}</ul>
+                        <button type="button" class="button small secondary" data-hs-cmd="addcensus">＋ Ajouter un recensement…</button>`)}
+                    <div data-hs-versec>${sec('🕰 Les époques', 'h-vers', `${vl.length ? `<ul class="h-hs-vlist">${vl.map(v => `<li class="${v === cur ? 'is-on' : ''}"><button type="button" class="link-button" data-hs-vgo="${esc(v.id)}" title="Montrer la maison à cette époque">${v === cur ? '● ' : ''}${esc(verName(v))}</button><button type="button" class="icon-button" data-hs-vedit="${esc(v.id)}" title="Renommer, changer la date, rattacher à un recensement">✎</button><button type="button" class="icon-button" data-hs-vdel="${esc(v.id)}" title="Supprimer cette époque">×</button>${verCensus(v).length ? `<small class="muted">${verCensus(v).map(c => `📋 ${esc(c.short || c.label)}`).join(' · ')}</small>` : ''}</li>`).join('')}</ul>`
                         : '<p class="muted">La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement.</p>'}
-                    <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="vernew">＋ Nouvelle époque (copie de celle-ci)</button>${vl.length > 1 ? `<button type="button" class="button small secondary" data-hs-cmd="verplay">${playT ? '⏹ Arrêter' : '▶ Voir évoluer'}</button>` : ''}</div>
-                    <label>Histoire de la maison<textarea data-hs-m="note" rows="6" placeholder="Construite par…, agrandie en…, vendue en…">${esc(m.note || '')}</textarea></label></div>`;
+                    <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="vernew">＋ Nouvelle époque (copie de celle-ci)</button>${vl.length > 1 ? `<button type="button" class="button small secondary" data-hs-cmd="verplay">${playT ? '⏹ Arrêter' : '▶ Voir évoluer'}</button>` : ''}</div>`)}</div>
+                    ${sec('📖 Histoire de la maison', 'h-note', `<textarea data-hs-m="note" rows="6" aria-label="Histoire de la maison" placeholder="Construite par…, agrandie en…, vendue en…">${esc(m.note || '')}</textarea>`)}</div>`;
                 return;
             }
-            // Propriétés de ce qui est choisi
+            // Propriétés de ce qui est choisi (E2 : Position et taille · Couleur · Texte · Effets · propres à l'objet)
             const o = !sel ? null : sel.type === 'wall' ? f.walls.find(q => q.id === sel.id) : sel.type === 'room' ? f.rooms.find(q => q.id === sel.id) : sel.type === 'item' ? f.items.find(q => q.id === sel.id) : sel.type === 'opening' ? f.openings.find(q => q.id === sel.id) : sel.type === 'label' ? f.labels.find(q => q.id === sel.id) : sel.type === 'dim' ? f.dims.find(q => q.id === sel.id) : null;
             if (!o) { pane.innerHTML = `<div class="h-hs-form"><p class="muted">Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté).</p>
                 <p class="muted">Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant.</p>
-                <h4>Cet étage</h4><p>${f.walls.length} mur${f.walls.length > 1 ? 's' : ''}, ${f.rooms.length} pièce${f.rooms.length > 1 ? 's' : ''}, ${f.items.length} objet${f.items.length > 1 ? 's' : ''} · ${String(r1(f.rooms.reduce((a, r) => a + area(r.pts), 0) / 10000)).replace('.', ',')} m² habitables</p></div>`; return; }
+                <h4>Cet étage</h4><p>${plural(f.walls.length, 'mur')}, ${plural(f.rooms.length, 'pièce')}, ${plural(f.items.length, 'objet')} · ${String(r1(f.rooms.reduce((a, r) => a + area(r.pts), 0) / 10000)).replace('.', ',')} m² habitables</p></div>`; return; }
+            const memSec = (title, extra = '') => sec(title, 'p-mem', `${extra}${memListHtml(o)}<button type="button" class="button small secondary" data-hs-cmd="memadd">🏷 Rattacher un souvenir…</button>`);
             let h = '<div class="h-hs-form">';
-            if (sel.type === 'wall') h += `<h4>Mur · ${fmtLen(wallLen(o))}</h4><div class="h-hs-g2c"><label>Longueur (cm)<input type="number" data-hs-p="len" value="${Math.round(wallLen(o))}" min="10"></label><label>Épaisseur (cm)<input type="number" data-hs-p="t" value="${o.t || f.wallT}" min="5" max="150"></label></div>
-                <label>Matériau (côtés)<select data-hs-p="mat">${opt(WALL_MATS.map(m => [m[0], m[1]]), o.mat || 'platre')}</select></label><label>Couleur (papier peint, enduit)<input type="color" data-hs-p="color" value="${esc(o.color || WALL_MATS.find(m => m[0] === (o.mat || 'platre'))[2])}"></label>
+            if (sel.type === 'wall') h += `<h4>Mur · ${fmtLen(wallLen(o))}</h4>${sec('Position et taille', 'p-pos', `<div class="h-hs-g2c"><label>Longueur (cm)<input type="number" data-hs-p="len" value="${Math.round(wallLen(o))}" min="10"></label><label>Épaisseur (cm)<input type="number" data-hs-p="t" value="${o.t || f.wallT}" min="5" max="150"></label></div>
                 <label>Angle (°, 0 = vers la droite, 90 = vers le haut)<input type="number" data-hs-p="ang" value="${degOf(o.a, o.b)}" step="0.5"></label><div class="h-hs-g4c"><label>Début X<input type="number" data-hs-p="ax" value="${r1(o.a[0])}" step="1"></label><label>Début Y<input type="number" data-hs-p="ay" value="${r1(o.a[1])}" step="1"></label><label>Fin X<input type="number" data-hs-p="bx" value="${r1(o.b[0])}" step="1"></label><label>Fin Y<input type="number" data-hs-p="by" value="${r1(o.b[1])}" step="1"></label></div>
-                <label>Hauteur (cm, vide = celle de l’étage)<input type="number" data-hs-p="h" value="${o.h || ''}" min="20" max="900"></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="split">✂ Couper en deux</button></div>`;
-            if (sel.type === 'opening') h += `<h4>${o.type === 'window' ? 'Fenêtre' : 'Porte'}</h4><div class="h-hs-g2c"><label>Largeur (cm)<input type="number" data-hs-p="w" value="${o.w}" min="30" max="600"></label><label>Hauteur (cm)<input type="number" data-hs-p="h" value="${o.h}" min="30" max="400"></label></div>
-                ${o.type === 'window' ? `<label>Allège (cm du sol)<input type="number" data-hs-p="sill" value="${o.sill ?? 90}" min="0" max="300"></label>` : `<label>Genre<select data-hs-p="style">${opt([['porte', 'Porte'], ['double', 'Porte double'], ['entree', 'Porte d’entrée'], ['arche', 'Passage, arche'], ['grange', 'Porte de grange']], o.style || 'porte')}</select></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="swing">↔ Sens d’ouverture</button><button type="button" class="button small secondary" data-hs-cmd="flip">⇅ Côté</button></div>`}
-                <label>Position sur le mur<input type="range" min="0" max="1000" value="${Math.round(o.pos * 1000)}" data-hs-p="pos"></label>${(() => { const w = f.walls.find(q => q.id === o.wall), L = w ? wallLen(w) : 0, s0 = r1(o.pos * L - o.w / 2); return w ? `<div class="h-hs-g2c"><label>Du début du mur (cm)<input type="number" data-hs-p="from" value="${s0}" min="0" step="1"></label><label>Jusqu’à la fin (cm)<input type="number" data-hs-p="to" value="${r1(L - s0 - o.w)}" min="0" step="1"></label></div>` : ''; })()}`;
-            if (sel.type === 'room') h += `<h4>Pièce · ${(area(o.pts) / 10000).toFixed(2).replace('.', ',')} m²</h4><p class="muted">${(() => { const xs = o.pts.map(p => p[0]), ys = o.pts.map(p => p[1]); return `${fmtLen(Math.max(...xs) - Math.min(...xs))} × ${fmtLen(Math.max(...ys) - Math.min(...ys))} hors tout · périmètre ${fmtLen(o.pts.reduce((a, p, i) => a + Math.hypot(o.pts[(i + 1) % o.pts.length][0] - p[0], o.pts[(i + 1) % o.pts.length][1] - p[1]), 0))}`; })()}</p><label>Nom<input data-hs-p="name" value="${esc(o.name || '')}" list="hs-rooms"></label><label class="checkbox-line" title="En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule."><input type="checkbox" data-hs-p="follow" ${o.follow === false ? '' : 'checked'}> 🔗 Les murs et les meubles suivent la pièce</label><datalist id="hs-rooms">${['Salle commune', 'Cuisine', 'Chambre', 'Chambre des parents', 'Chambre des enfants', 'Salon', 'Salle à manger', 'Bureau', 'Grenier', 'Cave', 'Cellier', 'Étable', 'Écurie', 'Grange', 'Fournil', 'Atelier', 'Boutique', 'Entrée', 'Couloir', 'Salle d’eau', 'Cour', 'Jardin', 'Potager', 'Basse-cour'].map(v => `<option value="${v}">`).join('')}</datalist>
-                <div class="h-hs-g2c"><label>Sol<select data-hs-p="floor">${opt(FLOOR_MATS.map(m => [m[0], m[1]]), o.floor || 'parquet')}</select></label><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || FLOOR_MATS.find(m => m[0] === (o.floor || 'parquet'))[2])}"></label></div>
-                <h4>🕯 Souvenirs de la pièce</h4><label>Ce qui s’y est passé<textarea data-hs-p="note" rows="4" placeholder="La chambre où est née Marie en 1890 ; la veillée…">${esc(o.note || '')}</textarea></label><label>Époque<input data-hs-p="period" value="${esc(o.period || '')}" placeholder="ex. 1890 – 1920"></label>
-                <ul class="h-hs-people">${(o.people || []).map((p, i) => `<li><button type="button" class="link-button" data-hs-popen="${p.id}">${esc(p.label)}</button><button type="button" class="icon-button" data-hs-rpdel="${i}">×</button></li>`).join('')}</ul><button type="button" class="button small secondary" data-hs-cmd="roompeople">＋ Une personne liée à la pièce…</button>`;
-            if (sel.type === 'item') { const L = libOf(o.kind); h += `<h4>${esc(o.name || L?.[1] || 'Objet')}</h4><label>Nom<input data-hs-p="name" value="${esc(o.name || '')}" placeholder="${esc(L?.[1] || '')}"></label><div class="h-hs-g3c"><label>Largeur<input type="number" data-hs-p="w" value="${Math.round(o.w)}" min="5"></label><label>Profondeur<input type="number" data-hs-p="d" value="${Math.round(o.d)}" min="1"></label><label>Hauteur<input type="number" data-hs-p="hgt" value="${Math.round(o.h ?? L?.[5] ?? 80)}" min="1"></label></div>
-                <div class="h-hs-g2c"><label>Rotation (°)<input type="number" data-hs-p="rot" value="${Math.round(o.rot || 0)}" step="15"></label><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || L?.[6] || '#9a8a7a')}"></label></div><div class="h-hs-g3c"><label>X (cm)<input type="number" data-hs-p="x" value="${r1(o.x)}" step="1"></label><label>Y (cm)<input type="number" data-hs-p="y" value="${r1(o.y)}" step="1"></label><label>Du sol (cm)<input type="number" data-hs-p="elev" value="${o.elev || 0}" min="0" max="400"></label></div>
-                ${itemMore(o, L)}<label>Souvenir (objet de famille, histoire)<textarea data-hs-p="note" rows="2">${esc(o.note || '')}</textarea></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="rot90" data-shortcut="R">⟳ 90°</button><button type="button" class="button small secondary" data-hs-cmd="dup">⧉ Dupliquer</button></div>`; }
-            if (sel.type === 'label') h += `<h4>Texte</h4><label>Texte<input data-hs-p="text" value="${esc(o.text)}"></label><label>Taille<input type="number" data-hs-p="size" value="${o.size || 24}" min="6" max="300"></label>`;
+                <label>Hauteur (cm, vide = celle de l’étage)<input type="number" data-hs-p="h" value="${o.h || ''}" min="20" max="900"></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="split">✂ Couper en deux</button></div>`)}
+                ${(() => { const fr = faceRooms(f, o), face = sd => { const [k, c] = faceOf(o, sd), rm = fr[sd];
+                    const all = fr[sd + 'All']; return `<fieldset class="h-hs-face"><legend>${rm ? `Face côté ${all.map(x => `« ${esc(x.name || 'Pièce')} »`).join(' et ')}` : 'Face extérieure (façade)'}</legend><div class="h-hs-g2c"><label>Revêtement<select data-hs-face="${sd}:mat">${opt(WALL_MATS.map(m => [m[0], m[1]]), k)}</select></label><label>Couleur<input type="color" data-hs-face="${sd}:color" value="${esc(c)}"></label></div>
+                        <div class="h-hs-row h-hs-faceapply"><small class="muted">Pareil pour :</small>${rm ? `<button type="button" class="button small secondary" data-hs-faceapply="${sd}:room" title="Les murs de « ${esc(rm.name || 'Pièce')} »">la pièce</button>` : ''}<button type="button" class="button small secondary" data-hs-faceapply="${sd}:floor" title="${rm ? 'Les murs de toutes les pièces' : 'Toutes les façades'} de cet étage">tout l’étage</button><button type="button" class="button small secondary" data-hs-faceapply="${sd}:house" title="${rm ? 'Les murs de toutes les pièces' : 'Toutes les façades'} de la maison (tous les étages)">toute la maison</button></div></fieldset>`; };
+                    return sec('Couleur et texture', 'p-color', (fr.l || !fr.r ? ['l', 'r'] : ['r', 'l']).map(face).join('') + `<label><span data-help="Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle." data-help-faq="plan de maison">Taille du motif</span><input type="range" min="25" max="400" step="5" data-unit="%" data-default="100" data-hs-face="x:tsc" value="${o.tsc || 100}"></label>`); })()}`;
+            if (sel.type === 'opening') { const w = f.walls.find(q => q.id === o.wall), L = w ? wallLen(w) : 0, s0 = r1(o.pos * L - o.w / 2);
+                h += `<h4>${o.type === 'window' ? 'Fenêtre' : 'Porte'}</h4>${sec('Position et taille', 'p-pos', `<div class="h-hs-g2c"><label>Largeur (cm)<input type="number" data-hs-p="w" value="${o.w}" min="30" max="600"></label><label>Hauteur (cm)<input type="number" data-hs-p="h" value="${o.h}" min="30" max="400"></label></div>
+                    ${o.type === 'window' ? `<label><span data-help="La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm)." data-help-faq="plan de maison">Allège (cm du sol)</span><input type="number" data-hs-p="sill" value="${o.sill ?? 90}" min="0" max="300"></label>` : ''}
+                    <label>Position sur le mur<input type="range" min="0" max="1000" value="${Math.round(o.pos * 1000)}" data-hs-p="pos" data-ui-off></label>${w ? `<div class="h-hs-g2c"><label>Du début du mur (cm)<input type="number" data-hs-p="from" value="${s0}" min="0" step="1"></label><label>Jusqu’à la fin (cm)<input type="number" data-hs-p="to" value="${r1(L - s0 - o.w)}" min="0" step="1"></label></div>` : ''}`)}
+                    ${o.type === 'window' ? '' : sec('🚪 Genre et ouverture', 'p-door', `<label>Genre<select data-hs-p="style">${opt([['porte', 'Porte'], ['double', 'Porte double'], ['entree', 'Porte d’entrée'], ['arche', 'Passage, arche'], ['grange', 'Porte de grange']], o.style || 'porte')}</select></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="swing">↔ Sens d’ouverture</button><button type="button" class="button small secondary" data-hs-cmd="flip">⇅ Côté</button></div>`)}`; }
+            if (sel.type === 'room') { const xs = o.pts.map(p => p[0]), ys = o.pts.map(p => p[1]);
+                h += `<h4>Pièce · ${(area(o.pts) / 10000).toFixed(2).replace('.', ',')} m²</h4>${sec('Position et taille', 'p-pos', `<p class="muted">${fmtLen(Math.max(...xs) - Math.min(...xs))} × ${fmtLen(Math.max(...ys) - Math.min(...ys))} hors tout · périmètre ${fmtLen(o.pts.reduce((a, p, i) => a + Math.hypot(o.pts[(i + 1) % o.pts.length][0] - p[0], o.pts[(i + 1) % o.pts.length][1] - p[1]), 0))}</p>
+                    <label class="checkbox-line"><input type="checkbox" data-hs-p="follow" ${o.follow === false ? '' : 'checked'}> <span data-help="En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule." data-help-faq="plan de maison">🔗 Les murs et les meubles suivent la pièce</span></label>`)}
+                    ${sec('Couleur', 'p-color', `<div class="h-hs-g2c"><label>Sol<select data-hs-p="floor">${opt(FLOOR_MATS.map(m => [m[0], m[1]]), o.floor || 'parquet')}</select></label><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || FLOOR_MATS.find(m => m[0] === (o.floor || 'parquet'))[2])}"></label></div>`)}
+                    ${(() => { const rw = roomWalls(f, o); if (!rw.length) return ''; const [k, c] = faceOf(...rw[0]);
+                        return sec('🧱 Murs de la pièce', 'p-rwalls', `<p class="muted small">La face de ${plural(rw.length, 'mur')} tournée vers la pièce.</p><div class="h-hs-g2c"><label>Revêtement<select data-hs-rwall="mat">${opt(WALL_MATS.map(m => [m[0], m[1]]), k)}</select></label><label>Couleur<input type="color" data-hs-rwall="color" value="${esc(c)}"></label></div>`); })()}
+                    ${sec('Texte', 'p-text', `<label>Nom<input data-hs-p="name" value="${esc(o.name || '')}" list="hs-rooms"></label><datalist id="hs-rooms">${['Salle commune', 'Cuisine', 'Chambre', 'Chambre des parents', 'Chambre des enfants', 'Salon', 'Salle à manger', 'Bureau', 'Grenier', 'Cave', 'Cellier', 'Étable', 'Écurie', 'Grange', 'Fournil', 'Atelier', 'Boutique', 'Entrée', 'Couloir', 'Salle d’eau', 'Cour', 'Jardin', 'Potager', 'Basse-cour'].map(v => `<option value="${v}">`).join('')}</datalist>`)}
+                    ${memSec('🕯 Souvenirs de la pièce', `<label>Ce qui s’y est passé<textarea data-hs-p="note" rows="3" placeholder="La chambre où est née Marie en 1890 ; la veillée…">${esc(o.note || '')}</textarea></label><label>Époque<input data-hs-p="period" value="${esc(o.period || '')}" placeholder="ex. 1890 – 1920"></label>
+                        <ul class="h-hs-people">${(o.people || []).map((p, i) => `<li><button type="button" class="link-button" data-hs-popen="${p.id}">${esc(p.label)}</button><button type="button" class="icon-button" data-hs-rpdel="${i}" title="Retirer">×</button></li>`).join('')}</ul><button type="button" class="button small secondary" data-hs-cmd="roompeople">＋ Ajouter une personne liée à la pièce…</button>`)}`; }
+            if (sel.type === 'item') { const L = libOf(o.kind), s3 = o.s3 || (o.img ? 'img' : L?.[8] || L?.[7] || 'box'), doors = ['cabinet', 'wardrobe', 'hutch', 'drawers'].includes(s3);
+                h += `<h4>${esc(o.name || L?.[1] || 'Objet')}</h4>${sec('Position et taille', 'p-pos', `<div class="h-hs-g3c"><label>Largeur<input type="number" data-hs-p="w" value="${Math.round(o.w)}" min="5"></label><label>Profondeur<input type="number" data-hs-p="d" value="${Math.round(o.d)}" min="1"></label><label>Hauteur<input type="number" data-hs-p="hgt" value="${Math.round(o.h ?? L?.[5] ?? 80)}" min="1"></label></div>
+                    <div class="h-hs-g3c"><label>X (cm)<input type="number" data-hs-p="x" value="${r1(o.x)}" step="1"></label><label>Y (cm)<input type="number" data-hs-p="y" value="${r1(o.y)}" step="1"></label><label><span data-help="La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur." data-help-faq="plan de maison">Du sol (cm)</span><input type="number" data-hs-p="elev" value="${o.elev || 0}" min="0" max="400"></label></div>
+                    <label>Rotation (°)<input type="number" data-hs-p="rot" value="${Math.round(o.rot || 0)}" step="15"></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="rot90" data-shortcut="R">⟳ 90°</button><button type="button" class="button small secondary" data-hs-cmd="dup">⧉ Dupliquer</button></div>`)}
+                    ${sec('Couleur', 'p-color', `<div class="h-hs-g2c"><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || L?.[6] || '#9a8a7a')}"></label><label>Matière<select data-hs-p="matl">${opt(OBJ_MATS.map(m => [m[0], m[1]]), o.matl || '')}</select></label></div>
+                        <label title="Pieds, poignées, filets, ferrures">2ᵉ couleur<span class="h-hs-c2"><input type="color" data-hs-p="color2" value="${esc(o.color2 || '#c9a24a')}">${o.color2 ? '<button type="button" class="h-hs-vstep" data-hs-cmd="nocolor2" title="Sans deuxième couleur">×</button>' : '<small class="muted">aucune</small>'}</span></label>`)}
+                    ${sec('Texte', 'p-text', `<label>Nom<input data-hs-p="name" value="${esc(o.name || '')}" placeholder="${esc(L?.[1] || '')}"></label><label>Époque, style<input data-hs-p="period" value="${esc(o.period || '')}" placeholder="ex. vers 1880, Louis-Philippe"></label>`)}
+                    ${sec('Effets : pieds et détails', 'p-fx', `<div class="h-hs-g2c"><label>Pieds<select data-hs-p="feet">${opt(FEET_OPTS, o.feet || '')}</select></label><label>Coins arrondis (%)<input type="number" data-hs-p="rad" value="${o.rad || 0}" min="0" max="50" step="5"></label></div>
+                        ${doors ? `<div class="h-hs-g2c"><label>Portes<input type="number" data-hs-p="doors" value="${o.doors || ''}" min="0" max="8" placeholder="auto"></label><label>Tiroirs<input type="number" data-hs-p="drawers" value="${o.drawers || ''}" min="0" max="12" placeholder="auto"></label></div>` : ''}`, !!(o.feet || o.rad || o.doors || o.drawers))}
+                    ${memSec('🏷 Souvenirs de cet objet', `<label>Son histoire (objet de famille)<textarea data-hs-p="note" rows="2">${esc(o.note || '')}</textarea></label>`)}`; }
+            if (sel.type === 'label') h += `<h4>Texte</h4>${sec('Position et taille', 'p-pos', `<label>Taille<input type="number" data-hs-p="size" value="${o.size || 24}" min="6" max="300"></label>`)}
+                ${sec('Texte', 'p-text', `<label>Texte<input data-hs-p="text" value="${esc(o.text)}"></label><label>Police</label><div class="h-hs-row"><button type="button" class="button small secondary h-hs-fontbtn" data-hs-cmd="font" style="font-family:${esc(cssFont(o.font || 'Georgia'))}">${esc(o.font || 'Georgia (de départ)')} ▾</button>${o.font ? '<button type="button" class="icon-button small" data-hs-cmd="nofont" title="Police de départ">×</button>' : ''}</div>`)}`;
             if (sel.type === 'dim') h += `<h4>Cote · ${fmtLen(Math.hypot(o.b[0] - o.a[0], o.b[1] - o.a[1]))}</h4>`;
             h += '<div class="h-hs-row"><button type="button" class="button small danger" data-hs-cmd="del" data-shortcut="⌫">🗑 Supprimer</button></div></div>';
             pane.innerHTML = h;
         }
-        /** 🎨 matière, deuxième couleur, pieds, coins arrondis, portes et tiroirs, époque d'un objet posé */
-        let moreOpen = false;
-        function itemMore(o, L) {
-            const s3 = o.s3 || (o.img ? 'img' : L?.[8] || L?.[7] || 'box'), doors = ['cabinet', 'wardrobe', 'hutch', 'drawers'].includes(s3), on = moreOpen || !!(o.matl || o.color2 || o.feet || o.rad || o.doors || o.drawers);
-            return `<details class="h-hs-more" data-hs-more ${on ? 'open' : ''}><summary>🎨 Matière, pieds, détails</summary><div class="h-hs-g2c"><label>Matière<select data-hs-p="matl">${opt(OBJ_MATS.map(m => [m[0], m[1]]), o.matl || '')}</select></label><label>Pieds<select data-hs-p="feet">${opt(FEET_OPTS, o.feet || '')}</select></label></div>
-                <div class="h-hs-g2c"><label title="Pieds, poignées, filets, ferrures">2ᵉ couleur<span class="h-hs-c2"><input type="color" data-hs-p="color2" value="${esc(o.color2 || '#c9a24a')}">${o.color2 ? '<button type="button" class="h-hs-vstep" data-hs-cmd="nocolor2" title="Sans deuxième couleur">×</button>' : '<small class="muted">aucune</small>'}</span></label><label>Coins arrondis (%)<input type="number" data-hs-p="rad" value="${o.rad || 0}" min="0" max="50" step="5"></label></div>
-                ${doors ? `<div class="h-hs-g2c"><label>Portes<input type="number" data-hs-p="doors" value="${o.doors || ''}" min="0" max="8" placeholder="auto"></label><label>Tiroirs<input type="number" data-hs-p="drawers" value="${o.drawers || ''}" min="0" max="12" placeholder="auto"></label></div>` : ''}
-                <label>Époque, style<input data-hs-p="period" value="${esc(o.period || '')}" placeholder="ex. vers 1880, Louis-Philippe"></label></details>`;
-        }
-        pane.addEventListener('toggle', e => { if (e.target.matches?.('[data-hs-more]')) moreOpen = e.target.open; }, true);
         /* ─── 🕰 les époques : la maison selon les années ; chacune garde ses étages et son toit (celle qu'on dessine est dans H.floors et H.roof) ─── */
         const VKEYS = ['floors', 'roof'];
         const verKey = v => { const t = String(v.date || ''), iso = t.match(/(\d{4})-(\d{1,2})-(\d{1,2})/), fr = t.match(/(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})/), y = t.match(/\d{4}/); return iso ? +iso[1] * 1e4 + +iso[2] * 100 + +iso[3] : fr ? +fr[3] * 1e4 + +fr[2] * 100 + +fr[1] : y ? +y[0] * 1e4 : 9e8; }; // sans date : à la fin
@@ -459,6 +581,7 @@
             const [x, y] = toW(e); svg.setPointerCapture(e.pointerId);
             if (e.button === 1 || space || tool === 'pan') { drag = {pan: true, sx: e.clientX, sy: e.clientY, px: panX, py: panY}; return; }
             if (e.button !== 0) return;
+            const mk = !draft && e.target.closest?.('[data-hs-memat]'); if (mk) { openMemView(mk.dataset.hsMemat); return; } // ✦ un souvenir posé
             const f = F();
             if (tool === 'select') {
                 const wp = e.target.closest('[data-hs-wp]'), rp = e.target.closest('[data-hs-rp]'), rot = e.target.closest('[data-hs-rot]');
@@ -472,7 +595,7 @@
                 else if (hit?.type === 'wall') { const w = f.walls.find(q => q.id === hit.id); drag = {move: 'wall', w, x, y, a: [...w.a], b: [...w.b], linked: f.walls.flatMap(q => q === w ? [] : [[q, 'a'], [q, 'b']]).flatMap(([q, k]) => [[w.a, 'a'], [w.b, 'b']].filter(([p]) => q[k][0] === p[0] && q[k][1] === p[1]).map(([, which]) => [q, k, which])), ops: f.openings.filter(o => o.wall === w.id)}; }
                 else if (hit?.type === 'room') { const rm = f.rooms.find(q => q.id === hit.id); drag = {move: 'room', rm, x, y, orig: rm.pts.map(p => [...p]), grp: roomGroup(f, rm)}; }
                 else if (hit?.type === 'label') { const lb = f.labels.find(q => q.id === hit.id); drag = {move: 'label', lb, x, y, ox: lb.x, oy: lb.y}; }
-                else if (H.ref?.moving) { drag = {refMove: true, x, y, ox: H.ref.x, oy: H.ref.y}; }
+                else if (H.ref?.moving && !H.ref.lock) { drag = {refMove: true, x, y, ox: H.ref.x, oy: H.ref.y}; }
                 render(); return;
             }
             const p = snapPt(x, y, e, draft?.pts?.[draft.pts.length - 1]);
@@ -511,7 +634,7 @@
             const d = drag; drag = null;
             if (draft?.kind === 'room' && tool === 'room') { const a = draft.a, b = draft.b || snapPt(...toW(e), e); draft = null; makeRoomRect(a, b); return; }
             if (!d || d.pan) return;
-            if (d.moved) commit({wallEnd: 'Mur modifié', roomPt: 'Pièce modifiée', rot: 'Objet tourné', refMove: 'Plan scanné déplacé'}[Object.keys(d).find(k => ['wallEnd', 'roomPt', 'rot', 'refMove'].includes(k))] || 'Déplacé');
+            if (d.moved) commit({wallEnd: 'Mur modifié', roomPt: 'Pièce modifiée', rot: 'Objet tourné', refMove: 'Plan ancien déplacé'}[Object.keys(d).find(k => ['wallEnd', 'roomPt', 'rot', 'refMove'].includes(k))] || 'Déplacé');
         });
         svg.addEventListener('dblclick', e => { if (draft) finishDraft(); else { const hit = hitOf(e); if (hit?.type === 'room') { tab = 'props'; sel = hit; render(); pane.querySelector('[data-hs-p="name"]')?.focus(); } } });
         stage.addEventListener('wheel', e => { if (view3d) return; e.preventDefault(); const r = svg.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top; if (e.ctrlKey || e.metaKey || Math.abs(e.deltaY) > Math.abs(e.deltaX)) { const z = clamp(zoom * Math.exp(-e.deltaY * .0018), .03, 8); panX = cx - (cx - panX) * z / zoom; panY = cy - (cy - panY) * z / zoom; zoom = z; } else { panX -= e.deltaX; panY -= e.deltaY; } render(); }, {passive: false});
@@ -566,12 +689,15 @@
         /* ─── 🧲 aimants ─── */
         function paintSnap() {
             const box = $('[data-hs-snapbox]'), c = (k, l) => `<label class="checkbox-line"><input type="checkbox" data-hs-snap="${k}" ${snapO[k] ? 'checked' : ''}> ${l}</label>`;
+            const l = setsList(); setsSel = clamp(setsSel, 0, Math.max(0, l.length - 1));
             box.innerHTML = c('grid', 'Grille') + c('corner', 'Coins des murs et des pièces') + c('mid', 'Milieu des murs') + c('wall', 'Le long des murs (au cm)') + c('align', 'Alignements (lignes de rappel)') + c('angle', 'Angles')
-                + `<label>Pas des angles<select data-hs-snap="step">${[90, 45, 30, 15, 5, 1].map(v => `<option value="${v}" ${snapO.step === v ? 'selected' : ''}>${v}°</option>`).join('')}</select></label><label>Pas de la grille<select data-hs-snapgrid>${[1, 2, 5, 10, 25, 50, 100].map(v => `<option value="${v}" ${H.grid === v ? 'selected' : ''}>${v} cm</option>`).join('')}</select></label>`
-                + '<p class="muted">Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier.</p>';
+                + `<label><span data-help="Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin." data-help-faq="plan de maison">Pas des angles</span><select data-hs-snap="step">${[90, 45, 30, 15, 5, 1].map(v => `<option value="${v}" ${snapO.step === v ? 'selected' : ''}>${v}°</option>`).join('')}</select></label><label>Pas de la grille<select data-hs-snapgrid>${[1, 2, 5, 10, 25, 50, 100].map(v => `<option value="${v}" ${H.grid === v ? 'selected' : ''}>${v} cm</option>`).join('')}</select></label>`
+                + '<p class="muted">Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier.</p>'
+                + `<div class="h-hs-sets"><b>💾 Réglages enregistrés</b><small class="muted">Les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière, gardés sous un nom.</small>${l.length ? `<select data-hs-set aria-label="Réglages enregistrés">${l.map((x, i) => `<option value="${i}" ${i === setsSel ? 'selected' : ''}>${esc(x.name)}${x.date ? ` · ${esc(x.date)}` : ''}</option>`).join('')}</select><div class="h-hs-row"><button type="button" class="button small" data-hs-setcmd="apply">✓ Appliquer</button><button type="button" class="button small secondary" data-hs-setcmd="export" title="Un fichier .json, pour un autre ordinateur">⤓ Exporter</button><button type="button" class="icon-button small" data-hs-setcmd="del" title="Supprimer ce réglage">🗑</button></div>` : '<small class="muted">Aucun réglage enregistré pour l’instant.</small>'}
+                    <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-setcmd="save">💾 Enregistrer sous ce nom…</button><button type="button" class="button small secondary" data-hs-setcmd="import">⤒ Importer un réglage</button></div></div>`;
         }
-        $('[data-hs-snapbox]').addEventListener('click', e => e.stopPropagation());
-        $('[data-hs-snapbox]').addEventListener('change', e => { const el = e.target;
+        $('[data-hs-snapbox]').addEventListener('click', e => { e.stopPropagation(); const b = e.target.closest('[data-hs-setcmd]'); if (b) setsCmd(b.dataset.hsSetcmd, setsSel); });
+        $('[data-hs-snapbox]').addEventListener('change', e => { const el = e.target; if (el.matches('[data-hs-set]')) { setsSel = Number(el.value) || 0; return; }
             if (el.matches('[data-hs-snapgrid]')) { H.grid = Number(el.value); commit('Grille'); return; }
             const k = el.dataset.hsSnap; if (!k) return; snapO[k] = k === 'step' ? Number(el.value) : el.checked; try { localStorage.setItem(SNAP_KEY, JSON.stringify(snapO)); } catch (_) {} });
         /** décaler au clavier ce qui est choisi */
@@ -607,45 +733,234 @@
             ext.openDialog({eyebrow: 'MAISON', title, submitLabel: 'Ajouter', body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${PK().pickerField({name: 'hs_pick', kind: 'person'})}</div>`,
                 onOpen: dg => { setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
                 onSubmit: f => { const it = pkItems(f.querySelector('.pk'))[0]; if (!it) { toast('Choisis une personne.', 'error'); return false; } done = true; res({id: Number(it.id), label: it.title || ''}); }}); });
-        async function import3d() {
-            const inp = Object.assign(document.createElement('input'), {type: 'file', accept: '.obj,.stl,.glb,.gltf,.mtl', multiple: true});
-            inp.onchange = async () => {
-                const files = [...inp.files]; if (!files.length) return; const main = files.find(f => /\.(obj|stl|glb|gltf)$/i.test(f.name)); if (!main) return toast('Il faut un fichier OBJ, STL, GLB ou glTF.', 'error');
-                status('Lecture du modèle…');
-                try {
-                    // mesurer le modèle (et une vignette) avant de l'envoyer
-                    const info = await ext.house3d?.inspect(main, files.find(f => /\.mtl$/i.test(f.name)));
-                    const fd = new FormData(); fd.append('file', main); fd.append('name', main.name.replace(/\.[^.]+$/, '')); fd.append('dims', JSON.stringify(info?.dims || {})); fd.append('thumb', info?.thumb || ''); fd.append('csrf', A().state.csrf);
-                    const r = await fetch('api.php?action=house_model_upload', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}); const j = await r.json().catch(() => ({}));
-                    if (!r.ok || j.error) throw new Error(j.error || 'Envoi impossible.');
-                    let mtl = 0; const mf = files.find(f => /\.mtl$/i.test(f.name)); if (mf) { const fd2 = new FormData(); fd2.append('file', mf); fd2.append('name', main.name.replace(/\.[^.]+$/, '') + ' (couleurs)'); fd2.append('csrf', A().state.csrf); const r2 = await fetch('api.php?action=house_model_upload', {method: 'POST', body: fd2, headers: {'X-CSRF-Token': A().state.csrf}}); const j2 = await r2.json().catch(() => ({})); mtl = j2.result?.id || 0; }
-                    const dims = info?.dims || {w: 100, d: 100, h: 100};
-                    await loadMine(); status('Objet importé');
-                    placeItem({kind: 'model', name: j.result.name, w: Math.max(5, Math.round(dims.w)), d: Math.max(5, Math.round(dims.d)), h: Math.max(5, Math.round(dims.h)), model: {id: j.result.id, ext: j.result.ext, ...(mtl ? {mtl} : {})}});
-                    toast('Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons.');
-                } catch (e) { status(''); toast(e.message, 'error'); }
-            };
-            inp.click();
+        /* ─── 📥 importer : objets 3D, objets en image, plan ancien (le fichier entre aussi dans les médias) ─── */
+        async function import3d(given = null) {
+            const files = given || [...((await new Promise(res => { const inp = Object.assign(document.createElement('input'), {type: 'file', accept: '.obj,.stl,.glb,.gltf,.mtl', multiple: true}); inp.onchange = () => res(inp.files); inp.click(); })) || [])];
+            if (!files.length) return; const main = files.find(f => /\.(obj|stl|glb|gltf)$/i.test(f.name)); if (!main) return toast('Il faut un fichier OBJ, STL, GLB ou glTF.', 'error');
+            status('Lecture du modèle…');
+            try {
+                // mesurer le modèle (et une vignette) avant de l'envoyer
+                const info = await ext.house3d?.inspect(main, files.find(f => /\.mtl$/i.test(f.name)));
+                const fd = new FormData(); fd.append('file', main); fd.append('name', main.name.replace(/\.[^.]+$/, '')); fd.append('dims', JSON.stringify(info?.dims || {})); fd.append('thumb', info?.thumb || ''); fd.append('csrf', A().state.csrf);
+                const r = await fetch('api.php?action=house_model_upload', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}); const j = await r.json().catch(() => ({}));
+                if (!r.ok || j.error) throw new Error(j.error || 'Envoi impossible.');
+                let mtl = 0; const mf = files.find(f => /\.mtl$/i.test(f.name)); if (mf) { const fd2 = new FormData(); fd2.append('file', mf); fd2.append('name', main.name.replace(/\.[^.]+$/, '') + ' (couleurs)'); fd2.append('csrf', A().state.csrf); const r2 = await fetch('api.php?action=house_model_upload', {method: 'POST', body: fd2, headers: {'X-CSRF-Token': A().state.csrf}}); const j2 = await r2.json().catch(() => ({})); mtl = j2.result?.id || 0; }
+                const dims = info?.dims || {w: 100, d: 100, h: 100};
+                await loadMine(); status('Objet importé'); if (view3d) await toggle3d(false);
+                placeItem({kind: 'model', name: j.result.name, w: Math.max(5, Math.round(dims.w)), d: Math.max(5, Math.round(dims.d)), h: Math.max(5, Math.round(dims.h)), model: {id: j.result.id, ext: j.result.ext, ...(mtl ? {mtl} : {})}});
+                toast('Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons.');
+            } catch (e) { status(''); toast(e.message, 'error'); }
         }
-        function importImg() {
-            const inp = Object.assign(document.createElement('input'), {type: 'file', accept: 'image/*'});
-            inp.onchange = async () => { const f = inp.files?.[0]; if (!f) return; const src = await shrink(f, 600); const im = await loadImg(src); const k = 100 / Math.max(im.naturalWidth, im.naturalHeight);
-                placeItem({kind: 'image', name: f.name.replace(/\.[^.]+$/, ''), img: src, w: Math.round(im.naturalWidth * k), d: Math.round(im.naturalHeight * k), h: 80}); toast('Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés.'); };
-            inp.click();
+        async function importImg(given = null) {
+            const f = given || await pickFile('image/*'); if (!f) return;
+            try { const src = await shrink(f, 600), im = await loadImg(src), k = 100 / Math.max(im.naturalWidth, im.naturalHeight); if (view3d) await toggle3d(false);
+                placeItem({kind: 'image', name: f.name.replace(/\.[^.]+$/, '') || 'Objet', img: src, w: Math.round(im.naturalWidth * k), d: Math.round(im.naturalHeight * k), h: 80}); toast('Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés.');
+                if (given) PK().importMediaFile?.(f, ['image']).catch(() => {}); // déposé : il entre aussi dans les médias
+            } catch (e) { toast(e.message, 'error'); }
         }
-        function importPlan() {
-            const inp = Object.assign(document.createElement('input'), {type: 'file', accept: 'image/*'});
-            inp.onchange = async () => { const f = inp.files?.[0]; if (!f) return; const src = await shrink(f, 2200), im = await loadImg(src), k = 1000 / Math.max(im.naturalWidth, im.naturalHeight);
-                H.ref = {src, x: 0, y: 0, w: im.naturalWidth * k, h: im.naturalHeight * k, op: .45, show: true, floor: F().id}; tab = 'floor'; commit('Plan scanné posé'); fit();
-                toast('Plan posé en transparence : « 📏 Mettre à l’échelle » (Étage) — clique les deux bouts d’une longueur connue — puis trace les murs par-dessus.'); };
-            inp.click();
+        /** l'adresse d'une image des médias, utilisable dans le plan (« media/… ») */
+        const mediaSrc = it => { const full = it?.filename && /^(image|photo)/.test(String(it.media_type || it.sort || 'image')) ? `media/${encodeURIComponent(it.filename)}` : ''; return [full, it?.thumb, it?.thumbnail ? `media/${encodeURIComponent(it.thumbnail)}` : ''].find(v => v && imgSafe(v)) || ''; };
+        /** 📐 O18 : un plan ancien (cadastre napoléonien…) en fond : choisi dans les médias (ou importé : il y entre), puis mis à l'échelle */
+        async function importPlan(file = null) {
+            let it = null;
+            if (file) { try { status('Envoi de l’image dans les médias…'); it = await PK().importMediaFile(file, ['image']); status(''); } catch (e) { status(''); return toast(e.message, 'error'); } }
+            else it = await PK().openMediaPicker?.({types: ['image'], eyebrow: 'MAISON · PLAN ANCIEN', title: 'Le plan à calquer', intro: 'Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias).', okLabel: 'Poser ce plan'});
+            if (!it) return; const src = mediaSrc(it); if (!src) return toast('Cette image ne peut pas servir de plan.', 'error');
+            let im; try { im = await loadImg(src); } catch (e) { return toast(e.message, 'error'); }
+            if (view3d) await toggle3d(false);
+            const r = stage.getBoundingClientRect(), k = 1500 / Math.max(im.naturalWidth, im.naturalHeight), w = r1(im.naturalWidth * k), h = r1(im.naturalHeight * k), cx = (r.width / 2 - panX) / zoom, cy = (r.height / 2 - panY) / zoom;
+            H.ref = {src, mid: Number(it.id) || 0, x: r1(cx - w / 2), y: r1(cy - h / 2), w, h, op: .5, rot: 0, show: true, lock: false, floor: F().id}; tab = 'floor'; commit('Plan ancien posé'); fitRef();
+            calibrate();
         }
-        function calibrate() {
-            if (!H.ref) return; const pts = []; hint('Clique les deux bouts d’une longueur que tu connais sur le plan scanné (un mur, une cote)…'); setTool('select');
-            const onDown = e => { e.stopPropagation(); e.preventDefault(); pts.push(toW(e)); if (pts.length < 2) return; svg.removeEventListener('pointerdown', onDown, true);
-                const L = Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]), real0 = A().askText({title: 'Mettre le plan à l’échelle', message: 'Quelle est la longueur réelle entre ces deux points ? (en cm, ou 5 m)', value: '500', okLabel: 'Mettre à l’échelle'}); hint(HINTS[tool]);
-                real0.then(v => { const real = parseLen(v); if (!(real > 0) || L < 1) return; const k = real / L, [ox, oy] = pts[0]; H.ref.x = ox + (H.ref.x - ox) * k; H.ref.y = oy + (H.ref.y - oy) * k; H.ref.w *= k; H.ref.h *= k; commit('Plan scanné mis à l’échelle'); fit(); }); };
-            svg.addEventListener('pointerdown', onDown, true);
+        /** le plan ancien entier à l'écran */
+        function fitRef() { const R = H.ref; if (!R) return; const r = stage.getBoundingClientRect(); zoom = clamp(Math.min((r.width - 80) / R.w, (r.height - 80) / R.h), .03, 6); panX = r.width / 2 - (R.x + R.w / 2) * zoom; panY = r.height / 2 - (R.y + R.h / 2) * zoom; render(); }
+        /** deux clics sur le plan (un petit rond marque le premier) ; Échap : abandon */
+        function twoClicks(msg) {
+            return new Promise(res => { const pts = []; hint(msg); setTool('select'); let dot = null;
+                const end = v => { svg.removeEventListener('pointerdown', onDown, true); document.removeEventListener('keydown', onEsc, true); dot?.remove(); hint(HINTS[tool]); res(v); };
+                const onEsc = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); end(null); } };
+                const onDown = e => { if (e.button !== 0) return; e.stopPropagation(); e.preventDefault(); const p = toW(e); pts.push(p);
+                    if (pts.length === 1) { dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); dot.setAttribute('cx', p[0]); dot.setAttribute('cy', p[1]); dot.setAttribute('r', 7 / zoom); dot.setAttribute('fill', '#e0457b'); svg.appendChild(dot); dot.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); hint(`${msg} — et maintenant le deuxième point.`); return; }
+                    end(pts); };
+                svg.addEventListener('pointerdown', onDown, true); document.addEventListener('keydown', onEsc, true); });
+        }
+        async function calibrate() {
+            if (!H.ref || H.ref.lock) return; if (view3d) await toggle3d(false);
+            const pts = await twoClicks('📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée)'); if (!pts) return;
+            const L = Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]); if (L < 1) return toast('Les deux points sont trop proches.', 'error');
+            const real = await new Promise(res => { let done = false;
+                ext.openDialog({eyebrow: 'MAISON · PLAN ANCIEN', title: '📏 Mettre le plan à l’échelle', submitLabel: 'Mettre à l’échelle',
+                    body: `<p>Quelle est la vraie longueur entre ces deux points ?</p><div class="form-grid"><label>Longueur<input name="len" value="10" inputmode="decimal" autocomplete="off"></label><label>Unité<select name="unit">${OLD_UNITS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label></div>
+                        <p class="muted small">Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule.</p>`,
+                    onOpen: dg => { setTimeout(() => { const i = dg.querySelector('[name=len]'); i.focus(); i.select(); }, 30); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
+                    onSubmit: f => { const v = Number(String(f.elements.len.value).trim().replace(',', '.')), u = OLD_UNITS.find(x => x[0] === f.elements.unit.value); if (!(v > 0) || !u) { toast('Écris une longueur, par exemple 12 ou 3,5.', 'error'); return false; } done = true; res(v * u[2]); }}); });
+            if (!real) return; const R = H.ref, k = real / L, [ox, oy] = pts[0], cx = R.x + R.w / 2, cy = R.y + R.h / 2, nx = ox + (cx - ox) * k, ny = oy + (cy - oy) * k;
+            R.w = r1(R.w * k); R.h = r1(R.h * k); R.x = r1(nx - R.w / 2); R.y = r1(ny - R.h / 2); commit('Plan ancien mis à l’échelle'); fitRef();
+            toast(`À l’échelle : la longueur choisie mesure ${fmtLen(real)}. Puis « ✏️ Décalquer les murs » (onglet Étage).`);
+        }
+        /** ↻ deux clics le long d'un mur de l'image : il devient horizontal ou vertical */
+        async function refAlign() {
+            if (!H.ref || H.ref.lock) return; if (view3d) await toggle3d(false);
+            const pts = await twoClicks('↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit'); if (!pts) return;
+            const ang = Math.atan2(pts[1][1] - pts[0][1], pts[1][0] - pts[0][0]) * 180 / Math.PI, delta = Math.round(ang / 90) * 90 - ang; if (Math.abs(delta) < .05) return toast('Ce mur est déjà droit.');
+            const R = H.ref, [ox, oy] = pts[0], a = delta * Math.PI / 180, cx = R.x + R.w / 2 - ox, cy = R.y + R.h / 2 - oy, ncx = ox + cx * Math.cos(a) - cy * Math.sin(a), ncy = oy + cx * Math.sin(a) + cy * Math.cos(a);
+            R.rot = r1(((Number(R.rot) || 0) + delta + 540) % 360 - 180); R.x = r1(ncx - R.w / 2); R.y = r1(ncy - R.h / 2); commit(`Plan ancien redressé (${String(r1(delta)).replace('.', ',')}°)`);
+        }
+        function toggleTrace(on = !tracing) {
+            tracing = !!on && !!H.ref?.src; stage.classList.toggle('is-tracing', tracing);
+            if (tracing) { H.ref.show = true; if ((H.ref.op ?? .45) < .55) H.ref.op = .6; H.ref.moving = false; if ((H.ref.floor ?? F().id) !== F().id) H.ref.floor = F().id; setTool('wall'); hint('✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière'); }
+            else setTool('select');
+            render();
+        }
+
+        /* ─── ✦ O19 : les souvenirs posés sur un meuble, un objet ou une pièce (photo, récit, personne, souvenir de famille) ─── */
+        const holderOf = ref => { const [type, hid] = String(ref || '').split(':'); for (const [i, fl] of H.floors.entries()) { const o = (type === 'room' ? fl.rooms : type === 'item' ? fl.items : []).find(q => q.id === hid); if (o) return {o, type, fi: i, floor: fl}; } return null; };
+        const holderName = hd => hd.type === 'room' ? (hd.o.name || 'Pièce') : (hd.o.name || libOf(hd.o.kind)?.[1] || 'Objet');
+        const memTitle = m => String(m.title || m.label || (m.type === 'text' ? String(m.text || '').slice(0, 60) : '') || 'Souvenir');
+        const memThumb = m => m.type === 'media' && m.src ? `<img src="${esc(m.src)}" alt="">` : `<span aria-hidden="true">${MEM_ICON[m.type] || '✦'}</span>`;
+        const MEM_KIND = {media: 'Photo, document', text: 'Récit', person: 'Personne', memory: 'Souvenir de famille', object: 'Objet de famille'};
+        function allMems() { return H.floors.flatMap(fl => [...fl.rooms.map(o => ['room', o]), ...fl.items.map(o => ['item', o])].flatMap(([type, o]) => (o.mem || []).map(m => ({m, ref: `${type}:${o.id}`, where: `${holderName({type, o})} · ${fl.name}`})))); }
+        const memListHtml = o => (o.mem || []).length ? `<ul class="h-hs-memlist">${o.mem.map((m, i) => `<li>${memThumb(m)}<button type="button" class="link-button" data-hs-memview="${i}" title="Voir ce souvenir">${esc(memTitle(m))}<br><small>${esc(MEM_KIND[m.type] || '')}</small></button><button type="button" class="icon-button small" data-hs-memdel="${i}" title="Retirer ce souvenir (sans le supprimer de la base)">✕</button></li>`).join('')}</ul>` : '<p class="muted small">Aucun souvenir rattaché : une photo, un récit, une personne…</p>';
+        /** une question à choix (boutons) → la clé choisie, ou null */
+        const choose = (title, eyebrow, items) => new Promise(res => { let done = false;
+            ext.openDialog({eyebrow, title, body: `<div class="h-hs-memopts">${items.map(([k, l, hint2]) => `<button type="button" class="button secondary" data-ch="${esc(k)}">${esc(l)}${hint2 ? `<br><small class="muted">${esc(hint2)}</small>` : ''}</button>`).join('')}</div>`,
+                onOpen: dg => { dg.addEventListener('click', e => { const b = e.target.closest('[data-ch]'); if (!b) return; done = true; res(b.dataset.ch); dg.close(); }); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); setTimeout(() => dg.querySelector('[data-ch]')?.focus(), 30); }}); });
+        let famCache = null;
+        /** les souvenirs et objets de famille de la base (si ces listes existent) */
+        async function famLoad() {
+            if (famCache) return famCache; const out = [];
+            const [mm, oo] = await Promise.all([api('family_memories', {}).catch(() => null), api('family_objects', {}).catch(() => null)]);
+            if (!mm && !oo) return (famCache = null);
+            (mm?.memories || []).forEach(m => out.push({kind: 'memory', id: Number(m.id), title: m.title || 'Souvenir', sub: m.kind_label || 'Souvenir de famille', text: m.content || ''}));
+            (oo?.objects || []).forEach(o => out.push({kind: 'object', id: Number(o.id), title: o.title || 'Objet', sub: ['Objet de famille', o.kind].filter(Boolean).join(' · '), text: [o.description, o.origin_text].filter(Boolean).join('\n')}));
+            return (famCache = out);
+        }
+        function famPick(list) {
+            return new Promise(res => { let done = false, q = '';
+                const draw = dg => { const box = dg.querySelector('[data-fm-list]'), l = list.filter(x => norm(`${x.title} ${x.sub} ${x.text}`).includes(norm(q)));
+                    box.innerHTML = l.length ? l.map(x => `<button type="button" data-fm="${x.kind}:${x.id}">${x.kind === 'object' ? '🏺' : '📜'} <b>${esc(x.title)}</b><br><small class="muted">${esc(x.sub)}${x.text ? ` · ${esc(String(x.text).slice(0, 90))}` : ''}</small></button>`).join('')
+                        : A().emptyState({icon: '📜', text: list.length ? 'Aucun souvenir ne correspond.' : 'Aucun souvenir de famille pour l’instant', hint: list.length ? 'Essaie un autre mot.' : 'Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille.'}); };
+                ext.openDialog({eyebrow: 'MAISON · SOUVENIRS', title: '📜 Un souvenir de famille', body: `<div class="h-hs-fmwrap"><input type="search" data-fm-q placeholder="Chercher… (recette, montre, surnom)" aria-label="Chercher un souvenir"></div><div class="h-hs-fmlist" data-fm-list></div>`,
+                    onOpen: dg => { draw(dg); dg.querySelector('[data-fm-q]').addEventListener('input', e => { q = e.target.value; draw(dg); }); setTimeout(() => dg.querySelector('[data-fm-q]')?.focus(), 30);
+                        dg.addEventListener('click', e => { const b = e.target.closest('[data-fm]'); if (!b) return; const [k, i] = b.dataset.fm.split(':'); done = true; res(list.find(x => x.kind === k && x.id === Number(i)) || null); dg.close(); });
+                        dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); }}); });
+        }
+        async function memAdd(given = null) {
+            const f = F(), o = sel?.type === 'item' ? f.items.find(q => q.id === sel.id) : sel?.type === 'room' ? f.rooms.find(q => q.id === sel.id) : null;
+            if (!o) return toast('Choisis d’abord un meuble, un objet ou une pièce.', 'error');
+            const fam = given ? null : await famLoad(), nm = holderName({type: sel.type, o});
+            const kind = given ? 'media' : await choose(`🏷 Rattacher un souvenir à « ${nm} »`, 'MAISON · SOUVENIRS', [['media', '🖼 Une photo, un document', 'pris dans les médias (ou importé depuis l’ordinateur)'], ['text', '✍ Un récit', 'ce qui s’est passé ici, ce qu’on en raconte'], ['person', '👤 Une personne', 'qui a vécu ici, qui s’en servait'], ...(fam ? [['family', '📜 Un souvenir de famille', 'une recette, une expression, un objet de famille…']] : [])]);
+            if (!kind) return; let m = null;
+            if (kind === 'media') { const it = given || await PK().openMediaPicker?.({types: ['image', 'document'], eyebrow: 'MAISON · SOUVENIRS', title: `Un souvenir pour « ${nm} »`, okLabel: 'Rattacher'}); if (!it) return;
+                m = {id: uid('s'), type: 'media', mid: Number(it.id) || 0, title: String(it.title || 'Photo').slice(0, 200), src: mediaSrc(it), kind: /^[\w-]{1,20}$/.test(it.media_type || '') ? it.media_type : '', date: String(it.year || it.date_text || '').slice(0, 40)}; }
+            if (kind === 'text') { m = await new Promise(res => { let done = false;
+                ext.openDialog({eyebrow: 'MAISON · SOUVENIRS', title: `✍ Un récit pour « ${nm} »`, submitLabel: 'Rattacher', body: `<label>Titre<input name="title" maxlength="200" placeholder="ex. La veillée de Noël 1912"></label><label>Le récit<textarea name="text" rows="8" maxlength="2000" placeholder="Ce qui s’est passé ici, ce qu’on en raconte…"></textarea></label>`,
+                    onOpen: dg => { setTimeout(() => dg.querySelector('[name=title]')?.focus(), 30); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
+                    onSubmit: fm => { const t = fm.elements.title.value.trim(), x = fm.elements.text.value.trim(); if (!t && !x) { toast('Écris un titre ou un récit.', 'error'); return false; } done = true; res({id: uid('s'), type: 'text', title: (t || x.slice(0, 60)).slice(0, 200), text: x.slice(0, 2000)}); }}); }); }
+            if (kind === 'person') { const p = await pickPerson(`👤 Une personne liée à « ${nm} »`); if (p) m = {id: uid('s'), type: 'person', pid: p.id, label: String(p.label || '').slice(0, 200), title: String(p.label || 'Personne').slice(0, 200)}; }
+            if (kind === 'family') { const x = await famPick(fam || []); if (x) m = {id: uid('s'), type: x.kind, mid: x.id, title: String(x.title).slice(0, 200), text: String(x.text || '').slice(0, 2000), label: String(x.sub || '').slice(0, 200)}; }
+            if (!m) return; o.mem = [...(o.mem || []), m]; tab = 'props'; commit('Souvenir rattaché');
+        }
+        /** ✦ voir les souvenirs d'un meuble ou d'une pièce (clic sur le repère, en 2D, en 3D, pendant la visite) */
+        function openMemView(ref, focus = -1) {
+            const hd = holderOf(ref); if (!hd) return; const list = hd.o.mem || []; if (!list.length) return;
+            const dg = document.createElement('dialog'); dg.className = 'modal h-modal h-hs-memdlg';
+            const card = (m, i) => `<article class="h-hs-memcard" data-mi="${i}">${m.type === 'media' ? `${m.src ? `<img src="${esc(m.src)}" alt="${esc(memTitle(m))}">` : ''}<b>🖼 ${esc(memTitle(m))}</b>${m.date ? `<small class="muted">${esc(m.date)}</small>` : ''}${m.mid ? `<div><button type="button" class="button small secondary" data-mv-media="${m.mid}">↗ Ouvrir le média</button></div>` : ''}`
+                : m.type === 'person' ? `<b>👤 ${esc(m.label || m.title)}</b><div><button type="button" class="button small secondary" data-mv-person="${Number(m.pid) || 0}">↗ Fiche</button></div>`
+                : `<b>${MEM_ICON[m.type] || '✦'} ${esc(memTitle(m))}</b>${m.label ? `<small class="muted">${esc(m.label)}</small>` : ''}${m.text ? `<p>${esc(m.text)}</p>` : ''}`}</article>`;
+            const extra = hd.type === 'room' && (hd.o.note || hd.o.period) ? `<article class="h-hs-memcard"><b>🕯 ${esc(hd.o.period || 'Ce qui s’y est passé')}</b>${hd.o.note ? `<p>${esc(hd.o.note)}</p>` : ''}</article>` : hd.type === 'item' && hd.o.note ? `<article class="h-hs-memcard"><b>🏺 Son histoire</b><p>${esc(hd.o.note)}</p></article>` : '';
+            dg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">✦ ${esc(plural(list.length, 'souvenir'))} · ${esc(hd.floor.name)}</span><h2>${esc(holderName(hd))}</h2></div><button type="button" class="icon-button" data-mv-x aria-label="Fermer">×</button></div>
+                <div class="h-dialog-body h-hs-memv">${list.map(card).join('')}${extra}</div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-mv-x>Fermer</button></div></form>`;
+            document.body.appendChild(dg); dg.addEventListener('close', () => dg.remove());
+            dg.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return;
+                if (b.hasAttribute('data-mv-x')) return dg.close();
+                if (b.dataset.mvMedia) { try { const [it] = await PK().loadMedia([Number(b.dataset.mvMedia)]); if (it) PK().openMedia(it); else toast('Ce média n’existe plus.', 'error'); } catch (err) { toast(err.message, 'error'); } return; }
+                if (b.dataset.mvPerson) { const pid = Number(b.dataset.mvPerson); if (!pid) return; if (dirty && !await A().confirmBox('La maison non enregistrée sera perdue (💾 d’abord).', {title: 'Ouvrir la fiche ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return; dg.close(); dirty = false; close(); A().openPersonById?.(pid); } });
+            dg.showModal(); if (focus >= 0) dg.querySelector(`[data-mi="${focus}"]`)?.scrollIntoView({block: 'center'});
+        }
+
+        /* ─── ☀️ O17 : orientation et lumière (gardées avec la maison) ; 🧭 la boussole du plan ─── */
+        const sunOf = () => ({north: 0, hour: 15, day: 172, shadows: true, ...(H.sun && typeof H.sun === 'object' ? H.sun : {})});
+        let quietT = 0;
+        /** un réglage qui ne change pas le dessin (lumière, hauteur des yeux) : gardé dans l'historique sans tout redessiner */
+        const quietCommit = label => { dirty = true; syncSt(); clearTimeout(quietT); quietT = setTimeout(() => { hist = hist.slice(0, hpos + 1); hist.push(snap0()); if (hist.length > 120) hist.shift(); hpos = hist.length - 1; status(label); }, 600); };
+        function paintCompass() { const c = $('[data-hs-compass]'); if (!c) return; c.hidden = !!view3d; c.querySelector('svg').style.transform = `rotate(${Number(sunOf().north) || 0}deg)`; }
+
+        /* ─── 💾 réglages enregistrés : aimants, grille, murs, visite, lumière ─── */
+        const setsData = () => ({snap: {...snapO}, grid: H.grid || 10, wallT: F().wallT, slab: H.slab ?? 20, ghostOp: Number(H.ghostOp ?? .3), eye: clamp(Number(H.walk?.eye) || 160, 80, 220), sun: sunOf()});
+        function applySet(d) {
+            if (!d || typeof d !== 'object') return false;
+            if (d.snap && typeof d.snap === 'object') { Object.keys(SNAP0).forEach(k => { if (k in d.snap) snapO[k] = k === 'step' ? ([90, 45, 30, 15, 5, 1].includes(Number(d.snap.step)) ? Number(d.snap.step) : 45) : !!d.snap[k]; }); try { localStorage.setItem(SNAP_KEY, JSON.stringify(snapO)); } catch (_) {} }
+            if ([1, 2, 5, 10, 25, 50, 100].includes(Number(d.grid))) H.grid = Number(d.grid);
+            if (Number(d.wallT) >= 5 && Number(d.wallT) <= 120) F().wallT = Number(d.wallT);
+            if (Number(d.slab) >= 0 && Number(d.slab) <= 120) H.slab = Number(d.slab);
+            if (Number(d.ghostOp) >= .05 && Number(d.ghostOp) <= .9) H.ghostOp = Number(d.ghostOp);
+            if (Number(d.eye) >= 80 && Number(d.eye) <= 220) H.walk = {...(H.walk || {}), eye: Number(d.eye)};
+            if (d.sun && typeof d.sun === 'object') { const s = {}; if (Number.isFinite(+d.sun.north)) s.north = clamp(+d.sun.north, 0, 359); if (Number.isFinite(+d.sun.hour)) s.hour = clamp(+d.sun.hour, 0, 24); if (Number.isFinite(+d.sun.day)) s.day = clamp(Math.round(+d.sun.day), 1, 365); if (typeof d.sun.shadows === 'boolean') s.shadows = d.sun.shadows; H.sun = {...sunOf(), ...s}; }
+            view3d?.setSun?.(); return true;
+        }
+        async function setsCmd(k, idx) {
+            const l = setsList(), cur = l[idx];
+            if (k === 'apply' && cur) { applySet(cur.v); paintSnap(); commit(`Réglage « ${cur.name} » appliqué`); return; }
+            if (k === 'del' && cur) { if (!await A().confirmBox('', {title: `Supprimer le réglage « ${cur.name} » ?`, okLabel: 'Supprimer'})) return; l.splice(idx, 1); setsSave(l); paintSnap(); return; }
+            if (k === 'export' && cur) { downloadText(JSON.stringify({lcnda: 'reglage', outil: SETS_TOOL, nom: cur.name, version: 1, donnees: cur.v}, null, 1), `lcnda-reglage-${SETS_TOOL}-${slug(cur.name)}.json`); toast('Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer un réglage ».'); return; }
+            if (k === 'save') { const n = String(await A().askText({title: '💾 Enregistrer ces réglages', message: 'Nom de ces réglages (aimants, grille, épaisseur des murs, hauteur des yeux, lumière) :', value: cur?.name || 'Mes réglages', okLabel: 'Enregistrer'}) || '').trim().slice(0, 80); if (!n) return;
+                const at = l.findIndex(x => x.name === n); if (at >= 0 && !await A().confirmBox('', {title: `Remplacer le réglage « ${n} » ?`, okLabel: 'Remplacer'})) return;
+                const row = {name: n, date: new Date().toISOString().slice(0, 10), v: setsData()}; if (at >= 0) l[at] = row; else l.push(row); if (setsSave(l)) { setsSel = at >= 0 ? at : l.length - 1; paintSnap(); toast(`Réglages enregistrés sous « ${n} ».`); } return; }
+            if (k === 'import') return importSet();
+        }
+        let setsSel = 0;
+        async function importSet(file = null) {
+            file = file || await pickFile('.json,application/json'); if (!file) return; let d;
+            try { d = JSON.parse(await file.text()); } catch (_) { return toast('Ce fichier n’est pas lisible (il faut un fichier .json de réglage).', 'error'); }
+            if (d?.lcnda !== 'reglage' || !d.donnees || typeof d.donnees !== 'object') return toast('Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil).', 'error');
+            if (d.outil !== SETS_TOOL) return toast(`Ce réglage est celui d’un autre outil (« ${String(d.outil || '?').slice(0, 40)} ») : importe-le dans cet outil-là, pas dans la Maison.`, 'error');
+            const l = setsList(); let n = String(d.nom || 'Réglage importé').trim().slice(0, 80) || 'Réglage importé';
+            while (l.some(x => x.name === n)) { const n2 = String(await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${n} ». Nom du réglage importé :`, value: `${n} (importé)`, okLabel: 'Importer'}) || '').trim().slice(0, 80); if (!n2) return; n = n2; }
+            l.push({name: n, date: new Date().toISOString().slice(0, 10), v: d.donnees}); if (!setsSave(l)) return; setsSel = l.length - 1; paintSnap(); toast(`Réglage « ${n} » importé : « ✓ Appliquer » pour t’en servir.`);
+        }
+
+        /* ─── ⤓ E3 : la fenêtre d'export unique ; 🏠 le fichier de la maison ─── */
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+        const blobToDataUrl = b => new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); });
+        async function toMedia(blob, filename) { try { await PK().importMediaFile(new File([blob], filename, {type: blob.type}), ['image']); toast('Une copie est rangée dans les médias.'); } catch (e) { toast(`Copie dans les médias impossible : ${e.message}`, 'error'); } }
+        async function exportDlg() {
+            const U = UI(); if (!U?.openExportDialog) return CMD.png();
+            const planBlob = async (q, type) => { const s = planSvg(); if (!s) throw new Error('Le plan de cet étage est vide.'); return svgToBlob(s, (q || 300) / 150, type); };
+            await U.openExportDialog({title: name, defaultName: `${name} ${F().name}`, quality: 300, saveCopy: true, info: `${F().name}${verCur() ? ` · ${verName(verCur())}` : ''} · ${plural(H.floors.length, 'étage')}`,
+                preview: async () => (await thumb(F())) || null,
+                formats: [
+                    {id: 'png', hint: 'le plan de l’étage', run: async o => { const b = await planBlob(o.quality, 'image/png'); download(b, o.filename); if (o.saveCopy) await toMedia(b, o.filename); }},
+                    {id: 'jpg', hint: 'le plan, plus léger', run: async o => { const b = await planBlob(o.quality, 'image/jpeg'); download(b, o.filename); if (o.saveCopy) await toMedia(b, o.filename); }},
+                    {id: 'pdf', hint: 'le plan sur une page A4', run: async o => { const b = await planBlob(o.quality, 'image/jpeg'), url = await blobToDataUrl(b), im = await loadImg(url); download(jpegPdf(url, im.naturalWidth, im.naturalHeight, name), o.filename); }},
+                    {id: 'svg', hint: 'le plan, en dessin', run: async o => { const s = planSvg(); if (!s) throw new Error('Le plan de cet étage est vide.'); download(new Blob([s], {type: 'image/svg+xml'}), o.filename); }},
+                    {id: 'print', hint: 'le plan, tout de suite', run: async () => CMD.print()},
+                    {id: 'shot3d', label: '🧊 Vue 3D', hint: 'image de la vue 3D', ext: 'png', quality: false, run: async o => { if (!view3d) { await toggle3d(true); await sleep(600); } const b = await view3d?.shot(); if (!b) throw new Error('Vue 3D indisponible.'); download(b, o.filename); if (o.saveCopy) await toMedia(b, o.filename); }},
+                    {id: 'file', label: '💾 Fichier de la maison', hint: 'à réimporter (📥 Importer)', ext: 'json', run: async o => downloadText(JSON.stringify({lcnda: 'maison', version: 1, name, period, place_text: placeText, house: H}), o.filename)},
+                ]});
+        }
+        async function importHouseFile(file = null) {
+            file = file || await pickFile('.json,application/json'); if (!file) return; let d;
+            try { d = JSON.parse(await file.text()); } catch (_) { return toast('Ce fichier n’est pas lisible.', 'error'); }
+            if (d?.lcnda === 'reglage') return importSet(file);
+            if (d?.lcnda !== 'maison' || !d.house || typeof d.house !== 'object') return toast('Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison).', 'error');
+            if (H.floors.some(f => f.walls.length || f.rooms.length || f.items.length) && !await A().confirmBox('Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière).', {title: 'Remplacer le plan par celui du fichier ?', okLabel: 'Remplacer le plan'})) return;
+            const nh = {...newHouse(), ...cleanHouse(d.house)}; if (!Array.isArray(nh.floors) || !nh.floors.length) nh.floors = [newFloor(0)]; if (!nh.meta || typeof nh.meta !== 'object') nh.meta = {people: [], note: ''};
+            if (Array.isArray(nh.versions) && nh.versions.length && !nh.versions.some(v => v.id === nh.ver)) { const v0 = {id: uid('v'), label: 'Époque sans nom', date: ''}; nh.versions.push(v0); nh.ver = v0.id; }
+            if (view3d) await toggle3d(false); stopPlay(); toggleTrace(false); H = nh; fi = Math.max(0, H.floors.findIndex(f => f.level === 0)); sel = null; draft = null;
+            if (!id && d.name) { name = String(d.name).slice(0, 200); $('[data-hs-name]').value = name; } if (!period && d.period) period = String(d.period).slice(0, 120);
+            badge(); commit('Maison importée'); fit(); render();
+        }
+        /* ─── 📁 E4 : un fichier déposé ou collé sur le plan ─── */
+        async function onDropFiles(files) {
+            const f3 = files.filter(f => /\.(obj|stl|glb|gltf|mtl)$/i.test(f.name)); if (f3.length) return import3d(f3);
+            const js = files.find(f => /\.json$/i.test(f.name)); if (js) return importHouseFile(js);
+            const img = files.find(f => /^image\//.test(f.type)); if (!img) return toast('Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison.', 'error');
+            const canMem = sel?.type === 'item' || sel?.type === 'room';
+            const what = await choose('📁 Que faire de cette image ?', 'MAISON', [['plan', '📐 Un plan ancien, un cadastre, à calquer', 'posé en fond, à mettre à l’échelle'], ['item', '🖼 Un objet vu de dessus', 'posé sur le plan comme un meuble'], ...(canMem ? [['mem', '🏷 Un souvenir pour ce qui est choisi', 'rattaché au meuble ou à la pièce']] : [])]);
+            if (what === 'plan') return importPlan(img);
+            if (what === 'item') return importImg(img);
+            if (what === 'mem') { try { const it = await PK().importMediaFile(img, ['image']); return memAdd(it); } catch (e) { return toast(e.message, 'error'); } }
         }
         const loadImg = src => new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ko(new Error('Image illisible.')); i.src = src; });
         const shrink = async (file, max) => { const src = await new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = ko; r.readAsDataURL(file); }); const im = await loadImg(src), k = Math.min(1, max / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); return c.toDataURL(/png/i.test(file.type) ? 'image/png' : 'image/jpeg', .85); };
@@ -658,19 +973,22 @@
             let body = '', dfs = ''; try { render(); body = world.innerHTML; dfs = $('[data-hs-defs]').innerHTML; } finally { exporting = false; zoom = z0; panX = px; panY = py; sel = s0; fi = f0; render(); }
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x0} ${y0} ${x1 - x0} ${y1 - y0}" width="${Math.round(x1 - x0)}" height="${Math.round(y1 - y0)}"><style>.h-hs-rname{font-family:Georgia,serif;text-anchor:middle;fill:#3a3530;font-weight:700}.h-hs-rarea{font-family:Georgia,serif;text-anchor:middle;fill:#6a6560}.h-hs-iname{font-family:Helvetica,sans-serif;text-anchor:middle;fill:#555}.h-hs-label{font-family:Georgia,serif;fill:#3a3530}.h-hs-dim path{stroke:#2a5db0;stroke-width:1;fill:none}.h-hs-dim text{fill:#2a5db0;text-anchor:middle;font-family:Helvetica,sans-serif}</style><defs>${dfs}</defs><rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" fill="#fff"/>${body}<text x="${x0 + 30}" y="${y1 - 30}" font-family="Georgia,serif" font-size="36" fill="#3a3530">${esc(name)} — ${esc(f.name)}${verCur() ? ` — ${esc(verName(verCur()))}` : ''}</text></svg>`;
         }
-        const svgToPng = svgText => new Promise((ok, ko) => { const m = svgText.match(/width="(\d+)" height="(\d+)"/), W = Math.min(6000, +m[1] * 2), Hh = Math.min(6000, +m[2] * 2), url = URL.createObjectURL(new Blob([svgText], {type: 'image/svg+xml'})), i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = W; c.height = Hh; c.getContext('2d').drawImage(i, 0, 0, W, Hh); URL.revokeObjectURL(url); c.toBlob(ok, 'image/png'); }; i.onerror = () => { URL.revokeObjectURL(url); ko(new Error('Image impossible.')); }; i.src = url; });
+        /** le dessin (SVG) en image : « scale » pixels par centimètre (2 = 300 ppp), 8000 px au plus */
+        const svgToBlob = (svgText, scale = 2, type = 'image/png') => new Promise((ok, ko) => { const m = svgText.match(/width="(\d+)" height="(\d+)"/), k0 = Math.min(scale, 8000 / Math.max(+m[1], +m[2])), W = Math.max(1, Math.round(+m[1] * k0)), Hh = Math.max(1, Math.round(+m[2] * k0)), url = URL.createObjectURL(new Blob([svgText], {type: 'image/svg+xml'})), i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = W; c.height = Hh; const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, W, Hh); g.drawImage(i, 0, 0, W, Hh); URL.revokeObjectURL(url); c.toBlob(ok, type, .92); }; i.onerror = () => { URL.revokeObjectURL(url); ko(new Error('Image impossible.')); }; i.src = url; });
+        const svgToPng = svgText => svgToBlob(svgText, 2, 'image/png');
         const download = (blob, fname) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fname; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
         const fname = ext2 => `${A().safeExportFilename ? A().safeExportFilename(name, 'maison') : 'maison'}.${ext2}`;
-        async function thumb() { const s = planSvg(H.floors.find(f => f.level === 0) || F()); if (!s) return ''; try { const b = await svgToPng(s.replace(/width="(\d+)" height="(\d+)"/, (m0, w, h) => { const k = 240 / Math.max(+w, +h); return `width="${Math.round(w * k)}" height="${Math.round(h * k)}"`; })); return await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); }); } catch (_) { return ''; } }
+        async function thumb(fl = null) { const s = planSvg(fl || H.floors.find(f => f.level === 0) || F()); if (!s) return ''; try { const b = await svgToPng(s.replace(/width="(\d+)" height="(\d+)"/, (m0, w, h) => { const k = 240 / Math.max(+w, +h); return `width="${Math.round(w * k)}" height="${Math.round(h * k)}"`; })); return await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); }); } catch (_) { return ''; } }
         async function save() {
-            name = $('[data-hs-name]').value.trim() || 'Maison de famille'; status('Enregistrement…');
-            try { const r = await post('save_house', {id, name, place_id: placeId, place_text: placeText, period, house: H, thumb: await thumb()}); id = r.result.id; dirty = false; status('✓ Enregistré'); toast('Maison enregistrée (Listes → Maisons de famille).'); ctx.onSaved?.(id); } catch (e) { status(''); toast(e.message, 'error'); }
+            name = $('[data-hs-name]').value.trim() || 'Maison de famille'; saving = true; savedSt('saving');
+            try { const r = await post('save_house', {id, name, place_id: placeId, place_text: placeText, period, house: H, thumb: await thumb()}); id = r.result.id; dirty = false; saving = false; savedSt('saved'); status(''); ctx.onSaved?.(id); } catch (e) { saving = false; savedSt('error'); toast(e.message, 'error'); }
         }
         async function toggle3d(on) {
             dlg.querySelectorAll('[data-hs-mode]').forEach(b => b.classList.toggle('is-active', b.dataset.hsMode === (on ? '3d' : '2d'))); $('[data-hs-pbar]').hidden = !!on;
             if (on && !view3d) { if (!ext.house3d) return toast('Vue 3D indisponible.', 'error'); status('Construction de la maison en 3D…'); const box = $('[data-hs-3d]'); box.hidden = false; svg.style.display = 'none';
-                try { view3d = await ext.house3d.mount(box, H, fi); status(''); hint('Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · 🚶 visite : flèches ou Z Q S D'); } catch (e) { box.hidden = true; svg.style.display = ''; status(''); return toast(e.message, 'error'); } }
+                try { if (tracing) toggleTrace(false); view3d = await ext.house3d.mount(box, H, fi, {geo, onMemory: r => openMemView(`${r.type}:${r.id}`)}); status(''); paintCompass(); hint('Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir'); } catch (e) { box.hidden = true; svg.style.display = ''; status(''); return toast(e.message, 'error'); } }
             if (!on && view3d) { view3d.destroy(); view3d = null; $('[data-hs-3d]').hidden = true; svg.style.display = ''; hint(HINTS[tool]); render(); }
+            paintCompass();
         }
         async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la maison seront perdues.', {title: 'Fermer sans enregistrer la maison ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; stopPlay(); view3d?.destroy(); document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); dlg.close(); dlg.remove(); ctx.onClose?.(); }
         const CMD = {
@@ -699,8 +1017,14 @@
                         const cur = F(); H.floors = H.floors.filter(f => !del.includes(f)); fi = Math.max(0, H.floors.indexOf(cur)); if (!H.floors.includes(cur)) fi = Math.max(0, H.floors.findIndex(f => f.level === 0)); sel = null; commit(del.length ? `${del.length} étage${del.length > 1 ? 's' : ''} supprimé${del.length > 1 ? 's' : ''}` : 'Étages'); }}); },
             dupfloor: () => { const src = F(), f = newFloor(Math.max(...H.floors.map(q => q.level)) + 1), map = new Map(); f.walls = src.walls.map(w => { const n = {...JSON.parse(JSON.stringify(w)), id: uid('w')}; map.set(w.id, n.id); return n; }); f.openings = src.openings.filter(o => o.type === 'window').map(o => ({...o, id: uid('o'), wall: map.get(o.wall)})); f.wallT = src.wallT; f.height = src.height; H.floors.push(f); fi = H.floors.length - 1; commit(`${f.name} (murs repris)`); },
             delfloor: async () => { if (H.floors.length < 2) return toast('Il faut au moins un étage.', 'error'); if (!await A().confirmBox('', {title: `Supprimer « ${F().name} » et tout ce qu’il contient ?`, okLabel: 'Supprimer l’étage'})) return; H.floors.splice(fi, 1); fi = 0; sel = null; commit('Étage supprimé'); },
-            import3d, importimg: importImg, importplan: importPlan, calib: calibrate,
-            refmove: () => { if (!H.ref) return; H.ref.moving = !H.ref.moving; toast(H.ref.moving ? 'Glisse le plan scanné (sur un endroit vide). Reclique pour finir.' : 'Plan scanné fixé.'); }, refdel: () => { H.ref = null; commit('Plan scanné retiré'); },
+            import3d: () => import3d(), importimg: () => importImg(), importplan: () => importPlan(), calib: calibrate, refalign: refAlign, importhouse: () => importHouseFile(),
+            refmove: () => { if (!H.ref || H.ref.lock) return; H.ref.moving = !H.ref.moving; if (H.ref.moving) setTool('select'); hint(H.ref.moving ? '✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir.' : HINTS[tool]); render(); },
+            refdel: async () => { if (!await A().confirmBox('L’image reste dans les médias.', {title: 'Retirer le plan ancien du fond ?', okLabel: 'Retirer'})) return; toggleTrace(false); H.ref = null; commit('Plan ancien retiré'); },
+            refhere: () => { if (!H.ref) return; H.ref.floor = F().id; commit('Plan ancien sous cet étage'); }, trace: () => toggleTrace(),
+            export: exportDlg, memadd: () => memAdd(),
+            font: async () => { const lb = F().labels.find(q => q.id === sel?.id); if (!lb) return; const fnt = await UI()?.openFontPicker?.({value: lb.font || 'Georgia', sample: lb.text || 'Maison de famille'}); if (fnt) { lb.font = String(fnt).slice(0, 80); commit('Police'); } },
+            nofont: () => { const lb = F().labels.find(q => q.id === sel?.id); if (!lb) return; delete lb.font; commit('Police de départ'); },
+            sunpanel: () => { tab = 'house'; paintSide(); const d = pane.querySelector('[data-ui-section="hs-h-sun"]'); if (d) { d.open = true; d.scrollIntoView({block: 'start'}); } },
             addpeople: async () => { const p = await pickPerson('Un habitant de la maison'); if (!p) return; H.meta.people = [...(H.meta.people || []), {...p, role: ''}]; tab = 'house'; commit('Habitant ajouté'); },
             roompeople: async () => { const rm = F().rooms.find(q => q.id === sel?.id); if (!rm) return; const p = await pickPerson('Une personne liée à cette pièce'); if (!p) return; rm.people = [...(rm.people || []), p]; commit('Personne liée à la pièce'); },
             png: async () => { const s = planSvg(); if (!s) return toast('Le plan est vide.', 'error'); download(await svgToPng(s), fname('png')); }, svg: () => { const s = planSvg(); if (!s) return toast('Le plan est vide.', 'error'); download(new Blob([s], {type: 'image/svg+xml'}), fname('svg')); },
@@ -712,7 +1036,7 @@
         };
         /* ─── événements ─── */
         dlg.addEventListener('click', async e => {
-            const b = e.target.closest('button'); if (!b) return; const d = b.dataset; b.closest('details')?.removeAttribute('open');
+            const b = e.target.closest('button'); if (!b) return; const d = b.dataset; b.closest('details.h-hs-menu')?.removeAttribute('open');
             if (d.hsCmd) return CMD[d.hsCmd]?.();
             if (d.hsTool) { if (view3d) await toggle3d(false); return setTool(d.hsTool); }
             if (d.hsTab) { tab = d.hsTab; if (tab === 'lib' && !mine.length) await loadMine(); return paintSide(); }
@@ -730,6 +1054,10 @@
             if (d.hsVedit) { const v = (H.versions || []).find(q => q.id === d.hsVedit); if (v) verDialog(v); return; }
             if (d.hsVdel) { stopPlay(); delVer(d.hsVdel); return; }
             if (d.hsRpdel !== undefined) { const rm = F().rooms.find(q => q.id === sel?.id); rm?.people?.splice(Number(d.hsRpdel), 1); return commit('Personne retirée'); }
+            if (d.hsFaceapply && sel?.type === 'wall') { const w = F().walls.find(q => q.id === sel.id), [sd, scope] = d.hsFaceapply.split(':'); if (w) applyFace(w, sd, scope); return; }
+            if (d.hsMemview !== undefined && sel) return openMemView(`${sel.type}:${sel.id}`, Number(d.hsMemview));
+            if (d.hsMemdel !== undefined && sel) { const o = (sel.type === 'room' ? F().rooms : F().items).find(q => q.id === sel.id); if (!o?.mem) return; o.mem.splice(Number(d.hsMemdel), 1); if (!o.mem.length) delete o.mem; return commit('Souvenir retiré'); }
+            if (d.hsMemgo) { const hd = holderOf(d.hsMemgo); if (!hd) return; if (view3d) await toggle3d(false); fi = hd.fi; sel = {type: hd.type, id: hd.o.id}; tab = 'props'; const [cx, cy] = hd.type === 'room' ? centroid(hd.o.pts) : [hd.o.x, hd.o.y], r = stage.getBoundingClientRect(); panX = r.width / 2 - cx * zoom; panY = r.height / 2 - cy * zoom; render(); return openMemView(d.hsMemgo); }
         });
         dlg.addEventListener('dblclick', e => { const b = e.target.closest('[data-hs-floor]'); if (!b) return; const f = H.floors[Number(b.dataset.hsFloor)]; A().askText({title: 'Renommer l’étage', value: f.name, okLabel: 'Renommer'}).then(n => { if (n?.trim()) { f.name = n.trim().slice(0, 60); commit('Étage renommé'); } }); });
         let tmr = 0;
@@ -739,12 +1067,13 @@
         // le lieu de la maison : le menu de choix unique (un lieu de la base, ou un texte gardé tel quel) → place_id + place_text
         pane.addEventListener('picker-change', async e => {
             if (!e.target.closest('[data-hs-placepk]')) return;
-            const it = e.detail.item; dirty = true;
-            if (!it) { placeId = 0; placeText = ''; return; }
-            if (it.free) { placeId = 0; placeText = it.title; return; }
+            const it = e.detail.item; dirty = true; syncSt();
+            if (!it) { placeId = 0; placeText = ''; geo = null; view3d?.setGeo?.(null); return; }
+            if (it.free) { placeId = 0; placeText = it.title; geo = null; view3d?.setGeo?.(null); return; }
+            geo = null; if (Number.isFinite(Number(it.lat)) && Number.isFinite(Number(it.lon)) && it.lat !== '' && it.lat != null) { geo = {lat: Number(it.lat), lon: Number(it.lon)}; view3d?.setGeo?.(geo); }
             const nm = String(it.name || it.title).replace(/\s*\(.*\)$/, '');
             placeId = Number(it.id) || 0; placeText = [nm, it.short].filter(Boolean).join(', ');
-            try { const c = await ext.placeCoords?.(it); if (c?.text) placeText = c.text; } catch (_) {} // « Tulle, Corrèze, France », comme avant
+            try { const c = await ext.placeCoords?.(it); if (c?.text) placeText = c.text; if (!geo && c && c.lat !== '' && c.lat != null && Number.isFinite(Number(c.lat)) && Number.isFinite(Number(c.lon))) { geo = {lat: Number(c.lat), lon: Number(c.lon)}; view3d?.setGeo?.(geo); } } catch (_) {} // « Tulle, Corrèze, France », comme avant
             if (name === 'Maison de famille') { name = `Maison de ${nm}`; $('[data-hs-name]').value = name; }
         });
         pane.addEventListener('input', e => {
@@ -753,10 +1082,15 @@
             if (el.dataset.hsF) { const k = el.dataset.hsF; f[k] = ['level', 'height', 'wallT'].includes(k) ? Number(v) : v; later('Étage'); return; }
             if (el.dataset.hsH) { H[el.dataset.hsH] = Number(v); later('Grille'); return; }
             if (el.dataset.hsRoof) { const k = el.dataset.hsRoof; H.roof = H.roof || {}; H.roof[k] = ['pitch', 'over', 'chimneyPos'].includes(k) ? Number(v) : v; if (k === 'kind') delete H.roof.color; later('Toit'); if (k === 'on' || k === 'kind') setTimeout(paintSide, 0); return; } // la couverture choisie reprend sa couleur
-            if (el.dataset.hsRef && H.ref) { if (el.dataset.hsRef === 'op') H.ref.op = Number(v) / 100; else H.ref.show = v; later('Plan scanné'); return; }
-            if (el.dataset.hsM) { if (el.dataset.hsM === 'period') period = v; else H.meta[el.dataset.hsM] = v; dirty = true; return; }
-            if (el.dataset.hsProle !== undefined) { H.meta.people[Number(el.dataset.hsProle)].role = v; dirty = true; return; }
+            if (el.dataset.hsRef && H.ref) { const k = el.dataset.hsRef; if (k === 'op') H.ref.op = Number(v) / 100; else if (k === 'rot') { if (H.ref.lock) return; H.ref.rot = clamp(Number(v) || 0, -180, 180); } else if (k === 'lock') { H.ref.lock = !!v; if (v) H.ref.moving = false; setTimeout(paintSide, 0); } else H.ref.show = v; later(k === 'lock' ? (v ? 'Plan ancien verrouillé' : 'Plan ancien déverrouillé') : 'Plan ancien'); return; }
+            if (el.dataset.hsSun) { const k = el.dataset.hsSun; H.sun = {...sunOf(), [k]: Number(v)}; const out = pane.querySelector(`[data-hs-sunout="${k}"]`); if (out) out.textContent = k === 'hour' ? ext.house3d?.hourLabel?.(Number(v)) || v : ext.house3d?.dayLabel?.(Number(v)) || v; view3d?.setSun?.(); paintCompass(); quietCommit('Lumière'); return; }
+            if (el.dataset.hsWalk) { const n = Number(v); if (!(n >= 80 && n <= 220)) return; H.walk = {...(H.walk || {}), eye: n}; quietCommit('Hauteur des yeux'); return; }
+            if (el.dataset.hsM) { if (el.dataset.hsM === 'period') period = v; else H.meta[el.dataset.hsM] = v; dirty = true; syncSt(); return; }
+            if (el.dataset.hsProle !== undefined) { H.meta.people[Number(el.dataset.hsProle)].role = v; dirty = true; syncSt(); return; }
             if (el.dataset.hsCver !== undefined) { const c = H.meta.census[Number(el.dataset.hsCver)]; if (v) c.ver = v; else delete c.ver; badge(); later('Recensement rattaché à l’époque'); return; }
+            if (el.dataset.hsFace && sel?.type === 'wall') { const w = f.walls.find(q => q.id === sel.id); if (!w) return; const [sd, k] = el.dataset.hsFace.split(':');
+                if (k === 'tsc') { const n = Number(v); if (n === 100 || !(n >= 25 && n <= 400)) delete w.tsc; else w.tsc = n; } else setFace(w, sd, k, v); later('Revêtement du mur'); if (k === 'mat') setTimeout(paintSide, 0); return; }
+            if (el.dataset.hsRwall && sel?.type === 'room') { const rm = f.rooms.find(q => q.id === sel.id); if (!rm) return; roomWalls(f, rm).forEach(([q, sd]) => setFace(q, sd, el.dataset.hsRwall, v)); later('Murs de la pièce'); if (el.dataset.hsRwall === 'mat') setTimeout(paintSide, 0); return; }
             if (el.dataset.hsP && sel) {
                 if (sel.type === 'wall' && ['len', 'ang', 'ax', 'ay', 'bx', 'by'].includes(el.dataset.hsP) && !el._geo) return; // la géométrie d'un mur : appliquée une fois la valeur finie (sinon les coins voisins se décrochent en cours de frappe)
                 const k = el.dataset.hsP, o = sel.type === 'wall' ? f.walls.find(q => q.id === sel.id) : sel.type === 'room' ? f.rooms.find(q => q.id === sel.id) : sel.type === 'item' ? f.items.find(q => q.id === sel.id) : sel.type === 'opening' ? f.openings.find(q => q.id === sel.id) : sel.type === 'label' ? f.labels.find(q => q.id === sel.id) : null; if (!o) return;
@@ -777,12 +1111,15 @@
         });
         pane.addEventListener('change', e => { if (tmr) { clearTimeout(tmr); tmr = 0; } const el = e.target; if (sel?.type === 'wall' && ['len', 'ang', 'ax', 'ay', 'bx', 'by'].includes(el.dataset?.hsP)) { el._geo = true; el.dispatchEvent(new Event('input', {bubbles: true})); el._geo = false; } });
         stage.addEventListener('h3-roof', () => { hist = hist.slice(0, hpos + 1); hist.push(snap0()); hpos = hist.length - 1; dirty = true; status(H.roof?.on ? '✓ Toit ajouté' : '✓ Toit retiré'); }); // la case Toit de la vue 3D est gardée avec la maison
+        stage.addEventListener('h3-change', e => { quietCommit(e.detail?.what === 'walk' ? 'Hauteur des yeux' : 'Lumière'); paintCompass(); if (tab === 'house') paintSide(); }); // ☀️ la lumière et 🚶 la hauteur des yeux, réglées dans la vue 3D
+        stage.addEventListener('h3-floor', e => { const n = Number(e.detail?.fi); if (!H.floors[n]) return; fi = n; sel = null; draft = null; paintFloors(); paintSide(); }); // 🚶 un escalier pris pendant la visite
         let laterT = 0; const later = label => { render(); clearTimeout(laterT); laterT = setTimeout(() => commit(label), 500); };
         const onKey = e => {
             if (!dlg.open || document.querySelector('dialog[open]:not(.h-hs-dlg)')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
             if (mod && k === 's') { e.preventDefault(); save(); return; }
             if (e.target.closest?.('input, textarea, select')) return;
+            if (view3d?.walking?.()) { if (k === 'escape') { e.preventDefault(); if (!view3d.justUnlocked()) view3d.stopWalk(); } return; } // 🚶 en visite : les lettres servent à marcher
             if (mod && k === 'z') { e.preventDefault(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
             if (k === ' ' && !space) { space = true; stage.dataset.tool = 'pan'; e.preventDefault(); return; }
             if (k === 'escape') { e.preventDefault(); if (draft) { draft = null; hover = null; render(); } else if (sel) { sel = null; render(); } else if (tool !== 'select') setTool('select'); return; }
@@ -795,12 +1132,16 @@
         };
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
-        dlg.addEventListener('cancel', e => { e.preventDefault(); const ae = document.activeElement; if (ae && dlg.contains(ae) && ae.matches('input, textarea, select')) { ae.blur(); stage.focus({preventScroll: true}); return; } if (draft) { draft = null; render(); return; } if (sel) { sel = null; render(); return; } close(); }); // Échap : quitter le champ, le tracé, la sélection, puis fermer
+        dlg.addEventListener('cancel', e => { e.preventDefault(); if (view3d?.walking?.()) { if (!view3d.justUnlocked()) view3d.stopWalk(); return; } const ae = document.activeElement; if (ae && dlg.contains(ae) && ae.matches('input, textarea, select')) { ae.blur(); stage.focus({preventScroll: true}); return; } if (draft) { draft = null; render(); return; } if (sel) { sel = null; render(); return; } close(); }); // Échap : quitter le champ, le tracé, la sélection, puis fermer
         new ResizeObserver(() => { if (dlg.isConnected && !view3d) render(); }).observe(stage);
         $('.h-hs-snapm').addEventListener('toggle', e => { if (e.target.open) paintSnap(); }); paintSnap(); ext.tbApply?.(dlg, 'house'); ext.editorKeysAttach?.(dlg, 'house'); // boutons rangés à sa façon (⚙️ Personnaliser), raccourcis à soi
+        try { UI()?.harmonizeTopbar?.($('.h-hs-top')); } catch (_) {} // E1 : ✓ Enregistré · ⚙️ · ⤓ · 💾 · ⛶ · × toujours dans cet ordre
+        // 🧭 la boussole (le nord du plan, réglé dans Maison → ☀️ Orientation et lumière) ; 📁 E4 : déposer ou coller un fichier sur le plan
+        stage.insertAdjacentHTML('beforeend', '<button type="button" class="h-hs-compass" data-hs-compass data-hs-cmd="sunpanel" title="Le nord du plan : clic pour le régler (☀️ Orientation et lumière)" aria-label="Nord du plan"><svg viewBox="-20 -20 40 40" aria-hidden="true"><path d="M0 -17L5.5 0L-5.5 0Z" fill="#c0392b"/><path d="M0 17L5.5 0L-5.5 0Z" fill="#9aa3ad"/><circle r="2.2" fill="#fff"/><text x="9" y="-9" font-size="9" font-weight="700" fill="#c0392b" font-family="system-ui,sans-serif">N</text></svg></button>');
+        UI()?.bindFileDrop?.(stage, files => onDropFiles(files), {accept: 'image/*,.obj,.stl,.glb,.gltf,.mtl,.json'});
         if (ctx.ver) switchVer(String(ctx.ver), true); // ouverte depuis un recensement : à l'époque qui lui est rattachée
-        setTool(H.floors.some(f => f.walls.length) ? 'select' : 'room'); badge(); hist = [snap0()]; hpos = 0; fit(); render(); stage.focus({preventScroll: true});
-        return {get house() { return H; }, setTool, commit, render, toggle3d, save, cmd: k => CMD[k]?.(), switchVer, verList};
+        setTool(H.floors.some(f => f.walls.length) ? 'select' : 'room'); badge(); hist = [snap0()]; hpos = 0; fit(); render(); paintCompass(); syncSt(); stage.focus({preventScroll: true});
+        return {get house() { return H; }, get view3d() { return view3d; }, get dirty() { return dirty; }, setTool, commit, render, toggle3d, save, cmd: k => CMD[k]?.(), switchVer, verList, openMemView, select: (type, sid) => { sel = {type, id: sid}; tab = 'props'; render(); }, setTab: t => { tab = t; paintSide(); }};
     }
 
     /* ═════════ La liste « Maisons de famille » ═════════ */

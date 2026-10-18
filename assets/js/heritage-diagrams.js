@@ -87,16 +87,30 @@
         const kind = R().KINDS[spec.kind]; if (!kind) return '';
         return kind.grids.map(g => { const cols = gridCols(g, spec); return [g.label, cols.map(c => c.label).join(';'), ...(spec[g.key] || []).map(r => cols.map(c => csvCell(r[c.k])).join(';'))].join('\n'); }).join('\n\n');
     }
-    async function exportAs(fmt, name, spec) {
+    async function exportAs(fmt, name, spec, o = {}) {
         const svg = R().svg(await resolveLive(spec));
-        if (fmt === 'svg') return download(new Blob([svg], {type: 'image/svg+xml'}), fileName(name) + '.svg');
-        if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec)], {type: 'text/csv;charset=utf-8'}), fileName(name) + '.csv');
-        if (fmt === 'json') return download(new Blob([JSON.stringify({lcnda_diagram: 1, name, kind: spec.kind, spec}, null, 1)], {type: 'application/json'}), fileName(name) + '.diagramme.json');
-        const c = await svgToCanvas(svg, 2, fmt === 'jpg' ? '#ffffff' : '');
+        if (fmt === 'svg') return download(new Blob([svg], {type: 'image/svg+xml'}), o.filename || fileName(name) + '.svg');
+        if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec)], {type: 'text/csv;charset=utf-8'}), o.filename || fileName(name) + '.csv');
+        if (fmt === 'json') return download(new Blob([JSON.stringify({lcnda_diagram: 1, name, kind: spec.kind, spec}, null, 1)], {type: 'application/json'}), o.filename || fileName(name) + '.diagramme.json');
+        if (fmt === 'print') { const w = window.open('', '_blank'); if (!w) throw new Error('fenêtre bloquée par le navigateur'); w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(name)}</title><style>body{margin:0}svg{width:100%;height:auto}</style>${svg}<script>onload=()=>setTimeout(()=>print(),200)<\/script>`); w.document.close(); return; }
+        const c = await svgToCanvas(svg, Math.max(0.5, Math.min(6, (Number(o.quality) || 192) / 96)), fmt === 'jpg' ? '#ffffff' : '');
         if (fmt === 'copy') { try { const b = await new Promise(r => c.toBlob(r, 'image/png')); await navigator.clipboard.write([new ClipboardItem({'image/png': b})]); toast('Image copiée : colle-la où tu veux (⌘V).'); } catch (_) { toast('Copie impossible ici : utilise « Image PNG ».', 'error'); } return; }
-        c.toBlob(b => download(b, fileName(name) + (fmt === 'jpg' ? '.jpg' : '.png')), fmt === 'jpg' ? 'image/jpeg' : 'image/png', .92);
+        const blob = await new Promise(r => c.toBlob(r, fmt === 'jpg' ? 'image/jpeg' : 'image/png', .92)); if (!blob) throw new Error('image trop grande : baisse la qualité');
+        const fname = o.filename || fileName(name) + (fmt === 'jpg' ? '.jpg' : '.png'); download(blob, fname);
+        if (o.saveCopy && A().importMediaFile) { try { await A().importMediaFile(new File([blob], fname, {type: blob.type}), ['image']); toast('Une copie est rangée dans les médias.'); } catch (e) { toast('Copie dans les médias impossible : ' + e.message, 'error'); } }
     }
-    const exportMenu = attr => `<span class="h-dg-exp"><button type="button" class="button small secondary" ${attr}="png">🖼️ PNG</button><button type="button" class="button small secondary" ${attr}="jpg">JPG</button><button type="button" class="button small secondary" ${attr}="svg" title="Image vectorielle, nette à toutes les tailles (impression, mise en page)">SVG</button><button type="button" class="button small secondary" ${attr}="csv">📄 CSV</button><button type="button" class="button small secondary" ${attr}="copy" title="Copier l’image pour la coller ailleurs">📋 Copier</button><button type="button" class="button small secondary" ${attr}="json" title="Le diagramme et ses données, pour le recharger dans une autre généalogie">⤓ Fichier</button></span>`;
+    // E3 : la fenêtre d'export commune (PNG, JPG, SVG, Imprimer / PDF, CSV, fichier du diagramme, copier l'image)
+    function exportDialog(name, getSpec) {
+        const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return exportAs('png', name, getSpec()).catch(e => toast(e.message, 'error'));
+        const run = fmt => o => exportAs(fmt, name, getSpec(), o);
+        UI.openExportDialog({title: name || 'Diagramme', defaultName: fileName(name), quality: 192, saveCopy: !!A().importMediaFile,
+            preview: async () => { const box = document.createElement('div'); box.className = 'h-dg-svg'; box.innerHTML = R().svg(await resolveLive(getSpec())); return box; },
+            formats: [{id: 'png', run: run('png')}, {id: 'jpg', run: run('jpg')}, {id: 'svg', hint: 'net à toutes les tailles', run: run('svg')},
+                {id: 'pdf', hint: 'par l’impression : « Enregistrer en PDF »', ext: '', quality: false, run: run('print')}, {id: 'print', quality: false, run: run('print')},
+                {id: 'csv', label: '📄 CSV', hint: 'les chiffres, pour un tableur', ext: 'csv', quality: false, run: run('csv')},
+                {id: 'file', label: '💾 Fichier', hint: 'du diagramme, à réimporter', ext: 'diagramme.json', run: run('json')},
+                {id: 'copy', label: '📋 Copier l’image', hint: 'à coller ailleurs (⌘V)', ext: '', run: run('copy')}]});
+    }
 
     /* ─── Tableaux de données ─── */
     function gridCols(g, spec) {
@@ -123,9 +137,9 @@
         const head = cols.map(c => c.series !== undefined && g.series === true ? `<th><span class="h-dg-sername"><input data-dg-sername="${c.series}" value="${esc(spec.series?.[c.series]?.name || '')}" placeholder="${esc(c.label)}"><input type="color" data-dg-sercolor="${c.series}" value="${esc(/^#[0-9a-f]{6}$/i.test(spec.series?.[c.series]?.color || '') ? spec.series[c.series].color : pal[c.series % pal.length])}" title="Couleur de la série">${(spec.series || []).length > 1 ? `<button type="button" class="h-dg-x" data-dg-delser="${c.series}" title="Supprimer cette série">✕</button>` : ''}</span></th>`
             : c.series !== undefined ? `<th><span class="h-dg-sername"><input data-dg-sername="${c.series}" value="${esc(spec.series?.[c.series]?.name || '')}" placeholder="${esc(c.label)}"><input type="color" data-dg-sercolor="${c.series}" value="${esc(/^#[0-9a-f]{6}$/i.test(spec.series?.[c.series]?.color || '') ? spec.series[c.series].color : pal[c.series % pal.length])}" title="Couleur"></span></th>` : `<th>${esc(c.label)}</th>`).join('');
         const canAdd = !g.fixed && !(g.max && rows.length >= g.max);
-        return `<section class="h-dg-grid" data-grid="${gi}"><h4>${esc(g.label)} <small>(${rows.length})</small></h4>
+        return `<section class="h-dg-grid" data-grid="${gi}"><h4>${esc(g.label)}</h4>${rows.length > 1 && !g.fixed ? `<div data-dg-sortbar="${gi}" data-count="${rows.length}"></div>` : `<small class="muted">(${rows.length})</small>`}
             <div class="h-dg-tablewrap"><table><thead><tr>${head}<th></th></tr></thead><tbody>${rows.map((r, ri) => `<tr>${cols.map(c => cell(c, r, ri)).join('')}<td class="h-dg-rowtools">${g.fixed ? '' : `<button type="button" data-dg-row="up" data-g="${gi}" data-r="${ri}" title="Monter">↑</button><button type="button" data-dg-row="down" data-g="${gi}" data-r="${ri}" title="Descendre">↓</button><button type="button" data-dg-row="dup" data-g="${gi}" data-r="${ri}" title="Dupliquer">⧉</button><button type="button" data-dg-row="del" data-g="${gi}" data-r="${ri}" title="Supprimer">✕</button>`}</td></tr>`).join('')}</tbody></table></div>
-            <div class="h-dg-gridtools">${canAdd ? `<button type="button" class="button small" data-dg-add="${gi}">+ Ligne</button>` : ''}${g.series === true ? `<button type="button" class="button small secondary" data-dg-addser="${gi}">+ Série (colonne de chiffres)</button>` : ''}${g.fixed ? '' : `<button type="button" class="button small secondary" data-dg-paste="${gi}" title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">📥 CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-dg-csv="${gi}" hidden></label>`}${rows.length > 1 && cols.some(c => c.type === 'number') && !g.fixed ? `<button type="button" class="button small secondary" data-dg-sort="${gi}" title="Ranger du plus grand au plus petit">⇅ Trier</button>` : ''}${rows.length && !g.fixed ? `<button type="button" class="link-button" data-dg-clear="${gi}">Vider</button>` : ''}</div></section>`;
+            <div class="h-dg-gridtools">${canAdd ? `<button type="button" class="button small" data-dg-add="${gi}">+ Ligne</button>` : ''}${g.series === true ? `<button type="button" class="button small secondary" data-dg-addser="${gi}">+ Série (colonne de chiffres)</button>` : ''}${g.fixed ? '' : `<button type="button" class="button small secondary" data-dg-paste="${gi}" title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">📥 CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-dg-csv="${gi}" hidden></label>`}${rows.length && !g.fixed ? `<button type="button" class="link-button" data-dg-clear="${gi}">Vider</button>` : ''}</div></section>`;
     }
     /** texte d'un tableur (tabulations) ou CSV (; ou ,) → lignes de cellules */
     function parseTable(text) {
@@ -233,13 +247,15 @@
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-dlg'; dlg.dataset.ownClose = '1';
         const kindOf = () => R().KINDS[spec.kind] || R().KINDS.columns;
         dlg.innerHTML = `<div class="h-dg-shell">
-            <header class="h-dg-top"><input class="h-dg-name" data-dg-name value="${esc(rec.name)}" maxlength="200" aria-label="Nom du diagramme"><button type="button" class="button small secondary" data-dg-type></button>
-                <span class="h-dg-spacer"></span><details class="h-dg-expmenu"><summary class="button small secondary">⤓ Exporter</summary>${exportMenu('data-dg-exp')}</details><button type="button" class="button small" data-dg-save>Enregistrer</button><button type="button" class="icon-button" data-dg-close title="Fermer">×</button></header>
+            <header class="h-dg-top"><span class="ui-topbar-icon" aria-hidden="true">📊</span><input class="h-dg-name" data-dg-name value="${esc(rec.name)}" maxlength="200" aria-label="Nom du diagramme"><button type="button" class="button small secondary" data-dg-type title="Changer de type de diagramme"></button>
+                <span class="h-dg-spacer"></span><span class="ui-status" data-ui-status></span><button type="button" class="button small secondary" data-dg-expdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter ▾</button><button type="button" class="button small" data-dg-save data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button><button type="button" class="icon-button" data-dg-close title="Fermer" aria-label="Fermer">×</button></header>
             <div class="h-dg-body"><aside class="h-dg-side"><nav class="segmented h-dg-tabs"><button type="button" data-dg-tab="data">Données</button><button type="button" data-dg-tab="opts">Réglages</button><button type="button" data-dg-tab="app">Depuis l’app</button><button type="button" data-dg-tab="links">Rattacher</button></nav><div class="h-dg-pane"></div></aside>
                 <main class="h-dg-preview"><div class="h-dg-svg" data-dg-preview></div></main></div></div>`;
         document.body.appendChild(dlg);
         const pane = dlg.querySelector('.h-dg-pane'), prev = dlg.querySelector('[data-dg-preview]');
-        const draw = async () => { const s = await resolveLive(spec); prev.innerHTML = R().svg(s); };
+        // « ✓ Enregistré » / « • modifié » au même endroit, sans toast (E1)
+        const showStatus = () => window.LCNDA_UI?.savedStatus?.(dlg.querySelector('[data-ui-status]'), dirty ? 'dirty' : 'saved');
+        const draw = async () => { showStatus(); const s = await resolveLive(spec); prev.innerHTML = R().svg(s); };
         const later = () => { dirty = true; clearTimeout(timer); timer = setTimeout(draw, 90); };
         const paint = () => {
             dlg.querySelector('[data-dg-type]').textContent = `${kindOf().icon} ${kindOf().label} ▾`;
@@ -249,7 +265,21 @@
             else if (tab === 'app') pane.innerHTML = appPaneHtml();
             else pane.innerHTML = linksHtml();
             if (tab === 'app') bindAppPane(); if (tab === 'links') bindLinks();
+            if (tab === 'data') sortBars();
         };
+        // C6 : « N lignes · Trier : [menu] » au-dessus de chaque tableau : range les lignes (le dessin suit)
+        const sortBars = () => pane.querySelectorAll('[data-dg-sortbar]').forEach(ph => {
+            const UI = window.LCNDA_UI; if (!UI?.sortBar) return ph.remove();
+            const g = grid(ph.dataset.dgSortbar), cols = gridCols(g, spec), numC = cols.find(x => x.type === 'number'), txtC = cols.find(x => x.type !== 'number' && x.type !== 'color');
+            const opts = [['', 'Dans l’ordre du tableau'], ...(numC ? [['big', `${numC.label} : du plus grand au plus petit`], ['small', `${numC.label} : du plus petit au plus grand`]] : []), ...(txtC ? [['az', `${txtC.label} : A → Z`], ['za', `${txtC.label} : Z → A`]] : [])];
+            if (opts.length < 2) return ph.remove();
+            ph.replaceWith(UI.sortBar({count: Number(ph.dataset.count) || 0, label: 'ligne', feminine: true, value: '', options: opts, onChange: v => {
+                const rows = spec[g.key] || [], t = r => String(r[txtC?.k] ?? '');
+                if (v === 'big' || v === 'small') rows.sort((x, y) => (R().num(y[numC.k]) - R().num(x[numC.k])) * (v === 'big' ? 1 : -1));
+                else if (v === 'az' || v === 'za') rows.sort((x, y) => t(x).localeCompare(t(y), 'fr', {numeric: true}) * (v === 'az' ? 1 : -1));
+                else return;
+                const y = pane.scrollTop; paint(); pane.scrollTop = y; later(); }}));
+        });
         /* données prises dans l'app */
         const appPaneHtml = () => {
             const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || ['parliament', 'wordcloud', 'pictogram'].includes(k);
@@ -361,7 +391,8 @@
         const close = async () => { if (dirty && !await A().confirmBox('Fermer sans enregistrer les changements ?', {title: 'Changements non enregistrés', okLabel: 'Fermer sans enregistrer', danger: true})) return; dlg.close(); dlg.remove(); onClose?.(); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         dlg.querySelector('[data-dg-close]').addEventListener('click', close);
-        dlg.querySelector('[data-dg-name]').addEventListener('input', e => { rec.name = e.target.value; dirty = true; });
+        dlg.querySelector('[data-dg-name]').addEventListener('input', e => { rec.name = e.target.value; dirty = true; showStatus(); });
+        dlg.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); e.stopPropagation(); dlg.querySelector('[data-dg-save]').click(); } });
         dlg.querySelectorAll('[data-dg-tab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.dgTab; paint(); }));
         dlg.querySelector('[data-dg-type]').addEventListener('click', async () => {
             const t = await chooseType({current: spec.kind, title: 'Changer de type'}); if (!t) return;
@@ -373,7 +404,7 @@
                 spec = presetSpec(t); Object.entries(keepO).forEach(([k, v]) => { if (v !== undefined && v !== '') spec.o[k] = v; }); }
             dirty = true; paint(); draw();
         });
-        dlg.querySelectorAll('[data-dg-exp]').forEach(b => b.addEventListener('click', () => { exportAs(b.dataset.dgExp, rec.name, spec).catch(e => toast(e.message, 'error')); b.closest('details').open = false; }));
+        dlg.querySelector('[data-dg-expdlg]').addEventListener('click', () => exportDialog(rec.name || spec.o?.title || 'Diagramme', () => spec));
         dlg.querySelector('[data-dg-save]').addEventListener('click', async () => {
             const btn = dlg.querySelector('[data-dg-save]'); btn.disabled = true;
             try {
@@ -381,7 +412,7 @@
                 const r = await post('save_diagram', {id: rec.id || 0, name: rec.name.trim() || spec.o.title || 'Mon diagramme', kind: k, spec: rest, links: rec.links.map(l => ({type: l.type, id: l.id}))});
                 rec.id = Number(r.result?.id || r.id || rec.id); dirty = false;
                 await list(true); refreshEmbeds(rec.id); liveMem.clear();
-                toast('Diagramme enregistré.');
+                window.LCNDA_UI?.savedStatus?.(dlg.querySelector('[data-ui-status]'), 'saved');
                 dlg.close(); dlg.remove();
                 onSave?.(rec.id); afterSave(rec.id);
             } catch (e) { toast(e.message, 'error'); } finally { btn.disabled = false; }
@@ -425,7 +456,7 @@
         if (!d) { ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES</span><h2>Créer un diagramme</h2><p>Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page.</p></div><div class="page-actions"><button type="button" class="button" data-dg-new>+ Nouveau diagramme</button><label class="button secondary h-dg-file">⤒ Importer un fichier<input type="file" accept=".json,application/json" data-dg-import hidden></label></div></header></section>`; bindPage(ws, null); return; }
         ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
             <div class="page-actions"><button type="button" class="button" data-dg-edit="${d.id}">✎ Modifier</button><button type="button" class="button secondary" data-dg-dup>⧉ Dupliquer</button><button type="button" class="button secondary" data-dg-dash title="Le poser sur le tableau de bord, comme un widget">➕ Tableau de bord</button><button type="button" class="button danger" data-dg-del>Supprimer</button></div></header>
-            <div class="h-dg-pagetools">${exportMenu('data-dg-pexp')}<button type="button" class="button small secondary" data-dg-print>🖨️ Imprimer / PDF</button></div>
+            <div class="h-dg-pagetools"><button type="button" class="button small secondary" data-dg-pexpdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter</button></div>
             <div class="card h-dg-big"><div class="h-dg-svg">${await svgOf(d)}</div></div>
             ${d.links?.length ? `<div class="h-dg-linked"><span class="section-label">Rattaché à</span>${d.links.map(l => `<button type="button" class="h-pr-lchip" data-dg-golink="${esc(l.type)}:${l.id}:${l.inv || 0}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)}</button>`).join('')}</div>` : ''}
             <p class="muted h-dg-where">Pour le poser ailleurs : <b>Maintenance → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Rattacher » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>.</p></section>`;
@@ -435,8 +466,7 @@
         ws.querySelector('[data-dg-new]')?.addEventListener('click', () => openEditor(null));
         ws.querySelector('[data-dg-import]')?.addEventListener('change', e => importFile(e.target.files?.[0]));
         if (!d) return;
-        ws.querySelectorAll('[data-dg-pexp]').forEach(b => b.addEventListener('click', () => exportAs(b.dataset.dgPexp, d.name, specOf(d)).catch(e => toast(e.message, 'error'))));
-        ws.querySelector('[data-dg-print]').addEventListener('click', async () => { const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée par le navigateur.', 'error'); w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(d.name)}</title><style>body{margin:0}svg{width:100%;height:auto}</style>${await svgOf(d)}<script>onload=()=>setTimeout(()=>print(),200)<\/script>`); w.document.close(); });
+        ws.querySelector('[data-dg-pexpdlg]').addEventListener('click', () => exportDialog(d.name, () => specOf(d)));
         ws.querySelector('[data-dg-dup]').addEventListener('click', async () => { try { const r = await post('save_diagram', {name: d.name + ' (copie)', kind: d.kind, spec: d.spec}); await list(true); S().graphDiagramId = Number(r.result?.id); A().setModule('graphiques'); toast('Copie créée.'); } catch (e) { toast(e.message, 'error'); } });
         ws.querySelector('[data-dg-del]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer le diagramme « ${d.name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé.`, {title: 'Supprimer le diagramme', okLabel: 'Supprimer le diagramme'})) return; try { await post('delete_diagram', {id: d.id}); await list(true); S().graphDiagramId = cache[0]?.id || 0; if (!cache.length) S().graphMode = 'diagram'; A().setModule('graphiques'); toast('Diagramme supprimé.'); } catch (e) { toast(e.message, 'error'); } });
         ws.querySelector('[data-dg-dash]').addEventListener('click', () => addToDashboard(d));

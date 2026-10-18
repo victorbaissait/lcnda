@@ -356,6 +356,14 @@
             </div></section>`;
         if (keepScroll) ws.querySelectorAll('[data-at-scroll]').forEach((el, i) => { el.scrollTop = scroll[i] || 0; });
         A().bindTableLinks?.();
+        // C6 : « N éléments · Trier : [menu] » (même tri que les titres de colonnes)
+        const sb = ws.querySelector('[data-at-sortbar]'), UI = window.LCNDA_UI;
+        if (sb && UI?.sortBar) {
+            const cur = `${v.sort?.col || 'title'}:${v.sort?.dir < 0 ? -1 : 1}`;
+            const opts = [['added:-1', 'Les plus récemment ajoutés'], ['added:1', 'Les plus anciennement ajoutés'], ['title:1', 'Titre : A → Z'], ['title:-1', 'Titre : Z → A'], ['creator:1', 'Auteur : A → Z'], ['year:1', 'Date : les plus anciens'], ['year:-1', 'Date : les plus récents'], ['type:1', 'Sorte']];
+            sb.replaceWith(UI.sortBar({count: Number(sb.dataset.count) || 0, label: 'élément', value: cur, options: opts.some(o => o[0] === cur) ? opts : [...opts, [cur, 'Comme les colonnes']],
+                onChange: val => { const [c, d] = val.split(':'); v.sort = {col: c || 'title', dir: Number(d) || 1}; renderProject(S().workspaceToken, true); }}));
+        }
         bindProject(ws.querySelector('.h-at-open'));
     }
 
@@ -380,7 +388,7 @@
                 ${trash ? '<button type="button" class="button small" data-at-bulk="restore">Restaurer</button><button type="button" class="button small danger" data-at-bulk="delete">Supprimer définitivement</button>'
                     : `<select data-at-bulkfolder><option value="">Ranger dans…</option>${folderOptions()}</select><button type="button" class="button small secondary" data-at-bulk="tag">🏷 Étiquette…</button><button type="button" class="button small secondary" data-at-bulk="star">⭐ Favoris</button>${folder ? '<button type="button" class="button small secondary" data-at-bulk="remove">Retirer de ce dossier</button>' : ''}<button type="button" class="button small secondary danger" data-at-bulk="trash">🗑 Corbeille</button>`}
                 <button type="button" class="link-button" data-at-unsel>Aucun</button></div>` : ''}
-            ${items.length ? `<table class="data-table h-at-table"><thead><tr><th class="h-at-c-star"></th>${sortTh('type', '')}${sortTh('title', 'Titre')}${sortTh('creator', 'Auteur, créateur')}${sortTh('year', 'Date')}<th class="h-at-c-att" title="Fichiers joints">📎</th></tr></thead>
+            ${items.length ? `<div data-at-sortbar data-count="${items.length}"></div><table class="data-table h-at-table"><thead><tr><th class="h-at-c-star"></th>${sortTh('type', '')}${sortTh('title', 'Titre')}${sortTh('creator', 'Auteur, créateur')}${sortTh('year', 'Date')}<th class="h-at-c-att" title="Fichiers joints">📎</th></tr></thead>
                 <tbody>${items.map(i => `<tr data-at-item="${i.id}" class="${v.sel.includes(Number(i.id)) ? 'is-sel' : ''} ${i.type === 'task' && Number(i.data.done) ? 'is-done' : ''}" draggable="true">
                     <td class="h-at-c-star"><button type="button" class="h-at-star ${Number(i.starred) ? 'is-on' : ''}" data-at-star="${i.id}" title="Favori">${Number(i.starred) ? '★' : '☆'}</button></td>
                     <td class="h-at-c-type" title="${esc(tl(i))}${i.type === 'reference' ? ' — ' + esc(REF_KINDS[i.data.kind] || '') : ''}">${ti(i)}</td>
@@ -1075,7 +1083,8 @@
     const cfgSummary = c => { const n = c || {}; const mine = list => (list || []).filter(x => x.custom).length; const hidden = list => (list || []).filter(x => x.hidden).length;
         return [`menu : ${mine(n.nav) ? plural(mine(n.nav), 'vue à moi', 'vues à moi') : 'pas de vue à moi'}${hidden(n.nav) ? `, ${plural(hidden(n.nav), 'masqué', 'masqués')}` : ''}`, `${plural(mine(n.types), 'sorte à moi', 'sortes à moi')}${hidden(n.types) ? `, ${plural(hidden(n.types), 'masquée', 'masquées')}` : ''}`, `dossiers ${n.folders?.closed || '📁'}${n.folders?.open || '📂'}`, `${plural(mine(n.plans), 'plan à moi', 'plans à moi')}`].join(' · '); };
     const applyCfg = settings => { try { localStorage.setItem(CFG_KEY, JSON.stringify(cleanCfg(settings))); } catch (_) {} CFG = loadCfg(); };
-    const downloadCfg = (name, settings) => ext.downloadText(`reglages-atelier-${String(name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').toLowerCase().slice(0, 50) || 'lcnda'}.lcnda-atelier.json`,
+    // ⤓ un fichier « lcnda-reglage-atelier-<nom>.json » (le format commun des réglages enregistrés)
+    const downloadCfg = (name, settings) => A().exportSettingFile ? A().exportSettingFile('atelier', name, {settings: cleanCfg(settings)}) : ext.downloadText(`reglages-atelier-${String(name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').toLowerCase().slice(0, 50) || 'lcnda'}.lcnda-atelier.json`,
         JSON.stringify({type: 'lcnda-atelier-reglages', version: 1, name, exported: new Date().toISOString(), settings: cleanCfg(settings)}, null, 1));
     ext.atelierSavePlanFromProject = () => {
         if (!P) return;
@@ -1133,7 +1142,7 @@
             <section class="maintenance-panel"><div class="h-cfg-head"><h3>4. Les plans de départ</h3><button type="button" class="button small secondary" data-cfg-reset-sec="plans" title="Remettre cette partie comme au départ">↺ Remettre comme au départ</button></div><p class="muted">Proposés quand on crée un projet. Range-les, masque ceux qui ne te servent pas, crée les tiens (ou copie un plan de l’app pour le changer). Astuce : dans un projet, « Exporter… → Enregistrer ce plan » garde ses dossiers comme plan.</p>
                 <div class="h-cfg-list">${CFG.plans.map((x, i, l) => row('plans', x, i, l, planExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-plan-add>+ Mon plan</button></section>
             <section class="maintenance-panel h-layouts"><h3>5. 💾 Réglages enregistrés</h3><p class="muted">Garde tous ces réglages (menu, sortes d’éléments, dossiers, plans) sous un nom, pour y revenir plus tard, ou les envoyer à quelqu’un : il les importe ici. Les projets et leurs éléments ne sont pas dedans.</p>
-                <div class="h-layouts-save"><input type="text" data-cfg-pname maxlength="60" placeholder="Nom (ex. Thèse montreurs, Réglages simples)"><button type="button" class="button small" data-cfg-psave>💾 Enregistrer sous ce nom</button><button type="button" class="button small secondary" data-cfg-pexport-now>⤓ Exporter les réglages actuels</button><button type="button" class="button small secondary" data-cfg-pimport>⤒ Importer</button></div>
+                <div class="h-layouts-save"><input type="text" data-cfg-pname maxlength="60" placeholder="Nom (ex. Thèse montreurs, Réglages simples)"><button type="button" class="button small" data-cfg-psave>💾 Enregistrer sous ce nom</button><button type="button" class="button small secondary" data-cfg-pexport-now>⤓ Exporter les réglages actuels</button><button type="button" class="button small secondary" data-cfg-pimport>⤒ Importer un réglage</button></div>
                 ${profiles().length ? `<ul class="h-layouts-list">${profiles().map((x, i) => `<li><div><strong>${esc(x.name)}</strong><small>${esc(cfgSummary(x.settings))}${x.saved ? ` · ${esc(new Date(x.saved).toLocaleDateString('fr-FR'))}` : ''}${x.from ? ` · reçus de ${esc(x.from)}` : ''}</small></div>
                     <span class="page-actions"><button type="button" class="button small" data-cfg-papply="${i}">Appliquer</button><button type="button" class="button small secondary" data-cfg-pupdate="${i}" title="Remplacer par les réglages actuels">Mettre à jour</button><button type="button" class="button small secondary" data-cfg-prename="${i}">Renommer</button><button type="button" class="button small secondary" data-cfg-pexport="${i}">⤓ Exporter</button><button type="button" class="icon-button danger" data-cfg-pdel="${i}" title="Supprimer">🗑</button></span></li>`).join('')}</ul>` : '<p class="muted">Aucun pour l’instant.</p>'}</section>
             <div class="page-actions"><button type="button" class="button secondary danger" data-cfg-reset>↺ Tout remettre comme au départ</button></div></section>`;
@@ -1175,19 +1184,19 @@
                 if (same >= 0 && !await A().confirmBox(`Des réglages « ${list[same].name} » existent déjà. Les remplacer ?`, {title: 'Réglages déjà enregistrés', okLabel: 'Remplacer'})) return;
                 const entry = {name: n, saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; if (same >= 0) list[same] = entry; else list.push(entry);
                 saveProfiles(list); toast(`Réglages « ${n} » enregistrés.`); again(); return; }
-            if (t.closest('[data-cfg-pexport-now]')) { downloadCfg(name() || 'reglages actuels', readCfg()); toast('Fichier prêt : l’autre personne l’importe dans Maintenance → Atelier de recherche.'); return; }
+            if (t.closest('[data-cfg-pexport-now]')) { downloadCfg(name() || 'reglages actuels', readCfg()); return; }
             if (t.closest('[data-cfg-pimport]')) { (async () => {
-                const text = await ext.pickFile('.json,application/json'); if (text === null) return;
-                let data; try { data = JSON.parse(text); } catch (_) { return toast('Ce fichier n’est pas un fichier de réglages de l’Atelier.', 'error'); }
-                if (data?.type !== 'lcnda-atelier-reglages' || !data.settings || typeof data.settings !== 'object') return toast('Ce fichier n’est pas un fichier de réglages de l’Atelier.', 'error');
-                const list = profiles(); let n = str(data.name, 60) || 'Réglages reçus'; while (list.some(x => x.name === n)) n += ' (2)';
-                list.push({name: n, saved: new Date().toISOString(), from: str(data.author, 60), settings: cleanCfg(data.settings)}); saveProfiles(list);
-                toast(`Réglages « ${n} » importés : clique sur « Appliquer » pour les utiliser.`); again(); })(); return; }
+                // le format commun, et aussi les fichiers d'avant (« lcnda-atelier-reglages »)
+                const got = await A().importSettingFile('atelier', {names: profiles().map(x => x.name), check: d => d.settings && typeof d.settings === 'object',
+                    legacy: j => j?.type === 'lcnda-atelier-reglages' && j.settings && typeof j.settings === 'object' ? {nom: str(j.name, 60) || 'Réglages reçus', donnees: {settings: j.settings, author: j.author}} : null});
+                if (!got) return;
+                const list = profiles(); list.push({name: got.nom, saved: new Date().toISOString(), from: str(got.donnees.author, 60), settings: cleanCfg(got.donnees.settings)}); saveProfiles(list);
+                toast(`Réglages « ${got.nom} » importés : clique sur « Appliquer » pour les utiliser.`); again(); })(); return; }
             const pi = b => Number(t.closest(`[${b}]`)?.getAttribute(b));
             if (t.closest('[data-cfg-papply]')) { const x = profiles()[pi('data-cfg-papply')]; if (!x || !await A().confirmBox(`Appliquer les réglages « ${x.name} » ?\n\nLes réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.`, {title: 'Appliquer des réglages', okLabel: 'Appliquer les réglages'})) return; applyCfg(x.settings); toast(`Réglages « ${x.name} » appliqués.`); again(); return; }
             if (t.closest('[data-cfg-pupdate]')) { const list = profiles(), i = pi('data-cfg-pupdate'); if (!list[i] || !await A().confirmBox(`Remplacer « ${list[i].name} » par les réglages actuels ?`, {title: 'Mettre à jour les réglages', okLabel: 'Remplacer'})) return; list[i] = {...list[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(list); toast('Mis à jour.'); again(); return; }
             if (t.closest('[data-cfg-prename]')) { const list = profiles(), i = pi('data-cfg-prename'); if (!list[i]) return; A().askText({title: 'Renommer', message: 'Nouveau nom :', value: list[i].name, okLabel: 'Renommer'}).then(n => { if (!n?.trim()) return; list[i].name = n.trim().slice(0, 60); saveProfiles(list); again(); }); return; }
-            if (t.closest('[data-cfg-pexport]')) { const x = profiles()[pi('data-cfg-pexport')]; if (x) { downloadCfg(x.name, x.settings); toast('Fichier prêt.'); } return; }
+            if (t.closest('[data-cfg-pexport]')) { const x = profiles()[pi('data-cfg-pexport')]; if (x) { downloadCfg(x.name, x.settings); } return; }
             if (t.closest('[data-cfg-pdel]')) { const list = profiles(), i = pi('data-cfg-pdel'); if (!list[i] || !await A().confirmBox(`Supprimer les réglages enregistrés « ${list[i].name} » ? (les réglages actuels ne changent pas)`, {title: 'Supprimer les réglages', okLabel: 'Supprimer les réglages'})) return; list.splice(i, 1); saveProfiles(list); again(); return; }
             if (t.closest('[data-cfg-reset]')) return resetSections(['nav', 'types', 'folders', 'plans']);
         }, {signal: ws._cfgCtl.signal});

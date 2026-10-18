@@ -258,12 +258,12 @@ header('X-Content-Type-Options: nosniff');
 
         <div class="form-section-label" style="margin:1rem 0 .5rem;font-size:.75em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Époques de passage</div>
         <div class="form-grid">
-            <label>Entrée dans l'armée active<input name="date_entree_active" placeholder="15 novembre 1897…"></label>
-            <label>Passé dans la disponibilité<input name="date_disponibilite" placeholder="1er oct. 1900…"></label>
-            <label>Passé dans la réserve active<input name="date_reserve" placeholder="1er oct. 1910…"></label>
-            <label>Passé dans l'armée territoriale<input name="date_territoriale" placeholder="1er oct. 1916…"></label>
-            <label>Passé dans la réserve territoriale<input name="date_reserve_territ" placeholder="1er oct. 1920…"></label>
-            <label>Libération du service militaire<input name="date_liberation" placeholder=""></label>
+            <label>Entrée dans l'armée active<input name="date_entree_active" data-ui-date placeholder="15 novembre 1897…"></label>
+            <label>Passé dans la disponibilité<input name="date_disponibilite" data-ui-date placeholder="1er oct. 1900…"></label>
+            <label>Passé dans la réserve active<input name="date_reserve" data-ui-date placeholder="1er oct. 1910…"></label>
+            <label>Passé dans l'armée territoriale<input name="date_territoriale" data-ui-date placeholder="1er oct. 1916…"></label>
+            <label>Passé dans la réserve territoriale<input name="date_reserve_territ" data-ui-date placeholder="1er oct. 1920…"></label>
+            <label>Libération du service militaire<input name="date_liberation" data-ui-date placeholder=""></label>
         </div>
 
         <div class="form-section-label" style="margin:1rem 0 .5rem;font-size:.75em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Détail des services et mutations diverses</div>
@@ -368,7 +368,7 @@ header('X-Content-Type-Options: nosniff');
             <label>Nom relevé<input name="last_name" autocomplete="off" placeholder="Nom tel qu’il est dans l’acte"></label>
             <label>Date telle qu’elle est connue
                 <div class="date-text-wrap">
-                    <input name="date_text" placeholder="vers 1784, 7 mai 1925, 08/12/1960…" autocomplete="off">
+                    <input name="date_text" placeholder="vers 1784, 7 mai 1925, 08/12/1960…" autocomplete="off" data-ui-date="nocal">
                     <button type="button" class="icon-button date-picker-toggle" title="Choisir une date dans le calendrier" aria-label="Ouvrir le calendrier">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                     </button>
@@ -423,7 +423,7 @@ header('X-Content-Type-Options: nosniff');
             <label id="media-create-event-toggle" class="checkbox-line"><input type="checkbox" name="create_event" value="1"> Créer un événement pour ce média</label>
             <div id="media-create-event-fields" class="nested-fields" hidden>
                 <label>Type d’événement<select name="create_event_type_id"></select></label>
-                <label>Date<input name="create_event_date" placeholder="7 mai 1925"></label>
+                <label>Date<input name="create_event_date" placeholder="7 mai 1925" data-ui-date></label>
                 <label>Titre<input name="create_event_title" placeholder="Acte trouvé, mention marginale…"></label>
                 <label>Lieu<input name="create_event_place" placeholder="Saint-Amand-Montrond"></label>
                 <label>Pays<input name="create_event_country" value="France"></label>
@@ -450,7 +450,7 @@ header('X-Content-Type-Options: nosniff');
             </div>
             <label>Date du document
                 <div class="date-text-wrap">
-                    <input name="date_text" placeholder="vers 1917, 7 mai 1916, 08/12/1917…" autocomplete="off">
+                    <input name="date_text" placeholder="vers 1917, 7 mai 1916, 08/12/1917…" autocomplete="off" data-ui-date="nocal">
                     <button type="button" class="icon-button date-picker-toggle" title="Choisir une date dans le calendrier" aria-label="Ouvrir le calendrier">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                     </button>
@@ -492,6 +492,7 @@ header('X-Content-Type-Options: nosniff');
                 </div>
                 <input id="media-files-input" name="files[]" type="file" accept="image/*,application/pdf,audio/*,video/*,.aif,.aiff,.aifc" multiple style="display:none">
                 <input id="media-folder-input" type="file" accept="image/*,application/pdf,audio/*,video/*,.aif,.aiff,.aifc" multiple webkitdirectory style="display:none">
+                <small class="media-drop-hint">📁 ou <b>glisse les fichiers ici</b>, ou colle-les (⌘V)</small>
                 <div id="media-files-preview" class="media-files-preview" hidden></div>
             </div>
             <div id="media-investigation-fields" hidden><label>Dossier de l’enquête<select name="investigation_folder_id"></select></label><label>Piste(s) concernée(s)<select name="investigation_item_ids[]" multiple size="6"></select></label><label>Classement<select name="investigation_verdict"><option value="interesting">Intéressant</option><option value="rejected">Rejeté</option></select></label><label>Pourquoi ?<textarea name="investigation_reason" rows="4" placeholder="Intéressant car la date indiquée est 1856…"></textarea></label></div>
@@ -607,10 +608,10 @@ header('X-Content-Type-Options: nosniff');
         <input type="hidden" name="linked_persons" id="battue-linked-persons">
         <div class="form-grid">
             <label>Titre<input id="battue-title" name="title" required placeholder="Naissance de Jean Dupont"></label>
-            <label>Type de recherche<select name="target_type"></select></label>
+            <label><span data-help="Une battue fouille un lieu ou un registre, niveau après niveau, pour tout ce qui touche à la cible : une personne, un couple, un nom de famille, un événement…" data-help-faq="battue">Type de recherche</span><select name="target_type"></select></label>
             <label class="span-2">Ce que l'on cherche<input name="target_text" placeholder="Nom, personne, couple, événement…"></label>
             <div class="pk-host span-2"><span>Commune de départ <small>(commune française)</small></span><div class="pk" data-picker="place" id="battue-commune-search" data-pk-opts='{"name":"battue_commune_pick","kind":"place","multiple":false,"placeholder":"Commune française…","allowFree":false,"allowCreate":false,"roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="battue_commune_pick" value=""></div></div>
-            <label>Niveaux à générer<select name="max_level"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
+            <label><span data-help="Niveau 0 : la cible seule. Niveau 1 : ses parents, enfants et conjoints. Niveau 2 : leurs proches à eux… Plus le nombre est grand, plus la liste à vérifier est longue." data-help-faq="battue">Niveaux à générer</span><select name="max_level"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
             <label>État<select name="status"><option value="open">En cours</option><option value="paused">En pause</option><option value="closed">Terminée</option></select></label>
             <label class="span-2">Notes<textarea name="notes" rows="3"></textarea></label>
         </div>
@@ -766,6 +767,7 @@ header('X-Content-Type-Options: nosniff');
             <div style="display:flex;gap:8px;margin-top:.9rem;align-items:center">
                 <input id="stats-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line-color);border-radius:4px;font-size:.85em">
                 <button type="button" class="button small" id="stats-colors-save-preset">Enregistrer</button>
+                <button type="button" class="button small secondary" id="stats-colors-import-preset" title="Reprendre une palette exportée (fichier .json)">⤒ Importer un réglage</button>
             </div>
         </div>
 
@@ -794,6 +796,7 @@ header('X-Content-Type-Options: nosniff');
             <div style="display:flex;gap:8px;margin-top:.9rem;align-items:center">
                 <input id="battue-level-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line-color);border-radius:4px;font-size:.85em">
                 <button type="button" class="button small" id="battue-level-colors-save-preset">Enregistrer</button>
+                <button type="button" class="button small secondary" id="battue-level-colors-import-preset" title="Reprendre une palette exportée (fichier .json)">⤒ Importer un réglage</button>
             </div>
         </div>
         <div class="modal-actions">
@@ -945,7 +948,7 @@ header('X-Content-Type-Options: nosniff');
             <input id="lightbox-title" class="lightbox-input" placeholder="Acte de mariage, portrait…">
             <label for="lightbox-date">Date du média</label>
             <div class="date-text-wrap">
-                <input id="lightbox-date" name="date_text" class="lightbox-input" placeholder="vers 1900, 7 mai 1925…">
+                <input id="lightbox-date" name="date_text" class="lightbox-input" placeholder="vers 1900, 7 mai 1925…" data-ui-date="nocal">
                 <button type="button" class="icon-button date-picker-toggle" id="lightbox-date-toggle" title="Choisir une date dans le calendrier" aria-label="Ouvrir le calendrier">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                 </button>
@@ -1084,7 +1087,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=402" defer></script>
+<script src="assets/js/app.js?v=403" defer></script>
 <script src="assets/js/app-picker.js?v=2" defer></script>
 <script src="assets/js/app-media-picker.js?v=1" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
@@ -1092,56 +1095,56 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-chronologie.js?v=6" defer></script>
 <script src="assets/js/app-comparaison.js?v=6" defer></script>
 <script src="assets/js/app-carte.js?v=6" defer></script>
-<script src="assets/js/app-enquetes.js?v=4" defer></script>
-<script src="assets/js/app-tableau-de-bord.js?v=6" defer></script>
+<script src="assets/js/app-enquetes.js?v=5" defer></script>
+<script src="assets/js/app-tableau-de-bord.js?v=7" defer></script>
 <script src="assets/js/app-harmony.js?v=4" defer></script>
 <script src="assets/js/app-ui.js?v=1" defer></script>
-<script src="assets/js/app-access.js?v=1" defer></script>
+<script src="assets/js/app-access.js?v=2" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
-<script src="assets/js/app-listes.js?v=8" defer></script>
-<script src="assets/js/app-maintenance.js?v=9" defer></script>
-<script src="assets/js/app-recherche.js?v=7" defer></script>
+<script src="assets/js/app-listes.js?v=9" defer></script>
+<script src="assets/js/app-maintenance.js?v=10" defer></script>
+<script src="assets/js/app-recherche.js?v=8" defer></script>
 <script src="assets/js/app-graphiques.js?v=6" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
-<script src="assets/js/heritage.js?v=20" defer></script>
+<script src="assets/js/heritage.js?v=21" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=118" defer></script>
-<script src="assets/js/heritage-records.js?v=3" defer></script>
-<script src="assets/js/heritage-research.js?v=23" defer></script>
+<script src="assets/js/heritage-more.js?v=120" defer></script>
+<script src="assets/js/heritage-records.js?v=4" defer></script>
+<script src="assets/js/heritage-research.js?v=24" defer></script>
 <script src="assets/js/heritage-av.js?v=10" defer></script>
-<script src="assets/js/heritage-recueil-table.js?v=5" defer></script>
-<script src="assets/js/heritage-recueils.js?v=17" defer></script>
+<script src="assets/js/heritage-recueil-table.js?v=6" defer></script>
+<script src="assets/js/heritage-recueils.js?v=18" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=14" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=6" defer></script>
 <script src="assets/js/heritage-studio-av.js?v=43" defer></script>
-<script src="assets/js/heritage-calendars.js?v=9" defer></script>
-<script src="assets/js/heritage-assemble.js?v=5" defer></script>
+<script src="assets/js/heritage-calendars.js?v=10" defer></script>
+<script src="assets/js/heritage-assemble.js?v=6" defer></script>
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=2" defer></script>
-<script src="assets/js/heritage-voters.js?v=3" defer></script>
-<script src="assets/js/heritage-widgets.js?v=31" defer></script>
+<script src="assets/js/heritage-voters.js?v=4" defer></script>
+<script src="assets/js/heritage-widgets.js?v=32" defer></script>
 <script src="assets/js/heritage-tabs.js?v=7" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
 <script src="assets/js/heritage-employers.js?v=3" defer></script>
 <script src="assets/js/heritage-book.js?v=5" defer></script>
 <script src="assets/js/heritage-layout-facts.js?v=2" defer></script>
 <script src="assets/js/heritage-layout.js?v=31" defer></script>
-<script src="assets/js/heritage-edittools.js?v=11" defer></script>
-<script src="assets/js/heritage-editorkeys.js?v=8" defer></script>
-<script src="assets/js/heritage-livrets.js?v=7" defer></script>
-<script src="assets/js/heritage-pets.js?v=17" defer></script>
+<script src="assets/js/heritage-edittools.js?v=12" defer></script>
+<script src="assets/js/heritage-editorkeys.js?v=9" defer></script>
+<script src="assets/js/heritage-livrets.js?v=8" defer></script>
+<script src="assets/js/heritage-pets.js?v=18" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
-<script src="assets/js/heritage-board-kit.js?v=16" defer></script>
-<script src="assets/js/heritage-boards.js?v=26" defer></script>
+<script src="assets/js/heritage-board-kit.js?v=17" defer></script>
+<script src="assets/js/heritage-boards.js?v=27" defer></script>
 <script src="assets/js/heritage-dnd.js?v=8" defer></script>
-<script src="assets/js/heritage-studio.js?v=55" defer></script>
-<script src="assets/js/heritage-retouch-simple.js?v=5" defer></script>
+<script src="assets/js/heritage-studio.js?v=56" defer></script>
+<script src="assets/js/heritage-retouch-simple.js?v=6" defer></script>
 <script src="assets/js/heritage-fiches.js?v=12" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=3" defer></script>
-<script src="assets/js/heritage-periodicals.js?v=6" defer></script>
+<script src="assets/js/heritage-periodicals.js?v=7" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=3" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=5" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=6" defer></script>
 <script src="assets/js/heritage-vector.js?v=16" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=11" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=8" defer></script>
@@ -1155,10 +1158,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe.js?v=7" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=9" defer></script>
 <script src="assets/js/heritage-keynote.js?v=8" defer></script>
-<script src="assets/js/heritage-house.js?v=14" defer></script>
-<script src="assets/js/heritage-house3d.js?v=7" defer></script>
+<script src="assets/js/heritage-house.js?v=15" defer></script>
+<script src="assets/js/heritage-house3d.js?v=8" defer></script>
 <script src="assets/js/heritage-house-lib.js?v=4" defer></script>
-<script src="assets/js/heritage-dna.js?v=7" defer></script>
+<script src="assets/js/heritage-dna.js?v=8" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=5" defer></script>
 <script src="assets/js/museum-viewer.js?v=9" defer></script>
 <script src="assets/js/heritage-museum.js?v=13" defer></script>

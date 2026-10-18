@@ -333,7 +333,7 @@
         const rows = g => tbKids(g).map(el => `<li class="h-pet-lrow" data-k="${esc(tbKeyOf(el))}"><input type="checkbox" ${el.classList.contains('is-tb-off') ? '' : 'checked'} title="Montrer"><span>${esc(tbLabel(el))}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('');
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-tbcfg';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">PERSONNALISER</span><h2>⚙️ Boutons et options</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-tbcfg-ws h-pp-presets" data-ws><strong>💾 Réglages enregistrés</strong><select data-ws-pick aria-label="Réglages enregistrés"><option value="">— les boutons actuels —</option>${wsList(id).map(x => `<option value="${esc(x.name)}">${esc(x.name)}</option>`).join('')}</select><button type="button" class="button small secondary" data-ws-apply>Appliquer</button><button type="button" class="button small secondary" data-ws-save title="Garder les boutons montrés, cachés et rangés sous un nom">💾 Enregistrer sous un nom…</button><button type="button" class="button small secondary" data-ws-del title="Supprimer ces réglages enregistrés">🗑</button></div>
+            <div class="h-tbcfg-ws h-pp-presets" data-ws><strong>💾 Réglages enregistrés</strong><select data-ws-pick aria-label="Réglages enregistrés"><option value="">— les boutons actuels —</option>${wsList(id).map(x => `<option value="${esc(x.name)}">${esc(x.name)}</option>`).join('')}</select><button type="button" class="button small secondary" data-ws-apply>Appliquer</button><button type="button" class="button small secondary" data-ws-save title="Garder les boutons montrés, cachés et rangés sous un nom">💾 Enregistrer sous un nom…</button><button type="button" class="button small secondary" data-ws-import title="Reprendre un réglage exporté (fichier .json)">⤒ Importer un réglage</button><button type="button" class="button small secondary" data-ws-export title="Enregistrer les réglages choisis dans un fichier, pour les garder ou les donner">⤓ Exporter</button><button type="button" class="button small secondary" data-ws-del title="Supprimer ces réglages enregistrés">🗑</button></div>
             <div class="h-tbcfg-body"><p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre.</p>${groups.map(g => `<section><h4>${esc(g.dataset.tbgLabel || g.dataset.tbg)}</h4><ol class="h-pet-layout" data-g="${esc(g.dataset.tbg)}">${rows(g)}</ol></section>`).join('')}</div>
             <div class="modal-actions"><button type="button" class="button secondary" data-reset>↺ Remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="button" class="button" data-ok>Enregistrer</button></div>`;
         (b.closest('dialog') || document.body).appendChild(dlg);
@@ -346,6 +346,15 @@
             const cur = () => { const c = {order: {}, hidden: {}}; dlg.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; c.order[ol.dataset.g] = lis.map(l => l.dataset.k); c.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); }); return c; };
             const picked = () => { const n = dlg.querySelector('[data-ws-pick]').value; return n === '' ? null : wsList(id).find(y => y.name === n) || null; }; // par nom : les index se décalent après une suppression
             if (ev.target.closest('[data-ws-apply]')) { const x = picked(); if (!x) return toast('Choisis des réglages enregistrés.'); const all = tbAll(); all[id] = x.v; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} ext.tbApply(root, id); toast(`Espace de travail « ${x.name} » appliqué.`); dlg.close(); return; }
+            if (ev.target.closest('[data-ws-export]')) { const x = picked(); if (!x) return toast('Choisis d’abord des réglages enregistrés dans la liste.'); return ext.reglageExport(`boutons-${id}`, x.name, x.v); }
+            if (ev.target.closest('[data-ws-import]')) {
+                const keys = v => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.entries(v).slice(0, 60).filter(([k, a]) => typeof k === 'string' && k.length < 80 && Array.isArray(a)).map(([k, a]) => [k, a.filter(x => typeof x === 'string' && x.length < 200).slice(0, 300)])) : {});
+                const r = await ext.reglageImport(`boutons-${id}`, {names: wsList(id).map(y => y.name), check: v => !!v && typeof v === 'object' && (v.order === undefined || typeof v.order === 'object') && (v.hidden === undefined || typeof v.hidden === 'object')});
+                if (!r) return;
+                const v = {order: keys(r.donnees.order), hidden: keys(r.donnees.hidden)}, list = wsList(id).filter(y => y.name !== r.nom); list.push({name: r.nom, date: new Date().toLocaleDateString('fr-FR'), v}); wsSave(id, list.slice(-60));
+                const sel = dlg.querySelector('[data-ws-pick]'); sel.add(new Option(r.nom, r.nom)); sel.value = r.nom;
+                toast(`Réglages « ${r.nom} » importés : « Appliquer » pour les utiliser.`); return;
+            }
             if (ev.target.closest('[data-ws-del]')) { const x = picked(); if (!x || !await A().confirmBox('', {title: `Supprimer les réglages enregistrés « ${x.name} » ?`, okLabel: 'Supprimer'})) return; wsSave(id, wsList(id).filter(y => y.name !== x.name)); const sel = dlg.querySelector('[data-ws-pick]'); sel.selectedOptions[0]?.remove(); sel.value = ''; toast('Supprimé.'); return; }
             if (ev.target.closest('[data-ws-save]')) { (async () => { const name = String((await A().askText?.({title: 'Réglages enregistrés', message: 'Nom de ces réglages (boutons montrés et leur ordre) :', value: '', okLabel: 'Enregistrer'})) ?? '').trim().slice(0, 60); if (!name) return;
                 const list = wsList(id).filter(y => y.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: cur()}); wsSave(id, list.slice(-60));
@@ -760,6 +769,8 @@
     function rtReplayStrokes(img, strokes, masks = null) {
         const W = img.width, H = img.height, data = img.data;
         for (const g of strokes) {
+            // 🪡 réparer : la zone peinte (ou repérée : un masque) est refaite d'après ses alentours
+            if (g.tool === 'inpaint') { const mc = g.mask ? masks?.get(g.mask) : null, m = g.mask ? (mc ? rtMaskAlpha(mc, W, H) : null) : rtDabsMask(g.dabs, W, H); if (m) rtInpaint(img, m, {grain: g.grain !== false}); continue; }
             // sélection : remplir d'une couleur, rendre transparent, ou poser la zone ailleurs (tampon d'une zone)
             if (['fill', 'clear', 'patch'].includes(g.tool)) {
                 const m = masks?.get(g.mask); if (!m) continue; const al = rtMaskAlpha(m, W, H);
@@ -878,6 +889,475 @@
         for (let p = 0; p < W * H; p++) if (sel[p]) out.data[p * 4 + 3] = 255;
         g.putImageData(out, 0, 0); return c;
     }
+    /* ═══ 🪡 Réparer un pli, une déchirure, une rayure : la zone est refaite d'après ses alentours ═══ */
+    /** Le masque (0 à 255, un octet par point) d'un geste du pinceau 🪡 : des disques au bord adouci, à la taille de l'image */
+    function rtDabsMask(dabs, W, H) {
+        const m = new Uint8Array(W * H);
+        for (const d of dabs || []) {
+            const cx = d.x * W, cy = d.y * H, r = Math.max(1, d.r * W), r2 = r * r;
+            const x0 = Math.max(0, Math.floor(cx - r)), x1 = Math.min(W - 1, Math.ceil(cx + r)), y0 = Math.max(0, Math.floor(cy - r)), y1 = Math.min(H - 1, Math.ceil(cy + r));
+            for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+                const q = (x - cx) * (x - cx) + (y - cy) * (y - cy); if (q > r2) continue;
+                const t = Math.sqrt(q) / r, v = t < 0.7 ? 255 : Math.round(255 * (1 - (t - 0.7) / 0.3)), p = y * W + x;
+                if (v > m[p]) m[p] = v;
+            }
+        }
+        return m;
+    }
+    /** Un carreau : « tirer-pousser » (moyennes pondérées sur une pyramide, puis retour au détail), lissage de l'intérieur,
+     *  et le grain des alentours remis par-dessus ; seuls les points du cœur du carreau (cx0…cy1) sont écrits. */
+    function rtInpaintTile(d, W, H, mask, bx0, by0, bx1, by1, cx0, cy0, cx1, cy1, grain) {
+        const w = bx1 - bx0, h = by1 - by0, n = w * h, C = new Float32Array(n * 3), Wt = new Float32Array(n), hole = new Uint8Array(n);
+        for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+            const p = y * w + x, q = (y + by0) * W + x + bx0, i = q * 4;
+            if (mask[q] > 8) { hole[p] = 1; continue; }
+            Wt[p] = 1; C[p * 3] = d[i]; C[p * 3 + 1] = d[i + 1]; C[p * 3 + 2] = d[i + 2];
+        }
+        const lv = [{w, h, C, Wt}];
+        while (lv[lv.length - 1].w > 1 || lv[lv.length - 1].h > 1) { // tirer : 2 × 2 → 1
+            const a = lv[lv.length - 1], nw = Math.ceil(a.w / 2), nh = Math.ceil(a.h / 2), c2 = new Float32Array(nw * nh * 3), w2 = new Float32Array(nw * nh);
+            for (let y = 0; y < nh; y++) for (let x = 0; x < nw; x++) {
+                let sw = 0, r = 0, g = 0, b = 0;
+                for (let dy = 0; dy < 2; dy++) { const yy = y * 2 + dy; if (yy >= a.h) continue; for (let dx = 0; dx < 2; dx++) { const xx = x * 2 + dx; if (xx >= a.w) continue; const p = yy * a.w + xx, k = a.Wt[p]; if (!k) continue; sw += k; r += a.C[p * 3] * k; g += a.C[p * 3 + 1] * k; b += a.C[p * 3 + 2] * k; } }
+                if (sw > 0) { const p = y * nw + x; c2[p * 3] = r / sw; c2[p * 3 + 1] = g / sw; c2[p * 3 + 2] = b / sw; w2[p] = Math.min(1, sw); }
+            }
+            lv.push({w: nw, h: nh, C: c2, Wt: w2});
+        }
+        for (let k = lv.length - 2; k >= 0; k--) { // pousser : ce qui manque prend la valeur (interpolée) du niveau du dessus
+            const a = lv[k], u = lv[k + 1];
+            for (let y = 0; y < a.h; y++) {
+                const fy = Math.min(u.h - 1, Math.max(0, (y + 0.5) / 2 - 0.5)), y0 = Math.floor(fy), y1 = Math.min(u.h - 1, y0 + 1), ty = fy - y0;
+                for (let x = 0; x < a.w; x++) {
+                    const p = y * a.w + x, wv = a.Wt[p]; if (wv >= 1) continue;
+                    const fx = Math.min(u.w - 1, Math.max(0, (x + 0.5) / 2 - 0.5)), x0 = Math.floor(fx), x1 = Math.min(u.w - 1, x0 + 1), tx = fx - x0;
+                    const i00 = (y0 * u.w + x0) * 3, i01 = (y0 * u.w + x1) * 3, i10 = (y1 * u.w + x0) * 3, i11 = (y1 * u.w + x1) * 3;
+                    for (let c = 0; c < 3; c++) { const v = (u.C[i00 + c] * (1 - tx) + u.C[i01 + c] * tx) * (1 - ty) + (u.C[i10 + c] * (1 - tx) + u.C[i11 + c] * tx) * ty; a.C[p * 3 + c] = a.C[p * 3 + c] * wv + v * (1 - wv); }
+                    a.Wt[p] = 1;
+                }
+            }
+        }
+        // lisser l'intérieur des trous (les points connus ne bougent pas) : plus de marches d'escalier
+        const idx = []; for (let p = 0; p < n; p++) if (hole[p]) idx.push(p);
+        const iters = Math.min(60, 14 + Math.round(Math.sqrt(idx.length) / 3));
+        for (let s = 0; s < iters; s++) for (let j = 0; j < idx.length; j++) {
+            const p = idx[j], x = p % w, y = (p - x) / w; let r = 0, g = 0, b = 0, m = 0;
+            if (x > 0) { r += C[p * 3 - 3]; g += C[p * 3 - 2]; b += C[p * 3 - 1]; m++; }
+            if (x < w - 1) { r += C[p * 3 + 3]; g += C[p * 3 + 4]; b += C[p * 3 + 5]; m++; }
+            if (y > 0) { const q = (p - w) * 3; r += C[q]; g += C[q + 1]; b += C[q + 2]; m++; }
+            if (y < h - 1) { const q = (p + w) * 3; r += C[q]; g += C[q + 1]; b += C[q + 2]; m++; }
+            if (m) { C[p * 3] = r / m; C[p * 3 + 1] = g / m; C[p * 3 + 2] = b / m; }
+        }
+        // le grain des alentours (une zone trop lisse se verrait sur une photo ancienne)
+        let gs = 0;
+        if (grain) {
+            const L = q => 0.299 * C[q * 3] + 0.587 * C[q * 3 + 1] + 0.114 * C[q * 3 + 2]; let s2 = 0, cnt = 0;
+            for (let p = w + 1; p < n - w - 1; p += 3) { if (hole[p] || hole[p - 1] || hole[p + 1] || hole[p - w] || hole[p + w]) continue; const v = L(p) - (L(p - 1) + L(p + 1) + L(p - w) + L(p + w)) / 4; s2 += v * v; cnt++; }
+            gs = cnt ? Math.min(16, Math.sqrt(s2 / cnt) * 0.75) : 0;
+        }
+        for (let y = cy0; y < cy1; y++) for (let x = cx0; x < cx1; x++) {
+            const q = y * W + x, mv = mask[q]; if (mv <= 8) continue;
+            const p = (y - by0) * w + (x - bx0), a = mv / 255, i = q * 4; let nz = 0;
+            if (gs) { let hs = (x * 374761393 + y * 668265263) ^ 0x2c1b3c6d; hs = Math.imul(hs ^ (hs >>> 13), 1274126177); nz = ((((hs ^ (hs >>> 16)) & 1023) / 1023) - 0.5) * gs * 3.4; }
+            for (let c = 0; c < 3; c++) d[i + c] = d[i + c] * (1 - a) + clamp255(C[p * 3 + c] + nz) * a;
+        }
+    }
+    /** Remplit les points du masque (0 à 255) d'après leurs alentours, carreau par carreau (256 points) : seuls ceux qui
+     *  touchent le masque sont calculés, si bien qu'un long pli sur une photo de 3000 points se répare en un instant. */
+    function rtInpaint(img, mask, {grain = true} = {}) {
+        const W = img.width, H = img.height, T = 256, PAD = 40; let tiles = 0;
+        for (let ty = 0; ty < H; ty += T) for (let tx = 0; tx < W; tx += T) {
+            const x1 = Math.min(W, tx + T), y1 = Math.min(H, ty + T); let any = false;
+            for (let y = ty; y < y1 && !any; y++) { const row = y * W; for (let x = tx; x < x1; x++) if (mask[row + x] > 8) { any = true; break; } }
+            if (!any) continue;
+            rtInpaintTile(img.data, W, H, mask, Math.max(0, tx - PAD), Math.max(0, ty - PAD), Math.min(W, x1 + PAD), Math.min(H, y1 + PAD), tx, ty, x1, y1, grain); tiles++;
+        }
+        return tiles;
+    }
+    /** 🔍 Plis et rayures : les lignes fines plus claires ou plus sombres que leur voisinage (l'image moins son « ouverture »,
+     *  sa « fermeture » moins l'image), qui vont dans un même sens (pas un point, pas une texture), longues et minces.
+     *  Calculé sur une image réduite (1200 points au plus), puis ramené à la taille de img.
+     *  sens : 1 (seulement les lignes franches) à 100 (beaucoup). Renvoie {mask (0/255 par point de img), lines}. */
+    function rtCreases(img, sens = 50, inside = null) {
+        const W0 = img.width, H0 = img.height, d = img.data, k = Math.min(1, 1200 / Math.max(W0, H0)), W = Math.max(8, Math.round(W0 * k)), H = Math.max(8, Math.round(H0 * k)), N = W * H;
+        // la luminosité, réduite (moyenne des points de chaque case)
+        const L = new Float32Array(N), cnt = new Float32Array(N);
+        for (let y = 0; y < H0; y++) { const ty = Math.min(H - 1, Math.floor(y * k)) * W; for (let x = 0; x < W0; x++) { const i = (y * W0 + x) * 4, q = ty + Math.min(W - 1, Math.floor(x * k)); L[q] += 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]; cnt[q]++; } }
+        for (let p = 0; p < N; p++) L[p] /= cnt[p] || 1;
+        const r = 2, tmp = new Float32Array(N);
+        const mm = (src, isMax) => { // minimum ou maximum sur un carré de 5 × 5 (deux passes)
+            const o = new Float32Array(N);
+            for (let y = 0; y < H; y++) { const row = y * W; for (let x = 0; x < W; x++) { let v = src[row + x]; for (let q = Math.max(0, x - r), e = Math.min(W - 1, x + r); q <= e; q++) { const u = src[row + q]; if (isMax ? u > v : u < v) v = u; } tmp[row + x] = v; } }
+            for (let y = 0; y < H; y++) { const a = Math.max(0, y - r), b = Math.min(H - 1, y + r); for (let x = 0; x < W; x++) { let v = tmp[y * W + x]; for (let q = a; q <= b; q++) { const u = tmp[q * W + x]; if (isMax ? u > v : u < v) v = u; } o[y * W + x] = v; } }
+            return o;
+        };
+        const open = mm(mm(L, false), true), close = mm(mm(L, true), false), R = new Float32Array(N);
+        for (let p = 0; p < N; p++) { const a = L[p] - open[p], b = close[p] - L[p]; R[p] = a > b ? a : b; }
+        // le sens de la ligne : tenseur de structure de la réponse, lissé ; cohérence proche de 1 = un seul sens (une ligne)
+        const jxx = new Float32Array(N), jxy = new Float32Array(N), jyy = new Float32Array(N);
+        for (let y = 1; y < H - 1; y++) for (let x = 1; x < W - 1; x++) { const p = y * W + x, gx = R[p + 1] - R[p - 1], gy = R[p + W] - R[p - W]; jxx[p] = gx * gx; jxy[p] = gx * gy; jyy[p] = gy * gy; }
+        const box = (a, rad) => { // moyenne glissante (deux passes)
+            for (let y = 0; y < H; y++) { const row = y * W; let s = 0; for (let x = -rad; x < W + rad; x++) { if (x + rad < W) s += a[row + x + rad] || 0; if (x - rad - 1 >= 0) s -= a[row + x - rad - 1]; if (x >= 0 && x < W) tmp[row + x] = s; } }
+            for (let x = 0; x < W; x++) { let s = 0; for (let y = -rad; y < H + rad; y++) { if (y + rad < H) s += tmp[(y + rad) * W + x]; if (y - rad - 1 >= 0) s -= tmp[(y - rad - 1) * W + x]; if (y >= 0 && y < H) a[y * W + x] = s; } }
+        };
+        box(jxx, 3); box(jxy, 3); box(jyy, 3);
+        const sample = []; for (let p = 0; p < N; p += 5) sample.push(R[p]); sample.sort((a, b) => a - b);
+        const med = sample[sample.length >> 1] || 0, dev = Float32Array.from(sample, v => Math.abs(v - med)).sort()[sample.length >> 1] || 1;
+        const T = Math.max(7, med + dev * (15 - sens * 0.12)), T2 = T * 0.6;
+        const ok = p => !inside || inside[Math.min(H0 - 1, Math.floor(Math.floor(p / W) / k)) * W0 + Math.min(W0 - 1, Math.floor((p % W) / k))] > 127;
+        // hystérésis : on part des points nets (forts et dans un seul sens) et on suit la ligne là où elle pâlit
+        const lab = new Int32Array(N), stack = [], keep = [0]; let id = 0, lines = 0;
+        const minLen = Math.max(14, Math.max(W, H) * (0.06 - sens * 0.00045));
+        for (let p0 = 0; p0 < N; p0++) {
+            if (lab[p0] || R[p0] <= T || !ok(p0)) continue;
+            const a = jxx[p0], c = jyy[p0], b = jxy[p0], coh = Math.sqrt((a - c) * (a - c) + 4 * b * b) / (a + c + 1e-6); if (coh < 0.5) continue;
+            id++; lab[p0] = id; stack.push(p0); let n = 0, sx = 0, sy = 0, sxx = 0, syy = 0, sxy = 0;
+            while (stack.length) {
+                const p = stack.pop(), x = p % W, y = (p - x) / W; n++; sx += x; sy += y; sxx += x * x; syy += y * y; sxy += x * y;
+                for (let dy = -1; dy <= 1; dy++) { const yy = y + dy; if (yy < 0 || yy >= H) continue; for (let dx = -1; dx <= 1; dx++) { const xx = x + dx; if (xx < 0 || xx >= W) continue; const q = yy * W + xx; if (!lab[q] && R[q] > T2 && ok(q) && Math.sqrt((jxx[q] - jyy[q]) ** 2 + 4 * jxy[q] * jxy[q]) / (jxx[q] + jyy[q] + 1e-6) > 0.4) { lab[q] = id; stack.push(q); } } }
+            }
+            // longueur et épaisseur d'après l'étalement des points (une ligne : très longue dans un sens, mince dans l'autre)
+            const mx = sx / n, my = sy / n, vxx = sxx / n - mx * mx, vyy = syy / n - my * my, vxy = sxy / n - mx * my, tr = vxx + vyy, det = vxx * vyy - vxy * vxy, l1 = tr / 2 + Math.sqrt(Math.max(0, tr * tr / 4 - det));
+            const len = Math.sqrt(12 * Math.max(0, l1)), thick = n / Math.max(1, len);
+            const good = len >= minLen && thick <= 5; keep.push(good ? 1 : 0); if (good) lines++;
+        }
+        // à la taille de img, un peu plus large que la ligne (le bord ne laisse pas de liseré)
+        const small = new Uint8Array(N); for (let p = 0; p < N; p++) if (lab[p] && keep[lab[p]]) small[p] = 1;
+        const g = Math.max(1, Math.round(1 / k)), mask = new Uint8Array(W0 * H0), t2 = new Uint8Array(W0 * H0);
+        for (let y = 0; y < H0; y++) { const ty = Math.min(H - 1, Math.floor(y * k)) * W; for (let x = 0; x < W0; x++) t2[y * W0 + x] = small[ty + Math.min(W - 1, Math.floor(x * k))]; }
+        const t3 = new Uint8Array(W0 * H0);
+        for (let y = 0; y < H0; y++) { const row = y * W0; let run = -1e9; for (let x = 0; x < W0; x++) { if (t2[row + x]) run = x; t3[row + x] = x - run <= g ? 1 : 0; } run = 1e9; for (let x = W0 - 1; x >= 0; x--) { if (t2[row + x]) run = x; if (run - x <= g) t3[row + x] = 1; } }
+        for (let x = 0; x < W0; x++) { let run = -1e9; for (let y = 0; y < H0; y++) { if (t3[y * W0 + x]) run = y; if (y - run <= g) mask[y * W0 + x] = 255; } run = 1e9; for (let y = H0 - 1; y >= 0; y--) { if (t3[y * W0 + x]) run = y; if (run - y <= g) mask[y * W0 + x] = 255; } }
+        return {mask, lines};
+    }
+    /** Un masque (0 à 255 par point) en toile pw × ph : l'opacité porte le masque (pour les sélections et l'historique) */
+    const rtMaskCanvas = (mask, W, H, color = null) => { const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d'), id = g.createImageData(W, H); const rgb = color ? [1, 3, 5].map(k => parseInt(color.slice(k, k + 2), 16)) : [0, 0, 0]; for (let p = 0; p < mask.length; p++) { if (!mask[p]) continue; const i = p * 4; id.data[i] = rgb[0]; id.data[i + 1] = rgb[1]; id.data[i + 2] = rgb[2]; id.data[i + 3] = mask[p]; } g.putImageData(id, 0, 0); return c; };
+
+    /* ═══ ◧ Avant / après : le rideau qu'on glisse sur la photo, et l'image à exporter (côte à côte ou rideau, avec légende) ═══ */
+    /**
+     * Pose sur la photo (target, une toile dans host) l'original coupé à la position du rideau.
+     * before : une toile ou une ImageData (l'original). → {toggle(on), setVertical(v), place(), on, pos, vertical}
+     */
+    ext.rtCurtain = ({host, target, before, onChange = null}) => {
+        const cv = document.createElement('canvas'); cv.className = 'h-ba-before'; cv.hidden = true;
+        if (before instanceof ImageData) { cv.width = before.width; cv.height = before.height; cv.getContext('2d').putImageData(before, 0, 0); }
+        else { cv.width = before.width; cv.height = before.height; cv.getContext('2d').drawImage(before, 0, 0); }
+        const line = document.createElement('div'); line.className = 'h-ba-line'; line.hidden = true;
+        line.innerHTML = '<span class="h-ba-grip" title="Glisse pour comparer">⇔</span><span class="h-ba-lab is-before">Avant</span><span class="h-ba-lab is-after">Après</span>';
+        line.setAttribute('role', 'slider'); line.setAttribute('aria-label', 'Rideau avant / après'); line.tabIndex = 0;
+        host.append(cv, line);
+        const S = {on: false, pos: 0.5, vertical: true};
+        const box = () => { // la place de l'image dans host (une toile peut garder ses proportions à l'intérieur de sa boîte)
+            const hr = host.getBoundingClientRect(), tr = target.getBoundingClientRect(), k = Math.min(tr.width / target.width, tr.height / target.height) || 1, w = target.width * k, h = target.height * k;
+            return {left: tr.left - hr.left + host.scrollLeft + (tr.width - w) / 2, top: tr.top - hr.top + host.scrollTop + (tr.height - h) / 2, width: w, height: h};
+        };
+        const place = () => {
+            if (!S.on) return; const b = box(), p = Math.round(S.pos * 1000) / 10;
+            Object.assign(cv.style, {left: b.left + 'px', top: b.top + 'px', width: b.width + 'px', height: b.height + 'px', clipPath: S.vertical ? `inset(0 ${100 - p}% 0 0)` : `inset(0 0 ${100 - p}% 0)`, transform: target.style.transform || ''});
+            line.classList.toggle('is-h', !S.vertical);
+            Object.assign(line.style, S.vertical ? {left: b.left + b.width * S.pos + 'px', top: b.top + 'px', height: b.height + 'px', width: ''} : {left: b.left + 'px', top: b.top + b.height * S.pos + 'px', width: b.width + 'px', height: ''});
+            line.setAttribute('aria-valuenow', String(Math.round(S.pos * 100)));
+        };
+        const ro = new ResizeObserver(place); ro.observe(host); ro.observe(target); host.addEventListener('scroll', place);
+        line.addEventListener('pointerdown', e => {
+            e.preventDefault(); e.stopPropagation(); line.setPointerCapture(e.pointerId); line.classList.add('is-drag');
+            const mv = ev => { const b = box(), hr = host.getBoundingClientRect(); S.pos = Math.min(1, Math.max(0, S.vertical ? (ev.clientX - hr.left + host.scrollLeft - b.left) / b.width : (ev.clientY - hr.top + host.scrollTop - b.top) / b.height)); place(); onChange?.(S); };
+            const up = () => { line.removeEventListener('pointermove', mv); line.classList.remove('is-drag'); };
+            line.addEventListener('pointermove', mv); line.addEventListener('pointerup', up, {once: true}); line.addEventListener('pointercancel', up, {once: true});
+        });
+        line.addEventListener('keydown', e => { const k = {ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1}[e.key]; if (!k) return; e.preventDefault(); e.stopPropagation(); S.pos = Math.min(1, Math.max(0, S.pos + k * (e.shiftKey ? 0.1 : 0.02))); place(); onChange?.(S); });
+        return Object.assign(S, {
+            toggle(on = !S.on) { S.on = !!on; cv.hidden = line.hidden = !S.on; place(); onChange?.(S); return S.on; },
+            setVertical(v) { S.vertical = !!v; place(); onChange?.(S); },
+            place, destroy() { ro.disconnect(); cv.remove(); line.remove(); },
+        });
+    };
+    /** L'image « avant / après » : côte à côte, l'une sous l'autre, ou en rideau (vertical, horizontal), légende en bas */
+    function rtCompose(before, after, o, maxSide = 6000) {
+        const W0 = after.width, H0 = after.height, gap = o.layout === 'side' || o.layout === 'stack' ? Math.round(Math.max(W0, H0) * 0.012) : 0;
+        const k = Math.min(1, maxSide / ((o.layout === 'side' ? 2 : 1) * W0 + gap), maxSide / ((o.layout === 'stack' ? 2 : 1) * H0 + gap));
+        const w = Math.max(1, Math.round(W0 * k)), h = Math.max(1, Math.round(H0 * k)), fs = Math.max(12, Math.round(Math.max(w, h) * 0.032)), cap = String(o.caption || '').trim(), capH = cap ? Math.round(fs * 2.2) : 0;
+        const c = document.createElement('canvas'); c.width = o.layout === 'side' ? w * 2 + gap : w; c.height = (o.layout === 'stack' ? h * 2 + gap : h) + capH;
+        const g = c.getContext('2d'); g.fillStyle = '#ffffff'; g.fillRect(0, 0, c.width, c.height); g.imageSmoothingQuality = 'high';
+        const lab = (t, x, y, align = 'left') => { if (!o.labels) return; g.save(); g.font = `700 ${fs}px system-ui, Arial, sans-serif`; const tw = g.measureText(t).width, px = fs * 0.45, bw = tw + px * 2, bh = fs * 1.5, bx = align === 'right' ? x - bw : x; g.fillStyle = 'rgba(0,0,0,.55)'; g.beginPath(); g.roundRect ? g.roundRect(bx, y, bw, bh, bh / 2) : g.rect(bx, y, bw, bh); g.fill(); g.fillStyle = '#fff'; g.textBaseline = 'middle'; g.fillText(t, bx + px, y + bh / 2); g.restore(); };
+        const m = fs * 0.6;
+        if (o.layout === 'side' || o.layout === 'stack') {
+            g.drawImage(before, 0, 0, w, h); const x2 = o.layout === 'side' ? w + gap : 0, y2 = o.layout === 'stack' ? h + gap : 0; g.drawImage(after, x2, y2, w, h);
+            lab('Avant', m, m); lab('Après', x2 + m, y2 + m);
+        } else {
+            const vert = o.layout !== 'curtain-h', p = Math.min(1, Math.max(0, o.pos ?? 0.5));
+            g.drawImage(after, 0, 0, w, h); g.save(); g.beginPath(); vert ? g.rect(0, 0, w * p, h) : g.rect(0, 0, w, h * p); g.clip(); g.drawImage(before, 0, 0, w, h); g.restore();
+            g.save(); g.strokeStyle = '#fff'; g.lineWidth = Math.max(2, Math.round(fs / 8)); g.shadowColor = 'rgba(0,0,0,.6)'; g.shadowBlur = fs / 3; g.beginPath(); if (vert) { g.moveTo(w * p, 0); g.lineTo(w * p, h); } else { g.moveTo(0, h * p); g.lineTo(w, h * p); } g.stroke(); g.restore();
+            lab('Avant', m, m); if (vert) lab('Après', w - m, m, 'right'); else lab('Après', m, h - m - fs * 1.5);
+        }
+        if (cap) { g.fillStyle = '#222'; g.font = `500 ${Math.round(fs * 0.9)}px Georgia, "Times New Roman", serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(cap.length > 160 ? cap.slice(0, 159) + '…' : cap, c.width / 2, c.height - capH / 2, c.width - fs * 2); }
+        return c;
+    }
+    const canvasBlob = (c, type = 'image/jpeg', q = 0.92) => new Promise((ok, ko) => c.toBlob(b => (b ? ok(b) : ko(new Error('Image trop grande pour le navigateur.'))), type, q));
+    const saveBlobAs = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
+    /** 🖨 Imprimer une image (une page, centrée) sans quitter l'outil */
+    const printBlob = (blob, title = 'Image') => new Promise(res => {
+        const url = URL.createObjectURL(blob), f = document.createElement('iframe'); f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(f);
+        const doc = f.contentDocument; doc.open(); doc.write(`<!doctype html><title>${esc(title)}</title><style>@page{margin:10mm}html,body{margin:0}img{display:block;max-width:100%;max-height:96vh;margin:auto}</style><img alt="" src="${url}">`); doc.close();
+        const im = doc.querySelector('img'), go = () => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (_) {} setTimeout(() => { f.remove(); URL.revokeObjectURL(url); res(); }, 1500); };
+        if (im.complete) go(); else { im.onload = go; im.onerror = go; }
+    });
+    /** Une copie de l'image dans les médias, rattachée aux mêmes fiches que le média de départ (ou seule, sans média de départ) */
+    async function rtUploadCopy(blob, {mediaId = 0, title = 'Image'} = {}) {
+        const fd = new FormData(), ext0 = blob.type === 'image/png' ? 'png' : 'jpg'; fd.append('file', blob, 'export.' + ext0); fd.append('title', String(title).slice(0, 300)); fd.append('csrf', A().state.csrf);
+        if (mediaId) { fd.append('media_id', mediaId); fd.append('mode', 'copy'); fd.append('show', '0'); } else fd.append('kind', 'image');
+        const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
+        if (!r.ok || j.error) throw new Error(j.error || 'Copie impossible.');
+        return j.result;
+    }
+    ext.rtUploadCopy = rtUploadCopy;
+    /** Une image glissée ou collée dans un outil entre dans les médias (sans fiche) : renvoie {media_id, filename} */
+    ext.rtImportImage = async file => rtUploadCopy(file, {title: String(file.name || 'Image importée').replace(/\.[a-z0-9]{2,5}$/i, '')});
+    /** ⤓ La fenêtre d'export unique pour une image faite par un outil (PNG, JPG, imprimer ; copie dans les médias) */
+    ext.rtExportImage = ({title = 'Image', render, mediaId = 0, copyTitle = '', png = false} = {}) => {
+        ext.rtEnsureCss();
+        const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return toast('La fenêtre d’export n’est pas encore prête.', 'error');
+        let cache = null; const full = async () => (cache = cache || await render());
+        const run = type => async o => {
+            let c = await full();
+            if (o.format === 'print' || type === 'image/jpeg') { const w = document.createElement('canvas'); w.width = c.width; w.height = c.height; const g = w.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, w.width, w.height); g.drawImage(c, 0, 0); c = w; } // le JPG n'a pas de transparence : fond blanc
+            if (o.format === 'print') return printBlob(await canvasBlob(c, 'image/jpeg', 0.95), title);
+            const blob = await canvasBlob(c, type, 0.93); saveBlobAs(blob, o.filename);
+            if (o.saveCopy) { await rtUploadCopy(blob, {mediaId, title: copyTitle || title}); toast('Image téléchargée ; une copie est rangée dans les médias.'); }
+        };
+        return UI.openExportDialog({title, defaultName: title, quality: false, saveCopy: !!mediaId, info: '',
+            preview: async () => { const c = await full(), k = Math.min(1, 360 / Math.max(c.width, c.height)), t = document.createElement('canvas'); t.width = Math.max(1, Math.round(c.width * k)); t.height = Math.max(1, Math.round(c.height * k)); t.getContext('2d').drawImage(c, 0, 0, t.width, t.height); return t.toDataURL('image/jpeg', 0.85); },
+            formats: [{id: png ? 'png' : 'jpg', run: run(png ? 'image/png' : 'image/jpeg')}, {id: png ? 'jpg' : 'png', run: run(png ? 'image/jpeg' : 'image/png')}, {id: 'print', run: run('print')}]});
+    };
+    /** ◧ Exporter l'avant / après : la fenêtre d'export unique, avec la disposition, la position du rideau et la légende dans l'aperçu */
+    ext.rtBeforeAfterExport = ({title = 'Photo', getBefore, getAfter, mediaId = 0, pos = 0.5, vertical = true, layout = ''} = {}) => {
+        ext.rtEnsureCss();
+        const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return toast('La fenêtre d’export n’est pas encore prête.', 'error');
+        const o = {layout: layout || (vertical ? 'curtain-v' : 'curtain-h'), pos, caption: title, labels: true};
+        let src = null; const both = async () => (src = src || await Promise.all([getBefore(), getAfter()]));
+        const small = async () => { const [b, a] = await both(), k = Math.min(1, 900 / Math.max(a.width, a.height)), sz = c => { const t = document.createElement('canvas'); t.width = Math.max(1, Math.round(a.width * k)); t.height = Math.max(1, Math.round(a.height * k)); t.getContext('2d').drawImage(c, 0, 0, t.width, t.height); return t; }; return [sz(b), sz(a)]; };
+        let smallP = null;
+        const box = document.createElement('div'); box.className = 'h-ba-exp';
+        const pimg = document.createElement('img'); pimg.alt = 'Aperçu de l’avant / après'; pimg.className = 'h-ba-prev';
+        box.innerHTML = `<label>Disposition <select data-ba-layout><option value="curtain-v">Rideau vertical (avant à gauche)</option><option value="curtain-h">Rideau horizontal (avant en haut)</option><option value="side">Côte à côte</option><option value="stack">L’une sous l’autre</option></select></label>
+            <label data-ba-posrow>Position du rideau <input type="range" min="5" max="95" value="${Math.round(pos * 100)}" data-ba-pos data-unit="%"></label>
+            <label>Légende <input type="text" maxlength="160" data-ba-cap value="${esc(title)}" placeholder="ex. Mariage de Jean et Marie, 1925"></label>
+            <label class="checkbox-line"><input type="checkbox" data-ba-labels checked> Écrire « Avant » et « Après »</label>`;
+        const $ = s => box.querySelector(s);
+        $('[data-ba-layout]').value = o.layout;
+        let tm = 0; const redraw = async () => { $('[data-ba-posrow]').hidden = !o.layout.startsWith('curtain'); try { smallP = smallP || small(); const [b, a] = await smallP; pimg.src = rtCompose(b, a, o, 900).toDataURL('image/jpeg', 0.85); } catch (err) { pimg.alt = err.message; } };
+        box.addEventListener('input', e => { if (e.target.matches('[data-ba-pos]')) o.pos = Number(e.target.value) / 100; if (e.target.matches('[data-ba-cap]')) o.caption = e.target.value; clearTimeout(tm); tm = setTimeout(redraw, 120); });
+        box.addEventListener('change', e => { if (e.target.matches('[data-ba-layout]')) o.layout = e.target.value; if (e.target.matches('[data-ba-labels]')) o.labels = e.target.checked; redraw(); });
+        const run = type => async x => {
+            const [b, a] = await both(), c = rtCompose(b, a, o);
+            if (x.format === 'print') return printBlob(await canvasBlob(c, 'image/jpeg', 0.95), title);
+            const blob = await canvasBlob(c, type, 0.93); saveBlobAs(blob, x.filename);
+            if (x.saveCopy) { await rtUploadCopy(blob, {mediaId, title: `${title} (avant / après)`}); toast('Avant / après téléchargé ; une copie est rangée dans les médias.'); }
+        };
+        return UI.openExportDialog({title: `Avant / après — ${title}`, defaultName: `${title} avant-apres`, quality: false, saveCopy: !!mediaId, info: '',
+            preview: async () => { // les réglages de l'avant / après vont sous les formats ; l'aperçu à droite
+                const main = [...document.querySelectorAll('dialog.ui-export')].pop()?.querySelector('.ui-export-formats'); if (main) main.after(box); else pimg.after(box);
+                redraw(); return pimg; },
+            formats: [{id: 'jpg', run: run('image/jpeg')}, {id: 'png', run: run('image/png')}, {id: 'print', run: run('print')}]});
+    };
+    /** Boutons « 👁 Avant / après » (garder appuyé), « ◧ Rideau », sens du rideau et export, à poser sous la photo */
+    const rtBaButtons = p => `<span class="h-ba-bar" data-${p}-babar><button type="button" class="button small secondary" data-${p}-before title="Garder appuyé pour voir l’original">👁 Avant / après</button><button type="button" class="button small secondary" data-${p}-curtain title="Comparer avec un rideau qu’on glisse sur la photo">◧ Rideau</button><button type="button" class="button small secondary" data-${p}-curdir hidden title="Rideau vertical ou horizontal">⇅</button><button type="button" class="button small secondary" data-${p}-curexp hidden title="Exporter l’avant / après en image (côte à côte ou rideau, avec légende)">⤓</button></span>`;
+
+    ext.rtBaButtons = rtBaButtons;
+    /* ═══ 🪪 Photo d'identité : le visage cadré au même format pour tous (yeux à la même hauteur, 3:4), puis portrait de la fiche ═══ */
+    const IDP_KEY = 'genealogie-idphoto';
+    const IDP_RATIOS = [['0.75', '3:4 (portrait classique)'], ['0.7778', '35 × 45 mm (photo d’identité)'], ['0.8', '4:5'], ['1', 'Carré']];
+    const idpPrefs = () => { let v = {}; try { v = JSON.parse(localStorage.getItem(IDP_KEY) || '{}') || {}; } catch (_) {} return {ratio: IDP_RATIOS.some(r => Number(r[0]) === Number(v.ratio)) ? Number(v.ratio) : 0.75, eye: Math.min(0.6, Math.max(0.25, Number(v.eye) || 0.42)), margin: Math.min(100, Math.max(0, Number.isFinite(Number(v.margin)) ? Number(v.margin) : 45))}; };
+    const idpSave = p => lsSet(IDP_KEY, JSON.stringify({ratio: p.ratio, eye: p.eye, margin: p.margin}));
+    /** Le cadre (comme un recadrage : x, y, w, h relatifs, a en degrés) qui met les yeux à l'horizontale, à la hauteur voulue */
+    function idpCrop(eyes, W, H, p) {
+        const [[lx, ly], [rx, ry]] = eyes[0][0] <= eyes[1][0] ? eyes : [eyes[1], eyes[0]];
+        const tilt = Math.atan2(ry - ly, rx - lx), a = -tilt * 180 / Math.PI, th = a * Math.PI / 180, cx = W / 2, cy = H / 2;
+        const mx = (lx + rx) / 2 - cx, my = (ly + ry) / 2 - cy, Mx = mx * Math.cos(th) - my * Math.sin(th) + cx, My = mx * Math.sin(th) + my * Math.cos(th) + cy;
+        const D = Math.max(4, Math.hypot(rx - lx, ry - ly)), hc = D * (3.4 + p.margin / 100 * 3.2), wc = hc * p.ratio;
+        return {x: (Mx - wc / 2) / W, y: (My - p.eye * hc) / H, w: wc / W, h: hc / H, a: Math.round(a * 10) / 10};
+    }
+    /** L'image recadrée (cadre tourné, fond blanc hors de la photo), au plus maxH points de haut */
+    function idpRender(src, W, H, c, maxH = 1600) {
+        const ow = c.w * W, oh = c.h * H, k = Math.min(1, maxH / oh), out = document.createElement('canvas'); out.width = Math.max(1, Math.round(ow * k)); out.height = Math.max(1, Math.round(oh * k));
+        const g = out.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, out.width, out.height); g.imageSmoothingQuality = 'high'; g.scale(k, k);
+        g.translate(-c.x * W, -c.y * H); g.translate(W / 2, H / 2); g.rotate(c.a * Math.PI / 180); g.translate(-W / 2, -H / 2); g.drawImage(src, 0, 0, W, H); return out;
+    }
+    /** Les yeux d'un visage sur une image (en points de l'image) : le modèle de reconnaissance des visages de l'app
+     *  (heritage-faces.js, points du visage) ; sinon la boîte d'une identification (hint, en %) ; sinon null. */
+    async function idpFindEyes(im, {hint = null, onStep = null} = {}) {
+        const W = im.naturalWidth || im.width, H = im.naturalHeight || im.height, fromBox = (b, source) => ({eyes: [[(b.x + b.w * 0.3) * W / 100, (b.y + b.h * 0.42) * H / 100], [(b.x + b.w * 0.7) * W / 100, (b.y + b.h * 0.42) * H / 100]], source});
+        try {
+            const load = ext.faceInternals?.loadModel; if (!load) throw new Error('modèle absent');
+            const F = await Promise.race([load(s => onStep?.(`Modèle des visages : ${s}`)), new Promise((_, ko) => setTimeout(() => ko(new Error('trop long')), 45000))]);
+            onStep?.('Recherche du visage…');
+            const k = Math.min(1, 1600 / Math.max(W, H)), c = document.createElement('canvas'); c.width = Math.round(W * k); c.height = Math.round(H * k); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+            const res = await F.detectAllFaces(c, new F.SsdMobilenetv1Options({minConfidence: 0.35, maxResults: 30})).withFaceLandmarks();
+            const pick = res.map(r => { const b = r.detection.box, bx = {x: b.x / c.width * 100, y: b.y / c.height * 100, w: b.width / c.width * 100, h: b.height / c.height * 100}; const over = hint ? Math.max(0, Math.min(bx.x + bx.w, hint.x + hint.w) - Math.max(bx.x, hint.x)) * Math.max(0, Math.min(bx.y + bx.h, hint.y + hint.h) - Math.max(bx.y, hint.y)) : 0; return {r, bx, score: hint ? over : b.width * b.height}; }).sort((a, b) => b.score - a.score)[0];
+            if (pick && (!hint || pick.score > 0)) {
+                const avg = pts => [pts.reduce((s, q) => s + q.x, 0) / pts.length / k, pts.reduce((s, q) => s + q.y, 0) / pts.length / k];
+                return {eyes: [avg(pick.r.landmarks.getLeftEye()), avg(pick.r.landmarks.getRightEye())], box: pick.bx, source: 'model'};
+            }
+        } catch (_) { /* pas de modèle (pas d'internet la première fois) : la boîte d'une identification */ }
+        if (hint) return fromBox(hint, 'tag');
+        return null;
+    }
+    /** La photo envoyée dans les médias de la fiche (photo de la personne) puis choisie comme portrait (route set_portrait) */
+    async function idpUseAsPortrait(canvas, personId, name = '') {
+        const blob = await canvasBlob(canvas, 'image/jpeg', 0.92), fd = new FormData();
+        fd.append('files[]', blob, 'portrait.jpg'); fd.append('person_id', personId); fd.append('title', `Portrait${name ? ` de ${name}` : ''} (photo d’identité)`); fd.append('is_person_photo', '1'); fd.append('csrf', A().state.csrf);
+        const r = await fetch('upload.php', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
+        if (!r.ok || j.error) throw new Error(j.error || 'Envoi impossible.');
+        const mediaId = Number(j.media?.[0]); if (!mediaId) throw new Error('Photo non enregistrée.');
+        await api('set_portrait', {}, {method: 'POST', body: {person_id: personId, media_id: mediaId}});
+        return mediaId;
+    }
+    ext.idPhoto = {prefs: idpPrefs, crop: idpCrop, render: idpRender, findEyes: idpFindEyes, useAsPortrait: idpUseAsPortrait};
+    /** Choisir la fiche (le menu de choix des personnes), avec une personne proposée d'office */
+    const idpAskPerson = (preset = 0, title = 'Utiliser comme portrait de quelle fiche ?') => new Promise(res => {
+        let done = false, chosen = '';
+        ext.openDialog({eyebrow: 'PHOTO D’IDENTITÉ', title, submitLabel: 'Utiliser comme portrait',
+            body: `<div><span class="pk-lab">Personne</span>${window.LCNDA_PICKER?.pickerField ? window.LCNDA_PICKER.pickerField({name: 'idp_person', kind: 'person', value: preset || ''}) : '<input name="idp_person" type="number">'}</div><p class="muted">La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias).</p>`,
+            onOpen: d => { d.addEventListener('close', () => { if (!done) res(null); }, {once: true}); d.addEventListener('picker-change', e => { chosen = e.detail.item?.title || ''; }); },
+            onSubmit: f => { const id = Number(f.elements.idp_person?.value) || 0; if (!id) { toast('Choisis une personne dans la liste.', 'error'); return false; } done = true; res({id, name: chosen}); }});
+    });
+    ext.idpAskPerson = idpAskPerson;
+
+    /** 🪪 Portraits de plusieurs fiches : chaque portrait (ou photo de la fiche) recadré au même format, à vérifier, puis utilisé */
+    async function idpBatchDialog() {
+        ext.rtEnsureCss(); const P = window.LCNDA_PICKER, p = idpPrefs(); let rows = [], busy = false;
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-modal-wide h-idp-batch';
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE · PHOTO D’IDENTITÉ</span><h2>🪪 Portraits de plusieurs fiches</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            <div class="h-idp-body"><p class="muted">Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste).</p>
+            <div class="h-idp-people">${P?.pickerField ? P.pickerField({name: 'idp_people', kind: 'person', multiple: true}) : ''}</div>
+            <div class="h-idp-opts"><label>Format <select data-idp-ratio>${IDP_RATIOS.map(([v, l]) => `<option value="${v}" ${Number(v) === p.ratio ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <label data-help="De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond.">Marge autour du visage <input type="range" min="0" max="100" value="${p.margin}" data-idp-margin data-unit="%"></label>
+                <label data-help="La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte.">Hauteur des yeux <input type="range" min="25" max="60" value="${Math.round(p.eye * 100)}" data-idp-eye data-unit="%"></label>
+                <button type="button" class="button" data-idp-go>🔍 Préparer les portraits</button></div>
+            <div class="h-idp-state" data-idp-state></div><div class="h-idp-grid" data-idp-grid></div></div>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="button" class="button" data-idp-use disabled>✓ Utiliser comme portraits</button></div>`;
+        document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
+        const $ = s => dlg.querySelector(s), state = $('[data-idp-state]'), grid = $('[data-idp-grid]'), useBtn = $('[data-idp-use]');
+        const opts = () => ({ratio: Number($('[data-idp-ratio]').value) || 0.75, margin: Number($('[data-idp-margin]').value), eye: Number($('[data-idp-eye]').value) / 100});
+        const draw = () => {
+            const ok = rows.filter(r => r.crop && r.use);
+            grid.innerHTML = rows.length ? rows.map((r, i) => `<figure class="h-idp-card${r.crop ? '' : ' is-ko'}" data-i="${i}">${r.thumb ? `<img src="${r.thumb}" alt="">` : `<span class="h-idp-none">${r.crop === undefined ? '…' : '🙈'}</span>`}<figcaption><b>${esc(r.name)}</b><small>${esc(r.note || '')}</small>${r.crop ? `<label class="checkbox-line"><input type="checkbox" data-idp-use1 ${r.use ? 'checked' : ''}> utiliser</label>` : ''}</figcaption></figure>`).join('')
+                : A().emptyState({icon: '🪪', text: 'Aucune fiche choisie pour l’instant', hint: 'Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ».'});
+            useBtn.disabled = busy || !ok.length; useBtn.textContent = ok.length ? `✓ Utiliser comme portraits (${ok.length})` : '✓ Utiliser comme portraits';
+        };
+        const rerender = () => rows.forEach(r => { if (!r.eyes) return; r.crop = idpCrop(r.eyes, r.W, r.H, opts()); r.thumb = idpRender(r.img, r.W, r.H, r.crop, 220).toDataURL('image/jpeg', 0.85); });
+        let tm = 0; dlg.addEventListener('input', e => { if (e.target.closest('[data-idp-margin],[data-idp-eye]') && rows.length) { clearTimeout(tm); tm = setTimeout(() => { rerender(); draw(); }, 150); } });
+        dlg.addEventListener('change', e => { if (e.target.matches('[data-idp-ratio]') && rows.length) { rerender(); draw(); } if (e.target.matches('[data-idp-use1]')) { rows[Number(e.target.closest('[data-i]').dataset.i)].use = e.target.checked; draw(); } });
+        dlg.addEventListener('click', async e => {
+            if (e.target.closest('[data-x]')) { if (busy) return; dlg.close(); return; }
+            if (e.target.closest('[data-idp-go]')) {
+                const ids = String(dlg.querySelector('[name="idp_people"]')?.value || '').split(',').map(Number).filter(Boolean);
+                if (!ids.length) return toast('Choisis d’abord une ou plusieurs fiches.', 'error');
+                busy = true; idpSave(opts()); rows = ids.map(id => ({id, name: `Fiche ${id}`})); draw();
+                for (const [i, r] of rows.entries()) {
+                    state.innerHTML = window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(`${i + 1} / ${rows.length} · ${r.name}`) : esc(r.name);
+                    try {
+                        const d = await api('person', {id: r.id}), pe = d.person || {}; r.name = `${pe.first_name || ''} ${pe.last_name || ''}`.trim() || r.name;
+                        const imgs = (d.media || []).filter(m => (m.media_type || 'image') === 'image' && /\.(jpe?g|png|webp)$/i.test(m.filename || ''));
+                        // le portrait d'abord, puis les photos où la personne est identifiée (la boîte de son visage aide quand le modèle manque)
+                        const portrait = imgs.find(x => Number(x.id) === Number(pe.portrait_media_id)) || null; let m = null, hint = null;
+                        for (const x of [...(portrait ? [portrait] : []), ...imgs.filter(y => y !== portrait)].slice(0, 12)) { const t = ((await api('media_tags', {media_id: x.id})).tags || []).find(t => Number(t.person_id) === r.id && t.tag_type === 'person'); if (t) { m = x; hint = {x: Number(t.x), y: Number(t.y), w: Number(t.w), h: Number(t.h)}; break; } }
+                        m = m || portrait || imgs[0]; if (!m) { r.crop = null; r.note = 'aucune photo dans la fiche'; draw(); continue; }
+                        const im = new Image(); im.src = `media/${encodeURIComponent(m.filename)}`; await im.decode();
+                        const f = await idpFindEyes(im, {hint, onStep: s => { state.innerHTML = window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(`${r.name} · ${s}`) : esc(s); }});
+                        r.img = im; r.W = im.naturalWidth; r.H = im.naturalHeight; r.media = m;
+                        if (!f) { r.eyes = [[r.W * 0.43, r.H * 0.36], [r.W * 0.57, r.H * 0.36]]; r.use = false; r.note = `⚠️ visage non trouvé sur « ${m.title || m.filename} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse)`; rerender(); draw(); continue; }
+                        r.eyes = f.eyes; r.use = true; r.note = `${m.title || m.filename} · ${f.source === 'model' ? 'yeux trouvés' : 'd’après l’identification'}`; rerender(); draw();
+                    } catch (err) { r.crop = null; r.note = err.message; draw(); }
+                }
+                busy = false; const n = rows.filter(r => r.crop && r.use).length, chk = rows.filter(r => r.crop && !r.use).length;
+                state.innerHTML = window.LCNDA_UI?.notice ? window.LCNDA_UI.notice(n ? 'ok' : 'warn', `${n ? `${A().plural(n, 'portrait prêt', 'portraits prêts')} : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ».` : 'Aucun visage trouvé tout seul.'}${chk ? ` ${A().plural(chk, 'autre est', 'autres sont')} cadré${chk > 1 ? 's' : ''} au centre : coche-le${chk > 1 ? 's' : ''} seulement s’il${chk > 1 ? 's vont' : ' va'}.` : ''}`) : ''; draw(); return;
+            }
+            if (e.target.closest('[data-idp-use]')) {
+                const list = rows.filter(r => r.crop && r.use); if (!list.length) return;
+                busy = true; draw(); let ok = 0;
+                for (const [i, r] of list.entries()) {
+                    state.innerHTML = window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(`${i + 1} / ${list.length} · ${r.name}`) : '';
+                    try { await idpUseAsPortrait(idpRender(r.img, r.W, r.H, r.crop), r.id, r.name); ok++; r.note = '✓ portrait mis à jour'; r.use = false; } catch (err) { r.note = `⛔ ${err.message}`; }
+                    draw();
+                }
+                busy = false; state.innerHTML = window.LCNDA_UI?.notice ? window.LCNDA_UI.notice(ok === list.length ? 'ok' : 'warn', `${A().plural(ok, 'portrait mis à jour', 'portraits mis à jour')} sur ${list.length}.`) : ''; draw();
+                toast(`${A().plural(ok, 'portrait mis à jour', 'portraits mis à jour')}.`);
+                const S0 = A().state; if (S0.currentPersonId && S0.module === 'personnes') A().selectPerson?.(S0.currentPersonId, false);
+            }
+        });
+        draw();
+    }
+    ext.openIdPhotoBatch = idpBatchDialog;
+
+    /* ═══ Styles des nouveautés de la retouche (barre du haut, rideau, réparer, restaurer, photo d'identité) ═══ */
+    const RT_CSS = `
+.h-rt-topbar{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}
+.h-rt-topbar .ui-topbar-name{width:150px;max-width:24vw}
+.h-rt-topbar .h-rt-menubar summary{padding-left:6px;padding-right:6px}
+.h-rt-topbar .h-rt-menubar{margin:0;padding:0;border:0}
+.h-rt-topbar .spacer{flex:1 1 auto}
+.h-rt-exportmenu{position:relative}
+.h-rt-exportmenu>summary{list-style:none;cursor:pointer;font-weight:700;font-size:12.5px;padding:6px 10px;border:1px solid #c9ced6;border-radius:6px;background:#fff;white-space:nowrap}
+.h-rt-exportmenu>summary::-webkit-details-marker{display:none}
+.h-rt-exportmenu>.h-rt-menulist{right:0;left:auto;min-width:290px}
+.h-ba-bar{display:inline-flex;gap:4px;flex-wrap:wrap;align-items:center}
+.h-rt2 .h-ba-bar{position:sticky;left:10px;bottom:10px;float:left;margin-top:-44px;z-index:6}
+.h-retouch-simple .h-ba-bar{position:absolute;left:10px;bottom:10px;z-index:6}
+.h-ba-bar .is-active{background:#111;color:#fff}
+.h-ba-before{position:absolute;pointer-events:none;z-index:4;image-rendering:auto}
+.h-ba-line{position:absolute;z-index:5;width:0;cursor:ew-resize;touch-action:none}
+.h-ba-line::before{content:"";position:absolute;top:0;bottom:0;left:-1px;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.45)}
+.h-ba-line::after{content:"";position:absolute;top:0;bottom:0;left:-10px;width:20px}
+.h-ba-line.is-h{height:0;cursor:ns-resize}
+.h-ba-line.is-h::before{left:0;right:0;top:-1px;bottom:auto;width:auto;height:2px}
+.h-ba-line.is-h::after{left:0;right:0;top:-10px;bottom:auto;width:auto;height:20px}
+.h-ba-grip{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.4);z-index:1}
+.h-ba-line.is-h .h-ba-grip{left:50%;top:0;transform:translate(-50%,-50%) rotate(90deg)}
+.h-ba-lab{position:absolute;top:8px;font:700 12px system-ui,sans-serif;color:#fff;background:rgba(0,0,0,.55);padding:3px 8px;border-radius:10px;white-space:nowrap;pointer-events:none}
+.h-ba-lab.is-before{right:10px}.h-ba-lab.is-after{left:10px}
+.h-ba-line.is-h .h-ba-lab{top:auto;left:8px;right:auto}.h-ba-line.is-h .h-ba-lab.is-before{bottom:8px}.h-ba-line.is-h .h-ba-lab.is-after{top:8px}
+.h-ba-exp{display:grid;gap:8px;font-size:13px}
+.h-ba-prev{display:block;width:100%;max-height:340px;object-fit:contain;background:#f3f3f3}
+.h-ba-exp{margin:10px 0}
+.h-ba-exp label{display:grid;gap:3px}.h-ba-exp label.checkbox-line{display:flex}
+.h-rt-panel2{width:min(380px,92%)}
+.h-rt-panel2 h4{margin:.2rem 0 .4rem}
+.h-ra-steps{list-style:none;margin:.4rem 0;padding:0;display:grid;gap:6px}
+.h-ra-step{display:grid;grid-template-columns:auto 1fr;gap:4px 8px;align-items:center;border:1px solid #e1e4e8;border-radius:8px;padding:6px 8px}
+.h-ra-step.is-off{opacity:.55}
+.h-ra-step small{grid-column:2;color:#6b7280}
+.h-ra-thumbs{grid-column:1/-1;display:flex;gap:6px;align-items:center}
+.h-ra-thumbs canvas{width:calc(50% - 10px);height:auto;border:1px solid #ddd;border-radius:4px;background:#f3f3f3}
+.h-ra-thumbs span{color:#888}
+.h-rt-panelbtns{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:.5rem}
+.h-as-head{padding:12px 18px 6px}
+.h-as .ui-section{padding:6px 2px}
+.h-rt-raone{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 8px}
+.h-rt-fontrow{display:inline-flex;gap:6px;align-items:center}
+.h-rt-fontrow button{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-rt-panelbtns .spacer{flex:1}
+.h-idp-body{padding:0 18px 8px;display:grid;gap:10px}
+.h-idp-opts{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:end}
+.h-idp-opts label{display:grid;gap:3px;font-size:13px}
+.h-idp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;max-height:46vh;overflow:auto}
+.h-idp-card{margin:0;border:1px solid #e1e4e8;border-radius:8px;padding:6px;display:grid;gap:4px;background:#fff}
+.h-idp-card img{width:100%;aspect-ratio:3/4;object-fit:contain;background:#f3f3f3;border-radius:4px}
+.h-idp-card.is-ko{opacity:.7}
+.h-idp-none{display:flex;align-items:center;justify-content:center;aspect-ratio:3/4;background:#f3f3f3;border-radius:4px;font-size:30px}
+.h-idp-card figcaption{display:grid;gap:2px;font-size:12px}
+.h-idp-card small{color:#6b7280}
+.h-idp-prev{display:block;margin:.4rem auto;max-width:100%;max-height:220px;border:1px solid #ddd;background:#f3f3f3}
+.h-rt-panel2 label{display:grid;gap:3px;margin:.3rem 0;font-size:13px}.h-rt-panel2 label.checkbox-line{display:flex}
+@media (max-width:640px){.h-rt-topbar .ui-topbar-name{width:130px}.h-rt-panel2{left:8px;right:8px;width:auto}}
+:root[data-theme="dark"] .h-rt-exportmenu>summary{background:#24272c;border-color:#3a3f46;color:#e8e8e8}
+:root[data-theme="dark"] .h-ra-step,:root[data-theme="dark"] .h-idp-card{border-color:#3a3f46;background:#24272c}
+:root[data-theme="dark"] .h-ra-step small,:root[data-theme="dark"] .h-idp-card small{color:#a8b0bb}
+:root[data-theme="dark"] .h-ra-thumbs canvas,:root[data-theme="dark"] .h-idp-card img,:root[data-theme="dark"] .h-idp-none,:root[data-theme="dark"] .h-ba-prev,:root[data-theme="dark"] .h-idp-prev{background:#1b1d21;border-color:#3a3f46}
+`;
+    ext.rtEnsureCss = () => { if (document.getElementById('h-rt-css2')) return; const s = document.createElement('style'); s.id = 'h-rt-css2'; s.textContent = RT_CSS; document.head.appendChild(s); };
+    /* 💾 Réglages enregistrés : un fichier par réglage (⤓ Exporter / ⤒ Importer un réglage), par les outils communs de l'app */
+    ext.reglageExport = (outil, nom, donnees) => { if (A().exportSettingFile) return A().exportSettingFile(outil, nom, donnees); downloadText(`lcnda-reglage-${slug(outil)}-${slug(nom)}.json`, JSON.stringify({lcnda: 'reglage', outil, nom, version: 1, donnees}, null, 1)); };
+    ext.reglageImport = (outil, opts = {}) => { if (A().importSettingFile) return A().importSettingFile(outil, opts); toast('Import des réglages indisponible.', 'error'); return Promise.resolve(null); };
     const rtClone = v => JSON.parse(JSON.stringify(v));
 
     /** Retouche d'une photo : on part de la version affichée (ou d'une autre, `source`), le résultat devient une nouvelle version.
@@ -888,13 +1368,13 @@
         ['frame', '⌗ Cadrer et redresser', 'Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte.', '<button type="button" class="button small" data-rt-cmd="straighten:auto">📐 Redresser tout seul</button><button type="button" class="button small secondary" data-rt-cmd="mode:crop">⌗ Recadrer</button><button type="button" class="button small secondary" data-rt-cmd="mode:persp">⧈ Photo prise de biais</button>'],
         ['color', '🎨 Couleurs passées, photo jaunie', 'Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste.', '<button type="button" class="button small" data-rt-cmd="restore:yellow">🟨 Enlever le jaunissement</button><button type="button" class="button small secondary" data-rt-cmd="preset:1">✨ Raviver une vieille photo</button><button type="button" class="button small secondary" data-rt-cmd="preset:0">Réglage automatique</button>'],
         ['spots', '🧹 Poussières et petites taches', 'Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main.', '<label class="h-rt-slider"><span>Sensibilité <output data-rt-spotf-out>50</output></span><input type="range" min="1" max="100" value="50" data-rt-spotf></label><label class="h-rt-slider"><span>Taille maximale d’une tache <output data-rt-spots-out>6</output></span><input type="range" min="2" max="20" value="6" data-rt-spots></label><button type="button" class="button small" data-rt-cmd="restore:spots">🔍 Repérer et enlever les taches</button><button type="button" class="button small secondary" data-rt-cmd="mode:heal">🩹 Correcteur à la main</button><button type="button" class="button small secondary" data-rt-cmd="fx:dust">Filtre poussière et rayures</button>'],
-        ['tears', '🩹 Déchirures, plis, rayures', 'Avec le correcteur, glisse le long d’une rayure ou d’un pli : il est comblé par ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine.', '<button type="button" class="button small" data-rt-cmd="restore:tear">🩹 Correcteur pour les rayures</button><button type="button" class="button small secondary" data-rt-cmd="mode:clone">🧬 Tampon (morceau manquant)</button><button type="button" class="button small secondary" data-rt-cmd="mode:lasso">➰ Entourer une zone…</button>'],
+        ['tears', '🩹 Déchirures, plis, rayures', '« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine.', '<button type="button" class="button small" data-rt-cmd="repair:detect">🔍 Repérer les plis et rayures</button><button type="button" class="button small secondary" data-rt-cmd="mode:repair">🪡 Réparer au pinceau</button><button type="button" class="button small secondary" data-rt-cmd="restore:tear">🩹 Correcteur</button><button type="button" class="button small secondary" data-rt-cmd="mode:clone">🧬 Tampon (morceau manquant)</button><button type="button" class="button small secondary" data-rt-cmd="mode:lasso">➰ Entourer une zone…</button>'],
         ['grain', '🌫️ Grain et bruit', 'Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours.', '<button type="button" class="button small" data-rt-cmd="fx:denoise2">Réduire le bruit…</button><button type="button" class="button small secondary" data-rt-cmd="fx:surface">Flou de surface (garde les contours)…</button><button type="button" class="button small secondary" data-rt-cmd="fx:median">Médiane…</button>'],
         ['face', '🙂 Netteté des visages', 'Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser).', '<button type="button" class="button small secondary" data-rt-cmd="mode:ellipsesel">◯ Entourer le visage</button><button type="button" class="button small" data-rt-cmd="restore:face">✨ Visage plus net</button><button type="button" class="button small secondary" data-rt-cmd="sel:subject">🎯 Sélectionner le sujet</button>'],
         ['colorize', '🌈 Coloriser une photo en noir et blanc', 'Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée.', '<button type="button" class="button small" data-rt-cmd="colorize:auto">🎨 Coloriser tout seul</button><button type="button" class="button small secondary" data-rt-cmd="colorize:paint">🖌 Coloriser au pinceau</button><div class="h-rt-palette">' + RT_PALETTE.map(([c, l]) => `<button type="button" data-rt-cmd="restore:color:${c}" style="background:${c}" title="${l}"></button>`).join('') + '</div>'],
-        ['save', '✅ Comparer et enregistrer', 'Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer. La photo restaurée devient une nouvelle version : l’original reste.', '<button type="button" class="button small" data-rt-cmd="save:show">💾 Enregistrer et afficher</button><button type="button" class="button small secondary" data-rt-cmd="proj:save">Garder le travail pour plus tard</button>'],
+        ['save', '✅ Comparer et enregistrer', 'Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste.', '<button type="button" class="button small" data-rt-cmd="save:show">💾 Enregistrer et afficher</button><button type="button" class="button small secondary" data-rt-cmd="proj:save">Garder le travail pour plus tard</button>'],
     ];
-    async function openRetouch(source = '', project = null, {advanced = false, tab = ''} = {}) {
+    async function openRetouch(source = '', project = null, {advanced = false, tab = '', restoreAll = false, idphoto = false} = {}) {
         // la retouche simple (celle de la 0.5.0) si c'est la dernière choisie ; un projet s'ouvre toujours ici
         let mode0 = ''; try { mode0 = localStorage.getItem('genealogie-retouch-mode') || ''; } catch (_) {}
         if (!project && !advanced && mode0 !== 'advanced' && ext.openRetouchSimple) return ext.openRetouchSimple(source);
@@ -916,43 +1396,45 @@
         const hist = new Array(256).fill(0); for (let i = 0; i < srcData.data.length; i += 4) hist[Math.round(0.299 * srcData.data[i] + 0.587 * srcData.data[i + 1] + 0.114 * srcData.data[i + 2])]++;
         const hmax = Math.max(...hist.slice(2, 254), 1);
         const histPath = 'M0,256 ' + hist.map((h, x) => `L${x},${256 - Math.min(256, h / hmax * 230)}`).join(' ') + ' L255,256 Z';
-        const TOOLS = [['adjust', '🎚', 'Réglages'], ['heal', '🩹', 'Correcteur de taches'], ['clone', '🧬', 'Tampon'], ['brush', '🖌', 'Pinceau'], ['eraser', '🧽', 'Gomme'], ['text', '🔤', 'Texte'], ['hand', '✋', 'Déplacer la vue']];
+        const TOOLS = [['adjust', '🎚', 'Réglages'], ['heal', '🩹', 'Correcteur de taches'], ['repair', '🪡', 'Réparer'], ['clone', '🧬', 'Tampon'], ['brush', '🖌', 'Pinceau'], ['eraser', '🧽', 'Gomme'], ['text', '🔤', 'Texte'], ['hand', '✋', 'Déplacer la vue']];
         // la colonne d'outils (comme l'atelier de mise en page) : sélectionner, recadrer, retoucher, dessiner, écrire
         const VTOOLS = [['move', '➤', 'Déplacer un élément d’un calque (V)', 'v'], ['marquee', '⬚', 'Sélection rectangle (M)', 'm'], ['ellipsesel', '◯', 'Sélection ellipse (⇧M)', ''], ['lasso', '➰', 'Lasso : entourer à main levée (L)', 'l'], ['polysel', '✒︎', 'Plume : sélection point par point (P) — double-clic ou Entrée pour fermer', 'p'], ['wand', '🪄', 'Sélection automatique (baguette magique) (W)', 'w'], ['crop', '⌗', 'Recadrer et redresser (C)', 'c'],
-            ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['eraser', '🧽', 'Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu)', 'e'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main, ou barre d’espace (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
+            ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['repair', '🪡', 'Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours', 'r'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['eraser', '🧽', 'Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu)', 'e'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main, ou barre d’espace (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
         const MENUS = [
-            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['download:png', 'Télécharger en PNG'], ['download:jpg', 'Télécharger en JPG'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
+            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '◧ Exporter l’avant / après…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'],
-                ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['reset', 'Remettre comme au départ']]],
+                ['restore:all', '✨ Restaurer en une fois…'], ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['repair:detect', '🔍 Repérer les plis et rayures…'], ['mode:repair', '🪡 Réparer au pinceau (plis, déchirures)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['idphoto', '🪪 Recadrer en photo d’identité…'], ['idbatch', '🪪 Portraits de plusieurs fiches…'], ['-'], ['reset', 'Remettre comme au départ']]],
             ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['img:place', '🖼️ Placer une image…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:subject', '🎯 Sélectionner le sujet (automatique)'], ['-'], ['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['fx:last', '↻ Refaire le dernier filtre', '⌘F'], ['-'], ...['Flou', 'Bruit', 'Netteté', 'Esthétiques', 'Artistiques', 'Pixellisation', 'Rendu', 'Déformation', 'Autres'].map(cat => ['>', cat, Object.entries(RT_FX).filter(([, f]) => f[0] === cat).map(([k, f]) => ['fx:' + k, f[1] + '…'])]),
                 ['-'], ['tab:filters', '✨ Filtres rapides et filtres du calque (panneau)'], ['filters:reset', 'Enlever les filtres rapides']]],
-            ['Affichage', [['side:toggle', 'Replier / ouvrir le panneau de droite', 'Tab'], ['-'], ['zoom:in', 'Zoom avant', '+'], ['zoom:out', 'Zoom arrière', '−'], ['zoom:fit', 'Toute l’image', '0'], ['zoom:100', 'Taille réelle', '1']]],
+            ['Affichage', [['side:toggle', 'Replier / ouvrir le panneau de droite', 'Tab'], ['curtain', '◧ Avant / après en rideau'], ['-'], ['zoom:in', 'Zoom avant', '+'], ['zoom:out', 'Zoom arrière', '−'], ['zoom:fit', 'Toute l’image', '0'], ['zoom:100', 'Taille réelle', '1']]],
         ];
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch h-rt2'; dlg.dataset.ownClose = '1'; // il demande lui-même avant de fermer
-        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : k === '>' ? `<div class="h-rt-sub"><button type="button" class="h-rt-subh"><span>${esc(t)}</span><kbd>▸</kbd></button><div class="h-rt-menulist h-rt-sublist">${sc.map(([k2, t2]) => `<button type="button" data-rt-cmd="${k2}"><span>${esc(t2)}</span></button>`).join('')}</div></div>` : `<button type="button" data-rt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="spacer"></span><button type="button" class="button small secondary" data-rt-cmd="simple" title="La retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons">⚡ Retouche rapide</button>${ext.tbButton('retouch')}${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
+        // E1 : icône · nom tapable · menus · ↶ ↷ · … · ✓ Enregistré · ⚙️ Personnaliser · ⤓ Exporter ▾ · 💾 Enregistrer · ⛶ · ×
+        const sec = (title, key, body, open = true) => window.LCNDA_UI?.panelSection ? window.LCNDA_UI.panelSection({title, key, open, body}) : `<details ${open ? 'open' : ''}><summary>${esc(title)}</summary>${body}</details>`;
+        dlg.innerHTML = `<div class="h-rt-head h-rt-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name" data-rt-name value="${esc(project?.name || item.title || item.filename || 'Photo')}" maxlength="160" aria-label="Nom du projet de retouche" title="Le nom du projet de retouche (tape pour le changer)"><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : k === '>' ? `<div class="h-rt-sub"><button type="button" class="h-rt-subh"><span>${esc(t)}</span><kbd>▸</kbd></button><div class="h-rt-menulist h-rt-sublist">${sc.map(([k2, t2]) => `<button type="button" data-rt-cmd="${k2}"><span>${esc(t2)}</span></button>`).join('')}</div></div>` : `<button type="button" data-rt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="ui-topbar-hist h-rt-hist-btns"><button type="button" class="icon-button small" data-rt-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rt-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span><button type="button" class="button small secondary" data-rt-cmd="simple" title="Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons">⚡ Rapide</button><span class="spacer"></span><span class="ui-status" data-ui-status data-rt-status></span>${ext.tbButton('retouch')}<details class="h-rt-menu h-rt-exportmenu"><summary title="Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rt-cmd="export:image"><span>🖼 L’image retouchée (PNG, JPG, imprimer)…</span></button><button type="button" data-rt-cmd="export:ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details><button type="button" class="button small" data-rt-projsave data-ui-cmd="save" title="Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer" title="Fermer">×</button></div>
             <div class="h-rt-bar" data-tbg="rt-bar" data-tbg-label="Barre du haut (groupes)">
                 <span class="h-rt-modes" role="toolbar" data-tb="modes" data-tb-label="Les outils" data-tbg="rt-modes" data-tbg-label="Outils">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(l)}" data-shortcut="${esc((VTOOLS.find(v => v[0] === k)?.[3] || '').toUpperCase())}">${i} ${esc(l)}</button>`).join('')}</span>
-                <span class="h-rt-hist-btns"><button type="button" class="button small secondary" data-rt-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="button small secondary" data-rt-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span>
                 <span class="h-rt-zoom"><button type="button" class="button small secondary" data-rt-zoom="-1" title="Dézoomer (−)" data-shortcut="−">−</button><output data-rt-zoomout>100 %</output><button type="button" class="button small secondary" data-rt-zoom="1" title="Zoomer (+)" data-shortcut="+">+</button><button type="button" class="button small secondary" data-rt-zoomfit title="Toute l’image (0)" data-shortcut="0">Ajuster</button><button type="button" class="button small secondary" data-rt-zoom100 title="Taille réelle (1)" data-shortcut="1">1:1</button></span>
             </div>
             <div class="h-rt-opts" data-rt-opts hidden data-tbg="rt-opts" data-tbg-label="Options des outils (pinceau, texte…)">
                 <label data-o="size">Taille <input type="range" min="1" max="200" value="18" data-rt-size> <output data-rt-size-out>18</output> <small class="muted">[ ]</small></label>
-                <label data-o="hard">Dureté <input type="range" min="0" max="100" value="55" data-rt-hard> <output data-rt-hard-out>55 %</output></label>
+                <label data-o="hard" data-help="Faible : le bord du pinceau est doux et se fond ; forte : le bord est net.">Dureté <input type="range" min="0" max="100" value="55" data-rt-hard> <output data-rt-hard-out>55 %</output></label>
                 <label data-o="opacity">Opacité <input type="range" min="5" max="100" value="100" data-rt-opac> <output data-rt-opac-out>100 %</output></label>
                 <label data-o="brush" data-tb-label="Sorte de pinceau">Sorte <select data-rt-brushtype>${RT_BRUSHES.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
                 <label data-o="color">Couleur <input type="color" value="#d0021b" data-rt-color></label>
                 <span data-o="swatches" class="h-rt-swatches" data-tb-label="Couleurs rapides">${['#d0021b', '#f5a623', '#f8e71c', '#7ed321', '#2a7de1', '#9013fe', '#ffffff', '#000000', '#e2b195', '#c98f78', '#8fb3d9', '#6f8f4e', '#8b5a2b', '#c9a227', '#7a4b6b'].map(c => `<button type="button" style="background:${c}" data-rt-swatch="${c}" aria-label="${c}"></button>`).join('')}</span>
-                <label data-o="font" data-tb-label="Police">Police <select data-rt-font>${RT_FONTS.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</select></label>
+                <span data-o="font" data-tb-label="Police" class="h-rt-fontrow">Police <button type="button" class="button small secondary" data-rt-fontpick title="Choisir la police (celles de l’app et de l’ordinateur)">${esc(RT_FONTS[0][1])} ▾</button></span>
                 <label data-o="font" class="checkbox-line" data-tb-label="Contour du texte"><input type="checkbox" data-rt-halo checked> <span>contour</span></label><input data-o="font" type="color" value="#ffffff" data-rt-halocolor title="Couleur du contour" data-tb-label="Couleur du contour"><label data-o="font" data-tb-label="Épaisseur du contour">épaisseur <input type="range" min="1" max="8" value="1" data-rt-halow></label>
                 <label data-o="font" class="checkbox-line" data-tb-label="Ombre du texte"><input type="checkbox" data-rt-shadow> <span>ombre</span></label><input data-o="font" type="color" value="#000000" data-rt-shadowcolor title="Couleur de l’ombre" data-tb-label="Couleur de l’ombre">
-                <span data-o="clone" class="h-rt-clone" data-tb-label="Tampon : endroit à recopier, aligné"><button type="button" class="button small" data-rt-pick>🎯 Choisir l’endroit à recopier</button><label class="checkbox-line"><input type="checkbox" data-rt-aligned checked> <span>aligné</span></label></span>
-                <label data-o="textstyle" class="checkbox-line" data-tb-label="Texte gras"><input type="checkbox" data-rt-bold> <span><b>Gras</b></span></label><label data-o="textstyle" class="checkbox-line" data-tb-label="Texte italique"><input type="checkbox" data-rt-italic> <span><i>Italique</i></span></label><button type="button" data-o="textstyle" class="button small secondary" data-rt-localfonts data-tb-label="Polices de l’ordi">🖥 Polices de l’ordi</button>
+                <span data-o="clone" class="h-rt-clone" data-tb-label="Tampon : endroit à recopier, aligné"><button type="button" class="button small" data-rt-pick>🎯 Choisir l’endroit à recopier</button><label class="checkbox-line" data-help="Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit."><input type="checkbox" data-rt-aligned checked> <span>aligné</span></label></span>
+                <span data-o="repair" class="h-rt-cropops" data-tb-label="Réparer : grain, repérer les plis"><label class="checkbox-line" data-help="Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse."><input type="checkbox" data-rt-rgrain checked> <span>garder le grain</span></label><button type="button" class="button small secondary" data-rt-cmd="repair:detect" title="Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler">🔍 Repérer les plis</button></span>
+                <label data-o="textstyle" class="checkbox-line" data-tb-label="Texte gras"><input type="checkbox" data-rt-bold> <span><b>Gras</b></span></label><label data-o="textstyle" class="checkbox-line" data-tb-label="Texte italique"><input type="checkbox" data-rt-italic> <span><i>Italique</i></span></label>
                 <label data-o="shape" data-tb-label="Forme (rectangle, ellipse, flèche…)">Forme <select data-rt-shape><option value="rect">Rectangle</option><option value="round">Rectangle arrondi</option><option value="ellipse">Ellipse</option><option value="line">Ligne</option><option value="arrow">Flèche</option></select></label>
                 <label data-o="shape" class="checkbox-line" data-tb-label="Forme remplie"><input type="checkbox" data-rt-fillon> <span>remplie</span></label><label data-o="shape" data-tb-label="Couleur de fond des formes">Fond <input type="color" value="#ffffff" data-rt-fill></label>
-                <label data-o="wand" data-tb-label="Baguette : tolérance">Tolérance <input type="range" min="1" max="100" value="24" data-rt-tol> <output data-rt-tol-out>24</output></label><label data-o="wand" class="checkbox-line" data-tb-label="Baguette : contiguë"><input type="checkbox" data-rt-contig checked> <span>contiguë</span></label><button type="button" data-o="wand" class="button small" data-rt-cmd="sel:subject" data-tb-label="Sélectionner le sujet" title="Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va">🎯 Sujet</button>
+                <label data-o="wand" data-tb-label="Baguette : tolérance" data-help="Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi.">Tolérance <input type="range" min="1" max="100" value="24" data-rt-tol> <output data-rt-tol-out>24</output></label><label data-o="wand" class="checkbox-line" data-tb-label="Baguette : contiguë"><input type="checkbox" data-rt-contig checked> <span>contiguë</span></label><button type="button" data-o="wand" class="button small" data-rt-cmd="sel:subject" data-tb-label="Sélectionner le sujet" title="Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va">🎯 Sujet</button>
                 <span data-o="sel" class="h-rt-selops" data-tb-label="Actions de la sélection"><small class="muted">⇧ ajouter · ⌥ enlever</small><button type="button" class="button small secondary" data-rt-cmd="sel:all">Tout</button><button type="button" class="button small secondary" data-rt-cmd="sel:none">Aucune</button><button type="button" class="button small secondary" data-rt-cmd="sel:invert">Inverser</button><button type="button" class="button small secondary" data-rt-cmd="sel:feather">Contour progressif</button><button type="button" class="button small secondary" data-rt-cmd="sel:copy">→ Calque</button><button type="button" class="button small secondary" data-rt-cmd="sel:fill">Remplir</button><button type="button" class="button small secondary" data-rt-cmd="sel:clear">Effacer</button><button type="button" class="button small secondary" data-rt-cmd="mask:sel">Masque</button><button type="button" class="button small secondary" data-rt-cmd="sel:crop">Recadrer</button></span>
                 <span data-o="crop" class="h-rt-cropops" data-tb-label="Recadrage : proportions, redresser"><label>Proportions <select data-rt-ratio><option value="">Libres</option><option value="orig">Celles de la photo</option><option value="1">Carré 1:1</option><option value="1.3333">4:3</option><option value="0.75">3:4</option><option value="1.5">3:2</option><option value="0.6667">2:3</option><option value="1.7778">16:9</option><option value="0.7071">A4 portrait</option><option value="1.4142">A4 paysage</option></select></label><label>Redresser <input type="range" min="-45" max="45" step="0.5" value="0" data-rt-angle> <output data-rt-angle-out>0°</output></label><button type="button" class="button small secondary" data-rt-cmd="straighten:auto" title="Trouve l’angle des grandes lignes (horizon, murs, cadres)">📐 Auto</button><button type="button" class="button small" data-rt-cmd="cropok">✓ Valider</button><button type="button" class="button small secondary" data-rt-cmd="cropclear">Annuler le recadrage</button></span>
                 <span data-o="persp" class="h-rt-cropops" data-tb-label="Perspective"><small class="muted">Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade).</small><button type="button" class="button small" data-rt-cmd="persp:ok">✓ Valider</button><button type="button" class="button small secondary" data-rt-cmd="persp:reset">Coins aux bords</button><button type="button" class="button small secondary" data-rt-cmd="persp:cancel">Annuler</button></span>
@@ -962,33 +1444,35 @@
             <div class="h-rt-main">
                 <div class="h-rt-left">
                     <div class="h-rt-stage" data-rt-stage><div class="h-rt-canvaswrap" data-rt-wrap><canvas data-rt-canvas width="${pw}" height="${ph}"></canvas><canvas class="h-rt-overlay" data-rt-overlay width="${pw}" height="${ph}"></canvas><div class="h-rt-crop" data-rt-crop hidden>${['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'].map(h => `<i data-ch="${h}"></i>`).join('')}</div><span class="h-rt-brush" data-rt-brush hidden></span><span class="h-rt-src" data-rt-src hidden></span></div>
-                        <button type="button" class="button small secondary h-rt-before" data-rt-before title="Garder appuyé pour voir l’original">👁 Avant / après</button></div>
+                        ${rtBaButtons('rt')}</div>
                     <section class="h-rt-versions" data-rt-versions></section>
                 </div>
                 <nav class="h-rt-vtools" data-tbg="rt-vtools" data-tbg-label="Colonne d’outils">${VTOOLS.map(([k, i, l, key]) => { const sc = key ? key.toUpperCase() : k === 'ellipsesel' ? '⇧M' : ''; return `<button type="button" data-rt-mode="${k}" data-rt-v title="${esc(sc ? l.replace(` (${sc})`, '') : l)}" data-tb-label="${esc(l)}" data-shortcut="${esc(sc)}">${i}</button>`; }).join('')}<span class="h-rt-fg" title="Couleur (pinceau, texte, formes, remplir)" data-tb-label="Couleur"><input type="color" value="#d0021b" data-rt-color2></span></nav>
                 <aside class="h-rt-side"><button type="button" class="h-rt-sidetog" data-rt-sidetog title="Replier le panneau (plus de place pour la photo) — Tab">⇥</button><span class="h-rt-resize" data-rt-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span>
                     <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="filters">✨ Filtres</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="history">🕘 Historique</button><button type="button" data-rt-tab="restore" title="Restaurer une vieille photo, pas à pas">🧭 Restaurer</button></div>
                     <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-target" data-rt-target></div><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
-                        ${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
-                        <details class="h-rt-levels"><summary><strong>Niveaux</strong> <small class="muted">point noir, tons moyens, point blanc</small></summary>${RT_LEVELS.map(([k, l, mn, mx, dv]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-out="${k}">${dv}</output></span><input type="range" min="${mn}" max="${mx}" value="${dv}" data-rt="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-lvlauto>Niveaux automatiques</button></details>
-                        <details class="h-rt-levels"><summary><strong>🎨 Colorisation douce</strong> <small class="muted">pour une photo en noir et blanc</small></summary><label>Couleurs <select data-rt-gmap>${Object.entries(RT_GMAPS).map(([k, [l]]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label><label class="h-rt-slider"><span>Force <output data-rt-out="gmap_amt">70</output></span><input type="range" min="0" max="100" value="70" data-rt="gmap_amt"></label><p class="muted">Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau.</p></details>
-                        <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>
-                        <div class="h-rt-curve-head"><strong>Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rt-ch ${k === 'rgb' ? 'is-active' : ''}" data-rt-ch="${k}">${l}</button>`).join('')}</span></div>
+                        ${sec('Couleur', 'rt-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span${k === 'vibrance' ? ' data-help="Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord."' : ''}>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
+                        <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>`)}
+                        ${sec('Niveaux : point noir, tons moyens, point blanc', 'rt-levels', `${RT_LEVELS.map(([k, l, mn, mx, dv]) => `<label class="h-rt-slider"><span${k === 'lvl_gamma' ? ' data-help="Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre."' : ''}>${esc(l)} <output data-rt-out="${k}">${dv}</output></span><input type="range" min="${mn}" max="${mx}" value="${dv}" data-rt="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-lvlauto>Niveaux automatiques</button>`, false)}
+                        ${sec('Courbe', 'rt-curve', `<div class="h-rt-curve-head"><strong data-help="Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur.">Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rt-ch ${k === 'rgb' ? 'is-active' : ''}" data-rt-ch="${k}">${l}</button>`).join('')}</span></div>
                         <svg class="h-rt-curve" viewBox="-6 -6 268 268" data-rt-curve><path class="h-rt-hist" d="${histPath}"/><g class="h-rt-grid">${[64, 128, 192].map(v => `<line x1="${v}" y1="0" x2="${v}" y2="256"/><line x1="0" y1="${v}" x2="256" y2="${v}"/>`).join('')}<line x1="0" y1="256" x2="256" y2="0" class="h-rt-diag"/></g><path class="h-rt-line" data-rt-line/><g data-rt-points></g></svg>
                         <div class="h-rt-curve-tools"><button type="button" class="button small secondary" data-rt-ptdel disabled>Enlever le point</button></div>
-                        <p class="muted h-rt-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre.</p>
+                        <p class="muted h-rt-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre.</p>`)}
+                        ${sec('🎨 Colorisation douce (photo en noir et blanc)', 'rt-gmap', `<label>Couleurs <select data-rt-gmap>${Object.entries(RT_GMAPS).map(([k, [l]]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label><label class="h-rt-slider"><span>Force <output data-rt-out="gmap_amt">70</output></span><input type="range" min="0" max="100" value="70" data-rt="gmap_amt"></label><p class="muted">Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau.</p>`, false)}
                         <button type="button" class="link-button" data-rt-reset>↺ Remettre comme au départ</button></div>
-                    <div class="h-rt-tools" data-rt-pane="filters" hidden><div class="h-rt-target" data-rt-target></div><div data-rt-fxlist></div><p class="muted">Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille.</p>${RT_FILTERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-fout="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt-f="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-cmd="filters:reset">Enlever les filtres</button></div>
+                    <div class="h-rt-tools" data-rt-pane="filters" hidden><div class="h-rt-target" data-rt-target></div><div data-rt-fxlist></div><p class="muted">Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille.</p>${sec('Effets', 'rt-fx', `${RT_FILTERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span${k === 'clarity' ? ' data-help="Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général."' : ''}>${esc(l)} <output data-rt-fout="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt-f="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-cmd="filters:reset">Enlever les filtres</button>`)}</div>
                     <div class="h-rt-tools" data-rt-pane="layers" hidden></div>
                     <div class="h-rt-tools" data-rt-pane="history" hidden></div>
-                    <div class="h-rt-tools h-rt-restore" data-rt-pane="restore" hidden>${RT_RESTORE_STEPS.map(([k, t, help, btns], i) => `<details class="h-rt-step" data-rt-step="${k}" ${i === 0 ? 'open' : ''}><summary><span class="h-rt-stepn">${i + 1}</span> ${t} <i class="h-rt-stepok" hidden>✓</i></summary><p class="muted">${help}</p><div class="h-rt-stepbtns">${btns}</div></details>`).join('')}
+                    <div class="h-rt-tools h-rt-restore" data-rt-pane="restore" hidden><div class="h-rt-raone"><button type="button" class="button" data-rt-cmd="restore:all" title="Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis">✨ Restaurer en une fois</button><small class="muted">ou étape par étape :</small></div>${RT_RESTORE_STEPS.map(([k, t, help, btns], i) => `<details class="h-rt-step" data-rt-step="${k}" ${i === 0 ? 'open' : ''}><summary><span class="h-rt-stepn">${i + 1}</span> ${t} <i class="h-rt-stepok" hidden>✓</i></summary><p class="muted">${help}</p><div class="h-rt-stepbtns">${btns}</div></details>`).join('')}
                         <p class="muted h-rt-help">Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version.</p></div>
                 </aside>
             </div>
-            <div class="modal-actions"><button type="button" class="button small secondary" data-rt-projopen title="Rouvrir un travail de retouche enregistré">📂 Projets…</button><button type="button" class="button small secondary" data-rt-projsave title="Garde tout le travail (calques, groupes, masques, réglages…) pour le rouvrir et continuer (⌘S)" data-shortcut="⌘S">💾 Enregistrer le projet</button><span class="h-rt-projname" data-rt-projname></span><label class="checkbox-line h-rt-merge" data-rt-mergebox hidden><input type="checkbox" data-rt-merge checked> <span>avec les annotations (calques visibles)</span></label><span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rt-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rt-save="show">Enregistrer et afficher cette version</button></div>
+            <div class="modal-actions"><label class="checkbox-line h-rt-merge" data-rt-mergebox hidden><input type="checkbox" data-rt-merge checked> <span>avec les annotations (calques visibles)</span></label><span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rt-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rt-save="show">Enregistrer et afficher cette version</button></div>
             <p class="muted h-rt-note">L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout.</p>`;
         document.body.appendChild(dlg);
+        ext.rtEnsureCss();
         ext.tbApply(dlg, 'retouch');
+        window.LCNDA_UI?.harmonizeTopbar?.(dlg.querySelector('.h-rt-head')); // E1 : l'ordre validé (après ⚙️ Personnaliser)
         ext.editorKeysAttach?.(dlg, 'retouch'); // ⌨️ raccourcis à soi // boutons rangés à sa façon (⚙️ Personnaliser)
         // une image partie de zéro (canevas vide) ou importée : pas de « version » d'une photo de la base, juste l'image à enregistrer
         const fresh = !!(item.fresh || project?.project?.fresh);
@@ -996,7 +1480,6 @@
             dlg.querySelectorAll('[data-rt-save="copy"], [data-rt-save="keep"], [data-rt-cmd="save:copy"], [data-rt-cmd="save:keep"]').forEach(b => { b.style.display = 'none'; });
             const sh = dlg.querySelector('.modal-actions [data-rt-save="show"]'); if (sh) { sh.textContent = '🖼 Enregistrer l’image dans les Médias'; sh.title = 'L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer'; }
             const ms = dlg.querySelector('[data-rt-cmd="save:show"] span'); if (ms) ms.textContent = '🖼 Enregistrer l’image dans les Médias';
-            sh?.insertAdjacentHTML('beforebegin', '<button type="button" class="button secondary" data-rt-cmd="download:png" title="L’image sur l’ordinateur (PNG)">⬇ Télécharger</button>');
             dlg.querySelector('.h-rt-note')?.remove();
         }
         try { const rl = JSON.parse(localStorage.getItem('genealogie-retouch-layout') || '{}') || {}; if (['left', 'right'].includes(rl.tools)) dlg.classList.add('rt-tools-' + rl.tools); if (rl.side === 'left') dlg.classList.add('rt-side-left'); } catch (_) {} // Maintenance → Montage, retouche, mise en page et son
@@ -1007,6 +1490,7 @@
         const stage = $('[data-rt-stage]'), wrap = $('[data-rt-wrap]');
         let raf = 0, showBefore = false, selPt = -1, outside = -1;
         const baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); // l'image d'origine (avant / après, annuler)
+        let curtain = null, idp = null, creaseProp = null; // ◧ le rideau avant / après ; 🪪 la photo d'identité en cours ; 🔍 les plis repérés (proposition)
         // la perspective redressée : l'image de départ remise à plat (gardée tant que les 4 coins ne changent pas)
         let persp = null, warpCache = {key: '', data: null};
         const baseFor = () => { if (!st.persp) return baseData; const key = JSON.stringify(st.persp); if (warpCache.key !== key) warpCache = {key, data: rtWarp(baseData, st.persp)}; return warpCache.data; };
@@ -1136,9 +1620,17 @@
                     octx.beginPath(); octx.arc(hs.rot[0], hs.rot[1], k * 1.1, 0, Math.PI * 2); octx.fill(); octx.stroke();
                 } else octx.strokeRect(bb.x * pw - 4, bb.y * ph - 4, bb.w * pw + 8, bb.h * ph + 8);
                 octx.restore(); } }
+            if (painting?.tool === 'repair' && painting.dabs.length) { octx.save(); octx.fillStyle = 'rgba(230,40,40,.45)'; for (const d of painting.dabs) { octx.beginPath(); octx.arc(d.x * pw, d.y * ph, d.r * pw, 0, Math.PI * 2); octx.fill(); } octx.restore(); }
+            if (creaseProp?.canvas) { octx.save(); octx.globalAlpha = 0.8; octx.drawImage(creaseProp.canvas, 0, 0); octx.restore(); }
+            if (idp?.crop && mode === 'idphoto') { // le cadre (tourné pour mettre les yeux à l'horizontale), la ligne des yeux et les deux ronds à glisser
+                const c = idp.crop, rot = g => { g.translate(pw / 2, ph / 2); g.rotate(-c.a * Math.PI / 180); g.translate(-pw / 2, -ph / 2); }, lw = Math.max(1, pw / 600), k = handleSize();
+                octx.save(); octx.fillStyle = 'rgba(0,0,0,.45)'; octx.fillRect(0, 0, pw, ph); octx.globalCompositeOperation = 'destination-out'; rot(octx); octx.fillRect(c.x * pw, c.y * ph, c.w * pw, c.h * ph); octx.restore();
+                octx.save(); rot(octx); octx.strokeStyle = '#fff'; octx.lineWidth = lw * 1.5; octx.strokeRect(c.x * pw, c.y * ph, c.w * pw, c.h * ph); octx.setLineDash([lw * 6, lw * 5]); octx.strokeStyle = '#2a7de1'; const ey = (c.y + c.h * idp.p.eye) * ph; octx.beginPath(); octx.moveTo(c.x * pw, ey); octx.lineTo((c.x + c.w) * pw, ey); octx.stroke(); octx.restore();
+                octx.save(); octx.lineWidth = lw * 2; idp.eyes.forEach(([ex, ey2]) => { octx.strokeStyle = '#fff'; octx.beginPath(); octx.arc(ex, ey2, k * 1.7, 0, Math.PI * 2); octx.stroke(); octx.strokeStyle = '#2a7de1'; octx.beginPath(); octx.arc(ex, ey2, k * 1.4, 0, Math.PI * 2); octx.stroke(); octx.fillStyle = '#2a7de1'; octx.beginPath(); octx.arc(ex, ey2, k * 0.35, 0, Math.PI * 2); octx.fill(); }); octx.restore();
+            }
         }
         // ── Historique : chaque geste ou réglage est une étape ; un clic sur une étape y revient ──
-        let history = [], hpos = -1;
+        let history = [], hpos = -1, onHist = null;
         const snapshot = () => ({st: rtClone({...st, strokes: undefined, persp: st.persp ?? st._persp0 ?? null, _persp0: undefined}), strokes: rtClone(st.strokes), layers: rtClone(layers), activeLayer, selId});
         const commit = label => {
             const snap = snapshot();
@@ -1148,6 +1640,7 @@
         };
         const restore = i => {
             dlg.querySelector('.h-rt-fxpanel')?.remove(); // une fenêtre de filtre ouverte ne vise plus le bon calque
+            creaseProp = null; if (idp) { idp = null; if (mode === 'idphoto') setMode('adjust'); }
             const s = history[i]?.snap; if (!s) return;
             Object.keys(st).forEach(k => { if (k !== 'strokes') delete st[k]; }); Object.assign(st, rtClone(s.st));
             st.strokes = rtClone(s.strokes);
@@ -1160,7 +1653,7 @@
         };
         const undoBtn = $('[data-rt-undo]'), redoBtn = $('[data-rt-redo]');
         function refreshHistory() {
-            undoBtn.disabled = hpos <= 0; redoBtn.disabled = hpos >= history.length - 1;
+            undoBtn.disabled = hpos <= 0; redoBtn.disabled = hpos >= history.length - 1; onHist?.();
             const pane = $('[data-rt-pane="history"]');
             pane.innerHTML = `<p class="muted">Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre.</p><ol class="h-rt-history">${history.map((h, i) => `<li class="${i === hpos ? 'is-current' : i > hpos ? 'is-future' : ''}"><button type="button" data-rt-hist="${i}"><span>${esc(h.label)}</span><small>${h.at.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</small></button></li>`).join('')}</ol>`;
             pane.querySelector('.is-current')?.scrollIntoView({block: 'nearest'});
@@ -1326,7 +1819,7 @@
         // ── Zoom : boutons, molette avec ⌘ / Ctrl (ou pincer), barre d'espace ou ✋ pour se déplacer ──
         let zoom = 1; // 1 = toute l'image dans le cadre
         const fitScale = () => { const r = stage.getBoundingClientRect(); return Math.max(0.01, Math.min((r.width - 24) / pw, (r.height - 24) / ph)); };
-        const placeOver = () => { Object.assign(overlay.style, {left: canvas.offsetLeft + 'px', top: canvas.offsetTop + 'px', width: canvas.offsetWidth + 'px', height: canvas.offsetHeight + 'px'}); syncCrop(); };
+        const placeOver = () => { Object.assign(overlay.style, {left: canvas.offsetLeft + 'px', top: canvas.offsetTop + 'px', width: canvas.offsetWidth + 'px', height: canvas.offsetHeight + 'px'}); syncCrop(); curtain?.place(); };
         const setZoom = (z, cx, cy) => {
             const r = stage.getBoundingClientRect(), before = canvas.getBoundingClientRect();
             const ax = cx ?? r.left + r.width / 2, ay = cy ?? r.top + r.height / 2, fx = (ax - before.left) / before.width, fy = (ay - before.top) / before.height;
@@ -1343,6 +1836,11 @@
         $('[data-rt-zoom100]').addEventListener('click', () => setZoom(scale / fitScale()));
         stage.addEventListener('wheel', e => { if (!(e.ctrlKey || e.metaKey)) return; e.preventDefault(); setZoom(zoom * Math.exp(-e.deltaY * 0.0025), e.clientX, e.clientY); }, {passive: false});
         const ro = new ResizeObserver(() => setZoom(zoom)); ro.observe(stage);
+        // ◧ Avant / après en rideau : l'original par-dessus, coupé là où on glisse la ligne
+        curtain = ext.rtCurtain({host: wrap, target: canvas, before: baseData, onChange: S0 => { $('[data-rt-curtain]').classList.toggle('is-active', S0.on); $('[data-rt-curdir]').hidden = $('[data-rt-curexp]').hidden = !S0.on; $('[data-rt-curdir]').textContent = S0.vertical ? '⇅' : '⇆'; $('[data-rt-curdir]').title = S0.vertical ? 'Rideau horizontal' : 'Rideau vertical'; }});
+        $('[data-rt-curtain]').addEventListener('click', () => curtain.toggle());
+        $('[data-rt-curdir]').addEventListener('click', () => curtain.setVertical(!curtain.vertical));
+        $('[data-rt-curexp]').addEventListener('click', () => cmd('export:ba'));
 
         // ── Outils ──
         let mode = 'adjust', brush = 18, hard = 55, opac = 100, brushType = 'round', color = '#d0021b', font = RT_FONTS[0][0], halo = true, aligned = true, haloColor = '#ffffff', haloW = 1, shadow = false, shadowColor = '#000000';
@@ -1364,9 +1862,11 @@
             clone: '« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs.',
             brush: 'Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo.',
             mask: 'Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque.',
-            text: 'Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne).'};
+            text: 'Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne).',
+            repair: 'Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul.',
+            idphoto: 'Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ».'};
         const SELTOOLS = ['marquee', 'ellipsesel', 'lasso', 'polysel', 'wand'];
-        const OPTS = {heal: ['size'], clone: ['size', 'hard', 'clone'], brush: ['size', 'opacity', 'brush', 'color', 'swatches'], text: ['size', 'opacity', 'color', 'swatches', 'font', 'textstyle'], hand: [], adjust: [], move: ['font'], zoom: [],
+        const OPTS = {heal: ['size'], repair: ['size', 'repair'], idphoto: [], clone: ['size', 'hard', 'clone'], brush: ['size', 'opacity', 'brush', 'color', 'swatches'], text: ['size', 'opacity', 'color', 'swatches', 'font', 'textstyle'], hand: [], adjust: [], move: ['font'], zoom: [],
             marquee: ['sel'], ellipsesel: ['sel'], lasso: ['sel'], polysel: ['sel'], wand: ['wand', 'sel'], crop: ['crop'], persp: ['persp'], shape: ['shape', 'size', 'opacity', 'color', 'swatches'], mask: ['size', 'hard', 'opacity', 'maskmode']};
         const optsFor = m => m === 'brush' && maskEdit ? 'mask' : m;
         const setMode = m => {
@@ -1383,7 +1883,8 @@
             $('[data-rt-opts]').hidden = !OPTS[om].length && !HELP[om];
             $$('[data-rt-opts] [data-o]').forEach(el => { el.hidden = !OPTS[om].includes(el.dataset.o); });
             help.textContent = HELP[om] || '';
-            canvas.classList.toggle('is-painting', ['heal', 'clone', 'brush'].includes(m) && !(m === 'clone' && selId)); canvas.classList.toggle('is-text', m === 'text'); stage.classList.toggle('is-hand', m === 'hand');
+            canvas.classList.toggle('is-painting', ['heal', 'repair', 'clone', 'brush'].includes(m) && !(m === 'clone' && selId));
+            if (m !== 'idphoto' && idp) { idp = null; dlg.querySelector('.h-rt-idp')?.remove(); } canvas.classList.toggle('is-text', m === 'text'); stage.classList.toggle('is-hand', m === 'hand');
             canvas.dataset.tool = m;
             brushEl.hidden = true; srcEl.hidden = true;
             if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } if (changed) showTab('layers'); }
@@ -1418,7 +1919,15 @@
         $('[data-rt-color]').addEventListener('input', e => setColor(e.target.value));
         $('[data-rt-color2]').addEventListener('input', e => setColor(e.target.value));
         $$('[data-rt-swatch]').forEach(b => b.addEventListener('click', () => setColor(b.dataset.rtSwatch)));
-        $('[data-rt-font]').addEventListener('change', e => { font = e.target.value; const op = moveSel && nodeById(moveSel.layer)?.ops[moveSel.i]; if (mode === 'move' && op?.type === 'text') { op.font = font; renderLayer(nodeById(moveSel.layer)); draw(); commit('Police du texte'); } });
+        // E5 : la police se choisit dans la liste unique (polices de l'app, récentes, celles de l'ordinateur)
+        const fontBtn = $('[data-rt-fontpick]'), fontName = f => RT_FONTS.find(x => x[0] === f)?.[1] || String(f).split(',')[0].replace(/["']/g, '').trim();
+        const setFont = f => { font = f; fontBtn.textContent = `${fontName(f)} ▾`; fontBtn.style.fontFamily = f; };
+        fontBtn.addEventListener('click', async () => {
+            const UI = window.LCNDA_UI, cur = String(font).split(',')[0].replace(/["']/g, '').trim(); if (!UI?.openFontPicker) return;
+            const f = await UI.openFontPicker({value: cur, sample: 'Souvenir de famille'}); if (!f) return;
+            setFont(`"${f.replace(/["\\<>]/g, '')}", ${/script|hand|chancery|roundhand|zapfino|calligraph|brush/i.test(f) ? 'cursive' : 'sans-serif'}`);
+            const op = moveSel && nodeById(moveSel.layer)?.ops[moveSel.i]; if (mode === 'move' && op?.type === 'text') { op.font = font; renderLayer(nodeById(moveSel.layer)); draw(); commit('Police du texte'); }
+        });
         // contour et ombre : pour les prochains textes, et pour le texte choisi avec ➤
         const textStyle = () => { const op = moveSel && nodeById(moveSel.layer)?.ops[moveSel.i]; if (op?.type !== 'text') return; op.halo = halo ? haloColor : ''; op.haloW = haloW; op.shadow = shadow ? shadowColor : ''; renderLayer(nodeById(moveSel.layer)); draw(); commit('Style du texte'); };
         $('[data-rt-halo]').addEventListener('change', e => { halo = e.target.checked; textStyle(); });
@@ -1436,19 +1945,10 @@
         $$('[data-rt-maskmode]').forEach(r => r.addEventListener('change', () => { if (r.checked) maskMode = r.value; }));
         $('[data-rt-aligned]').addEventListener('change', e => { aligned = e.target.checked; });
         $('[data-rt-pick]').addEventListener('click', () => { picking = true; help.textContent = 'Clique maintenant à l’endroit à recopier.'; canvas.classList.add('is-picking'); });
-        // les polices de l'ordinateur, ajoutées à la liste (tapées à la main si le navigateur ne sait pas les lire)
-        $('[data-rt-localfonts]').addEventListener('click', async () => {
-            const sel = $('[data-rt-font]'), add = names => { const have = new Set([...sel.options].map(o => o.value)); names.forEach(n => { const v = `"${n.replace(/["\\<>]/g, '')}", sans-serif`; if (!have.has(v)) { sel.add(new Option(n, v)); have.add(v); } }); };
-            try {
-                if (window.queryLocalFonts) { const fonts = await window.queryLocalFonts(); add([...new Set(fonts.map(f => f.family))].sort((a, b) => a.localeCompare(b, 'fr')).slice(0, 600)); toast('Polices de l’ordinateur ajoutées à la liste.'); return; }
-            } catch (_) {}
-            const n = ((await A().askText({title: 'Police de l’ordinateur', message: 'Nom exact de la police (ex. Garamond, Baskerville) :', okLabel: 'Ajouter'})) || '').trim().slice(0, 80); if (!n) return;
-            add([n]); sel.value = `"${n.replace(/["\\<>]/g, '')}", sans-serif`; font = sel.value;
-        });
         // coordonnées : la toile garde sa taille d'aperçu (pw × ph) ; elle est affichée plus ou moins grande selon le zoom
         const toCanvas = e => { const r = canvas.getBoundingClientRect(); return [(e.clientX - r.left) * pw / r.width, (e.clientY - r.top) * ph / r.height, r.width / pw]; };
         const showBrush = e => {
-            const painty = ['heal', 'brush'].includes(mode) || (mode === 'clone' && !selId);
+            const painty = ['heal', 'repair', 'brush'].includes(mode) || (mode === 'clone' && !selId);
             if (!painty || picking) { brushEl.hidden = true; srcEl.hidden = !(mode === 'clone' && cloneSrc && picking === false && !cloneOff); return; }
             const [x, y, k] = toCanvas(e), r = mode === 'brush' && brushType === 'pencil' && !maskEdit ? Math.min(brush, 4) : brush, cr = canvas.getBoundingClientRect(), wr = wrap.getBoundingClientRect();
             Object.assign(brushEl.style, {width: r * 2 * k + 'px', height: r * 2 * k + 'px', left: (cr.left - wr.left + x * k - r * k) + 'px', top: (cr.top - wr.top + y * k - r * k) + 'px', borderColor: mode === 'brush' && !maskEdit ? color : ''}); brushEl.hidden = false;
@@ -1535,9 +2035,10 @@
             if (it?.filename) placeUrl(`media/${encodeURIComponent(it.filename)}`, it.title || it.filename);
         }
         // une image glissée depuis l'ordinateur sur la photo, ou collée (⌘V) : placée sur un nouveau calque
-        stage.addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; } });
-        stage.addEventListener('drop', e => { const f = [...(e.dataTransfer?.files || [])].find(x => /^image\//.test(x.type)); if (f) { e.preventDefault(); placeFile(f); } });
-        document.addEventListener('paste', function onPaste(e) {
+        const dropFiles = async files => { const f = files.find(x => /^image\//.test(x.type)); if (!f) return toast('Ce fichier n’est pas une image.', 'error'); placeFile(f); try { await ext.rtImportImage(f); } catch (err) { toast(`Image placée, mais pas rangée dans les médias : ${err.message}`, 'error'); } };
+        if (window.LCNDA_UI?.bindFileDrop) window.LCNDA_UI.bindFileDrop(stage, dropFiles, {accept: 'image/*'}); // E4 : la zone s'allume, le fichier entre dans les médias (⌘V aussi)
+        else stage.addEventListener('drop', e => { const f = [...(e.dataTransfer?.files || [])].find(x => /^image\//.test(x.type)); if (f) { e.preventDefault(); dropFiles([f]); } });
+        if (!window.LCNDA_UI?.bindFileDrop) document.addEventListener('paste', function onPaste(e) {
             if (!dlg.isConnected) { document.removeEventListener('paste', onPaste); return; }
             if (!dlg.open || e.target.closest?.('input, textarea, [contenteditable]')) return;
             // une autre fenêtre ouverte PAR-DESSUS la retouche (pas celle d'où elle a été ouverte, ex. la mise en page) garde le collage
@@ -1560,6 +2061,7 @@
             if (mode === 'adjust' || mode === 'crop') return;
             e.preventDefault();
             const [x, y] = toCanvas(e);
+            if (mode === 'idphoto') { if (!idp) return; const k = handleSize() * 2.8, i = idp.eyes.findIndex(([ex, ey]) => Math.hypot(ex - x, ey - y) <= k); if (i >= 0) { drag = {idpEye: i}; canvas.setPointerCapture(e.pointerId); } return; }
             if (mode === 'persp') { if (!persp) return; const k = handleSize() * 3, i = persp.findIndex(([px, py]) => Math.hypot(px * pw - x, py * ph - y) <= k); if (i >= 0) { drag = {persp: i}; canvas.setPointerCapture(e.pointerId); } return; }
             if (mode === 'zoom') { drag = {zoom: true, x0: e.clientX, y0: e.clientY, alt: e.altKey}; canvas.setPointerCapture(e.pointerId); return; }
             if (mode === 'text') { if (e.detail > 1) return; const h = hitOp(x, y), op = h && nodeById(h.layer).ops[h.i]; if (op?.type === 'text') return placeText(op.x * pw, op.y * ph, h); return placeText(x, y); }
@@ -1606,6 +2108,7 @@
             }
             if (!P()) return toast('La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques).', 'error');
             if (lockedDeep(P())) return toast('La photo est verrouillée (🔒 dans Calques).', 'error');
+            if (mode === 'repair') { painting = {tool: 'repair', dabs: []}; canvas.setPointerCapture(e.pointerId); repairDab(x, y); return; }
             painting = {tool: mode, dabs: [], from: new Uint8ClampedArray(srcData.data)};
             canvas.setPointerCapture(e.pointerId); dabAt(x, y);
         });
@@ -1613,6 +2116,7 @@
             if (panning) { stage.scrollLeft = panning.l - (e.clientX - panning.x); stage.scrollTop = panning.t - (e.clientY - panning.y); return; }
             showBrush(e);
             const [x, y] = toCanvas(e);
+            if (drag?.idpEye !== undefined && idp) { idp.eyes[drag.idpEye] = [Math.min(pw, Math.max(0, x)), Math.min(ph, Math.max(0, y))]; idpUpdate(); return; }
             if (drag?.persp !== undefined && persp) { persp[drag.persp] = [Math.min(1.2, Math.max(-0.2, x / pw)), Math.min(1.2, Math.max(-0.2, y / ph))]; draw(); return; }
             if (poly && !drag) { polyHover = [x, y]; draw(); return; }
             if (drag?.sel) { const d = drag.sel; if (d.kind === 'poly') d.pts.push([x, y]); else { let nx = x, ny = y; if (e.shiftKey && drag.how === 'new') { const s0 = Math.max(Math.abs(x - d.x0), Math.abs(y - d.y0)); nx = d.x0 + Math.sign(x - d.x0 || 1) * s0; ny = d.y0 + Math.sign(y - d.y0 || 1) * s0; } d.x1 = nx; d.y1 = ny; } draw(); return; }
@@ -1636,6 +2140,7 @@
             if (painting.tool === 'shape') { const p = painting.preview; let ex = x, ey = y; if (e.shiftKey) { if (['line', 'arrow'].includes(p.kind)) { const a = Math.round(Math.atan2(y - painting.y0, x - painting.x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x - painting.x0, y - painting.y0); ex = painting.x0 + Math.cos(a) * L; ey = painting.y0 + Math.sin(a) * L; } else { const s0 = Math.max(Math.abs(x - painting.x0), Math.abs(y - painting.y0)); ex = painting.x0 + Math.sign(x - painting.x0 || 1) * s0; ey = painting.y0 + Math.sign(y - painting.y0 || 1) * s0; } } p.x2 = ex / pw; p.y2 = ey / ph; draw(); return; }
             if (painting.tool === 'patch') { painting.patch.dx = (x - painting.x0) / pw; painting.patch.dy = (y - painting.y0) / ph; draw(); return; }
             if (painting.tool === 'brush' || painting.tool === 'mask') { const p = painting.preview.points, l = p[p.length - 1]; if (Math.hypot((x / pw - l[0]) * pw, (y / ph - l[1]) * ph) >= 1) { p.push([x / pw, y / ph]); draw(); } return; }
+            if (painting.tool === 'repair') { repairDab(x, y); return; }
             dabAt(x, y);
         });
         canvas.addEventListener('pointerleave', () => { brushEl.hidden = true; if (!cloneSrc) srcEl.hidden = true; if (polyHover) { polyHover = null; draw(); } });
@@ -1658,10 +2163,12 @@
             if (g.tool === 'patch') { const p = g.patch; if (Math.abs(p.dx * pw) < 1 && Math.abs(p.dy * ph) < 1) { draw(); return; } st.strokes.push({tool: 'patch', mask: p.mask, dx: p.dx, dy: p.dy}); rtReplayStrokes(srcData, [st.strokes[st.strokes.length - 1]], masks); strokeVer++; draw(); refreshLayers(); commit('Tampon : zone recopiée'); return; }
             if (g.tool === 'mask') { const t = g.layer; t.mask = [...(t.mask || []), g.preview]; draw(); refreshLayers(); commit(`Masque : ${g.preview.mode === 'hide' ? 'caché' : 'montré'} au pinceau`); return; }
             if (g.tool === 'brush') { g.layer.ops.push(g.preview); renderLayer(g.layer); draw(); refreshLayers(); commit(`${RT_BRUSHES.find(b => b[0] === g.preview.brush)?.[1] || 'Pinceau'} sur « ${g.layer.name} »`); return; }
+            if (g.tool === 'repair') { if (!g.dabs.length) { draw(); return; } const s0 = {tool: 'inpaint', dabs: g.dabs, grain: $('[data-rt-rgrain]')?.checked !== false}; st.strokes.push(s0); rtReplayStrokes(srcData, [s0], masks); strokeVer++; draw(); refreshLayers(); commit(`Pli réparé${g.dabs.length > 1 ? ` (${g.dabs.length} touches)` : ''}`); return; }
             if (g.dabs.length) { st.strokes.push({tool: g.tool, dabs: g.dabs}); refreshLayers(); commit(NAMES[g.tool] + (g.dabs.length > 1 ? ` (${g.dabs.length} touches)` : '')); }
         };
         canvas.addEventListener('pointerup', endPaint); canvas.addEventListener('pointercancel', endPaint);
-        canvas.addEventListener('pointerup', () => { if (drag?.persp !== undefined) drag = null; });
+        canvas.addEventListener('pointerup', () => { if (drag?.persp !== undefined || drag?.idpEye !== undefined) drag = null; });
+        const repairDab = (x, y) => { const d = painting.dabs, last = d[d.length - 1]; if (last && Math.hypot(x - last.x * pw, y - last.y * ph) < Math.max(0.6, brush / 5)) return; d.push({x: x / pw, y: y / ph, r: brush / pw}); drawOverlay(); };
         // ── Recadrer et redresser : un cadre à poignées sur l'image (tournée de l'angle choisi) ──
         let crop = null; // le cadre pendant l'outil : {x, y, w, h, a} relatifs (0 à 1)
         const ratioSel = $('[data-rt-ratio]'), angleIn = $('[data-rt-angle]');
@@ -1757,6 +2264,14 @@
         const actOf = () => { const s0 = rtClone({...st}); ['strokes', 'crop', 'persp', '_persp0'].forEach(k => delete s0[k]);
             const adj = []; layers.forEach(n => { if (typeOf(n) === 'adjust' && n.visible && !n.mask && !n.clip) adj.push({name: n.name, opacity: n.opacity ?? 1, st: rtClone(n.st)}); });
             return {st: s0, adj}; };
+        /** une action venue d'un fichier : seulement des réglages connus, des nombres bornés, des noms courts */
+        const actClean = d => {
+            const num = v => (Number.isFinite(Number(v)) ? Math.max(-1000, Math.min(1000, Number(v))) : 0), pts = c => (Array.isArray(c) ? c.filter(q => Array.isArray(q) && q.length === 2).slice(0, 32).map(([x, y]) => [Math.max(0, Math.min(255, num(x))), Math.max(0, Math.min(255, num(y)))]) : [[0, 0], [255, 255]]);
+            const fl = f => { const o = {}; if (!f || typeof f !== 'object') return o; RT_FILTERS.forEach(([k]) => { if (f[k] !== undefined) o[k] = num(f[k]); }); if (Array.isArray(f.chain)) o.chain = f.chain.filter(x => x && RT_FX[x.t]).slice(0, 20).map(x => Object.fromEntries([['t', x.t], ...Object.entries(x).filter(([k, v]) => k !== 't' && /^[a-z0-9_]{1,20}$/i.test(k) && Number.isFinite(Number(v))).map(([k, v]) => [k, Number(v)])])); return o; };
+            const one = s0 => { const b = rtDefault(), o = {}; if (!s0 || typeof s0 !== 'object') return o; Object.keys(b).forEach(k => { if (s0[k] === undefined || ['crop', 'persp', 'filters', 'curves'].includes(k)) return; if (typeof b[k] === 'boolean') o[k] = !!s0[k]; else if (k === 'gmap') o.gmap = RT_GMAPS[s0.gmap] ? s0.gmap : ''; else o[k] = num(s0[k]); });
+                if (s0.curves && typeof s0.curves === 'object') o.curves = Object.fromEntries(RT_CHANNELS.map(([c]) => [c, pts(s0.curves[c])])); o.filters = fl(s0.filters); return o; };
+            return {st: one(d?.st), adj: (Array.isArray(d?.adj) ? d.adj : []).slice(0, 20).map(x => ({name: String(x?.name || 'Réglages').slice(0, 80), opacity: Math.max(0, Math.min(1, Number(x?.opacity ?? 1) || 0)), st: one(x?.st)}))};
+        };
         const actApplyHere = a => { Object.assign(st, rtDefault(), rtClone(a.st), {strokes: st.strokes, crop: st.crop, persp: st.persp}); (a.adj || []).forEach(x => { const n = newAdjust(x.name); n.opacity = x.opacity; n.st = {...adjDefault(), ...rtClone(x.st)}; }); refreshLayers(); syncControls(); commit(`Action « ${a.name} »`); };
         /** une action sur une image entière (en pleine taille) */
         const actRender = (im, a) => {
@@ -1770,16 +2285,21 @@
             const draw2 = () => { const list = actList();
                 d2.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>⚡ Actions</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
                     <p class="muted">Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé.</p>
-                    <div class="h-rt-actnew"><input data-actname placeholder="Nom de l’action (ex. « Photos de l’album 1930 »)" maxlength="80"><button type="button" class="button small" data-actadd>＋ Enregistrer les réglages actuels</button></div>
+                    <div class="h-rt-actnew"><input data-actname placeholder="Nom de l’action (ex. « Photos de l’album 1930 »)" maxlength="80"><button type="button" class="button small" data-actadd>＋ Enregistrer les réglages actuels</button><button type="button" class="button small secondary" data-actimport title="Reprendre un réglage exporté (fichier .json)">⤒ Importer un réglage</button></div>
                     ${list.length ? `<ol class="h-rt-actlist">${list.map((a, i) => `<li data-i="${i}"><strong>${esc(a.name)}</strong><small class="muted">${(a.adj || []).length ? `${A().plural(a.adj.length, 'calque de réglage', 'calques de réglage')} · ` : ''}${new Date(a.at || Date.now()).toLocaleDateString('fr-FR')}</small>
-                        <span><button type="button" class="button small secondary" data-acthere>Sur cette photo</button><button type="button" class="button small" data-actbatch>Sur plusieurs photos…</button><button type="button" class="icon-button danger" data-actdel title="Supprimer">🗑</button></span></li>`).join('')}</ol>` : A().emptyState({icon: '⏺', text: 'Aucune action enregistrée pour l’instant', hint: '« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos.'})}
+                        <span><button type="button" class="button small secondary" data-acthere>Sur cette photo</button><button type="button" class="button small" data-actbatch>Sur plusieurs photos…</button><button type="button" class="button small secondary" data-actexp title="Enregistrer cette action dans un fichier, pour la garder ou la donner">⤓ Exporter</button><button type="button" class="icon-button danger" data-actdel title="Supprimer">🗑</button></span></li>`).join('')}</ol>` : A().emptyState({icon: '⏺', text: 'Aucune action enregistrée pour l’instant', hint: '« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos.'})}
                     <div data-batch></div>`;
             };
             draw2(); document.body.appendChild(d2); d2.addEventListener('close', () => d2.remove());
             d2.addEventListener('click', async e => {
                 if (e.target.closest('[data-x]')) return d2.close();
                 if (e.target.closest('[data-actadd]')) { const name = d2.querySelector('[data-actname]').value.trim() || `Action du ${new Date().toLocaleDateString('fr-FR')}`; const l = actList(); l.push({name, at: Date.now(), ...actOf()}); if (actSave(l)) { toast(`Action « ${name} » enregistrée.`); draw2(); } return; }
+                if (e.target.closest('[data-actimport]')) {
+                    const r = await ext.reglageImport('retouche', {names: actList().map(x => x.name), check: d => !!d && typeof d === 'object' && !!d.st && typeof d.st === 'object'}); if (!r) return;
+                    const l = actList(); l.push({name: r.nom, at: Date.now(), ...actClean(r.donnees)}); if (actSave(l)) { toast(`Action « ${r.nom} » importée : « Sur cette photo » ou « Sur plusieurs photos… ».`); draw2(); } return;
+                }
                 const li = e.target.closest('[data-i]'); if (!li) return; const list = actList(), a = list[Number(li.dataset.i)]; if (!a) return;
+                if (e.target.closest('[data-actexp]')) return ext.reglageExport('retouche', a.name, {st: a.st, adj: a.adj || []});
                 if (e.target.closest('[data-actdel]')) { if (!await A().confirmBox('', {title: `Supprimer l’action « ${a.name} » ?`, okLabel: 'Supprimer l’action'})) return; list.splice(Number(li.dataset.i), 1); actSave(list); return draw2(); }
                 if (e.target.closest('[data-acthere]')) { actApplyHere(a); d2.close(); return; }
                 if (e.target.closest('[data-actbatch]')) return batchPanel(d2.querySelector('[data-batch]'), a);
@@ -1812,6 +2332,151 @@
                 state.textContent = `Terminé : ${ok} ${ok > 1 ? 'photos' : 'photo'} sur ${list.length}${show ? ', nouvelle version affichée' : ''}.`; toast(state.textContent); go.disabled = false;
             });
         }
+        /* ⤓ Exporter (E3) : l'image retouchée, ou l'avant / après ; une copie peut aller dans les médias */
+        const docTitle = () => (dlg.querySelector('[data-rt-name]')?.value || '').trim() || item.title || String(item.filename || 'photo').replace(/\.[a-z0-9]+$/i, '');
+        const readyFull = () => { if (mode === 'persp') setMode('adjust'); if (mode === 'crop') endCrop(true); };
+        const exportImage = () => { readyFull(); return ext.rtExportImage({title: docTitle(), mediaId: item.id || 0, copyTitle: `${docTitle()} (retouchée)`, png: hasAlpha(), render: () => renderFull()}); };
+        const exportBA = () => { readyFull(); return ext.rtBeforeAfterExport({title: docTitle(), mediaId: item.id || 0, pos: curtain?.pos ?? 0.5, vertical: curtain?.vertical !== false, getBefore: () => renderBefore(), getAfter: () => renderFull()}); };
+        const tick = () => new Promise(r => setTimeout(r, 30));
+        const panel = (cls, html) => { dlg.querySelector('.h-rt-fxpanel')?.remove(); const pn = document.createElement('div'); pn.className = `h-rt-fxpanel h-rt-panel2 ${cls}`; pn.innerHTML = html; $('.h-rt-left').appendChild(pn); return pn; };
+
+        /* 🔍 Plis et rayures repérés tout seuls : proposés en rouge, puis comblés d'après leurs alentours (une étape d'historique) */
+        async function creasePanel() {
+            if (!P()) return toast('La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques).', 'error');
+            if (lockedDeep(P())) return toast('La photo est verrouillée (🔒 dans Calques).', 'error');
+            const pn = panel('h-rt-crease', `<header><b>🔍 Plis et rayures</b><small>Les lignes fines, claires ou sombres, sont repérées en rouge${selId ? ' (dans la sélection)' : ''}. Vérifie, puis « Réparer ces lignes ».</small></header>
+                <p data-cr-count class="muted">Recherche…</p>
+                <label data-help="Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge.">Sensibilité <input type="range" min="1" max="100" value="${Number(ls('genealogie-retouch-crease', 50))}" data-cr-sens data-unit="%"></label>
+                <label class="checkbox-line"><input type="checkbox" data-cr-grain checked> <span>garder le grain autour</span></label>
+                <div class="h-rt-panelbtns"><button type="button" class="link-button" data-cr-hand>🪡 Plutôt à la main</button><span class="spacer"></span><button type="button" class="button small secondary" data-cr-cancel>Annuler</button><button type="button" class="button small" data-cr-ok disabled>✓ Réparer ces lignes</button></div>`);
+            const count = pn.querySelector('[data-cr-count]'), ok = pn.querySelector('[data-cr-ok]');
+            const run = async () => {
+                count.textContent = 'Recherche des plis…'; ok.disabled = true; await tick();
+                const sens = Number(pn.querySelector('[data-cr-sens]').value), inside = selId ? rtMaskAlpha(masks.get(selId), pw, ph) : null, r = rtCreases(srcData, sens, inside);
+                if (!pn.isConnected) return;
+                creaseProp = {...r, canvas: r.lines ? rtMaskCanvas(r.mask, pw, ph, '#ff2020') : null}; draw();
+                count.textContent = r.lines ? `${A().plural(r.lines, 'ligne repérée', 'lignes repérées')} (en rouge sur la photo).` : 'Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡.';
+                ok.disabled = !r.lines;
+            };
+            let tm = 0; pn.querySelector('[data-cr-sens]').addEventListener('input', e => { lsSet('genealogie-retouch-crease', e.target.value); clearTimeout(tm); tm = setTimeout(run, 250); });
+            const end = () => { creaseProp = null; pn.remove(); draw(); };
+            pn.querySelector('[data-cr-cancel]').addEventListener('click', end);
+            pn.querySelector('[data-cr-hand]').addEventListener('click', () => { end(); setMode('repair'); });
+            ok.addEventListener('click', async () => {
+                if (!creaseProp?.lines) return; const n = creaseProp.lines; ok.disabled = true; count.textContent = 'Réparation…'; await tick();
+                const s0 = {tool: 'inpaint', mask: addMask(rtMaskCanvas(creaseProp.mask, pw, ph)), grain: pn.querySelector('[data-cr-grain]').checked};
+                st.strokes.push(s0); rtReplayStrokes(srcData, [s0], masks); strokeVer++; end(); refreshLayers();
+                commit(`Plis réparés (${A().plural(n, 'ligne')})`); dlg.querySelector('[data-rt-step="tears"] .h-rt-stepok')?.removeAttribute('hidden');
+                toast(`${A().plural(n, 'ligne réparée', 'lignes réparées')} : compare avec 👁 ou ◧ ; ↶ pour revenir.`);
+            });
+            run();
+        }
+
+        /* ✨ Restaurer en une fois : débruitage, poussières, plis, niveaux, netteté, colorisation — chaque étape avec son aperçu
+           et une case ; le résultat : des calques de réglage « ✨ » (et les plis comblés sur la photo), une seule étape d'historique */
+        async function restoreAllPanel() {
+            if (!P()) return toast('La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques).', 'error');
+            if (mode === 'persp') setMode('adjust');
+            let sat = 0, cnt = 0; for (let i = 0; i < srcData.data.length; i += 64) { const d = srcData.data; sat += Math.abs(d[i] - d[i + 1]) + Math.abs(d[i + 1] - d[i + 2]); cnt++; }
+            const gray = sat / Math.max(1, cnt) < 14;
+            const STEPS = [['denoise', '🌫️ Débruitage', 'adoucit le grain sans perdre les contours', true, 'detail'], ['dust', '🧹 Poussières et rayures', 'les petits points blancs ou noirs', true, 'all'],
+                ['creases', '🩹 Plis et fines déchirures', 'lignes fines repérées puis comblées', true, 'all'], ['levels', '🎚 Contraste et niveaux automatiques', 'noirs bien noirs, blancs bien blancs', true, 'all'],
+                ['sharpen', '🔎 Netteté douce', 'un peu plus de piqué', true, 'detail'], ['colorize', '🌈 Colorisation', gray ? 'couleurs d’époque (photo en noir et blanc)' : 'la photo a déjà des couleurs : coche si tu veux quand même', gray, 'all']];
+            const pn = panel('h-rt-raall', `<header><b>✨ Restaurer en une fois</b><small>Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup.</small></header>
+                <label data-help="La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »).">Intensité <input type="range" min="0" max="100" value="${Number(ls('genealogie-retouch-raall', 60))}" data-ra-k data-unit="%"></label>
+                <ol class="h-ra-steps">${STEPS.map(([k, t, h, on, view]) => `<li class="h-ra-step${on ? '' : ' is-off'}" data-ra="${k}"><input type="checkbox" ${on ? 'checked' : ''} data-ra-on aria-label="Garder : ${esc(t)}"><b>${esc(t)}</b><small>${esc(h)}${view === 'detail' ? ' · détail au centre' : ''}</small><div class="h-ra-thumbs"><canvas data-ra-b></canvas><span>→</span><canvas data-ra-a></canvas></div></li>`).join('')}</ol>
+                <div class="h-rt-panelbtns"><small class="muted" data-ra-state></small><span class="spacer"></span><button type="button" class="button small secondary" data-ra-cancel>Annuler</button><button type="button" class="button small" data-ra-ok>✓ Appliquer</button></div>`);
+            const K = () => Number(pn.querySelector('[data-ra-k]').value) / 100, state = pn.querySelector('[data-ra-state]');
+            // la petite image (toute la photo) et un détail au centre (à 100 %) pour voir le grain et la netteté
+            const pc = photo(), tw = 240, th = Math.max(1, Math.round(tw * ph / pw));
+            const whole = (() => { const c = blank(tw, th); c.getContext('2d').drawImage(pc, 0, 0, tw, th); return c.getContext('2d', {willReadFrequently: true}).getImageData(0, 0, tw, th); })();
+            const dw = Math.min(pw, 240), dh = Math.min(ph, Math.round(240 * th / tw)), detail = pctx.getImageData(Math.round((pw - dw) / 2), Math.round((ph - dh) / 2), dw, dh);
+            const autoLv = () => { const h = new Array(256).fill(0); let n = 0; for (let i = 0; i < srcData.data.length; i += 16) { h[Math.round(0.299 * srcData.data[i] + 0.587 * srcData.data[i + 1] + 0.114 * srcData.data[i + 2])]++; n++; }
+                let lo = 0, hi = 255, acc = 0; while (lo < 250 && (acc += h[lo]) < n * 0.005) lo++; acc = 0; while (hi > lo + 5 && (acc += h[hi]) < n * 0.005) hi--; let mid = 0; acc = 0; while (mid < 255 && (acc += h[mid]) < n / 2) mid++;
+                const t = Math.min(0.95, Math.max(0.05, (mid - lo) / Math.max(1, hi - lo))); return {lo, hi, g: Math.round(Math.min(300, Math.max(10, Math.log(t) / Math.log(0.5) * 100)))}; };
+            const LV = autoLv();
+            const stepSt = (key, k) => ({
+                denoise: {filters: {chain: [{t: 'denoise2', ...fxDefaults('denoise2'), amount: Math.round(15 + 55 * k)}]}},
+                dust: {filters: {dust: Math.round(15 + 60 * k)}},
+                levels: (() => { const q = 0.35 + 0.65 * k; return {lvl_in_b: Math.round(LV.lo * q), lvl_in_w: Math.round(255 - (255 - LV.hi) * q), lvl_gamma: Math.round(100 + (LV.g - 100) * q), contrast: Math.round(10 * k)}; })(),
+                sharpen: {filters: {chain: [{t: 'unsharp', ...fxDefaults('unsharp'), amount: Math.round(40 + 90 * k), r: 1.2, thr: 3}]}},
+                colorize: {gmap: 'autochrome', gmap_amt: Math.round(35 + 45 * k)},
+            })[key];
+            const put = (cv, idata) => { cv.width = idata.width; cv.height = idata.height; cv.getContext('2d').putImageData(idata, 0, 0); };
+            let creases = null;
+            const preview = async () => {
+                const k = K(); state.textContent = 'Aperçus…'; await tick(); if (!pn.isConnected) return;
+                for (const [key, , , , view] of STEPS) {
+                    const li = pn.querySelector(`[data-ra="${key}"]`), base = view === 'detail' ? detail : whole; put(li.querySelector('[data-ra-b]'), base);
+                    if (key === 'creases') continue;
+                    const o = new ImageData(base.width, base.height); rtApply(new ImageData(new Uint8ClampedArray(base.data), base.width, base.height), o, {...adjDefault(), ...stepSt(key, k)}); put(li.querySelector('[data-ra-a]'), o);
+                }
+                // les plis : repérés sur l'aperçu de travail, comblés, puis montrés en petit
+                const r = rtCreases(srcData, Math.round(30 + 45 * k)); if (!pn.isConnected) return; creases = r;
+                const li = pn.querySelector('[data-ra="creases"]'), tmp = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); if (r.lines) rtInpaint(tmp, r.mask);
+                const big = blank(pw, ph); big.getContext('2d').putImageData(tmp, 0, 0); const sm = blank(tw, th), sg = sm.getContext('2d', {willReadFrequently: true}); sg.drawImage(big, 0, 0, tw, th); put(li.querySelector('[data-ra-a]'), sg.getImageData(0, 0, tw, th));
+                li.querySelector('small').textContent = r.lines ? `${A().plural(r.lines, 'ligne repérée', 'lignes repérées')} puis comblée${r.lines > 1 ? 's' : ''}` : 'aucun pli trouvé à cette intensité';
+                if (!r.lines) { li.querySelector('[data-ra-on]').checked = false; li.classList.add('is-off'); }
+                state.textContent = '';
+            };
+            let tm = 0;
+            pn.addEventListener('input', e => { if (!e.target.matches('[data-ra-k]')) return; lsSet('genealogie-retouch-raall', e.target.value); clearTimeout(tm); tm = setTimeout(preview, 250); });
+            pn.addEventListener('change', e => { const li = e.target.closest('[data-ra]'); if (li && e.target.matches('[data-ra-on]')) li.classList.toggle('is-off', !e.target.checked); });
+            pn.querySelector('[data-ra-cancel]').addEventListener('click', () => pn.remove());
+            pn.querySelector('[data-ra-ok]').addEventListener('click', async () => {
+                const k = K(), on = new Set([...pn.querySelectorAll('[data-ra]')].filter(li => li.querySelector('[data-ra-on]').checked).map(li => li.dataset.ra));
+                if (!on.size) return toast('Coche au moins une étape.', 'error');
+                state.textContent = 'Restauration…'; pn.querySelectorAll('button').forEach(b => { b.disabled = true; }); await tick();
+                let n = 0;
+                if (on.has('creases')) { const r = creases || rtCreases(srcData, Math.round(30 + 45 * k)); if (r.lines && !lockedDeep(P())) { const s0 = {tool: 'inpaint', mask: addMask(rtMaskCanvas(r.mask, pw, ph)), grain: true}; st.strokes.push(s0); rtReplayStrokes(srcData, [s0], masks); strokeVer++; n++; } }
+                const NAMES0 = {dust: '✨ Poussières et rayures', denoise: '✨ Débruitage', levels: '✨ Contraste et niveaux', sharpen: '✨ Netteté douce', colorize: '✨ Colorisation'};
+                for (const key of ['dust', 'denoise', 'levels', 'sharpen', 'colorize']) { if (!on.has(key)) continue; layers.push({id: nid('a'), type: 'adjust', name: NAMES0[key], visible: true, opacity: 1, mask: null, clip: false, st: {...adjDefault(), ...rtClone(stepSt(key, k))}}); n++; }
+                pn.remove(); activeLayer = ''; refreshLayers(); syncControls(); draw();
+                commit(`✨ Restauration en une fois (${A().plural(n, 'étape')})`);
+                toast(`Restauration faite (${A().plural(n, 'étape')}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout.`);
+            });
+            preview();
+        }
+
+        /* 🪪 Photo d'identité : les yeux trouvés (modèle des visages de l'app, sinon l'identification de la photo), le cadre au
+           format choisi (yeux à l'horizontale, à la même hauteur pour tous), puis recadrer ou en faire le portrait d'une fiche */
+        const idpUpdate = () => { if (!idp) return; idp.crop = idpCrop(idp.eyes, pw, ph, idp.p); drawOverlay(); const cv = dlg.querySelector('[data-idp-prev]'); if (!cv) return; const t = idpRender(canvas, pw, ph, idp.crop, 220); cv.width = t.width; cv.height = t.height; cv.getContext('2d').drawImage(t, 0, 0); };
+        async function openIdPhoto() {
+            if (mode === 'crop') endCrop(true);
+            const pn = panel('h-rt-idp', `<header><b>🪪 Photo d’identité</b><small>Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format.</small></header><p class="muted" data-idp-src>${window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner('Recherche du visage…') : 'Recherche du visage…'}</p>`);
+            let tags = []; try { if (item.id) tags = ((await api('media_tags', {media_id: item.id})).tags || []).filter(t => t.tag_type === 'person'); } catch (_) {}
+            const hint = tags.slice().sort((a, b) => b.w * b.h - a.w * a.h)[0], f = await idpFindEyes(img, {hint: hint ? {x: Number(hint.x), y: Number(hint.y), w: Number(hint.w), h: Number(hint.h)} : null, onStep: s => { const el = pn.querySelector('[data-idp-src]'); if (el) el.textContent = s; }});
+            if (!pn.isConnected) return;
+            const k = pw / img.naturalWidth, eyes = f ? f.eyes.map(([x, y]) => [x * k, y * k]) : [[pw * 0.42, ph * 0.38], [pw * 0.58, ph * 0.38]];
+            const mid = [(eyes[0][0] + eyes[1][0]) / 2 / pw * 100, (eyes[0][1] + eyes[1][1]) / 2 / ph * 100], who = tags.find(t => mid[0] >= Number(t.x) && mid[0] <= Number(t.x) + Number(t.w) && mid[1] >= Number(t.y) && mid[1] <= Number(t.y) + Number(t.h));
+            idp = {eyes, p: idpPrefs(), person: who ? Number(who.person_id) : 0, personName: who ? `${who.first_name || ''} ${who.last_name || ''}`.trim() : ''};
+            const p = idp.p;
+            pn.innerHTML = `<header><b>🪪 Photo d’identité</b><small>Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format.</small></header>
+                <canvas class="h-idp-prev" data-idp-prev></canvas>
+                <p class="muted" data-idp-src>${f ? (f.source === 'model' ? '✓ Yeux trouvés sur le visage.' : '✓ D’après l’identification de la photo : ajuste les ronds sur les yeux.') : '⚠️ Visage non trouvé : glisse les deux ronds sur les yeux.'}${idp.personName ? ` Personne : <b>${esc(idp.personName)}</b>.` : ''}</p>
+                <label>Format <select data-idp-ratio>${IDP_RATIOS.map(([v, l]) => `<option value="${v}" ${Number(v) === p.ratio ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <label data-help="De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond.">Marge autour du visage <input type="range" min="0" max="100" value="${p.margin}" data-idp-margin data-unit="%"></label>
+                <label data-help="La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte.">Hauteur des yeux <input type="range" min="25" max="60" value="${Math.round(p.eye * 100)}" data-idp-eye data-unit="%"></label>
+                <div class="h-rt-panelbtns"><button type="button" class="link-button" data-idp-batch>Plusieurs fiches…</button><span class="spacer"></span><button type="button" class="button small secondary" data-idp-cancel>Annuler</button><button type="button" class="button small secondary" data-idp-ok>✓ Recadrer</button><button type="button" class="button small" data-idp-use>👤 Utiliser comme portrait…</button></div>`;
+            setMode('idphoto'); idpUpdate();
+            pn.addEventListener('input', e => { if (!idp) return; if (e.target.matches('[data-idp-margin]')) idp.p.margin = Number(e.target.value); if (e.target.matches('[data-idp-eye]')) idp.p.eye = Number(e.target.value) / 100; idpSave(idp.p); idpUpdate(); });
+            pn.addEventListener('change', e => { if (e.target.matches('[data-idp-ratio]') && idp) { idp.p.ratio = Number(e.target.value) || 0.75; idpSave(idp.p); idpUpdate(); } });
+            const applyCrop = () => { if (!idp) return false; st.crop = {...idp.crop}; idp = null; pn.remove(); setMode('adjust'); draw(); commit('Recadré en photo d’identité'); return true; };
+            pn.querySelector('[data-idp-cancel]').addEventListener('click', () => { idp = null; pn.remove(); setMode('adjust'); });
+            pn.querySelector('[data-idp-batch]').addEventListener('click', () => idpBatchDialog());
+            pn.querySelector('[data-idp-ok]').addEventListener('click', applyCrop);
+            pn.querySelector('[data-idp-use]').addEventListener('click', async () => {
+                if (!idp) return; const who0 = idp.person || A().state.currentPersonId || 0, nm = idp.personName;
+                const pers = await idpAskPerson(who0); if (!pers) return;
+                applyCrop();
+                try {
+                    window.LCNDA_UI?.savedStatus?.(statusEl, 'saving'); lastStatus = 'saving';
+                    let c = await renderFull(); if (c.height > 1600) { const k2 = 1600 / c.height, t = blank(Math.round(c.width * k2), 1600); t.getContext('2d').drawImage(c, 0, 0, t.width, t.height); c = t; }
+                    await idpUseAsPortrait(c, pers.id, pers.name || nm); lastStatus = null; showProj();
+                    toast(`Portrait de la fiche${pers.name ? ` « ${pers.name} »` : ''} mis à jour (la photo recadrée est dans ses médias).`); refreshAfter();
+                } catch (err) { lastStatus = null; showProj(); toast(err.message, 'error'); }
+            });
+        }
         async function cmd(k) {
             dlg.querySelectorAll('details.h-rt-menu[open]').forEach(d => d.removeAttribute('open'));
             const [a, b] = k.split(':');
@@ -1837,6 +2502,12 @@
             if (k === 'cropclear') { if (mode === 'crop') { crop = {x: 0, y: 0, w: 1, h: 1, a: 0}; angleIn.value = 0; $('[data-rt-angle-out]').textContent = '0°'; syncCrop(); } if (st.crop) { st.crop = null; draw(); commit('Recadrage enlevé'); } return; }
             if (k === 'img:place') return placeDialog();
             if (k === 'actions') return actionsDialog();
+            if (a === 'export') return b === 'ba' ? exportBA() : exportImage();
+            if (k === 'curtain') return curtain.toggle();
+            if (k === 'restore:all') return restoreAllPanel();
+            if (k === 'repair:detect') return creasePanel();
+            if (k === 'idphoto') return openIdPhoto();
+            if (k === 'idbatch') return idpBatchDialog();
             if (a === 'fx') return b === 'last' ? fxLast() : fxDialog(b);
             if (k === 'sel:subject') {
                 help.textContent = 'Recherche du sujet…'; await new Promise(r => setTimeout(r, 30));
@@ -1861,7 +2532,7 @@
             if (k === 'colorize:auto') {
                 const n = newAdjust('Colorisation'); n.st.gmap = 'autochrome'; n.st.gmap_amt = 70;
                 if (selId) { n.mask = [{type: 'sel', mask: selId}]; }
-                refreshLayers(); syncControls(); draw(); showTab('adjust'); $$('.h-rt-levels')[1]?.setAttribute('open', '');
+                refreshLayers(); syncControls(); draw(); showTab('adjust'); $('[data-ui-section="rt-gmap"]')?.setAttribute('open', '');
                 toast(`Colorisation dans un calque de réglage${selId ? ' (limitée à la sélection)' : ''} : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée.`);
                 return commit('Calque de colorisation');
             }
@@ -2053,7 +2724,20 @@
         // 💾 Projet : tout le travail (corrections, réglages, calques, groupes, masques, sélection, recadrage) gardé pour continuer plus tard
         let projId = project?.id || 0, projName = project?.name || '', projKey = '';
         const curKey = () => JSON.stringify(snapshot());
-        const showProj = () => { const el = $('[data-rt-projname]'); if (el) el.textContent = projId ? `🎚️ ${projName}${projKey && projKey !== curKey() ? ' · modifié' : ''}` : ''; };
+        const statusEl = $('[data-rt-status]'), nameIn = $('[data-rt-name]'); let lastStatus = null;
+        const showProj = () => {
+            const now = projId && projKey === curKey() ? 'saved' : hpos > 0 || projId ? 'dirty' : '';
+            if (now !== lastStatus) { lastStatus = now; if (now) window.LCNDA_UI?.savedStatus?.(statusEl, now); else statusEl.textContent = ''; }
+            statusEl.title = projId ? `Projet « ${projName} » (📂 Fichier → Ouvrir un projet pour le retrouver)` : 'Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard';
+        };
+        onHist = () => setTimeout(showProj, 0);
+        nameIn.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); nameIn.blur(); } });
+        nameIn.addEventListener('change', async () => {
+            const v = nameIn.value.trim().slice(0, 160); if (!v) { nameIn.value = projName || item.title || item.filename || ''; return; }
+            if (!projId) { projName = v; return; }
+            if (v === projName) return;
+            try { const r = await api('rename_retouch_project', {}, {method: 'POST', body: {id: projId, name: v}}); projName = r.result?.name || v; nameIn.value = projName; } catch (err) { toast(err.message, 'error'); nameIn.value = projName; }
+        });
         async function projectData() {
             const snap = snapshot(), ids = [...new Set((JSON.stringify(snap).match(/"k\d+"/g) || []).map(x => x.slice(1, -1)))], m = {};
             ids.forEach(id => { const c = masks.get(id); if (c) m[id] = c.toDataURL('image/png'); });
@@ -2064,19 +2748,18 @@
             if (mode === 'persp') setMode('adjust');
             if (projBusy) return;
             let name = projName;
-            if (!projId || asNew) { const n = await A().askText({title: 'Enregistrer le projet de retouche', message: 'Nom du projet (pour le retrouver dans « 📂 Projets… ») :', value: projName || item.title || 'Ma retouche', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
-            projBusy = true; const btn = $('[data-rt-projsave]'), l0 = btn.textContent; btn.disabled = true; btn.textContent = 'Enregistrement…';
+            if (asNew) { const n = await A().askText({title: 'Enregistrer le projet sous un autre nom', message: 'Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») :', value: `${projName || nameIn.value || item.title || 'Ma retouche'} (copie)`, okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
+            else if (!projId) name = (nameIn.value.trim() || item.title || 'Ma retouche').slice(0, 160); // le nom tapé dans la barre du haut
+            projBusy = true; const btn = $('[data-rt-projsave]'); btn.disabled = true; window.LCNDA_UI?.savedStatus?.(statusEl, 'saving'); lastStatus = 'saving';
             try {
                 const t = document.createElement('canvas'), k = Math.min(1, 320 / Math.max(pw, ph)); t.width = Math.max(1, Math.round(pw * k)); t.height = Math.max(1, Math.round(ph * k)); const tg = t.getContext('2d'); tg.fillStyle = '#fff'; tg.fillRect(0, 0, t.width, t.height); tg.drawImage(canvas, 0, 0, t.width, t.height);
                 const r = await A().api('save_retouch_project', {}, {method: 'POST', body: {id: asNew ? 0 : projId, name, media_id: item.id || 0, source: from, thumb: t.toDataURL('image/jpeg', 0.8), project: await projectData()}});
-                projId = r.result.id; projName = r.result.name; projKey = curKey(); showProj();
-                toast(`Projet « ${projName} » enregistré : « 📂 Projets… » pour le rouvrir.`);
-            } catch (err) { toast(err.message, 'error'); }
-            finally { projBusy = false; btn.disabled = false; btn.textContent = l0; }
+                projId = r.result.id; projName = r.result.name; nameIn.value = projName; projKey = curKey(); showProj();
+            } catch (err) { window.LCNDA_UI?.savedStatus?.(statusEl, 'error'); lastStatus = 'error'; toast(err.message, 'error'); }
+            finally { projBusy = false; btn.disabled = false; }
         }
         $('[data-rt-projsave]').addEventListener('click', () => saveProject());
         const openProjects = () => retouchProjectsDialog({current: projId, onOpen: async pr => { if (hpos > 0 && curKey() !== projKey && !await A().confirmBox('Les retouches en cours seront perdues.', {title: 'Ouvrir un autre projet sans enregistrer ce travail ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; saved = true; dlg.close(); await ext.openRetouchProject(pr.id); }});
-        $('[data-rt-projopen]').addEventListener('click', openProjects);
         dlg.addEventListener('input', () => setTimeout(showProj, 0)); dlg.addEventListener('pointerup', () => setTimeout(showProj, 0));
         const askClose = async () => { if (!saved && hpos > 0 && !(projId && curKey() === projKey) && !await A().confirmBox('Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard).', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; saved = true; dlg.close(); };
         $$('[data-rt-close]').forEach(b => b.addEventListener('click', askClose));
@@ -2122,6 +2805,16 @@
             const comp = document.createElement('canvas'); comp.width = W; comp.height = H; const cg = comp.getContext('2d');
             const RF = {W, H, layer: l => { if (typeOf(l) === 'photo') return pc; const lc = blank(W, H); rtDrawLayer(lc, l, {masks, photo: pc}); return lc; }, mask: n => n.maskOff ? null : n.mask};
             cg.drawImage(renderStack($('[data-rt-merge]').checked ? layers : P() ? [P()] : [], null, RF), 0, 0);
+            return cropOf(comp);
+        }
+        /** L'original en pleine taille, avec la même perspective et le même cadre que la retouche (l'« avant ») */
+        async function renderBefore() {
+            const W = img.naturalWidth, H = img.naturalHeight, pc = blank(W, H), g = pc.getContext('2d', {willReadFrequently: true}); g.drawImage(img, 0, 0);
+            if (st.persp) g.putImageData(rtWarp(g.getImageData(0, 0, W, H), st.persp), 0, 0);
+            return cropOf(pc);
+        }
+        function cropOf(comp) {
+            const W = comp.width, H = comp.height;
             if (!st.crop) return comp;
             const c = st.crop, oc = document.createElement('canvas'); oc.width = Math.max(1, Math.round(c.w * W)); oc.height = Math.max(1, Math.round(c.h * H));
             const og = oc.getContext('2d'); if (!hasAlpha()) { og.fillStyle = '#fff'; og.fillRect(0, 0, oc.width, oc.height); }
@@ -2156,10 +2849,12 @@
                 b.textContent = label0;
             }
         }));
-        dlg.showModal();
+        dlg.showModal(); stage.tabIndex = -1; stage.focus({preventScroll: true}); // les touches des outils marchent tout de suite (pas dans la case du nom)
         photo(); setMode('adjust'); if (tab) showTab(tab);
         try { if (localStorage.getItem('genealogie-retouch-side-closed') === '1') setSideClosed(true); } catch (_) {}
         commit('Ouverture de la photo');
+        if (restoreAll) setTimeout(() => cmd('restore:all'), 60);
+        if (idphoto) setTimeout(() => cmd('idphoto'), 60);
         if (project?.project) { // un projet rouvert : ses masques (images), puis tout son état, comme une étape de l'historique
             const d = project.project;
             try {

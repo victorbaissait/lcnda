@@ -140,7 +140,7 @@
         const ph = x.placeholder ? ` placeholder="${esc(x.placeholder)}"` : '';
         switch (x.type) {
             case 'longtext': return `<textarea name="${name}" rows="3"${ph}${req(x)}>${esc(v ?? '')}</textarea>`;
-            case 'date': return `<input type="date" name="${name}" value="${esc(v ?? '')}"${req(x)}>`;
+            case 'date': return `<input type="date" data-iso-date name="${name}" value="${esc(v ?? '')}"${req(x)}>`;
             case 'time': return `<input type="time" name="${name}" value="${esc(v ?? '')}"${req(x)}>`;
             case 'number': return `<input type="text" inputmode="decimal" name="${name}" value="${esc(v ?? '')}"${ph}${req(x)}>`;
             case 'select': return `<select name="${name}"${req(x)}><option value="">—</option>${(x.options || []).map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;

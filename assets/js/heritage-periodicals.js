@@ -169,9 +169,10 @@
                 <select data-pr-f="inv">${opt('', 'Toutes les enquêtes', f.inv)}${invs.map(l => opt(l.id, l.name, f.inv)).join('')}</select>
                 <input type="search" data-pr-f="who" value="${esc(f.who)}" placeholder="Personne citée…">
                 <label class="h-pr-years">Années <input type="number" data-pr-f="y0" value="${esc(f.y0)}" placeholder="de"> – <input type="number" data-pr-f="y1" value="${esc(f.y1)}" placeholder="à"></label>
-                <span class="h-pr-sorts">Trier par ${sortSel(0)} puis ${sortSel(1)} puis ${sortSel(2)}</span>
+                <span class="h-pr-sorts">Ensuite par ${sortSel(1)} puis ${sortSel(2)}</span>
                 <button type="button" class="link-button" data-pr-reset>Tout effacer</button>
             </div>
+            <div data-pr-sortbar data-count="${f.view === 'articles' ? articles.length : f.view === 'periodicals' ? conts.length : f.view === 'wanted' ? wanted.length : issues.length}"></div>
             <div data-pr-body>${f.view === 'articles' ? articlesTable(articles) : f.view === 'periodicals' ? periodicalCards(conts) : f.view === 'wanted' ? `<p class="h-pr-total">${wanted.length} à acheter ou commandé${wanted.length > 1 ? 's' : ''}${total ? ` · environ <strong>${esc(euro(total))}</strong> au prix affiché` : ''}</p>${issuesShown(wanted, f, true)}` : issuesShown(issues, f)}</div>
         </section>`;
         bind(ws, {issues, articles, wanted});
@@ -230,6 +231,10 @@
         ws.querySelector('[data-pr-types]')?.addEventListener('click', () => typesDialog());
         let t = 0;
         ws.querySelectorAll('[data-pr-f]').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { clearTimeout(t); t = setTimeout(() => { const pos = el.selectionStart; save({[el.dataset.prF]: el.value}); const again = A().$(`[data-pr-f="${el.dataset.prF}"]`); if (again && el.tagName !== 'SELECT') { again.focus(); try { again.setSelectionRange(pos, pos); } catch (_) {} } }, el.tagName === 'SELECT' ? 0 : 300); }));
+        // C6 : « N éléments · Trier : [menu] » (le premier critère ; « Ensuite par… » affine)
+        const sb = ws.querySelector('[data-pr-sortbar]'), UI = window.LCNDA_UI;
+        if (sb && UI?.sortBar) { const cur = prefs().sort?.[0] || ''; sb.replaceWith(UI.sortBar({count: Number(sb.dataset.count) || 0, label: 'élément', value: cur, options: [['', 'Dans l’ordre de départ'], ...Object.entries(SORTS).map(([v, [l]]) => [v, l])],
+            onChange: v => { const s = [...prefs().sort]; s[0] = v; save({sort: s.filter((x, k) => x || k < 3)}); }})); }
         ws.querySelectorAll('[data-pr-sort]').forEach(el => el.addEventListener('change', () => { const s = [...prefs().sort]; s[Number(el.dataset.prSort)] = el.value; save({sort: s.filter((v, k) => v || k < 3)}); }));
         ws.querySelector('[data-pr-reset]').addEventListener('click', () => save({q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', cat: ''}));
         ws.querySelectorAll('[data-pr-new]').forEach(b => b.addEventListener('click', () => b.dataset.prNew === 'periodical' ? periodicalDialog(null, prefs().fam || 'revue') : issueDialog(null, Number(prefs().periodical) || 0, b.dataset.fam)));
@@ -386,7 +391,8 @@
             if (c.type === 'status') return field('status', lab, i?.status || '', {type: 'select', list: Object.entries(D.statuses)});
             if (c.type === 'cat') return `<label>${esc(lab)}<input name="category" list="h-pr-cats" value="${esc(v || '')}" placeholder="Généalogie, histoire locale, guerre…" autocomplete="off"></label>`;
             const t = f.k.startsWith('cf_') ? ({textarea: 'textarea', check: 'check', number: 'number', date: 'date', url: 'url'}[f.type] || 'text') : c.type || 'text';
-            return field(f.k, lab, v ?? '', {type: t, span: c.span || t === 'textarea', ph, list: c.list, rows: c.rows || 3}); };
+            const html = field(f.k, lab, v ?? '', {type: t, span: c.span || t === 'textarea', ph, list: c.list, rows: c.rows || 3});
+            return f.k === 'date_text' ? html.replace('<input ', '<input data-ui-date="nocal" ') : html; }; // C4 : « ✓ Compris : mars 2024 »
         const fields = fieldsFor(fam).filter(f => f.show).map(one).join('') + `<datalist id="h-pr-cats">${categories().map(c => `<option value="${esc(c)}">`).join('')}</datalist>`;
         const roles = bf === 'doc' ? [['cover', '🖼️ Affiche, vignette', 'image/*'], ['video', '🎞️ Le film lui-même (fichier vidéo, si tu l’as)', 'video/*'], ['', '📸 Captures d’écran, documents', 'image/*,application/pdf']]
             : bf === 'podcast' ? [['cover', '🖼️ Image de l’émission', 'image/*'], ['audio', '🎧 L’épisode lui-même (fichier audio, si tu l’as)', 'audio/*'], ['', '📸 Captures, documents', 'image/*,application/pdf']]

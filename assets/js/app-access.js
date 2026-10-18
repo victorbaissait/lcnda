@@ -355,6 +355,7 @@
             <details class="a11y-light" ${CB[P.cb].light ? 'open' : ''}><summary>Couleurs seulement affaiblies (léger)</summary><div class="a11y-cbs">${['protanomaly', 'deuteranomaly', 'tritanomaly'].map(cbCard).join('')}</div></details>
             ${range('fix', 'Force de la correction', {min: 0, max: 100, step: 5, unit: '%', def: 80})}
             <div class="a11y-toggles">${toggle('safe', 'Couleurs faciles à distinguer', 'Erreur / réussi, homme / femme et graphiques prennent des couleurs que tout le monde distingue (palette Okabe-Ito).')}
+            <p class="muted a11y-small">Les couleurs que tu as choisies toi-même (dessins, plans et maison 3D, tableaux, mises en page, photos) ne sont pas remplacées : c’est la correction (le curseur au-dessus) qui les rend plus faciles à distinguer, partout, y compris dans les outils de modification en plein écran.</p>
             ${toggle('shapes', 'Ajouter des formes en plus des couleurs', 'Symboles ✓ ⚠ ⛔ dans les messages, hachures sur les pastilles des légendes et les barres des graphiques, ronds et carrés pour femmes et hommes.')}</div>
             <div class="a11y-demo" aria-label="Aperçu"><span class="a11y-demo-title">Aperçu</span>
                 <div class="a11y-demo-msgs"><span class="a11y-demo-msg is-bad">Date impossible</span><span class="a11y-demo-msg is-good">Enregistré</span><span class="a11y-demo-msg is-warn">À vérifier</span></div>

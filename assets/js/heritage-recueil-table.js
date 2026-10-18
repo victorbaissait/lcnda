@@ -65,7 +65,7 @@
                     <button type="button" class="button small secondary" data-rt-delcol ${g ? '' : 'disabled'}>🗑 ${g && g.c1 > g.c0 ? 'Colonnes' : 'Colonne'}</button>
                     <span class="h-rt-sep"></span>
                     <button type="button" class="button small secondary" data-rt-csv title="Télécharger le tableau (s’ouvre dans Excel, Numbers, LibreOffice)">⬇ CSV</button>
-                    <span class="muted h-rt-hint">Coller depuis un tableur remplit les cellules · Entrée : cellule du dessous · Maj + Entrée : à la ligne</span></div>
+                    <span class="muted h-rt-hint">Coller depuis un tableur (ou glisser un fichier .csv) remplit les cellules · Entrée : cellule du dessous · Maj + Entrée : à la ligne</span></div>
                 <div class="h-rt-wrap"><table class="h-rt ${free ? 'is-free' : ''}"><thead><tr><th class="h-rt-corner">#</th>${t.cols.map((c, ci) => `<th data-rt-col="${ci}">${free ? '<span class="h-rt-grip" draggable="true" title="Glisser pour déplacer la colonne">⠿</span>' : ''}<input data-rt-colname="${ci}" value="${esc(c.name)}" placeholder="Colonne ${ci + 1}"></th>`).join('')}</tr></thead>
                 <tbody>${t.rows.map((r, ri) => `<tr data-rt-row="${ri}"><th class="h-rt-rowhead"><span class="h-rt-num" ${free ? 'draggable="true" title="Glisser pour déplacer la ligne"' : ''}>${free ? '⠿ ' : ''}${ri + 1}</span>
                         ${r.person ? `<span class="h-rt-person"><button type="button" class="link-button" data-rt-openp="${ri}" title="Ouvrir la fiche">👤 ${esc(r.person.name)}</button><button type="button" class="icon-button" data-rt-unp="${ri}" title="Ne plus rattacher cette ligne à la fiche">✕</button></span>` : `<button type="button" class="icon-button h-rt-addp" data-rt-person="${ri}" title="Cette ligne parle de quelqu’un : la rattacher à sa fiche (bloc « Recueils » de la personne)">👤</button>`}</th>
@@ -173,6 +173,37 @@
                 tr.addEventListener('drop', e => { e.preventDefault(); tr.classList.remove('is-drop'); if (drag?.kind !== 'row') return; const to = Number(tr.dataset.rtRow); if (to !== drag.i) { mergesMove("r", drag.i, to); move(t.rows, drag.i, to); sel = null; changed(); paint(); } drag = null; });
             });
         }
+        // E4 : un fichier de tableur (.csv, .tsv, .txt) glissé sur le tableau remplit les cellules, comme un collage
+        const parseCsv = text => {
+            text = text.replace(/^\ufeff/, '').replace(/\r\n?/g, '\n');
+            const first = text.split('\n')[0], sep = ['\t', ';', ','].map(c => [c, first.split(c).length]).sort((a, b) => b[1] - a[1])[0][0];
+            const rows = [[]]; let cur = '', q = false;
+            for (let i = 0; i < text.length; i++) {
+                const ch = text[i];
+                if (q) { if (ch === '"' && text[i + 1] === '"') { cur += '"'; i++; } else if (ch === '"') q = false; else cur += ch; }
+                else if (ch === '"' && !cur) q = true;
+                else if (ch === sep) { rows[rows.length - 1].push(cur); cur = ''; }
+                else if (ch === '\n') { rows[rows.length - 1].push(cur); cur = ''; rows.push([]); }
+                else cur += ch;
+            }
+            rows[rows.length - 1].push(cur);
+            return rows.filter(r => r.some(v => v.trim())).map(r => r.map(v => v.replace(/[\t\n]/g, ' ')).join('\t')).join('\n');
+        };
+        box._rtOnFiles = async files => {
+            const f = files[0]; let txt = '';
+            try { txt = parseCsv(await f.text()); } catch (_) {}
+            if (!txt) { A().toast?.('Ce fichier ne contient pas de tableau lisible.', 'error'); return; }
+            // tableau encore vide : la première ligne du fichier donne les titres des colonnes
+            if (!ext.recueilTableHasText(t) && txt.includes('\n')) {
+                const [head, ...rest] = txt.split('\n'), names = head.split('\t');
+                while (t.cols.length < names.length) t.cols.push({id: uid('c'), name: ''});
+                names.forEach((n, j) => { if (n.trim()) t.cols[j].name = n.trim().slice(0, 80); });
+                return pasteGrid(0, 0, rest.join('\n'));
+            }
+            const g = range(), lastFilled = t.rows.reduce((n, r, i) => Object.values(r.c || {}).some(v => String(v).trim()) ? i + 1 : n, 0);
+            pasteGrid(g ? g.r0 : lastFilled, g ? g.c0 : 0, txt);
+        };
+        if (window.LCNDA_UI?.bindFileDrop && !box._uiDrop) window.LCNDA_UI.bindFileDrop(box, files => box._rtOnFiles?.(files), {accept: '.csv,.tsv,.txt,text/csv,text/plain,text/tab-separated-values'});
         paint();
         return {repaint: () => paint()};
     };

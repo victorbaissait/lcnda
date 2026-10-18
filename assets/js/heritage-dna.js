@@ -148,7 +148,7 @@
                 <label>Nom du test <small>(si la personne n’est pas dans l’arbre)</small><input name="label" value="${esc(k.label || '')}" maxlength="160"></label>
                 <label>Société / origine<input name="company" list="dna-companies" value="${esc(k.company || '')}"><datalist id="dna-companies">${COMPANIES.map(c => `<option value="${esc(c)}">`).join('')}</datalist></label>
                 <label>Type<select name="test_type">${TYPES.map(([v, l]) => `<option value="${v}" ${(k.test_type || 'autosomal') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <label>N° de kit<input name="kit_number" value="${esc(k.kit_number || '')}"></label><label>Date<input name="test_date" value="${esc(k.test_date || '')}" placeholder="2024"></label>
+                <label>N° de kit<input name="kit_number" value="${esc(k.kit_number || '')}"></label><label>Date<input name="test_date" data-ui-date="nocal" value="${esc(k.test_date || '')}" placeholder="2024"></label>
                 <label>Haplogroupe Y<input name="haplo_y" value="${esc(k.haplo_y || '')}" placeholder="R-M269, R-L21…"></label><label>Haplogroupe mitochondrial<input name="haplo_mt" value="${esc(k.haplo_mt || '')}" placeholder="H1, U5b…"></label>
                 <label>Puce / version<input name="chip" value="${esc(d.chip || '')}" placeholder="GSA v3, OmniExpress…"></label><label>Géré par<input name="manager" value="${esc(d.manager || '')}"></label>
                 <label>Kit GEDmatch<input name="gedmatch" value="${esc(d.gedmatch || '')}"></label><label>Fichier brut (où il est rangé)<input name="raw_file" value="${esc(d.raw_file || '')}"></label>
@@ -218,18 +218,29 @@
             <div class="h-dna-filters">${sel('kit', [[0, 'Tous les tests'], ...data.kits.map(k => [k.id, kitName(k)])], f.kit)}<input type="search" data-dna-f="q" value="${esc(f.q || '')}" placeholder="Nom, nom de famille, lieu, note…">
                 ${sel('side', [['', 'Tous les côtés'], ...SIDES.slice(1)], f.side)}${sel('status', [['', 'Tout suivi'], ...STATUSES.slice(1)], f.status)}${sel('group', [[0, 'Tous les groupes'], [-1, 'Sans groupe'], ...data.groups.map(g => [g.id, g.name])], f.group)}
                 <input type="number" data-dna-f="min" value="${esc(f.min || '')}" placeholder="cM min" min="0"><input type="number" data-dna-f="max" value="${esc(f.max || '')}" placeholder="cM max" min="0">
-                ${sel('sort', [['cm', 'Trier : cM'], ['name', 'Nom'], ['segments', 'Segments'], ['longest', 'Plus long segment'], ['side', 'Côté'], ['status', 'Suivi'], ['stars', 'Étoiles'], ['updated', 'Modifié']], f.sort)}${sel('dir', [['desc', '↓'], ['asc', '↑']], f.dir)}</div>
+</div>
             <div class="h-dna-bulk" hidden><span data-dna-nsel></span>${sel('bside', [['', 'Côté…'], ...SIDES.slice(1)], '')}${sel('bstatus', [['', 'Suivi…'], ...STATUSES.slice(1)], '')}${sel('bgroup', [[0, 'Ajouter au groupe…'], ...data.groups.map(g => [g.id, g.name])], 0)}${sel('bungroup', [[0, 'Retirer du groupe…'], ...data.groups.map(g => [g.id, g.name])], 0)}<button type="button" class="button small danger" data-dna-bdel>Supprimer</button></div>
-            <div class="data-table-wrap"><table class="data-table h-dna-table"><thead><tr><th><input type="checkbox" data-dna-all title="Tout cocher"></th>${p.columns.map(k => `<th>${esc(label(COLUMNS, k))}</th>`).join('')}</tr></thead>
+            <div data-dna-sortbar></div><div class="data-table-wrap"><table class="data-table h-dna-table"><thead><tr><th><input type="checkbox" data-dna-all title="Tout cocher"></th>${p.columns.map(k => `<th>${esc(label(COLUMNS, k))}</th>`).join('')}</tr></thead>
             <tbody>${shown.map(m => `<tr data-id="${m.id}"><td><input type="checkbox" data-dna-chk="${m.id}"></td>${p.columns.map(k => `<td class="c-${k}">${cell(k, m)}</td>`).join('')}</tr>`).join('') || `<tr><td colspan="${p.columns.length + 1}">${A().empty('Aucune correspondance pour ces filtres.')}</td></tr>`}</tbody></table></div>
-            ${list.length > shown.length ? `<p><button type="button" class="button secondary" data-dna-more>Afficher ${fmt(Math.min(size, list.length - shown.length))} de plus</button></p>` : ''}`;
+            <div data-dna-morebox data-rest="${list.length - shown.length}" data-step="${size}"></div>`;
     }, bind(root) {
         const f = filt();
         root.querySelectorAll('[data-dna-f]:not([data-dna-f="q"])').forEach(el => el.addEventListener('change', () => { const k = el.dataset.dnaF;
             if (['bside', 'bstatus', 'bgroup', 'bungroup'].includes(k)) return bulk(root, k, el.value);
             f[k] = el.type === 'number' ? el.value : ['kit', 'group'].includes(k) ? Number(el.value) : el.value; f.shown = 0; go('matches'); }));
         root.querySelector('[data-dna-f="q"]').addEventListener('input', e => { clearTimeout(root._t); root._t = setTimeout(() => { f.q = e.target.value; f.shown = 0; go('matches'); setTimeout(() => { const i = A().$('#workspace [data-dna-f="q"]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }, 50); }, 350); });
-        root.querySelector('[data-dna-more]')?.addEventListener('click', () => { f.shown = (f.shown || 0) + (Math.max(50, num(prefs().pageSize) || 200)); go('matches'); });
+        // C6 : « N correspondances · Trier : [menu] » et « Voir les N suivantes ↓ »
+        const UI = window.LCNDA_UI;
+        if (UI?.sortBar) {
+            const SORT_OPTS = [['cm:desc', 'cM : les plus nombreux'], ['cm:asc', 'cM : les moins nombreux'], ['name:asc', 'Nom : A → Z'], ['name:desc', 'Nom : Z → A'], ['segments:desc', 'Segments : les plus nombreux'], ['longest:desc', 'Plus long segment'], ['side:asc', 'Côté'], ['status:asc', 'Suivi'], ['stars:desc', 'Étoiles'], ['updated:desc', 'Les plus récemment modifiées'], ['updated:asc', 'Les plus anciennement modifiées']];
+            const cur = `${f.sort || 'cm'}:${f.dir || 'desc'}`;
+            const bar = UI.sortBar({count: filtered().length, label: 'correspondance', feminine: true, value: cur, options: SORT_OPTS.some(o => o[0] === cur) ? SORT_OPTS : [...SORT_OPTS, [cur, cur]],
+                onChange: v => { const [k, d] = v.split(':'); f.sort = k; f.dir = d; f.shown = 0; go('matches'); }});
+            root.querySelector('[data-dna-sortbar]')?.replaceWith(bar);
+        }
+        const mb = root.querySelector('[data-dna-morebox]');
+        if (mb && Number(mb.dataset.rest) > 0) { const step = Number(mb.dataset.step) || 200, onMore = () => { f.shown = (f.shown || 0) + step; go('matches'); };
+            mb.appendChild(UI?.moreButton ? UI.moreButton({remaining: Number(mb.dataset.rest), step, feminine: true, onClick: onMore}) : Object.assign(document.createElement('button'), {type: 'button', className: 'button secondary', textContent: 'Afficher la suite', onclick: onMore})); }
         root.querySelector('[data-dna-newmatch]').addEventListener('click', () => matchDialog({kit_id: f.kit || data.kits[0]?.id}));
         root.querySelector('[data-dna-import]').addEventListener('click', () => importDialog());
         root.querySelector('[data-dna-export]').addEventListener('click', () => exportCsv(filtered()));
@@ -253,8 +264,8 @@
             body: `<div class="form-grid">
                 <label>Nom (tel que sur le site)<input name="name" required value="${esc(m.name || '')}" maxlength="200"></label>
                 <label>Test<select name="kit_id">${data.kits.map(k => `<option value="${k.id}" ${Number(m.kit_id) === k.id ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label>
-                <label>cM partagés<input name="shared_cm" inputmode="decimal" value="${esc(m.shared_cm || '')}" data-dna-cm></label><label>Segments<input name="segments" inputmode="numeric" value="${esc(m.segments || '')}"></label>
-                <label>Plus long segment (cM)<input name="longest_cm" inputmode="decimal" value="${esc(m.longest_cm || '')}"></label><label>cM sur le X<input name="x_cm" inputmode="decimal" value="${esc(d.x_cm || '')}"></label>
+                <label><span data-help="Le centiMorgan (cM) mesure l’ADN que vous avez en commun : environ 3 400 cM avec un parent, 850 avec un cousin germain, 200 avec un cousin issu de germain. Recopie le chiffre donné par le site du test." data-help-faq="ADN">cM partagés</span><input name="shared_cm" inputmode="decimal" value="${esc(m.shared_cm || '')}" data-dna-cm></label><label>Segments<input name="segments" inputmode="numeric" value="${esc(m.segments || '')}"></label>
+                <label><span data-help="Un long morceau d’ADN en commun (plus de 20 cM) montre souvent une parenté proche et sûre ; beaucoup de petits morceaux peuvent venir d’ancêtres très anciens." data-help-faq="ADN">Plus long segment (cM)</span><input name="longest_cm" inputmode="decimal" value="${esc(m.longest_cm || '')}"></label><label>cM sur le X<input name="x_cm" inputmode="decimal" value="${esc(d.x_cm || '')}"></label>
                 <div class="span-2 h-dna-guess" data-dna-guess></div>
                 <label>Relation proposée par la société<input name="relationship" value="${esc(m.relationship || '')}"></label><label>Côté<select name="side">${SIDES.map(([v, l]) => `<option value="${v}" ${(m.side || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <div><span class="pk-lab">Fiche dans l’arbre</span>${PKF({name: 'dna_mperson', kind: 'person', value: Number(m.person_id) || null, placeholder: 'Si tu sais qui c’est…'})}</div>
@@ -417,7 +428,7 @@
     RENDER.auto = {html() {
         const f = filt(), kit = Number(f.kit) || data.kits[0]?.id || 0, A2 = autoClusters(kit, tree && treeKit === kit ? tree : null), p = prefs();
         return `${header('ADN', '🔗 Groupes automatiques', 'Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome.')}
-            <div class="h-dna-filters"><label>Test<select data-auto-kit>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label><label>De (cM)<input type="number" min="0" data-auto-p="autoMin" value="${esc(p.autoMin ?? 30)}"></label><label>à (cM)<input type="number" min="0" data-auto-p="autoMax" value="${esc(p.autoMax ?? 600)}"></label></div>
+            <div class="h-dna-filters"><label>Test<select data-auto-kit>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label><label><span data-help="Les groupes (clusters) rassemblent les correspondances qui se partagent entre elles : chaque groupe a souvent un même couple d’ancêtres. Garde de 30 à 600 cM pour éviter les parents trop proches et le bruit." data-help-faq="ADN">De (cM)</span><input type="number" min="0" data-auto-p="autoMin" value="${esc(p.autoMin ?? 30)}"></label><label>à (cM)<input type="number" min="0" data-auto-p="autoMax" value="${esc(p.autoMax ?? 600)}"></label></div>
             <p class="muted">${plural(A2.pool.length, 'correspondance', 'correspondances')} entre ${A2.lo} et ${A2.hi} cM ; ${fmt(A2.withShared)} avec des correspondances en commun, ${plural(A2.segLinks, 'chevauchement', 'chevauchements')} de segments. Les très proches parents (au-delà de ${A2.hi} cM) sont écartés : ils correspondent à tout le monde.</p>
             ${A2.clusters.length ? `<div class="h-dna-auto">${clusterMatrix(A2)}<div class="h-dna-cl-list">${A2.clusters.map(c => `<article class="card h-dna-cl" style="--c:${c.color}"><h3><span class="h-dna-gchip" style="--c:${c.color}">Grappe ${c.k + 1}</span> <small class="muted">${c.members.length} correspondances · ${fmt(c.members.at(-1).shared_cm)}–${fmt(c.members[0].shared_cm)} cM · liens ${Math.round(c.density * 100)} %</small></h3>
                     <p>${c.couple ? `${c.sure ? '🎯 Ancêtres communs' : '🤔 Ancêtres probables'} : <b>${esc(coupleLabel(c.couple, tree))}</b> <small class="muted">(${esc(GEN_NAMES[genOf(c.couple)] || '')}${c.side ? ', ' + esc(label(SIDES, c.side).toLowerCase()) : ''})</small>` : `<span class="muted">Ancêtre commun encore inconnu${c.side ? ` (côté ${esc(label(SIDES, c.side).toLowerCase())})` : ''} : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille.</span>`}</p>

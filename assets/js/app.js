@@ -1270,12 +1270,95 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const cleaned=String(value||fallback).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/gi,'-').replace(/^-+|-+$/g,'').toLowerCase();
         return cleaned||fallback;
     }
+    /* ═════ 💾 Réglages enregistrés : un fichier par réglage, pour le garder ou le donner ═════
+       Fichier « lcnda-reglage-<outil>-<nom>.json » = {lcnda:'reglage', outil, nom, version:1, donnees}. */
+    const SETTING_TOOLS={presets:'les designs (Apparence → Mes propres designs)',raccourcis:'les raccourcis clavier',apparence:'l’apparence (designs)',tableaux:'les réglages des tableaux',animaux:'les animaux',atelier:'l’Atelier de recherche','palette-stats':'les couleurs des statistiques','palette-battues':'les couleurs des battues','palette-badges':'les couleurs des badges'};
+    const settingToolName=o=>SETTING_TOOLS[o]||`l’outil « ${o} »`;
+    function settingFileName(outil,nom){return `lcnda-reglage-${safeExportFilename(outil,'outil')}-${safeExportFilename(nom,'reglage')}.json`;}
+    /** ⤓ Exporter un réglage : télécharge le fichier .json */
+    function exportSettingFile(outil,nom,donnees){
+        const blob=new Blob([JSON.stringify({lcnda:'reglage',outil,nom:String(nom||''),version:1,exporte:new Date().toISOString(),donnees},null,1)],{type:'application/json'});
+        const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=settingFileName(outil,nom);document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+        toast(`Fichier prêt : « ${a.download} ». Il s’importe avec « ⤒ Importer un réglage ».`);
+    }
+    /** ⤒ Importer un réglage : choisit le fichier, vérifie qu'il vient de cet outil, demande un autre nom si celui-ci est déjà pris.
+     *  → Promise<{nom, donnees, remplace}|null> ; check(donnees) peut refuser un contenu mal formé (renvoie false). */
+    function importSettingFile(outil,{names=[],check=null,legacy=null}={}){
+        return new Promise(resolve=>{
+            const inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';inp.hidden=true;inp.dataset.uiOff='1';document.body.appendChild(inp);
+            let done=false;const finish=v=>{if(done)return;done=true;inp.remove();resolve(v);};
+            inp.addEventListener('cancel',()=>finish(null));
+            inp.addEventListener('change',async()=>{
+                const file=inp.files?.[0];if(!file)return finish(null);
+                let j=null;try{j=JSON.parse(await file.text());}catch(_){}
+                // un fichier d'avant (format propre à l'outil) : l'outil le traduit (legacy → {nom, donnees})
+                if(j&&j.lcnda!=='reglage'&&legacy){const old=legacy(j);if(old)j={lcnda:'reglage',outil,nom:old.nom,donnees:old.donnees};}
+                if(!j||j.lcnda!=='reglage'||typeof j.outil!=='string'){toast('Ce fichier n’est pas un réglage enregistré de LCNDA.','error');return finish(null);}
+                if(j.outil!==outil){toast(`Ce fichier contient un réglage pour ${settingToolName(j.outil)}, pas pour ${settingToolName(outil)} : importe-le dans le bon outil.`,'error');return finish(null);}
+                if(j.donnees===undefined||j.donnees===null||(check&&!check(j.donnees))){toast('Ce réglage est vide ou abîmé : il ne peut pas être importé.','error');return finish(null);}
+                let nom=String(j.nom||'').trim().slice(0,60)||'Réglage importé';
+                const taken=n=>names.some(x=>String(x).trim().toLowerCase()===n.trim().toLowerCase());
+                while(taken(nom)){
+                    let i=2;while(taken(`${nom} (${i})`))i++;
+                    const next=await askText({title:'Ce nom est déjà pris',message:`Tu as déjà un réglage « ${nom} ». Quel nom donner à celui que tu importes ?`,value:`${nom} (${i})`,okLabel:'Importer'});
+                    if(next===null||!String(next).trim())return finish(null);
+                    nom=String(next).trim().slice(0,60);
+                }
+                finish({nom,donnees:j.donnees});
+            });
+            inp.click();
+        });
+    }
+    /** Les deux petits boutons : « ⤓ Exporter » (sur un réglage) et « ⤒ Importer un réglage » (à côté de « Enregistrer sous ce nom ») */
+    const settingExportButton=attrs=>`<button class="button small secondary" type="button" ${attrs} title="Enregistrer ce réglage dans un fichier, pour le garder ou le donner">⤓ Exporter</button>`;
+    const settingImportButton=attrs=>`<button class="button small secondary" type="button" ${attrs} title="Reprendre un réglage exporté (fichier .json)">⤒ Importer un réglage</button>`;
+
+    /* ═════ 📅 Dates d'une fiche saisies comme dans un acte, envoyées au format du serveur (AAAA-MM-JJ) ═════
+       <input type="date" data-iso-date> devient une case de texte « 7 mai 1925 » (C4) ; la case d'origine reste (cachée)
+       avec son nom et reçoit la date AAAA-MM-JJ : formulaires, .value et événements input/change ne changent pas. */
+    const FR_MONTHS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    const MONTH_START=[['janv',1],['jan',1],['fev',2],['mars',3],['mar',3],['avr',4],['mai',5],['juin',6],['juil',7],['aout',8],['sept',9],['sep',9],['oct',10],['nov',11],['dec',12],['7bre',9],['8bre',10],['9bre',11],['xbre',12]];
+    function freeDateToIso(text){
+        const s=String(text||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim().replace(/^le\s+/,'').replace(/\s+/g,' ').replace(/,/g,'');
+        if(!s)return '';
+        let d,m,y,r;
+        if((r=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/))){y=+r[1];m=+r[2];d=+r[3];}
+        else if((r=s.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})$/))){d=+r[1];m=+r[2];y=+r[3];}
+        else if((r=s.match(/^(1er|\d{1,2})\s+([a-z0-9]+)\.?\s+(\d{4})$/))){d=r[1]==='1er'?1:+r[1];const k=MONTH_START.find(([p])=>r[2].startsWith(p));m=k?k[1]:(/^\d{1,2}$/.test(r[2])?+r[2]:0);y=+r[3];}
+        else return null;
+        if(!y||m<1||m>12||d<1||d>new Date(Date.UTC(y,m,0)).getUTCDate())return null;
+        return `${String(y).padStart(4,'0')}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    }
+    function isoToFreeDate(iso){const r=String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})/);if(!r)return String(iso||'');const d=+r[3];return `${d===1?'1er':d} ${FR_MONTHS[+r[2]-1]} ${+r[1]}`;}
+    const DATE_VALUE=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');
+    function upgradeIsoDateInput(inp){
+        if(!inp||inp._isoText||!inp.isConnected)return;
+        const text=document.createElement('input');text.type='text';text.autocomplete='off';text.className=inp.className;
+        text.placeholder=inp.placeholder||'7 mai 1925, 08/12/1960…';
+        if(inp.title)text.title=inp.title;if(inp.getAttribute('aria-label'))text.setAttribute('aria-label',inp.getAttribute('aria-label'));
+        text.setAttribute('data-ui-date',inp.dataset.isoDate==='nocal'?'nocal':'');
+        if(inp.required){text.required=true;inp.required=false;}
+        const iso0=DATE_VALUE.get.call(inp);inp.type='hidden';inp._isoText=text;
+        DATE_VALUE.set.call(text,isoToFreeDate(iso0));text.defaultValue=DATE_VALUE.get.call(text);
+        inp.after(text);
+        const sync=()=>{const raw=DATE_VALUE.get.call(text),iso=freeDateToIso(raw);
+            text.setCustomValidity(raw.trim()&&iso===null?'Ici, il faut un jour précis : par exemple « 7 mai 1925 » ou « 07/05/1925 ».':'');
+            // la ligne « ✓ Compris » dit aussi pourquoi ce n'est pas assez précis ici (après sa mise à jour)
+            if(raw.trim()&&iso===null)setTimeout(()=>{const h=text.closest('.ui-date')?.querySelector('.ui-date-help');if(h&&DATE_VALUE.get.call(text)===raw){h.className='ui-date-help is-warn';h.textContent='⚠️ Ici, il faut un jour précis : « 7 mai 1925 » ou « 07/05/1925 ».';}});
+            const v=iso||'';if(DATE_VALUE.get.call(inp)!==v){DATE_VALUE.set.call(inp,v);inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));}};
+        text.addEventListener('input',e=>{e.stopPropagation();sync();});text.addEventListener('change',e=>e.stopPropagation());
+        // le code qui écrit form.elements.x.value = 'AAAA-MM-JJ' met aussi à jour la case de texte
+        Object.defineProperty(inp,'value',{configurable:true,get(){return DATE_VALUE.get.call(this);},set(v){DATE_VALUE.set.call(this,v);text.value=isoToFreeDate(v);text.setCustomValidity('');}});
+        inp.form?.addEventListener('reset',()=>setTimeout(()=>{text.value=isoToFreeDate(DATE_VALUE.get.call(inp));}));
+    }
+    const scanIsoDates=root=>{if(!root?.querySelectorAll)return;(root.matches?.('input[data-iso-date]')?[root]:[]).concat([...root.querySelectorAll('input[data-iso-date]')]).forEach(upgradeIsoDateInput);};
+    new MutationObserver(list=>list.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)scanIsoDates(n);}))).observe(document.documentElement,{childList:true,subtree:true});
+    document.addEventListener('DOMContentLoaded',()=>scanIsoDates(document));
+
+    // ⤓ Exporter un graphique : un seul bouton, la fenêtre d'export commune (PDF, PNG, JPG, Imprimer)
     function graphExportToolbarHtml(){
         return `<div class="graph-export-toolbar no-export" aria-label="Exporter le graphique">
-            <button class="button small secondary" type="button" data-graph-export="pdf">PDF</button>
-            <button class="button small secondary" type="button" data-graph-export="png">PNG</button>
-            <button class="button small secondary" type="button" data-graph-export="jpeg">JPEG</button>
-            <button class="button small secondary" type="button" data-graph-export="print">Imprimer</button>
+            <button class="button small secondary" type="button" data-graph-export="dialog" title="PDF, image PNG ou JPG, impression">⤓ Exporter</button>
         </div>`;
     }
     function graphExportTitle(){
@@ -1317,7 +1400,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         win.document.close();
         if(asPdf)toast('Dans la fenêtre d’impression, choisis “Enregistrer en PDF”.');
     }
-    async function exportGraphImage(format){
+    async function graphCanvas(format='png',scale=1){
         const clone=cloneGraphForExport();
         const target=graphExportTarget();
         const rect=target.getBoundingClientRect();
@@ -1331,26 +1414,68 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const url=URL.createObjectURL(blob);
         try{
             const img=await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=reject;image.src=url;});
+            // un navigateur ne fait pas d'image de plus de ~16 000 points de côté
+            const k=Math.max(0.05,Math.min(scale,16000/width,16000/height,Math.sqrt(2.6e8/(width*height))));
             const canvas=document.createElement('canvas');
-            canvas.width=width;canvas.height=height;
+            canvas.width=Math.round(width*k);canvas.height=Math.round(height*k);
             const ctx=canvas.getContext('2d');
-            if(format==='jpeg'){ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);}
-            ctx.drawImage(img,0,0);
-            const mime=format==='jpeg'?'image/jpeg':'image/png';
-            const link=document.createElement('a');
-            link.download=`${safeExportFilename(graphExportTitle())}.${format==='jpeg'?'jpg':'png'}`;
-            link.href=canvas.toDataURL(mime,.92);
-            link.click();
+            if(format==='jpeg'){ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);}
+            ctx.scale(k,k);ctx.drawImage(img,0,0);
+            return canvas;
         }finally{
             URL.revokeObjectURL(url);
         }
+    }
+    async function exportGraphImage(format,{filename='',quality=96,saveCopy=false}={}){
+        const canvas=await graphCanvas(format,Math.max(0.5,Math.min(6,(Number(quality)||96)/96)));
+        const mime=format==='jpeg'?'image/jpeg':'image/png';
+        const name=filename||`${safeExportFilename(graphExportTitle())}.${format==='jpeg'?'jpg':'png'}`;
+        const blob=await new Promise(res=>canvas.toBlob(res,mime,.92));
+        if(!blob)throw new Error('Image impossible : le graphique est trop grand.');
+        const link=document.createElement('a');
+        link.download=name;
+        link.href=URL.createObjectURL(blob);
+        document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),4000);
+        if(saveCopy)await saveExportCopy(blob,name);
+    }
+    /** « Ranger aussi une copie dans les médias » : l'image exportée entre dans les médias (même envoi que la fenêtre de choix d'image) */
+    async function saveExportCopy(blob,name){
+        const send=window.LCNDA_APP?.importMediaFile;
+        if(!send){toast('La copie dans les médias n’a pas pu être faite.','error');return;}
+        try{await send(new File([blob],name,{type:blob.type||'image/png'}),['image']);toast(`Une copie est rangée dans les médias : « ${name.replace(/\.[^.]+$/,'')} ».`);}
+        catch(error){toast(`Copie dans les médias impossible : ${error.message}`,'error');}
+    }
+    // certains navigateurs (Chrome, Edge, l'app) refusent de faire une image d'une page HTML copiée dans un dessin : on le teste une fois
+    let graphImageOk=null;
+    async function canGraphImage(){
+        if(graphImageOk!==null)return graphImageOk;
+        try{const url=URL.createObjectURL(new Blob(['<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><foreignObject width="4" height="4"><div xmlns="http://www.w3.org/1999/xhtml">a</div></foreignObject></svg>'],{type:'image/svg+xml'}));
+            const img=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=url;});
+            const c=document.createElement('canvas');c.width=c.height=4;c.getContext('2d').drawImage(img,0,0);c.toDataURL();URL.revokeObjectURL(url);graphImageOk=true;}
+        catch(_){graphImageOk=false;}
+        return graphImageOk;
+    }
+    async function openGraphExportDialog(){
+        const UI=window.LCNDA_UI;const title=graphExportTitle();
+        if(!UI?.openExportDialog){printGraphExport(true);return;}
+        const images=await canGraphImage();
+        UI.openExportDialog({title,defaultName:title,quality:images?150:false,saveCopy:images&&!!window.LCNDA_APP?.importMediaFile,
+            info:images?'':'Ce navigateur ne sait pas faire une image PNG ou JPG de ce graphique : « PDF » donne un fichier net, à imprimer ou à envoyer.',
+            // aperçu : le graphique lui-même, en tout petit
+            preview:async()=>{const box=document.createElement('div');box.style.cssText='width:100%;height:100%;overflow:hidden;background:#fff;pointer-events:none';const clone=cloneGraphForExport();const w=Math.max(1,graphExportTarget().scrollWidth||800);clone.style.cssText+=`;zoom:${Math.min(1,236/w)};position:static;transform:none`;box.appendChild(clone);return box;},
+            formats:[
+                {id:'pdf',hint:'par l’impression : « Enregistrer en PDF »',quality:false,ext:'',run:async()=>printGraphExport(true)},
+                ...(images?[{id:'png',run:o=>exportGraphImage('png',o)},{id:'jpg',run:o=>exportGraphImage('jpeg',o)}]:[]),
+                {id:'print',quality:false,run:async()=>printGraphExport(false)},
+            ]});
     }
     function bindGraphExportControls(){
         $$('[data-graph-export]').forEach(button=>{
             button.addEventListener('click',async()=>{
                 const format=button.dataset.graphExport;
                 try{
-                    if(format==='print'||format==='pdf')printGraphExport(format==='pdf');
+                    if(format==='dialog')openGraphExportDialog();
+                    else if(format==='print'||format==='pdf')printGraphExport(format==='pdf');
                     else await exportGraphImage(format);
                 }catch(error){toast(error.message||'Export impossible.','error');}
             });
@@ -1563,25 +1688,113 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         }
     }
 
+    const BUILTIN_DESIGN_PRESETS={
+        portfolio:{blue:'#0066cc',bg:'#ffffff',paper:'#ffffff',card:'#ffffff',cardHead:'#fafafa',dark:false},
+        soft:{blue:'#3978d8',bg:'#f7f9ff',paper:'#ffffff',card:'#ffffff',cardHead:'#f4f8ff',dark:false},
+        archive:{blue:'#315f9f',bg:'#f6f1e8',paper:'#fffaf0',card:'#fffaf0',cardHead:'#f2ead8',dark:false},
+        archiveBlue:{blue:'#315f9f',bg:'#e8eef6',paper:'#f0f6ff',card:'#f0f6ff',cardHead:'#d8e3f2',dark:false},
+        archiveGreen:{blue:'#315f9f',bg:'#e8f6ed',paper:'#f0fff5',card:'#f0fff5',cardHead:'#d8f2e1',dark:false},
+        archiveRed:{blue:'#315f9f',bg:'#f6e9e8',paper:'#fff1f0',card:'#fff1f0',cardHead:'#f2dad8',dark:false},
+        archivePurple:{blue:'#315f9f',bg:'#f1e8f6',paper:'#faf0ff',card:'#faf0ff',cardHead:'#e9d8f2',dark:false},
+        archiveOrange:{blue:'#315f9f',bg:'#f6eee8',paper:'#fff7f0',card:'#fff7f0',cardHead:'#f2e4d8',dark:false},
+        archiveTurquoise:{blue:'#315f9f',bg:'#daf1f0',paper:'#eaf7f6',card:'#eaf7f6',cardHead:'#bfe7e5',dark:false},
+        archivePink:{blue:'#315f9f',bg:'#f2dfe8',paper:'#f8eef3',card:'#f8eef3',cardHead:'#e7c7d6',dark:false},
+        archivePetrol:{blue:'#315f9f',bg:'#d9e7eb',paper:'#eef5f7',card:'#eef5f7',cardHead:'#b7d0d8',dark:false},
+        archiveSalmon:{blue:'#315f9f',bg:'#f4dfd9',paper:'#faf0ed',card:'#faf0ed',cardHead:'#ebc4b8',dark:false},
+        archiveLavender:{blue:'#315f9f',bg:'#e2e0f2',paper:'#f2f1fa',card:'#f2f1fa',cardHead:'#c9c5e6',dark:false},
+        archiveYellow:{blue:'#315f9f',bg:'#f8f2d3',paper:'#fbf8e8',card:'#fbf8e8',cardHead:'#f4e8b2',dark:false},
+        dark:{blue:'#4d9fff',bg:'#1a1a1a',paper:'#1a1a1a',card:'#242424',cardHead:'#2e2e2e',dark:true},
+    };
+    const BUILTIN_PRESET_LABELS={portfolio:'Portfolio actuel',soft:'Plus doux',archive:'Archive papier',archiveBlue:'Archive bleu',archiveGreen:'Archive vert',archiveRed:'Archive rouge',archivePurple:'Archive violet',archiveOrange:'Archive orange',archiveTurquoise:'Turquoise',archivePink:'Rose poudré',archivePetrol:'Bleu pétrole pâle',archiveSalmon:'Saumon clair',archiveLavender:'Lavande grisée',archiveYellow:'Jaune doux',dark:'Sombre'};
+    /* ═════ 🎨 Mes propres designs (presets de couleurs) ═════
+       localStorage['genealogie-design-custom-presets'] = {custom:{id:{name,blue,bg,paper,card,cardHead,dark}}, order:[ids], hidden:[ids]} */
+    const CUSTOM_PRESETS_KEY='genealogie-design-custom-presets';
+    const PRESET_COLOR_KEYS=[['blue','Couleur principale (boutons, liens, accents)'],['bg','Fond de la page'],['paper','Fond des panneaux'],['card','Fond des cartes'],['cardHead','En-têtes des cartes et des tableaux']];
+    function presetStore(){try{const v=JSON.parse(localStorage.getItem(CUSTOM_PRESETS_KEY)||'{}');return {custom:v&&typeof v.custom==='object'&&v.custom&&!Array.isArray(v.custom)?v.custom:{},order:Array.isArray(v?.order)?v.order:[],hidden:Array.isArray(v?.hidden)?v.hidden:[]};}catch(_){return {custom:{},order:[],hidden:[]};}}
+    function savePresetStore(st){try{localStorage.setItem(CUSTOM_PRESETS_KEY,JSON.stringify(st));}catch(_){toast('Enregistrement impossible (place du navigateur ?).','error');}}
+    const isHex=c=>typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c);
+    function cleanPresetColors(p,base=BUILTIN_DESIGN_PRESETS.portfolio){const out={};PRESET_COLOR_KEYS.forEach(([k])=>{out[k]=isHex(p?.[k])?p[k].toLowerCase():base[k];});out.dark=!!p?.dark;return out;}
+    function allDesignPresets(){const st=presetStore();const out={...BUILTIN_DESIGN_PRESETS};Object.entries(st.custom).forEach(([id,p])=>{if(/^my_[a-z0-9]+$/.test(id))out[id]=cleanPresetColors(p);});return out;}
+    const presetLabel=id=>BUILTIN_PRESET_LABELS[id]||presetStore().custom[id]?.name||id;
+    /** Les presets dans l'ordre choisi : [{id, label, own, hidden}] */
+    function orderedDesignPresets(){
+        const st=presetStore(),ids=[...Object.keys(BUILTIN_DESIGN_PRESETS),...Object.keys(st.custom).filter(id=>/^my_[a-z0-9]+$/.test(id))];
+        const ordered=[...st.order.filter(id=>ids.includes(id)),...ids.filter(id=>!st.order.includes(id))];
+        return ordered.map(id=>({id,label:presetLabel(id),own:!BUILTIN_DESIGN_PRESETS[id],hidden:st.hidden.includes(id)&&id!=='portfolio'}));
+    }
+    function presetSelectOptionsHtml(current){
+        const cur=allDesignPresets()[current]?current:'portfolio';
+        return orderedDesignPresets().filter(p=>!p.hidden||p.id===cur).map(p=>`<option value="${escapeHtml(p.id)}" ${p.id===cur?'selected':''}>${escapeHtml(p.label)}${p.own?' ★':''}</option>`).join('');
+    }
+    const presetSwatches=p=>PRESET_COLOR_KEYS.map(([k,l])=>`<span class="my-preset-sw" title="${escapeHtml(l)} : ${escapeHtml(p[k])}" style="background:${escapeHtml(p[k])}"></span>`).join('');
+    function customPresetsPanelHtml(){
+        const all=allDesignPresets();
+        return `<section class="maintenance-panel my-presets" id="my-presets"><div class="item-title-row"><h3 data-help="Un design règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes. Crée le tien à partir d’un design existant." data-help-faq="design">🎨 Mes propres designs</h3><div class="page-actions"><button type="button" class="button small" data-my-preset-new>＋ Nouveau design…</button>${settingImportButton('data-my-preset-import')}</div></div>
+            <details class="my-presets-manage" data-ui-section="my-presets-manage"${(()=>{try{return JSON.parse(localStorage.getItem('genealogie-ui-sections')||'{}')['my-presets-manage']?' open':'';}catch(_){return '';}})()}><summary>⚙️ Gérer les presets (${orderedDesignPresets().length})</summary>
+            <p class="muted">Les designs proposés dans « Preset » : coche ceux à montrer, range-les en glissant ⠿ (ou ↑ ↓). Ceux de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiens (★) se modifient, se renomment, s’exportent.</p>
+            <div class="order-list my-preset-list" data-my-preset-list>${orderedDesignPresets().map((p,i)=>`<div class="order-row has-visibility" data-order-key="${escapeHtml(p.id)}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i+1).padStart(2,'0')}</span><label class="order-visible" title="${p.id==='portfolio'?'Toujours proposé':'Proposer dans la liste'}"><input type="checkbox" data-my-preset-show ${p.hidden?'':'checked'} ${p.id==='portfolio'?'disabled':''}></label><b>${escapeHtml(p.label)}${p.own?' ★':''}${all[p.id].dark?' <small class="muted">· sombre</small>':''}</b><span class="my-preset-sws">${presetSwatches(all[p.id])}</span><span class="page-actions"><button type="button" class="icon-button small" data-my-preset-move="-1" title="Monter">↑</button><button type="button" class="icon-button small" data-my-preset-move="1" title="Descendre">↓</button>${p.own?`<button type="button" class="button small secondary" data-my-preset-edit>Modifier</button><button type="button" class="button small secondary" data-my-preset-rename>Renommer</button>`:''}<button type="button" class="button small secondary" data-my-preset-dup title="Créer un design à partir de celui-ci">Dupliquer</button>${settingExportButton('data-my-preset-export')}${p.own?'<button type="button" class="button small secondary danger" data-my-preset-del>Supprimer</button>':''}</span></div>`).join('')}</div>
+            <div class="page-actions"><button type="button" class="button small" data-my-preset-saveorder>Enregistrer l’ordre et les designs montrés</button></div></details></section>`;
+    }
+    const MY_PRESET_CSS=`.my-presets .order-row{flex-wrap:wrap}.my-preset-sws{display:inline-flex;gap:3px;margin:0 8px}.my-preset-sw{display:inline-block;width:16px;height:16px;border:1px solid rgba(0,0,0,.25)}
+        .my-preset-row-actions{display:inline-flex;gap:4px}.my-preset-editor .my-preset-prev{border:2px solid #111;padding:12px;min-height:170px}.my-preset-prev .pv-card{border:2px solid #111;margin-top:10px}.my-preset-prev .pv-head{padding:6px 10px;font-weight:800}
+        .my-preset-prev .pv-body{padding:10px}.my-preset-prev .pv-btn{display:inline-block;padding:6px 12px;color:#fff;font-weight:700;margin-top:8px}.my-preset-prev a{font-weight:700}.my-preset-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+        @media (max-width:640px){.my-preset-grid{grid-template-columns:1fr}}`;
+    /** Éditeur d'un design : « tel élément = telle couleur », aperçu en direct */
+    function openPresetEditor({id='',from='portfolio'}={}){
+        const st=presetStore(),own=id&&st.custom[id];
+        const base=cleanPresetColors(own||allDesignPresets()[from]||BUILTIN_DESIGN_PRESETS.portfolio);
+        if(!document.getElementById('my-preset-css'))document.head.insertAdjacentHTML('beforeend',`<style id="my-preset-css">${MY_PRESET_CSS}</style>`);
+        const dlg=document.createElement('dialog');dlg.className='modal my-preset-editor';
+        dlg.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">APPARENCE</span><h2>${own?`Modifier « ${escapeHtml(own.name)} »`:'Nouveau design'}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            <div class="my-preset-grid"><div class="form-grid one-column"><label>Nom<input data-f="name" maxlength="60" required value="${escapeHtml(own?.name||(from&&!own?`${presetLabel(from)} (ma version)`:''))}"></label>
+                ${own?'':`<label>Partir de<select data-f="from">${orderedDesignPresets().map(p=>`<option value="${escapeHtml(p.id)}" ${p.id===from?'selected':''}>${escapeHtml(p.label)}</option>`).join('')}</select></label>`}
+                ${PRESET_COLOR_KEYS.map(([k,l])=>`<label>${escapeHtml(l)}<input type="color" data-c="${k}" value="${escapeHtml(base[k])}"></label>`).join('')}
+                <label class="ui-toggle"><input type="checkbox" data-f="dark" ${base.dark?'checked':''}><i></i><span data-help="Un design sombre passe toute l’app en mode sombre (textes clairs sur fond foncé), comme le preset « Sombre »." data-help-faq="design">Design sombre</span></label></div>
+            <div><span class="section-label">Aperçu</span><div class="my-preset-prev" data-prev></div></div></div>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">${own?'Enregistrer':'＋ Créer le design'}</button></div></form>`;
+        document.body.appendChild(dlg);
+        const q=sel=>dlg.querySelector(sel),read=()=>{const o={};PRESET_COLOR_KEYS.forEach(([k])=>{o[k]=q(`[data-c="${k}"]`).value;});o.dark=q('[data-f="dark"]').checked;return o;};
+        const paint=()=>{const o=read(),ink=o.dark?'#f2f2f2':'#111111';q('[data-prev]').style.cssText=`background:${o.bg};color:${ink};border-color:${ink}`;
+            q('[data-prev]').innerHTML=`<div style="background:${o.paper};padding:8px;border:1px solid ${ink}">Fond des panneaux · <a style="color:${o.blue}">un lien</a></div><div class="pv-card" style="background:${o.card};border-color:${ink}"><div class="pv-head" style="background:${o.cardHead}">En-tête d’une carte</div><div class="pv-body">Jean MARTIN, ° 1890<br><span class="pv-btn" style="background:${o.blue}">Bouton</span></div></div>`;};
+        dlg.addEventListener('input',paint);dlg.addEventListener('change',e=>{if(e.target.matches('[data-f="from"]')){const p=cleanPresetColors(allDesignPresets()[e.target.value]);PRESET_COLOR_KEYS.forEach(([k])=>{q(`[data-c="${k}"]`).value=p[k];});q('[data-f="dark"]').checked=p.dark;const nm=q('[data-f="name"]');if(!nm.dataset.typed)nm.value=`${presetLabel(e.target.value)} (ma version)`;}paint();});
+        q('[data-f="name"]').addEventListener('input',e=>{e.target.dataset.typed='1';});
+        dlg.addEventListener('click',e=>{if(e.target.closest('[data-x]'))dlg.close();});
+        q('form').addEventListener('submit',e=>{e.preventDefault();const name=q('[data-f="name"]').value.trim().slice(0,60);if(!name)return;
+            const store=presetStore(),pid=id||`my_${Date.now().toString(36)}`;store.custom[pid]={name,...read()};if(!id)store.order=[...orderedDesignPresets().map(p=>p.id),pid];savePresetStore(store);
+            dlg.close();toast(id?`Design « ${name} » enregistré.`:`Design « ${name} » créé : il est dans la liste « Preset ».`);
+            if(readDesignSettings().preset===pid)applyDesign();renderDesignTools();});
+        dlg.addEventListener('close',()=>dlg.remove());
+        paint();dlg.showModal();
+    }
+    function bindCustomPresetsPanel(){
+        const box=$('#my-presets');if(!box)return;
+        if(!document.getElementById('my-preset-css'))document.head.insertAdjacentHTML('beforeend',`<style id="my-preset-css">${MY_PRESET_CSS}</style>`);
+        const list=box.querySelector('[data-my-preset-list]');
+        const keyOf=el=>el.closest('[data-order-key]')?.dataset.orderKey;
+        box.addEventListener('click',async e=>{
+            const b=e.target.closest('button');if(!b)return;
+            if(b.matches('[data-my-preset-new]'))return openPresetEditor({from:$('#design-form [name=preset]')?.value||'portfolio'});
+            if(b.matches('[data-my-preset-move]')){const row=b.closest('.order-row');if(b.dataset.myPresetMove==='-1'&&row.previousElementSibling)row.after(row.previousElementSibling);else if(b.dataset.myPresetMove==='1'&&row.nextElementSibling)row.before(row.nextElementSibling);renumberOrderList(list);return;}
+            if(b.matches('[data-my-preset-saveorder]')){const store=presetStore();store.order=$$('.order-row',list).map(r=>r.dataset.orderKey);store.hidden=$$('.order-row',list).filter(r=>!r.querySelector('[data-my-preset-show]').checked).map(r=>r.dataset.orderKey);savePresetStore(store);toast('Liste des designs enregistrée.');renderDesignTools();return;}
+            const id=keyOf(b);if(!id)return;
+            if(b.matches('[data-my-preset-edit]'))return openPresetEditor({id});
+            if(b.matches('[data-my-preset-dup]'))return openPresetEditor({from:id});
+            if(b.matches('[data-my-preset-export]'))return exportSettingFile('presets',presetLabel(id),{preset:{name:presetLabel(id),...allDesignPresets()[id]}});
+            if(b.matches('[data-my-preset-rename]')){const store=presetStore(),p=store.custom[id];const n=await askText({title:'Renommer le design',message:'Nouveau nom :',value:p.name,okLabel:'Renommer'});if(!n||!n.trim())return;p.name=n.trim().slice(0,60);savePresetStore(store);renderDesignTools();return;}
+            if(b.matches('[data-my-preset-del]')){const store=presetStore(),p=store.custom[id];if(!await confirmBox('',{title:`Supprimer le design « ${p.name} » ?`,okLabel:'Supprimer le design'}))return;delete store.custom[id];store.order=store.order.filter(x=>x!==id);store.hidden=store.hidden.filter(x=>x!==id);savePresetStore(store);
+                if(readDesignSettings().preset===id){const d=readDesignSettings();d.preset='portfolio';localStorage.setItem('genealogie-design',JSON.stringify(d));applyDesign();}toast('Design supprimé.');renderDesignTools();}
+        });
+        box.querySelector('[data-my-preset-import]').addEventListener('click',async()=>{
+            const store=presetStore();
+            const got=await importSettingFile('presets',{names:orderedDesignPresets().map(p=>p.label),check:d=>d.preset&&typeof d.preset==='object'&&PRESET_COLOR_KEYS.some(([k])=>isHex(d.preset[k]))});
+            if(!got)return;const pid=`my_${Date.now().toString(36)}`;store.custom[pid]={name:got.nom,...cleanPresetColors(got.donnees.preset)};store.order=[...orderedDesignPresets().map(p=>p.id),pid];savePresetStore(store);
+            toast(`Design « ${got.nom} » importé : choisis-le dans « Preset ».`);renderDesignTools();
+        });
+    }
+
     function applyDesign(){
         const design=readDesignSettings();
-        const presets={
-            portfolio:{blue:'#0066cc',bg:'#ffffff',paper:'#ffffff',card:'#ffffff',cardHead:'#fafafa',dark:false},
-            soft:{blue:'#3978d8',bg:'#f7f9ff',paper:'#ffffff',card:'#ffffff',cardHead:'#f4f8ff',dark:false},
-            archive:{blue:'#315f9f',bg:'#f6f1e8',paper:'#fffaf0',card:'#fffaf0',cardHead:'#f2ead8',dark:false},
-            archiveBlue:{blue:'#315f9f',bg:'#e8eef6',paper:'#f0f6ff',card:'#f0f6ff',cardHead:'#d8e3f2',dark:false},
-            archiveGreen:{blue:'#315f9f',bg:'#e8f6ed',paper:'#f0fff5',card:'#f0fff5',cardHead:'#d8f2e1',dark:false},
-            archiveRed:{blue:'#315f9f',bg:'#f6e9e8',paper:'#fff1f0',card:'#fff1f0',cardHead:'#f2dad8',dark:false},
-            archivePurple:{blue:'#315f9f',bg:'#f1e8f6',paper:'#faf0ff',card:'#faf0ff',cardHead:'#e9d8f2',dark:false},
-            archiveOrange:{blue:'#315f9f',bg:'#f6eee8',paper:'#fff7f0',card:'#fff7f0',cardHead:'#f2e4d8',dark:false},
-            archiveTurquoise:{blue:'#315f9f',bg:'#daf1f0',paper:'#eaf7f6',card:'#eaf7f6',cardHead:'#bfe7e5',dark:false},
-            archivePink:{blue:'#315f9f',bg:'#f2dfe8',paper:'#f8eef3',card:'#f8eef3',cardHead:'#e7c7d6',dark:false},
-            archivePetrol:{blue:'#315f9f',bg:'#d9e7eb',paper:'#eef5f7',card:'#eef5f7',cardHead:'#b7d0d8',dark:false},
-            archiveSalmon:{blue:'#315f9f',bg:'#f4dfd9',paper:'#faf0ed',card:'#faf0ed',cardHead:'#ebc4b8',dark:false},
-            archiveLavender:{blue:'#315f9f',bg:'#e2e0f2',paper:'#f2f1fa',card:'#f2f1fa',cardHead:'#c9c5e6',dark:false},
-            archiveYellow:{blue:'#315f9f',bg:'#f8f2d3',paper:'#fbf8e8',card:'#fbf8e8',cardHead:'#f4e8b2',dark:false},
-            dark:{blue:'#4d9fff',bg:'#1a1a1a',paper:'#1a1a1a',card:'#242424',cardHead:'#2e2e2e',dark:true},
-        };
+        const presets=allDesignPresets();
         const preset=presets[design.preset]||presets.portfolio;
         document.documentElement.dataset.theme=preset.dark?'dark':'';
         const cardBackgrounds={
@@ -2200,7 +2413,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                 const mode=state.eventDisplayMode||'all_mixed';
                 const showWitness=mode==='all_mixed'||mode==='all_bottom'||mode==='witness_only';
                 const showOwn=mode!=='witness_only';
-                const renderOwnEvent=event=>`<div class="event-row"><span class="event-icon" style="--event-color:${escapeHtml(event.color)}">${typeGlyph(event.icon,event.gedcom_tag)}</span><div class="event-date">${escapeHtml(event.date_text || 'Date inconnue')}${eventConvertedDateHtml(event)}<small>${escapeHtml(eventAgeText(event,birthEvent))}</small></div><div class="event-content"><div class="item-title-row"><strong>${escapeHtml(event.type_label)}</strong><span class="item-title-extra"><span class="inline-actions">${mediaForEvent(orderedMedia,event.id).length?actionButton('media','Voir les médias liés',`data-view-event-media="${event.id}"`):''}${editOnly(`${actionButton('source',`Source${eventSources(event.id).length?` (${eventSources(event.id).length})`:''}`,`data-add-event-source="${event.id}"`)}${actionButton('edit','Modifier',`data-edit-event="${event.id}"`)}${actionButton('delete','Supprimer',`data-delete-event="${event.id}"`)}`)}</span></span></div>${placeText(event) ? `<p>${escapeHtml(placeText(event))}</p>`:''}${event.title || event.description ? `<p>${escapeHtml(event.title || event.description)}</p>`:''}${eventFactConfidenceHtml(event)}${eventSourcesHtml(event)}${(event.witnesses&&event.witnesses.length)?`<div class="event-witnesses"><span>Témoins</span><div class="event-witnesses-names">${event.witnesses.map(w=>`<span class="event-witness"><button type="button" class="witness-owner-link" data-open-person="${w.person_id}"><strong>${escapeHtml([w.first_name,w.last_name].filter(Boolean).join(' '))}</strong></button>${w.note?` — ${escapeHtml(w.note)}`:''}</span>`).join('')}</div></div>`:''}</div></div>`;
+                const renderOwnEvent=event=>`<div class="event-row"><span class="event-icon" style="--event-color:${escapeHtml(event.color)}">${typeGlyph(event.icon,event.gedcom_tag)}</span><div class="event-date">${escapeHtml(event.date_text || 'Date inconnue')}${eventConvertedDateHtml(event)}<small>${escapeHtml(eventAgeText(event,birthEvent))}</small></div><div class="event-content"><div class="item-title-row"><strong>${escapeHtml(event.type_label)}</strong><span class="item-title-extra"><span class="inline-actions">${mediaForEvent(orderedMedia,event.id).length?actionButton('media','Voir les médias liés',`data-view-event-media="${event.id}"`):''}<button type="button" class="icon-button small event-ics-btn" data-event-ics="${event.id}" data-event-ics-person="${Number(event.person_id)||''}" title="📅 Ajouter à mon calendrier" aria-label="Ajouter à mon calendrier">📅</button>${editOnly(`${actionButton('source',`Source${eventSources(event.id).length?` (${eventSources(event.id).length})`:''}`,`data-add-event-source="${event.id}"`)}${actionButton('edit','Modifier',`data-edit-event="${event.id}"`)}${actionButton('delete','Supprimer',`data-delete-event="${event.id}"`)}`)}</span></span></div>${placeText(event) ? `<p>${escapeHtml(placeText(event))}</p>`:''}${event.title || event.description ? `<p>${escapeHtml(event.title || event.description)}</p>`:''}${eventFactConfidenceHtml(event)}${eventSourcesHtml(event)}${(event.witnesses&&event.witnesses.length)?`<div class="event-witnesses"><span>Témoins</span><div class="event-witnesses-names">${event.witnesses.map(w=>`<span class="event-witness"><button type="button" class="witness-owner-link" data-open-person="${w.person_id}"><strong>${escapeHtml([w.first_name,w.last_name].filter(Boolean).join(' '))}</strong></button>${w.note?` — ${escapeHtml(w.note)}`:''}</span>`).join('')}</div></div>`:''}</div></div>`;
                 const renderWitnessEvent=ev=>`<div class="event-row event-row-witness"><span class="event-icon-witness" style="--event-color:${escapeHtml(ev.color)}">${typeGlyph(ev.icon,ev.gedcom_tag)}</span><div class="event-date">${escapeHtml(ev.date_text||'Date inconnue')}${eventConvertedDateHtml(ev)}</div><div class="event-content"><div class="item-title-row"><strong><button type="button" class="witness-owner-link" data-open-person="${ev.person_id}">${escapeHtml(ev.owner_name||'Personne')}</button> — ${escapeHtml(ev.type_label)}</strong></div>${placeText(ev)?`<p>${escapeHtml(placeText(ev))}</p>`:''}${ev.witness_note?`<p class="witness-role">${escapeHtml(ev.witness_note)}</p>`:''}</div></div>`;
                 // Convertit les recensements trouvés en événements virtuels si l'option est active
                 const showCensusInEvents=evtFilter.showCensus;const artistDisplay=person.artist_events_display||'events';const artisticTypeIds=new Set((state.bootstrap?.eventTypes||[]).filter(t=>Number(t.is_artistic)).map(t=>Number(t.id)));const filteredEvents=events.filter(e=>!evtFilter.hiddenTypeIds.includes(Number(e.event_type_id))&&(artistDisplay!=='block'||!artisticTypeIds.has(Number(e.event_type_id))));
@@ -3329,7 +3542,27 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     function bindReminderButtons(root=document){$$('[data-reminder-done]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{try{await setReminderDone(Number(button.dataset.reminderDone),Number(button.dataset.done)===1,button.dataset.reminderSource||'investigation_item');}catch(error){toast(error.message,'error');}});});$$('[data-delete-standalone-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer ce rappel ?',okLabel:'Supprimer le rappel'}))return;try{await api('delete_standalone_reminder',{}, {method:'POST',body:{id:Number(button.dataset.deleteStandaloneReminder)}});toast('Rappel supprimé.');await renderList();}catch(error){toast(error.message,'error');}});});$$('[data-edit-standalone-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.editStandaloneReminder);const row=(state.currentListRows||[]).find(r=>Number(r.id)===id&&r.source_type==='standalone');if(row)openStandaloneReminderEditForm(row);});});$$('[data-edit-investigation-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.editInvestigationReminder);const row=(state.currentListRows||[]).find(r=>Number(r.id)===id&&r.source_type!=='standalone');if(row)openInvestigationReminderEditDialog(row);});});$$('[data-clear-investigation-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{if(!await confirmBox('La piste liée sera conservée.',{title:'Supprimer ce rappel ?',okLabel:'Supprimer le rappel'}))return;try{await api('clear_investigation_item_reminder',{}, {method:'POST',body:{id:Number(button.dataset.clearInvestigationReminder)}});toast('Rappel supprimé.');await renderList();}catch(error){toast(error.message,'error');}});});}
     function bindTableLinks(){$$('[data-open-person]:not([data-bound])').forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.openPerson);setModule('personnes');});});$$('[data-open-investigation]:not([data-bound])').forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{state.currentInvestigationId=Number(button.dataset.openInvestigation);state.enquetesTab='enquetes';setModule('enquetes');});});$$('[data-open-media]:not([data-bound])').forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.openMedia);const media=(state.currentListRows||[]).filter(row=>row.filename).map(row=>state.listType==='signatures'?{...row,id:Number(row.media_id||row.id)}:row);const index=media.findIndex(row=>Number(row.id)===id);if(index>=0)openLightbox(media,index,!['media','signatures'].includes(state.listType));});});bindReminderButtons();bindBudgetButtons();bindCourrierButtons();bindSortableTables();bindLabelListToggles();}
-    function bindSortableTables(){$$('.sortable-table:not([data-sort-bound])').forEach(table=>{table.dataset.sortBound='1';$$('[data-sort-column]',table).forEach(button=>button.addEventListener('click',()=>{const index=Number(button.dataset.sortColumn),direction=button.dataset.direction==='asc'?'desc':'asc';$$('[data-sort-column]',table).forEach(item=>{item.removeAttribute('data-direction');item.querySelector('.sort-mark')?.remove();});button.dataset.direction=direction;button.insertAdjacentHTML('beforeend',`<span class="sort-mark">${direction==='asc'?' ↑':' ↓'}</span>`);const body=$('tbody',table),rows=$$('tr',body);rows.sort((a,b)=>{const av=a.children[index]?.dataset.sortValue||'',bv=b.children[index]?.dataset.sortValue||'';const numeric=!Number.isNaN(Number(av))&&!Number.isNaN(Number(bv));const result=numeric?Number(av)-Number(bv):av.localeCompare(bv,'fr',{numeric:true,sensitivity:'base'});return direction==='asc'?result:-result;});rows.forEach(row=>body.append(row));}));});}
+    function sortTableBy(table,index,direction){
+        $$('[data-sort-column]',table).forEach(item=>{item.removeAttribute('data-direction');item.querySelector('.sort-mark')?.remove();});
+        const button=$(`[data-sort-column="${index}"]`,table);if(button){button.dataset.direction=direction;button.insertAdjacentHTML('beforeend',`<span class="sort-mark">${direction==='asc'?' ↑':' ↓'}</span>`);}
+        const body=$('tbody',table),rows=$$('tr',body);
+        rows.sort((a,b)=>{const av=a.children[index]?.dataset.sortValue??a.children[index]?.textContent.trim()??'',bv=b.children[index]?.dataset.sortValue??b.children[index]?.textContent.trim()??'';const numeric=av!==''&&bv!==''&&!Number.isNaN(Number(av))&&!Number.isNaN(Number(bv));const result=numeric?Number(av)-Number(bv):av.localeCompare(bv,'fr',{numeric:true,sensitivity:'base'});return direction==='asc'?result:-result;});
+        rows.forEach(row=>body.append(row));
+        const bar=table._sortBar;if(bar)bar.select.value=`${index}:${direction}`;
+    }
+    /** C6 : une table triable avec data-sortbar="personne" (data-sortbar-many, data-sortbar-fem) reçoit au-dessus la barre
+     *  « N personnes · Trier : [menu] » (chaque colonne dans les deux sens) ; un clic sur un titre de colonne la met à jour. */
+    function addTableSortBar(table){
+        const UI=window.LCNDA_UI,label=table.dataset.sortbar;if(!UI?.sortBar||!label||table._sortBar)return;
+        const rows=$$('tbody tr',table).length,fem=table.dataset.sortbarFem==='1';
+        const cols=$$('[data-sort-column]',table).map(b=>[b.dataset.sortColumn,(b.textContent||'').replace(/[↑↓]/g,'').trim()]).filter(c=>c[1]);
+        const isDate=n=>/date|année|naissance|décès|vote|premier|dernier|quand|ajout|modifi/i.test(n);
+        const options=[['','Dans l’ordre de départ'],...cols.flatMap(([i,n])=>isDate(n)?[[`${i}:asc`,`${n} : ${fem?'les plus anciennes':'les plus anciens'}`],[`${i}:desc`,`${n} : ${fem?'les plus récentes':'les plus récents'}`]]:[[`${i}:asc`,`${n} : A → Z`],[`${i}:desc`,`${n} : Z → A`]])];
+        const start=$$('tbody tr',table);
+        const bar=UI.sortBar({count:rows,label,many:table.dataset.sortbarMany||'',feminine:fem,options,value:'',onChange:v=>{if(!v){const body=$('tbody',table);start.forEach(r=>body.append(r));$$('[data-sort-column]',table).forEach(item=>{item.removeAttribute('data-direction');item.querySelector('.sort-mark')?.remove();});return;}const [i,d]=v.split(':');sortTableBy(table,Number(i),d);}});
+        table._sortBar=bar;(table.closest('.data-table-wrap')||table).before(bar);
+    }
+    function bindSortableTables(){$$('.sortable-table:not([data-sort-bound])').forEach(table=>{table.dataset.sortBound='1';addTableSortBar(table);$$('[data-sort-column]',table).forEach(button=>button.addEventListener('click',()=>{sortTableBy(table,Number(button.dataset.sortColumn),button.dataset.direction==='asc'?'desc':'asc');}));});}
 
     function bindLabelListToggles(){$$('[data-label-toggle]:not([data-toggle-bound])').forEach(btn=>{btn.dataset.toggleBound='1';btn.addEventListener('click',()=>{const body=btn.closest('.label-list-row')?.querySelector('.label-list-body');if(!body)return;const open=!body.hidden;body.hidden=open;btn.textContent=open?'Afficher les éléments':'Masquer les éléments';});});}
     /* 🕰️ Chronologie : dans app-chronologie.js (chargé juste après app.js). */
@@ -3345,7 +3578,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const radiusKm=Number(ps.radiusKm)||0;
         const radiusLabel=radiusKm>0?`± ${radiusKm} km autour de la commune`:'Commune exacte uniquement';
         const dateWindowMode=ps.dateWindowMode||'exact';
-        return `<div id="research-proximity-fields"><div class="research-place-picker" id="proximity-place-picker"><span class="research-place-label">Commune</span><div class="research-place-input-wrap" id="proximity-place-input">${pkField({name:'proximity_place_id',kind:'place',allowCreate:false,value:Number(ps.placeId)||null})}</div></div><div class="proximity-radius-field"><span class="research-place-label">Zone de recherche</span><input id="proximity-radius" name="proximity_radius_km" type="range" min="0" max="50" step="1" value="${radiusKm}"><output id="proximity-radius-value" class="proximity-radius-value">${escapeHtml(radiusLabel)}</output></div><label>Temps<select name="proximity_date_mode"><option value="range" ${(ps.dateMode||'range')==='range'?'selected':''}>Période par années</option><option value="exact" ${ps.dateMode==='exact'?'selected':''}>Date précise</option></select></label><div class="year-range-fields" id="proximity-year-range"><label>De<input name="proximity_year_from" type="number" min="1" max="9999" value="${escapeHtml(ps.yearFrom)}" placeholder="1800"></label><label>À<input name="proximity_year_to" type="number" min="1" max="9999" value="${escapeHtml(ps.yearTo)}" placeholder="1810"></label></div><div id="proximity-exact-date-fields"><label>Date précise<input name="proximity_exact_date" value="${escapeHtml(ps.exactDate||'')}" placeholder="30/02/1988"></label><label>Élargir<select name="proximity_date_window_mode"><option value="exact">Non, date exacte</option><option value="before" ${dateWindowMode==='before'?'selected':''}>Avant</option><option value="after" ${dateWindowMode==='after'?'selected':''}>Après</option><option value="both" ${dateWindowMode==='both'?'selected':''}>Avant et après</option></select></label><label id="proximity-date-window-days">Nombre de jours<input name="proximity_date_window_days" type="number" min="0" max="365" step="1" value="${escapeHtml(ps.dateWindowDays||'')}" placeholder="30"></label></div></div>`;
+        return `<div id="research-proximity-fields"><div class="research-place-picker" id="proximity-place-picker"><span class="research-place-label">Commune</span><div class="research-place-input-wrap" id="proximity-place-input">${pkField({name:'proximity_place_id',kind:'place',allowCreate:false,value:Number(ps.placeId)||null})}</div></div><div class="proximity-radius-field"><span class="research-place-label" data-help="0 km : seulement la commune choisie. En montant le curseur, les communes voisines (jusqu’à 50 km) comptent aussi : utile pour retrouver des témoins ou voisins qui revenaient souvent." data-help-faq="recherche par proximité">Zone de recherche</span><input id="proximity-radius" name="proximity_radius_km" type="range" min="0" max="50" step="1" value="${radiusKm}"><output id="proximity-radius-value" class="proximity-radius-value">${escapeHtml(radiusLabel)}</output></div><label>Temps<select name="proximity_date_mode"><option value="range" ${(ps.dateMode||'range')==='range'?'selected':''}>Période par années</option><option value="exact" ${ps.dateMode==='exact'?'selected':''}>Date précise</option></select></label><div class="year-range-fields" id="proximity-year-range"><label>De<input name="proximity_year_from" type="number" min="1" max="9999" value="${escapeHtml(ps.yearFrom)}" placeholder="1800"></label><label>À<input name="proximity_year_to" type="number" min="1" max="9999" value="${escapeHtml(ps.yearTo)}" placeholder="1810"></label></div><div id="proximity-exact-date-fields"><label>Date précise<input name="proximity_exact_date" value="${escapeHtml(ps.exactDate||'')}" placeholder="30/02/1988"></label><label><span data-help="Garde les actes passés quelques jours avant ou après la date précise (par exemple 30 jours) : un baptême et une naissance déclarée plus tard se retrouvent ensemble." data-help-faq="recherche par proximité">Élargir</span><select name="proximity_date_window_mode"><option value="exact">Non, date exacte</option><option value="before" ${dateWindowMode==='before'?'selected':''}>Avant</option><option value="after" ${dateWindowMode==='after'?'selected':''}>Après</option><option value="both" ${dateWindowMode==='both'?'selected':''}>Avant et après</option></select></label><label id="proximity-date-window-days">Nombre de jours<input name="proximity_date_window_days" type="number" min="0" max="365" step="1" value="${escapeHtml(ps.dateWindowDays||'')}" placeholder="30"></label></div></div>`;
     }
     /* 🔎 Recherche : dans app-recherche.js (chargé juste après app.js) ; ici, des relais. */
     async function renderResearch(...a){const f=await appPartReady('renderResearch');if(f)return f(...a);$('#workspace').innerHTML=empty('La recherche n’a pas pu se charger (fichier app-recherche.js manquant ?).',{icon:'⚠️',hint:'Recharge la page ; si le problème continue, le fichier manque peut-être.'});}
@@ -4078,7 +4311,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='raccourcis')return;
         const presets=shortcutPresets(),customCount=Object.keys(shortcutOverrides()).length;
         $('#workspace').innerHTML=`<section class="page shortcut-page"><header class="page-header"><div><span class="eyebrow">RACCOURCIS CLAVIER</span><h2>Raccourcis clavier</h2><p>Clique sur « Changer » puis appuie sur la nouvelle combinaison. Le logiciel te prévient si elle est déjà prise par ${IS_MAC?'macOS':SHORTCUT_PLATFORM==='win'?'Windows':'Linux'} ou par un autre raccourci. Ces réglages suivent ta base (comme l’apparence). La liste s’affiche aussi avec ${kbd(shortcutFor(SHORTCUT_DEFS.find(d=>d.id==='help')))}.</p></div><div class="page-actions"><button class="button secondary" type="button" id="shortcut-reset-all" ${customCount?'':'disabled'}>Tout réinitialiser</button></div></header>
-            <div class="maintenance-panel shortcut-presets"><h3>💾 Réglages enregistrés</h3><p>Comme pour l’apparence : garde un jeu de raccourcis sous un nom, pour y revenir plus tard.</p><div class="shortcut-preset-save"><input id="shortcut-preset-name" placeholder="Nom (ex. Mes raccourcis)" maxlength="60"><button class="button small" type="button" id="shortcut-preset-save">💾 Enregistrer sous ce nom</button></div>${presets.length?`<ul class="shortcut-preset-list">${presets.map((p,i)=>`<li><strong>${escapeHtml(p.name)}</strong> <small>${plural(Object.keys(p.map||{}).length,'personnalisé')}</small><button class="button small secondary" type="button" data-preset-apply="${i}">Appliquer</button><button class="button small secondary" type="button" data-preset-delete="${i}">Supprimer</button></li>`).join('')}</ul>`:'<p class="cell-muted">Aucun pour l’instant.</p>'}</div>
+            <div class="maintenance-panel shortcut-presets"><h3>💾 Réglages enregistrés</h3><p>Comme pour l’apparence : garde un jeu de raccourcis sous un nom, pour y revenir plus tard.</p><div class="shortcut-preset-save"><input id="shortcut-preset-name" placeholder="Nom (ex. Mes raccourcis)" maxlength="60"><button class="button small" type="button" id="shortcut-preset-save">💾 Enregistrer sous ce nom</button>${settingImportButton('id="shortcut-preset-import"')}</div>${presets.length?`<ul class="shortcut-preset-list">${presets.map((p,i)=>`<li><strong>${escapeHtml(p.name)}</strong> <small>${plural(Object.keys(p.map||{}).length,'personnalisé')}</small><button class="button small secondary" type="button" data-preset-apply="${i}">Appliquer</button>${settingExportButton(`data-preset-export="${i}"`)}<button class="button small secondary" type="button" data-preset-delete="${i}">Supprimer</button></li>`).join('')}</ul>`:'<p class="cell-muted">Aucun pour l’instant.</p>'}</div>
             <div class="data-table-wrap"><table class="data-table shortcut-table is-editable">${shortcutTableHtml(true)}</table></div>
             <div class="maintenance-panel h-ek-panel"><h3>⌨️ Dans les outils de modification</h3><p>Montage vidéo, son, retouche des photos, mise en page : des raccourcis à toi pour chaque outil (aussi dans Maintenance → Montage, retouche, mise en page et son).</p><div id="editor-keys-box"></div></div></section>`;
         window.LCNDA_EXT?.editorKeysPanel?.($('#editor-keys-box'));
@@ -4087,6 +4320,15 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         $('#shortcut-reset-all').addEventListener('click',async()=>{if(!await confirmBox('Tous tes raccourcis personnalisés seront remplacés par ceux d’origine.',{title:'Revenir aux raccourcis d’origine ?',okLabel:'Réinitialiser les raccourcis'}))return;saveShortcutOverrides({});renderShortcutSettings();toast('Raccourcis d’origine rétablis.');});
         $('#shortcut-preset-save').addEventListener('click',()=>{const name=$('#shortcut-preset-name').value.trim();if(!name)return toast('Donne un nom au réglage.','error');const list=shortcutPresets().filter(p=>p.name!==name);list.push({name,map:shortcutOverrides(),saved_at:new Date().toISOString()});saveShortcutPresets(list);renderShortcutSettings();toast(`Réglage « ${name} » enregistré.`);});
         $$('[data-preset-apply]').forEach(b=>b.addEventListener('click',()=>{const p=shortcutPresets()[Number(b.dataset.presetApply)];if(!p)return;saveShortcutOverrides({...(p.map||{})});renderShortcutSettings();toast(`Réglage « ${p.name} » appliqué.`);}));
+        $$('[data-preset-export]').forEach(b=>b.addEventListener('click',()=>{const p=shortcutPresets()[Number(b.dataset.presetExport)];if(p)exportSettingFile('raccourcis',p.name,{map:p.map||{}});}));
+        $('#shortcut-preset-import').addEventListener('click',async()=>{
+            const known=new Set(SHORTCUT_DEFS.map(d=>d.id));
+            const got=await importSettingFile('raccourcis',{names:shortcutPresets().map(p=>p.name),check:d=>d&&typeof d.map==='object'&&!Array.isArray(d.map)});
+            if(!got)return;
+            const map=Object.fromEntries(Object.entries(got.donnees.map||{}).filter(([k,v])=>known.has(k)&&typeof v==='string'&&v.length<40));
+            const list=shortcutPresets();list.push({name:got.nom,map,saved_at:new Date().toISOString()});saveShortcutPresets(list);renderShortcutSettings();
+            toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`);
+        });
         $$('[data-preset-delete]').forEach(b=>b.addEventListener('click',async()=>{const list=shortcutPresets();const p=list[Number(b.dataset.presetDelete)];if(!p||!await confirmBox('',{title:`Supprimer le réglage « ${p.name} » ?`,okLabel:'Supprimer le réglage'}))return;list.splice(Number(b.dataset.presetDelete),1);saveShortcutPresets(list);renderShortcutSettings();}));
     }
     function captureShortcut(def){
@@ -4305,7 +4547,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         bindTableLinks();
     }
     function familyObjectFormHtml(o){
-        const row=(t={})=>`<div class="transfer-row">${collectionPersonField('from_person_id',t.from_person,'De (personne)')}<input type="text" name="from_text" value="${escapeHtml(t.from_text||'')}" placeholder="ou nom libre"><span>→</span>${collectionPersonField('to_person_id',t.to_person,'À (personne)')}<input type="text" name="to_text" value="${escapeHtml(t.to_text||'')}" placeholder="ou nom libre"><input type="text" name="date_text" value="${escapeHtml(t.date_text||'')}" placeholder="Quand (ex. 1923)"><input type="text" name="note" value="${escapeHtml(t.note||'')}" placeholder="Occasion (mariage, héritage…)"><button type="button" class="button small secondary" data-remove-transfer aria-label="Retirer">✕</button></div>`;
+        const row=(t={})=>`<div class="transfer-row">${collectionPersonField('from_person_id',t.from_person,'De (personne)')}<input type="text" name="from_text" value="${escapeHtml(t.from_text||'')}" placeholder="ou nom libre"><span>→</span>${collectionPersonField('to_person_id',t.to_person,'À (personne)')}<input type="text" name="to_text" value="${escapeHtml(t.to_text||'')}" placeholder="ou nom libre"><input type="text" name="date_text" data-ui-date value="${escapeHtml(t.date_text||'')}" placeholder="Quand (ex. 1923)"><input type="text" name="note" value="${escapeHtml(t.note||'')}" placeholder="Occasion (mariage, héritage…)"><button type="button" class="button small secondary" data-remove-transfer aria-label="Retirer">✕</button></div>`;
         return `<form id="object-form" class="maintenance-panel collection-form" data-id="${o.id||0}"><h3>${o.id?'Modifier l’objet':'Nouvel objet'}</h3>
             <div class="form-grid"><label>Nom de l’objet<input name="title" required value="${escapeHtml(o.title||'')}" placeholder="Horloge comtoise"></label><label>Type<input name="kind" value="${escapeHtml(o.kind||'')}" placeholder="Bijou, meuble, livre…"></label>
             <label>Origine<input name="origin_text" value="${escapeHtml(o.origin_text||'')}" placeholder="Achetée à la foire de Tulle vers 1850"></label>
@@ -4431,7 +4673,6 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             <div class="saint-stats-grid"><section class="maintenance-panel"><h3>Par époque</h3>${table(data.periods,'Époque','period')}</section><section class="maintenance-panel"><h3>Par famille (au moins 8 naissances datées)</h3>${data.families.length?table(data.families,'Famille','family'):empty('Pas assez de naissances datées par famille.',{icon:'👶'})}</section></div>
             <section class="maintenance-panel saint-people-panel"><h3>Les personnes concernées</h3>
                 <div class="saint-people-tools"><label>Montrer <select data-saint-show><option value="matched">qui portent le prénom du saint</option><option value="other">qui ne le portent pas</option><option value="all">toutes</option></select></label>
-                <label>Trier <select data-saint-sort><option value="date_asc">par date (la plus ancienne d’abord)</option><option value="date_desc">par date (la plus récente d’abord)</option><option value="day">par jour de l’année (1er janvier → 31 décembre)</option><option value="name">par nom</option><option value="saint">par saint</option></select></label>
                 <input type="search" data-saint-q placeholder="Filtrer : prénom, nom, saint…"><span class="saint-people-scope" data-saint-scope hidden></span></div>
                 <div data-saint-people></div></section></section>`;
         const people=data.people||[];
@@ -4448,11 +4689,12 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             rows=[...rows].sort(cmp);
             const scopeBox=$('[data-saint-scope]');scopeBox.hidden=!ui.scope;
             scopeBox.innerHTML=ui.scope?`${ui.scope.key==='period'?'Époque':'Famille'} : <strong>${escapeHtml(ui.scope.value)}</strong> <button type="button" class="link-button" data-saint-unscope>retirer</button>`:'';
-            $('[data-saint-people]').innerHTML=rows.length?`<p class="muted">${rows.length.toLocaleString('fr-FR')} personne${rows.length>1?'s':''}</p><table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Jour</th><th>Événement</th><th>Saint du jour</th></tr></thead><tbody>${rows.slice(0,ui.limit).map(r=>`<tr><td><button type="button" class="link-button" data-open-person="${Number(r.id)}">${escapeHtml(`${r.first_name} ${r.last_name}`.trim())}</button></td><td>${escapeHtml(r.date_text||'')}</td><td>${escapeHtml(r.day_label||'')}</td><td>${escapeHtml(kindLabel(r))}</td><td>${r.saint?escapeHtml(r.saint_label||r.saint):'<span class="muted">—</span>'}</td></tr>`).join('')}</tbody></table>${rows.length>ui.limit?`<button type="button" class="button small secondary" data-saint-more>Afficher ${Math.min(200,rows.length-ui.limit)} de plus (${plural(rows.length-ui.limit,'restante')})</button>`:''}`:empty('Aucune personne pour ce choix.',{icon:'👥'});
+            $('[data-saint-people]').innerHTML=rows.length?`<div data-saint-sortbar></div><table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Jour</th><th>Événement</th><th>Saint du jour</th></tr></thead><tbody>${rows.slice(0,ui.limit).map(r=>`<tr><td><button type="button" class="link-button" data-open-person="${Number(r.id)}">${escapeHtml(`${r.first_name} ${r.last_name}`.trim())}</button></td><td>${escapeHtml(r.date_text||'')}</td><td>${escapeHtml(r.day_label||'')}</td><td>${escapeHtml(kindLabel(r))}</td><td>${r.saint?escapeHtml(r.saint_label||r.saint):'<span class="muted">—</span>'}</td></tr>`).join('')}</tbody></table>${rows.length>ui.limit?`<button type="button" class="ui-more" data-saint-more>Voir les ${Math.min(200,rows.length-ui.limit).toLocaleString('fr-FR')} suivantes ↓</button>`:''}`:empty('Aucune personne pour ce choix.',{icon:'👥'});
+            // C6 : « N personnes · Trier : [menu] »
+            const sb=$('[data-saint-sortbar]');if(sb&&window.LCNDA_UI?.sortBar)sb.replaceWith(window.LCNDA_UI.sortBar({count:rows.length,label:'personne',feminine:true,value:ui.sort,options:[['date_asc','Par date : les plus anciennes'],['date_desc','Par date : les plus récentes'],['day','Par jour de l’année (1er janvier → 31 décembre)'],['name','Par nom : A → Z'],['saint','Par saint']],onChange:v=>{ui.sort=v;paint();}}));
             bindTableLinks();
         };
         $('[data-saint-show]').addEventListener('change',e=>{ui.show=e.target.value;ui.limit=200;paint();});
-        $('[data-saint-sort]').addEventListener('change',e=>{ui.sort=e.target.value;paint();});
         $('[data-saint-q]').addEventListener('input',debounce(e=>{ui.q=e.target.value;ui.limit=200;paint();},150));
         $('#workspace > section').addEventListener('click',e=>{
             const f=e.target.closest('[data-saint-filter]');
@@ -4670,7 +4912,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const m=state.merge;
         if(!m){
             $('#workspace').innerHTML=`<section class="page merge-page"><header class="page-header"><div><span class="eyebrow">FUSIONNER UN ARBRE</span><h2>Fusionner l’arbre d’un cousin</h2><p>Un cousin t’envoie son GEDCOM ? Le logiciel le compare à ta base <b>avant</b> de l’importer et te propose, fiche par fiche : « C’est la même personne : compléter la mienne », « Nouvelle personne : l’ajouter » ou « Ignorer ». Rien n’est modifié avant ta confirmation, et une copie de sécurité de ta base est faite juste avant.</p></div></header>
-                <form id="merge-upload" class="maintenance-panel"><div class="form-grid"><label>Fichier GEDCOM reçu (.ged)<input type="file" name="file" accept=".ged,.gedcom" required></label><label>De qui vient cet arbre ?<input name="origin" placeholder="Arbre de cousin Paul" maxlength="80"></label></div><div class="page-actions"><button class="button" type="submit">Comparer avec ma base</button></div><p id="merge-status" class="muted"></p></form></section>`;
+                <form id="merge-upload" class="maintenance-panel"><div class="form-grid"><label><span data-help="Le fichier .ged exporté depuis le logiciel du cousin (Geneanet, Heredis, Ancestry…). Il est seulement comparé : rien n’entre dans ta base avant que tu aies tout vérifié et confirmé." data-help-faq="fusionner l’arbre d’un cousin">Fichier GEDCOM reçu (.ged)</span><input type="file" name="file" accept=".ged,.gedcom" required></label><label>De qui vient cet arbre ?<input name="origin" placeholder="Arbre de cousin Paul" maxlength="80"></label></div><div class="page-actions"><button class="button" type="submit">Comparer avec ma base</button></div><p id="merge-status" class="muted"></p></form></section>`;
             $('#merge-upload').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget;const file=form.elements.file.files[0];if(!file)return;
                 $('#merge-status').textContent='Comparaison en cours… (quelques secondes à une minute selon la taille)';
                 const fd=new FormData();fd.append('file',file);fd.append('csrf',state.csrf);
@@ -5054,10 +5296,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
   <h3>Sauvegarde automatique programmée</h3>
   <p>Copie SQLite locale vers un dossier, en plus de l’export manuel. La programmation fonctionne quand le site est ouvert.</p>
   <form id="auto-backup-form" class="form-grid" style="margin-top:12px;padding:0;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem">
-    <label style="grid-column:1/-1">Dossier de sauvegarde<input name="dir" value="${escapeHtml(settings.dir||'data/backups')}" placeholder="data/backups ou /chemin/vers/dossier"></label>
+    <label style="grid-column:1/-1"><span data-help="Le dossier où les copies de ta base sont rangées. Mets-en un sur un autre disque ou une clé USB : si l’ordinateur tombe en panne, la copie reste." data-help-faq="sauvegarde">Dossier de sauvegarde</span><input name="dir" value="${escapeHtml(settings.dir||'data/backups')}" placeholder="data/backups ou /chemin/vers/dossier"></label>
     <label>Toutes les<input name="intervalValue" type="number" min="1" value="${escapeHtml(value)}"></label>
     <label>Unité<select name="intervalUnit"><option value="minutes" ${unit==='minutes'?'selected':''}>minutes</option><option value="hours" ${unit==='hours'?'selected':''}>heures</option></select></label>
-    <label>Conserver au maximum<input name="maxFiles" type="number" min="2" max="50" value="${escapeHtml(settings.maxFiles||10)}"></label>
+    <label><span data-help="Au-delà de ce nombre, la plus ancienne copie est effacée pour faire de la place. 10 copies toutes les heures = les 10 dernières heures." data-help-faq="sauvegarde">Conserver au maximum</span><input name="maxFiles" type="number" min="2" max="50" value="${escapeHtml(settings.maxFiles||10)}"></label>
     <label class="checkbox-line" style="grid-column:1/-1"><input type="checkbox" name="enabled" value="1" ${settings.enabled?'checked':''}> Activer la sauvegarde automatique</label>
   </form>
   <p class="muted" id="auto-backup-status" style="margin:.75rem 0;font-size:.9em">${status}</p>
@@ -5089,7 +5331,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 ${exportPrivacySectionHtml(privacy)}
 
 <section class="maintenance-panel">
-  <h3>Export GEDCOM configurable</h3>
+  <h3 data-help="Le GEDCOM (.ged) est le format que tous les logiciels de généalogie savent lire : c’est lui qu’il faut pour envoyer ton arbre à un cousin ou le mettre sur Geneanet." data-help-faq="GEDCOM">Export GEDCOM configurable</h3>
   <p>Choisis le contenu transmis avant de télécharger le fichier d'échange.</p>
   <form id="gedcom-export-form" class="form-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem">
     <label>Version GEDCOM<select name="gedcom_version"><option value="7">GEDCOM 7.0 (recommandé)</option><option value="5.5.1">GEDCOM 5.5.1 (compatibilité ancienne)</option></select></label>
@@ -5296,7 +5538,7 @@ ${backupSectionHtml()}
         const map=sosaMap();
         const count=Object.keys(map).length;
         const rootName=rootId?(localStorage.getItem('genealogie-sosa-root-name')||`Personne #${rootId}`):'';
-        return `<div class="local-lock-inline sosa-inline"><div><strong>Numérotation Sosa</strong><span>${rootId?`Sosa n°1 (de cujus) : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="sosa-root-pick">${pkFieldLocal({name:'sosa_root_pick',kind:'person',value:rootId?(/^Personne #/.test(rootName)?rootId:{id:rootId,title:rootName,kind:'person'}):null})}<input type="hidden" id="sosa-root-search" value="${escapeHtml(rootId?rootName:'')}"><input type="hidden" id="sosa-root-input" value="${rootId||''}"></div><button class="button small" type="button" id="sosa-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="sosa-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="sosa-clear">Retirer</button>':''}</div></div>`;
+        return `<div class="local-lock-inline sosa-inline"><div><strong data-help="La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1." data-help-faq="Sosa">Numérotation Sosa</strong><span>${rootId?`Sosa n°1 (de cujus) : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="sosa-root-pick">${pkFieldLocal({name:'sosa_root_pick',kind:'person',value:rootId?(/^Personne #/.test(rootName)?rootId:{id:rootId,title:rootName,kind:'person'}):null})}<input type="hidden" id="sosa-root-search" value="${escapeHtml(rootId?rootName:'')}"><input type="hidden" id="sosa-root-input" value="${rootId||''}"></div><button class="button small" type="button" id="sosa-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="sosa-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="sosa-clear">Retirer</button>':''}</div></div>`;
     }
     function dabovilleRootId(){return Number(localStorage.getItem('genealogie-daboville-root'))||0;}
     function dabovilleMap(){try{return JSON.parse(localStorage.getItem('genealogie-daboville-map')||'{}');}catch(_){return {};}}
@@ -5314,13 +5556,13 @@ ${backupSectionHtml()}
         const map=dabovilleMap();
         const count=Object.keys(map).length;
         const rootName=rootId?(localStorage.getItem('genealogie-daboville-root-name')||`Personne #${rootId}`):'';
-        return `<div class="local-lock-inline sosa-inline"><div><strong>Numérotation d'Aboville</strong><span>${rootId?`N°1 : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="daboville-root-pick">${pkFieldLocal({name:'daboville_root_pick',kind:'person',value:rootId?(/^Personne #/.test(rootName)?rootId:{id:rootId,title:rootName,kind:'person'}):null})}<input type="hidden" id="daboville-root-search" value="${escapeHtml(rootId?rootName:'')}"><input type="hidden" id="daboville-root-input" value="${rootId||''}"></div><button class="button small" type="button" id="daboville-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="daboville-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="daboville-clear">Retirer</button>':''}</div></div>`;
+        return `<div class="local-lock-inline sosa-inline"><div><strong data-help="Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus." data-help-faq="Aboville">Numérotation d'Aboville</strong><span>${rootId?`N°1 : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="daboville-root-pick">${pkFieldLocal({name:'daboville_root_pick',kind:'person',value:rootId?(/^Personne #/.test(rootName)?rootId:{id:rootId,title:rootName,kind:'person'}):null})}<input type="hidden" id="daboville-root-search" value="${escapeHtml(rootId?rootName:'')}"><input type="hidden" id="daboville-root-input" value="${rootId||''}"></div><button class="button small" type="button" id="daboville-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="daboville-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="daboville-clear">Retirer</button>':''}</div></div>`;
     }
     function designPresets(){try{return JSON.parse(localStorage.getItem('genealogie-design-presets')||'{}');}catch(_){return {};}}
     function saveDesignPresets(presets){localStorage.setItem('genealogie-design-presets',JSON.stringify(presets));}
     function designFieldsHtml(design){
         design=design||{};
-        return `<label>Preset<select name="preset"><option value="portfolio">Portfolio actuel</option><option value="soft" ${design.preset==='soft'?'selected':''}>Plus doux</option><option value="archive" ${design.preset==='archive'?'selected':''}>Archive papier</option><option value="archiveBlue" ${design.preset==='archiveBlue'?'selected':''}>Archive bleu</option><option value="archiveGreen" ${design.preset==='archiveGreen'?'selected':''}>Archive vert</option><option value="archiveRed" ${design.preset==='archiveRed'?'selected':''}>Archive rouge</option><option value="archivePurple" ${design.preset==='archivePurple'?'selected':''}>Archive violet</option><option value="archiveOrange" ${design.preset==='archiveOrange'?'selected':''}>Archive orange</option><option value="archiveTurquoise" ${design.preset==='archiveTurquoise'?'selected':''}>Turquoise</option><option value="archivePink" ${design.preset==='archivePink'?'selected':''}>Rose poudré</option><option value="archivePetrol" ${design.preset==='archivePetrol'?'selected':''}>Bleu pétrole pâle</option><option value="archiveSalmon" ${design.preset==='archiveSalmon'?'selected':''}>Saumon clair</option><option value="archiveLavender" ${design.preset==='archiveLavender'?'selected':''}>Lavande grisée</option><option value="archiveYellow" ${design.preset==='archiveYellow'?'selected':''}>Jaune doux</option><option value="dark" ${design.preset==='dark'?'selected':''}>Sombre</option></select></label><label>Couleur principale<input type="color" name="blue" value="${escapeHtml(design.blue||'#0066cc')}"></label><label>Menu des onglets<select name="navPosition"><option value="top" ${design.navPosition!=='bottom'?'selected':''}>En haut (défaut)</option><option value="bottom" ${design.navPosition==='bottom'?'selected':''}>En bas de l’écran</option></select></label><label>Logo « ${escapeHtml(design.ownerFirst||'MA')} ${escapeHtml(design.ownerLast||'FAMILLE')} · GÉNÉALOGIE »<select name="brandDisplay"><option value="show" ${design.brandDisplay!=='hide'?'selected':''}>Afficher (défaut)</option><option value="hide" ${design.brandDisplay==='hide'?'selected':''}>Masquer (onglets plus larges)</option></select></label><label>Colonne latérale<select name="sidebarPosition"><option value="left" ${design.sidebarPosition!=='right'?'selected':''}>À gauche (défaut)</option><option value="right" ${design.sidebarPosition==='right'?'selected':''}>À droite</option></select></label><label>Taille typographique<select name="fontScale"><option value="0.82" ${design.fontScale==='0.82'?'selected':''}>Très compacte (13px)</option><option value="0.88" ${design.fontScale==='0.88'?'selected':''}>Compacte (14px)</option><option value="0.94" ${design.fontScale==='0.94'?'selected':''}>Resserrée (15px)</option><option value="1" ${(!design.fontScale||design.fontScale==='1')?'selected':''}>Normale (16px)</option><option value="1.06" ${design.fontScale==='1.06'?'selected':''}>Confortable (17px)</option><option value="1.13" ${design.fontScale==='1.13'?'selected':''}>Grande (18px)</option><option value="1.19" ${design.fontScale==='1.19'?'selected':''}>Très grande (19px)</option><option value="1.25" ${design.fontScale==='1.25'?'selected':''}>Large (20px)</option><option value="1.38" ${design.fontScale==='1.38'?'selected':''}>Très large (22px)</option><option value="1.5" ${design.fontScale==='1.5'?'selected':''}>Maximale (24px)</option></select></label><label>Police de caractères<select name="fontFamily" id="font-family-select">${fontFamilyOptions.map(([value,label])=>`<option value="${value}" ${fontFamilyValue(design.fontFamily)===value?'selected':''}>${escapeHtml(label)}</option>`).join('')}${(typeof design.fontFamily==='string'&&design.fontFamily.indexOf('local:')===0)?`<optgroup label="— Polices de votre ordinateur —"><option value="${escapeHtml(design.fontFamily)}" selected>${escapeHtml(design.fontFamily.slice(6))}</option></optgroup>`:''}</select><button type="button" class="button small" id="detect-local-fonts" hidden style="margin-top:6px">Voir toutes les polices de mon ordinateur</button></label><label>Fond des blocs de fiche<select name="cardBackground"><option value="white">Selon le preset</option><option value="blue" ${design.cardBackground==='blue'?'selected':''}>Couleur bleutée</option><option value="bw" ${design.cardBackground==='bw'?'selected':''}>Noir et blanc</option><option value="archive" ${design.cardBackground==='archive'?'selected':''}>Papier archive</option><option value="green" ${design.cardBackground==='green'?'selected':''}>Vert doux</option></select></label><label>Fond de carte géographique<select name="mapBackground"><option value="bw" ${mapBackgroundValue(design.mapBackground)==='bw'?'selected':''}>Noir &amp; blanc</option><option value="color" ${mapBackgroundValue(design.mapBackground)==='color'?'selected':''}>Couleur (OSM)</option><option value="light" ${mapBackgroundValue(design.mapBackground)==='light'?'selected':''}>Claire</option><option value="minimal" ${mapBackgroundValue(design.mapBackground)==='minimal'?'selected':''}>Minimaliste</option><option value="roads" ${mapBackgroundValue(design.mapBackground)==='roads'?'selected':''}>Routes seules</option><option value="dark" ${mapBackgroundValue(design.mapBackground)==='dark'?'selected':''}>Sombre</option><option value="osmfr" ${mapBackgroundValue(design.mapBackground)==='osmfr'?'selected':''}>OSM France</option><option value="relief" ${mapBackgroundValue(design.mapBackground)==='relief'?'selected':''}>Relief léger</option><option value="cyclosm" ${mapBackgroundValue(design.mapBackground)==='cyclosm'?'selected':''}>CyclOSM (relief + routes)</option><option value="wikimedia" ${mapBackgroundValue(design.mapBackground)==='wikimedia'?'selected':''}>Wikimedia Maps</option><option value="satellite" ${mapBackgroundValue(design.mapBackground)==='satellite'?'selected':''}>Satellite (Esri)</option><option value="esri_topo" ${mapBackgroundValue(design.mapBackground)==='esri_topo'?'selected':''}>Topographique (Esri)</option><option value="esri_street" ${mapBackgroundValue(design.mapBackground)==='esri_street'?'selected':''}>Rues couleur (Esri)</option><option value="voyager" ${mapBackgroundValue(design.mapBackground)==='voyager'?'selected':''}>Voyager (avec labels)</option><option value="osmde" ${mapBackgroundValue(design.mapBackground)==='osmde'?'selected':''}>OSM Allemagne</option><option value="cartoweb" ${mapBackgroundValue(design.mapBackground)==='cartoweb'?'selected':''}>CartoWeb.be (Belgique, IGN)</option><option value="swisstopo" ${mapBackgroundValue(design.mapBackground)==='swisstopo'?'selected':''}>Swisstopo (Suisse)</option><option value="grid" ${mapBackgroundValue(design.mapBackground)==='grid'?'selected':''}>Quadrillé</option><optgroup label="— Cartes historiques —"></optgroup><option value="ohm" ${mapBackgroundValue(design.mapBackground)==='ohm'?'selected':''}>OpenHistoricalMap</option><option value="cassini" ${mapBackgroundValue(design.mapBackground)==='cassini'?'selected':''}>Carte de Cassini (18e s.)</option><option value="etatmajor" ${mapBackgroundValue(design.mapBackground)==='etatmajor'?'selected':''}>État-Major (France, 19e s.)</option><option value="swisstopo_dufour" ${mapBackgroundValue(design.mapBackground)==='swisstopo_dufour'?'selected':''}>Swisstopo — Carte Dufour (Suisse, 1845-1865)</option><option value="swisstopo_siegfried" ${mapBackgroundValue(design.mapBackground)==='swisstopo_siegfried'?'selected':''}>Swisstopo — Carte Siegfried (Suisse, 1870-1949)</option><option value="nls_6inch" ${mapBackgroundValue(design.mapBackground)==='nls_6inch'?'selected':''}>OS 6-inch Écosse (1842-1882)</option><option value="nls_natgrid" ${mapBackgroundValue(design.mapBackground)==='nls_natgrid'?'selected':''}>OS National Grid UK (1940-1960)</option><option value="ferraris" ${mapBackgroundValue(design.mapBackground)==='ferraris'?'selected':''}>Carte de Ferraris (Belgique, 1777)</option><option value="vandermaelen" ${mapBackgroundValue(design.mapBackground)==='vandermaelen'?'selected':''}>Carte Vandermaelen (Belgique, 1846-1854)</option><option value="popp" ${mapBackgroundValue(design.mapBackground)==='popp'?'selected':''}>Atlas Popp (Belgique, 1842-1879)</option><option value="frickx" ${mapBackgroundValue(design.mapBackground)==='frickx'?'selected':''}>Carte Fricx (Belgique, 1744)</option><option value="buurtwegen" ${mapBackgroundValue(design.mapBackground)==='buurtwegen'?'selected':''}>Atlas der Buurtwegen (Flandre, ~1840)</option><optgroup label="— France IGN (Géoplateforme) —"></optgroup><option value="ign_ortho_1950" ${mapBackgroundValue(design.mapBackground)==='ign_ortho_1950'?'selected':''}>Photos aériennes historiques IGN (1950-1965)</option><option value="ign_scan50_1950" ${mapBackgroundValue(design.mapBackground)==='ign_scan50_1950'?'selected':''}>Scan50 1950 — carte papier IGN</option><option value="ign_hr_ortho" ${mapBackgroundValue(design.mapBackground)==='ign_hr_ortho'?'selected':''}>Orthophotos actuelles HD IGN</option><option value="ign_planv2" ${mapBackgroundValue(design.mapBackground)==='ign_planv2'?'selected':''}>Plan IGN v2 (actuel)</option><optgroup label="— Grande-Bretagne (NLS) —"></optgroup><option value="nls_25inch" ${mapBackgroundValue(design.mapBackground)==='nls_25inch'?'selected':''}>OS 25-inch Écosse (1892-1905)</option><option value="nls_1inch" ${mapBackgroundValue(design.mapBackground)==='nls_1inch'?'selected':''}>OS 1-inch GB (1885-1900)</option><option value="gsgs3906" ${mapBackgroundValue(design.mapBackground)==='gsgs3906'?'selected':''}>GSGS 3906 — War Office 1940-1943 (Écosse)</option><option value="london_1940s" ${mapBackgroundValue(design.mapBackground)==='london_1940s'?'selected':''}>Londres 1940s (1:1250/1:2500)</option><optgroup label="— États-Unis (USGS) —"></optgroup><option value="usgs_topo" ${mapBackgroundValue(design.mapBackground)==='usgs_topo'?'selected':''}>USGS Topo (USA, actuel)</option><option value="usgs_imagery" ${mapBackgroundValue(design.mapBackground)==='usgs_imagery'?'selected':''}>USGS Satellite (USA)</option><optgroup label="— Espagne (IGN España) —"></optgroup><option value="ign_es_mtn50" ${mapBackgroundValue(design.mapBackground)==='ign_es_mtn50'?'selected':''}>MTN50 première édition (Espagne, 1910-1970)</option><option value="ign_es_pnoa" ${mapBackgroundValue(design.mapBackground)==='ign_es_pnoa'?'selected':''}>Orthophotos PNOA actuelles (Espagne)</option></select></label><label>Détails des recensements<select name="censusDetailsDefault"><option value="collapsed" ${design.censusDetailsDefault!=='expanded'?'selected':''}>Masqués par défaut</option><option value="expanded" ${design.censusDetailsDefault==='expanded'?'selected':''}>Affichés par défaut</option></select></label><label>Ordre des recensements spéciaux<select name="censusSpecialOrder"><option value="official_first" ${design.censusSpecialOrder!=='chronological'?'selected':''}>Classiques puis spéciaux</option><option value="chronological" ${design.censusSpecialOrder==='chronological'?'selected':''}>Tout chronologique</option></select></label><label>Forme des avatars<select name="avatarShape"><option value="tilted" ${(design.avatarShape||'tilted')==='tilted'?'selected':''}>Carré penché (défaut)</option><option value="square" ${design.avatarShape==='square'?'selected':''}>Carré droit</option><option value="circle" ${design.avatarShape==='circle'?'selected':''}>Cercle</option><option value="pentagon" ${design.avatarShape==='pentagon'?'selected':''}>Pentagone</option><option value="hexagon" ${design.avatarShape==='hexagon'?'selected':''}>Hexagone</option><option value="diamond" ${design.avatarShape==='diamond'?'selected':''}>Losange</option></select></label><label>Affichage des événements<select name="eventDisplayMode"><option value="all_mixed" ${(design.eventDisplayMode||'all_mixed')==='all_mixed'?'selected':''}>Tous (mélangés)</option><option value="all_bottom" ${design.eventDisplayMode==='all_bottom'?'selected':''}>Tous (séparés)</option><option value="own_only" ${design.eventDisplayMode==='own_only'?'selected':''}>Mes événements</option><option value="witness_only" ${design.eventDisplayMode==='witness_only'?'selected':''}>Comme témoin</option></select></label><label>Position sur la carte (défaut)<select name="defaultMapLocationMode"><option value="city" ${(design.defaultMapLocationMode||'city')==='city'?'selected':''}>Ville</option><option value="combined" ${design.defaultMapLocationMode==='combined'?'selected':''}>Combiné</option><option value="precise" ${design.defaultMapLocationMode==='precise'?'selected':''}>Lieu précis</option></select></label><label>Variantes de nom<select name="identity_name_variants_display"><option value="always" ${getIdentityNameVariantsDisplay()==='always'?'selected':''}>Afficher</option><option value="never" ${getIdentityNameVariantsDisplay()==='never'?'selected':''}>Masquer</option><option value="if_filled" ${(getIdentityNameVariantsDisplay()||'if_filled')==='if_filled'?'selected':''}>Afficher seulement si renseigné</option></select></label><label>Enquêtes en secondaire<select name="showInvestigationsAsSecondary"><option value="show" ${(design.showInvestigationsAsSecondary||'show')==='show'?'selected':''}>Afficher dans la fiche</option><option value="hide" ${design.showInvestigationsAsSecondary==='hide'?'selected':''}>Masquer de la fiche</option></select></label><label>Mort Pour La France (défaut)<select name="defaultMortPourLaFrance"><option value="unknown" ${(design.defaultMortPourLaFrance||'unknown')==='unknown'?'selected':''}>Inconnu</option><option value="yes" ${design.defaultMortPourLaFrance==='yes'?'selected':''}>Oui</option><option value="no" ${design.defaultMortPourLaFrance==='no'?'selected':''}>Non</option><option value="na" ${design.defaultMortPourLaFrance==='na'?'selected':''}>Non applicable</option></select></label><label>Prénom affiché<input name="ownerFirst" value="${escapeHtml(design.ownerFirst||'')}" placeholder="Marie"></label><label>Nom affiché<input name="ownerLast" value="${escapeHtml(design.ownerLast||'')}" placeholder="Dupont"></label><label>Lecteur audio / vidéo : avancer et reculer de (secondes)<input type="number" name="avSkipSeconds" min="1" max="3600" step="1" value="${escapeHtml(String(design.avSkipSeconds||15))}"></label>`;
+        return `<label>Preset<select name="preset">${presetSelectOptionsHtml(design.preset)}</select></label><label>Couleur principale<input type="color" name="blue" value="${escapeHtml(design.blue||'#0066cc')}"></label><label>Menu des onglets<select name="navPosition"><option value="top" ${design.navPosition!=='bottom'?'selected':''}>En haut (défaut)</option><option value="bottom" ${design.navPosition==='bottom'?'selected':''}>En bas de l’écran</option></select></label><label>Logo « ${escapeHtml(design.ownerFirst||'MA')} ${escapeHtml(design.ownerLast||'FAMILLE')} · GÉNÉALOGIE »<select name="brandDisplay"><option value="show" ${design.brandDisplay!=='hide'?'selected':''}>Afficher (défaut)</option><option value="hide" ${design.brandDisplay==='hide'?'selected':''}>Masquer (onglets plus larges)</option></select></label><label>Colonne latérale<select name="sidebarPosition"><option value="left" ${design.sidebarPosition!=='right'?'selected':''}>À gauche (défaut)</option><option value="right" ${design.sidebarPosition==='right'?'selected':''}>À droite</option></select></label><label>Taille typographique<select name="fontScale"><option value="0.82" ${design.fontScale==='0.82'?'selected':''}>Très compacte (13px)</option><option value="0.88" ${design.fontScale==='0.88'?'selected':''}>Compacte (14px)</option><option value="0.94" ${design.fontScale==='0.94'?'selected':''}>Resserrée (15px)</option><option value="1" ${(!design.fontScale||design.fontScale==='1')?'selected':''}>Normale (16px)</option><option value="1.06" ${design.fontScale==='1.06'?'selected':''}>Confortable (17px)</option><option value="1.13" ${design.fontScale==='1.13'?'selected':''}>Grande (18px)</option><option value="1.19" ${design.fontScale==='1.19'?'selected':''}>Très grande (19px)</option><option value="1.25" ${design.fontScale==='1.25'?'selected':''}>Large (20px)</option><option value="1.38" ${design.fontScale==='1.38'?'selected':''}>Très large (22px)</option><option value="1.5" ${design.fontScale==='1.5'?'selected':''}>Maximale (24px)</option></select></label><label>Police de caractères<select name="fontFamily" id="font-family-select">${fontFamilyOptions.map(([value,label])=>`<option value="${value}" ${fontFamilyValue(design.fontFamily)===value?'selected':''}>${escapeHtml(label)}</option>`).join('')}${(typeof design.fontFamily==='string'&&design.fontFamily.indexOf('local:')===0)?`<optgroup label="— Polices de votre ordinateur —"><option value="${escapeHtml(design.fontFamily)}" selected>${escapeHtml(design.fontFamily.slice(6))}</option></optgroup>`:''}</select><button type="button" class="button small secondary" id="detect-local-fonts" hidden style="margin-top:6px">Aa Voir toutes les polices…</button></label><label>Fond des blocs de fiche<select name="cardBackground"><option value="white">Selon le preset</option><option value="blue" ${design.cardBackground==='blue'?'selected':''}>Couleur bleutée</option><option value="bw" ${design.cardBackground==='bw'?'selected':''}>Noir et blanc</option><option value="archive" ${design.cardBackground==='archive'?'selected':''}>Papier archive</option><option value="green" ${design.cardBackground==='green'?'selected':''}>Vert doux</option></select></label><label>Fond de carte géographique<select name="mapBackground"><option value="bw" ${mapBackgroundValue(design.mapBackground)==='bw'?'selected':''}>Noir &amp; blanc</option><option value="color" ${mapBackgroundValue(design.mapBackground)==='color'?'selected':''}>Couleur (OSM)</option><option value="light" ${mapBackgroundValue(design.mapBackground)==='light'?'selected':''}>Claire</option><option value="minimal" ${mapBackgroundValue(design.mapBackground)==='minimal'?'selected':''}>Minimaliste</option><option value="roads" ${mapBackgroundValue(design.mapBackground)==='roads'?'selected':''}>Routes seules</option><option value="dark" ${mapBackgroundValue(design.mapBackground)==='dark'?'selected':''}>Sombre</option><option value="osmfr" ${mapBackgroundValue(design.mapBackground)==='osmfr'?'selected':''}>OSM France</option><option value="relief" ${mapBackgroundValue(design.mapBackground)==='relief'?'selected':''}>Relief léger</option><option value="cyclosm" ${mapBackgroundValue(design.mapBackground)==='cyclosm'?'selected':''}>CyclOSM (relief + routes)</option><option value="wikimedia" ${mapBackgroundValue(design.mapBackground)==='wikimedia'?'selected':''}>Wikimedia Maps</option><option value="satellite" ${mapBackgroundValue(design.mapBackground)==='satellite'?'selected':''}>Satellite (Esri)</option><option value="esri_topo" ${mapBackgroundValue(design.mapBackground)==='esri_topo'?'selected':''}>Topographique (Esri)</option><option value="esri_street" ${mapBackgroundValue(design.mapBackground)==='esri_street'?'selected':''}>Rues couleur (Esri)</option><option value="voyager" ${mapBackgroundValue(design.mapBackground)==='voyager'?'selected':''}>Voyager (avec labels)</option><option value="osmde" ${mapBackgroundValue(design.mapBackground)==='osmde'?'selected':''}>OSM Allemagne</option><option value="cartoweb" ${mapBackgroundValue(design.mapBackground)==='cartoweb'?'selected':''}>CartoWeb.be (Belgique, IGN)</option><option value="swisstopo" ${mapBackgroundValue(design.mapBackground)==='swisstopo'?'selected':''}>Swisstopo (Suisse)</option><option value="grid" ${mapBackgroundValue(design.mapBackground)==='grid'?'selected':''}>Quadrillé</option><optgroup label="— Cartes historiques —"></optgroup><option value="ohm" ${mapBackgroundValue(design.mapBackground)==='ohm'?'selected':''}>OpenHistoricalMap</option><option value="cassini" ${mapBackgroundValue(design.mapBackground)==='cassini'?'selected':''}>Carte de Cassini (18e s.)</option><option value="etatmajor" ${mapBackgroundValue(design.mapBackground)==='etatmajor'?'selected':''}>État-Major (France, 19e s.)</option><option value="swisstopo_dufour" ${mapBackgroundValue(design.mapBackground)==='swisstopo_dufour'?'selected':''}>Swisstopo — Carte Dufour (Suisse, 1845-1865)</option><option value="swisstopo_siegfried" ${mapBackgroundValue(design.mapBackground)==='swisstopo_siegfried'?'selected':''}>Swisstopo — Carte Siegfried (Suisse, 1870-1949)</option><option value="nls_6inch" ${mapBackgroundValue(design.mapBackground)==='nls_6inch'?'selected':''}>OS 6-inch Écosse (1842-1882)</option><option value="nls_natgrid" ${mapBackgroundValue(design.mapBackground)==='nls_natgrid'?'selected':''}>OS National Grid UK (1940-1960)</option><option value="ferraris" ${mapBackgroundValue(design.mapBackground)==='ferraris'?'selected':''}>Carte de Ferraris (Belgique, 1777)</option><option value="vandermaelen" ${mapBackgroundValue(design.mapBackground)==='vandermaelen'?'selected':''}>Carte Vandermaelen (Belgique, 1846-1854)</option><option value="popp" ${mapBackgroundValue(design.mapBackground)==='popp'?'selected':''}>Atlas Popp (Belgique, 1842-1879)</option><option value="frickx" ${mapBackgroundValue(design.mapBackground)==='frickx'?'selected':''}>Carte Fricx (Belgique, 1744)</option><option value="buurtwegen" ${mapBackgroundValue(design.mapBackground)==='buurtwegen'?'selected':''}>Atlas der Buurtwegen (Flandre, ~1840)</option><optgroup label="— France IGN (Géoplateforme) —"></optgroup><option value="ign_ortho_1950" ${mapBackgroundValue(design.mapBackground)==='ign_ortho_1950'?'selected':''}>Photos aériennes historiques IGN (1950-1965)</option><option value="ign_scan50_1950" ${mapBackgroundValue(design.mapBackground)==='ign_scan50_1950'?'selected':''}>Scan50 1950 — carte papier IGN</option><option value="ign_hr_ortho" ${mapBackgroundValue(design.mapBackground)==='ign_hr_ortho'?'selected':''}>Orthophotos actuelles HD IGN</option><option value="ign_planv2" ${mapBackgroundValue(design.mapBackground)==='ign_planv2'?'selected':''}>Plan IGN v2 (actuel)</option><optgroup label="— Grande-Bretagne (NLS) —"></optgroup><option value="nls_25inch" ${mapBackgroundValue(design.mapBackground)==='nls_25inch'?'selected':''}>OS 25-inch Écosse (1892-1905)</option><option value="nls_1inch" ${mapBackgroundValue(design.mapBackground)==='nls_1inch'?'selected':''}>OS 1-inch GB (1885-1900)</option><option value="gsgs3906" ${mapBackgroundValue(design.mapBackground)==='gsgs3906'?'selected':''}>GSGS 3906 — War Office 1940-1943 (Écosse)</option><option value="london_1940s" ${mapBackgroundValue(design.mapBackground)==='london_1940s'?'selected':''}>Londres 1940s (1:1250/1:2500)</option><optgroup label="— États-Unis (USGS) —"></optgroup><option value="usgs_topo" ${mapBackgroundValue(design.mapBackground)==='usgs_topo'?'selected':''}>USGS Topo (USA, actuel)</option><option value="usgs_imagery" ${mapBackgroundValue(design.mapBackground)==='usgs_imagery'?'selected':''}>USGS Satellite (USA)</option><optgroup label="— Espagne (IGN España) —"></optgroup><option value="ign_es_mtn50" ${mapBackgroundValue(design.mapBackground)==='ign_es_mtn50'?'selected':''}>MTN50 première édition (Espagne, 1910-1970)</option><option value="ign_es_pnoa" ${mapBackgroundValue(design.mapBackground)==='ign_es_pnoa'?'selected':''}>Orthophotos PNOA actuelles (Espagne)</option></select></label><label>Détails des recensements<select name="censusDetailsDefault"><option value="collapsed" ${design.censusDetailsDefault!=='expanded'?'selected':''}>Masqués par défaut</option><option value="expanded" ${design.censusDetailsDefault==='expanded'?'selected':''}>Affichés par défaut</option></select></label><label>Ordre des recensements spéciaux<select name="censusSpecialOrder"><option value="official_first" ${design.censusSpecialOrder!=='chronological'?'selected':''}>Classiques puis spéciaux</option><option value="chronological" ${design.censusSpecialOrder==='chronological'?'selected':''}>Tout chronologique</option></select></label><label>Forme des avatars<select name="avatarShape"><option value="tilted" ${(design.avatarShape||'tilted')==='tilted'?'selected':''}>Carré penché (défaut)</option><option value="square" ${design.avatarShape==='square'?'selected':''}>Carré droit</option><option value="circle" ${design.avatarShape==='circle'?'selected':''}>Cercle</option><option value="pentagon" ${design.avatarShape==='pentagon'?'selected':''}>Pentagone</option><option value="hexagon" ${design.avatarShape==='hexagon'?'selected':''}>Hexagone</option><option value="diamond" ${design.avatarShape==='diamond'?'selected':''}>Losange</option></select></label><label>Affichage des événements<select name="eventDisplayMode"><option value="all_mixed" ${(design.eventDisplayMode||'all_mixed')==='all_mixed'?'selected':''}>Tous (mélangés)</option><option value="all_bottom" ${design.eventDisplayMode==='all_bottom'?'selected':''}>Tous (séparés)</option><option value="own_only" ${design.eventDisplayMode==='own_only'?'selected':''}>Mes événements</option><option value="witness_only" ${design.eventDisplayMode==='witness_only'?'selected':''}>Comme témoin</option></select></label><label>Position sur la carte (défaut)<select name="defaultMapLocationMode"><option value="city" ${(design.defaultMapLocationMode||'city')==='city'?'selected':''}>Ville</option><option value="combined" ${design.defaultMapLocationMode==='combined'?'selected':''}>Combiné</option><option value="precise" ${design.defaultMapLocationMode==='precise'?'selected':''}>Lieu précis</option></select></label><label>Variantes de nom<select name="identity_name_variants_display"><option value="always" ${getIdentityNameVariantsDisplay()==='always'?'selected':''}>Afficher</option><option value="never" ${getIdentityNameVariantsDisplay()==='never'?'selected':''}>Masquer</option><option value="if_filled" ${(getIdentityNameVariantsDisplay()||'if_filled')==='if_filled'?'selected':''}>Afficher seulement si renseigné</option></select></label><label>Enquêtes en secondaire<select name="showInvestigationsAsSecondary"><option value="show" ${(design.showInvestigationsAsSecondary||'show')==='show'?'selected':''}>Afficher dans la fiche</option><option value="hide" ${design.showInvestigationsAsSecondary==='hide'?'selected':''}>Masquer de la fiche</option></select></label><label>Mort Pour La France (défaut)<select name="defaultMortPourLaFrance"><option value="unknown" ${(design.defaultMortPourLaFrance||'unknown')==='unknown'?'selected':''}>Inconnu</option><option value="yes" ${design.defaultMortPourLaFrance==='yes'?'selected':''}>Oui</option><option value="no" ${design.defaultMortPourLaFrance==='no'?'selected':''}>Non</option><option value="na" ${design.defaultMortPourLaFrance==='na'?'selected':''}>Non applicable</option></select></label><label>Prénom affiché<input name="ownerFirst" value="${escapeHtml(design.ownerFirst||'')}" placeholder="Marie"></label><label>Nom affiché<input name="ownerLast" value="${escapeHtml(design.ownerLast||'')}" placeholder="Dupont"></label><label>Lecteur audio / vidéo : avancer et reculer de (secondes)<input type="number" name="avSkipSeconds" min="1" max="3600" step="1" value="${escapeHtml(String(design.avSkipSeconds||15))}"></label>`;
     }
     function enhanceDesignFormOptions(design){
         const cardSelect=$('#design-form select[name="cardBackground"]');
@@ -5358,7 +5600,7 @@ ${backupSectionHtml()}
     }
     function designPresetsHtml(presets){
         const rows=Object.entries(presets).sort((a,b)=>(a[1].name||'').localeCompare(b[1].name||'','fr'));
-        return `<div class="local-lock-inline design-presets-head"><div><strong>Designs enregistrés</strong><span>Sauvegarde ce réglage sous un nom pour le retrouver et le réappliquer plus tard.</span></div><div class="page-actions"><input type="text" id="design-preset-name" placeholder="Nom du design" maxlength="60"><button class="button small" type="button" id="save-design-preset">Enregistrer ce design</button></div></div><div class="design-presets-list">${rows.length?rows.map(([id,preset])=>`<article class="design-preset-row" data-preset-id="${escapeHtml(id)}"><b>${escapeHtml(preset.name||'Sans nom')}</b><div class="page-actions"><button class="button small secondary" type="button" data-apply-preset="${escapeHtml(id)}">Appliquer</button><button class="button small secondary" type="button" data-edit-preset="${escapeHtml(id)}">Modifier</button><button class="button small secondary" type="button" data-rename-preset="${escapeHtml(id)}">Renommer</button><button class="button small secondary" type="button" data-delete-preset="${escapeHtml(id)}">Supprimer</button></div></article>`).join(''):empty('Aucun design enregistré pour l’instant',{icon:'🎨',hint:'Règle l’apparence puis enregistre-la sous un nom pour la retrouver ici.'})}</div>`;
+        return `<div class="local-lock-inline design-presets-head"><div><strong>Designs enregistrés</strong><span>Sauvegarde ce réglage sous un nom pour le retrouver et le réappliquer plus tard.</span></div><div class="page-actions"><input type="text" id="design-preset-name" placeholder="Nom du design" maxlength="60"><button class="button small" type="button" id="save-design-preset">Enregistrer ce design</button>${settingImportButton('id="import-design-preset"')}</div></div><div class="design-presets-list">${rows.length?rows.map(([id,preset])=>`<article class="design-preset-row" data-preset-id="${escapeHtml(id)}"><b>${escapeHtml(preset.name||'Sans nom')}</b><div class="page-actions"><button class="button small secondary" type="button" data-apply-preset="${escapeHtml(id)}">Appliquer</button><button class="button small secondary" type="button" data-edit-preset="${escapeHtml(id)}">Modifier</button><button class="button small secondary" type="button" data-rename-preset="${escapeHtml(id)}">Renommer</button>${settingExportButton(`data-export-preset="${escapeHtml(id)}"`)}<button class="button small secondary" type="button" data-delete-preset="${escapeHtml(id)}">Supprimer</button></div></article>`).join(''):empty('Aucun design enregistré pour l’instant',{icon:'🎨',hint:'Règle l’apparence puis enregistre-la sous un nom pour la retrouver ici.'})}</div>`;
     }
     function personBadgeColorsFromPanel(){
         const panel=$('#person-badge-colors'),colors={};
@@ -5380,7 +5622,7 @@ ${backupSectionHtml()}
             ['artist_bg','Artiste fond'],['artist_text','Artiste texte'],
         ];
         const presets=Object.entries(getPersonBadgeColorPresets()).sort((a,b)=>(a[1].name||'').localeCompare(b[1].name||'','fr'));
-        return `<section class="maintenance-panel order-editor compact person-badge-colors" id="person-badge-colors"><h3>Couleurs des badges</h3><div class="person-badge-preview"><span class="sosa-star"><span>★</span> SOSA : 64</span><span class="daboville-tag"><span>◆</span> d'Aboville : 1.2.3</span><span class="status-badge deceased">Décédé(e)</span><span class="outside-genealogy-badge">Hors généalogie</span><span class="artist-badge">🎨 Artiste</span></div><div class="person-badge-color-grid">${rows.map(([key,label])=>`<label><span>${escapeHtml(label)}</span><input type="color" name="badge_${key}" value="${escapeHtml(colors[key]||DEFAULT_PERSON_BADGE_COLORS[key])}"></label>`).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" id="apply-person-badge-colors">Appliquer</button><button class="button small secondary" type="button" id="reset-person-badge-colors">↺ Remettre comme au départ</button></div><div class="person-badge-presets"><strong>Palettes</strong><div class="person-badge-preset-list">${presets.length?presets.map(([id,preset])=>`<article class="design-preset-row"><b>${escapeHtml(preset.name||'Sans nom')}</b><span>${personBadgePresetSwatches(preset.colors||{})}</span><div class="page-actions"><button class="button small secondary" type="button" data-apply-person-badge-preset="${escapeHtml(id)}">Appliquer</button><button class="button small secondary" type="button" data-delete-person-badge-preset="${escapeHtml(id)}">Suppr.</button></div></article>`).join(''):empty('Aucune palette enregistrée pour l’instant',{icon:'🎨',hint:'Donne un nom à tes couleurs ci-dessous puis enregistre-les.'})}</div><div class="page-actions person-badge-save-row"><input type="text" id="person-badge-preset-name" placeholder="Nom de la palette"><button class="button small" type="button" id="save-person-badge-preset">Enregistrer</button></div></div></section>`;
+        return `<section class="maintenance-panel order-editor compact person-badge-colors" id="person-badge-colors"><h3>Couleurs des badges</h3><div class="person-badge-preview"><span class="sosa-star"><span>★</span> SOSA : 64</span><span class="daboville-tag"><span>◆</span> d'Aboville : 1.2.3</span><span class="status-badge deceased">Décédé(e)</span><span class="outside-genealogy-badge">Hors généalogie</span><span class="artist-badge">🎨 Artiste</span></div><div class="person-badge-color-grid">${rows.map(([key,label])=>`<label><span>${escapeHtml(label)}</span><input type="color" name="badge_${key}" value="${escapeHtml(colors[key]||DEFAULT_PERSON_BADGE_COLORS[key])}"></label>`).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" id="apply-person-badge-colors">Appliquer</button><button class="button small secondary" type="button" id="reset-person-badge-colors">↺ Remettre comme au départ</button></div><div class="person-badge-presets"><strong>Palettes</strong><div class="person-badge-preset-list">${presets.length?presets.map(([id,preset])=>`<article class="design-preset-row"><b>${escapeHtml(preset.name||'Sans nom')}</b><span>${personBadgePresetSwatches(preset.colors||{})}</span><div class="page-actions"><button class="button small secondary" type="button" data-apply-person-badge-preset="${escapeHtml(id)}">Appliquer</button>${settingExportButton(`data-export-person-badge-preset="${escapeHtml(id)}"`)}<button class="button small secondary" type="button" data-delete-person-badge-preset="${escapeHtml(id)}">Suppr.</button></div></article>`).join(''):empty('Aucune palette enregistrée pour l’instant',{icon:'🎨',hint:'Donne un nom à tes couleurs ci-dessous puis enregistre-les.'})}</div><div class="page-actions person-badge-save-row"><input type="text" id="person-badge-preset-name" placeholder="Nom de la palette"><button class="button small" type="button" id="save-person-badge-preset">Enregistrer</button>${settingImportButton('id="import-person-badge-preset"')}</div></div></section>`;
     }
     function openEditPresetDialog(presetId){
         const presets=designPresets(),preset=presets[presetId];
@@ -5432,7 +5674,7 @@ ${backupSectionHtml()}
         let curIsAnimal=(current?.kind||state.currentPersonKind)==='animal';
         if(personId&&!current?.kind&&!state.currentPersonKind){try{curIsAnimal=(await api('person',{id:personId})).person?.kind==='animal';}catch(_){}}
         $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">APPARENCE</span><h2>Personnalisation locale</h2><p>Presets, couleur, typo, ordre des menus et ordre des listes. Tout est gardé dans ce navigateur.</p></div></header>
-        <form class="maintenance-panel" id="design-form"><div class="form-grid design-primary-grid">${designFieldsHtml(design)}</div>${sosaInlineControlsHtml()}${dabovilleInlineControlsHtml()}${lockInlineControlsHtml(lockData)}<div class="page-actions action-zone design-actions"><button class="button" type="submit">Appliquer</button><button class="button secondary" type="button" id="reset-design">↺ Remettre comme au départ</button><button class="button secondary" type="button" id="save-site-defaults">Définir comme défaut du site</button><button class="button secondary" type="button" id="apply-site-defaults">Appliquer les défauts du site</button></div>${designPresetsHtml(designPresets())}</form>
+        <form class="maintenance-panel" id="design-form"><div class="form-grid design-primary-grid">${designFieldsHtml(design)}</div>${customPresetsPanelHtml()}${sosaInlineControlsHtml()}${dabovilleInlineControlsHtml()}${lockInlineControlsHtml(lockData)}<div class="page-actions action-zone design-actions"><button class="button" type="submit">Appliquer</button><button class="button secondary" type="button" id="reset-design">↺ Remettre comme au départ</button><button class="button secondary" type="button" id="save-site-defaults">Définir comme défaut du site</button><button class="button secondary" type="button" id="apply-site-defaults">Appliquer les défauts du site</button></div>${designPresetsHtml(designPresets())}</form>
         <div class="design-order-grid design-order-grid-four">${menuOrderEditor(menuItems)}${graphDiagramOrderEditor(graphDiagramAllItems,graphDiagramHidden)}${graphStatsOrderEditor(graphStatsAllItems,graphStatsHidden)}${`<section class="maintenance-panel order-editor compact"><h3>Ordre des cartes</h3><div class="order-list" id="map-order">${mapItems.map(([key,label],index)=>menuOrderRow(key,label,index,key!=='all',!mapHidden.includes(key))).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" data-order-save="map-order">Enregistrer</button></div></section>`}${tileCategoryOrderEditor(tileAllCats,tileCatHidden,tileHidden)}${window.LCNDA_SIDEGROUPS?.instances?.listes?.panel('Ordre des listes')??listOrderEditor(listItems,listHidden)}${window.LCNDA_SIDEGROUPS?.instances?.maintenance?.panel('Ordre des pages de Maintenance')??orderEditor('maintenance-order','Ordre des onglets Maintenance',maintenanceItems)}${personBadgeColorPanel()}</div>
         ${lockToolsHtml(lockData)}
         <section class="person-block-config"><header><span class="eyebrow">TABLEAU DE BORD</span><h3>Widgets et bibliothèque</h3><p>Réorganise la bibliothèque de widgets de la colonne de gauche, puis règle les widgets déjà posés sur le tableau de bord.</p></header>
@@ -5507,36 +5749,25 @@ ${backupSectionHtml()}
             renderDesignTools();
             if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);
         });
+        // « Voir toutes les polices » : la liste de polices commune (recherche, récentes, polices de l'app et de l'ordinateur)
         const detectFontsBtn=$('#detect-local-fonts');
-        if(detectFontsBtn&&typeof window.queryLocalFonts==='function'){
+        if(detectFontsBtn&&window.LCNDA_UI?.openFontPicker){
             detectFontsBtn.hidden=false;
             detectFontsBtn.addEventListener('click',async()=>{
-                detectFontsBtn.disabled=true;detectFontsBtn.textContent='Lecture des polices…';
-                try{
-                    const fonts=await window.queryLocalFonts();
-                    const families=[...new Set(fonts.map(f=>f.family))].sort((a,b)=>a.localeCompare(b,'fr'));
-                    const select=$('#font-family-select');
-                    if(select&&families.length){
-                        const previousValue=select.value;
-                        let group=select.querySelector('optgroup[data-local-fonts]');
-                        if(!group){group=document.createElement('optgroup');group.dataset.localFonts='1';group.label='— Polices de votre ordinateur —';select.appendChild(group);}
-                        group.innerHTML='';
-                        families.forEach(family=>{
-                            const option=document.createElement('option');
-                            option.value=`local:${family}`;
-                            option.textContent=family;
-                            group.appendChild(option);
-                        });
-                        select.value=previousValue;
-                        toast(`${plural(families.length,'police trouvée','polices trouvées')} sur cet ordinateur.`);
-                    }else{
-                        toast('Aucune police supplémentaire trouvée.','error');
-                    }
-                }catch(err){
-                    toast('Accès aux polices refusé ou indisponible.','error');
-                }finally{
-                    detectFontsBtn.disabled=false;detectFontsBtn.textContent='Voir toutes les polices de mon ordinateur';
+                const select=$('#font-family-select');if(!select)return;
+                const cur=select.value.indexOf('local:')===0?select.value.slice(6):(fontFamilyOptions.find(o=>o[0]===select.value)?.[1]||'');
+                const owner=[readDesignSettings?.().ownerFirst,readDesignSettings?.().ownerLast].filter(Boolean).join(' ');
+                const font=await window.LCNDA_UI.openFontPicker({value:cur,sample:owner||'Louise Borie'});
+                if(!font)return;
+                const known=fontFamilyOptions.find(o=>o[1].toLowerCase()===font.toLowerCase());
+                let value=known?known[0]:`local:${font}`;
+                if(!known){
+                    let group=select.querySelector('optgroup[data-local-fonts]')||[...select.querySelectorAll('optgroup')].find(g=>/ordinateur/.test(g.label));
+                    if(!group){group=document.createElement('optgroup');group.dataset.localFonts='1';group.label='— Polices de votre ordinateur —';select.appendChild(group);}
+                    if(![...select.options].some(o=>o.value===value)){const option=document.createElement('option');option.value=value;option.textContent=font;group.appendChild(option);}
                 }
+                select.value=value;select.dispatchEvent(new Event('input',{bubbles:true}));select.dispatchEvent(new Event('change',{bubbles:true}));
+                toast(`Police « ${font} » choisie : enregistre le design pour la garder.`);
             });
         }
         const presetNameInput=$('#design-preset-name');
@@ -5572,6 +5803,15 @@ ${backupSectionHtml()}
             toast('Design renommé.');
             renderDesignTools();
         }));
+        $$('[data-export-preset]').forEach(button=>button.addEventListener('click',()=>{const p=designPresets()[button.dataset.exportPreset];if(p)exportSettingFile('apparence',p.name||'Sans nom',{design:p.design||{}});}));
+        $('#import-design-preset')?.addEventListener('click',async()=>{
+            const presets=designPresets();
+            const got=await importSettingFile('apparence',{names:Object.values(presets).map(p=>p.name||''),check:d=>d.design&&typeof d.design==='object'&&!Array.isArray(d.design)});
+            if(!got)return;
+            // seulement des valeurs simples (texte, nombre) : un design n'est fait que de ça
+            const design=Object.fromEntries(Object.entries(got.donnees.design).filter(([k,v])=>/^[a-z_][a-z0-9_]{0,60}$/i.test(k)&&['string','number','boolean'].includes(typeof v)).map(([k,v])=>[k,typeof v==='string'?v.slice(0,500):v]));
+            presets[String(Date.now())]={name:got.nom,design};saveDesignPresets(presets);toast(`Design « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`);renderDesignTools();
+        });
         $$('[data-delete-preset]').forEach(button=>button.addEventListener('click',async()=>{
             const presets=designPresets(),preset=presets[button.dataset.deletePreset];
             if(!preset)return;
@@ -5600,6 +5840,14 @@ ${backupSectionHtml()}
             renderDesignTools();
             if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);
         }));
+        $$('[data-export-person-badge-preset]').forEach(button=>button.addEventListener('click',()=>{const p=getPersonBadgeColorPresets()[button.dataset.exportPersonBadgePreset];if(p)exportSettingFile('palette-badges',p.name||'Sans nom',{colors:p.colors||{}});}));
+        $('#import-person-badge-preset')?.addEventListener('click',async()=>{
+            const presets=getPersonBadgeColorPresets(),isColor=c=>typeof c==='string'&&/^#[0-9a-f]{3,8}$/i.test(c);
+            const got=await importSettingFile('palette-badges',{names:Object.values(presets).map(p=>p.name||''),check:d=>d.colors&&typeof d.colors==='object'&&!Array.isArray(d.colors)});
+            if(!got)return;
+            const colors=Object.fromEntries(Object.entries(got.donnees.colors).filter(([k,v])=>k in DEFAULT_PERSON_BADGE_COLORS&&isColor(v)));
+            presets[String(Date.now())]={name:got.nom,colors:{...DEFAULT_PERSON_BADGE_COLORS,...colors}};savePersonBadgeColorPresets(presets);toast(`Palette « ${got.nom} » importée.`);renderDesignTools();
+        });
         $$('[data-delete-person-badge-preset]').forEach(button=>button.addEventListener('click',async()=>{
             const presets=getPersonBadgeColorPresets(),preset=presets[button.dataset.deletePersonBadgePreset];
             if(!preset)return;
@@ -5610,6 +5858,7 @@ ${backupSectionHtml()}
             renderDesignTools();
         }));
         $$('.order-list:not(.tile-cat-items)').forEach(setupDragOrder);
+        bindCustomPresetsPanel();
         // Tile category drag + item drag between modules
         const tileCatList=$('#tile-cat-order');
         if(tileCatList){
@@ -5913,6 +6162,8 @@ ${backupSectionHtml()}
         // Boutons Fichiers / Dossier dans #media-dialog
         (function(){
             let _mediaFiles=[];
+            // pour les autres écrans (fichiers glissés sur une enquête…) : les fichiers entrent dans la fenêtre d'import ouverte
+            mediaDialogAddFiles=files=>{const existing=new Set(_mediaFiles.map(f=>f.name+'|'+f.size));[...files].forEach(f=>{if(!existing.has(f.name+'|'+f.size)){_mediaFiles.push(f);existing.add(f.name+'|'+f.size);}});updateMediaPreview();};
             function updateMediaPreview(){
                 const preview=$('#media-files-preview');
                 const input=$('#media-files-input');
@@ -5942,6 +6193,21 @@ ${backupSectionHtml()}
                 newFiles.forEach(f=>{if(!existing.has(f.name+'|'+f.size)){_mediaFiles.push(f);existing.add(f.name+'|'+f.size);}});
                 updateMediaPreview();
             });
+            // E4 : on peut aussi glisser les fichiers dans la zone, ou les coller (⌘V)
+            const bindDrop=()=>{const dropArea=$('#media-dialog .media-upload-section');
+            if(dropArea&&window.LCNDA_UI?.bindFileDrop){
+                window.LCNDA_UI.bindFileDrop(dropArea,files=>{
+                    const accept=($('#media-files-input')?.getAttribute('accept')||'').split(',').map(a=>a.trim().toLowerCase()).filter(Boolean);
+                    const ok=f=>!accept.length||accept.some(a=>a.startsWith('.')?f.name.toLowerCase().endsWith(a):a.endsWith('/*')?(f.type||'').startsWith(a.slice(0,-1)):f.type===a);
+                    const good=files.filter(ok);
+                    if(!good.length){toast(accept.some(a=>a.startsWith('image'))?'Ici : des images, des PDF, des sons ou des vidéos.':'Ici : des sons ou des vidéos.','error');return;}
+                    const existing=new Set(_mediaFiles.map(f=>f.name+'|'+f.size));
+                    good.forEach(f=>{if(!existing.has(f.name+'|'+f.size)){_mediaFiles.push(f);existing.add(f.name+'|'+f.size);}});
+                    updateMediaPreview();
+                    if(good.length<files.length)toast(`${plural(files.length-good.length,'fichier laissé de côté','fichiers laissés de côté')} (type non accepté ici).`,'error');
+                });
+            }};
+            if(window.LCNDA_UI)bindDrop();else document.addEventListener('DOMContentLoaded',bindDrop);
             // Réinitialiser à l'ouverture du dialog
             const origOpenMediaDialog=openMediaDialog;
             // On patchera via un event reset sur le form
@@ -5965,6 +6231,15 @@ ${backupSectionHtml()}
         $('#stats-colors-save-preset')?.addEventListener('click',()=>{const nameInput=$('#stats-colors-preset-name');const name=(nameInput?.value||'').trim();if(!name){toast('Indique un nom pour cette palette.','error');nameInput?.focus();return;}const form=$('#stats-colors-form');const colors=Array.from({length:40},(_,i)=>form.querySelector(`[name="color_${i}"]`)?.value||DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length]);const presets=getStatsColorPresets();presets[String(Date.now())]={name,colors};saveStatsColorPresets(presets);if(nameInput)nameInput.value='';renderStatsColorPresetsList();toast(`Palette « ${name} » sauvegardée.`);});
         $('#battue-level-colors-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;const colors=Array.from({length:DEFAULT_BATTUE_LEVEL_COLORS.length},(_,i)=>form.querySelector(`[name="battue_level_${i}"]`)?.value||DEFAULT_BATTUE_LEVEL_COLORS[i]);saveBattueLevelColors(colors);$('#battue-level-colors-dialog').close();toast('Couleurs des niveaux enregistrées.');});
         $('#battue-level-colors-reset')?.addEventListener('click',()=>{const form=$('#battue-level-colors-form');DEFAULT_BATTUE_LEVEL_COLORS.forEach((c,i)=>{const input=form?.querySelector(`[name="battue_level_${i}"]`);if(input)input.value=c;});});
+        // ⤒ Importer une palette exportée
+        const importPalette=async(outil,get,save,redraw)=>{
+            const presets=get();
+            const got=await importSettingFile(outil,{names:Object.values(presets).map(p=>p.name||''),check:d=>Array.isArray(d.colors)&&d.colors.every(c=>typeof c==='string'&&/^#[0-9a-f]{3,8}$/i.test(c))});
+            if(!got)return;
+            presets[String(Date.now())]={name:got.nom,colors:got.donnees.colors.slice(0,40)};save(presets);redraw();toast(`Palette « ${got.nom} » importée.`);
+        };
+        $('#stats-colors-import-preset')?.addEventListener('click',()=>importPalette('palette-stats',getStatsColorPresets,saveStatsColorPresets,renderStatsColorPresetsList));
+        $('#battue-level-colors-import-preset')?.addEventListener('click',()=>importPalette('palette-battues',getBattueLevelColorPresets,saveBattueLevelColorPresets,renderBattueLevelColorPresetsList));
         $('#battue-level-colors-save-preset')?.addEventListener('click',()=>{const nameInput=$('#battue-level-colors-preset-name');const name=(nameInput?.value||'').trim();if(!name){toast('Indique un nom pour cette palette.','error');nameInput?.focus();return;}const form=$('#battue-level-colors-form');const colors=Array.from({length:DEFAULT_BATTUE_LEVEL_COLORS.length},(_,i)=>form.querySelector(`[name="battue_level_${i}"]`)?.value||DEFAULT_BATTUE_LEVEL_COLORS[i]);const presets=getBattueLevelColorPresets();presets[String(Date.now())]={name,colors};saveBattueLevelColorPresets(presets);if(nameInput)nameInput.value='';renderBattueLevelColorPresetsList();toast(`Palette « ${name} » sauvegardée.`);});
         $('#investigation-form').addEventListener('submit',async event=>{event.preventDefault();try{const formData=formObject(event.currentTarget);formData.additional_persons=$('#investigation-extra-persons')?.value||'';delete formData.people_json;if(!Number(formData.person_id)){toast('Choisis la personne principale de l’enquête.','error');return;}const result=await api('save_investigation',{}, {method:'POST',body:formData});$('#investigation-dialog').close();state.currentInvestigationId=Number(result.result.id);if(state.module==='personnes')await selectPerson(state.currentPersonId);else await renderInvestigations();toast('Enquête enregistrée.');}catch(error){toast(error.message,'error');}});
         $('#battue-form')?.addEventListener('submit',async event=>{
@@ -6655,22 +6930,86 @@ ${backupSectionHtml()}
         const reminderButton=$('#download-investigation-reminder');if(reminderButton)reminderButton.onclick=()=>downloadInvestigationReminderIcs(form);
         $('#investigation-item-dialog').showModal();
     }
+    /* ═════ 📅 Fichiers de calendrier .ics (RFC 5545) : rappels, événements, anniversaires ═════ */
+    const icsEscape=v=>String(v??'').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/([,;])/g,'\\$1');
+    /** une ligne pliée à 75 octets (UTF-8), les suites commencent par une espace */
+    function icsFold(line){
+        const enc=new TextEncoder(),out=[];let cur='',size=0;
+        for(const ch of line){const n=enc.encode(ch).length;if(size+n>(out.length?74:75)){out.push(cur);cur='';size=0;}cur+=ch;size+=n;}
+        out.push(cur);return out.join('\r\n ');
+    }
+    const icsYmd=({y,m,d})=>`${String(y).padStart(4,'0')}${String(m).padStart(2,'0')}${String(d).padStart(2,'0')}`;
+    const icsNextDay=({y,m,d})=>{const t=new Date(Date.UTC(y,m-1,d+1));return {y:t.getUTCFullYear(),m:t.getUTCMonth()+1,d:t.getUTCDate()};};
+    /** events : [{uid, date:{y,m,d}, summary, description, yearly, alarm}] → le texte du fichier */
+    function icsBuild(events,{name='LCNDA'}={}){
+        const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');
+        const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//LCNDA//Genealogie//FR','CALSCALE:GREGORIAN','METHOD:PUBLISH',`X-WR-CALNAME:${icsEscape(name)}`];
+        events.forEach(e=>{
+            lines.push('BEGIN:VEVENT',`UID:${e.uid}`,`DTSTAMP:${stamp}`,`DTSTART;VALUE=DATE:${icsYmd(e.date)}`,`DTEND;VALUE=DATE:${icsYmd(icsNextDay(e.date))}`,`SUMMARY:${icsEscape(e.summary)}`);
+            if(e.description)lines.push(`DESCRIPTION:${icsEscape(e.description)}`);
+            if(e.yearly)lines.push(e.date.m===2&&e.date.d===29?'RRULE:FREQ=YEARLY;BYMONTH=2;BYMONTHDAY=-1':'RRULE:FREQ=YEARLY');
+            lines.push('TRANSP:TRANSPARENT');
+            if(e.alarm)lines.push('BEGIN:VALARM','ACTION:DISPLAY',`DESCRIPTION:${icsEscape(e.summary)}`,'TRIGGER:-P1D','END:VALARM');
+            lines.push('END:VEVENT');
+        });
+        lines.push('END:VCALENDAR');
+        return lines.map(icsFold).join('\r\n')+'\r\n';
+    }
+    function icsDownload(filename,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/calendar;charset=utf-8'}));a.download=filename;document.body.append(a);a.click();const href=a.href;a.remove();setTimeout(()=>URL.revokeObjectURL(href),1000);}
+    /** La date exacte d'un événement (grégorienne), ou {why} quand on ne peut pas la mettre au calendrier */
+    function icsDateOf(ev){
+        const raw=String(ev?.date_converted&&ev.date_calendar&&ev.date_calendar!=='gregorian'?ev.date_converted:ev?.date_text||'').trim();
+        if(!raw)return {why:'cet événement n’a pas de date'};
+        if(/^(vers|environ|env|circa|ca|avant|av|apres|après|entre|de|du|depuis|~)\b/i.test(raw)||Number(ev?.date_uncertain))return {why:`la date « ${raw} » n’est pas sûre (vers, avant, entre…) : un calendrier a besoin d’un jour précis`};
+        const iso=freeDateToIso(raw);
+        if(!iso){return {why:/^\d{3,4}$/.test(raw)?`seule l’année est connue (« ${raw} ») : il faut le jour et le mois`:`la date « ${raw} » n’est pas un jour précis (il faut le jour, le mois et l’année)`};}
+        const [y,m,d]=iso.split('-').map(Number);return {y,m,d};
+    }
+    const icsSlug=v=>safeExportFilename(v,'lcnda');
+    const EVENT_ANNIV={BIRT:'Anniversaire de naissance',MARR:'Anniversaire de mariage',DEAT:'Anniversaire du décès',BAPM:'Anniversaire du baptême',CHR:'Anniversaire du baptême',BURI:'Anniversaire de l’inhumation'};
+    /** Un événement d'une personne → l'entrée du calendrier (annuelle ou non) */
+    function icsEventEntry(person,ev,{yearly=true,alarm=true}={}){
+        const date=icsDateOf(ev);if(date.why)return {why:date.why};
+        const who=personName(person),born=person?.gender==='female'?'née':'né',what=ev.type_label||'Événement';
+        const summary=yearly?`${EVENT_ANNIV[ev.gedcom_tag]||`Anniversaire : ${what.toLowerCase()}`} de ${who} (${ev.gedcom_tag==='BIRT'?`${born} en ${date.y}`:`${what.toLowerCase()} en ${date.y}`})`:`${what} de ${who}`;
+        const place=[ev.place_name,ev.county].filter(Boolean).join(', ');
+        return {uid:`lcnda-evt-${Number(ev.id)||icsSlug(what)}-${yearly?'y':'1'}@lcnda.local`,date,summary,description:[`${what} : ${ev.date_text}${place?` à ${place}`:''}`,'Exporté depuis LCNDA (généalogie).'].join('\n'),yearly,alarm};
+    }
+    /** « 📅 Ajouter à mon calendrier » sur un événement de la fiche */
+    function openEventIcsDialog(person,ev){
+        const test=icsDateOf(ev);
+        if(test.why){toast(`Impossible de mettre cet événement au calendrier : ${test.why}.`,'error');return;}
+        const dlg=document.createElement('dialog');dlg.className='modal small-modal';
+        dlg.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">CALENDRIER</span><h2>📅 Ajouter à mon calendrier</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            <p><b>${escapeHtml(ev.type_label||'Événement')}</b> de ${escapeHtml(personName(person))} : ${escapeHtml(ev.date_text)}</p>
+            <fieldset class="h-rc-modes"><legend>Dans le calendrier</legend><label class="checkbox-line"><input type="radio" name="rep" value="yearly" checked> Tous les ans (l’anniversaire)</label><label class="checkbox-line"><input type="radio" name="rep" value="once"> Une seule fois, à la date de l’événement</label></fieldset>
+            <label class="checkbox-line"><input type="checkbox" name="alarm" checked> Me le rappeler la veille</label>
+            <p class="muted"><small>Un fichier .ics est téléchargé : ouvre-le, ton calendrier (Apple, Google, Outlook…) propose de l’ajouter. Le réimporter ne crée pas de doublon.</small></p>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">📅 Télécharger le fichier</button></div></form>`;
+        document.body.appendChild(dlg);
+        dlg.addEventListener('click',e=>{if(e.target.closest('[data-x]'))dlg.close();});
+        dlg.querySelector('form').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget,yearly=f.elements.rep.value==='yearly';
+            const entry=icsEventEntry(person,ev,{yearly,alarm:f.elements.alarm.checked});
+            icsDownload(`${icsSlug(`${ev.type_label||'evenement'} ${personName(person)}`)}.ics`,icsBuild([entry],{name:personName(person)}));
+            toast('Fichier .ics prêt : ouvre-le pour l’ajouter à ton calendrier.');dlg.close();});
+        dlg.addEventListener('close',()=>dlg.remove());dlg.showModal();
+    }
+    document.addEventListener('click',async event=>{
+        const b=event.target.closest?.('[data-event-ics]');if(!b)return;
+        event.preventDefault();
+        try{const pid=Number(b.dataset.eventIcsPerson)||state.currentPersonId;const detail=await api('person',{id:pid});const ev=(detail.events||[]).find(x=>Number(x.id)===Number(b.dataset.eventIcs));if(ev)openEventIcsDialog(detail.person,ev);}
+        catch(error){toast(error.message,'error');}
+    });
+
     function downloadInvestigationReminderIcs(form){
         const title=(form.elements.title?.value||'Rappel généalogique').trim();
         const date=form.elements.reminder_due_at?.value||'';
         const mode=form.elements.reminder_mode?.value||'none';
         if(!date||mode==='none'){toast('Choisis une date de rappel.','error');return;}
-        const ymd=date.replaceAll('-','');
+        const [y,m,d]=date.split('-').map(Number);
         const summary=(mode==='before'?'À faire avant : ':mode==='after'?'À faire après : ':'À faire : ')+title;
-        const desc=(form.elements.notes?.value||'').replace(/\r?\n/g,'\\n');
-        const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');
-        const esc=value=>String(value).replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/([,;])/g,'\\$1');
-        const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Genealogie//Rappel//FR','BEGIN:VEVENT',`UID:${Date.now()}-${Math.random().toString(16).slice(2)}@genealogie.local`,`DTSTAMP:${stamp}`,`DTSTART;VALUE=DATE:${ymd}`,`SUMMARY:${esc(summary)}`,`DESCRIPTION:${esc(desc)}`,'END:VEVENT','END:VCALENDAR'].join('\r\n');
-        const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
-        const a=document.createElement('a');
-        a.href=URL.createObjectURL(blob);
-        a.download=`rappel-${date}-${title.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'')||'genealogie'}.ics`;
-        document.body.append(a);a.click();const href=a.href;a.remove();setTimeout(()=>URL.revokeObjectURL(href),500);
+        const entry={uid:`lcnda-rappel-${icsSlug(title)}-${date}@lcnda.local`,date:{y,m,d},summary,description:form.elements.notes?.value||'',yearly:false,alarm:false};
+        icsDownload(`rappel-${date}-${icsSlug(title)}.ics`,icsBuild([entry],{name:'Rappels LCNDA'}));
     }
     async function openInvestigationMediaDialog(investigationId,personId,selectedMediaIds=[],selectedItemIds=[],items=[],currentFile=null,folders=[]){
         const form=$('#investigation-media-form');form.reset();form.elements.investigation_id.value=investigationId;form.elements.verdict.value=currentFile?.verdict||'interesting';form.elements.reason.value=currentFile?.reason||'';
@@ -6804,6 +7143,7 @@ ${backupSectionHtml()}
         if(personId){pkSet(personField,Number(personId));await loadEventsForPerson(personId);}
         $('#investigation-item-event-dialog').showModal();
     }
+    let mediaDialogAddFiles=null;
     function openInvestigationUploadDialog(investigationId,personId,items=[],folders=[]){const form=$('#media-form');form.reset();form.elements.person_id.value=personId;form.elements.investigation_id.value=investigationId;if(form.elements.battue_item_id)form.elements.battue_item_id.value='';form.elements.event_id.value='';form.elements.census_id.value='';form.elements.event_id.closest('label').hidden=true;$('#media-census-label').hidden=true;$('#media-create-event-toggle').hidden=true;$('#media-create-event-fields').hidden=true;$('#media-correspondence-fields').hidden=true;$('#media-files-input')?.setAttribute('accept','image/*,application/pdf,audio/*,video/*,.aif,.aiff,.aifc');$('#media-folder-input')?.setAttribute('accept','image/*,application/pdf,audio/*,video/*,.aif,.aiff,.aifc');const mediaDialogTitleInv=$('#media-dialog-title');if(mediaDialogTitleInv)mediaDialogTitleInv.textContent='Ajouter des médias';form.querySelector('[name="investigation_item_ids[]"]').innerHTML=items.map(item=>`<option value="${item.id}">${escapeHtml(item.title)}</option>`).join('');const folderSelect=form.querySelector('[name="investigation_folder_id"]');if(folderSelect)folderSelect.innerHTML=`<option value="">Racine de l’enquête</option>${folders.map(folder=>`<option value="${folder.id}" ${Number(state.investigationFolderId||0)===Number(folder.id)?'selected':''}>${'— '.repeat(Math.max(0,investigationFolderPath(folders,folder.id).length-1))}${escapeHtml(folder.name)}</option>`).join('')}`;$('#media-investigation-fields').hidden=false;renderLabelPicker('#media-label-picker','media',0,[]);$('#media-dialog').showModal();}
     function openBattueMediaDialog(item){
         const form=$('#media-form');
@@ -6862,6 +7202,10 @@ ${backupSectionHtml()}
             +`<div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px"><button type="button" class="button small secondary" id="event-media-cancel">Annuler</button><button type="button" class="button small" id="event-media-confirm">Enregistrer</button></div>`;
         const refresh=async()=>{const personId=Number($('#event-form').elements.person_id.value)||state.currentPersonId;const refreshed=await api('person',{id:personId});detail.media=refreshed.media||detail.media;renderEventMediaPanel(detail,eventId,panel);const confidenceMediaId=Number(pkValue($('#event-confidence-media'))||0);renderEventConfidenceMediaChoices(detail,confidenceMediaId);const list=$('#event-media-list');if(list){const items=mediaForEvent(detail.media||[],eventId);list.innerHTML=items.length?`<p class="form-help">${plural(items.length,'document lié','documents liés')} à cet événement.</p>`:'';}};
         panel.querySelector('#event-media-cancel')?.addEventListener('click',()=>panel.remove());
+        // E4 : glisser (ou coller) des fichiers sur le panneau les met dans « Importer des fichiers »
+        const fileIn=panel.querySelector('#event-media-file');
+        if(fileIn&&window.LCNDA_UI?.bindFileDrop){fileIn.closest('label')?.insertAdjacentHTML('afterend','<small class="form-help">📁 ou glisse les fichiers ici, ou colle-les (⌘V).</small>');
+            window.LCNDA_UI.bindFileDrop(panel,files=>{const dt=new DataTransfer(),seen=new Set();[...(fileIn.files||[]),...files].forEach(f=>{const k=f.name+'|'+f.size;if(!seen.has(k)){seen.add(k);dt.items.add(f);}});fileIn.files=dt.files;fileIn.dispatchEvent(new Event('change',{bubbles:true}));toast(`${plural(dt.files.length,'fichier prêt','fichiers prêts')} : clique « Enregistrer ».`);},{accept:fileIn.getAttribute('accept')});}
         panel.querySelector('[data-event-group-create]')?.addEventListener('click',async()=>{const ids=$$('[data-event-group-media]:checked',panel).map(input=>Number(input.value));if(ids.length<2){toast('Coche au moins deux médias.','error');return;}try{await api('group_entity_media',{},{method:'POST',body:{entity_type:'event',entity_id:eventId,person_id:state.currentPersonId,media_ids:ids}});toast('Document groupé créé.');await refresh();}catch(error){toast(error.message,'error');}});
         panel.querySelector('[data-event-group-separate]')?.addEventListener('click',async()=>{const ids=$$('[data-event-group-media]:checked',panel).map(input=>Number(input.value));const item=linkedItems.find(row=>Number(row.id)===ids[0]);const key=item&&eventCollectionKey(item,eventId);if(!key||!ids.length||ids.some(id=>eventCollectionKey(linkedItems.find(row=>Number(row.id)===id),eventId)!==key)){toast('Sélectionne les éléments d’un seul document groupé.','error');return;}try{await api('ungroup_entity_media',{},{method:'POST',body:{entity_type:'event',entity_id:eventId,person_id:state.currentPersonId,collection_key:key}});toast('Document dissocié.');await refresh();}catch(error){toast(error.message,'error');}});
         panel.querySelector('[data-event-group-reorder]')?.addEventListener('click',()=>{const selected=$$('[data-event-group-media]:checked',panel).map(input=>Number(input.value));const groupedKeys=[...new Set(selected.map(id=>eventCollectionKey(linkedItems.find(row=>Number(row.id)===id),eventId)).filter(Boolean))];const allGroupedKeys=[...new Set(linkedItems.map(item=>eventCollectionKey(item,eventId)).filter(Boolean))];const key=groupedKeys.length===1?groupedKeys[0]:(selected.length===0&&allGroupedKeys.length===1?allGroupedKeys[0]:'');if(!key||groupedKeys.length>1){toast('Coche une image du document que tu veux réorganiser.','error');return;}openEventMediaOrderDialog(detail,eventId,key,refresh);});
@@ -7791,6 +8135,7 @@ ${backupSectionHtml()}
             return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.08)">
                 <div style="flex:1;min-width:0"><strong style="font-size:.88em;display:block;margin-bottom:4px">${escapeHtml(preset.name||'Sans nom')}</strong><div>${swatches}</div></div>
                 <button type="button" class="button small" data-apply-color-preset="${id}">Appliquer</button>
+                ${settingExportButton(`data-export-color-preset="${id}"`)}
                 <button type="button" class="button small secondary" data-delete-color-preset="${id}">Suppr.</button>
             </div>`;
         }).join('');
@@ -7801,6 +8146,7 @@ ${backupSectionHtml()}
             (preset.colors||[]).forEach((c,i)=>{const input=form.querySelector(`[name="color_${i}"]`);if(input)input.value=c;});
             toast(`Palette « ${preset.name||'Sans nom'} » appliquée. Clique sur Enregistrer pour confirmer.`);
         }));
+        $$('[data-export-color-preset]',container).forEach(btn=>btn.addEventListener('click',()=>{const p=getStatsColorPresets()[btn.dataset.exportColorPreset];if(p)exportSettingFile('palette-stats',p.name||'Sans nom',{colors:p.colors||[]});}));
         $$('[data-delete-color-preset]',container).forEach(btn=>btn.addEventListener('click',async()=>{
             const presets=getStatsColorPresets();
             const preset=presets[btn.dataset.deleteColorPreset];
@@ -7826,7 +8172,7 @@ ${backupSectionHtml()}
         if(!rows.length){container.innerHTML='<p class="muted" style="font-size:.85em;margin:.25rem 0 .5rem">Aucune palette enregistrée.</p>';return;}
         container.innerHTML=rows.map(([id,preset])=>{
             const swatches=(preset.colors||[]).slice(0,11).map(c=>`<span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:${escapeHtml(c)};margin-right:3px;vertical-align:middle"></span>`).join('');
-            return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.08)"><div style="flex:1;min-width:0"><strong style="font-size:.88em;display:block;margin-bottom:4px">${escapeHtml(preset.name||'Sans nom')}</strong><div>${swatches}</div></div><button type="button" class="button small" data-apply-battue-color-preset="${id}">Appliquer</button><button type="button" class="button small secondary" data-delete-battue-color-preset="${id}">Suppr.</button></div>`;
+            return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.08)"><div style="flex:1;min-width:0"><strong style="font-size:.88em;display:block;margin-bottom:4px">${escapeHtml(preset.name||'Sans nom')}</strong><div>${swatches}</div></div><button type="button" class="button small" data-apply-battue-color-preset="${id}">Appliquer</button>${settingExportButton(`data-export-battue-color-preset="${id}"`)}<button type="button" class="button small secondary" data-delete-battue-color-preset="${id}">Suppr.</button></div>`;
         }).join('');
         $$('[data-apply-battue-color-preset]',container).forEach(btn=>btn.addEventListener('click',()=>{
             const preset=getBattueLevelColorPresets()[btn.dataset.applyBattueColorPreset];
@@ -7835,6 +8181,7 @@ ${backupSectionHtml()}
             (preset.colors||[]).forEach((color,index)=>{const input=form.querySelector(`[name="battue_level_${index}"]`);if(input)input.value=color;});
             toast(`Palette « ${preset.name||'Sans nom'} » appliquée. Clique sur Enregistrer pour confirmer.`);
         }));
+        $$('[data-export-battue-color-preset]',container).forEach(btn=>btn.addEventListener('click',()=>{const p=getBattueLevelColorPresets()[btn.dataset.exportBattueColorPreset];if(p)exportSettingFile('palette-battues',p.name||'Sans nom',{colors:p.colors||[]});}));
         $$('[data-delete-battue-color-preset]',container).forEach(btn=>btn.addEventListener('click',async()=>{
             const presets=getBattueLevelColorPresets();
             const preset=presets[btn.dataset.deleteBattueColorPreset];
@@ -7981,7 +8328,7 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     // type de base changé (Listes → Animaux) : compteur, liste de gauche
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';setCountStatus($('#database-status'),personCountLabel(state.bootstrap.stats.personnes));if(state.module==='personnes'){renderSidebar();loadPeople();}}
-    window.LCNDA_APP={defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,confirmBox,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,confirmBox,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 

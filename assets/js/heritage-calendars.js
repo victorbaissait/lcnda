@@ -223,6 +223,48 @@
         const opts = [...m.entries()].sort((a, b) => b[1] - a[1]).map(([key, n]) => { const [k, v] = key.split(/:(.*)/s); return `<option value="${esc(placeLabel(k, v, n))}" data-key="${esc(key)}">`; }).join('');
         return `<span class="h-cal-place"><input type="search" data-cal-place placeholder="📍 Un lieu : commune, département, région, pays…" list="h-cal-places"><datalist id="h-cal-places">${opts}</datalist></span>`;
     }
+    /* ─── 📅 Exporter les anniversaires dans un fichier .ics (calendrier du téléphone, de l'ordinateur) ─── */
+    function icsExportDialog() {
+        const PK = window.LCNDA_PICKER;
+        ext.openDialog({eyebrow: 'CALENDRIER', title: '📅 Exporter les anniversaires (.ics)', submitLabel: '📅 Télécharger le fichier',
+            body: `<p class="muted">Un fichier à ouvrir dans ton calendrier (Apple, Google, Outlook…) : chaque anniversaire revient tous les ans. Le réimporter plus tard met à jour sans créer de doublon.</p>
+                <fieldset class="h-rc-modes"><legend>Les personnes</legend>
+                    <label class="checkbox-line"><input type="radio" name="who" value="sosa" checked> Mes ancêtres directs (numérotés Sosa)</label>
+                    <label class="checkbox-line"><input type="radio" name="who" value="all"> Toute la base</label>
+                    <label class="checkbox-line"><input type="radio" name="who" value="branch"> Une branche : une personne et tous ses descendants</label>
+                    <div data-ics-branch hidden>${PK.pickerField({name: 'ics_root', kind: 'person', allowCreate: false})}</div></fieldset>
+                <label class="checkbox-line"><input type="checkbox" name="living"> Seulement les personnes en vie (sans décès noté)</label>
+                <fieldset class="h-rc-modes"><legend>Les anniversaires</legend>
+                    <label class="checkbox-line"><input type="checkbox" name="g_birth" checked> 👶 Naissances, baptêmes</label>
+                    <label class="checkbox-line"><input type="checkbox" name="g_union" checked> 💍 Mariages</label>
+                    <label class="checkbox-line"><input type="checkbox" name="g_death"> ✝️ Décès</label></fieldset>
+                <label class="checkbox-line"><input type="checkbox" name="alarm" checked> Me le rappeler la veille</label>
+                <p class="muted" data-ics-note></p>`,
+            onOpen: dl => {
+                const sync = () => { dl.querySelector('[data-ics-branch]').hidden = dl.querySelector('[name=who]:checked').value !== 'branch'; };
+                dl.querySelectorAll('[name=who]').forEach(r => r.addEventListener('change', sync));
+            },
+            onSubmit: async form => {
+                const who = form.querySelector('[name=who]:checked').value, groups = ['birth', 'union', 'death'].filter(g => form.elements['g_' + g].checked);
+                if (!groups.length) { toast('Coche au moins une sorte d’anniversaire.', 'error'); return false; }
+                let ids = null;
+                if (who === 'sosa') { ids = new Set(Object.keys(A().sosaMap?.() || {}).map(Number)); if (!ids.size) { toast('Aucune personne numérotée Sosa : choisis le n°1 dans Maintenance → Apparence.', 'error'); return false; } }
+                if (who === 'branch') { const root = Number(PK.pickerValue?.(form.querySelector('[data-ics-branch] .pk')) || form.querySelector('[name=ics_root]')?.value || 0); if (!root) { toast('Choisis la personne en haut de la branche.', 'error'); return false; }
+                    const m = await A().api('daboville_map', {root_id: root}); ids = new Set([root, ...Object.keys(m.map || {}).map(Number)]); }
+                const data = await A().api('genea_calendar');
+                const dead = new Set(data.events.filter(e => e.group === 'death').flatMap(e => e.who.map(w => Number(w.id))));
+                const keep = e => groups.includes(e.group) && e.who.some(w => (!ids || ids.has(Number(w.id))) && (!form.elements.living.checked || !dead.has(Number(w.id))));
+                const chosen = data.events.filter(keep), ok = chosen.filter(e => e.d && e.m && !e.approx), skipped = chosen.length - ok.length;
+                if (!ok.length) { toast(chosen.length ? `Aucune date assez précise : ${A().plural(skipped, 'date n’a', 'dates n’ont')} que l’année ou une date approchée (vers, avant…), qu’un calendrier ne sait pas placer.` : 'Personne ne correspond à ce choix.', 'error'); return false; }
+                const LABEL = {birth: 'Anniversaire de naissance', union: 'Anniversaire de mariage', death: 'Anniversaire du décès'};
+                const entries = ok.map(e => { const names = e.who.map(w => w.name).join(' et '), g = e.who[0]?.gender === 'female';
+                    return {uid: `lcnda-anniv-${e.id}@lcnda.local`, date: {y: e.y, m: e.m, d: e.d}, yearly: true, alarm: form.elements.alarm.checked,
+                        summary: `${LABEL[e.group]} de ${names} (${e.group === 'birth' ? `${g ? 'née' : 'né'} en ${e.y}` : `${e.type.toLowerCase()} en ${e.y}`})`,
+                        description: `${e.type} : ${e.text}${e.place ? ` à ${e.place}` : ''}\nExporté depuis LCNDA (généalogie).`}; });
+                A().ics.download(`anniversaires-${who === 'sosa' ? 'ancetres' : who === 'all' ? 'famille' : 'branche'}.ics`, A().ics.build(entries, {name: 'Anniversaires de la famille'}));
+                toast(`${A().plural(entries.length, 'anniversaire exporté', 'anniversaires exportés')}${skipped ? ` · ${A().plural(skipped, 'date laissée de côté', 'dates laissées de côté')} (année seule ou date approchée : un calendrier a besoin du jour précis)` : ''}.`);
+            }});
+    }
     ext.lists.genea_calendar = calendarScreen({
         key: 'genea', eyebrow: 'LISTES · CALENDRIERS', title: '📜 Calendrier de la famille',
         intro: 'Naissances, mariages, décès et tous les événements des fiches, au jour près quand la date le dit. Sous chaque jour, sa date dans les autres calendriers (julien, républicain…) : à choisir dans ⚙️ Réglages.',
@@ -236,8 +278,9 @@
             return data.events.filter(e => !pk || String(e[pk] || '') === pv).map(e => ({uid: 'g' + e.id, y: e.y, m: e.m, d: e.d, approx: e.approx, group: e.group === 'other' && !p.groupOthers ? 'type:' + e.type : e.group,
             title: `${e.type}${e.who.length ? ' — ' + e.who.map(w => w.name).join(' et ') : ''}`, sub: [e.text && e.text !== String(e.y) ? e.text : '', e.place].filter(Boolean).join(' · '), raw: e}));
         },
-        extraToolbar: (data) => placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : window.LCNDA_PICKER.pickerField({name: 'cal_person', kind: 'person', placeholder: 'Une seule personne…'})}</span>${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
+        extraToolbar: (data) => '<button type="button" class="button small secondary" data-cal-ics title="Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…)">📅 Exporter les anniversaires (.ics)</button>' + placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : window.LCNDA_PICKER.pickerField({name: 'cal_person', kind: 'person', placeholder: 'Une seule personne…'})}</span>${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
         bindExtra: (sec, data, p, c, {reload, draw}) => {
+            sec.querySelector('[data-cal-ics]')?.addEventListener('click', () => icsExportDialog());
             sec.querySelector('[data-cal-place-clear]')?.addEventListener('click', () => { genea().place = ''; draw(); });
             sec.querySelector('[data-cal-place]')?.addEventListener('input', e => { const o = [...sec.querySelectorAll('#h-cal-places option')].find(x => x.value === e.target.value); if (o) { genea().place = o.dataset.key; draw(); } });
             sec.querySelector('[data-cal-person-clear]')?.addEventListener('click', () => { Object.assign(genea(), {person: 0, personName: ''}); reload(); });

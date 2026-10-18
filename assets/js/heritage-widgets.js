@@ -337,11 +337,17 @@
         return j >= 0 ? {people: mine.members[j] || [], truncated: !!rows.truncated} : null;
     }
     const lifeOf = p => { const b = p.birth_year || yearOf(p.birth_date || p.bapt_date || ''), dd = p.death_year || yearOf(p.death_date || p.buri_date || ''); return b && dd ? `${b} – ${dd}` : b ? `° ${b}` : dd ? `† ${dd}` : ''; };
-    function peopleGridHtml(people, sort, q) {
+    // tri (C6) : az / za par nom, old / recent par naissance
+    function peopleGridList(people, sort, q) {
         const qq = String(q || '').toLowerCase().trim();
-        let list = people.filter(p => !qq || pname(p).toLowerCase().includes(qq) || String(p.occupation || '').toLowerCase().includes(qq));
+        const list = people.filter(p => !qq || pname(p).toLowerCase().includes(qq) || String(p.occupation || '').toLowerCase().includes(qq));
         const by = p => Number(p.birth_year || yearOf(p.birth_date || p.bapt_date || '') || 99999);
-        list.sort(sort === 'birth' ? (a, b) => by(a) - by(b) : sort === 'birth_desc' ? (a, b) => (by(b) % 99999) - (by(a) % 99999) : (a, b) => String(a.last_name || '').localeCompare(String(b.last_name || ''), 'fr') || String(a.first_name || '').localeCompare(String(b.first_name || ''), 'fr'));
+        const az = (a, b) => String(a.last_name || '').localeCompare(String(b.last_name || ''), 'fr') || String(a.first_name || '').localeCompare(String(b.first_name || ''), 'fr');
+        list.sort(sort === 'birth' || sort === 'old' ? (a, b) => by(a) - by(b) : sort === 'birth_desc' || sort === 'recent' ? (a, b) => (by(b) % 99999) - (by(a) % 99999) : sort === 'za' ? (a, b) => az(b, a) : az);
+        return list;
+    }
+    function peopleGridHtml(people, sort, q, limit = Infinity) {
+        const list = peopleGridList(people, sort, q).slice(0, limit);
         if (!list.length) return '<p class="muted">Personne ne correspond.</p>';
         return `<ul class="h-cw-who">${list.map(p => { const g = p.gender === 'female' ? 'is-f' : p.gender === 'male' ? 'is-m' : ''; const ini = (String(p.first_name || '').trim()[0] || '') + (String(p.last_name || '').trim()[0] || ''); return `<li><button type="button" class="h-cw-who-card" data-h-person="${Number(p.id)}"><span class="h-cw-who-ini ${g}" aria-hidden="true">${esc(ini.toUpperCase() || '?')}</span><span><strong>${esc(pname(p))}</strong><small>${esc([lifeOf(p), p.occupation].filter(Boolean).join(' · '))}</small></span></button></li>`; }).join('')}</ul>`;
     }
@@ -363,11 +369,25 @@
         const note = !res ? `<p class="muted">${unavailable || 'Le détail de cette valeur n’est pas disponible pour cette statistique : transforme-la en graphique (« ➕ Ajouter d’autres conditions ») pour voir qui est compté.'}</p>`
             : people.length < n ? `<p class="muted">${fmt(people.length)} personne${people.length > 1 ? 's' : ''} différente${people.length > 1 ? 's' : ''} pour ${fmt(n)} compté${n > 1 ? 's' : ''}${res.truncated ? ' (les 3 000 premières lignes seulement)' : ' : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…)'}.</p>` : '';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2><i class="h-cw-dot" style="background:${esc(color || '#0066cc')}"></i>${esc(label)} <small class="muted">${fmt(n)} · ${total ? Math.round(n / total * 100) : 0} %</small></h2></div><button type="button" class="icon-button" data-close aria-label="Fermer">×</button></div>
-            <div class="h-cw-all-body">${sub}${note}${people.length ? `<div class="h-cw-who-tools"><input type="search" placeholder="Chercher un nom, un métier…" data-who-q aria-label="Chercher"><select data-who-sort aria-label="Trier"><option value="name">par nom</option><option value="birth">par naissance (anciens d’abord)</option><option value="birth_desc">par naissance (récents d’abord)</option></select><button type="button" class="button small secondary" data-who-csv>⬇︎ CSV</button></div><div data-who-list>${peopleGridHtml(people, 'name', '')}</div>` : ''}</div>`;
+            <div class="h-cw-all-body">${sub}${note}${people.length ? `<div class="h-cw-who-tools"><input type="search" placeholder="Chercher un nom, un métier…" data-who-q aria-label="Chercher"><button type="button" class="button small secondary" data-who-csv>⬇︎ CSV</button></div><div data-who-sortbar></div><div data-who-list></div><div data-who-more></div>` : ''}</div>`;
         document.body.appendChild(dlg);
-        const redraw = () => { dlg.querySelector('[data-who-list]').innerHTML = peopleGridHtml(people, dlg.querySelector('[data-who-sort]').value, dlg.querySelector('[data-who-q]').value); };
-        dlg.querySelector('[data-who-q]')?.addEventListener('input', redraw);
-        dlg.querySelector('[data-who-sort]')?.addEventListener('change', redraw);
+        // « N personnes · Trier : … » et « Voir les 120 suivantes ↓ » (C6)
+        const UI = window.LCNDA_UI, STEP = 120;
+        let sort = 'az', shown = STEP;
+        const bar = people.length && UI?.sortBar ? UI.sortBar({count: people.length, label: 'personne', feminine: true, value: sort,
+            options: [['az', 'Par nom, A → Z'], ['za', 'Par nom, Z → A'], ['old', 'Par naissance, les plus anciennes'], ['recent', 'Par naissance, les plus récentes']],
+            onChange: v => { sort = v; shown = STEP; redraw(); }}) : null;
+        const more = people.length && UI?.moreButton ? UI.moreButton({remaining: 0, step: STEP, feminine: true, onClick: () => { shown += STEP; redraw(); }}) : null;
+        if (bar) dlg.querySelector('[data-who-sortbar]').appendChild(bar);
+        if (more) dlg.querySelector('[data-who-more]').appendChild(more);
+        const redraw = () => {
+            const box = dlg.querySelector('[data-who-list]'); if (!box) return;
+            const q = dlg.querySelector('[data-who-q]').value, total = peopleGridList(people, sort, q).length;
+            box.innerHTML = peopleGridHtml(people, sort, q, more ? shown : Infinity);
+            bar?.setCount(total); more?.update(total - shown);
+        };
+        redraw();
+        dlg.querySelector('[data-who-q]')?.addEventListener('input', () => { shown = STEP; redraw(); });
         dlg.querySelector('[data-who-csv]')?.addEventListener('click', () => {
             const q = x => `"${String(x ?? '').replace(/"/g, '""')}"`;
             const csv = '\ufeff' + [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'].map(q).join(';'), ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation].map(q).join(';'))].join('\r\n');
@@ -1143,7 +1163,7 @@
         const d = defs().find(x => x.id === id);
         const ws = A().$('#workspace');
         if (!d) { ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', 'Statistique introuvable', 'Elle a peut-être été supprimée.')}</section>`; return; }
-        ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="png" title="Une image à poster sur un forum">🖼️ Image PNG</button><button type="button" class="button small secondary" data-cs-export="jpg" title="Une image plus légère, pour un courriel ou un réseau social">🖼️ Image JPG</button><button type="button" class="button small secondary" data-cs-export="csv" title="Les chiffres, pour un tableur">📄 CSV</button><button type="button" class="button small secondary" data-cs-export="print" title="Imprimer, ou « Enregistrer en PDF »">🖨️ Imprimer / PDF</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
+        ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
         const datas = await loadData(d);
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         // le titre et le texte sont déjà en haut de la page : la carte ne les répète pas
@@ -1184,8 +1204,23 @@
         (d.parts || []).forEach((p, i) => one(p, datas.parts?.[i], p.title || `Partie ${i + 2}`));
         return '\ufeff' + lines.join('\r\n'); // BOM : Excel lit les accents
     }
-    async function exportStat(kind, d, datas, cardEl) {
-        if (kind === 'csv') { if (ext.downloadText) ext.downloadText(statFileName(d) + '.csv', statCsv(d, datas), 'text/csv;charset=utf-8'); return; }
+    // ⤓ Exporter : la fenêtre d'export commune (image, PDF par l'impression, impression, chiffres en CSV)
+    function exportStatDialog(d, datas, cardEl) {
+        const UI = window.LCNDA_UI, name = d.name || 'Ma statistique';
+        if (!UI?.openExportDialog) return exportStat('print', d, datas, cardEl);
+        UI.openExportDialog({title: name, defaultName: statFileName(d), quality: false, saveCopy: !!A().importMediaFile,
+            preview: async () => drawStatImage(d, datas, `${d.icon ? d.icon + ' ' : ''}${name}`).toDataURL('image/png'),
+            formats: [
+                {id: 'png', hint: 'pour un forum', run: o => exportStat('png', d, datas, cardEl, o)},
+                {id: 'jpg', hint: 'léger, pour un courriel', run: o => exportStat('jpg', d, datas, cardEl, o)},
+                {id: 'pdf', hint: 'par l’impression : « Enregistrer en PDF »', ext: '', run: () => exportStat('print', d, datas, cardEl)},
+                {id: 'print', run: () => exportStat('print', d, datas, cardEl)},
+                {id: 'file', label: '📄 CSV', hint: 'les chiffres, pour un tableur', ext: 'csv', run: o => exportStat('csv', d, datas, cardEl, o)},
+            ]});
+    }
+    async function exportStat(kind, d, datas, cardEl, opts = {}) {
+        if (kind === 'dialog') return exportStatDialog(d, datas, cardEl);
+        if (kind === 'csv') { if (ext.downloadText) ext.downloadText(opts.filename || statFileName(d) + '.csv', statCsv(d, datas), 'text/csv;charset=utf-8'); return; }
         if (!cardEl) return;
         const css = A().graphExportCss ? A().graphExportCss() : '';
         const title = `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`;
@@ -1202,8 +1237,12 @@
         try {
             const canvas = drawStatImage(d, datas, title);
             const jpg = kind === 'jpg';
-            const a = document.createElement('a'); a.download = statFileName(d) + (jpg ? '.jpg' : '.png'); a.href = jpg ? canvas.toDataURL('image/jpeg', 0.92) : canvas.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove();
-        } catch (_) { toast('Image impossible à fabriquer : utilise « Imprimer / PDF ».', 'error'); }
+            const a = document.createElement('a'); a.download = opts.filename || statFileName(d) + (jpg ? '.jpg' : '.png'); a.href = jpg ? canvas.toDataURL('image/jpeg', 0.92) : canvas.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove();
+            if (opts.saveCopy && A().importMediaFile) {
+                const blob = await new Promise(res => canvas.toBlob(res, jpg ? 'image/jpeg' : 'image/png', 0.92));
+                try { await A().importMediaFile(new File([blob], a.download, {type: blob.type}), ['image']); toast('Une copie est rangée dans les médias.'); } catch (error) { toast('Copie dans les médias impossible : ' + error.message, 'error'); }
+            }
+        } catch (_) { if (opts.filename) throw new Error('image impossible à fabriquer, utilise « Imprimer »'); toast('Image impossible à fabriquer : utilise « Imprimer / PDF ».', 'error'); }
     }
     /** Le graphique (barres, colonnes, camembert, anneau ; les autres dessins en barres), des chiffres ou les premières lignes d'une liste */
     function drawStatImage(d, datas, title) {

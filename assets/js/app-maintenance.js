@@ -363,9 +363,17 @@
                 }
             }));
         };
+        // C6 : « N modifications · Trier : [menu] » et « Voir les 50 suivantes ↓ »
+        let changeSort='recent',changeShown=50,changeBar=null,changeMore=null;
         const renderList=()=>{
-            const filtered=activeFilter==='all'?data.changes:data.changes.filter(row=>row.action===activeFilter);
-            $('#change-list').innerHTML=filtered.map(row=>{
+            let filtered=activeFilter==='all'?data.changes:data.changes.filter(row=>row.action===activeFilter);
+            if(changeSort==='old')filtered=[...filtered].reverse();
+            const UI=window.LCNDA_UI,list=$('#change-list');
+            if(UI?.sortBar&&!changeBar){changeBar=UI.sortBar({count:filtered.length,label:'modification',feminine:true,value:changeSort,options:[['recent','Les plus récentes'],['old','Les plus anciennes']],onChange:v=>{changeSort=v;changeShown=50;renderList();}});list.before(changeBar);}
+            if(UI?.moreButton&&!changeMore){changeMore=UI.moreButton({remaining:0,step:50,feminine:true,onClick:()=>{changeShown+=50;renderList();}});list.after(changeMore);}
+            changeBar?.setCount(filtered.length);changeMore?.update(filtered.length-changeShown);
+            if(changeMore)filtered=filtered.slice(0,changeShown);
+            list.innerHTML=filtered.map(row=>{
                 const label=row.entity_label||`${row.entity_type} #${row.entity_id||'—'}`;
                 const technical=`${row.entity_type} #${row.entity_id||'—'} · ${row.action}`;
                 const restoreButton=row.restore_available
@@ -381,7 +389,7 @@
         renderList();
         bindTableLinks();
         $$('[data-change-filter]').forEach(btn=>btn.addEventListener('click',()=>{
-            activeFilter=btn.dataset.changeFilter;
+            activeFilter=btn.dataset.changeFilter;changeShown=50;
             state.changesFilter=activeFilter;
             $$('[data-change-filter]').forEach(b=>b.classList.toggle('is-active',b===btn));
             renderList();
@@ -595,7 +603,7 @@
     async function renderImportTools(token=++state.workspaceToken){const [data,dbProfiles]=await Promise.all([api('deed_preview'),api('database_profiles')]);if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='import')return;$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">IMPORT</span><h2>Importer des données</h2><p>Analyse et import depuis GEDCOM, JSON, CSV, SQLite. Chaque format est analysé avant toute modification de la base.</p></div></header>
 
 <section class="maintenance-panel">
-  <h3>Changer de base SQLite</h3>
+  <h3 data-help="Une « base » est un fichier qui contient toute une généalogie. Tu peux en avoir plusieurs (la tienne, celle d’un ami) et passer de l’une à l’autre ; rien n’est mélangé." data-help-faq="base">Changer de base SQLite</h3>
   <p>Permet d’ouvrir une autre généalogie locale sans réinstaller. Place les bases dans <code>data/</code> ou <code>data/bases/</code>, puis recharge après sélection.</p>
   <p class="muted">Sécurité : les imports sont analysés avant toute modification. Ajouter un GEDCOM ou un autre fichier ne doit pas remplacer la base ouverte sans confirmation explicite.</p>
   <form id="database-profile-form" class="import-form"><label>Base active<select name="key" id="database-profile-select">${(dbProfiles.databases||[]).map(db=>`<option value="${escapeHtml(db.key)}" data-active="${db.active?'1':'0'}" ${db.active?'selected':''}>${escapeHtml(db.name)}${db.active?' — active':''}</option>`).join('')}</select></label><button class="button secondary" type="submit" ${(dbProfiles.databases||[]).length?'':'disabled'}>Utiliser cette base</button><button class="button danger" type="button" id="delete-database-profile" ${(dbProfiles.databases||[]).length?'':'disabled'}>Supprimer cette base</button></form>
@@ -603,14 +611,14 @@
 </section>
 
 <section class="maintenance-panel">
-  <h3>🔍 Vérificateur GEDCOM</h3>
+  <h3 data-help="Lit le fichier sans rien importer et liste ce qui cloche (liens cassés, encodage, version) : utile quand un import échoue ou paraît incomplet." data-help-faq="GEDCOM">🔍 Vérificateur GEDCOM</h3>
   <p>Analyse un fichier .ged sans l'importer : détecte les erreurs de format, les références cassées, l'encodage et la version.</p>
   <form id="verify-gedcom-form" class="import-form"><label>Fichier GEDCOM<input type="file" name="file" accept=".ged,.gedcom"></label><button class="button" type="submit">Vérifier le GEDCOM</button></form>
   <div id="verify-gedcom-result"></div>
 </section>
 
 <section class="maintenance-panel">
-  <h3>GEDCOM (.ged) — Import</h3>
+  <h3 data-help="Le fichier est d’abord analysé : tu vois combien de personnes, familles et sources il contient avant de confirmer. Pour ajouter l’arbre d’un cousin à ta base sans doublons, utilise plutôt « Fusionner un arbre »." data-help-faq="importer un GEDCOM">GEDCOM (.ged) — Import</h3>
   <p>Compatible GEDCOM 5.5.1 et 7.0. Version et encodage détectés automatiquement.</p>
   <form id="import-gedcom-form" class="import-form"><label>Fichier GEDCOM<input type="file" name="file" accept=".ged,.gedcom"></label><button class="button" type="submit">Analyser le GEDCOM</button></form>
   <div id="import-result"></div>

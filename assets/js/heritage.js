@@ -110,6 +110,17 @@
         const box = root.querySelector('.h-media-editor');
         if (!box) return;
         const type = box.dataset.hMediaType, id = Number(box.dataset.hMediaId);
+        // E4 : chaque zone de fichiers accepte aussi qu'on y glisse (ou colle) des fichiers ; ils partent à l'enregistrement
+        box.querySelectorAll('[data-h-upload-role]').forEach(input => {
+            const zone = input.closest('.h-media-role'); if (!zone || !window.LCNDA_UI?.bindFileDrop) return;
+            if (!zone.querySelector('.h-media-drophint')) zone.insertAdjacentHTML('beforeend', '<small class="muted h-media-drophint">📁 ou glisse les fichiers ici, ou colle-les (⌘V) : ils entrent dans les médias à l’enregistrement.</small>');
+            window.LCNDA_UI.bindFileDrop(zone, files => {
+                const dt = new DataTransfer(), seen = new Set();
+                [...(input.files || []), ...files].forEach(f => { const k = f.name + '|' + f.size; if (!seen.has(k)) { seen.add(k); dt.items.add(f); } });
+                input.files = dt.files; input.dispatchEvent(new Event('change', {bubbles: true}));
+                toast(`${A().plural(files.length, 'fichier ajouté', 'fichiers ajoutés')} : ${A().plural(dt.files.length, 'fichier partira', 'fichiers partiront')} à l’enregistrement.`);
+            }, {accept: input.getAttribute('accept') || ''});
+        });
         box.addEventListener('click', async event => {
             const rm = event.target.closest('[data-h-media-remove]');
             if (rm && await A().confirmBox('Il reste dans les médias de l’application.', {title: 'Retirer ce fichier de la fiche ?', okLabel: 'Retirer'})) {
@@ -420,7 +431,7 @@
     // Champs préfixés « c_ » : ne pas se mélanger avec la naturalisation de la personne principale
     function companionRow(c = {}) {
         return `<div class="transfer-row h-companion-row">${personPick('c_person_id', c.person)}<input name="c_relation" value="${esc(c.relation || '')}" placeholder="Lien (épouse, fils…)">
-            <input name="c_naturalization_date" value="${esc(c.naturalization_date || '')}" placeholder="Naturalisé·e le…"><input name="c_naturalization_place" value="${esc(c.naturalization_place || '')}" placeholder="Lieu / tribunal"><input name="c_naturalization_text" value="${esc(c.naturalization_text || '')}" placeholder="Détails"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
+            <input name="c_naturalization_date" data-ui-date value="${esc(c.naturalization_date || '')}" placeholder="Naturalisé·e le…"><input name="c_naturalization_place" value="${esc(c.naturalization_place || '')}" placeholder="Lieu / tribunal"><input name="c_naturalization_text" value="${esc(c.naturalization_text || '')}" placeholder="Détails"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
     }
     async function openVoyageDialog(id, personId) {
         let v = {person_id: personId, media: []};
@@ -429,13 +440,13 @@
         openDialog({
             eyebrow: 'DÉPART', title: id ? 'Modifier le voyage' : 'Nouveau voyage', wide: true, labels: ['voyage', v.labels],
             body: `<div class="form-grid">
-                <label>Date de départ<input name="departure_date" value="${f('departure_date')}" placeholder="12 mai 1885"></label>
+                <label>Date de départ<input name="departure_date" data-ui-date value="${f('departure_date')}" placeholder="12 mai 1885"></label>
                 <label>Port de départ${placeField('departure_port', v.departure_port, v.dep_lat, v.dep_lon, 'Le Havre, Bordeaux, Marseille…')}</label>
                 <label>Nom du navire<input name="ship_name" value="${f('ship_name')}" placeholder="La Bretagne"></label>
                 <label>Motif<input name="reason" value="${f('reason')}" placeholder="Travail, famille, service militaire…"></label>
                 <label>Escales <small>(une par ligne)</small><textarea name="stopovers" rows="2" placeholder="Liverpool">${f('stopovers')}</textarea></label>
                 <label>Partis avec (texte libre, si pas de fiche)<textarea name="companions" rows="2" placeholder="Deux cousins du village">${f('companions')}</textarea></label>
-                <label>Date d’arrivée<input name="arrival_date" value="${f('arrival_date')}" placeholder="24 mai 1885"></label>
+                <label>Date d’arrivée<input name="arrival_date" data-ui-date value="${f('arrival_date')}" placeholder="24 mai 1885"></label>
                 <label>Port d’arrivée${placeField('arrival_port', v.arrival_port, v.dest_lat, v.dest_lon, 'New York, Québec, Buenos Aires, Alger…')}</label>
                 <label class="span-2">Destination finale <small>(si elle est ailleurs que le port)</small><input name="destination" value="${f('destination')}" placeholder="Montréal, Pampa, Oran…"></label>
             </div>
@@ -446,7 +457,7 @@
             <h4>Partis ensemble (fiches)</h4><p class="muted">Le voyage s’affichera aussi sur leur fiche. Chacun a sa propre naturalisation à l’arrivée.</p>
             <div class="h-rows" data-h-rows="companions">${(v.companion_people || []).map(companionRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="companions">+ Personne partie avec</button><template data-h-template="companions">${companionRow()}</template>
             <h4>Naturalisation à l’arrivée${(v.companion_people || []).length ? ' de ' + esc(v.person_name || 'la personne') : ''}</h4><div class="form-grid">
-                <label>Date<input name="naturalization_date" value="${f('naturalization_date')}" placeholder="1892"></label>
+                <label>Date<input name="naturalization_date" data-ui-date value="${f('naturalization_date')}" placeholder="1892"></label>
                 <label>Lieu / tribunal<input name="naturalization_place" value="${f('naturalization_place')}" placeholder="Cour de district de Chicago"></label>
                 <label class="span-2">Détails<textarea name="naturalization_text" rows="2">${f('naturalization_text')}</textarea></label></div>
             <h4>Papiers d’émigration</h4>
@@ -539,8 +550,8 @@
                 <label>N° matricule / registre<input name="matricule" value="${f('matricule')}" placeholder="n° 12345"></label>
                 <label>Parti de${placeField('origin_text', r.origin_text, r.origin_lat, r.origin_lon, 'Paris')}</label>
                 <label>Placé à${placeField('place_text', r.place_text, r.lat, r.lon, 'Château-Chinon (Morvan)')}</label>
-                <label>Du<input name="start_date" value="${f('start_date')}" placeholder="1878-03-12 ou mars 1878"></label>
-                <label>Au<input name="end_date" value="${f('end_date')}" placeholder="1881-06-02"></label>
+                <label>Du<input name="start_date" data-ui-date value="${f('start_date')}" placeholder="1878-03-12 ou mars 1878"></label>
+                <label>Au<input name="end_date" data-ui-date value="${f('end_date')}" placeholder="1881-06-02"></label>
                 <label>Durée <small>(sinon calculée)</small><input name="duration_text" value="${f('duration_text')}" placeholder="3 ans"></label>
                 <div><span class="pk-lab">Nourrice (fiche)</span>${personPick('nurse_person_id', r.nurse_person_id)}</div>
                 <label>ou nom de la nourrice / famille<input name="nurse_name" value="${f('nurse_name')}" placeholder="Femme Lazare, cultivateurs"></label>
@@ -700,8 +711,8 @@
     async function openPoiluDialog(personId) {
         const detail = await api('person', {id: personId});
         const data = detail.heritage?.poilu || {units: [], events: []};
-        const unitRow = (u = {}) => `<div class="transfer-row h-unit-row"><input name="unit_name" value="${esc(u.unit_name || '')}" placeholder="152e régiment d’infanterie" list="h-units"><input type="date" name="date_from" value="${esc(u.date_from || '')}" title="Du"><input type="date" name="date_to" value="${esc(u.date_to || '')}" title="Au"><input name="jmo_cote" value="${esc(u.jmo_cote || '')}" placeholder="Cote JMO (26 N 698/1)"><input name="jmo_url" value="${esc(u.jmo_url || '')}" placeholder="Adresse du journal (https://…)"><input name="note" value="${esc(u.note || '')}" placeholder="Compagnie, bataillon…"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
-        const eventRow = (e = {}) => `<div class="transfer-row h-event-row"><input type="date" name="event_date" value="${esc(e.event_date || '')}"><select name="kind">${Object.entries(poiluKinds).map(([k, l]) => `<option value="${k}" ${e.kind === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select><input name="place_text" value="${esc(e.place_text || '')}" placeholder="Lieu (Verdun, bois des Caures…)"><input name="note" value="${esc(e.note || '')}" placeholder="Détail (éclat d’obus à la jambe…)"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
+        const unitRow = (u = {}) => `<div class="transfer-row h-unit-row"><input name="unit_name" value="${esc(u.unit_name || '')}" placeholder="152e régiment d’infanterie" list="h-units"><input type="date" data-iso-date="nocal" name="date_from" value="${esc(u.date_from || '')}" title="Du"><input type="date" data-iso-date="nocal" name="date_to" value="${esc(u.date_to || '')}" title="Au"><input name="jmo_cote" value="${esc(u.jmo_cote || '')}" placeholder="Cote JMO (26 N 698/1)"><input name="jmo_url" value="${esc(u.jmo_url || '')}" placeholder="Adresse du journal (https://…)"><input name="note" value="${esc(u.note || '')}" placeholder="Compagnie, bataillon…"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
+        const eventRow = (e = {}) => `<div class="transfer-row h-event-row"><input type="date" data-iso-date="nocal" name="event_date" value="${esc(e.event_date || '')}"><select name="kind">${Object.entries(poiluKinds).map(([k, l]) => `<option value="${k}" ${e.kind === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select><input name="place_text" value="${esc(e.place_text || '')}" placeholder="Lieu (Verdun, bois des Caures…)"><input name="note" value="${esc(e.note || '')}" placeholder="Détail (éclat d’obus à la jambe…)"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
         openDialog({
             eyebrow: 'POILU 14-18', title: 'Parcours de ' + A().personName(detail.person), wide: true, labels: ['poilu', data.labels],
             body: `<p class="muted">Le registre matricule (bloc Militaire) donne les unités successives et leurs dates, les blessures, les citations.</p>
@@ -855,7 +866,7 @@
     function probateFormHtml(inv) {
         const f = k => esc(inv[k] || '');
         return `<form class="maintenance-panel collection-form" id="h-probate-form"><h3>${inv.id ? 'Modifier l’inventaire' : 'Nouvel inventaire après décès'}</h3>
-            <div class="form-grid"><div><span class="pk-lab">Défunt(e)</span>${personPick('person_id', inv.person)}</div><label>Date<input name="date_text" value="${f('date_text')}" placeholder="12 mars 1782"></label>
+            <div class="form-grid"><div><span class="pk-lab">Défunt(e)</span>${personPick('person_id', inv.person)}</div><label>Date<input name="date_text" data-ui-date value="${f('date_text')}" placeholder="12 mars 1782"></label>
             <label>Notaire<input name="notary" value="${f('notary')}" placeholder="Me Dubois, notaire à Tulle"></label><label>Lieu<input name="place_text" value="${f('place_text')}"></label>
             <label>Monnaie<select name="currency"><option value="livre" ${inv.currency === 'livre' ? 'selected' : ''}>Livres tournois (l, s, d)</option><option value="franc" ${inv.currency === 'franc' ? 'selected' : ''}>Francs</option><option value="nf" ${inv.currency === 'nf' ? 'selected' : ''}>Nouveaux francs (1960-2001)</option></select></label><label>Cote<input name="reference" value="${f('reference')}" placeholder="AD19, 3 E 1234"></label></div>
             <h4>Objets, pièce par pièce</h4><p class="muted">Valeur : « 12 l 5 s 3 d » (livres, sols, deniers), « 12 livres 5 sols », ou un nombre (« 152,50 »). La catégorie « Dettes » est déduite du total.</p>
@@ -925,7 +936,7 @@
         const f = k => esc(p[k] || '');
         return `<form class="maintenance-panel collection-form" id="h-paper-form"><h3>${p.id ? 'Modifier le document' : 'Nouveau document'}</h3>
             <div class="form-grid"><label>N° de classement<input name="class_number" value="${f('class_number')}" placeholder="P-0001"></label><label>Titre<input name="title" required value="${f('title')}" placeholder="Livret de famille Dupont-Martin"></label>
-            <label>Type<input name="kind" value="${f('kind')}" list="h-paper-kinds"><datalist id="h-paper-kinds">${paperKinds.map(k => `<option>${esc(k)}</option>`).join('')}</datalist></label><label>Date<input name="date_text" value="${f('date_text')}" placeholder="1923"></label>
+            <label>Type<input name="kind" value="${f('kind')}" list="h-paper-kinds"><datalist id="h-paper-kinds">${paperKinds.map(k => `<option>${esc(k)}</option>`).join('')}</datalist></label><label>Date<input name="date_text" data-ui-date value="${f('date_text')}" placeholder="1923"></label>
             <label>Où il est rangé<input name="storage_location" value="${f('storage_location')}" list="h-paper-locations" placeholder="Boîte 3, classeur bleu"><datalist id="h-paper-locations">${locations.map(l => `<option>${esc(l)}</option>`).join('')}</datalist></label>
             <label>Chez qui<input name="holder_text" value="${f('holder_text')}" placeholder="Chez moi, chez tante Monique…"></label><label>État<input name="condition_text" value="${f('condition_text')}" placeholder="Bon, déchiré, taché…"></label>
             <label class="span-2">Description<textarea name="description" rows="2">${f('description')}</textarea></label></div>

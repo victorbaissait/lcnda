@@ -158,32 +158,47 @@
         const hmax = Math.max(...hist.slice(2, 254), 1);
         const histPath = 'M0,256 ' + hist.map((h, x) => `L${x},${256 - Math.min(256, h / hmax * 230)}`).join(' ') + ' L255,256 Z';
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch-simple';
-        dlg.innerHTML = `<div class="h-rs-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><span class="h-rs-headbtns"><button type="button" class="button small secondary" data-rs-advanced title="La retouche complète : calques, sélections, masques, texte, formes, filtres, projets">🎛️ Retouche complète</button><button type="button" class="icon-button" data-rs-close aria-label="Fermer">×</button></span></div>
-            <div class="h-rs-paint"><span class="h-rs-modes">${[['adjust', '🎚 Réglages'], ['heal', '🩹 Correcteur de taches'], ['clone', '🧬 Tampon de duplication']].map(([k, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rs-mode="${k}">${l}</button>`).join('')}</span>
+        const UI = window.LCNDA_UI, sec = (title, key, body, open = true) => UI?.panelSection ? UI.panelSection({title, key, open, body}) : `<details ${open ? 'open' : ''}><summary>${esc(title)}</summary>${body}</details>`;
+        // E1 : icône · nom · ↶ ↷ · … · ✓ Enregistré · ⚙️ Personnaliser · ⤓ Exporter ▾ · 💾 Enregistrer · ⛶ · ×
+        dlg.innerHTML = `<div class="h-rs-head h-rt-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name" data-rs-name value="${esc(item.title || item.filename || 'Photo')}" maxlength="200" aria-label="Nom de la photo retouchée" title="Le nom de la copie et des fichiers exportés">
+                <span class="ui-topbar-hist"><button type="button" class="icon-button small" data-rs-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rs-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span>
+                <button type="button" class="button small secondary" data-rs-advanced title="La retouche complète : calques, sélections, masques, texte, formes, filtres, projets">🎛️ Retouche complète</button><button type="button" class="button small secondary" data-rs-restoreall title="Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète)">✨ Restaurer en une fois</button>
+                <span class="spacer"></span><span class="ui-status" data-ui-status data-rs-status></span>${ext.tbButton ? ext.tbButton('retouch-simple') : ''}
+                <details class="h-rt-menu h-rt-exportmenu"><summary title="Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rs-export="image"><span>🖼 La photo retouchée (PNG, JPG, imprimer)…</span></button><button type="button" data-rs-export="ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details>
+                <button type="button" class="button small" data-rs-topsave data-ui-cmd="save" data-shortcut="⌘S" title="Enregistrer et afficher cette version de la photo (l’original est gardé)">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('retouch-simple') : ''}<button type="button" class="icon-button" data-rs-close aria-label="Fermer" title="Fermer">×</button></div>
+            <div class="h-rs-paint" data-tbg="rs-paint" data-tbg-label="Barre des outils"><span class="h-rs-modes">${[['adjust', '🎚 Réglages'], ['heal', '🩹 Correcteur de taches'], ['clone', '🧬 Tampon de duplication']].map(([k, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rs-mode="${k}"${k === 'clone' ? ' title="Alt + clic (⌥ + clic sur Mac) : l’endroit à recopier, puis peins sur la zone à couvrir"' : ''}>${l}</button>`).join('')}</span>
                 <label class="h-rs-size" hidden>Taille <input type="range" min="3" max="120" value="18" data-rs-size> <output data-rs-size-out>18</output></label>
-                <button type="button" class="button small secondary" data-rs-undo disabled>↶ Annuler la dernière correction</button>
                 <span class="h-rs-zoom" title="Zoom"><span class="muted">🔍</span><button type="button" class="button small secondary" data-rs-zoom="out" title="Dézoomer (⌘/Ctrl + molette)">−</button><button type="button" class="button small secondary" data-rs-zoom="fit" title="Toute l’image (clic : 100 %)" data-rs-zoom-label>Ajusté</button><button type="button" class="button small secondary" data-rs-zoom="in" title="Zoomer (⌘/Ctrl + molette)">+</button></span>
                 <small class="muted" data-rs-paint-help></small></div>
-            <div class="h-rs-body"><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span><button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button></div>
-            <div class="h-rs-tools"><div class="h-rs-presets">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rs-preset="${i}">${esc(l)}</button>`).join('')}</div>
-                ${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rs-slider"><span>${esc(l)} <output data-rs-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rs="${k}"></label>`).join('')}
-                <div class="h-rs-toggles"><label class="checkbox-line"><input type="checkbox" data-rs-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rs-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rs-t="invert"> Négatif</label></div>
-                <div class="h-rs-curve-head"><strong>Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rs-ch ${k === 'rgb' ? 'is-active' : ''}" data-rs-ch="${k}">${l}</button>`).join('')}</span></div>
+            <div class="h-rs-body"><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span>${ext.rtBaButtons ? ext.rtBaButtons('rs') : '<button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button>'}</div>
+            <div class="h-rs-tools" data-tbg="rs-tools" data-tbg-label="Panneau de droite"><div class="h-rs-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rs-preset="${i}"${i === 0 ? ' data-help="Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant."' : ''}>${esc(l)}</button>`).join('')}</div>
+                ${sec('Couleur', 'rs-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rs-slider"><span${k === 'shadows' ? ' data-help="Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires."' : ''}>${esc(l)} <output data-rs-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rs="${k}"></label>`).join('')}
+                <div class="h-rs-toggles"><label class="checkbox-line"><input type="checkbox" data-rs-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rs-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rs-t="invert" data-help="Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent."> Négatif</label></div>`)}
+                ${sec('Courbe', 'rs-curve', `<div class="h-rs-curve-head"><strong data-help="Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur.">Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rs-ch ${k === 'rgb' ? 'is-active' : ''}" data-rs-ch="${k}">${l}</button>`).join('')}</span></div>
                 <svg class="h-rs-curve" viewBox="-6 -6 268 268" data-rs-curve><path class="h-rs-hist" d="${histPath}"/><g class="h-rs-grid">${[64, 128, 192].map(v => `<line x1="${v}" y1="0" x2="${v}" y2="256"/><line x1="0" y1="${v}" x2="256" y2="${v}"/>`).join('')}<line x1="0" y1="256" x2="256" y2="0" class="h-rs-diag"/></g><path class="h-rs-line" data-rs-line/><g data-rs-points></g></svg>
                 <div class="h-rs-curve-tools"><button type="button" class="button small secondary" data-rs-ptdel disabled>Enlever le point</button></div>
-                <p class="muted h-rs-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste.</p>
+                <p class="muted h-rs-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre.</p>`)}
                 <button type="button" class="link-button" data-rs-reset>Tout remettre à zéro</button></div></div>
             <section class="h-rs-versions" data-rs-versions></section>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-rs-close>Annuler</button><button type="button" class="button secondary" data-rs-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rs-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rs-save="show">Enregistrer et afficher cette version</button></div>
             <p class="muted h-rs-note">L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout.</p>`;
         document.body.appendChild(dlg);
+        ext.rtEnsureCss?.();
+        ext.tbApply?.(dlg, 'retouch-simple'); // ⚙️ Personnaliser : boutons rangés, montrés ou cachés
+        UI?.harmonizeTopbar?.(dlg.querySelector('.h-rs-head'));
+        ext.fullInit?.(dlg, 'retouch-simple');
         dlg.addEventListener('close', () => dlg.remove());
-        dlg.querySelectorAll('[data-rs-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
-        dlg.querySelector('[data-rs-advanced]').addEventListener('click', async () => {
-            if (st.strokes.length && !await A().confirmBox('Les corrections en cours seront perdues.', {title: 'Passer à la retouche avancée ?', okLabel: 'Passer sans enregistrer', danger: true})) return;
+        let saved = false;
+        const askClose = async () => { if (!saved && hpos > 0 && !await A().confirmBox('Les retouches en cours seront perdues.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; saved = true; dlg.close(); };
+        dlg.querySelectorAll('[data-rs-close]').forEach(b => b.addEventListener('click', askClose));
+        dlg.addEventListener('cancel', e => { if (e.target !== dlg) return; if (!saved && hpos > 0) { e.preventDefault(); askClose(); } });
+        const toAdvanced = async (opts = {}) => {
+            if (!saved && hpos > 0 && !await A().confirmBox('Les corrections en cours seront perdues.', {title: 'Passer à la retouche complète ?', okLabel: 'Passer sans enregistrer', danger: true})) return;
             try { localStorage.setItem('genealogie-retouch-mode', 'advanced'); } catch (_) {}
-            dlg.close(); ext.openRetouch?.(source, null, {advanced: true});
-        });
+            saved = true; dlg.close(); ext.openRetouch?.(source, null, {advanced: true, ...opts});
+        };
+        dlg.querySelector('[data-rs-advanced]').addEventListener('click', () => toAdvanced());
+        dlg.querySelector('[data-rs-restoreall]').addEventListener('click', () => toAdvanced({restoreAll: true}));
         const canvas = dlg.querySelector('[data-rs-canvas]'), ctx = canvas.getContext('2d'), out = ctx.createImageData(pw, ph);
         let raf = 0, showBefore = false, selPt = -1, outside = -1;
         const baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); // l'image d'origine (avant / après, annuler)
@@ -191,7 +206,16 @@
         // ── Correcteur de taches et tampon ──
         st.strokes = [];
         let mode = 'adjust', brush = 18, cloneOff = null, painting = null;
-        const brushEl = dlg.querySelector('[data-rs-brush]'), srcEl = dlg.querySelector('[data-rs-src]'), help = dlg.querySelector('[data-rs-paint-help]'), undoBtn = dlg.querySelector('[data-rs-undo]');
+        const brushEl = dlg.querySelector('[data-rs-brush]'), srcEl = dlg.querySelector('[data-rs-src]'), help = dlg.querySelector('[data-rs-paint-help]'), undoBtn = dlg.querySelector('[data-rs-undo]'), redoBtn = dlg.querySelector('[data-rs-redo]'), statusEl = dlg.querySelector('[data-rs-status]');
+        let steps = [], hpos = -1;
+        const snap = () => JSON.stringify({st: {...st, strokes: undefined}, strokes: st.strokes});
+        const syncHist = () => { undoBtn.disabled = hpos <= 0; redoBtn.disabled = hpos >= steps.length - 1; if (hpos > 0) UI?.savedStatus?.(statusEl, 'dirty'); else statusEl.textContent = ''; };
+        const commit = () => { const s0 = snap(); if (hpos >= 0 && steps[hpos] === s0) return; steps = steps.slice(0, hpos + 1); steps.push(s0); if (steps.length > 150) steps.shift(); hpos = steps.length - 1; syncHist(); };
+        const goHist = i => {
+            if (i < 0 || i >= steps.length) return; hpos = i; const o = JSON.parse(steps[i]), strokes = o.strokes || [];
+            Object.keys(st).forEach(k => delete st[k]); Object.assign(st, rtDefault(), o.st, {strokes});
+            srcData.data.set(baseData.data); if (strokes.length) rtReplayStrokes(srcData, strokes); activePreset = -1; markPreset(); syncControls(); syncHist();
+        };
         const HELP = {adjust: '', heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long.', clone: 'Alt + clic (⌥ + clic sur Mac) pour choisir l’endroit à recopier, puis peins sur la zone à couvrir.'};
         // l'image est centrée dans le cadre (marges sur les côtés ou en haut et en bas) : on en tient compte
         const fit = () => { const r = canvas.getBoundingClientRect(), k = Math.min(r.width / pw, r.height / ph); return {r, k, ox: r.left + (r.width - pw * k) / 2, oy: r.top + (r.height - ph * k) / 2}; };
@@ -233,11 +257,10 @@
         });
         canvas.addEventListener('pointermove', e => { showBrush(e); if (painting) { const [x, y] = toCanvas(e); dabAt(x, y); } });
         canvas.addEventListener('pointerleave', () => { brushEl.hidden = true; srcEl.hidden = true; });
-        const endPaint = () => { if (!painting) return; if (painting.dabs.length) { st.strokes.push({tool: painting.tool, dabs: painting.dabs}); undoBtn.disabled = false; } painting = null; };
+        const endPaint = () => { if (!painting) return; if (painting.dabs.length) { st.strokes.push({tool: painting.tool, dabs: painting.dabs}); commit(); } painting = null; };
         canvas.addEventListener('pointerup', endPaint); canvas.addEventListener('pointercancel', endPaint);
-        undoBtn.addEventListener('click', () => {
-            st.strokes.pop(); srcData.data.set(baseData.data); rtReplayStrokes(srcData, st.strokes); undoBtn.disabled = !st.strokes.length; draw();
-        });
+        undoBtn.addEventListener('click', () => goHist(hpos - 1));
+        redoBtn.addEventListener('click', () => goHist(hpos + 1));
         const svg = dlg.querySelector('[data-rs-curve]');
         const drawCurve = () => {
             const lut = curveLut(st.curves[channel]);
@@ -254,7 +277,7 @@
             drawCurve(); draw();
         };
         dlg.addEventListener('input', e => { const k = e.target.dataset.rs; if (k) { st[k] = Number(e.target.value); manualEdit(); dlg.querySelector(`[data-rs-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; draw(); } });
-        dlg.addEventListener('change', e => { const k = e.target.dataset.rsT; if (k) { st[k] = e.target.checked; manualEdit(); if (k === 'bw' && st.bw) st.sepia = false; if (k === 'sepia' && st.sepia) st.bw = false; syncControls(); } });
+        dlg.addEventListener('change', e => { if (e.target.dataset.rs) commit(); const k = e.target.dataset.rsT; if (k) { st[k] = e.target.checked; manualEdit(); if (k === 'bw' && st.bw) st.sepia = false; if (k === 'sepia' && st.sepia) st.bw = false; syncControls(); commit(); } });
         dlg.querySelectorAll('[data-rs-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rsCh; selPt = -1; dlg.querySelectorAll('[data-rs-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
         // un préréglage cliqué une 2e fois : retour à l'état d'avant (ex. « Négatif → positif » puis à nouveau → le négatif d'origine)
         let activePreset = -1, beforePreset = null;
@@ -262,17 +285,17 @@
         const manualEdit = () => { if (activePreset >= 0) { activePreset = -1; markPreset(); } }; // un curseur touché à la main : le préréglage n'est plus « actif » (un 2e clic le réappliquera)
         dlg.querySelectorAll('[data-rs-preset]').forEach(b => b.addEventListener('click', () => {
             const i = Number(b.dataset.rsPreset);
-            if (activePreset === i && beforePreset) { Object.assign(st, JSON.parse(beforePreset), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); return; }
+            if (activePreset === i && beforePreset) { Object.assign(st, JSON.parse(beforePreset), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); commit(); return; }
             if (activePreset < 0) beforePreset = JSON.stringify({...st, strokes: undefined});
             const keep = {bw: false, sepia: false, invert: false, strokes: st.strokes}; Object.assign(st, rtDefault(), keep); RT_PRESETS[i][1](st); if (st._auto) { delete st._auto; rtAuto(srcData, st); }
-            activePreset = i; markPreset(); syncControls(); }));
+            activePreset = i; markPreset(); syncControls(); commit(); }));
         // zoom : « Ajusté » (toute l'image) ou un facteur ; ⌘/Ctrl + molette ; l'aperçu défile quand il dépasse
         let zoom = 0; const stage = canvas.parentElement, zLabel = dlg.querySelector('[data-rs-zoom-label]');
         const fitK = () => { const r = stage.getBoundingClientRect(); return Math.min(1, (r.width - 4) / pw, (r.height - 4) / ph) || 1; };
-        const setZoom = z => { zoom = z ? Math.max(.1, Math.min(8, z)) : 0; stage.classList.toggle('is-zoomed', !!zoom); canvas.style.width = zoom ? `${Math.round(pw * zoom)}px` : ''; canvas.style.height = zoom ? `${Math.round(ph * zoom)}px` : ''; zLabel.textContent = zoom ? `${Math.round(zoom * 100 / scale)} %` : 'Ajusté'; };
+        const setZoom = z => { zoom = z ? Math.max(.1, Math.min(8, z)) : 0; stage.classList.toggle('is-zoomed', !!zoom); canvas.style.width = zoom ? `${Math.round(pw * zoom)}px` : ''; canvas.style.height = zoom ? `${Math.round(ph * zoom)}px` : ''; zLabel.textContent = zoom ? `${Math.round(zoom * 100 / scale)} %` : 'Ajusté'; requestAnimationFrame(() => curtain?.place()); };
         dlg.querySelectorAll('[data-rs-zoom]').forEach(b => b.addEventListener('click', () => { const z = zoom || fitK(), k = b.dataset.rsZoom; setZoom(k === 'in' ? z * 1.25 : k === 'out' ? (z / 1.25 <= fitK() ? 0 : z / 1.25) : (zoom ? 0 : scale)); }));
         stage.addEventListener('wheel', e => { if (!e.ctrlKey && !e.metaKey) return; e.preventDefault(); const z = zoom || fitK(); setZoom(e.deltaY < 0 ? z * 1.12 : (z / 1.12 <= fitK() ? 0 : z / 1.12)); }, {passive: false});
-        dlg.querySelector('[data-rs-reset]').addEventListener('click', () => { Object.assign(st, rtDefault(), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); }); // les corrections de taches ont leur propre « Annuler »
+        dlg.querySelector('[data-rs-reset]').addEventListener('click', () => { Object.assign(st, rtDefault(), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); commit(); }); // les corrections de taches restent (↶ pour les défaire)
         const before = dlg.querySelector('[data-rs-before]');
         const setBefore = v => { showBefore = v; before.classList.toggle('is-active', v); draw(); };
         before.addEventListener('pointerdown', () => setBefore(true));
@@ -280,7 +303,7 @@
         // Courbe : ajouter, déplacer, enlever des points
         const rawPoint = e => { const r = svg.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * 268 - 6, 256 - ((e.clientY - r.top) / r.height * 268 - 6)]; };
         const svgPoint = e => rawPoint(e).map(v => Math.round(clamp255(v)));
-        const removePoint = i => { const pts = st.curves[channel]; if (i < 0 || pts.length <= 2) return; pts.splice(i, 1); selPt = -1; drawCurve(); draw(); };
+        const removePoint = i => { const pts = st.curves[channel]; if (i < 0 || pts.length <= 2) return; pts.splice(i, 1); selPt = -1; drawCurve(); draw(); commit(); };
         let dragging = -1;
         svg.setAttribute('tabindex', '0');
         svg.addEventListener('pointerdown', e => {
@@ -298,11 +321,17 @@
             if (outside < 0) pts[dragging] = [Math.min(hi, Math.max(lo, x)), y];
             drawCurve(); draw();
         });
-        const release = () => { if (dragging >= 0 && outside === dragging) { outside = -1; removePoint(dragging); } dragging = -1; outside = -1; drawCurve(); };
+        const release = () => { if (dragging >= 0 && outside === dragging) { outside = -1; removePoint(dragging); } else if (dragging >= 0) commit(); dragging = -1; outside = -1; drawCurve(); };
         svg.addEventListener('pointerup', release); svg.addEventListener('pointercancel', release);
         // ⌫ / Suppr enlève le point choisi (écouté sur toute la page : un clic sur la courbe ne lui donne pas le clavier)
-        const onKey = e => { if (dlg.open && [...document.querySelectorAll('dialog[open]')].at(-1) === dlg && (e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0 && !e.target.closest?.('input, textarea, select, [contenteditable]')) { e.preventDefault(); removePoint(selPt); } };
-        document.addEventListener('keydown', onKey); dlg.addEventListener('close', () => document.removeEventListener('keydown', onKey));
+        const onKey = e => {
+            if (!dlg.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dlg || e.target.closest?.('input:not([type=range]):not([type=checkbox]), textarea, select, [contenteditable]')) return;
+            const mod = (e.metaKey || e.ctrlKey) && !e.altKey, k = e.key.toLowerCase();
+            if (mod && k === 'z') { e.preventDefault(); e.stopImmediatePropagation(); goHist(e.shiftKey ? hpos + 1 : hpos - 1); return; }
+            if (mod && k === 's') { e.preventDefault(); e.stopImmediatePropagation(); dlg.querySelector('[data-rs-save="show"]').click(); return; }
+            if ((e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0) { e.preventDefault(); removePoint(selPt); }
+        };
+        window.addEventListener('keydown', onKey, true); dlg.addEventListener('close', () => window.removeEventListener('keydown', onKey, true));
         svg.addEventListener('contextmenu', e => { const hit = e.target.closest('[data-rs-pt]'); if (hit) { e.preventDefault(); removePoint(Number(hit.dataset.rsPt)); } });
         dlg.querySelector('[data-rs-ptdel]').addEventListener('click', () => removePoint(selPt));
         // Tout ce qui montrait l'ancien fichier (fiche, liste des médias…) est redessiné
@@ -339,20 +368,17 @@
             dlg.querySelectorAll('.modal-actions button').forEach(x => { x.disabled = true; });
             b.textContent = 'Enregistrement…';
             try {
-                // L'image en pleine taille, retouchée avec les mêmes réglages que l'aperçu
-                const full = document.createElement('canvas'); full.width = img.naturalWidth; full.height = img.naturalHeight;
-                const fctx = full.getContext('2d', {willReadFrequently: true}); fctx.drawImage(img, 0, 0);
-                const data = fctx.getImageData(0, 0, full.width, full.height);
-                if (st.strokes.length) rtReplayStrokes(data, st.strokes); // taches et tampon, rejoués en pleine taille
-                fctx.putImageData(rtApply(data, data, st), 0, 0);
+                const full = renderFull();
                 const ext0 = String(from || '').split('.').pop().toLowerCase();
                 const type = ext0 === 'png' ? 'image/png' : ext0 === 'webp' ? 'image/webp' : ext0 === 'gif' ? 'image/png' : 'image/jpeg';
                 const blob = await new Promise(res => full.toBlob(res, type, 0.93));
                 if (!blob) throw new Error('Image trop grande pour être enregistrée par le navigateur.');
                 const fd = new FormData(); fd.append('file', blob, 'retouche.' + (type.split('/')[1] === 'jpeg' ? 'jpg' : type.split('/')[1])); fd.append('media_id', item.id); fd.append('mode', mode === 'copy' ? 'copy' : 'version'); fd.append('show', mode === 'show' ? '1' : '0'); fd.append('csrf', A().state.csrf);
+                if (mode === 'copy') fd.append('title', `${docTitle()} (retouchée)`);
                 const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
                 const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                 if (!r.ok || j.error) throw new Error(j.error || 'Enregistrement impossible.');
+                saved = true;
                 if (mode === 'copy') { toast('Copie retouchée ajoutée aux mêmes fiches.'); dlg.close(); refreshAfter(); return; }
                 if (mode === 'show') { applyShown(j.result.filename); toast('Nouvelle version affichée. L’original est gardé dans les versions.'); dlg.close(); return; }
                 versions = j.result.versions; toast('Version enregistrée (non affichée).'); dlg.close();
@@ -362,8 +388,37 @@
                 b.textContent = label0;
             }
         }));
-        dlg.showModal();
-        syncControls();
+        /** L'image en pleine taille, retouchée avec les mêmes réglages que l'aperçu (taches et tampon rejoués en pleine taille) */
+        function renderFull() {
+            const full = document.createElement('canvas'); full.width = img.naturalWidth; full.height = img.naturalHeight;
+            const fctx = full.getContext('2d', {willReadFrequently: true}); fctx.drawImage(img, 0, 0);
+            const data = fctx.getImageData(0, 0, full.width, full.height);
+            if (st.strokes.length) rtReplayStrokes(data, st.strokes);
+            fctx.putImageData(rtApply(data, data, st), 0, 0);
+            return full;
+        }
+        const docTitle = () => (dlg.querySelector('[data-rs-name]').value || '').trim() || item.title || 'photo';
+        // ⤓ Exporter (E3) : la photo retouchée, ou l'avant / après (une copie peut aller dans les médias)
+        dlg.addEventListener('click', e => {
+            const x = e.target.closest('[data-rs-export]'); if (!x) return; x.closest('details')?.removeAttribute('open');
+            if (x.dataset.rsExport === 'ba') return ext.rtBeforeAfterExport?.({title: docTitle(), mediaId: item.id || 0, pos: curtain?.pos ?? 0.5, vertical: curtain?.vertical !== false, getBefore: async () => img, getAfter: async () => renderFull()});
+            ext.rtExportImage?.({title: docTitle(), mediaId: item.id || 0, copyTitle: `${docTitle()} (retouchée)`, render: async () => renderFull()});
+        });
+        dlg.querySelector('[data-rs-topsave]').addEventListener('click', () => dlg.querySelector('[data-rs-save="show"]').click());
+        // ◧ Avant / après en rideau
+        const curtain = ext.rtCurtain ? ext.rtCurtain({host: stage, target: canvas, before: baseData, onChange: S0 => { const q = s0 => dlg.querySelector(s0); q('[data-rs-curtain]').classList.toggle('is-active', S0.on); q('[data-rs-curdir]').hidden = q('[data-rs-curexp]').hidden = !S0.on; q('[data-rs-curdir]').textContent = S0.vertical ? '⇅' : '⇆'; }}) : null;
+        dlg.querySelector('[data-rs-curtain]')?.addEventListener('click', () => curtain?.toggle());
+        dlg.querySelector('[data-rs-curdir]')?.addEventListener('click', () => curtain?.setVertical(!curtain.vertical));
+        dlg.querySelector('[data-rs-curexp]')?.addEventListener('click', () => dlg.querySelector('[data-rs-export="ba"]').click());
+        // E4 : une photo glissée ou collée sur l'image entre dans les médias, et on peut la retoucher à la place
+        UI?.bindFileDrop?.(stage, async files => {
+            const f = files[0]; if (!f) return;
+            if (!await A().confirmBox('La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés.', {title: `Retoucher « ${f.name} » à la place ?`, okLabel: 'Retoucher cette photo'})) return;
+            try { const r = await ext.rtImportImage(f); saved = true; dlg.close(); const s0 = A().state; s0.lightboxMedia = [{id: r.media_id, filename: r.filename, thumbnail: r.filename, title: f.name.replace(/\.[a-z0-9]{2,5}$/i, ''), media_type: 'image'}]; s0.lightboxIndex = 0; openRetouchSimple(); }
+            catch (err) { toast(err.message, 'error'); }
+        }, {accept: 'image/*'});
+        dlg.showModal(); stage.tabIndex = -1; stage.focus({preventScroll: true}); // pas dans la case du nom : ⌘Z, ⌘S marchent tout de suite
+        syncControls(); commit();
     }
 
     ext.openRetouchSimple = openRetouchSimple;

@@ -283,19 +283,29 @@
             bg: () => `<span class="h-bd-bgpick"><select data-bd-bg title="Fond">${BG_LIST.map(([k, l]) => `<option value="${k}" ${bg === k ? 'selected' : ''}>${l}</option>`).join('')}</select><input type="color" data-bd-bgcolor value="${esc(bgColor)}" title="Couleur du fond" ${bg === 'custom' ? '' : 'hidden'}><select data-bd-bgpattern title="Motif sur la couleur" ${bg === 'custom' ? '' : 'hidden'}>${[['', 'sans motif'], ['dots', 'points'], ['grid', 'quadrillé'], ['lines', 'lignes']].map(([k, l]) => `<option value="${k}" ${bgPattern === k ? 'selected' : ''}>${l}</option>`).join('')}</select></span>`,
             snaps: () => '<button type="button" class="button small secondary" data-bd-snaps title="Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau">📸 Instantanés</button>',
             copy: () => '<button type="button" class="button small secondary" data-bd-copy title="Créer un nouveau tableau à partir de celui-ci">⧉ Copie</button>',
-            export: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-export title="Image PNG ou JPG, PDF, impression, fichier du tableau">⬇ Exporter</button></span>',
+            export: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-export title="PDF, image PNG ou JPG, impression, fichier du tableau, modèle">⤓ Exporter ▾</button></span>',
             hyp: () => '<button type="button" class="button small secondary h-bd-hypcount" data-bd-hypcount title="Les pistes à vérifier : clic pour aller à la suivante" hidden>❓ 0</button>',
             search: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-search title="Chercher dans le tableau" data-shortcut="⌘F">🔍</button></span>',
             layers: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-layers title="Calques : montrer, cacher, verrouiller">🗂</button></span>',
             snapgrid: () => `<button type="button" class="button small secondary ${snapOn ? 'is-on' : ''}" data-bd-snapgrid title="Grille aimantée et guides d’alignement">🧲</button>`,
             minimap: () => '<button type="button" class="button small secondary" data-bd-minimap title="Mini-carte du tableau (montrer ou cacher)">🗺</button>',
             present: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-present title="Présenter : un parcours d’étapes">▶ Présenter</button></span>',
-            prefs: () => '<button type="button" class="button small secondary" data-bd-prefs title="Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés">⚙️</button>',
+            prefs: () => '<button type="button" class="button small secondary" data-bd-prefs title="Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés">⚙️ Personnaliser</button>',
             full: () => '<button type="button" class="button small secondary" data-bd-full title="Plein écran">⛶</button>', lockall: () => '<button type="button" class="button small secondary" data-bd-lockall title="Verrouiller ou déverrouiller tout le tableau">🔓</button>',
-            delete: () => '<button type="button" class="button small secondary danger" data-bd-delete title="Supprimer ce tableau (et ses dossiers)">🗑</button>', close: () => '<button type="button" class="button small secondary" data-bd-close title="Revenir aux tableaux">✕</button>',
+            delete: () => '<button type="button" class="button small secondary danger" data-bd-delete title="Supprimer ce tableau (et ses dossiers)">🗑</button>', close: () => '<button type="button" class="icon-button" data-bd-close title="Revenir aux tableaux" aria-label="Fermer">×</button>',
         };
+        // E1 : ↶ ↷ à côté du nom ; à droite, toujours dans cet ordre : ✓ Enregistré · ⚙️ Personnaliser · ⤓ Exporter ▾ · 💾 Enregistrer · ⛶ · ×
+        const FIXED_HEAD = ['undo', 'redo', 'prefs', 'export', 'full', 'close'];
+        const headOne = k => { const p = P(), shown = ordered(p.headerOrder, p.headerHidden, Object.keys(HEAD_DEFS)); return shown.includes(k) ? HEAD_DEFS[k]() : HEAD_DEFS[k]().replace(/^<(\w+)/, '<$1 hidden'); };
         // les boutons dont le tableau a besoin (fermer, verrou…) restent dans la page même cachés : on les cache seulement
-        const headTools = () => { const p = P(), shown = ordered(p.headerOrder, p.headerHidden, Object.keys(HEAD_DEFS)); return [...shown.map(k => HEAD_DEFS[k]()), ...Object.keys(HEAD_DEFS).filter(k => !shown.includes(k)).map(k => HEAD_DEFS[k]().replace(/^<(\w+)/, '<$1 hidden'))].join(''); };
+        const headTools = () => { const p = P(), all = Object.keys(HEAD_DEFS).filter(k => !FIXED_HEAD.includes(k)), shown = ordered(p.headerOrder, p.headerHidden, all); return [...shown.map(k => HEAD_DEFS[k]()), ...all.filter(k => !shown.includes(k)).map(k => HEAD_DEFS[k]().replace(/^<(\w+)/, '<$1 hidden'))].join(''); };
+        // E1 : ↶ ↷ près du nom, les autres outils ensuite, la fin de barre (✓ Enregistré … ×) tout à droite
+        if (!document.getElementById('h-bd-e1-css')) document.head.insertAdjacentHTML('beforeend', `<style id="h-bd-e1-css">
+            .h-board-head .h-board-title{flex:0 1 auto}.h-board-hist{display:inline-flex;gap:4px;align-items:center}
+            .h-board-head .h-board-headtools{flex:1 1 auto;justify-content:flex-start}
+            .h-board-headend{display:inline-flex;gap:6px;align-items:center;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+            .h-board-headend .h-board-status{min-width:0;text-align:right}
+            .h-board-headend .icon-button{width:32px;height:32px}</style>`);
         const LY = P().layout || {};
         host.innerHTML = `<section class="h-board tb-${esc(LY.toolbar || 'top')} insp-${esc(LY.inspector || 'right')} btn-${esc(LY.size || 'm')} head-${esc(LY.title || 'show')}" tabindex="-1">
             <header class="h-board-head">
@@ -304,8 +314,9 @@
                     <span class="h-board-owner">${OWNER_ICONS[b.owner_type] || '🧩'} ${esc(b.owner_type ? `${OWNERS[b.owner_type]} : ${b.owner_label || '?'}` : 'Tableau libre')}${b.part ? ` · ${esc(b.part)}` : ''} <button type="button" class="link-button" data-bd-place>changer</button></span>
                     <span class="h-board-links" data-bd-links></span>
                     <select class="h-board-state" data-bd-state title="État du tableau">${Object.entries({open: '● En cours', paused: '⏸ En pause', closed: '✓ Terminé'}).map(([k, l]) => `<option value="${k}" ${(b.status || 'open') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
-                <span class="h-board-status" data-bd-status>Enregistré</span>
+                <span class="h-board-hist ui-topbar-hist">${headOne('undo')}${headOne('redo')}</span>
                 <span class="h-board-headtools">${headTools()}</span>
+                <span class="h-board-headend"><span class="h-board-status ui-status" data-bd-status data-ui-status></span>${headOne('prefs')}${headOne('export')}<button type="button" class="button small" data-bd-save title="Enregistrer maintenant (le tableau s’enregistre aussi tout seul)" data-shortcut="⌘S">💾 Enregistrer</button>${headOne('full')}${headOne('close')}</span>
             </header>
             <div class="h-board-toolbar" role="toolbar">
                 ${toolButtons()}
@@ -324,7 +335,16 @@
             </div>
         </section>`;
         const root = host.querySelector('.h-board'), stage = root.querySelector('[data-bd-stage]'), world = root.querySelector('[data-bd-world]'), inspector = root.querySelector('[data-bd-inspector]');
-        const status = t => { root.querySelector('[data-bd-status]').textContent = t; };
+        const status = t => {
+            const el = root.querySelector('[data-bd-status]'), UI = window.LCNDA_UI; t = String(t || ''); el.title = '';
+            if (!UI?.savedStatus) { el.textContent = t; return; }
+            if (/^Enregistré/.test(t)) UI.savedStatus(el, 'saved');
+            else if (/^Modifié/.test(t)) UI.savedStatus(el, 'dirty');
+            else if (/^⚠/.test(t)) { UI.savedStatus(el, 'error'); el.title = t.replace(/^⚠\s*/, ''); }
+            else if (/^🔒/.test(t)) el.innerHTML = `<span class="ui-status-txt is-saved">${esc(t)} · ✓ Enregistré</span>`;
+            else el.innerHTML = `<span class="ui-status-txt is-saving"><span class="ui-spin" aria-hidden="true"></span>${esc(t)}</span>`;
+        };
+        status('Enregistré');
         const byId = id0 => items.find(i => i.id === id0);
         const topZ = () => items.reduce((m, i) => Math.max(m, i.z || 0), 0);
         const groupOf = it => it.group ? items.filter(x => x.group === it.group) : [it];
@@ -610,6 +630,7 @@
         // les enregistrements passent l'un après l'autre (un ancien ne peut pas écraser un plus récent)
         let saveChain = Promise.resolve(), changes = 0;
         function save() { saveChain = saveChain.then(save1, save1); return saveChain; }
+        const saveNow = () => { clearTimeout(saveT); status('Enregistrement…'); return save(); };
         async function save1() {
             clearTimeout(thumbT);
             let thumb = '';
@@ -1062,13 +1083,18 @@
             if (it.type === 'webimage' && it.url) window.open(it.url, '_blank', 'noopener');
         }
         // ── déposer, coller ──
-        stage.addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) { e.preventDefault(); root.querySelector('[data-bd-drop]').hidden = false; } });
+        // les fichiers : la zone de dépôt commune (bleue au survol), ils entrent dans les médias et se posent où on les lâche
+        let dropAt = null;
+        const hasFiles = e => [...(e.dataTransfer?.types || [])].includes('Files');
+        stage.addEventListener('dragover', e => { if (hasFiles(e)) root.querySelector('[data-bd-drop]').hidden = false; });
         stage.addEventListener('dragleave', e => { if (e.target === stage) root.querySelector('[data-bd-drop]').hidden = true; });
         stage.addEventListener('drop', e => {
             root.querySelector('[data-bd-drop]').hidden = true;
             if (!e.dataTransfer?.files?.length) { const url = e.dataTransfer?.getData('text/uri-list') || e.dataTransfer?.getData('text/plain'); if (/^https?:\/\//.test(url || '')) { e.preventDefault(); addUrl(url.trim(), toWorld(e.clientX, e.clientY)); } return; }
-            e.preventDefault(); uploadAndPlace(e.dataTransfer.files, toWorld(e.clientX, e.clientY));
+            dropAt = toWorld(e.clientX, e.clientY);
         });
+        if (window.LCNDA_UI?.bindFileDrop) window.LCNDA_UI.bindFileDrop(stage, files => { const at = dropAt; dropAt = null; uploadAndPlace(files, at || undefined); }, {paste: false}); // ⌘V : le collage du tableau, plus bas
+        else stage.addEventListener('drop', e => { if (e.dataTransfer?.files?.length) { e.preventDefault(); uploadAndPlace(e.dataTransfer.files, dropAt); } });
         const onPaste = e => {
             if (!root.isConnected || editing || e.target.closest?.('input, textarea, [contenteditable="true"]')) return;
             const files = [...(e.clipboardData?.files || [])];
@@ -1129,10 +1155,11 @@
             if (typing(e) || !root.contains(document.activeElement) && document.activeElement !== document.body) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
             // nos raccourcis passent avant ceux de l'app (⌘Z annule ici, pas la dernière modification d'une fiche)
-            const ours = mod ? ['z', 'y', 'd', 'g', 'l', 'a', ...(sel.size ? ['c'] : [])].includes(k) : ['delete', 'backspace', 'escape', ' ', ']', '[', 'v', 'h', 't', 'n', 's', 'l', 'a', 'p', 'e', 'g', '+', '=', '-', '0'].includes(k) || (k.startsWith('arrow') && sel.size);
+            const ours = mod ? ['z', 'y', 'd', 'g', 'l', 'a', 's', ...(sel.size ? ['c'] : [])].includes(k) : ['delete', 'backspace', 'escape', ' ', ']', '[', 'v', 'h', 't', 'n', 's', 'l', 'a', 'p', 'e', 'g', '+', '=', '-', '0'].includes(k) || (k.startsWith('arrow') && sel.size);
             if (ours) e.stopImmediatePropagation();
             if (boardLocked && ours && !['escape', ' ', '+', '=', '-', '0', 'v', 'h'].includes(k) && !(mod && ['a', 'c'].includes(k)) && !k.startsWith('arrow')) { e.preventDefault(); ro(); return; }
             if (boardLocked && k.startsWith('arrow')) return;
+            if (mod && k === 's') { e.preventDefault(); e.stopImmediatePropagation(); saveNow(); return; }
             if (mod && k === 'z') { e.preventDefault(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
             if (mod && k === 'y') { e.preventDefault(); restore(hpos + 1); return; }
             if (mod && k === 'd') { e.preventDefault(); actions.duplicate(); return; }
@@ -1159,7 +1186,7 @@
             const sw = (k, list) => `<div class="h-bd-sws">${list.map(c => `<button type="button" class="h-sw ${one[k] === c ? 'is-on' : ''}" style="background:${c === 'transparent' ? 'repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0/8px 8px' : c}" data-bd-set="${k}" data-v="${c}" title="${c}"></button>`).join('')}<input type="color" data-bd-setc="${k}" value="${/^#[0-9a-f]{6}$/i.test(one[k] || '') ? one[k] : '#111111'}" title="Autre couleur"></div>`;
             const parts = {
                 lbSize: () => numField('lbSize', 'Taille du texte', tMin, Math.min(tMax, 120), 1, one.lbSize || 13, 'px', 2, 500),
-                lbFont: () => `<label>Police <select data-bd-sel="lbFont"><option value="">Police du thème</option>${(p.fontLists || []).map(L => `<optgroup label="${esc(L.name)}">${L.fonts.map(f => `<option value="${esc(f)}" ${one.lbFont === f ? 'selected' : ''}>${esc(f)}</option>`).join('')}</optgroup>`).join('')}${one.lbFont && !(p.fontLists || []).some(L => L.fonts.includes(one.lbFont)) ? `<option selected value="${esc(one.lbFont)}">${esc(one.lbFont)}</option>` : ''}</select></label>`,
+                lbFont: () => `<label>Police <select data-bd-sel="lbFont"><option value="">Police du thème</option>${(p.fontLists || []).map(L => `<optgroup label="${esc(L.name)}">${L.fonts.map(f => `<option value="${esc(f)}" ${one.lbFont === f ? 'selected' : ''}>${esc(f)}</option>`).join('')}</optgroup>`).join('')}${one.lbFont && !(p.fontLists || []).some(L => L.fonts.includes(one.lbFont)) ? `<option selected value="${esc(one.lbFont)}">${esc(one.lbFont)}</option>` : ''}</select></label><button type="button" class="button small secondary" data-bd-fontpick="lbFont">Aa Toutes les polices…</button>`,
                 lbStyle: () => `<div class="h-bd-row">${[['lbBold', '<b>G</b>', 'Gras'], ['lbItalic', '<i>I</i>', 'Italique']].map(([k, h, lb]) => `<button type="button" class="h-bt ${one[k] ? 'is-on' : ''}" data-bd-toggle="${k}" title="${lb}">${h}</button>`).join('')}</div>`,
                 lbColor: () => `<label>Couleur du texte</label>${sw('lbColor', pal('label'))}`,
                 lbBg: () => `<label>Fond du cadre</label>${sw('lbBg', pal('labelbg'))}`,
@@ -1205,7 +1232,7 @@
                 radius: () => (one && ((t === 'shape' && ['rect', 'round'].includes(one.shape)) || ['note', 'media', 'webimage', 'table', 'tag', 'folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'widget'].includes(t))) ? numField('radius', 'Arrondi des coins', 0, 120, 1, one.radius ?? (t === 'shape' && one.shape === 'round' ? Math.round(Math.min(one.w, one.h) * .18) : 0), 'px', 0, 400) : '',
                 text: () => any(...textTypes) ? `${numField('fs', 'Taille du texte', tMin, tMax, 1, one?.fs || 18, 'px', 2, 500)}<div class="h-bd-row">${[['bold', '<b>G</b>', 'Gras'], ['italic', '<i>I</i>', 'Italique'], ['underline', '<u>S</u>', 'Souligné'], ['strike', '<s>B</s>', 'Barré']].map(([k, h, lb]) => `<button type="button" class="h-bt ${one?.[k] ? 'is-on' : ''}" data-bd-toggle="${k}" title="${lb}">${h}</button>`).join('')}<span class="h-bt-sep"></span>${[['left', '⇤', 'Aligner à gauche'], ['center', '↔', 'Centrer'], ['right', '⇥', 'Aligner à droite'], ['justify', '☰', 'Justifier']].map(([a, h, lb]) => `<button type="button" class="h-bt ${(one?.align || (t === 'shape' ? 'center' : 'left')) === a ? 'is-on' : ''}" data-bd-set="align" data-v="${a}" title="${lb}">${h}</button>`).join('')}</div>` : '',
                 list: () => any('text', 'note', 'shape') ? `<label>Puces et numéros <select data-bd-sel="list">${[['', 'Aucune'], ['bullet', '• Puce'], ['num', '1. Nombres'], ['roman', 'I. Chiffres romains'], ['alpha', 'a. Lettres'], ['ALPHA', 'A. Lettres capitales'], ['dash', '– Tiret'], ['check', '☐ Cases à cocher']].map(([k, lb]) => `<option value="${k}" ${(one?.list || '') === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label>` : '',
-                font: () => any(...textTypes) ? `<label>Police <select data-bd-sel="font">${fontOpts()}</select></label>${(() => { const own = fontWeights(one?.font), cur = Number(one?.weight || (one?.bold ? 700 : 400)), list = own ? own.map(([w, s]) => [w, `${s} (${w})`]) : WEIGHTS; return `<label>Graisse <select data-bd-weight>${list.map(([w, l]) => `<option value="${w}" ${cur === w ? 'selected' : ''}>${esc(l)}</option>`).join('')}${list.some(x => x[0] === cur) ? '' : `<option value="${cur}" selected>${cur}</option>`}</select></label>${own ? '' : '<small class="muted">Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur).</small>'}`; })()}<div class="h-bd-fontfree"><input list="bd-fonts-${b.id}" placeholder="ou tape un nom de police…" data-bd-fontfree value=""><button type="button" class="h-bt" data-bd-localfonts title="Les polices de l’ordinateur">🖥</button><datalist id="bd-fonts-${b.id}">${(localFonts || []).map(f => `<option value="${esc(f)}">`).join('')}</datalist></div>` : '',
+                font: () => any(...textTypes) ? `<label>Police <select data-bd-sel="font">${fontOpts()}</select></label>${(() => { const own = fontWeights(one?.font), cur = Number(one?.weight || (one?.bold ? 700 : 400)), list = own ? own.map(([w, s]) => [w, `${s} (${w})`]) : WEIGHTS; return `<label>Graisse <select data-bd-weight>${list.map(([w, l]) => `<option value="${w}" ${cur === w ? 'selected' : ''}>${esc(l)}</option>`).join('')}${list.some(x => x[0] === cur) ? '' : `<option value="${cur}" selected>${cur}</option>`}</select></label>${own ? '' : '<small class="muted">Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur).</small>'}`; })()}<div class="h-bd-fontfree"><button type="button" class="button small secondary" data-bd-fontpick="font" title="Chercher parmi toutes les polices (de l’app et de l’ordinateur), chacune écrite dans sa police">Aa Toutes les polices…</button><button type="button" class="h-bt" data-bd-localfonts title="Lire les graisses exactes des polices de l’ordinateur">🖥</button></div>` : '',
                 heads: () => t === 'line' ? `<label>Couleur des pointes ${one.headColor ? '<button type="button" class="link-button" data-bd-headsame>même couleur que le trait</button>' : '<small class="muted">(comme le trait)</small>'}</label>${swatches('headColor', pal('text'))}<div class="h-bd-heads"><label>Pointe au début ${headSel('headStart', headOf(one, 'start'))}</label><label>Pointe à la fin ${headSel('headEnd', headOf(one, 'end'))}</label></div>${numField('hs', 'Taille des pointes', 4, 80, 1, one.hs || headSize(one), 'px', 2, 200)}` : '',
                 linepath: () => t === 'line' ? `<label>Forme du trait <select data-bd-sel="path">${LINE_PATHS.map(([k, lb]) => `<option value="${k}" ${(one.path || (one.curved ? 'curve' : 'straight')) === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label><label>Légende <input data-bd-str="text" value="${esc(one.text || '')}" placeholder="frère de, a écrit à…"></label>
                     <details class="h-bd-lbopts" ${one.text ? 'open' : ''}><summary>Réglages de la légende</summary>${legendParts(one)}</details>` : '',
@@ -1259,6 +1286,13 @@
             const ss = e.target.closest('[data-bd-setshape]'); if (ss) { applyShape(ss.dataset.bdSetshape); return; }
             if (e.target.closest('[data-bd-shapelib]')) { shapeLibrary(e.target.closest('[data-bd-shapelib]'), k => applyShape(k)); return; }
             if (e.target.closest('[data-bd-localfonts]')) { loadLocalFonts(); return; }
+            // E5 : la liste de polices commune (recherche, récentes, polices de l'app et de l'ordinateur)
+            const fp = e.target.closest('[data-bd-fontpick]');
+            if (fp && window.LCNDA_UI?.openFontPicker) { (async () => {
+                const key = fp.dataset.bdFontpick, one0 = selItems()[0] || {}, sample = String(one0.text || one0.label || '').split('\n')[0].slice(0, 40).trim();
+                const f = await window.LCNDA_UI.openFontPicker({value: one0[key] || '', sample: sample || 'Louise Borie'});
+                if (!f) return; setOnSel(key, f); commit(); renderInspector();
+            })(); return; }
             if (e.target.closest('[data-bd-shapefrom]')) { const one = selItems()[0]; if (!one) return; KIT().openComposer?.({base: one.shape, onSave: k => applyShape(k)}); return; }
             const tb = e.target.closest('[data-bd-tbl]'); if (tb) { const it = selItems()[0]; if (it?.type !== 'table') return; if (tb.dataset.bdTbl === 'csv') return tableCsv(it); tableOp(it, tb.dataset.bdTbl); return; }
             const cf = e.target.closest('[data-bd-cellfill]'); if (cf && cellSel && !ro()) { const it = byId(cellSel.id); if (!it) return; it.cfill = {...(it.cfill || {})}; const k = cellSel.r + ':' + cellSel.c; setCellFill(it, cf.dataset.bdCellfill); return; }
@@ -1386,7 +1420,7 @@
         const fontWeights = fam => { const st = fam && fontStyles?.get(fam); if (!st) return null; const m = new Map(); [...st].forEach(s => { const w = styleWeight(s); if (!m.has(w) || !/italic|oblique/i.test(s)) m.set(w, s.replace(/\b(italic|oblique)\b/ig, '').trim() || s); }); return [...m.entries()].sort((x, y) => x[0] - y[0]); };
         async function loadLocalFonts() {
             if (!window.queryLocalFonts) { toast('Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Maintenance → Réglages des tableaux).', 'error'); return; }
-            try { const all = await window.queryLocalFonts(); localFonts = [...new Set(all.map(f => f.family))].sort((a, b2) => a.localeCompare(b2, 'fr')); fontStyles = new Map(); all.forEach(f => { if (!fontStyles.has(f.family)) fontStyles.set(f.family, new Set()); fontStyles.get(f.family).add(f.style); }); renderInspector(); inspector.querySelector('[data-bd-fontfree]')?.focus(); toast(`${localFonts.length} polices de l’ordinateur : tape le début du nom.`); }
+            try { const all = await window.queryLocalFonts(); localFonts = [...new Set(all.map(f => f.family))].sort((a, b2) => a.localeCompare(b2, 'fr')); fontStyles = new Map(); all.forEach(f => { if (!fontStyles.has(f.family)) fontStyles.set(f.family, new Set()); fontStyles.get(f.family).add(f.style); }); renderInspector(); toast(`${localFonts.length} polices de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes).`); }
             catch (error) { toast('Lecture des polices refusée : ' + error.message, 'error'); }
         }
         // ── importer un tableau exporté (fichier .lcnda-tableau.json) : un nouveau tableau ──
@@ -1476,7 +1510,7 @@
                     <section data-k="map"><h4>🗺 Une carte</h4><p class="muted">Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères.</p>${PKF({name: 'bd_map', kind: 'person', placeholder: 'Nom de la personne (facultatif)'})}<label>Lieux de <select data-bd-mapmode><option value="person">la personne</option><option value="family">la personne et sa famille</option><option value="">personne : seulement mes repères</option></select></label><button type="button" class="button small" data-bd-addmap>Poser la carte</button></section>
                     <section data-k="frame"><h4>▭ Un cadre</h4><p class="muted">Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier.</p><input data-bd-framename placeholder="Nom du cadre"><button type="button" class="button small" data-bd-addframe>Poser le cadre</button></section>
                     <section data-k="memo"><h4>🎙 Un mémo vocal</h4><p class="muted">Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus.</p><button type="button" class="button small" data-bd-addmemo>🎙 Enregistrer</button></section>
-                    <section data-k="import"><h4>💾 Importer un tableau</h4><p class="muted">Un fichier « .lcnda-tableau.json » (⬇ Exporter → Fichier du tableau) : il devient un nouveau tableau.</p><input type="file" accept=".json,application/json" data-bd-import></section>
+                    <section data-k="import"><h4>💾 Importer un tableau</h4><p class="muted">Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau.</p><input type="file" accept=".json,application/json" data-bd-import></section>
                 </div>`,
                 onOpen: dlg => {
                     const close = () => dlg.close();
@@ -1635,55 +1669,71 @@
             setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!m.contains(ev.target)) { m.remove(); document.removeEventListener('pointerdown', off, true); } }, true), 0);
         }
         // le fichier du tableau : léger (sans les photos) ou complet (photos, sons, PDF dedans)
-        function exportFile() {
+        async function exportFile(withFiles, filename = '') {
             const used = [...new Set(items.filter(i => i.type === 'media' && media[i.media_id]).map(i => Number(i.media_id)))];
-            ext.openDialog({eyebrow: 'TABLEAU', title: '💾 Fichier du tableau', submitLabel: 'Enregistrer le fichier',
-                body: `<div class="h-bd-expopt">
-                    <label class="h-bd-expchoice"><input type="radio" name="with" value="0" checked><span><strong>Léger, sans les photos</strong>
-                        <small>✓ petit fichier, vite fait, facile à envoyer par courriel.<br>✓ parfait pour garder une copie ou le rouvrir dans <em>cette</em> base : les photos y sont déjà.<br>✗ dans une autre base (un cousin, un autre ordinateur), les photos qui n’y sont pas deviennent des notes « média absent ».</small></span></label>
-                    <label class="h-bd-expchoice"><input type="radio" name="with" value="1"><span><strong>Complet, avec les photos${used.length ? ` (${used.length} fichier${used.length > 1 ? 's' : ''})` : ''}</strong>
-                        <small>✓ le tableau est complet partout : à l’import, les photos, sons et PDF absents sont ajoutés à la base.<br>✗ fichier bien plus lourd (le poids de toutes les photos), plus long à faire et à envoyer.<br>✗ les photos sont copiées : dans la même base, celles déjà présentes ne sont pas recopiées, mais le fichier les contient quand même.</small></span></label>
-                    ${used.length ? '' : '<p class="muted">Ce tableau n’a pas de photo de l’app : les deux fichiers seront pareils.</p>'}</div>`,
-                onSubmit: async form => {
-                    const withFiles = form.querySelector('[name=with]:checked')?.value === '1';
-                    const people = {}; for (const it of items.filter(i => i.type === 'person')) people[it.person_id] = (await personBrief(it.person_id)).name;
-                    const data = {format: 'lcnda-board', version: 3, title: root.querySelector('[data-bd-title]').value.trim(), exported_at: new Date().toISOString(), data: {items, view, bg, bgColor, bgPattern, links, layers, steps, snap: snapOn}, people,
-                        media: Object.fromEntries(Object.entries(media).map(([id0, m]) => [id0, {title: m.title, filename: m.filename, media_type: m.media_type}]))};
-                    if (withFiles && used.length) {
-                        data.files = {}; let n = 0, failed = 0;
-                        for (const mid of used) {
-                            status(`Photos : ${++n} / ${used.length}…`);
-                            try { const r = await fetch(mediaUrl(media[mid])); if (!r.ok) throw new Error(); const blob = await r.blob();
-                                data.files[mid] = await new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(blob); }); }
-                            catch (_) { failed++; }
-                        }
-                        status(dirty ? 'Modifié…' : 'Enregistré ✓');
-                        if (failed) toast(`${failed} fichier${failed > 1 ? 's' : ''} n’${failed > 1 ? 'ont' : 'a'} pas pu être mis dedans (introuvable${failed > 1 ? 's' : ''} sur le disque).`, 'error');
-                    }
-                    const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
-                    download(URL.createObjectURL(blob), fileBase() + (withFiles && used.length ? ' (avec photos)' : '') + '.lcnda-tableau.json');
-                    toast(`Fichier du tableau enregistré (${blob.size > 1048576 ? (blob.size / 1048576).toFixed(1).replace('.', ',') + ' Mo' : Math.max(1, Math.round(blob.size / 1024)) + ' ko'}) : « ＋ Ajouter → Importer un tableau » le rouvre.`);
-                }});
-        }
-        async function exportMenu(btn) {
-            popMenu(btn, [['png', '🖼 Image PNG'], ['jpg', '🖼 Image JPG'], ['pdf', '📄 PDF'], ['print', '🖨 Imprimer…'], '-', ['selpng', '✂ La sélection en PNG', !sel.size], '-', ['file', '💾 Fichier du tableau (pour le garder ou le donner)'], ['tpl', '⭐ En faire un modèle (pour les nouveaux tableaux)']], async k => {
-                if (k === 'file') return exportFile();
-                if (k === 'tpl') return saveTemplate();
-                status('Préparation…');
-                // l'échelle est réduite pour un grand tableau (un navigateur ne fait pas d'image de plus de ~16 millions de points)
-                const bb0 = bbox(k === 'selpng' && sel.size ? selItems() : items) || {w: 800, h: 600}, scale = Math.max(0.1, Math.min(2, Math.sqrt(16e6 / Math.max(1, (bb0.w + 80) * (bb0.h + 80))), 16000 / (bb0.w + 80), 16000 / (bb0.h + 80)));
-                const url = await thumbnail(0, 0, scale, k === 'jpg' || k === 'pdf' || k === 'print' ? 'image/jpeg' : 'image/png', k === 'selpng');
+            const people = {}; for (const it of items.filter(i => i.type === 'person')) people[it.person_id] = (await personBrief(it.person_id)).name;
+            const data = {format: 'lcnda-board', version: 3, title: root.querySelector('[data-bd-title]').value.trim(), exported_at: new Date().toISOString(), data: {items, view, bg, bgColor, bgPattern, links, layers, steps, snap: snapOn}, people,
+                media: Object.fromEntries(Object.entries(media).map(([id0, m]) => [id0, {title: m.title, filename: m.filename, media_type: m.media_type}]))};
+            if (withFiles && used.length) {
+                data.files = {}; let n = 0, failed = 0;
+                for (const mid of used) {
+                    status(`Photos : ${++n} / ${used.length}…`);
+                    try { const r = await fetch(mediaUrl(media[mid])); if (!r.ok) throw new Error(); const blob = await r.blob();
+                        data.files[mid] = await new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(blob); }); }
+                    catch (_) { failed++; }
+                }
                 status(dirty ? 'Modifié…' : 'Enregistré ✓');
-                if (!url || url.length < 40) { toast('Image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand).', 'error'); return; }
-                if (k === 'png' || k === 'selpng') return download(url, fileBase() + (k === 'selpng' ? ' (sélection)' : '') + '.png');
-                if (k === 'jpg') return download(url, fileBase() + '.jpg');
-                const img = await new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = url; });
-                if (!img) { toast('Image impossible.', 'error'); return; }
-                if (k === 'pdf') return download(URL.createObjectURL(jpegPdf(url, img.width, img.height, fileBase())), fileBase() + '.pdf');
-                // imprimer : une page avec l'image, ajustée à la feuille
-                const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);
-                fr.contentDocument.write(`<!doctype html><title>${esc(fileBase())}</title><style>@page{size:${img.width > img.height ? 'landscape' : 'portrait'};margin:10mm}html,body{margin:0}img{max-width:100%;max-height:100vh;display:block;margin:auto}</style><img src="${url}">`); fr.contentDocument.close();
-                setTimeout(() => { fr.contentWindow.focus(); fr.contentWindow.print(); setTimeout(() => fr.remove(), 60000); }, 300);
+                if (failed) toast(`${failed} fichier${failed > 1 ? 's' : ''} n’${failed > 1 ? 'ont' : 'a'} pas pu être mis dedans (introuvable${failed > 1 ? 's' : ''} sur le disque).`, 'error');
+            }
+            const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+            download(URL.createObjectURL(blob), filename || fileBase() + (withFiles && used.length ? ' (avec photos)' : '') + '.lcnda-tableau.json');
+            toast(`Fichier du tableau enregistré (${blob.size > 1048576 ? (blob.size / 1048576).toFixed(1).replace('.', ',') + ' Mo' : Math.max(1, Math.round(blob.size / 1024)) + ' ko'}) : « ＋ Ajouter → Importer un tableau » le rouvre.`);
+        }
+        // l'image du tableau (ou de la sélection) ; la qualité (ppp) règle l'échelle, réduite pour un grand tableau
+        // (un navigateur ne fait pas d'image de plus de ~16 millions de points)
+        async function boardImage(mime, quality, onlySel) {
+            const bb0 = bbox(onlySel && sel.size ? selItems() : items) || {w: 800, h: 600};
+            const lim = Math.max(0.1, Math.min(Math.sqrt(16e6 / Math.max(1, (bb0.w + 80) * (bb0.h + 80))), 16000 / (bb0.w + 80), 16000 / (bb0.h + 80)));
+            const scale = Math.min(lim, Math.max(0.25, (Number(quality) || 150) / 150));
+            status('Préparation…');
+            try { const url = await thumbnail(0, 0, scale, mime, onlySel); if (!url || url.length < 40) throw new Error('image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand)'); return url; }
+            finally { status(dirty ? 'Modifié…' : 'Enregistré ✓'); }
+        }
+        const loadImg = url => new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = url; });
+        // « Ranger aussi une copie dans les médias » : l'image entre dans les médias (la fenêtre de choix d'image la retrouve)
+        async function copyToMedia(url, name) {
+            if (!A().importMediaFile) return;
+            try { const blob = await (await fetch(url)).blob(); await A().importMediaFile(new File([blob], name.replace(/\.pdf$/i, '.jpg'), {type: blob.type}), ['image']); toast('Une copie de l’image est rangée dans les médias.'); }
+            catch (error) { toast('Copie dans les médias impossible : ' + error.message, 'error'); }
+        }
+        function printImage(url, img) {
+            const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);
+            fr.contentDocument.write(`<!doctype html><title>${esc(fileBase())}</title><style>@page{size:${img.width > img.height ? 'landscape' : 'portrait'};margin:10mm}html,body{margin:0}img{max-width:100%;max-height:100vh;display:block;margin:auto}</style><img src="${url}">`); fr.contentDocument.close();
+            setTimeout(() => { fr.contentWindow.focus(); fr.contentWindow.print(); setTimeout(() => fr.remove(), 60000); }, 300);
+        }
+        // E3 : tous les exports passent par la fenêtre d'export commune
+        function openExport(onlySel = false) {
+            const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return;
+            const used = new Set(items.filter(i => i.type === 'media' && media[i.media_id]).map(i => Number(i.media_id))).size;
+            const img = (mime, ext0) => async o => { const url = await boardImage(mime, o.quality, onlySel); download(url, o.filename); if (o.saveCopy) await copyToMedia(url, o.filename); };
+            const formats = [
+                ...(onlySel ? [] : [{id: 'pdf', run: async o => { const url = await boardImage('image/jpeg', o.quality, false), im = await loadImg(url); if (!im) throw new Error('image impossible'); download(URL.createObjectURL(jpegPdf(url, im.width, im.height, fileBase())), o.filename); if (o.saveCopy) await copyToMedia(url, o.filename); }}]),
+                {id: 'png', run: img('image/png')},
+                {id: 'jpg', run: img('image/jpeg')},
+                ...(onlySel ? [] : [
+                    {id: 'print', quality: false, run: async () => { const url = await boardImage('image/jpeg', 150, false), im = await loadImg(url); if (!im) throw new Error('image impossible'); printImage(url, im); }},
+                    {id: 'file', label: '💾 Fichier léger', hint: 'sans les photos : petit, pour garder une copie', ext: 'lcnda-tableau.json', run: o => exportFile(false, o.filename)},
+                    {id: 'file2', label: '💾 Fichier complet', hint: used ? `avec ${A().plural(used, 'photo')} : pour une autre base` : 'pareil : pas de photo de l’app', ext: 'lcnda-tableau.json', quality: false, run: o => exportFile(true, o.filename)}]),
+            ];
+            UI.openExportDialog({title: fileBase() + (onlySel ? ' (sélection)' : ''), defaultName: fileBase() + (onlySel ? ' (sélection)' : ''), quality: 300, saveCopy: !!A().importMediaFile,
+                info: onlySel ? A().plural(sel.size, 'élément choisi', 'éléments choisis') : A().plural(items.length, 'élément'),
+                preview: () => thumbnail(360, 240, 0, 'image/png', onlySel), formats});
+        }
+        // ⤓ Exporter ▾ : un seul menu (tout le tableau, la sélection, en faire un modèle)
+        async function exportMenu(btn) {
+            popMenu(btn, [['all', '⤓ Exporter le tableau… (PDF, image, impression, fichier)'], ['sel', '✂ Exporter la sélection en image…', !sel.size], '-', ['tpl', '⭐ En faire un modèle (pour les nouveaux tableaux)']], k => {
+                if (k === 'tpl') return saveTemplate();
+                openExport(k === 'sel');
             });
         }
         // le menu du zoom (comme Freeform) : ajuster à la sélection, adapter le contenu à la fenêtre…
@@ -1697,6 +1747,7 @@
         root.querySelector('[data-bd-full]').addEventListener('click', () => { root.classList.toggle('is-full'); setTimeout(applyView, 50); });
         root.querySelector('[data-bd-prefs]')?.addEventListener('click', () => { const st = A().state; st.maintenanceTab = 'board_prefs'; try { sessionStorage.setItem('lcnda-bp-tab', 'menus'); } catch (_) {} A().setModule('maintenance'); });
         root.querySelector('[data-bd-export]').addEventListener('click', e => exportMenu(e.currentTarget));
+        root.querySelector('[data-bd-save]').addEventListener('click', () => saveNow());
         root.querySelector('[data-bd-close]').addEventListener('click', async () => { if (dirty) await save(); go(0); });
         root.querySelectorAll('[data-bd-open]').forEach(x => x.addEventListener('click', async () => { if (dirty) await save(); go(Number(x.dataset.bdOpen)); }));
         root.querySelector('[data-bd-place]').addEventListener('click', () => placeDialog(ownerData, async () => { await save(); go(b.id); }));

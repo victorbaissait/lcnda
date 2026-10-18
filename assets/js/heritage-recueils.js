@@ -417,6 +417,18 @@
         lb?.addEventListener('close', () => { bust = Date.now(); if (st().id && S().listType === 'recueils') reload(); }, {once: true});
     }
 
+    /* E4 : la zone « 📷 Choisis… » accepte aussi les photos glissées ou collées (⌘V) */
+    function bindDropLabel(label) {
+        const input = label?.querySelector('input[type=file]'); if (!input || !window.LCNDA_UI?.bindFileDrop) return;
+        const txt = label.querySelector('span'); if (txt && !/glisse/.test(txt.textContent)) txt.insertAdjacentHTML('beforeend', `<small> — ou glisse ${input.multiple ? 'les photos' : 'la photo'} ici, ou colle-${input.multiple ? 'les' : 'la'} (⌘V)</small>`);
+        input.addEventListener('change', () => { const n = input.files?.length || 0; label.classList.toggle('has-files', n > 0); const c = label.querySelector('.h-rc-dropcount') || label.appendChild(Object.assign(document.createElement('b'), {className: 'h-rc-dropcount'})); c.textContent = n ? ` ✓ ${A().plural(n, 'photo choisie', 'photos choisies')}` : ''; });
+        window.LCNDA_UI.bindFileDrop(label, files => {
+            const dt = new DataTransfer(), seen = new Set();
+            (input.multiple ? [...(input.files || []), ...files] : files.slice(0, 1)).forEach(f => { const k = f.name + '|' + f.size; if (!seen.has(k)) { seen.add(k); dt.items.add(f); } });
+            input.files = dt.files; input.dispatchEvent(new Event('change', {bubbles: true}));
+        }, {accept: input.getAttribute('accept') || 'image/*'});
+    }
+
     /* ─── Ajouter des photos ─── */
     function addPhotosDialog({pageId = 0, versionId = 0} = {}) {
         const p = pageId ? pageById(pageId) : null;
@@ -432,6 +444,7 @@
                     <label class="checkbox-line"><input type="radio" name="mode" value="loose"> <b>À ranger</b> : je dirai plus tard sur quelle page va chaque photo</label></fieldset>`}
                 <p class="muted" data-rc-progress></p>`,
             onOpen: dl => {
+                bindDropLabel(dl.querySelector('.h-rc-drop'));
                 const sel = dl.querySelector('[name=version_id]'), nv = dl.querySelector('[data-rc-newv]');
                 const sync = () => { nv.hidden = sel.value !== 'new'; nv.querySelector('input').required = sel.value === 'new'; };
                 sel.addEventListener('change', sync); sync();
@@ -523,6 +536,7 @@
                 const bindTiles = root => root.querySelectorAll('[data-rc-covmid]').forEach(b => b.addEventListener('click', () => pick(Number(b.dataset.rcCovmid))));
                 bindTiles(d);
                 d.querySelector('[data-rc-covreset]')?.addEventListener('click', () => pick(0));
+                bindDropLabel(d.querySelector('[data-rc-covfile]')?.closest('.h-rc-drop'));
                 d.querySelector('[data-rc-covfile]').addEventListener('change', async e => {
                     const f = e.target.files[0]; if (!f) return;
                     try { const ids = await uploadPhotos(r.id, [f]); if (ids[0]) await pick(ids[0]); } catch (err) { toast(err.message, 'error'); }

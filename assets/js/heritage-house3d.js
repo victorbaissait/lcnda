@@ -1,6 +1,7 @@
 /* LCNDA — 🏠 Plan de maison en 3D : les étages construits (murs avec leurs textures, percés de portes et de fenêtres, sols,
  * toit à deux pans), les meubles en volume, et les objets 3D importés : OBJ (+ MTL pour les couleurs), STL (binaire ou texte),
- * glTF et GLB (géométrie, couleurs et textures intégrées). Tourner, approcher, et visiter (flèches ou Z Q S D).
+ * glTF et GLB (géométrie, couleurs et textures intégrées). Tourner, approcher ; ☀️ la lumière du jour (soleil selon le lieu, la date, l'heure et le nord du plan, ombres, lampes la nuit) ;
+ * 🚶 la visite à la première personne (yeux à 1,60 m, Z Q S D / W A S D / flèches, souris capturée, murs, escaliers, petite carte, joystick) ; ✦ les souvenirs posés.
  * Appelé par heritage-house.js (ext.house3d.mount / inspect). three.js est chargé à la demande.
  */
 (() => {
@@ -20,6 +21,15 @@
         g.fillStyle = color; g.fillRect(0, 0, S, S);
         const noise = (a, n = 1800) => { for (let i = 0; i < n; i++) { g.fillStyle = `rgba(${rnd() > .5 ? '0,0,0' : '255,255,255'},${a * rnd()})`; g.fillRect(rnd() * S, rnd() * S, 2, 2); } };
         switch (kind) {
+            // 🧱 revêtements des murs ajoutés : crépi, pierre de taille, papiers peints (rayures, fleurs, toile de Jouy) ; 🪵 poutres du plafond
+            case 'crepi': { noise(.16, 7000); for (let i = 0; i < 70; i++) { g.fillStyle = `rgba(0,0,0,${.03 + rnd() * .05})`; g.beginPath(); g.arc(rnd() * S, rnd() * S, 4 + rnd() * 14, 0, Math.PI * 2); g.fill(); } break; }
+            case 'pierretaille': { const h = S / 4; for (let r = 0; r < 4; r++) for (let x = (r % 2) * -64; x < S; x += 128) { g.fillStyle = shade(color, .9 + rnd() * .14); g.fillRect(x + 2, r * h + 2, 124, h - 4); } g.strokeStyle = shade(color, .72); g.lineWidth = 2; for (let r = 0; r <= 4; r++) { g.beginPath(); g.moveTo(0, r * h); g.lineTo(S, r * h); g.stroke(); } noise(.05, 1500); break; }
+            case 'rayures': { for (let x = 0; x < S; x += 32) { g.fillStyle = shade(color, .82); g.fillRect(x, 0, 12, S); g.fillStyle = shade(color, 1.08); g.fillRect(x + 14, 0, 3, S); } break; }
+            case 'fleurs': { for (let y = 0; y < S; y += 64) for (let x = ((y / 64) % 2) * 32; x < S + 32; x += 64) { const cx = x + 8, cy = y + 24; g.fillStyle = shade(color, .62); for (let k = 0; k < 5; k++) { g.beginPath(); g.arc(cx + Math.cos(k * 1.2566) * 6, cy + Math.sin(k * 1.2566) * 6, 4.5, 0, Math.PI * 2); g.fill(); } g.fillStyle = shade(color, .45); g.beginPath(); g.arc(cx, cy, 3, 0, Math.PI * 2); g.fill(); g.strokeStyle = shade(color, .7); g.lineWidth = 2; g.beginPath(); g.moveTo(cx, cy + 9); g.quadraticCurveTo(cx + 9, cy + 20, cx + 3, cy + 30); g.stroke(); } break; }
+            case 'jouy': { g.strokeStyle = '#8a3b3b'; g.fillStyle = '#8a3b3b'; g.lineWidth = 1.6; const scene = (ox, oy) => { g.beginPath(); g.arc(ox + 20, oy + 22, 14, Math.PI, 0); g.stroke(); g.beginPath(); g.moveTo(ox + 20, oy + 22); g.lineTo(ox + 20, oy + 44); g.stroke(); for (let k = 0; k < 6; k++) { g.beginPath(); g.arc(ox + 10 + k * 4, oy + 16 + (k % 2) * 5, 4, 0, Math.PI * 2); g.stroke(); }
+                    g.beginPath(); g.arc(ox + 60, oy + 30, 4, 0, Math.PI * 2); g.fill(); g.beginPath(); g.moveTo(ox + 60, oy + 34); g.lineTo(ox + 56, oy + 54); g.lineTo(ox + 66, oy + 54); g.closePath(); g.stroke(); g.beginPath(); g.moveTo(ox + 40, oy + 56); g.bezierCurveTo(ox + 55, oy + 50, ox + 75, oy + 62, ox + 90, oy + 56); g.stroke(); };
+                for (let y = 0; y < S; y += 128) for (let x = ((y / 128) % 2) * 64; x < S + 64; x += 128) scene(x - 64, y + 20); break; }
+            case 'poutres': { for (let x = 0; x < S; x += 4) { g.strokeStyle = shade(color, .82 + rnd() * .3); g.beginPath(); g.moveTo(0, x); g.lineTo(S, x + (rnd() - .5) * 6); g.stroke(); } break; }
             case 'pierre': case 'dalles': { const rows = kind === 'dalles' ? 3 : 5; for (let r = 0; r < rows; r++) { let x = -rnd() * 60; const h = S / rows; while (x < S) { const w = 50 + rnd() * 70; g.fillStyle = shade(color, .82 + rnd() * .3); g.fillRect(x + 3, r * h + 3, w - 6, h - 6); x += w; } } g.strokeStyle = shade(color, .55); noise(.12); break; }
             case 'brique': { const h = S / 8; for (let r = 0; r < 8; r++) for (let x = (r % 2) * -32; x < S; x += 64) { g.fillStyle = shade(color, .85 + rnd() * .25); g.fillRect(x + 2, r * h + 2, 60, h - 4); } noise(.08); break; }
             case 'colombage': { g.fillStyle = '#5a3b22'; [0, 120, 250].forEach(x => g.fillRect(x, 0, 14, S)); g.fillRect(0, 0, S, 12); g.fillRect(0, S - 12, S, 12); g.save(); g.translate(14, 12); g.rotate(Math.atan2(S - 24, 106)); g.fillRect(0, -6, 150, 12); g.restore(); noise(.06); break; }
@@ -189,9 +199,45 @@
         const src = await modelCache.get(key); return src.clone(true);
     }
 
+    /* ═════════ ✦ Souvenirs, 💡 lampes, ☀️ soleil ═════════ */
+    let memTex = null;
+    /** le repère ✦ d'un souvenir posé (même dessin en 2D et en 3D) */
+    function memSprite() {
+        if (!memTex) { const c = document.createElement('canvas'); c.width = c.height = 96; const x = c.getContext('2d');
+            x.fillStyle = '#c9962a'; x.beginPath(); x.arc(48, 48, 40, 0, Math.PI * 2); x.fill(); x.lineWidth = 7; x.strokeStyle = '#fff'; x.stroke();
+            x.fillStyle = '#fff'; x.font = '700 50px system-ui, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('✦', 48, 51);
+            memTex = new T.CanvasTexture(c); memTex.colorSpace = T.SRGBColorSpace; }
+        const sp = new T.Sprite(new T.SpriteMaterial({map: memTex, transparent: true, depthTest: false})); sp.scale.set(.34, .34, 1); sp.renderOrder = 12; return sp;
+    }
+    /** une lampe, une bougie, un lustre… : elle s'allume la nuit */
+    const isLamp = it => { const s = `${it.kind || ''} ${it.s2 || ''} ${it.s3 || ''} ${it.name || ''}`; return /lamp|lustre|bougie|cierge|chandel|lantern|applique|petrole|pétrole|suspension|quinquet|candle/i.test(s) && !/tsf|radio/i.test(s); };
+    const DEG = Math.PI / 180, FRANCE = {lat: 46.6, lon: 2.4, def: true};
+    /** le fuseau (heure légale) : la France métropolitaine (UTC+1, +2 de fin mars à fin octobre), ailleurs approché par la longitude */
+    const tzOf = (lat, lon, day) => { const summer = day >= 87 && day <= 300; if (lat > 41 && lat < 51.5 && lon > -5.5 && lon < 10) return summer ? 2 : 1; const z = Math.round(lon / 15); return z + (lat > 30 && summer ? 1 : 0); };
+    /** ☀️ la place du soleil : hauteur et azimut (depuis le nord, sens des aiguilles d'une montre), lever et coucher (heure légale) */
+    function sunAt({lat = FRANCE.lat, lon = FRANCE.lon, day = 172, hour = 14} = {}) {
+        const tz = tzOf(lat, lon, day), B = 2 * Math.PI * (day - 81) / 364, eot = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);
+        const corr = -tz + lon / 15 + eot / 60, Hh = (hour + corr - 12) * 15 * DEG, dec = 23.44 * DEG * Math.sin(2 * Math.PI * (284 + day) / 365), phi = lat * DEG;
+        const alt = Math.asin(clamp(Math.sin(phi) * Math.sin(dec) + Math.cos(phi) * Math.cos(dec) * Math.cos(Hh), -1, 1));
+        const az = (Math.atan2(Math.sin(Hh), Math.cos(Hh) * Math.sin(phi) - Math.tan(dec) * Math.cos(phi)) + Math.PI) % (2 * Math.PI);
+        const c0 = (Math.sin(-.833 * DEG) - Math.sin(phi) * Math.sin(dec)) / (Math.cos(phi) * Math.cos(dec)), H0 = c0 >= 1 ? null : c0 <= -1 ? 'jour' : Math.acos(c0) / DEG / 15;
+        return {alt, az, tz, rise: typeof H0 === 'number' ? 12 - H0 - corr : null, set: typeof H0 === 'number' ? 12 + H0 - corr : null, polar: c0 >= 1 ? 'nuit' : c0 <= -1 ? 'jour' : ''};
+    }
+    const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    const dayLabel = d => { const dt = new Date(Date.UTC(2023, 0, 1) + (clamp(Math.round(d), 1, 365) - 1) * 864e5); return `${dt.getUTCDate() === 1 ? '1er' : dt.getUTCDate()} ${MONTHS[dt.getUTCMonth()]}`; };
+    const hourLabel = h => { h = ((h % 24) + 24) % 24; const m = Math.round((h % 1) * 60); return `${Math.floor(h) + (m === 60 ? 1 : 0)} h ${String(m === 60 ? 0 : m).padStart(2, '0')}`; };
+    const dirName = az => ['nord', 'nord-est', 'est', 'sud-est', 'sud', 'sud-ouest', 'ouest', 'nord-ouest'][Math.round(((az / DEG) % 360) / 45) % 8];
+    const dayOfYear = (dt = new Date()) => Math.min(365, Math.floor((Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()) - Date.UTC(dt.getFullYear(), 0, 1)) / 864e5) + 1);
+    const SUN0 = {north: 0, hour: 15, day: 172, shadows: true};
+    const sunOf = H => ({...SUN0, ...(H.sun && typeof H.sun === 'object' ? H.sun : {})});
     /* ═════════ La maison construite ═════════ */
     function floorBase(H, f) { const fl = [...H.floors].sort((a, b) => a.level - b.level); let y = 0; if (f.level >= 0) { for (const q of fl) if (q.level >= 0 && q.level < f.level) y += M(q.height) + M(H.slab ?? 20); } else { for (const q of fl) if (q.level < 0 && q.level >= f.level) y -= M(q.height) + M(H.slab ?? 20); } return y; }
-    function buildFloor(H, f, {cut = false} = {}) {
+    /** le revêtement d'une face de mur : [couleur, texture] ; side '' = le mur entier, 'l' / 'r' = un côté (sinon celui du mur) */
+    function wallFace(w, side) {
+        const W = ext.houseLib?.WALL_MATS || [], k = (side && w[side + 'Mat']) || w.mat || 'platre', base = W.find(m => m[0] === k)?.[2] || '#eeeeee';
+        const c = side ? (w[side + 'Color'] || (w[side + 'Mat'] ? base : w.color || base)) : (w.color || base); return [c, k];
+    }
+    function buildFloor(H, f, {cut = false, ceil = false} = {}) {
         const g = new T.Group(), L = ext.houseLib, base = floorBase(H, f), fh = M(f.height);
         g.position.y = base;
         // les sols des pièces (ou une dalle sous les murs)
@@ -202,9 +248,11 @@
         // les murs, percés de leurs portes et fenêtres
         f.walls.forEach(w => {
             const ax = M(w.a[0]), az = M(w.a[1]), bx = M(w.b[0]), bz = M(w.b[1]), len = Math.hypot(bx - ax, bz - az); if (len < .01) return;
-            const t = M(w.t || f.wallT), wh = cut ? Math.min(1.1, M(w.h || f.height)) : M(w.h || f.height), ang = Math.atan2(bz - az, bx - ax), wm = L.WALL_MATS.find(m => m[0] === (w.mat || 'platre')), material = mat(w.color || wm?.[2] || '#eee', w.mat || 'platre');
+            const t = M(w.t || f.wallT), wh = cut ? Math.min(1.1, M(w.h || f.height)) : M(w.h || f.height), ang = Math.atan2(bz - az, bx - ax), material = mat(...wallFace(w, ''));
+            // 🧱 chaque face a son revêtement : « l » = côté gauche du mur (sa normale (−dy, dx) sur le plan = la face +z de la boîte), « r » = l'autre côté
+            const tile = 1.1 * clamp(Number(w.tsc) || 100, 20, 400) / 100, faces = [material, material, material, material, mat(...wallFace(w, 'l')), mat(...wallFace(w, 'r'))];
             const holes = f.openings.filter(o => o.wall === w.id).map(o => ({s: o.pos * len - M(o.w) / 2, e: o.pos * len + M(o.w) / 2, y0: o.type === 'window' ? M(o.sill ?? 90) : 0, y1: (o.type === 'window' ? M(o.sill ?? 90) : 0) + M(o.h), o})).sort((a, b) => a.s - b.s);
-            const piece = (s, e, y0, y1) => { if (e - s < .005 || y1 - y0 < .005) return; const m = box(e - s, y1 - y0, t + .002, material, 1.1); const mid = (s + e) / 2; m.position.set(ax + Math.cos(ang) * mid, y0 + (y1 - y0) / 2, az + Math.sin(ang) * mid); m.rotation.y = -ang; m.castShadow = m.receiveShadow = true; g.add(m); };
+            const piece = (s, e, y0, y1) => { if (e - s < .005 || y1 - y0 < .005) return; const m = box(e - s, y1 - y0, t + .002, faces, tile); const mid = (s + e) / 2; m.position.set(ax + Math.cos(ang) * mid, y0 + (y1 - y0) / 2, az + Math.sin(ang) * mid); m.rotation.y = -ang; m.castShadow = m.receiveShadow = true; g.add(m); };
             // le mur ne déborde de la moitié de son épaisseur que là où il rejoint un autre mur (l'angle se ferme) : un bout libre garde sa vraie longueur
             const joined = p => f.walls.some(q => q !== w && [q.a, q.b].some(c => Math.abs(c[0] - p[0]) < .5 && Math.abs(c[1] - p[1]) < .5));
             const ext0 = joined(w.a) ? t / 2 : 0, ext1 = joined(w.b) ? t / 2 : 0;
@@ -221,6 +269,19 @@
         // les meubles
         f.items.forEach(it => { const Lb = L.libOf(it.kind), m = furniture(it, Lb); m.position.set(M(it.x), M(it.elev || 0), M(it.y)); m.rotation.y = -(it.rot || 0) * Math.PI / 180; m.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } }); g.add(m);
             if (it.model) loadModel(it.model).then(obj => { const bb = new T.Box3().setFromObject(obj), s = bb.getSize(new T.Vector3()), c = bb.getCenter(new T.Vector3()); obj.position.sub(new T.Vector3(c.x, bb.min.y, c.z)); const wrap = new T.Group(); wrap.add(obj); wrap.scale.set(M(it.w) / (s.x || 1), M(it.h ?? 80) / (s.y || 1), M(it.d) / (s.z || 1)); m.clear(); m.add(wrap); wrap.traverse(o => { if (o.isMesh) o.castShadow = true; }); }).catch(() => {}); });
+        // ✦ les souvenirs posés sur un meuble ou dans une pièce (un clic : la photo, le récit) ; 💡 les lampes (allumées la nuit)
+        const lamps = [];
+        f.items.forEach(it => { const top = M((it.elev || 0) + Number(it.h ?? L.libOf(it.kind)?.[5] ?? 80));
+            if (Array.isArray(it.mem) && it.mem.length) { const sp = memSprite(); sp.position.set(M(it.x), top + .28, M(it.y)); sp.userData.mem = {type: 'item', id: it.id, floor: f.id}; g.add(sp); }
+            if (isLamp(it)) lamps.push(new T.Vector3(M(it.x), Math.max(.3, top - .08), M(it.y))); });
+        f.rooms.forEach(rm => { if (!Array.isArray(rm.mem) || !rm.mem.length || !rm.pts?.length) return; const xs = rm.pts.map(p => p[0]), ys = rm.pts.map(p => p[1]);
+            const sp = memSprite(); sp.position.set(M((Math.min(...xs) + Math.max(...xs)) / 2), Math.min(1.9, fh - .25), M((Math.min(...ys) + Math.max(...ys)) / 2)); sp.userData.mem = {type: 'room', id: rm.id, floor: f.id}; g.add(sp); });
+        // 🪵 le plafond (pendant la visite) : uni, ou avec ses poutres apparentes
+        if (ceil && f.ceil && f.ceil !== 'none') { const cc = /^#[0-9a-f]{6}$/i.test(f.ceilColor || '') ? f.ceilColor : '#f1ece2';
+            (f.rooms.length ? f.rooms : []).forEach(rm => { if (!rm.pts?.length) return; const geo = new T.ShapeGeometry(new T.Shape(rm.pts.map(p => new T.Vector2(M(p[0]), M(p[1]))))); const m = new T.Mesh(geo, mat(cc, 'platre', {side: T.DoubleSide})); m.rotation.x = Math.PI / 2; m.position.y = fh - .01; g.add(m);
+                if (f.ceil === 'poutres') { const xs = rm.pts.map(p => M(p[0])), zs = rm.pts.map(p => M(p[1])), x0 = Math.min(...xs), x1 = Math.max(...xs), z0 = Math.min(...zs), z1 = Math.max(...zs), alongX = x1 - x0 <= z1 - z0, span = alongX ? x1 - x0 : z1 - z0, run = alongX ? z1 - z0 : x1 - x0, n = Math.max(1, Math.floor(run / .65)), bm = mat('#6a4a2e', 'poutres');
+                    for (let i = 1; i <= n; i++) { const b = box(alongX ? span : .14, .18, alongX ? .14 : span, bm, .9), off = (alongX ? z0 : x0) + run * i / (n + 1); b.position.set(alongX ? (x0 + x1) / 2 : off, fh - .1, alongX ? off : (z0 + z1) / 2); b.castShadow = true; g.add(b); } } }); }
+        g.userData.lamps = lamps; g.userData.floorId = f.id;
         return g;
     }
     /** le toit : deux pans, quatre pans (croupe), pavillon, appentis (un pan), mansardé, plat (terrasse) ; pente, sens du faîtage, débord, couverture et couleurs, cheminée */
@@ -257,45 +318,89 @@
         if (r.chimney) { const cw = .55, ch = Math.max(.9, ridgeY - y0 + .7), pos = clamp(Number(r.chimneyPos ?? 30), 0, 100) / 100, u = -hu + ov + (run - 2 * ov) * pos, c = box(cw, ch, cw, mat('#a0826d', 'brique'), .8); c.position.copy(P(u, y0 + ch / 2, shape === 'shed' ? 0 : -hv * .25)); c.castShadow = true; g.add(c); }
         return g;
     }
-    /** la vue 3D dans « box » : tourner, approcher, visiter */
-    async function mount(box2, H, fi) {
+    /** la vue 3D dans « box » : tourner, approcher, ☀️ lumière du jour, 🚶 visiter à la première personne
+     *  o3 : {geo: {lat, lon}, onMemory({type, id, floor})} ; émet sur box2 « h3-roof », « h3-change » ({what: 'sun'|'walk'}), « h3-floor » ({fi}) */
+    async function mount(box2, H, fi, o3 = {}) {
         await three();
         const W = () => box2.clientWidth || 800, Hh = () => box2.clientHeight || 600;
         const renderer = new T.WebGLRenderer({antialias: true, preserveDrawingBuffer: true}); renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.setSize(W(), Hh()); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap; renderer.outputColorSpace = T.SRGBColorSpace;
         // la barre de la vue 3D est dans l'éditeur (pour pouvoir la ranger avec ⚙️ Personnaliser) ; sinon on la crée ici
         let bar = box2.parentElement?.querySelector('[data-h3bar]'), ownBar = false;
-        if (!bar) { ownBar = true; box2.innerHTML = '<div class="h-hs-3dbar"><label class="checkbox-line"><input type="checkbox" data-h3="all" checked> Tous les étages</label><label class="checkbox-line"><input type="checkbox" data-h3="roof"> Toit</label><label class="checkbox-line"><input type="checkbox" data-h3="cut"> Murs coupés</label><label class="checkbox-line"><input type="checkbox" data-h3="dims"> Cotes</label><button type="button" class="button small secondary" data-h3="measure">📏 Mesurer</button><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div>'; bar = box2.querySelector('.h-hs-3dbar'); }
+        if (!bar) { ownBar = true; box2.innerHTML = '<div class="h-hs-3dbar"><label class="checkbox-line"><input type="checkbox" data-h3="all" checked> Tous les étages</label><label class="checkbox-line"><input type="checkbox" data-h3="roof"> Toit</label><label class="checkbox-line"><input type="checkbox" data-h3="cut"> Murs coupés</label><label class="checkbox-line"><input type="checkbox" data-h3="dims"> Cotes</label><button type="button" class="button small secondary" data-h3="measure">📏 Mesurer</button><button type="button" class="button small secondary" data-h3="sun">☀️ Lumière</button><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div>'; bar = box2.querySelector('.h-hs-3dbar'); }
         else { box2.innerHTML = ''; bar.hidden = false; bar.querySelectorAll('input[data-h3]').forEach(i => { i.checked = i.dataset.h3 === 'all'; }); bar.querySelectorAll('.is-on').forEach(b => b.classList.remove('is-on')); const wb = bar.querySelector('[data-h3="walk"]'); if (wb) wb.textContent = '🚶 Visiter'; }
         const barAc = new AbortController(), sig = {signal: barAc.signal};
         box2.appendChild(renderer.domElement);
         const scene = new T.Scene(); scene.background = new T.Color('#dfe8ef'); scene.fog = new T.Fog('#dfe8ef', 60, 220);
-        scene.add(new T.HemisphereLight('#ffffff', '#8a7a66', 1.6)); const sun = new T.DirectionalLight('#fff4e0', 2.2); sun.position.set(18, 30, 12); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -30, right: 30, top: 30, bottom: -30, far: 120}); scene.add(sun);
-        const ground = new T.Mesh(new T.PlaneGeometry(400, 400), new T.MeshStandardMaterial({color: '#a9b88f', roughness: 1})); ground.rotation.x = -Math.PI / 2; ground.position.y = -.06; ground.receiveShadow = true; scene.add(ground);
+        const hemi = new T.HemisphereLight('#ffffff', '#8a7a66', 1.6); scene.add(hemi);
+        const sun = new T.DirectionalLight('#fff4e0', 2.2); sun.position.set(18, 30, 12); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0004; Object.assign(sun.shadow.camera, {left: -30, right: 30, top: 30, bottom: -30, far: 160}); scene.add(sun); scene.add(sun.target);
+        const groundMat = new T.MeshStandardMaterial({color: '#a9b88f', roughness: 1}), ground = new T.Mesh(new T.PlaneGeometry(400, 400), groundMat); ground.rotation.x = -Math.PI / 2; ground.position.y = -.06; ground.receiveShadow = true; scene.add(ground);
         const cam = new T.PerspectiveCamera(50, W() / Hh(), .05, 500);
         let house = new T.Group(); scene.add(house);
         const opts = {all: true, roof: !!H.roof?.on, cut: false, dims: false}; // pas de toit tant qu'on ne l'a pas demandé
         bar.querySelector('[data-h3="roof"]').checked = opts.roof;
-        let target = new T.Vector3(), dist = 20, yaw = .8, pitch = .7, walk = false, fiCur = fi, Hcur = H;
+        let target = new T.Vector3(), dist = 20, yaw = .8, pitch = .7, walk = false, fiCur = fi, Hcur = H, geo = o3.geo && Number.isFinite(+o3.geo.lat) && Number.isFinite(+o3.geo.lon) ? {lat: +o3.geo.lat, lon: +o3.geo.lon} : null;
+        let lampLights = [], bulbs = [];
+        const emit = (type, detail = {}) => box2.dispatchEvent(new CustomEvent(type, {bubbles: true, detail}));
         function rebuild() {
-            scene.remove(house); house.traverse(o => { if (o.isSprite) { o.material.map?.dispose(); o.material.dispose(); } }); house = new T.Group();
+            scene.remove(house); house.traverse(o => { if (o.isSprite) { if (!o.userData.mem) o.material.map?.dispose(); o.material.dispose(); } }); house = new T.Group();
             const floors = opts.all ? Hcur.floors.filter(f => f.level <= Hcur.floors[fiCur].level) : [Hcur.floors[fiCur]];
-            floors.forEach(f => house.add(buildFloor(Hcur, f, {cut: opts.cut && f === Hcur.floors[fiCur]})));
+            floors.forEach(f => house.add(buildFloor(Hcur, f, {cut: opts.cut && f === Hcur.floors[fiCur], ceil: walk && f === Hcur.floors[fiCur]})));
             const top = [...Hcur.floors].sort((a, b) => b.level - a.level)[0];
-            if (opts.roof && opts.all && top === Hcur.floors[fiCur]) { const r = buildRoof(Hcur, top); if (r) house.add(r); }
+            if (opts.roof && opts.all && top === Hcur.floors[fiCur] && !walk) { const r = buildRoof(Hcur, top); if (r) house.add(r); }
             if (opts.dims) { const f = Hcur.floors[fiCur], y0 = floorBase(Hcur, f); f.walls.forEach(w => { const L = Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]); if (L < 20) return; const sp = label3d(fmt3(L)); sp.position.set(M((w.a[0] + w.b[0]) / 2), y0 + M(w.h || f.height) + .25, M((w.a[1] + w.b[1]) / 2)); house.add(sp); });
                 const hh = label3d(`↕ ${fmt3(f.height)}`, '#1d5fb8'), xs = f.walls.flatMap(w => [w.a[0], w.b[0]]), zs = f.walls.flatMap(w => [w.a[1], w.b[1]]); if (xs.length) { hh.position.set(M(Math.min(...xs)) - .4, y0 + M(f.height) / 2, M(Math.min(...zs)) - .4); house.add(hh); } }
-            scene.add(house); measureObjs.forEach(o => scene.add(o));
+            // 💡 les lampes posées (12 au plus, les plus proches de l'étage montré d'abord)
+            lampLights.forEach(l => scene.remove(l)); bulbs.forEach(b => scene.remove(b)); lampLights = []; bulbs = [];
+            const lampPts = house.children.filter(g => g.userData.lamps).sort((a, b) => (b.userData.floorId === Hcur.floors[fiCur].id) - (a.userData.floorId === Hcur.floors[fiCur].id)).flatMap(g => g.userData.lamps.map(v => v.clone().add(g.position))).slice(0, 12);
+            lampPts.forEach(p => { const l = new T.PointLight('#ffc977', 0, 7.5, 2); l.position.copy(p); scene.add(l); lampLights.push(l); const b = new T.Mesh(new T.SphereGeometry(.06, 12, 8), new T.MeshBasicMaterial({color: '#ffe2a8'})); b.position.copy(p); b.visible = false; scene.add(b); bulbs.push(b); });
+            scene.add(house); measureObjs.forEach(o => scene.add(o)); applySun();
         }
         const fmt3 = cm => cm >= 100 ? `${(Math.round(cm) / 100).toFixed(2).replace('.', ',')} m` : `${Math.round(cm)} cm`;
         function label3d(text, color = '#222') { const c = document.createElement('canvas'), x = c.getContext('2d'); x.font = '600 44px system-ui, sans-serif'; const w = Math.ceil(x.measureText(text).width) + 28; c.width = w; c.height = 64;
             x.font = '600 44px system-ui, sans-serif'; x.fillStyle = '#ffffffe8'; x.beginPath(); x.roundRect?.(0, 0, w, 64, 14); if (!x.roundRect) x.rect(0, 0, w, 64); x.fill(); x.fillStyle = color; x.textBaseline = 'middle'; x.fillText(text, 14, 34);
             const tex = new T.CanvasTexture(c); tex.colorSpace = T.SRGBColorSpace; const sp = new T.Sprite(new T.SpriteMaterial({map: tex, depthTest: false, transparent: true})); sp.renderOrder = 10; sp.scale.set(w / 64 * .32, .32, 1); return sp; }
+
+        /* ─── ☀️ la lumière du jour : le soleil selon le lieu, la date, l'heure et le nord du plan ; la nuit, les lampes ─── */
+        const sunBox = document.createElement('div'); sunBox.className = 'h-hs-sunbox'; sunBox.hidden = true; box2.appendChild(sunBox);
+        sunBox.innerHTML = `<div class="h-hs-sunhd"><b>☀️ Lumière du jour</b><button type="button" class="icon-button small" data-sx="close" title="Fermer" aria-label="Fermer">×</button></div>
+            <label class="h-hs-sxrow"><span>Heure</span><input type="range" min="0" max="24" step="0.25" data-sx="hour" data-ui-off><output data-sxo="hour"></output></label>
+            <div class="h-hs-sxbtns"><button type="button" class="button small secondary" data-sx="play" title="Le soleil passe d’une heure à l’autre">▶ Voir la journée</button></div>
+            <label class="h-hs-sxrow"><span>Jour</span><input type="range" min="1" max="365" step="1" data-sx="day" data-ui-off><output data-sxo="day"></output></label>
+            <div class="h-hs-sxbtns">${[[355, '❄️ Hiver'], [80, '🌱 Printemps'], [172, '☀️ Été'], [265, '🍂 Automne'], [0, '📅 Aujourd’hui']].map(([d, l]) => `<button type="button" class="h-hs-chip" data-sx-day="${d}">${l}</button>`).join('')}</div>
+            <label class="h-hs-sxrow"><span data-help="Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent." data-help-faq="lumière du jour">Nord du plan</span><input type="range" min="0" max="359" step="1" data-sx="north" data-unit="°"></label>
+            <label class="checkbox-line"><input type="checkbox" data-sx="shadows"> Ombres portées</label><small class="h-hs-sxinfo" data-sxo="info"></small>`;
+        let playT = 0;
+        function paintSunBox() { const s = sunOf(Hcur); sunBox.querySelector('[data-sx="hour"]').value = s.hour; sunBox.querySelector('[data-sx="day"]').value = s.day; const n = sunBox.querySelector('[data-sx="north"]'); if (n.value !== String(s.north)) { n.value = s.north; n.dispatchEvent(new Event('input')); } sunBox.querySelector('[data-sx="shadows"]').checked = s.shadows !== false;
+            sunBox.querySelector('[data-sxo="hour"]').textContent = hourLabel(s.hour); sunBox.querySelector('[data-sxo="day"]').textContent = dayLabel(s.day); }
+        function applySun() {
+            const s = sunOf(Hcur), g = geo || FRANCE, sp = sunAt({lat: g.lat, lon: g.lon, day: s.day, hour: s.hour}), altD = sp.alt / DEG;
+            const night = clamp((2 - altD) / 9, 0, 1), dayF = clamp(Math.sin(sp.alt) * 2.2, 0, 1), gold = clamp(1 - altD / 14, 0, 1) * (1 - night);
+            const th = sp.az + (Number(s.north) || 0) * DEG, alt = Math.max(sp.alt, .03), dir = new T.Vector3(Math.cos(alt) * Math.sin(th), Math.sin(alt), -Math.cos(alt) * Math.cos(th));
+            const bb = new T.Box3().setFromObject(house), c = bb.isEmpty() ? new T.Vector3() : bb.getCenter(new T.Vector3()), sz = bb.isEmpty() ? 20 : Math.max(10, bb.getSize(new T.Vector3()).length() * .7);
+            sun.target.position.copy(c); sun.position.copy(c).addScaledVector(dir, sz + 25); Object.assign(sun.shadow.camera, {left: -sz, right: sz, top: sz, bottom: -sz, far: sz * 2 + 60}); sun.shadow.camera.updateProjectionMatrix();
+            sun.intensity = sp.alt > 0 ? .35 + 2.2 * dayF : 0; sun.color.set('#fff4e0').lerp(new T.Color('#ff9a50'), gold * .8); sun.castShadow = s.shadows !== false && sp.alt > 0;
+            hemi.intensity = .16 + 1.45 * (1 - night) * (.45 + .55 * dayF); hemi.color.set('#ffffff').lerp(new T.Color('#4a5a8a'), night);
+            const sky = new T.Color('#dfe8ef').lerp(new T.Color('#f2c49e'), gold * .75).lerp(new T.Color('#0e1828'), night); scene.background.copy(sky); scene.fog.color.copy(sky);
+            groundMat.color.set('#a9b88f').lerp(new T.Color('#25301f'), night * .8);
+            lampLights.forEach(l => { l.intensity = night * 9; }); bulbs.forEach(b => { b.visible = night > .3; });
+            const info = sunBox.querySelector('[data-sxo="info"]'); if (info) info.textContent = `${sp.alt > 0 ? `Soleil à ${Math.round(altD)}° de haut, au ${dirName(sp.az)}` : `${night >= 1 ? '🌙 Nuit' : 'Crépuscule'}${lampLights.length ? ` : ${lampLights.length} lampe${lampLights.length > 1 ? 's' : ''} allumée${lampLights.length > 1 ? 's' : ''}` : ' (pose une lampe pour éclairer)'}`} · ${sp.polar === 'nuit' ? 'nuit polaire' : sp.polar === 'jour' ? 'soleil de minuit' : `lever ${hourLabel(sp.rise)}, coucher ${hourLabel(sp.set)}`} · ${geo ? `${String(Math.abs(g.lat).toFixed(2)).replace('.', ',')}° ${g.lat >= 0 ? 'N' : 'S'}` : 'France (lieu de la maison inconnu)'}`;
+            return sp;
+        }
+        const setSun = (patch, quiet = false) => { Hcur.sun = {...sunOf(Hcur), ...patch}; paintSunBox(); applySun(); if (!quiet) emit('h3-change', {what: 'sun'}); };
+        sunBox.addEventListener('input', e => { const k = e.target.dataset.sx; if (k === 'hour' || k === 'day' || k === 'north') setSun({[k]: Number(e.target.value)}); else if (k === 'shadows') setSun({shadows: e.target.checked}); });
+        sunBox.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+            if (b.dataset.sx === 'close') { sunBox.hidden = true; bar.querySelector('[data-h3="sun"]')?.classList.remove('is-on'); stopPlay(); return; }
+            if (b.dataset.sx === 'play') { if (playT) return stopPlay(); b.textContent = '⏸ Arrêter'; let h = 4.5; playT = setInterval(() => { h += .25; if (h > 22.5) return stopPlay(); setSun({hour: h}, true); }, 90); return; }
+            if (b.dataset.sxDay !== undefined) setSun({day: Number(b.dataset.sxDay) || dayOfYear()}); });
+        function stopPlay() { if (playT) { clearInterval(playT); playT = 0; emit('h3-change', {what: 'sun'}); } const b = sunBox.querySelector('[data-sx="play"]'); if (b) b.textContent = '▶ Voir la journée'; }
+
         // 📏 mesurer : deux clics sur la maison
         let measuring = false, mPts = [], measureObjs = []; const mLabel = document.createElement('div'); mLabel.className = 'h-hs-3dmeasure'; mLabel.hidden = true; box2.appendChild(mLabel);
         const clearMeasure = () => { measureObjs.forEach(o => { scene.remove(o); o.geometry?.dispose?.(); }); measureObjs = []; mPts = []; mLabel.hidden = true; };
         const ray = new T.Raycaster(), ndc = new T.Vector2();
+        const rayAt = e => { const r = el.getBoundingClientRect(); if (e) ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1); else ndc.set(0, 0); ray.setFromCamera(ndc, cam); };
         function pickMeasure(e) {
-            const r = el.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, cam);
+            rayAt(e);
             const hit = ray.intersectObjects([house, ground], true).find(h => h.object.isMesh); if (!hit) return;
             if (mPts.length >= 2) clearMeasure();
             const p = hit.point.clone(); mPts.push(p);
@@ -303,42 +408,152 @@
             if (mPts.length === 2) { const [a, b] = mPts, line = new T.Line(new T.BufferGeometry().setFromPoints([a, b]), new T.LineBasicMaterial({color: '#e0457b', depthTest: false})); line.renderOrder = 11; scene.add(line); measureObjs.push(line);
                 const d = a.distanceTo(b) * 100, dh = Math.abs(a.y - b.y) * 100, dxz = Math.hypot(a.x - b.x, a.z - b.z) * 100; mLabel.textContent = `${fmt3(d)}${dh > 2 ? ` · au sol ${fmt3(dxz)} · ↕ ${fmt3(dh)}` : ''}`; mLabel.hidden = false; }
         }
+        /** ✦ un souvenir sous la souris (ou au centre de la vue, souris capturée) : les repères se voient (et se cliquent) à travers les murs */
+        function pickMemory(e) {
+            rayAt(e); const h0 = ray.intersectObjects(house.children, true).find(h => h.object.isSprite && h.object.userData.mem);
+            if (!h0) return false; o3.onMemory?.(h0.object.userData.mem); return true;
+        }
         const placeLabel = () => { if (mLabel.hidden || mPts.length < 2) return; const m = mPts[0].clone().add(mPts[1]).multiplyScalar(.5).project(cam), r = el.getBoundingClientRect(); mLabel.style.left = `${(m.x + 1) / 2 * r.width}px`; mLabel.style.top = `${(1 - m.y) / 2 * r.height + 34}px`; mLabel.style.visibility = m.z < 1 ? '' : 'hidden'; };
-        function home() { const bb = new T.Box3().setFromObject(house); if (bb.isEmpty()) { target.set(0, 0, 0); dist = 15; return; } bb.getCenter(target); const s = bb.getSize(new T.Vector3()); dist = Math.max(6, Math.max(s.x, s.z) * 1.4); yaw = .8; pitch = .65; walk = false; }
-        const place = () => { if (walk) return; cam.position.set(target.x + dist * Math.cos(pitch) * Math.sin(yaw), target.y + dist * Math.sin(pitch), target.z + dist * Math.cos(pitch) * Math.cos(yaw)); cam.lookAt(target); };
-        rebuild(); home();
+        function home() { const bb = new T.Box3().setFromObject(house); if (bb.isEmpty()) { target.set(0, 0, 0); dist = 15; return; } bb.getCenter(target); const s = bb.getSize(new T.Vector3()); dist = Math.max(6, Math.max(s.x, s.z) * 1.4); yaw = .8; pitch = .65; if (walk) stopWalk(true); }
+        const place = () => { cam.position.set(target.x + dist * Math.cos(pitch) * Math.sin(yaw), target.y + dist * Math.sin(pitch), target.z + dist * Math.cos(pitch) * Math.cos(yaw)); cam.lookAt(target); };
+
+        /* ─── 🚶 la visite à la première personne : hauteur d'yeux, Z Q S D / W A S D / flèches, souris (capturée), murs (on passe par les portes), escaliers, petite carte, joystick ─── */
+        const P = new T.Vector3(); let wyaw = Math.PI, wpitch = 0, segs = [], unlockAt = 0, joy = null, onStair = 0;
+        const eyeM = () => clamp(Number(Hcur.walk?.eye) || 160, 80, 220) / 100;
+        const hud = document.createElement('div'); hud.className = 'h-hs-walkhud'; hud.hidden = true; box2.appendChild(hud);
+        hud.innerHTML = `<div class="h-hs-wkrow"><b>🚶 Visite</b><span data-wk="floor"></span><button type="button" class="button small secondary" data-wk="up" title="Monter à l’étage du dessus (E ou Page ↑)">⬆</button><button type="button" class="button small secondary" data-wk="down" title="Descendre à l’étage du dessous (C ou Page ↓)">⬇</button>
+            <label class="h-hs-wkeye"><span data-help="La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant." data-help-faq="visiter la maison">Yeux à</span><input type="number" min="80" max="220" step="5" data-wk="eye" aria-label="Hauteur des yeux (cm)"> cm</label><button type="button" class="button small" data-wk="stop">✋ Arrêter</button></div>
+            <small data-wk="hint"></small><div class="h-hs-wkstair" data-wk="stair" hidden></div>`;
+        const mini = document.createElement('canvas'); mini.className = 'h-hs-minimap'; mini.width = mini.height = 340; mini.hidden = true; mini.title = 'Petite carte : clic pour t’y rendre'; box2.appendChild(mini);
+        const cross = document.createElement('div'); cross.className = 'h-hs-cross'; cross.hidden = true; box2.appendChild(cross);
+        const joyEl = document.createElement('div'); joyEl.className = 'h-hs-joy'; joyEl.hidden = true; joyEl.innerHTML = '<i></i>'; box2.appendChild(joyEl);
+        /** juste sous la barre de la vue 3D (qui peut tenir sur deux lignes) */
+        const under = () => { const r = bar.getBoundingClientRect(), r0 = box2.getBoundingClientRect(); return bar.hidden || !r.height ? 10 : Math.max(10, Math.round(r.bottom - r0.top + 8)); };
+        const touchy = () => (navigator.maxTouchPoints || 0) > 0 || matchMedia?.('(pointer: coarse)').matches;
+        const sortedFloors = () => [...Hcur.floors].sort((a, b) => a.level - b.level);
+        /** les murs de l'étage, en segments pleins (mètres) : les portes et les passages laissent passer, pas les fenêtres */
+        function buildSegs() {
+            const f = Hcur.floors[fiCur]; segs = [];
+            (f.walls || []).forEach(w => { const ax = M(w.a[0]), az = M(w.a[1]), bx = M(w.b[0]), bz = M(w.b[1]), len = Math.hypot(bx - ax, bz - az); if (len < .02) return; const ux = (bx - ax) / len, uz = (bz - az) / len, t = M(w.t || f.wallT || 20);
+                const holes = (f.openings || []).filter(o => o.wall === w.id && o.type !== 'window').map(o => [o.pos * len - M(o.w) / 2, o.pos * len + M(o.w) / 2]).sort((a, b) => a[0] - b[0]);
+                let s = 0; holes.forEach(([h0, h1]) => { if (h0 > s) segs.push([ax + ux * s, az + uz * s, ax + ux * h0, az + uz * h0, t]); s = Math.max(s, h1); }); if (s < len) segs.push([ax + ux * s, az + uz * s, bx, bz, t]); });
+        }
+        /** pousser hors des murs (rayon du corps : 22 cm) */
+        function collide(x, z) {
+            const r = .22;
+            for (let it = 0; it < 4; it++) { let moved = false;
+                for (const [x0, z0, x1, z1, t] of segs) { const dx = x1 - x0, dz = z1 - z0, L2 = dx * dx + dz * dz || 1e-6, k = clamp(((x - x0) * dx + (z - z0) * dz) / L2, 0, 1), qx = x0 + dx * k, qz = z0 + dz * k, d = Math.hypot(x - qx, z - qz), min = r + t / 2;
+                    if (d < min) { const nx = d > 1e-5 ? (x - qx) / d : -dz / Math.sqrt(L2), nz = d > 1e-5 ? (z - qz) / d : dx / Math.sqrt(L2); x = qx + nx * min; z = qz + nz * min; moved = true; } }
+                if (!moved) break; }
+            return [x, z];
+        }
+        /** un escalier sous les pieds (cet étage pour monter, celui du dessous pour descendre) */
+        const STAIR = /^(escalier|escaliert)$|stair|spiral|echelle|échelle/i;
+        const stairAt = (f, x, z) => (f?.items || []).find(it => { if (!STAIR.test(`${it.kind || ''}`) && !STAIR.test(`${it.s2 || ''} ${it.s3 || ''}`)) return false; const a = -(it.rot || 0) * DEG, dx = x * 100 - it.x, dz = z * 100 - it.y, lx = dx * Math.cos(a) - dz * Math.sin(a), lz = dx * Math.sin(a) + dz * Math.cos(a); return Math.abs(lx) <= it.w / 2 + 25 && Math.abs(lz) <= it.d / 2 + 25; });
+        function startPos() {
+            const f = Hcur.floors[fiCur], rooms = (f.rooms || []).filter(r => r.pts?.length > 2), area = pts => Math.abs(pts.reduce((a, p, i) => { const q = pts[(i + 1) % pts.length]; return a + p[0] * q[1] - q[0] * p[1]; }, 0) / 2);
+            if (rooms.length) { const rm = rooms.sort((a, b) => area(b.pts) - area(a.pts))[0], xs = rm.pts.map(p => p[0]), ys = rm.pts.map(p => p[1]); return [M((Math.min(...xs) + Math.max(...xs)) / 2), M((Math.min(...ys) + Math.max(...ys)) / 2)]; }
+            const bb = new T.Box3().setFromObject(house), c = bb.isEmpty() ? new T.Vector3() : bb.getCenter(new T.Vector3()); return [c.x, c.z];
+        }
+        function paintHud() {
+            const fl = sortedFloors(), f = Hcur.floors[fiCur], i = fl.indexOf(f); hud.querySelector('[data-wk="floor"]').textContent = f.name || 'Étage';
+            hud.querySelector('[data-wk="up"]').disabled = i >= fl.length - 1; hud.querySelector('[data-wk="down"]').disabled = i <= 0;
+            const eye = hud.querySelector('[data-wk="eye"]'); if (document.activeElement !== eye) eye.value = Math.round(eyeM() * 100);
+            hud.querySelector('[data-wk="hint"]').textContent = document.pointerLockElement === el ? 'Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris' : touchy() ? 'Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir' : 'Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir';
+        }
+        function goFloor(dir) {
+            const fl = sortedFloors(), i = fl.indexOf(Hcur.floors[fiCur]), nx = fl[i + dir]; if (!nx) return;
+            fiCur = Hcur.floors.indexOf(nx); rebuild(); buildSegs(); [P.x, P.z] = collide(P.x, P.z); paintHud(); emit('h3-floor', {fi: fiCur});
+        }
+        function startWalk() {
+            if (walk) return; walk = true; measuring = false; clearMeasure(); el.style.cursor = ''; bar.querySelector('[data-h3="measure"]')?.classList.remove('is-on');
+            rebuild(); buildSegs(); const [x, z] = startPos(); [P.x, P.z] = collide(x, z); wyaw = Math.PI; wpitch = 0;
+            hud.hidden = false; mini.hidden = false; cross.hidden = false; joyEl.hidden = !touchy(); const wb = bar.querySelector('[data-h3="walk"]'); if (wb) { wb.textContent = '✋ Arrêter la visite'; wb.classList.add('is-on'); } hud.style.top = `${under()}px`; paintHud(); box2.classList.add('is-walking');
+        }
+        function stopWalk(keepView = false) {
+            if (!walk) return; walk = false; keys.clear(); joy = null; try { if (document.pointerLockElement === el) document.exitPointerLock(); } catch (_) {}
+            hud.hidden = true; mini.hidden = true; cross.hidden = true; joyEl.hidden = true; box2.classList.remove('is-walking'); const wb = bar.querySelector('[data-h3="walk"]'); if (wb) { wb.textContent = '🚶 Visiter'; wb.classList.remove('is-on'); }
+            rebuild(); if (!keepView) home();
+        }
+        hud.addEventListener('click', e => { const k = e.target.closest('button')?.dataset.wk; if (k === 'stop') stopWalk(); else if (k === 'up') goFloor(1); else if (k === 'down') goFloor(-1); else if (k === 'stairup') goFloor(1); else if (k === 'stairdown') goFloor(-1); });
+        hud.addEventListener('change', e => { if (e.target.dataset.wk !== 'eye') return; const v = clamp(Math.round(Number(e.target.value) || 160), 80, 220); e.target.value = v; Hcur.walk = {...(Hcur.walk || {}), eye: v}; emit('h3-change', {what: 'walk'}); });
+        hud.addEventListener('keydown', e => e.stopPropagation()); // taper la hauteur sans marcher
+        function drawMini() {
+            const f = Hcur.floors[fiCur], x = mini.getContext('2d'), S = mini.width; x.clearRect(0, 0, S, S); x.fillStyle = 'rgba(255,255,255,.88)'; x.fillRect(0, 0, S, S);
+            const pts = [...(f.walls || []).flatMap(w => [w.a, w.b]), ...(f.rooms || []).flatMap(r => r.pts || [])]; if (!pts.length) return;
+            const x0 = Math.min(...pts.map(p => p[0])), x1 = Math.max(...pts.map(p => p[0])), y0 = Math.min(...pts.map(p => p[1])), y1 = Math.max(...pts.map(p => p[1])), k = (S - 40) / Math.max(100, x1 - x0, y1 - y0), ox = (S - (x1 - x0) * k) / 2 - x0 * k, oy = (S - (y1 - y0) * k) / 2 - y0 * k, X = v => v * k + ox, Y = v => v * k + oy;
+            mini._map = {k, ox, oy};
+            (f.rooms || []).forEach(r => { if (!r.pts?.length) return; x.beginPath(); r.pts.forEach((p, i) => (i ? x.lineTo(X(p[0]), Y(p[1])) : x.moveTo(X(p[0]), Y(p[1])))); x.closePath(); x.fillStyle = '#efe6d4'; x.fill(); });
+            x.strokeStyle = '#2f2b27'; x.lineCap = 'square'; (f.walls || []).forEach(w => { x.lineWidth = Math.max(2, (w.t || f.wallT || 20) * k); x.beginPath(); x.moveTo(X(w.a[0]), Y(w.a[1])); x.lineTo(X(w.b[0]), Y(w.b[1])); x.stroke(); });
+            x.strokeStyle = '#fbfaf7'; x.lineWidth = Math.max(3, 16 * k); (f.openings || []).forEach(o => { const w = f.walls.find(q => q.id === o.wall); if (!w || o.type === 'window') return; const L = Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]) || 1, ux = (w.b[0] - w.a[0]) / L, uy = (w.b[1] - w.a[1]) / L, c = o.pos * L; x.beginPath(); x.moveTo(X(w.a[0] + ux * (c - o.w / 2)), Y(w.a[1] + uy * (c - o.w / 2))); x.lineTo(X(w.a[0] + ux * (c + o.w / 2)), Y(w.a[1] + uy * (c + o.w / 2))); x.stroke(); });
+            x.font = '700 20px system-ui, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
+            (f.items || []).forEach(it => { if (STAIR.test(`${it.kind || ''} ${it.s2 || ''}`)) { x.fillStyle = '#9a7a5a'; x.fillText('🪜', X(it.x), Y(it.y)); } if (it.mem?.length) { x.fillStyle = '#c9962a'; x.fillText('✦', X(it.x), Y(it.y)); } });
+            (f.rooms || []).forEach(r => { if (!r.mem?.length || !r.pts?.length) return; const xs = r.pts.map(p => p[0]), ys = r.pts.map(p => p[1]); x.fillStyle = '#c9962a'; x.fillText('✦', X((Math.min(...xs) + Math.max(...xs)) / 2), Y((Math.min(...ys) + Math.max(...ys)) / 2)); });
+            const px = X(P.x * 100), py = Y(P.z * 100), fx = -Math.sin(wyaw), fz = -Math.cos(wyaw), a = Math.atan2(fz, fx);
+            x.fillStyle = 'rgba(42,125,225,.25)'; x.beginPath(); x.moveTo(px, py); x.arc(px, py, 46, a - .55, a + .55); x.closePath(); x.fill();
+            x.fillStyle = '#2a7de1'; x.beginPath(); x.arc(px, py, 8, 0, Math.PI * 2); x.fill(); x.strokeStyle = '#fff'; x.lineWidth = 3; x.stroke();
+            const n = (Number(sunOf(Hcur).north) || 0) * DEG; x.save(); x.translate(S - 26, 26); x.rotate(n); x.fillStyle = '#c0392b'; x.beginPath(); x.moveTo(0, -16); x.lineTo(7, 6); x.lineTo(-7, 6); x.closePath(); x.fill(); x.fillStyle = '#333'; x.font = '700 15px system-ui'; x.fillText('N', 0, 17); x.restore();
+        }
+        mini.addEventListener('click', e => { const m = mini._map; if (!m) return; const r = mini.getBoundingClientRect(), sx = (e.clientX - r.left) / r.width * mini.width, sy = (e.clientY - r.top) / r.height * mini.height; [P.x, P.z] = collide(M((sx - m.ox) / m.k), M((sy - m.oy) / m.k)); });
+        // 🕹 le joystick (tablette) : la direction et la force
+        joyEl.addEventListener('pointerdown', e => { e.preventDefault(); e.stopPropagation(); try { joyEl.setPointerCapture(e.pointerId); } catch (_) {} const r = joyEl.getBoundingClientRect(); joy = {cx: r.left + r.width / 2, cy: r.top + r.height / 2, R: r.width / 2, x: 0, y: 0}; joyMove(e); });
+        const joyMove = e => { if (!joy) return; let dx = (e.clientX - joy.cx) / joy.R, dy = (e.clientY - joy.cy) / joy.R; const l = Math.hypot(dx, dy); if (l > 1) { dx /= l; dy /= l; } joy.x = dx; joy.y = dy; joyEl.querySelector('i').style.transform = `translate(${dx * joy.R * .55}px, ${dy * joy.R * .55}px)`; };
+        joyEl.addEventListener('pointermove', joyMove); const joyEnd = () => { joy = null; joyEl.querySelector('i').style.transform = ''; }; joyEl.addEventListener('pointerup', joyEnd); joyEl.addEventListener('pointercancel', joyEnd);
+        document.addEventListener('pointerlockchange', () => { if (document.pointerLockElement !== el) unlockAt = performance.now(); if (walk) paintHud(); }, sig);
+        document.addEventListener('mousemove', e => { if (!walk || document.pointerLockElement !== el) return; wyaw -= e.movementX * .0024; wpitch = clamp(wpitch - e.movementY * .0024, -1.3, 1.3); }, sig);
+
+        rebuild(); home(); paintSunBox();
         // souris : tourner, déplacer, approcher ; en visite : regarder
         let dragM = null; const el = renderer.domElement;
         el.addEventListener('contextmenu', e => e.preventDefault());
-        el.addEventListener('pointerdown', e => { el.setPointerCapture(e.pointerId); dragM = {x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, pan: e.button === 2 || e.shiftKey}; });
+        el.addEventListener('pointerdown', e => { try { el.setPointerCapture(e.pointerId); } catch (_) {} dragM = {x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, pan: e.button === 2 || e.shiftKey}; });
         el.addEventListener('pointermove', e => { if (!dragM) return; const dx = e.clientX - dragM.x, dy = e.clientY - dragM.y; dragM.x = e.clientX; dragM.y = e.clientY;
-            if (walk) { yaw -= dx * .004; pitch = clamp(pitch - dy * .004, -1.2, 1.2); return; }
+            if (walk) { if (document.pointerLockElement !== el) { wyaw -= dx * .004; wpitch = clamp(wpitch - dy * .004, -1.3, 1.3); } return; }
             if (dragM.pan) { const right = new T.Vector3(Math.cos(yaw), 0, -Math.sin(yaw)), fwd = new T.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), k = dist * .0018; target.addScaledVector(right, -dx * k).addScaledVector(fwd, dy * k); }
             else { yaw -= dx * .006; pitch = clamp(pitch + dy * .005, .05, 1.5); } });
-        el.addEventListener('pointerup', e => { const d = dragM; dragM = null; if (measuring && d && e.button === 0 && Math.hypot(e.clientX - d.x0, e.clientY - d.y0) < 5) pickMeasure(e); });
+        el.addEventListener('pointerup', e => { const d = dragM; dragM = null; if (!d || e.button !== 0 || Math.hypot(e.clientX - d.x0, e.clientY - d.y0) >= 5) return;
+            const locked = document.pointerLockElement === el;
+            if (pickMemory(locked ? null : e)) { if (locked) document.exitPointerLock(); return; }
+            if (measuring) return pickMeasure(e);
+            if (walk && !locked && e.pointerType === 'mouse') { try { const p = el.requestPointerLock?.(); p?.catch?.(() => {}); } catch (_) {} } });
         el.addEventListener('wheel', e => { e.preventDefault(); if (walk) return; dist = clamp(dist * Math.exp(e.deltaY * .0012), 1.5, 200); }, {passive: false});
-        const keys = new Set(); const kd = e => { if (e.target.closest?.('input, textarea')) return; keys.add(e.key.toLowerCase()); }, ku = e => keys.delete(e.key.toLowerCase());
-        document.addEventListener('keydown', kd); document.addEventListener('keyup', ku);
+        const keys = new Set();
+        const kd = e => { if (e.target.closest?.('input, textarea, select') || !box2.isConnected || box2.closest('dialog')?.querySelector('dialog[open]')) return; const k = e.key.toLowerCase(); keys.add(k);
+            if (walk && !e.metaKey && !e.ctrlKey) { if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' ', 'pageup', 'pagedown'].includes(k)) e.preventDefault(); if (k === 'e' || k === 'pageup') goFloor(1); if (k === 'c' || k === 'pagedown') goFloor(-1); } },
+            ku = e => keys.delete(e.key.toLowerCase()), blur = () => keys.clear();
+        document.addEventListener('keydown', kd); document.addEventListener('keyup', ku); window.addEventListener('blur', blur);
         bar.addEventListener('input', e => { const k = e.target.dataset.h3; if (k in opts) { opts[k] = e.target.checked; if (k === 'roof') { Hcur.roof = {...(Hcur.roof || {}), on: opts.roof}; box2.dispatchEvent(new CustomEvent('h3-roof', {bubbles: true})); } rebuild(); } }, sig);
         bar.addEventListener('click', e => { const bt = e.target.closest('button'), k = bt?.dataset.h3;
-            if (k === 'measure') { measuring = !measuring; bt.classList.toggle('is-on', measuring); el.style.cursor = measuring ? 'crosshair' : ''; if (!measuring) clearMeasure(); return; }
-            if (k === 'view') { walk = false; const v = bt.dataset.v; home(); if (v === 'top') { pitch = 1.5; yaw = 0; } else if (v === 'front') { pitch = .06; yaw = 0; } else { pitch = .06; yaw = Math.PI / 2; } return; }
-            if (k === 'home') home(); if (k === 'walk') { walk = !walk; e.target.textContent = walk ? '✋ Arrêter la visite' : '🚶 Visiter'; if (walk) { const f = Hcur.floors[fiCur], bb = new T.Box3().setFromObject(house), c = bb.getCenter(new T.Vector3()); cam.position.set(c.x, floorBase(Hcur, f) + 1.6, c.z); yaw = Math.PI; pitch = 0; } else home(); } }, sig);
-        let raf = 0, last = performance.now();
-        const loop = now => { const dt = Math.min(.05, (now - last) / 1000); last = now;
-            if (walk) { const sp = (keys.has('shift') ? 3.2 : 1.6) * dt, f2 = new T.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), r2 = new T.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
-                if (keys.has('arrowup') || keys.has('z') || keys.has('w')) cam.position.addScaledVector(f2, sp); if (keys.has('arrowdown') || keys.has('s')) cam.position.addScaledVector(f2, -sp);
-                if (keys.has('arrowleft') || keys.has('q') || keys.has('a')) cam.position.addScaledVector(r2, -sp); if (keys.has('arrowright') || keys.has('d')) cam.position.addScaledVector(r2, sp);
-                cam.lookAt(cam.position.x - Math.sin(yaw) * Math.cos(pitch), cam.position.y + Math.sin(pitch), cam.position.z - Math.cos(yaw) * Math.cos(pitch)); }
-            else place();
+            if (k === 'measure') { if (walk) stopWalk(); measuring = !measuring; bt.classList.toggle('is-on', measuring); el.style.cursor = measuring ? 'crosshair' : ''; if (!measuring) clearMeasure(); return; }
+            if (k === 'sun') { sunBox.style.top = `${under()}px`; sunBox.hidden = !sunBox.hidden; bt.classList.toggle('is-on', !sunBox.hidden); if (!sunBox.hidden) { paintSunBox(); applySun(); } return; }
+            if (k === 'view') { const v = bt.dataset.v; home(); if (v === 'top') { pitch = 1.5; yaw = 0; } else if (v === 'front') { pitch = .06; yaw = 0; } else { pitch = .06; yaw = Math.PI / 2; } return; }
+            if (k === 'home') home(); if (k === 'walk') { if (walk) stopWalk(); else startWalk(); } }, sig);
+        let raf = 0, last = performance.now(), stairT = 0;
+        const loop = now => { const dt = Math.min(walk ? .1 : .05, (now - last) / 1000); last = now; // en visite : même vitesse si l'image est lente
+            if (walk) {
+                const f = Hcur.floors[fiCur], sp = (keys.has('shift') ? 3.4 : 1.5) * dt; let fw = 0, st = 0;
+                if (keys.has('arrowup') || keys.has('z') || keys.has('w')) fw += 1; if (keys.has('arrowdown') || keys.has('s')) fw -= 1;
+                if (keys.has('arrowleft') || keys.has('q') || keys.has('a')) st -= 1; if (keys.has('arrowright') || keys.has('d')) st += 1;
+                if (joy) { fw -= joy.y; st += joy.x; }
+                if (fw || st) { const l = Math.max(1, Math.hypot(fw, st)), fx = -Math.sin(wyaw), fz = -Math.cos(wyaw), rx = Math.cos(wyaw), rz = -Math.sin(wyaw); [P.x, P.z] = collide(P.x + (fx * fw + rx * st) / l * sp, P.z + (fz * fw + rz * st) / l * sp); }
+                cam.position.set(P.x, floorBase(Hcur, f) + eyeM(), P.z);
+                cam.lookAt(P.x - Math.sin(wyaw) * Math.cos(wpitch), cam.position.y + Math.sin(wpitch), P.z - Math.cos(wyaw) * Math.cos(wpitch));
+                if (now - stairT > 120) { stairT = now; drawMini(); const fl = sortedFloors(), i = fl.indexOf(f), up = stairAt(f, P.x, P.z) && fl[i + 1], down = fl[i - 1] && stairAt(fl[i - 1], P.x, P.z), s2 = up ? 1 : down ? -1 : 0;
+                    if (s2 !== onStair) { onStair = s2; const sb = hud.querySelector('[data-wk="stair"]'); sb.hidden = !s2; sb.innerHTML = s2 ? `🪜 Un escalier : ${up ? '<button type="button" class="button small" data-wk="stairup">⬆ Monter (E)</button>' : ''}${down ? '<button type="button" class="button small secondary" data-wk="stairdown">⬇ Descendre (C)</button>' : ''}` : ''; } }
+            } else place();
             placeLabel(); renderer.render(scene, cam); raf = requestAnimationFrame(loop); };
         raf = requestAnimationFrame(loop);
         const ro = new ResizeObserver(() => { renderer.setSize(W(), Hh()); cam.aspect = W() / Hh(); cam.updateProjectionMatrix(); }); ro.observe(box2);
-        return {update: (H2, fi2) => { Hcur = H2; fiCur = fi2; opts.roof = !!H2.roof?.on; const rb = bar.querySelector('[data-h3="roof"]'); if (rb) rb.checked = opts.roof; rebuild(); },
+        return {update: (H2, fi2) => { Hcur = H2; if (!walk) fiCur = fi2; opts.roof = !!H2.roof?.on; const rb = bar.querySelector('[data-h3="roof"]'); if (rb) rb.checked = opts.roof; rebuild(); if (walk) buildSegs(); paintSunBox(); },
             shot: () => new Promise(ok => { renderer.render(scene, cam); renderer.domElement.toBlob(ok, 'image/png'); }),
-            destroy: () => { cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); renderer.dispose(); box2.innerHTML = ''; barAc.abort(); if (!ownBar) bar.hidden = true; }};
+            setGeo: g => { geo = g && Number.isFinite(+g.lat) && Number.isFinite(+g.lon) && (g.lat !== '' && g.lon !== '') ? {lat: +g.lat, lon: +g.lon} : null; applySun(); },
+            setSun: () => { paintSunBox(); applySun(); }, sunInfo: () => applySun(),
+            walking: () => walk, justUnlocked: () => performance.now() - unlockAt < 500, startWalk, stopWalk: () => stopWalk(), goFloor,
+            walkState: () => ({x: P.x, z: P.z, yaw: wyaw, fi: fiCur, stair: onStair}), walkTo: (x, z) => { [P.x, P.z] = collide(x, z); },
+            memPoints: () => { const r = el.getBoundingClientRect(), out = []; house.traverse(o => { if (o.isSprite && o.userData.mem) { const v = o.getWorldPosition(new T.Vector3()).project(cam); if (v.z < 1) out.push({...o.userData.mem, x: r.left + (v.x + 1) / 2 * r.width, y: r.top + (1 - v.y) / 2 * r.height}); } }); return out; }, // où sont les ✦ à l'écran
+            walkKeys: keys, setWalkYaw: v => { wyaw = v; },
+            destroy: () => { stopPlay(); cancelAnimationFrame(raf); ro.disconnect(); try { if (document.pointerLockElement === el) document.exitPointerLock(); } catch (_) {} document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); window.removeEventListener('blur', blur); renderer.dispose(); box2.innerHTML = ''; box2.classList.remove('is-walking'); barAc.abort(); if (!ownBar) { bar.hidden = true; bar.querySelectorAll('.is-on').forEach(b => b.classList.remove('is-on')); } }};
     }
-
     /** l'aperçu en 3D d'un seul objet (fenêtre « Créer un objet ») : une image, faite avec un seul rendu partagé */
     let snapR = null;
     async function snapshot(it, W = 180, Hh = 150) {
@@ -351,5 +566,5 @@
         snapR.render(sc, cam); const url = snapR.domElement.toDataURL('image/png');
         sc.traverse(o => { if (o.isMesh) o.geometry?.dispose?.(); }); return url;
     }
-    ext.house3d = {mount, inspect, inspectBuf, parseModel, snapshot};
+    ext.house3d = {mount, inspect, inspectBuf, parseModel, snapshot, sunAt, dayLabel, hourLabel, dayOfYear};
 })();

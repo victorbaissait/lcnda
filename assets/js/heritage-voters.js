@@ -66,7 +66,7 @@
         if (!votes.length) return '';
         const years = votes.map(v => Number(v.year)).filter(Boolean);
         return `<h5>${plural(votes.length, 'vote noté', 'votes notés')}${years.length ? ` (${Math.min(...years)}${Math.max(...years) !== Math.min(...years) ? '–' + Math.max(...years) : ''})` : ''}</h5>
-            <div class="data-table-wrap"><table class="data-table sortable-table"><thead><tr><th><button data-sort-column="0">Date</button></th><th><button data-sort-column="1">Élection</button></th><th>Tour</th><th><button data-sort-column="3">Lieu</button></th><th>Tampon, case</th><th>Remarque</th></tr></thead><tbody>
+            <div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="vote"><thead><tr><th><button data-sort-column="0">Date</button></th><th><button data-sort-column="1">Élection</button></th><th>Tour</th><th><button data-sort-column="3">Lieu</button></th><th>Tampon, case</th><th>Remarque</th></tr></thead><tbody>
             ${votes.map(v => `<tr><td data-sort-value="${esc(v.sort_key || v.year || 9999)}">${esc(v.date_text || '—')}</td><td data-sort-value="${esc(v.election_label || '')}">${esc(v.election_label || elections[v.election] || '—')}</td><td>${Number(v.round) ? `${v.round}${Number(v.round) === 1 ? 'er' : 'e'} tour` : ''}</td><td data-sort-value="${esc(v.place_text || '')}">${esc(v.place_text || '')}</td><td>${esc(v.stamp || '')}</td><td>${esc(v.note || '')}</td></tr>`).join('')}</tbody></table></div>`;
     }
     function voterHtml(d, person, world) {
@@ -118,7 +118,7 @@
         <label class="span-2">Source, cote<input name="c_source" value="${esc(c.source || '')}" placeholder="papiers de famille ; AD Nord 3 M 123 (listes électorales)"></label>
         <label class="span-2">Remarques<textarea name="c_note" rows="2">${esc(c.note || '')}</textarea></label></div>
         <div class="h-row-actions"><button type="button" class="icon-button danger" data-h-voter-del title="Retirer cette carte">×</button></div></fieldset>`;
-    const voteRow = (v = {}) => `<div class="h-voter-vote"><input name="v_date" value="${esc(v.date_text || '')}" placeholder="11 mai 1924" aria-label="Date">
+    const voteRow = (v = {}) => `<div class="h-voter-vote"><input name="v_date" data-ui-date="nocal" value="${esc(v.date_text || '')}" placeholder="11 mai 1924" aria-label="Date">
         <select name="v_election" aria-label="Élection"><option value="">Élection…</option>${Object.entries(elections).map(([k, l]) => `<option value="${k}" ${v.election === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
         <select name="v_round" aria-label="Tour"><option value="0">—</option><option value="1" ${Number(v.round) === 1 ? 'selected' : ''}>1er tour</option><option value="2" ${Number(v.round) === 2 ? 'selected' : ''}>2e tour</option></select>
         <input name="v_place" value="${esc(v.place_text || '')}" placeholder="Lieu (si autre)" aria-label="Lieu"><input name="v_stamp" value="${esc(v.stamp || '')}" placeholder="Tampon, case n°" aria-label="Tampon">
@@ -223,7 +223,7 @@
         const regions = world ? [...new Set(world.suffrage.countries.map(c => c.region))].sort((a, b) => a.localeCompare(b, 'fr')) : [];
         A().$('#workspace').innerHTML = `<section class="page collection-page h-voters">${header('LISTES', 'Cartes d’électeur', 'Les électeurs de la famille, leurs cartes et les dates où ils ont voté. Pour en ajouter : fiche → Identité → « Blocs à afficher sur la fiche » → 🗳️ Cartes d’électeur.')}
             ${people.length ? `<p class="muted">${plural(people.length, 'électeur', 'électeurs')} · ${plural(people.reduce((n, r) => n + r.cards.length, 0), 'carte', 'cartes')} · ${plural(votes, 'vote noté', 'votes notés')}</p>
-            <div class="data-table-wrap"><table class="data-table sortable-table"><thead><tr>${['Personne', 'Commune(s)', 'Cartes', 'Votes', 'Premier vote ou carte', 'Dernier'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}<th>Photos</th></tr></thead><tbody>
+            <div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="électeur"><thead><tr>${['Personne', 'Commune(s)', 'Cartes', 'Votes', 'Premier vote ou carte', 'Dernier'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}<th>Photos</th></tr></thead><tbody>
                 ${people.map(r => `<tr><td data-sort-value="${esc(pname(r.person).toLowerCase())}">${personLink(r.person.id, pname(r.person))}${r.person.birth_year ? ` <small class="muted">(${esc(r.person.birth_year)}–${esc(r.person.death_year || '')})</small>` : ''}</td><td data-sort-value="${esc((r.communes[0] || '').toLowerCase())}">${esc(r.communes.join(', ') || '—')}</td><td data-sort-value="${r.cards.length}">${r.cards.length}</td><td data-sort-value="${r.votes.length}">${r.votes.length}</td><td data-sort-value="${r.first || 9999}">${r.first || '—'}</td><td data-sort-value="${r.last || 0}">${r.last || '—'}</td><td>${ext.thumbs ? ext.thumbs('voters-list-' + r.person.id, (r.media || []).slice(0, 4)) : ''}</td></tr>`).join('')}</tbody></table></div>`
             : A().emptyState({icon: '🗳️', text: 'Aucune carte d’électeur pour l’instant', hint: 'Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur).'})}
             ${world ? `<section class="maintenance-panel h-suffrage"><h3>🌍 Le droit de vote dans le monde</h3>
@@ -232,7 +232,7 @@
                 <div data-h-suffrage-map>${mapSvg(world, st.hSuffrage.who, st.hSuffrage.atYear, st.hSuffrage.open)}</div><div data-h-suffrage-legend>${legendHtml(st.hSuffrage.who, st.hSuffrage.atYear)}</div>
                 <div data-h-suffrage-info>${countryInfo(world.byId[st.hSuffrage.open]) || '<p class="muted">Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…).</p>'}</div>
                 <details class="h-suffrage-list" ${st.hSuffrage.listOpen ? 'open' : ''}><summary><strong>Tous les pays, dans l’ordre que tu veux</strong> <span class="muted">(${world.suffrage.countries.length})</span></summary>
-                    <div class="h-suffrage-controls"><label>Trier par <select data-h-suffrage-sort>${Object.entries(SORTS).map(([k, [l]]) => `<option value="${k}" ${st.hSuffrage.sort === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                    <div class="h-suffrage-controls"><span data-h-suffrage-sortbar></span>
                     <label>Région <select data-h-suffrage-region><option value="">Toutes</option>${regions.map(r => `<option ${st.hSuffrage.region === r ? 'selected' : ''}>${esc(r)}</option>`).join('')}</select></label></div>
                     <div data-h-suffrage-rows>${countryListHtml(world, st.hSuffrage.sort, st.hSuffrage.region)}</div></details>
                 <p class="muted"><small>${esc(world.suffrage.source)} Fond de carte : Natural Earth (domaine public) ; les tout petits pays ne sont que dans la liste.</small></p></section>` : '<p class="muted">La carte du droit de vote n’a pas pu être chargée.</p>'}</section>`;
@@ -257,7 +257,11 @@
         });
         const rows = ws.querySelector('[data-h-suffrage-rows]');
         ws.querySelector('.h-suffrage-list').addEventListener('toggle', e => { st.hSuffrage.listOpen = e.target.open; });
-        ws.querySelector('[data-h-suffrage-sort]').addEventListener('change', e => { st.hSuffrage.sort = e.target.value; rows.innerHTML = countryListHtml(world, st.hSuffrage.sort, st.hSuffrage.region); });
-        ws.querySelector('[data-h-suffrage-region]').addEventListener('change', e => { st.hSuffrage.region = e.target.value; rows.innerHTML = countryListHtml(world, st.hSuffrage.sort, st.hSuffrage.region); });
+        // C6 : « N pays · Trier : [menu] »
+        const countOf = () => world.suffrage.countries.filter(c => !st.hSuffrage.region || c.region === st.hSuffrage.region).length;
+        const UI = window.LCNDA_UI, bar = UI?.sortBar ? UI.sortBar({count: countOf(), label: 'pays', options: Object.entries(SORTS).map(([k, [l]]) => [k, l]), value: st.hSuffrage.sort,
+            onChange: v => { st.hSuffrage.sort = v; rows.innerHTML = countryListHtml(world, st.hSuffrage.sort, st.hSuffrage.region); }}) : null;
+        if (bar) ws.querySelector('[data-h-suffrage-sortbar]').replaceWith(bar);
+        ws.querySelector('[data-h-suffrage-region]').addEventListener('change', e => { st.hSuffrage.region = e.target.value; rows.innerHTML = countryListHtml(world, st.hSuffrage.sort, st.hSuffrage.region); bar?.setCount(countOf()); });
     };
 })();

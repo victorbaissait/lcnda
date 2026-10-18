@@ -180,7 +180,15 @@ function house_get(PDO $pdo, int $id): array
     houses_ensure($pdo);
     $s = $pdo->prepare('SELECT * FROM houses WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
     if (!$r) { throw new RuntimeException('Maison introuvable.'); }
+    // ☀️ les coordonnées du lieu (lumière du jour de la vue 3D) ; sans lieu : la France par défaut, côté navigateur
+    $lat = null; $lon = null;
+    if ((int) $r['place_id'] > 0) {
+        try { $p = $pdo->prepare('SELECT latitude, longitude FROM places WHERE id=?'); $p->execute([(int) $r['place_id']]); $c = $p->fetch();
+            if ($c && is_numeric($c['latitude']) && is_numeric($c['longitude']) && abs((float) $c['latitude']) <= 90 && abs((float) $c['longitude']) <= 180) { $lat = round((float) $c['latitude'], 5); $lon = round((float) $c['longitude'], 5); }
+        } catch (Throwable $_) {}
+    }
     return ['id' => (int) $r['id'], 'name' => $r['name'], 'place_id' => (int) $r['place_id'], 'place_text' => $r['place_text'], 'period' => $r['period'],
+        'place_lat' => $lat, 'place_lon' => $lon,
         'house' => json_decode((string) $r['data_json'], true) ?: new stdClass(), 'updated_at' => $r['updated_at']];
 }
 

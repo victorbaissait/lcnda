@@ -11,7 +11,8 @@
     const toast = (...a) => A().toast(...a);
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
-    const TAB_KEY = 'genealogie-edittools-tab';
+    const TAB_KEY = 'genealogie-edittools-tab', VIEW_KEY = 'genealogie-edittools-view', SORT_KEY = 'genealogie-edittools-sort', STEP = 24;
+    const UI = () => window.LCNDA_UI;
     const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T') + (String(d || '').includes('T') ? '' : 'Z')); return isNaN(x) ? '' : x.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'}); };
     const fmtDur = s => { s = Math.round(Number(s) || 0); return s ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` : ''; };
 
@@ -34,7 +35,7 @@
             open: id => ext.openRetouchProject?.(id),
             create: () => ext.pickRetouch?.(),
             rename: (id, name) => post('rename_retouch_project', {id, name}),
-            remove: id => post('delete_retouch_project', {id}), createLabel: '＋ Nouvelle retouche', extra: '<button type="button" class="button secondary" data-et-restore title="Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas">🧭 Restaurer une vieille photo</button>'},
+            remove: id => post('delete_retouch_project', {id}), createLabel: '＋ Nouvelle retouche', extra: '<button type="button" class="button secondary" data-et-restore title="Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas">🧭 Restaurer une vieille photo</button><button type="button" class="button secondary" data-et-idp title="Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait">🪪 Portraits d’identité</button>'},
         {key: 'vector', icon: '✒️', label: 'Dessin vectoriel', what: 'dessin',
             load: async () => ((await api('vector_docs')).docs || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">✒️</span>', info: `${d.objects} objet${d.objects > 1 ? 's' : ''}`})),
             open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
@@ -68,12 +69,39 @@
                 try { localStorage.setItem(ORDER_KEY, JSON.stringify({order: li.map(x => x.dataset.k), hidden})); } catch (_) {} onDone?.(); }});
     }
     ext.arrangeEditTools = arrangeTools;
+    // les cartes des projets (C6) : grande vignette, nom, détails, date, boutons
+    const ensureCss = () => { if (document.getElementById('h-et-css')) return; const st = document.createElement('style'); st.id = 'h-et-css'; st.textContent = `
+.h-et-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.h-et-view.segmented{display:inline-grid;grid-template-columns:auto auto;margin:0 4px 0 0;vertical-align:middle}
+.h-et-view.segmented button{min-height:32px;padding:0 14px;font-size:12.5px;font-weight:800;color:var(--ink,#080808);background:var(--white,#fff);border:2px solid var(--ink,#080808)}
+.h-et-view.segmented button.is-active{color:#fff;background:var(--blue-bright,#055dff)}
+.ui-sortbar{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
+.h-et-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:12px;padding:0 4px 4px 0}
+.h-et-card{display:flex;flex-direction:column;border:2px solid var(--ink,#080808);background:var(--white,#fff);box-shadow:4px 4px 0 var(--blue-bright,#055dff);overflow:hidden;min-width:0}
+.h-et-card.is-disabled{opacity:.6}
+.h-et-cardthumb{display:flex;align-items:center;justify-content:center;height:150px;background:#f1f2f4;border:0;border-bottom:2px solid var(--ink,#080808);padding:0;cursor:pointer;overflow:hidden;width:100%;box-shadow:none}
+.h-et-cardthumb img{width:100%;height:100%;object-fit:cover}
+.h-et-cardthumb .h-et-ico,.h-et-cardthumb .h-et-cover{font-size:46px}
+.h-et-cardbody{display:grid;gap:2px;padding:8px 10px 4px;min-width:0}
+.h-et-cardname{font-weight:800;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-et-card .h-et-act{display:flex;gap:6px;padding:6px 10px 10px;margin-top:auto;align-items:center}
+.h-et-page .ui-more{margin:14px auto 0;display:block}
+@media (max-width:520px){.h-et-cards{grid-template-columns:1fr;gap:14px}.h-et-cardthumb{height:170px}}
+:root[data-theme="dark"] .h-et-view.segmented button{color:#eee;background:#1f1f1f;border-color:#eee}
+:root[data-theme="dark"] .h-et-view.segmented button.is-active{color:#fff;background:var(--blue-bright,#055dff)}
+:root[data-theme="dark"] .h-et-card{background:#242424;border-color:#e8e8e8;box-shadow:4px 4px 0 #4d9fff}
+:root[data-theme="dark"] .h-et-cardthumb{background:#1b1b1b;border-color:#e8e8e8}`; document.head.appendChild(st); };
     ext.lists = ext.lists || {};
     ext.lists.edit_tools = async token => {
         const S = A().state, ws = A().$('#workspace');
         let tab = (() => { try { return localStorage.getItem(TAB_KEY) || 'montage'; } catch (_) { return 'montage'; } })();
         if (!allTools().some(t => t.key === tab)) tab = 'montage';
-        let q = '', sort = 'recent', rows = [], loading = false;
+        let q = '', sort = (() => { try { return localStorage.getItem(SORT_KEY) || 'recent'; } catch (_) { return 'recent'; } })(), rows = [], loading = false, shown = STEP;
+        // « Liste | Fiches » retenu pour chaque outil : {montage: 'list', retouch: 'cards', …}
+        const views = () => { try { const v = JSON.parse(localStorage.getItem(VIEW_KEY) || '{}'); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch (_) { return {}; } };
+        const viewOf = k => (views()[k] === 'cards' ? 'cards' : 'list');
+        let view = viewOf(tab);
+        if (!['recent', 'old', 'az', 'za'].includes(sort)) sort = 'recent';
         const tool = () => allTools().find(t => t.key === tab);
         const visible = () => {
             const n = s => String(s || '').toLocaleLowerCase('fr').normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -82,26 +110,40 @@
             const by = {recent: (a, b) => String(b.date).localeCompare(String(a.date)), old: (a, b) => String(a.date).localeCompare(String(b.date)), az: (a, b) => a.name.localeCompare(b.name, 'fr', {sensitivity: 'base'}), za: (a, b) => b.name.localeCompare(a.name, 'fr', {sensitivity: 'base'})}[sort];
             return list.sort(by);
         };
+        const acts = r => `<div class="h-et-act"><button type="button" class="button small" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>Ouvrir</button><button type="button" class="icon-button small" data-et-ren="${r.id}" title="Renommer" aria-label="Renommer">✎</button><button type="button" class="icon-button small" data-et-del="${r.id}" title="Supprimer le projet" aria-label="Supprimer le projet">🗑</button></div>`;
         const drawList = () => {
             const box = ws.querySelector('[data-et-list]'); if (!box) return;
-            const t = tool(), list = visible();
-            ws.querySelector('[data-et-count]').textContent = loading ? '…' : `${list.length}${list.length !== rows.length ? ` sur ${rows.length}` : ''} projet${rows.length > 1 ? 's' : ''}`;
-            box.innerHTML = loading ? '<div class="loading-block">Chargement…</div>' : list.length ? `<div class="data-table-wrap"><table class="data-table h-et-table"><thead><tr><th></th><th>Nom</th><th>Détails</th><th>Modifié le</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td class="h-et-thumb">${r.thumb}</td><td><button type="button" class="table-link" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button></td><td class="muted">${esc(r.info)}</td><td>${esc(fmtDate(r.date))}</td>
-                <td><div class="h-et-act"><button type="button" class="button small" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>Ouvrir</button><button type="button" class="button small secondary" data-et-ren="${r.id}" title="Renommer">✎</button><button type="button" class="button small secondary" data-et-del="${r.id}" title="Supprimer le projet">🗑</button></div></td></tr>`).join('')}</tbody></table></div>`
-                : rows.length ? A().empty('Aucun projet ne correspond à la recherche', {icon: '🔎', hint: 'Change les mots cherchés.'}) : A().empty(`Aucun projet de ${t.what} pour l’instant`, {icon: '🗂️', action: {label: t.createLabel, attrs: 'data-et-new'}});
+            const t = tool(), list = visible(), part = list.slice(0, shown), U = UI();
+            const bar = ws.querySelector('[data-et-sortbar]'); if (bar?.setCount) bar.setCount(loading ? 0 : list.length);
+            const cnt = ws.querySelector('[data-et-of]'); if (cnt) cnt.textContent = !loading && list.length !== rows.length ? `sur ${rows.length}` : '';
+            if (loading) { box.innerHTML = U?.skeleton ? U.skeleton(4) : '<div class="loading-block">Chargement…</div>'; return; }
+            box.innerHTML = list.length ? (view === 'cards'
+                ? `<div class="h-et-cards">${part.map(r => `<article class="h-et-card${r.disabled ? ' is-disabled' : ''}"><button type="button" class="h-et-cardthumb" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''} title="Ouvrir « ${esc(r.name)} »">${r.thumb}</button><div class="h-et-cardbody"><button type="button" class="table-link h-et-cardname" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button><small class="muted">${esc(r.info)}</small><small class="muted">Modifié le ${esc(fmtDate(r.date))}</small></div>${acts(r)}</article>`).join('')}</div>`
+                : `<div class="data-table-wrap"><table class="data-table h-et-table"><thead><tr><th></th><th>Nom</th><th>Détails</th><th>Modifié le</th><th></th></tr></thead><tbody>${part.map(r => `<tr><td class="h-et-thumb">${r.thumb}</td><td><button type="button" class="table-link" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button></td><td class="muted">${esc(r.info)}</td><td>${esc(fmtDate(r.date))}</td><td>${acts(r)}</td></tr>`).join('')}</tbody></table></div>`)
+                : rows.length ? A().emptyState({icon: '🔎', text: `Aucun projet pour « ${q.trim()} »`, hint: 'Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails).', action: {label: '× Effacer la recherche', attrs: 'data-et-clear'}})
+                    : A().emptyState({icon: t.icon || '🗂️', text: `Aucun projet de ${t.what} pour l’instant`, hint: 'Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard.', action: {label: t.createLabel, attrs: 'data-et-new'}});
+            if (list.length > shown && U?.moreButton) box.appendChild(U.moreButton({remaining: list.length - shown, step: STEP, onClick: () => { shown += STEP; drawList(); }}));
         };
         const load = async () => {
-            loading = true; drawList();
+            loading = true; shown = STEP; drawList();
             try { rows = await tool().load(); } catch (err) { rows = []; toast(err.message, 'error'); }
             loading = false; if (token !== S.workspaceToken || S.module !== 'listes') return; drawList();
         };
         const again = () => { if (S.module === 'listes' && S.listType === 'edit_tools') load(); };
         const drawPage = () => {
-            const t = tool();
+            const t = tool(), U = UI();
             ws.innerHTML = `<section class="page collection-page h-et-page" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>🛠️ Outils de modification</h2><p>Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet.</p></div><div class="page-actions"><button type="button" class="button small secondary" data-et-arrange title="L’ordre des outils, et ceux qu’on montre">⚙️ Ranger les outils</button></div></header>
                 <div class="segmented enquetes-tab-toggle h-et-tabs">${allTools().map(x => `<button type="button" class="${x.key === tab ? 'is-active ' : ''}enquetes-tab-btn" data-et-tab="${x.key}"><span class="enquetes-tab-icon" aria-hidden="true">${x.icon}</span><span>${esc(x.label)}</span></button>`).join('')}</div>
-                <div class="h-et-bar"><input type="search" data-et-q placeholder="Chercher un projet (nom, photo, détails)…" value="${esc(q)}"><label class="h-et-sort">Trier <select data-et-sort>${[['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'Nom A → Z'], ['za', 'Nom Z → A']].map(([k, l]) => `<option value="${k}" ${k === sort ? 'selected' : ''}>${l}</option>`).join('')}</select></label><span class="muted" data-et-count></span><span class="spacer"></span><button type="button" class="button" data-et-new>${esc(t.createLabel)}</button>${t.extra || ''}</div>
+                <div class="h-et-bar"><input type="search" data-et-q placeholder="Chercher un projet… (nom, photo, détails)" value="${esc(q)}"><span data-et-sortslot></span><small class="muted" data-et-of></small><span class="spacer"></span><button type="button" class="button" data-et-new>${esc(t.createLabel)}</button>${t.extra || ''}</div>
                 <div data-et-list></div></section>`;
+            ensureCss();
+            view = viewOf(tab);
+            const slot = ws.querySelector('[data-et-sortslot]');
+            // « Liste | Fiches » (onglet segmenté de l'app), juste avant « Trier »
+            const seg = document.createElement('span'); seg.className = 'segmented h-et-view'; seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', 'Affichage des projets');
+            seg.innerHTML = `<button type="button" class="${view === 'list' ? 'is-active' : ''}" data-et-view="list" aria-pressed="${view === 'list'}" title="En tableau : vignette, nom, détails, date">Liste</button><button type="button" class="${view === 'cards' ? 'is-active' : ''}" data-et-view="cards" aria-pressed="${view === 'cards'}" title="En fiches : une carte par projet, avec une grande vignette">Fiches</button>`;
+            if (U?.sortBar) { const bar = U.sortBar({count: rows.length, label: 'projet', value: sort, onChange: v => { sort = v; shown = STEP; try { localStorage.setItem(SORT_KEY, v); } catch (_) {} drawList(); }}); bar.dataset.etSortbar = ''; slot.replaceWith(bar); const lab = bar.querySelector('.ui-sortbar-sort'); if (lab) lab.before(seg); else bar.appendChild(seg); }
+            else slot.outerHTML = seg.outerHTML + `<label class="h-et-sort">Trier <select data-et-sort>${[['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']].map(([k, l]) => `<option value="${k}" ${k === sort ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
             load();
         };
         drawPage();
@@ -114,6 +156,9 @@
                 if (d.etBlank !== undefined) return ext.newLayoutDoc?.('blank', again);
                 if (d.etStudio !== undefined) return ext.openLayoutStudio?.();
                 if (d.etRestore !== undefined) return ext.openRestore?.();
+                if (d.etIdp !== undefined) return ext.openIdPhotoBatch?.();
+                if (d.etClear !== undefined) { q = ''; const i = ws.querySelector('[data-et-q]'); if (i) { i.value = ''; i.dispatchEvent(new Event('input', {bubbles: true})); } shown = STEP; return drawList(); }
+                if (d.etView) { view = d.etView === 'cards' ? 'cards' : 'list'; try { localStorage.setItem(VIEW_KEY, JSON.stringify({...views(), [tab]: view})); } catch (_) {} ws.querySelectorAll('[data-et-view]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.etView === view))); ws.querySelectorAll('[data-et-view]').forEach(x => x.classList.toggle('is-active', x.dataset.etView === view)); return drawList(); }
                 if (d.etVxblason !== undefined) return ext.openVectorEditor?.({coat: {title: 'Blason'}, onSaved: again, onClose: again});
                 if (d.etX && t.onExtra) return t.onExtra(d.etX, again); // les boutons en plus d'un outil ajouté
                 if (d.etOpen) return t.open(Number(d.etOpen), again);
@@ -121,7 +166,7 @@
                 if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!await A().confirmBox('Les photos, vidéos et sons restent dans les Médias.', {title: `Supprimer le projet « ${r?.name} » ?`, okLabel: 'Supprimer le projet'})) return; await t.remove(r.id); toast('Projet supprimé.'); return load(); }
             } catch (err) { toast(err.message, 'error'); }
         };
-        ws.oninput = e => { if (e.target.matches('[data-et-q]')) { q = e.target.value; drawList(); } };
+        ws.oninput = e => { if (e.target.matches('[data-et-q]')) { q = e.target.value; shown = STEP; drawList(); } };
         ws.onchange = e => { if (e.target.matches('[data-et-sort]')) { sort = e.target.value; drawList(); } };
     };
 })();
