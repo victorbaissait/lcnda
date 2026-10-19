@@ -37,7 +37,7 @@
     // Tout ce que règle l'écran Apparence : design, menus (ordre, masqués), listes, cartes, graphiques, blocs des
     // fiches et du tableau de bord, couleurs, fonds de carte… (pas les données, ni les raccourcis, ni les sauvegardes).
     const LAYOUT_KEYS = [
-        'genealogie-design', 'genealogie-menu-order', 'genealogie-menu-hidden',
+        'genealogie-design', 'genealogie-menu-order', 'genealogie-menu-hidden', 'genealogie-menu-names', 'genealogie-menu-icons',
         'genealogie-list-order', 'genealogie-list-hidden', 'genealogie-map-order', 'genealogie-map-hidden', 'genealogie-maintenance-order', 'genealogie-maintenance-groups', 'genealogie-list-groups', 'genealogie-mylists-order',
         'genealogie-graph-diagram-order', 'genealogie-graph-diagram-hidden', 'genealogie-graph-stats-order', 'genealogie-graph-stats-hidden',
         'genealogie-tile-cat-order', 'genealogie-tile-hidden-cats', 'genealogie-tile-hidden', 'genealogie-tile-custom-cats',

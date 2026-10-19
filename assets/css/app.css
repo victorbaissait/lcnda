@@ -3881,6 +3881,7 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .archive-room-piece label{display:flex;align-items:center;gap:5px;border:0!important;box-shadow:none!important;padding:0!important}
 .archive-room-piece button{border:1px solid #000;background:#fff;cursor:pointer;font-weight:900;padding:0 5px}
 .order-row .order-rename{flex:1;min-width:90px;max-width:180px;margin-left:auto;font-size:.8rem;padding:2px 6px}
+.order-row .order-icon{flex:0 0 3.2em;width:3.2em;min-width:0;text-align:center;font-size:.95rem;padding:2px 4px}
 #database-status{display:inline-flex;flex-direction:column;line-height:1.15;text-align:left}#database-status .db-count-line{display:block;white-space:nowrap}
 .collection-person-list button.is-cp-active{background:var(--blue-soft)}.collection-person-list button small{color:var(--muted,#777);margin-left:.3rem}
 /* Maintenance : pages rangées en groupes (le dessin des boutons reste le même) */
@@ -3931,6 +3932,7 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .order-editor.compact .order-row.has-visibility>.order-number{flex:0 0 auto}
 .order-editor.compact .order-row.has-visibility>b{flex:1 1 auto;min-width:0;overflow-wrap:normal}
 .order-editor.compact .order-row.has-visibility>.order-rename{flex:1 1 150px;min-width:0;width:auto;order:5}
+.order-editor.compact .order-row.has-visibility>.order-icon{order:6}
 /* 🧩 mêmes petits boutons partout (app-harmony.js) : poubelle et crayon de la fiche personne, 29 px */
 .icon-action.ia-auto{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;padding:0!important;display:inline-grid!important;place-items:center;font-size:0;line-height:1;border:1.5px solid var(--ink)!important;background:var(--card-bg,#fff)!important;color:var(--ink)!important;border-radius:0!important;box-shadow:2px 2px 0 rgba(5,93,255,.2)}
 .icon-action.ia-auto.is-danger{color:#a31625!important}.icon-action.ia-auto:hover{color:#fff!important;background:var(--blue)!important}.icon-action.ia-auto.is-danger:hover{background:#c91d2e!important}
