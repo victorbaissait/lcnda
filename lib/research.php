@@ -291,7 +291,7 @@ function implexe_data(PDO $pdo, int $rootId, int $maxGen = 40, int $maxSlots = 3
 function quick_search_data(PDO $pdo, string $q): array
 {
     $words = preg_split('/\s+/u', trim($q), -1, PREG_SPLIT_NO_EMPTY) ?: [];
-    $kinds = ['battue' => 'battues', 'battues' => 'battues', 'enquete' => 'investigations', 'enquête' => 'investigations', 'enquetes' => 'investigations', 'enquêtes' => 'investigations', 'lieu' => 'places', 'lieux' => 'places', 'personne' => 'persons'];
+    $kinds = ['battue' => 'battues', 'battues' => 'battues', 'enquete' => 'investigations', 'enquête' => 'investigations', 'enquetes' => 'investigations', 'enquêtes' => 'investigations', 'lieu' => 'places', 'lieux' => 'places', 'personne' => 'persons', 'graphique' => 'graphs', 'graphiques' => 'graphs', 'statistique' => 'graphs', 'statistiques' => 'graphs'];
     $only = null;
     $words = array_values(array_filter($words, static function ($w) use ($kinds, &$only) {
         $k = mb_strtolower($w);
@@ -299,7 +299,7 @@ function quick_search_data(PDO $pdo, string $q): array
         return true;
     }));
     $words = array_slice($words, 0, 5);
-    $out = ['persons' => [], 'battues' => [], 'investigations' => [], 'places' => []];
+    $out = ['persons' => [], 'battues' => [], 'investigations' => [], 'places' => [], 'graphs' => []];
     if (!$words && $only === null) { return $out; }
     // chaque mot, sans tenir compte des accents ni des tirets (« helene » trouve Hélène) ; $extra : condition en plus
     // (ex. les variantes de nom), écrite avec {raw} et {fold} à la place des paramètres
@@ -342,6 +342,14 @@ function quick_search_data(PDO $pdo, string $q): array
         // Seulement les lieux cités (pas les ~80 000 lieux du répertoire)
         $out['places'] = $run("SELECT pl.id, pl.name, pl.county, pl.country, (SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS uses FROM places pl
             WHERE {$w} AND EXISTS (SELECT 1 FROM events e WHERE e.place_id=pl.id) ORDER BY uses DESC LIMIT 6", $p);
+    }
+    // 📈 mes graphiques (lib/graphs.php, table créée au premier enregistrement)
+    if (($only === null && $words) || $only === 'graphs') {
+        $has = (bool) $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='custom_widgets'")->fetchColumn();
+        if ($has) {
+            [$w, $p] = $like(['g.name', 'g.search_text']);
+            $out['graphs'] = $run("SELECT g.uid, g.name, g.icon, g.kind, g.draw_label, g.data_label FROM custom_widgets g WHERE g.deleted_at IS NULL AND g.is_graph=1 AND {$w} ORDER BY g.updated_at DESC LIMIT 6", $p);
+        }
     }
     return $out;
 }

@@ -174,10 +174,20 @@
     const ALL_SKIP = ['genealogie-auto-backup-lock', 'genealogie-baissait-ui-v2', 'genealogie-last-route', PROFILES_KEY, ALL_PROFILES_KEY, 'genealogie-site-defaults-applied',
         'genealogie-dashboard-recent-people', 'genealogie-sosa-root', 'genealogie-sosa-root-name', 'genealogie-sosa-map', 'genealogie-daboville-root', 'genealogie-daboville-root-name', 'genealogie-daboville-map', 'genealogie-atelier-timers'];
     const isAllKey = key => /^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !/-\d+$/.test(key);
+    // 📈 mes graphiques et widgets sont rangés dans la base (lib/graphs.php) : l'ensemble en garde une copie sous leur
+    // ancienne clé ; « Appliquer » les remet dans la base (sans effacer ceux faits depuis : ce sont des données)
+    const GRAPHS_KEY = 'genealogie-custom-widgets';
     function currentAll() {
         const settings = {};
         for (let i = 0; i < localStorage.length; i++) { const key = localStorage.key(i); if (key && isAllKey(key)) settings[key] = localStorage.getItem(key); }
+        const graphs = ext.customWidgetList?.();
+        if (Array.isArray(graphs) && graphs.length) settings[GRAPHS_KEY] = JSON.stringify(graphs);
         return settings;
+    }
+    async function restoreGraphs(json) {
+        let list = []; try { list = JSON.parse(json); } catch (_) { return; }
+        list = (Array.isArray(list) ? list : []).filter(d => d && typeof d === 'object' && /^cw_[a-z0-9]{4,24}$/.test(String(d.id)));
+        for (let i = 0; i < list.length; i += 500) await A().api('graphs_write', {}, {method: 'POST', body: {op: 'save', defs: list.slice(i, i + 500)}});
     }
     const allProfiles = () => { try { const p = JSON.parse(ls(ALL_PROFILES_KEY, '[]')); return Array.isArray(p) ? p.filter(validProfile) : []; } catch (_) { return []; } };
     const saveAllProfiles = list => { try { localStorage.setItem(ALL_PROFILES_KEY, JSON.stringify(list)); return true; } catch (_) { toast('Trop de réglages enregistrés pour la place disponible : supprimes-en un.', 'error'); return false; } };
@@ -186,7 +196,11 @@
     async function applyAll(settings, {layoutOnly = false, keep = []} = {}) {
         // un fichier reçu : ce qui a été laissé de côté à l'import (illisible) n'efface rien ; une mise en page ne touche qu'à l'Apparence
         const removed = [];
-        for (let i = localStorage.length - 1; i >= 0; i--) { const key = localStorage.key(i); if (key && isAllKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
+        if (!layoutOnly && typeof settings[GRAPHS_KEY] === 'string') {
+            try { await restoreGraphs(settings[GRAPHS_KEY]); } catch (e) { toast('Tes graphiques n’ont pas pu être remis : ' + e.message, 'error'); return; }
+        }
+        settings = Object.fromEntries(Object.entries(settings).filter(([key]) => key !== GRAPHS_KEY));
+        for (let i = localStorage.length - 1; i >= 0; i--) { const key = localStorage.key(i); if (key && key !== GRAPHS_KEY && isAllKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
         const set = {};
         Object.entries(settings).forEach(([key, value]) => { if (isAllKey(key) && typeof value === 'string') { set[key] = value; lsSet(key, value); } });
         try {
@@ -200,7 +214,7 @@
     const cleanAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k, v]) => isAllKey(k) && safeLayoutValue(k, v)));
     ext.designPanelsEnd.push(() => {
         const list = allProfiles();
-        return `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">TOUS LES RÉGLAGES</span><h3>💾 Réglages enregistrés : toute l’app</h3><p>Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les statistiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche) et ce qui est propre à cet ordinateur.</p></header>
+        return `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">TOUS LES RÉGLAGES</span><h3>💾 Réglages enregistrés : toute l’app</h3><p>Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche) et ce qui est propre à cet ordinateur.</p></header>
             <div class="h-layouts-save"><input type="text" id="h-allset-name" maxlength="60" placeholder="Nom (ex. Mon app complète, Version élevage)"><button type="button" class="button small" data-h-allset-save>💾 Enregistrer sous ce nom</button><button type="button" class="button small secondary" data-h-allset-export-now>⤓ Exporter les réglages actuels</button><button type="button" class="button small secondary" data-h-allset-import>⤒ Importer</button></div>
             ${list.length ? `<ul class="h-layouts-list">${list.map((p, i) => `<li><div><strong>${esc(p.name)}</strong><small>${esc(allSummary(p.settings))}${p.saved ? ` · ${esc(new Date(p.saved).toLocaleDateString('fr-FR'))}` : ''}${p.from ? ` · reçu de ${esc(p.from)}` : ''}</small></div>
                 <span class="page-actions"><button type="button" class="button small" data-h-allset-apply="${i}">Appliquer</button><button type="button" class="button small secondary" data-h-allset-update="${i}" title="Remplacer par les réglages actuels">Mettre à jour</button><button type="button" class="button small secondary" data-h-allset-rename="${i}">Renommer</button><button type="button" class="button small secondary" data-h-allset-export="${i}">⤓ Exporter</button><button type="button" class="button small secondary danger" data-h-allset-delete="${i}">Supprimer</button></span></li>`).join('')}</ul>` : A().emptyState({icon: '🗃️', text: 'Aucun ensemble de réglages pour l’instant', hint: 'Donne un nom puis « 💾 Enregistrer sous ce nom » pour garder tous les réglages actuels.'})}</section>`;

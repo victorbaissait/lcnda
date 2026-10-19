@@ -27,7 +27,7 @@
     const KINDS = {numbers: ['🔢', 'Chiffres', 'Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères.'],
         list: ['📋', 'Liste', 'Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux.'],
         chart: ['📊', 'Graphique', 'Des barres ou un camembert : par métier, par lieu, par décennie, par siècle…'],
-        appstat: ['📈', 'Statistique de l’app', 'Une statistique de Graphiques → Statistiques (noms, prénoms, lieux, années…) redessinée à ta façon : barres, camembert, courbe, mosaïque, avec tes filtres.'],
+        appstat: ['📈', 'Graphique d’une statistique de l’app', 'Une statistique de Graphiques → Statistiques (noms, prénoms, lieux, années…) redessinée à ta façon : barres, camembert, courbe, mosaïque, avec tes filtres.'],
         screen: ['📺', 'Écran de l’app', 'Une liste, un diagramme, une statistique, la fiche d’une personne ou d’un village, la carte, une de tes listes… directement dans le widget.'],
         diagram: ['🏛️', 'Diagramme', 'Un de « Mes diagrammes » : hémicycle, fer à cheval, frise des membres d’un groupe, camembert, flux, organigramme…'],
         text: ['📝', 'Texte', 'Un pense-bête, une citation, une consigne, avec des émojis.'],
@@ -64,22 +64,97 @@
         const src = m.events ? {source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tagIds(meta || {}, ...[].concat(m.events))}, ...rules]}} : {source: 'persons', definition: {match: 'all', rules}};
         return {...d, kind: 'chart', src, group: m.group, groupBy: m.groupBy, groupStep: m.groupStep || 25, style: d.style && d.style !== 'bars' ? d.style : (m.style || 'bars'), limit: m.limit || d.limit || 10, valueColors: {}};
     }
-    // Éditeur ouvert depuis Maintenance → Éditeur de widgets (mode « widgets ») ou → Éditeur de statistiques (mode « stats »)
+    // Éditeur ouvert depuis Maintenance → Éditeur de widgets (mode « widgets ») ou → Éditeur de graphiques (mode « stats »)
     let mode = 'widgets';
     const backToList = () => ext.maintenance[mode === 'stats' ? 'stats_editor' : 'widget_editor'](++S().workspaceToken);
 
-    /* ─── Rangement ─── */
-    function defs() {
-        try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v.filter(d => d && /^cw_[a-z0-9]{4,24}$/.test(String(d.id))) : []; } catch (_) { return []; }
+    /* ─── Rangement : dans la base (table custom_widgets, lib/graphs.php) ───
+     * index.php injecte la liste (window.LCNDA_GRAPHS) : defs() reste synchrone, comme avant. Chaque enregistrement part
+     * aussitôt au serveur (seulement ce qui a changé). Les graphiques d'avant, rangés dans le réglage du navigateur
+     * « genealogie-custom-widgets », passent une seule fois dans la base (op « import ») puis ce réglage est retiré ;
+     * une définition déjà connue ou supprimée dans la base n'est jamais reprise d'un navigateur resté à l'ancien réglage. */
+    const validDefs = v => (Array.isArray(v) ? v : []).filter(d => d && typeof d === 'object' && /^cw_[a-z0-9]{4,24}$/.test(String(d.id)));
+    const STORE = {list: [], info: {}, gone: new Set(), pending: [], queue: Promise.resolve()};
+    const legacyDefs = () => { try { return validDefs(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (_) { return []; } };
+    function applyServer(r) {
+        if (!r || !Array.isArray(r.graphs)) return;
+        STORE.info = r.info && typeof r.info === 'object' ? r.info : {};
+        STORE.gone = new Set(Array.isArray(r.gone) ? r.gone : []);
+        const known = new Set([...validDefs(r.graphs).map(d => d.id), ...STORE.gone]);
+        STORE.pending = STORE.pending.filter(d => !known.has(d.id));
+        STORE.list = [...validDefs(r.graphs), ...STORE.pending];
     }
-    function saveDefs(list) {
-        try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (_) { toast('Réglage impossible à enregistrer dans ce navigateur.', 'error'); }
-        A().syncCustomDashboardWidgets();
+    (() => {
+        const g = window.LCNDA_GRAPHS;
+        STORE.pending = legacyDefs();
+        if (g && Array.isArray(g.graphs)) applyServer(g); else STORE.list = STORE.pending.slice();
+    })();
+    function defs() { return STORE.list.slice(); }
+    const graphApi = body => api('graphs_write', {}, {method: 'POST', body});
+    const kioskOn = () => document.body.classList.contains('is-kiosk');
+    function changed() {
+        A().syncCustomDashboardWidgets?.();
         registerAll();
         // 📈 les graphiques posés ailleurs (fiche, enquête, Atelier, page d'une personne, mise en page) se redessinent
         try { document.dispatchEvent(new CustomEvent('lcnda:graphs-changed')); } catch (_) {}
     }
+    /** le petit résumé du menu de choix pour un dessin de diagramme (« Hémicycle ») */
+    const hintOf = d => { const st = String(d.style || ''); return st.startsWith('dg:') ? {draw: String(ext.diagramRender?.KINDS?.[st.slice(3).split(':')[0]]?.label || 'Diagramme').slice(0, 60)} : undefined; };
+    /** Reprise des graphiques de ce navigateur (une fois) : seules les définitions inconnues de la base y entrent. */
+    async function migrateLegacy() {
+        if (!STORE.pending.length || !window.LCNDA_GRAPHS) return;
+        // le jeton de la page (state.csrf) arrive avec le démarrage de l'app
+        for (let i = 0; i < 100 && !S()?.csrf; i++) await new Promise(r => setTimeout(r, 300));
+        if (!S()?.csrf || kioskOn()) return;
+        try {
+            const r = await graphApi({op: 'import', defs: STORE.pending.slice(0, 500)});
+            applyServer(r);
+            // tout est dans la base (ou y a été supprimé) : l'ancien réglage du navigateur part (et sa copie dans la base)
+            if (!STORE.pending.length) { try { localStorage.removeItem(KEY); } catch (_) {} }
+            changed();
+        } catch (_) { /* consultation, pas de connexion : on réessaie au prochain chargement, rien n'est perdu */ }
+    }
+    setTimeout(migrateLegacy, 0);
+    /** Relit la base (une autre fenêtre a enregistré, ou après une reprise) */
+    async function reloadDefs() { try { applyServer(await api('graphs')); changed(); } catch (_) {} }
+    ext.reloadMyGraphs = reloadDefs;
+    window.addEventListener?.('storage', e => { if (e.key === 'lcnda-graphs-ping') reloadDefs(); });
+    /** Enregistre la liste : l'écran change tout de suite, la base reçoit seulement ce qui a changé (dans l'ordre). */
+    function saveDefs(list) {
+        list = validDefs(list);
+        const prev = STORE.list, before = new Map(prev.map(d => [d.id, JSON.stringify(d)])), now = new Set(list.map(d => d.id));
+        const put = list.filter(d => before.get(d.id) !== JSON.stringify(d)), del = [...before.keys()].filter(id => !now.has(id));
+        STORE.list = list.slice();
+        STORE.pending = STORE.pending.filter(d => now.has(d.id) && !put.some(x => x.id === d.id));
+        changed();
+        if (!put.length && !del.length) return Promise.resolve(true);
+        const send = () => (STORE.queue = STORE.queue.then(async () => {
+            try {
+                const r = await graphApi({op: 'save', defs: put.map(d => ({...d, _hint: hintOf(d)})), delete: del});
+                const local = STORE.list, mine = new Set(local.map(d => d.id)); applyServer(r);
+                // l'ordre et les enregistrements faits pendant l'envoi restent ceux de l'écran ; ceux d'une autre fenêtre s'ajoutent
+                const byId = new Map(STORE.list.map(d => [d.id, d]));
+                STORE.list = [...local.map(d => put.some(x => x.id === d.id) && byId.has(d.id) ? byId.get(d.id) : d), ...STORE.list.filter(d => !mine.has(d.id) && !del.includes(d.id))];
+                try { localStorage.setItem('lcnda-graphs-ping', String(Date.now())); } catch (_) {}
+                changed();
+                put.filter(d => ['chart', 'appstat'].includes(d.kind)).forEach(d => setTimeout(() => ext.graphThumbNow?.(d.id), 400));
+                return true;
+            } catch (error) {
+                if (error.network) { toast('Graphique pas encore enregistré dans la base : ' + error.message, 'error', {retry: send}); return false; }
+                // consultation ou envoi refusé : l'écran revient à ce que la base contient
+                STORE.list = prev; changed();
+                toast(error.message, 'error');
+                return false;
+            }
+        }));
+        return send();
+    }
     ext.customWidgetDefs = () => Object.fromEntries(defs().map(d => [d.id, d]));
+    ext.customWidgetList = () => defs();
+    /** enregistre toute la liste (seul ce qui a changé part à la base) → Promise<true|false> */
+    ext.saveCustomWidgetList = list => saveDefs(list);
+    /** infos de rangement d'un graphique : {rid, created_at, updated_at, places, where, thumb_ok} */
+    ext.myGraphInfo = id => STORE.info[id] || null;
 
     /* ─── Données ─── */
     /* ✍️ Mes propres chiffres (source « manual » d'un graphique) : {series: [{name, color}], rows: [{label, v: ['42', …]}]} */
@@ -386,7 +461,7 @@
         let res; try { res = await membersOf(v, i); } catch (error) { toast(error.message, 'error'); return; }
         const total = v.entries.reduce((k, e) => k + e[1], 0);
         const sub = label === 'autres' && v.entries.restValues?.length ? `<p class="h-cw-who-rest">${v.entries.restValues.slice(0, 80).map(([k, c]) => `<span>${esc(k)} <b>${fmt(c)}</b></span>`).join('')}${v.entries.restValues.length > 80 ? `<span>… et ${fmt(v.entries.restValues.length - 80)} autres valeurs</span>` : ''}</p>` : '';
-        whoDialog({eyebrow: v.d.name || 'STATISTIQUE', label, n, total, color: chartColor(v.d, label, i), res, sub, csvName: `${v.d.name || 'statistique'} - ${label}`});
+        whoDialog({eyebrow: v.d.name || 'GRAPHIQUE', label, n, total, color: chartColor(v.d, label, i), res, sub, csvName: `${v.d.name || 'graphique'} - ${label}`});
     }
     /** La fenêtre « qui est compté » : les personnes derrière une valeur (statistiques à soi, distributions de Graphiques) */
     function whoDialog({eyebrow, label, n, total, color, res, sub = '', csvName, unavailable}) {
@@ -463,7 +538,7 @@
                 res = {people, truncated: !!rows.truncated};
             }
         } catch (error) { toast(error.message, 'error'); return; }
-        whoDialog({eyebrow: title || 'DISTRIBUTION', label, n, total, color, res, csvName: `${title || 'statistique'} - ${label}`, unavailable: 'Le détail de cette valeur n’est pas disponible pour cette statistique. Les noms, prénoms, lieux, pays, sexes, années et âges au décès l’ont ; pour les autres, fais-en une statistique à toi (Maintenance → Éditeur de statistiques).'});
+        whoDialog({eyebrow: title || 'DISTRIBUTION', label, n, total, color, res, csvName: `${title || 'statistique'} - ${label}`, unavailable: 'Le détail de cette valeur n’est pas disponible pour cette statistique. Les noms, prénoms, lieux, pays, sexes, années et âges au décès l’ont ; pour les autres, fais-en un graphique à toi (Maintenance → Éditeur de graphiques).'});
     };
     document.addEventListener('click', event => { const el = event.target.closest?.('[data-cw-detail]'); if (el) { event.preventDefault(); openDetail(el); } });
     document.addEventListener('keydown', event => { if ((event.key === 'Enter' || event.key === ' ') && event.target.matches?.('[data-cw-detail]')) { event.preventDefault(); openDetail(event.target); } });
@@ -633,7 +708,7 @@
     const newPart = kind => ({kind, title: '', counters: kind === 'numbers' ? [{label: 'Personnes', src: P()}] : [], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: kind === 'links' ? [{label: 'Carte', target: 'module:carte'}] : [], steps: [], jSource: 'manual', jLayout: 'vertical', jMap: true, jDays: true, jText: true, jOrder: 'date'});
     async function loadMeta() { meta = await api('my_lists'); return meta; }
     ext.maintenance.widget_editor = token => { mode = 'widgets'; return defsPage(token); };
-    /** Maintenance → Éditeur de statistiques : les mêmes widgets, montrés en grand dans Graphiques → Statistiques */
+    /** Maintenance → Éditeur de graphiques : les mêmes widgets, montrés en grand dans Graphiques → Statistiques */
     ext.maintenance.stats_editor = token => { mode = 'stats'; return defsPage(token); };
     async function defsPage(token) {
         try { await loadMeta(); } catch (error) { toast(error.message, 'error'); return; }
@@ -642,13 +717,13 @@
         editing = null; // revenir sur l'onglet : la liste (un brouillon abandonné ne revient pas)
         const all = defs(), list = mode === 'stats' ? all.filter(d => d.inStats) : all, onBoard = new Set(A().dashboardBlockSettings().widgets.map(w => w.type));
         A().$('#workspace').innerHTML = `<section class="page collection-page">${mode === 'stats'
-            ? header('MAINTENANCE', 'Éditeur de statistiques', 'Crée tes propres graphiques et statistiques, sans rien programmer : avec <b>tes propres chiffres</b> (un tableau à remplir, collé d’un tableur ou importé en CSV), ou avec les données de l’app (personnes, événements, une de tes listes, une statistique de l’app redessinée à ta façon). Chacun a un nom et se pose partout : Graphiques → « Mes statistiques », le tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page (« ＋ Diagramme » → « 📈 Un de mes graphiques »). Modifié ici, il change partout.', '<button type="button" class="button" data-cw-new>＋ Nouveau graphique</button><button type="button" class="button secondary" data-cw-dgnewpage>＋ Nouveau diagramme</button><button type="button" class="button secondary" data-cw-golist title="Listes → Graphiques et diagrammes">📋 Tous mes graphiques et diagrammes</button>')
-            : header('MAINTENANCE', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord. Pour un graphique ou une statistique en grand dans l’onglet Graphiques : Éditeur de statistiques.', '<button type="button" class="button" data-cw-new>+ Nouveau widget</button>')}
+            ? header('MAINTENANCE', 'Éditeur de graphiques', 'Crée tes propres graphiques, sans rien programmer : avec <b>tes propres chiffres</b> (un tableau à remplir, collé d’un tableur ou importé en CSV), ou avec les données de l’app (personnes, événements, une de tes listes, une statistique de l’app redessinée à ta façon). Chacun a un nom et se pose partout : Graphiques → « Mes graphiques », le tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page (« ＋ Diagramme » → « 📈 Un de mes graphiques »). Modifié ici, il change partout.', '<button type="button" class="button" data-cw-new>＋ Nouveau graphique</button><button type="button" class="button secondary" data-cw-dgnewpage>＋ Nouveau diagramme</button><button type="button" class="button secondary" data-cw-golist title="Listes → Graphiques et diagrammes">📋 Tous mes graphiques et diagrammes</button>')
+            : header('MAINTENANCE', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord. Pour un graphique en grand dans l’onglet Graphiques : Éditeur de graphiques.', '<button type="button" class="button" data-cw-new>+ Nouveau widget</button>')}
             ${mode === 'stats' ? diagramsPanelHtml() : ''}
             <section class="maintenance-panel"><h3>Importer un widget reçu</h3><p class="muted">Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données.</p><input type="file" accept=".json,application/json" data-cw-import></section>
             ${list.length ? `<div class="h-records">${list.map(d => `<article class="h-record h-cw-record${color(d.color) ? ' has-accent' : ''}"${color(d.color) ? ` style="--cw-accent:${color(d.color)}"` : ''}><header><div><strong>${esc(d.icon || '🧱')} ${esc(d.name || 'Mon widget')}</strong> <small>${esc(KINDS[d.kind]?.[1] || '')}${d.kind === 'app' ? ' : ' + esc(appCatalog().find(x => x[0] === d.base)?.[1] || d.base) : ''}</small>${onBoard.has(d.id) ? ' <span class="collection-kind">sur le tableau de bord</span>' : ''}${d.inStats ? ' <span class="collection-kind">dans Graphiques</span>' : ''}</div>
                     <span class="h-saved-tools"><button type="button" class="link-button" data-cw-edit="${esc(d.id)}">modifier</button><button type="button" class="link-button" data-cw-dup="${esc(d.id)}">dupliquer</button><button type="button" class="link-button" data-cw-del="${esc(d.id)}">supprimer</button></span></header>
-                    ${d.note ? `<p>${nl(d.note)}</p>` : ''}<div class="page-actions">${d.inStats ? `<button type="button" class="button small" data-cw-opengraph="${esc(d.id)}">📊 Ouvrir dans Graphiques</button>` : ''}<button type="button" class="button small ${d.inStats ? 'secondary' : ''}" data-cw-add="${esc(d.id)}">+ Ajouter au tableau de bord</button><button type="button" class="button small secondary" data-cw-share="${esc(d.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>` : A().emptyState({icon: '🧩', text: mode === 'stats' ? 'Aucun graphique ni statistique à toi pour l’instant' : 'Aucun widget à toi pour l’instant', action: {label: mode === 'stats' ? '＋ Nouveau graphique' : '＋ Nouveau widget', attrs: 'data-cw-new'}})}</section>`;
+                    ${d.note ? `<p>${nl(d.note)}</p>` : ''}<div class="page-actions">${d.inStats ? `<button type="button" class="button small" data-cw-opengraph="${esc(d.id)}">📊 Ouvrir dans Graphiques</button>` : ''}<button type="button" class="button small ${d.inStats ? 'secondary' : ''}" data-cw-add="${esc(d.id)}">+ Ajouter au tableau de bord</button><button type="button" class="button small secondary" data-cw-share="${esc(d.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>` : A().emptyState({icon: '🧩', text: mode === 'stats' ? 'Aucun graphique à toi pour l’instant' : 'Aucun widget à toi pour l’instant', action: {label: mode === 'stats' ? '＋ Nouveau graphique' : '＋ Nouveau widget', attrs: 'data-cw-new'}})}</section>`;
         const ws = A().$('#workspace');
         const find = id => list.find(d => d.id === id);
         ws.querySelectorAll('[data-cw-new]').forEach(b => b.addEventListener('click', () => chooseStart(token)));
@@ -672,7 +747,7 @@
         }));
         ws.querySelector('[data-cw-import]').addEventListener('change', async e => {
             const file = e.target.files[0]; if (!file) return;
-            try { const d = importDef(JSON.parse(await file.text())); if (mode === 'stats') d.inStats = true; saveDefs([...defs(), d]); toast(mode === 'stats' ? `« ${d.name} » importé : il est dans Graphiques → Statistiques.` : `Widget « ${d.name} » importé : ajoute-le au tableau de bord.`); backToList(); }
+            try { const d = importDef(JSON.parse(await file.text())); if (mode === 'stats') d.inStats = true; saveDefs([...defs(), d]); toast(mode === 'stats' ? `« ${d.name} » importé : il est dans Graphiques → « Mes graphiques ».` : `Widget « ${d.name} » importé : ajoute-le au tableau de bord.`); backToList(); }
             catch (error) { toast('Fichier de widget illisible : ' + error.message, 'error'); }
         });
     }
@@ -706,7 +781,7 @@
             catch (error) { toast(error.message, 'error'); }
         });
     }
-    /** Éditeur de statistiques : mes diagrammes (hémicycle, frise d'un groupe, camembert…), faits avec le même éditeur que dans Graphiques */
+    /** Éditeur de graphiques : mes diagrammes (hémicycle, frise d'un groupe, camembert…), faits avec le même éditeur que dans Graphiques */
     function diagramsPanelHtml() {
         if (!ext.diagramItems) return '';
         const own = ext.diagramItems().filter(([, l]) => !String(l).startsWith('📈')); // sans mes graphiques posés comme diagrammes (📈)
@@ -762,24 +837,24 @@
         });
     }
 
-    /** Nouvelle statistique : de zéro, d'une statistique de l'app, d'un de mes widgets, d'un exemple */
+    /** Nouveau graphique : de zéro, d'une statistique de l'app, d'un de mes widgets, d'un exemple */
     function chooseStatStart(tile) {
         const mine = defs().filter(d => ['chart', 'appstat', 'numbers', 'list'].includes(d.kind)), ex = EXAMPLES(meta || {}).filter(d => ['chart', 'numbers', 'list'].includes(d.kind));
         ext.openDialog({
-            eyebrow: 'NOUVEAU GRAPHIQUE OU STATISTIQUE', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
+            eyebrow: 'NOUVEAU GRAPHIQUE', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
             body: `<h4>Avec mes propres chiffres</h4><div class="h-templates">${tile('✍️', 'Mes propres chiffres', 'Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV.', 'data-cs-manual')}${ext.openDiagramEditor ? tile('🏛️', 'Un diagramme', 'Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes).', 'data-cs-diagram') : ''}</div>
                 <h4>Partir de rien, avec les données de l’app</h4><div class="h-templates">${['chart', 'numbers', 'list'].map(k => tile(KINDS[k][0], KINDS[k][1], KINDS[k][2], `data-cs-kind="${k}"`)).join('')}</div>
                 <h4>Partir d’une statistique de l’app</h4><p class="muted">Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage…</p>
-                <div class="h-templates">${APP_STATS.map(([k, l]) => tile('📈', l, 'Statistique de l’app', `data-cs-app="${k}"`)).join('')}</div>
-                ${mine.length ? `<h4>Partir d’un de mes widgets ou de mes statistiques</h4><div class="h-templates">${mine.map(d => tile(d.icon || '🧱', d.name || 'Mon widget', KINDS[d.kind]?.[1] || '', `data-cs-mine="${esc(d.id)}"`)).join('')}</div>` : ''}
+                <div class="h-templates">${APP_STATS.map(([k, l]) => tile('📈', l, 'D’une statistique de l’app', `data-cs-app="${k}"`)).join('')}</div>
+                ${mine.length ? `<h4>Partir d’un de mes widgets ou de mes graphiques</h4><div class="h-templates">${mine.map(d => tile(d.icon || '🧱', d.name || 'Mon widget', KINDS[d.kind]?.[1] || '', `data-cs-mine="${esc(d.id)}"`)).join('')}</div>` : ''}
                 <h4>Exemples</h4><div class="h-templates">${ex.map((d, i) => tile(d.icon, d.name, KINDS[d.kind][1], `data-cs-ex="${i}"`)).join('')}</div>`,
             onOpen: dlg => {
-                const go = d => { editing = {...d, inStats: true, width: '12'}; partIndex = -1; dlg.close(); renderEditor(++S().workspaceToken); };
+                const go = d => { const nm = startName; startName = ''; editing = {...d, ...(nm ? {name: nm} : {}), inStats: true, width: '12'}; partIndex = -1; dlg.close(); renderEditor(++S().workspaceToken); };
                 dlg.querySelectorAll('[data-cs-kind]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csKind; go(baseDef({kind: k, icon: KINDS[k][0], name: '', style: 'bars'})); }));
                 dlg.querySelector('[data-cs-manual]')?.addEventListener('click', () => go(baseDef({kind: 'chart', icon: '📈', name: 'Mon graphique', src: {source: 'manual'}, free: FREE_SAMPLE(), style: 'columns'})));
                 dlg.querySelector('[data-cs-diagram]')?.addEventListener('click', () => { dlg.close(); ext.openDiagramEditor?.(null, {onSave: () => { if (S().module === 'maintenance') backToList(); }}); });
                 dlg.querySelectorAll('[data-cs-app]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csApp; const st = baseDef({kind: 'appstat', icon: '📈', name: appStatLabel(k), statType: k, style: ['birth_years', 'death_years', 'age_at_death'].includes(k) ? 'columns' : 'bars', limit: 15}); go(appStatToChart(st) || st); }));
-                dlg.querySelectorAll('[data-cs-mine]').forEach(b => b.addEventListener('click', () => { const d = mine.find(x => x.id === b.dataset.csMine); go(baseDef({...d, id: newId(), name: (d.name || 'Ma statistique') + ' (copie)'})); }));
+                dlg.querySelectorAll('[data-cs-mine]').forEach(b => b.addEventListener('click', () => { const d = mine.find(x => x.id === b.dataset.csMine); go(baseDef({...d, id: newId(), name: (d.name || 'Mon graphique') + ' (copie)'})); }));
                 dlg.querySelectorAll('[data-cs-ex]').forEach(b => b.addEventListener('click', () => go(baseDef(ex[Number(b.dataset.csEx)]))));
             },
         });
@@ -862,7 +937,7 @@
         return `<section class="h-dg-grid h-cw-free" data-cw-free><h4>✍️ Mes chiffres <small class="muted">(${plural(f.rows.length, 'ligne', 'lignes')}${many ? ' · ' + plural(f.series.length, 'série', 'séries') : ''})</small></h4>
             <p class="muted">Première colonne : le nom de chaque valeur ; puis les chiffres. Tu peux coller des cellules d’un tableur directement dans une case.${many ? ' Toutes les séries se voient en barres, colonnes, courbe, aire, tableau et avec les dessins de « Mes diagrammes » (empilées, radar…) ; le camembert, l’anneau et la mosaïque montrent la première.' : ''}</p>
             <div class="h-dg-tablewrap"><table><thead><tr>${head}</tr></thead><tbody>${rows || `<tr><td colspan="${f.series.length + 2}" class="muted">Tableau vide : « + Ligne » ou « 📋 Coller un tableau ».</td></tr>`}</tbody></table></div>
-            <div class="h-dg-gridtools">${f.rows.length < FREE_ROWS ? '<button type="button" class="button small" data-fr-add>+ Ligne</button>' : ''}${f.series.length < FREE_SERIES ? '<button type="button" class="button small secondary" data-fr-addser>+ Série (colonne de chiffres)</button>' : ''}<button type="button" class="button small secondary" data-fr-paste title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">📥 Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-fr-csv hidden></label><button type="button" class="button small secondary" data-fr-fromstat title="Recopier les chiffres d’une statistique (de l’app ou à toi) pour les retoucher">📊 Partir d’une statistique</button>${f.rows.length ? '<button type="button" class="link-button" data-fr-clear>Vider</button>' : ''}</div></section>`;
+            <div class="h-dg-gridtools">${f.rows.length < FREE_ROWS ? '<button type="button" class="button small" data-fr-add>+ Ligne</button>' : ''}${f.series.length < FREE_SERIES ? '<button type="button" class="button small secondary" data-fr-addser>+ Série (colonne de chiffres)</button>' : ''}<button type="button" class="button small secondary" data-fr-paste title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">📥 Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-fr-csv hidden></label><button type="button" class="button small secondary" data-fr-fromstat title="Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher">📊 Partir d’un graphique</button>${f.rows.length ? '<button type="button" class="link-button" data-fr-clear>Vider</button>' : ''}</div></section>`;
     }
     const isNumCell = v => /^-?[\d\s  .,]+%?$/.test(String(v ?? '').trim());
     /** texte d'un tableur (tabulations) ou d'un CSV (; ou ,), avec les guillemets → lignes de cellules */
@@ -948,10 +1023,10 @@
             }
             if (b.hasAttribute('data-fr-fromstat')) {
                 const src = ((await ext.diagramStatSources?.().catch(() => [])) || []).filter(([k]) => k !== `my:${editing?.id}`);
-                if (!src.length) return toast('Aucune statistique disponible.', 'error');
+                if (!src.length) return toast('Aucun graphique disponible.', 'error');
                 const g = {}; src.forEach(([k, l, grp]) => { (g[grp] = g[grp] || []).push([k, l]); });
-                ext.openDialog({eyebrow: 'MES CHIFFRES', title: '📊 Partir d’une statistique', submitLabel: 'Recopier ces chiffres', body: `<p class="muted">Les chiffres d’une statistique (de l’app, un exemple ou une des tiennes) sont recopiés dans ton tableau : tu peux ensuite les retoucher, en ajouter, ajouter une série… Ils ne bougent plus quand l’arbre change (pour des chiffres tenus à jour, choisis plutôt la statistique dans « Données »).</p><label>Statistique<select name="src">${Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>`,
-                    onSubmit: async form => { const sel = form.querySelector('[name=src]'); try { const pairs = await ext.diagramStatRows(sel.value); if (!pairs.length) { toast('Aucun chiffre pour cette statistique.', 'error'); return false; }
+                ext.openDialog({eyebrow: 'MES CHIFFRES', title: '📊 Partir d’un graphique', submitLabel: 'Recopier ces chiffres', body: `<p class="muted">Les chiffres d’un graphique (un des tiens, un exemple ou une statistique de l’app) sont recopiés dans ton tableau : tu peux ensuite les retoucher, en ajouter, ajouter une série… Ils ne bougent plus quand l’arbre change (pour des chiffres tenus à jour, choisis plutôt la source dans « Données »).</p><label>Graphique<select name="src">${Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>`,
+                    onSubmit: async form => { const sel = form.querySelector('[name=src]'); try { const pairs = await ext.diagramStatRows(sel.value); if (!pairs.length) { toast('Aucun chiffre pour ce graphique.', 'error'); return false; }
                         const before = snap(); d.free = cleanFree({series: [{name: sel.selectedOptions[0]?.textContent || 'Nombre'}], rows: pairs.map(([v, n]) => ({label: String(v), v: [String(n)]}))}); again(); undoable(`${plural(pairs.length, 'valeur recopiée', 'valeurs recopiées')}`, before); }
                         catch (error) { toast(error.message, 'error'); return false; } }});
             }
@@ -1039,7 +1114,7 @@
         const partHead = partIndex >= 0 ? `<div class="form-grid"><label>Sous-titre de cette partie<input data-cw-parttitle value="${esc(d.title || '')}" placeholder="Ex. : À faire, Mes chiffres, Liens utiles"></label>
             <label>Sorte <select data-cw-partkind>${PART_KINDS.map(k => `<option value="${k}" ${d.kind === k ? 'selected' : ''}>${KINDS[k][0]} ${esc(KINDS[k][1])}</option>`).join('')}</select></label>
             <p class="span-2"><button type="button" class="button small secondary" data-cw-partup ${partIndex ? '' : 'disabled'}>↑ Monter</button> <button type="button" class="button small secondary" data-cw-partdown ${partIndex < root.parts.length - 1 ? '' : 'disabled'}>↓ Descendre</button> <button type="button" class="button small secondary danger" data-cw-partdel>Retirer cette partie</button></p></div>` : '';
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-be h-cw-editor">${header(mode === 'stats' ? 'ÉDITEUR DE STATISTIQUES' : 'ÉDITEUR DE WIDGETS', root._existing ? `Modifier « ${root.name || 'Mon widget'} »` : mode === 'stats' ? (['chart', 'appstat'].includes(root.kind) ? 'Nouveau graphique' : 'Nouvelle statistique') : 'Nouveau widget', 'Règle ton widget à gauche ; l’aperçu se met à jour à droite.', '<button type="button" class="button secondary" data-cw-cancel>← Retour</button>')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-be h-cw-editor">${header(mode === 'stats' ? 'ÉDITEUR DE GRAPHIQUES' : 'ÉDITEUR DE WIDGETS', root._existing ? `Modifier « ${root.name || 'Mon widget'} »` : mode === 'stats' ? 'Nouveau graphique' : 'Nouveau widget', 'Règle ton widget à gauche ; l’aperçu se met à jour à droite.', '<button type="button" class="button secondary" data-cw-cancel>← Retour</button>')}
             <div class="h-cw-layout"><div>
             <section class="maintenance-panel"><h3>1. Le widget</h3><div class="form-grid">
                 <label>Titre<input data-cw="name" value="${esc(root.name || '')}" placeholder="Mes ancêtres bretons"></label><label>Icône<input data-cw="icon" value="${esc(root.icon || '')}" maxlength="16" class="h-be-icon" placeholder="🧱"></label>
@@ -1048,7 +1123,7 @@
                 <div class="span-2"><span class="section-label">Couleur</span><div class="h-cw-colors"><button type="button" class="h-cw-swatch ${!color(root.color) ? 'is-on' : ''}" data-cw-color="" title="Aucune">∅</button>${COLORS.map(c => `<button type="button" class="h-cw-swatch ${root.color === c ? 'is-on' : ''}" data-cw-color="${c}" style="background:${c}" title="${c}"></button>`).join('')}<input type="color" data-cw-colorpick value="${esc(color(root.color) || '#0066cc')}" title="Autre couleur"></div></div>
                 <label class="span-2">Texte en haut du widget <small>(facultatif)</small><textarea rows="2" data-cw="note" placeholder="Une phrase pour expliquer ce widget">${esc(root.note || '')}</textarea></label>
                 <fieldset class="span-2 h-be-display"><legend>Où l’afficher</legend>
-                    ${root.kind === 'app' ? '' : `<label class="checkbox-line"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> <span>📊 en grand dans Graphiques → « Mes statistiques » (graphique, chiffres ou liste)</span></label>`}
+                    ${root.kind === 'app' ? '' : `<label class="checkbox-line"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> <span>📊 en grand dans Graphiques → « Mes graphiques » (graphique, chiffres ou liste)</span></label>`}
                     <label class="checkbox-line"><input type="checkbox" data-cw-ondash ${root._onDash ?? onDashboard(root.id) ? 'checked' : ''}> <span>🧱 en widget sur le tableau de bord</span></label>
                     <small class="muted">Et dans un de tes onglets : Maintenance → Éditeur d’onglets, ou la colonne de gauche de l’onglet.</small>
                     ${['chart', 'appstat'].includes(root.kind) && ext.myGraphDiagram ? poseHtml(root) : ''}</fieldset></div></section>
@@ -1225,7 +1300,7 @@
                 if (before && String(before.width) !== String(clean.width)) { placed.forEach(w => { w.width = clean.width; }); A().saveDashboardBlockSettings(settings); }
                 toast('Widget enregistré : le tableau de bord est à jour.');
             } else if (andAdd) addToDashboard(clean.id);
-            else toast(clean.inStats ? 'Enregistré : il est dans Graphiques → Statistiques, rubrique « Mes statistiques ».' : 'Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord.');
+            else toast(clean.inStats ? 'Enregistré : il est dans Graphiques → Statistiques, rubrique « Mes graphiques ».' : 'Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord.');
             editing = null;
             if (root._onDash !== undefined) setOnDashboard(clean.id, !!root._onDash);
             if (ext.blockStatReturn && ext.attachStatToBlock?.(clean.id)) return; // venue d'un bloc de fiche : on y retourne
@@ -1311,10 +1386,11 @@
         return cleanDef({...w, id: newId(), name: w.name || 'Widget importé'});
     }
     ext.cleanWidgetDef = d => cleanDef(d); // pour les tests
-    /** une statistique reçue (fichier .lcnda-widget.json) : rangée dans « Mes statistiques » ; rend sa clé de source pour un diagramme */
+    /** un graphique reçu (fichier .lcnda-widget.json) : rangé dans « Mes graphiques » ; rend sa clé de source pour un diagramme */
     ext.importCustomStat = json => { const d = importDef(json); d.inStats = true; saveDefs([...defs(), d]); return {key: `my:${d.id}`, name: d.name}; };
-    // Ouverts depuis l'Éditeur de blocs (champ « Statistique ») : nouvelle statistique, ou réglage d'une existante
-    ext.newStatFor = async () => { mode = 'stats'; S().maintenanceTab = 'stats_editor'; await A().setModule('maintenance'); chooseStart(S().workspaceToken); };
+    // Ouverts depuis l'Éditeur de blocs (champ « Graphique ») : nouveau graphique, ou réglage d'un existant
+    let startName = ''; // nom tapé dans le menu de choix (« ＋ Créer le graphique « … » »), repris par le nouveau graphique
+    ext.newStatFor = async (o = {}) => { startName = typeof o?.name === 'string' ? o.name.trim().slice(0, 80) : ''; mode = 'stats'; S().maintenanceTab = 'stats_editor'; await A().setModule('maintenance'); chooseStart(S().workspaceToken); };
     ext.editStatFor = async id => { mode = 'stats'; S().maintenanceTab = 'stats_editor'; await A().setModule('maintenance'); try { await loadMeta(); } catch (_) {} const cur = defs().find(x => x.id === id); if (!cur) return; editing = {...baseDef(cur), id: cur.id, _existing: true}; partIndex = -1; renderEditor(++S().workspaceToken); };
     /** Un de mes widgets dessiné dans une boîte (champ « Widget » d'un bloc de fiche) */
     ext.renderCustomWidgetInto = async (el, id, ctx = {}) => {
@@ -1325,7 +1401,7 @@
         catch (error) { el.innerHTML = `<p class="muted">${esc(error.message)}</p>`; }
     };
 
-    /* ─── 📈 Mes graphiques, posés partout : un graphique (Éditeur de statistiques) dessiné comme un diagramme ─── */
+    /* ─── 📈 Mes graphiques, posés partout : un graphique (Éditeur de graphiques) dessiné comme un diagramme ─── */
     const SIMPLE_KIND = {bars: 'bars', columns: 'columns', pie: 'pie', donut: 'donut', line: 'line', area: 'area', tiles: 'treemap', table: 'bars'};
     /** mes graphiques (un graphique ou une statistique de l'app redessinée) : ceux qu'on peut poser partout */
     ext.myGraphs = () => defs().filter(d => ['chart', 'appstat'].includes(d.kind));
@@ -1356,13 +1432,13 @@
     ext.editMyGraph = id => ext.editStatFor(id);
     ext.newMyGraph = () => ext.newStatFor();
 
-    /* ─── 📊 Mes statistiques dans Graphiques → Statistiques ─── */
-    ext.customStatItems = () => defs().filter(d => d.inStats && d.kind !== 'app').map(d => [d.id, `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`]);
+    /* ─── 📊 Mes graphiques dans Graphiques → Statistiques (rubrique « Mes graphiques ») ─── */
+    ext.customStatItems = () => defs().filter(d => d.inStats && d.kind !== 'app').map(d => [d.id, `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`]);
     ext.addDiagramWidget = dg => {
         const d = {...baseDef({kind: 'diagram', icon: '📊', name: dg.name, width: '12'}), diagramId: dg.id};
         saveDefs([...defs(), d]); addToDashboard(d.id);
     };
-    /* 📊 Mes diagrammes : leurs chiffres peuvent venir de l'app (exemples, statistiques de l'app, mes statistiques) */
+    /* 📊 Mes diagrammes : leurs chiffres peuvent venir de l'app (exemples, statistiques de l'app, mes graphiques) */
     async function diagramSourceDef(key) {
         const t = String(key).slice(0, String(key).indexOf(':')), k = String(key).slice(String(key).indexOf(':') + 1);
         if (t === 'app') return APP_STATS.some(x => x[0] === k) ? {kind: 'appstat', statType: k, limit: 30} : null;
@@ -1374,10 +1450,10 @@
         if (!meta) { try { await loadMeta(); } catch (_) {} }
         return [...EXAMPLES(meta || {}).filter(d => d.kind === 'chart').map((d, i) => [`ex:${i}`, d.name, 'Exemples']),
             ...APP_STATS.map(([k, l]) => [`app:${k}`, l, 'Statistiques de l’app']),
-            ...defs().filter(d => ['chart', 'appstat'].includes(d.kind)).map(d => [`my:${d.id}`, d.name || 'Ma statistique', 'Mes statistiques'])];
+            ...defs().filter(d => ['chart', 'appstat'].includes(d.kind)).map(d => [`my:${d.id}`, d.name || 'Mon graphique', 'Mes graphiques'])];
     };
     ext.diagramStatRows = async key => {
-        const d = await diagramSourceDef(key); if (!d) throw new Error('Source introuvable (statistique supprimée ?).');
+        const d = await diagramSourceDef(key); if (!d) throw new Error('Source introuvable (graphique supprimé ?).');
         const datas = await loadData(d); if (datas[0]?.error) throw new Error(datas[0].error);
         return groupRows(datas[0] || {}, {...d, limit: Math.max(Number(d.limit) || 10, 30)}).map(([v, n]) => [v, n]);
     };
@@ -1385,8 +1461,8 @@
     ext.renderCustomStat = async (token, id) => {
         const d = defs().find(x => x.id === id);
         const ws = A().$('#workspace');
-        if (!d) { ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', 'Statistique introuvable', 'Elle a peut-être été supprimée.')}</section>`; return; }
-        ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
+        if (!d) { ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', 'Graphique introuvable', 'Il a peut-être été supprimé.')}</section>`; return; }
+        ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
         const datas = await loadData(d);
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         // le titre et le texte sont déjà en haut de la page : la carte ne les répète pas
@@ -1401,8 +1477,8 @@
         ws.querySelector('[data-cs-dash]').addEventListener('click', () => addToDashboard(id));
         ws.querySelectorAll('[data-cs-export]').forEach(b => b.addEventListener('click', () => exportStat(b.dataset.csExport, d, datas, ws.querySelector('.card-grid .card'))));
     };
-    /* ── Export d'une de « Mes statistiques » : image PNG, tableau CSV, impression (et PDF) ── */
-    const statFileName = d => (A().safeExportFilename ? A().safeExportFilename(d.name || 'statistique', 'statistique') : 'statistique');
+    /* ── Export d'un de « Mes graphiques » : image PNG, tableau CSV, impression (et PDF) ── */
+    const statFileName = d => (A().safeExportFilename ? A().safeExportFilename(d.name || 'graphique', 'graphique') : 'graphique');
     function statCsv(d, datas) {
         const q = v => { const t = (A().csvSafe || (x => String(x ?? '')))(v); return /[;"\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; }; // pas de formule glissée dans un tableur
         const lines = [];
@@ -1434,7 +1510,7 @@
     }
     // ⤓ Exporter : la fenêtre d'export commune (image, PDF par l'impression, impression, chiffres en CSV)
     function exportStatDialog(d, datas, cardEl) {
-        const UI = window.LCNDA_UI, name = d.name || 'Ma statistique';
+        const UI = window.LCNDA_UI, name = d.name || 'Mon graphique';
         if (!UI?.openExportDialog) return exportStat('print', d, datas, cardEl);
         UI.openExportDialog({title: name, defaultName: statFileName(d), quality: false, saveCopy: !!A().importMediaFile,
             preview: async () => drawStatImage(d, datas, `${d.icon ? d.icon + ' ' : ''}${name}`).toDataURL('image/png'),
@@ -1451,7 +1527,7 @@
         if (kind === 'csv') { if (ext.downloadText) ext.downloadText(opts.filename || statFileName(d) + '.csv', statCsv(d, datas), 'text/csv;charset=utf-8'); return; }
         if (!cardEl) return;
         const css = A().graphExportCss ? A().graphExportCss() : '';
-        const title = `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`;
+        const title = `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`;
         const html = `<div class="h-cs-sheet" style="background:#fff;padding:24px;font-family:inherit"><h2 style="margin:0 0 6px">${esc(title)}</h2>${d.note ? `<p style="margin:0 0 12px">${nl(d.note)}</p>` : ''}${cardEl.outerHTML}<p style="margin:10px 0 0;font-size:12px;color:#666">LCNDA · ${esc(new Date().toLocaleDateString('fr-FR'))}</p></div>`;
         if (kind === 'print') {
             const w = window.open('', '_blank', 'width=1000,height=800');

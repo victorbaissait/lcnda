@@ -1,6 +1,6 @@
 /**
  * 🗂️ Éditeur d'onglets (Maintenance → Éditeur d'onglets) : ses propres onglets dans la barre du haut, sans programmer.
- *  - une page de widgets, comme le tableau de bord : widgets de l'app, ses widgets, ses listes et ses statistiques
+ *  - une page de widgets, comme le tableau de bord : widgets de l'app, ses widgets, ses listes et ses graphiques
  *    (ajoutés depuis la colonne de gauche de l'onglet, ou ici) ;
  *  - ou un raccourci vers un écran de l'app (une liste, un diagramme, une statistique, un outil de maintenance…) ;
  *  - partir de rien, d'un onglet existant (copie du tableau de bord, un de ses onglets, un écran de l'app) ou d'un modèle ;
@@ -36,7 +36,8 @@
             ['Écrans', Object.entries(app.appModules).filter(([k]) => k !== 'jeu').map(([k, v]) => ['module:' + k, v[1]])],
             ['Listes', app.defaultListTypes.map(([k, , l]) => ['list:' + k, l])],
             ['Diagrammes (Graphiques)', app.orderedGraphDiagramItems(true).map(([k, , l]) => ['graph:' + k, l])],
-            ['Statistiques (Graphiques)', app.orderedGraphStatsItems(true).map(([k, , l]) => ['stat:' + k, l]).concat((ext.customStatItems?.() || []).map(([k, l]) => ['stat:' + k, l]))],
+            ['Statistiques (Graphiques)', app.orderedGraphStatsItems(true).map(([k, , l]) => ['stat:' + k, l])],
+            ...((ext.customStatItems?.() || []).length ? [['Mes graphiques (Graphiques)', ext.customStatItems().map(([k, l]) => ['stat:' + k, l])]] : []),
             ['Maintenance', app.defaultMaintenanceTabs.map(([k, , l]) => ['maint:' + k, l])],
         ];
     }
@@ -171,12 +172,12 @@
         if (open) { const t = tabs().find(x => x.id === open); if (t) return editTab({...t}, true); }
         const list = tabs();
         const kindText = t => t.kind === 'screen' ? `raccourci vers « ${esc(targetLabel(t.target))} »` : `${(t.widgets || []).length} widget${(t.widgets || []).length > 1 ? 's' : ''}`;
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Éditeur d’onglets', 'Crée tes propres onglets dans la barre du haut, sans rien programmer : une page de widgets comme le tableau de bord (widgets de l’app, tes widgets, tes listes, tes statistiques), ou un raccourci vers un écran de l’app. Pars de rien, d’un onglet existant ou d’un modèle.', '<button type="button" class="button" data-ct-new>+ Nouvel onglet</button>')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Éditeur d’onglets', 'Crée tes propres onglets dans la barre du haut, sans rien programmer : une page de widgets comme le tableau de bord (widgets de l’app, tes widgets, tes listes, tes graphiques), ou un raccourci vers un écran de l’app. Pars de rien, d’un onglet existant ou d’un modèle.', '<button type="button" class="button" data-ct-new>+ Nouvel onglet</button>')}
             <section class="maintenance-panel"><h3>Importer un onglet reçu</h3><p class="muted">Un fichier « .lcnda-onglet.json » envoyé par un proche : seule la mise en page est partagée, jamais les données.</p><input type="file" accept=".json,application/json" data-ct-import></section>
             ${list.length ? `<div class="h-records">${list.map((t, i) => `<article class="h-record"><header><div><strong>${esc(t.icon || '🗂️')} ${esc(t.name || 'Mon onglet')}</strong> <small>${kindText(t)}</small>${t.hidden ? ' <span class="collection-kind">masqué</span>' : ''}</div>
                     <span class="h-saved-tools"><button type="button" class="link-button" data-ct-edit="${esc(t.id)}">modifier</button><button type="button" class="link-button" data-ct-dup="${esc(t.id)}">dupliquer</button><button type="button" class="link-button" data-ct-hide="${esc(t.id)}">${t.hidden ? 'afficher' : 'masquer'}</button><button type="button" class="link-button" data-ct-del="${esc(t.id)}">supprimer</button></span></header>
                     ${t.intro ? `<p>${esc(t.intro)}</p>` : ''}<div class="page-actions"><button type="button" class="button small" data-ct-open="${esc(t.id)}">Ouvrir l’onglet</button><button type="button" class="button small secondary" data-ct-share="${esc(t.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>`
-                : A().emptyState({icon: '🗂️', text: 'Aucun onglet à toi pour l’instant', hint: 'Un onglet rassemble sur un écran les widgets, listes et statistiques de ton choix.', action: {label: '＋ Nouvel onglet', attrs: 'data-ct-new'}})}</section>`;
+                : A().emptyState({icon: '🗂️', text: 'Aucun onglet à toi pour l’instant', hint: 'Un onglet rassemble sur un écran les widgets, listes et graphiques de ton choix.', action: {label: '＋ Nouvel onglet', attrs: 'data-ct-new'}})}</section>`;
         const ws = A().$('#workspace'), find = id => list.find(t => t.id === id);
         ws.querySelectorAll('[data-ct-new]').forEach(b => b.addEventListener('click', chooseStart));
         ws.querySelectorAll('[data-ct-edit]').forEach(b => b.addEventListener('click', () => editTab({...find(b.dataset.ctEdit)}, true)));
@@ -186,7 +187,7 @@
         ws.querySelectorAll('[data-ct-hide]').forEach(b => b.addEventListener('click', () => { const t = find(b.dataset.ctHide); t.hidden = !t.hidden; menuHidden(t.id, t.hidden); save(list); refresh(); }));
         ws.querySelectorAll('[data-ct-del]').forEach(b => b.addEventListener('click', async () => {
             const t = find(b.dataset.ctDel);
-            // H7 : supprimé tout de suite (ses widgets, listes et statistiques restent), « ↶ Annuler » le remet
+            // H7 : supprimé tout de suite (ses widgets, listes et graphiques restent), « ↶ Annuler » le remet
             const before = JSON.parse(JSON.stringify(list)), again = () => { if (S().module === 'maintenance') refresh(); };
             save(list.filter(x => x.id !== t.id)); refresh();
             A().undoToast?.(`Onglet « ${t.name || 'Mon onglet'} » supprimé`, {undo: () => { save(before); again(); }, redo: () => { save(before.filter(x => x.id !== t.id)); again(); }});
@@ -222,7 +223,7 @@
         const board = A().dashboardBlockSettings; // tableau de bord principal (on n'est pas dans un onglet à soi ici)
         ext.openDialog({
             eyebrow: 'NOUVEL ONGLET', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
-            body: `<h4>Partir de rien</h4><div class="h-templates">${tile('🧩', 'Page composée', 'Une page vide où tu poses ce que tu veux : écrans de l’app (listes, diagrammes, fiches, carte…), widgets, statistiques, textes.', 'data-ct-blank')}${tile('🔗', 'Raccourci vers un écran', 'Un onglet qui ouvre directement une liste, un diagramme, une statistique ou un outil.', 'data-ct-screen')}</div>
+            body: `<h4>Partir de rien</h4><div class="h-templates">${tile('🧩', 'Page composée', 'Une page vide où tu poses ce que tu veux : écrans de l’app (listes, diagrammes, fiches, carte…), widgets, graphiques, textes.', 'data-ct-blank')}${tile('🔗', 'Raccourci vers un écran', 'Un onglet qui ouvre directement une liste, un diagramme, une statistique ou un outil.', 'data-ct-screen')}</div>
                 <h4>Partir d’un onglet existant</h4><div class="h-templates">${tile('📊', 'Copie du tableau de bord', `Les ${board().widgets.length} widgets du tableau de bord, dans le même ordre, à arranger à ta façon.`, 'data-ct-dashboard')}${mine.map(t => tile(t.icon || '🗂️', t.name || 'Mon onglet', 'Un de mes onglets', `data-ct-mine="${esc(t.id)}"`)).join('')}</div>
                 <h4>Partir d’un écran de l’app</h4><p class="muted">L’écran (avec ses menus) dans une page à toi, où tu ajoutes ensuite d’autres écrans, des widgets ou des notes.</p><div class="h-templates">${['list:villages', 'module:carte', 'graph:ancestors', 'list:reminders', 'module:enquetes', 'list:census_households'].map(v => tile('📺', targetLabel(v), 'Écran de l’app', `data-ct-fromscreen="${v}"`)).join('')}</div>
                 <h4>Modèles</h4><div class="h-templates">${TEMPLATES.map((t, i) => tile(t.icon, t.name, t.intro, `data-ct-tpl="${i}"`)).join('')}</div>`,
@@ -273,19 +274,19 @@
                     <label>Nom<input data-ct="name" value="${esc(t.name || '')}" maxlength="40" placeholder="Ma Bretagne"></label>
                     <label>Icône<input data-ct="icon" value="${esc(t.icon || '')}" maxlength="16" class="h-be-icon" placeholder="🗂️"></label>
                     <label>Place dans la barre <select data-ct="after">${afterOptions.map(([v, l]) => `<option value="${esc(v)}" ${(t.after || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                    <label>Sorte <select data-ct-kind><option value="page" ${t.kind !== 'screen' ? 'selected' : ''}>🧩 Page composée (écrans, widgets, statistiques, textes)</option><option value="screen" ${t.kind === 'screen' ? 'selected' : ''}>🔗 Raccourci vers un écran de l’app</option></select></label>
+                    <label>Sorte <select data-ct-kind><option value="page" ${t.kind !== 'screen' ? 'selected' : ''}>🧩 Page composée (écrans, widgets, graphiques, textes)</option><option value="screen" ${t.kind === 'screen' ? 'selected' : ''}>🔗 Raccourci vers un écran de l’app</option></select></label>
                     <label class="span-2">Texte en haut de la page <small>(facultatif)</small><textarea rows="2" data-ct="intro" maxlength="400" placeholder="À quoi sert cet onglet">${esc(t.intro || '')}</textarea></label></div></section>
                 ${t.kind === 'screen'
                     ? `<section class="maintenance-panel"><h3>2. L’écran à ouvrir</h3><label>Écran <select data-ct="target">${screenTargets().map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([v, l]) => `<option value="${esc(v)}" ${t.target === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label></section>`
-                    : `<section class="maintenance-panel"><h3>2. Ce que montre la page</h3><p class="muted">Pose ce que tu veux, dans l’ordre que tu veux : un écran de l’app (une liste, un diagramme, une statistique, une fiche, la carte, une de tes listes…), un widget, une de tes statistiques, un texte. Chaque pièce a sa largeur ; un écran a aussi sa hauteur.</p>
+                    : `<section class="maintenance-panel"><h3>2. Ce que montre la page</h3><p class="muted">Pose ce que tu veux, dans l’ordre que tu veux : un écran de l’app (une liste, un diagramme, une statistique, une fiche, la carte, une de tes listes…), un widget, un de tes graphiques, un texte. Chaque pièce a sa largeur ; un écran a aussi sa hauteur.</p>
                         ${t.widgets.length ? `<ol class="h-ct-widgets">${t.widgets.map((x, i) => pieceHtml(x, i, known)).join('')}</ol>` : '<p class="muted">La page est vide : ajoute une première pièce ci-dessous.</p>'}
                         <div class="h-ct-add"><label>+ Ajouter <select data-ct-wadd><option value="">choisir…</option>
                             <optgroup label="📝 Texte"><option value="note">Texte libre (titre, note, consigne)</option></optgroup>
                             ${screenTargets().map(([g, items]) => `<optgroup label="📺 ${esc(g)}">${items.map(([v, l]) => `<option value="screen|${esc(v)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}
                             ${myLists.length ? `<optgroup label="📋 Mes listes">${myLists.map(l => `<option value="screen|mylist:${Number(l.id)}">${esc((l.icon || '📋') + ' ' + l.name)}</option>`).join('')}</optgroup>` : ''}
                             <optgroup label="👤 Une personne"><option value="screen|person:">Fiche d’une personne…</option></optgroup>
-                            ${(() => { const all = catalog().filter(([k]) => !['app_screen', 'tab_note'].includes(k)); const own = all.filter(([k]) => String(k).startsWith('cw_')); const appW = all.filter(([k]) => !String(k).startsWith('cw_')); return `${own.length ? `<optgroup label="✨ Mes widgets et statistiques">${own.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>` : ''}<optgroup label="🧱 Widgets de l’app">${appW.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`; })()}</select></label>
-                        <span class="h-ct-create"><span class="muted">Créer d’abord :</span><button type="button" class="button small secondary" data-ct-go="widget_editor">🧱 un widget</button><button type="button" class="button small secondary" data-ct-go="stats_editor">📊 une statistique</button><button type="button" class="button small secondary" data-ct-go="my_lists">📋 une liste</button><button type="button" class="button small secondary" data-ct-go="block_editor">🧩 un bloc de fiche</button></span></div></section>`}
+                            ${(() => { const all = catalog().filter(([k]) => !['app_screen', 'tab_note'].includes(k)); const own = all.filter(([k]) => String(k).startsWith('cw_')); const appW = all.filter(([k]) => !String(k).startsWith('cw_')); return `${own.length ? `<optgroup label="✨ Mes widgets et graphiques">${own.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>` : ''}<optgroup label="🧱 Widgets de l’app">${appW.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`; })()}</select></label>
+                        <span class="h-ct-create"><span class="muted">Créer d’abord :</span><button type="button" class="button small secondary" data-ct-go="widget_editor">🧱 un widget</button><button type="button" class="button small secondary" data-ct-go="stats_editor">📊 un graphique</button><button type="button" class="button small secondary" data-ct-go="my_lists">📋 une liste</button><button type="button" class="button small secondary" data-ct-go="block_editor">🧩 un bloc de fiche</button></span></div></section>`}
                 <div class="page-actions"><button type="button" class="button" data-ct-save>Enregistrer</button><button type="button" class="button secondary" data-ct-saveopen>Enregistrer et ouvrir</button><button type="button" class="button secondary" data-ct-back>Annuler</button></div></section>`;
             const ws = app.$('#workspace');
             ws.querySelectorAll('[data-ct-back]').forEach(b => b.addEventListener('click', refresh));

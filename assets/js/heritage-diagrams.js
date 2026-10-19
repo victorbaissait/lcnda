@@ -49,7 +49,7 @@
         else { s.rows = pairs.map(([v, n]) => ({label: v, s0: n, color: keep[v] || ''})); s.series = [{...(s.series?.[0] || {}), name: s.series?.[0]?.name || label || 'Nombre'}]; }
         return s;
     }
-    /** 📈 un de mes graphiques (Éditeur de statistiques) posé comme un diagramme : son dessin, ses couleurs et ses chiffres suivent le graphique */
+    /** 📈 un de mes graphiques (Éditeur de graphiques) posé comme un diagramme : son dessin, ses couleurs et ses chiffres suivent le graphique */
     const followId = spec => (spec?.live?.follow && /^my:cw_[a-z0-9]{4,24}$/.test(String(spec.live.key || '')) ? String(spec.live.key).slice(3) : '');
     async function resolveFollow(spec) {
         const id = followId(spec), key = 'follow:' + spec.live.key; // à part des chiffres « tenus à jour » d'une statistique (même clé my:…)
@@ -252,7 +252,7 @@
         let rec;
         if (!id && given && R().KINDS[given.kind]) rec = {id: 0, name: givenName || given.o?.title || R().KINDS[given.kind].label, spec: clone(given), links: link ? [link] : []}; // données déjà prêtes (statistique, import)
         else if (id) { const d = await get(id); if (!d) return toast('Diagramme introuvable.', 'error');
-            // 📈 un de mes graphiques posé ici : on le modifie dans l'Éditeur de statistiques (il se met à jour partout)
+            // 📈 un de mes graphiques posé ici : on le modifie dans l'Éditeur de graphiques (il se met à jour partout)
             if (followId(d.spec)) { document.querySelectorAll('dialog[open]').forEach(x => { try { x.close(); } catch (_) {} }); if (ext.editMyGraph) ext.editMyGraph(followId(d.spec)); return null; }
             rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
         else {
@@ -300,8 +300,8 @@
         /* données prises dans l'app */
         const appPaneHtml = () => {
             const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || ['parliament', 'wordcloud', 'pictogram'].includes(k);
-            return `<div class="h-dg-app">${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par une statistique : un exemple, une statistique de l’app (noms, lieux, âges…) ou une de « Mes statistiques » (faites dans Maintenance → Éditeur de statistiques, avec tous leurs critères).</p>
-                <label>Statistique<select data-dg-src><option value="">Chargement…</option></select></label><label class="checkbox-line"><input type="checkbox" data-dg-srclive> 🔄 Tenir à jour (relire les chiffres à chaque affichage)</label><button type="button" class="button small" data-dg-srcgo>Prendre ces chiffres</button>` : ''}
+            return `<div class="h-dg-app">${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres tenus à jour : un exemple, une statistique de l’app (noms, lieux, âges…) ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques, avec tous leurs critères).</p>
+                <label>Graphique<select data-dg-src><option value="">Chargement…</option></select></label><label class="checkbox-line"><input type="checkbox" data-dg-srclive> 🔄 Tenir à jour (relire les chiffres à chaque affichage)</label><button type="button" class="button small" data-dg-srcgo>Prendre ces chiffres</button>` : ''}
                 ${people ? `<h4>👥 Des personnes de la base</h4><p class="muted">${k === 'timeline' ? 'Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté).' : 'Leurs naissances, mariages et décès deviennent des dates de la frise.'}</p>
                 <div class="h-pr-addlink" data-dg-pq>${window.LCNDA_PICKER.pickerField({name: 'dg_addp', kind: 'person'})}</div>` : ''}
                 ${!stats && !people ? '<p class="muted">Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données).</p>' : ''}</div>`;
@@ -312,7 +312,7 @@
             else if (sel) sel.innerHTML = '<option value="">Indisponible</option>';
             pane.querySelector('[data-dg-srcgo]')?.addEventListener('click', async () => {
                 const key = sel.value; if (!key) return; const label = sel.selectedOptions[0]?.textContent || '';
-                try { const pairs = await ext.diagramStatRows(key); if (!pairs.length) return toast('Aucun chiffre pour cette statistique.', 'error');
+                try { const pairs = await ext.diagramStatRows(key); if (!pairs.length) return toast('Aucun chiffre pour ce graphique.', 'error');
                     spec = fillFrom(spec, pairs, label); if (pane.querySelector('[data-dg-srclive]').checked) spec.live = {key, label}; else delete spec.live;
                     if (!spec.o.title || spec.o.title === kindOf().sample().o?.title) spec.o.title = label;
                     tab = 'data'; paint(); later(); toast(`${pairs.length} valeur${pairs.length > 1 ? 's' : ''} prise${pairs.length > 1 ? 's' : ''} dans l’app.`); } catch (e) { toast(e.message, 'error'); }
@@ -449,7 +449,7 @@
         const all = await list(true).catch(() => []);
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-gallery';
         dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 MES DIAGRAMMES</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-close>×</button></div>
-            <div class="h-dg-tiles"><button type="button" class="h-dg-tile is-new" data-new><span class="h-dg-mini h-dg-plus">＋</span><span>Nouveau diagramme</span></button>${ext.diagramFromStat ? '<button type="button" class="h-dg-tile is-new" data-fromstat><span class="h-dg-mini h-dg-plus">📊</span><span>D’une statistique (de l’app ou à moi, tenue à jour)</span></button><button type="button" class="h-dg-tile is-new" data-import><span class="h-dg-mini h-dg-plus">📥</span><span>Importer (fichier, tableau, Wikipédia, image)</span></button>' : ''}${ext.pickMyGraph ? '<button type="button" class="h-dg-tile is-new" data-mygraph><span class="h-dg-mini h-dg-plus">📈</span><span>Un de mes graphiques (Éditeur de statistiques, tenu à jour)</span></button>' : ''}${all.map(d => `<button type="button" class="h-dg-tile" data-pick="${d.id}"><span class="h-dg-mini"${followId(d.spec) ? ` data-dg-mini="${d.id}"` : ''}>${followId(d.spec) ? '<span class="h-dg-plus">📈</span>' : R().svg({...specOf(d), o: {...(d.spec?.o || {}), legend: 'none', source: '', subtitle: ''}}, 480)}</span><span>${esc(R().KINDS[d.kind]?.icon || '📊')} ${esc(d.name)}</span></button>`).join('')}</div>`;
+            <div class="h-dg-tiles"><button type="button" class="h-dg-tile is-new" data-new><span class="h-dg-mini h-dg-plus">＋</span><span>Nouveau diagramme</span></button>${ext.diagramFromStat ? '<button type="button" class="h-dg-tile is-new" data-fromstat><span class="h-dg-mini h-dg-plus">📊</span><span>D’un graphique (à moi ou de l’app, tenu à jour)</span></button><button type="button" class="h-dg-tile is-new" data-import><span class="h-dg-mini h-dg-plus">📥</span><span>Importer (fichier, tableau, Wikipédia, image)</span></button>' : ''}${ext.pickMyGraph ? '<button type="button" class="h-dg-tile is-new" data-mygraph><span class="h-dg-mini h-dg-plus">📈</span><span>Un de mes graphiques (Éditeur de graphiques, tenu à jour)</span></button>' : ''}${all.map(d => `<button type="button" class="h-dg-tile" data-pick="${d.id}"><span class="h-dg-mini"${followId(d.spec) ? ` data-dg-mini="${d.id}"` : ''}>${followId(d.spec) ? '<span class="h-dg-plus">📈</span>' : R().svg({...specOf(d), o: {...(d.spec?.o || {}), legend: 'none', source: '', subtitle: ''}}, 480)}</span><span>${esc(R().KINDS[d.kind]?.icon || '📊')} ${esc(d.name)}</span></button>`).join('')}</div>`;
         document.body.appendChild(dlg);
         const done = v => { dlg.close(); dlg.remove(); resolve(v); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); done(null); });
@@ -505,7 +505,7 @@
         const d = id ? await get(id) : null;
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         if (!d) { ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES</span><h2>Créer un diagramme</h2><p>Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page.</p></div><div class="page-actions"><button type="button" class="button" data-dg-new>+ Nouveau diagramme</button><label class="button secondary h-dg-file">⤒ Importer un fichier<input type="file" accept=".json,application/json" data-dg-import hidden></label></div></header></section>`; bindPage(ws, null); return; }
-        ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${followId(d.spec) ? `<p>📈 Ce diagramme montre ton graphique « ${esc(d.name)} » (Éditeur de statistiques) : son dessin et ses chiffres le suivent, partout où il est posé.</p>` : d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
+        ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${followId(d.spec) ? `<p>📈 Ce diagramme montre ton graphique « ${esc(d.name)} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé.</p>` : d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
             <div class="page-actions"><button type="button" class="button" data-dg-edit="${d.id}">${followId(d.spec) ? '✎ Modifier le graphique' : '✎ Modifier'}</button><button type="button" class="button secondary" data-dg-dup title="${followId(d.spec) ? 'Une copie figée, à retoucher comme un diagramme' : 'Une copie à modifier'}">⧉ Dupliquer</button><button type="button" class="button secondary" data-dg-dash title="Le poser sur le tableau de bord, comme un widget">➕ Tableau de bord</button><button type="button" class="button danger" data-dg-del>Supprimer</button></div></header>
             <div class="h-dg-pagetools"><button type="button" class="button small secondary" data-dg-pexpdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter</button></div>
             <div class="card h-dg-big"><div class="h-dg-svg">${await svgOf(d)}</div></div>

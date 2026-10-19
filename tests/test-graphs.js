@@ -112,12 +112,19 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         await p.goto(base);
         await p.waitForFunction(() => window.LCNDA_APP?.state && window.LCNDA_EXT?.myGraphs && window.LCNDA_EXT?.pickMyGraph, null, { timeout: 20000 });
         await p.waitForTimeout(600);
+        await t('reprise : le graphique du navigateur passe dans la base, l’ancien réglage part', async () => {
+            await p.waitForFunction(() => localStorage.getItem('genealogie-custom-widgets') === null, null, { timeout: 15000 });
+            const r = await (await fetch(base + 'api.php?action=graphs')).json();
+            assert.deepEqual(r.graphs.map(g => g.id), ['cw_test1234']);
+            assert.deepEqual(await p.evaluate(() => window.LCNDA_EXT.myGraphs().map(g => g.id)), ['cw_test1234']);
+        });
+        const pickIn = async () => { await p.waitForSelector('.pk-dialog .pk-row[data-row="0"]'); await p.click('.pk-dialog .pk-row[data-row="0"]'); };
         let did = 0;
         await t('« ＋ Diagramme » → « 📈 Un de mes graphiques » : un diagramme qui suit le graphique, réutilisé ensuite', async () => {
             const pick = () => p.evaluate(() => window.LCNDA_EXT.pickDiagram({ title: 'Ajouter un diagramme' }));
-            let pr = pick(); await p.click('[data-mygraph]'); await p.click('[data-gr-pickg="cw_test1234"]'); did = await pr;
+            let pr = pick(); await p.click('[data-mygraph]'); await pickIn(); did = await pr;
             assert.ok(did > 0);
-            pr = pick(); await p.click('[data-mygraph]'); await p.click('[data-gr-pickg="cw_test1234"]'); assert.equal(await pr, did);
+            pr = pick(); await p.click('[data-mygraph]'); await pickIn(); assert.equal(await pr, did);
             const all = await p.evaluate(async () => (await window.LCNDA_EXT.diagramList(true)).map(d => ({ id: d.id, follow: window.LCNDA_EXT.diagramFollowId(d) })));
             assert.deepEqual(all, [{ id: did, follow: 'cw_test1234' }]);
         });
@@ -126,7 +133,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
             await p.waitForFunction(() => document.querySelector('#gr-test svg'));
             const txt = await p.$eval('#gr-test svg', s => s.textContent);
             assert.match(txt, /1900/); assert.match(txt, /1950/); assert.match(txt, /Rennes/);
-            await p.evaluate(() => { const k = 'genealogie-custom-widgets'; const l = JSON.parse(localStorage.getItem(k)); l[0].free.rows[0].v[0] = '99'; l[0].style = 'pie'; l[0].name = 'Habitants (bis)'; localStorage.setItem(k, JSON.stringify(l)); document.dispatchEvent(new CustomEvent('lcnda:graphs-changed')); });
+            assert.equal(await p.evaluate(async () => { const l = window.LCNDA_EXT.customWidgetList(); l[0] = JSON.parse(JSON.stringify(l[0])); l[0].free.rows[0].v[0] = '99'; l[0].style = 'pie'; l[0].name = 'Habitants (bis)'; return window.LCNDA_EXT.saveCustomWidgetList(l); }), true);
             await p.waitForFunction(() => /99/.test(document.querySelector('#gr-test svg')?.textContent || ''), null, { timeout: 8000 });
             await p.waitForFunction(async () => (await window.LCNDA_EXT.diagramList(true)).some(d => d.name === 'Habitants (bis)' && d.kind === 'pie'), null, { timeout: 8000 });
         });
@@ -146,7 +153,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
             assert.equal(await p.$$eval('[data-gr-item]', e => e.length), 1);
             assert.equal(await p.evaluate(() => window.__xss), undefined);
         });
-        await t('« ✎ Modifier » sur un graphique posé rouvre l’Éditeur de statistiques', async () => {
+        await t('« ✎ Modifier » sur un graphique posé rouvre l’Éditeur de graphiques', async () => {
             await p.evaluate(id => window.LCNDA_EXT.openDiagramEditor(id), did);
             await p.waitForFunction(() => window.LCNDA_APP.state.module === 'maintenance' && document.querySelector('[data-cw-free]'), null, { timeout: 8000 });
             assert.equal(await p.$$eval('[data-fr-ser]', e => e.map(x => x.value).join(',')), '1900,1950');
@@ -155,7 +162,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         await t('le bloc « Diagramme » d’une Fiche propose « 📈 Un de mes graphiques »', async () => {
             await p.evaluate(() => { const d = document.createElement('dialog'); d.id = 'fi-test'; d.innerHTML = '<select name="diagram"><option value="">— choisir —</option></select><p><button type="button" data-fi-dgnew>+ Nouveau diagramme</button></p>'; document.body.appendChild(d); d.show(); });
             await p.click('#fi-test [data-gr-fimine]');
-            await p.click('[data-gr-pickg="cw_test1234"]');
+            await pickIn();
             await p.waitForFunction(id => document.querySelector('#fi-test select').value === String(id), did);
             await p.evaluate(() => document.getElementById('fi-test').remove());
         });

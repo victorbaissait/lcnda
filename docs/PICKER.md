@@ -64,7 +64,13 @@ P.pickerField({name: 'places', kind: 'place', multiple: true});
 // 7. Une autre sorte
 P.pickerField({name: 'source_id', kind: 'source'});
 P.pickerField({name: 'label_ids', kind: 'label', multiple: true});
-// kinds : person, place, source, media, investigation, battue, label, house, periodical, employer, census, artwork
+// kinds : person, place, source, media, investigation, battue, label, house, periodical, employer, census, artwork, graph
+
+// 📈 un de mes graphiques (table custom_widgets, lib/graphs.php) : la valeur est le numéro de ligne (item.id) ; l'identifiant
+// du graphique (cw_…) est dans item.uid. Case vide = tous les graphiques ; « ＋ Nouveau graphique » / « ＋ Créer le graphique « … » »
+// ouvrent l'Éditeur de graphiques (allowCreate: true). filter.graph_kinds : sortes de définitions (« chart,appstat » = ceux qui
+// se posent comme un diagramme ; sans filtre = tous les graphiques). ext.pickMyGraph() s'en sert.
+P.pickerField({name: 'g', hiddenName: false, kind: 'graph', allowCreate: true, filter: {graph_kinds: 'chart,appstat'}});
 
 // 🎨 une fiche du moteur des œuvres (disque, morceau, œuvre d'art, exposition, type créé par l'utilisateur…) : docs/TYPES.md
 P.pickerField({name: 'release', kind: 'artwork', filter: {art_kind: 'release,master', art_person: 12}});
@@ -158,6 +164,7 @@ Champs en plus selon la sorte :
 | artwork (fiches du moteur) | `art_kind` (clé du type), `thumb` (première photo) ; filtres `art_kind=` (types, séparés par des virgules) et `art_person=` |
 | enquête | `person_id` |
 | employeur | `key` |
+| graphique | `uid` (cw_…), `thumb` (vignette PNG), `graph_kind`, `places` (nombre d'endroits où il est posé) ; filtre `graph_kinds=` |
 
 Autres paramètres GET : `person_id=` et `media_type=` (médias), `near=lat,lon` (lieux les plus proches d'un point :
 groupes `base` puis `fr`, distance dans la ligne grise).

@@ -1,9 +1,9 @@
-/* LCNDA — 📊 Les types de diagrammes, communs aux diagrammes et aux statistiques :
+/* LCNDA — 📊 Les types de diagrammes, communs aux diagrammes et aux graphiques :
  *  - un seul catalogue (ordre, types cachés, groupes à soi) : Maintenance → « Types de diagrammes », ou ⚙️ dans la galerie ;
- *  - une statistique (Éditeur de statistiques) peut se dessiner avec n'importe quel type : parts, chiffres, assemblées,
+ *  - un graphique (Éditeur de graphiques) peut se dessiner avec n'importe quel type : parts, chiffres, assemblées,
  *    nuage de mots… et, à partir des personnes, frise de vies, frise chronologique, flux de migrations ;
- *  - partout où l'on pose un diagramme (fiche, fiche d'une personne, enquête, Atelier, tableau de bord) : « D'une
- *    statistique » (tenue à jour) et « Importer » : fichier (diagramme ou statistique LCNDA, CSV), tableau collé, page
+ *  - partout où l'on pose un diagramme (fiche, fiche d'une personne, enquête, Atelier, tableau de bord) : « D'un
+ *    graphique » (tenu à jour) et « Importer » : fichier (diagramme ou graphique LCNDA, CSV), tableau collé, page
  *    Wikipédia (ses tableaux et ses images), image d'un graphique (PNG, JPG, SVG) convertie en chiffres à corriger.
  */
 (() => {
@@ -64,10 +64,10 @@
             const lis = [...root.querySelectorAll('li[data-dk-id]')], groupOf = {};
             lis.forEach(li => { const g = li.closest('[data-dk-g]').dataset.dkG; if (g !== li.dataset.dkDef) groupOf[li.dataset.dkId] = g; });
             write(KKEY, {order: lis.map(li => li.dataset.dkId), hidden: lis.filter(li => !li.querySelector('input[type=checkbox]').checked).map(li => li.dataset.dkId), groupOf, groups: [...root.querySelectorAll('[data-dk-g]')].map(x => x.dataset.dkG)});
-            toast('Types de diagrammes enregistrés (galerie des diagrammes et éditeur de statistiques).');
+            toast('Types de diagrammes enregistrés (galerie des diagrammes et Éditeur de graphiques).');
         }
     }
-    const kindsHelp = '<p class="muted">Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de statistiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes.</p>';
+    const kindsHelp = '<p class="muted">Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes.</p>';
     ext.openDiagramKindsEditor = ({onSave} = {}) => {
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-dk-dlg';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">DIAGRAMMES</span><h2>⚙️ Ranger les types</h2></div><button type="button" class="icon-button" data-x>×</button></div><div class="h-dk-body">${kindsHelp}${kindsEditorHtml()}</div><div class="modal-actions"><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button><button type="button" class="button" data-dk-save>Enregistrer</button></div>`;
@@ -81,14 +81,14 @@
         if (token !== A().state.workspaceToken) return;
         const ws = document.getElementById('workspace');
         ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>📊 Types de diagrammes</h2><p>Ordre, types montrés ou cachés, et groupes à toi.</p></div></header><div class="maintenance-panel">${kindsHelp}${kindsEditorHtml()}<div class="page-actions action-zone"><button type="button" class="button" data-dk-save>Enregistrer</button><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button></div></div>
-            <section class="maintenance-panel h-dk-howto"><h3>📥 Ma propre statistique à partir de données d’ailleurs</h3>${HOWTO}</section></section>`;
+            <section class="maintenance-panel h-dk-howto"><h3>📥 Mon propre graphique à partir de données d’ailleurs</h3>${HOWTO}</section></section>`;
         bindKindsEditor(ws.querySelector('.page'));
     };
     const HOWTO = `<ol><li><b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « 📥 Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries.</li>
         <li><b>Un fichier CSV</b> : « 📥 Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation).</li>
         <li><b>Une page Wikipédia</b> : « 📥 Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un.</li>
         <li><b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « 📥 Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme.</li>
-        <li><b>Une statistique partagée</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « 📥 Importer » → « Fichier » : elle rejoint « Mes statistiques » et se dessine avec les données de ton arbre.</li>
+        <li><b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « 📥 Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre.</li>
         <li>Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout.</li></ol>`;
     ext.diagramHowtoHtml = () => HOWTO;
 
@@ -148,14 +148,14 @@
     }
     ext.diagramFromStat = ({link = null} = {}) => new Promise(async res => {
         const src = await ext.diagramStatSources?.().catch(() => []) || []; let done = false;
-        if (!src.length) { toast('Aucune statistique disponible.', 'error'); return res(null); }
+        if (!src.length) { toast('Aucun graphique disponible.', 'error'); return res(null); }
         const g = {}; src.forEach(([k, l, grp]) => { (g[grp] = g[grp] || []).push([k, l]); });
         const groups = catalog(DI().TEMPLATES()).map(([gn, items]) => [gn, items.filter(t => PAIR_KINDS.has(t.kind) && !t.preset)]).filter(([, l]) => l.length);
-        ext.openDialog({eyebrow: 'DIAGRAMME', title: '📊 D’une statistique', submitLabel: 'Créer', body: `<div class="h-dk-form"><p class="muted">Une statistique de l’app (naissances par décennie, prénoms…), un exemple, ou une des tiennes (Maintenance → Éditeur de statistiques), dessinée avec le type de ton choix.</p>
-            <label>Statistique<select name="src">${Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
+        ext.openDialog({eyebrow: 'DIAGRAMME', title: '📊 D’un graphique', submitLabel: 'Créer', body: `<div class="h-dk-form"><p class="muted">Un de tes graphiques (Maintenance → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix.</p>
+            <label>Graphique<select name="src">${Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
             <label>Dessin<select name="tpl">${groups.map(([gn, items]) => `<optgroup label="${esc(gn)}">${items.map(t => `<option value="${esc(tplId(t))}">${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</optgroup>`).join('')}</select></label>
             <label class="checkbox-line"><input type="checkbox" name="live" checked> Chiffres tenus à jour (relus dans l’arbre à chaque affichage)</label>
-            <p><button type="button" class="link-button" data-newstat>＋ Créer une nouvelle statistique (Éditeur de statistiques)…</button></p></div>`,
+            <p><button type="button" class="link-button" data-newstat>＋ Créer un nouveau graphique (Éditeur de graphiques)…</button></p></div>`,
             onOpen: dg => { dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); dg.querySelector('[data-newstat]').addEventListener('click', () => { dg.close(); ext.newStatFor?.(); }); },
             onSubmit: async f => {
                 const key = f.querySelector('[name=src]').value, label = f.querySelector('[name=src]').selectedOptions[0]?.textContent || '', t = DI().TEMPLATES().find(x => tplId(x) === f.querySelector('[name=tpl]').value);
@@ -177,10 +177,10 @@
     }
     ext.diagramImport = ({link = null} = {}) => new Promise(res => { let done = false;
         ext.openDialog({eyebrow: 'DIAGRAMME', title: '📥 Importer', wide: true, submitLabel: 'Continuer', body: `<div class="h-dgi"><nav class="h-dgi-tabs">${[['file', '📄 Fichier'], ['paste', '📋 Coller un tableau'], ['wiki', '🌐 Page Wikipédia'], ['image', '🖼️ Image d’un graphique']].map(([k, l], i) => `<button type="button" data-dgi-tab="${k}" class="${i ? '' : 'active'}">${l}</button>`).join('')}</nav>
-            <section data-dgi="file"><p class="muted">Un diagramme LCNDA (.json), une statistique partagée (.lcnda-widget.json) ou un tableau CSV.</p><input type="file" name="file" accept=".json,.csv,.tsv,.txt,application/json,text/csv"></section>
+            <section data-dgi="file"><p class="muted">Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV.</p><input type="file" name="file" accept=".json,.csv,.tsv,.txt,application/json,text/csv"></section>
             <section data-dgi="paste" hidden><p class="muted">Copie un tableau (tableur, site web…) et colle-le ici. Première colonne = les noms, colonnes suivantes = les chiffres.</p><textarea name="paste" rows="10" placeholder="Prénom;Nombre&#10;Marie;42&#10;Jean;37"></textarea></section>
             <section data-dgi="wiki" hidden><p class="muted">L’adresse d’une page Wikipédia (n’importe quelle langue) : ses tableaux et ses graphiques s’affichent, choisis-en un. Il faut Internet.</p><span class="h-fp-who"><input name="wiki" placeholder="https://fr.wikipedia.org/wiki/Démographie_de_la_France"><button type="button" class="button small" data-dgi-wiki>Lire la page</button></span><div data-dgi-wikires></div></section>
-            <section data-dgi="image" hidden><p class="muted">Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite.</p><input type="file" name="img" accept="image/*"></section></div>${ext.diagramHowtoHtml ? `<details class="h-dgi-howto"><summary>Comment faire ma propre statistique avec des données d’ailleurs ?</summary>${HOWTO}</details>` : ''}`,
+            <section data-dgi="image" hidden><p class="muted">Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite.</p><input type="file" name="img" accept="image/*"></section></div>${ext.diagramHowtoHtml ? `<details class="h-dgi-howto"><summary>Comment faire mon propre graphique avec des données d’ailleurs ?</summary>${HOWTO}</details>` : ''}`,
             onOpen: dg => {
                 let tab = 'file'; dg._tab = () => tab;
                 dg.addEventListener('close', () => { if (!done) res(null); }, {once: true});
@@ -194,8 +194,8 @@
                         const text = await file.text(), name = file.name.replace(/\.[^.]+$/, '');
                         if (/\.json$/i.test(file.name)) { const j = JSON.parse(text);
                             if (j?.lcnda_diagram && R().KINDS[j.kind]) { done = true; setTimeout(async () => res(await editWith({...(j.spec || {}), kind: j.kind}, String(j.name || name), link)), 0); return; }
-                            if (j?.format === 'lcnda-widget') { const st = ext.importCustomStat(j); toast(`Statistique « ${st.name} » ajoutée à Mes statistiques.`); const t = await pickKind('Avec quel dessin ?', x => PAIR_KINDS.has(x.kind) && !x.preset); if (!t) return; const pairs = await ext.diagramStatRows(st.key); const spec = {...DI().fillFrom(DI().presetSpec(t), pairs, st.name), live: {key: st.key, label: st.name}}; spec.o = {...spec.o, title: st.name}; done = true; setTimeout(async () => res(await editWith(spec, st.name, link)), 0); return; }
-                            throw new Error('Ce fichier JSON n’est ni un diagramme ni une statistique LCNDA.'); }
+                            if (j?.format === 'lcnda-widget') { const st = ext.importCustomStat(j); toast(`Graphique « ${st.name} » ajouté à Mes graphiques.`); const t = await pickKind('Avec quel dessin ?', x => PAIR_KINDS.has(x.kind) && !x.preset); if (!t) return; const pairs = await ext.diagramStatRows(st.key); const spec = {...DI().fillFrom(DI().presetSpec(t), pairs, st.name), live: {key: st.key, label: st.name}}; spec.o = {...spec.o, title: st.name}; done = true; setTimeout(async () => res(await editWith(spec, st.name, link)), 0); return; }
+                            throw new Error('Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA.'); }
                         const spec = await specFromTable(text, name); if (!spec) return false; done = true; setTimeout(async () => res(await editWith(spec, name, link)), 0); return; }
                     if (tab === 'paste') { const text = f.querySelector('[name=paste]').value; if (!text.trim()) { toast('Colle un tableau.', 'error'); return false; } const spec = await specFromTable(text); if (!spec) return false; done = true; setTimeout(async () => res(await editWith(spec, spec.o?.title || 'Tableau collé', link)), 0); return; }
                     if (tab === 'image') { const file = f.querySelector('[name=img]').files?.[0]; if (!file) { toast('Choisis une image.', 'error'); return false; } const src = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(file); }); done = true; setTimeout(async () => res(await digitize(src, {link, title: file.name.replace(/\.[^.]+$/, '')})), 0); return; }

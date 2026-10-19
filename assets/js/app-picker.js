@@ -27,6 +27,7 @@
         employer: {sym: '🏭', add: '＋ Ajouter un employeur…', one: 'employeur', none: 'Aucun employeur', label: '🏭 Employeurs'},
         census: {sym: '📋', add: '＋ Ajouter un recensement…', one: 'recensement', none: 'Aucun recensement', label: '📋 Recensements'},
         artwork: {sym: '🎨', add: '＋ Ajouter une fiche…', one: 'fiche', fem: true, none: 'Aucune fiche', label: '🎨 Œuvres'},
+        graph: {sym: '📈', ph: 'Chercher un graphique… (ex. naissances, camembert)', add: '＋ Ajouter un graphique…', one: 'graphique', none: 'Aucun graphique', create: 'Créer le graphique', createEmpty: 'Nouveau graphique', label: '📈 Graphiques'},
     };
     const kindOf = k => K[k] ? k : 'person';
     const isPerson = it => it && (it.kind === 'person' || it.kind === 'animal');
@@ -255,7 +256,7 @@
     // ── la recherche dans une case ──
     const SS = new WeakMap();
     const S = s => { if (!SS.has(s)) SS.set(s, {seq: 0, q: '', groups: [], flat: [], more: false, next: 0, active: 0, filter: 'all', counts: null, loading: false, timer: 0, kind: ''}); return SS.get(s); };
-    const EMPTY_OK = ['label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media'];
+    const EMPTY_OK = ['label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph'];
     function minLen(c) { const kinds = c.opts.kind.split(','); return kinds.length > 1 ? 2 : (K[kinds[0]]?.min ?? 1); }
     function onFocus(c, s) { const inp = s.querySelector('.pk-input'); if (inp.value.trim().length >= minLen(c) || (!inp.value.trim() && !c.opts.kind.includes(',') && EMPTY_OK.includes(c.kind))) { if (s.querySelector('.pk-list').hidden) run(c, s); } }
     function schedule(c, s) {
@@ -277,6 +278,7 @@
         if (f.media_type) extra.media_type = f.media_type;
         if (f.art_kind) extra.art_kind = f.art_kind;
         if (f.art_person) extra.art_person = f.art_person;
+        if (f.graph_kinds) extra.graph_kinds = f.graph_kinds;
         return {kind, q, animals: c.opts.animals === 0 ? 0 : 1, ...extra};
     }
     async function run(c, s, more = false) {
@@ -310,8 +312,9 @@
     function actions(c, s, q) {
         const kinds = c.opts.kind.split(','), st = S(s), kind = c.opts.kind.includes(',') && st.filter !== 'all' ? st.filter : kinds[0];
         const out = [], mixed = kinds.length > 1 && st.filter === 'all';
-        if (!q) return out;
         const canCreate = c.opts.allowCreate === true || (c.opts.allowCreate === 'auto' && (kind === 'person' || kind === 'place'));
+        // case vide d'une sorte qui se montre en entier (📈 graphiques) : « ＋ Nouveau graphique » en bas de la liste
+        if (!q) { if (canCreate && !mixed && K[kind]?.createEmpty) out.push({act: 'create', kind, text: '', html: `＋ ${esc(K[kind].createEmpty)}`}); return out; }
         if (canCreate && !mixed) {
             const text = kind === 'person' ? q.charAt(0).toUpperCase() + q.slice(1) : q;
             out.push({act: 'create', kind, text, html: `＋ ${esc(K[kind]?.create || 'Créer')} « ${esc(text)} »`});
@@ -360,7 +363,7 @@
             head = `<div class="pk-head"><span>${esc(headText(c, s))}</span><span>↑ ↓ Entrée</span></div>`;
         }
         const kindNow = st.kind.includes(',') ? '' : st.kind;
-        const empty = !flat.length ? `<div class="pk-empty">${esc(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien')} pour « ${esc(q)} ». Vérifie l’orthographe${acts.length ? ', ou :' : '.'}</div>` : '';
+        const empty = !flat.length ? (q ? `<div class="pk-empty">${esc(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien')} pour « ${esc(q)} ». Vérifie l’orthographe${acts.length ? ', ou :' : '.'}</div>` : `<div class="pk-empty">${esc(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien')} pour l’instant${acts.length ? ' :' : '.'}</div>`) : '';
         let ai = flat.length;
         const foot = acts.length ? `<div class="pk-foot">${acts.map(a => { const h = `<div class="pk-act pk-row${a.muted ? ' muted' : ''}${ai === st.active ? ' on' : ''}" role="option" data-row="${ai}">${a.html}</div>`; ai++; return h; }).join('')}</div>` : '';
         list.innerHTML = head + (flat.length ? `<div class="pk-scroll">${body}</div>` : empty) + foot;
@@ -474,6 +477,9 @@
             post('picker_place_adopt', {name: row.text}).then(r => done({...(r.item || {}), id: Number(r.id), kind: 'place', group: 'base', title: r.item?.title || row.text})).catch(err => toast(err.message, 'error'));
         } else if (row.kind === 'person') {
             createPerson(row.text, done);
+        } else if (row.kind === 'graph' && window.LCNDA_EXT?.newStatFor) {
+            // 📈 l'Éditeur de graphiques s'ouvre (la fenêtre de choix se ferme), avec le nom tapé ; une fois enregistré, on le pose
+            c.el.closest('dialog[open]')?.close(); window.LCNDA_EXT.newStatFor({name: row.text});
         } else toast(`Crée-la d’abord dans l’outil, puis choisis-la ici.`);
     }
     /** Repli de « ＋ Créer la fiche » : la fenêtre « Nouvelle fiche » de l'app, préremplie ; la fiche enregistrée est choisie. */
@@ -589,6 +595,7 @@
         if (it.kind === 'battue' && app.state && app.setModule) { close(); app.state.currentBattueId = it.id; app.state.enquetesTab = 'battues'; app.setModule('enquetes'); return; }
         if (it.kind === 'house' && window.LCNDA_EXT?.openHouse) { window.LCNDA_EXT.openHouse({id: it.id}); return; }
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
+        if (it.kind === 'graph' && window.LCNDA_EXT?.openMyGraph) { close(); window.LCNDA_EXT.openMyGraph(it.uid); return; }
         toast(`« ${it.title} » : ouvre-le depuis son outil.`);
     }
 

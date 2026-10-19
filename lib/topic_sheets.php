@@ -5,7 +5,7 @@ declare(strict_types=1);
  * 📒 Fiches (onglet « Fiches », masqué au départ) : une page sur un sujet — « La Pologne avant les guerres
  * napoléoniennes », un métier, un lieu… — faite de blocs rangés sur une grille : texte, images et documents,
  * personnes, frise de dates, citation, liens, intertitre, et tout ce que l'app sait montrer (écrans, listes,
- * Mes listes, widgets et statistiques à soi). Table topic_sheets (structure n°42) ; les images sont des médias
+ * Mes listes, widgets et graphiques à soi). Table topic_sheets (structure n°42) ; les images sont des médias
  * rattachés à la fiche (family_collection_media, type « topic_sheet », rôle = le bloc).
  */
 

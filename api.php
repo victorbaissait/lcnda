@@ -6,6 +6,7 @@ require __DIR__ . '/lib/gedcom.php';   // import / export GEDCOM
 require __DIR__ . '/lib/heredis.php';  // fichier Hérédis natif (.hmw / .heredis)
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
+require_once __DIR__ . '/lib/graphs.php'; // 📈 mes graphiques (table custom_widgets, sorte « graph » du menu de choix)
 require_once __DIR__ . '/lib/scene.php'; // 🎤 scène : coordonnées des lieux des concerts (assets/js/heritage-scene*.js)
 require_once __DIR__ . '/lib/layout_extra.php'; // 📐 mise en page : arbre dynamique, citations, vérificateur, index des lieux et métiers
 
@@ -192,6 +193,9 @@ try {
     }
     if ($isWrite && $action === 'save_audio_project') {
         save_audio_project($pdo, $_FILES['file'] ?? null, $_POST);
+    }
+    if ($action === 'graphs' || $action === 'graphs_write') { // 📈 mes graphiques et widgets rangés dans la base (lib/graphs.php)
+        graphs_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
     if ($action === 'puzzle' || $action === 'puzzle_write') { // 🧩 parties de puzzle (lib/puzzle.php)
         require_once __DIR__ . '/lib/puzzle.php';

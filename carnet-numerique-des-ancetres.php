@@ -224,7 +224,7 @@
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux libres, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></span></summary>
+                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux libres, animaux, fiches sur un sujet, livre de famille et livrets, graphiques et réglages à soi</small></span></summary>
                 <div class="presentation-changes-body">
                     <h4>📐 Atelier de mise en page</h4>
                     <ul>
@@ -279,9 +279,9 @@
                         <li>Livre de famille par branche : parties à cocher et ranger, textes, styles, polices, format ; PDF, HTML, Word, OpenDocument, ePub, Markdown, texte, CSV.</li>
                         <li>Livrets de famille transcrits en entier, personnes reliées aux fiches ; fiches d'employeurs façon fiche d'entreprise.</li>
                     </ul>
-                    <h4>📊 Statistiques, widgets et onglets à soi</h4>
+                    <h4>📊 Graphiques, widgets et onglets à soi</h4>
                     <ul>
-                        <li>Éditeur de statistiques et de widgets, onglets à soi avec n'importe quel écran de l'app ; tableau de bord en pages et en ensembles repliables.</li>
+                        <li>Éditeur de graphiques et de widgets, onglets à soi avec n'importe quel écran de l'app ; tableau de bord en pages et en ensembles repliables.</li>
                         <li>Distributions : <b>« + Critère »</b> autant qu'on veut, filtres par défaut, et <b>un clic sur une barre</b> (pyramides des âges comprises) montre les personnes comptées.</li>
                         <li>Fiche d'un village et monographie de commune en widget, saint du jour détaillé, suggestions de recherche.</li>
                     </ul>
@@ -689,12 +689,12 @@
                 <span class="eyebrow">04 — EN DÉTAIL</span>
                 <h2>Chaque généalogie est unique, votre logiciel aussi.</h2>
             </header>
-            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, statistiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
+            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, graphiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
 
             <div class="presentation-about-grid">
                 <article class="presentation-about about-intro">
                     <h3>Un logiciel qui s’adapte à votre famille</h3>
-                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements, blocs, widgets, statistiques et onglets, et vous réglez couleurs, polices et affichage. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
+                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements, blocs, widgets, graphiques et onglets, et vous réglez couleurs, polices et affichage. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
                 </article>
                 <article class="presentation-about">
                     <h3>Un carnet de recherche, pas seulement un arbre</h3>

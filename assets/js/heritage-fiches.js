@@ -2,7 +2,7 @@
  * Une fiche = une page sur un sujet (« La Pologne avant les guerres napoléoniennes », un métier, un lieu…), faite de
  * blocs rangés sur une grille : texte (mise en forme simple), images et documents, personnes, frise de dates, citation,
  * liens, intertitre, et ce que l'app sait montrer : un écran (carte, arbre, liste, Mes listes, fiche d'une personne,
- * village…) ou un widget / une statistique à soi. Serveur : lib/topic_sheets.php.
+ * village…) ou un widget / un graphique à soi. Serveur : lib/topic_sheets.php.
  */
 (() => {
     'use strict';
@@ -26,7 +26,7 @@
         ['divider', '➖', 'Intertitre', 'Un titre pour séparer les parties'],
         ['screen', '📺', 'Écran de l’app', 'Carte, arbre, liste, Mes listes, fiche d’une personne, village…'],
         ['diagram', '🏛️', 'Diagramme', 'Un de « Mes diagrammes » : hémicycle, frise d’un groupe, camembert…'],
-        ['widget', '📊', 'Widget ou statistique à soi', 'Ceux de l’Éditeur de widgets / de statistiques'],
+        ['widget', '📊', 'Widget ou graphique à soi', 'Ceux de l’Éditeur de widgets / de graphiques'],
     ];
     const kindOf = t => KINDS.find(k => k[0] === t) || KINDS[0];
     const WIDTHS = [['12', 'toute la largeur'], ['9', '¾'], ['8', '⅔'], ['6', '½'], ['4', '⅓'], ['3', '¼']];
@@ -101,7 +101,7 @@
     };
     function renderIndex(token, tpls = []) {
         A().$('#workspace').innerHTML = `<section class="page h-fi">
-            <header class="page-header"><div><span class="eyebrow">FICHES</span><h2>📒 Mes fiches</h2><p>Une fiche par sujet : l’histoire d’un pays à une époque, un lieu, un métier, une guerre, une coutume… Tu y mets ce que tu veux : du texte, des images et des documents, des personnes de la base, une frise de dates, des citations, des liens, et tout ce que l’app sait montrer (carte, arbre, listes, Mes listes, widgets et statistiques à toi).</p></div>
+            <header class="page-header"><div><span class="eyebrow">FICHES</span><h2>📒 Mes fiches</h2><p>Une fiche par sujet : l’histoire d’un pays à une époque, un lieu, un métier, une guerre, une coutume… Tu y mets ce que tu veux : du texte, des images et des documents, des personnes de la base, une frise de dates, des citations, des liens, et tout ce que l’app sait montrer (carte, arbre, listes, Mes listes, widgets et graphiques à toi).</p></div>
                 <div class="page-actions"><button type="button" class="button" data-fi-new>＋ Nouvelle fiche</button></div></header>
             ${sheets.length ? `<div class="h-fi-cards">${sheets.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}">${s.cover ? `<span class="h-fi-cover">${A().mediaThumbHtml(s.cover)}</span>` : `<span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span>`}<strong>${esc(s.icon || '')} ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks} bloc${s.blocks > 1 ? 's' : ''}</small></button>`).join('')}</div>` : A().emptyState({icon: '📒', text: 'Aucune fiche pour l’instant', hint: 'Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet.', action: {label: '＋ Nouvelle fiche', attrs: 'data-fi-new'}})}
             ${tpls.length ? `<h3 class="h-fi-modhead">⭐ Mes modèles <small class="muted">— des fiches toutes prêtes à remplir, proposées dans « Nouvelle fiche »</small></h3><div class="h-fi-cards is-models">${tpls.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}"><span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span><strong>⭐ ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks.length} bloc${s.blocks.length > 1 ? 's' : ''}</small></button>`).join('')}</div>` : ''}
@@ -277,11 +277,17 @@
             <label>Hauteur<select name="height">${ext.appScreen.heights.map(([v, l]) => `<option value="${v}" ${String(b.height) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="sidebar" ${b.sidebar ? 'checked' : ''}> avec sa colonne de gauche (menus de l’écran)</label>
             <p class="muted">Mes listes, les listes de l’app, la carte, les arbres, les statistiques, la fiche d’une personne, un village… : tout écran de l’app se met dans la fiche, à jour.</p>` : '<p class="muted">Écrans indisponibles.</p>';
         if (b.type === 'diagram') { const items = ext.diagramItems?.() || []; body = `<label>Diagramme<select name="diagram"><option value="">— choisir —</option>${items.map(([id, l]) => `<option value="${id}" ${Number(b.diagram) === Number(id) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><p><button type="button" class="button small secondary" data-fi-dgnew>+ Nouveau diagramme</button></p><p class="muted">Graphiques → Mes diagrammes : le bloc montre toujours sa dernière version.</p>`; }
-        if (b.type === 'widget') { const defs = Object.values(ext.customWidgetDefs?.() || {}); body = defs.length ? `<label>Widget ou statistique<select name="widget">${defs.map(w => `<option value="${esc(w.id)}" ${b.widget === w.id ? 'selected' : ''}>${esc((w.icon || '🧱') + ' ' + (w.name || w.id))}</option>`).join('')}</select></label><p class="muted">Pour en créer un : Maintenance → Éditeur de widgets ou Éditeur de statistiques.</p>` : '<p class="muted">Aucun widget ni statistique à toi pour l’instant : Maintenance → Éditeur de widgets ou Éditeur de statistiques.</p>'; }
+        if (b.type === 'widget') {
+            // 📈 le menu de choix commun (sorte « graph », tous mes widgets) ; le champ caché garde l'identifiant cw_…
+            const defs = Object.values(ext.customWidgetDefs?.() || {}), cur = b.widget ? ext.customWidgetDefs?.()?.[b.widget] : null, info = cur ? ext.myGraphInfo?.(cur.id) : null;
+            const value = cur && info?.rid ? {kind: 'graph', id: info.rid, uid: cur.id, title: cur.name || 'Mon widget', icon: cur.icon || '🧱'} : null;
+            body = defs.length ? `<div data-fi-widgetpk><span class="pk-lab">Widget ou graphique</span>${window.LCNDA_PICKER.pickerField({name: 'fi_widget', hiddenName: false, kind: 'graph', value, allowCreate: false, placeholder: 'Chercher un widget ou un graphique…', filter: {graph_kinds: 'numbers,list,chart,appstat,screen,diagram,text,links,journey'}})}<input type="hidden" name="widget" value="${esc(b.widget || '')}"></div><p class="muted">Pour en créer un : Maintenance → Éditeur de widgets ou Éditeur de graphiques.</p>` : '<p class="muted">Aucun widget ni graphique à toi pour l’instant : Maintenance → Éditeur de widgets ou Éditeur de graphiques.</p>';
+        }
         const onOpen = dlg => {
                 const root = dlg.querySelector('.h-dialog-body') || dlg;
                 ext.bindMediaEditor?.(root);
                 root.addEventListener('picker-change', e => { if (e.detail.name === 'fi_person') root.dataset.fiPersonName = e.detail.item?.title || ''; });
+                root.addEventListener('picker-change', e => { const box = e.target.closest?.('[data-fi-widgetpk]'); if (box) box.querySelector('input[name=widget]').value = e.detail.item?.uid || ''; });
                 root.addEventListener('click', e => {
                     if (e.target.closest('[data-fi-rowadd]')) { const box = root.querySelector('[data-fi-rows]'), last = box.lastElementChild; const n = last.cloneNode(true); n.querySelectorAll('input').forEach(x => { x.value = ''; }); box.appendChild(n); n.querySelector('input').focus(); }
                     if (e.target.closest('[data-fi-rowdel]')) { const row = e.target.closest('.h-fi-row'), box = row.parentElement; if (box.children.length > 1) row.remove(); else row.querySelectorAll('input').forEach(x => { x.value = ''; }); }

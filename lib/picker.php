@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * 🔍 Menu de choix unique (assets/js/app-picker.js, docs/PICKER.md) : une seule recherche pour choisir
  * une personne, un lieu, une source, un média, une enquête, une battue, une étiquette, une maison, une revue,
- * un employeur ou un recensement — ou plusieurs sortes à la fois (recherche mélangée).
+ * un employeur, un recensement, une œuvre ou un graphique (📈, lib/graphs.php) — ou plusieurs sortes à la fois (recherche mélangée).
  *
  * GET api.php?action=picker_search&kind=person|place|…|person,place&q=…&offset=0&limit=30&animals=1
  * → {groups:[{kind,key,label,total,items:[…]}], more, next_offset}
@@ -12,12 +12,12 @@ declare(strict_types=1);
  * Toutes les requêtes sont préparées ; q n'est jamais collé dans le SQL.
  */
 
-const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'battue', 'label', 'house', 'periodical', 'employer', 'census', 'artwork'];
+const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'battue', 'label', 'house', 'periodical', 'employer', 'census', 'artwork', 'graph'];
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
     'periodical' => '📰 Revues', 'employer' => '🏭 Employeurs', 'census' => '📋 Recensements',
-    'artwork' => '🎨 Œuvres',
+    'artwork' => '🎨 Œuvres', 'graph' => '📈 Graphiques',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -107,6 +107,8 @@ function picker_search(PDO $pdo, array $get): array
     // 🎨 fiches des catalogues d'artistes : sortes (« release,master ») et artiste
     $opts['art_kind'] = (string) preg_replace('/[^a-z0-9_,]/', '', strtolower(scalar_text($get['art_kind'] ?? '', 'art_kind')));
     $opts['art_person'] = max(0, (int) ($get['art_person'] ?? 0));
+    // 📈 graphiques : sortes de définitions (« chart,appstat » = ceux qui se posent comme un diagramme ; vide = tous les graphiques)
+    $opts['graph_kinds'] = (string) preg_replace('/[^a-z,]/', '', strtolower(scalar_text($get['graph_kinds'] ?? '', 'graph_kinds')));
     // near=lat,lon : les lieux les plus proches d'un point cliqué sur la carte
     if (in_array('place', $kinds, true) && preg_match('/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/', (string) ($get['near'] ?? ''), $m)) {
         return ['groups' => picker_places_near($pdo, (float) $m[1], (float) $m[2], min($limit, 30)), 'more' => false, 'next_offset' => 0];
@@ -170,6 +172,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'employer' => picker_employers($pdo, $q, $offset, $limit),
             'census' => picker_census($pdo, $q, $offset, $limit),
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
+            'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
         };
         return ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $r['total'], 'items' => $r['items']]],
             'more' => $offset + $limit < $r['total']];
