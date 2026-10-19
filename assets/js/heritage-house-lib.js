@@ -1,5 +1,5 @@
 /* LCNDA — 🏠 Plan de maison : la bibliothèque d'objets (complète heritage-house.js et heritage-house3d.js).
- *  - le catalogue : plus de 450 objets (dont 120 d’autrefois : filtre « 🕰 Ancien seulement ») d'hier et d'aujourd'hui, rangés en 12 catégories (Chambre… Ferme, animaux… Structure),
+ *  - le catalogue : plus de 700 objets avec ceux de heritage-house-more.js (dont 120 d’autrefois ici : filtre « 🕰 Ancien seulement ») d'hier et d'aujourd'hui, rangés en 20 catégories (Chambre… Luminaires, Décoration… Garage… Structure), retrouvés aussi par leurs mots-clés (kw),
  *    chacun avec son dessin vu de dessus et sa forme en 3D, aux vraies dimensions (cm) ;
  *  - « ＋ Créer un objet » : ses propres objets (nom, catégorie, taille, couleurs, matière, pieds, formes 2D et 3D, image vue de dessus, en partant ou non d’un objet du catalogue), gardés
  *    sur le serveur (lib/house_library.php), modifiables et supprimables ;
@@ -17,7 +17,9 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const norm = s => String(s || '').toLocaleLowerCase('fr').normalize('NFD').replace(/[̀-ͯ]/g, '');
     const MINE = 'Mes objets';
-    const CATS = ['Chambre', 'Séjour', 'Cuisine', 'Salle d’eau', 'Rangement', 'Bureau', 'Enfants', 'Religion, souvenirs', 'Métiers, atelier', 'Ferme, animaux', 'Jardin, extérieur', 'Structure'];
+    const CATS = ['Chambre', 'Séjour', 'Salle à manger', 'Cuisine', 'Salle d’eau', 'Buanderie', 'Entrée', 'Rangement', 'Bureau', 'Enfants', 'Luminaires', 'Décoration', 'Électroménager', 'Musique', 'Religion, souvenirs', 'Métiers, atelier', 'Garage', 'Ferme, animaux', 'Jardin, extérieur', 'Structure'];
+    // d'autres mots pour les catégories (la recherche « salon » trouve le Séjour, « salle de bain » la Salle d’eau…)
+    const CAT_KW = {'Séjour': 'salon living', 'Salle d’eau': 'salle de bain bains sdb toilettes', 'Chambre': 'chambres', 'Enfants': 'jouets jeux bébé', 'Luminaires': 'lampes lumière éclairage', 'Décoration': 'déco', 'Électroménager': 'appareils électrique', 'Garage': 'atelier bricolage', 'Métiers, atelier': 'métier artisan', 'Jardin, extérieur': 'dehors terrasse', 'Ferme, animaux': 'ferme ancienne campagne', 'Entrée': 'vestibule hall couloir'};
 
     /* ═════════ Le catalogue ═════════
        [clé, nom, largeur, profondeur, hauteur (cm), couleur, forme vue de dessus, forme 3D (sinon la même), options {elev: cm du sol, pic: image d'un cadre}] */
@@ -509,9 +511,10 @@
         const words = norm(q).split(/\s+/).filter(Boolean), hit = s => words.every(w => norm(s).includes(w));
         let body;
         if (words.length) {
-            const libs = cats.flatMap(c => c === MINE ? [] : orderedItems(c, p)).filter(l => !p.hidden.includes(l[0]) && keep(l) && hit(`${l[1]} ${l[2]} ${l[9]?.period || ''}`)), ms = oo ? [] : models.filter(m => hit(`${m.name} ${m.cat} ${m.source} ${m.author}`));
+            const libs = cats.flatMap(c => c === MINE ? [] : orderedItems(c, p)).filter(l => !p.hidden.includes(l[0]) && keep(l) && hit(`${l[1]} ${l[2]} ${CAT_KW[l[2]] || ''} ${l[9]?.period || ''} ${l[9]?.kw || ''}`)), ms = oo ? [] : models.filter(m => hit(`${m.name} ${m.cat} ${m.source} ${m.author}`));
             const seen = new Set(), uniq = libs.filter(l => !seen.has(l[0]) && seen.add(l[0]));
-            body = uniq.length || ms.length ? `<div class="h-hs-lib">${uniq.map(l => libTile(l, sym2d)).join('')}${ms.map(modelTile).join('')}</div>` : '<p class="muted">Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne.</p>';
+            const nf = uniq.length + ms.length, plu = n => A()?.plural ? A().plural(n, 'objet trouvé', 'objets trouvés') : `${n} objet${n > 1 ? 's trouvés' : ' trouvé'}`;
+            body = nf ? `<p class="muted h-hs-found">${plu(nf)}</p><div class="h-hs-lib">${uniq.map(l => libTile(l, sym2d)).join('')}${ms.map(modelTile).join('')}</div>` : '<p class="muted">Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne.</p>';
         } else if (cat === MINE) {
             const own = orderedItems(MINE, p).filter(l => !p.hidden.includes(l[0]) && keep(l));
             body = `<div class="h-hs-lib">${own.map(l => libTile(l, sym2d)).join('')}${oo ? '' : models.map(modelTile).join('')}</div>${own.length || models.length ? '' : '<p class="muted">Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (📥 Importer, en haut).</p>'}`;
@@ -519,7 +522,7 @@
             const list = orderedItems(cat, p).filter(l => !p.hidden.includes(l[0]) && keep(l)), ms = oo ? [] : models.filter(m => m.cat === cat);
             body = `<div class="h-hs-lib">${list.map(l => libTile(l, sym2d)).join('')}${ms.map(modelTile).join('')}</div>${list.length || ms.length ? '' : `<p class="muted">${oo ? 'Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »).' : 'Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer).'}</p>`}`;
         }
-        return `<input type="search" data-hs-libq placeholder="Chercher : lit, poêle, rouet, vache…" value="${esc(q)}">
+        return `<input type="search" data-hs-libq placeholder="Chercher… lit, lampe, piano, vache, salon…" aria-label="Chercher un objet" value="${esc(q)}">
             <div class="h-hs-libbar"><button type="button" class="button small" data-hs-libcmd="create" title="Un objet à toi : nom, taille, couleur, forme, image">＋ Créer un objet</button><button type="button" class="button small secondary" data-hs-libcmd="online" title="Des modèles 3D libres de droit (CC0) à télécharger">📦 Bibliothèque en ligne</button><button type="button" class="button small secondary" data-hs-libcmd="arrange" title="Montrer, cacher, ranger les catégories et les objets">⚙️ Ranger</button><label class="checkbox-line h-hs-oldf" title="Ne montrer que le mobilier et les objets d’autrefois"><input type="checkbox" data-hs-oldonly ${oo ? 'checked' : ''}> 🕰 Ancien seulement</label></div>
             <div class="h-hs-cats">${cats.map(c => `<button type="button" class="${c === cat && !words.length ? 'is-on' : ''}" data-hs-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>${body}
             <p class="muted h-hs-help">Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner).</p>`;

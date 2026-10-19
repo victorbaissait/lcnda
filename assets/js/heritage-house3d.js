@@ -114,6 +114,7 @@
             case 'piano': B(w, h, d); B(w, .05, d * .4, '#f4f4f4', 0, h * .55, d / 2 + d * .2); break;
             default: if (!ext.houseFurnitureX?.(shape, {T, g, B, C, put, legs, box, mat: fm, w, d, h, col, col2, it})) { if (rad > 0) RB(w, h, d, col, 0); else B(w, h, d); }
         }
+        if (shape !== 'img') ext.houseMergeByMaterial?.(T, g); // ⚡ les volumes de même matière fondus en un seul (heritage-house-more.js) : bien plus fluide avec beaucoup de meubles
         if (ft) { // les pieds : l'objet monte d'autant
             const out = new T.Group(), fc = col2 || '#' + new T.Color(col).multiplyScalar(.6).getHexString(), fw = Math.min(ft[1], w * .2, d * .2), ins = fw * .9;
             g.position.y = fh; out.add(g);
