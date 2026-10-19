@@ -1211,7 +1211,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-press-ads.js?v=7" defer></script>
 <script src="assets/js/museum-viewer.js?v=9" defer></script>
 <script src="assets/js/heritage-museum.js?v=13" defer></script>
-<script src="assets/js/app-apparence.js?v=3" defer></script>
+<script src="assets/js/app-apparence.js?v=4" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

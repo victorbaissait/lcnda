@@ -138,7 +138,9 @@
     }
     function refreshAvatarSelect() {
         const sel = document.querySelector('#design-form select[name="avatarShape"]'); if (!sel) return;
-        const cur = sel.dataset.lcCur || sel.value || A().readDesignSettings?.().avatarShape || 'tilted';
+        // la forme enregistrée d'abord : le menu d'app.js ne connaît que les formes de l'app, donc sel.value y retombe sur « Carré penché » pour une forme à soi
+        let saved = ''; try { saved = String(JSON.parse(localStorage.getItem('genealogie-design') || '{}')?.avatarShape || ''); } catch (_) {}
+        const cur = sel.dataset.lcCur || saved || sel.value || 'tilted';
         sel.innerHTML = avatarSelectHtml(cur); sel.dataset.lcCur = sel.value;
     }
 
