@@ -4065,6 +4065,9 @@ select { max-width: 100%; }
 .investigation-item-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .investigation-card > div:has(> .investigation-status) { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
 .investigation-card > div:has(> .investigation-status) > .entity-date-badge { margin-left: 0; }
+/* ✎ Mes thèmes, traits épais (jusqu'à 12 px) : les petits boutons icône, petits boutons et points gardent un trait de 4 px au plus, pour que l'icône reste visible */
+html:root.lc-frame :is(.icon-action, .icon-button, .button.small, .status-dot, .life-dot, .person-thumb, .outside-genealogy-mark, .pm-filter, .ui-num) { border-width: min(calc(2px * var(--lc-frame-k)), 4px); }
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

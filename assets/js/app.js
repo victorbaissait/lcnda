@@ -1914,9 +1914,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
        localStorage['genealogie-design-custom-presets'] = {custom:{id:{name,blue,bg,paper,card,cardHead,dark}}, order:[ids], hidden:[ids]} */
     const CUSTOM_PRESETS_KEY='genealogie-design-custom-presets';
     const PRESET_COLOR_KEYS=[['blue','Couleur principale (boutons, liens, accents)'],['bg','Fond de la page'],['paper','Fond des panneaux'],['card','Fond des cartes'],['cardHead','En-têtes des cartes et des tableaux'],['ink','Texte'],['line','Traits qui entourent (bordures)']];
-    /* ✎ Mes thèmes : texte, couleur et épaisseur des traits (lineW, 0 à 8 px) ; les designs de l'app gardent leurs valeurs de départ */
+    /* ✎ Mes thèmes : texte, couleur et épaisseur des traits (lineW, 0 à 12 px) ; les designs de l'app gardent leurs valeurs de départ */
     const presetInkDefault=dark=>dark?'#e8e8e8':'#080808';
-    const presetLineW=v=>{const n=(typeof v==='number'||(typeof v==='string'&&v.trim()!==''))?Number(v):NaN;return Number.isFinite(n)?Math.max(0,Math.min(8,Math.round(n*2)/2)):2;};
+    const presetLineW=v=>{const n=(typeof v==='number'||(typeof v==='string'&&v.trim()!==''))?Number(v):NaN;return Number.isFinite(n)?Math.max(0,Math.min(12,Math.round(n*2)/2)):2;};
     function presetStore(){try{const v=JSON.parse(localStorage.getItem(CUSTOM_PRESETS_KEY)||'{}');return {custom:v&&typeof v.custom==='object'&&v.custom&&!Array.isArray(v.custom)?v.custom:{},order:Array.isArray(v?.order)?v.order:[],hidden:Array.isArray(v?.hidden)?v.hidden:[]};}catch(_){return {custom:{},order:[],hidden:[]};}}
     function savePresetStore(st){try{localStorage.setItem(CUSTOM_PRESETS_KEY,JSON.stringify(st));}catch(_){toast('Enregistrement impossible (place du navigateur ?).','error');}}
     const isHex=c=>typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c);
@@ -1958,7 +1958,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             <div class="my-preset-grid"><div class="form-grid one-column"><label>Nom<input data-f="name" maxlength="60" required value="${escapeHtml(own?.name||(from&&!own?`${presetLabel(from)} (ma version)`:''))}"></label>
                 ${own?'':`<label>Partir de<select data-f="from">${orderedDesignPresets().map(p=>`<option value="${escapeHtml(p.id)}" ${p.id===from?'selected':''}>${escapeHtml(p.label)}</option>`).join('')}</select></label>`}
                 ${PRESET_COLOR_KEYS.map(([k,l])=>`<label>${escapeHtml(l)}<input type="color" data-c="${k}" value="${escapeHtml(base[k])}"></label>`).join('')}
-                <label>Épaisseur des traits qui entourent<input type="range" data-f="lineW" min="0" max="8" step="0.5" value="${base.lineW}" data-unit="px" data-default="2"></label>
+                <label>Épaisseur des traits qui entourent<input type="range" data-f="lineW" min="0" max="12" step="0.5" value="${base.lineW}" data-unit="px" data-default="2"></label>
                 <label class="ui-toggle"><input type="checkbox" data-f="dark" ${base.dark?'checked':''}><i></i><span data-help="Un thème sombre passe toute l’app en mode sombre (textes clairs sur fond foncé), comme le preset « Sombre »." data-help-faq="thème">Thème sombre</span></label>
                 <div data-contrast></div></div>
             <div><span class="section-label">Aperçu</span><div class="my-preset-prev" data-prev></div></div></div>
@@ -1967,7 +1967,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const q=sel=>dlg.querySelector(sel),read=()=>{const o={};PRESET_COLOR_KEYS.forEach(([k])=>{o[k]=q(`[data-c="${k}"]`).value;});o.lineW=presetLineW(q('[data-f="lineW"]').value);o.dark=q('[data-f="dark"]').checked;return o;};
         // lisibilité : écart de luminosité entre le texte et les fonds (règle WCAG, 4,5 au moins)
         const lum=c=>{const n=parseInt(String(c).slice(1),16),f=v=>{v/=255;return v<=.03928?v/12.92:((v+.055)/1.055)**2.4;};return .2126*f(n>>16)+.7152*f((n>>8)&255)+.0722*f(n&255);},ratio=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
-        const paint=()=>{const o=read(),ink=o.ink,ln=`${o.lineW}px solid ${o.line}`;q('[data-prev]').style.cssText=`background:${o.bg};color:${ink};border:${ln}`;
+        const paint=()=>{const o=read(),ink=o.ink,ln=`${o.lineW}px solid ${o.line}`;q('[data-prev]').style.cssText=`background:${o.bg};color:${ink};border:${ln};box-sizing:border-box;max-width:100%`;
             q('[data-prev]').innerHTML=`<div style="background:${o.paper};padding:8px;border:${ln}">Fond des panneaux · <a style="color:${o.blue}">un lien</a></div><div class="pv-card" style="background:${o.card};border:${ln}"><div class="pv-head" style="background:${o.cardHead};border-bottom:${ln}">En-tête d’une carte</div><div class="pv-body">Jean MARTIN, ° 1890<br><span class="pv-btn" style="background:${o.blue};border:${ln}">Bouton</span></div></div>`;
             const bad=[['bg','le fond de la page'],['paper','le fond des panneaux'],['card','le fond des cartes']].filter(([k])=>ratio(ink,o[k])<4.5).map(([,t])=>t);
             q('[data-contrast]').innerHTML=bad.length?(window.LCNDA_UI?.notice?window.LCNDA_UI.notice('warn',`Le texte se lit mal sur ${bad.join(', ')} : choisis un texte plus ${lum(ink)>.4?'foncé':'clair'}${!o.dark&&lum(o.bg)<.2?', ou coche « Thème sombre »':''}.`):''):'';};
