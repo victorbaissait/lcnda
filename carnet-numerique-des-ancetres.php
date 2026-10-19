@@ -135,6 +135,25 @@
         .presentation-carousel-dots button { width:13px; height:13px; padding:0; border:2px solid var(--presentation-ink); background:#fff; cursor:pointer; }
         .presentation-carousel-dots button[aria-current="true"] { background:var(--presentation-blue); }
 
+        /* ─── FAQ ─── */
+        /* Cadre de la FAQ, dans la page */
+        .presentation-faq-box { margin-top:44px; padding:clamp(22px,3.5vw,44px); border:2px solid var(--presentation-ink); background:#fff; box-shadow:10px 10px 0 rgba(5,93,255,.21); }
+        .presentation-faq-box > h3 { margin:0 0 18px; font-size:clamp(22px,2.6vw,30px); letter-spacing:-.03em; }
+        .presentation-faq-hint { margin:12px 0 0; color:var(--presentation-muted); font-size:16px; font-weight:600; }
+        .presentation-faq-search { display:block; width:100%; max-width:760px; margin-top:0; padding:14px 16px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:4px 4px 0 rgba(5,93,255,.25); font:600 16px Arial,Helvetica,sans-serif; color:var(--presentation-ink); }
+        .presentation-faq-search:focus-visible { outline:3px solid var(--presentation-blue); outline-offset:3px; }
+        .presentation-faq-cat { margin-top:28px; }
+        .presentation-faq-cat h3 { margin:0 0 8px; padding-bottom:8px; border-bottom:1px solid #d7d7d7; font-size:20px; letter-spacing:-.02em; }
+        .presentation-faq-cat h3 small { margin-left:8px; color:var(--presentation-blue); font-size:12px; font-weight:900; letter-spacing:.1em; }
+        .presentation-faq-item { border-bottom:1px solid #e3e3e3; background:#fff; }
+        .presentation-faq-item summary { display:flex; align-items:baseline; gap:10px; padding:12px 0; cursor:pointer; list-style:none; font-size:17px; font-weight:800; line-height:1.3; }
+        .presentation-faq-item summary:hover { color:var(--presentation-blue); }
+        .presentation-faq-item summary::-webkit-details-marker { display:none; }
+        .presentation-faq-item summary::before { content:"▶"; display:inline-block; flex:none; font-size:12px; transition:transform .15s ease; }
+        .presentation-faq-item[open] summary::before { transform:rotate(90deg); }
+        .presentation-faq-item p { max-width:900px; margin:0; padding:0 0 16px 22px; color:#3f3f3f; font-weight:600; line-height:1.55; }
+        .presentation-faq-empty { margin-top:30px; color:var(--presentation-muted); font-weight:700; }
+
         .presentation-footer { display:flex; justify-content:space-between; gap:20px; padding:21px clamp(24px,4vw,64px); border-top:2px solid var(--presentation-ink); background:#fff; font-size:11px; letter-spacing:.08em; font-weight:900; }
         .presentation-footer a { color:var(--presentation-blue); }
 
@@ -148,13 +167,14 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.6.0</span>
+                <span class="eyebrow">VERSION BÊTA · 0.7.0</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
-                <p class="presentation-lead">Un logiciel de généalogie local, open source et gratuit pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
+                <p class="presentation-lead">Un logiciel de généalogie local, open source, gratuit et modulable pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
                 <div class="presentation-actions">
                     <a class="button" href="#telecharger">Télécharger LCNDA<span aria-hidden="true">↓</span></a>
                     <a class="button secondary" href="#fonctionnalites">Fonctionnalités</a>
+                    <a class="button secondary" href="#faq">FAQ</a>
                 </div>
             </div>
             <div class="presentation-hero-board" aria-label="Aperçu des éléments réunis dans l'application">
@@ -177,8 +197,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.6.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 539 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.6.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.7.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 539 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.7.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -187,7 +207,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.6.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 555 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.7.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 555 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -198,16 +218,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.6.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 534 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.6.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 509 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.7.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 534 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.7.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 509 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.6.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 536 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.6.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 505 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.7.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 536 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.7.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 505 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.6.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.7.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -215,17 +235,107 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.6.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.7.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.6.0.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.6.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.7.0.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.7.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux libres, animaux, fiches sur un sujet, livre de famille et livrets, graphiques et réglages à soi</small></span></summary>
+                <summary><span>Nouveautés de la version 0.7.0<small>Créations, artistes et carrières, maison de famille en 3D, dessin et blasons, transcription d'actes et alphabets anciens, présentations et récit d'une vie, graphiques et cartes, cartes de photos, ADN et visages, plusieurs généalogies, une app plus cohérente et plus accessible</small></span></summary>
                 <div class="presentation-changes-body">
+                    <h4>🎨 Créations, artistes et carrières</h4>
+                    <ul>
+                        <li><b>« Cette personne était… »</b> : des profils à cocher sur une fiche (artiste, artisan d'art, acteur, sportif, politique, scientifique, inventeur, explorateur, militaire, agriculteur… et les vôtres). Chaque profil ajoute ses parties ; une personne peut en avoir plusieurs, réunis sur une page avec une <b>frise colorée par profil</b>.</li>
+                        <li><b>131 types d'œuvres</b> en 12 familles : peinture, sculpture et ses fontes, affiche, disque, morceau → enregistrements → parutions, livre, pièce → mises en scène → représentations → tournées, film, série → saisons → épisodes, métiers d'art, jeux, saveurs… et <b>son propre type</b>, créé en 5 étapes.</li>
+                        <li><b>Catalogue raisonné</b> et <b>discographie</b> (album par album, titre par titre, crédits, pressages), inventaire des œuvres (où, à qui, état, valeur), provenance et expositions ; disques et livres en plusieurs exemplaires ; fiches reprises des grandes bases en ligne de disques, de livres et de films.</li>
+                        <li><b>Concerts et spectacles</b> avec la liste des morceaux joués (rappels, reprises, invités), tournées, carte et statistiques ; <b>inventions</b> (brevets par pays, prototypes), <b>découvertes</b> et <b>expéditions</b> ; mandats et élections ; <b>137 sports</b> avec leurs chiffres par saison ; la <b>liste officielle des métiers d'art</b>.</li>
+                        <li>Pour toute personne : <b>« 📰 Dans les médias »</b> (et la Revue de presse), <b>« 🏆 Concours et récompenses »</b> (et le Palmarès), <b>« 🎓 Diplômes et formation »</b> ; tout se retrouve dans le groupe de listes <b>« 🎨 Créations et carrières »</b>.</li>
+                    </ul>
+                    <h4>🏠 La maison de famille, en plan et en 3D</h4>
+                    <ul>
+                        <li>Dessiner la maison <b>pièce par pièce, au centimètre près</b> : longueurs tapées au clavier, aimants, cotes, portes et fenêtres, étages (et l'étage d'en dessous en transparence pour caler), <b>toit à son goût</b>, plan ancien ou cadastre à calquer.</li>
+                        <li><b>Près de 700 meubles et objets</b> d'autrefois, de métiers et d'ateliers, objets à soi ou importés ; <b>photos et tableaux de la base dans les cadres</b>, les toiles et les miroirs.</li>
+                        <li><b>Visite en 3D</b> à la première personne, lumière du jour, <b>« 🕰 Époques »</b> qui font évoluer la maison au fil des années ; habitants, souvenirs et recensements reliés à chaque maison, bloc 🏠 Maisons sur la fiche.</li>
+                    </ul>
+                    <h4>✏️ Dessin, blasons, plans et faire-part</h4>
+                    <ul>
+                        <li>Un <b>outil de dessin</b> complet : plume, formes, calques et groupes, masques, texte sur une courbe, dégradés et motifs, aligner et répartir, vectoriser une image ; export SVG, PNG, JPG, PDF.</li>
+                        <li><b>Blasons</b> (écus, partitions, émaux, hachures, 44 ornements anciens), <b>plans de ville ou de village</b> (routes, rivières, bâtiments, rose des vents, styles d'époque) et <b>cartes à l'échelle</b>.</li>
+                        <li><b>Faire-part et affiches</b> remplis depuis l'arbre (naissance, mariage, décès, cousinade…), dans bien plus de formats, recto-verso ou pliés avec leur enveloppe ; <b>signatures</b> détourées d'un acte, cachets de cire, monogrammes, ex-libris.</li>
+                        <li><b>Arbre décoratif à imprimer en grand</b> : éventail, roue, arbre dessiné, arbre en cases, jusqu'à 12 générations, 13 styles et les vôtres, formats A4 à A0.</li>
+                    </ul>
+                    <h4>📜 Lire les actes anciens</h4>
+                    <ul>
+                        <li>Un <b>atelier de transcription</b> : l'image et le texte côte à côte, des zones reliées à chaque passage, la lecture automatique, le repérage des noms, des rôles, des dates (en toutes lettres et républicaines), des lieux et des métiers, des modèles d'actes ; « 🎚️ Mieux voir » (netteté, contraste, fond effacé, loupe) ; une liste des transcriptions.</li>
+                        <li>Dans Calendrier / Mesures, le cadre <b>« Alphabets et langues des actes »</b> : choisir une langue parmi <b>une quarantaine</b> (latin, occitan, breton, polonais, russe, grec…), voir tout son alphabet, ses lettres à accents et des indices pour la reconnaître ; <b>taper des caractères pour savoir de quelle langue ils viennent</b> ; un <b>clavier cyrillique et grec</b>, avec la transcription en lettres latines.</li>
+                        <li>L'assistant <b>« Que manque-t-il ? »</b> liste les actes encore à chercher et les archives à consulter ; la lecture des textes imprimés est fournie avec l'application.</li>
+                    </ul>
+                    <h4>🎞️ Présentations, diaporamas et montage</h4>
+                    <ul>
+                        <li>De <b>vraies présentations</b> : thèmes, textes, images, tableaux, graphiques, objets de généalogie, transitions et animations, fenêtre du présentateur ; import et export de présentations, PDF et vidéo.</li>
+                        <li><b>« ✨ Récit d'une vie »</b> fabrique tout seul, depuis la fiche, le diaporama d'une personne : carte de naissance, événements, photos, époque, lieux de vie, descendance.</li>
+                        <li>Montage : <b>voix off</b> au micro, <b>sous-titres</b>, mouvement lent sur les photos, modèles « La vie de… » et « Une famille », musique qui baisse sous la voix, formats pour téléphone ou carré, chapitres, <b>vitesse de 0,1 × à 10 ×</b>, rushes rangés en dossiers.</li>
+                    </ul>
+                    <h4>🎚️ Retouche et mise en page</h4>
+                    <ul>
+                        <li><b>Restauration guidée d'une vieille photo</b> : redresser, enlever le jaunissement, les taches, les rayures et les plis, coloriser avec des couleurs d'époque, comparer avant / après.</li>
+                        <li><b>41 filtres</b> qui ne touchent jamais la photo d'origine, enlever les <b>reflets d'une vitre</b>, sélectionner le sujet d'un clic, placer une image sur un calque, gomme à part, modes de fusion, actions pour plusieurs photos à la fois.</li>
+                        <li>Livres : <b>texte qui continue d'un bloc à l'autre</b>, sommaire et index des noms remplis tout seuls, <b>notes de bas de page</b> et sources citées, index des lieux et des métiers, arbre qui se met à jour, contrôle avant impression, <b>vérification du texte avec les fiches</b>, mode relecture avec commentaires, ePub.</li>
+                    </ul>
+                    <h4>📊 Graphiques, diagrammes et cartes</h4>
+                    <ul>
+                        <li><b>Des graphiques à poser partout</b> et tenus à jour, avec ses propres chiffres (tableau, collage, fichier, page Wikipédia, et même une image de graphique), rangés dans une liste et <b>dans des dossiers</b>.</li>
+                        <li><b>22 nouvelles formes</b> : éventail d'ascendance, soleil des lignées, réseau de relations, spirale du temps, classement qui évolue… ; hémicycles et frises des membres.</li>
+                        <li><b>Cartes colorées par zones</b> (départements, régions, pays d'Europe, continents) avec un <b>encart zoomé sur l'Île-de-France</b> et un niveau de détail <b>« Communes »</b> pour la France, la Belgique, la Suisse et le Luxembourg ; carte des migrations.</li>
+                    </ul>
+                    <h4>📸 Cartes de photos et vidéos</h4>
+                    <ul>
+                        <li>L'<b>endroit et l'heure</b> d'une photo ou d'une vidéo sont lus tout seuls, à corriger en glissant ; les photos sans position attendent dans « À placer » ; <b>une frise pour remonter le temps</b>, jusqu'à la seconde ; toutes les cartes en pastilles en haut de l'outil.</li>
+                    </ul>
+                    <h4>🔬 Chercher autrement</h4>
+                    <ul>
+                        <li>Onglet <b>ADN</b> (caché au départ, avec une mise en garde sur la loi française) : correspondances, groupes automatiques, chromosomes, lignées, <b>placement probable d'un cousin</b> dans l'arbre.</li>
+                        <li><b>« 👤 Visages »</b> reconnaît les personnes sur les photos, sur l'ordinateur seulement ; <b>« Poser une question »</b> en français comprend les liens de parenté, les records, les âges, les dates républicaines ; les <b>dates impossibles</b> sont signalées pendant la saisie.</li>
+                        <li><b>Revues, livres, documentaires et podcasts</b> (numéros à acheter, articles, moments minutés, captures annotées) ; <b>petites annonces</b> et courriers aux journaux avec le calcul du prix.</li>
+                    </ul>
+                    <h4>🌳 Plusieurs généalogies, et un puzzle</h4>
+                    <ul>
+                        <li><b>Plusieurs généalogies complètement séparées</b>, chacune avec sa base, ses médias, ses sauvegardes et ses réglages.</li>
+                        <li><b>🧩 Puzzle</b> de 12 à 1000 pièces avec une image de la base, chrono et records ; pièce d'archives et musée à aménager.</li>
+                    </ul>
+                    <h4>🧭 Une app plus simple et plus cohérente</h4>
+                    <ul>
+                        <li>Partout <b>le même menu pour choisir une personne, un lieu ou autre chose</b> (communes de France et villes du monde, sans être bloqué par les homonymes) et <b>une seule fenêtre</b> pour choisir une image, un son ou une vidéo.</li>
+                        <li><b>La même barre au-dessus de toutes les listes</b> (Chercher · Filtrer · Liste | Fiches · Trier) ; plus de « Es-tu sûr ? » pour ce qui se défait : on supprime, et un message propose <b>« ↶ Annuler »</b>.</li>
+                        <li>Mêmes champs de date, de couleur et de curseur, même fenêtre d'export, mêmes « 💾 Réglages enregistrés » partout ; mode sombre partout ; petits écrans mieux pris en charge.</li>
+                    </ul>
+                    <h4>♿ Accessibilité et apparence</h4>
+                    <ul>
+                        <li>Réglages pour le <b>daltonisme</b> (avec « Voir comme… »), taille et espacement du texte, <b>polices pour mieux lire et pour la dyslexie</b> (intégrées), contraste élevé, grandes cibles, moins d'animations, <b>lecture à voix haute</b>, dictée.</li>
+                        <li>Renommer les onglets du menu et choisir leur émoji ; formes d'avatar et thèmes à soi ; en-tête de fiche réglable ; Listes et Maintenance rangées en groupes repliables.</li>
+                        <li>Le widget <b>« Mes raccourcis »</b> mène à n'importe quoi (une fiche, une liste filtrée, un outil, un site), et <b>son crayon permet d'ajouter et de ranger ses raccourcis directement</b>.</li>
+                    </ul>
+                    <h4>🐞 Bugs corrigés</h4>
+                    <ul>
+                        <li><b>Saisie</b> : un double-clic créait parfois deux fiches ; Entrée pouvait effacer ce qu'on venait de taper ; deux onglets ouverts sur la même fiche s'écrasaient sans prévenir ; Échap fermait parfois une fenêtre de trop.</li>
+                        <li><b>Famille</b> : retirer un parent ne le retirait pas toujours ; des demi-frères pouvaient se retrouver avec trois parents ; des fusions impossibles (entre conjoints, entre un ancêtre et son descendant) étaient acceptées.</li>
+                        <li><b>GEDCOM</b> : dates républicaines et juliennes, étiquettes, animaux et titres de notes perdus ; la recherche tenait compte des accents et des tirets ; « né un 29 février » n'était compris qu'à moitié.</li>
+                        <li><b>Cartes et affichage</b> : la Russie n'apparaissait qu'en morceaux sur la carte du monde ; des textes débordaient et des éléments se collaient dans toute l'app ; des cadres côte à côte n'avaient pas la même hauteur.</li>
+                        <li><b>Réglages</b> : 17 réglages du « Défaut du site » n'étaient pas gardés ; un graphique en ¾ revenait à ½ ; une forme d'avatar à soi s'affichait sous le mauvais nom.</li>
+                        <li><b>Sécurité</b> : sauvegardes et bases reçues d'ailleurs vérifiées avant l'ouverture, liens vérifiés, exports CSV protégés, et de nombreuses autres protections.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.6.0 <small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux libres, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></summary>
+                        <div class="presentation-version-body">
                     <h4>📐 Atelier de mise en page</h4>
                     <ul>
                         <li>Faire <b>le livre de sa généalogie</b> comme dans un logiciel de mise en page : pages simples ou <b>en vis-à-vis</b>, <b>gabarits</b> (numéro de page, titre courant), <b>calques</b> (cacher, verrouiller, ranger).</li>
@@ -279,9 +389,9 @@
                         <li>Livre de famille par branche : parties à cocher et ranger, textes, styles, polices, format ; PDF, HTML, Word, OpenDocument, ePub, Markdown, texte, CSV.</li>
                         <li>Livrets de famille transcrits en entier, personnes reliées aux fiches ; fiches d'employeurs façon fiche d'entreprise.</li>
                     </ul>
-                    <h4>📊 Graphiques, widgets et onglets à soi</h4>
+                    <h4>📊 Statistiques, widgets et onglets à soi</h4>
                     <ul>
-                        <li>Éditeur de graphiques et de widgets, onglets à soi avec n'importe quel écran de l'app ; tableau de bord en pages et en ensembles repliables.</li>
+                        <li>Éditeur de statistiques et de widgets, onglets à soi avec n'importe quel écran de l'app ; tableau de bord en pages et en ensembles repliables.</li>
                         <li>Distributions : <b>« + Critère »</b> autant qu'on veut, filtres par défaut, et <b>un clic sur une barre</b> (pyramides des âges comprises) montre les personnes comptées.</li>
                         <li>Fiche d'un village et monographie de commune en widget, saint du jour détaillé, suggestions de recherche.</li>
                     </ul>
@@ -300,12 +410,8 @@
                         <li><b>Mise en page</b> : des boutons des gabarits ne faisaient rien ; la couleur du texte perdait la sélection ; « Dupliquer » pouvait planter ; renommer un calque d'un double-clic ne tenait pas.</li>
                         <li><b>Glisser-déposer</b> : une ligne pouvait passer dans une autre liste, et le repère de dépôt était caché derrière les fenêtres ; dans Maintenance, les boutons rangés ou cachés n'étaient jamais enregistrés.</li>
                     </ul>
-                </div>
-            </details>
-
-            <details class="presentation-changes presentation-changes-old">
-                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
-                <div class="presentation-changes-body">
+                        </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.5.0 <small>Recueils, dépouillements page par page, plan des adresses d'un recensement, fiche d'un village à organiser, atelier de recherche, sons et vidéos, calendriers</small></summary>
                         <div class="presentation-version-body">
@@ -675,6 +781,77 @@
                     <img src="captures/lcnda-11.jpg" alt="Réglages de personnalisation de l’apparence" width="1600" height="1034" loading="lazy">
                     <figcaption><span>11</span>Apparence : couleurs, polices, ordre des menus</figcaption>
                 </figure>
+                 <figure class="presentation-slide" id="apercu-12" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-12.jpg" alt="Création de bloc" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>12</span>Fiche d'un village</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-13" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-13.jpg" alt="Fiche d'un village" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>13</span>Création de bloc</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-14" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-14.jpg" alt="Création de bloc" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>14</span>Création de bloc</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-15" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-15.jpg" alt="retouche d'une photo" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>15</span>Retouche d'une photo</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-16" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-16.jpg" alt="Modifier un son" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>16</span>Modifier un son</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-17" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-17.jpg" alt="Egg Easter: La vue Musée" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>17</span>La vue Musée</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-18" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-18.jpg" alt="Egg Easter: Jeu de l'oie" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>18</span>Egg Easter: Jeu de l'oie</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-19" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-19.jpg" alt="Atelier de recherche" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>19</span>Atelier de recherche</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-20" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-20.jpg" alt="recueils" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>20</span>recueils</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-21" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-21.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>21</span>Monographie de commune</figcaption>
+                </figure>
+                
+                <figure class="presentation-slide" id="apercu-22" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-22.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>22</span>Une fiche "animaux"</figcaption>
+                </figure>
+                
+                <figure class="presentation-slide" id="apercu-23" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-23.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>23</span>Une fiche documentaire</figcaption>
+                </figure>
+               
+                 <figure class="presentation-slide" id="apercu-24" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-24.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>24</span>Montage Vidéo</figcaption>
+                </figure>
+                
+                 <figure class="presentation-slide" id="apercu-25" aria-roledescription="diapositive" aria-label="11 sur 12">
+                    <img src="captures/lcnda-25.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>25</span>l'outil tableau</figcaption>
+                </figure>
+
+
                 </div>
                 <div class="presentation-carousel-controls">
                     <button class="button secondary" type="button" data-carousel-prev aria-label="Image précédente">←</button>
@@ -689,12 +866,12 @@
                 <span class="eyebrow">04 — EN DÉTAIL</span>
                 <h2>Chaque généalogie est unique, votre logiciel aussi.</h2>
             </header>
-            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, graphiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
+            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, statistiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
 
             <div class="presentation-about-grid">
                 <article class="presentation-about about-intro">
                     <h3>Un logiciel qui s’adapte à votre famille</h3>
-                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements, blocs, widgets, graphiques et onglets, et vous réglez couleurs, polices et affichage. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
+                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements et d’œuvres, profils, blocs, widgets, statistiques et onglets, et vous réglez couleurs, polices et affichage. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
                 </article>
                 <article class="presentation-about">
                     <h3>Un carnet de recherche, pas seulement un arbre</h3>
@@ -722,6 +899,14 @@
                     <p>Une fois l’histoire trouvée, il reste à la partager. Un atelier de mise en page fait <b>le livre de votre famille</b> à partir de vos fiches : gabarits, styles, photos habillées par le texte, couverture, export PDF prêt pour l’imprimeur. Un petit <b>montage vidéo</b> assemble films de famille, photos animées, titres et musique ; des <b>tableaux</b> libres posent l’enquête à plat ; des <b>fiches</b> racontent un pays, un métier, une coutume. Et les animaux de la famille ont aussi leur place.</p>
                 </article>
                 <article class="presentation-about">
+                    <h3>Toute une vie, pas seulement des dates</h3>
+                    <p>Un ancêtre peintre, musicien, inventeur, sportif ou maire ? Cochez ce qu’il était, et sa fiche s’enrichit de ce qui compte pour lui : œuvres et <b>catalogue raisonné</b>, disques et concerts, brevets, mandats, palmarès, diplômes, articles de presse. Sa <b>maison</b> se redessine pièce par pièce, en plan et en 3D, avec ses meubles et ses habitants au fil des époques.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Lire les actes, d’hier et d’ailleurs</h3>
+                    <p>Un atelier de <b>transcription</b> place l’image de l’acte et votre texte côte à côte, repère les noms, les dates et les lieux, et rend lisible une page pâlie. Un acte en latin, en polonais ou en russe ? Les <b>alphabets d’une quarantaine de langues</b>, avec leurs lettres à accents, aident à reconnaître la langue et à transcrire le cyrillique ou le grec en lettres latines.</p>
+                </article>
+                <article class="presentation-about">
                     <h3>Une base propre et vérifiée</h3>
                     <p>Un assistant repère les incohérences : enfant né après la mort d’un parent, mariage après un décès, longévité improbable. Il signale aussi les doublons possibles et les familles incomplètes. Un journal garde la trace de chaque modification, et une suppression peut être annulée.</p>
                 </article>
@@ -743,12 +928,81 @@
             </div>
             <p class="presentation-beta-note">LCNDA est en version bêta : faites des sauvegardes régulières, ce que l’application facilite. Il n’est pas encore signé par Apple ni Microsoft, d’où un avertissement au premier lancement.</p>
         </section>
+
+        <section class="presentation-section" id="faq">
+            <header class="presentation-section-head">
+                <span class="eyebrow">05 — FAQ</span>
+                <h2>Questions fréquentes.</h2>
+                <p>Comment faire ceci ou cela dans LCNDA.</p>
+            </header>
+            <div class="presentation-faq-box">
+                <h3>Questions fréquentes</h3>
+                <input class="presentation-faq-search" id="faq-search" type="search" placeholder="🔎 Pose ta question : comment faire un livre de famille en PDF ?" aria-label="Rechercher dans la FAQ" autocomplete="off">
+                <p class="presentation-faq-hint" id="faq-count">Comment faire ceci ou cela dans LCNDA.</p>
+                <p class="presentation-faq-empty" id="faq-empty" hidden>Aucune question ne correspond à cette recherche.</p>
+                <div id="faq-list"></div>
+            </div>
+        </section>
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.6.0 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.7.0 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
+    <script src="faq-data.js"></script>
+    <script>
+    // FAQ : questions rangées par thème dans un cadre de la section 5, dépliables, avec recherche.
+    (() => {
+        const list = document.getElementById('faq-list');
+        const input = document.getElementById('faq-search');
+        const empty = document.getElementById('faq-empty');
+        const count = document.getElementById('faq-count');
+        if (!list) return;
+        if (typeof FAQ === 'undefined' || !Array.isArray(FAQ)) {
+            empty.textContent = 'La FAQ n’a pas pu être chargée : le fichier faq-data.js doit être placé à côté de index.html.';
+            empty.hidden = false;
+            input.disabled = true;
+            return;
+        }
+        const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+        let nb = 0;
+        const cats = FAQ.map(([title, items]) => {
+            const box = el('div', 'presentation-faq-cat');
+            const h = el('h3', '', title);
+            h.appendChild(el('small', '', String(items.length)));
+            box.appendChild(h);
+            const rows = items.map(([q, a]) => {
+                const d = el('details', 'presentation-faq-item');
+                d.appendChild(el('summary', '', q));
+                d.appendChild(el('p', '', a));
+                box.appendChild(d);
+                nb++;
+                return { d, text: norm(q + ' ' + a) };
+            });
+            list.appendChild(box);
+            return { box, rows };
+        });
+        count.textContent = 'Comment faire ceci ou cela dans LCNDA : ' + nb + ' question' + (nb > 1 ? 's' : '') + '.';
+
+        input.addEventListener('input', () => {
+            const words = norm(input.value).split(/\s+/).filter(Boolean);
+            let total = 0;
+            cats.forEach(({ box, rows }) => {
+                let shown = 0;
+                rows.forEach(({ d, text }) => {
+                    const ok = words.every(w => text.includes(w));
+                    d.hidden = !ok;
+                    d.open = ok && words.length > 0;
+                    if (ok) shown++;
+                });
+                box.hidden = shown === 0;
+                total += shown;
+            });
+            empty.hidden = total > 0;
+        });
+    })();
+    </script>
     <script>
     // Carrousel de l'aperçu : il ne défile jamais tout seul (flèches, points, clavier, glissement au doigt).
     (() => {
