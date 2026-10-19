@@ -353,7 +353,11 @@
                 return ['l', 'r'].map((sd, i) => { if (!w[sd + 'Mat'] && !w[sd + 'Color'] && (!w.mat || w.mat === 'platre')) return ''; const [k, c] = faceOf(w, sd), o = (t / 2 - 3.5) * (i ? -1 : 1), d = (WALL_DASH[k] || '').split(' ').filter(Boolean).map(v => Number(v) * 3).join(' ');
                     return `<path d="M${w.a[0] + nx * o} ${w.a[1] + ny * o}L${w.b[0] + nx * o} ${w.b[1] + ny * o}" stroke="${esc(c)}" stroke-width="6" ${d ? `stroke-dasharray="${d}"` : ''} style="pointer-events:none" class="h-hs-wface"/>`; }).join(''); }).join('');
             h += f.openings.map(o => { const w = f.walls.find(q => q.id === o.wall); return w ? openingSvg(o, w) : ''; }).join('');
-            f.items.forEach(it => { const isSel = sel?.type === 'item' && sel.id === it.id;
+            // ordre de dessin = ordre « vu du dessus » : ce qui est posé plus haut (la radio sur la table, la lampe sur la commode) passe par-dessus,
+            // à hauteur égale le plus petit dessus, et l'objet choisi tout en haut — il reste visible et se clique
+            const topOf = it => Number(it.elev || 0) + Number(it.h ?? libOf(it.kind)?.[5] ?? 80);
+            const drawOrder = f.items.map((it, i) => ({it, i})).sort((a, b) => (sel?.type === 'item' && sel.id === a.it.id) - (sel?.type === 'item' && sel.id === b.it.id) || Number(a.it.elev || 0) - Number(b.it.elev || 0) || topOf(a.it) - topOf(b.it) || (b.it.w * b.it.d) - (a.it.w * a.it.d) || a.i - b.i).map(x => x.it);
+            drawOrder.forEach(it => { const isSel = sel?.type === 'item' && sel.id === it.id;
                 h += `<g data-hs="item:${it.id}" class="h-hs-item${isSel ? ' is-sel' : ''}" transform="translate(${it.x} ${it.y}) rotate(${it.rot || 0})">${sym2d(it)}${isSel ? `<rect x="${-it.w / 2 - 4}" y="${-it.d / 2 - 4}" width="${it.w + 8}" height="${it.d + 8}" fill="none" stroke="#2a7de1" stroke-width="1.5" stroke-dasharray="5 3" vector-effect="non-scaling-stroke"/><circle cy="${-it.d / 2 - 26 / zoom}" r="${7 / zoom}" fill="#2a7de1" data-hs-rot="1"/><path d="M0 ${-it.d / 2 - 4}V${-it.d / 2 - 20 / zoom}" stroke="#2a7de1" vector-effect="non-scaling-stroke"/>` : ''}</g>`;
                 if (zoom > .35 && it.name) h += `<text x="${it.x}" y="${it.y + it.d / 2 + 16 / zoom}" font-size="${11 / zoom}" class="h-hs-iname">${esc(it.name)}</text>`; });
             // cotes : chaque mur choisi, et les cotes posées
