@@ -29,7 +29,7 @@
         ['widget', '📊', 'Widget ou graphique à soi', 'Ceux de l’Éditeur de widgets / de graphiques'],
     ];
     const kindOf = t => KINDS.find(k => k[0] === t) || KINDS[0];
-    const WIDTHS = [['12', 'toute la largeur'], ['9', '¾'], ['8', '⅔'], ['6', '½'], ['4', '⅓'], ['3', '¼']];
+    const WIDTHS = [['12', 'toute la largeur'], ['6', '½'], ['4', '⅓'], ['3', '¼'], ['8', '⅔'], ['9', '¾']];
     const TEMPLATES = [
         {name: 'Sujet d’histoire', icon: '🏛️', subtitle: 'Le contexte historique d’une époque ou d’un pays', blocks: [
             {type: 'text', title: 'En bref', width: '8', text: 'Ce qu’il faut savoir en quelques lignes.'}, {type: 'dates', title: 'Les dates clés', width: '4', rows: []},

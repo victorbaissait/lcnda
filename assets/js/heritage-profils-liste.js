@@ -90,7 +90,7 @@
     };
 
     /* ═════════ 2. Maintenance : « Cette personne était… (profils) » ═════════ */
-    const WIDTHS = [['ligne', '1'], ['¾', '3/4'], ['⅔', '2/3'], ['½', '1/2'], ['⅓', '1/3']];
+    const WIDTHS = [['ligne', '1'], ['½', '1/2'], ['⅓', '1/3'], ['¼', '1/4'], ['⅔', '2/3'], ['¾', '3/4']];
     /** une « personne » qui a tous les profils de la base : pour montrer toutes les sections dans le réglage standard */
     const fakeStore = (data, keys, own = false) => ({pid: 0, name: 'toutes les pages', person: {profiles: keys.map(k => ({profile_key: k})), is_artist: keys.includes('artist') ? 1 : 0}, global: own ? {} : data, personSet: own ? data : null, items: [], of: () => [], get: () => null, people: []});
     /** l'éditeur d'un réglage (standard ou exception) : renvoie le HTML ; l'état est dans ed */

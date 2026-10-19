@@ -34,7 +34,7 @@
         links: ['🔗', 'Raccourcis', 'Des boutons vers les écrans, les listes ou des sites que tu utilises souvent.'],
         journey: ['🧭', 'Parcours jour par jour', 'Des étapes datées (écrites à la main, ou les événements d’une personne) en frise et sur la carte : un voyage, une guerre, une vie.'],
         app: ['🎨', 'Widget de l’app habillé', 'Un widget de l’app tel quel, avec ton titre, ton icône, ta couleur et ton texte.']};
-    const WIDTHS = [['3', '¼'], ['4', '⅓'], ['6', '½'], ['8', '⅔'], ['12', 'toute la largeur']];
+    const WIDTHS = [['12', 'toute la largeur'], ['6', '½'], ['4', '⅓'], ['3', '¼'], ['8', '⅔'], ['9', '¾']];
     const COLORS = ['#0066cc', '#2f8f5b', '#cc4700', '#7a47db', '#c0392b', '#a07a00', '#00838f', '#555555'];
     const color = c => /^#[0-9a-f]{6}$/i.test(String(c || '')) ? c : '';
     const newId = () => 'cw_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);

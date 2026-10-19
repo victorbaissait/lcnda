@@ -128,7 +128,7 @@
     const coverImg = (design, media) => { const g = effectiveDesign(design), m = (media || []).find(x => Number(x.id) === Number(g.cover_media)); if (!m || !g.cover_mode) return ''; const url = 'media/' + encodeURIComponent(m.filename).replace(/['()]/g, c => '%' + c.charCodeAt(0).toString(16)); return g.cover_mode === 'bg' ? `<span class="h-bk-coverbg" style="background-image:url('${esc(url)}')"></span>` : `<img class="h-bk-coverphoto" src="${esc(url)}" alt="">`; };
     const MY_DESIGNS = 'genealogie-booklet-designs';
     const myDesigns = () => { try { const l = JSON.parse(localStorage.getItem(MY_DESIGNS) || '[]'); return Array.isArray(l) ? l.filter(x => x && x.name && x.design) : []; } catch (_) { return []; } };
-    const WIDTHS = [['12', '1'], ['6', '1/2'], ['4', '1/3'], ['8', '2/3'], ['3', '1/4'], ['9', '3/4']];
+    const WIDTHS = [['12', '1'], ['6', '1/2'], ['4', '1/3'], ['3', '1/4'], ['8', '2/3'], ['9', '3/4']];
     function applyDesign(el, g) {
         if (!el) return;
         const v = {'--bk-cover': g.cover, '--bk-cover-ink': g.cover_ink, '--bk-page': g.page, '--bk-ink': g.ink, '--bk-rule': g.rule, '--bk-title': g.title, '--bk-font': fontCss(g.font), '--bk-title-font': fontCss(g.title_font), '--bk-size': (g.size || 15) + 'px', '--bk-title-size': (g.title_size || 18) + 'px'};

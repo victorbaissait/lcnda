@@ -45,6 +45,7 @@ Maquette : `docs/design/champs-communs.html`. Un seul composant pour chacun, par
 - **C1 Cases de recherche / filtres de listes** : comme le menu de choix — loupe à gauche, « Chercher… » + exemples, × pour vider, Échap vide aussi, touche « / » pour aller dans la case ; plus de bouton ⌕.
 - **C2 Couleur** : pastille + nom/code ; fenêtre avec couleurs de l'app, couleurs récentes (partagées), 💧 pipette, 🎨 autre couleur, code #, « Aucune » (hachuré) quand ça a un sens, transparence quand ça a un sens.
 - **C3 Curseurs** : libellé · curseur · case chiffrée tapable avec unité (%, mm, °, px, ppp) ; double-clic = valeur de départ.
+- **Largeurs des blocs et sections** (validé) : toujours proposées dans cet ordre, partout (fiches, pages de profils et d'artiste, Fiches, onglets, widgets, tableau de bord, village, livrets) : **1 (toute la ligne), ½, ⅓, ¼, ⅔, ¾** — en boutons ou en menu, même ordre.
 - **C4 Dates** : texte libre comme dans un acte (« 7 mai 1925 », « 08/12/1960 », « vers 1784 », « avant 1800 », « entre 1880 et 1885 », « an II ») ; dessous « ✓ Compris : … » ou « ⚠️ date impossible » ; 📅 facultatif.
 - **C5 Onglets** : deux modèles seulement — onglets de page (segmenté, bleu = actif) et filtres (pastilles avec le nombre trouvé, noir = actif) ; classe active unique `is-active`.
 - **C6 Listes** : barre « N éléments · Trier : [menu] » (plus récents, plus anciens, A → Z, Z → A + choix propres) et « Voir les N suivants ↓ » en bas.

@@ -74,9 +74,9 @@
         architecte: {label: 'Architecte', order: ['bio', 'works', 'identity', 'prizes', 'biblio', 'expos', 'press', 'links', 'photos', 'discography', 'tracks', 'filmo', 'concerts', 'shows'], hidden: ['discography', 'tracks', 'filmo', 'concerts', 'shows', 'photos']},
     });
     const MODEL_OF = {musicien: 'musicien', chanteur: 'musicien', compositeur: 'musicien', chef: 'musicien', groupe: 'musicien', peintre: 'peintre', plasticien: 'peintre', ecrivain: 'ecrivain', poete: 'ecrivain', dramaturge: 'ecrivain', cineaste: 'cineaste', acteur: 'cineaste', videaste: 'cineaste', danseur: 'cineaste', photographe: 'photographe', sculpteur: 'sculpteur', architecte: 'architecte'};
-    const WIDTH = {'ligne': 'w-12', '¾': 'w-9', '⅔': 'w-8', '½': 'w-6', '⅓': 'w-4', 'en-tête': 'w-0'};
+    const WIDTH = {'ligne': 'w-12', '½': 'w-6', '⅓': 'w-4', '¼': 'w-3', '⅔': 'w-8', '¾': 'w-9', 'en-tête': 'w-0'};
     /** les largeurs d'une section de page, rangées comme ailleurs dans l'app (de la plus large à la plus étroite) */
-    ART.PAGE_WIDTHS = [['ligne', 'toute la ligne'], ['¾', '¾'], ['⅔', '⅔'], ['½', '½'], ['⅓', '⅓']];
+    ART.PAGE_WIDTHS = [['ligne', 'toute la ligne'], ['½', '½'], ['⅓', '⅓'], ['¼', '¼'], ['⅔', '⅔'], ['¾', '¾']];
     ART.PAGE_WIDTH_CLASS = WIDTH;
     ART.widthOptions = w => ART.PAGE_WIDTHS.map(([v, l]) => `<option value="${v}" ${v === w ? 'selected' : ''}>${l}</option>`).join('');
     /** la couleur du liseré d'une section : réglage de la section (« none » = aucun), sinon celle donnée (profil), sinon rien */
@@ -139,7 +139,7 @@
         function paint() {
             const cfg = pageCfg(C.store), list = cfg.order;
             aside.innerHTML = `<div class="ar-ph"><b>⚙️ Organiser la page${profilesOf(C.store).includes('artist') ? ' de l’artiste' : ` de ${esc(C.store.name)}`}</b><span class="spacer"></span><button type="button" class="icon-button small" data-o-close aria-label="Fermer">×</button></div><div class="ar-pbody">
-                <p class="ar-phelp">Glisse ⠿ (ou ↑ ↓) pour ranger, 👁 pour cacher. La largeur : toute la ligne, ¾, ⅔, ½ ou ⅓ ; la pastille : la couleur du liseré.</p><div class="ar-plist">${list.map((k, i) => { const S0 = secOf(cfg, k, C.store); if (!S0) return ''; const on = !cfg.hidden.has(k), w = cfg.widths[k] || S0.w;
+                <p class="ar-phelp">Glisse ⠿ (ou ↑ ↓) pour ranger, 👁 pour cacher. La largeur : toute la ligne, ½, ⅓, ¼, ⅔ ou ¾ ; la pastille : la couleur du liseré.</p><div class="ar-plist">${list.map((k, i) => { const S0 = secOf(cfg, k, C.store); if (!S0) return ''; const on = !cfg.hidden.has(k), w = cfg.widths[k] || S0.w;
                     return `<div class="ar-fr ${on ? '' : 'off'} ${S0.custom ? 'cust' : ''}" data-okey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><button type="button" class="ar-eye" data-o-eye title="${on ? 'Cacher' : 'Montrer'}">${on ? '👁' : '🚫'}</button><span class="lbl">${esc(S0.icon)} ${esc(S0.label)}</span>
                         ${k === 'links' ? '<span class="ty">en-tête</span>' : `<select class="ty ar-wsel" data-o-w title="Largeur">${ART.widthOptions(w)}</select><span class="ar-ocol" data-o-col="${esc(k)}"></span>`}<span class="tools"><button type="button" data-o-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-o-mv="1" ${i < list.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${S0.custom ? '<button type="button" data-o-del title="Retirer">🗑</button>' : ''}</span></div>`; }).join('')}</div>
                 <div class="ar-pbtns"><button type="button" class="button small secondary" data-o-add>＋ Ajouter une section</button><select class="ar-in" data-o-model title="Modèle de départ selon la discipline">${Object.entries(M).map(([k, m]) => `<option value="${k}" ${k === cfg.modelKey ? 'selected' : ''}>Modèle : ${esc(m.label)}</option>`).join('')}</select></div>

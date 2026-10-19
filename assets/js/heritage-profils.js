@@ -409,7 +409,7 @@
     });
 
     /* ═════════ R · La page d'une personne à plusieurs profils ═════════ */
-    const WIDTH = {'ligne': 'w-12', '¾': 'w-9', '⅔': 'w-8', '½': 'w-6', '⅓': 'w-4'};
+    const WIDTH = {'ligne': 'w-12', '½': 'w-6', '⅓': 'w-4', '¼': 'w-3', '⅔': 'w-8', '¾': 'w-9'};
     /** la couleur d'un profil sur la page de cette personne (son réglage propre, sinon le standard) */
     PF.colorIn = (st, key) => { const c = (cfgOf(st).ppage || {}).profColors?.[key]; return /^#[0-9a-f]{6}$/i.test(c || '') ? c : PF.color(key); };
     const cfgOf = st => (st.personSet?.own ? st.personSet : st.global) || {};
@@ -629,7 +629,7 @@
                     <select class="ty ar-wsel" data-o-w title="Largeur">${ART.widthOptions ? ART.widthOptions(w) : ''}</select><span class="ar-ocol" data-o-col="${esc(k)}"></span><span class="tools"><button type="button" data-o-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-o-mv="1" ${i < list.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${S0.custom ? '<button type="button" data-o-del title="Retirer">🗑</button>' : ''}</span></div>`; }).join('');
             const models = one ? Object.entries(cfg.models || {}) : [];
             aside.innerHTML = `<div class="ar-ph"><b>⚙️ ${one ? `Organiser le profil ${esc(String(P.label).toLocaleLowerCase('fr-FR'))}` : `Organiser la page de ${esc(first)}`}</b><span class="spacer"></span><button type="button" class="icon-button small" data-o-close aria-label="Fermer">×</button></div><div class="ar-pbody">
-                <p class="ar-phelp">${one ? 'Comme pour l’artiste : ⠿ ou ↑ ↓ pour ranger, 👁 pour cacher, la largeur (toute la ligne, ¾, ⅔, ½, ⅓) et la couleur du liseré.' : 'Range les profils et les sections (⠿ ou ↑ ↓), cache-les (👁), choisis leur largeur et la couleur de leur liseré (la pastille d’un profil : sa couleur).'}</p>${profCards}
+                <p class="ar-phelp">${one ? 'Comme pour l’artiste : ⠿ ou ↑ ↓ pour ranger, 👁 pour cacher, la largeur (toute la ligne, ½, ⅓, ¼, ⅔, ¾) et la couleur du liseré.' : 'Range les profils et les sections (⠿ ou ↑ ↓), cache-les (👁), choisis leur largeur et la couleur de leur liseré (la pastille d’un profil : sa couleur).'}</p>${profCards}
                 <b class="pf-sub">Sections, dans l’ordre de la page</b><div class="ar-plist">${rows}</div>
                 <div class="ar-pbtns">${one ? '' : '<button type="button" class="button small secondary" data-o-addprof>＋ Ajouter un profil</button>'}<button type="button" class="button small secondary" data-o-add>＋ Ajouter une section</button>${models.length > 1 ? `<select class="ar-in" data-o-model title="Modèle de départ">${models.map(([k, m]) => `<option value="${esc(k)}" ${k === cfg.model ? 'selected' : ''}>Modèle : ${esc(m.label)}</option>`).join('')}</select>` : ''}</div>
                 ${one && P.organizerNote ? `<p class="ar-phelp">${P.organizerNote}</p>` : ''}

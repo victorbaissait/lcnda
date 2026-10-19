@@ -242,7 +242,7 @@
     /** Une pièce de la page dans l'éditeur : son nom, sa largeur, ses réglages, ↑ ↓ retirer */
     function pieceHtml(x, i, known) {
         const c = x.config || {};
-        const widths = `<select data-ct-width="${i}" title="Largeur">${[['3', '¼'], ['4', '⅓'], ['6', '½'], ['8', '⅔'], ['12', 'toute la largeur']].map(([v, l]) => `<option value="${v}" ${String(x.width || '6') === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
+        const widths = `<select data-ct-width="${i}" title="Largeur">${[['12', 'toute la largeur'], ['6', '½'], ['4', '⅓'], ['3', '¼'], ['8', '⅔'], ['9', '¾']].map(([v, l]) => `<option value="${v}" ${String(x.width || '6') === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
         const tools = `<span class="h-saved-tools">${widths}<button type="button" class="link-button" data-ct-wup="${i}" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" class="link-button" data-ct-wdown="${i}" title="Descendre">↓</button><button type="button" class="link-button" data-ct-wdel="${i}">retirer</button></span>`;
         let kind = '🧱 Widget', label = known.get(x.type) || x.type, settings = '';
         if (x.type === 'app_screen') {
