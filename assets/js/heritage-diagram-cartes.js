@@ -143,9 +143,11 @@
     function zonePath(z, pr, w, h, cull = true) {
         let d = ''; const jump = Math.max(w, h) * .55;
         for (const poly of z.polys) for (const r of poly) {
-            let s = '', n = 0, lx = NaN, ly = NaN, bx0 = Infinity, by0 = Infinity, bx1 = -Infinity, by1 = -Infinity;
+            let s = '', n = 0, lx = NaN, ly = NaN, bx0 = Infinity, by0 = Infinity, bx1 = -Infinity, by1 = -Infinity, off = 0, plo = NaN;
             for (let i = 0; i < r.length; i += 2) {
-                const [x, y] = pr.p(r[i], r[i + 1]); if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+                // un contour qui passe la ligne des 180° (Russie, Fidji…) : longitudes suivies d'un seul tenant (190° au lieu de -170°)
+                if (r[i] - plo > 180) off -= 360; else if (r[i] - plo < -180) off += 360; plo = r[i];
+                const [x, y] = pr.p(r[i] + off, r[i + 1]); if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
                 if (n && Math.abs(x - lx) > jump) { n = -1; break; } // un anneau qui saute d'un bord à l'autre (180°) : pas dessiné
                 if (n && Math.abs(x - lx) < .5 && Math.abs(y - ly) < .5 && i < r.length - 2) continue;
                 s += (n ? 'L' : 'M') + r1(x) + ' ' + r1(y); n++; lx = x; ly = y;

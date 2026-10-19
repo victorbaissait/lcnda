@@ -1179,7 +1179,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-kinds.js?v=5" defer></script>
 <script src="assets/js/heritage-graphs.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-chiffres.js?v=2" defer></script>
-<script src="assets/js/heritage-diagram-cartes.js?v=1" defer></script>
+<script src="assets/js/heritage-diagram-cartes.js?v=2" defer></script>
 <script src="assets/js/heritage-artist.js?v=13" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-panel.js?v=8" defer></script>

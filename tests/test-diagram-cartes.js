@@ -92,6 +92,14 @@ step('lieux des migrations : coordonnées tapées, lieux choisis, zones du fond'
     assert.deepEqual(J(DC.placeOf({}, 'Alger (36,75; 3,06)', [])), [3.06, 36.75, 'Alger']); assert.equal(DC.placeOf({}, 'Canada', [fr, w])[2], 'Canada');
     assert.equal(DC.placeOf({}, 'Nulle part', [fr, w]), null); assert.equal(DC.placeOf({ places: { x: { lat: 999, lon: 0 } } }, 'x', []), null);
 });
+step('carte du monde : la Russie (qui passe la ligne des 180°) est dessinée en entier, pas seulement ses îles', async () => {
+    const k = R.KINDS.choropleth, smp = k.sample();
+    for (const base of ['monde-110m', 'monde-50m']) {
+        const s = R.svg(await k.resolve({ kind: 'choropleth', ...smp, o: { ...smp.o, map: 'monde', base, frame: 'monde' }, rows: [{ label: 'Russie', s0: 50 }, { label: 'Fidji', s0: 5 }] }), 900);
+        const ru = [...s.matchAll(/<path[^>]*d="([^"]*)"[^>]*><title>Russie/g)][0];
+        assert.ok(ru && ru[1].length > 3000, `${base} : contour de la Russie trop court (${ru ? ru[1].length : 0})`);
+    }
+});
 step('chaque exemple se dessine (900 et 390 px), nom pour les lecteurs d’écran, source du fond rappelée', async () => {
     for (const k of MINE) for (const W of [900, 390]) {
         const s = R.svg(await R.KINDS[k].resolve({ kind: k, ...R.KINDS[k].sample() }), W);
