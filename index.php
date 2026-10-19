@@ -51,7 +51,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/apparence.css?v=1">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=3">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=8">
-    <link rel="stylesheet" href="assets/css/shortcuts.css?v=1">
+    <link rel="stylesheet" href="assets/css/shortcuts.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=1" id="lc-frame-css" media="not all">
 </head></html>
 <body>
@@ -1143,7 +1143,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-atelier-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-voters.js?v=4" defer></script>
 <script src="assets/js/heritage-widgets.js?v=38" defer></script>
-<script src="assets/js/heritage-shortcuts.js?v=2" defer></script>
+<script src="assets/js/heritage-shortcuts.js?v=3" defer></script>
 <script src="assets/js/heritage-tabs.js?v=10" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
 <script src="assets/js/heritage-employers.js?v=3" defer></script>

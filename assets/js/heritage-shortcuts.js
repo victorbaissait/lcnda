@@ -568,10 +568,12 @@
         A().undoToast?.(msg, {undo: () => ext.saveCustomWidgetList(before), redo: () => ext.saveCustomWidgetList(list)});
     }
     const STAR = '<button type="button" class="button small secondary h-sc-star" data-sc-star title="Ajouter aux raccourcis (un widget « Raccourcis » du tableau de bord, d’un onglet ou d’une Fiche)" aria-label="Ajouter aux raccourcis">⭐ Raccourci</button>';
+    // sur la fiche : un bouton icône comme ses voisins (signet, verrou, historique…), le nom dans la bulle
+    const STAR_ICON = '<button type="button" class="icon-action icon-shortcut h-sc-star-hero" data-sc-star title="Ajouter aux raccourcis" aria-label="Ajouter aux raccourcis"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></button>';
     document.addEventListener('click', e => { if (e.target.closest?.('[data-sc-star]')) { e.preventDefault(); addToShortcuts(); } });
     // sur la fiche d'une personne : à côté des signets
     ext.afterPerson = ext.afterPerson || [];
-    ext.afterPerson.push(() => { const bar = document.querySelector('#workspace .person-hero-actions'); if (bar && !bar.querySelector('[data-sc-star]') && !document.body.classList.contains('is-kiosk')) bar.insertAdjacentHTML('beforeend', STAR.replace('button small secondary', 'button small secondary h-sc-star-hero')); });
+    ext.afterPerson.push(() => { const bar = document.querySelector('#workspace .person-hero-actions'); if (bar && !bar.querySelector('[data-sc-star]') && !document.body.classList.contains('is-kiosk')) bar.insertAdjacentHTML('beforeend', STAR_ICON); });
     // en haut des listes, des Fiches, des enquêtes et de Graphiques : dans les boutons de l'en-tête de la page
     const STAR_MODULES = ['listes', 'fiches', 'enquetes', 'graphiques'];
     function placeStar() {

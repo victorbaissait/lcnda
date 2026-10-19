@@ -71,7 +71,7 @@
 .h-sc-presets summary { cursor: pointer; font-weight: 700; }
 .h-sc-presetbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 6px 0 0; }
 .h-sc-presetbar select { max-width: 100%; }
-.h-sc-star-hero { white-space: nowrap; }
+.h-sc-star-hero svg { fill: none; }
 
 /* ── Fenêtre « Ajouter des raccourcis » ── */
 .h-sc-dlg .h-sc-tabs { margin-bottom: 10px; display: flex; flex-wrap: wrap; }
