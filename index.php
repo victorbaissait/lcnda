@@ -1195,7 +1195,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-profils.js?v=4" defer></script>
 <script src="assets/js/heritage-profils-politique.js?v=2" defer></script>
 <script src="assets/js/heritage-profils-sport.js?v=2" defer></script>
-<script src="assets/js/heritage-profils-liste.js?v=2" defer></script>
+<script src="assets/js/heritage-profils-liste.js?v=3" defer></script>
 <script src="assets/js/heritage-blocs.js?v=3" defer></script>
 <script src="assets/js/heritage-blocs-press.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-awards.js?v=1" defer></script>
