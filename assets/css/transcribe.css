@@ -1,0 +1,98 @@
+/* LCNDA — 📜 Transcription d'actes : poignées des zones, zoom (⤢ Toute l'image / Largeur / 100 %), au doigt.
+ * Le reste de l'outil est dans heritage.css (.h-tx-…). */
+.h-tx-stage{touch-action:none;-webkit-user-select:none;user-select:none}
+.h-tx-stage [data-tx-zone].is-sel{cursor:move}
+.h-tx-stage[data-tool=zone] [data-tx-zone]:not(.is-sel){cursor:crosshair}
+.h-tx-stage[data-drag],.h-tx-stage[data-drag] *{cursor:inherit}
+.h-tx-stage[data-drag=nwse]{cursor:nwse-resize}
+.h-tx-stage[data-drag=nesw]{cursor:nesw-resize}
+.h-tx-stage[data-drag=ns]{cursor:ns-resize}
+.h-tx-stage[data-drag=ew]{cursor:ew-resize}
+.h-tx-sel-frame{fill:none;stroke:#1473e6;pointer-events:none;vector-effect:none}
+.h-tx-handle{fill:#fff;stroke:#1473e6;filter:drop-shadow(0 0 1px rgba(0,0,0,.5))}
+.h-tx-handle:hover{fill:#1473e6}
+.h-tx-stage:focus-visible{box-shadow:inset 0 0 0 2px #1473e6}
+/* ─── la barre de gauche : A (tout dans la barre, qui passe à la ligne) ou B (barre courte + « 🎚 Mieux voir ») ─── */
+.h-tx-barwrap{position:relative;z-index:3}
+.h-tx-barwrap .h-tx-tools{row-gap:6px;column-gap:6px;align-items:center}
+.h-tx-ctl{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;min-height:28px}
+.h-tx-ctl+.h-tx-ctl{padding-left:6px;border-left:1px solid #e6e6ea}
+.h-tx-ctl[data-tx-item=tools]+.h-tx-ctl,.h-tx-ctl[data-tx-item=zoom]+.h-tx-ctl[data-tx-item=rot]{border-left:0;padding-left:0}
+.h-tx-tools .h-tx-rg{display:inline-flex;align-items:center;gap:4px;font-size:12px}
+.h-tx-tools .h-tx-rg input[type=range]{width:78px}
+.h-tx-tools .h-tx-rgl{font-size:12px;color:inherit}
+.h-tx-pair{display:inline-flex;align-items:center;gap:8px}
+.h-tx-pair .h-tx-rg input[type=range]{width:64px}
+.h-tx-ck{font-size:12px;gap:4px}
+.h-tx-seg{display:inline-flex}
+.h-tx-seg.segmented{padding:0;gap:0;background:none;border:0;box-shadow:none;min-height:0}
+.h-tx-tools .h-tx-seg button{border-radius:0;margin-left:-1px;padding:0 8px;min-height:0;height:26px;line-height:24px;font-size:12px}
+.h-tx-tools .h-tx-seg button:first-child{border-radius:6px 0 0 6px;margin-left:0}
+.h-tx-tools .h-tx-seg button:last-child{border-radius:0 6px 6px 0}
+.h-tx-tools .h-tx-seg button.is-active{background:#1473e6;border-color:#1473e6;color:#fff;position:relative}
+.h-tx-cfg{margin-left:auto;border-left:0!important}
+.h-tx-tools .h-tx-cfgbtn{padding:3px 6px}
+.h-tx-betterw{position:relative}
+.h-tx-tools .h-tx-betterbtn{display:inline-flex;align-items:center;gap:5px;font-weight:600}
+.h-tx-tools .h-tx-betterbtn.is-active{background:#1473e6;color:#fff;border-color:#1473e6}
+.h-tx-badge{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#1473e6;color:#fff;font-size:11px;font-weight:700}
+.h-tx-betterbtn.is-active .h-tx-badge{background:#fff;color:#1473e6}
+.h-tx-better{position:absolute;left:0;top:calc(100% + 6px);z-index:20;width:min(400px,calc(100vw - 32px));max-height:calc(100vh - 150px);overflow:auto;background:#fff;border:1px solid #d6d6db;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.22);padding:10px 14px 12px;white-space:normal;cursor:default}
+.h-tx-better h4{margin:8px 0 6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6e6e73}
+.h-tx-better .h-tx-rub+.h-tx-rub{border-top:1px solid #eee;margin-top:8px;padding-top:2px}
+.h-tx-better .h-tx-ctl{display:flex;width:100%;border-left:0;padding-left:0;margin:4px 0;white-space:normal}
+.h-tx-better .h-tx-rg{display:grid;grid-template-columns:118px 1fr auto;align-items:center;gap:8px;width:100%;font-size:13px}
+.h-tx-better .h-tx-rg input[type=range]{width:100%}
+.h-tx-better .h-tx-pair{display:grid;gap:4px;width:100%}
+.h-tx-better .h-tx-rgl{font-size:13px}
+.h-tx-better .h-tx-chanw{display:grid;grid-template-columns:118px 1fr;align-items:center;gap:8px;width:100%}
+.h-tx-better .h-tx-ck{font-size:13px}
+.h-tx-better .h-tx-rub-act{display:flex;gap:8px;flex-wrap:wrap}
+.h-tx-better .h-tx-rub-act .h-tx-ctl{width:auto;flex:1}
+.h-tx-better .h-tx-rub-act button{width:100%;padding:6px 8px;font-weight:600}
+.h-tx-better button{border:1px solid #d6d6db;background:#fff;border-radius:6px;padding:3px 8px;cursor:pointer;font:inherit;color:inherit}
+.h-tx-better .h-tx-seg button{border-radius:0;margin-left:-1px}
+.h-tx-better .h-tx-seg button:first-child{border-radius:6px 0 0 6px;margin-left:0}.h-tx-better .h-tx-seg button:last-child{border-radius:0 6px 6px 0}
+.h-tx-better .h-tx-seg button.is-active{background:#1473e6;border-color:#1473e6;color:#fff}
+/* 🔍 la loupe */
+.h-tx-loupe{position:absolute;z-index:4;border-radius:50%;border:3px solid #fff;box-shadow:0 6px 22px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.35);pointer-events:none}
+.h-tx-useenh{padding:6px 8px;font-size:12px;white-space:normal;max-width:260px}
+/* ⚙️ réglage de la barre (Maintenance et dans l'outil) */
+.h-txb-layout{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px}
+.h-txb-lab{font-weight:600}
+.h-txb-seg{display:inline-flex;flex-wrap:wrap}
+.h-txb-seg button{border:1px solid #d0d0d6;background:#fff;padding:6px 12px;cursor:pointer;font:inherit;color:inherit;margin-left:-1px}
+.h-txb-seg button:first-child{border-radius:8px 0 0 8px;margin-left:0}.h-txb-seg button:last-child{border-radius:0 8px 8px 0}
+.h-txb-seg button.is-active{background:#1473e6;border-color:#1473e6;color:#fff}
+.h-txb-row{flex-wrap:wrap;row-gap:4px}
+.h-txb-row select{font:inherit;font-size:12px;padding:2px 4px;flex:0 1 190px;min-width:0}
+.h-txb-row>span{flex:1 1 160px;min-width:0}
+.h-txb-dlg{width:min(640px,calc(100vw - 32px))}
+/* ⤢ : le mode de zoom écrit en clair, de largeur stable pour que les boutons ne sautent pas */
+.h-tx-tools .h-tx-zoomlab{display:inline-flex;align-items:center;gap:4px;min-width:118px;justify-content:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.h-tx-tools .h-tx-zoomlab b{font-weight:600;font-size:12px}
+.h-tx-tools .h-tx-zoomlab[data-fit=width] b,.h-tx-tools .h-tx-zoomlab[data-fit=real] b{color:#1473e6}
+.h-tx-zkeys{font-size:11px;white-space:nowrap}
+@media (max-width:600px){
+    .h-tx-tools .h-tx-zoomlab{min-width:0}
+    .h-tx-zkeys{display:none}
+}
+:root[data-theme="dark"] .h-tx-ctl+.h-tx-ctl{border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-better{background:#24272c;border-color:#3a3f46;box-shadow:0 12px 32px rgba(0,0,0,.6)}
+:root[data-theme="dark"] .h-tx-better h4{color:#a1a1a6}
+:root[data-theme="dark"] .h-tx-better .h-tx-rub+.h-tx-rub{border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-better button{background:#2c3036;border-color:#3a3f46;color:#e6e6e6}
+:root[data-theme="dark"] .h-tx-better .h-tx-seg button.is-active,:root[data-theme="dark"] .h-tx-tools .h-tx-seg button.is-active{background:#1473e6;border-color:#1473e6;color:#fff}
+:root[data-theme="dark"] .h-txb-seg button{background:#2c3036;border-color:#3a3f46;color:#e6e6e6}
+:root[data-theme="dark"] .h-txb-seg button.is-active{background:#1473e6;border-color:#1473e6;color:#fff}
+:root[data-theme="dark"] .h-tx-handle{fill:#24272c;stroke:#5aa2ff}
+:root[data-theme="dark"] .h-tx-handle:hover{fill:#5aa2ff}
+:root[data-theme="dark"] .h-tx-sel-frame{stroke:#5aa2ff}
+:root[data-theme="dark"] .h-tx-tools .h-tx-zoomlab[data-fit=width] b,:root[data-theme="dark"] .h-tx-tools .h-tx-zoomlab[data-fit=real] b{color:#7db6ff}
+/* le message d'état ne doit pas faire passer la barre du haut à la ligne (l'image changerait de taille à chaque message) */
+.h-tx-top .h-tx-status{flex:0 1 110px;width:110px;min-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.h-tx-top [data-tx=date_text],.h-tx-top [data-tx=place],.h-tx-top [data-tx=source]{flex:0 1 150px;min-width:80px}
+.h-tx-top [data-tx-state]{flex:0 0 auto}
+/* Listes → Transcriptions d'actes : les premières lignes du texte sur la fiche */
+.h-atl .ui-card small:has(.h-atl-text){white-space:normal;overflow:visible;text-overflow:clip}
+.h-atl-text{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;font:italic 13px/1.4 Georgia,"Times New Roman",serif;color:inherit;margin:2px 0}

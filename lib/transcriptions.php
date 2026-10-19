@@ -28,6 +28,67 @@ function act_transcriptions_list(PDO $pdo): array
             m.filename, COALESCE(NULLIF(m.thumbnail,''), m.filename) AS thumb FROM act_transcriptions t LEFT JOIN media m ON m.id=t.media_id ORDER BY t.updated_at DESC")->fetchAll());
 }
 
+/** l'année d'une date d'acte écrite librement (« 23 mars 1790 », « vers 1784 », « 1790-03-23 ») */
+function act_transcription_year(?string $text): ?int
+{
+    return preg_match('/(?<!\d)(9\d\d|1\d{3}|20\d\d)(?!\d)/', (string) $text, $m) ? (int) $m[1] : null;
+}
+
+/**
+ * Listes → « Transcriptions d'actes » : une page de la liste (lecture seule), avec recherche, filtres et tri faits en SQL.
+ * q : titre, texte, personnes, lieu, cote ; kinds : sortes d'acte ; person : n° de fiche reliée ; place : lieu (texte) ;
+ * from / to : années ; status : todo / doing / done ; zones / linked : 1 ; sort : recent, old, date, az, za ; offset, limit.
+ */
+function act_transcriptions_page(PDO $pdo, array $q): array
+{
+    act_transcriptions_ensure($pdo);
+    $pdo->sqliteCreateFunction('act_year', static fn($v) => act_transcription_year($v === null ? '' : (string) $v), 1);
+    $where = []; $args = [];
+    $text = trim(safe_text($q['q'] ?? ''));
+    if ($text !== '') {
+        // sans accents ni majuscules (lc_fold, comme la recherche de l'app) : titre, texte, personnes, lieu, cote, date
+        $hay = "lc_fold(t.title || ' ' || t.place || ' ' || t.source || ' ' || t.date_text || ' ' || COALESCE(json_extract(t.data_json, '$.people'), '') || ' ' || t.body)";
+        foreach (array_slice(preg_split('/\s+/u', $text) ?: [], 0, 6) as $w) {
+            $f = function_exists('search_fold') ? search_fold($w) : mb_strtolower($w);
+            if ($f === '') { continue; }
+            $where[] = "instr($hay, ?) > 0"; $args[] = $f;
+        }
+    }
+    $kinds = array_values(array_intersect(array_map('strval', is_array($q['kinds'] ?? null) ? $q['kinds'] : array_filter(explode(',', (string) ($q['kinds'] ?? '')))), TRANSCRIPTION_KINDS));
+    if ($kinds) { $where[] = 't.kind IN (' . implode(',', array_fill(0, count($kinds), '?')) . ')'; array_push($args, ...$kinds); }
+    $person = safe_int($q['person'] ?? 0);
+    if ($person) { $where[] = "EXISTS (SELECT 1 FROM json_each(t.data_json, '$.people') j WHERE CAST(json_extract(j.value, '$.person_id') AS INTEGER) = ?)"; $args[] = $person; }
+    $place = trim(safe_text($q['place'] ?? ''));
+    if ($place !== '') { $where[] = "t.place LIKE ? ESCAPE '\\'"; $args[] = '%' . str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $place) . '%'; }
+    $from = safe_int($q['from'] ?? 0); $to = safe_int($q['to'] ?? 0);
+    if ($from) { $where[] = 'act_year(t.date_text) >= ?'; $args[] = $from; }
+    if ($to) { $where[] = 'act_year(t.date_text) <= ?'; $args[] = $to; }
+    $statusSql = "COALESCE(NULLIF(json_extract(t.data_json, '$.status'), ''), CASE WHEN trim(t.body) = '' THEN 'todo' ELSE 'doing' END)";
+    $status = (string) ($q['status'] ?? '');
+    if (in_array($status, ['todo', 'doing', 'done'], true)) { $where[] = "$statusSql = ?"; $args[] = $status; }
+    if (!empty($q['zones'])) { $where[] = "COALESCE(json_array_length(t.data_json, '$.zones'), 0) > 0"; }
+    if (!empty($q['linked'])) { $where[] = "EXISTS (SELECT 1 FROM json_each(t.data_json, '$.people') j WHERE CAST(json_extract(j.value, '$.person_id') AS INTEGER) > 0)"; }
+    $sql = ' FROM act_transcriptions t LEFT JOIN media m ON m.id=t.media_id' . ($where ? ' WHERE ' . implode(' AND ', $where) : '');
+    $order = ['recent' => 't.updated_at DESC, t.id DESC', 'old' => 't.updated_at ASC, t.id ASC', 'date' => 'act_year(t.date_text) IS NULL, act_year(t.date_text) ASC, t.date_text ASC, t.id ASC',
+        'az' => 't.title COLLATE NOCASE ASC, t.id ASC', 'za' => 't.title COLLATE NOCASE DESC, t.id DESC'][(string) ($q['sort'] ?? '')] ?? 't.updated_at DESC, t.id DESC';
+    $limit = max(1, min(200, safe_int($q['limit'] ?? 50) ?: 50)); $offset = max(0, safe_int($q['offset'] ?? 0));
+    $c = $pdo->prepare('SELECT count(*)' . $sql); $c->execute($args); $total = (int) $c->fetchColumn();
+    $s = $pdo->prepare("SELECT t.id, t.title, t.kind, t.date_text, t.place, t.source, t.media_id, t.updated_at, substr(t.body, 1, 600) AS excerpt,
+        (length(t.body) - length(replace(t.body, char(10), '')) + (CASE WHEN trim(t.body) = '' THEN 0 ELSE 1 END)) AS line_count,
+        COALESCE(json_array_length(t.data_json, '$.zones'), 0) AS zone_count, json_extract(t.data_json, '$.people') AS people_json, $statusSql AS status,
+        COALESCE(NULLIF(m.thumbnail,''), m.filename) AS thumb" . $sql . " ORDER BY $order LIMIT $limit OFFSET $offset");
+    $s->execute($args);
+    $items = array_map(static function ($r) {
+        $people = array_values(array_filter(array_map(static fn($p) => is_array($p) ? ['name' => (string) ($p['name'] ?? ''), 'role' => (string) ($p['role'] ?? ''), 'person_id' => (int) ($p['person_id'] ?? 0)] : null, json_decode((string) $r['people_json'], true) ?: [])));
+        return ['id' => (int) $r['id'], 'title' => (string) $r['title'], 'kind' => (string) $r['kind'], 'date_text' => (string) $r['date_text'], 'year' => act_transcription_year($r['date_text']), 'place' => (string) $r['place'], 'source' => (string) $r['source'],
+            'media_id' => (int) $r['media_id'], 'thumb' => (string) ($r['thumb'] ?? ''), 'updated_at' => (string) $r['updated_at'], 'excerpt' => (string) $r['excerpt'], 'lines' => (int) $r['line_count'], 'zones' => (int) $r['zone_count'], 'people' => $people, 'status' => (string) $r['status']];
+    }, $s->fetchAll());
+    // le nombre de chaque sorte d'acte (pour « Filtrer ▾ »), sur toute la base
+    $kindCounts = [];
+    foreach ($pdo->query('SELECT kind, count(*) AS n FROM act_transcriptions GROUP BY kind')->fetchAll() as $r) { $kindCounts[(string) $r['kind']] = (int) $r['n']; }
+    return ['items' => $items, 'total' => $total, 'offset' => $offset, 'limit' => $limit, 'kinds' => $kindCounts, 'all' => array_sum($kindCounts)];
+}
+
 /** les transcriptions d'actes faites sur une image (pour la visionneuse) */
 function act_transcriptions_for_media(PDO $pdo, int $mediaId): array
 {
@@ -66,7 +127,16 @@ function act_transcription_clean_data(PDO $pdo, $data): array
         $people[] = ['name' => mb_substr(safe_text($p['name'] ?? ''), 0, 160), 'role' => mb_substr(safe_text($p['role'] ?? ''), 0, 60), 'person_id' => $pid, 's' => max(0, (int) ($p['s'] ?? 0)), 'e' => max(0, (int) ($p['e'] ?? 0))];
     }
     $view = is_array($data['view'] ?? null) ? $data['view'] : [];
-    return ['zones' => $zones, 'people' => $people, 'view' => ['contrast' => $num($view['contrast'] ?? 100), 'bright' => $num($view['bright'] ?? 100), 'invert' => !empty($view['invert']), 'rot' => (int) ($view['rot'] ?? 0) % 360, 'gray' => !empty($view['gray'])]];
+    $range = static fn($v, float $min, float $max, float $def) => is_numeric($v) ? max($min, min($max, round((float) $v, 3))) : $def;
+    $rot = ((int) ($view['rot'] ?? 0) % 360 + 360) % 360;
+    // « 🎚 Mieux voir » : les réglages de l'image retenus pour cet acte (des nombres bornés, rien d'autre)
+    $cleanView = ['contrast' => $range($view['contrast'] ?? 100, 50, 300, 100), 'bright' => $range($view['bright'] ?? 100, 40, 220, 100), 'invert' => !empty($view['invert']), 'rot' => $rot - $rot % 90, 'gray' => !empty($view['gray']),
+        'sharp' => $range($view['sharp'] ?? 0, 0, 300, 0), 'sharpR' => $range($view['sharpR'] ?? 1.5, .5, 5, 1.5), 'clahe' => $range($view['clahe'] ?? 0, 0, 100, 0),
+        'channel' => in_array($view['channel'] ?? '', ['', 'r', 'g', 'b'], true) ? (string) ($view['channel'] ?? '') : '', 'thr' => $range($view['thr'] ?? 0, 0, 254, 0),
+        'lvB' => $range($view['lvB'] ?? 0, 0, 200, 0), 'lvW' => $range($view['lvW'] ?? 255, 55, 255, 255), 'lvG' => $range($view['lvG'] ?? 1, .3, 3, 1),
+        'bg' => !empty($view['bg']), 'tilt' => $range($view['tilt'] ?? 0, -10, 10, 0), 'mirror' => !empty($view['mirror'])];
+    $status = in_array($data['status'] ?? '', ['todo', 'doing', 'done'], true) ? $data['status'] : '';
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status];
 }
 
 function save_act_transcription(PDO $pdo, array $data): array
@@ -83,7 +153,11 @@ function save_act_transcription(PDO $pdo, array $data): array
     if ($id) {
         $s = $pdo->prepare('UPDATE act_transcriptions SET title=?, kind=?, media_id=?, date_text=?, place=?, source=?, body=?, data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?');
         $s->execute([...$vals, $id]);
-        if (!$s->rowCount()) { throw new RuntimeException('Transcription introuvable.'); }
+        if (!$s->rowCount()) {
+            // « ↶ Annuler » après une suppression : la transcription revient avec son numéro
+            if (empty($data['restore'])) { throw new RuntimeException('Transcription introuvable.'); }
+            $pdo->prepare('INSERT INTO act_transcriptions(id, title, kind, media_id, date_text, place, source, body, data_json) VALUES(?,?,?,?,?,?,?,?,?)')->execute([$id, ...$vals]);
+        }
     } else {
         $pdo->prepare('INSERT INTO act_transcriptions(title, kind, media_id, date_text, place, source, body, data_json) VALUES(?,?,?,?,?,?,?,?)')->execute($vals);
         $id = (int) $pdo->lastInsertId();

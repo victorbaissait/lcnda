@@ -1750,6 +1750,7 @@
                 </section>
                 ${ext.vectorMapPalette ? `<section class="maintenance-panel" data-mtp-blk="vectormap"><h3>🗺️ Dessin vectoriel — mode Plan : les éléments${blkMove}</h3><p class="muted">Les groupes (voies, eau, zones, symboles…) et leurs éléments : dans quel ordre, lesquels on voit, et les tiens (une allure de départ, un nom, une couleur, une largeur, ou un symbole que tu as dessiné).</p><div data-vmp-box>${ext.vectorMapPalette.html()}</div></section>` : ''}
                 ${ext.decorTreePrefs ? `<section class="maintenance-panel" data-mtp-blk="decortree"><h3>🌳 Arbre décoratif${blkMove}</h3><p class="muted">Ce que la fenêtre propose au départ, tes formats et tes styles. Les formes et les boutons se rangent dans « Boutons et options » (éditeur 🌳 Arbre décoratif), avec ses raccourcis.</p><div data-dtp-box>${ext.decorTreePrefs.html()}</div></section>` : ''}
+                ${ext.transcribePrefs ? `<section class="maintenance-panel" data-mtp-blk="transcribe"><h3>📜 Transcription d’actes : barre d’outils${blkMove}</h3><p class="muted">La barre au-dessus de l’image de l’acte : tout dans la barre (A), ou une barre courte et le panneau « 🎚️ Mieux voir » (B) ; les boutons et réglages montrés, cachés et rangés. Aussi avec « ⚙️ » dans l’outil.</p><div data-txp-box>${ext.transcribePrefs.html()}</div></section>` : ''}
                 ${ext.keynotePrefs ? `<section class="maintenance-panel" data-mtp-blk="keynote"><h3>🎤 Présentation (Keynote)${blkMove}</h3><p class="muted">Ce qu’une nouvelle présentation prend au départ : thème, format (16:9, 4:3, sur mesure…), transition, disposition des nouvelles diapositives, aimant, pointeur laser.</p><div data-knp-box>${ext.keynotePrefs.html()}</div></section>` : ''}
                 <section class="maintenance-panel" data-mtp-blk="full"><h3>⛶ Plein écran à l’ouverture${blkMove}</h3>
                     <div class="form-grid h-mtp-grid">${FULL_EDITORS.map(([k, l]) => `<label>${esc(l)}<select data-mtp-full="${k}">${opt([['0', 'Fenêtre'], ['1', 'Plein écran']], (full[k] ?? FULL_DEFAULT[k]) ? '1' : '0')}</select></label>`).join('')}</div>
@@ -1767,13 +1768,14 @@
             ext.editorKeysPanel?.(ws.querySelector('[data-ek-box]'));
             { const box = ws.querySelector('[data-dtp-box]'); if (box) ext.decorTreePrefs.bind(box, () => { box.innerHTML = ext.decorTreePrefs.html(); }); } // 🌳 arbre décoratif
             { const box = ws.querySelector('[data-knp-box]'); if (box) ext.keynotePrefs.bind(box, () => { box.innerHTML = ext.keynotePrefs.html(); }); } // 🎤 présentation
+            { const box = ws.querySelector('[data-txp-box]'); if (box) ext.transcribePrefs.bind(box, () => { box.innerHTML = ext.transcribePrefs.html(); }); } // 📜 transcription d'actes
             { const box = ws.querySelector('[data-vmp-box]'); if (box) ext.vectorMapPalette.bind(box, () => { box.innerHTML = ext.vectorMapPalette.html(); }); } // 🗺️ éléments du mode Plan
             ws.querySelectorAll('[data-ek-tab]').forEach(b => { b.hidden = true; }); // l'éditeur se choisit plus haut
             // les grands blocs : deux colonnes, chacune dans son ordre (↑ ↓, ⇄ pour changer de colonne), gardé pour la prochaine fois
             { const cols = ws.querySelector('.h-mtp-cols'), left = ws.querySelector('.h-mtp-stack'), right = document.createElement('div'); right.className = 'h-mtp-stack'; right.dataset.col = 'right'; left.dataset.col = 'left'; cols.appendChild(right);
               const saved = lsJson(BLK_KEY, null), def = {left: ['layout', 'export', 'retouch', 'full'], right: ['tools']}, lay = saved && Array.isArray(saved.left) && Array.isArray(saved.right) ? saved : def;
               const all = [...ws.querySelectorAll('[data-mtp-blk]')], put = (col, keys) => keys.forEach(k => { const el = all.find(x => x.dataset.mtpBlk === k); if (el) col.appendChild(el); });
-              put(left, lay.left); put(right, lay.right); all.filter(el => !lay.left.includes(el.dataset.mtpBlk) && !lay.right.includes(el.dataset.mtpBlk)).forEach(el => (el.dataset.mtpBlk === 'tools' ? right : left).appendChild(el)); }
+              put(left, lay.left); put(right, lay.right); all.filter(el => !lay.left.includes(el.dataset.mtpBlk) && !lay.right.includes(el.dataset.mtpBlk)).forEach(el => (['tools', 'transcribe'].includes(el.dataset.mtpBlk) ? right : left).appendChild(el)); }
         };
         draw();
         // ce qui est à l'écran (pas encore enregistré) : disposition, boutons de l'éditeur choisi

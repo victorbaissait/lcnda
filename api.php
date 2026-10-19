@@ -373,6 +373,7 @@ try {
         'slideshows' => json_response(['items' => slideshows_list($pdo)]),
         'slideshow' => json_response(slideshow_get($pdo, safe_int($_GET['id'] ?? 0))),
         'act_transcriptions' => json_response(['items' => act_transcriptions_list($pdo)]),
+        'act_transcriptions_page' => json_response(act_transcriptions_page($pdo, $_GET)), // Listes → Transcriptions d'actes (lecture seule, page par page)
         'act_transcription' => json_response(act_transcription_get($pdo, safe_int($_GET['id'] ?? 0))),
         'vector_map_places' => json_response(vector_map_places($pdo, (float) ($_GET['n'] ?? 0), (float) ($_GET['s'] ?? 0), (float) ($_GET['w'] ?? 0), (float) ($_GET['e'] ?? 0))),
         'diagram_genea' => json_response(diagram_genea_data($pdo, $_GET)), // 📊 lib/diagram_genea.php
@@ -12672,6 +12673,19 @@ function htr_recognize_media(PDO $pdo,array $data): array
     $imagePath = realpath(MEDIA_DIR . '/' . $filename);
     if (!$mediaRoot || !$imagePath || !str_starts_with($imagePath, $mediaRoot . DIRECTORY_SEPARATOR)) {
         throw new RuntimeException('Fichier média introuvable.');
+    }
+    // 📜 Transcription d'actes : l'image améliorée (« Mieux voir » : contraste, netteté, canal, seuil…) au lieu du fichier d'origine
+    $tempImage = '';
+    if (!empty($data['image_b64']) && is_string($data['image_b64'])) {
+        if (strlen($data['image_b64']) > 40 * 1024 * 1024) throw new RuntimeException('Image améliorée trop lourde.');
+        $bin = base64_decode($data['image_b64'], true);
+        $info = $bin !== false ? @getimagesizefromstring($bin) : false;
+        if (!$info || !in_array($info[2] ?? 0, [IMAGETYPE_JPEG, IMAGETYPE_PNG], true)) throw new RuntimeException('Image améliorée illisible.');
+        $base = (string) tempnam(sys_get_temp_dir(), 'lcnda-htr-'); if (is_file($base)) { @unlink($base); }
+        $tempImage = $base . ($info[2] === IMAGETYPE_PNG ? '.png' : '.jpg');
+        if (file_put_contents($tempImage, $bin) === false) throw new RuntimeException('Image améliorée : écriture impossible.');
+        register_shutdown_function(static function () use ($tempImage) { if (is_file($tempImage)) { @unlink($tempImage); } });
+        $imagePath = $tempImage;
     }
 
     $modelId = safe_text($data['model'] ?? 'fr-actes') ?: 'fr-actes';

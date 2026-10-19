@@ -27,6 +27,8 @@
         sepulture: 'L’an [année], le [jour] du mois de [mois], a été inhumé(e) dans le cimetière de cette paroisse le corps de [prénom et nom], âgé(e) d’environ [âge] ans, décédé(e) le [date], [époux / veuve de …]. Présents : [témoins].\n[signatures]',
         notarial: 'Par-devant [nom], notaire royal / public à [lieu], soussigné, et en présence des témoins ci-après nommés, furent présents [parties]…\n[objet de l’acte]\nFait et passé à [lieu], le [date], en présence de [témoins].\n[signatures]',
     };
+    const USE_KEY = 'genealogie-transcribe-useenh';
+    const useEnh = () => { try { return localStorage.getItem(USE_KEY) !== '0'; } catch (_) { return true; } };
     const SPECIAL = ['ſ', 'œ', 'Œ', 'æ', 'ç', 'é', 'è', 'ê', 'ë', 'à', 'â', 'î', 'ï', 'ô', 'ù', 'û', 'ÿ', '&', '«', '»', '…', '†', '°', '[', ']', '[?]', '[illisible]', '/'];
 
     /* ═════════ Repérage : nombres et dates en toutes lettres, noms, rôles, lieux, métiers ═════════ */
@@ -129,32 +131,30 @@
 
     /* ═════════ L'atelier ═════════ */
     async function open(ctx = {}) {
-        let t = {id: 0, title: '', kind: 'bapteme', media_id: 0, filename: '', date_text: '', place: '', source: '', body: '', data: {zones: [], people: [], view: {contrast: 100, bright: 100, invert: false, rot: 0, gray: false}}};
-        if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = {...{contrast: 100, bright: 100, invert: false, rot: 0, gray: false}, ...(r.data?.view || {})}; } catch (e) { return toast(e.message, 'error'); } }
+        const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
+        let t = {id: 0, title: '', kind: 'bapteme', media_id: 0, filename: '', date_text: '', place: '', source: '', body: '', data: {zones: [], people: [], status: 'todo', view: TV.viewOf()}};
+        if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = TV.viewOf(r.data?.view); if (!['todo', 'doing', 'done'].includes(t.data.status)) t.data.status = String(t.body || '').trim() ? 'doing' : 'todo'; } catch (e) { return toast(e.message, 'error'); } }
         else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = ctx.title || ''; t.body = ctx.text || ''; }
-        let dirty = false, tool = 'pan', zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
+        let dirty = false, tool = 'pan', fitMode = 'page', fitOn = true, zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-tx-dlg';
         dlg.innerHTML = `<div class="h-tx">
             <header class="h-tx-top"><span class="h-tx-logo">📜</span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="Titre de l’acte (ex. Baptême de Jean Martin, 1790)" value="${esc(t.title)}">
                 <select data-tx="kind" title="Genre d’acte">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <input data-tx="date_text" placeholder="Date" value="${esc(t.date_text)}" title="Date de l’acte"><input data-tx="place" placeholder="Lieu" value="${esc(t.place)}" title="Paroisse, commune"><input data-tx="source" placeholder="Source (AD, cote, vue)" value="${esc(t.source)}" title="Archives, cote, numéro de vue">
+                <select data-tx-state title="Où en est cette transcription (pour la liste « Transcriptions d’actes »)">${[['todo', 'À faire'], ['doing', 'En cours'], ['done', 'Finie']].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <span class="spacer"></span><span class="muted h-tx-status" data-tx-status data-ui-status></span>
                 <button type="button" class="button small secondary" data-tx-cmd="export" title="Le texte (.txt), l’impression ou un PDF (image + texte)">⤓ Exporter ▾</button><button type="button" class="button small" data-tx-cmd="save" title="Enregistrer" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
             <div class="h-tx-main">
                 <section class="h-tx-left">
-                    <div class="h-tx-tools"><button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)">🖼️ Image…</button><span class="h-tx-sep"></span>
-                        <button type="button" data-tx-tool="pan" title="Déplacer l’image, ou barre d’espace" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="Dessiner une zone (elle se relie au passage choisi dans le texte)" data-shortcut="Z" data-help="Choisis un passage dans le texte, puis dessine un rectangle sur l’image : les deux restent liés (un clic sur l’un montre l’autre).">▭ Zone</button>
-                        <button type="button" data-tx-cmd="zin" title="Zoom avant">＋</button><button type="button" data-tx-cmd="zout" title="Zoom arrière">－</button><button type="button" data-tx-cmd="fit" title="Toute l’image">⤢</button><button type="button" data-tx-cmd="rot" title="Tourner de 90°">⟳</button><span class="h-tx-sep"></span>
-                        <label title="Contraste">◐<input type="range" data-tx-view="contrast" min="50" max="300" value="${t.data.view.contrast}"></label><label title="Luminosité">☀<input type="range" data-tx-view="bright" min="40" max="220" value="${t.data.view.bright}"></label>
-                        <label class="checkbox-line" title="Négatif : encre claire sur fond sombre"><input type="checkbox" data-tx-view="invert" ${t.data.view.invert ? 'checked' : ''}>Négatif</label><label class="checkbox-line"><input type="checkbox" data-tx-view="gray" ${t.data.view.gray ? 'checked' : ''}>Gris</label></div>
-                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><p class="h-tx-empty" data-tx-empty>Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).</p></div>
+                    <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}</div>
+                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).</p></div>
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Reconnaissance d’écriture manuscrite, si un modèle est installé (Maintenance)" data-help="La lecture d’une écriture à la main (HTR) : elle demande un modèle installé dans Maintenance. Relis toujours : elle se trompe sur les noms." data-help-faq="transcription">✍️ Lire (manuscrit)</button>
                         <select data-tx-lang title="Langue du texte"><option value="fra">Français</option><option value="lat">Latin</option><option value="fra+lat">Français + latin</option><option value="eng">Anglais</option><option value="deu">Allemand</option><option value="ita">Italien</option><option value="spa">Espagnol</option></select>
                         <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
-                        <details class="h-tx-more"><summary>⋯ Plus</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button></div></details></div>
+                        <details class="h-tx-more"><summary>⋯ Plus</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="checkbox-line h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}> Lire et exporter l’image améliorée</label></div></details></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="Insérer ${esc(c)}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.">${esc(t.body)}</textarea></div>
                     <div class="h-tx-found" data-tx-found></div>
@@ -163,33 +163,126 @@
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'transcribe', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const $ = s => dlg.querySelector(s), area = $('[data-tx-body]'), mirror = $('[data-tx-mirror]'), svg = $('[data-tx-svg]'), world = $('[data-tx-world]'), img = $('[data-tx-img]'), stage = $('[data-tx-stage]');
         const UI = window.LCNDA_UI || {}, STATES = {'modifié': 'dirty', '✓ Enregistré': 'saved', 'Enregistrement…': 'saving'};
-        const status = s => { const el = $('[data-tx-status]'); if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
+        const status = s => { const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
         const touch = () => { dirty = true; status('modifié'); };
         // E4 : une image glissée (ou collée) sur l'acte entre dans les Médias et devient l'image de l'acte
         UI.bindFileDrop?.(stage, async files => {
             const f = files[0], fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
             try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
-                if (t.data.zones.length && !await A().confirmBox('Elles étaient posées pour l’ancienne image.', {title: 'Garder les zones déjà posées ?', okLabel: 'Garder les zones', cancelLabel: 'Les retirer', danger: false})) t.data.zones = [];
+                if (t.data.zones.length && !await A().confirmBox('Elles étaient posées pour l’ancienne image.', {title: 'Garder les zones déjà posées ?', okLabel: 'Garder les zones', cancelLabel: 'Les retirer', danger: false})) { snap(); t.data.zones = []; }
                 t.media_id = Number(j.result.media_id); t.filename = j.result.filename; touch(); await loadImage(); toast('L’image est dans les Médias et devient l’image de l’acte.');
             } catch (e) { toast(`${f.name} : ${e.message}`, 'error'); }
         }, {accept: 'image/*'});
         /* ─── l'image ─── */
-        const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); };
-        const fit = () => { const r = stage.getBoundingClientRect(); if (!imgW) return; const rot = (t.data.view.rot || 0) % 180 !== 0, w = rot ? imgH : imgW, h = rot ? imgW : imgH; zoom = clamp(Math.min((r.width - 20) / w, (r.height - 20) / h), .02, 20); panX = (r.width - w * zoom) / 2; panY = (r.height - h * zoom) / 2; applyView(); };
-        const filter = () => { const v = t.data.view; img.style.filter = `contrast(${v.contrast}%) brightness(${v.bright}%)${v.invert ? ' invert(1)' : ''}${v.gray ? ' grayscale(1)' : ''}`; const rot = v.rot || 0; img.setAttribute('transform', rot ? (rot === 90 ? `translate(${imgH} 0) rotate(90)` : rot === 180 ? `translate(${imgW} ${imgH}) rotate(180)` : `translate(0 ${imgW}) rotate(270)`) : ''); $('[data-tx-zones]').setAttribute('transform', img.getAttribute('transform') || ''); };
+        /* De l'image (pixels de l'acte) à l'écran : miroir, rotation de 90° en 90° et redressement fin autour du centre,
+         * puis décalage pour que le cadre englobant commence en (0, 0). Les zones restent en pixels de l'image. */
+        let M = new DOMMatrix(), Mi = new DOMMatrix(), WH = [0, 0];
+        const mstr = m => `matrix(${m.a} ${m.b} ${m.c} ${m.d} ${m.e} ${m.f})`;
+        const rotPt = (x, y) => { const p = M.transformPoint(new DOMPoint(x, y)); return [p.x, p.y]; };
+        const unrot = (X, Y) => { const p = Mi.transformPoint(new DOMPoint(X, Y)); return [p.x, p.y]; };
+        const vecToImg = (dx, dy) => [Mi.a * dx + Mi.c * dy, Mi.b * dx + Mi.d * dy];
+        const vecToScr = (dx, dy) => [M.a * dx + M.c * dy, M.b * dx + M.d * dy];
+        function geom({keepCenter = true} = {}) {
+            if (!imgW) return;
+            const v = t.data.view, cx = imgW / 2, cy = imgH / 2, before = keepCenter ? rotPt(cx, cy) : null;
+            const A0 = new DOMMatrix().translate(cx, cy).scale(v.mirror ? -1 : 1, 1).rotate((v.rot || 0) + (v.tilt || 0)).translate(-cx, -cy);
+            const pts = [[0, 0], [imgW, 0], [0, imgH], [imgW, imgH]].map(([x, y]) => A0.transformPoint(new DOMPoint(x, y))), xs = pts.map(q => q.x), ys = pts.map(q => q.y);
+            const minX = Math.min(...xs), minY = Math.min(...ys);
+            M = new DOMMatrix().translate(-minX, -minY).multiply(A0); Mi = M.inverse(); WH = [Math.max(...xs) - minX, Math.max(...ys) - minY];
+            const tr = mstr(M); img.setAttribute('transform', tr); $('[data-tx-zones]').setAttribute('transform', tr); $('[data-tx-draw]').setAttribute('transform', tr);
+            if (before) { const [ax, ay] = rotPt(cx, cy); panX += (before[0] - ax) * zoom; panY += (before[1] - ay) * zoom; } // le centre de l'image ne bouge pas à l'écran
+        }
+        const rotWH = () => WH;
+        const FIT = {page: 'Toute l’image', width: 'Largeur', real: '100 %'}, FIT_NEXT = {page: 'width', width: 'real', real: 'page'};
+        const FIT_HELP = {page: 'Toute l’image', width: 'Largeur (l’image prend toute la largeur, le mieux pour lire)', real: 'Taille réelle (100 %)'};
+        const fitZoom = mode => { const r = stage.getBoundingClientRect(), [w, h] = rotWH(); return mode === 'real' ? 1 : clamp(mode === 'width' ? (r.width - 20) / w : Math.min((r.width - 20) / w, (r.height - 20) / h), .02, 20); };
+        function paintZoomLabel() {
+            const b = $('[data-tx-zoomlab]'); if (!b) return;
+            const on = fitOn && !!imgW, now = on ? FIT[fitMode] : `${Math.round(zoom * 100)} %`, next = FIT_NEXT[on ? fitMode : 'real'];
+            $('[data-tx-zoomtxt]').textContent = now; b.dataset.fit = on ? fitMode : '';
+            b.title = `Zoom : ${on ? FIT_HELP[fitMode] : now}. Clic : ${FIT_HELP[next]} (puis ${FIT_HELP[FIT_NEXT[next]]}, ${FIT_HELP[FIT_NEXT[FIT_NEXT[next]]]})`;
+        }
+        const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); paintOverlay(); paintZoomLabel(); };
+        /** ⤢ : trois façons d'ajuster — toute l'image, la largeur (on lit l'acte de haut en bas), la taille réelle (100 %) */
+        function applyFit(mode = 'page', {keepY = false} = {}) {
+            if (!imgW) return; const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return;
+            const [w, h] = rotWH(), z = fitZoom(mode), cx = r.width / 2, cy = r.height / 2;
+            if (mode === 'page') { panX = (r.width - w * z) / 2; panY = (r.height - h * z) / 2; }
+            else if (mode === 'width') { panX = (r.width - w * z) / 2; panY = h * z <= r.height ? (r.height - h * z) / 2 : keepY ? clamp(panY * z / zoom, r.height - 10 - h * z, 10) : 10; }
+            else { const wx = (cx - panX) / zoom, wy = (cy - panY) / zoom; panX = w * z <= r.width ? (r.width - w * z) / 2 : cx - wx * z; panY = h * z <= r.height ? (r.height - h * z) / 2 : cy - wy * z; }
+            zoom = z; fitMode = mode; fitOn = true; applyView();
+        }
+        const fit = () => applyFit('page');
+        /** zoom autour d'un point de l'écran (la souris, le milieu des deux doigts, le centre pour ＋ et －) */
+        const zoomAt = (z, cx, cy) => { z = clamp(z, .02, 20); fitOn = false; panX = cx - (cx - panX) * z / zoom; panY = cy - (cy - panY) * z / zoom; zoom = z; applyView(); };
+        /* ─── « 🎚️ Mieux voir » : filtre CSS rapide, ou calcul pixel par pixel dans un Web Worker ─── */
+        let enh = null, enhFor = '', srcEl = null, processed = false, loupeImg = null;
+        const origSrc = () => `media/${encodeURIComponent(t.filename)}`;
+        const setHref = u => { if (img.getAttribute('href') !== u) img.setAttribute('href', u); if (loupeImg?.dataset.u !== u) { loupeImg = new Image(); loupeImg.dataset.u = u; loupeImg.src = u; } };
+        const getEnh = () => enh || (enh = TV.enhancer((u, info) => { if (!TV.needsPixels(t.data.view)) return; processed = true; img.style.filter = ''; setHref(u); dlg.dataset.txMs = String(Math.round(info.ms)); dlg.dataset.txRender = info.preview ? 'preview' : 'full'; dlg.dataset.txRenders = String(Number(dlg.dataset.txRenders || 0) + 1); }));
+        async function applyImage({preview = false} = {}) {
+            if (!imgW || !t.filename) return;
+            const v = t.data.view;
+            if (TV.needsPixels(v)) {
+                getEnh();
+                if (enh.ok) {
+                    if (enhFor !== t.filename) { status('Préparation de l’image…'); enhFor = t.filename; dlg.dataset.txRender = 'source'; const t0 = performance.now(); await enh.source(srcEl, imgW, imgH); dlg.dataset.txSourceMs = String(Math.round(performance.now() - t0)); status(''); }
+                    enh.render(v, {preview}); paintBadge(); return;
+                }
+                if (!applyImage.warned) { applyImage.warned = true; toast('Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent.', 'error'); }
+            }
+            processed = false; setHref(origSrc()); img.style.filter = TV.cssFilter(v); paintBadge();
+        }
+        /** un réglage de l'image a changé (curseur : aperçu rapide pendant qu'on le bouge) */
+        function setView(k, val, {preview = false} = {}) {
+            t.data.view[k] = val; touch();
+            if (k === 'tilt' || k === 'mirror' || k === 'rot') { geom({keepCenter: !fitOn}); if (fitOn) applyFit(fitMode); else applyView(); paintBadge(); return; }
+            applyImage({preview});
+        }
+        /** les curseurs et cases suivent les réglages (après ↺ Origine, ↶ Annuler…) */
+        function syncControls() {
+            const v = t.data.view;
+            dlg.querySelectorAll('[data-tx-barwrap] [data-tx-view]').forEach(i => { if (i.type === 'checkbox') i.checked = !!v[i.dataset.txView]; else i.value = String(v[i.dataset.txView]); });
+            dlg.querySelectorAll('[data-tx-chan]').forEach(b => { const on = b.dataset.txChan === v.channel; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+            paintBadge();
+        }
+        function paintBadge() { const b = $('[data-tx-badge]'); if (!b) return; const n = TV.changedCount(t.data.view, TV.panelKeys(TV.barCfg(), narrow)); b.hidden = !n; b.textContent = String(n); b.title = n ? `${n} réglage${n > 1 ? 's' : ''} actif${n > 1 ? 's' : ''} dans « Mieux voir »` : ''; }
         async function loadImage() {
             const has = !!t.filename; $('[data-tx-empty]').hidden = has; img.style.display = has ? '' : 'none'; if (!has) return;
-            const src = `media/${encodeURIComponent(t.filename)}`;
-            await new Promise(res => { const i = new Image(); i.onload = () => { imgW = i.naturalWidth; imgH = i.naturalHeight; res(); }; i.onerror = () => { toast('Image de l’acte illisible.', 'error'); res(); }; i.src = src; });
-            img.setAttribute('href', src); img.setAttribute('width', imgW); img.setAttribute('height', imgH); filter(); fit(); drawZones();
+            const src = origSrc();
+            await new Promise(res => { const i = new Image(); i.onload = () => { imgW = i.naturalWidth; imgH = i.naturalHeight; srcEl = i; res(); }; i.onerror = () => { toast('Image de l’acte illisible.', 'error'); res(); }; i.src = src; });
+            img.setAttribute('width', imgW); img.setAttribute('height', imgH); geom({keepCenter: false}); setHref(src); applyFit('page'); await applyImage(); drawZones();
         }
         /* ─── les zones et le texte surligné ─── */
         const colorOf = (z, i) => z.c || COLORS[i % COLORS.length];
-        function drawZones() {
+        function paintZoneRects() {
             const g = $('[data-tx-zones]'), sw = 2 / zoom;
-            g.innerHTML = t.data.zones.map((z, i) => `<rect data-tx-zone="${esc(z.id)}" x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${selZone === z.id ? .38 : .2}" stroke="${colorOf(z, i)}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || 'Zone non reliée')}</title></rect>`).join('');
-            paintMirror(); paintZoneBar();
+            g.innerHTML = t.data.zones.map((z, i) => `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id ? ' class="is-sel"' : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${selZone === z.id ? .38 : .2}" stroke="${colorOf(z, i)}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || 'Zone non reliée')}${selZone === z.id ? ' — glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)' : ''}</title></rect>`).join('');
+            paintHandles();
         }
+        function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); }
+        /* ─── la zone choisie : 8 poignées (coins et milieux), toujours de la même taille à l'écran ─── */
+        // les poignées sont nommées dans l'image (nw = coin haut-gauche de l'image) ; leur curseur suit leur direction à l'écran
+        const HANDLES = [['n', .5, 0], ['e', 1, .5], ['s', .5, 1], ['w', 0, .5], ['nw', 0, 0], ['ne', 1, 0], ['se', 1, 1], ['sw', 0, 1]]; // les coins par-dessus
+        const CURSORS = ['ew-resize', 'nwse-resize', 'ns-resize', 'nesw-resize'];
+        const cursorFor = (fx, fy) => { const [sx, sy] = vecToScr(fx - .5, fy - .5), a = ((Math.atan2(sy, sx) * 180 / Math.PI) % 180 + 180) % 180; return CURSORS[Math.round(a / 45) % 4]; };
+        const HANDLE_PX = 11; // côté d'une poignée à l'écran (un peu plus au doigt)
+        let coarse = false; // un doigt : des poignées plus grandes
+        function paintHandles() {
+            const g = $('[data-tx-handles]'), z = t.data.zones.find(q => q.id === selZone);
+            if (!z || !imgW) { g.innerHTML = ''; return; }
+            const hpx = coarse ? 20 : HANDLE_PX, hs = hpx / zoom, sw = 1.5 / zoom;
+            if (!g.firstChild) g.innerHTML = '<polygon class="h-tx-sel-frame"/>' + HANDLES.map(([k]) => `<rect class="h-tx-handle" data-tx-h="${k}"><title>Tirer pour redimensionner</title></rect>`).join('');
+            const set = (el, o) => Object.entries(o).forEach(([a, v]) => el.setAttribute(a, v)); // les mêmes éléments, déplacés (pas de clignotement sous le doigt)
+            const at = (fx, fy) => rotPt(z.x + z.w * fx, z.y + z.h * fy);
+            set(g.firstChild, {points: [[0, 0], [1, 0], [1, 1], [0, 1]].map(([fx, fy]) => at(fx, fy).join(',')).join(' '), 'stroke-width': sw, 'stroke-dasharray': `${4 / zoom} ${3 / zoom}`});
+            // une petite zone : les poignées des milieux s'effacent, pour que les coins restent faciles à attraper
+            const scrLen = (dx, dy) => Math.hypot(...vecToScr(dx, dy)) * zoom, tightW = scrLen(z.w, 0) < hpx * 3, tightH = scrLen(0, z.h) < hpx * 3;
+            HANDLES.forEach(([k, fx, fy], i) => { const [X, Y] = at(fx, fy), el = g.children[i + 1];
+                set(el, {x: X - hs / 2, y: Y - hs / 2, width: hs, height: hs, rx: hs / 5, 'stroke-width': sw, display: ((k === 'n' || k === 's') && tightW) || ((k === 'e' || k === 'w') && tightH) ? 'none' : 'inline'}); el.style.cursor = cursorFor(fx, fy); });
+        }
+        // au zoom, seules les épaisseurs et les poignées changent : pas besoin de tout redessiner
+        function paintOverlay() { const sw = 2 / zoom; $('[data-tx-zones]')?.querySelectorAll('rect').forEach(r => r.setAttribute('stroke-width', r.classList.contains('is-sel') ? sw * 2 : sw)); paintHandles(); }
         function paintMirror() {
             const text = area.value, marks = [];
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
@@ -203,7 +296,24 @@
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
             const linked = z.e > z.s;
             bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : '<span class="muted">pas encore reliée au texte</span>'}
-                <button type="button" class="button small secondary" data-tx-zlink title="Relier cette zone au passage choisi dans le texte">🔗 Au passage choisi</button><input data-tx-znote placeholder="Note (mot illisible, signature…)" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="Couleur"><button type="button" class="button small danger" data-tx-zdel>🗑</button>`;
+                <button type="button" class="button small secondary" data-tx-zlink title="Relier cette zone au passage choisi dans le texte">🔗 Au passage choisi</button><input data-tx-znote placeholder="Note (mot illisible, signature…)" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="Couleur"><button type="button" class="button small danger" data-tx-zdel title="Supprimer la zone (Suppr) — « ↶ Annuler » la remet">🗑</button>
+                <small class="muted h-tx-zkeys" title="Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille">↔ glisser · poignées · flèches · Maj + flèches · ⌘Z</small>`;
+        }
+        /* ─── ⌘Z / ⇧⌘Z pour les zones (le texte garde l'annulation de la case) ─── */
+        const hist = {undo: [], redo: []}, cloneZones = () => t.data.zones.map(z => ({...z}));
+        /** à appeler juste AVANT de changer les zones */
+        const snap = () => { hist.undo.push(cloneZones()); if (hist.undo.length > 100) hist.undo.shift(); hist.redo = []; };
+        function undoZones(redo = false) {
+            const from = redo ? hist.redo : hist.undo, to = redo ? hist.undo : hist.redo; if (!from.length) { status(redo ? 'Rien à rétablir' : 'Rien à annuler'); return false; }
+            to.push(cloneZones()); t.data.zones = from.pop(); if (!t.data.zones.some(z => z.id === selZone)) selZone = null; touch(); drawZones(); status(redo ? '↷ Zone rétablie' : '↶ Zone annulée'); return true;
+        }
+        /** H7 : la zone part tout de suite, « ↶ Annuler » la remet à sa place (liée au même passage) */
+        function deleteZone(id = selZone) {
+            const i = t.data.zones.findIndex(q => q.id === id); if (i < 0) return; const gone = {...t.data.zones[i]};
+            snap(); t.data.zones.splice(i, 1); if (selZone === id) selZone = null; touch(); drawZones();
+            const put = () => { if (!t.data.zones.some(q => q.id === gone.id)) { snap(); t.data.zones.splice(Math.min(i, t.data.zones.length), 0, {...gone}); selZone = gone.id; touch(); drawZones(); } };
+            const del = () => { if (t.data.zones.some(q => q.id === gone.id)) { snap(); t.data.zones = t.data.zones.filter(q => q.id !== gone.id); if (selZone === gone.id) selZone = null; touch(); drawZones(); } };
+            (A().undoToast || toast)('Zone supprimée', {undo: put, redo: del});
         }
         /** garder les liens quand on écrit : les passages après la modification se décalent */
         let before = area.value;
@@ -212,41 +322,89 @@
             let q = 0; while (q < before.length - p && q < now.length - p && before[before.length - 1 - q] === now[now.length - 1 - q]) q++;
             const oldEnd = before.length - q, delta = now.length - before.length;
             const shift = r => { const f = v => v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, p + (now.length - q - p))) : v; r.s = f(r.s); r.e = Math.max(r.s, f(r.e)); };
-            t.data.zones.forEach(shift); t.data.people.forEach(shift); found.forEach(shift);
+            t.data.zones.forEach(shift); t.data.people.forEach(shift); found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
             before = now; t.body = now; touch(); paintMirror(); paintPeople();
         });
         area.addEventListener('scroll', () => { mirror.scrollTop = area.scrollTop; });
         // un clic dans le texte : la zone qui contient cet endroit s'allume
         area.addEventListener('click', () => { const c = area.selectionStart, z = t.data.zones.find(q => q.e > q.s && c >= q.s && c <= q.e); if (z && z.id !== selZone) { selZone = z.id; drawZones(); reveal(z); } });
         const reveal = z => { const r = stage.getBoundingClientRect(); const cx = z.x + z.w / 2, cy = z.y + z.h / 2; const [X, Y] = rotPt(cx, cy); if (X * zoom + panX < 0 || X * zoom + panX > r.width || Y * zoom + panY < 0 || Y * zoom + panY > r.height) { panX = r.width / 2 - X * zoom; panY = r.height / 2 - Y * zoom; applyView(); } };
-        const rotPt = (x, y) => { const r = t.data.view.rot || 0; return r === 90 ? [imgH - y, x] : r === 180 ? [imgW - x, imgH - y] : r === 270 ? [y, imgW - x] : [x, y]; };
-        const unrot = (X, Y) => { const r = t.data.view.rot || 0; return r === 90 ? [Y, imgH - X] : r === 180 ? [imgW - X, imgH - Y] : r === 270 ? [imgW - Y, X] : [X, Y]; };
-        const selectText = z => { if (!(z.e > z.s)) return; area.focus(); area.setSelectionRange(z.s, z.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, z.s).split('\n').length; area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; };
-        /* ─── glisser sur l'image : déplacer ou dessiner une zone ─── */
-        let drag = null, space = false;
-        const toImg = e => { const r = svg.getBoundingClientRect(); return unrot((e.clientX - r.left - panX) / zoom, (e.clientY - r.top - panY) / zoom); };
+        const selectText = (z, focus = true) => { if (!(z?.e > z?.s)) return; if (focus) area.focus(); area.setSelectionRange(z.s, z.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, z.s).split('\n').length; area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; };
+        /* ─── glisser sur l'image : déplacer l'image, dessiner une zone, déplacer ou redimensionner la zone choisie ─── */
+        let drag = null, space = false, pinch = null;
+        const pointers = new Map();
+        const toRot = e => { const r = svg.getBoundingClientRect(); return [(e.clientX - r.left - panX) / zoom, (e.clientY - r.top - panY) / zoom]; };
+        const toImg = e => unrot(...toRot(e));
+        const minSide = () => Math.max(4, 12 / zoom); // une zone garde au moins 12 points d'écran (4 de l'image)
+        /** la zone choisie, déplacée (mode « move ») ou tirée par une poignée (nw, n, ne, e, se, s, sw, w), en pixels de l'image :
+         *  elle ne sort pas de l'image et garde une taille minimale */
+        function editRect(R0, mode, dx, dy) {
+            const W = imgW, H = imgH, m = Math.min(minSide(), W, H);
+            if (mode === 'move') return {x: clamp(R0.x + dx, 0, Math.max(0, W - R0.w)), y: clamp(R0.y + dy, 0, Math.max(0, H - R0.h)), w: R0.w, h: R0.h};
+            let x1 = R0.x, y1 = R0.y, x2 = R0.x + R0.w, y2 = R0.y + R0.h;
+            if (mode.includes('w')) x1 = clamp(x1 + dx, 0, x2 - m); if (mode.includes('e')) x2 = clamp(x2 + dx, x1 + m, W);
+            if (mode.includes('n')) y1 = clamp(y1 + dy, 0, y2 - m); if (mode.includes('s')) y2 = clamp(y2 + dy, y1 + m, H);
+            return {x: x1, y: y1, w: x2 - x1, h: y2 - y1};
+        }
+        const setGeom = (z, R) => Object.assign(z, {x: Math.round(R.x), y: Math.round(R.y), w: Math.round(R.w), h: Math.round(R.h)});
+        const pickZone = (id, {showText = true} = {}) => { const z = t.data.zones.find(q => q.id === id); if (!z) return null; if (selZone !== id) { selZone = id; drawZones(); } if (showText) selectText(z, false); stage.focus({preventScroll: true}); return z; };
         svg.addEventListener('pointerdown', e => {
-            if (!imgW) return; svg.setPointerCapture(e.pointerId);
-            const zr = e.target.closest('[data-tx-zone]');
-            if (zr && tool !== 'zone' && !space) { selZone = zr.dataset.txZone; drawZones(); selectText(t.data.zones.find(q => q.id === selZone)); return; }
-            if (tool === 'zone' && !space && e.button === 0) { const [x, y] = toImg(e); drag = {zone: true, x0: x, y0: y, x1: x, y1: y}; return; }
+            if (!imgW) return;
+            coarse = e.pointerType === 'touch';
+            pointers.set(e.pointerId, {x: e.clientX, y: e.clientY}); try { svg.setPointerCapture(e.pointerId); } catch (_) {}
+            if (pointers.size >= 2) { // deux doigts : pincer pour zoomer (ce qui avait commencé avec le premier doigt est oublié)
+                if (drag?.edit && drag.moved) { Object.assign(drag.z, drag.orig); drawZones(); }
+                drag = null; $('[data-tx-draw]').hidden = true;
+                const [a, b] = [...pointers.values()], r = svg.getBoundingClientRect();
+                pinch = {d: Math.hypot(a.x - b.x, a.y - b.y) || 1, zoom, wx: ((a.x + b.x) / 2 - r.left - panX) / zoom, wy: ((a.y + b.y) / 2 - r.top - panY) / zoom}; return;
+            }
+            if (e.pointerType === 'mouse' && e.button !== 0 && e.button !== 1) return;
+            const hd = e.target.closest('[data-tx-h]'), zr = e.target.closest('[data-tx-zone]'), mainBtn = e.button === 0 && !space;
+            if (mainBtn && hd && selZone) { const z = t.data.zones.find(q => q.id === selZone); if (z) { stage.focus({preventScroll: true}); drag = {edit: hd.dataset.txH, z, orig: {x: z.x, y: z.y, w: z.w, h: z.h}, R0: {x: z.x, y: z.y, w: z.w, h: z.h}, p0: toImg(e), c0: [e.clientX, e.clientY], before: cloneZones(), moved: false}; stage.dataset.drag = hd.style.cursor.replace('-resize', ''); e.preventDefault(); return; } }
+            if (mainBtn && zr && (tool !== 'zone' || zr.dataset.txZone === selZone)) { // un clic sur une zone la choisit ; glisser la déplace
+                const z = pickZone(zr.dataset.txZone); if (z) { drag = {edit: 'move', z, orig: {x: z.x, y: z.y, w: z.w, h: z.h}, R0: {x: z.x, y: z.y, w: z.w, h: z.h}, p0: toImg(e), c0: [e.clientX, e.clientY], before: cloneZones(), moved: false}; e.preventDefault(); return; }
+            }
+            if (tool === 'zone' && mainBtn) { const [x, y] = toImg(e); drag = {zone: true, x0: x, y0: y, x1: x, y1: y}; return; }
             drag = {pan: true, sx: e.clientX, sy: e.clientY, px: panX, py: panY};
         });
         svg.addEventListener('pointermove', e => {
+            if (pointers.has(e.pointerId)) pointers.set(e.pointerId, {x: e.clientX, y: e.clientY});
+            if (pinch && pointers.size >= 2) { const [a, b] = [...pointers.values()], r = svg.getBoundingClientRect(), mx = (a.x + b.x) / 2 - r.left, my = (a.y + b.y) / 2 - r.top;
+                zoom = clamp(pinch.zoom * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d, .02, 20); fitOn = false; panX = mx - pinch.wx * zoom; panY = my - pinch.wy * zoom; applyView(); return; }
             if (!drag) return;
             if (drag.pan) { panX = drag.px + e.clientX - drag.sx; panY = drag.py + e.clientY - drag.sy; applyView(); return; }
-            const [x, y] = toImg(e); drag.x1 = x; drag.y1 = y; const r = $('[data-tx-draw]'), [ax, ay] = rotPt(drag.x0, drag.y0), [bx, by] = rotPt(x, y);
-            r.hidden = false; r.setAttribute('x', Math.min(ax, bx)); r.setAttribute('y', Math.min(ay, by)); r.setAttribute('width', Math.abs(bx - ax)); r.setAttribute('height', Math.abs(by - ay)); r.setAttribute('stroke-width', 2 / zoom);
+            if (drag.edit) {
+                const [x, y] = toImg(e), dx = x - drag.p0[0], dy = y - drag.p0[1];
+                if (!drag.moved && Math.hypot(e.clientX - drag.c0[0], e.clientY - drag.c0[1]) < 3) return; // un simple clic ne bouge rien
+                drag.moved = true; setGeom(drag.z, editRect(drag.R0, drag.edit, dx, dy)); paintZoneRects(); return;
+            }
+            const [x, y] = toImg(e); drag.x1 = x; drag.y1 = y; const r = $('[data-tx-draw]'); // en pixels de l'image (elle tourne avec l'image) : c'est la zone qui sera posée
+            r.hidden = false; r.setAttribute('x', Math.min(drag.x0, x)); r.setAttribute('y', Math.min(drag.y0, y)); r.setAttribute('width', Math.abs(x - drag.x0)); r.setAttribute('height', Math.abs(y - drag.y0)); r.setAttribute('stroke-width', 2 / zoom);
         });
-        svg.addEventListener('pointerup', () => {
-            const d = drag; drag = null; $('[data-tx-draw]').hidden = true; if (!d?.zone) return;
+        const endPointer = e => {
+            pointers.delete(e.pointerId); if (pinch) { if (pointers.size < 2) pinch = null; drag = null; return; }
+            const d = drag; drag = null; delete stage.dataset.drag; $('[data-tx-draw]').hidden = true; if (!d) return;
+            if (d.edit) { if (d.moved && e.type !== 'pointercancel') { hist.undo.push(d.before); hist.redo = []; touch(); drawZones(); status(d.edit === 'move' ? 'Zone déplacée (⌘Z pour annuler)' : 'Zone redimensionnée (⌘Z pour annuler)'); } else if (d.moved) { Object.assign(d.z, d.orig); drawZones(); } return; }
+            if (!d.zone || e.type === 'pointercancel') return;
             const x = clamp(Math.min(d.x0, d.x1), 0, imgW), y = clamp(Math.min(d.y0, d.y1), 0, imgH), w = Math.min(imgW - x, Math.abs(d.x1 - d.x0)), h = Math.min(imgH - y, Math.abs(d.y1 - d.y0));
             if (w < 4 || h < 4) return;
             const s = area.selectionStart, e2 = area.selectionEnd, z = {id: zid(), x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h), s: e2 > s ? s : 0, e: e2 > s ? e2 : 0, note: '', c: ''};
-            t.data.zones.push(z); selZone = z.id; touch(); drawZones();
+            snap(); t.data.zones.push(z); selZone = z.id; touch(); drawZones(); stage.focus({preventScroll: true});
             status(e2 > s ? 'Zone reliée au passage choisi' : 'Zone posée : choisis son passage dans le texte, puis « 🔗 Au passage choisi »');
-        });
-        stage.addEventListener('wheel', e => { e.preventDefault(); const r = svg.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top; if (e.ctrlKey || e.metaKey || !e.deltaX) { const z = clamp(zoom * Math.exp(-e.deltaY * .0022), .02, 20); panX = cx - (cx - panX) * z / zoom; panY = cy - (cy - panY) * z / zoom; zoom = z; } else { panX -= e.deltaX; panY -= e.deltaY; } applyView(); drawZones(); }, {passive: false});
+        };
+        svg.addEventListener('pointerup', endPointer); svg.addEventListener('pointercancel', endPointer);
+        stage.addEventListener('wheel', e => { e.preventDefault(); if (loupe.on && !lc.hidden) { loupe.mag = clamp(loupe.mag * Math.exp(-e.deltaY * .002), 1.5, 12); paintLoupe(e.clientX, e.clientY); return; } const r = svg.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top; if (e.ctrlKey || e.metaKey || !e.deltaX) zoomAt(zoom * Math.exp(-e.deltaY * .0022), cx, cy); else { panX -= e.deltaX; panY -= e.deltaY; applyView(); } }, {passive: false});
+        /** clavier sur la zone choisie : flèches = déplacer, Maj + flèches = redimensionner (côté droit / bas), Alt = au point près */
+        let keyEdit = 0;
+        function nudgeZone(key, resize, fine) {
+            const z = t.data.zones.find(q => q.id === selZone); if (!z) return;
+            const st = fine ? 1 / zoom : Math.max(1, 6 / zoom), sx = key === 'ArrowLeft' ? -st : key === 'ArrowRight' ? st : 0, sy = key === 'ArrowUp' ? -st : key === 'ArrowDown' ? st : 0;
+            const [dx, dy] = vecToImg(sx, sy); // les flèches vont dans le sens de l'écran, même image tournée ou retournée
+            if (Date.now() - keyEdit > 900) snap(); keyEdit = Date.now(); // une série de flèches = une seule annulation
+            // Maj : on tire le coin qui est en bas à droite à l'écran
+            const corner = resize ? [['nw', 0, 0], ['ne', 1, 0], ['se', 1, 1], ['sw', 0, 1]].map(([k, fx, fy]) => { const [X, Y] = rotPt(z.x + z.w * fx, z.y + z.h * fy); return [k, X + Y]; }).sort((a, b) => b[1] - a[1])[0][0] : 'move';
+            setGeom(z, editRect({x: z.x, y: z.y, w: z.w, h: z.h}, corner, dx, dy)); touch(); paintZoneRects(); reveal(z);
+        }
         const setTool = k => { tool = k; dlg.querySelectorAll('[data-tx-tool]').forEach(b => b.classList.toggle('is-active', b.dataset.txTool === k)); stage.dataset.tool = k; };
         setTool('pan');
         /* ─── ce qui est repéré : noms (et fiches), dates, lieux, métiers ─── */
@@ -288,11 +446,17 @@
         });
         $('[data-tx-found]').addEventListener('change', e => { const s = e.target.closest('[data-tx-prole]'); if (s) { t.data.people[Number(s.dataset.txProle)].role = s.value; touch(); } });
         /* ─── lecture automatique ─── */
-        async function filteredCanvas() {
-            const i = await new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = ko; im.src = `media/${encodeURIComponent(t.filename)}`; });
-            const c = document.createElement('canvas'); c.width = imgW; c.height = imgH; const g = c.getContext('2d'), v = t.data.view;
-            g.filter = `contrast(${v.contrast}%) brightness(${v.bright}%)${v.invert ? ' invert(1)' : ''} grayscale(1)`; g.drawImage(i, 0, 0); return c;
+        /** l'image pour la lecture (gris) ou l'export (couleurs) : améliorée (« Mieux voir », pleine taille) si c'est choisi dans ⋯ Plus.
+         *  Sans redressement ni miroir : les zones posées par la lecture restent en pixels de l'image. */
+        async function filteredCanvas({gray = true} = {}) {
+            const v = t.data.view, enhanced = useEnh();
+            let i = await new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = ko; im.src = origSrc(); });
+            if (enhanced && TV.needsPixels(v) && getEnh().ok) { if (enhFor !== t.filename) { enhFor = t.filename; await enh.source(srcEl || i, imgW, imgH); } i = await createImageBitmap(await enh.full(v)); }
+            const c = document.createElement('canvas'); c.width = imgW; c.height = imgH; const g = c.getContext('2d');
+            const css = enhanced && !TV.needsPixels(v) ? TV.cssFilter(v) : '';
+            g.filter = `${css}${gray ? ' grayscale(1)' : ''}`.trim() || 'none'; g.drawImage(i, 0, 0, imgW, imgH); return c;
         }
+        const viewChanged = () => Object.entries(TV.DEFAULT_VIEW).some(([k, d]) => k !== 'rot' && k !== 'tilt' && k !== 'mirror' && String(t.data.view[k]) !== String(d));
         async function runOcr() {
             if (!t.filename) return toast('Choisis d’abord l’image de l’acte.', 'error');
             const lang = $('[data-tx-lang]').value; status('Chargement du lecteur…');
@@ -305,14 +469,16 @@
                 let text = area.value; if (text.trim()) text += '\n\n'; const start = text.length;
                 const made = [];
                 lines.forEach(l => { const s = text.length, line = l.text.replace(/\s+$/, ''); text += line + '\n'; const b = l.bbox; made.push({id: zid(), x: b.x0, y: b.y0, w: b.x1 - b.x0, h: b.y1 - b.y0, s, e: s + line.length, note: '', c: ''}); });
-                area.value = text; before = text; t.body = text; t.data.zones.push(...made); touch(); drawZones();
+                area.value = text; before = text; t.body = text; snap(); t.data.zones.push(...made); touch(); drawZones();
                 status(`${lines.length} ligne${lines.length > 1 ? 's' : ''} lue${lines.length > 1 ? 's' : ''} (à relire)`); toast('Texte lu et zones posées ligne par ligne : relis et corrige.'); void start;
             } catch (e) { status(''); toast(e.message || 'Lecture impossible.', 'error'); }
         }
         async function runHtr() {
             if (!t.media_id) return toast('Choisis d’abord l’image de l’acte.', 'error');
             status('Reconnaissance de l’écriture…');
-            try { const r = await post('htr_recognize', {media_id: t.media_id, model: $('[data-tx-lang]').value.startsWith('fra') ? 'fr-actes' : 'en-handwritten'}); const txt = String(r.result?.text || r.text || '').trim(); if (!txt) { status(''); return toast('Aucun texte reconnu.', 'error'); }
+            try { const body = {media_id: t.media_id, model: $('[data-tx-lang]').value.startsWith('fra') ? 'fr-actes' : 'en-handwritten'};
+                if (useEnh() && viewChanged()) { status('Préparation de l’image améliorée…'); const c = await filteredCanvas(); const b = await new Promise(r2 => c.toBlob(r2, 'image/jpeg', .92)); body.image_b64 = await new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); }); status('Reconnaissance de l’écriture…'); }
+                const r = await post('htr_recognize', body); const txt = String(r.result?.text || r.text || '').trim(); if (!txt) { status(''); return toast('Aucun texte reconnu.', 'error'); }
                 area.value += (area.value.trim() ? '\n\n— Lu automatiquement (à relire) —\n' : '') + txt; before = area.value; t.body = area.value; touch(); paintMirror(); status('Texte manuscrit ajouté (à relire)'); }
             catch (e) { status(''); toast(`${e.message || 'Reconnaissance impossible.'} (Maintenance → Reconnaissance manuscrite pour installer un modèle)`, 'error'); }
         }
@@ -322,38 +488,48 @@
             t.media_id = Number(m.id); t.filename = m.filename;
             if (!t.title && m.title && !m.imported) { t.title = m.title; $('[data-tx="title"]').value = t.title; }
             if (!area.value.trim() && m.transcription) { area.value = m.transcription; before = area.value; t.body = area.value; }
-            if (t.data.zones.length && !await A().confirmBox('Elles étaient posées pour l’ancienne image.', {title: 'Garder les zones déjà posées ?', okLabel: 'Garder les zones', cancelLabel: 'Les retirer', danger: false})) t.data.zones = [];
+            if (t.data.zones.length && !await A().confirmBox('Elles étaient posées pour l’ancienne image.', {title: 'Garder les zones déjà posées ?', okLabel: 'Garder les zones', cancelLabel: 'Les retirer', danger: false})) { snap(); t.data.zones = []; }
             touch(); await loadImage();
         }
         /* ─── enregistrer, exporter ─── */
         async function save(toMedia = false) {
-            ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value;
+            ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value; t.data.status = $('[data-tx-state]').value;
             if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${KINDS.find(k => k[0] === t.kind)?.[1] || 'Acte'}${subj ? ` de ${subj.name}` : ''}${t.date_text ? `, ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
             status('Enregistrement…');
             try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data, to_media: toMedia ? 1 : 0}); t.id = r.result.id; dirty = false; status('✓ Enregistré'); if (toMedia) toast('Enregistré, et le texte est dans la transcription du média.'); ctx.onSaved?.(t.id); }
             catch (e) { status(''); toast(e.message, 'error'); }
         }
-        function printIt() {
+        async function printIt() {
             const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée par le navigateur.', 'error');
+            let imgUrl = t.filename ? `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${encodeURIComponent(t.filename)}` : '';
+            if (t.filename && useEnh() && viewChanged()) { try { w.document.write('<p style="font:14px sans-serif">Préparation de l’image améliorée…</p>'); const c = await filteredCanvas({gray: false}); imgUrl = URL.createObjectURL(await new Promise(r2 => c.toBlob(r2, 'image/png'))); setTimeout(() => URL.revokeObjectURL(imgUrl), 120000); w.document.open(); } catch (_) {} }
             w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(t.title || 'Transcription')}</title><style>body{font:14px/1.5 Georgia,serif;margin:16mm}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}img{max-width:100%;border:1px solid #ccc}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}@media print{.g{grid-template-columns:1fr}img{max-height:120mm;object-fit:contain}}</style>
                 <h1>${esc($('[data-tx="title"]').value || 'Transcription')}</h1><p class="m">${esc([KINDS.find(k => k[0] === $('[data-tx="kind"]').value)?.[1], $('[data-tx="date_text"]').value, $('[data-tx="place"]').value, $('[data-tx="source"]').value].filter(Boolean).join(' · '))}</p>
-                <div class="g">${t.filename ? `<img src="${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${esc(encodeURIComponent(t.filename))}">` : ''}<div><pre>${esc(area.value)}</pre>${t.data.people.length ? `<h3>Personnes</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div><script>onload=()=>setTimeout(()=>print(),300)<\/script>`);
+                <div class="g">${imgUrl ? `<img src="${esc(imgUrl)}">` : ''}<div><pre>${esc(area.value)}</pre>${t.data.people.length ? `<h3>Personnes</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div><script>onload=()=>setTimeout(()=>print(),300)<\/script>`);
             w.document.close();
         }
         dlg.addEventListener('click', async e => {
             const tl = e.target.closest('[data-tx-tool]'); if (tl) return setTool(tl.dataset.txTool);
+            const chan = e.target.closest('[data-tx-chan]'); if (chan) { setView('channel', chan.dataset.txChan); syncControls(); return; }
             const ch = e.target.closest('[data-tx-char]'); if (ch) { const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar; area.setRangeText(c, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
-            if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast('Choisis d’abord un passage dans le texte.', 'error'); z.s = s; z.e = en; touch(); drawZones(); return; }
-            if (e.target.closest('[data-tx-zdel]')) { t.data.zones = t.data.zones.filter(q => q.id !== selZone); selZone = null; touch(); drawZones(); return; }
+            if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast('Choisis d’abord un passage dans le texte.', 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
+            if (e.target.closest('[data-tx-zdel]')) return deleteZone();
             const c = e.target.closest('[data-tx-cmd]'); if (!c) return; c.closest('details')?.removeAttribute('open');
             const k = c.dataset.txCmd;
             if (k === 'close') return close();
             if (k === 'save') return save();
             if (k === 'tomedia') { if (!t.media_id) return toast('Il n’y a pas d’image de la base.', 'error'); return save(true); }
             if (k === 'image') return pickImage();
-            if (k === 'zin' || k === 'zout') { const r = stage.getBoundingClientRect(), f = k === 'zin' ? 1.25 : .8, z = clamp(zoom * f, .02, 20); panX = r.width / 2 - (r.width / 2 - panX) * z / zoom; panY = r.height / 2 - (r.height / 2 - panY) * z / zoom; zoom = z; applyView(); drawZones(); return; }
-            if (k === 'fit') { fit(); drawZones(); return; }
-            if (k === 'rot') { t.data.view.rot = ((t.data.view.rot || 0) + 90) % 360; touch(); filter(); fit(); drawZones(); return; }
+            if (k === 'zin' || k === 'zout') { if (!imgW) return; const r = stage.getBoundingClientRect(); zoomAt(zoom * (k === 'zin' ? 1.25 : .8), r.width / 2, r.height / 2); return; }
+            if (k === 'fit') { if (!imgW) return; applyFit(fitOn ? FIT_NEXT[fitMode] : 'page'); return; }
+            if (k === 'rot') { if (!fitOn) { fitOn = true; fitMode = 'page'; } setView('rot', ((t.data.view.rot || 0) + 90) % 360); drawZones(); return; }
+            if (k === 'loupe') { loupe.on = !loupe.on; paintLoupeBtn(); if (!loupe.on) lc.hidden = true; status(loupe.on ? '🔍 Loupe : la molette change le grossissement' : ''); return; }
+            if (k === 'better') { togglePanel(); return; }
+            if (k === 'barcfg') { TV.openBarDialog(dlg); return; }
+            if (k === 'keepview') { await save(); if (!dirty) toast('Réglages de l’image retenus pour cet acte : ils reviennent à la prochaine ouverture.'); return; }
+            if (k === 'resetview') { const before = {...t.data.view}, origin = () => { t.data.view = TV.viewOf(); fitOn = true; fitMode = 'page'; syncControls(); geom({keepCenter: false}); applyFit('page'); applyImage(); touch(); };
+                if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d))) return status('L’image est déjà d’origine');
+                origin(); A().undoToast?.('Image remise d’origine', {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
             if (k === 'ocr') return runOcr();
             if (k === 'htr') return runHtr();
             if (k === 'detect') return runDetect();
@@ -371,27 +547,63 @@
             }
         });
         dlg.addEventListener('input', e => {
-            const v = e.target.dataset.txView; if (v) { t.data.view[v] = e.target.type === 'checkbox' ? e.target.checked : Number(e.target.value); filter(); touch(); return; }
+            const v = e.target.dataset.txView; if (v) { setView(v, e.target.type === 'checkbox' ? e.target.checked : Number(e.target.value), {preview: e.target.type === 'range'}); return; }
+            if (e.target.matches('[data-tx-useenh]')) { try { localStorage.setItem(USE_KEY, e.target.checked ? '1' : '0'); } catch (_) {} return; }
             if (e.target.dataset.tx) { t[e.target.dataset.tx] = e.target.value; touch(); }
             if (e.target.matches('[data-tx-znote]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { z.note = e.target.value.slice(0, 300); touch(); } }
-            if (e.target.matches('[data-tx-zcolor]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { z.c = e.target.value; touch(); drawZones(); } }
+            if (e.target.matches('[data-tx-zcolor]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { if (!e.target.dataset.snapped) { snap(); e.target.dataset.snapped = '1'; } z.c = e.target.value; touch(); paintZoneRects(); paintMirror(); } }
         });
-        dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); } });
+        dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); } });
+        /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
+        const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };
+        dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false); });
+        /* ─── la barre se redessine quand on la règle (⚙️, ou Maintenance) ─── */
+        let narrow = false; const isNarrow = () => ($('.h-tx-left')?.getBoundingClientRect().width || 1000) < 620;
+        function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
+        new ResizeObserver(() => { if (dlg.isConnected && isNarrow() !== narrow) renderBar(); }).observe($('.h-tx-left'));
+        const onBar = () => renderBar(); window.addEventListener('lcnda-txbar-change', onBar);
+        /* ─── 🔍 Loupe : suit la souris ; la molette change le grossissement ─── */
+        const loupe = {on: false, mag: 3}, lc = $('[data-tx-loupe]');
+        const paintLoupeBtn = () => { const b = $('[data-tx-cmd="loupe"]'); if (b) { b.classList.toggle('is-active', loupe.on); b.setAttribute('aria-pressed', String(loupe.on)); } };
+        let lastPt = null;
+        function paintLoupe(cx = lastPt?.[0], cy = lastPt?.[1]) {
+            if (cx == null) return; lastPt = [cx, cy];
+            const r = stage.getBoundingClientRect(), sx = cx - r.left, sy = cy - r.top, S = Math.min(240, Math.max(140, Math.round(r.width / 3)));
+            if (!loupe.on || !imgW || !loupeImg?.naturalWidth || sx < 0 || sy < 0 || sx > r.width || sy > r.height) { lc.hidden = true; return; }
+            const dpr = devicePixelRatio || 1; if (lc.width !== Math.round(S * dpr)) { lc.width = lc.height = Math.round(S * dpr); lc.style.width = lc.style.height = `${S}px`; }
+            lc.hidden = false; lc.style.left = `${sx - S / 2}px`; lc.style.top = `${sy - S / 2}px`;
+            const g = lc.getContext('2d'), k = zoom * loupe.mag, wx = (sx - panX) / zoom, wy = (sy - panY) / zoom;
+            g.setTransform(1, 0, 0, 1, 0, 0); g.filter = 'none'; g.fillStyle = '#3a3a40'; g.fillRect(0, 0, lc.width, lc.height);
+            g.setTransform(new DOMMatrix().scale(dpr).translate(S / 2, S / 2).scale(k).translate(-wx, -wy).multiply(M).scale(imgW / loupeImg.naturalWidth, imgH / loupeImg.naturalHeight));
+            g.filter = processed ? 'none' : TV.cssFilter(t.data.view); g.imageSmoothingQuality = 'high'; g.drawImage(loupeImg, 0, 0);
+            g.setTransform(dpr, 0, 0, dpr, 0, 0); g.filter = 'none'; g.font = '600 12px system-ui, sans-serif'; g.fillStyle = 'rgba(0,0,0,.55)'; g.fillRect(S / 2 - 22, S - 26, 44, 18); g.fillStyle = '#fff'; g.textAlign = 'center'; g.fillText(`× ${loupe.mag.toFixed(1).replace('.0', '').replace('.', ',')}`, S / 2, S - 13);
+        }
+        stage.addEventListener('pointermove', e => { if (loupe.on && e.pointerType !== 'touch') paintLoupe(e.clientX, e.clientY); });
+        stage.addEventListener('pointerleave', () => { lc.hidden = true; });
         const onKey = e => {
             if (!dlg.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dlg) return; // une fenêtre par-dessus (confirmation…) garde ses touches
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
+            if (e.key === 'Escape' && e.target.closest?.('[data-tx-panel]')) { e.preventDefault(); e.stopPropagation(); togglePanel(false); $('[data-tx-cmd="better"]')?.focus(); return; }
             if (e.target.closest?.('input, textarea, select')) return;
+            if (e.target.closest?.('button, [contenteditable="true"]') && (e.key === ' ' || e.key === 'Enter')) return;
+            const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
+            if (mod && (k === 'z' || k === 'y')) { e.preventDefault(); undoZones(k === 'y' || e.shiftKey); return; } // ⌘Z, ⇧⌘Z / Ctrl+Y
+            if (mod || e.altKey && !e.key.startsWith('Arrow')) return;
             if (e.key === ' ' && !space) { space = true; stage.dataset.tool = 'pan'; e.preventDefault(); }
-            if (e.key.toLowerCase() === 'z') setTool('zone'); if (e.key.toLowerCase() === 'h') setTool('pan');
-            if ((e.key === 'Delete' || e.key === 'Backspace') && selZone) { t.data.zones = t.data.zones.filter(q => q.id !== selZone); selZone = null; touch(); drawZones(); }
+            if (k === 'z') setTool('zone'); if (k === 'h') setTool('pan'); if (k === 'l') { $('[data-tx-cmd="loupe"]') ? $('[data-tx-cmd="loupe"]').click() : (loupe.on = !loupe.on, lc.hidden = !loupe.on); return; }
+            if (e.key === 'Escape' && $('[data-tx-panel]') && !$('[data-tx-panel]').hidden) { e.preventDefault(); e.stopPropagation(); togglePanel(false); $('[data-tx-cmd="better"]')?.focus(); return; }
+            if (selZone && e.key.startsWith('Arrow')) { e.preventDefault(); nudgeZone(e.key, e.shiftKey, e.altKey); return; }
+            if ((e.key === 'Delete' || e.key === 'Backspace') && selZone) { e.preventDefault(); deleteZone(); return; }
+            if (e.key === 'Escape' && selZone) { e.preventDefault(); e.stopPropagation(); selZone = null; drawZones(); }
         };
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
-        async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la transcription seront perdues.', {title: 'Fermer sans enregistrer la transcription ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); ro.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la transcription seront perdues.', {title: 'Fermer sans enregistrer la transcription ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
         dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
-        const ro = new ResizeObserver(() => { if (imgW && !drag) { applyView(); } }); ro.observe(stage);
-        paintMirror(); paintPeople(); await loadImage();
+        // la fenêtre change de taille (⛶, panneau) : l'ajustement choisi (toute l'image, largeur) suit
+        let roW = 0, roH = 0; const ro = new ResizeObserver(() => { const r = stage.getBoundingClientRect(); if (!imgW || drag || (r.width === roW && r.height === roH)) return; roW = r.width; roH = r.height; if (fitOn && fitMode !== 'real') applyFit(fitMode, {keepY: true}); else applyView(); }); ro.observe(stage);
+        renderBar(); paintMirror(); paintPeople(); await loadImage();
         if (!t.filename && !ctx.id) setTimeout(pickImage, 50);
         return {get t() { return t; }, detect: runDetect, save};
     }
