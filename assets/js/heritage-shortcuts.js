@@ -236,7 +236,7 @@
     }
     function html(d, data) {
         const links = (d?.links || []).filter(l => l && validTarget(l.target));
-        if (!links.length) return `<p class="muted h-sc-empty">Aucun raccourci pour l’instant. Ajoute-en avec le crayon ✎ (Éditeur de widgets) ou le bouton « ⭐ » d’une fiche ou d’une liste.</p>`;
+        if (!links.length) return `<p class="muted h-sc-empty">Aucun raccourci pour l’instant. Ajoute-en avec le crayon ✎ du widget (« ✎ Modifier les raccourcis ») ou le bouton « ⭐ » d’une fiche ou d’une liste.</p>`;
         const layout = LAYOUTS.some(([k]) => k === d.lLayout) ? d.lLayout : 'buttons';
         const size = Math.max(64, Math.min(240, Number(d.lSize) || 112)), cols = Math.max(0, Math.min(8, Number(d.lCols) || 0));
         const ctx = {editable: !document.body?.classList?.contains('is-kiosk')};
@@ -505,6 +505,63 @@
         });
     }
 
+    /* ─── ✎ d'un widget « Raccourcis » posé sur le tableau de bord, dans un onglet à soi ou dans une Fiche :
+     *     l'éditeur ci-dessus (editorHtml + bindEditor), dans une fenêtre, sans passer par Maintenance ─── */
+    const kiosk = () => !!document.body?.classList?.contains('is-kiosk');
+    /** la ligne « 🔗 Raccourcis · N raccourcis · ✎ Modifier les raccourcis » du panneau ✎ ('' si ce widget n'a pas de raccourcis) */
+    function panelHtml(id) {
+        const hs = homes().filter(h => h.def.id === id);
+        if (!hs.length) return '';
+        if (kiosk()) return '<p class="muted h-sc-panelro">Mode consultation : les raccourcis ne se modifient pas.</p>';
+        const n = h => (h.box.links || []).filter(l => l && validTarget(l.target) && !RE.head.test(l.target)).length;
+        return `<div class="h-sc-panel" data-sc-panel="${esc(id)}">${hs.map(h => `<div class="h-sc-panelrow"><span class="h-sc-paneltxt"><strong>🔗 ${h.part < 0 ? 'Raccourcis' : esc(h.box.title || `Partie ${h.part + 2}`)}</strong><small>${n(h) ? `${plural(n(h), 'raccourci')} · ajouter, ranger, renommer, icône, disposition` : 'Aucun raccourci pour l’instant'}</small></span><button type="button" class="button small" data-sc-editwidget="${esc(id)}" data-sc-part="${h.part}">✎ Modifier les raccourcis</button></div>`).join('')}</div>`;
+    }
+    /** fenêtre « Modifier les raccourcis » d'un widget (part = -1 : le widget lui-même, sinon une de ses parties) → Promise<true si enregistré> */
+    function openEditor(id, part = -1, {after} = {}) {
+        if (kiosk()) { toast('Mode consultation : les raccourcis ne se modifient pas.'); return Promise.resolve(false); }
+        if (!ext.openDialog || !ext.saveCustomWidgetList) { toast('La fenêtre n’est pas encore prête. Réessaie dans un instant.', 'error'); return Promise.resolve(false); }
+        const def = myGraphs().find(x => x.id === id), box0 = boxOf(copyDefs(), id, Number(part));
+        if (!def || box0?.kind !== 'links') { toast('Ce widget n’a plus de raccourcis.', 'error'); return Promise.resolve(false); }
+        const work = cleanFields(box0); // copie de travail : rien ne change tant qu'on n'a pas cliqué « Enregistrer »
+        let saved = false;
+        return new Promise(resolve => {
+            ext.openDialog({eyebrow: 'RACCOURCIS', title: `Modifier « ${def.name || 'Mes raccourcis'} »`, wide: true, submitLabel: 'Enregistrer',
+                body: `<p class="muted h-sc-edhelp">＋ Ajoute ce que tu veux (une personne, un lieu, une liste, un écran, un outil, un site web…), range-les en glissant ⠿ ou avec ↑ ↓, renomme-les, change leur icône. Rien ne change tant que tu n’as pas cliqué « Enregistrer ».</p><div data-sc-edhost></div>`,
+                onOpen: dg => {
+                    dg.classList.add('h-sc-eddlg');
+                    const host = dg.querySelector('[data-sc-edhost]');
+                    const again = () => { host.innerHTML = editorHtml(work); bindEditor(host, work, {again}); };
+                    again();
+                    dg.addEventListener('close', () => resolve(saved));
+                },
+                onSubmit: async () => {
+                    const list = copyDefs(), b = boxOf(list, id, Number(part));
+                    if (!b) { toast('Ce widget n’existe plus.', 'error'); return; }
+                    Object.assign(b, cleanFields(work));
+                    if (await ext.saveCustomWidgetList(list) === false) return false; // refusé : la fenêtre reste ouverte, rien n'est perdu
+                    saved = true;
+                    if (after) after(); else redrawWidget(id);
+                }});
+        });
+    }
+    /** le widget se redessine tout de suite là où il est posé (tableau de bord, onglet, Fiche, page d'une personne) */
+    function redrawWidget(id) {
+        const st = S();
+        if (st.module === 'dashboard' && document.querySelector(`#workspace [data-widget-type="${CSS.escape(id)}"]`)) { A().renderDashboard?.(); return; }
+        document.querySelectorAll(`[data-fi-widget="${CSS.escape(id)}"], [data-be-widget="${CSS.escape(id)}"]`).forEach(el => ext.renderCustomWidgetInto?.(el, id, {personId: Number(el.dataset.bePerson) || 0}));
+    }
+    // un clic sur « ✎ Modifier les raccourcis » : depuis le ✎ d'un widget du tableau de bord (ou d'un onglet à soi), ou d'un bloc de Fiche
+    document.addEventListener('click', e => {
+        const b = e.target.closest?.('[data-sc-editwidget]'); if (!b) return;
+        e.preventDefault();
+        const dash = b.closest('[data-dashboard-widget-editor]'), fiche = b.closest('form.h-fi-back');
+        const id = (fiche && fiche.querySelector('input[name=widget]')?.value) || b.dataset.scEditwidget;
+        // enregistré : le ✎ se referme comme avec son propre « Enregistrer » (la largeur choisie est gardée) et le widget se redessine
+        const after = dash ? () => dash.querySelector('[data-save-dashboard-widget]')?.click() : fiche ? () => fiche.requestSubmit() : null;
+        const part = Number(b.dataset.scPart);
+        openEditor(id, Number.isInteger(part) && part >= 0 ? part : -1, {after});
+    });
+
     /* ─── ⭐ Ajouter aux raccourcis : depuis une fiche, une liste, une Fiche, une enquête, Graphiques ─── */
     function currentTarget() {
         const st = S(), m = st.module;
@@ -586,5 +643,5 @@
     const watch = () => { const ws = document.getElementById('workspace'); if (!ws) return setTimeout(watch, 500); new MutationObserver(() => { clearTimeout(starTimer); starTimer = setTimeout(placeStar, 60); }).observe(ws, {childList: true}); placeStar(); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch); else watch();
 
-    ext.shortcuts = {load, html, editorHtml, bindEditor, cleanFields, cleanLink, cleanLinks, validTarget, describe, openTarget, canOpen, chooseTargets, addToShortcuts, currentTarget, catalog, webUrl, safeThumb, homes, LAYOUTS};
+    ext.shortcuts = {load, html, editorHtml, bindEditor, panelHtml, openEditor, redrawWidget, cleanFields, cleanLink, cleanLinks, validTarget, describe, openTarget, canOpen, chooseTargets, addToShortcuts, currentTarget, catalog, webUrl, safeThumb, homes, LAYOUTS};
 })();

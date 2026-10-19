@@ -11,7 +11,9 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  * 3. Navigateur (si Playwright est installé), en mode sombre à 390 px : tuiles (introuvable + Retirer + ↶ Annuler),
  *    un clic ouvre la cible, vue d'une liste reprise, éditeur (fenêtre de choix : base, écrans et outils, site web),
  *    « ⭐ Raccourci » d'une liste et d'une fiche, widget dans une Fiche, ancien widget en petits boutons ;
- *    aucun texte piégé exécuté, aucune erreur JavaScript.
+ *    aucun texte piégé exécuté, aucune erreur JavaScript ;
+ * 4. ✎ d’un widget « Raccourcis » sur le tableau de bord et dans une Fiche : « ✎ Modifier les raccourcis » (ajouter, ranger,
+ *    renommer, retirer, disposition), enregistré dans la base et gardé après rechargement ; rien en mode consultation.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -284,6 +286,107 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                 assert.equal(await p.$$eval('dialog[open].h-sc-dlg', e => e.length), 0, 'pas de fenêtre en consultation');
                 assert.equal(await p.evaluate(() => window.LCNDA_EXT.customWidgetList().length), n0);
                 await p.evaluate(() => document.body.classList.remove('is-kiosk'));
+            });
+            // ✎ d'un widget « Raccourcis » sur le tableau de bord : tout se fait sur place, sans passer par Maintenance
+            let NEW = '';
+            const order = id => p.evaluate(x => window.LCNDA_EXT.customWidgetList().find(d => d.id === x).links.map(l => l.target), id);
+            await t('✎ du tableau de bord : « Modifier les raccourcis », ajouter 2 raccourcis, en déplacer un, enregistrer', async () => {
+                // un widget « Mes raccourcis » pris dans les exemples (catalogue de l'Éditeur de widgets), posé sur le tableau de bord
+                await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'widget_editor'; await A.setModule('maintenance'); });
+                const known = await p.evaluate(() => window.LCNDA_EXT.customWidgetList().map(d => d.id));
+                await p.click('[data-cw-new]');
+                await p.click('dialog[open] [data-cw-ex]:has-text("Mes raccourcis")');
+                await p.click('[data-cw-saveadd]');
+                await p.waitForFunction(k => window.LCNDA_EXT.customWidgetList().some(d => !k.includes(d.id) && d.kind === 'links'), known);
+                NEW = await p.evaluate(k => window.LCNDA_EXT.customWidgetList().find(d => !k.includes(d.id) && d.kind === 'links').id, known);
+                const start = await order(NEW);
+                assert.deepEqual(start, ['module:carte', 'list:places', 'maint:design', 'url:https://www.geneanet.org/']);
+                await p.evaluate(() => { window.LCNDA_APP.setModule('dashboard'); document.querySelector('#toast-region')?.replaceChildren(); }); // captures sans les messages des étapes d'avant
+                const card = `[data-dashboard-widget][data-widget-type="${NEW}"]`;
+                await p.waitForSelector(`${card} .h-sc-tile`);
+                await p.click(`${card} [data-edit-dashboard-widget]`);
+                await p.waitForSelector(`${card} [data-sc-editwidget="${NEW}"]`);
+                assert.ok(await p.$(`${card} [data-dashboard-widget-editor] .block-widths`), 'le reste du ✎ (largeur) est toujours là');
+                assert.match(await p.textContent(`${card} .h-sc-panelrow`), /4 raccourcis/);
+                assert.equal(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'panneau ✎ sans défilement de côté');
+                await shot('crayon-01-panneau-390.png', await p.$(`${card} [data-dashboard-widget-editor]`));
+                await p.click(`${card} [data-sc-editwidget]`);
+                await p.waitForSelector('dialog[open].h-sc-eddlg [data-sc-row]');
+                assert.equal(await p.$$eval('.h-sc-eddlg [data-sc-row]', e => e.length), 4);
+                await p.waitForFunction(() => document.querySelectorAll('.h-sc-eddlg .dnd-grip').length >= 4, null, { timeout: 5000 }); // ⠿ glisser
+                // ＋ Ajouter des raccourcis : la même fenêtre (base, écrans et outils, site web)
+                await p.click('.h-sc-eddlg [data-sc-add]');
+                await p.fill('.h-sc-dlg [data-sc-pane="base"] .pk-input', 'joseph');
+                await p.waitForSelector('.h-sc-dlg .pk-row', { timeout: 8000 });
+                await p.click('.h-sc-dlg .pk-row');
+                await p.click('.h-sc-dlg [data-sc-tab="screens"]');
+                await p.fill('.h-sc-dlg [data-sc-qslot] input', 'sauvegarde');
+                await p.waitForFunction(() => /sauvegarde/i.test(document.querySelector('.h-sc-dlg .h-sc-catrow')?.textContent || ''));
+                await p.click('.h-sc-dlg .h-sc-catrow');
+                assert.match(await p.textContent('.h-sc-dlg [data-sc-count]'), /^2 raccourcis choisis/);
+                assert.equal(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'fenêtre d’ajout sans défilement de côté');
+                await shot('crayon-02-ajout-390.png');
+                await p.click('.h-sc-dlg [type=submit]');
+                await p.waitForFunction(() => document.querySelectorAll('.h-sc-eddlg [data-sc-row]').length === 6);
+                assert.deepEqual(await order(NEW), start, 'rien n’est enregistré avant « Enregistrer »');
+                // Joseph (5e) monte tout en haut avec ↑
+                for (let i = 4; i > 0; i--) await p.click(`.h-sc-eddlg [data-sc-row="${i}"] [data-sc-up]`);
+                const firstSmall = await p.$eval('.h-sc-eddlg [data-sc-row="0"] .h-sc-rowmain small', s => s.textContent);
+                assert.match(firstSmall, /Personne/);
+                // renommer et ✕ retirer (↶ Annuler le remet)
+                await p.fill('.h-sc-eddlg [data-sc-row="1"] [data-sc-f="label"]', 'La carte');
+                await p.click('.h-sc-eddlg [data-sc-row="2"] [data-sc-del]');
+                await p.waitForFunction(() => document.querySelectorAll('.h-sc-eddlg [data-sc-row]').length === 5);
+                await p.click('text=↶ Annuler');
+                await p.waitForFunction(() => document.querySelectorAll('.h-sc-eddlg [data-sc-row]').length === 6);
+                await p.selectOption('.h-sc-eddlg [data-sc-opt="lLayout"]', 'list');
+                assert.equal(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'éditeur sans défilement de côté');
+                await shot('crayon-03-range-390.png', await p.$('.h-sc-eddlg [data-sc-ed]'));
+                await p.click('.h-sc-eddlg [type=submit]');
+                await p.waitForFunction(() => !document.querySelector('dialog[open].h-sc-eddlg'));
+                await p.waitForFunction(x => { const d = window.LCNDA_EXT.customWidgetList().find(w => w.id === x); return d.links[0].target === 'person:1' && d.lLayout === 'list'; }, NEW);
+                // le ✎ se referme et le widget se redessine tout de suite, dans le nouvel ordre
+                await p.waitForFunction(c => { const b = document.querySelector(c + ' .h-sc-list .h-sc-tile b'); return b && /Joseph MARTIN/.test(b.textContent) && !document.querySelector(c + ' [data-dashboard-widget-editor]'); }, card, { timeout: 10000 });
+                await shot('crayon-04-widget-redessine-390.png', await p.$(card));
+            });
+            await t('après rechargement : l’ordre et les noms sont gardés (dans la base)', async () => {
+                const want = ['person:1', 'module:carte', 'list:places', 'maint:design', 'url:https://www.geneanet.org/', 'action:backup_now'];
+                assert.deepEqual(await order(NEW), want);
+                await p.reload();
+                await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.shortcuts?.openEditor && window.LCNDA_EXT?.customWidgetList, null, { timeout: 30000 });
+                assert.deepEqual(await order(NEW), want);
+                assert.equal(await p.evaluate(x => window.LCNDA_EXT.customWidgetList().find(w => w.id === x).links[1].label, NEW), 'La carte');
+                await p.evaluate(() => window.LCNDA_APP.setModule('dashboard'));
+                const card = `[data-dashboard-widget][data-widget-type="${NEW}"]`;
+                await p.waitForSelector(`${card} .h-sc-tile`);
+                const names = await p.$$eval(`${card} .h-sc-tile b`, e => e.map(x => x.textContent));
+                assert.equal(names[0], 'Joseph MARTIN'); assert.equal(names[1], 'La carte');
+            });
+            await t('✎ d’un bloc « widget » dans une Fiche : même bouton, même fenêtre', async () => {
+                const sid = await p.evaluate(async x => { const r = await window.LCNDA_APP.api('save_topic_sheet', {}, {method: 'POST', body: {title: 'Ma fiche raccourcis', icon: '📒', blocks: [{id: 'b_sc1', type: 'widget', widget: x, width: '12'}]}}); return Number(r.result?.id || r.id); }, NEW);
+                await p.evaluate(async id => { window.LCNDA_APP.state.ficheId = id; await window.LCNDA_APP.setModule('fiches'); }, sid);
+                await p.waitForSelector('.h-fi [data-fi-widget] .h-sc-tile', { timeout: 10000 });
+                await p.click('.h-fi [data-fi-block="0"] [data-fi-edit]');
+                await p.waitForSelector(`form.h-fi-back [data-sc-editwidget="${NEW}"]`);
+                await p.click('form.h-fi-back [data-sc-editwidget]');
+                await p.waitForSelector('dialog[open].h-sc-eddlg [data-sc-row]');
+                await p.click('.h-sc-eddlg [data-sc-row="5"] [data-sc-del]'); // la sauvegarde
+                await p.click('.h-sc-eddlg [type=submit]');
+                await p.waitForFunction(x => window.LCNDA_EXT.customWidgetList().find(w => w.id === x).links.length === 5, NEW);
+                await p.waitForFunction(() => !document.querySelector('form.h-fi-back') && document.querySelectorAll('.h-fi [data-fi-widget] .h-sc-tile').length === 5, null, { timeout: 10000 });
+            });
+            await t('mode consultation : le ✎ ne permet pas de modifier les raccourcis', async () => {
+                await p.evaluate(async () => { document.body.classList.add('is-kiosk'); await window.LCNDA_APP.setModule('dashboard'); });
+                const card = `[data-dashboard-widget][data-widget-type="${NEW}"]`;
+                await p.waitForSelector(`${card} .h-sc-tile`);
+                await p.$eval(`${card} [data-edit-dashboard-widget]`, b => b.click()); // le ✎ ouvert (même s'il est caché en consultation)
+                await p.waitForSelector(`${card} [data-dashboard-widget-editor]`);
+                assert.equal(await p.$$eval(`${card} [data-sc-editwidget]`, e => e.length), 0, 'pas de bouton en consultation');
+                assert.ok(await p.$(`${card} .h-sc-panelro`));
+                assert.equal(await p.evaluate(x => window.LCNDA_EXT.shortcuts.openEditor(x), NEW), false);
+                assert.equal(await p.$$eval('dialog[open].h-sc-eddlg', e => e.length), 0, 'pas de fenêtre en consultation');
+                assert.equal(await p.evaluate(x => window.LCNDA_EXT.customWidgetList().find(w => w.id === x).links.length, NEW), 5);
+                await p.evaluate(() => { document.body.classList.remove('is-kiosk'); window.LCNDA_APP.state.dashboardEditingWidget = ''; });
             });
             await t('aucun texte piégé exécuté, aucune erreur JavaScript', async () => {
                 assert.equal(await p.evaluate(() => window.__xss), undefined);

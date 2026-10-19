@@ -94,6 +94,19 @@
 .h-sc-count { margin: 10px 0 0; font-weight: 700; }
 .h-sc-where { display: grid; gap: 6px; }
 
+/* ✎ d'un widget « Raccourcis » (tableau de bord, onglet à soi, Fiche) : la ligne du panneau et la fenêtre de l'éditeur */
+.h-sc-panel { display: grid; gap: 8px; }
+.h-sc-panelrow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 10px 12px; border: 1.5px solid var(--blue, #0066cc); border-radius: 10px; background: var(--blue-soft, #eaf2ff); min-width: 0; }
+.h-sc-paneltxt { display: grid; gap: 2px; min-width: 0; flex: 1 1 180px; }
+.h-sc-paneltxt strong { font-size: 14px; }
+.h-sc-paneltxt small { color: var(--muted, #6d6d6d); font-size: 12px; overflow-wrap: anywhere; }
+.h-sc-panelrow .button { flex: 0 0 auto; white-space: nowrap; }
+.h-sc-panelro { margin: 0; }
+body.is-kiosk [data-sc-editwidget] { display: none !important; }
+.h-sc-eddlg .h-sc-edhelp { margin: 0 0 12px; }
+:root[data-theme="dark"] .h-sc-panelrow { background: #14263d; border-color: #4d8fe0; }
+:root[data-theme="dark"] .h-sc-paneltxt small { color: #b9c3cf; }
+
 :root[data-theme="dark"] .h-sc-miss { color: #ff8a80 !important; }
 :root[data-theme="dark"] .h-sc-catrow.is-on .h-sc-catck { color: #111; }
 
