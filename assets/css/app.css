@@ -4109,6 +4109,11 @@ body.is-kiosk .sf-add, body.is-kiosk .sf-tools, body.is-kiosk .sf-range-btn { di
 .sf-opt.is-on { border-color: var(--blue); background: var(--blue-soft); }
 .sf-opt input { flex-shrink: 0; margin: 0; }
 .sf-newbtn { justify-self: start; }
+/* 📐 Côte à côte, tout part de la même hauteur : dans une grille ou une rangée, l'écart vient du « gap », pas d'une marge du haut
+   (sinon le 2e cadre d'une ligne descend : Calendrier / Mesures, Apparence, Visionneuse, Animaux, Infos…) */
+:is(.calendar-tools-grid, .design-order-grid, .block-grid, .lb-prefs, .h-pp-cols, .h-columns, .software-info-grid, .saint-stats-grid, .h-sync-grid) > :is(.maintenance-panel, .empty-box, .help-glossary, .h-search-layout, .h-columns) { margin-top: 0; }
+.maintenance-panel :is(.item-title-row, .ord-row, .order-row, .local-lock-inline) > .page-actions { margin-top: 0; }
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}
