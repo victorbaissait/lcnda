@@ -703,9 +703,20 @@
     function setCurrent(id) { S().photomapId = id; store.set('lcnda-photomaps-current', id); }
     async function renderCarte(token) {
         const ws = A().$('#workspace');
-        ws.innerHTML = '<section class="pm-carte"></section>';
+        ws.innerHTML = '<nav class="pm-pick" aria-label="Mes cartes de photos"></nav><section class="pm-carte"></section>';
         const host = ws.querySelector('.pm-carte');
         current?.tl?.stop?.();
+        // en haut de l'outil : toutes les cartes en pastilles (aussi dans la colonne de gauche, mais tout en bas)
+        api('photomaps').then(r => {
+            const nav = ws.querySelector('.pm-pick'); if (!nav || !nav.isConnected) return;
+            const maps = r.maps || [], cur = currentId(), n = m => (m.photos || 0) + (m.videos || 0);
+            nav.innerHTML = `<span class="pm-filters" role="group" aria-label="Carte affichée"><button type="button" class="pm-filter${cur === 'all' ? ' is-active' : ''}" data-pmp="all">🗺 Toutes mes cartes <b>${maps.length}</b></button>${maps.map(m => `<button type="button" class="pm-filter${cur === m.id ? ' is-active' : ''}" data-pmp="${Number(m.id)}"><span class="pm-legdot" style="background:${esc(color(m.color))}" aria-hidden="true"></span> ${esc(m.name)} <b>${n(m)}</b></button>`).join('')}</span>${kiosk() ? '' : '<button type="button" class="button small secondary" data-pmp-new>＋ Nouvelle carte</button>'}`;
+            nav.addEventListener('click', e => {
+                const b = e.target.closest('[data-pmp]');
+                if (b) { setCurrent(b.dataset.pmp === 'all' ? 'all' : Number(b.dataset.pmp)); A().renderSidebar(); renderCarte(++S().workspaceToken); return; }
+                if (e.target.closest('[data-pmp-new]')) editMap(null, m => { if (m) { setCurrent(m.id); A().renderSidebar(); renderCarte(++S().workspaceToken); } });
+            });
+        }).catch(() => {});
         current = await mount(host, {mapId: currentId()});
         if (token !== undefined && token !== S().workspaceToken) current?.tl?.stop?.();
     }

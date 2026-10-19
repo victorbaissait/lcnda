@@ -154,3 +154,10 @@
 :root[data-theme="dark"] .pm-tiles { filter: brightness(.82); }
 :root[data-theme="dark"] .pm-screen .pm-filter.is-active { background: #e8e8e8; border-color: #e8e8e8; color: #111 !important; }
 :root[data-theme="dark"] .pm-screen .pm-filter, :root[data-theme="dark"] .pm-screen .pm-chip { color: #e8e8e8; }
+/* Cartes → 📸 : les cartes en pastilles en haut de l'outil */
+.pm-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 18px 22px 0; }
+.pm-pick + .pm-carte { padding-top: 14px; }
+@media (max-width: 700px) { .pm-pick { padding: 10px 10px 0; } }
+.pm-pick:empty { display: none; }
+.pm-pick .pm-filters { flex: 1 1 auto; min-width: 0; }
+.pm-pick .pm-filter { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; }
