@@ -2246,7 +2246,11 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-bp-shape small{color:#555;font-size:11px;text-align:center;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .h-bp-shape.is-off{opacity:.35}
 .h-bp-shape.is-quick{width:auto}
-.h-bp-shtools{display:flex;gap:2px}
+.h-bp-shtools{display:flex;flex-wrap:wrap;justify-content:center;gap:2px;max-width:100%}
+/* les ✏️ deviennent des boutons icône (app-harmony) : ici ils restent petits pour tenir dans la vignette */
+.h-bp-shtools .icon-action{width:20px;height:20px;flex:0 0 20px;border:0;box-shadow:none;background:transparent;color:inherit}
+.h-bp-shtools .icon-action svg{width:13px;height:13px}
+.h-bp-shtools .icon-action:hover{background:var(--blue);color:#fff;transform:none}
 .h-bp-shtools button{border:0;background:transparent;cursor:pointer;font-size:12px;padding:0 2px}
 .h-bp-fonts{display:flex;flex-wrap:wrap;gap:6px}
 .h-bp-font{position:relative;border:1px solid #e1e4e8;border-radius:8px;padding:4px 10px;background:#fff;font-size:15px;cursor:pointer;color:inherit}
