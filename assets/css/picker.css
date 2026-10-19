@@ -148,6 +148,9 @@
 .pk-dialog { overflow: visible; }
 .pk-dialog .pk-dialog-body { padding: 18px 20px 6px; min-height: 120px; }
 .pk-dialog .pk-list { position: static; max-height: min(400px, 52vh); }
+/* une fenêtre de choix plus haute que l'écran (personnes avec des rôles, sur téléphone) : son contenu défile, le bas reste visible */
+.pk-dialog[open] > form { display: flex; flex-direction: column; max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); }
+.pk-dialog .pk-dialog-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
 
 /* liste dans le flux (inline:true) ou vers le haut quand la place manque dessous (calculé par app-picker.js) */
 .pk-inline .pk-list { position: static; }
@@ -156,7 +159,7 @@
 .pk-chip2 .role.static { cursor: default; }
 
 /* champ posé par app.js (pkField / ancien collectionPersonField) — règles reprises de l'injection pk-host-style */
-.pk-host { display: grid; gap: 6px; font-size: 11px; font-weight: 700; min-width: 0; }
+.pk-host { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; font-size: 11px; font-weight: 700; min-width: 0; }
 .pk-host > .pk { font-weight: 400; }
 .cp-picker { display: block; position: relative; flex: 1 1 220px; min-width: 180px; }
 .cp-picker > .cp-compat { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; border: 0; padding: 0; }
@@ -183,7 +186,9 @@
     .pk-head span:last-child, .pk-kbd { display: none; }
     .pk-item { gap: 9px; padding: 8px 10px; }
     .pk-chip, .pk-chip2 { flex-wrap: wrap; row-gap: 3px; }
-    .pk-chip2 b, .pk-chip2 small, .pk-chip2 .role, .pk-chips .pk-chip b, .pk-chips .pk-chip small { white-space: nowrap; }
+    .pk-chip2 small, .pk-chip2 .role, .pk-chips .pk-chip small { white-space: nowrap; }
+    /* un nom très long passe à la ligne dans sa pastille au lieu d'en sortir */
+    .pk-chip2 b, .pk-chips .pk-chip b, .pk-chip b { white-space: normal; overflow-wrap: anywhere; min-width: 0; }
     .pk-vrow > span.lbl { min-width: 0; width: 100%; }
     .pk-main-card .who { min-width: 0; flex-basis: calc(100% - 60px); }
 }
@@ -207,6 +212,9 @@
 .mpk-chip:focus-visible, .mpk-size:focus-visible { outline: 3px solid rgba(5, 93, 255, .45); outline-offset: 1px; }
 span.mpk-chip { display: inline-flex; align-items: center; gap: 4px; padding: 0; }
 span.mpk-chip button { border: 0; background: none; color: inherit; font: inherit; cursor: pointer; padding: 5px 10px; min-height: 0; box-shadow: none; }
+/* la pastille « 👤 Nom × » d'un nom très long : coupée avec « … » au lieu de sortir de la fenêtre */
+span.mpk-chip.mpk-person { max-width: 100%; min-width: 0; }
+span.mpk-chip.mpk-person button:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 span.mpk-chip button.x { padding: 5px 8px 5px 0; font-size: 14px; }
 .mpk-size { margin-left: auto; appearance: auto; height: auto; width: auto; }
 .mpk-extra { display: flex; gap: 8px; flex-wrap: wrap; }

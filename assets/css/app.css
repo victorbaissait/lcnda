@@ -3913,6 +3913,8 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .drawer-btn{display:inline-grid;place-items:center;position:absolute;top:8px;right:8px;z-index:31;width:36px;height:36px;padding:0;border:1.5px solid var(--ink);background:var(--card-bg,#fff);color:var(--ink);font-size:18px;cursor:pointer;box-shadow:2px 2px 0 rgba(5,93,255,.25)}
 .drawer-open .drawer-btn{right:calc(min(340px,88vw) + 8px)}
 }
+/* 📐 le tiroir fermé (poussé hors de l'écran) ne fait plus défiler la fenêtre de côté */
+@media (max-width:900px){.vx-main,.h-hs-main,.kn-main{overflow:hidden}}
 /* colonne de gauche (Maintenance, Listes…) en écran étroit : en-tête et pied compacts, plus de place pour la liste ; repliable */
 @media (max-width:850px){
 .sidebar{max-height:62vh}
@@ -3985,11 +3987,90 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 /* titres PARENTS / CONJOINTS… et leur ＋ : passent à la ligne au lieu de se chevaucher (grand texte, espacements) */
 .relation-heading { flex-wrap: wrap; }
 .relation-heading > span { min-width: 0; overflow-wrap: anywhere; }
+
+/* ═════ 📐 Rien ne sort du cadre (repéré par le détecteur de débordements, à 1440, 1024 et 390 px) ═════ */
+/* une grille ne s'élargit jamais à cause d'un de ses blocs (nom long, menu, tableau) : ses cases peuvent rétrécir
+   (spécificité nulle : une largeur minimale écrite ailleurs reste prioritaire) */
+:where([class*="grid"], [class*="-cols"], .h-columns) > :where(*) { min-width: 0; }
+.maintenance-panel { min-width: 0; }
+/* un menu déroulant ne déborde jamais de son panneau : il rétrécit (le texte choisi se coupe dans la case) */
+select { max-width: 100%; }
+/* fiche personne → complétude : 3 colonnes seulement s'il y a la place, et les longs mots passent à la ligne */
+.completion-groups { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+.completion-group { min-width: 0; }
+.completion-group span, .completion-group em { overflow-wrap: anywhere; }
+/* jeu de l'oie / puzzle : les libellés en grille gardent leur colonne, les champs la remplissent */
+.goose-setup label, .goose-setup fieldset label { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.goose-setup input, .goose-setup select { width: 100%; min-width: 0; }
+/* bandeaux « Numérotation Sosa », « Designs enregistrés »… : le texte et les boutons passent à la ligne sur un écran étroit */
+.local-lock-inline { flex-wrap: wrap; }
+.local-lock-inline > * { min-width: 0; }
+.local-lock-inline input { min-width: 0; max-width: 100%; }
+/* incohérences, doublons : sur téléphone, la rangée de boutons prend toute la largeur sous le texte */
+@media (max-width: 560px) { .issue > .page-actions, .issue > .issue-actions { grid-column: 1 / -1; } }
+/* listes en fiches : un nom de lieu d'un seul mot très long (Llanfairpwll…) se coupe */
+.list-card h3, .list-card p { overflow-wrap: anywhere; min-width: 0; }
+.list-card > div { min-width: 0; }
+/* Chercher sur internet (widget et outil) : la plage d'années passe à la ligne au lieu de sortir du panneau */
+.web-search-options label { flex-wrap: wrap; min-width: 0; max-width: 100%; }
+.web-search-options input[type="number"], .web-search-options input[type="text"] { min-width: 0; max-width: 100%; }
+/* tableau de bord : une ligne de widget au nom de lieu interminable reste dans sa carte (téléphone) */
+.dashboard-list { grid-template-columns: minmax(0, 1fr); }
+.dashboard-row, .dashboard-row > div { min-width: 0; }
+.dashboard-row strong, .dashboard-row small { overflow-wrap: anywhere; }
+/* barre « N éléments · Trier : » (C6) dans un panneau étroit : le menu de tri rétrécit au lieu de dépasser */
+.ui-sortbar-sort { max-width: 100%; min-width: 0; }
+.ui-sortbar-sort select { min-width: 0; flex: 0 1 auto; }
+/* colonne de gauche (Recherche → dates, autour d'un lieu…) : les champs prennent la largeur de la colonne, pas plus */
+.sidebar-form { grid-template-columns: minmax(0, 1fr); }
+.sidebar-form > *, .sidebar-form label { min-width: 0; }
+/* bas des fenêtres : sur un écran étroit, les boutons passent à la ligne au lieu de sortir de la fenêtre */
+.modal-actions { flex-wrap: wrap; }
+/* fenêtre d'un événement : « Origine de la confiance » à la largeur de sa case */
+.event-confidence-origin-wrap input { width: 100%; max-width: 100%; }
+/* fiche → « Carte des événements » vide : la case grandit avec son message au lieu de le couper */
+.person-map-stage.person-map-empty { aspect-ratio: auto; min-height: 140px; display: grid; place-items: center; padding: 12px; }
+.person-map-stage.person-map-empty > .empty-box { position: static; }
+/* Graphiques → Prénom et saint du jour : colonnes d'au moins 380 px seulement s'il y a la place */
+.saint-stats-grid { grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); }
+/* texte pour lecteur d'écran : posé en haut à gauche, il ne fait plus défiler la page de côté */
+.sr-only { left: 0; top: 0; }
+/* tableau de bord → réglages des widgets : une seule colonne sous 1100 px (sinon la 2e colonne écrase la 1re) */
+@media (max-width: 1100px) { .dashboard-widget-settings-grid { grid-template-columns: minmax(0, 1fr); } }
+/* tableaux larges dans un panneau de Maintenance (HTR…) : ils défilent dans le panneau au lieu d'en sortir */
+@media (max-width: 760px) { .maintenance-panel > table.data-table, .maintenance-panel > .data-table-wrap { display: block; max-width: 100%; overflow-x: auto; } }
+
+/* 🧩 bouton icône taille « outil » (C8) : la poubelle / le crayon d'une petite barre (vignette, piste, ligne serrée) — app-harmony.js */
+.icon-action.ia-auto.ia-tool{width:22px!important;height:22px!important;min-width:22px!important;min-height:22px!important;flex:0 0 22px;border-width:1px!important;box-shadow:none}
+.icon-action.ia-auto.ia-tool svg{width:13px;height:13px}
+
+/* ═════ 📐 Rien ne se colle : le même écart entre les blocs qui se suivent (comme deux panneaux de Maintenance) ═════ */
+/* deux grands blocs l'un sous l'autre (panneau, « rien ici », grille de champs, colonnes…) : 1,5 rem, partout */
+:is(.maintenance-panel, .empty-box, .form-grid, .help-glossary, .h-search-layout, .h-columns) + :is(.maintenance-panel, .empty-box, .help-glossary, .h-search-layout, .h-columns) { margin-top: 1.5rem; }
+/* une rangée de boutons et le bloc d'à côté (barre des listes H10, compteurs, tableau, « rien ici ») : 1 rem */
+.page-actions + :is(.ui-listbar, .empty-box, .data-table-wrap),
+.page > .page-actions ~ :is(.ui-listbar, .reminder-summary-boxes),
+.page-head + :is(.ui-listbar, .bl-pagewrap),
+:is(.maintenance-panel, .empty-box, .data-table-wrap) + .page-actions,
+.page > .maintenance-panel ~ .page-actions { margin-top: 1rem; }
+/* une rangée de boutons puis un champ, dans un panneau ; un lieu puis le champ suivant (Recherche → Autour d'un lieu) */
+.maintenance-panel > .page-actions + :is(label, .h-inline), .research-place-picker + * { margin-top: .8rem; }
+/* Graphiques → Liens de parenté : « Afficher le lien » ne touche plus la case de la 2e personne */
+#show-kinship { margin-top: 10px; }
+/* flèches ↑ ↓ (et la poubelle qui les suit) : jamais bord à bord */
+.ord-arrow + .ord-arrow, .ord-arrow + .icon-action { margin-left: 4px; }
+/* un titre de panneau qui porte ses flèches ↑ ↓ ⇄ : elles passent à la ligne plutôt que de sortir du panneau */
+:is(h1, h2, h3, h4, header).ord-row { flex-wrap: wrap !important; row-gap: 4px; }
+/* Enquêtes : les boutons d'une piste et les étiquettes d'une carte (état, date) passent à la ligne avec un écart */
+.investigation-item-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.investigation-card > div:has(> .investigation-status) { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.investigation-card > div:has(> .investigation-status) > .entity-date-badge { margin-left: 0; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}
 :root[data-theme="dark"] .person-list-item .outside-genealogy-mark{background:#212121}
 :root[data-theme="dark"] .person-list-item.is-active .outside-genealogy-mark{border-color:#4c4c4c}
+:root[data-theme="dark"] .button.secondary.danger{background:#212121;color:#eaa4ad}
 :root[data-theme="dark"] .sosa-results{background:#212121}
 :root[data-theme="dark"] .data-row{border-bottom:1px solid #4c4c4c}
 :root[data-theme="dark"] .event-row{border-bottom:1px solid #4c4c4c}

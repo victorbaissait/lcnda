@@ -28,9 +28,9 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=228">
-    <link rel="stylesheet" href="assets/css/picker.css?v=4">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=206">
+    <link rel="stylesheet" href="assets/css/app.css?v=230">
+    <link rel="stylesheet" href="assets/css/picker.css?v=5">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=208">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=1">
     <link rel="stylesheet" href="assets/css/layout.css?v=13">
@@ -38,13 +38,10 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
     <link rel="stylesheet" href="assets/css/ui.css?v=5">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
-    <link rel="stylesheet" href="assets/css/artist.css?v=3">
+    <link rel="stylesheet" href="assets/css/artist.css?v=4">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
     <link rel="stylesheet" href="assets/css/oeuvres.css?v=1">
-    <link rel="stylesheet" href="assets/css/profils.css?v=2">
-    <link rel="stylesheet" href="assets/css/transcribe.css?v=2">
-    <link rel="stylesheet" href="assets/css/photomaps.css?v=1">
-    <link rel="stylesheet" href="assets/css/shortcuts.css?v=1">
+    <link rel="stylesheet" href="assets/css/profils.css?v=3">
     <link rel="stylesheet" href="assets/css/sciences.css?v=2">
     <link rel="stylesheet" href="assets/css/faces.css?v=1">
     <link rel="stylesheet" href="assets/css/blocs.css?v=1">
@@ -52,6 +49,9 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/puzzle.css?v=3">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=1">
+    <link rel="stylesheet" href="assets/css/transcribe.css?v=2">
+    <link rel="stylesheet" href="assets/css/photomaps.css?v=1">
+    <link rel="stylesheet" href="assets/css/shortcuts.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=1" id="lc-frame-css" media="not all">
 </head></html>
 <body>
@@ -1116,12 +1116,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-carte.js?v=8" defer></script>
 <script src="assets/js/app-enquetes.js?v=7" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=10" defer></script>
-<script src="assets/js/app-harmony.js?v=5" defer></script>
+<script src="assets/js/app-harmony.js?v=6" defer></script>
 <script src="assets/js/app-ui.js?v=9" defer></script>
 <script src="assets/js/app-access.js?v=5" defer></script>
 <script src="assets/js/app-sidegroups.js?v=7" defer></script>
 <script src="assets/js/app-listes.js?v=19" defer></script>
-<script src="assets/js/app-maintenance.js?v=11" defer></script>
+<script src="assets/js/app-maintenance.js?v=12" defer></script>
 <script src="assets/js/app-recherche.js?v=9" defer></script>
 <script src="assets/js/app-graphiques.js?v=8" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
@@ -1158,7 +1158,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=20" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=1" defer></script>
 <script src="assets/js/heritage-boards.js?v=31" defer></script>
-<script src="assets/js/heritage-dnd.js?v=8" defer></script>
+<script src="assets/js/heritage-dnd.js?v=9" defer></script>
 <script src="assets/js/heritage-studio.js?v=61" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=6" defer></script>
 <script src="assets/js/heritage-fiches.js?v=17" defer></script>

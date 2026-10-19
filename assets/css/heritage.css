@@ -2246,7 +2246,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-bp-shape small{color:#555;font-size:11px;text-align:center;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .h-bp-shape.is-off{opacity:.35}
 .h-bp-shape.is-quick{width:auto}
-.h-bp-shtools{display:flex;flex-wrap:wrap;justify-content:center;gap:2px;max-width:100%}
+.h-bp-shtools{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;max-width:100%}
 /* les ✏️ deviennent des boutons icône (app-harmony) : ici ils restent petits pour tenir dans la vignette */
 .h-bp-shtools .icon-action{width:20px;height:20px;flex:0 0 20px;border:0;box-shadow:none;background:transparent;color:inherit}
 .h-bp-shtools .icon-action svg{width:13px;height:13px}
@@ -3912,6 +3912,73 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .vx-dlg .vx-top>.h-full-btn,.vx-dlg .vx-top>.stick-r,.vx-dlg .vx-top>.stick-r2{order:1;position:static}
 .vx-dlg .vx-top>.vx-menus{order:2;flex-basis:100%;display:flex;flex-wrap:wrap;gap:4px}
 }
+
+/* ═════ 📐 Rien ne sort du cadre (repéré par le détecteur de débordements, à 1440, 1024 et 390 px) ═════ */
+/* Listes → Outils de modification, Maintenance → Montage… : quand les onglets ne tiennent pas sur une ligne, ils passent sur plusieurs lignes
+   (au moins 100 px chacun) au lieu d'écraser leur nom */
+@media (min-width:701px){.segmented.enquetes-tab-toggle.h-et-tabs,.segmented.enquetes-tab-toggle.h-ek-tabs{grid-auto-flow:row;grid-template-columns:repeat(auto-fill,minmax(100px,1fr))!important}}
+/* fiche d'animal → Caractéristiques : les valeurs longues (race…) restent dans la carte */
+.h-pet-animalblock .h-pet-dl{min-width:0}
+.h-pet-dl{grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr))}
+.h-pet-dl dd{overflow-wrap:anywhere;min-width:0}
+/* Recherche → Poser une question : sur téléphone, « Chercher » passe sous la case */
+.h-question-form{flex-wrap:wrap}
+.h-question-form input{min-width:min(220px,100%)}
+/* 🎬 Montage : le nom de la piste n'est plus rogné en haut et en bas par ses petits boutons */
+.h-mt-lname b{flex-shrink:0;line-height:1.25}
+.h-mt-tbtns{gap:4px}
+.h-mt-lname .h-mt-tbtns .ord-arrow{width:20px;height:20px;min-width:20px;min-height:20px;font-size:11px;margin-left:0}
+/* ═════ 📐 Rien ne se colle (suite) ═════ */
+/* Revues, livres… : les deux rangées d'onglets ne se touchent plus */
+.h-pr-views + .h-pr-views{margin-top:8px}
+.h-pr-views{row-gap:6px}
+/* fiche d'animal : « Voir le pedigree complet » sous les parents */
+.h-pet-parents + .button,.h-pet-parents + button{margin-top:12px}
+/* fiche d'animal : les deux parents passent l'un sous l'autre quand la carte est étroite */
+.h-pet-parents{grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr))}
+.h-pet-parents > *,.h-pet-parents .h-pet-mini{min-width:0}
+.h-pet-mini{min-width:min(180px,100%)}
+.h-pet-mini>span:last-child{min-width:0;overflow-wrap:anywhere}
+/* réglages des animaux : les lignes à ranger tiennent dans leur colonne */
+.h-pet-layout{grid-template-columns:minmax(0,1fr)}
+.h-pet-lrow{min-width:0}
+.h-pet-lrow span{min-width:0;overflow-wrap:break-word}
+/* Maintenance → Montage, retouche… : une seule colonne de panneaux quand la page est étroite (sinon les listes s'écrasent) */
+@media (max-width:1200px){.h-mtp-cols{grid-template-columns:minmax(0,1fr)}}
+/* une ligne à ranger avec un menu (Montage… → Boutons et options) : le menu et les flèches passent dessous si la colonne est étroite */
+.h-pet-lrow.ord-row:has(> select){flex-wrap:wrap}
+.h-pet-lrow:has(> select) > span{flex:1 1 120px}
+.h-pet-lrow select{min-width:0;max-width:100%}
+.h-pp-cols > *{min-width:0}
+/* Musée (plein écran) et Signatures et sceaux : une seule colonne sur un écran étroit, à la largeur de la fenêtre */
+@media (max-width:900px){.h-museum-editor.is-full .h-me-grid{grid-template-columns:minmax(0,1fr)}}
+.h-sl-work > *{min-width:0}
+@media (max-width:760px){.h-sl-work{grid-template-columns:minmax(0,1fr)}}
+/* Maintenance → Montage… : les boutons de réglages enregistrés côte à côte, avec un écart */
+.h-mtp-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.h-mtp .h-mtp-grid{width:100%}
+/* Réglages des animaux : les lignes de champs (↑ ↓) un peu plus aérées */
+.h-pp-fields{gap:4px}
+/* ADN : les flèches d'une ligne restent côte à côte */
+.h-dna-orow > span{display:inline-flex;gap:4px;align-items:center}
+/* Retouche : − Ajusté + */
+.h-rs-zoom{gap:4px}
+/* Diaporama : la bulle « ? » au-dessus d'un bouton */
+.h-ss-f .h-ss-fl + *{margin-top:4px}
+/* Diagrammes : « ⚙️ Ranger les types » et × côte à côte dans l'en-tête */
+.h-dg-galhead > span{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+/* Retouche simple : la barre des outils ne touche plus la barre du haut */
+.h-retouch-simple .h-rs-head ~ .h-rs-paint{margin-top:8px}
+/* Dessin : ↶ ↷ côte à côte ; Présentation : les petits boutons de la colonne des diapositives */
+.vx-top .vx-hist{display:inline-flex;gap:4px;align-items:center}
+.kn-nav .kn-navbar{gap:4px}
+.kn-nlist{grid-template-columns:minmax(0,1fr)}
+.kn-ni{grid-template-columns:18px minmax(0,1fr)}
+@media (max-width:1100px){.kn-ni{grid-template-columns:14px minmax(0,1fr)}}
+/* 📊 Éditeur de diagramme (toutes les sortes) : les colonnes peuvent rétrécir ; sur téléphone, une seule colonne à la largeur de la fenêtre */
+.h-dg-body{grid-template-columns:minmax(min(380px,100%),46%) minmax(0,1fr)}
+.h-dg-body > *{min-width:0}
+@media (max-width:820px){.h-dg-body{grid-template-columns:minmax(0,1fr)}}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .h-poilu-event.is-blesse>strong,:root[data-theme="dark"] .h-poilu-event.is-tue>strong,:root[data-theme="dark"] .h-poilu-event.is-gaze>strong{color:#f49aa3}
 :root[data-theme="dark"] .h-calib-image{background:#292929}

@@ -1,6 +1,8 @@
 /* LCNDA — 🧩 Les mêmes petits boutons partout : la poubelle et le crayon de la fiche personne (bloc Événements),
  * à la même taille, à la place des 🗑, ✎ et ✏️ écrits en émoji ; un seul ＋ devant « Ajouter… ».
  * Seul l'aspect change : le bouton garde ses attributs, son titre et ce qu'il fait.
+ * Taille : 29 px d'habitude ; « outil » (22 px, classe ia-tool) si le bouton d'origine faisait moins de 24 px de haut
+ * (petite barre, vignette) ou s'il est dans un conteneur data-ia-size="tool".
  */
 (() => {
     'use strict';
@@ -16,6 +18,10 @@
         const t = b.textContent.trim(), kind = KIND[t];
         if (kind && !b.children.length && !isTool(b)) {
             const label = b.getAttribute('title') || b.getAttribute('aria-label') || (kind === 'delete' ? 'Supprimer' : 'Modifier');
+            // 📐 dans une petite barre (vignette, piste du montage, ligne serrée…), le bouton d'origine était petit :
+            // il prend la taille « outil » (C8) au lieu des 29 px, sinon il sortirait de son cadre
+            const h0 = b.getBoundingClientRect().height;
+            if ((h0 > 0 && h0 < 24) || b.closest('[data-ia-size="tool"]')) b.classList.add('ia-tool');
             b.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${SVG[kind]}</svg>`;
             b.classList.add('icon-action', 'ia-auto', `icon-${kind}`); if (kind === 'delete') b.classList.add('is-danger');
             if (!b.title) b.title = label; if (!b.getAttribute('aria-label')) b.setAttribute('aria-label', label);

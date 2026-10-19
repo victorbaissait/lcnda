@@ -252,7 +252,7 @@ textarea.ar-in { resize: vertical; }
 .ar-fr.cust .lbl { color: var(--blue-bright); font-weight: 700; }
 .ar-fr.drag { background: var(--blue-soft); box-shadow: inset 4px 0 0 var(--blue-bright), 0 4px 10px rgba(0, 0, 0, .15); }
 .ar-fr .ty { font: 600 10.5px system-ui, sans-serif; color: #777; border: 1px solid #ccd; padding: 0 4px; white-space: nowrap; background: var(--white); }
-.ar-fr .tools { display: flex; gap: 2px; }
+.ar-fr .tools { display: flex; gap: 4px; }
 .ar-eye { border: 0; background: none; cursor: pointer; font-size: 13px; padding: 0; }
 .ar-pbtns { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; align-items: center; }
 .ar-pbtns .ar-in { width: auto; }
