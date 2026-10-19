@@ -115,6 +115,7 @@
             default: if (!ext.houseFurnitureX?.(shape, {T, g, B, C, put, legs, box, mat: fm, w, d, h, col, col2, it})) { if (rad > 0) RB(w, h, d, col, 0); else B(w, h, d); }
         }
         if (shape !== 'img') ext.houseMergeByMaterial?.(T, g); // ⚡ les volumes de même matière fondus en un seul (heritage-house-more.js) : bien plus fluide avec beaucoup de meubles
+        try { ext.housePics?.decorate?.(T, g, it); } catch (_) {} // 🖼 l'image choisie dans les médias, posée sur la toile ou le cadre (heritage-house-pics.js)
         if (ft) { // les pieds : l'objet monte d'autant
             const out = new T.Group(), fc = col2 || '#' + new T.Color(col).multiplyScalar(.6).getHexString(), fw = Math.min(ft[1], w * .2, d * .2), ins = fw * .9;
             g.position.y = fh; out.add(g);
@@ -268,7 +269,7 @@
             piece(cur2, len + ext1, 0, wh);
         });
         // les meubles
-        f.items.forEach(it => { const Lb = L.libOf(it.kind), m = furniture(it, Lb); m.position.set(M(it.x), M(it.elev || 0), M(it.y)); m.rotation.y = -(it.rot || 0) * Math.PI / 180; m.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } }); g.add(m);
+        f.items.forEach(it => { const Lb = L.libOf(it.kind), m = furniture(it, Lb); m.userData.hsItem = it.id; m.position.set(M(it.x), M(it.elev || 0), M(it.y)); m.rotation.y = -(it.rot || 0) * Math.PI / 180; m.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } }); g.add(m);
             if (it.model) loadModel(it.model).then(obj => { const bb = new T.Box3().setFromObject(obj), s = bb.getSize(new T.Vector3()), c = bb.getCenter(new T.Vector3()); obj.position.sub(new T.Vector3(c.x, bb.min.y, c.z)); const wrap = new T.Group(); wrap.add(obj); wrap.scale.set(M(it.w) / (s.x || 1), M(it.h ?? 80) / (s.y || 1), M(it.d) / (s.z || 1)); m.clear(); m.add(wrap); wrap.traverse(o => { if (o.isMesh) o.castShadow = true; }); }).catch(() => {}); });
         // ✦ les souvenirs posés sur un meuble ou dans une pièce (un clic : la photo, le récit) ; 💡 les lampes (allumées la nuit)
         const lamps = [];
@@ -553,6 +554,7 @@
             walkState: () => ({x: P.x, z: P.z, yaw: wyaw, fi: fiCur, stair: onStair}), walkTo: (x, z) => { [P.x, P.z] = collide(x, z); },
             memPoints: () => { const r = el.getBoundingClientRect(), out = []; house.traverse(o => { if (o.isSprite && o.userData.mem) { const v = o.getWorldPosition(new T.Vector3()).project(cam); if (v.z < 1) out.push({...o.userData.mem, x: r.left + (v.x + 1) / 2 * r.width, y: r.top + (1 - v.y) / 2 * r.height}); } }); return out; }, // où sont les ✦ à l'écran
             walkKeys: keys, setWalkYaw: v => { wyaw = v; },
+            itemAt: (cx, cy) => { rayAt({clientX: cx, clientY: cy}); const hit = ray.intersectObjects(house.children, true).find(h => h.object.isMesh); let o = hit?.object; while (o && o.userData?.hsItem == null) o = o.parent; return o ? {id: o.userData.hsItem, obj: o, point: hit.point} : null; }, // 🖼 l'objet sous la souris (une image déposée dessus)
             destroy: () => { stopPlay(); cancelAnimationFrame(raf); ro.disconnect(); try { if (document.pointerLockElement === el) document.exitPointerLock(); } catch (_) {} document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); window.removeEventListener('blur', blur); renderer.dispose(); box2.innerHTML = ''; box2.classList.remove('is-walking'); barAc.abort(); if (!ownBar) { bar.hidden = true; bar.querySelectorAll('.is-on').forEach(b => b.classList.remove('is-on')); } }};
     }
     /** l'aperçu en 3D d'un seul objet (fenêtre « Créer un objet ») : une image, faite avec un seul rendu partagé */

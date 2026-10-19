@@ -143,6 +143,7 @@
         let s = sym2dBase(item); const w = item.w, d = item.d, k = item.s2 || libOf(item.kind)?.[7] || 'box';
         // la deuxième couleur (pieds, poignées, filets) : un liseré à l'intérieur
         if (/^#[0-9a-f]{6}$/i.test(item.color2 || '') && !item.img && w > 10 && d > 10) s += ROUNDISH.has(k) ? `<ellipse rx="${w / 2 - 4}" ry="${d / 2 - 4}" fill="none" stroke="${item.color2}" stroke-width="2.5" vector-effect="non-scaling-stroke"/>` : `<rect x="${-w / 2 + 4}" y="${-d / 2 + 4}" width="${w - 8}" height="${d - 8}" rx="${Math.min(w, d) * clamp(Number(item.rad) || 0, 0, 50) / 100}" fill="none" stroke="${item.color2}" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`;
+        if (item.pics) s += ext.housePics?.sym2d?.(item) || ''; // 🖼 l'image d'un tableau, d'une toile : un aperçu vu de dessus, ou une petite marque (heritage-house-pics.js)
         return s;
     }
     function sym2dBase(item) {
@@ -206,7 +207,7 @@
     /* un plan ouvert depuis la base (ou une base reçue d'ailleurs) : seuls des nombres, des couleurs, des images sûres et
        des mots-clés simples ; le texte libre (noms, notes) est toujours échappé à l'affichage */
     const H_FREE = new Set(['name', 'note', 'text', 'title', 'label', 'period', 'place', 'place_text', 'caption', 'date', 'short', 'font']);
-    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape', 'axis', 's2', 's3', 'matl', 'feet', 'ver', 'lMat', 'rMat', 'ceil']);
+    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape', 'axis', 's2', 's3', 'matl', 'feet', 'ver', 'lMat', 'rMat', 'ceil', 'fit']);
     const H_COLOR = /^(color2?|.*Color)$/, H_IMG = /^(src|img|image|href|top|thumb|tex|texture)$/;
     const imgSafe = v => /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(v) || /^media\/[\w.%-]+$/.test(v) || /^api\.php\?action=house_model_file&id=\d+$/.test(v);
     function cleanHouse(v, key = '') {
@@ -398,6 +399,7 @@
         function paintSide() {
             dlg.querySelectorAll('[data-hs-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.hsTab === tab));
             if (pane.contains(document.activeElement) && document.activeElement.matches('input:not([type=range]):not([type=color]):not([type=checkbox]):not([type=radio]), textarea')) return;
+            if (ext.housePics?.busy?.()) return; // 🖼 un recadrage en cours (curseur, aperçu glissé) : le panneau ne bouge pas
             const f = F();
             if (tab === 'lib' && ext.houseLibUI) { pane.innerHTML = ext.houseLibUI.pane({cat: libCat, q: libQ, mine, sym2d, setCat: c => { libCat = c; }}); return; } // catégories rangées, objets créés, bibliothèque en ligne (heritage-house-lib.js)
             if (tab === 'lib') {
@@ -491,6 +493,7 @@
                     <label>Rotation (°)<input type="number" data-hs-p="rot" value="${Math.round(o.rot || 0)}" step="15"></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="rot90" data-shortcut="R">⟳ 90°</button><button type="button" class="button small secondary" data-hs-cmd="dup">⧉ Dupliquer</button></div>`)}
                     ${sec('Couleur', 'p-color', `<div class="h-hs-g2c"><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || L?.[6] || '#9a8a7a')}"></label><label>Matière<select data-hs-p="matl">${opt(OBJ_MATS.map(m => [m[0], m[1]]), o.matl || '')}</select></label></div>
                         <label title="Pieds, poignées, filets, ferrures">2ᵉ couleur<span class="h-hs-c2"><input type="color" data-hs-p="color2" value="${esc(o.color2 || '#c9a24a')}">${o.color2 ? '<button type="button" class="h-hs-vstep" data-hs-cmd="nocolor2" title="Sans deuxième couleur">×</button>' : '<small class="muted">aucune</small>'}</span></label>`)}
+                    ${ext.housePics?.section?.(o, {sec, name: o.name || L?.[1] || 'Objet', person: H.meta?.people?.[0] ? {id: Number(H.meta.people[0].id) || 0, title: H.meta.people[0].label || ''} : null}) || ''}
                     ${sec('Texte', 'p-text', `<label>Nom<input data-hs-p="name" value="${esc(o.name || '')}" placeholder="${esc(L?.[1] || '')}"></label><label>Époque, style<input data-hs-p="period" value="${esc(o.period || '')}" placeholder="ex. vers 1880, Louis-Philippe"></label>`)}
                     ${sec('Effets : pieds et détails', 'p-fx', `<div class="h-hs-g2c"><label>Pieds<select data-hs-p="feet">${opt(FEET_OPTS, o.feet || '')}</select></label><label>Coins arrondis (%)<input type="number" data-hs-p="rad" value="${o.rad || 0}" min="0" max="50" step="5"></label></div>
                         ${doors ? `<div class="h-hs-g2c"><label>Portes<input type="number" data-hs-p="doors" value="${o.doors || ''}" min="0" max="8" placeholder="auto"></label><label>Tiroirs<input type="number" data-hs-p="drawers" value="${o.drawers || ''}" min="0" max="12" placeholder="auto"></label></div>` : ''}`, !!(o.feet || o.rad || o.doors || o.drawers))}
@@ -963,8 +966,10 @@
             const f3 = files.filter(f => /\.(obj|stl|glb|gltf|mtl)$/i.test(f.name)); if (f3.length) return import3d(f3);
             const js = files.find(f => /\.json$/i.test(f.name)); if (js) return importHouseFile(js);
             const img = files.find(f => /^image\//.test(f.type)); if (!img) return toast('Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison.', 'error');
-            const canMem = sel?.type === 'item' || sel?.type === 'room';
-            const what = await choose('📁 Que faire de cette image ?', 'MAISON', [['plan', '📐 Un plan ancien, un cadastre, à calquer', 'posé en fond, à mettre à l’échelle'], ['item', '🖼 Un objet vu de dessus', 'posé sur le plan comme un meuble'], ...(canMem ? [['mem', '🏷 Un souvenir pour ce qui est choisi', 'rattaché au meuble ou à la pièce']] : [])]);
+            if (ext.housePics?.claimDrop?.(img)) return; // 🖼 déposée sur un tableau, une toile, un cadre : elle y va directement
+            const canMem = sel?.type === 'item' || sel?.type === 'room', selPic = sel?.type === 'item' && ext.housePics?.count?.(F().items.find(q => q.id === sel.id)) > 0;
+            const what = await choose('📁 Que faire de cette image ?', 'MAISON', [...(selPic ? [['pic', '🖼 L’image de ce tableau, de ce cadre', 'posée sur l’objet choisi, en 2D et en 3D']] : []), ['plan', '📐 Un plan ancien, un cadastre, à calquer', 'posé en fond, à mettre à l’échelle'], ['item', '🖼 Un objet vu de dessus', 'posé sur le plan comme un meuble'], ...(canMem ? [['mem', '🏷 Un souvenir pour ce qui est choisi', 'rattaché au meuble ou à la pièce']] : [])]);
+            if (what === 'pic') return ext.housePics?.dropOn?.(img, sel.id);
             if (what === 'plan') return importPlan(img);
             if (what === 'item') return importImg(img);
             if (what === 'mem') { try { const it = await PK().importMediaFile(img, ['image']); return memAdd(it); } catch (e) { return toast(e.message, 'error'); } }
@@ -1147,6 +1152,9 @@
         // 🧭 la boussole (le nord du plan, réglé dans Maison → ☀️ Orientation et lumière) ; 📁 E4 : déposer ou coller un fichier sur le plan
         stage.insertAdjacentHTML('beforeend', '<button type="button" class="h-hs-compass" data-hs-compass data-hs-cmd="sunpanel" title="Le nord du plan : clic pour le régler (☀️ Orientation et lumière)" aria-label="Nord du plan"><svg viewBox="-20 -20 40 40" aria-hidden="true"><path d="M0 -17L5.5 0L-5.5 0Z" fill="#c0392b"/><path d="M0 17L5.5 0L-5.5 0Z" fill="#9aa3ad"/><circle r="2.2" fill="#fff"/><text x="9" y="-9" font-size="9" font-weight="700" fill="#c0392b" font-family="system-ui,sans-serif">N</text></svg></button>');
         UI()?.bindFileDrop?.(stage, files => onDropFiles(files), {accept: 'image/*,.obj,.stl,.glb,.gltf,.mtl,.json'});
+        // 🖼 les images des tableaux, toiles et cadres (heritage-house-pics.js) : section du panneau, dépôt sur l'objet en 2D et en 3D
+        ext.housePics?.attach?.({dlg, pane, stage, svg, commit, later, render, paint: () => paintSide(), view3d: () => view3d, selItem: () => sel?.type === 'item' ? F().items.find(q => q.id === sel.id) || null : null,
+            findItem: iid => { for (const fl of H.floors) { const it = fl.items.find(q => q.id === iid); if (it) return it; } return null; }, select: iid => { sel = {type: 'item', id: iid}; tab = 'props'; }});
         if (ctx.ver) switchVer(String(ctx.ver), true); // ouverte depuis un recensement : à l'époque qui lui est rattachée
         setTool(H.floors.some(f => f.walls.length) ? 'select' : 'room'); badge(); hist = [snap0()]; hpos = 0; fit(); render(); paintCompass(); syncSt(); stage.focus({preventScroll: true});
         return {get house() { return H; }, get view3d() { return view3d; }, get dirty() { return dirty; }, setTool, commit, render, toggle3d, save, cmd: k => CMD[k]?.(), switchVer, verList, openMemView, select: (type, sid) => { sel = {type, id: sid}; tab = 'props'; render(); }, setTab: t => { tab = t; paintSide(); }};
