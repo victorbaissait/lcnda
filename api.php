@@ -629,6 +629,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-graph-diagram-hidden',
         'genealogie-graph-stats-order',
         'genealogie-graph-stats-hidden',
+        'genealogie-side-folders', // 📁 dossiers de Mes diagrammes / Mes graphiques (app-side-folders.js)
         'genealogie-tile-cat-order',
         'genealogie-tile-hidden-cats',
         'genealogie-tile-hidden',

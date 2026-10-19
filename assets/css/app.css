@@ -4068,6 +4068,47 @@ select { max-width: 100%; }
 /* ✎ Mes thèmes, traits épais (jusqu'à 12 px) : les petits boutons icône, petits boutons et points gardent un trait de 4 px au plus, pour que l'icône reste visible */
 html:root.lc-frame :is(.icon-action, .icon-button, .button.small, .status-dot, .life-dot, .person-thumb, .outside-genealogy-mark, .pm-filter, .ui-num) { border-width: min(calc(2px * var(--lc-frame-k)), 4px); }
 
+/* 📁 Dossiers de « Mes diagrammes » et « Mes graphiques » (colonne de Graphiques, app-side-folders.js) */
+.sf-label { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 22px 0 10px; }
+.sf-label .section-label { margin: 0; min-width: 0; }
+.sf-add { flex-shrink: 0; border: var(--line); background: var(--white); color: var(--ink); font: inherit; font-size: 12px; font-weight: 700; padding: 4px 8px; white-space: nowrap; cursor: pointer; box-shadow: 2px 2px 0 rgba(5, 93, 255, .22); }
+.sf-add:hover, .sf-add:focus-visible { background: var(--blue-soft); }
+.sf-root { position: relative; }
+.sf-loose { display: grid; gap: 9px; }
+.sf-loose:empty { display: none; }
+.sf { min-width: 0; }
+.sf-head { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 42px; padding: 7px 10px; border: var(--line); background: var(--card-head-bg); color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; user-select: none; box-sizing: border-box; }
+.sf-head:hover { background: var(--blue-soft); }
+.sf-head:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.sf-car { width: 12px; flex-shrink: 0; color: var(--blue); font-size: 12px; }
+.sf-ic { flex-shrink: 0; }
+.sf-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sf-count { flex-shrink: 0; color: var(--muted); font-weight: 600; font-size: 12px; }
+.sf-tools { display: none; gap: 4px; flex-shrink: 0; }
+.sf-head:hover .sf-tools, .sf-head:focus-within .sf-tools { display: inline-flex; }
+@media (hover: none) { .sf-tools { display: inline-flex; } }
+.sf-tool { width: 24px; height: 24px; display: inline-grid; place-items: center; padding: 0; border: 1.5px solid var(--ink); background: var(--white); color: var(--ink); font-size: 12px; cursor: pointer; }
+.sf-tool:hover, .sf-tool:focus-visible { background: var(--blue); color: #fff; border-color: var(--blue); }
+.sf-body { display: grid; gap: 9px; margin: 9px 0 0 12px; padding-left: 10px; border-left: 3px solid #c8d6f5; }
+.sf-body[hidden] { display: none; }
+.sf-empty { margin: 0; padding: 4px 0; color: var(--muted); font-size: 12px; }
+.sf-head.is-sf-drop { outline: 3px dashed var(--blue); outline-offset: 2px; background: var(--blue-soft); }
+.sf-root.is-sf-drop-out > .sf-loose, .sf-root.is-sf-drop-out > .sf-loose:empty { display: grid; min-height: 34px; outline: 3px dashed var(--blue); outline-offset: 3px; }
+.is-sf-dragging { opacity: .45; }
+.sf-ghost { position: fixed; z-index: 100000; pointer-events: none; opacity: .7; transform: rotate(-2deg); box-shadow: 6px 6px 0 rgba(5, 93, 255, .3); margin: 0; }
+.sf-marker { position: fixed; z-index: 100001; height: 4px; background: var(--blue); border-radius: 2px; pointer-events: none; }
+body.is-sf-dragging-any, body.is-sf-dragging-any * { cursor: grabbing !important; user-select: none; }
+.sf-can-drag [data-sf-item], .sf-can-drag .sf-head { touch-action: auto; }
+/* mode consultation : on voit et on ouvre les dossiers, rien d'autre */
+body.is-kiosk .sf-add, body.is-kiosk .sf-tools, body.is-kiosk .sf-range-btn { display: none !important; }
+/* fenêtre « 📁 Ranger « Nom » » */
+.sf-range-body { display: grid; gap: 10px; padding: 16px 20px; max-height: min(60vh, 520px); overflow-y: auto; }
+.sf-opts { display: grid; gap: 8px; }
+.sf-opt { display: flex; align-items: center; gap: 10px; margin-left: calc(var(--sf-depth, 0) * 18px); padding: 8px 10px; border: 1.5px solid var(--line-color); border-radius: 8px; background: var(--white); color: var(--ink); font-size: 14px; font-weight: 600; cursor: pointer; min-width: 0; }
+.sf-opt span { min-width: 0; overflow-wrap: anywhere; }
+.sf-opt.is-on { border-color: var(--blue); background: var(--blue-soft); }
+.sf-opt input { flex-shrink: 0; margin: 0; }
+.sf-newbtn { justify-self: start; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}
@@ -4352,4 +4393,5 @@ html:root.lc-frame :is(.icon-action, .icon-button, .button.small, .status-dot, .
 :root[data-theme="dark"] .archive-room-piece.is-on{background:#12233d}
 :root[data-theme="dark"] .archive-room-piece button{background:#212121}
 :root[data-theme="dark"] .icon-action.ia-auto.is-danger{color:#e9a5ac!important}
+:root[data-theme="dark"] .sf-body{border-left:3px solid #324267}
 /* ═════ fin du mode sombre automatique ═════ */

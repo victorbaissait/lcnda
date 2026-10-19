@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=231">
+    <link rel="stylesheet" href="assets/css/app.css?v=232">
     <link rel="stylesheet" href="assets/css/picker.css?v=5">
     <link rel="stylesheet" href="assets/css/heritage.css?v=208">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -1105,7 +1105,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=426" defer></script>
+<script src="assets/js/app.js?v=427" defer></script>
 <script src="assets/js/app-picker.js?v=9" defer></script>
 <script src="assets/js/app-media-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
@@ -1123,12 +1123,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes.js?v=19" defer></script>
 <script src="assets/js/app-maintenance.js?v=12" defer></script>
 <script src="assets/js/app-recherche.js?v=9" defer></script>
-<script src="assets/js/app-graphiques.js?v=8" defer></script>
+<script src="assets/js/app-graphiques.js?v=9" defer></script>
+<script src="assets/js/app-side-folders.js?v=1" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=22" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=157" defer></script>
+<script src="assets/js/heritage-more.js?v=158" defer></script>
 <script src="assets/js/heritage-records.js?v=5" defer></script>
 <script src="assets/js/heritage-research.js?v=26" defer></script>
 <script src="assets/js/heritage-av.js?v=12" defer></script>
@@ -1142,7 +1143,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-voters.js?v=4" defer></script>
-<script src="assets/js/heritage-widgets.js?v=38" defer></script>
+<script src="assets/js/heritage-widgets.js?v=39" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=3" defer></script>
 <script src="assets/js/heritage-tabs.js?v=10" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
@@ -1165,7 +1166,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-genealogies.js?v=3" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=10" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=5" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=10" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=11" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=2" defer></script>
 <script src="assets/js/heritage-vector.js?v=18" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=12" defer></script>

@@ -1466,7 +1466,7 @@
         const d = defs().find(x => x.id === id);
         const ws = A().$('#workspace');
         if (!d) { ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', 'Graphique introuvable', 'Il a peut-être été supprimé.')}</section>`; return; }
-        ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
+        ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button>' + (window.LCNDA_SIDE_FOLDERS && !kioskOn() ? window.LCNDA_SIDE_FOLDERS.rangeButtonHtml('graph', d.id, d.name || 'Mon graphique') : '') + '<button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
         const datas = await loadData(d);
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         // le titre et le texte sont déjà en haut de la page : la carte ne les répète pas
