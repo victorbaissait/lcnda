@@ -1176,12 +1176,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-artist-art.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-books.js?v=8" defer></script>
 <script src="assets/js/heritage-artist-film.js?v=8" defer></script>
-<script src="assets/js/heritage-sciences.js?v=2" defer></script>
+<script src="assets/js/heritage-sciences.js?v=3" defer></script>
 <script src="assets/js/heritage-sciences-explore.js?v=2" defer></script>
 <script src="assets/js/heritage-sciences-profile.js?v=2" defer></script>
 <script src="assets/js/heritage-artist-page.js?v=11" defer></script>
 <script src="assets/js/heritage-artist-list.js?v=9" defer></script>
-<script src="assets/js/heritage-artist-import.js?v=9" defer></script>
+<script src="assets/js/heritage-artist-import.js?v=10" defer></script>
 <script src="assets/js/heritage-artist-catalogue.js?v=9" defer></script>
 <script src="assets/js/heritage-scene.js?v=2" defer></script>
 <script src="assets/js/heritage-scene-list.js?v=2" defer></script>
@@ -1192,7 +1192,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-oeuvres-types.js?v=1" defer></script>
 <script src="assets/js/heritage-oeuvres-wizard.js?v=2" defer></script>
 <script src="assets/js/heritage-oeuvres-metiers.js?v=2" defer></script>
-<script src="assets/js/heritage-profils.js?v=2" defer></script>
+<script src="assets/js/heritage-profils.js?v=3" defer></script>
 <script src="assets/js/heritage-profils-politique.js?v=2" defer></script>
 <script src="assets/js/heritage-profils-sport.js?v=2" defer></script>
 <script src="assets/js/heritage-profils-liste.js?v=1" defer></script>

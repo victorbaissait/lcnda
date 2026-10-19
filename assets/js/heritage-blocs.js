@@ -417,6 +417,7 @@
     hookCited(); document.addEventListener('DOMContentLoaded', hookCited);
 
     /* ═════════ L'écran Listes : « Revue de presse » et « Palmarès » (toutes les personnes) ═════════ */
+    let listOnChg = null;
     BL.listScreen = (domain, kind) => async token => {
         const ws = A().$('#workspace'), D = BL.DOMAINS[domain], def = ART.defs[kind];
         const st = () => A().state?.workspaceToken;
@@ -442,7 +443,9 @@
             if (t.hasAttribute('data-bl-pexport')) return ART.exportList?.(C, kind);
         });
         const onChg = () => { if (!page.isConnected) { document.removeEventListener('lcnda:blocs-changed', onChg); return; } refresh(); };
-        document.addEventListener('lcnda:blocs-changed', onChg);
+        // un seul écouteur pour l'écran Listes : celui de la page d'avant part (sinon un de plus, avec toute sa page, à chaque passage)
+        if (listOnChg) document.removeEventListener('lcnda:blocs-changed', listOnChg);
+        listOnChg = onChg; document.addEventListener('lcnda:blocs-changed', onChg);
     };
 
     /* ═════════ La petite API pour les autres outils (profils sportif, politique, artiste…) ═════════ */

@@ -105,7 +105,7 @@
                     const res = f.querySelector('[data-res]'), cands = res._cands || [], chosen = [...res.querySelectorAll('[data-cand]:checked')].map(c => cands[Number(c.dataset.cand)]).filter(Boolean);
                     if (!chosen.length) { toast('Coche ce qu’il faut importer.', 'error'); return false; }
                     const prog = f.querySelector('[data-prog]'), imgs = f.querySelector('[data-imgs]').checked, nodup = f.querySelector('[data-nodup]').checked, have = new Set(C.store.items.map(sameKey));
-                    let extra; try { extra = await ART.needArtist(C.store); } catch (_) { return false; }
+                    let extra; try { extra = await ART.needArtist(C.store, tab); } catch (_) { return false; }
                     let done = 0, skipped = 0; const out = [];
                     for (const c of chosen) {
                         prog.textContent = `${done + skipped + 1} / ${chosen.length} : ${c.title || ''}…`;

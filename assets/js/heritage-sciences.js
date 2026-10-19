@@ -99,10 +99,10 @@
         return job;
     };
     // « 📥 Importer » d'une de nos sortes : la question porte sur le bon profil (pas sur « Artiste »)
-    let importKind = '';
+    // la sorte vient de l'appel (fenêtre « 📥 Importer ») : pas d'une variable restée d'une fenêtre fermée (sinon « ＋ Plusieurs épisodes » demandait « Cocher Inventeur ? »)
     const baseNeed = ART.needArtist;
-    ART.needArtist = async store => { if (importKind && SC.KIND_PROFILE[importKind]) { await SC.needProfile(store, importKind); return {}; } return baseNeed(store); };
-    const wrapImport = () => { const base = ART.openImport; if (!base || base._sc) return; ART.openImport = (C, kind) => { importKind = SC.KIND_PROFILE[kind] ? kind : ''; if (kind === 'paper' && SC.openPubImport) return SC.openPubImport(C); return base(C, kind); }; ART.openImport._sc = true; };
+    ART.needArtist = async (store, kind) => { if (kind && SC.KIND_PROFILE[kind]) { await SC.needProfile(store, kind); return {}; } return baseNeed(store); };
+    const wrapImport = () => { const base = ART.openImport; if (!base || base._sc) return; ART.openImport = (C, kind) => { if (kind === 'paper' && SC.openPubImport) return SC.openPubImport(C); return base(C, kind); }; ART.openImport._sc = true; };
     if (document.readyState === 'loading') document.addEventListener?.('DOMContentLoaded', wrapImport); else setTimeout(wrapImport, 0);
 
     /* ═════════ Les cartes : un repère par lieu (coordonnées de la base, ou écrites à la main) ═════════ */
