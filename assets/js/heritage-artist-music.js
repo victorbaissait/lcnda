@@ -58,7 +58,10 @@
                 {key: 'value', label: 'Valeur', type: 'money', star: true, join: {key: 'value_date', sep: ' ', small: ''}},
                 {key: 'value_date', label: 'Valeur estimée le', type: 'date', star: true},
                 {key: 'dedication', label: 'Dédicace', type: 'text', star: true, join: {key: 'dedicatee', sep: ' · '}},
-                {key: 'dedicatee', label: 'Dédicacé à', type: 'person', star: true, roleWord: 'dédicace'}]},
+                {key: 'dedicatee', label: 'Dédicacé à', type: 'person', star: true, roleWord: 'dédicace'},
+                // en double, en triple… : les autres exemplaires, chacun avec son état, sa place, son prix
+                {key: 'copies', label: 'Autres exemplaires (double, triple…)', type: 'rows', star: true, addLabel: 'Un exemplaire de plus',
+                    cols: [{key: 'cond_disc', label: 'Disque', type: 'select', choices: GOLDMINE, w: 's'}, {key: 'cond_sleeve', label: 'Pochette', w: 'm'}, {key: 'edition', label: 'Édition / pressage', w: 'm'}, {key: 'shelf', label: 'Rangé', w: 'm'}, {key: 'paid', label: 'Payé', w: 's'}, {key: 'value', label: 'Valeur', type: 'money', w: 's'}, {key: 'dedication', label: 'Dédicace', w: 'm'}, {key: 'note', label: 'Note', w: 'm'}]}]},
             {key: 'ids', label: 'Identifiants et liens', icon: '🔢', zone: 'right', fields: [
                 {key: 'barcode', label: 'Code-barres', type: 'text', star: false},
                 {key: 'matrix_a', label: 'Matrice face A', type: 'text', star: false},

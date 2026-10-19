@@ -1122,7 +1122,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=22" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=143" defer></script>
+<script src="assets/js/heritage-more.js?v=144" defer></script>
 <script src="assets/js/heritage-records.js?v=5" defer></script>
 <script src="assets/js/heritage-research.js?v=26" defer></script>
 <script src="assets/js/heritage-av.js?v=12" defer></script>
@@ -1172,9 +1172,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-artist.js?v=13" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-panel.js?v=8" defer></script>
-<script src="assets/js/heritage-artist-music.js?v=9" defer></script>
+<script src="assets/js/heritage-artist-music.js?v=10" defer></script>
 <script src="assets/js/heritage-artist-art.js?v=9" defer></script>
-<script src="assets/js/heritage-artist-books.js?v=8" defer></script>
+<script src="assets/js/heritage-artist-books.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-film.js?v=8" defer></script>
 <script src="assets/js/heritage-sciences.js?v=3" defer></script>
 <script src="assets/js/heritage-sciences-explore.js?v=2" defer></script>
