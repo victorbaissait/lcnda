@@ -26,7 +26,7 @@
     const mediaUrl = f => `media/${encodeURIComponent(f)}`;
     const store = {get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch (_) { return d; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} }};
     const TEST = () => (window.LCNDA_FACES_TEST && typeof window.LCNDA_FACES_TEST === 'object' ? window.LCNDA_FACES_TEST : null);
-    const WORKER_URL = 'assets/js/faces-worker.js?v=1';
+    const WORKER_URL = 'assets/js/faces-worker.js?v=2';
     const MAX_SIDE = 1280;                                  // les photos sont réduites à 1280 points de côté avant l'analyse
     // délai maximum pour une photo : au moins 1 min 30, et cinq fois le temps habituel de cet ordinateur (un vieil ordinateur sans carte graphique est lent)
     const TIMEOUT = (avg = 0) => Number(TEST()?.timeout) || Math.max(90000, Math.round(avg * 5));
@@ -95,18 +95,21 @@
         let worker = null, booting = null, pending = null, kind = '', fallbackReason = '', times = [];
         const avg = () => (times.length ? times.reduce((s, x) => s + x, 0) / times.length : 0);
         const test = TEST(), mode = test?.engine === 'mock' ? 'mock' : 'faceapi';
-        const kill = () => { try { worker?.terminate(); } catch (_) {} worker = null; booting = null; };
+        let bootKo = null, initTimer = 0;
+        // arrêter : le fil est coupé net, même pendant le chargement du modèle (le chargement en cours échoue tout de suite, sans secours)
+        const kill = () => { try { worker?.terminate(); } catch (_) {} worker = null; booting = null; clearTimeout(initTimer); const k = bootKo; bootKo = null; if (k) k(Object.assign(new Error('Analyse arrêtée.'), {stopped: true})); };
         function finish(v) { const p = pending; pending = null; if (p) { clearTimeout(p.timer); p.resolve(v); } }
         function boot() {
             if (booting) return booting;
             booting = new Promise((ok, ko) => {
+                bootKo = ko;
                 let w; try { w = new Worker(WORKER_URL); } catch (e) { ko(new Error('Fil de calcul impossible : ' + e.message)); return; }
                 worker = w;
-                const initTimer = setTimeout(() => { ko(new Error('Le modèle met trop de temps à se charger.')); }, 180000);
+                initTimer = setTimeout(() => { ko(new Error('Le modèle met trop de temps à se charger.')); }, 180000);
                 w.onmessage = e => {
                     const m = e.data || {};
                     if (m.type === 'step') onStep(m.text);
-                    else if (m.type === 'ready') { clearTimeout(initTimer); kind = m.backend === 'mock' ? 'mock' : 'worker'; ok(); }
+                    else if (m.type === 'ready') { clearTimeout(initTimer); bootKo = null; kind = m.backend === 'mock' ? 'mock' : 'worker'; ok(); }
                     else if (m.type === 'fatal') { clearTimeout(initTimer); ko(new Error(m.message)); }
                     else if ((m.type === 'result' || m.type === 'error') && pending && m.id === pending.id) {
                         if (m.type === 'result' && m.ms) times = [...times.slice(-11), m.ms];
@@ -115,7 +118,7 @@
                 };
                 w.onerror = e => { e.preventDefault?.(); clearTimeout(initTimer); if (pending) { kill(); finish({skipped: 'le calcul a planté'}); } else ko(new Error(e.message || 'Fil de calcul en erreur.')); };
                 w.postMessage({type: 'init', engine: mode, cdn: CDN, files: FILES, mock: test || {}});
-            }).catch(e => { kill(); throw e; });
+            }).catch(e => { if (!e?.stopped) kill(); throw e; });
             return booting;
         }
         let seq = 0;
@@ -123,7 +126,7 @@
             if (kind === 'page' || kind === 'simple') return;
             try { await boot(); }
             catch (e) {
-                if (mode === 'mock') throw e;
+                if (mode === 'mock' || e?.stopped) throw e;
                 fallbackReason = e.message;
                 if (!String(e.message).startsWith(NET_FAIL)) { onStep('Calcul sur la page (plus lent)…'); try { await loadModel(onStep); kind = 'page'; return; } catch (e2) { fallbackReason = e2.message; } }
                 if ('FaceDetector' in window) { kind = 'simple'; return; }
@@ -150,7 +153,7 @@
             });
         }
         return {ensure, scan, get kind() { return kind; }, get reason() { return fallbackReason; },
-            stop() { if (kind === 'worker' || kind === 'mock') kill(); finish({stopped: true}); }, dispose() { kill(); finish({stopped: true}); }};
+            stop() { if (kind === 'worker' || kind === 'mock' || booting) kill(); finish({stopped: true}); }, dispose() { kill(); finish({stopped: true}); }};
     }
 
     /* ═════════ Propositions : le plus proche des visages connus, et les inconnus regroupés ═════════ */
@@ -362,7 +365,7 @@
                 const sk = run.skipped.length ? ` · ${plural(run.skipped.length, 'photo sautée', 'photos sautées')}` : '';
                 if (!closed) toast(`${stopped || run.stop ? '■ Analyse arrêtée' : '✓ Analyse finie'} : ${plural(run.found, 'visage trouvé', 'visages trouvés')}${sk}.${run.ids.length ? ` Il reste ${plural(run.ids.length, 'photo', 'photos')} : « ▶ Reprendre » quand tu veux.` : ''}`);
             } catch (err) {
-                if (!closed) toast(err.message, 'error');
+                if (!closed && !err?.stopped) toast(err.message, 'error');
                 saveJob();
             }
             engine?.dispose(); engine = null; busy = false; paused = false; run = null;

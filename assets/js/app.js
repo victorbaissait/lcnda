@@ -1994,7 +1994,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function applyDesign(){
         const design=readDesignSettings();
         const presets=allDesignPresets();
-        const preset=presets[design.preset]||presets.portfolio;
+        const preset=(Object.hasOwn(presets,design.preset)&&presets[design.preset])||presets.portfolio; // « constructor », « toString »… ne sont pas des thèmes
         document.documentElement.dataset.theme=preset.dark?'dark':'';
         const cardBackgrounds={
             white:{card:preset.card,cardHead:preset.cardHead},
@@ -2012,7 +2012,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         document.documentElement.style.setProperty('--card-bg',cardBg.card);
         document.documentElement.style.setProperty('--card-head-bg',cardBg.cardHead);
         // ✎ Mes thèmes : couleur du texte, couleur et épaisseur des traits qui entourent (assets/css/apparence-traits.css)
-        {const root=document.documentElement,mine=!BUILTIN_DESIGN_PRESETS[design.preset]&&presets[design.preset]?preset:null,frame=!!mine&&(mine.line!==mine.ink||mine.lineW!==2);
+        {const root=document.documentElement,mine=!Object.hasOwn(BUILTIN_DESIGN_PRESETS,design.preset)&&Object.hasOwn(presets,design.preset)?preset:null,frame=!!mine&&(mine.line!==mine.ink||mine.lineW!==2);
             if(mine)root.style.setProperty('--ink',mine.ink);else root.style.removeProperty('--ink');
             root.classList.toggle('lc-frame',frame);if(frame){root.style.setProperty('--lc-frame-color',mine.line);root.style.setProperty('--lc-frame-k',String(mine.lineW/2));const sheet=document.getElementById('lc-frame-css');if(sheet)sheet.media='all';}}
         document.documentElement.lang='fr';

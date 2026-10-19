@@ -30,12 +30,14 @@
         return thumbMem.get(id);
     }
     let io = null;
+    const watched = new Set();
     function fillThumbs(root) {
         const boxes = [...root.querySelectorAll('[data-gr-thumb]:not([data-gr-done])')];
         const fill = async el => { el.dataset.grDone = '1'; const svg = await graphSvg(el.dataset.grThumb); if (svg && el.isConnected) el.innerHTML = svg; };
         if (!('IntersectionObserver' in window)) { boxes.slice(0, 40).forEach(fill); return; }
-        io = io || new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); fill(e.target); } }), {rootMargin: '200px'});
-        boxes.forEach(b => io.observe(b));
+        io = io || new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); watched.delete(e.target); fill(e.target); } }), {rootMargin: '200px'});
+        watched.forEach(el => { if (!el.isConnected) { io.unobserve(el); watched.delete(el); } }); // les vignettes d'une liste redessinée ne sont plus suivies (fuite)
+        boxes.forEach(b => { io.observe(b); watched.add(b); });
     }
 
     /* ═════════ Choisir un de mes graphiques ═════════ */

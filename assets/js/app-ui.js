@@ -844,7 +844,7 @@
             let ok = ask;
             if (!ok) { try { const st = (await navigator.permissions?.query({name: 'local-fonts'}))?.state; if (st) state = st; ok = st === 'granted'; } catch (_) {} }
             // demandé sur un clic : queryLocalFonts est appelé tout de suite (avant tout « await »), sinon le navigateur refuse
-            if (ok) { try { const seen = new Map(); for (const f of await window.queryLocalFonts()) { const fam = String(f?.family || '').replace(/["'<>\\]/g, '').trim(); if (fam && !seen.has(fam.toLowerCase())) seen.set(fam.toLowerCase(), fam); } local = [...seen.values()]; state = 'granted'; } catch (e) { state = e?.name === 'NotAllowedError' || e?.name === 'SecurityError' ? 'denied' : 'error'; } }
+            if (ok) { try { const seen = new Map(); for (const f of await window.queryLocalFonts()) { const fam = cleanFont(String(f?.family || '')); if (fam && !seen.has(fam.toLowerCase())) seen.set(fam.toLowerCase(), fam); } local = [...seen.values()]; state = 'granted'; } catch (e) { state = e?.name === 'NotAllowedError' || e?.name === 'SecurityError' ? 'denied' : 'error'; } }
         }
         const appLow = new Set(APP_FONTS.map(f => f.toLowerCase())), all = new Map();
         for (const f of [...local, ...COMMON_FONTS.filter(f => !local.length && fontExists(f))]) if (!appLow.has(f.toLowerCase()) && !all.has(f.toLowerCase())) all.set(f.toLowerCase(), f);
@@ -852,7 +852,9 @@
         fontCache.full = local.length > 0; fontCache.state = state;
         return fontCache;
     }
-    UI.rememberFont = f => { if (!f) return; const r = store.get(RECENT_F, []); store.set(RECENT_F, [f, ...(Array.isArray(r) ? r : []).filter(x => x !== f)].slice(0, 8)); };
+    /** un nom de police sûr partout (attribut, style font-family) : ni guillemets, ni \, ni ; { }, ni retour à la ligne */
+    const cleanFont = f => (typeof f === 'string' ? f.replace(/["'<>\\;{}\u0000-\u001f\u007f]/g, '').replace(/\s+/g, ' ').trim().slice(0, 80) : '');
+    UI.rememberFont = f => { f = cleanFont(f); if (!f) return; const r = store.get(RECENT_F, []); store.set(RECENT_F, [f, ...(Array.isArray(r) ? r : []).filter(x => x !== f)].slice(0, 8)); };
     /** E5 — openFontPicker({value, sample}) → Promise<nom de la police | null> */
     UI.openFontPicker = ({value = '', sample = 'Louise Borie', title = 'Choisir une police'} = {}) => new Promise(resolve => {
         const dlg = h('dialog', 'modal small-modal ui-fontpick');
@@ -863,7 +865,7 @@
         const $ = s => dlg.querySelector(s), list = $('[data-ui-fl]');
         const sf = UI.searchField({placeholder: 'Chercher une police…', delay: 60, onInput: () => draw()}); $('[data-ui-fq]').appendChild(sf);
         let chosen = value, comp = [], answer = null;
-        const row = (f, tag) => `<div class="ui-font${f === chosen ? ' on' : ''}" role="option" data-f="${esc(f)}" aria-selected="${f === chosen}"><span style="font-family:'${esc(f.replace(/'/g, ''))}', ${/script|hand|chancery|roundhand|zapfino|calligraph|brush/i.test(f) ? 'cursive' : 'serif'}">${esc(f)} — ${esc(sample)}</span><small>${tag}</small></div>`;
+        const row = (f, tag) => `<div class="ui-font${f === chosen ? ' on' : ''}" role="option" data-f="${esc(f)}" aria-selected="${f === chosen}"><span style="font-family:'${esc(cleanFont(f))}', ${/script|hand|chancery|roundhand|zapfino|calligraph|brush/i.test(f) ? 'cursive' : 'serif'}">${esc(f)} — ${esc(sample)}</span><small>${tag}</small></div>`;
         // affichage progressif : 60 lignes, puis la suite en descendant (chaque ligne charge sa police : 500 d'un coup figeraient la fenêtre)
         let rows = [], shown = 0, more0 = null;
         const STEP = 60;
@@ -877,10 +879,10 @@
         }
         function draw() {
             const q = fold(sf.input.value).trim(), m = f => !q || fold(f).includes(q), seen = new Set();
-            const rec = (store.get(RECENT_F, []) || []).filter(m), app = APP_FONTS.filter(m), pc = comp.filter(m);
+            const r0 = store.get(RECENT_F, []), rec = (Array.isArray(r0) ? r0 : []).map(cleanFont).filter(Boolean).filter(m), app = APP_FONTS.filter(m), pc = comp.filter(m);
             const part = (arr, tag) => arr.filter(f => !seen.has(f.toLowerCase()) && seen.add(f.toLowerCase())).map(f => [f, tag]);
             rows = [...part(rec, 'RÉCENTE'), ...part(app, 'DE L’APP'), ...part(pc, 'ORDINATEUR')];
-            if (q && !rows.some(([f]) => fold(f) === q)) rows.push([sf.input.value.trim().replace(/["'<>\\]/g, '').slice(0, 80), 'TAPÉE']);
+            if (q && !rows.some(([f]) => fold(f) === q)) { const typed = cleanFont(sf.input.value); if (typed) rows.push([typed, 'TAPÉE']); }
             if (chosen && !q) { const i = rows.findIndex(([f]) => f === chosen); if (i >= STEP) rows.unshift(rows.splice(i, 1)[0]); } // la police en cours, visible tout de suite
             shown = 0; more0 = null; io?.disconnect(); list.innerHTML = '';
             if (!rows.length) { list.innerHTML = `<div class="ui-font-empty">Aucune police pour « ${esc(sf.input.value)} ».</div>`; return; }

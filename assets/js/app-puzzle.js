@@ -98,7 +98,8 @@
     async function flushPending() {
         if (flushing) return; flushing = true;
         try {
-            for (const p of Object.values(pendingAll())) {
+            for (const [k, p] of Object.entries(pendingAll())) {
+                if (!p || typeof p !== 'object' || !owns(p.uid)) { const all = pendingAll(); delete all[k]; store.set(pendingKey(), all); continue; } // entrée abîmée : jetée
                 try { await send(p); pendingDrop(p.uid, Number(p.saved_at || 0)); }
                 catch (e) { if (e.status === 422 || e.status === 404) pendingDrop(p.uid); else { if (e.kiosk) C.kiosk = true; else C.offline = true; schedulePendingRetry(); break; } }
             }
@@ -146,15 +147,16 @@
                 if (hadPending) await flushPending();
                 const adopted = await adoptLegacy();
                 if (adopted > 0 || hadPending) { r = await fetch('api.php?action=puzzle', {headers: {Accept: 'application/json'}}); d = await r.json(); }
-                C.games = Array.isArray(d.games) ? d.games : []; C.history = Array.isArray(d.history) ? d.history : []; C.records = d.records && typeof d.records === 'object' ? {...d.records} : {};
+                C.games = Array.isArray(d.games) ? d.games.filter(g => g && owns(g.id)) : []; C.history = Array.isArray(d.history) ? d.history.filter(g => g && owns(g.id)) : []; C.records = d.records && typeof d.records === 'object' ? {...d.records} : {};
                 if (adopted > 0) toast(`🧩 ${plural(adopted, 'partie de puzzle rangée', 'parties de puzzle rangées')} dans la base de la généalogie.`, 'success');
             } catch (e) {
                 C.offline = true;
                 const l = store.get(LIST_PREFIX + (C.base || 'x'), null);
-                if (l && !C.loaded) { C.games = l.games || []; C.history = l.history || []; C.records = l.records || {}; }
+                if (l && typeof l === 'object' && !C.loaded) { const ok = a => (Array.isArray(a) ? a.filter(g => g && typeof g === 'object' && owns(g.id)) : []); C.games = ok(l.games); C.history = ok(l.history); C.records = l.records && typeof l.records === 'object' ? {...l.records} : {}; }
             }
             // ce qui n'est pas encore parti (hors ligne) se voit quand même
             for (const p of Object.values(pendingAll())) {
+                if (!p || typeof p !== 'object' || !owns(p.uid)) continue;
                 if (p.op === 'save' && p.meta?.image && !C.games.some(g => g.id === p.uid) && !C.history.some(g => g.id === p.uid)) C.games.unshift({...p.meta, id: p.uid});
                 if (p.op === 'delete') { C.games = C.games.filter(g => g.id !== p.uid); C.history = C.history.filter(g => g.id !== p.uid); }
             }
@@ -417,23 +419,23 @@
     }
 
     /* ═════════════════════ La partie ═════════════════════ */
-    let cur = null; // la partie affichée
-    function stopRunning() { if (cur) cur.stop(); cur = null; }
+    let cur = null, renderSeq = 0; // la partie affichée
+    function stopRunning() { renderSeq++; if (cur) cur.stop(); cur = null; } // renderSeq : une partie encore en lecture ne s'affichera plus
 
     const fresh = new Map(); // parties qu'on vient de créer : pas besoin de les relire
-    let renderSeq = 0;
     function render(ws, id, ctx) {
         const known = C.games.some(g => g.id === id) || C.history.some(g => g.id === id) || fresh.has(id) || !!pendingAll()[id];
         if (C.loaded && !known && !C.offline) return false;
         stopRunning();
         const seq = ++renderSeq, f = fresh.get(id); fresh.delete(id);
         if (f) { cur = new Game(ws, f.meta, ctx, false, f.state); return true; }
-        ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait">${UI().spinner ? UI().spinner('Ouverture de la partie…') : 'Ouverture de la partie…'}</div></section>`;
+        ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait" data-pz-wait="${seq}">${UI().spinner ? UI().spinner('Ouverture de la partie…') : 'Ouverture de la partie…'}</div></section>`;
+        const ours = () => seq === renderSeq && ws.isConnected && !!ws.querySelector(`[data-pz-wait="${seq}"]`); // un autre écran a pu prendre la place
         loadGame(id).then(g => {
-            if (seq !== renderSeq || !ws.isConnected) return;
+            if (!ours()) return;
             cur = new Game(ws, {...g.meta, id}, ctx, g.status === 'done', g.state);
         }).catch(e => {
-            if (seq !== renderSeq || !ws.isConnected) return;
+            if (!ours()) return;
             if (e.status === 404) { C.games = C.games.filter(g => g.id !== id); C.history = C.history.filter(g => g.id !== id); ctx.newGame?.(); return; }
             ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait">${notice('error', `La partie n’a pas pu être ouverte : ${e.message || e}`)}<button type="button" class="button" data-pz-retry>Réessayer</button></div></section>`;
             ws.querySelector('[data-pz-retry]').addEventListener('click', () => render(ws, id, ctx));
@@ -455,7 +457,7 @@
         get G() { return this.geo; }
         html() {
             const m = this.meta, total = m.cols * m.rows, rec = C.records[recordKey(m)];
-            this.ws.innerHTML = `<section class="goose-page pz-page pz-play"><header class="goose-head goose-game-head"><div><span class="eyebrow">${this.finished ? 'PUZZLE TERMINÉ' : 'PUZZLE EN COURS'} · ${num(total)} PIÈCES (${m.cols} × ${m.rows})</span><h2><input class="pz-name" data-pz-name value="${esc(m.name)}" maxlength="120" aria-label="Nom de la partie" title="Le nom de la partie : clique pour le changer"${this.finished ? ' readonly' : ''}></h2><p>${esc(m.image?.title || '')}${m.shape === 'square' ? ' · carrés simples' : ''}${m.rotate ? ' · pièces tournées' : ''}</p></div>
+            this.ws.innerHTML = `<section class="goose-page pz-page pz-play"><header class="goose-head goose-game-head"><div><span class="eyebrow">${this.finished ? 'PUZZLE TERMINÉ' : 'PUZZLE EN COURS'} · ${num(total)} PIÈCES (${esc(m.cols)} × ${esc(m.rows)})</span><h2><input class="pz-name" data-pz-name value="${esc(m.name)}" maxlength="120" aria-label="Nom de la partie" title="Le nom de la partie : clique pour le changer"${this.finished ? ' readonly' : ''}></h2><p>${esc(m.image?.title || '')}${m.shape === 'square' ? ' · carrés simples' : ''}${m.rotate ? ' · pièces tournées' : ''}</p></div>
                 <div class="page-actions">${this.finished ? '<button type="button" class="button small" data-pz-again title="Recommencer ce puzzle avec la même image et le même nombre de pièces">↻ Rejouer</button>' : ''}<button type="button" class="button small secondary" data-pz-new title="Préparer une autre partie">＋ Nouvelle partie</button>${this.finished ? '' : '<button type="button" class="button small secondary" data-pz-delete title="Supprimer ce puzzle (tu pourras annuler)">Supprimer</button>'}</div></header>
                 <div class="pz-wrap" data-pz-wrap>
                     <div class="pz-bar">
@@ -491,6 +493,8 @@
         async load() {
             const m = this.meta;
             try {
+                const nOk = Number.isInteger(m.cols) && Number.isInteger(m.rows) && m.cols >= 1 && m.rows >= 1 && m.cols * m.rows >= MIN_PIECES && m.cols * m.rows <= MAX_PIECES;
+                if (!nOk || !m.image || typeof m.image.url !== 'string') throw new Error('partie abîmée');
                 const im = await loadImg(m.image.url);
                 if (!this.alive()) return;
                 this.img = im; this.el.modelImg.src = m.image.url;
@@ -514,11 +518,20 @@
             const G = this.geo, n = G.n;
             this.tx = new Float32Array(n); this.ty = new Float32Array(n);
             for (let p = 0; p < n; p++) { this.tx[p] = (p % G.cols + .5) * G.pw; this.ty[p] = (Math.floor(p / G.cols) + .5) * G.ph; }
-            const st = this.finished ? null : this.initState, ok = st && Array.isArray(st.cx) && st.cx.length === n; this.initState = null;
+            // l'état vient de la base ou de ce navigateur (secours) : tout est revérifié — un nombre faux (NaN, 1e308, texte),
+            // une rotation ou un groupe hors bornes, un ordre qui oublie ou double des pièces → l'état est jeté (pièces en anneau)
+            const st0 = this.finished ? null : this.initState; this.initState = null;
+            const list = k => st0 && Array.isArray(st0[k]) && st0[k].length === n ? st0[k] : null;
+            const nums = a => a && a.every(v => typeof v === 'number' && Number.isFinite(v) && Math.abs(v) <= 1e7);
+            const ints = (a, max) => a && a.every(v => Number.isInteger(v) && v >= 0 && v <= max);
+            const ord = list('order'), ok = nums(list('cx')) && nums(list('cy')) && ints(list('rot'), 3) && ints(list('lk'), 1) && ints(list('grp'), n - 1)
+                && ints(ord, n - 1) && new Set(ord).size === n;
+            const st = ok ? st0 : null;
             this.cx = Float32Array.from(ok ? st.cx : this.tx); this.cy = Float32Array.from(ok ? st.cy : this.ty);
             this.rot = Uint8Array.from(ok ? st.rot : new Array(n).fill(0)); this.lk = Uint8Array.from(ok ? st.lk : new Array(n).fill(1));
-            this.grp = Int32Array.from(ok && Array.isArray(st.grp) && st.grp.length === n ? st.grp : Array.from({length: n}, (_, i) => i));
-            this.order = ok && Array.isArray(st.order) && st.order.length === n ? st.order.slice() : Array.from({length: n}, (_, i) => i);
+            this.grp = Int32Array.from(ok ? st.grp : Array.from({length: n}, (_, i) => i));
+            this.order = ok ? st.order.slice() : Array.from({length: n}, (_, i) => i);
+            if (ok) for (let p = 0; p < n; p++) if (this.lk[p]) { this.cx[p] = this.tx[p]; this.cy[p] = this.ty[p]; this.rot[p] = 0; } // une pièce posée est à sa place
             if (!this.finished && !ok) { // état perdu : on remet les pièces en anneau
                 const {slots} = ringSlots(n, G); this.lk.fill(0); this.order.forEach((p, i) => { this.cx[p] = slots[i][0]; this.cy[p] = slots[i][1]; });
             }

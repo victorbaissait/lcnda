@@ -89,7 +89,10 @@ function mockEngine(cfg = {}) {
 self.onmessage = async e => {
     const m = e.data || {};
     if (m.type === 'init') {
-        try { engine = m.engine === 'mock' ? mockEngine(m.mock) : await faceapiEngine(m, text => postMessage({type: 'step', text})); postMessage({type: 'ready', backend: engine.backend}); }
+        try {
+            if (m.engine === 'mock' && Number(m.mock?.bootMs) > 0) { postMessage({type: 'step', text: 'Faux modèle…'}); await new Promise(r => setTimeout(r, Math.min(600000, Number(m.mock.bootMs)))); } // tests : un modèle long à charger
+            engine = m.engine === 'mock' ? mockEngine(m.mock) : await faceapiEngine(m, text => postMessage({type: 'step', text})); postMessage({type: 'ready', backend: engine.backend});
+        }
         catch (err) { postMessage({type: 'fatal', message: String(err?.message || err)}); }
         return;
     }

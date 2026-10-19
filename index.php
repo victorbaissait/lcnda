@@ -1099,11 +1099,11 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=416" defer></script>
+<script src="assets/js/app.js?v=417" defer></script>
 <script src="assets/js/app-picker.js?v=5" defer></script>
 <script src="assets/js/app-media-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
-<script src="assets/js/app-puzzle.js?v=3" defer></script>
+<script src="assets/js/app-puzzle.js?v=4" defer></script>
 <script src="assets/js/app-jeu.js?v=8" defer></script>
 <script src="assets/js/app-chronologie.js?v=6" defer></script>
 <script src="assets/js/app-comparaison.js?v=6" defer></script>
@@ -1111,7 +1111,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-enquetes.js?v=7" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=9" defer></script>
 <script src="assets/js/app-harmony.js?v=5" defer></script>
-<script src="assets/js/app-ui.js?v=7" defer></script>
+<script src="assets/js/app-ui.js?v=8" defer></script>
 <script src="assets/js/app-access.js?v=5" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
 <script src="assets/js/app-listes.js?v=16" defer></script>
@@ -1136,7 +1136,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-voters.js?v=4" defer></script>
-<script src="assets/js/heritage-widgets.js?v=34" defer></script>
+<script src="assets/js/heritage-widgets.js?v=35" defer></script>
 <script src="assets/js/heritage-tabs.js?v=8" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
 <script src="assets/js/heritage-employers.js?v=3" defer></script>
@@ -1165,10 +1165,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector-cards.js?v=7" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=6" defer></script>
 <script src="assets/js/heritage-research-gaps.js?v=1" defer></script>
-<script src="assets/js/heritage-faces.js?v=5" defer></script>
+<script src="assets/js/heritage-faces.js?v=6" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-kinds.js?v=4" defer></script>
-<script src="assets/js/heritage-graphs.js?v=1" defer></script>
+<script src="assets/js/heritage-graphs.js?v=2" defer></script>
 <script src="assets/js/heritage-artist.js?v=13" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-panel.js?v=8" defer></script>
@@ -1196,7 +1196,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-profils-politique.js?v=2" defer></script>
 <script src="assets/js/heritage-profils-sport.js?v=2" defer></script>
 <script src="assets/js/heritage-profils-liste.js?v=1" defer></script>
-<script src="assets/js/heritage-blocs.js?v=2" defer></script>
+<script src="assets/js/heritage-blocs.js?v=3" defer></script>
 <script src="assets/js/heritage-blocs-press.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-awards.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=1" defer></script>
@@ -1211,7 +1211,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-press-ads.js?v=7" defer></script>
 <script src="assets/js/museum-viewer.js?v=9" defer></script>
 <script src="assets/js/heritage-museum.js?v=13" defer></script>
-<script src="assets/js/app-apparence.js?v=2" defer></script>
+<script src="assets/js/app-apparence.js?v=3" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

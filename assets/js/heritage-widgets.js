@@ -867,16 +867,16 @@
     const isNumCell = v => /^-?[\d\s  .,]+%?$/.test(String(v ?? '').trim());
     /** texte d'un tableur (tabulations) ou d'un CSV (; ou ,), avec les guillemets → lignes de cellules */
     function parseCells(text) {
-        const t = String(text || '').replace(/\r\n?/g, '\n').replace(/\n+$/, '');
-        const head = t.split('\n')[0], sep = t.includes('\t') ? '\t' : (head.split(';').length >= head.split(',').length ? ';' : ',');
+        const t = String(text || '').slice(0, 1500000).replace(/\r\n?/g, '\n').replace(/\n+$/, ''); // le tableau garde 300 lignes : 1,5 million de caractères suffisent
+        const head = t.slice(0, t.indexOf('\n') + 1 || t.length), sep = t.includes('\t') ? '\t' : (head.split(';').length >= head.split(',').length ? ';' : ',');
         const out = []; let row = [], cur = '', q = false;
         for (let i = 0; i < t.length && out.length < 5000; i++) {
             const ch = t[i];
-            if (q) { if (ch === '"') { if (t[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; continue; }
+            if (q) { if (ch === '"') { if (t[i + 1] === '"') { cur += '"'; i++; } else q = false; } else if (cur.length < 200) cur += ch; continue; }
             if (ch === '"' && cur.trim() === '') { q = true; cur = ''; continue; }
-            if (ch === sep) { row.push(cur); cur = ''; continue; }
+            if (ch === sep) { if (row.length < 100) row.push(cur); cur = ''; continue; } // 100 colonnes au plus (12 séries servent)
             if (ch === '\n') { row.push(cur); out.push(row); row = []; cur = ''; continue; }
-            cur += ch;
+            if (cur.length < 200) cur += ch; // une case : 200 caractères au plus (le tableau en garde 120)
         }
         row.push(cur); out.push(row);
         return out.map(r => r.map(c => c.trim())).filter(r => r.some(c => c !== ''));

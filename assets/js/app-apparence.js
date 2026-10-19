@@ -235,6 +235,7 @@
             if (t === 'circle' || t === 'ellipse') { const cx = n(el, 'cx'), cy = n(el, 'cy'), rx = t === 'circle' ? n(el, 'r') : n(el, 'rx'), ry = t === 'circle' ? rx : n(el, 'ry'); return rx > 0 && ry > 0 ? `M${cx - rx} ${cy}A${rx} ${ry} 0 1 0 ${cx + rx} ${cy}A${rx} ${ry} 0 1 0 ${cx - rx} ${cy}Z` : ''; }
             return null;
         };
+        let made = 0;
         const walk = (src, dst) => {
             for (const el of [...src.children]) {
                 const t = el.nodeName.toLowerCase();
@@ -243,12 +244,14 @@
                 const okTr = tr && T_OK.test(tr) ? tr : '';
                 if (tr && !okTr) out.dropped++;
                 if (t === 'g' || t === 'svg') { const g = document.createElementNS(NS, 'g'); if (okTr) g.setAttribute('transform', okTr); if (t === 'svg' && (el.getAttribute('x') || el.getAttribute('y'))) g.setAttribute('transform', `translate(${n(el, 'x')} ${n(el, 'y')}) ${okTr}`); dst.appendChild(g); walk(el, g); continue; }
+                if (made >= LIMITS.paths) { out.dropped++; continue; } // au-delà de 400 chemins, rien n'est gardé : inutile de les poser (fluidité)
                 const d = toD(el);
                 if (d === null) { out.dropped++; continue; }
+                if (d.length > LIMITS.d * 2) { out.dropped++; continue; } // un chemin énorme : jeté avant les expressions régulières
                 const dd = String(d).replace(/\s+/g, ' ').trim();
                 if (!dd || !D_OK.test(dd) || dd.length > LIMITS.d) { out.dropped++; continue; }
                 const p = document.createElementNS(NS, 'path'); p.setAttribute('d', dd); if (okTr) p.setAttribute('transform', okTr); if (evenOdd(el) || evenOdd(src)) p.dataset.eo = '1';
-                dst.appendChild(p);
+                dst.appendChild(p); made++;
             }
         };
         const top = document.createElementNS(NS, 'g'); host.appendChild(top);
