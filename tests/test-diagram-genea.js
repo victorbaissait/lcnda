@@ -50,6 +50,16 @@ step('les 8 sortes sont rangées (Généalogie, Frises) avec une icône, un nom,
     }
     assert.match(R.KINDS.venn.label, /2 à 4/);
 });
+step('SVG valide en XML (fichier .svg exporté, image PNG) : chaque attribut a une valeur', () => {
+    // <rect … data-gn-bg/> passait dans la page (HTML) mais rendait le fichier SVG du réseau illisible
+    for (const k of NEW) {
+        const svg = draw({ kind: k, ...R.KINDS[k].sample() });
+        for (const [, name, attrs] of svg.matchAll(/<([a-zA-Z][\w:-]*)((?:\s+[^\s=>\/]+(?:="[^"]*")?)*)\s*\/?>/g)) {
+            const bare = attrs.replace(/\s+[^\s=>\/]+="[^"]*"/g, '').trim();
+            assert.equal(bare, '', `${k} : <${name}> a un attribut sans valeur (${bare})`);
+        }
+    }
+});
 step('dates C4 comprises (jour, mois, année ; républicain ; sans année)', () => {
     const d = s => { const r = G.parseDay(s); return r ? [r.y ?? null, r.m ?? null, r.d ?? null] : null; };
     assert.deepEqual(d('7 mai 1925'), [1925, 5, 7]);
@@ -170,6 +180,9 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
             const bad = await p.evaluate(() => window.LCNDA_APP.api('diagram_genea', { what: 'venn', keys: "sosa,label:1 OR 1=1" }).then(() => 'ok', e => e.message));
             assert.match(bad, /inconnu/);
             const d = await api({ what: 'dates', types: 'birth,marriage,death', scope: 'ancestors' }); assert.ok(d.days.length > 10 && d.months.birth.length === 12);
+            // paramètres en tableau (?types[]=…, ?root[]=…) : lus comme vides, pas « Array » ni erreur
+            const arr = await p.evaluate(() => fetch('api.php?action=diagram_genea&what=dates&types[]=death&root[]=1&scope[]=x').then(async r => [r.status, await r.json()]));
+            assert.equal(arr[0], 200); assert.deepEqual(arr[1].types, ['birth']);
         });
         await t('« Nouveau diagramme » : les sortes rangées dans Généalogie et Frises, avec leur vignette', async () => {
             const pr = p.evaluate(() => window.LCNDA_EXT.diagramsInternals.chooseType());

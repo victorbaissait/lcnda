@@ -320,7 +320,7 @@
         g.links.forEach((l, e) => { const c = o.edgeKinds === false ? '#8a94a3' : kc.m.get(l.kind); edges += `<line data-e="${e}" data-a="${l.i}" data-b="${l.j}" x1="${r2(X(l.i))}" y1="${r2(Y(l.i))}" x2="${r2(X(l.j))}" y2="${r2(Y(l.j))}" stroke="${c}" stroke-opacity=".6" stroke-width="${r2(.8 + 3.2 * Math.sqrt(l.w / maxW))}"><title>${esc(`${g.nodes[l.i].name} — ${g.nodes[l.j].name}${l.kind ? ' : ' + l.kind : ''}${l.w !== 1 ? ` (${fmt(l.w)})` : ''}`)}</title></line>`; });
         g.nodes.forEach((n, i) => { const r = rad(i), lab = !labelSet || labelSet.has(i);
             nodes += `<g data-n="${i}" transform="translate(${r2(X(i))} ${r2(Y(i))})"><circle r="${r2(r)}" fill="${nc.col[i]}" stroke="#fff" stroke-width="1.2"/><title>${esc(`${n.name}${n.group ? ' · ' + n.group : ''} : ${n.deg} lien${n.deg > 1 ? 's' : ''}`)}</title>${lab ? T(0, r + fs * .75, cut(n.name, fs * 12, fs * .85), {size: fs * .85, anchor: 'middle', weight: n.deg === maxDeg ? 700 : 500}) : ''}</g>`; });
-        const svg = `<g data-gn-net="${st.key}" data-fit="${r2(ox)} ${r2(oy)} ${r2(s)}"><rect width="${r2(W)}" height="${r2(H)}" fill="#fff" fill-opacity="0" data-gn-bg/><g data-gn-vp><g>${edges}</g><g>${nodes}</g></g></g>`;
+        const svg = `<g data-gn-net="${st.key}" data-fit="${r2(ox)} ${r2(oy)} ${r2(s)}"><rect width="${r2(W)}" height="${r2(H)}" fill="#fff" fill-opacity="0" data-gn-bg=""/><g data-gn-vp=""><g>${edges}</g><g>${nodes}</g></g></g>`;
         const legend = [...nc.legend, ...(o.edgeKinds === false ? [] : kc.kinds.filter(Boolean).slice(0, 12).map(k => ({label: k, color: kc.m.get(k), type: 'line', width: 3})))];
         return {h: H, svg, legend, desc: `Réseau de ${g.nodes.length} personnes et ${g.links.length} liens.`};
     }

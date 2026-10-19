@@ -84,6 +84,10 @@ const note = { id: 'cw_txt00001', name: 'Pense-bête', icon: '📌', kind: 'text
         out.save = await A.post({ op: 'save', defs: [chart({ name: TRAP + ' (bis)', style: 'pie' })] });
         out.del = await A.post({ op: 'save', delete: ['cw_txt00001', 'cw_old00001'] });
         out.importDeleted = await A.post({ op: 'import', defs: [note, { id: 'cw_old00001', name: 'Jamais repris', kind: 'text', text: '' }] });
+        // largeurs 1, ½, ⅓, ¼, ⅔, ¾ : un graphique en ¾ (9) ou ¼ (3) garde sa largeur ; une largeur inconnue revient à ½
+        out.widths = [];
+        for (const w of ['12', '6', '4', '3', '8', '9', '7', '<b>']) { const r = await A.post({ op: 'save', defs: [chart({ id: 'cw_wid00001', width: w })] }); out.widths.push([w, r.body.graphs?.find(g => g.id === 'cw_wid00001')?.width]); }
+        await A.post({ op: 'save', delete: ['cw_wid00001'] });
         out.list = await A.getJ('graphs');
         out.page = await A.page();
         // vignette
@@ -157,6 +161,9 @@ const note = { id: 'cw_txt00001', name: 'Pense-bête', icon: '📌', kind: 'text
             assert.equal(g.name, TRAP + ' (bis)'); assert.equal(g.style, 'pie');
             assert.deepEqual(g.valueColors, {}); assert.ok(!Array.isArray(g.valueColors));
             assert.equal(out.list.body.graphs.find(x => x.id === 'cw_pre00001')._hint, undefined, 'le petit résumé n’est pas rangé dans la définition');
+        }],
+        ['largeurs 1, ½, ⅓, ¼, ⅔, ¾ gardées (¾ ne revient plus à ½)', () => {
+            assert.deepEqual(out.widths, [['12', '12'], ['6', '6'], ['4', '4'], ['3', '3'], ['8', '8'], ['9', '9'], ['7', '6'], ['<b>', '6']]);
         }],
         ['supprimer : la ligne « supprimée » empêche la reprise de la faire revenir', () => {
             assert.equal(out.del.status, 200); assert.deepEqual(out.del.body.deleted, ['cw_txt00001', 'cw_old00001']);

@@ -1105,8 +1105,8 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=423" defer></script>
-<script src="assets/js/app-picker.js?v=8" defer></script>
+<script src="assets/js/app.js?v=424" defer></script>
+<script src="assets/js/app-picker.js?v=9" defer></script>
 <script src="assets/js/app-media-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
 <script src="assets/js/app-puzzle.js?v=4" defer></script>
@@ -1166,7 +1166,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-periodicals.js?v=10" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=5" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=10" defer></script>
-<script src="assets/js/heritage-diagram-genea.js?v=1" defer></script>
+<script src="assets/js/heritage-diagram-genea.js?v=2" defer></script>
 <script src="assets/js/heritage-vector.js?v=18" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=12" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=8" defer></script>

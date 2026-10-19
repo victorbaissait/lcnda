@@ -734,6 +734,8 @@
             const kind = String(o.kind || 'person'), k = K[kindOf(kind.split(',')[0])], mixed = kind.includes(',');
             const title = o.title || (mixed ? 'Choisir…' : kind === 'person' ? (o.multiple ? 'Choisir des personnes' : 'Choisir une personne') : kind === 'place' ? (o.multiple ? 'Choisir des lieux' : 'Choisir un lieu') : `Choisir : ${k.label.replace(/^\S+\s/, '').toLowerCase()}`);
             const d = document.createElement('dialog'); d.className = 'modal small-modal pk-dialog';
+            // un seul choix : les lettres tapées pour chercher ne sont pas une saisie à garder (Échap ferme, sans « Fermer sans enregistrer ? »)
+            if (!o.multiple && !o.roles) d.dataset.ownClose = '1';
             d.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${esc(o.eyebrow || 'CHOISIR')}</span><h2>${esc(title)}</h2></div><button class="icon-button" value="cancel" type="button" data-pk-close aria-label="Fermer" data-ia-done="1">×</button></div>
                 <div class="pk-dialog-body">${o.label ? `<span class="pk-lab">${esc(o.label)}</span>` : ''}${pickerField({...o, name: o.name || 'pk_dialog', kind, value: o.value ?? null, inline: true})}</div>
                 <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-pk-close data-ia-done="1">Annuler</button>${o.multiple || o.roles ? `<button type="submit" class="button" data-ia-done="1">${esc(o.okLabel || 'Choisir')}</button>` : ''}</div></form>`;

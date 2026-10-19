@@ -366,11 +366,12 @@ function dgn_events(PDO $pdo, array $types, string $scope, int $root): array
 
 function diagram_genea_data(PDO $pdo, array $q): array
 {
-    $what = (string) ($q['what'] ?? '');
+    $q = array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $q); // ?types[]=… forgé : un texte vide, pas « Array »
+    $what = $q['what'] ?? '';
     $root = (int) ($q['root'] ?? 0);
     $gens = (int) ($q['gens'] ?? 5);
-    $scope = (string) ($q['scope'] ?? 'all') === 'ancestors' ? 'ancestors' : 'all';
-    $types = array_slice(explode(',', (string) ($q['types'] ?? 'birth')), 0, 5);
+    $scope = ($q['scope'] ?? 'all') === 'ancestors' ? 'ancestors' : 'all';
+    $types = array_slice(explode(',', $q['types'] ?? 'birth'), 0, 5);
     return match ($what) {
         'fan' => dgn_fan($pdo, $root, $gens),
         'desc' => dgn_desc($pdo, $root, $gens),

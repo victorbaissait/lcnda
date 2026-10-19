@@ -29,7 +29,7 @@ const GRAPH_MAX = 2000;                         // définitions gardées dans un
 const GRAPH_BATCH = 500;                        // définitions reçues en un envoi
 const GRAPH_THUMB_MAX = 120_000;                // vignette PNG/JPEG/WebP (data:…) en octets
 const GRAPH_KINDS = ['numbers', 'list', 'chart', 'appstat', 'screen', 'diagram', 'text', 'links', 'journey', 'app'];
-const GRAPH_WIDTHS = ['3', '4', '6', '8', '12'];
+const GRAPH_WIDTHS = ['12', '6', '4', '3', '8', '9']; // 1, ½, ⅓, ¼, ⅔, ¾ (WIDTHS de heritage-widgets.js)
 // clés dont la valeur est un objet côté navigateur (un {} vide reste un objet, pas une liste)
 const GRAPH_OBJECT_KEYS = ['valueColors', 'src', 'free', 'definition', 'sort', 'place', 'filters'];
 const GRAPH_STYLE_LABELS = ['bars' => 'Barres', 'columns' => 'Colonnes', 'pie' => 'Camembert', 'donut' => 'Anneau', 'line' => 'Courbe',

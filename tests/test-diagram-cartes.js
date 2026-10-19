@@ -106,6 +106,12 @@ step('tous les fonds, niveaux, cadrages et projections se dessinent', async () =
     }
     for (const [f] of DC.FRAMES_WORLD) { const s = R.svg(await R.KINDS.flowmap.resolve({ kind: 'flowmap', o: { map: 'monde', frame: f }, rows: [{ from: 'France', to: 'Canada', value: 3 }] }), 600); assert.doesNotMatch(s, /NaN|Infinity|data-geo-wait/, f); }
 });
+step('zone libre (cadrage à soi) plate, à l’envers ou hors du monde : la carte entière, jamais de NaN', async () => {
+    for (const view of ['200 0 300 10', '-500 10 -400 20', '0 90 10 95', '5 45 5 46', '10 50 0 40', 'a b c d', '', '1 2 3']) for (const k of MINE) {
+        const s = R.svg(await R.KINDS[k].resolve({ kind: k, ...R.KINDS[k].sample(), o: { ...(R.KINDS[k].sample().o || {}), frame: 'custom', view } }), 600);
+        assert.doesNotMatch(s, /NaN|Infinity|Dessin impossible|data-geo-wait/, `${k} « ${view} »`);
+    }
+});
 step('textes et couleurs piégés : échappés, couleurs refusées', async () => {
     const s1 = R.svg(await R.KINDS.choropleth.resolve({ kind: 'choropleth', o: { title: TRAP, unit: TRAP, noData: 'red;background:url(x)', borderColor: '"><script>', ramp: 'perso', lowColor: 'url(javascript:x)' }, series: [{ name: TRAP }], rows: [{ label: 'Ille-et-Vilaine', s0: '3', note: TRAP }, { label: TRAP, s0: 1 }] }), 800);
     const s2 = R.svg(await R.KINDS.flowmap.resolve({ kind: 'flowmap', o: { unit: TRAP, flowColor: 'expression(alert(1))' }, places: { [TRAP]: { lat: 48, lon: 0 } }, rows: [{ from: TRAP, to: 'Paris 48.85, 2.35', value: 5, color: 'url(x)' }] }), 800);
