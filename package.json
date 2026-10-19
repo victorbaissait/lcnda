@@ -32,6 +32,7 @@
     "test:media-av": "node tests/test-media-av.js",
     "test:recueils": "node tests/test-recueils.js",
     "test:calendars": "node tests/test-calendars.js",
+    "test:alphabets": "node tests/test-alphabets.js",
     "test:depouillements": "node tests/test-depouillements.js",
     "test:addrmap": "node tests/test-addrmap.js",
     "test:sosa-stats-tabs": "node tests/test-sosa-stats-tabs.js",
