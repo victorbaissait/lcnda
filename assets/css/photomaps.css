@@ -159,5 +159,8 @@
 .pm-pick + .pm-carte { padding-top: 14px; }
 @media (max-width: 700px) { .pm-pick { padding: 10px 10px 0; } }
 .pm-pick:empty { display: none; }
-.pm-pick .pm-filters { flex: 1 1 auto; min-width: 0; }
+.pm-pick { flex-wrap: nowrap; align-items: flex-start; }
+.pm-pick .pm-filters { flex: 1 1 0; min-width: 0; }
+.pm-pick > .button { flex: none; }
+@media (max-width: 700px) { .pm-pick { flex-wrap: wrap; } .pm-pick .pm-filters { flex-basis: 100%; } }
 .pm-pick .pm-filter { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; }

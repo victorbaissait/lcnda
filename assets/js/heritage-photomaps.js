@@ -710,10 +710,20 @@
         api('photomaps').then(r => {
             const nav = ws.querySelector('.pm-pick'); if (!nav || !nav.isConnected) return;
             const maps = r.maps || [], cur = currentId(), n = m => (m.photos || 0) + (m.videos || 0);
-            nav.innerHTML = `<span class="pm-filters" role="group" aria-label="Carte affichée"><button type="button" class="pm-filter${cur === 'all' ? ' is-active' : ''}" data-pmp="all">🗺 Toutes mes cartes <b>${maps.length}</b></button>${maps.map(m => `<button type="button" class="pm-filter${cur === m.id ? ' is-active' : ''}" data-pmp="${Number(m.id)}"><span class="pm-legdot" style="background:${esc(color(m.color))}" aria-hidden="true"></span> ${esc(m.name)} <b>${n(m)}</b></button>`).join('')}</span>${kiosk() ? '' : '<button type="button" class="button small secondary" data-pmp-new>＋ Nouvelle carte</button>'}`;
-            nav.addEventListener('click', e => {
+            // au-delà de 6 cartes : les 5 dernières modifiées (+ celle affichée), les autres par le menu de choix
+            const MAX = 6, recent = [...maps].sort((a, b) => String(b.updated_at || '').localeCompare(String(a.updated_at || '')) || b.id - a.id);
+            let shown = maps.length > MAX ? recent.slice(0, MAX - 1) : maps;
+            if (maps.length > MAX && cur !== 'all' && !shown.some(m => m.id === cur)) { const c = maps.find(m => m.id === cur); if (c) shown = [c, ...shown.slice(0, MAX - 2)]; }
+            const more = maps.length - shown.length;
+            nav.innerHTML = `<span class="pm-filters" role="group" aria-label="Carte affichée"><button type="button" class="pm-filter${cur === 'all' ? ' is-active' : ''}" data-pmp="all">🗺 Toutes mes cartes <b>${maps.length}</b></button>${shown.map(m => `<button type="button" class="pm-filter${cur === m.id ? ' is-active' : ''}" data-pmp="${Number(m.id)}"><span class="pm-legdot" style="background:${esc(color(m.color))}" aria-hidden="true"></span> ${esc(m.name)} <b>${n(m)}</b></button>`).join('')}${more > 0 ? `<button type="button" class="pm-filter" data-pmp-more>🔍 ${plural(more, 'autre carte', 'autres cartes')}…</button>` : ''}</span>${kiosk() ? '' : '<button type="button" class="button small secondary" data-pmp-new>＋ Nouvelle carte</button>'}`;
+            nav.addEventListener('click', async e => {
                 const b = e.target.closest('[data-pmp]');
                 if (b) { setCurrent(b.dataset.pmp === 'all' ? 'all' : Number(b.dataset.pmp)); A().renderSidebar(); renderCarte(++S().workspaceToken); return; }
+                if (e.target.closest('[data-pmp-more]')) { // le menu de choix unique, sorte « photomap »
+                    const it = await P().openPicker?.({kind: 'photomap', title: 'Choisir une carte de photos'});
+                    if (it?.id) { setCurrent(Number(it.id)); A().renderSidebar(); renderCarte(++S().workspaceToken); }
+                    return;
+                }
                 if (e.target.closest('[data-pmp-new]')) editMap(null, m => { if (m) { setCurrent(m.id); A().renderSidebar(); renderCarte(++S().workspaceToken); } });
             });
         }).catch(() => {});
