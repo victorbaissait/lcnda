@@ -203,6 +203,10 @@ try {
         require_once __DIR__ . '/lib/puzzle.php';
         puzzle_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['photomaps', 'photomap', 'photomap_all', 'photomap_thumb', 'photomap_write', 'photomap_upload'], true)) { // 📸 cartes de photos (lib/photomaps.php)
+        require_once __DIR__ . '/lib/photomaps.php';
+        photomaps_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     // Imports qui interrogent un site (Discogs, MusicBrainz…, DOI, ORCID, HAL) : rien n'est écrit dans la base, donc pas de
     // transaction d'écriture ouverte pendant l'attente du site (jusqu'à 25 s par demande) — sinon tout enregistrement fait
     // en même temps attendait, puis échouait en « base verrouillée ».

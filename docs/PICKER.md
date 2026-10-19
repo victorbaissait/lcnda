@@ -74,6 +74,10 @@ P.pickerField({name: 'label_ids', kind: 'label', multiple: true});
 // se posent comme un diagramme ; sans filtre = tous les graphiques). ext.pickMyGraph() s'en sert.
 P.pickerField({name: 'g', hiddenName: false, kind: 'graph', allowCreate: true, filter: {graph_kinds: 'chart,appstat'}});
 
+// 📸 une carte de photos (lib/photomaps.php, heritage-photomaps.js) : la valeur est l'id de la carte (photo_maps.id) ;
+// case vide = « toutes mes cartes » dans le widget ; « ↗ Ouvrir » ouvre la carte dans Cartes → 📸 Cartes de photos.
+P.pickerField({name: 'map', hiddenName: false, kind: 'photomap'});
+
 // 🎨 une fiche du moteur des œuvres (disque, morceau, œuvre d'art, exposition, type créé par l'utilisateur…) : docs/TYPES.md
 P.pickerField({name: 'release', kind: 'artwork', filter: {art_kind: 'release,master', art_person: 12}});
 // valeur : l'id de la fiche (items.id) ; l'item a art_kind (la sorte) ; « ↗ Ouvrir » ouvre la fiche dans son catalogue

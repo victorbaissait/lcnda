@@ -27,6 +27,7 @@
         ['screen', '📺', 'Écran de l’app', 'Carte, arbre, liste, Mes listes, fiche d’une personne, village…'],
         ['diagram', '🏛️', 'Diagramme', 'Un de « Mes diagrammes » : hémicycle, frise d’un groupe, camembert…'],
         ['widget', '📊', 'Widget ou graphique à soi', 'Ceux de l’Éditeur de widgets / de graphiques'],
+        ['photomap', '📸', 'Carte de photos', 'Une de tes cartes de photos (ou toutes), avec sa période'], // heritage-photomaps.js
     ];
     const kindOf = t => KINDS.find(k => k[0] === t) || KINDS[0];
     const WIDTHS = [['12', 'toute la largeur'], ['6', '½'], ['4', '⅓'], ['3', '¼'], ['8', '⅔'], ['9', '¾']];
@@ -198,6 +199,7 @@
                 return as.valid(b.target) ? `<iframe class="h-ct-frame" src="${esc(as.url(b))}" title="${esc(b.title || as.label(b.target))}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(b.height) || 560))}px"></iframe>` : '<p class="muted">Cet écran n’existe plus : ✎ pour en choisir un autre.</p>';
             }
             case 'diagram': return Number(b.diagram) && ext.diagramEmbedHtml ? ext.diagramEmbedHtml(b.diagram) : '<p class="muted">Aucun diagramme choisi : ✎ pour en choisir un.</p>';
+            case 'photomap': return `<div class="pm-widget" data-fi-photomap="${esc(JSON.stringify(b.config || {}))}"><p class="muted">Chargement…</p></div>`;
             case 'widget': return b.widget ? `<div class="h-fi-widget" data-fi-widget="${esc(b.widget)}"><p class="muted">Calcul…</p></div>` : '<p class="muted">Aucun widget choisi : ✎ pour en choisir un.</p>';
             default: return '';
         }
@@ -219,6 +221,7 @@
             ${editing ? '<div class="h-fi-addrow"><button type="button" class="button" data-fi-add>＋ Ajouter un bloc</button></div>' : ''}
         </section>`;
         const ws = A().$('#workspace');
+        ws.querySelectorAll('[data-fi-photomap]').forEach(el => { let c = {}; try { c = JSON.parse(el.dataset.fiPhotomap || '{}'); } catch (_) {} if (ext.photomapEmbed) ext.photomapEmbed(el, c); else el.innerHTML = '<p class="muted">Carte de photos indisponible.</p>'; });
         ws.querySelectorAll('[data-fi-widget]').forEach(el => { if (ext.renderCustomWidgetInto) ext.renderCustomWidgetInto(el, el.dataset.fiWidget).catch?.(() => { el.innerHTML = '<p class="muted">Ce widget n’existe plus.</p>'; }); else el.innerHTML = '<p class="muted">Widget indisponible.</p>'; });
         A().bindTableLinks?.();
         ws.querySelector('.h-fi').addEventListener('click', async e => {
@@ -277,6 +280,7 @@
             <label>Hauteur<select name="height">${ext.appScreen.heights.map(([v, l]) => `<option value="${v}" ${String(b.height) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="sidebar" ${b.sidebar ? 'checked' : ''}> avec sa colonne de gauche (menus de l’écran)</label>
             <p class="muted">Mes listes, les listes de l’app, la carte, les arbres, les statistiques, la fiche d’une personne, un village… : tout écran de l’app se met dans la fiche, à jour.</p>` : '<p class="muted">Écrans indisponibles.</p>';
         if (b.type === 'diagram') { const items = ext.diagramItems?.() || []; body = `<label>Diagramme<select name="diagram"><option value="">— choisir —</option>${items.map(([id, l]) => `<option value="${id}" ${Number(b.diagram) === Number(id) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><p><button type="button" class="button small secondary" data-fi-dgnew>+ Nouveau diagramme</button></p><p class="muted">Graphiques → Mes diagrammes : le bloc montre toujours sa dernière version.</p>`; }
+        if (b.type === 'photomap') body = ext.photomapConfigHtml ? ext.photomapConfigHtml(b.config || {}) : '<p class="muted">Cartes de photos indisponibles.</p>';
         if (b.type === 'widget') {
             // 📈 le menu de choix commun (sorte « graph », tous mes widgets) ; le champ caché garde l'identifiant cw_…
             const defs = Object.values(ext.customWidgetDefs?.() || {}), cur = b.widget ? ext.customWidgetDefs?.()?.[b.widget] : null, info = cur ? ext.myGraphInfo?.(cur.id) : null;
@@ -305,6 +309,7 @@
                 if (b.type === 'people') { b.ids = String(f.fi_people || '').split(',').map(Number).filter(Boolean); b.note = f.note || ''; }
                 if (b.type === 'screen') { let target = f.target || 'module:carte'; const pid = Number(form.elements.fi_person?.value) || 0; if (target.startsWith('person:')) target = pid ? 'person:' + pid : 'module:personnes'; b.target = target; b.personName = (form.querySelector('.h-dialog-body') || form).dataset.fiPersonName ?? (pid ? b.personName || '' : ''); b.height = Number(f.height) || 560; b.sidebar = !!form.elements.sidebar?.checked; }
                 if (b.type === 'widget') b.widget = f.widget || '';
+                if (b.type === 'photomap') b.config = ext.photomapConfigRead ? ext.photomapConfigRead(form) : {};
                 if (b.type === 'diagram') b.diagram = Number(f.diagram) || 0;
                 if (fresh) cur.blocks.push(b); else cur.blocks[i] = b;
                 await save();

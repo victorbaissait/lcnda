@@ -351,6 +351,16 @@
         const bad = t => ({ok: false, text: t}), good = (label, extra = '') => ({ok: true, label, extra, ...(low ? {warn: `année ${low} : l’app ne range pas encore les dates d’avant l’an ${MIN_YEAR} (le texte est gardé tel quel, mais il ne sert ni au tri, ni aux âges, ni aux frises)`} : {})});
         const check = d => { if (!d) return null; if (d.error) return d; if (d.y === 0 || d.y !== undefined && d.y !== null && Number(d.y) === 0) return {error: 'date impossible : l’an 0 n’existe pas (on passe de l’an 1 avant J.-C. à l’an 1)'}; if (d.y > NOW_Y) return {error: `date dans le futur : ${d.label}`}; if (d.y && d.y < MIN_YEAR) low = d.y; return d; };
         let m;
+        // une heure après un jour précis : « 7 mai 1925 à 14 h 30 », « 12/08/2019 18:42:07 » (cartes de photos, frise)
+        if (!/^(?:entre|de|du|vers|environ|avant|apres)\s/.test(s) && (m = s.match(/^(.+?)(?:\s+a|\s*t|\s)\s*(\d{1,2})\s*(?:h|:)\s*(?:(\d{1,2})\s*(?:min|mn|m|:)?\s*(?:(\d{1,2})\s*s?)?)?\s*$/))) {
+            const d = check(oneDate(m[1]));
+            if (d && !d.error && d.k % 100) {
+                const hh = +m[2], mm = +(m[3] || 0), ss = +(m[4] || 0);
+                if (hh > 23 || mm > 59 || ss > 59) return bad(`heure impossible : ${m[2]} h ${m[3] || '00'}${m[4] ? ` ${m[4]} s` : ''}`);
+                return good(`${d.label} à ${hh} h ${String(mm).padStart(2, '0')}${ss ? ` ${String(ss).padStart(2, '0')} s` : ''}`, d.extra || '');
+            }
+            if (d?.error) return bad(d.error);
+        }
         if ((m = s.match(/^(?:entre|de|du)\s+(.+?)\s+(?:et|a|au|-)\s+(.+)$/))) {
             const a = check(oneDate(m[1])), b = check(oneDate(m[2]));
             if (a?.error) return bad(a.error); if (b?.error) return bad(b.error);

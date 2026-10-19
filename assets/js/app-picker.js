@@ -36,6 +36,7 @@
         diagram: {sym: '🏛️', add: '＋ Ajouter un diagramme…', one: 'diagramme', none: 'Aucun diagramme', label: '🏛️ Diagrammes'},
         oldmap: {sym: '🗺️', add: '＋ Ajouter une carte…', one: 'carte', fem: true, none: 'Aucune carte', label: '🗺️ Cartes'},
         act: {sym: '📜', add: '＋ Ajouter une transcription…', one: 'transcription', fem: true, none: 'Aucune transcription', label: '📜 Transcriptions'},
+        photomap: {sym: '📸', add: '＋ Ajouter une carte de photos…', one: 'carte', fem: true, none: 'Aucune carte de photos', label: '📸 Cartes de photos'}, // lib/photomaps.php
     };
     const kindOf = k => K[k] ? k : 'person';
     const isPerson = it => it && (it.kind === 'person' || it.kind === 'animal');
@@ -264,6 +265,7 @@
     // ── la recherche dans une case ──
     const SS = new WeakMap();
     const S = s => { if (!SS.has(s)) SS.set(s, {seq: 0, q: '', groups: [], flat: [], more: false, next: 0, active: 0, filter: 'all', counts: null, loading: false, timer: 0, kind: ''}); return SS.get(s); };
+    const EMPTY_OK = ['label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph', 'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', 'photomap'];
     function minLen(c) { const kinds = c.opts.kind.split(','); return kinds.length > 1 ? 2 : (K[kinds[0]]?.min ?? 1); }
     function onFocus(c, s) { const inp = s.querySelector('.pk-input'); if (inp.value.trim().length >= minLen(c) || (!inp.value.trim() && !c.opts.kind.includes(',') && EMPTY_OK.includes(c.kind))) { if (s.querySelector('.pk-list').hidden) run(c, s); } }
     function schedule(c, s) {
@@ -603,6 +605,7 @@
         if (it.kind === 'house' && window.LCNDA_EXT?.openHouse) { window.LCNDA_EXT.openHouse({id: it.id}); return; }
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
         if (it.kind === 'graph' && window.LCNDA_EXT?.openMyGraph) { close(); window.LCNDA_EXT.openMyGraph(it.uid); return; }
+        if (it.kind === 'photomap' && app.state && app.setModule) { close(); app.state.mapMode = 'photos'; window.LCNDA_PHOTOMAPS?.setCurrent?.(it.id); app.setModule('carte'); return; } // 📸 heritage-photomaps.js
         // fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions : comme une tuile du widget « Raccourcis »
         if (window.LCNDA_EXT?.shortcuts?.openTarget && window.LCNDA_EXT.shortcuts.canOpen?.(it.kind)) { close(); window.LCNDA_EXT.shortcuts.openTarget(`${it.kind}:${it.id}`, {title: it.title}); return; }
         toast(`« ${it.title} » : ouvre-le depuis son outil.`);

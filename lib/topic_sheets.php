@@ -9,7 +9,7 @@ declare(strict_types=1);
  * rattachés à la fiche (family_collection_media, type « topic_sheet », rôle = le bloc).
  */
 
-const TOPIC_BLOCK_TYPES = ['text', 'images', 'people', 'dates', 'quote', 'links', 'divider', 'screen', 'widget', 'diagram'];
+const TOPIC_BLOCK_TYPES = ['text', 'images', 'people', 'dates', 'quote', 'links', 'divider', 'screen', 'widget', 'diagram', 'photomap']; // photomap : 📸 carte de photos (lib/photomaps.php)
 const TOPIC_WIDTHS = ['3', '4', '6', '8', '9', '12'];
 
 function topic_text($v, int $max): string
@@ -52,6 +52,12 @@ function topic_clean_block($b): ?array
                 if ($u !== '' || $l !== '') { $rows[] = ['label' => $l, 'url' => $u, 'note' => topic_text($r['note'] ?? '', 500)]; }
             }
             $out['rows'] = $rows; break;
+        case 'photomap': // 📸 une carte de photos (ou toutes : mapId vide), sa période, le filtre photos / vidéos
+            $c = is_array($b['config'] ?? null) ? $b['config'] : [];
+            $out['config'] = ['mapId' => max(0, (int) ($c['mapId'] ?? 0)) ?: null, 'mapName' => topic_text($c['mapName'] ?? '', 160),
+                'type' => in_array($c['type'] ?? '', ['all', 'image', 'video'], true) ? $c['type'] : 'all', 'period' => topic_text($c['period'] ?? '', 120),
+                'height' => max(220, min(1200, (int) ($c['height'] ?? 380))), 'track' => !empty($c['track'])];
+            break;
         case 'screen':
             $t = topic_text($b['target'] ?? '', 200);
             $out['target'] = preg_match('/^[a-z_]+:[A-Za-z0-9_:.\-]{1,160}$/', $t) ? $t : 'module:carte';

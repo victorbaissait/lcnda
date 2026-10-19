@@ -14,13 +14,14 @@ declare(strict_types=1);
 
 const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'battue', 'label', 'house', 'periodical', 'employer', 'census', 'artwork', 'graph',
     'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', // ces 7 : lib/widget_links.php (widget « Raccourcis »)
-];
+    'photomap']; // 📸 cartes de photos (lib/photomaps.php)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
     'periodical' => '📰 Revues', 'employer' => '🏭 Employeurs', 'census' => '📋 Recensements',
     'artwork' => '🎨 Œuvres', 'graph' => '📈 Graphiques',
     'sheet' => '📒 Fiches', 'atelier' => '📚 Atelier', 'board' => '🧩 Tableaux', 'layout' => '📐 Mises en page', 'diagram' => '🏛️ Diagrammes', 'oldmap' => '🗺️ Cartes', 'act' => '📜 Transcriptions',
+    'photomap' => '📸 Cartes de photos',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -177,6 +178,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             // 🔗 sortes du widget « Raccourcis » (lib/widget_links.php) : fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions
+            'photomap' => (static function () use ($pdo, $q, $offset, $limit) { require_once __DIR__ . '/photomaps.php'; return picker_photomaps($pdo, $q, $offset, $limit); })(), // 📸 lib/photomaps.php
             'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act' => function_exists($fn = defined('WIDGET_LINK_PICKER_KINDS') ? (WIDGET_LINK_PICKER_KINDS[$kind][0] ?? '') : '') ? $fn($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
         };
         return ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $r['total'], 'items' => $r['items']]],
