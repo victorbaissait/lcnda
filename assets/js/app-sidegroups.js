@@ -24,6 +24,10 @@
             const groups = (Array.isArray(p.groups) && p.groups.length ? p.groups : defaults()).filter(g => g && typeof g === 'object').map(g => ({id: /^g_\w{1,24}$/.test(g.id || '') && g.id !== MINE ? g.id : gid(), icon: String(g.icon || '📁').slice(0, 4), label: String(g.label || 'Groupe').slice(0, 60),
                 items: (Array.isArray(g.items) ? g.items : []).filter(k => keys.includes(k) && !seen.has(k) && seen.add(k))}));
             // une page ou une liste nouvelle (ou sortie d'un groupe effacé) : dans son groupe prévu, sinon dans le dernier
+            // un groupe de départ nouveau (ex. « 🎨 Créations et carrières ») : il apparaît à sa place, même avec un rangement déjà enregistré
+            keys.filter(k => !seen.has(k)).forEach(k => { const home = cfg.defaults.find(g => g[3].includes(k)); if (!home || groups.some(x => x.id === home[0])) return;
+                const at = cfg.defaults.indexOf(home), prev = cfg.defaults.slice(0, at).reverse().map(d => groups.findIndex(x => x.id === d[0])).find(i => i >= 0);
+                groups.splice(prev == null ? groups.length : prev + 1, 0, {id: home[0], icon: home[1], label: home[2], items: []}); });
             keys.filter(k => !seen.has(k)).forEach(k => { const home = cfg.defaults.find(g => g[3].includes(k)), g = groups.find(x => x.id === home?.[0]) || groups.at(-1);
                 if (!g) { groups.push({id: 'g_misc', icon: '📁', label: 'Autres', items: [k]}); return; }
                 const before = home ? home[3].slice(0, home[3].indexOf(k)).reverse().find(x => g.items.includes(x)) : null; // juste après sa voisine de départ

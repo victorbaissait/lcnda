@@ -1,0 +1,73 @@
+/* LCNDA — 🎨 Listes « Créations et carrières » (assets/js/heritage-creations.js).
+   Le reste vient des composants communs : barre H10 (.ui-listbar, ui.css), fiches (.ui-cards), tableau (.ar-t, artist.css).
+   Couleurs : jetons de app.css (--ink, --muted, --blue-bright…) ; mode sombre écrit à la main en bas. */
+
+.cr-page { min-width: 0; }
+.cr-body { min-width: 0; transition: opacity .15s; }
+.cr-body.is-loading { opacity: .55; pointer-events: none; }
+
+/* — « Tout » : les autres listes, avec leur nombre — */
+.cr-fams, .cr-choose { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 12px; }
+.cr-fam { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 32px; padding: 4px 10px; border: 1.5px solid var(--ink); background: var(--card-bg, #fff); color: var(--ink);
+    font: 600 13px/1.3 var(--font-family, system-ui, sans-serif); cursor: pointer; text-align: left; overflow-wrap: anywhere; }
+.cr-fam b { font-weight: 800; color: var(--blue-bright); font-variant-numeric: tabular-nums; }
+.cr-fam small { color: var(--muted); font-weight: 400; }
+.cr-fam:hover, .cr-fam:focus-visible { background: var(--blue-soft, #eaf2ff); }
+.cr-fam.is-other { border-style: dashed; }
+.cr-choose { margin: 0; }
+.cr-choose .cr-fam { flex: 1 1 220px; min-height: 40px; }
+
+/* — l'interrupteur « Ranger par sorte » dans la barre — */
+.cr-grouptg { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; white-space: nowrap; }
+
+/* — intertitres « 🎵 Morceaux (34) » — */
+.cr-kindh { margin: 18px 0 6px; font-size: 16px; line-height: 1.3; overflow-wrap: anywhere; }
+.cr-kindh small { color: var(--muted); font-weight: 600; font-size: 13px; }
+.cr-body > .cr-kindh:first-child { margin-top: 6px; }
+
+/* — le tableau — */
+.cr-scroll { max-width: 100%; position: relative; } /* les textes cachés (lecteur d'écran) restent dans le cadre qui défile */
+.cr-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.cr-table tbody tr.is-click { cursor: pointer; }
+.cr-table tbody tr.is-click:hover, .cr-table tbody tr.is-click:focus-visible { background: var(--blue-soft, #eaf2ff); outline: none; }
+.cr-table td { overflow-wrap: break-word; }
+.cr-table td:not(.cr-c-title):not(.cr-c-who) { min-width: 64px; }
+.cr-grouprow th { padding: 16px 7px 6px; background: none; text-transform: none; letter-spacing: 0; color: var(--ink); font-size: inherit; border-bottom: 2px solid var(--ink); }
+.cr-grouprow .cr-kindh { margin: 0; display: block; }
+.cr-table tbody:first-of-type .cr-grouprow th { padding-top: 8px; }
+.cr-table .cr-c-title { min-width: 160px; max-width: 360px; }
+.cr-table .cr-c-title b { overflow-wrap: anywhere; }
+.cr-table .cr-c-who { min-width: 120px; }
+.cr-table .cr-c-img { width: 52px; }
+.cr-table .cr-c-year { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cr-table .cr-c-go { width: 36px; text-align: right; }
+.cr-table .cr-c-kind { min-width: 110px; }
+.cr-sub { display: block; margin-top: 2px; }
+.cr-kind { white-space: nowrap; font-size: 12.5px; }
+.cr-thumb { width: 44px; height: 44px; object-fit: cover; border: 1.5px solid var(--ink); display: grid; place-items: center; font-size: 20px; background: var(--card-head-bg, #fafafa); }
+.cr-av-badge { font-size: 12px; }
+
+/* — la personne : rond d'initiales (bleu homme, rose femme, gris inconnu) — */
+.cr-who { display: inline-flex; align-items: center; gap: 6px; text-align: left; max-width: 100%; overflow-wrap: anywhere; }
+.cr-av { flex: none; width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; font: 800 10px/1 system-ui, sans-serif; color: #fff; background: #8a8f99; }
+.cr-av.m { background: #3a7bd5; } .cr-av.f { background: #d6538e; }
+.cr-with { display: block; color: var(--muted); margin-top: 2px; overflow-wrap: anywhere; }
+.cr-with i { font-style: normal; }
+
+/* — les fiches (vignettes) — */
+.cr-card .ui-card-thumb .cr-cov { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cr-card .ui-card-thumb .cr-cov.is-empty { display: grid; place-items: center; font-size: 46px; height: 100%; }
+.cr-card .ui-card-name { overflow-wrap: anywhere; }
+.cr-card small { overflow-wrap: anywhere; }
+
+@media (max-width: 640px) {
+    .cr-fam { font-size: 12.5px; }
+    .cr-table .cr-c-title { min-width: 140px; }
+    .cr-grouptg { white-space: normal; }
+}
+
+/* ═════ Mode sombre écrit à la main ═════ */
+:root[data-theme="dark"] .cr-fam { background: var(--card-bg, #242424); border-color: #666; }
+:root[data-theme="dark"] .cr-fam:hover, :root[data-theme="dark"] .cr-fam:focus-visible { background: var(--blue-soft, #1a2a3d); }
+:root[data-theme="dark"] .cr-thumb { border-color: #666; background: #2e2e2e; }
+:root[data-theme="dark"] .cr-table tbody tr.is-click:hover, :root[data-theme="dark"] .cr-table tbody tr.is-click:focus-visible { background: var(--blue-soft, #1a2a3d); }
