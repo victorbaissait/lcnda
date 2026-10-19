@@ -28,6 +28,14 @@
         census: {sym: '📋', add: '＋ Ajouter un recensement…', one: 'recensement', none: 'Aucun recensement', label: '📋 Recensements'},
         artwork: {sym: '🎨', add: '＋ Ajouter une fiche…', one: 'fiche', fem: true, none: 'Aucune fiche', label: '🎨 Œuvres'},
         graph: {sym: '📈', ph: 'Chercher un graphique… (ex. naissances, camembert)', add: '＋ Ajouter un graphique…', one: 'graphique', none: 'Aucun graphique', create: 'Créer le graphique', createEmpty: 'Nouveau graphique', label: '📈 Graphiques'},
+        // 🔗 sortes ajoutées pour le widget « Raccourcis » (lib/widget_links.php)
+        sheet: {sym: '📒', add: '＋ Ajouter une fiche…', one: 'fiche', fem: true, none: 'Aucune fiche', label: '📒 Fiches'},
+        atelier: {sym: '📚', add: '＋ Ajouter un projet…', one: 'projet', none: 'Aucun projet', label: '📚 Atelier'},
+        board: {sym: '🧩', add: '＋ Ajouter un tableau…', one: 'tableau', many: 'tableaux', none: 'Aucun tableau', label: '🧩 Tableaux'},
+        layout: {sym: '📐', add: '＋ Ajouter une mise en page…', one: 'mise en page', many: 'mises en page', fem: true, none: 'Aucune mise en page', label: '📐 Mises en page'},
+        diagram: {sym: '🏛️', add: '＋ Ajouter un diagramme…', one: 'diagramme', none: 'Aucun diagramme', label: '🏛️ Diagrammes'},
+        oldmap: {sym: '🗺️', add: '＋ Ajouter une carte…', one: 'carte', fem: true, none: 'Aucune carte', label: '🗺️ Cartes'},
+        act: {sym: '📜', add: '＋ Ajouter une transcription…', one: 'transcription', fem: true, none: 'Aucune transcription', label: '📜 Transcriptions'},
     };
     const kindOf = k => K[k] ? k : 'person';
     const isPerson = it => it && (it.kind === 'person' || it.kind === 'animal');
@@ -256,7 +264,6 @@
     // ── la recherche dans une case ──
     const SS = new WeakMap();
     const S = s => { if (!SS.has(s)) SS.set(s, {seq: 0, q: '', groups: [], flat: [], more: false, next: 0, active: 0, filter: 'all', counts: null, loading: false, timer: 0, kind: ''}); return SS.get(s); };
-    const EMPTY_OK = ['label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph'];
     function minLen(c) { const kinds = c.opts.kind.split(','); return kinds.length > 1 ? 2 : (K[kinds[0]]?.min ?? 1); }
     function onFocus(c, s) { const inp = s.querySelector('.pk-input'); if (inp.value.trim().length >= minLen(c) || (!inp.value.trim() && !c.opts.kind.includes(',') && EMPTY_OK.includes(c.kind))) { if (s.querySelector('.pk-list').hidden) run(c, s); } }
     function schedule(c, s) {
@@ -596,6 +603,8 @@
         if (it.kind === 'house' && window.LCNDA_EXT?.openHouse) { window.LCNDA_EXT.openHouse({id: it.id}); return; }
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
         if (it.kind === 'graph' && window.LCNDA_EXT?.openMyGraph) { close(); window.LCNDA_EXT.openMyGraph(it.uid); return; }
+        // fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions : comme une tuile du widget « Raccourcis »
+        if (window.LCNDA_EXT?.shortcuts?.openTarget && window.LCNDA_EXT.shortcuts.canOpen?.(it.kind)) { close(); window.LCNDA_EXT.shortcuts.openTarget(`${it.kind}:${it.id}`, {title: it.title}); return; }
         toast(`« ${it.title} » : ouvre-le depuis son outil.`);
     }
 

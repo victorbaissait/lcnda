@@ -53,6 +53,7 @@
     // d'autres fichiers ajoutent leur outil (arbre décoratif, transcription, diaporama, plan de maison…) : ext.editToolsExtra.push({key, icon, label, …})
     ext.editToolsExtra = ext.editToolsExtra || [];
     const baseTools = () => [...TOOLS, ...ext.editToolsExtra.filter(t => t.key !== 'house'), ...ext.editToolsExtra.filter(t => t.key === 'house')]; // la maison (plan et 3D) à la fin
+    ext.editToolsList = () => baseTools(); // pour le widget « Raccourcis » (heritage-shortcuts.js) : les projets de chaque outil
     // l'ordre des outils et ceux qu'on cache (⚙️ Ranger les outils) ; il en reste toujours au moins un
     const ORDER_KEY = 'genealogie-edit-tools-order';
     const toolPrefs = () => { try { const v = JSON.parse(localStorage.getItem(ORDER_KEY) || '{}'); return {order: Array.isArray(v?.order) ? v.order : [], hidden: Array.isArray(v?.hidden) ? v.hidden : []}; } catch (_) { return {order: [], hidden: []}; } };

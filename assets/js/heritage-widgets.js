@@ -219,6 +219,7 @@
             try { return [{appstat: await api('graph_stats', q)}]; } catch (error) { return [{error: error.message}]; }
         }
         if (d.kind === 'chart' && d.src?.source === 'manual') return [{free: cleanFree(d.free)}]; // ✍️ mes propres chiffres : rien à demander au serveur
+        if (d.kind === 'links') return ext.shortcuts ? [await ext.shortcuts.load(d)] : []; // 🔗 raccourcis : introuvables, vignettes, petites infos (heritage-shortcuts.js)
         const sources = d.kind === 'numbers' ? (d.counters || []).map(c => c.src || {}) : ['list', 'chart'].includes(d.kind) ? [d.src || {}] : [];
         return Promise.all(sources.map(async src => {
             try {
@@ -616,7 +617,7 @@
         if (d.kind === 'journey') return journeyHtml(d, datas);
         if (d.kind === 'diagram') return Number(d.diagramId) && ext.diagramEmbedHtml ? ext.diagramEmbedHtml(d.diagramId) : '<p class="muted">Choisis le diagramme dans l’Éditeur de widgets.</p>';
         if (d.kind === 'text') return d.text ? `<div class="h-cw-text">${nl(d.text)}</div>` : '<p class="muted">Texte vide.</p>';
-        if (d.kind === 'links') return linksHtml(d);
+        if (d.kind === 'links') return ext.shortcuts ? ext.shortcuts.html(d, datas?.[0]) : linksHtml(d);
         const err = datas.find(x => x?.error);
         if (err) return `<p class="h-offsite-sentence is-warn">${esc(err.error)}</p>`;
         if (d.kind === 'numbers') return `<div class="h-cw-numbers">${(d.counters || []).map((c, i) => { const x = datas[i] || {shown: []}; return `<div class="h-cw-number"><strong>${fmt(x.count ?? x.shown.length)}${x.count === undefined && x.truncated ? '+' : ''}</strong><span>${esc(c.label || 'Nombre')}</span></div>`; }).join('')}</div>`;
@@ -696,7 +697,7 @@
         {name: 'Ancêtres à sourcer', kind: 'list', icon: '🔎', src: P([{field: 'sosa'}, {field: 'no_source'}]), columns: ['name', 'sosa', 'birth'], sort: {col: 'sosa', dir: 'asc'}, limit: 10},
         {name: 'Morts avant 1900', kind: 'numbers', icon: '🕯️', counters: [{label: 'décès avant 1800', src: P([{field: 'death_year', to: 1799}])}, {label: 'de 1800 à 1899', src: P([{field: 'death_year', from: 1800, to: 1899}])}]},
         {name: 'Pense-bête', kind: 'text', icon: '📌', text: 'Demander aux AD les registres de 1793.\nAppeler tante Jeanne pour les photos 📸'},
-        {name: 'Mes raccourcis', kind: 'links', icon: '🔗', links: [{label: 'Carte', target: 'module:carte'}, {label: 'Lieux', target: 'list:places'}, {label: 'Apparence', target: 'maint:design'}, {label: 'Geneanet', target: 'url:https://www.geneanet.org/'}]},
+        {name: 'Mes raccourcis', kind: 'links', icon: '🔗', lLayout: 'grid', links: [{label: 'Carte', target: 'module:carte'}, {label: 'Lieux', target: 'list:places'}, {label: 'Apparence', target: 'maint:design'}, {label: 'Geneanet', target: 'url:https://www.geneanet.org/'}]},
     ];
     const appCatalog = () => A().orderedDashboardWidgetTypes(true).filter(([k]) => !String(k).startsWith('cw_')).map(([k, , l]) => [k, l]);
     function baseDef(over = {}) {
@@ -705,7 +706,7 @@
 
     /* ─── Écran de l'éditeur ─── */
     let editing = null, meta = null, previewSeq = 0, partIndex = -1; // partIndex : -1 = partie principale, sinon une partie en plus
-    const newPart = kind => ({kind, title: '', counters: kind === 'numbers' ? [{label: 'Personnes', src: P()}] : [], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: kind === 'links' ? [{label: 'Carte', target: 'module:carte'}] : [], steps: [], jSource: 'manual', jLayout: 'vertical', jMap: true, jDays: true, jText: true, jOrder: 'date'});
+    const newPart = kind => ({kind, title: '', counters: kind === 'numbers' ? [{label: 'Personnes', src: P()}] : [], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: kind === 'links' ? [{label: 'Carte', target: 'module:carte'}] : [], lLayout: 'grid', steps: [], jSource: 'manual', jLayout: 'vertical', jMap: true, jDays: true, jText: true, jOrder: 'date'});
     async function loadMeta() { meta = await api('my_lists'); return meta; }
     ext.maintenance.widget_editor = token => { mode = 'widgets'; return defsPage(token); };
     /** Maintenance → Éditeur de graphiques : les mêmes widgets, montrés en grand dans Graphiques → Statistiques */
@@ -824,7 +825,7 @@
             onOpen: dlg => {
                 const go = d => { editing = d; partIndex = -1; dlg.close(); renderEditor(++S().workspaceToken); };
                 const label = k => appCatalog().find(x => x[0] === k)?.[1] || k;
-                dlg.querySelectorAll('[data-cw-kind]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cwKind; go(baseDef({kind: k, icon: KINDS[k][0], name: k === 'app' ? '' : KINDS[k][1], base: k === 'app' ? appCatalog()[0]?.[0] || 'stats' : '', links: k === 'links' ? [{label: 'Carte', target: 'module:carte'}] : []})); }));
+                dlg.querySelectorAll('[data-cw-kind]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cwKind; go(baseDef({kind: k, icon: KINDS[k][0], name: k === 'app' ? '' : KINDS[k][1], base: k === 'app' ? appCatalog()[0]?.[0] || 'stats' : '', links: k === 'links' ? [{label: 'Carte', target: 'module:carte'}] : [], ...(k === 'links' ? {lLayout: 'grid'} : {})})); }));
                 dlg.querySelector('[data-cw-fromscreen]')?.addEventListener('click', () => {
                     const t = dlg.querySelector('[data-cw-fromscreen-sel]').value || 'module:carte';
                     go(baseDef({kind: 'screen', icon: '📺', name: t === 'person:' ? 'Fiche d’une personne' : ext.appScreen.label(t), target: t === 'person:' ? 'person:' : t, height: 560, sidebar: false, width: '12'}));
@@ -1096,6 +1097,7 @@
         if (d.kind === 'diagram') { const items = ext.diagramItems?.() || [];
             return `<div class="form-grid"><label class="span-2">Diagramme<select data-cw-diagram><option value="">— choisir —</option>${items.map(([id, l]) => `<option value="${id}" ${Number(d.diagramId) === Number(id) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><p class="span-2"><button type="button" class="button small secondary" data-cw-dgnew>+ Nouveau diagramme</button> ${Number(d.diagramId) ? '<button type="button" class="button small secondary" data-cw-dgedit>✎ Modifier ce diagramme</button>' : ''}</p><p class="span-2 muted">Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes).</p></div>`; }
         if (d.kind === 'text') return `<label>Texte<textarea rows="6" data-cw-text placeholder="Un pense-bête, une citation… Les émojis marchent 🌳">${esc(d.text || '')}</textarea></label>`;
+        if (d.kind === 'links' && ext.shortcuts) return ext.shortcuts.editorHtml(d); // 🔗 heritage-shortcuts.js
         if (d.kind === 'links') {
             const app = A(), opt = (v, l, cur) => `<option value="${esc(v)}" ${cur === v ? 'selected' : ''}>${esc(l)}</option>`;
             const targets = cur => `<optgroup label="Écrans">${Object.entries(app.appModules).filter(([k]) => k !== 'jeu').map(([k, v]) => opt('module:' + k, v[1], cur)).join('')}</optgroup><optgroup label="Listes">${app.defaultListTypes.map(([k, , l]) => opt('list:' + k, l, cur)).join('')}</optgroup><optgroup label="Maintenance">${app.defaultMaintenanceTabs.map(([k, , l]) => opt('maint:' + k, l, cur)).join('')}</optgroup>${opt('url:', 'Un site internet…', String(cur).startsWith('url:') ? 'url:' : '')}`;
@@ -1158,7 +1160,7 @@
         ws.querySelector('[data-cw-ondash]')?.addEventListener('change', e => { root._onDash = e.target.checked; });
         ws.querySelector('[data-cw-refresh]').addEventListener('click', preview);
         ws.querySelectorAll('[data-cw]').forEach(el => el.addEventListener('input', () => { root[el.dataset.cw] = el.value; preview(); }));
-        ws.querySelector('[data-cw-kindsel]').addEventListener('change', e => { const k = e.target.value; root.kind = k; if (k === 'app' && !root.base) root.base = appCatalog()[0]?.[0]; if (k === 'numbers' && !root.counters?.length) root.counters = [{label: 'Personnes', src: P()}]; partIndex = -1; again(); });
+        ws.querySelector('[data-cw-kindsel]').addEventListener('change', e => { const k = e.target.value; root.kind = k; if (k === 'app' && !root.base) root.base = appCatalog()[0]?.[0]; if (k === 'numbers' && !root.counters?.length) root.counters = [{label: 'Personnes', src: P()}]; if (k === 'links' && !root.links?.length) root.lLayout = 'grid'; partIndex = -1; again(); });
         ws.querySelectorAll('[data-cw-color]').forEach(b => b.addEventListener('click', () => { root.color = b.dataset.cwColor; again(); }));
         ws.querySelector('[data-cw-colorpick]').addEventListener('change', e => { root.color = e.target.value; again(); });
         // les parties en plus : choisir, ajouter, renommer, changer de sorte, déplacer, retirer
@@ -1279,6 +1281,7 @@
             });
         }
         if (d.kind === 'chart' && d.src?.source === 'manual') bindFree(box, d, again);
+        if (d.kind === 'links') ext.shortcuts?.bindEditor(box, d, {again, preview});
         function readRule(e, src) {
             const row = e.target.closest('[data-lr-i]'); if (!row) return;
             const r = src.definition.rules[Number(row.dataset.lrI)];
@@ -1354,7 +1357,8 @@
         }
         if (kind === 'text') out.text = str(d.text, 5000);
         if (kind === 'diagram') out.diagramId = Math.max(0, Number(d.diagramId) || 0);
-        if (kind === 'links') out.links = (Array.isArray(d.links) ? d.links : []).slice(0, 20).map(l => ({label: str(l.label, 60), target: /^(module|list|maint|person):[a-z0-9_]{1,40}$/i.test(String(l.target)) || /^url:https?:\/\/\S{1,500}$/i.test(String(l.target)) ? String(l.target) : ''})).filter(l => l.target);
+        if (kind === 'links' && ext.shortcuts) Object.assign(out, ext.shortcuts.cleanFields(d)); // 🔗 toutes les cibles, icône, couleur, disposition (heritage-shortcuts.js)
+        else if (kind === 'links') out.links = (Array.isArray(d.links) ? d.links : []).slice(0, 20).map(l => ({label: str(l.label, 60), target: /^(module|list|maint|person):[a-z0-9_]{1,40}$/i.test(String(l.target)) || /^url:https?:\/\/\S{1,500}$/i.test(String(l.target)) ? String(l.target) : ''})).filter(l => l.target);
         return out;
     }
     /** Dans le fichier : les types d'événements et les étiquettes par leur nom (leurs numéros changent d'une base à l'autre) */

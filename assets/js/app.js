@@ -1471,7 +1471,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     /* ═════ 💾 Réglages enregistrés : un fichier par réglage, pour le garder ou le donner ═════
        Fichier « lcnda-reglage-<outil>-<nom>.json » = {lcnda:'reglage', outil, nom, version:1, donnees}. */
-    const SETTING_TOOLS={presets:'les designs (Apparence → Mes propres designs)',raccourcis:'les raccourcis clavier',apparence:'l’apparence (designs)',tableaux:'les réglages des tableaux',animaux:'les animaux',atelier:'l’Atelier de recherche','palette-stats':'les couleurs des statistiques','palette-battues':'les couleurs des battues','palette-badges':'les couleurs des badges',artistes:'les réglages des artistes (champs affichés, page de l’artiste)','types-oeuvres':'les types d’œuvres (✎ Mes types)'};
+    const SETTING_TOOLS={presets:'les designs (Apparence → Mes propres designs)',raccourcis:'les raccourcis clavier','widget-raccourcis':'les widgets « Raccourcis »',apparence:'l’apparence (designs)',tableaux:'les réglages des tableaux',animaux:'les animaux',atelier:'l’Atelier de recherche','palette-stats':'les couleurs des statistiques','palette-battues':'les couleurs des battues','palette-badges':'les couleurs des badges',artistes:'les réglages des artistes (champs affichés, page de l’artiste)','types-oeuvres':'les types d’œuvres (✎ Mes types)'};
     const settingToolName=o=>SETTING_TOOLS[o]||`l’outil « ${o} »`;
     function settingFileName(outil,nom){return `lcnda-reglage-${safeExportFilename(outil,'outil')}-${safeExportFilename(nom,'reglage')}.json`;}
     /** ⤓ Exporter un réglage : télécharge le fichier .json */
@@ -8545,6 +8545,8 @@ ${backupSectionHtml()}
     window.LCNDA_APP.shortcutKit={IS_MAC,platform:SHORTCUT_PLATFORM,platformName:IS_MAC?'macOS':SHORTCUT_PLATFORM==='win'?'Windows':'Linux',eventCombo,comboLabel,kbd,
         osConflict:shortcutOsConflict,osNote:c=>(OS_SHORTCUT_NOTES[SHORTCUT_PLATFORM]||{})[c]||'',hasMod:shortcutHasMod,isFKey:shortcutIsFKey,isTyping:isTypingTarget,
         // ce que l'app prend même quand un outil est ouvert : les raccourcis du menu de l'application (⌘/Ctrl ou F…) et ceux qui marchent partout
+        // pour le widget « Raccourcis » (heritage-shortcuts.js) : les commandes et leur lancement (« ＋ Nouvelle personne », « Sauvegarde »…)
+        commands:()=>SHORTCUT_DEFS.map(d=>({id:d.id,group:d.group,label:d.label,ctx:d.ctx})),run:id=>runShortcutCommand(String(id||'')),
         appConflict:c=>SHORTCUT_DEFS.filter(d=>{const k=shortcutFor(d);return k&&k===c&&((d.menu&&!d.noTyping&&(shortcutHasMod(k)||shortcutIsFKey(k)))||d.ctx==='any');}).map(d=>d.label)};
     init();
 })();

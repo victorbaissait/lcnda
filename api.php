@@ -7,6 +7,7 @@ require __DIR__ . '/lib/heredis.php';  // fichier Hérédis natif (.hmw / .hered
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
 require_once __DIR__ . '/lib/graphs.php'; // 📈 mes graphiques (table custom_widgets, sorte « graph » du menu de choix)
+require_once __DIR__ . '/lib/widget_links.php'; // 🔗 widget « Raccourcis » : sortes en plus du menu de choix, état des tuiles (shortcut_info)
 require_once __DIR__ . '/lib/scene.php'; // 🎤 scène : coordonnées des lieux des concerts (assets/js/heritage-scene*.js)
 require_once __DIR__ . '/lib/layout_extra.php'; // 📐 mise en page : arbre dynamique, citations, vérificateur, index des lieux et métiers
 require_once __DIR__ . '/lib/diagram_genea.php'; // 📊 diagrammes Généalogie et Frises : éventail, soleil, réseau, arcs, Venn, calendrier, rose, spirale
@@ -376,6 +377,7 @@ try {
         'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
         'person_names' => json_response(person_names($pdo)),
         'picker_search' => json_response(picker_search($pdo, $_GET)),
+        'shortcut_info' => json_response(widget_links_info($pdo, $_GET)), // 🔗 tuiles du widget « Raccourcis » : introuvable ?, titre, vignette, nombre (lib/widget_links.php)
         'periodical_link_search' => json_response(periodical_link_search($pdo, (string) ($_GET['q'] ?? ''))),
         'press_ads' => json_response(press_ads_all($pdo)),
         'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),

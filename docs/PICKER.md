@@ -64,7 +64,9 @@ P.pickerField({name: 'places', kind: 'place', multiple: true});
 // 7. Une autre sorte
 P.pickerField({name: 'source_id', kind: 'source'});
 P.pickerField({name: 'label_ids', kind: 'label', multiple: true});
-// kinds : person, place, source, media, investigation, battue, label, house, periodical, employer, census, artwork, graph
+// kinds : person, place, source, media, investigation, battue, label, house, periodical, employer, census, artwork, graph,
+//         sheet (📒 Fiches), atelier (📚 projets de l'Atelier), board (🧩 tableaux), layout (📐 mises en page), diagram (🏛️), oldmap (🗺️ cartes anciennes), act (📜 transcriptions)
+//         — ces 7 dernières : lib/widget_links.php (widget « Raccourcis », assets/js/heritage-shortcuts.js)
 
 // 📈 un de mes graphiques (table custom_widgets, lib/graphs.php) : la valeur est le numéro de ligne (item.id) ; l'identifiant
 // du graphique (cw_…) est dans item.uid. Case vide = tous les graphiques ; « ＋ Nouveau graphique » / « ＋ Créer le graphique « … » »

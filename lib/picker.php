@@ -12,12 +12,15 @@ declare(strict_types=1);
  * Toutes les requêtes sont préparées ; q n'est jamais collé dans le SQL.
  */
 
-const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'battue', 'label', 'house', 'periodical', 'employer', 'census', 'artwork', 'graph'];
+const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'battue', 'label', 'house', 'periodical', 'employer', 'census', 'artwork', 'graph',
+    'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', // ces 7 : lib/widget_links.php (widget « Raccourcis »)
+];
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
     'periodical' => '📰 Revues', 'employer' => '🏭 Employeurs', 'census' => '📋 Recensements',
     'artwork' => '🎨 Œuvres', 'graph' => '📈 Graphiques',
+    'sheet' => '📒 Fiches', 'atelier' => '📚 Atelier', 'board' => '🧩 Tableaux', 'layout' => '📐 Mises en page', 'diagram' => '🏛️ Diagrammes', 'oldmap' => '🗺️ Cartes', 'act' => '📜 Transcriptions',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -173,6 +176,8 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'census' => picker_census($pdo, $q, $offset, $limit),
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
+            // 🔗 sortes du widget « Raccourcis » (lib/widget_links.php) : fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions
+            'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act' => function_exists($fn = defined('WIDGET_LINK_PICKER_KINDS') ? (WIDGET_LINK_PICKER_KINDS[$kind][0] ?? '') : '') ? $fn($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
         };
         return ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $r['total'], 'items' => $r['items']]],
             'more' => $offset + $limit < $r['total']];
