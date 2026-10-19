@@ -61,8 +61,9 @@ function act_transcriptions_page(PDO $pdo, array $q): array
     $place = trim(safe_text($q['place'] ?? ''));
     if ($place !== '') { $where[] = "t.place LIKE ? ESCAPE '\\'"; $args[] = '%' . str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $place) . '%'; }
     $from = safe_int($q['from'] ?? 0); $to = safe_int($q['to'] ?? 0);
-    if ($from) { $where[] = 'act_year(t.date_text) >= ?'; $args[] = $from; }
-    if ($to) { $where[] = 'act_year(t.date_text) <= ?'; $args[] = $to; }
+    // CAST : PDO envoie les valeurs en texte, et pour SQLite un nombre est toujours « plus petit » qu'un texte (le filtre ne trouvait rien)
+    if ($from) { $where[] = 'act_year(t.date_text) >= CAST(? AS INTEGER)'; $args[] = $from; }
+    if ($to) { $where[] = 'act_year(t.date_text) <= CAST(? AS INTEGER)'; $args[] = $to; }
     $statusSql = "COALESCE(NULLIF(json_extract(t.data_json, '$.status'), ''), CASE WHEN trim(t.body) = '' THEN 'todo' ELSE 'doing' END)";
     $status = (string) ($q['status'] ?? '');
     if (in_array($status, ['todo', 'doing', 'done'], true)) { $where[] = "$statusSql = ?"; $args[] = $status; }
@@ -112,7 +113,8 @@ function act_transcription_get(PDO $pdo, int $id): array
 function act_transcription_clean_data(PDO $pdo, $data): array
 {
     $data = is_array($data) ? $data : [];
-    $num = static fn($v) => is_numeric($v) ? round((float) $v, 4) : 0;
+    // « 1e999 » est un nombre pour PHP mais devient l'infini : json_encode échouait et les zones et personnes de l'acte étaient perdues
+    $num = static fn($v) => is_numeric($v) && is_finite((float) $v) ? max(-1e7, min(1e7, round((float) $v, 4))) : 0;
     $zones = [];
     foreach (array_slice(is_array($data['zones'] ?? null) ? $data['zones'] : [], 0, 2000) as $z) {
         if (!is_array($z)) { continue; }
@@ -127,7 +129,7 @@ function act_transcription_clean_data(PDO $pdo, $data): array
         $people[] = ['name' => mb_substr(safe_text($p['name'] ?? ''), 0, 160), 'role' => mb_substr(safe_text($p['role'] ?? ''), 0, 60), 'person_id' => $pid, 's' => max(0, (int) ($p['s'] ?? 0)), 'e' => max(0, (int) ($p['e'] ?? 0))];
     }
     $view = is_array($data['view'] ?? null) ? $data['view'] : [];
-    $range = static fn($v, float $min, float $max, float $def) => is_numeric($v) ? max($min, min($max, round((float) $v, 3))) : $def;
+    $range = static fn($v, float $min, float $max, float $def) => is_numeric($v) && is_finite((float) $v) ? max($min, min($max, round((float) $v, 3))) : $def;
     $rot = ((int) ($view['rot'] ?? 0) % 360 + 360) % 360;
     // « 🎚 Mieux voir » : les réglages de l'image retenus pour cet acte (des nombres bornés, rien d'autre)
     $cleanView = ['contrast' => $range($view['contrast'] ?? 100, 50, 300, 100), 'bright' => $range($view['bright'] ?? 100, 40, 220, 100), 'invert' => !empty($view['invert']), 'rot' => $rot - $rot % 90, 'gray' => !empty($view['gray']),
@@ -144,11 +146,14 @@ function save_act_transcription(PDO $pdo, array $data): array
     act_transcriptions_ensure($pdo);
     $id = safe_int($data['id'] ?? 0);
     $mediaId = safe_int($data['media_id'] ?? 0);
-    if ($mediaId) { $c = $pdo->prepare('SELECT 1 FROM media WHERE id=?'); $c->execute([$mediaId]); if (!$c->fetchColumn()) { throw new RuntimeException('Image de l’acte introuvable.'); } }
+    if ($mediaId) { $c = $pdo->prepare('SELECT 1 FROM media WHERE id=?'); $c->execute([$mediaId]);
+        // « ↶ Annuler » d'une suppression : si l'image a été supprimée entre-temps, le texte revient quand même (sans image)
+        if (!$c->fetchColumn()) { if (empty($data['restore'])) { throw new RuntimeException('Image de l’acte introuvable.'); } $mediaId = 0; } }
     $kind = in_array($data['kind'] ?? '', TRANSCRIPTION_KINDS, true) ? $data['kind'] : 'autre';
     $title = mb_substr(safe_text($data['title'] ?? ''), 0, 200) ?: 'Acte sans titre';
-    $body = mb_substr(str_replace("\0", '', (string) (is_scalar($data['body'] ?? '') ? $data['body'] : '')), 0, 200000);
-    $json = json_encode(act_transcription_clean_data($pdo, $data['data'] ?? []), JSON_UNESCAPED_UNICODE);
+    $body = mb_substr(str_replace("\0", '', (string) (is_scalar($data['body'] ?? '') ? ($data['body'] ?? '') : '')), 0, 200000);
+    $json = json_encode(act_transcription_clean_data($pdo, $data['data'] ?? []), JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
+    if ($json === false) { throw new RuntimeException('Zones ou personnes de l’acte illisibles : rien n’a été changé.'); }
     $vals = [$title, $kind, $mediaId ?: null, mb_substr(safe_text($data['date_text'] ?? ''), 0, 120), mb_substr(safe_text($data['place'] ?? ''), 0, 160), mb_substr(safe_text($data['source'] ?? ''), 0, 300), $body, $json];
     if ($id) {
         $s = $pdo->prepare('UPDATE act_transcriptions SET title=?, kind=?, media_id=?, date_text=?, place=?, source=?, body=?, data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?');

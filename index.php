@@ -49,7 +49,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/puzzle.css?v=3">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=1">
-    <link rel="stylesheet" href="assets/css/transcribe.css?v=2">
+    <link rel="stylesheet" href="assets/css/transcribe.css?v=3">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=1">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=1" id="lc-frame-css" media="not all">
@@ -1105,7 +1105,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=422" defer></script>
+<script src="assets/js/app.js?v=423" defer></script>
 <script src="assets/js/app-picker.js?v=8" defer></script>
 <script src="assets/js/app-media-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
@@ -1116,7 +1116,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-carte.js?v=8" defer></script>
 <script src="assets/js/app-enquetes.js?v=7" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=10" defer></script>
-<script src="assets/js/app-harmony.js?v=6" defer></script>
+<script src="assets/js/app-harmony.js?v=7" defer></script>
 <script src="assets/js/app-ui.js?v=9" defer></script>
 <script src="assets/js/app-access.js?v=5" defer></script>
 <script src="assets/js/app-sidegroups.js?v=7" defer></script>
@@ -1143,7 +1143,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-atelier-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-voters.js?v=4" defer></script>
 <script src="assets/js/heritage-widgets.js?v=38" defer></script>
-<script src="assets/js/heritage-shortcuts.js?v=1" defer></script>
+<script src="assets/js/heritage-shortcuts.js?v=2" defer></script>
 <script src="assets/js/heritage-tabs.js?v=10" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
 <script src="assets/js/heritage-employers.js?v=3" defer></script>
@@ -1205,16 +1205,16 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-profils.js?v=4" defer></script>
 <script src="assets/js/heritage-profils-politique.js?v=2" defer></script>
 <script src="assets/js/heritage-profils-sport.js?v=2" defer></script>
-<script src="assets/js/heritage-profils-liste.js?v=3" defer></script>
+<script src="assets/js/heritage-profils-liste.js?v=4" defer></script>
 <script src="assets/js/heritage-blocs.js?v=3" defer></script>
 <script src="assets/js/heritage-blocs-press.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-awards.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=1" defer></script>
 <script src="assets/js/heritage-creations.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe-view.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=9" defer></script>
-<script src="assets/js/heritage-photomaps-time.js?v=1" defer></script>
-<script src="assets/js/heritage-photomaps.js?v=1" defer></script>
+<script src="assets/js/heritage-transcribe-view.js?v=2" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=10" defer></script>
+<script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
+<script src="assets/js/heritage-photomaps.js?v=2" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=1" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=10" defer></script>
 <script src="assets/js/heritage-keynote.js?v=9" defer></script>

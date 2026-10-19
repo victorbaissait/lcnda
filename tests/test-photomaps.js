@@ -117,9 +117,39 @@ const ffmpeg = ['/usr/bin/ffmpeg', '/usr/local/bin/ffmpeg', '/opt/homebrew/bin/f
 if (ffmpeg) spawnSync(ffmpeg, ['-v', 'error', '-y', '-f', 'lavfi', '-i', 'testsrc=duration=2:size=160x120:rate=10', '-pix_fmt', 'yuv420p', '-metadata', 'location=+44.8378-000.5792/', '-metadata', 'creation_time=2024-02-03T11:12:13Z', path.join(fx, 'real.mp4')]);
 const hasReal = ffmpeg && fs.existsSync(path.join(fx, 'real.mp4'));
 
-const meta = JSON.parse(php(String.raw`require 'lib/photomaps.php'; $o=[]; foreach (glob($argv[1].'/*') as $f) { $o[basename($f)] = pm_meta_read($f); }
+// fichiers piégés : décalages circulaires ou hors limites, nombre d'entrées énorme, rationnels à 0, types inattendus, atomes de
+// taille 0, 1 ou 64 bits, imbrication profonde, entrées HEIC trop courtes, PNG à chunk géant, fichiers tronqués
+const traps = (() => {
+    const le16 = n => { const b = Buffer.alloc(2); b.writeUInt16LE(n); return b; }, le32 = n => { const b = Buffer.alloc(4); b.writeUInt32LE(n >>> 0); return b; };
+    const ent = (tag, type, count, val) => Buffer.concat([le16(tag), le16(type), le32(count), Buffer.concat([val, Buffer.alloc(4)]).subarray(0, 4)]);
+    const head = Buffer.concat([Buffer.from('II', 'latin1'), le16(42), le32(8)]);
+    const jpg = t => Buffer.concat([Buffer.from([0xFF, 0xD8]), exifApp1(t), Buffer.from([0xFF, 0xD9])]);
+    const exOff = 8 + 2 + 24 + 4, ex = Buffer.concat([le16(2), ent(0x9011, 3, 2, Buffer.concat([le16(1), le16(2)])), ent(0x9003, 3, 1, le16(7)), le32(0)]);
+    const gOff = exOff + ex.length, rats = gOff + 2 + 48 + 4;
+    const g = Buffer.concat([le16(4), ent(1, 3, 1, le16(5)), ent(2, 5, 3, le32(rats)), ent(3, 3, 1, le16(5)), ent(4, 5, 3, le32(rats)), le32(0), Buffer.alloc(24)]);
+    let deep = Buffer.from('x'); for (let i = 0; i < 2000; i++) deep = box('meta', deep);
+    const ftypMp4 = box('ftyp', Buffer.from('isom', 'latin1'), be32(0));
+    return {
+        'trap-circ.jpg': jpg(Buffer.concat([head, le16(2), ent(0x8769, 4, 1, le32(8)), ent(0x8825, 4, 1, le32(8)), le32(8)])),
+        'trap-oob.jpg': jpg(Buffer.concat([head, le16(2), ent(0x8769, 4, 1, le32(0xFFFFFFF0)), ent(0x8825, 4, 1, le32(0x7FFFFFFF)), le32(0)])),
+        'trap-count.jpg': jpg(Buffer.concat([head, le16(65535), ...Array(50).fill(ent(0x0112, 3, 0xFFFFFFFF, le16(1)))])),
+        'trap-types.jpg': jpg(Buffer.concat([head, le16(2), ent(0x8769, 4, 1, le32(exOff)), ent(0x8825, 4, 1, le32(gOff)), le32(0), ex, g])), // rationnels 0/0, types inattendus
+        'trap-trunc.jpg': files.gps.subarray(0, 40),
+        'trap-giant.png': Buffer.concat([Buffer.from('\x89PNG\r\n\x1a\n', 'latin1'), be32(0xFFFFFFF0), Buffer.from('IHDR', 'latin1'), Buffer.alloc(20)]),
+        'trap-zero.mp4': Buffer.concat([ftypMp4, be32(0), Buffer.from('moov', 'latin1'), be32(0), Buffer.from('udta', 'latin1')]),
+        'trap-one.mp4': Buffer.concat([ftypMp4, be32(1), Buffer.from('moov', 'latin1'), Buffer.from([0, 0, 0, 0, 0, 0, 0, 1]), be32(7), Buffer.from('mvhd', 'latin1')]),
+        'trap-64neg.mp4': Buffer.concat([ftypMp4, be32(1), Buffer.from('moov', 'latin1'), Buffer.alloc(8, 0xFF)]),
+        'trap-deep.mp4': Buffer.concat([ftypMp4, box('moov', box('udta', deep), box('meta', deep))]),
+        'trap-many.mp4': Buffer.concat([ftypMp4, ...Array(20000).fill(box('free')), box('moov', ...Array(20000).fill(box('free')))]),
+        'trap-infe.heic': Buffer.concat([box('ftyp', Buffer.from('heic', 'latin1'), be32(0)), box('meta', full(0), box('iinf', full(0), be16(2), box('infe', full(2)), box('infe', full(3), Buffer.from([0, 0]))), box('iloc', full(0), Buffer.from([0x44, 0]), be16(0)))]),
+    };
+})();
+for (const [k, b] of Object.entries(traps)) fs.writeFileSync(path.join(fx, k), b);
+
+const meta = JSON.parse(php(String.raw`require 'lib/photomaps.php'; $warn=[]; set_error_handler(function($n,$s,$f,$l) use (&$warn){ $warn[]=basename($f).":$l $s"; return true; }); $o=[]; $slow=[];
+foreach (glob($argv[1].'/*') as $f) { $t=microtime(true); $o[basename($f)] = pm_meta_read($f); if (microtime(true)-$t > 1) { $slow[]=basename($f); } }
 $dates=[]; foreach (['7 mai 1925 à 14 h 30','12/08/2019 18:42:07','2019-08-12 18:42','14 juillet 2023','vers 1950','avant 1800','entre 1880 et 1885','juillet 1936','an II','années 1950','31 février 2020','14 juillet 2023 à 25 h','n importe quoi'] as $s) { $dates[$s]=pm_date_parse($s); }
-echo json_encode(['meta'=>$o,'dates'=>$dates,'frdt'=>pm_fr_datetime('2023-07-14 10:22:05')]);`, [fx]));
+echo json_encode(['meta'=>$o,'dates'=>$dates,'frdt'=>pm_fr_datetime('2023-07-14 10:22:05'),'warn'=>array_values(array_unique($warn)),'slow'=>$slow,'peak'=>memory_get_peak_usage()]);`, [fx]));
 
 /* ─── serveur ─── */
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
@@ -196,6 +226,14 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, enco
         out.thumb = await get('photomap_thumb', `m=${g.media_id}`);
         out.thumbVid = out.items.real ? await get('photomap_thumb', `m=${out.items.real.media_id}`) : null;
         out.thumbBad = await get('photomap_thumb', 'm=999999');
+        out.thumbDirs = [fs.existsSync(path.join(dir, 'cache', 'photomaps-mini')), fs.existsSync(path.join(dir, 'media', 'photomaps-mini'))];
+        out.oneCoord = await post({ op: 'update_item', id: g.id, lat: 48.1 });
+        // une personne liée puis supprimée : la carte n'y renvoie plus
+        php(String.raw`require 'lib/bootstrap.php'; $p=db(); $p->exec("INSERT INTO persons(first_name,last_name,gender) VALUES('Éphémère','Test','male')"); echo $p->lastInsertId();`);
+        out.mapGone = await post({ op: 'save_map', name: 'Lien perdu', person_id: 3 });
+        php(String.raw`require 'lib/bootstrap.php'; $p=db(); $p->exec("PRAGMA foreign_keys=OFF"); $p->exec("DELETE FROM persons WHERE id=3"); echo 'ok';`);
+        out.mapGoneGet = await get('photomap', `id=${out.mapGone.body.map.id}`);
+        await post({ op: 'delete_map', id: out.mapGone.body.map.id });
         out.picker = await get('picker_search', 'kind=photomap&q=vacances');
         out.pickerIds = await get('picker_search', `kind=photomap&ids=${mapId}`);
         // sécurité
@@ -231,6 +269,11 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, enco
         ['MOV : clés QuickTime ISO6709 et creationdate avec fuseau (heure locale gardée)', () => { const m = M['mov.mov']; near(m.lat, 37.7749); near(m.lon, -122.4194); assert.equal(m.taken, '2018-04-05 16:20:00'); assert.equal(m.tz, '-07:00'); }],
         ['vraie vidéo ffmpeg (si présent) : lieu et date lus', () => { if (!hasReal) return; const m = M['real.mp4']; near(m.lat, 44.8378); near(m.lon, -0.5792); assert.ok(m.taken.startsWith('2024-02-03 11:12:13')); assert.ok(m.duration > 1.5); }],
         ['fichier abîmé : rien, sans erreur', () => assert.deepEqual(M['broken.jpg'], [])],
+        ['fichiers piégés (EXIF circulaire, hors limites, 65 535 entrées, rationnels à 0, mauvais types, atomes 0 / 1 / 64 bits, 2 000 niveaux, HEIC trop court, PNG géant, tronqué) : rien, sans avertissement PHP, sans lenteur', () => {
+            for (const k of Object.keys(traps)) assert.ok(M[k] !== undefined && typeof M[k] === 'object', k);
+            assert.deepEqual(meta.warn, []); assert.deepEqual(meta.slow, []); assert.ok(meta.peak < 64 * 1024 * 1024, `mémoire ${meta.peak}`);
+            assert.equal(M['trap-types.jpg'].lat, undefined); assert.equal(M['trap-types.jpg'].tz, undefined);
+        }],
         ['dates C4 avec heure (PHP)', () => { const d = meta.dates; assert.deepEqual(d['7 mai 1925 à 14 h 30'], { from: '1925-05-07', to: '1925-05-07', prec: 'time', time: '14:30:00' }); assert.equal(d['12/08/2019 18:42:07'].time, '18:42:07'); assert.equal(d['2019-08-12 18:42'].time, '18:42:00');
             assert.equal(d['14 juillet 2023'].prec, 'day'); assert.equal(d['vers 1950'].prec, 'approx'); assert.deepEqual([d['entre 1880 et 1885'].from, d['entre 1880 et 1885'].to], ['1880-01-01', '1885-12-31']); assert.equal(d['juillet 1936'].to, '1936-07-31');
             assert.equal(d['an II'].from, '1793-09-22'); assert.equal(d['années 1950'].to, '1959-12-31'); assert.equal(d['31 février 2020'], null); assert.equal(d['14 juillet 2023 à 25 h'], null); assert.equal(d['n importe quoi'], null); assert.equal(meta.frdt, '14 juillet 2023 à 10:22:05'); }],
@@ -258,6 +301,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, enco
         ['supprimer une carte puis la remettre (↶ Annuler)', () => { assert.equal(out.listDel.body.maps.length, 1); assert.equal(out.listUndel.body.maps.length, 2); }],
         ['vignette : petite image JPEG, tournée selon l’EXIF ; média inconnu : 404', () => { assert.equal(out.thumb.status, 200); assert.match(out.thumb.type, /image\/jpeg/); assert.ok(out.thumb.body.length < 40000); assert.equal(out.thumbBad.status, 404);
             const dims = php(String.raw`$s=getimagesizefromstring(file_get_contents($argv[1])); echo $s[0].'x'.$s[1];`, [(() => { const f = path.join(fx, 'thumb.jpg'); fs.writeFileSync(f, out.thumb.body); return f; })()]); assert.equal(dims, '150x240'); }],
+        ['vignettes en cache dans le dossier de la généalogie (cache/), pas dans les médias (ni sauvegardées ni mélangées)', () => assert.deepEqual(out.thumbDirs, [true, false])],
+        ['une seule coordonnée : refusée (pas de remise dans « À placer » par erreur)', () => assert.equal(out.oneCoord.status, 422)],
+        ['personne liée supprimée depuis : plus de lien vers elle', () => { assert.equal(out.mapGone.body.map.person_id, 3); assert.equal(out.mapGoneGet.body.map.person_id, null); }],
         ['menu de choix : sorte « photomap »', () => { const it = out.picker.body.groups[0].items[0]; assert.equal(it.kind, 'photomap'); assert.equal(it.id, out.mapId); assert.match(it.meta, /photos/); assert.equal(out.pickerIds.body.groups[0].items.length, 1); }],
         ['sécurité : sans jeton CSRF, opération inconnue, fichier qui n’est pas une image, carte inconnue', () => { assert.equal(out.noCsrf.status, 419); assert.equal(out.badOp.status, 422); assert.equal(out.badRefuse.body.imported.length, 0); assert.equal(out.evil.body.imported.length, 0); assert.match(out.evil.body.refused[0].reason, /format/); assert.equal(out.missing.status, 404); }],
         ['mode consultation : lecture permise, écriture et import refusés', () => { assert.equal(out.kioskGet.status, 200); assert.equal(out.kioskPost.status, 423); assert.equal(out.kioskUp.status, 423); }],
@@ -265,7 +311,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, enco
             const ok = (s, step, label) => { const r = T.parseStep(s); assert.equal(r.ok, true, s); Object.entries(step).forEach(([k, v]) => assert.equal(r.step[k], v, `${s} ${k}`)); if (label) assert.equal(r.label, label); };
             ok('3j', { d: 3 }, '3 jours'); ok('3 j', { d: 3 }); ok('1 mois 12 jours 3 heures 49 minutes 28 secondes', { mo: 1, d: 12, h: 3, mi: 49, s: 28 }, '1 mois 12 jours 3 h 49 min 28 s');
             ok('1 mois 12 j 3 h 49 min 28 s', { mo: 1, d: 12, h: 3, mi: 49, s: 28 }); ok('2 ans 6 mois', { y: 2, mo: 6 }, '2 ans 6 mois'); ok('90 min', { mi: 90 }, '90 min'); ok('1h30', { h: 1, mi: 30 }); ok('1 sem', { w: 1 }, '1 semaine'); ok('10 ans', { y: 10 }); ok('1,5 j', { d: 1, h: 12 }); ok('2 h et 15 min', { h: 2, mi: 15 });
-            for (const bad of ['5', '3 zorg', '0 j', '1,5 mois', 'demain']) assert.equal(T.parseStep(bad).ok, false, bad);
+            for (const bad of ['5', '3 zorg', '0 j', '0 s', '1,5 mois', 'demain', '99999 ans', '-3 j', '1 mois - 2 j', '99999999999999999 s', '3000000000 min', '1e5 j']) assert.equal(T.parseStep(bad).ok, false, bad);
+            assert.match(T.parseStep('-3 j').error, /négatif/); assert.equal(T.parseStep('5000 ans').ok, true);
             assert.equal(T.parseStep(''), null);
         }],
         ['frise : mois et années dans le calendrier', () => {

@@ -216,7 +216,7 @@ function my_list_rows(PDO $pdo, int $listId): array
 {
     $s = $pdo->prepare('SELECT * FROM custom_lists WHERE id=?'); $s->execute([$listId]);
     $list = $s->fetch();
-    if (!$list) { throw new RuntimeException('Liste introuvable.'); }
+    if (!$list) { throw new LcndaBadInput('Cette liste n’existe plus.'); } // 422, pas une erreur du serveur (raccourci vers une liste supprimée)
     return my_list_rows_for($pdo, $list);
 }
 

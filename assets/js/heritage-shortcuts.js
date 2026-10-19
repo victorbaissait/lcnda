@@ -146,7 +146,7 @@
     /** existe encore ? (ce qui se vérifie sans le serveur) : true / false / null (on ne sait pas) */
     function existsLocal(t) {
         const ty = typeOf(t), v = String(t).slice(ty.length + 1);
-        if (RE.screen.test(t)) { if (ty === 'module') return !!A()?.appModules?.[v] && v !== 'jeu'; return ext.appScreen?.valid ? !!ext.appScreen.valid(t) : null; }
+        if (RE.screen.test(t)) { if (ty === 'module') return !!A()?.appModules && Object.prototype.hasOwnProperty.call(A().appModules, v) && v !== 'jeu'; return ext.appScreen?.valid ? !!ext.appScreen.valid(t) : null; }
         if (RE.tab.test(t)) return customTabs().some(x => x.id === v);
         if (RE.mygraph.test(t)) return myGraphs().some(x => x.id === v);
         if (RE.tool.test(t)) return !!toolOf(v);
@@ -251,7 +251,8 @@
         document.querySelectorAll('dialog[open].h-sc-dlg').forEach(dl => { try { dl.close(); } catch (_) {} });
         if (RE.url.test(t)) { const u = webUrl(t); if (u) window.open(u, '_blank', 'noopener,noreferrer'); return; }
         if (RE.screen.test(t) || RE.mylist.test(t)) {
-            if (ty === 'list' && link.view) { try { localStorage.setItem(LB + 'listes:' + v, JSON.stringify(link.view)); } catch (_) {} }
+            const vw = ty === 'list' ? cleanView(link.view) : undefined; // une vue relue de la base : nettoyée (bornée) avant d'aller dans la barre de la liste
+            if (vw) { try { localStorage.setItem(LB + 'listes:' + v, JSON.stringify(vw)); } catch (_) {} }
             if (existsLocal(t) === false) return toast('Cet écran n’existe plus.', 'error');
             return go(() => A().openCustomScreen(t));
         }
@@ -424,7 +425,7 @@
                 <label class="checkbox-line span-2"><input type="checkbox" data-sc-opt="lInfo" ${d.lInfo !== false ? 'checked' : ''}> Petite info en direct (années d’une personne, nombre d’éléments d’une liste…)</label></div>
             <p class="h-sc-n">${n ? `${plural(n, 'raccourci')} · ⠿ glisse ou ↑ ↓ pour ranger` : 'Aucun raccourci pour l’instant.'}</p>
             <ol class="h-sc-rows" data-sc-rows>${d.links.map((l, i) => rowHtml(l, i, n)).join('')}</ol>
-            <p class="h-sc-addbar"><button type="button" class="button small" data-sc-add ${n >= MAX_LINKS ? 'disabled' : ''}>＋ Ajouter des raccourcis…</button><button type="button" class="button small secondary" data-sc-addhead>＋ Intertitre</button></p>
+            <p class="h-sc-addbar"><button type="button" class="button small" data-sc-add ${n >= MAX_LINKS ? 'disabled' : ''}>＋ Ajouter des raccourcis…</button><button type="button" class="button small secondary" data-sc-addhead ${n >= MAX_LINKS ? 'disabled' : ''}>＋ Intertitre</button></p>
             <details class="h-sc-presets" data-sc-presets><summary>💾 Réglages enregistrés</summary>${presetsHtml()}</details></div>`;
     }
     const presets = () => { try { const v = JSON.parse(localStorage.getItem(PRESETS_KEY) || '[]'); return Array.isArray(v) ? v.filter(p => p && typeof p.name === 'string' && p.data) : []; } catch (_) { return []; } };
@@ -492,8 +493,8 @@
                 A().undoToast?.(`Raccourci « ${gone.label || gone.name || describe(gone.target).label} » retiré`, {undo: () => { d.links.splice(Math.min(i, d.links.length), 0, gone); redraw(); }, redo: () => { const j = d.links.indexOf(gone); if (j >= 0) d.links.splice(j, 1); redraw(); }});
                 return;
             }
-            if (e.target.closest('[data-sc-add]')) { const got = await chooseTargets(); if (!got?.length) return; const room = MAX_LINKS - d.links.length; d.links.push(...got.slice(0, room)); if (got.length > room) toast(`Au plus ${MAX_LINKS} raccourcis par widget.`, 'error'); return redraw(); }
-            if (e.target.closest('[data-sc-addhead]')) { d.links.push({id: newLinkId(), label: 'Intertitre', target: 'head:'}); redraw(); setTimeout(() => { const ins = box.querySelectorAll('[data-sc-row].is-head input'); ins[ins.length - 1]?.select(); }, 0); return; }
+            if (e.target.closest('[data-sc-add]')) { const got = await chooseTargets(); if (!got?.length) return; const room = Math.max(0, MAX_LINKS - d.links.length); d.links.push(...got.slice(0, room)); if (got.length > room) toast(`Au plus ${MAX_LINKS} raccourcis par widget.`, 'error'); return redraw(); }
+            if (e.target.closest('[data-sc-addhead]')) { if (d.links.length >= MAX_LINKS) return toast(`Au plus ${MAX_LINKS} raccourcis par widget (intertitres compris).`, 'error'); d.links.push({id: newLinkId(), label: 'Intertitre', target: 'head:'}); redraw(); setTimeout(() => { const ins = box.querySelectorAll('[data-sc-row].is-head input'); ins[ins.length - 1]?.select(); }, 0); return; }
             // 💾 Réglages enregistrés
             const sel = ed.querySelector('[data-sc-pset]'), list = presets(), cur = sel?.value === '' ? null : list[Number(sel?.value)];
             if (e.target.closest('[data-sc-papply]')) { if (!cur) return toast('Choisis d’abord un réglage.', 'error'); applyPreset(d, cur.data); toast(`Réglage « ${cur.name} » appliqué.`); return redraw(); }
@@ -528,6 +529,7 @@
     }
     /** propose le widget de raccourcis où ranger cette cible, puis l'y ajoute (↶ Annuler) */
     async function addToShortcuts(pick = currentTarget()) {
+        if (document.body.classList.contains('is-kiosk')) { toast('Mode consultation : on ne peut rien ajouter.', 'error'); return; }
         if (!pick || !validTarget(pick.target)) { toast('Cet écran ne peut pas devenir un raccourci.', 'error'); return; }
         if (!ext.saveCustomWidgetList || !ext.openDialog) { toast('Réessaie dans un instant.', 'error'); return; }
         const where = homes(), desc = describe(pick.target), name = pick.name || desc.label;
@@ -569,7 +571,7 @@
     document.addEventListener('click', e => { if (e.target.closest?.('[data-sc-star]')) { e.preventDefault(); addToShortcuts(); } });
     // sur la fiche d'une personne : à côté des signets
     ext.afterPerson = ext.afterPerson || [];
-    ext.afterPerson.push(() => { const bar = document.querySelector('#workspace .person-hero-actions'); if (bar && !bar.querySelector('[data-sc-star]')) bar.insertAdjacentHTML('beforeend', STAR.replace('button small secondary', 'button small secondary h-sc-star-hero')); });
+    ext.afterPerson.push(() => { const bar = document.querySelector('#workspace .person-hero-actions'); if (bar && !bar.querySelector('[data-sc-star]') && !document.body.classList.contains('is-kiosk')) bar.insertAdjacentHTML('beforeend', STAR.replace('button small secondary', 'button small secondary h-sc-star-hero')); });
     // en haut des listes, des Fiches, des enquêtes et de Graphiques : dans les boutons de l'en-tête de la page
     const STAR_MODULES = ['listes', 'fiches', 'enquetes', 'graphiques'];
     function placeStar() {

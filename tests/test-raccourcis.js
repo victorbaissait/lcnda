@@ -254,6 +254,37 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                 assert.ok(await p.$$eval('#sc-test .h-sc-tile', e => e.length) > 10);
                 await shot('07-liste-dans-une-fiche-390.png', await p.$('#sc-test'));
             });
+            await t('cibles forgées : « module:constructor », vue de liste énorme, mode consultation', async () => {
+                // un nom d'écran qui est une propriété de tout objet JavaScript ne casse pas l'app
+                await p.evaluate(async () => { await window.LCNDA_APP.setModule('dashboard'); await window.LCNDA_EXT.shortcuts.openTarget('module:constructor'); await window.LCNDA_EXT.shortcuts.openTarget('module:__proto__'); });
+                assert.equal(await p.evaluate(() => window.LCNDA_APP.state.module), 'dashboard');
+                await p.evaluate(() => window.LCNDA_APP.setModule('constructor'));
+                assert.equal(await p.evaluate(() => window.LCNDA_APP.state.module), 'personnes', 'setModule refuse « constructor »');
+                // une vue de liste forgée dans la base (sans nettoyage) : bornée avant d'aller dans la barre de la liste
+                await p.evaluate(async id => { const E = window.LCNDA_EXT, list = JSON.parse(JSON.stringify(E.customWidgetList())), d = list.find(x => x.id === id);
+                    d.links.push({id: 'l_vuefor1', target: 'list:events', view: {q: 'x'.repeat(5000), f: {big: 'y'.repeat(9000)}, sort: 'z'.repeat(300), view: '<b>'}}); await E.saveCustomWidgetList(list);
+                    await E.shortcuts.openTarget('list:events', E.customWidgetList().find(x => x.id === id).links.find(l => l.id === 'l_vuefor1') || d.links[d.links.length - 1]); }, WID);
+                const vw = await p.evaluate(() => JSON.parse(localStorage.getItem('lcnda-listbar:listes:events') || 'null'));
+                assert.ok(vw && vw.q.length <= 200 && vw.sort.length <= 40 && vw.view === 'list' && !vw.f.big, JSON.stringify(vw).slice(0, 200));
+                // 60 raccourcis au plus : « ＋ Intertitre » aussi
+                await p.evaluate(async id => { const E = window.LCNDA_EXT, list = JSON.parse(JSON.stringify(E.customWidgetList())), d = list.find(x => x.id === id);
+                    d.links = Array.from({length: 60}, (_, i) => ({id: 'l_max' + String(i).padStart(3, '0'), target: 'head:', label: 'T' + i})); await E.saveCustomWidgetList(list);
+                    const A = window.LCNDA_APP; A.state.maintenanceTab = 'widget_editor'; await A.setModule('maintenance'); }, WID);
+                await p.click(`[data-cw-edit="${WID}"]`);
+                await p.waitForSelector('[data-sc-ed] [data-sc-addhead]');
+                assert.equal(await p.$eval('[data-sc-ed] [data-sc-addhead]', b => b.disabled), true, '« ＋ Intertitre » désactivé à 60');
+                assert.equal(await p.$eval('[data-sc-ed] [data-sc-add]', b => b.disabled), true);
+                // mode consultation : pas de « ⭐ Raccourci » sur une fiche, et rien ne s'enregistre
+                const n0 = await p.evaluate(() => window.LCNDA_EXT.customWidgetList().length);
+                await p.evaluate(async () => { document.body.classList.add('is-kiosk'); await window.LCNDA_APP.openPersonById(1); });
+                await p.waitForSelector('#workspace .person-hero-actions', { timeout: 10000 });
+                await p.waitForTimeout(300);
+                assert.equal(await p.$$eval('.person-hero-actions [data-sc-star]', e => e.length), 0, 'pas d’étoile en consultation');
+                await p.evaluate(() => window.LCNDA_EXT.shortcuts.addToShortcuts({target: 'person:1', name: 'x'}));
+                assert.equal(await p.$$eval('dialog[open].h-sc-dlg', e => e.length), 0, 'pas de fenêtre en consultation');
+                assert.equal(await p.evaluate(() => window.LCNDA_EXT.customWidgetList().length), n0);
+                await p.evaluate(() => document.body.classList.remove('is-kiosk'));
+            });
             await t('aucun texte piégé exécuté, aucune erreur JavaScript', async () => {
                 assert.equal(await p.evaluate(() => window.__xss), undefined);
                 assert.deepEqual(errors, []);

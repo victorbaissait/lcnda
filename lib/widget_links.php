@@ -162,7 +162,7 @@ function widget_links_list_count(PDO $pdo, string $type): ?int
 function widget_links_info(PDO $pdo, array $get): array
 {
     picker_register($pdo);
-    $raw = array_slice(array_values(array_unique(array_filter(array_map('trim', explode(',', scalar_text($get['targets'] ?? '', 'targets')))))), 0, 120);
+    $raw = array_slice(array_values(array_unique(array_filter(array_map('trim', explode(',', substr(scalar_text($get['targets'] ?? '', 'targets'), 0, 8000)))))), 0, 120);
     $out = [];
     $byKind = [];
     foreach ($raw as $t) {
@@ -179,13 +179,14 @@ function widget_links_info(PDO $pdo, array $get): array
         $ids = array_values(array_unique(array_filter($ids, static fn(int $i): bool => $i > 0)));
         if (!$ids) { continue; }
         foreach ($ids as $id) { $out[$kind . ':' . $id] = ['ok' => false]; }
-        picker_ids($ids);
+        foreach (array_chunk($ids, 100) as $chunk) { // une page du menu de choix = 100 au plus : sinon les suivantes passeraient pour « introuvables »
+        picker_ids($chunk);
         try {
             $r = picker_kind($pdo, $kind, '', 0, 100, ['animals' => true, 'mixed' => false, 'person_id' => 0, 'media_type' => '', 'media_types' => [], 'media_sort' => '',
                 'portraits' => false, 'recent' => false, 'recent_ids' => [], 'media_flag' => '', 'with_text' => false, 'art_kind' => '', 'art_person' => 0, 'graph_kinds' => '']);
             foreach ($r['groups'] as $g) {
                 foreach ($g['items'] as $it) {
-                    if (empty($it['id']) || !in_array((int) $it['id'], $ids, true)) { continue; }
+                    if (empty($it['id']) || !in_array((int) $it['id'], $chunk, true)) { continue; }
                     $key = $kind . ':' . (int) $it['id'];
                     $out[$key] = ['ok' => true, 'title' => (string) ($it['title'] ?? ''), 'short' => (string) ($it['short'] ?? ''), 'thumb' => (string) ($it['thumb'] ?? ''),
                         'icon' => (string) ($it['icon'] ?? ''), 'color' => (string) ($it['color'] ?? ''), 'kind' => (string) ($it['kind'] ?? $kind)]
@@ -196,6 +197,7 @@ function widget_links_info(PDO $pdo, array $get): array
             error_log('[shortcut_info] ' . $kind . ' : ' . $e->getMessage());
         } finally {
             picker_ids([]);
+        }
         }
         // une source : la première fiche qui la cite (une source n'a pas d'écran à elle)
         if ($kind === 'source') {

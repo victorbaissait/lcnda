@@ -75,15 +75,18 @@ function creations_year(mixed $v): ?int
 function creations_like(string $w): string { return '%' . strtr($w, ['\\' => '\\\\', '%' => '\\%', '_' => '\\_']) . '%'; }
 
 /** les valeurs simples d'une fiche, à plat (« label » → « Polydor », dims → « 65 × 81 ») : pour les colonnes et les vignettes */
-function creations_flat(array $d): array
+function creations_flat(array $d, array $hide = []): array
 {
     $o = [];
+    // mode consultation : une personne vivante ou confidentielle citée ({"pid": 12, "title": "…"}) n'est pas nommée
+    $hidden = static fn($x): bool => $hide && is_array($x) && isset($x['pid']) && is_numeric($x['pid']) && isset($hide[(int) $x['pid']]);
     foreach ($d as $k => $v) {
         if (count($o) >= 48 || !is_string($k) || in_array($k, ['photos', 'notes', 'synopsis', 'summary', 'lyrics', 'lyrics_all', 'story', 'anecdote'], true)) { continue; }
         $t = '';
         if (is_string($v) || is_int($v) || is_float($v)) { $t = trim((string) $v); }
         elseif (is_bool($v)) { $t = $v ? 'oui' : ''; }
         elseif (is_array($v) && !array_is_list($v)) {
+            if ($hidden($v)) { continue; }
             $t = trim(scalar_text(is_scalar($v['title'] ?? null) ? $v['title'] : (is_scalar($v['txt'] ?? null) ? $v['txt'] : (is_scalar($v['pname'] ?? null) ? $v['pname'] : '')), $k));
             if ($t === '' && (isset($v['h']) || isset($v['w']))) {
                 $t = implode(' × ', array_filter(array_map(static fn($x) => is_scalar($v[$x] ?? null) ? trim((string) $v[$x]) : '', ['h', 'w', 'd']), static fn($x) => $x !== ''));
@@ -91,7 +94,7 @@ function creations_flat(array $d): array
             }
         } elseif (is_array($v) && $v && is_array($v[0] ?? null)) { // une liste de personnes ou de fiches : les premiers noms
             $names = [];
-            foreach (array_slice($v, 0, 4) as $x) { if (is_array($x)) { $n = $x['title'] ?? $x['pname'] ?? $x['txt'] ?? ''; if (is_scalar($n) && trim((string) $n) !== '') { $names[] = trim((string) $n); } } }
+            foreach (array_slice(array_values(array_filter($v, static fn($x) => !$hidden($x))), 0, 4) as $x) { if (is_array($x)) { $n = $x['title'] ?? $x['pname'] ?? $x['txt'] ?? ''; if (is_scalar($n) && trim((string) $n) !== '') { $names[] = trim((string) $n); } } }
             $t = implode(', ', $names);
         }
         if ($t !== '') { $o[$k] = mb_substr($t, 0, 140); }
@@ -135,6 +138,10 @@ function creations_list(PDO $pdo, array $g): array
     }
     // 👤 la personne : à qui se rattache la fiche, ou citée dedans (crédits, jury, camarade…)
     $person = safe_int($g['person'] ?? 0);
+    if ($person > 0 && $ro) { // en consultation, on ne cherche pas les fiches où figure une personne vivante ou confidentielle
+        $pv = $pdo->prepare("SELECT 1 FROM persons WHERE id=? AND (COALESCE(living_status,'')='living' OR COALESCE(is_private,0)=1)"); $pv->execute([$person]);
+        if ($pv->fetchColumn()) { $where[] = '0=1'; }
+    }
     if ($person > 0) { $where[] = '(i.person_id=? OR EXISTS (SELECT 1 FROM item_people a WHERE a.item_id=i.id AND a.person_id=?))'; array_push($params, $person, $person); }
     // 📍 le lieu : choisi dans la base (lieu de la fiche ou lieu cité), ou texte libre
     $place = trim(scalar_text($g['place'] ?? '', 'place'));
@@ -182,12 +189,16 @@ function creations_list(PDO $pdo, array $g): array
     $rows = $s->fetchAll(PDO::FETCH_ASSOC);
     $ids = array_map(static fn($r) => (int) $r['id'], $rows);
     $people = creations_people($pdo, $ids, $ro);
+    $hide = []; // en consultation : les personnes à ne pas nommer dans les colonnes (champs « crédits », « jury »…)
+    if ($ro && $ids) {
+        foreach ($pdo->query("SELECT DISTINCT a.person_id FROM item_people a JOIN persons p ON p.id=a.person_id WHERE a.item_id IN (" . implode(',', $ids) . ") AND (COALESCE(p.living_status,'')='living' OR COALESCE(p.is_private,0)=1)")->fetchAll(PDO::FETCH_COLUMN) as $pid) { $hide[(int) $pid] = true; }
+    }
     $av = [];
     if ($ids) {
         $in = implode(',', $ids);
         foreach ($pdo->query("SELECT DISTINCT l.from_id, m.media_type FROM item_links l JOIN media m ON m.id=l.to_id WHERE l.to_type='media' AND l.from_id IN ({$in}) AND m.media_type IN ('audio','video')")->fetchAll(PDO::FETCH_ASSOC) as $r) { $av[(int) $r['from_id']][] = (string) $r['media_type']; }
     }
-    $items = array_map(static function (array $r) use ($people, $av) {
+    $items = array_map(static function (array $r) use ($people, $av, $hide) {
         $d = json_decode((string) $r['data'], true); $d = is_array($d) ? $d : [];
         $ph = null;
         foreach (is_array($d['photos'] ?? null) ? $d['photos'] : [] as $x) { if (is_array($x) && (!empty($x['f']) || preg_match('#^https://#', (string) ($x['u'] ?? '')))) { $ph = $x; break; } }
@@ -197,7 +208,7 @@ function creations_list(PDO $pdo, array $g): array
             'owner_gender' => (string) ($r['owner_gender'] ?? ''), 'year' => $r['year'] !== null ? (int) $r['year'] : null, 'date_text' => (string) $r['date_text'],
             'date_min' => $r['date_min'] !== null ? (int) $r['date_min'] : null, 'date_max' => $r['date_max'] !== null ? (int) $r['date_max'] : null,
             'place_id' => $r['place_id'] !== null ? (int) $r['place_id'] : null, 'place' => (string) $r['place_name'], 'parent_id' => $r['parent_id'] !== null ? (int) $r['parent_id'] : null,
-            'thumb' => $thumb, 'av' => array_values(array_unique($av[$id] ?? [])), 'people' => $people[$id] ?? [], 'f' => creations_flat($d),
+            'thumb' => $thumb, 'av' => array_values(array_unique($av[$id] ?? [])), 'people' => $people[$id] ?? [], 'f' => creations_flat($d, $hide),
             'sub' => function_exists('art_subline') ? art_subline($d, (string) $r['type_key']) : '', 'updated_at' => (string) ($r['updated_at'] ?? '')];
     }, $rows);
     return $base + ['total' => $total, 'offset' => $offset, 'limit' => $limit, 'items' => $items, 'counts' => $counts ?: new stdClass(), 'types' => $types ?: new stdClass()];

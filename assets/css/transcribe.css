@@ -96,3 +96,5 @@
 /* Listes → Transcriptions d'actes : les premières lignes du texte sur la fiche */
 .h-atl .ui-card small:has(.h-atl-text){white-space:normal;overflow:visible;text-overflow:clip}
 .h-atl-text{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;font:italic 13px/1.4 Georgia,"Times New Roman",serif;color:inherit;margin:2px 0}
+/* « ⋯ Plus » sur un écran étroit : le bouton est à gauche, son menu s'ouvre vers la droite (il sortait de l'écran par la gauche) */
+@media (max-width:700px){.h-tx-more>div{right:auto;left:0;max-width:calc(100vw - 24px)}}

@@ -40,13 +40,16 @@
         const keys = [...new Set(people.flatMap(p => p.profiles))].filter(known).sort((a, b) => String(ART.profiles[a].label).localeCompare(ART.profiles[b].label, 'fr'));
         const jobs = [...new Set(people.map(p => p.occupation.trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr')).slice(0, 300);
         const groups = PF.GROUPS.filter(([g]) => people.some(p => p.profiles.some(k => groupOf(k) === g)));
-        ws.innerHTML = `<section class="page pf-listpage"><header class="page-header"><div><span class="eyebrow">LISTES · PROFILS</span><h2>🧩 Cette personne était…</h2><p class="muted">Les personnes qui ont des profils (artiste, sportif, élu, militaire…) : un clic ouvre leur page.</p></div><div class="page-actions"><button type="button" class="button" data-pfl-new title="Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…)">＋ Nouvelle page</button></div></header><div data-pfl-bar></div><div data-pfl-body></div><div class="list-more-wrap" data-pfl-more></div></section>`;
+        ws.innerHTML = `<section class="page pf-listpage"><header class="page-header"><div><span class="eyebrow">LISTES · PROFILS</span><h2>🧩 Cette personne était…</h2><p class="muted">Les personnes qui ont des profils (artiste, sportif, élu, militaire…) : un clic ouvre leur page.</p></div>${document.body.classList.contains('is-kiosk') ? '' : '<div class="page-actions"><button type="button" class="button" data-pfl-new title="Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…)">＋ Nouvelle page</button></div>'}</header><div data-pfl-bar></div><div data-pfl-body></div><div class="list-more-wrap" data-pfl-more></div></section>`;
         const body = ws.querySelector('[data-pfl-body]'), more = ws.querySelector('[data-pfl-more]');
         // ＋ : choisir la personne (menu de choix), puis ses profils ; la liste se redessine ensuite
         ws.querySelector('[data-pfl-new]')?.addEventListener('click', async () => {
             const P = window.LCNDA_PICKER || app; const it = await P.openPicker?.({kind: 'person', title: 'Qui était cette personne ?'});
             if (!it || !Number(it.id)) return;
-            PF.openChooser(Number(it.id), {name: it.title || '', onDone: () => ext.lists.profiles_list(app.state?.workspaceToken)});
+            // la liste ne se redessine que si on y est encore (pas par-dessus un autre écran)
+            const still = () => alive() && app.state?.module === 'listes' && app.state?.listType === 'profiles_list' && ws.querySelector('.pf-listpage');
+            if (!still()) return;
+            PF.openChooser(Number(it.id), {name: it.title || '', onDone: () => { if (still()) ext.lists.profiles_list(app.state?.workspaceToken); }});
         });
         let shown = 60;
         const bar = UI().listBar({key: 'listes:profiles_list',

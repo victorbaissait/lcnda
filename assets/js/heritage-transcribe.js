@@ -216,20 +216,30 @@
         /** zoom autour d'un point de l'écran (la souris, le milieu des deux doigts, le centre pour ＋ et －) */
         const zoomAt = (z, cx, cy) => { z = clamp(z, .02, 20); fitOn = false; panX = cx - (cx - panX) * z / zoom; panY = cy - (cy - panY) * z / zoom; zoom = z; applyView(); };
         /* ─── « 🎚️ Mieux voir » : filtre CSS rapide, ou calcul pixel par pixel dans un Web Worker ─── */
-        let enh = null, enhFor = '', srcEl = null, processed = false, loupeImg = null;
+        let enh = null, enhFor = '', srcEl = null, processed = false, loupeImg = null, srcP = null, srcFailed = '';
         const origSrc = () => `media/${encodeURIComponent(t.filename)}`;
         const setHref = u => { if (img.getAttribute('href') !== u) img.setAttribute('href', u); if (loupeImg?.dataset.u !== u) { loupeImg = new Image(); loupeImg.dataset.u = u; loupeImg.src = u; } };
         const getEnh = () => enh || (enh = TV.enhancer((u, info) => { if (!TV.needsPixels(t.data.view)) return; processed = true; img.style.filter = ''; setHref(u); dlg.dataset.txMs = String(Math.round(info.ms)); dlg.dataset.txRender = info.preview ? 'preview' : 'full'; dlg.dataset.txRenders = String(Number(dlg.dataset.txRenders || 0) + 1); }));
+        /** l'image de l'acte préparée dans le worker, une seule fois (plusieurs curseurs bougés pendant la préparation l'attendent) ; false : impossible */
+        function ensureSource() {
+            getEnh();
+            if (enhFor === t.filename && (srcP || enh.hasSource())) return srcP || Promise.resolve(true);
+            enhFor = t.filename; dlg.dataset.txRender = 'source'; const t0 = performance.now(), forFile = t.filename;
+            const p = srcP = enh.source(srcEl, imgW, imgH).then(ok => { if (srcP === p) srcP = null; if (!ok && enhFor === forFile) enhFor = ''; dlg.dataset.txSourceMs = String(Math.round(performance.now() - t0)); return ok; });
+            return p;
+        }
         async function applyImage({preview = false} = {}) {
             if (!imgW || !t.filename) return;
             const v = t.data.view;
             if (TV.needsPixels(v)) {
                 getEnh();
-                if (enh.ok) {
-                    if (enhFor !== t.filename) { status('Préparation de l’image…'); enhFor = t.filename; dlg.dataset.txRender = 'source'; const t0 = performance.now(); await enh.source(srcEl, imgW, imgH); dlg.dataset.txSourceMs = String(Math.round(performance.now() - t0)); status(''); }
-                    enh.render(v, {preview}); paintBadge(); return;
-                }
-                if (!applyImage.warned) { applyImage.warned = true; toast('Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent.', 'error'); }
+                if (enh.ok && srcFailed !== t.filename) {
+                    const wasReady = enhFor === t.filename && enh.hasSource(); if (!wasReady) status('Préparation de l’image…');
+                    const ready = await ensureSource(); if (!wasReady) status('');
+                    if (!dlg.isConnected) return; // l'outil a été fermé pendant la préparation
+                    if (ready) { enh.render(t.data.view, {preview}); paintBadge(); return; }
+                    if (srcFailed !== t.filename) { srcFailed = t.filename; toast('« Mieux voir » : cette image n’a pas pu être préparée (trop grande ou abîmée) ; seuls contraste, luminosité, négatif et gris s’appliquent.', 'error'); }
+                } else if (!enh.ok && !applyImage.warned) { applyImage.warned = true; toast('Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent.', 'error'); }
             }
             processed = false; setHref(origSrc()); img.style.filter = TV.cssFilter(v); paintBadge();
         }
@@ -250,7 +260,9 @@
         async function loadImage() {
             const has = !!t.filename; $('[data-tx-empty]').hidden = has; img.style.display = has ? '' : 'none'; if (!has) return;
             const src = origSrc();
+            imgW = imgH = 0; srcEl = null; enhFor = ''; // une autre image : rien de l'ancienne ne reste (taille, préparation « Mieux voir »)
             await new Promise(res => { const i = new Image(); i.onload = () => { imgW = i.naturalWidth; imgH = i.naturalHeight; srcEl = i; res(); }; i.onerror = () => { toast('Image de l’acte illisible.', 'error'); res(); }; i.src = src; });
+            if (!dlg.isConnected) return;
             img.setAttribute('width', imgW); img.setAttribute('height', imgH); geom({keepCenter: false}); setHref(src); applyFit('page'); await applyImage(); drawZones();
         }
         /* ─── les zones et le texte surligné ─── */
@@ -442,7 +454,7 @@
             if (d.txPlink) return linkPerson(Number(d.txPlink));
             if (d.txPunlink) { t.data.people[Number(d.txPunlink)].person_id = 0; touch(); paintPeople(); return; }
             if (d.txPdel) { t.data.people.splice(Number(d.txPdel), 1); touch(); paintPeople(); return; }
-            if (d.txPopen) { if (dirty && !await A().confirmBox('La transcription non enregistrée sera perdue (💾 d’abord).', {title: 'Ouvrir la fiche ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return; dlg.close(); dlg.remove(); A().openPersonById?.(Number(d.txPopen)); }
+            if (d.txPopen) { if (dirty && !await A().confirmBox('La transcription non enregistrée sera perdue (💾 d’abord).', {title: 'Ouvrir la fiche ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return; teardown(); A().openPersonById?.(Number(d.txPopen)); }
         });
         $('[data-tx-found]').addEventListener('change', e => { const s = e.target.closest('[data-tx-prole]'); if (s) { t.data.people[Number(s.dataset.txProle)].role = s.value; touch(); } });
         /* ─── lecture automatique ─── */
@@ -450,8 +462,9 @@
          *  Sans redressement ni miroir : les zones posées par la lecture restent en pixels de l'image. */
         async function filteredCanvas({gray = true} = {}) {
             const v = t.data.view, enhanced = useEnh();
-            let i = await new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = ko; im.src = origSrc(); });
-            if (enhanced && TV.needsPixels(v) && getEnh().ok) { if (enhFor !== t.filename) { enhFor = t.filename; await enh.source(srcEl || i, imgW, imgH); } i = await createImageBitmap(await enh.full(v)); }
+            if (!imgW || !imgH) throw new Error('Image de l’acte illisible.');
+            let i = await new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ko(new Error('Image de l’acte illisible.')); im.src = origSrc(); });
+            if (enhanced && TV.needsPixels(v) && getEnh().ok) { srcEl = srcEl || i; if (!await ensureSource()) throw new Error('« Mieux voir » : cette image n’a pas pu être préparée.'); i = await createImageBitmap(await enh.full(v)); }
             const c = document.createElement('canvas'); c.width = imgW; c.height = imgH; const g = c.getContext('2d');
             const css = enhanced && !TV.needsPixels(v) ? TV.cssFilter(v) : '';
             g.filter = `${css}${gray ? ' grayscale(1)' : ''}`.trim() || 'none'; g.drawImage(i, 0, 0, imgW, imgH); return c;
@@ -560,7 +573,7 @@
         /* ─── la barre se redessine quand on la règle (⚙️, ou Maintenance) ─── */
         let narrow = false; const isNarrow = () => ($('.h-tx-left')?.getBoundingClientRect().width || 1000) < 620;
         function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
-        new ResizeObserver(() => { if (dlg.isConnected && isNarrow() !== narrow) renderBar(); }).observe($('.h-tx-left'));
+        const roBar = new ResizeObserver(() => { if (dlg.isConnected && isNarrow() !== narrow) renderBar(); }); roBar.observe($('.h-tx-left'));
         const onBar = () => renderBar(); window.addEventListener('lcnda-txbar-change', onBar);
         /* ─── 🔍 Loupe : suit la souris ; la molette change le grossissement ─── */
         const loupe = {on: false, mag: 3}, lc = $('[data-tx-loupe]');
@@ -598,7 +611,9 @@
         };
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
-        async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la transcription seront perdues.', {title: 'Fermer sans enregistrer la transcription ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        /** l'outil s'en va (× ou Échap, ou « ↗ Fiche » d'une personne) : touches, worker « Mieux voir », observateurs, fenêtre */
+        function teardown() { if (!dlg.isConnected) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la transcription seront perdues.', {title: 'Fermer sans enregistrer la transcription ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; teardown(); }
         dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         // la fenêtre change de taille (⛶, panneau) : l'ajustement choisi (toute l'image, largeur) suit

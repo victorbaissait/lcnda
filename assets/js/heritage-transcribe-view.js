@@ -110,47 +110,60 @@
         };
     }
     const WORK_MAX = 2400, PREVIEW_MAX = 800; // taille de travail (côté long) ; aperçu pendant qu'on bouge un curseur
+    // l'image améliorée « pleine taille » (lecture, export) : au plus 8000 px de côté et 20 millions de pixels — une image énorme
+    // (30 000 × 20 000…) demanderait plusieurs Go au calcul ; l'appelant la remet à la taille de l'image d'origine en la dessinant
+    const FULL_MAX = 8000, FULL_AREA = 20e6;
     /** Un « développeur » par image : enhancer(imgElement, natW, natH, onImage(url, info)) */
     function enhancer(onImage) {
         let worker = null, ready = null, seq = 0, gen = 0, shownSeq = 0, lastShown = 0, busy = false, pending = null, fullTimer = 0, lastP = null, natW = 0, natH = 0, url = '', onceWait = new Map(), srcEl = null;
+        let dead = false, workerUrl = ''; // dead : l'outil est fermé (stop) — plus rien ne se lance, les attentes se terminent
         const ok = typeof Worker === 'function' && typeof OffscreenCanvas === 'function' && typeof createImageBitmap === 'function';
+        /** le calcul ne peut plus répondre (outil fermé, worker tombé) : chaque attente reçoit sa réponse au lieu d'attendre pour toujours */
+        const failAll = message => { busy = false; pending = null; ready?.res?.(false); ready = null; onceWait.forEach(w => w.ko(new Error(message))); onceWait.clear(); };
         const start = () => {
-            if (worker || !ok) return worker;
-            try { worker = new Worker(URL.createObjectURL(new Blob([`(${WORKER.toString()})(self)`], {type: 'text/javascript'}))); } catch (_) { worker = null; return null; }
+            if (worker || !ok || dead) return worker;
+            try { if (workerUrl) URL.revokeObjectURL(workerUrl); workerUrl = URL.createObjectURL(new Blob([`(${WORKER.toString()})(self)`], {type: 'text/javascript'})); worker = new Worker(workerUrl); } catch (_) { worker = null; return null; }
+            // le worker tombe (mémoire…) : on le remplace au prochain calcul, et l'image est préparée de nouveau (hasSource)
+            worker.onerror = e => { e.preventDefault?.(); console.warn('Mieux voir :', e.message || 'calcul interrompu'); try { worker?.terminate(); } catch (_) {} worker = null; failAll('Le calcul de l’image s’est arrêté (image trop grande ?).'); };
             worker.onmessage = e => {
                 const m = e.data;
-                if (m.type === 'ready') { ready?.res?.(); return; }
+                if (m.type === 'ready') { if (ready && ready.id === m.id) ready.res(true); return; }
+                if (m.type === 'error' && ready && ready.id === m.id) { console.warn('Mieux voir :', m.message); ready.res(false); ready = null; return; } // l'image n'a pas pu être préparée
                 if (m.type === 'once' || (m.type === 'error' && onceWait.has(m.id))) { const w = onceWait.get(m.id); onceWait.delete(m.id); if (m.type === 'error') w?.ko(new Error(m.message)); else w?.ok(m.blob); return; }
                 if (m.type === 'error') { busy = false; console.warn('Mieux voir :', m.message); next(); return; }
                 if (m.type === 'done') {
                     busy = false;
                     { const u = URL.createObjectURL(m.blob), shown = ++shownSeq, pre = new Image(); pre.src = u;
                         // décodée hors du fil principal avant d'être montrée (sinon une grande image fige l'écran un instant)
-                        pre.decode().catch(() => {}).then(() => { if (shown < lastShown) { URL.revokeObjectURL(u); return; } lastShown = shown; const old = url; url = u; onImage(u, {preview: m.preview, ms: m.ms, w: m.w, h: m.h}); if (old && old !== u) setTimeout(() => URL.revokeObjectURL(old), 4000); }); }
+                        pre.decode().catch(() => {}).then(() => { if (dead || shown < lastShown) { URL.revokeObjectURL(u); return; } lastShown = shown; const old = url; url = u; onImage(u, {preview: m.preview, ms: m.ms, w: m.w, h: m.h}); if (old && old !== u) setTimeout(() => URL.revokeObjectURL(old), 4000); }); }
                     next();
                 }
             };
             return worker;
         };
-        const next = () => { if (busy || !pending) return; const p = pending; pending = null; busy = true; worker.postMessage(p); };
+        const next = () => { if (busy || !pending || !worker) return; const p = pending; pending = null; busy = true; worker.postMessage(p); };
         const api = {
             ok,
-            /** une nouvelle image : la taille de travail et l'aperçu sont préparés une fois */
+            /** l'image est-elle prête dans le worker (sinon : source() de nouveau, par exemple après un worker tombé) */
+            hasSource: () => !dead && !!worker && !!ready,
+            /** une nouvelle image : la taille de travail et l'aperçu sont préparés une fois ; false si c'est impossible (image cassée, outil fermé) */
             async source(imgEl, w, h) {
-                natW = w; natH = h; srcEl = imgEl; lastP = null; if (!start()) return false;
+                natW = w; natH = h; srcEl = imgEl; lastP = null; if (!w || !h || !start()) return false;
                 const k = Math.min(1, WORK_MAX / Math.max(w, h)), ks = Math.min(1, PREVIEW_MAX / Math.max(w, h));
                 // le fichier est décodé et réduit hors du fil principal (createImageBitmap d'un Blob) : l'écran ne fige pas, même pour 6000 × 4000
                 const W = Math.max(1, Math.round(w * k)), H = Math.max(1, Math.round(h * k)), SW = Math.max(1, Math.round(w * ks)), SH = Math.max(1, Math.round(h * ks));
                 let bm, sbm;
                 try { const blob = await (await fetch(imgEl.currentSrc || imgEl.src)).blob(); [bm, sbm] = await Promise.all([createImageBitmap(blob, {resizeWidth: W, resizeHeight: H, resizeQuality: 'high'}), createImageBitmap(blob, {resizeWidth: SW, resizeHeight: SH, resizeQuality: 'medium'})]); }
-                catch (_) { bm = await createImageBitmap(imgEl); sbm = null; }
-                ready = {}; ready.p = new Promise(res => { ready.res = res; });
-                worker.postMessage({type: 'src', id: ++seq, bitmap: bm, small: sbm, w: W, h: H, sw: SW, sh: SH}, sbm ? [bm, sbm] : [bm]);
-                await ready.p; return true;
+                catch (_) { try { bm = await createImageBitmap(imgEl); } catch (__) { return false; } sbm = null; }
+                if (dead || !worker) { bm?.close?.(); sbm?.close?.(); return false; } // l'outil a été fermé pendant la préparation
+                ready?.res?.(false); // une préparation plus ancienne qui attendait encore
+                const r = ready = {id: ++seq}; r.p = new Promise(res => { r.res = res; });
+                worker.postMessage({type: 'src', id: r.id, bitmap: bm, small: sbm, w: W, h: H, sw: SW, sh: SH}, sbm ? [bm, sbm] : [bm]);
+                return r.p;
             },
             /** demander l'image pour ces réglages ; preview = pendant qu'on bouge (l'image fine suit 180 ms après) */
             async render(v, {preview = false} = {}) {
-                if (!start() || !ready) return; await ready.p;
+                if (!start() || !ready) return; if (!await ready.p || dead) return;
                 const p = {...v}, g = ++gen; lastP = p; clearTimeout(fullTimer);
                 // toujours d'abord l'aperçu (image réduite, quelques dizaines de ms), puis l'image fine : 180 ms après le dernier mouvement d'un curseur
                 pending = {type: 'run', id: ++seq, gen: g, p, preview: true, natW}; next();
@@ -158,12 +171,15 @@
             },
             /** l'image améliorée en pleine taille (lecture, export) → Blob PNG */
             async full(v) {
-                if (!start()) throw new Error('Calcul impossible ici.');
-                let bm; try { bm = await createImageBitmap(await (await fetch(srcEl.currentSrc || srcEl.src)).blob()); } catch (_) { bm = await createImageBitmap(srcEl); }
+                if (!start() || !srcEl || !natW || !natH) throw new Error('Calcul impossible ici.');
+                const k = Math.min(1, FULL_MAX / Math.max(natW, natH), Math.sqrt(FULL_AREA / (natW * natH))), W = Math.max(1, Math.round(natW * k)), H = Math.max(1, Math.round(natH * k));
+                let bm; try { bm = await createImageBitmap(await (await fetch(srcEl.currentSrc || srcEl.src)).blob(), {resizeWidth: W, resizeHeight: H, resizeQuality: 'high'}); } catch (_) { bm = await createImageBitmap(srcEl, {resizeWidth: W, resizeHeight: H, resizeQuality: 'high'}); }
+                if (dead || !worker) { bm.close?.(); throw new Error('Outil fermé.'); }
                 const id = ++seq;
-                return new Promise((okp, ko) => { onceWait.set(id, {ok: okp, ko}); worker.postMessage({type: 'once', id, bitmap: bm, w: natW, h: natH, p: {...v}}, [bm]); });
+                return new Promise((okp, ko) => { onceWait.set(id, {ok: okp, ko}); worker.postMessage({type: 'once', id, bitmap: bm, w: W, h: H, p: {...v, sharpR: v.sharpR * k}}, [bm]); });
             },
-            stop() { clearTimeout(fullTimer); worker?.terminate(); worker = null; if (url) URL.revokeObjectURL(url); url = ''; },
+            /** l'outil se ferme : le worker s'arrête, les attentes se terminent, les images en mémoire sont rendues */
+            stop() { dead = true; clearTimeout(fullTimer); worker?.terminate(); worker = null; failAll('Outil fermé.'); if (url) URL.revokeObjectURL(url); url = ''; if (workerUrl) URL.revokeObjectURL(workerUrl); workerUrl = ''; },
         };
         return api;
     }

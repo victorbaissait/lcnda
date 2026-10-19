@@ -30,7 +30,7 @@ const PHOTOMAP_MAX_MAPS = 500;
 const PHOTOMAP_MAX_ITEMS = 20000;      // par carte
 const PHOTOMAP_MAX_ADD = 2000;         // médias ajoutés en une fois
 const PHOTOMAP_SHAPES = ['round', 'square'];
-const PHOTOMAP_THUMB_DIR = 'photomaps-mini';
+const PHOTOMAP_THUMB_DIR = 'cache/photomaps-mini'; // dans le dossier de la généalogie (DATA_DIR), hors des médias : ni sauvegardé, ni mélangé aux fichiers
 const PHOTOMAP_THUMB_SIZE = 240;
 const PHOTOMAP_UPLOAD_TYPES = [
     'image/jpeg' => ['jpg', 'image'], 'image/png' => ['png', 'image'], 'image/webp' => ['webp', 'image'], 'image/gif' => ['gif', 'image'],
@@ -350,6 +350,7 @@ function pm_tiff(string $t): array
         }
     };
     $out = [];
+    $str = static fn($v): string => is_string($v) ? $v : ''; // une valeur d'un autre type que prévu (fichier piégé) : ignorée
     $ifd0 = $ifd($u32(4));
     if (isset($ifd0[0x0112])) { $o = $val($ifd0[0x0112]); if (is_array($o) && isset($o[0]) && $o[0] >= 1 && $o[0] <= 8) { $out['orientation'] = (int) $o[0]; } }
     $taken = '';
@@ -358,7 +359,7 @@ function pm_tiff(string $t): array
         $exif = is_array($p) && isset($p[0]) ? $ifd((int) $p[0]) : [];
         foreach ([0x9003, 0x9004] as $tag) { if ($taken === '' && isset($exif[$tag])) { $taken = pm_exif_datetime($val($exif[$tag])); } }
         // décalage horaire de la prise de vue (EXIF 2.31 : OffsetTimeOriginal, sinon OffsetTime) : « +02:00 »
-        foreach ([0x9011, 0x9010] as $tag) { if (!isset($out['tz']) && isset($exif[$tag]) && ($z = pm_tz((string) $val($exif[$tag]))) !== '') { $out['tz'] = $z; } }
+        foreach ([0x9011, 0x9010] as $tag) { if (!isset($out['tz']) && isset($exif[$tag]) && ($z = pm_tz($str($val($exif[$tag])))) !== '') { $out['tz'] = $z; } }
     }
     if ($taken === '' && isset($ifd0[0x0132])) { $taken = pm_exif_datetime($val($ifd0[0x0132])); }
     if (isset($ifd0[0x8825])) {
@@ -370,7 +371,7 @@ function pm_tiff(string $t): array
         };
         $lat = $dms($val($gps[2] ?? null)); $lon = $dms($val($gps[4] ?? null));
         if ($lat !== null && $lon !== null) {
-            $latRef = strtoupper((string) $val($gps[1] ?? null)); $lonRef = strtoupper((string) $val($gps[3] ?? null));
+            $latRef = strtoupper($str($val($gps[1] ?? null))); $lonRef = strtoupper($str($val($gps[3] ?? null)));
             if (str_starts_with($latRef, 'S')) { $lat = -$lat; }
             if (str_starts_with($lonRef, 'W')) { $lon = -$lon; }
             if ($c = pm_coords($lat, $lon)) { [$out['lat'], $out['lon']] = $c; }
@@ -492,9 +493,9 @@ function pm_meta_heic($f, int $size): array
         if ($b[0] !== 'infe') { continue; }
         $d = pm_read($f, $b[1], min(64, $b[2] - $b[1]));
         $iv = ord($d[0] ?? "\0");
-        if ($iv < 2) { continue; }
-        $id = $iv === 2 ? unpack('n', substr($d, 4, 2))[1] : unpack('N', substr($d, 4, 4))[1];
         $typeAt = $iv === 2 ? 8 : 10;
+        if ($iv < 2 || strlen($d) < $typeAt + 4) { continue; } // entrée trop courte (fichier tronqué ou piégé)
+        $id = $iv === 2 ? unpack('n', substr($d, 4, 2))[1] : unpack('N', substr($d, 4, 4))[1];
         if (substr($d, $typeAt, 4) === 'Exif') { $exifId = $id; break; }
     }
     if (!$exifId) { return []; }
@@ -678,19 +679,20 @@ function pm_media_geo(PDO $pdo, int $mediaId, string $filename): array
 
 /* ═══════════════════════ Lecture ═══════════════════════ */
 
+/** une carte pour le navigateur ; une personne ou une enquête supprimée depuis n'y est plus liée */
 function pm_map_out(array $r): array
 {
     return ['id' => (int) $r['id'], 'name' => (string) $r['name'], 'description' => (string) $r['description'], 'color' => pm_color($r['color']),
         'period_text' => (string) $r['period_text'], 'period_from' => (string) $r['period_from'], 'period_to' => (string) $r['period_to'],
         'background' => (string) $r['background'], 'shape' => in_array($r['shape'], PHOTOMAP_SHAPES, true) ? $r['shape'] : 'round', 'show_track' => (int) $r['show_track'] === 1,
-        'person_id' => $r['person_id'] !== null ? (int) $r['person_id'] : null, 'person_name' => trim((string) ($r['person_name'] ?? '')),
-        'investigation_id' => $r['investigation_id'] !== null ? (int) $r['investigation_id'] : null, 'investigation_title' => (string) ($r['investigation_title'] ?? ''),
+        'person_id' => $r['person_id'] !== null && ($r['person_ok'] ?? null) !== null ? (int) $r['person_id'] : null, 'person_name' => trim((string) ($r['person_name'] ?? '')),
+        'investigation_id' => $r['investigation_id'] !== null && ($r['investigation_ok'] ?? null) !== null ? (int) $r['investigation_id'] : null, 'investigation_title' => (string) ($r['investigation_title'] ?? ''),
         'created_at' => (string) $r['created_at'], 'updated_at' => (string) $r['updated_at']];
 }
 
 function pm_map_select(): string
 {
-    return "SELECT pm.*, TRIM(COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')) AS person_name, i.title AS investigation_title
+    return "SELECT pm.*, TRIM(COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')) AS person_name, p.id AS person_ok, i.title AS investigation_title, i.id AS investigation_ok
         FROM photo_maps pm LEFT JOIN persons p ON p.id = pm.person_id LEFT JOIN investigations i ON i.id = pm.investigation_id";
 }
 
@@ -903,9 +905,11 @@ function pm_update_item(PDO $pdo, array $d): array
     $it = pm_need_item($pdo, $d['id'] ?? 0);
     $set = []; $vals = [];
     if (array_key_exists('lat', $d) || array_key_exists('lon', $d)) {
-        if ($d['lat'] === null || $d['lon'] === null || $d['lat'] === '' || $d['lon'] === '') { $set[] = 'lat=NULL, lon=NULL, pos_source=\'\''; }
+        $la = $d['lat'] ?? null; $lo = $d['lon'] ?? null;
+        if (($la === null || $la === '') && ($lo === null || $lo === '')) { // les deux vides : remise dans « À placer » (une seule : refusée plus bas)
+            $set[] = 'lat=NULL, lon=NULL, pos_source=\'\''; }
         else {
-            $c = pm_coords($d['lat'], $d['lon']);
+            $c = pm_coords($la, $lo);
             if (!$c) { throw new RuntimeException('Position impossible.'); }
             $src = in_array($d['src'] ?? '', ['manual', 'place', 'gps'], true) ? $d['src'] : 'manual';
             if ($src === 'gps' && $it['gps_lat'] === null) { $src = 'manual'; }
@@ -995,7 +999,7 @@ function pm_upload(PDO $pdo, array $post, ?array $files): never
         if ($count > 200) { throw new RuntimeException('200 fichiers au plus à la fois.'); }
         if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
         $cols = photomaps_media_cols($pdo);
-        $done = []; $refused = []; $moved = [];
+        $done = []; $refused = []; $moved = []; $pending = [];
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         for ($i = 0; $i < $count; $i++) {
             $name = (string) ((array) $files['name'])[$i]; $tmp = (string) ((array) $files['tmp_name'])[$i];
@@ -1026,24 +1030,44 @@ function pm_upload(PDO $pdo, array $post, ?array $files): never
                 if (!@move_uploaded_file($tmp, MEDIA_DIR . '/' . $file)) { $refused[] = ['name' => $label, 'reason' => 'copie impossible']; continue; }
             }
             $moved[] = MEDIA_DIR . '/' . $file;
+            $pending[] = [$name, $label, $kind, $file, $meta];
+        }
+        // la base n'est écrite qu'une fois tous les fichiers en place, d'un seul coup : une erreur ne laisse pas de média sans fichier
+        $pdo->beginTransaction();
+        $insMedia = $pdo->prepare('INSERT INTO media(title, media_type, filename, thumbnail, date_text, description) VALUES(?,?,?,?,?,?)');
+        foreach ($pending as [$name, $label, $kind, $file, $meta]) {
             $title = mb_substr(pathinfo($name, PATHINFO_FILENAME), 0, 300) ?: ($kind === 'video' ? 'Vidéo' : 'Photo');
             $dateText = isset($meta['taken']) ? pm_fr_datetime($meta['taken']) : '';
-            $pdo->prepare('INSERT INTO media(title, media_type, filename, thumbnail, date_text, description) VALUES(?,?,?,?,?,?)')
-                ->execute([$title, $kind, $file, $kind === 'image' ? $file : '', $dateText, 'Importé dans la carte de photos « ' . $map['name'] . ' » le ' . date('d/m/Y')]);
+            $insMedia->execute([$title, $kind, $file, $kind === 'image' ? $file : '', $dateText, 'Importé dans la carte de photos « ' . $map['name'] . ' » le ' . date('d/m/Y')]);
             $mediaId = (int) $pdo->lastInsertId();
             if ($kind === 'video' && isset($cols['duration_seconds']) && isset($meta['duration'])) { $pdo->prepare('UPDATE media SET duration_seconds=? WHERE id=?')->execute([$meta['duration'], $mediaId]); }
             $done[] = ['media_id' => $mediaId, 'name' => $label, 'gps' => isset($meta['lat']), 'date' => $dateText];
         }
         $res = $done ? pm_add_media($pdo, (int) $map['id'], array_column($done, 'media_id'), $drop) : ['added' => [], 'placed' => 0, 'unplaced' => 0];
         if ($done) { log_change($pdo, 'media', null, 'upload', count($done) . ' fichier(s) importé(s) dans la carte de photos « ' . $map['name'] . ' »'); }
+        $pdo->commit();
         json_response(['ok' => true, 'imported' => $done, 'refused' => $refused, 'placed' => $res['placed'], 'unplaced' => $res['unplaced'], 'item_ids' => $res['added']]);
     } catch (Throwable $e) {
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
         foreach ($moved ?? [] as $f) { @unlink($f); }
         json_response(['error' => $e instanceof RuntimeException ? $e->getMessage() : 'Import impossible : ' . $e->getMessage()], 422);
     }
 }
 
 /* ═══════════════════════ Vignettes ═══════════════════════ */
+
+/** assez de mémoire pour ouvrir l'image avec GD (≈ 5 octets par point, deux fois si on la tourne), sinon l'image elle-même */
+function pm_gd_fits(int $w, int $h, int $bytes): bool
+{
+    $need = $w * $h * 10 + $bytes + 16 * 1024 * 1024;
+    $lim = trim((string) ini_get('memory_limit'));
+    if ($lim === '' || $lim === '-1') { return true; }
+    $n = (int) $lim; $u = strtolower(substr($lim, -1));
+    $n *= $u === 'g' ? 1 << 30 : ($u === 'm' ? 1 << 20 : ($u === 'k' ? 1 << 10 : 1));
+    if ($n - memory_get_usage() >= $need) { return true; }
+    @ini_set('memory_limit', (string) (int) ceil((memory_get_usage() + $need) / 1048576) . 'M'); // une grande photo de téléphone (48 Mpx)
+    return trim((string) ini_get('memory_limit')) !== $lim;
+}
 
 function pm_ffmpeg(): ?string
 {
@@ -1059,16 +1083,20 @@ function pm_thumb(PDO $pdo, int $mediaId): never
     $kind = $m ? pm_media_kind($m) : '';
     $path = $m ? pm_media_path((string) $m['filename']) : '';
     if ($kind === '' || $path === '' || !is_file($path)) { http_response_code(404); header('Content-Type: text/plain; charset=utf-8'); echo 'Introuvable'; exit; }
-    $dir = MEDIA_DIR . '/' . PHOTOMAP_THUMB_DIR;
+    $dir = DATA_DIR . '/' . PHOTOMAP_THUMB_DIR;
     $v = substr(md5(basename($path) . '|' . filesize($path) . '|' . filemtime($path)), 0, 10);
     $out = $dir . '/m' . $mediaId . '-' . $v . '.jpg';
     if (!is_file($out)) {
-        if (!is_dir($dir)) { @mkdir($dir, 0775, true); }
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0775, true);
+            $legacy = MEDIA_DIR . '/photomaps-mini'; // ancien emplacement (dans les médias, donc dans les sauvegardes) : vidé
+            if (is_dir($legacy)) { foreach (glob($legacy . '/m*.jpg') ?: [] as $oldFile) { @unlink($oldFile); } @rmdir($legacy); }
+        }
         foreach (glob($dir . '/m' . $mediaId . '-*.jpg') ?: [] as $oldFile) { @unlink($oldFile); }
         $ok = false;
         if ($kind === 'image' && function_exists('imagecreatefromstring') && filesize($path) < 60 * 1024 * 1024) {
             $info = @getimagesize($path);
-            if (is_array($info) && $info[0] * $info[1] < 120_000_000) {
+            if (is_array($info) && $info[0] * $info[1] < 120_000_000 && pm_gd_fits((int) $info[0], (int) $info[1], (int) filesize($path))) {
                 $im = @imagecreatefromstring((string) file_get_contents($path));
                 if ($im) {
                     $orient = (int) (pm_meta_read($path)['orientation'] ?? 1);

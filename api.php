@@ -12681,60 +12681,72 @@ function htr_recognize_media(PDO $pdo,array $data): array
         $bin = base64_decode($data['image_b64'], true);
         $info = $bin !== false ? @getimagesizefromstring($bin) : false;
         if (!$info || !in_array($info[2] ?? 0, [IMAGETYPE_JPEG, IMAGETYPE_PNG], true)) throw new RuntimeException('Image améliorée illisible.');
-        $base = (string) tempnam(sys_get_temp_dir(), 'lcnda-htr-'); if (is_file($base)) { @unlink($base); }
-        $tempImage = $base . ($info[2] === IMAGETYPE_PNG ? '.png' : '.jpg');
-        if (file_put_contents($tempImage, $bin) === false) throw new RuntimeException('Image améliorée : écriture impossible.');
+        // une image minuscule dans le fichier mais immense une fois ouverte (30 000 × 30 000…) : refusée avant d'aller au lecteur
+        if ((int) $info[0] < 1 || (int) $info[1] < 1 || (int) $info[0] > 20000 || (int) $info[1] > 20000 || (int) $info[0] * (int) $info[1] > 120000000) throw new RuntimeException('Image améliorée trop grande.');
+        // un nom tiré au hasard par le serveur (rien ne vient de la demande), créé seulement s'il n'existe pas encore (« x » : pas d'écrasement ni de lien suivi)
+        $fh = false;
+        for ($try = 0; $try < 5 && !$fh; $try++) {
+            $tempImage = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'lcnda-htr-' . bin2hex(random_bytes(12)) . ($info[2] === IMAGETYPE_PNG ? '.png' : '.jpg');
+            $fh = @fopen($tempImage, 'xb');
+        }
+        if (!$fh) { $tempImage = ''; throw new RuntimeException('Image améliorée : écriture impossible.'); }
+        // effacé quoi qu'il arrive : à la fin de la lecture (finally plus bas), et aussi à la fin de la demande si elle s'arrête avant
         register_shutdown_function(static function () use ($tempImage) { if (is_file($tempImage)) { @unlink($tempImage); } });
+        $len = strlen($bin); $written = fwrite($fh, $bin); fclose($fh); unset($bin);
+        if ($written !== $len) throw new RuntimeException('Image améliorée : écriture impossible.');
         $imagePath = $tempImage;
     }
+    try {
+        $modelId = safe_text($data['model'] ?? 'fr-actes') ?: 'fr-actes';
+        $language = safe_text($data['language'] ?? '');
+        $model = htr_model_by_id($modelId);
+        // Modèle et Kraken : installés dans le dossier des données (Maintenance → Reconnaissance d'écriture), sinon dans l'application
+        $modelPath = htr_model_file($model);
+        if (!$modelPath) {
+            throw new RuntimeException('Le modèle « ' . (string)($model['label'] ?? $modelId) . ' » n’est pas encore installé : Maintenance → Reconnaissance d’écriture (HTR) → « Installer », ou ajoute le fichier ' . basename((string)$model['model']) . ' à la main.');
+        }
 
-    $modelId = safe_text($data['model'] ?? 'fr-actes') ?: 'fr-actes';
-    $language = safe_text($data['language'] ?? '');
-    $model = htr_model_by_id($modelId);
-    // Modèle et Kraken : installés dans le dossier des données (Maintenance → Reconnaissance d'écriture), sinon dans l'application
-    $modelPath = htr_model_file($model);
-    if (!$modelPath) {
-        throw new RuntimeException('Le modèle « ' . (string)($model['label'] ?? $modelId) . ' » n’est pas encore installé : Maintenance → Reconnaissance d’écriture (HTR) → « Installer », ou ajoute le fichier ' . basename((string)$model['model']) . ' à la main.');
+        $script = __DIR__ . '/scripts/htr_recognize.py';
+        if (!is_file($script)) throw new RuntimeException('Script HTR local introuvable.');
+        $venvPython = htr_venv_python() ?? '';
+        if ($venvPython === '' && !trim((string) @shell_exec('command -v kraken 2>/dev/null'))) {
+            throw new RuntimeException('La reconnaissance d’écriture n’est pas encore installée : Maintenance → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois).');
+        }
+        $scriptArgs = ['--image',$imagePath,'--model',$modelPath,'--language',$language ?: (string)($model['language'] ?? ''),'--engine',(string)($model['engine'] ?? 'kraken')];
+        if (!empty($model['segment_direction'])) {
+            $scriptArgs[] = '--segment-direction';
+            $scriptArgs[] = (string)$model['segment_direction'];
+        }
+        if (!empty($model['base_dir'])) {
+            $scriptArgs[] = '--base-dir';
+            $scriptArgs[] = (string)$model['base_dir'];
+        }
+        $cmd = $venvPython !== '' && is_file($venvPython)
+            ? array_merge([$venvPython,$script], $scriptArgs)
+            : array_merge(['/usr/bin/env','python3',$script], $scriptArgs);
+        $descriptors = [1=>['pipe','w'],2=>['pipe','w']];
+        $proc = proc_open($cmd, $descriptors, $pipes, __DIR__);
+        if (!is_resource($proc)) throw new RuntimeException('Impossible de lancer le service HTR local.');
+        $stdout = stream_get_contents($pipes[1]);fclose($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);fclose($pipes[2]);
+        $code = proc_close($proc);
+        $result = json_decode((string)$stdout, true);
+        if ($code !== 0 || !is_array($result) || !empty($result['error'])) {
+            $message = is_array($result) && !empty($result['error']) ? (string)$result['error'] : trim((string)$stderr);
+            throw new RuntimeException($message ?: 'Reconnaissance manuscrite impossible.');
+        }
+        return [
+            'id'=>$mediaId,
+            'text'=>(string)($result['text'] ?? ''),
+            'engine'=>(string)($result['engine'] ?? 'kraken'),
+            'mode'=>(string)($result['mode'] ?? ''),
+            'model_id'=>$modelId,
+            'model_label'=>(string)($model['label'] ?? $modelId),
+            'language'=>$language ?: (string)($model['language'] ?? ''),
+        ];
+    } finally {
+        if ($tempImage !== '' && is_file($tempImage)) { @unlink($tempImage); } // l'image améliorée n'est gardée que le temps de la lecture
     }
-
-    $script = __DIR__ . '/scripts/htr_recognize.py';
-    if (!is_file($script)) throw new RuntimeException('Script HTR local introuvable.');
-    $venvPython = htr_venv_python() ?? '';
-    if ($venvPython === '' && !trim((string) @shell_exec('command -v kraken 2>/dev/null'))) {
-        throw new RuntimeException('La reconnaissance d’écriture n’est pas encore installée : Maintenance → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois).');
-    }
-    $scriptArgs = ['--image',$imagePath,'--model',$modelPath,'--language',$language ?: (string)($model['language'] ?? ''),'--engine',(string)($model['engine'] ?? 'kraken')];
-    if (!empty($model['segment_direction'])) {
-        $scriptArgs[] = '--segment-direction';
-        $scriptArgs[] = (string)$model['segment_direction'];
-    }
-    if (!empty($model['base_dir'])) {
-        $scriptArgs[] = '--base-dir';
-        $scriptArgs[] = (string)$model['base_dir'];
-    }
-    $cmd = $venvPython !== '' && is_file($venvPython)
-        ? array_merge([$venvPython,$script], $scriptArgs)
-        : array_merge(['/usr/bin/env','python3',$script], $scriptArgs);
-    $descriptors = [1=>['pipe','w'],2=>['pipe','w']];
-    $proc = proc_open($cmd, $descriptors, $pipes, __DIR__);
-    if (!is_resource($proc)) throw new RuntimeException('Impossible de lancer le service HTR local.');
-    $stdout = stream_get_contents($pipes[1]);fclose($pipes[1]);
-    $stderr = stream_get_contents($pipes[2]);fclose($pipes[2]);
-    $code = proc_close($proc);
-    $result = json_decode((string)$stdout, true);
-    if ($code !== 0 || !is_array($result) || !empty($result['error'])) {
-        $message = is_array($result) && !empty($result['error']) ? (string)$result['error'] : trim((string)$stderr);
-        throw new RuntimeException($message ?: 'Reconnaissance manuscrite impossible.');
-    }
-    return [
-        'id'=>$mediaId,
-        'text'=>(string)($result['text'] ?? ''),
-        'engine'=>(string)($result['engine'] ?? 'kraken'),
-        'mode'=>(string)($result['mode'] ?? ''),
-        'model_id'=>$modelId,
-        'model_label'=>(string)($model['label'] ?? $modelId),
-        'language'=>$language ?: (string)($model['language'] ?? ''),
-    ];
 }
 
 function set_portrait(PDO $pdo,array $data): array

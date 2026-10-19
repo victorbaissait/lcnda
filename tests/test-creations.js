@@ -86,7 +86,8 @@ $out['summary'] = creations_summary($pdo)['families'];
 file_put_contents(DATA_DIR . '/consultation.json', json_encode(['hash' => password_hash('1234', PASSWORD_DEFAULT), 'since' => 'x']));
 $k = $L(['family' => 'all', 'limit' => 200]);
 $out['kiosk'] = [$k['readonly'], $k['total'], in_array('Film de Louise (vivante)', $titles($k), true), in_array('Livre confidentiel', $titles($k), true),
-    array_values(array_filter($k['items'], static fn($i) => $i['id'] === $m1))[0]['people'], creations_summary($pdo)['families']['all'], $L(['family' => 'all', 'person' => 2])['total']];
+    array_values(array_filter($k['items'], static fn($i) => $i['id'] === $m1))[0]['people'], creations_summary($pdo)['families']['all'], $L(['family' => 'all', 'person' => 2])['total'],
+    json_encode(array_values(array_filter($k['items'], static fn($i) => $i['id'] === $m1))[0]['f'], JSON_UNESCAPED_UNICODE)];
 @unlink(DATA_DIR . '/consultation.json');
 // 20 000 fiches : la page reste rapide
 $pdo->beginTransaction();
@@ -157,6 +158,8 @@ assert.equal(out.kiosk[1], 9, 'consultation : sans la vivante ni la confidentiel
 assert.equal(out.kiosk[2], false); assert.equal(out.kiosk[3], false);
 assert.deepEqual(out.kiosk[4], [], 'consultation : la vivante n’est pas nommée dans les crédits');
 assert.equal(out.kiosk[5], 9, 'consultation : le résumé aussi');
+assert.equal(out.kiosk[6], 0, 'consultation : on ne cherche pas les fiches d’une personne vivante');
+assert.ok(!/Louise|BORIE/i.test(out.kiosk[7]), 'consultation : la vivante n’est pas nommée dans les colonnes (champ « crédits ») : ' + out.kiosk[7]);
 assert.equal(out.big[0], 20011, '20 000 fiches de plus');
 assert.ok(out.big[1] < 1.5, `20 000 fiches : chaque page en moins d’une seconde et demie (${out.big[2].join(' / ')} s)`);
 assert.equal(out.bad_op, true);

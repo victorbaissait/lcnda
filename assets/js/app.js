@@ -1182,7 +1182,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     /** Onglet raccourci : ouvre un écran de l'app (mêmes cibles que les raccourcis des widgets : module:, list:, maint:, graph:, stat:) */
     async function openCustomScreen(target){
         const [type,...rest]=String(target||'').split(':'),value=rest.join(':');
-        if(type==='module'&&modules[value]&&value!=='jeu')return setModule(value);
+        if(type==='module'&&Object.prototype.hasOwnProperty.call(modules,value)&&value!=='jeu')return setModule(value);
         if(type==='list'){state.listType=value;return setModule('listes');}
         if(type==='maint'){state.maintenanceTab=value;return setModule('maintenance');}
         if(type==='graph'){state.graphMode=value;state.graphStatsFrozenColors=null;return setModule('graphiques');}
@@ -2093,7 +2093,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     async function setModuleReal(module, pushHash = true) {
         if(state.module==='carte'&&module!=='carte'){hideMapTooltip();const surnameBox=document.getElementById('map-surname-suggestions');if(surnameBox)surnameBox.hidden=true;}
         if(state.hasRendered)saveScrollPosition();
-        if (!modules[module]) module = 'personnes';
+        if (!Object.prototype.hasOwnProperty.call(modules, module)) module = 'personnes'; // jamais « constructor », « __proto__ »… (raccourci ou adresse forgés)
         if (module === 'animaux') { state.peopleScope = 'animals'; module = 'personnes'; } else if (module === 'personnes' && !setModuleReal.keepScope) state.peopleScope = '';
         setModuleReal.keepScope = false;
         if (!animalsTabOn()) state.peopleScope = '';

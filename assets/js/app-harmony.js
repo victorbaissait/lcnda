@@ -13,14 +13,17 @@
     const KIND = {'🗑': 'delete', '🗑️': 'delete', '✎': 'edit', '✏': 'edit', '✏️': 'edit', '🖉': 'edit'};
     // les outils de dessin (crayon du dessin vectoriel, des tableaux…) ne sont pas des boutons « modifier »
     const isTool = b => [...b.attributes].some(a => /tool/i.test(a.name)) || b.closest('[class*="tools"][class*="vx"], .vx-rail, [data-vx-tools], .h-rt-toolbar, .ly-tools');
-    function tidy(b) {
+    const isIcon = b => !b.dataset.iaDone && !b.children.length && !!KIND[b.textContent.trim()];
+    /** h0 : la hauteur du bouton mesurée avant tout changement (tidyAll mesure tous les boutons d'abord, puis les change :
+     *  mesurer puis changer bouton par bouton recalculait toute la page à chaque fois — 14 s pour une liste de 1 500 lignes) */
+    function tidy(b, h0 = null) {
         if (b.dataset.iaDone) return; b.dataset.iaDone = '1';
         const t = b.textContent.trim(), kind = KIND[t];
         if (kind && !b.children.length && !isTool(b)) {
             const label = b.getAttribute('title') || b.getAttribute('aria-label') || (kind === 'delete' ? 'Supprimer' : 'Modifier');
             // 📐 dans une petite barre (vignette, piste du montage, ligne serrée…), le bouton d'origine était petit :
             // il prend la taille « outil » (C8) au lieu des 29 px, sinon il sortirait de son cadre
-            const h0 = b.getBoundingClientRect().height;
+            if (h0 === null) h0 = b.getBoundingClientRect().height;
             if ((h0 > 0 && h0 < 24) || b.closest('[data-ia-size="tool"]')) b.classList.add('ia-tool');
             b.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${SVG[kind]}</svg>`;
             b.classList.add('icon-action', 'ia-auto', `icon-${kind}`); if (kind === 'delete') b.classList.add('is-danger');
@@ -72,7 +75,9 @@
     }
     /* ⌨️ un raccourci clavier se lit dans la bulle d'aide : data-shortcut="⌘S" → « Enregistrer (⌘S) » */
     function shortcutTip(el) { const k = el.dataset.shortcut; if (!k || el.dataset.scDone === k) return; el.dataset.scDone = k; const t = (el.getAttribute('title') || el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\s*\([^()]*\)\s*$/, m => (m.includes(k) ? '' : m)); el.title = `${t} (${k})`; }
-    const scan = root => { root.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])').forEach(tidy); root.querySelectorAll?.('input[type=file]:not([data-fp-done])').forEach(filePick); root.querySelectorAll?.('[data-shortcut]').forEach(shortcutTip); if (root.matches?.('[data-shortcut]')) shortcutTip(root); };
+    /** toutes les mesures d'abord (une seule mise en page), puis tous les changements */
+    const tidyAll = list => { const hs = list.map(b => (isIcon(b) ? b.getBoundingClientRect().height : 0)); list.forEach((b, i) => tidy(b, hs[i])); };
+    const scan = (root, skipButtons = false) => { if (!skipButtons) tidyAll([...(root.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])') || [])]); root.querySelectorAll?.('input[type=file]:not([data-fp-done])').forEach(filePick); root.querySelectorAll?.('[data-shortcut]').forEach(shortcutTip); if (root.matches?.('[data-shortcut]')) shortcutTip(root); };
     /* ⏎ Entrée dans un champ d'une fenêtre = enregistrer (pas fermer) : le × d'en-tête et « Annuler » (value="cancel")
      * sans type étaient les premiers boutons d'envoi du formulaire, donc ceux qu'Entrée « cliquait » (fenêtre fermée,
      * saisie perdue). Ils deviennent de simples boutons qui ferment la fenêtre ; Entrée va au bouton principal. */
@@ -83,7 +88,9 @@
     fixCancel(document);
     let queued = new Set(), timer = 0;
     new MutationObserver(list => { list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) { queued.add(n); fixCancel(n); } })); clearTimeout(timer);
-        timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (!n.isConnected) return; if (n.matches?.('button')) tidy(n); scan(n); narrow(n); }); }, 40); })
+        timer = setTimeout(() => { const nodes = [...queued].filter(n => n.isConnected); queued = new Set();
+            const btns = new Set(); nodes.forEach(n => { if (n.matches?.('button, label.button') && !n.dataset.iaDone) btns.add(n); n.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])').forEach(b => btns.add(b)); });
+            tidyAll([...btns]); nodes.forEach(n => { scan(n, true); narrow(n); }); }, 40); })
         .observe(document.documentElement, {childList: true, subtree: true});
     document.addEventListener('DOMContentLoaded', () => scan(document));
 })();

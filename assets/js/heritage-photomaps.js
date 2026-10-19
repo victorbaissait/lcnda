@@ -62,7 +62,7 @@
                     let img = tiles.get(key);
                     if (!img) {
                         img = document.createElement('img'); img.className = 'map-tile'; img.alt = ''; img.draggable = false; img.decoding = 'async'; img.referrerPolicy = 'no-referrer';
-                        img.addEventListener('error', () => { if (++tileErr > 3) stage.querySelector('.pm-tile-note').hidden = false; }, {once: true});
+                        img.addEventListener('error', () => { img.style.visibility = 'hidden'; if (++tileErr > 3) stage.querySelector('.pm-tile-note').hidden = false; }, {once: true});
                         img.src = A().mapTileUrl(m.bg, z, ((x % n) + n) % n, y); tiles.set(key, img); tilesEl.appendChild(img);
                     }
                     img.style.transform = `translate(${Math.round(x * 256 - left)}px,${Math.round(y * 256 - top)}px)`;
@@ -206,7 +206,7 @@
     function createTimeline(host, {onChange, compact = false} = {}) {
         const saved = {group: 'auto', step: '1 mois', win: 'cumul', winText: '1 an', speed: '2', ...store.get(TIME_KEY, {})};
         const tl = {times: [], undated: 0, view: null, sel: null, play: null, playing: false, group: saved.group, step: T.parseStep(saved.step)?.step || {mo: 1}, stepText: saved.step,
-            win: ['cumul', 'step', 'custom'].includes(saved.win) ? saved.win : 'cumul', winText: saved.winText, winStep: T.parseStep(saved.winText)?.step || {y: 1}, speed: Number(saved.speed) || 2};
+            win: ['cumul', 'step', 'custom'].includes(saved.win) ? saved.win : 'cumul', winText: saved.winText, winStep: T.parseStep(saved.winText)?.step || {y: 1}, speed: SPEEDS.some(([v]) => Number(v) === Number(saved.speed)) ? Number(saved.speed) : 2};
         const remember = () => store.set(TIME_KEY, {group: tl.group, step: tl.stepText, win: tl.win, winText: tl.winText, speed: String(tl.speed)});
         host.classList.add('pm-time');
         host.innerHTML = `<div class="pm-time-row">
@@ -278,6 +278,7 @@
             if (!tl.times.length) return false;
             if (tl.play == null) tl.play = dir > 0 ? start() : end();
             else tl.play = T.addStep(tl.play, tl.step, dir);
+            if (!Number.isFinite(tl.play)) { tl.play = null; stop(); changed(); return false; } // pas impossible : on s'arrête
             let done = false;
             if (tl.play >= end()) { tl.play = end(); done = dir > 0; }
             if (tl.play < start()) tl.play = start();
@@ -319,7 +320,7 @@
             host.addEventListener('change', e => {
                 const k = e.target.dataset?.tl;
                 if (k === 'win') { tl.win = e.target.value; $('[data-tl=winbox]').hidden = tl.win !== 'custom'; remember(); changed(); }
-                if (k === 'speed') { tl.speed = Number(e.target.value) || 2; remember(); if (tl.playing) { stop(); play(); } }
+                if (k === 'speed') { tl.speed = SPEEDS.some(([v]) => Number(v) === Number(e.target.value)) ? Number(e.target.value) : 2; remember(); if (tl.playing) { stop(); play(); } }
                 if (k === 'group') { tl.group = e.target.value; remember(); paint(); }
             });
         }
@@ -613,13 +614,18 @@
         }
         /* ⤓ E3 : la carte en image (fond, trajet, vignettes) */
         function exportMap() {
+            const sub = () => (tl.sel ? `Du ${T.label(tl.sel[0])} au ${T.label(tl.sel[1])}` : (mp.period_text || ''));
+            const toMedia = async (blob, filename) => { try { await P().importMediaFile(new File([blob], filename, {type: blob.type}), ['image']); toast('Une copie est rangée dans les médias.'); } catch (x) { toast(`Copie dans les médias impossible : ${x.message}`, 'error'); } };
             const run = async o => {
-                const blob = await renderPng(map, o.format === 'jpg' ? 'image/jpeg' : 'image/png', mp.name, tl.sel ? `Du ${T.label(tl.sel[0])} au ${T.label(tl.sel[1])}` : (mp.period_text || ''));
-                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = o.filename || 'carte-de-photos.png'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+                const blob = await renderPng(map, o.format === 'jpg' ? 'image/jpeg' : 'image/png', mp.name, sub());
+                const fn = o.filename || `carte-de-photos.${o.format === 'jpg' ? 'jpg' : 'png'}`;
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fn; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+                if (o.saveCopy && P().importMediaFile) await toMedia(blob, fn);
             };
-            if (!UI().openExportDialog) return run({format: 'png'});
-            UI().openExportDialog({title: `Carte de photos « ${mp.name} »`, defaultName: mp.name || 'carte-de-photos', quality: false,
+            if (!UI().openExportDialog) return run({format: 'png'}).catch(x => toast(x.message, 'error'));
+            UI().openExportDialog({title: `Carte de photos « ${mp.name} »`, defaultName: mp.name || 'carte-de-photos', quality: false, saveCopy: !kiosk() && !!P().importMediaFile,
                 info: 'La carte telle qu’elle est à l’écran : fond, trajet et vignettes. Si le fond vient d’Internet et refuse d’être copié, l’image est faite sans lui.',
+                preview: async () => { try { return URL.createObjectURL(await renderPng(map, 'image/jpeg', mp.name, sub())); } catch (_) { return null; } },
                 formats: [{id: 'png', run}, {id: 'jpg', run}, {id: 'print', run: async () => { const blob = await renderPng(map, 'image/png', mp.name, ''); const u = URL.createObjectURL(blob); const w = window.open('', '_blank'); if (w) { w.document.write(`<title>${esc(mp.name)}</title><img src="${u}" style="max-width:100%" onload="print()">`); w.document.close(); } }}]});
         }
         // vue gardée, sinon tout voir
@@ -655,7 +661,7 @@
             if (el.classList.contains('is-video')) { c.fillStyle = 'rgba(0,0,0,.55)'; c.beginPath(); c.arc(x + s / 2, y + s / 2, 9, 0, Math.PI * 2); c.fill(); c.fillStyle = '#fff'; c.font = '10px Arial'; c.textAlign = 'center'; c.fillText('▶', x + s / 2 + 1, y + s / 2 + 4); }
         }
         c.fillStyle = 'rgba(255,255,255,.9)'; c.fillRect(0, 0, w, sub ? 46 : 30); c.fillStyle = '#111'; c.textAlign = 'left'; c.font = 'bold 16px Arial'; c.fillText(`📸 ${title || ''}`, 10, 21); if (sub) { c.font = '12px Arial'; c.fillText(sub, 10, 38); }
-        return new Promise(res => cv.toBlob(b => res(b), type, .92));
+        return new Promise((res, rej) => cv.toBlob(b => (b ? res(b) : rej(new Error('la carte est cachée ou trop petite pour en faire une image'))), type, .92));
     }
 
     /* ═════════════════ Créer, modifier une carte ═════════════════ */

@@ -86,6 +86,7 @@
     function parseStep(raw) {
         let s = fold(String(raw ?? '').replace(/(\d),(\d)/g, '$1.$2')).replace(/\bet\b/g, ' ').replace(/(\d)\s*h\s*(\d{1,2})(?!\s*[a-z\d])/g, '$1 h $2 min'); // « 1h30 »
         if (!s) return null;
+        if (/^-|\s-\s*\d/.test(s)) return {ok: false, error: 'un pas ne peut pas être négatif : pour reculer, utilise ⏮'};
         const st = {y: 0, mo: 0, w: 0, d: 0, h: 0, mi: 0, s: 0};
         const re = /(\d+(?:[.,]\d+)?)\s*([a-z]+)/g; let m, rest = s, any = false;
         while ((m = re.exec(s))) {
@@ -100,7 +101,8 @@
         }
         if (rest.replace(/[\s:+]/g, '') !== '') return {ok: false, error: /\d/.test(rest) ? 'un nombre sans unité : ajoute j, h, min, s, mois ou ans' : `je ne comprends pas « ${rest.trim()} »`};
         if (!any || !Object.values(st).some(Boolean)) return {ok: false, error: 'un pas de 0 n’avance pas : écris par exemple 1 j'};
-        if (st.y > 5000 || st.d + st.w * 7 > 2e6 || st.h > 5e7 || st.mi > 3e9) return {ok: false, error: 'pas trop grand'};
+        // au plus 5 000 ans en tout (au-delà, les dates sortent du calendrier de l'ordinateur et la lecture se perd)
+        if (st.y > 5000 || st.d + st.w * 7 > 2e6 || st.h > 5e7 || st.mi > 3e9 || st.s > 2e11 || stepMs(st) > 5000 * 365.2425 * DAY) return {ok: false, error: 'pas trop grand (5 000 ans au plus)'};
         return {ok: true, step: st, label: stepLabel(st)};
     }
     function splitMs(ms) { const out = {d: 0, h: 0, mi: 0, s: 0}; out.d = Math.floor(ms / DAY); ms -= out.d * DAY; out.h = Math.floor(ms / HOUR); ms -= out.h * HOUR; out.mi = Math.floor(ms / MIN); ms -= out.mi * MIN; out.s = Math.round(ms / SEC); return out; }
