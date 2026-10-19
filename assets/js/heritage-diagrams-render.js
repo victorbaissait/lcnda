@@ -95,7 +95,7 @@
         }
         if (o.source) { out += T(pad, bottom + fs * 1.3, o.source, {size: fs * .85, fill: fg, style: 'italic'}); bottom += fs * 2; }
         const H = Math.ceil(bottom + pad);
-        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${Math.ceil(W)} ${H}" width="${Math.ceil(W)}" height="${H}" font-family="${FONT}" color="${fg}" style="color:${fg}">${bgv ? `<rect width="100%" height="100%" fill="${bgv}"/>` : ''}${head}${out}</svg>`;
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${Math.ceil(W)} ${H}" width="${Math.ceil(W)}" height="${H}" font-family="${FONT}" color="${fg}" style="color:${fg}" role="img" aria-label="${esc(o.title || kind.label || 'Diagramme')}">${o.subtitle || o.source || body.desc ? `<desc>${esc([o.subtitle, body.desc, o.source].filter(Boolean).join(' — '))}</desc>` : ''}${bgv ? `<rect width="100%" height="100%" fill="${bgv}"/>` : ''}${head}${out}</svg>`; // titre et description pour les lecteurs d'écran
     }
 
     /* ═════════ 🏛️ Parlements ═════════ */

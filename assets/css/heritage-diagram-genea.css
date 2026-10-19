@@ -1,0 +1,14 @@
+/* LCNDA — 📊 diagrammes Généalogie et Frises (assets/js/heritage-diagram-genea.js) */
+.gn-net-host{position:relative}
+.gn-net-tools{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:6px;max-width:100%}
+.gn-net-tools .icon-button{min-width:32px}
+.gn-net-tools [aria-pressed="true"]{background:var(--blue, #0a66d8);color:#fff}
+.gn-net-hint{font-size:12px;color:var(--muted, #6b7280);flex:1 1 180px;min-width:0}
+.gn-app fieldset{border:1px solid var(--line, #d9dde3);border-radius:8px;padding:6px 10px;margin:0;display:flex;flex-wrap:wrap;gap:2px 14px;min-width:0}
+.gn-app fieldset legend{font-size:12px;font-weight:600;padding:0 4px;color:var(--muted, #6b7280)}
+.gn-app .gn-sets{display:grid;gap:6px;max-height:240px;overflow:auto}
+.gn-app [data-gn-msg]:empty{display:none}
+.h-dg-more{margin:4px 0 0;font-size:12px}
+:root[data-theme="dark"] .gn-app fieldset{border-color:#3a3f47}
+:root[data-theme="dark"] .gn-net-hint{color:#a3a9b3}
+@media (max-width: 480px){.gn-net-hint{flex-basis:100%}}

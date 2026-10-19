@@ -31,6 +31,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/app.css?v=227">
     <link rel="stylesheet" href="assets/css/picker.css?v=4">
     <link rel="stylesheet" href="assets/css/heritage.css?v=206">
+    <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
+    <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=1">
     <link rel="stylesheet" href="assets/css/layout.css?v=13">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1122,7 +1124,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=22" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=144" defer></script>
+<script src="assets/js/heritage-more.js?v=147" defer></script>
 <script src="assets/js/heritage-records.js?v=5" defer></script>
 <script src="assets/js/heritage-research.js?v=26" defer></script>
 <script src="assets/js/heritage-av.js?v=12" defer></script>
@@ -1157,8 +1159,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-fiches.js?v=16" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=3" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=10" defer></script>
-<script src="assets/js/heritage-diagrams-render.js?v=3" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=8" defer></script>
+<script src="assets/js/heritage-diagrams-render.js?v=5" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=10" defer></script>
+<script src="assets/js/heritage-diagram-genea.js?v=1" defer></script>
 <script src="assets/js/heritage-vector.js?v=18" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=12" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=8" defer></script>
@@ -1169,6 +1172,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lightbox-layout.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-kinds.js?v=5" defer></script>
 <script src="assets/js/heritage-graphs.js?v=3" defer></script>
+<script src="assets/js/heritage-diagram-chiffres.js?v=2" defer></script>
+<script src="assets/js/heritage-diagram-cartes.js?v=1" defer></script>
 <script src="assets/js/heritage-artist.js?v=13" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-panel.js?v=8" defer></script>

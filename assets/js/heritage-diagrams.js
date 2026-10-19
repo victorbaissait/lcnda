@@ -34,6 +34,7 @@
     /** chiffres « tenus à jour » : relus dans l'app à chaque affichage (une minute de mémoire) */
     const liveMem = new Map();
     async function resolveLive(spec) {
+        const kr = R().KINDS[spec?.kind]?.resolve; if (kr) { try { return await kr(spec); } catch (_) { return spec; } } // kind.resolve(spec) → Promise<spec> : une sorte qui prépare son dessin (fond de carte à charger, chiffres relus…) — heritage-diagram-cartes.js
         if (spec.live?.follow) return resolveFollow(spec);
         if (!spec.live?.key || !ext.diagramStatRows) return spec;
         let hit = liveMem.get(spec.live.key);
@@ -136,7 +137,8 @@
         }
         return cols;
     }
-    function ensureFixed(g, spec) { if (!g.fixed) return; const have = spec[g.key] || []; spec[g.key] = g.fixed.map(f => ({...(have.find(r => r.region === f) || {}), region: f})); }
+    const GRID_SHOWN = 400; // au-delà, les lignes ne s'affichent pas dans le tableau (des milliers de cases figeraient la fenêtre)
+    function ensureFixed(g, spec) { if (!g.fixed) return; const have = spec[g.key] || []; spec[g.key] = (typeof g.fixed === 'function' ? g.fixed(spec) : g.fixed).map(f => ({...(have.find(r => r.region === f) || {}), region: f})); }
     function gridHtml(g, gi, spec) {
         ensureFixed(g, spec);
         const cols = gridCols(g, spec), rows = spec[g.key] = Array.isArray(spec[g.key]) ? spec[g.key] : [];
@@ -152,7 +154,7 @@
             : c.series !== undefined ? `<th><span class="h-dg-sername"><input data-dg-sername="${c.series}" value="${esc(spec.series?.[c.series]?.name || '')}" placeholder="${esc(c.label)}"><input type="color" data-dg-sercolor="${c.series}" value="${esc(/^#[0-9a-f]{6}$/i.test(spec.series?.[c.series]?.color || '') ? spec.series[c.series].color : pal[c.series % pal.length])}" title="Couleur"></span></th>` : `<th>${esc(c.label)}</th>`).join('');
         const canAdd = !g.fixed && !(g.max && rows.length >= g.max);
         return `<section class="h-dg-grid" data-grid="${gi}"><h4>${esc(g.label)}</h4>${rows.length > 1 && !g.fixed ? `<div data-dg-sortbar="${gi}" data-count="${rows.length}"></div>` : `<small class="muted">(${rows.length})</small>`}
-            <div class="h-dg-tablewrap"><table><thead><tr>${head}<th></th></tr></thead><tbody>${rows.map((r, ri) => `<tr>${cols.map(c => cell(c, r, ri)).join('')}<td class="h-dg-rowtools">${g.fixed ? '' : `<button type="button" data-dg-row="up" data-g="${gi}" data-r="${ri}" title="Monter">↑</button><button type="button" data-dg-row="down" data-g="${gi}" data-r="${ri}" title="Descendre">↓</button><button type="button" data-dg-row="dup" data-g="${gi}" data-r="${ri}" title="Dupliquer">⧉</button><button type="button" data-dg-row="del" data-g="${gi}" data-r="${ri}" title="Supprimer">✕</button>`}</td></tr>`).join('')}</tbody></table></div>
+            <div class="h-dg-tablewrap"><table><thead><tr>${head}<th></th></tr></thead><tbody>${rows.slice(0, GRID_SHOWN).map((r, ri) => `<tr>${cols.map(c => cell(c, r, ri)).join('')}<td class="h-dg-rowtools">${g.fixed ? '' : `<button type="button" data-dg-row="up" data-g="${gi}" data-r="${ri}" title="Monter">↑</button><button type="button" data-dg-row="down" data-g="${gi}" data-r="${ri}" title="Descendre">↓</button><button type="button" data-dg-row="dup" data-g="${gi}" data-r="${ri}" title="Dupliquer">⧉</button><button type="button" data-dg-row="del" data-g="${gi}" data-r="${ri}" title="Supprimer">✕</button>`}</td></tr>`).join('')}</tbody></table></div>${rows.length > GRID_SHOWN ? `<p class="muted h-dg-more">… et ${(rows.length - GRID_SHOWN).toLocaleString('fr-FR')} autres lignes, cachées ici pour rester rapide : elles comptent dans le dessin (⤓ Exporter → CSV pour toutes les voir).</p>` : ''}
             <div class="h-dg-gridtools">${canAdd ? `<button type="button" class="button small" data-dg-add="${gi}">+ Ligne</button>` : ''}${g.series === true ? `<button type="button" class="button small secondary" data-dg-addser="${gi}">+ Série (colonne de chiffres)</button>` : ''}${g.fixed ? '' : `<button type="button" class="button small secondary" data-dg-paste="${gi}" title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">📥 CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-dg-csv="${gi}" hidden></label>`}${rows.length && !g.fixed ? `<button type="button" class="link-button" data-dg-clear="${gi}">Vider</button>` : ''}</div></section>`;
     }
     /** texte d'un tableur (tabulations) ou CSV (; ou ,) → lignes de cellules */
@@ -272,7 +274,9 @@
         const pane = dlg.querySelector('.h-dg-pane'), prev = dlg.querySelector('[data-dg-preview]');
         // « ✓ Enregistré » / « • modifié » au même endroit, sans toast (E1)
         const showStatus = () => window.LCNDA_UI?.savedStatus?.(dlg.querySelector('[data-ui-status]'), dirty ? 'dirty' : 'saved');
-        const draw = async () => { showStatus(); const s = await resolveLive(spec); prev.innerHTML = R().svg(s); };
+        const draw = async () => { showStatus(); const s = await resolveLive(spec); prev.innerHTML = R().svg(s); kindOf().afterDraw?.(prev, kindApi); };
+        // kind.afterDraw(aperçu, api) : une sorte qui se règle aussi dans l'aperçu (cadrage d'une carte à la souris) ; api.set({réglages}) change spec.o
+        const kindApi = {spec: () => spec, set: patch => { spec.o = {...(spec.o || {}), ...patch}; later(); if (tab === 'opts') { const y = pane.scrollTop; paint(); pane.scrollTop = y; } }};
         const later = () => { dirty = true; clearTimeout(timer); timer = setTimeout(draw, 90); };
         const paint = () => {
             dlg.querySelector('[data-dg-type]').textContent = `${kindOf().icon} ${kindOf().label} ▾`;
@@ -299,14 +303,19 @@
         });
         /* données prises dans l'app */
         const appPaneHtml = () => {
-            const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || ['parliament', 'wordcloud', 'pictogram'].includes(k);
-            return `<div class="h-dg-app">${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres tenus à jour : un exemple, une statistique de l’app (noms, lieux, âges…) ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques, avec tous leurs critères).</p>
+            if (kindOf().fromApp?.html) return kindOf().fromApp.html(spec); // une sorte avec son propre panneau : kind.fromApp = {html(spec), bind(pane, {spec, apply})} (heritage-diagram-genea.js)
+            const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || ['parliament', 'wordcloud', 'pictogram'].includes(k) || !!kindOf().pairs, kApp = kindOf().app;
+            // une sorte peut apporter ses propres données de l'arbre : kind.app = {sources: [[clé, nom]], fill: async (spec, clé) => spec}
+            return `<div class="h-dg-app">${kApp?.sources?.length ? `<h4>🌳 Des données de mon arbre</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main).</p><label>Données<select data-dg-kapp>${kApp.sources.map(([key, label]) => `<option value="${esc(key)}">${esc(label)}</option>`).join('')}</select></label><button type="button" class="button small" data-dg-kappgo>Prendre ces données</button>` : ''}${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres tenus à jour : un exemple, une statistique de l’app (noms, lieux, âges…) ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques, avec tous leurs critères).</p>
                 <label>Graphique<select data-dg-src><option value="">Chargement…</option></select></label><label class="checkbox-line"><input type="checkbox" data-dg-srclive> 🔄 Tenir à jour (relire les chiffres à chaque affichage)</label><button type="button" class="button small" data-dg-srcgo>Prendre ces chiffres</button>` : ''}
                 ${people ? `<h4>👥 Des personnes de la base</h4><p class="muted">${k === 'timeline' ? 'Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté).' : 'Leurs naissances, mariages et décès deviennent des dates de la frise.'}</p>
                 <div class="h-pr-addlink" data-dg-pq>${window.LCNDA_PICKER.pickerField({name: 'dg_addp', kind: 'person'})}</div>` : ''}
-                ${!stats && !people ? '<p class="muted">Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données).</p>' : ''}</div>`;
+                ${!stats && !people && !kApp?.sources?.length ? '<p class="muted">Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données).</p>' : ''}</div>`;
         };
         function bindAppPane() {
+            if (kindOf().fromApp?.bind) return kindOf().fromApp.bind(pane, {spec: () => clone(spec), apply: s => { spec = s; delete spec.live; tab = 'data'; paint(); later(); }, set: s => { spec = s; later(); } /* set : sans changer d'onglet, spec.live gardé */});
+            pane.querySelector('[data-dg-kappgo]')?.addEventListener('click', async e => { const key = pane.querySelector('[data-dg-kapp]').value, b = e.currentTarget; b.disabled = true;
+                try { spec = await kindOf().app.fill(clone(spec), key); delete spec.live; tab = 'data'; paint(); later(); toast('Données prises dans ton arbre.'); } catch (err) { toast(err.message, 'error'); } finally { b.disabled = false; } });
             const sel = pane.querySelector('[data-dg-src]');
             if (sel && ext.diagramStatSources) ext.diagramStatSources().then(src => { const g = {}; src.forEach(([key, label, grp]) => { (g[grp] = g[grp] || []).push([key, label]); }); sel.innerHTML = Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([key, label]) => `<option value="${esc(key)}" ${spec.live?.key === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</optgroup>`).join(''); }).catch(() => { sel.innerHTML = '<option value="">Indisponible</option>'; });
             else if (sel) sel.innerHTML = '<option value="">Indisponible</option>';
@@ -413,7 +422,7 @@
         dlg.querySelectorAll('[data-dg-tab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.dgTab; paint(); }));
         dlg.querySelector('[data-dg-type]').addEventListener('click', async () => {
             const t = await chooseType({current: spec.kind, title: 'Changer de type'}); if (!t) return;
-            const tableToTable = TABLE_KINDS.includes(t.kind) && TABLE_KINDS.includes(spec.kind);
+            const isTable = k => TABLE_KINDS.includes(k) || !!R().KINDS[k]?.table, tableToTable = isTable(t.kind) && isTable(spec.kind); // kind.table : mêmes catégories × séries
             const same = t.kind === spec.kind;
             if (same || tableToTable) { spec.kind = t.kind; spec.o = {...spec.o, ...(t.o || {})}; }
             else { const hasData = (spec.rows || []).length; const keepO = {title: spec.o.title, subtitle: spec.o.subtitle, source: spec.o.source, palette: spec.o.palette, width: spec.o.width, bg: spec.o.bg};

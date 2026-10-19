@@ -1,0 +1,69 @@
+Fonds de carte des diagrammes « Cartes » (carte colorée par zones, carte des migrations)
+=====================================================================================
+
+Ces fichiers sont produits par scripts/build-geo-maps.js à partir des sources ci-dessous, téléchargées telles
+quelles. Les tracés ont seulement été simplifiés (topojson-simplify) et quantifiés ; aucun contour n'a été
+dessiné à la main. Les noms des zones sont en français (traductions ajoutées dans le script) ; les codes
+d'origine (INSEE, NUTS, ISO 3166) sont gardés pour relier les lieux de l'application.
+Chaque carte dessinée rappelle sa source en petit, en bas à droite (« Fond : … »), comme le demandent les licences.
+
+
+1. monde-110m.json, monde-50m.json, continents.json — pays du monde et continents
+-------------------------------------------------------------------------------
+Source : Natural Earth (https://www.naturalearthdata.com), « Admin 0 – Countries » 1:110m et 1:50m.
+Licence : domaine public. « All versions of Natural Earth raster + vector map data found on this website are in
+the public domain. You may use the maps in any manner, including modifying the content and design, electronic
+dissemination, and offset printing. » — mention facultative : « Made with Natural Earth ».
+Paquet npm utilisé : world-atlas 2.0.2 (https://github.com/topojson/world-atlas), licence ISC :
+  Copyright 2013-2019 Michael Bostock
+  Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is
+  hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE
+  INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE,
+  DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+  CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+Noms français et codes : i18n-iso-countries 7.14.0 (licence MIT, Copyright (c) 2016 widdix GmbH).
+Continent de chaque pays (pour fondre les pays en continents) : countries-list 3.4.1 (licence MIT,
+Copyright (c) 2014 Annexare Studio).
+Texte de la licence MIT : « Permission is hereby granted, free of charge, to any person obtaining a copy of this
+software and associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions: The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. »
+Remarque : comme dans Natural Earth, la Russie entière compte dans l'Europe, la Turquie dans l'Asie.
+
+
+2. fr-departements.json, fr-regions.json — France (départements et régions, outre-mer compris)
+--------------------------------------------------------------------------------------------
+Source des tracés : IGN, Admin Express COG (édition 2018) ; noms et codes : INSEE, Code officiel géographique 2018.
+Fichiers repris de https://github.com/gregoiredavid/france-geojson (departements-avec-outre-mer.geojson,
+regions-avec-outre-mer.geojson).
+Licence : Licence Ouverte / Open Licence (Etalab) — réutilisation libre, y compris commerciale, à condition de
+mentionner la source et la date de dernière mise à jour : « Source : IGN – Admin Express COG 2018 ».
+https://www.etalab.gouv.fr/licence-ouverte-open-licence
+Codes NUTS ajoutés aux départements et régions d'après le fichier NUTS (point 3).
+
+
+3. eu-nuts1.json, eu-nuts2.json, be-provinces.json, be-regions.json, ch-cantons.json, ch-regions.json
+----------------------------------------------------------------------------------------------------
+Source : Eurostat GISCO, nomenclature NUTS version 2024 (régions NUTS 1, 2 et 3), échelles 1:10 000 000 et
+1:3 000 000, servie en TopoJSON par Eurostat sur https://github.com/eurostat/Nuts2json (pub/v2/2024/4326/…).
+Mention obligatoire, à montrer sur la carte : « © EuroGeographics for the administrative boundaries »
+(sur les cartes de l'app : « Fond : © EuroGeographics (Eurostat GISCO) »).
+Conditions : https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units — réutilisation autorisée
+à condition de citer la source ; les conditions d'Eurostat GISCO réservent certains jeux de limites
+administratives à un usage non commercial : l'application étant libre et gratuite (AGPL), cet usage est couvert ;
+à revoir si LCNDA devait un jour être vendue.
+Le code de Nuts2json est sous licence EUPL 1.2 (le code n'est pas repris, seulement les données).
+Belgique : provinces = NUTS 2 (BE10…BE35), régions = NUTS 1 fondues depuis les provinces.
+Suisse : cantons = NUTS 3 (CH011…CH070), grandes régions = NUTS 2. Noms français ajoutés dans le script.
+
+
+4. lu-cantons.json — Luxembourg (12 cantons)
+------------------------------------------
+Source : geoBoundaries (https://www.geoboundaries.org, jeu gbOpen LUX ADM1, 2017), d'après OpenStreetMap
+(limites de Wambacher). Licence : Open Data Commons Open Database License (ODbL) 1.0.
+Mention obligatoire : « © les contributeurs d'OpenStreetMap » (https://www.openstreetmap.org/copyright).
+Les fichiers dérivés (lu-cantons.json) restent sous ODbL 1.0 : https://opendatacommons.org/licenses/odbl/1-0/

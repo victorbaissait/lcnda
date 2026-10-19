@@ -9,6 +9,7 @@ require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/j
 require_once __DIR__ . '/lib/graphs.php'; // 📈 mes graphiques (table custom_widgets, sorte « graph » du menu de choix)
 require_once __DIR__ . '/lib/scene.php'; // 🎤 scène : coordonnées des lieux des concerts (assets/js/heritage-scene*.js)
 require_once __DIR__ . '/lib/layout_extra.php'; // 📐 mise en page : arbre dynamique, citations, vérificateur, index des lieux et métiers
+require_once __DIR__ . '/lib/diagram_genea.php'; // 📊 diagrammes Généalogie et Frises : éventail, soleil, réseau, arcs, Venn, calendrier, rose, spirale
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
 const EVENT_FACT_CONFIDENCE_LEVELS = ['unknown','certain','deduced','estimated','doubt'];
@@ -369,7 +370,10 @@ try {
         'act_transcriptions' => json_response(['items' => act_transcriptions_list($pdo)]),
         'act_transcription' => json_response(act_transcription_get($pdo, safe_int($_GET['id'] ?? 0))),
         'vector_map_places' => json_response(vector_map_places($pdo, (float) ($_GET['n'] ?? 0), (float) ($_GET['s'] ?? 0), (float) ($_GET['w'] ?? 0), (float) ($_GET['e'] ?? 0))),
+        'diagram_genea' => json_response(diagram_genea_data($pdo, $_GET)), // 📊 lib/diagram_genea.php
         'diagram_people' => json_response(diagram_people($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))),
+        'diagram_numbers' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_chiffres.php'; json_response(diagram_numbers($pdo, $_GET)); })(), // 📊 diagrammes « Chiffres » (lib/diagram_chiffres.php)
+        'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
         'person_names' => json_response(person_names($pdo)),
         'picker_search' => json_response(picker_search($pdo, $_GET)),
         'periodical_link_search' => json_response(periodical_link_search($pdo, (string) ($_GET['q'] ?? ''))),

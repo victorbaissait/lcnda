@@ -1,0 +1,26 @@
+/* LCNDA — 🗺️ Diagrammes « Cartes » (assets/js/heritage-diagram-cartes.js) : barre de cadrage de l'aperçu, onglet « Depuis l'app » */
+.dgm-bar{position:sticky;top:-16px;z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-16px -16px 12px;padding:8px 16px;background:#ffffffee;border-bottom:1px solid #d6d6d6;backdrop-filter:blur(4px)}
+.dgm-bar[hidden]{display:none}
+.dgm-bar-t{font-weight:700;margin-right:4px}
+.dgm-bar .is-active{background:#055dff;color:#fff;border-color:#055dff}
+.dgm-bar-h{flex:1 1 220px;min-width:0}
+.h-dg-preview [data-dg-preview]{position:relative}
+.h-dg-preview [data-geo-map]{cursor:grab;touch-action:none;transition:transform .05s linear}
+.h-dg-preview [data-geo-map]:active{cursor:grabbing}
+.dgm-rubber{position:absolute;z-index:4;border:2px dashed #055dff;background:#055dff1f;pointer-events:none}
+svg .dgm-z:hover{stroke:#1d1d1f;stroke-width:1.6}
+svg .dgm-f:hover path{stroke-opacity:1}
+.dgm-app .dgm-form{display:grid;gap:8px;margin-bottom:14px}
+.dgm-app .dgm-period{display:flex;flex-wrap:wrap;gap:8px}
+.dgm-app .dgm-period label{flex:1 1 120px;min-width:0}
+.dgm-app .dgm-msg{margin:0;min-height:1.2em;font-size:.9em}
+.dgm-app .dgm-msg:empty{display:none}
+.dgm-places{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:6px}
+.dgm-places li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:6px 8px;border:1px solid #d6d6d6;border-radius:8px;background:#fafafa}
+.dgm-pl-n{font-weight:600;overflow-wrap:anywhere}
+.dgm-pl-pk{flex:1 1 220px;min-width:0}
+@media (max-width:600px){.dgm-bar-h{display:none}.dgm-bar{gap:4px}}
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .dgm-bar{background:rgba(33,33,33,0.93);border-bottom:1px solid #4c4c4c}
+:root[data-theme="dark"] .dgm-places li{border:1px solid #4c4c4c;background:#232323}
+/* ═════ fin du mode sombre automatique ═════ */
