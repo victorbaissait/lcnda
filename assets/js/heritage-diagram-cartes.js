@@ -3,7 +3,10 @@
  *    dégradé ou classes, légende, étiquettes, valeur au survol ;
  *  - flowmap : carte des migrations, flèches courbes d'un lieu à un autre, plus épaisses quand il y a plus de personnes.
  * Fonds de carte : assets/data/geo/<fond>.json (TopoJSON simplifié, licences dans assets/data/geo/LICENCES.txt), chargés
- * seulement quand une carte est dessinée. Projections : Equal Earth, Robinson (monde), Lambert azimutale équivalente,
+ * seulement quand une carte est dessinée ; niveau « Communes (villes) » (France, Belgique, Suisse, Luxembourg) :
+ * <pays>-communes.json.gz (scripts/build-geo-communes.js), décompressé ici, communes retrouvées par code puis par
+ * nom + département (homonymes refusés), limites des départements tirées des communes. Encart zoomé sur
+ * l'Île-de-France (spec.o.idf) dans un coin libre, ou sous la carte quand il n'y en a pas. Projections : Equal Earth, Robinson (monde), Lambert azimutale équivalente,
  * Lambert conique conforme (Europe, pays), Mercator. Cadrage libre (molette, glisser, cadre tracé) enregistré dans
  * spec.o.view, ou cadrages tout faits (spec.o.frame).
  * Branchements (heritage-diagrams.js) : kind.resolve(spec) → Promise<spec> (fond chargé, chiffres de l'app relus),
@@ -17,6 +20,8 @@
     const A = () => window.LCNDA_APP;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const num = DR.num, color = DR.color;
+    // fonctions mathématiques gardées sous la main : les tracés des communes en appellent des millions de fois
+    const msin = Math.sin, mcos = Math.cos, msqrt = Math.sqrt, mround = Math.round, mabs = Math.abs, isF = Number.isFinite, MPI = Math.PI;
     const clamp = (v, a, b) => Math.max(a, Math.min(b, Number.isFinite(v) ? v : a));
     const r1 = v => Math.round(v * 10) / 10, r2 = v => Math.round((Number.isFinite(v) ? v : 0) * 100) / 100;
     const NF = new Intl.NumberFormat('fr-FR', {maximumFractionDigits: 2}); // un seul formateur : toLocaleString à chaque nombre est lent
@@ -31,15 +36,24 @@
     const hex6 = c => /^#[0-9a-f]{6}$/i.test(String(c || '')) ? String(c) : '';
 
     /* ═════════ Les fonds de carte ═════════ */
-    const GEO_DIR = 'assets/data/geo/', GEO_V = 1;
-    const ATTR = {ne: 'Fond : Natural Earth', ign: 'Fond : IGN Admin Express (Licence Ouverte)', nuts: 'Fond : © EuroGeographics (Eurostat GISCO)', osm: 'Fond : © contributeurs OpenStreetMap (ODbL)'};
-    const FILES = {'monde-110m': 'ne', 'monde-50m': 'ne', continents: 'ne', 'fr-departements': 'ign', 'fr-regions': 'ign', 'be-provinces': 'nuts', 'be-regions': 'nuts', 'ch-cantons': 'nuts', 'ch-regions': 'nuts', 'lu-cantons': 'osm', 'eu-nuts1': 'nuts', 'eu-nuts2': 'nuts'};
+    const GEO_DIR = 'assets/data/geo/', GEO_V = 2;
+    const ATTR = {ne: 'Fond : Natural Earth', ign: 'Fond : IGN Admin Express (Licence Ouverte)', nuts: 'Fond : © EuroGeographics (Eurostat GISCO)', osm: 'Fond : © contributeurs OpenStreetMap (ODbL)',
+        frc: 'Fond : IGN Admin Express, INSEE COG 2025 (Licence Ouverte)', bec: 'Fond : IGN-NGI, Statbel (CC BY 4.0)', chc: 'Fond : © swisstopo (Opendata BY)', luc: 'Fond : ACT Luxembourg (CC0)'};
+    const FILES = {'monde-110m': 'ne', 'monde-50m': 'ne', continents: 'ne', 'fr-departements': 'ign', 'fr-regions': 'ign', 'be-provinces': 'nuts', 'be-regions': 'nuts', 'ch-cantons': 'nuts', 'ch-regions': 'nuts', 'lu-cantons': 'osm', 'eu-nuts1': 'nuts', 'eu-nuts2': 'nuts',
+        'fr-communes': 'frc', 'be-communes': 'bec', 'ch-communes': 'chc', 'lu-communes': 'luc'};
+    // les communes : gros fichiers livrés compressés (gzip), chargés seulement quand on choisit ce niveau
+    const GZ = new Set(['fr-communes', 'be-communes', 'ch-communes', 'lu-communes']);
+    // pays de chaque fond des communes (un lieu d'un autre pays n'y est pas cherché par son nom)
+    const COUNTRY = {'fr-communes': ['france', 'fr', 'fra', 'guadeloupe', 'martinique', 'guyane', 'guyane francaise', 'la reunion', 'reunion', 'mayotte'], 'be-communes': ['belgique', 'belgium', 'belgie', 'belgien', 'be', 'bel'],
+        'ch-communes': ['suisse', 'switzerland', 'schweiz', 'svizzera', 'ch', 'che'], 'lu-communes': ['luxembourg', 'luxemburg', 'letzebuerg', 'lu', 'lux']};
+    const PARENT_WORD = {'fr-communes': 'le département', 'be-communes': 'la province', 'ch-communes': 'le canton', 'lu-communes': 'le canton'};
+    const DOM = {971: 'Guadeloupe', 972: 'Martinique', 973: 'Guyane', 974: 'La Réunion', 976: 'Mayotte'};
     // les cartes, leurs niveaux de détail [niveau, fond, nom] et leur cadrage de départ [ouest, sud, est, nord]
     const MAPS = {
-        fr: {label: 'France', levels: [['dep', 'fr-departements', 'Départements'], ['reg', 'fr-regions', 'Régions']], view: [-5.2, 41.3, 9.6, 51.15], ctx: true, insets: true},
-        be: {label: 'Belgique', levels: [['prov', 'be-provinces', 'Provinces'], ['reg', 'be-regions', 'Régions']], view: [2.5, 49.47, 6.43, 51.53], ctx: true},
-        ch: {label: 'Suisse', levels: [['cant', 'ch-cantons', 'Cantons'], ['reg', 'ch-regions', 'Grandes régions']], view: [5.92, 45.8, 10.52, 47.84], ctx: true},
-        lu: {label: 'Luxembourg', levels: [['cant', 'lu-cantons', 'Cantons']], view: [5.72, 49.43, 6.55, 50.19], ctx: true},
+        fr: {label: 'France', levels: [['dep', 'fr-departements', 'Départements'], ['reg', 'fr-regions', 'Régions'], ['com', 'fr-communes', 'Communes (villes)']], view: [-5.2, 41.3, 9.6, 51.15], ctx: true, insets: true, zoneBase: 'fr-departements', zoneWord: ['un département', 'Département', 'des départements', '35, Gers, Côtes-d’Armor…']},
+        be: {label: 'Belgique', levels: [['prov', 'be-provinces', 'Provinces'], ['reg', 'be-regions', 'Régions'], ['com', 'be-communes', 'Communes (villes)']], view: [2.5, 49.47, 6.43, 51.53], ctx: true, zoneBase: 'be-provinces', zoneWord: ['une province', 'Province', 'des provinces', 'Liège, Anvers, Hainaut…']},
+        ch: {label: 'Suisse', levels: [['cant', 'ch-cantons', 'Cantons'], ['reg', 'ch-regions', 'Grandes régions'], ['com', 'ch-communes', 'Communes (villes)']], view: [5.92, 45.8, 10.52, 47.84], ctx: true, zoneBase: 'ch-cantons', zoneWord: ['un canton', 'Canton', 'des cantons', 'Vaud, VD, Berne…']},
+        lu: {label: 'Luxembourg', levels: [['cant', 'lu-cantons', 'Cantons'], ['com', 'lu-communes', 'Communes (villes)']], view: [5.72, 49.43, 6.55, 50.19], ctx: true, zoneBase: 'lu-cantons', zoneWord: ['un canton', 'Canton', 'des cantons', 'Clervaux, Esch-sur-Alzette…']},
         eu: {label: 'Europe', levels: [['pays', 'monde-50m', 'Pays'], ['nuts1', 'eu-nuts1', 'Grandes régions (NUTS 1)'], ['nuts2', 'eu-nuts2', 'Régions (NUTS 2)']], view: [-24.5, 34.3, 44.8, 71.3], ctx: true},
         monde: {label: 'Monde', levels: [['pays', 'monde', 'Pays'], ['cont', 'continents', 'Continents']], view: [-180, -57, 180, 83.7]},
     };
@@ -58,25 +72,57 @@
     const store = new Map(); // fond → {data} | {promise} | {error}
     const waiting = new Map(); // jeton → {spec, width} : dessins à refaire quand leur fond arrive
     let waitSeq = 0, uidSeq = 0;
+    /** clé d'un nom de commune : sans accents ni tirets, « St » = « Saint » */
+    const nameKey = s => fold(s).replace(/\bste\b/g, 'sainte').replace(/\bst\b/g, 'saint');
+    const ARTICLE = /^(le|la|les|l|de|het|den|d) /;
     function decode(raw, id) {
-        const t = raw?.topo; if (!t || !Array.isArray(t.arcs) || !t.objects?.z || !Array.isArray(t.objects.z.geometries)) throw new Error('Fond de carte illisible.');
-        const [sx, sy] = t.transform?.scale || [1, 1], [tx, ty] = t.transform?.translate || [0, 0];
-        const arcs = t.arcs.map(a => { let x = 0, y = 0; const out = new Float64Array(a.length * 2); for (let i = 0; i < a.length; i++) { x += a[i][0]; y += a[i][1]; out[i * 2] = x * sx + tx; out[i * 2 + 1] = y * sy + ty; } return out; });
-        const ring = idx => { const pts = []; for (const i of idx) { const a = arcs[i < 0 ? ~i : i]; if (!a) continue; const n = a.length / 2; for (let j = 0; j < n; j++) { if (j === 0 && pts.length) continue; const k = i < 0 ? n - 1 - j : j; pts.push(a[k * 2], a[k * 2 + 1]); } } return Float64Array.from(pts); };
-        const zones = t.objects.z.geometries.map((g, gi) => {
-            const p = g.properties || {}, polys = (g.type === 'Polygon' ? [g.arcs] : g.type === 'MultiPolygon' ? g.arcs : []).map(pp => pp.map(ring));
-            let b = [Infinity, Infinity, -Infinity, -Infinity]; polys.forEach(pp => { const r = pp[0]; for (let i = 0; i < r.length; i += 2) { if (r[i] < b[0]) b[0] = r[i]; if (r[i] > b[2]) b[2] = r[i]; if (r[i + 1] < b[1]) b[1] = r[i + 1]; if (r[i + 1] > b[3]) b[3] = r[i + 1]; } });
-            return {i: gi, id: String(p.i ?? ''), name: String(p.n ?? p.i ?? ''), alt: Array.isArray(p.a) ? p.a.map(String) : [], parent: String(p.p ?? ''), label: Array.isArray(p.l) ? p.l.map(Number) : [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2], outre: !!p.o, polys, bbox: b};
-        }).filter(z => z.polys.length);
+        const t0 = raw?.topo; if (!t0 || !Array.isArray(t0.arcs) || !t0.objects?.z || !Array.isArray(t0.objects.z.geometries)) throw new Error('Fond de carte illisible.');
+        const communes = /-communes$/.test(id), zones = [], lines = [];
+        // une topologie (plus, pour les communes, une par département d'outre-mer : « more »)
+        [t0, ...(Array.isArray(raw.more) ? raw.more : [])].forEach(t => {
+            if (!Array.isArray(t?.arcs) || !Array.isArray(t.objects?.z?.geometries)) return;
+            const [sx, sy] = t.transform?.scale || [1, 1], [tx, ty] = t.transform?.translate || [0, 0];
+            const arcs = t.arcs.map(a => { let x = 0, y = 0; const out = new Float64Array(a.length * 2); for (let i = 0; i < a.length; i++) { x += a[i][0]; y += a[i][1]; out[i * 2] = x * sx + tx; out[i * 2 + 1] = y * sy + ty; } return out; });
+            const ring = idx => { let n = 0; for (const i of idx) { const a = arcs[i < 0 ? ~i : i]; if (a) n += a.length / 2; } const pts = new Float64Array(n * 2); let m = 0;
+                for (const i of idx) { const a = arcs[i < 0 ? ~i : i]; if (!a) continue; const k = a.length / 2; for (let j = 0; j < k; j++) { if (j === 0 && m) continue; const q = i < 0 ? k - 1 - j : j; pts[m++] = a[q * 2]; pts[m++] = a[q * 2 + 1]; } } return pts.subarray(0, m); };
+            const arcOwner = communes ? new Map() : null; // arc → parent de la 1re commune qui l'emprunte (limites des départements, plus bas)
+            t.objects.z.geometries.forEach(g => {
+                const p = g.properties || {}, refs = g.type === 'Polygon' ? [g.arcs] : g.type === 'MultiPolygon' ? g.arcs : [], polys = refs.map(pp => pp.map(ring));
+                let b = [Infinity, Infinity, -Infinity, -Infinity]; polys.forEach(pp => { const r = pp[0]; if (!r) return; for (let i = 0; i < r.length; i += 2) { if (r[i] < b[0]) b[0] = r[i]; if (r[i] > b[2]) b[2] = r[i]; if (r[i + 1] < b[1]) b[1] = r[i + 1]; if (r[i + 1] > b[3]) b[3] = r[i + 1]; } });
+                const code = String(p.i ?? ''), parent = String(p.p ?? (raw.parentFromCode && code ? (/^97/.test(code) ? code.slice(0, 3) : code.slice(0, 2)) : ''));
+                if (!polys.length || !polys[0][0]?.length) return;
+                zones.push({i: zones.length, id: code, name: String(p.n ?? p.i ?? ''), alt: Array.isArray(p.a) ? p.a.map(String) : [], parent, label: Array.isArray(p.l) ? p.l.map(Number) : [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2], outre: !!p.o, old: !!p.x, polys, bbox: b});
+                if (arcOwner) refs.flat(2).forEach(i => { const k = i < 0 ? ~i : i, o = arcOwner.get(k); if (o === undefined) arcOwner.set(k, {p: parent, n: 1, outre: !!p.o}); else { o.n++; if (o.p !== parent) o.diff = true; } });
+            });
+            // les limites des départements (ou provinces, cantons), tirées des communes elles-mêmes : exactement sur leurs limites
+            if (arcOwner) arcOwner.forEach((o, k) => { if (o.diff) { const a = arcs[k]; let b0 = Infinity, b1 = Infinity, b2 = -Infinity, b3 = -Infinity; for (let i = 0; i < a.length; i += 2) { if (a[i] < b0) b0 = a[i]; if (a[i] > b2) b2 = a[i]; if (a[i + 1] < b1) b1 = a[i + 1]; if (a[i + 1] > b3) b3 = a[i + 1]; } lines.push({a, outre: o.outre, bbox: [b0, b1, b2, b3]}); } });
+        });
         const index = new Map(), add = (k, z) => { const f = fold(k); if (f && !index.has(f)) index.set(f, z); };
-        zones.forEach(z => { add(z.id, z); if (/^0\d$/.test(z.id)) add(z.id.slice(1), z); }); zones.forEach(z => z.alt.forEach(a => add(a, z))); zones.forEach(z => add(z.name, z));
+        const pfx = String(raw.pfx || '');
+        if (!communes) { zones.forEach(z => { add(z.id, z); if (/^0\d$/.test(z.id)) add(z.id.slice(1), z); }); zones.forEach(z => z.alt.forEach(a => add(a, z))); zones.forEach(z => add(z.name, z)); }
+        // communes : les codes (et anciens codes) d'un côté, les noms (souvent les mêmes pour des centaines de communes) de l'autre
+        const byName = new Map(), byAlt = new Map(), push = (m, k, z) => { if (!k) return; const l = m.get(k); if (!l) m.set(k, [z]); else if (!l.includes(z)) l.push(z); };
+        if (communes) zones.forEach(z => {
+            add(z.id, z); if (pfx) add(pfx + z.id, z); if (/^\d+$/.test(z.id) && pfx) add(pfx + String(Number(z.id)), z);
+            const k = nameKey(z.name); push(byName, k, z); if (ARTICLE.test(k)) push(byName, k.replace(ARTICLE, ''), z);
+            z.alt.forEach(a => { if (/^\d[\dAB]\d{2,6}$/i.test(a)) add(a, z); else { const ka = nameKey(a); push(byAlt, ka, z); if (ARTICLE.test(ka)) push(byAlt, ka.replace(ARTICLE, ''), z);
+                const arr = ka.match(/^(.+ \d+)(e|er) arrondissement$/); if (arr) { push(byAlt, arr[1] + arr[2], z); push(byAlt, arr[1], z); } } }); // « Paris 12e », « Lyon 3 »
+        });
         const dupNames = new Set(); const seen = new Set(); zones.forEach(z => { const f = fold(z.name); if (seen.has(f)) dupNames.add(f); seen.add(f); });
-        return {id, name: String(raw.name || id), attr: ATTR[FILES[id]] || '', zones, index, dupNames, bbox: raw.bbox};
+        return {id, name: String(raw.name || id), attr: ATTR[FILES[id]] || '', zones, index, dupNames, bbox: raw.bbox, communes, byName, byAlt, lines, pfx, parentBase: String(raw.parentBase || ''), country: COUNTRY[id] || []};
+    }
+    /** un fichier compressé (gzip) : décompressé ici, sans dépendre du serveur */
+    async function readGeo(r, gz) {
+        if (!gz) return r.json();
+        const buf = new Uint8Array(await r.arrayBuffer());
+        if (buf[0] !== 0x1f || buf[1] !== 0x8b) return JSON.parse(new TextDecoder().decode(buf)); // déjà décompressé en route
+        if (typeof DecompressionStream === 'undefined') throw new Error('Ce navigateur ne sait pas ouvrir ce fond de carte.');
+        return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
     function load(id) {
         if (!FILES[id]) return Promise.reject(new Error('Fond de carte inconnu.'));
         const hit = store.get(id); if (hit?.data) return Promise.resolve(hit.data); if (hit?.promise) return hit.promise;
-        const promise = fetch(`${GEO_DIR}${id}.json?v=${GEO_V}`, {credentials: 'same-origin'}).then(r => { if (!r.ok) throw new Error('Fond de carte introuvable.'); return r.json(); })
+        const promise = fetch(`${GEO_DIR}${id}.json${GZ.has(id) ? '.gz' : ''}?v=${GEO_V}`, {credentials: 'same-origin'}).then(r => { if (!r.ok) throw new Error('Fond de carte introuvable.'); return readGeo(r, GZ.has(id)); })
             .then(raw => { const data = decode(raw, id); store.set(id, {data}); redrawWaiting(); return data; })
             .catch(e => { store.set(id, {error: e.message || 'Fond de carte indisponible.'}); redrawWaiting(); throw e; });
         store.set(id, {promise}); return promise;
@@ -121,6 +167,8 @@
         const sp0 = Math.sin(phi0), cp0 = Math.cos(phi0);
         return {
             f: (l, p) => { const dl = wrap(l - lam0), cp = Math.cos(p), sp = Math.sin(p), cl = Math.cos(dl), k = Math.sqrt(2 / Math.max(1e-9, 1 + sp0 * sp + cp0 * cp * cl)); return [k * cp * Math.sin(dl), k * (cp0 * sp - sp0 * cp * cl)]; },
+            // la même, sans créer de tableau (des centaines de milliers de points pour les communes)
+            fq: (l, p, o) => { let dl = l - lam0; if (dl > MPI || dl < -MPI) dl = wrap(dl); const cp = mcos(p), sp = msin(p), cl = mcos(dl), d = 1 + sp0 * sp + cp0 * cp * cl, k = msqrt(2 / (d > 1e-9 ? d : 1e-9)); o[0] = k * cp * msin(dl); o[1] = k * (cp0 * sp - sp0 * cp * cl); },
             inv: (x, y) => { const r = Math.sqrt(x * x + y * y); if (r < 1e-12) return [lam0, phi0]; const c = 2 * Math.asin(clamp(r / 2, -1, 1)), sc = Math.sin(c), cc = Math.cos(c); return [lam0 + Math.atan2(x * sc, r * cp0 * cc - y * sp0 * sc), Math.asin(clamp(cc * sp0 + y * sc * cp0 / r, -1, 1))]; }};
     }
     const autoProj = view => (view[2] - view[0] > 100 || view[3] - view[1] > 80) ? 'equalearth' : 'laea';
@@ -133,13 +181,15 @@
         const bw = Math.max(1e-9, x1 - x0), bh = Math.max(1e-9, y1 - y0);
         const h = hAuto ? clamp(w * bh / bw, w * .3, Math.min(hMax, w * 1.6)) : hMax;
         const k = Math.min(w / bw, h / bh), ox = (w - bw * k) / 2, oy = (h - bh * k) / 2;
+        const fq = P.fq || ((l, p, o) => { const r = P.f(l, p); o[0] = r[0]; o[1] = r[1]; });
         return {h, k, kind, view,
             p: (lo, la) => { const [x, y] = P.f(lo * RAD, la * RAD); return [ox + (x - x0) * k, oy + (y1 - y) * k]; },
+            q: (lo, la) => { fq(lo * RAD, la * RAD, PQ); PQ[0] = ox + (PQ[0] - x0) * k; PQ[1] = oy + (y1 - PQ[1]) * k; }, // résultat dans PQ
             inv: (px, py) => { const [l, p] = P.inv((px - ox) / k + x0, y1 - (py - oy) / k); return [clamp(l / RAD, -540, 540), clamp(p / RAD, -90, 90)]; }};
     }
 
     /* ── les tracés en SVG (mémoire des derniers dessins : les mêmes zones ne sont pas recalculées) ── */
-    const pathMem = new Map();
+    const pathMem = new Map(), PQ = new Float64Array(2);
     function zonePath(z, pr, w, h, cull = true) {
         let d = ''; const jump = Math.max(w, h) * .55;
         for (const poly of z.polys) for (const r of poly) {
@@ -147,10 +197,10 @@
             for (let i = 0; i < r.length; i += 2) {
                 // un contour qui passe la ligne des 180° (Russie, Fidji…) : longitudes suivies d'un seul tenant (190° au lieu de -170°)
                 if (r[i] - plo > 180) off -= 360; else if (r[i] - plo < -180) off += 360; plo = r[i];
-                const [x, y] = pr.p(r[i] + off, r[i + 1]); if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
-                if (n && Math.abs(x - lx) > jump) { n = -1; break; } // un anneau qui saute d'un bord à l'autre (180°) : pas dessiné
-                if (n && Math.abs(x - lx) < .5 && Math.abs(y - ly) < .5 && i < r.length - 2) continue;
-                s += (n ? 'L' : 'M') + r1(x) + ' ' + r1(y); n++; lx = x; ly = y;
+                pr.q(r[i] + off, r[i + 1]); const x = PQ[0], y = PQ[1]; if (!isF(x) || !isF(y)) continue;
+                if (n && mabs(x - lx) > jump) { n = -1; break; } // un anneau qui saute d'un bord à l'autre (180°) : pas dessiné
+                if (n && mabs(x - lx) < .5 && mabs(y - ly) < .5 && i < r.length - 2) continue;
+                s += (n ? 'L' : 'M') + mround(x * 10) / 10 + ' ' + mround(y * 10) / 10; n++; lx = x; ly = y;
                 if (x < bx0) bx0 = x; if (x > bx1) bx1 = x; if (y < by0) by0 = y; if (y > by1) by1 = y;
             }
             if (n < 3 || (bx1 - bx0 < .4 && by1 - by0 < .4)) continue;
@@ -175,10 +225,16 @@
     function viewOf(o, auto = null) {
         const M = MAPS[mapOf(o)];
         if (o.frame === 'custom') { const v = parseView(o.view); if (v) return v; }
+        if (o.frame === 'zone' && M.zoneBase) { // un département, une province, un canton : sa boîte, avec une marge
+            const zb = loaded(M.zoneBase), z = zb && String(o.frameZone ?? '').trim() ? matchZone(zb, o.frameZone) : null;
+            if (z) { const b = z.bbox, mx = Math.max(.04, (b[2] - b[0]) * .06), my = Math.max(.03, (b[3] - b[1]) * .06); return [b[0] - mx, b[1] - my, b[2] + mx, b[3] + my]; }
+        }
         const f = framesOf(mapOf(o)).find(x => x[0] === o.frame); if (f) return f[2];
         return auto || M.view;
     }
     const baseIdOf = (o, view) => { const id = levelOf(o)[1]; return id === 'monde' ? (view[2] - view[0] > 70 ? 'monde-110m' : 'monde-50m') : id; };
+    /** le fond des départements (provinces, cantons) : pour cadrer sur l'un d'eux, et lire « Saint-Martin (Gers) » */
+    const zoneBaseOf = o => { const M = MAPS[mapOf(o)]; return M.zoneBase && (o.frame === 'zone' || levelOf(o)[0] === 'com') ? M.zoneBase : ''; };
     const ctxIdOf = (o, baseId, view) => MAPS[mapOf(o)].ctx && o.context !== false && !baseId.startsWith('monde') ? (view[2] - view[0] > 70 ? 'monde-110m' : 'monde-50m') : '';
     /** le fond (et le fond autour) : déjà là, ou un dessin d'attente qui se refera tout seul */
     function needBases(spec, W, ids) {
@@ -193,11 +249,12 @@
     }
     const attrOf = (base, ctx) => ctx && ctx.attr && ctx.attr !== base.attr ? `${base.attr} ; ${ctx.attr.replace(/^Fond : /, '')}` : base.attr;
     const unitFor = (v, unit) => Math.abs(v) < 2 ? String(unit).replace(/(\S)s\b/g, '$1') : unit; // « 1 personne », « 6 personnes »
+    const PARENT_LINE = '#4a4f57'; // limites des départements par-dessus les communes
     const SEA = '#e3edf6', LAND = '#f1f0ec', LAND_LINE = '#c9c6bd';
     /** le dessin du fond : mer, pays autour, zones (remplies par fillOf), encarts d'outre-mer */
     function drawBase(spec, base, ctx, pr, w, h, fillOf, uid) {
         const o = spec.o || {}, key = `${pr.kind}|${pr.view.join(',')}|${Math.round(w)}x${Math.round(h)}`;
-        const line = color(o.borderColor, '#ffffff'), lw = clamp(num(o.borderWidth) || .8, .1, 6);
+        const line = color(o.borderColor, '#ffffff'), lw = clamp(num(o.borderWidth) || (base.communes ? .2 : .8), .1, 6); // communes : traits fins
         let svg = `<defs><clipPath id="${uid}c"><rect width="${r1(w)}" height="${r1(h)}"/></clipPath></defs><g clip-path="url(#${uid}c)">`;
         if (o.sea !== false) svg += `<rect width="${r1(w)}" height="${r1(h)}" fill="${color(o.seaColor, SEA)}"/>`;
         if (ctx) { const cp = pathsOf(ctx, pr, w, h, key); svg += `<path d="${cp.join('')}" fill="${color(o.landColor, LAND)}" stroke="${LAND_LINE}" stroke-width=".6" stroke-linejoin="round"/>`; }
@@ -206,23 +263,98 @@
         // les zones sans chiffre d'abord, en un seul tracé ; puis chaque zone avec sa couleur et sa bulle
         const plain = zones.filter(x => !x.f.title).map(x => x.d).join('');
         if (plain) svg += `<path d="${plain}" fill="${zones.find(x => !x.f.title)?.f.fill || '#e8e8e8'}" stroke="${line}" stroke-width="${lw}" stroke-linejoin="round"/>`;
-        zones.filter(x => x.f.title).forEach(x => { svg += `<path class="dgm-z" d="${x.d}" fill="${x.f.fill}" stroke="${line}" stroke-width="${lw}" stroke-linejoin="round"><title>${esc(x.f.title)}</title></path>`; });
+        // le trait est porté par le groupe (35 000 communes : des mégaoctets de moins à lire pour le navigateur)
+        const titled = zones.filter(x => x.f.title);
+        if (titled.length) svg += `<g stroke="${line}" stroke-width="${lw}" stroke-linejoin="round">${titled.map(x => `<path class="dgm-z" d="${x.d}" fill="${x.f.fill}"><title>${esc(x.f.title)}</title></path>`).join('')}</g>`;
+        if (base.communes && o.parentLines !== false) { const d = linesPath(base, pr, w, h, key, !!pr.allOutre); if (d) svg += `<path d="${d}" fill="none" stroke="${PARENT_LINE}" stroke-opacity=".7" stroke-width="${r2(clamp(lw * 4 * Math.sqrt(Math.min(1, w / 900)), .4, 3))}" stroke-linejoin="round" stroke-linecap="round" pointer-events="none"/>`; }
         svg += '</g>';
         return {svg, zones};
+    }
+    /** les limites des départements (provinces, cantons), par-dessus les communes */
+    function linesPath(base, pr, w, h, key, outre, filter = null) {
+        const k = `${base.id}|L|${key}|${outre ? 1 : 0}`; let d = filter ? null : pathMem.get(k); if (d !== undefined && d !== null) return d;
+        const v = pr.view, mx = (v[2] - v[0]) * .05, my = (v[3] - v[1]) * .05; d = '';
+        for (const ln of base.lines) {
+            if ((ln.outre && !outre) || ln.bbox[2] < v[0] - mx || ln.bbox[0] > v[2] + mx || ln.bbox[3] < v[1] - my || ln.bbox[1] > v[3] + my || (filter && !filter(ln))) continue;
+            const a = ln.a; let s = '', n = 0, lx = NaN, ly = NaN;
+            for (let i = 0; i < a.length; i += 2) { pr.q(a[i], a[i + 1]); const x = PQ[0], y = PQ[1]; if (!isF(x) || !isF(y)) continue; if (n && mabs(x - lx) < .5 && mabs(y - ly) < .5 && i < a.length - 2) continue; s += (n ? 'L' : 'M') + mround(x * 10) / 10 + ' ' + mround(y * 10) / 10; n++; lx = x; ly = y; }
+            if (n > 1) d += s;
+        }
+        if (!filter) { pathMem.set(k, d); if (pathMem.size > 16) pathMem.delete(pathMem.keys().next().value); }
+        return d;
     }
     /** les encarts d'outre-mer (France) : 2 colonnes en bas à gauche */
     function insetsOf(spec, base, w, h, fillOf) {
         const out = base.zones.filter(z => z.outre); if (!out.length) return {svg: '', zones: []};
-        const s = Math.min(w * .1, h * .12, 120), gap = Math.max(3, s * .08), cols = 2, rowsN = Math.ceil(out.length / cols), fsz = clamp(s / 8, 7, 12);
+        // un encart par département d'outre-mer (au niveau des communes, toutes ses communes dedans)
+        const groups = new Map(); out.forEach(z => { const k = base.communes ? z.parent : z.id; const g = groups.get(k); if (g) g.push(z); else groups.set(k, [z]); });
+        const list = [...groups].map(([k, zs]) => ({k, name: base.communes ? DOM[k] || k : zs[0].name, zs, bbox: zs.reduce((b, z) => [Math.min(b[0], z.bbox[0]), Math.min(b[1], z.bbox[1]), Math.max(b[2], z.bbox[2]), Math.max(b[3], z.bbox[3])], [Infinity, Infinity, -Infinity, -Infinity])}));
+        const s = Math.min(w * .1, h * .12, 120), gap = Math.max(3, s * .08), cols = 2, rowsN = Math.ceil(list.length / cols), fsz = clamp(s / 8, 7, 12);
+        const line = color(spec.o?.borderColor, '#ffffff'), lw = base.communes ? .25 : .7;
         let svg = ''; const placed = [];
-        out.forEach((z, i) => {
-            const cx = (i % cols) * (s + gap), cy = h - (rowsN - Math.floor(i / cols)) * (s + gap + fsz) + gap;
-            const pad = 4, pr = fitProj('laea', [z.bbox[0] - .05, z.bbox[1] - .05, z.bbox[2] + .05, z.bbox[3] + .05], s - pad * 2, s - pad * 2 - fsz, false);
-            const f = fillOf(z), d = zonePath(z, pr, s, s, false);
-            svg += `<g transform="translate(${r1(cx)} ${r1(cy)})"><rect width="${r1(s)}" height="${r1(s)}" fill="${color(spec.o?.seaColor, SEA)}" stroke="#9aa3ad" stroke-width=".8" rx="3"/>${T(s / 2, fsz * .8, z.name, {anchor: 'middle', size: fsz, fill: '#444'})}<g transform="translate(${pad} ${r1(pad + fsz)})"><path class="dgm-z" d="${d}" fill="${f.fill}" stroke="${color(spec.o?.borderColor, '#ffffff')}" stroke-width=".7">${f.title ? `<title>${esc(f.title)}</title>` : ''}</path></g></g>`;
+        list.forEach((G, i) => {
+            const cx = (i % cols) * (s + gap), cy = h - (rowsN - Math.floor(i / cols)) * (s + gap + fsz) + gap, b = G.bbox;
+            const pad = 4, pr = fitProj('laea', [b[0] - .05, b[1] - .05, b[2] + .05, b[3] + .05], s - pad * 2, s - pad * 2 - fsz, false);
+            let plain = '', plainFill = '', inner = '';
+            G.zs.forEach(z => { const f = fillOf(z), d = zonePath(z, pr, s, s, false); if (!d) return; if (f.title) inner += `<path class="dgm-z" d="${d}" fill="${f.fill}" stroke="${line}" stroke-width="${lw}"><title>${esc(f.title)}</title></path>`; else { plain += d; plainFill = f.fill; } });
+            if (plain) inner = `<path d="${plain}" fill="${plainFill}" stroke="${line}" stroke-width="${lw}"/>` + inner;
+            if (base.communes && spec.o?.parentLines !== false) { const d = linesPath(base, pr, s, s, '', true, ln => ln.outre && ln.bbox[0] >= b[0] - .01 && ln.bbox[2] <= b[2] + .01 && ln.bbox[1] >= b[1] - .01 && ln.bbox[3] <= b[3] + .01); if (d) inner += `<path d="${d}" fill="none" stroke="${PARENT_LINE}" stroke-opacity=".6" stroke-width=".6" pointer-events="none"/>`; }
+            const nf = Math.max(5, Math.min(fsz, (s - 4) / Math.max(1, textW(G.name, 1)))); // le nom tient dans son cadre (rien de collé au voisin)
+            svg += `<g transform="translate(${r1(cx)} ${r1(cy)})"><rect width="${r1(s)}" height="${r1(s)}" fill="${color(spec.o?.seaColor, SEA)}" stroke="#9aa3ad" stroke-width=".8" rx="3"/>${T(s / 2, fsz * .8, G.name, {anchor: 'middle', size: nf, fill: '#444'})}<g transform="translate(${pad} ${r1(pad + fsz)})">${inner}</g></g>`;
             placed.push([cx, cy, s, s]);
         });
         return {svg, boxes: placed};
+    }
+
+    /* ── l'encart zoomé sur l'Île-de-France (Paris et petite couronne, ou toute la région) ── */
+    const IDF = {pc: ['Paris et petite couronne', [2.06, 48.66, 2.64, 49.02]], idf: ['Île-de-France', [1.42, 48.1, 3.58, 49.26]]};
+    const idfOf = o => { const l = levelOf(o)[0], v = o.idf ?? (l === 'reg' ? 'none' : 'pc'); return mapOf(o) === 'fr' && IDF[v] ? v : ''; };
+    function idfInset(spec, base, pr, w, h, fillOf, avoid, lf, byZone, uid) {
+        const o = spec.o || {}, kind = idfOf(o); if (!kind) return null;
+        const [title, T0] = IDF[kind], v = pr.view;
+        if (!(v[0] < 2.35 && v[2] > 2.35 && v[1] < 48.86 && v[3] > 48.86)) return null; // le cadrage ne montre pas Paris
+        const a = pr.p(T0[0], T0[1]), b = pr.p(T0[2], T0[3]), tx0 = Math.min(a[0], b[0]), tx1 = Math.max(a[0], b[0]), ty0 = Math.min(a[1], b[1]), ty1 = Math.max(a[1], b[1]);
+        // un coin libre : le plus grand encart possible qui ne cache (presque) rien du pays, ni l'outre-mer, ni la zone agrandie
+        const land = base.parentBase && loaded(base.parentBase) || base, mainland = land.zones.filter(z => !z.outre);
+        const covered = (x, y, S, H) => { let n = 0; for (let i = 0; i < 7; i++) for (let j = 0; j < 7; j++) { const [lo, la] = pr.inv(x + S * (i + .5) / 7, y + H * (j + .5) / 7); if (mainland.some(z => inZone(z, lo, la))) n++; } return n / 49; };
+        const m = 6, rects = [[tx0 - 4, ty0 - 4, tx1 + 4, ty1 + 4], ...avoid.map(([ax, ay, aw, ah]) => [ax - 3, ay - 3, ax + aw + 3, ay + ah + 3])];
+        let pick = null;
+        const sized = S => { const cap = clamp(S / 13, 8, 12), ipr = fitProj('laea', T0, S, S * 1.2, true); return {S, cap, ipr, ih: ipr.h, H: ipr.h + cap * 1.7}; };
+        if (Math.min(w * .27, 260) / Math.max(1, tx1 - tx0, ty1 - ty0) < 1.8) return null; // déjà assez grand sur la carte (on zoome dessus)
+        for (const f of [.27, .24, .21, .18, .15]) {
+            const S = Math.min(w * f, h * f * 1.1, 260); if (S < 80) break;
+            const z = sized(S);
+            for (const [x, y] of [[m, m], [w - S - m, m], [w - S - m, h - z.H - m - 14], [m, h - z.H - m]]) {
+                if (rects.some(r => !(x + S < r[0] || x > r[2] || y + z.H < r[1] || y > r[3]))) continue;
+                if (covered(x, y, S, z.H) <= .02) { pick = {...z, x, y}; break; }
+            }
+            if (pick) break;
+        }
+        // aucun coin libre (téléphone, carte serrée) : l'encart se met sous la carte, en entier
+        if (!pick) { const z = sized(clamp(w * .62, 150, 260)); if (z.S > w - 8) return null; pick = {...z, x: (w - z.S) / 2, y: h + 8, below: true}; }
+        const {x: x0, y: y0, S, cap, ipr, ih, H} = pick, line = color(o.borderColor, '#ffffff'), lw = clamp(num(o.borderWidth) || (base.communes ? .35 : .8), .1, 6);
+        const paths = pathsOf(base, ipr, S, ih, `idf|${kind}|${Math.round(S)}`);
+        let plain = '', plainFill = '', zs = '';
+        base.zones.forEach((z, i) => { const d = paths[i]; if (!d || z.outre) return; const f = fillOf(z); if (f.title) zs += `<path class="dgm-z" d="${d}" fill="${f.fill}" stroke="${line}" stroke-width="${lw}" stroke-linejoin="round"><title>${esc(f.title)}</title></path>`; else { plain += d; plainFill = f.fill; } });
+        if (plain) zs = `<path d="${plain}" fill="${plainFill}" stroke="${line}" stroke-width="${lw}" stroke-linejoin="round"/>` + zs;
+        if (base.communes && o.parentLines !== false) { const d = linesPath(base, ipr, S, ih, `idf|${kind}|${Math.round(S)}`, false); if (d) zs += `<path d="${d}" fill="none" stroke="${PARENT_LINE}" stroke-opacity=".6" stroke-width="${r2(clamp(lw * 2.5, .7, 3))}" pointer-events="none"/>`; }
+        // étiquettes de l'encart : le nom s'il tient, sinon le numéro (75, 92…), avec le chiffre
+        let labs = ''; const placed = [], ilf = clamp(lf * .9, 7, 13), lab = o.labels || 'auto';
+        if (lab !== 'none') base.zones.map((z, i) => paths[i] && !z.outre ? z : null).filter(Boolean).map(z => { const [lx, ly] = ipr.p(z.label[0], z.label[1]), p0 = ipr.p(z.bbox[0], z.bbox[1]), p1 = ipr.p(z.bbox[2], z.bbox[3]); return {z, lx, ly, area: Math.abs((p1[0] - p0[0]) * (p1[1] - p0[1]))}; })
+            .filter(x => x.lx > 2 && x.lx < S - 2 && x.ly > 2 && x.ly < ih - 2 && (!base.communes || lab !== 'auto' || byZone.get(x.z)?.has)).sort((p, q) => q.area - p.area).slice(0, 120).forEach(x => {
+                const e = byZone.get(x.z), fit = t => textW(t, ilf) <= Math.sqrt(x.area) * 1.15;
+                const nm = lab === 'value' ? '' : fit(x.z.name) || lab !== 'auto' ? x.z.name : !base.communes && x.z.id && fit(x.z.id) ? x.z.id : ''; // 75, 92… (pas les codes INSEE)
+                const lines = [nm, (lab === 'value' || lab === 'both' || lab === 'auto') && e?.has ? fmt(e.v) : ''].filter(Boolean); if (!lines.length) return;
+                const tw = Math.max(...lines.map(t => textW(t, ilf))), th = lines.length * ilf * 1.15, box = [x.lx - tw / 2 - 1, x.ly - th / 2, x.lx + tw / 2 + 1, x.ly + th / 2];
+                if (box[0] < 0 || box[2] > S || placed.some(q => !(box[2] < q[0] || box[0] > q[2] || box[3] < q[1] || box[1] > q[3]))) return; placed.push(box);
+                const fc = contrast(fillOf(x.z).fill), halo = fc === '#ffffff' ? 'rgba(0,0,0,.35)' : 'rgba(255,255,255,.7)';
+                lines.forEach((t, i) => { labs += T(x.lx, x.ly - th / 2 + ilf * .58 + i * ilf * 1.15, t, {anchor: 'middle', size: i ? ilf * .92 : ilf, weight: i ? 400 : 600, fill: fc, halo}); });
+            });
+        const cid = `${uid}i`, cx = (tx0 + tx1) / 2, cy = (ty0 + ty1) / 2, ex = x0 + S / 2 < cx ? x0 + S : x0, ey = y0 + H / 2 < cy ? y0 + H : y0;
+        const link = `<rect x="${r1(tx0)}" y="${r1(ty0)}" width="${r1(Math.max(2, tx1 - tx0))}" height="${r1(Math.max(2, ty1 - ty0))}" fill="none" stroke="#3a3f45" stroke-width=".9" rx="1.5" pointer-events="none"/>` + (pick.below ? '' : `<line x1="${r1(ex)}" y1="${r1(ey)}" x2="${r1(ex === x0 ? tx0 : tx1)}" y2="${r1(ey === y0 ? ty0 : ty1)}" stroke="#3a3f45" stroke-width=".7" stroke-opacity=".7" pointer-events="none"/>`);
+        const svg = `${link}<g data-geo-inset="idf" transform="translate(${r1(x0)} ${r1(y0)})"><defs><clipPath id="${cid}"><rect width="${r1(S)}" height="${r1(ih)}" rx="3"/></clipPath></defs><rect width="${r1(S)}" height="${r1(H)}" rx="4" fill="#ffffff" stroke="#3a3f45" stroke-width="1"/>`
+            + `<g transform="translate(0 ${r1(cap * 1.7)})"><g clip-path="url(#${cid})"><rect width="${r1(S)}" height="${r1(ih)}" fill="${color(o.seaColor, SEA)}"/>${zs}${labs}</g></g>${T(S / 2, cap * .95, title, {anchor: 'middle', size: cap, weight: 600, fill: '#333'})}</g>`;
+        return {svg, box: [x0, y0, S, H], below: pick.below ? H + 12 : 0, geo: {x: x0, y: y0 + cap * 1.7, w: S, h: ih, pr: ipr}};
     }
 
     /* ═════════ Couleurs : dégradés et classes ═════════ */
@@ -253,6 +385,7 @@
 
     /** les lignes du tableau rattachées aux zones du fond : {byZone: Map(zone → {v, notes}), missing: [noms]} */
     function matchZone(base, raw) {
+        if (base?.communes) return matchCommune(base, raw).z;
         const s = String(raw ?? '').trim(); if (!s) return null;
         let z = base.index.get(fold(s)); if (z) return z;
         const par = s.match(/\(([^()]{1,12})\)\s*$/); if (par && (z = base.index.get(fold(par[1])))) return z;
@@ -261,11 +394,51 @@
         const lead = s.match(/^\s*(\d{2,3}|2[ab])\b/i); if (lead && (z = base.index.get(fold(lead[1])))) return z;
         return null;
     }
+    /** les parents (départements, provinces, cantons) que désigne un indice : « 32 », « Gers », « 32000 », « (Ille-et-Vilaine) » */
+    function parentsOf(base, hint) {
+        const out = new Set(), h = String(hint ?? '').trim(); if (!h) return out;
+        const f = fold(h), pb = base.parentBase ? loaded(base.parentBase) : null;
+        if (pb) { const z = matchZone(pb, h); if (z) out.add(z.id); }
+        if (base.id === 'fr-communes') {
+            if (/^(\d{2}|2[ab]|97\d)$/.test(f)) out.add(f.toUpperCase()); // numéro du département
+            else if (/^\d$/.test(f)) out.add('0' + f);
+            else if (/^\d{5}$/.test(f)) { if (/^97/.test(f)) out.add(f.slice(0, 3)); else if (/^20/.test(f)) { out.add('2A'); out.add('2B'); } else out.add(f.slice(0, 2)); } // code postal
+        }
+        if (!out.size) { const up = h.toUpperCase(); if (base.zones.some(z => z.parent === up)) out.add(up); }
+        return out;
+    }
+    /** une commune d'après son code, ou son nom (+ département, province ou canton pour départager les homonymes) :
+     *  {z} ou {z: null, why: 'homonymes' | ''} */
+    function matchCommune(base, raw, hints = []) {
+        const s = String(raw ?? '').trim().slice(0, 120); if (!s) return {z: null, why: ''};
+        let z = base.index.get(fold(s)); if (z) return {z};
+        const par = s.match(/^(.*?)\s*\(([^()]{1,40})\)\s*$/);
+        if (par && (z = base.index.get(fold(par[2])))) return {z};
+        // les découpages possibles : « nom », « nom (indice) », « nom, indice », « nom indice »
+        const tries = [[s, '']]; if (par) tries.push([par[1], par[2]]);
+        const comma = s.split(','); if (comma.length > 1) tries.push([comma[0], comma.slice(1).join(',')]);
+        const words = s.replace(/\(.*\)$/, '').trim().split(/\s+/); for (let k = 1; k <= Math.min(3, words.length - 1); k++) tries.push([words.slice(0, -k).join(' '), words.slice(-k).join(' ')]);
+        const extra = hints.map(h => String(h ?? '').trim()).filter(Boolean);
+        let homonym = false;
+        for (const map of [base.byName, base.byAlt]) for (const [name, hint] of tries) {
+            const list = map.get(nameKey(name)); if (!list?.length) continue;
+            const hs = [hint, ...(hint ? [] : extra)].filter(Boolean);
+            if (hs.length) {
+                for (const hh of hs) { const ps = parentsOf(base, hh); if (!ps.size) continue; const f = list.filter(c => ps.has(c.parent)); if (f.length === 1) return {z: f[0]}; if (f.length > 1) { const cur = f.filter(c => !c.old); if (cur.length === 1) return {z: cur[0]}; homonym = true; } }
+                if (hint) continue; // l'indice ne désigne rien : on essaie un autre découpage
+            }
+            if (list.length === 1) return {z: list[0]};
+            const cur = list.filter(c => !c.old); if (cur.length === 1) return {z: cur[0]};
+            homonym = true;
+        }
+        return {z: null, why: homonym ? 'homonymes' : ''};
+    }
     function joinRows(spec, base) {
         const byZone = new Map(), missing = [];
-        rowsOf(spec).forEach(r => {
+        rowsOf(spec, base.communes ? 40000 : 5000).forEach(r => { // une ligne par commune : jusqu'à 40 000
             const label = r.label ?? r.zone; if (String(label ?? '').trim() === '') return;
-            const z = matchZone(base, label); if (!z) { if (missing.length < 40) missing.push(String(label).slice(0, 40)); return; }
+            const m = base.communes ? matchCommune(base, label) : {z: matchZone(base, label)}, z = m.z;
+            if (!z) { if (missing.length < 40) missing.push(String(label).slice(0, 40) + (m.why === 'homonymes' ? ` (homonymes : précise ${PARENT_WORD[base.id] || 'le département'})` : '')); return; }
             const blankV = r.s0 === undefined || r.s0 === null || String(r.s0).trim() === '';
             const e = byZone.get(z) || {v: 0, has: false, notes: []}; if (!blankV) { e.v += num(r.s0); e.has = true; } if (r.note) e.notes.push(String(r.note).slice(0, 120)); byZone.set(z, e);
         });
@@ -275,7 +448,8 @@
 
     /* ═════════ 🗺️ Carte colorée par zones ═════════ */
     function choropleth(spec, W, fs) {
-        const o = spec.o || {}, view = viewOf(o), baseId = baseIdOf(o, view), ctxId = ctxIdOf(o, baseId, view);
+        const o0 = spec.o || {}, zb = zoneBaseOf(o0); if (zb) { const w0 = needBases(spec, W, [zb]); if (w0) return w0; } // le cadrage peut dépendre d'un département
+        const o = o0, view = viewOf(o), baseId = baseIdOf(o, view), ctxId = ctxIdOf(o, baseId, view);
         const wait = needBases(spec, W, [baseId, ctxId]); if (wait) return wait;
         const base = loaded(baseId), ctx = ctxId ? loaded(ctxId) : null, uid = 'dgm' + (++uidSeq);
         const legPos = o.legend === 'none' ? 'none' : o.legend === 'right' ? 'right' : 'bottom';
@@ -284,17 +458,21 @@
         const h = pr.h, unit = o.unit ? ' ' + String(o.unit).slice(0, 30) : '', series = String(spec.series?.[0]?.name || '').slice(0, 60);
         const {byZone, missing} = joinRows(spec, base);
         const vals = [...byZone.values()].filter(e => e.has).map(e => e.v), sc = vals.length ? scaleOf(vals, o) : null, noData = color(o.noData, '#e4e4e7');
-        const fillOf = z => { const e = byZone.get(z); if (!e) return {fill: noData, title: o.hoverAll !== false ? `${z.name}${z.id && !/^x-/.test(z.id) ? ` (${z.id})` : ''} : pas de chiffre` : ''};
-            return {fill: e.has && sc ? sc.color(e.v) : noData, title: `${z.name}${z.id && !/^x-/.test(z.id) ? ` (${z.id})` : ''} : ${e.has ? fmt(e.v) + unit : 'pas de chiffre'}${series && e.has ? ' — ' + series : ''}${e.notes.length ? '\n' + e.notes.join('\n') : ''}`, v: e.has ? e.v : null}; };
+        const hoverAll = o.hoverAll ?? !base.communes; // 35 000 bulles : seulement si on le demande
+        const nameOf = z => `${z.name}${z.id && !/^x-/.test(z.id) ? ` (${z.old ? 'ancienne commune, ' : ''}${z.id})` : ''}`;
+        const fillOf = z => { const e = byZone.get(z); if (!e) return {fill: noData, title: hoverAll ? `${nameOf(z)} : pas de chiffre` : ''};
+            return {fill: e.has && sc ? sc.color(e.v) : noData, title: `${nameOf(z)} : ${e.has ? fmt(e.v) + unit : 'pas de chiffre'}${series && e.has ? ' — ' + series : ''}${e.notes.length ? '\n' + e.notes.join('\n') : ''}`, v: e.has ? e.v : null}; };
         pr.allOutre = o.frame === 'custom' || (o.frame && o.frame !== '') || !MAPS[mapOf(o)].insets || o.insets === false;
         const B = drawBase(spec, base, ctx, pr, w, h, fillOf, uid);
         let svg = `<g data-geo-map="${uid}">${B.svg}`, boxes = [];
         if (!pr.allOutre) { const I = insetsOf(spec, base, w, h, fillOf); svg += I.svg; boxes = I.boxes || []; }
-        // étiquettes : les plus grandes zones d'abord, sans se chevaucher
-        const lab = o.labels || 'auto';
+        const lab = o.labels || 'auto', lf = clamp(fs * .78 * (num(o.labelSize) || 1), 6, 40), insetGeo = []; let belowSvg = '';
+        const idf = idfInset(spec, base, pr, w, h, fillOf, boxes, lf, byZone, uid); // l'Île-de-France en grand, dans un coin libre
+        if (idf) { if (idf.below) belowSvg = idf.svg; else { svg += idf.svg; boxes = [...boxes, idf.box]; } insetGeo.push(idf.geo); }
+        // étiquettes : les plus grandes zones d'abord, sans se chevaucher (communes : seulement celles qui ont un chiffre, en automatique)
         if (lab !== 'none') {
-            const lf = clamp(fs * .78 * (num(o.labelSize) || 1), 6, 40), placed = [...boxes.map(([x, y, bw, bh]) => [x, y, x + bw, y + bh])];
-            const cand = B.zones.filter(x => !x.z.outre || pr.allOutre).map(x => { const [lx, ly] = pr.p(x.z.label[0], x.z.label[1]); const bb = [pr.p(x.z.bbox[0], x.z.bbox[1]), pr.p(x.z.bbox[2], x.z.bbox[3])]; return {...x, lx, ly, area: Math.abs((bb[1][0] - bb[0][0]) * (bb[1][1] - bb[0][1]))}; })
+            const placed = [...boxes.map(([x, y, bw, bh]) => [x, y, x + bw, y + bh])];
+            const cand = B.zones.filter(x => (!x.z.outre || pr.allOutre) && (!base.communes || lab !== 'auto' || byZone.get(x.z)?.has)).map(x => { const [lx, ly] = pr.p(x.z.label[0], x.z.label[1]); const bb = [pr.p(x.z.bbox[0], x.z.bbox[1]), pr.p(x.z.bbox[2], x.z.bbox[3])]; return {...x, lx, ly, area: Math.abs((bb[1][0] - bb[0][0]) * (bb[1][1] - bb[0][1]))}; })
                 .filter(x => x.lx > 0 && x.lx < w && x.ly > 0 && x.ly < h).sort((a, b) => b.area - a.area).slice(0, 400);
             cand.forEach(x => {
                 const e = byZone.get(x.z), hasV = e?.has, lines = [];
@@ -342,11 +520,12 @@
                 }
             }
         }
-        let out = svg, H = h;
-        if (leg) { if (legPos === 'right') out += `<g transform="translate(${r1(w + fs)} ${r1(Math.max(0, h / 2 - legH / 2))})">${leg}</g>`; else { out += `<g transform="translate(0 ${r1(h + fs * .9)})">${leg}</g>`; H = h + fs * .9 + legH; } }
+        const below = belowSvg ? idf.below : 0; // l'encart sous la carte (téléphone)
+        let out = svg + belowSvg, H = h + below;
+        if (leg) { if (legPos === 'right') out += `<g transform="translate(${r1(w + fs)} ${r1(Math.max(0, h / 2 - legH / 2))})">${leg}</g>`; else { out += `<g transform="translate(0 ${r1(h + below + fs * .9)})">${leg}</g>`; H = h + below + fs * .9 + legH; } }
         if (missing.length && o.showMissing !== false) { out += T(0, H + fs * .9, `⚠ Pas trouvé sur ce fond : ${missing.slice(0, 12).join(', ')}${missing.length > 12 ? '…' : ''}`, {size: fs * .78, fill: '#a5552a'}); H += fs * 1.6; }
         if (!rowsOf(spec).length) { out += T(w / 2, h / 2, 'Ajoute des zones et leurs chiffres (onglet Données ou « Depuis l’app »).', {anchor: 'middle', size: fs, fill: '#555', halo: '#ffffffcc'}); }
-        return {h: H, svg: out, geo: {uid, pr, w, h}};
+        return {h: H, svg: out, geo: {uid, pr, w, h, insets: insetGeo}};
     }
 
     /* ═════════ 🧭 Carte des migrations ═════════ */
@@ -380,7 +559,7 @@
         return [clamp(w - dx, -180, 180), clamp(s - dy, -85, 85), clamp(e + dx, -180, 180), clamp(n + dy, -85, 85)];
     }
     function flowmap(spec, W, fs) {
-        const o = spec.o || {}, M = MAPS[mapOf(o)];
+        const o = spec.o || {}, M = MAPS[mapOf(o)], zb = zoneBaseOf(o); if (zb) { const w0 = needBases(spec, W, [zb]); if (w0) return w0; }
         // le fond et le fond autour sont nécessaires avant même de placer les lieux (les zones servent de lieux)
         const pre = viewOf(o), baseId0 = baseIdOf(o, pre), ctx0 = mapOf(o) === 'monde' || mapOf(o) === 'eu' ? 'monde-50m' : ctxIdOf(o, baseId0, pre);
         const wait0 = needBases(spec, W, [baseId0, ctx0, 'monde-110m']); if (wait0) return wait0;
@@ -442,10 +621,14 @@
     const mapOpts = () => [
         C('map', 'Carte', 'select', {choices: Object.entries(MAPS).map(([k, m]) => [k, m.label]), def: 'fr'}),
         ...Object.entries(MAPS).filter(([, m]) => m.levels.length > 1).map(([k, m]) => C('level', 'Niveau de détail', 'select', {choices: m.levels.map(([l, , n]) => [l, n]), when: s => mapOf(s.o || {}) === k})),
-        ...Object.keys(MAPS).map(k => C('frame', 'Partie de la carte (cadrage)', 'select', {choices: [['', k === 'fr' ? 'France entière' : k === 'monde' ? 'Le monde entier' : `${MAPS[k].label} entière`], ...framesOf(k).map(([f, n]) => [f, n]), ['custom', '✋ Mon cadrage (souris ou cadre tracé)']], when: s => mapOf(s.o || {}) === k})),
+        ...Object.keys(MAPS).map(k => C('frame', 'Partie de la carte (cadrage)', 'select', {choices: [['', k === 'fr' ? 'France entière' : k === 'monde' ? 'Le monde entier' : `${MAPS[k].label} entière`], ...framesOf(k).map(([f, n]) => [f, n]),
+            ...(MAPS[k].zoneWord ? [['zone', `📍 Zoomer sur ${MAPS[k].zoneWord[0]}…`]] : []), ['custom', '✋ Mon cadrage (souris ou cadre tracé)']], when: s => mapOf(s.o || {}) === k})),
+        ...Object.entries(MAPS).filter(([, m]) => m.zoneWord).map(([k, m]) => C('frameZone', `${m.zoneWord[1]} (nom ou numéro : ${m.zoneWord[3]})`, 'text', {when: s => mapOf(s.o || {}) === k && s.o?.frame === 'zone'})),
         C('view', 'Mon cadrage : ouest, sud, est, nord (degrés)', 'text', {when: s => s.o?.frame === 'custom'}),
         C('proj', 'Projection', 'select', {choices: [['', 'Automatique'], ['equalearth', 'Equal Earth (monde, surfaces justes)'], ['robinson', 'Robinson (monde)'], ['laea', 'Lambert azimutale équivalente (Europe, pays)'], ['lambert', 'Lambert conique conforme'], ['mercator', 'Mercator']]}),
         C('insets', 'Outre-mer en encarts', 'check', {def: true, when: s => mapOf(s.o || {}) === 'fr' && !s.o?.frame}),
+        ...[['pc', l => l !== 'reg'], ['none', l => l === 'reg']].map(([def, ok]) => C('idf', 'Encart zoomé sur l’Île-de-France', 'select', {choices: [['none', 'Aucun'], ['pc', 'Paris et petite couronne'], ['idf', 'Toute l’Île-de-France']], def, when: s => mapOf(s.o || {}) === 'fr' && ok(levelOf(s.o || {})[0])})),
+        ...Object.entries(MAPS).filter(([, m]) => m.zoneWord).map(([k, m]) => C('parentLines', `Limites ${m.zoneWord[2]} par-dessus les communes`, 'check', {def: true, when: s => mapOf(s.o || {}) === k && levelOf(s.o || {})[0] === 'com'})),
         C('context', 'Pays voisins en gris', 'check', {def: true, when: s => !!MAPS[mapOf(s.o || {})].ctx}),
         C('sea', 'Mer en couleur', 'check', {def: true}), C('seaColor', 'Couleur de la mer', 'color', {def: SEA, when: s => s.o?.sea !== false}),
         C('height', 'Hauteur du dessin (px, vide = selon la carte)', 'number', {min: 120, max: 3000})];
@@ -457,10 +640,11 @@
         C('method', 'Découpage des classes', 'select', {choices: [['', 'Autant de zones dans chaque classe (quantiles)'], ['equal', 'Classes de même largeur'], ['manual', 'Mes seuils…']], when: s => s.o?.colorMode === 'classes'}),
         C('breaks', 'Mes seuils (ex. 5; 10; 50)', 'text', {when: s => s.o?.colorMode === 'classes' && s.o?.method === 'manual'}),
         C('logScale', 'Échelle logarithmique (très grands écarts)', 'check', {when: s => s.o?.colorMode !== 'classes'}),
-        C('noData', 'Couleur des zones sans chiffre', 'color', {def: '#e4e4e7'}), C('borderColor', 'Couleur des limites', 'color', {def: '#ffffff'}), C('borderWidth', 'Épaisseur des limites', 'range', {min: .1, max: 4, step: .1, def: .8}),
+        C('noData', 'Couleur des zones sans chiffre', 'color', {def: '#e4e4e7'}), C('borderColor', 'Couleur des limites', 'color', {def: '#ffffff'}),
+        C('borderWidth', 'Épaisseur des limites', 'range', {min: .1, max: 4, step: .1, def: .8, when: s => levelOf(s.o || {})[0] !== 'com'}), C('borderWidth', 'Épaisseur des limites des communes', 'range', {min: .1, max: 2, step: .05, def: .2, when: s => levelOf(s.o || {})[0] === 'com'}),
         C('labels', 'Étiquettes', 'select', {choices: [['', 'Automatiques (là où il y a la place)'], ['name', 'Noms des zones'], ['value', 'Chiffres'], ['both', 'Noms et chiffres'], ['none', 'Aucune']]}),
         C('labelSize', 'Taille des étiquettes', 'range', {min: .5, max: 2.5, step: .1, def: 1}), C('unit', 'Unité (ex. : naissances, %)'),
-        C('hoverAll', 'Bulle aussi sur les zones sans chiffre', 'check', {def: true}), C('showMissing', 'Signaler les lignes pas trouvées sur la carte', 'check', {def: true})];
+        C('hoverAll', 'Bulle aussi sur les zones sans chiffre', 'check', {def: true, when: s => levelOf(s.o || {})[0] !== 'com'}), C('hoverAll', 'Bulle aussi sur les communes sans chiffre (plus lent)', 'check', {def: false, when: s => levelOf(s.o || {})[0] === 'com'}), C('showMissing', 'Signaler les lignes pas trouvées sur la carte', 'check', {def: true})];
     const FLOW_OPTS = [...mapOpts(), C('fit', 'Cadrer tout seul sur les lieux', 'check', {def: true, when: s => !s.o?.frame}),
         C('maxWidth', 'Épaisseur du plus gros flux', 'range', {min: 2, max: 50, def: 14}), C('minWidth', 'Épaisseur du plus petit flux', 'range', {min: .3, max: 10, step: .1, def: 1.2}),
         C('curve', 'Courbure des flèches (%)', 'range', {min: 0, max: 60, def: 25}), C('arrows', 'Pointes de flèche', 'check', {def: true}), C('opacity', 'Opacité des flèches (%)', 'range', {min: 10, max: 100, def: 75}),
@@ -488,7 +672,25 @@
     function inRing(x, y, r) { let c = false; for (let i = 0, j = r.length - 2; i < r.length; j = i, i += 2) { const xi = r[i], yi = r[i + 1], xj = r[j], yj = r[j + 1]; if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c; } return c; }
     const inZone = (z, x, y) => x >= z.bbox[0] && x <= z.bbox[2] && y >= z.bbox[1] && y <= z.bbox[3] && z.polys.some(p => inRing(x, y, p[0]) && !p.slice(1).some(hh => inRing(x, y, hh)));
     /** la zone d'un lieu de la base : par ses coordonnées, sinon par son département, sa région ou son pays */
-    function zoneOfPlace(base, pl) {
+    /** la commune sous un point : grille de 0,1° (35 000 communes, des milliers de lieux) */
+    function zoneAt(base, x, y) {
+        if (!base.grid) { const g = new Map(); base.zones.forEach(z => { for (let i = Math.floor(z.bbox[0] * 10); i <= Math.floor(z.bbox[2] * 10); i++) for (let j = Math.floor(z.bbox[1] * 10); j <= Math.floor(z.bbox[3] * 10); j++) { const k = i + ':' + j, l = g.get(k); if (l) l.push(z); else g.set(k, [z]); } }); base.grid = g; }
+        return (base.grid.get(Math.floor(x * 10) + ':' + Math.floor(y * 10)) || []).find(z => inZone(z, x, y)) || null;
+    }
+    /** la commune d'un lieu de la base : code INSEE (ou officiel), puis nom + département, province ou canton, puis coordonnées */
+    function communeOfPlace(base, pl, why) {
+        const code = String(pl.insee ?? '').trim(); let z = code ? base.index.get(fold(code)) : null; if (z) return z;
+        const hasXY = pl.lat !== null && pl.lon !== null && Number.isFinite(pl.lat) && Number.isFinite(pl.lon), at = hasXY ? zoneAt(base, pl.lon, pl.lat) : null;
+        const ctry = fold(pl.country), here = !ctry || base.country.includes(ctry);
+        const m = here && pl.name ? matchCommune(base, pl.name, [pl.code, pl.county, pl.state]) : {z: null, why: ''};
+        if (m.z && (!at || m.z === at)) return m.z;
+        if (m.z && at) { const b = m.z.bbox, d = .02; return pl.lon >= b[0] - d && pl.lon <= b[2] + d && pl.lat >= b[1] - d && pl.lat <= b[3] + d ? m.z : at; } // limite simplifiée : le nom l'emporte s'il est tout près
+        if (at) return at;
+        if (why && m.why) why.why = m.why;
+        return null;
+    }
+    function zoneOfPlace(base, pl, why) {
+        if (base.communes) return communeOfPlace(base, pl, why);
         if (pl.lat !== null && pl.lon !== null && Number.isFinite(pl.lat) && Number.isFinite(pl.lon)) { const z = base.zones.find(zz => inZone(zz, pl.lon, pl.lat)); if (z) return z; }
         for (const k of [pl.code, pl.county, pl.state, pl.country]) { const z = k && matchZone(base, k); if (z) return z; }
         return null;
@@ -497,7 +699,8 @@
     async function fillZones(spec, q) {
         const o = spec.o || {}, view = viewOf(o), base = await load(baseIdOf(o, view)), r = await fetchGeo(q);
         const sums = new Map(); let lost = 0, lostN = 0; const lostNames = [];
-        (r.places || []).slice(0, 6000).forEach(pl => { const n = Number(pl.n) || 0; if (!n) return; const z = zoneOfPlace(base, pl); if (!z) { lost++; lostN += n; if (lostNames.length < 8) lostNames.push(pl.name); return; } sums.set(z, (sums.get(z) || 0) + n); });
+        if (base.parentBase) await load(base.parentBase).catch(() => {}); // pour lire « Gers », « Liège »… à côté du nom
+        (r.places || []).slice(0, 6000).forEach(pl => { const n = Number(pl.n) || 0; if (!n) return; const why = {}; const z = zoneOfPlace(base, pl, why); if (!z) { lost++; lostN += n; if (lostNames.length < 8) lostNames.push(pl.name + (why.why === 'homonymes' ? ' (homonymes)' : '')); return; } sums.set(z, (sums.get(z) || 0) + n); });
         spec.rows = [...sums].sort((a, b) => b[1] - a[1]).map(([z, n]) => ({label: zoneLabel(base, z), s0: n}));
         spec.series = [{...(spec.series?.[0] || {}), name: (SRC_ZONES.find(x => x[0] === q.what)?.[1] || 'Nombre').replace(/ \(.*\)$/, '')}];
         return {zones: sums.size, places: (r.places || []).length, lost, lostN, lostNames};
@@ -519,6 +722,7 @@
     async function resolve(spec) {
         const s = JSON.parse(JSON.stringify(spec || {})), o = s.o || {}, q = parseLive(s.live?.key);
         if (q) { try { if (s.kind === 'flowmap') await fillFlows(s, q); else await fillZones(s, q); } catch (_) {} }
+        if (MAPS[mapOf(o)].zoneBase) await load(MAPS[mapOf(o)].zoneBase).catch(() => {}); // cadrage sur un département, « nom (département) »
         const view = viewOf(o), ids = [baseIdOf(o, view), ctxIdOf(o, baseIdOf(o, view), view)];
         if (s.kind === 'flowmap') ids.push('monde-110m', mapOf(o) === 'monde' || mapOf(o) === 'eu' ? 'monde-50m' : '');
         await Promise.all(ids.filter(Boolean).map(id => load(id).catch(() => {})));
@@ -549,6 +753,8 @@
         if (prev._dgmBound) return; prev._dgmBound = true;
         let drag = null, wheelT = 0, wheelK = 1, wheelAt = null;
         const pt = (g, e) => { const r = g.hit.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * g.w, (e.clientY - r.top) / r.height * g.h, r]; };
+        // un point de l'encart de l'Île-de-France → le même lieu sur la grande carte (la molette zoome là où l'on montre)
+        const toMain = (g, [x, y]) => { const i = (g.insets || []).find(q => x >= q.x && x <= q.x + q.w && y >= q.y && y <= q.y + q.h); if (!i) return [x, y]; const [lo, la] = i.pr.inv(x - i.x, y - i.y); return g.pr.p(lo, la); };
         prev.addEventListener('pointerdown', e => {
             const g = geoOf(prev); if (!g || e.button !== 0 || !e.target.closest?.('[data-geo-map]')) return;
             const [x, y] = pt(g, e); drag = {g, x, y, x0: e.clientX, y0: e.clientY, box: e.shiftKey || !!prev._dgmBox, moved: false};
@@ -572,7 +778,7 @@
         prev.addEventListener('pointerup', end); prev.addEventListener('pointercancel', () => { if (drag) drag.g.el.style.transform = ''; drag = null; prev.querySelector('.dgm-rubber')?.remove(); });
         prev.addEventListener('wheel', e => {
             const g = geoOf(prev); if (!g || !e.target.closest?.('[data-geo-map]')) return; e.preventDefault();
-            const [x, y] = pt(g, e); wheelAt = wheelAt || [x, y, g]; wheelK *= e.deltaY < 0 ? 1.15 : 1 / 1.15; wheelK = clamp(wheelK, 1 / 12, 40);
+            const [x, y] = toMain(g, pt(g, e)); wheelAt = wheelAt || [x, y, g]; wheelK *= e.deltaY < 0 ? 1.15 : 1 / 1.15; wheelK = clamp(wheelK, 1 / 12, 40);
             g.el.style.transformOrigin = `${wheelAt[0] / g.w * 100}% ${wheelAt[1] / g.h * 100}%`; g.el.style.transform = `scale(${wheelK})`;
             clearTimeout(wheelT); wheelT = setTimeout(() => { const [wx, wy, wg] = wheelAt, k = wheelK; wheelAt = null; wheelK = 1; zoomAt(prev, wg, wx, wy, k); }, 260);
         }, {passive: false});
@@ -596,7 +802,7 @@
         const spec = api.spec(), flows = spec.kind === 'flowmap', srcs = flows ? SRC_FLOWS : SRC_ZONES, cur = parseLive(spec.live?.key) || {};
         const P = window.LCNDA_PICKER;
         box.innerHTML = `<h4>📍 ${flows ? 'Les migrations de ton arbre' : 'Les lieux de ton arbre'}</h4>
-            <p class="muted">${flows ? 'Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé.' : 'Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays), puis les zones sont comptées. Le tableau est remplacé.'}</p>
+            <p class="muted">${flows ? 'Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé.' : 'Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé.'}</p>
             <div class="dgm-form"><label>Quoi<select data-dgm-what>${srcs.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
             <label class="checkbox-line"><input type="checkbox" data-dgm-anc ${cur.ancestors ? 'checked' : ''}> Seulement mes ancêtres (lignée Sosa)</label>
             <span class="dgm-period"><label>De l’année<input type="number" inputmode="numeric" data-dgm-from value="${esc(cur.from ?? '')}" placeholder="ex. 1700" min="-3000" max="3000"></label><label>à l’année<input type="number" inputmode="numeric" data-dgm-to value="${esc(cur.to ?? '')}" placeholder="ex. 1900" min="-3000" max="3000"></label></span>
@@ -664,5 +870,5 @@
             describe: spec => `Carte des migrations : ${rowsOf(spec).length} flux.`},
     };
     for (const [k, kind] of Object.entries(KINDS)) { if (!DR.KINDS[k]) DR.KINDS[k] = kind; }
-    ext.diagramCartes = {MAPS, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, joinRows, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone};
+    ext.diagramCartes = {MAPS, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf};
 })();

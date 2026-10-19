@@ -67,3 +67,53 @@ Source : geoBoundaries (https://www.geoboundaries.org, jeu gbOpen LUX ADM1, 2017
 (limites de Wambacher). Licence : Open Data Commons Open Database License (ODbL) 1.0.
 Mention obligatoire : « © les contributeurs d'OpenStreetMap » (https://www.openstreetmap.org/copyright).
 Les fichiers dérivés (lu-cantons.json) restent sous ODbL 1.0 : https://opendatacommons.org/licenses/odbl/1-0/
+
+
+5. fr-communes.json.gz, be-communes.json.gz, ch-communes.json.gz, lu-communes.json.gz — niveau « Communes (villes) »
+------------------------------------------------------------------------------------------------------------------
+Produits par scripts/build-geo-communes.js. Fichiers JSON compressés en gzip (l'application les décompresse elle-même),
+chargés seulement quand on choisit le niveau « Communes (villes) ». Tracés fortement simplifiés (topojson-simplify),
+limites communes partagées (TopoJSON) ; aucun tracé n'a été dessiné à la main.
+
+France (fr-communes.json.gz, 34 868 communes, outre-mer compris) :
+  Tracés : IGN, Admin Express COG (édition 2018), fichier communes-avec-outre-mer.geojson de
+  https://github.com/gregoiredavid/france-geojson (même source que les départements, point 2).
+  Communes au 1er janvier 2025 : INSEE, Code officiel géographique 2025, par le paquet npm
+  @etalab/decoupage-administratif 6.0.0 (data/communes.json ; code sous licence MIT, données INSEE).
+  Les tracés 2018 des communes fusionnées depuis sont réunis (topojson merge) en commune nouvelle ; les anciennes
+  communes (déléguées, associées) et les arrondissements de Paris, Lyon et Marseille sont gardés comme « autres noms »
+  et « autres codes ». 85 anciens codes sans commune déléguée sont rattachés à la commune voisine issue d'une fusion.
+  Licence : Licence Ouverte / Open Licence (Etalab), https://www.etalab.gouv.fr/licence-ouverte-open-licence
+  Mention à afficher : « Source : IGN – Admin Express COG 2018 ; INSEE – COG 2025 »
+  (sur la carte : « Fond : IGN Admin Express, INSEE COG 2025 (Licence Ouverte) »).
+
+Belgique (be-communes.json.gz, 565 communes de 2025) :
+  Tracés : IGN-NGI (Institut géographique national), communes 2025, via l'Open Data Wallonie-Bruxelles, licence
+  ouverte de l'IGN ; repris du fichier de référence de LCNDA data/reference/geo-be.sqlite.gz
+  (scripts/build-reference-europe.php). Codes INS (REFNIS).
+  Noms français et néerlandais : Statbel (Direction générale Statistique), CC BY 4.0, par le paquet npm
+  be-legal-data 0.2.0 (data/municipalities.json, © Statbel, CC BY 4.0 ; https://creativecommons.org/licenses/by/4.0/).
+  Anciennes communes et sections (autres noms) : GeoNames (https://www.geonames.org), CC BY 4.0.
+  Mention à afficher : « IGN-NGI ; Statbel (CC BY 4.0) » (sur la carte : « Fond : IGN-NGI, Statbel (CC BY 4.0) »).
+
+Suisse (ch-communes.json.gz, 2 110 communes de 2026) :
+  Tracés : swissBOUNDARIES3D 2026, © swisstopo (Office fédéral de topographie), conditions Opendata BY
+  (« utilisation libre, indication de la source obligatoire »), https://www.swisstopo.admin.ch/fr/conditions-d-utilisation-des-geodonnees-ogd ;
+  repris du fichier de référence de LCNDA data/reference/geo-ch.sqlite.gz. Numéros OFS des communes.
+  Hameaux et anciennes communes (autres noms) : GeoNames, CC BY 4.0. Quelques noms français ajoutés dans le script
+  (Berne, Bâle, Lucerne…).
+  Mention à afficher : « © swisstopo » (sur la carte : « Fond : © swisstopo (Opendata BY) »).
+
+Luxembourg (lu-communes.json.gz, 100 communes) :
+  Tracés : Administration du cadastre et de la topographie (ACT), limites communales, data.public.lu, licence CC0 ;
+  repris du fichier de référence de LCNDA data/reference/geo-lu.sqlite.gz. Codes LAU.
+  Noms allemands et luxembourgeois, sections (autres noms) : GeoNames, CC BY 4.0.
+  Mention (facultative pour CC0) : « ACT Luxembourg » (sur la carte : « Fond : ACT Luxembourg (CC0) »).
+
+GeoNames (autres noms des communes belges, suisses et luxembourgeoises) : © GeoNames, Creative Commons Attribution
+4.0 (https://creativecommons.org/licenses/by/4.0/) ; seulement utilisés pour retrouver un lieu, jamais affichés seuls.
+Province (Belgique) ou canton (Suisse, Luxembourg) de chaque commune : d'après ces mêmes lieux GeoNames, sinon
+d'après les fonds be-provinces, ch-cantons et lu-cantons (point 3 et 4).
+
+Encart de l'Île-de-France : fr-departements.json et fr-regions.json gardent des tracés plus fins dans la boîte
+1,4° E – 3,6° E, 48,1° N – 49,25° N (scripts/build-geo-maps.js, IDF_BOOST), pour rester lisibles une fois agrandis.

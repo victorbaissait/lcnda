@@ -7,10 +7,14 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *    sortes au catalogue (famille Cartes) ; zones retrouvées par nom ou code (INSEE, NUTS, ISO, abréviations), lieux
  *    rattachés par leurs coordonnées ; seuils des classes ; projections réversibles ; textes et couleurs piégés
  *    échappés ; beaucoup de données sans figer (< 200 ms) ; dessin d'attente puis vrai dessin.
+ *    Communes (France, Belgique, Suisse, Luxembourg) : fichiers compressés chargés à la demande, codes et noms,
+ *    rapprochement par code puis nom + département, homonymes refusés, arrondissements et communes fusionnées,
+ *    35 000 communes dessinées en temps borné ; encart de l'Île-de-France selon l'option et le cadrage.
  * 2. Navigateur (Playwright, sinon partie sautée), sur un vrai « php -S » avec une petite base : diagram_geo (lieux,
  *    paires, ancêtres) ; « Nouveau diagramme » (famille Cartes, vignettes dessinées) ; éditeur de chaque sorte
  *    (exemple, réglages, cadrage à la molette et au glisser, « Depuis l'app », tenu à jour, lieux à placer, flux
  *    ajouté avec le menu de choix des lieux), enregistrer, poser (case d'une Fiche), exporter (SVG, PNG, CSV) ;
+ *    niveau « Communes » choisi dans les réglages (fichier chargé seulement alors), encart, SVG valide ;
  *    mode sombre et 390 px ; aucune erreur JavaScript.
  */
 const assert = require('node:assert/strict');
@@ -29,8 +33,9 @@ const step = (name, fn) => steps.push([name, fn]);
 const shots = process.env.DGM_SHOTS || '';
 
 /* ── 1. Bac à sable ── */
-const readGeo = url => JSON.parse(fs.readFileSync(path.join(appRoot, String(url).split('?')[0]), 'utf8'));
-const sandbox = { window: {}, console, setTimeout, clearTimeout, performance, fetch: async url => ({ ok: true, json: async () => readGeo(url) }) };
+const readGeo = url => fs.readFileSync(path.join(appRoot, String(url).split('?')[0]));
+const sandbox = { window: {}, console, setTimeout, clearTimeout, performance, TextDecoder, Response, Blob, DecompressionStream,
+    fetch: async url => { const b = readGeo(url); return { ok: true, json: async () => JSON.parse(b.toString('utf8')), arrayBuffer: async () => b.buffer.slice(b.byteOffset, b.byteOffset + b.length) }; } };
 vm.createContext(sandbox);
 for (const f of ['heritage-diagrams-render.js', 'heritage-diagram-cartes.js']) vm.runInContext(fs.readFileSync(path.join(appRoot, 'assets/js', f), 'utf8'), sandbox, { filename: f });
 const ext = sandbox.window.LCNDA_EXT, R = ext.diagramRender, DC = ext.diagramCartes;
@@ -133,6 +138,77 @@ step('beaucoup de données sans figer : 5 000 lignes, 2 000 flux (< 200 ms) ; li
     t = performance.now(); const s = R.svg(fl, 1200); assert.ok(performance.now() - t < 200, `flux : ${performance.now() - t} ms`); assert.ok((s.match(/class="dgm-f"/g) || []).length <= 500);
     for (const k of MINE) { const out = R.svg(await R.KINDS[k].resolve({ kind: k, o: { height: 'x', classes: 99, maxWidth: -5, view: 'a,b', frame: 'custom' }, rows: [null, 3, 'x', { label: {}, s0: [], from: 1, to: {} }] }), 500); assert.doesNotMatch(out, /NaN|Infinity|Dessin impossible/, k); }
 });
+const COMMUNES = { 'fr-communes': [34000, 3.2e6], 'be-communes': [560, 4e5], 'ch-communes': [2000, 6e5], 'lu-communes': [100, 1e5] };
+step('communes : France, Belgique, Suisse, Luxembourg (fichiers compressés, codes, noms, départements ou cantons, licences)', async () => {
+    const lic = fs.readFileSync(path.join(appRoot, 'assets/data/geo/LICENCES.txt'), 'utf8');
+    for (const [id, [min, max]] of Object.entries(COMMUNES)) {
+        const size = fs.statSync(path.join(appRoot, 'assets/data/geo', id + '.json.gz')).size; assert.ok(size < max, `${id} : ${size} octets`);
+        assert.ok(lic.includes(id + '.json.gz'), `${id} dans LICENCES.txt`);
+        const b = await DC.load(id); assert.ok(b.zones.length >= min, `${id} : ${b.zones.length} communes`); assert.ok(b.attr.startsWith('Fond : '), id); assert.ok(b.communes && b.lines.length > 10, id);
+        assert.ok(b.zones.every(z => z.id && z.name && z.parent && z.label.every(Number.isFinite)), `${id} : code, nom, parent, étiquette`);
+    }
+    for (const [id, code, name, parent] of [['fr-communes', '35238', 'Rennes', '35'], ['fr-communes', '2A004', 'Ajaccio', '2A'], ['fr-communes', '97101', 'Les Abymes', '971'], ['fr-communes', '75056', 'Paris', '75'],
+        ['be-communes', '21004', 'Bruxelles', 'BE10'], ['be-communes', '62063', 'Liège', 'BE33'], ['ch-communes', '351', 'Bern', 'CH021'], ['ch-communes', '6621', 'Genève', 'CH013'], ['lu-communes', '0304', 'Luxembourg', 'LU-LU']]) {
+        const z = DC.loaded(id).zones.find(x => x.id === code); assert.ok(z, `${id} ${code}`); assert.equal(z.name, name); assert.equal(z.parent, parent, `${id} ${code} : parent`);
+    }
+    assert.equal(DC.loaded('fr-communes').zones.filter(z => z.outre).length > 100, true, 'communes d’outre-mer en encarts');
+    assert.ok(R.KINDS.choropleth.options.some(o => o.k === 'level' && o.choices.some(([k, l]) => k === 'com' && /Communes/.test(l))), 'niveau « Communes » dans les réglages');
+    for (const m of ['fr', 'be', 'ch', 'lu']) assert.ok(DC.MAPS[m].levels.some(([l, f]) => l === 'com' && f === m + '-communes'), m);
+});
+step('rapprochement des communes : code INSEE ou officiel, nom + département, homonymes refusés, arrondissements, fusions', async () => {
+    await DC.load('fr-departements');
+    const fr = DC.loaded('fr-communes'), mc = (s, b = fr) => { const r = DC.matchCommune(b, s); return r.z ? r.z.id : 'null:' + r.why; };
+    assert.equal(mc('35238'), '35238'); assert.equal(mc('Rennes'), '35238'); assert.equal(mc('rennes'), '35238'); assert.equal(mc('St-Malo'), '35288'); assert.equal(mc('Le Mans'), '72181'); assert.equal(mc('Mans'), '72181');
+    assert.equal(mc('Saint-Martin'), 'null:homonymes'); assert.equal(mc('Saint-Denis'), 'null:homonymes');
+    for (const s of ['Saint-Martin (Gers)', 'Saint-Martin, Gers', 'saint-martin gers', 'Saint-Martin 32', 'Saint-Martin (32)', 'Saint-Martin 32000']) assert.equal(mc(s), '32389', s);
+    assert.equal(mc('Saint-Denis 93'), '93066'); assert.equal(mc('Saint-Denis (La Réunion)'), '97411'); assert.equal(mc('Vitré (35)'), '35360');
+    for (const s of ['75112', 'Paris 12e', 'Paris 1er Arrondissement']) assert.equal(mc(s), '75056', s);
+    assert.equal(mc('69383'), '69123'); assert.equal(mc('Lyon 3e'), '69123'); assert.equal(mc('13205'), '13055'); assert.equal(mc('Marseille 5e Arrondissement'), '13055');
+    assert.equal(mc('Annecy-le-Vieux'), '74010'); assert.equal(mc('74011'), '74010'); assert.equal(mc('Cherbourg-Octeville'), '50129'); assert.equal(mc('Courcouronnes'), '91228'); // communes fusionnées
+    assert.equal(mc('Nulle part du tout'), 'null:'); assert.equal(mc(TRAP), 'null:');
+    // lieux de la base (api diagram_geo) : code d'abord, puis nom + département, puis coordonnées ; un autre pays n'est pas pris par son nom
+    const zp = (pl, b = fr) => { const why = {}; const z = DC.zoneOfPlace(b, { lat: null, lon: null, ...pl }, why); return z ? z.id : 'null:' + (why.why || ''); };
+    assert.equal(zp({ name: 'Rennes', insee: '35238' }), '35238'); assert.equal(zp({ name: 'Mauvais nom', insee: '35238' }), '35238');
+    assert.equal(zp({ name: 'Saint-Martin', code: '32', county: 'Gers' }), '32389'); assert.equal(zp({ name: 'Saint-Martin', county: 'Gers' }), '32389');
+    assert.equal(zp({ name: 'Saint-Martin' }), 'null:homonymes'); assert.equal(zp({ name: 'Rennes', country: 'Belgique' }), 'null:');
+    assert.equal(zp({ name: 'Le bourg', lat: 48.1147, lon: -1.6794 }), '35238'); assert.equal(zp({ name: 'Paris', insee: '75120' }), '75056');
+    assert.equal(zp({ name: 'Zwijndrecht', insee: 'BE-46030' }, DC.loaded('be-communes')), '46030'); assert.equal(mc('Anvers', DC.loaded('be-communes')), '11002'); assert.equal(mc('Antwerpen', DC.loaded('be-communes')), '11002');
+    assert.equal(zp({ name: 'Bern', insee: 'CH-351' }, DC.loaded('ch-communes')), '351'); assert.equal(mc('Berne', DC.loaded('ch-communes')), '351');
+    assert.equal(zp({ name: 'Wormeldange', insee: 'LU-1108' }, DC.loaded('lu-communes')), '1108'); assert.equal(mc('Wormeldingen', DC.loaded('lu-communes')), '1108');
+    // le tableau : les lignes pas trouvées, avec la raison
+    const { byZone, missing } = DC.joinRows({ rows: [{ label: 'Saint-Martin', s0: 1 }, { label: 'Saint-Martin (Gers)', s0: 2 }, { label: '35238', s0: 3 }, { label: 'Rennes', s0: 4 }] }, fr);
+    assert.equal(byZone.size, 2); assert.equal(byZone.get(fr.zones.find(z => z.id === '35238')).v, 7); assert.match(missing.join(' | '), /^Saint-Martin \(homonymes/);
+});
+step('encart de l’Île-de-France : présent ou absent selon l’option, le niveau et le cadrage', async () => {
+    const k = R.KINDS.choropleth, smp = k.sample(), draw = async (o, W = 900) => R.svg(await k.resolve({ kind: 'choropleth', ...smp, o: { ...smp.o, ...o } }), W);
+    const has = s => /data-geo-inset="idf"/.test(s);
+    const dep = await draw({}); assert.ok(has(dep), 'départements : encart par défaut'); assert.match(dep, /Paris et petite couronne/);
+    assert.match(dep.split('data-geo-inset')[1], /<title>Paris \(75\) : 11 naissances/, 'même bulle dans l’encart'); assert.match(dep.split('data-geo-inset')[1], /class="dgm-z"/);
+    assert.ok(!has(await draw({ idf: 'none' })), 'option « Aucun »');
+    assert.ok(!has(await draw({ level: 'reg' })), 'régions : pas d’encart par défaut'); assert.ok(has(await draw({ level: 'reg', idf: 'idf' })), 'régions : toute l’Île-de-France si on le demande');
+    assert.match(await draw({ idf: 'idf' }), /Île-de-France<\/text>/);
+    for (const o of [{ frame: 'idf' }, { frame: 'corse' }, { frame: 'sudouest' }, { frame: 'custom', view: '-5, 47, -1, 49' }, { frame: 'custom', view: '2.1, 48.7, 2.6, 49' }, { frame: 'zone', frameZone: '75' }, { map: 'be' }, { map: 'monde' }])
+        assert.ok(!has(await draw(o)), `pas d’encart : ${JSON.stringify(o)}`);
+    assert.ok(has(await draw({ frame: 'custom', view: '-1, 46, 6, 50.5' })), 'zone libre qui contient Paris');
+    const narrow = await draw({}, 390); assert.ok(has(narrow), '390 px : encart (sous la carte)'); assert.doesNotMatch(narrow, /NaN|undefined|Infinity/);
+    const com = await draw({ level: 'com', rows: undefined }); assert.ok(has(com), 'communes : encart par défaut');
+});
+step('communes : 35 000 dessinées en temps borné, traits fins, limites des départements, étiquettes seulement avec un chiffre', async () => {
+    const k = R.KINDS.choropleth, fr = DC.loaded('fr-communes');
+    const few = await k.resolve({ kind: 'choropleth', o: { map: 'fr', level: 'com' }, series: [{ name: 'N' }], rows: [{ label: 'Rennes', s0: 5 }, { label: 'Brest', s0: 2 }] });
+    let t = performance.now(); const s1 = R.svg(few, 902); const t1 = performance.now() - t; t = performance.now(); R.svg(few, 902); const t2 = performance.now() - t; // 902 : pas encore en mémoire
+    const all = await k.resolve({ kind: 'choropleth', o: { map: 'fr', level: 'com', colorMode: 'classes' }, series: [{ name: 'N' }], rows: fr.zones.map((z, i) => ({ label: z.id, s0: i % 50 })) });
+    t = performance.now(); const s3 = R.svg(all, 902); const t3 = performance.now() - t;
+    console.log(`  temps de dessin des communes (900 px) : ${Math.round(t1)} ms la 1re fois, ${Math.round(t2)} ms ensuite, ${Math.round(t3)} ms avec ${fr.zones.length} chiffres`);
+    assert.ok(t1 < 3000 && t2 < 400 && t3 < 1500, `${t1} / ${t2} / ${t3} ms`);
+    assert.match(s1, /stroke-width="0.2"/, 'traits fins'); assert.match(s1, /fill="none" stroke="#4a4f57"/, 'limites des départements');
+    assert.ok((s1.match(/<text /g) || []).length < 30, 'pas une étiquette par commune'); assert.ok((s3.match(/<text /g) || []).length < 500, 'étiquettes seulement là où elles tiennent'); assert.ok((s1.match(/class="dgm-z"/g) || []).length < 300, 'bulles seulement sur les communes avec un chiffre');
+    assert.ok((s3.match(/class="dgm-z"/g) || []).length > 25000, `${(s3.match(/class="dgm-z"/g) || []).length} communes avec bulle`); assert.doesNotMatch(s1 + s3, /NaN|undefined|Infinity|data-geo-wait/);
+    // cadrage sur un département : ses communes, sans encarts
+    const z35 = R.svg(await k.resolve({ kind: 'choropleth', o: { map: 'fr', level: 'com', frame: 'zone', frameZone: 'Ille-et-Vilaine' }, rows: [{ label: 'Vitré', s0: 3 }] }), 900);
+    assert.match(z35, /<title>Vitré \(35360\) : 3/); assert.match(z35, />Vitré<\/text>/, 'étiquette de la commune qui a un chiffre'); assert.doesNotMatch(z35, /Guadeloupe|data-geo-inset/);
+    for (const m of ['be', 'ch', 'lu']) { const s = R.svg(await k.resolve({ kind: 'choropleth', o: { map: m, level: 'com' }, rows: [{ label: DC.loaded(m + '-communes').zones[3].id, s0: 1 }] }), 390); assert.doesNotMatch(s, /NaN|Infinity|data-geo-wait/, m); assert.match(s, /Fond : /); }
+});
 step('sans fond chargé : un dessin d’attente, refait tout seul ; chiffres tenus à jour', () => {
     const s = R.svg({ kind: 'choropleth', o: { map: 'zz' } }, 600); assert.doesNotMatch(s, /NaN/);
     assert.deepEqual(J(DC.parseLive(DC.liveKey({ what: 'births', ancestors: 1, from: 1700 }))), { what: 'births', ancestors: 1, from: 1700 });
@@ -208,7 +284,9 @@ echo 'ok';`;
             });
             await t(`chaque dessin est un SVG valide, qui s’ouvre comme une image (${label})`, async () => {
                 const r = await p.evaluate(async () => { const R = window.LCNDA_EXT.diagramRender, out = [];
-                    for (const k of ['choropleth', 'flowmap']) { const svg = R.svg(await R.KINDS[k].resolve({ kind: k, ...R.KINDS[k].sample() }));
+                    const specs = [...['choropleth', 'flowmap'].map(k => [k, { kind: k, ...R.KINDS[k].sample() }]), ['communes', { kind: 'choropleth', ...R.KINDS.choropleth.sample(), o: { map: 'fr', level: 'com', labels: 'both' }, rows: [{ label: 'Rennes', s0: 3 }, { label: '75112', s0: 2 }] }],
+                        ['communes-be', { kind: 'choropleth', o: { map: 'be', level: 'com' }, rows: [{ label: 'Liège', s0: 3 }] }], ['encart-idf', { kind: 'choropleth', ...R.KINDS.choropleth.sample(), o: { map: 'fr', level: 'reg', idf: 'idf' } }]];
+                    for (const [k, sp] of specs) { const svg = R.svg(await R.KINDS[sp.kind].resolve(sp));
                         if (new DOMParser().parseFromString(svg, 'image/svg+xml').querySelector('parsererror')) out.push(k + ' : XML');
                         if (!await new Promise(ok => { const i = new Image(); i.onload = () => ok(true); i.onerror = () => ok(false); i.src = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' })); })) out.push(k + ' : image'); }
                     return out; });
@@ -289,6 +367,32 @@ echo 'ok';`;
                 await p.setInputFiles('dialog.h-dg-dlg[open] [data-dg-csv]', { name: 'dep.csv', mimeType: 'text/csv', buffer: Buffer.from(csv) });
                 await p.waitForFunction(() => /Corse-du-Sud \(2A\) : 4/.test(document.querySelector('[data-dg-preview]').innerHTML), null, { timeout: 5000 });
                 const h = await p.$eval('[data-dg-preview]', e => e.innerHTML); assert.match(h, /Pas trouvé sur ce fond : Nulle part/); assert.doesNotMatch(h, /<img/);
+                await closeAll(p);
+            });
+            await t(`choroplèthe : niveau « Communes » et encart de l’Île-de-France dans l’éditeur (${label})`, async () => {
+                await closeAll(p); await p.evaluate(() => { window.__ed = window.LCNDA_EXT.openDiagramEditor(null, { kind: 'choropleth' }); });
+                await p.waitForSelector('dialog.h-dg-dlg[open] [data-dg-preview] svg [data-geo-map]');
+                assert.ok(await p.$('[data-dg-preview] [data-geo-inset="idf"]'), 'encart sur la carte des départements');
+                await shot(p, `encart-departements-${tag}`);
+                await p.click('[data-dg-tab="opts"]');
+                assert.equal(await p.$eval('.h-dg-opts select[data-opt="idf"]', e => e.value), 'pc');
+                await p.selectOption('.h-dg-opts select[data-opt="level"]', 'com');
+                await p.waitForFunction(() => /INSEE COG 2025/.test(document.querySelector('[data-dg-preview]')?.innerHTML || '') && !document.querySelector('[data-dg-preview] [data-geo-wait]'), null, { timeout: 20000 });
+                assert.ok(await p.evaluate(() => performance.getEntriesByType('resource').some(e => /fr-communes\.json\.gz/.test(e.name))), 'fichier des communes chargé à la demande');
+                assert.ok(await p.$('[data-dg-preview] [data-geo-inset="idf"]'), 'encart sur la carte des communes');
+                assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'pas de défilement de côté');
+                await shot(p, `communes-france-${tag}`);
+                // zoomer sur un département
+                await p.selectOption('.h-dg-opts select[data-opt="frame"]', 'zone'); await p.waitForSelector('.h-dg-opts [data-opt="frameZone"]');
+                await p.fill('.h-dg-opts [data-opt="frameZone"]', '35'); await p.press('.h-dg-opts [data-opt="frameZone"]', 'Tab');
+                await p.waitForFunction(() => !document.querySelector('[data-dg-preview] [data-geo-inset="idf"]') && /Ille-et-Vilaine|35238/.test(document.querySelector('[data-dg-preview]')?.innerHTML || ''), null, { timeout: 10000 });
+                await shot(p, `communes-35-${tag}`);
+                for (const m of ['be', 'ch', 'lu']) {
+                    await p.selectOption('.h-dg-opts select[data-opt="map"]', m); await p.waitForTimeout(150); await p.selectOption('.h-dg-opts select[data-opt="level"]', 'com');
+                    const attr = { be: 'IGN-NGI', ch: 'swisstopo', lu: 'ACT Luxembourg' }[m];
+                    await p.waitForFunction(a => (document.querySelector('[data-dg-preview]')?.innerHTML || '').includes(a) && !document.querySelector('[data-dg-preview] [data-geo-wait]'), attr, { timeout: 20000 });
+                    await shot(p, `communes-${m}-${tag}`);
+                }
                 await closeAll(p);
             });
             await ctx.close();

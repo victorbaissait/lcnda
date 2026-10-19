@@ -15,7 +15,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const {topology} = require('topojson-server');
-const {presimplify, simplify, quantile} = require('topojson-simplify');
+const {presimplify, simplify, quantile, planarTriangleArea} = require('topojson-simplify');
 const {feature, merge, quantize} = require('topojson-client');
 const iso = require('i18n-iso-countries');
 iso.registerLocale(require('i18n-iso-countries/langs/fr.json'));
@@ -52,11 +52,14 @@ function labelPoint(g) {
 }
 const bboxOf = feats => { let b = [Infinity, Infinity, -Infinity, -Infinity]; feats.forEach(f => polysOf(f.geometry).forEach(p => p[0].forEach(([x, y]) => { b = [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)]; }))); return b.map(v => Math.round(v * 100) / 100); };
 
-/** des zones GeoJSON → un fichier : TopoJSON quantifié et simplifié (garde « keep » des points) */
-function write(id, meta, feats, {keep = .3, q = 1e5} = {}) {
+/** des zones GeoJSON → un fichier : TopoJSON quantifié et simplifié (garde « keep » des points) ;
+ *  boost = [ouest, sud, est, nord, facteur] : les points de cette boîte comptent « facteur » fois plus (tracés plus fins là,
+ *  pour l'encart agrandi de l'Île-de-France) */
+function write(id, meta, feats, {keep = .3, q = 1e5, boost = null} = {}) {
     feats = feats.filter(f => f.geometry && polysOf(f.geometry).length);
     let topo = topology({z: {type: 'FeatureCollection', features: feats}}, q);
-    if (keep < 1) { topo = presimplify(topo); topo = simplify(topo, quantile(topo, keep)); topo = quantize(topo, q); } // quantile(…, p) : la part p des points est gardée
+    const weight = boost ? t => { const [x, y] = t[1]; return planarTriangleArea(t) * (x >= boost[0] && x <= boost[2] && y >= boost[1] && y <= boost[3] ? boost[4] : 1); } : undefined;
+    if (keep < 1) { topo = presimplify(topo, weight); topo = simplify(topo, quantile(topo, keep)); topo = quantize(topo, q); } // quantile(…, p) : la part p des points est gardée
     // les étiquettes d'après le tracé simplifié (celui qui est dessiné)
     const simple = feature(topo, topo.objects.z).features;
     topo.objects.z.geometries.forEach((g, i) => { const p = g.properties || {}; const l = labelPoint(simple[i]?.geometry); if (l) p.l = l; Object.keys(p).forEach(k => { if (p[k] === undefined || p[k] === '' || (Array.isArray(p[k]) && !p[k].length)) delete p[k]; }); g.properties = p; delete g.id; });
@@ -105,8 +108,9 @@ const frDep = readJson('fr-departements-avec-outre-mer.geojson').features.map(f 
     const c = String(f.properties.code), n = f.properties.nom;
     return {type: 'Feature', geometry: f.geometry, properties: {i: c, n, a: [nuts3FR.get(fold(n)) || ''].filter(Boolean), p: regOf(f), o: c.length === 3 ? 1 : undefined}};
 });
-write('fr-departements', {name: 'France — départements', attr: FR_ATTR, codes: 'INSEE (35, 2A…), NUTS 3'}, frDep, {keep: .07, q: 1e5});
-write('fr-regions', {name: 'France — régions', attr: FR_ATTR, codes: 'INSEE (53…), NUTS 1'}, frReg.map(f => { const c = String(f.properties.code); return {type: 'Feature', geometry: f.geometry, properties: {i: c, n: f.properties.nom, a: [REG_NUTS[c] || ''].filter(Boolean), o: c.length === 2 && c[0] === '0' ? 1 : undefined}}; }), {keep: .07, q: 1e5});
+const IDF_BOOST = [1.4, 48.1, 3.6, 49.25, 400]; // Île-de-France : tracés gardés plus fins (encart agrandi)
+write('fr-departements', {name: 'France — départements', attr: FR_ATTR, codes: 'INSEE (35, 2A…), NUTS 3'}, frDep, {keep: .078, q: 1e5, boost: IDF_BOOST});
+write('fr-regions', {name: 'France — régions', attr: FR_ATTR, codes: 'INSEE (53…), NUTS 1'}, frReg.map(f => { const c = String(f.properties.code); return {type: 'Feature', geometry: f.geometry, properties: {i: c, n: f.properties.nom, a: [REG_NUTS[c] || ''].filter(Boolean), o: c.length === 2 && c[0] === '0' ? 1 : undefined}}; }), {keep: .078, q: 1e5, boost: IDF_BOOST});
 
 /* ═════════ Europe : NUTS (Eurostat GISCO via Nuts2json, version 2024) ═════════ */
 const NUTS_ATTR = '© EuroGeographics pour les limites administratives (Eurostat GISCO, NUTS 2024, via Nuts2json)';

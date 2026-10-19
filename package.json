@@ -76,6 +76,7 @@
           "router.php",
           "telecharger.php",
           "carnet-numerique-des-ancetres.php",
+          "faq-data.js",
           "LICENSE",
           "lib/**/*",
           "assets/**/*",

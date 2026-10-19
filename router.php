@@ -159,7 +159,7 @@ if ($ext === 'php') {
     return count($segments) === 1 ? false : router_deny(404); // seuls les scripts à la racine sont des pages
 }
 $anywhere = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'avif', 'ico', 'woff', 'woff2', 'ttf', 'otf'];
-$assetsOnly = ['json', 'geojson', 'wasm', 'map', 'mjs', 'webmanifest', 'bin']; // bin : carte terre / mer des trajets en bateau
+$assetsOnly = ['json', 'geojson', 'wasm', 'map', 'mjs', 'webmanifest', 'bin', 'gz']; // bin : carte terre / mer des trajets en bateau ; gz : fonds de carte des communes (assets/data/geo)
 if (in_array($ext, $anywhere, true) || (in_array($ext, $assetsOnly, true) && $first === 'assets')) {
     return false; // fichier statique servi par PHP (404 automatique s'il n'existe pas)
 }

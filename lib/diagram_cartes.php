@@ -4,7 +4,8 @@ declare(strict_types=1);
 /**
  * 🗺️ Diagrammes « Cartes » (assets/js/heritage-diagram-cartes.js) : les lieux de l'arbre avec leurs coordonnées.
  * GET api.php?action=diagram_geo&what=…&from=1700&to=1900&ancestors=1
- *  - what = births | deaths | marriages | all          → {places: [{id, name, county, state, country, code, lat, lon, n}]}
+ *  - what = births | deaths | marriages | all          → {places: [{id, name, county, state, country, code, insee, lat, lon, n}]}
+ *    (code = département, admin2_code ; insee = commune, admin4_code : INSEE en France, « BE-46030 »… ailleurs)
  *    (une personne compte une fois par lieu : sa naissance, sinon son baptême ; son décès, sinon sa sépulture)
  *  - what = birth_death | birth_marriage | generation → {places: [...], pairs: [[idDépart, idArrivée, nombre]]}
  *    (naissance → décès ; naissance → premier mariage ; lieu de naissance du parent → lieu de naissance de l'enfant)
@@ -85,9 +86,9 @@ function diagram_geo_data(PDO $pdo, array $get): array
     if ($counts) {
         foreach (array_chunk(array_keys($counts), 500) as $chunk) {
             $in = implode(',', array_map('intval', $chunk));
-            foreach ($pdo->query("SELECT id, name, county, state, country, COALESCE(admin2_code,'') AS code, latitude, longitude FROM places WHERE id IN ($in)") as $r) {
+            foreach ($pdo->query("SELECT id, name, county, state, country, COALESCE(admin2_code,'') AS code, COALESCE(admin4_code,'') AS insee, latitude, longitude FROM places WHERE id IN ($in)") as $r) {
                 $id = (int) $r['id'];
-                $places[] = ['id' => $id, 'name' => (string) $r['name'], 'county' => (string) $r['county'], 'state' => (string) $r['state'], 'country' => (string) $r['country'], 'code' => (string) $r['code'],
+                $places[] = ['id' => $id, 'name' => (string) $r['name'], 'county' => (string) $r['county'], 'state' => (string) $r['state'], 'country' => (string) $r['country'], 'code' => (string) $r['code'], 'insee' => (string) $r['insee'],
                     'lat' => is_numeric($r['latitude']) && abs((float) $r['latitude']) <= 90 ? round((float) $r['latitude'], 5) : null,
                     'lon' => is_numeric($r['longitude']) && abs((float) $r['longitude']) <= 180 ? round((float) $r['longitude'], 5) : null, 'n' => $counts[$id] ?? 0];
             }
