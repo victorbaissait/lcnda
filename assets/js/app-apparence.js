@@ -498,6 +498,7 @@
                 <fieldset class="lc-hh-set"><legend>Boutons carrés</legend>${radio('lc-hh-cols', 1, cfg.cols, 'Sur 1 colonne (défaut)')}${radio('lc-hh-cols', 2, cfg.cols, 'Sur 2 colonnes')}</fieldset>
                 <fieldset class="lc-hh-set"><legend>Lien « 🧩 Cette personne était… »</legend>${radio('lc-hh-pf', 'button', cfg.pf, 'Un bouton carré 🧩, dans la colonne des boutons')}${radio('lc-hh-pf', 'badges', cfg.pf, 'En bas de la colonne des badges', 'Sous À vérifier, Hors généalogie, Artiste.')}<small class="muted">Il est caché au départ : coche « 🧩 » dans la liste des boutons pour le montrer (décoche-le pour le cacher à nouveau). Pas sur les fiches d’animaux.</small></fieldset>
                 <span class="section-label">Aperçu</span><div data-hh-preview>${headerPreviewHtml(cfg)}</div>
+                <div class="page-actions action-zone"><button class="button small" type="button" data-hh-save>Enregistrer l’en-tête</button><button class="button small secondary" type="button" data-hh-reset>↺ Remettre comme au départ</button></div>
             </section>
             <section class="maintenance-panel order-editor block-order-editor"><div class="item-title-row"><h3>Ordre et visibilité des boutons</h3></div>
                 <div class="order-list block-order-list" id="lc-hh-order">${cfg.order.map(row).join('')}</div>
