@@ -89,10 +89,10 @@ function picker_number(int $n): string
 function picker_search(PDO $pdo, array $get): array
 {
     picker_register($pdo);
-    $kinds = array_values(array_unique(array_filter(array_map('trim', explode(',', strtolower((string) ($get['kind'] ?? 'person')))),
+    $kinds = array_values(array_unique(array_filter(array_map('trim', explode(',', strtolower(scalar_text($get['kind'] ?? 'person', 'kind')))),
         static fn(string $k): bool => in_array($k, PICKER_KINDS, true))));
     if (!$kinds) { $kinds = ['person']; }
-    $q = trim((string) preg_replace('/\s+/u', ' ', mb_substr((string) ($get['q'] ?? ''), 0, 120)));
+    $q = trim((string) preg_replace('/\s+/u', ' ', mb_substr(scalar_text($get['q'] ?? '', 'q'), 0, 120)));
     $offset = max(0, (int) ($get['offset'] ?? 0));
     $limit = max(1, min(100, (int) ($get['limit'] ?? 30)));
     $opts = ['animals' => (string) ($get['animals'] ?? '1') !== '0', 'mixed' => count($kinds) > 1,
@@ -105,7 +105,7 @@ function picker_search(PDO $pdo, array $get): array
         'media_flag' => in_array($get['media_flag'] ?? '', ['notr', 'tr', 'sig'], true) ? $get['media_flag'] : '',
         'with_text' => (string) ($get['with_text'] ?? '') === '1']; // avec la transcription (relecture d'un média choisi)
     // 🎨 fiches des catalogues d'artistes : sortes (« release,master ») et artiste
-    $opts['art_kind'] = (string) preg_replace('/[^a-z0-9_,]/', '', strtolower((string) ($get['art_kind'] ?? '')));
+    $opts['art_kind'] = (string) preg_replace('/[^a-z0-9_,]/', '', strtolower(scalar_text($get['art_kind'] ?? '', 'art_kind')));
     $opts['art_person'] = max(0, (int) ($get['art_person'] ?? 0));
     // near=lat,lon : les lieux les plus proches d'un point cliqué sur la carte
     if (in_array('place', $kinds, true) && preg_match('/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/', (string) ($get['near'] ?? ''), $m)) {

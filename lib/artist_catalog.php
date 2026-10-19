@@ -85,8 +85,8 @@ function artist_sparql(string $query): array
 /** une demande d'import : la source, ce qu'on veut, et des identifiants vérifiés un à un */
 function artist_remote(array $q): array
 {
-    $src = (string) ($q['source'] ?? ''); $what = (string) ($q['what'] ?? '');
-    $id = trim((string) ($q['id'] ?? '')); $text = mb_substr(trim((string) ($q['q'] ?? '')), 0, 200); $page = max(1, min(50, safe_int($q['page'] ?? 1)));
+    $src = scalar_text($q['source'] ?? '', 'source'); $what = scalar_text($q['what'] ?? '', 'what');
+    $id = trim(scalar_text($q['id'] ?? '', 'id')); $text = mb_substr(trim(scalar_text($q['q'] ?? '', 'q')), 0, 200); $page = max(1, min(50, safe_int($q['page'] ?? 1)));
     $need = static function (string $re, string $v, string $msg) { if (!preg_match($re, $v)) { throw new RuntimeException($msg); } return $v; };
     switch ($src) {
         case 'discogs':

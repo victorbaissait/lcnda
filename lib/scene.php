@@ -42,8 +42,8 @@ function scene_places(PDO $pdo, string $ids): array
 
 function scene_api_get(PDO $pdo, array $g): array
 {
-    return match ((string) ($g['op'] ?? '')) {
-        'places' => scene_places($pdo, (string) ($g['ids'] ?? '')),
+    return match (scalar_text($g['op'] ?? '', 'op')) {
+        'places' => scene_places($pdo, scalar_text($g['ids'] ?? '', 'ids')),
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }

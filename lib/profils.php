@@ -58,7 +58,7 @@ function profils_of_person(PDO $pdo, int $personId): array
     $out = array_map(static function ($r) {
         $def = json_decode((string) $r['def'], true) ?: [];
         return ['key' => (string) $r['key'], 'item_id' => $r['item_id'] !== null ? (int) $r['item_id'] : null, 'label' => (string) $r['label'], 'icon' => (string) $r['icon'],
-            'origin' => (string) $r['origin'], 'color' => (string) ($def['color'] ?? '')];
+            'origin' => (string) $r['origin'], 'color' => scalar_text($def['color'] ?? '', 'color')];
     }, $s->fetchAll(PDO::FETCH_ASSOC));
     // la case « Artiste » de la fiche compte aussi (anciennes bases)
     $a = $pdo->prepare('SELECT COALESCE(is_artist,0) FROM persons WHERE id=?'); $a->execute([$personId]);
@@ -97,12 +97,12 @@ function profils_set_many(PDO $pdo, array $d): array
     $off = array_slice(is_array($d['off'] ?? null) ? $d['off'] : [], 0, 80);
     $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
     try {
-        foreach ($off as $k) { $k = (string) $k; if (profils_key_ok($k)) { art_set_profile($pdo, ['person_id' => $pid, 'profile' => $k, 'on' => 0]); } }
+        foreach ($off as $k) { $k = scalar_text($k, 'off'); if (profils_key_ok($k)) { art_set_profile($pdo, ['person_id' => $pid, 'profile' => $k, 'on' => 0]); } }
         $ord = 0;
         foreach ($on as $p) {
-            $p = is_array($p) ? $p : ['key' => (string) $p]; $k = (string) ($p['key'] ?? '');
+            $p = is_array($p) ? $p : ['key' => scalar_text($p, 'on')]; $k = scalar_text($p['key'] ?? '', 'key');
             if (!profils_key_ok($k)) { continue; }
-            [$lab, $ic] = PROFILS_BUILTIN[$k] ?? [mb_substr(trim((string) ($p['label'] ?? '')), 0, 80) ?: $k, mb_substr((string) ($p['icon'] ?? ''), 0, 16)];
+            [$lab, $ic] = PROFILS_BUILTIN[$k] ?? [mb_substr(trim(scalar_text($p['label'] ?? '', 'label')), 0, 80) ?: $k, mb_substr(scalar_text($p['icon'] ?? '', 'icon'), 0, 16)];
             art_set_profile($pdo, ['person_id' => $pid, 'profile' => $k, 'on' => 1, 'label' => $lab, 'icon' => $ic]);
             $pdo->prepare('UPDATE person_profiles SET sort_order=? WHERE person_id=? AND profile_key=?')->execute([++$ord, $pid, $k]);
         }
@@ -117,7 +117,7 @@ function profils_save_def(PDO $pdo, array $d): array
     art_ensure($pdo);
     $label = mb_substr(trim(safe_text($d['label'] ?? '')), 0, 60);
     if ($label === '') { throw new RuntimeException('Donne un nom à ce profil.'); }
-    $key = (string) ($d['key'] ?? '');
+    $key = scalar_text($d['key'] ?? '', 'key');
     if ($key === '') {
         $base = trim((string) preg_replace('/[^a-z0-9]+/', '_', strtolower((string) (iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $label) ?: 'profil'))), '_') ?: 'profil';
         $key = 'u_' . substr($base, 0, 28); $n = 2;
@@ -126,10 +126,10 @@ function profils_save_def(PDO $pdo, array $d): array
     } elseif (!preg_match('/^u_[a-z0-9_]{1,38}$/', $key)) { throw new RuntimeException('Seuls tes propres profils se modifient ici.'); }
     $def = function_exists('artist_clean') ? artist_clean(is_array($d['def'] ?? null) ? $d['def'] : []) : [];
     $def = is_array($def) ? $def : [];
-    if (isset($def['color']) && !preg_match('/^#[0-9a-fA-F]{6}$/', (string) $def['color'])) { $def['color'] = '#7b2ff7'; }
+    if (isset($def['color']) && !preg_match('/^#[0-9a-fA-F]{6}$/', scalar_text($def['color'], 'color'))) { $def['color'] = '#7b2ff7'; }
     $json = json_encode($def, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if (strlen((string) $json) > 200_000) { throw new RuntimeException('Ce profil a trop de réglages.'); }
-    $icon = mb_substr(trim((string) ($d['icon'] ?? '')), 0, 8) ?: '✦';
+    $icon = mb_substr(trim(scalar_text($d['icon'] ?? '', 'icon')), 0, 8) ?: '✦';
     $pdo->prepare("INSERT INTO profiles(key, label, icon, origin, def) VALUES(?,?,?, 'user', ?) ON CONFLICT(key) DO UPDATE SET label=excluded.label, icon=excluded.icon, def=excluded.def")
         ->execute([$key, $label, $icon, $json]);
     return ['key' => $key];
@@ -139,7 +139,7 @@ function profils_save_def(PDO $pdo, array $d): array
 function profils_delete_def(PDO $pdo, array $d): array
 {
     art_ensure($pdo);
-    $key = (string) ($d['key'] ?? '');
+    $key = scalar_text($d['key'] ?? '', 'key');
     if (!preg_match('/^u_[a-z0-9_]{1,38}$/', $key)) { throw new RuntimeException('Seuls tes propres profils se suppriment.'); }
     $c = $pdo->prepare('SELECT count(*) FROM person_profiles WHERE profile_key=?'); $c->execute([$key]);
     if (($n = (int) $c->fetchColumn()) > 0) { throw new RuntimeException("Ce profil est coché sur {$n} fiche" . ($n > 1 ? 's' : '') . ' : décoche-le d’abord.'); }

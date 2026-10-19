@@ -48,11 +48,12 @@ function blocs_readonly(): bool { return function_exists('kiosk_state') && !empt
 
 /* ═════════ Lire ═════════ */
 
-/** les fiches (avec le nom et le sexe de leur personne, et si sa fiche est verrouillée) */
+/** les fiches (avec le nom et le sexe de leur personne, et si sa fiche est verrouillée) ; celles d'une personne supprimée
+ *  restent dans la base (elles reviennent si on remet la personne) mais ne s'affichent plus (Revue de presse, Palmarès…) */
 function blocs_rows(PDO $pdo, string $where, array $params, int $limit = 5000): array
 {
     $s = $pdo->prepare('SELECT i.*, ' . art_person_name_sql() . " AS owner, p.gender AS owner_gender, COALESCE(p.is_locked,0) AS owner_locked
-        FROM items i LEFT JOIN persons p ON p.id=i.person_id WHERE {$where} ORDER BY COALESCE(i.date_min, i.year, 9999), i.sort_order, i.id LIMIT " . max(1, min(20000, $limit)));
+        FROM items i JOIN persons p ON p.id=i.person_id WHERE {$where} ORDER BY COALESCE(i.date_min, i.year, 9999), i.sort_order, i.id LIMIT " . max(1, min(20000, $limit)));
     $s->execute($params);
     return array_map(static fn($r) => art_row($r) + ['owner' => trim((string) $r['owner']), 'owner_gender' => (string) ($r['owner_gender'] ?? ''), 'owner_locked' => (int) $r['owner_locked'] === 1,
         'date_text' => (string) $r['date_text']], $s->fetchAll(PDO::FETCH_ASSOC));
@@ -89,7 +90,7 @@ function blocs_boot(PDO $pdo, array $g): array
         $person = $p->fetch(PDO::FETCH_ASSOC) ?: null;
         if (!$person) { throw new RuntimeException('Fiche introuvable.'); }
     }
-    $items = (string) ($g['scope'] ?? 'all') === 'person' && $pid > 0
+    $items = scalar_text($g['scope'] ?? 'all', 'scope') === 'person' && $pid > 0
         ? blocs_rows($pdo, "i.type_key IN ({$in}) AND (i.person_id=? OR i.id IN (SELECT item_id FROM item_people WHERE person_id=?))", [...$kinds, $pid, $pid])
         : blocs_rows($pdo, "i.type_key IN ({$in})", $kinds);
     $ids = array_column($items, 'id');
@@ -115,7 +116,7 @@ function blocs_save_item(PDO $pdo, array $d): array
     blocs_ensure_types($pdo);
     $personId = safe_int($d['person_id'] ?? 0);
     blocs_person_check($pdo, $personId);
-    $kind = (string) ($d['kind'] ?? ''); if (!blocs_kind_ok($kind)) { throw new RuntimeException('Sorte de fiche inconnue.'); }
+    $kind = scalar_text($d['kind'] ?? '', 'kind'); if (!blocs_kind_ok($kind)) { throw new RuntimeException('Sorte de fiche inconnue.'); }
     $data = artist_clean(is_array($d['data'] ?? null) ? $d['data'] : []); $data = is_array($data) ? $data : [];
     $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if (strlen((string) $json) > 3_000_000) { throw new RuntimeException('Fiche trop volumineuse.'); }
@@ -185,7 +186,7 @@ function blocs_move_item(PDO $pdo, array $d): array
 
 function blocs_api_get(PDO $pdo, array $g): array
 {
-    return match ((string) ($g['op'] ?? '')) {
+    return match (scalar_text($g['op'] ?? '', 'op')) {
         'boot' => blocs_boot($pdo, $g),
         'person' => blocs_person($pdo, safe_int($g['person_id'] ?? 0), blocs_kinds_of($g['kinds'] ?? '')),
         default => throw new RuntimeException('Demande inconnue.'),
@@ -196,7 +197,7 @@ function blocs_api_post(PDO $pdo, array $d): array
 {
     art_ensure($pdo);
     if (blocs_readonly()) { throw new RuntimeException('Mode consultation : rien ne peut être modifié.'); }
-    return match ((string) ($d['op'] ?? '')) {
+    return match (scalar_text($d['op'] ?? '', 'op')) {
         'save_item' => blocs_save_item($pdo, $d),
         'delete_item' => blocs_delete_item($pdo, $d),
         'restore_item' => blocs_restore_item($pdo, $d),

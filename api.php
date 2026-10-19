@@ -197,6 +197,13 @@ try {
         require_once __DIR__ . '/lib/puzzle.php';
         puzzle_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    // Imports qui interrogent un site (Discogs, MusicBrainz…, DOI, ORCID, HAL) : rien n'est écrit dans la base, donc pas de
+    // transaction d'écriture ouverte pendant l'attente du site (jusqu'à 25 s par demande) — sinon tout enregistrement fait
+    // en même temps attendait, puis échouait en « base verrouillée ».
+    if ($isWrite && ($action === 'artist_remote' || $action === 'sciences_remote')) {
+        try { json_response(['ok' => true, 'result' => $action === 'artist_remote' ? artist_remote($payload) : sciences_remote($payload)]); }
+        catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
+    }
     if ($isWrite && $action === 'house_model_upload') {
         house_model_upload($pdo, $_FILES['file'] ?? null, $_POST);
     }
@@ -497,7 +504,7 @@ try {
             }
         }
     }
-    json_response(['error' => readable_error_message($e)], 500);
+    json_response(['error' => readable_error_message($e)], $e instanceof LcndaBadInput ? 422 : 500);
 }
 
 function bootstrap_data(PDO $pdo): never

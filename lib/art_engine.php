@@ -72,6 +72,22 @@ function art_table_kind(PDO $pdo, string $name): string
 /** Les tables (migration n°47) ; idempotent. L'ancienne table artist_items est recopiée dans items (mêmes numéros) puis supprimée. */
 function art_schema(PDO $pdo): void
 {
+    // tout ou rien : une erreur au milieu (après la copie d'artist_items) laissait la base au n°46 sans artist_items, avec des
+    // index vides et des dates non calculées que rien ne refaisait ensuite. Une seule transaction : aussi bien plus rapide
+    // (10 000 fiches : 18 s → moins d'une seconde, plus d'écriture disque à chaque ligne).
+    $own = !$pdo->inTransaction();
+    if ($own) { $pdo->beginTransaction(); }
+    try {
+        art_schema_steps($pdo);
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) {
+        if ($own && $pdo->inTransaction()) { $pdo->rollBack(); }
+        throw $e;
+    }
+}
+
+function art_schema_steps(PDO $pdo): void
+{
     $pdo->exec("CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, type_key TEXT NOT NULL, person_id INTEGER NOT NULL DEFAULT 0,
         parent_id INTEGER, title TEXT NOT NULL DEFAULT '', date_text TEXT NOT NULL DEFAULT '', date_min INTEGER, date_max INTEGER, year INTEGER, place_id INTEGER,
         data TEXT NOT NULL DEFAULT '{}', sort_order INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
@@ -185,12 +201,12 @@ function art_walk(mixed $node, string $field, array &$people, array &$links, int
     };
     $isList = array_is_list($node);
     if (!$isList) {
-        $role = trim((string) ($node['role'] ?? ($row['role'] ?? '')));
-        $zone = isset($node['primary']) ? (!empty($node['primary']) ? 'main' : 'secondary') : (string) ($node['zone'] ?? 'main');
+        $role = trim(scalar_text($node['role'] ?? ($row['role'] ?? ''), 'role'));
+        $zone = isset($node['primary']) ? (!empty($node['primary']) ? 'main' : 'secondary') : scalar_text($node['zone'] ?? 'main', 'zone');
         if (isset($node['pid']) && is_numeric($node['pid']) && (int) $node['pid'] > 0) {
-            $people[] = ['person_id' => (int) $node['pid'], 'name' => mb_substr((string) ($node['title'] ?? ''), 0, 200), 'role' => mb_substr($role, 0, 120), 'zone' => $zone === 'secondary' ? 'secondary' : 'main', 'field' => $field, 'details' => $small($node)];
-        } elseif (isset($node['pname']) && trim((string) $node['pname']) !== '') {
-            $people[] = ['person_id' => null, 'name' => mb_substr(trim((string) $node['pname']), 0, 200), 'role' => mb_substr($role, 0, 120), 'zone' => $zone === 'secondary' ? 'secondary' : 'main', 'field' => $field, 'details' => $small($node)];
+            $people[] = ['person_id' => (int) $node['pid'], 'name' => mb_substr(scalar_text($node['title'] ?? '', 'title'), 0, 200), 'role' => mb_substr($role, 0, 120), 'zone' => $zone === 'secondary' ? 'secondary' : 'main', 'field' => $field, 'details' => $small($node)];
+        } elseif (isset($node['pname']) && trim(scalar_text($node['pname'], 'pname')) !== '') {
+            $people[] = ['person_id' => null, 'name' => mb_substr(trim(scalar_text($node['pname'], 'pname')), 0, 200), 'role' => mb_substr($role, 0, 120), 'zone' => $zone === 'secondary' ? 'secondary' : 'main', 'field' => $field, 'details' => $small($node)];
         }
         foreach (ART_REF_KEYS as $key => $type) {
             if (isset($node[$key]) && is_numeric($node[$key]) && (int) $node[$key] > 0) {
@@ -297,7 +313,7 @@ function art_links_of(PDO $pdo, array $ids): array
         $in = implode(',', $chunk);
         $sql = 'SELECT l.id AS lid, l.from_id, l.to_id, l.kind AS lkind, l.precision, l.data AS ldata, i.id, i.person_id, i.type_key, i.title, i.year, i.data, ' . art_person_name_sql() . " AS pname
             FROM item_links l JOIN items i ON i.id = CASE WHEN l.from_id IN ({$in}) THEN l.to_id ELSE l.from_id END
-            LEFT JOIN persons p ON p.id=i.person_id WHERE l.to_type='item' AND (l.from_id IN ({$in}) OR l.to_id IN ({$in})) ORDER BY l.from_id, l.ord, l.id";
+            JOIN persons p ON p.id=i.person_id WHERE l.to_type='item' AND (l.from_id IN ({$in}) OR l.to_id IN ({$in})) ORDER BY l.from_id, l.ord, l.id";
         foreach ($pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC) as $r) {
             $out[(int) $r['lid']] = ['id' => (int) $r['lid'], 'from' => (int) $r['from_id'], 'to' => (int) $r['to_id'], 'type' => (string) $r['lkind'], 'precision' => (string) $r['precision'],
                 'data' => json_decode((string) $r['ldata'], true) ?: [], 'other' => art_summary($r)];
@@ -312,10 +328,11 @@ function art_people_of(PDO $pdo, array $ids): array
     art_ensure($pdo);
     $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
     if (!$ids) { return []; }
-    $rows = $pdo->query('SELECT a.item_id, a.person_id, a.name AS fname, a.role, a.zone, a.field, p.gender, ' . art_person_name_sql() . ' AS pname
+    $rows = $pdo->query('SELECT a.item_id, a.person_id, p.id AS alive, a.name AS fname, a.role, a.zone, a.field, p.gender, ' . art_person_name_sql() . ' AS pname
         FROM item_people a LEFT JOIN persons p ON p.id=a.person_id WHERE a.item_id IN (' . implode(',', $ids) . ') ORDER BY a.item_id, a.ord')->fetchAll(PDO::FETCH_ASSOC);
-    return array_map(static fn($r) => ['item_id' => (int) $r['item_id'], 'person_id' => $r['person_id'] !== null ? (int) $r['person_id'] : 0, 'role' => (string) $r['role'], 'zone' => (string) $r['zone'],
-        'field' => (string) $r['field'], 'name' => $r['person_id'] !== null && trim((string) $r['pname']) !== '' ? (string) $r['pname'] : (string) $r['fname'], 'gender' => (string) ($r['gender'] ?? 'unknown')], $rows);
+    // une personne citée dont la fiche a été supprimée : pastille sans fiche (nom gardé dans le JSON), pas de lien vers une fiche qui n'existe plus
+    return array_map(static fn($r) => ['item_id' => (int) $r['item_id'], 'person_id' => $r['alive'] !== null ? (int) $r['person_id'] : 0, 'role' => (string) $r['role'], 'zone' => (string) $r['zone'],
+        'field' => (string) $r['field'], 'name' => $r['alive'] !== null && trim((string) $r['pname']) !== '' ? (string) $r['pname'] : ((string) $r['fname'] !== '' ? (string) $r['fname'] : ($r['person_id'] !== null ? 'Fiche supprimée' : '')), 'gender' => (string) ($r['gender'] ?? 'unknown')], $rows);
 }
 
 /** « Lié à » sur la fiche d'une personne : les fiches qui la citent (crédits, propriétaire, dédicace…) */
@@ -324,7 +341,7 @@ function art_person_cited(PDO $pdo, int $personId): array
     if ($personId <= 0) { return []; }
     try { art_ensure($pdo); } catch (Throwable $e) { return []; }
     $s = $pdo->prepare('SELECT a.role, a.field, i.id, i.person_id, i.type_key, i.title, i.year, i.data, ' . art_person_name_sql() . ' AS pname
-        FROM item_people a JOIN items i ON i.id=a.item_id LEFT JOIN persons p ON p.id=i.person_id WHERE a.person_id=? ORDER BY COALESCE(i.year, 9999), i.title LIMIT 500');
+        FROM item_people a JOIN items i ON i.id=a.item_id JOIN persons p ON p.id=i.person_id WHERE a.person_id=? ORDER BY COALESCE(i.year, 9999), i.title LIMIT 500');
     $s->execute([$personId]);
     $out = [];
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) {
@@ -422,7 +439,7 @@ function art_save_item(PDO $pdo, array $d): array
     $p = $pdo->prepare('SELECT COALESCE(is_artist,0) FROM persons WHERE id=?'); $p->execute([$personId]); $isArtist = $p->fetchColumn();
     if ($isArtist === false) { throw new RuntimeException('Personne introuvable.'); }
     if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $personId); }
-    $kind = (string) ($d['kind'] ?? ''); if (!art_kind_ok($pdo, $kind)) { throw new RuntimeException('Sorte de fiche inconnue.'); }
+    $kind = scalar_text($d['kind'] ?? '', 'kind'); if (!art_kind_ok($pdo, $kind)) { throw new RuntimeException('Sorte de fiche inconnue.'); }
     $kindProfiles = art_kind_profiles($kind); // 🧩 politique, sport, profil de l'utilisateur… : le profil se coche tout seul
     $profOwn = $kindProfiles !== ['artist'] && !(function_exists('sciences_kind_ok') && sciences_kind_ok($kind));
     if ($profOwn) {
@@ -433,7 +450,7 @@ function art_save_item(PDO $pdo, array $d): array
     $sciOwn = function_exists('sciences_before_save') && sciences_before_save($pdo, $personId, $kind, $d); // 🔬 profil inventeur / scientifique / explorateur
     if (!$sciOwn && !$profOwn && !(int) $isArtist) {
         if (empty($d['make_artist'])) { throw new RuntimeException('Cette fiche n’est pas cochée « Artiste » : coche « Artiste » sur la fiche (Modifier la fiche) avant d’y ranger un élément du catalogue.'); }
-        art_make_artist($pdo, $personId, (string) ($d['discipline'] ?? ''));
+        art_make_artist($pdo, $personId, scalar_text($d['discipline'] ?? '', 'discipline'));
     }
     $data = artist_clean(is_array($d['data'] ?? null) ? $d['data'] : []);
     $data = is_array($data) ? $data : [];
@@ -549,11 +566,11 @@ function art_make_artist(PDO $pdo, int $personId, string $discipline = ''): arra
 function art_set_profile(PDO $pdo, array $d): array
 {
     art_ensure($pdo);
-    $pid = safe_int($d['person_id'] ?? 0); $key = (string) ($d['profile'] ?? '');
+    $pid = safe_int($d['person_id'] ?? 0); $key = scalar_text($d['profile'] ?? '', 'profile');
     if (!preg_match('/^[a-z][a-z0-9_]{1,40}$/', $key)) { throw new RuntimeException('Profil inconnu.'); }
     if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $pid); }
     $e = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $e->execute([$pid]); if (!$e->fetchColumn()) { throw new RuntimeException('Fiche introuvable.'); }
-    $pdo->prepare('INSERT OR IGNORE INTO profiles(key, label, icon, origin) VALUES(?,?,?,?)')->execute([$key, mb_substr((string) ($d['label'] ?? $key), 0, 80), mb_substr((string) ($d['icon'] ?? ''), 0, 16), 'builtin']);
+    $pdo->prepare('INSERT OR IGNORE INTO profiles(key, label, icon, origin) VALUES(?,?,?,?)')->execute([$key, mb_substr(scalar_text($d['label'] ?? $key, 'label'), 0, 80), mb_substr(scalar_text($d['icon'] ?? '', 'icon'), 0, 16), 'builtin']);
     if (!empty($d['on'])) { $pdo->prepare('INSERT OR IGNORE INTO person_profiles(person_id, profile_key) VALUES(?,?)')->execute([$pid, $key]); }
     else { $pdo->prepare('DELETE FROM person_profiles WHERE person_id=? AND profile_key=?')->execute([$pid, $key]); }
     if ($key === 'artist') { $pdo->prepare('UPDATE persons SET is_artist=? WHERE id=?')->execute([!empty($d['on']) ? 1 : 0, $pid]); }
@@ -564,9 +581,9 @@ function art_set_profile(PDO $pdo, array $d): array
 function art_save_type(PDO $pdo, array $d): array
 {
     art_ensure($pdo);
-    $label = mb_substr(trim((string) ($d['label'] ?? '')), 0, 80);
+    $label = mb_substr(trim(scalar_text($d['label'] ?? '', 'label')), 0, 80);
     if ($label === '') { throw new RuntimeException('Donne un nom à cette sorte de fiche.'); }
-    $key = (string) ($d['key'] ?? '');
+    $key = scalar_text($d['key'] ?? '', 'key');
     if ($key === '') {
         $base = trim((string) preg_replace('/[^a-z0-9]+/', '_', strtolower((string) (iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $label) ?: 'sorte'))), '_') ?: 'sorte';
         $key = 't_' . substr($base, 0, 30); $n = 2;
@@ -578,7 +595,7 @@ function art_save_type(PDO $pdo, array $d): array
     $meta = $def; $meta['groups'] = array_map(static fn($g) => array_diff_key(is_array($g) ? $g : [], ['fields' => 1]), $groups);
     $json = json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if (strlen((string) $json) > 400_000) { throw new RuntimeException('Cette sorte a trop de réglages.'); }
-    $s = static fn($k, $max = 80) => mb_substr(trim((string) ($def[$k] ?? '')), 0, $max);
+    $s = static fn($k, $max = 80) => mb_substr(trim(scalar_text($def[$k] ?? '', $k)), 0, $max);
     $pdo->prepare("INSERT INTO item_types(key, label, plural, icon, color, family, domain, parent_type, origin, def) VALUES(?,?,?,?,?,?,?,?, 'user', ?)
         ON CONFLICT(key) DO UPDATE SET label=excluded.label, plural=excluded.plural, icon=excluded.icon, color=excluded.color, family=excluded.family, domain=excluded.domain,
         parent_type=excluded.parent_type, def=excluded.def, version=version+1, updated_at=CURRENT_TIMESTAMP")
@@ -590,13 +607,13 @@ function art_save_type(PDO $pdo, array $d): array
     foreach ($groups as $g) {
         if (!is_array($g)) { continue; }
         foreach (is_array($g['fields'] ?? null) ? $g['fields'] : [] as $f) {
-            if (!is_array($f) || !preg_match('/^[A-Za-z_][A-Za-z0-9_]{0,39}$/', (string) ($f['key'] ?? ''))) { continue; }
+            if (!is_array($f) || !preg_match('/^[A-Za-z_][A-Za-z0-9_]{0,39}$/', scalar_text($f['key'] ?? '', 'key'))) { continue; }
             $set = array_diff_key($f, array_flip(['key', 'type', 'label', 'star', 'inList', 'inCard', 'inExport', 'filterable', 'source']));
-            $ins->execute([$key, mb_substr((string) ($g['key'] ?? 'main'), 0, 40), mb_substr((string) ($g['label'] ?? ''), 0, 80), $ord++, (string) $f['key'], mb_substr((string) ($f['type'] ?? 'text'), 0, 20),
-                mb_substr((string) ($f['label'] ?? ''), 0, 120), json_encode($set, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), !empty($f['star']) ? 1 : 0, !empty($f['inList']) ? 1 : 0, !empty($f['inCard']) ? 1 : 0,
-                ($f['inExport'] ?? true) ? 1 : 0, !empty($f['filterable']) ? 1 : 0, mb_substr((string) ($f['source'] ?? ''), 0, 90)]);
+            $ins->execute([$key, mb_substr(scalar_text($g['key'] ?? 'main', 'key'), 0, 40), mb_substr(scalar_text($g['label'] ?? '', 'label'), 0, 80), $ord++, scalar_text($f['key'], 'key'), mb_substr(scalar_text($f['type'] ?? 'text', 'type'), 0, 20),
+                mb_substr(scalar_text($f['label'] ?? '', 'label'), 0, 120), json_encode($set, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), !empty($f['star']) ? 1 : 0, !empty($f['inList']) ? 1 : 0, !empty($f['inCard']) ? 1 : 0,
+                ($f['inExport'] ?? true) ? 1 : 0, !empty($f['filterable']) ? 1 : 0, mb_substr(scalar_text($f['source'] ?? '', 'source'), 0, 90)]);
             if (in_array($f['type'] ?? '', ['item', 'items'], true)) { // 🧩 item ou items
-                foreach (is_array($f['kinds'] ?? null) ? $f['kinds'] : [] as $to) { $pdo->prepare('INSERT INTO type_links(from_type, to_type, field_key, name_fwd, name_back) VALUES(?,?,?,?,?)')->execute([$key, (string) $to, (string) $f['key'], mb_substr((string) ($f['label'] ?? ''), 0, 80), mb_substr((string) ($f['back'] ?? ''), 0, 80)]); }
+                foreach (array_slice(is_array($f['kinds'] ?? null) ? $f['kinds'] : [], 0, 200) as $to) { if (!is_string($to) || !preg_match('/^[a-z][a-z0-9_]{0,43}$/', $to)) { continue; } $pdo->prepare('INSERT INTO type_links(from_type, to_type, field_key, name_fwd, name_back) VALUES(?,?,?,?,?)')->execute([$key, (string) $to, scalar_text($f['key'], 'key'), mb_substr(scalar_text($f['label'] ?? '', 'label'), 0, 80), mb_substr(scalar_text($f['back'] ?? '', 'back'), 0, 80)]); }
             }
         }
     }
@@ -606,7 +623,7 @@ function art_save_type(PDO $pdo, array $d): array
 function art_delete_type(PDO $pdo, array $d): array
 {
     art_ensure($pdo);
-    $key = (string) ($d['key'] ?? '');
+    $key = scalar_text($d['key'] ?? '', 'key');
     $c = $pdo->prepare('SELECT count(*) FROM items WHERE type_key=?'); $c->execute([$key]);
     if ((int) $c->fetchColumn() > 0) { throw new RuntimeException('Des fiches de cette sorte existent encore : supprime-les d’abord.'); }
     $s = $pdo->prepare("DELETE FROM item_types WHERE key=? AND origin='user'"); $s->execute([$key]);
@@ -620,7 +637,7 @@ function art_delete_type(PDO $pdo, array $d): array
 function art_save_settings(PDO $pdo, array $d): array
 {
     art_ensure($pdo);
-    $key = (string) ($d['key'] ?? '');
+    $key = scalar_text($d['key'] ?? '', 'key');
     if (!preg_match('/^(global|presets|person:\d{1,10})$/', $key)) { throw new RuntimeException('Réglage inconnu.'); }
     if (($d['data'] ?? null) === null) { $pdo->prepare('DELETE FROM layout_prefs WHERE key=?')->execute([$key]); return ['ok' => true, 'deleted' => true]; }
     $data = artist_clean(is_array($d['data']) ? $d['data'] : []);
@@ -659,7 +676,7 @@ function picker_art_items(PDO $pdo, string $q, int $offset, int $limit, array $o
 {
     art_ensure($pdo);
     $where = ['1=1']; $params = [];
-    $kinds = array_values(array_filter(explode(',', (string) ($opts['art_kind'] ?? '')), static fn($k) => (bool) preg_match('/^[a-z0-9_]{1,44}$/', $k)));
+    $kinds = array_values(array_filter(explode(',', scalar_text($opts['art_kind'] ?? '', 'art_kind')), static fn($k) => (bool) preg_match('/^[a-z0-9_]{1,44}$/', $k)));
     if ($kinds) { $where[] = 'i.type_key IN (' . implode(',', array_fill(0, count($kinds), '?')) . ')'; array_push($params, ...$kinds); }
     else { $where[] = "i.type_key<>'profile' AND substr(i.type_key, 1, 8)<>'profile_'"; }
     if (!empty($opts['art_person'])) { $where[] = 'i.person_id=?'; $params[] = (int) $opts['art_person']; }
@@ -670,8 +687,9 @@ function picker_art_items(PDO $pdo, string $q, int $offset, int $limit, array $o
         else { foreach (array_slice(preg_split('/\s+/u', $q) ?: [], 0, 6) as $w) { $where[] = '(i.title LIKE ? OR i.data LIKE ? OR CAST(i.year AS TEXT)=?)'; $params[] = '%' . $w . '%'; $params[] = '%' . $w . '%'; $params[] = $w; } }
     }
     $w = implode(' AND ', $where);
-    $c = $pdo->prepare("SELECT count(*) FROM items i WHERE {$w}"); $c->execute($params); $total = (int) $c->fetchColumn();
-    $s = $pdo->prepare('SELECT i.*, t.label AS tlabel, t.icon AS ticon, ' . art_person_name_sql() . " AS pname FROM items i LEFT JOIN item_types t ON t.key=i.type_key LEFT JOIN persons p ON p.id=i.person_id WHERE {$w}
+    // les fiches d'une personne supprimée restent (elles reviennent si on remet la personne) mais ne sont plus proposées
+    $c = $pdo->prepare("SELECT count(*) FROM items i JOIN persons p ON p.id=i.person_id WHERE {$w}"); $c->execute($params); $total = (int) $c->fetchColumn();
+    $s = $pdo->prepare('SELECT i.*, t.label AS tlabel, t.icon AS ticon, ' . art_person_name_sql() . " AS pname FROM items i LEFT JOIN item_types t ON t.key=i.type_key JOIN persons p ON p.id=i.person_id WHERE {$w}
         ORDER BY CASE WHEN i.title LIKE ? THEN 0 ELSE 1 END, i.title COLLATE NOCASE, i.id LIMIT " . (int) $limit . ' OFFSET ' . (int) $offset);
     $s->execute([...$params, $q . '%']);
     $items = array_map(static function ($r) {
@@ -687,10 +705,10 @@ function picker_art_items(PDO $pdo, string $q, int $offset, int $limit, array $o
 
 function art_api_get(PDO $pdo, array $g): array
 {
-    return match ((string) ($g['op'] ?? '')) {
+    return match (scalar_text($g['op'] ?? '', 'op')) {
         'boot' => art_boot($pdo, safe_int($g['person_id'] ?? 0)),
         'item' => art_item($pdo, safe_int($g['id'] ?? 0)),
-        'items' => art_items_by_ids($pdo, explode(',', (string) ($g['ids'] ?? ''))),
+        'items' => art_items_by_ids($pdo, explode(',', scalar_text($g['ids'] ?? '', 'ids'))),
         'cited' => ['items' => art_person_cited($pdo, safe_int($g['person_id'] ?? 0))],
         'types' => ['types' => art_types_all($pdo)],
         'profiles' => profils_get($pdo, safe_int($g['person_id'] ?? 0)), // 🧩 lib/profils.php
@@ -702,13 +720,13 @@ function art_api_get(PDO $pdo, array $g): array
 function art_api_post(PDO $pdo, array $d): array
 {
     art_ensure($pdo);
-    return match ((string) ($d['op'] ?? '')) {
+    return match (scalar_text($d['op'] ?? '', 'op')) {
         'save_item' => art_save_item($pdo, $d),
         'save_items' => art_save_items($pdo, $d),
         'delete_item' => art_delete_item($pdo, $d),
         'restore_item' => art_restore_item($pdo, $d),
         'reorder' => art_reorder_items($pdo, $d),
-        'make_artist' => art_make_artist($pdo, safe_int($d['person_id'] ?? 0), (string) ($d['discipline'] ?? '')),
+        'make_artist' => art_make_artist($pdo, safe_int($d['person_id'] ?? 0), scalar_text($d['discipline'] ?? '', 'discipline')),
         'set_profile' => art_set_profile($pdo, $d),
         'set_profiles' => profils_set_many($pdo, $d), 'save_profile_def' => profils_save_def($pdo, $d), 'delete_profile_def' => profils_delete_def($pdo, $d), // 🧩 lib/profils.php
         'save_type' => art_save_type($pdo, $d),

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 /** Enregistrement refusé parce que la même chose a changé ailleurs (autre onglet, autre fenêtre) depuis son ouverture : réponse 409. */
 if (!class_exists('LcndaConflict')) { class LcndaConflict extends RuntimeException {} }
+if (!class_exists('LcndaBadInput')) { class LcndaBadInput extends RuntimeException {} } // donnée de mauvaise forme envoyée par la page → 422
 /** Version d'un contenu enregistré (tableau, mise en page) : change dès que le contenu change, même dans la même seconde. */
 function content_rev(?string $json): string { return substr(sha1((string) $json), 0, 16); }
 /** Le JSON reçu est lu en tableaux PHP : un objet vide {} y devient [] et repartait ainsi au navigateur (où ce qu'on y range
@@ -1326,5 +1327,15 @@ function safe_int(mixed $value, int $fallback = 0): int
 
 function safe_text(mixed $value): string
 {
-    return trim((string) ($value ?? ''));
+    return trim(scalar_text($value));
+}
+
+/** une valeur envoyée par la page, en texte : nombre, oui/non ou vide → texte ; un tableau ou un objet là où on attend
+ *  un texte → refus clair (422) au lieu de « Array » et d'un avertissement PHP */
+function scalar_text(mixed $value, string $what = ''): string
+{
+    if ($value === null || is_string($value)) { return (string) $value; }
+    if (is_int($value) || is_float($value) || is_bool($value)) { return (string) $value; }
+    if ($value instanceof Stringable) { return (string) $value; }
+    throw new LcndaBadInput('Donnée incorrecte' . ($what !== '' ? ' (« ' . $what . ' »)' : '') . ' : un texte est attendu.');
 }

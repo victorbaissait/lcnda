@@ -128,8 +128,8 @@ function sciences_coords(PDO $pdo, string $ids): array
 
 function sciences_api_get(PDO $pdo, array $g): array
 {
-    return match ((string) ($g['op'] ?? '')) {
-        'coords' => sciences_coords($pdo, (string) ($g['ids'] ?? '')),
+    return match (scalar_text($g['op'] ?? '', 'op')) {
+        'coords' => sciences_coords($pdo, scalar_text($g['ids'] ?? '', 'ids')),
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }
@@ -205,10 +205,10 @@ function sciences_parse_hal(array $j): array
 function sciences_remote(array $q): array
 {
     if (!function_exists('artist_json')) { throw new RuntimeException('Import indisponible.'); }
-    $src = (string) ($q['source'] ?? '');
+    $src = scalar_text($q['source'] ?? '', 'source');
     switch ($src) {
         case 'crossref': // un ou plusieurs DOI (un par ligne)
-            $dois = array_slice(array_values(array_unique(array_filter(array_map('sciences_doi', preg_split('~[\s,;]+~', (string) ($q['dois'] ?? '')) ?: [])))), 0, 25);
+            $dois = array_slice(array_values(array_unique(array_filter(array_map('sciences_doi', preg_split('~[\s,;]+~', scalar_text($q['dois'] ?? '', 'dois')) ?: [])))), 0, 25);
             if (!$dois) { throw new RuntimeException('Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/…'); }
             $items = []; $errors = [];
             foreach ($dois as $doi) {
@@ -217,11 +217,11 @@ function sciences_remote(array $q): array
             }
             return ['items' => $items, 'errors' => $errors];
         case 'orcid':
-            $id = sciences_orcid((string) ($q['id'] ?? ''));
+            $id = sciences_orcid(scalar_text($q['id'] ?? '', 'id'));
             if ($id === '') { throw new RuntimeException('Identifiant ORCID incorrect : 16 chiffres par groupes de 4 (ex. 0000-0002-1825-0097).'); }
             return ['items' => sciences_parse_orcid(artist_json('https://pub.orcid.org/v3.0/' . $id . '/works')), 'errors' => [], 'orcid' => $id];
         case 'hal':
-            $who = mb_substr(trim((string) ($q['q'] ?? '')), 0, 120);
+            $who = mb_substr(trim(scalar_text($q['q'] ?? '', 'q')), 0, 120);
             if ($who === '') { throw new RuntimeException('Écris le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL.'); }
             $w = str_replace(['"', '\\'], '', $who);
             $query = preg_match('~^[a-z0-9-]{3,60}$~', $w) ? 'authIdHal_s:"' . $w . '" OR authFullName_t:"' . $w . '"' : 'authFullName_t:"' . $w . '"'; // idHal (anne-martin) ou nom

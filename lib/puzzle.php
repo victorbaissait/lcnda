@@ -252,11 +252,11 @@ function puzzle_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload
 {
     try {
         if (!$isWrite && $action === 'puzzle') {
-            $uid = (string) ($_GET['uid'] ?? '');
+            $uid = scalar_text($_GET['uid'] ?? '', 'uid');
             json_response($uid !== '' ? puzzle_get($pdo, $uid) : puzzle_list($pdo));
         }
         if ($isWrite && $action === 'puzzle_write') {
-            $op = (string) ($payload['op'] ?? '');
+            $op = scalar_text($payload['op'] ?? '', 'op');
             $pdo->beginTransaction();
             try {
                 $out = match ($op) {
