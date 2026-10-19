@@ -164,3 +164,13 @@
 .pm-pick > .button { flex: none; }
 @media (max-width: 700px) { .pm-pick { flex-wrap: wrap; } .pm-pick .pm-filters { flex-basis: 100%; } }
 .pm-pick .pm-filter { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; }
+/* ⚙️ Les cartes en pastilles */
+.pm-pillset { display: flex; flex-direction: column; gap: 12px; }
+.pm-pillset > p { margin: 0; }
+.pm-pillset .radio-line { display: flex; align-items: baseline; gap: 10px; padding: 8px 10px; border: 1.5px solid var(--line-color); border-radius: 8px; cursor: pointer; }
+.pm-pillset .radio-line:has(input:checked) { border-color: var(--blue); }
+.pm-pillset [data-pps]:not(.ui-range) { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.pm-pillset [data-pps][hidden] { display: none; }
+.pm-pillset .ui-range { grid-template-columns: 150px minmax(0, 1fr) 74px; margin: 0; width: 100%; box-sizing: border-box; }
+.pm-pillset .ui-range > * { min-width: 0; box-sizing: border-box; }
+.pm-pillset .ui-range > .ui-num { margin: 0; width: 100%; }

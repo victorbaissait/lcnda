@@ -701,6 +701,26 @@
     let current = null;
     function currentId() { const v = S().photomapId ?? store.get('lcnda-photomaps-current', 'all'); return v === 'all' || !Number(v) ? 'all' : Number(v); }
     function setCurrent(id) { S().photomapId = id; store.set('lcnda-photomaps-current', id); }
+    // ⚙️ les pastilles en haut de l'outil : {mode: 'recent' | 'old' | 'manual', count: 1–12, ids: [cartes choisies, dans l'ordre]}
+    function pillPrefs() {
+        const v = store.get('lcnda-photomaps-pills', {}) || {};
+        return {mode: ['recent', 'old', 'manual'].includes(v.mode) ? v.mode : 'recent', count: Math.max(1, Math.min(12, Math.round(Number(v.count)) || 5)),
+            ids: Array.isArray(v.ids) ? [...new Set(v.ids.map(Number).filter(x => Number.isInteger(x) && x > 0))].slice(0, 40) : []};
+    }
+    function pillSettings(maps, after) {
+        const pr = pillPrefs(), r = (v, l, hint) => `<label class="radio-line"><input type="radio" name="mode" value="${v}" ${pr.mode === v ? 'checked' : ''}> <span><b>${l}</b> <small class="muted">${hint}</small></span></label>`;
+        ext.openDialog({eyebrow: 'CARTES DE PHOTOS', title: '⚙️ Les cartes en pastilles', submitLabel: 'Enregistrer',
+            body: `<div class="pm-pillset"><p class="muted">Les cartes qui ont leur pastille en haut de l’outil. Les autres restent dans « 🔍 autres cartes… », et la carte affichée garde toujours la sienne.</p>
+                ${r('recent', 'Les plus récentes', '(les dernières modifiées)')}${r('old', 'Les plus anciennes', '(les premières créées)')}${r('manual', 'Choisies à la main', '(dans l’ordre où tu les ajoutes)')}
+                <label class="ui-range" data-pps="count"><span class="ui-range-lab">Nombre de pastilles</span><input type="range" name="count" min="1" max="12" step="1" value="${pr.count}" data-default="5"></label>
+                <div data-pps="manual"><span class="pk-lab">Mes cartes en pastilles</span>${P().pickerField?.({name: 'ids', kind: 'photomap', multiple: true, value: pr.ids.filter(id => maps.some(m => m.id === id))}) || ''}</div></div>`,
+            onOpen: dl => { const sync = () => { const m = dl.querySelector('[name=mode]:checked')?.value; dl.querySelector('[data-pps=count]').hidden = m === 'manual'; dl.querySelector('[data-pps=manual]').hidden = m !== 'manual'; }; dl.querySelectorAll('[name=mode]').forEach(x => x.addEventListener('change', sync)); sync(); },
+            onSubmit: form => {
+                const f = new FormData(form);
+                store.set('lcnda-photomaps-pills', {mode: f.get('mode'), count: Number(f.get('count')), ids: String(f.get('ids') || '').split(',').map(Number).filter(Boolean)});
+                toast('✓ Enregistré'); after?.();
+            }});
+    }
     async function renderCarte(token) {
         const ws = A().$('#workspace');
         ws.innerHTML = '<nav class="pm-pick" aria-label="Mes cartes de photos"></nav><section class="pm-carte"></section>';
@@ -710,13 +730,16 @@
         api('photomaps').then(r => {
             const nav = ws.querySelector('.pm-pick'); if (!nav || !nav.isConnected) return;
             const maps = r.maps || [], cur = currentId(), n = m => (m.photos || 0) + (m.videos || 0);
-            // au-delà de 6 cartes : les 5 dernières modifiées (+ celle affichée), les autres par le menu de choix
-            const MAX = 6, recent = [...maps].sort((a, b) => String(b.updated_at || '').localeCompare(String(a.updated_at || '')) || b.id - a.id);
-            let shown = maps.length > MAX ? recent.slice(0, MAX - 1) : maps;
-            if (maps.length > MAX && cur !== 'all' && !shown.some(m => m.id === cur)) { const c = maps.find(m => m.id === cur); if (c) shown = [c, ...shown.slice(0, MAX - 2)]; }
+            // quelles cartes ont leur pastille : réglage ⚙️ (les plus récentes, les plus anciennes ou choisies à la main) ; les autres par le menu de choix
+            const pr = pillPrefs(), byDate = k => (a, b) => String(a[k] || '').localeCompare(String(b[k] || '')) || a.id - b.id;
+            let shown;
+            if (pr.mode === 'manual') shown = pr.ids.map(id => maps.find(m => m.id === id)).filter(Boolean);
+            else { const sorted = pr.mode === 'old' ? [...maps].sort(byDate('created_at')) : [...maps].sort(byDate('updated_at')).reverse(); shown = maps.length > pr.count + 1 ? sorted.slice(0, pr.count) : sorted; }
+            if (cur !== 'all' && !shown.some(m => m.id === cur)) { const c = maps.find(m => m.id === cur); if (c) shown = [c, ...shown]; } // celle affichée garde toujours sa pastille
             const more = maps.length - shown.length;
-            nav.innerHTML = `<span class="pm-filters" role="group" aria-label="Carte affichée"><button type="button" class="pm-filter${cur === 'all' ? ' is-active' : ''}" data-pmp="all">🗺 Toutes mes cartes <b>${maps.length}</b></button>${shown.map(m => `<button type="button" class="pm-filter${cur === m.id ? ' is-active' : ''}" data-pmp="${Number(m.id)}"><span class="pm-legdot" style="background:${esc(color(m.color))}" aria-hidden="true"></span> ${esc(m.name)} <b>${n(m)}</b></button>`).join('')}${more > 0 ? `<button type="button" class="pm-filter" data-pmp-more>🔍 ${plural(more, 'autre carte', 'autres cartes')}…</button>` : ''}</span>${kiosk() ? '' : '<button type="button" class="button small secondary" data-pmp-new>＋ Nouvelle carte</button>'}`;
+            nav.innerHTML = `<span class="pm-filters" role="group" aria-label="Carte affichée"><button type="button" class="pm-filter${cur === 'all' ? ' is-active' : ''}" data-pmp="all">🗺 Toutes mes cartes <b>${maps.length}</b></button>${shown.map(m => `<button type="button" class="pm-filter${cur === m.id ? ' is-active' : ''}" data-pmp="${Number(m.id)}"><span class="pm-legdot" style="background:${esc(color(m.color))}" aria-hidden="true"></span> ${esc(m.name)} <b>${n(m)}</b></button>`).join('')}${more > 0 ? `<button type="button" class="pm-filter" data-pmp-more>🔍 ${plural(more, 'autre carte', 'autres cartes')}…</button>` : ''}</span><button type="button" class="icon-action" data-pmp-set title="Quelles cartes en pastilles ?" aria-label="Régler les pastilles des cartes">⚙️</button>${kiosk() ? '' : '<button type="button" class="button small secondary" data-pmp-new>＋ Nouvelle carte</button>'}`;
             nav.addEventListener('click', async e => {
+                if (e.target.closest('[data-pmp-set]')) { pillSettings(maps, () => renderCarte(++S().workspaceToken)); return; }
                 const b = e.target.closest('[data-pmp]');
                 if (b) { setCurrent(b.dataset.pmp === 'all' ? 'all' : Number(b.dataset.pmp)); A().renderSidebar(); renderCarte(++S().workspaceToken); return; }
                 if (e.target.closest('[data-pmp-more]')) { // le menu de choix unique, sorte « photomap »
