@@ -615,7 +615,25 @@ function bootstrap_data(PDO $pdo): never
 
 function site_defaults_allowed_keys(): array
 {
+    // même liste que SITE_DEFAULT_KEYS (assets/js/app.js) : une clé absente d'ici est jetée sans rien dire
     return [
+        'genealogie-menu-names',
+        'genealogie-menu-icons',
+        'genealogie-lightbox-sections',
+        'genealogie-calendar-choices',
+        'genealogie-diagram-kinds',
+        'genealogie-house-snap',
+        'genealogie-house-lib',
+        'lcnda-decor-tree',
+        'genealogie-decor-tree-formats',
+        'genealogie-decor-tree-styles',
+        'genealogie-edit-tools-order',
+        'genealogie-maintenance-groups',
+        'genealogie-list-groups',
+        'genealogie-mylists-order',
+        'genealogie-keynote-prefs',
+        'genealogie-vector-map-palette',
+        'genealogie-dashboard-blocks',
         'genealogie-design',
         'genealogie-design-presets',
         'genealogie-menu-order',
@@ -679,7 +697,7 @@ function save_site_defaults(PDO $pdo,array $data): array
         if(!is_string($value))$value=json_encode($value,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         $value=(string)$value;
         // les réglages des tableaux peuvent contenir des formes faites d'une image : plus de place pour eux
-        if(strlen($value)>(str_starts_with($key,'genealogie-board-prefs')?4000000:200000))throw new RuntimeException('Un réglage est trop volumineux.');
+        if(strlen($value)>((str_starts_with($key,'genealogie-board-prefs')||in_array($key,['genealogie-house-lib','lcnda-decor-tree','genealogie-keynote-prefs'],true))?4000000:200000))throw new RuntimeException('Un réglage est trop volumineux.');
         $settings[$key]=$value;
     }
     if(!is_dir(dirname(SITE_DEFAULTS_PATH))&&!mkdir(dirname(SITE_DEFAULTS_PATH),0775,true)&&!is_dir(dirname(SITE_DEFAULTS_PATH)))throw new RuntimeException('Impossible de créer le dossier de configuration.');
