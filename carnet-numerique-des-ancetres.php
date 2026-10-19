@@ -197,8 +197,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.7.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 539 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.7.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.7.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.7.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 551 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -207,7 +207,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.7.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 555 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.7.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 561 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -218,13 +218,13 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.7.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 534 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.7.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 509 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.7.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 540 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.7.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 514 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.7.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 536 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.7.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 505 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.7.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.7.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 510 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
                     <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.7.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
@@ -238,8 +238,8 @@
                     <p class="presentation-os-help">Le code complet de la version 0.7.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.7.0.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.7.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.7.0.zip"><span>Archive .zip<small>Windows, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.7.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
