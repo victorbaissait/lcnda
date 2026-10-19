@@ -34,6 +34,7 @@
     /** chiffres « tenus à jour » : relus dans l'app à chaque affichage (une minute de mémoire) */
     const liveMem = new Map();
     async function resolveLive(spec) {
+        if (spec.live?.follow) return resolveFollow(spec);
         if (!spec.live?.key || !ext.diagramStatRows) return spec;
         let hit = liveMem.get(spec.live.key);
         if (!hit || Date.now() - hit.t > 60000) { hit = {t: Date.now(), rows: ext.diagramStatRows(spec.live.key)}; liveMem.set(spec.live.key, hit); }
@@ -48,7 +49,20 @@
         else { s.rows = pairs.map(([v, n]) => ({label: v, s0: n, color: keep[v] || ''})); s.series = [{...(s.series?.[0] || {}), name: s.series?.[0]?.name || label || 'Nombre'}]; }
         return s;
     }
-    const svgOf = async d => R().svg(await resolveLive(specOf(d)));
+    /** 📈 un de mes graphiques (Éditeur de statistiques) posé comme un diagramme : son dessin, ses couleurs et ses chiffres suivent le graphique */
+    const followId = spec => (spec?.live?.follow && /^my:cw_[a-z0-9]{4,24}$/.test(String(spec.live.key || '')) ? String(spec.live.key).slice(3) : '');
+    async function resolveFollow(spec) {
+        const id = followId(spec), key = 'follow:' + spec.live.key; // à part des chiffres « tenus à jour » d'une statistique (même clé my:…)
+        let hit = liveMem.get(key), r = null;
+        if (!hit || Date.now() - hit.t > 60000) { hit = {t: Date.now(), rows: id && ext.statDiagramSpec ? ext.statDiagramSpec(id) : Promise.resolve(null)}; liveMem.set(key, hit); }
+        try { r = await hit.rows; } catch (_) { liveMem.delete(key); }
+        if (r?.spec && R().KINDS[r.spec.kind]) return {...r.spec, live: spec.live};
+        return {kind: '_missing', live: spec.live, o: {title: r?.name || spec.o?.title || 'Mon graphique'}, msg: r ? (String(r.html || '').replace(/<[^>]*>/g, '').trim() || 'Rien à dessiner pour l’instant.') : 'Graphique introuvable : supprimé, ou fait dans un autre navigateur.'};
+    }
+    /** le dessin d'un diagramme, ou un petit cadre quand le graphique suivi n'est plus là */
+    const drawSpec = s => s.kind === '_missing' ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 150" width="640" height="150" role="img" aria-label="${esc(s.o?.title || '')}"><rect x="1" y="1" width="638" height="148" rx="12" fill="#f4f5f7" stroke="#cfd4db"/><text x="320" y="66" text-anchor="middle" font-family="system-ui, sans-serif" font-size="21" font-weight="700" fill="#333">📈 ${esc(String(s.o?.title || '').slice(0, 60))}</text><text x="320" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#666">${esc(String(s.msg || '').slice(0, 90))}</text></svg>` : R().svg(s);
+    const svgOf = async d => drawSpec(await resolveLive(specOf(d)));
+    ext.diagramFollowId = d => followId(d?.spec || d);
 
     /* ─── Les cases qui se remplissent seules : <div data-dg-embed="12"> ─── */
     ext.diagramEmbedHtml = (id, {tools = true} = {}) => `<div class="h-dg-embed" data-dg-embed="${Number(id) || 0}"${tools ? '' : ' data-dg-notools'}><p class="muted">Diagramme…</p></div>`;
@@ -88,9 +102,9 @@
         return kind.grids.map(g => { const cols = gridCols(g, spec); return [g.label, cols.map(c => c.label).join(';'), ...(spec[g.key] || []).map(r => cols.map(c => csvCell(r[c.k])).join(';'))].join('\n'); }).join('\n\n');
     }
     async function exportAs(fmt, name, spec, o = {}) {
-        const svg = R().svg(await resolveLive(spec));
+        const svg = drawSpec(await resolveLive(spec));
         if (fmt === 'svg') return download(new Blob([svg], {type: 'image/svg+xml'}), o.filename || fileName(name) + '.svg');
-        if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec)], {type: 'text/csv;charset=utf-8'}), o.filename || fileName(name) + '.csv');
+        if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec.live?.follow ? await resolveLive(spec) : spec)], {type: 'text/csv;charset=utf-8'}), o.filename || fileName(name) + '.csv');
         if (fmt === 'json') return download(new Blob([JSON.stringify({lcnda_diagram: 1, name, kind: spec.kind, spec}, null, 1)], {type: 'application/json'}), o.filename || fileName(name) + '.diagramme.json');
         if (fmt === 'print') { const w = window.open('', '_blank'); if (!w) throw new Error('fenêtre bloquée par le navigateur'); w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(name)}</title><style>body{margin:0}svg{width:100%;height:auto}</style>${svg}<script>onload=()=>setTimeout(()=>print(),200)<\/script>`); w.document.close(); return; }
         const c = await svgToCanvas(svg, Math.max(0.5, Math.min(6, (Number(o.quality) || 192) / 96)), fmt === 'jpg' ? '#ffffff' : '');
@@ -104,7 +118,7 @@
         const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return exportAs('png', name, getSpec()).catch(e => toast(e.message, 'error'));
         const run = fmt => o => exportAs(fmt, name, getSpec(), o);
         UI.openExportDialog({title: name || 'Diagramme', defaultName: fileName(name), quality: 192, saveCopy: !!A().importMediaFile,
-            preview: async () => { const box = document.createElement('div'); box.className = 'h-dg-svg'; box.innerHTML = R().svg(await resolveLive(getSpec())); return box; },
+            preview: async () => { const box = document.createElement('div'); box.className = 'h-dg-svg'; box.innerHTML = drawSpec(await resolveLive(getSpec())); return box; },
             formats: [{id: 'png', run: run('png')}, {id: 'jpg', run: run('jpg')}, {id: 'svg', hint: 'net à toutes les tailles', run: run('svg')},
                 {id: 'pdf', hint: 'par l’impression : « Enregistrer en PDF »', ext: '', quality: false, run: run('print')}, {id: 'print', quality: false, run: run('print')},
                 {id: 'csv', label: '📄 CSV', hint: 'les chiffres, pour un tableur', ext: 'csv', quality: false, run: run('csv')},
@@ -237,7 +251,10 @@
     async function openEditor(id = null, {link = null, kind = null, onSave = null, onClose = null, spec: given = null, name: givenName = ''} = {}) {
         let rec;
         if (!id && given && R().KINDS[given.kind]) rec = {id: 0, name: givenName || given.o?.title || R().KINDS[given.kind].label, spec: clone(given), links: link ? [link] : []}; // données déjà prêtes (statistique, import)
-        else if (id) { const d = await get(id); if (!d) return toast('Diagramme introuvable.', 'error'); rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
+        else if (id) { const d = await get(id); if (!d) return toast('Diagramme introuvable.', 'error');
+            // 📈 un de mes graphiques posé ici : on le modifie dans l'Éditeur de statistiques (il se met à jour partout)
+            if (followId(d.spec)) { document.querySelectorAll('dialog[open]').forEach(x => { try { x.close(); } catch (_) {} }); if (ext.editMyGraph) ext.editMyGraph(followId(d.spec)); return null; }
+            rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
         else {
             const t = kind ? {kind} : await chooseType(); if (!t) return null;
             const spec = presetSpec(t);
@@ -432,7 +449,7 @@
         const all = await list(true).catch(() => []);
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-gallery';
         dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 MES DIAGRAMMES</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-close>×</button></div>
-            <div class="h-dg-tiles"><button type="button" class="h-dg-tile is-new" data-new><span class="h-dg-mini h-dg-plus">＋</span><span>Nouveau diagramme</span></button>${ext.diagramFromStat ? '<button type="button" class="h-dg-tile is-new" data-fromstat><span class="h-dg-mini h-dg-plus">📊</span><span>D’une statistique (de l’app ou à moi, tenue à jour)</span></button><button type="button" class="h-dg-tile is-new" data-import><span class="h-dg-mini h-dg-plus">📥</span><span>Importer (fichier, tableau, Wikipédia, image)</span></button>' : ''}${all.map(d => `<button type="button" class="h-dg-tile" data-pick="${d.id}"><span class="h-dg-mini">${R().svg({...specOf(d), o: {...(d.spec?.o || {}), legend: 'none', source: '', subtitle: ''}}, 480)}</span><span>${esc(R().KINDS[d.kind]?.icon || '📊')} ${esc(d.name)}</span></button>`).join('')}</div>`;
+            <div class="h-dg-tiles"><button type="button" class="h-dg-tile is-new" data-new><span class="h-dg-mini h-dg-plus">＋</span><span>Nouveau diagramme</span></button>${ext.diagramFromStat ? '<button type="button" class="h-dg-tile is-new" data-fromstat><span class="h-dg-mini h-dg-plus">📊</span><span>D’une statistique (de l’app ou à moi, tenue à jour)</span></button><button type="button" class="h-dg-tile is-new" data-import><span class="h-dg-mini h-dg-plus">📥</span><span>Importer (fichier, tableau, Wikipédia, image)</span></button>' : ''}${ext.pickMyGraph ? '<button type="button" class="h-dg-tile is-new" data-mygraph><span class="h-dg-mini h-dg-plus">📈</span><span>Un de mes graphiques (Éditeur de statistiques, tenu à jour)</span></button>' : ''}${all.map(d => `<button type="button" class="h-dg-tile" data-pick="${d.id}"><span class="h-dg-mini"${followId(d.spec) ? ` data-dg-mini="${d.id}"` : ''}>${followId(d.spec) ? '<span class="h-dg-plus">📈</span>' : R().svg({...specOf(d), o: {...(d.spec?.o || {}), legend: 'none', source: '', subtitle: ''}}, 480)}</span><span>${esc(R().KINDS[d.kind]?.icon || '📊')} ${esc(d.name)}</span></button>`).join('')}</div>`;
         document.body.appendChild(dlg);
         const done = v => { dlg.close(); dlg.remove(); resolve(v); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); done(null); });
@@ -442,24 +459,58 @@
             if (e.target.closest('[data-new]')) { dlg.close(); dlg.remove(); const r = await openEditor(null, {link, onSave: id => resolve(id), onClose: () => resolve(null)}); if (!r) resolve(null); }
             if (e.target.closest('[data-fromstat]')) { dlg.close(); dlg.remove(); resolve(await ext.diagramFromStat({link})); }
             if (e.target.closest('[data-import]')) { dlg.close(); dlg.remove(); resolve(await ext.diagramImport({link})); }
+            if (e.target.closest('[data-mygraph]')) { dlg.close(); dlg.remove(); const gid = await ext.pickMyGraph(); resolve(gid ? await ext.myGraphDiagram(gid).catch(err => { toast(err.message, 'error'); return null; }) : null); }
         });
         dlg.showModal();
+        // les vignettes des graphiques suivis : dessinées après coup (leurs chiffres sont relus dans l'arbre)
+        dlg.querySelectorAll('[data-dg-mini]').forEach(async m => { const d = byId(m.dataset.dgMini); if (!d) return; try { const s = await resolveLive(specOf(d)); if (s.kind !== '_missing' && m.isConnected) m.innerHTML = R().svg({...s, o: {...(s.o || {}), legend: 'none', source: '', subtitle: '', title: ''}}, 480); } catch (_) {} });
+    });
+
+    /* ─── 📈 Un de mes graphiques posé partout : un diagramme « qui suit » le graphique (un seul par graphique) ─── */
+    const followKind = id => { const g = (ext.myGraphs?.() || []).find(x => x.id === id); const st = String(g?.style || 'bars'); const k = st.startsWith('dg:') ? st.slice(3).split(':')[0] : ({tiles: 'treemap', table: 'bars'}[st] || st); return R().KINDS[k] ? k : 'columns'; };
+    /** le numéro du diagramme qui montre mon graphique (créé la première fois) */
+    ext.myGraphDiagram = async statId => {
+        const g = (ext.myGraphs?.() || []).find(x => x.id === statId); if (!g) throw new Error('Graphique introuvable.');
+        const key = `my:${statId}`, all = await list(true), have = all.find(d => d.spec?.live?.follow && d.spec.live.key === key);
+        if (have) return have.id;
+        const r = await post('save_diagram', {name: String(g.name || 'Mon graphique').slice(0, 200), kind: followKind(statId), spec: {live: {key, label: g.name || '', follow: true}, o: {title: g.name || ''}}});
+        await list(true); return Number(r.result?.id || r.id) || null;
+    };
+    /** où mon graphique est posé (les fiches, enquêtes, projets où son diagramme est rattaché) */
+    ext.myGraphPlaces = statId => { const d = (cache || []).find(x => x.spec?.live?.follow && x.spec.live.key === `my:${statId}`); return d ? {diagramId: d.id, links: d.links || []} : null; };
+    /** un graphique supprimé : son diagramme part aussi (les cases où il était posé le disent) */
+    ext.forgetMyGraph = async statId => { await list().catch(() => {}); const p = ext.myGraphPlaces(statId); if (!p) return; try { await post('delete_diagram', {id: p.diagramId}); } catch (_) {} await list(true).catch(() => {}); };
+    // un graphique enregistré : ses diagrammes se redessinent partout, et prennent son nom
+    let syncT = 0;
+    document.addEventListener('lcnda:graphs-changed', () => {
+        [...liveMem.keys()].filter(k => /^(follow:)?my:/.test(String(k))).forEach(k => liveMem.delete(k));
+        clearTimeout(syncT); syncT = setTimeout(async () => {
+            const mine = new Map((ext.myGraphs?.() || []).map(g => [g.id, g]));
+            for (const d of (cache || []).filter(x => followId(x.spec))) {
+                const g = mine.get(followId(d.spec)); if (!g) continue;
+                const name = String(g.name || 'Mon graphique').slice(0, 200), kind = followKind(g.id);
+                if (name !== d.name || kind !== d.kind) { try { await post('save_diagram', {id: d.id, name, kind, spec: {...(d.spec || {}), live: {...d.spec.live, label: name}, o: {...(d.spec.o || {}), title: name}}}); } catch (_) {} }
+            }
+            await list(true).catch(() => {});
+            document.querySelectorAll('[data-dg-embed]').forEach(b => { if (followId(byId(b.dataset.dgEmbed)?.spec)) delete b.dataset.dgDone; }); fillAll();
+        }, 120);
     });
 
     /* ─── Graphiques → « Mes diagrammes » ─── */
-    ext.diagramItems = () => (cache || []).map(d => [d.id, `${R()?.KINDS[d.kind]?.icon || '📊'} ${d.name}`]);
+    ext.diagramItems = () => (cache || []).map(d => [d.id, `${followId(d.spec) ? '📈' : R()?.KINDS[d.kind]?.icon || '📊'} ${d.name}`]);
+    ext.diagramList = (force = false) => list(force);
     ext.renderDiagramPage = async (token, id) => {
         const ws = A().$('#workspace');
         if (!id) { await list(); id = cache?.[0]?.id; }
         const d = id ? await get(id) : null;
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         if (!d) { ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES</span><h2>Créer un diagramme</h2><p>Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page.</p></div><div class="page-actions"><button type="button" class="button" data-dg-new>+ Nouveau diagramme</button><label class="button secondary h-dg-file">⤒ Importer un fichier<input type="file" accept=".json,application/json" data-dg-import hidden></label></div></header></section>`; bindPage(ws, null); return; }
-        ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
-            <div class="page-actions"><button type="button" class="button" data-dg-edit="${d.id}">✎ Modifier</button><button type="button" class="button secondary" data-dg-dup>⧉ Dupliquer</button><button type="button" class="button secondary" data-dg-dash title="Le poser sur le tableau de bord, comme un widget">➕ Tableau de bord</button><button type="button" class="button danger" data-dg-del>Supprimer</button></div></header>
+        ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${followId(d.spec) ? `<p>📈 Ce diagramme montre ton graphique « ${esc(d.name)} » (Éditeur de statistiques) : son dessin et ses chiffres le suivent, partout où il est posé.</p>` : d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
+            <div class="page-actions"><button type="button" class="button" data-dg-edit="${d.id}">${followId(d.spec) ? '✎ Modifier le graphique' : '✎ Modifier'}</button><button type="button" class="button secondary" data-dg-dup title="${followId(d.spec) ? 'Une copie figée, à retoucher comme un diagramme' : 'Une copie à modifier'}">⧉ Dupliquer</button><button type="button" class="button secondary" data-dg-dash title="Le poser sur le tableau de bord, comme un widget">➕ Tableau de bord</button><button type="button" class="button danger" data-dg-del>Supprimer</button></div></header>
             <div class="h-dg-pagetools"><button type="button" class="button small secondary" data-dg-pexpdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter</button></div>
             <div class="card h-dg-big"><div class="h-dg-svg">${await svgOf(d)}</div></div>
             ${d.links?.length ? `<div class="h-dg-linked"><span class="section-label">Rattaché à</span>${d.links.map(l => `<button type="button" class="h-pr-lchip" data-dg-golink="${esc(l.type)}:${l.id}:${l.inv || 0}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)}</button>`).join('')}</div>` : ''}
-            <p class="muted h-dg-where">Pour le poser ailleurs : <b>Maintenance → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Rattacher » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>.</p></section>`;
+            <p class="muted h-dg-where">Pour le poser ailleurs : <b>Maintenance → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Rattacher » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>.</p></section>`;
         bindPage(ws, d);
     };
     function bindPage(ws, d) {
@@ -467,7 +518,8 @@
         ws.querySelector('[data-dg-import]')?.addEventListener('change', e => importFile(e.target.files?.[0]));
         if (!d) return;
         ws.querySelector('[data-dg-pexpdlg]').addEventListener('click', () => exportDialog(d.name, () => specOf(d)));
-        ws.querySelector('[data-dg-dup]').addEventListener('click', async () => { try { const r = await post('save_diagram', {name: d.name + ' (copie)', kind: d.kind, spec: d.spec}); await list(true); S().graphDiagramId = Number(r.result?.id); A().setModule('graphiques'); toast('Copie créée.'); } catch (e) { toast(e.message, 'error'); } });
+        ws.querySelector('[data-dg-dup]').addEventListener('click', async () => { try { const frozen = followId(d.spec) ? await resolveLive(specOf(d)) : null; if (frozen?.kind === '_missing') throw new Error('Rien à copier : le graphique est introuvable.'); const {kind: fk, live: _l, ...fspec} = frozen || {};
+            const r = await post('save_diagram', frozen ? {name: d.name + ' (copie)', kind: fk, spec: fspec} : {name: d.name + ' (copie)', kind: d.kind, spec: d.spec}); await list(true); S().graphDiagramId = Number(r.result?.id); A().setModule('graphiques'); toast('Copie créée.'); } catch (e) { toast(e.message, 'error'); } });
         ws.querySelector('[data-dg-del]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer le diagramme « ${d.name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé.`, {title: 'Supprimer le diagramme', okLabel: 'Supprimer le diagramme'})) return; try { await post('delete_diagram', {id: d.id}); await list(true); S().graphDiagramId = cache[0]?.id || 0; if (!cache.length) S().graphMode = 'diagram'; A().setModule('graphiques'); toast('Diagramme supprimé.'); } catch (e) { toast(e.message, 'error'); } });
         ws.querySelector('[data-dg-dash]').addEventListener('click', () => addToDashboard(d));
         ws.querySelectorAll('[data-dg-golink]').forEach(b => b.addEventListener('click', () => { const [type, id, inv] = b.dataset.dgGolink.split(':'); goLink(type, Number(id), Number(inv)); }));

@@ -100,13 +100,22 @@
     const yearOf = v => { const m = String(v || '').match(/(\d{3,4})(?!.*\d{3,4})/); return m ? Number(m[1]) : null; };
     const firstYear = v => { const m = String(v || '').match(/\d{3,4}/); return m ? Number(m[0]) : null; };
     const placeShort = v => String(v || '').split(',')[0].trim();
-    ext.diagramStatHtml = (d, data, entries, cell) => {
-        if (!DI()?.TEMPLATES || !R()) return '';
-        const id = String(d.style).slice(3), t = DI().TEMPLATES().find(x => tplId(x) === id); if (!t) return '';
+    /** le diagramme (spec) d'une statistique dessinée avec un type de diagramme ; {html} = un message à la place du dessin */
+    ext.diagramStatSpec = (d, data, entries, cell, id = String(d.style || '').slice(3)) => {
+        if (!DI()?.TEMPLATES || !R()) return null;
+        const t = DI().TEMPLATES().find(x => tplId(x) === id); if (!t) return null;
         let spec = DI().presetSpec(t); spec.o = {...(spec.o || {}), title: '', subtitle: '', source: ''};
         const people = Array.isArray(data?.shown) ? data.shown : null;
+        // ✍️ mes propres chiffres, en plusieurs séries : toutes les colonnes de chiffres pour les types qui en lisent plusieurs
+        const g0 = R().KINDS[spec.kind]?.grids?.[0], free = entries?.free;
+        if (free && free.series.length > 1 && g0?.series) {
+            const n = g0.series === true ? free.series.length : Math.min(Number(g0.series) || 1, free.series.length);
+            spec.series = free.series.slice(0, n).map(x => ({name: x.name, ...(x.color ? {color: x.color} : {})}));
+            spec.rows = free.rows.filter(r => r.label !== '' || r.v.some(x => x !== '')).map(r => { const row = {label: r.label}; spec.series.forEach((_, j) => { row['s' + j] = R().num(r.v[j]); }); return row; });
+            return spec;
+        }
         if (PEOPLE_TPL.has(id)) {
-            if (!people) return '<p class="muted">Ce dessin a besoin d’une liste de personnes (source « Personnes »).</p>';
+            if (!people) return {html: '<p class="muted">Ce dessin a besoin d’une liste de personnes (source « Personnes »).</p>'};
             if (id === 'timeline:lives') {
                 const rows = people.map(r => ({name: cell(r, 'name'), roles: cell(r, 'gender') || 'Personne', start: String(firstYear(cell(r, 'birth')) ?? ''), end: String(firstYear(cell(r, 'death')) ?? '')})).filter(r => r.start).map(r => r.end || Number(r.start) > new Date().getFullYear() - 100 ? r : {...r, end: r.start}).sort((a, b) => a.start - b.start).slice(0, 80); // décès inconnu et naissance ancienne : pas de barre jusqu'à aujourd'hui
                 const roles = [...new Set(rows.map(r => r.roles))].map((role, i) => ({role, color: /femme|female/i.test(role) ? '#e15759' : /homme|male/i.test(role) ? '#4e79a7' : PALETTE[i % PALETTE.length]}));
@@ -116,9 +125,14 @@
             } else if (id === 'sankey') {
                 const m = new Map(); people.forEach(r => { const a = placeShort(cell(r, 'birthplace')), b = placeShort(cell(r, 'deathplace')); if (a && b) m.set(a + '\u0000' + b, (m.get(a + '\u0000' + b) || 0) + 1); });
                 spec.rows = [...m.entries()].sort((x, y) => y[1] - x[1]).slice(0, 25).map(([k, v]) => { const [from, to] = k.split('\u0000'); return {from, to: from === to ? to + ' ' : to, value: v}; });
-                if (!spec.rows.length) return '<p class="muted">Aucune personne avec un lieu de naissance et un lieu de décès.</p>';
+                if (!spec.rows.length) return {html: '<p class="muted">Aucune personne avec un lieu de naissance et un lieu de décès.</p>'};
             }
-        } else spec = DI().fillFrom(spec, entries.map(([v, n]) => [String(v), Number(n) || 0]), d.name || '');
+        } else spec = DI().fillFrom(spec, entries.map(([v, n]) => [String(v), Number(n) || 0]), (free?.series?.[0]?.name) || d.name || '');
+        return spec;
+    };
+    ext.diagramStatHtml = (d, data, entries, cell) => {
+        const spec = ext.diagramStatSpec(d, data, entries, cell); if (!spec) return '';
+        if (spec.html) return spec.html;
         try { return R().svg(spec); } catch (_) { return ''; }
     };
 

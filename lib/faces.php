@@ -29,18 +29,43 @@ function faces_iou(array $a, array $b): float
     return $u > 0 ? $i / $u : 0.0;
 }
 
-/** l'index : les photos (images) avec leur état d'analyse, les empreintes, et à qui elles appartiennent */
+/** l'index : les photos (images) avec leur état d'analyse et ce qui sert à choisir lesquelles analyser (photo de la
+ *  personne, portrait, visages identifiés, personnes rattachées, étiquettes, albums, année), les empreintes, et à qui
+ *  elles appartiennent. Une photo « sautée » (illisible ou trop longue à analyser) a un face_scans dont le modèle commence
+ *  par « skip: » : elle n'est pas comptée comme analysée, mais n'est pas reproposée d'office. */
 function faces_index(PDO $pdo): array
 {
     faces_ensure($pdo);
-    $media = $pdo->query("SELECT m.id, m.filename, COALESCE(m.thumbnail,'') AS thumbnail, COALESCE(m.title,'') AS title, s.faces AS scanned_faces
+    $media = $pdo->query("SELECT m.id, m.filename, COALESCE(m.thumbnail,'') AS thumbnail, COALESCE(m.title,'') AS title, COALESCE(m.date_text,'') AS date_text,
+            COALESCE(m.created_at,'') AS created_at, COALESCE(m.is_person_photo,0) AS is_person_photo, s.faces AS scanned_faces, COALESCE(s.model,'') AS scan_model
         FROM media m LEFT JOIN face_scans s ON s.media_id=m.id
         WHERE lower(m.filename) GLOB '*.jpg' OR lower(m.filename) GLOB '*.jpeg' OR lower(m.filename) GLOB '*.png' OR lower(m.filename) GLOB '*.webp'
         ORDER BY m.id DESC LIMIT 20000")->fetchAll();
+    $add = static function (array &$map, $key, $value): void { $k = (int) $key; if (!isset($map[$k])) { $map[$k] = []; } if (!in_array($value, $map[$k], true)) { $map[$k][] = $value; } };
+    $people = []; $tagged = []; $labels = []; $albums = []; $portraits = [];
+    foreach ($pdo->query("SELECT media_id, person_id FROM media_tags WHERE COALESCE(tag_type,'person')='person'") as $r) { $add($people, $r['media_id'], (int) $r['person_id']); $tagged[(int) $r['media_id']] = ($tagged[(int) $r['media_id']] ?? 0) + 1; }
+    foreach ($pdo->query("SELECT ml.media_id, CASE WHEN ml.entity_type='person' THEN ml.entity_id ELSE e.person_id END AS pid, COALESCE(ml.collection_label,'') AS album
+        FROM media_links ml LEFT JOIN events e ON ml.entity_type='event' AND e.id=ml.entity_id WHERE ml.entity_type IN ('person','event')") as $r) {
+        if ($r['pid'] !== null) { $add($people, $r['media_id'], (int) $r['pid']); }
+        if (trim((string) $r['album']) !== '') { $add($albums, $r['media_id'], mb_substr(trim((string) $r['album']), 0, 80)); }
+    }
+    foreach ($pdo->query("SELECT entity_id, label_id FROM label_links WHERE entity_type='media'") as $r) { $add($labels, $r['entity_id'], (int) $r['label_id']); }
+    foreach ($pdo->query('SELECT DISTINCT portrait_media_id FROM persons WHERE portrait_media_id IS NOT NULL') as $r) { $portraits[(int) $r['portrait_media_id']] = true; }
+    $faceLabels = array_map('intval', $pdo->query("SELECT id FROM labels WHERE lower(name) LIKE '%visage%' OR lower(name) LIKE '%portrait%' OR lower(name) LIKE '%face%'")->fetchAll(PDO::FETCH_COLUMN));
+    $out = [];
+    foreach ($media as $m) {
+        $id = (int) $m['id']; $model = (string) $m['scan_model']; $skip = str_starts_with($model, 'skip:');
+        $year = preg_match('/\b(1[0-9]{3}|20[0-9]{2})\b/', (string) $m['date_text'], $y) ? (int) $y[1] : null;
+        $dir = str_contains((string) $m['filename'], '/') ? mb_substr(dirname((string) $m['filename']), 0, 80) : '';
+        $out[] = ['id' => $id, 'filename' => $m['filename'], 'thumbnail' => $m['thumbnail'], 'title' => $m['title'],
+            'scanned' => $m['scanned_faces'] !== null && !$skip, 'faces' => (int) ($m['scanned_faces'] ?? 0), 'skipped' => $skip ? mb_substr(substr($model, 5), 0, 80) : '',
+            'year' => $year, 'added' => substr((string) $m['created_at'], 0, 10), 'portrait' => (int) $m['is_person_photo'] === 1 || isset($portraits[$id]),
+            'tagged' => $tagged[$id] ?? 0, 'people' => $people[$id] ?? [], 'labels' => $labels[$id] ?? [], 'albums' => array_values(array_filter(array_merge($albums[$id] ?? [], $dir !== '' ? [$dir] : [])))];
+    }
     $prints = $pdo->query("SELECT f.id, f.media_id, f.x, f.y, f.w, f.h, f.score, f.descriptor, f.status, f.tag_id, t.person_id, t.confidence,
             trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name
         FROM face_prints f LEFT JOIN media_tags t ON t.id=f.tag_id LEFT JOIN persons p ON p.id=t.person_id ORDER BY f.media_id, f.x")->fetchAll();
-    return ['media' => array_map(static fn($m) => ['id' => (int) $m['id'], 'filename' => $m['filename'], 'thumbnail' => $m['thumbnail'], 'title' => $m['title'], 'scanned' => $m['scanned_faces'] !== null, 'faces' => (int) ($m['scanned_faces'] ?? 0)], $media),
+    return ['media' => $out, 'face_labels' => $faceLabels,
         'prints' => array_map(static fn($f) => ['id' => (int) $f['id'], 'media_id' => (int) $f['media_id'], 'x' => (float) $f['x'], 'y' => (float) $f['y'], 'w' => (float) $f['w'], 'h' => (float) $f['h'], 'score' => (float) $f['score'],
             'd' => $f['descriptor'], 'status' => $f['status'], 'tag_id' => $f['tag_id'] !== null ? (int) $f['tag_id'] : null, 'person_id' => $f['person_id'] !== null ? (int) $f['person_id'] : null,
             'person_name' => (string) ($f['person_name'] ?? ''), 'confidence' => (string) ($f['confidence'] ?? '')], $prints)];
@@ -52,6 +77,13 @@ function save_face_scan(PDO $pdo, array $d): array
     faces_ensure($pdo);
     $mediaId = safe_int($d['media_id'] ?? 0);
     $s = $pdo->prepare('SELECT 1 FROM media WHERE id=?'); $s->execute([$mediaId]); if (!$s->fetchColumn()) { throw new RuntimeException('Photo introuvable.'); }
+    // une photo sautée (illisible, trop longue) : on le note, sans toucher aux visages d'une analyse précédente réussie
+    if (isset($d['skipped'])) {
+        $reason = mb_substr(trim(preg_replace('/\s+/', ' ', safe_text((string) $d['skipped']))), 0, 80) ?: 'erreur';
+        $c = $pdo->prepare("SELECT 1 FROM face_scans WHERE media_id=? AND model NOT LIKE 'skip:%'"); $c->execute([$mediaId]);
+        if (!$c->fetchColumn()) { $pdo->prepare('INSERT OR REPLACE INTO face_scans(media_id, faces, model, scanned_at) VALUES(?,0,?,CURRENT_TIMESTAMP)')->execute([$mediaId, 'skip:' . $reason]); }
+        return ['faces' => 0, 'skipped' => true];
+    }
     $faces = array_slice(is_array($d['faces'] ?? null) ? $d['faces'] : [], 0, 80);
     $tags = $pdo->prepare("SELECT id, x, y, w, h FROM media_tags WHERE media_id=? AND COALESCE(tag_type,'person')='person'"); $tags->execute([$mediaId]); $tags = $tags->fetchAll();
     $old = $pdo->prepare("SELECT x, y, w, h, status FROM face_prints WHERE media_id=? AND status='ignored'"); $old->execute([$mediaId]); $ignored = $old->fetchAll();

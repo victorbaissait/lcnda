@@ -835,16 +835,21 @@
         const c = fontExists.c || (fontExists.c = document.createElement('canvas').getContext('2d')), t = 'mmmmmmmmmwwwwwwwlli1ÉgQ';
         return ['monospace', 'serif', 'sans-serif'].some(base => { c.font = `72px ${base}`; const w0 = c.measureText(t).width; c.font = `72px "${name}", ${base}`; return c.measureText(t).width !== w0; });
     }
+    // Les polices de l'ordinateur : API queryLocalFonts (Chrome, Edge, l'app Electron) si elle est là et permise ;
+    // sinon (ou en plus) les polices courantes réellement installées (test de largeur). Une ligne par famille.
     async function computerFonts(ask = false) {
-        if (fontCache && !ask) return fontCache;
-        let local = [];
-        if (typeof window.queryLocalFonts === 'function') {
-            let ok = ask; try { ok = ok || (await navigator.permissions?.query({name: 'local-fonts'}))?.state === 'granted'; } catch (_) {}
-            if (ok) { try { local = [...new Set((await window.queryLocalFonts()).map(f => f.family))]; } catch (_) {} }
+        if (fontCache?.full) return fontCache; // liste complète déjà lue ; sinon on relit (la permission a pu changer)
+        let local = [], state = typeof window.queryLocalFonts === 'function' ? 'prompt' : 'none';
+        if (state !== 'none') {
+            let ok = ask;
+            if (!ok) { try { const st = (await navigator.permissions?.query({name: 'local-fonts'}))?.state; if (st) state = st; ok = st === 'granted'; } catch (_) {} }
+            // demandé sur un clic : queryLocalFonts est appelé tout de suite (avant tout « await »), sinon le navigateur refuse
+            if (ok) { try { const seen = new Map(); for (const f of await window.queryLocalFonts()) { const fam = String(f?.family || '').replace(/["'<>\\]/g, '').trim(); if (fam && !seen.has(fam.toLowerCase())) seen.set(fam.toLowerCase(), fam); } local = [...seen.values()]; state = 'granted'; } catch (e) { state = e?.name === 'NotAllowedError' || e?.name === 'SecurityError' ? 'denied' : 'error'; } }
         }
-        const tested = COMMON_FONTS.filter(f => !APP_FONTS.includes(f) && fontExists(f));
-        fontCache = [...new Set([...local, ...tested])].filter(f => !APP_FONTS.includes(f)).sort((a, b) => a.localeCompare(b, 'fr'));
-        fontCache.full = local.length > 0;
+        const appLow = new Set(APP_FONTS.map(f => f.toLowerCase())), all = new Map();
+        for (const f of [...local, ...COMMON_FONTS.filter(f => !local.length && fontExists(f))]) if (!appLow.has(f.toLowerCase()) && !all.has(f.toLowerCase())) all.set(f.toLowerCase(), f);
+        fontCache = [...all.values()].sort((a, b) => a.localeCompare(b, 'fr'));
+        fontCache.full = local.length > 0; fontCache.state = state;
         return fontCache;
     }
     UI.rememberFont = f => { if (!f) return; const r = store.get(RECENT_F, []); store.set(RECENT_F, [f, ...(Array.isArray(r) ? r : []).filter(x => x !== f)].slice(0, 8)); };
@@ -859,25 +864,45 @@
         const sf = UI.searchField({placeholder: 'Chercher une police…', delay: 60, onInput: () => draw()}); $('[data-ui-fq]').appendChild(sf);
         let chosen = value, comp = [], answer = null;
         const row = (f, tag) => `<div class="ui-font${f === chosen ? ' on' : ''}" role="option" data-f="${esc(f)}" aria-selected="${f === chosen}"><span style="font-family:'${esc(f.replace(/'/g, ''))}', ${/script|hand|chancery|roundhand|zapfino|calligraph|brush/i.test(f) ? 'cursive' : 'serif'}">${esc(f)} — ${esc(sample)}</span><small>${tag}</small></div>`;
+        // affichage progressif : 60 lignes, puis la suite en descendant (chaque ligne charge sa police : 500 d'un coup figeraient la fenêtre)
+        let rows = [], shown = 0, more0 = null;
+        const STEP = 60;
+        const io = 'IntersectionObserver' in window ? new IntersectionObserver(en => { if (en.some(x => x.isIntersecting)) grow(); }, {root: list, rootMargin: '200px'}) : null;
+        function grow() {
+            if (!dlg.isConnected) return io?.disconnect();
+            more0?.remove(); more0 = null;
+            const next = rows.slice(shown, shown + STEP); shown += next.length;
+            list.insertAdjacentHTML('beforeend', next.map(([f, tag]) => row(f, tag)).join(''));
+            if (shown < rows.length) { more0 = h('div', 'ui-font-more'); more0.textContent = `… encore ${rows.length - shown}`; list.appendChild(more0); if (io) io.observe(more0); else more0.addEventListener('click', grow); }
+        }
         function draw() {
             const q = fold(sf.input.value).trim(), m = f => !q || fold(f).includes(q), seen = new Set();
             const rec = (store.get(RECENT_F, []) || []).filter(m), app = APP_FONTS.filter(m), pc = comp.filter(m);
-            const part = (arr, tag) => arr.filter(f => !seen.has(f) && seen.add(f)).map(f => row(f, tag)).join('');
-            const free = q && ![...rec, ...app, ...pc].some(f => fold(f) === q) ? row(sf.input.value.trim(), 'TAPÉE') : '';
-            list.innerHTML = part(rec, 'RÉCENTE') + part(app, 'DE L’APP') + part(pc, 'ORDINATEUR') + free || `<div class="ui-font-empty">Aucune police pour « ${esc(sf.input.value)} ».</div>`;
+            const part = (arr, tag) => arr.filter(f => !seen.has(f.toLowerCase()) && seen.add(f.toLowerCase())).map(f => [f, tag]);
+            rows = [...part(rec, 'RÉCENTE'), ...part(app, 'DE L’APP'), ...part(pc, 'ORDINATEUR')];
+            if (q && !rows.some(([f]) => fold(f) === q)) rows.push([sf.input.value.trim().replace(/["'<>\\]/g, '').slice(0, 80), 'TAPÉE']);
+            if (chosen && !q) { const i = rows.findIndex(([f]) => f === chosen); if (i >= STEP) rows.unshift(rows.splice(i, 1)[0]); } // la police en cours, visible tout de suite
+            shown = 0; more0 = null; io?.disconnect(); list.innerHTML = '';
+            if (!rows.length) { list.innerHTML = `<div class="ui-font-empty">Aucune police pour « ${esc(sf.input.value)} ».</div>`; return; }
+            grow();
         }
         const mark = el => { if (!el) return; list.querySelectorAll('.ui-font.on').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-selected', 'false'); }); el.classList.add('on'); el.setAttribute('aria-selected', 'true'); chosen = el.dataset.f; el.scrollIntoView({block: 'nearest'}); };
         list.addEventListener('click', e => { const r = e.target.closest('.ui-font'); if (r) mark(r); });
         list.addEventListener('dblclick', e => { if (e.target.closest('.ui-font')) $('form').requestSubmit(); });
         sf.input.addEventListener('keydown', e => {
-            const rows = [...list.querySelectorAll('.ui-font')], i = rows.findIndex(r => r.classList.contains('on'));
-            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); mark(rows[Math.max(0, Math.min(rows.length - 1, i + (e.key === 'ArrowDown' ? 1 : -1)))] || rows[0]); }
-            else if (e.key === 'Enter') { e.preventDefault(); if (i < 0 && rows[0]) mark(rows[0]); $('form').requestSubmit(); }
+            const els = [...list.querySelectorAll('.ui-font')], i = els.findIndex(r => r.classList.contains('on'));
+            if (e.key === 'ArrowDown' && i >= els.length - 2 && shown < rows.length) grow();
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const all = [...list.querySelectorAll('.ui-font')]; mark(all[Math.max(0, Math.min(all.length - 1, i + (e.key === 'ArrowDown' ? 1 : -1)))] || all[0]); }
+            else if (e.key === 'Enter') { e.preventDefault(); if (i < 0 && els[0]) mark(els[0]); $('form').requestSubmit(); }
         });
         const more = () => {
             const box = $('[data-ui-fmore]');
-            box.innerHTML = typeof window.queryLocalFonts === 'function' && !comp.full ? '<button type="button" class="button small secondary" data-ui-fall>🔓 Voir toutes les polices de l’ordinateur</button>' : '';
-            box.querySelector('[data-ui-fall]')?.addEventListener('click', async () => { comp = await computerFonts(true); draw(); more(); });
+            const st = comp.state, n = comp.length;
+            box.innerHTML = comp.full ? `<small class="muted">✓ ${esc(plural(n, 'police'))} de l’ordinateur.</small>`
+                : st === 'denied' ? UI.notice('warn', 'L’accès à la liste des polices est refusé pour cette page. Pour le permettre : réglages du site dans le navigateur (cadenas à gauche de l’adresse) → « Polices » → Autoriser, puis rouvre cette fenêtre. Tu peux aussi taper le nom exact d’une police.')
+                : st === 'none' ? UI.notice('info', 'Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact.')
+                : `${st === 'error' ? UI.notice('warn', 'La liste des polices n’a pas pu être lue. Réessaie.') : ''}<button type="button" class="button small secondary" data-ui-fall>🔓 Voir toutes les polices de l’ordinateur</button> <small class="muted">Le navigateur te demandera la permission.</small>`;
+            box.querySelector('[data-ui-fall]')?.addEventListener('click', async e => { const b = e.currentTarget; b.disabled = true; b.textContent = 'Lecture des polices…'; comp = await computerFonts(true); draw(); more(); });
         };
         computerFonts().then(c => { comp = c; draw(); more(); list.querySelector('.ui-font.on')?.scrollIntoView({block: 'nearest'}); });
         draw();

@@ -485,7 +485,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         cited_names_widget:'Les personnes sans fiche qui reviennent le plus souvent dans tes transcriptions (témoins, voisins, parrains…).',
         places:'Lieux les plus présents dans les événements.'
     };
-    const defaultListTypes = [['persons','01','Personnes'],['events','02','Événements'],['places','03','Lieux'],['precise_places','03b','Lieux précis'],['media','04','Médias'],['recueils','04a','Recueils'],['depouillements','04a2','Dépouillements'],['audios','04b','Audios'],['videos','04c','Vidéos'],['labels','05','Étiquettes'],['occupations','06','Métiers'],['employers','07','Employeurs'],['census','08','Recensements'],['census_households','08b','Recensements : tous les foyers'],['reminders','09','Rappels'],['my_calendar','09b','Mon agenda'],['genea_calendar','09c','Calendrier de la famille'],['research_budget','10','Budget de recherche'],['signatures','11','Signatures'],['sosa','12','SOSA'],['daboville','12b',"d'Aboville"],['archives','13','Archives'],['external_links','14','Liens externes utiles'],['courriers','15','Registre de courriers'],['archive_visits','16','Planificateur de visite d’archives'],['living_contacts','17','Répertoire des vivants'],['family_objects','18','Objets de famille'],['family_memories','19','Mémoire familiale'],['fairs','20','Salons et événements'],['closed_branches','21','Branches fermées'],['field_trips','22','Circuits sur le terrain'],['family_papers','23','Papiers de famille'],['coats_of_arms','24','Armoiries'],['old_maps','25','Cartes anciennes'],['probate','26','Inventaires après décès'],['voyages_list','27','Départs et émigration'],['placements_list','28','Enfants placés'],['poilus_list','29','Poilus 14-18'],['parishes','30','Paroisses d’Ancien Régime'],['cited_names','31','Noms cités (le cercle)'],['languages','32','Langues de la famille'],['help_requests','33','Demandes d’entraide'],['historical_context','34','Épidémies, guerres, hivers'],['resistance_list','35','Résistants'],['villages','36','Fiche d’un village'],['voter_cards','37','Cartes d’électeur'],['family_booklets','38','Livrets de famille'],['investigations_list','39','Enquêtes'],['battues_list','40','Battues'],['atelier_list','41','Projets de l’Atelier'],['boards_list','42','Tableaux'],['pets','43','Animaux de compagnie'],['topic_sheets_list','44','Fiches'],['layout_books','44b','Livres de famille (mise en page)'],['edit_tools','44c','Outils de modification'],['houses','44d','Maisons de famille'],['periodicals','44d','Revues, livres et documentaires'],['press_ads','44e','Petites annonces et courriers aux journaux'],['press_review','44f','Revue de presse'],['palmares','44g','Palmarès (concours et récompenses)'],['profiles_list','44h','Cette personne était… (profils)']];
+    const defaultListTypes = [['persons','01','Personnes'],['events','02','Événements'],['places','03','Lieux'],['precise_places','03b','Lieux précis'],['media','04','Médias'],['recueils','04a','Recueils'],['depouillements','04a2','Dépouillements'],['audios','04b','Audios'],['videos','04c','Vidéos'],['labels','05','Étiquettes'],['occupations','06','Métiers'],['employers','07','Employeurs'],['census','08','Recensements'],['census_households','08b','Recensements : tous les foyers'],['reminders','09','Rappels'],['my_calendar','09b','Mon agenda'],['genea_calendar','09c','Calendrier de la famille'],['research_budget','10','Budget de recherche'],['signatures','11','Signatures'],['sosa','12','SOSA'],['daboville','12b',"d'Aboville"],['archives','13','Archives'],['external_links','14','Liens externes utiles'],['courriers','15','Registre de courriers'],['archive_visits','16','Planificateur de visite d’archives'],['living_contacts','17','Répertoire des vivants'],['family_objects','18','Objets de famille'],['family_memories','19','Mémoire familiale'],['fairs','20','Salons et événements'],['closed_branches','21','Branches fermées'],['field_trips','22','Circuits sur le terrain'],['family_papers','23','Papiers de famille'],['coats_of_arms','24','Armoiries'],['old_maps','25','Cartes anciennes'],['probate','26','Inventaires après décès'],['voyages_list','27','Départs et émigration'],['placements_list','28','Enfants placés'],['poilus_list','29','Poilus 14-18'],['parishes','30','Paroisses d’Ancien Régime'],['cited_names','31','Noms cités (le cercle)'],['languages','32','Langues de la famille'],['help_requests','33','Demandes d’entraide'],['historical_context','34','Épidémies, guerres, hivers'],['resistance_list','35','Résistants'],['villages','36','Fiche d’un village'],['voter_cards','37','Cartes d’électeur'],['family_booklets','38','Livrets de famille'],['investigations_list','39','Enquêtes'],['battues_list','40','Battues'],['atelier_list','41','Projets de l’Atelier'],['boards_list','42','Tableaux'],['pets','43','Animaux de compagnie'],['topic_sheets_list','44','Fiches'],['layout_books','44b','Livres de famille (mise en page)'],['edit_tools','44c','Outils de modification'],['houses','44d','Maisons de famille'],['periodicals','44d','Revues, livres et documentaires'],['press_ads','44e','Petites annonces et courriers aux journaux'],['press_review','44f','Revue de presse'],['palmares','44g','Palmarès (concours et récompenses)'],['profiles_list','44h','Cette personne était… (profils)'],['graphs_list','44i','Graphiques et diagrammes']];
     const defaultExternalLinks=[
         {id:'socface',name:'Projet SocFace',url:'https://socface.site.ined.fr/',access:'public',cost:'gratuit',category:'Population / histoire sociale',country:'France',description:'Projet scientifique utile pour croiser histoire sociale, familles et populations.'},
         {id:'francearchives',name:'FranceArchives',url:'https://francearchives.gouv.fr/',access:'public',cost:'gratuit',category:'Archives',country:'France',description:'Portail national des archives françaises.'},
@@ -1896,12 +1896,16 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     /* ═════ 🎨 Mes propres designs (presets de couleurs) ═════
        localStorage['genealogie-design-custom-presets'] = {custom:{id:{name,blue,bg,paper,card,cardHead,dark}}, order:[ids], hidden:[ids]} */
     const CUSTOM_PRESETS_KEY='genealogie-design-custom-presets';
-    const PRESET_COLOR_KEYS=[['blue','Couleur principale (boutons, liens, accents)'],['bg','Fond de la page'],['paper','Fond des panneaux'],['card','Fond des cartes'],['cardHead','En-têtes des cartes et des tableaux']];
+    const PRESET_COLOR_KEYS=[['blue','Couleur principale (boutons, liens, accents)'],['bg','Fond de la page'],['paper','Fond des panneaux'],['card','Fond des cartes'],['cardHead','En-têtes des cartes et des tableaux'],['ink','Texte'],['line','Traits qui entourent (bordures)']];
+    /* ✎ Mes thèmes : texte, couleur et épaisseur des traits (lineW, 0 à 8 px) ; les designs de l'app gardent leurs valeurs de départ */
+    const presetInkDefault=dark=>dark?'#e8e8e8':'#080808';
+    const presetLineW=v=>{const n=(typeof v==='number'||(typeof v==='string'&&v.trim()!==''))?Number(v):NaN;return Number.isFinite(n)?Math.max(0,Math.min(8,Math.round(n*2)/2)):2;};
     function presetStore(){try{const v=JSON.parse(localStorage.getItem(CUSTOM_PRESETS_KEY)||'{}');return {custom:v&&typeof v.custom==='object'&&v.custom&&!Array.isArray(v.custom)?v.custom:{},order:Array.isArray(v?.order)?v.order:[],hidden:Array.isArray(v?.hidden)?v.hidden:[]};}catch(_){return {custom:{},order:[],hidden:[]};}}
     function savePresetStore(st){try{localStorage.setItem(CUSTOM_PRESETS_KEY,JSON.stringify(st));}catch(_){toast('Enregistrement impossible (place du navigateur ?).','error');}}
     const isHex=c=>typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c);
-    function cleanPresetColors(p,base=BUILTIN_DESIGN_PRESETS.portfolio){const out={};PRESET_COLOR_KEYS.forEach(([k])=>{out[k]=isHex(p?.[k])?p[k].toLowerCase():base[k];});out.dark=!!p?.dark;return out;}
+    function cleanPresetColors(p,base=BUILTIN_DESIGN_PRESETS.portfolio){const out={};PRESET_COLOR_KEYS.forEach(([k])=>{out[k]=isHex(p?.[k])?p[k].toLowerCase():(base[k]||presetInkDefault(!!p?.dark));});out.lineW=presetLineW(p?.lineW);out.dark=!!p?.dark;return out;}
     function allDesignPresets(){const st=presetStore();const out={...BUILTIN_DESIGN_PRESETS};Object.entries(st.custom).forEach(([id,p])=>{if(/^my_[a-z0-9]+$/.test(id))out[id]=cleanPresetColors(p);});return out;}
+    window.LCNDA_ALL_DESIGN_PRESETS=()=>allDesignPresets(); // lu par app-apparence.js (couleur principale reprise du thème choisi)
     const presetLabel=id=>BUILTIN_PRESET_LABELS[id]||presetStore().custom[id]?.name||id;
     /** Les presets dans l'ordre choisi : [{id, label, own, hidden}] */
     function orderedDesignPresets(){
@@ -1911,14 +1915,15 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     function presetSelectOptionsHtml(current){
         const cur=allDesignPresets()[current]?current:'portfolio';
-        return orderedDesignPresets().filter(p=>!p.hidden||p.id===cur).map(p=>`<option value="${escapeHtml(p.id)}" ${p.id===cur?'selected':''}>${escapeHtml(p.label)}${p.own?' ★':''}</option>`).join('');
+        const opt=p=>`<option value="${escapeHtml(p.id)}" ${p.id===cur?'selected':''}>${escapeHtml(p.label)}</option>`,shown=orderedDesignPresets().filter(p=>!p.hidden||p.id===cur),mine=shown.filter(p=>p.own);
+        return shown.filter(p=>!p.own).map(opt).join('')+(mine.length?`<optgroup label="✎ Mes thèmes">${mine.map(opt).join('')}</optgroup>`:'');
     }
-    const presetSwatches=p=>PRESET_COLOR_KEYS.map(([k,l])=>`<span class="my-preset-sw" title="${escapeHtml(l)} : ${escapeHtml(p[k])}" style="background:${escapeHtml(p[k])}"></span>`).join('');
+    const presetSwatches=p=>(p=cleanPresetColors(p),PRESET_COLOR_KEYS).map(([k,l])=>`<span class="my-preset-sw" title="${escapeHtml(l)} : ${escapeHtml(p[k])}" style="background:${escapeHtml(p[k])}"></span>`).join('');
     function customPresetsPanelHtml(){
         const all=allDesignPresets();
-        return `<section class="maintenance-panel my-presets" id="my-presets"><div class="item-title-row"><h3 data-help="Un design règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes. Crée le tien à partir d’un design existant." data-help-faq="design">🎨 Mes propres designs</h3><div class="page-actions"><button type="button" class="button small" data-my-preset-new>＋ Nouveau design…</button>${settingImportButton('data-my-preset-import')}</div></div>
+        return `<section class="maintenance-panel my-presets" id="my-presets"><div class="item-title-row"><h3 data-help="Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes »." data-help-faq="thème">✎ Mes thèmes</h3><div class="page-actions"><button type="button" class="button small" data-my-preset-new>＋ Nouveau thème…</button>${settingImportButton('data-my-preset-import')}</div></div>
             <details class="my-presets-manage" data-ui-section="my-presets-manage"${(()=>{try{return JSON.parse(localStorage.getItem('genealogie-ui-sections')||'{}')['my-presets-manage']?' open':'';}catch(_){return '';}})()}><summary>⚙️ Gérer les presets (${orderedDesignPresets().length})</summary>
-            <p class="muted">Les designs proposés dans « Preset » : coche ceux à montrer, range-les en glissant ⠿ (ou ↑ ↓). Ceux de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiens (★) se modifient, se renomment, s’exportent.</p>
+            <p class="muted">Les thèmes proposés dans « Preset » : coche ceux à montrer, range-les en glissant ⠿ (ou ↑ ↓). Ceux de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiens (★, rangés dans « ✎ Mes thèmes ») se modifient, se renomment, se dupliquent, s’exportent.</p>
             <div class="order-list my-preset-list" data-my-preset-list>${orderedDesignPresets().map((p,i)=>`<div class="order-row has-visibility" data-order-key="${escapeHtml(p.id)}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i+1).padStart(2,'0')}</span><label class="order-visible" title="${p.id==='portfolio'?'Toujours proposé':'Proposer dans la liste'}"><input type="checkbox" data-my-preset-show ${p.hidden?'':'checked'} ${p.id==='portfolio'?'disabled':''}></label><b>${escapeHtml(p.label)}${p.own?' ★':''}${all[p.id].dark?' <small class="muted">· sombre</small>':''}</b><span class="my-preset-sws">${presetSwatches(all[p.id])}</span><span class="page-actions"><button type="button" class="icon-button small" data-my-preset-move="-1" title="Monter">↑</button><button type="button" class="icon-button small" data-my-preset-move="1" title="Descendre">↓</button>${p.own?`<button type="button" class="button small secondary" data-my-preset-edit>Modifier</button><button type="button" class="button small secondary" data-my-preset-rename>Renommer</button>`:''}<button type="button" class="button small secondary" data-my-preset-dup title="Créer un design à partir de celui-ci">Dupliquer</button>${settingExportButton('data-my-preset-export')}${p.own?'<button type="button" class="button small secondary danger" data-my-preset-del>Supprimer</button>':''}</span></div>`).join('')}</div>
             <div class="page-actions"><button type="button" class="button small" data-my-preset-saveorder>Enregistrer l’ordre et les designs montrés</button></div></details></section>`;
     }
@@ -1932,23 +1937,30 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const base=cleanPresetColors(own||allDesignPresets()[from]||BUILTIN_DESIGN_PRESETS.portfolio);
         if(!document.getElementById('my-preset-css'))document.head.insertAdjacentHTML('beforeend',`<style id="my-preset-css">${MY_PRESET_CSS}</style>`);
         const dlg=document.createElement('dialog');dlg.className='modal my-preset-editor';
-        dlg.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">APPARENCE</span><h2>${own?`Modifier « ${escapeHtml(own.name)} »`:'Nouveau design'}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+        dlg.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">APPARENCE</span><h2>${own?`Modifier « ${escapeHtml(own.name)} »`:'Nouveau thème'}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
             <div class="my-preset-grid"><div class="form-grid one-column"><label>Nom<input data-f="name" maxlength="60" required value="${escapeHtml(own?.name||(from&&!own?`${presetLabel(from)} (ma version)`:''))}"></label>
                 ${own?'':`<label>Partir de<select data-f="from">${orderedDesignPresets().map(p=>`<option value="${escapeHtml(p.id)}" ${p.id===from?'selected':''}>${escapeHtml(p.label)}</option>`).join('')}</select></label>`}
                 ${PRESET_COLOR_KEYS.map(([k,l])=>`<label>${escapeHtml(l)}<input type="color" data-c="${k}" value="${escapeHtml(base[k])}"></label>`).join('')}
-                <label class="ui-toggle"><input type="checkbox" data-f="dark" ${base.dark?'checked':''}><i></i><span data-help="Un design sombre passe toute l’app en mode sombre (textes clairs sur fond foncé), comme le preset « Sombre »." data-help-faq="design">Design sombre</span></label></div>
+                <label>Épaisseur des traits qui entourent<input type="range" data-f="lineW" min="0" max="8" step="0.5" value="${base.lineW}" data-unit="px" data-default="2"></label>
+                <label class="ui-toggle"><input type="checkbox" data-f="dark" ${base.dark?'checked':''}><i></i><span data-help="Un thème sombre passe toute l’app en mode sombre (textes clairs sur fond foncé), comme le preset « Sombre »." data-help-faq="thème">Thème sombre</span></label>
+                <div data-contrast></div></div>
             <div><span class="section-label">Aperçu</span><div class="my-preset-prev" data-prev></div></div></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">${own?'Enregistrer':'＋ Créer le design'}</button></div></form>`;
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">${own?'Enregistrer':'＋ Créer le thème'}</button></div></form>`;
         document.body.appendChild(dlg);
-        const q=sel=>dlg.querySelector(sel),read=()=>{const o={};PRESET_COLOR_KEYS.forEach(([k])=>{o[k]=q(`[data-c="${k}"]`).value;});o.dark=q('[data-f="dark"]').checked;return o;};
-        const paint=()=>{const o=read(),ink=o.dark?'#f2f2f2':'#111111';q('[data-prev]').style.cssText=`background:${o.bg};color:${ink};border-color:${ink}`;
-            q('[data-prev]').innerHTML=`<div style="background:${o.paper};padding:8px;border:1px solid ${ink}">Fond des panneaux · <a style="color:${o.blue}">un lien</a></div><div class="pv-card" style="background:${o.card};border-color:${ink}"><div class="pv-head" style="background:${o.cardHead}">En-tête d’une carte</div><div class="pv-body">Jean MARTIN, ° 1890<br><span class="pv-btn" style="background:${o.blue}">Bouton</span></div></div>`;};
-        dlg.addEventListener('input',paint);dlg.addEventListener('change',e=>{if(e.target.matches('[data-f="from"]')){const p=cleanPresetColors(allDesignPresets()[e.target.value]);PRESET_COLOR_KEYS.forEach(([k])=>{q(`[data-c="${k}"]`).value=p[k];});q('[data-f="dark"]').checked=p.dark;const nm=q('[data-f="name"]');if(!nm.dataset.typed)nm.value=`${presetLabel(e.target.value)} (ma version)`;}paint();});
+        const q=sel=>dlg.querySelector(sel),read=()=>{const o={};PRESET_COLOR_KEYS.forEach(([k])=>{o[k]=q(`[data-c="${k}"]`).value;});o.lineW=presetLineW(q('[data-f="lineW"]').value);o.dark=q('[data-f="dark"]').checked;return o;};
+        // lisibilité : écart de luminosité entre le texte et les fonds (règle WCAG, 4,5 au moins)
+        const lum=c=>{const n=parseInt(String(c).slice(1),16),f=v=>{v/=255;return v<=.03928?v/12.92:((v+.055)/1.055)**2.4;};return .2126*f(n>>16)+.7152*f((n>>8)&255)+.0722*f(n&255);},ratio=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+        const paint=()=>{const o=read(),ink=o.ink,ln=`${o.lineW}px solid ${o.line}`;q('[data-prev]').style.cssText=`background:${o.bg};color:${ink};border:${ln}`;
+            q('[data-prev]').innerHTML=`<div style="background:${o.paper};padding:8px;border:${ln}">Fond des panneaux · <a style="color:${o.blue}">un lien</a></div><div class="pv-card" style="background:${o.card};border:${ln}"><div class="pv-head" style="background:${o.cardHead};border-bottom:${ln}">En-tête d’une carte</div><div class="pv-body">Jean MARTIN, ° 1890<br><span class="pv-btn" style="background:${o.blue};border:${ln}">Bouton</span></div></div>`;
+            const bad=[['bg','le fond de la page'],['paper','le fond des panneaux'],['card','le fond des cartes']].filter(([k])=>ratio(ink,o[k])<4.5).map(([,t])=>t);
+            q('[data-contrast]').innerHTML=bad.length?(window.LCNDA_UI?.notice?window.LCNDA_UI.notice('warn',`Le texte se lit mal sur ${bad.join(', ')} : choisis un texte plus ${lum(ink)>.4?'foncé':'clair'}${!o.dark&&lum(o.bg)<.2?', ou coche « Thème sombre »':''}.`):''):'';};
+        dlg.addEventListener('input',paint);dlg.addEventListener('change',e=>{if(e.target.matches('[data-f="dark"]')){const on=e.target.checked,was=presetInkDefault(!on);['ink','line'].forEach(k=>{const inp=q(`[data-c="${k}"]`);if(inp.value.toLowerCase()===was)inp.value=presetInkDefault(on);});}
+            if(e.target.matches('[data-f="from"]')){const p=cleanPresetColors(allDesignPresets()[e.target.value]);PRESET_COLOR_KEYS.forEach(([k])=>{q(`[data-c="${k}"]`).value=p[k];});q('[data-f="lineW"]').value=String(p.lineW);q('[data-f="dark"]').checked=p.dark;const nm=q('[data-f="name"]');if(!nm.dataset.typed)nm.value=`${presetLabel(e.target.value)} (ma version)`;}paint();});
         q('[data-f="name"]').addEventListener('input',e=>{e.target.dataset.typed='1';});
         dlg.addEventListener('click',e=>{if(e.target.closest('[data-x]'))dlg.close();});
         q('form').addEventListener('submit',e=>{e.preventDefault();const name=q('[data-f="name"]').value.trim().slice(0,60);if(!name)return;
             const store=presetStore(),pid=id||`my_${Date.now().toString(36)}`;store.custom[pid]={name,...read()};if(!id)store.order=[...orderedDesignPresets().map(p=>p.id),pid];savePresetStore(store);
-            dlg.close();toast(id?`Design « ${name} » enregistré.`:`Design « ${name} » créé : il est dans la liste « Preset ».`);
+            dlg.close();toast(id?`Thème « ${name} » enregistré.`:`Thème « ${name} » créé : il est dans la liste « Preset », dans « ✎ Mes thèmes ».`);
             if(readDesignSettings().preset===pid)applyDesign();renderDesignTools();});
         dlg.addEventListener('close',()=>dlg.remove());
         paint();dlg.showModal();
@@ -1968,7 +1980,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if(b.matches('[data-my-preset-dup]'))return openPresetEditor({from:id});
             if(b.matches('[data-my-preset-export]'))return exportSettingFile('presets',presetLabel(id),{preset:{name:presetLabel(id),...allDesignPresets()[id]}});
             if(b.matches('[data-my-preset-rename]')){const store=presetStore(),p=store.custom[id];const n=await askText({title:'Renommer le design',message:'Nouveau nom :',value:p.name,okLabel:'Renommer'});if(!n||!n.trim())return;p.name=n.trim().slice(0,60);savePresetStore(store);renderDesignTools();return;}
-            if(b.matches('[data-my-preset-del]')){const store=presetStore(),p=store.custom[id];return undoLocalChange(`Design « ${p.name} » supprimé`,[CUSTOM_PRESETS_KEY,'genealogie-design'],()=>{delete store.custom[id];store.order=store.order.filter(x=>x!==id);store.hidden=store.hidden.filter(x=>x!==id);savePresetStore(store);
+            if(b.matches('[data-my-preset-del]')){const store=presetStore(),p=store.custom[id];return undoLocalChange(`Thème « ${p.name} » supprimé`,[CUSTOM_PRESETS_KEY,'genealogie-design'],()=>{delete store.custom[id];store.order=store.order.filter(x=>x!==id);store.hidden=store.hidden.filter(x=>x!==id);savePresetStore(store);
                 if(readDesignSettings().preset===id){const d=readDesignSettings();d.preset='portfolio';localStorage.setItem('genealogie-design',JSON.stringify(d));applyDesign();}renderDesignTools();},()=>{applyDesign();renderDesignTools();});}
         });
         box.querySelector('[data-my-preset-import]').addEventListener('click',async()=>{
@@ -1999,6 +2011,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         document.documentElement.style.setProperty('--paper',preset.paper);
         document.documentElement.style.setProperty('--card-bg',cardBg.card);
         document.documentElement.style.setProperty('--card-head-bg',cardBg.cardHead);
+        // ✎ Mes thèmes : couleur du texte, couleur et épaisseur des traits qui entourent (assets/css/apparence-traits.css)
+        {const root=document.documentElement,mine=!BUILTIN_DESIGN_PRESETS[design.preset]&&presets[design.preset]?preset:null,frame=!!mine&&(mine.line!==mine.ink||mine.lineW!==2);
+            if(mine)root.style.setProperty('--ink',mine.ink);else root.style.removeProperty('--ink');
+            root.classList.toggle('lc-frame',frame);if(frame){root.style.setProperty('--lc-frame-color',mine.line);root.style.setProperty('--lc-frame-k',String(mine.lineW/2));const sheet=document.getElementById('lc-frame-css');if(sheet)sheet.media='all';}}
         document.documentElement.lang='fr';
         // Agencement : menu des onglets en haut ou en bas, colonne latérale à gauche ou à droite
         document.documentElement.classList.toggle('nav-bottom',design.navPosition==='bottom');
@@ -7716,27 +7732,6 @@ ${backupSectionHtml()}
     function mediaFaceDetectionRows(){
         return (state.currentListRows||[]).filter(row=>row&&row.filename&&normalizedMediaType(row)==='image');
     }
-    function mediaFaceDetectionThumb(item){
-        const src=item.thumbnail||item.filename;
-        return `<img class="media-compare-thumb" src="media/${encodeURIComponent(src)}" alt="">`;
-    }
-    async function detectFacesInMedia(item,detector){
-        const image=new Image();
-        image.decoding='async';
-        image.src=`media/${encodeURIComponent(item.filename)}`;
-        await new Promise((resolve,reject)=>{
-            image.onload=resolve;
-            image.onerror=()=>reject(new Error('Image illisible.'));
-        });
-        if(image.decode)try{await image.decode();}catch(_){}
-        const faces=await detector.detect(image);
-        const width=image.naturalWidth||image.width;
-        const height=image.naturalHeight||image.height;
-        return (faces||[]).map(face=>{
-            const box=face.boundingBox||{};
-            return {x:(box.x||0)/width*100,y:(box.y||0)/height*100,w:(box.width||0)/width*100,h:(box.height||0)/height*100};
-        }).filter(face=>face.w>1&&face.h>1);
-    }
     async function waitForLightboxImage(){
         const img=$('#lightbox-image');
         if(!img)return null;
@@ -7754,45 +7749,11 @@ ${backupSectionHtml()}
         canvas.style.pointerEvents='auto';
         toast(`${faces.length} visage${faces.length>1?'s':''} détecté${faces.length>1?'s':''}. Clique sur une zone pour l’identifier.`);
     }
-    async function openMediaFaceDetectionDialog(){
-        $('#media-face-dialog')?.remove();
-        const rows=mediaFaceDetectionRows();
-        document.body.insertAdjacentHTML('beforeend',`<dialog class="modal media-duplicates-dialog media-face-dialog" id="media-face-dialog"><div class="modal-head"><div><span class="eyebrow">MÉDIAS</span><h2>Détection de visage</h2></div><button class="icon-button" value="cancel" type="button" id="media-face-close">×</button></div><div class="media-duplicates-body" id="media-face-body">${rows.length?`<p class="media-duplicates-summary">Analyse semi-automatique ${rows.length<2?`de l’image actuellement chargée`:`des ${plural(rows.length,'image')} actuellement chargées`}. Les zones proposées restent à valider manuellement.</p><div class="page-actions" style="justify-content:flex-start"><button type="button" class="button small" id="media-face-run">Analyser les images chargées</button></div>`:'<p class="media-duplicates-summary">Aucune image chargée dans cette liste. Charge ou filtre la liste Médias puis relance la détection.</p>'}</div></dialog>`);
-        const dialog=$('#media-face-dialog'),body=$('#media-face-body');
-        $('#media-face-close').addEventListener('click',()=>{dialog.close();dialog.remove();});
-        dialog.addEventListener('close',()=>dialog.remove());
-        dialog.showModal();
-        $('#media-face-run')?.addEventListener('click',async()=>{
-            const runButton=$('#media-face-run');
-            if(!('FaceDetector' in window)){
-                body.innerHTML='<p class="media-duplicates-summary">Détection de visage indisponible dans ce navigateur. L’identification manuelle reste disponible dans chaque média.</p>';
-                return;
-            }
-            runButton.disabled=true;
-            runButton.textContent='Analyse en cours…';
-            const detector=new window.FaceDetector({fastMode:true,maxDetectedFaces:25});
-            const results=[];
-            for(let index=0;index<rows.length;index++){
-                body.querySelector('.media-duplicates-summary').textContent=`Analyse ${index+1}/${rows.length} · ${rows[index].filename}`;
-                try{
-                    const faces=await detectFacesInMedia(rows[index],detector);
-                    if(faces.length)results.push({item:rows[index],faces});
-                }catch(_){}
-            }
-            if(!dialog.isConnected)return;
-            body.innerHTML=results.length
-                ?`<p class="media-duplicates-summary">${plural(results.length,'image')} avec un visage détecté. Ouvre une image pour valider les identifications.</p><div class="media-duplicate-group-items">${results.map((result,index)=>`<article class="media-duplicate-item"><a class="media-duplicate-thumb-link" href="media/${encodeURIComponent(result.item.filename)}" target="_blank" rel="noopener">${mediaFaceDetectionThumb(result.item)}</a><div class="media-duplicate-info"><strong>${escapeHtml(result.item.title||result.item.document_title||result.item.filename)}</strong><small>${result.faces.length} visage${result.faces.length>1?'s':''} proposé${result.faces.length>1?'s':''}</small><small>${escapeHtml(result.item.attachment_label||'Non rattaché')}</small></div><div class="media-duplicate-actions"><button type="button" class="button small" data-open-face-result="${index}">Ouvrir et taguer</button></div></article>`).join('')}</div>`
-                :'<p class="media-duplicates-summary">Aucun visage détecté dans les images chargées.</p>';
-            body.querySelectorAll('[data-open-face-result]').forEach(button=>button.addEventListener('click',async()=>{
-                const result=results[Number(button.dataset.openFaceResult)];
-                if(!result)return;
-                const media=mediaFaceDetectionRows();
-                const mediaIndex=media.findIndex(item=>Number(item.id)===Number(result.item.id));
-                dialog.close();
-                openLightbox(media,mediaIndex>=0?mediaIndex:0,true);
-                await showFaceSuggestionsOnLightbox(result.faces);
-            }));
-        });
+    // l'ancienne « + Détection de visage » : réunie avec « Qui est qui ? » dans l'outil 👤 Visages (assets/js/heritage-faces.js),
+    // ouvert sur l'étape ① ; les photos affichées dans la liste Médias y sont l'un des choix (le plus léger est proposé d'office)
+    function openMediaFaceDetectionDialog(){
+        if(window.LCNDA_EXT?.openFaces)return window.LCNDA_EXT.openFaces({step:'find',listRows:mediaFaceDetectionRows()});
+        toast('L’outil Visages n’est pas encore chargé : réessaie dans un instant.','error');
     }
     function captureLightboxDraft(){const item=state.lightboxMedia[state.lightboxIndex];if(item&&$('#lightbox-transcription')){item.title=$('#lightbox-title').value;item.date_text=$('#lightbox-date').value;item.document_reference=$('#lightbox-doc-reference').value;item.document_title=$('#lightbox-doc-title').value;item.document_url=$('#lightbox-doc-url').value;item.document_pages=$('#lightbox-doc-pages').value;item.description=$('#lightbox-description').value;item.transcription=$('#lightbox-transcription').value;item.is_person_photo=$('#lightbox-person-photo')?.checked?1:0;item.correspondence_type=$('#lightbox-correspondence-type')?.value||'';item.date_calendar=$('#lightbox-date-calendar')?.value||'gregorian';item.correspondent_json=$('#lightbox-correspondent-value')?.value||'[]';item.correspondence_reply_to_media_id=$('#lightbox-correspondence-reply')?.value||0;item.media_subject_type=$('#lightbox-media-subject-type')?.value||'';}}
     function moveLightbox(direction){if(!state.lightboxMedia.length)return;captureLightboxDraft();state.lightboxIndex=(state.lightboxIndex+direction+state.lightboxMedia.length)%state.lightboxMedia.length;renderLightboxItem();}
@@ -8559,7 +8520,7 @@ ${backupSectionHtml()}
     // type de base changé (Listes → Animaux) : compteur, liste de gauche
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';setCountStatus($('#database-status'),personCountLabel(state.bootstrap.stats.personnes));if(state.module==='personnes'){renderSidebar();loadPeople();}}
     window.LCNDA_APP={ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
-        uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
+        uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,showFaceSuggestionsOnLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 
     // pour les raccourcis à soi des outils de modification (montage, son, retouche, mise en page) : même lecture des touches

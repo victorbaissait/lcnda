@@ -449,9 +449,10 @@ async function boot() {
     callback({ requestHeaders: details.requestHeaders });
   });
   // Permissions : l'application n'obtient que ce dont elle se sert (micro et caméra pour enregistrer et dicter,
-  // notifications, presse-papiers pour coller une image, plein écran, souris capturée pendant la visite de la maison),
+  // notifications, presse-papiers pour coller une image, plein écran, souris capturée pendant la visite de la maison,
+  // liste des polices de l'ordinateur pour la fenêtre « Toutes les polices » : 'local-fonts', API queryLocalFonts),
   // et seulement pour ses propres pages. Les sites ouverts dans la fenêtre « à côté » n'obtiennent rien.
-  const APP_PERMISSIONS = new Set(['media', 'notifications', 'clipboard-read', 'clipboard-sanitized-write', 'fullscreen', 'pointerLock']);
+  const APP_PERMISSIONS = new Set(['media', 'notifications', 'clipboard-read', 'clipboard-sanitized-write', 'fullscreen', 'pointerLock', 'local-fonts']);
   const appAsks = (wc, permission, url) => APP_PERMISSIONS.has(permission) && sameOrigin(url || wc?.getURL?.() || '', server.origin);
   session.defaultSession.setPermissionRequestHandler((wc, permission, callback, details) => callback(appAsks(wc, permission, details?.requestingUrl)));
   session.defaultSession.setPermissionCheckHandler((wc, permission, requestingOrigin) => appAsks(wc, permission, requestingOrigin));

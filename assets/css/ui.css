@@ -306,6 +306,9 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
 .ui-font:hover { background: #f5f8ff; }
 .ui-font.on { background: var(--ui-soft); box-shadow: inset 4px 0 0 var(--ui-blue); }
 .ui-font-empty { padding: 14px 12px; font-size: 13.5px; color: #555; }
+.ui-font-more { padding: 8px 10px; font: 12.5px system-ui, sans-serif; color: #777; text-align: center; }
+.ui-fontpick-more { display: grid; gap: 6px; justify-items: start; }
+.ui-fontpick-more:empty { display: none; }
 
 /* ═════ H10 Barre commune des listes (UI.listBar) : 🔍 Chercher · Filtrer ▾ · Liste | Fiches · Trier ▾, puis les pastilles ═════ */
 .ui-listbar { margin: 0 0 12px; font-size: 13px; }

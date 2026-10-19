@@ -1,0 +1,794 @@
+acorn|Gland|nature|chêne fruit automne
+address-book|Carnet d’adresses|docs|contacts répertoire
+address-book-tabs|Répertoire à onglets|docs|carnet adresses
+air-traffic-control|Tour de contrôle|transport|aéroport
+airplane|Avion|transport|voyage vol
+airplane-in-flight|Avion en vol|transport|voyage
+airplane-landing|Avion qui atterrit|transport|arrivée
+airplane-takeoff|Avion qui décolle|transport|départ
+airplane-taxiing|Avion au sol|transport|piste
+airplane-tilt|Avion penché|transport|vol
+alarm|Réveil|house|horloge heure
+ambulance|Ambulance|health|secours hôpital
+anchor|Ancre|transport|marin bateau mer
+anchor-simple|Ancre simple|transport|marin bateau
+angle|Angle|geo|géométrie degré
+aperture|Diaphragme|tech|photo objectif
+archive|Archives (boîte)|docs|carton classement
+armchair|Fauteuil|house|meuble salon
+article|Article|docs|texte page journal
+article-medium|Article illustré|docs|page journal
+asclepius|Bâton d’Asclépios|health|médecin médecine serpent
+asterisk|Astérisque|symbols|étoile naissance
+atom|Atome|tech|science physique
+avocado|Avocat (fruit)|food|légume
+axe|Hache|jobs|bûcheron bois outil
+baby|Bébé|people|naissance enfant nourrisson
+baby-carriage|Landau|people|naissance bébé poussette
+backpack|Sac à dos|clothes|randonnée école
+bag|Sac|clothes|bagage
+bag-simple|Sac simple|clothes|bagage
+balloon|Ballon de baudruche|leisure|fête anniversaire
+bandaids|Pansements|health|soin blessure
+bank|Banque|money|argent bâtiment
+barbell|Haltère|leisure|sport musculation
+barcode|Code-barres|money|commerce
+barn|Grange|places|ferme agriculture
+barricade|Barrière de chantier|transport|travaux route
+baseball|Balle de base-ball|leisure|sport
+baseball-cap|Casquette|clothes|chapeau
+baseball-helmet|Casque de base-ball|leisure|sport
+basket|Panier|house|marché osier
+basketball|Ballon de basket|leisure|sport
+bathtub|Baignoire|house|bain salle de bain
+battery-full|Pile chargée|tech|batterie
+battery-low|Pile vide|tech|batterie
+beach-ball|Ballon de plage|leisure|vacances
+beanie|Bonnet|clothes|hiver
+bed|Lit|house|chambre sommeil
+beer-bottle|Bouteille de bière|food|boisson
+beer-stein|Chope de bière|food|boisson brasserie
+bell|Cloche|faith|église sonnerie
+bell-ringing|Cloche qui sonne|faith|église sonnerie
+bell-simple|Clochette|house|sonnette
+bell-simple-ringing|Clochette qui sonne|house|sonnette
+belt|Ceinture|clothes|vêtement
+bicycle|Vélo|transport|bicyclette cycliste
+binoculars|Jumelles|objects|regarder observer
+bird|Oiseau|animals|
+blueprint|Plan d’architecte|jobs|bâtiment maison
+boat|Bateau|transport|navire émigration
+bone|Os|animals|chien squelette
+book|Livre|docs|registre
+book-bookmark|Livre avec marque-page|docs|lecture
+book-open|Livre ouvert|docs|lecture registre
+book-open-text|Livre ouvert écrit|docs|lecture registre
+book-open-user|Livre de la personne|docs|biographie mémoires
+bookmark|Marque-page|docs|signet
+bookmark-simple|Marque-page simple|docs|signet
+bookmarks|Marque-pages|docs|signets
+bookmarks-simple|Marque-pages simples|docs|signets
+books|Livres|docs|bibliothèque
+boot|Botte|clothes|chaussure
+boules|Boules (pétanque)|leisure|jeu sport
+bowl-food|Bol de nourriture|food|repas
+bowl-steam|Bol fumant|food|soupe repas
+bowling-ball|Boule de bowling|leisure|sport
+boxing-glove|Gant de boxe|leisure|sport
+brain|Cerveau|health|tête idée
+brandy|Verre de cognac|food|boisson alcool
+bread|Pain|food|boulanger
+bridge|Pont|places|rivière
+briefcase|Mallette|jobs|travail bureau
+briefcase-metal|Mallette en métal|jobs|travail
+broom|Balai|house|ménage
+bug|Insecte|animals|bestiole
+bug-beetle|Scarabée|animals|insecte
+building|Immeuble|places|bâtiment
+building-apartment|Immeuble d’appartements|places|bâtiment logement
+building-office|Bureaux|places|bâtiment travail
+buildings|Immeubles|places|ville bâtiments
+bulldozer|Bulldozer|transport|chantier engin
+bus|Autobus|transport|car
+butterfly|Papillon|animals|insecte
+cable-car|Téléphérique|transport|montagne
+cactus|Cactus|nature|plante désert
+cake|Gâteau|food|anniversaire fête
+calculator|Calculatrice|objects|calcul
+calendar|Calendrier|docs|date jour
+calendar-blank|Calendrier vierge|docs|date
+calendar-check|Calendrier coché|docs|date fait
+calendar-dot|Calendrier avec un jour|docs|date
+calendar-dots|Calendrier avec des jours|docs|date
+calendar-heart|Calendrier avec un cœur|docs|date anniversaire mariage
+calendar-star|Calendrier avec une étoile|docs|date fête
+calendar-x|Calendrier barré|docs|date annulé
+call-bell|Sonnette de comptoir|objects|hôtel accueil
+camera|Appareil photo|objects|photo
+camera-plus|Appareil photo plus|objects|photo ajouter
+camera-rotate|Appareil photo tourner|objects|photo
+camera-slash|Appareil photo barré|objects|photo interdit
+campfire|Feu de camp|nature|feu camping
+car|Voiture|transport|automobile
+car-battery|Batterie de voiture|transport|garage
+car-profile|Voiture de profil|transport|automobile
+car-simple|Voiture simple|transport|automobile
+cardholder|Porte-cartes|money|portefeuille
+cards|Cartes|leisure|jeu
+cards-three|Trois cartes|leisure|jeu
+carrot|Carotte|food|légume potager
+cash-register|Caisse enregistreuse|money|commerce magasin
+cassette-tape|Cassette audio|leisure|musique enregistrement
+castle-turret|Tour de château|places|château fort
+cat|Chat|animals|
+certificate|Diplôme|docs|certificat attestation acte
+chair|Chaise|house|meuble
+chalkboard|Tableau noir|docs|école classe
+chalkboard-simple|Tableau noir simple|docs|école
+chalkboard-teacher|Instituteur au tableau|jobs|école maître enseignant
+champagne|Champagne|food|fête mariage boisson
+chart-bar|Graphique en barres|docs|statistique
+chart-line|Courbe|docs|statistique graphique
+chart-pie|Camembert|docs|statistique graphique
+chat|Bulle carrée|bubbles|dialogue parole
+chat-centered|Bulle centrée|bubbles|dialogue
+chat-centered-dots|Bulle centrée (points)|bubbles|dialogue
+chat-centered-text|Bulle centrée (texte)|bubbles|dialogue
+chat-circle|Bulle ronde|bubbles|dialogue
+chat-circle-dots|Bulle ronde (points)|bubbles|dialogue
+chat-circle-text|Bulle ronde (texte)|bubbles|dialogue
+chat-dots|Bulle (points)|bubbles|dialogue
+chat-teardrop|Bulle goutte|bubbles|dialogue
+chat-teardrop-dots|Bulle goutte (points)|bubbles|dialogue
+chat-teardrop-text|Bulle goutte (texte)|bubbles|dialogue
+chat-text|Bulle (texte)|bubbles|dialogue
+chats|Deux bulles|bubbles|conversation dialogue
+check|Coche|symbols|ok valide vrai
+check-circle|Coche ronde|symbols|ok valide
+check-fat|Grosse coche|symbols|ok valide
+check-square|Case cochée|symbols|ok valide
+check-square-offset|Case cochée débordante|symbols|ok
+checkerboard|Damier|leisure|jeu dames échecs
+checks|Double coche|symbols|ok lu
+cheers|Trinquer|food|fête verres
+cheese|Fromage|food|
+chef-hat|Toque de cuisinier|jobs|cuisinier chef cuisine
+cherries|Cerises|food|fruit
+church|Église|faith|paroisse baptême mariage
+circle|Cercle|geo|rond
+circle-dashed|Cercle en pointillés|geo|rond
+circle-half|Demi-cercle plein|geo|rond moitié
+circle-half-tilt|Demi-cercle penché|geo|rond
+circle-notch|Cercle ouvert|geo|rond
+circles-four|Quatre cercles|geo|ronds
+circles-three|Trois cercles|geo|ronds
+circles-three-plus|Trois cercles et un plus|geo|ronds
+city|Ville|places|immeubles
+clipboard|Porte-bloc|docs|liste
+clipboard-text|Porte-bloc écrit|docs|liste notes
+clock|Horloge|house|heure temps
+clock-afternoon|Horloge (après-midi)|house|heure
+clock-clockwise|Horloge en avant|house|heure temps
+clock-countdown|Compte à rebours|house|heure minuteur
+clock-counter-clockwise|Horloge en arrière|house|heure histoire passé
+clock-user|Heure de la personne|people|horaire
+cloud|Nuage|weather|ciel
+cloud-arrow-down|Nuage flèche en bas|weather|télécharger
+cloud-arrow-up|Nuage flèche en haut|weather|envoyer
+cloud-check|Nuage coché|weather|
+cloud-fog|Brouillard|weather|brume nuage
+cloud-lightning|Orage|weather|éclair nuage
+cloud-moon|Nuit nuageuse|weather|lune nuage
+cloud-rain|Pluie|weather|nuage averse
+cloud-snow|Neige|weather|nuage hiver
+cloud-sun|Éclaircie|weather|soleil nuage
+cloud-warning|Nuage attention|weather|alerte
+cloud-x|Nuage barré|weather|
+clover|Trèfle à quatre feuilles|nature|chance porte-bonheur
+club|Trèfle (cartes)|leisure|jeu cartes
+coat-hanger|Cintre|clothes|vêtement
+coffee|Tasse de café|food|boisson
+coffee-bean|Grain de café|food|
+coin|Pièce de monnaie|money|argent
+coin-vertical|Pièce de monnaie (tranche)|money|argent
+coins|Pièces de monnaie|money|argent
+compass|Boussole|places|orientation nord
+compass-rose|Rose des vents|places|nord orientation carte
+compass-tool|Compas|jobs|géométrie dessin
+confetti|Confettis|leisure|fête
+cookie|Biscuit|food|gâteau
+cooking-pot|Marmite|food|cuisine casserole
+couch|Canapé|house|meuble salon
+court-basketball|Terrain de basket|leisure|sport
+cow|Vache|animals|ferme agriculture
+cowboy-hat|Chapeau de cow-boy|clothes|chapeau
+crane|Grue (oiseau)|animals|oiseau
+crane-tower|Grue de chantier|jobs|bâtiment travaux
+credit-card|Carte bancaire|money|paiement
+cricket|Cricket|leisure|sport
+cross|Croix|faith|décès religion christianisme
+crosshair|Viseur|symbols|cible
+crosshair-simple|Viseur simple|symbols|cible
+crown|Couronne|heraldry|roi noblesse
+crown-cross|Couronne à la croix|heraldry|roi noblesse
+crown-simple|Couronne simple|heraldry|roi noblesse
+cube|Cube|geo|volume
+currency-dollar|Dollar|money|argent monnaie
+currency-eur|Euro|money|argent monnaie
+currency-gbp|Livre sterling|money|argent monnaie
+cylinder|Cylindre|geo|volume
+desk|Bureau (meuble)|house|table travail
+desktop|Ordinateur|tech|écran
+device-tablet|Tablette|tech|écran
+diamond|Losange|geo|carreau
+diamonds-four|Quatre losanges|geo|carreaux
+dice-five|Dé (cinq)|leisure|jeu
+dice-four|Dé (quatre)|leisure|jeu
+dice-one|Dé (un)|leisure|jeu
+dice-six|Dé (six)|leisure|jeu
+dice-three|Dé (trois)|leisure|jeu
+dice-two|Dé (deux)|leisure|jeu
+disc|Disque|leisure|musique cd
+dna|ADN|genea|génétique test hérédité
+dog|Chien|animals|
+door|Porte|house|entrée
+door-open|Porte ouverte|house|entrée
+download|Télécharger|arrows|
+dress|Robe|clothes|vêtement femme
+dresser|Commode|house|meuble
+drop|Goutte|weather|eau pluie
+drop-half|Goutte à moitié|weather|eau
+drop-half-bottom|Goutte à moitié (bas)|weather|eau
+drop-simple|Goutte simple|weather|eau
+ear|Oreille|health|écouter
+egg|Œuf|food|
+egg-crack|Œuf fêlé|food|naissance
+elevator|Ascenseur|places|
+engine|Moteur|transport|mécanique
+envelope|Enveloppe|docs|lettre courrier
+envelope-open|Enveloppe ouverte|docs|lettre courrier
+envelope-simple|Enveloppe simple|docs|lettre courrier
+envelope-simple-open|Enveloppe simple ouverte|docs|lettre courrier
+eraser|Gomme|objects|effacer
+escalator-down|Escalier roulant (descente)|places|
+escalator-up|Escalier roulant (montée)|places|
+exam|Examen|docs|copie école note
+exclamation-mark|Point d’exclamation|symbols|attention
+export|Exporter|arrows|sortir
+eye|Œil|health|voir regarder
+eye-closed|Œil fermé|health|dormir
+eyedropper|Pipette|objects|couleur
+eyeglasses|Lunettes|clothes|
+eyes|Deux yeux|emotions|regarder
+face-mask|Masque de soin|health|masque
+factory|Usine|places|industrie travail
+fan|Ventilateur|house|
+farm|Ferme|places|agriculture campagne
+fast-forward|Avance rapide|leisure|lecture
+fast-forward-circle|Avance rapide (rond)|leisure|lecture
+feather|Plume|docs|écriture oiseau
+file|Fichier|docs|page document
+file-archive|Fichier d’archives|docs|document
+file-audio|Fichier son|docs|enregistrement
+file-image|Fichier image|docs|photo
+file-magnifying-glass|Chercher dans un document|docs|recherche
+file-pdf|Fichier PDF|docs|document
+file-text|Document écrit|docs|page texte acte
+file-video|Fichier vidéo|docs|film
+file-zip|Fichier compressé|docs|
+files|Fichiers|docs|documents
+film-reel|Bobine de film|leisure|cinéma
+film-script|Scénario|leisure|cinéma
+film-slate|Clap de cinéma|leisure|cinéma
+film-strip|Pellicule|leisure|photo cinéma
+fingerprint|Empreinte digitale|people|identité
+fingerprint-simple|Empreinte digitale simple|people|identité
+fire|Feu|nature|flamme incendie
+fire-extinguisher|Extincteur|jobs|pompier
+fire-simple|Flamme|nature|feu
+fire-truck|Camion de pompiers|transport|pompier
+first-aid|Croix de secours|health|soin
+first-aid-kit|Trousse de secours|health|soin
+fish|Poisson|animals|mer pêche
+fish-simple|Poisson simple|animals|mer pêche
+flag|Drapeau|flags|
+flag-banner|Fanion|flags|bannière
+flag-banner-fold|Fanion plié|flags|bannière
+flag-checkered|Drapeau à damier|flags|arrivée course
+flag-pennant|Flamme (drapeau)|flags|fanion
+flame|Flamme vive|nature|feu
+flashlight|Lampe de poche|objects|lumière
+flask|Fiole|health|chimie science
+floppy-disk|Disquette|tech|enregistrer
+floppy-disk-back|Disquette (dos)|tech|
+flow-arrow|Flèche de parcours|arrows|chemin
+flower|Fleur|nature|
+flower-lotus|Lotus|nature|fleur
+flower-tulip|Tulipe|nature|fleur
+folder|Dossier|docs|classement
+folder-open|Dossier ouvert|docs|classement
+folder-simple|Dossier simple|docs|classement
+folder-simple-star|Dossier favori|docs|classement
+folder-simple-user|Dossier de la personne|docs|classement
+folder-star|Dossier à l’étoile|docs|favori
+folder-user|Dossier personnel|docs|classement
+folders|Dossiers|docs|classement
+football|Ballon de rugby|leisure|sport
+football-helmet|Casque de football américain|leisure|sport
+footprints|Empreintes de pas|people|marche
+fork-knife|Fourchette et couteau|food|repas restaurant
+frame-corners|Coins de cadre|frames|cadre photo
+garage|Garage|places|maison voiture
+gas-can|Bidon d’essence|transport|
+gas-pump|Pompe à essence|transport|station
+gauge|Jauge|objects|compteur
+gavel|Marteau de juge|jobs|justice tribunal notaire
+gear|Engrenage|jobs|réglage mécanique
+gear-fine|Engrenage fin|jobs|mécanique
+gear-six|Engrenage à six dents|jobs|mécanique
+gender-female|Symbole femme|genea|féminin
+gender-intersex|Symbole intersexe|genea|genre
+gender-male|Symbole homme|genea|masculin
+gender-neuter|Symbole neutre|genea|genre
+gender-nonbinary|Symbole non binaire|genea|genre
+gender-transgender|Symbole transgenre|genea|genre
+gift|Cadeau|leisure|fête anniversaire
+globe|Globe|places|monde terre
+globe-hemisphere-east|Globe (Europe, Afrique)|places|monde
+globe-hemisphere-west|Globe (Amériques)|places|monde
+globe-simple|Globe simple|places|monde
+globe-stand|Globe terrestre sur pied|places|monde école
+goggles|Lunettes de natation|leisure|sport
+golf|Golf|leisure|sport
+graduation-cap|Toque de diplômé|docs|diplôme école études
+grains|Épis de blé|nature|agriculture céréales
+graph|Réseau de points|tech|graphe
+grid-four|Grille de quatre|geo|cases
+grid-nine|Grille de neuf|geo|cases
+guitar|Guitare|leisure|musique
+hair-dryer|Sèche-cheveux|house|coiffeur
+hamburger|Hamburger|food|
+hammer|Marteau|jobs|outil
+hand|Main|people|geste
+hand-coins|Main et pièces|money|argent don
+hand-eye|Main et œil|people|
+hand-fist|Poing|people|geste force
+hand-grabbing|Main qui attrape|people|geste
+hand-heart|Main et cœur|people|don amour
+hand-palm|Paume|people|geste main
+hand-peace|Signe de paix|people|geste
+hand-pointing|Main qui montre|people|doigt geste
+hand-soap|Savon liquide|house|lavage
+hand-waving|Main qui salue|people|bonjour au revoir
+handbag|Sac à main|clothes|
+handbag-simple|Sac à main simple|clothes|
+hands-clapping|Applaudissements|people|bravo
+hands-praying|Mains jointes|faith|prière
+handshake|Poignée de main|people|accord
+hard-hat|Casque de chantier|jobs|ouvrier
+headlights|Phares|transport|voiture
+headphones|Casque audio|leisure|musique
+headset|Casque micro|tech|
+heart|Cœur|symbols|amour
+heart-break|Cœur brisé|emotions|chagrin divorce
+heart-half|Demi-cœur|symbols|amour
+heart-straight|Cœur droit|symbols|amour
+heart-straight-break|Cœur droit brisé|emotions|chagrin
+heartbeat|Battement de cœur|health|vie
+hexagon|Hexagone|geo|
+high-heel|Escarpin|clothes|chaussure
+highlighter|Surligneur|objects|feutre
+hockey|Hockey|leisure|sport
+hoodie|Sweat à capuche|clothes|
+horse|Cheval|animals|ferme
+hospital|Hôpital|health|bâtiment soin
+hourglass|Sablier|symbols|temps
+hourglass-high|Sablier (début)|symbols|temps
+hourglass-low|Sablier (fin)|symbols|temps
+hourglass-medium|Sablier (milieu)|symbols|temps
+hourglass-simple|Sablier simple|symbols|temps
+hourglass-simple-high|Sablier simple (début)|symbols|temps
+hourglass-simple-low|Sablier simple (fin)|symbols|temps
+hourglass-simple-medium|Sablier simple (milieu)|symbols|temps
+house|Maison|places|foyer
+house-line|Maison au trait|places|foyer
+house-simple|Maison simple|places|foyer
+hurricane|Ouragan|weather|tempête
+ice-cream|Glace|food|dessert
+identification-badge|Badge|docs|identité
+identification-card|Carte d’identité|docs|identité papiers
+image|Image|docs|photo tableau
+images|Images|docs|photos
+infinity|Infini|genea|union mariage
+info|Information|symbols|
+invoice|Facture|money|
+island|Île|places|mer
+jar|Bocal|food|conserve
+jar-label|Bocal étiqueté|food|conserve
+jeep|Jeep|transport|voiture
+key|Clé|objects|
+keyboard|Clavier|tech|
+keyhole|Trou de serrure|objects|clé
+knife|Couteau|food|cuisine
+ladder|Échelle|jobs|outil
+ladder-simple|Échelle simple|jobs|outil
+lamp|Lampe|house|lumière
+lamp-pendant|Suspension|house|lumière lustre
+laptop|Ordinateur portable|tech|
+leaf|Feuille|nature|arbre
+lectern|Pupitre|faith|discours
+lifebuoy|Bouée|transport|mer secours
+lightbulb|Ampoule|house|idée lumière
+lightbulb-filament|Ampoule à filament|house|idée lumière
+lighthouse|Phare|places|mer côte
+lightning|Éclair|weather|orage
+link|Lien|genea|chaîne relier
+link-break|Lien rompu|genea|chaîne séparer
+list|Liste|docs|
+list-heart|Liste de favoris|docs|
+lock|Cadenas fermé|objects|verrou
+lock-key|Cadenas à clé|objects|verrou
+lock-open|Cadenas ouvert|objects|verrou
+lockers|Casiers|objects|vestiaire
+magic-wand|Baguette magique|leisure|magie
+magnet|Aimant|objects|
+magnet-straight|Aimant droit|objects|
+magnifying-glass|Loupe|objects|chercher enquête
+mailbox|Boîte aux lettres|house|courrier
+map-pin|Repère sur la carte|places|lieu
+map-pin-area|Repère et zone|places|lieu
+map-pin-line|Repère au sol|places|lieu
+map-trifold|Carte dépliée|places|plan
+martini|Cocktail|food|boisson
+mask-happy|Masque joyeux|leisure|théâtre comédie
+mask-sad|Masque triste|leisure|théâtre tragédie
+medal|Médaille|stars|récompense décoration
+medal-military|Médaille militaire|stars|décoration guerre
+megaphone|Porte-voix|objects|annonce
+megaphone-simple|Porte-voix simple|objects|annonce
+meteor|Météore|weather|étoile filante
+metronome|Métronome|leisure|musique
+microphone|Micro|leisure|enregistrer
+microphone-stage|Micro de scène|leisure|chanteur
+microscope|Microscope|health|science
+minus|Moins|symbols|
+minus-circle|Moins rond|symbols|
+minus-square|Moins carré|symbols|
+money|Billet|money|argent
+money-wavy|Billet ondulé|money|argent
+monitor|Écran|tech|
+moon|Lune|weather|nuit croissant
+moon-stars|Lune et étoiles|weather|nuit
+moped|Mobylette|transport|scooter
+moped-front|Mobylette (de face)|transport|scooter
+mosque|Mosquée|faith|islam
+motorcycle|Moto|transport|
+mountains|Montagnes|nature|paysage
+mouse|Souris (ordinateur)|tech|
+music-note|Note de musique|leisure|musique
+music-note-simple|Note simple|leisure|musique
+music-notes|Notes de musique|leisure|musique
+music-notes-minus|Notes moins|leisure|musique
+music-notes-plus|Notes plus|leisure|musique
+music-notes-simple|Notes simples|leisure|musique
+navigation-arrow|Flèche de navigation|arrows|direction
+needle|Aiguille à coudre|jobs|couture couturière
+newspaper|Journal|docs|presse
+newspaper-clipping|Coupure de presse|docs|journal article
+note|Note|docs|papier
+note-blank|Note vierge|docs|papier
+note-pencil|Note et crayon|docs|écrire
+notebook|Carnet|docs|cahier
+notepad|Bloc-notes|docs|cahier
+nut|Écrou|jobs|outil
+octagon|Octogone|geo|
+office-chair|Fauteuil de bureau|house|meuble
+onigiri|Onigiri|food|riz
+orange|Orange|food|fruit
+orange-slice|Tranche d’orange|food|fruit
+oven|Four|house|cuisine
+package|Colis|objects|carton
+paint-brush|Pinceau|jobs|peinture peintre
+paint-brush-household|Brosse de peintre|jobs|peinture
+paint-bucket|Pot de peinture|jobs|peinture
+paint-roller|Rouleau de peinture|jobs|peinture
+palette|Palette|jobs|peintre artiste
+panorama|Panorama|docs|photo
+pants|Pantalon|clothes|
+paper-plane|Avion en papier|leisure|lettre
+paper-plane-right|Avion en papier (droite)|leisure|lettre
+paper-plane-tilt|Avion en papier penché|leisure|lettre
+paperclip|Trombone|objects|attache
+paperclip-horizontal|Trombone couché|objects|attache
+parachute|Parachute|transport|
+paragraph|Pied-de-mouche (¶)|letters|paragraphe
+park|Parc|places|jardin arbre
+path|Chemin|places|parcours
+pause|Pause|leisure|lecture
+pause-circle|Pause (rond)|leisure|lecture
+paw-print|Empreinte de patte|animals|chien chat
+peace|Symbole de paix|symbols|
+pen|Stylo|docs|écrire
+pen-nib|Plume de stylo|docs|écrire
+pencil|Crayon|docs|écrire
+pencil-ruler|Crayon et règle|jobs|dessin
+pencil-simple|Crayon simple|docs|écrire
+pentagon|Pentagone|geo|
+pentagram|Pentagramme|symbols|étoile
+pepper|Poivron|food|légume
+person|Personne|people|
+person-arms-spread|Personne bras ouverts|people|
+person-simple|Personne simple|people|
+person-simple-bike|Cycliste|leisure|vélo sport
+person-simple-circle|Personne dans un rond|people|
+person-simple-hike|Randonneur|leisure|marche sport
+person-simple-run|Coureur|leisure|course sport
+person-simple-ski|Skieur|leisure|ski sport
+person-simple-snowboard|Surfeur des neiges|leisure|sport
+person-simple-swim|Nageur|leisure|natation sport
+person-simple-tai-chi|Tai-chi|leisure|sport
+person-simple-throw|Lanceur|leisure|sport
+person-simple-walk|Marcheur|people|marche
+phone|Téléphone|tech|
+phone-call|Téléphone qui sonne|tech|appel
+pi|Pi (π)|symbols|maths
+piano-keys|Clavier de piano|leisure|musique
+picnic-table|Table de pique-nique|leisure|
+piggy-bank|Tirelire|money|économies
+pill|Pilule|health|médicament
+pint-glass|Verre à bière|food|boisson
+pinwheel|Moulin à vent (jouet)|leisure|jouet enfant
+pipe|Pipe|objects|tabac
+pipe-wrench|Clé à molette|jobs|plombier outil
+pizza|Pizza|food|
+planet|Planète|weather|espace
+plant|Pousse|nature|plante
+plugs|Fiches électriques|tech|
+plug|Prise électrique|tech|
+plus|Plus|symbols|
+plus-circle|Plus rond|symbols|
+plus-square|Plus carré|symbols|
+poker-chip|Jeton de jeu|leisure|casino
+police-car|Voiture de police|transport|gendarme
+polygon|Polygone|geo|
+popcorn|Pop-corn|food|cinéma
+popsicle|Glace à l’eau|food|dessert
+potted-plant|Plante en pot|nature|
+power|Marche-arrêt|tech|bouton
+prescription|Ordonnance|health|médecin
+presentation|Tableau de présentation|docs|
+printer|Imprimante|tech|
+prohibit|Interdit|symbols|non
+projector-screen|Écran de projection|tech|
+pulse|Pouls|health|cœur
+push-pin|Punaise|objects|épingle
+push-pin-simple|Punaise simple|objects|épingle
+puzzle-piece|Pièce de puzzle|leisure|jeu
+question|Question (rond)|symbols|interrogation
+question-mark|Point d’interrogation|symbols|question
+quotes|Guillemets|letters|citation
+rabbit|Lapin|animals|
+racquet|Raquette|leisure|tennis sport
+radio|Poste de radio|tech|
+rainbow|Arc-en-ciel|weather|
+rainbow-cloud|Arc-en-ciel et nuage|weather|
+ranking|Podium|leisure|classement sport
+receipt|Reçu|money|ticket
+record|Enregistrer (rond)|leisure|
+rectangle|Rectangle|geo|
+rectangle-dashed|Rectangle en pointillés|geo|
+recycle|Recyclage|symbols|
+repeat|Répéter|arrows|boucle
+rewind|Retour rapide|leisure|lecture
+rewind-circle|Retour rapide (rond)|leisure|lecture
+road-horizon|Route|transport|chemin
+rocket|Fusée|transport|espace
+rocket-launch|Fusée au décollage|transport|espace
+rug|Tapis|house|
+ruler|Règle|jobs|mesure
+sailboat|Voilier|transport|bateau mer
+scales|Balance|jobs|justice
+scissors|Ciseaux|jobs|couture coiffeur
+scooter|Trottinette|transport|
+screwdriver|Tournevis|jobs|outil
+scroll|Parchemin|genea|acte archive
+seal|Sceau dentelé|stars|cachet
+seal-check|Sceau validé|stars|cachet certifié
+seat|Siège|transport|
+seatbelt|Ceinture de sécurité|transport|
+shapes|Formes|geo|
+share|Partager|arrows|
+share-fat|Partager (grosse flèche)|arrows|
+shield|Écu simple|heraldry|bouclier blason
+shield-check|Écu coché|heraldry|bouclier
+shield-checkered|Écu écartelé|heraldry|bouclier blason
+shield-chevron|Écu au chevron|heraldry|bouclier blason
+shield-plus|Écu à la croix|heraldry|bouclier blason
+shield-slash|Écu à la barre|heraldry|bouclier blason
+shield-star|Écu à l’étoile|heraldry|bouclier blason
+shield-warning|Écu au point d’exclamation|heraldry|bouclier
+shipping-container|Conteneur|transport|port
+shirt-folded|Chemise pliée|clothes|
+shooting-star|Étoile filante|weather|
+shopping-bag|Sac de courses|money|magasin
+shopping-bag-open|Sac de courses ouvert|money|magasin
+shopping-cart|Chariot de courses|money|magasin
+shopping-cart-simple|Chariot simple|money|magasin
+shovel|Pelle|jobs|jardin outil
+shower|Douche|house|salle de bain
+shrimp|Crevette|animals|mer
+shuffle|Mélanger|arrows|
+sigma|Sigma (Σ)|letters|somme grec
+signature|Signature|docs|signer acte
+signpost|Panneau indicateur|places|direction chemin
+siren|Gyrophare|transport|alarme
+skip-back|Précédent|leisure|lecture
+skip-back-circle|Précédent (rond)|leisure|lecture
+skip-forward|Suivant|leisure|lecture
+skip-forward-circle|Suivant (rond)|leisure|lecture
+skull|Tête de mort|genea|crâne décès
+slideshow|Diaporama|docs|
+smiley|Visage souriant|emotions|content heureux
+smiley-angry|Visage en colère|emotions|fâché
+smiley-blank|Visage sans expression|emotions|
+smiley-meh|Visage blasé|emotions|bof
+smiley-melting|Visage qui fond|emotions|
+smiley-nervous|Visage nerveux|emotions|
+smiley-sad|Visage triste|emotions|chagrin
+smiley-wink|Clin d’œil|emotions|
+smiley-x-eyes|Visage KO|emotions|
+sneaker|Basket (chaussure)|clothes|
+sneaker-move|Basket en marche|clothes|
+snowflake|Flocon de neige|weather|hiver
+soccer-ball|Ballon de foot|leisure|sport football
+sock|Chaussette|clothes|
+solar-panel|Panneau solaire|tech|
+spade|Pique (cartes)|leisure|jeu cartes
+sparkle|Étincelle|stars|brillant
+speaker-hifi|Enceinte|leisure|musique
+speaker-high|Haut-parleur|leisure|son
+speedometer|Compteur de vitesse|transport|
+sphere|Sphère|geo|boule
+spiral|Spirale|geo|
+spray-bottle|Vaporisateur|house|
+square|Carré|geo|
+square-half|Carré à moitié|geo|
+square-half-bottom|Carré à moitié (bas)|geo|
+squares-four|Quatre carrés|geo|
+stairs|Escalier|places|
+stamp|Tampon|docs|cachet administration
+star|Étoile|stars|
+star-and-crescent|Croissant et étoile|faith|islam
+star-four|Étoile à quatre branches|stars|
+star-half|Demi-étoile|stars|
+star-of-david|Étoile de David|faith|judaïsme
+steering-wheel|Volant|transport|voiture
+steps|Marches|places|escalier
+stethoscope|Stéthoscope|health|médecin
+stool|Tabouret|house|meuble
+stop|Arrêt (carré)|leisure|lecture
+stop-circle|Arrêt (rond)|leisure|lecture
+storefront|Boutique|places|commerce magasin
+strategy|Stratégie|leisure|jeu plan
+student|Élève|people|école étudiant
+subway|Métro|transport|
+suitcase|Valise|transport|voyage
+suitcase-rolling|Valise à roulettes|transport|voyage
+suitcase-simple|Valise simple|transport|voyage
+sun|Soleil|weather|beau temps
+sun-dim|Soleil voilé|weather|
+sun-horizon|Lever de soleil|weather|coucher
+sunglasses|Lunettes de soleil|clothes|
+swimming-pool|Piscine|leisure|natation
+sword|Épée|heraldry|arme chevalier
+synagogue|Synagogue|faith|judaïsme
+syringe|Seringue|health|vaccin
+t-shirt|Tee-shirt|clothes|
+table|Tableau (grille)|docs|tableur
+tag|Étiquette|labels|prix
+tag-chevron|Étiquette en chevron|labels|
+tag-simple|Étiquette simple|labels|
+target|Cible|leisure|tir
+taxi|Taxi|transport|voiture
+tea-bag|Sachet de thé|food|boisson
+television|Télévision|tech|écran
+tennis-ball|Balle de tennis|leisure|sport
+tent|Tente|leisure|camping
+test-tube|Éprouvette|health|science
+thermometer|Thermomètre|weather|température
+thermometer-cold|Thermomètre froid|weather|température
+thermometer-hot|Thermomètre chaud|weather|température
+thermometer-simple|Thermomètre simple|weather|température
+thumbs-down|Pouce en bas|emotions|non
+thumbs-up|Pouce en haut|emotions|oui bravo
+ticket|Billet d’entrée|leisure|spectacle
+timer|Chronomètre|objects|minuteur
+tip-jar|Pot à pourboires|money|
+tipi|Tipi|places|tente
+tire|Pneu|transport|roue
+toilet|Toilettes|house|
+toolbox|Boîte à outils|jobs|outils
+tooth|Dent|health|dentiste
+tornado|Tornade|weather|tempête
+tote|Cabas|clothes|sac
+tote-simple|Cabas simple|clothes|sac
+towel|Serviette|house|bain
+tractor|Tracteur|transport|ferme agriculture
+trademark-registered|Marque déposée (®)|symbols|
+traffic-cone|Cône de chantier|transport|travaux
+traffic-sign|Panneau routier|transport|route
+traffic-signal|Feu tricolore|transport|route
+train|Train|transport|locomotive
+train-regional|Train régional|transport|
+train-simple|Train simple|transport|
+tram|Tramway|transport|
+translate|Traduire|letters|langue
+trash|Poubelle|house|corbeille
+trash-simple|Poubelle simple|house|corbeille
+tray|Plateau|house|
+treasure-chest|Coffre au trésor|objects|malle
+tree|Arbre|nature|arbre généalogique
+tree-evergreen|Sapin|nature|arbre
+tree-palm|Palmier|nature|arbre
+tree-structure|Organigramme|genea|arbre descendance
+tree-view|Arborescence|genea|arbre
+trend-down|Courbe qui baisse|docs|
+trend-up|Courbe qui monte|docs|
+triangle|Triangle|geo|
+triangle-dashed|Triangle en pointillés|geo|
+trolley|Diable (chariot)|transport|
+trolley-suitcase|Chariot à bagages|transport|voyage
+trophy|Trophée|stars|coupe récompense
+truck|Camion|transport|
+truck-trailer|Semi-remorque|transport|camion
+umbrella|Parapluie|weather|pluie
+umbrella-simple|Parapluie simple|weather|pluie
+upload|Envoyer|arrows|
+user|Personne (buste)|people|
+user-check|Personne vérifiée|people|
+user-circle|Personne dans un rond|people|portrait
+user-circle-check|Personne vérifiée (rond)|people|
+user-circle-minus|Personne moins (rond)|people|
+user-circle-plus|Personne plus (rond)|people|ajouter
+user-list|Liste de personnes|people|
+user-minus|Personne moins|people|
+user-plus|Personne plus|people|ajouter
+user-square|Personne dans un carré|people|portrait
+users|Deux personnes|people|couple
+users-four|Quatre personnes|people|famille
+users-three|Trois personnes|people|famille
+van|Camionnette|transport|
+vault|Coffre-fort|money|
+video|Vidéo|leisure|film
+video-camera|Caméra|leisure|film
+vinyl-record|Disque vinyle|leisure|musique
+virus|Virus|health|maladie épidémie
+volleyball|Ballon de volley|leisure|sport
+wall|Mur de briques|jobs|maçon
+wallet|Portefeuille|money|
+warehouse|Entrepôt|places|
+warning|Attention (triangle)|symbols|danger
+warning-circle|Attention (rond)|symbols|danger
+warning-diamond|Attention (losange)|symbols|danger
+warning-octagon|Attention (octogone)|symbols|stop
+washing-machine|Machine à laver|house|lessive
+watch|Montre|clothes|heure
+wave-sine|Onde|symbols|vague
+waveform|Son (onde)|leisure|enregistrement
+waves|Vagues|nature|mer eau
+wheelchair|Fauteuil roulant|health|handicap
+wheelchair-motion|Fauteuil roulant en mouvement|health|handicap
+wifi-high|Wi-Fi|tech|réseau
+wind|Vent|weather|
+windmill|Moulin à vent|places|meunier
+wine|Verre de vin|food|boisson
+wrench|Clé plate|jobs|outil mécanique
+x|Croix (X)|symbols|non faux
+x-circle|Croix (rond)|symbols|non
+x-square|Croix (carré)|symbols|non
+yarn|Pelote de laine|jobs|tricot
+yin-yang|Yin et yang|faith|
+play|Lecture|leisure|jouer
+play-circle|Lecture (rond)|leisure|jouer
+play-pause|Lecture-pause|leisure|
+playlist|Liste de lecture|leisure|musique

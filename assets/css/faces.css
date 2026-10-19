@@ -1,0 +1,66 @@
+/* LCNDA — 👤 Visages (assets/js/heritage-faces.js) : ① trouver les visages, ② qui est-ce ?
+   Onglets et filtres : C5 (ui.css, .ui-tabs / .ui-filters) ; messages : C7 (.ui-notice). Ici seulement le reste (.fc-*).
+   Couleurs : variables de l'app ; le mode sombre est en bas (scripts/build-dark-css.py). */
+
+.h-faces .fc-top { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 4px 0 10px; }
+.h-faces .fc-stat { font-size: 12.5px; color: var(--ui-muted, #5b6270); }
+.h-faces .fc-h { font-size: 15px; margin: 16px 0 8px; }
+.h-faces .fc-help .ui-help { margin-left: 6px; vertical-align: 3px; }
+
+/* — quelles photos analyser : une ligne par choix, le nombre à droite — */
+.fc-srcs { display: grid; gap: 6px; }
+.fc-src { display: grid; grid-template-columns: auto 26px minmax(0, 1fr) auto; gap: 10px; align-items: start; border: 2px solid #d5d9e0; padding: 9px 12px; cursor: pointer; background: #fff; }
+.fc-src:hover { border-color: #9aa1ad; }
+.fc-src.is-active { border-color: var(--ui-blue, #055dff); background: #f3f7ff; }
+.fc-src > input { margin: 3px 0 0; accent-color: var(--ui-blue, #055dff); }
+.fc-src-ico { font-size: 18px; line-height: 1.2; text-align: center; }
+.fc-src-main { display: grid; gap: 2px; min-width: 0; }
+.fc-src-main > small { color: var(--ui-muted, #5b6270); font-size: 12.5px; }
+.fc-src-opt { margin-top: 6px; max-width: 460px; cursor: default; }
+.fc-src-opt select { min-width: 220px; max-width: 100%; }
+.fc-inline { display: inline-flex; align-items: center; gap: 6px; font-weight: 400; }
+.fc-inline input { width: 90px; }
+.fc-badge { font: 700 12px/1.3 system-ui, sans-serif; background: var(--ui-blue, #055dff); color: #fff; padding: 3px 8px; white-space: nowrap; align-self: center; }
+.fc-badge.is-zero { background: #eceff3; color: #5b6270; font-weight: 600; }
+.fc-check { margin: 10px 0 0; }
+.fc-go { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 12px 0 4px; }
+.fc-resume .button { margin-left: 4px; }
+
+/* — l'analyse en cours — */
+.fc-run { border: 2px solid var(--ui-blue, #055dff); background: #f3f7ff; padding: 10px 12px; margin: 0 0 12px; }
+.fc-run .h-faces-progress { margin-bottom: 6px; }
+.fc-run-line { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 13px; margin: 0; }
+.fc-run-txt { flex: 1 1 220px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.fc-run-speed { color: #3d4452; }
+.fc-run-btns { display: inline-flex; gap: 6px; }
+.fc-warn { color: #a15c00; font-weight: 700; cursor: help; }
+.fc-note { margin: 6px 0 0; font-size: 12.5px; }
+
+/* — photos avec des visages à nommer — */
+.fc-photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+.fc-photo { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 10px; align-items: center; border: 2px solid #d5d9e0; padding: 8px; background: #fff; }
+.fc-photo > .button { grid-column: 2; justify-self: start; }
+.fc-photo-thumb { grid-row: span 2; width: 64px; height: 56px; padding: 0; border: 1px solid #c9ccd3; background: #f1f2f4; overflow: hidden; cursor: pointer; box-shadow: none; }
+.fc-photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fc-photo-main { display: grid; min-width: 0; }
+.fc-photo-main b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fc-photo-main small { color: var(--ui-muted, #5b6270); }
+.fc-filters { margin: 4px 0 12px; }
+
+@media (max-width: 560px) {
+    .fc-src { grid-template-columns: auto 22px minmax(0, 1fr); }
+    .fc-badge { grid-column: 3; justify-self: start; }
+    .fc-photos { grid-template-columns: 1fr; }
+    .h-faces .h-faces-body { padding: 0 12px 14px; }
+}
+
+/* ═════ Mode sombre écrit à la main ═════ */
+:root[data-theme="dark"] .fc-run-speed { color: #c3c9d4; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .fc-src{border:2px solid #474b52;background:#212121}
+:root[data-theme="dark"] .fc-src.is-active{background:#101d38}
+:root[data-theme="dark"] .fc-badge.is-zero{background:#23272d;color:#c2c5cc}
+:root[data-theme="dark"] .fc-run{background:#101d38}
+:root[data-theme="dark"] .fc-warn{color:#f4cd9a}
+:root[data-theme="dark"] .fc-photo{border:2px solid #474b52;background:#212121}
+/* ═════ fin du mode sombre automatique ═════ */

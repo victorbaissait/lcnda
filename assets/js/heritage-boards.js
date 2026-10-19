@@ -1356,7 +1356,7 @@
         }
         // ── formes : accès rapide, bibliothèque, formes à soi ──
         const quickShapes = () => { const p = P(), K = KIT(); const list = (p.quickShapes || []).map(k => K.shapeByKey?.(k)).filter(Boolean).filter(sh => !(p.shapesHidden || []).includes(sh.k)); return list.length ? list : SHAPES.map(([k, n]) => ({k, n, d: K.shapeByKey?.(k)?.d || ''})); };
-        const shapeItem = k => { const sh = KIT().shapeByKey?.(k); const o = {shape: k}; if (k.startsWith('my_') && sh) { if (sh.mask) { o.mask = sh.mask; o.svgpath = undefined; } else { o.svgpath = sh.d; o.eo = !!sh.eo; o.mask = undefined; } } else { o.svgpath = undefined; o.mask = undefined; } return o; };
+        const shapeItem = k => { const sh = KIT().shapeByKey?.(k); const o = {shape: k}; if (k.startsWith('my_') && sh) { if (sh.mask) { o.mask = sh.mask; o.svgpath = undefined; } else { o.svgpath = sh.d; o.eo = !!sh.eo; o.mask = undefined; } } else if (sh?.lazy && KIT().shapeD100) { o.svgpath = KIT().shapeD100(sh); o.eo = !!sh.eo; o.mask = undefined; } /* grande bibliothèque (chargée à la demande) : le tracé est gardé dans l'élément */ else { o.svgpath = undefined; o.mask = undefined; } return o; };
         function applyShape(k) {
             if (ro()) return;
             const o = shapeItem(k);
@@ -1364,6 +1364,8 @@
             shapeKind = k; render(); commit();
         }
         function shapeLibrary(anchor, onPick) {
+            // la grande bibliothèque (heritage-board-shapelib.js : chargée à l'ouverture, défilement virtuel, recherche C1) ; sinon l'ancienne ci-dessous
+            if (KIT().openShapeLibrary) { KIT().openShapeLibrary({anchor, root, current: shapeKind, onPick, onNew: () => shapeMaker(onPick), onFrom: () => KIT().openComposer?.({base: shapeKind, onSave: onPick})}); return; }
             root.querySelector('.h-bd-shapelib')?.remove();
             const K = KIT(), p = P(), cats = (K.CATS || []).filter(c => (p.shapeCats || []).includes(c[0]) && !(p.shapesHidden || []).includes('cat:' + c[0]));
             const ord = c => [...(p.shapeCats || [])].indexOf(c);

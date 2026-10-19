@@ -76,10 +76,23 @@
         try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (_) { toast('Réglage impossible à enregistrer dans ce navigateur.', 'error'); }
         A().syncCustomDashboardWidgets();
         registerAll();
+        // 📈 les graphiques posés ailleurs (fiche, enquête, Atelier, page d'une personne, mise en page) se redessinent
+        try { document.dispatchEvent(new CustomEvent('lcnda:graphs-changed')); } catch (_) {}
     }
     ext.customWidgetDefs = () => Object.fromEntries(defs().map(d => [d.id, d]));
 
     /* ─── Données ─── */
+    /* ✍️ Mes propres chiffres (source « manual » d'un graphique) : {series: [{name, color}], rows: [{label, v: ['42', …]}]} */
+    const FREE_ROWS = 300, FREE_SERIES = 12;
+    const freeNum = v => { const n = parseFloat(String(v ?? '').replace(/[\s  ]/g, '').replace(',', '.')); return Number.isFinite(n) ? n : 0; };
+    function cleanFree(f) {
+        f = f && typeof f === 'object' ? f : {};
+        const series = (Array.isArray(f.series) ? f.series : []).slice(0, FREE_SERIES).map(s => ({name: String(s?.name ?? '').slice(0, 80), color: color(s?.color)}));
+        if (!series.length) series.push({name: 'Nombre', color: ''});
+        const rows = (Array.isArray(f.rows) ? f.rows : []).slice(0, FREE_ROWS).filter(r => r && typeof r === 'object').map(r => ({label: String(r.label ?? '').slice(0, 120), v: series.map((_, j) => { const x = Array.isArray(r.v) ? r.v[j] : ''; return x === '' || x == null || typeof x === 'object' ? '' : String(x).slice(0, 30); })}));
+        return {series, rows};
+    }
+    const FREE_SAMPLE = () => ({series: [{name: 'Nombre', color: ''}], rows: [{label: 'Rennes', v: ['42']}, {label: 'Nantes', v: ['25']}, {label: 'Vitré', v: ['14']}, {label: 'Fougères', v: ['9']}]});
     const srcQuery = src => src.list_id ? {list_id: Number(src.list_id)} : {source: src.source || 'persons', definition: {match: src.definition?.match || 'all', rules: src.definition?.rules || []}};
     const isPeopleCol = (data, c) => { const src = data.list?.source || ''; return (['events', 'persons'].includes(src) && (c === 'who' || c === 'name')) || (!['events', 'persons', 'free'].includes(src) && c === 'person'); };
     /** Texte d'une case (comme dans « Mes listes ») */
@@ -130,6 +143,7 @@
             if (d.statLineage) { const root = pid || Number(localStorage.getItem('genealogie-sosa-root')) || 0; if (root) q.sosa_root_id = root; }
             try { return [{appstat: await api('graph_stats', q)}]; } catch (error) { return [{error: error.message}]; }
         }
+        if (d.kind === 'chart' && d.src?.source === 'manual') return [{free: cleanFree(d.free)}]; // ✍️ mes propres chiffres : rien à demander au serveur
         const sources = d.kind === 'numbers' ? (d.counters || []).map(c => c.src || {}) : ['list', 'chart'].includes(d.kind) ? [d.src || {}] : [];
         return Promise.all(sources.map(async src => {
             try {
@@ -164,6 +178,13 @@
         return `${String(y).padStart(4, '0')}-${String(m).padStart(2, '0')}-${String(Math.min(d, 31)).padStart(2, '0')}`;
     }
     function groupRows(data, d) {
+        if (data.free) { // ✍️ mes propres chiffres : dans l'ordre du tableau, la première série pour les dessins simples
+            const f = cleanFree(data.free);
+            const entries = f.rows.filter(r => r.label !== '' || r.v.some(x => x !== '')).map(r => [r.label || '(sans nom)', freeNum(r.v[0])]);
+            entries.counted = entries.reduce((n, e) => n + e[1], 0);
+            entries.members = entries.map(() => []); entries.free = f;
+            return entries;
+        }
         if (data.appstat) { // chiffres déjà comptés par l'app
             const timeline = data.appstat.kind === 'histogram';
             let entries = (data.appstat.rows || []).map(r => [String(r.label ?? ''), Number(r.value) || 0]).filter(([v, n]) => n > 0 && (v !== '' || d.skipEmpty === false));
@@ -239,8 +260,15 @@
         const col = (v, i) => chartColor(d, v, i), pct = n => total ? Math.round(n / total * 100) : 0;
         // chaque valeur se clique : la liste des personnes comptées
         const key = 'd' + (++fullSeq); keepView(key, {detail: {d, entries, data}});
-        const hit = i => ` data-cw-detail="${key}" data-cw-i="${i}" tabindex="0" role="button"`;
+        const hit = i => data.free ? '' : ` data-cw-detail="${key}" data-cw-i="${i}" tabindex="0" role="button"`; // mes propres chiffres : personne derrière
         const legend = `<ul class="h-cw-legend">${entries.map(([v, n], i) => `<li${hit(i)}><i style="background:${col(v, i)}"></i>${esc(v)} <strong>${fmt(n)}</strong> <small class="muted">${pct(n)} %</small></li>`).join('')}</ul>`;
+        // ✍️ mes chiffres en plusieurs séries : les barres, colonnes, courbes et le tableau les montrent toutes
+        if (data.free && entries.free?.series.length > 1) {
+            const f = entries.free, st = d.style || 'bars', rows = f.rows.filter(r => r.label !== '' || r.v.some(x => x !== ''));
+            if (st === 'table') return `<table class="data-table h-cw-table"><thead><tr><th>Valeur</th>${f.series.map(x => `<th>${esc(x.name)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r.label || '(sans nom)')}</td>${r.v.map(x => `<td>${x === '' ? '' : fmt(freeNum(x))}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+            const k = {bars: 'bars', columns: 'columns', line: 'line', area: 'area'}[st];
+            if (k && ext.diagramStatSpec && ext.diagramRender) { const spec = ext.diagramStatSpec(d, data, entries, null, k); if (spec && !spec.html) { if (ext.diagramRender.PALETTES?.[d.palette]) spec.o.palette = d.palette; try { return `<div class="h-cw-dg">${ext.diagramRender.svg(spec)}</div>`; } catch (_) {} } }
+        }
         if (String(d.style || '').startsWith('dg:') && ext.diagramStatHtml) { const h = ext.diagramStatHtml(d, data, entries, (r, c) => cellText(data, r, c)); if (h) return `<div class="h-cw-dg">${h}</div>`; } // le diagramme a sa propre légende
         if (d.style === 'pie' || d.style === 'donut') {
             let at = 0;
@@ -609,19 +637,25 @@
     ext.maintenance.stats_editor = token => { mode = 'stats'; return defsPage(token); };
     async function defsPage(token) {
         try { await loadMeta(); } catch (error) { toast(error.message, 'error'); return; }
+        if (mode === 'stats') { try { await ext.diagramList?.(); } catch (_) {} }
         if (!isCurrent(token)) return;
         editing = null; // revenir sur l'onglet : la liste (un brouillon abandonné ne revient pas)
         const all = defs(), list = mode === 'stats' ? all.filter(d => d.inStats) : all, onBoard = new Set(A().dashboardBlockSettings().widgets.map(w => w.type));
         A().$('#workspace').innerHTML = `<section class="page collection-page">${mode === 'stats'
-            ? header('MAINTENANCE', 'Éditeur de statistiques', 'Crée tes propres graphiques et statistiques, sans rien programmer : de zéro (personnes, événements, une de tes listes…), à partir d’une statistique de l’app redessinée à ta façon, d’un de tes widgets ou d’un exemple. Ils apparaissent dans Graphiques → Statistiques, rubrique « Mes statistiques », et peuvent aussi aller sur le tableau de bord.', '<button type="button" class="button" data-cw-new>+ Nouvelle statistique</button>')
+            ? header('MAINTENANCE', 'Éditeur de statistiques', 'Crée tes propres graphiques et statistiques, sans rien programmer : avec <b>tes propres chiffres</b> (un tableau à remplir, collé d’un tableur ou importé en CSV), ou avec les données de l’app (personnes, événements, une de tes listes, une statistique de l’app redessinée à ta façon). Chacun a un nom et se pose partout : Graphiques → « Mes statistiques », le tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page (« ＋ Diagramme » → « 📈 Un de mes graphiques »). Modifié ici, il change partout.', '<button type="button" class="button" data-cw-new>＋ Nouveau graphique</button><button type="button" class="button secondary" data-cw-dgnewpage>＋ Nouveau diagramme</button><button type="button" class="button secondary" data-cw-golist title="Listes → Graphiques et diagrammes">📋 Tous mes graphiques et diagrammes</button>')
             : header('MAINTENANCE', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord. Pour un graphique ou une statistique en grand dans l’onglet Graphiques : Éditeur de statistiques.', '<button type="button" class="button" data-cw-new>+ Nouveau widget</button>')}
+            ${mode === 'stats' ? diagramsPanelHtml() : ''}
             <section class="maintenance-panel"><h3>Importer un widget reçu</h3><p class="muted">Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données.</p><input type="file" accept=".json,application/json" data-cw-import></section>
             ${list.length ? `<div class="h-records">${list.map(d => `<article class="h-record h-cw-record${color(d.color) ? ' has-accent' : ''}"${color(d.color) ? ` style="--cw-accent:${color(d.color)}"` : ''}><header><div><strong>${esc(d.icon || '🧱')} ${esc(d.name || 'Mon widget')}</strong> <small>${esc(KINDS[d.kind]?.[1] || '')}${d.kind === 'app' ? ' : ' + esc(appCatalog().find(x => x[0] === d.base)?.[1] || d.base) : ''}</small>${onBoard.has(d.id) ? ' <span class="collection-kind">sur le tableau de bord</span>' : ''}${d.inStats ? ' <span class="collection-kind">dans Graphiques</span>' : ''}</div>
                     <span class="h-saved-tools"><button type="button" class="link-button" data-cw-edit="${esc(d.id)}">modifier</button><button type="button" class="link-button" data-cw-dup="${esc(d.id)}">dupliquer</button><button type="button" class="link-button" data-cw-del="${esc(d.id)}">supprimer</button></span></header>
-                    ${d.note ? `<p>${nl(d.note)}</p>` : ''}<div class="page-actions">${d.inStats ? `<button type="button" class="button small" data-cw-opengraph="${esc(d.id)}">📊 Ouvrir dans Graphiques</button>` : ''}<button type="button" class="button small ${d.inStats ? 'secondary' : ''}" data-cw-add="${esc(d.id)}">+ Ajouter au tableau de bord</button><button type="button" class="button small secondary" data-cw-share="${esc(d.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>` : A().emptyState({icon: '🧩', text: mode === 'stats' ? 'Aucune statistique à toi pour l’instant' : 'Aucun widget à toi pour l’instant', action: {label: mode === 'stats' ? '＋ Nouvelle statistique' : '＋ Nouveau widget', attrs: 'data-cw-new'}})}</section>`;
+                    ${d.note ? `<p>${nl(d.note)}</p>` : ''}<div class="page-actions">${d.inStats ? `<button type="button" class="button small" data-cw-opengraph="${esc(d.id)}">📊 Ouvrir dans Graphiques</button>` : ''}<button type="button" class="button small ${d.inStats ? 'secondary' : ''}" data-cw-add="${esc(d.id)}">+ Ajouter au tableau de bord</button><button type="button" class="button small secondary" data-cw-share="${esc(d.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>` : A().emptyState({icon: '🧩', text: mode === 'stats' ? 'Aucun graphique ni statistique à toi pour l’instant' : 'Aucun widget à toi pour l’instant', action: {label: mode === 'stats' ? '＋ Nouveau graphique' : '＋ Nouveau widget', attrs: 'data-cw-new'}})}</section>`;
         const ws = A().$('#workspace');
         const find = id => list.find(d => d.id === id);
         ws.querySelectorAll('[data-cw-new]').forEach(b => b.addEventListener('click', () => chooseStart(token)));
+        // 🏛️ les diagrammes (hémicycle, frise d'un groupe…) se créent aussi d'ici
+        ws.querySelectorAll('[data-cw-dgnewpage]').forEach(b => b.addEventListener('click', () => ext.openDiagramEditor?.(null, {onSave: () => { if (S().module === 'maintenance' && S().maintenanceTab === 'stats_editor') backToList(); }})));
+        ws.querySelectorAll('[data-cw-dgopen]').forEach(b => b.addEventListener('click', () => ext.openDiagram?.(Number(b.dataset.cwDgopen))));
+        ws.querySelector('[data-cw-golist]')?.addEventListener('click', () => { S().listType = 'graphs_list'; A().setModule('listes'); });
         ws.querySelectorAll('[data-cw-edit]').forEach(b => b.addEventListener('click', () => { const cur = find(b.dataset.cwEdit); editing = {...baseDef(cur), id: cur.id, _existing: true}; partIndex = -1; renderEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-cw-dup]').forEach(b => b.addEventListener('click', () => { const d = find(b.dataset.cwDup); editing = baseDef({...d, name: (d.name || 'Mon widget') + ' (copie)'}); partIndex = -1; renderEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-cw-add]').forEach(b => b.addEventListener('click', () => { addToDashboard(b.dataset.cwAdd); backToList(); }));
@@ -629,8 +663,10 @@
         ws.querySelectorAll('[data-cw-share]').forEach(b => b.addEventListener('click', () => shareDef(find(b.dataset.cwShare))));
         ws.querySelectorAll('[data-cw-del]').forEach(b => b.addEventListener('click', async () => {
             const d = find(b.dataset.cwDel);
-            if (!await A().confirmBox(`Supprimer le widget « ${d.name || 'Mon widget'} » ? Il disparaît aussi du tableau de bord.`, {title: 'Supprimer le widget', okLabel: 'Supprimer le widget'})) return;
+            const posed = ext.myGraphPlaces?.(d.id);
+            if (!await A().confirmBox(`Supprimer le widget « ${d.name || 'Mon widget'} » ? Il disparaît aussi du tableau de bord${posed ? ' et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…)' : ''}.`, {title: 'Supprimer le widget', okLabel: 'Supprimer le widget'})) return;
             saveDefs(all.filter(x => x.id !== d.id));
+            if (posed) ext.forgetMyGraph?.(d.id);
             const settings = A().dashboardBlockSettings(); A().saveDashboardBlockSettings(settings); // les exemplaires posés partent (type inconnu)
             toast('Widget supprimé.'); backToList();
         }));
@@ -639,6 +675,45 @@
             try { const d = importDef(JSON.parse(await file.text())); if (mode === 'stats') d.inStats = true; saveDefs([...defs(), d]); toast(mode === 'stats' ? `« ${d.name} » importé : il est dans Graphiques → Statistiques.` : `Widget « ${d.name} » importé : ajoute-le au tableau de bord.`); backToList(); }
             catch (error) { toast('Fichier de widget illisible : ' + error.message, 'error'); }
         });
+    }
+    /* 📌 Poser un graphique sur la page d'une personne ou dans une enquête (et, depuis l'endroit, dans une Fiche, l'Atelier, la mise en page) */
+    const POSE_IC = {person: '👤', investigation: '🔎', investigation_item: '🧩', atelier_project: '📚'};
+    const savedDef = id => defs().some(x => x.id === id);
+    function poseHtml(root) {
+        const links = [...(ext.myGraphPlaces?.(root.id)?.links || []), ...(root._pose || []).map(l => ({...l, pending: true}))];
+        return `<div class="h-cw-pose span-2" data-cw-pose><span class="section-label">📌 Le poser aussi sur…</span>
+            <span class="h-pr-linkchips">${links.map(l => `<span class="h-pr-lchip" data-type="${esc(l.type)}" data-id="${Number(l.id)}">${POSE_IC[l.type] || '🔗'} ${esc(l.name || '')}${l.pending ? ' <small>(à l’enregistrement)</small>' : ''} <button type="button" data-cw-unpose aria-label="Retirer">×</button></span>`).join('') || '<small class="muted">Posé nulle part pour l’instant.</small>'}</span>
+            <div data-cw-posepk>${window.LCNDA_PICKER?.pickerField ? window.LCNDA_PICKER.pickerField({name: 'cw_pose', kind: 'person,investigation', placeholder: 'La page d’une personne, une enquête…', allowCreate: false}) : ''}</div>
+            <small class="muted h-cw-everywhere">Ailleurs (une Fiche, l’Atelier, la mise en page, un tableau) : le bouton « ＋ Diagramme » de l’endroit, puis « 📈 Un de mes graphiques ». Une fois enregistré, chaque changement fait ici se voit partout où il est posé.</small></div>`;
+    }
+    async function poseNow(statId, l) { const did = await ext.myGraphDiagram(statId); await api('link_diagram', {}, {method: 'POST', body: {id: did, type: l.type, entity_id: Number(l.id)}}); await ext.diagramList?.(true); return did; }
+    function bindPose(ws, root, again) {
+        const box = ws.querySelector('[data-cw-pose]'); if (!box) return;
+        box.addEventListener('picker-change', async e => {
+            const it = e.detail.item; if (!it?.id || it.free) return;
+            const l = {type: it.kind === 'investigation' ? 'investigation' : 'person', id: Number(it.id), name: it.title || ''};
+            window.LCNDA_PICKER?.pickerSet?.(box.querySelector('.pk'), null);
+            if (!savedDef(root.id)) { root._pose = [...(root._pose || []).filter(x => !(x.type === l.type && x.id === l.id)), l]; return again(); }
+            try { await poseNow(root.id, l); toast(`Graphique posé : ${l.name}.`); again(); } catch (error) { toast(error.message, 'error'); }
+        });
+        box.addEventListener('click', async e => {
+            const chip = e.target.closest('[data-cw-unpose]')?.closest('.h-pr-lchip'); if (!chip) return;
+            const l = {type: chip.dataset.type, id: Number(chip.dataset.id)}, pend = (root._pose || []).find(x => x.type === l.type && x.id === l.id);
+            if (pend) { root._pose = root._pose.filter(x => x !== pend); return again(); }
+            const p = ext.myGraphPlaces?.(root.id); if (!p) return;
+            try { await api('delete_diagram', {}, {method: 'POST', body: {id: p.diagramId, unlink: l}}); await ext.diagramList?.(true); again();
+                A().undoToast?.('Graphique retiré de cet endroit', {undo: async () => { await poseNow(root.id, l); again(); }, redo: async () => { await api('delete_diagram', {}, {method: 'POST', body: {id: p.diagramId, unlink: l}}); await ext.diagramList?.(true); again(); }}); }
+            catch (error) { toast(error.message, 'error'); }
+        });
+    }
+    /** Éditeur de statistiques : mes diagrammes (hémicycle, frise d'un groupe, camembert…), faits avec le même éditeur que dans Graphiques */
+    function diagramsPanelHtml() {
+        if (!ext.diagramItems) return '';
+        const own = ext.diagramItems().filter(([, l]) => !String(l).startsWith('📈')); // sans mes graphiques posés comme diagrammes (📈)
+        return `<section class="maintenance-panel h-cw-dgpanel"><h3>🏛️ Mes diagrammes <small class="muted">(${plural(own.length, 'diagramme', 'diagrammes')})</small></h3>
+            <p class="muted">Pour un dessin particulier : hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe façon Wikipédia, frise de vies, organigramme, flux de migrations, nuage de mots… avec tes chiffres (tableau, collé, CSV, Wikipédia, image) ou ceux de l’app. Ils se posent partout, comme les graphiques.</p>
+            ${own.length ? `<div class="h-cw-dglist">${own.slice(0, 30).map(([id, l]) => `<button type="button" class="h-pr-lchip" data-cw-dgopen="${Number(id)}" title="L’ouvrir dans Graphiques">${esc(l)}</button>`).join('')}${own.length > 30 ? `<small class="muted">… et ${fmt(own.length - 30)} autres (Listes → Graphiques et diagrammes)</small>` : ''}</div>` : ''}
+            <p><button type="button" class="button small" data-cw-dgnewpage>＋ Nouveau diagramme</button></p></section>`;
     }
     /** Le widget est-il posé sur le tableau de bord principal (pas dans un onglet à soi) ? */
     function onDashboard(id) { const st = S(), board = st.dashboardBoard; st.dashboardBoard = ''; try { return A().dashboardBlockSettings().widgets.some(w => w.type === id); } finally { st.dashboardBoard = board; } }
@@ -691,8 +766,9 @@
     function chooseStatStart(tile) {
         const mine = defs().filter(d => ['chart', 'appstat', 'numbers', 'list'].includes(d.kind)), ex = EXAMPLES(meta || {}).filter(d => ['chart', 'numbers', 'list'].includes(d.kind));
         ext.openDialog({
-            eyebrow: 'NOUVELLE STATISTIQUE', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
-            body: `<h4>Partir de rien</h4><div class="h-templates">${['chart', 'numbers', 'list'].map(k => tile(KINDS[k][0], KINDS[k][1], KINDS[k][2], `data-cs-kind="${k}"`)).join('')}</div>
+            eyebrow: 'NOUVEAU GRAPHIQUE OU STATISTIQUE', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
+            body: `<h4>Avec mes propres chiffres</h4><div class="h-templates">${tile('✍️', 'Mes propres chiffres', 'Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV.', 'data-cs-manual')}${ext.openDiagramEditor ? tile('🏛️', 'Un diagramme', 'Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes).', 'data-cs-diagram') : ''}</div>
+                <h4>Partir de rien, avec les données de l’app</h4><div class="h-templates">${['chart', 'numbers', 'list'].map(k => tile(KINDS[k][0], KINDS[k][1], KINDS[k][2], `data-cs-kind="${k}"`)).join('')}</div>
                 <h4>Partir d’une statistique de l’app</h4><p class="muted">Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage…</p>
                 <div class="h-templates">${APP_STATS.map(([k, l]) => tile('📈', l, 'Statistique de l’app', `data-cs-app="${k}"`)).join('')}</div>
                 ${mine.length ? `<h4>Partir d’un de mes widgets ou de mes statistiques</h4><div class="h-templates">${mine.map(d => tile(d.icon || '🧱', d.name || 'Mon widget', KINDS[d.kind]?.[1] || '', `data-cs-mine="${esc(d.id)}"`)).join('')}</div>` : ''}
@@ -700,6 +776,8 @@
             onOpen: dlg => {
                 const go = d => { editing = {...d, inStats: true, width: '12'}; partIndex = -1; dlg.close(); renderEditor(++S().workspaceToken); };
                 dlg.querySelectorAll('[data-cs-kind]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csKind; go(baseDef({kind: k, icon: KINDS[k][0], name: '', style: 'bars'})); }));
+                dlg.querySelector('[data-cs-manual]')?.addEventListener('click', () => go(baseDef({kind: 'chart', icon: '📈', name: 'Mon graphique', src: {source: 'manual'}, free: FREE_SAMPLE(), style: 'columns'})));
+                dlg.querySelector('[data-cs-diagram]')?.addEventListener('click', () => { dlg.close(); ext.openDiagramEditor?.(null, {onSave: () => { if (S().module === 'maintenance') backToList(); }}); });
                 dlg.querySelectorAll('[data-cs-app]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csApp; const st = baseDef({kind: 'appstat', icon: '📈', name: appStatLabel(k), statType: k, style: ['birth_years', 'death_years', 'age_at_death'].includes(k) ? 'columns' : 'bars', limit: 15}); go(appStatToChart(st) || st); }));
                 dlg.querySelectorAll('[data-cs-mine]').forEach(b => b.addEventListener('click', () => { const d = mine.find(x => x.id === b.dataset.csMine); go(baseDef({...d, id: newId(), name: (d.name || 'Ma statistique') + ' (copie)'})); }));
                 dlg.querySelectorAll('[data-cs-ex]').forEach(b => b.addEventListener('click', () => go(baseDef(ex[Number(b.dataset.csEx)]))));
@@ -712,7 +790,7 @@
         if (src.list_id) { const l = (meta.lists || []).find(x => Number(x.id) === Number(src.list_id)); return l ? (l.definition?.columns || []).map(k => [k, meta.columns[l.source]?.[k] || k]).concat((l.definition?.custom || []).map(c => [c.key, c.label])) : []; }
         return Object.entries(meta.columns[src.source || 'persons'] || {});
     }
-    function sourceHtml(src, path) {
+    function sourceHtml(src, path, {manual = false} = {}) {
         const val = src.list_id ? 'list:' + src.list_id : (src.source || 'persons');
         const isRules = !src.list_id && ['persons', 'events'].includes(src.source || 'persons');
         const d = src.definition = src.definition || {match: 'all', rules: []};
@@ -720,10 +798,10 @@
         const k = (src.source || 'persons') === 'events' ? 'ev' : 'pe';
         const lists = (meta.lists || []).filter(l => l.source !== 'free');
         return `<div class="h-cw-src" data-cw-src="${esc(path)}"><label>Données <select data-cw-srcsel>
-                <option value="persons" ${val === 'persons' ? 'selected' : ''}>Personnes</option><option value="events" ${val === 'events' ? 'selected' : ''}>Événements</option>
+                ${manual ? `<option value="manual" ${val === 'manual' ? 'selected' : ''}>✍️ Mes propres chiffres (tableau à remplir, coller, CSV)</option><option disabled>── ou des données de l’app ──</option>` : ''}<option value="persons" ${val === 'persons' ? 'selected' : ''}>Personnes</option><option value="events" ${val === 'events' ? 'selected' : ''}>Événements</option>
                 <optgroup label="Listes de l’app">${Object.entries(meta.sources || {}).map(([s, l]) => `<option value="${esc(s)}" ${val === s ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>
                 ${lists.length ? `<optgroup label="Mes listes (avec leurs critères et leurs filtres)">${lists.map(l => `<option value="list:${l.id}" ${val === 'list:' + l.id ? 'selected' : ''}>${esc((l.icon || '📋') + ' ' + l.name)}</option>`).join('')}</optgroup>` : ''}</select></label>
-            ${isRules ? `<div class="h-tabs"><label class="checkbox-line"><input type="radio" name="m-${esc(path)}" data-cw-match value="all" ${d.match !== 'any' ? 'checked' : ''}> toutes les conditions</label><label class="checkbox-line"><input type="radio" name="m-${esc(path)}" data-cw-match value="any" ${d.match === 'any' ? 'checked' : ''}> au moins une</label></div>
+            ${val === 'manual' ? '' : isRules ? `<div class="h-tabs"><label class="checkbox-line"><input type="radio" name="m-${esc(path)}" data-cw-match value="all" ${d.match !== 'any' ? 'checked' : ''}> toutes les conditions</label><label class="checkbox-line"><input type="radio" name="m-${esc(path)}" data-cw-match value="any" ${d.match === 'any' ? 'checked' : ''}> au moins une</label></div>
                 <div data-cw-rules>${d.rules.map((r, i) => ext.listRuleRowHtml ? ext.listRuleRowHtml(r, i, src.source || 'persons', meta) : '').join('') || '<p class="muted">Aucun critère : toute la base.</p>'}</div>
                 <label>+ Critère <select data-cw-addrule><option value="">choisir…</option>${ext.ruleOptionsHtml ? ext.ruleOptionsHtml(k) : ''}</select></label>`
             : src.list_id ? '<p class="muted">La liste est reprise telle qu’elle est enregistrée (critères, lignes ajoutées à la main, filtres de colonnes).</p>' : '<p class="muted">Toutes les lignes de cette liste de l’app.</p>'}</div>`;
@@ -766,6 +844,7 @@
         };
         if (d.kind === 'appstat') return `${appStatLabel(d.statType)}${d.statGender ? ', ' + ({female: 'femmes', male: 'hommes', unknown: 'sexe inconnu'}[d.statGender]) : ''}${d.statFrom || d.statTo ? `, nés ${d.statFrom ? 'à partir du ' + d.statFrom : ''}${d.statFrom && d.statTo ? ' ' : ''}${d.statTo ? 'jusqu’au ' + d.statTo : ''}` : ''}${d.statLineage ? ', mes ancêtres' : ''}.`;
         const src = d.kind === 'numbers' ? null : d.src || {};
+        if (src?.source === 'manual') { const f = cleanFree(d.free); return f.series.length > 1 ? `Mes chiffres : ${f.series.map(x => x.name).filter(Boolean).join(', ')}.` : ''; }
         if (d.kind === 'numbers') return (d.counters || []).map(c => c.label).filter(Boolean).join(' · ');
         if (src.list_id) { const l = (meta?.lists || []).find(x => Number(x.id) === Number(src.list_id)); return `D’après ma liste « ${l?.name || '?'} »${d.kind === 'chart' && d.group ? ', comptée par ' + (columnsOf(src).find(c => c[0] === d.group)?.[1] || d.group).toLowerCase() : ''}.`; }
         const what = {persons: 'Personnes', events: 'Événements'}[src.source || 'persons'] || (meta?.sources?.[src.source] || 'Lignes');
@@ -774,6 +853,109 @@
         const by = d.kind === 'chart' && d.group ? ` ; comptées par ${(columnsOf(src).find(c => c[0] === d.group)?.[1] || d.group).toLowerCase()}${d.groupBy === 'decade' ? ' (par décennie)' : d.groupBy === 'century' ? ' (par siècle)' : d.groupBy === 'year' ? ' (par année)' : d.groupBy === 'month' ? ' (par mois)' : d.groupBy === 'step' ? ` (par tranche de ${d.groupStep || 25})` : ''}` : '';
         const period = d.kind === 'chart' && (d.rangeFrom || d.rangeTo) ? `, du ${d.rangeFrom || '…'} au ${d.rangeTo || '…'}` : '';
         return `${what}${crit.length ? ' — ' + crit.join(join) : ' — toute la base'}${period}${by}.`;
+    }
+    /* ── ✍️ Mes propres chiffres : le tableau à remplir (lignes, séries), coller depuis un tableur, importer un CSV ── */
+    function freeGridHtml(d) {
+        const f = d.free = cleanFree(d.free), many = f.series.length > 1;
+        const head = `<th>Nom</th>${f.series.map((s, j) => `<th><span class="h-dg-sername"><input data-fr-ser="${j}" value="${esc(s.name)}" placeholder="Série ${j + 1}" aria-label="Nom de la série ${j + 1}" maxlength="80">${many ? `<button type="button" class="h-dg-x" data-fr-delser="${j}" title="Retirer cette série" aria-label="Retirer cette série">✕</button>` : ''}</span></th>`).join('')}<th></th>`;
+        const rows = f.rows.map((r, i) => `<tr><td><input data-fr-cell="${i}:-1" value="${esc(r.label)}" placeholder="Nom" aria-label="Nom, ligne ${i + 1}" maxlength="120"></td>${r.v.map((x, j) => `<td><input data-fr-cell="${i}:${j}" value="${esc(x)}" inputmode="decimal" class="is-num" placeholder="0" aria-label="${esc(f.series[j].name || 'Série ' + (j + 1))}, ligne ${i + 1}" maxlength="30"></td>`).join('')}<td class="h-dg-rowtools"><button type="button" data-fr-row="up" data-i="${i}" title="Monter" aria-label="Monter">↑</button><button type="button" data-fr-row="down" data-i="${i}" title="Descendre" aria-label="Descendre">↓</button><button type="button" data-fr-row="del" data-i="${i}" title="Retirer la ligne" aria-label="Retirer la ligne">✕</button></td></tr>`).join('');
+        return `<section class="h-dg-grid h-cw-free" data-cw-free><h4>✍️ Mes chiffres <small class="muted">(${plural(f.rows.length, 'ligne', 'lignes')}${many ? ' · ' + plural(f.series.length, 'série', 'séries') : ''})</small></h4>
+            <p class="muted">Première colonne : le nom de chaque valeur ; puis les chiffres. Tu peux coller des cellules d’un tableur directement dans une case.${many ? ' Toutes les séries se voient en barres, colonnes, courbe, aire, tableau et avec les dessins de « Mes diagrammes » (empilées, radar…) ; le camembert, l’anneau et la mosaïque montrent la première.' : ''}</p>
+            <div class="h-dg-tablewrap"><table><thead><tr>${head}</tr></thead><tbody>${rows || `<tr><td colspan="${f.series.length + 2}" class="muted">Tableau vide : « + Ligne » ou « 📋 Coller un tableau ».</td></tr>`}</tbody></table></div>
+            <div class="h-dg-gridtools">${f.rows.length < FREE_ROWS ? '<button type="button" class="button small" data-fr-add>+ Ligne</button>' : ''}${f.series.length < FREE_SERIES ? '<button type="button" class="button small secondary" data-fr-addser>+ Série (colonne de chiffres)</button>' : ''}<button type="button" class="button small secondary" data-fr-paste title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">📥 Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-fr-csv hidden></label><button type="button" class="button small secondary" data-fr-fromstat title="Recopier les chiffres d’une statistique (de l’app ou à toi) pour les retoucher">📊 Partir d’une statistique</button>${f.rows.length ? '<button type="button" class="link-button" data-fr-clear>Vider</button>' : ''}</div></section>`;
+    }
+    const isNumCell = v => /^-?[\d\s  .,]+%?$/.test(String(v ?? '').trim());
+    /** texte d'un tableur (tabulations) ou d'un CSV (; ou ,), avec les guillemets → lignes de cellules */
+    function parseCells(text) {
+        const t = String(text || '').replace(/\r\n?/g, '\n').replace(/\n+$/, '');
+        const head = t.split('\n')[0], sep = t.includes('\t') ? '\t' : (head.split(';').length >= head.split(',').length ? ';' : ',');
+        const out = []; let row = [], cur = '', q = false;
+        for (let i = 0; i < t.length && out.length < 5000; i++) {
+            const ch = t[i];
+            if (q) { if (ch === '"') { if (t[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; continue; }
+            if (ch === '"' && cur.trim() === '') { q = true; cur = ''; continue; }
+            if (ch === sep) { row.push(cur); cur = ''; continue; }
+            if (ch === '\n') { row.push(cur); out.push(row); row = []; cur = ''; continue; }
+            cur += ch;
+        }
+        row.push(cur); out.push(row);
+        return out.map(r => r.map(c => c.trim())).filter(r => r.some(c => c !== ''));
+    }
+    /** des cellules collées : tout le tableau (r0 = null : la première ligne de titres devient le nom des séries), ou à partir d'une case */
+    /** la première ligne donne-t-elle les titres ? des mots au-dessus de chiffres, ou des années (1900, 1950) au-dessus d'autres chiffres */
+    function guessHead(cells) {
+        const first = cells[0] || [], body = cells.slice(1), yr = v => /^\d{4}$/.test(String(v).trim());
+        if (!body.length) return false;
+        if (first.some((v, j) => j > 0 && v !== '' && !isNumCell(v) && body.some(r => r[j] !== undefined && r[j] !== '' && isNumCell(r[j])))) return true;
+        const heads = first.slice(1).filter(v => v !== '');
+        return heads.length > 0 && heads.every(yr) && (first[0] === '' || !isNumCell(first[0])) && body.some(r => r.slice(1).some(v => v !== '' && isNumCell(v) && !yr(v)));
+    }
+    function pasteFree(d, cells, r0 = null, c0 = 0, head = null) {
+        const f = d.free = cleanFree(d.free);
+        if (!cells.length) return;
+        if (r0 === null) {
+            const first = cells[0], body = cells.slice(1);
+            const isHead = body.length > 0 && (head === null ? guessHead(cells) : !!head);
+            const data = isHead ? body : cells;
+            let n = 0; for (let j = 1; j < Math.max(...data.map(r => r.length), 1) && n < FREE_SERIES; j++) { const vals = data.map(r => r[j]).filter(v => v !== undefined && v !== ''); if (vals.length && vals.every(isNumCell)) n++; else break; }
+            n = Math.max(1, n);
+            f.series = Array.from({length: n}, (_, j) => ({name: String(isHead ? first[1 + j] || `Série ${j + 1}` : f.series[j]?.name || (n === 1 ? 'Nombre' : `Série ${j + 1}`)).slice(0, 80), color: f.series[j]?.color || ''}));
+            f.rows = data.slice(0, FREE_ROWS).map(r => ({label: String(r[0] ?? '').slice(0, 120), v: f.series.map((_, j) => String(r[1 + j] ?? '').slice(0, 30))}));
+        } else {
+            const need = Math.min(FREE_SERIES, Math.max(f.series.length, c0 - 1 + Math.max(...cells.map(r => r.length))));
+            while (f.series.length < need) f.series.push({name: `Série ${f.series.length + 1}`, color: ''});
+            cells.forEach((line, k) => {
+                const i = r0 + k; if (i >= FREE_ROWS) return;
+                const row = f.rows[i] || (f.rows[i] = {label: '', v: []});
+                line.forEach((v, j) => { const c = c0 + j; if (c === 0) row.label = String(v).slice(0, 120); else if (c - 1 < f.series.length) row.v[c - 1] = String(v).slice(0, 30); });
+            });
+        }
+        d.free = cleanFree(f);
+    }
+    function bindFree(box, d, again) {
+        const snap = () => JSON.parse(JSON.stringify(cleanFree(d.free)));
+        const undoable = (msg, before) => { const after = snap(); A().undoToast?.(msg, {undo: () => { d.free = before; again(); }, redo: () => { d.free = after; again(); }}); };
+        box.addEventListener('input', e => {
+            const c = e.target.dataset?.frCell;
+            if (c !== undefined) { const [i, j] = c.split(':').map(Number), r = d.free?.rows?.[i]; if (!r) return; if (j < 0) r.label = e.target.value.slice(0, 120); else r.v[j] = e.target.value.slice(0, 30); return; }
+            const sj = e.target.dataset?.frSer; if (sj !== undefined && d.free?.series?.[Number(sj)]) d.free.series[Number(sj)].name = e.target.value.slice(0, 80);
+        });
+        box.addEventListener('paste', e => {
+            const c = e.target.dataset?.frCell; if (c === undefined) return;
+            const txt = e.clipboardData?.getData('text/plain') || ''; if (!/[\t\n]/.test(txt.trim())) return;
+            e.preventDefault(); const [i, j] = c.split(':').map(Number);
+            pasteFree(d, parseCells(txt), i, j + 1); again();
+        });
+        box.addEventListener('change', async e => {
+            const input = e.target.closest?.('[data-fr-csv]'); const file = input?.files?.[0]; if (!file) return;
+            if (file.size > 5e6) { input.value = ''; return toast('Fichier trop gros (5 Mo au plus).', 'error'); }
+            const before = snap(); pasteFree(d, parseCells(await file.text())); again(); undoable(`Tableau importé (${plural(d.free.rows.length, 'ligne', 'lignes')})`, before);
+        });
+        box.addEventListener('click', async e => {
+            const b = e.target.closest('button'); if (!b || !b.closest('[data-cw-free]')) return;
+            const f = d.free = cleanFree(d.free);
+            if (b.hasAttribute('data-fr-add')) { f.rows.push({label: '', v: f.series.map(() => '')}); again(); setTimeout(() => A().$('#workspace').querySelector('[data-cw-free] tbody tr:last-child input')?.focus(), 0); return; }
+            if (b.hasAttribute('data-fr-addser')) { if (f.series.length >= FREE_SERIES) return; f.series.push({name: `Série ${f.series.length + 1}`, color: ''}); f.rows.forEach(r => r.v.push('')); again(); return; }
+            if (b.dataset.frDelser !== undefined) { const j = Number(b.dataset.frDelser), before = snap(), name = f.series[j]?.name || `Série ${j + 1}`; f.series.splice(j, 1); f.rows.forEach(r => r.v.splice(j, 1)); again(); undoable(`Série « ${name} » retirée`, before); return; }
+            if (b.dataset.frRow) { const i = Number(b.dataset.i); if (!f.rows[i]) return;
+                if (b.dataset.frRow === 'del') { const before = snap(); f.rows.splice(i, 1); again(); undoable('Ligne retirée', before); return; }
+                const j = b.dataset.frRow === 'up' ? i - 1 : i + 1; if (j >= 0 && j < f.rows.length) [f.rows[i], f.rows[j]] = [f.rows[j], f.rows[i]]; again(); return; }
+            if (b.hasAttribute('data-fr-clear')) { const before = snap(); f.rows = []; again(); undoable('Tableau vidé', before); return; }
+            if (b.hasAttribute('data-fr-paste')) {
+                ext.openDialog({eyebrow: 'MES CHIFFRES', title: '📋 Coller un tableau', submitLabel: 'Remplacer le tableau', body: '<p class="muted">Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C / Ctrl+C) et colle-les ici. Première colonne : les noms ; colonnes suivantes : les chiffres. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé.</p><textarea name="t" rows="12" class="h-dg-pastearea" placeholder="Ville&#9;1900&#9;1950&#10;Rennes&#9;42&#9;51&#10;Nantes&#9;25&#9;30"></textarea><label>La première ligne<select name="head"><option value="auto">à deviner</option><option value="1">donne les titres (noms des séries)</option><option value="0">est une ligne de chiffres comme les autres</option></select></label>',
+                    onSubmit: form => { const t = form.querySelector('[name=t]').value; if (!t.trim()) return false; const hv = form.querySelector('[name=head]')?.value || 'auto'; const before = snap(); pasteFree(d, parseCells(t), null, 0, hv === 'auto' ? null : hv === '1'); again(); undoable(`Tableau collé (${plural(d.free.rows.length, 'ligne', 'lignes')})`, before); }});
+                return;
+            }
+            if (b.hasAttribute('data-fr-fromstat')) {
+                const src = ((await ext.diagramStatSources?.().catch(() => [])) || []).filter(([k]) => k !== `my:${editing?.id}`);
+                if (!src.length) return toast('Aucune statistique disponible.', 'error');
+                const g = {}; src.forEach(([k, l, grp]) => { (g[grp] = g[grp] || []).push([k, l]); });
+                ext.openDialog({eyebrow: 'MES CHIFFRES', title: '📊 Partir d’une statistique', submitLabel: 'Recopier ces chiffres', body: `<p class="muted">Les chiffres d’une statistique (de l’app, un exemple ou une des tiennes) sont recopiés dans ton tableau : tu peux ensuite les retoucher, en ajouter, ajouter une série… Ils ne bougent plus quand l’arbre change (pour des chiffres tenus à jour, choisis plutôt la statistique dans « Données »).</p><label>Statistique<select name="src">${Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>`,
+                    onSubmit: async form => { const sel = form.querySelector('[name=src]'); try { const pairs = await ext.diagramStatRows(sel.value); if (!pairs.length) { toast('Aucun chiffre pour cette statistique.', 'error'); return false; }
+                        const before = snap(); d.free = cleanFree({series: [{name: sel.selectedOptions[0]?.textContent || 'Nombre'}], rows: pairs.map(([v, n]) => ({label: String(v), v: [String(n)]}))}); again(); undoable(`${plural(pairs.length, 'valeur recopiée', 'valeurs recopiées')}`, before); }
+                        catch (error) { toast(error.message, 'error'); return false; } }});
+            }
+        });
     }
     function kindHtml() { return kindHtmlInner() + captionField(target()); }
     /** Dessin, couleurs et nombre de valeurs : communs au graphique et à la statistique de l'app */
@@ -785,7 +967,7 @@
                 <label>Couleurs <select data-cw-palette>${[['vive', 'Vives'], ['pastel', 'Pastel'], ['terre', 'Terre'], ['mer', 'Mer'], ['sepia', 'Sépia (photos anciennes)'], ['accent', 'Une couleur en dégradé']].map(([k, l]) => `<option value="${k}" ${(d.palette || 'vive') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 ${d.palette === 'accent' ? `<label>Couleur du dégradé<input type="color" data-cw-accent value="${esc(color(d.accentColor) || '#0066cc')}"></label>` : ''}
                 <div class="span-2"><span class="section-label">Couleur de chaque valeur</span><div class="h-cw-valcolors" data-cw-valcolors><small class="muted">Les valeurs apparaissent ici après le calcul de l’aperçu.</small></div></div>
-                <label>Valeurs les plus fréquentes<input type="number" min="2" max="60" data-cw-limit value="${esc(d.limit || 10)}"></label>`;
+                ${d.src?.source === 'manual' ? '' : `<label>Valeurs les plus fréquentes<input type="number" min="2" max="60" data-cw-limit value="${esc(d.limit || 10)}"></label>`}`;
     }
     function kindHtmlInner() {
         const d = target();
@@ -812,7 +994,8 @@
             <button type="button" class="button small secondary" data-cw-counter-add>+ Chiffre</button>`;
         if (d.kind === 'list' || d.kind === 'chart') {
             const cols = columnsOf(d.src = d.src || P());
-            const common = sourceHtml(d.src, 's');
+            const common = sourceHtml(d.src, 's', {manual: d.kind === 'chart'});
+            if (d.kind === 'chart' && d.src.source === 'manual') return `${common}${freeGridHtml(d)}<div class="form-grid">${drawHtml(d)}</div>`;
             if (d.kind === 'list') return `${common}<h4>Colonnes</h4><div class="h-cw-cols">${cols.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" data-cw-col="${esc(k)}" ${(d.columns?.length ? d.columns : cols.slice(0, 3).map(c => c[0])).includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div>
                 <div class="form-grid"><label>Trier par <select data-cw-sortcol><option value="">ordre de la liste</option>${cols.map(([k, l]) => `<option value="${esc(k)}" ${d.sort?.col === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <label>Sens <select data-cw-sortdir><option value="asc" ${d.sort?.dir !== 'desc' ? 'selected' : ''}>croissant (A → Z, 1 → 9)</option><option value="desc" ${d.sort?.dir === 'desc' ? 'selected' : ''}>décroissant</option></select></label>
@@ -856,7 +1039,7 @@
         const partHead = partIndex >= 0 ? `<div class="form-grid"><label>Sous-titre de cette partie<input data-cw-parttitle value="${esc(d.title || '')}" placeholder="Ex. : À faire, Mes chiffres, Liens utiles"></label>
             <label>Sorte <select data-cw-partkind>${PART_KINDS.map(k => `<option value="${k}" ${d.kind === k ? 'selected' : ''}>${KINDS[k][0]} ${esc(KINDS[k][1])}</option>`).join('')}</select></label>
             <p class="span-2"><button type="button" class="button small secondary" data-cw-partup ${partIndex ? '' : 'disabled'}>↑ Monter</button> <button type="button" class="button small secondary" data-cw-partdown ${partIndex < root.parts.length - 1 ? '' : 'disabled'}>↓ Descendre</button> <button type="button" class="button small secondary danger" data-cw-partdel>Retirer cette partie</button></p></div>` : '';
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-be h-cw-editor">${header(mode === 'stats' ? 'ÉDITEUR DE STATISTIQUES' : 'ÉDITEUR DE WIDGETS', root._existing ? `Modifier « ${root.name || 'Mon widget'} »` : mode === 'stats' ? 'Nouvelle statistique' : 'Nouveau widget', 'Règle ton widget à gauche ; l’aperçu se met à jour à droite.', '<button type="button" class="button secondary" data-cw-cancel>← Retour</button>')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-be h-cw-editor">${header(mode === 'stats' ? 'ÉDITEUR DE STATISTIQUES' : 'ÉDITEUR DE WIDGETS', root._existing ? `Modifier « ${root.name || 'Mon widget'} »` : mode === 'stats' ? (['chart', 'appstat'].includes(root.kind) ? 'Nouveau graphique' : 'Nouvelle statistique') : 'Nouveau widget', 'Règle ton widget à gauche ; l’aperçu se met à jour à droite.', '<button type="button" class="button secondary" data-cw-cancel>← Retour</button>')}
             <div class="h-cw-layout"><div>
             <section class="maintenance-panel"><h3>1. Le widget</h3><div class="form-grid">
                 <label>Titre<input data-cw="name" value="${esc(root.name || '')}" placeholder="Mes ancêtres bretons"></label><label>Icône<input data-cw="icon" value="${esc(root.icon || '')}" maxlength="16" class="h-be-icon" placeholder="🧱"></label>
@@ -867,7 +1050,8 @@
                 <fieldset class="span-2 h-be-display"><legend>Où l’afficher</legend>
                     ${root.kind === 'app' ? '' : `<label class="checkbox-line"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> <span>📊 en grand dans Graphiques → « Mes statistiques » (graphique, chiffres ou liste)</span></label>`}
                     <label class="checkbox-line"><input type="checkbox" data-cw-ondash ${root._onDash ?? onDashboard(root.id) ? 'checked' : ''}> <span>🧱 en widget sur le tableau de bord</span></label>
-                    <small class="muted">Et dans un de tes onglets : Maintenance → Éditeur d’onglets, ou la colonne de gauche de l’onglet.</small></fieldset></div></section>
+                    <small class="muted">Et dans un de tes onglets : Maintenance → Éditeur d’onglets, ou la colonne de gauche de l’onglet.</small>
+                    ${['chart', 'appstat'].includes(root.kind) && ext.myGraphDiagram ? poseHtml(root) : ''}</fieldset></div></section>
             <section class="maintenance-panel"><h3>2. ${partIndex >= 0 ? `Partie ${partIndex + 2} : ` : ''}${esc(KINDS[d.kind]?.[1] || '')}</h3>${partTabs}${partHead}<p class="muted">${esc(KINDS[d.kind]?.[2] || '')}${root.kind !== 'app' && partIndex < 0 && !(root.parts || []).length ? ' Pour mettre plusieurs choses dans le même widget (plusieurs textes, des chiffres et des raccourcis…), « + Ajouter une partie ».' : ''}</p><div data-cw-kind-box>${kindHtml()}</div></section>
             <div class="page-actions"><button type="button" class="button" data-cw-save>Enregistrer</button>${root.inStats ? '<button type="button" class="button secondary" data-cw-savegraph>Enregistrer et ouvrir dans Graphiques</button>' : ''}${root._existing ? '' : '<button type="button" class="button secondary" data-cw-saveadd>Enregistrer et ajouter au tableau de bord</button>'}<button type="button" class="button secondary" data-cw-cancel>Annuler</button></div>
             </div><aside class="h-cw-preview"><h3>Aperçu <button type="button" class="link-button" data-cw-refresh>actualiser</button></h3><div class="card-grid" data-cw-preview></div></aside></div></section>`;
@@ -895,6 +1079,7 @@
         preview();
         ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; if (ext.blockStatReturn) { ext.blockStatReturn = null; S().maintenanceTab = 'block_editor'; A().setModule('maintenance'); return; } backToList(); }));
         ws.querySelector('[data-cw-instats]')?.addEventListener('change', e => { root.inStats = e.target.checked; again(); });
+        bindPose(ws, root, again);
         ws.querySelector('[data-cw-ondash]')?.addEventListener('change', e => { root._onDash = e.target.checked; });
         ws.querySelector('[data-cw-refresh]').addEventListener('click', preview);
         ws.querySelectorAll('[data-cw]').forEach(el => el.addEventListener('input', () => { root[el.dataset.cw] = el.value; preview(); }));
@@ -921,6 +1106,7 @@
                     const v = e.target.value; Object.keys(src).forEach(k => delete src[k]);
                     if (v.startsWith('list:')) src.list_id = Number(v.slice(5)); else { src.source = v; src.definition = {match: 'all', rules: []}; }
                     if (srcBox.dataset.cwSrc === 's') { d.columns = []; d.sort = null; d.group = ''; }
+                    if (v === 'manual') { if (!cleanFree(d.free).rows.length) d.free = FREE_SAMPLE(); d.valueColors = {}; if (d === root && !String(root.name || '').trim()) root.name = 'Mon graphique'; }
                     return again();
                 }
                 if (e.target.matches('[data-cw-addrule]') && e.target.value) { src.definition.rules.push({field: e.target.value, value: {gender: 'female', living: 'deceased', of_person: 'ancestors'}[e.target.value] || '', values: []}); return again(); }
@@ -1017,6 +1203,7 @@
                 if (row && e.target.closest('[data-j-down]') && i < rows.length - 1) { syncSteps(); [d.steps[i + 1], d.steps[i]] = [d.steps[i], d.steps[i + 1]]; return again(); }
             });
         }
+        if (d.kind === 'chart' && d.src?.source === 'manual') bindFree(box, d, again);
         function readRule(e, src) {
             const row = e.target.closest('[data-lr-i]'); if (!row) return;
             const r = src.definition.rules[Number(row.dataset.lrI)];
@@ -1030,6 +1217,8 @@
             const clean = cleanDef(root), list = defs(), i = list.findIndex(x => x.id === clean.id), before = i >= 0 ? list[i] : null;
             if (i >= 0) list[i] = clean; else list.push(clean);
             saveDefs(list);
+            const poses = ['chart', 'appstat'].includes(clean.kind) ? (root._pose || []) : [];
+            if (poses.length && ext.myGraphDiagram) (async () => { try { for (const l of poses) await poseNow(clean.id, l); toast(`Graphique posé : ${poses.map(l => l.name).join(', ')}.`); } catch (error) { toast(error.message, 'error'); } })();
             // Déjà sur le tableau de bord : on le met à jour (largeur comprise) au lieu d'en proposer un deuxième
             const settings = A().dashboardBlockSettings(), placed = settings.widgets.filter(w => w.type === clean.id);
             if (placed.length) {
@@ -1052,6 +1241,7 @@
     function cleanSrc(src) {
         src = src && typeof src === 'object' ? src : {};
         if (Number(src.list_id) > 0) return {list_id: Number(src.list_id)};
+        if (src.source === 'manual') return {source: 'manual'};
         const source = ['persons', 'events', ...Object.keys(meta?.sources || {places: 1, media: 1, occupations: 1, census: 1, reminders: 1, sources: 1, family_objects: 1, courriers: 1, graves: 1, budget: 1, living: 1})].includes(src.source) ? src.source : 'persons';
         const rules = (Array.isArray(src.definition?.rules) ? src.definition.rules : []).slice(0, 30).map(r => ({field: str(r.field, 30), value: str(r.value, 200), from: r.from === '' || r.from == null || !Number.isFinite(Number(r.from)) ? null : Number(r.from), to: r.to === '' || r.to == null || !Number.isFinite(Number(r.to)) ? null : Number(r.to), values: (Array.isArray(r.values) ? r.values : []).map(Number).filter(Boolean).slice(0, 200), not: !!r.not,
             date_from: /^\d{4}-\d{2}-\d{2}$/.test(String(r.date_from || '')) ? r.date_from : '', date_to: /^\d{4}-\d{2}-\d{2}$/.test(String(r.date_to || '')) ? r.date_to : '', km: Math.max(0, Math.min(1000, Number(r.km) || 0))}));
@@ -1067,8 +1257,10 @@
     }
     function kindFields(d, kind) {
         const out = {};
-        if (kind === 'numbers') out.counters = (Array.isArray(d.counters) ? d.counters : []).slice(0, 8).map(c => ({label: str(c.label, 80), src: cleanSrc(c.src)}));
+        if (kind === 'numbers') out.counters = (Array.isArray(d.counters) ? d.counters : []).slice(0, 8).map(c => ({label: str(c.label, 80), src: c.src?.source === 'manual' ? P() : cleanSrc(c.src)}));
         if (kind === 'list' || kind === 'chart') { out.src = cleanSrc(d.src); out.limit = Math.max(1, Math.min(100, Number(d.limit) || 8)); }
+        if (kind === 'list' && out.src.source === 'manual') out.src = {source: 'persons', definition: {match: 'all', rules: []}}; // une liste n'a pas de « mes chiffres »
+        if (kind === 'chart' && out.src.source === 'manual') out.free = cleanFree(d.free);
         if (kind === 'list') { out.columns = (Array.isArray(d.columns) ? d.columns : []).map(c => str(c, 40)).slice(0, 12); out.sort = d.sort?.col ? {col: str(d.sort.col, 40), dir: d.sort.dir === 'desc' ? 'desc' : 'asc'} : null; }
         if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', ...TIME_GROUPS].includes(d.groupBy) ? d.groupBy : 'value', groupStep: Math.max(1, Math.min(500, Number(d.groupStep) || 25)), rangeFrom: str(d.rangeFrom, 40), rangeTo: str(d.rangeTo, 40), style: (CHART_STYLES.some(([k]) => k === d.style) || /^dg:[a-z0-9_]{2,30}(:[a-z0-9_]{1,30})?$/.test(String(d.style || ''))) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
@@ -1133,6 +1325,37 @@
         catch (error) { el.innerHTML = `<p class="muted">${esc(error.message)}</p>`; }
     };
 
+    /* ─── 📈 Mes graphiques, posés partout : un graphique (Éditeur de statistiques) dessiné comme un diagramme ─── */
+    const SIMPLE_KIND = {bars: 'bars', columns: 'columns', pie: 'pie', donut: 'donut', line: 'line', area: 'area', tiles: 'treemap', table: 'bars'};
+    /** mes graphiques (un graphique ou une statistique de l'app redessinée) : ceux qu'on peut poser partout */
+    ext.myGraphs = () => defs().filter(d => ['chart', 'appstat'].includes(d.kind));
+    /** tous mes widgets et statistiques (pour la liste « Graphiques et diagrammes ») */
+    ext.myStatDefs = () => defs().filter(d => d.kind !== 'app' && (d.inStats || ['chart', 'appstat'].includes(d.kind)));
+    ext.myGraphCreated = d => { const t = parseInt(String(d?.id || '').slice(3, 11), 36); return Number.isFinite(t) && t > 1e12 && t < 4e12 ? new Date(t).toISOString() : ''; };
+    /** le dessin d'un de mes graphiques, comme un diagramme : {spec, name} (ou {html} : un message) */
+    ext.statDiagramSpec = async (id, ctx = {}) => {
+        const d = defs().find(x => x.id === id && ['chart', 'appstat'].includes(x.kind)); if (!d) return null;
+        const datas = await loadData({...d, parts: []}, ctx), data = datas[0] || {};
+        if (data.error) return {html: `<p class="muted">${esc(data.error)}</p>`, name: d.name};
+        const entries = groupRows(data, d), cell = (r, c) => cellText(data, r, c), style = String(d.style || 'bars');
+        let spec = style.startsWith('dg:') ? ext.diagramStatSpec?.(d, data, entries, cell) : null;
+        if (!spec || spec.html) {
+            if (spec?.html) return {html: spec.html, name: d.name};
+            const k = SIMPLE_KIND[style] || 'bars';
+            const ents = k === 'line' || k === 'area' ? Object.assign(entries.filter(([v], i) => !(v === 'autres' && i === entries.length - 1)), {free: entries.free, counted: entries.counted}) : entries;
+            spec = ext.diagramStatSpec?.(d, data, ents, cell, k);
+            if (!spec || spec.html) return {html: spec?.html || '', name: d.name};
+            if (ext.diagramRender?.PALETTES?.[d.palette]) spec.o.palette = d.palette;
+            (spec.rows || []).forEach(r => { const own = d.valueColors?.[r.label]; if (color(own)) r.color = own; });
+            if (['line', 'area'].includes(k) && color(d.valueColors?.__line)) spec.series = [{...(spec.series?.[0] || {}), color: d.valueColors.__line}];
+            if (style === 'table') spec.o.values = true;
+        }
+        spec.o = {...(spec.o || {}), title: d.name || '', subtitle: d.caption || ''};
+        return {spec, name: d.name || 'Mon graphique'};
+    };
+    ext.editMyGraph = id => ext.editStatFor(id);
+    ext.newMyGraph = () => ext.newStatFor();
+
     /* ─── 📊 Mes statistiques dans Graphiques → Statistiques ─── */
     ext.customStatItems = () => defs().filter(d => d.inStats && d.kind !== 'app').map(d => [d.id, `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`]);
     ext.addDiagramWidget = dg => {
@@ -1188,6 +1411,11 @@
             if (!data) return;
             if (part.kind === 'chart' || part.kind === 'appstat') {
                 const entries = groupRows(data[0] || {rows: [], shown: []}, part), total = entries.reduce((n, e) => n + e[1], 0);
+                if (entries.free?.series.length > 1) { // ✍️ mes chiffres en plusieurs séries : toutes les colonnes
+                    lines.push(['Valeur', ...entries.free.series.map(x => q(x.name))].join(';'));
+                    entries.free.rows.filter(r => r.label !== '' || r.v.some(x => x !== '')).forEach(r => lines.push([q(r.label || '(sans nom)'), ...r.v.map(x => x === '' ? '' : String(freeNum(x)).replace('.', ','))].join(';')));
+                    lines.push(''); return;
+                }
                 lines.push('Valeur;Nombre;Part (%)');
                 entries.forEach(([v, n]) => lines.push([q(v), n, total ? String(Math.round(n / total * 1000) / 10).replace('.', ',') : ''].join(';')));
             } else if (part.kind === 'numbers') {
@@ -1302,4 +1530,5 @@
         return `rgb(${ch(16)},${ch(8)},${ch(0)})`;
     }
     ext.customStatCsv = statCsv; // pour les tests
+    ext.graphsFreeInternals = {cleanFree, pasteFree, guessHead, parseCells, groupRows, FREE_SAMPLE}; // pour les tests
 })();

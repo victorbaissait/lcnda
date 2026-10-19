@@ -44,7 +44,8 @@
         'genealogie-person-blocks', 'genealogie-dashboard-blocks', 'genealogie-dashboard-widget-catalog-order', 'genealogie-dashboard-widget-catalog-hidden',
         'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display',
         'genealogie-battue-level-colors', 'genealogie-person-badge-colors', 'genealogie-archive-digest-category-order', 'genealogie-heritage-flags',
-        'genealogie-village-maps', 'genealogie-transcription-layout'
+        'genealogie-village-maps', 'genealogie-transcription-layout',
+        'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header' // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
     ];
     const LAYOUT_PREFIXES = ['genealogie-tile-items-'];
     const PROFILES_KEY = 'genealogie-layout-profiles';

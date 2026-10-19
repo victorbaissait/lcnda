@@ -1,0 +1,28 @@
+/* LCNDA — Tableaux : la grande bibliothèque de formes (heritage-board-shapelib.js). Défilement virtuel : seules les formes visibles sont dessinées. */
+.h-bd-shapelib.sl-lib { grid-template-rows: auto auto 1fr auto; height: min(70vh, 560px); width: min(680px, calc(100vw - 32px)); }
+.sl-head { align-items: center; flex-wrap: wrap; }
+.sl-q { flex: 1 1 220px; min-width: 0; display: flex; }
+.sl-q > * { flex: 1; }
+.sl-x { flex: none; }
+.sl-cats { scrollbar-width: thin; }
+.sl-cats button { flex: none; }
+.sl-scroll { position: relative; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; padding: 0 12px; outline: none; }
+.sl-scroll:focus-visible { box-shadow: inset 0 0 0 2px #0a84ff; }
+.sl-space { position: relative; width: 100%; }
+.sl-row { position: absolute; left: 0; right: 0; height: 54px; display: flex; gap: 6px; align-items: center; }
+.sl-cell.h-bd-shcell { width: 48px; height: 48px; flex: none; aspect-ratio: auto; }
+.sl-cell.is-sel { outline: 3px solid #0a84ff; outline-offset: 1px; }
+.sl-h { position: absolute; left: 0; right: 0; height: 30px; margin: 0; display: flex; align-items: end; padding-bottom: 4px; font-size: 13px; }
+.sl-msg { position: absolute; left: 0; right: 0; padding: 10px 2px; font-size: 13.5px; color: #555; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; z-index: 1; background: #fff; }
+.sl-foot { border-top: 1px solid #eee; padding: 7px 12px; font-size: 12.5px; min-height: 32px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 480px) {
+    .h-bd-shapelib.sl-lib { position: fixed; left: 16px; right: 16px; top: 70px; width: auto; height: min(78vh, 560px); }
+    .sl-q { order: 1; flex: 1 1 calc(100% - 52px); }
+    .sl-x { order: 2; }
+    .sl-head .button { order: 3; font-size: 12px; }
+}
+:root[data-theme="dark"] .sl-msg { background: #24272c; color: #c9ced6; }
+:root[data-theme="dark"] .sl-foot { border-top-color: #3a3f46; }
+:root[data-theme="dark"] .sl-h { color: #e6e6e6; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+/* ═════ fin du mode sombre automatique ═════ */
