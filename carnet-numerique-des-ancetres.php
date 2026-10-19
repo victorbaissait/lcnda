@@ -389,9 +389,9 @@
                         <li>Livre de famille par branche : parties à cocher et ranger, textes, styles, polices, format ; PDF, HTML, Word, OpenDocument, ePub, Markdown, texte, CSV.</li>
                         <li>Livrets de famille transcrits en entier, personnes reliées aux fiches ; fiches d'employeurs façon fiche d'entreprise.</li>
                     </ul>
-                    <h4>📊 Statistiques, widgets et onglets à soi</h4>
+                    <h4>📊 Graphiques, widgets et onglets à soi</h4>
                     <ul>
-                        <li>Éditeur de statistiques et de widgets, onglets à soi avec n'importe quel écran de l'app ; tableau de bord en pages et en ensembles repliables.</li>
+                        <li>Éditeur de graphiques et de widgets, onglets à soi avec n'importe quel écran de l'app ; tableau de bord en pages et en ensembles repliables.</li>
                         <li>Distributions : <b>« + Critère »</b> autant qu'on veut, filtres par défaut, et <b>un clic sur une barre</b> (pyramides des âges comprises) montre les personnes comptées.</li>
                         <li>Fiche d'un village et monographie de commune en widget, saint du jour détaillé, suggestions de recherche.</li>
                     </ul>
@@ -737,116 +737,116 @@
             </header>
             <div class="presentation-carousel" aria-roledescription="carrousel" aria-label="Captures d’écran du logiciel">
                 <div class="presentation-carousel-track" tabindex="0">
-                <figure class="presentation-slide" id="apercu-1" aria-roledescription="diapositive" aria-label="1 sur 11">
+                <figure class="presentation-slide" id="apercu-1" aria-roledescription="diapositive" aria-label="1 sur 25">
                     <img src="captures/lcnda-01.jpg" alt="Fiche individuelle d’une personne : identité, parents, conjoints, enfants et événements" width="1600" height="1034" loading="eager">
                     <figcaption><span>01</span>La fiche d’une personne : identité, famille et événements</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-2" aria-roledescription="diapositive" aria-label="2 sur 11">
+                <figure class="presentation-slide" id="apercu-2" aria-roledescription="diapositive" aria-label="2 sur 25">
                     <img src="captures/lcnda-02.jpg" alt="Bas d’une fiche : médias, recensements, notes, sources et références externes" width="1600" height="1034" loading="lazy">
                     <figcaption><span>02</span>Médias, recensements, sources et références d’une fiche</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-3" aria-roledescription="diapositive" aria-label="3 sur 11">
+                <figure class="presentation-slide" id="apercu-3" aria-roledescription="diapositive" aria-label="3 sur 25">
                     <img src="captures/lcnda-03.jpg" alt="Graphique d’arbre des descendants" width="1600" height="1034" loading="lazy">
                     <figcaption><span>03</span>Arbres et diagrammes : ici, les descendants</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-4" aria-roledescription="diapositive" aria-label="4 sur 11">
+                <figure class="presentation-slide" id="apercu-4" aria-roledescription="diapositive" aria-label="4 sur 25">
                     <img src="captures/lcnda-04.jpg" alt="Statistiques : prénoms les plus fréquents de la base" width="1600" height="1034" loading="lazy">
                     <figcaption><span>04</span>Statistiques : distribution des prénoms</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-5" aria-roledescription="diapositive" aria-label="5 sur 11">
+                <figure class="presentation-slide" id="apercu-5" aria-roledescription="diapositive" aria-label="5 sur 25">
                     <img src="captures/lcnda-05.jpg" alt="Carte des lieux des événements" width="1600" height="1034" loading="lazy">
                     <figcaption><span>05</span>Carte de tous les événements</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-6" aria-roledescription="diapositive" aria-label="6 sur 11">
+                <figure class="presentation-slide" id="apercu-6" aria-roledescription="diapositive" aria-label="6 sur 25">
                     <img src="captures/lcnda-06.jpg" alt="Liste dynamique des personnes avec naissance, décès et statut" width="1600" height="1034" loading="lazy">
                     <figcaption><span>06</span>Listes dynamiques : personnes à vérifier</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-7" aria-roledescription="diapositive" aria-label="7 sur 11">
+                <figure class="presentation-slide" id="apercu-7" aria-roledescription="diapositive" aria-label="7 sur 25">
                     <img src="captures/lcnda-07.jpg" alt="Liste des rappels avec échéances" width="1600" height="1034" loading="lazy">
                     <figcaption><span>07</span>Rappels de recherche</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-8" aria-roledescription="diapositive" aria-label="8 sur 11">
+                <figure class="presentation-slide" id="apercu-8" aria-roledescription="diapositive" aria-label="8 sur 25">
                     <img src="captures/lcnda-08.jpg" alt="Liste des signatures relevées" width="1600" height="1034" loading="lazy">
                     <figcaption><span>08</span>Signatures relevées dans les actes</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-9" aria-roledescription="diapositive" aria-label="9 sur 11">
+                <figure class="presentation-slide" id="apercu-9" aria-roledescription="diapositive" aria-label="9 sur 25">
                     <img src="captures/lcnda-09.jpg" alt="Recherche des personnes présentes autour d’une commune entre deux dates" width="1600" height="1034" loading="lazy">
                     <figcaption><span>09</span>Recherche par proximité géographique et dans le temps</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-10" aria-roledescription="diapositive" aria-label="10 sur 11">
+                <figure class="presentation-slide" id="apercu-10" aria-roledescription="diapositive" aria-label="10 sur 25">
                     <img src="captures/lcnda-10.jpg" alt="Carte d’une battue avec les communes voisines colorées par niveau" width="1600" height="1034" loading="lazy">
                     <figcaption><span>10</span>Battue : les communes voisines, niveau par niveau</figcaption>
                 </figure>
-                <figure class="presentation-slide" id="apercu-11" aria-roledescription="diapositive" aria-label="11 sur 11">
+                <figure class="presentation-slide" id="apercu-11" aria-roledescription="diapositive" aria-label="11 sur 25">
                     <img src="captures/lcnda-11.jpg" alt="Réglages de personnalisation de l’apparence" width="1600" height="1034" loading="lazy">
                     <figcaption><span>11</span>Apparence : couleurs, polices, ordre des menus</figcaption>
                 </figure>
-                 <figure class="presentation-slide" id="apercu-12" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-12" aria-roledescription="diapositive" aria-label="12 sur 25">
                     <img src="captures/lcnda-12.jpg" alt="Création de bloc" width="1600" height="1034" loading="lazy">
                     <figcaption><span>12</span>Fiche d'un village</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-13" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-13" aria-roledescription="diapositive" aria-label="13 sur 25">
                     <img src="captures/lcnda-13.jpg" alt="Fiche d'un village" width="1600" height="1034" loading="lazy">
                     <figcaption><span>13</span>Création de bloc</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-14" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-14" aria-roledescription="diapositive" aria-label="14 sur 25">
                     <img src="captures/lcnda-14.jpg" alt="Création de bloc" width="1600" height="1034" loading="lazy">
                     <figcaption><span>14</span>Création de bloc</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-15" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-15" aria-roledescription="diapositive" aria-label="15 sur 25">
                     <img src="captures/lcnda-15.jpg" alt="retouche d'une photo" width="1600" height="1034" loading="lazy">
                     <figcaption><span>15</span>Retouche d'une photo</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-16" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-16" aria-roledescription="diapositive" aria-label="16 sur 25">
                     <img src="captures/lcnda-16.jpg" alt="Modifier un son" width="1600" height="1034" loading="lazy">
                     <figcaption><span>16</span>Modifier un son</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-17" aria-roledescription="diapositive" aria-label="11 sur 12">
-                    <img src="captures/lcnda-17.jpg" alt="Egg Easter: La vue Musée" width="1600" height="1034" loading="lazy">
+                <figure class="presentation-slide" id="apercu-17" aria-roledescription="diapositive" aria-label="17 sur 25">
+                    <img src="captures/lcnda-17.jpg" alt="Easter Egg : La vue Musée" width="1600" height="1034" loading="lazy">
                     <figcaption><span>17</span>La vue Musée</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-18" aria-roledescription="diapositive" aria-label="11 sur 12">
-                    <img src="captures/lcnda-18.jpg" alt="Egg Easter: Jeu de l'oie" width="1600" height="1034" loading="lazy">
-                    <figcaption><span>18</span>Egg Easter: Jeu de l'oie</figcaption>
+                <figure class="presentation-slide" id="apercu-18" aria-roledescription="diapositive" aria-label="18 sur 25">
+                    <img src="captures/lcnda-18.jpg" alt="Easter Egg : Jeu de l'oie" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>18</span>Easter Egg : Jeu de l'oie</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-19" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-19" aria-roledescription="diapositive" aria-label="19 sur 25">
                     <img src="captures/lcnda-19.jpg" alt="Atelier de recherche" width="1600" height="1034" loading="lazy">
                     <figcaption><span>19</span>Atelier de recherche</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-20" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-20" aria-roledescription="diapositive" aria-label="20 sur 25">
                     <img src="captures/lcnda-20.jpg" alt="recueils" width="1600" height="1034" loading="lazy">
                     <figcaption><span>20</span>recueils</figcaption>
                 </figure>
 
-                <figure class="presentation-slide" id="apercu-21" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-21" aria-roledescription="diapositive" aria-label="21 sur 25">
                     <img src="captures/lcnda-21.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
                     <figcaption><span>21</span>Monographie de commune</figcaption>
                 </figure>
                 
-                <figure class="presentation-slide" id="apercu-22" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-22" aria-roledescription="diapositive" aria-label="22 sur 25">
                     <img src="captures/lcnda-22.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
                     <figcaption><span>22</span>Une fiche "animaux"</figcaption>
                 </figure>
                 
-                <figure class="presentation-slide" id="apercu-23" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-23" aria-roledescription="diapositive" aria-label="23 sur 25">
                     <img src="captures/lcnda-23.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
                     <figcaption><span>23</span>Une fiche documentaire</figcaption>
                 </figure>
                
-                 <figure class="presentation-slide" id="apercu-24" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-24" aria-roledescription="diapositive" aria-label="24 sur 25">
                     <img src="captures/lcnda-24.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
                     <figcaption><span>24</span>Montage Vidéo</figcaption>
                 </figure>
                 
-                 <figure class="presentation-slide" id="apercu-25" aria-roledescription="diapositive" aria-label="11 sur 12">
+                <figure class="presentation-slide" id="apercu-25" aria-roledescription="diapositive" aria-label="25 sur 25">
                     <img src="captures/lcnda-25.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
                     <figcaption><span>25</span>l'outil tableau</figcaption>
                 </figure>
@@ -866,12 +866,12 @@
                 <span class="eyebrow">04 — EN DÉTAIL</span>
                 <h2>Chaque généalogie est unique, votre logiciel aussi.</h2>
             </header>
-            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, statistiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
+            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, graphiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
 
             <div class="presentation-about-grid">
                 <article class="presentation-about about-intro">
                     <h3>Un logiciel qui s’adapte à votre famille</h3>
-                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements et d’œuvres, profils, blocs, widgets, statistiques et onglets, et vous réglez couleurs, polices et affichage. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
+                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements et d’œuvres, profils, blocs, widgets, graphiques et onglets, et vous réglez couleurs, polices et affichage. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
                 </article>
                 <article class="presentation-about">
                     <h3>Un carnet de recherche, pas seulement un arbre</h3>
