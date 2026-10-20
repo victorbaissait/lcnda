@@ -4530,7 +4530,7 @@ dialog.kn-play-dlg::backdrop{background:#000}
 /* Retouche : les deux carrés de couleur, comme Photoshop (premier plan devant, arrière-plan derrière, ⤾ intervertir = X, petits carrés = D noir et blanc) */
 .h-rt-fgbg{position:relative;display:block;width:44px;height:48px;margin:8px auto 2px}
 .h-rt-fgbg label{position:absolute;width:26px;height:26px;border:1px solid #777;box-shadow:0 0 0 1px #fff inset;cursor:pointer;display:block}
-.h-rt-fgbg .h-rt-ccfg{left:2px;top:10px;z-index:2;background:var(--rt-fg,#d0021b)}
+.h-rt-fgbg .h-rt-ccfg{left:2px;top:10px;z-index:2;background:var(--rt-fg,#000000)}
 .h-rt-fgbg .h-rt-ccbg{left:16px;top:22px;z-index:1;background:var(--rt-bg,#fff)}
 .h-rt-fgbg input[type=color]{opacity:0;width:100%;height:100%;padding:0;border:0;cursor:pointer;display:block}
 .h-rt-fgbg .h-rt-ccswap{position:absolute;right:-2px;top:-4px;border:0;background:none;font-size:15px;line-height:1;padding:2px;cursor:pointer;color:inherit}
