@@ -896,6 +896,35 @@
         ['color-dodge', 'Densité couleur −'], ['color-burn', 'Densité couleur +'], ['hard-light', 'Lumière crue'], ['soft-light', 'Lumière tamisée'], ['difference', 'Différence'], ['exclusion', 'Exclusion'],
         ['hue', 'Teinte'], ['saturation', 'Saturation'], ['color', 'Couleur'], ['luminosity', 'Luminosité']];
     const rtBlend = n => RT_BLENDS.some(b => b[0] === n?.blend) ? n.blend : 'source-over';
+    /* Fond et effets d'un calque (comme Photoshop) : le « fond » dose seulement le contenu du calque, pas ses effets ;
+       les effets (ombre portée, lueur externe, contour, incrustation de couleur) sont tirés de la forme du calque.
+       Les tailles sont en points de l'image de travail ; k : échelle de la toile dessinée (1 à l'écran, plus en pleine taille). */
+    const RT_LFX = {shadow: {on: false, color: '#000000', opacity: 60, angle: 135, dist: 8, blur: 10}, glow: {on: false, color: '#fff2a8', opacity: 75, size: 14},
+        stroke: {on: false, color: '#ffffff', size: 4, pos: 'outside'}, overlay: {on: false, color: '#d0021b', opacity: 100}};
+    const rtLfx = n => Object.fromEntries(Object.entries(RT_LFX).map(([k, d]) => [k, {...d, ...(n?.lfx?.[k] || {})}]));
+    const rtHasStyle = n => (n?.fill ?? 1) < 1 || Object.values(rtLfx(n)).some(x => x.on);
+    function rtLayerStyle(src, n, k = 1) {
+        if (!rtHasStyle(n)) return src;
+        const W = src.width, H = src.height, fx = rtLfx(n), cv = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
+        const shape = (color, from = src) => { const c = cv(), g = c.getContext('2d'); g.drawImage(from, 0, 0); g.globalCompositeOperation = 'source-in'; g.fillStyle = color; g.fillRect(0, 0, W, H); return c; };
+        const out = cv(), o = out.getContext('2d');
+        if (fx.shadow.on) { const a = fx.shadow.angle * Math.PI / 180, d = fx.shadow.dist * k; o.save(); o.globalAlpha = fx.shadow.opacity / 100; if (fx.shadow.blur > 0) o.filter = `blur(${fx.shadow.blur * k}px)`; o.drawImage(shape(fx.shadow.color), -Math.cos(a) * d, Math.sin(a) * d); o.restore(); }
+        if (fx.glow.on) { o.save(); o.globalAlpha = fx.glow.opacity / 100; o.filter = `blur(${Math.max(1, fx.glow.size * k)}px)`; const sh = shape(fx.glow.color); o.drawImage(sh, 0, 0); o.drawImage(sh, 0, 0); o.restore(); }
+        let ring = null;
+        if (fx.stroke.on && fx.stroke.size > 0) { // le contour : la forme élargie (dans toutes les directions), moins la forme elle-même
+            const r = fx.stroke.size * k, sh = shape(fx.stroke.color), c = cv(), g = c.getContext('2d'), steps = Math.max(12, Math.min(48, Math.round(r * 4)));
+            const ins = fx.stroke.pos === 'inside', mid = fx.stroke.pos === 'center', rr = mid ? r / 2 : r;
+            if (ins) { g.drawImage(sh, 0, 0); g.globalCompositeOperation = 'destination-out'; const inv = cv(), ig = inv.getContext('2d'); ig.fillStyle = '#000'; ig.fillRect(0, 0, W, H); ig.globalCompositeOperation = 'destination-out'; ig.drawImage(src, 0, 0); for (let i = 0; i < steps; i++) { const t = i / steps * Math.PI * 2; g.drawImage(inv, Math.cos(t) * rr, Math.sin(t) * rr); } }
+            else { for (let i = 0; i < steps; i++) { const t = i / steps * Math.PI * 2; for (const f of [1, 0.5]) g.drawImage(sh, Math.cos(t) * rr * f, Math.sin(t) * rr * f); } if (!mid) { g.globalCompositeOperation = 'destination-out'; g.drawImage(src, 0, 0); } }
+            ring = c;
+        }
+        // le contenu, dosé par le fond (et recouvert de sa couleur d'incrustation)
+        let body = src; if (fx.overlay.on) { const c = cv(), g = c.getContext('2d'); g.drawImage(src, 0, 0); g.globalAlpha = fx.overlay.opacity / 100; g.globalCompositeOperation = 'source-atop'; g.fillStyle = fx.overlay.color; g.fillRect(0, 0, W, H); body = c; }
+        if (ring && fx.stroke.pos !== 'inside') o.drawImage(ring, 0, 0);
+        o.save(); o.globalAlpha = Math.max(0, Math.min(1, n.fill ?? 1)); o.drawImage(body, 0, 0); o.restore();
+        if (ring && fx.stroke.pos === 'inside') o.drawImage(ring, 0, 0);
+        return out;
+    }
     /** Un calque (ou la photo) avec son masque appliqué */
     function rtMasked(src, maskOps, masks) { if (!maskOps) return src; const W = src.width, H = src.height, m = rtRenderMask(maskOps, W, H, masks), t = document.createElement('canvas'); t.width = W; t.height = H; const g = t.getContext('2d'); g.drawImage(src, 0, 0); g.globalCompositeOperation = 'destination-in'; g.drawImage(m, 0, 0); return t; }
     /** Sélection automatique (baguette magique) : les points de teinte proche, voisins (contigu) ou partout */
@@ -1600,6 +1629,7 @@
                 let own = typeOf(n) === 'group' ? renderStack(n.children, null, R) : R.layer(n), j = i + 1;
                 while (j < arr.length && typeOf(arr[j]) === 'adjust' && arr[j].clip) { if (arr[j].visible) own = applyAdjust(own, arr[j], R.W, R.H); j++; }
                 own = rtMasked(own, R.mask(n), masks);
+                if (typeOf(n) !== 'group' && rtHasStyle(n)) own = rtLayerStyle(own, n, R.W / pw); // fond et effets
                 const g = acc.getContext('2d'); g.globalAlpha = n.opacity ?? 1; g.globalCompositeOperation = rtBlend(n); g.drawImage(own, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
                 i = j;
             }
@@ -1720,7 +1750,7 @@
                 ${maskBtns(n.id, n.mask)}
                 ${t !== 'adjust' ? `<button type="button" class="h-rt-eye" data-rt-llock title="${n.locked ? 'Déverrouiller' : 'Verrouiller'}">${n.locked ? '🔒' : '🔓'}</button>` : ''}
                 <span class="h-rt-lmoves"><button type="button" class="icon-button small" data-rt-lmove="1" title="Monter">↑</button><button type="button" class="icon-button small" data-rt-lmove="-1" title="Descendre">↓</button>${t !== 'group' ? '<button type="button" class="icon-button small" data-rt-ldup title="Dupliquer">⧉</button>' : ''}<button type="button" class="icon-button small" data-rt-ldel title="${t === 'group' ? 'Supprimer le groupe (ce qu’il contient reste)' : t === 'photo' ? 'Retirer la photo des calques (⌘Z pour la remettre)' : 'Supprimer'}">✕</button></span>
-                <div class="h-rt-lmore">${t !== 'adjust' ? `<label class="h-rt-lblend" title="Mode de fusion : comment le calque se mélange à ce qui est dessous">Fusion <select data-rt-lblend>${RT_BLENDS.map(([v, l]) => `<option value="${v}" ${rtBlend(n) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}<label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round((n.opacity ?? 1) * 100)}" data-rt-lopac></label>${into}</div>
+                <div class="h-rt-lmore">${t !== 'adjust' ? `<label class="h-rt-lblend" title="Mode de fusion : comment le calque se mélange à ce qui est dessous">Fusion <select data-rt-lblend>${RT_BLENDS.map(([v, l]) => `<option value="${v}" ${rtBlend(n) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}<label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round((n.opacity ?? 1) * 100)}" data-rt-lopac></label>${t !== 'adjust' && t !== 'group' ? `<label class="h-rt-lopac" title="Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets.">Fond <input type="range" min="0" max="100" value="${Math.round((n.fill ?? 1) * 100)}" data-rt-lfill></label><button type="button" class="h-rt-lfxbtn${Object.values(rtLfx(n)).some(x => x.on) ? ' is-on' : ''}" data-rt-lstyle title="Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur">fx</button>` : ''}${into}</div>
                 ${t === 'adjust' ? `<div class="h-rt-adjrow"><label class="checkbox-line" title="Comme un masque d’écrêtage de Photoshop"><input type="checkbox" data-rt-lclip ${n.clip ? 'checked' : ''}> <span>seulement sur ${(() => { const i = loc.arr.indexOf(n), below = loc.arr.slice(0, i).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)); return below ? `« ${esc(below.name)} »` : 'ce qui est juste dessous'; })()}</span></label><button type="button" class="link-button" data-rt-ladj>régler…</button></div><small class="muted">${n.clip ? 'ne touche que l’élément juste dessous' : loc.parent ? `touche tout ce qui est dessous dans « ${esc(loc.parent.name)} »` : 'touche tout ce qui est dessous'}</small>${(n.st?.filters?.chain || []).length ? `<div class="h-rt-lfx"><span class="muted">✨ Filtres :</span>${n.st.filters.chain.map((f, i) => `<button type="button" class="h-rt-lfxb" data-rt-lfxedit="${i}" title="Changer les réglages de ce filtre">${esc(RT_FX[f.t]?.[1] || f.t)} <b>régler…</b></button>`).join('')}</div>` : ''}`
                 : t === 'photo' ? `<small class="muted">réglages, ${st.strokes.length} correction${st.strokes.length > 1 ? 's' : ''}</small>`
                 : t === 'group' ? `<small class="muted">${n.children.length} élément${n.children.length > 1 ? 's' : ''}</small>` : `<small class="muted">${n.ops.length} élément${n.ops.length > 1 ? 's' : ''}</small>${n.ops.length ? '<button type="button" class="link-button" data-rt-lclear>vider</button>' : ''}`}
@@ -1762,6 +1792,7 @@
             if (e.target.closest('[data-rt-minv]')) { l.mask = [...l.mask, {type: 'invert'}]; refreshLayers(); draw(); commit(`Masque de ${name} inversé`); return; }
             if (e.target.closest('[data-rt-mdel]')) { l.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); refreshLayers(); draw(); commit(`Masque de ${name} retiré`); return; }
             const loc = locate(id);
+            if (e.target.closest('[data-rt-lstyle]')) { activeLayer = id === 'photo' ? '' : id; refreshLayers(); return styleDialog(id); }
             const lfx = e.target.closest('[data-rt-lfxedit]'); if (lfx) { const i = Number(lfx.dataset.rtLfxedit), f = l.st?.filters?.chain?.[i]; if (!f) return; activeLayer = id; refreshLayers(); syncControls(); return fxDialog(f.t, {node: id, i}); }
             if (e.target.closest('[data-rt-ladj]')) { activeLayer = id; refreshLayers(); syncControls(); const onlyFx = (l.st?.filters?.chain || []).length && JSON.stringify({...l.st, filters: {}}) === JSON.stringify({...adjDefault(), filters: {}}); showTab(onlyFx ? 'filters' : 'adjust'); return; }
             if (e.target.closest('[data-rt-llock]')) { l.locked = !l.locked; refreshLayers(); commit(`${l.name} ${l.locked ? 'verrouillé' : 'déverrouillé'}`); return; }
@@ -1783,10 +1814,11 @@
             if (!e.target.closest('input,button,select,label')) { activeLayer = l.id === 'photo' ? '' : l.id; if (maskEdit && maskEdit !== l.id) { maskEdit = ''; setMode(mode); } refreshLayers(); syncControls(); if (mode === 'brush' && brushType === 'eraser' && l.id === 'photo') pickTool('eraser'); } // gomme sur la photo : par son masque
         });
         paneLayers.addEventListener('focusin', e => { const li = e.target.closest('[data-rt-l]'); if (li && li.dataset.rtL !== 'photo' && activeLayer !== li.dataset.rtL && e.target.matches('[data-rt-lname]')) { activeLayer = li.dataset.rtL; paneLayers.querySelectorAll('[data-rt-l]').forEach(x => x.classList.toggle('is-active', x === li)); syncControls(); } });
-        paneLayers.addEventListener('input', e => { const l = target(e.target.closest('[data-rt-l]')?.dataset.rtL); if (!l) return; if (e.target.matches('[data-rt-lopac]')) { l.opacity = Number(e.target.value) / 100; draw(); } if (e.target.matches('[data-rt-lname]')) { l.name = e.target.value.slice(0, 60) || 'Calque'; syncTarget(); } });
+        paneLayers.addEventListener('input', e => { const l = target(e.target.closest('[data-rt-l]')?.dataset.rtL); if (!l) return; if (e.target.matches('[data-rt-lopac]')) { l.opacity = Number(e.target.value) / 100; draw(); } if (e.target.matches('[data-rt-lfill]')) { l.fill = Number(e.target.value) / 100; if (l.fill >= 1) delete l.fill; draw(); } if (e.target.matches('[data-rt-lname]')) { l.name = e.target.value.slice(0, 60) || 'Calque'; syncTarget(); } });
         paneLayers.addEventListener('change', e => {
             const id = e.target.closest('[data-rt-l]')?.dataset.rtL, l = target(id); if (!l) return;
             if (e.target.matches('[data-rt-lopac]')) commit(`Opacité de ${l.name} : ${Math.round(l.opacity * 100)} %`);
+            if (e.target.matches('[data-rt-lfill]')) commit(`Fond de ${l.name} : ${Math.round((l.fill ?? 1) * 100)} %`);
             if (e.target.matches('[data-rt-lname]')) { refreshLayers(); commit(`Renommé « ${l.name} »`); }
             if (e.target.matches('[data-rt-lblend]')) { l.blend = e.target.value === 'source-over' ? undefined : e.target.value; draw(); commit(`Fusion de ${l.name} : ${e.target.selectedOptions[0].textContent}`); }
             if (e.target.matches('[data-rt-lclip]')) { l.clip = e.target.checked; refreshLayers(); draw(); commit(`« ${l.name} » ${l.clip ? 'seulement sur l’élément dessous' : 'sur tout ce qui est dessous'}`); }
@@ -2398,6 +2430,26 @@
         const exportBA = () => { readyFull(); return ext.rtBeforeAfterExport({title: docTitle(), mediaId: item.id || 0, pos: curtain?.pos ?? 0.5, vertical: curtain?.vertical !== false, getBefore: () => renderBefore(), getAfter: () => renderFull()}); };
         const tick = () => new Promise(r => setTimeout(r, 30));
         const panel = (cls, html) => { dlg.querySelector('.h-rt-fxpanel')?.remove(); const pn = document.createElement('div'); pn.className = `h-rt-fxpanel h-rt-panel2 ${cls}`; pn.innerHTML = html; $('.h-rt-left').appendChild(pn); return pn; };
+        /** ✨ fx : les effets d'un calque (comme le « Style de calque » de Photoshop), avec son fond ; tout se voit en direct, Annuler remet comme avant */
+        function styleDialog(id) {
+            const l = target(id); if (!l) return; const before = JSON.stringify({lfx: l.lfx || null, fill: l.fill ?? null}), fx = rtLfx(l);
+            const sl = (g, k, label, mn, mx, unit = '') => `<label class="h-rt-slider"><span>${label} <output>${fx[g][k]}${unit}</output></span><input type="range" min="${mn}" max="${mx}" value="${fx[g][k]}" data-ls="${g}.${k}"></label>`;
+            const col = (g, label = 'Couleur') => `<label class="h-rt-lscol">${label} <input type="color" value="${fx[g].color}" data-ls="${g}.color"></label>`;
+            const sec = (g, title, body) => `<details class="h-rt-lsec" ${fx[g].on ? 'open' : ''}><summary><label class="checkbox-line" onclick="event.stopPropagation()"><input type="checkbox" data-ls="${g}.on" ${fx[g].on ? 'checked' : ''}> <b>${title}</b></label></summary>${body}</details>`;
+            const pn = panel('h-rt-lstyle', `<header><b>fx Effets du calque</b><small>« ${esc(l.name)} » · comme le style de calque de Photoshop</small></header>
+                <label class="h-rt-slider"><span>Fond (le contenu seulement, pas les effets) <output>${Math.round((l.fill ?? 1) * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round((l.fill ?? 1) * 100)}" data-ls="fill"></label>
+                ${sec('shadow', 'Ombre portée', col('shadow') + sl('shadow', 'opacity', 'Opacité', 0, 100, ' %') + sl('shadow', 'angle', 'Angle', 0, 360, '°') + sl('shadow', 'dist', 'Distance', 0, 120, ' px') + sl('shadow', 'blur', 'Flou', 0, 80, ' px'))}
+                ${sec('glow', 'Lueur externe', col('glow') + sl('glow', 'opacity', 'Opacité', 0, 100, ' %') + sl('glow', 'size', 'Taille', 1, 120, ' px'))}
+                ${sec('stroke', 'Contour', col('stroke') + sl('stroke', 'size', 'Épaisseur', 1, 60, ' px') + `<label class="h-rt-lscol">Position <select data-ls="stroke.pos">${[['outside', 'à l’extérieur'], ['center', 'au milieu'], ['inside', 'à l’intérieur']].map(([v, t]) => `<option value="${v}" ${fx.stroke.pos === v ? 'selected' : ''}>${t}</option>`).join('')}</select></label>`)}
+                ${sec('overlay', 'Incrustation de couleur', col('overlay') + sl('overlay', 'opacity', 'Opacité', 0, 100, ' %'))}
+                <div class="h-rt-fxbtns"><button type="button" class="button small secondary" data-ls-reset>Tout enlever</button><span class="spacer"></span><button type="button" class="button small secondary" data-ls-cancel>Annuler</button><button type="button" class="button small" data-ls-ok>OK</button></div>`);
+            const set = (path, v) => { if (path === 'fill') { l.fill = v / 100; if (l.fill >= 1) delete l.fill; return; } const [g, k] = path.split('.'); l.lfx = l.lfx || {}; l.lfx[g] = {...(l.lfx[g] || {}), [k]: v}; if (k !== 'on' && !l.lfx[g].on && pn.querySelector(`[data-ls="${g}.on"]`)) { l.lfx[g].on = true; pn.querySelector(`[data-ls="${g}.on"]`).checked = true; } };
+            pn.addEventListener('input', e => { const el = e.target.closest('[data-ls]'); if (!el) return; const v = el.type === 'checkbox' ? el.checked : el.type === 'range' ? Number(el.value) : el.value; set(el.dataset.ls, v); const out = el.parentElement.querySelector('output'); if (out) out.textContent = el.value + (out.textContent.match(/[^\d.-]+$/)?.[0] || ''); draw(); });
+            pn.addEventListener('change', e => { if (e.target.matches('select[data-ls]')) { set(e.target.dataset.ls, e.target.value); draw(); } });
+            pn.querySelector('[data-ls-reset]').addEventListener('click', () => { delete l.lfx; delete l.fill; pn.remove(); refreshLayers(); draw(); commit(`Effets de ${l.name} enlevés`); });
+            pn.querySelector('[data-ls-cancel]').addEventListener('click', () => { const b = JSON.parse(before); if (b.lfx) l.lfx = b.lfx; else delete l.lfx; if (b.fill !== null) l.fill = b.fill; else delete l.fill; pn.remove(); refreshLayers(); draw(); });
+            pn.querySelector('[data-ls-ok]').addEventListener('click', () => { pn.remove(); refreshLayers(); draw(); if (JSON.stringify({lfx: l.lfx || null, fill: l.fill ?? null}) !== before) commit(`Effets de ${l.name}`); });
+        }
 
         /* 🔍 Plis et rayures repérés tout seuls : proposés en rouge, puis comblés d'après leurs alentours (une étape d'historique) */
         async function creasePanel() {

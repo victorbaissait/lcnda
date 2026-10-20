@@ -4549,3 +4549,10 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-rt-lfxb b{color:#2a62c9;font-weight:600}
 .h-rt-lfxb:hover{background:#e3edff}
 :root[data-theme="dark"] .h-rt-lfxb{background:#1f2a3a;border-color:#3a4b66}:root[data-theme="dark"] .h-rt-lfxb b{color:#8fb6ff}
+/* Retouche : bouton « fx » (effets du calque) et panneau des effets */
+.h-rt-lfxbtn{border:1px solid #9aa4b2;background:#fff;border-radius:6px;font:italic 700 12px Georgia,serif;padding:2px 7px;cursor:pointer;color:#333}
+.h-rt-lfxbtn.is-on{background:#2a62c9;border-color:#2a62c9;color:#fff}
+.h-rt-lsec{border:1px solid #dde2ea;border-radius:6px;padding:4px 8px;margin:6px 0}
+.h-rt-lsec summary{cursor:pointer;list-style:none}.h-rt-lsec summary::-webkit-details-marker{display:none}
+.h-rt-lscol{display:flex;gap:8px;align-items:center;font-size:12.5px;margin:4px 0}
+:root[data-theme="dark"] .h-rt-lfxbtn{background:#262626;border-color:#555;color:#ddd}:root[data-theme="dark"] .h-rt-lsec{border-color:#3a3a3a}
