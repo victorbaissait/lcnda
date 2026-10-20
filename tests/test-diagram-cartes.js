@@ -209,6 +209,37 @@ step('communes : 35 000 dessinées en temps borné, traits fins, limites des dé
     assert.match(z35, /<title>Vitré \(35360\) : 3/); assert.match(z35, />Vitré<\/text>/, 'étiquette de la commune qui a un chiffre'); assert.doesNotMatch(z35, /Guadeloupe|data-geo-inset/);
     for (const m of ['be', 'ch', 'lu']) { const s = R.svg(await k.resolve({ kind: 'choropleth', o: { map: m, level: 'com' }, rows: [{ label: DC.loaded(m + '-communes').zones[3].id, s0: 1 }] }), 390); assert.doesNotMatch(s, /NaN|Infinity|data-geo-wait/, m); assert.match(s, /Fond : /); }
 });
+step('champ « Zone » : propositions mélangées (zones de chaque niveau, villes), valeur sans ambiguïté, ville comptée dans sa zone', async () => {
+    for (const id of ['fr-departements', 'fr-regions', 'fr-communes', 'be-provinces', 'be-regions', 'be-communes', 'monde-110m', 'continents']) await DC.load(id);
+    const sp = (o, rows = []) => ({ kind: 'choropleth', o: { map: 'fr', level: 'dep', ...o }, rows: rows.map(label => ({ label, s0: 1 })) });
+    const mo = DC.zoneSuggest(sp({}), 'Montreuil');
+    assert.deepEqual(J(mo.slice(0, 3).map(x => x.value)), ['Montreuil (28)', 'Montreuil (85)', 'Montreuil (93)']); assert.ok(mo.every(x => x.icon === '🏘' && x.kind === 'ville' && x.remember));
+    assert.match(mo[2].meta, /^Seine-Saint-Denis · Île-de-France/); assert.ok(mo.some(x => x.value === 'Montreuil-sur-Mer' && /aussi « Montreuil »/.test(x.meta)));
+    const pa = DC.zoneSuggest(sp({}), 'Paris'); assert.equal(pa[0].kind, 'département'); assert.equal(pa[0].icon, '🏛'); assert.equal(pa[0].remember, false); assert.ok(pa.some(x => x.kind === 'ville'));
+    assert.equal(DC.zoneSuggest(sp({}), '35')[0].value, 'Ille-et-Vilaine'); assert.equal(DC.zoneSuggest(sp({}), 'Saint-Martin 32')[0].value, 'Saint-Martin (32)');
+    const br = DC.zoneSuggest(sp({}), 'Bretagne')[0]; assert.equal(br.kind, 'région'); assert.ok(br.coarse && !br.remember, 'région : plus large que les départements');
+    assert.equal(DC.zoneSuggest(sp({ map: 'monde', level: 'pays' }), 'Afr')[0].icon, '🌍'); assert.equal(DC.zoneSuggest(sp({ map: 'be', level: 'prov' }), 'Anvers')[1].value, 'Anvers');
+    assert.deepEqual(J(DC.zoneSuggest(sp({}), TRAP)), []);
+    // « Montreuil » seul n'est plus pris pour Montreuil-sur-Mer : homonymes
+    assert.equal(DC.matchCommune(DC.loaded('fr-communes'), 'Montreuil').why, 'homonymes'); assert.equal(DC.matchCommune(DC.loaded('fr-communes'), 'Montreuil-sur-Mer').z.id, '62588');
+    // une ville choisie : comptée dans son département, sa région, ou elle-même ; « (93) » n'est pas la région n°93
+    const s = sp({}, ['Montreuil (93)']); s.rows[0].s0 = 5; DC.rememberPick(s, mo[2].value, mo[2]); assert.equal(s.places['montreuil 93'].k, 'com');
+    for (const [lv, base, want] of [['dep', 'fr-departements', 'Seine-Saint-Denis'], ['reg', 'fr-regions', 'Île-de-France'], ['com', 'fr-communes', 'Montreuil']]) {
+        const { byZone, missing } = DC.joinRows({ ...s, o: { ...s.o, level: lv } }, DC.loaded(base)); assert.deepEqual(J([...byZone].map(([z, e]) => [z.name, e.v])), [[want, 5]], lv); assert.deepEqual(J(missing), []); }
+    assert.equal(DC.matchZone(DC.loaded('fr-regions'), 'Montreuil (93)'), null);
+    // l'état de chaque ligne : pastille pour homonymes, autre niveau, inconnu ; une ville tapée à la main est retenue
+    const st = (o, v) => { const r = DC.rowStatus(sp(o, [v]), v); return r.ok ? 'ok' : r.auto ? 'auto:' + r.auto.z.name : r.why; };
+    assert.equal(st({}, 'Montreuil'), 'homonymes'); assert.match(DC.rowStatus(sp({}, ['Montreuil']), 'Montreuil').msg, /Plusieurs villes s’appellent Montreuil \(3\) : choisis-en une/);
+    assert.equal(st({}, 'Rennes'), 'auto:Rennes'); assert.equal(st({}, 'Bretagne'), 'niveau'); assert.equal(st({}, 'Nulle part'), 'inconnu'); assert.equal(st({}, '35'), 'ok');
+    assert.equal(st({ level: 'reg' }, '35'), 'auto:Ille-et-Vilaine'); assert.equal(st({ level: 'com' }, 'Montreuil (93)'), 'ok'); assert.equal(st({ level: 'com' }, 'Ille-et-Vilaine'), 'niveau');
+    const { missing } = DC.joinRows(sp({}, ['Montreuil']), DC.loaded('fr-departements')); assert.match(missing[0], /plusieurs villes de ce nom/);
+    // « Quoi » : quatre groupes, les nouvelles sources ; clés « tenu à jour » : anciennes toujours lues, sorte d'événement en plus
+    assert.deepEqual(J(DC.SRC_GROUPS.map(g => g[0])), ['Événements', 'Personnes', 'Valeurs', 'Autres']);
+    for (const k of ['baptisms', 'burials', 'residences', 'census', 'occupations', 'departures', 'arrivals', 'people', 'surnames', 'age_death', 'sourced', 'type']) assert.ok(DC.SRC_GROUPS.some(g => g[1].some(x => x[0] === k)), k);
+    assert.deepEqual(J(DC.parseLive('geo:births:1:1700:')), { what: 'births', ancestors: 1, from: 1700 }); assert.deepEqual(J(DC.parseLive('geo:type:0::1900:12')), { what: 'type', to: 1900, type: 12 });
+    assert.equal(DC.liveKey({ what: 'type', type: 12, from: 1800 }), 'geo:type:0:1800::12'); assert.equal(DC.liveKey({ what: 'age_death' }), 'geo:age_death:0::');
+    assert.equal(DC.parseLive('geo:type:0::'), null); assert.equal(DC.parseLive('geo:births:0:::3'), null);
+});
 step('sans fond chargé : un dessin d’attente, refait tout seul ; chiffres tenus à jour', () => {
     const s = R.svg({ kind: 'choropleth', o: { map: 'zz' } }, 600); assert.doesNotMatch(s, /NaN/);
     assert.deepEqual(J(DC.parseLive(DC.liveKey({ what: 'births', ancestors: 1, from: 1700 }))), { what: 'births', ancestors: 1, from: 1700 });
@@ -266,6 +297,11 @@ echo 'ok';`;
             assert.ok(b.places.some(x => x.name.startsWith('<img')), 'nom piégé renvoyé tel quel (échappé au dessin)');
             const bd = await get('what=birth_death'); assert.ok(bd.pairs.length >= 5); assert.ok(bd.pairs.every(([a, c, n]) => a !== c && n > 0));
             const anc = await get('what=births&ancestors=1'); assert.equal(anc.places.reduce((s, x) => s + x.n, 0), 5);
+            const age = await get('what=age_death'); assert.equal(age.avg, true); assert.equal(age.unit, 'ans'); assert.equal(age.places.find(x => x.name === 'Paris')?.n, 60); assert.ok(age.places.every(x => x.w > 0));
+            const dep = await get('what=departures&ancestors=1'); assert.deepEqual(dep.places.map(x => x.name + ':' + x.n).sort(), ['Rennes:1', 'Vieux bourg:1', 'Vitré:1']);
+            const ppl = await get('what=people'); assert.equal(ppl.distinct, true); assert.ok(ppl.places.every(x => Array.isArray(x.k) && x.k.length === x.n));
+            const ty = await get('list=types'); assert.ok(ty.types.length > 20 && ty.types[0].usage_count > 0);
+            const bt = await get('what=type&type=' + ty.types.find(x => x.gedcom_tag === 'MARR').id); assert.equal(bt.places.length, 2); assert.equal(bt.type.label, 'Mariage');
             const gen = await get('what=generation&ancestors=1'); assert.equal(gen.pairs.reduce((s, x) => s + x[2], 0), 4);
             const per = await get('what=births&from=1950&to=1960'); assert.equal(per.places.reduce((s, x) => s + x.n, 0), 2);
             assert.equal((await get('what=../../etc')).what, 'births'); assert.equal((await get('what=marriages')).places.length, 2);
@@ -360,6 +396,48 @@ echo 'ok';`;
                     await closeAll(p);
                 });
             }
+            await t(`choroplèthe : champ « Zone » à propositions, « Montreuil », pastille, sources groupées (${label})`, async () => {
+                await closeAll(p); await p.evaluate(() => { window.__ed = window.LCNDA_EXT.openDiagramEditor(null, { kind: 'choropleth' }); });
+                await p.waitForSelector('dialog.h-dg-dlg[open] [data-dg-preview] svg [data-geo-map]');
+                await p.click('[data-dg-add="0"]');
+                const inp = 'dialog.h-dg-dlg[open] [data-grid="0"] tbody tr:last-child input[data-dgm-zone]';
+                assert.equal(await p.$eval(inp, e => e.getAttribute('role')), 'combobox');
+                await p.click(inp); await p.keyboard.type('Montreuil', { delay: 20 });
+                await p.waitForFunction(() => [...document.querySelectorAll('.dgm-ac .pk-item')].some(e => /Montreuil \(93\)/.test(e.textContent)) && !document.querySelector('.dgm-ac [data-dgm-acload]'), null, { timeout: 30000 });
+                assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'pas de défilement de côté');
+                await shot(p, `zone-montreuil-${tag}`);
+                const idx = await p.$$eval('.dgm-ac .pk-item', els => els.findIndex(e => /Montreuil \(93\)/.test(e.textContent)));
+                for (let i = 0; i < idx; i++) await p.keyboard.press('ArrowDown');
+                await p.keyboard.press('Enter'); await p.waitForTimeout(150);
+                assert.equal(await p.$eval(inp, e => e.value), 'Montreuil (93)'); assert.ok(!await p.$('.dgm-ac'), 'liste fermée');
+                assert.ok(await p.evaluate(() => document.activeElement.classList.contains('is-num')), 'la case du chiffre ensuite');
+                await p.keyboard.type('7');
+                await p.waitForFunction(() => /Seine-Saint-Denis \(93\) : 7/.test(document.querySelector('[data-dg-preview]').innerHTML), null, { timeout: 8000 });
+                await p.waitForFunction(() => !document.querySelector('[data-dgm-zhint]')?.hidden, null, { timeout: 5000 });
+                assert.match(await p.$eval('[data-dgm-zhint]', e => e.textContent), /1 ville compte dans son département/);
+                // tapé à la main, sans choisir : pastille orange ; Échap ferme la liste, pas l'éditeur
+                await p.click('[data-dg-add="0"]'); await p.click(inp); await p.keyboard.type('Montreuil'); await p.waitForSelector('.dgm-ac .pk-item');
+                await p.keyboard.press('Escape'); await p.waitForTimeout(100); assert.ok(await p.$('dialog.h-dg-dlg[open]'), 'éditeur toujours ouvert'); assert.ok(!await p.$('.dgm-ac'));
+                await p.keyboard.press('Tab');
+                const dot = 'dialog.h-dg-dlg[open] [data-grid="0"] tbody tr:last-child [data-dgm-dot]:not([hidden])';
+                await p.waitForSelector(dot, { timeout: 5000 }); assert.match(await p.$eval(dot, e => e.title), /Plusieurs villes s’appellent Montreuil/);
+                await shot(p, `zone-pastille-${tag}`);
+                await p.click(dot); await p.waitForSelector('.dgm-ac .pk-item'); await p.click('.dgm-ac .pk-item'); await p.waitForTimeout(300);
+                assert.ok(!await p.$(dot), 'pastille partie après le choix');
+                // « Depuis l'app » : quatre groupes, une sorte d'événement au choix, âge moyen en années
+                await p.click('[data-dg-tab="app"]'); await p.waitForSelector('[data-dgm-what]');
+                assert.deepEqual(await p.$$eval('[data-dgm-what] optgroup', g => g.map(x => x.label)), ['Événements', 'Personnes', 'Valeurs', 'Autres']);
+                await p.selectOption('[data-dgm-what]', 'type'); assert.ok(await p.isVisible('[data-dgm-type]'));
+                await p.waitForFunction(() => document.querySelectorAll('[data-dgm-type] option').length > 20 && / Mariage \(famille\) — 2/.test(document.querySelector('[data-dgm-type]').textContent), null, { timeout: 5000 });
+                await p.selectOption('[data-dgm-type]', { label: await p.$$eval('[data-dgm-type] option', o => o.find(x => / Mariage \(famille\) — 2/.test(x.textContent)).textContent) });
+                await p.check('[data-dgm-live]'); await p.click('[data-dgm-go]');
+                await p.waitForFunction(() => /^✓/.test(document.querySelector('[data-dgm-msg]')?.textContent || ''), null, { timeout: 8000 });
+                await p.selectOption('[data-dgm-what]', 'age_death'); assert.ok(!await p.isVisible('[data-dgm-type]')); await p.click('[data-dgm-go]');
+                await p.waitForFunction(() => /âge moyen/.test(document.querySelector('[data-dgm-msg]')?.textContent || ''), null, { timeout: 8000 });
+                await p.waitForFunction(() => /: \d+(,\d)? ans/.test(document.querySelector('[data-dg-preview]').innerHTML), null, { timeout: 8000 });
+                await shot(p, `depuis-app-age-${tag}`);
+                await closeAll(p);
+            });
             await t(`choroplèthe : un tableau collé (codes INSEE, région, pays) (${label})`, async () => {
                 await closeAll(p); await p.evaluate(() => { window.__ed = window.LCNDA_EXT.openDiagramEditor(null, { kind: 'choropleth' }); });
                 await p.waitForSelector('dialog.h-dg-dlg[open] [data-dg-csv]', { state: 'attached' });

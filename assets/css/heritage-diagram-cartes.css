@@ -19,8 +19,27 @@ svg .dgm-f:hover path{stroke-opacity:1}
 .dgm-places li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:6px 8px;border:1px solid #d6d6d6;border-radius:8px;background:#fafafa}
 .dgm-pl-n{font-weight:600;overflow-wrap:anywhere}
 .dgm-pl-pk{flex:1 1 220px;min-width:0}
+/* le champ « Zone » du tableau : liste de propositions (classes du menu de choix, picker.css), pastille orange */
+.dgm-zcell{position:relative}
+.h-dg-grid td.dgm-zcell input[data-dgm-zone]{padding-right:24px;min-width:150px}
+.h-dg-grid td.dgm-zcell input.dgm-zbad{border-bottom:1px dashed #e08600}
+.dgm-zdot{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:13px;height:13px;min-width:0;min-height:0;padding:0;margin:0;border:2px solid #ffffff;border-radius:50%;background:#f08c00;box-shadow:0 0 0 1px #c46d00;cursor:pointer}
+.dgm-zdot:hover,.dgm-zdot:focus-visible{background:#d97800;outline:2px solid #f08c0066;outline-offset:1px}
+.dgm-zdot[hidden]{display:none}
+.dgm-zhint{margin:4px 0 6px;padding:6px 10px;border-radius:8px;background:#fff6e5;border:1px solid #f3d29a;font-size:13px}
+.dgm-zhint[hidden]{display:none}
+.dgm-ac{position:fixed;z-index:1000;font-size:14px}
+.dgm-ac .pk-list{margin-top:0}
+.dgm-ac .pk-item{padding:7px 10px;gap:10px}
+.dgm-ac .pk-ic.dgm-ac-ic{width:30px;height:30px;font-size:16px;border-radius:8px;border-width:1.5px}
+.dgm-ac .pk-name,.dgm-ac .pk-meta{display:block}
+.dgm-ac .pk-name small{font-weight:400;color:#666}
+.dgm-ac .pk-hint .link-button,.dgm-zhint .link-button{font-size:inherit;padding:0;color:#055dff;text-decoration:underline;font-weight:600;background:none;border:0;cursor:pointer}
 @media (max-width:600px){.dgm-bar-h{display:none}.dgm-bar{gap:4px}}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .dgm-bar{background:rgba(33,33,33,0.93);border-bottom:1px solid #4c4c4c}
 :root[data-theme="dark"] .dgm-places li{border:1px solid #4c4c4c;background:#232323}
+:root[data-theme="dark"] .dgm-zdot{border:2px solid #4c4c4c}
+:root[data-theme="dark"] .dgm-zhint{background:#3c2e12;border:1px solid #6b542e}
+:root[data-theme="dark"] .dgm-ac .pk-name small{color:#c7c7c7}
 /* ═════ fin du mode sombre automatique ═════ */
