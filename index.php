@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=233">
     <link rel="stylesheet" href="assets/css/picker.css?v=5">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=227">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=228">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -1226,7 +1226,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-list.js?v=1" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=10" defer></script>
 <script src="assets/js/heritage-keynote.js?v=9" defer></script>
-<script src="assets/js/heritage-house.js?v=20" defer></script>
+<script src="assets/js/heritage-house.js?v=21" defer></script>
 <script src="assets/js/heritage-house3d.js?v=10" defer></script>
 <script src="assets/js/heritage-house-lib.js?v=6" defer></script>
 <script src="assets/js/heritage-house-more.js?v=2" defer></script>

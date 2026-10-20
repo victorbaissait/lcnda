@@ -4738,3 +4738,10 @@ canvas.is-picking{cursor:crosshair}
 .h-rt-paligns{gap:6px!important}
 .h-rt-paligns button{padding:8px 0;min-width:0}
 :root[data-theme="dark"] .h-rt-chgrid{border-color:#3a3f46}
+/* maison 3D : onglets du panneau comme la retouche et le dessin (icône + nom, icônes seules si étroit ; ordre et affichage dans ⚙️ Personnaliser) */
+.segmented.h-hs-tabs:has(> button){grid-template-columns:repeat(auto-fit,minmax(38px,1fr));container-type:inline-size}
+.h-hs-tabs>button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;padding:6px 2px!important;line-height:1.15}
+.h-hs-tabs>button[hidden],.h-hs-tabs>button.is-tb-off{display:none!important}
+.h-hs-tabs .h-hs-ti{font-size:15px;line-height:1}
+.h-hs-tabs .h-hs-tl{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11.5px}
+@container (max-width: 250px){.h-hs-tabs .h-hs-tl{display:none}.h-hs-tabs .h-hs-ti{font-size:18px}}
