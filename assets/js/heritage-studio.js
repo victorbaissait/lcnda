@@ -876,6 +876,7 @@
             c.globalAlpha = op.opacity ?? 1; c.drawImage(t, (op.dx || 0) * W, (op.dy || 0) * H); c.restore(); return;
         }
         if (op.type === 'text') {
+            if (op._editing) { c.restore(); return; } // en train d'être écrit : la zone d'écriture le montre à sa place
             const size = Math.max(1, op.size * W);
             // lissage « Aucun » : le texte dessiné à part, puis chaque point gardé tout entier ou pas du tout (bords nets, comme Photoshop)
             const t = op.aa === 'none' ? (() => { const cv = document.createElement('canvas'); cv.width = W; cv.height = H; return cv.getContext('2d'); })() : c;
@@ -2038,12 +2039,12 @@
             setMode(k);
         };
         $$('[data-rt-mode]').forEach(b => b.addEventListener('click', () => pickTool(b.dataset.rtMode)));
-        const setSize = v => { brush = Math.max(1, Math.min(200, Math.round(v))); $('[data-rt-size]').value = brush; $('[data-rt-size-out]').textContent = brush; };
+        const setSize = v => { brush = Math.max(1, Math.min(200, Math.round(v))); $('[data-rt-size]').value = brush; $('[data-rt-size-out]').textContent = brush; try { if (mode === 'text' || (mode === 'move' && selText())) chSet({tsize: brush, size: brush}); } catch (_) {} }; // (à l'ouverture, avant que le texte soit prêt)
         $('[data-rt-size]').addEventListener('input', e => setSize(Number(e.target.value)));
         $('[data-rt-hard]').addEventListener('input', e => { hard = Number(e.target.value); $('[data-rt-hard-out]').textContent = hard + ' %'; });
         $('[data-rt-opac]').addEventListener('input', e => { opac = Number(e.target.value); $('[data-rt-opac-out]').textContent = opac + ' %'; });
         $('[data-rt-brushtype]').addEventListener('change', e => { brushType = e.target.value; if (mode === 'brush') setMode('brush'); }); // « Gomme » choisie ici allume aussi l'outil 🧽
-        const setColor = c => { color = c; $('[data-rt-color]').value = c; $('[data-rt-color2]').value = c; syncChips(); };
+        const setColor = c => { color = c; $('[data-rt-color]').value = c; $('[data-rt-color2]').value = c; syncChips(); try { if (editingTA && editingTA.op.color !== c) { editingTA.op.color = c; editingTA.restyle(); const l = nodeById(moveSel?.layer); if (l) renderLayer(l); } } catch (_) {} };
         const setFill = c => { fillColor = c; $('[data-rt-fill]').value = c; $('[data-rt-fill2]').value = c; syncChips(); };
         /** Les deux carrés de couleur (comme Photoshop). Sur un masque, ils montrent ce que fait le pinceau : ⬛ cacher (devant) ou ⬜ montrer ;
             X intervertit (un coup de gomme sur le masque se repeint ainsi en « montrer »), D remet noir devant (cacher) et blanc derrière. */
@@ -2074,7 +2075,7 @@
             const UI = window.LCNDA_UI, cur = String(font).split(',')[0].replace(/["']/g, '').trim(); if (!UI?.openFontPicker) return;
             const f = await UI.openFontPicker({value: cur, sample: 'Souvenir de famille'}); if (!f) return;
             setFont(`"${f.replace(/["\\<>]/g, '')}", ${/script|hand|chancery|roundhand|zapfino|calligraph|brush/i.test(f) ? 'cursive' : 'sans-serif'}`);
-            const op = moveSel && nodeById(moveSel.layer)?.ops[moveSel.i]; if (mode === 'move' && op?.type === 'text') { op.font = font; renderLayer(nodeById(moveSel.layer)); draw(); commit('Police du texte'); }
+            const op = moveSel && nodeById(moveSel.layer)?.ops[moveSel.i]; if (op?.type === 'text' && (mode === 'move' || editingTA?.op === op)) { op.font = font; renderLayer(nodeById(moveSel.layer)); draw(); syncChar(); if (editingTA?.op === op) { editingTA.restyle(); editingTA.ta.focus(); } else commit('Police du texte'); }
         });
         // contour et ombre : pour les prochains textes, et pour le texte choisi avec ➤
         const textStyle = () => { const op = moveSel && nodeById(moveSel.layer)?.ops[moveSel.i]; if (op?.type !== 'text') return; op.halo = halo ? haloColor : ''; op.haloW = haloW; op.shadow = shadow ? shadowColor : ''; renderLayer(nodeById(moveSel.layer)); draw(); commit('Style du texte'); };
@@ -2099,7 +2100,7 @@
                 for (const [k, v] of Object.entries(patch)) {
                     if (k === 'size') op.size = v / pw; else if (k === 'lead' || k === 'shift') { if (v) op[k] = v / pw; else delete op[k]; } else if (k === 'weight') { op.weight = v; op.bold = v >= 600; } else if (k === 'italic' || k === 'style' || k === 'color') op[k] = v;
                     else if (k === 'tsize') continue; else if ((k === 'hs' || k === 'vs') && v === 100) delete op[k]; else if (v === '' || v === false || v === 0 || (k === 'kern' && v === 'auto') || (k === 'align' && v === 'left') || (k === 'aa' && v === 'smooth')) delete op[k]; else op[k] = v; }
-                renderLayer(t.l); draw(); clearTimeout(chCommitT); chCommitT = setTimeout(() => commit('Caractère du texte'), 400); }
+                renderLayer(t.l); draw(); if (editingTA?.op === op) editingTA.restyle(); else { clearTimeout(chCommitT); chCommitT = setTimeout(() => commit('Caractère du texte'), 400); } }
             syncChar();
         }
         // les variantes (graisses) d'une famille : celles de l'ordinateur si l'app peut les lire, sinon les graisses habituelles
@@ -2115,7 +2116,7 @@
             const pane = $('[data-rt-pane="char"]'); if (!pane) return; const t = selText(), op = t?.op;
             const cur = op ? {font: op.font || font, style: op.style || (op.italic ? (rtTextWeight(op) >= 600 ? 'Bold Italic' : 'Italic') : rtTextWeight(op) >= 600 ? 'Bold' : 'Regular'), size: Math.round(op.size * pw), lead: op.lead ? Math.round(op.lead * pw) : '', kern: op.kern || 'auto', track: op.track || 0, hs: op.hs || 100, vs: op.vs || 100, shift: op.shift ? Math.round(op.shift * pw) : 0, color: op.color, caps: op.caps || '', pos: op.pos || '', under: !!op.under, strike: !!op.strike, align: op.align || 'left', aa: op.aa || 'smooth'}
                 : {...ch, font, size: ch.tsize || brush, lead: ch.lead || '', color};
-            $('[data-rt-chfor]').textContent = op ? `Texte choisi : « ${String(op.text).slice(0, 30)}${String(op.text).length > 30 ? '…' : ''} »` : 'Pour les prochains textes. Choisis un texte avec ➤ pour le changer.';
+            $('[data-rt-chfor]').textContent = op ? (op._editing ? '✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite.' : `Texte choisi : « ${String(op.text).slice(0, 30)}${String(op.text).length > 30 ? '…' : ''} »`) : 'Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer.';
             const fam = famOf(cur.font), nm = $('[data-rt-chfamname]'); nm.textContent = fontName(cur.font); nm.parentElement.style.fontFamily = cur.font;
             const own = (localFaces || []).some(f => f.family.toLowerCase() === fam.toLowerCase()), sel = $('[data-rt-ch="style"]'), list = stylesFor(fam);
             if (!list.some(x => x.n === cur.style)) list.push({n: cur.style, ...rtStyleOf(cur.style)});
@@ -2169,19 +2170,42 @@
         };
         // le calque où l'on dessine : celui qui est choisi ; si c'est un groupe ou un réglage, un nouveau calque à cet endroit
         const activeL = () => { const n = nodeById(activeLayer); if (typeOf(n) === 'layer') return n; const l = newLayer(); refreshLayers(); return l; };
+        /** ✍️ Écrire un texte (comme Photoshop : chaque nouveau texte est un calque à lui) ou réécrire un texte existant.
+            Pendant l'écriture : le texte est le « texte choisi » (l'onglet 🔤 Caractère et la taille de la barre le changent tout de suite),
+            il est caché sur l'image et la zone d'écriture le montre à sa place, avec sa police, sa taille, son approche, sa couleur. */
+        let editingTA = null;
         const placeText = (x, y, edit = null) => {
-            const l = edit ? nodeById(edit.layer) : activeL(); if (!l || lockedDeep(l)) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
-            const op0 = edit ? l.ops[edit.i] : null;
-            const r = canvas.getBoundingClientRect(), wr = wrap.getBoundingClientRect(), k = r.width / pw, sz = op0 ? op0.size * pw : (ch.tsize || brush);
-            const ta = document.createElement('textarea'); ta.className = 'h-rt-textinput'; ta.rows = 1; ta.value = op0?.text || '';
-            Object.assign(ta.style, {left: (r.left - wr.left + x * k) + 'px', top: (r.top - wr.top + y * k) + 'px', fontSize: Math.max(10, sz * k) + 'px', color: op0?.color || color, fontFamily: op0?.font || font, fontWeight: String(op0 ? rtTextWeight(op0) : ch.weight), fontStyle: (op0 ? op0.italic : italic) ? 'italic' : 'normal', letterSpacing: `${((op0 ? op0.track : ch.track) || 0) / 1000}em`, textTransform: (op0 ? op0.caps : ch.caps) === 'all' ? 'uppercase' : 'none'});
-            wrap.appendChild(ta); ta.focus();
-            let over = false; const done = ok => { if (over) return; over = true; const text = ta.value.replace(/\s+$/, ''); ta.remove(); if (!ok) return;
-                if (op0) { if (!text.trim()) l.ops.splice(edit.i, 1); else op0.text = text; moveSel = null; }
-                else { if (!text.trim()) return; l.ops.push({type: 'text', text, x: x / pw, y: y / ph, size: (ch.tsize || brush) / pw, color, opacity: opac / 100, font, bold: ch.weight >= 600, italic, weight: ch.weight, style: ch.style, ...chOpFields(), halo: halo ? haloColor : '', haloW, shadow: shadow ? shadowColor : ''}); }
-                renderLayer(l); draw(); refreshLayers(); commit(`Texte « ${text.slice(0, 24)}${text.length > 24 ? '…' : ''} »`); };
-            ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); done(true); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); done(false); } });
-            ta.addEventListener('blur', () => done(true));
+            if (editingTA) editingTA.finish(true);
+            let l = edit ? nodeById(edit.layer) : null, op, isNew = !edit;
+            if (edit) { if (!l || lockedDeep(l)) return toast('Ce calque est verrouillé : déverrouille-le dans Calques.', 'error'); op = l.ops[edit.i]; }
+            else {
+                l = newLayer('Texte'); l.textLayer = true; refreshLayers();
+                op = {type: 'text', text: '', x: x / pw, y: y / ph, size: (ch.tsize || brush) / pw, color, opacity: opac / 100, font, bold: ch.weight >= 600, italic, weight: ch.weight, style: ch.style, ...chOpFields(), halo: halo ? haloColor : '', haloW, shadow: shadow ? shadowColor : ''};
+                l.ops.push(op);
+            }
+            const before = edit ? JSON.stringify(op) : '';
+            moveSel = {layer: l.id, i: l.ops.indexOf(op)}; activeLayer = l.id; op._editing = true; renderLayer(l); draw(); syncChar(); refreshLayers();
+            const ta = document.createElement('textarea'); ta.className = 'h-rt-textinput'; ta.rows = Math.max(1, String(op.text).split('\n').length); ta.value = op.text || ''; ta.spellcheck = false;
+            const restyle = () => { const r = canvas.getBoundingClientRect(), wr = wrap.getBoundingClientRect(), k = r.width / pw, base = Math.max(1, op.size * pw), size = (op.pos ? base * 0.62 : base) * k, lead = (op.lead ? op.lead * pw : base * 1.2) * k;
+                const lines = ta.value.split('\n'); mctx.save(); const bx = rtDrawText(mctx, {...op, text: ta.value || 'M'}, pw, ph, true); mctx.restore();
+                Object.assign(ta.style, {left: (r.left - wr.left + bx.x * k) + 'px', top: (r.top - wr.top + op.y * ph * k - (op.shift || 0) * pw * k) + 'px', font: rtTextFont(op, size), lineHeight: lead + 'px', letterSpacing: ((op.track || 0) / 1000 * size) + 'px',
+                    color: op.color, textAlign: op.align || 'left', textTransform: op.caps === 'all' ? 'uppercase' : 'none', textDecoration: [op.under ? 'underline' : '', op.strike ? 'line-through' : ''].filter(Boolean).join(' ') || 'none',
+                    transform: `scale(${(op.hs || 100) / 100}, ${(op.vs || 100) / 100})`, transformOrigin: '0 0', padding: '0', margin: '0', border: '0', outline: '1px dashed #0066cc', outlineOffset: '2px', background: 'rgba(255,255,255,.25)', boxSizing: 'content-box', overflow: 'hidden', resize: 'none',
+                    width: Math.max(size * 2, bx.w * k / ((op.hs || 100) / 100) + size) + 'px', height: Math.max(lead, lines.length * lead) + 'px', minWidth: '0', minHeight: '0'}); };
+            ta.addEventListener('input', () => { op.text = ta.value; restyle(); });
+            wrap.appendChild(ta); restyle(); ta.focus(); if (edit) ta.select();
+            let over = false;
+            const finish = ok => { if (over) return; over = true; editingTA = null; delete op._editing; ta.remove();
+                const text = (ok ? ta.value : (edit ? JSON.parse(before).text : '')).replace(/\s+$/, '');
+                if (!ok && edit) Object.assign(op, JSON.parse(before), {_editing: undefined}), delete op._editing;
+                if (!text.trim()) { const i = l.ops.indexOf(op); if (i >= 0) l.ops.splice(i, 1); if (isNew && !l.ops.length) { const loc = locate(l.id); if (loc) loc.arr.splice(loc.arr.indexOf(l), 1); layerCanvases.delete(l.id); activeLayer = ''; } moveSel = null; renderLayer(l); draw(); refreshLayers(); syncChar(); if (edit && ok) commit('Texte effacé'); return; }
+                op.text = text; if (l.textLayer) l.name = 'T ' + text.split('\n')[0].slice(0, 30);
+                renderLayer(l); draw(); refreshLayers(); syncChar();
+                if (isNew || JSON.stringify(op) !== before) commit(`Texte « ${text.slice(0, 24)}${text.length > 24 ? '…' : ''} »`); };
+            editingTA = {ta, op, restyle, finish};
+            ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); finish(true); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); finish(false); } });
+            // cliquer dans le panneau de droite (🔤 Caractère) ne termine pas l'écriture : on revient dans la zone
+            ta.addEventListener('blur', () => setTimeout(() => { if (over) return; const a = document.activeElement; if (a && a.closest?.('.h-rt-side, .h-rt-opts, [data-rt-opts], .ui-fontpick, dialog.ui-fontpick, .ui-colorbox')) return; finish(true); }, 0));
         };
         // ── Sélections : rectangle, ovale, lasso, plume, baguette ; ⇧ ajoute, ⌥ enlève ──
         function selPath(g, d) {
