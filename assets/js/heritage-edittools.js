@@ -35,7 +35,7 @@
             open: id => ext.openRetouchProject?.(id),
             create: () => ext.pickRetouch?.(),
             rename: (id, name) => post('rename_retouch_project', {id, name}),
-            remove: id => post('delete_retouch_project', {id}), createLabel: '＋ Nouvelle retouche', extra: '<button type="button" class="button secondary" data-et-restore title="Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas">🧭 Restaurer une vieille photo</button><button type="button" class="button secondary" data-et-idp title="Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait">🪪 Portraits d’identité</button>'},
+            remove: id => post('delete_retouch_project', {id}), createLabel: '＋ Nouvelle retouche', extra: '<button type="button" class="button secondary" data-et-canvas title="Une image vide (blanche, transparente ou d’une couleur), à la taille voulue, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button><button type="button" class="button secondary" data-et-restore title="Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas">🧭 Restaurer une vieille photo</button><button type="button" class="button secondary" data-et-idp title="Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait">🪪 Portraits d’identité</button>'},
         {key: 'vector', icon: '✒️', label: 'Dessin vectoriel', what: 'dessin',
             load: async () => ((await api('vector_docs')).docs || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">✒️</span>', info: `${d.objects} objet${d.objects > 1 ? 's' : ''}`})),
             open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
@@ -144,6 +144,7 @@
                 if (d.etNew !== undefined) return t.create(again);
                 if (d.etBlank !== undefined) return ext.newLayoutDoc?.('blank', again);
                 if (d.etStudio !== undefined) return ext.openLayoutStudio?.();
+                if (d.etCanvas !== undefined) return ext.newBlankCanvas?.();
                 if (d.etRestore !== undefined) return ext.openRestore?.();
                 if (d.etIdp !== undefined) return ext.openIdPhotoBatch?.();
                 if (d.etClear !== undefined) { const i = ws.querySelector('.ui-listbar input[type=search]'); if (i) { i.value = ''; i.dispatchEvent(new Event('input', {bubbles: true})); i.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'})); } q = ''; shown = STEP; return drawList(); }

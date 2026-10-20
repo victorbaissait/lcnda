@@ -3166,17 +3166,8 @@
     ext.openRetouch = openRetouch;
 
     /** Listes → Médias → « 🎚️ Retoucher » : une photo de l'app (les plus récentes, ou filtrées) ou une photo importée, puis la Retouche */
-    async function pickRetouch({restore = false} = {}) {
-        const open = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch('', null, restore ? {advanced: true, tab: 'restore'} : {}); };
-        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) return toast('La fenêtre des images n’est pas encore prête. Réessaie dans un instant.', 'error');
-        // la fenêtre unique des médias, avec « 📂 Projets » et « ⬜ Canevas vide » en plus
-        const m = await P.openMediaPicker({types: ['image'], eyebrow: 'RETOUCHE', title: restore ? 'Quelle photo restaurer ?' : 'Quelle photo retoucher ?', okLabel: restore ? 'Restaurer cette photo' : 'Retoucher cette photo',
-            intro: 'Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions.',
-            extra: '<button type="button" class="mpk-chip" data-projects title="Rouvrir un travail de retouche enregistré">📂 Projets</button><button type="button" class="mpk-chip" data-blank title="Une image vide, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button>',
-            onOpen: (dlg, {close}) => {
-                dlg.querySelector('[data-projects]').addEventListener('click', () => retouchProjectsDialog({onOpen: async p => { close(); await ext.openRetouchProject(p.id); }}));
-                // ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias puis ouverte
-                dlg.querySelector('[data-blank]').addEventListener('click', () => {
+    /** ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias ; done(média) l'ouvre */
+    function blankCanvasDialog(done) {
             const SIZES = [['1920x1080', 'Écran 16:9 — 1920 × 1080'], ['1080x1080', 'Carré — 1080 × 1080'], ['1240x1754', 'A4 portrait (150 dpi) — 1240 × 1754'], ['1754x1240', 'A4 paysage (150 dpi) — 1754 × 1240'], ['2480x3508', 'A4 portrait (300 dpi) — 2480 × 3508'], ['1500x2100', 'Carte postale — 1500 × 2100'], ['custom', 'Autre taille…']];
             ext.openDialog({eyebrow: 'RETOUCHE', title: '⬜ Partir d’un canevas vide', submitLabel: 'Créer et ouvrir',
                 body: `<div class="form-grid"><label class="span-2">Format<select name="size">${SIZES.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
@@ -3194,11 +3185,25 @@
                     const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
                     const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                     if (!r.ok || j.error) { toast(j.error || 'Création impossible.', 'error'); return false; }
-                    close(); if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
-                    open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image', fresh: true});
+                    if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
+                    done({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image', fresh: true});
                 },
             });
-                });
+    }
+    // un canevas vide s'ouvre dans la retouche complète (calques, texte, formes), pas dans la retouche rapide
+    const openCanvas = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch('', null, {advanced: true}); };
+    ext.newBlankCanvas = () => blankCanvasDialog(openCanvas);
+    async function pickRetouch({restore = false} = {}) {
+        const open = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch('', null, restore ? {advanced: true, tab: 'restore'} : {}); };
+        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) return toast('La fenêtre des images n’est pas encore prête. Réessaie dans un instant.', 'error');
+        // la fenêtre unique des médias, avec « 📂 Projets » et « ⬜ Canevas vide » en plus
+        const m = await P.openMediaPicker({types: ['image'], eyebrow: 'RETOUCHE', title: restore ? 'Quelle photo restaurer ?' : 'Quelle photo retoucher ?', okLabel: restore ? 'Restaurer cette photo' : 'Retoucher cette photo',
+            intro: 'Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions.',
+            extra: '<button type="button" class="mpk-chip" data-projects title="Rouvrir un travail de retouche enregistré">📂 Projets</button><button type="button" class="mpk-chip" data-blank title="Une image vide, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button>',
+            onOpen: (dlg, {close}) => {
+                dlg.querySelector('[data-projects]').addEventListener('click', () => retouchProjectsDialog({onOpen: async p => { close(); await ext.openRetouchProject(p.id); }}));
+                // ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias puis ouverte
+                dlg.querySelector('[data-blank]').addEventListener('click', () => blankCanvasDialog(item => { close(); openCanvas(item); }));
             }});
         if (!m) return;
         if (m.imported && A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
