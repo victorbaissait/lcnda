@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=233">
     <link rel="stylesheet" href="assets/css/picker.css?v=5">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=212">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=213">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
