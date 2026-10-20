@@ -1090,7 +1090,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=430" defer></script>
+<script src="assets/js/app.js?v=431" defer></script>
 <script src="assets/js/app-picker.js?v=9" defer></script>
 <script src="assets/js/app-media-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
@@ -1197,7 +1197,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-profils.js?v=4" defer></script>
 <script src="assets/js/heritage-profils-politique.js?v=2" defer></script>
 <script src="assets/js/heritage-profils-sport.js?v=2" defer></script>
-<script src="assets/js/heritage-profils-liste.js?v=4" defer></script>
+<script src="assets/js/heritage-profils-liste.js?v=5" defer></script>
 <script src="assets/js/heritage-blocs.js?v=3" defer></script>
 <script src="assets/js/heritage-blocs-press.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-awards.js?v=1" defer></script>
