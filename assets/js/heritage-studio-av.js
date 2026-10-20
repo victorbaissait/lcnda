@@ -584,7 +584,41 @@
      * Textes (titres fixes ou animés), Son 1 et Son 2 (musiques, voix, son détaché d'une vidéo).
      * Le même moteur dessine l'aperçu et l'enregistrement : une image (canvas) et un mélange de sons (Web Audio).
      */
-    const TRANS = [['none', 'Coupe franche'], ['cross', 'Fondu enchaîné'], ['black', 'Fondu au noir'], ['white', 'Fondu au blanc']];
+    const TRANS = [['none', 'Coupe franche'], ['cross', 'Fondu enchaîné'], ['black', 'Fondu au noir'], ['white', 'Fondu au blanc'], ['color', 'Fondu en couleur (au choix)'],
+        ['slideL', 'Glissement vers la gauche (la suivante pousse)'], ['slideR', 'Glissement vers la droite'], ['slideU', 'Glissement vers le haut'], ['slideD', 'Glissement vers le bas'],
+        ['wipeL', 'Volet de gauche à droite'], ['wipeR', 'Volet de droite à gauche'], ['iris', 'Volet en cercle (iris)'], ['zoom', 'Zoom avant à travers'], ['blur', 'Fondu flou']];
+    // les transitions où les deux morceaux se chevauchent (comme le fondu enchaîné) ; noir, blanc et couleur passent par un fond
+    const TR_OVER = new Set(['cross', 'slideL', 'slideR', 'slideU', 'slideD', 'wipeL', 'wipeR', 'iris', 'zoom', 'blur']);
+    const TR_FADE = new Set(['black', 'white', 'color']);
+    /* 🎞️ Effet « vieux film » : du hasard tiré du temps (même image à l'aperçu et à l'export) */
+    const hsh = (a, b = 0) => { let h = Math.imul(a | 0, 374761393) + Math.imul(b | 0, 668265263) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
+    const OLD0 = {on: true, amt: 0.6, sepia: true, weave: true};
+    const oldClean = v => v && typeof v === 'object' && !Array.isArray(v) && v.on ? {on: true, amt: Math.max(0.05, Math.min(1, Number(v.amt ?? 0.6) || 0.6)), sepia: v.sepia !== false, weave: v.weave !== false} : null;
+    let grainTiles = null; // 6 carrés de grain (gris autour du milieu), tirés une fois pour toutes avec la même graine
+    const grainTile = i => {
+        if (!grainTiles) { grainTiles = Array.from({length: 6}, (_, k) => { const c = document.createElement('canvas'); c.width = c.height = 192; const x = c.getContext('2d'), im = x.createImageData(192, 192);
+            for (let p = 0; p < 192 * 192; p++) { const v = 128 + (hsh(p, k + 1) + hsh(p, k + 77) - 1) * 70; im.data[p * 4] = im.data[p * 4 + 1] = im.data[p * 4 + 2] = Math.max(0, Math.min(255, v)); im.data[p * 4 + 3] = 255; } x.putImageData(im, 0, 0); return c; }); }
+        return grainTiles[i % 6];
+    };
+    /* 📐 Stabilisation légère : c.stab = {t0, dt, x, y (chemin de l'image, en 1/10 000 de sa largeur / hauteur), z (zoom), sm (lissage, s), off}.
+     * Le chemin est lissé, l'écart entre le chemin et sa version lissée est compensé (sans dépasser ce que le zoom cache). */
+    const stabCache = new WeakMap();
+    function stabCorr(st) {
+        const key = `${st.sm}|${st.z}`, c0 = stabCache.get(st); if (c0 && c0.key === key) return c0;
+        const n = Math.min(st.x?.length || 0, st.y?.length || 0), R = Math.max(1, Math.round((Number(st.sm) || 1) / (st.dt || 0.1))), z = Math.max(1, Math.min(1.3, Number(st.z) || 1.06)), lim = (z - 1) / (2 * z) * 10000;
+        const sm = arr => { const out = new Float32Array(n), pre = new Float64Array(n + 1); for (let i = 0; i < n; i++) pre[i + 1] = pre[i] + arr[i]; for (let i = 0; i < n; i++) { const a = Math.max(0, i - R), b = Math.min(n - 1, i + R); out[i] = (pre[b + 1] - pre[a]) / (b - a + 1); } return out; };
+        const sx = sm(st.x), sy = sm(st.y), cx = new Float32Array(n), cy = new Float32Array(n);
+        for (let i = 0; i < n; i++) { cx[i] = Math.max(-lim, Math.min(lim, sx[i] - st.x[i])) / 10000; cy[i] = Math.max(-lim, Math.min(lim, sy[i] - st.y[i])) / 10000; }
+        const r = {key, cx, cy, n, z}; stabCache.set(st, r); return r;
+    }
+    /** Décalage de la stabilisation à un moment de la source : {x, y (en part de l'image), z} ou null */
+    function stabAt(c, local) {
+        const st = c.stab; if (!st || st.off || !st.x?.length) return null;
+        const r = stabCorr(st), u = Math.max(0, Math.min(r.n - 1, (local - st.t0) / (st.dt || 0.1))), i = Math.floor(u), f = u - i, j = Math.min(r.n - 1, i + 1);
+        return {x: r.cx[i] + (r.cx[j] - r.cx[i]) * f, y: r.cy[i] + (r.cy[j] - r.cy[i]) * f, z: r.z};
+    }
+    const stabClean = v => { if (!v || typeof v !== 'object' || !Array.isArray(v.x) || !Array.isArray(v.y)) return null; const n = Math.min(v.x.length, v.y.length, 20000), num = a => a.slice(0, n).map(x => Math.round(Number(x) || 0));
+        return {t0: Number(v.t0) || 0, dt: Math.max(0.02, Math.min(2, Number(v.dt) || 0.1)), x: num(v.x), y: num(v.y), z: Math.max(1, Math.min(1.3, Number(v.z) || 1.06)), sm: Math.max(0.2, Math.min(5, Number(v.sm) || 1)), ...(v.off ? {off: true} : {})}; };
     /* Mouvements d'un texte : une entrée, un mouvement pendant qu'il est à l'écran, une sortie ; durée de l'entrée et de la sortie réglables */
     const ANIMS = [['none', 'Fixe (pas de mouvement)'], ['fade', 'Apparaît en fondu'], ['slide', 'Glisse depuis la gauche'], ['slideR', 'Glisse depuis la droite'], ['drop', 'Descend depuis le haut'], ['rise', 'Monte depuis le bas'],
         ['zoom', 'Grandit'], ['shrink', 'Arrive de loin (rapetisse)'], ['pop', 'Surgit avec un rebond'], ['bounce', 'Tombe et rebondit'], ['spin', 'Arrive en tournant'], ['blur', 'Sort du flou'], ['wipe', 'Se dévoile de gauche à droite'],
@@ -625,7 +659,7 @@
     /** « 0,5 ; 1 ; 2× » → [0.5, 1, 2] : de 0,1 à 10, sans doublons, 12 au plus, dans l'ordre */
     const parseSpeeds = v => { const list = (Array.isArray(v) ? v : String(v ?? '').split(/[;\s/|]+/)).map(x => Number(String(x).replace(/,$/, '').replace(',', '.').replace(/[×x]/gi, ''))).filter(x => Number.isFinite(x) && x >= 0.1 && x <= 10).map(x => Math.round(x * 100) / 100); const u = [...new Set(list)]; return u.length ? u.sort((a, b) => a - b).slice(0, 12) : null; };
     const speedsText = l => l.map(x => String(x).replace('.', ',')).join(' ; ');
-    const MT_DEF = {side: 'right', sideW: 440, stage: 50, lane: 40, help: true, fmt: 'mp4', height: 0, quality: 5, fps: 30, abr: 128, speeds: MT_SPEEDS, ...Object.fromEntries(MT_COLORS.map(c => [c[0], c[2]]))};
+    const MT_DEF = {side: 'right', sideW: 440, stage: 50, lane: 40, help: true, snap: true, fmt: 'mp4', height: 0, quality: 5, fps: 30, abr: 128, speeds: MT_SPEEDS, ...Object.fromEntries(MT_COLORS.map(c => [c[0], c[2]]))};
     // texte lisible (noir ou blanc) sur la couleur choisie
     const inkOn = hex => { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return '#111'; const n = parseInt(m[1], 16), l = 0.299 * (n >> 16) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255); return l > 150 ? '#111' : '#fff'; };
     function montagePrefs() {
@@ -634,7 +668,7 @@
     }
     function montagePrefsFrom(v) {
         const pick = (x, list, d) => list.includes(x) ? x : d, num = (x, a, b, d) => Number.isFinite(Number(x)) ? Math.min(b, Math.max(a, Number(x))) : d;
-        return {side: pick(v.side, ['right', 'left'], 'right'), sideW: num(v.sideW, 300, 820, 440), stage: num(v.stage, 25, 80, 50), lane: num(v.lane, 28, 70, 40), help: v.help !== false, fmt: pick(v.fmt, ['mp4', 'webm'], 'mp4'),
+        return {side: pick(v.side, ['right', 'left'], 'right'), sideW: num(v.sideW, 300, 820, 440), stage: num(v.stage, 25, 80, 50), lane: num(v.lane, 28, 70, 40), help: v.help !== false, snap: v.snap !== false, fmt: pick(v.fmt, ['mp4', 'webm'], 'mp4'),
             height: pick(Number(v.height), MT_SIZES.map(x => x[0]), 0), quality: pick(Number(v.quality), MT_QUALITY.map(x => x[0]), 5), fps: pick(Number(v.fps), MT_FPS, 30), abr: pick(Number(v.abr), [96, 128, 192, 256], 128), speeds: parseSpeeds(v.speeds) || MT_SPEEDS,
             ...Object.fromEntries(MT_COLORS.map(([k, , d]) => [k, /^#[0-9a-f]{6}$/i.test(v[k] || '') ? v[k] : d]))};
     }
@@ -660,13 +694,17 @@
         // look, tf, kf, fx, afx d'un morceau : toujours des objets (un ancien enregistrement les rendait en [] : couleurs perdues)
         const objOf = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : {});
         [...P.v1, ...P.v2, ...P.audio, ...P.texts].forEach(c => ['look', 'tf', 'kf', 'fx', 'afx'].forEach(k => { if (k in c) c[k] = objOf(c[k]); }));
-        if (arr(d?.tracks).length) P.tracks = arr(d.tracks).filter(t => t && typeof t.id === 'string' && ['v', 'main', 't', 'a'].includes(t.kind)).map(t => ({id: t.id.slice(0, 12), kind: t.kind, name: String(t.name || '').slice(0, 60), ...(t.hidden ? {hidden: true} : {})}));
+        // vieux film, stabilisation (vidéos), temps de la musique (sons) : remis en état, ou enlevés s'ils sont illisibles
+        [...P.v1, ...P.v2].forEach(c => { const o = oldClean(c.old); if (o) c.old = o; else delete c.old; const s = stabClean(c.stab); if (s) c.stab = s; else delete c.stab; });
+        P.audio.forEach(a => { if (Array.isArray(a.beats)) { a.beats = a.beats.map(Number).filter(Number.isFinite).slice(0, 20000); if (Number(a.bpm) > 0) a.bpm = Math.round(Number(a.bpm) * 10) / 10; else delete a.bpm; } else { delete a.beats; delete a.bpm; } });
+        if (arr(d?.tracks).length) P.tracks = arr(d.tracks).filter(t => t && typeof t.id === 'string' && ['v', 'main', 't', 'a'].includes(t.kind)).map(t => ({id: t.id.slice(0, 12), kind: t.kind, name: String(t.name || '').slice(0, 60), ...(t.hidden ? {hidden: true} : {}), ...(t.locked ? {locked: true} : {})}));
         if (!P.tracks.some(t => t.kind === 'main')) P.tracks.splice(1, 0, {id: 'V1', kind: 'main', name: 'Vidéo 1'});
         if (d?.look && typeof d.look === 'object' && !Array.isArray(d.look)) P.look = {...P.look, ...d.look};
         if (d?.fx && typeof d.fx === 'object' && !Array.isArray(d.fx)) P.fx = {...P.fx, ...d.fx};
         P.fadeStart = !!d?.fadeStart; P.fadeEnd = !!d?.fadeEnd;
         if (ASPECTS.some(a => a[0] === d?.aspect)) P.aspect = d.aspect;
         P.blurBars = !!d?.blurBars; P.kbAuto = !!d?.kbAuto;
+        const old = oldClean(d?.old); if (old) P.old = old;
         if (d?.duck && typeof d.duck === 'object') P.duck = {on: d.duck.on !== false, amount: Math.max(0, Math.min(1, Number(d.duck.amount ?? 0.3))), video: !!d.duck.video};
         P.chapters = arr(d?.chapters).filter(c => c && Number.isFinite(Number(c.t))).map(c => ({id: String(c.id || nid('c')).slice(0, 20), t: Math.max(0, Number(c.t)), title: String(c.title || '').slice(0, 120)}));
         return P;
@@ -693,7 +731,7 @@
     const isSubText = (P, x) => !!x.sub || /^sous-titres/i.test(P.tracks.find(t => t.id === trackOf(P, x, 'texts'))?.name || '');
     /** Moments de chaque morceau de la piste 1 (un fondu enchaîné fait se chevaucher deux morceaux) */
     function layoutV1(P) {
-        let t = 0; return P.v1.map((c, k) => { const len = Math.max(0.05, clen(c)), d = k && c.tr?.type === 'cross' ? Math.min(c.tr.d || 1, len / 2, clen(P.v1[k - 1]) / 2) : 0; const at = Math.max(0, t - d); t = at + len; return {c, at, end: at + len, cross: d}; });
+        let t = 0; return P.v1.map((c, k) => { const len = Math.max(0.05, clen(c)), d = k && TR_OVER.has(c.tr?.type) ? Math.min(c.tr.d || 1, len / 2, clen(P.v1[k - 1]) / 2) : 0; const at = Math.max(0, t - d); t = at + len; return {c, at, end: at + len, cross: d}; });
     }
     /** Vitesse d'un morceau (0,1 × à 10 ×) et sa durée sur la frise : un morceau accéléré dure moins longtemps */
     const spd = c => Math.max(0.1, Math.min(10, Number(c?.speed) || 1)); // de 0,1 × (ralenti) à 10 × (accéléré)
@@ -774,16 +812,28 @@
             return keep;
         }
         /** Une vidéo ou une image : dans tout l'écran (piste principale) ou dans sa case (incrustation), transformée, recadrée, déformée */
-        function drawClip(el, c, local, alpha, main) {
+        /** Le vieux film d'un morceau : le sien, sinon celui de tout le film */
+        const oldOf = c => oldClean(c?.old) || oldClean(P.old);
+        let oldT = 0; // le moment dessiné (le vieux film en dépend)
+        /** tx : l'état d'un morceau pendant une transition (décalage, zoom, découpe, flou) */
+        function drawClip(el, c, local, alpha, main, tx = null) {
             const {vw, vh} = dimsOf(el); if (!vw || alpha <= 0) return;
             const v = k => tfAt(c, k, local), op = v('opacity') / 100; if (op <= 0) return;
-            g.save(); g.globalAlpha = Math.max(0, Math.min(1, alpha * op)); g.filter = lookFilter(c.look || {}, P.look); g.globalCompositeOperation = BLENDS.some(b => b[0] === c.blend) ? c.blend : 'source-over';
+            const of = oldOf(c), f = Math.floor(oldT * 24);
+            // vieux film : sépia, scintillement (la lumière bouge d'une image à l'autre), un peu de tremblement de l'image
+            const extra = `${of ? `${of.sepia ? ` sepia(${Math.min(1, 0.35 + of.amt * 0.65).toFixed(2)})` : ''} brightness(${(1 + (hsh(f, 5) - 0.5) * 0.16 * of.amt).toFixed(3)})` : ''}${tx?.blur > 0.3 ? ` blur(${tx.blur.toFixed(1)}px)` : ''}`;
+            g.save();
+            if (tx?.clip) { g.beginPath(); tx.clip(g); g.clip(); }
+            if (tx?.dx || tx?.dy) g.translate(tx.dx || 0, tx.dy || 0);
+            if (tx?.s && tx.s !== 1) { g.translate(W / 2, H / 2); g.scale(tx.s, tx.s); g.translate(-W / 2, -H / 2); }
+            if (of?.weave) { const u = Math.max(W, H) / 1280, k2 = Math.floor(oldT * 6); g.translate((Math.sin(oldT * 2.1) * 0.6 + (hsh(f, 7) - 0.5) * 0.8) * u * 2.2 * of.amt, (Math.sin(oldT * 1.3 + 1) * 0.5 + (hsh(k2, 8) - 0.5) * 1.6) * u * 2.6 * of.amt); }
+            g.globalAlpha = Math.max(0, Math.min(1, alpha * op)); g.filter = lookFilter(c.look || {}, P.look) + extra; g.globalCompositeOperation = BLENDS.some(b => b[0] === c.blend) ? c.blend : 'source-over';
             let w, h;
             if (main) {
                 const turn = fx.rotate % 180 !== 0, bw = turn ? H : W, bh = turn ? W : H;
                 const ref = P.sources[P.v1[0]?.s], k = c.fit === 'fill' ? Math.max(bw / vw, bh / vh) : c.fit === 'none' ? Math.min(bw / (ref?.w || vw), bh / (ref?.h || vh)) : Math.min(bw / vw, bh / vh);
                 if (P.blurBars && (c.fit || 'fit') === 'fit' && Math.abs(vw / vh - bw / bh) > 0.02) { // bandes floues : la même image, agrandie et floutée, derrière
-                    const kc = Math.max(bw / vw, bh / vh); g.save(); g.filter = `${lookFilter(c.look || {}, P.look)} blur(${Math.round(Math.max(W, H) / 60)}px) brightness(0.72)`;
+                    const kc = Math.max(bw / vw, bh / vh); g.save(); g.filter = `${lookFilter(c.look || {}, P.look)}${extra} blur(${Math.round(Math.max(W, H) / 60)}px) brightness(0.72)`;
                     g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180); g.drawImage(el, -vw * kc / 2 * 1.08, -vh * kc / 2 * 1.08, vw * kc * 1.08, vh * kc * 1.08); g.restore(); }
                 w = vw * k; h = vh * k; g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180);
             } else {
@@ -794,6 +844,7 @@
             const kx = v('kx'), ky = v('ky'); if (kx || ky) g.transform(1, Math.tan(ky * Math.PI / 180), Math.tan(kx * Math.PI / 180), 1, 0, 0);
             g.translate(-ax, -ay);
             if (P.sources[c.s]?.kind === 'image') { const kb = kbAt(c, P, local); if (kb) { g.translate(kb.x * w, kb.y * h); g.scale(kb.s, kb.s); } }
+            else { const st = stabAt(c, local); if (st) { g.beginPath(); g.rect(-w / 2, -h / 2, w, h); g.clip(); g.translate(st.x * w * st.z, st.y * h * st.z); g.scale(st.z, st.z); } } // stabilisée : un peu agrandie, les bords restent dans sa case
             const cl = Math.max(0, Math.min(95, v('cl'))) / 100, cr = Math.max(0, Math.min(95, v('cr'))) / 100, ct = Math.max(0, Math.min(95, v('ct'))) / 100, cb = Math.max(0, Math.min(95, v('cb'))) / 100;
             const fw = 1 - cl - cr, fh = 1 - ct - cb;
             if (fw > 0.01 && fh > 0.01) {
@@ -803,9 +854,51 @@
             }
             g.restore();
         }
-        function warmth(look) {
+        // la place d'un morceau pendant une transition (découpe, ou image décalée) : les voiles (chaleur, vieux film) y restent
+        const region = tx => { if (tx?.clip) { g.beginPath(); tx.clip(g); g.clip(); } else if (tx?.dx || tx?.dy) { g.beginPath(); g.rect(tx.dx || 0, tx.dy || 0, W, H); g.clip(); } };
+        function warmth(look, tx = null) {
             const w = (look?.warm || 0) + (P.look.warm || 0); if (!w) return;
-            g.save(); g.globalCompositeOperation = 'soft-light'; g.globalAlpha = Math.min(0.8, Math.abs(w)); g.fillStyle = w > 0 ? '#ff9a3c' : '#3c8bff'; g.fillRect(0, 0, W, H); g.restore();
+            g.save(); region(tx); g.globalCompositeOperation = 'soft-light'; g.globalAlpha = Math.min(0.8, Math.abs(w)) * (tx?.alpha ?? 1); g.fillStyle = w > 0 ? '#ff9a3c' : '#3c8bff'; g.fillRect(0, 0, W, H); g.restore();
+        }
+        /** Le voile du vieux film : vignette, grain qui bouge, rayures verticales, poussières (tiré du temps : même image à l'export) */
+        function oldFilm(o, tt, tx = null) {
+            const a = o.amt, f = Math.floor(tt * 24), u = Math.max(W, H) / 1280;
+            g.save(); region(tx); g.globalAlpha = tx?.alpha ?? 1; const ga = g.globalAlpha;
+            const vg = g.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.3, W / 2, H / 2, Math.hypot(W, H) / 2); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, `rgba(20,10,0,${(0.7 * a).toFixed(2)})`);
+            g.fillStyle = vg; g.fillRect(0, 0, W, H);
+            const pat = g.createPattern(grainTile(f), 'repeat'); g.save(); g.globalCompositeOperation = 'overlay'; g.globalAlpha = ga * Math.min(1, 0.15 + a * 0.45);
+            g.translate(-hsh(f, 1) * 192, -hsh(f, 2) * 192); g.scale(Math.max(1, u), Math.max(1, u)); g.fillStyle = pat; g.fillRect(0, 0, W / Math.max(1, u) + 400, H / Math.max(1, u) + 400); g.restore();
+            for (let i = 0; i < 4; i++) { // rayures : chacune vit quelques images, puis une autre la remplace ailleurs
+                const life = 5 + i * 4, b = Math.floor(f / life); if (hsh(i + 10, b) > 0.2 + 0.55 * a) continue;
+                const x = hsh(i + 20, b) * W + Math.sin(f * 0.9 + i) * 2 * u, y0 = hsh(i + 60, b) * H * 0.4, y1 = H - hsh(i + 70, b) * H * 0.4, light = hsh(i + 40, b) > 0.45;
+                g.strokeStyle = light ? `rgba(255,250,232,${(0.25 + 0.4 * hsh(f, i + 30)).toFixed(2)})` : `rgba(25,15,5,${(0.3 + 0.4 * hsh(f, i + 30)).toFixed(2)})`; g.lineWidth = (0.6 + hsh(i + 50, b) * 1.6) * u;
+                g.beginPath(); g.moveTo(x, y0); g.quadraticCurveTo(x + (hsh(i + 80, b) - 0.5) * 6 * u, (y0 + y1) / 2, x + (hsh(i + 90, b) - 0.5) * 4 * u, y1); g.stroke();
+            }
+            const nd = Math.round(a * 7 * hsh(f, 99)); // poussières et petits cheveux, d'une image à l'autre
+            for (let j = 0; j < nd; j++) {
+                const x = hsh(f, 100 + j) * W, y = hsh(f, 200 + j) * H, r = (0.7 + hsh(f, 300 + j) * 2.6) * u, dark = hsh(f, 400 + j) > 0.3;
+                g.fillStyle = g.strokeStyle = dark ? 'rgba(20,12,4,.75)' : 'rgba(255,252,240,.7)';
+                if (hsh(f, 500 + j) > 0.8) { g.lineWidth = 0.8 * u; g.beginPath(); g.moveTo(x, y); g.bezierCurveTo(x + 8 * u, y - 6 * u, x + 4 * u, y + 10 * u, x + 14 * u * hsh(f, 600 + j), y + 12 * u); g.stroke(); }
+                else { g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill(); }
+            }
+            g.restore();
+        }
+        /** L'état d'un morceau pendant une transition : p de 0 à 1, entrant (le suivant) ou sortant (celui d'avant) */
+        function trFx(type, p, incoming) {
+            const e = p * p * (3 - 2 * p), r = 1 - e;
+            switch (type) {
+                case 'cross': return incoming ? {alpha: p} : null;
+                case 'slideL': return {dx: incoming ? r * W : -e * W};
+                case 'slideR': return {dx: incoming ? -r * W : e * W};
+                case 'slideU': return {dy: incoming ? r * H : -e * H};
+                case 'slideD': return {dy: incoming ? -r * H : e * H};
+                case 'wipeL': return incoming ? {clip: x => x.rect(0, 0, e * W, H)} : null;
+                case 'wipeR': return incoming ? {clip: x => x.rect(W - e * W, 0, e * W, H)} : null;
+                case 'iris': return incoming ? {clip: x => x.arc(W / 2, H / 2, Math.max(0.5, e * Math.hypot(W, H) / 2), 0, Math.PI * 2)} : null;
+                case 'zoom': return incoming ? {alpha: Math.max(0, Math.min(1, (p - 0.25) / 0.5)), s: 1 + 0.6 * r, blur: Math.sin(Math.PI * p) * Math.max(W, H) / 220} : {s: 1 + 1.6 * e, blur: Math.sin(Math.PI * p) * Math.max(W, H) / 220};
+                case 'blur': return incoming ? {alpha: p, blur: r * Math.max(W, H) / 70} : {blur: e * Math.max(W, H) / 70};
+                default: return incoming ? {alpha: p} : null;
+            }
         }
         const clamp01 = v => Math.max(0, Math.min(1, v));
         const easeOut = p => 1 - (1 - p) ** 3;
@@ -866,36 +959,41 @@
             g.restore();
         }
         function paint(tt) {
-            W = canvas.width; H = canvas.height;
+            W = canvas.width; H = canvas.height; oldT = tt;
             g.save(); g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore();
-            const {L, list} = active(tt);
+            const {L, list} = active(tt), filmOld = oldClean(P.old);
+            const clipOld = (c, tx) => { const o = oldClean(c.old); if (o && !filmOld) oldFilm(o, tt, tx); }; // le vieux film d'un seul morceau, sur sa place
             // pistes vidéo dans l'ordre de la frise : celle du bas d'abord, celle du haut devant (la piste « Vidéo 1 » aussi : une incrustation placée sous elle passe derrière)
             const mainI = P.tracks.findIndex(tr => tr.kind === 'main');
             const drawV2 = it => {
                 const e = els.get(it.c.id); if (!dimsOf(e?.el).vw) return; const c = it.c, local = tt - c.at, len = clen(c);
                 let a = (c.opacity ?? 100) / 100; if (c.fade !== false) { if (local < 0.5) a *= local / 0.5; if (len - local < 0.5) a *= (len - local) / 0.5; }
                 drawClip(e.el, c, it.local, Math.max(0, a), false);
+                if (oldClean(c.old) && !filmOld) { const b = v2Box(c, dimsOf(e.el).vw, dimsOf(e.el).vh, W, H); oldFilm(oldClean(c.old), tt, {alpha: Math.max(0, Math.min(1, a)), clip: x => x.rect(b.x, b.y, b.w, b.h)}); }
             };
             const v2s = list.filter(i => i.kind === 'v2').sort((a, b) => trackIdx(P, trackOf(P, b.c, 'v2')) - trackIdx(P, trackOf(P, a.c, 'v2')));
             v2s.filter(it => trackIdx(P, trackOf(P, it.c, 'v2')) > mainI).forEach(drawV2);
-            // piste 1, avec ses transitions
+            // piste 1, avec ses transitions : le morceau d'avant (sortant) dessous, le suivant (entrant) dessus
             list.filter(i => i.kind === 'v1').sort((a, b) => a.k - b.k).forEach(it => {
-                const e = els.get(it.x.c.id); if (!e) return;
-                let a = 1; if (it.x.cross && tt < it.x.at + it.x.cross) a = (tt - it.x.at) / it.x.cross;
-                drawClip(e.el, it.x.c, it.local, a, true); warmth(it.x.c.look);
+                const e = els.get(it.x.c.id); if (!e) return; const nx = L[it.k + 1];
+                let tx = null;
+                if (it.x.cross && tt < it.x.at + it.x.cross) tx = trFx(it.x.c.tr?.type, (tt - it.x.at) / it.x.cross, true);
+                else if (nx?.cross && tt >= nx.at) tx = trFx(nx.c.tr?.type, (tt - nx.at) / nx.cross, false);
+                drawClip(e.el, it.x.c, it.local, tx?.alpha ?? 1, true, tx); warmth(it.x.c.look, tx); clipOld(it.x.c, tx);
             });
-            // fondus au noir ou au blanc : fin du morceau d'avant, puis début du suivant
+            // fondus au noir, au blanc ou à une couleur : fin du morceau d'avant, puis début du suivant
             L.forEach((x, k) => {
-                const tr = x.c.tr; if (!k || !tr || !['black', 'white'].includes(tr.type)) return; const h = Math.min(tr.d || 1, 4) / 2;
+                const tr = x.c.tr; if (!k || !tr || !TR_FADE.has(tr.type)) return; const h = Math.min(tr.d || 1, 4) / 2;
                 const prevEnd = L[k - 1].end; let a = 0;
                 if (tt >= prevEnd - h && tt < prevEnd) a = 1 - (prevEnd - tt) / h; else if (tt >= x.at && tt < x.at + h) a = 1 - (tt - x.at) / h;
-                if (a > 0) { g.save(); g.globalAlpha = a; g.fillStyle = tr.type === 'white' ? '#fff' : '#000'; g.fillRect(0, 0, W, H); g.restore(); }
+                if (a > 0) { g.save(); g.globalAlpha = a; g.fillStyle = tr.type === 'white' ? '#fff' : tr.type === 'color' ? (/^#[0-9a-f]{6}$/i.test(tr.color || '') ? tr.color : '#7a4b22') : '#000'; g.fillRect(0, 0, W, H); g.restore(); }
             });
             // fondu d'ouverture et de fin du film
             const T = montageEnd(P);
             if (P.fadeStart && tt < 1) { g.save(); g.globalAlpha = 1 - tt; g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); }
             if (P.fadeEnd && T - tt < 1) { g.save(); g.globalAlpha = 1 - (T - tt); g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); }
             v2s.filter(it => trackIdx(P, trackOf(P, it.c, 'v2')) <= mainI).forEach(drawV2);
+            if (filmOld && (list.some(i => i.kind === 'v1' || i.kind === 'v2'))) oldFilm(filmOld, tt); // vieux film sur tout le film (les titres restent nets, par-dessus)
             P.texts.filter(x => tt >= x.at && tt < x.at + x.dur && (!trackHidden(P, trackOf(P, x, 'texts')) || (out === 'preview' && subsAlwaysOn() && isSubText(P, x)))).sort((a, b) => trackIdx(P, trackOf(P, b, 'texts')) - trackIdx(P, trackOf(P, a, 'texts'))).forEach(x => drawText(x, tt));
             if (out === 'preview' && api.decorate) { g.save(); api.decorate(g, W, H, tt); g.restore(); } // cadre de l'élément choisi (aperçu seulement)
         }
@@ -974,6 +1072,88 @@
         try { return await ac.decodeAudioData(await blob.arrayBuffer()); } finally { ac.close(); }
     }
 
+    /* 📐 Stabilisation : de quoi l'image a bougé d'une image à la suivante (déplacement d'ensemble, en pixels de l'image réduite) */
+    function shiftOf(a, b, w, h, R = 16) {
+        const m = R + 1; let best = Infinity, bx = 0, by = 0; const sad = new Float64Array((2 * R + 1) * (2 * R + 1));
+        for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) { // b(x) ≈ a(x − d) : on cherche d
+            let s = 0; for (let y = m; y < h - m; y += 2) { const ro = y * w, rp = (y - dy) * w - dx; for (let x = m; x < w - m; x += 2) s += Math.abs(b[ro + x] - a[rp + x]); }
+            sad[(dy + R) * (2 * R + 1) + dx + R] = s; if (s < best) { best = s; bx = dx; by = dy; }
+        }
+        // un peu plus fin qu'un pixel : le creux d'une parabole autour du meilleur décalage
+        const at = (dx, dy) => sad[(dy + R) * (2 * R + 1) + dx + R], para = (l, c, r) => { const d = l - 2 * c + r; return d > 0 ? Math.max(-0.5, Math.min(0.5, (l - r) / (2 * d))) : 0; };
+        const fx = Math.abs(bx) < R ? para(at(bx - 1, by), best, at(bx + 1, by)) : 0, fy = Math.abs(by) < R ? para(at(bx, by - 1), best, at(bx, by + 1)) : 0;
+        return [bx + fx, by + fy];
+    }
+    /** Analyse un morceau de vidéo (de from à to, temps de la source) : le chemin de l'image, échantillonné, pour c.stab */
+    async function analyzeStab(src, from, to, {onStep, cancelled} = {}) {
+        const v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.playsInline = true; v.crossOrigin = 'anonymous'; v.src = src;
+        try {
+            await new Promise((res, rej) => { v.onloadeddata = res; v.onerror = () => rej(new Error('vidéo illisible')); setTimeout(() => rej(new Error('vidéo trop longue à charger')), 20000); });
+            const AW = 160, AH = Math.max(24, Math.round(AW * (v.videoHeight || 9) / (v.videoWidth || 16))), cv = document.createElement('canvas'); cv.width = AW; cv.height = AH;
+            const x = cv.getContext('2d', {willReadFrequently: true}), len = Math.max(0.1, to - from), dt = Math.max(0.1, Math.round(len / 1500 * 100) / 100), n = Math.floor(len / dt) + 1;
+            // après « seeked », attendre que la nouvelle image soit vraiment prête (sinon on lit parfois l'ancienne)
+            const seek = t => new Promise(r => { let ok = false; const fin = () => { if (!ok) { ok = true; clearTimeout(tm); r(); } }, tm = setTimeout(fin, 3000);
+                if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(() => fin()); else v.addEventListener('seeked', fin, {once: true});
+                v.addEventListener('seeked', () => setTimeout(fin, 250), {once: true}); v.currentTime = t; });
+            const gray = () => { x.drawImage(v, 0, 0, AW, AH); const d = x.getImageData(0, 0, AW, AH).data, out = new Float32Array(AW * AH); let s = 0; for (let i = 0; i < out.length; i++) { out[i] = d[i * 4] * 0.299 + d[i * 4 + 1] * 0.587 + d[i * 4 + 2] * 0.114; s += out[i]; } s /= out.length; for (let i = 0; i < out.length; i++) out[i] -= s; return out; }; // sans la luminosité moyenne (un scintillement ne compte pas)
+            let prev = null, cx = 0, cy = 0; const px = [], py = [];
+            for (let i = 0; i < n; i++) {
+                if (cancelled?.()) return null;
+                await seek(Math.min(to - 0.02, from + i * dt)); const cur = gray();
+                if (prev) { const [dx, dy] = shiftOf(prev, cur, AW, AH); cx += dx; cy += dy; }
+                px.push(Math.round(cx / AW * 10000)); py.push(Math.round(cy / AH * 10000)); prev = cur; onStep?.((i + 1) / n);
+            }
+            return {t0: from, dt, x: px, y: py, z: 1.06, sm: 1};
+        } finally { v.removeAttribute('src'); try { v.load(); } catch (_) {} }
+    }
+    /* 🥁 Les temps d'une musique : flux spectral (les attaques), tempo par autocorrélation, puis les temps par programmation dynamique */
+    function fftMag(re, im) { // FFT en place (taille : puissance de 2)
+        const n = re.length;
+        for (let i = 1, j = 0; i < n; i++) { let bit = n >> 1; for (; j & bit; bit >>= 1) j ^= bit; j ^= bit; if (i < j) { [re[i], re[j]] = [re[j], re[i]]; [im[i], im[j]] = [im[j], im[i]]; } }
+        for (let len = 2; len <= n; len <<= 1) { const a = -2 * Math.PI / len, wr = Math.cos(a), wi = Math.sin(a);
+            for (let i = 0; i < n; i += len) { let cr = 1, ci = 0; for (let k = 0; k < len / 2; k++) { const p = i + k, q = p + len / 2, tr = re[q] * cr - im[q] * ci, ti = re[q] * ci + im[q] * cr; re[q] = re[p] - tr; im[q] = im[p] - ti; re[p] += tr; im[p] += ti; const nr = cr * wr - ci * wi; ci = cr * wi + ci * wr; cr = nr; } } }
+    }
+    /** Les temps d'un son (samples mono, sr) : {beats (s), bpm} */
+    async function beatsOf(x, sr, onStep) {
+        const N = 512, hop = 128, nf = Math.max(0, Math.floor((x.length - N) / hop)), win = Float32Array.from({length: N}, (_, i) => 0.5 - 0.5 * Math.cos(2 * Math.PI * i / N));
+        const re = new Float32Array(N), im = new Float32Array(N), last = new Float32Array(N / 2), on = new Float32Array(nf);
+        for (let f = 0; f < nf; f++) {
+            for (let i = 0; i < N; i++) { re[i] = x[f * hop + i] * win[i]; im[i] = 0; } fftMag(re, im);
+            let s = 0; for (let k = 1; k < N / 2; k++) { const m = Math.log1p(100 * Math.hypot(re[k], im[k])), d = m - last[k]; if (d > 0) s += d; last[k] = m; }
+            on[f] = f ? s : 0; if (f % 3000 === 2999) { onStep?.(f / nf * 0.8); await new Promise(r => setTimeout(r, 0)); }
+        }
+        const fr = sr / hop; // images de l'enveloppe par seconde
+        // enveloppe des attaques : moins sa moyenne locale, sans le négatif, ramenée à un écart type de 1
+        const W2 = Math.round(fr * 0.15), o = new Float32Array(nf); let pre = 0; const cs = new Float64Array(nf + 1); for (let i = 0; i < nf; i++) cs[i + 1] = cs[i] + on[i];
+        for (let i = 0; i < nf; i++) { const a = Math.max(0, i - W2), b = Math.min(nf - 1, i + W2); o[i] = Math.max(0, on[i] - (cs[b + 1] - cs[a]) / (b - a + 1)); pre += o[i] * o[i]; }
+        const sd = Math.sqrt(pre / Math.max(1, nf)) || 1; for (let i = 0; i < nf; i++) o[i] /= sd;
+        // tempo : autocorrélation entre 50 et 220 battements par minute, avec une préférence douce autour de 120
+        const lmin = Math.floor(fr * 60 / 220), lmax = Math.min(nf - 1, Math.ceil(fr * 60 / 50)), l0 = fr * 60 / 120, ac = new Float32Array(lmax + 2);
+        let bl = 0, bv = -Infinity;
+        for (let l = lmin; l <= lmax; l++) { let s = 0; for (let i = l; i < nf; i++) s += o[i] * o[i - l]; ac[l] = s / (nf - l); const v = ac[l] * Math.exp(-0.5 * (Math.log2(l / l0) / 1.0) ** 2); if (v > bv) { bv = v; bl = l; } }
+        if (!bl || nf < 4 * bl) return {beats: [], bpm: 0};
+        const pd = bl > lmin && bl < lmax ? (() => { const a = ac[bl - 1], b = ac[bl], c = ac[bl + 1], d = a - 2 * b + c; return d < 0 ? Math.max(-0.5, Math.min(0.5, (a - c) / (2 * d))) : 0; })() : 0;
+        const L = bl + pd, tight = 100, score = new Float32Array(nf), back = new Int32Array(nf).fill(-1);
+        for (let i = 0; i < nf; i++) {
+            let best = 0, bj = -1; for (let j = Math.max(0, i - Math.round(2 * L)); j <= i - Math.round(L / 2); j++) { const v = score[j] - tight * Math.log((i - j) / L) ** 2; if (bj < 0 || v > best) { best = v; bj = j; } }
+            score[i] = o[i] + (bj >= 0 ? Math.max(0, best) : 0); back[i] = bj >= 0 && best > 0 ? bj : -1;
+        }
+        let i = Math.max(0, nf - Math.round(L)); for (let j = i; j < nf; j++) if (score[j] > score[i]) i = j; // le dernier temps : le meilleur de la dernière mesure
+        const out = []; for (; i >= 0; i = back[i]) out.unshift(i);
+        onStep?.(1);
+        return {beats: out.map(f => (f * hop + N / 2) / sr), bpm: Math.round(60 * fr / L * 10) / 10};
+    }
+    /** Décode le son d'un fichier (de from à to) et repère ses temps (temps de la source) */
+    async function detectBeats(src, from, to, onStep) {
+        const r = await fetch(src); if (!r.ok) throw new Error('son introuvable');
+        const ac = new OfflineAudioContext(1, 2, 11025), ab = await ac.decodeAudioData(await r.arrayBuffer()), sr = ab.sampleRate;
+        const a = Math.max(0, Math.floor(from * sr)), b = Math.min(ab.length, Math.ceil(Math.min(to, from + 600) * sr)), x = new Float32Array(Math.max(0, b - a));
+        for (let ch = 0; ch < ab.numberOfChannels; ch++) { const d = ab.getChannelData(ch); for (let i = 0; i < x.length; i++) x[i] += d[a + i] / ab.numberOfChannels; }
+        const res = await beatsOf(x, sr, onStep);
+        return {beats: res.beats.map(t => Math.round((t + from) * 1000) / 1000), bpm: res.bpm};
+    }
+    ext._montage = {TRANS, shiftOf, analyzeStab, beatsOf, detectBeats, stabAt, layoutV1, projectModel, recordMontage}; // pour les tests
+
     async function openVideo(media, onDone, start = null, proj = null) {
         const sources = [];
         if (!proj && (media.id || media.src)) {
@@ -999,10 +1179,11 @@
             const pos = at ?? (kind === 'v' ? 0 : same.length ? same.at(-1) + 1 : kind === 't' ? trackIdx(P, 'V1') + 1 : P.tracks.length);
             P.tracks.splice(pos, 0, tr); return tr.id;
         }
-        const freeTrack = (kind, at, len) => P.tracks.filter(t => t.kind === kind && !t.hidden).find(t => !LISTS[kind].some(c => trackOf(P, c, LISTNAME[kind]) === t.id && c.at < at + len && at < c.at + lenOf(c)))?.id || addTrack(kind);
+        const freeTrack = (kind, at, len) => P.tracks.filter(t => t.kind === kind && !t.hidden && !t.locked).find(t => !LISTS[kind].some(c => trackOf(P, c, LISTNAME[kind]) === t.id && c.at < at + len && at < c.at + lenOf(c)))?.id || addTrack(kind);
         const undetach = a => { if (!a?.detached) return; [...P.v1, ...P.v2].forEach(v => { if (v.detached === a.id) { v.mute = false; delete v.detached; } }); };
         const ver = await versionsHtml(media);
         const MP = montagePrefs();
+        let snapOn = MP.snap; // 🧲 aimanter (retenu dans les réglages du montage)
         const dl = bigDialog({eyebrow: 'MONTAGE VIDÉO', id: 'video', title: projName || media.title || media.filename || 'Nouveau montage',
             bar: {icon: '🎬', undo: '<span class="ui-topbar-hist"><button type="button" class="icon-button small" data-mt-cmd="undo" data-mt-op="undo" title="Annuler (⌘Z)" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-mt-cmd="redo" data-mt-op="redo" title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z" disabled>↷</button></span>', exportAttrs: 'data-mt-export', saveAttrs: 'data-mt-saveproj', saveTitle: 'Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S)'}, onClose: async () => { eng?.pause(); return !dirty || await A().confirmBox('💾 Enregistrer le projet le garde pour plus tard.', {title: 'Fermer sans enregistrer le projet ?', okLabel: 'Fermer sans enregistrer', danger: true}); },
             body: `<div class="h-mt">
@@ -1019,6 +1200,7 @@
                     </aside>
                 </div>
                 <div class="h-mt-transport" data-tbg="mt-transport" data-tbg-label="Lecture"><button type="button" class="button" data-mt-play data-shortcut="Espace">▶ Lire</button><button type="button" class="button small secondary" data-mt-home title="Au début">⏮</button><span class="h-avx-time" data-tb-label="Temps (où on en est / durée)"><b data-mt-cur>0:00.0</b> / <span data-mt-total></span></span>
+                    <button type="button" class="button small secondary h-mt-snapbtn ${MP.snap ? 'is-on' : ''}" data-mt-snap aria-pressed="${MP.snap}" title="Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant)">🧲 Aimanter</button>
                     <label class="h-mt-zoomr" data-tb-label="Zoom de la frise" title="Aussi ⌘ + / ⌘ − (Ctrl + / Ctrl − sur PC et Linux), ⌘ 0 pour revenir">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label></div>
                 <div class="h-mt-ops" data-tbg="mt-ops" data-tbg-label="Outils du montage">
                     <button type="button" class="button small secondary" data-mt-op="split" title="Coupe le morceau choisi à la tête de lecture" data-shortcut="B">✂️ Couper ici</button>
@@ -1039,13 +1221,14 @@
                     <button type="button" class="button small secondary" data-mt-op="chapter" title="Un chapitre commence à la tête de lecture">🔖 Chapitre ici</button>
                 </div>
                 <div class="h-mt-tl" data-mt-tl></div>
-                <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé.</p>
+                <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus.</p>
                 ${ver.html}
                 <div class="modal-actions"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo">📥 Garder dans les médias…</button></div></div>`});
         dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
         dl.style.setProperty('--mt-stage', MP.stage + 'vh'); dl.style.setProperty('--mt-lane', MP.lane + 'px'); dl.style.setProperty('--mt-side', MP.sideW + 'px');
         [['colV1', 'v1'], ['colV2', 'v2'], ['colT', 't'], ['colA', 'a']].forEach(([k, v]) => { dl.style.setProperty(`--mt-c-${v}`, MP[k]); dl.style.setProperty(`--mt-i-${v}`, inkOn(MP[k])); });
         const $ = s => dl.querySelector(s), cv = $('[data-mt-canvas]');
+        dl.__montage = {P, get eng() { return eng; }, get sel() { return sel; }}; // pour les tests (tests/test-montage-more.js)
         // panneau de droite (Élément, Couleurs, Son, Film, Rush) : sa largeur se règle en glissant la poignée, et reste pour la prochaine fois
         const saveSideW = w => { let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} v.sideW = w; try { localStorage.setItem(MT_KEY, JSON.stringify(v)); } catch (_) {} };
         $('[data-mt-split]').addEventListener('pointerdown', e => {
@@ -1065,7 +1248,7 @@
         // 0 : redessiner · 1 : recaler les vidéos · 2 : refaire le moteur (son général, rotation) ; pane=false : on écrit dans le panneau
         // ↶ ↷ : chaque changement du montage (couper, déplacer, régler…) est une étape ; les rushes, eux, restent
         let hist = [], hpos = -1, histTimer = 0;
-        const snapP = () => JSON.stringify({v1: P.v1, v2: P.v2, texts: P.texts, audio: P.audio, tracks: P.tracks, look: P.look, fx: P.fx, fadeStart: !!P.fadeStart, fadeEnd: !!P.fadeEnd, aspect: P.aspect || '', blurBars: !!P.blurBars, kbAuto: !!P.kbAuto, duck: P.duck || null, chapters: P.chapters || []});
+        const snapP = () => JSON.stringify({v1: P.v1, v2: P.v2, texts: P.texts, audio: P.audio, tracks: P.tracks, look: P.look, fx: P.fx, fadeStart: !!P.fadeStart, fadeEnd: !!P.fadeEnd, aspect: P.aspect || '', blurBars: !!P.blurBars, kbAuto: !!P.kbAuto, duck: P.duck || null, chapters: P.chapters || [], old: P.old || null});
         const record = () => { clearTimeout(histTimer); histTimer = 0; const v = snapP(); if (hist[hpos] === v) return; hist = hist.slice(0, hpos + 1); hist.push(v); if (hist.length > 300) hist.shift(); hpos = hist.length - 1; syncUndo(); };
         const schedHist = () => { clearTimeout(histTimer); histTimer = setTimeout(record, 350); };
         const syncUndo = () => { const u = dl.querySelector('[data-mt-op="undo"]'), r = dl.querySelector('[data-mt-op="redo"]'); if (u) u.disabled = hpos <= 0; if (r) r.disabled = hpos >= hist.length - 1; };
@@ -1083,14 +1266,16 @@
         function drawTl(pane = true) {
             const L = layoutV1(P), T = montageEnd(P), W = Math.max(600, T * pxs + 160);
             const kfMarks = c => { const ts = [...new Set(Object.values(c.kf || {}).flat().map(k => Math.round(k.t * 100) / 100))]; return ts.map(t => `<i class="h-mt-kfm" style="left:${(t - (c.from || 0)) / spd(c) * pxs}px" title="Image clé ${fmt(t - (c.from || 0))}"></i>`).join(''); };
-            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${isImg(c) ? 'is-img' : ''} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${isImg(c) ? '🖼️ ' : ''}${esc(label)}${kfMarks(c)}</button>`;
+            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${isImg(c) ? 'is-img' : ''} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${isImg(c) ? '🖼️ ' : ''}${esc(label)}${kfMarks(c)}${tr === 'audio' ? beatMarks(c) : ''}</button>`;
+            // 🥁 les temps repérés d'une musique : de petits traits sur le son
+            const beatMarks = c => (c.beats || []).filter(b => b >= c.from && b <= c.to).slice(0, 4000).map(b => `<i class="h-mt-beat" style="left:${(b - c.from) / spd(c) * pxs}px"></i>`).join('');
             const lane = (key, name, inner) => `<div class="h-mt-lane" data-mt-lane="${key}"><span class="h-mt-lname">${name}</span>${inner}</div>`;
             const ruler = Array.from({length: Math.ceil(T) + 1}, (_, s) => s % Math.max(1, Math.round(60 / pxs * 2)) === 0 ? `<span style="left:${OFF + s * pxs}px">${fmt(s, false)}</span>` : '').join('');
             const clipsOf = tr => tr.kind === 'main' ? L.map(x => block('v1', x.c, x.at, x.end - x.at, (x.c.tr?.type && x.c.tr.type !== 'none' ? '◇ ' : '') + (P.sources[x.c.s]?.title || 'Vidéo') + (x.c.mute ? ' 🔇' : ''), 'is-v1')).join('')
                 : tr.kind === 'v' ? P.v2.filter(c => trackOf(P, c, 'v2') === tr.id).map(c => block('v2', c, c.at, clen(c), P.sources[c.s]?.title || 'Incrustation', 'is-v2')).join('')
                 : tr.kind === 't' ? P.texts.filter(x => trackOf(P, x, 'texts') === tr.id).map(x => block('texts', x, x.at, x.dur, x.text.split('\n')[0] || 'Texte', 'is-text')).join('')
                 : P.audio.filter(a => trackOf(P, a, 'audio') === tr.id).map(a => block('audio', a, a.at, clen(a), (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join('');
-            const laneOf = tr => `<div class="h-mt-lane ${tr.hidden ? 'is-hidden' : ''}" data-mt-lane="${tr.id}" data-kind="${tr.kind}"><span class="h-mt-lname"><b title="Double-clic pour renommer" data-mt-tname="${tr.id}">${TRACK_KINDS[tr.kind][0]} ${esc(tr.name)}</b><span class="h-mt-tbtns">${`<button type="button" data-mt-tvis="${tr.id}" title="${tr.hidden ? 'Montrer cette piste' : 'Cacher cette piste (ni vue ni entendue)'}">${tr.hidden ? '🙈' : '👁'}</button>`}<button type="button" data-mt-tup="${tr.id}" title="Monter la piste">↑</button><button type="button" data-mt-tdown="${tr.id}" title="Descendre la piste">↓</button><button type="button" data-mt-tdel="${tr.id}" title="${tr.kind === 'main' ? 'Vider cette piste (elle reste, c’est la piste de base du film)' : 'Supprimer cette piste'}">🗑</button></span></span>${clipsOf(tr)}</div>`;
+            const laneOf = tr => `<div class="h-mt-lane ${tr.hidden ? 'is-hidden' : ''} ${tr.locked ? 'is-locked' : ''}" data-mt-lane="${tr.id}" data-kind="${tr.kind}"><span class="h-mt-lname"><b title="Double-clic pour renommer" data-mt-tname="${tr.id}">${TRACK_KINDS[tr.kind][0]} ${esc(tr.name)}</b><span class="h-mt-tbtns">${`<button type="button" data-mt-tvis="${tr.id}" title="${tr.hidden ? 'Montrer cette piste' : 'Cacher cette piste (ni vue ni entendue)'}">${tr.hidden ? '🙈' : '👁'}</button>`}<button type="button" data-mt-tlock="${tr.id}" class="${tr.locked ? 'is-on' : ''}" title="${tr.locked ? 'Déverrouiller la piste' : 'Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus)'}">${tr.locked ? '🔒' : '🔓'}</button><button type="button" data-mt-tup="${tr.id}" title="Monter la piste">↑</button><button type="button" data-mt-tdown="${tr.id}" title="Descendre la piste">↓</button><button type="button" data-mt-tdel="${tr.id}" title="${tr.kind === 'main' ? 'Vider cette piste (elle reste, c’est la piste de base du film)' : 'Supprimer cette piste'}">🗑</button></span></span>${clipsOf(tr)}</div>`;
             const chaps = (P.chapters || []).map(c => `<button type="button" class="h-mt-chap" style="left:${OFF + c.t * pxs}px" data-mt-chapgo="${c.t}" title="🔖 ${esc(c.title)} (${fmt(c.t)})">🔖<span>${esc(c.title)}</span></button>`).join('');
             $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px" data-dnd-off><div class="h-mt-ruler" data-mt-ruler>${ruler}${chaps}</div><div>
                 ${P.tracks.map(laneOf).join('')}</div>
@@ -1113,6 +1298,23 @@
         const lookHtml = (L, scope) => `<div class="h-mt-looks">${LOOKS.map(([n], i) => `<button type="button" class="button small secondary" data-mt-look="${scope}:${i}">${esc(n)}</button>`).join('')}</div>
             ${rng(scope + '.bright', 'Luminosité', 0.4, 1.8, 0.02, L.bright ?? 1, '%')}${rng(scope + '.contrast', 'Contraste', 0.4, 1.8, 0.02, L.contrast ?? 1, '%')}${rng(scope + '.sat', 'Saturation', 0, 2, 0.02, L.sat ?? 1, '%')}${rng(scope + '.warm', 'Température (froid ↔ chaud)', -0.8, 0.8, 0.02, L.warm ?? 0)}${rng(scope + '.hue', 'Teinte', -60, 60, 1, L.hue ?? 0, '°')}`;
         const trackSel = (list, c) => { const cur = trackOf(P, c, list); return `<label class="h-avx-row">Piste <select data-mt-k="track">${P.tracks.filter(t => t.kind === KIND_OF_LIST[list]).map(t => `<option value="${t.id}" ${t.id === cur ? 'selected' : ''}>${esc(t.name)}</option>`).join('')}</select></label>`; };
+        // 🎞️ vieux film : d'un morceau (old) ou de tout le film (pold)
+        const oldHtml = (o, pre, label) => `<details class="h-mt-isec h-mt-old" ${o?.on ? 'open' : ''}><summary><b>🎞️ ${label}</b></summary>${chk(pre + '.on', 'Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris', o?.on)}
+            ${rng(pre + '.amt', 'Intensité', 0.05, 1, 0.05, o?.amt ?? OLD0.amt, '%')}${chk(pre + '.sepia', 'sépia (couleurs passées, brunes)', o ? o.sepia !== false : true)}${chk(pre + '.weave', 'l’image tremble un peu, comme dans un vieux projecteur', o ? o.weave !== false : true)}${pre === 'old' && oldClean(P.old) ? '<p class="muted">Tout le film a déjà l’effet (onglet 🎨 Couleurs) : ces réglages-ci passent avant pour ce morceau.</p>' : ''}</details>`;
+        // 📐 stabilisation légère d'une vidéo : analyse une fois (avec sa barre et ✕ Annuler), puis réglages
+        let stabJob = null, beatJob = null, beatEvery = 1;
+        const STAB_HELP = 'Corrige les petites secousses d’une vidéo filmée à la main. L’analyse regarde, sur une image réduite, de combien toute l’image bouge d’un instant à l’autre (vers le haut, le bas, les côtés), garde le mouvement voulu (un panoramique lent) et compense le reste, en agrandissant un peu l’image pour cacher les bords. Elle ne corrige ni les rotations, ni le flou de bougé, ni un sujet qui bouge seul devant un fond fixe.';
+        const stabHtml = c => { if (isImg(c) || P.sources[c.s]?.kind !== 'video') return ''; const st = c.stab, job = stabJob?.id === c.id ? stabJob : null;
+            return `<details class="h-mt-isec h-mt-stab" ${st || job ? 'open' : ''}><summary><b>📐 Stabiliser (léger)</b><span data-help="${esc(STAB_HELP)}"></span></summary>
+                ${job ? `<div class="h-mt-prog"><progress max="1" value="${job.p}" data-mt-stabprog></progress><button type="button" class="button small secondary" data-mt-stabcancel>✕ Annuler</button></div><p class="muted">Analyse de la vidéo… (elle est regardée image par image, cela peut prendre un moment)</p>`
+                : st ? `${chk('stabon', 'stabilisation active', !st.off)}${rng('stab.z', 'Agrandir (cache les bords)', 1.02, 1.2, 0.01, st.z, '%')}${rng('stab.sm', 'Lissage du mouvement', 0.3, 4, 0.1, st.sm, ' s')}<div class="h-mt-quick"><button type="button" data-mt-stab>↻ Refaire l’analyse</button><button type="button" data-mt-stabdel>Enlever la stabilisation</button></div>`
+                : `<button type="button" class="button small secondary" data-mt-stab>📐 Analyser et stabiliser</button><p class="muted">Pour une vidéo filmée à la main qui tremble un peu. L’image est légèrement agrandie.</p>`}</details>`; };
+        // 🥁 les temps d'une musique : repérés une fois, ils se voient sur la frise et attirent les éléments qu'on glisse
+        const beatsHtml = c => { const job = beatJob?.id === c.id, n = (c.beats || []).filter(b => b >= c.from && b <= c.to).length;
+            return `<details class="h-mt-isec h-mt-beats" open><summary><b>🥁 Temps de la musique</b><span data-help="Repère les battements (les temps) de la musique : ils s’affichent en petits traits sur le son, dans la frise ; un élément qu’on glisse s’y colle (🧲 Aimanter). On peut aussi couper la vidéo de la piste 1 sur les temps, pour un montage en rythme."></span></summary>
+                ${job ? '<p class="muted" data-mt-beatprog>Écoute de la musique…</p>' : c.beats ? `<p class="muted" data-mt-beatinfo>${n} temps repérés${c.bpm ? ` · environ ${String(c.bpm).replace('.', ',')} battements par minute` : ''}.</p>` : ''}
+                <div class="h-mt-quick"><button type="button" data-mt-beats ${job ? 'disabled' : ''}>🥁 ${c.beats ? 'Repérer de nouveau' : 'Repérer les temps'}</button>${c.beats ? '<button type="button" data-mt-beatsdel>Effacer les temps</button>' : ''}</div>
+                ${c.beats?.length ? `<div class="h-avx-row">✂️ Couper la vidéo (piste 1) <select data-mt-beatevery aria-label="Tous les combien de temps">${[1, 2, 4, 8].map(v => `<option value="${v}" ${beatEvery === v ? 'selected' : ''}>${v === 1 ? 'sur chaque temps' : `tous les ${v} temps`}</option>`).join('')}</select><button type="button" class="button small secondary" data-mt-beatcut title="Coupe les morceaux de la piste Vidéo 1 aux temps de cette musique (coupes franches)">Couper</button></div>` : ''}</details>`; };
         /* Inspecteur (façon Final Cut) : Composition, Transformer, Recadrer, Distorsion, Adaptation ; ◇ = image clé au moment de la tête de lecture */
         const localOf = c => { const t = eng?.t || 0; if (sel?.track === 'v1') { const x = layoutV1(P).find(y => y.c === c); if (!x) return c.from; return Math.max(c.from, Math.min(c.to, c.from + (t - x.at) * spd(c))); } return Math.max(c.from, Math.min(c.to, c.from + (t - (c.at || 0)) * spd(c))); };
         const KF_EPS = 1 / 30;
@@ -1156,15 +1358,17 @@
             if (!c) item.innerHTML = '<p class="muted">Choisis un élément sur la frise (un morceau, une incrustation, un texte, un son).</p>';
             else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? '🖼️ Photo' : '🎬 Morceau'} de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? `${fmt(c.to - c.from)} à l’écran` : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
                 ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}
-                <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${rng('tr.d', 'Durée du fondu', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}
+                <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${c.tr?.type === 'color' ? `<label class="h-avx-row">Couleur du fondu <input type="color" value="${esc(/^#[0-9a-f]{6}$/i.test(c.tr.color || '') ? c.tr.color : '#7a4b22')}" data-mt-k="tr.color"></label>` : ''}${rng('tr.d', 'Durée de la transition', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}${P.v1[0] === c && c.tr?.type && c.tr.type !== 'none' ? '<p class="muted">C’est le premier morceau : sa transition ne joue pas (il n’y a rien avant lui).</p>' : ''}
+                ${stabHtml(c)}
                 ${isImg(c) ? '' : `${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>${c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep title="Le son passe sur une piste son : on le déplace, le coupe ou le règle à part de l’image">🔊 Séparer le son de l’image</button>'}${clipSound(c)}`}
                 ${inspectorHtml(c, true)}
-                <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}`;
+                <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}${oldHtml(c.old, 'old', 'Vieux film (ce morceau)')}`;
             else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ ${c.full ? 'Vidéo (tout l’écran)' : 'Incrustation'}${isImg(c) ? ' (photo)' : ''}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>
                 <div class="h-mt-quick"><button type="button" data-mt-full="1" class="${c.full ? 'is-on' : ''}" title="Prend tout l’écran (on peut ensuite la glisser ou tirer son coin sur l’image)">⛶ Tout l’écran</button><button type="button" data-mt-full="0" class="${c.full ? '' : 'is-on'}" title="Une petite vidéo dans un coin, réglable">▣ Dans un coin</button></div>
                 ${c.full ? `<label class="h-avx-row">Cadrage <select data-mt-k="fit">${FITS.slice(0, 2).map(([k, l]) => `<option value="${k}" ${(c.fit || 'fit') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}
                 ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}${c.full ? '' : rng('w', 'Largeur', 10, 300, 1, c.w ?? 35, ' %')}${c.full ? '' : rng('x', 'Position horizontale', -100, 100, 1, c.x ?? 62, ' %') + rng('y', 'Position verticale', -100, 100, 1, c.y ?? 6, ' %')}
                 ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + (c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep>🔊 Séparer le son de l’image</button>') + clipSound(c)}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>
+                ${stabHtml(c)}${oldHtml(c.old, 'old', 'Vieux film (cette vidéo)')}
                 ${inspectorHtml(c, false)}`;
             else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
                 <details class="h-mt-isec" open><summary><b>✨ Mouvement</b></summary>
@@ -1181,8 +1385,8 @@
                 <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-mt-k="bold" ${c.bold ? 'checked' : ''}> gras</label><label class="checkbox-line"><input type="checkbox" data-mt-k="shadow" ${c.shadow !== false ? 'checked' : ''}> ombre</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> entre et sort en fondu</label>`;
             else item.innerHTML = `<h4>${c.voice ? '🎙 Voix' : '🎵 Son'}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${chk('voice', '🎙 C’est une voix (la musique baisse toute seule pendant qu’elle parle)', c.voice)}${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
-                ${speedHtml(c)}${trackSel('audio', c)}${clipSound(c)}`;
-            $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${lookHtml(P.look, 'film')}`;
+                ${beatsHtml(c)}${speedHtml(c)}${trackSel('audio', c)}${clipSound(c)}`;
+            $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${lookHtml(P.look, 'film')}${oldHtml(P.old, 'pold', 'Vieux film (tout le film)')}`;
             $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}${soundFx('fx', P.fx)}${chk('fx.mute', '🔇 Sans le son', P.fx.mute)}<p class="muted">S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »).</p>`;
             $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4><div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? `tourné de ${P.fx.rotate}°` : ''}</small></div>
                 <label class="checkbox-line"><input type="checkbox" data-mt-k="fadeStart" ${P.fadeStart ? 'checked' : ''}> commence par un fondu depuis le noir</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fadeEnd" ${P.fadeEnd ? 'checked' : ''}> finit par un fondu au noir</label>
@@ -1220,6 +1424,7 @@
             const o = el.parentElement.querySelector('output'); if (o && el.type === 'range') o.textContent = o.dataset.u === '%' ? Math.round(v * 100) + ' %' : v + o.dataset.u;
             const film = k.startsWith('film.'), c = selected();
             if (film) setK(P.look, k.slice(5), v);
+            else if (k.startsWith('pold.')) { P.old = P.old && typeof P.old === 'object' ? P.old : {}; setK(P.old, k.slice(5), v); if (k === 'pold.on') { touch(0); return; } }
             else if (k.startsWith('fx.') || ['fadeStart', 'fadeEnd', 'blurBars', 'kbAuto'].includes(k) || k.startsWith('duck.')) { if (k.startsWith('duck.')) P.duck = P.duck || {on: true, amount: 0.3}; setK(P, k, v); }
             else if (c) {
                 if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; }
@@ -1227,13 +1432,16 @@
                 else if (k === 'anim' || k === 'loop') { if (c.anim === 'scroll') { c.anim = 'none'; if (!c.loop) c.loop = 'scroll'; } c[k] = v; }
                 else if (k === 'speedn') { const v2 = Number(String(v).replace(',', '.')); if (!(v2 > 0)) return; c.speed = Math.max(0.1, Math.min(10, v2)); touch(1, false); return; }
                 else if (k === 'imgdur') { const d = Number(String(v).replace(',', '.')); if (!(d > 0)) return; c.to = c.from + Math.max(0.1, Math.min(IMG_MAX, d)); }
-                else if (k === 'tr.type' || k === 'tr.d') { c.tr = c.tr || {type: 'none', d: 1}; c.tr[k.slice(3)] = k === 'tr.d' ? Number(v) : v; }
+                else if (k === 'tr.type' || k === 'tr.d') { c.tr = c.tr || {type: 'none', d: 1}; c.tr[k.slice(3)] = k === 'tr.d' ? Number(v) : v; if (k === 'tr.type') { touch(1); return; } if (TR_OVER.has(c.tr.type)) { touch(1, false); return; } }
+                else if (k === 'stabon') { if (c.stab) { if (v) delete c.stab.off; else c.stab.off = true; } }
+                else if (k.startsWith('stab.')) { if (!c.stab) return; setK(c, k, v); }
                 else setK(c, k, v);
             }
             touch(audioFx(k) ? 2 : (k === 'speed' || k === 'pitch') ? 1 : 0, false);
         });
         dl.querySelector('.h-mt-side').addEventListener('change', e => {
             if (e.target.matches('[data-mt-aspect]')) { P.aspect = e.target.value; touch(2); return; }
+            if (e.target.matches('[data-mt-beatevery]')) { beatEvery = Number(e.target.value) || 1; return; }
             if (e.target.matches('[data-mt-duck]')) { P.duck = P.duck || {on: true, amount: 0.3}; P.duck[e.target.dataset.mtDuck] = e.target.checked; touch(1); return; }
             if (e.target.matches('[data-mt-chapname]')) { const c = (P.chapters || []).find(x => x.id === e.target.dataset.mtChapname); if (c) { c.title = e.target.value.trim().slice(0, 120) || c.title; touch(0, false); } }
         });
@@ -1248,6 +1456,12 @@
             if (e.target.closest('[data-mt-sep]')) { dl.querySelector('[data-mt-op="detach"]')?.click(); return; }
             if (e.target.closest('[data-mt-speededit]')) { (async () => { const cur = montagePrefs().speeds, n = await A().askText({title: 'Boutons de vitesse', message: 'Les vitesses des boutons rapides, de 0,1 à 10, séparées par des points-virgules :', value: speedsText(cur), okLabel: 'Enregistrer'}); if (n === null) return; const l = parseSpeeds(n); if (!l) return toast('Aucune vitesse valable (entre 0,1 et 10).', 'error'); let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} v.speeds = l; try { localStorage.setItem(MT_KEY, JSON.stringify(v)); } catch (_) {} drawPane(); toast(`Boutons : ${speedsText(l)} ×`); })(); return; }
             const fu = e.target.closest('[data-mt-full]'); if (fu) { const c = selected(); if (c && sel?.track === 'v2') { if (fu.dataset.mtFull === '1') { c.full = true; c.border = false; } else { delete c.full; if (c.w > 100 || (c.w ?? 35) >= 90) { c.w = 35; c.x = 62; c.y = 6; } } touch(0); } return; }
+            if (e.target.closest('[data-mt-stab]')) { const c = selected(); if (c) stabGo(c); return; }
+            if (e.target.closest('[data-mt-stabcancel]')) { if (stabJob) stabJob.stop = true; return; }
+            if (e.target.closest('[data-mt-stabdel]')) { const c = selected(); if (c) { delete c.stab; touch(0); } return; }
+            if (e.target.closest('[data-mt-beats]')) { const c = selected(); if (c && sel?.track === 'audio') beatGo(c); return; }
+            if (e.target.closest('[data-mt-beatsdel]')) { const c = selected(); if (c) { delete c.beats; delete c.bpm; touch(0); } return; }
+            if (e.target.closest('[data-mt-beatcut]')) { const c = selected(); if (c && sel?.track === 'audio') beatCut(c); return; }
             const ap = e.target.closest('[data-mt-animprev]'); if (ap) { const c = selected(); if (c && sel?.track === 'texts') { eng.pause(); eng.seek(c.at).then(() => eng.play()); } return; }
             const sp = e.target.closest('[data-mt-speed]'); if (sp) { const c = selected(); if (c) { c.speed = Number(sp.dataset.mtSpeed); touch(1); } return; }
             const idur = e.target.closest('[data-mt-imgdur]'); if (idur) { const c = selected(); if (c) { c.to = c.from + Number(idur.dataset.mtImgdur); touch(1); } return; }
@@ -1265,6 +1479,46 @@
                 else IROWS[key].forEach(([k]) => { if (c.tf) delete c.tf[k]; if (c.kf) delete c.kf[k]; });
                 touch(0); return; }
         });
+        /* 🔒 Pistes verrouillées : leurs éléments ne se déplacent, ne se coupent et ne s'enlèvent plus (sur la frise comme sur l'image) */
+        const laneIdOf = (track, c) => track === 'v1' ? P.tracks.find(t => t.kind === 'main')?.id : trackOf(P, c, track);
+        const isLocked = (track, c) => !!P.tracks.find(t => t.id === laneIdOf(track, c))?.locked;
+        const lockToast = () => toast('🔒 Piste verrouillée : clique sur 🔒 à côté de son nom pour la déverrouiller.', 'error');
+        /** 📐 Analyse et stabilise une vidéo (une seule analyse à la fois ; ✕ Annuler l'arrête) */
+        async function stabGo(c) {
+            if (stabJob) return toast('Une analyse est déjà en cours.', 'error');
+            const so = P.sources[c.s]; if (!so || so.kind !== 'video') return;
+            stabJob = {id: c.id, p: 0, stop: false}; drawPane();
+            try {
+                const r = await analyzeStab(so.src, c.from, c.to, {onStep: p => { if (!stabJob) return; stabJob.p = p; const el = dl.querySelector('[data-mt-stabprog]'); if (el) el.value = p; }, cancelled: () => !stabJob || stabJob.stop || !dl.open});
+                if (r) { c = [...P.v1, ...P.v2].find(x => x.id === c.id) || c; const o = c.stab; c.stab = {...r, z: o?.z ?? r.z, sm: o?.sm ?? r.sm}; toast('📐 Vidéo stabilisée : règle l’agrandissement et le lissage si besoin.'); }
+                else toast('Stabilisation annulée.');
+            } catch (err) { toast(`Stabilisation impossible : ${err.message}`, 'error'); }
+            finally { stabJob = null; if (dl.open) touch(0); }
+        }
+        /** 🥁 Repère les temps d'une musique (son de la piste) */
+        async function beatGo(c) {
+            if (beatJob) return; const so = P.sources[c.s]; if (!so) return;
+            beatJob = {id: c.id}; drawPane();
+            try {
+                const r = await detectBeats(so.src, c.from, c.to, p => { const el = dl.querySelector('[data-mt-beatprog]'); if (el) el.textContent = `Écoute de la musique… ${Math.round(p * 100)} %`; });
+                c = P.audio.find(x => x.id === c.id) || c; c.beats = r.beats; if (r.bpm) c.bpm = r.bpm; else delete c.bpm;
+                toast(r.beats.length ? `🥁 ${r.beats.length} temps repérés${r.bpm ? ` (environ ${String(r.bpm).replace('.', ',')} par minute)` : ''}.` : 'Aucun temps net dans ce son (il n’a peut-être pas de rythme marqué).', r.beats.length ? '' : 'error');
+            } catch (err) { toast(`Temps introuvables : ${err.message}`, 'error'); }
+            finally { beatJob = null; if (dl.open) touch(0); }
+        }
+        /** ✂️ Coupe les morceaux de la piste 1 sur les temps de cette musique (un temps sur beatEvery), hors des transitions */
+        function beatCut(c) {
+            if (isLocked('v1')) return lockToast();
+            const ts = (c.beats || []).filter(b => b > c.from && b < c.to).map(b => c.at + (b - c.from) / spd(c)).filter((_, i) => i % beatEvery === 0);
+            let n = 0;
+            for (const T of ts) {
+                const L = layoutV1(P), k = L.findIndex(x => T > x.at + 0.12 && T < x.end - 0.12); if (k < 0) continue;
+                const x = L[k], nx = L[k + 1]; if ((x.cross && T < x.at + x.cross) || (nx?.cross && T > nx.at - 0.05)) continue; // pas au milieu d'une transition
+                const local = x.c.from + (T - x.at) * spd(x.c), b2 = {...JSON.parse(JSON.stringify(x.c)), id: nid('v'), from: local, tr: {type: 'none', d: 1}}; x.c.to = local; P.v1.splice(k + 1, 0, b2); n++;
+            }
+            if (!n) return toast('Aucune coupe possible : la musique doit passer en même temps qu’une vidéo de la piste 1.', 'error');
+            toast(`✂️ ${A().plural(n, 'coupe')} sur les temps de la musique.`); touch(1);
+        }
         // sur l'image : glisser une incrustation ou un texte pour le déplacer, tirer son coin pour changer sa taille
         const measure = document.createElement('canvas').getContext('2d');
         const boxOf = (track, c) => {
@@ -1286,7 +1540,9 @@
             const inside = (b, pad = 0) => b && px >= b.x - pad && px <= b.x + b.w + pad && py >= b.y - pad && py <= b.y + b.h + pad;
             const cands = [...(sel && ['v2', 'texts'].includes(sel.track) && selected() ? [[sel.track, selected()]] : []), ...P.texts.slice().reverse().map(x => ['texts', x]), ...P.v2.slice().reverse().map(x => ['v2', x])];
             const hit = cands.find(([tr, c]) => inside(boxOf(tr, c), HANDLE() / 2)); if (!hit) return;
-            e.preventDefault(); cv.setPointerCapture(e.pointerId);
+            e.preventDefault();
+            if (isLocked(hit[0], hit[1])) { sel = {track: hit[0], id: hit[1].id}; drawTl(); eng.redraw(); return lockToast(); }
+            cv.setPointerCapture(e.pointerId);
             const [track, c] = hit, b0 = boxOf(track, c), hs = HANDLE(), resize = px >= b0.x + b0.w - hs && py >= b0.y + b0.h - hs;
             sel = {track, id: c.id}; drawTl(); eng.redraw();
             let s0 = {x: c.x, y: c.y, w: c.w, size: c.size};
@@ -1317,13 +1573,29 @@
             // pendant le glissement : l'élément suit la souris (aussi vers une autre piste), la piste visée s'éclaire (bleu : elle l'accepte, rouge : non),
             // et la frise défile toute seule quand on approche de son bord (une piste cachée plus bas ou plus haut reste atteignable)
             const sx0 = tl.scrollLeft, sy0 = tl.scrollTop, maxTop = Math.max(0, tl.scrollHeight - tl.clientHeight), okKinds = track === 'v1' || track === 'v2' ? ['main', 'v'] : [KIND_OF_LIST[track]];
-            let last = e, raf = 0, hot = null;
+            let last = e, raf = 0, hot = null, warned = false;
+            const locked = isLocked(track, c); // 🔒 piste verrouillée : on peut choisir l'élément, pas le déplacer
             const laneAt = ev => document.elementFromPoint(ev.clientX, ev.clientY)?.closest('[data-mt-lane]');
+            // 🧲 aimant : la tête de lecture, le début et la fin des autres éléments (toutes pistes), les chapitres, les temps des musiques
+            const len = track === 'v1' ? 0 : lenOf(c), targets = [];
+            if (track !== 'v1') {
+                targets.push(0, eng?.t || 0, ...(P.chapters || []).map(x => x.t));
+                L0.forEach(x => { if (x.c !== c) targets.push(x.at, x.end); });
+                [...P.v2, ...P.texts, ...P.audio].forEach(x => { if (x !== c) targets.push(x.at, x.at + lenOf(x)); });
+                P.audio.forEach(a => { if (a !== c) (a.beats || []).forEach(b => { if (b >= a.from && b <= a.to) targets.push(a.at + (b - a.from) / spd(a)); }); });
+            }
+            const guide = document.createElement('i'); guide.className = 'h-mt-snapline'; guide.hidden = true; tl.querySelector('.h-mt-tlin')?.appendChild(guide); // la frise vient d'être redessinée
+            const snapTo = (at, ev) => {
+                guide.hidden = true; if (!snapOn || ev.altKey || !targets.length) return null;
+                let best = null; for (const t of targets) for (const edge of [0, len]) { const d = t - (at + edge); if (Math.abs(d) * pxs <= 8 && (!best || Math.abs(d) < Math.abs(best.d))) best = {d, t}; }
+                if (!best || at + best.d < 0) return null; guide.style.left = (OFF + best.t * pxs) + 'px'; guide.hidden = false; return at + best.d;
+            };
             const place = ev => {
                 const d = (ev.clientX - x0 + tl.scrollLeft - sx0) / pxs; if (Math.abs(ev.clientX - x0) > 3 || Math.abs(ev.clientY - y0) > 6) moved = true; if (!moved) return;
-                const at = Math.max(0, Math.round((at0 + d) * 10) / 10); if (track !== 'v1') c.at = at;
+                if (locked) { if (!warned) { warned = true; lockToast(); } return; }
+                const raw = Math.max(0, at0 + d), sn = track === 'v1' ? null : snapTo(raw, ev), at = sn ?? Math.max(0, Math.round(raw * 10) / 10); if (track !== 'v1') c.at = sn === null ? at : Math.round(at * 1000) / 1000;
                 if (el) { el.style.left = (OFF + at * pxs) + 'px'; el.style.pointerEvents = 'none'; el.style.zIndex = '5'; el.style.transform = `translateY(${ev.clientY - y0 + tl.scrollTop - sy0}px)`; }
-                const ln = laneAt(ev); if (ln !== hot) { hot?.classList.remove('is-drop', 'is-drop-no'); hot = ln; ln?.classList.add(okKinds.includes(ln.dataset.kind) ? 'is-drop' : 'is-drop-no'); }
+                const ln = laneAt(ev), ok = ln && okKinds.includes(ln.dataset.kind) && !P.tracks.find(t => t.id === ln.dataset.mtLane)?.locked; if (ln !== hot || ln) { hot?.classList.remove('is-drop', 'is-drop-no'); hot = ln; ln?.classList.add(ok ? 'is-drop' : 'is-drop-no'); }
             };
             const edge = () => {
                 const b = tl.getBoundingClientRect(), m = 34, sp = v => Math.round(Math.min(1, v / m) * 14);
@@ -1334,10 +1606,12 @@
             };
             raf = requestAnimationFrame(edge);
             const mv = ev => { last = ev; place(ev); };
-            const up = ev => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); cancelAnimationFrame(raf); hot?.classList.remove('is-drop', 'is-drop-no');
+            const up = ev => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); cancelAnimationFrame(raf); hot?.classList.remove('is-drop', 'is-drop-no'); guide.remove();
                 if (!moved) return eng.seek((ev.clientX - r.left - OFF) / pxs);
+                if (locked) return drawTl(false);
                 const drop = Math.max(0, at0 + (ev.clientX - x0 + tl.scrollLeft - sx0) / pxs);
                 const ln = document.elementFromPoint(ev.clientX, ev.clientY)?.closest('[data-mt-lane]'), kind = ln?.dataset.kind;
+                if (ln && P.tracks.find(t => t.id === ln.dataset.mtLane)?.locked && ln.dataset.mtLane !== laneIdOf(track, c)) { if (track !== 'v1') c.at = at0; lockToast(); return drawTl(false); } // pas sur une piste verrouillée
                 if (track === 'v1') {
                     if (kind === 'v') { // la piste principale → une piste d'incrustation (vidéo ou photo)
                         P.v1.splice(P.v1.indexOf(c), 1); const k = {...c, id: nid('i'), at: Math.round(drop * 10) / 10, full: true, border: false, w: 35, x: 62, y: 6, opacity: 100, track: ln.dataset.mtLane}; delete k.tr;
@@ -1363,11 +1637,13 @@
         $('[data-mt-zoom]').addEventListener('input', e => { pxs = Number(e.target.value); drawTl(); });
         // pistes : ajouter, cacher, monter, descendre, supprimer, renommer
         tl.addEventListener('click', async e => {
-            const b = e.target.closest('[data-mt-addtrack],[data-mt-tvis],[data-mt-tup],[data-mt-tdown],[data-mt-tdel]'); if (!b) return;
+            const b = e.target.closest('[data-mt-addtrack],[data-mt-tvis],[data-mt-tlock],[data-mt-tup],[data-mt-tdown],[data-mt-tdel]'); if (!b) return;
             e.stopPropagation(); const d = b.dataset;
             if (d.mtAddtrack) { const id = addTrack(d.mtAddtrack); toast(`Piste « ${P.tracks.find(t => t.id === id).name} » ajoutée.`); return touch(0); }
-            const id = d.mtTvis || d.mtTup || d.mtTdown || d.mtTdel, i = trackIdx(P, id), tr = P.tracks[i]; if (!tr) return;
+            const id = d.mtTvis || d.mtTlock || d.mtTup || d.mtTdown || d.mtTdel, i = trackIdx(P, id), tr = P.tracks[i]; if (!tr) return;
             if (d.mtTvis) { tr.hidden = !tr.hidden; return touch(1); }
+            if (d.mtTlock) { if (tr.locked) delete tr.locked; else tr.locked = true; toast(tr.locked ? `🔒 Piste « ${tr.name} » verrouillée : ses éléments ne bougent plus.` : `🔓 Piste « ${tr.name} » déverrouillée.`); return touch(0); }
+            if (d.mtTdel && tr.locked) return lockToast();
             if (d.mtTup || d.mtTdown) { const j = i + (d.mtTup ? -1 : 1); if (j < 0 || j >= P.tracks.length) return; [P.tracks[i], P.tracks[j]] = [P.tracks[j], P.tracks[i]]; return touch(0); }
             if (d.mtTdel && tr.kind === 'main') { // la piste de base du film reste : on la vide
                 if (!P.v1.length) return toast('Cette piste est déjà vide.');
@@ -1388,6 +1664,9 @@
         const play = () => { const b = $('[data-mt-play]'); if (eng.playing || eng.starting) { eng.pause(); b.textContent = '▶ Lire'; } else { b.textContent = '⏸ Pause'; eng.play().catch(() => { b.textContent = '▶ Lire'; }); } };
         $('[data-mt-play]').addEventListener('click', play);
         $('[data-mt-home]').addEventListener('click', () => eng.seek(0));
+        $('[data-mt-snap]').addEventListener('click', e => { snapOn = !snapOn; const b = e.currentTarget; b.classList.toggle('is-on', snapOn); b.setAttribute('aria-pressed', String(snapOn));
+            let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} v.snap = snapOn; try { localStorage.setItem(MT_KEY, JSON.stringify(v)); } catch (_) {}
+            toast(snapOn ? '🧲 Aimant : un élément glissé se colle aux autres (Alt / Option pour s’en passer).' : 'Aimant arrêté.'); });
         // au niveau de la page : après un clic sur la frise (redessinée), le focus peut ne plus être dans la fenêtre
         const keyAc = new AbortController(); dl.addEventListener('close', () => keyAc.abort());
         document.addEventListener('keydown', e => {
@@ -1417,7 +1696,7 @@
         const placeRush = (s, how, at = null) => {
             const so = P.sources[s]; if (!so) return; const t = at ?? eng?.t ?? 0;
             if (so.kind === 'audio' || how === 'a' || how === 'asound' || /^A\d/.test(how || '')) { if (so.kind === 'image') return toast('Une photo n’a pas de son.', 'error'); const k = {id: nid('a'), s, from: 0, to: so.dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1}; k.track = how?.startsWith?.('A') ? how : freeTrack('a', t, k.to); P.audio.push(k); sel = {track: 'audio', id: k.id}; }
-            else if (how === 'v1') { const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1};
+            else if (how === 'v1') { if (isLocked('v1')) return lockToast(); const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1};
                 // posé à un endroit précis de la frise : il se range entre les morceaux, sinon à la fin
                 const L = layoutV1(P), idx = at === null ? -1 : L.findIndex(x => (x.at + x.end) / 2 > at); if (idx < 0) P.v1.push(k); else { P.v1.splice(idx, 0, k); if (idx === 0) { k.tr = {type: 'none', d: 1}; if (P.v1[1]) P.v1[1].tr = {type: 'cross', d: 1}; } } sel = {track: 'v1', id: k.id}; }
             else { const k = {id: nid('i'), s, from: 0, to: srcLen(s), at: t, full: true, border: false, w: 35, x: 62, y: 6, opacity: 100, vol: so.kind === 'video' ? 1 : 0}; /* une vidéo garde son son */ k.track = how?.startsWith?.('V') && how !== 'V1' ? how : freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; }
@@ -1537,6 +1816,7 @@
         tlEl.addEventListener('drop', e => {
             const v = e.dataTransfer.getData('text/x-lcnda-rush'); if (v === '') return; e.preventDefault(); tlEl.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop'));
             const lane = laneAt(e.clientY, e.target), s = Number(v), so = P.sources[s]; if (!so) return;
+            if (lane && P.tracks.find(t => t.id === lane.dataset.mtLane)?.locked) return lockToast();
             const r = tlEl.querySelector('.h-mt-tlin').getBoundingClientRect(), at = Math.max(0, (e.clientX - r.left - OFF) / pxs);
             const kind = lane?.dataset.kind || (so.kind === 'audio' ? 'a' : 'main');
             if (so.kind === 'audio' && kind !== 'a') return toast('Un son se pose sur une piste son.', 'error');
@@ -1650,6 +1930,7 @@
             if (op === 'adda') { const s = await addSource('audio'); if (s === null) return; const k = {id: nid('a'), s, from: 0, to: P.sources[s].dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1}; k.track = freeTrack('a', t, k.to); P.audio.push(k); sel = {track: 'audio', id: k.id}; return touch(1); }
             if (op === 'addtext') { const k = {id: nid('t'), at: t, dur: 4, text: 'Mon titre', size: 7, color: '#ffffff', bg: '', font: 'Georgia, serif', x: 50, y: P.texts.length ? 82 : 50, anim: 'fade', align: 'center'}; k.track = freeTrack('t', t, 4); P.texts.push(k); sel = {track: 'texts', id: k.id}; touch(0); dl.querySelector('[data-mt-tab="item"]').click(); dl.querySelector('[data-mt-k="text"]')?.select(); return; }
             if (!c) return toast('Choisis d’abord un élément sur la frise.', 'error');
+            if (['del', 'left', 'right', 'detach', 'split', 'start', 'end'].includes(op) && isLocked(sel.track, c)) return lockToast();
             const list = sel.track === 'v1' ? P.v1 : sel.track === 'v2' ? P.v2 : sel.track === 'texts' ? P.texts : P.audio, i = list.indexOf(c);
             const startOf = () => sel.track === 'v1' ? layoutV1(P)[i].at : c.at;
             if (op === 'del') { if (sel.track === 'audio') undetach(c); list.splice(i, 1); sel = null; return touch(1); }
@@ -1730,7 +2011,7 @@
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫']]],
             ['Ajouter', [['import', '📥 Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '💬 Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
-            ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante']]],
+            ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante'], ['-'], ['snap', '🧲 Aimanter (marche / arrêt)']]],
             ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['full', '⛶ Plein écran']]],
         ];
         const head = dl.querySelector('.modal-head');
@@ -1749,7 +2030,7 @@
             if (a === 'op') return q(`[data-mt-op="${v}"]`);
             if (k === 'import') return q('[data-mt-rimport]'); if (k === 'base') { q('[data-mt-tab="rush"]'); return q('[data-mt-rbase]'); }
             if (a === 'track') return q(`[data-mt-addtrack="${v}"]`);
-            if (k === 'play') return q('[data-mt-play]'); if (k === 'home') return q('[data-mt-home]');
+            if (k === 'play') return q('[data-mt-play]'); if (k === 'home') return q('[data-mt-home]'); if (k === 'snap') return q('[data-mt-snap]');
             if (a === 'tab') return q(`[data-mt-tab="${v}"]`);
             if (a === 'zoom') return ext.editorZoom?.(v === 'in' ? 1 : v === 'out' ? -1 : 0);
             if (k === 'full') return q('[data-full-toggle]');
