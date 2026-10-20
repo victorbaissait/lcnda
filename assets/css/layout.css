@@ -179,3 +179,17 @@
 [data-theme="dark"] .ly-cm blockquote{background:rgba(255,214,0,.16)}[data-theme="dark"] .ly-cmsug{color:#7fb2ff}[data-theme="dark"] .ly-citeprev{background:rgba(47,107,255,.18)}
 /* ── petit écran : le panneau de droite rétrécit, la barre du haut passe sur deux lignes ── */
 @media(max-width:640px){.ly-editor[open]{grid-template-columns:minmax(0,1fr)}.ly-main{grid-template-columns:40px minmax(0,1fr) min(290px,64vw)!important;min-width:0}.ly-editor .ly-top{flex-wrap:wrap!important;row-gap:4px;height:auto}.ly-editor .ly-menus{flex-wrap:wrap}.ly-name{width:130px}.ly-tools>button{width:30px}.ly-panels,.ly-pbody{min-width:0;overflow-x:hidden}.ly-pbody input,.ly-pbody select{min-width:0;max-width:100%}.ly-grid2{grid-template-columns:1fr!important}}
+
+/* 📚 Livres prêts à l'emploi, ▦ QR codes, 📨 publipostage */
+.ly-tplrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .5rem; margin-bottom: 1rem; }
+.ly-tplbtn, .ly-tplcard { position: relative; display: flex; flex-direction: column; gap: .2rem; text-align: left; padding: .6rem .7rem; border: 1px solid var(--line, #d9dce1); border-radius: 10px; background: var(--panel, #fff); color: inherit; cursor: pointer; }
+.ly-tplbtn small, .ly-tplcard small { color: var(--muted, #666); line-height: 1.3; }
+.ly-tplbtn:hover, .ly-tplcard:hover { border-color: #2a7de1; }
+.ly-tplpick { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .45rem; margin-bottom: .8rem; }
+.ly-tplcard input { position: absolute; opacity: 0; pointer-events: none; }
+.ly-tplcard:has(input:checked) { border-color: #2a7de1; box-shadow: 0 0 0 2px rgba(42,125,225,.25); }
+.ly-qrdlg { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 1rem; align-items: start; }
+.ly-qrform { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.ly-qrprev { margin: 0; text-align: center; } .ly-qrprev svg { width: 180px; height: 180px; background: repeating-conic-gradient(#ddd 0 25%, #fff 0 50%) 0 0/12px 12px; } .ly-qrprev figcaption { font-size: .78rem; }
+.ly-mcount { font-weight: 600; }
+@media (max-width: 640px) { .ly-qrdlg { grid-template-columns: 1fr; } }

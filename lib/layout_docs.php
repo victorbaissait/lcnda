@@ -109,5 +109,14 @@ function delete_layout_doc(PDO $pdo, array $data): array
 function layout_family_data(PDO $pdo, array $q): array
 {
     $o = family_book_options($q + ['parts' => 'bio,family,events,photos,notes']);
-    return family_book_model($pdo, $o, $q);
+    $m = family_book_model($pdo, $o, $q);
+    // publipostage : une liste de fiches choisies, ou les fiches d'une étiquette
+    $keep = null;
+    if (trim((string) ($q['ids'] ?? '')) !== '') { $keep = array_flip(array_slice(array_values(array_filter(array_map('intval', explode(',', (string) $q['ids'])))), 0, 2000)); }
+    if (safe_int($q['label_id'] ?? 0) > 0) {
+        $s = $pdo->prepare("SELECT entity_id FROM label_links WHERE label_id=? AND entity_type='person'"); $s->execute([safe_int($q['label_id'])]);
+        $lab = array_flip(array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN))); $keep = $keep === null ? $lab : array_intersect_key($keep, $lab);
+    }
+    if ($keep !== null) { $m['persons'] = array_values(array_filter($m['persons'], static fn($p) => isset($keep[(int) $p['id']]))); }
+    return $m;
 }

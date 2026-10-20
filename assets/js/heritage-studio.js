@@ -1421,9 +1421,9 @@
             ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '◧ Exporter l’avant / après…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'],
-                ['restore:all', '✨ Restaurer en une fois…'], ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['repair:detect', '🔍 Repérer les plis et rayures…'], ['mode:repair', '🪡 Réparer au pinceau (plis, déchirures)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['idphoto', '🪪 Recadrer en photo d’identité…'], ['idbatch', '🪪 Portraits de plusieurs fiches…'], ['-'], ['reset', 'Remettre comme au départ']]],
+                ['restore:all', '✨ Restaurer en une fois…'], ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['repair:detect', '🔍 Repérer les plis et rayures…'], ['mode:repair', '🪡 Réparer au pinceau (plis, déchirures)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['idphoto', '🪪 Recadrer en photo d’identité…'], ['idbatch', '🪪 Portraits de plusieurs fiches…'], ['-'], ['plus:sky', '☁️ Remplacer le ciel…'], ['plus:cutout', '✂️ Détourer une personne (fond transparent, flou, uni)…'], ['plus:upscale', '🔍 Agrandir ×2 / ×4…'], ['plus:pano', '🧩 Panorama : assembler avec d’autres photos…'], ['-'], ['reset', 'Remettre comme au départ']]],
             ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['img:place', '🖼️ Placer une image…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
-            ['Sélection', [['sel:subject', '🎯 Sélectionner le sujet (automatique)'], ['-'], ['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
+            ['Sélection', [['sel:subject', '🎯 Sélectionner le sujet (automatique)'], ['plus:cutout', '✂️ Détourer une personne…'], ['-'], ['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['fx:last', '↻ Refaire le dernier filtre', '⌘F'], ['-'], ...['Flou', 'Bruit', 'Netteté', 'Esthétiques', 'Artistiques', 'Pixellisation', 'Rendu', 'Déformation', 'Autres'].map(cat => ['>', cat, Object.entries(RT_FX).filter(([, f]) => f[0] === cat).map(([k, f]) => ['fx:' + k, f[1] + '…'])]),
                 ['-'], ['tab:filters', '✨ Filtres rapides et filtres du calque (panneau)'], ['filters:reset', 'Enlever les filtres rapides']]],
             ['Affichage', [['side:toggle', 'Replier / ouvrir le panneau de droite', 'Tab'], ['curtain', '◧ Avant / après en rideau'], ['-'], ['zoom:in', 'Zoom avant', '+'], ['zoom:out', 'Zoom arrière', '−'], ['zoom:fit', 'Toute l’image', '0'], ['zoom:100', 'Taille réelle', '1']]],
@@ -2496,6 +2496,14 @@
                 } catch (err) { lastStatus = null; showProj(); toast(err.message, 'error'); }
             });
         }
+        // ☁️ ✂️ 🔍 les outils de heritage-retouch-plus.js : ce qu'ils peuvent toucher dans la retouche (calques, masques, sélection…)
+        const plusCtx = {pw, ph, dlg, left: $('.h-rt-left'), fresh, mediaId: item.id || 0, title: () => dlg.querySelector('[data-rt-name]')?.value || item.title || item.filename,
+            photo: () => photo(), addMask, blankMask, maskBox, selMask: () => (selId ? masks.get(selId) : null), clearSel: () => { selId = null; refreshLayers(); draw(); },
+            newLayer, newAdjust, aboveP: fn => { activeLayer = 'photo'; return fn(); }, photoNode: () => P(), nodeById,
+            removeNode: id => { const l = locate(id); if (l) l.arr.splice(l.arr.indexOf(l.n), 1); if (activeLayer === id) activeLayer = ''; if (maskEdit === id) maskEdit = ''; },
+            setActive: id => { activeLayer = id; }, setMaskEdit: id => { maskEdit = id; refreshLayers(); }, renderLayer,
+            refresh: () => { refreshLayers(); syncControls(); draw(); }, commit, showTab, setMode, renderFull: () => renderFull(), hasAlpha: () => hasAlpha(), applyShown: f => applyShown(f),
+            busy: t => { help.textContent = t || HELP[optsFor(mode)] || ''; if (t) $('[data-rt-opts]').hidden = false; }};
         async function cmd(k) {
             dlg.querySelectorAll('details.h-rt-menu[open]').forEach(d => d.removeAttribute('open'));
             const [a, b] = k.split(':');
@@ -2527,6 +2535,12 @@
             if (k === 'repair:detect') return creasePanel();
             if (k === 'idphoto') return openIdPhoto();
             if (k === 'idbatch') return idpBatchDialog();
+            if (a === 'plus') { // ☁️ ciel, ✂️ détourer, 🔍 agrandir (heritage-retouch-plus.js) ; 🧩 panorama (l'assemblage de photos)
+                if (b === 'pano') { if (!ext.openAssembler) return toast('L’assemblage de photos n’est pas encore prêt.', 'error'); return ext.openAssembler([{id: item.id, filename: from, title: item.title || item.filename}], {pano: true}); }
+                if (!ext.rtPlus?.[b]) return toast('Cet outil n’est pas encore prêt : réessaie dans un instant.', 'error');
+                if (mode === 'crop') endCrop(true);
+                return ext.rtPlus[b](plusCtx);
+            }
             if (a === 'fx') return b === 'last' ? fxLast() : fxDialog(b);
             if (k === 'sel:subject') {
                 help.textContent = 'Recherche du sujet…'; await new Promise(r => setTimeout(r, 30));
