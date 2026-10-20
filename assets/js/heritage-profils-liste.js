@@ -159,7 +159,7 @@
         body.innerHTML = `<div class="design-order-grid block-grid pfm-grid">
             <section class="maintenance-panel order-editor block-order-editor" data-pfm-std><div class="item-title-row"><h3>Réglage standard — toutes les pages</h3></div><div data-pfm-ed></div>
                 <div class="page-actions action-zone"><button class="button small" type="button" data-pfm-save-std>Enregistrer le réglage standard</button><button class="button small secondary" type="button" data-pfm-reset-std title="Revenir aux modèles de départ (↶ Annuler possible)">↺ Réglage de départ</button></div>
-                <div class="pfm-presets"><b>💾 Réglages enregistrés</b><select class="ar-in" data-pfm-preset><option value="">— choisir —</option>${M.presets.map((p, i) => `<option value="${i}">${esc(p.name)}</option>`).join('')}</select><button class="button small secondary" type="button" data-pfm-apply>Appliquer</button><button class="button small secondary" type="button" data-pfm-saveas>💾 Enregistrer sous…</button></div></section>
+                <div data-presets-slot="pfm-presets"></div></section>
             <section class="maintenance-panel order-editor block-order-editor" data-pfm-exc><div class="item-title-row"><h3>Exception pour une personne</h3></div>
                 <span class="pk-lab">Personne</span>${A().pickerField ? A().pickerField({name: 'pfm_person', kind: 'person'}) : ''}<div data-pfm-ed><p class="muted">Choisis une personne : sa page aura son propre réglage (comme « Réglage propre à … » dans « ⚙️ Organiser la page »).</p></div>
                 <div class="page-actions action-zone" data-pfm-excact hidden><button class="button small" type="button" data-pfm-save-exc>Enregistrer l’exception</button><button class="button small secondary" type="button" data-pfm-open-exc>↗ Ouvrir sa page</button><button class="button small secondary" type="button" data-pfm-drop-exc>↺ Revenir au standard</button></div></section></div>
@@ -168,6 +168,22 @@
         std.repaint = () => { stdBox.innerHTML = editorHtml(std); mountColors(stdBox, std); };
         exc.repaint = () => { if (!exc.data) return; excBox.innerHTML = editorHtml(exc); mountColors(excBox, exc); body.querySelector('[data-pfm-excact]').hidden = false; };
         bindEditor(stdBox, std); bindEditor(excBox, exc); std.repaint();
+        // 💾 Réglages enregistrés : la même liste (art_write « presets ») que « ⚙️ Champs affichés » d’une fiche, même fichier exporté (outil « artistes »)
+        const savePresets = l => write('presets', {list: l}).then(() => { M.presets = l; });
+        const stdPick = d => ['ppage', 'pfpages', 'page'].forEach(k => { if (d?.[k] !== undefined) std.data[k] = clone(d[k]); else delete std.data[k]; });
+        const pframe = UI().presetsFrame?.({id: 'profils-pages', what: 'les pages des profils (et tous les champs affichés des fiches)', quietApply: true,
+            list: () => M.presets.map(p => ({name: String(p?.name || 'Sans nom')})),
+            apply: i => { const p = M.presets[i]; if (!p) return false; stdPick(p.data); std.dirty = true; std.repaint(); toast(`Réglage « ${p.name} » repris : « Enregistrer le réglage standard » pour le garder.`); },
+            save: name => { const l = clone(M.presets), row = {name, data: clone(std.data)}, at = l.findIndex(p => p.name === name); if (at >= 0) l[at] = row; else l.push(row); return savePresets(l); },
+            replace: i => { const l = clone(M.presets); if (!l[i]) return false; l[i].data = clone(std.data); return savePresets(l); },
+            rename: (i, name) => { const l = clone(M.presets); if (!l[i]) return false; l[i].name = name; return savePresets(l); },
+            duplicate: async i => { const l = clone(M.presets), p = l[i]; if (!p) return false; const nm = UI().freeName(p.name, l.map(x => x.name)); l.splice(i + 1, 0, {...clone(p), name: nm}); await savePresets(l); toast(`Copie « ${nm} » créée.`); },
+            exportOne: i => { const p = M.presets[i]; if (p) A().exportSettingFile?.('artistes', p.name, {artistes: p.data}); return false; },
+            remove: async i => { const old = clone(M.presets), p = old[i]; if (!p) return false; const l = old.filter((_, k) => k !== i); await savePresets(l);
+                A().undoToast(`Réglage « ${p.name} » supprimé`, {undo: async () => { await savePresets(old); pframe.refresh(); }, redo: async () => { await savePresets(l); pframe.refresh(); }}); },
+            importOne: async () => { const got = await A().importSettingFile?.('artistes', {names: M.presets.map(p => p.name), check: x => x && typeof x.artistes === 'object'}); if (!got) return false;
+                await savePresets([...clone(M.presets), {name: got.nom, data: got.donnees.artistes}]); toast(`Réglage « ${got.nom} » importé : « Appliquer » pour t’en servir.`); }});
+        if (pframe) body.querySelector('[data-presets-slot="pfm-presets"]').replaceWith(pframe);
         const peopleBox = body.querySelector('[data-pfm-people]');
         const paintPeople = () => { peopleBox.innerHTML = M.people.length ? `<div class="pfm-plist">${M.people.map(p => `<div class="pfm-prow" data-pid="${p.id}"><b>${esc(nameOf(p))}</b><small class="muted">${esc(String(p.updated_at || '').slice(0, 10))}</small><button type="button" class="button small secondary" data-pfm-open="${p.id}">↗ Ouvrir</button><button type="button" class="button small secondary" data-pfm-drop="${p.id}">↺ Revenir au standard</button></div>`).join('')}</div>` : (A().emptyState ? A().emptyState({icon: '🧩', text: 'Aucune page personnalisée', hint: 'Une exception se crée ici, ou dans « ⚙️ Organiser la page » (« Réglage propre à … »).'}) : ''); };
         paintPeople();
@@ -191,11 +207,6 @@
             if (b.hasAttribute('data-pfm-drop-exc')) return exc.pid && dropPerson(exc.pid);
             if (b.dataset.pfmOpen) return PF.openPage(Number(b.dataset.pfmOpen), 'all');
             if (b.dataset.pfmDrop) return dropPerson(Number(b.dataset.pfmDrop));
-            if (b.hasAttribute('data-pfm-apply')) { const i = body.querySelector('[data-pfm-preset]').value, p = M.presets[Number(i)]; if (i === '' || !p) return toast('Choisis d’abord un réglage enregistré.');
-                ['ppage', 'pfpages', 'page'].forEach(k => { if (p.data?.[k] !== undefined) std.data[k] = clone(p.data[k]); else delete std.data[k]; }); std.dirty = true; std.repaint(); toast(`Réglage « ${p.name} » repris : « Enregistrer le réglage standard » pour le garder.`); return; }
-            if (b.hasAttribute('data-pfm-saveas')) { const n = await A().askText({title: 'Enregistrer les réglages sous un nom', message: 'Les pages des profils (et tous les champs affichés des fiches).', value: '', okLabel: '💾 Enregistrer'}); if (!n?.trim()) return;
-                const row = {name: n.trim().slice(0, 60), data: clone(std.data)}, at = M.presets.findIndex(p => p.name === row.name); if (at >= 0) M.presets[at] = row; else M.presets.push(row);
-                try { await write('presets', {list: M.presets}); toast(`Réglages enregistrés sous « ${row.name} ».`); const sel = body.querySelector('[data-pfm-preset]'); sel.innerHTML = `<option value="">— choisir —</option>${M.presets.map((p, i) => `<option value="${i}">${esc(p.name)}</option>`).join('')}`; } catch (er) { toast(er.message, 'error'); } }
         });
     }
     ext.designPanels = ext.designPanels || [];

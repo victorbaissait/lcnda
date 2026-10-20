@@ -272,17 +272,11 @@
     function getStatsColors(){try{const stored=JSON.parse(localStorage.getItem(STATS_COLORS_KEY)||'null');if(Array.isArray(stored)&&stored.length>=1){const out=stored.map((c,i)=>/^#[0-9a-f]{3,8}$/i.test(String(c))?c:DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length]);// seulement de vraies couleurs : elles sont écrites telles quelles dans le HTML des graphiques
 while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLORS.length]);return out;}return [...DEFAULT_STATS_COLORS];}catch(_){return [...DEFAULT_STATS_COLORS];}}
     function saveStatsColors(colors){localStorage.setItem(STATS_COLORS_KEY,JSON.stringify(colors));}
-    function getStatsColorPresets(){try{return JSON.parse(localStorage.getItem(STATS_COLORS_PRESETS_KEY)||'{}');}catch(_){return {};}}
-    function saveStatsColorPresets(presets){localStorage.setItem(STATS_COLORS_PRESETS_KEY,JSON.stringify(presets));}
     function getBattueLevelColors(){try{const stored=JSON.parse(localStorage.getItem(BATTUE_LEVEL_COLORS_KEY)||'null');if(Array.isArray(stored)&&stored.length){const out=[...stored];while(out.length<DEFAULT_BATTUE_LEVEL_COLORS.length)out.push(DEFAULT_BATTUE_LEVEL_COLORS[out.length]);return out.slice(0,DEFAULT_BATTUE_LEVEL_COLORS.length);}return [...DEFAULT_BATTUE_LEVEL_COLORS];}catch(_){return [...DEFAULT_BATTUE_LEVEL_COLORS];}}
     function saveBattueLevelColors(colors){localStorage.setItem(BATTUE_LEVEL_COLORS_KEY,JSON.stringify(colors.slice(0,DEFAULT_BATTUE_LEVEL_COLORS.length)));applyBattueLevelColors();}
-    function getBattueLevelColorPresets(){try{return JSON.parse(localStorage.getItem(BATTUE_LEVEL_COLOR_PRESETS_KEY)||'{}');}catch(_){return {};}}
-    function saveBattueLevelColorPresets(presets){localStorage.setItem(BATTUE_LEVEL_COLOR_PRESETS_KEY,JSON.stringify(presets));}
     function applyBattueLevelColors(){getBattueLevelColors().forEach((color,index)=>document.documentElement.style.setProperty(`--battue-level-${index}`,color));}
     function getPersonBadgeColors(){try{const stored=JSON.parse(localStorage.getItem(PERSON_BADGE_COLORS_KEY)||'null');return {...DEFAULT_PERSON_BADGE_COLORS,...(stored&&typeof stored==='object'?stored:{})};}catch(_){return {...DEFAULT_PERSON_BADGE_COLORS};}}
     function savePersonBadgeColors(colors){localStorage.setItem(PERSON_BADGE_COLORS_KEY,JSON.stringify({...DEFAULT_PERSON_BADGE_COLORS,...colors}));applyPersonBadgeColors();}
-    function getPersonBadgeColorPresets(){try{return JSON.parse(localStorage.getItem(PERSON_BADGE_COLOR_PRESETS_KEY)||'{}');}catch(_){return {};}}
-    function savePersonBadgeColorPresets(presets){localStorage.setItem(PERSON_BADGE_COLOR_PRESETS_KEY,JSON.stringify(presets));}
     function applyPersonBadgeColors(){const colors=getPersonBadgeColors();Object.entries(colors).forEach(([key,color])=>document.documentElement.style.setProperty(`--person-badge-${key.replaceAll('_','-')}`,color));}
     function collectSiteDefaultSettings(extra={}){
         const settings={...extra};
@@ -1516,6 +1510,28 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     /** Les deux petits boutons : « ⤓ Exporter » (sur un réglage) et « ⤒ Importer un réglage » (à côté de « Enregistrer sous ce nom ») */
     const settingExportButton=attrs=>`<button class="button small secondary" type="button" ${attrs} title="Enregistrer ce réglage dans un fichier, pour le garder ou le donner">⤓ Exporter</button>`;
     const settingImportButton=attrs=>`<button class="button small secondary" type="button" ${attrs} title="Reprendre un réglage exporté (fichier .json)">⤒ Importer un réglage</button>`;
+    /** Le cadre commun « 💾 Réglages enregistrés » (app-ui.js) posé à la place de slot (souvent <div data-presets-slot="…">) */
+    function mountPresetsFrame(slot,opts){const UI=window.LCNDA_UI;if(!slot||!UI?.presetsFrame)return null;const frame=UI.presetsFrame(opts);slot.replaceWith(frame);return frame;}
+    /** Le même cadre pour des réglages gardés sur cet ordinateur sous la forme {id:{name, [field]:données}} (id = Date.now() à la création) :
+     *  current() rend les réglages à l'écran, use(données) les applique ; fichier exporté {[field]:données} pour l'outil outil. */
+    function keyedPresetsFrame(slot,{id,what,key,field,outil,noun='Réglage',fem=false,current,use,check,clean=v=>v,quietApply=false}){
+        const read=()=>{try{const v=JSON.parse(localStorage.getItem(key)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch(_){return {};}};
+        const write=st=>{try{localStorage.setItem(key,JSON.stringify(st));}catch(_){throw new Error('Plus de place pour enregistrer ce réglage.');}};
+        const rows=()=>Object.entries(read()).filter(([,p])=>p&&typeof p==='object').sort((a,b)=>(a[1].name||'').localeCompare(b[1].name||'','fr'));
+        const fresh=st=>{let n=Date.now();while(st[String(n)])n++;return String(n);};
+        const copy=v=>JSON.parse(JSON.stringify(v??null)),e=fem?'e':'';
+        const frame=mountPresetsFrame(slot,{id,what,quietApply,
+            list:()=>rows().map(([pid,p])=>({name:String(p.name||'Sans nom'),date:/^\d{12,}$/.test(pid)?new Date(Number(pid)).toLocaleDateString('fr-FR'):''})),
+            apply:async i=>{const r=rows()[i];if(!r)return false;await use(copy(r[1][field]),r[1]);},
+            save:name=>{const st=read(),same=Object.keys(st).find(k=>st[k]?.name===name);st[same||fresh(st)]={name,[field]:current()};write(st);},
+            replace:i=>{const r=rows()[i],st=read();if(!r||!st[r[0]])return false;st[r[0]][field]=current();write(st);},
+            rename:(i,name)=>{const r=rows()[i],st=read();if(!r||!st[r[0]])return false;st[r[0]].name=name;write(st);},
+            duplicate:i=>{const r=rows()[i],st=read();if(!r)return false;const nm=window.LCNDA_UI.freeName(r[1].name||'Sans nom',rows().map(([,p])=>p.name||''));st[fresh(st)]={...copy(r[1]),name:nm};write(st);toast(`Copie « ${nm} » créée.`);},
+            exportOne:i=>{const r=rows()[i];if(r)exportSettingFile(outil,r[1].name||'Sans nom',{[field]:r[1][field]??null});return false;},
+            remove:i=>{const r=rows()[i];if(!r)return false;undoLocalChange(`${noun} « ${r[1].name||'Sans nom'} » supprimé${e}`,[key],()=>{const st=read();delete st[r[0]];write(st);},()=>{if(frame?.isConnected)frame.refresh();});},
+            importOne:async()=>{const got=await importSettingFile(outil,{names:rows().map(([,p])=>p.name||''),check});if(!got)return false;const st=read();st[fresh(st)]={name:got.nom,[field]:clean(got.donnees[field])};write(st);toast(`${noun} « ${got.nom} » importé${e} : « Appliquer » pour t’en servir.`);}});
+        return frame;
+    }
 
     /* ═════ 📅 Dates d'une fiche saisies comme dans un acte, envoyées au format du serveur (AAAA-MM-JJ) ═════
        <input type="date" data-iso-date> devient une case de texte « 7 mai 1925 » (C4) ; la case d'origine reste (cachée)
@@ -4580,27 +4596,33 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function saveShortcutPresets(list){try{localStorage.setItem(SHORTCUT_PRESETS_KEY,JSON.stringify(list));}catch(_){}}
     function renderShortcutSettings(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='raccourcis')return;
-        const presets=shortcutPresets(),customCount=Object.keys(shortcutOverrides()).length;
+        const customCount=Object.keys(shortcutOverrides()).length;
         $('#workspace').innerHTML=`<section class="page shortcut-page"><header class="page-header"><div><span class="eyebrow">RACCOURCIS CLAVIER</span><h2>Raccourcis clavier</h2><p>Clique sur « Changer » puis appuie sur la nouvelle combinaison. Le logiciel te prévient si elle est déjà prise par ${IS_MAC?'macOS':SHORTCUT_PLATFORM==='win'?'Windows':'Linux'} ou par un autre raccourci. Ces réglages suivent ta base (comme l’apparence). La liste s’affiche aussi avec ${kbd(shortcutFor(SHORTCUT_DEFS.find(d=>d.id==='help')))}.</p></div><div class="page-actions"><button class="button secondary" type="button" id="shortcut-reset-all" ${customCount?'':'disabled'}>Tout réinitialiser</button></div></header>
-            <div class="maintenance-panel shortcut-presets"><h3>💾 Réglages enregistrés</h3><p>Comme pour l’apparence : garde un jeu de raccourcis sous un nom, pour y revenir plus tard.</p><div class="shortcut-preset-save"><input id="shortcut-preset-name" placeholder="Nom (ex. Mes raccourcis)" maxlength="60"><button class="button small" type="button" id="shortcut-preset-save">💾 Enregistrer sous ce nom</button>${settingImportButton('id="shortcut-preset-import"')}</div>${presets.length?`<ul class="shortcut-preset-list">${presets.map((p,i)=>`<li><strong>${escapeHtml(p.name)}</strong> <small>${plural(Object.keys(p.map||{}).length,'personnalisé')}</small><button class="button small secondary" type="button" data-preset-apply="${i}">Appliquer</button>${settingExportButton(`data-preset-export="${i}"`)}<button class="button small secondary" type="button" data-preset-delete="${i}">Supprimer</button></li>`).join('')}</ul>`:'<p class="cell-muted">Aucun pour l’instant.</p>'}</div>
+            <div data-presets-slot="raccourcis"></div>
             <div class="data-table-wrap"><table class="data-table shortcut-table is-editable">${shortcutTableHtml(true)}</table></div>
             <div class="maintenance-panel h-ek-panel"><h3>⌨️ Dans les outils de modification</h3><p>Montage vidéo, son, retouche des photos, mise en page : des raccourcis à toi pour chaque outil (aussi dans Maintenance → Montage, retouche, mise en page et son).</p><div id="editor-keys-box"></div></div></section>`;
         window.LCNDA_EXT?.editorKeysPanel?.($('#editor-keys-box'));
         $$('[data-shortcut-change]').forEach(button=>button.addEventListener('click',()=>captureShortcut(SHORTCUT_DEFS.find(d=>d.id===button.dataset.shortcutChange))));
         $$('[data-shortcut-reset]').forEach(button=>button.addEventListener('click',()=>{const o=shortcutOverrides();delete o[button.dataset.shortcutReset];saveShortcutOverrides(o);renderShortcutSettings();}));
         $('#shortcut-reset-all').addEventListener('click',async()=>{if(!await confirmBox('Tous tes raccourcis personnalisés seront remplacés par ceux d’origine.',{title:'Revenir aux raccourcis d’origine ?',okLabel:'Réinitialiser les raccourcis'}))return;saveShortcutOverrides({});renderShortcutSettings();toast('Raccourcis d’origine rétablis.');});
-        $('#shortcut-preset-save').addEventListener('click',()=>{const name=$('#shortcut-preset-name').value.trim();if(!name)return toast('Donne un nom au réglage.','error');const list=shortcutPresets().filter(p=>p.name!==name);list.push({name,map:shortcutOverrides(),saved_at:new Date().toISOString()});saveShortcutPresets(list);renderShortcutSettings();toast(`Réglage « ${name} » enregistré.`);});
-        $$('[data-preset-apply]').forEach(b=>b.addEventListener('click',()=>{const p=shortcutPresets()[Number(b.dataset.presetApply)];if(!p)return;saveShortcutOverrides({...(p.map||{})});renderShortcutSettings();toast(`Réglage « ${p.name} » appliqué.`);}));
-        $$('[data-preset-export]').forEach(b=>b.addEventListener('click',()=>{const p=shortcutPresets()[Number(b.dataset.presetExport)];if(p)exportSettingFile('raccourcis',p.name,{map:p.map||{}});}));
-        $('#shortcut-preset-import').addEventListener('click',async()=>{
-            const known=new Set(SHORTCUT_DEFS.map(d=>d.id));
-            const got=await importSettingFile('raccourcis',{names:shortcutPresets().map(p=>p.name),check:d=>d&&typeof d.map==='object'&&!Array.isArray(d.map)});
-            if(!got)return;
-            const map=Object.fromEntries(Object.entries(got.donnees.map||{}).filter(([k,v])=>known.has(k)&&typeof v==='string'&&v.length<40));
-            const list=shortcutPresets();list.push({name:got.nom,map,saved_at:new Date().toISOString()});saveShortcutPresets(list);renderShortcutSettings();
-            toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`);
-        });
-        $$('[data-preset-delete]').forEach(b=>b.addEventListener('click',()=>{const list=shortcutPresets();const p=list[Number(b.dataset.presetDelete)];if(!p)return;undoLocalChange(`Réglage « ${p.name} » supprimé`,[SHORTCUT_PRESETS_KEY],()=>{list.splice(Number(b.dataset.presetDelete),1);saveShortcutPresets(list);},()=>renderShortcutSettings());renderShortcutSettings();}));
+        const now=()=>new Date().toISOString(),dt=p=>{const d=new Date(p?.saved_at||'');return isNaN(d)?'':d.toLocaleDateString('fr-FR');};
+        mountPresetsFrame($('[data-presets-slot="raccourcis"]'),{id:'raccourcis',what:'ce jeu de raccourcis',
+            list:()=>shortcutPresets().map(p=>({name:String(p?.name||'Sans nom'),date:[dt(p),plural(Object.keys(p?.map||{}).length,'personnalisé')].filter(Boolean).join(' · ')})),
+            apply:i=>{const p=shortcutPresets()[i];if(!p)return false;saveShortcutOverrides({...(p.map||{})});renderShortcutSettings();},
+            save:name=>{const list=shortcutPresets(),at=list.findIndex(p=>p.name===name),row={name,map:shortcutOverrides(),saved_at:now()};if(at>=0)list[at]=row;else list.push(row);saveShortcutPresets(list);},
+            replace:i=>{const list=shortcutPresets();if(!list[i])return false;list[i]={...list[i],map:shortcutOverrides(),saved_at:now()};saveShortcutPresets(list);},
+            rename:(i,name)=>{const list=shortcutPresets();if(!list[i])return false;list[i].name=name;saveShortcutPresets(list);},
+            duplicate:i=>{const list=shortcutPresets(),p=list[i];if(!p)return false;const nm=window.LCNDA_UI.freeName(p.name,list.map(x=>x.name));list.splice(i+1,0,{name:nm,map:{...(p.map||{})},saved_at:now()});saveShortcutPresets(list);toast(`Copie « ${nm} » créée.`);},
+            exportOne:i=>{const p=shortcutPresets()[i];if(p)exportSettingFile('raccourcis',p.name,{map:p.map||{}});return false;},
+            remove:i=>{const list=shortcutPresets(),p=list[i];if(!p)return false;undoLocalChange(`Réglage « ${p.name} » supprimé`,[SHORTCUT_PRESETS_KEY],()=>{list.splice(i,1);saveShortcutPresets(list);},()=>renderShortcutSettings());},
+            importOne:async()=>{
+                const known=new Set(SHORTCUT_DEFS.map(d=>d.id));
+                const got=await importSettingFile('raccourcis',{names:shortcutPresets().map(p=>p.name),check:d=>d&&typeof d.map==='object'&&!Array.isArray(d.map)});
+                if(!got)return false;
+                const map=Object.fromEntries(Object.entries(got.donnees.map||{}).filter(([k,v])=>known.has(k)&&typeof v==='string'&&v.length<40));
+                const list=shortcutPresets();list.push({name:got.nom,map,saved_at:now()});saveShortcutPresets(list);
+                toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`);
+            }});
     }
     function captureShortcut(def){
         if(!def)return;
@@ -5829,8 +5851,6 @@ ${backupSectionHtml()}
         const rootName=rootId?(localStorage.getItem('genealogie-daboville-root-name')||`Personne #${rootId}`):'';
         return `<div class="local-lock-inline sosa-inline"><div><strong data-help="Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus." data-help-faq="Aboville">Numérotation d'Aboville</strong><span>${rootId?`N°1 : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="daboville-root-pick">${pkFieldLocal({name:'daboville_root_pick',kind:'person',value:rootId?(/^Personne #/.test(rootName)?rootId:{id:rootId,title:rootName,kind:'person'}):null})}<input type="hidden" id="daboville-root-search" value="${escapeHtml(rootId?rootName:'')}"><input type="hidden" id="daboville-root-input" value="${rootId||''}"></div><button class="button small" type="button" id="daboville-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="daboville-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="daboville-clear">Retirer</button>':''}</div></div>`;
     }
-    function designPresets(){try{return JSON.parse(localStorage.getItem('genealogie-design-presets')||'{}');}catch(_){return {};}}
-    function saveDesignPresets(presets){localStorage.setItem('genealogie-design-presets',JSON.stringify(presets));}
     function designFieldsHtml(design){
         design=design||{};
         return `<label>Preset<select name="preset">${presetSelectOptionsHtml(design.preset)}</select></label><label>Couleur principale<input type="color" name="blue" value="${escapeHtml(design.blue||'#0066cc')}"></label><label>Menu des onglets<select name="navPosition"><option value="top" ${design.navPosition!=='bottom'?'selected':''}>En haut (défaut)</option><option value="bottom" ${design.navPosition==='bottom'?'selected':''}>En bas de l’écran</option></select></label><label>Logo « ${escapeHtml(design.ownerFirst||'MA')} ${escapeHtml(design.ownerLast||'FAMILLE')} · GÉNÉALOGIE »<select name="brandDisplay"><option value="show" ${design.brandDisplay!=='hide'?'selected':''}>Afficher (défaut)</option><option value="hide" ${design.brandDisplay==='hide'?'selected':''}>Masquer (onglets plus larges)</option></select></label><label>Colonne latérale<select name="sidebarPosition"><option value="left" ${design.sidebarPosition!=='right'?'selected':''}>À gauche (défaut)</option><option value="right" ${design.sidebarPosition==='right'?'selected':''}>À droite</option></select></label><label>Taille typographique<select name="fontScale"><option value="0.82" ${design.fontScale==='0.82'?'selected':''}>Très compacte (13px)</option><option value="0.88" ${design.fontScale==='0.88'?'selected':''}>Compacte (14px)</option><option value="0.94" ${design.fontScale==='0.94'?'selected':''}>Resserrée (15px)</option><option value="1" ${(!design.fontScale||design.fontScale==='1')?'selected':''}>Normale (16px)</option><option value="1.06" ${design.fontScale==='1.06'?'selected':''}>Confortable (17px)</option><option value="1.13" ${design.fontScale==='1.13'?'selected':''}>Grande (18px)</option><option value="1.19" ${design.fontScale==='1.19'?'selected':''}>Très grande (19px)</option><option value="1.25" ${design.fontScale==='1.25'?'selected':''}>Large (20px)</option><option value="1.38" ${design.fontScale==='1.38'?'selected':''}>Très large (22px)</option><option value="1.5" ${design.fontScale==='1.5'?'selected':''}>Maximale (24px)</option></select></label><label>Police de caractères<select name="fontFamily" id="font-family-select">${fontFamilyOptions.map(([value,label])=>`<option value="${value}" ${fontFamilyValue(design.fontFamily)===value?'selected':''}>${escapeHtml(label)}</option>`).join('')}${(typeof design.fontFamily==='string'&&design.fontFamily.indexOf('local:')===0)?`<optgroup label="— Polices de votre ordinateur —"><option value="${escapeHtml(design.fontFamily)}" selected>${escapeHtml(design.fontFamily.slice(6))}</option></optgroup>`:''}</select><button type="button" class="button small secondary" id="detect-local-fonts" hidden style="margin-top:6px">Aa Voir toutes les polices…</button></label><label>Fond des blocs de fiche<select name="cardBackground"><option value="white">Selon le preset</option><option value="blue" ${design.cardBackground==='blue'?'selected':''}>Couleur bleutée</option><option value="bw" ${design.cardBackground==='bw'?'selected':''}>Noir et blanc</option><option value="archive" ${design.cardBackground==='archive'?'selected':''}>Papier archive</option><option value="green" ${design.cardBackground==='green'?'selected':''}>Vert doux</option></select></label><label>Fond de carte géographique<select name="mapBackground"><option value="bw" ${mapBackgroundValue(design.mapBackground)==='bw'?'selected':''}>Noir &amp; blanc</option><option value="color" ${mapBackgroundValue(design.mapBackground)==='color'?'selected':''}>Couleur (OSM)</option><option value="light" ${mapBackgroundValue(design.mapBackground)==='light'?'selected':''}>Claire</option><option value="minimal" ${mapBackgroundValue(design.mapBackground)==='minimal'?'selected':''}>Minimaliste</option><option value="roads" ${mapBackgroundValue(design.mapBackground)==='roads'?'selected':''}>Routes seules</option><option value="dark" ${mapBackgroundValue(design.mapBackground)==='dark'?'selected':''}>Sombre</option><option value="osmfr" ${mapBackgroundValue(design.mapBackground)==='osmfr'?'selected':''}>OSM France</option><option value="relief" ${mapBackgroundValue(design.mapBackground)==='relief'?'selected':''}>Relief léger</option><option value="cyclosm" ${mapBackgroundValue(design.mapBackground)==='cyclosm'?'selected':''}>CyclOSM (relief + routes)</option><option value="wikimedia" ${mapBackgroundValue(design.mapBackground)==='wikimedia'?'selected':''}>Wikimedia Maps</option><option value="satellite" ${mapBackgroundValue(design.mapBackground)==='satellite'?'selected':''}>Satellite (Esri)</option><option value="esri_topo" ${mapBackgroundValue(design.mapBackground)==='esri_topo'?'selected':''}>Topographique (Esri)</option><option value="esri_street" ${mapBackgroundValue(design.mapBackground)==='esri_street'?'selected':''}>Rues couleur (Esri)</option><option value="voyager" ${mapBackgroundValue(design.mapBackground)==='voyager'?'selected':''}>Voyager (avec labels)</option><option value="osmde" ${mapBackgroundValue(design.mapBackground)==='osmde'?'selected':''}>OSM Allemagne</option><option value="cartoweb" ${mapBackgroundValue(design.mapBackground)==='cartoweb'?'selected':''}>CartoWeb.be (Belgique, IGN)</option><option value="swisstopo" ${mapBackgroundValue(design.mapBackground)==='swisstopo'?'selected':''}>Swisstopo (Suisse)</option><option value="grid" ${mapBackgroundValue(design.mapBackground)==='grid'?'selected':''}>Quadrillé</option><optgroup label="— Cartes historiques —"></optgroup><option value="ohm" ${mapBackgroundValue(design.mapBackground)==='ohm'?'selected':''}>OpenHistoricalMap</option><option value="cassini" ${mapBackgroundValue(design.mapBackground)==='cassini'?'selected':''}>Carte de Cassini (18e s.)</option><option value="etatmajor" ${mapBackgroundValue(design.mapBackground)==='etatmajor'?'selected':''}>État-Major (France, 19e s.)</option><option value="swisstopo_dufour" ${mapBackgroundValue(design.mapBackground)==='swisstopo_dufour'?'selected':''}>Swisstopo — Carte Dufour (Suisse, 1845-1865)</option><option value="swisstopo_siegfried" ${mapBackgroundValue(design.mapBackground)==='swisstopo_siegfried'?'selected':''}>Swisstopo — Carte Siegfried (Suisse, 1870-1949)</option><option value="nls_6inch" ${mapBackgroundValue(design.mapBackground)==='nls_6inch'?'selected':''}>OS 6-inch Écosse (1842-1882)</option><option value="nls_natgrid" ${mapBackgroundValue(design.mapBackground)==='nls_natgrid'?'selected':''}>OS National Grid UK (1940-1960)</option><option value="ferraris" ${mapBackgroundValue(design.mapBackground)==='ferraris'?'selected':''}>Carte de Ferraris (Belgique, 1777)</option><option value="vandermaelen" ${mapBackgroundValue(design.mapBackground)==='vandermaelen'?'selected':''}>Carte Vandermaelen (Belgique, 1846-1854)</option><option value="popp" ${mapBackgroundValue(design.mapBackground)==='popp'?'selected':''}>Atlas Popp (Belgique, 1842-1879)</option><option value="frickx" ${mapBackgroundValue(design.mapBackground)==='frickx'?'selected':''}>Carte Fricx (Belgique, 1744)</option><option value="buurtwegen" ${mapBackgroundValue(design.mapBackground)==='buurtwegen'?'selected':''}>Atlas der Buurtwegen (Flandre, ~1840)</option><optgroup label="— France IGN (Géoplateforme) —"></optgroup><option value="ign_ortho_1950" ${mapBackgroundValue(design.mapBackground)==='ign_ortho_1950'?'selected':''}>Photos aériennes historiques IGN (1950-1965)</option><option value="ign_scan50_1950" ${mapBackgroundValue(design.mapBackground)==='ign_scan50_1950'?'selected':''}>Scan50 1950 — carte papier IGN</option><option value="ign_hr_ortho" ${mapBackgroundValue(design.mapBackground)==='ign_hr_ortho'?'selected':''}>Orthophotos actuelles HD IGN</option><option value="ign_planv2" ${mapBackgroundValue(design.mapBackground)==='ign_planv2'?'selected':''}>Plan IGN v2 (actuel)</option><optgroup label="— Grande-Bretagne (NLS) —"></optgroup><option value="nls_25inch" ${mapBackgroundValue(design.mapBackground)==='nls_25inch'?'selected':''}>OS 25-inch Écosse (1892-1905)</option><option value="nls_1inch" ${mapBackgroundValue(design.mapBackground)==='nls_1inch'?'selected':''}>OS 1-inch GB (1885-1900)</option><option value="gsgs3906" ${mapBackgroundValue(design.mapBackground)==='gsgs3906'?'selected':''}>GSGS 3906 — War Office 1940-1943 (Écosse)</option><option value="london_1940s" ${mapBackgroundValue(design.mapBackground)==='london_1940s'?'selected':''}>Londres 1940s (1:1250/1:2500)</option><optgroup label="— États-Unis (USGS) —"></optgroup><option value="usgs_topo" ${mapBackgroundValue(design.mapBackground)==='usgs_topo'?'selected':''}>USGS Topo (USA, actuel)</option><option value="usgs_imagery" ${mapBackgroundValue(design.mapBackground)==='usgs_imagery'?'selected':''}>USGS Satellite (USA)</option><optgroup label="— Espagne (IGN España) —"></optgroup><option value="ign_es_mtn50" ${mapBackgroundValue(design.mapBackground)==='ign_es_mtn50'?'selected':''}>MTN50 première édition (Espagne, 1910-1970)</option><option value="ign_es_pnoa" ${mapBackgroundValue(design.mapBackground)==='ign_es_pnoa'?'selected':''}>Orthophotos PNOA actuelles (Espagne)</option></select></label><label>Détails des recensements<select name="censusDetailsDefault"><option value="collapsed" ${design.censusDetailsDefault!=='expanded'?'selected':''}>Masqués par défaut</option><option value="expanded" ${design.censusDetailsDefault==='expanded'?'selected':''}>Affichés par défaut</option></select></label><label>Ordre des recensements spéciaux<select name="censusSpecialOrder"><option value="official_first" ${design.censusSpecialOrder!=='chronological'?'selected':''}>Classiques puis spéciaux</option><option value="chronological" ${design.censusSpecialOrder==='chronological'?'selected':''}>Tout chronologique</option></select></label><label>Forme des avatars<select name="avatarShape"><option value="tilted" ${(design.avatarShape||'tilted')==='tilted'?'selected':''}>Carré penché (défaut)</option><option value="square" ${design.avatarShape==='square'?'selected':''}>Carré droit</option><option value="circle" ${design.avatarShape==='circle'?'selected':''}>Cercle</option><option value="pentagon" ${design.avatarShape==='pentagon'?'selected':''}>Pentagone</option><option value="hexagon" ${design.avatarShape==='hexagon'?'selected':''}>Hexagone</option><option value="diamond" ${design.avatarShape==='diamond'?'selected':''}>Losange</option></select></label><label>Affichage des événements<select name="eventDisplayMode"><option value="all_mixed" ${(design.eventDisplayMode||'all_mixed')==='all_mixed'?'selected':''}>Tous (mélangés)</option><option value="all_bottom" ${design.eventDisplayMode==='all_bottom'?'selected':''}>Tous (séparés)</option><option value="own_only" ${design.eventDisplayMode==='own_only'?'selected':''}>Mes événements</option><option value="witness_only" ${design.eventDisplayMode==='witness_only'?'selected':''}>Comme témoin</option></select></label><label>Position sur la carte (défaut)<select name="defaultMapLocationMode"><option value="city" ${(design.defaultMapLocationMode||'city')==='city'?'selected':''}>Ville</option><option value="combined" ${design.defaultMapLocationMode==='combined'?'selected':''}>Combiné</option><option value="precise" ${design.defaultMapLocationMode==='precise'?'selected':''}>Lieu précis</option></select></label><label>Variantes de nom<select name="identity_name_variants_display"><option value="always" ${getIdentityNameVariantsDisplay()==='always'?'selected':''}>Afficher</option><option value="never" ${getIdentityNameVariantsDisplay()==='never'?'selected':''}>Masquer</option><option value="if_filled" ${(getIdentityNameVariantsDisplay()||'if_filled')==='if_filled'?'selected':''}>Afficher seulement si renseigné</option></select></label><label>Enquêtes en secondaire<select name="showInvestigationsAsSecondary"><option value="show" ${(design.showInvestigationsAsSecondary||'show')==='show'?'selected':''}>Afficher dans la fiche</option><option value="hide" ${design.showInvestigationsAsSecondary==='hide'?'selected':''}>Masquer de la fiche</option></select></label><label>Mort Pour La France (défaut)<select name="defaultMortPourLaFrance"><option value="unknown" ${(design.defaultMortPourLaFrance||'unknown')==='unknown'?'selected':''}>Inconnu</option><option value="yes" ${design.defaultMortPourLaFrance==='yes'?'selected':''}>Oui</option><option value="no" ${design.defaultMortPourLaFrance==='no'?'selected':''}>Non</option><option value="na" ${design.defaultMortPourLaFrance==='na'?'selected':''}>Non applicable</option></select></label><label>Prénom affiché<input name="ownerFirst" value="${escapeHtml(design.ownerFirst||'')}" placeholder="Marie"></label><label>Nom affiché<input name="ownerLast" value="${escapeHtml(design.ownerLast||'')}" placeholder="Dupont"></label><label>Lecteur audio / vidéo : avancer et reculer de (secondes)<input type="number" name="avSkipSeconds" min="1" max="3600" step="1" value="${escapeHtml(String(design.avSkipSeconds||15))}"></label>`;
@@ -5869,17 +5889,10 @@ ${backupSectionHtml()}
         if(mapBackground&&defaultMapLocation)mapBackground.after(defaultMapLocation);
         if(censusDetails&&eventDisplay)censusDetails.before(eventDisplay);
     }
-    function designPresetsHtml(presets){
-        const rows=Object.entries(presets).sort((a,b)=>(a[1].name||'').localeCompare(b[1].name||'','fr'));
-        return `<div class="local-lock-inline design-presets-head"><div><strong>Designs enregistrés</strong><span>Sauvegarde ce réglage sous un nom pour le retrouver et le réappliquer plus tard.</span></div><div class="page-actions"><input type="text" id="design-preset-name" placeholder="Nom du design" maxlength="60"><button class="button small" type="button" id="save-design-preset">Enregistrer ce design</button>${settingImportButton('id="import-design-preset"')}</div></div><div class="design-presets-list">${rows.length?rows.map(([id,preset])=>`<article class="design-preset-row" data-preset-id="${escapeHtml(id)}"><b>${escapeHtml(preset.name||'Sans nom')}</b><div class="page-actions"><button class="button small secondary" type="button" data-apply-preset="${escapeHtml(id)}">Appliquer</button><button class="button small secondary" type="button" data-edit-preset="${escapeHtml(id)}">Modifier</button><button class="button small secondary" type="button" data-rename-preset="${escapeHtml(id)}">Renommer</button>${settingExportButton(`data-export-preset="${escapeHtml(id)}"`)}<button class="button small secondary" type="button" data-delete-preset="${escapeHtml(id)}">Supprimer</button></div></article>`).join(''):empty('Aucun design enregistré pour l’instant',{icon:'🎨',hint:'Règle l’apparence puis enregistre-la sous un nom pour la retrouver ici.'})}</div>`;
-    }
     function personBadgeColorsFromPanel(){
         const panel=$('#person-badge-colors'),colors={};
         Object.keys(DEFAULT_PERSON_BADGE_COLORS).forEach(key=>{colors[key]=panel?.querySelector(`[name="badge_${key}"]`)?.value||DEFAULT_PERSON_BADGE_COLORS[key];});
         return colors;
-    }
-    function personBadgePresetSwatches(colors){
-        return ['sosa_bg','sosa_star','daboville_bg','daboville_star','deceased_bg','outside_bg','artist_bg'].map(key=>`<span style="display:inline-block;width:13px;height:13px;border:1px solid var(--ink);background:${escapeHtml(colors?.[key]||DEFAULT_PERSON_BADGE_COLORS[key])};margin-right:2px;vertical-align:middle"></span>`).join('');
     }
     function personBadgeColorPanel(){
         const colors=getPersonBadgeColors();
@@ -5892,28 +5905,7 @@ ${backupSectionHtml()}
             ['outside_bg','Hors gén. fond'],['outside_text','Hors gén. texte'],
             ['artist_bg','Artiste fond'],['artist_text','Artiste texte'],
         ];
-        const presets=Object.entries(getPersonBadgeColorPresets()).sort((a,b)=>(a[1].name||'').localeCompare(b[1].name||'','fr'));
-        return `<section class="maintenance-panel order-editor compact person-badge-colors" id="person-badge-colors"><h3>Couleurs des badges</h3><div class="person-badge-preview"><span class="sosa-star"><span>★</span> SOSA : 64</span><span class="daboville-tag"><span>◆</span> d'Aboville : 1.2.3</span><span class="status-badge deceased">Décédé(e)</span><span class="outside-genealogy-badge">Hors généalogie</span><span class="artist-badge">🎨 Artiste</span></div><div class="person-badge-color-grid">${rows.map(([key,label])=>`<label><span>${escapeHtml(label)}</span><input type="color" name="badge_${key}" value="${escapeHtml(colors[key]||DEFAULT_PERSON_BADGE_COLORS[key])}"></label>`).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" id="apply-person-badge-colors">Appliquer</button><button class="button small secondary" type="button" id="reset-person-badge-colors">↺ Remettre comme au départ</button></div><div class="person-badge-presets"><strong>Palettes</strong><div class="person-badge-preset-list">${presets.length?presets.map(([id,preset])=>`<article class="design-preset-row"><b>${escapeHtml(preset.name||'Sans nom')}</b><span>${personBadgePresetSwatches(preset.colors||{})}</span><div class="page-actions"><button class="button small secondary" type="button" data-apply-person-badge-preset="${escapeHtml(id)}">Appliquer</button>${settingExportButton(`data-export-person-badge-preset="${escapeHtml(id)}"`)}<button class="button small secondary" type="button" data-delete-person-badge-preset="${escapeHtml(id)}">Suppr.</button></div></article>`).join(''):empty('Aucune palette enregistrée pour l’instant',{icon:'🎨',hint:'Donne un nom à tes couleurs ci-dessous puis enregistre-les.'})}</div><div class="page-actions person-badge-save-row"><input type="text" id="person-badge-preset-name" placeholder="Nom de la palette"><button class="button small" type="button" id="save-person-badge-preset">Enregistrer</button>${settingImportButton('id="import-person-badge-preset"')}</div></div></section>`;
-    }
-    function openEditPresetDialog(presetId){
-        const presets=designPresets(),preset=presets[presetId];
-        if(!preset)return;
-        $('#edit-preset-dialog')?.remove();
-        document.body.insertAdjacentHTML('beforeend',`<dialog class="modal small-modal" id="edit-preset-dialog"><form id="edit-preset-form"><div class="modal-head"><h2>Modifier « ${escapeHtml(preset.name||'Sans nom')} »</h2></div><div class="form-grid">${designFieldsHtml(preset.design||{})}</div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" value="cancel">Annuler</button><button class="button" type="submit">Valider</button></div></form></dialog>`);
-        const dialog=$('#edit-preset-dialog'),form=$('#edit-preset-form');
-        $('button[value="cancel"]',dialog).addEventListener('click',()=>{dialog.close();dialog.remove();});
-        dialog.addEventListener('close',()=>dialog.remove());
-        form.addEventListener('submit',event=>{
-            event.preventDefault();
-            const currentPresets=designPresets(),target=currentPresets[presetId];
-            if(!target){dialog.close();return;}
-            target.design=formObject(form);
-            saveDesignPresets(currentPresets);
-            toast(`Design « ${target.name||'Sans nom'} » modifié.`);
-            dialog.close();
-            renderDesignTools();
-        });
-        dialog.showModal();
+        return `<section class="maintenance-panel order-editor compact person-badge-colors" id="person-badge-colors"><h3>Couleurs des badges</h3><div class="person-badge-preview"><span class="sosa-star"><span>★</span> SOSA : 64</span><span class="daboville-tag"><span>◆</span> d'Aboville : 1.2.3</span><span class="status-badge deceased">Décédé(e)</span><span class="outside-genealogy-badge">Hors généalogie</span><span class="artist-badge">🎨 Artiste</span></div><div class="person-badge-color-grid">${rows.map(([key,label])=>`<label><span>${escapeHtml(label)}</span><input type="color" name="badge_${key}" value="${escapeHtml(colors[key]||DEFAULT_PERSON_BADGE_COLORS[key])}"></label>`).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" id="apply-person-badge-colors">Appliquer</button><button class="button small secondary" type="button" id="reset-person-badge-colors">↺ Remettre comme au départ</button></div><div data-presets-slot="palette-badges"></div></section>`;
     }
     // Apparence en trois pages : l'apparence générale, le tableau de bord, les fiches des personnes et des animaux.
     // Une seule page est construite (tous les réglages restent branchés) ; chaque onglet n'en montre que sa part.
@@ -5945,7 +5937,7 @@ ${backupSectionHtml()}
         let curIsAnimal=(current?.kind||state.currentPersonKind)==='animal';
         if(personId&&!current?.kind&&!state.currentPersonKind){try{curIsAnimal=(await api('person',{id:personId})).person?.kind==='animal';}catch(_){}}
         $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">APPARENCE</span><h2>Personnalisation locale</h2><p>Presets, couleur, typo, ordre des menus et ordre des listes. Tout est gardé dans ce navigateur.</p></div></header>
-        <form class="maintenance-panel" id="design-form"><div class="form-grid design-primary-grid">${designFieldsHtml(design)}</div>${customPresetsPanelHtml()}${sosaInlineControlsHtml()}${dabovilleInlineControlsHtml()}${lockInlineControlsHtml(lockData)}<div class="page-actions action-zone design-actions"><button class="button" type="submit">Appliquer</button><button class="button secondary" type="button" id="reset-design">↺ Remettre comme au départ</button><button class="button secondary" type="button" id="save-site-defaults">Définir comme défaut du site</button><button class="button secondary" type="button" id="apply-site-defaults">Appliquer les défauts du site</button></div>${designPresetsHtml(designPresets())}</form>
+        <form class="maintenance-panel" id="design-form"><div class="form-grid design-primary-grid">${designFieldsHtml(design)}</div>${customPresetsPanelHtml()}${sosaInlineControlsHtml()}${dabovilleInlineControlsHtml()}${lockInlineControlsHtml(lockData)}<div class="page-actions action-zone design-actions"><button class="button" type="submit">Appliquer</button><button class="button secondary" type="button" id="reset-design">↺ Remettre comme au départ</button><button class="button secondary" type="button" id="save-site-defaults">Définir comme défaut du site</button><button class="button secondary" type="button" id="apply-site-defaults">Appliquer les défauts du site</button></div><div data-presets-slot="apparence"></div></form>
         <div class="design-order-grid design-order-grid-four">${menuOrderEditor(menuItems)}${graphDiagramOrderEditor(graphDiagramAllItems,graphDiagramHidden)}${graphStatsOrderEditor(graphStatsAllItems,graphStatsHidden)}${window.LCNDA_SIDEGROUPS?.instances?.listes?.panel('Ordre des listes')??listOrderEditor(listItems,listHidden)}${window.LCNDA_SIDEGROUPS?.instances?.maintenance?.panel('Ordre des pages de Maintenance')??orderEditor('maintenance-order','Ordre des onglets Maintenance',maintenanceItems)}${personBadgeColorPanel()}</div>
         <section class="person-block-config design-maps-part"><header><span class="eyebrow">CARTES</span></header>
             <div class="maintenance-panel"><div class="form-grid design-primary-grid" data-design-mapfields></div><div class="page-actions action-zone"><button class="button" type="submit" form="design-form">Enregistrer</button></div></div>
@@ -6049,87 +6041,19 @@ ${backupSectionHtml()}
                 toast(`Police « ${font} » choisie : enregistre le design pour la garder.`);
             });
         }
-        const presetNameInput=$('#design-preset-name');
-        presetNameInput?.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();$('#save-design-preset')?.click();}});
-        $('#save-design-preset')?.addEventListener('click',()=>{
-            const name=(presetNameInput?.value||'').trim();
-            if(!name){toast('Indique un nom pour ce design.','error');presetNameInput?.focus();return;}
-            const presets=designPresets();
-            const id=String(Date.now());
-            const formValues=formObject($('#design-form'));localStorage.setItem('genealogie-design',JSON.stringify(formValues));applyDesign();presets[id]={name,design:formValues};
-            saveDesignPresets(presets);
-            toast(`Design « ${name} » enregistré.`);
-            renderDesignTools();
-        });
-        $$('[data-apply-preset]').forEach(button=>button.addEventListener('click',()=>{
-            const presets=designPresets(),preset=presets[button.dataset.applyPreset];
-            if(!preset)return;
-            localStorage.setItem('genealogie-design',JSON.stringify(preset.design||{}));
-            applyDesign();
-            toast(`Design « ${preset.name||'Sans nom'} » appliqué.`);
-            renderDesignTools();
-        }));
-        $$('[data-edit-preset]').forEach(button=>button.addEventListener('click',()=>openEditPresetDialog(button.dataset.editPreset)));
-        $$('[data-rename-preset]').forEach(button=>button.addEventListener('click',async()=>{
-            const presets=designPresets(),preset=presets[button.dataset.renamePreset];
-            if(!preset)return;
-            const name=await askText({title:'Renommer le design',message:'Nouveau nom pour ce design :',value:preset.name||'',okLabel:'Renommer'});
-            if(name===null)return;
-            const trimmed=name.trim();
-            if(!trimmed){toast('Le nom ne peut pas être vide.','error');return;}
-            preset.name=trimmed;
-            saveDesignPresets(presets);
-            toast('Design renommé.');
-            renderDesignTools();
-        }));
-        $$('[data-export-preset]').forEach(button=>button.addEventListener('click',()=>{const p=designPresets()[button.dataset.exportPreset];if(p)exportSettingFile('apparence',p.name||'Sans nom',{design:p.design||{}});}));
-        $('#import-design-preset')?.addEventListener('click',async()=>{
-            const presets=designPresets();
-            const got=await importSettingFile('apparence',{names:Object.values(presets).map(p=>p.name||''),check:d=>d.design&&typeof d.design==='object'&&!Array.isArray(d.design)});
-            if(!got)return;
+        keyedPresetsFrame($('[data-presets-slot="apparence"]'),{id:'apparence',what:'cette apparence',key:'genealogie-design-presets',field:'design',outil:'apparence',noun:'Design',
+            current:()=>{const v=formObject($('#design-form'));localStorage.setItem('genealogie-design',JSON.stringify(v));applyDesign();return v;},
+            use:d=>{localStorage.setItem('genealogie-design',JSON.stringify(d||{}));applyDesign();renderDesignTools();},
+            check:d=>d.design&&typeof d.design==='object'&&!Array.isArray(d.design),
             // seulement des valeurs simples (texte, nombre) : un design n'est fait que de ça
-            const design=Object.fromEntries(Object.entries(got.donnees.design).filter(([k,v])=>/^[a-z_][a-z0-9_]{0,60}$/i.test(k)&&['string','number','boolean'].includes(typeof v)).map(([k,v])=>[k,typeof v==='string'?v.slice(0,500):v]));
-            presets[String(Date.now())]={name:got.nom,design};saveDesignPresets(presets);toast(`Design « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`);renderDesignTools();
-        });
-        $$('[data-delete-preset]').forEach(button=>button.addEventListener('click',async()=>{
-            const presets=designPresets(),preset=presets[button.dataset.deletePreset];
-            if(!preset)return;
-            undoLocalChange(`Design « ${preset.name||'Sans nom'} » supprimé`,['genealogie-design-presets'],()=>{delete presets[button.dataset.deletePreset];saveDesignPresets(presets);},()=>renderDesignTools());
-            renderDesignTools();
-        }));
+            clean:d=>Object.fromEntries(Object.entries(d).filter(([k,v])=>/^[a-z_][a-z0-9_]{0,60}$/i.test(k)&&['string','number','boolean'].includes(typeof v)).map(([k,v])=>[k,typeof v==='string'?v.slice(0,500):v]))});
         $('#apply-person-badge-colors')?.addEventListener('click',()=>{savePersonBadgeColors(personBadgeColorsFromPanel());toast('Couleurs des badges appliquées.');if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);});
         $('#reset-person-badge-colors')?.addEventListener('click',()=>{savePersonBadgeColors(DEFAULT_PERSON_BADGE_COLORS);toast('Couleurs des badges réinitialisées.');renderDesignTools();if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);});
-        $('#save-person-badge-preset')?.addEventListener('click',()=>{
-            const input=$('#person-badge-preset-name'),name=(input?.value||'').trim();
-            if(!name){toast('Indique un nom pour cette palette.','error');input?.focus();return;}
-            const presets=getPersonBadgeColorPresets();
-            presets[String(Date.now())]={name,colors:personBadgeColorsFromPanel()};
-            savePersonBadgeColorPresets(presets);
-            toast(`Palette « ${name} » enregistrée.`);
-            renderDesignTools();
-        });
-        $$('[data-apply-person-badge-preset]').forEach(button=>button.addEventListener('click',()=>{
-            const preset=getPersonBadgeColorPresets()[button.dataset.applyPersonBadgePreset];
-            if(!preset)return;
-            savePersonBadgeColors(preset.colors||DEFAULT_PERSON_BADGE_COLORS);
-            toast(`Palette « ${preset.name||'Sans nom'} » appliquée.`);
-            renderDesignTools();
-            if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);
-        }));
-        $$('[data-export-person-badge-preset]').forEach(button=>button.addEventListener('click',()=>{const p=getPersonBadgeColorPresets()[button.dataset.exportPersonBadgePreset];if(p)exportSettingFile('palette-badges',p.name||'Sans nom',{colors:p.colors||{}});}));
-        $('#import-person-badge-preset')?.addEventListener('click',async()=>{
-            const presets=getPersonBadgeColorPresets(),isColor=c=>typeof c==='string'&&/^#[0-9a-f]{3,8}$/i.test(c);
-            const got=await importSettingFile('palette-badges',{names:Object.values(presets).map(p=>p.name||''),check:d=>d.colors&&typeof d.colors==='object'&&!Array.isArray(d.colors)});
-            if(!got)return;
-            const colors=Object.fromEntries(Object.entries(got.donnees.colors).filter(([k,v])=>k in DEFAULT_PERSON_BADGE_COLORS&&isColor(v)));
-            presets[String(Date.now())]={name:got.nom,colors:{...DEFAULT_PERSON_BADGE_COLORS,...colors}};savePersonBadgeColorPresets(presets);toast(`Palette « ${got.nom} » importée.`);renderDesignTools();
-        });
-        $$('[data-delete-person-badge-preset]').forEach(button=>button.addEventListener('click',async()=>{
-            const presets=getPersonBadgeColorPresets(),preset=presets[button.dataset.deletePersonBadgePreset];
-            if(!preset)return;
-            undoLocalChange(`Palette « ${preset.name||'Sans nom'} » supprimée`,[PERSON_BADGE_COLOR_PRESETS_KEY],()=>{delete presets[button.dataset.deletePersonBadgePreset];savePersonBadgeColorPresets(presets);},()=>renderDesignTools());
-            renderDesignTools();
-        }));
+        keyedPresetsFrame($('[data-presets-slot="palette-badges"]'),{id:'palette-badges',what:'ces couleurs des badges',key:PERSON_BADGE_COLOR_PRESETS_KEY,field:'colors',outil:'palette-badges',noun:'Palette',fem:true,
+            current:personBadgeColorsFromPanel,
+            use:c=>{savePersonBadgeColors(c||DEFAULT_PERSON_BADGE_COLORS);renderDesignTools();if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);},
+            check:d=>d.colors&&typeof d.colors==='object'&&!Array.isArray(d.colors),
+            clean:c=>({...DEFAULT_PERSON_BADGE_COLORS,...Object.fromEntries(Object.entries(c).filter(([k,v])=>k in DEFAULT_PERSON_BADGE_COLORS&&typeof v==='string'&&/^#[0-9a-f]{3,8}$/i.test(v)))})});
         $$('.order-list:not(.tile-cat-items)').forEach(setupDragOrder);
         bindCustomPresetsPanel();
         // Tile category drag + item drag between modules
@@ -6501,19 +6425,8 @@ ${backupSectionHtml()}
         $('#view-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);const form=event.currentTarget;try{if(values.view_id){const id=Number(values.view_id);const config=JSON.parse(values.config||'{}');if(form.querySelector('[name^="vc_stats_"]')){config.statsColors=Array.from({length:40},(_,i)=>form.querySelector(`[name="vc_stats_${i}"]`)?.value||DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length]);}else if(form.querySelector('[name^="vc_gender_"]')){const gColors={};['male','female','unknown'].forEach(key=>{gColors[key]={bg:form.querySelector(`[name="vc_gender_${key}_bg"]`)?.value||DEFAULT_GENDER_COLORS[key].bg,text:form.querySelector(`[name="vc_gender_${key}_text"]`)?.value||DEFAULT_GENDER_COLORS[key].text};});config.genderColors=gColors;}await api('update_view',{},{method:'POST',body:{id,name:values.name,config}});await applyLabelPickerAfterSave('#view-label-picker',id);$('#view-dialog').close();$('#view-dialog').classList.remove('has-colors');$('#view-dialog-colors').innerHTML='';await reloadBootstrap();if(values.module==='graph'&&state.module==='graphiques'){state.graphTab='saved';persistUiState();if(config.genderColors&&config.mode!=='stats'&&config.mode!=='distribution'){const gc=config.genderColors;saveGenderColors({male:{bg:gc.male?.bg||DEFAULT_GENDER_COLORS.male.bg,text:gc.male?.text||DEFAULT_GENDER_COLORS.male.text},female:{bg:gc.female?.bg||DEFAULT_GENDER_COLORS.female.bg,text:gc.female?.text||DEFAULT_GENDER_COLORS.female.text},unknown:{bg:gc.unknown?.bg||DEFAULT_GENDER_COLORS.unknown.bg,text:gc.unknown?.text||DEFAULT_GENDER_COLORS.unknown.text}});applyGenderColorsToDocument();}renderSidebar();await renderGraph();}else{renderSidebar();}toast('Vue modifiée.');}else{const _savedMod=values.module;const saved=await api('save_view',{},{method:'POST',body:{module:_savedMod,name:values.name,config:JSON.parse(values.config)}});const savedId=Number(saved?.result?.id||0);await applyLabelPickerAfterSave('#view-label-picker',savedId);$('#view-dialog').close();await reloadBootstrap();if(_savedMod==='graph'&&state.module==='graphiques'){state.graphTab='saved';persistUiState();}renderSidebar();if(_savedMod==='graph'&&state.module==='graphiques')await renderGraph();toast('Vue enregistrée.');}}catch(error){toast(error.message,'error');}});
         $('#stats-colors-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;const colors=Array.from({length:40},(_,i)=>form.querySelector(`[name="color_${i}"]`)?.value||DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length]);saveStatsColors(colors);state.graphStatsFrozenColors=null;const gColors={};['male','female','unknown'].forEach(key=>{gColors[key]={bg:form.querySelector(`[name="gender_${key}_bg"]`)?.value||DEFAULT_GENDER_COLORS[key].bg,text:form.querySelector(`[name="gender_${key}_text"]`)?.value||DEFAULT_GENDER_COLORS[key].text};});saveGenderColors(gColors);applyGenderColorsToDocument();const tFields={};['occupation','partners','living_status','marr','buri','bapt','id'].forEach(f=>{const el=form.querySelector(`[name="tree_field_${f}"]`);tFields[f]=el?el.checked:false;});saveTreeCardFields(tFields);saveIdentityNameVariantsDisplay(form.querySelector('[name="identity_name_variants_display"]')?.value||'if_filled');$('#stats-colors-dialog').close();toast('Palette enregistrée.');if(state.module==='graphiques'&&state.graphMode==='stats')renderGraphStats();else if(state.module==='graphiques')renderGraph();else if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);});
         $('#stats-colors-reset')?.addEventListener('click',()=>{const form=$('#stats-colors-form');DEFAULT_STATS_COLORS.forEach((c,i)=>{const input=form.querySelector(`[name="color_${i}"]`);if(input)input.value=c;});['male','female','unknown'].forEach(key=>{const bgInput=form.querySelector(`[name="gender_${key}_bg"]`);if(bgInput)bgInput.value=DEFAULT_GENDER_COLORS[key].bg;const textInput=form.querySelector(`[name="gender_${key}_text"]`);if(textInput)textInput.value=DEFAULT_GENDER_COLORS[key].text;});['occupation','partners','living_status','marr','buri','bapt','id'].forEach(f=>{const el=form.querySelector(`[name="tree_field_${f}"]`);if(el)el.checked=DEFAULT_TREE_CARD_FIELDS[f]||false;});const nameVariantsSelect=form.querySelector('[name="identity_name_variants_display"]');if(nameVariantsSelect)nameVariantsSelect.value='if_filled';});
-        $('#stats-colors-save-preset')?.addEventListener('click',()=>{const nameInput=$('#stats-colors-preset-name');const name=(nameInput?.value||'').trim();if(!name){toast('Indique un nom pour cette palette.','error');nameInput?.focus();return;}const form=$('#stats-colors-form');const colors=Array.from({length:40},(_,i)=>form.querySelector(`[name="color_${i}"]`)?.value||DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length]);const presets=getStatsColorPresets();presets[String(Date.now())]={name,colors};saveStatsColorPresets(presets);if(nameInput)nameInput.value='';renderStatsColorPresetsList();toast(`Palette « ${name} » sauvegardée.`);});
         $('#battue-level-colors-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;const colors=Array.from({length:DEFAULT_BATTUE_LEVEL_COLORS.length},(_,i)=>form.querySelector(`[name="battue_level_${i}"]`)?.value||DEFAULT_BATTUE_LEVEL_COLORS[i]);saveBattueLevelColors(colors);$('#battue-level-colors-dialog').close();toast('Couleurs des niveaux enregistrées.');});
         $('#battue-level-colors-reset')?.addEventListener('click',()=>{const form=$('#battue-level-colors-form');DEFAULT_BATTUE_LEVEL_COLORS.forEach((c,i)=>{const input=form?.querySelector(`[name="battue_level_${i}"]`);if(input)input.value=c;});});
-        // ⤒ Importer une palette exportée
-        const importPalette=async(outil,get,save,redraw)=>{
-            const presets=get();
-            const got=await importSettingFile(outil,{names:Object.values(presets).map(p=>p.name||''),check:d=>Array.isArray(d.colors)&&d.colors.every(c=>typeof c==='string'&&/^#[0-9a-f]{3,8}$/i.test(c))});
-            if(!got)return;
-            presets[String(Date.now())]={name:got.nom,colors:got.donnees.colors.slice(0,40)};save(presets);redraw();toast(`Palette « ${got.nom} » importée.`);
-        };
-        $('#stats-colors-import-preset')?.addEventListener('click',()=>importPalette('palette-stats',getStatsColorPresets,saveStatsColorPresets,renderStatsColorPresetsList));
-        $('#battue-level-colors-import-preset')?.addEventListener('click',()=>importPalette('palette-battues',getBattueLevelColorPresets,saveBattueLevelColorPresets,renderBattueLevelColorPresetsList));
-        $('#battue-level-colors-save-preset')?.addEventListener('click',()=>{const nameInput=$('#battue-level-colors-preset-name');const name=(nameInput?.value||'').trim();if(!name){toast('Indique un nom pour cette palette.','error');nameInput?.focus();return;}const form=$('#battue-level-colors-form');const colors=Array.from({length:DEFAULT_BATTUE_LEVEL_COLORS.length},(_,i)=>form.querySelector(`[name="battue_level_${i}"]`)?.value||DEFAULT_BATTUE_LEVEL_COLORS[i]);const presets=getBattueLevelColorPresets();presets[String(Date.now())]={name,colors};saveBattueLevelColorPresets(presets);if(nameInput)nameInput.value='';renderBattueLevelColorPresetsList();toast(`Palette « ${name} » sauvegardée.`);});
         $('#investigation-form').addEventListener('submit',async event=>{event.preventDefault();try{const formData=formObject(event.currentTarget);formData.additional_persons=$('#investigation-extra-persons')?.value||'';delete formData.people_json;if(!Number(formData.person_id)){toast('Choisis la personne principale de l’enquête.','error');return;}const result=await api('save_investigation',{}, {method:'POST',body:formData});$('#investigation-dialog').close();state.currentInvestigationId=Number(result.result.id);if(state.module==='personnes')await selectPerson(state.currentPersonId);else await renderInvestigations();toast('Enquête enregistrée.');}catch(error){toast(error.message,'error');}});
         $('#battue-form')?.addEventListener('submit',async event=>{
             event.preventDefault();
@@ -8367,36 +8280,16 @@ ${backupSectionHtml()}
         renderStatsColorPresetsList();
         $('#stats-colors-dialog').showModal();
     }
+    /* 💾 Palettes enregistrées : le cadre commun prend la place du bloc du dialogue (index.php) au premier affichage */
+    let statsPresetsFrame=null,battuePresetsFrame=null;
+    const isPaletteColor=c=>typeof c==='string'&&/^#[0-9a-f]{3,8}$/i.test(c);
     function renderStatsColorPresetsList(){
-        const presets=getStatsColorPresets();
-        const container=$('#stats-colors-presets-list');
-        if(!container)return;
-        const rows=Object.entries(presets).sort((a,b)=>(a[1].name||'').localeCompare(b[1].name||'','fr'));
-        if(!rows.length){container.innerHTML='<p class="muted" style="font-size:.85em;margin:.25rem 0 .5rem">Aucun design enregistré.</p>';return;}
-        container.innerHTML=rows.map(([id,preset])=>{
-            const swatches=(preset.colors||[]).slice(0,20).map(c=>`<span style="display:inline-block;width:13px;height:13px;border-radius:2px;background:${escapeHtml(c)};margin-right:2px;vertical-align:middle"></span>`).join('');
-            return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.08)">
-                <div style="flex:1;min-width:0"><strong style="font-size:.88em;display:block;margin-bottom:4px">${escapeHtml(preset.name||'Sans nom')}</strong><div>${swatches}</div></div>
-                <button type="button" class="button small" data-apply-color-preset="${id}">Appliquer</button>
-                ${settingExportButton(`data-export-color-preset="${id}"`)}
-                <button type="button" class="button small secondary" data-delete-color-preset="${id}">Suppr.</button>
-            </div>`;
-        }).join('');
-        $$('[data-apply-color-preset]',container).forEach(btn=>btn.addEventListener('click',()=>{
-            const preset=getStatsColorPresets()[btn.dataset.applyColorPreset];
-            if(!preset)return;
-            const form=$('#stats-colors-form');
-            (preset.colors||[]).forEach((c,i)=>{const input=form.querySelector(`[name="color_${i}"]`);if(input)input.value=c;});
-            toast(`Palette « ${preset.name||'Sans nom'} » appliquée. Clique sur Enregistrer pour confirmer.`);
-        }));
-        $$('[data-export-color-preset]',container).forEach(btn=>btn.addEventListener('click',()=>{const p=getStatsColorPresets()[btn.dataset.exportColorPreset];if(p)exportSettingFile('palette-stats',p.name||'Sans nom',{colors:p.colors||[]});}));
-        $$('[data-delete-color-preset]',container).forEach(btn=>btn.addEventListener('click',async()=>{
-            const presets=getStatsColorPresets();
-            const preset=presets[btn.dataset.deleteColorPreset];
-            if(!preset)return;
-            undoLocalChange(`Palette « ${preset.name||'Sans nom'} » supprimée`,[STATS_COLORS_PRESETS_KEY],()=>{delete presets[btn.dataset.deleteColorPreset];saveStatsColorPresets(presets);},()=>{if(container.isConnected)renderStatsColorPresetsList();});
-            renderStatsColorPresetsList();
-        }));
+        if(statsPresetsFrame?.isConnected)return statsPresetsFrame.refresh();
+        const form=$('#stats-colors-form');if(!form)return;
+        statsPresetsFrame=keyedPresetsFrame($('#stats-colors-presets-list')?.parentElement,{id:'palette-stats',what:'cette palette',key:STATS_COLORS_PRESETS_KEY,field:'colors',outil:'palette-stats',noun:'Palette',fem:true,quietApply:true,
+            current:()=>Array.from({length:40},(_,i)=>form.querySelector(`[name="color_${i}"]`)?.value||DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length]),
+            use:(colors,p)=>{(colors||[]).forEach((c,i)=>{const input=form.querySelector(`[name="color_${i}"]`);if(input)input.value=c;});toast(`Palette « ${p.name||'Sans nom'} » appliquée. Clique sur Enregistrer pour confirmer.`);},
+            check:d=>Array.isArray(d.colors)&&d.colors.every(isPaletteColor),clean:c=>c.slice(0,40)});
     }
     function openBattueLevelColorsDialog(){
         const form=$('#battue-level-colors-form');
@@ -8407,29 +8300,12 @@ ${backupSectionHtml()}
         $('#battue-level-colors-dialog')?.showModal();
     }
     function renderBattueLevelColorPresetsList(){
-        const container=$('#battue-level-colors-presets-list');
-        if(!container)return;
-        const rows=Object.entries(getBattueLevelColorPresets()).sort((a,b)=>(a[1].name||'').localeCompare(b[1].name||'','fr'));
-        if(!rows.length){container.innerHTML='<p class="muted" style="font-size:.85em;margin:.25rem 0 .5rem">Aucune palette enregistrée.</p>';return;}
-        container.innerHTML=rows.map(([id,preset])=>{
-            const swatches=(preset.colors||[]).slice(0,11).map(c=>`<span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:${escapeHtml(c)};margin-right:3px;vertical-align:middle"></span>`).join('');
-            return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.08)"><div style="flex:1;min-width:0"><strong style="font-size:.88em;display:block;margin-bottom:4px">${escapeHtml(preset.name||'Sans nom')}</strong><div>${swatches}</div></div><button type="button" class="button small" data-apply-battue-color-preset="${id}">Appliquer</button>${settingExportButton(`data-export-battue-color-preset="${id}"`)}<button type="button" class="button small secondary" data-delete-battue-color-preset="${id}">Suppr.</button></div>`;
-        }).join('');
-        $$('[data-apply-battue-color-preset]',container).forEach(btn=>btn.addEventListener('click',()=>{
-            const preset=getBattueLevelColorPresets()[btn.dataset.applyBattueColorPreset];
-            if(!preset)return;
-            const form=$('#battue-level-colors-form');
-            (preset.colors||[]).forEach((color,index)=>{const input=form.querySelector(`[name="battue_level_${index}"]`);if(input)input.value=color;});
-            toast(`Palette « ${preset.name||'Sans nom'} » appliquée. Clique sur Enregistrer pour confirmer.`);
-        }));
-        $$('[data-export-battue-color-preset]',container).forEach(btn=>btn.addEventListener('click',()=>{const p=getBattueLevelColorPresets()[btn.dataset.exportBattueColorPreset];if(p)exportSettingFile('palette-battues',p.name||'Sans nom',{colors:p.colors||[]});}));
-        $$('[data-delete-battue-color-preset]',container).forEach(btn=>btn.addEventListener('click',async()=>{
-            const presets=getBattueLevelColorPresets();
-            const preset=presets[btn.dataset.deleteBattueColorPreset];
-            if(!preset)return;
-            undoLocalChange(`Palette « ${preset.name||'Sans nom'} » supprimée`,[BATTUE_LEVEL_COLOR_PRESETS_KEY],()=>{delete presets[btn.dataset.deleteBattueColorPreset];saveBattueLevelColorPresets(presets);},()=>{if(container.isConnected)renderBattueLevelColorPresetsList();});
-            renderBattueLevelColorPresetsList();
-        }));
+        if(battuePresetsFrame?.isConnected)return battuePresetsFrame.refresh();
+        const form=$('#battue-level-colors-form');if(!form)return;
+        battuePresetsFrame=keyedPresetsFrame($('#battue-level-colors-presets-list')?.parentElement,{id:'palette-battues',what:'ces couleurs des niveaux',key:BATTUE_LEVEL_COLOR_PRESETS_KEY,field:'colors',outil:'palette-battues',noun:'Palette',fem:true,quietApply:true,
+            current:()=>Array.from({length:DEFAULT_BATTUE_LEVEL_COLORS.length},(_,i)=>form.querySelector(`[name="battue_level_${i}"]`)?.value||DEFAULT_BATTUE_LEVEL_COLORS[i]),
+            use:(colors,p)=>{(colors||[]).forEach((c,i)=>{const input=form.querySelector(`[name="battue_level_${i}"]`);if(input)input.value=c;});toast(`Palette « ${p.name||'Sans nom'} » appliquée. Clique sur Enregistrer pour confirmer.`);},
+            check:d=>Array.isArray(d.colors)&&d.colors.every(isPaletteColor),clean:c=>c.slice(0,40)});
     }
     function openViewDialog(module,config,id=0,editName=''){
         const form=$('#view-form');
