@@ -36,7 +36,7 @@
     /* petite fenêtre posée sous un élément (couleurs, aide) : au-dessus de tout, même d'une fenêtre ouverte */
     const CAN_POP = typeof HTMLElement !== 'undefined' && 'popover' in HTMLElement.prototype;
     let openPop = null;
-    function popup(anchor, el, {onClose} = {}) {
+    function popup(anchor, el, {onClose, align = 'left'} = {}) {
         closePop();
         el.classList.add('ui-pop');
         const host = anchor.closest('dialog') || document.body;
@@ -45,7 +45,7 @@
         if (CAN_POP) { try { el.showPopover(); } catch (_) {} }
         const place = () => {
             const r = anchor.getBoundingClientRect(), w = el.offsetWidth, ht = el.offsetHeight, vw = innerWidth, vh = innerHeight;
-            let left = Math.min(Math.max(8, r.left), vw - w - 8), top = r.bottom + 6;
+            let left = Math.min(Math.max(8, align === 'right' ? r.right - w : r.left), vw - w - 8), top = r.bottom + 6;
             if (top + ht > vh - 8 && r.top - ht - 6 > 8) top = r.top - ht - 6;
             el.style.left = `${Math.max(8, left)}px`; el.style.top = `${Math.max(8, Math.min(top, vh - ht - 8))}px`;
         };
@@ -236,6 +236,19 @@
         box.querySelector('.ui-sw-btn.is-on, .ui-sw-btn')?.focus();
     }
     /** C2 — openColorBox(élément, {get, set(v, final)}) : le cadre des couleurs posé sous n'importe quel élément (les deux carrés de la retouche…) */
+    /** Un menu d'actions sous un bouton (⋯) : il s'ouvre au clic et reste ouvert tant qu'on n'a rien choisi (on peut y promener la souris) ;
+        Échap ou un clic ailleurs le ferme. items : [{icon, label, help, danger, run}] ; title : petit titre en haut */
+    UI.menuAt = (anchor, items, {title = '', onClose = null} = {}) => {
+        if (openPop && openPop.el._uiFor === anchor) { closePop(); return null; }
+        const m = h('div', 'ui-actmenu'); m._uiFor = anchor; m.setAttribute('role', 'menu');
+        m.innerHTML = (title ? `<div class="ui-actmenu-t">${esc(title)}</div>` : '') + items.map((it, i) => `<button type="button" role="menuitem" class="ui-actmenu-i${it.danger ? ' is-danger' : ''}" data-i="${i}"><span class="ui-actmenu-ico" aria-hidden="true">${esc(it.icon || '')}</span><b>${esc(it.label)}</b>${it.help ? `<small>${esc(it.help)}</small>` : ''}</button>`).join('');
+        anchor.classList.add('is-open'); anchor.setAttribute('aria-expanded', 'true');
+        const pop = popup(anchor, m, {align: 'right', onClose: () => { anchor.classList.remove('is-open'); anchor.setAttribute('aria-expanded', 'false'); onClose?.(); }});
+        m.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; const it = items[Number(b.dataset.i)]; pop.close(); it?.run?.(); });
+        m.querySelector('button')?.focus({preventScroll: true});
+        m.addEventListener('keydown', e => { const bs = [...m.querySelectorAll('button')], k = bs.indexOf(document.activeElement); if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); bs[(k + (e.key === 'ArrowDown' ? 1 : bs.length - 1)) % bs.length]?.focus(); } });
+        return pop;
+    };
     UI.openColorBox = (anchor, {get, set, alpha = false, allowNone = false} = {}) => openColorBox(anchor, {get, set, alpha, allowNone}, () => {});
     /** C2 — colorField({name, value, allowNone, alpha, compact}) → l'élément (.input = l'input caché qui reçoit input/change) */
     UI.colorField = ({name = '', value = '#111111', allowNone = false, alpha = false, compact = false} = {}) => {

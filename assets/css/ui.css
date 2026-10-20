@@ -456,3 +456,37 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
 .ui-cb-sl output { text-align: right; font-variant-numeric: tabular-nums; }
 [data-cb-pane][hidden] { display: none; }
 .ui-colorbox-acts { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+/* menu d'actions (⋯) : carré, ombre bleue, une phrase d'aide sous chaque action */
+.ui-actmenu{position:fixed;z-index:10000;margin:0;padding:0;border:2px solid #111;background:#fff;box-shadow:5px 5px 0 #c9d6ff;min-width:270px;max-width:min(360px,calc(100vw - 16px));display:grid;color:#111}
+.ui-actmenu-t{padding:7px 12px;font:700 10.5px/1.2 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;border-bottom:1px solid #d9dde3;background:#fafbfc}
+.ui-actmenu-i{display:grid;grid-template-columns:22px 1fr;gap:1px 8px;padding:9px 12px;border:0;border-bottom:1px solid #d9dde3;background:#fff;text-align:left;cursor:pointer;color:inherit;border-radius:0;box-shadow:none;font:inherit}
+.ui-actmenu-i:last-child{border-bottom:0}
+.ui-actmenu-i b{font-weight:600;font-size:14px}
+.ui-actmenu-i small{grid-column:2;color:#6b7280;font-size:12px;line-height:1.3}
+.ui-actmenu-i:hover,.ui-actmenu-i:focus-visible{background:#f3f6ff;outline:0}
+.ui-actmenu-i.is-danger b,.ui-actmenu-i.is-danger .ui-actmenu-ico{color:#b42318}
+:root[data-theme="dark"] .ui-actmenu{background:#24272c;color:#eee;border-color:#666}
+:root[data-theme="dark"] .ui-actmenu-i{background:#24272c;border-color:#3a3f46}
+:root[data-theme="dark"] .ui-actmenu-i:hover{background:#30343a}
+:root[data-theme="dark"] .ui-actmenu-t{background:#1f2226;border-color:#3a3f46}
+/* 💾 Réglages enregistrés (proposition C) : un cadre repliable ; ouvert, une liste « Appliquer · ⋯ » ; en bas, créer ou importer */
+.ui-presets{border:1px solid #d9dde3;margin:6px 0 14px;background:#fff}
+.ui-presets-head{display:flex;justify-content:space-between;align-items:center;width:100%;padding:10px 12px;border:0;background:#fafbfc;font:inherit;font-weight:700;cursor:pointer;color:inherit;text-align:left;border-radius:0;box-shadow:none}
+.ui-presets-head:hover{background:#f3f6ff}
+.ui-presets-n,.ui-presets-car{color:#6b7280;font-weight:400;font-size:13px}
+.ui-presets-list{list-style:none;margin:0;padding:0}
+.ui-presets-list li{display:flex;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid #d9dde3}
+.ui-presets-list li.is-menu{background:#f3f6ff}
+.ui-presets-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ui-presets-name small{color:#6b7280}
+.ui-presets-more{width:34px;padding-left:0!important;padding-right:0!important;justify-content:center}
+.ui-presets-more.is-open{background:#111!important;color:#fff!important;border-color:#111!important}
+.ui-presets-edit,.ui-presets-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1}
+.ui-presets-foot{border-top:1px solid #d9dde3;padding:10px 12px}
+.ui-presets-foot .spacer{flex:1}
+.ui-presets-inp{flex:1;min-width:160px;border:2px solid #1a5cff;padding:5px 8px;font-size:14px;border-radius:0}
+.ui-presets-empty{margin:0;padding:10px 12px;border-top:1px solid #d9dde3;color:#6b7280;font-size:13px}
+:root[data-theme="dark"] .ui-presets{background:#24272c;border-color:#3a3f46}
+:root[data-theme="dark"] .ui-presets-head{background:#1f2226}
+:root[data-theme="dark"] .ui-presets-list li,:root[data-theme="dark"] .ui-presets-foot,:root[data-theme="dark"] .ui-presets-empty{border-color:#3a3f46}
+:root[data-theme="dark"] .ui-presets-list li.is-menu,:root[data-theme="dark"] .ui-presets-head:hover{background:#30343a}

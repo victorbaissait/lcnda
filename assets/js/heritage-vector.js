@@ -42,32 +42,53 @@
         try { const old = localStorage.getItem(OLD); if (old !== null) { if (localStorage.getItem(KEY) === null) localStorage.setItem(KEY, old); localStorage.removeItem(OLD); } } catch (_) {}
         const list = () => { try { const a = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(a) ? a.filter(x => x && typeof x.name === 'string' && x.data && typeof x.data === 'object') : []; } catch (_) { return []; } };
         const keep = a => { try { localStorage.setItem(KEY, JSON.stringify(a.slice(0, 60))); return true; } catch (_) { toast('Plus de place pour enregistrer ce réglage.', 'error'); return false; } };
-        const box = document.createElement('div'); box.className = 'h-pp-presets vx-presets'; box.dataset.vxPresets = tool;
-        const today = () => new Date().toLocaleDateString('fr-FR');
+        const box = document.createElement('div'); box.className = 'ui-presets'; box.dataset.vxPresets = tool;
+        const today = () => new Date().toLocaleDateString('fr-FR'), OPEN = 'genealogie-reglages-ouverts';
+        const openSet = () => { try { return JSON.parse(localStorage.getItem(OPEN) || '{}') || {}; } catch (_) { return {}; } };
+        let isOpen = !!openSet()[tool], mode = '', renaming = -1; // mode : '' | 'new'
+        const freeName = base => { const l = list(); let n = 2, nm = `${base} (2)`; while (l.some(x => x.name === nm)) nm = `${base} (${++n})`; return nm.slice(0, 60); };
+        const nameField = (v, ok) => `<input type="text" maxlength="60" class="ui-presets-inp" data-ps-name value="${esc(v)}" placeholder="Nom de ces réglages" aria-label="Nom du réglage"><button type="button" class="button small" data-ps-ok>${ok}</button><button type="button" class="button small secondary" data-ps-cancel>Annuler</button>`;
+        // C : un cadre repliable ; ouvert, une liste (Appliquer · ⋯) ; en bas, créer un réglage ou en importer un
         const draw = () => { const l = list();
-            box.innerHTML = `<strong>💾 Réglages enregistrés</strong>${l.length ? `<ul class="vx-preset-list">${l.map((x, i) => `<li data-i="${i}"><span title="${esc(x.date || '')}">${esc(x.name)}</span><button type="button" class="button small" data-ps-apply>Appliquer</button><button type="button" class="button small secondary" data-ps-update title="Remplacer par les réglages actuels">↻</button><button type="button" class="button small secondary" data-ps-export title="Un fichier .json, à garder ou à passer à un autre ordinateur">⤓ Exporter</button><button type="button" class="icon-button small" data-ps-del title="Supprimer ce réglage" aria-label="Supprimer">🗑</button></li>`).join('')}</ul>` : '<span class="muted">Aucun pour l’instant.</span>'}
-                <span class="vx-preset-new"><input type="text" maxlength="60" data-ps-name placeholder="Nom de ces réglages" aria-label="Nom du réglage"><button type="button" class="button small secondary" data-ps-save title="Garder ${esc(label)} sous ce nom">💾 Enregistrer sous ce nom</button><button type="button" class="button small secondary" data-ps-import title="Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur">⤒ Importer un réglage</button></span>`; };
-        const add = (name, data) => { const l = list(), i = l.findIndex(x => x.name === name); const item = {name, date: today(), data}; if (i >= 0) l[i] = item; else l.push(item); if (keep(l)) draw(); };
+            box.innerHTML = `<button type="button" class="ui-presets-head" data-ps-toggle aria-expanded="${isOpen}"><span>💾 Réglages enregistrés <span class="ui-presets-n">(${l.length})</span></span><span class="ui-presets-car" aria-hidden="true">${isOpen ? '▾' : '▸ ouvrir'}</span></button>
+                ${isOpen ? `${l.length ? `<ul class="ui-presets-list">${l.map((x, i) => `<li data-i="${i}">${renaming === i ? `<span class="ui-presets-edit">${nameField(x.name, 'OK')}</span>` : `<span class="ui-presets-name"><b>${esc(x.name)}</b>${x.date ? ` <small>· ${esc(x.date)}</small>` : ''}</span><button type="button" class="button small" data-ps-apply>Appliquer</button><button type="button" class="button small secondary ui-presets-more" data-ps-more title="Remplacer, renommer, dupliquer, exporter, supprimer" aria-label="Plus d’actions pour « ${esc(x.name)} »" aria-haspopup="menu">⋯</button>`}</li>`).join('')}</ul>` : '<p class="ui-presets-empty">Aucun réglage enregistré pour l’instant.</p>'}
+                <div class="ui-presets-foot">${mode === 'new' ? nameField('', '💾 Enregistrer') : `<button type="button" class="link-button" data-ps-new>＋ Enregistrer les réglages actuels</button><span class="spacer"></span><button type="button" class="link-button" data-ps-import title="Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur">⤒ Importer</button>`}</div>` : ''}`;
+            box.classList.toggle('is-open', isOpen);
+            const inp = box.querySelector('[data-ps-name]'); if (inp) { inp.focus(); inp.select(); } };
+        const add = (name, data, at = -1) => { const l = list(), i = l.findIndex(x => x.name === name); const item = {name, date: today(), data}; if (i >= 0) l[i] = item; else if (at >= 0) l.splice(at, 0, item); else l.push(item); if (keep(l)) draw(); };
+        const doImport = async () => {
+            const f = await askFile('.json,application/json'); if (!f) return;
+            let j = null; try { j = JSON.parse(await f.text()); } catch (_) { j = null; }
+            if (!j || j.lcnda !== 'reglage' || !j.donnees || typeof j.donnees !== 'object') return toast('Ce fichier n’est pas un réglage de LCNDA.', 'error');
+            if (j.outil !== tool) return toast(`Ce fichier est un réglage d’un autre outil (« ${String(j.outil || '?').slice(0, 40)} ») : il ne va pas dans ${toolName || 'cet outil'}.`, 'error');
+            let name = String(j.nom || 'Réglage importé').trim().slice(0, 60) || 'Réglage importé';
+            if (list().some(x => x.name === name)) { const n2b = await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage « ${name} » existe déjà. Quel nom donner à celui-ci ?`, value: freeName(name), okLabel: 'Importer'}); if (n2b === null || !String(n2b).trim()) return; name = String(n2b).trim().slice(0, 60); if (list().some(x => x.name === name)) return toast('Ce nom est aussi pris : recommence avec un autre.', 'error'); }
+            add(name, j.donnees); toast(`Réglage « ${name} » importé.`); };
+        const confirmName = async () => { const inp = box.querySelector('[data-ps-name]'); if (!inp) return; const name = inp.value.trim().slice(0, 60); if (!name) { toast('Donne un nom à ces réglages.', 'error'); inp.focus(); return; }
+            const l = list();
+            if (renaming >= 0) { const it = l[renaming]; if (!it) { renaming = -1; return draw(); } if (name !== it.name && l.some(x => x.name === name)) { toast(`Un réglage « ${name} » existe déjà.`, 'error'); inp.focus(); return; } it.name = name; renaming = -1; if (keep(l)) draw(); return; }
+            if (l.some(x => x.name === name) && !await A().confirmBox(`Un réglage « ${name} » existe déjà.`, {title: 'Le remplacer ?', okLabel: 'Remplacer'})) return;
+            mode = ''; add(name, get()); toast(`Réglages gardés sous « ${name} ».`); };
+        const menuFor = (btn, i) => { const it = list()[i]; if (!it) return;
+            window.LCNDA_UI?.menuAt?.(btn, [
+                {icon: '↻', label: 'Remplacer par les réglages actuels', help: 'Ce réglage prend ce qui est à l’écran maintenant.', run: async () => { if (!await A().confirmBox('L’ancienne version de ce réglage ne sera plus gardée.', {title: `Remplacer « ${it.name} » par les réglages actuels ?`, okLabel: 'Remplacer'})) return; add(it.name, get()); toast('Réglage mis à jour.'); }},
+                {icon: '✎', label: 'Renommer', help: 'Le nom devient modifiable sur la ligne.', run: () => { renaming = i; mode = ''; draw(); }},
+                {icon: '⧉', label: 'Dupliquer', help: `Une copie « ${freeName(it.name)} », à modifier sans toucher à l’original.`, run: () => { const nm = freeName(it.name); add(nm, JSON.parse(JSON.stringify(it.data)), i + 1); toast(`Copie « ${nm} » créée.`); }},
+                {icon: '⤓', label: 'Exporter (fichier .json)', help: 'Pour le garder, ou l’ouvrir sur un autre ordinateur.', run: () => { const fn = `lcnda-reglage-${tool}-${slug(it.name)}.json`; downloadBlob(new Blob([JSON.stringify({lcnda: 'reglage', outil: tool, nom: it.name, version: 1, donnees: it.data}, null, 2)], {type: 'application/json'}), fn); toast(`⤓ ${fn} enregistré dans Téléchargements.`); }},
+                {icon: '🗑', label: 'Supprimer', help: 'On peut encore l’annuler juste après.', danger: true, run: () => { const l = list(), k = l.findIndex(x => x.name === it.name); if (k < 0) return; A().undoLocalChange(`Réglage « ${it.name} » supprimé`, [KEY], () => { l.splice(k, 1); keep(l); }, () => { if (box.isConnected) draw(); }); draw(); }},
+            ], {title: `« ${it.name} »`});
+            btn.closest('li')?.classList.add('is-menu'); const off = () => { if (!btn.classList.contains('is-open')) { btn.closest('li')?.classList.remove('is-menu'); return; } setTimeout(off, 150); }; setTimeout(off, 150); };
         box.addEventListener('click', async e => {
-            const b = e.target.closest('button'); if (!b) return; const i = Number(b.closest('[data-i]')?.dataset.i), l = list(), it = l[i];
-            if (b.matches('[data-ps-save]')) { const inp = box.querySelector('[data-ps-name]'), name = inp.value.trim().slice(0, 60); if (!name) { toast('Donne un nom à ces réglages.', 'error'); inp.focus(); return; }
-                if (l.some(x => x.name === name) && !await A().confirmBox(`Un réglage « ${name} » existe déjà.`, {title: 'Le remplacer ?', okLabel: 'Remplacer'})) return;
-                add(name, get()); toast(`Réglages gardés sous « ${name} ».`); return; }
-            if (b.matches('[data-ps-import]')) {
-                const f = await askFile('.json,application/json'); if (!f) return;
-                let j = null; try { j = JSON.parse(await f.text()); } catch (_) { j = null; }
-                if (!j || j.lcnda !== 'reglage' || !j.donnees || typeof j.donnees !== 'object') return toast('Ce fichier n’est pas un réglage de LCNDA.', 'error');
-                if (j.outil !== tool) return toast(`Ce fichier est un réglage d’un autre outil (« ${String(j.outil || '?').slice(0, 40)} ») : il ne va pas dans ${toolName || 'cet outil'}.`, 'error');
-                let name = String(j.nom || 'Réglage importé').trim().slice(0, 60) || 'Réglage importé';
-                if (list().some(x => x.name === name)) { const n2b = await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage « ${name} » existe déjà. Quel nom donner à celui-ci ?`, value: `${name} (2)`, okLabel: 'Importer'}); if (n2b === null || !String(n2b).trim()) return; name = String(n2b).trim().slice(0, 60); if (list().some(x => x.name === name)) return toast('Ce nom est aussi pris : recommence avec un autre.', 'error'); }
-                add(name, j.donnees); toast(`Réglage « ${name} » importé.`); return; }
-            if (!it) return;
-            if (b.matches('[data-ps-apply]')) { try { await set(JSON.parse(JSON.stringify(it.data))); toast(`Réglages « ${it.name} » appliqués.`); } catch (err) { toast(err.message, 'error'); } return; }
-            if (b.matches('[data-ps-update]')) { if (!await A().confirmBox('', {title: `Remplacer « ${it.name} » par les réglages actuels ?`, okLabel: 'Remplacer'})) return; add(it.name, get()); toast('Réglage mis à jour.'); return; }
-            if (b.matches('[data-ps-export]')) { downloadBlob(new Blob([JSON.stringify({lcnda: 'reglage', outil: tool, nom: it.name, version: 1, donnees: it.data}, null, 2)], {type: 'application/json'}), `lcnda-reglage-${tool}-${slug(it.name)}.json`); return; }
-            if (b.matches('[data-ps-del]')) { A().undoLocalChange(`Réglage « ${it.name} » supprimé`, [KEY], () => { l.splice(i, 1); keep(l); }, () => { if (box.isConnected) draw(); }); draw(); }
+            const b = e.target.closest('button'); if (!b) return; const i = Number(b.closest('[data-i]')?.dataset.i), it = list()[i];
+            if (b.matches('[data-ps-toggle]')) { isOpen = !isOpen; const o = openSet(); if (isOpen) o[tool] = 1; else delete o[tool]; try { localStorage.setItem(OPEN, JSON.stringify(o)); } catch (_) {} mode = ''; renaming = -1; draw(); return; }
+            if (b.matches('[data-ps-new]')) { mode = 'new'; renaming = -1; draw(); return; }
+            if (b.matches('[data-ps-cancel]')) { mode = ''; renaming = -1; draw(); return; }
+            if (b.matches('[data-ps-ok]')) return confirmName();
+            if (b.matches('[data-ps-import]')) return doImport();
+            if (b.matches('[data-ps-more]')) return menuFor(b, i);
+            if (b.matches('[data-ps-apply]') && it) { try { await set(JSON.parse(JSON.stringify(it.data))); toast(`Réglages « ${it.name} » appliqués.`); } catch (err) { toast(err.message, 'error'); } }
         });
-        box.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-ps-name]')) { e.preventDefault(); box.querySelector('[data-ps-save]').click(); } });
+        box.addEventListener('keydown', e => { if (!e.target.matches('[data-ps-name]')) return; if (e.key === 'Enter') { e.preventDefault(); confirmName(); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); mode = ''; renaming = -1; draw(); } });
         draw(); return box;
     }
     ext.vectorPresets = presetBox;
