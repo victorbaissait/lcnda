@@ -780,15 +780,7 @@ header('X-Content-Type-Options: nosniff');
 
         <hr style="border:none;border-top:1px solid var(--line-color);margin:0 0 1.25rem">
 
-        <div style="background:var(--blue-soft);border:2px solid var(--line-color);border-radius:6px;padding:1rem 1.25rem;margin-bottom:1rem">
-            <strong style="font-size:.88em;display:block;margin-bottom:.75rem">Designs enregistrés</strong>
-            <div id="stats-colors-presets-list"></div>
-            <div style="display:flex;gap:8px;margin-top:.9rem;align-items:center">
-                <input id="stats-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line-color);border-radius:4px;font-size:.85em">
-                <button type="button" class="button small" id="stats-colors-save-preset">Enregistrer</button>
-                <button type="button" class="button small secondary" id="stats-colors-import-preset" title="Reprendre une palette exportée (fichier .json)">⤒ Importer un réglage</button>
-            </div>
-        </div>
+        <div><div id="stats-colors-presets-list"></div></div>
 
         <div class="modal-actions">
             <button type="button" class="button secondary" id="stats-colors-reset">↺ Remettre comme au départ</button>
@@ -809,15 +801,7 @@ header('X-Content-Type-Options: nosniff');
             </label>
             <?php endfor; ?>
         </div>
-        <div style="background:var(--blue-soft);border:2px solid var(--line-color);border-radius:6px;padding:1rem 1.25rem;margin-bottom:1rem">
-            <strong style="font-size:.88em;display:block;margin-bottom:.75rem">Palettes enregistrées</strong>
-            <div id="battue-level-colors-presets-list"></div>
-            <div style="display:flex;gap:8px;margin-top:.9rem;align-items:center">
-                <input id="battue-level-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line-color);border-radius:4px;font-size:.85em">
-                <button type="button" class="button small" id="battue-level-colors-save-preset">Enregistrer</button>
-                <button type="button" class="button small secondary" id="battue-level-colors-import-preset" title="Reprendre une palette exportée (fichier .json)">⤒ Importer un réglage</button>
-            </div>
-        </div>
+        <div><div id="battue-level-colors-presets-list"></div></div>
         <div class="modal-actions">
             <button type="button" class="button secondary" id="battue-level-colors-reset">↺ Remettre comme au départ</button>
             <button value="cancel" class="button secondary" type="button">Annuler</button>
