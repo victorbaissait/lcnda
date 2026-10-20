@@ -243,7 +243,7 @@
     const setsList = () => { const v = readJson(SETS_KEY, {})[SETS_ID]; return Array.isArray(v) ? v.filter(x => x && x.name && x.v).map(x => ({...x, v: cleanBar(x.v)})) : []; };
     const setsSave = list => { const all = readJson(SETS_KEY, {}); all[SETS_ID] = list.slice(-60); return writeJson(SETS_KEY, all); };
     function prefsHtml(cfg = barCfg()) {
-        const sets = setsList(), B = cfg.layout === 'B';
+        const B = cfg.layout === 'B';
         const row = k => { const [, label, rub] = itemOf(k); return `<li class="h-pet-lrow h-txb-row" data-k="${k}"><input type="checkbox" ${cfg.hidden.includes(k) ? '' : 'checked'} title="👁 Montrer dans la barre" aria-label="Montrer ${esc(label)}"><span>${esc(label)}</span>
             ${B ? `<select data-txb-place aria-label="Où va ${esc(label)}" title="Dans la barre, ou dans le panneau « 🎚️ Mieux voir »"><option value="bar" ${cfg.panel.includes(k) ? '' : 'selected'}>Dans la barre</option><option value="panel" ${cfg.panel.includes(k) ? 'selected' : ''}>Dans « Mieux voir »${rub === 'nav' || rub === 'act' ? '' : ` · ${esc((RUBRICS.find(r => r[0] === rub) || [])[1] || '')}`}</option></select>` : ''}
             <button type="button" class="h-bt" data-txb-up title="Monter">↑</button><button type="button" class="h-bt" data-txb-down title="Descendre">↓</button></li>`; };
@@ -251,8 +251,7 @@
             <div class="h-txb-layout"><span class="h-txb-lab">Disposition</span><span class="segmented h-txb-seg" role="group" aria-label="Disposition de la barre">
                 <button type="button" data-txb-layout="A" class="${B ? '' : 'is-active'}" aria-pressed="${!B}" title="Tous les réglages dans la barre ; elle passe à la ligne s’il le faut">A · Tout dans la barre</button>
                 <button type="button" data-txb-layout="B" class="${B ? 'is-active' : ''}" aria-pressed="${B}" title="Une barre courte ; les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques">B · Barre courte + « 🎚️ Mieux voir »</button></span></div>
-            <div class="h-pp-presets h-mtp-presets" data-txb-sets><strong>💾 Réglages enregistrés</strong>${sets.length ? `<select data-txb-pick aria-label="Réglages enregistrés">${sets.map((x, i) => `<option value="${i}">${esc(x.name)}${x.date ? ' — ' + esc(x.date) : ''}</option>`).join('')}</select><button type="button" class="button small" data-txb-apply>Appliquer</button><button type="button" class="button small secondary" data-txb-export title="Exporter ce réglage dans un fichier">⤓ Exporter</button><button type="button" class="button small secondary" data-txb-del title="Supprimer ces réglages enregistrés">🗑</button>` : '<span class="muted">Aucun pour l’instant.</span>'}
-                <button type="button" class="button small secondary" data-txb-save title="Garder cette barre (disposition, ordre, boutons montrés) sous un nom">💾 Enregistrer sous ce nom…</button><button type="button" class="button small secondary" data-txb-import title="Un fichier .json exporté depuis LCNDA">⤒ Importer un réglage</button></div>
+            <div data-presets-slot="txb"></div>
             <p class="muted">Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿)${B ? ', et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir »' : ''}. Gardé aussitôt ; l’outil ouvert suit tout de suite.</p>
             <ol class="h-pet-layout h-txb-list" data-txb-list>${cfg.order.map(row).join('')}</ol>
             <button type="button" class="button small secondary" data-txb-reset>↺ Réinitialiser</button></div>`;
@@ -260,22 +259,28 @@
     function prefsBind(box, redraw) {
         const cur = () => { const lis = [...box.querySelectorAll('[data-txb-list] > li')], c = barCfg(); return cleanBar({layout: c.layout, order: lis.map(l => l.dataset.k), hidden: lis.filter(l => !l.querySelector('input[type=checkbox]').checked).map(l => l.dataset.k),
             panel: lis.some(l => l.querySelector('[data-txb-place]')) ? lis.filter(l => l.querySelector('[data-txb-place]')?.value === 'panel').map(l => l.dataset.k) : c.panel}); };
-        const keep = () => saveBar(cur());
+        const keep = () => saveBar(cur()), today = () => new Date().toLocaleDateString('fr-FR'), UI = window.LCNDA_UI;
+        const frame = UI.presetsFrame({id: 'boutons-transcribe', what: 'cette barre (disposition, ordre, boutons montrés)', list: setsList,
+            apply: i => { const x = setsList()[i]; if (!x) return false; saveBar(x.v); redraw2(); },
+            save: name => setsSave([...setsList().filter(y => y.name !== name), {name, date: today(), v: cur()}]),
+            replace: i => { const l = setsList(); l[i] = {...l[i], date: today(), v: cur()}; return setsSave(l); },
+            rename: (i, name) => { const l = setsList(); l[i] = {...l[i], name}; return setsSave(l); },
+            duplicate: i => { const l = setsList(), name = UI.freeName(l[i].name, l.map(y => y.name)); l.splice(i + 1, 0, {...JSON.parse(JSON.stringify(l[i])), name, date: today()}); if (!setsSave(l)) return false; toast(`Copie « ${name} » créée.`); },
+            exportOne: i => { const x = setsList()[i]; if (x) ext.reglageExport?.('boutons-transcribe', x.name, x.v); return false; },
+            remove: i => { const l = setsList(), x = l[i]; A().undoLocalChange?.(`Réglages « ${x.name} » supprimés`, [SETS_KEY], () => { l.splice(i, 1); setsSave(l); }, () => { if (frame.isConnected) frame.refresh(); }); },
+            importOne: async () => { const r = await ext.reglageImport?.('boutons-transcribe', {names: setsList().map(y => y.name), check: v => !!v && typeof v === 'object'}); if (!r) return false;
+                if (!setsSave([...setsList().filter(y => y.name !== r.nom), {name: r.nom, date: today(), v: cleanBar(r.donnees)}])) return false; toast(`Réglages « ${r.nom} » importés : « Appliquer » pour les utiliser.`); }});
+        // la liste se redessine (innerHTML) : le cadre reprend sa place à chaque fois
+        const mount = () => { const slot = box.querySelector('[data-presets-slot="txb"]'); if (slot) { slot.replaceWith(frame); frame.refresh(); } };
+        const redraw2 = () => { redraw(); mount(); };
+        mount();
         box.addEventListener('click', async e => {
             const li = e.target.closest('li');
             if (e.target.closest('[data-txb-up]') && li?.previousElementSibling) { li.parentNode.insertBefore(li, li.previousElementSibling); keep(); return; }
             if (e.target.closest('[data-txb-down]') && li?.nextElementSibling) { li.parentNode.insertBefore(li.nextElementSibling, li); keep(); return; }
-            const lay = e.target.closest('[data-txb-layout]'); if (lay) { const c = cur(); c.layout = lay.dataset.txbLayout; saveBar(c); redraw(); return; }
-            if (e.target.closest('[data-txb-reset]')) { const before = readJson(BAR_KEY, null); try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw();
-                A().undoToast?.('Barre de la transcription remise comme au départ', {undo: () => { if (before) saveBar(before); redraw(); }, redo: () => { try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw(); }}); return; }
-            const picked = () => setsList()[Number(box.querySelector('[data-txb-pick]')?.value)] || null;
-            if (e.target.closest('[data-txb-apply]')) { const x = picked(); if (!x) return; saveBar(x.v); redraw(); toast(`Réglages « ${x.name} » appliqués.`); return; }
-            if (e.target.closest('[data-txb-export]')) { const x = picked(); if (x) ext.reglageExport?.('boutons-transcribe', x.name, x.v); return; }
-            if (e.target.closest('[data-txb-del]')) { const x = picked(); if (!x) return; A().undoLocalChange?.(`Réglages « ${x.name} » supprimés`, [SETS_KEY], () => setsSave(setsList().filter(y => y.name !== x.name)), () => redraw()); redraw(); return; }
-            if (e.target.closest('[data-txb-save]')) { const name = String((await A().askText?.({title: 'Réglages enregistrés', message: 'Nom de cette barre (disposition, ordre, boutons montrés) :', value: '', okLabel: 'Enregistrer'})) ?? '').trim().slice(0, 60); if (!name) return;
-                setsSave([...setsList().filter(y => y.name !== name), {name, date: new Date().toLocaleDateString('fr-FR'), v: cur()}]); redraw(); toast(`Réglages « ${name} » enregistrés.`); return; }
-            if (e.target.closest('[data-txb-import]')) { const r = await ext.reglageImport?.('boutons-transcribe', {names: setsList().map(y => y.name), check: v => !!v && typeof v === 'object'}); if (!r) return;
-                setsSave([...setsList().filter(y => y.name !== r.nom), {name: r.nom, date: new Date().toLocaleDateString('fr-FR'), v: cleanBar(r.donnees)}]); redraw(); toast(`Réglages « ${r.nom} » importés : « Appliquer » pour les utiliser.`); }
+            const lay = e.target.closest('[data-txb-layout]'); if (lay) { const c = cur(); c.layout = lay.dataset.txbLayout; saveBar(c); redraw2(); return; }
+            if (e.target.closest('[data-txb-reset]')) { const before = readJson(BAR_KEY, null); try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2();
+                A().undoToast?.('Barre de la transcription remise comme au départ', {undo: () => { if (before) saveBar(before); redraw2(); }, redo: () => { try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2(); }}); return; }
         });
         box.addEventListener('change', e => { if (e.target.closest('[data-txb-list]')) keep(); });
     }

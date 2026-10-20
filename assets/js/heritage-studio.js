@@ -106,66 +106,51 @@
     }
     const cleanLayout = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k, v]) => isLayoutKey(k) && safeLayoutValue(k, v)));
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
-    ext.designPanelsEnd.push(() => { // tout en bas de l'Apparence : on enregistre une fois tout réglé
-        const list = profiles();
-        return `<section class="person-block-config h-layouts" id="h-layouts"><header><span class="eyebrow">APPARENCE</span><h3>💾 Réglages enregistrés : l’Apparence</h3><p>Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA.</p></header>
-            <div class="h-layouts-save"><input type="text" id="h-layout-name" maxlength="60" placeholder="Nom (ex. Mode salon, Ma version épurée)"><button type="button" class="button small" data-h-layout-save>💾 Enregistrer sous ce nom</button><button type="button" class="button small secondary" data-h-layout-import>⤒ Importer</button></div>
-            ${list.length ? `<ul class="h-layouts-list">${list.map((p, i) => `<li><div><strong>${esc(p.name)}</strong><small>${esc(profileSummary(p.settings))}${p.saved ? ` · ${esc(new Date(p.saved).toLocaleDateString('fr-FR'))}` : ''}${p.from ? ` · reçue de ${esc(p.from)}` : ''}</small></div>
-                <span class="page-actions"><button type="button" class="button small" data-h-layout-apply="${i}">Appliquer</button><button type="button" class="button small secondary" data-h-layout-update="${i}" title="Remplacer par les réglages actuels">Mettre à jour</button><button type="button" class="button small secondary" data-h-layout-rename="${i}">Renommer</button><button type="button" class="button small secondary" data-h-layout-export="${i}">⤓ Exporter</button><button type="button" class="button small secondary danger" data-h-layout-delete="${i}">Supprimer</button></span></li>`).join('')}</ul>` : A().emptyState({icon: '🎨', text: 'Aucune mise en page enregistrée pour l’instant', hint: 'Donne un nom puis « 💾 Enregistrer sous ce nom » pour garder la mise en page actuelle.'})}</section>`;
-    });
+    /** 💾 le cadre commun pour une liste {name, saved, settings, from…} (mises en page, ensembles de tous les réglages) */
+    const profilesFrame = o => {
+        const UI = window.LCNDA_UI, day = p => (p.saved ? new Date(p.saved).toLocaleDateString('fr-FR') : '');
+        const frame = UI.presetsFrame({id: o.id, what: o.what, quietApply: true,
+            list: () => o.list().map(p => ({name: p.name, date: [o.summary(p.settings), day(p), p.from ? `${o.from} ${p.from}` : ''].filter(Boolean).join(' · ')})),
+            apply: i => { const p = o.list()[i]; return p ? o.apply(p) : false; },
+            save: name => { const list = o.list(), same = list.findIndex(p => p.name === name), entry = {name, saved: new Date().toISOString(), settings: o.current()}; if (same >= 0) list[same] = entry; else list.push(entry); return o.keep(list); },
+            replace: i => { const list = o.list(); list[i] = {...list[i], saved: new Date().toISOString(), settings: o.current()}; return o.keep(list); },
+            rename: (i, name) => { const list = o.list(); list[i] = {...list[i], name}; return o.keep(list); },
+            duplicate: i => { const list = o.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, saved: new Date().toISOString()}); if (!o.keep(list)) return false; toast(`Copie « ${name} » créée.`); },
+            exportOne: i => { o.exportOne(o.list()[i]); return false; },
+            // H7 : supprimé tout de suite, « ↶ Annuler » le remet (les réglages actuels ne changent pas)
+            remove: i => { const list = o.list(), p = list[i]; A().undoLocalChange(o.removed(p.name), [o.key], () => { list.splice(i, 1); o.keep(list); }, () => { if (frame.isConnected) frame.refresh(); }); },
+            importOne: o.importOne});
+        return frame;
+    };
+    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-layouts"><header><span class="eyebrow">APPARENCE</span><h3>💾 Réglages enregistrés : l’Apparence</h3><p>Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA.</p></header>
+            <div data-presets-slot="layouts"></div></section>`); // tout en bas de l'Apparence : on enregistre une fois tout réglé
     ext.afterDesign.push(() => {
-        const box = document.getElementById('h-layouts');
-        if (!box) return;
-        const rerender = () => A().renderMaintenance?.();
-        const nameInput = box.querySelector('#h-layout-name');
-        const save = async () => {
-            const name = nameInput.value.trim();
-            if (!name) { toast('Donne un nom à cette mise en page.', 'error'); nameInput.focus(); return; }
-            const list = profiles();
-            const same = list.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
-            if (same >= 0 && !await A().confirmBox('', {title: `Une mise en page « ${list[same].name} » existe déjà. La remplacer ?`, okLabel: 'Remplacer'})) return;
-            const entry = {name, saved: new Date().toISOString(), settings: currentLayout()};
-            if (same >= 0) list[same] = entry; else list.push(entry);
-            saveProfiles(list); toast(`Mise en page « ${name} » enregistrée.`); rerender();
-        };
-        box.querySelector('[data-h-layout-save]').addEventListener('click', save);
-        nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); save(); } });
-        box.querySelector('[data-h-layout-import]').addEventListener('click', async () => {
-            const text = await pickFile('.json,application/json');
-            if (text === null) return;
-            let data; try { data = JSON.parse(text); } catch (_) { return toast('Ce fichier n’est pas une mise en page LCNDA.', 'error'); }
-            if (data?.type !== 'lcnda-mise-en-page' || !validProfile(data)) return toast('Ce fichier n’est pas une mise en page LCNDA.', 'error');
-            const settings = cleanLayout(data.settings);
-            const ignored = Object.keys(data.settings).length - Object.keys(settings).length;
-            const list = profiles();
-            let name = data.name.slice(0, 60);
-            while (list.some(p => p.name === name)) name = `${name} (2)`;
-            list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings});
-            saveProfiles(list);
-            toast(`Mise en page « ${name} » importée : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored > 1 ? `${ignored} réglages illisibles laissés` : '1 réglage illisible laissé'} de côté)` : ''}`); rerender();
-        });
-        const at = (attr, fn) => box.querySelectorAll(`[${attr}]`).forEach(b => b.addEventListener('click', async () => { const list = profiles(), i = Number(b.getAttribute(attr)); if (list[i]) fn(list, i, list[i]); }));
-        at('data-h-layout-apply', async (list, i, p) => {
-            if (!await A().confirmBox('Tous les réglages de l’Apparence seront remplacés (pense à enregistrer la mise en page actuelle si tu veux la garder). L’écran va se recharger.', {title: `Appliquer la mise en page « ${p.name} » ?`, okLabel: 'Appliquer'})) return;
-            toast(`Mise en page « ${p.name} » appliquée.`); applyLayout(p.settings);
-        });
-        at('data-h-layout-update', async (list, i, p) => {
-            if (!await A().confirmBox('', {title: `Remplacer « ${p.name} » par les réglages actuels ?`, okLabel: 'Remplacer'})) return;
-            list[i] = {...p, saved: new Date().toISOString(), settings: currentLayout()}; saveProfiles(list); toast('Mise en page mise à jour.'); rerender();
-        });
-        at('data-h-layout-rename', async (list, i, p) => {
-            const name = ((await A().askText({title: 'Renommer la mise en page', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'})) || '').trim().slice(0, 60);
-            if (!name) return;
-            list[i] = {...p, name}; saveProfiles(list); toast('Mise en page renommée.'); rerender();
-        });
-        at('data-h-layout-export', (list, i, p) => {
-            downloadText(`mise-en-page-${slug(p.name)}.lcnda-apparence.json`, JSON.stringify({type: 'lcnda-mise-en-page', version: 1, name: p.name, saved: p.saved, settings: p.settings}, null, 1));
-            toast('Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Maintenance → Apparence.');
-        });
-        at('data-h-layout-delete', async (list, i, p) => {
-            // H7 : supprimée tout de suite, « ↶ Annuler » la remet (les réglages actuels ne changent pas)
-            A().undoLocalChange(`Mise en page « ${p.name} » supprimée`, [PROFILES_KEY], () => { list.splice(i, 1); saveProfiles(list); }, () => { if (A().state?.module === 'maintenance') rerender(); }); rerender();
-        });
+        const slot = document.querySelector('#h-layouts [data-presets-slot="layouts"]');
+        if (!slot) return;
+        slot.replaceWith(profilesFrame({id: 'apparence-mises-en-page', key: PROFILES_KEY, what: 'tous les réglages de l’Apparence', from: 'reçue de', removed: n => `Mise en page « ${n} » supprimée`,
+            list: profiles, keep: list => { saveProfiles(list); return true; }, current: currentLayout, summary: profileSummary,
+            apply: async p => {
+                if (!await A().confirmBox('Tous les réglages de l’Apparence seront remplacés (pense à enregistrer la mise en page actuelle si tu veux la garder). L’écran va se recharger.', {title: `Appliquer la mise en page « ${p.name} » ?`, okLabel: 'Appliquer'})) return false;
+                toast(`Mise en page « ${p.name} » appliquée.`); applyLayout(p.settings); return false;
+            },
+            exportOne: p => {
+                downloadText(`mise-en-page-${slug(p.name)}.lcnda-apparence.json`, JSON.stringify({type: 'lcnda-mise-en-page', version: 1, name: p.name, saved: p.saved, settings: p.settings}, null, 1));
+                toast('Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Maintenance → Apparence.');
+            },
+            importOne: async () => {
+                const text = await pickFile('.json,application/json');
+                if (text === null) return false;
+                let data; try { data = JSON.parse(text); } catch (_) { toast('Ce fichier n’est pas une mise en page LCNDA.', 'error'); return false; }
+                if (data?.type !== 'lcnda-mise-en-page' || !validProfile(data)) { toast('Ce fichier n’est pas une mise en page LCNDA.', 'error'); return false; }
+                const settings = cleanLayout(data.settings);
+                const ignored = Object.keys(data.settings).length - Object.keys(settings).length;
+                const list = profiles();
+                let name = data.name.slice(0, 60);
+                if (list.some(p => p.name === name)) name = window.LCNDA_UI.freeName(name, list.map(p => p.name));
+                list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings});
+                saveProfiles(list);
+                toast(`Mise en page « ${name} » importée : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored > 1 ? `${ignored} réglages illisibles laissés` : '1 réglage illisible laissé'} de côté)` : ''}`);
+            }}));
     });
     /* ═══════════════ 🗃️ TOUS MES RÉGLAGES (Maintenance → Apparence, après les mises en page) ═══════════════ */
     // Tous les réglages de l'app (« genealogie-… ») : apparence, mais aussi listes, statistiques, onglets, widgets,
@@ -212,55 +197,33 @@
     }
     // un fichier reçu : les mêmes précautions que pour une mise en page
     const cleanAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k, v]) => isAllKey(k) && safeLayoutValue(k, v)));
-    ext.designPanelsEnd.push(() => {
-        const list = allProfiles();
-        return `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">TOUS LES RÉGLAGES</span><h3>💾 Réglages enregistrés : toute l’app</h3><p>Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche) et ce qui est propre à cet ordinateur.</p></header>
-            <div class="h-layouts-save"><input type="text" id="h-allset-name" maxlength="60" placeholder="Nom (ex. Mon app complète, Version élevage)"><button type="button" class="button small" data-h-allset-save>💾 Enregistrer sous ce nom</button><button type="button" class="button small secondary" data-h-allset-export-now>⤓ Exporter les réglages actuels</button><button type="button" class="button small secondary" data-h-allset-import>⤒ Importer</button></div>
-            ${list.length ? `<ul class="h-layouts-list">${list.map((p, i) => `<li><div><strong>${esc(p.name)}</strong><small>${esc(allSummary(p.settings))}${p.saved ? ` · ${esc(new Date(p.saved).toLocaleDateString('fr-FR'))}` : ''}${p.from ? ` · reçu de ${esc(p.from)}` : ''}</small></div>
-                <span class="page-actions"><button type="button" class="button small" data-h-allset-apply="${i}">Appliquer</button><button type="button" class="button small secondary" data-h-allset-update="${i}" title="Remplacer par les réglages actuels">Mettre à jour</button><button type="button" class="button small secondary" data-h-allset-rename="${i}">Renommer</button><button type="button" class="button small secondary" data-h-allset-export="${i}">⤓ Exporter</button><button type="button" class="button small secondary danger" data-h-allset-delete="${i}">Supprimer</button></span></li>`).join('')}</ul>` : A().emptyState({icon: '🗃️', text: 'Aucun ensemble de réglages pour l’instant', hint: 'Donne un nom puis « 💾 Enregistrer sous ce nom » pour garder tous les réglages actuels.'})}</section>`;
-    });
+    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">TOUS LES RÉGLAGES</span><h3>💾 Réglages enregistrés : toute l’app</h3><p>Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche) et ce qui est propre à cet ordinateur.</p></header>
+            <div data-presets-slot="allsets"></div><div class="h-layouts-save"><button type="button" class="button small secondary" data-h-allset-export-now>⤓ Exporter les réglages actuels</button></div></section>`);
     ext.afterDesign.push(() => {
-        const box = document.getElementById('h-allsets');
-        if (!box) return;
-        const rerender = () => A().renderMaintenance?.();
-        const nameInput = box.querySelector('#h-allset-name');
+        const box = document.getElementById('h-allsets'), slot = box?.querySelector('[data-presets-slot="allsets"]');
+        if (!slot) return;
         const fileOf = (name, saved, settings) => JSON.stringify({type: 'lcnda-reglages', version: 1, name, saved, settings}, null, 1);
-        const save = async () => {
-            const name = nameInput.value.trim();
-            if (!name) { toast('Donne un nom à cet ensemble de réglages.', 'error'); nameInput.focus(); return; }
-            const list = allProfiles(), same = list.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
-            if (same >= 0 && !await A().confirmBox('', {title: `Un ensemble « ${list[same].name} » existe déjà. Le remplacer ?`, okLabel: 'Remplacer'})) return;
-            const entry = {name, saved: new Date().toISOString(), settings: currentAll()};
-            if (same >= 0) list[same] = entry; else list.push(entry);
-            if (saveAllProfiles(list)) { toast(`Ensemble « ${name} » enregistré.`); rerender(); }
-        };
-        box.querySelector('[data-h-allset-save]').addEventListener('click', save);
-        nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); save(); } });
         box.querySelector('[data-h-allset-export-now]').addEventListener('click', () => { downloadText(`reglages-lcnda-${new Date().toISOString().slice(0, 10)}.lcnda-reglages.json`, fileOf('Mes réglages', new Date().toISOString(), currentAll())); toast('Fichier prêt : il s’importe ici, sur un autre ordinateur.'); });
-        box.querySelector('[data-h-allset-import]').addEventListener('click', async () => {
-            const text = await pickFile('.json,application/json');
-            if (text === null) return;
-            let data; try { data = JSON.parse(text); } catch (_) { return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); }
-            // une mise en page (Apparence) s'importe aussi ici
-            if (!['lcnda-reglages', 'lcnda-mise-en-page'].includes(data?.type) || !validProfile(data)) return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error');
-            const settings = cleanAll(data.settings), dropped = Object.keys(data.settings).filter(k => !(k in settings)).slice(0, 500), ignored = dropped.length;
-            const list = allProfiles(); let name = String(data.name).slice(0, 60) || 'Réglages importés';
-            while (list.some(p => p.name === name)) name = `${name} (2)`;
-            list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings, keep: dropped.filter(k => typeof k === 'string'), layoutOnly: data.type === 'lcnda-mise-en-page'});
-            if (saveAllProfiles(list)) { toast(`Ensemble « ${name} » importé : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored > 1 ? `${ignored} réglages illisibles laissés` : '1 réglage illisible laissé'} de côté)` : ''}`); rerender(); }
-        });
-        const at = (attr, fn) => box.querySelectorAll(`[${attr}]`).forEach(b => b.addEventListener('click', async () => { const list = allProfiles(), i = Number(b.getAttribute(attr)); if (list[i]) fn(list, i, list[i]); }));
-        at('data-h-allset-apply', async (list, i, p) => {
-            if (!await A().confirmBox('Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.', {title: `Appliquer l’ensemble « ${p.name} » ?`, okLabel: 'Appliquer'})) return;
-            toast(`Ensemble « ${p.name} » appliqué.`); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []});
-        });
-        at('data-h-allset-update', async (list, i, p) => { if (!await A().confirmBox('', {title: `Remplacer « ${p.name} » par les réglages actuels ?`, okLabel: 'Remplacer'})) return; list[i] = {...p, saved: new Date().toISOString(), settings: currentAll()}; if (saveAllProfiles(list)) { toast('Ensemble mis à jour.'); rerender(); } });
-        at('data-h-allset-rename', async (list, i, p) => {
-            const name = ((await A().askText({title: 'Renommer l’ensemble', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'})) || '').trim().slice(0, 60);
-            if (!name) return; list[i] = {...p, name}; if (saveAllProfiles(list)) { toast('Ensemble renommé.'); rerender(); }
-        });
-        at('data-h-allset-export', (list, i, p) => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, p.settings)); toast('Fichier prêt : il s’importe dans Maintenance → Apparence → « Mes ensembles de réglages ».'); });
-        at('data-h-allset-delete', async (list, i, p) => { A().undoLocalChange(`Ensemble « ${p.name} » supprimé`, [ALL_PROFILES_KEY], () => { list.splice(i, 1); saveAllProfiles(list); }, () => { if (A().state?.module === 'maintenance') rerender(); }); rerender(); });
+        slot.replaceWith(profilesFrame({id: 'apparence-tous-les-reglages', key: ALL_PROFILES_KEY, what: 'tous les réglages de l’app', from: 'reçu de', removed: n => `Ensemble « ${n} » supprimé`,
+            list: allProfiles, keep: saveAllProfiles, current: currentAll, summary: allSummary,
+            apply: async p => {
+                if (!await A().confirmBox('Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.', {title: `Appliquer l’ensemble « ${p.name} » ?`, okLabel: 'Appliquer'})) return false;
+                toast(`Ensemble « ${p.name} » appliqué.`); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []}); return false;
+            },
+            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, p.settings)); toast('Fichier prêt : il s’importe dans Maintenance → Apparence → « Mes ensembles de réglages ».'); },
+            importOne: async () => {
+                const text = await pickFile('.json,application/json');
+                if (text === null) return false;
+                let data; try { data = JSON.parse(text); } catch (_) { toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); return false; }
+                // une mise en page (Apparence) s'importe aussi ici
+                if (!['lcnda-reglages', 'lcnda-mise-en-page'].includes(data?.type) || !validProfile(data)) { toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); return false; }
+                const settings = cleanAll(data.settings), dropped = Object.keys(data.settings).filter(k => !(k in settings)).slice(0, 500), ignored = dropped.length;
+                const list = allProfiles(); let name = String(data.name).slice(0, 60) || 'Réglages importés';
+                if (list.some(p => p.name === name)) name = window.LCNDA_UI.freeName(name, list.map(p => p.name));
+                list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings, keep: dropped.filter(k => typeof k === 'string'), layoutOnly: data.type === 'lcnda-mise-en-page'});
+                if (!saveAllProfiles(list)) return false;
+                toast(`Ensemble « ${name} » importé : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored > 1 ? `${ignored} réglages illisibles laissés` : '1 réglage illisible laissé'} de côté)` : ''}`);
+            }}));
     });
     /* ═══════════ ⚙️ BARRES D'OUTILS À SOI (Retouche, Modifier le son, Montage vidéo) ═══════════
      * Un éditeur marque ses rangées d'outils data-tbg="clé" data-tbg-label="nom" ; « ⚙️ Personnaliser » range, montre
@@ -340,7 +303,7 @@
     // espaces de travail : les mêmes « ensembles » que Maintenance → Montage, retouche… (genealogie-toolbar-sets = {éditeur: [{name, date, v}]})
     const WS_KEY = 'genealogie-toolbar-sets';
     const wsList = id => { try { const v = JSON.parse(localStorage.getItem(WS_KEY) || '{}')?.[id]; return Array.isArray(v) ? v.filter(x => x && x.name && x.v) : []; } catch (_) { return []; } };
-    const wsSave = (id, list) => { try { const all = JSON.parse(localStorage.getItem(WS_KEY) || '{}') || {}; all[id] = list; localStorage.setItem(WS_KEY, JSON.stringify(all)); } catch (_) { toast('Plus de place pour enregistrer : supprime un espace de travail.', 'error'); } };
+    const wsSave = (id, list) => { try { const all = JSON.parse(localStorage.getItem(WS_KEY) || '{}') || {}; all[id] = list; localStorage.setItem(WS_KEY, JSON.stringify(all)); return true; } catch (_) { toast('Plus de place pour enregistrer : supprime un espace de travail.', 'error'); return false; } };
     ext.tbButton = id => `<button type="button" class="button small secondary" data-tb-config="${esc(id)}" title="Ranger, montrer ou cacher les boutons et les options">⚙️ Personnaliser</button>`;
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-tb-config]'); if (!b) return;
@@ -350,40 +313,36 @@
         const rows = g => tbKids(g).map(el => `<li class="h-pet-lrow" data-k="${esc(tbKeyOf(el))}"><input type="checkbox" ${el.classList.contains('is-tb-off') ? '' : 'checked'} title="Montrer"><span>${esc(tbLabel(el))}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('');
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-tbcfg';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">PERSONNALISER</span><h2>⚙️ Boutons et options</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-tbcfg-ws h-pp-presets" data-ws><strong>💾 Réglages enregistrés</strong><select data-ws-pick aria-label="Réglages enregistrés"><option value="">— les boutons actuels —</option>${wsList(id).map(x => `<option value="${esc(x.name)}">${esc(x.name)}</option>`).join('')}</select><button type="button" class="button small secondary" data-ws-apply>Appliquer</button><button type="button" class="button small secondary" data-ws-save title="Garder les boutons montrés, cachés et rangés sous un nom">💾 Enregistrer sous un nom…</button><button type="button" class="button small secondary" data-ws-import title="Reprendre un réglage exporté (fichier .json)">⤒ Importer un réglage</button><button type="button" class="button small secondary" data-ws-export title="Enregistrer les réglages choisis dans un fichier, pour les garder ou les donner">⤓ Exporter</button><button type="button" class="button small secondary" data-ws-del title="Supprimer ces réglages enregistrés">🗑</button></div>
-            <div class="h-tbcfg-body"><p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre.</p>${groups.map(g => `<section><h4>${esc(g.dataset.tbgLabel || g.dataset.tbg)}</h4><ol class="h-pet-layout" data-g="${esc(g.dataset.tbg)}">${rows(g)}</ol></section>`).join('')}</div>
+            <div class="h-tbcfg-body"><div data-presets-slot="ws"></div><p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre.</p>${groups.map(g => `<section><h4>${esc(g.dataset.tbgLabel || g.dataset.tbg)}</h4><ol class="h-pet-layout" data-g="${esc(g.dataset.tbg)}">${rows(g)}</ol></section>`).join('')}</div>
             <div class="modal-actions"><button type="button" class="button secondary" data-reset>↺ Remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="button" class="button" data-ok>Enregistrer</button></div>`;
         (b.closest('dialog') || document.body).appendChild(dlg);
+        const cur = () => { const c = {order: {}, hidden: {}}; dlg.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; c.order[ol.dataset.g] = lis.map(l => l.dataset.k); c.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); }); return c; };
+        const useCfg = v => { const all = tbAll(); all[id] = v; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} ext.tbApply(root, id); };
+        const today = () => new Date().toLocaleDateString('fr-FR'), UI = window.LCNDA_UI;
+        // espaces de travail : comme ceux de Photoshop, une disposition gardée sous un nom (aussi dans Maintenance → Montage, retouche, mise en page et son)
+        const frame = UI.presetsFrame({id: `boutons-${id}`, what: 'les boutons montrés, cachés et rangés', list: () => wsList(id), quietApply: true,
+            apply: i => { const x = wsList(id)[i]; if (!x) return false; useCfg(x.v); toast(`Espace de travail « ${x.name} » appliqué.`); dlg.close(); return false; },
+            save: name => { const list = wsList(id), k = list.findIndex(y => y.name === name), it = {name, date: today(), v: cur()}; if (k >= 0) list[k] = it; else list.push(it); if (!wsSave(id, list.slice(-60))) return false; useCfg(it.v); },
+            replace: i => { const list = wsList(id); list[i] = {...list[i], date: today(), v: cur()}; return wsSave(id, list); },
+            rename: (i, name) => { const list = wsList(id); list[i] = {...list[i], name}; return wsSave(id, list); },
+            duplicate: i => { const list = wsList(id), name = UI.freeName(list[i].name, list.map(y => y.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, date: today()}); if (!wsSave(id, list.slice(-60))) return false; toast(`Copie « ${name} » créée.`); },
+            exportOne: i => { const x = wsList(id)[i]; if (x) ext.reglageExport(`boutons-${id}`, x.name, x.v); return false; },
+            remove: i => { const list = wsList(id), x = list[i]; A().undoLocalChange(`Réglages « ${x.name} » supprimés`, [WS_KEY], () => { list.splice(i, 1); wsSave(id, list); }, () => { if (frame.isConnected) frame.refresh(); }); },
+            importOne: async () => {
+                const keys = v => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.entries(v).slice(0, 60).filter(([k, a]) => typeof k === 'string' && k.length < 80 && Array.isArray(a)).map(([k, a]) => [k, a.filter(x => typeof x === 'string' && x.length < 200).slice(0, 300)])) : {});
+                const r = await ext.reglageImport(`boutons-${id}`, {names: wsList(id).map(y => y.name), check: v => !!v && typeof v === 'object' && (v.order === undefined || typeof v.order === 'object') && (v.hidden === undefined || typeof v.hidden === 'object')});
+                if (!r) return false;
+                const v = {order: keys(r.donnees.order), hidden: keys(r.donnees.hidden)}, list = wsList(id).filter(y => y.name !== r.nom); list.push({name: r.nom, date: today(), v}); if (!wsSave(id, list.slice(-60))) return false;
+                toast(`Réglages « ${r.nom} » importés : « Appliquer » pour les utiliser.`);
+            }});
+        dlg.querySelector('[data-presets-slot="ws"]').replaceWith(frame);
         dlg.addEventListener('click', async ev => {
             const li = ev.target.closest('li');
             if (ev.target.closest('[data-up]') && li.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
             if (ev.target.closest('[data-down]') && li.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
             if (ev.target.closest('[data-x]')) dlg.close();
             if (ev.target.closest('[data-reset]')) { const all = tbAll(); delete all[id]; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} toast('Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ).'); root.querySelectorAll('.is-tb-off').forEach(x => x.classList.remove('is-tb-off')); dlg.close(); }
-            const cur = () => { const c = {order: {}, hidden: {}}; dlg.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; c.order[ol.dataset.g] = lis.map(l => l.dataset.k); c.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); }); return c; };
-            const picked = () => { const n = dlg.querySelector('[data-ws-pick]').value; return n === '' ? null : wsList(id).find(y => y.name === n) || null; }; // par nom : les index se décalent après une suppression
-            if (ev.target.closest('[data-ws-apply]')) { const x = picked(); if (!x) return toast('Choisis des réglages enregistrés.'); const all = tbAll(); all[id] = x.v; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} ext.tbApply(root, id); toast(`Espace de travail « ${x.name} » appliqué.`); dlg.close(); return; }
-            if (ev.target.closest('[data-ws-export]')) { const x = picked(); if (!x) return toast('Choisis d’abord des réglages enregistrés dans la liste.'); return ext.reglageExport(`boutons-${id}`, x.name, x.v); }
-            if (ev.target.closest('[data-ws-import]')) {
-                const keys = v => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.entries(v).slice(0, 60).filter(([k, a]) => typeof k === 'string' && k.length < 80 && Array.isArray(a)).map(([k, a]) => [k, a.filter(x => typeof x === 'string' && x.length < 200).slice(0, 300)])) : {});
-                const r = await ext.reglageImport(`boutons-${id}`, {names: wsList(id).map(y => y.name), check: v => !!v && typeof v === 'object' && (v.order === undefined || typeof v.order === 'object') && (v.hidden === undefined || typeof v.hidden === 'object')});
-                if (!r) return;
-                const v = {order: keys(r.donnees.order), hidden: keys(r.donnees.hidden)}, list = wsList(id).filter(y => y.name !== r.nom); list.push({name: r.nom, date: new Date().toLocaleDateString('fr-FR'), v}); wsSave(id, list.slice(-60));
-                const sel = dlg.querySelector('[data-ws-pick]'); sel.add(new Option(r.nom, r.nom)); sel.value = r.nom;
-                toast(`Réglages « ${r.nom} » importés : « Appliquer » pour les utiliser.`); return;
-            }
-            if (ev.target.closest('[data-ws-del]')) { const x = picked(); if (!x) return; const sel = dlg.querySelector('[data-ws-pick]'), opt = sel.selectedOptions[0];
-                A().undoLocalChange(`Réglages « ${x.name} » supprimés`, [WS_KEY], () => wsSave(id, wsList(id).filter(y => y.name !== x.name)), what => { if (!dlg.isConnected || !opt) return; if (what === 'undo') sel.add(opt); else opt.remove(); sel.value = ''; });
-                opt?.remove(); sel.value = ''; return; }
-            if (ev.target.closest('[data-ws-save]')) { (async () => { const name = String((await A().askText?.({title: 'Réglages enregistrés', message: 'Nom de ces réglages (boutons montrés et leur ordre) :', value: '', okLabel: 'Enregistrer'})) ?? '').trim().slice(0, 60); if (!name) return;
-                const list = wsList(id).filter(y => y.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: cur()}); wsSave(id, list.slice(-60));
-                const all = tbAll(); all[id] = cur(); try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} ext.tbApply(root, id); toast(`Réglages « ${name} » enregistré (aussi dans Maintenance → Montage, retouche, mise en page et son).`); dlg.close(); })(); return; }
-            if (ev.target.closest('[data-ok]')) {
-                const cfg = {order: {}, hidden: {}};
-                dlg.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; cfg.order[ol.dataset.g] = lis.map(l => l.dataset.k); cfg.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); });
-                const all = tbAll(); all[id] = cfg; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {}
-                ext.tbApply(root, id); toast('Boutons rangés.'); dlg.close();
-            }
+            if (ev.target.closest('[data-ok]')) { useCfg(cur()); toast('Boutons rangés.'); dlg.close(); }
         });
         dlg.addEventListener('close', () => dlg.remove());
         dlg.showModal();
