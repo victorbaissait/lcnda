@@ -4701,3 +4701,15 @@ canvas.is-picking{cursor:crosshair}
 .h-rt-props,.h-rt-pats,.h-rt-brushes,.h-rt-char{grid-template-columns:minmax(0,1fr)}
 .h-rt-brushes select,.h-rt-pats select,.h-rt-props select{min-width:0;max-width:100%}
 .h-rt-bprev,.h-rt-patprev{max-width:100%}
+/* onglets du panneau de la retouche : une seule rangée, traits fins (comme le dessin vectoriel) ; les noms seulement s'il y a la place */
+.h-rt2 .h-rt-side>.h-rt-tabs{grid-template-columns:repeat(auto-fit,minmax(30px,1fr));gap:0;border:1px solid #111;background:#fff}
+.h-rt2 .h-rt-side>.h-rt-tabs>button{border:0;border-left:1px solid #111;border-radius:0;box-shadow:none;margin:0;padding:7px 0;background:transparent}
+.h-rt2 .h-rt-side>.h-rt-tabs>button:first-child{border-left:0}
+.h-rt2 .h-rt-side>.h-rt-tabs>button[hidden]{display:none}
+.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-ti{font-size:17px;filter:grayscale(.15)}
+@container (max-width: 700px){.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-tl{display:none}.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-ti{font-size:17px}.h-rt2 .h-rt-side>.h-rt-tabs>button{padding:7px 0}}
+:root[data-theme="dark"] .h-rt2 .h-rt-side>.h-rt-tabs{border-color:#555;background:#24272c}
+:root[data-theme="dark"] .h-rt2 .h-rt-side>.h-rt-tabs>button{border-left-color:#555}
+.h-rt2 .h-rt-side>.h-rt-tabs>button.is-active{background:var(--blue,#2456ff);color:#fff}
+.h-rt2 .h-rt-side>.h-rt-tabs>button:not(.is-active):hover{background:#f1f3f6}
+:root[data-theme="dark"] .h-rt2 .h-rt-side>.h-rt-tabs>button:not(.is-active):hover{background:#30343a}
