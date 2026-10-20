@@ -813,6 +813,38 @@
        pour être redessinés à n'importe quelle taille (aperçu, zoom, image en pleine taille à l'enregistrement). */
     const RT_BRUSHES = [['round', 'Rond net'], ['soft', 'Rond doux'], ['marker', 'Surligneur'], ['pencil', 'Crayon fin'], ['chalk', 'Craie (grain)'], ['eraser', 'Gomme']];
     const RT_FONTS = [['Arial, Helvetica, sans-serif', 'Sans empattement'], ['Georgia, "Times New Roman", serif', 'Avec empattement'], ['"Brush Script MT", "Segoe Script", cursive', 'Manuscrite'], ['"Courier New", monospace', 'Machine à écrire']];
+    /* 🔤 Caractère (comme le panneau de Photoshop) : la variante d'une police (sa graisse : Light, Regular, Bold, Black, « 85 Extra Black »…, et l'italique),
+       taille, interligne, crénage, approche, échelles, décalage vertical, capitales, exposant, souligné, barré, alignement, lissage */
+    const RT_WEIGHTS = [[100, 'Thin', 'Extra-fin'], [200, 'ExtraLight', 'Ultra-léger'], [300, 'Light', 'Léger'], [400, 'Regular', 'Normal'], [500, 'Medium', 'Médium'], [600, 'SemiBold', 'Demi-gras'], [700, 'Bold', 'Gras'], [800, 'ExtraBold', 'Extra-gras'], [900, 'Black', 'Noir']];
+    /** Le nom d'une variante (« Bold Italic », « 85 Extra Black », « Demi », « Light Oblique »…) → graisse et italique */
+    function rtStyleOf(name) {
+        const s = String(name || '').toLowerCase().replace(/[-_]/g, ' '), italic = /italic|oblique|kursiv|slanted|\bit\b/.test(s);
+        let weight = /thin|hairline|\bhair\b/.test(s) ? 100 : /(extra|ultra) ?light/.test(s) ? 200 : /light|\blt\b/.test(s) ? 300 : /semi ?bold|demi ?bold|\bdemi\b|\bsb\b/.test(s) ? 600 : /(extra|ultra) ?bold/.test(s) ? 800
+            : /heavy|black|\bfat\b|(extra|ultra) ?black/.test(s) ? 900 : /bold|\bbd\b/.test(s) ? 700 : /medium|\bmd\b/.test(s) ? 500 : 0;
+        if (!weight) { const m = s.match(/^\s*(\d)\d\b/); weight = m ? ({1: 100, 2: 200, 3: 200, 4: 300, 5: 400, 6: 700, 7: 800, 8: 900, 9: 900})[m[1]] : 400; } // Univers, Frutiger : 45, 55, 65, 75, 85…
+        return {weight, italic};
+    }
+    const rtTextWeight = op => op.weight || (op.bold ? 700 : 400);
+    const rtTextFont = (op, size) => `${op.italic ? 'italic ' : ''}${op.caps === 'small' ? 'small-caps ' : ''}${rtTextWeight(op)} ${size}px ${op.font || 'Arial, sans-serif'}`;
+    /** Dessine un texte (aussi pour mesurer sa boîte) : ctx, op, largeur et hauteur de la toile ; renvoie la boîte {x, y, w, h} en points */
+    function rtDrawText(c, op, W, H, measureOnly = false) {
+        const base = Math.max(1, op.size * W), size = op.pos ? base * 0.62 : base, lead = op.lead ? op.lead * W : base * 1.2, hs = (op.hs || 100) / 100, vs = (op.vs || 100) / 100;
+        const shift = (op.shift || 0) * W + (op.pos === 'sup' ? base * 0.36 : op.pos === 'sub' ? -base * 0.18 : 0);
+        c.font = rtTextFont(op, size); c.textBaseline = 'top'; c.textAlign = 'left';
+        if ('letterSpacing' in c) c.letterSpacing = `${((op.track || 0) / 1000) * size}px`;
+        if ('fontKerning' in c) c.fontKerning = op.kern === 'none' ? 'none' : 'normal';
+        const lines = String(op.text).split('\n').map(l => op.caps === 'all' ? l.toLocaleUpperCase('fr') : l), widths = lines.map(l => c.measureText(l).width * hs), w = Math.max(1, ...widths);
+        const x0 = op.x * W, y0 = op.y * H, ax = op.align === 'center' ? -w / 2 : op.align === 'right' ? -w : 0, box = {x: x0 + ax, y: y0 - shift, w, h: (lines.length - 1) * lead + size * 1.2 * vs};
+        if (measureOnly) return box;
+        lines.forEach((line, i) => {
+            const lx = x0 + (op.align === 'center' ? -widths[i] / 2 : op.align === 'right' ? -widths[i] : 0), ly = y0 + i * lead - shift;
+            c.save(); c.translate(lx, ly); c.scale(hs, vs);
+            if (op.halo) c.strokeText(line, 0, 0); c.fillText(line, 0, 0);
+            if (op.under || op.strike) { const lw = widths[i] / hs, th = Math.max(1, size / 14); c.shadowColor = 'transparent'; c.fillStyle = op.color; if (op.under) c.fillRect(0, size * 0.98, lw, th); if (op.strike) c.fillRect(0, size * 0.55, lw, th); }
+            c.restore();
+        });
+        return box;
+    }
     function rtDrawOp(c, op, W, H, env = null) {
         c.save();
         if (op.type === 'shape') { // rectangle, ellipse, ligne, flèche
@@ -844,11 +876,14 @@
             c.globalAlpha = op.opacity ?? 1; c.drawImage(t, (op.dx || 0) * W, (op.dy || 0) * H); c.restore(); return;
         }
         if (op.type === 'text') {
-            const size = Math.max(6, op.size * W);
-            c.globalAlpha = op.opacity ?? 1; c.fillStyle = op.color; c.font = `${op.italic ? 'italic ' : ''}${op.bold ? 'bold ' : ''}${size}px ${op.font || 'Arial, sans-serif'}`; c.textBaseline = 'top';
-            if (op.halo) { c.lineWidth = Math.max(2, size / 6) * (op.haloW || 1); c.strokeStyle = op.halo; c.lineJoin = 'round'; }
-            if (op.shadow) { c.shadowColor = op.shadow; c.shadowBlur = size * 0.22; c.shadowOffsetX = c.shadowOffsetY = size * 0.07; }
-            String(op.text).split('\n').forEach((line, i) => { const y = op.y * H + i * size * 1.2; if (op.halo) c.strokeText(line, op.x * W, y); c.fillText(line, op.x * W, y); });
+            const size = Math.max(1, op.size * W);
+            // lissage « Aucun » : le texte dessiné à part, puis chaque point gardé tout entier ou pas du tout (bords nets, comme Photoshop)
+            const t = op.aa === 'none' ? (() => { const cv = document.createElement('canvas'); cv.width = W; cv.height = H; return cv.getContext('2d'); })() : c;
+            t.globalAlpha = op.opacity ?? 1; t.fillStyle = op.color;
+            if (op.halo) { t.lineWidth = Math.max(2, size / 6) * (op.haloW || 1); t.strokeStyle = op.halo; t.lineJoin = 'round'; }
+            if (op.shadow) { t.shadowColor = op.shadow; t.shadowBlur = size * 0.22; t.shadowOffsetX = t.shadowOffsetY = size * 0.07; }
+            rtDrawText(t, op, W, H);
+            if (t !== c) { const id = t.getImageData(0, 0, W, H), d = id.data; for (let i = 3; i < d.length; i += 4) d[i] = d[i] >= 110 ? 255 : 0; t.putImageData(id, 0, 0); c.globalAlpha = 1; c.drawImage(t.canvas, 0, 0); }
             c.restore(); return;
         }
         const pts = op.points; if (!pts?.length) { c.restore(); return; }
@@ -1498,7 +1533,7 @@
                 </div>
                 <nav class="h-rt-vtools" data-tbg="rt-vtools" data-tbg-label="Colonne d’outils">${VTOOLS.map(([k, i, l, key]) => { const sc = key ? key.toUpperCase() : k === 'ellipsesel' ? '⇧M' : ''; return `<button type="button" data-rt-mode="${k}" data-rt-v title="${esc(sc ? l.replace(` (${sc})`, '') : l)}" data-tb-label="${esc(l)}" data-shortcut="${esc(sc)}">${i}</button>`; }).join('')}<span class="h-rt-fgbg" data-tb-label="Couleurs (premier plan et arrière-plan)"><button type="button" class="h-rt-ccdef" data-rt-ccdef title="Noir et blanc (D)" aria-label="Couleurs par défaut : noir et blanc"><i></i><i></i></button><button type="button" class="h-rt-ccswap" data-rt-ccswap title="Intervertir les deux couleurs (X)" aria-label="Intervertir les couleurs">⤾</button><label class="h-rt-ccbg" title="Couleur d’arrière-plan (fond des formes) : clic pour la changer"><input type="color" value="#ffffff" data-rt-fill2></label><label class="h-rt-ccfg" title="Couleur de premier plan (pinceau, texte, formes) : clic pour la changer"><input type="color" value="#d0021b" data-rt-color2></label></span></nav>
                 <aside class="h-rt-side"><button type="button" class="h-rt-sidetog" data-rt-sidetog title="Replier le panneau (plus de place pour la photo) — Tab">⇥</button><span class="h-rt-resize" data-rt-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span>
-                    <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="filters">✨ Filtres</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="history">🕘 Historique</button><button type="button" data-rt-tab="restore" title="Restaurer une vieille photo, pas à pas">🧭 Restaurer</button></div>
+                    <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="filters">✨ Filtres</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="char" title="Caractère : police, variante (graisse), taille, interligne, approche…">🔤 Caractère</button><button type="button" data-rt-tab="history">🕘 Historique</button><button type="button" data-rt-tab="restore" title="Restaurer une vieille photo, pas à pas">🧭 Restaurer</button></div>
                     <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-target" data-rt-target></div><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
                         ${sec('Couleur', 'rt-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span${k === 'vibrance' ? ' data-help="Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord."' : ''}>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
                         <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>`)}
@@ -1512,6 +1547,27 @@
                     <div class="h-rt-tools" data-rt-pane="filters" hidden><div class="h-rt-target" data-rt-target></div><div data-rt-fxlist></div><p class="muted">Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille.</p>${sec('Effets', 'rt-fx', `${RT_FILTERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span${k === 'clarity' ? ' data-help="Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général."' : ''}>${esc(l)} <output data-rt-fout="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt-f="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-cmd="filters:reset">Enlever les filtres</button>`)}</div>
                     <div class="h-rt-tools" data-rt-pane="layers" hidden></div>
                     <div class="h-rt-tools" data-rt-pane="history" hidden></div>
+                    <div class="h-rt-tools h-rt-char" data-rt-pane="char" hidden>
+                        <p class="muted h-rt-chfor" data-rt-chfor>Pour les prochains textes. Choisis un texte avec ➤ pour le changer.</p>
+                        <button type="button" class="h-rt-chfam" data-rt-chfont title="Police (famille)"><span data-rt-chfamname>Arial</span> ▾</button>
+                        <label class="h-rt-chline" title="Variante : la graisse (Light, Regular, Bold, Black…) et l’italique"><select data-rt-ch="style"></select></label>
+                        <div class="h-rt-chgrid">
+                            <label title="Taille (en points de l’image)"><span class="h-rt-chi">ᴛT</span><input type="number" min="1" max="4000" step="1" data-rt-ch="size"><small>px</small></label>
+                            <label title="Interligne (vide = automatique, 120 % de la taille)"><span class="h-rt-chi">↕A</span><input type="number" min="0" max="6000" step="1" placeholder="(Auto)" data-rt-ch="lead"><small>px</small></label>
+                            <label title="Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0)"><span class="h-rt-chi">V/A</span><select data-rt-ch="kern"><option value="auto">Métrique</option><option value="none">0</option></select></label>
+                            <label title="Approche : l’espace entre toutes les lettres, en millièmes de la taille"><span class="h-rt-chi">VA↔</span><input type="number" min="-500" max="2000" step="10" data-rt-ch="track"></label>
+                            <label title="Échelle verticale"><span class="h-rt-chi">↕T</span><input type="number" min="10" max="500" step="1" data-rt-ch="vs"><small>%</small></label>
+                            <label title="Échelle horizontale"><span class="h-rt-chi">T↔</span><input type="number" min="10" max="500" step="1" data-rt-ch="hs"><small>%</small></label>
+                            <label title="Décalage vertical (au-dessus de la ligne de base si positif)"><span class="h-rt-chi">A↑</span><input type="number" min="-2000" max="2000" step="1" data-rt-ch="shift"><small>px</small></label>
+                            <label title="Couleur du texte"><span class="h-rt-chi">Couleur</span><input type="color" data-rt-ch="color"></label>
+                        </div>
+                        <div class="h-rt-chtogs" role="group" aria-label="Style">
+                            <button type="button" data-rt-chtog="caps:all" title="Toutes capitales"><b>TT</b></button><button type="button" data-rt-chtog="caps:small" title="Petites capitales"><b>Tᴛ</b></button><button type="button" data-rt-chtog="pos:sup" title="Exposant">T¹</button><button type="button" data-rt-chtog="pos:sub" title="Indice">T₁</button><button type="button" data-rt-chtog="under" title="Souligné"><u>T</u></button><button type="button" data-rt-chtog="strike" title="Barré"><s>T</s></button>
+                        </div>
+                        <div class="h-rt-chtogs" role="group" aria-label="Alignement"><button type="button" data-rt-chalign="left" title="Aligné à gauche">⟸ gauche</button><button type="button" data-rt-chalign="center" title="Centré">≡ centre</button><button type="button" data-rt-chalign="right" title="Aligné à droite">droite ⟹</button></div>
+                        <label class="h-rt-chline" title="Lissage des bords des lettres">Lissage <select data-rt-ch="aa"><option value="smooth">Lissé</option><option value="none">Aucun (bords nets, pixels)</option></select></label>
+                        <p class="muted">Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles.</p>
+                    </div>
                     <div class="h-rt-tools h-rt-restore" data-rt-pane="restore" hidden><div class="h-rt-raone"><button type="button" class="button" data-rt-cmd="restore:all" title="Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis">✨ Restaurer en une fois</button><small class="muted">ou étape par étape :</small></div>${RT_RESTORE_STEPS.map(([k, t, help, btns], i) => `<details class="h-rt-step" data-rt-step="${k}" ${i === 0 ? 'open' : ''}><summary><span class="h-rt-stepn">${i + 1}</span> ${t} <i class="h-rt-stepok" hidden>✓</i></summary><p class="muted">${help}</p><div class="h-rt-stepbtns">${btns}</div></details>`).join('')}
                         <p class="muted h-rt-help">Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version.</p></div>
                 </aside>
@@ -1914,6 +1970,7 @@
         $('[data-rt-curexp]').addEventListener('click', () => cmd('export:ba'));
 
         // ── Outils ──
+        let ch = {weight: 400, style: 'Regular', lead: 0, track: 0, kern: 'auto', hs: 100, vs: 100, shift: 0, caps: '', pos: '', under: false, strike: false, align: 'left', aa: 'smooth', tsize: 0}; // 🔤 Caractère
         let mode = 'adjust', brush = 18, hard = 55, opac = 100, brushType = 'round', color = '#d0021b', font = RT_FONTS[0][0], halo = true, aligned = true, haloColor = '#ffffff', haloW = 1, shadow = false, shadowColor = '#000000';
         let bold = false, italic = false, shapeKind = 'rect', shapeFill = false, fillColor = '#ffffff', tol = 24, contig = true, maskMode = 'hide';
         let cloneOff = null, cloneSrc = null, picking = false, painting = null, panning = null, spaceDown = false, drag = null, poly = null, polyHover = null;
@@ -1958,7 +2015,7 @@
             if (m !== 'idphoto' && idp) { idp = null; dlg.querySelector('.h-rt-idp')?.remove(); } canvas.classList.toggle('is-text', m === 'text'); stage.classList.toggle('is-hand', m === 'hand');
             canvas.dataset.tool = m;
             brushEl.hidden = true; srcEl.hidden = true;
-            if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } if (changed) showTab('layers'); }
+            if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } if (changed) showTab(m === 'text' ? 'char' : 'layers'); }
             if (m === 'adjust' && changed) showTab('adjust');
             syncChips(); draw();
         };
@@ -2012,7 +2069,7 @@
         $$('[data-rt-swatch]').forEach(b => b.addEventListener('click', () => setColor(b.dataset.rtSwatch)));
         // E5 : la police se choisit dans la liste unique (polices de l'app, récentes, celles de l'ordinateur)
         const fontBtn = $('[data-rt-fontpick]'), fontName = f => RT_FONTS.find(x => x[0] === f)?.[1] || String(f).split(',')[0].replace(/["']/g, '').trim();
-        const setFont = f => { font = f; fontBtn.textContent = `${fontName(f)} ▾`; fontBtn.style.fontFamily = f; };
+        const setFont = f => { font = f; fontBtn.textContent = `${fontName(f)} ▾`; fontBtn.style.fontFamily = f; syncChar(); };
         fontBtn.addEventListener('click', async () => {
             const UI = window.LCNDA_UI, cur = String(font).split(',')[0].replace(/["']/g, '').trim(); if (!UI?.openFontPicker) return;
             const f = await UI.openFontPicker({value: cur, sample: 'Souvenir de famille'}); if (!f) return;
@@ -2026,8 +2083,65 @@
         $('[data-rt-halow]').addEventListener('change', e => { haloW = Number(e.target.value); textStyle(); });
         $('[data-rt-shadow]').addEventListener('change', e => { shadow = e.target.checked; textStyle(); });
         $('[data-rt-shadowcolor]').addEventListener('change', e => { shadowColor = e.target.value; shadow = true; $('[data-rt-shadow]').checked = true; textStyle(); });
-        $('[data-rt-bold]').addEventListener('change', e => { bold = e.target.checked; });
-        $('[data-rt-italic]').addEventListener('change', e => { italic = e.target.checked; });
+        $('[data-rt-bold]').addEventListener('change', e => { bold = e.target.checked; chSet({weight: bold ? 700 : 400, style: bold ? (italic ? 'Bold Italic' : 'Bold') : (italic ? 'Italic' : 'Regular')}); });
+        $('[data-rt-italic]').addEventListener('change', e => { italic = e.target.checked; chSet({italic, style: `${ch.weight >= 600 ? 'Bold' : 'Regular'}${italic ? ' Italic' : ''}`.replace('Regular Italic', 'Italic')}); });
+        // ── 🔤 Caractère : réglages des prochains textes, ou du texte choisi avec ➤ ──
+        const selText = () => { const l = moveSel && nodeById(moveSel.layer), op = l?.ops[moveSel.i]; return op?.type === 'text' ? {l, op} : null; };
+        /** les réglages du caractère gardés dans un texte (seulement ceux qui changent quelque chose) */
+        function chOpFields() { const o = {}; if (ch.lead) o.lead = ch.lead / pw; if (ch.track) o.track = ch.track; if (ch.kern === 'none') o.kern = 'none'; if (ch.hs !== 100) o.hs = ch.hs; if (ch.vs !== 100) o.vs = ch.vs; if (ch.shift) o.shift = ch.shift / pw;
+            if (ch.caps) o.caps = ch.caps; if (ch.pos) o.pos = ch.pos; if (ch.under) o.under = true; if (ch.strike) o.strike = true; if (ch.align !== 'left') o.align = ch.align; if (ch.aa === 'none') o.aa = 'none'; return o; }
+        let chCommitT = 0;
+        /** change un réglage : pour les prochains textes, et tout de suite sur le texte choisi (une étape d'historique) */
+        function chSet(patch) {
+            Object.assign(ch, patch); if ('italic' in patch) { italic = patch.italic; delete ch.italic; $('[data-rt-italic]').checked = italic; } if ('weight' in patch) { bold = ch.weight >= 600; $('[data-rt-bold]').checked = bold; }
+            const t = selText();
+            if (t) { const op = t.op;
+                for (const [k, v] of Object.entries(patch)) {
+                    if (k === 'size') op.size = v / pw; else if (k === 'lead' || k === 'shift') { if (v) op[k] = v / pw; else delete op[k]; } else if (k === 'weight') { op.weight = v; op.bold = v >= 600; } else if (k === 'italic' || k === 'style' || k === 'color') op[k] = v;
+                    else if (k === 'tsize') continue; else if ((k === 'hs' || k === 'vs') && v === 100) delete op[k]; else if (v === '' || v === false || v === 0 || (k === 'kern' && v === 'auto') || (k === 'align' && v === 'left') || (k === 'aa' && v === 'smooth')) delete op[k]; else op[k] = v; }
+                renderLayer(t.l); draw(); clearTimeout(chCommitT); chCommitT = setTimeout(() => commit('Caractère du texte'), 400); }
+            syncChar();
+        }
+        // les variantes (graisses) d'une famille : celles de l'ordinateur si l'app peut les lire, sinon les graisses habituelles
+        let localFaces = null;
+        const loadFaces = async (ask = false) => { if (localFaces || typeof window.queryLocalFonts !== 'function') return localFaces;
+            try { if (!ask) { const st = (await navigator.permissions?.query({name: 'local-fonts'}))?.state; if (st !== 'granted') return null; } localFaces = await window.queryLocalFonts(); } catch (_) { localFaces = null; } return localFaces; };
+        const famOf = f => String(f || '').split(',')[0].replace(/["']/g, '').trim();
+        const stylesFor = fam => { const own = (localFaces || []).filter(f => f.family.toLowerCase() === fam.toLowerCase()).map(f => f.style);
+            const list = own.length ? [...new Set(own)] : RT_WEIGHTS.flatMap(([w, en, fr]) => [en, `${en} Italic`.replace('Regular Italic', 'Italic')]);
+            return list.map(n => ({n, ...rtStyleOf(n)})).sort((a, b) => a.weight - b.weight || a.italic - b.italic); };
+        const frStyle = n => own => own ? n : (RT_WEIGHTS.find(w => n.replace(/ ?Italic$/, '') === w[1])?.[2] || 'Normal') + (/Italic/.test(n) ? ' italique' : '');
+        function syncChar() {
+            const pane = $('[data-rt-pane="char"]'); if (!pane) return; const t = selText(), op = t?.op;
+            const cur = op ? {font: op.font || font, style: op.style || (op.italic ? (rtTextWeight(op) >= 600 ? 'Bold Italic' : 'Italic') : rtTextWeight(op) >= 600 ? 'Bold' : 'Regular'), size: Math.round(op.size * pw), lead: op.lead ? Math.round(op.lead * pw) : '', kern: op.kern || 'auto', track: op.track || 0, hs: op.hs || 100, vs: op.vs || 100, shift: op.shift ? Math.round(op.shift * pw) : 0, color: op.color, caps: op.caps || '', pos: op.pos || '', under: !!op.under, strike: !!op.strike, align: op.align || 'left', aa: op.aa || 'smooth'}
+                : {...ch, font, size: ch.tsize || brush, lead: ch.lead || '', color};
+            $('[data-rt-chfor]').textContent = op ? `Texte choisi : « ${String(op.text).slice(0, 30)}${String(op.text).length > 30 ? '…' : ''} »` : 'Pour les prochains textes. Choisis un texte avec ➤ pour le changer.';
+            const fam = famOf(cur.font), nm = $('[data-rt-chfamname]'); nm.textContent = fontName(cur.font); nm.parentElement.style.fontFamily = cur.font;
+            const own = (localFaces || []).some(f => f.family.toLowerCase() === fam.toLowerCase()), sel = $('[data-rt-ch="style"]'), list = stylesFor(fam);
+            if (!list.some(x => x.n === cur.style)) list.push({n: cur.style, ...rtStyleOf(cur.style)});
+            sel.innerHTML = list.map(x => `<option value="${esc(x.n)}" ${x.n === cur.style ? 'selected' : ''} style="font-family:${esc(cur.font)};font-weight:${x.weight};font-style:${x.italic ? 'italic' : 'normal'}">${esc(frStyle(x.n)(own))}</option>`).join('') + (!own && typeof window.queryLocalFonts === 'function' ? '<option value="__ask">🔎 Lire les variantes de l’ordinateur…</option>' : '');
+            const set = (k, v) => { const el = $(`[data-rt-ch="${k}"]`); if (el && document.activeElement !== el) el.value = v; };
+            ['size', 'lead', 'kern', 'track', 'hs', 'vs', 'shift', 'color', 'aa'].forEach(k => set(k, cur[k]));
+            $$('[data-rt-chtog]').forEach(b => { const [k, v] = b.dataset.rtChtog.split(':'); b.classList.toggle('is-on', v ? cur[k] === v : !!cur[k]); });
+            $$('[data-rt-chalign]').forEach(b => b.classList.toggle('is-on', b.dataset.rtChalign === cur.align));
+        }
+        $('[data-rt-chfont]').addEventListener('click', () => fontBtn.click());
+        $('[data-rt-pane="char"]').addEventListener('change', async e => {
+            const el = e.target.closest('[data-rt-ch]'); if (!el) return; const k = el.dataset.rtCh;
+            if (k === 'style') { if (el.value === '__ask') { await loadFaces(true); syncChar(); return; } const st0 = rtStyleOf(el.value); return chSet({style: el.value, weight: st0.weight, italic: st0.italic}); }
+            if (k === 'kern' || k === 'aa') return chSet({[k]: el.value});
+            if (k === 'color') { setColor(el.value); return chSet({color: el.value}); }
+            const n = Number(String(el.value).replace(',', '.')); if (el.value !== '' && !Number.isFinite(n)) return;
+            if (k === 'size') { if (!(n > 0)) return; return chSet({tsize: Math.round(n), size: Math.round(n)}); }
+            chSet({[k]: el.value === '' ? (k === 'hs' || k === 'vs' ? 100 : 0) : n});
+        });
+        $('[data-rt-pane="char"]').addEventListener('click', e => {
+            const tg = e.target.closest('[data-rt-chtog]'), al = e.target.closest('[data-rt-chalign]');
+            const t = selText(), cur = t ? t.op : ch;
+            if (tg) { const [k, v] = tg.dataset.rtChtog.split(':'); return chSet({[k]: v ? (cur[k] === v ? '' : v) : !cur[k]}); }
+            if (al) return chSet({align: al.dataset.rtChalign});
+        });
+        loadFaces().then(() => syncChar());
         $('[data-rt-shape]').addEventListener('change', e => { shapeKind = e.target.value; });
         $('[data-rt-fillon]').addEventListener('change', e => { shapeFill = e.target.checked; });
         $('[data-rt-fill]').addEventListener('input', e => setFill(e.target.value));
@@ -2058,13 +2172,13 @@
         const placeText = (x, y, edit = null) => {
             const l = edit ? nodeById(edit.layer) : activeL(); if (!l || lockedDeep(l)) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
             const op0 = edit ? l.ops[edit.i] : null;
-            const r = canvas.getBoundingClientRect(), wr = wrap.getBoundingClientRect(), k = r.width / pw, sz = op0 ? op0.size * pw : brush;
+            const r = canvas.getBoundingClientRect(), wr = wrap.getBoundingClientRect(), k = r.width / pw, sz = op0 ? op0.size * pw : (ch.tsize || brush);
             const ta = document.createElement('textarea'); ta.className = 'h-rt-textinput'; ta.rows = 1; ta.value = op0?.text || '';
-            Object.assign(ta.style, {left: (r.left - wr.left + x * k) + 'px', top: (r.top - wr.top + y * k) + 'px', fontSize: Math.max(10, sz * k) + 'px', color: op0?.color || color, fontFamily: op0?.font || font, fontWeight: (op0 ? op0.bold : bold) ? '700' : '400', fontStyle: (op0 ? op0.italic : italic) ? 'italic' : 'normal'});
+            Object.assign(ta.style, {left: (r.left - wr.left + x * k) + 'px', top: (r.top - wr.top + y * k) + 'px', fontSize: Math.max(10, sz * k) + 'px', color: op0?.color || color, fontFamily: op0?.font || font, fontWeight: String(op0 ? rtTextWeight(op0) : ch.weight), fontStyle: (op0 ? op0.italic : italic) ? 'italic' : 'normal', letterSpacing: `${((op0 ? op0.track : ch.track) || 0) / 1000}em`, textTransform: (op0 ? op0.caps : ch.caps) === 'all' ? 'uppercase' : 'none'});
             wrap.appendChild(ta); ta.focus();
             let over = false; const done = ok => { if (over) return; over = true; const text = ta.value.replace(/\s+$/, ''); ta.remove(); if (!ok) return;
                 if (op0) { if (!text.trim()) l.ops.splice(edit.i, 1); else op0.text = text; moveSel = null; }
-                else { if (!text.trim()) return; l.ops.push({type: 'text', text, x: x / pw, y: y / ph, size: brush / pw, color, opacity: opac / 100, font, bold, italic, halo: halo ? haloColor : '', haloW, shadow: shadow ? shadowColor : ''}); }
+                else { if (!text.trim()) return; l.ops.push({type: 'text', text, x: x / pw, y: y / ph, size: (ch.tsize || brush) / pw, color, opacity: opac / 100, font, bold: ch.weight >= 600, italic, weight: ch.weight, style: ch.style, ...chOpFields(), halo: halo ? haloColor : '', haloW, shadow: shadow ? shadowColor : ''}); }
                 renderLayer(l); draw(); refreshLayers(); commit(`Texte « ${text.slice(0, 24)}${text.length > 24 ? '…' : ''} »`); };
             ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); done(true); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); done(false); } });
             ta.addEventListener('blur', () => done(true));
@@ -2094,7 +2208,7 @@
         function opBox(op) {
             if (op.type === 'image') return {x: op.x, y: op.y, w: op.w, h: op.h};
             if (op.type === 'shape') { const x = Math.min(op.x1, op.x2), y = Math.min(op.y1, op.y2); return {x, y, w: Math.abs(op.x2 - op.x1), h: Math.abs(op.y2 - op.y1)}; }
-            if (op.type === 'text') { const size = Math.max(6, op.size * pw); mctx.font = `${op.italic ? 'italic ' : ''}${op.bold ? 'bold ' : ''}${size}px ${op.font || 'Arial'}`; const lines = String(op.text).split('\n'); return {x: op.x, y: op.y, w: Math.max(...lines.map(l => mctx.measureText(l).width)) / pw, h: lines.length * size * 1.2 / ph}; }
+            if (op.type === 'text') { mctx.save(); const b = rtDrawText(mctx, op, pw, ph, true); mctx.restore(); return {x: b.x / pw, y: b.y / ph, w: b.w / pw, h: b.h / ph}; }
             if (op.type === 'pixels' || op.type === 'fillmask') { const m = masks.get(op.mask), b = m && (op._bb || (op._bb = maskBox(m))); return b ? {x: b.x / pw + (op.dx || 0), y: b.y / ph + (op.dy || 0), w: b.w / pw, h: b.h / ph} : null; }
             if (op.points?.length) { const xs = op.points.map(p => p[0]), ys = op.points.map(p => p[1]), pad = (op.size || 0) / 2; const x = Math.min(...xs) - pad, y = Math.min(...ys) - pad * pw / ph; return {x, y, w: Math.max(...xs) - Math.min(...xs) + pad * 2, h: Math.max(...ys) - Math.min(...ys) + pad * 2 * pw / ph}; }
             return null;
@@ -2163,7 +2277,7 @@
                     if (Math.hypot(hs.rot[0] - x, hs.rot[1] - y) <= k) { drag = {imgRot: true, moved: false}; canvas.setPointerCapture(e.pointerId); return; }
                     if (ci >= 0) { const o = hs.corners[(ci + 2) % 4]; drag = {imgSize: true, anchor: o, ratio: cur.w * pw / (cur.h * ph), moved: false}; canvas.setPointerCapture(e.pointerId); return; }
                 }
-                moveSel = hitOp(x, y); if (moveSel) { activeLayer = moveSel.layer; refreshLayers(); drag = {move: true, x, y, moved: false}; canvas.setPointerCapture(e.pointerId); }
+                moveSel = hitOp(x, y); syncChar(); if (moveSel) { activeLayer = moveSel.layer; refreshLayers(); drag = {move: true, x, y, moved: false}; canvas.setPointerCapture(e.pointerId); }
                 draw(); return;
             }
             if (mode === 'marquee' || mode === 'ellipsesel') { drag = {sel: {kind: mode === 'marquee' ? 'rect' : 'ellipse', x0: x, y0: y, x1: x, y1: y}, how: howOf(e)}; canvas.setPointerCapture(e.pointerId); return; }

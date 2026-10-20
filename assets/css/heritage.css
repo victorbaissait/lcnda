@@ -4556,3 +4556,19 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-rt-lsec summary{cursor:pointer;list-style:none}.h-rt-lsec summary::-webkit-details-marker{display:none}
 .h-rt-lscol{display:flex;gap:8px;align-items:center;font-size:12.5px;margin:4px 0}
 :root[data-theme="dark"] .h-rt-lfxbtn{background:#262626;border-color:#555;color:#ddd}:root[data-theme="dark"] .h-rt-lsec{border-color:#3a3a3a}
+/* Retouche : onglet 🔤 Caractère (comme le panneau Caractère de Photoshop) */
+.h-rt-char{display:flex;flex-direction:column;gap:8px}
+.h-rt-chfor{margin:0;font-size:12.5px}
+.h-rt-chfam{width:100%;text-align:left;border:1px solid #9aa4b2;border-radius:6px;background:#fff;padding:7px 10px;font-size:15px;cursor:pointer;color:inherit;display:flex;justify-content:space-between;gap:8px}
+.h-rt-chline{display:flex;gap:8px;align-items:center;font-size:12.5px}.h-rt-chline select{flex:1;min-width:0;font-size:14px;padding:5px 8px}
+.h-rt-chgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
+.h-rt-chgrid label{display:flex;align-items:center;gap:6px;min-width:0;font-size:12px}
+.h-rt-chgrid input[type=number],.h-rt-chgrid select{flex:1;min-width:0;width:0;padding:4px 6px;font-size:13px}
+.h-rt-chgrid input[type=color]{flex:1;min-width:0;height:28px;padding:1px}
+.h-rt-chgrid small{color:var(--muted,#777)}
+.h-rt-chi{flex:none;min-width:34px;font:600 12px/1 Georgia,serif;color:#555;text-align:center}
+.h-rt-chtogs{display:flex;flex-wrap:wrap;gap:4px}
+.h-rt-chtogs button{border:1px solid #c3cad5;background:#fff;border-radius:5px;padding:4px 9px;cursor:pointer;font-size:13px;color:inherit}
+.h-rt-chtogs button.is-on{background:#2a62c9;border-color:#2a62c9;color:#fff}
+:root[data-theme="dark"] .h-rt-chfam,:root[data-theme="dark"] .h-rt-chtogs button{background:#262626;border-color:#4a4a4a}:root[data-theme="dark"] .h-rt-chi{color:#bbb}
+:root[data-theme="dark"] .h-rt-chtogs button.is-on{background:#2a62c9;color:#fff}
