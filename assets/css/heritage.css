@@ -4745,3 +4745,9 @@ canvas.is-picking{cursor:crosshair}
 .h-hs-tabs .h-hs-ti{font-size:15px;line-height:1}
 .h-hs-tabs .h-hs-tl{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11.5px}
 @container (max-width: 250px){.h-hs-tabs .h-hs-tl{display:none}.h-hs-tabs .h-hs-ti{font-size:18px}}
+/* la recherche des questions fréquentes : un seul cadre (celui de la case de recherche commune) */
+.h-faq-search:has(.ui-search),:root.lc-frame .h-faq-search:has(.ui-search){border:0;padding:0;background:none;box-shadow:none}
+.h-faq-search:has(.ui-search)>span[aria-hidden]{display:none}
+.h-faq-search>.ui-search{flex:1;width:100%}
+/* outils (Maintenance → Montage, retouche… et raccourcis) : toute la largeur ; une seule rangée quand il y a la place */
+@media (min-width:701px){.segmented.enquetes-tab-toggle.h-et-tabs,.segmented.enquetes-tab-toggle.h-ek-tabs{max-width:none;grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(104px,1fr))!important}}

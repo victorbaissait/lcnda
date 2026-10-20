@@ -706,7 +706,7 @@
     async function openFaq(question) {
         const app = A(); if (!app.state || !app.setModule) return;
         app.state.maintenanceTab = 'faq'; await app.setModule('maintenance');
-        for (let i = 0; i < 30; i++) { const q = document.querySelector('[data-faq-q]'); if (q) { q.value = question; fire(q, 'input'); q.scrollIntoView({block: 'center'}); return; } await new Promise(r => setTimeout(r, 100)); }
+        for (let i = 0; i < 30; i++) { const q = document.querySelector('[data-faq-q]'); if (q) { q.value = question ?? ''; fire(q, 'input'); q.scrollIntoView({block: 'center'}); return; } await new Promise(r => setTimeout(r, 100)); }
     }
     UI.openFaq = openFaq;
     function showHelp(btn) {
