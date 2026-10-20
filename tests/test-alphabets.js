@@ -246,8 +246,8 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
             out.errors = errors; out.outside = outside;
         } finally { await browser?.close(); proc.kill(); }
 
-        check('navigateur : le cadre est le dernier, à droite de « Fêtes religieuses » (même ligne) sur grand écran', () => {
-            assert.equal(out.lastPanel, 'h-abc-panel');
+        check('navigateur : le cadre est à droite de « Fêtes religieuses » (même ligne) sur grand écran, avant les cadres de heritage-calendar-more.js', () => {
+            assert.ok(['h-abc-panel', 'h-cm-gen'].includes(out.lastPanel), out.lastPanel);
             assert.ok(Math.abs(out.abc.y - out.feast.y) < 2 && out.abc.x > out.feast.r, JSON.stringify([out.feast, out.abc]));
         });
         check('navigateur : « Une langue » — 26 lettres en français, russe avec Ж et sa translittération', () => {
