@@ -301,7 +301,7 @@ try {
         'impossible_journeys' => json_response(['alerts' => impossible_journeys($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'sync_status' => json_response(sync_status($pdo)),
         'sync_export' => sync_export($pdo),
-        'ask_question' => json_response(ask_question($pdo, safe_text($_GET['q'] ?? ''), safe_int($_GET['person_id'] ?? 0))),
+        'ask_question' => json_response(ask_question($pdo, safe_text($_GET['q'] ?? ''), safe_int($_GET['person_id'] ?? 0), preg_replace('/[^0-9,]/', '', (string) ($_GET['place'] ?? '')))),
         'languages_overview' => json_response(languages_overview($pdo)),
         'record_languages' => json_response(['languages' => record_languages_for($pdo, ($_GET['type'] ?? '') === 'media' ? 'media' : 'event', [safe_int($_GET['id'] ?? 0)])[safe_int($_GET['id'] ?? 0)] ?? [], 'catalog' => LANGUAGES, 'certainties' => LANGUAGE_CERTAINTY]),
         'villages' => json_response(['villages' => villages_list($pdo, safe_text($_GET['q'] ?? ''))]),

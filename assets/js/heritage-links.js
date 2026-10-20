@@ -54,29 +54,32 @@
         } catch (error) { toast(error.message, 'error'); }
     }
     let questionSeq = 0;
-    async function runQuestion(q, after, personId = 0) {
+    async function runQuestion(q, after, personId = 0, place = '') {
         const out = document.getElementById('h-question-out');
         if (!out || !q.trim()) return;
         out.innerHTML = '<p class="muted">Recherche…</p>';
         try {
             const seq = ++questionSeq;
-            const r = await api('ask_question', personId ? {q, person_id: personId} : {q});
+            const r = await api('ask_question', {q, ...(personId ? {person_id: personId} : {}), ...(place ? {place} : {})});
             if (seq !== questionSeq) return; // une question plus récente a été posée entre-temps
             S().hQuestion = q;
             // Homonymes : toutes les fiches qui portent ce nom, pour répondre pour une autre
             const homonyms = (r.homonyms || []).length > 1 ? `<div class="h-question-homonyms"><p><strong>${r.homonyms.length} fiches portent ce nom :</strong></p><ul>${r.homonyms.map(h => `<li>${personLink(h.id, h.name, h.life ? `(${h.life})` : '')} <small class="muted">fiche n°${h.id}</small> ${h.chosen ? '<span class="collection-kind">réponse ci-dessous</span>' : `<button type="button" class="button small secondary" data-h-question-person="${h.id}">Répondre pour celle-ci</button>`}</li>`).join('')}</ul></div>` : '';
-            out.innerHTML = `<p class="h-understood">J’ai compris : ${r.understood.map(u => `<span class="collection-kind">${esc(u)}</span>`).join(' ')}</p>${homonyms}
+            // plusieurs villes du même nom ont des actes : laquelle ?
+            const placeChoices = (r.place_choices || []).length ? `<div class="h-question-homonyms"><ul>${r.place_choices.map(c => `<li><strong>${esc(c.label)}</strong> <small class="muted">${plural(c.n, 'acte', 'actes')}</small> <button type="button" class="button small secondary" data-h-question-place="${esc(c.key)}">Répondre pour celle-ci</button></li>`).join('')}</ul></div>` : '';
+            out.innerHTML = `<p class="h-understood">J’ai compris : ${r.understood.map(u => `<span class="collection-kind">${esc(u)}</span>`).join(' ')}</p>${homonyms}${placeChoices}
                 ${r.answer ? `<p class="h-question-answer">${esc(r.answer)}</p>` : ''}
                 ${(r.facts || []).length ? `<dl class="h-question-facts">${r.facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}
                 ${(r.rows || []).length ? `<table class="data-table h-question-rank"><tbody>${r.rows.map((row, i) => `<tr><td class="muted">${i + 1}</td><td>${!row.group && row.ids.length && row.ids.length <= 2 ? personLink(row.ids[0], row.label) : esc(row.label)}${(row.group ? row.ids.length : row.ids.length > 2) ? ` <button type="button" class="link-button" data-h-question-ids="${row.ids.join(',')}">voir</button>` : ''}</td><td>${esc(row.value)}</td></tr>`).join('')}</tbody></table>` : ''}
-                ${r.people.length || !(r.rows || []).length && !(r.facts || []).length ? `<h4>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}</h4>${r.people.length ? resultsTable(r.people) : empty('Aucune fiche ne répond à cette question.')}` : ''}
+                ${r.people.length || !(r.rows || []).length && !(r.facts || []).length && !(r.place_choices || []).length ? `<h4>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}</h4>${r.people.length ? resultsTable(r.people) : empty('Aucune fiche ne répond à cette question.')}` : ''}
                 <div data-h-question-sub></div>
                 ${r.criteria && !r.criteria.same_birthday ? '<p><button type="button" class="button small secondary" data-h-question-save>Enregistrer comme recherche</button></p>' : ''}`;
             out.querySelector('[data-h-question-save]')?.addEventListener('click', () => saveQuestion(q, r.criteria, after));
             // « voir » sur une ligne d'un classement (un prénom, un lieu…) : les personnes concernées
             out.querySelectorAll('[data-h-question-ids]').forEach(b => b.addEventListener('click', async () => { const ids = b.dataset.hQuestionIds.split(',').map(Number).slice(0, 80), sub = out.querySelector('[data-h-question-sub]');
                 const rows = await Promise.all(ids.map(id => api('person', {id}).then(x => x.person).catch(() => null))); sub.innerHTML = `<h4>${esc(b.closest('tr').children[1].firstChild.textContent)} — ${plural(ids.length, 'fiche', 'fiches')}</h4>${resultsTable(rows.filter(Boolean))}`; sub.scrollIntoView({behavior: 'smooth', block: 'nearest'}); }));
-            out.querySelectorAll('[data-h-question-person]').forEach(b => b.addEventListener('click', () => runQuestion(q, after, Number(b.dataset.hQuestionPerson))));
+            out.querySelectorAll('[data-h-question-person]').forEach(b => b.addEventListener('click', () => runQuestion(q, after, Number(b.dataset.hQuestionPerson), place)));
+            out.querySelectorAll('[data-h-question-place]').forEach(b => b.addEventListener('click', () => runQuestion(q, after, personId, b.dataset.hQuestionPlace)));
         } catch (error) { out.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; }
     }
     // Les recherches enregistrées, en bas de l'écran « Poser une question », dans une section qui se déplie

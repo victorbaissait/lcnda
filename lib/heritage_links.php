@@ -335,11 +335,11 @@ function same_birthday_ids(PDO $pdo, int $personId): array
     return array_values(array_keys(array_filter($md, static fn($v, $id) => $v === $target && $id !== $personId, ARRAY_FILTER_USE_BOTH)));
 }
 
-function ask_question(PDO $pdo, string $question, int $personId = 0): array
+function ask_question(PDO $pdo, string $question, int $personId = 0, string $placeKey = ''): array
 {
     if (mb_strlen($question) > 300) { $question = mb_substr($question, 0, 300); }
     // les questions qui demandent un calcul (lien de parenté, records, moyennes, fréquences, époques…) : lib/question_more.php
-    if (function_exists('question_special') && ($sp = question_special($pdo, $question, $personId))) {
+    if (function_exists('question_special') && ($sp = question_special($pdo, $question, $personId, $placeKey))) {
         $ids = array_slice(array_values(array_unique($sp['ids'] ?? [])), 0, 1000);
         if ($ids) { $pp = collection_people($pdo, $ids); $sp['people'] = array_values(array_filter(array_map(static fn($id) => $pp[$id] ?? null, $ids))); $sp['count'] = count(array_unique($sp['ids'])); }
         unset($sp['ids']);

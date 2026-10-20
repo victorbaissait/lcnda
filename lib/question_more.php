@@ -84,6 +84,8 @@ function qm_de(string $name): string { return preg_match('/^[aeiouyœæ]/u', mb_
 /** l’article devant un mot de parenté : « l’oncle », « l’arrière-grand-père », « le petit-fils », « la tante » */
 function qm_art(string $noun, bool $female): string { return preg_match('/^[aeiouy]/', strtolower(ascii_fold($noun))) ? 'l’' . $noun : ($female ? 'la ' : 'le ') . $noun; }
 /** « 1 personne », « 3 personnes » (0 et 1 au singulier) */
+/** une majuscule au début, même accentuée (« Âge », « Écart ») */
+function qm_ucfirst(string $s): string { return mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1); }
 function qm_n(int $n, string $one, string $many): string { return $n . ' ' . ($n > 1 ? $many : $one); }
 /** une question sur les animaux (les fiches « animal » ne comptent pas parmi les personnes sinon) */
 function qm_about_animals(string $t): bool { return (bool) preg_match('/\b(animal|animaux|animaux de compagnie|betes?)\b/', $t); }
@@ -97,9 +99,9 @@ function qm_people(PDO $pdo): array
     $hasKind = false;
     try { $hasKind = (bool) array_filter($pdo->query('PRAGMA table_info(persons)')->fetchAll(), static fn($c) => $c['name'] === 'kind'); } catch (Throwable $_) {}
     foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS first, COALESCE(last_name,'') AS last, COALESCE(gender,'') AS gender, COALESCE(occupation,'') AS occupation, COALESCE(living_status,'') AS living, " . ($hasKind ? "COALESCE(kind,'human')" : "'human'") . " AS kind FROM persons") as $r) {
-        $p[(int) $r['id']] = ['id' => (int) $r['id']] + $r + ['by' => null, 'bd' => null, 'bplace' => '', 'btext' => '', 'dy' => null, 'dd' => null, 'dplace' => '', 'dtext' => ''];
+        $p[(int) $r['id']] = ['id' => (int) $r['id']] + $r + ['by' => null, 'bd' => null, 'bplace' => '', 'bplace_id' => 0, 'btext' => '', 'dy' => null, 'dd' => null, 'dplace' => '', 'dplace_id' => 0, 'dtext' => ''];
     }
-    $rows = $pdo->query("SELECT e.person_id, e.year, e.date_text, t.gedcom_tag, COALESCE(pl.name,'') AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
+    $rows = $pdo->query("SELECT e.person_id, e.year, e.date_text, t.gedcom_tag, COALESCE(pl.name,'') AS place, COALESCE(e.place_id,0) AS place_id FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
         WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','CHR','BAPM','DEAT','BURI') ORDER BY t.gedcom_tag IN ('BIRT','DEAT') DESC")->fetchAll();
     foreach ($rows as $e) {
         $id = (int) $e['person_id']; if (!isset($p[$id])) { continue; }
@@ -109,7 +111,7 @@ function qm_people(PDO $pdo): array
         if (!$iso && ($rep = qm_rep_text_iso((string) $e['date_text']))) { $iso = $rep; $year ??= (int) substr($rep, 0, 4); }
         if ($p[$id][$k . 'y'] === null && $year !== null) { $p[$id][$k . 'y'] = $year; $p[$id][$k . 'd'] = $iso; $p[$id][$k . 'text'] = (string) $e['date_text']; }
         if ($p[$id][$k . 'text'] === '' && trim((string) $e['date_text']) !== '') { $p[$id][$k . 'text'] = (string) $e['date_text']; }
-        if ($p[$id][$k . 'place'] === '' && $e['place'] !== '') { $p[$id][$k . 'place'] = (string) $e['place']; }
+        if ($p[$id][$k . 'place'] === '' && $e['place'] !== '') { $p[$id][$k . 'place'] = (string) $e['place']; $p[$id][$k . 'place_id'] = (int) $e['place_id']; }
     }
     return $cache = $p;
 }
@@ -134,8 +136,9 @@ function qm_couples(PDO $pdo): array
     $c = [];
     foreach ($pdo->query("SELECT f.id, f.partner1_id, f.partner2_id, (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' LIMIT 1) AS my,
             (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' LIMIT 1) AS md,
+            (SELECT e.place_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' LIMIT 1) AS mp,
             (SELECT count(*) FROM family_children fc WHERE fc.family_id=f.id) AS kids FROM families f") as $r) {
-        $c[(int) $r['id']] = ['a' => (int) $r['partner1_id'], 'b' => (int) $r['partner2_id'], 'my' => $r['my'] !== null ? (int) $r['my'] : null, 'md' => exact_date((string) ($r['md'] ?? '')), 'kids' => (int) $r['kids']];
+        $c[(int) $r['id']] = ['a' => (int) $r['partner1_id'], 'b' => (int) $r['partner2_id'], 'my' => $r['my'] !== null ? (int) $r['my'] : null, 'md' => exact_date((string) ($r['md'] ?? '')), 'mp' => (int) ($r['mp'] ?? 0), 'kids' => (int) $r['kids']];
     }
     return $cache = $c;
 }
@@ -153,12 +156,52 @@ function qm_filters(PDO $pdo, string $t): array
     if ($f['ancestors']) { $root = qm_root($pdo); $f['set'] = $root ? h_ancestors($pdo, $root, 40) : []; unset($f['set'][$root]); }
     return $f;
 }
+/**
+ * Un lieu dans la question (« à Pernay », « en Bretagne » n'est pas une commune : seuls les lieux de la base comptent) : précédé de à, en, de, dans, sur, près de.
+ * Plusieurs communes du même nom qui ont des actes (Pernay en Indre-et-Loire et ailleurs) → ['ask' => [choix]] ; $key (« 12,15 ») : celle choisie.
+ * Rend null, ou ['ids' => [lieux], 'label', 'people' => [personnes qui y ont un acte (elles-mêmes ou leur mariage)]].
+ */
+function qm_place_filter(PDO $pdo, string $t, string $key = ''): ?array
+{
+    $groups = [];
+    $label = static function (array $r): string { $sub = trim((string) ($r['subdivision'] ?: ($r['county'] ?: $r['state']))); return $r['name'] . ($sub !== '' ? " ({$sub})" : '') . (($r['country'] ?? '') !== '' && !preg_match('/^(france|fr)$/i', (string) $r['country']) ? ', ' . $r['country'] : ''); };
+    $rows = $pdo->query("SELECT id, name, COALESCE(subdivision,'') AS subdivision, COALESCE(county,'') AS county, COALESCE(state,'') AS state, COALESCE(country,'') AS country FROM places WHERE COALESCE(name,'') <> ''")->fetchAll();
+    if ($key !== '') {
+        $want = array_flip(array_filter(array_map('intval', explode(',', $key))));
+        foreach ($rows as $r) { if (isset($want[(int) $r['id']])) { $groups[$label($r)][] = (int) $r['id']; } }
+        if (!$groups) { return null; }
+        $ids = array_merge(...array_values($groups)); $lab = array_key_first($groups);
+    } else {
+        // le nom le plus long qui suit une préposition (« à Saint-Pierre-des-Corps » plutôt que « à Saint »)
+        $best = ''; $byName = [];
+        foreach ($rows as $r) { $n = trim(preg_replace('/[^a-z0-9]+/', ' ', strtolower(ascii_fold((string) $r['name'])))); if (strlen($n) < 3) { continue; } $byName[$n][] = $r; }
+        foreach (array_keys($byName) as $n) {
+            if (strlen($n) <= strlen($best) || strpos($t, " {$n}") === false) { continue; }
+            if (preg_match('/\b(?:a|en|de|du|des|dans|sur|pres de|vers|au)\s+(?:la |le |les |l )?' . preg_quote($n, '/') . '\b/', preg_replace('/[^a-z0-9]+/', ' ', $t))) { $best = $n; }
+        }
+        if ($best === '') { return null; }
+        foreach ($byName[$best] as $r) { $groups[$label($r)][] = (int) $r['id']; }
+        // seulement les communes qui ont des actes (des fiches en double d'un même lieu sont réunies par leur nom et leur département)
+        if (count($groups) > 1) {
+            $count = static function (array $ids) use ($pdo) { $m = implode(',', array_fill(0, count($ids), '?')); $s = $pdo->prepare("SELECT count(*) FROM events WHERE place_id IN ($m)"); $s->execute($ids); return (int) $s->fetchColumn(); };
+            $choices = []; foreach ($groups as $lab => $ids) { $n = $count($ids); if ($n > 0) { $choices[] = ['key' => implode(',', $ids), 'label' => $lab, 'n' => $n]; } }
+            if (count($choices) > 1) { usort($choices, static fn($a, $b) => $b['n'] <=> $a['n']); return ['ask' => $choices, 'word' => $byName[$best][0]['name']]; }
+            if (count($choices) === 1) { $groups = [$choices[0]['label'] => array_map('intval', explode(',', $choices[0]['key']))]; }
+        }
+        $ids = array_merge(...array_values($groups)); $lab = count($groups) === 1 ? array_key_first($groups) : $byName[$best][0]['name'];
+    }
+    $m = implode(',', array_fill(0, count($ids), '?')); $people = [];
+    $s = $pdo->prepare("SELECT e.person_id, f.partner1_id, f.partner2_id FROM events e LEFT JOIN families f ON f.id=e.family_id WHERE e.place_id IN ($m)"); $s->execute($ids);
+    foreach ($s->fetchAll() as $r) { foreach (['person_id', 'partner1_id', 'partner2_id'] as $k) { if ($r[$k]) { $people[(int) $r[$k]] = true; } } }
+    return ['ids' => array_flip($ids), 'label' => $lab, 'people' => $people];
+}
 /** la personne de départ de l'arbre (cochée, sinon la première fiche) */
 function qm_root(PDO $pdo): int { return (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn(); }
 function qm_keep(array $f, array $p, ?int $year = null): bool
 {
     if ($f['gender'] && $p['gender'] !== $f['gender']) { return false; }
     if ($f['ancestors'] && !isset($f['set'][(int) $p['id']])) { return false; }
+    if (!empty($f['place']) && !isset($f['place']['people'][(int) $p['id']])) { return false; }
     $y = $year ?? $p['by'];
     if (($f['from'] !== null || $f['to'] !== null) && $y === null) { return false; }
     if ($f['from'] !== null && $y < $f['from']) { return false; }
@@ -298,7 +341,7 @@ function qm_rows(array $list, int $limit = 15): array
     return array_map(static fn($r) => ['ids' => array_values((array) $r[0]), 'label' => $r[1], 'value' => $r[2]], array_slice($list, 0, $limit));
 }
 
-function question_special(PDO $pdo, string $question, int $personId = 0): ?array
+function question_special(PDO $pdo, string $question, int $personId = 0, string $placeKey = ''): ?array
 {
     $q = trim(preg_replace('/\s+/u', ' ', $question));
     if (mb_strlen($q) > 300) { $q = mb_substr($q, 0, 300); } // une question, pas un texte : le calcul reste rapide
@@ -334,7 +377,7 @@ function question_special(PDO $pdo, string $question, int $personId = 0): ?array
             $label = qm_kin_label($k['a'], $k['b'], $pp[$x]['gender'] ?? '', $k['half']);
             $anc = implode(' et ', array_map(static fn($i) => qm_name($pp[$i]), array_slice($k['commons'], 0, 2)));
             $civil = $k['a'] + $k['b'];
-            $facts = [['Lien', ucfirst($label) . ' ' . qm_de($ny)], ['Ancêtre(s) commun(s)', $anc], ['Générations', "{$nx} : {$k['a']} · {$ny} : {$k['b']}"], ['Degré (droit civil)', $civil . 'e degré']];
+            $facts = [['Lien', qm_ucfirst($label) . ' ' . qm_de($ny)], ['Ancêtre(s) commun(s)', $anc], ['Générations', "{$nx} : {$k['a']} · {$ny} : {$k['b']}"], ['Degré (droit civil)', $civil . 'e degré']];
             return qm_answer(['lien de parenté', "{$nx} et {$ny}"], ($k['a'] === 0 && $k['b'] === 0) ? 'C’est la même personne.' : "{$nx} est {$label} " . qm_de($ny) . '.' . ($anc && $k['a'] && $k['b'] ? " Ancêtre(s) commun(s) : {$anc}." : ''), ['facts' => $facts, 'ids' => [$x, $y]]);
         }
         // ── les cousins d'une personne (« les cousins germains de Louis MARTIN », « combien de cousines a Louise »)
@@ -392,6 +435,12 @@ function question_special(PDO $pdo, string $question, int $personId = 0): ?array
     }
 
     $f = qm_filters($pdo, $t); $fl = $f['label'];
+    // un lieu (« à Pernay ») : plusieurs communes de ce nom ont des actes → on demande laquelle
+    $plf = qm_place_filter($pdo, $t, $placeKey);
+    if ($plf && isset($plf['ask']) && preg_match('/\b(moyen|moyenne|en moyenne|esperance de vie|age median|combien|plus (frequent|frequente|courant|courante|repandu|ancien|ancienne|vieux|vieille|jeune|age|agee)|les plus|le plus|la plus|palmares|classement|top|repartition)\b/', $t)) {
+        return qm_answer(['lieu', '« ' . $plf['word'] . ' »', 'plusieurs villes'], 'Plusieurs villes de ta base s’appellent « ' . $plf['word'] . ' » : laquelle ? Choisis-la ci-dessous.', ['place_choices' => $plf['ask']]);
+    }
+    if ($plf && !isset($plf['ask'])) { $f['place'] = $plf; $fl[] = 'à ' . $plf['label']; }
     $kept = static fn() => array_filter($P(), static fn($p) => qm_keep($f, $p));
 
     // ── époques : vivants en telle année, ceux qui avaient tel âge, ceux qui ont connu un événement
@@ -576,23 +625,23 @@ function question_special(PDO $pdo, string $question, int $personId = 0): ?array
         $facts = []; $what = '';
         $fmtS = static fn(?array $s, string $u = 'ans') => $s ? number_format($s['avg'], 1, ',', ' ') . " {$u} (médiane " . number_format((float) $s['med'], 0, ',', ' ') . ", sur {$s['n']})" : '—';
         if (preg_match('/\b(mariage|marie|mariee|maries|se mari)/', $t)) {
-            $first = []; foreach (qm_couples($pdo) as $c) { if (!$c['my']) { continue; } foreach ([$c['a'], $c['b']] as $x) { if ($x && (!isset($first[$x]) || $c['my'] < $first[$x][1])) { $first[$x] = [$c['md'], $c['my']]; } } }
+            $first = []; foreach (qm_couples($pdo) as $c) { if (!$c['my'] || (!empty($f['place']) && !isset($f['place']['ids'][$c['mp']]))) { continue; } foreach ([$c['a'], $c['b']] as $x) { if ($x && (!isset($first[$x]) || $c['my'] < $first[$x][1])) { $first[$x] = [$c['md'], $c['my']]; } } }
             $v = $byGender(static fn($p) => isset($first[$p['id']]) && $p['by'] ? (($a = qm_age($p['bd'], $p['by'], $first[$p['id']][0], $first[$p['id']][1])) !== null && $a >= 12 && $a < 90 ? $a : null) : null); $what = 'âge moyen au premier mariage';
         } elseif (preg_match('/\b(premier enfant|premiere naissance|devenir (pere|mere|parent))\b/', $t)) {
-            $firstKid = []; $pp = $P(); foreach ($pdo->query('SELECT fc.child_id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id') as $r) { $k = $pp[(int) $r['child_id']] ?? null; if (!$k || !$k['by']) { continue; } foreach ([$r['partner1_id'], $r['partner2_id']] as $x) { $x = (int) $x; if ($x && (!isset($firstKid[$x]) || $k['by'] < $firstKid[$x][1])) { $firstKid[$x] = [$k['bd'], $k['by']]; } } }
+            $firstKid = []; $pp = $P(); foreach ($pdo->query('SELECT fc.child_id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id') as $r) { $k = $pp[(int) $r['child_id']] ?? null; if (!$k || !$k['by'] || (!empty($f['place']) && !isset($f['place']['ids'][$k['bplace_id']]))) { continue; } foreach ([$r['partner1_id'], $r['partner2_id']] as $x) { $x = (int) $x; if ($x && (!isset($firstKid[$x]) || $k['by'] < $firstKid[$x][1])) { $firstKid[$x] = [$k['bd'], $k['by']]; } } }
             $v = $byGender(static fn($p) => isset($firstKid[$p['id']]) && $p['by'] ? (($a = qm_age($p['bd'], $p['by'], $firstKid[$p['id']][0], $firstKid[$p['id']][1])) !== null && $a >= 12 && $a < 70 ? $a : null) : null); $what = 'âge moyen à la naissance du premier enfant';
         } elseif (preg_match('/\b(enfants?)\b/', $t)) {
             $l = array_values(array_map(static fn($c) => $c['kids'], array_filter(qm_couples($pdo), static fn($c) => $c['kids'] > 0 && qm_keep(['gender' => ''] + $f, ($P()[$c['a']] ?? $P()[$c['b']] ?? ['gender' => '', 'id' => 0, 'by' => null]), $c['my']))));
             $s = $stats($l);
             return qm_answer(array_merge(['nombre moyen d’enfants par couple'], $fl), $s ? 'En moyenne ' . number_format($s['avg'], 1, ',', ' ') . " enfants par couple (sur {$s['n']} couples avec enfants ; de {$s['min']} à {$s['max']})." : 'Aucun couple avec des enfants.', ['facts' => $s ? [['Moyenne', number_format($s['avg'], 1, ',', ' ')], ['Médiane', (string) $s['med']], ['Couples', (string) $s['n']], ['Le plus', (string) $s['max']]] : []]);
         } else {
-            $v = $byGender(static fn($p) => $p['by'] && $p['dy'] ? (($a = qm_age($p['bd'], $p['by'], $p['dd'], $p['dy'])) !== null && $a >= 0 && $a < 125 ? $a : null) : null); $what = 'âge moyen au décès';
+            $v = $byGender(static fn($p) => $p['by'] && $p['dy'] && (empty($f['place']) || isset($f['place']['ids'][$p['dplace_id']])) ? (($a = qm_age($p['bd'], $p['by'], $p['dd'], $p['dy'])) !== null && $a >= 0 && $a < 125 ? $a : null) : null); $what = 'âge moyen au décès';
             if (preg_match('/\badulte/', $t)) { $v = array_map(static fn($l) => array_values(array_filter($l, static fn($a) => $a >= 18)), $v); $what .= ' (adultes)'; }
         }
         $sa = $stats($v['all']); $sm = $stats($v['male']); $sf = $stats($v['female']);
         $facts = [['Tous', $fmtS($sa)], ['Hommes', $fmtS($sm)], ['Femmes', $fmtS($sf)]];
         if ($sa) { $facts[] = ['Écart', qm_years($sa['min']) . ' à ' . qm_years($sa['max'])]; }
-        return qm_answer(array_merge([$what], $fl), $sa ? ucfirst($what) . ' : ' . number_format($sa['avg'], 1, ',', ' ') . ' ans' . ($sm && $sf ? ' (hommes ' . number_format($sm['avg'], 1, ',', ' ') . ', femmes ' . number_format($sf['avg'], 1, ',', ' ') . ')' : '') . '.' . ($what === 'âge moyen au décès' && !preg_match('/\badulte/', $t) ? ' La mortalité des enfants fait beaucoup baisser cette moyenne : demande « âge moyen au décès des adultes ».' : '') : 'Pas assez de dates pour calculer.', ['facts' => $facts]);
+        return qm_answer(array_merge([$what], $fl), $sa ? qm_ucfirst($what) . ' : ' . number_format($sa['avg'], 1, ',', ' ') . ' ans' . ($sm && $sf ? ' (hommes ' . number_format($sm['avg'], 1, ',', ' ') . ', femmes ' . number_format($sf['avg'], 1, ',', ' ') . ')' : '') . '.' . ($what === 'âge moyen au décès' && !preg_match('/\badulte/', $t) ? ' La mortalité des enfants fait beaucoup baisser cette moyenne : demande « âge moyen au décès des adultes ».' : '') : 'Pas assez de dates pour calculer.', ['facts' => $facts]);
     }
 
     // ── les plus fréquents
@@ -613,7 +662,7 @@ function question_special(PDO $pdo, string $question, int $personId = 0): ?array
         arsort($count); $tot = array_sum($count) ?: 1;
         $rows = []; foreach (array_slice($count, 0, 20, true) as $k => $n) { $rows[] = ['ids' => $who[$k] ?? [], 'label' => (string) $k, 'value' => $n . ' (' . round($n / $tot * 100) . ' %)', 'group' => true]; }
         $k0 = array_key_first($count);
-        return qm_answer(array_merge([$lab], $fl), $k0 !== null ? ucfirst($lab) . ' : en tête, « ' . $k0 . ' » (' . $count[$k0] . ' fois sur ' . $tot . '), puis ' . implode(', ', array_slice(array_keys($count), 1, 4)) . '.' : 'Pas de données.', ['rows' => $rows]);
+        return qm_answer(array_merge([$lab], $fl), $k0 !== null ? qm_ucfirst($lab) . ' : en tête, « ' . $k0 . ' » (' . $count[$k0] . ' fois sur ' . $tot . '), puis ' . implode(', ', array_slice(array_keys($count), 1, 4)) . '.' : 'Pas de données.', ['rows' => $rows]);
     }
 
     // ── combien d'ancêtres, de générations
@@ -632,7 +681,7 @@ function question_special(PDO $pdo, string $question, int $personId = 0): ?array
         $forWho = $cited ? $rootName : ($rootName !== '' ? "la personne de départ ({$rootName})" : 'la personne de départ');
         $implexe = $slots - $distinct;
         return qm_answer(['ancêtres trouvés par génération', $cited ? 'ancêtres ' . qm_de($rootName) : "pour la personne de départ : {$rootName}"],
-            $by ? ucfirst($forWho) . ' : ' . qm_n($distinct, 'ancêtre connu', 'ancêtres connus') . ' sur ' . qm_n(count($by), 'génération', 'générations') . ' (' . ($implexe > 0 ? qm_n($implexe, 'place occupée', 'places occupées') . ' par un même ancêtre : implexe' : 'sans implexe') . ').' : 'Aucun ancêtre connu pour ' . $forWho . '.',
+            $by ? qm_ucfirst($forWho) . ' : ' . qm_n($distinct, 'ancêtre connu', 'ancêtres connus') . ' sur ' . qm_n(count($by), 'génération', 'générations') . ' (' . ($implexe > 0 ? qm_n($implexe, 'place occupée', 'places occupées') . ' par un même ancêtre : implexe' : 'sans implexe') . ').' : 'Aucun ancêtre connu pour ' . $forWho . '.',
             ['rows' => $rows]);
     }
 
