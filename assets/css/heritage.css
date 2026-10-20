@@ -4721,3 +4721,20 @@ canvas.is-picking{cursor:crosshair}
 .vx-fs .vx-fsfill:hover,.vx-fs .vx-fsstroke:hover{outline:2px solid #2a7de1;outline-offset:1px}
 .vx-fs .vx-fsswap{position:absolute;right:-4px;top:-6px;width:14px;height:14px;border:0;background:transparent;color:#ccc;font-size:12px;line-height:14px;z-index:3}
 .vx-fs .vx-fsswap:hover{color:#fff}
+/* 🔤 Caractère / ¶ Paragraphe : plus aéré, carré comme le reste de la retouche */
+.h-rt-char{gap:14px}
+.h-rt-char [data-chp]{display:flex;flex-direction:column;gap:14px}
+.h-rt-char [data-chp][hidden]{display:none}
+.h-rt-chfam{border-radius:0;padding:9px 12px}
+.h-rt-chline select{padding:7px 10px;border-radius:0}
+.h-rt-chgrid{gap:14px 20px;padding:12px 0;border-top:1px solid #e3e6ea;border-bottom:1px solid #e3e6ea}
+.h-rt-chgrid label{gap:8px}
+.h-rt-chgrid input[type=number],.h-rt-chgrid select{padding:6px 8px;border-radius:0}
+.h-rt-chgrid input[type=color]{height:32px}
+.h-rt-chi{min-width:30px}
+.h-rt-chtogs{gap:8px}
+.h-rt-chtogs button{border-radius:0;padding:7px 12px;min-width:38px}
+.h-rt-chtogs+.h-rt-chtogs{margin-top:-4px}
+.h-rt-paligns{gap:6px!important}
+.h-rt-paligns button{padding:8px 0;min-width:0}
+:root[data-theme="dark"] .h-rt-chgrid{border-color:#3a3f46}
