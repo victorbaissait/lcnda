@@ -1464,7 +1464,7 @@
                         ${rtBaButtons('rt')}</div>
                     <section class="h-rt-versions" data-rt-versions></section>
                 </div>
-                <nav class="h-rt-vtools" data-tbg="rt-vtools" data-tbg-label="Colonne d’outils">${VTOOLS.map(([k, i, l, key]) => { const sc = key ? key.toUpperCase() : k === 'ellipsesel' ? '⇧M' : ''; return `<button type="button" data-rt-mode="${k}" data-rt-v title="${esc(sc ? l.replace(` (${sc})`, '') : l)}" data-tb-label="${esc(l)}" data-shortcut="${esc(sc)}">${i}</button>`; }).join('')}<span class="h-rt-fg" title="Couleur (pinceau, texte, formes, remplir)" data-tb-label="Couleur"><input type="color" value="#d0021b" data-rt-color2></span></nav>
+                <nav class="h-rt-vtools" data-tbg="rt-vtools" data-tbg-label="Colonne d’outils">${VTOOLS.map(([k, i, l, key]) => { const sc = key ? key.toUpperCase() : k === 'ellipsesel' ? '⇧M' : ''; return `<button type="button" data-rt-mode="${k}" data-rt-v title="${esc(sc ? l.replace(` (${sc})`, '') : l)}" data-tb-label="${esc(l)}" data-shortcut="${esc(sc)}">${i}</button>`; }).join('')}<span class="h-rt-fgbg" data-tb-label="Couleurs (premier plan et arrière-plan)"><button type="button" class="h-rt-ccdef" data-rt-ccdef title="Noir et blanc (D)" aria-label="Couleurs par défaut : noir et blanc"><i></i><i></i></button><button type="button" class="h-rt-ccswap" data-rt-ccswap title="Intervertir les deux couleurs (X)" aria-label="Intervertir les couleurs">⤾</button><label class="h-rt-ccbg" title="Couleur d’arrière-plan (fond des formes) : clic pour la changer"><input type="color" value="#ffffff" data-rt-fill2></label><label class="h-rt-ccfg" title="Couleur de premier plan (pinceau, texte, formes) : clic pour la changer"><input type="color" value="#d0021b" data-rt-color2></label></span></nav>
                 <aside class="h-rt-side"><button type="button" class="h-rt-sidetog" data-rt-sidetog title="Replier le panneau (plus de place pour la photo) — Tab">⇥</button><span class="h-rt-resize" data-rt-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span>
                     <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="filters">✨ Filtres</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="history">🕘 Historique</button><button type="button" data-rt-tab="restore" title="Restaurer une vieille photo, pas à pas">🧭 Restaurer</button></div>
                     <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-target" data-rt-target></div><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
@@ -1710,6 +1710,7 @@
             return head + (t === 'group' && n.open !== false ? (n.children.length ? [...n.children].reverse().map(c => rowHtml(c, depth + 1)).join('') : `<li class="h-rt-gempty" data-rt-gin="${n.id}" style="--d:${depth + 1}">groupe vide : glisse un calque ici (⠿), ou range-le avec 📁</li>`) : '');
         }
         function refreshLayers() {
+            syncChips();
             const pane = $('[data-rt-pane="layers"]');
             pane.dataset.dndOff = '';
             pane.innerHTML = `<p class="muted">Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer.</p>
@@ -1908,7 +1909,7 @@
             brushEl.hidden = true; srcEl.hidden = true;
             if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } if (changed) showTab('layers'); }
             if (m === 'adjust' && changed) showTab('adjust');
-            draw();
+            syncChips(); draw();
         };
         /** Choisir un outil. 🧽 Gomme = le pinceau « Gomme » : elle efface le calque choisi ; sur la photo d'origine, elle passe
             par un masque qui la cache (comme un calque de fond qu'on ne détruit pas) ; 🖌 revient à la sorte de pinceau d'avant. */
@@ -1919,10 +1920,10 @@
                 if (brushType !== 'eraser') brushBeforeEraser = brushType;
                 brushType = 'eraser'; syncBrushType();
                 if (!maskEdit && (!activeLayer || activeLayer === 'photo') && P() && !lockedDeep(P())) { // la photo : on la cache au lieu de l'effacer
-                    if (!P().mask) { addMaskTo('photo', []); commit('Masque ajouté à la photo (gomme)'); toast('Gomme sur la photo : elle est cachée par un masque, rien n’est effacé (peins en ⬜ « montrer » pour la faire revenir).'); }
+                    if (!P().mask) { addMaskTo('photo', []); commit('Masque ajouté à la photo (gomme)'); toast('Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus.'); }
                     else { maskEdit = 'photo'; refreshLayers(); }
                 }
-                if (maskEdit) { maskMode = 'hide'; $$('[data-rt-maskmode]').forEach(r => { r.checked = r.value === 'hide'; }); }
+                if (maskEdit) setMaskMode('hide');
                 return setMode('brush');
             }
             if (k === 'brush' && brushType === 'eraser') { brushType = brushBeforeEraser === 'eraser' ? 'round' : brushBeforeEraser; syncBrushType(); }
@@ -1934,7 +1935,27 @@
         $('[data-rt-hard]').addEventListener('input', e => { hard = Number(e.target.value); $('[data-rt-hard-out]').textContent = hard + ' %'; });
         $('[data-rt-opac]').addEventListener('input', e => { opac = Number(e.target.value); $('[data-rt-opac-out]').textContent = opac + ' %'; });
         $('[data-rt-brushtype]').addEventListener('change', e => { brushType = e.target.value; if (mode === 'brush') setMode('brush'); }); // « Gomme » choisie ici allume aussi l'outil 🧽
-        const setColor = c => { color = c; $('[data-rt-color]').value = c; $('[data-rt-color2]').value = c; };
+        const setColor = c => { color = c; $('[data-rt-color]').value = c; $('[data-rt-color2]').value = c; syncChips(); };
+        const setFill = c => { fillColor = c; $('[data-rt-fill]').value = c; $('[data-rt-fill2]').value = c; syncChips(); };
+        /** Les deux carrés de couleur (comme Photoshop). Sur un masque, ils montrent ce que fait le pinceau : ⬛ cacher (devant) ou ⬜ montrer ;
+            X intervertit (un coup de gomme sur le masque se repeint ainsi en « montrer »), D remet noir devant (cacher) et blanc derrière. */
+        function syncChips() {
+            const box = $('.h-rt-fgbg'); if (!box) return; let onMask; try { onMask = !!maskEdit && mode === 'brush'; } catch (_) { return; } // appelé avant que l'outil soit prêt (ouverture)
+            const fg = onMask ? (maskMode === 'show' ? '#ffffff' : '#000000') : color, bg = onMask ? (maskMode === 'show' ? '#000000' : '#ffffff') : fillColor;
+            box.style.setProperty('--rt-fg', fg); box.style.setProperty('--rt-bg', bg); box.classList.toggle('is-mask', onMask);
+            box.querySelector('.h-rt-ccfg').title = onMask ? `Sur le masque, le pinceau ${maskMode === 'show' ? '⬜ montre (fait revenir ce qui était caché)' : '⬛ cache'} — X pour changer` : 'Couleur de premier plan (pinceau, texte, formes) : clic pour la changer';
+        }
+        const setMaskMode = m => { maskMode = m; $$('[data-rt-maskmode]').forEach(r => { r.checked = r.value === m; }); syncChips(); };
+        const swapColors = () => {
+            if (maskEdit && mode === 'brush') { setMaskMode(maskMode === 'show' ? 'hide' : 'show'); toast(maskMode === 'show' ? '⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher.' : '⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer.'); return; }
+            const c0 = color; setColor(fillColor); setFill(c0);
+        };
+        const defaultColors = () => { if (maskEdit && mode === 'brush') { setMaskMode('hide'); return; } setColor('#000000'); setFill('#ffffff'); };
+        $('[data-rt-ccswap]').addEventListener('click', swapColors);
+        $('[data-rt-ccdef]').addEventListener('click', defaultColors);
+        $('[data-rt-fill2]').addEventListener('input', e => setFill(e.target.value));
+        // sur un masque, les carrés ne choisissent pas une couleur : un clic sur celui de derrière intervertit cacher / montrer
+        $$('.h-rt-fgbg input[type=color]').forEach(inp => inp.addEventListener('click', e => { if (!(maskEdit && mode === 'brush')) return; e.preventDefault(); if (inp.matches('[data-rt-fill2]')) swapColors(); }));
         $('[data-rt-color]').addEventListener('input', e => setColor(e.target.value));
         $('[data-rt-color2]').addEventListener('input', e => setColor(e.target.value));
         $$('[data-rt-swatch]').forEach(b => b.addEventListener('click', () => setColor(b.dataset.rtSwatch)));
@@ -1958,10 +1979,10 @@
         $('[data-rt-italic]').addEventListener('change', e => { italic = e.target.checked; });
         $('[data-rt-shape]').addEventListener('change', e => { shapeKind = e.target.value; });
         $('[data-rt-fillon]').addEventListener('change', e => { shapeFill = e.target.checked; });
-        $('[data-rt-fill]').addEventListener('input', e => { fillColor = e.target.value; });
+        $('[data-rt-fill]').addEventListener('input', e => setFill(e.target.value));
         $('[data-rt-tol]').addEventListener('input', e => { tol = Number(e.target.value); $('[data-rt-tol-out]').textContent = tol; });
         $('[data-rt-contig]').addEventListener('change', e => { contig = e.target.checked; });
-        $$('[data-rt-maskmode]').forEach(r => r.addEventListener('change', () => { if (r.checked) maskMode = r.value; }));
+        $$('[data-rt-maskmode]').forEach(r => r.addEventListener('change', () => { if (r.checked) { maskMode = r.value; syncChips(); } }));
         $('[data-rt-aligned]').addEventListener('change', e => { aligned = e.target.checked; });
         $('[data-rt-pick]').addEventListener('click', () => { picking = true; help.textContent = 'Clique maintenant à l’endroit à recopier.'; canvas.classList.add('is-picking'); });
         // coordonnées : la toile garde sa taille d'aperçu (pw × ph) ; elle est affichée plus ou moins grande selon le zoom
@@ -2746,7 +2767,8 @@
                 if (selPt >= 0) { e.preventDefault(); removePoint(selPt); }
                 return;
             }
-            if (k === 'x') { const c0 = color; setColor(fillColor); fillColor = c0; $('[data-rt-fill]').value = c0; return; } // X : intervertir la couleur et le fond
+            if (k === 'x') { e.preventDefault(); swapColors(); return; } // X : intervertir les deux couleurs (sur un masque : cacher ↔ montrer)
+            if (k === 'd' && !e.shiftKey && !e.altKey) { e.preventDefault(); defaultColors(); return; } // D : noir et blanc (sur un masque : cacher)
             if (k === 'm' && e.shiftKey) { setMode('ellipsesel'); return; }
             const t = VTOOLS.find(x => x[3] === k); if (t && !e.altKey) { pickTool(t[0]); }
         };
