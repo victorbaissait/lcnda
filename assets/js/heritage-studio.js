@@ -845,8 +845,81 @@
         });
         return box;
     }
+    /* ▦ Dégradés (comme Photoshop) : linéaire, radial, angle, réfléchi, losange. Arrêts de couleur avec leur opacité et leur milieu,
+       mélange classique (RVB), doux (perceptuel) ou par les teintes ; répétition, inversion, tramage contre les bandes. */
+    const RT_GKINDS = [['linear', '▭', 'Linéaire'], ['radial', '◉', 'Radial'], ['angle', '◔', 'Angle (conique)'], ['reflected', '⇋', 'Réfléchi'], ['diamond', '◇', 'Losange']];
+    const RT_GPRESETS = [
+        ['fgbg', 'Premier plan → arrière-plan', null], ['fgtr', 'Premier plan → transparent', null],
+        ['bw', 'Noir → blanc', [[0, '#000000'], [1, '#ffffff']]], ['wtr', 'Blanc → transparent', [[0, '#ffffff'], [1, '#ffffff', 0]]],
+        ['vign', 'Vignette (bords sombres)', [[0, '#000000', 0], [0.55, '#000000', 0], [1, '#000000', 0.85]]],
+        ['sepia', 'Sépia', [[0, '#2b1a0e'], [0.5, '#a0784f'], [1, '#f3e6cf']]], ['sun', 'Coucher de soleil', [[0, '#2b1055'], [0.45, '#d53369'], [0.75, '#f58b3c'], [1, '#fdd77a']]],
+        ['sky', 'Ciel', [[0, '#1c4f9c'], [0.6, '#6fa7dc'], [1, '#e8f1fa']]], ['rainbow', 'Arc-en-ciel', [[0, '#ff0000'], [0.17, '#ffff00'], [0.33, '#00ff00'], [0.5, '#00ffff'], [0.67, '#0000ff'], [0.83, '#ff00ff'], [1, '#ff0000']]],
+        ['copper', 'Cuivre', [[0, '#5c2a12'], [0.35, '#c46d3b'], [0.5, '#f2b38a'], [0.65, '#b0592b'], [1, '#4a200c']]], ['chrome', 'Chrome', [[0, '#26292e'], [0.45, '#e9edf2'], [0.5, '#3a3f47'], [0.55, '#8c96a3'], [1, '#f5f7fa']]],
+        ['gold', 'Or', [[0, '#7a5410'], [0.3, '#e8c25a'], [0.5, '#fff1b8'], [0.7, '#c99a2e'], [1, '#6e4a0c']]], ['old', 'Vieux papier', [[0, '#f1e3c2'], [0.7, '#d8bf8c'], [1, '#8a6a3c']]],
+        ['night', 'Nuit', [[0, '#05060f'], [1, '#2a3a6e']]], ['spring', 'Printemps', [[0, '#c6ea8d'], [1, '#fe90af']]], ['sea', 'Mer', [[0, '#0b3d5c'], [0.5, '#1f8a9e'], [1, '#bfe7e0']]]];
+    const rtGStops = list => list.map(([p, c, a]) => ({p, c, a: a ?? 1}));
+    const rtHex = h => { const m = String(h || '#000').replace('#', ''), v = m.length === 3 ? m.split('').map(x => x + x).join('') : m.padEnd(6, '0'); return [0, 2, 4].map(i => parseInt(v.slice(i, i + 2), 16) || 0); };
+    const rtLin = v => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }, rtGam = v => 255 * (v <= 0.0031308 ? v * 12.92 : 1.055 * v ** (1 / 2.4) - 0.055);
+    const rtOklab = ([r, g, b]) => { r = rtLin(r); g = rtLin(g); b = rtLin(b); const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+        return [0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s, 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s, 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s]; };
+    const rtFromOklab = ([L, A, B]) => { const l = (L + 0.3963377774 * A + 0.2158037573 * B) ** 3, m = (L - 0.1055613458 * A - 0.0638541728 * B) ** 3, s = (L - 0.0894841775 * A - 1.291485548 * B) ** 3;
+        return [rtGam(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s), rtGam(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s), rtGam(-0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s)]; };
+    const rtHsl = ([r, g, b]) => { r /= 255; g /= 255; b /= 255; const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn; if (!d) return [NaN, 0, l];
+        const s = d / (1 - Math.abs(2 * l - 1)), h = mx === r ? ((g - b) / d + 6) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; return [h * 60, s, l]; };
+    const rtFromHsl = ([h, s, l]) => { const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = l - c / 2, k = Math.floor(((h % 360) + 360) % 360 / 60);
+        const [r, g, b] = [[c, x, 0], [x, c, 0], [0, c, x], [0, x, c], [x, 0, c], [c, 0, x]][k] || [0, 0, 0]; return [(r + m) * 255, (g + m) * 255, (b + m) * 255]; };
+    /** Les arrêts triés, prêts (premier plan et fond pris au moment voulu pour les préréglages « fgbg » / « fgtr ») */
+    const rtGSorted = stops => { const s = (stops?.length ? stops : rtGStops([[0, '#000000'], [1, '#ffffff']])).map(x => ({p: Math.min(1, Math.max(0, Number(x.p) || 0)), c: x.c || '#000000', a: Math.min(1, Math.max(0, x.a ?? 1)), m: Math.min(0.95, Math.max(0.05, x.m ?? 0.5))})).sort((a, b) => a.p - b.p); return s.length === 1 ? [s[0], {...s[0], p: 1}] : s; };
+    /** Une table de 1 024 couleurs (r, g, b, a de 0 à 255) le long du dégradé */
+    function rtGradLut(op) {
+        const s = rtGSorted(op.stops), N = 1024, lut = new Float32Array(N * 4), how = op.interp || 'rgb';
+        const conv = s.map(x => { const rgb = rtHex(x.c); return how === 'oklab' ? rtOklab(rgb) : how === 'hsl' ? rtHsl(rgb) : rgb; });
+        for (let i = 0; i < N; i++) {
+            const t = i / (N - 1); let j = 0; while (j < s.length - 2 && t > s[j + 1].p) j++;
+            const A0 = s[j], B0 = s[j + 1]; let f = B0.p > A0.p ? (t - A0.p) / (B0.p - A0.p) : t >= B0.p ? 1 : 0; f = Math.min(1, Math.max(0, f));
+            if (A0.m !== 0.5 && f > 0 && f < 1) f = f ** (Math.log(0.5) / Math.log(A0.m)); // le milieu entre deux arrêts (le petit losange de Photoshop)
+            const a = conv[j], b = conv[j + 1]; let rgb;
+            if (how === 'oklab') rgb = rtFromOklab([0, 1, 2].map(k => a[k] + (b[k] - a[k]) * f));
+            else if (how === 'hsl') { let h1 = a[0], h2 = b[0]; if (Number.isNaN(h1)) h1 = Number.isNaN(h2) ? 0 : h2; if (Number.isNaN(h2)) h2 = h1; let dh = h2 - h1; if (dh > 180) dh -= 360; if (dh < -180) dh += 360;
+                rgb = rtFromHsl([h1 + dh * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]); }
+            else rgb = [0, 1, 2].map(k => a[k] + (b[k] - a[k]) * f);
+            lut[i * 4] = rgb[0]; lut[i * 4 + 1] = rgb[1]; lut[i * 4 + 2] = rgb[2]; lut[i * 4 + 3] = (A0.a + (B0.a - A0.a) * f) * 255;
+        }
+        return lut;
+    }
+    /** Où en est le dégradé (0 à 1) au point x, y : la forme choisie, puis la répétition et l'inversion */
+    const rtGradT = op => { const W = op._W, H = op._H, x1 = op.x1 * W, y1 = op.y1 * H, dx = op.x2 * W - x1, dy = op.y2 * H - y1, L2 = dx * dx + dy * dy || 1, L = Math.sqrt(L2), a0 = Math.atan2(dy, dx), kind = op.kind || 'linear', rep = op.repeat || 'none', rev = !!op.reverse;
+        return (x, y) => { const px = x - x1, py = y - y1; let t;
+            if (kind === 'radial') t = Math.sqrt(px * px + py * py) / L;
+            else if (kind === 'angle') { t = (Math.atan2(py, px) - a0) / (Math.PI * 2); t -= Math.floor(t); }
+            else if (kind === 'diamond') t = (Math.abs(px * dx + py * dy) + Math.abs(px * dy - py * dx)) / L2;
+            else { t = (px * dx + py * dy) / L2; if (kind === 'reflected') t = Math.abs(t); }
+            if (rep === 'repeat') t -= Math.floor(t); else if (rep === 'mirror') { t = Math.abs(t) % 2; if (t > 1) t = 2 - t; } else t = t < 0 ? 0 : t > 1 ? 1 : t;
+            return rev ? 1 - t : t; }; };
+    /** Le dégradé dessiné à la taille W × H. luma : pour un masque (noir = caché, blanc = montré : la clarté devient la transparence) */
+    const RT_GCACHE = new WeakMap();
+    function rtGradCanvas(op, W, H, luma = false) {
+        const key = JSON.stringify([op.kind, op.x1, op.y1, op.x2, op.y2, op.stops, op.interp, op.repeat, op.reverse, op.dither, W, H, luma]), hit = RT_GCACHE.get(op);
+        if (hit?.key === key) return hit.c;
+        const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d'), id = g.createImageData(W, H), d = id.data;
+        const lut = rtGradLut(op), T = rtGradT({...op, _W: W, _H: H}), dith = !!op.dither; let seed = 12345;
+        for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i += 4) {
+            const k = Math.round(T(x + 0.5, y + 0.5) * 1023) * 4; let r = lut[k], gg = lut[k + 1], b = lut[k + 2], a = lut[k + 3];
+            if (dith) { seed = (seed * 1103515245 + 12345) & 0x7fffffff; const n = (seed / 0x7fffffff - 0.5); r += n; gg += n; b += n; a += a > 0 && a < 255 ? n : 0; }
+            if (luma) { d[i + 3] = (0.299 * r + 0.587 * gg + 0.114 * b) * a / 255; continue; }
+            d[i] = r; d[i + 1] = gg; d[i + 2] = b; d[i + 3] = a;
+        }
+        g.putImageData(id, 0, 0); RT_GCACHE.set(op, {key, c}); return c;
+    }
+    /** Le dégradé en CSS (aperçu dans les boutons et l'éditeur) */
+    const rtGradCss = (stops, dir = '90deg') => `linear-gradient(${dir}, ${rtGSorted(stops).map(s => { const [r, g, b] = rtHex(s.c); return `rgba(${r},${g},${b},${s.a}) ${(s.p * 100).toFixed(1)}%`; }).join(', ')})`;
     function rtDrawOp(c, op, W, H, env = null) {
         c.save();
+        if (op.type === 'gradient') { // ▦ un dégradé ; dans une sélection : seulement dedans
+            const t = rtGradCanvas(op, W, H), m = op.clip && env?.masks?.get(op.clip); c.globalAlpha = op.opacity ?? 1;
+            if (m) { const u = document.createElement('canvas'); u.width = W; u.height = H; const g = u.getContext('2d'); g.drawImage(t, 0, 0); g.globalCompositeOperation = 'destination-in'; g.drawImage(m, 0, 0, W, H); c.drawImage(u, 0, 0); } else c.drawImage(t, 0, 0);
+            c.restore(); return;
+        }
         if (op.type === 'shape') { // rectangle, ellipse, ligne, flèche
             const x1 = op.x1 * W, y1 = op.y1 * H, x2 = op.x2 * W, y2 = op.y2 * H, lw = Math.max(0.5, op.size * W);
             c.globalAlpha = op.opacity ?? 1; c.lineWidth = lw; c.strokeStyle = op.color; c.lineJoin = 'round'; c.lineCap = 'round';
@@ -920,6 +993,10 @@
             g.save();
             if (op.type === 'sel') { const m = masks?.get(op.mask); if (m) { g.globalCompositeOperation = 'copy'; if (op.invert) { g.fillRect(0, 0, W, H); g.globalCompositeOperation = 'destination-out'; } g.drawImage(m, 0, 0, W, H); } }
             else if (op.type === 'all') { if (op.mode === 'hide') g.clearRect(0, 0, W, H); else g.fillRect(0, 0, W, H); }
+            else if (op.type === 'gradient') { // ▦ dégradé dans un masque : noir = caché, blanc = montré (dans la sélection seulement, s'il y en a une)
+                const t = rtGradCanvas(op, W, H, true), m = op.clip && masks?.get(op.clip);
+                if (m) { const u = document.createElement('canvas'); u.width = W; u.height = H; const ug = u.getContext('2d'); ug.drawImage(t, 0, 0); ug.globalCompositeOperation = 'destination-in'; ug.drawImage(m, 0, 0, W, H); g.globalCompositeOperation = 'destination-out'; g.drawImage(m, 0, 0, W, H); g.globalCompositeOperation = 'source-over'; g.drawImage(u, 0, 0); }
+                else { g.globalCompositeOperation = 'copy'; g.drawImage(t, 0, 0); } }
             else if (op.type === 'invert') { const t = document.createElement('canvas'); t.width = W; t.height = H; const tg = t.getContext('2d'); tg.fillRect(0, 0, W, H); tg.globalCompositeOperation = 'destination-out'; tg.drawImage(c, 0, 0); g.globalCompositeOperation = 'copy'; g.drawImage(t, 0, 0); }
             else if (op.points?.length) { g.globalCompositeOperation = op.mode === 'hide' ? 'destination-out' : 'source-over'; g.strokeStyle = '#000'; g.globalAlpha = op.opacity ?? 1; g.lineCap = g.lineJoin = 'round'; g.lineWidth = Math.max(0.5, op.size * W); if (op.soft) g.filter = `blur(${Math.max(1, op.size * W * 0.3)}px)`;
                 g.beginPath(); g.moveTo(op.points[0][0] * W, op.points[0][1] * H); op.points.forEach(([x, y]) => g.lineTo(x * W, y * H)); if (op.points.length === 1) g.lineTo(op.points[0][0] * W + 0.1, op.points[0][1] * H); g.stroke(); }
@@ -1484,13 +1561,13 @@
         const TOOLS = [['adjust', '🎚', 'Réglages'], ['heal', '🩹', 'Correcteur de taches'], ['repair', '🪡', 'Réparer'], ['clone', '🧬', 'Tampon'], ['brush', '🖌', 'Pinceau'], ['eraser', '🧽', 'Gomme'], ['text', '🔤', 'Texte'], ['hand', '✋', 'Déplacer la vue']];
         // la colonne d'outils (comme l'atelier de mise en page) : sélectionner, recadrer, retoucher, dessiner, écrire
         const VTOOLS = [['move', '➤', 'Déplacer un élément d’un calque (V)', 'v'], ['marquee', '⬚', 'Sélection rectangle (M)', 'm'], ['ellipsesel', '◯', 'Sélection ellipse (⇧M)', ''], ['lasso', '➰', 'Lasso : entourer à main levée (L)', 'l'], ['polysel', '✒︎', 'Plume : sélection point par point (P) — double-clic ou Entrée pour fermer', 'p'], ['wand', '🪄', 'Sélection automatique (baguette magique) (W)', 'w'], ['crop', '⌗', 'Recadrer et redresser (C)', 'c'],
-            ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['repair', '🪡', 'Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours', 'r'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['eraser', '🧽', 'Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu)', 'e'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main, ou barre d’espace (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
+            ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['repair', '🪡', 'Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours', 'r'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['eraser', '🧽', 'Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu)', 'e'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['gradient', '▦', 'Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque', 'g'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main, ou barre d’espace (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
         const MENUS = [
             ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '◧ Exporter l’avant / après…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'],
                 ['restore:all', '✨ Restaurer en une fois…'], ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['repair:detect', '🔍 Repérer les plis et rayures…'], ['mode:repair', '🪡 Réparer au pinceau (plis, déchirures)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['idphoto', '🪪 Recadrer en photo d’identité…'], ['idbatch', '🪪 Portraits de plusieurs fiches…'], ['-'], ['plus:sky', '☁️ Remplacer le ciel…'], ['plus:cutout', '✂️ Détourer une personne (fond transparent, flou, uni)…'], ['plus:upscale', '🔍 Agrandir ×2 / ×4…'], ['plus:pano', '🧩 Panorama : assembler avec d’autres photos…'], ['-'], ['reset', 'Remettre comme au départ']]],
-            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['img:place', '🖼️ Placer une image…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
+            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['img:place', '🖼️ Placer une image…'], ['grad:layer', '▦ Nouveau calque de dégradé…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:subject', '🎯 Sélectionner le sujet (automatique)'], ['plus:cutout', '✂️ Détourer une personne…'], ['-'], ['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['fx:last', '↻ Refaire le dernier filtre', '⌘F'], ['-'], ...['Flou', 'Bruit', 'Netteté', 'Esthétiques', 'Artistiques', 'Pixellisation', 'Rendu', 'Déformation', 'Autres'].map(cat => ['>', cat, Object.entries(RT_FX).filter(([, f]) => f[0] === cat).map(([k, f]) => ['fx:' + k, f[1] + '…'])]),
                 ['-'], ['tab:filters', '✨ Filtres rapides et filtres du calque (panneau)'], ['filters:reset', 'Enlever les filtres rapides']]],
@@ -1523,6 +1600,7 @@
                 <span data-o="sel" class="h-rt-selops" data-tb-label="Actions de la sélection"><small class="muted">⇧ ajouter · ⌥ enlever</small><button type="button" class="button small secondary" data-rt-cmd="sel:all">Tout</button><button type="button" class="button small secondary" data-rt-cmd="sel:none">Aucune</button><button type="button" class="button small secondary" data-rt-cmd="sel:invert">Inverser</button><button type="button" class="button small secondary" data-rt-cmd="sel:feather">Contour progressif</button><button type="button" class="button small secondary" data-rt-cmd="sel:copy">→ Calque</button><button type="button" class="button small secondary" data-rt-cmd="sel:fill">Remplir</button><button type="button" class="button small secondary" data-rt-cmd="sel:clear">Effacer</button><button type="button" class="button small secondary" data-rt-cmd="mask:sel">Masque</button><button type="button" class="button small secondary" data-rt-cmd="sel:crop">Recadrer</button></span>
                 <span data-o="crop" class="h-rt-cropops" data-tb-label="Recadrage : proportions, redresser"><label>Proportions <select data-rt-ratio><option value="">Libres</option><option value="orig">Celles de la photo</option><option value="1">Carré 1:1</option><option value="1.3333">4:3</option><option value="0.75">3:4</option><option value="1.5">3:2</option><option value="0.6667">2:3</option><option value="1.7778">16:9</option><option value="0.7071">A4 portrait</option><option value="1.4142">A4 paysage</option></select></label><label>Redresser <input type="range" min="-45" max="45" step="0.5" value="0" data-rt-angle> <output data-rt-angle-out>0°</output></label><button type="button" class="button small secondary" data-rt-cmd="straighten:auto" title="Trouve l’angle des grandes lignes (horizon, murs, cadres)">📐 Auto</button><button type="button" class="button small" data-rt-cmd="cropok">✓ Valider</button><button type="button" class="button small secondary" data-rt-cmd="cropclear">Annuler le recadrage</button></span>
                 <span data-o="persp" class="h-rt-cropops" data-tb-label="Perspective"><small class="muted">Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade).</small><button type="button" class="button small" data-rt-cmd="persp:ok">✓ Valider</button><button type="button" class="button small secondary" data-rt-cmd="persp:reset">Coins aux bords</button><button type="button" class="button small secondary" data-rt-cmd="persp:cancel">Annuler</button></span>
+                <span data-o="gradient" class="h-rt-gopts" data-tb-label="Dégradé : couleurs, forme, options"><button type="button" class="h-rt-gprev" data-rt-gprev title="Modifier le dégradé : couleurs, transparence, préréglages"><i></i><span aria-hidden="true">▾</span></button><span class="h-rt-gkinds" role="group" aria-label="Forme du dégradé">${RT_GKINDS.map(([k, , l]) => `<button type="button" data-rt-gkind="${k}" title="${esc(l)}" aria-label="${esc(l)}"><i class="h-rt-gk is-${k}"></i></button>`).join('')}</span><label class="checkbox-line" data-tb-label="Inverser le dégradé"><input type="checkbox" data-rt-grev> <span>inverser</span></label><label class="checkbox-line" data-tb-label="Tramage" data-help="Un très léger grain qui évite les « marches » visibles dans les dégradés doux."><input type="checkbox" data-rt-gdith> <span>tramage</span></label></span>
                 <span data-o="maskmode" class="h-rt-maskmode" data-tb-label="Masque : cacher / montrer"><label class="checkbox-line"><input type="radio" name="rt-maskmode" value="hide" checked data-rt-maskmode> <span>⬛ cacher</span></label><label class="checkbox-line"><input type="radio" name="rt-maskmode" value="show" data-rt-maskmode> <span>⬜ montrer</span></label></span>
                 <small class="muted" data-rt-paint-help data-tb-label="Aide de l’outil"></small>
             </div>
@@ -1742,6 +1820,15 @@
                     octx.beginPath(); octx.arc(hs.rot[0], hs.rot[1], k * 1.1, 0, Math.PI * 2); octx.fill(); octx.stroke();
                 } else octx.strokeRect(bb.x * pw - 4, bb.y * ph - 4, bb.w * pw + 8, bb.h * ph + 8);
                 octx.restore(); } }
+            if (mode === 'gradient') { // la ligne du dégradé : début (rond blanc), fin (rond bleu), losange au milieu pour tout déplacer, et ses arrêts de couleur
+                const o = painting?.tool === 'gradient' ? (painting.layer ? painting.op : null) : painting?.tool === 'gradmask' ? painting.preview : gradTarget()?.op;
+                if (o) { const h = gradHandles(o), k = handleSize(), lw = Math.max(1, pw / 700), L = Math.hypot(h.b[0] - h.a[0], h.b[1] - h.a[1]) || 1, nx = -(h.b[1] - h.a[1]) / L, ny = (h.b[0] - h.a[0]) / L;
+                    octx.save(); octx.lineCap = 'round'; octx.lineWidth = lw * 3; octx.strokeStyle = 'rgba(0,0,0,.45)'; octx.beginPath(); octx.moveTo(...h.a); octx.lineTo(...h.b); octx.stroke(); octx.lineWidth = lw; octx.strokeStyle = '#fff'; octx.stroke();
+                    rtGSorted(o.stops).forEach(s0 => { const t = o.reverse ? 1 - s0.p : s0.p, cx = h.a[0] + (h.b[0] - h.a[0]) * t + nx * k * 3, cy = h.a[1] + (h.b[1] - h.a[1]) * t + ny * k * 3;
+                        const r = k * 1.05; octx.fillStyle = '#fff'; octx.fillRect(cx - r - lw, cy - r - lw, 2 * (r + lw), 2 * (r + lw)); octx.fillStyle = s0.c; octx.globalAlpha = 0.3 + 0.7 * s0.a; octx.fillRect(cx - r, cy - r, 2 * r, 2 * r); octx.globalAlpha = 1; octx.strokeStyle = 'rgba(0,0,0,.6)'; octx.lineWidth = lw; octx.strokeRect(cx - r - lw, cy - r - lw, 2 * (r + lw), 2 * (r + lw)); });
+                    [h.a, h.b].forEach(([cx, cy], i) => { octx.beginPath(); octx.arc(cx, cy, k * 1.3, 0, Math.PI * 2); octx.fillStyle = i ? '#2a7de1' : '#fff'; octx.fill(); octx.strokeStyle = i ? '#fff' : '#2a7de1'; octx.lineWidth = lw * 2; octx.stroke(); });
+                    octx.beginPath(); octx.moveTo(h.m[0], h.m[1] - k * 1.1); octx.lineTo(h.m[0] + k * 1.1, h.m[1]); octx.lineTo(h.m[0], h.m[1] + k * 1.1); octx.lineTo(h.m[0] - k * 1.1, h.m[1]); octx.closePath(); octx.fillStyle = '#fff'; octx.fill(); octx.strokeStyle = '#2a7de1'; octx.lineWidth = lw * 1.5; octx.stroke();
+                    octx.restore(); } }
             if (painting?.tool === 'repair' && painting.dabs.length) { octx.save(); octx.fillStyle = 'rgba(230,40,40,.45)'; for (const d of painting.dabs) { octx.beginPath(); octx.arc(d.x * pw, d.y * ph, d.r * pw, 0, Math.PI * 2); octx.fill(); } octx.restore(); }
             if (creaseProp?.canvas) { octx.save(); octx.globalAlpha = 0.8; octx.drawImage(creaseProp.canvas, 0, 0); octx.restore(); }
             if (idp?.crop && mode === 'idphoto') { // le cadre (tourné pour mettre les yeux à l'horizontale), la ligne des yeux et les deux ronds à glisser
@@ -1809,6 +1896,7 @@
                 <span class="h-rt-lmoves"><button type="button" class="icon-button small" data-rt-lmove="1" title="Monter">↑</button><button type="button" class="icon-button small" data-rt-lmove="-1" title="Descendre">↓</button>${t !== 'group' ? '<button type="button" class="icon-button small" data-rt-ldup title="Dupliquer">⧉</button>' : ''}<button type="button" class="icon-button small" data-rt-ldel title="${t === 'group' ? 'Supprimer le groupe (ce qu’il contient reste)' : t === 'photo' ? 'Retirer la photo des calques (⌘Z pour la remettre)' : 'Supprimer'}">✕</button></span>
                 <div class="h-rt-lmore">${t !== 'adjust' ? `<label class="h-rt-lblend" title="Mode de fusion : comment le calque se mélange à ce qui est dessous">Fusion <select data-rt-lblend>${RT_BLENDS.map(([v, l]) => `<option value="${v}" ${rtBlend(n) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}<label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round((n.opacity ?? 1) * 100)}" data-rt-lopac></label>${t !== 'adjust' && t !== 'group' ? `<label class="h-rt-lopac" title="Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets.">Fond <input type="range" min="0" max="100" value="${Math.round((n.fill ?? 1) * 100)}" data-rt-lfill></label><button type="button" class="h-rt-lfxbtn${Object.values(rtLfx(n)).some(x => x.on) ? ' is-on' : ''}" data-rt-lstyle title="Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur">fx</button>` : ''}${into}</div>
                 ${n.smart && n.ops?.some(o => o.type === 'image') ? `<div class="h-rt-smart"><span class="h-rt-smartb" title="Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée)">🧩 Objet dynamique</span><button type="button" class="link-button" data-rt-smart="replace" title="Une autre image à la même place, même taille, même rotation">Remplacer…</button><button type="button" class="link-button" data-rt-smart="orig" title="Remettre l’image à sa taille d’origine (et droite)">Taille d’origine</button><button type="button" class="link-button" data-rt-smart="filter" title="Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher">✨ Filtre dynamique</button><button type="button" class="link-button" data-rt-smart="raster" title="Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte)">Pixelliser</button></div>` : ''}
+                ${n.gradLayer && n.ops?.some(o => o.type === 'gradient') ? (() => { const g0 = [...n.ops].reverse().find(o => o.type === 'gradient'); return `<div class="h-rt-smart"><span class="h-rt-gsw" style="background:${rtGradCss(g0.stops)}" title="${esc(RT_GKINDS.find(k => k[0] === g0.kind)?.[2] || 'Dégradé')}"></span><button type="button" class="link-button" data-rt-gedit title="Couleurs, transparence, forme, préréglages">▦ Modifier le dégradé…</button></div>`; })() : ''}
                 ${t === 'adjust' ? `<div class="h-rt-adjrow"><label class="checkbox-line" title="Comme un masque d’écrêtage de Photoshop"><input type="checkbox" data-rt-lclip ${n.clip ? 'checked' : ''}> <span>seulement sur ${(() => { const i = loc.arr.indexOf(n), below = loc.arr.slice(0, i).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)); return below ? `« ${esc(below.name)} »` : 'ce qui est juste dessous'; })()}</span></label><button type="button" class="link-button" data-rt-ladj>régler…</button></div><small class="muted">${n.clip ? 'ne touche que l’élément juste dessous' : loc.parent ? `touche tout ce qui est dessous dans « ${esc(loc.parent.name)} »` : 'touche tout ce qui est dessous'}</small>${(n.st?.filters?.chain || []).length ? `<div class="h-rt-lfx"><span class="muted">✨ Filtres :</span>${n.st.filters.chain.map((f, i) => `<button type="button" class="h-rt-lfxb" data-rt-lfxedit="${i}" title="Changer les réglages de ce filtre">${esc(RT_FX[f.t]?.[1] || f.t)} <b>régler…</b></button>`).join('')}</div>` : ''}`
                 : t === 'photo' ? `<small class="muted">réglages, ${st.strokes.length} correction${st.strokes.length > 1 ? 's' : ''}</small>`
                 : t === 'group' ? `<small class="muted">${n.children.length} élément${n.children.length > 1 ? 's' : ''}</small>` : `<small class="muted">${n.ops.length} élément${n.ops.length > 1 ? 's' : ''}</small>${n.ops.length ? '<button type="button" class="link-button" data-rt-lclear>vider</button>' : ''}`}
@@ -1851,6 +1939,7 @@
             if (e.target.closest('[data-rt-minv]')) { l.mask = [...l.mask, {type: 'invert'}]; refreshLayers(); draw(); commit(`Masque de ${name} inversé`); return; }
             if (e.target.closest('[data-rt-mdel]')) { l.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); refreshLayers(); draw(); commit(`Masque de ${name} retiré`); return; }
             const loc = locate(id);
+            if (e.target.closest('[data-rt-gedit]')) { activeLayer = id; maskEdit = ''; refreshLayers(); if (mode !== 'gradient') setMode('gradient'); return gradDialog(); }
             if (e.target.closest('[data-rt-lstyle]')) { activeLayer = id === 'photo' ? '' : id; refreshLayers(); return styleDialog(id); }
             const sm = e.target.closest('[data-rt-smart]');
             if (sm) { const op = l.ops?.find(o => o.type === 'image'); if (!op) return; const act = sm.dataset.rtSmart;
@@ -1998,6 +2087,7 @@
             zoom: 'Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone.',
             persp: 'Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches.',
             shape: 'Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit).',
+            gradient: 'Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs.',
             heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis.',
             clone: '« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs.',
             brush: 'Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo.',
@@ -2007,7 +2097,7 @@
             idphoto: 'Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ».'};
         const SELTOOLS = ['marquee', 'ellipsesel', 'lasso', 'polysel', 'wand'];
         const OPTS = {heal: ['size'], repair: ['size', 'repair'], idphoto: [], clone: ['size', 'hard', 'clone'], brush: ['size', 'opacity', 'brush', 'color', 'swatches'], text: ['size', 'opacity', 'color', 'swatches', 'font', 'textstyle'], hand: [], adjust: [], move: ['font'], zoom: [],
-            marquee: ['sel'], ellipsesel: ['sel'], lasso: ['sel'], polysel: ['sel'], wand: ['wand', 'sel'], crop: ['crop'], persp: ['persp'], shape: ['shape', 'size', 'opacity', 'color', 'swatches'], mask: ['size', 'hard', 'opacity', 'maskmode']};
+            marquee: ['sel'], ellipsesel: ['sel'], lasso: ['sel'], polysel: ['sel'], wand: ['wand', 'sel'], crop: ['crop'], persp: ['persp'], shape: ['shape', 'size', 'opacity', 'color', 'swatches'], gradient: ['gradient', 'opacity'], mask: ['size', 'hard', 'opacity', 'maskmode']};
         const optsFor = m => m === 'brush' && maskEdit ? 'mask' : m;
         const setMode = m => {
             const changed = m !== mode; // le même outil redemandé (rafraîchir) ne change pas d'onglet
@@ -2027,6 +2117,7 @@
             if (m !== 'idphoto' && idp) { idp = null; dlg.querySelector('.h-rt-idp')?.remove(); } canvas.classList.toggle('is-text', m === 'text'); stage.classList.toggle('is-hand', m === 'hand');
             canvas.dataset.tool = m;
             brushEl.hidden = true; srcEl.hidden = true;
+            if (m === 'gradient') { try { syncGrad(); } catch (_) {} if (changed) showTab('layers'); }
             if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } if (changed) showTab(m === 'text' ? 'char' : 'layers'); }
             if (m === 'adjust' && changed) showTab('adjust');
             syncChips(); draw();
@@ -2062,7 +2153,7 @@
         function syncChips() {
             const box = $('.h-rt-fgbg'); if (!box) return; let onMask; try { onMask = !!maskEdit && mode === 'brush'; } catch (_) { return; } // appelé avant que l'outil soit prêt (ouverture)
             const fg = onMask ? (maskMode === 'show' ? '#ffffff' : '#000000') : color, bg = onMask ? (maskMode === 'show' ? '#000000' : '#ffffff') : fillColor;
-            box.style.setProperty('--rt-fg', fg); box.style.setProperty('--rt-bg', bg); box.classList.toggle('is-mask', onMask);
+            box.style.setProperty('--rt-fg', fg); box.style.setProperty('--rt-bg', bg); box.classList.toggle('is-mask', onMask); try { syncGrad(); } catch (_) {} // « premier plan → … » suit les deux carrés
             box.querySelector('.h-rt-ccfg').title = onMask ? `Sur le masque, le pinceau ${maskMode === 'show' ? '⬜ montre (fait revenir ce qui était caché)' : '⬛ cache'} — X pour changer` : 'Couleur de premier plan (pinceau, texte, formes) : clic pour la changer';
         }
         const setMaskMode = m => { maskMode = m; $$('[data-rt-maskmode]').forEach(r => { r.checked = r.value === m; }); syncChips(); };
@@ -2162,6 +2253,119 @@
         loadFaces().then(() => syncChar());
         $('[data-rt-shape]').addEventListener('change', e => { shapeKind = e.target.value; });
         $('[data-rt-fillon]').addEventListener('change', e => { shapeFill = e.target.checked; });
+        /* ▦ Dégradé : réglages de l'outil (gardés d'une fois sur l'autre), le dégradé du calque choisi, ses poignées, son éditeur */
+        const GKEY = 'genealogie-retouch-gradient', GUSER = 'genealogie-gradients', G0 = {kind: 'linear', preset: 'fgbg', stops: null, reverse: false, dither: true, repeat: 'none', interp: 'rgb'};
+        let grad = (() => { try { return {...G0, ...JSON.parse(ls(GKEY, '{}'))}; } catch (_) { return {...G0}; } })();
+        const saveGrad = () => lsSet(GKEY, JSON.stringify(grad));
+        const userPresets = () => { try { const v = JSON.parse(ls(GUSER, '[]')); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
+        // « premier plan → arrière-plan » et « → transparent » suivent les deux carrés de couleur
+        const presetStops = k => k === 'fgbg' ? [{p: 0, c: color, a: 1}, {p: 1, c: fillColor, a: 1}] : k === 'fgtr' ? [{p: 0, c: color, a: 1}, {p: 1, c: color, a: 0}]
+            : (() => { const b = RT_GPRESETS.find(x => x[0] === k); if (b?.[2]) return rtGStops(b[2]); const u = userPresets().find(x => x.id === k); return u ? rtClone(u.stops) : null; })();
+        const toolStops = () => (grad.preset && presetStops(grad.preset)) || grad.stops || presetStops('fgbg');
+        /** Le dégradé qu'on règle : celui du calque choisi (ou de son masque, si on peint le masque) */
+        const gradTarget = () => {
+            if (maskEdit) { const t = target(maskEdit), i = (t?.mask || []).map(o => o.type).lastIndexOf('gradient'); return i >= 0 ? {holder: t, op: t.mask[i], mask: true} : null; }
+            const l = nodeById(activeLayer); if (!l || typeOf(l) !== 'layer') return null; const op = [...(l.ops || [])].reverse().find(o => o.type === 'gradient'); return op ? {holder: l, op, mask: false} : null; };
+        const gradRefresh = gt => { if (!gt.mask) renderLayer(gt.holder); draw(); };
+        const gradHandles = op => { const a = [op.x1 * pw, op.y1 * ph], b = [op.x2 * pw, op.y2 * ph]; return {a, b, m: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]}; };
+        const snap45 = (x0, y0, x, y) => { const a = Math.round(Math.atan2(y - y0, x - x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x - x0, y - y0); return [x0 + Math.cos(a) * L, y0 + Math.sin(a) * L]; };
+        const CHECK = 'repeating-conic-gradient(#c9ccd1 0 25%, #fff 0 50%) 0 0/10px 10px';
+        const syncGrad = () => {
+            const gt = mode === 'gradient' ? gradTarget() : null, o = gt ? gt.op : {...grad, stops: toolStops()};
+            const pv = $('[data-rt-gprev] i'); if (pv) pv.style.background = `${rtGradCss(o.stops)}, ${CHECK}`;
+            $$('[data-rt-gkind]').forEach(b => b.classList.toggle('is-on', b.dataset.rtGkind === (o.kind || 'linear')));
+            $('[data-rt-grev]').checked = !!o.reverse; $('[data-rt-gdith]').checked = !!o.dither;
+        };
+        // la barre d'options règle le prochain dégradé, et celui du calque choisi s'il en a un (comme les dégradés « en direct » de Photoshop)
+        const gradSet = (patch, label) => { Object.assign(grad, patch); saveGrad(); const gt = gradTarget(); if (gt && !lockedDeep(gt.holder)) { Object.assign(gt.op, patch); gradRefresh(gt); refreshLayers(); commit(label); } syncGrad(); };
+        $$('[data-rt-gkind]').forEach(b => b.addEventListener('click', () => gradSet({kind: b.dataset.rtGkind}, `Dégradé : ${RT_GKINDS.find(k => k[0] === b.dataset.rtGkind)[2].toLowerCase()}`)));
+        $('[data-rt-grev]').addEventListener('change', e => gradSet({reverse: e.target.checked}, 'Dégradé inversé'));
+        $('[data-rt-gdith]').addEventListener('change', e => gradSet({dither: e.target.checked}, e.target.checked ? 'Dégradé : tramage' : 'Dégradé : sans tramage'));
+        $('[data-rt-gprev]').addEventListener('click', () => gradDialog());
+        /** ▦ Nouveau calque de dégradé (Calque → …) : de haut en bas sur toute l'image, puis l'éditeur */
+        const newGradLayer = () => {
+            const l = newLayer(`Dégradé ${drawLayers().filter(n => n.gradLayer).length + 1}`); l.gradLayer = true;
+            l.ops = [{type: 'gradient', kind: grad.kind, x1: 0.5, y1: 0, x2: 0.5, y2: 1, stops: rtClone(toolStops()), interp: grad.interp, repeat: grad.repeat, reverse: !!grad.reverse, dither: !!grad.dither, opacity: 1, ...(selId ? {clip: selId} : {})}];
+            activeLayer = l.id; maskEdit = ''; renderLayer(l); setMode('gradient'); refreshLayers(); showTab('layers'); draw(); commit(`Calque « ${l.name} »`); gradDialog();
+        };
+        /** ▦ L'éditeur de dégradé : préréglages, barre des arrêts (couleur + opacité + milieu), forme, mélange, répétition */
+        function gradDialog() {
+            const gt = mode === 'gradient' || activeLayer ? gradTarget() : null, live = gt && !lockedDeep(gt.holder) ? gt : null;
+            const src = live ? live.op : {...grad, stops: toolStops(), opacity: opac / 100}, before = JSON.stringify(live ? live.op : grad);
+            const w = {kind: src.kind || 'linear', interp: src.interp || 'rgb', repeat: src.repeat || 'none', reverse: !!src.reverse, dither: !!src.dither, opacity: src.opacity ?? 1, stops: rtGSorted(src.stops)};
+            let sel = w.stops[0], preset = live ? '' : grad.preset || '';
+            const opt = (list, cur) => list.map(([v, l]) => `<option value="${v}" ${v === cur ? 'selected' : ''}>${esc(l)}</option>`).join('');
+            const pn = panel('h-rt-gedit', `<header><b>▦ Dégradé</b><small>${live ? `« ${esc(live.holder.name || 'la photo')} »${live.mask ? ' · son masque (noir = caché, blanc = montré)' : ''} : tout se voit tout de suite` : 'le prochain dégradé que tu traceras'}</small></header>
+                <div class="h-rt-gpresets" data-g-presets></div>
+                <div class="h-rt-gbar" data-g-bar><i data-g-strip title="Clic : ajouter un arrêt de couleur à cet endroit"></i><div class="h-rt-gstops" data-g-stops></div></div>
+                <small class="muted">Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever</small>
+                <div class="h-rt-gstop" data-g-stop></div>
+                <div class="h-rt-gform">
+                    <label>Forme <select data-g="kind">${opt(RT_GKINDS.map(([k, i, l]) => [k, `${i} ${l}`]), w.kind)}</select></label>
+                    <label data-help="Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel.">Mélange <select data-g="interp">${opt([['rgb', 'Classique (RVB)'], ['oklab', 'Perceptuel (plus doux)'], ['hsl', 'Par les teintes']], w.interp)}</select></label>
+                    <label>Au-delà des bouts <select data-g="repeat">${opt([['none', 'Couleur des bouts'], ['repeat', 'Répéter'], ['mirror', 'Répéter en miroir']], w.repeat)}</select></label>
+                    ${live && !live.mask ? `<label class="h-rt-slider"><span>Opacité <output>${Math.round(w.opacity * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round(w.opacity * 100)}" data-g="opacity"></label>` : ''}
+                    <span class="h-rt-gchecks"><label class="checkbox-line"><input type="checkbox" data-g="reverse" ${w.reverse ? 'checked' : ''}> <span>inverser</span></label><label class="checkbox-line" data-help="Un très léger grain qui évite les « marches » visibles dans les dégradés doux."><input type="checkbox" data-g="dither" ${w.dither ? 'checked' : ''}> <span>tramage</span></label></span>
+                </div>
+                <div class="h-rt-gtools"><button type="button" class="link-button" data-g-flip title="Le début devient la fin">⇄ Retourner les arrêts</button><button type="button" class="link-button" data-g-even>Espacer également</button><button type="button" class="link-button" data-g-save>＋ Garder comme préréglage</button></div>
+                <div class="h-rt-fxbtns"><span class="spacer"></span><button type="button" class="button small secondary" data-g-cancel>Annuler</button><button type="button" class="button small" data-g-ok>OK</button></div>`);
+            const bar = pn.querySelector('[data-g-bar]'), strip = pn.querySelector('[data-g-strip]'), marks = pn.querySelector('[data-g-stops]'), box = pn.querySelector('[data-g-stop]');
+            const apply = () => {
+                const patch = {kind: w.kind, interp: w.interp, repeat: w.repeat, reverse: w.reverse, dither: w.dither, stops: rtClone(w.stops.map(({p, c, a, m}) => ({p, c, a, ...(m !== undefined && m !== 0.5 ? {m} : {})})))};
+                if (live) { Object.assign(live.op, patch); if (!live.mask) live.op.opacity = w.opacity; gradRefresh(live); }
+                else { Object.assign(grad, patch, {preset}); if (preset) grad.stops = null; saveGrad(); }
+                syncGrad(); paintBar();
+            };
+            const paintBar = () => {
+                strip.style.background = `${rtGradCss(w.stops)}, ${CHECK}`;
+                marks.innerHTML = w.stops.map((s, i) => `<button type="button" class="h-rt-gmk${s === sel ? ' is-on' : ''}" data-g-mk="${i}" style="left:${(s.p * 100).toFixed(2)}%" title="${esc(s.c.toUpperCase())}${s.a < 1 ? ` · ${Math.round(s.a * 100)} %` : ''} à ${Math.round(s.p * 100)} %"><i style="background:linear-gradient(${s.c}, ${s.c}), ${CHECK};opacity:1"><b style="background:${s.c};opacity:${s.a}"></b></i></button>`).join('');
+            };
+            const paintStop = () => {
+                const s = sel, sorted = [...w.stops].sort((a, b) => a.p - b.p), next = sorted[sorted.indexOf(s) + 1];
+                box.innerHTML = `<b>Arrêt choisi</b><button type="button" class="ui-color-btn h-rt-gcol" data-g-col title="Couleur de l’arrêt"><span style="background:${s.c}"></span>${esc(s.c.toUpperCase())} ▾</button>
+                    <label class="h-rt-slider"><span>Opacité <output>${Math.round(s.a * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round(s.a * 100)}" data-gs="a"></label>
+                    <label class="h-rt-gpos">Position <input type="number" min="0" max="100" step="1" value="${Math.round(s.p * 100)}" data-gs="p"> %</label>
+                    ${next ? `<label class="h-rt-slider" data-help="Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop)."><span>Milieu vers le suivant <output>${Math.round((s.m ?? 0.5) * 100)} %</output></span><input type="range" min="5" max="95" value="${Math.round((s.m ?? 0.5) * 100)}" data-gs="m"></label>` : ''}
+                    <button type="button" class="button small secondary" data-g-del ${w.stops.length <= 2 ? 'disabled' : ''}>✕ Enlever cet arrêt</button>`;
+            };
+            const paintPresets = () => {
+                const all = [...RT_GPRESETS.map(([k, l]) => ({id: k, name: l, stops: presetStops(k)})), ...userPresets().map(u => ({...u, user: true}))];
+                pn.querySelector('[data-g-presets]').innerHTML = all.map(p => `<span class="h-rt-gpre${p.id === preset ? ' is-on' : ''}"><button type="button" data-g-pre="${esc(p.id)}" title="${esc(p.name)}" aria-label="${esc(p.name)}" style="background:${rtGradCss(p.stops)}, ${CHECK}"></button>${p.user ? `<button type="button" class="h-rt-gpredel" data-g-predel="${esc(p.id)}" title="Supprimer ce préréglage" aria-label="Supprimer">×</button>` : ''}</span>`).join('');
+            };
+            const edited = () => { preset = ''; paintPresets(); };
+            paintPresets(); paintBar(); paintStop();
+            // la barre : clic = un arrêt de plus (de la couleur qu'il y a là) ; glisser un arrêt ; tiré vers le bas = enlevé
+            bar.addEventListener('pointerdown', e => {
+                const r = strip.getBoundingClientRect(), at = ev => Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width)), mk = e.target.closest('[data-g-mk]');
+                let s;
+                if (mk) s = w.stops[Number(mk.dataset.gMk)];
+                else { const p = at(e), lut = rtGradLut({stops: w.stops, interp: w.interp}), k = Math.round(p * 1023) * 4, hx = v => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, '0');
+                    s = {p, c: `#${hx(lut[k])}${hx(lut[k + 1])}${hx(lut[k + 2])}`, a: Math.round(lut[k + 3] / 2.55) / 100}; w.stops.push(s); edited(); }
+                sel = s; e.preventDefault(); paintBar(); paintStop(); if (!mk) apply();
+                let away = false; const el = () => marks.querySelector(`[data-g-mk="${w.stops.indexOf(s)}"]`);
+                const mv = ev => { away = w.stops.length > 2 && ev.clientY - r.bottom > 34; s.p = at(ev); const m = el(); if (m) { m.style.left = `${s.p * 100}%`; m.classList.toggle('is-away', away); } strip.style.background = `${rtGradCss(away ? w.stops.filter(x => x !== s) : w.stops)}, ${CHECK}`; };
+                const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up);
+                    if (away) { w.stops.splice(w.stops.indexOf(s), 1); sel = w.stops[0]; } edited(); apply(); paintStop(); };
+                addEventListener('pointermove', mv); addEventListener('pointerup', up);
+            });
+            pn.addEventListener('click', async e => {
+                const pre = e.target.closest('[data-g-pre]'); if (pre) { const st0 = presetStops(pre.dataset.gPre); if (!st0) return; w.stops = rtGSorted(st0); sel = w.stops[0]; preset = pre.dataset.gPre; paintPresets(); paintStop(); apply(); return; }
+                const del = e.target.closest('[data-g-predel]'); if (del) { lsSet(GUSER, JSON.stringify(userPresets().filter(u => u.id !== del.dataset.gPredel))); if (preset === del.dataset.gPredel) preset = ''; paintPresets(); return; }
+                if (e.target.closest('[data-g-col]')) { const s = sel; UI.openColorBox(e.target.closest('[data-g-col]'), {get: () => s.c, set: v => { if (!v) return; s.c = v.slice(0, 7); edited(); apply(); paintStop(); }}); return; }
+                if (e.target.closest('[data-g-del]')) { if (w.stops.length <= 2) return; w.stops.splice(w.stops.indexOf(sel), 1); sel = w.stops[0]; edited(); apply(); paintStop(); return; }
+                if (e.target.closest('[data-g-flip]')) { w.stops.forEach(s => { s.p = 1 - s.p; }); const sorted = [...w.stops].sort((a, b) => a.p - b.p); const ms = sorted.map(s => s.m ?? 0.5); sorted.forEach((s, i) => { const m = ms[sorted.length - 2 - i]; if (m !== undefined) s.m = 1 - m; else delete s.m; }); edited(); apply(); paintStop(); return; }
+                if (e.target.closest('[data-g-even]')) { const sorted = [...w.stops].sort((a, b) => a.p - b.p); sorted.forEach((s, i) => { s.p = i / (sorted.length - 1); }); edited(); apply(); paintStop(); return; }
+                if (e.target.closest('[data-g-save]')) { const name = await A().askText({title: 'Garder ce dégradé', message: 'Nom du préréglage :', value: 'Mon dégradé', okLabel: 'Garder'}); if (!name) return;
+                    const id = 'u' + Date.now().toString(36); lsSet(GUSER, JSON.stringify([...userPresets(), {id, name: String(name).slice(0, 60), stops: rtClone(w.stops)}])); preset = live ? '' : id; paintPresets(); toast(`Préréglage « ${name} » gardé : il reste dans cette liste.`); return; }
+                if (e.target.closest('[data-g-cancel]')) { if (live) { const b = JSON.parse(before); Object.keys(live.op).forEach(k => { if (!(k in b)) delete live.op[k]; }); Object.assign(live.op, b); gradRefresh(live); } else { grad = JSON.parse(before); saveGrad(); } pn.remove(); syncGrad(); return; }
+                if (e.target.closest('[data-g-ok]')) { pn.remove(); syncGrad(); if (live && JSON.stringify(live.op) !== before) { refreshLayers(); commit(`Dégradé modifié sur « ${live.holder.name || 'la photo'} »`); } }
+            });
+            pn.addEventListener('input', e => {
+                const g = e.target.closest('[data-g]'), gs = e.target.closest('[data-gs]');
+                if (g) { const k = g.dataset.g; w[k] = g.type === 'checkbox' ? g.checked : k === 'opacity' ? Number(g.value) / 100 : g.value; const out = g.parentElement.querySelector('output'); if (out) out.textContent = `${g.value} %`; apply(); return; }
+                if (gs) { const k = gs.dataset.gs, v = Number(gs.value); if (!Number.isFinite(v)) return; sel[k] = k === 'p' ? Math.min(1, Math.max(0, v / 100)) : v / 100; const out = gs.parentElement.querySelector('output'); if (out) out.textContent = `${gs.value} %`; edited(); apply(); }
+            });
+        }
         $('[data-rt-fill]').addEventListener('input', e => setFill(e.target.value));
         $('[data-rt-tol]').addEventListener('input', e => { tol = Number(e.target.value); $('[data-rt-tol-out]').textContent = tol; });
         $('[data-rt-contig]').addEventListener('change', e => { contig = e.target.checked; });
@@ -2248,7 +2452,7 @@
         const mctx = document.createElement('canvas').getContext('2d');
         function opBox(op) {
             if (op.type === 'image') return {x: op.x, y: op.y, w: op.w, h: op.h};
-            if (op.type === 'shape') { const x = Math.min(op.x1, op.x2), y = Math.min(op.y1, op.y2); return {x, y, w: Math.abs(op.x2 - op.x1), h: Math.abs(op.y2 - op.y1)}; }
+            if (op.type === 'shape' || op.type === 'gradient') { const x = Math.min(op.x1, op.x2), y = Math.min(op.y1, op.y2); return {x, y, w: Math.abs(op.x2 - op.x1), h: Math.abs(op.y2 - op.y1)}; }
             if (op.type === 'text') { mctx.save(); const b = rtDrawText(mctx, op, pw, ph, true); mctx.restore(); return {x: b.x / pw, y: b.y / ph, w: b.w / pw, h: b.h / ph}; }
             if (op.type === 'pixels' || op.type === 'fillmask') { const m = masks.get(op.mask), b = m && (op._bb || (op._bb = maskBox(m))); return b ? {x: b.x / pw + (op.dx || 0), y: b.y / ph + (op.dy || 0), w: b.w / pw, h: b.h / ph} : null; }
             if (op.points?.length) { const xs = op.points.map(p => p[0]), ys = op.points.map(p => p[1]), pad = (op.size || 0) / 2; const x = Math.min(...xs) - pad, y = Math.min(...ys) - pad * pw / ph; return {x, y, w: Math.max(...xs) - Math.min(...xs) + pad * 2, h: Math.max(...ys) - Math.min(...ys) + pad * 2 * pw / ph}; }
@@ -2299,7 +2503,7 @@
             for (const l of hitList()) { for (let i = l.ops.length - 1; i >= 0; i--) { const b = opBox(l.ops[i]); if (b && rx >= b.x - tolx && rx <= b.x + b.w + tolx && ry >= b.y - toly && ry <= b.y + b.h + toly) return {layer: l.id, i}; } }
             return null; };
         const moveOp = (op, dx, dy) => {
-            if (op.type === 'shape') { op.x1 += dx; op.x2 += dx; op.y1 += dy; op.y2 += dy; }
+            if (op.type === 'shape' || op.type === 'gradient') { op.x1 += dx; op.x2 += dx; op.y1 += dy; op.y2 += dy; }
             else if (op.type === 'text' || op.type === 'image') { op.x += dx; op.y += dy; }
             else if (op.type === 'pixels' || op.type === 'fillmask') { op.dx = (op.dx || 0) + dx; op.dy = (op.dy || 0) + dy; }
             else if (op.points) op.points = op.points.map(([px, py]) => [px + dx, py + dy]);
@@ -2334,6 +2538,17 @@
                 poly.push([x, y]); draw(); return;
             }
             if (mode === 'wand') { const c = rtWand(pctx.getImageData(0, 0, pw, ph), x, y, tol, contig); combine(c, howOf(e), howOf(e) === 'new' ? 'Sélection automatique' : ''); return; }
+            if (mode === 'gradient') {
+                const gt = gradTarget();
+                if (gt && !lockedDeep(gt.holder)) { // une poignée du dégradé choisi : son début, sa fin, ou le losange du milieu (le tout)
+                    const h = gradHandles(gt.op), k = handleSize() * 2.4, which = Math.hypot(h.a[0] - x, h.a[1] - y) <= k ? 'a' : Math.hypot(h.b[0] - x, h.b[1] - y) <= k ? 'b' : Math.hypot(h.m[0] - x, h.m[1] - y) <= k ? 'm' : '';
+                    if (which) { drag = {grad: which, gt, x, y, moved: false}; canvas.setPointerCapture(e.pointerId); return; }
+                }
+                const op = {type: 'gradient', kind: grad.kind, x1: x / pw, y1: y / ph, x2: x / pw, y2: y / ph, stops: rtClone(toolStops()), interp: grad.interp, repeat: grad.repeat, reverse: !!grad.reverse, dither: !!grad.dither, opacity: opac / 100, ...(selId ? {clip: selId} : {})};
+                if (maskEdit) { const t = target(maskEdit); if (!t) return; if (lockedDeep(t)) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error'); painting = {tool: 'gradmask', mask: true, layer: t, preview: op, x0: x, y0: y}; }
+                else painting = {tool: 'gradient', op, x0: x, y0: y}; // le calque n'est pris (ou créé) qu'une fois le geste commencé : un simple clic ne laisse rien
+                canvas.setPointerCapture(e.pointerId); return;
+            }
             if (mode === 'shape') {
                 const l = activeL(); if (!l) return; if (lockedDeep(l)) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
                 painting = {tool: 'shape', layer: l, x0: x, y0: y, preview: {type: 'shape', kind: shapeKind, x1: x / pw, y1: y / ph, x2: x / pw, y2: y / ph, color, fill: shapeFill ? fillColor : '', size: Math.max(1, brush / 6) / pw, opacity: opac / 100}};
@@ -2385,9 +2600,19 @@
                 }
                 drag.moved = true; renderLayer(l); draw(); return;
             }
+            if (drag?.grad) { const d = drag, op = d.gt.op;
+                if (d.grad === 'm') { const dx = (x - d.x) / pw, dy = (y - d.y) / ph; op.x1 += dx; op.x2 += dx; op.y1 += dy; op.y2 += dy; d.x = x; d.y = y; }
+                else { const [ox, oy] = d.grad === 'a' ? [op.x2 * pw, op.y2 * ph] : [op.x1 * pw, op.y1 * ph], [ex, ey] = e.shiftKey ? snap45(ox, oy, x, y) : [x, y]; if (d.grad === 'a') { op.x1 = ex / pw; op.y1 = ey / ph; } else { op.x2 = ex / pw; op.y2 = ey / ph; } }
+                d.moved = true; gradRefresh(d.gt); return; }
             if (drag?.move && moveSel) { const l = nodeById(moveSel.layer), op = l?.ops[moveSel.i]; if (!op) return; moveOp(op, (x - drag.x) / pw, (y - drag.y) / ph); drag.x = x; drag.y = y; drag.moved = true; renderLayer(l); draw(); return; }
             if (!painting) return;
             if (painting.tool === 'shape') { const p = painting.preview; let ex = x, ey = y; if (e.shiftKey) { if (['line', 'arrow'].includes(p.kind)) { const a = Math.round(Math.atan2(y - painting.y0, x - painting.x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x - painting.x0, y - painting.y0); ex = painting.x0 + Math.cos(a) * L; ey = painting.y0 + Math.sin(a) * L; } else { const s0 = Math.max(Math.abs(x - painting.x0), Math.abs(y - painting.y0)); ex = painting.x0 + Math.sign(x - painting.x0 || 1) * s0; ey = painting.y0 + Math.sign(y - painting.y0 || 1) * s0; } } p.x2 = ex / pw; p.y2 = ey / ph; draw(); return; }
+            if (painting.tool === 'gradient' || painting.tool === 'gradmask') { const g = painting, op = g.op || g.preview, [ex, ey] = e.shiftKey ? snap45(g.x0, g.y0, x, y) : [x, y];
+                if (g.tool === 'gradient' && !g.layer) { if (Math.hypot(ex - g.x0, ey - g.y0) < 3) return;
+                    // sur le calque de dégradé choisi (il est remplacé) ou un calque vide ; sinon un nouveau calque « Dégradé »
+                    let l = nodeById(activeLayer); if (l && typeOf(l) === 'layer' && !lockedDeep(l) && (l.gradLayer || !l.ops.length)) l.ops = [op]; else { l = newLayer(`Dégradé ${drawLayers().filter(n => n.gradLayer).length + 1}`); l.ops = [op]; activeLayer = l.id; }
+                    l.gradLayer = true; g.layer = l; refreshLayers(); }
+                op.x2 = ex / pw; op.y2 = ey / ph; if (g.tool === 'gradient') renderLayer(g.layer); draw(); return; }
             if (painting.tool === 'patch') { painting.patch.dx = (x - painting.x0) / pw; painting.patch.dy = (y - painting.y0) / ph; draw(); return; }
             if (painting.tool === 'brush' || painting.tool === 'mask') { const p = painting.preview.points, l = p[p.length - 1]; if (Math.hypot((x / pw - l[0]) * pw, (y / ph - l[1]) * ph) >= 1) { p.push([x / pw, y / ph]); draw(); } return; }
             if (painting.tool === 'repair') { repairDab(x, y); return; }
@@ -2406,9 +2631,13 @@
                 if (s.kind === 'poly' && s.pts.length < 3) { draw(); return; }
                 combine(shapeMask(s), d.how); return; }
             if (drag?.imgSize || drag?.imgRot) { const d = drag; drag = null; if (d.moved) { const l = nodeById(moveSel?.layer); refreshLayers(); commit(d.imgRot ? `Image tournée sur « ${l?.name || ''} »` : `Image agrandie / réduite sur « ${l?.name || ''} »`); } return; }
+            if (drag?.grad) { const d = drag; drag = null; if (d.moved) { refreshLayers(); commit(`Dégradé ajusté${d.gt.mask ? ' (masque)' : ''} sur « ${d.gt.holder.name || 'la photo'} »`); } return; }
             if (drag?.move) { const d = drag; drag = null; if (d.moved) { const l = nodeById(moveSel?.layer); refreshLayers(); commit(`Élément déplacé sur « ${l?.name || ''} »`); } return; }
             if (!painting) return;
             const g = painting; painting = null;
+            if (g.tool === 'gradient' || g.tool === 'gradmask') { const op = g.op || g.preview, name = RT_GKINDS.find(k => k[0] === op.kind)?.[2] || 'Dégradé';
+                if (g.tool === 'gradmask') { if (Math.hypot((op.x2 - op.x1) * pw, (op.y2 - op.y1) * ph) < 3) { draw(); return; } g.layer.mask = [...(g.layer.mask || []), op]; draw(); refreshLayers(); commit(`Masque en dégradé sur « ${g.layer.name || 'la photo'} »`); return; }
+                if (!g.layer) { draw(); return; } renderLayer(g.layer); draw(); refreshLayers(); syncGrad(); commit(`Dégradé ${name.toLowerCase()} : « ${g.layer.name} »`); return; }
             if (g.tool === 'shape') { const p = g.preview; if (Math.abs(p.x2 - p.x1) * pw < 2 && Math.abs(p.y2 - p.y1) * ph < 2) { draw(); return; } g.layer.ops.push(p); renderLayer(g.layer); draw(); refreshLayers(); commit(`${SHAPES[p.kind]} sur « ${g.layer.name} »`); return; }
             if (g.tool === 'patch') { const p = g.patch; if (Math.abs(p.dx * pw) < 1 && Math.abs(p.dy * ph) < 1) { draw(); return; } const before = new Uint8ClampedArray(srcData.data); rtReplayStrokes(srcData, [{tool: 'patch', mask: p.mask, dx: p.dx, dy: p.dy}], masks); patchToLayer(before); draw(); refreshLayers(); commit('Tampon : zone recopiée (calque ✨ Retouches)'); return; }
             if (g.tool === 'mask') { const t = g.layer; t.mask = [...(t.mask || []), g.preview]; draw(); refreshLayers(); commit(`Masque : ${g.preview.mode === 'hide' ? 'caché' : 'montré'} au pinceau`); return; }
@@ -2779,6 +3008,7 @@
             if (k === 'cropok') { endCrop(true); return setMode('adjust'); }
             if (k === 'cropclear') { if (mode === 'crop') { crop = {x: 0, y: 0, w: 1, h: 1, a: 0}; angleIn.value = 0; $('[data-rt-angle-out]').textContent = '0°'; syncCrop(); } if (st.crop) { st.crop = null; draw(); commit('Recadrage enlevé'); } return; }
             if (k === 'img:place') return placeDialog();
+            if (k === 'grad:layer') return newGradLayer();
             if (k === 'actions') return actionsDialog();
             if (a === 'export') return b === 'ba' ? exportBA() : exportImage();
             if (k === 'curtain') return curtain.toggle();
