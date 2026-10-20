@@ -50,11 +50,13 @@
             el.style.left = `${Math.max(8, left)}px`; el.style.top = `${Math.max(8, Math.min(top, vh - ht - 8))}px`;
         };
         place();
+        // la fenêtre change de taille (contenu ajouté, onglet changé) : elle se replace pour rester dans l'écran
+        const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => place()) : null; ro?.observe(el);
         const outside = e => { if (!el.contains(e.target) && !anchor.contains(e.target)) close(); };
         const key = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); anchor.focus?.(); } };
         const close = () => {
             if (openPop?.el !== el) return; openPop = null;
-            document.removeEventListener('pointerdown', outside, true); document.removeEventListener('keydown', key, true); removeEventListener('resize', place);
+            document.removeEventListener('pointerdown', outside, true); document.removeEventListener('keydown', key, true); removeEventListener('resize', place); ro?.disconnect();
             try { if (CAN_POP) el.hidePopover(); } catch (_) {}
             el.remove(); onClose?.();
         };
@@ -152,6 +154,56 @@
         w.prepend(btn); paint();
         return paint;
     }
+    /* Le sélecteur de couleur (standard de l'app, comme Photoshop) : Nuances (carré clair/foncé × terne/vif + barre des teintes),
+       TLS (teinte, lumière, saturation), RVB (rouge, vert, bleu), CMJN (cyan, magenta, jaune, noir : les encres de l'imprimerie) */
+    const CB_TAB = 'genealogie-color-tab';
+    const cbHex = ({r, g, b}) => '#' + [r, g, b].map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
+    const cbRgb = hx => { const n = parseInt(String(hx).slice(1, 7), 16); return {r: n >> 16, g: n >> 8 & 255, b: n & 255}; };
+    function cbToHsv({r, g, b}) { r /= 255; g /= 255; b /= 255; const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = 0; if (d) { h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; if (h < 0) h += 360; } return {h, s: mx ? d / mx : 0, v: mx}; }
+    const cbFromHsv = (h, s, v) => { const f = n => { const k = (n + h / 60) % 6; return v - v * s * Math.max(0, Math.min(k, 4 - k, 1)); }; return {r: f(5) * 255, g: f(3) * 255, b: f(1) * 255}; };
+    function cbToHsl(c) { const r = c.r / 255, g = c.g / 255, b = c.b / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn; return {h: cbToHsv(c).h, s: d ? d / (1 - Math.abs(2 * l - 1)) : 0, l}; }
+    const cbFromHsl = (h, s, l) => { const a = s * Math.min(l, 1 - l), f = n => { const k = (n + h / 30) % 12; return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)); }; return {r: f(0) * 255, g: f(8) * 255, b: f(4) * 255}; };
+    const cbToCmyk = ({r, g, b}) => { const k = 1 - Math.max(r, g, b) / 255; return k >= 1 ? {c: 0, m: 0, y: 0, k: 1} : {c: (1 - r / 255 - k) / (1 - k), m: (1 - g / 255 - k) / (1 - k), y: (1 - b / 255 - k) / (1 - k), k}; };
+    const cbFromCmyk = (C, M, Y, K) => ({r: 255 * (1 - C) * (1 - K), g: 255 * (1 - M) * (1 - K), b: 255 * (1 - Y) * (1 - K)});
+    const CB_SL = {hsl: [['h', 'T', 'Teinte', 360, '°'], ['l', 'L', 'Lumière', 100, ' %'], ['s', 'S', 'Saturation', 100, ' %']], rgb: [['r', 'R', 'Rouge', 255, ''], ['g', 'V', 'Vert', 255, ''], ['b', 'B', 'Bleu', 255, '']],
+        cmyk: [['c', 'C', 'Cyan', 100, ' %'], ['m', 'M', 'Magenta', 100, ' %'], ['y', 'J', 'Jaune', 100, ' %'], ['k', 'N', 'Noir', 100, ' %']]};
+    UI.colorConvert = {hex: cbHex, rgb: cbRgb, toHsv: cbToHsv, fromHsv: cbFromHsv, toHsl: cbToHsl, fromHsl: cbFromHsl, toCmyk: cbToCmyk, fromCmyk: cbFromCmyk}; // aussi pour les essais
+    /** le sélecteur dans un élément : start (#rrggbb), onInput(hex) pendant qu'on cherche ; rend {get, set} */
+    function colorPicker(root, start, onInput) {
+        let c = cbRgb(hex6(start) || '#000000'), hsv = cbToHsv(c), tab = 'sv';
+        try { tab = localStorage.getItem(CB_TAB) || 'sv'; } catch (_) {}
+        if (!['sv', 'hsl', 'rgb', 'cmyk'].includes(tab)) tab = 'sv';
+        const sl = k => CB_SL[k].map(([key, l, t, max, u]) => `<label class="ui-cb-sl" title="${t}"><span>${l}</span><input type="range" min="0" max="${max}" step="1" data-cb="${key}" data-ui-off="1" aria-label="${t}"><output data-cbo="${key}"></output></label>`).join('');
+        root.innerHTML = `<div class="ui-cb-duo"><span data-cb-new>nouvelle</span><span data-cb-old style="--c:${esc(cbHex(c))}">actuelle</span></div>
+            <div class="ui-cb-tabs" role="tablist">${[['sv', 'Nuances'], ['hsl', 'TLS'], ['rgb', 'RVB'], ['cmyk', 'CMJN']].map(([k, l]) => `<button type="button" role="tab" data-cb-tab="${k}" title="${({sv: 'Clair / foncé, terne / vif, et la teinte', hsl: 'Teinte, Lumière, Saturation', rgb: 'Rouge, Vert, Bleu (l’écran)', cmyk: 'Cyan, Magenta, Jaune, Noir (l’imprimerie)'})[k]}">${l}</button>`).join('')}</div>
+            <div data-cb-pane="sv"><div class="ui-cb-sv" data-cb-sv><i></i></div><input type="range" class="ui-cb-hue" min="0" max="360" step="1" data-cb-hue data-ui-off="1" aria-label="Teinte"></div>
+            <div data-cb-pane="hsl">${sl('hsl')}</div><div data-cb-pane="rgb">${sl('rgb')}</div><div data-cb-pane="cmyk">${sl('cmyk')}</div>`;
+        const q = s => root.querySelector(s), qa = s => [...root.querySelectorAll(s)];
+        const showTab = t => { tab = t; qa('[data-cb-tab]').forEach(b => { b.classList.toggle('is-on', b.dataset.cbTab === t); b.setAttribute('aria-selected', b.dataset.cbTab === t ? 'true' : 'false'); }); qa('[data-cb-pane]').forEach(p => { p.hidden = p.dataset.cbPane !== t; }); try { localStorage.setItem(CB_TAB, t); } catch (_) {} };
+        const draw = (from = '') => {
+            const hx = cbHex(c); q('[data-cb-new]').style.setProperty('--c', hx); q('[data-cb-new]').classList.toggle('is-light', c.r * 0.3 + c.g * 0.59 + c.b * 0.11 > 150);
+            if (from !== 'sv') { const n = cbToHsv(c); if (n.s > 0.001 && n.v > 0.001) hsv = n; else hsv = {...n, h: hsv.h}; }
+            const sv = q('[data-cb-sv]'); sv.style.setProperty('--h', hsv.h); sv.firstElementChild.style.left = hsv.s * 100 + '%'; sv.firstElementChild.style.top = (1 - hsv.v) * 100 + '%';
+            if (from !== 'hue') q('[data-cb-hue]').value = Math.round(hsv.h);
+            const L = cbToHsl(c), K = cbToCmyk(c), vals = {h: [Math.round(hsv.h), Math.round(hsv.h) + '°'], l: [Math.round(L.l * 100)], s: [Math.round(L.s * 100)], r: [Math.round(c.r)], g: [Math.round(c.g)], b: [Math.round(c.b)], c: [Math.round(K.c * 100)], m: [Math.round(K.m * 100)], y: [Math.round(K.y * 100)], k: [Math.round(K.k * 100)]};
+            const grad = {h: ['red', '#ff0', 'lime', 'cyan', 'blue', '#f0f', 'red'], l: ['#000', `hsl(${hsv.h},${Math.round(L.s * 100)}%,50%)`, '#fff'], s: [`hsl(${hsv.h},0%,${Math.round(L.l * 100)}%)`, `hsl(${hsv.h},100%,${Math.round(L.l * 100)}%)`],
+                r: [cbHex({...c, r: 0}), cbHex({...c, r: 255})], g: [cbHex({...c, g: 0}), cbHex({...c, g: 255})], b: [cbHex({...c, b: 0}), cbHex({...c, b: 255})],
+                c: [cbHex(cbFromCmyk(0, K.m, K.y, K.k)), cbHex(cbFromCmyk(1, K.m, K.y, K.k))], m: [cbHex(cbFromCmyk(K.c, 0, K.y, K.k)), cbHex(cbFromCmyk(K.c, 1, K.y, K.k))], y: [cbHex(cbFromCmyk(K.c, K.m, 0, K.k)), cbHex(cbFromCmyk(K.c, K.m, 1, K.k))], k: [cbHex(cbFromCmyk(K.c, K.m, K.y, 0)), '#000']};
+            qa('[data-cb]').forEach(i => { const k = i.dataset.cb, [v, t] = vals[k]; if (document.activeElement !== i) i.value = v; i.style.background = `linear-gradient(to right,${grad[k].join(',')})`; root.querySelector(`[data-cbo="${k}"]`).textContent = t ?? (v + ((CB_SL.hsl.concat(CB_SL.cmyk).find(x => x[0] === k) || [])[4] || '')); });
+        };
+        const changed = from => { draw(from); onInput(cbHex(c)); };
+        qa('[data-cb-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.cbTab)));
+        const sv = q('[data-cb-sv]'), move = e => { const r = sv.getBoundingClientRect(); hsv = {h: hsv.h, s: Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)), v: 1 - Math.max(0, Math.min(1, (e.clientY - r.top) / r.height))}; c = cbFromHsv(hsv.h, hsv.s, hsv.v); changed('sv'); };
+        sv.addEventListener('pointerdown', e => { e.preventDefault(); sv.setPointerCapture(e.pointerId); move(e); sv.onpointermove = move; });
+        sv.addEventListener('pointerup', () => { sv.onpointermove = null; }); sv.addEventListener('pointercancel', () => { sv.onpointermove = null; });
+        q('[data-cb-hue]').addEventListener('input', e => { hsv = {...hsv, h: Number(e.target.value)}; c = cbFromHsv(hsv.h, hsv.s, hsv.v); changed('hue'); });
+        qa('[data-cb]').forEach(i => i.addEventListener('input', () => { const v = k => Number(root.querySelector(`[data-cb="${k}"]`).value), k = i.dataset.cb;
+            if ('hls'.includes(k)) { c = cbFromHsl(v('h'), v('s') / 100, v('l') / 100); if (k === 'h') hsv = {...hsv, h: v('h')}; }
+            else if ('rgb'.includes(k)) c = {r: v('r'), g: v('g'), b: v('b')}; else c = cbFromCmyk(v('c') / 100, v('m') / 100, v('y') / 100, v('k') / 100);
+            changed('sl'); }));
+        showTab(tab); draw();
+        return {get: () => cbHex(c), set: hx => { const x = hex6(hx); if (x) { c = cbRgb(x); draw(); } }};
+    }
     function openColorBox(btn, m, paint) {
         if (openPop && openPop.el._uiFor === btn) { closePop(); return; }
         const cur = hex6(m.get()) || '', base = cur.slice(0, 7);
@@ -160,32 +212,31 @@
         const rec = recentColors();
         box.innerHTML = `<small>Couleurs de l’app</small><div class="ui-sw-row">${APP_COLORS.map(([c, n]) => sw(c, n)).join('')}${m.allowNone ? `<button type="button" class="ui-sw-btn${cur ? '' : ' is-on'}" data-c="" title="Aucune" aria-label="Aucune">${swatch('')}</button>` : ''}</div>
             ${rec.length ? `<small>Récentes</small><div class="ui-sw-row">${rec.map(c => sw(c)).join('')}</div>` : ''}
-            <div class="ui-colorbox-tools">${window.EyeDropper ? '<button type="button" class="button small secondary" data-ui-eye>💧 Pipette</button>' : ''}<button type="button" class="button small secondary" data-ui-other>🎨 Autre couleur…</button><span class="ui-num ui-hex"><input type="text" class="ui-num-input" data-ui-hex maxlength="9" spellcheck="false" aria-label="Code de la couleur" value="${esc(base.toUpperCase())}" placeholder="#RRGGBB"></span></div>
-            ${m.alpha ? '<div data-ui-alpha></div>' : ''}`;
+            <small>Choisir une autre couleur</small><div data-ui-picker></div>
+            <div class="ui-colorbox-tools">${window.EyeDropper ? '<button type="button" class="button small secondary" data-ui-eye title="Prendre une couleur n’importe où dans la fenêtre">💧 Pipette</button>' : ''}<span class="ui-num ui-hex"><input type="text" class="ui-num-input" data-ui-hex maxlength="9" spellcheck="false" aria-label="Code de la couleur" value="${esc(base.toUpperCase())}" placeholder="#RRGGBB"></span></div>
+            ${m.alpha ? '<div data-ui-alpha></div>' : ''}
+            <div class="ui-colorbox-acts"><button type="button" class="button small secondary" data-ui-cancel title="Remettre la couleur d’avant">Annuler</button><button type="button" class="button small" data-ui-ok>OK</button></div>`;
         const pop = popup(btn, box);
         const alphaOf = () => { const c = hex6(m.get()) || ''; return c.length === 9 ? Math.round(parseInt(c.slice(7), 16) / 2.55) : 100; };
         let alphaR = null;
         const withAlpha = c => { if (!c || !m.alpha) return c; const a = alphaR ? Number(alphaR.input.value) : alphaOf(); return a >= 100 ? c.slice(0, 7) : c.slice(0, 7) + Math.round(a * 2.55).toString(16).padStart(2, '0'); };
         const apply = (c, final = true) => { m.set(withAlpha(c), final); if (final && c) rememberColor(c); paint(); box.querySelectorAll('.ui-sw-btn').forEach(b => b.classList.toggle('is-on', b.dataset.c === (c || '').slice(0, 7))); const hx = box.querySelector('[data-ui-hex]'); if (hx && document.activeElement !== hx) hx.value = (c || '').slice(0, 7).toUpperCase(); };
+        const picker = colorPicker(box.querySelector('[data-ui-picker]'), base || '#000000', hx => apply(hx, false));
         if (m.alpha) { alphaR = UI.rangeField({label: 'Transparence', min: 0, max: 100, step: 1, value: alphaOf(), unit: '%', default: 100}); box.querySelector('[data-ui-alpha]').appendChild(alphaR); alphaR.input.addEventListener('input', () => { const c = hex6(m.get()); if (c) { m.set(withAlpha(c), false); paint(); } }); alphaR.input.addEventListener('change', () => { const c = hex6(m.get()); if (c) m.set(withAlpha(c), true); }); }
         box.addEventListener('click', async e => {
-            const s = e.target.closest('.ui-sw-btn'); if (s) { apply(s.dataset.c); if (!m.alpha) { pop.close(); btn.focus(); } return; }
-            if (e.target.closest('[data-ui-eye]')) { try { const r = await new window.EyeDropper().open(); if (r?.sRGBHex) apply(hex6(r.sRGBHex) || r.sRGBHex); } catch (_) {} return; }
-            if (e.target.closest('[data-ui-other]')) { m.other ? m.other(c => apply(c)) : otherColor(base, c => apply(c)); }
+            const s = e.target.closest('.ui-sw-btn'); if (s) { apply(s.dataset.c); if (s.dataset.c) picker.set(s.dataset.c); if (!m.alpha) { pop.close(); btn.focus(); } return; }
+            if (e.target.closest('[data-ui-eye]')) { try { const r = await new window.EyeDropper().open(); if (r?.sRGBHex) { const c = hex6(r.sRGBHex) || r.sRGBHex; apply(c); picker.set(c); } } catch (_) {} return; }
+            if (e.target.closest('[data-ui-ok]')) { apply(picker.get()); pop.close(); btn.focus(); return; }
+            if (e.target.closest('[data-ui-cancel]')) { m.set(cur, true); paint(); pop.close(); btn.focus(); return; }
         });
         const hx = box.querySelector('[data-ui-hex]');
-        hx.addEventListener('input', () => { const c = hex6(hx.value); if (c) apply(c.slice(0, 7), false); });
+        hx.addEventListener('input', () => { const c = hex6(hx.value); if (c) { apply(c.slice(0, 7), false); picker.set(c.slice(0, 7)); } });
         hx.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); const c = hex6(hx.value); if (c) { apply(c.slice(0, 7)); pop.close(); btn.focus(); } } });
         hx.addEventListener('change', () => { const c = hex6(hx.value); if (c) apply(c.slice(0, 7)); });
         box.querySelector('.ui-sw-btn.is-on, .ui-sw-btn')?.focus();
     }
-    // 🎨 le choix de couleur du système, à partir d'un input couleur caché
-    function otherColor(start, cb) {
-        const i = document.createElement('input'); i.type = 'color'; i.className = 'ui-native-color'; rawSet(i, (hex6(start) || '#000000').slice(0, 7)); i.dataset.uiOff = '1';
-        (openPop?.el || document.body).appendChild(i);
-        i.addEventListener('input', () => cb(i.value)); i.addEventListener('change', () => { cb(i.value); setTimeout(() => i.remove(), 50); });
-        try { i.showPicker ? i.showPicker() : i.click(); } catch (_) { i.click(); }
-    }
+    /** C2 — openColorBox(élément, {get, set(v, final)}) : le cadre des couleurs posé sous n'importe quel élément (les deux carrés de la retouche…) */
+    UI.openColorBox = (anchor, {get, set, alpha = false, allowNone = false} = {}) => openColorBox(anchor, {get, set, alpha, allowNone}, () => {});
     /** C2 — colorField({name, value, allowNone, alpha, compact}) → l'élément (.input = l'input caché qui reçoit input/change) */
     UI.colorField = ({name = '', value = '#111111', allowNone = false, alpha = false, compact = false} = {}) => {
         const w = h('span', `ui-color${compact ? ' is-compact' : ''}`);

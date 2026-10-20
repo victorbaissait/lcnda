@@ -52,7 +52,15 @@ parent.appendChild(box);                 // box.input = la case
 
 ## C2 — Couleur
 
-`<input type="color" name="color" value="#7a2a2a">` → habillé tout seul (la fenêtre propose les couleurs de l’app, les récentes, 💧 pipette, 🎨 autre couleur, le code #).
+`<input type="color" name="color" value="#7a2a2a">` → habillé tout seul : la fenêtre standard des couleurs (couleurs de l’app, récentes, puis « Choisir une autre couleur » avec les onglets Nuances · TLS · RVB · CMJN, 💧 pipette, code #, Annuler / OK). C’est **la** façon de choisir une couleur dans l’app : pas de fenêtre du système, pas de sélecteur maison (voir REGLES-INTERFACE.md, C2).
+
+Pour l’ouvrir sous un autre élément (les deux carrés de la retouche, une pastille dessinée par l’outil) :
+
+```js
+UI.openColorBox(element, {get: () => couleur, set: (v, final) => { couleur = v; /* final : OK, pastille, pipette */ }});
+```
+
+Conversions (pour les essais ou un outil) : `UI.colorConvert` — `hex`, `rgb`, `toHsv`/`fromHsv`, `toHsl`/`fromHsl`, `toCmyk`/`fromCmyk`.
 
 Quand il faut « Aucune » ou la transparence, le composant :
 

@@ -50,7 +50,7 @@
 /* la petite fenêtre (couleurs, aide) */
 .ui-pop { position: fixed; inset: auto; margin: 0; z-index: 2147483000; box-sizing: border-box; color: var(--ui-ink); }
 .ui-pop:popover-open { position: fixed; inset: auto; margin: 0; }
-.ui-colorbox { border: 2px solid var(--ui-ink); background: var(--ui-bg); box-shadow: 5px 5px 0 var(--ui-shadow); padding: 10px; width: min(330px, calc(100vw - 16px)); font-size: 13px; overflow: visible; }
+.ui-colorbox { border: 2px solid var(--ui-ink); background: var(--ui-bg); box-shadow: 5px 5px 0 var(--ui-shadow); padding: 10px; width: min(330px, calc(100vw - 16px)); font-size: 13px; overflow: visible; max-height: calc(100vh - 16px); overflow-y: auto; }
 .ui-colorbox > small { display: block; font: 700 10.5px/1.2 system-ui, sans-serif; letter-spacing: .08em; color: #777; text-transform: uppercase; margin: 6px 0 5px; }
 .ui-colorbox > small:first-child { margin-top: 0; }
 .ui-sw-row { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -436,3 +436,23 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
     .ui-fontpick-list { max-height: 55vh; }
     .ui-font > span { font-size: 16px; }
 }
+
+/* C2 — le sélecteur de couleur (standard de l'app) : nouvelle / actuelle, onglets Nuances · TLS · RVB · CMJN, tout en carré */
+.ui-cb-duo { display: flex; height: 40px; border: 2px solid var(--ui-ink); }
+.ui-cb-duo > span { flex: 1; display: flex; align-items: flex-end; padding: 3px 7px; font: 700 10.5px/1 system-ui, sans-serif; background: var(--c, #000); color: #fff; }
+.ui-cb-duo > span.is-light { color: #111; }
+.ui-cb-tabs { display: flex; margin: 9px 0 8px; border: 2px solid var(--ui-ink); }
+.ui-cb-tabs > button { flex: 1; border: 0; border-right: 2px solid var(--ui-ink); background: var(--ui-bg); color: var(--ui-ink); padding: 6px 0; font: 700 12px system-ui, sans-serif; cursor: pointer; border-radius: 0; }
+.ui-cb-tabs > button:last-child { border-right: 0; }
+.ui-cb-tabs > button.is-on { background: var(--ui-blue); color: #fff; }
+.ui-cb-sv { position: relative; height: 140px; border: 2px solid var(--ui-ink); cursor: crosshair; touch-action: none; background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, hsl(var(--h, 0), 100%, 50%)); }
+.ui-cb-sv > i { position: absolute; width: 12px; height: 12px; border: 2px solid #fff; box-shadow: 0 0 0 2px #111; transform: translate(-50%, -50%); pointer-events: none; }
+.ui-colorbox input[type=range].ui-cb-hue, .ui-cb-sl input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 12px; border: 2px solid var(--ui-ink); border-radius: 0; margin: 0; outline: 0; accent-color: auto; }
+.ui-colorbox input[type=range].ui-cb-hue { margin-top: 9px; background: linear-gradient(to right, red, #ff0, lime, cyan, blue, #f0f, red); }
+.ui-cb-hue::-webkit-slider-thumb, .ui-cb-sl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 0; background: #fff; border: 2px solid var(--ui-ink); cursor: pointer; }
+.ui-cb-hue::-moz-range-thumb, .ui-cb-sl input[type=range]::-moz-range-thumb { width: 12px; height: 12px; border-radius: 0; background: #fff; border: 2px solid var(--ui-ink); cursor: pointer; }
+.ui-cb-hue:focus-visible, .ui-cb-sl input[type=range]:focus-visible { outline: 3px solid rgba(5, 93, 255, .35); }
+.ui-cb-sl { display: grid; grid-template-columns: 16px 1fr 46px; gap: 8px; align-items: center; margin: 8px 0; font: 700 12.5px system-ui, sans-serif; }
+.ui-cb-sl output { text-align: right; font-variant-numeric: tabular-nums; }
+[data-cb-pane][hidden] { display: none; }
+.ui-colorbox-acts { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }

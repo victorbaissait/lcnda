@@ -2064,7 +2064,13 @@
         $('[data-rt-ccdef]').addEventListener('click', defaultColors);
         $('[data-rt-fill2]').addEventListener('input', e => setFill(e.target.value));
         // sur un masque, les carrés ne choisissent pas une couleur : un clic sur celui de derrière intervertit cacher / montrer
-        $$('.h-rt-fgbg input[type=color]').forEach(inp => inp.addEventListener('click', e => { if (!(maskEdit && mode === 'brush')) return; e.preventDefault(); if (inp.matches('[data-rt-fill2]')) swapColors(); }));
+        $$('.h-rt-fgbg input[type=color]').forEach(inp => inp.addEventListener('click', e => {
+            e.preventDefault(); const back = inp.matches('[data-rt-fill2]');
+            if (maskEdit && mode === 'brush') { if (back) swapColors(); return; }
+            // le cadre des couleurs de l'app (Nuances, TLS, RVB, CMJN, pipette), comme partout
+            const UI = window.LCNDA_UI; if (!UI?.openColorBox) { try { inp.showPicker(); } catch (_) {} return; }
+            UI.openColorBox(inp.closest('label'), {get: () => back ? fillColor : color, set: v => { if (!v) return; back ? setFill(v.slice(0, 7)) : setColor(v.slice(0, 7)); }});
+        }));
         $('[data-rt-color]').addEventListener('input', e => setColor(e.target.value));
         $('[data-rt-color2]').addEventListener('input', e => setColor(e.target.value));
         $$('[data-rt-swatch]').forEach(b => b.addEventListener('click', () => setColor(b.dataset.rtSwatch)));

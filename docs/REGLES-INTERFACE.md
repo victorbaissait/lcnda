@@ -43,7 +43,12 @@ Maquette : `docs/design/choix-image.html`.
 
 Maquette : `docs/design/champs-communs.html`. Un seul composant pour chacun, partout :
 - **C1 Cases de recherche / filtres de listes** : comme le menu de choix — loupe à gauche, « Chercher… » + exemples, × pour vider, Échap vide aussi, touche « / » pour aller dans la case ; plus de bouton ⌕.
-- **C2 Couleur** : pastille + nom/code ; fenêtre avec couleurs de l'app, couleurs récentes (partagées), 💧 pipette, 🎨 autre couleur, code #, « Aucune » (hachuré) quand ça a un sens, transparence quand ça a un sens.
+- **C2 Couleur — le standard pour choisir une couleur, partout dans l'app** (validé) : pastille + nom/code, puis une seule fenêtre, la même partout (texte, formes, tableaux, réglages, retouche, montage…), jamais la fenêtre du système :
+  1. **Couleurs de l'app**, puis **Récentes** (partagées), d'un clic ;
+  2. **Choisir une autre couleur** : bandeau « nouvelle » / « actuelle », puis 4 onglets — **Nuances** (carré clair/foncé × terne/vif et barre des teintes, comme Photoshop), **TLS** (Teinte, Lumière, Saturation), **RVB** (Rouge, Vert, Bleu, 0 à 255), **CMJN** (Cyan, Magenta, Jaune, Noir, en %) ; les fonds des curseurs montrent la couleur obtenue ; l'onglet choisi est retenu ;
+  3. **💧 Pipette** (n'importe où dans la fenêtre) et le **code #** (à taper ou coller), « Aucune » (hachuré) et la transparence quand ça a un sens ;
+  4. **Annuler** (remet la couleur d'avant) / **OK**.
+  Style : celui de l'app — cases carrées à trait noir, cadre noir et ombre bleue ; tout est carré (repère du carré de nuances, poignées des curseurs). La fenêtre se replace pour rester dans l'écran. Dans la retouche, les deux carrés (devant / derrière) ouvrent cette fenêtre ; ils sont noir et blanc au départ, X les intervertit, D les remet.
 - **C3 Curseurs** : libellé · curseur · case chiffrée tapable avec unité (%, mm, °, px, ppp) ; double-clic = valeur de départ.
 - **Largeurs des blocs et sections** (validé) : toujours proposées dans cet ordre, partout (fiches, pages de profils et d'artiste, Fiches, onglets, widgets, tableau de bord, village, livrets) : **1 (toute la ligne), ½, ⅓, ¼, ⅔, ¾** — en boutons ou en menu, même ordre.
 - **C4 Dates** : texte libre comme dans un acte (« 7 mai 1925 », « 08/12/1960 », « vers 1784 », « avant 1800 », « entre 1880 et 1885 », « an II ») ; dessous « ✓ Compris : … » ou « ⚠️ date impossible » ; 📅 facultatif.

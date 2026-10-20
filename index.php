@@ -37,7 +37,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/layout.css?v=14">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
-    <link rel="stylesheet" href="assets/css/ui.css?v=5">
+    <link rel="stylesheet" href="assets/css/ui.css?v=7">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=4">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
@@ -1118,7 +1118,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-enquetes.js?v=7" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=11" defer></script>
 <script src="assets/js/app-harmony.js?v=7" defer></script>
-<script src="assets/js/app-ui.js?v=9" defer></script>
+<script src="assets/js/app-ui.js?v=11" defer></script>
 <script src="assets/js/app-access.js?v=5" defer></script>
 <script src="assets/js/app-sidegroups.js?v=7" defer></script>
 <script src="assets/js/app-listes.js?v=19" defer></script>
@@ -1165,7 +1165,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-shapelib.js?v=1" defer></script>
 <script src="assets/js/heritage-boards.js?v=31" defer></script>
 <script src="assets/js/heritage-dnd.js?v=9" defer></script>
-<script src="assets/js/heritage-studio.js?v=73" defer></script>
+<script src="assets/js/heritage-studio.js?v=74" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=6" defer></script>
 <script src="assets/js/heritage-fiches.js?v=18" defer></script>
