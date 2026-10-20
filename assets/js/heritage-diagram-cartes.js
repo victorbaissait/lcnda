@@ -12,6 +12,8 @@
  * Branchements (heritage-diagrams.js) : kind.resolve(spec) → Promise<spec> (fond chargé, chiffres de l'app relus),
  * kind.afterDraw(aperçu, api) (cadrage à la souris dans l'éditeur), kind.appPane(boîte, api) (onglet « Depuis l'app »).
  * Données de l'app : api.php?action=diagram_geo (lib/diagram_cartes.php).
+ * Onglet Données (kind.dataPane) : la case « Zone » propose, au fil de la frappe, les zones de chaque niveau de la carte et
+ * les communes ; une ville choisie est retenue avec sa position (spec.places) et compte dans son département, sa région…
  */
 (() => {
     'use strict';
@@ -388,10 +390,11 @@
         if (base?.communes) return matchCommune(base, raw).z;
         const s = String(raw ?? '').trim(); if (!s) return null;
         let z = base.index.get(fold(s)); if (z) return z;
-        const par = s.match(/\(([^()]{1,12})\)\s*$/); if (par && (z = base.index.get(fold(par[1])))) return z;
+        const numOk = c => base.id !== 'fr-regions' || !/^\d+$/.test(fold(c)); // « Montreuil (93) » : 93 est un département, pas la région n°93
+        const par = s.match(/\(([^()]{1,12})\)\s*$/); if (par && numOk(par[1]) && (z = base.index.get(fold(par[1])))) return z;
         const strip = fold(s).replace(/^(departement|dept|dep|region|province|prov|canton|pays|land|comte) (de la |de l |de |du |des |d )?/, '').trim(); if ((z = base.index.get(strip))) return z;
         const first = fold(s.split(',')[0]); if (first && (z = base.index.get(first))) return z;
-        const lead = s.match(/^\s*(\d{2,3}|2[ab])\b/i); if (lead && (z = base.index.get(fold(lead[1])))) return z;
+        const lead = s.match(/^\s*(\d{2,3}|2[ab])\b/i); if (lead && numOk(lead[1]) && (z = base.index.get(fold(lead[1])))) return z;
         return null;
     }
     /** les parents (départements, provinces, cantons) que désigne un indice : « 32 », « Gers », « 32000 », « (Ille-et-Vilaine) » */
@@ -419,9 +422,10 @@
         const comma = s.split(','); if (comma.length > 1) tries.push([comma[0], comma.slice(1).join(',')]);
         const words = s.replace(/\(.*\)$/, '').trim().split(/\s+/); for (let k = 1; k <= Math.min(3, words.length - 1); k++) tries.push([words.slice(0, -k).join(' '), words.slice(-k).join(' ')]);
         const extra = hints.map(h => String(h ?? '').trim()).filter(Boolean);
-        let homonym = false;
+        let homonym = false; const named = new Set(); // un nom porté par des communes : pas cherché dans les autres noms (« Montreuil » n'est pas Montreuil-sur-Mer)
         for (const map of [base.byName, base.byAlt]) for (const [name, hint] of tries) {
-            const list = map.get(nameKey(name)); if (!list?.length) continue;
+            const nk = nameKey(name), list = map.get(nk); if (!list?.length || (map === base.byAlt && named.has(nk))) continue;
+            if (map === base.byName) named.add(nk);
             const hs = [hint, ...(hint ? [] : extra)].filter(Boolean);
             if (hs.length) {
                 for (const hh of hs) { const ps = parentsOf(base, hh); if (!ps.size) continue; const f = list.filter(c => ps.has(c.parent)); if (f.length === 1) return {z: f[0]}; if (f.length > 1) { const cur = f.filter(c => !c.old); if (cur.length === 1) return {z: cur[0]}; homonym = true; } }
@@ -433,12 +437,31 @@
         }
         return {z: null, why: homonym ? 'homonymes' : ''};
     }
+    /** la zone du fond qui contient un point (une ville choisie dans la liste compte dans son département, sa région…) */
+    function zoneAtPoint(base, lon, lat) {
+        if (!isF(lon) || !isF(lat)) return null;
+        if (base.communes) return zoneAt(base, lon, lat);
+        let best = null, area = Infinity;
+        for (const z of base.zones) { if (lon < z.bbox[0] || lon > z.bbox[2] || lat < z.bbox[1] || lat > z.bbox[3]) continue; if (inZone(z, lon, lat)) return z; const a = (z.bbox[2] - z.bbox[0]) * (z.bbox[3] - z.bbox[1]); if (a < area) { area = a; best = z; } } // tracé simplifié : la plus petite boîte
+        return best;
+    }
+    /** un lieu choisi dans la liste du champ « Zone » (spec.places : nom écrit → position, sorte) */
+    const pickedOf = (spec, label) => { const P = spec?.places && typeof spec.places === 'object' ? spec.places[fold(label)] : null; return P && isF(Number(P.lat)) && isF(Number(P.lon)) && Math.abs(P.lat) <= 90 && Math.abs(P.lon) <= 180 ? P : null; };
+    /** une ligne du tableau → sa zone sur ce fond : {z} ou {z: null, why} ; un lieu choisi dans la liste l'emporte (par sa position) */
+    function zoneOfRow(spec, base, label) {
+        const P = pickedOf(spec, label);
+        if (P && !base.communes) { const z = zoneAtPoint(base, Number(P.lon), Number(P.lat)); if (z) return {z, via: P.k || 'lieu'}; }
+        const m = base.communes ? matchCommune(base, label) : {z: matchZone(base, label)}; if (m.z) return m;
+        if (P) { const z = zoneAtPoint(base, Number(P.lon), Number(P.lat)); if (z) return {z, via: P.k || 'lieu'}; }
+        return m;
+    }
     function joinRows(spec, base) {
         const byZone = new Map(), missing = [];
         rowsOf(spec, base.communes ? 40000 : 5000).forEach(r => { // une ligne par commune : jusqu'à 40 000
             const label = r.label ?? r.zone; if (String(label ?? '').trim() === '') return;
-            const m = base.communes ? matchCommune(base, label) : {z: matchZone(base, label)}, z = m.z;
-            if (!z) { if (missing.length < 40) missing.push(String(label).slice(0, 40) + (m.why === 'homonymes' ? ` (homonymes : précise ${PARENT_WORD[base.id] || 'le département'})` : '')); return; }
+            const m = zoneOfRow(spec, base, label), z = m.z;
+            if (!z) { if (missing.length < 40) { const cb = !base.communes && !m.why ? comFor(base.id) : null, why = m.why || (cb && matchCommune(cb, label).why) || ''; // une ville tapée : homonymes ?
+                missing.push(String(label).slice(0, 40) + (why === 'homonymes' ? (base.communes ? ` (homonymes : précise ${PARENT_WORD[base.id] || 'le département'})` : ' (plusieurs villes de ce nom : choisis-en une)') : '')); } return; }
             const blankV = r.s0 === undefined || r.s0 === null || String(r.s0).trim() === '';
             const e = byZone.get(z) || {v: 0, has: false, notes: []}; if (!blankV) { e.v += num(r.s0); e.has = true; } if (r.note) e.notes.push(String(r.note).slice(0, 120)); byZone.set(z, e);
         });
@@ -660,7 +683,20 @@
         rows: [['Vitré', 'Rennes', 15], ['Rennes', 'Paris', 12], ['Rennes', 'Nantes', 8], ['Saint-Brieuc', 'Rennes', 6], ['Fougères', 'Rennes', 5], ['Nantes', 'Paris', 5], ['Laval', 'Paris', 4], ['Brest', 'Le Havre', 3], ['Rennes', 'Lyon', 2]].map(([from, to, value]) => ({from, to, value}))});
 
     /* ═════════ Les chiffres pris dans l'app (api diagram_geo) ═════════ */
-    const SRC_ZONES = [['births', 'Naissances (ou baptêmes)'], ['deaths', 'Décès (ou sépultures)'], ['marriages', 'Mariages'], ['all', 'Naissances, mariages et décès']];
+    // « Quoi » : [groupe, [[sorte, nom]]] ; « Une sorte d'événement… » ouvre une seconde liste (les sortes de la base)
+    const SRC_GROUPS = [['Événements', [['births', 'Naissances (ou baptêmes)'], ['deaths', 'Décès (ou sépultures)'], ['marriages', 'Mariages'], ['all', 'Naissances, mariages et décès'], ['baptisms', 'Baptêmes seuls'], ['burials', 'Sépultures seules'],
+            ['residences', 'Résidences'], ['census', 'Recensements (personnes recensées)'], ['occupations', 'Métiers (lieux où on les exerçait)'], ['departures', 'Départs (nés ici, morts ailleurs)'], ['arrivals', 'Arrivées (nés ailleurs, morts ici)']]],
+        ['Personnes', [['people', 'Personnes différentes'], ['surnames', 'Familles (patronymes différents)']]],
+        ['Valeurs', [['age_death', 'Âge moyen au décès (en années)']]],
+        ['Autres', [['sourced', 'Actes trouvés (événements avec une source ou un document)'], ['type', 'Une sorte d’événement…']]]];
+    const SRC_ZONES = SRC_GROUPS.flatMap(g => g[1]);
+    /** les sortes d'événements de la base (pour « Une sorte d'événement… ») : les plus utilisées d'abord, puis par nom */
+    let TYPES = null; // lues sur le serveur (api diagram_geo&list=types : nombre d'événements qui ont un lieu), sinon celles de l'app
+    const loadTypes = () => TYPES ? Promise.resolve(TYPES) : A().api('diagram_geo', {list: 'types'}).then(r => (TYPES = Array.isArray(r?.types) ? r.types : null) || []).catch(() => []);
+    const eventTypes = () => (TYPES || A()?.state?.bootstrap?.eventTypes || []).filter(t => t && Number(t.id) > 0 && Number(t.is_active ?? 1) !== 0)
+        .map(t => ({id: Number(t.id), label: String(t.label || ''), scope: t.scope, n: Number(t.usage_count) || 0, ic: A()?.typeGlyph ? A().typeGlyph(t.icon, t.gedcom_tag) : '◆'}))
+        .sort((a, b) => (b.n > 0) - (a.n > 0) || a.label.localeCompare(b.label, 'fr', {sensitivity: 'base'}));
+    const srcLabel = q => q.what === 'type' ? (eventTypes().find(t => t.id === Number(q.type))?.label || 'Une sorte d’événement') : (SRC_ZONES.find(x => x[0] === q.what)?.[1] || SRC_FLOWS.find(x => x[0] === q.what)?.[1] || '');
     const SRC_FLOWS = [['birth_death', 'Lieu de naissance → lieu de décès'], ['birth_marriage', 'Lieu de naissance → lieu du mariage'], ['generation', 'D’une génération à l’autre (naissance du parent → de l’enfant)']];
     const geoMem = new Map();
     function fetchGeo(q) {
@@ -700,10 +736,16 @@
         const o = spec.o || {}, view = viewOf(o), base = await load(baseIdOf(o, view)), r = await fetchGeo(q);
         const sums = new Map(); let lost = 0, lostN = 0; const lostNames = [];
         if (base.parentBase) await load(base.parentBase).catch(() => {}); // pour lire « Gers », « Liège »… à côté du nom
-        (r.places || []).slice(0, 6000).forEach(pl => { const n = Number(pl.n) || 0; if (!n) return; const why = {}; const z = zoneOfPlace(base, pl, why); if (!z) { lost++; lostN += n; if (lostNames.length < 8) lostNames.push(pl.name + (why.why === 'homonymes' ? ' (homonymes)' : '')); return; } sums.set(z, (sums.get(z) || 0) + n); });
-        spec.rows = [...sums].sort((a, b) => b[1] - a[1]).map(([z, n]) => ({label: zoneLabel(base, z), s0: n}));
-        spec.series = [{...(spec.series?.[0] || {}), name: (SRC_ZONES.find(x => x[0] === q.what)?.[1] || 'Nombre').replace(/ \(.*\)$/, '')}];
-        return {zones: sums.size, places: (r.places || []).length, lost, lostN, lostNames};
+        // un nombre : additionné ; une moyenne (âge au décès) : pondérée par le nombre de personnes ; des personnes (ou patronymes) différentes : réunies par zone
+        const avg = !!r.avg, distinct = !!r.distinct;
+        (r.places || []).slice(0, 6000).forEach(pl => { const n = Number(pl.n) || 0, w = avg ? Number(pl.w) || 0 : 1; if (!n || !w) return; const why = {}; const z = zoneOfPlace(base, pl, why); if (!z) { lost++; lostN += n; if (lostNames.length < 8) lostNames.push(pl.name + (why.why === 'homonymes' ? ' (homonymes)' : '')); return; }
+            const e = sums.get(z) || {n: 0, w: 0, k: distinct ? new Set() : null}; e.n += avg ? n * w : n; e.w += w; if (e.k) (pl.k || []).forEach(x => e.k.add(x)); sums.set(z, e); });
+        const val = e => avg ? Math.round(e.n / e.w * 10) / 10 : e.k ? e.k.size : e.n;
+        spec.rows = [...sums].map(([z, e]) => [z, val(e), e.w]).sort((a, b) => b[1] - a[1]).map(([z, n, w]) => ({label: zoneLabel(base, z), s0: n, ...(avg ? {note: pl(w, 'personne')} : {})}));
+        const name = q.what === 'type' ? (r.type?.label || srcLabel(q)) : srcLabel(q) || 'Nombre';
+        spec.series = [{...(spec.series?.[0] || {}), name: name.replace(/ \(.*\)$/, '').replace(/…$/, '')}];
+        spec.o = spec.o || {}; if (avg) spec.o.unit = r.unit || 'ans'; else if (spec.o.unit === 'ans') spec.o.unit = '';
+        return {zones: sums.size, places: (r.places || []).length, lost, lostN, lostNames, avg, people: avg ? [...sums.values()].reduce((t, e) => t + e.w, 0) : 0};
     }
     async function fillFlows(spec, q) {
         const r = await fetchGeo(q), byId = new Map((r.places || []).map(p => [p.id, p]));
@@ -714,9 +756,10 @@
         spec.places = {...(spec.places || {}), ...places};
         return {flows: spec.rows.length, lost};
     }
-    /** chiffres « tenus à jour » : spec.live = {key: 'geo:<sorte>[:a][:de:à]', label} */
-    const parseLive = key => { const m = String(key || '').match(/^geo:([a-z_]+):([01]):(-?\d*):(-?\d*)$/); if (!m || ![...SRC_ZONES, ...SRC_FLOWS].some(x => x[0] === m[1])) return null; const q = {what: m[1]}; if (m[2] === '1') q.ancestors = 1; if (m[3] !== '') q.from = Number(m[3]); if (m[4] !== '') q.to = Number(m[4]); return q; };
-    const liveKey = q => `geo:${q.what}:${q.ancestors ? 1 : 0}:${q.from ?? ''}:${q.to ?? ''}`;
+    /** chiffres « tenus à jour » : spec.live = {key: 'geo:<sorte>:<ancêtres 0|1>:<de>:<à>[:<sorte d'événement>]', label} (la fin, seulement pour « type » : les anciennes clés restent bonnes) */
+    const parseLive = key => { const m = String(key || '').match(/^geo:([a-z_]+):([01]):(-?\d*):(-?\d*)(?::(\d{1,9}))?$/); if (!m || ![...SRC_ZONES, ...SRC_FLOWS].some(x => x[0] === m[1])) return null; if ((m[1] === 'type') !== !!m[5]) return null;
+        const q = {what: m[1]}; if (m[2] === '1') q.ancestors = 1; if (m[3] !== '') q.from = Number(m[3]); if (m[4] !== '') q.to = Number(m[4]); if (m[5]) q.type = Number(m[5]); return q; };
+    const liveKey = q => `geo:${q.what}:${q.ancestors ? 1 : 0}:${q.from ?? ''}:${q.to ?? ''}${q.what === 'type' ? ':' + (Number(q.type) || 0) : ''}`;
 
     /** avant le dessin : le fond (et le fond autour) chargés, les chiffres tenus à jour relus */
     async function resolve(spec) {
@@ -797,13 +840,16 @@
     }
 
     /* ═════════ L'onglet « Depuis l'app » ═════════ */
+    const typeOptions = sel => eventTypes().map(t => `<option value="${t.id}" ${Number(sel) === t.id ? 'selected' : ''}>${esc(t.ic)} ${esc(t.label)}${t.scope === 'family' ? ' (famille)' : ''}${t.n ? ` — ${t.n}` : ' — pas encore utilisée'}</option>`).join('') || '<option value="">Chargement des sortes d’événements…</option>';
     function appPane(box, api) {
         const put = s => (api.set || api.apply)(s);
         const spec = api.spec(), flows = spec.kind === 'flowmap', srcs = flows ? SRC_FLOWS : SRC_ZONES, cur = parseLive(spec.live?.key) || {};
         const P = window.LCNDA_PICKER;
         box.innerHTML = `<h4>📍 ${flows ? 'Les migrations de ton arbre' : 'Les lieux de ton arbre'}</h4>
             <p class="muted">${flows ? 'Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé.' : 'Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé.'}</p>
-            <div class="dgm-form"><label>Quoi<select data-dgm-what>${srcs.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+            <div class="dgm-form"><label>Quoi<select data-dgm-what>${flows ? srcs.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('')
+                : SRC_GROUPS.map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
+            ${flows ? '' : `<label data-dgm-typebox ${cur.what === 'type' ? '' : 'hidden'}>Quelle sorte d’événement<select data-dgm-type>${typeOptions(cur.type)}</select></label>`}
             <label class="checkbox-line"><input type="checkbox" data-dgm-anc ${cur.ancestors ? 'checked' : ''}> Seulement mes ancêtres (lignée Sosa)</label>
             <span class="dgm-period"><label>De l’année<input type="number" inputmode="numeric" data-dgm-from value="${esc(cur.from ?? '')}" placeholder="ex. 1700" min="-3000" max="3000"></label><label>à l’année<input type="number" inputmode="numeric" data-dgm-to value="${esc(cur.to ?? '')}" placeholder="ex. 1900" min="-3000" max="3000"></label></span>
             <label class="checkbox-line"><input type="checkbox" data-dgm-live ${spec.live?.key && cur.what ? 'checked' : ''}> 🔄 Tenir à jour (relire l’arbre à chaque affichage)</label>
@@ -811,16 +857,19 @@
             ${flows ? `<h4>🧭 Ajouter un flux</h4><div class="dgm-form dgm-addflow"><span class="pk-lab">Départ</span><div data-dgm-pa>${P.pickerField({name: '', hiddenName: false, kind: 'place', inline: true})}</div><span class="pk-lab">Arrivée</span><div data-dgm-pb>${P.pickerField({name: '', hiddenName: false, kind: 'place', inline: true})}</div><label>Combien<input type="number" inputmode="decimal" min="0" value="1" data-dgm-n></label><button type="button" class="button small" data-dgm-addflow>＋ Ajouter ce flux</button></div>
             <h4>📍 Les lieux du tableau</h4><p class="muted">Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »).</p><div data-dgm-places></div><button type="button" class="button small secondary" data-dgm-find>🔎 Retrouver les lieux sans position</button>` : ''}`;
         const msg = t => { box.querySelector('[data-dgm-msg]').textContent = t; };
-        const query = () => { const q = {what: box.querySelector('[data-dgm-what]').value}; if (box.querySelector('[data-dgm-anc]').checked) q.ancestors = 1; const f = box.querySelector('[data-dgm-from]').value.trim(), t = box.querySelector('[data-dgm-to]').value.trim(); if (/^-?\d{1,4}$/.test(f)) q.from = Number(f); if (/^-?\d{1,4}$/.test(t)) q.to = Number(t); return q; };
+        if (!flows) loadTypes().then(() => { const sel = box.querySelector('[data-dgm-type]'); if (sel && box.isConnected) { const v = sel.value || cur.type; sel.innerHTML = typeOptions(v); } });
+        box.querySelector('[data-dgm-what]').addEventListener('change', e => { const tb = box.querySelector('[data-dgm-typebox]'); if (tb) tb.hidden = e.target.value !== 'type'; });
+        const query = () => { const q = {what: box.querySelector('[data-dgm-what]').value}; if (q.what === 'type') q.type = Number(box.querySelector('[data-dgm-type]')?.value) || 0; if (box.querySelector('[data-dgm-anc]').checked) q.ancestors = 1; const f = box.querySelector('[data-dgm-from]').value.trim(), t = box.querySelector('[data-dgm-to]').value.trim(); if (/^-?\d{1,4}$/.test(f)) q.from = Number(f); if (/^-?\d{1,4}$/.test(t)) q.to = Number(t); return q; };
         box.querySelector('[data-dgm-go]').addEventListener('click', async e => {
-            const b = e.currentTarget, q = query(); b.disabled = true; msg('⏳ Lecture de l’arbre…');
+            const b = e.currentTarget, q = query(); if (q.what === 'type' && !q.type) return msg('Choisis d’abord une sorte d’événement.');
+            b.disabled = true; msg('⏳ Lecture de l’arbre…');
             try {
-                const s = api.spec(), label = (srcs.find(x => x[0] === q.what)?.[1] || '') + (q.ancestors ? ' (mes ancêtres)' : '') + (q.from || q.to ? ` ${q.from ?? '…'}–${q.to ?? '…'}` : '');
+                const s = api.spec(), prevLabel = box._lastLabel || s.live?.label || '', label = srcLabel(q).replace(/…$/, '') + (q.ancestors ? ' (mes ancêtres)' : '') + (q.from || q.to ? ` ${q.from ?? '…'}–${q.to ?? '…'}` : '');
                 const rep = flows ? await fillFlows(s, q) : await fillZones(s, q);
                 if (box.querySelector('[data-dgm-live]').checked) s.live = {key: liveKey(q), label}; else delete s.live;
-                const smp = (flows ? FLOW_SAMPLE() : CHORO_SAMPLE()).o; if (!s.o.title || s.o.title === smp.title) s.o.title = label; if (s.o.subtitle === smp.subtitle) s.o.subtitle = ''; if (s.o.unit === smp.unit && !flows) s.o.unit = '';
+                const smp = (flows ? FLOW_SAMPLE() : CHORO_SAMPLE()).o; if (!s.o.title || s.o.title === smp.title || (prevLabel && s.o.title === prevLabel)) s.o.title = label; box._lastLabel = label; if (s.o.subtitle === smp.subtitle) s.o.subtitle = ''; if (s.o.unit === smp.unit && !flows) s.o.unit = '';
                 if (flows) { if (!rep.flows) { msg('Aucun déplacement trouvé (il faut deux lieux différents pour une même personne).'); } else msg(`✓ ${pl(rep.flows, 'flux')} pris dans l’arbre.${rep.lost ? ` ${pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')} : voir « Les lieux du tableau ».` : ''}`); }
-                else msg(rep.zones ? `✓ ${pl(rep.places - rep.lost, 'lieu rattaché', 'lieux rattachés')} à ${pl(rep.zones, 'zone')}.${rep.lost ? ` ${pl(rep.lost, 'lieu', 'lieux')} hors de cette carte ou sans position (${rep.lostNames.join(', ')}${rep.lost > rep.lostNames.length ? '…' : ''}).` : ''}` : 'Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages.');
+                else msg(rep.zones ? `✓ ${pl(rep.places - rep.lost, 'lieu rattaché', 'lieux rattachés')} à ${pl(rep.zones, 'zone')}${rep.avg ? ` (âge moyen sur ${pl(rep.people, 'personne')} ; la carte montre des années, pas un nombre)` : ''}.${rep.lost ? ` ${pl(rep.lost, 'lieu', 'lieux')} hors de cette carte ou sans position (${rep.lostNames.join(', ')}${rep.lost > rep.lostNames.length ? '…' : ''}).` : ''}` : 'Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages.');
                 put(s);
             } catch (err) { msg('⛔ ' + (err.message || 'Lecture impossible.')); } finally { b.disabled = false; }
         });
@@ -858,11 +907,201 @@
     // l'onglet « Depuis l'app » de l'éditeur (kind.fromApp : html, puis bind avec {spec, apply, set})
     const FROM_APP = {html: () => '<div class="h-dg-app dgm-app" data-dgm-app></div>', bind: (pane, api) => { const box = pane.querySelector('[data-dgm-app]'); if (box) appPane(box, api); }};
 
+    /* ═════════ Le champ « Zone » du tableau : une liste de choix au fil de la frappe ═════════
+     * Mélange les zones de la carte à chaque niveau (départements, régions, provinces, cantons, pays, NUTS…) et, pour la
+     * France, la Belgique, la Suisse et le Luxembourg, les communes (fichier chargé à la demande, dès 2 lettres).
+     * Choisir écrit une valeur sans ambiguïté (« Montreuil (93) », « Ille-et-Vilaine », « BE-46030 »…) ; une ville (ou une
+     * zone plus fine que le niveau de la carte) est retenue avec sa position (spec.places) : elle compte dans son
+     * département, sa région… tant que la carte n'est pas au niveau des communes. Pastille orange : ligne ambiguë ou inconnue. */
+    // niveau → [mot, finesse (0 = commune), « son … », « leur … », un/une]
+    const LV = {com: ['ville', 0, 'sa commune', 'leur commune', 'une ville'], dep: ['département', 1, 'son département', 'leur département', 'un département'], prov: ['province', 1, 'sa province', 'leur province', 'une province'],
+        cant: ['canton', 1, 'son canton', 'leur canton', 'un canton'], nuts2: ['région', 1, 'sa région', 'leur région', 'une région'], reg: ['région', 2, 'sa région', 'leur région', 'une région'],
+        nuts1: ['grande région', 2, 'sa grande région', 'leur grande région', 'une grande région'], pays: ['pays', 3, 'son pays', 'leur pays', 'un pays'], cont: ['continent', 4, 'son continent', 'leur continent', 'un continent']};
+    const levelWord = (map, lv) => map === 'ch' && lv === 'reg' ? LV.nuts1 : LV[lv] || ['zone', 1, 'sa zone', 'leur zone', 'une zone'];
+    const ICON = lv => lv === 'com' ? '🏘' : lv === 'pays' || lv === 'cont' ? '🌍' : '🏛';
+    /** les niveaux de la carte choisie, avec leur fond ; here = le niveau dessiné, com = celui des communes (ou null) */
+    function zoneCtx(spec) {
+        const o = spec.o || {}, map = mapOf(o), M = MAPS[map], cur = levelOf(o)[0];
+        const levels = M.levels.map(([lv, id, name]) => ({lv, id: lv === cur ? baseIdOf(o, viewOf(o)) : id === 'monde' ? 'monde-110m' : id, name, word: levelWord(map, lv), cur: lv === cur}));
+        return {o, map, M, levels, here: levels.find(l => l.cur), com: levels.find(l => l.lv === 'com') || null};
+    }
+    /** la ville (communes) de la carte qui contient ce fond, si son fichier est déjà chargé */
+    const comFor = id => { for (const M of Object.values(MAPS)) { if (!M.levels.some(l => l[1] === id)) continue; const c = M.levels.find(l => l[0] === 'com'); if (c) return loaded(c[1]); } return null; };
+    const suggIndex = b => b.sugg || (b.sugg = b.zones.map(z => ({z, k: nameKey(z.name), a: z.alt.filter(a => !/^\d/.test(a)).map(a => [nameKey(a), a]), c: fold(z.id).replace(/ /g, '')})));
+    const parentZone = (C, it) => { // le département (province, canton…) d'une commune, la région d'un département…
+        const ids = it.L.lv === 'com' ? [C.M.zoneBase] : C.levels.filter(l => l.word[1] > it.L.word[1] && l.lv !== 'com').map(l => l.id).concat(['continents']);
+        for (const id of ids) { const b = id && loaded(id), p = b && b.zones.find(z => z.id === it.z.parent); if (p) return p; } return null; };
+    /** ce qu'on écrit dans la case : la plus courte valeur qui retrouve cette zone (ou cette commune) sans ambiguïté */
+    function valueOf(C, it, pz) {
+        const {b, z} = it;
+        if (!b.communes) { for (const v of [z.name, `${z.name} (${z.id})`]) if (matchZone(b, v) === z) return v; return z.id; }
+        const tok = b.id === 'fr-communes' ? z.parent : b.id === 'ch-communes' ? (pz?.alt.find(a => /^[A-Z]{2}$/.test(a)) || pz?.name) : pz?.name || z.parent;
+        for (const v of [z.name, tok && `${z.name} (${tok})`]) if (v && matchCommune(b, v).z === z) return v;
+        return (b.pfx || '') + z.id;
+    }
+    /** les propositions pour un texte tapé : [{value, title, meta, kind, icon, L, b, z, remember, coarse}] */
+    function zoneSuggest(spec, q, max = 14) {
+        const C = zoneCtx(spec), qk = nameKey(q), qc = fold(q).replace(/ /g, ''); if (!qk) return [];
+        // « Saint-Martin 32 », « Montreuil (62) » : le nom, puis le département (province, canton) qui départage
+        const hm = String(q).match(/^(.+?)[\s,(]+([^\s,()]+)\)?\s*$/), head = hm ? nameKey(hm[1]) : '', cb = C.com && loaded(C.com.id), hp = hm && cb ? parentsOf(cb, hm[2]) : new Set();
+        const sc = (k, x) => k === x ? 0 : k.startsWith(x) ? 1 : k.includes(' ' + x) ? 2 : 9, out = [];
+        for (const L of C.levels) {
+            const b = loaded(L.id); if (!b || (b.communes && qk.length < 2)) continue;
+            for (const e of suggIndex(b)) {
+                let s = sc(e.k, qk), alt = '';
+                if (s > 0) for (const [ak, a] of e.a) { const s2 = sc(ak, qk) + .5; if (s2 < s) { s = s2; alt = a; } }
+                if (e.c && (e.c === qc ? 0 : /\d/.test(qc) && (qc.length >= 3 || !b.communes) && e.c.startsWith(qc) ? 1.5 : 9) < s) { s = e.c === qc ? 0 : 1.5; alt = ''; }
+                if (s > 2.5 && b.communes && hp.size && hp.has(e.z.parent) && sc(e.k, head) < 9) s = sc(e.k, head) - .2; // le nom et son département
+                if (s < 9) out.push({L, b, z: e.z, s, alt, tier: L.cur ? 0 : b.communes ? 2 : 1});
+            }
+        }
+        out.sort((x, y) => x.s - y.s || x.tier - y.tier || (x.z.old ? 1 : 0) - (y.z.old ? 1 : 0) || x.z.name.length - y.z.name.length || x.z.name.localeCompare(y.z.name, 'fr') || x.z.parent.localeCompare(y.z.parent, 'fr', {numeric: true}));
+        return out.slice(0, max).map(it => {
+            const pz = parentZone(C, it), value = valueOf(C, it, pz), com = it.L.lv === 'com', coarse = !com && it.L.word[1] > C.here.word[1];
+            const ppz = com && pz && C.map === 'fr' ? loaded('fr-regions')?.zones.find(z => z.id === pz.parent) : null;
+            const meta = com ? [pz?.name, ppz?.name, it.alt ? `aussi « ${it.alt} »` : ''].filter(Boolean).join(' · ')
+                : [it.z.id && !/^x-/.test(it.z.id) && fold(it.z.id) !== fold(it.z.name) ? it.z.id : '', pz?.name, it.alt ? `aussi « ${it.alt} »` : '', coarse ? `autre niveau : « ${it.L.name} »` : ''].filter(Boolean).join(' · ');
+            return {value, title: com ? (value === (it.b.pfx || '') + it.z.id ? `${it.z.name} — ${value}` : value) : it.z.name, meta, kind: com && it.z.old ? 'ancienne commune' : it.L.word[0], icon: ICON(it.L.lv), L: it.L, b: it.b, z: it.z, cur: it.L.cur, coarse, remember: com || (!it.L.cur && !coarse)};
+        });
+    }
+    /** une ville (ou une zone plus fine) choisie : sa position, pour la compter dans sa zone à tous les niveaux */
+    function rememberPick(spec, value, it) {
+        spec.places = {...(spec.places && typeof spec.places === 'object' ? spec.places : {})};
+        spec.places[fold(value)] = {lat: Math.round(it.z.label[1] * 1e5) / 1e5, lon: Math.round(it.z.label[0] * 1e5) / 1e5, n: String(value).slice(0, 80), k: it.L.lv};
+        prunePlaces(spec);
+    }
+    /** les positions retenues qui ne servent plus à aucune ligne s'en vont */
+    function prunePlaces(spec) {
+        if (!spec.places || typeof spec.places !== 'object') return;
+        const used = new Set(rowsOf(spec, 40000).map(r => fold(r.label ?? r.zone)));
+        Object.keys(spec.places).forEach(k => { if (!used.has(k)) delete spec.places[k]; }); if (!Object.keys(spec.places).length) delete spec.places;
+    }
+    const homonymsMsg = (b, s) => { const head = String(s).replace(/\(.*\)\s*$/, '').split(',')[0].trim(), n = (b.byName.get(nameKey(head)) || []).filter(z => !z.old).length;
+        return `Plusieurs villes s’appellent ${head}${n > 1 ? ` (${n})` : ''} : choisis-en une dans la liste.`; };
+    /** l'état d'une ligne : {ok} ; {auto} (une ville, ou une zone plus fine, à retenir) ; {why, msg} (homonymes, autre niveau, inconnue) */
+    function rowStatus(spec, raw) {
+        const C = zoneCtx(spec), base = loaded(C.here.id), s = String(raw ?? '').trim();
+        if (!s || !base) return {ok: true};
+        const m = zoneOfRow(spec, base, s); if (m.z) return {ok: true, z: m.z, via: m.via};
+        const cb = C.com && loaded(C.com.id);
+        if (base.communes && m.why === 'homonymes') return {why: 'homonymes', msg: homonymsMsg(base, s)};
+        // une zone d'un autre niveau (le nom exact d'une zone l'emporte sur une commune du même nom : « Bretagne »)
+        for (const L of C.levels) {
+            if (L.cur || L.lv === 'com') continue; const b = loaded(L.id), z = b && matchZone(b, s); if (!z) continue;
+            if (L.word[1] < C.here.word[1]) return {auto: {L, b, z}}; // plus fin que la carte : compte dans sa zone
+            return {why: 'niveau', msg: `${z.name} est ${L.word[4]}, mais la carte montre le niveau « ${C.here.name} » : choisis ${C.here.word[4]} dans la liste, ou change le niveau de détail (Réglages).`};
+        }
+        if (cb && !base.communes) { const mc = matchCommune(cb, s); if (mc.z) return {auto: {L: C.com, b: cb, z: mc.z}}; if (mc.why === 'homonymes') return {why: 'homonymes', msg: homonymsMsg(cb, s)}; }
+        return {why: 'inconnu', msg: `Pas trouvé sur cette carte : vérifie l’orthographe, ou choisis dans la liste.`, pending: !!(C.com && !cb && /[a-z]{2}/i.test(fold(s)))};
+    }
+    /** les pastilles orange (lignes ambiguës ou inconnues) et la phrase « N villes comptent dans leur département » */
+    async function refreshZoneCells(pane, api) {
+        const spec = api.spec(); if (spec.kind !== 'choropleth') return;
+        const C = zoneCtx(spec);
+        await Promise.all([...C.levels.filter(L => L.lv !== 'com' || L.cur).map(L => L.id), C.M.zoneBase].filter(Boolean).map(id => load(id).catch(() => {})));
+        if (api.spec() !== spec) return;
+        let changed = false, pending = false, viaCom = 0;
+        pane.querySelectorAll('input[data-dgm-zone]').forEach(inp => {
+            let st = rowStatus(spec, inp.value);
+            if (st.auto) { rememberPick(spec, inp.value.trim(), st.auto); changed = true; st = rowStatus(spec, inp.value); } // une ville tapée à la main : retenue comme si on l'avait choisie
+            if (st.via === 'com' && C.here.lv !== 'com') viaCom++;
+            if (st.pending) pending = true;
+            const dot = inp.parentElement.querySelector('[data-dgm-dot]'); if (!dot) return;
+            dot.hidden = !st.why; inp.classList.toggle('dgm-zbad', !!st.why);
+            if (st.why) { dot.title = st.msg; dot.setAttribute('aria-label', st.msg); dot.dataset.why = st.why; }
+        });
+        const hint = pane.querySelector('[data-dgm-zhint]');
+        if (hint) { hint.hidden = !viaCom; if (viaCom) hint.innerHTML = `🏘 ${viaCom > 1 ? `${viaCom} villes comptent dans ${esc(C.here.word[3])}` : `1 ville compte dans ${esc(C.here.word[2])}`} sur cette carte (niveau « ${esc(C.here.name)} »).${C.com ? ` <button type="button" class="link-button" data-dgm-tocom>Colorer les villes elles-mêmes</button>` : ''}`; }
+        if (changed) api.changed();
+        if (pending && C.com && !store.get(C.com.id)?.error) load(C.com.id).then(() => { if (pane.isConnected) refreshZoneCells(pane, api); }).catch(() => {});
+    }
+    /* la liste qui s'ouvre sous la case (fixée à la fenêtre : le tableau défile dans sa boîte) */
+    let AC = null, acSeq = 0, escAt = 0;
+    function acClose() { if (!AC) return; AC.input.setAttribute('aria-expanded', 'false'); AC.input.removeAttribute('aria-activedescendant'); AC.el.remove(); AC = null; }
+    function acPlace() {
+        if (!AC) return; if (!AC.input.isConnected) return acClose();
+        const r = AC.input.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight, w = Math.min(vw - 16, Math.max(r.width + 40, 380));
+        const left = clamp(r.left, 8, Math.max(8, vw - w - 8)), below = vh - r.bottom, up = below < 280 && r.top > below;
+        Object.assign(AC.el.style, {left: left + 'px', width: w + 'px', top: up ? '' : (r.bottom + 4) + 'px', bottom: up ? (vh - r.top + 4) + 'px' : ''});
+        AC.el.querySelector('.pk-list').style.maxHeight = Math.max(160, Math.min(380, (up ? r.top : below) - 16)) + 'px';
+    }
+    const hl = (t, q) => { const i = String(t).toLowerCase().indexOf(String(q).trim().toLowerCase()); return i < 0 || !String(q).trim() ? esc(t) : esc(t.slice(0, i)) + '<mark>' + esc(t.slice(i, i + String(q).trim().length)) + '</mark>' + esc(t.slice(i + String(q).trim().length)); };
+    function acRender(input, items, {loading, C, q}) {
+        const host = input.closest('dialog') || document.body;
+        if (!AC || AC.input !== input) { acClose(); const el = document.createElement('div'); el.className = 'pk dgm-ac'; el.innerHTML = '<div class="pk-list is-static"></div>'; host.appendChild(el);
+            el.addEventListener('mousedown', e => e.preventDefault()); // la case garde la main
+            el.addEventListener('click', e => { const it = e.target.closest('[data-i]'); if (it) acPick(Number(it.dataset.i)); const b = e.target.closest('[data-dgm-tocom]'); if (b) toCommunes(); });
+            AC = {el, input, items: [], on: 0}; input.setAttribute('aria-expanded', 'true'); }
+        AC.on = !items.length ? -1 : AC.q !== q || AC.on < 0 ? 0 : Math.min(AC.on, items.length - 1); AC.items = items; AC.q = q; AC.C = C; // nouveau texte : le premier choix
+        const lid = 'dgm-ac-' + (input.dataset.r || 0), hasCom = items.some(it => it.L.lv === 'com');
+        AC.el.querySelector('.pk-list').innerHTML = `<div class="pk-scroll" role="listbox" id="${lid}" aria-label="Zones proposées">${items.map((it, i) => `<div class="pk-item${i === AC.on ? ' on' : ''}" role="option" id="${lid}-${i}" data-i="${i}" aria-selected="${i === AC.on}">
+                <span class="pk-ic dgm-ac-ic" aria-hidden="true">${it.icon}</span><span class="pk-txt"><span class="pk-name">${hl(it.title, String(q).replace(/\s*[(,].*$/, ''))}</span>${it.meta ? `<span class="pk-meta">${esc(it.meta)}</span>` : ''}</span>
+                <span class="pk-badge2${it.cur ? ' blue' : ''}">${esc(it.kind)}</span></div>`).join('')}
+            ${!items.length && !loading ? '<div class="pk-empty">Rien de ce nom sur cette carte.</div>' : ''}</div>
+            ${loading ? '<div class="pk-loading" data-dgm-acload><span class="pk-spin"></span> chargement des communes…</div>' : ''}
+            <div class="pk-hint">${hasCom && C.here.lv !== 'com' ? `🏘 Une ville compte dans ${esc(C.here.word[2])} sur cette carte. <button type="button" class="link-button" data-dgm-tocom>Colorer les villes elles-mêmes</button>` : '↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer'}</div>`;
+        input.setAttribute('aria-controls', lid); if (AC.on >= 0) input.setAttribute('aria-activedescendant', `${lid}-${AC.on}`); else input.removeAttribute('aria-activedescendant');
+        acPlace();
+    }
+    async function acOpen(input, pane, api) {
+        const q = input.value.trim(), spec = api.spec(), tok = ++acSeq; if (!q) return acClose();
+        const C = zoneCtx(spec);
+        await Promise.all([...C.levels.filter(L => L.lv !== 'com').map(L => L.id), C.M.zoneBase, C.map === 'fr' ? 'fr-regions' : ''].filter(Boolean).map(id => load(id).catch(() => {})));
+        if (tok !== acSeq || document.activeElement !== input) return;
+        const wantCom = !!C.com && (/[a-z]{2}/.test(fold(q)) || /^\d{3,}/.test(q)), loading = wantCom && !loaded(C.com.id) && !store.get(C.com.id)?.error;
+        if (loading) load(C.com.id).then(() => { if (AC?.input === input && document.activeElement === input) acOpen(input, pane, api); refreshZoneCells(pane, api); }).catch(() => { if (AC?.input === input) acOpen(input, pane, api); });
+        acRender(input, zoneSuggest(spec, q), {loading, C, q});
+    }
+    function acMove(d) { if (!AC?.items.length) return; AC.on = (AC.on + d + AC.items.length) % AC.items.length; AC.el.querySelectorAll('.pk-item').forEach((el, i) => { el.classList.toggle('on', i === AC.on); el.setAttribute('aria-selected', String(i === AC.on)); if (i === AC.on) el.scrollIntoView({block: 'nearest'}); }); AC.input.setAttribute('aria-activedescendant', `${AC.input.getAttribute('aria-controls')}-${AC.on}`); }
+    let picking = false, zonePane = null;
+    function acPick(i, next = false) {
+        const it = AC?.items[i]; if (!it || !zonePane) return; const input = AC.input, api = zonePane._dgmZApi, spec = api.spec();
+        picking = true; input.value = it.value; input.dispatchEvent(new Event('input', {bubbles: true})); picking = false; // le tableau (et le dessin) suivent
+        if (it.remember) rememberPick(spec, it.value, it); else prunePlaces(spec);
+        api.changed(); acClose(); refreshZoneCells(zonePane, api);
+        if (next) input.closest('tr')?.querySelector('input.is-num')?.focus();
+    }
+    function toCommunes() { if (!zonePane) return; const api = zonePane._dgmZApi; acClose(); api.set({level: 'com'}); setTimeout(() => refreshZoneCells(zonePane, api), 0); A()?.toast?.('Niveau « Communes » : chaque ville a sa couleur.'); }
+    /** l'onglet Données de la carte colorée : chaque case « Zone » devient un champ à propositions */
+    function dataPane(pane, api) {
+        acClose();
+        if (api.spec().kind !== 'choropleth') return;
+        pane._dgmZApi = api; zonePane = pane;
+        const sec = pane.querySelector('[data-grid="0"]'); if (!sec) return;
+        sec.querySelectorAll('input[data-k="label"]').forEach(inp => {
+            Object.assign(inp.dataset, {dgmZone: '1'}); inp.setAttribute('autocomplete', 'off'); inp.setAttribute('role', 'combobox'); inp.setAttribute('aria-autocomplete', 'list'); inp.setAttribute('aria-expanded', 'false');
+            if (!inp.placeholder) inp.placeholder = 'Tape un nom ou un code…';
+            const td = inp.parentElement; td.classList.add('dgm-zcell'); td.insertAdjacentHTML('beforeend', '<button type="button" class="dgm-zdot" data-dgm-dot hidden></button>');
+        });
+        sec.querySelector('.h-dg-tablewrap')?.insertAdjacentHTML('beforebegin', '<p class="dgm-zhint" data-dgm-zhint hidden></p>');
+        if (!pane._dgmZBound) {
+            pane._dgmZBound = true;
+            const zin = e => e.target?.matches?.('input[data-dgm-zone]') && pane._dgmZApi?.spec().kind === 'choropleth' ? e.target : null;
+            pane.addEventListener('input', e => { const inp = zin(e); if (inp && !picking) acOpen(inp, pane, pane._dgmZApi); });
+            pane.addEventListener('keydown', e => {
+                const inp = zin(e); if (!inp) return;
+                if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (AC?.input === inp) acMove(e.key === 'ArrowDown' ? 1 : -1); else acOpen(inp, pane, pane._dgmZApi); }
+                else if (e.key === 'Enter' && AC?.input === inp && AC.on >= 0) { e.preventDefault(); acPick(AC.on, true); }
+                else if (e.key === 'Escape' && AC?.input === inp) { e.preventDefault(); e.stopPropagation(); escAt = Date.now(); acClose(); }
+                else if (e.key === 'Tab') acClose();
+            });
+            pane.addEventListener('focusout', e => { const inp = zin(e); if (!inp) return; setTimeout(() => { if (document.activeElement === inp) return; if (AC?.input === inp) acClose(); if (pane.isConnected) refreshZoneCells(pane, pane._dgmZApi); }, 150); });
+            pane.addEventListener('click', e => {
+                const dot = e.target.closest('[data-dgm-dot]'); if (dot) { const inp = dot.parentElement.querySelector('input[data-dgm-zone]'); if (inp) { inp.focus(); acOpen(inp, pane, pane._dgmZApi); } return; }
+                if (e.target.closest('[data-dgm-tocom]')) toCommunes();
+            });
+            pane.addEventListener('scroll', acPlace, true); window.addEventListener('resize', acPlace);
+            // Échap ferme la liste, pas l'éditeur
+            pane.closest('dialog')?.addEventListener('cancel', e => { if (Date.now() - escAt < 300) { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+        }
+        refreshZoneCells(pane, api);
+    }
+
     /* ═════════ L'enregistrement des deux sortes ═════════ */
     const KINDS = {
         choropleth: {icon: '🗺️', label: 'Carte colorée par zones (départements, régions, pays…)', group: 'Cartes', render: remember(choropleth), noLegend: true,
             grids: [{key: 'rows', label: 'Les zones et leurs chiffres', series: 1, cols: [C('label', 'Zone (nom ou code : 35, FRH03, BE, Vaud…)'), C('note', 'Note (dans la bulle)')]}],
-            options: CHORO_OPTS, sample: CHORO_SAMPLE, resolve, afterDraw, fromApp: FROM_APP,
+            options: CHORO_OPTS, sample: CHORO_SAMPLE, resolve, afterDraw, fromApp: FROM_APP, dataPane,
             describe: spec => `Carte colorée : ${rowsOf(spec).length} zones (${MAPS[mapOf(spec.o || {})].label}, ${levelOf(spec.o || {})[2].toLowerCase()}).`},
         flowmap: {icon: '🧭', label: 'Carte des migrations (flèches d’un lieu à un autre)', group: 'Cartes', render: remember(flowmap), noLegend: true,
             grids: [{key: 'rows', label: 'Les flux (départ → arrivée)', cols: [C('from', 'Départ (lieu)'), C('to', 'Arrivée (lieu)'), C('value', 'Combien', 'number'), C('color', 'Couleur', 'color')]}],
@@ -870,5 +1109,5 @@
             describe: spec => `Carte des migrations : ${rowsOf(spec).length} flux.`},
     };
     for (const [k, kind] of Object.entries(KINDS)) { if (!DR.KINDS[k]) DR.KINDS[k] = kind; }
-    ext.diagramCartes = {MAPS, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf};
+    ext.diagramCartes = {MAPS, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfRow, zoneSuggest, rowStatus, rememberPick, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf, SRC_GROUPS};
 })();

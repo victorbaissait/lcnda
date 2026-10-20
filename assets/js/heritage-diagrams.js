@@ -276,7 +276,8 @@
         const showStatus = () => window.LCNDA_UI?.savedStatus?.(dlg.querySelector('[data-ui-status]'), dirty ? 'dirty' : 'saved');
         const draw = async () => { showStatus(); const s = await resolveLive(spec); prev.innerHTML = R().svg(s); kindOf().afterDraw?.(prev, kindApi); };
         // kind.afterDraw(aperçu, api) : une sorte qui se règle aussi dans l'aperçu (cadrage d'une carte à la souris) ; api.set({réglages}) change spec.o
-        const kindApi = {spec: () => spec, set: patch => { spec.o = {...(spec.o || {}), ...patch}; later(); if (tab === 'opts') { const y = pane.scrollTop; paint(); pane.scrollTop = y; } }};
+        // kind.dataPane(onglet, api) : une sorte qui enrichit son tableau (champ « Zone » des cartes) ; api.changed() : spec modifié à la main, redessiner
+        const kindApi = {spec: () => spec, set: patch => { spec.o = {...(spec.o || {}), ...patch}; later(); if (tab === 'opts') { const y = pane.scrollTop; paint(); pane.scrollTop = y; } }, changed: () => later()};
         const later = () => { dirty = true; clearTimeout(timer); timer = setTimeout(draw, 90); };
         const paint = () => {
             dlg.querySelector('[data-dg-type]').textContent = `${kindOf().icon} ${kindOf().label} ▾`;
@@ -286,7 +287,7 @@
             else if (tab === 'app') pane.innerHTML = appPaneHtml();
             else pane.innerHTML = linksHtml();
             if (tab === 'app') bindAppPane(); if (tab === 'links') bindLinks();
-            if (tab === 'data') sortBars();
+            if (tab === 'data') { sortBars(); kindOf().dataPane?.(pane, kindApi); }
         };
         // C6 : « N lignes · Trier : [menu] » au-dessus de chaque tableau : range les lignes (le dessin suit)
         const sortBars = () => pane.querySelectorAll('[data-dg-sortbar]').forEach(ph => {
