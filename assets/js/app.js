@@ -1369,10 +1369,14 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         try{if(toastRegion.matches(':popover-open'))toastRegion.hidePopover();if(toastRegion.children.length)toastRegion.showPopover();}catch(_){}
     }
     const TOAST_MS=6000;
+    const TOAST_PREFS='genealogie-messages';
+    const TOAST_KINDS=[['info','Information','#111111','#ffffff','Réglages enregistrés.'],['success','Réussite','#14532d','#ffffff','✓ Fiche enregistrée.'],['error','Interdit ou erreur','#7f1020','#ffffff','⛔ Impossible : cette fiche est verrouillée.'],['undo','Suppression (avec « Annuler »)','#111111','#ffffff','🗑 Réglage « test » supprimé']];
+    const TOAST_DURATIONS=[[3000,'3 secondes'],[4000,'4 secondes'],[6000,'6 secondes (de départ)'],[8000,'8 secondes'],[10000,'10 secondes'],[15000,'15 secondes'],[20000,'20 secondes'],[30000,'30 secondes']];
+    const TOAST_CORNERS=[['tl','En haut à gauche'],['tr','En haut à droite'],['bl','En bas à gauche'],['br','En bas à droite']];
     function toast(message, type = '', opts = {}) {
         if(typeof opts!=='object'||!opts)opts={};
         const region=placeToastRegion();
-        const kind=type==='error'||type==='erreur'?'error':type==='success'||type==='ok'?'success':'';
+        const kind=type==='error'||type==='erreur'?'error':type==='success'||type==='ok'?'success':opts.kind==='undo'?'undo':'';
         const item=document.createElement('div');
         item.className=`toast ui-toast${kind?` ${kind}`:''}`;
         item.setAttribute('role',kind==='error'?'alert':'status');
@@ -1392,7 +1396,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         buttons.forEach(a=>{const b=document.createElement('button');b.type='button';b.className='ui-toast-btn';b.textContent=a.label;if(a.title)b.title=a.title;b.addEventListener('click',async e=>{e.stopPropagation();if(b.disabled)return;b.disabled=true;if(a.close!==false)close();try{await a.run?.(e);}catch(error){console.error(error);}});acts.appendChild(b);});
         if(!buttons.length)acts.remove();
         const x=Number(document.documentElement.dataset.a11yToast)||1;
-        const total=Math.max(1500,(Number(opts.duration)||TOAST_MS)*(x>1?x:1));
+        const total=Math.max(1500,(Number(opts.duration)||toastPrefs().ms)*(x>1?x:1));
         let left=total,last=performance.now(),paused=false,raf=0,closed=false;
         const bar=item.querySelector('.ui-toast-bar');
         const tick=now=>{if(closed)return;if(!paused){left-=now-last;}last=now;bar.style.width=`${Math.max(0,left/total*100)}%`;if(left<=0)return close();raf=requestAnimationFrame(tick);};
@@ -1425,7 +1429,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             catch(error){toast(`Impossible de rétablir : ${error.message||error}`,'error',{retry:doRedo});return;}
             undoToast(message,{undo,redo,icon,undoneText});
         };
-        return toast(`${ic?`${ic} `:''}${msg}`,'',undo?{action:{label:'↶ Annuler',run:doUndo}}:{});
+        return toast(`${ic?`${ic} `:''}${msg}`,'',undo?{kind:'undo',action:{label:'↶ Annuler',run:doUndo}}:{});
     }
     /** ↶ Défaire une suppression gardée sur cet ordinateur (localStorage) : les clés sont relues avant et après change(),
      *  « ↶ Annuler » remet l'avant, « ↷ Rétablir » l'après ; after('undo'|'redo') redessine l'écran. */
@@ -2008,7 +2012,25 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         });
     }
 
+    /* 💬 Messages après une action : le coin de l'écran où ils apparaissent et les couleurs (fond, texte) de chaque sorte */
+    function toastPrefs(){let v={};try{v=JSON.parse(localStorage.getItem(TOAST_PREFS)||'{}')||{};}catch(_){}const hex=c=>/^#[0-9a-f]{6}$/i.test(c||'')?c:null;
+        return {pos:TOAST_CORNERS.some(c=>c[0]===v.pos)?v.pos:'bl',ms:TOAST_DURATIONS.some(d=>d[0]===Number(v.ms))?Number(v.ms):TOAST_MS,colors:Object.fromEntries(TOAST_KINDS.map(([k,,bg,fg])=>[k,{bg:hex(v.colors?.[k]?.bg)||bg,fg:hex(v.colors?.[k]?.fg)||fg}]))};}
+    function applyToastPrefs(){const p=toastPrefs(),root=document.documentElement;root.dataset.toastPos=p.pos;TOAST_KINDS.forEach(([k,,bg,fg])=>{const c=p.colors[k];['bg','fg'].forEach(x=>{const v=c[x],d=x==='bg'?bg:fg;if(v.toLowerCase()===d)root.style.removeProperty(`--toast-${k}-${x}`);else root.style.setProperty(`--toast-${k}-${x}`,v);});});}
+    function toastPrefsPanelHtml(){const p=toastPrefs();
+        return `<section class="person-block-config toast-prefs" data-toast-prefs><header><span class="eyebrow">MESSAGES</span><h3>Messages après une action</h3><p>Où ils apparaissent, et leurs couleurs (fond et texte) selon la sorte de message. Gardé sur cet ordinateur ; « Essayer » montre le message tel qu’il sera.</p></header>
+            <div class="toast-prefs-grid"><div class="maintenance-panel"><h4>Coin de l’écran</h4><div class="toast-corner-pick" role="radiogroup" aria-label="Coin des messages">${TOAST_CORNERS.map(([k,l])=>`<button type="button" role="radio" aria-checked="${p.pos===k}" class="toast-corner is-${k}${p.pos===k?' is-on':''}" data-toast-pos="${k}" title="${l}" aria-label="${l}"><i></i></button>`).join('')}<span class="toast-corner-screen" aria-hidden="true"></span></div><p class="muted" data-toast-pos-label>${TOAST_CORNERS.find(c=>c[0]===p.pos)[1]}</p><h4>Durée d’affichage</h4><label class="toast-dur"><select data-toast-ms>${TOAST_DURATIONS.map(([v,l])=>`<option value="${v}" ${p.ms===v?'selected':''}>${l}</option>`).join('')}</select></label><p class="muted">Le message reste tant que la souris est dessus. Le réglage « durée des messages » d’Accessibilité s’y ajoute.</p></div>
+            <div class="maintenance-panel"><h4>Couleurs</h4><div class="toast-color-rows">${TOAST_KINDS.map(([k,l,,,ex])=>`<div class="toast-color-row" data-toast-kind="${k}"><span class="toast-color-demo" style="background:${p.colors[k].bg};color:${p.colors[k].fg}">${escapeHtml(l)}</span><label>Fond<input type="color" value="${p.colors[k].bg}" data-toast-c="${k}.bg"></label><label>Texte<input type="color" value="${p.colors[k].fg}" data-toast-c="${k}.fg"></label><button type="button" class="button small secondary" data-toast-try="${k}" title="${escapeHtml(ex)}">Essayer</button></div>`).join('')}</div>
+            <div class="page-actions action-zone"><button type="button" class="button small secondary" data-toast-reset>↺ Tout remettre comme au départ</button></div></div></div></section>`;}
+    function bindToastPrefs(root){const box=root.querySelector('[data-toast-prefs]');if(!box)return;
+        const save=p=>{try{localStorage.setItem(TOAST_PREFS,JSON.stringify(p));}catch(_){}applyToastPrefs();};
+        const tryKind=k=>{const ex=TOAST_KINDS.find(x=>x[0]===k);if(k==='undo')undoToast('Réglage « test » supprimé',{undo:()=>{},redo:()=>{}});else toast(ex[4],k==='info'?'':k);};
+        box.addEventListener('click',e=>{const pos=e.target.closest('button[data-toast-pos]');if(pos){const p=toastPrefs();p.pos=pos.dataset.toastPos;save(p);box.querySelectorAll('button[data-toast-pos]').forEach(b=>{const on=b===pos;b.classList.toggle('is-on',on);b.setAttribute('aria-checked',String(on));});box.querySelector('[data-toast-pos-label]').textContent=TOAST_CORNERS.find(c=>c[0]===p.pos)[1];toast('Les messages apparaîtront ici.');return;}
+            const t=e.target.closest('[data-toast-try]');if(t)return tryKind(t.dataset.toastTry);
+            if(e.target.closest('[data-toast-reset]')){undoLocalChange('Messages remis comme au départ',[TOAST_PREFS],()=>{localStorage.removeItem(TOAST_PREFS);applyToastPrefs();},()=>{applyToastPrefs();if(state.module==='maintenance')renderDesignTools();});renderDesignTools();}});
+        box.addEventListener('input',e=>{const el=e.target.closest('[data-toast-c]');if(!el)return;const [k,x]=el.dataset.toastC.split('.'),p=toastPrefs();p.colors[k][x]=el.value;save(p);const d=box.querySelector(`[data-toast-kind="${k}"] .toast-color-demo`);if(d){d.style.background=p.colors[k].bg;d.style.color=p.colors[k].fg;}});
+        box.addEventListener('change',e=>{if(e.target.matches('[data-toast-ms]')){const p=toastPrefs();p.ms=Number(e.target.value);save(p);toast(`Les messages restent ${TOAST_DURATIONS.find(d=>d[0]===p.ms)[1].replace(/ \(.*\)/,'')}.`);return;}const el=e.target.closest('[data-toast-c]');if(el)tryKind(el.dataset.toastC.split('.')[0]);});}
     function applyDesign(){
+        applyToastPrefs();
         const design=readDesignSettings();
         const presets=allDesignPresets();
         const preset=(Object.hasOwn(presets,design.preset)&&presets[design.preset])||presets.portfolio; // « constructor », « toString »… ne sont pas des thèmes
@@ -5929,6 +5951,7 @@ ${backupSectionHtml()}
             <div class="maintenance-panel"><div class="form-grid design-primary-grid" data-design-mapfields></div><div class="page-actions action-zone"><button class="button" type="submit" form="design-form">Enregistrer</button></div></div>
             <div class="design-order-grid">${`<section class="maintenance-panel order-editor compact"><h3>Ordre des cartes</h3><div class="order-list" id="map-order">${mapItems.map(([key,label],index)=>menuOrderRow(key,label,index,key!=='all',!mapHidden.includes(key))).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" data-order-save="map-order">Enregistrer</button></div></section>`}${tileCategoryOrderEditor(tileAllCats,tileCatHidden,tileHidden)}</div>
         </section>
+        ${toastPrefsPanelHtml()}
         ${lockToolsHtml(lockData)}
         <section class="person-block-config"><header><span class="eyebrow">TABLEAU DE BORD</span><h3>Widgets et bibliothèque</h3><p>Réorganise la bibliothèque de widgets de la colonne de gauche, puis règle les widgets déjà posés sur le tableau de bord.</p></header>
             <div class="design-order-grid block-grid dashboard-widget-settings-grid">${dashboardWidgetCatalogEditor(dashboardCatalogItems,dashboardCatalogHidden)}${dashboardBlockEditor(dashboardBlockSettings(),Object.fromEntries(defaultDashboardBlocks))}</div>
@@ -5957,6 +5980,7 @@ ${backupSectionHtml()}
         splitDesignPage();
         enhanceDesignFormOptions(design);
         reorderDesignPrimaryFields();
+        bindToastPrefs($('#workspace'));
         // 🗺️ les réglages de carte vont dans leur page (Cartes et fonds de carte) ; ils restent enregistrés avec le reste de l'apparence
         {const box=$('[data-design-mapfields]');['mapBackground','defaultMapLocationMode'].forEach(n=>{const f=$(`#design-form [name="${n}"]`);if(!box||!f)return;f.setAttribute('form','design-form');box.appendChild(f.closest('label'));});}
         $('#design-form').addEventListener('submit',async event=>{

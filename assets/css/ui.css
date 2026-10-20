@@ -490,3 +490,30 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
 :root[data-theme="dark"] .ui-presets-head{background:#1f2226}
 :root[data-theme="dark"] .ui-presets-list li,:root[data-theme="dark"] .ui-presets-foot,:root[data-theme="dark"] .ui-presets-empty{border-color:#3a3f46}
 :root[data-theme="dark"] .ui-presets-list li.is-menu,:root[data-theme="dark"] .ui-presets-head:hover{background:#30343a}
+/* 💬 réglages des messages (Maintenance → Apparence) : couleurs par sorte, coin de l'écran */
+.toast.ui-toast{background:var(--toast-info-bg,#111);color:var(--toast-info-fg,#fff)}
+.toast.ui-toast.success{background:var(--toast-success-bg,#14532d);color:var(--toast-success-fg,#fff)}
+.toast.ui-toast.error{background:var(--toast-error-bg,#7f1020);color:var(--toast-error-fg,#fff)}
+.toast.ui-toast.undo{background:var(--toast-undo-bg,#111);color:var(--toast-undo-fg,#fff)}
+.toast.ui-toast .ui-toast-btn{color:inherit!important;border-color:currentColor!important}
+html[data-toast-pos="br"] .toast-region,html[data-toast-pos="br"] .toast-region[popover]{inset:auto 24px 24px auto}
+html[data-toast-pos="tl"] .toast-region,html[data-toast-pos="tl"] .toast-region[popover]{inset:24px auto auto 24px}
+html[data-toast-pos="tr"] .toast-region,html[data-toast-pos="tr"] .toast-region[popover]{inset:24px 24px auto auto}
+html[data-toast-pos="tl"] .toast.ui-toast,html[data-toast-pos="tr"] .toast.ui-toast{animation-name:toast-in-top}
+@keyframes toast-in-top{from{opacity:0;transform:translateY(-10px)}}
+.toast-prefs-grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:16px;align-items:start}
+@media(max-width:760px){.toast-prefs-grid{grid-template-columns:1fr}}
+.toast-prefs h4{margin:0 0 10px}
+.toast-corner-pick{position:relative;width:200px;height:130px;border:2px solid #111;background:#f6f7f9;margin-bottom:6px}
+.toast-corner{position:absolute;width:64px;height:22px;border:1.5px dashed #9aa4b2;background:#fff;cursor:pointer;padding:0;border-radius:0;box-shadow:none}
+.toast-corner i{display:block;height:6px;margin:6px 8px;background:#c9ccd1}
+.toast-corner.is-tl{left:8px;top:8px}.toast-corner.is-tr{right:8px;top:8px}.toast-corner.is-bl{left:8px;bottom:8px}.toast-corner.is-br{right:8px;bottom:8px}
+.toast-corner:hover{border-color:#111}
+.toast-corner.is-on{border:2px solid #111;background:#111}.toast-corner.is-on i{background:#fff}
+.toast-color-rows{display:grid;gap:10px}
+.toast-color-row{display:grid;grid-template-columns:minmax(150px,1fr) auto auto auto;gap:12px;align-items:center}
+@media(max-width:760px){.toast-color-row{grid-template-columns:1fr 1fr}}
+.toast-color-row label{display:flex;align-items:center;gap:6px;font-size:13px}
+.toast-color-demo{padding:9px 12px;font-weight:600;font-size:13.5px;box-shadow:4px 4px 0 rgba(5,93,255,.35)}
+.toast-dur select{min-width:200px}
+.toast-prefs h4+.toast-corner-pick{margin-top:0}.toast-prefs .maintenance-panel h4:not(:first-child){margin-top:18px}
