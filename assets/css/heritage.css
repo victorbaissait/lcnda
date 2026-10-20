@@ -4572,3 +4572,11 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-rt-chtogs button.is-on{background:#2a62c9;border-color:#2a62c9;color:#fff}
 :root[data-theme="dark"] .h-rt-chfam,:root[data-theme="dark"] .h-rt-chtogs button{background:#262626;border-color:#4a4a4a}:root[data-theme="dark"] .h-rt-chi{color:#bbb}
 :root[data-theme="dark"] .h-rt-chtogs button.is-on{background:#2a62c9;color:#fff}
+/* Retouche : les onglets du panneau de droite sur une seule ligne de cases égales (icône au-dessus du nom) ; la flèche ⇥ à côté, pas dedans ;
+   panneau étroit : les icônes seules (le nom au survol) */
+.h-rt2 .h-rt-side>.h-rt-tabs{padding-right:0;margin-right:32px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));flex-wrap:nowrap;container-type:inline-size}
+.h-rt2 .h-rt-side>.h-rt-tabs>button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;padding:6px 2px;line-height:1.15}
+.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-ti{font-size:15px;line-height:1}
+.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-tl{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11.5px;letter-spacing:-.1px}
+@container (max-width: 390px){.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-tl{display:none}.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-ti{font-size:19px}.h-rt2 .h-rt-side>.h-rt-tabs>button{padding:8px 2px}}
+.h-rt2 .h-rt-side>.h-rt-sidetog{height:auto;min-height:26px}
