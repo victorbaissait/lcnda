@@ -73,6 +73,7 @@
         .presentation-changes-body h4 { margin:18px 0 6px; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--presentation-blue); }
         .presentation-changes-body ul { margin:0; padding-left:20px; }
         .presentation-changes-body li { margin:4px 0; }
+        .presentation-changes-body p { margin:0; }
         .presentation-changes-old { margin-top:12px; }
         .presentation-version { margin-top:14px; border:1px solid #d7d7d7; }
         .presentation-version summary { padding:12px 16px; font-size:16px; cursor:pointer; list-style:none; font-weight:800; }
@@ -167,7 +168,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.7.0</span>
+                <span class="eyebrow">VERSION BÊTA · 0.7.1</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source, gratuit et modulable pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -197,8 +198,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.7.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.7.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 551 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.7.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.7.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 551 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -207,7 +208,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.7.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 561 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.7.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 561 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -218,16 +219,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.7.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 540 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.7.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 514 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.7.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 540 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.7.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 514 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.7.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.7.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 510 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.7.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.7.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 510 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.7.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.7.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -235,13 +236,37 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.7.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.7.1, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.7.0.zip"><span>Archive .zip<small>Windows, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.7.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.7.1.zip"><span>Archive .zip<small>Windows, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.7.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
+
+            <details class="presentation-changes">
+                <summary><span>Nouveautés de la version 0.7.1<small>Retouche comme Photoshop (dégradés, Teinte/Saturation, paragraphes, glyphes, motifs, formes de pinceau), une seule fenêtre de couleur, montage, réglages enregistrés repensés, diagrammes, recherche par date précise, messages réglables</small></span></summary>
+                <div class="presentation-changes-body">
+                    <h4>🎚️ Retouche des photos, comme Photoshop</h4>
+                    <p>Un vrai outil <b>▦ Dégradé</b> (linéaire, radial, angle, réfléchi, losange ; arrêts de couleur et de transparence, 16 préréglages, poignées sur l'image, dans un masque pour fondre une photo) ; l'onglet <b>ⓘ Propriétés</b> avec <b>Teinte/Saturation</b> (gammes de couleurs, Coloriser, pipettes, réglage ciblé), la densité et le contour progressif des masques ; <b>🔤 Caractère, ¶ Paragraphe et Ω Glyphes</b> (police et sa graisse, blocs de texte justifiés avec césure, retraits, signes de la typographie française et de la généalogie) ; <b>▩ Motifs</b> à poser sur un calque ou à créer soi-même (raccord sans couture) ; <b>🖌 Formes de pinceau</b> (étoiles, feuilles, herbe, craie, plume calligraphique… et sa propre forme d'après une sélection) ; images placées en <b>objet dynamique 🧩</b> (agrandir, tourner sans perte) ; <b>Fond</b> et effets de calque <b>fx</b> (ombre, lueur, contour) ; restaurer sans rien détruire (tout va sur des calques) ; remplacer le ciel, détourer une personne, agrandir ×2 / ×4, panorama ; canevas vide ; les deux carrés de couleur avec X et D.</p>
+                    <h4>🎨 Une seule fenêtre de couleur partout</h4>
+                    <p>Couleurs de l'app, récentes, puis nuances, TLS, RVB ou CMJN, pipette et code ; elle remplace la fenêtre du système dans toute l'app.</p>
+                    <h4>🎞️ Montage</h4>
+                    <p>Transitions, vieux film, stabilisation, pistes verrouillables, aimantation, temps de la musique repérés ; pistes superposées dans l'ordre de la frise, vidéo en plein écran, textes avec 17 entrées, 16 sorties et leurs durées, export du son seul (MP3, WAV).</p>
+                    <h4>📐 Mise en page et ✏️ dessin</h4>
+                    <p>Gabarits de livre de famille, QR codes vers les fiches, publipostage ; les onglets des panneaux (retouche, mise en page, dessin, maison 3D) se rangent et se cachent dans « ⚙️ Personnaliser » ; dans le dessin, les carrés Remplissage / Contour ouvrent la fenêtre de couleur.</p>
+                    <h4>💾 Réglages enregistrés, nouveau cadre</h4>
+                    <p>Repliable, une ligne par réglage avec « Appliquer » et un menu ⋯ (remplacer, renommer, dupliquer, exporter, supprimer avec « Annuler ») ; le nom ne se tape qu'au moment de créer un réglage.</p>
+                    <h4>📊 Diagrammes et cartes</h4>
+                    <p>12 nouveaux diagrammes (frises, liens de famille, accord, violon, carte à ronds) ; cartes colorées avec un champ « Zone » qui propose zones et villes, et de nouvelles sources « Les lieux de ton arbre ».</p>
+                    <h4>🔎 Recherche et questions</h4>
+                    <p>La date précise marche enfin dans Proximité et Dates (dates d'actes lues au jour près, autres calendriers convertis), « Entre deux dates précises » ; « Poser une question » comprend le lieu (« à Pernay ») et demande laquelle quand plusieurs villes portent le même nom.</p>
+                    <h4>📏 Calendrier / Mesures</h4>
+                    <p>Huit cadres de plus (mesures par région, âge ↔ naissance, écart entre deux dates, jour de la semaine, saint du jour et fêtes mobiles, heures canoniques, monnaies étrangères, générations).</p>
+                    <h4>⚙️ Maintenance</h4>
+                    <p>Une page « Cartes et fonds de carte » à part ; les messages après une action se règlent (coin de l'écran, durée, couleurs de chaque sorte de message) ; recherche des questions fréquentes avec un seul cadre.</p>
+                </div>
+            </details>
 
             <details class="presentation-changes">
                 <summary><span>Nouveautés de la version 0.7.0<small>Créations, artistes et carrières, maison de famille en 3D, dessin et blasons, transcription d'actes et alphabets anciens, présentations et récit d'une vie, graphiques et cartes, cartes de photos, ADN et visages, plusieurs généalogies, une app plus cohérente et plus accessible</small></span></summary>
@@ -946,7 +971,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.7.0 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.7.1 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script src="faq-data.js"></script>
