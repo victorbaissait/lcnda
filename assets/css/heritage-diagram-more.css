@@ -1,0 +1,12 @@
+/* LCNDA — 📊 diagrammes en plus (assets/js/heritage-diagram-more.js) : curseur des années, accordéon, cases cliquables */
+.dmo-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px;max-width:100%}
+.dmo-tools input[type=range]{flex:1 1 160px;min-width:0}
+.dmo-tools output{font-weight:700;min-width:3.5em;font-variant-numeric:tabular-nums}
+.dmo-tools .icon-button{min-width:32px}
+.dmo-app .dmo-period{display:flex;flex-wrap:wrap;gap:8px}
+.dmo-app .dmo-period label{flex:1 1 120px;min-width:0}
+.dmo-app [data-dm-msg]:empty{display:none}
+[data-acc-t]:hover circle{fill:#eef3ff}
+[data-dmo-pid]:hover rect{filter:brightness(.92)}
+:root[data-theme="dark"] .dmo-tools output{color:#e8eaed}
+@media (max-width: 480px){.dmo-tools{gap:6px}}
