@@ -662,7 +662,10 @@
         oldfilm: ['Artistiques', 'Vieux film', [['amount', 'Usure', 0, 100, 60, 1]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, R = fxRng(2024), a = p.amount / 100; for (let i = 0; i < d.length; i += 4) { const y = fxLum(d, i), n = (R() - 0.5) * 50 * a; d[i] = clamp255(y * 1.07 + 18 + n); d[i + 1] = clamp255(y * 0.92 + 8 + n); d[i + 2] = clamp255(y * 0.72 + n); }
             const c = fxCanvas(img), g = c.getContext('2d'); g.strokeStyle = 'rgba(255,255,240,.55)'; for (let k = 0; k < Math.round(8 * a); k++) { const x = R() * W; g.lineWidth = Math.max(1, s * (0.6 + R())); g.beginPath(); g.moveTo(x, 0); g.lineTo(x + (R() - 0.5) * 20 * s, H); g.stroke(); } g.fillStyle = 'rgba(20,15,10,.7)'; for (let k = 0; k < Math.round(120 * a); k++) { g.beginPath(); g.arc(R() * W, R() * H, Math.max(0.6, R() * 2.5 * s), 0, Math.PI * 2); g.fill(); } fxBack(img, c); }],
         mosaic: ['Pixellisation', 'Mosaïque', [['size', 'Taille des carreaux', 2, 200, 16, 1]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, z = Math.max(2, Math.round(p.size * s)); for (let y0 = 0; y0 < H; y0 += z) for (let x0 = 0; x0 < W; x0 += z) { let n = 0, r = 0, g = 0, b = 0; for (let y = y0; y < Math.min(H, y0 + z); y++) for (let x = x0; x < Math.min(W, x0 + z); x++) { const i = (y * W + x) * 4; r += d[i]; g += d[i + 1]; b += d[i + 2]; n++; } for (let y = y0; y < Math.min(H, y0 + z); y++) for (let x = x0; x < Math.min(W, x0 + z); x++) { const i = (y * W + x) * 4; d[i] = r / n; d[i + 1] = g / n; d[i + 2] = b / n; } } }],
-        halftone: ['Pixellisation', 'Demi-teinte (points d’imprimerie)', [['size', 'Taille des points', 3, 60, 8, 1], ['color', 'En couleur (0 / 1)', 0, 1, 0, 1]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, z = Math.max(3, p.size * s), c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+        halftone: ['Pixellisation', 'Demi-teinte (points d’imprimerie)', [['size', 'Taille des points', 1, 60, 8, 1], ['color', 'En couleur (0 / 1)', 0, 1, 0, 1]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, z = Math.max(1, p.size * s);
+            // points de 1 ou 2 : une trame fine (Bayer 4 × 4) calculée point par point, plutôt qu'un rond par pixel (trop lent sur une grande photo)
+            if (z < 2.5) { const B = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5]; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = (y * W + x) * 4, t = (B[(y & 3) * 4 + (x & 3)] + 0.5) / 16; if (p.color) { for (let k = 0; k < 3; k++) d[i + k] = d[i + k] / 255 > t ? 255 : d[i + k] * 0.85 | 0; } else { const v = fxLum(d, i) / 255 > t ? 255 : 17; d[i] = d[i + 1] = d[i + 2] = v; } } return; }
+            const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
             for (let y = 0; y < H; y += z) for (let x = 0; x < W; x += z) { const i = (Math.min(H - 1, Math.round(y + z / 2)) * W + Math.min(W - 1, Math.round(x + z / 2))) * 4, l = fxLum(d, i) / 255, rad = z / 2 * Math.sqrt(1 - l) * 1.35; if (rad < 0.3) continue; g.fillStyle = p.color ? `rgb(${d[i] * 0.85 | 0},${d[i + 1] * 0.85 | 0},${d[i + 2] * 0.85 | 0})` : '#111'; g.beginPath(); g.arc(x + z / 2, y + z / 2, rad, 0, Math.PI * 2); g.fill(); } fxBack(img, c); }],
         crystal: ['Pixellisation', 'Cristallisation', [['size', 'Taille des cristaux', 3, 150, 18, 1]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, z = Math.max(3, p.size * s), gw = Math.ceil(W / z), gh = Math.ceil(H / z), R = fxRng(3), seeds = []; for (let j = 0; j < gh; j++) for (let i = 0; i < gw; i++) seeds.push([(i + R()) * z, (j + R()) * z]); const col = seeds.map(([x, y]) => { const i = (Math.min(H - 1, y | 0) * W + Math.min(W - 1, x | 0)) * 4; return [d[i], d[i + 1], d[i + 2]]; });
             for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const gi = Math.floor(x / z), gj = Math.floor(y / z); let best = 1e18, bk = 0; for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const ii = gi + di, jj = gj + dj; if (ii < 0 || jj < 0 || ii >= gw || jj >= gh) continue; const k = jj * gw + ii, dx = seeds[k][0] - x, dy = seeds[k][1] - y, dd = dx * dx + dy * dy; if (dd < best) { best = dd; bk = k; } } const o = (y * W + x) * 4; d[o] = col[bk][0]; d[o + 1] = col[bk][1]; d[o + 2] = col[bk][2]; } }],
@@ -1383,7 +1386,7 @@
     const RT_PALETTE = [['#e9c2a6', 'Peau claire'], ['#d39e7e', 'Peau hâlée'], ['#a8725a', 'Peau mate'], ['#e7a3a0', 'Joues, lèvres'], ['#5a3a24', 'Cheveux bruns'], ['#c9a35e', 'Cheveux blonds'], ['#9a9a9a', 'Cheveux gris'], ['#8fb3d9', 'Ciel'], ['#6f8f4e', 'Feuillage'], ['#9fbf6a', 'Herbe'], ['#2f3f66', 'Uniforme, costume bleu'], ['#6b2d2d', 'Robe bordeaux'], ['#3a3a3a', 'Habit noir'], ['#d8cfb8', 'Mur, pierre'], ['#b5653e', 'Brique, tuile'], ['#7b5a3a', 'Bois']];
     const RT_RESTORE_STEPS = [
         ['frame', '⌗ Cadrer et redresser', 'Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte.', '<button type="button" class="button small" data-rt-cmd="straighten:auto">📐 Redresser tout seul</button><button type="button" class="button small secondary" data-rt-cmd="mode:crop">⌗ Recadrer</button><button type="button" class="button small secondary" data-rt-cmd="mode:persp">⧈ Photo prise de biais</button>'],
-        ['color', '🎨 Couleurs passées, photo jaunie', 'Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste.', '<button type="button" class="button small" data-rt-cmd="restore:yellow">🟨 Enlever le jaunissement</button><button type="button" class="button small secondary" data-rt-cmd="preset:1">✨ Raviver une vieille photo</button><button type="button" class="button small secondary" data-rt-cmd="preset:0">Réglage automatique</button>'],
+        ['color', '🎨 Couleurs passées, photo jaunie', 'Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste.', '<button type="button" class="button small" data-rt-cmd="restore:yellow">🟨 Enlever le jaunissement</button><button type="button" class="button small secondary" data-rt-cmd="restore:preset:1">✨ Raviver une vieille photo</button><button type="button" class="button small secondary" data-rt-cmd="restore:preset:0">Réglage automatique</button>'],
         ['spots', '🧹 Poussières et petites taches', 'Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main.', '<label class="h-rt-slider"><span>Sensibilité <output data-rt-spotf-out>50</output></span><input type="range" min="1" max="100" value="50" data-rt-spotf></label><label class="h-rt-slider"><span>Taille maximale d’une tache <output data-rt-spots-out>6</output></span><input type="range" min="2" max="20" value="6" data-rt-spots></label><button type="button" class="button small" data-rt-cmd="restore:spots">🔍 Repérer et enlever les taches</button><button type="button" class="button small secondary" data-rt-cmd="mode:heal">🩹 Correcteur à la main</button><button type="button" class="button small secondary" data-rt-cmd="fx:dust">Filtre poussière et rayures</button>'],
         ['tears', '🩹 Déchirures, plis, rayures', '« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine.', '<button type="button" class="button small" data-rt-cmd="repair:detect">🔍 Repérer les plis et rayures</button><button type="button" class="button small secondary" data-rt-cmd="mode:repair">🪡 Réparer au pinceau</button><button type="button" class="button small secondary" data-rt-cmd="restore:tear">🩹 Correcteur</button><button type="button" class="button small secondary" data-rt-cmd="mode:clone">🧬 Tampon (morceau manquant)</button><button type="button" class="button small secondary" data-rt-cmd="mode:lasso">➰ Entourer une zone…</button>'],
         ['grain', '🌫️ Grain et bruit', 'Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours.', '<button type="button" class="button small" data-rt-cmd="fx:denoise2">Réduire le bruit…</button><button type="button" class="button small secondary" data-rt-cmd="fx:surface">Flou de surface (garde les contours)…</button><button type="button" class="button small secondary" data-rt-cmd="fx:median">Médiane…</button>'],
@@ -1515,6 +1518,21 @@
         // ── Masques (sélections) : des toiles pw × ph jamais modifiées une fois créées, rangées par numéro (l'historique les garde) ──
         const masks = new Map(); let maskSeq = 0;
         const addMask = c => { const id = 'k' + (++maskSeq); masks.set(id, c); return id; };
+        /** 🧭 Restaurer sans rien détruire : ce qu'une retouche (taches, plis, tampon, correcteur, réparer) vient de changer sur la photo
+            est rangé sur un calque « ✨ Retouches » au-dessus d'elle, et la photo revient comme avant. Cacher ou baisser ce calque = revenir en arrière. */
+        const RT_PATCH_NAME = '✨ Retouches (taches, plis, tampon)';
+        function patchToLayer(before, name = RT_PATCH_NAME) {
+            const a = srcData.data, c = blank(pw, ph), g = c.getContext('2d'), id = g.createImageData(pw, ph), o = id.data; let any = 0;
+            for (let i = 0; i < a.length; i += 4) { if (a[i] !== before[i] || a[i + 1] !== before[i + 1] || a[i + 2] !== before[i + 2] || a[i + 3] !== before[i + 3]) { o[i] = a[i]; o[i + 1] = a[i + 1]; o[i + 2] = a[i + 2]; o[i + 3] = a[i + 3]; any++; } }
+            srcData.data.set(before); strokeVer++; photoKey = '';
+            if (!any) return null;
+            g.putImageData(id, 0, 0);
+            // toujours le même calque de retouches (tant qu'il existe) : ses retouches s'ajoutent, une seule image à la taille de la photo
+            let l = drawLayers().find(x => x.restorePatch && x.name === name && !x.locked);
+            if (l) { const op = l.ops.find(x => x.type === 'image'), prev = op && masks.get(op.mask); if (prev) { const m = blank(pw, ph), mg = m.getContext('2d'); mg.drawImage(prev, 0, 0, pw, ph); mg.drawImage(c, 0, 0); l.ops = [{type: 'image', mask: addMask(m), x: 0, y: 0, w: 1, h: 1, rot: 0, opacity: 1}]; renderLayer(l); return l; } }
+            const keep = activeLayer; activeLayer = ''; l = newLayer(name); l.restorePatch = true; activeLayer = keep && nodeById(keep) ? keep : l.id;
+            l.ops = [{type: 'image', mask: addMask(c), x: 0, y: 0, w: 1, h: 1, rot: 0, opacity: 1}]; renderLayer(l); return l;
+        }
         const blankMask = () => { const c = document.createElement('canvas'); c.width = pw; c.height = ph; return c; };
         let selId = null; // la sélection en cours (ou aucune)
         // ── Calques : la photo (réglages, taches, tampon) tout en bas, puis un arbre (du bas vers le haut) de calques,
@@ -2200,11 +2218,11 @@
             if (!painting) return;
             const g = painting; painting = null;
             if (g.tool === 'shape') { const p = g.preview; if (Math.abs(p.x2 - p.x1) * pw < 2 && Math.abs(p.y2 - p.y1) * ph < 2) { draw(); return; } g.layer.ops.push(p); renderLayer(g.layer); draw(); refreshLayers(); commit(`${SHAPES[p.kind]} sur « ${g.layer.name} »`); return; }
-            if (g.tool === 'patch') { const p = g.patch; if (Math.abs(p.dx * pw) < 1 && Math.abs(p.dy * ph) < 1) { draw(); return; } st.strokes.push({tool: 'patch', mask: p.mask, dx: p.dx, dy: p.dy}); rtReplayStrokes(srcData, [st.strokes[st.strokes.length - 1]], masks); strokeVer++; draw(); refreshLayers(); commit('Tampon : zone recopiée'); return; }
+            if (g.tool === 'patch') { const p = g.patch; if (Math.abs(p.dx * pw) < 1 && Math.abs(p.dy * ph) < 1) { draw(); return; } const before = new Uint8ClampedArray(srcData.data); rtReplayStrokes(srcData, [{tool: 'patch', mask: p.mask, dx: p.dx, dy: p.dy}], masks); patchToLayer(before); draw(); refreshLayers(); commit('Tampon : zone recopiée (calque ✨ Retouches)'); return; }
             if (g.tool === 'mask') { const t = g.layer; t.mask = [...(t.mask || []), g.preview]; draw(); refreshLayers(); commit(`Masque : ${g.preview.mode === 'hide' ? 'caché' : 'montré'} au pinceau`); return; }
             if (g.tool === 'brush') { g.layer.ops.push(g.preview); renderLayer(g.layer); draw(); refreshLayers(); commit(`${RT_BRUSHES.find(b => b[0] === g.preview.brush)?.[1] || 'Pinceau'} sur « ${g.layer.name} »`); return; }
-            if (g.tool === 'repair') { if (!g.dabs.length) { draw(); return; } const s0 = {tool: 'inpaint', dabs: g.dabs, grain: $('[data-rt-rgrain]')?.checked !== false}; st.strokes.push(s0); rtReplayStrokes(srcData, [s0], masks); strokeVer++; draw(); refreshLayers(); commit(`Pli réparé${g.dabs.length > 1 ? ` (${g.dabs.length} touches)` : ''}`); return; }
-            if (g.dabs.length) { st.strokes.push({tool: g.tool, dabs: g.dabs}); refreshLayers(); commit(NAMES[g.tool] + (g.dabs.length > 1 ? ` (${g.dabs.length} touches)` : '')); }
+            if (g.tool === 'repair') { if (!g.dabs.length) { draw(); return; } const before = new Uint8ClampedArray(srcData.data), s0 = {tool: 'inpaint', dabs: g.dabs, grain: $('[data-rt-rgrain]')?.checked !== false}; rtReplayStrokes(srcData, [s0], masks); patchToLayer(before); draw(); refreshLayers(); commit(`Pli réparé${g.dabs.length > 1 ? ` (${g.dabs.length} touches)` : ''} (calque ✨ Retouches)`); return; }
+            if (g.dabs.length) { if (g.from) { patchToLayer(g.from); draw(); } else st.strokes.push({tool: g.tool, dabs: g.dabs}); refreshLayers(); commit(NAMES[g.tool] + (g.dabs.length > 1 ? ` (${g.dabs.length} touches)` : '') + (g.from ? ' (calque ✨ Retouches)' : '')); }
         };
         canvas.addEventListener('pointerup', endPaint); canvas.addEventListener('pointercancel', endPaint);
         canvas.addEventListener('pointerup', () => { if (drag?.persp !== undefined || drag?.idpEye !== undefined) drag = null; });
@@ -2405,7 +2423,7 @@
             ok.addEventListener('click', async () => {
                 if (!creaseProp?.lines) return; const n = creaseProp.lines; ok.disabled = true; count.textContent = 'Réparation…'; await tick();
                 const s0 = {tool: 'inpaint', mask: addMask(rtMaskCanvas(creaseProp.mask, pw, ph)), grain: pn.querySelector('[data-cr-grain]').checked};
-                st.strokes.push(s0); rtReplayStrokes(srcData, [s0], masks); strokeVer++; end(); refreshLayers();
+                const before = new Uint8ClampedArray(srcData.data); rtReplayStrokes(srcData, [s0], masks); patchToLayer(before, '✨ Plis et rayures comblés'); end(); refreshLayers();
                 commit(`Plis réparés (${A().plural(n, 'ligne')})`); dlg.querySelector('[data-rt-step="tears"] .h-rt-stepok')?.removeAttribute('hidden');
                 toast(`${A().plural(n, 'ligne réparée', 'lignes réparées')} : compare avec 👁 ou ◧ ; ↶ pour revenir.`);
             });
@@ -2468,7 +2486,7 @@
                 if (!on.size) return toast('Coche au moins une étape.', 'error');
                 state.textContent = 'Restauration…'; pn.querySelectorAll('button').forEach(b => { b.disabled = true; }); await tick();
                 let n = 0;
-                if (on.has('creases')) { const r = creases || rtCreases(srcData, Math.round(30 + 45 * k)); if (r.lines && !lockedDeep(P())) { const s0 = {tool: 'inpaint', mask: addMask(rtMaskCanvas(r.mask, pw, ph)), grain: true}; st.strokes.push(s0); rtReplayStrokes(srcData, [s0], masks); strokeVer++; n++; } }
+                if (on.has('creases')) { const r = creases || rtCreases(srcData, Math.round(30 + 45 * k)); if (r.lines && !lockedDeep(P())) { const s0 = {tool: 'inpaint', mask: addMask(rtMaskCanvas(r.mask, pw, ph)), grain: true}, before = new Uint8ClampedArray(srcData.data); rtReplayStrokes(srcData, [s0], masks); patchToLayer(before, '✨ Plis et fines déchirures'); n++; } }
                 const NAMES0 = {dust: '✨ Poussières et rayures', denoise: '✨ Débruitage', levels: '✨ Contraste et niveaux', sharpen: '✨ Netteté douce', colorize: '✨ Colorisation'};
                 for (const key of ['dust', 'denoise', 'levels', 'sharpen', 'colorize']) { if (!on.has(key)) continue; layers.push({id: nid('a'), type: 'adjust', name: NAMES0[key], visible: true, opacity: 1, mask: null, clip: false, st: {...adjDefault(), ...rtClone(stepSt(key, k))}}); n++; }
                 pn.remove(); activeLayer = ''; refreshLayers(); syncControls(); draw();
@@ -2602,18 +2620,18 @@
                     const inside = selId ? rtMaskAlpha(masks.get(selId), pw, ph) : null;
                     const dabs = rtSpots(srcData, Number($('[data-rt-spotf]')?.value || 50), Number($('[data-rt-spots]')?.value || 6), inside); help.textContent = HELP[optsFor(mode)] || '';
                     if (!dabs.length) return toast('Aucune tache trouvée : augmente la sensibilité ou la taille.');
-                    const g = {tool: 'heal', dabs}; st.strokes.push(g); rtReplayStrokes(srcData, [g], masks); strokeVer++; draw(); refreshLayers();
-                    toast(`${dabs.length} tache${dabs.length > 1 ? 's' : ''} enlevée${dabs.length > 1 ? 's' : ''} : compare avec 👁 ; ↶ si c’est trop.`);
+                    const before = new Uint8ClampedArray(srcData.data); rtReplayStrokes(srcData, [{tool: 'heal', dabs}], masks); patchToLayer(before, '✨ Taches enlevées'); draw(); refreshLayers();
+                    toast(`${dabs.length} tache${dabs.length > 1 ? 's' : ''} enlevée${dabs.length > 1 ? 's' : ''}, sur le calque « ✨ Taches enlevées » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop.`);
                     return commit(`Taches enlevées automatiquement (${dabs.length})`);
                 }
                 if (b === 'yellow') { // chaque couleur ramenée à la plage de la luminosité (sombre et clair) : la dominante (jaune, rose) s'en va, le contraste reste
                     const hs = [0, 1, 2, 3].map(() => new Uint32Array(256)), d = srcData.data, n = d.length / 4;
                     for (let i = 0; i < d.length; i += 4) { hs[0][d[i]]++; hs[1][d[i + 1]]++; hs[2][d[i + 2]]++; hs[3][Math.round(0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2])]++; }
                     const pct = (h, p) => { let acc = 0; for (let v = 0; v < 256; v++) { acc += h[v]; if (acc >= n * p) return v; } return 255; };
-                    const L0 = pct(hs[3], .01), L1 = Math.max(L0 + 10, pct(hs[3], .99)), mid = (L0 + L1) / 2;
+                    const L0 = pct(hs[3], .01), L1 = Math.max(L0 + 10, pct(hs[3], .99)), mid = (L0 + L1) / 2, an = newAdjust('✨ Jaunissement enlevé'); activeLayer = an.id;
                     ['r', 'g', 'b'].forEach((c, i) => { const lo = pct(hs[i], .01), hi = Math.max(lo + 8, pct(hs[i], .99)), mc = (lo + hi) / 2, k = (L1 - L0) / (hi - lo); // la même pente pour toutes, chaque couleur recentrée
-                        const f = v => Math.round(Math.max(0, Math.min(255, mid + (v - mc) * k))); st.curves[c] = [[0, f(0)], [lo, L0], [hi, L1], [255, f(255)]].filter((q, j, arr) => j === 0 || q[0] > arr[j - 1][0]); });
-                    syncControls(); draw(); return commit('Jaunissement enlevé (chaque couleur remise à sa place)');
+                        const f = v => Math.round(Math.max(0, Math.min(255, mid + (v - mc) * k))); an.st.curves = an.st.curves || {}; an.st.curves[c] = [[0, f(0)], [lo, L0], [hi, L1], [255, f(255)]].filter((q, j, arr) => j === 0 || q[0] > arr[j - 1][0]); });
+                    refreshLayers(); syncControls(); draw(); toast('Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée.'); return commit('Jaunissement enlevé (calque de réglage)');
                 }
                 if (b === 'face') {
                     if (!selId) { setMode('ellipsesel'); return toast('Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ».'); }
@@ -2621,6 +2639,7 @@
                     refreshLayers(); syncControls(); draw(); toast('Visage débruité et accentué sur un calque à part : son opacité dose l’effet.'); return commit('Visage plus net');
                 }
                 if (b === 'tear') { setMode('heal'); const sz = $('[data-rt-size]'); if (sz) { sz.value = 26; sz.dispatchEvent(new Event('input', {bubbles: true})); } return toast('Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis).'); }
+                if (b === 'preset') { const i = k.slice('restore:preset:'.length), an = newAdjust(i === '1' ? '✨ Vieille photo ravivée' : '✨ Réglage automatique'); activeLayer = an.id; refreshLayers(); syncControls(); dlg.querySelector(`[data-rt-preset="${CSS.escape(i)}"]`)?.click(); return; }
                 if (b === 'color') { const c = k.slice('restore:color:'.length); const l = nodeById(activeLayer); if (!(l && typeOf(l) === 'layer' && l.blend === 'color')) await cmd('colorize:paint'); setColor(c); setMode('brush'); return; }
                 return;
             }

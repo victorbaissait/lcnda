@@ -1123,7 +1123,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sidegroups.js?v=7" defer></script>
 <script src="assets/js/app-listes.js?v=19" defer></script>
 <script src="assets/js/app-maintenance.js?v=13" defer></script>
-<script src="assets/js/app-recherche.js?v=10" defer></script>
+<script src="assets/js/app-recherche.js?v=11" defer></script>
 <script src="assets/js/app-graphiques.js?v=9" defer></script>
 <script src="assets/js/app-side-folders.js?v=1" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
@@ -1165,7 +1165,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-shapelib.js?v=1" defer></script>
 <script src="assets/js/heritage-boards.js?v=31" defer></script>
 <script src="assets/js/heritage-dnd.js?v=9" defer></script>
-<script src="assets/js/heritage-studio.js?v=63" defer></script>
+<script src="assets/js/heritage-studio.js?v=64" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=6" defer></script>
 <script src="assets/js/heritage-fiches.js?v=18" defer></script>

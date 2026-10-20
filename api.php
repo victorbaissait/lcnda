@@ -4860,13 +4860,13 @@ function research_events_in_windows(array $events, array $windows): array
 
 function date_search_data(PDO $pdo): never
 {
-    $mode=($_GET['mode']??'range')==='exact'?'exact':'range';$raw=safe_text($_GET['values']??'');$typeId=safe_int($_GET['event_type_id']??0);$query=safe_text($_GET['q']??'');
+    $mode=in_array($_GET['mode']??'range',['exact','between'],true)?$_GET['mode']:'range';$raw=safe_text($_GET['values']??'');$valueTo=safe_text($_GET['value_to']??'');$typeId=safe_int($_GET['event_type_id']??0);$query=safe_text($_GET['q']??'');
     $dateWindowMode=safe_text($_GET['date_window_mode']??'exact');$dateWindowDays=safe_int($_GET['date_window_days']??0);
     $values=array_values(array_unique(array_filter(array_map('trim',preg_split('/[,;\n]+/u',$raw)?:[]))));$yearFrom=safe_int($_GET['year_from']??0);$yearTo=safe_int($_GET['year_to']??0);
     $windowLabel='';
     $params=[];
     if($mode==='range'){if(!$yearFrom&&!$yearTo)json_response(['mode'=>$mode,'values'=>[],'events'=>[]]);if(!$yearFrom)$yearFrom=$yearTo;if(!$yearTo)$yearTo=$yearFrom;if($yearFrom>$yearTo)[$yearFrom,$yearTo]=[$yearTo,$yearFrom];$dateWhere='e.year IS NOT NULL AND e.year BETWEEN ? AND ?';$params=[$yearFrom,$yearTo];$values=[$yearFrom,$yearTo];}
-    else{if(!$values)json_response(['mode'=>$mode,'values'=>[],'events'=>[]]);[$windows,$windowLabel,$invalid]=research_date_windows($values,$dateWindowMode,$dateWindowDays);if(!$windows)json_response(['mode'=>$mode,'values'=>$values,'windowLabel'=>'','invalidDates'=>$invalid,'events'=>[]]);[$dateWhere,$params]=research_windows_year_where($windows);}
+    else{if(!$values||($mode==='between'&&$valueTo===''))json_response(['mode'=>$mode,'values'=>[],'events'=>[]]);[$windows,$windowLabel,$invalid]=$mode==='between'?research_date_windows([$values[0]],'exact',0,$valueTo):research_date_windows($values,$dateWindowMode,$dateWindowDays);if(!$windows)json_response(['mode'=>$mode,'values'=>$values,'windowLabel'=>'','invalidDates'=>$invalid,'events'=>[]]);[$dateWhere,$params]=research_windows_year_where($windows);}
     if($typeId){$dateWhere.=' AND e.event_type_id=?';$params[]=$typeId;}
     $placeId=safe_int($_GET['place_id']??0);
     if($placeId){$dateWhere.=' AND e.place_id=?';$params[]=$placeId;}
@@ -4878,9 +4878,9 @@ function date_search_data(PDO $pdo): never
         p.first_name,p.last_name,f.partner1_id,f.partner2_id,p1.first_name AS p1_first,p1.last_name AS p1_last,p2.first_name AS p2_first,p2.last_name AS p2_last
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id
-        WHERE $dateWhere ORDER BY COALESCE(e.year,9999),e.date_text,e.id LIMIT ".($mode==='exact'?20000:1500);
+        WHERE $dateWhere ORDER BY COALESCE(e.year,9999),e.date_text,e.id LIMIT ".($mode!=='range'?50000:1500);
     $stmt=$pdo->prepare($sql);$stmt->execute($params);$events=$stmt->fetchAll();
-    if($mode==='exact')$events=array_slice(research_events_in_windows($events,$windows),0,1500);
+    if($mode!=='range')$events=array_slice(research_events_in_windows($events,$windows),0,1500);
     foreach($events as &$event){$event['participants']=[];if($event['person_id'])$event['participants'][]=['id'=>(int)$event['person_id'],'name'=>trim(($event['first_name']??'').' '.($event['last_name']??''))];foreach([1,2] as $n)if($event["partner{$n}_id"]&&!array_filter($event['participants'],static fn($p)=>$p['id']==(int)$event["partner{$n}_id"]))$event['participants'][]=['id'=>(int)$event["partner{$n}_id"],'name'=>trim(($event["p{$n}_first"]??'').' '.($event["p{$n}_last"]??''))];}
     unset($event);
     json_response(['mode'=>$mode,'values'=>$values,'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'windowLabel'=>$windowLabel,'invalidDates'=>$invalid??[],'eventTypeId'=>$typeId,'events'=>$events]);
