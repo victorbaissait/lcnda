@@ -1118,7 +1118,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-enquetes.js?v=7" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=11" defer></script>
 <script src="assets/js/app-harmony.js?v=7" defer></script>
-<script src="assets/js/app-ui.js?v=13" defer></script>
+<script src="assets/js/app-ui.js?v=14" defer></script>
 <script src="assets/js/app-access.js?v=5" defer></script>
 <script src="assets/js/app-sidegroups.js?v=7" defer></script>
 <script src="assets/js/app-listes.js?v=19" defer></script>
@@ -1174,7 +1174,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagrams-render.js?v=5" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=12" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=2" defer></script>
-<script src="assets/js/heritage-vector.js?v=22" defer></script>
+<script src="assets/js/heritage-vector.js?v=23" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=12" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=8" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=7" defer></script>

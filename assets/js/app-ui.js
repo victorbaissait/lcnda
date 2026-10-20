@@ -249,6 +249,57 @@
         m.addEventListener('keydown', e => { const bs = [...m.querySelectorAll('button')], k = bs.indexOf(document.activeElement); if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); bs[(k + (e.key === 'ArrowDown' ? 1 : bs.length - 1)) % bs.length]?.focus(); } });
         return pop;
     };
+    /* 💾 Réglages enregistrés (le cadre commun, proposition C) : repliable « 💾 Réglages enregistrés (n) » ; ouvert, une ligne par réglage
+       « nom · date · Appliquer · ⋯ » (⋯ = remplacer, renommer, dupliquer, exporter, supprimer) ; en bas, « ＋ Enregistrer les réglages actuels »
+       (le champ du nom n'apparaît qu'à ce moment) et « ⤒ Importer ». L'outil garde ses données : il donne la liste et les actions.
+       UI.presetsFrame({id, title, list: () => [{name, date}], apply(i), save(name), replace(i), rename(i, name), duplicate(i), exportOne(i), remove(i), importOne(), what})
+       — chaque action peut être async et rendre false pour dire « rien n'a changé » ; une action absente n'est pas proposée.
+       frame.refresh() redessine (après un changement fait ailleurs). */
+    const PF_OPEN = 'genealogie-reglages-ouverts';
+    UI.presetsFrame = (o = {}) => {
+        const box = h('div', 'ui-presets'); box.dataset.uiPresets = o.id || '';
+        const openSet = () => { try { return JSON.parse(localStorage.getItem(PF_OPEN) || '{}') || {}; } catch (_) { return {}; } };
+        let isOpen = o.open ?? !!openSet()[o.id], mode = '', renaming = -1;
+        const list = () => { try { return (o.list?.() || []).filter(x => x && typeof x.name === 'string'); } catch (_) { return []; } };
+        const toast = (m, k) => A()?.toast?.(m, k);
+        const nameField = (v, ok) => `<input type="text" maxlength="60" class="ui-presets-inp" data-ps-name value="${esc(v)}" placeholder="Nom de ces réglages" aria-label="Nom du réglage"><button type="button" class="button small" data-ps-ok>${ok}</button><button type="button" class="button small secondary" data-ps-cancel>Annuler</button>`;
+        const draw = () => { const l = list();
+            box.innerHTML = `<button type="button" class="ui-presets-head" data-ps-toggle aria-expanded="${isOpen}"><span>💾 ${esc(o.title || 'Réglages enregistrés')} <span class="ui-presets-n">(${l.length})</span></span><span class="ui-presets-car" aria-hidden="true">${isOpen ? '▾' : '▸ ouvrir'}</span></button>
+                ${isOpen ? `${l.length ? `<ul class="ui-presets-list">${l.map((x, i) => `<li data-i="${i}">${renaming === i ? `<span class="ui-presets-edit">${nameField(x.name, 'OK')}</span>` : `<span class="ui-presets-name"><b>${esc(x.name)}</b>${x.date ? ` <small>· ${esc(x.date)}</small>` : ''}</span>${o.apply ? '<button type="button" class="button small" data-ps-apply>Appliquer</button>' : ''}<button type="button" class="button small secondary ui-presets-more" data-ps-more title="Remplacer, renommer, dupliquer, exporter, supprimer" aria-label="Plus d’actions pour « ${esc(x.name)} »" aria-haspopup="menu">⋯</button>`}</li>`).join('')}</ul>` : '<p class="ui-presets-empty">Aucun réglage enregistré pour l’instant.</p>'}
+                <div class="ui-presets-foot">${mode === 'new' ? nameField(o.defaultName?.() || '', '💾 Enregistrer') : `${o.save ? `<button type="button" class="link-button" data-ps-new title="Garder ${esc(o.what || 'ces réglages')} sous un nom">＋ Enregistrer les réglages actuels</button>` : ''}<span class="spacer"></span>${o.importOne ? '<button type="button" class="link-button" data-ps-import title="Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur">⤒ Importer</button>' : ''}`}</div>` : ''}`;
+            box.classList.toggle('is-open', isOpen);
+            const inp = box.querySelector('[data-ps-name]'); if (inp) { inp.focus(); inp.select(); } };
+        const run = async (fn, ...a) => { try { const r = await fn(...a); if (r !== false) draw(); return r; } catch (err) { toast(err?.message || String(err), 'error'); return false; } };
+        const confirmName = async () => { const inp = box.querySelector('[data-ps-name]'); if (!inp) return; const name = inp.value.trim().slice(0, 60); if (!name) { toast('Donne un nom à ces réglages.', 'error'); inp.focus(); return; }
+            const l = list();
+            if (renaming >= 0) { const it = l[renaming]; if (!it) { renaming = -1; return draw(); } if (name !== it.name && l.some(x => x.name === name)) { toast(`Un réglage « ${name} » existe déjà.`, 'error'); inp.focus(); return; } const i = renaming; renaming = -1; if (name === it.name) return draw(); await run(o.rename, i, name); return; }
+            if (l.some(x => x.name === name) && !await A().confirmBox(`Un réglage « ${name} » existe déjà.`, {title: 'Le remplacer ?', okLabel: 'Remplacer'})) return;
+            mode = ''; if (await run(o.save, name) !== false) toast(`Réglages gardés sous « ${name} ».`); };
+        const menuFor = (btn, i) => { const it = list()[i]; if (!it) return;
+            const items = [
+                o.replace && {icon: '↻', label: 'Remplacer par les réglages actuels', help: 'Ce réglage prend ce qui est à l’écran maintenant.', run: async () => { if (!await A().confirmBox('L’ancienne version de ce réglage ne sera plus gardée.', {title: `Remplacer « ${it.name} » par les réglages actuels ?`, okLabel: 'Remplacer'})) return; if (await run(o.replace, i) !== false) toast('Réglage mis à jour.'); }},
+                o.rename && {icon: '✎', label: 'Renommer', help: 'Le nom devient modifiable sur la ligne.', run: () => { renaming = i; mode = ''; draw(); }},
+                o.duplicate && {icon: '⧉', label: 'Dupliquer', help: 'Une copie, à modifier sans toucher à l’original.', run: () => run(o.duplicate, i)},
+                o.exportOne && {icon: '⤓', label: 'Exporter (fichier .json)', help: 'Pour le garder, ou l’ouvrir sur un autre ordinateur.', run: () => run(o.exportOne, i)},
+                o.remove && {icon: '🗑', label: 'Supprimer', help: 'On peut encore l’annuler juste après.', danger: true, run: () => run(o.remove, i)},
+            ].filter(Boolean);
+            const li = btn.closest('li'); li?.classList.add('is-menu');
+            UI.menuAt(btn, items, {title: `« ${it.name} »`, onClose: () => li?.classList.remove('is-menu')}); };
+        box.addEventListener('click', async e => {
+            const b = e.target.closest('button'); if (!b || !box.contains(b)) return; const i = Number(b.closest('[data-i]')?.dataset.i), it = list()[i];
+            if (b.matches('[data-ps-toggle]')) { isOpen = !isOpen; const s = openSet(); if (isOpen) s[o.id] = 1; else delete s[o.id]; try { localStorage.setItem(PF_OPEN, JSON.stringify(s)); } catch (_) {} mode = ''; renaming = -1; draw(); return; }
+            if (b.matches('[data-ps-new]')) { mode = 'new'; renaming = -1; draw(); return; }
+            if (b.matches('[data-ps-cancel]')) { mode = ''; renaming = -1; draw(); return; }
+            if (b.matches('[data-ps-ok]')) return confirmName();
+            if (b.matches('[data-ps-import]')) return run(o.importOne);
+            if (b.matches('[data-ps-more]')) return menuFor(b, i);
+            if (b.matches('[data-ps-apply]') && it) { if (await run(o.apply, i) !== false && !o.quietApply) toast(`Réglages « ${it.name} » appliqués.`); }
+        });
+        box.addEventListener('keydown', e => { if (!e.target.matches('[data-ps-name]')) return; if (e.key === 'Enter') { e.preventDefault(); confirmName(); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); mode = ''; renaming = -1; draw(); } });
+        box.refresh = draw; draw(); return box;
+    };
+    /** un nom libre : « Nom (2) », « Nom (3) »… */
+    UI.freeName = (base, taken) => { let n = 2, nm = `${base} (2)`; while (taken.includes(nm)) nm = `${base} (${++n})`; return nm.slice(0, 60); };
     UI.openColorBox = (anchor, {get, set, alpha = false, allowNone = false} = {}) => openColorBox(anchor, {get, set, alpha, allowNone}, () => {});
     /** C2 — colorField({name, value, allowNone, alpha, compact}) → l'élément (.input = l'input caché qui reçoit input/change) */
     UI.colorField = ({name = '', value = '#111111', allowNone = false, alpha = false, compact = false} = {}) => {
