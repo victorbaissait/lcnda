@@ -4786,38 +4786,75 @@ function parse_research_exact_date(string $value): ?DateTimeImmutable
     return null;
 }
 
-function research_date_text_variants(DateTimeImmutable $date): array
+/** Une date tapée dans une recherche : « 30/02/1988 », « 1988-02-30 », « 3 juillet 1832 », « 1er mars 1790 », « 3 JUL 1832 ». Au jour près, sinon null. */
+function research_parse_day(string $value): ?DateTimeImmutable
 {
-    return [
-        $date->format('Y-m-d'),
-        $date->format('d/m/Y'),
-        (int)$date->format('j') . '/' . (int)$date->format('n') . '/' . $date->format('Y'),
-    ];
+    $date = parse_research_exact_date($value);
+    if ($date) return $date;
+    $d = cal_parse_date($value);
+    if ($d && $d[1] && $d[2] && !$d[3]) return new DateTimeImmutable(sprintf('%04d-%02d-%02d', $d[0], $d[1], $d[2]));
+    return null;
 }
 
-function expanded_exact_date_variants(array $values, string $windowMode, int $windowDays): array
+/**
+ * Les fenêtres de dates d'une recherche : chaque date précise (élargie de quelques jours avant / après si on le demande),
+ * ou une seule fenêtre « du … au … ». Rend [fenêtres [début, fin], libellé, dates non comprises].
+ */
+function research_date_windows(array $values, string $windowMode, int $windowDays, ?string $until = null): array
 {
     $windowMode = in_array($windowMode, ['before', 'after', 'both'], true) ? $windowMode : 'exact';
     $windowDays = max(0, min(365, $windowDays));
-    $variants = [];
-    $windowLabels = [];
-    foreach ($values as $value) {
-        $variants[] = mb_strtolower(trim($value));
-        $date = parse_research_exact_date($value);
-        if (!$date) continue;
-        if ($windowMode === 'exact' || $windowDays === 0) {
-            foreach (research_date_text_variants($date) as $variant) $variants[] = mb_strtolower($variant);
-            $windowLabels[] = $date->format('d/m/Y');
-            continue;
+    $windows = []; $labels = []; $invalid = [];
+    if ($until !== null) {
+        $from = research_parse_day($values[0] ?? '');
+        $to = research_parse_day($until);
+        if (!$from) $invalid[] = (string) ($values[0] ?? '');
+        if (!$to) $invalid[] = $until;
+        if ($from && $to) {
+            if ($from > $to) [$from, $to] = [$to, $from];
+            $windows[] = [$from, $to];
+            $labels[] = 'du ' . $from->format('d/m/Y') . ' au ' . $to->format('d/m/Y');
         }
-        $start = $windowMode === 'after' ? $date : $date->modify("-{$windowDays} days");
-        $end = $windowMode === 'before' ? $date : $date->modify("+{$windowDays} days");
-        for ($cursor = $start; $cursor <= $end; $cursor = $cursor->modify('+1 day')) {
-            foreach (research_date_text_variants($cursor) as $variant) $variants[] = mb_strtolower($variant);
-        }
-        $windowLabels[] = $start->format('d/m/Y') . ' — ' . $end->format('d/m/Y');
+        return [$windows, implode(' · ', $labels), array_values(array_filter($invalid, static fn($v) => trim($v) !== ''))];
     }
-    return [array_values(array_unique(array_filter($variants))), implode(' · ', array_unique($windowLabels))];
+    foreach ($values as $value) {
+        $date = research_parse_day($value);
+        if (!$date) { $invalid[] = $value; continue; }
+        $start = ($windowMode === 'after' || $windowMode === 'exact' || !$windowDays) ? $date : $date->modify("-{$windowDays} days");
+        $end = ($windowMode === 'before' || $windowMode === 'exact' || !$windowDays) ? $date : $date->modify("+{$windowDays} days");
+        $windows[] = [$start, $end];
+        $labels[] = $start == $end ? $start->format('d/m/Y') : $start->format('d/m/Y') . ' — ' . $end->format('d/m/Y');
+    }
+    return [$windows, implode(' · ', array_unique($labels)), $invalid];
+}
+
+/** Le jour d'un événement (« Y-m-d »), quelle que soit la façon dont la date est écrite ; null si elle n'est pas connue au jour près. */
+function research_event_day(array $event): ?string
+{
+    $d = null;
+    if (($event['date_calendar'] ?? 'gregorian') !== 'gregorian' && trim((string) ($event['date_converted'] ?? '')) !== '') $d = cal_parse_date((string) $event['date_converted']);
+    $d ??= cal_parse_date((string) ($event['date_text'] ?? ''));
+    if (!$d || !$d[1] || !$d[2]) return null;
+    return sprintf('%04d-%02d-%02d', $d[0], $d[1], $d[2]);
+}
+
+/** SQL des années couvertes par les fenêtres (pré-filtre), puis research_events_in_windows() garde les jours exacts. */
+function research_windows_year_where(array $windows): array
+{
+    $min = 9999; $max = 0;
+    foreach ($windows as [$a, $b]) { $min = min($min, (int) $a->format('Y')); $max = max($max, (int) $b->format('Y')); }
+    return ['e.year IS NOT NULL AND e.year BETWEEN ? AND ?', [$min, $max]];
+}
+
+function research_events_in_windows(array $events, array $windows): array
+{
+    $ranges = array_map(static fn($w) => [$w[0]->format('Y-m-d'), $w[1]->format('Y-m-d')], $windows);
+    return array_values(array_filter($events, static function ($e) use ($ranges) {
+        $day = research_event_day($e);
+        if ($day === null) return false;
+        foreach ($ranges as [$a, $b]) if ($day >= $a && $day <= $b) return true;
+        return false;
+    }));
 }
 
 function date_search_data(PDO $pdo): never
@@ -4828,7 +4865,7 @@ function date_search_data(PDO $pdo): never
     $windowLabel='';
     $params=[];
     if($mode==='range'){if(!$yearFrom&&!$yearTo)json_response(['mode'=>$mode,'values'=>[],'events'=>[]]);if(!$yearFrom)$yearFrom=$yearTo;if(!$yearTo)$yearTo=$yearFrom;if($yearFrom>$yearTo)[$yearFrom,$yearTo]=[$yearTo,$yearFrom];$dateWhere='e.year IS NOT NULL AND e.year BETWEEN ? AND ?';$params=[$yearFrom,$yearTo];$values=[$yearFrom,$yearTo];}
-    else{if(!$values)json_response(['mode'=>$mode,'values'=>[],'events'=>[]]);[$variants,$windowLabel]=expanded_exact_date_variants($values,$dateWindowMode,$dateWindowDays);if(!$variants)json_response(['mode'=>$mode,'values'=>$values,'windowLabel'=>'','events'=>[]]);$marks=implode(',',array_fill(0,count($variants),'?'));$dateWhere="lower(trim(e.date_text)) IN ($marks)";$params=$variants;}
+    else{if(!$values)json_response(['mode'=>$mode,'values'=>[],'events'=>[]]);[$windows,$windowLabel,$invalid]=research_date_windows($values,$dateWindowMode,$dateWindowDays);if(!$windows)json_response(['mode'=>$mode,'values'=>$values,'windowLabel'=>'','invalidDates'=>$invalid,'events'=>[]]);[$dateWhere,$params]=research_windows_year_where($windows);}
     if($typeId){$dateWhere.=' AND e.event_type_id=?';$params[]=$typeId;}
     $placeId=safe_int($_GET['place_id']??0);
     if($placeId){$dateWhere.=' AND e.place_id=?';$params[]=$placeId;}
@@ -4836,15 +4873,16 @@ function date_search_data(PDO $pdo): never
     if($occupationFilter!==''){$occLike='%'.$occupationFilter.'%';$dateWhere.=" AND (EXISTS(SELECT 1 FROM persons pp WHERE pp.id IN (e.person_id,f.partner1_id,f.partner2_id) AND pp.occupation LIKE ? COLLATE NOCASE) OR EXISTS(SELECT 1 FROM events eo JOIN event_types to2 ON to2.id=eo.event_type_id WHERE eo.person_id IN (e.person_id,f.partner1_id,f.partner2_id) AND to2.gedcom_tag='OCCU' AND (eo.title LIKE ? COLLATE NOCASE OR eo.description LIKE ? COLLATE NOCASE)) OR EXISTS(SELECT 1 FROM census_members cm WHERE cm.person_id IN (e.person_id,f.partner1_id,f.partner2_id) AND cm.occupation LIKE ? COLLATE NOCASE))";$params=array_merge($params,[$occLike,$occLike,$occLike,$occLike]);}
     if($query!=='')
 {$like='%'.$query.'%';$dateWhere.=' AND (t.label LIKE ? COLLATE NOCASE OR pl.name LIKE ? COLLATE NOCASE OR pl.subdivision LIKE ? COLLATE NOCASE OR pl.country LIKE ? COLLATE NOCASE OR p.first_name LIKE ? COLLATE NOCASE OR p.last_name LIKE ? COLLATE NOCASE OR p1.first_name LIKE ? COLLATE NOCASE OR p1.last_name LIKE ? COLLATE NOCASE OR p2.first_name LIKE ? COLLATE NOCASE OR p2.last_name LIKE ? COLLATE NOCASE)';$params=array_merge($params,array_fill(0,10,$like));}
-    $sql="SELECT e.id,e.date_text,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,pl.name AS place,pl.subdivision,pl.country,
+    $sql="SELECT e.id,e.date_text,e.date_calendar,e.date_converted,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,pl.name AS place,pl.subdivision,pl.country,
         p.first_name,p.last_name,f.partner1_id,f.partner2_id,p1.first_name AS p1_first,p1.last_name AS p1_last,p2.first_name AS p2_first,p2.last_name AS p2_last
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id
-        WHERE $dateWhere ORDER BY COALESCE(e.year,9999),e.date_text,e.id LIMIT 1500";
+        WHERE $dateWhere ORDER BY COALESCE(e.year,9999),e.date_text,e.id LIMIT ".($mode==='exact'?20000:1500);
     $stmt=$pdo->prepare($sql);$stmt->execute($params);$events=$stmt->fetchAll();
+    if($mode==='exact')$events=array_slice(research_events_in_windows($events,$windows),0,1500);
     foreach($events as &$event){$event['participants']=[];if($event['person_id'])$event['participants'][]=['id'=>(int)$event['person_id'],'name'=>trim(($event['first_name']??'').' '.($event['last_name']??''))];foreach([1,2] as $n)if($event["partner{$n}_id"]&&!array_filter($event['participants'],static fn($p)=>$p['id']==(int)$event["partner{$n}_id"]))$event['participants'][]=['id'=>(int)$event["partner{$n}_id"],'name'=>trim(($event["p{$n}_first"]??'').' '.($event["p{$n}_last"]??''))];}
     unset($event);
-    json_response(['mode'=>$mode,'values'=>$values,'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'windowLabel'=>$windowLabel,'eventTypeId'=>$typeId,'events'=>$events]);
+    json_response(['mode'=>$mode,'values'=>$values,'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'windowLabel'=>$windowLabel,'invalidDates'=>$invalid??[],'eventTypeId'=>$typeId,'events'=>$events]);
 }
 
 // Distance approximative en kilomètres entre deux points (latitude/longitude en degrés),
@@ -4867,19 +4905,23 @@ function proximity_search_data(PDO $pdo): never
     // apparaissent (personne principale de l'événement, conjoint, ou témoin) afin de repérer des voisins/témoins récurrents.
     // Un rayon optionnel (radius_km, 0 à 50 km) permet d'inclure aussi les communes voisines géolocalisées
     // dans ce rayon, plutôt que de se limiter strictement à la commune exacte sélectionnée.
-    $placeId=safe_int($_GET['place_id']??0);$dateMode=($_GET['date_mode']??'range')==='exact'?'exact':'range';$yearFrom=safe_int($_GET['year_from']??0);$yearTo=safe_int($_GET['year_to']??0);
-    $exactDate=safe_text($_GET['exact_date']??'');$dateWindowMode=safe_text($_GET['date_window_mode']??'exact');$dateWindowDays=safe_int($_GET['date_window_days']??0);
+    $placeId=safe_int($_GET['place_id']??0);$dateMode=in_array($_GET['date_mode']??'range',['exact','between'],true)?$_GET['date_mode']:'range';$yearFrom=safe_int($_GET['year_from']??0);$yearTo=safe_int($_GET['year_to']??0);
+    $exactDate=safe_text($_GET['exact_date']??'');$exactDateTo=safe_text($_GET['exact_date_to']??'');$dateWindowMode=safe_text($_GET['date_window_mode']??'exact');$dateWindowDays=safe_int($_GET['date_window_days']??0);
     $radiusKm=isset($_GET['radius_km'])?(float)$_GET['radius_km']:0.0;
     if($radiusKm<0)$radiusKm=0.0;if($radiusKm>50)$radiusKm=50.0;
-    if(!$placeId||($dateMode==='exact'?$exactDate==='':(!$yearFrom&&!$yearTo)))json_response(['placeId'=>$placeId,'placeName'=>'','yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'dateLabel'=>'','radiusKm'=>$radiusKm,'people'=>[]]);
+    $emptyAnswer=['placeId'=>$placeId,'placeName'=>'','dateMode'=>$dateMode,'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'dateLabel'=>'','radiusKm'=>$radiusKm,'invalidDates'=>[],'people'=>[]];
+    $missing=$dateMode==='range'?(!$yearFrom&&!$yearTo):($dateMode==='between'?($exactDate===''||$exactDateTo===''):$exactDate==='');
+    if(!$placeId||$missing)json_response($emptyAnswer);
     $dateLabel='';
     $dateWhere='e.year IS NOT NULL AND e.year BETWEEN ? AND ?';
     $dateParams=[];
-    if($dateMode==='exact'){
-        [$dateVariants,$dateLabel]=expanded_exact_date_variants([$exactDate],$dateWindowMode,$dateWindowDays);
-        if(!$dateVariants)json_response(['placeId'=>$placeId,'placeName'=>'','yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'dateLabel'=>'','radiusKm'=>$radiusKm,'people'=>[]]);
-        $dateWhere='lower(trim(e.date_text)) IN ('.implode(',',array_fill(0,count($dateVariants),'?')).')';
-        $dateParams=$dateVariants;
+    $windows=[];
+    if($dateMode!=='range'){
+        // Date précise (élargie si on le demande) ou entre deux dates précises : on lit chaque date d'acte au jour près
+        // (« 24/08/1770 », « 18 novembre 1792 », « 24 AUG 1770 », dates d'autres calendriers converties…)
+        [$windows,$dateLabel,$invalid]=research_date_windows([$exactDate],$dateWindowMode,$dateWindowDays,$dateMode==='between'?$exactDateTo:null);
+        if(!$windows)json_response(['invalidDates'=>$invalid]+$emptyAnswer);
+        [$dateWhere,$dateParams]=research_windows_year_where($windows);
     }else{
         if(!$yearFrom)$yearFrom=$yearTo;if(!$yearTo)$yearTo=$yearFrom;if($yearFrom>$yearTo)[$yearFrom,$yearTo]=[$yearTo,$yearFrom];
         $dateParams=[$yearFrom,$yearTo];
@@ -4915,14 +4957,15 @@ function proximity_search_data(PDO $pdo): never
         }
     }
     $placeMarks=implode(',',array_fill(0,count($placeIds),'?'));
-    $sql="SELECT e.id,e.date_text,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,
+    $sql="SELECT e.id,e.date_text,e.date_calendar,e.date_converted,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,
         pl.name AS place_name,pl.subdivision AS place_subdivision,
         p.first_name,p.last_name,f.partner1_id,f.partner2_id,p1.first_name AS p1_first,p1.last_name AS p1_last,p2.first_name AS p2_first,p2.last_name AS p2_last
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN places pl ON pl.id=e.place_id
         LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id
-        WHERE e.place_id IN ($placeMarks) AND $dateWhere ORDER BY COALESCE(e.year,9999),e.date_text,e.id LIMIT 3000";
+        WHERE e.place_id IN ($placeMarks) AND $dateWhere ORDER BY COALESCE(e.year,9999),e.date_text,e.id LIMIT ".($windows?50000:3000);
     $stmt=$pdo->prepare($sql);$stmt->execute(array_merge($placeIds,$dateParams));$events=$stmt->fetchAll();
+    if($windows)$events=array_slice(research_events_in_windows($events,$windows),0,3000);
     $eventIds=array_map(static fn($e)=>(int)$e['id'],$events);$witnessesByEvent=[];
     if($eventIds){$marks=implode(',',array_fill(0,count($eventIds),'?'));
         $wStmt=$pdo->prepare("SELECT ew.event_id,ew.person_id,p.first_name,p.last_name FROM event_witnesses ew JOIN persons p ON p.id=ew.person_id WHERE ew.event_id IN ($marks)");

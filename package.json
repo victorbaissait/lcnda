@@ -35,6 +35,7 @@
     "test:alphabets": "node tests/test-alphabets.js",
     "test:depouillements": "node tests/test-depouillements.js",
     "test:addrmap": "node tests/test-addrmap.js",
+    "test:research-dates": "node tests/test-research-dates.js",
     "test:sosa-stats-tabs": "node tests/test-sosa-stats-tabs.js",
     "test:artist": "node tests/test-artist.js",
     "test:scene": "node tests/test-scene.js",
