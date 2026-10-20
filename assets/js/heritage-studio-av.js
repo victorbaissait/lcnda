@@ -2105,8 +2105,7 @@
     const toolbarSets = which => cleanSets(readJson(TB_SETS, {})[which], cleanToolbar);
     const saveToolbarSets = (which, list) => { const all = readJson(TB_SETS, {}); all[which] = list; return writeJson(TB_SETS, all); };
     const downloadJson = (name, obj) => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {type: 'application/json'})); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
-    const presetBar = (id, sets, what) => `<div class="h-pp-presets h-mtp-presets" data-set="${id}"><strong>💾 Réglages enregistrés</strong>${sets.length ? `<select data-set-pick aria-label="Réglages enregistrés">${sets.map((x, i) => `<option value="${i}">${esc(x.name)}${x.date ? ' — ' + esc(x.date) : ''}</option>`).join('')}</select><button type="button" class="button small" data-set-apply>Appliquer</button><button type="button" class="button small secondary" data-set-exportone title="Exporter ce réglage dans un fichier (pour un autre ordinateur ou une autre personne)">⤓ Exporter</button><button type="button" class="button small secondary" data-set-del title="Supprimer ces réglages enregistrés">🗑</button>` : `<span class="muted">Aucun pour l’instant.</span>`}
-        <button type="button" class="button small secondary" data-set-save title="Garder ${esc(what)} sous un nom">💾 Enregistrer sous ce nom…</button><label class="button small secondary" title="Un fichier .json exporté depuis LCNDA (un réglage, ou un ancien fichier d’ensembles)">⤒ Importer un réglage<input type="file" accept=".json,application/json" data-set-import hidden></label></div>`;
+    const askFile = () => new Promise(ok => { const i = document.createElement('input'); i.type = 'file'; i.accept = '.json,application/json'; i.addEventListener('change', () => ok(i.files?.[0] || null), {once: true}); i.click(); });
     /* un réglage dans un fichier : {lcnda: 'reglage', outil, nom, version: 1, donnees} → lcnda-reglage-<outil>-<nom>.json */
     const slugOf = n => String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase().slice(0, 50) || 'reglage';
     const OUTIL_LABEL = o => o === 'montage-disposition' ? 'la disposition du montage' : /^boutons-/.test(o) ? `les boutons de « ${(EDITORS.find(e => e[0] === o.slice(8)) || [0, o.slice(8)])[1]} »` : `l’outil « ${o} »`;
@@ -2116,6 +2115,7 @@
         let which = st.montagePrefsEditor || 'video';
         ext.maintenance.montage_prefs.ac?.abort(); const ac = ext.maintenance.montage_prefs.ac = new AbortController();
         const BLK_KEY = 'genealogie-montage-page-order';
+        let mountSets = () => {};
         const blkMove = '<span class="h-mtp-blkmove"><button type="button" class="h-bt" data-blk-up title="Monter ce bloc">↑</button><button type="button" class="h-bt" data-blk-down title="Descendre ce bloc">↓</button><button type="button" class="h-bt" data-blk-side title="Passer dans l’autre colonne">⇄</button></span>';
         const draw = () => {
             if (token !== st.workspaceToken) return;
@@ -2129,7 +2129,7 @@
                 <div class="h-mtp-cols">
                 <div class="h-mtp-stack">
                 <section class="maintenance-panel" data-mtp-blk="layout"><h3>🎬 Disposition du montage${blkMove}</h3>
-                    ${presetBar('layout', layoutSets(), 'cette disposition')}
+                    <div data-presets-slot="layout"></div>
                     <div class="form-grid h-mtp-grid">
                     <label>Panneau des réglages<select data-mtp="side">${opt([['right', 'À droite de l’image'], ['left', 'À gauche de l’image']], p.side)}</select></label>
                     <label>Aide sous la frise<select data-mtp="help">${opt([['1', 'Montrée'], ['0', 'Cachée']], p.help ? '1' : '0')}</select></label>
@@ -2165,7 +2165,7 @@
                 </div>
                 <section class="maintenance-panel" data-mtp-blk="tools"><h3>🧰 Boutons et options${blkMove}</h3>
                     <div class="form-grid h-mtp-grid"><label>Éditeur<select data-mtp-which>${opt(EDITORS, which)}</select></label></div>
-                    ${presetBar('toolbar', toolbarSets(which), 'ces boutons')}
+                    <div data-presets-slot="toolbar"></div>
                     <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ». Les ensembles ci-dessus sont ceux de « ${esc(edName)} ».</p>
                     ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>↺ Remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : which === 'vector' ? 'le dessin vectoriel (Listes → Outils de modification → ✒️ Dessin vectoriel)' : which === 'house' ? 'le plan d’une maison (Listes → 🏠 Maisons de famille)' : which === 'decortree' ? 'l’arbre décoratif (Listes → Outils de modification → 🌳 Arbre décoratif → ＋)' : which === 'keynote' ? 'une présentation (Listes → Outils de modification → 🎞️ Présentation et diaporama → ＋ Nouveau → Présentation)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
                 <div class="h-ek-panel h-mtp-keys"><h4>⌨️ Raccourcis de « ${esc(edName)} »</h4><div data-ek-box></div><p class="muted"><button type="button" class="button small secondary" data-mtp-allkeys>⌨️ Tous les raccourcis de l’app (Maintenance → Raccourcis clavier)</button></p></div>
@@ -2183,6 +2183,7 @@
               const saved = lsJson(BLK_KEY, null), def = {left: ['layout', 'export', 'retouch', 'full'], right: ['tools']}, lay = saved && Array.isArray(saved.left) && Array.isArray(saved.right) ? saved : def;
               const all = [...ws.querySelectorAll('[data-mtp-blk]')], put = (col, keys) => keys.forEach(k => { const el = all.find(x => x.dataset.mtpBlk === k); if (el) col.appendChild(el); });
               put(left, lay.left); put(right, lay.right); all.filter(el => !lay.left.includes(el.dataset.mtpBlk) && !lay.right.includes(el.dataset.mtpBlk)).forEach(el => (['tools', 'transcribe'].includes(el.dataset.mtpBlk) ? right : left).appendChild(el)); }
+            mountSets();
         };
         draw();
         // ce qui est à l'écran (pas encore enregistré) : disposition, boutons de l'éditeur choisi
@@ -2191,14 +2192,15 @@
         const applyLayout = v => { const cur = readJson(MT_KEY, {}); writeJson(MT_KEY, {...cur, ...cleanLayout(v)}); };
         const applyToolbar = v => { const all = lsJson('genealogie-toolbars', {}); all[which] = cleanToolbar(v); writeJson('genealogie-toolbars', all); };
         const setOps = {
-            layout: {list: layoutSets, save: list => writeJson(LAYOUT_SETS, list), now: layoutNow, apply: applyLayout, clean: cleanLayout, type: 'lcnda-montage-disposition', file: 'disposition-montage', outil: () => 'montage-disposition'},
-            toolbar: {list: () => toolbarSets(which), save: list => saveToolbarSets(which, list), now: toolbarNow, apply: applyToolbar, clean: cleanToolbar, type: 'lcnda-boutons-editeur', file: () => `boutons-${which}`, outil: () => `boutons-${which}`},
+            layout: {list: layoutSets, save: list => writeJson(LAYOUT_SETS, list), now: layoutNow, apply: applyLayout, clean: cleanLayout, type: 'lcnda-montage-disposition', outil: () => 'montage-disposition'},
+            toolbar: {list: () => toolbarSets(which), save: list => saveToolbarSets(which, list), now: toolbarNow, apply: applyToolbar, clean: cleanToolbar, type: 'lcnda-boutons-editeur', outil: () => `boutons-${which}`},
         };
         ws.addEventListener('input', e => { const el = e.target.closest('[data-mtp]'); if (el?.type === 'color') { const sw = ws.querySelector(`[data-mtp-sw="${el.dataset.mtp}"]`); if (sw) { sw.style.background = el.value; sw.style.color = inkOn(el.value); } return; } if (el?.type === 'range') el.nextElementSibling.textContent = el.value + (el.dataset.mtp === 'stage' ? ' %' : ' px'); }, {signal: ac.signal});
         ws.addEventListener('change', async e => {
             if (e.target.matches('[data-mtp-which]')) { which = st.montagePrefsEditor = e.target.value; draw(); return; }
-            const inp = e.target.closest('[data-set-import]'); if (!inp) return;
-            const op = setOps[inp.closest('[data-set]').dataset.set], file = inp.files?.[0]; inp.value = ''; if (!file) return;
+        }, {signal: ac.signal});
+        const importSet = async op => {
+            const file = await askFile(); if (!file) return;
             if (file.size > 2e6) return toast('Fichier trop gros pour des réglages.', 'error');
             let data; try { data = JSON.parse(await file.text()); } catch (_) { return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); }
             if (data?.lcnda === 'reglage') {
@@ -2209,9 +2211,9 @@
                 }
                 if (!data.donnees || typeof data.donnees !== 'object') return toast('Ce réglage est vide ou abîmé.', 'error');
                 const list = op.list(); let name = cleanName(data.nom) || 'Réglage importé';
-                while (list.some(y => y.name === name)) { const n = await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${name} ». Quel nom pour celui-ci ?`, value: `${name} (2)`.slice(0, 80), okLabel: 'Importer'}); if (n === null) return; name = cleanName(n); if (!name) return; }
+                while (list.some(y => y.name === name)) { const n = await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${name} ». Quel nom pour celui-ci ?`, value: window.LCNDA_UI.freeName(name, list.map(y => y.name)), okLabel: 'Importer'}); if (n === null) return; name = cleanName(n); if (!name) return; }
                 list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.clean(data.donnees)});
-                if (op.save(list.slice(-60))) { draw(); toast(`Réglage « ${name} » importé : choisis-le puis « Appliquer ».`); }
+                if (op.save(list.slice(-60))) { draw(); toast(`Réglage « ${name} » importé : « Appliquer » pour l’utiliser.`); }
                 return;
             }
             if (data?.type !== op.type) return toast(op === setOps.layout ? 'Ce fichier n’est pas une disposition du montage.' : 'Ce fichier n’est pas un réglage de boutons.', 'error');
@@ -2220,7 +2222,23 @@
             add.forEach(x => { let name = x.name; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({...x, name}); n++; });
             if (data.current && typeof data.current === 'object') { let name = cleanName(data.name) || 'Importé'; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.clean(data.current)}); n++; }
             if (op.save(list.slice(-60))) { draw(); toast(`${A().plural(n, 'ensemble importé', 'ensembles importés')} : choisis-en un puis « Appliquer ».`); }
-        }, {signal: ac.signal});
+        };
+        // 💾 Réglages enregistrés (le cadre commun) : la disposition du montage, les boutons de l'éditeur choisi
+        mountSets = () => Object.entries(setOps).forEach(([key, op]) => {
+            const slot = ws.querySelector(`[data-presets-slot="${key}"]`); if (!slot) return;
+            const UI = window.LCNDA_UI, today = () => new Date().toLocaleDateString('fr-FR'), put = (list, at, it) => { if (at >= 0) list[at] = it; else list.push(it); return op.save(list.slice(-60)); };
+            const fr = UI.presetsFrame({id: `montage-${key}`, what: key === 'layout' ? 'cette disposition' : 'ces boutons', list: op.list, quietApply: true,
+                apply: async i => { const x = op.list()[i]; if (!x || !await A().confirmBox('', {title: `Remplacer les réglages actuels par l’ensemble « ${x.name} » ?`, okLabel: 'Remplacer'})) return false; op.apply(x.v); draw(); toast(`Ensemble « ${x.name} » appliqué.`); return false; },
+                save: name => { const list = op.list(); name = cleanName(name); return put(list, list.findIndex(x => x.name === name), {name, date: today(), v: op.now()}); },
+                replace: i => { const list = op.list(); return put(list, i, {...list[i], date: today(), v: op.now()}); },
+                rename: (i, name) => { const list = op.list(); return put(list, i, {...list[i], name: cleanName(name) || list[i].name}); },
+                duplicate: i => { const list = op.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, date: today()}); if (!op.save(list.slice(-60))) return false; toast(`Copie « ${name} » créée.`); },
+                exportOne: i => { const x = op.list()[i]; if (x) { downloadJson(`lcnda-reglage-${op.outil()}-${slugOf(x.name)}.json`, {lcnda: 'reglage', outil: op.outil(), nom: x.name, version: 1, donnees: x.v}); toast('Fichier prêt : il s’importe dans Maintenance → Montage, retouche, mise en page et son (« ⤒ Importer »).'); } return false; },
+                remove: i => { const list = op.list(), x = list[i]; A().undoLocalChange(`Ensemble « ${x.name} » supprimé`, [key === 'layout' ? LAYOUT_SETS : TB_SETS], () => { list.splice(i, 1); op.save(list); }, () => { if (fr.isConnected) fr.refresh(); }); },
+                importOne: async () => { await importSet(op); return false; }});
+            slot.replaceWith(fr);
+        });
+        mountSets();
         ws.addEventListener('click', async e => {
             const mv = e.target.closest('[data-blk-up],[data-blk-down],[data-blk-side]');
             if (mv) { const blk = mv.closest('[data-mtp-blk]'), lay = {left: [...ws.querySelectorAll('[data-col="left"] > [data-mtp-blk]')].map(b => b.dataset.mtpBlk), right: [...ws.querySelectorAll('[data-col="right"] > [data-mtp-blk]')].map(b => b.dataset.mtpBlk)};
@@ -2232,16 +2250,6 @@
             const li = e.target.closest('li');
             if (e.target.closest('[data-up]') && li?.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
             if (e.target.closest('[data-down]') && li?.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
-            const bar = e.target.closest('[data-set]');
-            if (bar) {
-                const op = setOps[bar.dataset.set], pick = () => op.list()[Number(bar.querySelector('[data-set-pick]')?.value)];
-                if (e.target.closest('[data-set-save]')) { const name = cleanName((await window.LCNDA_APP.askText({message: bar.dataset.set === 'layout' ? 'Nom de cette disposition (ex. Grand écran) :' : 'Nom de ces boutons (ex. L’essentiel) :'})) || ''); if (!name) return; const list = op.list().filter(x => x.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.now()}); if (op.save(list)) { draw(); toast(`Ensemble « ${name} » enregistré.`); } return; }
-                if (e.target.closest('[data-set-apply]')) { const x = pick(); if (!x || !await A().confirmBox('', {title: `Remplacer les réglages actuels par l’ensemble « ${x.name} » ?`, okLabel: 'Remplacer'})) return; op.apply(x.v); draw(); toast(`Ensemble « ${x.name} » appliqué.`); return; }
-                if (e.target.closest('[data-set-del]')) { const x = pick(); if (!x || !await A().confirmBox('', {title: `Supprimer l’ensemble « ${x.name} » ?`, okLabel: 'Supprimer l’ensemble'})) return; op.save(op.list().filter(y => y !== x && y.name !== x.name)); draw(); return; }
-                if (e.target.closest('[data-set-exportone]')) { const x = pick(); if (!x) return; downloadJson(`lcnda-reglage-${op.outil()}-${slugOf(x.name)}.json`, {lcnda: 'reglage', outil: op.outil(), nom: x.name, version: 1, donnees: x.v}); toast(`Fichier prêt : il s’importe dans Maintenance → Montage, retouche, mise en page et son (« ⤒ Importer un réglage »).`); return; }
-                if (e.target.closest('[data-set-export]')) { const f = typeof op.file === 'function' ? op.file() : op.file; downloadJson(`${f}-${new Date().toISOString().slice(0, 10)}.json`, {type: op.type, version: 1, editor: bar.dataset.set === 'toolbar' ? which : undefined, name: bar.dataset.set === 'layout' ? 'Disposition exportée' : 'Boutons exportés', current: op.now(), sets: op.list()}); return; }
-                return;
-            }
             if (e.target.closest('[data-mtp-colreset]')) { MT_COLORS.forEach(([k, , d]) => { const el = ws.querySelector(`[data-mtp="${k}"]`); if (el) { el.value = d; el.dispatchEvent(new Event('input', {bubbles: true})); } }); toast('Couleurs de départ remises (n’oublie pas « Enregistrer »).'); return; }
             if (e.target.closest('[data-mtp-reset]')) { const all = lsJson('genealogie-toolbars', {}); delete all[which]; writeJson('genealogie-toolbars', all); toast('Boutons remis comme au départ.'); draw(); }
             if (e.target.closest('[data-mtp-save]')) {
