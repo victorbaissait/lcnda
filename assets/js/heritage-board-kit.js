@@ -552,8 +552,10 @@
                     <section class="h-bp-sec"><h4>Réglages d’une légende de trait</h4><p class="muted">Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs.</p>${orderList('legend', LEGEND, p.legendOrder, p.legendHidden)}</section></div>`,
             }[tab]();
             ws.innerHTML = `<section class="page h-bp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Réglages des tableaux</h2><p>Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus.</p></div>
-                <div class="page-actions"><span class="h-bp-sets"><strong>💾 Réglages enregistrés</strong><select data-bp-set aria-label="Réglages enregistrés"><option value="">— choisir —</option>${sets().map((x, n) => `<option value="${n}">${esc(x.name)}</option>`).join('')}</select><button type="button" class="button small secondary" data-bp-setapply title="Reprendre ces réglages">Appliquer</button><button type="button" class="button small secondary danger" data-bp-setdel title="Supprimer ces réglages enregistrés">🗑</button><button type="button" class="button small secondary" data-bp-setexport title="Enregistrer ces réglages dans un fichier, pour les garder ou les donner">⤓ Exporter</button><button type="button" class="button small secondary" data-bp-setsave title="Garder tous les réglages actuels sous un nom">💾 Enregistrer sous un nom…</button><button type="button" class="button small secondary" data-bp-setimport title="Reprendre des réglages exportés (fichier .json)">⤒ Importer un réglage</button></span><button type="button" class="button secondary" data-bp-reset>↺ Remettre comme au départ</button><button type="button" class="button" data-bp-save>Enregistrer</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-bp-reset>↺ Remettre comme au départ</button><button type="button" class="button" data-bp-save>Enregistrer</button></div></header>
+                <div data-presets-slot="tableaux"></div>
                 <nav class="h-bp-tabs">${TABS.map(([k, l]) => `<button type="button" class="${tab === k ? 'is-active' : ''}" data-bp-tab="${k}">${l}</button>`).join('')}</nav><div class="h-bp-body">${body}</div></section>`;
+            ws.querySelector('[data-presets-slot]')?.replaceWith(frame); frame.refresh();
             bindOrder(ws);
         };
         // ce qui est à l'écran → p (avant de changer d'onglet ou d'enregistrer)
@@ -574,57 +576,28 @@
             if (tab === 'menus') for (const [id, ok, hk] of [['tools', 'toolsOrder', 'toolsHidden'], ['header', 'headerOrder', 'headerHidden'], ['inspector', 'inspectorOrder', 'inspectorHidden'], ['add', 'addOrder', 'addHidden'], ['legend', 'legendOrder', 'legendHidden']]) { const o = readOrder(q(`[data-bp-order="${id}"]`)); p[ok] = o.order; p[hk] = o.hidden.filter(k => !(id === 'tools' && k === 'select')); }
             p = clean(p);
         };
+        const putSet = (name, pr, at = -1) => { const l = sets(), i = l.findIndex(x => x.name === name), it = {name, prefs: pr, saved_at: new Date().toISOString()}; if (i >= 0) l[i] = it; else if (at >= 0) l.splice(at, 0, it); else l.push(it); return saveSets(l); };
+        const frame = window.LCNDA_UI.presetsFrame({id: 'tableaux', what: 'tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus)', quietApply: true,
+            list: () => sets().map(x => ({name: x.name, date: x.saved_at ? new Date(x.saved_at).toLocaleDateString('fr-FR') : ''})),
+            apply: async i => { const it = sets()[i]; if (!await A().confirmBox(`Reprendre les réglages « ${it.name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder).`, {title: 'Reprendre ces réglages', okLabel: 'Reprendre les réglages'})) return false; p = clean(it.prefs); savePrefs(p); draw(); toast(`Réglages « ${it.name} » appliqués.`); return false; },
+            save: name => { collect(); if (!putSet(name, clean(p))) return false; savePrefs(p); toast(`Réglages enregistrés sous « ${name} » (et utilisés dès maintenant).`); },
+            replace: i => { collect(); if (!putSet(sets()[i].name, clean(p))) return false; savePrefs(p); },
+            rename: (i, name) => { const l = sets(); l[i].name = name; return saveSets(l); },
+            duplicate: i => { const l = sets(), it = l[i], nm = window.LCNDA_UI.freeName(it.name, l.map(x => x.name)); if (putSet(nm, JSON.parse(JSON.stringify(it.prefs)), i + 1)) toast(`Copie « ${nm} » créée.`); },
+            exportOne: i => { const it = sets()[i]; A().exportSettingFile?.('tableaux', it.name, {prefs: clean(it.prefs)}); return false; },
+            // H7 : supprimés tout de suite, « ↶ Annuler » les remet (gardés sur cet ordinateur)
+            remove: i => { const l = sets(), it = l[i], tk = token; A().undoLocalChange(`Réglages « ${it.name} » supprimés`, [SETS_KEY], () => { l.splice(i, 1); saveSets(l); }, () => { if (tk === st.workspaceToken && frame.isConnected) frame.refresh(); }); },
+            importOne: async () => {
+                const got = await A().importSettingFile?.('tableaux', {names: sets().map(x => x.name), check: d => d.prefs && typeof d.prefs === 'object' && !Array.isArray(d.prefs)});
+                if (!got) return false;
+                const l = sets(); l.push({name: got.nom, prefs: clean(got.donnees.prefs), saved_at: new Date().toISOString()});
+                if (!saveSets(l)) return false;
+                toast(`Réglages « ${got.nom} » importés : « Appliquer » pour t’en servir.`); }});
         draw();
         ws.addEventListener('click', async e => {
             if (token !== st.workspaceToken) return;
             const t = e.target.closest('[data-bp-tab]'); if (t) { collect(); tab = t.dataset.bpTab; draw(); return; }
             if (e.target.closest('[data-bp-save]')) { collect(); savePrefs(p); toast('Réglages des tableaux enregistrés : ils servent dès le prochain tableau ouvert.'); return; }
-            if (e.target.closest('[data-bp-setsave]')) {
-                collect();
-                const l0 = sets(), cur = l0[Number(ws.querySelector('[data-bp-set]').value)]?.name || '';
-                ext.openDialog({eyebrow: 'RÉGLAGES DES TABLEAUX', title: 'Enregistrer sous un nom', submitLabel: 'Enregistrer',
-                    body: `<div class="form-grid"><label class="span-2">Nom de ces réglages<input name="name" maxlength="60" required value="${esc(cur || 'Mes réglages')}" list="h-bp-setnames"><datalist id="h-bp-setnames">${l0.map(x => `<option value="${esc(x.name)}">`).join('')}</datalist></label>
-                        <p class="muted span-2">Tout ce qui est réglé ici est gardé : couleurs et palettes, pointes, formes (et tes formes), polices, tailles et arrondi, tableur, pinceaux, ordre des menus. Un nom déjà pris remplace ses réglages.</p></div>`,
-                    onSubmit: async form => {
-                        const name = form.elements.name.value.trim().slice(0, 60); if (!name) return false;
-                        const l = sets(), at = l.findIndex(x => x.name === name);
-                        if (at >= 0 && !await A().confirmBox(`Remplacer les réglages « ${name} » déjà enregistrés ?`, {title: 'Réglages déjà enregistrés', okLabel: 'Remplacer'})) return false;
-                        const item = {name, prefs: clean(p), saved_at: new Date().toISOString()};
-                        if (at >= 0) l[at] = item; else l.push(item);
-                        if (!saveSets(l)) return false;
-                        savePrefs(p); draw(); ws.querySelector('[data-bp-set]').value = String(at >= 0 ? at : l.length - 1); toast(`Réglages enregistrés sous « ${name} » (et utilisés dès maintenant).`);
-                    }});
-                return;
-            }
-            // ⤓ Exporter / ⤒ Importer un réglage (fichier lcnda-reglage-tableaux-<nom>.json)
-            if (e.target.closest('[data-bp-setexport]')) {
-                const it = sets()[Number(ws.querySelector('[data-bp-set]').value)];
-                if (ws.querySelector('[data-bp-set]').value === '' || !it) { toast('Choisis d’abord, dans la liste, les réglages à exporter.', 'error'); return; }
-                A().exportSettingFile?.('tableaux', it.name, {prefs: clean(it.prefs)}); return;
-            }
-            if (e.target.closest('[data-bp-setimport]')) {
-                const got = await A().importSettingFile?.('tableaux', {names: sets().map(x => x.name), check: d => d.prefs && typeof d.prefs === 'object' && !Array.isArray(d.prefs)});
-                if (!got) return;
-                const l = sets(); l.push({name: got.nom, prefs: clean(got.donnees.prefs), saved_at: new Date().toISOString()});
-                if (!saveSets(l)) return;
-                collect(); draw(); ws.querySelector('[data-bp-set]').value = String(l.length - 1);
-                toast(`Réglages « ${got.nom} » importés : « Appliquer » pour t’en servir.`); return;
-            }
-            if (e.target.closest('[data-bp-setapply]')) {
-                const n = ws.querySelector('[data-bp-set]').value, it = sets()[Number(n)];
-                if (n === '' || !it) { toast('Choisis d’abord des réglages enregistrés.', 'error'); return; }
-                if (!await A().confirmBox(`Reprendre les réglages « ${it.name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder).`, {title: 'Reprendre ces réglages', okLabel: 'Reprendre les réglages'})) return;
-                p = clean(it.prefs); savePrefs(p); draw(); toast(`Réglages « ${it.name} » appliqués.`);
-                return;
-            }
-            if (e.target.closest('[data-bp-setdel]')) {
-                const n = ws.querySelector('[data-bp-set]').value, l = sets(), it = l[Number(n)];
-                if (n === '' || !it) { toast('Choisis d’abord les réglages à supprimer.', 'error'); return; }
-                // H7 : supprimés tout de suite, « ↶ Annuler » les remet (gardés sur cet ordinateur)
-                const tk = token, again = () => { if (tk === st.workspaceToken) { collect(); draw(); } };
-                collect(); A().undoLocalChange(`Réglages « ${it.name} » supprimés`, [SETS_KEY], () => { l.splice(Number(n), 1); saveSets(l); }, again); draw();
-                return;
-            }
             if (e.target.closest('[data-bp-reset]')) { if (!await A().confirmBox('Revenir aux réglages d’origine des tableaux ? Tes palettes, formes, listes de polices et pinceaux à toi seront retirés.', {title: 'Réglages d’origine', okLabel: 'Revenir aux réglages d’origine', danger: true})) return; p = DEFAULTS(); savePrefs(p); draw(); toast('Réglages d’origine remis.'); return; }
             // couleurs
             const box = e.target.closest('[data-bp-colors]');

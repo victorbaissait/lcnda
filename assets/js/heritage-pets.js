@@ -437,9 +437,8 @@
             const own = scope !== '*' && !!cfgOf(scope), c = cleanCfg(cfgOf(scope) || pr.cfg['*'], pr);
             const spRow = k => { const mine = pr.species.find(x => x.k === k); return `<div class="h-pet-lrow" data-sp="${esc(k)}"><input type="checkbox" data-sp-show ${pr.speciesHidden.includes(k) ? '' : 'checked'} title="Proposer cette espèce">${mine ? `<input class="h-pp-icon" data-sp-icon value="${esc(mine.icon)}" readonly title="Choisir une icône" aria-label="Icône"><input data-sp-label value="${esc(mine.label)}" maxlength="60">` : `<span>${esc((SPECIES_ICON0[k] || '🐾') + ' ' + SPECIES0[k])}</span>`}<button type="button" class="h-bt" data-sp-up title="Monter">↑</button><button type="button" class="h-bt" data-sp-down title="Descendre">↓</button>${mine ? '<button type="button" class="h-bt" data-sp-del title="Supprimer cette espèce">🗑</button>' : ''}</div>`; };
             ws.innerHTML = `<section class="page h-pp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Réglages des animaux</h2><p>Les espèces proposées (et les tiennes), l’ordre des parties du formulaire d’un animal, et les champs montrés : pour tous les animaux, ou à part pour une espèce (ex. l’UELN seulement pour les chevaux). Un champ caché garde ce qui y était écrit.</p></div>
-                <div class="page-actions"><button type="button" class="button" data-pp-save>Enregistrer</button></div></header>
-                <div class="h-pp-presets maintenance-panel"><strong>💾 Réglages enregistrés</strong>${presets().length ? `<select data-ps-pick aria-label="Réglages enregistrés">${presets().map((x, i) => `<option value="${i}">${esc(x.name)}${x.date ? ' — ' + esc(x.date) : ''}</option>`).join('')}</select><button type="button" class="button small" data-ps-apply>Appliquer</button><button type="button" class="button small secondary" data-ps-one-export title="Enregistrer cet ensemble dans un fichier, pour le garder ou le donner">⤓ Exporter</button><button type="button" class="button small secondary" data-ps-del title="Supprimer ces réglages enregistrés">🗑</button>` : '<span class="muted">Aucun pour l’instant.</span>'}
-                    <button type="button" class="button small secondary" data-ps-save title="Garder les réglages actuels sous un nom">💾 Enregistrer sous un nom…</button><button type="button" class="button small secondary" data-ps-one-import title="Reprendre un ensemble exporté (fichier .json)">⤒ Importer un réglage</button><span class="h-pp-sep"></span><button type="button" class="button small secondary" data-ps-export title="Un fichier .json avec les réglages (espèces, catégories, champs, formulaire) et tous les ensembles">⤓ Tout exporter</button><label class="button small secondary" title="Reprendre un fichier « Tout exporter »">⤒ Tout importer<input type="file" accept=".json,application/json" data-ps-import hidden></label></div>
+                <div class="page-actions"><button type="button" class="button secondary" data-pp-allexport title="Un fichier .json avec les réglages (espèces, catégories, champs, formulaire) et tous les réglages enregistrés">⤓ Tout exporter</button><label class="button secondary" title="Reprendre un fichier « Tout exporter »">⤒ Tout importer<input type="file" accept=".json,application/json" data-pp-allimport hidden></label><button type="button" class="button" data-pp-save>Enregistrer</button></div></header>
+                <div data-presets-slot="animaux"></div>
                 <div class="h-pp-cols"><section class="maintenance-panel"><h3>🐾 Espèces</h3><p class="muted">Coche celles qu’on propose ; range-les avec ↑ ↓.</p><div data-pp-species>${pr.speciesOrder.map(spRow).join('')}</div>
                     <div class="h-pp-add"><input class="h-pp-icon" data-sp-newicon value="🐾" readonly title="Choisir une icône" aria-label="Icône"><input data-sp-newlabel placeholder="Nouvelle espèce (ex. Furet, Alpaga)" maxlength="60"><button type="button" class="button small" data-sp-add>＋ Ajouter</button></div></section>
                 <section class="maintenance-panel"><h3>📝 Formulaire « Nouvel animal »</h3>
@@ -450,6 +449,7 @@
                         <div class="h-pp-fields" data-fields>${c.forder[k].map(fk => { const cf = pr.customFields.find(x => x.k === fk), lab = cf ? '' : (FIELDS.find(x => x[1] === fk) || [])[2]; return `<div class="h-pp-frow" data-field-row="${fk}"><input type="checkbox" data-field="${fk}" ${LOCKED.includes(fk) ? 'checked disabled title="Toujours montré"' : c.fields.includes(fk) ? '' : 'checked'} aria-label="Montrer">${cf ? `<input data-cf-label value="${esc(cf.label)}" maxlength="80" aria-label="Nom du champ"><small class="muted">${esc(FTYPES.find(t => t[0] === cf.type)[1])}</small>` : `<span>${esc(lab)}</span>`}<button type="button" class="h-bt" data-f-up title="Monter">↑</button><button type="button" class="h-bt" data-f-down title="Descendre">↓</button>${cf ? '<button type="button" class="h-bt" data-cf-del title="Supprimer ce champ">🗑</button>' : ''}</div>`; }).join('')}</div>
                         <div class="h-pp-addf"><input data-nf-label placeholder="Nouveau champ (ex. Groupe sanguin)" maxlength="80"><select data-nf-type>${FTYPES.map(([t, l]) => `<option value="${t}">${esc(l)}</option>`).join('')}</select><input data-nf-opts placeholder="choix séparés par ;" hidden maxlength="600"><button type="button" class="button small secondary" data-nf-add>＋ Champ</button></div></div>`; }).join('')}
                     <div class="h-pp-add"><input class="h-pp-icon" data-cs-newicon value="🗂️" readonly title="Choisir une icône" aria-label="Icône"><input data-cs-newlabel placeholder="Nouvelle catégorie (ex. Génétique, Dressage)" maxlength="60"><button type="button" class="button small" data-cs-add>＋ Catégorie</button></div></div></section></div></section>`;
+            ws.querySelector('[data-presets-slot]')?.replaceWith(frame); frame.refresh();
         };
         // ce qui est à l'écran → pr
         const collect = () => {
@@ -464,28 +464,32 @@
             pr.cfg[scope] = cleanCfg({order: secs.map(x => x.dataset.sec), hidden: secs.filter(x => !x.querySelector('[data-sec-show]').checked).map(x => x.dataset.sec), fields: [...box.querySelectorAll('[data-field]')].filter(x => !x.checked).map(x => x.dataset.field),
                 forder: Object.fromEntries(secs.map(x => [x.dataset.sec, [...x.querySelectorAll('[data-field-row]')].map(f => f.dataset.fieldRow)]))}, pr);
         };
+        const today = () => new Date().toLocaleDateString('fr-FR');
+        const putPreset = (name, prefs, at = -1) => { const l = presets(), i = l.findIndex(x => x.name === name), it = {name, date: today(), prefs}; if (i >= 0) l[i] = it; else if (at >= 0) l.splice(at, 0, it); else l.push(it); savePresets(l); };
+        const frame = window.LCNDA_UI.presetsFrame({id: 'animaux', what: 'les espèces, les catégories et les champs du formulaire', list: presets, quietApply: true,
+            apply: async i => { const x = presets()[i]; if (!await A().confirmBox(`Remplacer les réglages actuels par « ${x.name} » ?`, {title: 'Appliquer ces réglages', okLabel: 'Remplacer les réglages'})) return false; savePetPrefs(x.prefs); pr = petPrefs(); savePetPrefs(pr); scope = '*'; draw(); toast(`Réglages « ${x.name} » appliqués.`); return false; },
+            save: name => { collect(); putPreset(name, JSON.parse(JSON.stringify(pr))); },
+            replace: i => { collect(); putPreset(presets()[i].name, JSON.parse(JSON.stringify(pr))); },
+            rename: (i, name) => { const l = presets(); l[i].name = name; savePresets(l); },
+            duplicate: i => { const l = presets(), x = l[i], nm = window.LCNDA_UI.freeName(x.name, l.map(y => y.name)); putPreset(nm, JSON.parse(JSON.stringify(x.prefs)), i + 1); toast(`Copie « ${nm} » créée.`); },
+            exportOne: i => { const x = presets()[i]; A().exportSettingFile?.('animaux', x.name, {prefs: x.prefs}); return false; },
+            remove: i => { const l = presets(), x = l[i]; A().undoLocalChange(`Réglage « ${x.name} » supprimé`, [PRESETS_KEY], () => { l.splice(i, 1); savePresets(l); }, () => { if (frame.isConnected) frame.refresh(); }); },
+            importOne: async () => {
+                const got = await A().importSettingFile?.('animaux', {names: presets().map(x => x.name), check: d => d.prefs && typeof d.prefs === 'object' && !Array.isArray(d.prefs)});
+                if (!got) return false;
+                collect(); // le contenu passe par le même nettoyage que les réglages (petPrefs), sans toucher aux réglages actuels
+                let clean = null; const before = localStorage.getItem(PREFS_KEY);
+                try { localStorage.setItem(PREFS_KEY, JSON.stringify(got.donnees.prefs)); clean = petPrefs(); } catch (_) {} finally { try { if (before === null) localStorage.removeItem(PREFS_KEY); else localStorage.setItem(PREFS_KEY, before); } catch (_) {} }
+                if (!clean) { toast('Ce réglage n’a pas pu être lu.', 'error'); return false; }
+                const l = presets(); l.push({name: got.nom.slice(0, 60), date: today(), prefs: clean}); savePresets(l);
+                toast(`Réglage « ${got.nom} » importé : « Appliquer » pour t’en servir.`);
+            }});
         draw();
         const download = (name, obj) => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {type: 'application/json'})); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
         ws.addEventListener('click', async e => {
             // une icône : on clique et on choisit (les animaux d'abord pour une espèce)
             const ic = e.target.closest('.h-pp-icon'); if (ic && ext.pickEmoji) { ext.pickEmoji(ic, null, {first: ic.matches('[data-sp-icon],[data-sp-newicon]') ? 'Animaux' : ''}); return; }
-            if (e.target.closest('[data-ps-save]')) { collect(); const name = ((await window.LCNDA_APP.askText({message: 'Nom de cet ensemble de réglages (ex. Élevage de chevaux) :'})) || '').trim().slice(0, 80); if (!name) return; const list = presets().filter(x => x.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), prefs: JSON.parse(JSON.stringify(pr))}); savePresets(list); draw(); toast(`Ensemble « ${name} » enregistré.`); return; }
-            if (e.target.closest('[data-ps-apply]')) { const x = presets()[Number(ws.querySelector('[data-ps-pick]').value)]; if (!x || !await A().confirmBox(`Remplacer les réglages actuels par l’ensemble « ${x.name} » ?`, {title: 'Appliquer l’ensemble', okLabel: 'Remplacer les réglages'})) return; savePetPrefs(x.prefs); pr = petPrefs(); savePetPrefs(pr); scope = '*'; draw(); toast(`Ensemble « ${x.name} » appliqué.`); return; }
-            // un ensemble seul : ⤓ Exporter / ⤒ Importer un réglage (fichier lcnda-reglage-animaux-<nom>.json)
-            if (e.target.closest('[data-ps-one-export]')) { const x = presets()[Number(ws.querySelector('[data-ps-pick]').value)]; if (x) A().exportSettingFile?.('animaux', x.name, {prefs: x.prefs}); return; }
-            if (e.target.closest('[data-ps-one-import]')) {
-                const got = await A().importSettingFile?.('animaux', {names: presets().map(x => x.name), check: d => d.prefs && typeof d.prefs === 'object' && !Array.isArray(d.prefs)});
-                if (!got) return;
-                collect(); // le contenu passe par le même nettoyage que les réglages (petPrefs), sans toucher aux réglages actuels
-                let clean = null; const before = localStorage.getItem(PREFS_KEY);
-                try { localStorage.setItem(PREFS_KEY, JSON.stringify(got.donnees.prefs)); clean = petPrefs(); } catch (_) {} finally { try { if (before === null) localStorage.removeItem(PREFS_KEY); else localStorage.setItem(PREFS_KEY, before); } catch (_) {} }
-                if (!clean) { toast('Ce réglage n’a pas pu être lu.', 'error'); return; }
-                const list = presets(); list.push({name: got.nom.slice(0, 80), date: new Date().toLocaleDateString('fr-FR'), prefs: clean}); savePresets(list); draw();
-                const pick = ws.querySelector('[data-ps-pick]'); if (pick) pick.value = String(presets().length - 1);
-                toast(`Ensemble « ${got.nom} » importé : « Appliquer » pour t’en servir.`); return;
-            }
-            if (e.target.closest('[data-ps-del]')) { const i = Number(ws.querySelector('[data-ps-pick]').value), x = presets()[i]; if (!x || !await A().confirmBox(`Supprimer l’ensemble « ${x.name} » ?`, {title: 'Supprimer l’ensemble', okLabel: 'Supprimer l’ensemble'})) return; savePresets(presets().filter((_, j) => j !== i)); draw(); return; }
-            if (e.target.closest('[data-ps-export]')) { collect(); download(`reglages-animaux-${new Date().toISOString().slice(0, 10)}.json`, {type: 'lcnda-pet-prefs', version: 1, prefs: pr, presets: presets()}); return; }
+            if (e.target.closest('[data-pp-allexport]')) { collect(); download(`reglages-animaux-${new Date().toISOString().slice(0, 10)}.json`, {type: 'lcnda-pet-prefs', version: 1, prefs: pr, presets: presets()}); return; }
             const mv = (sel, up) => { const r = e.target.closest(sel); if (!r) return false; if (up && r.previousElementSibling) r.parentNode.insertBefore(r, r.previousElementSibling); if (!up && r.nextElementSibling) r.parentNode.insertBefore(r.nextElementSibling, r); return true; };
             if (e.target.closest('[data-sp-up]')) { mv('[data-sp]', true); return; } if (e.target.closest('[data-sp-down]')) { mv('[data-sp]', false); return; }
             if (e.target.closest('[data-sec-up]')) { mv('[data-sec]', true); return; } if (e.target.closest('[data-sec-down]')) { mv('[data-sec]', false); return; }
@@ -501,7 +505,7 @@
             if (e.target.closest('[data-pp-save]')) { collect(); savePetPrefs(pr); pr = petPrefs(); draw(); toast('Réglages des animaux enregistrés.'); }
         }, {signal});
         ws.addEventListener('change', async e => {
-            if (e.target.matches('[data-ps-import]')) {
+            if (e.target.matches('[data-pp-allimport]')) {
                 const file = e.target.files?.[0]; e.target.value = ''; if (!file) return;
                 let v; try { if (file.size > 2e6) throw new Error(); v = JSON.parse(await file.text()); } catch (_) { v = null; }
                 if (v?.type !== 'lcnda-pet-prefs' || !v.prefs || typeof v.prefs !== 'object') { toast('Ce fichier n’est pas un fichier de réglages des animaux.', 'error'); return; }
