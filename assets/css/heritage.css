@@ -4060,6 +4060,21 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-abc-trout output{font-size:18px}
 :root[data-theme="dark"] .h-abc-legend{color:#c7c7c7}
 @media (max-width:520px){.h-abc-grid{grid-template-columns:repeat(auto-fill,minmax(50px,1fr))}.h-abc-tabs > button{padding:7px 8px;font-size:12.5px}.h-abc-key{min-width:36px;height:36px;font-size:18px}}
+/* 📅 Calendrier / mesures : cadres de heritage-calendar-more.js (mêmes cadres que « Unités anciennes ») */
+.h-cm-panel > p:first-of-type{margin-top:0}
+.h-cm-out{font-weight:400}
+.h-cm-result{display:flex;flex-direction:column;gap:.2rem}
+.h-cm-result strong{font-weight:900}
+.h-cm-result small{color:var(--muted)}
+.h-cm-sub{margin-top:16px}
+.h-cm-table{margin-top:12px;overflow-x:auto}
+.h-cm-table .data-table td{padding:5px 8px;vertical-align:top}
+.h-cm-table .data-table td:last-child{white-space:nowrap}
+.h-cm-table tr.is-easter td{font-weight:900}
+.h-cm-details{margin-top:12px}
+.h-cm-note{font-size:.85em;margin-bottom:0}
+.h-cm-list{margin:.3rem 0 0;padding-left:1.1rem;font-size:.92em}
+.h-cm-list b{font-weight:800}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .h-poilu-event.is-blesse>strong,:root[data-theme="dark"] .h-poilu-event.is-tue>strong,:root[data-theme="dark"] .h-poilu-event.is-gaze>strong{color:#f49aa3}
 :root[data-theme="dark"] .h-calib-image{background:#292929}

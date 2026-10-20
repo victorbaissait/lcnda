@@ -117,7 +117,7 @@
         ['lundi de la pentecote', 50, 'lundi de Pentecôte'], ['lundi de pentecote', 50, 'lundi de Pentecôte'], ['lundi de paques', 1, 'lundi de Pâques'], ['mardi de paques', 2, 'mardi de Pâques'],
         ['dimanche des rameaux', -7, 'dimanche des Rameaux'], ['rameaux', -7, 'Rameaux'], ['jeudi saint', -3, 'jeudi saint'], ['vendredi saint', -2, 'vendredi saint'], ['samedi saint', -1, 'samedi saint'],
         ['mercredi des cendres', -46, 'mercredi des Cendres'], ['les cendres', -46, 'mercredi des Cendres'], ['mardi gras', -47, 'mardi gras'], ['septuagesime', -63, 'dimanche de la Septuagésime'], ['sexagesime', -56, 'dimanche de la Sexagésime'], ['quinquagesime', -49, 'dimanche de la Quinquagésime'],
-        ['dimanche de la passion', -14, 'dimanche de la Passion'], ['quasimodo', 7, 'dimanche de Quasimodo'], ['ascension', 39, 'Ascension'], ['rogations', 35, 'lundi des Rogations'],
+        ['dimanche de la passion', -14, 'dimanche de la Passion'], ['quasimodo', 7, 'dimanche de Quasimodo'], ['ascension', 39, 'Ascension'], ['rogations', 36, 'lundi des Rogations'],
         ['dimanche de la trinite', 56, 'dimanche de la Trinité'], ['trinite', 56, 'dimanche de la Trinité'], ['fete-dieu', 60, 'Fête-Dieu'], ['fete dieu', 60, 'Fête-Dieu'], ['saint-sacrement', 60, 'Fête-Dieu'], ['corpus christi', 60, 'Fête-Dieu'], ['sacre-coeur', 68, 'Sacré-Cœur'],
         ['pentecote', 49, 'Pentecôte'], ['paques', 0, 'Pâques'], ['pasques', 0, 'Pâques'],
     ];
@@ -149,11 +149,27 @@
         }
         if (jdn === null) return null;
         let shift = 0, how = '';
-        if (/surlendemain/.test(t)) { shift = 2; how = 'surlendemain de '; }
+        // « le lundi après la Saint-Martin », « le 2e dimanche après Pâques », « 3 jours avant Pâques », « huit jours après la Toussaint »
+        const wd = t.match(/(?:\b(premier|1er|second|deuxieme|2e|2eme|troisieme|3e|3eme|quatrieme|4e|4eme)\s+)?\b(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)\s+(?:d'\s*|qui\s+)?(avant|apres|suivant|suit|precedant|precede|devant)\b/);
+        const nd = t.match(/(?:^|\s)(\d{1,3}|une?|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze|quinze|vingt|trente|quarante)\s+(jours?|semaines?)\s+(avant|apres|devant|suivant)\b/);
+        const before = w => /avant|precedant|precede|devant/.test(w);
+        if (wd) {
+            const nth = ({premier: 1, '1er': 1, second: 2, deuxieme: 2, '2e': 2, '2eme': 2, troisieme: 3, '3e': 3, '3eme': 3, quatrieme: 4, '4e': 4, '4eme': 4})[wd[1]] || 1;
+            const target = WEEKDAYS.indexOf(wd[2]), w = ((jdn % 7) + 7) % 7;
+            shift = before(wd[3]) ? -(((w - target + 7) % 7) || 7) - 7 * (nth - 1) : (((target - w + 7) % 7) || 7) + 7 * (nth - 1);
+            how = `${nth > 1 ? (nth === 2 ? '2e' : nth + 'e') + ' ' : ''}${wd[2]} ${before(wd[3]) ? 'avant' : 'après'} `;
+        } else if (nd) {
+            const words = {un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10, onze: 11, douze: 12, quinze: 15, vingt: 20, trente: 30, quarante: 40};
+            const n = Number(nd[1]) || words[nd[1]] || 0, days = n * (/semaine/.test(nd[2]) ? 7 : 1);
+            shift = before(nd[3]) ? -days : days;
+            how = `${n} ${/semaine/.test(nd[2]) ? (n > 1 ? 'semaines' : 'semaine') : (n > 1 ? 'jours' : 'jour')} ${before(nd[3]) ? 'avant' : 'après'} `;
+        }
+        else if (/surlendemain/.test(t)) { shift = 2; how = 'surlendemain de '; }
         else if (/lendemain/.test(t)) { shift = 1; how = 'lendemain de '; }
         else if (/veille|vigile/.test(t)) { shift = -1; how = 'veille de '; }
         else if (/octave/.test(t)) { shift = 7; how = 'octave de '; }
         jdn += shift;
+        if (how && /^Sainte?-/.test(label)) how += 'la ';
         const julian = usesJulian(year);
         const civil = julian ? julianFromJdn(jdn) : gregorianFromJdn(jdn);
         const greg = gregorianFromJdn(jdn);
@@ -167,24 +183,15 @@
         return `<p class="h-feast-result"><strong>${esc(r.weekday)} ${esc(r.date)}</strong> — ${esc(r.label)}${r.julian ? ` <small>(calendrier julien, en usage en France avant décembre 1582 ; soit le ${esc(r.gregorian)} dans le calendrier grégorien)</small>` : ''}<br><small class="muted">Pâques ${esc(r.date.slice(-4))} : ${esc(r.easter)}.${original ? ` Écrit : « ${esc(original)} ».` : ''}</small></p>`;
     }
     ext.calendarPanels.push(() => `<section class="maintenance-panel" id="h-feast-panel"><h3>Fêtes religieuses → date exacte</h3>
-        <p>Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lundi de Pâques », « le lendemain de la Saint-Martin ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite).</p>
+        <p>Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lendemain de la Saint-Martin », « le lundi après la Saint-Martin 1650 » ou « trois jours avant Pâques 1702 ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite).</p>
         <form class="form-grid" style="padding:0" id="h-feast-form"><label class="span-2">Mention de l’acte<input name="text" placeholder="le jour de la Pentecôte 1754" autocomplete="off"></label></form><div id="h-feast-out"></div>
-        <details><summary>Dates de Pâques et des fêtes mobiles d’une année</summary><label class="h-inline">Année <input type="number" id="h-easter-year" min="400" max="2100" value="1754" class="h-narrow"></label><div id="h-easter-table"></div></details></section>`);
+        <p class="muted">Toutes les fêtes mobiles d’une année (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…) : cadre « Saint du jour et fêtes mobiles ».</p></section>`);
     ext.afterCalendar.push(() => {
         const form = document.getElementById('h-feast-form');
         if (!form) return;
         const out = document.getElementById('h-feast-out');
         form.addEventListener('input', () => { out.innerHTML = form.text.value.trim() ? feastResultHtml(feastDate(form.text.value)) : ''; });
         form.addEventListener('submit', e => e.preventDefault());
-        const yearInput = document.getElementById('h-easter-year'), table = document.getElementById('h-easter-table');
-        const draw = () => {
-            const y = Number(yearInput.value) || 0;
-            if (y < 400) { table.innerHTML = ''; return; }
-            const rows = [['Mardi gras', -47], ['Mercredi des Cendres', -46], ['Rameaux', -7], ['Vendredi saint', -2], ['Pâques', 0], ['Lundi de Pâques', 1], ['Quasimodo', 7], ['Ascension', 39], ['Pentecôte', 49], ['Trinité', 56], ['Fête-Dieu', 60]];
-            const e = easterJdn(y), conv = usesJulian(y) ? julianFromJdn : gregorianFromJdn;
-            table.innerHTML = `<table class="data-table"><tbody>${rows.map(([n, o]) => `<tr><td>${esc(n)}</td><td>${esc(WEEKDAYS[(((e + o) % 7) + 7) % 7])} ${esc(dateText(conv(e + o)))}</td></tr>`).join('')}</tbody></table>${usesJulian(y) ? '<p class="muted">Dates dans le calendrier julien.</p>' : ''}`;
-        };
-        yearInput.addEventListener('input', draw); draw();
     });
     // Fenêtre d'événement : si la date écrite est une fête, l'app propose la date exacte
     document.addEventListener('input', event => {
