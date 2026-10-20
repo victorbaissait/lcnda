@@ -4580,3 +4580,7 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-rt2 .h-rt-side>.h-rt-tabs .h-rt-tl{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11.5px;letter-spacing:-.1px}
 @container (max-width: 390px){.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-tl{display:none}.h-rt2 .h-rt-side>.h-rt-tabs .h-rt-ti{font-size:19px}.h-rt2 .h-rt-side>.h-rt-tabs>button{padding:8px 2px}}
 .h-rt2 .h-rt-side>.h-rt-sidetog{height:auto;min-height:26px}
+/* Retouche : objet dynamique (image placée) dans les calques */
+.h-rt-smart{flex-basis:100%;grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:12px;margin-top:4px}
+.h-rt-smartb{border:1px solid #9aa4b2;background:#f3f5f9;padding:1px 6px;font-weight:700;font-size:11.5px}
+:root[data-theme="dark"] .h-rt-smartb{background:#262a31;border-color:#4a515c}
