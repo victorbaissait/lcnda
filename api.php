@@ -379,6 +379,7 @@ try {
         'diagram_genea' => json_response(diagram_genea_data($pdo, $_GET)), // 📊 lib/diagram_genea.php
         'diagram_people' => json_response(diagram_people($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))),
         'diagram_numbers' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_chiffres.php'; json_response(diagram_numbers($pdo, $_GET)); })(), // 📊 diagrammes « Chiffres » (lib/diagram_chiffres.php)
+        'diagram_more' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_more.php'; json_response(diagram_more_data($pdo, $_GET)); })(), // 📊 arbre en frise, crises, fratrie, pyramide, accordéon, cousinages, matrice, patronymes, accord (lib/diagram_more.php)
         'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
         'person_names' => json_response(person_names($pdo)),
         'picker_search' => json_response(picker_search($pdo, $_GET)),

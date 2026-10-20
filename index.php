@@ -33,6 +33,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/heritage.css?v=209">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=1">
+    <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
     <link rel="stylesheet" href="assets/css/layout.css?v=13">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1181,7 +1182,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-kinds.js?v=5" defer></script>
 <script src="assets/js/heritage-graphs.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-chiffres.js?v=2" defer></script>
-<script src="assets/js/heritage-diagram-cartes.js?v=3" defer></script>
+<script src="assets/js/heritage-diagram-cartes.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-more.js?v=1" defer></script>
 <script src="assets/js/heritage-artist.js?v=13" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-panel.js?v=8" defer></script>
