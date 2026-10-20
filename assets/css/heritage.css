@@ -4539,3 +4539,13 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-rt-fgbg .h-rt-ccdef i:first-child{left:0;top:0;background:#000;z-index:1}.h-rt-fgbg .h-rt-ccdef i:last-child{left:4px;top:4px;background:#fff}
 .h-rt-fgbg.is-mask label{border-color:#2a7de1}
 :root[data-theme="dark"] .h-rt-fgbg label{border-color:#999;box-shadow:0 0 0 1px #222 inset}
+/* Calques : l'opacité (curseur + case du pourcentage) passe à la ligne au lieu de déborder ; les filtres d'un calque, réglables d'un clic */
+.h-rt-lmore .h-rt-lopac{flex:1 1 210px;min-width:0;max-width:100%;display:flex;gap:6px;align-items:center}
+.h-rt-lmore .h-rt-lopac input[type=range]{flex:1 1 auto;min-width:40px;width:auto}
+.h-rt-lmore .h-rt-lopac .ui-num{flex:none}
+.h-rt-tree li{min-width:0}.h-rt-tree li>*{min-width:0}
+.h-rt-lfx{flex-basis:100%;grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin-top:4px}
+.h-rt-lfxb{border:1px solid #c9d3e3;background:#f3f7ff;border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;color:inherit}
+.h-rt-lfxb b{color:#2a62c9;font-weight:600}
+.h-rt-lfxb:hover{background:#e3edff}
+:root[data-theme="dark"] .h-rt-lfxb{background:#1f2a3a;border-color:#3a4b66}:root[data-theme="dark"] .h-rt-lfxb b{color:#8fb6ff}
