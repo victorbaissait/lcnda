@@ -443,13 +443,44 @@
         const master = curveLut(st.curves.rgb);
         return ['r', 'g', 'b'].map(ch => { const own = curveLut(st.curves[ch]), lut = new Uint8ClampedArray(256); for (let i = 0; i < 256; i++) lut[i] = own[Math.round(clamp255(master[Math.round(base[i])]))]; return lut; });
     }
+    /* 🎨 Teinte/Saturation (comme Photoshop) : global, ou seulement une gamme de couleurs (rouges, jaunes…) avec ses bords réglables ; « Coloriser » teinte toute l'image */
+    const RT_HS_CH = [['master', 'Global'], ['reds', 'Rouges', 0], ['yellows', 'Jaunes', 60], ['greens', 'Verts', 120], ['cyans', 'Cyans', 180], ['blues', 'Bleus', 240], ['magentas', 'Magentas', 300]];
+    const rtHsRange = c => [c - 45, c - 15, c + 15, c + 45].map(v => (v + 360) % 360);
+    const rtHsDefault = () => ({ch: Object.fromEntries(RT_HS_CH.map(([k]) => [k, {h: 0, s: 0, l: 0}])), rg: Object.fromEntries(RT_HS_CH.slice(1).map(([k, , c]) => [k, rtHsRange(c)])), colorize: false, cz: {h: 30, s: 25, l: 0}});
+    const RT_HS_PRESETS = [['', 'Par défaut', {}], ['cyano', 'Cyanotype', {colorize: true, cz: {h: 210, s: 40, l: 0}}], ['sepia', 'Sépia', {colorize: true, cz: {h: 35, s: 25, l: 0}}],
+        ['sat', 'Saturation augmentée', {ch: {master: {h: 0, s: 30, l: 0}}}], ['sat2', 'Saturation plus forte', {ch: {master: {h: 0, s: 60, l: 0}}}], ['old', 'Ancien style', {ch: {master: {h: 0, s: -40, l: 0}, yellows: {h: -6, s: 15, l: 0}}}],
+        ['reds', 'Rouges plus saturés', {ch: {reds: {h: 0, s: 40, l: 0}}}], ['yellow', 'Jaune intensifié', {ch: {yellows: {h: 0, s: 45, l: 0}}}], ['sky', 'Ciel plus bleu', {ch: {blues: {h: 0, s: 40, l: -10}, cyans: {h: 8, s: 25, l: 0}}}],
+        ['skin', 'Peau plus douce', {ch: {reds: {h: 4, s: -15, l: 6}, yellows: {h: 0, s: -10, l: 4}}}], ['light', 'Éclaircir', {ch: {master: {h: 0, s: 0, l: 25}}}], ['dark', 'Assombrir', {ch: {master: {h: 0, s: 0, l: -25}}}],
+        ['gray', 'Désaturer', {ch: {master: {h: 0, s: -100, l: 0}}}], ['green', 'Verts d’automne', {ch: {greens: {h: -45, s: -10, l: 0}, yellows: {h: -15, s: 10, l: 0}}}]];
+    const rtHsPreset = k => { const p = RT_HS_PRESETS.find(x => x[0] === k)?.[2] || {}, d = rtHsDefault(); Object.entries(p.ch || {}).forEach(([c, v]) => { d.ch[c] = {...v}; }); if (p.colorize) { d.colorize = true; d.cz = {...p.cz}; } d.preset = k; return d; };
+    const rtHsActive = hs => !!hs && (hs.colorize || Object.values(hs.ch || {}).some(v => v.h || v.s || v.l));
+    /** Le poids d'une gamme pour une teinte (0 à 1) : plein entre ses deux bords intérieurs, en pente jusqu'aux bords extérieurs */
+    const rtHsWeight = (rg, h) => { const [a, b, c, d] = rg, rel = v => ((v - a) % 360 + 360) % 360, x = rel(h), B = rel(b), C = rel(c), D = rel(d) || 360;
+        return x < B ? (B ? x / B : 1) : x <= C ? 1 : x < D ? (D - x) / Math.max(1e-6, D - C) : 0; };
+    /** Prépare les tables par degré de teinte : décalage de teinte, de saturation et de luminosité */
+    function rtHsPrep(hs) {
+        const dh = new Float32Array(360), ds = new Float32Array(360), dl = new Float32Array(360), m = hs.ch?.master || {h: 0, s: 0, l: 0};
+        for (let h = 0; h < 360; h++) { let H = m.h || 0, S = m.s || 0, L = m.l || 0;
+            for (const [k] of RT_HS_CH.slice(1)) { const v = hs.ch?.[k]; if (!v || !(v.h || v.s || v.l)) continue; const w = rtHsWeight(hs.rg?.[k] || rtHsRange(RT_HS_CH.find(x => x[0] === k)[2]), h); if (!w) continue; H += (v.h || 0) * w; S += (v.s || 0) * w; L += (v.l || 0) * w; }
+            dh[h] = H; ds[h] = S; dl[h] = L; }
+        return {dh, ds, dl, m, colorize: !!hs.colorize, cz: hs.cz || {h: 0, s: 25, l: 0}};
+    }
+    const rtHsL = (l, d) => d > 0 ? l + (1 - l) * d / 100 : l * (1 + d / 100);
+    const rtHsS = (s, d) => Math.min(1, Math.max(0, d > 0 ? s + (1 - s) * s * d / 100 + s * d / 200 : s * (1 + d / 100)));
+    /** Une couleur (0 à 255) passée par Teinte/Saturation */
+    function rtHsPixel(P, r, g, b) {
+        let [h, s, l] = rtHsl([r, g, b]);
+        if (P.colorize) { const y = (0.299 * r + 0.587 * g + 0.114 * b) / 255; return rtFromHsl([P.cz.h, (P.cz.s || 0) / 100, rtHsL(y, P.cz.l || 0)]); }
+        if (Number.isNaN(h)) { return rtFromHsl([0, 0, rtHsL(l, P.m.l || 0)]); }
+        const i = Math.round(h) % 360; return rtFromHsl([h + P.dh[i], rtHsS(s, P.ds[i]), rtHsL(l, P.dl[i])]);
+    }
     const hex3 = h => [1, 3, 5].map(k => parseInt(String(h).slice(k, k + 2), 16) || 0);
     function rtApply(src, dst, st) {
         if (st.filters?.dust > 0 && src === dst) rtDust(src, st.filters.dust); // poussière et rayures : avant tout le reste, sur l'image elle-même
         else if (st.filters?.dust > 0) { src = new ImageData(new Uint8ClampedArray(src.data), src.width, src.height); rtDust(src, st.filters.dust); }
         const [lr, lg, lb] = rtLuts(st), sat = 1 + st.saturation / 100, warm = st.warmth * 0.35, vib = (st.vibrance || 0) / 100, hue = (st.hue || 0) * Math.PI / 180;
         const hc = Math.cos(hue), hs = Math.sin(hue), gm = st.gmap && RT_GMAPS[st.gmap]?.[1] ? RT_GMAPS[st.gmap][1].map(hex3) : null, gk = (st.gmap_amt ?? 70) / 100, W = src.width, H = src.height;
-        const a = src.data, o = dst.data, plain = sat === 1 && !warm && !st.bw && !st.sepia && !vib && !hue && !gm;
+        const hsP = rtHsActive(st.hsat) ? rtHsPrep(st.hsat) : null, a = src.data, o = dst.data, plain = sat === 1 && !warm && !st.bw && !st.sepia && !vib && !hue && !gm && !hsP;
         for (let i = 0; i < a.length; i += 4) {
             let r = lr[a[i]], g = lg[a[i + 1]], b = lb[a[i + 2]];
             if (!plain) {
@@ -458,6 +489,7 @@
                 if (hue) { // rotation de teinte (espace YIQ) : la luminosité ne bouge pas
                     const y = 0.299 * r + 0.587 * g + 0.114 * b, ii = 0.596 * r - 0.274 * g - 0.322 * b, q = 0.211 * r - 0.523 * g + 0.312 * b, i2 = ii * hc - q * hs, q2 = ii * hs + q * hc;
                     r = y + 0.956 * i2 + 0.621 * q2; g = y - 0.272 * i2 - 0.647 * q2; b = y - 1.106 * i2 + 1.703 * q2; }
+                if (hsP) { const q = rtHsPixel(hsP, Math.min(255, Math.max(0, r)), Math.min(255, Math.max(0, g)), Math.min(255, Math.max(0, b))); r = q[0]; g = q[1]; b = q[2]; }
                 if (warm) { r += warm; b -= warm; }
                 if (st.bw || st.sepia) { const y = 0.299 * r + 0.587 * g + 0.114 * b; if (st.sepia) { r = y * 1.07 + 18; g = y * 0.92 + 8; b = y * 0.72; } else { r = g = b = y; } }
                 if (gm) { // colorisation : une couleur prise dans le dégradé, qui garde la luminosité du point
@@ -811,7 +843,7 @@
     }
     /* ── Calques d'annotation : des traits de pinceau et des textes, gardés en coordonnées relatives (0 à 1)
        pour être redessinés à n'importe quelle taille (aperçu, zoom, image en pleine taille à l'enregistrement). */
-    const RT_BRUSHES = [['round', 'Rond net'], ['soft', 'Rond doux'], ['marker', 'Surligneur'], ['pencil', 'Crayon fin'], ['chalk', 'Craie (grain)'], ['eraser', 'Gomme']];
+    const RT_BRUSHES = [['round', 'Rond net'], ['soft', 'Rond doux'], ['marker', 'Surligneur'], ['pencil', 'Crayon fin'], ['chalk', 'Craie (grain)'], ['tip', '🖌 Forme du panneau Formes'], ['eraser', 'Gomme']];
     const RT_FONTS = [['Arial, Helvetica, sans-serif', 'Sans empattement'], ['Georgia, "Times New Roman", serif', 'Avec empattement'], ['"Brush Script MT", "Segoe Script", cursive', 'Manuscrite'], ['"Courier New", monospace', 'Machine à écrire']];
     /* 🔤 Caractère (comme le panneau de Photoshop) : la variante d'une police (sa graisse : Light, Regular, Bold, Black, « 85 Extra Black »…, et l'italique),
        taille, interligne, crénage, approche, échelles, décalage vertical, capitales, exposant, souligné, barré, alignement, lissage */
@@ -826,6 +858,70 @@
     }
     const rtTextWeight = op => op.weight || (op.bold ? 700 : 400);
     const rtTextFont = (op, size) => `${op.italic ? 'italic ' : ''}${op.caps === 'small' ? 'small-caps ' : ''}${rtTextWeight(op)} ${size}px ${op.font || 'Arial, sans-serif'}`;
+    /* ¶ Paragraphe (comme Photoshop) : bloc de texte d'une largeur donnée (les lignes se coupent toutes seules), alignement et justification,
+       retraits gauche, droite et de première ligne, espace avant et après chaque paragraphe, césure. */
+    const RT_ALIGNS = [['left', 'Aligné à gauche'], ['center', 'Centré'], ['right', 'Aligné à droite'], ['justify-left', 'Justifié, dernière ligne à gauche'], ['justify-center', 'Justifié, dernière ligne centrée'], ['justify-right', 'Justifié, dernière ligne à droite'], ['justify-all', 'Tout justifié']];
+    /** Petite icône d'alignement : quatre lignes, la dernière plus courte */
+    const rtAlignIcon = k => { const j = k.startsWith('justify'), la = j ? (k === 'justify-all' ? 'all' : k.slice(8)) : k;
+        const row = (y, w, a) => { const x = a === 'center' ? (16 - w) / 2 : a === 'right' ? 16 - w : 0; return `<rect x="${x}" y="${y}" width="${w}" height="1.6"/>`; };
+        return `<svg viewBox="0 0 16 14" width="16" height="14" aria-hidden="true" fill="currentColor">${[0, 4, 8].map((y, i) => row(y, j ? 16 : [16, 11, 14][i], la === 'all' ? 'left' : la)).join('')}${row(12, la === 'all' ? 16 : 9, la === 'all' ? 'left' : la)}</svg>`; };
+    /* Ω Glyphes : les caractères qu'on n'a pas sur le clavier, rangés par usage (la typo française et la généalogie d'abord), puis les blocs Unicode */
+    const RT_GLYPH_SETS = [
+        ['fr', 'Typographie française', '« » ‹ › “ ” ‘ ’ „ ‚ — – ‑ … · • ‧ ′ ″ ‰ № § ¶ † ‡ ° ª º ¹ ² ³ ᵉ ʳ ᵈ ˢ ᵐ ⁿ ¿ ¡ \u202F \u00A0 \u2009 \u00AD'],
+        ['genea', 'Généalogie', '° ⚭ ∞ ⚮ ⚯ † ✝ ✞ ⚰ ⚱ ♂ ♀ ⚥ ~ ≈ ? ⁂ ⚔ ✠ ⚜ ✡ ☪ ☦ ⌂ ✉ ☩ ♰ ♱ ⚓ ⚒ ✿ ❀ ☙ ❧ ❦'],
+        ['accents', 'Lettres accentuées', 'À Â Ä Æ Ç É È Ê Ë Î Ï Ô Ö Œ Ù Û Ü Ÿ à â ä æ ç é è ê ë î ï ô ö œ ù û ü ÿ Á Í Ó Ú Ñ á í ó ú ñ Ã Õ ã õ Å å Ø ø ß Ł ł Ś ś Ź ź Ż ż Č č Š š Ž ž Ř ř Ě ě Ő ő Ű ű'],
+        ['lig', 'Ligatures et formes', 'ﬀ ﬁ ﬂ ﬃ ﬄ ﬅ ﬆ Œ œ Æ æ ſ ꝛ ꝑ ꝓ ꝗ ꝯ ꝰ ⁊ ꞇ ȝ þ ð Þ Ð'],
+        ['money', 'Monnaies et chiffres', '€ £ $ ¢ ¥ ₣ ₤ ₶ ₺ ₹ ₽ ½ ⅓ ⅔ ¼ ¾ ⅛ ⅜ ⅝ ⅞ ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ Ⅺ Ⅻ Ⅼ Ⅽ Ⅾ Ⅿ'],
+        ['sym', 'Symboles', '© ® ™ ℗ ℠ ✓ ✔ ✗ ✘ ★ ☆ ✦ ✧ ❖ ◆ ◇ ■ □ ▲ △ ● ○ ◉ ♠ ♣ ♥ ♦ ♪ ♫ ☀ ☁ ☂ ☎ ✂ ✎ ✍ ⌘ ⌥ ⇧ ⏎ ⚑ ⚐ ☐ ☑ ☒'],
+        ['arrows', 'Flèches', '← ↑ → ↓ ↔ ↕ ↖ ↗ ↘ ↙ ⇐ ⇑ ⇒ ⇓ ⇔ ⇕ ➔ ➜ ➝ ➞ ➟ ➠ ➡ ⟵ ⟶ ⟷ ↩ ↪ ↺ ↻ ⤴ ⤵'],
+        ['math', 'Mathématiques', '± × ÷ − ≠ ≤ ≥ ≈ ≡ ∞ √ ∑ ∏ ∫ ∂ ∆ ∇ ∈ ∉ ∩ ∪ ⊂ ⊃ ∀ ∃ ∅ ¬ ∧ ∨ ∴ ∵ ∝ ° ′ ″ ‰ µ π Ω'],
+        ['greek', 'Grec', 'Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ ς τ υ φ χ ψ ω'],
+        ['u:0x00A0:0x00FF', 'Unicode : Latin-1', ''], ['u:0x0100:0x017F', 'Unicode : Latin étendu A', ''], ['u:0x0180:0x024F', 'Unicode : Latin étendu B', ''], ['u:0x0370:0x03FF', 'Unicode : grec', ''], ['u:0x0400:0x04FF', 'Unicode : cyrillique', ''],
+        ['u:0x0590:0x05FF', 'Unicode : hébreu', ''], ['u:0x2000:0x206F', 'Unicode : ponctuation', ''], ['u:0x2070:0x209F', 'Unicode : exposants et indices', ''], ['u:0x20A0:0x20BF', 'Unicode : monnaies', ''], ['u:0x2100:0x214F', 'Unicode : symboles de lettres', ''],
+        ['u:0x2150:0x218F', 'Unicode : nombres', ''], ['u:0x2190:0x21FF', 'Unicode : flèches', ''], ['u:0x2200:0x22FF', 'Unicode : mathématiques', ''], ['u:0x2500:0x257F', 'Unicode : traits de tableau', ''], ['u:0x25A0:0x25FF', 'Unicode : formes géométriques', ''],
+        ['u:0x2600:0x26FF', 'Unicode : symboles divers', ''], ['u:0x2700:0x27BF', 'Unicode : casseau (dingbats)', ''], ['u:0xA720:0xA7FF', 'Unicode : latin étendu D (abréviations anciennes)', ''], ['u:0xFB00:0xFB4F', 'Unicode : ligatures', '']];
+    const RT_GLYPH_NAMES = {'\u202F': 'espace fine insécable (avant ; : ! ? »)', '\u00A0': 'espace insécable', '\u2009': 'espace fine', '\u00AD': 'tiret conditionnel (césure)', '⚭': 'marié', '∞': 'marié (autre signe)', '⚮': 'divorcé', '†': 'décédé', '°': 'né', '⚰': 'inhumé', '~': 'vers', '⚔': 'mort au combat', '⁊': 'et (abréviation ancienne)', 'ſ': 's long'};
+    const rtGlyphsOf = k => { const set = RT_GLYPH_SETS.find(g => g[0] === k); if (!set) return [];
+        if (k.startsWith('u:')) { const [, a, b] = k.split(':').map(Number); const out = []; for (let i = a; i <= b; i++) { const ch = String.fromCodePoint(i); if (!/\p{Cc}|\p{Cn}|\p{Mn}/u.test(ch)) out.push(ch); } return out; }
+        return set[2].split(' ').filter(Boolean); };
+    /** Où couper un mot (césure simple, à la française) : entre deux consonnes (sauf ch, ph, gn, bl, tr…), ou avant une consonne seule entre deux voyelles ; aux tirets conditionnels d'abord */
+    function rtHyphenPoints(w) {
+        if (w.includes('\u00AD')) { const out = []; let k = 0; for (const ch of w) { if (ch === '\u00AD') out.push(k); else k++; } return out; }
+        const s = w.toLowerCase(), V = /[aeiouyàâäéèêëîïôöùûüœæ]/, n = s.length, out = [], keep = /^(ch|ph|th|gn|qu|gu|[bcdfgkptv][lr])$/;
+        if (n < 6 || /[^a-zàâäçéèêëîïôöùûüœæ'’-]/i.test(w)) return out;
+        for (let i = 2; i <= n - 3; i++) { const a = s[i - 1], b = s[i];
+            if (!V.test(a) && !V.test(b) && V.test(s[i - 2] || '') && !keep.test(a + b)) out.push(i); // entre deux consonnes
+            else if (V.test(a) && !V.test(b) && V.test(s[i + 1] || '')) out.push(i); } // devant une consonne entre deux voyelles
+        return out.filter(i => i >= 2 && i <= n - 3);
+    }
+    /** Coupe le texte en lignes : {words, y, first, last} ; la largeur du bloc (0 = texte simple, une ligne par paragraphe) */
+    function rtTextLines(c, op, W, mw, lead) {
+        const il = (op.il || 0) * W, ir = (op.ir || 0) * W, fi = (op.fi || 0) * W, sb = (op.sb || 0) * W, sa = (op.sa || 0) * W, bw = (op.boxW || 0) * W, sp = mw(' ');
+        const cap = s => op.caps === 'all' ? s.toLocaleUpperCase('fr') : s, lines = []; let y = 0;
+        String(op.text).split('\n').forEach((para, pi) => {
+            if (pi) y += sa + sb;
+            const words = cap(para).split(/ +/);
+            if (!bw) { lines.push({words: [cap(para).replace(/\u00AD/g, '')], y, first: true, last: true}); y += lead; return; }
+            let cur = [], curW = 0, first = true;
+            const avail = () => Math.max(10, bw - il - ir - (first ? fi : 0)), clean = s => s.replace(/\u00AD/g, '');
+            const flush = last => { lines.push({words: cur, y, first, last}); y += lead; first = false; cur = []; curW = 0; };
+            for (let w0 of words) {
+                let w = w0;
+                while (true) {
+                    const ww = mw(clean(w)), need = (cur.length ? sp : 0) + ww;
+                    if (curW + need <= avail() || (!cur.length && !op.hyph)) { cur.push(clean(w)); curW += need; break; }
+                    // la césure : la plus longue partie du mot qui tient encore, avec un tiret
+                    if (op.hyph) { const room = avail() - curW - (cur.length ? sp : 0), pts = rtHyphenPoints(w).reverse(), plain = clean(w);
+                        const cut = pts.find(i => mw(plain.slice(0, i) + '-') <= room);
+                        if (cut) { cur.push(plain.slice(0, cut) + '-'); flush(false); w = plain.slice(cut); continue; }
+                        if (!cur.length) { cur.push(plain); curW += ww; break; } }
+                    flush(false);
+                }
+            }
+            flush(true);
+        });
+        return {lines, il, ir, fi, bw};
+    }
     /** Dessine un texte (aussi pour mesurer sa boîte) : ctx, op, largeur et hauteur de la toile ; renvoie la boîte {x, y, w, h} en points */
     function rtDrawText(c, op, W, H, measureOnly = false) {
         const base = Math.max(1, op.size * W), size = op.pos ? base * 0.62 : base, lead = op.lead ? op.lead * W : base * 1.2, hs = (op.hs || 100) / 100, vs = (op.vs || 100) / 100;
@@ -833,15 +929,24 @@
         c.font = rtTextFont(op, size); c.textBaseline = 'top'; c.textAlign = 'left';
         if ('letterSpacing' in c) c.letterSpacing = `${((op.track || 0) / 1000) * size}px`;
         if ('fontKerning' in c) c.fontKerning = op.kern === 'none' ? 'none' : 'normal';
-        const lines = String(op.text).split('\n').map(l => op.caps === 'all' ? l.toLocaleUpperCase('fr') : l), widths = lines.map(l => c.measureText(l).width * hs), w = Math.max(1, ...widths);
-        const x0 = op.x * W, y0 = op.y * H, ax = op.align === 'center' ? -w / 2 : op.align === 'right' ? -w : 0, box = {x: x0 + ax, y: y0 - shift, w, h: (lines.length - 1) * lead + size * 1.2 * vs};
+        const mw = t => c.measureText(t).width * hs, L = rtTextLines(c, op, W, mw, lead), al = op.align || 'left', just = al.startsWith('justify');
+        const lineW = l => mw(l.words.join(' ')), ind = l => L.il + (l.first ? L.fi : 0);
+        const BW = L.bw || Math.max(1, ...L.lines.map(l => lineW(l) + ind(l) + L.ir));
+        const x0 = op.x * W, y0 = op.y * H, bx = L.bw ? x0 : x0 + (al === 'center' ? -BW / 2 : al === 'right' ? -BW : 0), last = L.lines[L.lines.length - 1];
+        const box = {x: bx, y: y0 - shift, w: BW, h: (last?.y || 0) + size * 1.2 * vs};
         if (measureOnly) return box;
-        lines.forEach((line, i) => {
-            const lx = x0 + (op.align === 'center' ? -widths[i] / 2 : op.align === 'right' ? -widths[i] : 0), ly = y0 + i * lead - shift;
-            c.save(); c.translate(lx, ly); c.scale(hs, vs);
-            if (op.halo) c.strokeText(line, 0, 0); c.fillText(line, 0, 0);
-            if (op.under || op.strike) { const lw = widths[i] / hs, th = Math.max(1, size / 14); c.shadowColor = 'transparent'; c.fillStyle = op.color; if (op.under) c.fillRect(0, size * 0.98, lw, th); if (op.strike) c.fillRect(0, size * 0.55, lw, th); }
-            c.restore();
+        const lastAl = just ? (al === 'justify-all' ? 'justify' : al.slice(8)) : al;
+        const put = (t, lx, ly, uw) => { c.save(); c.translate(lx, ly); c.scale(hs, vs); if (op.halo) c.strokeText(t, 0, 0); c.fillText(t, 0, 0);
+            if (uw && (op.under || op.strike)) { const th = Math.max(1, size / 14); c.shadowColor = 'transparent'; c.fillStyle = op.color; if (op.under) c.fillRect(0, size * 0.98, uw / hs, th); if (op.strike) c.fillRect(0, size * 0.55, uw / hs, th); }
+            c.restore(); };
+        L.lines.forEach(l => {
+            const room = BW - L.il - L.ir - (l.first ? L.fi : 0), ly = y0 + l.y - shift, a = l.last ? lastAl : just ? 'justify' : al, w = lineW(l);
+            if (a === 'justify' && l.words.length > 1 && L.bw) { // justifié : l'espace qui reste est partagé entre les mots
+                const ws = l.words.map(mw), gap = (room - ws.reduce((s, v) => s + v, 0)) / (l.words.length - 1); let lx = bx + ind(l);
+                if (op.under || op.strike) put('', lx, ly, room);
+                l.words.forEach((t, i) => { put(t, lx, ly, 0); lx += ws[i] + gap; }); return; }
+            const off = a === 'center' ? (room - w) / 2 : a === 'right' ? room - w : 0;
+            put(l.words.join(' '), bx + ind(l) + off, ly, w);
         });
         return box;
     }
@@ -913,8 +1018,94 @@
     }
     /** Le dégradé en CSS (aperçu dans les boutons et l'éditeur) */
     const rtGradCss = (stops, dir = '90deg') => `linear-gradient(${dir}, ${rtGSorted(stops).map(s => { const [r, g, b] = rtHex(s.c); return `rgba(${r},${g},${b},${s.a}) ${(s.p * 100).toFixed(1)}%`; }).join(', ')})`;
+    /* ▩ Motifs (comme Photoshop) : des carreaux qui se répètent. Les motifs de l'app sont dessinés avec les deux couleurs (premier plan, fond) ;
+       on crée les siens d'après une sélection, un calque ou l'image (raccord sans couture possible). */
+    const RT_PATTERNS = [
+        ['checker', 'Damier', 32, (g, s, f) => { g.fillStyle = f; g.fillRect(0, 0, s / 2, s / 2); g.fillRect(s / 2, s / 2, s / 2, s / 2); }],
+        ['dots', 'Pois', 24, (g, s, f) => { g.fillStyle = f; g.beginPath(); g.arc(s / 4, s / 4, s / 8, 0, Math.PI * 2); g.arc(s * 3 / 4, s * 3 / 4, s / 8, 0, Math.PI * 2); g.fill(); }],
+        ['stripes', 'Rayures', 16, (g, s, f) => { g.fillStyle = f; g.fillRect(0, 0, s / 2, s); }],
+        ['diag', 'Hachures', 16, (g, s, f) => { g.strokeStyle = f; g.lineWidth = s / 6; g.beginPath(); for (const o of [-s, 0, s]) { g.moveTo(o, s); g.lineTo(o + s, 0); } g.stroke(); }],
+        ['cross', 'Hachures croisées', 16, (g, s, f) => { g.strokeStyle = f; g.lineWidth = s / 8; g.beginPath(); for (const o of [-s, 0, s]) { g.moveTo(o, s); g.lineTo(o + s, 0); g.moveTo(o, 0); g.lineTo(o + s, s); } g.stroke(); }],
+        ['grid', 'Quadrillage', 24, (g, s, f) => { g.fillStyle = f; g.fillRect(0, 0, s, Math.max(1, s / 16)); g.fillRect(0, 0, Math.max(1, s / 16), s); }],
+        ['bricks', 'Briques', 32, (g, s, f) => { g.fillStyle = f; const t = Math.max(1, s / 16); g.fillRect(0, 0, s, t); g.fillRect(0, s / 2, s, t); g.fillRect(0, 0, t, s / 2); g.fillRect(s / 2, s / 2, t, s / 2); }],
+        ['chevron', 'Chevrons', 32, (g, s, f) => { g.strokeStyle = f; g.lineWidth = s / 8; g.lineJoin = 'miter'; g.beginPath(); for (const y of [-s / 2, 0, s / 2, s]) { g.moveTo(0, y + s / 4); g.lineTo(s / 2, y); g.lineTo(s, y + s / 4); } g.stroke(); }],
+        ['harlequin', 'Losanges', 32, (g, s, f) => { g.fillStyle = f; g.beginPath(); g.moveTo(s / 2, 0); g.lineTo(s, s / 2); g.lineTo(s / 2, s); g.lineTo(0, s / 2); g.closePath(); g.fill(); }],
+        ['scales', 'Écailles', 32, (g, s, f) => { g.strokeStyle = f; g.lineWidth = s / 14; g.beginPath(); for (const [x, y] of [[0, 0], [s, 0], [s / 2, s / 2], [0, s], [s, s]]) { g.moveTo(x + s / 2, y); g.arc(x, y, s / 2, 0, Math.PI); } g.stroke(); }],
+        ['waves', 'Vagues', 32, (g, s, f) => { g.strokeStyle = f; g.lineWidth = s / 10; g.beginPath(); for (const y0 of [s / 4, s * 3 / 4]) for (let x = 0; x <= s; x++) { const y = y0 + Math.sin(x / s * Math.PI * 2) * s / 8; x ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke(); }],
+        ['weave', 'Toile', 16, (g, s, f) => { g.fillStyle = f; g.globalAlpha = 0.55; g.fillRect(0, 0, s / 2, s / 2); g.fillRect(s / 2, s / 2, s / 2, s / 2); g.globalAlpha = 0.25; g.fillRect(s / 2, 0, s / 2, s / 2); g.fillRect(0, s / 2, s / 2, s / 2); }],
+        ['paper', 'Grain de papier', 64, (g, s, f) => { let seed = 7; const r = () => (seed = (seed * 16807) % 2147483647) / 2147483647; g.fillStyle = f; for (let i = 0; i < s * s / 3; i++) { g.globalAlpha = r() * 0.35; g.fillRect(Math.floor(r() * s), Math.floor(r() * s), 1, 1); } }],
+        ['plus', 'Croix', 24, (g, s, f) => { g.fillStyle = f; const t = s / 10; g.fillRect(s / 2 - t / 2, s / 4, t, s / 2); g.fillRect(s / 4, s / 2 - t / 2, s / 2, t); }],
+        ['stars', 'Étoiles', 40, (g, s, f) => { g.fillStyle = f; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `${s / 3}px serif`; g.fillText('★', s / 4, s / 4); g.fillText('★', s * 3 / 4, s * 3 / 4); }],
+        ['lys', 'Fleurs de lys', 48, (g, s, f) => { g.fillStyle = f; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `${s / 2.6}px serif`; g.fillText('⚜', s / 4, s / 4); g.fillText('⚜', s * 3 / 4, s * 3 / 4); }]];
+    /** Un motif de l'app dessiné en carreau (fond transparent ou couleur de fond) */
+    function rtPatternTile(id, fg, bg, transp) { const p = RT_PATTERNS.find(x => x[0] === id); if (!p) return null; const s = p[2], c = document.createElement('canvas'); c.width = c.height = s; const g = c.getContext('2d'); if (!transp) { g.fillStyle = bg; g.fillRect(0, 0, s, s); } g.save(); p[3](g, s, fg); g.restore(); return c; }
+    /** Raccord sans couture : le carreau décalé d'une moitié vient couvrir ses bords, qui se fondent (comme « Décalage » + retouche des bords dans Photoshop) */
+    function rtSeamless(c) {
+        const w = c.width, h = c.height, g = c.getContext('2d'), A0 = g.getImageData(0, 0, w, h), a = A0.data, o = new Uint8ClampedArray(a.length);
+        for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+            const i = (y * w + x) * 4, j = (((y + (h >> 1)) % h) * w + ((x + (w >> 1)) % w)) * 4;
+            const wx = Math.min(x, w - 1 - x) / (w / 2), wy = Math.min(y, h - 1 - y) / (h / 2), t = Math.min(1, Math.min(wx, wy) * 2.2), k = t * t * (3 - 2 * t);
+            for (let q = 0; q < 4; q++) o[i + q] = a[i + q] * k + a[j + q] * (1 - k);
+        }
+        A0.data.set(o); g.putImageData(A0, 0, 0); return c;
+    }
+    /* 🖌 Formes de pinceau (comme le panneau Formes de Photoshop) : le trait est fait d'empreintes posées à intervalle régulier (le pas),
+       chacune avec sa forme, son angle, son arrondi, et des variations (taille, angle, dispersion, opacité, couleur) toujours les mêmes pour un même trait. */
+    const RT_TIP_SHAPES = [['round', 'Rond'], ['square', 'Carré'], ['star', 'Étoile'], ['leaf', 'Feuille'], ['grass', 'Brin d’herbe'], ['splat', 'Éclaboussure'], ['chalk', 'Craie'], ['charcoal', 'Fusain'], ['custom', 'Ma forme (d’après une sélection)']];
+    const RT_TIP0 = {shape: 'round', hard: 80, spacing: 25, angle: 0, round: 100, follow: false, sj: 0, aj: 0, scatter: 0, count: 1, oj: 0, cj: 0, flow: 100};
+    const RT_BRUSH_PRESETS = [['hard', 'Rond net', {hard: 100, spacing: 8}], ['soft', 'Rond doux', {hard: 0, spacing: 8}], ['air', 'Aérographe', {hard: 0, spacing: 4, flow: 10}],
+        ['callig', 'Plume calligraphique', {hard: 100, spacing: 3, angle: 45, round: 18}], ['pencil', 'Crayon', {hard: 100, spacing: 4, oj: 35}], ['chalk', 'Craie', {shape: 'chalk', hard: 60, spacing: 12, aj: 100}],
+        ['charcoal', 'Fusain', {shape: 'charcoal', spacing: 10, aj: 100, oj: 30}], ['dry', 'Pinceau sec', {shape: 'chalk', spacing: 5, round: 55, angle: 30, oj: 50, follow: true}], ['square', 'Carré net', {shape: 'square', hard: 100, spacing: 8}],
+        ['stars', 'Étoiles semées', {shape: 'star', hard: 100, spacing: 140, sj: 60, aj: 100, scatter: 160, count: 2, cj: 25}], ['leaves', 'Feuilles', {shape: 'leaf', hard: 100, spacing: 90, sj: 50, aj: 100, scatter: 120, count: 2, cj: 12}],
+        ['grass', 'Herbe', {shape: 'grass', hard: 100, spacing: 25, sj: 45, aj: 18, scatter: 70, count: 3, cj: 10}], ['splat', 'Éclaboussures', {shape: 'splat', hard: 100, spacing: 110, sj: 60, aj: 100, scatter: 200, count: 2, oj: 40}]];
+    const RT_TIPCACHE = new Map();
+    /** L'empreinte (blanche, sa transparence dit où elle peint), 128 points de côté */
+    function rtTipCanvas(t, env) {
+        if (t.shape === 'custom') { const m = env?.masks?.get(t.mask); if (m) return m; }
+        const key = `${t.shape}|${t.hard}`; if (RT_TIPCACHE.has(key)) return RT_TIPCACHE.get(key);
+        const S = 128, c = document.createElement('canvas'); c.width = c.height = S; const g = c.getContext('2d'), h = Math.min(1, Math.max(0, (t.hard ?? 80) / 100)), blur = (1 - h) * 14;
+        let seed = 99; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+        g.fillStyle = '#fff'; g.strokeStyle = '#fff';
+        if (t.shape === 'round' || t.shape === 'custom') { const gr = g.createRadialGradient(64, 64, 60 * h * 0.98, 64, 64, 60); gr.addColorStop(0, '#fff'); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = h >= 1 ? '#fff' : gr; g.beginPath(); g.arc(64, 64, 60, 0, Math.PI * 2); g.fill(); }
+        else {
+            if (blur) g.filter = `blur(${blur}px)`;
+            g.beginPath();
+            if (t.shape === 'square') g.rect(14, 14, 100, 100);
+            else if (t.shape === 'star') { for (let i = 0; i < 10; i++) { const r = i % 2 ? 22 : 54, a = -Math.PI / 2 + i * Math.PI / 5; g.lineTo(64 + r * Math.cos(a), 64 + r * Math.sin(a)); } g.closePath(); }
+            else if (t.shape === 'leaf') { g.moveTo(64, 8); g.quadraticCurveTo(118, 64, 64, 120); g.quadraticCurveTo(10, 64, 64, 8); }
+            else if (t.shape === 'grass') { g.moveTo(58, 124); g.quadraticCurveTo(54, 50, 74, 4); g.quadraticCurveTo(64, 56, 70, 124); g.closePath(); }
+            else if (t.shape === 'splat') { for (let i = 0; i < 14; i++) { const a = rnd() * Math.PI * 2, d = rnd() * 44, r = 4 + rnd() * 16 * (1 - d / 60); g.moveTo(64 + Math.cos(a) * d + r, 64 + Math.sin(a) * d); g.arc(64 + Math.cos(a) * d, 64 + Math.sin(a) * d, r, 0, Math.PI * 2); } }
+            else if (t.shape === 'chalk' || t.shape === 'charcoal') { g.arc(64, 64, 58, 0, Math.PI * 2); }
+            g.fill(); g.filter = 'none';
+            if (t.shape === 'leaf') { g.globalCompositeOperation = 'destination-out'; g.lineWidth = 3; g.beginPath(); g.moveTo(64, 14); g.lineTo(64, 116); g.stroke(); g.globalCompositeOperation = 'source-over'; }
+            if (t.shape === 'chalk' || t.shape === 'charcoal') { const id = g.getImageData(0, 0, S, S), d = id.data; for (let i = 3; i < d.length; i += 4) { const y = (i >> 2) / S | 0; const k = t.shape === 'charcoal' ? (rnd() < 0.5 + 0.4 * Math.sin(y * 0.9) ? 0.15 : 1) : (rnd() < 0.45 ? 0.1 : 0.6 + rnd() * 0.4); d[i] *= k; } g.putImageData(id, 0, 0); }
+        }
+        RT_TIPCACHE.set(key, c); return c;
+    }
+    /** l'empreinte teintée d'une couleur (gardée, une par couleur) */
+    const rtTipTint = (tip, col) => { const key = tip; let m = RT_TIPCACHE.get(key); if (!(m instanceof Map)) { m = new Map(); RT_TIPCACHE.set(key, m); } let s = m.get(col); if (!s) { s = document.createElement('canvas'); s.width = tip.width; s.height = tip.height; const g = s.getContext('2d'); g.drawImage(tip, 0, 0); g.globalCompositeOperation = 'source-in'; g.fillStyle = col; g.fillRect(0, 0, s.width, s.height); m.set(col, s); } return s; };
+    function rtDrawTipStroke(c, op, W, H, env) {
+        const t = {...RT_TIP0, ...(op.tip || {})}, size = Math.max(1, op.size * W), pts = op.points.map(([x, y]) => [x * W, y * H]), step = Math.max(0.5, size * Math.max(1, t.spacing) / 100);
+        let seed = Math.round(op.points[0][0] * 1e6 + op.points[0][1] * 1e3) % 2147483646 + 1; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+        const tip = rtTipCanvas(t, env), u = document.createElement('canvas'); u.width = W; u.height = H; const g = u.getContext('2d'), base = rtHsl(rtHex(op.color));
+        const colOf = () => { if (!t.cj || Number.isNaN(base[0])) return op.color; const h = base[0] + (rnd() * 2 - 1) * t.cj * 1.8, q = rtFromHsl([Math.round(h / 6) * 6, base[1], Math.min(0.9, Math.max(0.1, base[2] + (rnd() - 0.5) * t.cj / 300))]); return '#' + q.map(v => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, '0')).join(''); };
+        const dab = (x, y, dir) => { for (let n = 0; n < Math.max(1, t.count); n++) {
+            const s = size * (1 - (t.sj / 100) * rnd()), a = (t.angle * Math.PI / 180) + (t.follow ? dir : 0) + (t.aj / 100) * (rnd() - 0.5) * Math.PI * 2, sc = (t.scatter / 100) * size, dx = sc ? (rnd() * 2 - 1) * sc : 0, dy = sc ? (rnd() * 2 - 1) * sc : 0;
+            g.save(); g.globalAlpha = Math.max(0, (t.flow / 100) * (1 - (t.oj / 100) * rnd())); g.translate(x + dx, y + dy); g.rotate(a); g.scale(1, Math.max(0.02, t.round / 100)); g.drawImage(rtTipTint(tip, colOf()), -s / 2, -s / 2, s, s); g.restore(); } };
+        let left = 0; dab(pts[0][0], pts[0][1], 0);
+        for (let i = 1; i < pts.length; i++) { const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], L = Math.hypot(x1 - x0, y1 - y0), dir = Math.atan2(y1 - y0, x1 - x0); let d = step - left;
+            while (d <= L) { dab(x0 + (x1 - x0) * d / L, y0 + (y1 - y0) * d / L, dir); d += step; } left = L - (d - step); }
+        c.globalAlpha = op.opacity ?? 1; c.drawImage(u, 0, 0);
+    }
     function rtDrawOp(c, op, W, H, env = null) {
         c.save();
+        if (op.type === 'pattern') { // ▩ un motif répété (échelle, angle, décalage) ; dans une sélection : seulement dedans
+            const tile = env?.masks?.get(op.mask); if (!tile) { c.restore(); return; }
+            const k = (op.scale ?? 1) * W / (op.refW || W), pat = c.createPattern(tile, 'repeat'); pat.setTransform(new DOMMatrix().translate((op.ox || 0) * W, (op.oy || 0) * H).rotate(op.angle || 0).scale(k));
+            const m = op.clip && env?.masks?.get(op.clip), u = m ? document.createElement('canvas') : null, g = u ? u.getContext('2d') : c; if (u) { u.width = W; u.height = H; }
+            c.globalAlpha = op.opacity ?? 1; g.fillStyle = pat; g.fillRect(0, 0, W, H); if (u) { g.globalCompositeOperation = 'destination-in'; g.drawImage(m, 0, 0, W, H); c.drawImage(u, 0, 0); }
+            c.restore(); return;
+        }
         if (op.type === 'gradient') { // ▦ un dégradé ; dans une sélection : seulement dedans
             const t = rtGradCanvas(op, W, H), m = op.clip && env?.masks?.get(op.clip); c.globalAlpha = op.opacity ?? 1;
             if (m) { const u = document.createElement('canvas'); u.width = W; u.height = H; const g = u.getContext('2d'); g.drawImage(t, 0, 0); g.globalCompositeOperation = 'destination-in'; g.drawImage(m, 0, 0, W, H); c.drawImage(u, 0, 0); } else c.drawImage(t, 0, 0);
@@ -961,6 +1152,7 @@
             c.restore(); return;
         }
         const pts = op.points; if (!pts?.length) { c.restore(); return; }
+        if (op.brush === 'tip') { rtDrawTipStroke(c, op, W, H, env); c.restore(); return; } // 🖌 une forme du panneau Formes
         const lw = Math.max(0.5, (op.brush === 'pencil' ? Math.min(op.size, 0.004) : op.size) * W);
         c.lineCap = op.brush === 'marker' ? 'square' : 'round'; c.lineJoin = 'round'; c.lineWidth = lw;
         c.strokeStyle = op.color; c.globalAlpha = (op.opacity ?? 1) * (op.brush === 'marker' ? 0.45 : 1);
@@ -988,8 +1180,9 @@
     /* ── Masques de calque : blanc = on voit, noir = caché. Faits de coups de pinceau (cacher / montrer) et de sélections ── */
     function rtRenderMask(ops, W, H, masks) {
         const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
-        g.fillStyle = '#000'; g.fillRect(0, 0, W, H);
+        g.fillStyle = '#000'; g.fillRect(0, 0, W, H); let refine = null;
         for (const op of ops || []) {
+            if (op.type === 'refine') { refine = op; continue; } // ⓘ Propriétés du masque : appliquées à la fin
             g.save();
             if (op.type === 'sel') { const m = masks?.get(op.mask); if (m) { g.globalCompositeOperation = 'copy'; if (op.invert) { g.fillRect(0, 0, W, H); g.globalCompositeOperation = 'destination-out'; } g.drawImage(m, 0, 0, W, H); } }
             else if (op.type === 'all') { if (op.mode === 'hide') g.clearRect(0, 0, W, H); else g.fillRect(0, 0, W, H); }
@@ -1002,6 +1195,8 @@
                 g.beginPath(); g.moveTo(op.points[0][0] * W, op.points[0][1] * H); op.points.forEach(([x, y]) => g.lineTo(x * W, y * H)); if (op.points.length === 1) g.lineTo(op.points[0][0] * W + 0.1, op.points[0][1] * H); g.stroke(); }
             g.restore();
         }
+        if (refine?.feather > 0) { const t = document.createElement('canvas'); t.width = W; t.height = H; t.getContext('2d').drawImage(c, 0, 0); g.save(); g.globalCompositeOperation = 'copy'; g.filter = `blur(${refine.feather * W}px)`; g.drawImage(t, 0, 0); g.restore(); } // contour progressif
+        if (refine && (refine.density ?? 1) < 1) { g.save(); g.globalCompositeOperation = 'destination-over'; g.globalAlpha = 1 - refine.density; g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); } // densité : le caché ne l'est plus qu'en partie
         return c;
     }
     /** Modes de fusion d'un calque (comme Photoshop ; ceux que sait faire le canvas) */
@@ -1565,9 +1760,9 @@
         const MENUS = [
             ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '◧ Exporter l’avant / après…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
-            ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'],
+            ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['hs:photo', '🎨 Teinte/Saturation…'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'],
                 ['restore:all', '✨ Restaurer en une fois…'], ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['repair:detect', '🔍 Repérer les plis et rayures…'], ['mode:repair', '🪡 Réparer au pinceau (plis, déchirures)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['idphoto', '🪪 Recadrer en photo d’identité…'], ['idbatch', '🪪 Portraits de plusieurs fiches…'], ['-'], ['plus:sky', '☁️ Remplacer le ciel…'], ['plus:cutout', '✂️ Détourer une personne (fond transparent, flou, uni)…'], ['plus:upscale', '🔍 Agrandir ×2 / ×4…'], ['plus:pano', '🧩 Panorama : assembler avec d’autres photos…'], ['-'], ['reset', 'Remettre comme au départ']]],
-            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['img:place', '🖼️ Placer une image…'], ['grad:layer', '▦ Nouveau calque de dégradé…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
+            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['hs:layer', '🎨 Nouveau réglage Teinte/Saturation'], ['img:place', '🖼️ Placer une image…'], ['grad:layer', '▦ Nouveau calque de dégradé…'], ['pat:fill', '▩ Nouveau calque de motif…'], ['pat:make', '▩ Créer un motif…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:subject', '🎯 Sélectionner le sujet (automatique)'], ['plus:cutout', '✂️ Détourer une personne…'], ['-'], ['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['fx:last', '↻ Refaire le dernier filtre', '⌘F'], ['-'], ...['Flou', 'Bruit', 'Netteté', 'Esthétiques', 'Artistiques', 'Pixellisation', 'Rendu', 'Déformation', 'Autres'].map(cat => ['>', cat, Object.entries(RT_FX).filter(([, f]) => f[0] === cat).map(([k, f]) => ['fx:' + k, f[1] + '…'])]),
                 ['-'], ['tab:filters', '✨ Filtres rapides et filtres du calque (panneau)'], ['filters:reset', 'Enlever les filtres rapides']]],
@@ -1612,7 +1807,7 @@
                 </div>
                 <nav class="h-rt-vtools" data-tbg="rt-vtools" data-tbg-label="Colonne d’outils">${VTOOLS.map(([k, i, l, key]) => { const sc = key ? key.toUpperCase() : k === 'ellipsesel' ? '⇧M' : ''; return `<button type="button" data-rt-mode="${k}" data-rt-v title="${esc(sc ? l.replace(` (${sc})`, '') : l)}" data-tb-label="${esc(l)}" data-shortcut="${esc(sc)}">${i}</button>`; }).join('')}<span class="h-rt-fgbg" data-tb-label="Couleurs (premier plan et arrière-plan)"><button type="button" class="h-rt-ccdef" data-rt-ccdef title="Noir et blanc (D)" aria-label="Couleurs par défaut : noir et blanc"><i></i><i></i></button><button type="button" class="h-rt-ccswap" data-rt-ccswap title="Intervertir les deux couleurs (X)" aria-label="Intervertir les couleurs">⤾</button><label class="h-rt-ccbg" title="Couleur d’arrière-plan (fond des formes) : clic pour la changer"><input type="color" value="#ffffff" data-rt-fill2></label><label class="h-rt-ccfg" title="Couleur de premier plan (pinceau, texte, formes) : clic pour la changer"><input type="color" value="#000000" data-rt-color2></label></span></nav>
                 <aside class="h-rt-side"><button type="button" class="h-rt-sidetog" data-rt-sidetog title="Replier le panneau (plus de place pour la photo) — Tab">⇥</button><span class="h-rt-resize" data-rt-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span>
-                    <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust" title="Réglages"><span class="h-rt-ti" aria-hidden="true">🎚</span><span class="h-rt-tl">Réglages</span></button><button type="button" data-rt-tab="filters" title="Filtres"><span class="h-rt-ti" aria-hidden="true">✨</span><span class="h-rt-tl">Filtres</span></button><button type="button" data-rt-tab="layers" title="Calques"><span class="h-rt-ti" aria-hidden="true">🗂</span><span class="h-rt-tl">Calques</span></button><button type="button" data-rt-tab="char" title="Caractère : police, variante (graisse), taille, interligne, approche…"><span class="h-rt-ti" aria-hidden="true">🔤</span><span class="h-rt-tl">Caractère</span></button><button type="button" data-rt-tab="history" title="Historique"><span class="h-rt-ti" aria-hidden="true">🕘</span><span class="h-rt-tl">Historique</span></button><button type="button" data-rt-tab="restore" title="Restaurer une vieille photo, pas à pas"><span class="h-rt-ti" aria-hidden="true">🧭</span><span class="h-rt-tl">Restaurer</span></button></div>
+                    <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust" title="Réglages"><span class="h-rt-ti" aria-hidden="true">🎚</span><span class="h-rt-tl">Réglages</span></button><button type="button" data-rt-tab="filters" title="Filtres"><span class="h-rt-ti" aria-hidden="true">✨</span><span class="h-rt-tl">Filtres</span></button><button type="button" data-rt-tab="layers" title="Calques"><span class="h-rt-ti" aria-hidden="true">🗂</span><span class="h-rt-tl">Calques</span></button><button type="button" data-rt-tab="props" title="Propriétés : Teinte/Saturation, masque, position et taille du calque choisi"><span class="h-rt-ti" aria-hidden="true">ⓘ</span><span class="h-rt-tl">Propriétés</span></button><button type="button" data-rt-tab="char" title="Caractère : police, variante (graisse), taille, interligne, approche…"><span class="h-rt-ti" aria-hidden="true">🔤</span><span class="h-rt-tl">Caractère</span></button><button type="button" data-rt-tab="pat" title="Motifs : remplir d’un motif, créer les siens"><span class="h-rt-ti" aria-hidden="true">▩</span><span class="h-rt-tl">Motifs</span></button><button type="button" data-rt-tab="brushes" title="Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection"><span class="h-rt-ti" aria-hidden="true">🖌</span><span class="h-rt-tl">Formes</span></button><button type="button" data-rt-tab="history" title="Historique"><span class="h-rt-ti" aria-hidden="true">🕘</span><span class="h-rt-tl">Historique</span></button><button type="button" data-rt-tab="restore" title="Restaurer une vieille photo, pas à pas"><span class="h-rt-ti" aria-hidden="true">🧭</span><span class="h-rt-tl">Restaurer</span></button></div>
                     <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-target" data-rt-target></div><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
                         ${sec('Couleur', 'rt-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span${k === 'vibrance' ? ' data-help="Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord."' : ''}>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
                         <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>`)}
@@ -1626,8 +1821,13 @@
                     <div class="h-rt-tools" data-rt-pane="filters" hidden><div class="h-rt-target" data-rt-target></div><div data-rt-fxlist></div><p class="muted">Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille.</p>${sec('Effets', 'rt-fx', `${RT_FILTERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span${k === 'clarity' ? ' data-help="Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général."' : ''}>${esc(l)} <output data-rt-fout="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt-f="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-cmd="filters:reset">Enlever les filtres</button>`)}</div>
                     <div class="h-rt-tools" data-rt-pane="layers" hidden></div>
                     <div class="h-rt-tools" data-rt-pane="history" hidden></div>
+                    <div class="h-rt-tools h-rt-props" data-rt-pane="props" hidden></div>
+                    <div class="h-rt-tools h-rt-pats" data-rt-pane="pat" hidden></div>
+                    <div class="h-rt-tools h-rt-brushes" data-rt-pane="brushes" hidden></div>
                     <div class="h-rt-tools h-rt-char" data-rt-pane="char" hidden>
+                        <div class="h-rt-chpages" role="tablist" aria-label="Texte">${[['char', 'Caractère'], ['para', '¶ Paragraphe'], ['glyph', 'Ω Glyphes']].map(([k, l], i) => `<button type="button" role="tab" data-rt-chpage="${k}" class="${i ? '' : 'is-on'}">${l}</button>`).join('')}</div>
                         <p class="muted h-rt-chfor" data-rt-chfor>Pour les prochains textes. Choisis un texte avec ➤ pour le changer.</p>
+                        <div data-chp="char">
                         <button type="button" class="h-rt-chfam" data-rt-chfont title="Police (famille)"><span data-rt-chfamname>Arial</span> ▾</button>
                         <label class="h-rt-chline" title="Variante : la graisse (Light, Regular, Bold, Black…) et l’italique"><select data-rt-ch="style"></select></label>
                         <div class="h-rt-chgrid">
@@ -1646,6 +1846,26 @@
                         <div class="h-rt-chtogs" role="group" aria-label="Alignement"><button type="button" data-rt-chalign="left" title="Aligné à gauche">⟸ gauche</button><button type="button" data-rt-chalign="center" title="Centré">≡ centre</button><button type="button" data-rt-chalign="right" title="Aligné à droite">droite ⟹</button></div>
                         <label class="h-rt-chline" title="Lissage des bords des lettres">Lissage <select data-rt-ch="aa"><option value="smooth">Lissé</option><option value="none">Aucun (bords nets, pixels)</option></select></label>
                         <p class="muted">Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles.</p>
+                        </div>
+                        <div data-chp="para" hidden>
+                            <div class="h-rt-chtogs h-rt-paligns" role="group" aria-label="Alignement du paragraphe">${RT_ALIGNS.map(([k, l]) => `<button type="button" data-rt-palign="${k}" title="${esc(l)}" aria-label="${esc(l)}">${rtAlignIcon(k)}</button>`).join('')}</div>
+                            <div class="h-rt-chgrid">
+                                <label title="Retrait à gauche"><span class="h-rt-chi">→▤</span><input type="number" min="0" max="4000" step="1" data-rt-ch="il"><small>px</small></label>
+                                <label title="Retrait à droite"><span class="h-rt-chi">▤←</span><input type="number" min="0" max="4000" step="1" data-rt-ch="ir"><small>px</small></label>
+                                <label title="Retrait de la première ligne (négatif : en saillie)"><span class="h-rt-chi">⇥¹</span><input type="number" min="-4000" max="4000" step="1" data-rt-ch="fi"><small>px</small></label>
+                                <label title="Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe)"><span class="h-rt-chi">⟷▭</span><input type="number" min="0" max="20000" step="1" placeholder="(Auto)" data-rt-ch="boxW"><small>px</small></label>
+                                <label title="Espace avant chaque paragraphe"><span class="h-rt-chi">⇡¶</span><input type="number" min="0" max="4000" step="1" data-rt-ch="sb"><small>px</small></label>
+                                <label title="Espace après chaque paragraphe"><span class="h-rt-chi">¶⇣</span><input type="number" min="0" max="4000" step="1" data-rt-ch="sa"><small>px</small></label>
+                            </div>
+                            <label class="checkbox-line" title="Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier)"><input type="checkbox" data-rt-ch="hyph"> <span>Césure</span></label>
+                            <p class="muted">Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc.</p>
+                        </div>
+                        <div data-chp="glyph" hidden>
+                            <div class="h-rt-gltop"><select data-rt-glset></select><input type="search" placeholder="Code (U+00E9) ou caractère" data-rt-glq aria-label="Chercher un glyphe"></div>
+                            <div class="h-rt-glrecent" data-rt-glrecent></div>
+                            <div class="h-rt-glgrid" data-rt-glgrid></div>
+                            <p class="muted" data-rt-glhelp>Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié.</p>
+                        </div>
                     </div>
                     <div class="h-rt-tools h-rt-restore" data-rt-pane="restore" hidden><div class="h-rt-raone"><button type="button" class="button" data-rt-cmd="restore:all" title="Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis">✨ Restaurer en une fois</button><small class="muted">ou étape par étape :</small></div>${RT_RESTORE_STEPS.map(([k, t, help, btns], i) => `<details class="h-rt-step" data-rt-step="${k}" ${i === 0 ? 'open' : ''}><summary><span class="h-rt-stepn">${i + 1}</span> ${t} <i class="h-rt-stepok" hidden>✓</i></summary><p class="muted">${help}</p><div class="h-rt-stepbtns">${btns}</div></details>`).join('')}
                         <p class="muted h-rt-help">Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version.</p></div>
@@ -1820,6 +2040,7 @@
                     octx.beginPath(); octx.arc(hs.rot[0], hs.rot[1], k * 1.1, 0, Math.PI * 2); octx.fill(); octx.stroke();
                 } else octx.strokeRect(bb.x * pw - 4, bb.y * ph - 4, bb.w * pw + 8, bb.h * ph + 8);
                 octx.restore(); } }
+            if (drag?.textBox) { octx.save(); octx.strokeStyle = '#2a7de1'; octx.lineWidth = Math.max(1, pw / 600); octx.setLineDash([5, 4]); octx.strokeRect(Math.min(drag.x0, drag.x1), Math.min(drag.y0, drag.y1), Math.abs(drag.x1 - drag.x0), Math.abs(drag.y1 - drag.y0)); octx.restore(); }
             if (mode === 'gradient') { // la ligne du dégradé : début (rond blanc), fin (rond bleu), losange au milieu pour tout déplacer, et ses arrêts de couleur
                 const o = painting?.tool === 'gradient' ? (painting.layer ? painting.op : null) : painting?.tool === 'gradmask' ? painting.preview : gradTarget()?.op;
                 if (o) { const h = gradHandles(o), k = handleSize(), lw = Math.max(1, pw / 700), L = Math.hypot(h.b[0] - h.a[0], h.b[1] - h.a[1]) || 1, nx = -(h.b[1] - h.a[1]) / L, ny = (h.b[0] - h.a[0]) / L;
@@ -1897,6 +2118,7 @@
                 <div class="h-rt-lmore">${t !== 'adjust' ? `<label class="h-rt-lblend" title="Mode de fusion : comment le calque se mélange à ce qui est dessous">Fusion <select data-rt-lblend>${RT_BLENDS.map(([v, l]) => `<option value="${v}" ${rtBlend(n) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}<label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round((n.opacity ?? 1) * 100)}" data-rt-lopac></label>${t !== 'adjust' && t !== 'group' ? `<label class="h-rt-lopac" title="Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets.">Fond <input type="range" min="0" max="100" value="${Math.round((n.fill ?? 1) * 100)}" data-rt-lfill></label><button type="button" class="h-rt-lfxbtn${Object.values(rtLfx(n)).some(x => x.on) ? ' is-on' : ''}" data-rt-lstyle title="Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur">fx</button>` : ''}${into}</div>
                 ${n.smart && n.ops?.some(o => o.type === 'image') ? `<div class="h-rt-smart"><span class="h-rt-smartb" title="Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée)">🧩 Objet dynamique</span><button type="button" class="link-button" data-rt-smart="replace" title="Une autre image à la même place, même taille, même rotation">Remplacer…</button><button type="button" class="link-button" data-rt-smart="orig" title="Remettre l’image à sa taille d’origine (et droite)">Taille d’origine</button><button type="button" class="link-button" data-rt-smart="filter" title="Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher">✨ Filtre dynamique</button><button type="button" class="link-button" data-rt-smart="raster" title="Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte)">Pixelliser</button></div>` : ''}
                 ${n.gradLayer && n.ops?.some(o => o.type === 'gradient') ? (() => { const g0 = [...n.ops].reverse().find(o => o.type === 'gradient'); return `<div class="h-rt-smart"><span class="h-rt-gsw" style="background:${rtGradCss(g0.stops)}" title="${esc(RT_GKINDS.find(k => k[0] === g0.kind)?.[2] || 'Dégradé')}"></span><button type="button" class="link-button" data-rt-gedit title="Couleurs, transparence, forme, préréglages">▦ Modifier le dégradé…</button></div>`; })() : ''}
+                ${n.patLayer && n.ops?.some(o => o.type === 'pattern') ? '<div class="h-rt-smart"><button type="button" class="link-button" data-rt-patedit title="Motif, échelle, angle, décalage">▩ Modifier le motif…</button></div>' : ''}
                 ${t === 'adjust' ? `<div class="h-rt-adjrow"><label class="checkbox-line" title="Comme un masque d’écrêtage de Photoshop"><input type="checkbox" data-rt-lclip ${n.clip ? 'checked' : ''}> <span>seulement sur ${(() => { const i = loc.arr.indexOf(n), below = loc.arr.slice(0, i).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)); return below ? `« ${esc(below.name)} »` : 'ce qui est juste dessous'; })()}</span></label><button type="button" class="link-button" data-rt-ladj>régler…</button></div><small class="muted">${n.clip ? 'ne touche que l’élément juste dessous' : loc.parent ? `touche tout ce qui est dessous dans « ${esc(loc.parent.name)} »` : 'touche tout ce qui est dessous'}</small>${(n.st?.filters?.chain || []).length ? `<div class="h-rt-lfx"><span class="muted">✨ Filtres :</span>${n.st.filters.chain.map((f, i) => `<button type="button" class="h-rt-lfxb" data-rt-lfxedit="${i}" title="Changer les réglages de ce filtre">${esc(RT_FX[f.t]?.[1] || f.t)} <b>régler…</b></button>`).join('')}</div>` : ''}`
                 : t === 'photo' ? `<small class="muted">réglages, ${st.strokes.length} correction${st.strokes.length > 1 ? 's' : ''}</small>`
                 : t === 'group' ? `<small class="muted">${n.children.length} élément${n.children.length > 1 ? 's' : ''}</small>` : `<small class="muted">${n.ops.length} élément${n.ops.length > 1 ? 's' : ''}</small>${n.ops.length ? '<button type="button" class="link-button" data-rt-lclear>vider</button>' : ''}`}
@@ -1911,7 +2133,7 @@
                 <div class="h-rt-lbar"><button type="button" class="button small" data-rt-ladd>＋ Calque</button><button type="button" class="button small secondary" data-rt-imgadd title="Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte)">🖼️ Image</button><button type="button" class="button small secondary" data-rt-gadd title="Un groupe vide au-dessus du calque choisi">＋ Groupe</button><button type="button" class="button small secondary" data-rt-aadd title="Réglages et filtres dans un calque">＋ Réglage</button>${!P() ? '<button type="button" class="button small secondary" data-rt-padd title="La photo a été retirée des calques : la remettre tout en bas">↺ Remettre la photo</button>' : ''}${nodeById(activeLayer) || P() ? '<button type="button" class="button small secondary" data-rt-gwrap title="Met le calque choisi dans un nouveau groupe (⌘G)">Grouper</button>' : ''}${selId ? '<button type="button" class="button small secondary" data-rt-cmd="sel:copy">Sélection → calque</button>' : ''}</div>
                 <ol class="h-rt-layers h-rt-tree">${[...layers].reverse().map(n => rowHtml(n, 0)).join('')}${layers.length ? '' : '<li class="muted">Aucun calque.</li>'}</ol>`;
             $('[data-rt-mergebox]').hidden = !drawLayers().some(l => l.ops.length) && !layers.some(n => !['layer', 'photo'].includes(typeOf(n))) && layers[0] === P();
-            syncTarget();
+            syncTarget(); try { renderProps(); renderPats(); } catch (_) {} // ⓘ et ▩ suivent le calque choisi
         }
         const target = id => nodeById(id);
         const addMaskTo = (id, ops) => { const t = target(id); if (!t) return; t.mask = ops; maskEdit = id; if (id !== 'photo') renderLayer(t); refreshLayers(); draw(); };
@@ -1939,6 +2161,7 @@
             if (e.target.closest('[data-rt-minv]')) { l.mask = [...l.mask, {type: 'invert'}]; refreshLayers(); draw(); commit(`Masque de ${name} inversé`); return; }
             if (e.target.closest('[data-rt-mdel]')) { l.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); refreshLayers(); draw(); commit(`Masque de ${name} retiré`); return; }
             const loc = locate(id);
+            if (e.target.closest('[data-rt-patedit]')) { activeLayer = id; maskEdit = ''; refreshLayers(); return patDialog(); }
             if (e.target.closest('[data-rt-gedit]')) { activeLayer = id; maskEdit = ''; refreshLayers(); if (mode !== 'gradient') setMode('gradient'); return gradDialog(); }
             if (e.target.closest('[data-rt-lstyle]')) { activeLayer = id === 'photo' ? '' : id; refreshLayers(); return styleDialog(id); }
             const sm = e.target.closest('[data-rt-smart]');
@@ -2021,7 +2244,7 @@
             if (e.target.closest('[data-rt-tophoto]')) { activeLayer = ''; refreshLayers(); syncControls(); }
             if (e.target.closest('[data-rt-toadj]')) { newAdjust(); refreshLayers(); syncControls(); draw(); commit('Nouveau calque de réglage'); }
         });
-        const showTab = k => { $$('[data-rt-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.rtTab === k)); $$('[data-rt-pane]').forEach(p => { p.hidden = p.dataset.rtPane !== k; }); };
+        const showTab = k => { $$('[data-rt-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.rtTab === k)); $$('[data-rt-pane]').forEach(p => { p.hidden = p.dataset.rtPane !== k; }); if (k === 'props') renderProps(); if (k === 'pat') renderPats(); if (k === 'brushes') renderBrushes(); if (k !== 'props' && canvasHook) { hsTool = ''; canvasHook = null; canvas.classList.remove('is-picking'); } };
         $$('[data-rt-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.rtTab)));
         // ── Le panneau de droite s'élargit en glissant son bord (comme dans l'atelier de mise en page) ──
         const SIDE_KEY = 'genealogie-retouch-panel-w', mainEl = $('.h-rt-main');
@@ -2145,7 +2368,7 @@
         $('[data-rt-size]').addEventListener('input', e => setSize(Number(e.target.value)));
         $('[data-rt-hard]').addEventListener('input', e => { hard = Number(e.target.value); $('[data-rt-hard-out]').textContent = hard + ' %'; });
         $('[data-rt-opac]').addEventListener('input', e => { opac = Number(e.target.value); $('[data-rt-opac-out]').textContent = opac + ' %'; });
-        $('[data-rt-brushtype]').addEventListener('change', e => { brushType = e.target.value; if (mode === 'brush') setMode('brush'); }); // « Gomme » choisie ici allume aussi l'outil 🧽
+        $('[data-rt-brushtype]').addEventListener('change', e => { brushType = e.target.value; if (brushType === 'tip') ensureTipMask(); if (mode === 'brush') setMode('brush'); }); // « Gomme » choisie ici allume aussi l'outil 🧽
         const setColor = c => { color = c; $('[data-rt-color]').value = c; $('[data-rt-color2]').value = c; syncChips(); try { if (editingTA && editingTA.op.color !== c) { editingTA.op.color = c; editingTA.restyle(); const l = nodeById(moveSel?.layer); if (l) renderLayer(l); } } catch (_) {} };
         const setFill = c => { fillColor = c; $('[data-rt-fill]').value = c; $('[data-rt-fill2]').value = c; syncChips(); };
         /** Les deux carrés de couleur (comme Photoshop). Sur un masque, ils montrent ce que fait le pinceau : ⬛ cacher (devant) ou ⬜ montrer ;
@@ -2198,7 +2421,7 @@
         const selText = () => { const l = moveSel && nodeById(moveSel.layer), op = l?.ops[moveSel.i]; return op?.type === 'text' ? {l, op} : null; };
         /** les réglages du caractère gardés dans un texte (seulement ceux qui changent quelque chose) */
         function chOpFields() { const o = {}; if (ch.lead) o.lead = ch.lead / pw; if (ch.track) o.track = ch.track; if (ch.kern === 'none') o.kern = 'none'; if (ch.hs !== 100) o.hs = ch.hs; if (ch.vs !== 100) o.vs = ch.vs; if (ch.shift) o.shift = ch.shift / pw;
-            if (ch.caps) o.caps = ch.caps; if (ch.pos) o.pos = ch.pos; if (ch.under) o.under = true; if (ch.strike) o.strike = true; if (ch.align !== 'left') o.align = ch.align; if (ch.aa === 'none') o.aa = 'none'; return o; }
+            if (ch.caps) o.caps = ch.caps; if (ch.pos) o.pos = ch.pos; if (ch.under) o.under = true; if (ch.strike) o.strike = true; if (ch.align !== 'left') o.align = ch.align; if (ch.aa === 'none') o.aa = 'none'; ['il', 'ir', 'fi', 'sb', 'sa'].forEach(k => { if (ch[k]) o[k] = ch[k] / pw; }); if (ch.hyph) o.hyph = true; return o; }
         let chCommitT = 0;
         /** change un réglage : pour les prochains textes, et tout de suite sur le texte choisi (une étape d'historique) */
         function chSet(patch) {
@@ -2206,7 +2429,7 @@
             const t = selText();
             if (t) { const op = t.op;
                 for (const [k, v] of Object.entries(patch)) {
-                    if (k === 'size') op.size = v / pw; else if (k === 'lead' || k === 'shift') { if (v) op[k] = v / pw; else delete op[k]; } else if (k === 'weight') { op.weight = v; op.bold = v >= 600; } else if (k === 'italic' || k === 'style' || k === 'color') op[k] = v;
+                    if (k === 'size') op.size = v / pw; else if (['lead', 'shift', 'il', 'ir', 'fi', 'sb', 'sa', 'boxW'].includes(k)) { if (v) op[k] = v / pw; else delete op[k]; } else if (k === 'weight') { op.weight = v; op.bold = v >= 600; } else if (k === 'italic' || k === 'style' || k === 'color') op[k] = v;
                     else if (k === 'tsize') continue; else if ((k === 'hs' || k === 'vs') && v === 100) delete op[k]; else if (v === '' || v === false || v === 0 || (k === 'kern' && v === 'auto') || (k === 'align' && v === 'left') || (k === 'aa' && v === 'smooth')) delete op[k]; else op[k] = v; }
                 renderLayer(t.l); draw(); if (editingTA?.op === op) editingTA.restyle(); else { clearTimeout(chCommitT); chCommitT = setTimeout(() => commit('Caractère du texte'), 400); } }
             syncChar();
@@ -2222,23 +2445,26 @@
         const frStyle = n => own => own ? n : (RT_WEIGHTS.find(w => n.replace(/ ?Italic$/, '') === w[1])?.[2] || 'Normal') + (/Italic/.test(n) ? ' italique' : '');
         function syncChar() {
             const pane = $('[data-rt-pane="char"]'); if (!pane) return; const t = selText(), op = t?.op;
-            const cur = op ? {font: op.font || font, style: op.style || (op.italic ? (rtTextWeight(op) >= 600 ? 'Bold Italic' : 'Italic') : rtTextWeight(op) >= 600 ? 'Bold' : 'Regular'), size: Math.round(op.size * pw), lead: op.lead ? Math.round(op.lead * pw) : '', kern: op.kern || 'auto', track: op.track || 0, hs: op.hs || 100, vs: op.vs || 100, shift: op.shift ? Math.round(op.shift * pw) : 0, color: op.color, caps: op.caps || '', pos: op.pos || '', under: !!op.under, strike: !!op.strike, align: op.align || 'left', aa: op.aa || 'smooth'}
-                : {...ch, font, size: ch.tsize || brush, lead: ch.lead || '', color};
+            const cur = op ? {font: op.font || font, style: op.style || (op.italic ? (rtTextWeight(op) >= 600 ? 'Bold Italic' : 'Italic') : rtTextWeight(op) >= 600 ? 'Bold' : 'Regular'), size: Math.round(op.size * pw), lead: op.lead ? Math.round(op.lead * pw) : '', kern: op.kern || 'auto', track: op.track || 0, hs: op.hs || 100, vs: op.vs || 100, shift: op.shift ? Math.round(op.shift * pw) : 0, color: op.color, caps: op.caps || '', pos: op.pos || '', under: !!op.under, strike: !!op.strike, align: op.align || 'left', aa: op.aa || 'smooth', ...Object.fromEntries(['il', 'ir', 'fi', 'sb', 'sa'].map(k => [k, op[k] ? Math.round(op[k] * pw) : 0])), boxW: op.boxW ? Math.round(op.boxW * pw) : '', hyph: !!op.hyph}
+                : {...ch, font, size: ch.tsize || brush, lead: ch.lead || '', color, boxW: ''};
             $('[data-rt-chfor]').textContent = op ? (op._editing ? '✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite.' : `Texte choisi : « ${String(op.text).slice(0, 30)}${String(op.text).length > 30 ? '…' : ''} »`) : 'Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer.';
             const fam = famOf(cur.font), nm = $('[data-rt-chfamname]'); nm.textContent = fontName(cur.font); nm.parentElement.style.fontFamily = cur.font;
             const own = (localFaces || []).some(f => f.family.toLowerCase() === fam.toLowerCase()), sel = $('[data-rt-ch="style"]'), list = stylesFor(fam);
             if (!list.some(x => x.n === cur.style)) list.push({n: cur.style, ...rtStyleOf(cur.style)});
             sel.innerHTML = list.map(x => `<option value="${esc(x.n)}" ${x.n === cur.style ? 'selected' : ''} style="font-family:${esc(cur.font)};font-weight:${x.weight};font-style:${x.italic ? 'italic' : 'normal'}">${esc(frStyle(x.n)(own))}</option>`).join('') + (!own && typeof window.queryLocalFonts === 'function' ? '<option value="__ask">🔎 Lire les variantes de l’ordinateur…</option>' : '');
             const set = (k, v) => { const el = $(`[data-rt-ch="${k}"]`); if (el && document.activeElement !== el) el.value = v; };
-            ['size', 'lead', 'kern', 'track', 'hs', 'vs', 'shift', 'color', 'aa'].forEach(k => set(k, cur[k]));
+            ['size', 'lead', 'kern', 'track', 'hs', 'vs', 'shift', 'color', 'aa', 'il', 'ir', 'fi', 'sb', 'sa', 'boxW'].forEach(k => set(k, cur[k] ?? 0)); $('[data-rt-ch="hyph"]').checked = !!cur.hyph;
+            $$('[data-rt-palign]').forEach(b => b.classList.toggle('is-on', b.dataset.rtPalign === cur.align));
+            $('[data-rt-ch="boxW"]').disabled = !op;
             $$('[data-rt-chtog]').forEach(b => { const [k, v] = b.dataset.rtChtog.split(':'); b.classList.toggle('is-on', v ? cur[k] === v : !!cur[k]); });
-            $$('[data-rt-chalign]').forEach(b => b.classList.toggle('is-on', b.dataset.rtChalign === cur.align));
+            $$('[data-rt-chalign]').forEach(b => b.classList.toggle('is-on', b.dataset.rtChalign === cur.align || (b.dataset.rtChalign === 'left' && cur.align.startsWith('justify'))));
         }
         $('[data-rt-chfont]').addEventListener('click', () => fontBtn.click());
         $('[data-rt-pane="char"]').addEventListener('change', async e => {
             const el = e.target.closest('[data-rt-ch]'); if (!el) return; const k = el.dataset.rtCh;
             if (k === 'style') { if (el.value === '__ask') { await loadFaces(true); syncChar(); return; } const st0 = rtStyleOf(el.value); return chSet({style: el.value, weight: st0.weight, italic: st0.italic}); }
             if (k === 'kern' || k === 'aa') return chSet({[k]: el.value});
+            if (k === 'hyph') return chSet({hyph: el.checked});
             if (k === 'color') { setColor(el.value); return chSet({color: el.value}); }
             const n = Number(String(el.value).replace(',', '.')); if (el.value !== '' && !Number.isFinite(n)) return;
             if (k === 'size') { if (!(n > 0)) return; return chSet({tsize: Math.round(n), size: Math.round(n)}); }
@@ -2249,10 +2475,273 @@
             const t = selText(), cur = t ? t.op : ch;
             if (tg) { const [k, v] = tg.dataset.rtChtog.split(':'); return chSet({[k]: v ? (cur[k] === v ? '' : v) : !cur[k]}); }
             if (al) return chSet({align: al.dataset.rtChalign});
+            const pa = e.target.closest('[data-rt-palign]'); if (pa) return chSet({align: pa.dataset.rtPalign});
+            const pg = e.target.closest('[data-rt-chpage]'); if (pg) return chPage(pg.dataset.rtChpage);
+            const gl = e.target.closest('[data-rt-gl]'); if (gl) return insertGlyph(gl.dataset.rtGl);
         });
-        loadFaces().then(() => syncChar());
+        /** Caractère · ¶ Paragraphe · Ω Glyphes (le même panneau, trois pages comme dans Photoshop) */
+        const chPage = k => { $$('[data-rt-chpage]').forEach(b => b.classList.toggle('is-on', b.dataset.rtChpage === k)); $$('[data-chp]').forEach(d => { d.hidden = d.dataset.chp !== k; }); lsSet('genealogie-retouch-chpage', k); if (k === 'glyph') renderGlyphs(); };
+        // ── Ω Glyphes ──
+        const GL_RECENT = 'genealogie-glyphs-recent', glSel = $('[data-rt-glset]'), glQ = $('[data-rt-glq]');
+        glSel.innerHTML = RT_GLYPH_SETS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join(''); glSel.value = ls('genealogie-retouch-glset', 'fr') || 'fr'; if (!glSel.value) glSel.value = 'fr';
+        const glFont = () => { const t = selText(); return t?.op.font || font; };
+        const glBtn = c => { const cp = c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0'), nm = RT_GLYPH_NAMES[c]; return `<button type="button" data-rt-gl="${esc(c)}" title="U+${cp}${nm ? ' · ' + esc(nm) : ''}" aria-label="U+${cp}${nm ? ' ' + esc(nm) : ''}">${/\s|\p{Cf}/u.test(c) ? `<small>${nm ? esc(nm.split(' ')[0]) : 'U+' + cp}</small>` : esc(c)}</button>`; };
+        function renderGlyphs() {
+            const q = glQ.value.trim(), grid = $('[data-rt-glgrid]'); let list;
+            if (q) { const m = q.match(/^(?:u\+|0x)?([0-9a-f]{2,6})$/i); list = m ? [String.fromCodePoint(parseInt(m[1], 16))] : [...new Set([...q])]; }
+            else list = rtGlyphsOf(glSel.value);
+            grid.style.fontFamily = glFont(); $('[data-rt-glrecent]').style.fontFamily = glFont();
+            grid.innerHTML = list.map(glBtn).join('') || '<p class="muted">Rien trouvé.</p>';
+            let rec = []; try { rec = JSON.parse(ls(GL_RECENT, '[]')); } catch (_) {}
+            $('[data-rt-glrecent]').innerHTML = rec.length ? `<small class="muted">Récents</small>${rec.map(glBtn).join('')}` : '';
+        }
+        glSel.addEventListener('change', () => { lsSet('genealogie-retouch-glset', glSel.value); glQ.value = ''; renderGlyphs(); });
+        glQ.addEventListener('input', renderGlyphs);
+        /** un glyphe : dans le texte en cours d'écriture (là où est le curseur), sinon à la fin du texte choisi, sinon copié */
+        function insertGlyph(c) {
+            let rec = []; try { rec = JSON.parse(ls(GL_RECENT, '[]')); } catch (_) {} lsSet(GL_RECENT, JSON.stringify([c, ...rec.filter(x => x !== c)].slice(0, 16)));
+            if (editingTA) { const ta = editingTA.ta; ta.focus(); ta.setRangeText(c, ta.selectionStart, ta.selectionEnd, 'end'); ta.dispatchEvent(new Event('input')); renderGlyphs(); return; }
+            const t = selText(); if (t && !lockedDeep(t.l)) { t.op.text += c; renderLayer(t.l); draw(); commit(`Glyphe ${c} ajouté`); renderGlyphs(); return; }
+            navigator.clipboard?.writeText(c).then(() => toast(`« ${c} » copié : colle-le dans un texte (⌘V / Ctrl+V).`), () => toast('Choisis d’abord un texte (outil T).', 'error')); renderGlyphs();
+        }
+        loadFaces().then(() => syncChar()); chPage(ls('genealogie-retouch-chpage', 'char') || 'char');
         $('[data-rt-shape]').addEventListener('change', e => { shapeKind = e.target.value; });
         $('[data-rt-fillon]').addEventListener('change', e => { shapeFill = e.target.checked; });
+        /* ⓘ Propriétés (comme Photoshop) : ce qui se règle sur l'élément choisi. La photo ou un calque de réglage : 🎨 Teinte/Saturation ;
+           un calque : position et taille, opacité, fond, fusion ; un masque : densité et contour progressif. */
+        let hsCh = 'master', hsTool = '', canvasHook = null, hsCommitT = 0;
+        const HS = () => { const t = T(); if (!t.hsat) t.hsat = rtHsDefault(); return t.hsat; };
+        const hsCur = H => H.colorize ? H.cz : H.ch[hsCh];
+        const hsName = () => { const n = adjNode(); return n ? `calque « ${esc(n.name)} »${n.clip ? ' (seulement l’élément dessous)' : ''}` : 'la photo'; };
+        const hueOfHex = h => rtHsl(rtHex(h))[0];
+        const nearestCh = h => RT_HS_CH.slice(1).reduce((b, c) => Math.abs(((h - c[2] + 540) % 360) - 180) < Math.abs(((h - b[2] + 540) % 360) - 180) ? c : b)[0];
+        const pickAt = (x, y) => { const d = canvas.getContext('2d').getImageData(Math.max(0, Math.min(pw - 1, Math.round(x))), Math.max(0, Math.min(ph - 1, Math.round(y))), 1, 1).data; return rtHsl([d[0], d[1], d[2]]); };
+        const hsChanged = (label = 'Teinte/Saturation') => { HS().preset = '__custom'; draw(); paintHsBars(); const sel = $('[data-hs-preset]'); if (sel) sel.value = '__custom'; clearTimeout(hsCommitT); hsCommitT = setTimeout(() => commit(label), 350); };
+        function hsHtml() {
+            const H = T().hsat || rtHsDefault(), cz = H.colorize, cur = cz ? H.cz : H.ch[hsCh], master = hsCh === 'master' || cz;
+            const sl = (k, label, mn, mx, cls) => `<div class="h-rt-hsl"><span>${label}</span></div><input type="range" class="h-rt-hsr ${cls}" min="${mn}" max="${mx}" value="${Math.round(cur[k] || 0)}" data-hs="${k}" style="--hc:hsl(${cz ? H.cz.h : RT_HS_CH.find(c => c[0] === hsCh)?.[2] ?? 0},100%,50%)">`;
+            return `<section class="h-rt-hs"><div class="h-rt-phead"><span class="h-rt-pico" title="Calque de réglage">🎨</span><b>Teinte/Saturation</b><small>${hsName()}</small></div>
+                <label class="h-rt-pline">Préréglage <select data-hs-preset><option value="__custom" ${H.preset === '__custom' ? 'selected' : ''}>Personnalisé</option>${RT_HS_PRESETS.map(([k, l]) => `<option value="${k}" ${(H.preset ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <div class="h-rt-pline"><button type="button" class="h-rt-hsbtn${hsTool === 'target' ? ' is-on' : ''}" data-hs-tool="target" title="Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change" aria-label="Réglage ciblé">👆↔</button><select data-hs-ch ${cz ? 'disabled' : ''}>${RT_HS_CH.map(([k, l]) => `<option value="${k}" ${k === hsCh ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+                ${sl('h', 'Teinte', cz ? 0 : -180, cz ? 360 : 180, cz ? 'is-hue0' : 'is-hue')}${sl('s', 'Saturation', cz ? 0 : -100, 100, 'is-sat')}${sl('l', 'Luminosité', -100, 100, 'is-light')}
+                <div class="h-rt-pline"><span class="h-rt-hspick" role="group" aria-label="Pipettes de la gamme">${[['pick', '⊙', 'Pipette : la gamme se centre sur la couleur cliquée dans la photo'], ['add', '⊕', 'Ajouter à la gamme la couleur cliquée'], ['sub', '⊖', 'Retirer de la gamme la couleur cliquée']].map(([k, i, t]) => `<button type="button" class="h-rt-hsbtn${hsTool === k ? ' is-on' : ''}" data-hs-tool="${k}" title="${t}" aria-label="${t}" ${cz ? 'disabled' : ''}>💧${i}</button>`).join('')}</span><label class="checkbox-line"><input type="checkbox" data-hs-colorize ${cz ? 'checked' : ''}> <span>Coloriser</span></label></div>
+                <div class="h-rt-hsbars"><canvas data-hs-bar="in" width="360" height="12"></canvas><div class="h-rt-hsrg" data-hs-rg ${master ? 'hidden' : ''}>${[0, 1, 2, 3].map(i => `<i data-hs-h="${i}" class="${i === 1 || i === 2 ? 'is-in' : ''}" title="${i === 1 || i === 2 ? 'Bord intérieur : plein effet jusqu’ici' : 'Bord extérieur : l’effet s’éteint ici'}"></i>`).join('')}<b data-hs-band></b></div><canvas data-hs-bar="out" width="360" height="12"></canvas></div>
+                <small class="muted" data-hs-rgtxt>${master ? 'Haut : les couleurs avant ; bas : après.' : ''}</small>
+                <div class="h-rt-pbtns"><button type="button" class="link-button" data-hs-reset>↺ Remettre à zéro</button><button type="button" class="link-button" data-rt-tab-go="adjust">🎚 Autres réglages…</button></div></section>`;
+        }
+        function paintHsBars() {
+            const pane = $('[data-rt-pane="props"]'), cin = pane?.querySelector('[data-hs-bar="in"]'); if (!cin) return; const cout = pane.querySelector('[data-hs-bar="out"]');
+            const H = T().hsat || rtHsDefault(), P = rtHsPrep(H), gi = cin.getContext('2d'), go = cout.getContext('2d');
+            for (let x = 0; x < 360; x++) { const c = rtFromHsl([x, 1, 0.5]); gi.fillStyle = `rgb(${c.map(Math.round)})`; gi.fillRect(x, 0, 1, 12); const o = rtHsPixel(P, ...c); go.fillStyle = `rgb(${o.map(v => Math.round(Math.min(255, Math.max(0, v))))})`; go.fillRect(x, 0, 1, 12); }
+            const rgEl = pane.querySelector('[data-hs-rg]'); if (!rgEl || rgEl.hidden || hsCh === 'master') return; const rg = H.rg[hsCh];
+            rgEl.querySelectorAll('[data-hs-h]').forEach(el => { el.style.left = `${rg[Number(el.dataset.hsH)] / 360 * 100}%`; });
+            const band = rgEl.querySelector('[data-hs-band]'), [a, , , d] = rg; band.style.background = `linear-gradient(90deg, ${Array.from({length: 73}, (_, i) => `rgba(17,17,17,${(0.15 + 0.7 * rtHsWeight(rg, i * 5)).toFixed(2)}) ${(i / 72 * 100).toFixed(1)}%`).join(', ')})`;
+            pane.querySelector('[data-hs-rgtxt]').textContent = `Gamme : ${Math.round(a)}° / ${Math.round(rg[1])}° — ${Math.round(rg[2])}° \\ ${Math.round(d)}° (glisse les repères)`;
+        }
+        function maskPropsHtml(n) {
+            const rf = (n.mask || []).find(o => o.type === 'refine') || {density: 1, feather: 0};
+            return `<section class="h-rt-pmask"><div class="h-rt-phead"><span class="h-rt-pico">🎭</span><b>Masque</b><small>« ${esc(n.name || 'Photo')} »</small></div>
+                <label class="h-rt-slider"><span>Densité <output>${Math.round((rf.density ?? 1) * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round((rf.density ?? 1) * 100)}" data-pm="density"></label>
+                <label class="h-rt-slider"><span>Contour progressif <output>${(rf.feather * pw).toFixed(1)} px</output></span><input type="range" min="0" max="250" step="0.5" value="${(rf.feather || 0) * pw}" data-pm="feather"></label>
+                <div class="h-rt-pbtns"><button type="button" class="link-button" data-pm-act="paint">🖌 Peindre le masque</button><button type="button" class="link-button" data-pm-act="invert">Inverser</button><button type="button" class="link-button" data-pm-act="off">${n.maskOff ? 'Réactiver' : 'Désactiver'}</button><button type="button" class="link-button" data-pm-act="del">Retirer</button></div></section>`;
+        }
+        function layerPropsHtml(n) {
+            const img = n.ops?.find(o => o.type === 'image'), txt = n.ops?.find(o => o.type === 'text'), gr = n.ops?.find(o => o.type === 'gradient'), pat = n.ops?.find(o => o.type === 'pattern');
+            const kind = img ? (n.smart ? '🧩 Objet dynamique' : '🖼 Image') : txt ? '🔤 Calque de texte' : gr ? '▦ Calque de dégradé' : pat ? '▩ Calque de motif' : '🖌 Calque';
+            const num = (k, label, v, unit = 'px', step = 1) => `<label class="h-rt-pnum"><span>${label}</span><input type="number" step="${step}" value="${Math.round(v * 10) / 10}" data-pl="${k}"><small>${unit}</small></label>`;
+            return `<section class="h-rt-player"><div class="h-rt-phead"><span class="h-rt-pico">${kind.split(' ')[0]}</span><b>${kind.slice(kind.indexOf(' ') + 1)}</b><small>« ${esc(n.name)} »</small></div>
+                ${img ? `<div class="h-rt-pgrid">${num('w', 'L', img.w * pw)}${num('h', 'H', img.h * ph)}${num('x', 'X', img.x * pw)}${num('y', 'Y', img.y * ph)}${num('rot', 'Angle', img.rot || 0, '°')}</div><label class="checkbox-line"><input type="checkbox" data-pl-ratio checked> <span>garder les proportions</span></label>` : ''}
+                ${txt ? `<div class="h-rt-pbtns"><button type="button" class="button small secondary" data-pl-go="char">🔤 Caractère</button><button type="button" class="button small secondary" data-pl-go="para">¶ Paragraphe</button><button type="button" class="button small secondary" data-pl-go="glyph">Ω Glyphes</button></div>` : ''}
+                ${gr ? '<div class="h-rt-pbtns"><button type="button" class="button small secondary" data-pl-go="grad">▦ Modifier le dégradé…</button></div>' : ''}
+                ${pat ? '<div class="h-rt-pbtns"><button type="button" class="button small secondary" data-pl-go="pat">▩ Modifier le motif…</button></div>' : ''}
+                <label class="h-rt-slider"><span>Opacité <output>${Math.round((n.opacity ?? 1) * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round((n.opacity ?? 1) * 100)}" data-pl="opacity"></label>
+                <label class="h-rt-slider"><span>Fond <output>${Math.round((n.fill ?? 1) * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round((n.fill ?? 1) * 100)}" data-pl="fill"></label>
+                <label class="h-rt-pline">Fusion <select data-pl="blend">${RT_BLENDS.map(([v, l]) => `<option value="${v}" ${rtBlend(n) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <div class="h-rt-pbtns"><button type="button" class="link-button" data-pl-go="fx">fx Effets…</button><button type="button" class="link-button" data-pl-go="hs" title="Un calque de réglage juste au-dessus, qui ne touche que ce calque">🎨 Teinte/Saturation sur ce calque</button></div></section>`;
+        }
+        function renderProps() {
+            const pane = $('[data-rt-pane="props"]'); if (!pane || pane.hidden) return;
+            const n = nodeById(activeLayer), t = n ? typeOf(n) : 'photo', holder = n || P();
+            pane.innerHTML = (t === 'photo' || t === 'adjust' ? hsHtml() : t === 'layer' ? layerPropsHtml(n) : `<div class="h-rt-phead"><span class="h-rt-pico">📁</span><b>Groupe</b><small>« ${esc(n.name)} » · ${A().plural(n.children.length, 'élément')}</small></div>`)
+                + (holder?.mask ? maskPropsHtml(holder) : '') + (t === 'photo' || t === 'adjust' ? '' : '<p class="muted">Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation.</p>');
+            paintHsBars();
+        }
+        const refineOf = n => { let rf = n.mask.find(o => o.type === 'refine'); if (!rf) { rf = {type: 'refine', density: 1, feather: 0}; n.mask.push(rf); } return rf; };
+        const setHook = k => { hsTool = hsTool === k ? '' : k; canvasHook = hsTool ? hsHooks[hsTool] : null; canvas.classList.toggle('is-picking', !!canvasHook); renderProps(); if (hsTool) toast(hsTool === 'target' ? '👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte).' : '💧 Clique sur une couleur de la photo.'); };
+        const hsHooks = {
+            target: {down(x, y) { const [h, s] = pickAt(x, y); const H = HS(); if (H.colorize) { this.base = {...H.cz}; this.k = H.cz; return; } if (!Number.isNaN(h) && s > 0.08) hsCh = nearestCh(h); else hsCh = 'master'; this.k = H.ch[hsCh]; this.base = {...this.k}; renderProps(); },
+                move(dx, e) { const k = e.metaKey || e.ctrlKey ? 'h' : 's', H = HS(), lim = k === 'h' ? (H.colorize ? [0, 360] : [-180, 180]) : [-100, 100]; this.k[k] = Math.max(lim[0], Math.min(lim[1], Math.round(this.base[k] + dx / 2))); this.k[k === 'h' ? 's' : 'h'] = this.base[k === 'h' ? 's' : 'h'];
+                    const pane = $('[data-rt-pane="props"]'); ['h', 's'].forEach(q => pane.querySelectorAll(`[data-hs="${q}"]`).forEach(el => { el.value = Math.round(this.k[q] || 0); el.dispatchEvent(new Event('input', {bubbles: true})); })); hsChanged(); },
+                up() { commit(`Teinte/Saturation : ${RT_HS_CH.find(c => c[0] === hsCh)[1]}`); }},
+            pick: {down(x, y) { const [h] = pickAt(x, y); if (Number.isNaN(h)) return toast('C’est un gris : il n’a pas de teinte.', 'error'); const H = HS(); if (hsCh === 'master') hsCh = nearestCh(h); H.rg[hsCh] = rtHsRange(Math.round(h)); renderProps(); hsChanged('Gamme choisie à la pipette'); }},
+            add: {down(x, y) { const [h] = pickAt(x, y); if (Number.isNaN(h) || hsCh === 'master') return; const H = HS(), rg = [...H.rg[hsCh]]; if (rtHsWeight(rg, h) >= 1) return;
+                const ang = v => ((v - rg[1]) % 360 + 360) % 360, toB = (rg[1] - h + 360) % 360, toC = (h - rg[2] + 360) % 360; void ang;
+                if (toB < toC) { const gap = (rg[1] - rg[0] + 360) % 360; rg[1] = (h + 360) % 360; rg[0] = (rg[1] - gap + 360) % 360; } else { const gap = (rg[3] - rg[2] + 360) % 360; rg[2] = (h + 360) % 360; rg[3] = (rg[2] + gap) % 360; }
+                H.rg[hsCh] = rg; renderProps(); hsChanged('Gamme agrandie'); }},
+            sub: {down(x, y) { const [h] = pickAt(x, y); if (Number.isNaN(h) || hsCh === 'master') return; const H = HS(), rg = [...H.rg[hsCh]]; if (rtHsWeight(rg, h) <= 0) return;
+                const dB = (h - rg[1] + 360) % 360, dC = (rg[2] - h + 360) % 360;
+                if (dB < dC) { const gap = (rg[1] - rg[0] + 360) % 360; rg[1] = (h + 2) % 360; rg[0] = (rg[1] - gap + 360) % 360; } else { const gap = (rg[3] - rg[2] + 360) % 360; rg[2] = (h - 2 + 360) % 360; rg[3] = (rg[2] + gap) % 360; }
+                H.rg[hsCh] = rg; renderProps(); hsChanged('Gamme réduite'); }}};
+        const propsPaneEl = $('[data-rt-pane="props"]');
+        propsPaneEl.addEventListener('input', e => {
+            const el = e.target; const H = () => HS();
+            if (el.dataset.hs) { const k = el.dataset.hs, v = Number(el.value); if (!Number.isFinite(v)) return; const cur = hsCur(H()); if (cur[k] === v) return; cur[k] = Math.max(Number(el.min), Math.min(Number(el.max), v)); hsChanged(); return; }
+            if (el.dataset.pm) { const n = nodeById(activeLayer) || P(); if (!n?.mask) return; const rf = refineOf(n), v = Number(el.value); if (el.dataset.pm === 'density') { rf.density = v / 100; el.parentElement.querySelector('output').textContent = `${v} %`; } else { rf.feather = v / pw; el.parentElement.querySelector('output').textContent = `${v} px`; } draw(); return; }
+            if (el.dataset.pl) { const n = nodeById(activeLayer); if (!n || lockedDeep(n)) return; const k = el.dataset.pl, v = Number(el.value);
+                if (k === 'opacity' || k === 'fill') { n[k] = v / 100; if (k === 'fill' && n.fill >= 1) delete n.fill; el.parentElement.querySelector('output').textContent = `${v} %`; draw(); return; }
+                const img = n.ops?.find(o => o.type === 'image'); if (!img || !Number.isFinite(v)) return; const ratio = propsPaneEl.querySelector('[data-pl-ratio]')?.checked, ar = img.w * pw / (img.h * ph);
+                if (k === 'w' && v > 0) { const cx = img.x + img.w / 2, cy = img.y + img.h / 2; img.w = v / pw; if (ratio) img.h = v / ar / ph; img.x = cx - img.w / 2; img.y = cy - img.h / 2; }
+                else if (k === 'h' && v > 0) { const cx = img.x + img.w / 2, cy = img.y + img.h / 2; img.h = v / ph; if (ratio) img.w = v * ar / pw; img.x = cx - img.w / 2; img.y = cy - img.h / 2; }
+                else if (k === 'x') img.x = v / pw; else if (k === 'y') img.y = v / ph; else if (k === 'rot') img.rot = v;
+                if (k === 'w' || k === 'h') propsPaneEl.querySelectorAll('[data-pl="w"], [data-pl="h"], [data-pl="x"], [data-pl="y"]').forEach(x => { if (x !== el) x.value = Math.round({w: img.w * pw, h: img.h * ph, x: img.x * pw, y: img.y * ph}[x.dataset.pl] * 10) / 10; });
+                renderLayer(n); draw(); }
+        });
+        propsPaneEl.addEventListener('change', e => {
+            const el = e.target;
+            if (el.matches('[data-hs-preset]')) { if (el.value === '__custom') return; T().hsat = rtHsPreset(el.value); hsCh = 'master'; renderProps(); draw(); return commit(`Teinte/Saturation : ${RT_HS_PRESETS.find(p => p[0] === el.value)[1]}`); }
+            if (el.matches('[data-hs-ch]')) { hsCh = el.value; return renderProps(); }
+            if (el.matches('[data-hs-colorize]')) { const H = HS(); H.colorize = el.checked; if (el.checked && hsTool && hsTool !== 'target') setHook(hsTool); renderProps(); hsChanged(el.checked ? 'Coloriser' : 'Coloriser : non'); return; }
+            if (el.dataset.pm) { commit('Propriétés du masque'); refreshLayers(); return; }
+            if (el.dataset.pl) { const n = nodeById(activeLayer); if (!n) return; if (el.dataset.pl === 'blend') { n.blend = el.value; draw(); } refreshLayers(); commit(`Propriétés de « ${n.name} »`); }
+        });
+        propsPaneEl.addEventListener('click', e => {
+            const tool = e.target.closest('[data-hs-tool]'); if (tool) return setHook(tool.dataset.hsTool);
+            if (e.target.closest('[data-hs-reset]')) { T().hsat = rtHsDefault(); renderProps(); draw(); return commit('Teinte/Saturation remise à zéro'); }
+            const go = e.target.closest('[data-rt-tab-go]'); if (go) return showTab(go.dataset.rtTabGo);
+            const pm = e.target.closest('[data-pm-act]'); if (pm) { const n = nodeById(activeLayer) || P(), id = n === P() ? 'photo' : n.id, act = pm.dataset.pmAct;
+                if (act === 'paint') { maskEdit = id; setMode('brush'); refreshLayers(); return; }
+                if (act === 'invert') { const i = n.mask.findIndex(o => o.type === 'refine'); n.mask.splice(i < 0 ? n.mask.length : i, 0, {type: 'invert'}); draw(); refreshLayers(); renderProps(); return commit('Masque inversé'); }
+                if (act === 'off') { n.maskOff = !n.maskOff; draw(); refreshLayers(); renderProps(); return commit(n.maskOff ? 'Masque désactivé' : 'Masque réactivé'); }
+                if (act === 'del') { n.mask = null; if (maskEdit === id) maskEdit = ''; draw(); refreshLayers(); renderProps(); return commit('Masque retiré'); } }
+            const pg = e.target.closest('[data-pl-go]'); if (pg) { const n = nodeById(activeLayer), k = pg.dataset.plGo;
+                if (k === 'char' || k === 'para' || k === 'glyph') { const op = n?.ops?.find(o => o.type === 'text'); if (op) { moveSel = {layer: n.id, i: n.ops.indexOf(op)}; draw(); } showTab('char'); chPage(k); syncChar(); return; }
+                if (k === 'grad') return gradDialog();
+                if (k === 'pat') return patDialog();
+                if (k === 'fx') return styleDialog(n.id);
+                if (k === 'hs') { const a = newAdjust(`🎨 Teinte/Saturation sur « ${n.name} »`), la = locate(a.id); la.arr.splice(la.arr.indexOf(a), 1); const tl = locate(n.id); tl.arr.splice(tl.arr.indexOf(n) + 1, 0, a); a.clip = true; a.st.hsat = rtHsDefault(); activeLayer = a.id; refreshLayers(); syncControls(); draw(); renderProps(); return commit('Teinte/Saturation sur un calque'); } }
+        });
+        // les repères de la gamme (sous la barre des couleurs) : glisser pour l'élargir ou la resserrer
+        propsPaneEl.addEventListener('pointerdown', e => {
+            const hd = e.target.closest('[data-hs-h]'); if (!hd) return; e.preventDefault(); const i = Number(hd.dataset.hsH), box = hd.parentElement.getBoundingClientRect(), H = HS(), rg = H.rg[hsCh];
+            const mv = ev => { rg[i] = Math.round(Math.min(359, Math.max(0, (ev.clientX - box.left) / box.width * 360))); paintHsBars(); draw(); };
+            const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); hsChanged('Gamme de couleurs'); };
+            addEventListener('pointermove', mv); addEventListener('pointerup', up);
+        });
+        const newHsLayer = () => { const a = newAdjust(`🎨 Teinte/Saturation ${layers.filter(n => typeOf(n) === 'adjust').length + 1}`); a.st.hsat = rtHsDefault(); activeLayer = a.id; hsCh = 'master'; refreshLayers(); syncControls(); draw(); showTab('props'); commit('Nouveau réglage Teinte/Saturation'); };
+        /* ▩ Motifs : la bibliothèque (ceux de l'app + les miens), le calque de motif (échelle, angle, décalage, opacité), le créateur de motif */
+        const PKEY = 'genealogie-retouch-pattern', PUSER = 'genealogie-patterns', P0 = {id: 'checker', scale: 1, angle: 0, ox: 0, oy: 0, opacity: 1, transp: false};
+        let patSt = (() => { try { return {...P0, ...JSON.parse(ls(PKEY, '{}'))}; } catch (_) { return {...P0}; } })();
+        const savePat = () => lsSet(PKEY, JSON.stringify(patSt));
+        const userPats = () => { try { const v = JSON.parse(ls(PUSER, '[]')); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
+        const patTarget = () => { const l = nodeById(activeLayer); if (!l || typeOf(l) !== 'layer') return null; const op = l.ops?.find(o => o.type === 'pattern'); return op ? {l, op} : null; };
+        const loadImg = url => new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = ko; im.src = url; });
+        /** le carreau d'un motif, en toile (ceux de l'app : avec les couleurs du moment) */
+        async function patTile(id) {
+            const u = userPats().find(p => p.id === id); if (u) { const im = await loadImg(u.url), c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight; c.getContext('2d').drawImage(im, 0, 0); return c; }
+            return rtPatternTile(id, color, fillColor, patSt.transp);
+        }
+        const patName = id => userPats().find(p => p.id === id)?.name || RT_PATTERNS.find(p => p[0] === id)?.[1] || 'Motif';
+        function renderPats() {
+            const pane = $('[data-rt-pane="pat"]'); if (!pane || pane.hidden) return; const t = patTarget(), cur = t ? {...patSt, ...t.op, id: t.op.pid} : patSt;
+            const sw = (id, name, url, user) => `<span class="h-rt-patc${id === cur.id ? ' is-on' : ''}"><button type="button" data-pt-pick="${esc(id)}" title="${esc(name)}" aria-label="${esc(name)}" style="background-image:url(${url})"></button>${user ? `<button type="button" class="h-rt-gpredel" data-pt-del="${esc(id)}" title="Supprimer ce motif" aria-label="Supprimer">×</button>` : ''}</span>`;
+            const sl = (k, label, mn, mx, v, unit) => `<label class="h-rt-slider"><span>${label} <output>${v}${unit}</output></span><input type="range" min="${mn}" max="${mx}" value="${v}" data-pt="${k}"></label>`;
+            pane.innerHTML = `<p class="muted">${t ? `Calque de motif <b>« ${esc(t.l.name)} »</b> : tout se règle ici, tout de suite.` : 'Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs.'}</p>
+                <div class="h-rt-patgrid">${RT_PATTERNS.map(([id, name]) => sw(id, name, rtPatternTile(id, color, fillColor, patSt.transp).toDataURL(), false)).join('')}${userPats().map(p => sw(p.id, p.name, p.url, true)).join('')}</div>
+                <label class="checkbox-line"><input type="checkbox" data-pt-transp ${patSt.transp ? 'checked' : ''}> <span>fond transparent (motifs de l’app)</span></label>
+                ${sl('scale', 'Échelle', 5, 800, Math.round((cur.scale ?? 1) * 100), ' %')}${sl('angle', 'Angle', -180, 180, Math.round(cur.angle || 0), '°')}${sl('ox', 'Décalage horizontal', 0, 100, Math.round((cur.ox || 0) * 100), ' %')}${sl('oy', 'Décalage vertical', 0, 100, Math.round((cur.oy || 0) * 100), ' %')}${sl('opacity', 'Opacité', 0, 100, Math.round((cur.opacity ?? 1) * 100), ' %')}
+                <div class="h-rt-pbtns"><button type="button" class="button small" data-pt-fill>▩ Remplir : nouveau calque de motif</button><button type="button" class="button small secondary" data-pt-make>＋ Créer un motif…</button></div>`;
+        }
+        const patDialog = () => { showTab('pat'); renderPats(); };
+        async function patFill() {
+            const tile = await patTile(patSt.id); if (!tile) return;
+            const l = newLayer(`Motif ${drawLayers().filter(n => n.patLayer).length + 1}`); l.patLayer = true;
+            l.ops = [{type: 'pattern', mask: addMask(tile), pid: patSt.id, refW: pw, scale: patSt.scale, angle: patSt.angle, ox: patSt.ox, oy: patSt.oy, opacity: patSt.opacity, ...(selId ? {clip: selId} : {})}];
+            activeLayer = l.id; renderLayer(l); refreshLayers(); draw(); renderPats(); commit(`Motif « ${patName(patSt.id)} » : calque « ${l.name} »`);
+        }
+        let patCommitT = 0;
+        const patPane = $('[data-rt-pane="pat"]');
+        patPane.addEventListener('input', e => { const el = e.target.closest('[data-pt]'); if (!el) return; const k = el.dataset.pt, v = Number(el.value), val = k === 'angle' ? v : v / 100;
+            el.parentElement.querySelector('output').textContent = `${v}${k === 'angle' ? '°' : ' %'}`; patSt[k] = val; savePat();
+            const t = patTarget(); if (t && !lockedDeep(t.l)) { t.op[k] = val; renderLayer(t.l); draw(); clearTimeout(patCommitT); patCommitT = setTimeout(() => commit(`Motif de « ${t.l.name} »`), 400); } });
+        patPane.addEventListener('change', e => { if (e.target.matches('[data-pt-transp]')) { patSt.transp = e.target.checked; savePat(); renderPats(); } });
+        patPane.addEventListener('click', async e => {
+            const pk = e.target.closest('[data-pt-pick]'); if (pk) { patSt.id = pk.dataset.ptPick; savePat(); const t = patTarget(); if (t && !lockedDeep(t.l)) { const tile = await patTile(patSt.id); t.op.mask = addMask(tile); t.op.pid = patSt.id; t.op.refW = pw; renderLayer(t.l); draw(); refreshLayers(); commit(`Motif « ${patName(patSt.id)} » sur « ${t.l.name} »`); } renderPats(); return; }
+            const del = e.target.closest('[data-pt-del]'); if (del) { if (!await A().confirmBox(`Supprimer le motif « ${patName(del.dataset.ptDel)} » de la bibliothèque ? (les calques qui l’utilisent le gardent)`, {okLabel: 'Supprimer'})) return; lsSet(PUSER, JSON.stringify(userPats().filter(p => p.id !== del.dataset.ptDel))); renderPats(); return; }
+            if (e.target.closest('[data-pt-fill]')) return patFill();
+            if (e.target.closest('[data-pt-make]')) return patMaker();
+        });
+        /** ▩ Créer un motif : d'après la sélection, le calque choisi ou l'image visible ; raccord sans couture ; aperçu en mosaïque */
+        function patMaker() {
+            const al = nodeById(activeLayer), hasL = al && typeOf(al) === 'layer' && al.ops?.length;
+            const pn = panel('h-rt-patmake', `<header><b>▩ Créer un motif</b><small>Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur).</small></header>
+                <label class="h-rt-pline">D’après <select data-pc-src>${selId ? '<option value="sel">la sélection</option>' : ''}${hasL ? `<option value="layer">le calque « ${esc(al.name)} »</option>` : ''}<option value="all">l’image visible</option></select></label>
+                <label class="h-rt-slider"><span>Taille du carreau <output>128 px</output></span><input type="range" min="16" max="384" step="8" value="128" data-pc-size></label>
+                <label class="checkbox-line"><input type="checkbox" data-pc-seam checked> <span>raccord sans couture (les bords se fondent)</span></label>
+                <canvas class="h-rt-patprev" data-pc-prev width="300" height="180"></canvas>
+                <label class="h-rt-pline">Nom <input type="text" data-pc-name value="Mon motif ${userPats().length + 1}" maxlength="60"></label>
+                <div class="h-rt-fxbtns"><span class="spacer"></span><button type="button" class="button small secondary" data-pc-cancel>Annuler</button><button type="button" class="button small secondary" data-pc-save>Garder</button><button type="button" class="button small" data-pc-fill>Garder et remplir</button></div>`);
+            let tile = null;
+            const build = () => {
+                const src = pn.querySelector('[data-pc-src]').value, size = Number(pn.querySelector('[data-pc-size]').value); pn.querySelector('[data-pc-size]').parentElement.querySelector('output').textContent = `${size} px`;
+                const base = src === 'layer' ? layerCanvas(al) : canvas, m = src === 'sel' ? masks.get(selId) : null, bb = m ? maskBox(m) : src === 'layer' ? maskBox(layerCanvas(al)) : null, box = bb || {x: 0, y: 0, w: pw, h: ph};
+                const k = Math.min(1, size / Math.max(box.w, box.h)), c = document.createElement('canvas'); c.width = Math.max(4, Math.round(box.w * k)); c.height = Math.max(4, Math.round(box.h * k)); const g = c.getContext('2d');
+                g.imageSmoothingQuality = 'high'; g.drawImage(base, box.x, box.y, box.w, box.h, 0, 0, c.width, c.height);
+                if (m) { g.globalCompositeOperation = 'destination-in'; g.drawImage(m, box.x, box.y, box.w, box.h, 0, 0, c.width, c.height); g.globalCompositeOperation = 'source-over'; }
+                tile = pn.querySelector('[data-pc-seam]').checked ? rtSeamless(c) : c;
+                const pv = pn.querySelector('[data-pc-prev]'), pg = pv.getContext('2d'); pg.clearRect(0, 0, pv.width, pv.height); const kk = Math.min(1, 60 / Math.max(tile.width, tile.height)), pat = pg.createPattern(tile, 'repeat'); pat.setTransform(new DOMMatrix().scale(kk)); pg.fillStyle = pat; pg.fillRect(0, 0, pv.width, pv.height);
+            };
+            build(); pn.addEventListener('input', build); pn.addEventListener('change', build);
+            const keep = () => { const name = pn.querySelector('[data-pc-name]').value.trim() || 'Mon motif', id = 'u' + Date.now().toString(36);
+                try { lsSet(PUSER, JSON.stringify([...userPats(), {id, name, url: tile.toDataURL('image/png')}])); if (!userPats().some(p => p.id === id)) throw new Error('plein'); } catch (_) { toast('Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit.', 'error'); return null; }
+                patSt.id = id; savePat(); return id; };
+            pn.querySelector('[data-pc-cancel]').addEventListener('click', () => pn.remove());
+            pn.querySelector('[data-pc-save]').addEventListener('click', () => { if (keep()) { pn.remove(); patDialog(); toast('Motif gardé dans la bibliothèque ▩.'); } });
+            pn.querySelector('[data-pc-fill]').addEventListener('click', async () => { if (keep()) { pn.remove(); showTab('pat'); await patFill(); } });
+        }
+        /* 🖌 Formes : préréglages, réglages de la forme (comme « Paramètres de forme » de Photoshop), forme d'après la sélection, aperçu du trait */
+        const TKEY = 'genealogie-retouch-tip', TUSER = 'genealogie-brush-presets';
+        let tipSt = (() => { try { return {...RT_TIP0, ...JSON.parse(ls(TKEY, '{}'))}; } catch (_) { return {...RT_TIP0}; } })(), tipPreset = '';
+        delete tipSt.mask; // l'empreinte « Ma forme » est remise dans la retouche à la première utilisation
+        const saveTip = () => { const {mask, ...keep} = tipSt; void mask; lsSet(TKEY, JSON.stringify(keep)); };
+        const userBrushes = () => { try { const v = JSON.parse(ls(TUSER, '[]')); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
+        /** « Ma forme » : son image (gardée sur l'ordinateur) remise dans les masques de la retouche */
+        const ensureTipMask = async () => { if (tipSt.shape !== 'custom' || (tipSt.mask && masks.get(tipSt.mask))) return; if (!tipSt.customUrl) { tipSt.shape = 'round'; return; } const im = await loadImg(tipSt.customUrl), c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight; c.getContext('2d').drawImage(im, 0, 0); tipSt.mask = addMask(c); };
+        const tipStroke = (cv, tip, col = '#222') => { const g = cv.getContext('2d'); g.clearRect(0, 0, cv.width, cv.height); const pts = []; for (let i = 0; i <= 40; i++) { const t = i / 40; pts.push([0.06 + t * 0.88, 0.5 + Math.sin(t * Math.PI * 2) * 0.28]); }
+            rtDrawTipStroke(g, {type: 'brush', brush: 'tip', tip, color: col, size: Math.min(0.12, 22 / cv.width), opacity: 1, points: pts}, cv.width, cv.height, env()); };
+        function renderBrushes() {
+            const pane = $('[data-rt-pane="brushes"]'); if (!pane || pane.hidden) return; const t = tipSt;
+            const sl = (k, label, mn, mx, unit = ' %', help = '') => `<label class="h-rt-slider"${help ? ` data-help="${esc(help)}"` : ''}><span>${label} <output>${t[k]}${unit}</output></span><input type="range" min="${mn}" max="${mx}" value="${t[k]}" data-tp="${k}"></label>`;
+            const pres = [...RT_BRUSH_PRESETS.map(([id, name, o]) => ({id, name, tip: {...RT_TIP0, ...o}})), ...userBrushes().map(u => ({...u, user: true}))];
+            pane.innerHTML = `<p class="muted">Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]).</p>
+                <div class="h-rt-bgrid">${pres.map(p => `<span class="h-rt-bpre${p.id === tipPreset ? ' is-on' : ''}"><button type="button" data-tp-pre="${esc(p.id)}" title="${esc(p.name)}" aria-label="${esc(p.name)}"><canvas width="96" height="34" data-tp-cv="${esc(p.id)}"></canvas><small>${esc(p.name)}</small></button>${p.user ? `<button type="button" class="h-rt-gpredel" data-tp-del="${esc(p.id)}" title="Supprimer" aria-label="Supprimer">×</button>` : ''}</span>`).join('')}</div>
+                <canvas class="h-rt-bprev" width="300" height="70" data-tp-prev></canvas>
+                <label class="h-rt-pline">Forme <select data-tp="shape">${RT_TIP_SHAPES.map(([k, l]) => `<option value="${k}" ${t.shape === k ? 'selected' : ''} ${k === 'custom' && !t.customUrl ? 'disabled' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <details class="h-rt-lsec" open><summary><b>Forme de la pointe</b></summary>${sl('hard', 'Dureté', 0, 100)}${sl('spacing', 'Pas (écart entre les empreintes)', 1, 300, ' %', 'Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles).')}${sl('angle', 'Angle', -180, 180, '°')}${sl('round', 'Arrondi', 2, 100, ' %', 'À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat).')}<label class="checkbox-line"><input type="checkbox" data-tp="follow" ${t.follow ? 'checked' : ''}> <span>l’angle suit le trait</span></label></details>
+                <details class="h-rt-lsec" ${t.sj || t.aj || t.scatter || t.count > 1 ? 'open' : ''}><summary><b>Dynamique et dispersion</b></summary>${sl('sj', 'Variation de taille', 0, 100)}${sl('aj', 'Variation d’angle', 0, 100)}${sl('scatter', 'Dispersion', 0, 400)}${sl('count', 'Nombre par empreinte', 1, 8, '')}</details>
+                <details class="h-rt-lsec" ${t.oj || t.cj || t.flow < 100 ? 'open' : ''}><summary><b>Transfert et couleur</b></summary>${sl('flow', 'Flux (chaque empreinte)', 1, 100)}${sl('oj', 'Variation d’opacité', 0, 100)}${sl('cj', 'Variation de couleur', 0, 100)}</details>
+                <div class="h-rt-pbtns"><button type="button" class="button small secondary" data-tp-make ${selId ? '' : 'disabled title="Fais d’abord une sélection autour du dessin"'}>＋ Forme d’après la sélection</button><button type="button" class="button small secondary" data-tp-save>Garder comme préréglage</button></div>`;
+            pres.forEach(p => { const cv = pane.querySelector(`[data-tp-cv="${CSS.escape(p.id)}"]`); if (cv) { try { tipStroke(cv, p.tip.shape === 'custom' ? {...p.tip, shape: 'round'} : p.tip); } catch (_) {} } });
+            paintTipPrev();
+        }
+        const paintTipPrev = () => { const cv = $('[data-tp-prev]'); if (cv) tipStroke(cv, tipSt, color); };
+        const useTip = async () => { await ensureTipMask(); saveTip(); brushType = 'tip'; $('[data-rt-brushtype]').value = 'tip'; if (mode !== 'brush' || maskEdit) { maskEdit = ''; setMode('brush'); showTab('brushes'); } paintTipPrev(); };
+        const brPane = $('[data-rt-pane="brushes"]');
+        brPane.addEventListener('input', e => { const el = e.target.closest('[data-tp]'); if (!el || el.tagName === 'SELECT') return; const k = el.dataset.tp; tipSt[k] = el.type === 'checkbox' ? el.checked : Number(el.value); const out = el.parentElement.querySelector('output'); if (out) out.textContent = `${el.value}${k === 'angle' ? '°' : k === 'count' ? '' : ' %'}`; tipPreset = ''; brPane.querySelectorAll('.h-rt-bpre.is-on').forEach(x => x.classList.remove('is-on')); useTip(); });
+        brPane.addEventListener('change', e => { const el = e.target.closest('select[data-tp]'); if (!el) return; tipSt.shape = el.value; tipPreset = ''; useTip().then(renderBrushes); });
+        brPane.addEventListener('click', async e => {
+            const pr = e.target.closest('[data-tp-pre]'); if (pr) { const id = pr.dataset.tpPre, b = RT_BRUSH_PRESETS.find(x => x[0] === id), u = userBrushes().find(x => x.id === id);
+                tipSt = {...RT_TIP0, ...(b ? b[2] : u.tip), ...(u?.tip.customUrl ? {customUrl: u.tip.customUrl} : tipSt.customUrl ? {customUrl: tipSt.customUrl} : {})}; delete tipSt.mask; tipPreset = id; await useTip(); renderBrushes(); return toast(`🖌 ${b ? b[1] : u.name} : peins sur un calque.`); }
+            const del = e.target.closest('[data-tp-del]'); if (del) { lsSet(TUSER, JSON.stringify(userBrushes().filter(x => x.id !== del.dataset.tpDel))); renderBrushes(); return; }
+            if (e.target.closest('[data-tp-save]')) { const name = await A().askText({title: 'Garder cette forme de pinceau', message: 'Nom du préréglage :', value: 'Mon pinceau', okLabel: 'Garder'}); if (!name) return; const {mask, ...tip} = tipSt; void mask;
+                try { lsSet(TUSER, JSON.stringify([...userBrushes(), {id: 'u' + Date.now().toString(36), name: String(name).slice(0, 40), tip}])); } catch (_) { return toast('Plus de place pour garder ce pinceau.', 'error'); } renderBrushes(); return; }
+            if (e.target.closest('[data-tp-make]')) { // ma forme : ce qui est sombre dans la sélection peint (comme « Définir une forme prédéfinie » de Photoshop)
+                const m = selId && masks.get(selId), bb = m && maskBox(m); if (!bb) return toast('Fais d’abord une sélection autour du dessin.', 'error');
+                const k = Math.min(1, 128 / Math.max(bb.w, bb.h)), w = Math.max(4, Math.round(bb.w * k)), h = Math.max(4, Math.round(bb.h * k)), S = Math.max(w, h), c = document.createElement('canvas'); c.width = c.height = S; const g = c.getContext('2d');
+                g.drawImage(canvas, bb.x, bb.y, bb.w, bb.h, (S - w) / 2, (S - h) / 2, w, h); const id = g.getImageData(0, 0, S, S), d = id.data;
+                const sm = document.createElement('canvas'); sm.width = sm.height = S; const sg = sm.getContext('2d'); sg.drawImage(m, bb.x, bb.y, bb.w, bb.h, (S - w) / 2, (S - h) / 2, w, h); const sd = sg.getImageData(0, 0, S, S).data;
+                for (let i = 0; i < d.length; i += 4) { const lum = (0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]) / 255; d[i + 3] = (1 - lum) * d[i + 3] * sd[i + 3] / 255; d[i] = d[i + 1] = d[i + 2] = 255; }
+                g.putImageData(id, 0, 0); tipSt = {...tipSt, shape: 'custom', customUrl: c.toDataURL('image/png')}; delete tipSt.mask; tipPreset = ''; await useTip(); renderBrushes(); return toast('🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver.'); }
+        });
         /* ▦ Dégradé : réglages de l'outil (gardés d'une fois sur l'autre), le dégradé du calque choisi, ses poignées, son éditeur */
         const GKEY = 'genealogie-retouch-gradient', GUSER = 'genealogie-gradients', G0 = {kind: 'linear', preset: 'fgbg', stops: null, reverse: false, dither: true, repeat: 'none', interp: 'rgb'};
         let grad = (() => { try { return {...G0, ...JSON.parse(ls(GKEY, '{}'))}; } catch (_) { return {...G0}; } })();
@@ -2395,13 +2884,14 @@
             Pendant l'écriture : le texte est le « texte choisi » (l'onglet 🔤 Caractère et la taille de la barre le changent tout de suite),
             il est caché sur l'image et la zone d'écriture le montre à sa place, avec sa police, sa taille, son approche, sa couleur. */
         let editingTA = null;
-        const placeText = (x, y, edit = null) => {
+        const placeText = (x, y, edit = null, boxW = 0) => {
             if (editingTA) editingTA.finish(true);
             let l = edit ? nodeById(edit.layer) : null, op, isNew = !edit;
             if (edit) { if (!l || lockedDeep(l)) return toast('Ce calque est verrouillé : déverrouille-le dans Calques.', 'error'); op = l.ops[edit.i]; }
             else {
                 l = newLayer('Texte'); l.textLayer = true; refreshLayers();
-                op = {type: 'text', text: '', x: x / pw, y: y / ph, size: (ch.tsize || brush) / pw, color, opacity: opac / 100, font, bold: ch.weight >= 600, italic, weight: ch.weight, style: ch.style, ...chOpFields(), halo: halo ? haloColor : '', haloW, shadow: shadow ? shadowColor : ''};
+                op = {type: 'text', text: '', x: x / pw, y: y / ph, size: (ch.tsize || brush) / pw, color, opacity: opac / 100, font, bold: ch.weight >= 600, italic, weight: ch.weight, style: ch.style, ...chOpFields(), halo: halo ? haloColor : '', haloW, shadow: shadow ? shadowColor : '', ...(boxW ? {boxW: boxW / pw} : {})};
+                if (boxW && (op.align === 'center' || op.align === 'right')) delete op.align; // un bloc se place par son bord gauche
                 l.ops.push(op);
             }
             const before = edit ? JSON.stringify(op) : '';
@@ -2410,9 +2900,9 @@
             const restyle = () => { const r = canvas.getBoundingClientRect(), wr = wrap.getBoundingClientRect(), k = r.width / pw, base = Math.max(1, op.size * pw), size = (op.pos ? base * 0.62 : base) * k, lead = (op.lead ? op.lead * pw : base * 1.2) * k;
                 const lines = ta.value.split('\n'); mctx.save(); const bx = rtDrawText(mctx, {...op, text: ta.value || 'M'}, pw, ph, true); mctx.restore();
                 Object.assign(ta.style, {left: (r.left - wr.left + bx.x * k) + 'px', top: (r.top - wr.top + op.y * ph * k - (op.shift || 0) * pw * k) + 'px', font: rtTextFont(op, size), lineHeight: lead + 'px', letterSpacing: ((op.track || 0) / 1000 * size) + 'px',
-                    color: op.color, textAlign: op.align || 'left', textTransform: op.caps === 'all' ? 'uppercase' : 'none', textDecoration: [op.under ? 'underline' : '', op.strike ? 'line-through' : ''].filter(Boolean).join(' ') || 'none',
-                    transform: `scale(${(op.hs || 100) / 100}, ${(op.vs || 100) / 100})`, transformOrigin: '0 0', padding: '0', margin: '0', border: '0', outline: '1px dashed #0066cc', outlineOffset: '2px', background: 'rgba(255,255,255,.25)', boxSizing: 'content-box', overflow: 'hidden', resize: 'none',
-                    width: Math.max(size * 2, bx.w * k / ((op.hs || 100) / 100) + size) + 'px', height: Math.max(lead, lines.length * lead) + 'px', minWidth: '0', minHeight: '0'}); };
+                    color: op.color, textAlign: (op.align || 'left').startsWith('justify') ? 'justify' : op.align || 'left', textAlignLast: op.align === 'justify-all' ? 'justify' : (op.align || '').startsWith('justify-') ? op.align.slice(8) : 'auto', textIndent: (op.fi || 0) * pw * k + 'px', paddingLeft: (op.il || 0) * pw * k + 'px', paddingRight: (op.ir || 0) * pw * k + 'px', hyphens: op.hyph ? 'auto' : 'manual', whiteSpace: op.boxW ? 'pre-wrap' : 'pre', textTransform: op.caps === 'all' ? 'uppercase' : 'none', textDecoration: [op.under ? 'underline' : '', op.strike ? 'line-through' : ''].filter(Boolean).join(' ') || 'none',
+                    transform: `scale(${(op.hs || 100) / 100}, ${(op.vs || 100) / 100})`, transformOrigin: '0 0', paddingTop: '0', paddingBottom: '0', margin: '0', border: '0', outline: '1px dashed #0066cc', outlineOffset: '2px', background: 'rgba(255,255,255,.25)', boxSizing: 'content-box', overflow: 'hidden', resize: 'none',
+                    width: (op.boxW ? Math.max(size * 2, (op.boxW * pw - (op.il || 0) * pw - (op.ir || 0) * pw) * k / ((op.hs || 100) / 100)) : Math.max(size * 2, bx.w * k / ((op.hs || 100) / 100) + size)) + 'px', height: Math.max(lead, lines.length * lead, bx.h * k / ((op.vs || 100) / 100)) + 'px', minWidth: '0', minHeight: '0'}); };
             ta.addEventListener('input', () => { op.text = ta.value; restyle(); });
             wrap.appendChild(ta); restyle(); ta.focus(); if (edit) ta.select();
             let over = false;
@@ -2512,13 +3002,14 @@
         canvas.addEventListener('dblclick', e => { if (mode === 'polysel') { finishPoly(); return; } if (mode !== 'move') return; const [x, y] = toCanvas(e), h = hitOp(x, y); if (!h) return; const op = nodeById(h.layer).ops[h.i]; if (op.type === 'text') { e.preventDefault(); placeText(op.x * pw, op.y * ph, h); } });
         canvas.addEventListener('pointerdown', e => {
             if (mode === 'hand' || spaceDown || e.button === 1) { panning = {x: e.clientX, y: e.clientY, l: stage.scrollLeft, t: stage.scrollTop}; canvas.setPointerCapture(e.pointerId); e.preventDefault(); return; }
+            if (canvasHook) { e.preventDefault(); const [hx, hy] = toCanvas(e), hk = canvasHook; hk.down(hx, hy, e); if (hk.move) { drag = {hook: hk, cx: e.clientX}; canvas.setPointerCapture(e.pointerId); } return; } // ⓘ Propriétés : pipettes, réglage ciblé
             if (mode === 'adjust' || mode === 'crop') return;
             e.preventDefault();
             const [x, y] = toCanvas(e);
             if (mode === 'idphoto') { if (!idp) return; const k = handleSize() * 2.8, i = idp.eyes.findIndex(([ex, ey]) => Math.hypot(ex - x, ey - y) <= k); if (i >= 0) { drag = {idpEye: i}; canvas.setPointerCapture(e.pointerId); } return; }
             if (mode === 'persp') { if (!persp) return; const k = handleSize() * 3, i = persp.findIndex(([px, py]) => Math.hypot(px * pw - x, py * ph - y) <= k); if (i >= 0) { drag = {persp: i}; canvas.setPointerCapture(e.pointerId); } return; }
             if (mode === 'zoom') { drag = {zoom: true, x0: e.clientX, y0: e.clientY, alt: e.altKey}; canvas.setPointerCapture(e.pointerId); return; }
-            if (mode === 'text') { if (e.detail > 1) return; const h = hitOp(x, y), op = h && nodeById(h.layer).ops[h.i]; if (op?.type === 'text') return placeText(op.x * pw, op.y * ph, h); return placeText(x, y); }
+            if (mode === 'text') { if (e.detail > 1) return; const h = hitOp(x, y), op = h && nodeById(h.layer).ops[h.i]; if (op?.type === 'text') return placeText(op.x * pw, op.y * ph, h); drag = {textBox: true, x0: x, y0: y, x1: x, y1: y}; canvas.setPointerCapture(e.pointerId); return; } // un clic : texte simple ; un cadre glissé : bloc de texte (¶)
             if (mode === 'move') {
                 const cur = moveSel && nodeById(moveSel.layer)?.ops[moveSel.i];
                 if (cur?.type === 'image' && !lockedDeep(nodeById(moveSel.layer))) { // une poignée de l'image choisie : taille ou rotation
@@ -2568,7 +3059,7 @@
             if (mode === 'brush') {
                 const l = activeL(); if (!l) return;
                 if (lockedDeep(l)) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
-                painting = {tool: 'brush', layer: l, preview: {type: 'brush', brush: brushType, color, size: (brushType === 'pencil' ? Math.min(brush, 4) : brush) * 2 / pw, opacity: opac / 100, points: [[x / pw, y / ph]]}};
+                painting = {tool: 'brush', layer: l, preview: {type: 'brush', brush: brushType, color, size: (brushType === 'pencil' ? Math.min(brush, 4) : brush) * 2 / pw, opacity: opac / 100, points: [[x / pw, y / ph]], ...(brushType === 'tip' ? {tip: (() => { const {customUrl, ...t} = tipSt; void customUrl; return {...t}; })()} : {})}};
                 canvas.setPointerCapture(e.pointerId); draw(); return;
             }
             if (!P()) return toast('La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques).', 'error');
@@ -2600,6 +3091,8 @@
                 }
                 drag.moved = true; renderLayer(l); draw(); return;
             }
+            if (drag?.textBox) { drag.x1 = x; drag.y1 = y; draw(); return; }
+            if (drag?.hook) { drag.hook.move(e.clientX - drag.cx, e); return; }
             if (drag?.grad) { const d = drag, op = d.gt.op;
                 if (d.grad === 'm') { const dx = (x - d.x) / pw, dy = (y - d.y) / ph; op.x1 += dx; op.x2 += dx; op.y1 += dy; op.y2 += dy; d.x = x; d.y = y; }
                 else { const [ox, oy] = d.grad === 'a' ? [op.x2 * pw, op.y2 * ph] : [op.x1 * pw, op.y1 * ph], [ex, ey] = e.shiftKey ? snap45(ox, oy, x, y) : [x, y]; if (d.grad === 'a') { op.x1 = ex / pw; op.y1 = ey / ph; } else { op.x2 = ex / pw; op.y2 = ey / ph; } }
@@ -2631,6 +3124,8 @@
                 if (s.kind === 'poly' && s.pts.length < 3) { draw(); return; }
                 combine(shapeMask(s), d.how); return; }
             if (drag?.imgSize || drag?.imgRot) { const d = drag; drag = null; if (d.moved) { const l = nodeById(moveSel?.layer); refreshLayers(); commit(d.imgRot ? `Image tournée sur « ${l?.name || ''} »` : `Image agrandie / réduite sur « ${l?.name || ''} »`); } return; }
+            if (drag?.textBox) { const d = drag; drag = null; const w = Math.abs(d.x1 - d.x0); draw(); if (w > 12) placeText(Math.min(d.x0, d.x1), Math.min(d.y0, d.y1), null, w); else placeText(d.x0, d.y0); return; }
+            if (drag?.hook) { const h = drag.hook; drag = null; h.up?.(); return; }
             if (drag?.grad) { const d = drag; drag = null; if (d.moved) { refreshLayers(); commit(`Dégradé ajusté${d.gt.mask ? ' (masque)' : ''} sur « ${d.gt.holder.name || 'la photo'} »`); } return; }
             if (drag?.move) { const d = drag; drag = null; if (d.moved) { const l = nodeById(moveSel?.layer); refreshLayers(); commit(`Élément déplacé sur « ${l?.name || ''} »`); } return; }
             if (!painting) return;
@@ -3009,6 +3504,11 @@
             if (k === 'cropclear') { if (mode === 'crop') { crop = {x: 0, y: 0, w: 1, h: 1, a: 0}; angleIn.value = 0; $('[data-rt-angle-out]').textContent = '0°'; syncCrop(); } if (st.crop) { st.crop = null; draw(); commit('Recadrage enlevé'); } return; }
             if (k === 'img:place') return placeDialog();
             if (k === 'grad:layer') return newGradLayer();
+            if (k === 'hs:layer') return newHsLayer();
+            if (k === 'pat:fill') return patDialog();
+            if (k === 'pat:make') return patMaker();
+            if (k === 'hs:photo') { activeLayer = ''; refreshLayers(); syncControls(); return showTab('props'); }
+            if (k === 'tab:props') return showTab('props');
             if (k === 'actions') return actionsDialog();
             if (a === 'export') return b === 'ba' ? exportBA() : exportImage();
             if (k === 'curtain') return curtain.toggle();
@@ -3160,7 +3660,7 @@
             const f = e.target.dataset.rtF; if (f) commit(`${flabel(f)} : ${T().filters[f]}`);
             const t = e.target.dataset.rtT; if (t) { T()[t] = e.target.checked; if (t === 'bw' && T().bw) T().sepia = false; if (t === 'sepia' && T().sepia) T().bw = false; syncControls(); commit(`${{bw: 'Noir et blanc', sepia: 'Sépia', invert: 'Négatif'}[t]} ${T()[t] ? 'oui' : 'non'}`); }
         });
-        $$('[data-rt-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rtCh; selPt = -1; $$('[data-rt-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
+        $$('button.h-rt-ch[data-rt-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rtCh; selPt = -1; $$('button.h-rt-ch[data-rt-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
         let rtLastPreset = null; // un préréglage cliqué une 2e fois sur le même calque : retour à l'état d'avant
         $$('[data-rt-preset]').forEach(b => b.addEventListener('click', () => { const tg0 = T(), i0 = Number(b.dataset.rtPreset);
             if (rtLastPreset && rtLastPreset.tg === tg0 && rtLastPreset.i === i0 && rtLastPreset.after === JSON.stringify(snapshot())) { /* seulement si rien n'a bougé depuis (⌘Z, curseur, remise à zéro…) */ const keep0 = {strokes: tg0.strokes, filters: tg0.filters, crop: tg0.crop, persp: tg0.persp}; Object.keys(tg0).forEach(k => { if (!(k in keep0)) delete tg0[k]; }); Object.assign(tg0, JSON.parse(rtLastPreset.before)); Object.entries(keep0).forEach(([k, v]) => { if (v !== undefined) tg0[k] = v; }); rtLastPreset = null; syncControls(); commit(`Préréglage « ${RT_PRESETS[i0][0]} » retiré`); return; }

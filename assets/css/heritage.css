@@ -4574,7 +4574,7 @@ dialog.kn-play-dlg::backdrop{background:#000}
 :root[data-theme="dark"] .h-rt-chtogs button.is-on{background:#2a62c9;color:#fff}
 /* Retouche : les onglets du panneau de droite sur une seule ligne de cases égales (icône au-dessus du nom) ; la flèche ⇥ à côté, pas dedans ;
    panneau étroit : les icônes seules (le nom au survol) */
-.h-rt2 .h-rt-side>.h-rt-tabs{padding-right:0;margin-right:32px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));flex-wrap:nowrap;container-type:inline-size}
+.h-rt2 .h-rt-side>.h-rt-tabs{padding-right:0;margin-right:32px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));flex-wrap:nowrap;container-type:inline-size}
 .h-rt2 .h-rt-side>.h-rt-tabs>button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;padding:6px 2px;line-height:1.15}
 .h-rt2 .h-rt-side>.h-rt-tabs .h-rt-ti{font-size:15px;line-height:1}
 .h-rt2 .h-rt-side>.h-rt-tabs .h-rt-tl{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11.5px;letter-spacing:-.1px}
@@ -4631,3 +4631,73 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-rt-gk.is-diamond{border:0;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);background:radial-gradient(circle,#111,#fff 75%)}
 .h-rt-gkinds button.is-on{outline:2px solid #2a7de1;outline-offset:-2px;background:transparent}
 .h-rt-gstop .h-rt-gpos{display:flex;align-items:center;gap:6px}
+/* ⓘ Propriétés (Teinte/Saturation, masque, calque) */
+.h-rt-props section{border:1px solid #d9dce1;padding:.6rem;margin-bottom:.6rem;display:grid;gap:6px}
+.h-rt-phead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.h-rt-phead small{flex-basis:100%;color:var(--muted,#6b7280)}
+.h-rt-pico{display:inline-grid;place-items:center;width:26px;height:26px;border:1px solid #c9ccd1;font-size:15px}
+.h-rt-pline{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.h-rt-pline select{flex:1;min-width:0}
+.h-rt-hsl{display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-weight:600;font-size:13px}
+.h-rt-hsl input{width:4.6em;text-align:right}
+.h-rt-hsr{width:100%;-webkit-appearance:none;appearance:none;height:10px;border:1px solid rgba(0,0,0,.3);margin:2px 0 4px;background:#ddd}
+.h-rt-hsr.is-hue{background:linear-gradient(90deg,#0ff,#00f,#f0f,#f00,#ff0,#0f0,#0ff)}
+.h-rt-hsr.is-hue0{background:linear-gradient(90deg,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00)}
+.h-rt-hsr.is-sat{background:linear-gradient(90deg,#888,var(--hc,#f00))}
+.h-rt-hsr.is-light{background:linear-gradient(90deg,#000,var(--hc,#888),#fff)}
+.h-rt-hsr::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:16px;background:#fff;border:1px solid #333;clip-path:polygon(50% 0,100% 40%,100% 100%,0 100%,0 40%);cursor:pointer}
+.h-rt-hsr::-moz-range-thumb{width:12px;height:16px;background:#fff;border:1px solid #333;border-radius:0}
+.h-rt-hsbtn{border:1px solid #c9ccd1;background:var(--panel,#fff);padding:3px 6px;cursor:pointer;border-radius:0;color:inherit;font-size:12px}
+.h-rt-hsbtn.is-on{outline:2px solid #2a7de1;outline-offset:-2px}
+.h-rt-hsbtn:disabled{opacity:.4;cursor:default}
+.h-rt-hspick{display:inline-flex;gap:3px}
+.h-rt-hsbars{position:relative;display:grid;gap:0}
+.h-rt-hsbars canvas{display:block;width:100%;height:12px;border:1px solid rgba(0,0,0,.25)}
+.h-rt-hsrg{position:relative;height:16px;margin:1px 0}
+.h-rt-hsrg b{position:absolute;inset:5px 0;display:block}
+.h-rt-hsrg i{position:absolute;top:0;width:10px;height:14px;margin-left:-5px;background:#fff;border:1px solid #333;cursor:ew-resize;z-index:1;clip-path:polygon(50% 0,100% 35%,100% 100%,0 100%,0 35%)}
+.h-rt-hsrg i.is-in{background:#333}
+.h-rt-pbtns{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.h-rt-pgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.h-rt-pnum{display:flex;align-items:center;gap:4px}
+.h-rt-pnum span{width:3.2em;font-weight:600;font-size:12px}
+.h-rt-pnum input{width:100%;min-width:0}
+canvas.is-picking{cursor:crosshair}
+/* ¶ Paragraphe · Ω Glyphes */
+.h-rt-chpages{display:flex;border:1px solid #c9ccd1;margin-bottom:8px}
+.h-rt-chpages button{flex:1;border:0;border-right:1px solid #c9ccd1;background:transparent;padding:5px 2px;font-size:12px;font-weight:700;cursor:pointer;color:inherit;border-radius:0}
+.h-rt-chpages button:last-child{border-right:0}
+.h-rt-chpages button.is-on{background:#111;color:#fff}
+.h-rt-paligns{display:grid!important;grid-template-columns:repeat(7,1fr)}
+.h-rt-paligns button{display:grid;place-items:center;padding:5px 0}
+.h-rt-gltop{display:flex;gap:6px;margin-bottom:6px}
+.h-rt-gltop select{flex:1;min-width:0}
+.h-rt-gltop input{width:9em}
+.h-rt-glgrid,.h-rt-glrecent{display:grid;grid-template-columns:repeat(auto-fill,minmax(32px,1fr));gap:2px}
+.h-rt-glrecent{margin-bottom:6px;padding-bottom:6px;border-bottom:1px dashed #d9dce1}
+.h-rt-glrecent small{grid-column:1/-1}
+.h-rt-glgrid{max-height:300px;overflow:auto}
+.h-rt-glgrid button,.h-rt-glrecent button{height:34px;border:1px solid #d9dce1;background:var(--panel,#fff);font-size:18px;cursor:pointer;border-radius:0;color:inherit;padding:0;overflow:hidden;font-family:inherit}
+.h-rt-glgrid button small,.h-rt-glrecent button small{font-size:8px;line-height:1;font-family:system-ui}
+.h-rt-glgrid button:hover,.h-rt-glrecent button:hover{background:#111;color:#fff}
+:root[data-theme="dark"] .h-rt-props section{border-color:#3a3f46}
+/* ▩ Motifs · 🖌 Formes */
+.h-rt-patgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:5px;margin:.4rem 0 .6rem}
+.h-rt-patc{position:relative;display:block}
+.h-rt-patc>button[data-pt-pick]{display:block;width:100%;aspect-ratio:1;border:1px solid rgba(0,0,0,.25);background-color:#fff;background-size:22px;cursor:pointer;border-radius:0;padding:0;image-rendering:auto}
+.h-rt-patc.is-on>button[data-pt-pick]{outline:2px solid #2a7de1;outline-offset:1px}
+.h-rt-patc:hover .h-rt-gpredel{display:block}
+.h-rt-patprev{display:block;width:100%;height:auto;border:1px solid #c9ccd1;margin:.4rem 0;background:repeating-conic-gradient(#e5e7eb 0 25%,#fff 0 50%) 0 0/12px 12px}
+.h-rt-patmake{width:min(360px,92%)}
+.h-rt-bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:4px;margin:.4rem 0}
+.h-rt-bpre{position:relative;display:block}
+.h-rt-bpre>button[data-tp-pre]{display:flex;flex-direction:column;align-items:center;width:100%;border:1px solid #d9dce1;background:#fff;padding:2px;cursor:pointer;border-radius:0;color:#111}
+.h-rt-bpre>button canvas{width:96px;height:34px;max-width:100%}
+.h-rt-bpre>button small{font-size:10px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.h-rt-bpre.is-on>button[data-tp-pre]{outline:2px solid #2a7de1;outline-offset:-2px}
+.h-rt-bpre:hover .h-rt-gpredel{display:block}
+.h-rt-bprev{display:block;width:100%;height:auto;border:1px solid #c9ccd1;background:#fff;margin:.3rem 0 .5rem}
+.h-rt-brushes .h-rt-lsec{margin:.3rem 0}
+.h-rt-props,.h-rt-pats,.h-rt-brushes,.h-rt-char{grid-template-columns:minmax(0,1fr)}
+.h-rt-brushes select,.h-rt-pats select,.h-rt-props select{min-width:0;max-width:100%}
+.h-rt-bprev,.h-rt-patprev{max-width:100%}
