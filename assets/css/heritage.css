@@ -2666,6 +2666,17 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-mt-clip { position:absolute; }
 .h-mt-clip.is-img { background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.35) 0 6px, transparent 6px 12px); }
 .h-mt-kfm { position:absolute; bottom:2px; width:8px; height:8px; margin-left:-4px; background:#ffcc00; border:1px solid #333; transform:rotate(45deg); pointer-events:none; }
+/* 🥁 temps d'une musique, 🧲 ligne de l'aimant, 🔒 piste verrouillée */
+.h-mt-beat { position:absolute; bottom:0; width:1px; height:9px; background:rgba(0,0,0,.55); pointer-events:none; }
+.h-mt-snapline { position:absolute; top:0; bottom:0; width:0; border-left:1px dashed #e0a100; pointer-events:none; z-index:6; }
+.h-mt-snapline[hidden] { display:none; }
+.h-mt-lane.is-locked { background-image:repeating-linear-gradient(135deg, rgba(127,127,127,.12) 0 5px, transparent 5px 10px); }
+.h-mt-lane.is-locked > .h-mt-clip { cursor:not-allowed; border-style:dashed; }
+.h-mt-tbtns button.is-on { border-color:#c08a00; background:#fff3cc; }
+.h-mt-snapbtn.is-on { box-shadow:inset 0 0 0 2px #c08a00; }
+.h-mt-prog { display:flex; gap:8px; align-items:center; } .h-mt-prog progress { flex:1; min-width:0; }
+:root[data-theme="dark"] .h-mt-beat { background:rgba(255,255,255,.7); }
+:root[data-theme="dark"] .h-mt-tbtns button.is-on { background:#4a3a08; }
 .h-avx-pickthumb { width:34px; height:26px; object-fit:cover; border-radius:3px; vertical-align:middle; }
 .h-mt-insp { margin:10px 0; border:1px solid #d6d6dc; border-radius:8px; background:#fff; color:#1d1d1f; font-size:13px; overflow:hidden; }
 .h-mt-ihead { display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px; padding:8px 10px; border-bottom:1px solid #e4e4e8; }
