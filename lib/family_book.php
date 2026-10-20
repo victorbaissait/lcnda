@@ -87,7 +87,7 @@ function family_book_model(PDO $pdo, array $o, array $q): array
         foreach ($pdo->query("SELECT ml.entity_id AS person_id,m.id,m.title,m.filename,m.thumbnail FROM media_links ml JOIN media m ON m.id=ml.media_id
             WHERE ml.entity_type='person' AND COALESCE(m.media_type,'image')='image' ORDER BY ml.position,m.id") as $m) {
             $pid = (int) $m['person_id'];
-            if (isset($visible[$pid]) && count($photosBy[$pid] ?? []) < $o['photos']) { $photosBy[$pid][] = ['file' => ($m['thumbnail'] ?? '') ?: (string) $m['filename'], 'full' => (string) $m['filename'], 'title' => ($m['title'] ?? '') ?: (string) $m['filename']]; }
+            if (isset($visible[$pid]) && count($photosBy[$pid] ?? []) < $o['photos']) { $photosBy[$pid][] = ['id' => (int) $m['id'], 'file' => ($m['thumbnail'] ?? '') ?: (string) $m['filename'], 'full' => (string) $m['filename'], 'title' => ($m['title'] ?? '') ?: (string) $m['filename']]; }
         }
     }
     $notesBy = [];
@@ -101,12 +101,16 @@ function family_book_model(PDO $pdo, array $o, array $q): array
     elseif ($o['order'] === 'name') { usort($people, static fn($a, $b) => strcoll(mb_strtolower(($a['last_name'] ?? '') . ' ' . ($a['first_name'] ?? '')), mb_strtolower(($b['last_name'] ?? '') . ' ' . ($b['first_name'] ?? '')))); }
     elseif ($o['order'] === 'generation' && $numbers) { usort($people, static function ($a, $b) use ($numbers) { $g = static fn($p) => ($s = $numbers[(int) $p['id']]['sosa'][0] ?? null) ? (int) floor(log((float) $s, 2)) : (($d = $numbers[(int) $p['id']]['daboville'][0] ?? null) ? substr_count((string) $d, '.') : 99); return [$g($a), (int) ($a['birth_year'] ?: 9999)] <=> [$g($b), (int) ($b['birth_year'] ?: 9999)]; }); }
 
-    $persons = [];
+    $persons = []; $portraitStmt = null;
     foreach ($people as $p) {
         $id = (int) $p['id'];
         $names = static fn(array $ids) => array_values(array_filter(array_map(static fn($x) => $byId[$x] ?? null, array_values($ids))));
         $parents = $names($parentsOf[$id] ?? []); $partners = $names($partnersOf[$id] ?? []); $children = $names($childrenOf[$id] ?? []);
         $evs = $eventsBy[$id] ?? [];
+        // pour le publipostage de la mise en page : lieux de naissance et de décès, métier, premier numéro Sosa, portrait en grand
+        $placeOf = static function (array $tags) use ($evs): string { foreach ($tags as $t) { foreach ($evs as $e) { if (($e['gedcom_tag'] ?? '') === $t && ($e['place_name'] ?? '') !== '') { return (string) $e['place_name']; } } } return ''; };
+        $portraitFull = '';
+        if (!empty($p['portrait_media_id'])) { $portraitStmt ??= $pdo->prepare('SELECT filename FROM media WHERE id=?'); $portraitStmt->execute([(int) $p['portrait_media_id']]); $portraitFull = (string) ($portraitStmt->fetchColumn() ?: ''); }
         $persons[] = [
             'id' => $id, 'name' => full_name($p) ?: 'Personne sans nom', 'number' => $numberLabel($id), 'life' => $life($p),
             'first_name' => (string) ($p['first_name'] ?? ''), 'last_name' => (string) ($p['last_name'] ?? ''), 'gender' => (string) ($p['gender'] ?? 'unknown'),
@@ -117,6 +121,8 @@ function family_book_model(PDO $pdo, array $o, array $q): array
             'parents' => array_map(static fn($x) => full_name($x), $parents), 'partners' => array_map(static fn($x) => full_name($x), $partners), 'children' => array_map(static fn($x) => full_name($x), $children),
             'events' => array_map(static fn($e) => ['date' => (string) (($e['date_text'] ?? '') ?: ($e['year'] ?? '')), 'type' => (string) ($e['type_label'] ?? 'Événement'), 'place' => trim(implode(', ', array_filter([$e['place_name'] ?? '', $e['country'] ?? ''])))], array_slice($evs, 0, $o['events'] ?: 0)),
             'photos' => $photosBy[$id] ?? [], 'notes' => $notesBy[$id] ?? [],
+            'occupation' => trim((string) ($p['occupation'] ?? '')), 'birth_place' => $placeOf(['BIRT', 'CHR', 'BAPM']), 'death_place' => $placeOf(['DEAT', 'BURI']),
+            'sosa' => (string) ($numbers[$id]['sosa'][0] ?? ''), 'portrait_id' => (int) ($p['portrait_media_id'] ?? 0), 'portrait_full' => $portraitFull,
         ];
     }
     // L'arbre

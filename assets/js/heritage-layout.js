@@ -240,6 +240,7 @@
             if (Array.isArray(it.names)) o.names = it.names.filter(n => typeof n === 'string').slice(0, 20000).map(n => n.slice(0, 160));
             if (Array.isArray(it.terms)) o.terms = it.terms.filter(n => typeof n === 'string' && n.trim()).slice(0, 20000).map(n => n.slice(0, 120)); }
         if (it.type === 'frame' && it.tree && Number(it.tree.root) > 0) o.tree = cleanTree(it.tree);
+        if (it.type === 'frame' && it.qr && typeof it.qr === 'object' && String(it.qr.text || '').trim()) o.qr = {kind: ['person', 'url', 'text'].includes(it.qr.kind) ? it.qr.kind : 'text', text: String(it.qr.text).slice(0, 600), person: Math.max(0, Math.round(Number(it.qr.person) || 0)), dark: hexOk(it.qr.dark) ? it.qr.dark : '#000000', light: it.qr.light === 'none' ? 'none' : hexOk(it.qr.light) ? it.qr.light : '#ffffff', quiet: clamp(it.qr.quiet ?? 4, 0, 10)}; // ▦ QR code (redessiné d'après ces réglages)
         if (Number(it.mediaId) > 0) o.mediaId = Math.round(Number(it.mediaId));
         if (it.type === 'frame' && Number(it.diagramId) > 0) o.diagramId = Math.round(Number(it.diagramId));
         if (it.type === 'text' && it.dyn?.type === 'person' && Number(it.dyn.id) > 0) o.dyn = {type: 'person', id: Math.round(Number(it.dyn.id)), fields: (Array.isArray(it.dyn.fields) ? it.dyn.fields : []).filter(f => DYN_FIELDS.some(d => d[0] === f)), at: String(it.dyn.at || '').slice(0, 40)};
@@ -608,6 +609,118 @@
         if (!doc.pages.length) doc.pages.push({id: nid('p'), master: 'A', items: []});
         return doc;
     }
+    /* ═════════════ 📚 Gabarits de livre de famille prêts à l'emploi : remplis avec une personne (objets dynamiques) ═════════════ */
+    const BOOK_TEMPLATES = [['bio', '📜 Biographie d’un ancêtre', 'Page de titre, portrait, repères en frise, sa vie racontée, ses sources.'], ['tree2', '🌳 Arbre en double page', 'Son arbre étalé sur deux pages en vis-à-vis.'],
+        ['gallery', '🖼️ Galerie de photos', 'Des pages de photos, remplies avec celles de la personne ou de sa famille proche.'], ['chronicle', '📗 Livret de famille / chronique', 'Le couple, les enfants, et les événements de la famille au fil des années.'],
+        ['cousinade', '🎉 Carnet de cousinade', 'L’ancêtre commun, ses descendants branche par branche, « qui est qui », des pages de souvenirs.']];
+    const lookOfDoc = doc => { const st = id => doc.paraStyles.find(x => x.id === id) || {}; return {accent: colorOf(doc, 'sw-accent', '#7a2e2e'), text: colorOf(doc, 'sw-text', '#222222'), soft: colorOf(doc, 'sw-soft', '#6b6b6b'), light: colorOf(doc, 'sw-light', '#f3ece4'), paper: colorOf(doc, 'sw-paper', '#ffffff'), font: fontOk(st('ps-body').font) || 'Georgia', title: fontOk(st('ps-name').font || st('ps-title').font) || 'Georgia'}; };
+    async function templateDoc(kind, {root, th, pageOpts = {}, gens = 4, photosOf = 'person', title = '', author = ''}) {
+        const doc = themeDoc(th, '', {...pageOpts, facing: kind === 'tree2' ? true : pageOpts.facing});
+        doc.pages = [];
+        const now = () => new Date().toISOString().slice(0, 16);
+        const page = (master = 'A') => { const pg = {id: nid('p'), master, items: []}; doc.pages.push(pg); const i = doc.pages.length - 1; return {pg, i, b: box(doc, i)}; };
+        const head = (b, text, ps = 'ps-chapter') => textItem({x: b.x, y: b.y, w: b.w, h: 16, html: `<p data-ps="${ps}">${esc(text)}</p>`, name: 'Titre'});
+        const chapter = (t, paras, columns = 1) => { if (!paras.length) return; const {pg, b} = page(); pg.items.push(head(b, t)); pg.flowTop = b.y + 20; flow(doc, paras, {first: pg, columns}); delete pg.flowTop; };
+        const dyn = async (id, fields, o) => textItem({...o, html: await personDynHtml(id, fields), name: 'Texte lié à une fiche', dyn: {type: 'person', id, fields, at: now()}});
+        const portrait = (p, o) => { const f = p?.portrait_full || p?.portrait || p?.photos?.[0]?.full || ''; return shapeItem('frame', {fit: 'fill', fill: f ? 'none' : 'sw-light', stroke: {c: 'sw-accent', w: 0.5}, name: 'Portrait', ...o, ...(f ? {src: `media/${f}`, srcName: p.name, mediaId: p.portrait_id || p.photos?.[0]?.id || undefined} : {})}); };
+        const fam = (scope, g, extra = {}) => api('layout_family_data', {scope, root_id: String(root), generations: String(g), order: 'book', photo_count: '12', event_count: '60', sections: 'people', parts: 'bio,family,events,photos,notes', ...extra});
+        const photoPages = (photos, label) => { // 6 photos par page (2 × 3), avec leur légende
+            for (let k = 0; k < photos.length; k += 6) {
+                const {pg, b} = page(), chunk = photos.slice(k, k + 6), top = k ? b.y : b.y + 20, cols = 2, rows = 3, gw = (b.w - 6) / cols, gh = (b.y + b.h - top - 2 * 6) / rows;
+                if (!k) pg.items.push(head(b, label));
+                chunk.forEach((m, j) => { const x = b.x + (j % cols) * (gw + 6), y = top + Math.floor(j / cols) * (gh + 6);
+                    pg.items.push(shapeItem('frame', {x: r1(x), y: r1(y), w: r1(gw), h: r1(gh - 8), src: `media/${m.full || m.file}`, srcName: m.title, mediaId: m.id || undefined, fit: 'fit', fill: 'none', stroke: {c: 'none', w: 0}, name: 'Photo'}),
+                        textItem({x: r1(x), y: r1(y + gh - 7.5), w: r1(gw), h: 7, html: `<p data-ps="ps-caption">${esc(m.title || '')}</p>`, name: 'Légende'})); });
+            }
+        };
+        const treePage = async (cfg, b, pg, spread = null) => { // un arbre dynamique ; spread : la page de droite, l'arbre passe de l'une à l'autre
+            const r = await treeSvg(cfg, lookOfDoc(doc)), src = svgData(r.svg), W = doc.page.w;
+            const fr = spread ? {x: b.x, y: b.y + 18, w: r1(W + spread.b.x + spread.b.w - b.x), h: r1(b.h - 18)} : {x: b.x, y: b.y + 18, w: b.w, h: r1(b.h - 18)};
+            pg.items.push(shapeItem('frame', {...fr, src, srcName: r.name, tree: {...cfg, at: now()}, fit: 'fit', fill: 'none', stroke: {c: 'none', w: 0}, name: 'Arbre'}));
+            if (spread) spread.pg.items.push(shapeItem('frame', {...fr, x: r1(fr.x - W), src, srcName: r.name, tree: {...cfg, at: now()}, fit: 'fit', fill: 'none', stroke: {c: 'none', w: 0}, name: 'Arbre (suite)'}));
+        };
+        const data = await fam(kind === 'cousinade' || kind === 'chronicle' ? 'descendants' : photosOf === 'family' && kind === 'gallery' ? 'both' : 'ancestors', kind === 'cousinade' ? gens : kind === 'chronicle' || (kind === 'gallery' && photosOf === 'family') ? 2 : 1);
+        const p = (data.persons || []).find(x => Number(x.id) === Number(root)) || data.persons?.[0];
+        if (!p) throw new Error('Personne introuvable (ou cachée à l’export).');
+        doc.title = title || {bio: `Vie de ${p.name}`, tree2: `L’arbre de ${p.name}`, gallery: `Album de ${p.name}`, chronicle: 'Livret de famille', cousinade: `Cousinade des descendants de ${p.name}`}[kind];
+        const cover = (sub) => doc.pages.push({id: nid('p'), master: 'B', items: coverItems(doc, th, {title: doc.title, subtitle: sub, author, photo: p.portrait_full || p.portrait ? `media/${p.portrait_full || p.portrait}` : (p.photos?.[0] ? `media/${p.photos[0].full || p.photos[0].file}` : '')})});
+        if (kind === 'bio') {
+            cover(p.life);
+            { const {pg, b} = page(); pg.items.push(head(b, p.name, 'ps-name')); const fw = Math.min(b.w * 0.55, b.h * 0.42), fh = fw * 1.25; pg.items.push(portrait(p, {x: r1(b.x + (b.w - fw) / 2), y: b.y + 20, w: r1(fw), h: r1(fh)}));
+                pg.items.push(await dyn(p.id, ['life', 'occupation', 'parents', 'partners', 'children'], {x: b.x, y: r1(b.y + 26 + fh), w: b.w, h: r1(b.h - 26 - fh)})); }
+            const evs = p.events || [], per = Math.max(4, Math.floor((box(doc, 0).h - 22) / 14));
+            for (let k = 0; k < evs.length; k += per) {
+                const {pg, b} = page(), chunk = evs.slice(k, k + per), x0 = b.x + 30, top = b.y + 22;
+                pg.items.push(head(b, k ? 'Repères (suite)' : 'Repères'), shapeItem('line', {x: x0, y: top - 2, w: 0, h: r1(chunk.length * 14), stroke: {c: 'sw-accent', w: 0.8}, name: 'Frise'}));
+                chunk.forEach((e, j) => { const y = top + j * 14; pg.items.push(shapeItem('ellipse', {x: x0 - 2, y: y + 1, w: 4, h: 4, fill: 'sw-accent', stroke: {c: 'none', w: 0}, name: 'Point'}),
+                    textItem({x: b.x, y, w: 26, h: 12, html: `<p data-ps="ps-dates" style="text-align:right">${esc(e.date || '?')}</p>`, name: 'Date'}),
+                    textItem({x: x0 + 6, y, w: r1(b.w - 36), h: 12, html: `<p data-ps="ps-body" style="text-indent:0;text-align:left"><b>${esc(e.type)}</b>${e.place ? ` — ${esc(e.place)}` : ''}</p>`, name: 'Événement'})); });
+            }
+            chapter('Sa vie', String(p.bio || '').split(/\n+/).filter(Boolean).map(t => ({ps: 'ps-body', text: t})));
+            let sources = []; try { sources = (await api('person', {id: p.id})).sources || []; } catch (_) {}
+            chapter('Sources', sources.length ? sources.map(s => ({ps: 'ps-list', text: `• ${[s.title || s.name || 'Source', s.author, s.citation || s.page || s.reference].filter(Boolean).join(' — ')}`})) : [{ps: 'ps-body', text: 'Aucune source rattachée à la fiche pour l’instant : ajoute-les dans la fiche, ou écris-les ici.'}]);
+            if ((p.photos || []).length > 1) photoPages(p.photos, 'Photos');
+        } else if (kind === 'tree2') {
+            { const {pg, b} = page(); pg.items.push(textItem({x: b.x, y: b.y + b.h * 0.35, w: b.w, h: 30, html: `<p data-ps="ps-title">${esc(doc.title)}</p><p data-ps="ps-subtitle">${esc(A().plural(clamp(gens, 2, 6), 'génération'))}</p>`, name: 'Titre'})); }
+            const L = page(), R = page();
+            L.pg.items.push(head(L.b, `Les ancêtres de ${p.name}`));
+            await treePage({root: p.id, mode: 'asc', gens: clamp(gens, 2, 6), style: 'classic', photos: true, dates: true, places: false}, L.b, L.pg, R);
+        } else if (kind === 'gallery') {
+            const seen = new Set(), photos = []; (data.persons || []).forEach(x => (x.photos || []).forEach(m => { const k = m.id || m.full; if (!seen.has(k)) { seen.add(k); photos.push(m); } }));
+            if (!photos.length) throw new Error(photosOf === 'family' ? 'Aucune photo rattachée à cette personne ni à sa famille proche.' : 'Aucune photo rattachée à cette personne (essaie « sa famille proche »).');
+            cover(photosOf === 'family' ? 'La famille en photos' : p.life);
+            photoPages(photos, photosOf === 'family' ? `${p.name} et sa famille` : p.name);
+        } else if (kind === 'chronicle') {
+            let full = {}; try { full = await api('person', {id: p.id}); } catch (_) {}
+            const partners = (full.partners || []).filter(x => Number(x.id) > 0), children = (full.children || []).filter(x => Number(x.id) > 0), nm = x => [x.first_name, x.last_name].filter(Boolean).join(' ');
+            cover([p.name, ...partners.map(nm)].filter(Boolean).join(' et '));
+            { const {pg, b} = page(); pg.items.push(head(b, partners.length ? 'Les époux' : 'Le chef de famille')); const fw = Math.min(42, b.w * 0.3), half = (b.h - 24) / 2;
+                pg.items.push(portrait(p, {x: b.x, y: b.y + 22, w: fw, h: r1(fw * 1.25)}), await dyn(p.id, ['name', 'life', 'occupation', 'parents'], {x: r1(b.x + fw + 6), y: b.y + 22, w: r1(b.w - fw - 6), h: r1(half - 4)}));
+                if (partners[0]) pg.items.push(await dyn(Number(partners[0].id), ['name', 'life', 'occupation', 'parents'], {x: r1(b.x + fw + 6), y: r1(b.y + 24 + half), w: r1(b.w - fw - 6), h: r1(half - 4)})); }
+            for (let k = 0; k < children.length; k += 3) {
+                const {pg, b} = page(), chunk = children.slice(k, k + 3), hh = (b.h - 22) / 3; pg.items.push(head(b, k ? 'Les enfants (suite)' : 'Les enfants'));
+                for (let j = 0; j < chunk.length; j++) pg.items.push(await dyn(Number(chunk[j].id), ['name', 'life', 'partners'], {x: b.x, y: r1(b.y + 22 + j * hh), w: b.w, h: r1(hh - 4)}));
+            }
+            chapter('Chronique de la famille', (data.chronology || []).map(e => ({ps: 'ps-list', lead: e.date, text: `${e.type} — ${e.who}${e.place ? ` (${e.place})` : ''}`})));
+            if (!(data.chronology || []).length) chapter('Chronique de la famille', [{ps: 'ps-body', text: 'Les événements de la famille (naissances, mariages, décès…) viendront ici quand ils seront datés dans les fiches.'}]);
+        } else if (kind === 'cousinade') {
+            cover('{date}');
+            { const {pg, b} = page(); pg.items.push(head(b, 'Notre ancêtre commun')); const fw = Math.min(b.w * 0.5, b.h * 0.38), fh = fw * 1.25; pg.items.push(portrait(p, {x: r1(b.x + (b.w - fw) / 2), y: b.y + 20, w: r1(fw), h: r1(fh)}));
+                pg.items.push(await dyn(p.id, ['name', 'life', 'occupation', 'partners', 'children'], {x: b.x, y: r1(b.y + 26 + fh), w: b.w, h: r1(b.h - 26 - fh)})); }
+            { const {pg, b} = page(); pg.items.push(head(b, 'L’arbre des descendants')); await treePage({root: p.id, mode: 'desc', gens: clamp(Math.min(gens, 4), 2, 4), style: 'color', photos: false, dates: true, places: false}, b, pg); }
+            const branches = new Map(); Object.values(data.tree?.descendants || {}).forEach(([n, name, life]) => { const k = String(n).split('.').slice(0, 2).join('.'); if (!branches.has(k)) branches.set(k, []); branches.get(k).push({n, name, life}); });
+            [...branches.entries()].filter(([k]) => k.includes('.')).forEach(([k, list]) => chapter(`Branche ${k} : ${list.find(x => String(x.n) === k)?.name || ''}`, list.map(x => ({ps: 'ps-list', lead: String(x.n), text: `${x.name} (${x.life})`}))));
+            chapter('Qui est qui ?', (data.index || []).map(x => ({ps: 'ps-list', text: `${x.name} (${x.life})${x.number ? ' — ' + x.number : ''}`})), 2);
+            for (const t of ['Souvenirs de la journée', 'Autographes des cousins']) { const {pg, b} = page(); pg.items.push(head(b, t)); for (let y = b.y + 26; y < b.y + b.h - 4; y += 9) pg.items.push(shapeItem('line', {x: b.x, y: r1(y), w: b.w, h: 0, stroke: {c: 'sw-soft', w: 0.25}, name: 'Ligne'})); }
+        }
+        if (!doc.pages.length) page();
+        return doc;
+    }
+    /** 📚 Nouveau livre d'après un gabarit prêt à l'emploi */
+    function templateWizard(onSaved, kind = 'bio') {
+        const d = defaults(), start = A().state.bootstrap?.startPersonId, P = window.LCNDA_PICKER || A();
+        ext.openDialog({eyebrow: 'NOUVEAU DOCUMENT', title: '📚 Un livre de famille prêt à l’emploi', wide: true, submitLabel: 'Faire le livre',
+            body: `<div class="ly-tplpick">${BOOK_TEMPLATES.map(([k, l, h]) => `<label class="ly-tplcard"><input type="radio" name="tpl" value="${k}" ${k === kind ? 'checked' : ''}><b>${l}</b><small>${esc(h)}</small></label>`).join('')}</div>
+                <div class="form-grid"><div><span class="pk-lab" data-tplwho>Personne</span>${P.pickerField({name: 'tpl_root', kind: 'person', value: start || null})}</div>
+                <label>Nom du document <input name="name" maxlength="160" placeholder="automatique si vide"></label>
+                <label>Design <select name="design">${THEMES.map(th => `<option value="${th.id}">${esc(th.name)}</option>`).join('')}</select></label>
+                <label data-tplopt="gens">Générations <input type="number" name="gens" min="2" max="8" value="4"></label>
+                <label data-tplopt="photos">Les photos <select name="photos"><option value="person">de la personne</option><option value="family">de la personne et de sa famille proche</option></select></label>
+                <label>Auteur <input name="author" maxlength="200"></label>
+                ${formatFieldsHtml(d.w, d.h)}</div>
+                <p class="muted">Tout se modifie ensuite. Les textes des fiches sont des objets dynamiques : « ↻ Mettre à jour » les refait si la fiche change.</p>`,
+            onOpen: dg => { bindFormatFields(dg); const sync = () => { const k = dg.querySelector('[name=tpl]:checked')?.value; dg.querySelector('[data-tplopt=gens]').hidden = !['tree2', 'cousinade'].includes(k); dg.querySelector('[data-tplopt=photos]').hidden = k !== 'gallery'; dg.querySelector('[data-tplwho]').textContent = k === 'cousinade' ? 'L’ancêtre commun' : k === 'chronicle' ? 'Le chef de famille (ou l’un des époux)' : 'Personne'; }; dg.addEventListener('change', sync); sync(); },
+            onSubmit: async f => {
+                const v = Object.fromEntries(new FormData(f)), root = Number(f.elements.tpl_root?.value) || 0;
+                if (!root) { toast('Choisis la personne.', 'error'); return false; }
+                const fm = f.closest('dialog')._formatMm?.(); if (fm && (fm.w < 30 || fm.h < 30)) { toast('Format entre 3 cm et 1,5 m de côté.', 'error'); return false; }
+                const th = THEMES.find(t => t.id === v.design) || THEMES[0];
+                toast('Le livre se prépare…');
+                let doc; try { doc = await templateDoc(v.tpl || 'bio', {root, th, pageOpts: fm ? {w: fm.w, h: fm.h} : {}, gens: clamp(v.gens, 2, 8), photosOf: v.photos, author: v.author || ''}); } catch (err) { toast(err.message, 'error'); return false; }
+                openEditor({id: 0, name: (v.name || doc.title || 'Mon livre').slice(0, 160), doc, onSaved});
+            }});
+    }
+    ext.layoutTemplates = {list: BOOK_TEMPLATES, build: templateDoc, wizard: templateWizard};
     /* ═════════════ L'éditeur ═════════════ */
     const TOOLS = [['select', '➤', 'Sélection (V)', 'v'], ['text', 'T', 'Texte (T)', 't'], ['frame', '⊠', 'Cadre d’image (F)', 'f'], ['rect', '▭', 'Rectangle (M)', 'm'], ['ellipse', '◯', 'Ellipse (L)', 'l'], ['polygon', '⬡', 'Polygone (Y)', 'y'], ['star', '☆', 'Étoile (E)', 'e'], ['line', '╲', 'Ligne (\\)', '\\'], ['pen', '✒︎', 'Plume (P) : clic = point, double-clic ou Entrée = fini', 'p'], ['hand', '✋', 'Main (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — Alt pour reculer', 'z']];
     const PANELS = [['pages', '📄', 'Pages'], ['layers', '🗂', 'Calques'], ['obj', '🔧', 'Objet'], ['text', '🅰', 'Texte'], ['color', '🎨', 'Couleur'], ['links', '🔗', 'Liens'], ['review', '💬', 'Relecture'], ['history', '🕘', 'Historique'], ['doc', '⚙️', 'Document']];
@@ -639,8 +752,8 @@
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
                 <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['export', '⤓ Exporter (PDF, ePub, HTML, fichier)…'], ['-'], ['preflight', '✅ Contrôle avant impression…'], ['relink', '↻ Mettre à jour les objets dynamiques (photos, fiches, arbres)'], ['stylelib', '🎨 Mes styles (pour tous mes documents)…'], ['-'], ['close', 'Fermer']])}
                 ${menu('Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['cut', 'Couper', '⌘X'], ['copy', 'Copier', '⌘C'], ['paste', 'Coller', '⌘V'], ['dup', 'Dupliquer', '⌘D'], ['del', 'Supprimer', '⌫'], ['-'], ['all', 'Tout sélectionner', '⌘A'], ['none', 'Désélectionner', 'Échap']])}
-                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['idxplaces', '📍 Insérer un index des lieux'], ['idxjobs', '🔨 Insérer un index des métiers'], ['-'], ['fnote', '¹ Insérer une note de bas de page…'], ['cite', '📚 Citer une source (en note)…'], ['notesblock', '🗒 Insérer les notes du chapitre'], ['biblio', '📚 Insérer la bibliographie'], ['-'], ['tree', '🌳 Insérer un arbre généalogique (objet dynamique)…'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…'], ['dyndiagram', '📊 Insérer un diagramme (objet dynamique)…']])}
-                ${menu('Page', [['addend', '➕ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['masters', '📄 Gabarit de plusieurs pages…'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
+                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['idxplaces', '📍 Insérer un index des lieux'], ['idxjobs', '🔨 Insérer un index des métiers'], ['-'], ['fnote', '¹ Insérer une note de bas de page…'], ['cite', '📚 Citer une source (en note)…'], ['notesblock', '🗒 Insérer les notes du chapitre'], ['biblio', '📚 Insérer la bibliographie'], ['-'], ['tree', '🌳 Insérer un arbre généalogique (objet dynamique)…'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…'], ['dyndiagram', '📊 Insérer un diagramme (objet dynamique)…'], ['-'], ['qr', '▦ Insérer un QR code (fiche, adresse, texte)…']])}
+                ${menu('Page', [['addend', '➕ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['masters', '📄 Gabarit de plusieurs pages…'], ['-'], ['merge', '📨 Publipostage : une page par personne…'], ['mergesample', '📨 Page modèle de publipostage (avec des champs)'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
                 ${menu('Relecture', [['comment', '💬 Commenter le passage ou l’objet choisi…'], ['suggest', '✎ Suggérer une modification du texte choisi…'], ['reviewpanel', '🗂 Voir les commentaires'], ['-'], ['sendreview', '📨 Envoyer à un cousin (fichier de relecture)…'], ['importreview', '⤒ Importer les commentaires d’un cousin…'], ['annot', '📝 PDF annoté (avec les commentaires)…']])}
                 ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Page entière', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['guides', 'Repères et marges'], ['snap', 'Magnétisme'], ['preview', 'Aperçu (sans repères)', 'W']])}</span>
                 <span class="ly-hbtns" data-tbg="ly-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state data-ui-status></span>${ext.tbButton ? ext.tbButton('layout') : ''}<button type="button" class="button small secondary" data-ly-cmd="export" title="Exporter : PDF, ePub, HTML, impression, fichier du document">⤓ Exporter ▾</button><button type="button" class="button small" data-ly-cmd="save" title="Enregistrer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('layout') : ''}<button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
@@ -679,7 +792,7 @@
             timeline = timeline.slice(0, pos + 1); timeline.push({snap, label: label || act || 'Modification', at: new Date()}); act = '';
             if (timeline.length > 150) timeline.shift(); pos = timeline.length - 1; setDirty(); syncHistory();
         };
-        const goTo = i => { if (i < 0 || i >= timeline.length) return; if (editingId) stopEditing(); const o = JSON.parse(timeline[i].snap); D = o.D; cur = Math.min(o.cur, D.pages.length - 1); sel = []; editingId = null; pos = i; setDirty(); render(); };
+        const goTo = i => { if (i < 0 || i >= timeline.length) return; if (editingId) stopEditing(); const o = JSON.parse(timeline[i].snap); D = o.D; cur = Math.min(o.cur, D.pages.length - 1); sel = []; editingId = null; pos = i; setDirty(); render(); syncHistory(); };
         const undo = () => { if (editingId) stopEditing(); if (pos <= 0) return msg('Rien à annuler.'); msg(`Annulé : ${timeline[pos].label}`); goTo(pos - 1); };
         const redo = () => { if (pos >= timeline.length - 1) return msg('Rien à rétablir.'); goTo(pos + 1); msg(`Rétabli : ${timeline[pos].label}`); };
         // H7 : une suppression faite sans question ; « ↶ Annuler » dans le message en bas à gauche (tant que rien d'autre n'a changé depuis)
@@ -840,7 +953,7 @@
             const itemEl = e.target.closest('.ly-item:not(.ly-from-master)'); if (!itemEl) return;
             const it = curList().find(x => x.id === itemEl.dataset.id); if (!it) return;
             if (tool === 'pen') return;
-            if (it.type === 'text') startEditing(it); else if (it.type === 'frame') placeImage(it);
+            if (it.type === 'text') startEditing(it); else if (it.type === 'frame' && it.qr) qrDialog(it); else if (it.type === 'frame') placeImage(it);
         });
         canvas.addEventListener('pointermove', e => { const pe = pageEl(); if (!pe || !pe.contains(e.target) && !pageOfEvent(e)) return; const P = mmAt(e, pe); $('[data-ly-pos]').textContent = `x ${r1(P.x)} · y ${r1(P.y)} mm`; if (pen) drawPen(P); });
         canvas.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey) { e.preventDefault(); setZoom(zoom * (e.deltaY < 0 ? 1.1 : 1 / 1.1)); } }, {passive: false});
@@ -1133,6 +1246,129 @@
                     commit('Texte lié à une fiche'); render();
                 }});
         }
+        /* ─── ▦ QR code : vers une fiche (ses fiches en ligne, FamilySearch, ou son identité en texte), une adresse web, un texte ─── */
+        function qrDialog(it = null) {
+            if (!ext.qr) return msg('Le générateur de QR codes n’est pas encore prêt.');
+            const q0 = it?.qr || {kind: 'person', text: '', person: 0, dark: '#000000', light: '#ffffff', quiet: 4};
+            let choices = [], loadedFor = 0;
+            const P = window.LCNDA_PICKER || A();
+            ext.openDialog({eyebrow: 'QR CODE', title: it ? '▦ Modifier le QR code' : '▦ Insérer un QR code', submitLabel: it ? 'Mettre à jour' : 'Insérer', wide: true,
+                body: `<div class="ly-qrdlg"><div class="ly-qrform">
+                    <fieldset><legend>Ce que le QR code ouvre</legend>${[['person', '👤 Une fiche de la généalogie'], ['url', '🌐 Une adresse web'], ['text', '🔤 Un texte']].map(([k, l]) => `<label class="checkbox-line"><input type="radio" name="qkind" value="${k}" ${q0.kind === k ? 'checked' : ''}> ${l}</label>`).join('')}</fieldset>
+                    <div data-q="person"><span class="pk-lab">Personne</span>${P.pickerField({name: 'ly_qrp', kind: 'person', value: q0.person || null})}
+                        <label>Le contenu <select name="qchoice"><option value="">(choisis d’abord la personne)</option></select></label>
+                        <p class="muted">Les fiches de l’app restent sur cet ordinateur : le QR code mène aux fiches en ligne de la personne (Geneanet, Filae…, notées dans sa fiche) ou à FamilySearch ; sinon, il contient son identité en texte (lisible par n’importe quel téléphone).</p></div>
+                    <label data-q="url">Adresse <input name="qurl" type="url" placeholder="https://…" value="${esc(q0.kind === 'url' ? q0.text : '')}"></label>
+                    <label data-q="text">Texte <textarea name="qtext" rows="3" maxlength="600">${esc(q0.kind === 'text' ? q0.text : '')}</textarea></label>
+                    <div class="form-grid"><label>Couleur <input type="color" name="qdark" value="${esc(q0.dark)}"></label><label>Fond <input type="color" name="qlight" value="${esc(q0.light === 'none' ? '#ffffff' : q0.light)}"></label>
+                        <label class="checkbox-line"><input type="checkbox" name="qnobg" ${q0.light === 'none' ? 'checked' : ''}> fond transparent</label>
+                        <label><span data-help="La marge claire autour du code : 4 modules d’après la norme, pour que les téléphones le lisent bien.">Marge (modules)</span> <input type="number" name="qquiet" min="0" max="10" value="${q0.quiet}"></label>
+                        ${it ? '' : '<label>Taille (mm) <input type="number" name="qsize" min="10" max="200" value="30"></label>'}</div></div>
+                    <figure class="ly-qrprev"><div data-qprev></div><figcaption data-qinfo class="muted"></figcaption></figure></div>`,
+                onOpen: dg => {
+                    const f = dg.querySelector('form') || dg, kind = () => dg.querySelector('[name=qkind]:checked')?.value || 'text';
+                    const sync = () => { dg.querySelectorAll('[data-q]').forEach(el => { el.hidden = el.dataset.q !== kind(); }); prev(); };
+                    const content = () => kind() === 'url' ? String(dg.querySelector('[name=qurl]').value).trim() : kind() === 'text' ? String(dg.querySelector('[name=qtext]').value).trim() : dg.querySelector('[name=qchoice]').value;
+                    const prev = () => { const t = content(), box0 = dg.querySelector('[data-qprev]'), info = dg.querySelector('[data-qinfo]'); if (!t) { box0.innerHTML = ''; info.textContent = 'Rien à coder pour l’instant.'; return; }
+                        try { const r = ext.qr.svg(t, {dark: dg.querySelector('[name=qdark]').value, light: dg.querySelector('[name=qnobg]').checked ? 'none' : dg.querySelector('[name=qlight]').value, quiet: Number(dg.querySelector('[name=qquiet]').value)}); box0.innerHTML = r.svg; info.textContent = `${new TextEncoder().encode(t).length} octets · version ${r.version} (${r.size} × ${r.size} modules) · correction d’erreurs M`; }
+                        catch (err) { box0.innerHTML = ''; info.textContent = '⚠️ ' + err.message; } };
+                    const load = async id => { id = Number(id) || 0; if (!id || id === loadedFor) return; loadedFor = id; const sel0 = dg.querySelector('[name=qchoice]'); sel0.innerHTML = '<option value="">Chargement…</option>';
+                        try { choices = await personQrChoices(id); } catch (err) { choices = []; toast(err.message, 'error'); }
+                        sel0.innerHTML = choices.map(([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`).join(''); if (q0.kind === 'person' && q0.text && choices.some(c => c[0] === q0.text)) sel0.value = q0.text; prev(); };
+                    dg._qrContent = content; dg._qrLoad = load;
+                    dg.addEventListener('cp-pick', e => { if (e.detail?.field === 'ly_qrp') load(e.detail.id); });
+                    dg.addEventListener('input', prev); dg.addEventListener('change', e => { if (e.target.name === 'qkind') sync(); else prev(); });
+                    sync(); if (q0.person) load(q0.person); void f;
+                },
+                onSubmit: async f => {
+                    const dg = f.closest('dialog'), kind = f.elements.qkind.value || 'text';
+                    if (kind === 'person') await dg._qrLoad?.(f.elements.ly_qrp?.value);
+                    const text = dg._qrContent?.() || '';
+                    if (!text) { toast(kind === 'person' ? 'Choisis la personne (et ce que le QR code contient).' : 'Écris ce que le QR code doit contenir.', 'error'); return false; }
+                    const cfg = {kind, text: text.slice(0, 600), person: kind === 'person' ? Number(f.elements.ly_qrp?.value) || 0 : 0, dark: f.elements.qdark.value, light: f.elements.qnobg.checked ? 'none' : f.elements.qlight.value, quiet: clamp(f.elements.qquiet.value, 0, 10)};
+                    let src; try { src = qrSrc(cfg); } catch (err) { toast(err.message, 'error'); return false; }
+                    if (it) { it.qr = cfg; it.src = src; it.srcName = 'QR code'; }
+                    else { const size = clamp(f.elements.qsize?.value || 30, 10, 200), b = box(D, cur); const n = shapeItem('frame', {x: r1(b.x + b.w - size), y: b.y, w: size, h: size, src, srcName: 'QR code', fit: 'fit', fill: 'none', stroke: {c: 'none', w: 0}, lockRatio: true, layer: activeLayer(), name: 'QR code', qr: cfg}); curList().push(n); sel = [n.id]; }
+                    commit(it ? 'QR code modifié' : 'QR code inséré'); render(); msg('▦ QR code : tire un coin pour la taille (il reste carré) ; double-clic pour le modifier.');
+                }});
+        }
+        async function personQrChoices(id) {
+            const r = await api('person', {id}), p = r.person || {}, nm = [p.first_name, p.last_name].filter(Boolean).join(' ') || 'Fiche';
+            const ev = r.events || [], find = re => ev.find(e => re.test(String(e.type_label || e.type || e.event_type || ''))), when = e => String(e?.date_text || e?.year || '');
+            const b = find(/naiss|birth|bapt/i), d = find(/décè|deces|death|inhum|sépult/i);
+            const life = [b && `° ${[when(b), b.place_name || b.place].filter(Boolean).join(' ')}`, d && `† ${[when(d), d.place_name || d.place].filter(Boolean).join(' ')}`].filter(Boolean).join(' ');
+            const ident = [nm, life, p.reference_number ? `réf. ${p.reference_number}` : ''].filter(Boolean).join(' — ');
+            const out = (r.onlineSheets || []).filter(s => /^https?:\/\//i.test(String(s.url || ''))).map(s => [s.url, `🌐 ${s.label || s.site || 'Fiche en ligne'} — ${s.url}`]);
+            if (p.familysearch_id) out.push([`https://www.familysearch.org/tree/person/details/${encodeURIComponent(p.familysearch_id)}`, `🌳 FamilySearch (${p.familysearch_id})`]);
+            out.push([ident, `🪪 Son identité en texte : « ${ident} »`]);
+            return out;
+        }
+        /* ─── 📨 Publipostage : une page modèle (ou un gabarit) avec des champs {prénom}, {nom}…, une page par personne ─── */
+        function mergeSample() {
+            const b = box(D, cur), pg = {id: nid('p'), master: D.pages[cur]?.master || 'A', items: []}, fw = Math.min(55, b.w * 0.4);
+            pg.items.push(textItem({x: b.x, y: b.y, w: b.w, h: 24, html: '<p data-ps="ps-name">{prénom} {nom}</p><p data-ps="ps-dates">{dates} · Sosa {sosa}</p>', name: 'Nom', layer: activeLayer()}));
+            pg.items.push(shapeItem('frame', {x: b.x, y: b.y + 28, w: fw, h: fw * 1.25, fit: 'fill', fill: 'sw-light', stroke: {c: 'sw-accent', w: 0.5}, name: '{portrait}', layer: activeLayer()}));
+            pg.items.push(textItem({x: b.x + fw + 6, y: b.y + 28, w: b.w - fw - 6, h: fw * 1.25, html: '<p data-ps="ps-head">Naissance</p><p data-ps="ps-body">{naissance}, {lieu de naissance}</p><p data-ps="ps-head">Décès</p><p data-ps="ps-body">{décès}, {lieu de décès}</p><p data-ps="ps-head">Métier</p><p data-ps="ps-body">{métier}</p><p data-ps="ps-head">Famille</p><p data-ps="ps-body">Parents : {parents}</p><p data-ps="ps-body">Conjoint : {conjoints}</p>', name: 'Repères', layer: activeLayer()}));
+            pg.items.push(textItem({x: b.x, y: b.y + 34 + fw * 1.25, w: b.w, h: b.h - 34 - fw * 1.25, html: '<p data-ps="ps-body">{biographie}</p>', name: 'Biographie', layer: activeLayer()}));
+            D.pages.splice(cur + 1, 0, pg); commit('Page modèle de publipostage'); goPage(cur + 1);
+            msg('📨 Page modèle posée : change la mise en forme à ton goût, puis Page → « Publipostage ».');
+        }
+        function mergeDialog() {
+            const sources = [...D.pages.map((p, i) => [`p:${i}`, `Page ${i + (D.page.start || 1)}${i === cur ? ' (celle-ci)' : ''}`, p.items]), ...D.masters.map(m => [`m:${m.id}`, `Gabarit « ${m.name} »`, m.items])];
+            const P = window.LCNDA_PICKER || A(), start = A().state.bootstrap?.startPersonId;
+            let data = null, dataKey = '', labels = [];
+            ext.openDialog({eyebrow: 'PUBLIPOSTAGE', title: '📨 Une page par personne', submitLabel: 'Créer les pages', wide: true,
+                body: `<p class="muted">La page modèle contient des champs entre accolades, remplacés pour chaque personne : ${MERGE_FIELDS.map(([k]) => `<code>{${esc(k)}}</code>`).join(' ')}. Un cadre d’image nommé <code>{portrait}</code> (onglet Objet → Nom) reçoit son portrait.</p>
+                    <div class="form-grid"><label>Page modèle <select name="msrc">${sources.map(([v, l]) => `<option value="${v}" ${v === `p:${cur}` ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><p class="muted span-2" data-mfound></p>
+                    <label>Les personnes <select name="mscope"><option value="ancestors">les ancêtres de…</option><option value="descendants">les descendants de…</option><option value="both">ancêtres et descendants de…</option><option value="list">une liste de fiches</option><option value="label">les fiches d’une étiquette</option><option value="all">toute la base</option></select></label>
+                    <div data-mw="root"><span class="pk-lab">Personne de départ</span>${P.pickerField({name: 'mroot', kind: 'person', value: start || null})}</div>
+                    <label data-mw="gens">Générations <input type="number" name="mgens" min="1" max="30" value="4"></label>
+                    <div data-mw="list" class="span-2"><span class="pk-lab">Les fiches</span>${P.pickerField({name: 'mlist', kind: 'person', multiple: true})}</div>
+                    <label data-mw="label">Étiquette <select name="mlabel"><option value="">Chargement…</option></select></label>
+                    <label>Ordre <select name="morder"><option value="book">celui de l’arbre (Sosa, d’Aboville)</option><option value="generation">par génération</option><option value="birth">par naissance</option><option value="name">par nom</option></select></label>
+                    <label>Où <select name="mwhere"><option value="after">après la page modèle</option><option value="end">à la fin du document</option></select></label>
+                    <label class="checkbox-line"><input type="checkbox" name="mdrop"> retirer la page modèle ensuite</label></div>
+                    <p class="ly-mcount" data-mcount>…</p>`,
+                onOpen: dg => {
+                    const v = n => dg.querySelector(`[name=${n}]`)?.value || '';
+                    const showFound = () => { const s = sources.find(x => x[0] === v('msrc')), r = mergeScan(s?.[2] || []); dg.querySelector('[data-mfound]').innerHTML = r.keys.length || r.portrait ? `Champs trouvés : ${r.keys.map(k => `<code>{${esc(k)}}</code>`).join(' ')}${r.portrait ? ' · cadre {portrait}' : ''}` : '⚠️ Aucun champ sur cette page : Page → « Page modèle de publipostage » en pose une toute prête.'; };
+                    const showWho = () => { const sc = v('mscope'); dg.querySelector('[data-mw=root]').hidden = !['ancestors', 'descendants', 'both'].includes(sc); dg.querySelector('[data-mw=gens]').hidden = !['ancestors', 'descendants', 'both'].includes(sc); dg.querySelector('[data-mw=list]').hidden = sc !== 'list'; dg.querySelector('[data-mw=label]').hidden = sc !== 'label'; };
+                    let tm = 0;
+                    const count = () => { clearTimeout(tm); tm = setTimeout(async () => { const el = dg.querySelector('[data-mcount]'); try { const d = await mergeData(dg); el.textContent = d ? `→ ${A().plural(d.persons.length, 'page sera créée', 'pages seront créées')}${d.persons.length > MERGE_MAX ? ` (seulement les ${MERGE_MAX} premières)` : ''}.` : 'Choisis les personnes.'; el.dataset.n = String(d ? Math.min(MERGE_MAX, d.persons.length) : 0); } catch (err) { el.textContent = '⚠️ ' + err.message; } }, 250); };
+                    dg._mergeData = () => mergeData(dg);
+                    dg.addEventListener('change', e => { if (e.target.name === 'msrc') showFound(); if (e.target.name === 'mscope') showWho(); count(); });
+                    dg.addEventListener('input', e => { if (e.target.name === 'mgens') count(); });
+                    dg.addEventListener('cp-pick', count); dg.addEventListener('cp-change', count);
+                    new MutationObserver(count).observe(dg.querySelector('[data-mw=list]'), {subtree: true, childList: true});
+                    api('labels').then(r => { labels = r.labels || []; dg.querySelector('[name=mlabel]').innerHTML = labels.length ? labels.map(l => `<option value="${l.id}">${esc(l.name)}</option>`).join('') : '<option value="">(aucune étiquette)</option>'; }).catch(() => {});
+                    showFound(); showWho(); count();
+                },
+                onSubmit: async f => {
+                    const dg = f.closest('dialog'); let d; try { d = await dg._mergeData(); } catch (err) { toast(err.message, 'error'); return false; }
+                    if (!d?.persons?.length) { toast('Aucune personne dans ce choix.', 'error'); return false; }
+                    const sv = f.elements.msrc.value, s = sources.find(x => x[0] === sv); if (!s) return false;
+                    const fromMaster = sv.startsWith('m:'), srcPage = fromMaster ? null : D.pages[Number(sv.slice(2))];
+                    const people = d.persons.slice(0, MERGE_MAX);
+                    const pages = people.map(p => ({id: nid('p'), master: fromMaster ? '' : (srcPage.master || ''), items: mergeFill(s[2], p)}));
+                    let at = f.elements.mwhere.value === 'end' || fromMaster ? D.pages.length : D.pages.indexOf(srcPage) + 1;
+                    D.pages.splice(at, 0, ...pages);
+                    if (f.elements.mdrop.checked && srcPage) { const k = D.pages.indexOf(srcPage); D.pages.splice(k, 1); if (k < at) at--; }
+                    commit(`Publipostage : ${A().plural(pages.length, 'page')}`); goPage(at);
+                    msg(`📨 ${A().plural(pages.length, 'page créée', 'pages créées')} (une par personne). ↶ pour tout défaire.`);
+                    toast(`Publipostage : ${A().plural(pages.length, 'page créée', 'pages créées')}.`);
+                }});
+            async function mergeData(dg) {
+                const v = n => dg.querySelector(`[name=${n}]`)?.value || '', sc = v('mscope');
+                const q = {scope: ['ancestors', 'descendants', 'both'].includes(sc) ? sc : 'all', root_id: v('mroot'), generations: String(clamp(v('mgens'), 1, 30)), order: v('morder') || 'book', photo_count: '1', event_count: '0', sections: 'people', parts: 'bio,family,photos'};
+                if (['ancestors', 'descendants', 'both'].includes(sc) && !Number(q.root_id)) return null;
+                if (sc === 'list') { q.ids = v('mlist'); if (!q.ids) return null; }
+                if (sc === 'label') { q.label_id = v('mlabel'); if (!Number(q.label_id)) return null; }
+                const key = JSON.stringify(q); if (key === dataKey && data) return data;
+                data = await api('layout_family_data', q); dataKey = key;
+                if (sc === 'list') { const order = q.ids.split(',').map(Number); data.persons.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id)); }
+                return data;
+            }
+        }
         /* ─── ¹ Notes de bas de page et 📚 citations : l'appel <sup data-fn> est numéroté tout seul (resolveDoc), le texte est dans D.notes ─── */
         const askBox = (title, message, value = '', okLabel = 'Valider') => A().askText({title, message, value, okLabel}).then(v => (v === null || v === undefined ? null : String(v)));
         function caretBlock() { const t = editEl(); if (!t) { msg('Double-clic dans un bloc de texte, place le curseur où va l’appel de note, puis recommence.'); return null; } return t; }
@@ -1416,7 +1652,7 @@
                 zin: () => setZoom(zoom * 1.25), zout: () => setZoom(zoom / 1.25), zfit: zoomFit, z100: () => setZoom(1), guides: () => { guides = !guides; render(); }, snap: () => { snapOn = !snapOn; syncChrome(); msg(snapOn ? 'Magnétisme activé.' : 'Magnétisme coupé.'); }, preview: () => { preview = !preview; render(); },
                 endmaster: () => { editMaster = null; sel = []; render(); },
                 preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), idxplaces: () => insertAuto('places'), idxjobs: () => insertAuto('jobs'), notesblock: () => insertAuto('notes'), biblio: () => insertAuto('biblio'), dynperson: () => dynPersonDialog(), dyndiagram: () => insertDiagram(),
-                tree: () => treeDialog(), fnote: () => insertNote(), cite: () => citeDialog(),
+                tree: () => treeDialog(), fnote: () => insertNote(), cite: () => citeDialog(), qr: () => qrDialog(), merge: () => mergeDialog(), mergesample: () => mergeSample(),
                 comment: () => addComment(false), suggest: () => addComment(true), reviewpanel: () => { panel = 'review'; renderPanel(); }, sendreview: () => exportDialog('review'), importreview: () => importReview(), annot: () => exportDialog('annot'),
                 chain: () => { const it = one(); if (it?.type !== 'text') return msg('Choisis d’abord un bloc de texte.'); if (it.next) return msg('Ce bloc est déjà chaîné (« Couper le chaînage » d’abord).'); linkFrom = it.id; canvas.classList.add('is-linking'); render(); msg('➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler.'); },
                 unchain: () => { const it = one(); if (!it?.next) return msg('Ce bloc n’est pas chaîné vers un autre.'); delete it.next; commit('Chaînage coupé'); render(); },
@@ -1585,6 +1821,7 @@
             }
             if (it && it.type !== 'text') h += sec('Habillage du texte', `${sel2('wrap.mode', help('Le texte voisin', 'Les blocs de texte posés sous cet objet le contournent au lieu de passer dessous.', 'habillage'), WRAPS, it.wrap?.mode || 'none')}${num('wrap.off', 'Distance', it.wrap?.off ?? 3, {min: 0, max: 100, step: 0.5})}<p class="ly-help">Les blocs de texte de la page contournent cet objet.</p>`, !!it.wrap?.mode && it.wrap.mode !== 'none');
             if (it?.type === 'frame' && it.tree) h += sec('🌳 Arbre (objet dynamique)', `<p class="ly-help">${esc(TREE_MODES.find(m => m[0] === it.tree.mode)?.[1] || '')} · ${A().plural(it.tree.gens, 'génération')}${it.tree.at ? ` · mis à jour le ${esc(it.tree.at.replace('T', ' à '))}` : ''}${linkState[it.id] === 'missing' ? ' — ⛔ personne introuvable' : ''}. Il suit la base : il se refait à l’ouverture du document et avec « ↻ Mettre à jour ».</p><div class="ly-row"><button type="button" class="button small" data-ly-treeedit>✏️ Modifier l’arbre…</button><button type="button" class="button small secondary" data-ly-treeupd>↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-treeopen>↗ Fiche</button><button type="button" class="button small secondary" data-ly-treedetach title="L’arbre reste tel quel et ne suit plus la base">Détacher</button></div>`);
+            else if (it?.type === 'frame' && it.qr) h += sec('▦ QR code', `<p class="ly-help">Il contient : « ${esc(it.qr.text.length > 120 ? it.qr.text.slice(0, 119) + '…' : it.qr.text)} ». Il se redessine net à toutes les tailles (PDF, ePub, HTML).</p><div class="ly-row"><button type="button" class="button small" data-ly-qredit>▦ Modifier le QR code…</button></div>`);
             else if (it?.type === 'frame' && it.src) h += sec('🔗 Objet dynamique', it.diagramId ? `<p class="ly-help">📊 Diagramme <b>lié</b>${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : ''} : modifié dans Graphiques → Mes diagrammes, il se redessine ici (« Mettre à jour »).</p><div class="ly-row"><button type="button" class="button small" data-ly-editdg>✏️ Modifier le diagramme</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button></div>` : it.mediaId ? `<p class="ly-help">Image <b>liée</b> à une photo de l’app${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : linkState[it.id] === 'updated' ? ' — mise à jour' : ''} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici.</p><div class="ly-row"><button type="button" class="button small" data-ly-editorig>✏️ Modifier l’original (retouche)</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-unlinkimg title="L’image ne suit plus la photo de l’app">Incorporer (ne plus suivre)</button></div>`
                 : '<p class="ly-help">Image incorporée au document. Pour qu’elle suive une photo de l’app (et ses retouches) : « Remplacer l’image » et choisis-la dans la base.</p>');
             if (it?.type === 'frame') h += sec('Cadre d’image', `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="place">🖼️ ${it.src ? 'Remplacer' : 'Placer'} l’image</button>${it.src ? '<button type="button" class="button small secondary" data-ly-imgclear>Vider</button><button type="button" class="button small secondary" data-ly-cmd="fitframe">Cadre au contenu</button>' : ''}</div>${sel2('fit', 'Ajustement', FITS, it.fit || 'fill')}<div class="ly-grid2">${num('imgS', 'Échelle', it.imgS || 100, {min: 5, max: 2000, step: 1, unit: '%'})}${num('imgX', 'Décalage X', it.imgX || 0)}${num('imgY', 'Décalage Y', it.imgY || 0)}</div>`);
@@ -1726,6 +1963,7 @@
             if (e.target.closest('[data-ly-idxterms]')) { const it = one(); if (!it) return; try { const r = await api('layout_index_terms'); it.terms = (it.auto === 'places' ? r.places : r.jobs) || []; commit('Index : mots de la base'); render(); } catch (err) { toast(err.message, 'error'); } return; }
             if (e.target.closest('[data-ly-idxtermsnone]')) { const it = one(); if (it) { delete it.terms; commit('Index : mots marqués seulement'); render(); } return; }
             if (e.target.closest('[data-ly-treeedit]')) return treeDialog(one());
+            if (e.target.closest('[data-ly-qredit]')) return qrDialog(one());
             if (e.target.closest('[data-ly-treeupd]')) { const it = one(); if (!it?.tree) return; msg('🌳 Je redessine l’arbre…'); try { const r = await treeSvg(it.tree, lookOf()); it.src = svgSrc(r.svg); it.srcName = r.name; it.tree.at = new Date().toISOString().slice(0, 16); linkState[it.id] = 'ok'; commit('Arbre mis à jour'); render(); msg('🌳 Arbre à jour d’après la base.'); } catch (err) { linkState[it.id] = 'missing'; msg(''); toast(err.message, 'error'); } return; }
             if (e.target.closest('[data-ly-treedetach]')) { const it = one(); if (it?.tree) { delete it.tree; commit('Arbre détaché de la base'); render(); } return; }
             if (e.target.closest('[data-ly-treeopen]')) { const it = one(); if (!it?.tree) return; if (!dirty || await A().confirmBox('Les dernières modifications ne sont pas enregistrées (enregistre d’abord si besoin).', {title: 'Fermer la mise en page pour ouvrir la fiche ?', okLabel: 'Fermer sans enregistrer', danger: true})) { A().state.currentPersonId = it.tree.root; keyAc.abort(); dl.close(); A().setModule('personnes'); } return; }
@@ -1981,6 +2219,35 @@
         return rows.map(r => { const l = fold(r.name)[0]?.toUpperCase() || '#'; const head = l !== letter ? `<p data-ps="ps-head">${esc(l)}</p>` : ''; letter = l; return `${head}<p data-ps="${esc(it.autoPs || 'ps-list')}">${esc(r.name)}, ${pagesTxt(r.pages)}</p>`; }).join('') || `<p data-ps="ps-body"><em>${esc(INDEX_EMPTY[kind] || '')}</em></p>`;
     }
     /* ── Objets dynamiques : le texte d'une fiche de la généalogie ── */
+    /* ═════════════ ▦ QR codes (heritage-qr.js) et 📨 publipostage ═════════════ */
+    const svgData = svg => 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+    /** L'image (SVG) d'un QR code d'après ses réglages {text, dark, light, quiet} */
+    const qrSrc = cfg => svgData(ext.qr.svg(cfg.text, {dark: cfg.dark, light: cfg.light, quiet: cfg.quiet}).svg);
+    const MERGE_MAX = 500;
+    const MERGE_FIELDS = [['prénom', 'first_name'], ['nom', 'last_name'], ['nom complet', 'name'], ['naissance', 'birth'], ['lieu de naissance', 'birth_place'], ['décès', 'death'], ['lieu de décès', 'death_place'], ['dates', 'life'], ['métier', 'occupation'], ['sosa', 'sosa'], ['numéro', 'number'], ['parents', 'parents'], ['conjoints', 'partners'], ['enfants', 'children'], ['biographie', 'bio']];
+    const foldKey = t => String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
+    const MERGE_KEY = new Map([...MERGE_FIELDS.map(([k, f]) => [foldKey(k), f]), ['profession', 'occupation'], ['conjoint', 'partners'], ['nom de famille', 'last_name'], ['prenoms', 'first_name'], ['bio', 'bio']]);
+    const isPortraitFrame = it => it.type === 'frame' && /\{\s*(portrait|photo)\s*\}/i.test(it.name || '');
+    /** Les champs d'une page modèle */
+    function mergeScan(items) {
+        const keys = new Set(); let portrait = false;
+        (items || []).forEach(it => { if (it.type === 'text') for (const m of String(it.html || '').matchAll(/\{([^{}<>]{2,40})\}/g)) { if (MERGE_KEY.has(foldKey(m[1]))) keys.add(m[1]); } if (isPortraitFrame(it)) portrait = true; });
+        return {keys: [...keys], portrait};
+    }
+    /** Une copie des objets de la page modèle, champs remplis pour une personne (données de layout_family_data) */
+    function mergeFill(items, p) {
+        const val = f => { const v = p[f]; return Array.isArray(v) ? v.join(', ') : String(v ?? '').trim(); };
+        const copy = JSON.parse(JSON.stringify(items || [])), map = new Map();
+        copy.forEach(it => { const old = it.id; it.id = nid('c'); map.set(old, it.id); });
+        copy.forEach(it => {
+            if (it.next) { if (map.has(it.next)) it.next = map.get(it.next); else delete it.next; }
+            if (it.type === 'text') it.html = String(it.html || '').replace(/\{([^{}<>]{2,40})\}/g, (m, k) => { const f = MERGE_KEY.get(foldKey(k)); return f ? esc(val(f)) : m; })
+                .replace(/(?:\s*[,·–—]\s*)+(<\/(?:p|li|h\d|div)>)/g, '$1').replace(/(<(?:p|li|h\d|div)\b[^>]*>)(?:\s*[,·]\s*)+/g, '$1'); // pas de virgule orpheline quand un champ est vide
+            if (isPortraitFrame(it)) { const file = p.portrait_full || p.portrait || p.photos?.[0]?.full || ''; it.name = `Portrait — ${p.name || ''}`.slice(0, 80); if (file) { it.src = `media/${file}`; it.srcName = p.name || ''; if (p.portrait_id && (p.portrait_full || p.portrait)) it.mediaId = p.portrait_id; else if (p.photos?.[0]?.id) it.mediaId = p.photos[0].id; } else { delete it.src; delete it.mediaId; } }
+        });
+        return copy;
+    }
+    ext.layoutMerge = {mergeScan, mergeFill, MERGE_FIELDS};
     const DYN_FIELDS = [['name', 'Nom complet'], ['life', 'Naissance et décès (dates et lieux)'], ['parents', 'Parents'], ['partners', 'Conjoints'], ['children', 'Enfants'], ['occupation', 'Profession'], ['events', 'Tous les événements'], ['notes', 'Notes']];
     async function personDynHtml(id, fields) {
         const r = await api('person', {id}), p = r.person || {}, nm = x => [x?.first_name, x?.last_name].filter(Boolean).join(' ') || x?.name || '';
@@ -2281,7 +2548,8 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
             const mine = docs.filter(x => !x.is_design), designs = docs.filter(x => x.is_design);
             const card = (x, kind) => `<article class="ly-card">${coverHtml(x.cover)}<div><b>${esc(x.name)}</b><small>${A().plural(x.pages, 'page')} · ${esc(String(x.updated_at || '').slice(0, 16).replace('T', ' '))}</small><div class="ly-cardbtns">${kind === 'doc' ? `<button type="button" class="button small" data-open="${x.id}">Ouvrir</button>` : `<button type="button" class="button small" data-usedesign="${x.id}">Utiliser</button><button type="button" class="button small secondary" data-open="${x.id}">Modifier</button>`}<button type="button" class="button small secondary" data-dup="${x.id}">Dupliquer</button><button type="button" class="button small secondary" data-ren="${x.id}">Renommer</button><button type="button" class="button small secondary" data-exp="${x.id}">Exporter</button><button type="button" class="button small secondary danger" data-del="${x.id}">🗑</button></div></div></article>`;
             dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">LIVRE DE FAMILLE</span><h2>📐 Mise en page</h2><p>Un atelier façon InDesign : pages, gabarits, calques, textes, formes, images, nuancier… Pars d’une page blanche, des données de la famille ou d’un design.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
-                <div class="ly-libbody"><div class="ly-row ly-libtop"><button type="button" class="button" data-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-new="catalogue">🖼 Catalogue raisonné</button><button type="button" class="button secondary" data-new="discography">💿 Discographie</button><button type="button" class="button secondary" data-new="design">🎨 Nouveau depuis un design</button><button type="button" class="button secondary" data-new="blank">📄 Page blanche</button><label class="button secondary">⬆️ Importer un document<input type="file" accept=".json,application/json" data-import hidden></label><button type="button" class="button secondary" data-defaults>⚙️ Réglages par défaut</button></div>
+                <div class="ly-libbody"><div class="ly-row ly-libtop"><button type="button" class="button" data-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-new="template">📚 Livre prêt à l’emploi</button><button type="button" class="button secondary" data-new="catalogue">🖼 Catalogue raisonné</button><button type="button" class="button secondary" data-new="discography">💿 Discographie</button><button type="button" class="button secondary" data-new="design">🎨 Nouveau depuis un design</button><button type="button" class="button secondary" data-new="blank">📄 Page blanche</button><label class="button secondary">⬆️ Importer un document<input type="file" accept=".json,application/json" data-import hidden></label><button type="button" class="button secondary" data-defaults>⚙️ Réglages par défaut</button></div>
+                <h3>📚 Livres de famille prêts à l’emploi</h3><div class="ly-tplrow">${BOOK_TEMPLATES.map(([k, l, h]) => `<button type="button" class="ly-tplbtn" data-tpl="${k}" title="${esc(h)}"><b>${l}</b><small>${esc(h)}</small></button>`).join('')}</div>
                 <h3>📚 Mes livres (${mine.length})</h3><div class="ly-cards">${mine.map(x => card(x, 'doc')).join('') || A().emptyState({icon: '📚', text: 'Aucun livre pour l’instant', hint: 'Commence par un livre fait d’après la famille : il se remplit avec les fiches.', action: {label: '👪 Nouveau livre d’après la famille', attrs: 'data-new="family"'}})}</div>
                 <h3>🎨 Mes designs (${designs.length})</h3><div class="ly-cards">${designs.map(x => card(x, 'design')).join('') || '<p class="muted">Un design est un modèle : ouvre un livre, puis Fichier → « Enregistrer comme design ». Les designs de l’app (ci-dessous) peuvent aussi être modifiés et enregistrés à ton nom.</p>'}</div>
                 <h3>✨ Designs de l’app</h3><div class="ly-cards">${builtins().map(({th, doc}) => `<article class="ly-card">${coverHtml(doc)}<div><b>${esc(th.name)}</b><small>${esc(th.titleFont)} · ${esc(th.bodyFont)}</small><div class="ly-cardbtns"><button type="button" class="button small" data-builtin="${th.id}">Utiliser</button><button type="button" class="button small secondary" data-editbuiltin="${th.id}">Modifier (à mon nom)</button></div></div></article>`).join('')}</div></div>`;
@@ -2294,6 +2562,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
                 if (d.close !== undefined) return dlg.close();
                 if (d.defaults !== undefined) return defaultsDialog();
                 if (d.new) return newDocWizard(d.new, reopen);
+                if (d.tpl) return templateWizard(reopen, d.tpl);
                 if (d.open) { const r = await api('layout_doc', {id: Number(d.open)}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved: reopen, rev: r.rev}); }
                 if (d.usedesign) { const r = await api('layout_doc', {id: Number(d.usedesign)}); return newDocWizard('design', reopen, {designId: r.id}); }
                 if (d.builtin) return newDocWizard('design', reopen, {builtin: d.builtin});
@@ -2321,6 +2590,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     /** Nouveau document : page blanche, d'après un design, ou d'après la famille (avec un design) */
     async function newDocWizard(mode, onSaved, {designId = 0, builtin = ''} = {}) {
         if ((mode === 'catalogue' || mode === 'discography') && ext.artistCatalogue?.wizard) return ext.artistCatalogue.wizard({mode, onSaved}); // 🎨
+        if (mode === 'template') return templateWizard(onSaved, builtin || 'bio'); // 📚 gabarits de livre de famille
         let mineDesigns = []; try { mineDesigns = (await api('layout_docs')).docs.filter(x => x.is_design); } catch (_) {}
         const d = defaults(), S = A().state, start = S.bootstrap?.startPersonId;
         const designOpts = [...THEMES.map(th => [`b:${th.id}`, `✨ ${th.name}`]), ...mineDesigns.map(x => [`m:${x.id}`, `🎨 ${x.name}`])];
@@ -2373,7 +2643,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     ext.openLayoutDoc = async (id, onSaved) => { const r = await api('layout_doc', {id}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved, rev: r.rev}); };
     ext.newLayoutDoc = (mode, onSaved) => newDocWizard(mode, onSaved);
     // 🎨 pour heritage-artist-catalogue.js : fabriquer un livre (catalogue raisonné, discographie) avec les mêmes briques que le livre de famille
-    ext.layoutKit = {SIZES, THEMES, themeDoc, baseStyles, baseSwatches, folioMaster, defaults, cleanDoc, nid, box, flow, textItem, shapeItem, coverItems, openEditor};
+    ext.layoutKit = {SIZES, THEMES, themeDoc, baseStyles, baseSwatches, folioMaster, defaults, cleanDoc, nid, box, flow, textItem, shapeItem, coverItems, openEditor, printHtml, buildEpub, resolveDoc};
     ext.layoutCoverHtml = (cover, w) => coverHtml(cover, w);
     ext.lists.layout_books = async token => {
         const S = A().state, ws = A().$('#workspace'), UI = window.LCNDA_UI;
@@ -2397,7 +2667,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
             const acts = x => `<button type="button" class="button small" data-lyl-open="${x.id}">${x.is_design ? 'Modifier' : 'Ouvrir'}</button>${x.is_design ? `<button type="button" class="button small secondary" data-lyl-use="${x.id}">Utiliser</button>` : ''}<button type="button" class="icon-button small" data-lyl-dup="${x.id}" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-lyl-ren="${x.id}" title="Renommer" aria-label="Renommer">✎</button><button type="button" class="icon-button small" data-lyl-exp="${x.id}" title="Exporter" aria-label="Exporter">⤓</button><button type="button" class="icon-button small" data-lyl-del="${x.id}" title="Supprimer" aria-label="Supprimer">🗑</button>`;
             const table = (list, empty) => list.length && view === 'cards' && UI?.cardsHtml ? UI.cardsHtml(list.map(x => ({thumb: coverHtml(x.cover, 96) || `<span class="ui-card-ico">${x.is_design ? '🎨' : '📕'}</span>`, name: x.name, open: `data-lyl-open="${x.id}"`, lines: [`${x.is_design ? '🎨 Design' : '📖 Livre'} · ${x.pages} page${x.pages > 1 ? 's' : ''}`], date: x.updated_at ? `Modifié le ${fmtDate(x.updated_at)}` : '', actions: acts(x)}))) : list.length ? `<div class="data-table-wrap"><table class="data-table ly-listtable"><thead><tr><th></th><th>Nom</th><th>Sorte</th><th>Pages</th><th>Modifié le</th><th></th></tr></thead><tbody>${list.map(row).join('')}</tbody></table></div>` : A().empty(empty);
             ws.innerHTML = `<section class="page collection-page ly-listpage" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📐 Livres de famille</h2><p>Les livres faits dans l’atelier de mise en page (façon InDesign) et tes designs : ouvre-les, crée-en un, règle les réglages par défaut.</p></div>
-                <div class="page-actions"><button type="button" class="button" data-lyl-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-lyl-new="design">🎨 Depuis un design</button><button type="button" class="button secondary" data-lyl-new="blank">📄 Page blanche</button><button type="button" class="button secondary" data-lyl-defaults>⚙️ Réglages par défaut</button><button type="button" class="button secondary" data-lyl-studio>📐 Ouvrir l’atelier</button></div></header>
+                <div class="page-actions"><button type="button" class="button" data-lyl-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-lyl-new="template">📚 Livre prêt à l’emploi</button><button type="button" class="button secondary" data-lyl-new="design">🎨 Depuis un design</button><button type="button" class="button secondary" data-lyl-new="blank">📄 Page blanche</button><button type="button" class="button secondary" data-lyl-defaults>⚙️ Réglages par défaut</button><button type="button" class="button secondary" data-lyl-studio>📐 Ouvrir l’atelier</button></div></header>
                 ${all.length ? '<div data-lyl-bar></div>' : ''}${!kinds.length || kinds.includes('book') ? `<h3>📖 Livres (${books.length})</h3>${table(books, q.trim() ? `Aucun livre pour « ${q.trim()} ».` : 'Aucun livre pour l’instant : « 👪 Nouveau livre d’après la famille ».')}` : ''}
                 ${!kinds.length || kinds.includes('design') ? `<h3>🎨 Mes designs (${designs.length})</h3>${table(designs, q.trim() ? `Aucun design pour « ${q.trim()} ».` : 'Aucun design à toi : dans un livre, Fichier → « Enregistrer comme design », ou « 📐 Ouvrir l’atelier » → Designs de l’app → « Modifier (à mon nom) ».')}` : ''}</section>`;
             const slot = ws.querySelector('[data-lyl-bar]');
