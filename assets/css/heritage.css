@@ -4717,3 +4717,7 @@ canvas.is-picking{cursor:crosshair}
 .h-rt2 .h-rt-side>.h-rt-tabs{overflow:hidden}
 .h-rt2 .h-rt-side>.h-rt-tabs>button,.h-rt2 .h-rt-side>.h-rt-tabs>button:first-child{border-left:0;border-right:1px solid #111;border-bottom:1px solid #111;margin:0 -1px -1px 0}
 :root[data-theme="dark"] .h-rt2 .h-rt-side>.h-rt-tabs>button{border-right-color:#555;border-bottom-color:#555}
+.vx-fs button{padding:0;cursor:pointer;border-radius:0;box-shadow:none;min-width:0;min-height:0}
+.vx-fs .vx-fsfill:hover,.vx-fs .vx-fsstroke:hover{outline:2px solid #2a7de1;outline-offset:1px}
+.vx-fs .vx-fsswap{position:absolute;right:-4px;top:-6px;width:14px;height:14px;border:0;background:transparent;color:#ccc;font-size:12px;line-height:14px;z-index:3}
+.vx-fs .vx-fsswap:hover{color:#fff}
