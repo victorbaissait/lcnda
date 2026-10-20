@@ -426,18 +426,11 @@
             <p class="h-sc-n">${n ? `${plural(n, 'raccourci')} · ⠿ glisse ou ↑ ↓ pour ranger` : 'Aucun raccourci pour l’instant.'}</p>
             <ol class="h-sc-rows" data-sc-rows>${d.links.map((l, i) => rowHtml(l, i, n)).join('')}</ol>
             <p class="h-sc-addbar"><button type="button" class="button small" data-sc-add ${n >= MAX_LINKS ? 'disabled' : ''}>＋ Ajouter des raccourcis…</button><button type="button" class="button small secondary" data-sc-addhead ${n >= MAX_LINKS ? 'disabled' : ''}>＋ Intertitre</button></p>
-            <details class="h-sc-presets" data-sc-presets><summary>💾 Réglages enregistrés</summary>${presetsHtml()}</details></div>`;
+            <div data-presets-slot="widget-raccourcis"></div></div>`;
     }
     const presets = () => { try { const v = JSON.parse(localStorage.getItem(PRESETS_KEY) || '[]'); return Array.isArray(v) ? v.filter(p => p && typeof p.name === 'string' && p.data) : []; } catch (_) { return []; } };
     const savePresets = l => { try { localStorage.setItem(PRESETS_KEY, JSON.stringify(l.slice(0, 50))); } catch (_) {} };
     const presetData = d => { const c = cleanFields(d); return {links: c.links.map(({id, ...l}) => l), lLayout: c.lLayout, lSize: c.lSize, lCols: c.lCols, lInfo: c.lInfo}; };
-    function presetsHtml() {
-        const l = presets(), A_ = A();
-        return `<p class="muted">Garde ces raccourcis et leur disposition sous un nom, pour les reprendre dans un autre widget, ou les donner (fichier).</p>
-            <div class="h-sc-presetbar"><select data-sc-pset aria-label="Réglages enregistrés"><option value="">— choisir —</option>${l.map((p, i) => `<option value="${i}">${esc(p.name)} (${plural((p.data.links || []).length, 'raccourci')})</option>`).join('')}</select>
-            <button type="button" class="button small secondary" data-sc-papply>Appliquer</button>${A_?.settingExportButton ? A_.settingExportButton('data-sc-pexport') : ''}<button type="button" class="icon-button small danger" data-sc-pdel title="Supprimer ce réglage" aria-label="Supprimer ce réglage">🗑</button></div>
-            <p class="h-sc-presetbar"><button type="button" class="button small secondary" data-sc-psave>💾 Enregistrer sous un nom…</button>${A_?.settingImportButton ? A_.settingImportButton('data-sc-pimport') : ''}</p>`;
-    }
     function applyPreset(d, data) {
         const c = cleanFields({...data, links: (data.links || []).map(l => ({...l, id: ''}))});
         d.links = c.links; d.lLayout = c.lLayout; d.lSize = c.lSize; d.lCols = c.lCols; d.lInfo = c.lInfo;
@@ -450,6 +443,19 @@
         const slot = ed.querySelector('[data-sc-sizeslot]');
         if (UI()?.rangeField && slot) { const r = UI().rangeField({label: 'Taille des tuiles', min: 64, max: 240, step: 4, value: Number(d.lSize) || 112, unit: 'px', default: 112}); slot.appendChild(r); const inp = r.input || r.querySelector('input[type=range]'); inp?.addEventListener('input', () => { d.lSize = Number(inp.value) || 112; show(); }); }
         else if (slot) { slot.innerHTML = `<label>Taille des tuiles <input type="range" min="64" max="240" step="4" value="${Number(d.lSize) || 112}" data-sc-opt="lSize"></label>`; }
+        // 💾 Réglages enregistrés
+        const pput = (name, data, at = -1) => { const l = presets(), i = l.findIndex(p => p.name === name), row = {name, date: new Date().toLocaleDateString('fr-FR'), data}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); savePresets(l); };
+        const frame = window.LCNDA_UI?.presetsFrame?.({id: SETTING_TOOL, what: 'ces raccourcis (leur ordre, leurs icônes et couleurs) et leur disposition',
+            list: () => presets().map(p => ({name: p.name, date: [p.date, plural((p.data.links || []).length, 'raccourci')].filter(Boolean).join(' · ')})),
+            apply: i => { applyPreset(d, presets()[i].data); redraw(); },
+            save: name => pput(name, presetData(d)),
+            replace: i => pput(presets()[i].name, presetData(d)),
+            rename: (i, name) => { const l = presets(); l[i].name = name; savePresets(l); },
+            duplicate: i => { const l = presets(), p = l[i], nm = UI().freeName(p.name, l.map(x => x.name)); pput(nm, JSON.parse(JSON.stringify(p.data)), i + 1); toast(`Copie « ${nm} » créée.`); },
+            exportOne: i => { const p = presets()[i]; A().exportSettingFile?.(SETTING_TOOL, p.name, p.data); return false; },
+            remove: i => { const l = presets(), p = l[i]; A().undoLocalChange(`Réglage « ${p.name} » supprimé`, [PRESETS_KEY], () => { l.splice(i, 1); savePresets(l); }, () => { if (frame.isConnected) frame.refresh(); }); },
+            importOne: async () => { const r = await A().importSettingFile?.(SETTING_TOOL, {names: presets().map(p => p.name), check: x => x && Array.isArray(x.links)}); if (!r) return false; const l = presets(); l.push({name: r.nom, date: new Date().toLocaleDateString('fr-FR'), data: presetData({...r.donnees, links: cleanLinks(r.donnees.links)})}); savePresets(l); toast(`Réglage « ${r.nom} » importé : « Appliquer » pour t’en servir.`); }});
+        if (frame) ed.querySelector('[data-presets-slot]')?.replaceWith(frame);
         // C2 : couleur de chaque raccourci
         ed.querySelectorAll('[data-sc-color]').forEach(s => {
             const l = d.links[Number(s.dataset.scColor)]; if (!l) return;
@@ -495,13 +501,6 @@
             }
             if (e.target.closest('[data-sc-add]')) { const got = await chooseTargets(); if (!got?.length) return; const room = Math.max(0, MAX_LINKS - d.links.length); d.links.push(...got.slice(0, room)); if (got.length > room) toast(`Au plus ${MAX_LINKS} raccourcis par widget.`, 'error'); return redraw(); }
             if (e.target.closest('[data-sc-addhead]')) { if (d.links.length >= MAX_LINKS) return toast(`Au plus ${MAX_LINKS} raccourcis par widget (intertitres compris).`, 'error'); d.links.push({id: newLinkId(), label: 'Intertitre', target: 'head:'}); redraw(); setTimeout(() => { const ins = box.querySelectorAll('[data-sc-row].is-head input'); ins[ins.length - 1]?.select(); }, 0); return; }
-            // 💾 Réglages enregistrés
-            const sel = ed.querySelector('[data-sc-pset]'), list = presets(), cur = sel?.value === '' ? null : list[Number(sel?.value)];
-            if (e.target.closest('[data-sc-papply]')) { if (!cur) return toast('Choisis d’abord un réglage.', 'error'); applyPreset(d, cur.data); toast(`Réglage « ${cur.name} » appliqué.`); return redraw(); }
-            if (e.target.closest('[data-sc-pexport]')) { if (!cur) return toast('Choisis d’abord un réglage.', 'error'); A().exportSettingFile?.(SETTING_TOOL, cur.name, cur.data); return; }
-            if (e.target.closest('[data-sc-pdel]')) { if (!cur) return toast('Choisis d’abord un réglage.', 'error'); const at = list.indexOf(cur); list.splice(at, 1); savePresets(list); redraw(); A().undoToast?.(`Réglage « ${cur.name} » supprimé`, {undo: () => { const l2 = presets(); l2.splice(at, 0, cur); savePresets(l2); redraw(); }}); return; }
-            if (e.target.closest('[data-sc-psave]')) { const name = await A().askText?.({title: 'Enregistrer ces raccourcis sous un nom', message: 'Les raccourcis, leur ordre, leurs icônes et couleurs, et la disposition.', value: '', okLabel: '💾 Enregistrer'}); if (!name?.trim()) return; const row2 = {name: name.trim().slice(0, 60), data: presetData(d)}; const at = list.findIndex(p => p.name === row2.name); if (at >= 0) list[at] = row2; else list.push(row2); savePresets(list); toast(`Réglages enregistrés sous « ${row2.name} ».`); redraw(); setTimeout(() => box.querySelector('[data-sc-presets]')?.setAttribute('open', ''), 0); return; }
-            if (e.target.closest('[data-sc-pimport]')) { const r = await A().importSettingFile?.(SETTING_TOOL, {names: list.map(p => p.name), check: x => x && Array.isArray(x.links)}); if (!r) return; const data = {...presetData({...r.donnees, links: cleanLinks(r.donnees.links)})}; list.push({name: r.nom, data}); savePresets(list); toast(`Réglage « ${r.nom} » importé : choisis-le puis « Appliquer ».`); redraw(); setTimeout(() => box.querySelector('[data-sc-presets]')?.setAttribute('open', ''), 0); }
         });
     }
 

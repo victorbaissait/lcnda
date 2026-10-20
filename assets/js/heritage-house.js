@@ -84,7 +84,6 @@
 .h-hs-memv{display:grid;gap:12px}.h-hs-memcard{border:1px solid #e3e3e8;border-radius:10px;padding:10px;display:grid;gap:6px}.h-hs-memcard img{max-width:100%;max-height:58vh;border-radius:6px;justify-self:center;background:#eee}.h-hs-memcard p{white-space:pre-wrap;margin:0;line-height:1.5}
 .h-hs-memopts{display:grid;gap:6px}.h-hs-memopts button{text-align:left;padding:9px 11px}.h-hs-fmlist{max-height:46vh;overflow:auto;display:grid;gap:4px;margin-top:6px}.h-hs-fmlist button{text-align:left;border:1px solid #e3e3e8;background:#fff;border-radius:7px;padding:6px 9px;cursor:pointer;font:inherit;color:inherit}.h-hs-fmlist button:hover,.h-hs-fmlist button.is-active{border-color:#2a7de1;background:#eef4fd}
 .h-hs-fmwrap,.h-hs-fmwrap .ui-search,.h-hs-fmwrap input{width:100%;box-sizing:border-box}.h-hs-fmwrap .ui-search{display:flex}
-.h-hs-sets{border-top:1px solid #e3e3e8;margin-top:8px;padding-top:8px;display:grid;gap:6px}.h-hs-sets select{width:100%}.h-hs-sets .h-hs-row{display:flex;gap:4px;flex-wrap:wrap}
 .h-hs-dlg .ui-num>input.ui-num-input.ui-num-input{width:48px!important;flex:none}.h-hs-form label>input[type=range]{width:calc(100% - 100px);vertical-align:middle;margin-right:8px}.h-hs-form label>.ui-range-pair input[type=range]{width:auto}
 .h-hs-face{border:1px solid #e3e3e8;border-radius:8px;padding:4px 8px 6px;margin:0 0 8px}.h-hs-face legend{font-weight:600;font-size:12px;padding:0 4px}.h-hs-faceapply{gap:4px;align-items:center;margin-top:4px}:root[data-theme="dark"] .h-hs-face{border-color:#3a3f46}
 .h-hs-refbar{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}.h-hs-pane .ui-section{margin:0 0 6px}.h-hs-fontbtn{font-family:var(--hs-font,inherit)}
@@ -94,7 +93,7 @@
 :root[data-theme="dark"] .h-hs-sunbox,:root[data-theme="dark"] .h-hs-walkhud,:root[data-theme="dark"] .h-hs-compass{background:#24272cf2;border-color:#3a3f46;color:#e6e6e6}
 :root[data-theme="dark"] .h-hs-wkeye input{background:#1c1e22;border-color:#4a4a4f;color:#e6e6e6}:root[data-theme="dark"] .h-hs-wkstair{background:#3a3218;border-color:#7a6420;color:#f2e6c0}
 :root[data-theme="dark"] .h-hs-memlist li,:root[data-theme="dark"] .h-hs-memcard,:root[data-theme="dark"] .h-hs-fmlist button{background:#24272c;border-color:#3a3f46;color:#e6e6e6}:root[data-theme="dark"] .h-hs-fmlist button:hover,:root[data-theme="dark"] .h-hs-fmlist button.is-active{background:#192333;border-color:#4a8be8}
-:root[data-theme="dark"] .h-hs-sets{border-color:#3a3f46}:root[data-theme="dark"] .h-hs-sunbox .h-hs-chip{background:#2d3138;border-color:#4a4f57;color:#e6e6e6}:root[data-theme="dark"] .h-hs-sxrow output{color:#e6e6e6}`;
+:root[data-theme="dark"] .h-hs-sunbox .h-hs-chip{background:#2d3138;border-color:#4a4f57;color:#e6e6e6}:root[data-theme="dark"] .h-hs-sxrow output{color:#e6e6e6}`;
     const injectCss = () => { if (document.getElementById('h-hs-css2')) return; const st = document.createElement('style'); st.id = 'h-hs-css2'; st.textContent = HS_CSS; document.head.appendChild(st); };
 
     /* ═════════ Matériaux et mobilier ═════════ */
@@ -253,7 +252,7 @@
             </div></div>`;
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'house', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const $ = s => dlg.querySelector(s), svg = $('[data-hs-svg]'), world = $('[data-hs-world]'), stage = $('[data-hs-stage]'), pane = $('[data-hs-pane]');
-        dlg.addEventListener('pointerdown', e => dlg.querySelectorAll('details.h-hs-menu[open]').forEach(d => { if (!d.contains(e.target)) d.removeAttribute('open'); })); // un menu ouvert se ferme quand on clique ailleurs
+        dlg.addEventListener('pointerdown', e => { if (e.target.closest?.('.ui-pop, #toast-region')) return; dlg.querySelectorAll('details.h-hs-menu[open]').forEach(d => { if (!d.contains(e.target)) d.removeAttribute('open'); }); }); // un menu ouvert se ferme quand on clique ailleurs
         // E1 : « ✓ Enregistré » (ou « • modifié ») toujours au même endroit, sans toast ; la dernière action en petit à côté
         let msgT = 0, shownSt = null, saving = false;
         const status = s => { const m = $('[data-hs-msg]'); if (!m) return; m.textContent = s || ''; clearTimeout(msgT); if (s) msgT = setTimeout(() => { m.textContent = ''; }, 6000); };
@@ -699,15 +698,13 @@
         /* ─── 🧲 aimants ─── */
         function paintSnap() {
             const box = $('[data-hs-snapbox]'), c = (k, l) => `<label class="checkbox-line"><input type="checkbox" data-hs-snap="${k}" ${snapO[k] ? 'checked' : ''}> ${l}</label>`;
-            const l = setsList(); setsSel = clamp(setsSel, 0, Math.max(0, l.length - 1));
             box.innerHTML = c('grid', 'Grille') + c('corner', 'Coins des murs et des pièces') + c('mid', 'Milieu des murs') + c('wall', 'Le long des murs (au cm)') + c('align', 'Alignements (lignes de rappel)') + c('angle', 'Angles')
                 + `<label><span data-help="Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin." data-help-faq="plan de maison">Pas des angles</span><select data-hs-snap="step">${[90, 45, 30, 15, 5, 1].map(v => `<option value="${v}" ${snapO.step === v ? 'selected' : ''}>${v}°</option>`).join('')}</select></label><label>Pas de la grille<select data-hs-snapgrid>${[1, 2, 5, 10, 25, 50, 100].map(v => `<option value="${v}" ${H.grid === v ? 'selected' : ''}>${v} cm</option>`).join('')}</select></label>`
-                + '<p class="muted">Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier.</p>'
-                + `<div class="h-hs-sets"><b>💾 Réglages enregistrés</b><small class="muted">Les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière, gardés sous un nom.</small>${l.length ? `<select data-hs-set aria-label="Réglages enregistrés">${l.map((x, i) => `<option value="${i}" ${i === setsSel ? 'selected' : ''}>${esc(x.name)}${x.date ? ` · ${esc(x.date)}` : ''}</option>`).join('')}</select><div class="h-hs-row"><button type="button" class="button small" data-hs-setcmd="apply">✓ Appliquer</button><button type="button" class="button small secondary" data-hs-setcmd="export" title="Un fichier .json, pour un autre ordinateur">⤓ Exporter</button><button type="button" class="icon-button small" data-hs-setcmd="del" title="Supprimer ce réglage">🗑</button></div>` : '<small class="muted">Aucun réglage enregistré pour l’instant.</small>'}
-                    <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-setcmd="save">💾 Enregistrer sous ce nom…</button><button type="button" class="button small secondary" data-hs-setcmd="import">⤒ Importer un réglage</button></div></div>`;
+                + '<p class="muted">Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier.</p>';
+            setsBox = setsBox || setsFrame(); box.appendChild(setsBox); setsBox.refresh();
         }
-        $('[data-hs-snapbox]').addEventListener('click', e => { e.stopPropagation(); const b = e.target.closest('[data-hs-setcmd]'); if (b) setsCmd(b.dataset.hsSetcmd, setsSel); });
-        $('[data-hs-snapbox]').addEventListener('change', e => { const el = e.target; if (el.matches('[data-hs-set]')) { setsSel = Number(el.value) || 0; return; }
+        $('[data-hs-snapbox]').addEventListener('click', e => e.stopPropagation());
+        $('[data-hs-snapbox]').addEventListener('change', e => { const el = e.target;
             if (el.matches('[data-hs-snapgrid]')) { H.grid = Number(el.value); commit('Grille'); return; }
             const k = el.dataset.hsSnap; if (!k) return; snapO[k] = k === 'step' ? Number(el.value) : el.checked; try { localStorage.setItem(SNAP_KEY, JSON.stringify(snapO)); } catch (_) {} });
         /** décaler au clavier ce qui est choisi */
@@ -909,25 +906,25 @@
             if (d.sun && typeof d.sun === 'object') { const s = {}; if (Number.isFinite(+d.sun.north)) s.north = clamp(+d.sun.north, 0, 359); if (Number.isFinite(+d.sun.hour)) s.hour = clamp(+d.sun.hour, 0, 24); if (Number.isFinite(+d.sun.day)) s.day = clamp(Math.round(+d.sun.day), 1, 365); if (typeof d.sun.shadows === 'boolean') s.shadows = d.sun.shadows; H.sun = {...sunOf(), ...s}; }
             view3d?.setSun?.(); return true;
         }
-        async function setsCmd(k, idx) {
-            const l = setsList(), cur = l[idx];
-            if (k === 'apply' && cur) { applySet(cur.v); paintSnap(); commit(`Réglage « ${cur.name} » appliqué`); return; }
-            if (k === 'del' && cur) { A().undoLocalChange(`Réglage « ${cur.name} » supprimé`, [SETS_KEY], () => { l.splice(idx, 1); setsSave(l); }, () => { if (dlg.isConnected) paintSnap(); }); paintSnap(); return; }
-            if (k === 'export' && cur) { downloadText(JSON.stringify({lcnda: 'reglage', outil: SETS_TOOL, nom: cur.name, version: 1, donnees: cur.v}, null, 1), `lcnda-reglage-${SETS_TOOL}-${slug(cur.name)}.json`); toast('Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer un réglage ».'); return; }
-            if (k === 'save') { const n = String(await A().askText({title: '💾 Enregistrer ces réglages', message: 'Nom de ces réglages (aimants, grille, épaisseur des murs, hauteur des yeux, lumière) :', value: cur?.name || 'Mes réglages', okLabel: 'Enregistrer'}) || '').trim().slice(0, 80); if (!n) return;
-                const at = l.findIndex(x => x.name === n); if (at >= 0 && !await A().confirmBox('', {title: `Remplacer le réglage « ${n} » ?`, okLabel: 'Remplacer'})) return;
-                const row = {name: n, date: new Date().toISOString().slice(0, 10), v: setsData()}; if (at >= 0) l[at] = row; else l.push(row); if (setsSave(l)) { setsSel = at >= 0 ? at : l.length - 1; paintSnap(); toast(`Réglages enregistrés sous « ${n} ».`); } return; }
-            if (k === 'import') return importSet();
-        }
-        let setsSel = 0;
+        let setsBox = null;
+        const setsPut = (name, v, at = -1) => { const l = setsList(), i = l.findIndex(x => x.name === name), row = {name, date: new Date().toISOString().slice(0, 10), v}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return setsSave(l); };
+        const setsFrame = () => { const box = window.LCNDA_UI.presetsFrame({id: SETS_TOOL, what: 'les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière', list: setsList, quietApply: true,
+            apply: i => { const cur = setsList()[i]; applySet(cur.v); paintSnap(); commit(`Réglage « ${cur.name} » appliqué`); return false; },
+            save: name => setsPut(name, setsData()),
+            replace: i => setsPut(setsList()[i].name, setsData()),
+            rename: (i, name) => { const l = setsList(); l[i].name = name; return setsSave(l); },
+            duplicate: i => { const l = setsList(), it = l[i], nm = window.LCNDA_UI.freeName(it.name, l.map(x => x.name)); if (setsPut(nm, JSON.parse(JSON.stringify(it.v)), i + 1)) toast(`Copie « ${nm} » créée.`); },
+            exportOne: i => { const cur = setsList()[i]; downloadText(JSON.stringify({lcnda: 'reglage', outil: SETS_TOOL, nom: cur.name, version: 1, donnees: cur.v}, null, 1), `lcnda-reglage-${SETS_TOOL}-${slug(cur.name)}.json`); toast('Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ».'); return false; },
+            remove: i => { const l = setsList(), cur = l[i]; A().undoLocalChange(`Réglage « ${cur.name} » supprimé`, [SETS_KEY], () => { l.splice(i, 1); setsSave(l); }, () => { if (box.isConnected) box.refresh(); }); },
+            importOne: () => importSet()}); return box; };
         async function importSet(file = null) {
-            file = file || await pickFile('.json,application/json'); if (!file) return; let d;
-            try { d = JSON.parse(await file.text()); } catch (_) { return toast('Ce fichier n’est pas lisible (il faut un fichier .json de réglage).', 'error'); }
-            if (d?.lcnda !== 'reglage' || !d.donnees || typeof d.donnees !== 'object') return toast('Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil).', 'error');
-            if (d.outil !== SETS_TOOL) return toast(`Ce réglage est celui d’un autre outil (« ${String(d.outil || '?').slice(0, 40)} ») : importe-le dans cet outil-là, pas dans la Maison.`, 'error');
-            const l = setsList(); let n = String(d.nom || 'Réglage importé').trim().slice(0, 80) || 'Réglage importé';
-            while (l.some(x => x.name === n)) { const n2 = String(await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${n} ». Nom du réglage importé :`, value: `${n} (importé)`, okLabel: 'Importer'}) || '').trim().slice(0, 80); if (!n2) return; n = n2; }
-            l.push({name: n, date: new Date().toISOString().slice(0, 10), v: d.donnees}); if (!setsSave(l)) return; setsSel = l.length - 1; paintSnap(); toast(`Réglage « ${n} » importé : « ✓ Appliquer » pour t’en servir.`);
+            file = file || await pickFile('.json,application/json'); if (!file) return false; let d;
+            try { d = JSON.parse(await file.text()); } catch (_) { toast('Ce fichier n’est pas lisible (il faut un fichier .json de réglage).', 'error'); return false; }
+            if (d?.lcnda !== 'reglage' || !d.donnees || typeof d.donnees !== 'object') { toast('Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil).', 'error'); return false; }
+            if (d.outil !== SETS_TOOL) { toast(`Ce réglage est celui d’un autre outil (« ${String(d.outil || '?').slice(0, 40)} ») : importe-le dans cet outil-là, pas dans la Maison.`, 'error'); return false; }
+            const l = setsList(); let n = String(d.nom || 'Réglage importé').trim().slice(0, 60) || 'Réglage importé';
+            while (l.some(x => x.name === n)) { const n2 = String(await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${n} ». Nom du réglage importé :`, value: window.LCNDA_UI.freeName(n, l.map(x => x.name)), okLabel: 'Importer'}) || '').trim().slice(0, 60); if (!n2) return false; n = n2; }
+            l.push({name: n, date: new Date().toISOString().slice(0, 10), v: d.donnees}); if (!setsSave(l)) return false; setsBox?.refresh(); toast(`Réglage « ${n} » importé : « Appliquer » pour t’en servir.`);
         }
 
         /* ─── ⤓ E3 : la fenêtre d'export unique ; 🏠 le fichier de la maison ─── */
