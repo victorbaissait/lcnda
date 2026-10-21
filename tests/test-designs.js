@@ -158,7 +158,8 @@ function sandbox(store = {}) {
     });
     await t('FAQ, CLAUDE.md, docs/UI.md', () => {
         assert.match(read('assets/js/heritage-more.js'), /Designs au choix/);
-        assert.match(read('CLAUDE.md'), /Designs au choix A1–A10 \(validé\)/);
+        // CLAUDE.md n'est pas suivi par git : absent d'une copie fraîche
+        if (fs.existsSync(path.join(root, 'CLAUDE.md'))) assert.match(read('CLAUDE.md'), /Designs au choix A1–A10 \(validé\)/);
         assert.match(read('docs/UI.md'), /Designs au choix/);
     });
 
