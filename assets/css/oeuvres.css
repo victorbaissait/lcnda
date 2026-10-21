@@ -2,7 +2,7 @@
    Couleurs : variables de l'app (--ink, --white, --paper, --blue-bright…) ; le mode sombre est en bas (scripts/build-dark-css.py). */
 
 /* — les fenêtres du domaine (Quelle sorte d'œuvre ?, assistant, métiers d'art) — */
-.oe-dlg { padding: 0; width: min(1320px, 97vw); height: 92vh; max-height: 92vh; }
+.oe-dlg { padding: 0; width: var(--modal-win-w); height: var(--modal-win-h); max-height: var(--modal-win-h); }
 .oe-shell { display: flex; flex-direction: column; height: 100%; min-height: 0; background: var(--paper); }
 .oe-body { flex: 1; overflow: auto; padding: 12px 16px 24px; min-width: 0; }
 .oe-body > input[type=search], .oe-body .ui-search { width: 100%; margin-bottom: 8px; }

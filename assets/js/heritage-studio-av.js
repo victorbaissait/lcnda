@@ -1230,7 +1230,7 @@
                 </div>
                 <div class="h-mt-transport" data-tbg="mt-transport" data-tbg-label="Lecture"><button type="button" class="button" data-mt-play data-shortcut="Espace">▶ Lire</button><button type="button" class="button small secondary" data-mt-home title="Au début">⏮</button><span class="h-avx-time" data-tb-label="Temps (où on en est / durée)"><b data-mt-cur>0:00.0</b> / <span data-mt-total></span></span>
                     <button type="button" class="button small secondary h-mt-snapbtn ${MP.snap ? 'is-on' : ''}" data-mt-snap aria-pressed="${MP.snap}" title="Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant)">🧲 Aimanter</button>
-                    <label class="h-mt-zoomr" data-tb-label="Zoom de la frise" title="Aussi ⌘ + / ⌘ − (Ctrl + / Ctrl − sur PC et Linux), ⌘ 0 pour revenir">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label></div>
+                    <label class="h-mt-zoomr" data-tb-label="Zoom de la frise" title="Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label></div>
                 <div class="h-mt-ops" data-tbg="mt-ops" data-tbg-label="Outils du montage">
                     <button type="button" class="button small secondary" data-mt-op="split" title="Coupe le morceau choisi à la tête de lecture" data-shortcut="B">✂️ Couper ici</button>
                     <button type="button" class="button small secondary" data-mt-op="start" title="Le morceau choisi commence à la tête de lecture">⟦ Commence ici</button>
@@ -1762,7 +1762,7 @@
             const dirs = subOf(rushDir).sort((a, b) => coll.compare(a.name, b.name));
             const crumbs = [`<button type="button" data-mt-rdir="" class="${rushDir ? '' : 'is-cur'}" title="Revenir à la racine (on peut y déposer un rush ou un dossier)">🎞️ Tous</button>`, ...pathOf(rushDir).map(f => `<button type="button" data-mt-rdir="${esc(f.id)}" class="${f.id === rushDir ? 'is-cur' : ''}">${esc(f.name)}</button>`)].join('<span>›</span>');
             pane.innerHTML = `<div class="h-mt-rhead"><h4>🎞️ Rushes</h4><span class="muted">${P.sources.length || 'aucun'}</span></div>
-                <div class="h-mt-rbar"><label class="button small" title="Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert">📥 Importer<input type="file" multiple accept="video/*,image/*,audio/*" data-mt-rimport hidden></label><button type="button" class="button small secondary" data-mt-rbase>🗂 De la base</button><button type="button" class="button small secondary" data-mt-rnewdir title="Nouveau dossier dans le dossier ouvert">📁＋ Dossier</button>
+                <div class="h-mt-rbar"><label class="button small" title="Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert">⤒ Importer<input type="file" multiple accept="video/*,image/*,audio/*" data-mt-rimport hidden></label><button type="button" class="button small secondary" data-mt-rbase>🗂 De la base</button><button type="button" class="button small secondary" data-mt-rnewdir title="Nouveau dossier dans le dossier ouvert">📁＋ Dossier</button>
                     <select data-mt-rsort aria-label="Trier les rushes" title="Trier les rushes"><option value="added" ${rushSort === 'added' ? 'selected' : ''}>Ordre d’arrivée</option><option value="name" ${rushSort === 'name' ? 'selected' : ''}>Nom</option><option value="kind" ${rushSort === 'kind' ? 'selected' : ''}>Genre (vidéo, photo, son)</option></select></div>
                 ${P.folders.length || rushDir ? `<nav class="h-mt-rcrumbs" aria-label="Dossier ouvert">${crumbs}</nav>` : ''}
                 ${here.length || dirs.length ? `<div class="h-mt-rgrid">${dirs.map(f => { const n = countIn(f.id), sub = subOf(f.id).length; return `<figure class="h-mt-rush h-mt-rfolder" draggable="true" data-mt-rfolder="${esc(f.id)}" title="Clic pour ouvrir ; glisse un rush ou un dossier dessus pour l’y ranger">
@@ -1914,7 +1914,7 @@
                     <label class="checkbox-line"><input type="checkbox" name="chap" checked> Un chapitre par grande étape</label></div>`,
                 onOpen: dg => { setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30); },
                 onSubmit: async form => { chosen = Number(form.elements.av_tpl?.value) || 0;
-                    if (!chosen) { toast('Choisis une personne.', 'error'); return false; }
+                    if (!chosen) return window.LCNDA_UI.fail(form.elements.av_tpl, 'Choisis une personne.');
                     const f = Object.fromEntries(new FormData(form)), dur = Number(f.dur) || 5, trType = f.tr || 'cross', btn = form.querySelector('[type=submit]'); btn.textContent = 'Préparation…';
                     const nm = x => [x?.first_name, x?.last_name].filter(Boolean).join(' ') || x?.name || '';
                     const isPic = m => (m.media_type || 'image') === 'image' && /\.(jpe?g|png|webp|gif)$/i.test(m.filename || '');
@@ -2049,7 +2049,7 @@
         const MT_MENUS = [
             ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '📤 Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '💬 Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫']]],
-            ['Ajouter', [['import', '📥 Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '💬 Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
+            ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '💬 Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
             ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante'], ['-'], ['snap', '🧲 Aimanter (marche / arrêt)']]],
             ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['full', '⛶ Plein écran']]],
@@ -2165,7 +2165,7 @@
                 return `<section><h4>${esc(g.label)}</h4><ol class="h-pet-layout" data-g="${esc(g.key)}">${items.map(([k, l]) => `<li class="h-pet-lrow" data-k="${esc(k)}"><input type="checkbox" ${hidden.includes(k) ? '' : 'checked'} title="Montrer"><span>${esc(l)}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('')}</ol></section>`; }).join('');
             const edName = (EDITORS.find(e => e[0] === which) || EDITORS[0])[1];
             ws.innerHTML = `<section class="page h-mtp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Montage, retouche, mise en page et son</h2><p>La disposition du montage vidéo, l’enregistrement des vidéos par défaut, les boutons et options de chaque éditeur (montrés, cachés, rangés), tes raccourcis clavier dans chaque outil et le plein écran.</p></div>
-                <div class="page-actions"><button type="button" class="button" data-mtp-save>Enregistrer</button></div></header>
+                </header>
                 <div class="h-mtp-cols">
                 <div class="h-mtp-stack">
                 <section class="maintenance-panel" data-mtp-blk="layout"><h3>🎬 Disposition du montage${blkMove}</h3>
@@ -2290,28 +2290,30 @@
             const li = e.target.closest('li');
             if (e.target.closest('[data-up]') && li?.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
             if (e.target.closest('[data-down]') && li?.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
-            if (e.target.closest('[data-mtp-colreset]')) { MT_COLORS.forEach(([k, , d]) => { const el = ws.querySelector(`[data-mtp="${k}"]`); if (el) { el.value = d; el.dispatchEvent(new Event('input', {bubbles: true})); } }); toast('Couleurs de départ remises (n’oublie pas « Enregistrer »).'); return; }
+            if (e.target.closest('[data-mtp-colreset]')) { MT_COLORS.forEach(([k, , d]) => { const el = ws.querySelector(`[data-mtp="${k}"]`); if (el) { el.value = d; el.dispatchEvent(new Event('input', {bubbles: true})); } });  return; }
             if (e.target.closest('[data-mtp-reset]')) { const all = lsJson('genealogie-toolbars', {}); delete all[which]; writeJson('genealogie-toolbars', all); toast('Boutons remis comme au départ.'); draw(); }
-            if (e.target.closest('[data-mtp-save]')) {
-                const v = {}; ws.querySelectorAll('[data-mtp]').forEach(el => { v[el.dataset.mtp] = el.dataset.mtp === 'help' ? el.value === '1' : el.value; });
-                writeJson(MT_KEY, v);
-                const full = lsJson('genealogie-editor-full', {}); ws.querySelectorAll('[data-mtp-full]').forEach(el => { full[el.dataset.mtpFull] = el.value === '1'; }); writeJson('genealogie-editor-full', full);
-                writeJson('genealogie-retouch-layout', {tools: ws.querySelector('[data-mtp-rttools]')?.value || 'side', side: ws.querySelector('[data-mtp-rtside]')?.value || 'right'});
-                if (ws.querySelector('[data-mtp-groups]')) applyToolbar(toolbarNow());
-                toast('Réglages du montage, de la retouche et du son enregistrés.'); draw();
-            }
         }, {signal: ac.signal});
+        // K2 : plus de bouton « Enregistrer » : ce qui est à l'écran est gardé tout de suite (UI.autoSave) ; « ↶ Annuler » dans le message
+        const saveNow = () => {
+            if (token !== st.workspaceToken || !ws.querySelector('.h-mtp')) return;
+            const v = {}; ws.querySelectorAll('[data-mtp]').forEach(el => { v[el.dataset.mtp] = el.dataset.mtp === 'help' ? el.value === '1' : el.value; });
+            if (JSON.stringify(v) !== JSON.stringify(readJson(MT_KEY, {}))) writeJson(MT_KEY, v);
+            const full = lsJson('genealogie-editor-full', {}), full0 = JSON.stringify(full); ws.querySelectorAll('[data-mtp-full]').forEach(el => { full[el.dataset.mtpFull] = el.value === '1'; }); if (JSON.stringify(full) !== full0) writeJson('genealogie-editor-full', full);
+            const rt = {tools: ws.querySelector('[data-mtp-rttools]')?.value || 'side', side: ws.querySelector('[data-mtp-rtside]')?.value || 'right'}; if (JSON.stringify(rt) !== JSON.stringify(readJson('genealogie-retouch-layout', {}))) writeJson('genealogie-retouch-layout', rt);
+            if (ws.querySelector('[data-mtp-groups]')) { const tb = cleanToolbar(toolbarNow()), cur = cleanToolbar(lsJson('genealogie-toolbars', {})[which] || {}); if (JSON.stringify(tb) !== JSON.stringify(cur)) applyToolbar(tb); }
+        };
+        window.LCNDA_UI?.autoSave?.(ws, {save: saveNow, redraw: () => draw()});
     };
     // Listes → Vidéos / Audios → « 🎬 Montage » : un montage fait de zéro, enregistré comme un nouveau média
     /** 📂 Les projets de montage enregistrés : ouvrir, renommer, supprimer (ou en commencer un nouveau) */
     async function projectsDialog({current = 0, onOpen, onNew = null} = {}) {
         let list = []; try { list = (await A().api('montage_projects')).projects || []; } catch (e) { return toast(e.message, 'error'); }
-        const when = d => { const x = new Date(String(d || '').replace(' ', 'T') + 'Z'); return isNaN(x) ? '' : x.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'}); };
+        const when = d => window.LCNDA_UI?.when?.(d, {label: 'Modifié'}) || ''; // K4 : HTML <time>
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-mt-projdlg';
         const draw = () => { dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">🎬 MONTAGE</span><h2>Projets de montage</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
             ${onNew ? '<div class="h-mt-pnew"><button type="button" class="button" data-new>＋ Nouveau montage</button></div>' : ''}
-            ${list.length ? `<div class="h-mt-plist">${list.map(p => `<div class="h-mt-prow${p.id === current ? ' is-cur' : ''}"><button type="button" class="h-mt-popen" data-open="${p.id}">${p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-mt-pico">🎬</span>'}<span><b>${esc(p.name)}</b><small>${p.clips} morceau${p.clips > 1 ? 'x' : ''} · ${p.sources} rush${p.sources > 1 ? 'es' : ''}${p.duration ? ' · ' + fmt(p.duration, false) : ''} · ${esc(when(p.updated_at))}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (les vidéos et photos restent dans les Médias)">🗑</button></div>`).join('')}</div>`
-                : A().emptyState({icon: '🎬', text: 'Aucun projet de montage pour l’instant', hint: 'Dans le montage, « 💾 Enregistrer le projet ».'})}`; };
+            ${list.length ? `<div class="h-mt-plist">${list.map(p => `<div class="h-mt-prow${p.id === current ? ' is-cur' : ''}"><button type="button" class="h-mt-popen" data-open="${p.id}">${p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-mt-pico">🎬</span>'}<span><b>${esc(p.name)}</b><small>${p.clips} morceau${p.clips > 1 ? 'x' : ''} · ${p.sources} rush${p.sources > 1 ? 'es' : ''}${p.duration ? ' · ' + fmt(p.duration, false) : ''} · ${when(p.updated_at)}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (les vidéos et photos restent dans les Médias)">🗑</button></div>`).join('')}</div>`
+                : A().emptyState({icon: '🎬', text: 'Aucun projet de montage pour l’instant', hint: 'Dans le montage, « 💾 Enregistrer le projet ».'})}<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`; };
         draw(); document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
         dlg.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;
@@ -2331,12 +2333,12 @@
     /** 📂 Les projets audio enregistrés */
     async function audioProjectsDialog({current = 0, onOpen, onNew = null} = {}) {
         let list = []; try { list = (await A().api('audio_projects')).projects || []; } catch (e) { return toast(e.message, 'error'); }
-        const when = d => { const x = new Date(String(d || '').replace(' ', 'T') + 'Z'); return isNaN(x) ? '' : x.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'}); };
+        const when = d => window.LCNDA_UI?.when?.(d, {label: 'Modifié'}) || ''; // K4 : HTML <time>
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-mt-projdlg';
         const draw = () => { dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">🎧 SON</span><h2>Projets son</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
             ${onNew ? '<div class="h-mt-pnew"><button type="button" class="button" data-new>＋ Nouveau projet son</button></div>' : ''}
-            ${list.length ? `<div class="h-mt-plist">${list.map(p => `<div class="h-mt-prow${p.id === current ? ' is-cur' : ''}"><button type="button" class="h-mt-popen" data-open="${p.id}" ${p.exists ? '' : 'disabled'}><span class="h-mt-pico">🎧</span><span><b>${esc(p.name)}</b><small>${esc(p.media_title || 'son de départ importé')} · ${fmt(p.duration, false)} · ${esc(when(p.updated_at))}${p.exists ? '' : ' · fichier de travail introuvable'}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (le son de départ reste dans les Médias)">🗑</button></div>`).join('')}</div>`
-                : A().emptyState({icon: '🎵', text: 'Aucun projet son pour l’instant', hint: 'Dans « Modifier le son », « 💾 Enregistrer le projet ».'})}`; };
+            ${list.length ? `<div class="h-mt-plist">${list.map(p => `<div class="h-mt-prow${p.id === current ? ' is-cur' : ''}"><button type="button" class="h-mt-popen" data-open="${p.id}" ${p.exists ? '' : 'disabled'}><span class="h-mt-pico">🎧</span><span><b>${esc(p.name)}</b><small>${esc(p.media_title || 'son de départ importé')} · ${fmt(p.duration, false)} · ${when(p.updated_at)}${p.exists ? '' : ' · fichier de travail introuvable'}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (le son de départ reste dans les Médias)">🗑</button></div>`).join('')}</div>`
+                : A().emptyState({icon: '🎵', text: 'Aucun projet son pour l’instant', hint: 'Dans « Modifier le son », « 💾 Enregistrer le projet ».'})}<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`; };
         draw(); document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
         dlg.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;

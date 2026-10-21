@@ -190,7 +190,7 @@
                 onOpen: dg => { const tool = dg.querySelector('[name=tool]'), base = dg.querySelector('[name=base]'), g = dg.querySelector('[name=g]');
                     const sync = first => { const t = tool.value; base.innerHTML = opt(BASES[t], first && c?.base ? c.base : BASES[t][0][0]); if (!first) g.value = HOME[t]; dg.querySelectorAll('[data-only]').forEach(x => { x.hidden = x.dataset.only !== t; }); };
                     sync(true); tool.addEventListener('change', () => sync(false)); },
-                onSubmit: f => { const v = n => f.querySelector(`[name=${n}]`), label = v('label').value.trim(); if (!label) { toast('Donne un nom à l’élément.', 'error'); return false; }
+                onSubmit: f => { const v = n => f.querySelector(`[name=${n}]`), label = v('label').value.trim(); if (!label) return window.LCNDA_UI.fail(v('label'), 'Donne un nom à l’élément.');
                     const item = {id: c?.id || `my_${Math.random().toString(36).slice(2, 10)}`, g: v('g').value, tool: v('tool').value, base: v('base').value, label, color: v('usecolor').checked ? v('color').value : '', w: Number(v('w').value) || 0, d: '', vb: null};
                     if (item.tool === 'msym' && v('own')?.checked) {
                         if (shapes.length && (!c?.d || v('redraw')?.checked)) { const bx = shapes.map(o => V.box(o)).filter(Boolean), x0 = Math.min(...bx.map(b => b.x)), y0 = Math.min(...bx.map(b => b.y)), x1 = Math.max(...bx.map(b => b.x + b.w)), y1 = Math.max(...bx.map(b => b.y + b.h)), m = Math.max(x1 - x0, y1 - y0) * .04 || 1;
@@ -525,12 +525,12 @@
             if (what === 'person') return ext.openDialog({eyebrow: 'PLAN', title: 'Lier à une personne', submitLabel: 'Lier', // même champ « personne » que partout ailleurs
                 body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${PK().pickerField({name: 'vm_pick', kind: 'person', value: o.map?.link?.type === 'person' && o.map.link.id ? o.map.link.id : null})}</div>`,
                 onOpen: dg => setTimeout(() => dg.querySelector('.pk-search:not([hidden]) .pk-input')?.focus(), 30),
-                onSubmit: f => { const it = pkItem(f.querySelector('.pk')); if (!it) { toast('Choisis dans la liste.', 'error'); return false; }
+                onSubmit: f => { const it = pkItem(f.querySelector('.pk')); if (!it) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis dans la liste.');
                     o.map = o.map || {}; o.map.link = {type: 'person', id: Number(it.id), label: String(it.title || '').slice(0, 120)}; ed.commit('Lien ajouté'); }});
             ext.openDialog({eyebrow: 'PLAN', title: 'Lier à un lieu', submitLabel: 'Lier',
                 body: `<div class="h-pk-solo"><span class="pk-lab">Lieu</span>${PK().pickerField({name: 'vm_place', kind: 'place', value: o.map?.link?.type === 'place' && o.map.link.id ? {id: o.map.link.id, title: o.map.link.label, name: o.map.name || o.map.link.label} : null})}</div>`,
                 onOpen: dg => setTimeout(() => dg.querySelector('.pk-search:not([hidden]) .pk-input')?.focus(), 30),
-                onSubmit: async f => { const it = pkItem(f.querySelector('.pk')); if (!it) { toast('Choisis dans la liste.', 'error'); return false; }
+                onSubmit: async f => { const it = pkItem(f.querySelector('.pk')); if (!it) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis dans la liste.');
                     const c = it.lat != null ? it : await (ext.placeCoords ? ext.placeCoords(it) : Promise.resolve({}));
                     const r = {id: Number(it.id) || 0, label: it.title, lat: c.lat === '' ? null : c.lat, lon: c.lon === '' ? null : c.lon};
                     o.map = o.map || {}; o.map.link = {type: what, id: r.id, label: String(r.label).slice(0, 120), ...(r.lat ? {lat: r.lat, lon: r.lon} : {})}; if (!o.map.name && o.type !== 'text') o.map.name = String(r.label).replace(/ \(.*\)$/, ''); ed.commit('Lien ajouté'); }});
@@ -539,7 +539,7 @@
         function linksDialog() {
             const rows = []; const walk = arr => (arr || []).forEach(o => { if (o.map?.link || o.map?.note) rows.push(o); if (o.children) walk(o.children); }); walk(ed.doc().objs);
             ext.openDialog({eyebrow: 'PLAN', title: 'Objets reliés à la famille', submitLabel: 'Fermer',
-                body: rows.length ? `<ul class="vx-mlinks">${rows.map((o, i) => `<li><b>${esc(o.map.name || o.text || o.name || 'Objet')}</b>${o.map.link ? ` → ${esc(o.map.link.label)}` : ''}${o.map.note ? `<br><small>${esc(o.map.note)}</small>` : ''}<span><button type="button" class="link-button" data-vm-go="${i}">montrer</button>${o.map.link?.type === 'person' ? ` · <button type="button" class="link-button" data-vm-open="${i}">ouvrir la fiche</button>` : ''}</span></li>`).join('')}</ul>` : '<p class="muted">Aucun objet n’est encore relié. Choisis un objet, puis dans Propriétés : « 🔗 Lier à une personne » ou « 📍 Lier à un lieu ».</p>',
+                body: rows.length ? `<ul class="vx-mlinks">${rows.map((o, i) => `<li><b>${esc(o.map.name || o.text || o.name || 'Objet')}</b>${o.map.link ? ` → ${esc(o.map.link.label)}` : ''}${o.map.note ? `<br><small>${esc(o.map.note)}</small>` : ''}<span><button type="button" class="link-button" data-vm-go="${i}">montrer</button>${o.map.link?.type === 'person' ? ` · <button type="button" class="link-button" data-vm-open="${i}">ouvrir la fiche</button>` : ''}</span></li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucun objet n’est encore relié. Choisis un objet, puis dans Propriétés : « 🔗 Lier à une personne » ou « 📍 Lier à un lieu ».</span></p>',
                 onOpen: dg => dg.addEventListener('click', e => { const g = e.target.closest('[data-vm-go]'), op = e.target.closest('[data-vm-open]'); if (g) { ed.reveal(rows[Number(g.dataset.vmGo)].id); dg.querySelector('[data-dialog-close],[value=cancel]')?.click(); dg.close?.(); } if (op) openLink(rows[Number(op.dataset.vmOpen)].map); }),
                 onSubmit: () => {}});
         }
@@ -593,7 +593,7 @@
                     dg.addEventListener('input', e => { if (e.target.matches('[name=op]')) { const im = prev.querySelector('img'); if (im) im.style.opacity = num(e.target.value, 55) / 100; } });
                     dg._center = center; },
                 onSubmit: async f => {
-                    const dg = f.closest('dialog'), c = dg?._center?.(); if (!c) { toast('Choisis un lieu dans la liste.', 'error'); return false; }
+                    const dg = f.closest('dialog'), c = dg?._center?.(); if (!c) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis un lieu dans la liste.');
                     toast('Chargement de la carte…');
                     return (await placeBasemap({lat: c[0], lon: c[1], km: num(f.querySelector('[name=km]').value, 2), bg: f.querySelector('[name=bg]').value, op: num(f.querySelector('[name=op]').value, 55) / 100, name: picked.name, place_id: Number(picked.id) || 0})) ? undefined : false;
                 }});
@@ -629,7 +629,7 @@
                     let src = '';
                     try { if (file) src = await ed.normImage(await new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = ko; r.readAsDataURL(file); }), file.type); else if (media) src = await ed.normImage(await ed.toDataUrl(media)); }
                     catch (e) { toast(e.message || 'Image illisible.', 'error'); return false; }
-                    if (!src) { toast('Choisis un fichier ou une image.', 'error'); return false; }
+                    if (!src) return window.LCNDA_UI.fail(f.querySelector('input[type=file], .mpk-field, .pk'), 'Choisis un fichier ou une image.');
                     const im = await new Promise(ok => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = src; }); if (!im) { toast('Image illisible.', 'error'); return false; }
                     const k = Math.min(d.w / im.naturalWidth, d.h / im.naturalHeight);
                     d.ref = {src, x: (d.w - im.naturalWidth * k) / 2, y: (d.h - im.naturalHeight * k) / 2, w: im.naturalWidth * k, h: im.naturalHeight * k, k: 1, op, show: true, print: false, gray: false};

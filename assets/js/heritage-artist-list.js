@@ -60,13 +60,15 @@
             const list = filtered(), total = store.of(kind).length, st = bar.state;
             const sum = def.summary ? def.summary(list) : '';
             bar.setCount(`${U.plural(list.length, String(def.label).toLowerCase(), String(def.many).toLowerCase())}${list.length !== total ? ` sur ${total}` : ''}${sum ? ` · ${sum}` : ''}`);
-            if (!total) { out.innerHTML = A().emptyState({icon: def.icon, text: `${def.fem ? 'Aucune' : 'Aucun'} ${String(def.label).toLowerCase()} pour l’instant`, hint: '« ＋ Nouveau », ou « 📥 Importer » (Discogs, MusicBrainz, Open Library, Wikidata, TMDb, un tableau, un fichier).', action: {label: `＋ ${def.fem ? 'Nouvelle' : 'Nouveau'} ${String(def.label).toLowerCase()}`, attrs: 'data-ar-cmd="new"'}}); return; }
+            if (!total) { out.innerHTML = A().emptyState({icon: def.icon, text: `${def.fem ? 'Aucune' : 'Aucun'} ${String(def.label).toLowerCase()} pour l’instant`, hint: '« ＋ Nouveau », ou « ⤒ Importer » (Discogs, MusicBrainz, Open Library, Wikidata, TMDb, un tableau, un fichier).', action: {label: `＋ ${def.fem ? 'Nouvelle' : 'Nouveau'} ${String(def.label).toLowerCase()}`, attrs: 'data-ar-cmd="new"'}}); return; }
             if (!list.length) { out.innerHTML = A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre.'}); return; }
             const page = list.slice(0, shown), perso = st.sort === 'perso';
             const move = it => perso ? `<span class="ar-move"><span class="ar-grip" title="Glisser pour ranger">⠿</span><button type="button" class="icon-button small" data-ar-up="${it.id}" title="Monter">↑</button><button type="button" class="icon-button small" data-ar-down="${it.id}" title="Descendre">↓</button></span>` : '';
             if (st.view === 'cards') {
                 const L = ART.layout(store, kind, 'vignettes'), lines = L.fields.filter(f => f.on && f.type !== 'photos' && f.key !== 'title');
-                out.innerHTML = `<div class="ar-grid is-big">${page.map(it => { const ctx = ART.ctx(store, it); return `<div class="ar-card" data-ar-row-open="${it.id}" role="button" tabindex="0">${U.cover(it)}<b>${esc(it.title)}</b>${lines.map(f => { const t = ART.text(ctx, it, f); return t ? `<small>${esc(t)}</small>` : ''; }).join('')}${move(it)}</div>`; }).join('')}</div>`;
+                // K9 : la vignette unique (UI.cardsHtml) ; les champs choisis dans « ⚙️ Champs affichés » : les 2 premiers en lignes grises, les suivants en pastilles
+                out.innerHTML = UI().cardsHtml(page.map(it => { const ctx = ART.ctx(store, it), t = lines.map(f => ART.text(ctx, it, f)).filter(Boolean);
+                    return {thumb: U.cover(it), name: it.title, open: `data-ar-row-open="${it.id}"`, lines: t.slice(0, 2), badges: t.slice(2, 6).map(x => ({text: x, kind: 'grey'})), quick: move(it)}; }));
             } else {
                 const L = ART.layout(store, kind, 'liste'), cols = L.fields.filter(f => f.on);
                 out.innerHTML = `<div class="ar-scroll"><table class="ar-t ar-list"><thead><tr>${cols.map(f => `<th>${esc(f.type === 'photos' ? '' : (f.short || f.label).replace(' (avec durées)', ''))}</th>`).join('')}${perso ? '<th></th>' : ''}</tr></thead><tbody>${page.map(it => { const ctx = ART.ctx(store, it); return `<tr data-ar-row-open="${it.id}" class="is-click">${cols.map(f => `<td class="c-${esc(f.type)}">${cell(ctx, it, f)}</td>`).join('')}${perso ? `<td>${move(it)}</td>` : ''}</tr>`; }).join('')}</tbody></table></div>`;
@@ -109,7 +111,7 @@
             {id: 'pdf', hint: 'les notices illustrées (« Enregistrer en PDF »)', ext: '', run: async () => print()},
             {id: 'print', hint: 'les notices illustrées', run: async () => print()},
             {id: 'csv', label: '📊 Tableur', hint: 'CSV (Excel, Numbers, LibreOffice)', ext: 'csv', run: async o => csv(o.filename)},
-            {id: 'file', label: '💾 Fichier', hint: 'pour une autre base : « 📥 Importer » → « Un fichier exporté d’ici »', ext: 'json', run: async o => file(o.filename)}]});
+            {id: 'file', label: '💾 Fichier', hint: 'pour une autre base : « ⤒ Importer » → « Un fichier exporté d’ici »', ext: 'json', run: async o => file(o.filename)}]});
     };
     /* ═════════ Exporter (E3) : une fiche ═════════ */
     ART.exportItem = (C, it) => {
@@ -118,6 +120,6 @@
         if (!UI().openExportDialog) return print();
         return UI().openExportDialog({title, defaultName: title, quality: false, info: 'les champs de l’onglet « L’export » (⚙️ Champs affichés)', formats: [
             {id: 'pdf', hint: 'la notice (« Enregistrer en PDF »)', ext: '', run: async () => print()}, {id: 'print', hint: 'la notice', run: async () => print()},
-            {id: 'file', label: '💾 Fichier', hint: 'réimportable (« 📥 Importer »)', ext: 'json', run: async o => file(o.filename)}]});
+            {id: 'file', label: '💾 Fichier', hint: 'réimportable (« ⤒ Importer »)', ext: 'json', run: async o => file(o.filename)}]});
     };
 })();

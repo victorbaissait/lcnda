@@ -35,7 +35,7 @@
         const byPlace = new Map();
         list.forEach(c => { const p = U.place(c.data?.place); if (!p?.plid) return; const x = byPlace.get(p.plid) || {plid: p.plid, title: p.title, n: 0, list: []}; x.n++; x.list.push(c); byPlace.set(p.plid, x); });
         const free = list.filter(c => !U.place(c.data?.place)?.plid).length;
-        if (!byPlace.size) return {html: `<p class="muted">Aucun lieu de ta base pour ces soirs${free ? ` (${plural(free, 'soir')} sans lieu choisi dans la base)` : ''}.</p>`, pts: []};
+        if (!byPlace.size) return {html: `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucun lieu de ta base pour ces soirs${free ? ` (${plural(free, 'soir')} sans lieu choisi dans la base)` : ''}.</span></p>`, pts: []};
         const co = await SC.coords([...byPlace.keys()]);
         const max = Math.max(...[...byPlace.values()].map(x => x.n));
         const pts = [...byPlace.values()].map(x => ({...x, c: co.get(x.plid)})).filter(x => x.c && Number.isFinite(Number(x.c.lat)) && Number.isFinite(Number(x.c.lon)));
@@ -153,7 +153,9 @@
             const page = list.slice(0, shown);
             if (view === 'cards') {
                 const L = ART.layout(store, 'concert', 'vignettes'), lines = L.fields.filter(f => f.on && f.type !== 'photos' && f.key !== 'title');
-                out.innerHTML = `<div class="ar-grid is-big">${page.map(it => { const ctx = ART.ctx(store, it); return `<div class="ar-card" data-ar-row-open="${it.id}" role="button" tabindex="0">${U.cover(it)}<b>${esc(it.title)}</b>${lines.map(f => { const t = ART.text(ctx, it, f); return t ? `<small>${esc(t)}</small>` : ''; }).join('')}</div>`; }).join('')}</div>`;
+                // K9 : la vignette unique (UI.cardsHtml) ; champs choisis : 2 en lignes grises, la suite en pastilles
+                out.innerHTML = window.LCNDA_UI.cardsHtml(page.map(it => { const ctx = ART.ctx(store, it), t = lines.map(f => ART.text(ctx, it, f)).filter(Boolean);
+                    return {thumb: U.cover(it), name: it.title, open: `data-ar-row-open="${it.id}"`, lines: t.slice(0, 2), badges: t.slice(2, 6).map(x => ({text: x, kind: 'grey'}))}; }));
             } else {
                 const L = ART.layout(store, 'concert', 'liste'), cols = L.fields.filter(f => f.on);
                 out.innerHTML = `<div class="ar-scroll"><table class="ar-t ar-list sc-list"><thead><tr>${cols.map(f => `<th>${esc(f.type === 'photos' ? '' : (f.short || f.label))}</th>`).join('')}</tr></thead><tbody>${page.map(it => { const ctx = ART.ctx(store, it);
@@ -175,7 +177,7 @@
             const dateCell = x => x ? `<button type="button" class="ar-linkbtn u" data-ar-open="${x.c.id}" title="${esc(x.c.title)}">${esc(SC.dayLabel(SC.dayOf(x.c.data.date), 'num') || x.c.year || '?')}</button>` : '';
             const shownTop = top.slice(0, S2.more ? 60 : 10);
             const blk = (cls, title, bodyH, headX = '') => `<section class="ar-blk sc-blk ${cls}"><div class="ar-bh"><b>${title}</b><span class="spacer"></span>${headX}</div><div class="ar-bb">${bodyH}</div></section>`;
-            const bTop = blk('w-4', `🔝 ${esc(SC.cap(gWords.items))} les plus joués`, top.length ? `<div class="ar-scroll"><table class="ar-t sc-top"><thead><tr><th>${esc(SC.cap(gWords.item))}</th><th>Fois</th><th>1re</th><th>Dernière</th></tr></thead><tbody>${shownTop.map(x => `<tr><td>${x.ref?.iid ? U.refChip(x.ref, '🎵') : esc(x.title)}${x.cover ? ' <small class="ar-g">(reprise)</small>' : ''}</td><td><b>${x.n}</b></td><td>${dateCell(x.first)}</td><td>${dateCell(x.last)}</td></tr>`).join('')}</tbody></table></div>${top.length > 10 ? `<button type="button" class="ar-linkbtn u" data-sc-more>${S2.more ? 'Moins ↑' : `Voir les ${Math.min(50, top.length - 10)} suivants ↓`}</button>` : ''}` : '<p class="muted">Aucune setlist notée sur ces soirs.</p>', `<small class="ar-g">sur ${esc(plural(withSl.length, 'soir'))}</small>`);
+            const bTop = blk('w-4', `🔝 ${esc(SC.cap(gWords.items))} les plus joués`, top.length ? `<div class="ar-scroll"><table class="ar-t sc-top"><thead><tr><th>${esc(SC.cap(gWords.item))}</th><th>Fois</th><th>1re</th><th>Dernière</th></tr></thead><tbody>${shownTop.map(x => `<tr><td>${x.ref?.iid ? U.refChip(x.ref, '🎵') : esc(x.title)}${x.cover ? ' <small class="ar-g">(reprise)</small>' : ''}</td><td><b>${x.n}</b></td><td>${dateCell(x.first)}</td><td>${dateCell(x.last)}</td></tr>`).join('')}</tbody></table></div>${top.length > 10 ? `<button type="button" class="ar-linkbtn u" data-sc-more>${S2.more ? 'Moins ↑' : `Voir les ${Math.min(50, top.length - 10)} suivants ↓`}</button>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune setlist notée sur ces soirs.</span></p>', `<small class="ar-g">sur ${esc(plural(withSl.length, 'soir'))}</small>`);
             // soirs par année / pays / ville / salle
             const countBy = fn => { const m = new Map(); list.forEach(c => { const k = fn(c); if (!k) return; m.set(k, (m.get(k) || 0) + 1); }); return m; };
             const years = countBy(c => SC.dayOf(c.data?.date)?.y || Number(c.year) || 0), byCity = countBy(c => SC.cityOf(c)), byVenue = countBy(c => [c.data.venue, SC.cityOf(c)].filter(Boolean).join(', ') && c.data.venue ? `${c.data.venue}${SC.cityOf(c) ? `, ${SC.cityOf(c)}` : ''}` : '');
@@ -197,7 +199,7 @@
             const tourItems = store.of('tour'), tourBest = (() => { const m = new Map(); list.forEach(c => { const r = U.ref(c.data?.tour); if (r?.iid) m.set(r.iid, (m.get(r.iid) || 0) + 1); }); return [...m.entries()].sort((a, b) => b[1] - a[1])[0]?.[0]; })();
             const tId = S2.tour && store.get(S2.tour) ? S2.tour : tourBest, tIt = tId ? store.get(tId) : null, tDates = tIt ? SC.tourDates(store, tIt.id) : [];
             const pk = (name, v, art) => P().pickerField({name, hiddenName: false, kind: 'artwork', allowFree: false, allowCreate: false, value: v ? {id: v.id, title: v.title, kind: 'artwork', art_kind: art} : null, filter: {art_kind: art, art_person: C.pid}});
-            const bType = blk('w-8', '🚌 Setlist type d’une tournée', tourItems.length ? `<div class="sc-pkline" data-sc-pk="tour">${pk('sc_tour', tIt, 'tour')}</div>${tIt ? `<p class="ar-g">${esc(tIt.title)} · ${esc(plural(tDates.length, 'date'))}</p>${SC.typeHtml(store, tDates)}` : '<p class="muted">Choisis une tournée.</p>'}` : '<p class="muted">Pas encore de fiche « Tournée » : une tournée regroupe ses dates (carte de l’itinéraire, setlist type). Choisis-la sur la fiche d’un soir (« Tournée » ＋ Créer).</p>');
+            const bType = blk('w-8', '🚌 Setlist type d’une tournée', tourItems.length ? `<div class="sc-pkline" data-sc-pk="tour">${pk('sc_tour', tIt, 'tour')}</div>${tIt ? `<p class="ar-g">${esc(tIt.title)} · ${esc(plural(tDates.length, 'date'))}</p>${SC.typeHtml(store, tDates)}` : '<p class="muted">Choisis une tournée.</p>'}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Pas encore de fiche « Tournée » : une tournée regroupe ses dates (carte de l’itinéraire, setlist type). Choisis-la sur la fiche d’un soir (« Tournée » ＋ Créer).</span></p>');
             // jamais joués en public
             const allPlayed = SC.playStats(store), kinds = new Set([...SC.kindsFor('concert'), ...SC.kindsFor('humour')]);
             const never = (store.items || []).filter(it => kinds.has(it.kind) && !allPlayed.has(`i${it.id}`));

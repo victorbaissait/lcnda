@@ -58,7 +58,7 @@
 
     /** la personne de la fiche (et deux personnes citées) */
     function whoHtml(it, short = false) {
-        const own = it.owner ? `<button type="button" class="table-link cr-who" data-cr-person="${Number(it.person_id)}" title="Ouvrir la fiche de ${esc(it.owner)}"><span class="cr-av ${{male: 'm', female: 'f'}[it.owner_gender] || 'u'}" aria-hidden="true">${esc(initials(it.owner))}</span>${esc(it.owner)}</button>` : '';
+        const own = it.owner ? `<button type="button" class="table-link cr-who" data-cr-person="${Number(it.person_id)}" title="Ouvrir la fiche de ${esc(it.owner)}">${window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({id: it.person_id, name: it.owner, gender: it.owner_gender}, 22) : `<span class="cr-av ${{male: 'm', female: 'f'}[it.owner_gender] || 'u'}" aria-hidden="true">${esc(initials(it.owner))}</span>`}${esc(it.owner)}</button>` : '';
         if (short) return own;
         const others = (it.people || []).filter(p => p.pid !== Number(it.person_id) && p.zone !== 'secondary').slice(0, 2);
         return own + (others.length ? `<small class="cr-with">avec ${others.map(p => esc(p.name) + (p.role ? ` <i>(${esc(p.role)})</i>` : '')).join(', ')}</small>` : '');
@@ -170,8 +170,9 @@
             if (st.view === 'cards') {
                 body.innerHTML = runs.map(r => (groupHeads ? head(r) : '') + UI().cardsHtml(r.list.map(it => { const i = kindInfo(it.kind, types);
                     return {thumb: thumb(it, 'cr-cov', types), name: it.title, open: `data-cr-open="${it.id}"`, cls: 'cr-card',
-                        lines: [`${i.icon} ${i.label}`, {html: whoHtml(it, true)}, [yearOf(it), it.place].filter(Boolean).join(' · '), it.av?.length ? (it.av.includes('video') ? '🎞 vidéo' : '🔊 son') : ''],
-                        actions: it.person_id ? `<button type="button" class="icon-button small" data-cr-person="${Number(it.person_id)}" title="Ouvrir la fiche de ${esc(it.owner)}" aria-label="Ouvrir la fiche de ${esc(it.owner)}">↗</button>` : ''}; }))).join('');
+                        // K9 : 2 lignes grises, la sorte en pastille, l'année en date ; « ↗ Fiche » dans ⋯
+                        lines: [{html: whoHtml(it, true)}, it.place || ''], badges: [{text: `${i.icon} ${i.label}`, kind: 'blue'}, it.av?.length ? {text: it.av.includes('video') ? '🎞 vidéo' : '🔊 son', kind: 'grey'} : null].filter(Boolean), date: yearOf(it) || '',
+                        menu: it.person_id ? [`<button type="button" data-cr-person="${Number(it.person_id)}">↗ Fiche de ${esc(it.owner)}</button>`] : []}; }))).join('');
             } else {
                 const cols = F.cols || [];
                 const thead = `<thead><tr><th class="cr-c-img"><span class="cr-sr">Image</span></th><th>Titre</th><th>Sorte</th><th>Personne(s)</th><th>Année</th>${cols.map(([l]) => `<th>${esc(l)}</th>`).join('')}<th class="cr-c-go"><span class="cr-sr">Ouvrir</span></th></tr></thead>`;

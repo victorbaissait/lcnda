@@ -1,0 +1,91 @@
+/* LCNDA — Harmonisation K4, K8, K10 (validé). Mode d'emploi : docs/UI.md. Code : assets/js/app-indicateurs.js (+ emptyState / empty dans app.js).
+ * Chargé après app.css, heritage.css, ui.css, artist.css : ces règles remplacent les anciens dessins des pastilles. */
+
+/* ═════ K8 — une seule pastille : 11 px, gras, capitales, bord 1,5 px, coins carrés ═════
+ * bleu : en cours · vert : fait / certain · jaune : à vérifier · rouge : problème · gris : fermé / archivé · noir : décès · Sosa : bleu plein.
+ * Les anciennes classes (encore écrites par le code) prennent le même dessin et la même couleur pour le même sens. */
+.ui-badge,
+.status-badge, .sosa-star, .daboville-tag, .outside-genealogy-badge, .artist-badge,
+.investigation-status, .entity-date-badge, .h-badge, .h-new-badge, .tag-conf-badge,
+.grave-status-badge, .grave-condition-badge, .branch-closed-badge, .ar-badge, .investigation-item-status-badge {
+    display: inline-flex; align-items: center; gap: 4px; width: max-content; max-width: 100%;
+    font: 800 11px/1 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: .04em; text-transform: uppercase;
+    border: 1.5px solid; border-radius: 0; padding: 4px 7px; white-space: nowrap; vertical-align: middle; box-shadow: none;
+    color: #444; background: #f0f1f3; border-color: #8a8f99;
+}
+.label-chip { font-size: 11px; font-weight: 800; letter-spacing: .04em; line-height: 1; padding: 4px 7px; border-width: 1.5px; border-radius: 0; }
+/* bleu : en cours */
+.ui-badge.is-blue, .investigation-status.open, .daboville-tag, .h-new-badge, .ar-badge.b, .investigation-item-status-badge.status-promising {
+    color: #0a3fae; background: #eaf1ff; border-color: #055dff;
+}
+/* vert : fait ou certain */
+.ui-badge.is-green, .status-badge.living, .investigation-status.confirmed, .h-badge.is-ok, .tag-conf-badge.tag-conf-certain,
+.grave-status-badge.is-existing, .branch-closed-badge.certainty-certain, .branch-closed-badge.certainty-very_likely, .ar-badge.ok, .archive-digest-complete-badge,
+.grave-condition-badge.grave-condition-bon, .investigation-item-status-badge.status-explored {
+    color: #14532d; background: #ecfaf0; border-color: #1aa34a;
+}
+/* jaune : à vérifier */
+.ui-badge.is-yellow, .status-badge.unknown, .investigation-status.paused, .investigation-status.promising, .h-badge.is-warn,
+.tag-conf-badge.tag-conf-probable, .tag-conf-badge.tag-conf-possible, .branch-closed-badge.certainty-likely, .branch-closed-badge.certainty-maybe, .ar-badge.w,
+.grave-condition-badge.grave-condition-moyen, .investigation-item-status-badge.status-to_explore, .investigation-item-status-badge.status-to_explore_priority {
+    color: #6b4e00; background: #fff8e1; border-color: #e1a500;
+}
+/* rouge : problème */
+.ui-badge.is-red, .investigation-status.rejected, .tag-conf-badge.tag-conf-uncertain, .grave-status-badge.is-gone, .branch-closed-badge.certainty-doubtful,
+.grave-condition-badge.grave-condition-mauvais, .grave-condition-badge.grave-condition-a_restaurer {
+    color: #7f1020; background: #fff0f1; border-color: #d0182f;
+}
+/* gris : fermé ou archivé */
+.ui-badge.is-grey, .investigation-status.closed, .outside-genealogy-badge, .grave-condition-badge.grave-condition-disparu, .investigation-item-status-badge.status-closed { color: #444; background: #f0f1f3; border-color: #8a8f99; }
+/* noir : décès */
+.ui-badge.is-black, .status-badge.deceased, .h-badge.is-dark { color: #fff; background: #111; border-color: #111; }
+/* Sosa : toujours bleu plein (comme le menu de choix) */
+.ui-badge.is-sosa, .sosa-star { color: #fff; background: #055dff; border-color: #055dff; }
+.sosa-star > span, .daboville-tag > span { display: none; }
+/* une date n'est pas un statut : même forme, sans capitales (K4) */
+.ui-badge.is-date, .entity-date-badge { text-transform: none; letter-spacing: 0; font-weight: 700; color: #555; background: #fff; border-color: #c9ccd3; margin-left: 0; }
+/* profils (artiste…) : gardent leur couleur, même forme */
+.artist-badge { background: var(--person-badge-artist-bg, #e8d5f5); color: var(--person-badge-artist-text, #5c1a99); border-color: currentColor; }
+/* fiche : les couleurs réglées dans « Couleurs des badges » (Maintenance → Apparence) restent possibles en clair */
+:root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-sosa { background: var(--person-badge-sosa-bg, #055dff); color: var(--person-badge-sosa-text, #fff); border-color: var(--person-badge-sosa-bg, #055dff); }
+:root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-green { background: var(--person-badge-living-bg, #ecfaf0); color: var(--person-badge-living-text, #14532d); }
+:root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-black { background: var(--person-badge-deceased-bg, #111); color: var(--person-badge-deceased-text, #fff); border-color: var(--person-badge-deceased-bg, #111); }
+:root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-yellow { background: var(--person-badge-unknown-bg, #fff8e1); color: var(--person-badge-unknown-text, #6b4e00); }
+:root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-blue { background: var(--person-badge-daboville-bg, #eaf1ff); color: var(--person-badge-daboville-text, #0a3fae); }
+:root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-grey { background: var(--person-badge-outside-bg, #f0f1f3); color: var(--person-badge-outside-text, #444); }
+.person-hero-status .ui-badge { font-size: 11px; padding: 6px 9px; }
+.person-badge-preview { display: flex; flex-wrap: wrap; gap: 6px; }
+a.ui-badge, a.ar-badge { text-decoration: none; }
+.h-acts-table .h-badge { white-space: normal; }
+
+/* ═════ K4 — date de création / modification : texte gris, date complète au survol ═════ */
+.ui-when { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ui-when[title] { cursor: help; text-decoration: none; }
+
+/* ═════ K10 — « Rien ici » : la petite ligne (la grande boîte : .empty-box dans app.css) ═════ */
+.empty-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; color: var(--muted, #666); font-size: 13px; line-height: 1.35; padding: 6px 0; grid-column: 1 / -1; min-height: 0; text-align: left; }
+.empty-line-ico { font-size: 15px; line-height: 1; flex: none; }
+.empty-line-text { flex: 0 1 auto; min-width: 0; }
+.empty-line-text small { color: var(--muted, #777); font-size: 12px; }
+.empty-line .button { margin: 0; }
+/* la Carte : le message « rien dans cette zone » devient une petite ligne posée sur la carte */
+.map-empty-overlay.empty-line { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); width: max-content; max-width: calc(100% - 32px); padding: 8px 12px; background: #fff; border: 1.5px solid #c9ccd3; box-shadow: 0 2px 8px rgba(0,0,0,.12); font-weight: 600; color: #333; z-index: 5; pointer-events: auto; }
+/* la Recherche : même grande boîte que partout (plus de texte centré à part) */
+.search-empty .empty-box { margin: 24px auto; max-width: 560px; }
+
+/* ═════ Mode sombre ═════ */
+:root[data-theme="dark"] .ui-badge, :root[data-theme="dark"] .status-badge, :root[data-theme="dark"] .sosa-star, :root[data-theme="dark"] .daboville-tag,
+:root[data-theme="dark"] .outside-genealogy-badge, :root[data-theme="dark"] .investigation-status, :root[data-theme="dark"] .entity-date-badge, :root[data-theme="dark"] .h-badge,
+:root[data-theme="dark"] .h-new-badge, :root[data-theme="dark"] .tag-conf-badge, :root[data-theme="dark"] .grave-status-badge, :root[data-theme="dark"] .grave-condition-badge,
+:root[data-theme="dark"] .branch-closed-badge, :root[data-theme="dark"] .ar-badge, :root[data-theme="dark"] .investigation-item-status-badge { color: #c8c8c8; background: #2a2a2a; border-color: #777; }
+:root[data-theme="dark"] :is(.ui-badge.is-blue, .investigation-status.open, .daboville-tag, .h-new-badge, .ar-badge.b, .investigation-item-status-badge.status-promising) { background: #1a2a3d; color: #9cc2ff; border-color: #5599ff; }
+:root[data-theme="dark"] :is(.ui-badge.is-green, .status-badge.living, .investigation-status.confirmed, .h-badge.is-ok, .tag-conf-badge.tag-conf-certain, .grave-status-badge.is-existing, .branch-closed-badge.certainty-certain, .branch-closed-badge.certainty-very_likely, .ar-badge.ok, .archive-digest-complete-badge, .grave-condition-badge.grave-condition-bon, .investigation-item-status-badge.status-explored) { background: #13301f; color: #8fe0ad; border-color: #3ccf73; }
+:root[data-theme="dark"] :is(.ui-badge.is-yellow, .status-badge.unknown, .investigation-status.paused, .investigation-status.promising, .h-badge.is-warn, .tag-conf-badge.tag-conf-probable, .tag-conf-badge.tag-conf-possible, .branch-closed-badge.certainty-likely, .branch-closed-badge.certainty-maybe, .ar-badge.w, .grave-condition-badge.grave-condition-moyen, .investigation-item-status-badge.status-to_explore, .investigation-item-status-badge.status-to_explore_priority) { background: #3a2f0b; color: #ffd770; border-color: #e1a500; }
+:root[data-theme="dark"] :is(.ui-badge.is-red, .investigation-status.rejected, .tag-conf-badge.tag-conf-uncertain, .grave-status-badge.is-gone, .branch-closed-badge.certainty-doubtful, .grave-condition-badge.grave-condition-mauvais, .grave-condition-badge.grave-condition-a_restaurer) { background: #3d1218; color: #ff9aa5; border-color: #ff5d6c; }
+:root[data-theme="dark"] :is(.ui-badge.is-grey, .investigation-status.closed, .outside-genealogy-badge, .grave-condition-badge.grave-condition-disparu, .investigation-item-status-badge.status-closed) { background: #2a2a2a; color: #c8c8c8; border-color: #777; }
+:root[data-theme="dark"] :is(.ui-badge.is-black, .status-badge.deceased, .h-badge.is-dark) { background: #e8e8e8; color: #111; border-color: #e8e8e8; }
+:root[data-theme="dark"] :is(.ui-badge.is-sosa, .sosa-star) { background: #5599ff; color: #0b0b0b; border-color: #5599ff; }
+:root[data-theme="dark"] :is(.ui-badge.is-date, .entity-date-badge) { background: #1e1e1e; color: #aaa; border-color: #555; }
+:root[data-theme="dark"] .artist-badge { background: #2e2140; color: #d9b8ff; border-color: #a77be0; }
+:root[data-theme="dark"] .empty-line, :root[data-theme="dark"] .empty-line-text small { color: #aaa; }
+:root[data-theme="dark"] .map-empty-overlay.empty-line { background: #222; border-color: #555; color: #e8e8e8; }

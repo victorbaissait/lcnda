@@ -50,7 +50,8 @@
         dlg.className = 'modal h-modal h-cw-all-dialog'; dlg.id = 'h-sugg-dialog';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">WIDGET</span><h2>💡 Suggestions de recherche <small class="muted">(${fmt(data.total)})</small></h2><p class="muted">Les générations les plus proches d’abord. Les années sont des fenêtres probables, calculées d’après les dates voisines.</p></div><button type="button" class="icon-button" data-close aria-label="Fermer">×</button></div><div class="h-cw-all-body">${rowsHtml(data.items || [])}</div>`;
         document.body.appendChild(dlg);
-        dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
+        dlg.insertAdjacentHTML('beforeend', '<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Fermer</button></div>'); // K6 : bas de fenêtre « Fermer »
+        dlg.querySelectorAll('[data-close]').forEach(x => x.addEventListener('click', () => dlg.close()));
         dlg.addEventListener('close', () => dlg.remove());
         dlg.showModal();
     });

@@ -20,7 +20,8 @@
     const fmt = n => Number(n || 0).toLocaleString('fr-FR');
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const isCurrent = token => token === S().workspaceToken && S().module === 'maintenance';
-    const header = (eyebrow, title, intro, actions = '') => `<header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p>${intro}</p>` : ''}</div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</header>`;
+    // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
     const pname = p => p ? A().personName(p) : '';
 
     const KEY = 'genealogie-custom-widgets';
@@ -325,7 +326,7 @@
     }
     function chartHtml(data, d) {
         let entries = groupRows(data, d);
-        if (!entries.length) return '<p class="muted">Rien à compter.</p>';
+        if (!entries.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Rien à compter.</span></p>';
         const total = entries.reduce((n, e) => n + e[1], 0);
         // « autres » (le reste mis ensemble) ne donne pas l'échelle : sinon il écrase les vraies valeurs, qui n'ont plus de couleur visible
         const isRest = (v, i) => v === 'autres' && i === entries.length - 1 && entries.length > 1;
@@ -401,7 +402,7 @@
             rows.sort((a, b) => { const x = cellText(data, a, d.sort.col), y = cellText(data, b, d.sort.col), nx = num(x), ny = num(y); const r = nx !== null && ny !== null ? nx - ny : x.localeCompare(y, 'fr', {numeric: true, sensitivity: 'base'}); return d.sort.dir === 'desc' ? -r : r; });
         }
         const n = Math.max(1, Math.min(100, Number(d.limit) || 8));
-        if (!rows.length) return '<p class="muted">Aucune ligne.</p>';
+        if (!rows.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune ligne.</span></p>';
         let more = '';
         if (rows.length > n) {
             const key = 'l' + (++fullSeq); keepView(key, {title: d.title || d.name || 'Liste', caption: d.caption || '', html: () => listTableHtml(data, d, rows, cols, all), count: rows.length});
@@ -421,7 +422,8 @@
         dlg.className = 'modal h-modal h-cw-all-dialog'; dlg.id = 'h-cw-all-dialog'; // h-modal : se ferme quand on ouvre une fiche depuis la liste
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">WIDGET</span><h2>${esc(v.title)} <small class="muted">(${fmt(v.count)})</small></h2>${v.caption ? `<p class="muted">${nl(v.caption)}</p>` : ''}</div><button type="button" class="icon-button" data-close aria-label="Fermer">×</button></div><div class="h-cw-all-body">${v.html()}</div>`;
         document.body.appendChild(dlg);
-        dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
+        dlg.insertAdjacentHTML('beforeend', '<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Fermer</button></div>'); // K6 : bas de fenêtre « Fermer »
+        dlg.querySelectorAll('[data-close]').forEach(x => x.addEventListener('click', () => dlg.close()));
         dlg.addEventListener('close', () => dlg.remove());
         A().bindTableLinks?.();
         dlg.showModal();
@@ -452,7 +454,7 @@
     }
     function peopleGridHtml(people, sort, q, limit = Infinity) {
         const list = peopleGridList(people, sort, q).slice(0, limit);
-        if (!list.length) return '<p class="muted">Personne ne correspond.</p>';
+        if (!list.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Personne ne correspond.</span></p>';
         return `<ul class="h-cw-who">${list.map(p => { const g = p.gender === 'female' ? 'is-f' : p.gender === 'male' ? 'is-m' : ''; const ini = (String(p.first_name || '').trim()[0] || '') + (String(p.last_name || '').trim()[0] || ''); return `<li><button type="button" class="h-cw-who-card" data-h-person="${Number(p.id)}"><span class="h-cw-who-ini ${g}" aria-hidden="true">${esc(ini.toUpperCase() || '?')}</span><span><strong>${esc(pname(p))}</strong><small>${esc([lifeOf(p), p.occupation].filter(Boolean).join(' · '))}</small></span></button></li>`; }).join('')}</ul>`;
     }
     async function openDetail(el) {
@@ -497,7 +499,8 @@
             const csv = '\ufeff' + [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'].map(q).join(';'), ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation].map(q).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (A().safeExportFilename?.(csvName) || 'personnes') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
         });
-        dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
+        dlg.insertAdjacentHTML('beforeend', '<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Fermer</button></div>'); // K6 : bas de fenêtre « Fermer »
+        dlg.querySelectorAll('[data-close]').forEach(x => x.addEventListener('click', () => dlg.close()));
         dlg.addEventListener('close', () => dlg.remove());
         A().bindTableLinks?.();
         dlg.showModal();
@@ -506,6 +509,7 @@
      * Distributions de Graphiques → Statistiques : qui est derrière une barre. La statistique est refaite sur les
      * personnes (avec ses filtres et ses critères) ; null si elle ne se refait pas ainsi.
      */
+    ext.whoDialog = whoDialog; // la même fenêtre « qui est compté » pour les diagrammes (heritage-diagram-cartes2.js : un point, une alvéole, une cause…)
     ext.statWhoSupported = type => !!APP_STAT_AS_CHART[type];
     ext.statWho = async ({statType, statFrom, statTo, statGender, statLineage, rules = [], kind = 'human', generation = ''}, label, n, total, color, title) => {
         let res = null;
@@ -546,7 +550,7 @@
     const LINK_ICONS = {module: '➜', list: '📋', maint: '🛠️', url: '↗', person: '👤'};
     function linksHtml(d) {
         const links = (d.links || []).filter(l => l.label || l.target);
-        if (!links.length) return '<p class="muted">Aucun raccourci.</p>';
+        if (!links.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun raccourci.</span></p>';
         return `<div class="h-cw-links">${links.map(l => {
             const [type, ...rest] = String(l.target || '').split(':'), value = rest.join(':');
             const label = esc(l.label || value || 'Lien');
@@ -938,7 +942,7 @@
         return `<section class="h-dg-grid h-cw-free" data-cw-free><h4>✍️ Mes chiffres <small class="muted">(${plural(f.rows.length, 'ligne', 'lignes')}${many ? ' · ' + plural(f.series.length, 'série', 'séries') : ''})</small></h4>
             <p class="muted">Première colonne : le nom de chaque valeur ; puis les chiffres. Tu peux coller des cellules d’un tableur directement dans une case.${many ? ' Toutes les séries se voient en barres, colonnes, courbe, aire, tableau et avec les dessins de « Mes diagrammes » (empilées, radar…) ; le camembert, l’anneau et la mosaïque montrent la première.' : ''}</p>
             <div class="h-dg-tablewrap"><table><thead><tr>${head}</tr></thead><tbody>${rows || `<tr><td colspan="${f.series.length + 2}" class="muted">Tableau vide : « + Ligne » ou « 📋 Coller un tableau ».</td></tr>`}</tbody></table></div>
-            <div class="h-dg-gridtools">${f.rows.length < FREE_ROWS ? '<button type="button" class="button small" data-fr-add>+ Ligne</button>' : ''}${f.series.length < FREE_SERIES ? '<button type="button" class="button small secondary" data-fr-addser>+ Série (colonne de chiffres)</button>' : ''}<button type="button" class="button small secondary" data-fr-paste title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">📥 Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-fr-csv hidden></label><button type="button" class="button small secondary" data-fr-fromstat title="Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher">📊 Partir d’un graphique</button>${f.rows.length ? '<button type="button" class="link-button" data-fr-clear>Vider</button>' : ''}</div></section>`;
+            <div class="h-dg-gridtools">${f.rows.length < FREE_ROWS ? '<button type="button" class="button small" data-fr-add>+ Ligne</button>' : ''}${f.series.length < FREE_SERIES ? '<button type="button" class="button small secondary" data-fr-addser>+ Série (colonne de chiffres)</button>' : ''}<button type="button" class="button small secondary" data-fr-paste title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">⤒ Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-fr-csv hidden></label><button type="button" class="button small secondary" data-fr-fromstat title="Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher">📊 Partir d’un graphique</button>${f.rows.length ? '<button type="button" class="link-button" data-fr-clear>Vider</button>' : ''}</div></section>`;
     }
     const isNumCell = v => /^-?[\d\s  .,]+%?$/.test(String(v ?? '').trim());
     /** texte d'un tableur (tabulations) ou d'un CSV (; ou ,), avec les guillemets → lignes de cellules */
@@ -1018,7 +1022,7 @@
                 const j = b.dataset.frRow === 'up' ? i - 1 : i + 1; if (j >= 0 && j < f.rows.length) [f.rows[i], f.rows[j]] = [f.rows[j], f.rows[i]]; again(); return; }
             if (b.hasAttribute('data-fr-clear')) { const before = snap(); f.rows = []; again(); undoable('Tableau vidé', before); return; }
             if (b.hasAttribute('data-fr-paste')) {
-                ext.openDialog({eyebrow: 'MES CHIFFRES', title: '📋 Coller un tableau', submitLabel: 'Remplacer le tableau', body: '<p class="muted">Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C / Ctrl+C) et colle-les ici. Première colonne : les noms ; colonnes suivantes : les chiffres. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé.</p><textarea name="t" rows="12" class="h-dg-pastearea" placeholder="Ville&#9;1900&#9;1950&#10;Rennes&#9;42&#9;51&#10;Nantes&#9;25&#9;30"></textarea><label>La première ligne<select name="head"><option value="auto">à deviner</option><option value="1">donne les titres (noms des séries)</option><option value="0">est une ligne de chiffres comme les autres</option></select></label>',
+                ext.openDialog({eyebrow: 'MES CHIFFRES', title: '📋 Coller un tableau', submitLabel: 'Remplacer le tableau', body: '<p class="muted">Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Première colonne : les noms ; colonnes suivantes : les chiffres. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé.</p><textarea name="t" rows="12" class="h-dg-pastearea" placeholder="Ville&#9;1900&#9;1950&#10;Rennes&#9;42&#9;51&#10;Nantes&#9;25&#9;30"></textarea><label>La première ligne<select name="head"><option value="auto">à deviner</option><option value="1">donne les titres (noms des séries)</option><option value="0">est une ligne de chiffres comme les autres</option></select></label>',
                     onSubmit: form => { const t = form.querySelector('[name=t]').value; if (!t.trim()) return false; const hv = form.querySelector('[name=head]')?.value || 'auto'; const before = snap(); pasteFree(d, parseCells(t), null, 0, hv === 'auto' ? null : hv === '1'); again(); undoable(`Tableau collé (${plural(d.free.rows.length, 'ligne', 'lignes')})`, before); }});
                 return;
             }
@@ -1150,7 +1154,7 @@
             const entries = groupRows(data, d);
             const line = ['line', 'area'].includes(d.style);
             holder.innerHTML = line ? `<label class="h-cw-valcolor"><input type="color" data-cw-valcolor="__line" value="${esc(color(d.valueColors?.__line) || PALETTE[0])}"> la courbe</label>`
-                : entries.map(([v], i) => { const c = chartColor(d, v, i); return `<label class="h-cw-valcolor"><input type="color" data-cw-valcolor="${esc(v)}" value="${esc(color(c) || PALETTE[i % PALETTE.length])}"> ${esc(v)}</label>`; }).join('') || '<small class="muted">Aucune valeur.</small>';
+                : entries.map(([v], i) => { const c = chartColor(d, v, i); return `<label class="h-cw-valcolor"><input type="color" data-cw-valcolor="${esc(v)}" value="${esc(color(c) || PALETTE[i % PALETTE.length])}"> ${esc(v)}</label>`; }).join('') || '<small class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune valeur.</span></small>';
             if (d.valueColors && Object.keys(d.valueColors).length) holder.insertAdjacentHTML('beforeend', '<button type="button" class="link-button" data-cw-valreset>remettre les couleurs de la palette</button>');
         }
         preview();
@@ -1289,7 +1293,7 @@
             preview();
         }
         const save = (andAdd, andGraph = false) => {
-            if (!String(root.name || '').trim()) { toast('Donne un titre au widget.', 'error'); ws.querySelector('[data-cw="name"]').focus(); return; }
+            if (!String(root.name || '').trim()) return window.LCNDA_UI.fail(ws.querySelector('[data-cw="name"]'), 'Donne un titre au widget.');
             // Légende vide d'un graphique ou d'une liste avec des critères : on garde la légende proposée
             [root, ...(root.parts || [])].forEach(p => { if (!String(p.caption || '').trim() && ['chart', 'list'].includes(p.kind) && (p.src?.definition?.rules || []).length) p.caption = proposeCaption(p); });
             const clean = cleanDef(root), list = defs(), i = list.findIndex(x => x.id === clean.id), before = i >= 0 ? list[i] : null;
@@ -1466,7 +1470,7 @@
         const d = defs().find(x => x.id === id);
         const ws = A().$('#workspace');
         if (!d) { ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', 'Graphique introuvable', 'Il a peut-être été supprimé.')}</section>`; return; }
-        ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button>' + (window.LCNDA_SIDE_FOLDERS && !kioskOn() ? window.LCNDA_SIDE_FOLDERS.rangeButtonHtml('graph', d.id, d.name || 'Mon graphique') : '') + '<button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
+        ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`, d.note ? nl(d.note) : '', '<button type="button" class="button" data-cs-edit>✎ Modifier</button>' + (window.LCNDA_SIDE_FOLDERS && !kioskOn() ? window.LCNDA_SIDE_FOLDERS.rangeButtonHtml('graph', d.id, d.name || 'Mon graphique') : '') + '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
         const datas = await loadData(d);
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         // le titre et le texte sont déjà en haut de la page : la carte ne les répète pas
@@ -1533,10 +1537,11 @@
         const css = A().graphExportCss ? A().graphExportCss() : '';
         const title = `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`;
         const html = `<div class="h-cs-sheet" style="background:#fff;padding:24px;font-family:inherit"><h2 style="margin:0 0 6px">${esc(title)}</h2>${d.note ? `<p style="margin:0 0 12px">${nl(d.note)}</p>` : ''}${cardEl.outerHTML}<p style="margin:10px 0 0;font-size:12px;color:#666">LCNDA · ${esc(new Date().toLocaleDateString('fr-FR'))}</p></div>`;
+        if (kind === 'print' && window.LCNDA_UI?.openPrintDialog) { window.LCNDA_UI.openPrintDialog({title, html: `<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><base href="${esc(location.href)}"><style>${css}@page{margin:12mm}body{background:#fff}</style></head><body>${html}</body></html>`}); return; } // K13
         if (kind === 'print') {
             const w = window.open('', '_blank', 'width=1000,height=800');
             if (!w) { toast('Fenêtre d’impression bloquée.', 'error'); return; }
-            w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>${css}@page{margin:12mm}body{background:#fff}</style></head><body>${html}<script>window.onload=()=>setTimeout(()=>window.print(),200);<\/script></body></html>`);
+            w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>${css}@page{margin:12mm}body{background:#fff}</style></head><body>${html}<script>window.onload=()=>setTimeout(()=>window.print(),200);<\/script></body></html>`); // secours (sans la fenêtre commune)
             w.document.close();
             toast('Dans la fenêtre d’impression, choisis « Enregistrer en PDF » pour un fichier PDF.');
             return;

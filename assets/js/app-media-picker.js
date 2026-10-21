@@ -237,7 +237,7 @@
                 const ids = (it.people_ids || []).map(Number).filter(Boolean);
                 if (ids.length) loadPeople(ids).then(ps => {
                     const box = prev.querySelector('[data-mpk-ppl]'); if (!box || prevId !== it.id) return;
-                    box.innerHTML = ps.map(p => `<button type="button" class="pk-chip mpk-pchip" data-mpk-person="${Number(p.id)}" data-ia-done="1" title="Voir ses médias">${p.thumb ? `<span class="pk-av ${p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'} photo" style="background-image:url('${esc(p.thumb)}')"></span>` : `<span class="pk-av ${p.kind === 'animal' ? 'a' : p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'}">${esc(p.initials || '?')}</span>`}<b>${esc(p.title)}</b></button>`).join('') + (it.people_count > ps.length ? `<small>+ ${num(it.people_count - ps.length)}</small>` : '');
+                    box.innerHTML = ps.map(p => `<button type="button" class="pk-chip mpk-pchip" data-mpk-person="${Number(p.id)}" data-ia-done="1" title="Voir ses médias">${window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({...p, name: p.title, photo: p.thumb || ''}, 22) : p.thumb ? `<span class="pk-av ${p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'} photo" style="background-image:url('${esc(p.thumb)}')"></span>` : `<span class="pk-av ${p.kind === 'animal' ? 'a' : p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'}">${esc(p.initials || '?')}</span>`}<b>${esc(p.title)}</b></button>`).join('') + (it.people_count > ps.length ? `<small>+ ${num(it.people_count - ps.length)}</small>` : '');
                 });
             }
 

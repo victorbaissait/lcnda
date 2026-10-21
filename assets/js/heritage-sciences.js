@@ -98,8 +98,8 @@
         inFlight.set(key, job); job.finally(() => inFlight.delete(key)).catch(() => {});
         return job;
     };
-    // « 📥 Importer » d'une de nos sortes : la question porte sur le bon profil (pas sur « Artiste »)
-    // la sorte vient de l'appel (fenêtre « 📥 Importer ») : pas d'une variable restée d'une fenêtre fermée (sinon « ＋ Plusieurs épisodes » demandait « Cocher Inventeur ? »)
+    // « ⤒ Importer » d'une de nos sortes : la question porte sur le bon profil (pas sur « Artiste »)
+    // la sorte vient de l'appel (fenêtre « ⤒ Importer ») : pas d'une variable restée d'une fenêtre fermée (sinon « ＋ Plusieurs épisodes » demandait « Cocher Inventeur ? »)
     const baseNeed = ART.needArtist;
     ART.needArtist = async (store, kind) => { if (kind && SC.KIND_PROFILE[kind]) { await SC.needProfile(store, kind); return {}; } return baseNeed(store); };
     const wrapImport = () => { const base = ART.openImport; if (!base || base._sc) return; ART.openImport = (C, kind) => { if (kind === 'paper' && SC.openPubImport) return SC.openPubImport(C); return base(C, kind); }; ART.openImport._sc = true; };

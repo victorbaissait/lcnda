@@ -67,7 +67,7 @@
 .h-txb-row{flex-wrap:wrap;row-gap:4px}
 .h-txb-row select{font:inherit;font-size:12px;padding:2px 4px;flex:0 1 190px;min-width:0}
 .h-txb-row>span{flex:1 1 160px;min-width:0}
-.h-txb-dlg{width:min(640px,calc(100vw - 32px))}
+.h-txb-dlg{width:var(--modal-m)}
 /* ⤢ : le mode de zoom écrit en clair, de largeur stable pour que les boutons ne sautent pas */
 .h-tx-tools .h-tx-zoomlab{display:inline-flex;align-items:center;gap:4px;min-width:118px;justify-content:center;font-variant-numeric:tabular-nums;white-space:nowrap}
 .h-tx-tools .h-tx-zoomlab b{font-weight:600;font-size:12px}

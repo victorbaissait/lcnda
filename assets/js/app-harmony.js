@@ -73,8 +73,9 @@
         const show = () => { const f = [...(inp.files || [])]; n.textContent = !f.length ? 'Aucun fichier choisi' : f.length === 1 ? f[0].name : `${f.length} fichiers`; n.title = f.map(x => x.name).join('\n'); };
         inp.addEventListener('change', show); inp.form?.addEventListener('reset', () => setTimeout(show));
     }
-    /* ⌨️ un raccourci clavier se lit dans la bulle d'aide : data-shortcut="⌘S" → « Enregistrer (⌘S) » */
-    function shortcutTip(el) { const k = el.dataset.shortcut; if (!k || el.dataset.scDone === k) return; el.dataset.scDone = k; const t = (el.getAttribute('title') || el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\s*\([^()]*\)\s*$/, m => (m.includes(k) ? '' : m)); el.title = `${t} (${k})`; }
+    /* ⌨️ un raccourci clavier se lit dans la bulle de l'app (K12, app-tips.js) : data-shortcut="⌘S" → « Enregistrer ⌘ S » en petites
+     *  touches, écrit pour cet ordinateur (Ctrl S hors Mac). Le title n'est plus complété par « (⌘S) » ; un bouton sans title en reçoit un. */
+    function shortcutTip(el) { const k = el.dataset.shortcut; if (!k || el.dataset.scDone === k) return; el.dataset.scDone = k; if (!el.getAttribute('title') && !el.getAttribute('aria-label')) { const t = (el.textContent || '').trim(); if (t) el.title = t; } }
     /** toutes les mesures d'abord (une seule mise en page), puis tous les changements */
     const tidyAll = list => { const hs = list.map(b => (isIcon(b) ? b.getBoundingClientRect().height : 0)); list.forEach((b, i) => tidy(b, hs[i])); };
     const scan = (root, skipButtons = false) => { if (!skipButtons) tidyAll([...(root.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])') || [])]); root.querySelectorAll?.('input[type=file]:not([data-fp-done])').forEach(filePick); root.querySelectorAll?.('[data-shortcut]').forEach(shortcutTip); if (root.matches?.('[data-shortcut]')) shortcutTip(root); };

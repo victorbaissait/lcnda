@@ -1,0 +1,20 @@
+/* LCNDA — 🗺️ cartes et arbres en plus (assets/js/heritage-diagram-cartes2.js) : « Depuis l'app », points et cases cliquables, barre des étapes */
+.c2-app .c2-form{display:grid;gap:8px;margin-bottom:14px}
+.c2-app .c2-period{display:flex;flex-wrap:wrap;gap:8px}
+.c2-app .c2-period label{flex:1 1 120px;min-width:0}
+.c2-app .c2-msg{margin:0;min-height:1.2em;font-size:.9em}
+.c2-app .c2-msg:empty{display:none}
+.c2-app [data-c2-find]{justify-self:start}
+svg .c2-pt,svg .c2-hex,svg [data-c2-pid],svg .c2-cs,svg .c2-st{cursor:pointer}
+svg .c2-pt:hover circle{stroke:#1d1d1f;stroke-width:1.2}
+svg .c2-hex:hover,svg .c2-cg:hover{stroke:#1d1d1f;stroke-width:1.6}
+svg .c2-ic:hover rect,svg .c2-cs:hover path{filter:brightness(.9)}
+svg .c2-gnn:hover circle,svg .c2-st:hover circle{stroke:#1d1d1f}
+svg .c2-gn:hover path{stroke-opacity:1;stroke-width:3}
+.c2-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px;max-width:100%}
+.c2-tools input[type=range]{flex:1 1 140px;min-width:0}
+.c2-tools output{font-weight:700;min-width:6.5em;font-variant-numeric:tabular-nums}
+.c2-tools .icon-button{min-width:32px}
+@media (max-width:480px){.c2-tools{gap:4px}.c2-tools output{min-width:0}}
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+/* ═════ fin du mode sombre automatique ═════ */

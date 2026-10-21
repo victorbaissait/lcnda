@@ -41,10 +41,11 @@
             <ol class="h-gen-list">${data.genealogies.map(g => `<li class="${g.active ? 'is-active' : ''}" data-id="${esc(g.id)}">
                 <span class="h-gen-ic">🌳</span><div><strong>${esc(g.name)}</strong><small>${g.main ? 'principale · ' : ''}${size(g.size)}${g.active ? ' · ouverte' : ''}</small></div>
                 <span class="h-gen-acts">${g.active ? '<b class="h-gen-on">✓ Ouverte</b>' : '<button type="button" class="button small" data-open>Ouvrir</button>'}<button type="button" class="icon-button" data-ren title="Renommer">✎</button>${!g.main && !g.active ? '<button type="button" class="icon-button danger" data-aside title="Mettre de côté (le dossier est gardé, rien n’est effacé)">🗑</button>' : ''}</span></li>`).join('')}</ol>
-            <form class="h-gen-new" data-new><label>Nouvelle généalogie<input name="name" maxlength="80" placeholder="Famille de mon conjoint, une étude de village…" required></label><button type="submit" class="button">＋ Créer et ouvrir</button></form>`;
+            <form class="h-gen-new" data-new><label>Nouvelle généalogie<input name="name" maxlength="80" placeholder="Famille de mon conjoint, une étude de village…" required></label><button type="submit" class="button">＋ Créer et ouvrir</button></form>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;
         document.body.appendChild(dl);
         dl.addEventListener('close', () => dl.remove());
-        dl.querySelector('[data-x]').addEventListener('click', () => dl.close());
+        dl.querySelectorAll('[data-x]').forEach(x => x.addEventListener('click', () => dl.close()));
         dl.addEventListener('click', async e => {
             const li = e.target.closest('[data-id]'); if (!li) return;
             const id = li.dataset.id, g = data.genealogies.find(x => x.id === id);

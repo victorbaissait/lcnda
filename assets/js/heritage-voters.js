@@ -22,7 +22,8 @@
     const isCurrent = token => token === S().workspaceToken && S().module === 'listes';
     const personLink = (id, name) => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>` : esc(name || '');
     const pname = p => p ? A().personName(p) : '';
-    const header = (eyebrow, title, intro) => `<header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p>${intro}</p>` : ''}</div></header>`;
+    // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
+    const header = (eyebrow, title, intro) => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow)});
     const tools = (...args) => ext.tools ? ext.tools(...args) : '';
     const refresh = () => ext.refreshView ? ext.refreshView() : null;
     const ls = (key, fallback = '') => { try { return localStorage.getItem(key) ?? fallback; } catch (_) { return fallback; } };
@@ -75,7 +76,7 @@
             ${(d.cards || []).length ? `<div class="h-voter-cards">${d.cards.map(cardHtml).join('')}</div>` : ''}
             ${media.length && ext.thumbs ? `<h5>Photos des cartes</h5>${ext.thumbs('voter-' + person.id, media)}` : ''}
             ${votesHtml(d.votes || [])}
-            ${!(d.cards || []).length && !(d.votes || []).length && !media.length ? '<p class="muted">Aucune carte notée. Ajoute les cartes d’électeur (photos recto / verso, commune, bureau, numéros) et les dates où la personne a voté.</p>' : ''}`;
+            ${!(d.cards || []).length && !(d.votes || []).length && !media.length ? '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucune carte notée. Ajoute les cartes d’électeur (photos recto / verso, commune, bureau, numéros) et les dates où la personne a voté.</span></p>' : ''}`;
     }
 
     ext.personBlocks.voter = (index, detail, {editOnly}) => {

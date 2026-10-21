@@ -77,21 +77,15 @@
         const sort = lbSaved?.sort || (UI?.sortOf ? UI.sortOf(KEY, 'az') : 'az'), view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
         const rows = UI?.sortItems ? UI.sortItems(data.recueils || [], sort, {name: r => r.title, date: r => r.updated_at}) : (data.recueils || []);
         const pctOf = r => r.pages ? Math.round(r.transcribed / r.pages * 100) : 0;
-        const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page h-rc">
             <header class="page-header"><div><span class="eyebrow">LISTES · MÉDIAS</span><h2>📚 Recueils</h2>
                 <p>Un recueil rassemble des pages photographiées dans l’ordre : un registre, une liste de prisonniers, un cahier, un album. Tu peux y transcrire chaque page, garder plusieurs campagnes de photos (celles d’il y a dix ans et les nouvelles) et choisir, page par page, la meilleure image.</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>+ Nouveau recueil</button></div></header>
-            ${rows.length || s.q ? '<div data-rc-bar></div>' : ''}${rows.length && view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: r.title, open: `data-open-recueil="${r.id}"`, lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '), `${plural(r.pages, 'page', 'pages')} · ${pctOf(r)} % transcrit`], date: r.updated_at ? `Modifié le ${fmtDate(r.updated_at)}` : ''}))) : rows.length ? `<div class="h-rc-grid">${rows.map(r => {
-                const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0;
-                return `<button type="button" class="h-rc-card" data-open-recueil="${r.id}">
-                    <span class="h-rc-cover">${r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="h-rc-cover-empty">${esc(r.icon || '📚')}</span>`}${r.pages ? `<span class="h-rc-badge">${plural(r.pages, 'page', 'pages')}</span>` : ''}</span>
-                    <span class="h-rc-card-body"><strong>${esc(r.icon || '📚')} ${esc(r.title)}</strong>
-                        ${r.reference || r.place_text || r.date_text ? `<small class="muted">${esc([r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '))}</small>` : ''}
-                        <span class="h-rc-meter" title="${pct} % des pages transcrites"><i style="width:${pct}%"></i></span>
-                        <small>${plural(r.versions, 'version', 'versions')} · ${pct} % transcrit${r.links ? ` · 🔗 ${r.links}` : ''}${r.loose ? ` · <b class="h-rc-warn">${plural(r.loose, 'photo à ranger', 'photos à ranger')}</b>` : ''}</small></span>
-                </button>`; }).join('')}</div>`
+            ${rows.length || s.q ? '<div data-rc-bar></div>' : ''}${rows.length && view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: r.title, open: `data-open-recueil="${r.id}"`, lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '), `${plural(r.pages, 'page', 'pages')} · ${pctOf(r)} % transcrit`], when: r.updated_at, whenLabel: 'Modifié'}))) : rows.length ? UI.cardsHtml(rows.map(r => { const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0; // K9 : la vignette unique
+                return {thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: `${r.icon || '📚'} ${r.title}`, open: `data-open-recueil="${r.id}"`,
+                    lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ') || 'Sans cote', `${plural(r.pages, 'page', 'pages')} · ${plural(r.versions, 'version', 'versions')}${r.links ? ` · 🔗 ${r.links}` : ''}`],
+                    badges: [{text: `${pct} % transcrit`, kind: pct >= 100 ? 'green' : pct ? 'blue' : 'grey'}, r.loose ? {text: plural(r.loose, 'photo à ranger', 'photos à ranger'), kind: 'yellow'} : null].filter(Boolean), when: r.updated_at, whenLabel: 'Modifié'}; }))
             : (s.q ? A().emptyState({icon: '🔍', text: 'Aucun recueil ne correspond.'}) : A().emptyState({icon: '📚', text: 'Aucun recueil pour l’instant', hint: 'Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page.', action: {label: '＋ Nouveau recueil', attrs: 'data-rc-new'}}))}
         </section>`;
         const sec = ws.querySelector('.h-rc');
@@ -372,7 +366,7 @@
                     <p class="muted h-rc-hint">Supprimer une page ne supprime pas ses photos : elles passent « à ranger ».</p>
                 </div></div>
             <details class="h-rc-tablebox maintenance-panel" data-rc-tablebox ${p.table || s.tableOpen ? 'open' : ''}><summary><b>📊 Tableau de la page</b> <small class="muted">${p.table ? plural(p.table.rows?.length || 0, 'ligne', 'lignes') + ' · ' + plural(p.table.cols?.length || 0, 'colonne', 'colonnes') : 'pour transposer une liste (noms, âges, lieux…) ligne par ligne'}</small> <span class="h-rc-saved muted" data-rc-tsaved></span></summary>
-                <div data-rc-table>${p.table ? '' : '<p class="muted">Pas encore de tableau sur cette page.</p><button type="button" class="button small" data-rc-tnew>📊 Créer le tableau</button>'}</div></details>`;
+                <div data-rc-table>${p.table ? '' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas encore de tableau sur cette page.</span></p><button type="button" class="button small" data-rc-tnew>📊 Créer le tableau</button>'}</div></details>`;
         const go = id => { if (!id) return; s.page = Number(id); s.image = 0; s.compare = 0; paint(); };
         bindPageTable(body, p);
         body.querySelector('[data-rc-totable]')?.addEventListener('click', () => { const tb = body.querySelector('[data-rc-tablebox]'); tb.open = true; tb.scrollIntoView({behavior: 'smooth', block: 'start'}); });
@@ -510,9 +504,9 @@
             dialog({eyebrow: 'LIGNE ' + (t.rows.indexOf(row) + 1), title: 'Rattacher cette ligne à une fiche', submitLabel: 'Rattacher',
                 body: `<p class="muted">${esc(ext.recueilTableRowText(t, row) || 'Ligne vide')}</p>` + ext.personPickerHtml({guess}),
                 onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true}); picker = ext.bindPersonPicker(d); },
-                onSubmit: async () => {
+                onSubmit: async form => {
                     const o = picker.selected();
-                    if (!o) { toast('Choisis la personne dans la liste.', 'error'); return false; }
+                    if (!o) return window.LCNDA_UI.fail(form.querySelector('.h-pick .pk, .h-pick input, .h-pick'), 'Choisis la personne dans la liste.');
                     const note = `Ligne ${t.rows.indexOf(row) + 1} : ${ext.recueilTableRowText(t, row) || '(vide)'}`;
                     const res = await post('save_recueil_link', {recueil_id: D.recueil.id, entity_type: 'person', entity_key: o.key, page_from: p.id, page_to: p.id, note});
                     row.person = {id: Number(o.key), name: o.label, link: (res.result || res).id}; row._note = note;
@@ -536,7 +530,7 @@
                 <h4>📤 Une image à part, juste pour la couverture</h4>
                 <label class="h-rc-drop"><input type="file" accept="image/*" data-rc-covfile><span>📷 Choisir une image sur l’ordinateur</span></label>
                 <h4>📚 Une photo du recueil</h4>
-                <div class="h-rc-covgrid">${shown.concat(others).map(i => tile(i.media_id, thumbUrl(i), (pageById(i.page_id) ? pageName(pageById(i.page_id)) : 'À ranger') + ' · ' + (versionById(i.version_id)?.name || ''), cur?.chosen && cur.media_id === i.media_id)).join('') || '<p class="muted">Pas encore de photo dans le recueil.</p>'}</div>
+                <div class="h-rc-covgrid">${shown.concat(others).map(i => tile(i.media_id, thumbUrl(i), (pageById(i.page_id) ? pageName(pageById(i.page_id)) : 'À ranger') + ' · ' + (versionById(i.version_id)?.name || ''), cur?.chosen && cur.media_id === i.media_id)).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Pas encore de photo dans le recueil.</span></p>'}</div>
                 <h4>🖼️ Une image déjà dans Médias</h4>
                 <button type="button" class="pk-box h-rc-covmedia" data-rc-covpick><span class="pk-ico" aria-hidden="true">🖼</span><span>Choisir dans les médias : titre, cote, personne, lieu, année…</span></button>`,
             onOpen: d => {
@@ -609,9 +603,9 @@
             },
             onSubmit: async form => {
                 const f = Object.fromEntries(new FormData(form));
-                if (!f.key) { toast('Choisis dans la liste à quoi rattacher.', 'error'); return false; }
+                if (!f.key) return window.LCNDA_UI.fail((form.elements.key || form.querySelector('.pk')), 'Choisis dans la liste à quoi rattacher.');
                 if (f.scope === 'image') {
-                    if (!f.target) { toast('Choisis où mettre l’image.', 'error'); return false; }
+                    if (!f.target) return window.LCNDA_UI.fail(form.elements.target, 'Choisis où mettre l’image.');
                     const label = PK_KINDS.includes(f.kind) ? (pkItem?.title || '') : (form.querySelector('select[name=key]').selectedOptions[0]?.textContent || '');
                     const r = await post('recueil_link_media', {media_id: image.media_id, target: f.target, note: f.note, label, title: `${D.recueil.title} — ${pageName(page)}`});
                     toast((r.result || r).already ? 'Cette image y était déjà rattachée.' : 'Image rattachée.');
@@ -638,7 +632,7 @@
                     <span class="h-cfg-actions"><button type="button" class="icon-button" data-rc-vmove="-1" ${k ? '' : 'disabled'} title="Monter">↑</button><button type="button" class="icon-button" data-rc-vmove="1" ${k < D.versions.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>
                     <button type="button" class="button small secondary" data-rc-vedit>Renommer…</button><button type="button" class="button small" data-rc-vadd>+ Photos</button>${D.versions.length > 1 ? '<button type="button" class="icon-button danger" data-rc-vdel title="Supprimer cette version">🗑</button>' : ''}</span></div>
                     ${v.notes ? `<p class="muted">${nl(v.notes)}</p>` : ''}
-                    <div class="h-rc-vstrip">${imgs.map(i => { const p = pageById(i.page_id); return `<button type="button" class="h-rc-thumb" ${p ? `data-rc-open="${p.id}" data-rc-image="${i.id}"` : `data-rc-zoomv="${i.id}"`} title="${p ? esc(pageName(p)) : 'À ranger'}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"><small>${p ? (i.role === 'detail' ? '🔍 ' : '') + 'p. ' + p.num : '🧺 à ranger'}</small>${p && i.id === p.shown_image_id ? '<b>⭐</b>' : ''}</button>`; }).join('') || '<span class="muted">Pas encore de photo.</span>'}</div></section>`; }).join('')}
+                    <div class="h-rc-vstrip">${imgs.map(i => { const p = pageById(i.page_id); return `<button type="button" class="h-rc-thumb" ${p ? `data-rc-open="${p.id}" data-rc-image="${i.id}"` : `data-rc-zoomv="${i.id}"`} title="${p ? esc(pageName(p)) : 'À ranger'}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"><small>${p ? (i.role === 'detail' ? '🔍 ' : '') + 'p. ' + p.num : '🧺 à ranger'}</small>${p && i.id === p.shown_image_id ? '<b>⭐</b>' : ''}</button>`; }).join('') || '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Pas encore de photo.</span></span>'}</div></section>`; }).join('')}
             <button type="button" class="button secondary" data-rc-vnew>+ Nouvelle série de photos</button>`;
         body.querySelectorAll('[data-rc-cmp]').forEach(sel => sel.addEventListener('change', () => { s['cmp' + sel.dataset.rcCmp] = Number(sel.value); paintVersions(body); }));
         body.querySelectorAll('[data-rc-keep]').forEach(btn => btn.addEventListener('click', () => { const [pid, iid] = btn.dataset.rcKeep.split(':').map(Number); run('save_recueil_page', {id: pid, best_image_id: iid}); }));
@@ -712,14 +706,14 @@
                     if (on) { box.innerHTML = ''; if (!pk.querySelector('.pk')) pk.innerHTML = PKF({name: 'rc_pick', kind: type.value, value: chosen && l?.entity_type === type.value ? {id: Number(chosen.key), title: chosen.label} : null}); return; }
                     pk.innerHTML = '';
                     const r = await get('recueil_search', {type: type.value, q: q.value.trim()}).catch(() => ({results: []}));
-                    box.innerHTML = (r.results || []).map(x => `<label class="checkbox-line"><input type="radio" name="pick" value="${esc(x.key)}" data-label="${esc(x.label)}" ${chosen?.key === x.key ? 'checked' : ''}> ${esc(x.label)} ${x.extra ? `<small class="muted">${esc(x.extra)}</small>` : ''}</label>`).join('') || '<p class="muted">Rien trouvé.</p>';
+                    box.innerHTML = (r.results || []).map(x => `<label class="checkbox-line"><input type="radio" name="pick" value="${esc(x.key)}" data-label="${esc(x.label)}" ${chosen?.key === x.key ? 'checked' : ''}> ${esc(x.label)} ${x.extra ? `<small class="muted">${esc(x.extra)}</small>` : ''}</label>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>';
                     box.querySelectorAll('[name=pick]').forEach(r2 => r2.addEventListener('change', () => { chosen = {key: r2.value, label: r2.dataset.label}; })); };
                 q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(search, 250); });
                 type.addEventListener('change', () => { chosen = null; q.value = ''; pk.innerHTML = ''; search(); });
                 search();
             },
             onSubmit: async form => {
-                if (!chosen) { toast('Choisis dans la liste à quoi rattacher.', 'error'); return false; }
+                if (!chosen) return window.LCNDA_UI.fail((form.elements.key || form.querySelector('.pk')), 'Choisis dans la liste à quoi rattacher.');
                 const f = Object.fromEntries(new FormData(form));
                 await run('save_recueil_link', {id: l?.id || 0, recueil_id: D.recueil.id, entity_type: f.entity_type, entity_key: chosen.key, label: chosen.label, note: f.note,
                     page_from: f.scope === 'some' ? Number(f.page_from) : 0, page_to: f.scope === 'some' ? Number(f.page_to) : 0}, 'Rattaché.');
@@ -742,7 +736,7 @@
         let inner = '';
         switch (b.type) {
             case 'cover': { const c = D.recueil.cover, p = pages[0], i = p ? imgById(p.shown_image_id) : null;
-                inner = c?.chosen ? `<button type="button" class="h-rc-coverbig" data-rc-coverzoom><img src="${esc(thumbUrl(c))}" alt=""></button>` : i ? `<button type="button" class="h-rc-coverbig" data-rc-open="${p.id}"><img src="${esc(thumbUrl(i))}" alt=""></button>` : '<p class="muted">Pas encore de photo.</p>';
+                inner = c?.chosen ? `<button type="button" class="h-rc-coverbig" data-rc-coverzoom><img src="${esc(thumbUrl(c))}" alt=""></button>` : i ? `<button type="button" class="h-rc-coverbig" data-rc-open="${p.id}"><img src="${esc(thumbUrl(i))}" alt=""></button>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Pas encore de photo.</span></p>';
                 inner += `<button type="button" class="link-button" data-rc-cover2>🖼️ ${c?.chosen ? 'Changer la couverture' : 'Choisir une autre couverture'}</button>`; break; }
             case 'figures': inner = `<div class="h-rc-figs"><span><b>${pages.length}</b> pages</span><span><b>${imgs.length}</b> photos</span><span><b>${D.versions.length}</b> versions</span><span><b>${imgs.filter(i => i.role === 'detail').length}</b> détails</span><span><b>${done.length}</b> transcrites</span>${loose().length ? `<span class="h-rc-warn"><b>${loose().length}</b> à ranger</span>` : ''}</div>`; break;
             case 'description': inner = D.recueil.description ? `<p>${nl(D.recueil.description)}</p>` : '<p class="muted">Pas de description : « Modifier » pour en écrire une.</p>'; break;
@@ -753,10 +747,10 @@
             case 'missing': { const rows = D.versions.map(v => ({v, miss: pages.filter(p => !imgs.some(i => i.page_id === p.id && i.version_id === v.id && i.role === 'page'))})).filter(x => x.miss.length);
                 const none = pages.filter(p => !imgs.some(i => i.page_id === p.id));
                 inner = rows.length || none.length ? `${none.length ? `<p><b>Sans aucune photo :</b> ${none.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}</p>` : ''}${D.versions.length > 1 ? rows.map(x => `<p><b>${esc(x.v.name)} :</b> ${x.miss.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${x.miss.length > b.n ? '…' : ''}</p>`).join('') : ''}` : '<p class="muted">Toutes les pages ont leurs photos.</p>'; break; }
-            case 'toc': inner = pages.length ? `<ol class="h-rc-toc">${pages.slice(0, b.n).map(p => `<li><button type="button" class="link-button" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button> ${p.transcription.trim() ? `<small class="muted">${esc(excerpt(p.transcription, 90))}</small>` : '<small class="muted">—</small>'}</li>`).join('')}</ol>${pages.length > b.n ? `<p class="muted">… et ${pages.length - b.n} autres.</p>` : ''}` : '<p class="muted">Pas de page.</p>'; break;
-            case 'latest': inner = done.length ? done.slice(0, b.n).map(p => `<div class="h-rc-tr"><button type="button" class="link-button" data-rc-open="${p.id}">${esc(pageName(p))}</button><p>${nl(p.transcription)}</p></div>`).join('') : '<p class="muted">Aucune page transcrite.</p>'; break;
+            case 'toc': inner = pages.length ? `<ol class="h-rc-toc">${pages.slice(0, b.n).map(p => `<li><button type="button" class="link-button" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button> ${p.transcription.trim() ? `<small class="muted">${esc(excerpt(p.transcription, 90))}</small>` : '<small class="muted">—</small>'}</li>`).join('')}</ol>${pages.length > b.n ? `<p class="muted">… et ${pages.length - b.n} autres.</p>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
+            case 'latest': inner = done.length ? done.slice(0, b.n).map(p => `<div class="h-rc-tr"><button type="button" class="link-button" data-rc-open="${p.id}">${esc(pageName(p))}</button><p>${nl(p.transcription)}</p></div>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Aucune page transcrite.</span></p>'; break;
             case 'links': inner = D.links.length ? `<ul class="h-rc-llist">${D.links.map(l => `<li>${linkLabel(l)} <small class="muted">· ${esc(linkPages(l))}</small></li>`).join('')}</ul>` : '<p class="muted">Rattaché à rien.</p>'; break;
-            case 'mosaic': inner = pages.length ? `<div class="h-rc-mosaic">${pages.slice(0, b.n).map(p => { const i = imgById(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-rc-open="${p.id}" title="${esc(pageName(p))}">${i ? `<img src="${esc(thumbUrl(i))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">—</span>'}<small>${p.num}</small></button>`; }).join('')}</div>` : '<p class="muted">Pas de page.</p>'; break;
+            case 'mosaic': inner = pages.length ? `<div class="h-rc-mosaic">${pages.slice(0, b.n).map(p => { const i = imgById(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-rc-open="${p.id}" title="${esc(pageName(p))}">${i ? `<img src="${esc(thumbUrl(i))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">—</span>'}<small>${p.num}</small></button>`; }).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
             case 'note': inner = b.text ? `<p>${nl(b.text)}</p>` : '<p class="muted">Note vide : « Personnaliser » pour l’écrire.</p>'; break;
         }
         return `<section class="maintenance-panel h-rc-block ${b.wide ? 'is-wide' : ''}"><h3>${icon} ${esc(title)}</h3>${inner}</section>`;
@@ -848,7 +842,7 @@
         const elsewhere = all.length - rows.length;
         const more = elsewhere ? `<p class="muted h-rc-elsewhere">${plural(elsewhere, 'autre recueil est rangé', 'autres recueils sont rangés')} dans d’autres dossiers de l’enquête.</p>` : '';
         if (!rows.length && hideEmpty) { box.innerHTML = place ? (elsewhere ? more : '') : `<button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">📚 Rattacher un recueil</button>`; }
-        else box.innerHTML = `<section class="maintenance-panel h-rc-section"><h3>${title}</h3>${rows.length ? '' : '<p class="muted">Aucun recueil rattaché.</p>'}${forEntityHtml(rows, type, key, place)}${more}</section>`;
+        else box.innerHTML = `<section class="maintenance-panel h-rc-section"><h3>${title}</h3>${rows.length ? '' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun recueil rattaché.</span></p>'}${forEntityHtml(rows, type, key, place)}${more}</section>`;
         const again = () => ext.recueilsSection(box, type, key, {title, hideEmpty});
         bindFor(box, again, place);
         box.querySelectorAll('[data-rc-linkmove]').forEach(sel => sel.addEventListener('change', async () => {
@@ -873,6 +867,6 @@
         const rows = detail.heritage?.recueils || [];
         const pid = detail.person?.id;
         setTimeout(() => { const box = document.querySelector('[data-rc-person-block]'); if (box) bindFor(box, () => ext.refreshView?.()); }, 0);
-        return A().card(index, 'Recueils', rows.length, `<div data-rc-person-block>${rows.length ? forEntityHtml(rows, 'person', String(pid)) : `<p class="muted">Aucun recueil (registre, liste, cahier photographié) ne parle de cette personne.</p><button type="button" class="button small secondary" data-rc-attach="person:${pid}">+ Rattacher un recueil</button>`}</div>`, 'span-12');
+        return A().card(index, 'Recueils', rows.length, `<div data-rc-person-block>${rows.length ? forEntityHtml(rows, 'person', String(pid)) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucun recueil (registre, liste, cahier photographié) ne parle de cette personne.</span></p><button type="button" class="button small secondary" data-rc-attach="person:${pid}">+ Rattacher un recueil</button>`}</div>`, 'span-12');
     };
 })();

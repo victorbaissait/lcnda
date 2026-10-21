@@ -45,7 +45,8 @@
         'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display',
         'genealogie-battue-level-colors', 'genealogie-person-badge-colors', 'genealogie-archive-digest-category-order', 'genealogie-heritage-flags',
         'genealogie-village-maps', 'genealogie-transcription-layout',
-        'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header' // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
+        'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
+        'genealogie-portraits', 'genealogie-left-column' // K7 portraits, K15 colonne de gauche (app-portraits.js, app-colonne.js)
     ];
     const LAYOUT_PREFIXES = ['genealogie-tile-items-'];
     const PROFILES_KEY = 'genealogie-layout-profiles';
@@ -70,6 +71,8 @@
         if (settings['genealogie-dashboard-blocks']) parts.push('tableau de bord');
         if (Object.keys(settings).some(k => k.startsWith('genealogie-tile'))) parts.push('fonds de carte');
         if (Object.keys(settings).some(k => /colors/.test(k))) parts.push('couleurs');
+        if (settings['genealogie-portraits']) parts.push('portraits');
+        if (settings['genealogie-left-column']) parts.push('colonne de gauche');
         return parts.join(' · ') || 'réglages de départ';
     };
     /** Applique une mise en page : chaque réglage enregistré est remis, les autres reviennent au réglage de départ. */
@@ -108,7 +111,7 @@
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
     /** 💾 le cadre commun pour une liste {name, saved, settings, from…} (mises en page, ensembles de tous les réglages) */
     const profilesFrame = o => {
-        const UI = window.LCNDA_UI, day = p => (p.saved ? new Date(p.saved).toLocaleDateString('fr-FR') : '');
+        const UI = window.LCNDA_UI, day = p => p.saved || '';
         const frame = UI.presetsFrame({id: o.id, what: o.what, quietApply: true,
             list: () => o.list().map(p => ({name: p.name, date: [o.summary(p.settings), day(p), p.from ? `${o.from} ${p.from}` : ''].filter(Boolean).join(' · ')})),
             apply: i => { const p = o.list()[i]; return p ? o.apply(p) : false; },
@@ -1537,7 +1540,7 @@
         ext.openDialog({eyebrow: 'PHOTO D’IDENTITÉ', title, submitLabel: 'Utiliser comme portrait',
             body: `<div><span class="pk-lab">Personne</span>${window.LCNDA_PICKER?.pickerField ? window.LCNDA_PICKER.pickerField({name: 'idp_person', kind: 'person', value: preset || ''}) : '<input name="idp_person" type="number">'}</div><p class="muted">La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias).</p>`,
             onOpen: d => { d.addEventListener('close', () => { if (!done) res(null); }, {once: true}); d.addEventListener('picker-change', e => { chosen = e.detail.item?.title || ''; }); },
-            onSubmit: f => { const id = Number(f.elements.idp_person?.value) || 0; if (!id) { toast('Choisis une personne dans la liste.', 'error'); return false; } done = true; res({id, name: chosen}); }});
+            onSubmit: f => { const id = Number(f.elements.idp_person?.value) || 0; if (!id) return window.LCNDA_UI.fail(f.elements.idp_person, 'Choisis une personne dans la liste.'); done = true; res({id, name: chosen}); }});
     });
     ext.idpAskPerson = idpAskPerson;
 
@@ -2101,7 +2104,7 @@
             pane.dataset.dndOff = '';
             pane.innerHTML = `<p class="muted">Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer.</p>
                 <div class="h-rt-lbar"><button type="button" class="button small" data-rt-ladd>＋ Calque</button><button type="button" class="button small secondary" data-rt-imgadd title="Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte)">🖼️ Image</button><button type="button" class="button small secondary" data-rt-gadd title="Un groupe vide au-dessus du calque choisi">＋ Groupe</button><button type="button" class="button small secondary" data-rt-aadd title="Réglages et filtres dans un calque">＋ Réglage</button>${!P() ? '<button type="button" class="button small secondary" data-rt-padd title="La photo a été retirée des calques : la remettre tout en bas">↺ Remettre la photo</button>' : ''}${nodeById(activeLayer) || P() ? '<button type="button" class="button small secondary" data-rt-gwrap title="Met le calque choisi dans un nouveau groupe (⌘G)">Grouper</button>' : ''}${selId ? '<button type="button" class="button small secondary" data-rt-cmd="sel:copy">Sélection → calque</button>' : ''}</div>
-                <ol class="h-rt-layers h-rt-tree">${[...layers].reverse().map(n => rowHtml(n, 0)).join('')}${layers.length ? '' : '<li class="muted">Aucun calque.</li>'}</ol>`;
+                <ol class="h-rt-layers h-rt-tree">${[...layers].reverse().map(n => rowHtml(n, 0)).join('')}${layers.length ? '' : '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧱</span><span class="empty-line-text">Aucun calque.</span></li>'}</ol>`;
             $('[data-rt-mergebox]').hidden = !drawLayers().some(l => l.ops.length) && !layers.some(n => !['layer', 'photo'].includes(typeOf(n))) && layers[0] === P();
             syncTarget(); try { renderProps(); renderPats(); } catch (_) {} // ⓘ et ▩ suivent le calque choisi
         }
@@ -2467,7 +2470,7 @@
             if (q) { const m = q.match(/^(?:u\+|0x)?([0-9a-f]{2,6})$/i); list = m ? [String.fromCodePoint(parseInt(m[1], 16))] : [...new Set([...q])]; }
             else list = rtGlyphsOf(glSel.value);
             grid.style.fontFamily = glFont(); $('[data-rt-glrecent]').style.fontFamily = glFont();
-            grid.innerHTML = list.map(glBtn).join('') || '<p class="muted">Rien trouvé.</p>';
+            grid.innerHTML = list.map(glBtn).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>';
             let rec = []; try { rec = JSON.parse(ls(GL_RECENT, '[]')); } catch (_) {}
             $('[data-rt-glrecent]').innerHTML = rec.length ? `<small class="muted">Récents</small>${rec.map(glBtn).join('')}` : '';
         }
@@ -2478,7 +2481,7 @@
             let rec = []; try { rec = JSON.parse(ls(GL_RECENT, '[]')); } catch (_) {} lsSet(GL_RECENT, JSON.stringify([c, ...rec.filter(x => x !== c)].slice(0, 16)));
             if (editingTA) { const ta = editingTA.ta; ta.focus(); ta.setRangeText(c, ta.selectionStart, ta.selectionEnd, 'end'); ta.dispatchEvent(new Event('input')); renderGlyphs(); return; }
             const t = selText(); if (t && !lockedDeep(t.l)) { t.op.text += c; renderLayer(t.l); draw(); commit(`Glyphe ${c} ajouté`); renderGlyphs(); return; }
-            navigator.clipboard?.writeText(c).then(() => toast(`« ${c} » copié : colle-le dans un texte (⌘V / Ctrl+V).`), () => toast('Choisis d’abord un texte (outil T).', 'error')); renderGlyphs();
+            navigator.clipboard?.writeText(c).then(() => toast(`« ${c} » copié : colle-le dans un texte (⌘V).`), () => toast('Choisis d’abord un texte (outil T).', 'error')); renderGlyphs();
         }
         loadFaces().then(() => syncChar()); chPage(ls('genealogie-retouch-chpage', 'char') || 'char');
         $('[data-rt-shape]').addEventListener('change', e => { shapeKind = e.target.value; });
@@ -2952,7 +2955,7 @@
         /** 🖼️ Placer une image : la fenêtre unique des médias (une image de l'ordinateur y entre et se coche). */
         async function placeDialog(target = null) {
             const it = await window.LCNDA_PICKER?.openMediaPicker?.({types: ['image'], eyebrow: 'RETOUCHE', title: target ? 'Remplacer l’image de l’objet dynamique' : 'Placer une image', okLabel: target ? 'Remplacer par cette image' : 'Placer cette image',
-                intro: target ? 'La nouvelle image prend la place, la taille et la rotation de l’ancienne.' : 'Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V / Ctrl+V).'});
+                intro: target ? 'La nouvelle image prend la place, la taille et la rotation de l’ancienne.' : 'Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V).'});
             if (it?.filename) placeUrl(`media/${encodeURIComponent(it.filename)}`, it.title || it.filename, target);
         }
         // une image glissée depuis l'ordinateur sur la photo, ou collée (⌘V) : placée sur un nouveau calque
@@ -3253,7 +3256,8 @@
                     <div class="h-rt-actnew"><input data-actname placeholder="Nom de l’action (ex. « Photos de l’album 1930 »)" maxlength="80"><button type="button" class="button small" data-actadd>＋ Enregistrer les réglages actuels</button><button type="button" class="button small secondary" data-actimport title="Reprendre un réglage exporté (fichier .json)">⤒ Importer un réglage</button></div>
                     ${list.length ? `<ol class="h-rt-actlist">${list.map((a, i) => `<li data-i="${i}"><strong>${esc(a.name)}</strong><small class="muted">${(a.adj || []).length ? `${A().plural(a.adj.length, 'calque de réglage', 'calques de réglage')} · ` : ''}${new Date(a.at || Date.now()).toLocaleDateString('fr-FR')}</small>
                         <span><button type="button" class="button small secondary" data-acthere>Sur cette photo</button><button type="button" class="button small" data-actbatch>Sur plusieurs photos…</button><button type="button" class="button small secondary" data-actexp title="Enregistrer cette action dans un fichier, pour la garder ou la donner">⤓ Exporter</button><button type="button" class="icon-button danger" data-actdel title="Supprimer">🗑</button></span></li>`).join('')}</ol>` : A().emptyState({icon: '⏺', text: 'Aucune action enregistrée pour l’instant', hint: '« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos.'})}
-                    <div data-batch></div>`;
+                    <div data-batch></div>
+                    <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;
             };
             draw2(); document.body.appendChild(d2); d2.addEventListener('close', () => d2.remove());
             d2.addEventListener('click', async e => {
@@ -3634,7 +3638,7 @@
             ['bw', 'sepia', 'invert'].forEach(k => { $(`[data-rt-t="${k}"]`).checked = !!T()[k]; });
             RT_FILTERS.forEach(([k]) => { const v = T().filters?.[k] || 0; $(`[data-rt-f="${k}"]`).value = v; $(`[data-rt-fout="${k}"]`).textContent = v; });
             const fxl = $('[data-rt-fxlist]'), an = adjNode(), ch = an?.st.filters?.chain || [];
-            if (fxl) fxl.innerHTML = an ? `<div class="h-rt-fxl"><b>Filtres de ce calque</b>${ch.length ? `<ol>${ch.map((st0, i) => `<li><span>${esc(RT_FX[st0.t]?.[1] || st0.t)}</span><button type="button" class="link-button" data-rt-fxedit="${i}">régler…</button>${i ? `<button type="button" class="icon-button small" data-rt-fxup="${i}" title="Plus tôt">↑</button>` : ''}<button type="button" class="icon-button small" data-rt-fxdel="${i}" title="Enlever">✕</button></li>`).join('')}</ol>` : '<p class="muted">Aucun.</p>'}
+            if (fxl) fxl.innerHTML = an ? `<div class="h-rt-fxl"><b>Filtres de ce calque</b>${ch.length ? `<ol>${ch.map((st0, i) => `<li><span>${esc(RT_FX[st0.t]?.[1] || st0.t)}</span><button type="button" class="link-button" data-rt-fxedit="${i}">régler…</button>${i ? `<button type="button" class="icon-button small" data-rt-fxup="${i}" title="Plus tôt">↑</button>` : ''}<button type="button" class="icon-button small" data-rt-fxdel="${i}" title="Enlever">✕</button></li>`).join('')}</ol>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun.</span></p>'}
                 <label>＋ Ajouter <select data-rt-fxadd><option value="">un filtre…</option>${['Flou', 'Bruit', 'Netteté', 'Esthétiques', 'Artistiques', 'Pixellisation', 'Rendu', 'Déformation', 'Autres'].map(cat => `<optgroup label="${cat}">${Object.entries(RT_FX).filter(([, f]) => f[0] === cat).map(([k, f]) => `<option value="${k}">${esc(f[1])}</option>`).join('')}</optgroup>`).join('')}</select></label></div>`
                 : '<p class="muted">✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁.</p>';
             drawCurve(); draw(); syncTarget();
@@ -3691,7 +3695,7 @@
         });
         const release = () => { if (dragging >= 0 && outside === dragging) { outside = -1; removePoint(dragging); } else if (dragging >= 0) commit(`Courbe ${RT_CHANNELS.find(c => c[0] === channel)[1]}`); dragging = -1; outside = -1; drawCurve(); };
         svg.addEventListener('pointerup', release); svg.addEventListener('pointercancel', release);
-        svg.addEventListener('contextmenu', e => { const hit = e.target.closest('[data-rt-pt]'); if (hit) { e.preventDefault(); removePoint(Number(hit.dataset.rtPt)); } });
+        svg.addEventListener('contextmenu', e => { const hit = e.target.closest('[data-rt-pt]'); if (!hit) return; e.preventDefault(); const i = Number(hit.dataset.rtPt); if (!window.LCNDA_UI?.contextMenu) return removePoint(i); window.LCNDA_UI.contextMenu(e, [{icon: '🗑', label: 'Supprimer ce point', danger: true, run: () => removePoint(i)}], {title: 'Point de la courbe'}); }); // K14 : le menu de l'app
         $('[data-rt-ptdel]').addEventListener('click', () => removePoint(selPt));
         // ── Clavier : outils (V M L P W C J S B U T H Z), ⌘Z / ⇧⌘Z, ⌘A ⌘D ⇧⌘I ⌘J, [ ] taille, + − 0 1 zoom, espace, ⌫ ──
         const typing = e => e.target.closest?.('input:not([type=range]):not([type=checkbox]):not([type=color]):not([type=radio]), textarea, select, [contenteditable]');
@@ -3884,11 +3888,11 @@
     /** 📂 Les projets de retouche enregistrés : ouvrir, renommer, supprimer */
     async function retouchProjectsDialog({current = 0, onOpen} = {}) {
         let list = []; try { list = (await api('retouch_projects')).projects || []; } catch (e) { return toast(e.message, 'error'); }
-        const when = d => { const x = new Date(String(d || '').replace(' ', 'T') + 'Z'); return isNaN(x) ? '' : x.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'}); };
+        const when = d => window.LCNDA_UI?.when?.(d, {label: 'Modifié'}) || ''; // K4 : HTML <time>
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-projdlg';
         const draw = () => { dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">🎚️ RETOUCHE</span><h2>Projets de retouche</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            ${list.length ? `<div class="h-rt-plist">${list.map(p => `<div class="h-rt-prow${p.id === current ? ' is-cur' : ''}${p.exists ? '' : ' is-missing'}"><button type="button" class="h-rt-popen" data-open="${p.id}" ${p.exists ? '' : 'disabled'}>${p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-rt-pico">🎚️</span>'}<span><b>${esc(p.name)}</b><small>${esc(p.media_title || p.source)} · ${esc(when(p.updated_at))}${p.exists ? '' : ' · photo de départ introuvable'}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (les photos et leurs versions restent)">🗑</button></div>`).join('')}</div>`
-                : A().emptyState({icon: '🖼️', text: 'Aucun projet de retouche pour l’instant', hint: 'Dans la Retouche, « 💾 Enregistrer le projet ».'})}`; };
+            ${list.length ? `<div class="h-rt-plist">${list.map(p => `<div class="h-rt-prow${p.id === current ? ' is-cur' : ''}${p.exists ? '' : ' is-missing'}"><button type="button" class="h-rt-popen" data-open="${p.id}" ${p.exists ? '' : 'disabled'}>${p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-rt-pico">🎚️</span>'}<span><b>${esc(p.name)}</b><small>${esc(p.media_title || p.source)} · ${when(p.updated_at)}${p.exists ? '' : ' · photo de départ introuvable'}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (les photos et leurs versions restent)">🗑</button></div>`).join('')}</div>`
+                : A().emptyState({icon: '🖼️', text: 'Aucun projet de retouche pour l’instant', hint: 'Dans la Retouche, « 💾 Enregistrer le projet ».'})}<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`; };
         draw(); document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
         dlg.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;

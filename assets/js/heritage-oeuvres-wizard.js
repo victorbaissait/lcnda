@@ -113,7 +113,7 @@
                     ${W.parts.on && !['main', 'photos'].includes(g.key) ? `<label class="checkbox-line oe-gpart" title="Ces champs sont ceux de chaque partie"><input type="checkbox" data-w-gpart ${g.part ? 'checked' : ''}> pour chaque partie</label>` : ''}
                     <button type="button" class="icon-button small" data-w-gmv="-1" ${gi ? '' : 'disabled'} title="Monter le groupe">↑</button><button type="button" class="icon-button small" data-w-gmv="1" ${gi < W.groups.length - 1 ? '' : 'disabled'} title="Descendre le groupe">↓</button><button type="button" class="icon-button small" data-w-gren title="Renommer le groupe">✎</button>${['main', 'photos'].includes(g.key) ? '' : '<button type="button" class="icon-button small" data-w-gdel title="Retirer le groupe (ses champs vont dans le premier)">✕</button>'}</div>
                     ${g.fields.map(f => `<div class="oe-cf ${sel === f.key ? 'sel' : ''} ${f.star ? '' : 'off'}" data-f="${esc(f.key)}" draggable="true"><span class="ar-grip" title="Glisser pour ranger">⠿</span><button type="button" class="oe-eye" data-w-eye title="${f.star ? 'Masquer à la lecture' : 'Afficher'}">${f.star ? '👁' : '🚫'}</button>
-                        <button type="button" class="oe-cfl" data-w-sel><b>${esc(f.label)}</b>${f.required ? ' <small class="ar-g">obligatoire</small>' : ''}</button><span class="oe-ty">${esc(short(f.type))}</span><span class="oe-src">${esc(srcTxt(f))}</span><span class="oe-def">${esc(defTxt(f))}</span></div>`).join('') || '<p class="muted">Aucun champ : choisis une sorte à droite.</p>'}</div>`; }).join('')}
+                        <button type="button" class="oe-cfl" data-w-sel><b>${esc(f.label)}</b>${f.required ? ' <small class="ar-g">obligatoire</small>' : ''}</button><span class="oe-ty">${esc(short(f.type))}</span><span class="oe-src">${esc(srcTxt(f))}</span><span class="oe-def">${esc(defTxt(f))}</span></div>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun champ : choisis une sorte à droite.</span></p>'}</div>`; }).join('')}
                 <div class="ar-row"><button type="button" class="button small secondary" data-w-addf>＋ Ajouter un champ</button><button type="button" class="button small secondary" data-w-addg>＋ Ajouter un groupe</button><button type="button" class="button small secondary" data-w-lib>↙ Reprendre d’un autre type…</button></div>
                 ${sel ? settingsHtml(findF(sel)?.f) : ''}</div>
             <aside class="oe-pan"><div class="oe-ph"><b>＋ Champs à ajouter</b></div><div class="oe-pb"><b class="oe-sm">Champ perso — choisis sa sorte</b> <small class="ar-g">(dans « ${esc(W.groups.find(g => g.key === gsel)?.label || '')} »)</small>
@@ -123,7 +123,7 @@
         const libHtml = () => { const have = new Set(allFields().map(f => f.source).filter(Boolean)), q = OE.norm(libq);
             const l = library().filter(({d, f}) => !q || OE.norm(`${f.label} ${d.label}`).includes(q));
             const seen = new Set(); const rows = l.filter(({d, f}) => { const k = `${d.key}.${f.key}`; if (seen.has(k)) return false; seen.add(k); return true; });
-            return rows.slice(0, q ? 200 : 60).map(({d, f}) => `<label class="checkbox-line"><input type="checkbox" data-w-libf="${esc(`${d.key}.${f.key}`)}" ${have.has(`${d.key}.${f.key}`) ? 'checked' : ''}> ${esc(short(f.type === 'person' ? 'people' : f.type).split(' ')[0])} ${esc(f.label)} <small>${esc(d.icon)} ${esc(d.label)}</small></label>`).join('') + (rows.length > (q ? 200 : 60) ? `<p class="ar-note">… ${rows.length - (q ? 200 : 60)} de plus : précise ta recherche.</p>` : '') || '<p class="muted">Aucun champ.</p>'; };
+            return rows.slice(0, q ? 200 : 60).map(({d, f}) => `<label class="checkbox-line"><input type="checkbox" data-w-libf="${esc(`${d.key}.${f.key}`)}" ${have.has(`${d.key}.${f.key}`) ? 'checked' : ''}> ${esc(short(f.type === 'person' ? 'people' : f.type).split(' ')[0])} ${esc(f.label)} <small>${esc(d.icon)} ${esc(d.label)}</small></label>`).join('') + (rows.length > (q ? 200 : 60) ? `<p class="ar-note">… ${rows.length - (q ? 200 : 60)} de plus : précise ta recherche.</p>` : '') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun champ.</span></p>'; };
         const tog = (k, on, label) => `<label class="ui-toggle"><input type="checkbox" data-ws-b="${k}" ${on ? 'checked' : ''}><i></i>${esc(label)}</label>`;
         function settingsHtml(f) { if (!f) return '';
             const kindsSel = `<select data-ws="kinds" class="ar-in"><option value="">Toutes les fiches</option>${Object.values(ART.defs).filter(d => !d.hidden && d.key !== 'profile' && !d.key.startsWith('profile') && d.key !== '_oe_preview').map(d => `<option value="${esc(d.key)}" ${(f.kinds || [])[0] === d.key ? 'selected' : ''}>${esc(d.icon)} ${esc(d.label)}</option>`).join('')}</select>`;
@@ -183,8 +183,8 @@
         let saving = null; // un seul enregistrement à la fois : ⌘S ou double clic ne créent pas deux types
         function save() { if (!saving) saving = save1().finally(() => { saving = null; }); return saving; }
         async function save1() {
-            if (!W.label.trim()) { step = 0; paint(); A().toast('Donne un nom au type.', 'error'); dlg.querySelector('[data-w="label"]')?.focus(); return; }
-            if (W.parts.on && !W.parts.label.trim()) { step = 0; paint(); A().toast('Donne un nom aux fiches « parties ».', 'error'); dlg.querySelector('[data-wp="label"]')?.focus(); return; }
+            if (!W.label.trim()) { step = 0; paint(); return window.LCNDA_UI.fail(dlg.querySelector('[data-w="label"]'), 'Donne un nom au type.'); }
+            if (W.parts.on && !W.parts.label.trim()) { step = 0; paint(); return window.LCNDA_UI.fail(dlg.querySelector('[data-wp="label"]'), 'Donne un nom aux fiches « parties ».'); }
             const btn = dlg.querySelector('[data-w-save]'); if (btn) btn.disabled = true;
             try {
                 let def = toDef(); const r = await ART.write('save_type', {key: W.key || '', label: def.label, def}); W.key = r.key;
@@ -258,7 +258,7 @@
         dlg.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return; const d = b.dataset, row = b.closest('[data-f]'), gb = b.closest('[data-g]');
             if (d.wClose !== undefined) return close();
             if (d.wStep !== undefined) { step = Number(d.wStep); return paint(); }
-            if (d.wNext !== undefined) { if (step === 0 && !W.label.trim()) { A().toast('Donne un nom au type.', 'error'); dlg.querySelector('[data-w="label"]')?.focus(); return; } step = Math.min(4, step + 1); return paint(); }
+            if (d.wNext !== undefined) { if (step === 0 && !W.label.trim()) { return window.LCNDA_UI.fail(dlg.querySelector('[data-w="label"]'), 'Donne un nom au type.'); } step = Math.min(4, step + 1); return paint(); }
             if (d.wPrev !== undefined) { step = Math.max(0, step - 1); return paint(); }
             if (d.wSave !== undefined) return save();
             if (d.wIcon) { W.icon = d.wIcon; changed(); return paint(); }

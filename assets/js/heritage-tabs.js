@@ -18,7 +18,8 @@
     const toast = (...args) => A().toast(...args);
     const S = () => A().state;
     const isCurrent = token => token === S().workspaceToken && S().module === 'maintenance';
-    const header = (eyebrow, title, intro, actions = '') => `<header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p>${intro}</p>` : ''}</div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</header>`;
+    // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
     const newId = () => 'ct_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     const str = (v, n) => String(v ?? '').slice(0, n);
     const FILE_KIND = 'lcnda-tab';
@@ -322,7 +323,7 @@
             ws.querySelectorAll('[data-ct-wdown]').forEach(b => b.addEventListener('click', () => swap(Number(b.dataset.ctWdown), Number(b.dataset.ctWdown) + 1)));
             ws.querySelectorAll('[data-ct-wdel]').forEach(b => b.addEventListener('click', () => { t.widgets.splice(Number(b.dataset.ctWdel), 1); paint(); }));
             const doSave = andOpen => {
-                if (!String(t.name || '').trim()) { toast('Donne un nom à l’onglet.', 'error'); ws.querySelector('[data-ct="name"]').focus(); return; }
+                if (!String(t.name || '').trim()) return window.LCNDA_UI.fail(ws.querySelector('[data-ct="name"]'), 'Donne un nom à l’onglet.');
                 const clean = cleanTab(t), list = tabs(), i = list.findIndex(x => x.id === clean.id);
                 if (i < 0 || (list[i].after || '') !== clean.after) forgetMenuPlace(clean.id);
                 if (i >= 0) list[i] = clean; else list.push(clean);

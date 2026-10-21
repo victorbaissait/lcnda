@@ -154,7 +154,7 @@
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Reconnaissance d’écriture manuscrite, si un modèle est installé (Maintenance)" data-help="La lecture d’une écriture à la main (HTR) : elle demande un modèle installé dans Maintenance. Relis toujours : elle se trompe sur les noms." data-help-faq="transcription">✍️ Lire (manuscrit)</button>
                         <select data-tx-lang title="Langue du texte"><option value="fra">Français</option><option value="lat">Latin</option><option value="fra+lat">Français + latin</option><option value="eng">Anglais</option><option value="deu">Allemand</option><option value="ita">Italien</option><option value="spa">Espagnol</option></select>
                         <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
-                        <details class="h-tx-more"><summary>⋯ Plus</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="checkbox-line h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}> Lire et exporter l’image améliorée</label></div></details></div>
+                        <details class="h-tx-more"><summary>Plus ▾</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="checkbox-line h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}> Lire et exporter l’image améliorée</label></div></details></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="Insérer ${esc(c)}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.">${esc(t.body)}</textarea></div>
                     <div class="h-tx-found" data-tx-found></div>
@@ -441,7 +441,7 @@
             ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `Relier « ${p.name} » à une fiche`, submitLabel: 'Relier',
                 body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'tx_pick', kind: 'person', value: p.person_id || null})}</div>`,
                 onOpen: dg => { const q = dg.querySelector('.pk-search:not([hidden]) .pk-input'); if (!q) return; q.value = p.name; setTimeout(() => { q.focus(); q.dispatchEvent(new Event('input', {bubbles: true})); }, 30); }, // les fiches du nom lu s’affichent tout de suite
-                onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) { toast('Choisis une fiche.', 'error'); return false; } p.person_id = chosen; touch(); paintPeople(); }});
+                onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) return window.LCNDA_UI.fail(f.elements.tx_pick, 'Choisis une fiche.'); p.person_id = chosen; touch(); paintPeople(); }});
         }
         $('[data-tx-found]').addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
@@ -458,7 +458,7 @@
         });
         $('[data-tx-found]').addEventListener('change', e => { const s = e.target.closest('[data-tx-prole]'); if (s) { t.data.people[Number(s.dataset.txProle)].role = s.value; touch(); } });
         /* ─── lecture automatique ─── */
-        /** l'image pour la lecture (gris) ou l'export (couleurs) : améliorée (« Mieux voir », pleine taille) si c'est choisi dans ⋯ Plus.
+        /** l'image pour la lecture (gris) ou l'export (couleurs) : améliorée (« Mieux voir », pleine taille) si c'est choisi dans « Plus ▾ ».
          *  Sans redressement ni miroir : les zones posées par la lecture restent en pixels de l'image. */
         async function filteredCanvas({gray = true} = {}) {
             const v = t.data.view, enhanced = useEnh();
@@ -600,7 +600,7 @@
             if (e.target.closest?.('input, textarea, select')) return;
             if (e.target.closest?.('button, [contenteditable="true"]') && (e.key === ' ' || e.key === 'Enter')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
-            if (mod && (k === 'z' || k === 'y')) { e.preventDefault(); undoZones(k === 'y' || e.shiftKey); return; } // ⌘Z, ⇧⌘Z / Ctrl+Y
+            if (mod && (k === 'z' || k === 'y')) { e.preventDefault(); undoZones(k === 'y' || e.shiftKey); return; } // ⌘Z, ⇧⌘Z
             if (mod || e.altKey && !e.key.startsWith('Arrow')) return;
             if (e.key === ' ' && !space) { space = true; stage.dataset.tool = 'pan'; e.preventDefault(); }
             if (k === 'z') setTool('zone'); if (k === 'h') setTool('pan'); if (k === 'l') { $('[data-tx-cmd="loupe"]') ? $('[data-tx-cmd="loupe"]').click() : (loupe.on = !loupe.on, lc.hidden = !loupe.on); return; }
@@ -637,7 +637,7 @@
         try { lbActs = (await api('act_transcriptions_media', {media_id: it.id})).items || []; } catch (_) { lbActs = []; }
         if (n !== lbSeq) return;
         box.innerHTML = `<div class="lb-acts-head"><span class="section-label">📜 Transcription d’actes</span><span class="lb-acts-btns"><button type="button" class="button small secondary" data-lbact-read title="Toute la transcription, en grand (et les actes transcrits dans l’outil)">📖 Lire en entier</button><button type="button" class="button small secondary" data-lbact-new title="Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates)">${lbActs.length ? '＋ Nouvelle' : '📜 Transcrire dans l’outil'}</button></span></div>
-            ${lbActs.length ? `<ul class="lb-acts-list">${lbActs.map(a => `<li><button type="button" class="link-button" data-lbact-open="${a.id}" title="Ouvrir dans Transcription d’actes">📜 ${esc(a.title || kindLabel(a.kind))}</button> <small class="muted">${esc([kindLabel(a.kind), a.date_text, a.place].filter(Boolean).join(' · '))}${a.people?.length ? ` · ${a.people.length} personne${a.people.length > 1 ? 's' : ''}` : ''}</small></li>`).join('')}</ul>` : '<p class="muted small">Aucun acte transcrit dans l’outil pour cette image.</p>'}`;
+            ${lbActs.length ? `<ul class="lb-acts-list">${lbActs.map(a => `<li><button type="button" class="link-button" data-lbact-open="${a.id}" title="Ouvrir dans Transcription d’actes">📜 ${esc(a.title || kindLabel(a.kind))}</button> <small class="muted">${esc([kindLabel(a.kind), a.date_text, a.place].filter(Boolean).join(' · '))}${a.people?.length ? ` · ${a.people.length} personne${a.people.length > 1 ? 's' : ''}` : ''}</small></li>`).join('')}</ul>` : '<p class="empty-line small"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucun acte transcrit dans l’outil pour cette image.</span></p>'}`;
     }
     function lbOpenTool(id) {
         const it = lbItem(); if (!it) return;
@@ -648,7 +648,7 @@
         const it = lbItem(); if (!it) return; const txt = document.getElementById('lightbox-transcription')?.value || it.transcription || '';
         const people = a => (a.people || []).filter(p => p.name).map(p => `${esc(p.name)}${p.role ? ` <small class="muted">(${esc(p.role)})</small>` : ''}`).join(', ');
         const body = `<div class="lb-read"><figure class="lb-read-img"><img src="media/${encodeURIComponent(it.filename)}" alt=""></figure><div class="lb-read-txt">
-            <h3>Transcription du document</h3>${txt.trim() ? `<pre class="lb-read-pre">${esc(txt)}</pre>` : '<p class="muted">Rien d’écrit pour l’instant dans la visionneuse.</p>'}
+            <h3>Transcription du document</h3>${txt.trim() ? `<pre class="lb-read-pre">${esc(txt)}</pre>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Rien d’écrit pour l’instant dans la visionneuse.</span></p>'}
             ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.people?.length ? `<p><b>Personnes :</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">Ouvrir dans Transcription d’actes</button></section>`).join('')}</div></div>`;
         ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `📖 ${it.title || 'Document'}`, wide: true, submitLabel: '🖨️ Imprimer', body,
             onOpen: dg => { dg.classList.add('lb-read-dlg'); dg.addEventListener('click', e => { const b = e.target.closest('[data-lbact-open]'); if (b) { dg.close(); lbOpenTool(Number(b.dataset.lbactOpen)); } }); },

@@ -20,7 +20,7 @@ Règles d’interface : `docs/REGLES-INTERFACE.md` ; menu de choix : `docs/PICKE
 | `heritage-artist-music.js`, `-art.js`, `-books.js`, `-film.js` | les **types intégrés** et leurs vues (pistes, enregistrements, provenance, expositions…) |
 | `heritage-artist-page.js` | le profil « Artiste » (type `profile`), la page (`ART.pageSections`, `ART.models`, `ART.profiles`), « ⚙️ Organiser la page » |
 | `heritage-artist-list.js` | listes H10 (`ART.paintList`), tri, export E3 de la liste et d’une fiche, notice imprimable |
-| `heritage-artist-import.js` | « 📥 Importer » (`ART.openImport`), `ART.discogsItem`, clés 🔑 |
+| `heritage-artist-import.js` | « ⤒ Importer » (`ART.openImport`), `ART.discogsItem`, clés 🔑 |
 | `heritage-artist-catalogue.js` | « 📖 Nouveau catalogue raisonné / 💿 Discographie » (`ext.artistCatalogue.wizard`), notices = objets dynamiques (`noticeHtml`) |
 | `assets/css/artist.css` | styles (`.ar-*`), mode sombre en bas (`python3 scripts/build-dark-css.py assets/css/artist.css`) |
 | `tests/test-artist.js` | serveur + navigateur (machine virtuelle) |

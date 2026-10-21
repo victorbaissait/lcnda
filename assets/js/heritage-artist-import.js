@@ -83,7 +83,7 @@
                 film: [['wd', 'Wikidata (relie aux fiches IMDb)'], ['imdb', 'Une adresse IMDb de la personne (nm…)'], ['tmdb', 'TMDb (clé ; affiches)']]};
             const SRC = [...(SRC0[tab] || []), ['file', 'Un fichier exporté d’ici (💾 Fichier, ou l’ancienne « Sauvegarde JSON »)']];
             const name = C.store.name;
-            ext.openDialog({eyebrow: `IMPORTER · ${String(ART.defs[tab]?.many || '').toUpperCase()}`, title: '📥 Importer', wide: true, submitLabel: 'Importer la sélection',
+            ext.openDialog({eyebrow: `IMPORTER · ${String(ART.defs[tab]?.many || '').toUpperCase()}`, title: '⤒ Importer', wide: true, submitLabel: 'Importer la sélection',
                 body: `<div class="ar-imp"><label>Source<select data-src>${SRC.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
                     <div class="ar-impq"><input data-iq value="${esc(name)}" placeholder="Nom, adresse, ISBN…"><button type="button" class="button small" data-go>Chercher</button></div><p class="muted" data-help></p>
                     <div data-res class="ar-res"></div><label class="checkbox-line"><input type="checkbox" data-imgs checked> Rapatrier les images (pochettes, affiches, couvertures) dans les médias de la fiche</label><label class="checkbox-line"><input type="checkbox" data-nodup checked> Ne pas doubler ce qui est déjà au catalogue (même titre, même année)</label><p class="muted" data-prog></p></div>`,
@@ -103,7 +103,7 @@
                 },
                 onSubmit: async f => {
                     const res = f.querySelector('[data-res]'), cands = res._cands || [], chosen = [...res.querySelectorAll('[data-cand]:checked')].map(c => cands[Number(c.dataset.cand)]).filter(Boolean);
-                    if (!chosen.length) { toast('Coche ce qu’il faut importer.', 'error'); return false; }
+                    if (!chosen.length) return window.LCNDA_UI.fail(res.querySelector('[data-cand]'), 'Coche ce qu’il faut importer.');
                     const prog = f.querySelector('[data-prog]'), imgs = f.querySelector('[data-imgs]').checked, nodup = f.querySelector('[data-nodup]').checked, have = new Set(C.store.items.map(sameKey));
                     let extra; try { extra = await ART.needArtist(C.store, tab); } catch (_) { return false; }
                     let done = 0, skipped = 0; const out = [];
@@ -121,8 +121,8 @@
                 }});
         }
         // la liste à cocher des candidats
-        const candList = (res, cands, note = '') => { res._cands = cands; res.innerHTML = cands.length ? `${note ? `<p class="muted">${esc(note)}</p>` : ''}<label class="checkbox-line"><input type="checkbox" data-all checked> Tout cocher (${cands.length})</label><div class="ar-cands">${cands.map((c, i) => `<label class="checkbox-line"><input type="checkbox" data-cand="${i}" ${c.off ? '' : 'checked'}>${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy">` : ''}<span><b>${esc(c.title)}</b> <small class="muted">${esc(c.sub || '')}</small></span></label>`).join('')}</div>` : '<p class="muted">Rien trouvé.</p>'; };
-        const choose = (res, rows, onPick, note = 'Lequel ?') => { res._pick = i => onPick(rows[i]); res.innerHTML = `<p class="muted">${esc(note)}</p>${rows.map((r, i) => `<button type="button" class="ar-choice" data-pick="${i}"><b>${esc(r.label)}</b> <small class="muted">${esc(r.description || '')}</small></button>`).join('') || '<p class="muted">Rien trouvé.</p>'}`; };
+        const candList = (res, cands, note = '') => { res._cands = cands; res.innerHTML = cands.length ? `${note ? `<p class="muted">${esc(note)}</p>` : ''}<label class="checkbox-line"><input type="checkbox" data-all checked> Tout cocher (${cands.length})</label><div class="ar-cands">${cands.map((c, i) => `<label class="checkbox-line"><input type="checkbox" data-cand="${i}" ${c.off ? '' : 'checked'}>${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy">` : ''}<span><b>${esc(c.title)}</b> <small class="muted">${esc(c.sub || '')}</small></span></label>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>'; };
+        const choose = (res, rows, onPick, note = 'Lequel ?') => { res._pick = i => onPick(rows[i]); res.innerHTML = `<p class="muted">${esc(note)}</p>${rows.map((r, i) => `<button type="button" class="ar-choice" data-pick="${i}"><b>${esc(r.label)}</b> <small class="muted">${esc(r.description || '')}</small></button>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>'}`; };
         const remote = q2 => post('artist_remote', q2);
         // Wikidata : trouver la personne (nom, adresse, Q…), puis la liste
         async function wdPerson(val, res, then) {

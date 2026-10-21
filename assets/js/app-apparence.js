@@ -342,7 +342,7 @@
             q('[data-lib-cats]').innerHTML = `<button type="button" data-cat="" class="${libCat ? '' : 'is-active'}">Tout (${found.length})</button>` + lib.cats.filter(([c]) => counts[c]).map(([c, n]) => `<button type="button" data-cat="${esc(c)}" class="${libCat === c ? 'is-active' : ''}">${esc(n)} (${counts[c]})</button>`).join('');
             const rows = found.filter(s => !libCat || s.c === libCat);
             q('[data-lib]').innerHTML = rows.length ? rows.slice(0, libMax).map(s => `<button type="button" class="lc-shp-tile${libPick === s.k ? ' is-active' : ''}" role="option" aria-selected="${libPick === s.k}" data-lib-k="${esc(s.k)}" title="${esc(s.n)}"><svg viewBox="0 0 ${s.s || 100} ${s.s || 100}" aria-hidden="true"><path d="${esc(s.d)}"${s.eo ? ' fill-rule="evenodd"' : ''}/></svg><span>${esc(s.n)}</span></button>`).join('')
-                : `<p class="muted">Aucune forme pour « ${esc(libQ)} ». Essaie un autre mot (cœur, arbre, étoile, croix…).</p>`;
+                : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧱</span><span class="empty-line-text">Aucune forme pour « ${esc(libQ)} ». Essaie un autre mot (cœur, arbre, étoile, croix…).</span></p>`;
             const rest = rows.length - Math.min(rows.length, libMax);
             q('[data-lib-more]').innerHTML = rest > 0 ? `<button type="button" class="button small secondary" data-lib-next>Voir les ${Math.min(rest, 120)} suivantes ↓</button> <small class="muted">${plural(rows.length, 'forme')}</small>` : '';
         }

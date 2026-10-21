@@ -34,7 +34,7 @@
         const ident = kv(IDENT), contact = kv(CONTACT.filter(([k]) => k !== 'logo_url'));
         const list = (key, render) => (d[key] || []).length ? `<section class="h-emp-card"><h3>${LISTS[key].icon} ${LISTS[key].title} <small>${(d[key] || []).length}</small></h3>${render(d[key])}</section>` : '';
         const period = (a, b) => a || b ? `<small class="h-emp-period">${esc(a || '?')} → ${esc(b || '…')}</small>` : '';
-        const directors = list('directors', xs => `<ul class="h-emp-people">${xs.map(x => `<li><span class="h-emp-ini">${esc((x.name || '?').split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase())}</span><div>${x.person_id ? `<button type="button" class="table-link" data-h-person="${Number(x.person_id)}">${esc(x.name)}</button>` : `<strong>${esc(x.name)}</strong>`}<small>${esc(x.role)}</small>${period(x.from, x.to)}</div></li>`).join('')}</ul>`);
+        const directors = list('directors', xs => `<ul class="h-emp-people">${xs.map(x => `<li>${window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({id: x.person_id, name: x.name || '?'}, 34) : `<span class="h-emp-ini">${esc((x.name || '?').split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase())}</span>`}<div>${x.person_id ? `<button type="button" class="table-link" data-h-person="${Number(x.person_id)}">${esc(x.name)}</button>` : `<strong>${esc(x.name)}</strong>`}<small>${esc(x.role)}</small>${period(x.from, x.to)}</div></li>`).join('')}</ul>`);
         const estab = list('establishments', xs => `<ul class="h-emp-estab">${xs.map(x => `<li><strong>${esc(x.name || x.kind || 'Établissement')}</strong>${x.kind && x.name ? ` <span class="h-emp-tag">${esc(x.kind)}</span>` : ''}<small>${esc([x.address, x.city].filter(Boolean).join(', '))}</small>${period(x.from, x.to)}</li>`).join('')}</ul>`);
         // chronologie : création, événements à soi, passages de la famille, fermeture
         const timeline = [...(d.history || []).map(h => ({y: yearOf(h.date), date: h.date, text: h.text}))];
@@ -48,7 +48,7 @@
             const life = p.birth_year || p.death_year ? `${p.birth_year || '?'} – ${p.death_year || ''}` : '';
             const ms = (p.mentions || []).map(m => m.kind === 'census' ? `recensement ${m.year || ''}${m.occupation ? ' · ' + m.occupation : ''}${m.place ? ' · ' + m.place : ''}` : `${m.from || m.to ? `${m.from || '?'} → ${m.to || '…'}` : 'fiche'}${m.occupation ? ' · ' + m.occupation : ''}${m.place ? ' · ' + m.place : ''}`);
             return `<li class="gender-${esc(p.gender || 'unknown')}"><div>${p.id ? `<button type="button" class="table-link" data-h-person="${Number(p.id)}">${esc(pname(p))}</button>` : `<strong>${esc(pname(p))}</strong> <small class="muted">(non relié)</small>`}${life ? ` <small class="muted">${esc(life)}</small>` : ''}</div><small>${ms.map(esc).join('<br>')}</small></li>`; }).join('')}</ul>`
-            : '<p class="muted">Personne de la base n’est encore rattaché à cet employeur : écris son nom dans le champ « Employeur » d’un recensement ou du bloc « Métiers » d’une fiche.</p>'}</section>`;
+            : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Personne de la base n’est encore rattaché à cet employeur : écris son nom dans le champ « Employeur » d’un recensement ou du bloc « Métiers » d’une fiche.</span></p>'}</section>`;
         const notes = d.notes ? `<section class="h-emp-card h-emp-wide"><h3>📝 Notes et histoire</h3><div class="h-emp-text">${esc(d.notes).replace(/\n/g, '<br>')}</div></section>` : '';
         const sources = d.sources ? `<section class="h-emp-card h-emp-wide"><h3>📚 Sources</h3><div class="h-emp-text">${esc(d.sources).replace(/\n/g, '<br>')}</div></section>` : '';
         const empty = !Object.values(d).some(v => Array.isArray(v) ? v.length : v);
@@ -114,15 +114,16 @@
         dlg.className = 'modal h-modal h-emp-dialog'; dlg.id = 'h-emp-dialog';
         document.body.appendChild(dlg);
         const show = () => {
-            dlg.innerHTML = `<button type="button" class="icon-button h-emp-close" data-close aria-label="Fermer">×</button><div class="h-emp-body">${ficheHtml(r)}</div>`;
+            dlg.innerHTML = `<button type="button" class="icon-button h-emp-close" data-close aria-label="Fermer">×</button><div class="h-emp-body">${ficheHtml(r)}</div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Fermer</button></div>`;
             dlg.querySelector('[data-emp-edit]').addEventListener('click', edit);
             dlg.querySelector('[data-emp-print]').addEventListener('click', () => {
-                const w = window.open('', '_blank', 'width=1000,height=800'); if (!w) { toast('Fenêtre d’impression bloquée.', 'error'); return; }
                 const css = [...document.styleSheets].map(s => { try { return [...s.cssRules].map(x => x.cssText).join('\n'); } catch (_) { return ''; } }).join('\n');
-                w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(r.name)}</title><style>${css}body{background:#fff;padding:20px}.h-emp-actions{display:none}</style></head><body>${dlg.querySelector('.h-emp-body').innerHTML}<script>window.onload=()=>setTimeout(()=>window.print(),250);<\/script></body></html>`);
-                w.document.close();
+                const doc = `<!doctype html><html><head><meta charset="utf-8"><title>${esc(r.name)}</title><base href="${esc(location.href)}"><style>${css}body{background:#fff;padding:20px}.h-emp-actions{display:none}</style></head><body>${dlg.querySelector('.h-emp-body').innerHTML}</body></html>`;
+                if (window.LCNDA_UI?.openPrintDialog) { window.LCNDA_UI.openPrintDialog({title: `Fiche de ${r.name}`, html: doc}); return; } // K13 : la fenêtre « Imprimer » commune
+                const w = window.open('', '_blank', 'width=1000,height=800'); if (!w) { toast('Fenêtre d’impression bloquée.', 'error'); return; }
+                w.document.write(doc.replace('</body>', '<script>window.onload=()=>setTimeout(()=>window.print(),250);<\/script></body>')); w.document.close();
             });
-            dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
+            dlg.querySelectorAll('[data-close]').forEach(x => x.addEventListener('click', () => dlg.close()));
             A().bindTableLinks?.();
         };
         const edit = () => {
@@ -152,13 +153,13 @@
                 if (q.length < 3) { box.innerHTML = '<p class="muted">Au moins 3 lettres.</p>'; return; }
                 box.innerHTML = '<p class="muted">Recherche…</p>';
                 try { lookups = (await api('employer_lookup', {q})).results || []; } catch (error) { box.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; return; }
-                box.innerHTML = lookups.length ? `<ul class="h-emp-hits">${lookups.map((h, i) => `<li><button type="button" data-emp-pick="${i}"><strong>${esc(h.name)}</strong><small>${esc([h.siren && 'SIREN ' + siren(h.siren), h.legal_form, [h.postcode, h.city].filter(Boolean).join(' '), h.founded && 'créée le ' + dateFr(h.founded), h.status === 'closed' ? 'fermée' : 'active'].filter(Boolean).join(' · '))}</small></button></li>`).join('')}</ul>` : '<p class="muted">Rien trouvé : l’entreprise est peut-être trop ancienne. Remplis la fiche à la main.</p>';
+                box.innerHTML = lookups.length ? `<ul class="h-emp-hits">${lookups.map((h, i) => `<li><button type="button" data-emp-pick="${i}"><strong>${esc(h.name)}</strong><small>${esc([h.siren && 'SIREN ' + siren(h.siren), h.legal_form, [h.postcode, h.city].filter(Boolean).join(' '), h.founded && 'créée le ' + dateFr(h.founded), h.status === 'closed' ? 'fermée' : 'active'].filter(Boolean).join(' · '))}</small></button></li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé : l’entreprise est peut-être trop ancienne. Remplis la fiche à la main.</span></p>';
             };
             form.querySelector('[data-emp-q]').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); lookup(); } });
             form.addEventListener('submit', async e => {
                 e.preventDefault();
                 const data = readForm(form);
-                if (!String(data.name || '').trim()) { toast('Donne un nom à l’employeur.', 'error'); return; }
+                if (!String(data.name || '').trim()) return window.LCNDA_UI.fail(form.elements.name || form.querySelector('[name=name]'), 'Donne un nom à l’employeur.');
                 data.old_name = r.name;
                 let saved; try { saved = await api('save_employer_record', {}, {method: 'POST', body: data}); } catch (error) { toast(error.message, 'error'); return; }
                 toast('Fiche de l’employeur enregistrée.');

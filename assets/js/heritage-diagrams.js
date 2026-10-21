@@ -238,7 +238,8 @@
                 if (ext.diagramCatalog) ext.diagramCatalog(all).forEach(([g, items]) => { groups[g] = items.map(t => [t, all.indexOf(t)]); });
                 else all.forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });
                 dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 DIAGRAMMES</span><h2>${esc(title)}</h2><p class="muted">Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app).</p></div><span>${ext.openDiagramKindsEditor ? '<button type="button" class="button small secondary" data-kinds-cfg title="Ordre, types montrés ou cachés, groupes à toi">⚙️ Ranger les types</button>' : ''}<button type="button" class="icon-button" data-close>×</button></span></div>
-                ${Object.entries(groups).map(([g, items]) => `<h4>${esc(g)}</h4><div class="h-dg-tiles">${items.map(([t, i]) => `<button type="button" class="h-dg-tile ${current === t.kind && !t.o && !t.preset ? 'is-current' : ''}" data-tpl="${i}"><span class="h-dg-mini">${R().svg({...presetSpec(t), o: {...presetSpec(t).o, title: '', subtitle: '', source: '', legend: 'none', scale: 1.6}}, 480)}</span><span>${esc(t.icon)} ${esc(t.label)}</span></button>`).join('')}</div>`).join('')}`;
+                ${Object.entries(groups).map(([g, items]) => `<h4>${esc(g)}</h4><div class="h-dg-tiles">${items.map(([t, i]) => `<button type="button" class="h-dg-tile ${current === t.kind && !t.o && !t.preset ? 'is-current' : ''}" data-tpl="${i}"${R().KINDS[t.kind]?.help && !t.o && !t.preset ? ` title="${esc(R().KINDS[t.kind].help)}"` : ''}><span class="h-dg-mini">${R().svg({...presetSpec(t), o: {...presetSpec(t).o, title: '', subtitle: '', source: '', legend: 'none', scale: 1.6}}, 480)}</span><span>${esc(t.icon)} ${esc(t.label)}</span></button>`).join('')}</div>`).join('')}`;
+                dlg.insertAdjacentHTML('beforeend', '<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Annuler</button></div>'); // K6 : le bas de fenêtre
             };
             paint();
             document.body.appendChild(dlg);
@@ -364,7 +365,7 @@
                     (projCache ? Promise.resolve() : api('atelier_projects').then(r => { projCache = r.projects || []; })).then(() => { projs = (projCache || []).filter(p => String(p.title || '').toLowerCase().includes(ql)).slice(0, 6); }).catch(() => {}),
                 ]);
                 const b = (type, id, name) => `<button type="button" data-add-type="${type}" data-add-id="${Number(id)}" data-add-name="${esc(name)}">${LINK_IC[type]} ${esc(name)}</button>`;
-                sugg.innerHTML = [...parts.map(x => b('investigation_item', x.id, x.name)), ...projs.map(p => b('atelier_project', p.id, p.title))].join('') || '<small class="muted">Rien trouvé.</small>';
+                sugg.innerHTML = [...parts.map(x => b('investigation_item', x.id, x.name)), ...projs.map(p => b('atelier_project', p.id, p.title))].join('') || '<small class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></small>';
                 sugg.hidden = false; }, 220); });
             input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sugg.querySelector('[data-add-type]')?.click(); } });
             sugg.addEventListener('click', e => { const s = e.target.closest('[data-add-type]'); if (!s) return; if (!rec.links.some(l => l.type === s.dataset.addType && Number(l.id) === Number(s.dataset.addId))) rec.links.push({type: s.dataset.addType, id: Number(s.dataset.addId), name: s.dataset.addName}); dirty = true; paint(); pane.querySelector('[data-dg-lq]')?.focus(); });
@@ -411,7 +412,7 @@
             if (b.hasAttribute('data-dg-unlive')) { delete spec.live; return keep(); }
             if (b.dataset.dgPaste !== undefined) {
                 const gi = b.dataset.dgPaste;
-                ext.openDialog({eyebrow: 'DIAGRAMME', title: 'Coller un tableau', body: '<p class="muted">Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C / Ctrl+C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé.</p><textarea name="t" rows="12" class="h-dg-pastearea" placeholder="Rennes&#9;42&#10;Nantes&#9;25"></textarea>', submitLabel: 'Remplacer le tableau',
+                ext.openDialog({eyebrow: 'DIAGRAMME', title: 'Coller un tableau', body: '<p class="muted">Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé.</p><textarea name="t" rows="12" class="h-dg-pastearea" placeholder="Rennes&#9;42&#10;Nantes&#9;25"></textarea>', submitLabel: 'Remplacer le tableau',
                     onSubmit: form => { const t = form.querySelector('[name=t]').value; if (!t.trim()) return false; pasteInto(grid(gi), spec, parseTable(t)); delete spec.live; keep(); }});
             }
         });
@@ -460,6 +461,7 @@
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-gallery';
         dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 MES DIAGRAMMES</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-close>×</button></div>
             <div class="h-dg-tiles"><button type="button" class="h-dg-tile is-new" data-new><span class="h-dg-mini h-dg-plus">＋</span><span>Nouveau diagramme</span></button>${ext.diagramFromStat ? '<button type="button" class="h-dg-tile is-new" data-fromstat><span class="h-dg-mini h-dg-plus">📊</span><span>D’un graphique (à moi ou de l’app, tenu à jour)</span></button><button type="button" class="h-dg-tile is-new" data-import><span class="h-dg-mini h-dg-plus">📥</span><span>Importer (fichier, tableau, Wikipédia, image)</span></button>' : ''}${ext.pickMyGraph ? '<button type="button" class="h-dg-tile is-new" data-mygraph><span class="h-dg-mini h-dg-plus">📈</span><span>Un de mes graphiques (Éditeur de graphiques, tenu à jour)</span></button>' : ''}${all.map(d => `<button type="button" class="h-dg-tile" data-pick="${d.id}"><span class="h-dg-mini"${followId(d.spec) ? ` data-dg-mini="${d.id}"` : ''}>${followId(d.spec) ? '<span class="h-dg-plus">📈</span>' : R().svg({...specOf(d), o: {...(d.spec?.o || {}), legend: 'none', source: '', subtitle: ''}}, 480)}</span><span>${esc(R().KINDS[d.kind]?.icon || '📊')} ${esc(d.name)}</span></button>`).join('')}</div>`;
+        dlg.insertAdjacentHTML('beforeend', '<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Annuler</button></div>'); // K6 : le bas de fenêtre
         document.body.appendChild(dlg);
         const done = v => { dlg.close(); dlg.remove(); resolve(v); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); done(null); });

@@ -444,7 +444,7 @@
             const box = pane.querySelector('[data-gn-sets]'), names = new Map();
             pane.addEventListener('picker-change', e => { if (e.detail?.name === 'gn_labels') (e.detail.items || []).forEach(it => names.set(Number(it.id), String(it.title || ''))); });
             get({what: 'venn_sets'}).then(r => { const g = {}; (r.sets || []).forEach(s => { (g[s.group] = g[s.group] || []).push(s); });
-                box.innerHTML = Object.entries(g).map(([grp, l]) => `<fieldset><legend>${esc(grp)}</legend>${l.map(s => `<label class="checkbox-line"><input type="checkbox" value="${esc(s.key)}" data-label="${esc(s.label)}"> ${esc(s.label)}</label>`).join('')}</fieldset>`).join('') || '<p class="muted">Rien d’autre pour l’instant.</p>'; }).catch(e => { box.innerHTML = `<p class="muted">${esc(e.message)}</p>`; });
+                box.innerHTML = Object.entries(g).map(([grp, l]) => `<fieldset><legend>${esc(grp)}</legend>${l.map(s => `<label class="checkbox-line"><input type="checkbox" value="${esc(s.key)}" data-label="${esc(s.label)}"> ${esc(s.label)}</label>`).join('')}</fieldset>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Rien d’autre pour l’instant.</span></p>'; }).catch(e => { box.innerHTML = `<p class="muted">${esc(e.message)}</p>`; });
             bindApp(pane, async () => {
                 const lab = pane.querySelector('[name="gn_labels"]')?.value || '', labels = lab.split(',').map(Number).filter(Boolean).map(id => ({key: 'label:' + id, label: ''}));
                 labels.forEach(l => { l.label = names.get(Number(l.key.slice(6))) || 'Étiquette'; });

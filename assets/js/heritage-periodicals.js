@@ -178,12 +178,12 @@
         const val = (i, f, bf) => { if (['title', 'periodical_id', 'summary', 'notes'].includes(f.k)) return ''; const c = FIELD_CAT[f.k] || {}, v = c.data || f.k.startsWith('cf_') ? i.data?.[f.k] : i[f.k];
             if (f.k === 'status') return ''; // déjà en pastille if (f.k === 'rating') return stars(v); if (f.k === 'priority') return '🔥'.repeat(Number(v) || 0); if (c.type === 'check' || f.type === 'check') return v ? fieldLabel(f, bf) : '';
             return v ? (['number', 'date_text', 'creators', 'host', 'channel', 'publisher', 'category', 'duration'].includes(f.k) ? String(v) : `${fieldLabel(f, bf)} : ${v}`) : ''; };
-        return `<div class="h-fi-cards h-pr-fcards">${rows.map(i => { const fm = famOf(i), bf = baseOf(fm), p = pOf(i), m = thumbOf(i), title = bf === 'revue' ? `${p?.title || ''}${i.number ? ' n° ' + i.number : ''}` : i.title;
-            const lines = fieldsFor(fm).filter(f => f.show).map(f => val(i, f, bf)).filter(Boolean).slice(0, 6);
-            return `<article class="h-fi-card h-pr-fcard" data-pr-issue="${i.id}" style="--fi-c:${esc(typeCfg(fm).color || ({revue: '#0066cc', livre: '#7b3f8c', doc: '#c0392b', podcast: '#16a085'}[bf]))}">
-                <div class="h-fi-cover ${m ? '' : 'is-icon'}">${m ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : Wf(fm).ic}</div>
-                <strong>${esc(title || 'Sans titre')}</strong>${bf === 'revue' && i.title ? `<small>${esc(i.title)}</small>` : p && bf !== 'revue' ? `<small>${esc(p.title)}</small>` : ''}
-                ${lines.map(l => `<small>${esc(l)}</small>`).join('')}<small class="h-pr-fchips">${statusChip(i.status)}${labelChips(i.labels)}</small></article>`; }).join('')}</div>`;
+        // K9 : la vignette unique (UI.cardsHtml) : 2 lignes grises (les champs choisis), l'état et les étiquettes en pastilles
+        return window.LCNDA_UI.cardsHtml(rows.map(i => { const fm = famOf(i), bf = baseOf(fm), p = pOf(i), m = thumbOf(i), title = bf === 'revue' ? `${p?.title || ''}${i.number ? ' n° ' + i.number : ''}` : i.title;
+            const sub = bf === 'revue' && i.title ? i.title : p && bf !== 'revue' ? p.title : '';
+            const lines = [sub, ...fieldsFor(fm).filter(f => f.show).map(f => val(i, f, bf)).filter(Boolean)].filter(Boolean);
+            return {thumb: m ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : `<span class="ui-card-ico">${Wf(fm).ic}</span>`, name: title || 'Sans titre', open: `data-pr-issue="${i.id}"`,
+                attrs: `style="--fi-c:${esc(typeCfg(fm).color || ({revue: '#0066cc', livre: '#7b3f8c', doc: '#c0392b', podcast: '#16a085'}[bf]))}"`, cls: 'h-pr-fcard', lines: lines.slice(0, 2), badges: [statusChip(i.status), labelChips(i.labels)].filter(Boolean)}; }));
     }
     function issuesTable(rows, buy = false) {
         if (!rows.length) return (D.issues.length ? A().empty('Rien ne correspond.', {icon: '🔍'}) : A().emptyState({icon: '📰', text: 'Rien pour l’instant', hint: 'Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page.'}));
@@ -291,7 +291,7 @@
             let parts = [];
             await api('periodical_link_search', {q}).then(r => { parts = r.items || []; }).catch(() => {});
             const b = (type, id, name) => `<button type="button" data-add-type="${type}" data-add-id="${id}" data-add-name="${esc(name)}">${LINK_IC[type]} ${esc(name)}</button>`;
-            sugg.innerHTML = parts.map(x => b('investigation_item', x.id, x.name)).join('') || '<small class="muted">Rien trouvé.</small>';
+            sugg.innerHTML = parts.map(x => b('investigation_item', x.id, x.name)).join('') || '<small class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></small>';
             sugg.hidden = false; }, 220); });
     }
     const readLinks = form => { const out = {persons: [], investigations: [], investigation_items: []}; form.querySelectorAll('.h-pr-lchip').forEach(c => out[{person: 'persons', investigation: 'investigations', investigation_item: 'investigation_items'}[c.dataset.type]]?.push(Number(c.dataset.id))); return out; };
@@ -402,7 +402,7 @@
             : aud ? `<div class="h-pr-player is-audio"><audio controls preload="metadata" src="media/${encodeURIComponent(aud.filename)}" data-pr-video></audio>
                 <div class="h-pr-playbar"><b data-pr-now>0:00</b><button type="button" class="button small" data-pr-mark>📌 Noter ce moment</button><small class="muted">Le minutage du moment se remplit tout seul.</small></div></div>`
             : bf === 'podcast' ? `<p class="muted h-pr-hint">🎧 Pour écouter l’épisode ici et noter ses moments d’un clic, ajoute le fichier audio plus bas. Sinon : écoute-le ${urlAt(d.audio_url, null) ? `<a href="${esc(urlAt(d.audio_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, puis « ＋ Moment » avec son minutage.</p>`
-            : `<p class="muted h-pr-hint">🎞️ Pour regarder le film ici et capturer ses images d’un clic, ajoute le fichier vidéo plus bas. Sinon : regarde-le ${urlAt(d.video_url, null) ? `<a href="${esc(urlAt(d.video_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, fais une capture d’écran (⌘⇧4 sur Mac, Win+Maj+S sur PC), puis « ＋ Moment » et colle-la (⌘V / Ctrl+V).</p>`;
+            : `<p class="muted h-pr-hint">🎞️ Pour regarder le film ici et capturer ses images d’un clic, ajoute le fichier vidéo plus bas. Sinon : regarde-le ${urlAt(d.video_url, null) ? `<a href="${esc(urlAt(d.video_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, fais une capture d’écran (${/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌘⇧4' : 'Win+Maj+S'}), puis « ＋ Moment » et colle-la (⌘V).</p>`;
         const newTitle = {revue: 'Nouveau numéro', livre: 'Nouveau livre', doc: 'Nouveau documentaire', podcast: 'Nouvel épisode'}[fam] || `Nouveau : ${w.item}`;
         ext.openDialog({eyebrow: w.item.toUpperCase(), title: i ? issueName(i) : newTitle, wide: true, labels: ['periodical_issue', i?.labels || []],
             body: `<div class="form-grid">${fields}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>
@@ -489,7 +489,7 @@
                 });
             },
             onSubmit: async () => {
-                const bad = T.find(t => !BASES.includes(t.key) && !String(t.name).trim()); if (bad) { toast('Donne un nom à chaque type.', 'error'); return false; }
+                const bad = T.find(t => !BASES.includes(t.key) && !String(t.name).trim()); if (bad) return window.LCNDA_UI.fail('[data-ty-body] input', 'Donne un nom à chaque type.');
                 const types = T.map(t => ({key: t.key, base: t.base, name: t.name, item: t.item, icon: t.icon, view: t.view, group: t.group, fields: t.fields.filter(f => !f.k.startsWith('cf_') || String(f.label || '').trim()).map(f => ({k: f.k, show: !!f.show, ...(f.k.startsWith('cf_') ? {label: f.label, type: f.type || 'text'} : {})}))}));
                 await post('save_periodical_types', {types}); toast('Réglages des types enregistrés.'); await reload();
             }});
@@ -564,7 +564,7 @@
         ext.openDialog({eyebrow: `${w.part.toUpperCase()} · ${issueName(issue)}`, title: a ? a.title : `Nouveau${fam === 'doc' ? ' moment' : fam === 'livre' ? ' chapitre ou passage' : ' article'}`, wide: true, labels: ['periodical_article', a?.labels || []],
             body: `<div class="form-grid">${fields}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>
                 ${vurl ? `<p><a href="${esc(vurl)}" target="_blank" rel="noopener">${pod ? '▶ Réécouter ce moment en ligne ↗' : '▶ Revoir ce moment en ligne ↗'}</a></p>` : ''}
-                <section class="h-pr-capture"><h4>📸 ${fam === 'doc' ? 'Capture de ce moment' : 'Capture'}</h4><p class="muted" data-cap-hint>${fam === 'doc' ? 'Colle une capture d’écran (⌘V / Ctrl+V) ou choisis-la ci-dessous : tu peux ensuite l’annoter (flèches, cercles, texte).' : 'Colle une capture (⌘V / Ctrl+V) pour l’annoter avant de l’ajouter.'}</p><div data-cap-annot></div></section>
+                <section class="h-pr-capture"><h4>📸 ${fam === 'doc' ? 'Capture de ce moment' : 'Capture'}</h4><p class="muted" data-cap-hint>${fam === 'doc' ? 'Colle une capture d’écran (⌘V) ou choisis-la ci-dessous : tu peux ensuite l’annoter (flèches, cercles, texte).' : 'Colle une capture (⌘V) pour l’annoter avant de l’ajouter.'}</p><div data-cap-annot></div></section>
                 ${linksField(a?.links || [])}
                 ${ext.mediaEditorHtml ? ext.mediaEditorHtml('periodical_article', a?.id || 0, a?.media || [], [['', fam === 'doc' ? '📸 Captures de ce moment' : '📸 Captures d’écran, PDF', 'image/*,application/pdf']]) : ''}`,
             onOpen: dl => {
@@ -634,7 +634,7 @@
             },
             onSubmit: async form => {
                 const items = [...form.querySelectorAll('.h-pr-pick input:checked')].map(c => { const [type, id] = c.value.split(':'); return {type, id: Number(id)}; });
-                if (!items.length) { toast('Coche au moins un élément.', 'error'); return false; }
+                if (!items.length) return window.LCNDA_UI.fail(form.querySelector('.h-pr-pick input'), 'Coche au moins un élément.');
                 const r = await post('periodicals_to_atelier', {project_id: projectId, folder_id: folderId, items});
                 toast(`${A().plural((r.result || r).created, 'élément ajouté', 'éléments ajoutés')}.`); done?.();
             }});

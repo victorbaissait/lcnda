@@ -289,3 +289,198 @@ if (font) apply(font);
 ```
 
 Une seule liste : recherche, récentes en haut (`localStorage['genealogie-recent-fonts']`), polices de l’app, puis celles de l’ordinateur (`queryLocalFonts` si déjà permis, ou bouton « 🔓 Voir toutes les polices de l’ordinateur » ; sinon les polices courantes trouvées sur l’ordinateur). Chaque nom est écrit dans sa police avec le texte choisi. ↑ ↓ Entrée, double-clic.
+
+---
+
+## K5 — En-tête de page : `UI.pageHeader` (app-pages.js)
+
+Un seul en-tête en haut de chaque page (listes, Maintenance, Fiches, Enquêtes, ADN, Comparaison…). Maquette : `harmonisation-K.html`, K5.
+
+```js
+ws.innerHTML = `<section class="page">${UI.pageHeader({
+    title: 'Médias', help: 'Photos, actes, documents et sons de ta généalogie.',   // help = une phrase (HTML)
+    primary: '<button class="button" data-x-new>＋ Ajouter des médias</button>',    // le bouton bleu
+    actions: ['<button class="button secondary" data-x-a>📚 Recueils</button>', …],   // 2 visibles, le reste dans « ⋯ »
+    more: ['<button …>…</button>'],                                                 // toujours dans « ⋯ »
+})}…</section>`;
+```
+
+- **Sur-titre** = l’endroit, calculé d’après le menu : « Listes · Médias et documents », « Maintenance · Réglages des outils », « Enquêtes »… (`where` pour l’imposer ; `detail: true` pour la page d’un élément → « Listes · Recueils »). `UI.pagePlace()` le donne.
+- **Titre** = le nom, avec l’icône du menu (groupe de la colonne pour Listes et Maintenance, émoji de l’onglet sinon ; `icon` pour l’imposer), 38 px partout (30 px sur téléphone). **Jamais un nombre** : le nombre va dans la barre H10 (`bar.setCount`) ou, sans barre, en tête de la phrase d’aide (`<b class="ui-ph-count">`).
+- **À droite**, dans cet ordre : « ✓ Enregistré » (pages de réglages, K2) · le bouton bleu · 2 boutons au plus · « ⋯ » (un `<details class="ui-ph-more">`, les boutons y sont **déplacés**, leurs écouteurs restent) · ⭐ (raccourci, posé par heritage-shortcuts.js).
+- Tout `.page-header` de `#workspace` qui n’a pas été fait par `UI.pageHeader` est rangé pareil tout seul (`UI.harmonizePageHeader`, `MutationObserver`) : sur-titre, icône, boutons laissés sous le texte ou à même l’en-tête, « ⋯ ». `data-ph-off` l’exclut, `data-ph-where="…"` impose le sur-titre, `data-ph-detail` = page d’un élément.
+- Un bouton « Tout réinitialiser », « Tout remettre comme avant »… dans l’en-tête devient « ↺ Remettre comme au départ », toujours visible.
+
+## K2 — Réglages enregistrés tout seuls : `UI.autoSave` (app-pages.js)
+
+En Maintenance, tout changement fait dans la page (case, menu, curseur, couleur, glisser, bouton) est gardé tout de suite. Une seule écoute sur `#workspace` relit les réglages gardés sur cet ordinateur (localStorage) ; s’ils ont changé : « ✓ Enregistré » à droite du titre (`UI.pageSaved()`) et un message H7 « Réglage changé : « … » » avec « ↶ Annuler » (qui remet les clés d’avant, puis redessine). Pas de bouton « Enregistrer » sur une page de réglages ; « ↺ Remettre comme au départ » se fait sans question (« ↶ Annuler » dans le message).
+
+Une page qui garde un brouillon (lu à l’écran) donne de quoi l’enregistrer :
+
+```js
+draw();
+UI.autoSave(ws, {save: () => { collect(); savePrefs(p); },          // lit l’écran et enregistre (appelé après chaque changement)
+                 redraw: () => { p = loadPrefs(); draw(); }});        // après ↶ Annuler / ↷ Rétablir
+```
+
+- Hors Maintenance (ex. ADN → ⚙️ Réglages), `UI.autoSave(élément, …)` marche tant que l’élément est affiché.
+- Si la page propose déjà son propre « ↶ Annuler » pour ce geste (une palette retirée…), pas de deuxième message.
+- Réglages gardés sur le serveur : la page continue d’enregistrer elle-même ; elle peut appeler `UI.pageSaved()` pour afficher « ✓ Enregistré ».
+
+## K9 — La vignette unique du mode « Fiches » : `UI.cardsHtml`
+
+```js
+box.innerHTML = UI.cardsHtml(rows.map(r => ({
+    thumb: '<img src="…">',                 // photo, portrait (UI.avatarOr) ou <span class="ui-card-ico">🏠</span>
+    name: r.title, open: `data-x-open="${r.id}"`,   // ou href: 'https://…' (un lien, ouvert dans un nouvel onglet)
+    lines: ['ligne grise 1', 'ligne grise 2'],      // 2 au plus (les suivantes ne sont pas montrées)
+    badges: [{text: 'En cours', kind: 'blue'}, '<span class="ui-badge …">…</span>'],   // pastilles K8 (UI.badge)
+    when: r.updated_at, whenLabel: 'Modifié',       // ou date: '1906'
+    quick: '<button class="button small" data-x-play>▶</button>',          // facultatif : un bouton gardé à côté d’« Ouvrir »
+    menu: ['<button data-x-ren>✎ Renommer</button>', '<button class="danger" data-x-del>🗑 Supprimer</button>'],  // dans « ⋯ »
+})), {size: ''});   // 's' = petites vignettes
+```
+
+En bas de chaque vignette : « Ouvrir » (même attribut que `open`, `openLabel` pour un autre mot) puis ⋯. L’ancien champ `actions` va aussi dans ⋯. Un bouton qui n’a qu’une icône y reçoit son nom (sa bulle). Plus de cartes faites à la main en mode « Fiches » (`.list-card`, `.h-pet-card`, `.h-hs-card`, `.h-rc-card`, `.investigation-card`, `.external-link-card`, `.ar-card`, `.h-pr-fcard`…).
+
+## K7 — Un seul portrait : `UI.avatar` (app-portraits.js)
+
+```js
+const UI = window.LCNDA_UI;
+const html = UI.avatarOn() ? UI.avatar({id, first_name, last_name, name, gender, kind, photo: 'media/…'}, 34) : ancienDessin;
+// ou : UI.avatarOr(personne, 34, ancienDessin)
+```
+
+- Tailles : 22 (dans une ligne, pastille), 34 (listes, menu de choix), 48 (arbre, vignettes), 88 (fiche) ; une autre taille prend la plus proche.
+- `photo` : adresse déjà prête (`media/…`, `https://…`, `data:image/…`) ; refusée si elle n’est pas sûre. `kind: 'animal'` → 🐾 ; `{free: true}` → « ? » gris.
+- Badge Sosa (réglage) : `opts.sosa`, `p.sosa`, sinon `sosaNumberFor(p.id)` ; jamais à 22 px.
+- Réglage : `localStorage['genealogie-portraits']` (Maintenance → Apparence → « 👤 Portraits ») ; les couleurs, la forme et le bord sont des variables `--lc-av-*` sur `:root` (styles `.lc-av` dans app.css). « Comme avant » (par défaut) : `UI.avatarOn()` est faux et chaque endroit garde son dessin.
+- Branché : fiche (88), liste des personnes (34), menu de choix (34 / 22 / 48), fenêtre des images (22), arbre et diagrammes (48), tableau de bord (48), Recherche (48), œuvres, profils, artistes, écoles (22 / 34 / 88), employeurs (34), tableaux (48).
+
+## K15 — Colonne de gauche (app-colonne.js)
+
+- Réglage : `localStorage['genealogie-left-column']` = `{mode, style, nums, numstyle, tabs, size, width, lf}` (Maintenance → Apparence → « ▤ Colonne de gauche »). « Comme avant » (par défaut) : rien n’est posé.
+- Sinon : attributs `data-lc-col-style|nums|tabs|size` sur `:root` (styles dans app.css) et `--sidebar` pour la largeur ; après chaque dessin de `#sidebar-content` : numéros réécrits 01, 02… (`.side-number`, l’original gardé dans `data-lc-num`), onglets `.segmented` en « icône + nom » (`data-lc-tab` garde l’original), « Liste | Fiches » (`.investigation-display`, `.result-display`) recopié dans l’en-tête de page, le bouton d’origine caché reçoit le clic.
+- Pour qu’une nouvelle colonne suive le réglage : `.segmented` pour les onglets, `.side-menu` > `.side-menu-item` > `.side-number`, `.section-label` pour les titres de groupe.
+
+
+## K4, K8, K10 — dates des fiches, pastilles de statut, « rien ici » (harmonisation validée)
+
+Code : `assets/js/app-indicateurs.js` (`UI.when`, `UI.badge`) et `emptyState` / `empty` dans `app.js`. Styles : `assets/css/indicateurs.css` (chargée après toutes les autres feuilles).
+
+### K4 — Date de création ou de modification : `UI.when`
+
+```js
+UI.when(row.updated_at)                       // HTML <time title="samedi 17 octobre 2026 à 23 h 39">aujourd’hui à 10 h 22</time>
+UI.when(row.updated_at, {label: 'Modifié'})   // « Modifié hier à 23 h 39 », « Modifié mardi à 9 h 05 », « Modifié le 17 oct. 2026 »
+UI.whenText(d, {label}) / UI.whenFull(d)      // le même en texte (pour un toast, un title, une case)
+UI.cardsHtml([{…, when: x.updated_at, whenLabel: 'Modifié'}])   // vignettes et lignes (rowsHtml) : la date au même format
+```
+
+Comprend `2026-10-17 23:39:32` (SQLite, heure UTC), l’ISO (`…T…Z`), `2026-10-17` (un jour), `17/10/2026` (anciens réglages enregistrés), un `Date` ou un nombre. Moins de 7 jours : « aujourd’hui / hier / mardi à … » ; après : « 17 oct. 2026 ». **Pas pour les dates généalogiques** (naissance, actes…), qui suivent C4.
+
+### K8 — Pastille de statut : `UI.badge`
+
+```js
+UI.badge('En cours', 'blue')     // ou 'open' : <span class="ui-badge is-blue">En cours</span>
+UI.badge('Terminée', 'closed')   // gris ; sortes : blue, green, yellow, red, grey, black, sosa (+ alias open, done, warn, error, closed, deceased…)
+```
+
+11 px, gras, capitales, bord 1,5 px, coins carrés. **Bleu** en cours · **vert** fait / certain · **jaune** à vérifier · **rouge** problème · **gris** fermé / archivé · **noir** décès · **Sosa** toujours bleu plein. Une date n’est pas un statut : `ui-badge is-date` (sans capitales). Les étiquettes (`.label-chip`) gardent leur couleur, même forme.
+Les anciennes classes encore écrites par le code ont pris ce dessin et ces couleurs dans `indicateurs.css` : `.status-badge`, `.sosa-star`, `.daboville-tag`, `.outside-genealogy-badge`, `.artist-badge`, `.investigation-status`, `.investigation-item-status-badge`, `.entity-date-badge`, `.h-badge`, `.h-new-badge`, `.tag-conf-badge`, `.grave-status-badge`, `.grave-condition-badge`, `.branch-closed-badge`, `.ar-badge`. Tout nouveau code écrit `UI.badge` (ou `.ui-badge.is-…`), jamais une nouvelle classe.
+
+### K10 — Quand il n’y a rien : deux tailles
+
+```js
+emptyState({icon: '📚', text: 'Aucun livre pour l’instant', hint: '…', action: {label: '＋ Nouveau livre', attrs: 'data-empty-click="#new-book"'}})  // grande boîte : page ou liste vide
+empty('Aucune source', {icon: '📚', action: {label: '＋ Ajouter une source', attrs: 'data-empty-click="[data-add-source-inline]"'}})          // petite ligne : bloc, panneau
+```
+
+Toujours le bouton pour commencer quand c’est possible : `data-empty-click="sélecteur"` clique le vrai bouton de création, `data-empty-focus="sélecteur"` va au champ du formulaire. En HTML écrit à la main (chaîne entre apostrophes…) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📚</span><span class="empty-line-text">Aucune source</span>[bouton]</p>`. Plus jamais de `<p class="muted">Aucun…</p>`. La Carte (« Aucun événement dans cette zone » + « ⤢ Voir tout ») et la Recherche (avant de chercher) utilisent les mêmes.
+
+## K1 — Erreurs dans les formulaires : `UI.fail`, `UI.validateForm` (app-forms.js)
+
+Une seule façon de dire qu'il manque quelque chose (maquette `harmonisation-K.html`, K1) : cadre rouge autour du champ, la phrase juste dessous, curseur dans le premier champ fautif, fenêtre ouverte, « ⛔ N choses à corriger avant d’enregistrer. » en haut s'il y en a plusieurs ; l'erreur s'efface dès qu'on tape ou qu'on choisit.
+
+```js
+onSubmit: f => {
+    if (!f.elements.title.value.trim()) return UI.fail(f.elements.title, 'Donne un titre au widget.'); // renvoie false : la fenêtre reste ouverte
+    if (!Number(f.elements.person.value)) throw UI.invalid('person', 'Choisis une personne.');       // openDialog la montre sous le champ (pas de toast)
+}
+UI.formErrors(form, [[form.elements.a, 'Donne un titre.'], [form.elements.b, 'Entre 1 et 12 générations.']]); // plusieurs d'un coup ; true si aucune
+UI.validateForm(form);            // règles du navigateur (required, min, max, type=email, pattern…) + input[type=hidden][data-required]
+UI.fieldError(champ, '…'); UI.clearFieldError(champ); UI.clearFormErrors(form);
+```
+
+- Le champ : l'élément, ou son nom / un sélecteur (cherché dans le formulaire en cours d'envoi). Un champ caché (menu de choix, lieu, fichier « 📁 Choisir ») : c'est l'habillage visible qui est encadré (`.pk`, `.h-place`, `.file-pick`…).
+- **Rien à écrire pour `required`, `min`, `max`, `type=email`…** : la bulle du navigateur est remplacée partout par le même rendu (l'événement `invalid` est intercepté) ; `data-error="Entre 1 et 12 générations."` sur le champ donne sa phrase, sinon une phrase simple (« Ce champ est à remplir. », « Au moins 1. »…).
+- Classes : `.is-invalid` (l'encadré), `.ui-field-error` (la phrase), `.ui-form-errors` (le résumé, une `ui-notice-error` de C7). Exclure : `data-ui-off`.
+- Le toast rouge reste pour ce qui échoue **après** l'envoi (base verrouillée, réseau, conflit).
+
+## K6 — Fenêtres : 4 largeurs, le bas toujours là
+
+| Taille | Classe | CSS | Pour |
+|---|---|---|---|
+| Petite 540 | `modal small-modal` (ou `modal-s`) | `var(--modal-s)` | une question, un choix |
+| Moyenne 760 | `modal` (`h-modal`) | `var(--modal-m)` | un formulaire d'une colonne |
+| Grande 1040 | `h-modal-wide` (`openDialog({wide: true})`) ou `modal-l` | `var(--modal-l)` | 2 colonnes, aperçu à droite |
+| Galerie 1180 | `modal-xl` | `var(--modal-xl)` | fenêtre d'images, galeries de modèles |
+| Plein écran | `is-full` (⛶) | réduit : `var(--modal-win-w)` × `var(--modal-win-h)` | les éditeurs |
+
+- Jamais d'autre largeur (`width: min(820px, …)`) : une classe à soi prend une de ces variables.
+- Le bas `.modal-actions` (dernier enfant de la fenêtre ou de son `<form>`) reste collé en bas quand on fait défiler, et le titre (`.modal-head`) en haut. Ordre : Supprimer à gauche, Annuler puis le bouton principal à droite.
+- Une fenêtre qui ne fait que montrer : « Fermer » seul (`openDialog` sans `onSubmit` le met tout seul ; `closeLabel` pour un autre mot).
+- Filet de sécurité : une fenêtre `.modal` ouverte sans bas en reçoit un (« Fermer », qui passe par son ×) — `data-no-foot` pour l'éviter. Les éditeurs (barre du haut E1, ⛶) n'en ont pas.
+
+## K12 — Bulles au survol et touches : `LCNDA_APP.keys` (app-tips.js)
+
+Rien à écrire pour la bulle : tout élément avec `title` (ou un bouton icône avec `aria-label`, ou un bouton avec `data-shortcut`) a la bulle de l’app (fond noir, 0,4 s, au-dessus ou au-dessous). Le `title` n’est retiré que pendant le survol, puis remis : le code qui le lit ou le change ne voit rien. `data-tip-off` (ou `data-k-off`) sur un élément ou un parent : pas de bulle.
+
+```js
+const K = window.LCNDA_APP.keys;          // aussi LCNDA_UI.keys
+K.html('⇧⌘Z')      // <kbd class="k-keys"><kbd class="k-cap">Ctrl</kbd><kbd class="k-cap">Maj</kbd><kbd class="k-cap">Z</kbd></kbd> hors Mac
+K.text('Mod+S')    // « ⌘S » sur Mac, « Ctrl+S » ailleurs (pour un toast, un aria-label)
+K.parts('⌘V / Ctrl+V')   // ['Ctrl', 'V'] hors Mac : on garde l’écriture de cet ordinateur
+K.setKbd(kbd, '⌘D')      // écrit la touche dans un <kbd> de menu (valeur d’origine dans data-k)
+K.isMac
+```
+
+- Les textes de la page sont redessinés tout seuls : « colle-la (⌘V) » devient « colle-la ( Ctrl V ) » en petites touches sur PC ; « ⌘V / Ctrl+V », « ⌘/Ctrl » ne gardent qu’une écriture. Écrire la touche Mac (ou « Mod+… ») dans le code ; jamais les deux.
+- Un texte propre à un système (« ⊞ + . » pour les émojis sous Windows) : `K.isMac ? '⌃⌘Espace' : '⊞ + .'`.
+- `data-shortcut="⌘S"` sur un bouton : la touche va dans la bulle (plus jamais « (⌘S) » ajouté au `title`).
+
+## K13 — Une fenêtre « Imprimer », une fenêtre « Importer » (app-actions.js)
+
+```js
+UI.printPage('Fiche de Joseph MARTIN');                     // le contenu de l’écran (#workspace), sans menus ni boutons
+UI.printPage('', {element: '.h-booklet', bodyClass: 'h-gaps-printing', orientation: 'landscape'});
+UI.openPrintDialog({title: 'Bordereau', html: '<!doctype html>…', photos: false,
+    options: [{key: 'notes', label: 'Sources et notes', checked: true}]});   // html peut être (choix) => texte
+UI.printDocument(html);   // « 🖨 Imprimer » d’une fenêtre d’export E3 : tout de suite, sans aperçu
+```
+Fenêtre : aperçu de la page (nombre de pages), A4 / A5, Portrait / Paysage, « Ce qu’on imprime » (Photos d’office), Annuler · ⤓ PDF · 🖨 Imprimer. L’impression se fait dans un cadre caché (sans scripts) ; les dessins `<canvas>` deviennent des images.
+
+```js
+UI.openImportDialog({title: 'Importer un tableau CSV', accept: '.csv,text/csv', noun: 'personne', feminine: true,
+    analyze: async files => ({count: 12, summaryHtml: '<b>12 personnes</b>, 34 événements', notices: [{kind: 'warn', text: '3 doublons possibles seront mis de côté.'}], preview: '<table>…</table>', data}),
+    run: async (analyse, files) => { const ids = await importer(analyse.data); return {message: '12 personnes importées', undo: () => retirer(ids)}; }});
+```
+1. déposer le fichier (zone E4) · 2. « Voilà ce qui va entrer : … » (← Retour) · 3. « ⤒ Importer 12 personnes » → message H7, avec « ↶ Annuler » si `undo`. Une erreur levée dans `analyze` ou `run` s’affiche dans la fenêtre (⛔).
+
+Sans rien changer à un outil : un bouton dont le nom commence par « ⤒ Importer… » (ou 📥) qui ouvre le choix de fichier (`input.click()`, `showPicker()`, étiquette autour du champ) passe tout seul par cette fenêtre ; à l’étape 2, un coup d’œil au fichier (personnes d’un GEDCOM, lignes d’un CSV avec les premières lignes, éléments d’un JSON, nom d’un réglage) ; à l’étape 3, le fichier est remis au champ (`input` + `change`), et le formulaire `form[id^="import-"]` / `form[data-k-import]` est envoyé. `data-k-direct` sur le champ : le choix de fichier habituel. `importSettingFile` (réglages) utilise la fenêtre directement (le nom se change à l’étape 2).
+
+## K14 — « ⋯ » et clic droit : `UI.menuAt`, `UI.contextMenu` (app-ui.js, app-actions.js)
+
+```js
+UI.menuAt(boutonPlus, [
+    {icon: '↗', label: 'Ouvrir', run: open},
+    {icon: '✎', label: 'Renommer', run: rename},
+    '-',                                                   // un trait
+    {icon: '⧉', label: 'Dupliquer', shortcut: '⌘D', run: dup},
+    {icon: '🗑', label: 'Supprimer', danger: true, run: del},  // toujours en bas, en rouge, après un trait
+], {title: '« Mon tableau »'});
+UI.contextMenu(event, items);   // le même menu à l’endroit de la souris (clic droit d’un outil)
+```
+- « ⋯ » fait d’un `<details class="ui-more | ui-ph-more | ui-card-more">` : ouvre ce menu tout seul (ses boutons sont cliqués pour de vrai).
+- Clic droit sur une ligne (`tbody tr`, `.ui-row`, `.ui-card`, `[data-ctx-menu]`, vignettes…) : le menu de son ⋯ à la souris, sinon un menu fait de ses boutons (↗ Ouvrir d’abord). Sur un objet d’un éditeur (`.vx-stage`, `.ly-canvas`, `.kn-stage`, `.h-board-stage`, `.h-hs-stage`) : l’objet est choisi, puis Couper, Copier, Coller, Dupliquer, Premier plan, Avancer, Reculer, Arrière-plan, Grouper, Dissocier, Verrouiller, Supprimer — les commandes de l’éditeur, avec leurs touches.
+- Maj + clic droit, une case de texte, du texte choisi, une carte Leaflet : le menu du navigateur. `data-ctx-off` : pas de menu de l’app.

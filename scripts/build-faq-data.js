@@ -27,7 +27,8 @@ for (; i < source.length; i++) {
     else if (c === ']' && --depth === 0) break;
 }
 const literal = source.slice(source.indexOf('[', start), i + 1);
-const FAQ = vm.runInNewContext('(' + literal + ')', Object.create(null), { timeout: 2000 });
+// La FAQ de l'app écrit certaines touches selon l'ordinateur (navigator) : ici, la version PC.
+const FAQ = vm.runInNewContext('(' + literal + ')', Object.assign(Object.create(null), { navigator: { platform: '', userAgent: '' } }), { timeout: 2000 });
 
 // Texte simple : pas de balises ni d'entités HTML, espaces resserrés.
 const entities = { amp: '&', lt: '<', gt: '>', quot: '"', apos: '\'', nbsp: ' ' };

@@ -1,0 +1,22 @@
+/* LCNDA — 📊 diagrammes ADN et chiffres (assets/js/heritage-diagram-adn-chiffres.js) : parties cliquables, liste des personnes */
+[data-dac-pid]:hover rect, [data-dac-pid]:hover circle, [data-dac-pids]:hover rect, [data-dac-pids]:hover path{filter:brightness(.9)}
+.dac-app [data-dac-msg]:empty{display:none}
+.dac-app select{max-width:100%}
+.dac-people{width:min(var(--modal-s, 540px), calc(100vw - 32px))}
+.dac-people-list{max-height:min(60vh, 520px);overflow:auto;padding:0 2px}
+.dac-people-list ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.dac-person{display:flex;align-items:center;gap:10px;width:100%;padding:6px 8px;border:1px solid var(--line, #e3e6ea);border-radius:10px;background:var(--panel, #fff);color:inherit;font:inherit;text-align:left;cursor:pointer}
+.dac-person:hover, .dac-person:focus-visible{border-color:#4e79a7;background:#f3f7fc}
+.dac-ini{flex:0 0 30px;width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.dac-pname{flex:1 1 auto;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dac-years{flex:0 1 auto;color:#6b7280;font-size:.85em;white-space:nowrap}
+.dac-go{color:#4e79a7}
+:root[data-theme="dark"] .dac-person{background:#22262c;border-color:#3a3f47}
+:root[data-theme="dark"] .dac-person:hover, :root[data-theme="dark"] .dac-person:focus-visible{background:#2a3340;border-color:#6d9bd1}
+:root[data-theme="dark"] .dac-years{color:#a3a9b3}
+@media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .dac-person{background:#22262c;border-color:#3a3f47}
+    :root:not([data-theme="light"]) .dac-person:hover{background:#2a3340;border-color:#6d9bd1}
+    :root:not([data-theme="light"]) .dac-years{color:#a3a9b3}
+}
+@media (max-width: 480px){.dac-years{display:none}}

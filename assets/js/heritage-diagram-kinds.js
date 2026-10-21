@@ -84,19 +84,20 @@
             <section class="maintenance-panel h-dk-howto"><h3>📥 Mon propre graphique à partir de données d’ailleurs</h3>${HOWTO}</section></section>`;
         bindKindsEditor(ws.querySelector('.page'));
     };
-    const HOWTO = `<ol><li><b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « 📥 Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries.</li>
-        <li><b>Un fichier CSV</b> : « 📥 Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation).</li>
-        <li><b>Une page Wikipédia</b> : « 📥 Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un.</li>
-        <li><b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « 📥 Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme.</li>
-        <li><b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « 📥 Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre.</li>
+    const HOWTO = `<ol><li><b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries.</li>
+        <li><b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation).</li>
+        <li><b>Une page Wikipédia</b> : « ⤒ Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un.</li>
+        <li><b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « ⤒ Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme.</li>
+        <li><b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « ⤒ Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre.</li>
         <li>Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout.</li></ol>`;
     ext.diagramHowtoHtml = () => HOWTO;
 
     /* ═════════ Les statistiques dessinées avec les types de diagrammes ═════════ */
-    const PAIR_KINDS = new Set(['columns', 'bars', 'stacked', 'stacked100', 'line', 'area', 'pie', 'donut', 'halfdonut', 'waffle', 'treemap', 'funnel', 'radar', 'pyramid', 'heatmap', 'parliament', 'wordcloud', 'pictogram', 'gauge']);
+    const PAIR_KINDS = new Set(['columns', 'bars', 'stacked', 'stacked100', 'line', 'area', 'pie', 'donut', 'halfdonut', 'waffle', 'treemap', 'funnel', 'radar', 'pyramid', 'heatmap', 'parliament', 'wordcloud', 'pictogram', 'gauge', 'causesun']); // causesun : causes de décès en anneaux (heritage-diagram-cartes2.js)
     const PEOPLE_TPL = new Set(['timeline:lives', 'chrono', 'sankey']);
-    const usable = t => (PAIR_KINDS.has(t.kind) && !t.preset) || PEOPLE_TPL.has(tplId(t));
-    ext.diagramStatStyles = () => { if (!DI()?.TEMPLATES || !R()) return []; return catalog(DI().TEMPLATES()).map(([g, items]) => [g, items.filter(usable).map(t => ['dg:' + tplId(t), `${t.icon} ${t.label}${PEOPLE_TPL.has(tplId(t)) ? ' (avec des personnes)' : ''}`])]).filter(([, l]) => l.length); };
+    const fromPeople = t => (!t.o && !t.preset && typeof R()?.KINDS[t.kind]?.fromPeople === 'function'); // un type qui se remplit tout seul avec une liste de personnes (heritage-diagram-famille.js)
+    const usable = t => (PAIR_KINDS.has(t.kind) && !t.preset) || PEOPLE_TPL.has(tplId(t)) || fromPeople(t);
+    ext.diagramStatStyles = () => { if (!DI()?.TEMPLATES || !R()) return []; return catalog(DI().TEMPLATES()).map(([g, items]) => [g, items.filter(usable).map(t => ['dg:' + tplId(t), `${t.icon} ${t.label}${PEOPLE_TPL.has(tplId(t)) || fromPeople(t) ? ' (avec des personnes)' : ''}`])]).filter(([, l]) => l.length); };
     const yearOf = v => { const m = String(v || '').match(/(\d{3,4})(?!.*\d{3,4})/); return m ? Number(m[1]) : null; };
     const firstYear = v => { const m = String(v || '').match(/\d{3,4}/); return m ? Number(m[0]) : null; };
     const placeShort = v => String(v || '').split(',')[0].trim();
@@ -114,6 +115,11 @@
             spec.rows = free.rows.filter(r => r.label !== '' || r.v.some(x => x !== '')).map(r => { const row = {label: r.label}; spec.series.forEach((_, j) => { row['s' + j] = R().num(r.v[j]); }); return row; });
             return spec;
         }
+        if (fromPeople(t)) { // le type sait se remplir avec une liste de personnes : {html} (un message) ou des morceaux du diagramme
+            if (!people) return {html: '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Ce dessin a besoin d’une liste de personnes (source « Personnes »).</span></p>'};
+            const got = R().KINDS[spec.kind].fromPeople(people, cell, spec) || {}; if (got.html) return got;
+            Object.assign(spec, got, {o: {...spec.o, ...(got.o || {})}}); return spec;
+        }
         if (PEOPLE_TPL.has(id)) {
             if (!people) return {html: '<p class="muted">Ce dessin a besoin d’une liste de personnes (source « Personnes »).</p>'};
             if (id === 'timeline:lives') {
@@ -125,7 +131,7 @@
             } else if (id === 'sankey') {
                 const m = new Map(); people.forEach(r => { const a = placeShort(cell(r, 'birthplace')), b = placeShort(cell(r, 'deathplace')); if (a && b) m.set(a + '\u0000' + b, (m.get(a + '\u0000' + b) || 0) + 1); });
                 spec.rows = [...m.entries()].sort((x, y) => y[1] - x[1]).slice(0, 25).map(([k, v]) => { const [from, to] = k.split('\u0000'); return {from, to: from === to ? to + ' ' : to, value: v}; });
-                if (!spec.rows.length) return {html: '<p class="muted">Aucune personne avec un lieu de naissance et un lieu de décès.</p>'};
+                if (!spec.rows.length) return {html: '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucune personne avec un lieu de naissance et un lieu de décès.</span></p>'};
             }
         } else spec = DI().fillFrom(spec, entries.map(([v, n]) => [String(v), Number(n) || 0]), (free?.series?.[0]?.name) || d.name || '');
         return spec;
@@ -176,7 +182,7 @@
         return spec;
     }
     ext.diagramImport = ({link = null} = {}) => new Promise(res => { let done = false;
-        ext.openDialog({eyebrow: 'DIAGRAMME', title: '📥 Importer', wide: true, submitLabel: 'Continuer', body: `<div class="h-dgi"><nav class="h-dgi-tabs">${[['file', '📄 Fichier'], ['paste', '📋 Coller un tableau'], ['wiki', '🌐 Page Wikipédia'], ['image', '🖼️ Image d’un graphique']].map(([k, l], i) => `<button type="button" data-dgi-tab="${k}" class="${i ? '' : 'active'}">${l}</button>`).join('')}</nav>
+        ext.openDialog({eyebrow: 'DIAGRAMME', title: '⤒ Importer', wide: true, submitLabel: 'Continuer', body: `<div class="h-dgi"><nav class="h-dgi-tabs">${[['file', '📄 Fichier'], ['paste', '📋 Coller un tableau'], ['wiki', '🌐 Page Wikipédia'], ['image', '🖼️ Image d’un graphique']].map(([k, l], i) => `<button type="button" data-dgi-tab="${k}" class="${i ? '' : 'active'}">${l}</button>`).join('')}</nav>
             <section data-dgi="file"><p class="muted">Un diagramme LCNDA (.json), un graphique partagé (.lcnda-widget.json) ou un tableau CSV.</p><input type="file" name="file" accept=".json,.csv,.tsv,.txt,application/json,text/csv"></section>
             <section data-dgi="paste" hidden><p class="muted">Copie un tableau (tableur, site web…) et colle-le ici. Première colonne = les noms, colonnes suivantes = les chiffres.</p><textarea name="paste" rows="10" placeholder="Prénom;Nombre&#10;Marie;42&#10;Jean;37"></textarea></section>
             <section data-dgi="wiki" hidden><p class="muted">L’adresse d’une page Wikipédia (n’importe quelle langue) : ses tableaux et ses graphiques s’affichent, choisis-en un. Il faut Internet.</p><span class="h-fp-who"><input name="wiki" placeholder="https://fr.wikipedia.org/wiki/Démographie_de_la_France"><button type="button" class="button small" data-dgi-wiki>Lire la page</button></span><div data-dgi-wikires></div></section>
@@ -190,15 +196,15 @@
             onSubmit: async f => {
                 const tab = f.closest('dialog')._tab();
                 try {
-                    if (tab === 'file') { const file = f.querySelector('[name=file]').files?.[0]; if (!file) { toast('Choisis un fichier.', 'error'); return false; } if (file.size > 5e6) throw new Error('Fichier trop gros.');
+                    if (tab === 'file') { const file = f.querySelector('[name=file]').files?.[0]; if (!file) return window.LCNDA_UI.fail(f.querySelector('[name=file]'), 'Choisis un fichier.'); if (file.size > 5e6) throw new Error('Fichier trop gros.');
                         const text = await file.text(), name = file.name.replace(/\.[^.]+$/, '');
                         if (/\.json$/i.test(file.name)) { const j = JSON.parse(text);
                             if (j?.lcnda_diagram && R().KINDS[j.kind]) { done = true; setTimeout(async () => res(await editWith({...(j.spec || {}), kind: j.kind}, String(j.name || name), link)), 0); return; }
                             if (j?.format === 'lcnda-widget') { const st = ext.importCustomStat(j); toast(`Graphique « ${st.name} » ajouté à Mes graphiques.`); const t = await pickKind('Avec quel dessin ?', x => PAIR_KINDS.has(x.kind) && !x.preset); if (!t) return; const pairs = await ext.diagramStatRows(st.key); const spec = {...DI().fillFrom(DI().presetSpec(t), pairs, st.name), live: {key: st.key, label: st.name}}; spec.o = {...spec.o, title: st.name}; done = true; setTimeout(async () => res(await editWith(spec, st.name, link)), 0); return; }
                             throw new Error('Ce fichier JSON n’est ni un diagramme ni un graphique LCNDA.'); }
                         const spec = await specFromTable(text, name); if (!spec) return false; done = true; setTimeout(async () => res(await editWith(spec, name, link)), 0); return; }
-                    if (tab === 'paste') { const text = f.querySelector('[name=paste]').value; if (!text.trim()) { toast('Colle un tableau.', 'error'); return false; } const spec = await specFromTable(text); if (!spec) return false; done = true; setTimeout(async () => res(await editWith(spec, spec.o?.title || 'Tableau collé', link)), 0); return; }
-                    if (tab === 'image') { const file = f.querySelector('[name=img]').files?.[0]; if (!file) { toast('Choisis une image.', 'error'); return false; } const src = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(file); }); done = true; setTimeout(async () => res(await digitize(src, {link, title: file.name.replace(/\.[^.]+$/, '')})), 0); return; }
+                    if (tab === 'paste') { const text = f.querySelector('[name=paste]').value; if (!text.trim()) return window.LCNDA_UI.fail(f.querySelector('[name=paste]'), 'Colle un tableau.'); const spec = await specFromTable(text); if (!spec) return false; done = true; setTimeout(async () => res(await editWith(spec, spec.o?.title || 'Tableau collé', link)), 0); return; }
+                    if (tab === 'image') { const file = f.querySelector('[name=img]').files?.[0]; if (!file) return window.LCNDA_UI.fail(f.querySelector('[name=img]'), 'Choisis une image.'); const src = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(file); }); done = true; setTimeout(async () => res(await digitize(src, {link, title: file.name.replace(/\.[^.]+$/, '')})), 0); return; }
                     if (tab === 'wiki') { toast('Clique « Lire la page », puis choisis un tableau ou une image.'); return false; }
                 } catch (e) { toast(e.message, 'error'); return false; }
             }});
@@ -221,7 +227,7 @@
             const imgs = [...doc.querySelectorAll('img')].map(im => ({src: im.getAttribute('src') || '', w: Number(im.getAttribute('width')) || 0, alt: im.getAttribute('alt') || ''})).filter(x => x.w >= 120 && /upload\.wikimedia\.org/.test(x.src)).slice(0, 24)
                 .map(x => { let src = x.src.startsWith('//') ? 'https:' + x.src : x.src; src = src.replace(/\/(\d+)px-([^/]+)$/, (m0, w, f) => `/${Math.max(800, Number(w))}px-${f}`); return {kind: 'image', src, title: x.alt || pageTitle}; });
             dg._wiki = [...tables, ...imgs];
-            out.innerHTML = `<h4>${esc(pageTitle)}</h4>${tables.length ? `<p><b>Tableaux</b></p><ul class="h-dgi-list">${tables.map((t, i) => `<li><button type="button" class="link-button" data-dgi-pick="${i}">📋 ${esc(t.title)}</button> <small class="muted">${t.rows.length} lignes · ${esc(t.rows[0].slice(0, 4).join(' | '))}</small></li>`).join('')}</ul>` : '<p class="muted">Aucun tableau.</p>'}
+            out.innerHTML = `<h4>${esc(pageTitle)}</h4>${tables.length ? `<p><b>Tableaux</b></p><ul class="h-dgi-list">${tables.map((t, i) => `<li><button type="button" class="link-button" data-dgi-pick="${i}">📋 ${esc(t.title)}</button> <small class="muted">${t.rows.length} lignes · ${esc(t.rows[0].slice(0, 4).join(' | '))}</small></li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun tableau.</span></p>'}
                 ${imgs.length ? `<p><b>Images</b> (graphiques à convertir en chiffres)</p><div class="h-dgi-imgs">${imgs.map((x, i) => `<button type="button" data-dgi-pick="${tables.length + i}" title="${esc(x.title)}"><img src="${esc(x.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}`;
             out.querySelectorAll('[data-dgi-pick]').forEach(b => b.addEventListener('click', () => onPick(dg._wiki[Number(b.dataset.dgiPick)])));
         } catch (e) { out.innerHTML = `<p class="error">${esc(e.message || 'Lecture impossible (connexion internet ?)')}</p>`; }

@@ -441,7 +441,7 @@
             if (!pw || pw.closed) return; const d = pw.document, s = cur(), nx = order[pos + 1] !== undefined ? show.slides[order[pos + 1]] : null;
             fitBox(d.getElementById('cur'), renderBuilt(show, s, 'thumb', si >= steps.length ? 'end' : 'start'));
             fitBox(d.getElementById('next'), si < steps.length ? `<div style="width:${W}px;height:${H}px;display:flex;align-items:center;justify-content:center;background:#222;color:#ddd;font:600 ${H / 12}px sans-serif">✨ Encore ${steps.length - si} animation${steps.length - si > 1 ? 's' : ''} sur cette diapositive</div>` : nx ? renderBuilt(show, nx, 'thumb', 'end') : `<div style="width:${W}px;height:${H}px;display:flex;align-items:center;justify-content:center;background:#111;color:#888;font:600 ${H / 10}px sans-serif">Fin</div>`);
-            const n = d.getElementById('notes'); n.style.fontSize = notesSize + 'px'; n.innerHTML = s.notes ? esc(s.notes).replace(/\n/g, '<br>') : '<span class="muted">Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive).</span>';
+            const n = d.getElementById('notes'); n.style.fontSize = notesSize + 'px'; n.innerHTML = s.notes ? esc(s.notes).replace(/\n/g, '<br>') : '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive).</span></span>';
             d.getElementById('idx').textContent = ended ? 'Fin' : `Diapositive ${pos + 1} / ${order.length}`;
         }
         const tick = () => { if (!pw || pw.closed) { clearInterval(pTimer); return; } const d = pw.document, el = (Date.now() - pStart - (pPause ? Date.now() - pPause : 0)) / 1000; d.getElementById('timer').textContent = `${Math.floor(el / 3600) ? Math.floor(el / 3600) + ':' : ''}${String(Math.floor(el / 60) % 60).padStart(2, '0')}:${String(Math.floor(el % 60)).padStart(2, '0')}`; d.getElementById('clock').textContent = new Date().toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'}); };
@@ -491,7 +491,7 @@
         pv.addEventListener('pointermove', e => { if (laser) { laserEl.style.left = e.clientX + 'px'; laserEl.style.top = e.clientY + 'px'; } hud.classList.add('is-on'); clearTimeout(hudT); hudT = setTimeout(() => hud.classList.remove('is-on'), 1800); });
         pv.addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (b) { const a = b.dataset.p; if (a === 'next') next(); if (a === 'prev') prev(); if (a === 'exit') exit(); if (a === 'laser') toggleLaser(); if (a === 'presenter') openPresenter(); if (a === 'help') $('[data-help]').hidden = !$('[data-help]').hidden; return; }
             if (e.target.closest('video[controls],audio[controls],[data-help]')) return; next(); });
-        pv.addEventListener('contextmenu', e => { e.preventDefault(); prev(); });
+        pv.addEventListener('contextmenu', e => { e.preventDefault(); if (!window.LCNDA_UI?.contextMenu) return prev(); window.LCNDA_UI.contextMenu(e, [{icon: '←', label: 'Diapositive précédente', shortcut: 'ArrowLeft', run: prev}, {icon: '→', label: 'Diapositive suivante', shortcut: 'ArrowRight', run: next}, '-', {icon: '×', label: 'Quitter la présentation', shortcut: 'Échap', run: exit}]); }); // K14 : le menu de l'app (plus de « clic droit = diapo précédente »)
         fit(); requestAnimationFrame(fit); setTimeout(fit, 250);
         enter(pos, {trans: false});
         if (presenter) openPresenter();
@@ -534,7 +534,7 @@
                 body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'kn_pick', kind: 'person', value: cp || null})}</div>${cp ? '<p class="muted">La personne affichée en ce moment, ou × pour en chercher une autre.</p>' : ''}`,
                 onOpen: dg => { setTimeout(() => (dg.querySelector('.pk-search:not([hidden]) .pk-input') || dg.querySelector('.pk-chosen .go'))?.focus(), 30);
                     dg.addEventListener('close', () => { if (!done) res(0); }, {once: true}); },
-                onSubmit: f => { const v = Number(f.elements.kn_pick?.value) || 0; if (!v) { toast('Choisis une personne.', 'error'); return false; } done = true; res(v); }}); });
+                onSubmit: f => { const v = Number(f.elements.kn_pick?.value) || 0; if (!v) return window.LCNDA_UI.fail(f.elements.kn_pick, 'Choisis une personne.'); done = true; res(v); }}); });
     }
     /** une vidéo ou un son : la fenêtre unique des médias (un fichier de l'ordinateur y entre et se coche) */
     async function pickAV(title = 'Une vidéo ou un son', types = ['video', 'audio']) {
@@ -560,7 +560,7 @@
                     <div class="kn-row"><button type="button" class="button secondary" data-kf-to="body">Pour les textes</button>${hasSel ? '<button type="button" class="button secondary" data-kf-to="sel">Pour le texte choisi</button>' : ''}</div>`,
                 onOpen: dg => { const q = dg.querySelector('[data-kf-q]'), box = dg.querySelector('[data-kf-list]'), prev = dg.querySelector('[data-kf-prev]');
                     const draw = () => { const v = q.value.trim().toLowerCase(), list = all().filter(f => !v || f.toLowerCase().includes(v)).slice(0, 400);
-                        box.innerHTML = list.map(f => `<button type="button" class="kn-fontitem${f === chosen ? ' is-on' : ''}" data-kf="${esc(f)}" style="font-family:'${esc(f).replace(/'/g, '')}',sans-serif">${esc(f)}</button>`).join('') || `<p class="muted">Aucune police « ${esc(q.value)} » dans la liste : Entrée pour la prendre telle quelle.</p>`; };
+                        box.innerHTML = list.map(f => `<button type="button" class="kn-fontitem${f === chosen ? ' is-on' : ''}" data-kf="${esc(f)}" style="font-family:'${esc(f).replace(/'/g, '')}',sans-serif">${esc(f)}</button>`).join('') || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune police « ${esc(q.value)} » dans la liste : Entrée pour la prendre telle quelle.</span></p>`; };
                     const pick = f => { chosen = fontOk(f) || ''; prev.textContent = chosen ? `${chosen} : Portez ce vieux whisky au juge blond qui fume` : 'Choisis une police'; prev.style.fontFamily = chosen ? `'${chosen.replace(/'/g, '')}', sans-serif` : ''; box.querySelectorAll('[data-kf]').forEach(b => b.classList.toggle('is-on', b.dataset.kf === chosen)); };
                     q.addEventListener('input', draw); q.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (q.value.trim()) pick(q.value.trim()); } });
                     box.addEventListener('click', e => { const b = e.target.closest('[data-kf]'); if (b) pick(b.dataset.kf); });
@@ -949,7 +949,7 @@
                     ${t.type === 'magic' ? '<p class="muted">✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent.</p>' : ''}
                     <div class="kn-row">${B('ptrans', '▶ Aperçu')}${B('transall', 'Pour toutes les diapositives')}</div>`),
                 sec('obj', 'Animations de l’objet choisi', o ? `<p class="kn-ihead">${TYPE_ICON[o.t]} ${esc(cut(objLabel(o), 34))}</p>${bl.map((b, i) => b.obj === o.id ? buildRow(b, i) : '').join('') || '<p class="muted">Aucune : il est là dès l’arrivée de la diapositive.</p>'}<div class="kn-row">${B('badd:in', '＋ Entrée')}${B('badd:out', '＋ Sortie')}</div>` : '<p class="muted">Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul.</p>'),
-                sec('order', 'Ordre des animations', bl.length ? `<ol class="kn-blist">${bl.map((b, i) => `<li class="${o && b.obj === o.id ? 'is-cur' : ''}"><button type="button" class="kn-blab" data-kn-x="bsel:${i}"><b>${i + 1}.</b> ${esc(cut(objLabel(obj(b.obj)), 24))}<small>${b.kind === 'out' ? '⬅ Sortie' : '➡ Entrée'} · ${esc(fxL(b.fx))} · ${esc(startL(b.start))}</small></button>${B(`bup:${i}`, '↑', 'Plus tôt')}${B(`bdown:${i}`, '↓', 'Plus tard')}${B(`bdel:${i}`, '×', 'Retirer')}</li>`).join('')}</ol><div class="kn-row">${B('pbuilds', '▶ Aperçu des animations')}</div>` : '<p class="muted">Pas encore d’animation sur cette diapositive.</p>'),
+                sec('order', 'Ordre des animations', bl.length ? `<ol class="kn-blist">${bl.map((b, i) => `<li class="${o && b.obj === o.id ? 'is-cur' : ''}"><button type="button" class="kn-blab" data-kn-x="bsel:${i}"><b>${i + 1}.</b> ${esc(cut(objLabel(obj(b.obj)), 24))}<small>${b.kind === 'out' ? '⬅ Sortie' : '➡ Entrée'} · ${esc(fxL(b.fx))} · ${esc(startL(b.start))}</small></button>${B(`bup:${i}`, '↑', 'Plus tôt')}${B(`bdown:${i}`, '↓', 'Plus tard')}${B(`bdel:${i}`, '×', 'Retirer')}</li>`).join('')}</ol><div class="kn-row">${B('pbuilds', '▶ Aperçu des animations')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">✨</span><span class="empty-line-text">Pas encore d’animation sur cette diapositive.</span></p>'),
             ].join('')}</div>`;
         }
         function paneSlide() {
@@ -1681,7 +1681,7 @@
     function openImport(ctl) {
         ext.openDialog({eyebrow: 'PRÉSENTATION', title: '⤒ Importer', submitLabel: 'Importer', wide: true,
             body: `${IMPORT_HELP}<label>Fichiers<input type="file" name="kn_files" multiple accept=".pptx,.potx,.ppsx,.odp,.otp,.key,.pdf,.md,.markdown,.txt,.json,image/*"></label><label class="checkbox-line"><input type="checkbox" name="kn_replace"> Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée)</label>`,
-            onSubmit: f => { const files = [...(f.elements.kn_files.files || [])]; if (!files.length) { toast('Choisis au moins un fichier.', 'error'); return false; } importFiles(files, ctl, {replace: !!f.elements.kn_replace?.checked}); }});
+            onSubmit: f => { const files = [...(f.elements.kn_files.files || [])]; if (!files.length) return window.LCNDA_UI.fail(f.elements.kn_files, 'Choisis au moins un fichier.'); importFiles(files, ctl, {replace: !!f.elements.kn_replace?.checked}); }});
     }
     const IMPORT_HELP = `<ul class="kn-implist"><li><b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions.</li>
         <li><b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici.</li>
@@ -1761,7 +1761,7 @@
     function importNew(ctx = {}) {
         ext.openDialog({eyebrow: 'NOUVELLE PRÉSENTATION', title: '⤒ Importer une présentation', submitLabel: 'Importer', wide: true,
             body: `${IMPORT_HELP}<label>Fichiers<input type="file" name="kn_files" multiple accept=".pptx,.potx,.ppsx,.odp,.otp,.key,.pdf,.md,.markdown,.txt,.json,image/*"></label>`,
-            onSubmit: f => { const files = [...(f.elements.kn_files.files || [])]; if (!files.length) { toast('Choisis au moins un fichier.', 'error'); return false; }
+            onSubmit: f => { const files = [...(f.elements.kn_files.files || [])]; if (!files.length) return window.LCNDA_UI.fail(f.elements.kn_files, 'Choisis au moins un fichier.');
                 const show = newShowFrom(); show.slides = [newSlide(show, 'blank')]; openEditor({...ctx, show, name: files[0].name.replace(/\.[^.]+$/, '').slice(0, 200), importFiles: files}); }});
     }
 

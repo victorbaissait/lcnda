@@ -25,7 +25,7 @@
         list: ['title', 'tkind', 'written', '_editions'], card: ['tkind', 'written'], export: ['title', 'tkind', 'authors', 'written', 'summary'],
     });
     ART.views.text_editions = {text: (ctx, it) => { const n = ctx.store.linksTo(it.id, 'text').length; return n ? U.plural(n, 'édition') : ''; },
-        read: (ctx, it) => { const st = ctx.store, l = st.linksTo(it.id, 'text').map(k => st.get(k.from) || {...k.other, data: {}}); if (!l.length) return '<p class="muted">Aucune édition rattachée : sur la fiche d’un livre, choisis ce texte dans « Texte (l’œuvre) ».</p>';
+        read: (ctx, it) => { const st = ctx.store, l = st.linksTo(it.id, 'text').map(k => st.get(k.from) || {...k.other, data: {}}); if (!l.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Aucune édition rattachée : sur la fiche d’un livre, choisis ce texte dans « Texte (l’œuvre) ».</span></p>';
             return `<div class="ar-grid">${l.map(b => `<button type="button" class="ar-card" data-ar-open="${b.id}">${U.cover(b)}<b>${esc(b.title)}</b><small>${esc([b.year, U.refTitle(b.data?.publisher)].filter(Boolean).join(' · '))}</small></button>`).join('')}</div>`; }};
 
     /* ═════════ 📚 Livre (une édition) — la « bibliographie » d'avant ═════════ */

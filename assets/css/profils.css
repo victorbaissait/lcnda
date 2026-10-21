@@ -2,7 +2,7 @@
    Couleur d'un profil : --pf (posée par le script). Le mode sombre est en bas (scripts/build-dark-css.py). */
 
 /* — AA : la fenêtre des profils — */
-.pf-dlg { width: min(980px, 96vw); padding: 0; }
+.pf-dlg { width: var(--modal-l); max-width: none; padding: 0; }
 .pf-dlg form { display: flex; flex-direction: column; max-height: 90vh; }
 .pf-dlg .modal-head { padding: 12px 16px 6px; }
 .pf-dlg .modal-head small { display: block; margin-top: 2px; }
@@ -30,7 +30,7 @@
 .pf-note { font-size: 12px; color: #666; margin: 8px 0 0; }
 
 /* — AA : créer un profil — */
-.pf-wiz { width: min(640px, 96vw); }
+.pf-wiz { width: var(--modal-m); }
 .pf-steps { display: flex; gap: 0; margin: 0 16px 8px; border: 2px solid var(--ink, #111); width: fit-content; }
 .pf-steps span { padding: 4px 10px; font: 700 12px system-ui, sans-serif; border-right: 2px solid var(--ink, #111); background: var(--white, #fff); }
 .pf-steps span:last-child { border-right: 0; }

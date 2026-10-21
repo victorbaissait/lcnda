@@ -132,7 +132,7 @@
         meta: (ctx, it) => esc(U.plural(ctx.store.linksTo(it.id, 'exhibitions').length, 'œuvre')),
         text: (ctx, it) => U.plural(ctx.store.linksTo(it.id, 'exhibitions').length, 'œuvre'),
         read: (ctx, it) => { const st = ctx.store, l = st.linksTo(it.id, 'exhibitions').map(k => ({k, w: st.get(k.from) || {...k.other, data: {}}}));
-            if (!l.length) return '<p class="muted">Aucune œuvre : sur la fiche d’une œuvre, « Expositions » → choisis celle-ci.</p>';
+            if (!l.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucune œuvre : sur la fiche d’une œuvre, « Expositions » → choisis celle-ci.</span></p>';
             return `<div class="ar-grid">${l.map(({k, w}) => `<button type="button" class="ar-card" data-ar-open="${w.id}">${U.cover(w)}<b>${esc(w.title)}</b><small>${esc([k.data?.catno, w.year].filter(Boolean).join(' · '))}</small></button>`).join('')}</div>`; },
     };
 })();

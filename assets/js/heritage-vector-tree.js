@@ -313,7 +313,7 @@
                     <label class="checkbox-line"><input type="checkbox" name="frame" ${base.frame ? 'checked' : ''}> Cadre et ornements possibles</label></div><div class="h-dt-pv" data-pv></div></div>`,
                 onOpen: dg => { preview(dg); dg.addEventListener('input', () => preview(dg));
                     dg.querySelector('[data-dt-fontpick]').addEventListener('click', async () => { const U = window.LCNDA_UI || A().ui, inp = dg.querySelector('[name=font]'); const f = U?.openFontPicker ? await U.openFontPicker({value: inp.value, sample: 'Famille Martin'}) : null; if (f) { inp.value = f; preview(dg); } }); dg.querySelector('[name=from]')?.addEventListener('change', e => { const t = themeOf(e.target.value); THEME_FIELDS.forEach(([k]) => { const v = /\d$/.test(k) ? (t[k.slice(0, -1)] || [])[Number(k.slice(-1))] || (t[k.slice(0, -1)] || [])[0] : t[k]; if (v) dg.querySelector(`[name=${k}]`).value = v; }); dg.querySelector('[name=font]').value = t.font; dg.querySelector('[name=frame]').checked = !!t.frame; preview(dg); }); },
-                onSubmit: dg => { const v = k => dg.querySelector(`[name=${k}]`).value, label = v('label').trim(); if (!label) { toast('Donne un nom au style.', 'error'); return false; }
+                onSubmit: dg => { const v = k => dg.querySelector(`[name=${k}]`).value, label = v('label').trim(); if (!label) return window.LCNDA_UI.fail(dg.querySelector('[name=label]'), 'Donne un nom au style.');
                     const t = cleanTheme({label, paper: v('paper'), ink: v('ink'), title: v('title'), center: v('center'), empty: v('empty'), trunk: v('trunk'), font: v('font'), pat: [v('pat0'), v('pat1')], mat: [v('mat0'), v('mat1')], leaf: [v('leaf0'), v('leaf1'), v('leaf2')], frame: dg.querySelector('[name=frame]').checked});
                     const p2 = readJ(SKEY, {}), key = id || rid(); p2.custom = {...(p2.custom || {}), [key]: t}; if (Object.keys(p2.custom).length > 60) { toast('60 styles au plus.', 'error'); return false; } writeJ(SKEY, p2); res(key); } }).addEventListener('close', () => res(null)); });
     }
@@ -376,7 +376,7 @@
             },
             onSubmit: async f => {
                 const chosen = Number(f.querySelector('input[type=hidden][name=person]')?.value) || 0;
-                if (!chosen) { toast('Choisis une personne dans la liste.', 'error'); return false; }
+                if (!chosen) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une personne dans la liste.');
                 const o = {person: chosen}; ['gens', 'format', 'orient', 'theme', 'colors', 'layoutNames', 'title', 'subtitle', 'titlePos'].forEach(k => { const el = f.querySelector(`[name=${k}]:checked`) || f.querySelector(`[name=${k}]`); o[k] = el?.value ?? ''; });
                 o.shape = f.querySelector('input[name=shape]').value; o.gens = clamp(Number(o.gens) || 5, 2, SHAPES.find(x => x[0] === o.shape)?.[3] || 10); ['dates', 'fullDates', 'places', 'jobs', 'sosa', 'empty', 'photos', 'leaves', 'frame', 'genLabels'].forEach(k => { o[k] = !!f.querySelector(`[name=${k}]`)?.checked; });
                 writeJ(PREF, {...o, person: undefined});

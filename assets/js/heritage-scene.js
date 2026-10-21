@@ -286,7 +286,7 @@
     ART.views.sc_tour_dates = {
         read: (ctx, it) => { const l = SC.tourDates(ctx.store, it.id), mine = !it.person_id || it.person_id === ctx.store.pid;
             const add = mine && it.id ? `<button type="button" class="button small secondary" data-sc-newdate="${it.id}">＋ Ajouter une date</button>` : '';
-            if (!l.length) return `<p class="muted">Aucune date pour l’instant.</p>${add}`;
+            if (!l.length) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune date pour l’instant.</span></p>${add}`;
             return `<div class="ar-scroll"><table class="ar-t sc-dates"><thead><tr><th>#</th><th>Date</th><th>Ville</th><th>Salle</th><th>Titres</th><th>Spectateurs</th></tr></thead><tbody>${l.map((c, i) => { const n = slCount(c);
                 return `<tr class="is-click" data-ar-row-open="${c.id}"><td class="n">${i + 1}</td><td>${esc(SC.dayLabel(SC.dayOf(c.data.date), 'short') || c.data.date || '')}</td><td>${esc(SC.cityOf(c))}</td><td>${esc(c.data.venue || '')}</td><td>${n.songs + n.enc || ''}</td><td>${esc(c.data.audience || '')}</td></tr>`; }).join('')}</tbody></table></div>${add}`; },
         meta: (ctx, it) => { const l = SC.tourDates(ctx.store, it.id); return l.length ? esc([plural(l.length, 'date'), it.data?.planned && `${it.data.planned} prévues`, plural(new Set(l.map(SC.cityOf).filter(Boolean)).size, 'ville')].filter(Boolean).join(' · ')) : ''; },
@@ -299,7 +299,7 @@
         const order = [...pos.keys()].sort((a, b) => (a[0] === 'R') - (b[0] === 'R') || Number(a.replace('R', '')) - Number(b.replace('R', '')));
         return order.map(p => { const best = [...pos.get(p).values()].sort((a, b) => b.n - a.n)[0]; return {pos: p, ...best, of: list.length}; });
     };
-    SC.typeHtml = (store, list, max = 30) => { const rows = SC.typeSetlist(store, list).slice(0, max); if (!rows.length) return '<p class="muted">Pas encore de setlist notée pour ces dates.</p>';
+    SC.typeHtml = (store, list, max = 30) => { const rows = SC.typeSetlist(store, list).slice(0, max); if (!rows.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Pas encore de setlist notée pour ces dates.</span></p>';
         return `<div class="ar-scroll"><table class="ar-t sc-type"><thead><tr><th>Pos.</th><th>Titre le plus souvent à cette place</th><th>Joué</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td class="n">${esc(r.pos)}</td><td>${r.ref ? U.refChip(r.ref, '🎵') : esc(r.title)}</td><td>${r.n} / ${r.of}</td><td class="sc-barcell"><span class="sc-bar${r.pos[0] === 'R' ? ' is-enc' : ''}" style="width:${Math.round(r.n / Math.max(1, r.of) * 100)}%"></span></td></tr>`).join('')}</tbody></table></div>`; };
     ART.views.sc_tour_type = {read: (ctx, it) => { const l = SC.tourDates(ctx.store, it.id); return l.length ? SC.typeHtml(ctx.store, l) : ''; }, meta: (ctx, it) => { const n = SC.tourDates(ctx.store, it.id).filter(c => SC.rowsOf(c).length).length; return n ? `d’après ${esc(plural(n, 'setlist'))}` : ''; }};
     ART.views.sc_tour_map = {read: (ctx, it) => SC.tourDates(ctx.store, it.id).some(c => U.place(c.data.place)?.plid) ? `<div class="sc-map" data-sc-map="tour:${it.id}"><p class="muted">Carte…</p></div>` : '<p class="muted">Les lieux des dates (choisis dans ta base) s’affichent ici, reliés dans l’ordre.</p>'};
@@ -357,7 +357,7 @@
     ART.views.sc_performances = {
         read: (ctx, it) => { if (!it.id) return ''; const l = SC.performancesOf(ctx.store, it.id), mine = !it.person_id || it.person_id === ctx.store.pid;
             const add = mine ? `<button type="button" class="button small secondary" data-sc-newperf="${it.id}">＋ Ajouter une représentation</button>` : '';
-            if (!l.length) return `<p class="muted">Aucune représentation notée.</p>${add}`;
+            if (!l.length) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune représentation notée.</span></p>${add}`;
             const cities = new Set(l.map(SC.cityOf).filter(Boolean)), ys = l.map(c => SC.dayOf(c.data?.date)?.y || Number(c.year)).filter(Boolean);
             return `<p class="ar-sum">${esc([plural(l.length, 'représentation'), ys.length && [Math.min(...ys), Math.max(...ys)].filter((v, i, a) => a.indexOf(v) === i).join(' – '), cities.size && plural(cities.size, 'ville')].filter(Boolean).join(' · '))}</p>
                 <div class="ar-scroll"><table class="ar-t"><thead><tr><th>Date</th><th>Ville</th><th>Salle</th><th>Rôles du soir</th></tr></thead><tbody>${l.slice(0, 200).map(c => `<tr class="is-click" data-ar-row-open="${c.id}"><td>${esc(SC.dayLabel(SC.dayOf(c.data?.date), 'short') || c.year || '')}</td><td>${esc(SC.cityOf(c))}</td><td>${esc(c.data?.venue || '')}</td><td>${ART.arr(c.data?.cast_night).filter(r => r.status === 'remplacant' || r.status === 'doublure').length ? '<span class="ar-badge w">remplacement</span>' : ''}</td></tr>`).join('')}</tbody></table></div>${add}`; },

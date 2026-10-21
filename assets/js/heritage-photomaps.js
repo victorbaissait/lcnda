@@ -186,7 +186,9 @@
             pan = null;
         };
         stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', () => { pan = null; dragging = null; stage.classList.remove('is-panning'); });
-        stage.addEventListener('contextmenu', e => { const el = e.target.closest('.pm-mk'); if (el && el._c.list.length === 1 && o.onEdit) { e.preventDefault(); o.onEdit(el._c.rep.it); } });
+        stage.addEventListener('contextmenu', e => { const el = e.target.closest('.pm-mk'); if (!el) return; e.preventDefault(); const c = el._c, one = c.list.length === 1; // K14 : le menu de l'app
+            const items = [{icon: '↗', label: one ? 'Ouvrir' : `Ouvrir les ${c.list.length} photos`, run: () => o.onOpen?.(c.rep.it, c.list.map(p => p.it))}, one && o.onEdit && {icon: '✎', label: 'Modifier le repère', run: () => o.onEdit(c.rep.it)}].filter(Boolean);
+            if (window.LCNDA_UI?.contextMenu) window.LCNDA_UI.contextMenu(e, items); else if (one && o.onEdit) o.onEdit(c.rep.it); });
         stage.addEventListener('wheel', e => { e.preventDefault(); const now = Date.now(); if (now - lastWheel < 120) return; lastWheel = now; const r = stage.getBoundingClientRect(); m.zoomAt(e.deltaY < 0 ? 1 : -1, e.clientX - r.left, e.clientY - r.top); }, {passive: false});
         stage.addEventListener('dblclick', e => { if (e.target.closest('.pm-mk,.pm-zoom')) return; const r = stage.getBoundingClientRect(); m.zoomAt(1, e.clientX - r.left, e.clientY - r.top); });
         stage.querySelector('.pm-zoom').addEventListener('click', e => { const b = e.target.closest('[data-pmz]'); if (!b) return; if (b.dataset.pmz === 'fit') m.fit(); else m.zoomAt(Number(b.dataset.pmz)); });
@@ -431,7 +433,7 @@
         function paintSide() {
             const side = $('[data-pm=side]'); if (!side) return;
             const base = visibleItems(), todo = base.filter(it => it.lat == null), list = sideTab === 'todo' ? todo : shownList;
-            const legend = data.all ? `<div class="pm-legend"><b>Légende</b>${data.maps.length ? data.maps.map(m2 => `<label class="checkbox-line"><input type="checkbox" data-pm-leg="${m2.id}" ${V.hidden.has(m2.id) ? '' : 'checked'}><span class="pm-legdot" style="background:${esc(mapColor.get(m2.id))}"></span><span class="pm-legname">${esc(m2.name)}</span><small>${(m2.photos || 0) + (m2.videos || 0)}</small></label>`).join('') : '<p class="muted">Aucune carte encore.</p>'}<span class="pm-legall"><button type="button" class="link-button" data-pm="legall">Tout cocher</button> · <button type="button" class="link-button" data-pm="legnone">Tout décocher</button></span></div>` : '';
+            const legend = data.all ? `<div class="pm-legend"><b>Légende</b>${data.maps.length ? data.maps.map(m2 => `<label class="checkbox-line"><input type="checkbox" data-pm-leg="${m2.id}" ${V.hidden.has(m2.id) ? '' : 'checked'}><span class="pm-legdot" style="background:${esc(mapColor.get(m2.id))}"></span><span class="pm-legname">${esc(m2.name)}</span><small>${(m2.photos || 0) + (m2.videos || 0)}</small></label>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucune carte encore.</span></p>'}<span class="pm-legall"><button type="button" class="link-button" data-pm="legall">Tout cocher</button> · <button type="button" class="link-button" data-pm="legnone">Tout décocher</button></span></div>` : '';
             side.innerHTML = `${legend}<div class="segmented pm-sidetabs"><button type="button" data-pm-tab="todo" class="${sideTab === 'todo' ? 'is-active' : ''}">À placer (${todo.length})</button><button type="button" data-pm-tab="all" class="${sideTab === 'all' ? 'is-active' : ''}">Affichés (${shownList.length})</button></div>
                 ${sideTab === 'todo' && todo.length && editable ? '<p class="pm-hint">Glisse une vignette sur la carte, ou 📍 pour choisir un lieu de ta base.</p>' : ''}
                 <ol class="pm-drawer">${list.slice(0, 300).map(it => `<li class="pm-row" data-pm-item="${it.id}">
@@ -795,13 +797,14 @@
         };
         const item = m => ({cls: 'pm-li', attrs: `data-pml-id="${m.id}" style="--pm-c:${esc(color(m.color))}"`, name: m.name, open: `data-pml-open="${m.id}"`, thumb: mosaic(m),
             lines: [`${plural(m.photos || 0, 'photo')} · ${plural(m.videos || 0, 'vidéo')}${m.unplaced ? ` · ${m.unplaced} à placer` : ''}`, periodOf(m) ? `🗓 ${periodOf(m)}` : 'Pas encore de date', [m.person_id ? `👤 ${m.person_name}` : '', m.investigation_id ? `🔍 ${m.investigation_title}` : ''].filter(Boolean).join(' · '), m.description ? String(m.description).slice(0, 160) : ''].filter(Boolean),
-            date: m.updated_at ? `Modifiée le ${new Date(String(m.updated_at).replace(' ', 'T') + 'Z').toLocaleDateString('fr-FR')}` : '',
+            badges: [m.person_id ? {text: `👤 ${m.person_name}`, kind: 'blue'} : null, m.investigation_id ? {text: `🔍 ${m.investigation_title}`, kind: 'grey'} : null].filter(Boolean), // K9 : en Fiches, 2 lignes + pastilles
+            when: m.updated_at, whenLabel: 'Modifiée',
             actions: kiosk() ? '' : `<button type="button" class="button small secondary" data-pml-edit="${m.id}">✎ Modifier</button><button type="button" class="icon-button" data-pml-del="${m.id}" title="Supprimer la carte (les photos restent dans les médias)" aria-label="Supprimer">🗑</button>`});
         const draw = () => {
             const l = filtered();
             bar.setCount?.(l.length, 'carte');
             if (!maps.length) { body.innerHTML = A().emptyState ? A().emptyState({icon: '📸', text: 'Aucune carte de photos pour l’instant', hint: 'Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules.', action: kiosk() ? null : {label: '＋ Nouvelle carte', attrs: 'data-pml="new"'}}) : A().empty('Aucune carte de photos pour l’instant'); page.querySelector('[data-pml-more]').innerHTML = ''; return; }
-            body.innerHTML = l.length ? (UI().itemsHtml ? UI().itemsHtml(view, l.slice(0, limit).map(item)) : '') : '<p class="muted">Rien ne correspond : retire un filtre ou change la recherche.</p>';
+            body.innerHTML = l.length ? (UI().itemsHtml ? UI().itemsHtml(view, l.slice(0, limit).map(item)) : '') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien ne correspond : retire un filtre ou change la recherche.</span></p>';
             const more = page.querySelector('[data-pml-more]'); more.innerHTML = '';
             if (l.length > limit && UI().moreButton) more.appendChild(UI().moreButton({remaining: l.length - limit, step: 40, feminine: true, onClick: () => { limit += 40; draw(); }}));
         };

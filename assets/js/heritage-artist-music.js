@@ -92,7 +92,7 @@
         read: (ctx, it) => {
             const st = ctx.store, d = it.data || {}, tracks = d.tracks || [], disc = ART.normPeople(d.credits);
             const p = (() => { try { return JSON.parse(localStorage.getItem(PREFK) || '{}'); } catch (_) { return {}; } })();
-            if (!tracks.length) return '<p class="muted">Pas encore de pistes : « ✎ Modifier » → « ＋ Une piste » ou « 📋 Coller une liste de titres ».</p>';
+            if (!tracks.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🎨</span><span class="empty-line-text">Pas encore de pistes : « ✎ Modifier » → « ＋ Une piste » ou « 📋 Coller une liste de titres ».</span></p>';
             return `<table class="ar-t ar-tracks ${p.credits === false ? 'no-credits' : ''} ${p.lyrics ? 'with-lyrics' : ''}"><tbody>${tracks.map(t => {
                 if (t.heading) return `<tr class="ar-theading"><td colspan="4">${esc(t.title)}</td></tr>`;
                 const r = U.ref(t.rec), rec = r?.iid ? st.get(r.iid) : null, rk = rec?.data?.rkind || 'prise';
@@ -154,7 +154,7 @@
         meta: (ctx, it) => { const n = ctx.store.linksTo(it.id, 'master').length; return n ? esc(U.plural(n, 'édition')) : ''; },
         text: (ctx, it) => { const n = ctx.store.linksTo(it.id, 'master').length; return n ? U.plural(n, 'édition') : ''; },
         read: (ctx, it) => { const st = ctx.store, l = st.linksTo(it.id, 'master').map(x => st.get(x.from) || {...x.other, data: {}}).sort((a, b) => (Number(a.year) || 9999) - (Number(b.year) || 9999));
-            if (!l.length) return '<p class="muted">Aucune parution rattachée : sur la fiche d’un disque, choisis cet album dans « Album (toutes éditions) ».</p>';
+            if (!l.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucune parution rattachée : sur la fiche d’un disque, choisis cet album dans « Album (toutes éditions) ».</span></p>';
             return `<div class="ar-scroll"><table class="ar-t"><thead><tr><th></th><th>Titre</th><th>Format</th><th>Label · n°</th><th>Pays</th><th>Année</th></tr></thead><tbody>${l.map((x, i) => `<tr data-ar-row-open="${x.id}" class="is-click"><td>${U.cover(x, 'ar-mini')}</td><td><b>${esc(x.title)}</b>${i === 0 ? ' <small>⭐ 1re</small>' : ''}</td><td>${esc(x.data?.format || '')}</td><td>${esc([U.refTitle(x.data?.label), x.data?.catno].filter(Boolean).join(' '))}</td><td>${esc(x.data?.country || '')}</td><td>${esc(x.year || '')}</td></tr>`).join('')}</tbody></table></div>`; },
     };
 
@@ -198,7 +198,7 @@
         actions: (ctx, it) => it.id ? `<span class="segmented ar-rmode"><button type="button" class="${(localStorage.getItem('genealogie-artist-recview') || 'tree') === 'tree' ? 'is-active' : ''}" data-ar-recview="tree">Arbre</button><button type="button" class="${localStorage.getItem('genealogie-artist-recview') === 'table' ? 'is-active' : ''}" data-ar-recview="table">Tableau</button></span><button type="button" class="button small secondary" data-ar-newrec="${it.id}">＋ Ajouter un enregistrement</button>` : '',
         read: (ctx, it) => {
             const st = ctx.store, l = recsOf(st, it.id);
-            if (!l.length) return '<p class="muted">Aucun enregistrement : « ＋ Ajouter un enregistrement » (une prise, un mixage, une version, en public…). Sur un disque, chaque piste peut ensuite pointer vers l’un d’eux.</p>';
+            if (!l.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun enregistrement <small>Une prise, un mixage, une version, en public… Sur un disque, chaque piste peut ensuite pointer vers l’un d’eux.</small></span><button type="button" class="button small secondary" data-empty-click="[data-ar-newrec]">＋ Ajouter un enregistrement</button></p>';
             if (localStorage.getItem('genealogie-artist-recview') === 'table') return `<div class="ar-scroll"><table class="ar-t"><thead><tr><th>Sorte</th><th>Titre</th><th>Date</th><th>D’après</th><th>Durée</th><th>Parutions</th></tr></thead><tbody>${l.map(r => `<tr data-ar-row-open="${r.id}" class="is-click"><td><span class="ar-kind k-${esc(r.data.rkind || 'prise')}">${esc(lab(REC_KINDS, r.data.rkind || 'prise').toLocaleUpperCase('fr-FR'))}</span></td><td><b>${esc(r.title)}</b>${r.data.kept ? ' <span class="ar-star">★</span>' : ''}</td><td>${esc(r.data.date || '')}</td><td>${esc(U.refTitle(r.data.from))}</td><td>${esc(r.data.dur || '')}</td><td>${onReleases(st, r.id).length || ''}</td></tr>`).join('')}</tbody></table></div>`;
             const ids = new Set(l.map(r => r.id)), kids = id => l.filter(r => U.ref(r.data.from)?.iid === id);
             const card = (r, depth) => { const d = r.data || {}, rk = d.rkind || 'prise', snd = ART.mediaOf(d.sound), cr = ART.normPeople(d.credits), n = onReleases(st, r.id).length;

@@ -138,7 +138,7 @@
     /* ═════════ Le bloc « 🎓 Diplômes et formation » de la fiche ═════════ */
     const pchip = (r, store) => { const p = U.person(r); if (!p) return ''; const role = r.role ? ` <span class="ar-role">${esc(r.role)}</span>` : '';
         if (!p.pid) return `<span class="ar-chip is-free"><span class="ar-q">?</span>${esc(p.txt)}${role}</span>`;
-        const t = p.title || store.personTitle(p.pid) || `#${p.pid}`; return `<button type="button" class="ar-chip" data-bl-person="${p.pid}" title="Ouvrir la fiche"><span class="ar-av ${store.genderOf(p.pid)}">${esc(U.initials(t))}</span>${esc(t)}${role}</button>`; };
+        const t = p.title || store.personTitle(p.pid) || `#${p.pid}`; return `<button type="button" class="ar-chip" data-bl-person="${p.pid}" title="Ouvrir la fiche">${window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({id: p.pid, name: t, gender: store.genderOf(p.pid)}, 22) : `<span class="ar-av ${store.genderOf(p.pid)}">${esc(U.initials(t))}</span>`}${esc(t)}${role}</button>`; };
     function render(p, data, {locked} = {}) {
         const pid = Number(p.id), st = BL.miniStore(pid, data);
         const steps = (data.items || []).filter(i => i.kind === 'school_step').sort(byStart), dips = (data.items || []).filter(i => i.kind === 'diploma').sort(byStart);

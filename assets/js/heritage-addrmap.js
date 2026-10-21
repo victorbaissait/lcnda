@@ -122,7 +122,7 @@
             const todo = list.filter(a => !a.point).length;
             const al = new Map(D.streets.map(s => [s.old_name.toLowerCase(), s]));
             box.querySelector('.h-am-side').innerHTML = `<p class="h-am-count"><b>${plural(list.length, 'adresse', 'adresses')}</b>${st.year ? ` en ${st.year}` : ''} · ${plural(list.length - todo, 'placée', 'placées')}${todo ? ` · <b class="h-rc-warn">${todo} à placer</b>` : ''}</p>
-                ${!list.length ? '<p class="muted">Aucune adresse relevée : dans les pages du dépouillement, remplis les colonnes « N° » et « Rue » des foyers.</p>' : ''}
+                ${!list.length ? '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucune adresse relevée : dans les pages du dépouillement, remplis les colonnes « N° » et « Rue » des foyers.</span></p>' : ''}
                 ${[...byStreet.entries()].sort((a, b) => (a[1][0].street || '').localeCompare(b[1][0].street || '', 'fr')).map(([k, as]) => { const s = as[0], alias = D.streets.find(x => x.old_name && x.old_name.toLowerCase() === (s.street || '').toLowerCase()) || al.get((s.street || '').toLowerCase());
                     return `<section class="h-am-st"><h4>${esc(s.street || 'Rue non précisée')}${s.street_status === 'renamed' && s.current_name ? ` <small class="h-rc-chip" title="Nom d’aujourd’hui">→ ${esc(s.current_name)}</small>` : ''}${s.street_status === 'gone' ? ' <small class="h-rc-chip is-gone">disparue</small>' : ''}
                         ${s.street ? `<button type="button" class="icon-button" data-am-alias="${esc(s.street)}" title="Ancien nom, nom d’aujourd’hui, rue disparue…">✎</button>` : ''}</h4>

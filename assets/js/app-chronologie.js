@@ -3,7 +3,7 @@
  */
 (() => {
     'use strict';
-    const {$, $$, api, bindTableLinks, card, debounce, empty, escapeHtml, persistUiState, personName, renderSidebar, setModule, state, summaryFromState, toast, years} = window.LCNDA_APP;
+    const {$, $$, api, bindTableLinks, card, debounce, empty, emptyState, escapeHtml, persistUiState, personName, plural, renderSidebar, setModule, state, summaryFromState, toast, years} = window.LCNDA_APP;
     const defaultHistoricalTimelineEvents=[
         {start_year:1347,end_year:1352,label:'Grande peste en Europe',category:'épidémie',parent_label:'',hidden:false},
         {start_year:1429,end_year:1429,label:'Jeanne d’Arc à Orléans',category:'guerre',parent_label:'Guerre de Cent Ans',hidden:false},
@@ -56,7 +56,7 @@
             const height=Math.max(18,bottom-top);
             const years=event.end_year>event.start_year?`${event.start_year}-${event.end_year}`:String(event.start_year);
             return `<article class="historical-aligned-row" style="--timeline-top:${top}px;--timeline-height:${height}px"><div class="historical-span"></div><div class="timeline-card"><strong>${escapeHtml(event.label)}</strong><p>${escapeHtml([years,event.category,event.parent_label?`dans ${event.parent_label}`:''].filter(Boolean).join(' · '))}</p></div></article>`;
-        }).join('')||empty('Aucun événement historique dans cette période.',{icon:'🕰️',hint:'Élargis la période ou affiche d’autres catégories.'});
+        }).join('')||emptyState({text: 'Aucun événement historique dans cette période.', icon:'🕰️',hint:'Élargis la période ou affiche d’autres catégories.'});
     }
     function timelineAlignedHtml(events,minYear,maxYear,sharedPositions=null,includeHistorical=true){
         const historical=historicalTimelineEvents().filter(event=>!event.hidden&&event.end_year>=minYear&&event.start_year<=maxYear);
@@ -121,7 +121,7 @@
     }
 
     function timelineRowsHtml(data){
-        return data.events.length?`<div class="timeline">${data.events.map(event=>`<article class="timeline-row"><div class="timeline-year">${event.year}</div><span class="timeline-node" style="--event-color:${escapeHtml(event.color)}"></span><div class="timeline-card"><strong>${escapeHtml(event.type)} · <button class="table-link" data-open-person="${event.person_id}">${escapeHtml([event.first_name,event.last_name].filter(Boolean).join(' '))}</button></strong><p>${escapeHtml([event.date_text,event.place].filter(Boolean).join(' — '))}</p></div></article>`).join('')}</div>`:empty('Aucun événement daté dans cette sélection.',{icon:'🕰️',hint:'Ajoute des dates aux événements des fiches pour les voir sur la frise.'});
+        return data.events.length?`<div class="timeline">${data.events.map(event=>`<article class="timeline-row"><div class="timeline-year">${event.year}</div><span class="timeline-node" style="--event-color:${escapeHtml(event.color)}"></span><div class="timeline-card"><strong>${escapeHtml(event.type)} · <button class="table-link" data-open-person="${event.person_id}">${escapeHtml([event.first_name,event.last_name].filter(Boolean).join(' '))}</button></strong><p>${escapeHtml([event.date_text,event.place].filter(Boolean).join(' — '))}</p></div></article>`).join('')}</div>`:emptyState({text: 'Aucun événement daté dans cette sélection.', icon:'🕰️',hint:'Ajoute des dates aux événements des fiches pour les voir sur la frise.'});
     }
 
     async function renderTimeline(token=++state.workspaceToken){
@@ -147,7 +147,7 @@
         const lanes=[lane('PERSONNE A',personName(summaryFromState()),data.events),...compared.map((result,index)=>lane(`PERSONNE ${String.fromCharCode(66+index)}`,parallel[index]?.name||'Personne comparée',result.events))];
         const timelineHtml=results.length>1?`<div class="timeline-comparison-layout is-multiple">${lanes.join('')}</div>`:primaryHtml;
         const historyHtml=state.timeline.history&&results.length>1?`<aside class="historical-timeline is-aligned"><header><span class="eyebrow">FRISE HISTORIQUE</span><h3>Contexte commun</h3></header><div class="historical-aligned-stage" style="--timeline-stage-height:${sharedPositions.height}px">${historicalTimelineHtml([],minYear,maxYear,sharedPositions)}</div></aside>`:'';
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">RÉCIT FAMILIAL · ${data.peopleCount} PERSONNES${results.length>1?` · ${results.length} FRISES PARALLÈLES`:''}</span><h2>Chronologie</h2><p>Événements connus autour de ${escapeHtml(personName(summaryFromState()))}, classés sans modifier la formulation originale des dates.</p></div></header><div class="timeline-layout ${state.timeline.history?'has-history':''}">${timelineHtml}${historyHtml}</div></section>`;
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({title:'Chronologie',help:`<b class="ui-ph-count">${plural(data.peopleCount,'personne')}${results.length>1?` · ${results.length} frises parallèles`:''}</b> · Événements connus autour de ${escapeHtml(personName(summaryFromState()))}, classés sans modifier la formulation originale des dates.`})}<div class="timeline-layout ${state.timeline.history?'has-history':''}">${timelineHtml}${historyHtml}</div></section>`;
         bindTableLinks();
     }
 

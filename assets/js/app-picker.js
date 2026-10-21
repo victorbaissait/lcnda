@@ -61,7 +61,9 @@
     const sosaOf = it => { if (!isPerson(it) || !it.id) return 0; try { return Number(A().sosaNumberFor?.(it.id)) || 0; } catch (_) { return 0; } };
     const avClass = it => it.kind === 'animal' ? 'a' : it.gender === 'male' ? 'm' : it.gender === 'female' ? 'f' : 'u';
     /** Le symbole de gauche : rond d'initiales (ou photo), repère de lieu, pastille de couleur, vignette ou symbole. */
-    function sym(it) {
+    function sym(it, size = 34) {
+        const UI = window.LCNDA_UI; // K7 : le portrait commun (34 dans la liste, 22 dans une pastille, 48 en grand) si Apparence → Portraits le demande
+        if (UI?.avatarOn?.() && (it.free || isPerson(it))) return UI.avatar(it.free ? {free: true} : {...it, name: it.title, photo: it.thumb || '', initials: it.initials, sosa: sosaOf(it)}, size);
         if (it.free) return '<span class="pk-av u">?</span>';
         if (isPerson(it)) {
             const ini = it.initials || (it.kind === 'animal' ? '🐾' : initialsOf(it.title));
@@ -104,8 +106,8 @@
     function chipHtml(it, i, small) {
         const info = shortInfo(it);
         const title = it.free ? `« ${esc(it.title)} »` : esc(it.kind === 'place' && it.name ? it.name : it.title); // « Saint-Martin (Gers) » : le département est déjà à côté
-        if (small) return `<span class="pk-chip${it.free ? ' free' : ''}" data-i="${i}">${sym(it)}<b>${title}</b>${info ? `<small>${esc(info)}</small>` : ''}<button type="button" class="x" data-pk="remove" data-i="${i}" data-ia-done="1" title="Retirer" aria-label="Retirer ${esc(it.title)}">×</button></span>`;
-        return `<span class="pk-chip${it.free ? ' free' : ''}" data-i="${i}">${sym(it)}<span><b>${title}</b>${info ? ` <small>${esc(info)}</small>` : ''}</span>`
+        if (small) return `<span class="pk-chip${it.free ? ' free' : ''}" data-i="${i}">${sym(it, 22)}<b>${title}</b>${info ? `<small>${esc(info)}</small>` : ''}<button type="button" class="x" data-pk="remove" data-i="${i}" data-ia-done="1" title="Retirer" aria-label="Retirer ${esc(it.title)}">×</button></span>`;
+        return `<span class="pk-chip${it.free ? ' free' : ''}" data-i="${i}">${sym(it, 22)}<span><b>${title}</b>${info ? ` <small>${esc(info)}</small>` : ''}</span>`
             + (it.free ? '' : `<button type="button" class="go" data-pk="open" data-i="${i}" data-ia-done="1" title="Ouvrir">${esc(openLabel(it.kind === 'animal' ? 'person' : it.kind))}</button>`)
             + (it.kind === 'place' && !it.free ? `<button type="button" class="go" data-pk="map" data-i="${i}" data-ia-done="1" title="Voir sur la carte">🗺</button>` : '')
             + `<button type="button" class="x" data-pk="remove" data-i="${i}" data-ia-done="1" title="Changer" aria-label="Changer">×</button></span>`;
@@ -183,14 +185,14 @@
     function mainHtml(c) {
         const m = c.main; if (!m) return '';
         const s = sosaOf(m), meta = [m.free ? 'sans fiche' : m.meta, s ? `Sosa ${s}` : ''].filter(Boolean).join(' · ');
-        return `<div class="pk-main-card">${sym(m)}<div class="who"><b>${esc(m.title)}</b>${meta ? `<div>${esc(meta)}</div>` : ''}</div><span class="pk-star">★ PRINCIPALE</span>${m.free ? '' : '<button type="button" class="btn-s" data-pk="open-main" data-ia-done="1">↗ Fiche</button>'}<button type="button" class="btn-s" data-pk="change-main" data-ia-done="1">Changer</button></div>`;
+        return `<div class="pk-main-card">${sym(m, 48)}<div class="who"><b>${esc(m.title)}</b>${meta ? `<div>${esc(meta)}</div>` : ''}</div><span class="pk-star">★ PRINCIPALE</span>${m.free ? '' : '<button type="button" class="btn-s" data-pk="open-main" data-ia-done="1">↗ Fiche</button>'}<button type="button" class="btn-s" data-pk="change-main" data-ia-done="1">Changer</button></div>`;
     }
     function zoneChips(c, primary) {
         return c.people.map((p, i) => ({p, i})).filter(x => !!x.p.primary === primary).map(({p, i}) => {
             const info = p.free ? 'sans fiche' : [p.short, sosaOf(p) ? `Sosa ${sosaOf(p)}` : ''].filter(Boolean).join(' · ');
             const noMenu = !(c.opts.roles.roleList || []).length && c.opts.roles.roleList !== undefined;
             const role = noMenu ? (p.role ? `<span class="role static">${esc(p.role)}</span>` : '') : p.role ? `<button type="button" class="role" data-pk="role" data-i="${i}" data-ia-done="1" title="Changer le rôle">${esc(p.role)} ▾</button>` : `<button type="button" class="role empty" data-pk="role" data-i="${i}" data-ia-done="1" title="Donner un rôle (facultatif)">rôle ▾</button>`;
-            return `<span class="pk-chip2${p.free ? ' free' : ''}" draggable="true" data-i="${i}">${sym(p)}<b>${p.free ? `« ${esc(p.title)} »` : esc(p.title)}</b>${info ? `<small>${esc(info)}</small>` : ''}${role}<button type="button" class="tg${primary ? '' : ' off'}" data-pk="toggle" data-i="${i}" data-ia-done="1" title="${primary ? 'Passer en secondaire' : 'Passer en principale'}">${primary ? '★' : '☆'}</button><button type="button" class="x" data-pk="remove" data-i="${i}" data-ia-done="1" title="Retirer" aria-label="Retirer ${esc(p.title)}">×</button></span>`;
+            return `<span class="pk-chip2${p.free ? ' free' : ''}" draggable="true" data-i="${i}">${sym(p, 22)}<b>${p.free ? `« ${esc(p.title)} »` : esc(p.title)}</b>${info ? `<small>${esc(info)}</small>` : ''}${role}<button type="button" class="tg${primary ? '' : ' off'}" data-pk="toggle" data-i="${i}" data-ia-done="1" title="${primary ? 'Passer en secondaire' : 'Passer en principale'}">${primary ? '★' : '☆'}</button><button type="button" class="x" data-pk="remove" data-i="${i}" data-ia-done="1" title="Retirer" aria-label="Retirer ${esc(p.title)}">×</button></span>`;
         }).join('');
     }
 
@@ -573,7 +575,7 @@
                 const zb = e.target.closest('[data-pkm-zoom]'); if (zb) { z = Math.max(2, Math.min(18, z + Number(zb.dataset.pkmZoom))); draw(); return; }
                 if (e.target.closest('[data-pkm-create]')) {
                     const name = d.querySelector('.pk-map-name').value.trim();
-                    if (!name) { toast('Donne un nom au lieu.'); d.querySelector('.pk-map-name').focus(); return; }
+                    if (!name) return window.LCNDA_UI.fail(d.querySelector('.pk-map-name'), 'Donne un nom au lieu.');
                     post('picker_place_adopt', {name, lat: point[0], lon: point[1]}).then(r2 => finish({...(r2.item || {}), id: Number(r2.id), kind: 'place', group: 'base', title: r2.item?.title || name})).catch(err => toast(err.message, 'error'));
                 }
             });
@@ -694,11 +696,11 @@
     function pickerView(data = {}) {
         const main = norm(data.main, 'person'), people = (data.people || []).map(p => { const it = norm(p, 'person'); return it && {...it, role: p.role || '', primary: !!p.primary}; }).filter(Boolean);
         const all = [main, ...people].filter(Boolean), need = all.some(it => it._load);
-        const chip = p => `<button type="button" class="pk-vchip${p.free ? ' free' : ''}" data-pkv="${p.free ? 'free' : 'open'}" data-id="${p.id || ''}" data-title="${esc(p.title)}" data-ia-done="1" title="${p.free ? 'Personne sans fiche : clic pour créer sa fiche' : 'Ouvrir la fiche'}">${sym(p)}${esc(p.title || `#${p.id}`)}${p.role ? ` <small>${esc(p.role)}</small>` : p.free ? ' <small>sans fiche</small>' : ''}</button>`;
+        const chip = p => `<button type="button" class="pk-vchip${p.free ? ' free' : ''}" data-pkv="${p.free ? 'free' : 'open'}" data-id="${p.id || ''}" data-title="${esc(p.title)}" data-ia-done="1" title="${p.free ? 'Personne sans fiche : clic pour créer sa fiche' : 'Ouvrir la fiche'}">${sym(p, 22)}${esc(p.title || `#${p.id}`)}${p.role ? ` <small>${esc(p.role)}</small>` : p.free ? ' <small>sans fiche</small>' : ''}</button>`;
         const prim = people.filter(p => p.primary), sec = people.filter(p => !p.primary);
         const sm = main ? sosaOf(main) : 0, sub = main ? [main.meta || main.short, sm ? `Sosa ${sm}` : ''].filter(Boolean).join(' · ') : '';
         return `<div class="pk-view"${need ? ` data-pk-view="${esc(JSON.stringify(data))}"` : ''}>`
-            + (main ? `<div class="pk-view-main" data-pkv="${main.free ? 'free' : 'open'}" data-id="${main.id || ''}" data-title="${esc(main.title)}" role="button" tabindex="0">${sym(main).replace('class="pk-av', 'class="pk-av big')}<div><b>${esc(main.title || `#${main.id}`)}</b> <span class="pk-star">★ PRINCIPALE</span>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}</div></div>` : '')
+            + (main ? `<div class="pk-view-main" data-pkv="${main.free ? 'free' : 'open'}" data-id="${main.id || ''}" data-title="${esc(main.title)}" role="button" tabindex="0">${sym(main, 48).replace('class="pk-av', 'class="pk-av big')}<div><b>${esc(main.title || `#${main.id}`)}</b> <span class="pk-star">★ PRINCIPALE</span>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}</div></div>` : '')
             + (prim.length ? `<div class="pk-vrow"><span class="lbl">★ Principales</span><span class="pk-vchips">${prim.map(chip).join('')}</span></div>` : '')
             + (sec.length ? `<div class="pk-vrow sec"><span class="lbl">☆ Secondaires</span><span class="pk-vchips">${sec.map(chip).join('')}</span></div>` : '')
             + (!all.length ? '<div class="pk-vrow sec"><span class="lbl">Personne</span><small>Aucune personne choisie</small></div>' : '') + '</div>';

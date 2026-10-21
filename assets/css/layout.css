@@ -4,7 +4,7 @@
 
 .ly-editor{--ly-bg:#e9e9ee;--ly-panel:#fff;--ly-line:#d4d4dc;--ly-ink:#1d1d1f;--ly-soft:#6e6e73;--ly-acc:#2f6bff;width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:0;border:0;display:none;grid-template-rows:auto 1fr auto;background:var(--ly-bg);color:var(--ly-ink);font-size:13px}
 .ly-editor[open]{display:grid}
-.ly-editor:not(.is-full){width:96vw;height:94vh;margin:auto;border:2px solid var(--ly-ink);box-shadow:8px 8px 0 rgba(0,102,204,.25)} /* ⛶ : en fenêtre */
+.ly-editor:not(.is-full){width:var(--modal-win-w);height:var(--modal-win-h);margin:auto;border:2px solid var(--ly-ink);box-shadow:8px 8px 0 rgba(0,102,204,.25)} /* ⛶ : en fenêtre */
 .ly-top .h-full-btn{flex:none}
 [data-theme="dark"] .ly-editor{--ly-bg:#1e1f22;--ly-panel:#2a2b2f;--ly-line:#3c3d43;--ly-ink:#e8e8ea;--ly-soft:#a2a2a8}
 .ly-top{display:flex;align-items:center;gap:6px;padding:5px 10px;background:var(--ly-panel);border-bottom:1px solid var(--ly-line);min-height:40px}
@@ -75,7 +75,7 @@
 .ly-status button{border:1px solid var(--ly-line);background:var(--ly-panel);color:inherit;border-radius:4px;padding:2px 8px;cursor:pointer}.ly-status input{width:56px;padding:2px 4px;border:1px solid var(--ly-line);border-radius:4px;background:var(--ly-panel);color:inherit}.ly-status select{padding:2px 4px;border:1px solid var(--ly-line);border-radius:4px;background:var(--ly-panel);color:inherit}
 .ly-pos{color:var(--ly-soft);min-width:130px}.ly-msg{color:var(--ly-acc);flex:1;text-align:right;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 /* bibliothèque */
-.ly-lib{width:min(1200px,96vw)}.ly-libbody{padding:4px 22px 22px;overflow:auto;max-height:calc(100vh - 170px)}.ly-libtop{margin:6px 0 10px}
+dialog.h-modal.ly-lib{width:var(--modal-xl);max-width:none}.ly-libbody{padding:4px 22px 22px;overflow:auto;max-height:calc(100vh - 240px)}.ly-libtop{margin:6px 0 10px}
 .ly-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:18px}
 .ly-card{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px;border:2px solid var(--ink,#111);background:var(--panel,#fff)}.ly-card>div{display:grid;align-content:start;gap:4px;min-width:0}.ly-card small{color:var(--muted,#666);font-size:12px}
 .ly-cardbtns{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.ly-cardbtns .button.small{padding:3px 7px;font-size:11px}

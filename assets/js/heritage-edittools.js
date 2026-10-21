@@ -13,7 +13,7 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const TAB_KEY = 'genealogie-edittools-tab', VIEW_KEY = 'genealogie-edittools-view', SORT_KEY = 'genealogie-edittools-sort', STEP = 24;
     const UI = () => window.LCNDA_UI;
-    const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T') + (String(d || '').includes('T') ? '' : 'Z')); return isNaN(x) ? '' : x.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'}); };
+    const fmtDate = d => window.LCNDA_UI?.when?.(d) || ''; // K4 : HTML <time>, date complète au survol
     const fmtDur = s => { s = Math.round(Number(s) || 0); return s ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` : ''; };
 
     /** Chaque outil : comment lire ses projets, les ouvrir, les renommer, les supprimer, en créer un */
@@ -104,8 +104,8 @@
             const bar = ws.querySelector('.ui-listbar'); if (bar?.setCount) bar.setCount(loading ? '' : `${A().plural(list.length, 'projet')}${list.length !== rows.length ? ` sur ${rows.length}` : ''}`);
             if (loading) { box.innerHTML = U?.skeleton ? U.skeleton(4) : '<div class="loading-block">Chargement…</div>'; return; }
             box.innerHTML = list.length ? (view === 'cards'
-                ? `<div class="h-et-cards">${U.cardsHtml(part.map(r => ({thumb: r.thumb, name: r.name, open: `data-et-open="${r.id}"`, disabled: r.disabled, lines: [r.info], date: `Modifié le ${fmtDate(r.date)}`, actions: acts(r).replace(/^<div class="h-et-act">|<\/div>$/g, '')})))}</div>`
-                : `<div class="data-table-wrap"><table class="data-table h-et-table"><thead><tr><th></th><th>Nom</th><th>Détails</th><th>Modifié le</th><th></th></tr></thead><tbody>${part.map(r => `<tr><td class="h-et-thumb">${r.thumb}</td><td><button type="button" class="table-link" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button></td><td class="muted">${esc(r.info)}</td><td>${esc(fmtDate(r.date))}</td><td>${acts(r)}</td></tr>`).join('')}</tbody></table></div>`)
+                ? `<div class="h-et-cards">${U.cardsHtml(part.map(r => ({thumb: r.thumb, name: r.name, open: `data-et-open="${r.id}"`, disabled: r.disabled, lines: [r.info], when: r.date, whenLabel: 'Modifié', menu: [`<button type="button" data-et-ren="${r.id}">✎ Renommer</button>`, `<button type="button" class="danger" data-et-del="${r.id}">🗑 Supprimer le projet</button>`]})))}</div>`
+                : `<div class="data-table-wrap"><table class="data-table h-et-table"><thead><tr><th></th><th>Nom</th><th>Détails</th><th>Modifié</th><th></th></tr></thead><tbody>${part.map(r => `<tr><td class="h-et-thumb">${r.thumb}</td><td><button type="button" class="table-link" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button></td><td class="muted">${esc(r.info)}</td><td>${fmtDate(r.date)}</td><td>${acts(r)}</td></tr>`).join('')}</tbody></table></div>`)
                 : rows.length ? A().emptyState({icon: '🔎', text: `Aucun projet pour « ${q.trim()} »`, hint: 'Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails).', action: {label: '× Effacer la recherche', attrs: 'data-et-clear'}})
                     : A().emptyState({icon: t.icon || '🗂️', text: `Aucun projet de ${t.what} pour l’instant`, hint: 'Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard.', action: {label: t.createLabel, attrs: 'data-et-new'}});
             if (list.length > shown && U?.moreButton) box.appendChild(U.moreButton({remaining: list.length - shown, step: STEP, onClick: () => { shown += STEP; drawList(); }}));

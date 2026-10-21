@@ -86,7 +86,7 @@
         ws.querySelector('[data-gaps-group]').addEventListener('change', e => { v.group = e.target.value; lsSet('genealogie-gaps-group', v.group); draw(); });
         let tm = 0; ws.querySelector('[data-gaps-q]').addEventListener('input', e => { clearTimeout(tm); tm = setTimeout(() => { v.q = e.target.value; draw(); }, 200); });
         ws.querySelectorAll('[data-gaps-kind]').forEach(c => c.addEventListener('change', () => { v.off = [...ws.querySelectorAll('[data-gaps-kind]')].filter(x => !x.checked).map(x => x.dataset.gapsKind); draw(); }));
-        ws.querySelector('[data-gaps-print]').addEventListener('click', () => { document.body.classList.add('h-gaps-printing'); window.print(); setTimeout(() => document.body.classList.remove('h-gaps-printing'), 500); });
+        ws.querySelector('[data-gaps-print]').addEventListener('click', () => { if (window.LCNDA_UI?.printPage) { window.LCNDA_UI.printPage('Les trous à combler, pour aller aux archives', {bodyClass: 'h-gaps-printing'}); return; } document.body.classList.add('h-gaps-printing'); window.print(); setTimeout(() => document.body.classList.remove('h-gaps-printing'), 500); }); // K13
         ws.querySelector('[data-gaps-list]').addEventListener('click', async e => {
             const b = e.target.closest('[data-gap-add]'); if (!b) return;
             const it = items[Number(b.closest('[data-gap-i]').dataset.gapI)];

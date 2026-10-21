@@ -719,7 +719,7 @@
         const reduceOs = matchMedia?.('(prefers-reduced-motion: reduce)').matches;
         return `<section class="page a11y-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>♿ Accessibilité</h2>
             <p>Pour voir, lire et utiliser l’app plus facilement : couleurs, texte, contraste, interface simplifiée, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée. Chaque réglage s’applique tout de suite, partout dans l’app, et reste gardé avec ta généalogie.</p></div>
-            <div class="page-actions"><button type="button" class="button secondary" data-a11y-reset>↺ Tout remettre comme avant</button></div></header>
+            <div class="page-actions"><button type="button" class="button secondary" data-a11y-reset>↺ Remettre comme au départ</button></div></header>
 
         <section class="maintenance-panel a11y-sec" id="a11y-colors"><h3>🎨 Couleurs et daltonisme ${help('Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues.')}</h3>
             <p class="muted">Environ 1 homme sur 12 voit mal certaines couleurs. Choisis ce qui te ressemble : l’app décale ses couleurs pour que les différences se voient (c’est une correction, réglable).</p>
@@ -885,6 +885,8 @@
         const page = ws.querySelector('.a11y-page'); pageToken++;
         bindRanges(page); mountHelp(page); afterChange('cb'); afterChange('tts'); afterChange('dictate');
         remapCharts(page);
+        // K2 : tout est gardé tout de suite ; « ↶ Annuler » (message) relit les réglages et les remet en place
+        window.LCNDA_UI?.autoSave?.(page, {redraw: () => { load(); apply(); refreshPage(); }});
         page.addEventListener('change', e => {
             const t = e.target;
             if (t.matches('[data-a11y-bool]')) { P[t.dataset.a11yBool] = t.checked; save(); apply(); afterChange(t.dataset.a11yBool); if (t.dataset.a11yBool === 'simple' && t.checked) toast('Mode simple : moins de boutons. Pour tout réafficher, clique sur « Tout afficher » en bas à droite.'); return; }
@@ -900,11 +902,7 @@
             if (b.hasAttribute('data-a11y-try')) { speak('Bonjour ! Voici la voix qui lira tes textes. Jean-Baptiste Martin, né le 7 mai 1784 à Figeac, dans le Lot.'); return; }
             if (b.hasAttribute('data-a11y-stop')) { stop(); return; }
             if (b.hasAttribute('data-a11y-dys')) { P.lh = 1.5; P.ls = 0.12; P.ws = 0.16; save(); apply(); refreshPage(); toast('Espacements conseillés appliqués.'); return; }
-            if (b.hasAttribute('data-a11y-reset')) {
-                const ok = A().confirmBox ? await A().confirmBox('Tous les réglages d’accessibilité reviennent comme au départ (couleurs, texte, contraste, clavier, mouvement, voix, sous-titres, images, mode simple, dictée). Les descriptions d’images que tu as écrites sont gardées.', {title: 'Tout remettre comme avant', okLabel: '↺ Tout remettre comme avant', danger: true}) : true;
-                if (!ok) return;
-                reset(); toast('Accessibilité remise comme avant.');
-            }
+            if (b.hasAttribute('data-a11y-reset')) { reset(); } // K2 : sans question, « ↶ Annuler » dans le message
         });
     };
 

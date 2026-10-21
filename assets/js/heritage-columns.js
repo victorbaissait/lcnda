@@ -17,7 +17,7 @@
     const get = list => ({order: [], hidden: [], extra: [], ...(all()[list] || {})});
     const put = (list, cfg) => { try { const a = all(); if (!cfg) delete a[list]; else a[list] = cfg; localStorage.setItem(KEY, JSON.stringify(a)); } catch (_) {} };
 
-    const LABELS = {id: 'N°', created_at: 'Créé le', updated_at: 'Modifié le', date_text: 'Date', year: 'Année', place: 'Lieu', title: 'Titre', description: 'Description', notes: 'Notes', note: 'Note',
+    const LABELS = {id: 'N°', created_at: 'Créé', updated_at: 'Modifié', date_text: 'Date', year: 'Année', place: 'Lieu', title: 'Titre', description: 'Description', notes: 'Notes', note: 'Note',
         filename: 'Fichier', media_type: 'Sorte', document_reference: 'Cote', document_title: 'Document', document_url: 'Lien du document', document_pages: 'Pages', transcription: 'Transcription', first_name: 'Prénom',
         last_name: 'Nom', middle_name: 'Deuxième prénom', gender: 'Sexe', birth_year: 'Année de naissance', death_year: 'Année de décès', birth_date: 'Naissance', death_date: 'Décès', marr_date: 'Mariage', birth_place: 'Lieu de naissance',
         death_place: 'Lieu de décès', county: 'Département', country: 'Pays', state: 'Région', latitude: 'Latitude', longitude: 'Longitude', occupation: 'Métier', reference_number: 'Référence', familysearch_id: 'FamilySearch',
@@ -33,8 +33,10 @@
         apply(type, columns, rows) {
             const cfg = get(type);
             const virt = VIRTUAL[type] || {};
-            let cols = [...columns, ...cfg.extra.filter(k => !columns.some(c => c[1] === k)).map(k => [label(k), virt[k] ? `__v_${k}` : k])];
+            const stamp = k => /^(created|updated)_at$/.test(k); // K4 : « aujourd’hui à 10 h 22 », « 17 oct. 2026 »
+            let cols = [...columns, ...cfg.extra.filter(k => !columns.some(c => c[1] === k)).map(k => [label(k), virt[k] || stamp(k) ? `__v_${k}` : k])];
             if (Object.keys(virt).length) rows.forEach(r => Object.entries(virt).forEach(([k, fn]) => { r[`__v_${k}`] = fn(r); }));
+            cfg.extra.filter(stamp).forEach(k => rows.forEach(r => { r[`__v_${k}`] = window.LCNDA_UI?.whenText?.(r[k]) || r[k] || ''; }));
             const id = c => c[1].replace(/^__v_/, '');
             if (cfg.order.length) cols.sort((a, b) => { const ia = cfg.order.indexOf(id(a)), ib = cfg.order.indexOf(id(b)); return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib); });
             (ext._lastColumns ||= {})[type] = cols;

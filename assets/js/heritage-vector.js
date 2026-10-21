@@ -1057,7 +1057,7 @@
         function ornLists() { const L = ext.vectorOrnaments, q = fold2(ornQ).trim(); const found = (L?.items || []).filter(it => !q || fold2(`${it.n} ${it.tags || ''} ${(L.CATS.find(c => c[0] === it.cat) || [])[1] || ''}`).includes(q));
             return {L, found, shown: found.filter(it => !ornCat || it.cat === ornCat)}; }
         const ornCatsHtml = () => { const {L, found} = ornLists(); return [['', 'Tout'], ...(L?.CATS || [])].map(([k, l]) => `<button type="button" data-vx-orncat="${k}" class="${ornCat === k ? 'is-active' : ''}">${esc(l)} (${k ? found.filter(it => it.cat === k).length : found.length})</button>`).join(''); };
-        const ornGridHtml = () => { const {shown} = ornLists(); return shown.map(it => `<button type="button" draggable="true" data-vx-orn="${esc(it.k)}" title="${esc(it.n)} — clic : au centre ; glisser : où tu veux">${ornThumb(it)}<span>${esc(it.n)}</span></button>`).join('') || `<p class="muted">Aucun ornement pour « ${esc(ornQ)} ».</p>`; };
+        const ornGridHtml = () => { const {shown} = ornLists(); return shown.map(it => `<button type="button" draggable="true" data-vx-orn="${esc(it.k)}" title="${esc(it.n)} — clic : au centre ; glisser : où tu veux">${ornThumb(it)}<span>${esc(it.n)}</span></button>`).join('') || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧱</span><span class="empty-line-text">Aucun ornement pour « ${esc(ornQ)} ».</span></p>`; };
         function ornPane() {
             if (!ext.vectorOrnaments) return '<p class="muted">La bibliothèque d’ornements n’est pas chargée.</p>';
             return `<div class="vx-form vx-orn"><p class="muted vx-mhelp">Fleurons, cadres Belle Époque, Art nouveau, Art déco, coins, filets, culs-de-lampe, lettrines. Clique pour poser au centre, ou glisse sur le dessin ; la palette « Couleur » les recolore ensuite.</p>
@@ -1345,7 +1345,7 @@
         }
         const blObs = new MutationObserver(() => { if (tab === 'blason' && pane.querySelector('[data-bl-prev]') && !pane.querySelector('[data-bl-prev] svg')) paintBlasonPreview(); }); blObs.observe(pane, {childList: true});
         pane.addEventListener('input', e => { if (!e.target.matches('[data-vx-chq]')) return; const q = e.target.value.trim().toLowerCase(), out = pane.querySelector('[data-vx-chres]'); if (q.length < 2 || !K()) { out.innerHTML = ''; return; }
-            out.innerHTML = K().allShapes().filter(s => s.d && !s.mask && (s.n || '').toLowerCase().includes(q)).slice(0, 40).map(s => `<button type="button" data-bl-charge="${esc(s.k)}" title="${esc(s.n)}">${K().shapeSvg(s, 24)}</button>`).join('') || '<small class="muted">Rien trouvé.</small>'; });
+            out.innerHTML = K().allShapes().filter(s => s.d && !s.mask && (s.n || '').toLowerCase().includes(q)).slice(0, 40).map(s => `<button type="button" data-bl-charge="${esc(s.k)}" title="${esc(s.n)}">${K().shapeSvg(s, 24)}</button>`).join('') || '<small class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></small>'; });
         function addCharge(key, fill) {
             const s = Math.min(doc.w, doc.h) * .25, d = chargeD(key, doc.w / 2, doc.h / 2, s); if (!d) return toast('Forme introuvable.', 'error');
             const sh = K().shapeByKey(key), one = dToPts(d), o = {id: uid(), type: one ? 'path' : 'svgpath', name: sh?.n || 'Meuble', fill, stroke: '#222222', sw: 0, evenodd: !!sh?.eo, ...(one ? {pts: one.pts, closed: one.closed} : {d})};
@@ -1670,7 +1670,7 @@
             ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title, submitLabel: 'Envoyer',
                 body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'vx_pick', kind: 'person'})}</div><p class="muted">L’image (PNG, nette, fond ${doc.bg === 'transparent' ? 'transparent' : 'compris'}) y est ajoutée.</p>`,
                 onOpen: dg => { setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30); },
-                onSubmit: async f => { const chosen = Number(f.elements.vx_pick?.value) || 0; if (!chosen) { toast('Choisis une personne.', 'error'); return false; } try { await onPick(chosen); } catch (e) { toast(e.message, 'error'); return false; } }});
+                onSubmit: async f => { const chosen = Number(f.elements.vx_pick?.value) || 0; if (!chosen) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une personne.'); try { await onPick(chosen); } catch (e) { toast(e.message, 'error'); return false; } }});
         }
         function saveToMedia() { pickPerson('Enregistrer dans les médias d’une fiche', async pid => { status('Envoi…'); await upload({person_id: pid}, await pngFile()); status('✓ Envoyé'); toast('Image ajoutée aux médias de la fiche.'); }); }
         async function saveToCoat() {
@@ -1678,7 +1678,7 @@
             const coats = (await api('coats_of_arms').catch(() => ({coats: []}))).coats || [];
             ext.openDialog({eyebrow: 'ARMOIRIES', title: 'Enregistrer comme image d’armoiries', submitLabel: 'Enregistrer',
                 body: `<div class="form-grid"><label>Armoiries<select name="coat"><option value="new">➕ Nouvelles armoiries…</option>${coats.map(c => `<option value="${Number(c.id)}">${esc(c.title)}</option>`).join('')}</select></label><label>Nom (si nouvelles)<input name="title" value="${esc($('[data-vx-name]').value || 'Armes de la famille')}"></label><label class="span-2">Blasonnement (si nouvelles)<textarea name="blazon" rows="2">${esc(lastBlazon)}</textarea></label></div>`,
-                onSubmit: async f => { try { let id = f.querySelector('[name=coat]').value; if (id === 'new') { const t = f.querySelector('[name=title]').value.trim(); if (!t) { toast('Donne un nom aux armoiries.', 'error'); return false; } const r = await post('save_coat_of_arms', {id: 0, title: t, blazon: f.querySelector('[name=blazon]').value}); id = r.result.id; }
+                onSubmit: async f => { try { let id = f.querySelector('[name=coat]').value; if (id === 'new') { const t = f.querySelector('[name=title]').value.trim(); if (!t) return window.LCNDA_UI.fail(f.querySelector('[name=title]'), 'Donne un nom aux armoiries.'); const r = await post('save_coat_of_arms', {id: 0, title: t, blazon: f.querySelector('[name=blazon]').value}); id = r.result.id; }
                     await upload({collection_type: 'coat_of_arms', collection_id: Number(id), collection_role: ''}, await pngFile()); toast('Image enregistrée dans les armoiries (fiche d’une personne → bloc Blason, ou Listes → Armoiries).'); } catch (e) { toast(e.message, 'error'); return false; } }});
         }
         /* fermer */

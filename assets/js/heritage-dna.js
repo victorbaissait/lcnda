@@ -19,7 +19,8 @@
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const isCurrent = token => token === S().workspaceToken && S().module === 'adn';
-    const header = (eyebrow, title, intro, actions = '') => `<header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p>${intro}</p>` : ''}</div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</header>`;
+    // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
 
     /* ═════════ La loi ═════════ */
     const LAW_LINKS = [
@@ -213,7 +214,7 @@
         const f = filt(), p = prefs(), list = filtered(), size = Math.max(50, num(p.pageSize) || 200), shown = list.slice(0, size + (f.shown || 0));
         const sel = (k, opts, v) => `<select data-dna-f="${k}">${opts.map(([a, b]) => `<option value="${esc(a)}" ${String(v ?? '') === String(a) ? 'selected' : ''}>${esc(b)}</option>`).join('')}</select>`;
         return `${header('ADN', '👥 Correspondances', `${fmt(list.length)} sur ${fmt(data.matches.length)}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable.`,
-            `<button type="button" class="button" data-dna-newmatch>+ Correspondance</button><button type="button" class="button secondary" data-dna-import>📥 Importer (CSV)</button><button type="button" class="button secondary" data-dna-export>⤓ CSV</button><button type="button" class="button secondary" data-dna-cols>⚙ Colonnes</button>`)}
+            `<button type="button" class="button" data-dna-newmatch>+ Correspondance</button><button type="button" class="button secondary" data-dna-import>⤒ Importer (CSV)</button><button type="button" class="button secondary" data-dna-export>⤓ CSV</button><button type="button" class="button secondary" data-dna-cols>⚙ Colonnes</button>`)}
             ${!data.kits.length ? `<p class="h-dna-warn">Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent.</p>` : ''}
             <div class="h-dna-filters">${sel('kit', [[0, 'Tous les tests'], ...data.kits.map(k => [k.id, kitName(k)])], f.kit)}<input type="search" data-dna-f="q" value="${esc(f.q || '')}" placeholder="Nom, nom de famille, lieu, note…">
                 ${sel('side', [['', 'Tous les côtés'], ...SIDES.slice(1)], f.side)}${sel('status', [['', 'Tout suivi'], ...STATUSES.slice(1)], f.status)}${sel('group', [[0, 'Tous les groupes'], [-1, 'Sans groupe'], ...data.groups.map(g => [g.id, g.name])], f.group)}
@@ -271,7 +272,7 @@
                 <div><span class="pk-lab">Fiche dans l’arbre</span>${PKF({name: 'dna_mperson', kind: 'person', value: Number(m.person_id) || null, placeholder: 'Si tu sais qui c’est…'})}</div>
                 <label>Ancêtre(s) commun(s) (MRCA)<input name="mrca" value="${esc(d.mrca || '')}" placeholder="Jean Martin et Marie Durand"></label>
                 <label>Suivi<select name="status">${STATUSES.map(([v, l]) => `<option value="${v}" ${(m.status || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Étoiles (0 à 5)<input name="stars" type="number" min="0" max="5" value="${esc(d.stars || '')}"></label>
-                <div class="span-2"><span class="section-label">Groupes</span><div class="h-dna-gpick">${data.groups.map(g => `<label class="checkbox-line"><input type="checkbox" name="g_${g.id}" ${(m.groups || []).includes(g.id) ? 'checked' : ''}> <span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></label>`).join('') || '<small class="muted">Aucun groupe (« 🗂️ Groupes »).</small>'}</div></div>
+                <div class="span-2"><span class="section-label">Groupes</span><div class="h-dna-gpick">${data.groups.map(g => `<label class="checkbox-line"><input type="checkbox" name="g_${g.id}" ${(m.groups || []).includes(g.id) ? 'checked' : ''}> <span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></label>`).join('') || '<small class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧬</span><span class="empty-line-text">Aucun groupe (« 🗂️ Groupes »).</span></small>'}</div></div>
                 <label>Noms de famille en commun<input name="surnames" value="${esc(d.surnames || '')}"></label><label>Lieux en commun<input name="places" value="${esc(d.places || '')}"></label>
                 <label>Arbre en ligne (adresse)<input name="tree_url" value="${esc(d.tree_url || '')}" placeholder="https://…"></label><label>Taille de son arbre<input name="tree_size" value="${esc(d.tree_size || '')}"></label>
                 <label>Contact<input name="contact" value="${esc(d.contact || '')}"></label><label>Pays<input name="country" value="${esc(d.country || '')}"></label>
@@ -314,7 +315,7 @@
                 extra: `<label>Test<select name="kit">${data.kits.map(k => `<option value="${k.id}" ${filt().kit === k.id ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label>`,
                 onGo: async (m, f) => {
                     const get = (r, k) => m[k] >= 0 ? String(r[m[k]] ?? '').trim() : '';
-                    if (m.name < 0) { toast('Choisis au moins la colonne du nom.', 'error'); return false; }
+                    if (m.name < 0) return window.LCNDA_UI.fail('[name=m_name]', 'Choisis au moins la colonne du nom.');
                     const out = rows.map(r => ({name: get(r, 'name'), shared_cm: num(get(r, 'shared_cm')), segments: Math.round(num(get(r, 'segments'))), longest_cm: num(get(r, 'longest_cm')), relationship: get(r, 'relationship'), side: sideOf(get(r, 'side')),
                         data: Object.fromEntries(['shared_matches', 'surnames', 'places', 'tree_size', 'tree_url', 'contact', 'x_cm', 'country', 'notes'].map(k => [k, get(r, k)]).filter(([, v]) => v !== ''))})).filter(r => r.name);
                     try { let added = 0, updated = 0; for (let i = 0; i < out.length; i += 3000) { const res = await post('import_dna_matches', {kit_id: Number(f.querySelector('[name=kit]').value), rows: out.slice(i, i + 3000)}); added += res.result?.added || 0; updated += res.result?.updated || 0; }
@@ -364,7 +365,7 @@
             <p class="muted">${plural(L.pool, 'correspondance', 'correspondances')} entre ${L.lo} et ${L.hi} cM${kit ? ' pour ce test' : ''} (bornes dans ⚙️ Réglages)${L.missing ? ` ; ${fmt(L.missing)} sans « correspondances en commun » notées, donc ignorées` : ''}.</p>
             ${L.clusters.length ? `<div class="data-table-wrap"><table class="data-table h-dna-leeds"><thead><tr><th>Correspondance</th><th>cM</th>${L.clusters.map((c, i) => `<th style="background:${PALETTE[i % PALETTE.length]};color:#fff">${i + 1}</th>`).join('')}</tr></thead><tbody>
                 ${L.grid.filter(r => r.cols.some(Boolean)).map(r => `<tr><td><button type="button" class="link-button" data-dna-match="${r.m.id}">${esc(r.m.name)}</button></td><td>${fmt(r.m.shared_cm, 0)}</td>${r.cols.map((v, i) => `<td style="${v ? `background:${PALETTE[i % PALETTE.length]};opacity:${v === 2 ? 1 : .45}` : ''}"></td>`).join('')}</tr>`).join('')}</tbody></table></div>
-                <p><button type="button" class="button" data-dna-leedsmake>Créer ${plural(L.clusters.length, 'groupe', 'groupes')} avec ces couleurs</button></p>` : '<p class="muted">Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »).</p>'}`;
+                <p><button type="button" class="button" data-dna-leedsmake>Créer ${plural(L.clusters.length, 'groupe', 'groupes')} avec ces couleurs</button></p>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧬</span><span class="empty-line-text">Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »).</span></p>'}`;
     }, bind(root) {
         bindMatchLinks(root);
         root.querySelectorAll('[data-dna-newgroup]').forEach(b => b.addEventListener('click', () => groupDialog()));
@@ -435,7 +436,7 @@
                     ${c.surnames.length ? `<p class="h-dna-chips">Noms : ${c.surnames.map(s => `<span>${esc(s.w)} ×${s.n}</span>`).join('')}</p>` : ''}${c.places.length ? `<p class="h-dna-chips">Lieux : ${c.places.map(s => `<span>${esc(s.w)} ×${s.n}</span>`).join('')}</p>` : ''}
                     <p class="h-dna-cl-m">${c.members.map(m => `<button type="button" class="link-button" data-dna-match="${m.id}">${esc(m.name)}</button> <small>${fmt(m.shared_cm)}</small>`).join(' · ')}</p></article>`).join('')}</div></div>
                 <p><button type="button" class="button" data-auto-make>Créer ${plural(A2.clusters.length, 'groupe', 'groupes')} avec ces couleurs</button> <small class="muted">(ou mettre à jour ceux déjà créés)</small></p>`
-            : `<p class="muted">Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes).</p>`}`;
+            : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes).</span></p>`}`;
     }, bind(root) {
         bindMatchLinks(root);
         const kit = () => Number(root.querySelector('[data-auto-kit]')?.value) || 0;
@@ -533,11 +534,11 @@
         const ov = overlaps(segs);
         const svg = `<svg viewBox="0 0 ${W} ${CHR.length * rowH + 10}" class="h-dna-chr">${CHR.map(([c, L], i) => { const y = i * rowH + 4, k = (W - 50) / maxL;
             return `<text x="4" y="${y + 12}" font-size="11">${c}</text><rect x="40" y="${y + 3}" width="${(L * k).toFixed(1)}" height="12" rx="6" fill="#e9ecef" stroke="#c4c9cf"/>${segs.filter(s => s.chromosome === c).map(s => `<rect x="${(40 + mb(s.start) * k).toFixed(1)}" y="${y + 3}" width="${Math.max(1.5, (mb(s.end) - mb(s.start)) * k).toFixed(1)}" height="12" fill="${esc(segColor(s, by))}" opacity=".85"><title>${esc(segName(s))} — chr ${c} : ${fmt(mb(s.start), 1)}–${fmt(mb(s.end), 1)} Mb, ${fmt(s.cm, 1)} cM${s.ancestor ? ' — ' + esc(s.ancestor) : ''}</title></rect>`).join('')}`; }).join('')}</svg>`;
-        return `${header('ADN', '🧩 Chromosomes et segments', 'Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment).', '<button type="button" class="button secondary" data-dna-segimport>📥 Importer des segments (CSV)</button><button type="button" class="button secondary" data-dna-segadd>+ Segment</button>')}
+        return `${header('ADN', '🧩 Chromosomes et segments', 'Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment).', '<button type="button" class="button secondary" data-dna-segimport>⤒ Importer des segments (CSV)</button><button type="button" class="button secondary" data-dna-segadd>+ Segment</button>')}
             <div class="h-dna-filters"><select data-dna-ck>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('') || '<option>Aucun test</option>'}</select><select data-dna-paint>${[['match', 'Couleur par correspondance'], ['group', 'Par groupe'], ['side', 'Par côté']].map(([v, l]) => `<option value="${v}" ${by === v ? 'selected' : ''}>${l}</option>`).join('')}</select><span class="muted">${plural(segs.length, 'segment', 'segments')}</span></div>
             <div class="card">${svg}</div>
             <h3>Chevauchements (triangulation possible) <small>${fmt(ov.length)}</small></h3>
-            ${ov.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Chr</th><th>De (Mb)</th><th>À (Mb)</th><th>Correspondance 1</th><th>Correspondance 2</th></tr></thead><tbody>${ov.slice(0, 300).map(o => `<tr><td>${o.c}</td><td>${fmt(mb(o.a), 1)}</td><td>${fmt(mb(o.b), 1)}</td><td>${esc(segName(o.s1))}</td><td>${esc(segName(o.s2))}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted">Aucun pour l’instant.</p>'}
+            ${ov.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Chr</th><th>De (Mb)</th><th>À (Mb)</th><th>Correspondance 1</th><th>Correspondance 2</th></tr></thead><tbody>${ov.slice(0, 300).map(o => `<tr><td>${o.c}</td><td>${fmt(mb(o.a), 1)}</td><td>${fmt(mb(o.b), 1)}</td><td>${esc(segName(o.s1))}</td><td>${esc(segName(o.s2))}</td></tr>`).join('')}</tbody></table></div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun pour l’instant.</span></p>'}
             <h3>Segments</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Chr</th><th>Début</th><th>Fin</th><th>cM</th><th>SNP</th><th>Correspondance</th><th>Ancêtre</th><th></th></tr></thead><tbody>${segs.slice(0, 2000).map(s => `<tr><td>${esc(s.chromosome)}</td><td>${fmt(mb(s.start), 2)}</td><td>${fmt(mb(s.end), 2)}</td><td>${fmt(s.cm, 1)}</td><td>${s.snps ? fmt(s.snps) : ''}</td><td>${esc(segName(s))}</td><td>${esc(s.ancestor)}</td><td><button type="button" class="icon-action" data-dna-segdel="${s.id}" title="Supprimer">✕</button></td></tr>`).join('') || `<tr><td colspan="8">${A().empty('Aucun segment.')}</td></tr>`}</tbody></table></div>`;
     }, bind(root) {
         const f = filt();
@@ -588,10 +589,10 @@
         const pl = p => `<li><span class="h-dna-gen">G${p.gen}</span> <button type="button" class="table-link" data-open-person="${p.id}">${esc(p.name || '?')}</button> <small class="muted">${esc([p.birth, p.death].filter(Boolean).map(d => String(d).slice(0, 4)).join('–'))}</small>${haplo(p.id)}</li>`;
         const haplo = id => { const k = data.kits.filter(x => x.person_id === id); return k.length ? ` <span class="h-dna-hap">${k.map(x => [x.haplo_y && 'Y ' + x.haplo_y, x.haplo_mt && 'mt ' + x.haplo_mt].filter(Boolean).join(' · ')).filter(Boolean).join(' / ')}</span>` : ''; };
         const male = r.person.gender === 'male';
-        root.querySelector('[data-dna-lines]').innerHTML = `<section class="card"><h3>♂ ADN-Y — lignée paternelle directe</h3>${male ? '' : '<p class="muted">Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent.</p>'}<ol>${r.y.map(pl).join('') || '<li class="muted">Pas de père connu dans l’arbre.</li>'}</ol><p class="muted">Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester.</p></section>
-            <section class="card"><h3>♀ ADN mitochondrial — lignée maternelle directe</h3><ol>${r.mt.map(pl).join('') || '<li class="muted">Pas de mère connue dans l’arbre.</li>'}</ol><p class="muted">Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour.</p></section>
+        root.querySelector('[data-dna-lines]').innerHTML = `<section class="card"><h3>♂ ADN-Y — lignée paternelle directe</h3>${male ? '' : '<p class="muted">Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent.</p>'}<ol>${r.y.map(pl).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">👪</span><span class="empty-line-text">Pas de père connu dans l’arbre.</span></li>'}</ol><p class="muted">Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester.</p></section>
+            <section class="card"><h3>♀ ADN mitochondrial — lignée maternelle directe</h3><ol>${r.mt.map(pl).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">👪</span><span class="empty-line-text">Pas de mère connue dans l’arbre.</span></li>'}</ol><p class="muted">Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour.</p></section>
             <section class="card"><h3>✕ ADN-X — ancêtres possibles</h3><p class="muted">${male ? 'Un homme reçoit son X de sa mère seulement.' : 'Une femme reçoit un X de chaque parent.'} Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. ${plural(r.x.length, 'ancêtre possible', 'ancêtres possibles')} :</p>
-                ${[...new Set(r.x.map(p => p.gen))].map(g => `<h4>Génération ${g} <small>(${r.x.filter(p => p.gen === g).length})</small></h4><ul class="h-dna-xlist">${r.x.filter(p => p.gen === g).map(pl).join('')}</ul>`).join('') || '<p class="muted">Aucun parent connu.</p>'}</section>`;
+                ${[...new Set(r.x.map(p => p.gen))].map(g => `<h4>Génération ${g} <small>(${r.x.filter(p => p.gen === g).length})</small></h4><ul class="h-dna-xlist">${r.x.filter(p => p.gen === g).map(pl).join('')}</ul>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👪</span><span class="empty-line-text">Aucun parent connu.</span></p>'}</section>`;
     }};
 
     /* ═════════ 🌍 Origines estimées ═════════ */
@@ -619,7 +620,7 @@
     /* ═════════ ⚙️ Réglages (modulable) ═════════ */
     RENDER.settings = {html() {
         const p = prefs();
-        return `${header('ADN', '⚙️ Réglages', 'Ce que montre l’onglet, dans l’ordre voulu, et comment.', '<button type="button" class="button secondary" data-dna-reset>↺ Remettre comme au départ</button><button type="button" class="button" data-dna-psave>Enregistrer</button>')}
+        return `${header('ADN', '⚙️ Réglages', 'Ce que montre l’onglet, dans l’ordre voulu, et comment.', '<button type="button" class="button secondary" data-dna-reset>↺ Remettre comme au départ</button>')}
             <div class="h-dna-settings"><section class="card"><h3>Rubriques de la colonne de gauche</h3><p class="muted">Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée).</p>
                 <div data-dna-order>${p.order.map(k => { const s = SECTIONS.find(x => x[0] === k); return `<div class="h-dna-orow" data-k="${k}"><label class="checkbox-line"><input type="checkbox" ${p.hidden.includes(k) ? '' : 'checked'} ${['settings', 'law'].includes(k) ? 'disabled' : ''}> ${s[1]} ${esc(s[2])}</label><span><button type="button" data-up>↑</button><button type="button" data-down>↓</button></span></div>`; }).join('')}</div></section>
             <section class="card"><h3>Colonnes du tableau des correspondances</h3><div data-dna-cols>${[...p.columns, ...COLUMNS.map(c => c[0]).filter(k => !p.columns.includes(k))].map(k => `<div class="h-dna-orow" data-k="${k}"><label class="checkbox-line"><input type="checkbox" ${p.columns.includes(k) ? 'checked' : ''} ${k === 'name' ? 'disabled' : ''}> ${esc(label(COLUMNS, k))}</label><span><button type="button" data-up>↑</button><button type="button" data-down>↓</button></span></div>`).join('')}</div></section>
@@ -632,12 +633,18 @@
     }, bind(root) {
         const p = prefs();
         root.addEventListener('click', e => { const row = e.target.closest('.h-dna-orow'); if (!row) return; if (e.target.closest('[data-up]') && row.previousElementSibling) row.parentElement.insertBefore(row, row.previousElementSibling); if (e.target.closest('[data-down]') && row.nextElementSibling) row.parentElement.insertBefore(row.nextElementSibling, row); });
-        root.querySelector('[data-dna-psave]').addEventListener('click', () => {
+        // K2 : plus de bouton « Enregistrer » : chaque changement est gardé tout de suite ; « ↶ Annuler » dans le message (UI.autoSave)
+        const saveNow = () => {
+            if (!root.isConnected || !root.querySelector('[data-dna-order]')) return;
+            const before = JSON.stringify([p.order, p.hidden]);
             p.order = [...root.querySelectorAll('[data-dna-order] .h-dna-orow')].map(r => r.dataset.k); p.hidden = [...root.querySelectorAll('[data-dna-order] .h-dna-orow')].filter(r => !r.querySelector('input').checked).map(r => r.dataset.k);
             p.columns = [...root.querySelectorAll('[data-dna-cols] .h-dna-orow')].filter(r => r.querySelector('input').checked).map(r => r.dataset.k);
             root.querySelectorAll('[data-p]').forEach(i => { p[i.dataset.p] = num(i.value); }); root.querySelectorAll('[data-c]').forEach(i => { p.colors[i.dataset.c] = i.value; });
-            savePrefs(p); toast('Réglages ADN enregistrés.'); A().renderSidebar?.(); reopenSettings(); });
-        root.querySelector('[data-dna-reset]').addEventListener('click', async () => { if (!await A().confirmBox('Revenir aux réglages d’origine de l’onglet ADN ?', {title: 'Réglages d’origine', okLabel: 'Revenir aux réglages d’origine', danger: true})) return; const ack = p.ack; savePrefs({...DEFAULTS(), ack}); reopenSettings(); });
+            const was = localStorage.getItem(PKEY), now = JSON.stringify(p); if (was === now) return;
+            savePrefs(p); if (before !== JSON.stringify([p.order, p.hidden]) && S().module === 'adn') A().renderSidebar?.();
+        };
+        window.LCNDA_UI?.autoSave?.(root, {save: saveNow, redraw: () => reopenSettings()});
+        root.querySelector('[data-dna-reset]').addEventListener('click', () => { const ack = p.ack; savePrefs({...DEFAULTS(), ack}); reopenSettings(); });
         root.querySelector('[data-dna-json]').addEventListener('click', () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda_dna: 1, exported: new Date().toISOString(), ...data}, null, 1)], {type: 'application/json'})); a.download = 'adn.json'; document.body.appendChild(a); a.click(); a.remove(); });
     }};
 

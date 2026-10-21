@@ -120,8 +120,8 @@
             const f = e.target.closest('[data-book-format]'); if (!f) return;
             const c = read(form); save(c);
             const root = form.elements.book_root?.value || String(A().state.bootstrap?.startPersonId || '');
-            if (c.scope !== 'all' && !Number(root)) { A().toast('Choisis la personne de départ de la branche.', 'error'); return; }
-            if (!c.sections.length) { A().toast('Coche au moins une partie du livre.', 'error'); return; }
+            if (c.scope !== 'all' && !Number(root)) return window.LCNDA_UI.fail(form.elements.book_root || form.querySelector('.pk'), 'Choisis la personne de départ de la branche.');
+            if (!c.sections.length) return window.LCNDA_UI.fail(form.querySelector('[name^=sec], [data-sec] input, input[type=checkbox]'), 'Coche au moins une partie du livre.');
             const p = {scope: c.scope, root_id: root, generations: String(Math.max(1, Math.min(30, Number(c.generations) || 6))), sections: c.sections.join(','), parts: c.parts.join(','),
                 title: c.title, subtitle: c.subtitle, author: c.author, preface: c.preface, epilogue: c.epilogue, theme: c.theme, font: c.font, paper: c.paper, flow: c.flow, order: c.order,
                 photo_count: String(c.photo_count), event_count: String(c.event_count), accent: c.accent || ''};

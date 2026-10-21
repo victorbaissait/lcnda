@@ -46,8 +46,8 @@
 
     /* ═════════ Styles propres (injectés : la barre du haut commune, les sections, le récit) ═════════ */
     const CSS = `
-.h-ss-dlg:not(.is-full){width:min(1500px,96vw);height:min(940px,92vh);max-height:92vh;padding:0!important}
-.h-ss-dlg:not(.is-full) .h-ss{height:min(940px,92vh)}
+.h-ss-dlg:not(.is-full){width:var(--modal-win-w);height:var(--modal-win-h);max-height:var(--modal-win-h);padding:0!important}
+.h-ss-dlg:not(.is-full) .h-ss{height:var(--modal-win-h)}
 .h-ss-top.ui-topbar{border-width:0 0 1px;border-color:#d6d6db;border-style:solid;padding:6px 10px}
 .h-ss-extra{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .h-ss-extra label{display:flex;align-items:center;gap:4px;font-size:12px}
@@ -409,7 +409,7 @@
                     dg.addEventListener('picker-change', e => { if (e.detail?.name !== 'st_person') return; pid = Number(e.detail.value) || 0; load(); });
                     dg.addEventListener('media-change', e => { const it = e.detail?.item; music = it?.filename ? {id: Number(it.id), filename: it.filename, title: it.title || ''} : null; });
                     dg.querySelector('[data-st-photos]').addEventListener('click', async () => {
-                        if (!pid) return toast('Choisis d’abord une personne.', 'error');
+                        if (!pid) return window.LCNDA_UI.fail('.pk', 'Choisis d’abord une personne.');
                         if (!P.openMediaPicker) return toast('La fenêtre des médias n’est pas encore prête.', 'error');
                         const ids = photoIds == null ? personMedia.map(m => Number(m.id)) : photoIds;
                         const list = await P.openMediaPicker({types: ['image'], multiple: true, person: pid, eyebrow: 'RÉCIT D’UNE VIE', title: 'Les photos du récit', okLabel: 'Prendre ces photos', value: ids.map(id => personMedia.find(x => Number(x.id) === id) || photoItems.get(id) || id)});
@@ -423,7 +423,7 @@
                     load(); setTimeout(() => (dg.querySelector('.pk-search:not([hidden]) .pk-input') || dg.querySelector('[type=submit]'))?.focus(), 40);
                 },
                 onSubmit: f => {
-                    if (!pid) { toast('Choisis une personne.', 'error'); return false; }
+                    if (!pid) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une personne.');
                     const o = {pid, target: Number(f.elements.target.value) || 0, theme: f.elements.theme.value, aspect: f.elements.aspect.value, siblings: f.elements.siblings.checked, sources: f.elements.sources.checked, history: f.elements.history.checked, photoIds, photoItems, music};
                     writeJ(STORY_KEY, {target: o.target, theme: o.theme, aspect: o.aspect, siblings: o.siblings, sources: o.sources, history: o.history, music});
                     done = true; res(o);
@@ -567,7 +567,7 @@
                     body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'ss_pick', kind: 'person', value: cp || null})}</div>${cp ? '<p class="muted">La personne affichée en ce moment, ou × pour en chercher une autre.</p>' : ''}`,
                     onOpen: dg => { setTimeout(() => (dg.querySelector('.pk-search:not([hidden]) .pk-input') || dg.querySelector('.pk-chosen .go'))?.focus(), 30);
                         dg.addEventListener('close', () => { if (!done) res(0); }, {once: true}); },
-                    onSubmit: f => { const chosen = Number(f.elements.ss_pick?.value) || 0; if (!chosen) { toast('Choisis une personne.', 'error'); return false; } done = true; res(chosen); }}); });
+                    onSubmit: f => { const chosen = Number(f.elements.ss_pick?.value) || 0; if (!chosen) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une personne.'); done = true; res(chosen); }}); });
         }
         async function story(pid0 = 0) {
             const o = await storyOptions({pid: pid0 || show.story?.pid || 0}); if (!o) return;

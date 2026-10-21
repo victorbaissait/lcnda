@@ -740,7 +740,10 @@
                 e.preventDefault(); if (this.paused || this.finished) return;
                 if (!this.meta.rotate) { toast('Les pièces ne tournent pas dans ce puzzle (option « Pièces tournées » à la préparation).'); return; }
                 const pt = pos(e), w = this.toWorld(pt.x, pt.y), p = this.drag ? this.drag.p : this.pick(w.x, w.y);
-                if (p >= 0) { this.sel = p; this.rotateGroup(p); if (!this.drag) this.afterMove(this.snap(this.grp[p])); else this.requestDraw(); }
+                const turn = () => { if (p >= 0 && this.alive() && !this.paused) { this.sel = p; this.rotateGroup(p); if (!this.drag) this.afterMove(this.snap(this.grp[p])); else this.requestDraw(); } };
+                // K14 : le menu de l'app (pendant qu'on tient une pièce, le clic droit la tourne tout de suite, comme avant)
+                if (this.drag || p < 0 || !window.LCNDA_UI?.contextMenu) { turn(); return; }
+                window.LCNDA_UI.contextMenu(e, [{icon: '⟳', label: 'Tourner la pièce', shortcut: 'R', run: turn}]);
             }, sig);
             c.addEventListener('wheel', e => { e.preventDefault(); if (this.paused) return; const pt = pos(e), k = e.deltaMode === 1 ? 0.05 : 0.0018; this.zoomAt(pt.x, pt.y, Math.exp(-e.deltaY * k)); }, {passive: false, signal: this.ac.signal});
             if ('ResizeObserver' in window) { this.ro = new ResizeObserver(() => { if (this.alive()) this.resize(); }); this.ro.observe(this.el.stage); }

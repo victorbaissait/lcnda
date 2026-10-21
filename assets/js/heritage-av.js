@@ -53,7 +53,7 @@
         return h ? `${h}:${String(m).padStart(2, '0')}:${String(r).padStart(2, '0')}` : `${m}:${String(r).padStart(2, '0')}`;
     };
     const fmtSize = n => !n ? '' : n < 1048576 ? `${Math.max(1, Math.round(n / 1024))} Ko` : `${(n / 1048576).toLocaleString('fr-FR', {maximumFractionDigits: 1})} Mo`;
-    const fmtAdded = v => { const m = String(v || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? `${m[3]}/${m[2]}/${m[1]}` : ''; };
+    const fmtAdded = v => window.LCNDA_UI?.when?.(v) || ''; // K4 : HTML <time>, date complète au survol
     const nameOf = it => String(it.title || '').trim() || String(it.filename || '').replace(/^\d+[-_]/, '') || `Média ${it.id}`;
     const ownerText = it => it.owners.map(o => `${o.label} ${o.name}`).join(' · ');
     const yearKey = it => { const m = String(it.date_text || '').match(/\b(\d{3,4})\b/); return m ? Number(m[1]) : null; };
@@ -272,7 +272,7 @@
                 <td class="av-dur" data-av-dur="${it.id}">${fmtDur(it.duration) || (it.exists ? '<span class="muted">…</span>' : '—')}</td>
                 <td>${it.owners.length ? it.owners.map((o, i) => { const go = o.person_id || o.battue_id || o.investigation_id || o.atelier_project || o.list_id; return `<${go ? 'button type="button"' : 'span'} class="av-owner${go ? ' is-link' : ''}" ${go ? `data-av-owner="${it.id}:${i}"` : ''} title="${esc(o.label)}">${OWNER_ICONS[o.type] || '•'} <em>${esc(o.label)}</em> ${esc(o.name)}</${go ? 'button' : 'span'}>`; }).join('') : '<span class="muted">—</span>'}</td>
                 <td>${esc(it.date_text || '')}</td>
-                <td>${esc(fmtAdded(it.created_at))}</td>
+                <td>${fmtAdded(it.created_at)}</td>
                 <td class="muted">${esc(fmtSize(it.size))}</td>
                 <td class="muted">${esc(it.format || '')}${it.original ? ` <small title="Version modifiée ; l’original (${esc(it.original_format)}) est gardé">✂️</small>` : ''}</td>
                 <td class="av-edit-col">${it.original ? `<button type="button" class="icon-button" data-av-original="${it.id}" title="${kind === 'video' ? 'Voir' : 'Écouter'} l’original (avant modification)">🕰️</button>` : ''}${it.exists ? `<button type="button" class="icon-button" data-av-edit="${it.id}" title="Modifier : couper, améliorer le son, assembler… (l’original est gardé)">✏️</button>` : ''}</td>
@@ -292,15 +292,17 @@
             const playing = it.id === player.current, src = `media/${encodeURIComponent(it.filename || '')}`;
             return {cls: `is-clickable${playing ? ' is-playing' : ''}${it.exists ? '' : ' is-missing'}`, attrs: `data-av-row="${it.id}"`, name: nameOf(it),
                 thumb: kind === 'video' && it.exists && it.filename ? `<video src="${esc(src)}#t=1" preload="metadata" muted playsinline></video>` : `<span class="ui-card-ico">${it.exists ? K.icon : '⚠️'}</span>`,
-                lines: [it.owners.length ? ownerText(it) : 'Rattaché à rien', [fmtDur(it.duration), it.date_text, it.format].filter(Boolean).join(' · '), it.exists ? '' : 'Fichier introuvable'],
-                date: it.created_at ? `Ajouté le ${fmtAdded(it.created_at)}` : '',
-                actions: `${it.exists ? `<button type="button" class="button small" data-av-play="${it.id}" aria-label="Lire">${playing && !player.paused ? '❚❚' : '▶'}</button>` : ''}${it.original ? `<button type="button" class="icon-button small" data-av-original="${it.id}" title="${kind === 'video' ? 'Voir' : 'Écouter'} l’original (avant modification)">🕰️</button>` : ''}${it.exists ? `<button type="button" class="icon-button small" data-av-edit="${it.id}" title="Modifier : couper, améliorer le son, assembler… (l’original est gardé)">✏️</button>` : ''}`};
+                lines: [it.owners.length ? ownerText(it) : 'Rattaché à rien', [fmtDur(it.duration), it.date_text, it.format].filter(Boolean).join(' · ')], badges: it.exists ? [] : [{text: '⚠️ Fichier introuvable', kind: 'red'}],
+                when: it.created_at, whenLabel: 'Ajouté',
+                // K9 : ▶ reste à côté (comme « Ouvrir ») ; le reste dans ⋯
+                quick: it.exists ? `<button type="button" class="button small" data-av-play="${it.id}" aria-label="Lire">${playing && !player.paused ? '❚❚' : '▶'}</button>` : '',
+                menu: [it.original ? `<button type="button" data-av-original="${it.id}">🕰️ ${kind === 'video' ? 'Voir' : 'Écouter'} l’original</button>` : '', it.exists ? `<button type="button" data-av-edit="${it.id}">✏️ Modifier (couper, améliorer…)</button>` : ''].filter(Boolean)};
         };
         const draw = () => {
             view = sorted(filtered(items, p), p.sort);
             const cards = disp === 'cards' && UI?.cardsHtml;
             $('#av-cards').hidden = !cards; $('#av-tablewrap').hidden = !!cards;
-            if (cards) { $('#av-body').innerHTML = ''; $('#av-cards').innerHTML = view.length ? UI.cardsHtml(view.map(cardItem)) : '<p class="muted">Rien ne correspond.</p>'; }
+            if (cards) { $('#av-body').innerHTML = ''; $('#av-cards').innerHTML = view.length ? UI.cardsHtml(view.map(cardItem)) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien ne correspond.</span></p>'; }
             else { $('#av-cards').innerHTML = ''; $('#av-body').innerHTML = view.length ? view.map(rowHtml).join('') : `<tr><td colspan="9" class="muted">Rien ne correspond.</td></tr>`; }
             const dur = view.reduce((s, it) => s + (it.duration || 0), 0);
             bar.setCount(`${view.length} ${view.length > 1 ? K.many : K.one}${view.length !== items.length ? ` sur ${items.length}` : ''}${dur ? ` · ${fmtDur(dur)} en tout` : ''}`);
@@ -326,7 +328,7 @@
             const own = e.target.closest('[data-av-owner]');
             if (own) { const [mid, i] = own.dataset.avOwner.split(':').map(Number); const o = items.find(x => x.id === mid)?.owners[i]; if (o) goOwner(o); return; }
             const tr = e.target.closest('[data-av-row]');
-            if (tr && !e.target.closest('button, a')) { const id = Number(tr.dataset.avRow); if (id !== player.current) play(id); }
+            if (tr && !e.target.closest('button, a, summary, details')) { const id = Number(tr.dataset.avRow); if (id !== player.current) play(id); }
         };
         $('#av-body').addEventListener('click', onListClick);
         $('#av-cards').addEventListener('click', onListClick);

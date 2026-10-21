@@ -61,7 +61,7 @@
         read: (ctx, it) => {
             if (!it.id) return '<p class="muted">Enregistre d’abord la sculpture, puis ajoute ses fontes.</p>';
             const l = castSort(OE.childrenOf(ctx.store, it, 'o_cast', 'sculpture'));
-            if (!l.length) return '<p class="muted">Aucune fonte notée : « ＋ Ajouter une fonte ». Chaque fonte est une petite fiche (cachet, numéro, poids, patineur, propriétaires, ventes, photos).</p>';
+            if (!l.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucune fonte notée <small>Chaque fonte est une petite fiche (cachet, numéro, poids, patineur, propriétaires, ventes, photos).</small></span><button type="button" class="button small secondary" data-empty-click="[data-oe-newchild=&quot;o_cast&quot;]">＋ Ajouter une fonte</button></p>';
             const st = ctx.store;
             return `<div class="ar-scroll"><table class="ar-t oe-ctable"><thead><tr><th>N°</th><th>Fondeur</th><th>Fondue</th><th>Procédé</th><th>Patine</th><th>Où / à qui</th><th></th></tr></thead><tbody>${l.map(c => { const d = c.data || {}, x = ART.ctx(st, c);
                 const where = [d.owner ? U.personChip(d.owner, '', x) : '', d.holder ? esc(d.holder) : '', d.location ? U.placeChip(d.location) : '', d.location_detail ? esc(d.location_detail) : '', d.inv ? `<small class="ar-g">inv. ${esc(d.inv)}</small>` : ''].filter(Boolean).join(' ');
@@ -164,12 +164,12 @@
     function stagingsHtml(st, it, mode) {
         const mes = OE.childrenOf(st, it, 'o_mes', 'play').sort((a, b) => (Number(a.year) || 9999) - (Number(b.year) || 9999));
         if (!it.id) return '<p class="muted">Enregistre d’abord la pièce, puis ajoute ses mises en scène.</p>';
-        if (!mes.length) return '<p class="muted">Aucune mise en scène : « ＋ Ajouter une mise en scène » (la création, puis les reprises). Chacune a sa distribution, ses représentations et ses tournées.</p>';
+        if (!mes.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune mise en scène <small>La création, puis les reprises. Chacune a sa distribution, ses représentations et ses tournées.</small></span><button type="button" class="button small secondary" data-empty-click="[data-oe-newchild=&quot;o_mes&quot;]">＋ Ajouter une mise en scène</button></p>';
         const allReps = mes.flatMap(m => repsOf(st, m)).sort((a, b) => dkey(a) - dkey(b));
-        if (mode === 'table') return allReps.length ? repTable(st, allReps, true) : '<p class="muted">Aucune représentation notée.</p>';
+        if (mode === 'table') return allReps.length ? repTable(st, allReps, true) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune représentation notée.</span></p>';
         if (mode === 'cal') { const ds = allReps.map(r => frDate(r.data?.date || '')).filter(Boolean); const months = [...new Set(ds.map(d => d.y * 12 + d.m))].sort((a, b) => a - b).slice(0, 24);
-            return months.length ? `<div class="oe-cals">${months.map(k => `<div>${calHtml(ds, Math.floor(k / 12), k % 12)}</div>`).join('')}</div>${months.length === 24 ? '<p class="ar-note">Les 24 premiers mois.</p>' : ''}` : '<p class="muted">Aucune représentation avec une date complète (« 12 mai 1951 »).</p>'; }
-        if (mode === 'map') return `<div data-oe-map>${allReps.some(r => U.place(r.data?.place)?.plid) ? '<p class="muted">Carte en préparation…</p>' : '<p class="muted">Aucune représentation avec un lieu de ta base.</p>'}</div>`;
+            return months.length ? `<div class="oe-cals">${months.map(k => `<div>${calHtml(ds, Math.floor(k / 12), k % 12)}</div>`).join('')}</div>${months.length === 24 ? '<p class="ar-note">Les 24 premiers mois.</p>' : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune représentation avec une date complète (« 12 mai 1951 »).</span></p>'; }
+        if (mode === 'map') return `<div data-oe-map>${allReps.some(r => U.place(r.data?.place)?.plid) ? '<p class="muted">Carte en préparation…</p>' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucune représentation avec un lieu de ta base.</span></p>'}</div>`;
         return mes.map((m, i) => { const d = m.data || {}, x = ART.ctx(st, m), reps = repsOf(st, m).sort((a, b) => dkey(a) - dkey(b)), tours = OE.childrenOf(st, m, TOUR(), 'staging');
             const cast = (d.cast || []), first = frDate(reps[0]?.data?.date || '');
             return `<div class="oe-lvl l2"><span class="oe-lt">Mise en scène ${i + 1} · ${esc(lab(MESK, d.mkind || 'creation').toLowerCase())}</span>
@@ -233,7 +233,7 @@
         list: ['date', 'title', 'staging', '_stats'], card: ['date']});
     const tourReps = (st, t) => st.items.filter(r => r.kind === REP() && U.ref(r.data?.tour)?.iid === t.id).sort((a, b) => dkey(a) - dkey(b));
     ART.views.o_tourstats = {read: (ctx, it) => { const l = tourReps(ctx.store, it), sp = l.reduce((a, r) => a + (U.num(r.data?.spectators) || 0), 0), towns = new Set(l.map(r => U.placeTitle(r.data?.place)).filter(Boolean)).size; return esc([l.length && U.plural(l.length, 'date'), towns && U.plural(towns, 'ville'), sp && `${sp.toLocaleString('fr-FR')} spectateurs`].filter(Boolean).join(' · ')); }, text: (ctx, it) => U.plural(tourReps(ctx.store, it).length, 'date')};
-    ART.views.o_tourdates = {read: (ctx, it) => { const l = tourReps(ctx.store, it); return l.length ? repTable(ctx.store, l) : '<p class="muted">Aucune date : sur chaque représentation, choisis cette tournée.</p>'; }, text: (ctx, it) => U.plural(tourReps(ctx.store, it).length, 'date')};
+    ART.views.o_tourdates = {read: (ctx, it) => { const l = tourReps(ctx.store, it); return l.length ? repTable(ctx.store, l) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune date : sur chaque représentation, choisis cette tournée.</span></p>'; }, text: (ctx, it) => U.plural(tourReps(ctx.store, it).length, 'date')};
 
     /* ═════════ T. ⚒️ Les pièces de métiers d'art (modèle commun) et la ferronnerie ═════════ */
     const PROT = [['', '—'], ['inscrit', 'Inscrite aux Monuments historiques'], ['classe', 'Classée Monument historique'], ['inventaire', 'Inventaire général'], ['label', 'Label (Patrimoine du XXe s.…)'], ['aucune', 'Aucune']];

@@ -34,7 +34,8 @@
         A().setModule('maintenance');
     });
     const personLink = (id, name, extra = '') => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>${extra ? ` <small>${esc(extra)}</small>` : ''}` : esc(name || '');
-    const header = (eyebrow, title, intro, actions = '') => `<header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p>${intro}</p>` : ''}</div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</header>`;
+    // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
     const fold = text => String(text || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, "'");
 
     /* ═══════════════════════ 🔒 MODE CONSULTATION ═══════════════════════ */
@@ -179,7 +180,7 @@
     }
     ext.feastDate = feastDate;
     function feastResultHtml(r, original) {
-        if (!r) return '<p class="muted">Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »).</p>';
+        if (!r) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »).</span></p>';
         return `<p class="h-feast-result"><strong>${esc(r.weekday)} ${esc(r.date)}</strong> — ${esc(r.label)}${r.julian ? ` <small>(calendrier julien, en usage en France avant décembre 1582 ; soit le ${esc(r.gregorian)} dans le calendrier grégorien)</small>` : ''}<br><small class="muted">Pâques ${esc(r.date.slice(-4))} : ${esc(r.easter)}.${original ? ` Écrit : « ${esc(original)} ».` : ''}</small></p>`;
     }
     ext.calendarPanels.push(() => `<section class="maintenance-panel" id="h-feast-panel"><h3>Fêtes religieuses → date exacte</h3>
@@ -249,7 +250,7 @@
                 <label class="checkbox-line"><input type="checkbox" name="move_imported" ${s.move_imported ? 'checked' : ''}> Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA »</label></div>
                 <p class="muted">Formats : JPEG, PNG, WebP, GIF, PDF${s.can_convert ? ', et HEIC (iPhone) ou TIFF, convertis en JPEG' : ' (les photos HEIC de l’iPhone et les TIFF ne sont pas convertibles sur cet ordinateur : règle l’iPhone sur « Le plus compatible »)'}. Conseil : un dossier réservé aux scans (AirDrop dépose dans « Téléchargements », où il y a de tout). Un même fichier n’est jamais importé deux fois.</p>
                 <div class="page-actions"><button class="button" type="submit">Enregistrer</button>${s.dir ? '<button class="button secondary" type="button" data-h-scan-now>Vérifier maintenant</button>' : ''}<span class="muted">${s.dir ? (s.reachable ? `${s.pending ? `${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : 'Rien en attente'} · ${plural(s.total, 'fichier importé', 'fichiers importés')} en tout` : '⚠ dossier introuvable (disque débranché ?)') : ''}</span></div></form>
-            <h3>Derniers arrivés</h3>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.map(r => `<span class="collection-media-item" title="${esc(r.filename)} — ${esc(r.imported_at)}">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div><p><button type="button" class="button small secondary" data-h-scan-identify>Voir les médias à identifier</button></p>` : empty('Rien d’arrivé pour l’instant', {icon: '📥'})}</section>`;
+            <h3>Derniers arrivés</h3>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.map(r => `<span class="collection-media-item" title="${esc(r.filename)} — ${esc(window.LCNDA_UI?.whenFull?.(r.imported_at) || r.imported_at)}">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div><p><button type="button" class="button small secondary" data-h-scan-identify>Voir les médias à identifier</button></p>` : empty('Rien d’arrivé pour l’instant', {icon: '📥'})}</section>`;
         const form = A().$('#h-scan-form');
         form.addEventListener('submit', async event => {
             event.preventDefault();
@@ -337,7 +338,7 @@
             body = groups.length ? `<div class="h-cite-groups">${groups.map(g => `<article class="h-record"><header><div><strong>${esc(g.name)}</strong>${g.occupations.length ? `, ${esc(g.occupations.join(', '))}` : ''} — apparaît dans <strong>${plural(g.acts, 'acte', 'actes')}</strong>${g.from ? ` ${g.from === g.to ? `en ${g.from}` : `entre ${g.from} et ${g.to}`}` : ''}
                 ${g.roles.length ? `<div class="muted">${esc(g.roles.join(', '))}${g.places.length ? ' · ' + esc(g.places.join(', ')) : ''}</div>` : ''}${g.person_id ? `<div>Fiche : ${personLink(g.person_id, g.person_name)}</div>` : ''}</div></header>
                 <details><summary>Les ${g.items.length} mentions</summary><ul class="h-cite-items">${g.items.map(i => `<li>${LC(i.labels)}${esc(i.date_text || i.year || '')} ${i.role ? `<em>${esc(i.role)}</em>` : ''} ${i.media_id ? `<button type="button" class="link-button" data-h-cite-open="${i.media_id}">${esc(i.media_title || 'transcription')}</button>` : ''}${i.snippet ? `<br><small class="h-transcription">… ${esc(i.snippet)} …</small>` : ''} <button type="button" class="link-button" data-h-cite-del="${i.id}">retirer</button></li>`).join('')}</ul></details></article>`).join('')}</div>`
-                : empty('Aucun nom indexé pour l’instant', {icon: '🏷️', hint: 'Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app.'});
+                : A().emptyState({text: 'Aucun nom indexé pour l’instant', icon: '🏷️', hint: 'Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app.'});
         } else {
             const media = data.media || [];
             body = media.length ? `<table class="data-table"><thead><tr><th>Document</th><th>Début de la transcription</th><th>Noms marqués</th><th></th></tr></thead><tbody>${media.map(m => `<tr><td><strong>${esc(m.title || 'Sans titre')}</strong>${m.document_reference ? `<br><small>${esc(m.document_reference)}</small>` : ''}${m.date_text ? `<br><small>${esc(m.date_text)}</small>` : ''}</td><td><small>${esc(m.excerpt)}…</small></td><td>${Number(m.marked) || '—'}</td><td><button type="button" class="button small" data-h-cite-open="${m.id}">Ouvrir</button></td></tr>`).join('')}</tbody></table>`
@@ -364,7 +365,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page h-cite-page">${header('NOMS CITÉS', m.title || 'Transcription', esc([m.document_reference, m.date_text].filter(Boolean).join(' · ')), '<button type="button" class="button secondary" data-h-cite-back>← Retour</button>')}
             <div class="h-cite-layout"><div><div class="maintenance-panel"><p class="muted">Sélectionne un nom dans le texte avec la souris : un bouton « Ajouter » apparaît.</p><div class="h-cite-text" id="h-cite-text">${html.replace(/\n/g, '<br>')}</div></div>
                 ${m.media_type === 'image' ? `<p><img src="media/${encodeURIComponent(m.filename)}" alt="" class="h-cite-image"></p>` : ''}</div>
-            <aside><div class="maintenance-panel"><h4>Noms marqués (${m.marks.length})</h4><ul class="h-cite-marks">${m.marks.map(k => `<li><strong>${esc(k.name)}</strong>${k.role ? ` — ${esc(k.role)}` : ''}${k.occupation ? `, ${esc(k.occupation)}` : ''}${k.person_id ? ` · ${personLink(k.person_id, k.person_name)}` : ''} <button type="button" class="link-button" data-h-cite-del="${k.id}">retirer</button></li>`).join('') || '<li class="muted">Aucun.</li>'}</ul></div>
+            <aside><div class="maintenance-panel"><h4>Noms marqués (${m.marks.length})</h4><ul class="h-cite-marks">${m.marks.map(k => `<li><strong>${esc(k.name)}</strong>${k.role ? ` — ${esc(k.role)}` : ''}${k.occupation ? `, ${esc(k.occupation)}` : ''}${k.person_id ? ` · ${personLink(k.person_id, k.person_name)}` : ''} <button type="button" class="link-button" data-h-cite-del="${k.id}">retirer</button></li>`).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun.</span></li>'}</ul></div>
                 ${m.suggestions.length ? `<div class="maintenance-panel"><h4>Noms repérés par l’app</h4><p class="muted">À vérifier : la détection automatique n’est pas parfaite.</p><ul class="h-cite-marks">${m.suggestions.map((sg, i) => `<li><strong>${esc(sg.name)}</strong>${sg.role ? ` — ${esc(sg.role)}` : ''}${sg.occupation ? `, ${esc(sg.occupation)}` : ''} <button type="button" class="button small secondary" data-h-cite-sugg="${i}">Ajouter…</button></li>`).join('')}</ul></div>` : ''}</aside></div>
             <button type="button" class="button small h-cite-float" id="h-cite-float" hidden>+ Ajouter ce nom</button></section>`;
         const ws = A().$('#workspace');
@@ -452,7 +453,7 @@
                 <form id="h-sync-author" class="page-actions"><label class="h-inline">Je signe mes paquets <input name="author" value="${esc(s.author)}"></label><button class="button small secondary" type="submit">Changer</button></form></section>
                 <section class="maintenance-panel"><h3>Recevoir un paquet</h3><form id="h-sync-receive" class="page-actions"><input type="file" name="file" accept=".json,application/json" required><button class="button" type="submit">Lire le paquet</button></form></section></div>
                 ${preview ? syncPreviewHtml(preview) : ''}
-                ${s.log?.length ? `<h3>Paquets échangés</h3><table class="data-table"><thead><tr><th>Date</th><th>Sens</th><th>De</th><th>Contenu</th></tr></thead><tbody>${s.log.map(l => `<tr><td>${esc(l.created_at)}</td><td>${l.direction === 'sent' ? '📤 envoyé' : '📥 reçu'}</td><td>${esc(l.author)}</td><td>${esc(l.summary)}${l.direction === 'received' ? ` <small>(${l.accepted_count}/${l.change_count} acceptés)</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}`;
+                ${s.log?.length ? `<h3>Paquets échangés</h3><table class="data-table"><thead><tr><th>Date</th><th>Sens</th><th>De</th><th>Contenu</th></tr></thead><tbody>${s.log.map(l => `<tr><td>${window.LCNDA_UI?.when?.(l.created_at) || esc(l.created_at)}</td><td>${l.direction === 'sent' ? '📤 envoyé' : '📥 reçu'}</td><td>${esc(l.author)}</td><td>${esc(l.summary)}${l.direction === 'received' ? ` <small>(${l.accepted_count}/${l.change_count} acceptés)</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}`;
         }
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Travail à deux', intro)}${body}</section>`;
         const ws = A().$('#workspace');
@@ -489,7 +490,7 @@
     function syncPreviewHtml(p) {
         const items = p.items || [];
         const shown = items.filter(i => i.state !== 'same');
-        return `<form class="maintenance-panel" id="h-sync-apply"><h3>Paquet de ${esc(p.author || '?')} <small class="muted">(${esc(p.created_at ? new Date(p.created_at).toLocaleString('fr-FR') : '')})</small></h3>
+        return `<form class="maintenance-panel" id="h-sync-apply"><h3>Paquet de ${esc(p.author || '?')} <small class="muted">(${p.created_at ? window.LCNDA_UI?.when?.(p.created_at) || esc(p.created_at) : ''})</small></h3>
             ${p.already_received ? '<p class="h-offsite-sentence is-warn">⚠ Ce paquet a déjà été reçu une fois.</p>' : ''}
             <p>${plural(items.length, 'changement', 'changements')}${items.length - shown.length ? `, dont ${items.length - shown.length} déjà identiques chez toi (ignorés)` : ''}. Coche ce que tu acceptes. Les conflits (tu as aussi modifié la même chose) sont décochés : regarde-les.</p>
             <label class="checkbox-line"><input type="checkbox" data-h-sync-all checked> Tout cocher / décocher</label>

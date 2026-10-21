@@ -165,7 +165,7 @@
 .cp-picker > .cp-compat { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; border: 0; padding: 0; }
 
 /* 🗺 petite carte « Choisir sur la carte » */
-.pk-map-dialog { width: min(980px, calc(100vw - 24px)); }
+.pk-map-dialog { width: var(--modal-l); max-width: none; }
 .pk-map-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr); gap: 14px; padding: 16px 20px 6px; }
 .pk-map { position: relative; height: min(460px, 58vh); overflow: hidden; border: 2px solid #111; background: #dfe6ee; cursor: crosshair; touch-action: none; user-select: none; }
 .pk-map-tiles { position: absolute; inset: 0; }
@@ -194,7 +194,7 @@
 }
 
 /* ═════ 🖼 Choisir une image / un son / une vidéo (assets/js/app-media-picker.js, maquette docs/design/choix-image.html) ═════ */
-.modal.mpk-dialog { width: min(1180px, calc(100vw - 24px)); max-width: none; max-height: calc(100vh - 24px); border: 2px solid #111; box-shadow: 6px 6px 0 rgba(5, 93, 255, .25); padding: 0; overflow: hidden; color: #111; background: #fff; }
+.modal.mpk-dialog { width: var(--modal-xl); max-width: none; max-height: calc(100vh - 24px); border: 2px solid #111; box-shadow: 6px 6px 0 rgba(5, 93, 255, .25); padding: 0; overflow: hidden; color: #111; background: #fff; }
 .modal.mpk-dialog[open] { display: flex; flex-direction: column; }
 .mpk-dialog.mpk-dragging { outline: 4px dashed #055dff; outline-offset: -8px; }
 .mpk-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 18px; border-bottom: 2px solid #111; background: #fafafa; flex: none; }

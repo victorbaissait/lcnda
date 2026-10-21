@@ -236,7 +236,7 @@
     }
     function html(d, data) {
         const links = (d?.links || []).filter(l => l && validTarget(l.target));
-        if (!links.length) return `<p class="muted h-sc-empty">Aucun raccourci pour l’instant. Ajoute-en avec le crayon ✎ du widget (« ✎ Modifier les raccourcis ») ou le bouton « ⭐ » d’une fiche ou d’une liste.</p>`;
+        if (!links.length) return `<p class="empty-line h-sc-empty"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun raccourci pour l’instant. Ajoute-en avec le crayon ✎ du widget (« ✎ Modifier les raccourcis ») ou le bouton « ⭐ » d’une fiche ou d’une liste.</span></p>`;
         const layout = LAYOUTS.some(([k]) => k === d.lLayout) ? d.lLayout : 'buttons';
         const size = Math.max(64, Math.min(240, Number(d.lSize) || 112)), cols = Math.max(0, Math.min(8, Number(d.lCols) || 0));
         const ctx = {editable: !document.body?.classList?.contains('is-kiosk')};
@@ -355,7 +355,7 @@
                         const rows = shown(), box = $('[data-sc-cat]'); let g = '', out = '';
                         rows.slice(0, 400).forEach((r, i) => { if (r.group !== g) { g = r.group; out += `<div class="h-sc-catg">${esc(g)}</div>`; } const on = picks.screens.has(r.target);
                             out += `<button type="button" class="h-sc-catrow${on ? ' is-on' : ''}${i === act ? ' is-act' : ''}" role="option" aria-selected="${on ? 'true' : 'false'}" data-sc-i="${i}"><span class="h-sc-catic" aria-hidden="true">${esc(r.icon)}</span><span class="h-sc-catname">${markText(r.label, q)}</span><small>${esc(r.hint)}</small><span class="h-sc-catck" aria-hidden="true">${on ? '✓' : '＋'}</span></button>`; });
-                        box.innerHTML = rows.length ? `<p class="h-sc-catn">${plural(rows.length, 'écran ou outil trouvé', 'écrans ou outils trouvés')}</p>${out}` : `<p class="muted">Rien pour « ${esc(q)} ». Vérifie l’orthographe, ou cherche dans ta base (premier onglet).</p>`;
+                        box.innerHTML = rows.length ? `<p class="h-sc-catn">${plural(rows.length, 'écran ou outil trouvé', 'écrans ou outils trouvés')}</p>${out}` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien pour « ${esc(q)} ». Vérifie l’orthographe, ou cherche dans ta base (premier onglet).</span></p>`;
                         box._rows = rows;
                     }
                     const moveAct = step => { const rows = $('[data-sc-cat]')._rows || []; if (!rows.length) return; act = Math.max(0, Math.min(rows.length - 1, act + step)); paintCat(); $('[data-sc-cat] .is-act')?.scrollIntoView({block: 'nearest'}); };
@@ -395,7 +395,7 @@
                         ...[...picks.screens.values()].map(r => ({target: r.target, label: '', name: str(r.label, 120)})),
                         ...picks.web.map(w => ({target: w.target, label: w.label || '', name: host(webUrl(w.target))})),
                     ].map(cleanLink).filter(Boolean);
-                    if (!out.length) { toast('Choisis au moins un raccourci.', 'error'); return false; }
+                    if (!out.length) return window.LCNDA_UI.fail(f.querySelector('[data-sc-pane]:not([hidden]) input, [data-sc-pane] input'), 'Choisis au moins un raccourci.');
                     finish(out);
                 }});
             dlg?.addEventListener('close', () => finish(null));
@@ -623,7 +623,7 @@
         }
         A().undoToast?.(msg, {undo: () => ext.saveCustomWidgetList(before), redo: () => ext.saveCustomWidgetList(list)});
     }
-    const STAR = '<button type="button" class="button small secondary h-sc-star" data-sc-star title="Ajouter aux raccourcis (un widget « Raccourcis » du tableau de bord, d’un onglet ou d’une Fiche)" aria-label="Ajouter aux raccourcis">⭐ Raccourci</button>';
+    const STAR = '<button type="button" class="button small secondary h-sc-star" data-sc-star title="Ajouter aux raccourcis (un widget « Raccourcis » du tableau de bord, d’un onglet ou d’une Fiche)" aria-label="Ajouter aux raccourcis">⭐</button>'; // K5 : ⭐ seul, en dernier à droite de l'en-tête
     // sur la fiche : un bouton icône comme ses voisins (signet, verrou, historique…), le nom dans la bulle
     const STAR_ICON = '<button type="button" class="icon-action icon-shortcut h-sc-star-hero" data-sc-star title="Ajouter aux raccourcis" aria-label="Ajouter aux raccourcis"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></button>';
     document.addEventListener('click', e => { if (e.target.closest?.('[data-sc-star]')) { e.preventDefault(); addToShortcuts(); } });
@@ -642,5 +642,5 @@
     const watch = () => { const ws = document.getElementById('workspace'); if (!ws) return setTimeout(watch, 500); new MutationObserver(() => { clearTimeout(starTimer); starTimer = setTimeout(placeStar, 60); }).observe(ws, {childList: true}); placeStar(); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch); else watch();
 
-    ext.shortcuts = {load, html, editorHtml, bindEditor, panelHtml, openEditor, redrawWidget, cleanFields, cleanLink, cleanLinks, validTarget, describe, openTarget, canOpen, chooseTargets, addToShortcuts, currentTarget, catalog, webUrl, safeThumb, homes, LAYOUTS};
+    ext.shortcuts = {placeStar, load, html, editorHtml, bindEditor, panelHtml, openEditor, redrawWidget, cleanFields, cleanLink, cleanLinks, validTarget, describe, openTarget, canOpen, chooseTargets, addToShortcuts, currentTarget, catalog, webUrl, safeThumb, homes, LAYOUTS};
 })();

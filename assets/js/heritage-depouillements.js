@@ -86,18 +86,15 @@
         const card = r => {
             const pages = pagesOf(r), cover = (r.media || []).find(m => isImage(m) && String(m.archive_page_number || '').trim()) || (r.media || []).find(isImage);
             const done = pages.filter(p => ['checked', 'empty'].includes(p.status)).length, total = Number(r.page_total) || pages.length, pct = total ? Math.min(100, Math.round(done / total * 100)) : 0, ls = loose(r).length;
-            return `<button type="button" class="h-rc-card" data-dp-open="${r.id}">
-                <span class="h-rc-cover">${cover ? `<img src="${esc(thumb(cover))}" alt="" loading="lazy">` : '<span class="h-rc-cover-empty">📜</span>'}${pages.length ? `<span class="h-rc-badge">${plural(pages.length, 'page', 'pages')}</span>` : ''}</span>
-                <span class="h-rc-card-body"><strong>${esc(types[r.record_type] || r.record_type || 'Dépouillement')}${r.year_text ? ' · ' + esc(r.year_text) : ''}</strong>
-                    <small class="muted">${esc([r.city_alias && r.city_alias !== (r.place_name || r.city_name) ? r.city_alias : '', r.archive_service, r.archive_reference].filter(Boolean).join(' · ')) || '&nbsp;'}</small>
-                    <span class="h-rc-meter" title="${plural(done, 'page dépouillée', 'pages dépouillées')} sur ${total}${r.page_total ? ' vues du scan' : ''} (${pct} %)"><i style="width:${pct}%"></i></span>
-                    ${r.page_total || r.doc_pages ? `<small class="muted">${r.page_total ? `📷 ${plural(r.page_total, 'vue', 'vues')} en ligne` : ''}${r.page_total && r.doc_pages ? ' · ' : ''}${r.doc_pages ? `📄 document de ${plural(r.doc_pages, 'page', 'pages')}` : ''}</small>` : ''}
-                    <small>${esc(statuses[r.status] || r.status || '')} · 👥 ${(r.people || []).length} · 🏠 ${plural(households(r.people || []), 'foyer', 'foyers')}${ls ? ` · <b class="h-rc-warn">${plural(ls, 'photo à ranger', 'photos à ranger')}</b>` : ''}</small></span></button>`;
+            // K9 : la vignette unique (UI.cardsHtml)
+            return {thumb: cover ? `<img src="${esc(thumb(cover))}" alt="" loading="lazy">` : '<span class="ui-card-ico">📜</span>', name: `${types[r.record_type] || r.record_type || 'Dépouillement'}${r.year_text ? ' · ' + r.year_text : ''}`, open: `data-dp-open="${r.id}"`,
+                lines: [[r.city_alias && r.city_alias !== (r.place_name || r.city_name) ? r.city_alias : '', r.archive_service, r.archive_reference].filter(Boolean).join(' · ') || 'Service d’archives à préciser', `👥 ${(r.people || []).length} · 🏠 ${plural(households(r.people || []), 'foyer', 'foyers')}${r.page_total ? ` · 📷 ${plural(r.page_total, 'vue', 'vues')}` : ''}${r.doc_pages ? ` · 📄 ${plural(r.doc_pages, 'page', 'pages')}` : ''}`],
+                badges: [{text: statuses[r.status] || r.status || '', kind: r.status === 'done' ? 'green' : 'blue'}, {text: `${pct} % dépouillé`, kind: pct >= 100 ? 'green' : 'grey'}, ls ? {text: plural(ls, 'photo à ranger', 'photos à ranger'), kind: 'yellow'} : null].filter(b => b && b.text)};
         };
         const line = r => { const pages = pagesOf(r), cover = (r.media || []).find(m => isImage(m) && String(m.archive_page_number || '').trim()) || (r.media || []).find(isImage);
             const done = pages.filter(p => ['checked', 'empty'].includes(p.status)).length, total = Number(r.page_total) || pages.length, pct = total ? Math.min(100, Math.round(done / total * 100)) : 0;
             return {thumb: cover ? `<img src="${esc(thumb(cover))}" alt="" loading="lazy">` : '<span class="ui-card-ico">📜</span>', name: nameOf(r), open: `data-dp-open="${r.id}"`, lines: [[r.archive_service, r.archive_reference].filter(Boolean).join(' · '), `${statuses[r.status] || r.status || ''} · ${plural(pages.length, 'page', 'pages')} · ${pct} % dépouillé · 👥 ${(r.people || []).length}`], date: ''}; };
-        const group = list => view === 'list' && UI?.rowsHtml ? UI.rowsHtml(list.map(line)) : `<div class="h-rc-grid">${list.map(card).join('')}</div>`;
+        const group = list => view === 'list' && UI?.rowsHtml ? UI.rowsHtml(list.map(line)) : UI.cardsHtml(list.map(card));
         ws.innerHTML = `<section class="page collection-page h-rc h-dp">
             <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES</span><h2>📜 Dépouillements</h2>
                 <p>Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.</p></div>
@@ -464,10 +461,10 @@
                 dialog({eyebrow: 'PERSONNE RELEVÉE', title: guess || 'Rattacher à une fiche', submitLabel: 'Rattacher',
                     body: `<p class="muted">Choisis la fiche de cette personne : elle sera rattachée à ce relevé (et au recensement de la fiche).</p>` + ext.personPickerHtml({guess, createLabel: `Créer la fiche « ${esc(guess || 'sans nom')} » (marquée à vérifier)`}),
                     onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true}); picker = ext.bindPersonPicker(d); },
-                    onSubmit: async () => {
+                    onSubmit: async form => {
                         if (picker.create()) { await save(x, {person_mode: 'create'}); x.person_name = guess; toast('Fiche créée (à vérifier) et rattachée.'); end(true); return; }
                         const o = picker.selected();
-                        if (!o) { toast('Choisis une fiche dans la liste, ou « Pas encore de fiche ».', 'error'); return false; }
+                        if (!o) return window.LCNDA_UI.fail(form.querySelector('.h-pick .pk, .h-pick input, .h-pick'), 'Choisis une fiche dans la liste, ou « Pas encore de fiche ».');
                         x.person_id = Number(o.key); x.person_name = o.label;
                         await save(x, {person_mode: 'existing'}); toast(`Rattachée à ${x.person_name}.`); end(true);
                     },

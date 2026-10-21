@@ -17,7 +17,8 @@
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
-    const header = (eyebrow, title, intro, actions = '') => `<header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p>${intro}</p>` : ''}</div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</header>`;
+    // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
     const tools = (...args) => ext.tools ? ext.tools(...args) : '';
     const dialog = opts => ext.openDialog(opts);
     const pname = p => p ? A().personName(p) : '';
@@ -85,7 +86,7 @@
                     <p class="muted">Les champs de chaque ligne :</p><div data-rb-subs>${(x.fields || []).map(sub).join('')}</div><button type="button" class="button small secondary" data-rbs-add>+ Champ de la ligne</button></div>` : ''}</div></div>`; };
         return `<section class="maintenance-panel"><h3>2. Le formulaire d’une fiche</h3><p class="muted">Clique sur une sorte de champ pour l’ajouter, puis donne-lui un nom. « demi-largeur » met deux champs côte à côte. Les <b>Étapes</b> sont une sous-liste sans limite, chaque ligne avec ses propres champs.</p>
                 <div class="h-be-palette">${TYPES.map(([t, icon, label, help]) => `<button type="button" class="button small secondary" data-rb-add="${t}" title="${esc(help)}">${icon} ${esc(label)}</button>`).join('')}</div>
-                <div class="h-rb-fields" data-rb-fields>${d.fields.map(row).join('') || '<p class="muted">Aucun champ pour l’instant.</p>'}</div>
+                <div class="h-rb-fields" data-rb-fields>${d.fields.map(row).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun champ pour l’instant.</span></p>'}</div>
                 <button type="button" class="button small secondary" data-rb-preview>👁 Voir le formulaire</button></section>
             <section class="maintenance-panel"><h3>3. La liste des fiches</h3><div class="form-grid">
                 <label>Bouton pour créer<input data-rr="new" value="${esc(r.new)}" placeholder="+ Circuit"></label><label>Titre du formulaire<input data-rr="form" value="${esc(r.form)}" placeholder="Nouveau circuit"></label><label>Une fiche s’appelle<input data-rr="item" value="${esc(r.item)}" placeholder="circuit"></label>
@@ -277,7 +278,7 @@
             await api('delete_my_list', {}, {method: 'POST', body: {id}}); S().hListOpen = 0; S().hRec = {};
             ext.afterListDeleted?.(inLists);
         });
-        ws.querySelector('[data-rv-print]').addEventListener('click', () => window.print());
+        ws.querySelector('[data-rv-print]').addEventListener('click', () => (window.LCNDA_UI?.printPage ? window.LCNDA_UI.printPage('') : window.print())); // K13
         ws.querySelector('[data-rv-csv]').addEventListener('click', () => {
             const cols = d.fields.filter(x => !['heading', 'media'].includes(x.type));
             const q = val => '"' + (A().csvSafe || (x => String(x ?? '')))(val).replace(/"/g, '""') + '"'; // pas de formule glissée dans un tableur
@@ -357,7 +358,7 @@
         A().bindTableLinks?.();
         ws.querySelector('[data-rd-back]').addEventListener('click', () => { v.open = 0; reload(); });
         ws.querySelector('[data-rd-edit]').addEventListener('click', () => { v.open = 0; v.edit = rec.id; reload(); });
-        ws.querySelector('[data-rd-print]').addEventListener('click', () => window.print());
+        ws.querySelector('[data-rd-print]').addEventListener('click', () => (window.LCNDA_UI?.printPage ? window.LCNDA_UI.printPage('') : window.print())); // K13
         ws.querySelector('[data-rd-status]')?.addEventListener('click', async e => { await api('set_my_list_record_status', {}, {method: 'POST', body: {id: rec.id, status: e.currentTarget.dataset.rdStatus}}); reload(); });
         ws.querySelector('[data-rd-del]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer « ${title} » ?`, {title: 'Supprimer la fiche', okLabel: 'Supprimer la fiche'})) return; await api('delete_my_list_record', {}, {method: 'POST', body: {id: rec.id}}); toast('Fiche supprimée.'); v.open = 0; reload(); });
         ws.querySelectorAll('[data-rd-step]').forEach(c => c.addEventListener('change', async () => {

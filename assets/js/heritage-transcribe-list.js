@@ -38,10 +38,12 @@
     function item(r, view) {
         const st = STATUS[r.status] || STATUS.doing, what = [kindLabel(r.kind), r.date_text, r.place].filter(Boolean).join(' · ');
         if (view === 'cards') return {thumb: thumbOf(r), name: r.title || kindLabel(r.kind), open: `data-atl-open="${r.id}"`, cls: 'h-atl-card',
-            lines: [what, ...(firstLines(r).length ? [{html: `<span class="h-atl-text">${firstLines(r).map(esc).join('<br>')}</span>`}] : ['Pas encore de texte']), `${st[1]} ${st[0]} · ${plural(r.lines, 'ligne', 'lignes')} · ${plural(r.zones, 'zone', 'zones')}`], actions: actions(r)};
+            // K9 : 2 lignes grises, l'état en pastille, ⋯ pour supprimer
+            lines: [what, firstLines(r).length ? {html: `<span class="h-atl-text">${firstLines(r).map(esc).join('<br>')}</span>`} : 'Pas encore de texte'], badges: [{text: `${st[1]} ${st[0]}`, kind: r.status === 'done' ? 'green' : 'blue'}, {text: `${plural(r.lines, 'ligne', 'lignes')} · ${plural(r.zones, 'zone', 'zones')}`, kind: 'grey'}], when: r.updated_at, whenLabel: 'Modifié',
+            menu: [`<button type="button" class="danger" data-atl-del="${r.id}">🗑 Supprimer</button>`]};
         return {thumb: thumbOf(r), name: r.title || kindLabel(r.kind), open: `data-atl-open="${r.id}"`, cls: 'h-atl-row',
             lines: [what, r.source ? `📚 ${r.source}` : '', `${st[1]} ${st[0]} · ${plural(r.lines, 'ligne transcrite', 'lignes transcrites')} · ${plural(r.zones, 'zone', 'zones')}`, peopleText(r) ? `👥 ${peopleText(r)}` : ''],
-            date: (r.updated_at || '').slice(0, 10).split('-').reverse().join('/'), actions: actions(r)};
+            when: r.updated_at, whenLabel: 'Modifié', actions: actions(r)};
     }
 
     ext.lists[KEY] = async token => {

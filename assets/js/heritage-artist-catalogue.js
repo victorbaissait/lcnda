@@ -114,7 +114,7 @@
                 dg.addEventListener('dragend', () => { if (!drag) return; drag = null; parts = [...dg.querySelectorAll('[data-pk]')].map(r => parts.find(x => x.k === r.dataset.pk)); dg._paint(); });
             },
             onSubmit: async f => {
-                if (!st) { A().toast('Choisis l’artiste.', 'error'); return false; }
+                if (!st) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis l’artiste.');
                 const v = Object.fromEntries(new FormData(f)), list0 = v.which === 'list' ? listOf() : st.of(kindOf());
                 const list = ART.sortItems ? ART.sortItems(list0, v.order) : list0;
                 if (!list.length) { A().toast(mode === 'catalogue' ? 'Aucune œuvre à mettre dans le livre.' : 'Aucun disque à mettre dans le livre.', 'error'); return false; }

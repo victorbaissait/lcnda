@@ -1188,5 +1188,7 @@
             describe: spec => `Carte à symboles proportionnels : ${rowsOf(spec).length} lieux.`},
     };
     for (const [k, kind] of Object.entries(KINDS)) { if (!DR.KINDS[k]) DR.KINDS[k] = kind; }
-    ext.diagramCartes = {MAPS, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfRow, zoneSuggest, rowStatus, rememberPick, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf, SRC_GROUPS, bubblesOf};
+    ext.diagramCartes = {MAPS, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfRow, zoneSuggest, rowStatus, rememberPick, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf, SRC_GROUPS, bubblesOf,
+        // pour les cartes de heritage-diagram-cartes2.js (points, hexagones, cartogramme, carte qui raconte) : mêmes fonds, mêmes projections
+        mapOf, levelOf, viewOf, baseIdOf, ctxIdOf, needBases, drawBase, attrOf, autoProj, fitView, mapOpts, remember, afterDraw, fillZones, communeOfPlace, zoneAt, RAMPS, rampAt, SEA, LAND, FROM_APP};
 })();

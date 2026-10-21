@@ -166,7 +166,7 @@
                 <span class="spacer"></span><span class="ui-status" data-ui-status data-rs-status></span>${ext.tbButton ? ext.tbButton('retouch-simple') : ''}
                 <details class="h-rt-menu h-rt-exportmenu"><summary title="Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rs-export="image"><span>🖼 La photo retouchée (PNG, JPG, imprimer)…</span></button><button type="button" data-rs-export="ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details>
                 <button type="button" class="button small" data-rs-topsave data-ui-cmd="save" data-shortcut="⌘S" title="Enregistrer et afficher cette version de la photo (l’original est gardé)">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('retouch-simple') : ''}<button type="button" class="icon-button" data-rs-close aria-label="Fermer" title="Fermer">×</button></div>
-            <div class="h-rs-paint" data-tbg="rs-paint" data-tbg-label="Barre des outils"><span class="h-rs-modes">${[['adjust', '🎚 Réglages'], ['heal', '🩹 Correcteur de taches'], ['clone', '🧬 Tampon de duplication']].map(([k, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rs-mode="${k}"${k === 'clone' ? ' title="Alt + clic (⌥ + clic sur Mac) : l’endroit à recopier, puis peins sur la zone à couvrir"' : ''}>${l}</button>`).join('')}</span>
+            <div class="h-rs-paint" data-tbg="rs-paint" data-tbg-label="Barre des outils"><span class="h-rs-modes">${[['adjust', '🎚 Réglages'], ['heal', '🩹 Correcteur de taches'], ['clone', '🧬 Tampon de duplication']].map(([k, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rs-mode="${k}"${k === 'clone' ? ' title="' + (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt') + ' + clic : l’endroit à recopier, puis peins sur la zone à couvrir"' : ''}>${l}</button>`).join('')}</span>
                 <label class="h-rs-size" hidden>Taille <input type="range" min="3" max="120" value="18" data-rs-size> <output data-rs-size-out>18</output></label>
                 <span class="h-rs-zoom" title="Zoom"><span class="muted">🔍</span><button type="button" class="button small secondary" data-rs-zoom="out" title="Dézoomer (⌘/Ctrl + molette)">−</button><button type="button" class="button small secondary" data-rs-zoom="fit" title="Toute l’image (clic : 100 %)" data-rs-zoom-label>Ajusté</button><button type="button" class="button small secondary" data-rs-zoom="in" title="Zoomer (⌘/Ctrl + molette)">+</button></span>
                 <small class="muted" data-rs-paint-help></small></div>
@@ -216,7 +216,7 @@
             Object.keys(st).forEach(k => delete st[k]); Object.assign(st, rtDefault(), o.st, {strokes});
             srcData.data.set(baseData.data); if (strokes.length) rtReplayStrokes(srcData, strokes); activePreset = -1; markPreset(); syncControls(); syncHist();
         };
-        const HELP = {adjust: '', heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long.', clone: 'Alt + clic (⌥ + clic sur Mac) pour choisir l’endroit à recopier, puis peins sur la zone à couvrir.'};
+        const HELP = {adjust: '', heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long.', clone: (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt') + ' + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir.'};
         // l'image est centrée dans le cadre (marges sur les côtés ou en haut et en bas) : on en tient compte
         const fit = () => { const r = canvas.getBoundingClientRect(), k = Math.min(r.width / pw, r.height / ph); return {r, k, ox: r.left + (r.width - pw * k) / 2, oy: r.top + (r.height - ph * k) / 2}; };
         const toCanvas = e => { const f = fit(); return [(e.clientX - f.ox) / f.k, (e.clientY - f.oy) / f.k, f]; };
@@ -332,7 +332,7 @@
             if ((e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0) { e.preventDefault(); removePoint(selPt); }
         };
         window.addEventListener('keydown', onKey, true); dlg.addEventListener('close', () => window.removeEventListener('keydown', onKey, true));
-        svg.addEventListener('contextmenu', e => { const hit = e.target.closest('[data-rs-pt]'); if (hit) { e.preventDefault(); removePoint(Number(hit.dataset.rsPt)); } });
+        svg.addEventListener('contextmenu', e => { const hit = e.target.closest('[data-rs-pt]'); if (!hit) return; e.preventDefault(); const i = Number(hit.dataset.rsPt); if (!window.LCNDA_UI?.contextMenu) return removePoint(i); window.LCNDA_UI.contextMenu(e, [{icon: '🗑', label: 'Supprimer ce point', shortcut: '⌫', danger: true, run: () => removePoint(i)}], {title: 'Point de la courbe'}); }); // K14 : le menu de l'app
         dlg.querySelector('[data-rs-ptdel]').addEventListener('click', () => removePoint(selPt));
         // Tout ce qui montrait l'ancien fichier (fiche, liste des médias…) est redessiné
         const refreshAfter = async () => {

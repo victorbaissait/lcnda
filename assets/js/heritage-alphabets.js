@@ -204,13 +204,13 @@
     function langHtml(id) {
         const {langs, byId} = build();
         const l = byId[id] || langs[0];
-        if (!l) return '<p class="muted">Aucune langue.</p>';
+        if (!l) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune langue.</span></p>';
         const specials = new Set(l.special || []);
         const trLegend = l.tr ? `<p class="h-abc-legend">Sous chaque lettre : sa translittération (${esc((l.trLabels || ['usuelle', 'savante']).join(' · '))}).</p>` : '';
         const alpha = `<h4>L’alphabet <small>(${plural(l.alphabet.length, 'lettre')})</small></h4>${trLegend}${specials.size && l.alphabet.some(c => specials.has(c)) ? '<p class="h-abc-legend"><span class="h-abc-dot"></span> lettres à accents ou propres à la langue</p>' : ''}
             <div class="h-abc-grid">${l.alphabet.map((c, i) => cell(l, c, i, specials.has(c))).join('')}</div>`;
         const sp = l.special?.length ? `<h4>Lettres à accents et lettres spéciales</h4><div class="h-abc-grid">${l.special.map(c => cell(l, c, -1, true)).join('')}</div>`
-            : '<h4>Lettres à accents et lettres spéciales</h4><p class="muted">Aucune : cette langue n’a pas de lettres à accents.</p>';
+            : '<h4>Lettres à accents et lettres spéciales</h4><p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune : cette langue n’a pas de lettres à accents.</span></p>';
         const extra = l.extra?.length ? `<p class="h-abc-extra"><strong>${frText(l.extraLabel || 'Seulement dans les mots et les noms étrangers :')}</strong> ${l.extra.map(c => `<span class="h-abc-mini" lang="${esc(l.id)}">${esc(c)}</span>`).join(' ')}</p>` : '';
         const old = l.old?.length ? `<h4>Lettres anciennes et abréviations des actes</h4><ul class="h-abc-old">${l.old.map(([c, note]) => `<li><span class="h-abc-oldglyph" lang="${esc(l.id)}"${RTL.has(l.script) ? ' dir="rtl"' : ''}>${esc(c)}</span><span>${frText(note)}</span></li>`).join('')}</ul>` : '';
         const hints = `<h4>Comment la reconnaître</h4><ul class="h-abc-hints">${(l.hints || []).map(h => `<li>${frText(h)}</li>`).join('')}</ul>`;

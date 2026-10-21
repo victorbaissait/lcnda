@@ -494,10 +494,11 @@
                 </body></html>`;
         }
         function printCatalog() {
+            if (window.LCNDA_UI?.openPrintDialog) return window.LCNDA_UI.openPrintDialog({title: 'Catalogue du musée', html: catalogHtml()}); // K13 : la fenêtre « Imprimer » commune
             const frame = document.createElement('iframe'); frame.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0';
             document.body.appendChild(frame);
             frame.srcdoc = catalogHtml();
-            frame.onload = () => { const imgs = [...frame.contentDocument.images]; Promise.all(imgs.map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; }))).then(() => { frame.contentWindow.focus(); frame.contentWindow.print(); setTimeout(() => frame.remove(), 60000); }); };
+            frame.onload = () => { const imgs = [...frame.contentDocument.images]; Promise.all(imgs.map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; }))).then(() => { frame.contentWindow.focus(); frame.contentWindow.print(); setTimeout(() => frame.remove(), 60000); }); }; // secours (sans la fenêtre commune)
         }
 
         /* ── Visite guidée : on va d'œuvre en œuvre, avec l'enregistrement ou la voix de synthèse ── */

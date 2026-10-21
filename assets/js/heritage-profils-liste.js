@@ -82,11 +82,13 @@
             else l = UI().sortItems(l, s || 'az', {name: p => `${p.last_name} ${p.first_name}`, date: p => p.updated_at});
             return l;
         }
-        const thumb = (p, big) => p.photo ? `<img src="media/${encodeURIComponent(p.photo)}" alt="" loading="lazy">` : `<span class="pf-lav ${{male: 'm', female: 'f'}[p.gender] || 'u'}${big ? ' is-big' : ''}">${esc(U.initials ? U.initials(p.name) : p.name.slice(0, 2))}</span>`;
+        const thumb = (p, big) => window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({...p, photo: p.photo ? `media/${encodeURIComponent(p.photo)}` : ''}, big ? 88 : 34) : p.photo ? `<img src="media/${encodeURIComponent(p.photo)}" alt="" loading="lazy">` : `<span class="pf-lav ${{male: 'm', female: 'f'}[p.gender] || 'u'}${big ? ' is-big' : ''}">${esc(U.initials ? U.initials(p.name) : p.name.slice(0, 2))}</span>`;
         function paint() {
             const st = bar.state, l = rowsOf(st), part = l.slice(0, shown);
             bar.setCount(l.length, 'personne');
-            const items = part.map(p => ({thumb: thumb(p, st.view === 'cards'), name: p.name, open: `data-pfl-open="${p.id}"`,
+            const items = part.map(p => st.view === 'cards' ? ({thumb: thumb(p, true), name: p.name, open: `data-pfl-open="${p.id}"`, openLabel: '↗ Sa page', // K9 : la vignette unique
+                lines: [[life(p), p.occupation].filter(Boolean).join(' · '), [p.items ? plural(p.items, 'fiche') : '', p.own ? '✎ page personnalisée' : '', p.is_locked ? '🔒 fiche verrouillée' : ''].filter(Boolean).join(' · ')], badges: [`<span class="pf-badges">${badges(p.profiles)}</span>`]})
+                : ({thumb: thumb(p, false), name: p.name, open: `data-pfl-open="${p.id}"`,
                 lines: [{html: `<span class="pf-badges">${badges(p.profiles)}</span>`}, [life(p), p.occupation, p.items ? plural(p.items, 'fiche') : ''].filter(Boolean).join(' · '), p.own ? '✎ page personnalisée' : '', p.is_locked ? '🔒 fiche verrouillée' : ''],
                 actions: `<button type="button" class="button small secondary" data-pfl-open="${p.id}">↗ Sa page</button>`}));
             body.innerHTML = l.length ? UI().itemsHtml(st.view, items) : (people.length ? A().emptyState({icon: '🔍', text: 'Aucune personne ne correspond', hint: 'Retire un filtre ou change la recherche.'})
@@ -111,7 +113,7 @@
         const models = ed.keys.map(k => { const P = known(k); if (!P) return ''; if (k === 'artist') { const M = ART.models || {}; const cur = ed.data.page?.model || ''; return Object.keys(M).length > 1 ? `<label class="pfm-model"><span>${esc(P.icon)} ${esc(P.label)}</span><select data-pfm-model="artist"><option value="">Selon la discipline</option>${Object.entries(M).filter(([, m]) => m?.label).map(([mk, m]) => `<option value="${esc(mk)}" ${mk === cur ? 'selected' : ''}>${esc(m.label)}</option>`).join('')}</select></label>` : ''; }
             const ms = Array.isArray(P.models) ? Object.fromEntries(P.models.filter(m => ART.models?.[m]).map(m => [m, ART.models[m]])) : (P.models || {}); const ent = Object.entries(ms).filter(([, m]) => m?.label); if (ent.length < 2) return '';
             const cur = ed.data.pfpages?.[k]?.model || ''; return `<label class="pfm-model"><span>${esc(P.icon)} ${esc(P.label)}</span><select data-pfm-model="${esc(k)}"><option value="">Modèle de départ</option>${ent.map(([mk, m]) => `<option value="${esc(mk)}" ${mk === cur ? 'selected' : ''}>${esc(m.label)}</option>`).join('')}</select></label>`; }).join('');
-        return `<b class="pf-sub">Profils (ordre, couleur, visibles)</b><div class="order-list block-order-list" data-pfm-list="prof">${profRows || '<p class="muted">Aucun profil dans la base pour l’instant.</p>'}</div>
+        return `<b class="pf-sub">Profils (ordre, couleur, visibles)</b><div class="order-list block-order-list" data-pfm-list="prof">${profRows || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun profil dans la base pour l’instant.</span></p>'}</div>
             <b class="pf-sub">Sections de la page « Tout mélangé »</b><div class="order-list block-order-list" data-pfm-list="sec">${secRows}</div>
             ${models ? `<b class="pf-sub">Modèles de départ</b><div class="pfm-models">${models}</div>` : ''}
             <label class="checkbox-line"><input type="checkbox" data-pfm-empty ${pp.hideEmpty ? 'checked' : ''}> Masquer les sections vides</label>`;
@@ -185,7 +187,7 @@
                 await savePresets([...clone(M.presets), {name: got.nom, data: got.donnees.artistes}]); toast(`Réglage « ${got.nom} » importé : « Appliquer » pour t’en servir.`); }});
         if (pframe) body.querySelector('[data-presets-slot="pfm-presets"]').replaceWith(pframe);
         const peopleBox = body.querySelector('[data-pfm-people]');
-        const paintPeople = () => { peopleBox.innerHTML = M.people.length ? `<div class="pfm-plist">${M.people.map(p => `<div class="pfm-prow" data-pid="${p.id}"><b>${esc(nameOf(p))}</b><small class="muted">${esc(String(p.updated_at || '').slice(0, 10))}</small><button type="button" class="button small secondary" data-pfm-open="${p.id}">↗ Ouvrir</button><button type="button" class="button small secondary" data-pfm-drop="${p.id}">↺ Revenir au standard</button></div>`).join('')}</div>` : (A().emptyState ? A().emptyState({icon: '🧩', text: 'Aucune page personnalisée', hint: 'Une exception se crée ici, ou dans « ⚙️ Organiser la page » (« Réglage propre à … »).'}) : ''); };
+        const paintPeople = () => { peopleBox.innerHTML = M.people.length ? `<div class="pfm-plist">${M.people.map(p => `<div class="pfm-prow" data-pid="${p.id}"><b>${esc(nameOf(p))}</b><small class="muted">${window.LCNDA_UI?.when?.(p.updated_at, {label: 'Modifié'}) || ''}</small><button type="button" class="button small secondary" data-pfm-open="${p.id}">↗ Ouvrir</button><button type="button" class="button small secondary" data-pfm-drop="${p.id}">↺ Revenir au standard</button></div>`).join('')}</div>` : (A().emptyState ? A().emptyState({icon: '🧩', text: 'Aucune page personnalisée', hint: 'Une exception se crée ici, ou dans « ⚙️ Organiser la page » (« Réglage propre à … »).'}) : ''); };
         paintPeople();
         const reloadPeople = async () => { try { const x = await A().api('art', {op: 'page_settings'}); M.people = x.people || []; paintPeople(); } catch (_) {} };
         /** revenir au standard (↶ Annuler remet l'exception) */

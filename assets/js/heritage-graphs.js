@@ -19,7 +19,6 @@
     const KIND_LABEL = {chart: 'Graphique', appstat: 'Graphique d’une statistique de l’app', numbers: 'Chiffres', list: 'Liste'};
     const kiosk = () => document.body.classList.contains('is-kiosk');
     const norm = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-    const frDate = iso => { const t = Date.parse(String(iso || '').replace(' ', 'T')); return Number.isFinite(t) ? new Date(t).toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) : ''; };
     const styleLabel = g => { const st = String(g.style || ''); if (st.startsWith('dg:')) { const k = st.slice(3).split(':')[0]; return R()?.KINDS[k]?.label || 'Diagramme'; } return STYLE_LABEL[st] || ''; };
 
     /* ─── les vignettes des graphiques : dessinées quand elles se montrent (leurs chiffres sont relus dans l'arbre) ─── */
@@ -129,7 +128,7 @@
             : `<span class="gr-thumb" ${['graph'].includes(it.type) ? `data-gr-thumb="${esc(it.id)}"` : ''}><span class="gr-ico">${esc(it.icon)}</span></span>`;
         return {cls: 'gr-item', attrs: `data-gr-item="${esc(ref)}"`, name: `${it.icon} ${it.name}`, open: `data-gr-open="${esc(ref)}"`, thumb,
             lines: [`${it.type === 'graph' ? '📈' : '📊'} ${it.what} · ${it.dataLabel}`, it.where.length ? `Posé : ${it.where.slice(0, 4).join(', ')}${it.where.length > 4 ? '…' : ''}` : 'Posé nulle part pour l’instant', it.note ? String(it.note).slice(0, 140) : ''],
-            date: it.date ? (it.type === 'graph' ? 'Créé le ' : 'Modifié le ') + frDate(it.date) : '',
+            when: it.date, whenLabel: it.type === 'graph' ? 'Créé' : 'Modifié',
             actions: kiosk() ? '' : `<button type="button" class="button small secondary" data-gr-edit="${esc(ref)}">✎ Modifier</button>`};
     }
     ext.lists = ext.lists || {};
@@ -157,7 +156,7 @@
             bar.setCount?.(shown.length === items.length ? shown.length : `${shown.length} sur ${items.length} ${items.length > 1 ? 'éléments' : 'élément'}`, 'élément');
             if (!items.length) { body.innerHTML = A().emptyState({icon: '📈', text: 'Aucun graphique ni diagramme pour l’instant', hint: 'Un graphique compte ce que tu veux (tes propres chiffres, des personnes, des événements, une statistique de l’app) ; un diagramme dessine une assemblée, une frise, un organigramme…', action: kiosk() ? null : {label: '＋ Nouveau graphique', attrs: 'data-gr-newgraph'}}); page.querySelector('[data-gr-more]').innerHTML = ''; return; }
             const part = shown.slice(0, limit).map(itemOf);
-            body.innerHTML = shown.length ? (UI()?.itemsHtml ? UI().itemsHtml(view, part) : part.map(p => `<p>${esc(p.name)}</p>`).join('')) : '<p class="muted">Rien ne correspond : retire un filtre ou change la recherche.</p>';
+            body.innerHTML = shown.length ? (UI()?.itemsHtml ? UI().itemsHtml(view, part) : part.map(p => `<p>${esc(p.name)}</p>`).join('')) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien ne correspond : retire un filtre ou change la recherche.</span></p>';
             const more = page.querySelector('[data-gr-more]'); more.innerHTML = '';
             if (shown.length > limit && UI()?.moreButton) more.appendChild(UI().moreButton({remaining: shown.length - limit, step: 40, onClick: () => { limit += 40; draw(); }}));
             fillThumbs(body);

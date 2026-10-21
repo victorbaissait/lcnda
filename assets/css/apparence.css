@@ -37,7 +37,7 @@
 /* ── Formes des avatars ── */
 .lc-shp-thumb { display: inline-grid; place-items: center; width: 28px; height: 28px; color: var(--blue); }
 .lc-shp-svg { display: block; }
-.lc-shp-editor { width: min(980px, calc(100vw - 24px)); }
+.lc-shp-editor { width: var(--modal-l); max-width: none; }
 .lc-shp-grid { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 18px; }
 .lc-shp-main { display: grid; gap: 12px; min-width: 0; align-content: start; }
 .lc-shp-name input { width: 100%; }

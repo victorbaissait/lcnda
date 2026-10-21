@@ -246,10 +246,10 @@
             },
             onSubmit: async form => {
                 const who = form.querySelector('[name=who]:checked').value, groups = ['birth', 'union', 'death'].filter(g => form.elements['g_' + g].checked);
-                if (!groups.length) { toast('Coche au moins une sorte d’anniversaire.', 'error'); return false; }
+                if (!groups.length) return window.LCNDA_UI.fail(form.elements.g_birth, 'Coche au moins une sorte d’anniversaire.');
                 let ids = null;
                 if (who === 'sosa') { ids = new Set(Object.keys(A().sosaMap?.() || {}).map(Number)); if (!ids.size) { toast('Aucune personne numérotée Sosa : choisis le n°1 dans Maintenance → Apparence.', 'error'); return false; } }
-                if (who === 'branch') { const root = Number(PK.pickerValue?.(form.querySelector('[data-ics-branch] .pk')) || form.querySelector('[name=ics_root]')?.value || 0); if (!root) { toast('Choisis la personne en haut de la branche.', 'error'); return false; }
+                if (who === 'branch') { const root = Number(PK.pickerValue?.(form.querySelector('[data-ics-branch] .pk')) || form.querySelector('[name=ics_root]')?.value || 0); if (!root) return window.LCNDA_UI.fail(form.querySelector('[data-ics-branch] .pk'), 'Choisis la personne en haut de la branche.');
                     const m = await A().api('daboville_map', {root_id: root}); ids = new Set([root, ...Object.keys(m.map || {}).map(Number)]); }
                 const data = await A().api('genea_calendar');
                 const dead = new Set(data.events.filter(e => e.group === 'death').flatMap(e => e.who.map(w => Number(w.id))));
@@ -326,7 +326,7 @@
             onSubmit: async form => {
                 const f = Object.fromEntries(new FormData(form)), k = f.kind, def = KINDS.find(x => x[0] === k);
                 const title = (f.title || '').trim();
-                if (k !== 'archive_visit' && !title) { toast('Donne un titre.', 'error'); return false; }
+                if (k !== 'archive_visit' && !title) return window.LCNDA_UI.fail(form.elements.title, 'Donne un titre.');
                 const body = {
                     fair: {title, date_start: f.start, date_end: f.end, place_text: f.place, hours_text: f.hours},
                     archive_visit: {title, archive_center: (f.archive_center || '').trim(), visit_date: f.start, address: f.place, notes: f.notes},
@@ -335,8 +335,8 @@
                     courrier: {objet: title, destinataire: (f.destinataire || '').trim(), date_envoi: f.start, notes: f.notes},
                     atelier_task: {project_id: Number(f.project), type: 'task', title, data: {due: f.start, done: 0, priority: 'normale'}},
                 }[k];
-                if (k === 'archive_visit' && !body.archive_center) { toast('Indique le centre d’archives.', 'error'); return false; }
-                if (k === 'courrier' && !body.destinataire) { toast('Indique le destinataire.', 'error'); return false; }
+                if (k === 'archive_visit' && !body.archive_center) return window.LCNDA_UI.fail(form.elements.archive_center, 'Indique le centre d’archives.');
+                if (k === 'courrier' && !body.destinataire) return window.LCNDA_UI.fail(form.elements.destinataire, 'Indique le destinataire.');
                 if (k === 'reminder' && !f.start) { toast('Un rappel a besoin d’une date.', 'error'); return false; }
                 if (k === 'atelier_task' && !body.project_id) { toast('Crée d’abord un projet dans l’Atelier.', 'error'); return false; }
                 const r = await A().api(def[3], {}, {method: 'POST', body});
@@ -394,7 +394,7 @@
             const li = r => r.kind === 'anniv'
                 ? `<li style="--c:${colorOf('genea', pg, r.e.group)}"><span class="h-agw-when">${dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-person="${r.e.who[0]?.id || 0}">🎂 ${esc(r.e.type)} — ${esc(r.e.who.map(w => w.name).join(' et '))}</button> <small class="muted">il y a ${r.years} ans (${r.e.y})</small></li>`
                 : `<li class="${r.kind === 'late' ? 'is-late' : ''}" style="--c:${colorOf('agenda', p, r.it.src)}"><span class="h-agw-when">${r.kind === 'late' ? '⏰ en retard' : dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-item="${esc(r.it.src + ':' + r.it.id)}">${esc(r.it.title)}</button>${r.it.sub ? ` <small class="muted">${esc(r.it.sub)}</small>` : ''}${r.it.end ? ` <small class="muted">→ ${esc(r.it.end.split('-').reverse().slice(0, 2).join('/'))}</small>` : ''}</li>`;
-            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">… et ${rows.length - limit} ${rows.length - limit > 1 ? 'autres' : 'autre'}.</p>` : ''}` : `<p class="muted">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : `sur les ${c.days} prochains jours`}.</p>`;
+            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">… et ${rows.length - limit} ${rows.length - limit > 1 ? 'autres' : 'autre'}.</p>` : ''}` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : `sur les ${c.days} prochains jours`}.</span></p>`;
             setTimeout(() => document.querySelectorAll('[data-agw-item]:not([data-b]), [data-agw-person]:not([data-b])').forEach(b => { b.dataset.b = '1'; b.addEventListener('click', () => {
                 if (b.dataset.agwPerson) { S().currentPersonId = Number(b.dataset.agwPerson); return A().setModule('personnes'); }
                 const [src, id] = b.dataset.agwItem.split(':'), it = (data.agenda.items || []).find(x => x.src === src && String(x.id) === id);

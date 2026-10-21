@@ -79,7 +79,7 @@
                 <section><h3>Partager</h3><p class="muted">Un <b>site web</b> s’ouvre d’un double-clic sur n’importe quel ordinateur (ou se met en ligne) ; un <b>fichier LCNDA</b> s’importe dans LCNDA par un proche.</p>
                     <div class="h-me-buttons"><a class="button small secondary" href="api.php?action=museum_export&id=${data.id}&format=site" download>🌐 Site web (.zip)</a><a class="button small secondary" href="api.php?action=museum_export&id=${data.id}&format=lcnda" download>📦 Fichier LCNDA</a><button type="button" class="button small secondary" data-me-print>🗂 Catalogue</button></div></section>
                 <section><h3>Musées</h3><ul class="h-me-museums">${museums.map(m => `<li class="${Number(m.id) === data.id ? 'is-active' : ''}"><button type="button" class="link-button" data-me-museum-open="${m.id}">${esc(m.title)}</button><small>${Number(m.imported) ? 'reçu' + (m.author ? ' de ' + esc(m.author) : '') : 'le mien'} · ${A().plural(m.rooms, 'salle')}</small>${Number(m.imported) ? `<button type="button" class="icon-button danger" data-me-museum-del="${m.id}" title="Supprimer ce musée reçu">🗑</button>` : ''}</li>`).join('')}</ul>
-                    <button type="button" class="button small secondary" data-me-import>Importer un musée reçu…</button></section>
+                    <button type="button" class="button small secondary" data-me-import>⤒ Importer un musée reçu…</button></section>
                 ${data.guestbook.length ? `<section><h3>Livre d’or</h3><ul class="h-me-book">${data.guestbook.map(g => `<li><p>${esc(g.message)}</p><small>${esc(g.name)} · ${esc(g.date)}</small>${readOnly ? '' : `<button type="button" class="icon-button danger" data-me-book-del="${g.id}" title="Supprimer ce message">🗑</button>`}</li>`).join('')}</ul></section>` : ''}
             </aside>
             <section class="h-me-main"><section class="h-me-mplan"><div class="h-me-plan-head"><h3>🗺️ Plan du musée</h3><small class="muted">${readOnly ? 'Vu de dessus : les salles et leurs portes.' : 'Vu de dessus, comme un plan de maison : glisse une salle pour la placer, tire un de ses bords ou un coin pour l’agrandir (⇧ Maj sur un coin : garder les proportions). Deux salles collées par un mur sont reliées par une porte ; clic sur une porte pour la fermer ou la rouvrir. Clic sur une salle pour l’aménager.'}</small></div>
@@ -418,7 +418,7 @@
             body: `<div class="pk"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🔍</span><input type="text" class="pk-input" data-me-q placeholder="${what === 'object' ? 'Nom de l’objet…' : 'Titre, date, nom d’une personne…'}" autocomplete="off" spellcheck="false" aria-label="Chercher"></div></div><div class="mpk-grid size-big h-mu-known" data-me-results role="listbox" aria-multiselectable="true"><p class="muted">Recherche…</p></div><p class="muted">Clique pour choisir (plusieurs possibles). Chaque élément pourra ensuite recevoir son cartel et son audio (✎).</p>`,
             onSubmit: async () => {
                 const chosen = [...d.querySelectorAll('[data-me-pick].is-chosen')];
-                if (!chosen.length) { toast('Choisis au moins un élément.', 'error'); return false; }
+                if (!chosen.length) return window.LCNDA_UI.fail(d.querySelector('[data-me-pick]')?.parentElement, 'Choisis au moins un élément.');
                 for (const el of chosen) {
                     const r = JSON.parse(el.dataset.mePick);
                     const cartel = what === 'object' ? [r.kind].filter(Boolean).join('\n') : [r.date_text, r.person_name, r.document_reference].filter(Boolean).join('\n');
@@ -465,7 +465,7 @@
                 if (isDecor) settings.model = f.model.value;
                 const kind = isDecor ? (SEATS.includes(f.model.value) ? 'seat' : 'decor') : f.kind.value;
                 const file = f.image?.files?.[0];
-                if (it._upload && !file && isNew) { toast('Choisis une image.', 'error'); return false; }
+                if (it._upload && !file && isNew) return window.LCNDA_UI.fail(f.image, 'Choisis une image.');
                 const saved = await post('save_museum_item', {...itemPayload(it), id: it.id, room_id: room.id, kind, wall: isDecor ? 'center' : f.wall.value, title: f.title.value, cartel: f.cartel?.value || '', description: f.description.value, in_tour: f.in_tour ? (f.in_tour.checked ? 1 : 0) : 0, settings});
                 it.id = saved.result.id; it.room_id = room.id; // si l'envoi de l'image échoue, un nouvel essai modifie cet élément au lieu d'en créer un autre
                 if (file) { const fd = new FormData(); fd.append('file', file); fd.append('target', 'item_image'); fd.append('id', saved.result.id); await postForm('museum_upload', fd); }

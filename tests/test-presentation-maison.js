@@ -10,7 +10,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *     le compte rendu d'import se ferme par « OK » ;
  *  3. les barres du haut (diaporama, présentation, maison) ne changent pas de hauteur quand « • modifié », « Enregistrement… »
  *     ou un message apparaissent (le plan de la maison ne saute plus sous la souris : une porte se pose là où l'on clique) ;
- *  4. maison : le toit se voit aussi quand l'étage du dessus est encore vide ; date des réglages enregistrés en jj/mm/aaaa ;
+ *  4. maison : le toit se voit aussi quand l'étage du dessus est encore vide ; date des réglages enregistrés au format commun K4 (« aujourd’hui », « 17 oct. 2026 ») ;
  *  5. transcription : le message du lecteur d'écriture (HTR) absent ne répète pas deux fois où l'installer.
  */
 const assert = require('node:assert/strict');
@@ -122,7 +122,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         await p.fill(`${D} [data-hs-name]`, 'Maison du test'); await p.click(`${D} [data-hs-cmd=save]`);
         for (let i = 0; i < 40; i++) { await p.waitForTimeout(150); if ((await p.$eval(`${D} [data-ui-status]`, e => e.innerText)).includes('✓')) break; }
         out.door = await p.evaluate(async () => { const l = (await window.LCNDA_APP.api('houses')).items; const h = await window.LCNDA_APP.api('house', {id: l.find(x => x.name === 'Maison du test').id}); return h.house.floors[0].openings.map(o => o.type); });
-        // 🧲 réglages enregistrés : la date en jj/mm/aaaa
+        // 🧲 réglages enregistrés : la date au format commun (K4)
         await p.click(`${D} summary:has-text("Aimants")`); await p.waitForTimeout(200);
         if (!await p.$(`${D} [data-hs-snapbox] [data-ps-new]`)) await p.click(`${D} [data-hs-snapbox] [data-ps-toggle]`);
         await p.click(`${D} [data-hs-snapbox] [data-ps-new]`); await p.fill(`${D} [data-hs-snapbox] [data-ps-name]`, 'Précis'); await p.keyboard.press('Enter'); await p.waitForTimeout(300);
@@ -165,7 +165,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
             assert.equal(new Set(out.ssBar).size, 1, `diaporama ${out.ssBar}`); assert.equal(new Set(out.knBar).size, 1, `présentation ${out.knBar}`); assert.equal(new Set(out.hsBar).size, 1, `maison ${out.hsBar}`);
         }],
         ['maison : la porte se pose sur le mur cliqué juste après avoir dessiné la pièce', () => assert.deepEqual(out.door, ['door'])],
-        ['maison : date des réglages enregistrés en jj/mm/aaaa', () => assert.match(out.presetDate, /\d{2}\/\d{2}\/\d{4}/)],
+        ['maison : date des réglages enregistrés au format commun (K4)', () => assert.match(out.presetDate, /aujourd’hui|hier|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|\d{1,2} \S+ \d{4}/)],
         ['maison : le toit se voit même si l’étage du dessus est encore vide', () => { assert.ok(out.roof.with > .02, JSON.stringify(out.roof)); assert.ok(out.roof.with > out.roof.without * 5 + .01, JSON.stringify(out.roof)); }],
         ['transcription : « Maintenance → … » une seule fois dans le message du lecteur d’écriture', () => { assert.ok(out.htrToast, 'pas de message'); assert.equal((out.htrToast.match(/Maintenance/g) || []).length, 1, out.htrToast); }],
         ['aucune erreur JS', () => assert.deepEqual(errs, [])],
