@@ -190,7 +190,15 @@
                 const nextMen = mentions.find(x => x.at > m.index); if (tag !== 'MARR' && nextMen && nextMen.at - (m.index + m[0].length) < cut) after = after.slice(0, nextMen.at - (m.index + m[0].length)); else after = after.slice(0, cut);
                 let dt = readDate(after), lead = false;
                 if (!dt) { const h = readDate(low.slice(ps0, m.index)); if (h && h.at <= 2 && /^\W*$/.test(low.slice(ps0 + h.at + h.len, m.index))) { dt = h; lead = true; } }
-                if (!dt) continue;
+                if (!dt) { // pas de date, mais un lieu juste après (« Antoine BORIE naquit à Tulle ») : comparé aux lieux de la ou des fiches
+                    const rawA = raw.slice(m.index + m[0].length, Math.min(pe0, m.index + m[0].length + 60)), place = /^\s*à\s+\p{Lu}/u.test(rawA) ? placeIn(rawA) : '';
+                    if (!place) continue;
+                    const evs = subj.ps.map(p => p.ev.filter(e => e[0] === tag && e[3]));
+                    if (evs.some(x => !x.length) || evs.some(x => x.some(e => samePlace(place, e[3])))) continue; // une fiche sans ce lieu, ou un lieu qui va : rien à dire
+                    const key = `${b.id}|${tag}|${subj.at}|pl`; if (seen.has(key)) continue; seen.add(key);
+                    out.push({lvl: 'warn', page: b.page, id: b.id, person: subj.ps[0].id, text: `🔎 ${subj.name.replace(/\s+/g, ' ')} : le texte place ${the(tag)} à « ${place} », la fiche dit ${fmt(evs[0][0])}${subj.ps.length > 1 ? ` (${subj.ps.length} fiches portent ce nom)` : ''}.`});
+                    continue;
+                }
                 const rawAfter = raw.slice(m.index + m[0].length, Math.min(pe0, m.index + m[0].length + 90)), dash = (rawAfter.match(/^\s*[—–]\s*(\p{Lu}[^,(\n—]*)/u) || [])[1]?.trim();
                 const place = lead ? (dash || placeIn(rawAfter)) : (placeIn(rawAfter.slice(dt.at + dt.len)) || placeIn(rawAfter.slice(0, dt.at)) || dash || '');
                 // 3. comparer avec la ou les fiches qui portent ce nom

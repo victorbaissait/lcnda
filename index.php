@@ -1117,7 +1117,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=1" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=2" defer></script>
 <script src="assets/js/heritage-links.js?v=13" defer></script>
-<script src="assets/js/heritage-more.js?v=162" defer></script>
+<script src="assets/js/heritage-more.js?v=163" defer></script>
 <script src="assets/js/heritage-records.js?v=5" defer></script>
 <script src="assets/js/heritage-research.js?v=27" defer></script>
 <script src="assets/js/heritage-av.js?v=12" defer></script>
@@ -1158,11 +1158,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagrams-render.js?v=5" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=12" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=2" defer></script>
-<script src="assets/js/heritage-vector.js?v=23" defer></script>
-<script src="assets/js/heritage-vector-map.js?v=12" defer></script>
-<script src="assets/js/heritage-vector-tree.js?v=8" defer></script>
+<script src="assets/js/heritage-vector.js?v=24" defer></script>
+<script src="assets/js/heritage-vector-map.js?v=13" defer></script>
+<script src="assets/js/heritage-vector-tree.js?v=9" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=7" defer></script>
-<script src="assets/js/heritage-vector-seal.js?v=6" defer></script>
+<script src="assets/js/heritage-vector-seal.js?v=7" defer></script>
 <script src="assets/js/heritage-research-gaps.js?v=1" defer></script>
 <script src="assets/js/heritage-faces.js?v=6" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=3" defer></script>

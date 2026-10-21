@@ -782,8 +782,10 @@
         $('[data-ly-resize]').addEventListener('dblclick', () => { main.style.gridTemplateColumns = ''; try { localStorage.removeItem(PW_KEY); } catch (_) {} });
         function menu(label, items) { return `<details class="ly-menu" data-tb="menu-${esc(label)}" data-tb-label="Menu ${esc(label)}"><summary>${label}</summary><div class="ly-menu-list">${items.map(([k, l, sc]) => k === '-' ? '<hr>' : `<button type="button" data-ly-cmd="${k}"><span>${l}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`; }
         const msg = t => { $('[data-ly-msg]').textContent = t || ''; };
+        // « quitter la page ? » seulement s'il reste des changements pas enregistrés (pas après un zoom ou un document enregistré)
+        ['input', 'change'].forEach(t => dl.addEventListener(t, () => queueMicrotask(() => { dl.dataset.dirty = dirty ? '1' : ''; })));
         const status = st => { const el = $('[data-ly-state]'); if (!el) return; if (window.LCNDA_UI?.savedStatus) window.LCNDA_UI.savedStatus(el, st); else el.textContent = {saved: '✓ Enregistré', dirty: '• modifié', saving: 'Enregistrement…', error: '⚠️ Pas enregistré'}[st] || st; };
-        const setDirty = (v = true) => { dirty = v; status(dirty || !docId ? 'dirty' : 'saved'); $('[data-ly-kind]').textContent = design ? '🎨 design' : ''; };
+        const setDirty = (v = true) => { dirty = v; dl.dataset.dirty = dirty ? '1' : ''; status(dirty || !docId ? 'dirty' : 'saved'); $('[data-ly-kind]').textContent = design ? '🎨 design' : ''; };
         /* Historique : chaque modification est une étape nommée ; ↶ ↷ (⌘Z, ⇧⌘Z) ou un clic sur une étape y revient */
         const snapshot = () => JSON.stringify({D, cur});
         let timeline = [{snap: snapshot(), label: 'Ouverture du document', at: new Date()}], pos = 0;
@@ -871,10 +873,10 @@
             t.addEventListener('paste', e => { e.preventDefault(); const txt = e.clipboardData.getData('text/plain'); document.execCommand('insertText', false, txt); });
             t.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); stopEditing(); } });
         }
-        function stopEditing() {
+        function stopEditing(label = 'Texte modifié') {
             if (!editingId) return; const f = findItem(editingId), t = board.querySelector(`.ly-item[data-id="${CSS.escape(editingId)}"] .ly-txt`);
             if (f && t) f.it.html = sanitizeHtml(readEditing(t)) || '<p data-ps="ps-body"><br></p>';
-            editingId = null; savedRange = null; commit('Texte modifié'); render();
+            editingId = null; savedRange = null; commit(label); render();
         }
         document.addEventListener('selectionchange', () => { if (!editingId || !dl.isConnected) return; const s = getSelection(); if (!s.rangeCount) return; const r = s.getRangeAt(0), t = board.querySelector('.ly-txt[contenteditable="true"]'); if (t && t.contains(r.commonAncestorContainer)) savedRange = r.cloneRange(); });
         const editEl = () => board.querySelector('.ly-txt[contenteditable="true"]');
@@ -1057,7 +1059,7 @@
 
         /* — commandes — */
         function arrange(kind) { const list = curList(), its = selected(); if (!its.length) return; its.forEach(it => { const i = list.indexOf(it); list.splice(i, 1); const n = list.length; const j = kind === 'front' ? n : kind === 'bottom' ? 0 : kind === 'fwd' ? Math.min(n, i + 1) : Math.max(0, i - 1); list.splice(j, 0, it); }); commit(); render(); }
-        function del() { if (!sel.length) return; const list = curList(); sel.forEach(i => { const k = list.findIndex(x => x.id === i); if (k >= 0 && !locked(list[k])) list.splice(k, 1); }); sel = []; commit(); render(); }
+        function del() { if (!sel.length) return; const list = curList(); let n = 0; sel.forEach(i => { const k = list.findIndex(x => x.id === i); if (k >= 0 && !locked(list[k])) { list.splice(k, 1); n++; } }); if (!n) return msg('Objet verrouillé : déverrouille-le d’abord (Objet → 🔒 Verrouiller / déverrouiller).'); const what = n > 1 ? `${n} objets supprimés` : 'Objet supprimé'; sel = []; commit(what); render(); undoable(what); } // H7 : supprimé sans question, « ↶ Annuler » dans le message
         function copy(cut = false) { if (!sel.length) return; clip = JSON.stringify(selected()); try { navigator.clipboard?.writeText?.('')?.catch?.(() => {}); } catch (_) {} if (cut) del(); msg(`${A().plural(JSON.parse(clip).length, 'objet copié', 'objets copiés')}.`); }
         /** Des copies : un chaînage vers un bloc copié avec elles suit la copie ; vers un bloc qui n'est pas copié, il est coupé */
         const relink = (orig, copies) => { const map = new Map(orig.map((o, k) => [o.id, copies[k].id])); copies.forEach(c => { if (c.next) { if (map.has(c.next)) c.next = map.get(c.next); else delete c.next; } }); return copies; };
@@ -1091,7 +1093,7 @@
                     });
                     const m = D.masters.find(x => x.id === to);
                     if (!k) { msg('Rien à changer : ces pages ont déjà ce gabarit.'); return; }
-                    act = m ? `Gabarit « ${m.name} » sur ${k} page${k > 1 ? 's' : ''}` : `Gabarit enlevé de ${k} page${k > 1 ? 's' : ''}`; commit(); render(); msg(act + '.');
+                    const what = m ? `Gabarit « ${m.name} » sur ${k} page${k > 1 ? 's' : ''}` : `Gabarit enlevé de ${k} page${k > 1 ? 's' : ''}`; commit(what); render(); msg(what + '.'); // (commit vide « act » : le message garde son texte)
                 }});
         }
         async function gotoDialog() { const v = await ask(`Aller à la page (1 à ${D.pages.length}) :`, String(cur + 1)); if (v) goPage(Number(v) - 1); }
@@ -1376,6 +1378,7 @@
             const t = editEl(); if (!t) return;
             const r = restoreRange() || (() => { const rr = document.createRange(); rr.selectNodeContents(t.lastElementChild || t); rr.collapse(false); return rr; })();
             r.collapse(false);
+            if (r.startContainer === t) { const prev = t.childNodes[r.startOffset - 1], next = t.childNodes[r.startOffset], blk = prev?.nodeType === 1 ? prev : next?.nodeType === 1 ? next : null; if (blk && /^(P|H\d|LI|UL|OL|DIV|BLOCKQUOTE)$/.test(blk.tagName)) { const inner = blk.matches('ul,ol') ? (blk === prev ? blk.lastElementChild : blk.firstElementChild) || blk : blk; r.selectNodeContents(inner); r.collapse(blk !== prev); } } // le curseur entre deux paragraphes : l'appel va à la fin du paragraphe d'avant (pas tout seul sur une ligne)
             const k = nid('n'); D.notes = D.notes || {}; D.notes[k] = {text: String(text).slice(0, 3000), ...extra};
             const sup = document.createElement('sup'); sup.setAttribute('data-fn', k); sup.textContent = String((board.querySelectorAll('sup[data-fn]').length || 0) + 1);
             r.insertNode(sup); const after = document.createRange(); after.setStartAfter(sup); after.collapse(true); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(after); savedRange = after;
@@ -1470,7 +1473,7 @@
             if (suggest) c.suggest = {from: quote, to: v.slice(0, 2000)};
             if (range && editEl()) { wrapRange(editEl(), range, c.id); const f = findItem(editingId); if (f) f.it.html = readEditing(editEl()); }
             comments().push(c); focusCm = c.id; panel = 'review';
-            if (editingId) stopEditing(); else { commit(suggest ? 'Suggestion ajoutée' : 'Commentaire ajouté'); render(); }
+            if (editingId) stopEditing(suggest ? 'Suggestion ajoutée' : 'Commentaire ajouté'); else { commit(suggest ? 'Suggestion ajoutée' : 'Commentaire ajouté'); render(); } // l'historique dit ce qu'on a fait (pas « Texte modifié »)
             msg(suggest ? '✎ Suggestion notée : elle s’accepte ou se refuse dans Relecture.' : '💬 Commentaire ajouté.');
         }
         function applySuggestion(c, accept) {
@@ -1616,9 +1619,10 @@
                     if (it.type === 'frame') {
                         if (!it.src) { add('warn', i, it.id, 'Cadre d’image vide.'); continue; }
                         if (it.mediaId && linkState[it.id] === 'missing') add('err', i, it.id, 'Photo liée introuvable dans l’app.');
+                        const vector = it.tree || it.qr || it.diagramId || /^data:image\/svg\+xml|\.svg(\?|$)/i.test(it.src); // un dessin (arbre, QR code, diagramme, SVG) reste net à toutes les tailles : pas de points par pouce
                         const n = await natural(it.src);
                         if (!n) add('err', i, it.id, 'Image illisible.');
-                        else { const ar = n[0] / n[1], s = (it.imgS || 100) / 100, fit = it.fit || 'fill', wmm = (fit === 'fit' ? Math.min(it.w, it.h * ar) : fit === 'stretch' ? it.w : Math.max(it.w, it.h * ar)) * s, ppi = Math.round(n[0] / (wmm / 25.4));
+                        else if (!vector) { const ar = n[0] / n[1], s = (it.imgS || 100) / 100, fit = it.fit || 'fill', wmm = (fit === 'fit' ? Math.min(it.w, it.h * ar) : fit === 'stretch' ? it.w : Math.max(it.w, it.h * ar)) * s, ppi = Math.round(n[0] / (wmm / 25.4));
                             if (ppi < 150) add(ppi < 96 ? 'err' : 'warn', i, it.id, `Image trop petite pour l’impression : ${ppi} points par pouce à cette taille (il en faut 300 pour une belle impression, 150 au minimum).`); }
                     }
                     if (it.type !== 'text' && B > 0) { // touche le bord sans aller jusqu'au fond perdu
@@ -1641,7 +1645,7 @@
             ext.openDialog({eyebrow: 'CONTRÔLE AVANT IMPRESSION', title: issues.some(x => x.lvl === 'err') ? `${A().plural(n('err'), 'problème')} à corriger` : 'Prêt pour l’impression' + (n('warn') ? ` (${A().plural(n('warn'), 'avertissement')})` : ' ✓'), wide: true,
                 body: `<p class="muted">${A().plural(n('err'), 'erreur')} · ${A().plural(n('warn'), 'avertissement')} · ${A().plural(n('info'), 'remarque')}. Clique sur « Aller » pour voir l’objet. Pour l’imprimeur : Fichier → « PDF avec fond perdu et traits de coupe ».</p>
                     <ol class="ly-preflight">${issues.sort((a, b) => ['err', 'warn', 'info'].indexOf(a.lvl) - ['err', 'warn', 'info'].indexOf(b.lvl) || a.page - b.page).map(x => `<li class="is-${x.lvl}">${ico[x.lvl]} ${x.page >= 0 ? `<b>Page ${x.page + st0}</b> — ` : ''}${esc(x.text)}${x.page >= 0 ? ` <button type="button" class="link-button" data-pfgo="${x.page}:${esc(x.id)}">Aller</button>` : ''}</li>`).join('') || '<li>✅ Rien à signaler.</li>'}</ol>`,
-                onOpen: dg => dg.addEventListener('click', e => { const b = e.target.closest('[data-pfgo]'); if (!b) return; const [pi, idv] = b.dataset.pfgo.split(':'); dg.close(); goPage(Number(pi)); if (idv) { sel = [idv]; drawSel(); panel = 'obj'; renderPanel(); } })});
+                onOpen: dg => { const x = dg.querySelector('.modal-actions [data-h-close]'); if (x) x.textContent = 'Fermer'; /* rien à annuler : la fenêtre ne fait que montrer */ dg.addEventListener('click', e => { const b = e.target.closest('[data-pfgo]'); if (!b) return; const [pi, idv] = b.dataset.pfgo.split(':'); dg.close(); goPage(Number(pi)); if (idv) { sel = [idv]; drawSel(); panel = 'obj'; renderPanel(); } }); }});
         }
         const CMD_LABELS = {cut: 'Couper', paste: 'Coller', dup: 'Dupliquer', del: 'Supprimer', front: 'Premier plan', fwd: 'Avancer', back: 'Reculer', bottom: 'Arrière-plan', lock: 'Verrouiller / déverrouiller', hide: 'Masquer', showall: 'Tout afficher', fitframe: 'Ajuster le cadre', place: 'Placer une image', addend: 'Page ajoutée à la fin', insert: 'Pages insérées', duppage: 'Page dupliquée', delpage: 'Page supprimée'};
         async function exec(cmd) {
@@ -1670,7 +1674,9 @@
             const pt = e.target.closest('[data-ly-panel]'); if (pt) { panel = pt.dataset.lyPanel; dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b === pt)); renderPanel(); return; }
             if (e.target.closest('[data-ly-fsswap]')) { swapPaint(); return; }
             if (e.target.closest('[data-ly-fsnone]')) { if (!selected().length) return msg('Choisis un objet.'); applyPaint('none'); return; }
-            const tg0 = e.target.closest('.ly-fs [data-ly-target]'); if (tg0) { const it = one(), pk = dl.querySelector('[data-ly-fspick]'), c0 = it ? colorOf(D, tg0.dataset.lyTarget === 'fill' ? it.fill : it.stroke?.c, '') : ''; pk.value = hexOk(c0) ? c0 : (tg0.dataset.lyTarget === 'fill' ? '#ffffff' : '#111111'); pk.dataset.for = tg0.dataset.lyTarget; if (selected().length) setTimeout(() => { try { pk.showPicker ? pk.showPicker() : pk.click(); } catch { pk.click(); } }, 0); }
+            const tg0 = e.target.closest('.ly-fs [data-ly-target]'); if (tg0) { const it = one(), pk = dl.querySelector('[data-ly-fspick]'), c0 = it ? colorOf(D, tg0.dataset.lyTarget === 'fill' ? it.fill : it.stroke?.c, '') : ''; pk.value = hexOk(c0) ? c0 : (tg0.dataset.lyTarget === 'fill' ? '#ffffff' : '#111111'); pk.dataset.for = tg0.dataset.lyTarget; if (selected().length) { const UI = window.LCNDA_UI, tgt = tg0.dataset.lyTarget; // C2 : la fenêtre des couleurs de l'app (jamais celle du système)
+                if (UI?.openColorBox) setTimeout(() => UI.openColorBox(tg0, {get: () => pk.value, allowNone: true, set: (v, final) => { if (!final) return; const keep = fillTarget; fillTarget = tgt; applyPaint(v ? v.slice(0, 7) : 'none'); fillTarget = keep; syncChrome(); }}), 0);
+                else setTimeout(() => { try { pk.showPicker ? pk.showPicker() : pk.click(); } catch { pk.click(); } }, 0); } }
             const tg = e.target.closest('[data-ly-target]'); if (tg) { fillTarget = tg.dataset.lyTarget; panel = 'color'; dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b.dataset.lyPanel === 'color')); syncChrome(); renderPanel(); }
             if (!e.target.closest('details.ly-menu')) dl.querySelectorAll('details.ly-menu[open]').forEach(d => d.removeAttribute('open'));
         });
@@ -1686,15 +1692,15 @@
             if (mod && k === 's') { e.preventDefault(); save(); return; }
             if (inField) { if (editingId && mod && k === 'z') return; return; }
             if (pen && e.key === 'Enter') { e.preventDefault(); finishPen(false); return; }
-            if (pen && e.key === 'Escape') { pen = null; pageEl()?.querySelector('.ly-penline')?.remove(); return; }
+            if (pen && e.key === 'Escape') { e.preventDefault(); pen = null; pageEl()?.querySelector('.ly-penline')?.remove(); return; }
             if (mod && k === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; } if (mod && k === 'y') { e.preventDefault(); redo(); return; }
             if (mod && k === 'v' && !clip) return; // rien de copié ici : on laisse coller une image de l'ordinateur (E4)
             if (mod && ['c', 'x', 'v', 'd', 'a', 'j', '0', '1', '=', '+', '-', ']', '['].includes(k)) {
                 e.preventDefault(); ({c: () => copy(), x: () => copy(true), v: () => paste(e.shiftKey || e.altKey), d: dup, a: () => exec('all'), j: gotoDialog, 0: zoomFit, 1: () => setZoom(1), '=': () => setZoom(zoom * 1.25), '+': () => setZoom(zoom * 1.25), '-': () => setZoom(zoom / 1.25), ']': () => arrange(e.shiftKey ? 'front' : 'fwd'), '[': () => arrange(e.shiftKey ? 'bottom' : 'back')})[k]?.(); return;
             }
             if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); del(); return; }
-            if (e.key === 'Escape' && linkFrom) { linkFrom = null; canvas.classList.remove('is-linking'); render(); msg('Chaînage annulé.'); return; }
-            if (e.key === 'Escape') { sel = []; drawSel(); renderPanel(); return; }
+            if (e.key === 'Escape' && linkFrom) { e.preventDefault(); linkFrom = null; canvas.classList.remove('is-linking'); render(); msg('Chaînage annulé.'); return; }
+            if (e.key === 'Escape' && sel.length) { e.preventDefault(); sel = []; drawSel(); renderPanel(); return; } // Échap désélectionne d'abord (la fenêtre ne se ferme qu'au suivant)
             if (e.key === 'PageDown') { e.preventDefault(); goPage(cur + 1); return; } if (e.key === 'PageUp') { e.preventDefault(); goPage(cur - 1); return; }
             if (e.key.startsWith('Arrow') && sel.length) { e.preventDefault(); const d = e.shiftKey ? 5 : 1, dx = e.key === 'ArrowLeft' ? -d : e.key === 'ArrowRight' ? d : 0, dy = e.key === 'ArrowUp' ? -d : e.key === 'ArrowDown' ? d : 0; selected().filter(x => !locked(x)).forEach(x => { x.x = r1(x.x + dx); x.y = r1(x.y + dy); }); commit('Déplacement au clavier'); render(); return; }
             if (k === 'w') { preview = !preview; render(); return; }
@@ -1758,7 +1764,7 @@
 
         /* — panneaux de droite — */
         const pid = () => 'p' + Math.random().toString(36).slice(2, 7);
-        const num = (k, label, v, {min = -9999, max = 9999, step = 0.1, unit = 'mm', attr = 'data-ly-set'} = {}) => `<label class="ly-f"><span>${label}</span><input type="number" ${attr}="${k}" value="${r1(v)}" min="${min}" max="${max}" step="${step}"><em>${unit}</em></label>`;
+        const num = (k, label, v, {min = -9999, max = 9999, step = 0.1, unit = 'mm', attr = 'data-ly-set'} = {}) => `<label class="ly-f"><span>${label}</span><input type="number" ${attr}="${k}" value="${v === '' ? '' : r1(v)}" min="${min}" max="${max}" step="${step}"><em>${unit}</em></label>`;
         const sel2 = (k, label, opts, v, attr = 'data-ly-set') => `<label class="ly-f"><span>${label}</span><select ${attr}="${k}">${opts.map(([a, b]) => `<option value="${esc(a)}" ${String(a) === String(v) ? 'selected' : ''}>${esc(b)}</option>`).join('')}</select></label>`;
         const paintSel = (k, label, v) => `<label class="ly-f"><span>${label}</span><select data-ly-set="${k}"><option value="none" ${v === 'none' ? 'selected' : ''}>Aucun</option>${D.swatches.map(s => `<option value="${esc(s.id)}" ${s.id === v ? 'selected' : ''}>${s.type === 'grad' ? '▤ ' : '■ '}${esc(s.name)}</option>`).join('')}${hexOk(v) ? `<option value="${v}" selected>${v}</option>` : ''}</select><i class="ly-chip" style="background:${cssPaint(D, v)}"></i></label>`;
         // E2 : sections repliables communes, ouvertes ou fermées comme la dernière fois (le titre est écrit tel quel, sans code)
@@ -1909,7 +1915,9 @@
             if (e.target.matches('[data-ly-pmaster]')) { const v = e.target.value, m = D.masters.find(x => x.id === v); D.pages[cur].master = m ? m.id : ''; act = m ? `Gabarit « ${m.name} » sur la page ${cur + 1}` : `Gabarit enlevé de la page ${cur + 1}`; commit(); render(); return; }
             const el = e.target; act = labelOfField(el) ? `${labelOfField(el)} changé` : '';
             if (el.matches('[data-ly-set]')) {
-                const k = el.dataset.lySet, v = el.type === 'checkbox' ? el.checked : el.type === 'number' ? Number(el.value) : el.value;
+                const k = el.dataset.lySet; let v = el.type === 'checkbox' ? el.checked : el.type === 'number' ? Number(el.value) : el.value;
+                if (el.type === 'number' && (el.value.trim() === '' || !Number.isFinite(v))) { renderPanel(); return; } // case vidée : on garde la valeur d'avant (pas 0)
+                if (el.type === 'number') v = clamp(v, el.min === '' ? -1e5 : Number(el.min), el.max === '' ? 1e5 : Number(el.max)); // pas de taille négative, d'opacité à 500 %…
                 const its = selected().filter(x => !locked(x)); if (!its.length) return;
                 its.forEach(it => {
                     if (k === 'shadow.on' && v && !it.shadow) it.shadow = {on: true, x: 1.5, y: 1.5, blur: 2, c: '#000000', o: 50};
@@ -1923,6 +1931,8 @@
             }
             if (el.matches('[data-ly-doc]')) {
                 const k = el.dataset.lyDoc, v = el.type === 'checkbox' ? el.checked : el.type === 'number' ? Number(el.value) : el.value;
+                if (el.type === 'number' && (el.value.trim() === '' || !Number.isFinite(v))) { renderPanel(); return; }
+                if (k === 'w' || k === 'h') { D.page[k] = clamp(v, 30, 1500); commit(); render(); return; } // une page de 0 mm casserait tout l'atelier
                 if (k === 'size') { const s0 = allSizes().find(x => x[0] === v); if (s0) { D.page.w = s0[2]; D.page.h = s0[3]; } }
                 else if (k === 'title') D.title = String(v).slice(0, 200);
                 else if (k.startsWith('m.')) D.page.margin[k.slice(2)] = clamp(v, 0, 300);
@@ -2075,7 +2085,7 @@
             const at = list.indexOf(back); its.forEach(p => list.splice(list.indexOf(p), 1)); list.splice(Math.min(at, list.length), 0, it); sel = [it.id]; commit(); render();
         }
         function editStyle(kind, sid) {
-            const list = kind === 'para' ? D.paraStyles : D.charStyles, s0 = list.find(x => x.id === sid) || {id: nid(kind === 'para' ? 'ps-' : 'cs-'), name: kind === 'para' ? 'Nouveau style' : 'Nouveau style de caractère'};
+            const list = kind === 'para' ? D.paraStyles : D.charStyles, s0 = list.find(x => x.id === sid) || {id: nid(kind === 'para' ? 'ps-' : 'cs-'), name: kind === 'para' ? 'Nouveau style' : 'Nouveau style de caractère', ...(kind === 'para' ? {font: D.paraStyles.find(x => x.id === 'ps-body')?.font, size: D.paraStyles.find(x => x.id === 'ps-body')?.size} : {})}; // un nouveau style de paragraphe part du texte courant (police et corps), pas de la police du système
             const fonts = fontList();
             ext.openDialog({eyebrow: kind === 'para' ? 'STYLE DE PARAGRAPHE' : 'STYLE DE CARACTÈRE', title: s0.name, wide: true, submitLabel: 'Enregistrer le style', onOpen: bindFontPick, onDelete: sid && !STYLE_IDS.includes(sid) ? () => { const i = list.indexOf(s0); if (i >= 0) list.splice(i, 1); commit(); render(); } : undefined,
                 body: `<div class="form-grid"><label>Nom <input name="name" value="${esc(s0.name)}" maxlength="60"></label><label>Police ${fontPickHtml('name="font"', s0.font || '')}</label>
@@ -2500,7 +2510,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     /** Fichier HTML autonome : les photos de la base sont intégrées */
     async function inlineImages(html) {
         const srcs = [...new Set([...html.matchAll(/href="(media\/[^"]+)"/g)].map(m => m[1]))], map = {};
-        await Promise.all(srcs.map(async s0 => { try { const b = await (await fetch(s0.replace(/&amp;/g, '&'))).blob(); map[s0] = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); }); } catch (_) {} }));
+        await Promise.all(srcs.map(async s0 => { try { const r = await fetch(s0.replace(/&amp;/g, '&')); if (!r.ok) return; const b = await r.blob(); if (!/^image\//.test(b.type)) return; map[s0] = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); }); } catch (_) {} }));
         return html.replace(/<base [^>]*>/, '').replace(/href="(media\/[^"]+)"/g, (m0, s0) => map[s0] ? `href="${map[s0]}"` : m0);
     }
 
