@@ -298,7 +298,7 @@
             ext.rtExportImage?.({title, mediaId: layers.find(l => l.media?.id)?.media.id || 0, copyTitle: title, png: !$('[data-as-bg]').checked, render: async () => renderCanvas('image/png')}); });
         $('[data-as-save]').addEventListener('click', async () => {
             const base = layers.find(l => l.media?.id);
-            if (!base) return toast('Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⬇ Télécharger).', 'error');
+            if (!base) return toast('Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger).', 'error');
             const msg = $('[data-as-msg]'), btn = $('[data-as-save]'); btn.disabled = true; msg.textContent = 'Création de l’image…'; UI?.savedStatus?.(statusEl, 'saving');
             try {
                 const r = await render();

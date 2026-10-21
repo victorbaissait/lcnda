@@ -42,7 +42,7 @@
         {key: 'politic', icon: '🏛', label: 'Parcours politiques', intro: 'Mandats et fonctions, élections, partis et groupes, textes et votes, discours.', cols: [['Fonction', ['fn', 'scrutin']], ['Institution', ['institution', 'constituency']], ['Parti', ['group', 'party', 'label']], ['Résultat', ['result', 'pct']]], kinds: ['pol_mandate', 'pol_election', 'pol_party', 'pol_text', 'pol_speech', 'pol_affair'], what: 'Mandats, élections…'},
         {key: 'sport', icon: '🏅', label: 'Sport', intro: 'Clubs et équipes, résultats, records, saisons.', cols: [['Sport', ['sport']], ['Épreuve', ['event', 'edition']], ['Classement', ['rank', 'position']], ['Performance', ['perf', 'medal']]], kinds: ['sp_club', 'sp_result', 'sp_record', 'sp_season'], what: 'Clubs, résultats, records…'},
         {key: 'school', icon: '🎓', label: 'Formation et diplômes', intro: 'Écoles, études et apprentissages, diplômes, établissements.', cols: [['Établissement', ['school']], ['Niveau, mention', ['level', 'mention', 'specialty']], ['Lieu', ['_place']]], kinds: ['school_step', 'diploma', 'school'], blocs: true, what: 'Écoles, diplômes…'},
-        {key: 'mine', icon: '✎', label: 'Mes types d’œuvres', intro: 'Les fiches des types que tu as créés toi-même (« ✎ Créer mon propre type… »).', cols: [['Détails', ['_sub']], ['Lieu', ['_place']]], oe: 'mine'}];
+        {key: 'mine', icon: '✎', label: 'Mes types d’œuvres', intro: 'Les fiches des types que tu as créés toi-même (« ＋ Créer mon propre type… »).', cols: [['Détails', ['_sub']], ['Lieu', ['_place']]], oe: 'mine'}];
     const famOf = k => FAM.find(f => f.key === k);
     const listKey = k => `creations_${k}`;
     ext.creations = {FAM, listKey};
@@ -157,7 +157,7 @@
             if (!items.length) {
                 body.innerHTML = filtersOn(st) ? A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer »).'})
                     : A().emptyState({icon: F.icon, text: famKey === 'all' ? 'Aucune création ni carrière pour l’instant' : `Aucune fiche « ${F.label} » pour l’instant`,
-                        hint: famKey === 'mine' ? 'Crée d’abord ton type (« ✎ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches.' : 'Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici.',
+                        hint: famKey === 'mine' ? 'Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches.' : 'Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici.',
                         action: ro ? null : {label: '＋ Nouveau…', attrs: 'data-cr-new'}});
                 more.innerHTML = ''; return;
             }
@@ -217,7 +217,7 @@
     /** « Tout » : d'abord la famille */
     function chooseFamily(pid) {
         const fams = FAM.filter(f => f.key !== 'all');
-        ext.openDialog?.({eyebrow: 'NOUVELLE FICHE', title: 'Quelle sorte de fiche ?', submitLabel: 'Annuler', wide: true,
+        ext.openDialog?.({eyebrow: 'NOUVELLE FICHE', title: 'Quelle sorte de fiche ?', submitLabel: 'Fermer', wide: true,
             body: `<div class="cr-choose">${fams.map(f => `<button type="button" class="cr-fam" data-cr-pick="${esc(f.key)}">${esc(f.icon)} ${esc(f.label)}${f.what ? ` <small>${esc(f.what)}</small>` : ''}</button>`).join('')}</div>`,
             onOpen: dg => dg.addEventListener('click', ev => { const b = ev.target.closest('[data-cr-pick]'); if (!b) return; dg.close(); startIn(famOf(b.dataset.crPick), pid); }),
             onSubmit: () => true});
@@ -239,7 +239,7 @@
         if (!kinds.length) { toast('Cette sorte de fiche n’est pas disponible.', 'error'); return; }
         const go = kind => (F.blocs && ext.blocs?.open ? ext.blocs.open({kind, pid, add: true}) : art.open(pid, {kind, add: true}));
         if (kinds.length === 1) return go(kinds[0]);
-        ext.openDialog?.({eyebrow: 'NOUVELLE FICHE', title: `${F.icon} ${F.label} : quelle sorte ?`, submitLabel: 'Annuler',
+        ext.openDialog?.({eyebrow: 'NOUVELLE FICHE', title: `${F.icon} ${F.label} : quelle sorte ?`, submitLabel: 'Fermer',
             body: `<div class="cr-choose">${kinds.map(k => { const i = kindInfo(k); return `<button type="button" class="cr-fam" data-cr-kind="${esc(k)}">${esc(i.icon)} ${esc(i.label)}</button>`; }).join('')}</div>`,
             onOpen: dg => dg.addEventListener('click', ev => { const b = ev.target.closest('[data-cr-kind]'); if (!b) return; dg.close(); go(b.dataset.crKind); }),
             onSubmit: () => true});

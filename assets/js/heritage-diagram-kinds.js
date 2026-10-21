@@ -81,7 +81,7 @@
         if (token !== A().state.workspaceToken) return;
         const ws = document.getElementById('workspace');
         ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>📊 Types de diagrammes</h2><p>Ordre, types montrés ou cachés, et groupes à toi.</p></div></header><div class="maintenance-panel">${kindsHelp}${kindsEditorHtml()}<div class="page-actions action-zone"><button type="button" class="button" data-dk-save>Enregistrer</button><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button></div></div>
-            <section class="maintenance-panel h-dk-howto"><h3>📥 Mon propre graphique à partir de données d’ailleurs</h3>${HOWTO}</section></section>`;
+            <section class="maintenance-panel h-dk-howto"><h3>⤒ Mon propre graphique à partir de données d’ailleurs</h3>${HOWTO}</section></section>`;
         bindKindsEditor(ws.querySelector('.page'));
     };
     const HOWTO = `<ol><li><b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries.</li>
@@ -157,7 +157,7 @@
         if (!src.length) { toast('Aucun graphique disponible.', 'error'); return res(null); }
         const g = {}; src.forEach(([k, l, grp]) => { (g[grp] = g[grp] || []).push([k, l]); });
         const groups = catalog(DI().TEMPLATES()).map(([gn, items]) => [gn, items.filter(t => PAIR_KINDS.has(t.kind) && !t.preset)]).filter(([, l]) => l.length);
-        ext.openDialog({eyebrow: 'DIAGRAMME', title: '📊 D’un graphique', submitLabel: 'Créer', body: `<div class="h-dk-form"><p class="muted">Un de tes graphiques (Maintenance → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix.</p>
+        ext.openDialog({eyebrow: 'DIAGRAMME', title: '📊 D’un graphique', submitLabel: 'Créer le diagramme', body: `<div class="h-dk-form"><p class="muted">Un de tes graphiques (Maintenance → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix.</p>
             <label>Graphique<select name="src">${Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
             <label>Dessin<select name="tpl">${groups.map(([gn, items]) => `<optgroup label="${esc(gn)}">${items.map(t => `<option value="${esc(tplId(t))}">${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</optgroup>`).join('')}</select></label>
             <label class="checkbox-line"><input type="checkbox" name="live" checked> Chiffres tenus à jour (relus dans l’arbre à chaque affichage)</label>

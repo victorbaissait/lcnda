@@ -74,7 +74,7 @@
         const counts = d.counts || {};
         ws.innerHTML = `<section class="page h-gaps"><header class="page-header"><div><span class="eyebrow">RECHERCHE · QUE MANQUE-T-IL ?</span><h2>Les actes à chercher${d.root_name ? ` pour la lignée de ${esc(d.root_name)}` : ''}</h2>
                 <p class="muted">${fmt(d.total)} recherche${d.total > 1 ? 's' : ''} pour ${fmt(d.ancestors)} ancêtres sur ${d.generations} générations, chez ${fmt((d.archives || []).length)} service${(d.archives || []).length > 1 ? 's' : ''} d’archives. Les plus proches générations d’abord : leurs actes sont les plus faciles à trouver, et chacun ouvre la porte du suivant.</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-gaps-print>🖨️ Imprimer pour aller aux archives</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-gaps-print>🖨 Imprimer pour aller aux archives</button></div></header>
             <div class="h-gaps-bar"><label>Générations<select data-gaps-gen>${[3, 4, 5, 6, 7, 8, 9, 10, 12].map(n => `<option value="${n}" ${n === v.gen ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
                 <label>Ranger par<select data-gaps-group>${[['archives', 'Service d’archives'], ['commune', 'Commune'], ['person', 'Ancêtre'], ['kind', 'Sorte d’acte']].map(([k, l]) => `<option value="${k}" ${k === v.group ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="h-gaps-q">Filtrer<input type="search" data-gaps-q value="${esc(v.q)}" placeholder="Nom, commune, département…"></label>

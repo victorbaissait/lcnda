@@ -1,6 +1,6 @@
 /* LCNDA — 🎨 Catalogues d'artistes : le panneau « ⚙️ Champs affichés » (maquette D) et la création de types.
  * Onglets La fiche / La liste (colonnes) / Les vignettes / L'export ; groupes repliables, ⠿ (glisser) et ↑ ↓, 👁 afficher/masquer,
- * ✎ 🗑 sur ses propres champs, « Remettre un champ enlevé », ↺ Réinitialiser ; réglage pour tous ou propre à l'artiste ;
+ * ✎ 🗑 sur ses propres champs, « Remettre un champ enlevé », ↺ Remettre comme au départ ; réglage pour tous ou propre à l'artiste ;
  * « 💾 Réglages enregistrés » (outil « artistes » : enregistrer sous un nom, ⤓ exporter, ⤒ importer).
  * Un champ masqué garde ce qui y est écrit (il ne s'affiche plus, ni à la lecture ni à l'export).
  */
@@ -50,7 +50,7 @@
                 <div class="ar-pfoot"><label class="ui-toggle"><input type="checkbox" data-p-hide ${store.settings?.hideEmpty === false ? '' : 'checked'}><i></i>Cacher les champs vides à la lecture</label>
                     <label class="ui-toggle"><input type="checkbox" data-p-own ${store.personSet?.own ? 'checked' : ''}><i></i>Réglage propre à ${esc(store.name)} (sinon : pour tous)</label>
                     <div data-presets-slot="artistes"></div>
-                    <div class="ar-pbtns"><button type="button" class="button small secondary" data-p-reset title="Revenir aux champs de départ de cette sorte">↺ Réinitialiser</button></div></div>`;
+                    <div class="ar-pbtns"><button type="button" class="button small secondary" data-p-reset title="Revenir aux champs de départ de cette sorte">↺ Remettre comme au départ</button></div></div>`;
             aside.querySelector('[data-presets-slot]').replaceWith(frame); frame.refresh();
         }
         const plist = () => C.store.presets || [];
@@ -93,7 +93,7 @@
             }
             if (d.pAdd !== undefined) return ART.addFieldDialog(C, st.kind, {after: paint});
             if (d.pAddgrp !== undefined) { const n = await A().askText({title: '＋ Ajouter un groupe', message: 'Le nom du groupe (il apparaît dans la colonne de droite de la fiche, avec ses champs).', value: '', okLabel: 'Ajouter le groupe'}); if (!n?.trim()) return; const K = kcfg(target(s), st.kind); (K.groups = K.groups || []).push({key: `g_${U.slug(n)}_${Date.now().toString(36).slice(-3)}`, label: n.trim().slice(0, 60), zone: 'right', icon: '✎'}); await changed(); return paint(); }
-            if (d.pReset !== undefined) { if (!await A().confirmBox(`Les champs de « ${ART.defs[st.kind].label} » reviennent comme au départ (ordre, affichés, colonnes). Tes propres champs restent.`, {title: '↺ Réinitialiser ?', okLabel: 'Réinitialiser'})) return; const K = kcfg(target(s), st.kind); ART.TABS.forEach(t => { delete K[t]; }); await changed(); return paint(); }
+            if (d.pReset !== undefined) { if (!await A().confirmBox(`Les champs de « ${ART.defs[st.kind].label} » reviennent comme au départ (ordre, affichés, colonnes). Tes propres champs restent.`, {title: '↺ Remettre comme au départ ?', okLabel: 'Remettre comme au départ'})) return; const K = kcfg(target(s), st.kind); ART.TABS.forEach(t => { delete K[t]; }); await changed(); return paint(); }
         };
         // ⠿ glisser une ligne dans son groupe
         let drag = null;
@@ -109,7 +109,7 @@
     ART.addFieldDialog = (C, kind, {after = null} = {}) => {
         const def = ART.defs[kind], s = C.store, groups = ART.layout(s, kind, 'fiche').groups.filter(g => !g.fields.every(f => f.type === 'computed') || g.key === '_mine');
         let type = 'text';
-        ext.openDialog({eyebrow: `${def.icon} ${String(def.label).toUpperCase()}`, title: '＋ Ajouter un champ', submitLabel: '＋ Ajouter le champ',
+        ext.openDialog({eyebrow: `${def.icon} ${String(def.label).toUpperCase()}`, title: '＋ Ajouter un champ', submitLabel: 'Ajouter le champ',
             body: `<div class="ar-addf"><label>Nom du champ<input name="label" maxlength="80" required placeholder="Écouté sur, Acheté par, Souvenir…"></label>
                 <span class="pk-lab">Sorte de champ</span><div class="ar-tys">${ART.CUSTOM_TYPES.map(t => `<button type="button" class="${t === 'text' ? 'on' : ''}" data-ty="${t}">${esc(ART.ft[t]?.tile || ART.ft[t]?.label || t)}</button>`).join('')}</div>
                 <label data-choices hidden>Choix (un par ligne)<textarea name="choices" rows="4" placeholder="Tourne-disque\nRadio\nJuke-box"></textarea></label>
@@ -135,7 +135,7 @@
     const ICONS = ['🎠', '🎭', '🗿', '🏺', '📷', '🎪', '🪆', '🧵', '🪵', '⚒️', '🎻', '🎺', '🏆', '💡', '🔭', '📰', '🗳', '⚽', '🧭', '🎨', '✦'];
     ART.newTypeDialog = (C, {key = ''} = {}) => {
         const types = Object.values(ART.defs).filter(d => d.key !== 'profile'), cur = key ? ART.defs[key] : null;
-        ext.openDialog({eyebrow: 'CATALOGUE', title: cur ? `✎ La sorte « ${cur.label} »` : '✎ Créer une sorte de fiche', submitLabel: cur ? 'Enregistrer' : 'Créer la sorte',
+        ext.openDialog({eyebrow: 'CATALOGUE', title: cur ? `✎ La sorte « ${cur.label} »` : '＋ Créer une sorte de fiche', submitLabel: cur ? 'Enregistrer' : 'Créer la sorte',
             body: `<div class="form-grid"><label>Nom<input name="label" required maxlength="80" value="${esc(cur?.label || '')}" placeholder="Char de carnaval, Sculpture, Affiche…"></label><label>Au pluriel<input name="many" maxlength="80" value="${esc(cur?.many || '')}"></label>
                 <div class="span-2"><span class="pk-lab">Icône</span><div class="ar-icons">${ICONS.map(i => `<label><input type="radio" name="icon" value="${i}" ${(cur?.icon || '✦') === i ? 'checked' : ''}><span>${i}</span></label>`).join('')}</div></div>
                 <label>Famille<select name="domain">${ART.DOMAINS.map(([k, l]) => `<option value="${k}" ${(cur?.domain || 'autre') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>

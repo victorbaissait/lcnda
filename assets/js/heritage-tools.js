@@ -291,7 +291,7 @@
         const rows = data.parishes || [];
         const e = edit ? (edit.id ? rows.find(r => Number(r.id) === Number(edit.id)) : {id: 0, until_year: 1790}) : null;
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Paroisses d’Ancien Régime', 'Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne.')}
-            <div class="collection-toolbar"><input type="search" id="h-parish-q" value="${esc(q)}" placeholder="Chercher un lieu ou une paroisse…"><button type="button" class="button" data-h-parish-new>+ Rattachement</button></div>
+            <div class="collection-toolbar"><input type="search" id="h-parish-q" value="${esc(q)}" placeholder="Chercher un lieu ou une paroisse…"><button type="button" class="button" data-h-parish-new>＋ Rattachement</button></div>
             ${e ? `<form class="maintenance-panel collection-form" id="h-parish-form"><h3>${e.id ? 'Modifier le rattachement' : 'Nouveau rattachement'}</h3><div class="form-grid">
                 <div><span class="pk-lab">Lieu (hameau, village, commune actuelle)</span>${placePicker('place_id', e.place_id, e.place_name || e.place_text)}</div>
                 <div><span class="pk-lab">Dépendait de la paroisse de</span>${placePicker('parish_place_id', e.parish_place_id, e.parish_place_name || '')}</div>
@@ -367,7 +367,7 @@
                 ${m.media_type === 'image' ? `<p><img src="media/${encodeURIComponent(m.filename)}" alt="" class="h-cite-image"></p>` : ''}</div>
             <aside><div class="maintenance-panel"><h4>Noms marqués (${m.marks.length})</h4><ul class="h-cite-marks">${m.marks.map(k => `<li><strong>${esc(k.name)}</strong>${k.role ? ` — ${esc(k.role)}` : ''}${k.occupation ? `, ${esc(k.occupation)}` : ''}${k.person_id ? ` · ${personLink(k.person_id, k.person_name)}` : ''} <button type="button" class="link-button" data-h-cite-del="${k.id}">retirer</button></li>`).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun.</span></li>'}</ul></div>
                 ${m.suggestions.length ? `<div class="maintenance-panel"><h4>Noms repérés par l’app</h4><p class="muted">À vérifier : la détection automatique n’est pas parfaite.</p><ul class="h-cite-marks">${m.suggestions.map((sg, i) => `<li><strong>${esc(sg.name)}</strong>${sg.role ? ` — ${esc(sg.role)}` : ''}${sg.occupation ? `, ${esc(sg.occupation)}` : ''} <button type="button" class="button small secondary" data-h-cite-sugg="${i}">Ajouter…</button></li>`).join('')}</ul></div>` : ''}</aside></div>
-            <button type="button" class="button small h-cite-float" id="h-cite-float" hidden>+ Ajouter ce nom</button></section>`;
+            <button type="button" class="button small h-cite-float" id="h-cite-float" hidden>＋ Ajouter ce nom</button></section>`;
         const ws = A().$('#workspace');
         A().bindTableLinks();
         const back = () => ext.lists.cited_names(++S().workspaceToken, {index: true});

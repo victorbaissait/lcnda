@@ -151,7 +151,7 @@
             ${!L.own.length && !L.inherited.length ? '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune langue notée.</span></p>' : ''}
             ${events ? `<h5>Langue des actes</h5><ul class="h-lang-events">${events}</ul>` : ''}
             ${editOnly(`<label class="checkbox-line h-lang-noinherit"><input type="checkbox" data-h-lang-noinherit="${p.id}" ${Number(L.no_inherited) ? 'checked' : ''}> Ne pas reprendre les langues de ses ancêtres</label>`)}`;
-        return card(index, 'Langues', L.own.length + L.inherited.length || '', body, 'span-6', editOnly(`<button type="button" class="button small secondary" data-h-lang-add="${p.id}">+ Langue</button>`));
+        return card(index, 'Langues', L.own.length + L.inherited.length || '', body, 'span-6', editOnly(`<button type="button" class="button small secondary" data-h-lang-add="${p.id}">＋ Langue</button>`));
     };
     function personLanguageDialog(personId, l = {}) {
         ext.openDialog({
@@ -233,7 +233,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Langues de la famille', 'La langue parlée par chacun ou par une branche (flamand, picard, breton, occitan, alsacien, yiddish, italien…). Elle éclaire les noms mal orthographiés par un curé qui ne comprenait pas la langue de la famille, et indique dans quelle langue chercher : dans le Nord, une partie des registres et des actes notariés est en flamand. Une langue notée sur une personne vaut aussi pour sa descendance, sauf refus explicite sur une fiche.')}
             ${langs.length ? `<div class="h-lang-legend">${langs.map((l, i) => `<span><i style="background:${langColors[i % langColors.length]}"></i>${esc(l.language)} <small>(${l.people.length})</small></span>`).join('')}</div>${map}
             ${langs.map((l, i) => `<details class="maintenance-panel"><summary><strong style="color:${langColors[i % langColors.length]}">${esc(l.language)}</strong> — ${plural(l.people.length, 'personne', 'personnes')} (${l.declared} déclarée${l.declared > 1 ? 's' : ''})</summary><table class="data-table"><tbody>${l.people.slice(0, 300).map(p => `<tr><td>${personLink(p.person.id, A().personName(p.person), A().years(p.person))}</td><td><small>${esc(p.how)}${p.certainty !== 'certain' ? ` · ${esc(p.certainty)}` : ''}</small></td><td><small>${esc(p.place?.place || '')}</small></td></tr>`).join('')}</tbody></table></details>`).join('')}`
-            : A().emptyState({text: 'Aucune langue notée pour l’instant', icon: '🗣️', hint: 'Sur une fiche, coche « Langues » dans IDENTITÉ → Modifier la personne, puis « + Langue ».'})}
+            : A().emptyState({text: 'Aucune langue notée pour l’instant', icon: '🗣️', hint: 'Sur une fiche, coche « Langues » dans IDENTITÉ → Modifier la personne, puis « ＋ Langue ».'})}
             <h3>Langue des actes et des documents</h3>${(data.records || []).length ? `<table class="data-table"><thead><tr><th>Langue</th><th>Acte ou document</th><th>Certitude</th></tr></thead><tbody>${data.records.map(r => `<tr><td>${esc(r.language)}</td><td>${r.entity_type === 'event' ? '📜 ' : '📄 '}${r.person_id ? personLink(r.person_id, r.label) : esc(r.label || '')}</td><td>${esc(data.certainties?.[r.certainty] || r.certainty)}</td></tr>`).join('')}</tbody></table>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune. La langue d’un acte se note dans la fenêtre de l’événement ; celle d’un document dans sa transcription (Listes → Noms cités).</span></p>'}</section>`;
         A().bindTableLinks();
     };
@@ -261,7 +261,7 @@
             if (dialog && mentionBox.parentElement !== dialog) dialog.appendChild(mentionBox); else if (!dialog && mentionBox.parentElement !== document.body) document.body.appendChild(mentionBox);
             const r = ta.getBoundingClientRect();
             mentionBox.style.left = `${r.left + 8}px`; mentionBox.style.top = `${Math.min(r.bottom, window.innerHeight - 220)}px`;
-            mentionBox.innerHTML = `<small class="muted">Lier à une fiche :</small>${rows.map(p => `<button type="button" data-id="${p.id}" data-name="${esc(A().personName(p))}">${esc(A().personName(p))} <small>${esc(A().years(p))}</small></button>`).join('')}`;
+            mentionBox.innerHTML = `<small class="muted">Relier à une fiche :</small>${rows.map(p => `<button type="button" data-id="${p.id}" data-name="${esc(A().personName(p))}">${esc(A().personName(p))} <small>${esc(A().years(p))}</small></button>`).join('')}`;
             mentionBox.hidden = false;
             mentionBox.onmousedown = e => {
                 const b = e.target.closest('button[data-id]');
@@ -375,7 +375,7 @@
         }
         const counts = data.counts || {open: 0, closed: 0};
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Demandes d’entraide', 'Pour un ancêtre où tu es bloqué, l’app rédige un message prêt à copier sur un forum, sur l’entraide de Geneanet ou sur un groupe Facebook : ce que l’on sait (avec les sources), ce que l’on cherche, ce qui a déjà été essayé (tiré des enquêtes). Les demandes bien présentées obtiennent beaucoup plus de réponses.')}
-            <div class="collection-toolbar"><button type="button" class="button" data-h-help-new>+ Demande</button><div class="segmented-filter">${[['open', `En cours (${counts.open})`], ['closed', `Terminées (${counts.closed})`], ['all', 'Toutes']].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-help-filter="${k}">${esc(l)}</button>`).join('')}</div></div>
+            <div class="collection-toolbar"><button type="button" class="button" data-h-help-new>＋ Demande</button><div class="segmented-filter">${[['open', `En cours (${counts.open})`], ['closed', `Terminées (${counts.closed})`], ['all', 'Toutes']].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-help-filter="${k}">${esc(l)}</button>`).join('')}</div></div>
             ${e ? helpFormHtml(e) : ''}
             ${rows.length ? `<div class="h-records">${rows.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong>${LC(r.labels)} — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">${window.LCNDA_UI?.when?.(r.updated_at, {label: 'Mise à jour'}) || esc(r.updated_at)}</small></article>`).join('')}</div>` : (e ? '' : (filter === 'closed' ? empty('Aucune demande terminée.', {icon: '✅'}) : A().emptyState({icon: '🤝', text: 'Aucune demande en cours', hint: 'Pour un ancêtre où tu es bloqué : l’app rédige un message prêt à copier sur un forum ou un groupe d’entraide.', action: {label: '＋ Demande', attrs: 'data-h-help-new'}})))}</section>`;
         const ws = A().$('#workspace');
@@ -422,7 +422,7 @@
     }
     ext.dashboard.help_requests_widget = {load: () => api('help_requests', {status: 'open'}), render: (index, widget, span, data) => {
         const rows = data?.requests || [];
-        return card(index, 'Demandes d’entraide', rows.length || '', `${rows.length ? `<ul class="h-widget-list">${rows.slice(0, 6).map(r => `<li>${personLink(r.person_id, r.person_name)} — ${esc(helpTargets[r.target] || '')} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">↗</a>` : ''}</li>`).join('')}</ul>` : empty('Aucune demande en cours.')}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-list="help_requests" data-h-edit="0">+ Demande</button></div>`, span);
+        return card(index, 'Demandes d’entraide', rows.length || '', `${rows.length ? `<ul class="h-widget-list">${rows.slice(0, 6).map(r => `<li>${personLink(r.person_id, r.person_name)} — ${esc(helpTargets[r.target] || '')} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">↗</a>` : ''}</li>`).join('')}</ul>` : empty('Aucune demande en cours.')}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-list="help_requests" data-h-edit="0">＋ Demande</button></div>`, span);
     }};
 
     /* ═══════════════════════ 🎬 LE FILM DE LA FAMILLE ═══════════════════════ */

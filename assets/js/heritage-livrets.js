@@ -40,7 +40,7 @@
         const counts = r => `${fmt(r.children)} enfant${r.children > 1 ? 's' : ''} · ${fmt(r.linked)}/${fmt(r.people)} personne${r.people > 1 ? 's' : ''} reliée${r.linked > 1 ? 's' : ''} · ${fmt(r.media_count)} photo${r.media_count > 1 ? 's' : ''}`;
         A().$('#workspace').innerHTML = `<section class="page h-booklets"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Livrets de famille</h2>
             <p>La transcription complète des livrets de famille : délivrance, époux et épouse, leurs parents, le mariage, les enfants et toutes les mentions. Relie chaque personne à sa fiche : le livret y apparaît, et ses dates peuvent y être reportées.</p></div>
-            <div class="page-actions"><button type="button" class="button" data-bk-new>📘 + Nouveau livret</button></div></header>
+            <div class="page-actions"><button type="button" class="button" data-bk-new>＋ Nouveau livret</button></div></header>
             <div data-bk-bar></div>
             ${rows.length ? `${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: cover(r) || '<span class="ui-card-ico">📘</span>', name: r.title, open: `data-bk-open="${r.id}"`, lines: [where(r), counts(r)], when: r.updated_at, whenLabel: 'Modifié'}))) : `<div class="h-bk-grid">${rows.map(r => `<button type="button" class="h-bk-card" data-bk-open="${r.id}">
                 <span class="h-bk-cover">${cover(r) || '<span class="h-bk-coverart">LIVRET<br>DE<br>FAMILLE</span>'}</span>
@@ -75,7 +75,7 @@
         const model = MODELS.find(m => m[0] === d.model)?.[1] || '';
         A().$('#workspace').innerHTML = `<section class="page h-booklet">
             <header class="page-header"><div><span class="eyebrow">LIVRET DE FAMILLE</span><h2>${esc(b.title)}</h2><p>${esc([d.commune, d.department, d.country].filter(Boolean).join(' · '))}${d.issued ? ` · délivré le ${esc(d.issued)}` : ''}</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-bk-back>← Tous les livrets</button><button type="button" class="button" data-bk-edit>✎ Modifier</button><button type="button" class="button secondary" data-bk-design>🎨 Apparence</button><button type="button" class="button secondary" data-bk-tags title="Les étiquettes de ce livret">🏷 Étiquettes</button><button type="button" class="button secondary" data-bk-apply>🗂 Reporter sur les fiches</button><button type="button" class="button secondary" data-bk-print>🖨️ Imprimer</button><button type="button" class="button secondary danger" data-bk-del>Supprimer</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-bk-back>← Tous les livrets</button><button type="button" class="button" data-bk-edit>✎ Modifier</button><button type="button" class="button secondary" data-bk-design>🎨 Apparence</button><button type="button" class="button secondary" data-bk-tags title="Les étiquettes de ce livret">🏷 Étiquettes</button><button type="button" class="button secondary" data-bk-apply>🗂 Reporter sur les fiches</button><button type="button" class="button secondary" data-bk-print>🖨 Imprimer</button><button type="button" class="button secondary danger" data-bk-del>Supprimer</button></div></header>
             ${ext.labelChips ? ext.labelChips(b.labels) : ''}
             <div class="h-bk-book">
                 <section class="h-bk-page h-bk-pagecover" data-bks="cover">${coverImg(d.design, b.media)}<span class="h-bk-rf">RÉPUBLIQUE FRANÇAISE</span><strong>LIVRET DE FAMILLE</strong>
@@ -167,7 +167,7 @@
                 <h4>Les parties, dans l’ordre</h4><p class="muted">Coche ce qui est montré ; range avec ⠿ ou ↑ ↓.</p>
                 <ol class="h-book-order" data-bk-order>${orderLis(g, order)}</ol>
                 <label class="checkbox-line"><input type="checkbox" name="as_default"> <span>Utiliser cette apparence pour <b>tous</b> mes livrets (ceux qui n’ont pas la leur)</span></label>
-                <p><button type="button" class="link-button" data-bk-reset>Revenir à l’apparence de départ</button></p>`,
+                <p><button type="button" class="link-button" data-bk-reset>↺ Remettre comme au départ</button></p>`,
             onOpen: dl => {
                 const form = dl.querySelector('form');
                 const read = () => {
@@ -266,8 +266,8 @@
                 <section id="bk-s2"><h3>💍 Le mariage</h3><div class="form-grid">${top('marriage_date', 'Mariage civil le', '15 mai 1912')}${top('marriage_place', 'à', 'Pernay')}${top('marriage_officer', 'Devant (officier)', '')}${top('contract_date', 'Contrat de mariage le', '')}${top('contract_notary', 'chez (notaire)', '')}${top('religious_date', 'Mariage religieux le', '')}${top('religious_parish', 'Paroisse', '')}${top('divorce_date', 'Divorce le', '')}${top('divorce_note', 'Divorce : mention', '')}</div></section>
                 <section id="bk-s3">${slotEditor('husband', d.husband, '👨 L’époux', people)}<div class="h-bk-parentsedit">${slotEditor('husband_father', d.husband_father, 'Son père', people)}${slotEditor('husband_mother', d.husband_mother, 'Sa mère', people)}</div></section>
                 <section id="bk-s4">${slotEditor('wife', d.wife, '👩 L’épouse', people)}<div class="h-bk-parentsedit">${slotEditor('wife_father', d.wife_father, 'Son père', people)}${slotEditor('wife_mother', d.wife_mother, 'Sa mère', people)}</div></section>
-                <section id="bk-s5"><h3>👶 Les enfants</h3><div data-bk-children>${childrenHtml(d.children || [])}</div><button type="button" class="button small secondary" data-bk-addchild>+ Enfant</button>
-                    <h3>👥 Autres personnes citées <small class="muted">(témoins, enfant décédé avant…)</small></h3><div data-bk-others>${(d.others || []).map((c, i) => slotEditor('other_' + i, c, 'Personne citée', people, {removable: true})).join('')}</div><button type="button" class="button small secondary" data-bk-addother>+ Personne citée</button></section>
+                <section id="bk-s5"><h3>👶 Les enfants</h3><div data-bk-children>${childrenHtml(d.children || [])}</div><button type="button" class="button small secondary" data-bk-addchild>＋ Enfant</button>
+                    <h3>👥 Autres personnes citées <small class="muted">(témoins, enfant décédé avant…)</small></h3><div data-bk-others>${(d.others || []).map((c, i) => slotEditor('other_' + i, c, 'Personne citée', people, {removable: true})).join('')}</div><button type="button" class="button small secondary" data-bk-addother>＋ Personne citée</button></section>
                 <section id="bk-s6"><h3>📝 Mentions, transcription, notes</h3><div class="form-grid">${area('mentions', 'Mentions (décès, divorce, rectifications, tampons…)', 4)}${area('transcription', 'Transcription intégrale, page par page', 8, 'Page 1 : …')}${area('notes', 'Notes', 3)}${area('sources', 'Sources', 2)}</div></section>
                 <section id="bk-s7"><h3>📷 Photos des pages</h3>${ext.mediaEditorHtml ? ext.mediaEditorHtml('family_booklet', b?.id || 0, b?.media || [], [['', 'Pages du livret', 'image/*,application/pdf']]) : ''}${b?.id ? '' : '<p class="muted">Les recueils se relient au livret une fois enregistré (en bas de sa page).</p>'}</section>
             </div>`,

@@ -30,7 +30,7 @@
             if (!b.title) b.title = label; if (!b.getAttribute('aria-label')) b.setAttribute('aria-label', label);
             return;
         }
-        // « + Ajouter » → « ＋ Ajouter » (un seul signe plus)
+        // « ＋ Ajouter » → « ＋ Ajouter » (un seul signe plus)
         const first = [...b.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
         if (first && /^\s*\+\s/.test(first.textContent)) first.textContent = first.textContent.replace(/^(\s*)\+\s+/, '$1＋ ');
         else if (first && first.textContent.trim() === '+') first.textContent = first.textContent.replace('+', '＋');

@@ -7,7 +7,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  1. diaporama : la durée tapée hors des bornes (0, 99999) est montrée telle qu'elle est gardée (1 à 120 s) ; un diaporama vide
  *     affiche « 0:00 / 0:00 » ; fermé pendant l'enregistrement de la vidéo : rien n'est téléchargé plus tard ;
  *  2. présentation : un .odp dont une diapositive porte un tableau (son cadre a aussi une image d'aperçu .svm) garde le tableau ;
- *     le compte rendu d'import se ferme par « OK » ;
+ *     le compte rendu d'import se ferme par « Fermer » seul (K3) ;
  *  3. les barres du haut (diaporama, présentation, maison) ne changent pas de hauteur quand « • modifié », « Enregistrement… »
  *     ou un message apparaissent (le plan de la maison ne saute plus sous la souris : une porte se pose là où l'on clique) ;
  *  4. maison : le toit se voit aussi quand l'étage du dessus est encore vide ; date des réglages enregistrés au format commun K4 (« aujourd’hui », « 17 oct. 2026 ») ;
@@ -160,7 +160,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         ['durée 99999 : ramenée à 120 s, et la case le montre', () => assert.deepEqual(out.durBig.map(String), ['120', '120'])],
         ['diaporama fermé pendant la vidéo : aucun téléchargement ensuite', () => { assert.match(out.recording, /⏺/); assert.equal(out.downloadsAfterClose, 0); }],
         ['présentation : le tableau d’un .odp est importé malgré son image d’aperçu .svm', () => assert.match(out.odpTable, /Nom.*Année.*Jean.*1850/)],
-        ['présentation : le compte rendu d’import a un bouton « OK »', () => assert.ok(Array.isArray(out.odpReport) && out.odpReport.includes('OK'), JSON.stringify(out.odpReport))],
+        ['présentation : le compte rendu d’import a « Fermer » seul (K3)', () => assert.ok(Array.isArray(out.odpReport) && out.odpReport.join('|') === 'Fermer', JSON.stringify(out.odpReport))],
         ['barres du haut : même hauteur quel que soit l’état (diaporama, présentation, maison)', () => {
             assert.equal(new Set(out.ssBar).size, 1, `diaporama ${out.ssBar}`); assert.equal(new Set(out.knBar).size, 1, `présentation ${out.knBar}`); assert.equal(new Set(out.hsBar).size, 1, `maison ${out.hsBar}`);
         }],

@@ -430,7 +430,7 @@
     <label class="name-field">Nom<input name="label" required placeholder="Jugement de naissance…" autocomplete="off"></label>
     <label>Portée<select name="scope"><option value="person">Personne</option><option value="family">Famille</option></select></label>
     <label>Couleur<input type="color" name="color" value="#0066cc"></label>
-    <div class="create-type-last-group"><span class="create-type-field-label">Pictogramme</span><div style="display:flex;align-items:center;gap:10px"><select name="icon" style="flex:1;min-width:0">${eventIconOptionsHtml('diamond')}</select><label class="checkbox-line create-type-artistic-inline" style="margin:0;white-space:nowrap;flex-shrink:0"><input type="checkbox" name="is_artistic" value="1" id="create-type-is-artistic"> Artiste</label><button class="button" type="submit" style="padding:9px 22px;flex-shrink:0">Créer</button></div></div>
+    <div class="create-type-last-group"><span class="create-type-field-label">Pictogramme</span><div style="display:flex;align-items:center;gap:10px"><select name="icon" style="flex:1;min-width:0">${eventIconOptionsHtml('diamond')}</select><label class="checkbox-line create-type-artistic-inline" style="margin:0;white-space:nowrap;flex-shrink:0"><input type="checkbox" name="is_artistic" value="1" id="create-type-is-artistic"> Artiste</label><button class="button" type="submit" style="padding:9px 22px;flex-shrink:0">Créer le type</button></div></div>
     <label class="span-2" id="create-type-fields-wrap" hidden>Champs spécifiques à l'œuvre (séparés par des virgules)<input name="custom_fields" placeholder="ex. Dimensions, Technique, Lieu de conservation" autocomplete="off"></label>
   </form>
 </section>

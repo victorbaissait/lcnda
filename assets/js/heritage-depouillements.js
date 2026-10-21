@@ -98,7 +98,7 @@
         ws.innerHTML = `<section class="page collection-page h-rc h-dp">
             <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES</span><h2>📜 Dépouillements</h2>
                 <p>Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-dp-research>🔎 Ouvrir dans Recherche</button><button type="button" class="button" data-dp-new>+ Nouveau dépouillement</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-dp-research>↗ Ouvrir dans Recherche</button><button type="button" class="button" data-dp-new>＋ Nouveau dépouillement</button></div></header>
             <div data-dp-bar></div>
             ${rows.length ? [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3>${group(list)}`).join('')
             : (s.q || s.type || s.status ? A().emptyState({icon: '🔍', text: 'Aucun dépouillement ne correspond.'}) : A().emptyState({icon: '📑', text: 'Aucun dépouillement pour l’instant', hint: 'La fiche du dépouillement se remplit dans Recherche.', action: {label: '＋ Nouveau dépouillement', attrs: 'data-dp-new'}}))}</section>`;
@@ -141,7 +141,7 @@
         ws.innerHTML = `<section class="page collection-page h-rc h-rc-one h-dp">
             <header class="page-header"><div><button type="button" class="back-link" data-dp-back>← Tous les dépouillements</button><span class="eyebrow">DÉPOUILLEMENT D’ARCHIVE</span><h2>📜 ${esc(titleOf(r, D.types))}${r.year_text ? ` <small>${esc(r.year_text)}</small>` : ''}</h2>
                 <p class="muted">${esc([r.archive_service, r.archive_reference, D.statuses[r.status]].filter(Boolean).join(' · ')) || '&nbsp;'}${/^https?:\/\//i.test(String(r.archive_url || '').trim()) ? ` · <a href="${esc(String(r.archive_url).trim())}" target="_blank" rel="noopener">ouvrir l’archive en ligne ↗</a>` : ''}</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-dp-inresearch title="La même fiche, dans Recherche › Dépouillement d’archive">🔎 Dans Recherche</button><button type="button" class="button secondary" data-dp-edit>Modifier la fiche</button><button type="button" class="button" data-dp-addphotos>+ Ajouter des photos</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-dp-inresearch title="La même fiche, dans Recherche › Dépouillement d’archive">🔎 Dans Recherche</button><button type="button" class="button secondary" data-dp-edit>Modifier la fiche</button><button type="button" class="button" data-dp-addphotos>＋ Ajouter des photos</button></div></header>
             <div class="h-dp-counts"><label title="Le nombre de vues (images) du registre sur le site des archives">📷 Le scan en ligne fait <input type="number" min="0" data-dp-count="page_total" value="${esc(r.page_total ?? '')}" placeholder="?"> vues</label>
                 <label title="Le nombre de pages du document lui-même (un scan peut avoir des vues de couverture, de mire, ou deux pages par vue)">📄 Le document fait <input type="number" min="0" data-dp-count="doc_pages" value="${esc(r.doc_pages ?? '')}" placeholder="?"> pages</label>
                 <span class="muted">${(() => { const done = pages.filter(p => ['checked', 'empty'].includes(p.status)).length; return `${plural(done, 'page dépouillée', 'pages dépouillées')}${r.page_total ? ` sur ${r.page_total} vues (${Math.min(100, Math.round(done / r.page_total * 100))} %)` : ''}`; })()}</span><span class="muted" data-dp-countsaved></span></div>
@@ -184,7 +184,7 @@
     const suggestNext = () => { const nums = pagesOf(D.row, D.lines).map(p => parseInt(p.number, 10)).filter(Number.isFinite); return String(nums.length ? Math.max(...nums) + 1 : 1); };
     function paintPages(body, pages) {
         const r = D.row, ls = loose(r);
-        body.innerHTML = `<div class="collection-toolbar h-rc-toolbar"><button type="button" class="button small secondary" data-dp-newpage>+ Page</button>
+        body.innerHTML = `<div class="collection-toolbar h-rc-toolbar"><button type="button" class="button small secondary" data-dp-newpage>＋ Page</button>
                 <span class="muted">Clique sur une page pour voir ses photos, ses personnes par foyer et sa transcription.</span></div>
             ${ls.length ? `<div class="h-rc-loose maintenance-panel"><h3>🧺 À ranger <small class="muted">${plural(ls.length, 'photo', 'photos')} sans page : choisis sa page</small></h3><div class="h-rc-loose-list">${ls.map(m => `<div class="h-rc-loose-item" data-dp-media="${m.id}">${isImage(m) ? `<button type="button" class="h-rc-thumb small" data-dp-zoom="${m.id}" title="Voir en grand"><img src="${esc(thumb(m))}" alt="" loading="lazy"></button>` : `<span class="h-rc-thumb small">📄</span>`}<small>${esc(m.title || '')}</small>${pageSelect('data-dp-assign', '', 'Mettre sur la page…')}</div>`).join('')}</div></div>` : ''}
             ${pages.length ? `<div class="h-rc-pages">${pages.map(p => {
@@ -192,7 +192,7 @@
                 return `<button type="button" class="h-rc-page" data-dp-page="${esc(p.number)}"><span class="h-rc-thumb">${img ? `<img src="${esc(thumb(img))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">pas de photo</span>'}<span class="h-rc-num">${esc(p.number)}</span></span>
                     <span class="h-rc-page-name"><i class="h-dp-dot" style="background:${col}" title="${esc(lab)}"></i> ${esc(lab)}</span>
                     <span class="h-rc-page-meta"><small>${ppl.length ? `👥 ${ppl.length} · 🏠 ${households(ppl)}` : esc(CONTENT[p.content_type] || '')}${p.act_from ? ` · actes ${esc(p.act_from)}${p.act_to ? '–' + esc(p.act_to) : ''}` : ''}</small></span></button>`; }).join('')}</div>`
-            : A().emptyState({icon: '📄', text: 'Aucune page pour l’instant', hint: '« + Page » pour une page sans photo, ou ajoute les photos du registre.', action: {label: '＋ Ajouter des photos', attrs: 'data-dp-add-empty'}})}`;
+            : A().emptyState({icon: '📄', text: 'Aucune page pour l’instant', hint: '« ＋ Page » pour une page sans photo, ou ajoute les photos du registre.', action: {label: '＋ Ajouter des photos', attrs: 'data-dp-add-empty'}})}`;
         body.querySelector('[data-dp-newpage]').addEventListener('click', async () => { const n = await pageFromSelect('__new'); if (n) { st().page = n; await reload(); } });
         body.querySelector('[data-dp-add-empty]')?.addEventListener('click', () => addPhotos(''));
         body.querySelectorAll('[data-dp-page]').forEach(b => b.addEventListener('click', () => { st().page = b.dataset.dpPage; st().image = 0; paint(); }));
@@ -222,7 +222,7 @@
             <div class="h-rc-pageview">
                 <div class="h-rc-stage-wrap">
                     <div class="h-rc-stage">${imgs.length > 1 ? `<button type="button" class="h-rc-imgnav is-prev" data-dp-imgstep="-1" title="Photo précédente de cette page" data-shortcut="←">‹</button><button type="button" class="h-rc-imgnav is-next" data-dp-imgstep="1" title="Photo suivante de cette page" data-shortcut="→">›</button><span class="h-rc-imgcount">${imgs.indexOf(cur) + 1} / ${imgs.length}</span>` : ''}
-                        ${cur ? `<figure class="h-rc-figure"><img src="${esc(full(cur))}" alt="" data-dp-zoomcur title="Cliquer : agrandir, pivoter, retoucher"><figcaption>${esc(cur.title || '')}</figcaption></figure>` : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-dp-addhere>+ Ajouter une photo de cette page</button></div>`}</div>
+                        ${cur ? `<figure class="h-rc-figure"><img src="${esc(full(cur))}" alt="" data-dp-zoomcur title="Cliquer : agrandir, pivoter, retoucher"><figcaption>${esc(cur.title || '')}</figcaption></figure>` : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-dp-addhere>＋ Ajouter une photo de cette page</button></div>`}</div>
                     ${cur ? `<div class="h-rc-imgactions"><button type="button" class="button small secondary" data-dp-zoomcur>🔍 Agrandir, pivoter, retoucher</button>
                         <label class="h-rc-move">Déplacer vers ${pageSelect('data-dp-moveimg', p.number)}</label>
                         <button type="button" class="icon-button danger" data-dp-unlink="${cur.id}" title="Retirer cette photo du dépouillement (elle reste dans Médias)">🗑</button></div>` : ''}
@@ -242,8 +242,8 @@
                     <div class="h-rc-sideactions"><button type="button" class="button small secondary danger" data-dp-delpage>Supprimer la page</button></div>
                 </div></div>
             <section class="maintenance-panel h-dp-people"><header class="h-dp-peoplehead"><h3>👥 Personnes et foyers de la page ${esc(p.number)}</h3>
-                <span>${(() => { const lk = isLocked(r.id, p.number); return `<button type="button" class="icon-button h-dp-lock ${lk ? 'is-locked' : ''}" data-dp-lock title="${lk ? 'Tableau verrouillé : clique pour pouvoir le modifier' : 'Verrouiller le tableau de cette page (évite les modifications par erreur)'}">${lk ? '🔒' : '🔓'}</button><button type="button" class="button small secondary" data-dp-addhh ${lk ? 'disabled' : ''}>+ Foyer</button><button type="button" class="button small" data-dp-addp ${lk ? 'disabled' : ''}>+ Personne</button>`; })()}</span></header>
-                <p class="muted h-dp-hint">Rangées par rue › n° › foyer, dans l’ordre du document. Un foyer a un numéro et une adresse (n° et rue sur sa ligne), que partagent ses personnes. « + Foyer » propose le numéro suivant ; tu peux en mettre un autre (12 bis, numéro sauté…). Coller depuis un tableur remplit les lignes.</p>
+                <span>${(() => { const lk = isLocked(r.id, p.number); return `<button type="button" class="icon-button h-dp-lock ${lk ? 'is-locked' : ''}" data-dp-lock title="${lk ? 'Tableau verrouillé : clique pour pouvoir le modifier' : 'Verrouiller le tableau de cette page (évite les modifications par erreur)'}">${lk ? '🔒' : '🔓'}</button><button type="button" class="button small secondary" data-dp-addhh ${lk ? 'disabled' : ''}>＋ Foyer</button><button type="button" class="button small" data-dp-addp ${lk ? 'disabled' : ''}>＋ Personne</button>`; })()}</span></header>
+                <p class="muted h-dp-hint">Rangées par rue › n° › foyer, dans l’ordre du document. Un foyer a un numéro et une adresse (n° et rue sur sa ligne), que partagent ses personnes. « ＋ Foyer » propose le numéro suivant ; tu peux en mettre un autre (12 bis, numéro sauté…). Coller depuis un tableur remplit les lignes.</p>
                 <div class="h-dp-tablewrap" data-dp-table></div></section>`;
         const go = n => { if (n === '' || n == null) return; st().page = String(n); st().image = 0; paint(); };
         body.querySelector('[data-dp-allpages]').addEventListener('click', () => { st().page = ''; paint(); });
@@ -354,9 +354,9 @@
                     bands += `<tr class="h-dp-colhead">${COLS2.map(([c, l], j) => `${j === FICHE_AT ? '<th class="h-dp-fiche">Fiche</th>' : ''}<th>${esc(l)}</th>`).join('')}<th></th></tr>`; // les colonnes, dans chaque foyer
                     lastUid = uid;
                 }
-                const fiche = `<td class="h-dp-fiche">${x.person_id ? `<button type="button" class="link-button h-dp-plink" data-open-person="${x.person_id}" title="Ouvrir la fiche de ${esc(x.person_name || '')}">👤 ${esc(x.person_name || 'la fiche')}</button>${locked ? '' : '<button type="button" class="h-dp-mini" data-dp-unp title="Ne plus rattacher à la fiche">✕</button>'}` : locked ? '' : `<button type="button" class="h-dp-mini is-faint" data-dp-p title="Rattacher à une fiche existante, ou créer la fiche">＋ fiche</button>`}</td>`;
+                const fiche = `<td class="h-dp-fiche">${x.person_id ? `<button type="button" class="link-button h-dp-plink" data-open-person="${x.person_id}" title="Ouvrir la fiche de ${esc(x.person_name || '')}">👤 ${esc(x.person_name || 'la fiche')}</button>${locked ? '' : '<button type="button" class="h-dp-mini" data-dp-unp title="Ne plus rattacher à la fiche">✕</button>'}` : locked ? '' : `<button type="button" class="h-dp-mini is-faint" data-dp-p title="Relier à une fiche existante, ou créer la fiche">＋ fiche</button>`}</td>`;
                 return `${bands}<tr data-dp-i="${i}" class="${x.id ? '' : 'is-draft'}">${COLS2.map(([c], j) => `${j === FICHE_AT ? fiche : ''}<td><input data-dp-k="${c}" value="${esc(x[c] || '')}" ${locked ? 'readonly tabindex="-1"' : ''}></td>`).join('')}
-                    <td>${locked ? '' : '<button type="button" class="h-dp-mini is-danger is-faint" data-dp-del title="Supprimer cette personne relevée">🗑</button>'}</td></tr>`; }).join('') || `<tr><td colspan="${span}" class="muted">Personne relevée sur cette page : « + Foyer », puis les noms ; ou colle des lignes depuis un tableur.</td></tr>`}</tbody></table>`;
+                    <td>${locked ? '' : '<button type="button" class="h-dp-mini is-danger is-faint" data-dp-del title="Supprimer cette personne relevée">🗑</button>'}</td></tr>`; }).join('') || `<tr><td colspan="${span}" class="muted">Personne relevée sur cette page : « ＋ Foyer », puis les noms ; ou colle des lignes depuis un tableur.</td></tr>`}</tbody></table>`;
             bind();
             if (focus) box.querySelector(focus)?.focus();
             else if (keep) { const inp = box.querySelector(keep.sel); if (inp) { inp.focus(); try { inp.setSelectionRange(keep.a, keep.b); } catch (_) {} } }
@@ -434,7 +434,7 @@
             const x = {household_uid: uid, household_key: base ? keyOf(base) : '', address: base?.address || ''}; draft.push(x);
             render(`tr[data-dp-i="${all().indexOf(x)}"] [data-dp-k="${focusCol}"]`);
         }
-        /** « + Foyer » : un nouveau foyer, avec le numéro qu'on dit (le suivant est proposé ; le document peut sauter ou répéter des numéros). */
+        /** « ＋ Foyer » : un nouveau foyer, avec le numéro qu'on dit (le suivant est proposé ; le document peut sauter ou répéter des numéros). */
         async function addHousehold() {
             const k = ((await A().askText({title: 'Nouveau foyer', message: 'Numéro du foyer (tel qu’il est écrit dans le document) :', value: suggestKey(), okLabel: 'Ajouter'})) ?? null);
             if (k === null) return;
@@ -458,7 +458,7 @@
                 let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
                 const guess = [x.first_name, x.last_name].filter(Boolean).join(' ');
                 let picker = null;
-                dialog({eyebrow: 'PERSONNE RELEVÉE', title: guess || 'Rattacher à une fiche', submitLabel: 'Rattacher',
+                dialog({eyebrow: 'PERSONNE RELEVÉE', title: guess || 'Rattacher à une fiche', submitLabel: 'Relier',
                     body: `<p class="muted">Choisis la fiche de cette personne : elle sera rattachée à ce relevé (et au recensement de la fiche).</p>` + ext.personPickerHtml({guess, createLabel: `Créer la fiche « ${esc(guess || 'sans nom')} » (marquée à vérifier)`}),
                     onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true}); picker = ext.bindPersonPicker(d); },
                     onSubmit: async form => {
@@ -488,7 +488,7 @@
                 return `<article class="h-dp-hh maintenance-panel"><h4>🏠 ${num ? 'Foyer ' + esc(num) : 'Foyer sans n°'}${addr ? ` <small class="muted">${esc(addr)}</small>` : ''}</h4>
                     <ul>${list.map(x => `<li>${x.person_id ? `<button type="button" class="table-link" data-open-person="${x.person_id}">${esc(x.person_name || [x.first_name, x.last_name].join(' '))}</button>` : `<b>${esc([x.first_name, x.last_name].filter(Boolean).join(' ') || 'Sans nom')}</b>`} <small class="muted">${esc([x.household_position, x.age_text && x.age_text + ' ans', x.occupation].filter(Boolean).join(' · '))}</small></li>`).join('')}</ul>
                     ${pages.length ? `<small>${pages.map(n => `<button type="button" class="link-button" data-dp-gopage="${esc(n)}">page ${esc(n)}</button>`).join(', ')}</small>` : ''}</article>`; }).join('')}</div>`
-            : A().empty('Personne relevée pour l’instant : ouvre une page et utilise « + Personne ».');
+            : A().empty('Personne relevée pour l’instant : ouvre une page et utilise « ＋ Personne ».');
         body.querySelectorAll('[data-dp-gopage]').forEach(b => b.addEventListener('click', () => { Object.assign(st(), {tab: 'pages', page: b.dataset.dpGopage, image: 0}); paint(); }));
     }
 

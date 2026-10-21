@@ -372,7 +372,7 @@
     }
 
     /** La fenêtre des choix du récit → les options (ou null si Annuler) */
-    function storyOptions({pid = 0, eyebrow = 'DIAPORAMA', submitLabel = '✨ Fabriquer le récit'} = {}) {
+    function storyOptions({pid = 0, eyebrow = 'DIAPORAMA', submitLabel = 'Créer le récit'} = {}) {
         const P = window.LCNDA_PICKER || A(), saved = readJ(STORY_KEY, {});
         pid = Number(pid) || Number(A().state.currentPersonId) || 0;
         let photoIds = null, photoItems = new Map(), music = saved.music?.filename ? saved.music : null, personMedia = [], done = false, loadSeq = 0;

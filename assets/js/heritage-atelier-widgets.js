@@ -129,7 +129,7 @@
         let list = listFor(pid) || [{id: uid(), type: 'words', cfg: {}}, {id: uid(), type: 'todo', cfg: {}}, {id: uid(), type: 'agenda', cfg: {}}];
         const save = () => saveList(pid, list);
         const draw = async () => {
-            box.innerHTML = `<div class="h-atw-head"><h4>🧩 Mes widgets</h4><button type="button" class="button small secondary" data-atw-add>+ Widget</button></div><div class="h-atw-grid">${list.map((w, k) => `<section class="h-atw ${w.type === 'dash' || w.type === 'agenda' ? 'is-wide' : ''}" data-atw="${w.id}">
+            box.innerHTML = `<div class="h-atw-head"><h4>🧩 Mes widgets</h4><button type="button" class="button small secondary" data-atw-add>＋ Widget</button></div><div class="h-atw-grid">${list.map((w, k) => `<section class="h-atw ${w.type === 'dash' || w.type === 'agenda' ? 'is-wide' : ''}" data-atw="${w.id}">
                 <header><b>${TYPES[w.type]?.[0] || '•'} ${esc(w.title || TYPES[w.type]?.[1] || '')}</b><span class="h-rb-tools"><button type="button" class="icon-button" data-atw-move="-1" ${k ? '' : 'disabled'} title="Avancer">←</button><button type="button" class="icon-button" data-atw-move="1" ${k < list.length - 1 ? '' : 'disabled'} title="Reculer">→</button><button type="button" class="icon-button" data-atw-cfg title="Réglages">⚙</button><button type="button" class="icon-button danger" data-atw-del title="Retirer">✕</button></span></header>
                 <div class="h-atw-body" data-atw-body><p class="muted">…</p></div></section>`).join('')}</div>`;
             for (const w of list) { const b = box.querySelector(`[data-atw="${w.id}"] [data-atw-body]`); try { b.innerHTML = await widgetBody(w, ctx); } catch (e) { b.innerHTML = `<p class="muted">${esc(e.message)}</p>`; } }

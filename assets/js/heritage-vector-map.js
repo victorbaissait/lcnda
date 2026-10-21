@@ -163,7 +163,7 @@
             if (b.dataset.vmeEd) { if (await editCustom(b.dataset.vmeEd)) { redraw(); onChange?.(); } return; }
             if (b.dataset.vmeDel) { const id = b.dataset.vmeDel; A().undoLocalChange('Élément supprimé (ce qui est déjà dessiné avec reste sur les plans)', [PKEY], () => { const P = readP(); P.custom = arr(P.custom).filter(c => c?.id !== id); writeP(P); }, () => { if (box.isConnected) { redraw(); onChange?.(); } }); redraw(); onChange?.(); return; }
             if (b.hasAttribute('data-vme-new')) { if (await editCustom(null)) { redraw(); onChange?.(); } return; }
-            if (b.hasAttribute('data-vme-reset')) { if (!await A().confirmBox('Tes éléments sont gardés.', {title: 'Remettre l’ordre et l’affichage de départ ?', okLabel: 'Réinitialiser'})) return; const P = readP(); delete P.order; delete P.hiddenGroups; delete P.items; writeP(P); redraw(); onChange?.(); } });
+            if (b.hasAttribute('data-vme-reset')) { if (!await A().confirmBox('Tes éléments sont gardés.', {title: 'Remettre l’ordre et l’affichage de départ ?', okLabel: 'Remettre comme au départ'})) return; const P = readP(); delete P.order; delete P.hiddenGroups; delete P.items; writeP(P); redraw(); onChange?.(); } });
         box.addEventListener('change', e => { if (e.target.matches('input[type=checkbox]')) { savePaletteFrom(box); onChange?.(); } });
     }
     function openPaletteEditor(onChange) {
@@ -181,7 +181,7 @@
         return new Promise(res => { const c = id ? customs().find(x => x.id === id) : null, V = ext.vectorInternals;
             const shapes = []; const walk = list => list.forEach(o => { if (o.type === 'group' && o.children) walk(o.children); else if (V?.shapeD && V.shapeD(o)) shapes.push(o); }); walk(selection || []);
             const tool0 = c?.tool || (shapes.length ? 'msym' : 'mline'), opt = (list, cur) => list.map(([k, l]) => `<option value="${esc(k)}" ${k === cur ? 'selected' : ''}>${esc(l)}</option>`).join('');
-            ext.openDialog({eyebrow: 'MODE PLAN', title: c ? '✎ Mon élément' : '＋ Créer un élément', submitLabel: 'Enregistrer',
+            ext.openDialog({eyebrow: 'MODE PLAN', title: c ? '✎ Mon élément' : '＋ Créer un élément', submitLabel: c ? 'Enregistrer' : 'Créer l’élément',
                 body: `<div class="form-grid"><label>Nom<input name="label" maxlength="60" value="${esc(c?.label || '')}" placeholder="ex. Chemin de halage, Lavoir communal…" required></label><label>Genre<select name="tool">${opt(TOOLS_L, tool0)}</select></label>
                     <label>Allure de départ<select name="base"></select></label><label>Groupe<select name="g">${opt(BASE_GROUPS().filter(g => g[0] !== 'deco').map(g => [g[0], g[1]]), c?.g || HOME[tool0])}</select></label>
                     <label class="checkbox-line"><input type="checkbox" name="usecolor" ${c?.color ? 'checked' : ''}> Ma couleur</label><label>Couleur<input type="color" name="color" value="${esc(c?.color || '#8a5a2b')}"></label>
@@ -506,7 +506,7 @@
             if (o.type === 'text' && m.k) h += `<label class="checkbox-line"><input type="checkbox" data-vmp="custom" ${m.custom ? 'checked' : ''}> Garder ma police et ma couleur (ne pas suivre le style)</label>`;
             // pour tous les objets : époque, lien, note
             h += `<div class="vx-grid2"><label>Existe depuis (année)<input type="number" data-vmp="yf" value="${esc(m.yf ?? o.yf ?? '')}" placeholder="—"></label><label>Jusqu’à (année)<input type="number" data-vmp="yt" value="${esc(m.yt ?? o.yt ?? '')}" placeholder="—"></label></div>
-                <div class="vx-mlink">${m.link ? `🔗 <b>${esc(m.link.label)}</b> <button type="button" class="link-button" data-vmp-open>ouvrir</button> <button type="button" class="link-button" data-vmp-unlink>délier</button>` : '<button type="button" class="button small secondary" data-vmp-link="person">🔗 Lier à une personne</button><button type="button" class="button small secondary" data-vmp-link="place">📍 Lier à un lieu</button>'}</div>
+                <div class="vx-mlink">${m.link ? `🔗 <b>${esc(m.link.label)}</b> <button type="button" class="link-button" data-vmp-open>ouvrir</button> <button type="button" class="link-button" data-vmp-unlink>délier</button>` : '<button type="button" class="button small secondary" data-vmp-link="person">🔗 Relier à une personne</button><button type="button" class="button small secondary" data-vmp-link="place">🔗 Relier à un lieu</button>'}</div>
                 <label>Note (ex. « ici habitait la famille Martin de 1820 à 1870 »)<textarea data-vmp="note" rows="2" maxlength="600">${esc(m.note || '')}</textarea></label></div>`;
             return h;
         }
@@ -522,12 +522,12 @@
         }
         /* les fenêtres */
         async function linkDialog(o, what) {
-            if (what === 'person') return ext.openDialog({eyebrow: 'PLAN', title: 'Lier à une personne', submitLabel: 'Lier', // même champ « personne » que partout ailleurs
+            if (what === 'person') return ext.openDialog({eyebrow: 'PLAN', title: 'Relier à une personne', submitLabel: 'Relier', // même champ « personne » que partout ailleurs
                 body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${PK().pickerField({name: 'vm_pick', kind: 'person', value: o.map?.link?.type === 'person' && o.map.link.id ? o.map.link.id : null})}</div>`,
                 onOpen: dg => setTimeout(() => dg.querySelector('.pk-search:not([hidden]) .pk-input')?.focus(), 30),
                 onSubmit: f => { const it = pkItem(f.querySelector('.pk')); if (!it) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis dans la liste.');
                     o.map = o.map || {}; o.map.link = {type: 'person', id: Number(it.id), label: String(it.title || '').slice(0, 120)}; ed.commit('Lien ajouté'); }});
-            ext.openDialog({eyebrow: 'PLAN', title: 'Lier à un lieu', submitLabel: 'Lier',
+            ext.openDialog({eyebrow: 'PLAN', title: 'Relier à un lieu', submitLabel: 'Relier',
                 body: `<div class="h-pk-solo"><span class="pk-lab">Lieu</span>${PK().pickerField({name: 'vm_place', kind: 'place', value: o.map?.link?.type === 'place' && o.map.link.id ? {id: o.map.link.id, title: o.map.link.label, name: o.map.name || o.map.link.label} : null})}</div>`,
                 onOpen: dg => setTimeout(() => dg.querySelector('.pk-search:not([hidden]) .pk-input')?.focus(), 30),
                 onSubmit: async f => { const it = pkItem(f.querySelector('.pk')); if (!it) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis dans la liste.');
@@ -539,7 +539,7 @@
         function linksDialog() {
             const rows = []; const walk = arr => (arr || []).forEach(o => { if (o.map?.link || o.map?.note) rows.push(o); if (o.children) walk(o.children); }); walk(ed.doc().objs);
             ext.openDialog({eyebrow: 'PLAN', title: 'Objets reliés à la famille', submitLabel: 'Fermer',
-                body: rows.length ? `<ul class="vx-mlinks">${rows.map((o, i) => `<li><b>${esc(o.map.name || o.text || o.name || 'Objet')}</b>${o.map.link ? ` → ${esc(o.map.link.label)}` : ''}${o.map.note ? `<br><small>${esc(o.map.note)}</small>` : ''}<span><button type="button" class="link-button" data-vm-go="${i}">montrer</button>${o.map.link?.type === 'person' ? ` · <button type="button" class="link-button" data-vm-open="${i}">ouvrir la fiche</button>` : ''}</span></li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucun objet n’est encore relié. Choisis un objet, puis dans Propriétés : « 🔗 Lier à une personne » ou « 📍 Lier à un lieu ».</span></p>',
+                body: rows.length ? `<ul class="vx-mlinks">${rows.map((o, i) => `<li><b>${esc(o.map.name || o.text || o.name || 'Objet')}</b>${o.map.link ? ` → ${esc(o.map.link.label)}` : ''}${o.map.note ? `<br><small>${esc(o.map.note)}</small>` : ''}<span><button type="button" class="link-button" data-vm-go="${i}">montrer</button>${o.map.link?.type === 'person' ? ` · <button type="button" class="link-button" data-vm-open="${i}">ouvrir la fiche</button>` : ''}</span></li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucun objet n’est encore relié. Choisis un objet, puis dans Propriétés : « 🔗 Relier à une personne » ou « 🔗 Relier à un lieu ».</span></p>',
                 onOpen: dg => dg.addEventListener('click', e => { const g = e.target.closest('[data-vm-go]'), op = e.target.closest('[data-vm-open]'); if (g) { ed.reveal(rows[Number(g.dataset.vmGo)].id); dg.querySelector('[data-dialog-close],[value=cancel]')?.click(); dg.close?.(); } if (op) openLink(rows[Number(op.dataset.vmOpen)].map); }),
                 onSubmit: () => {}});
         }

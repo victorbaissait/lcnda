@@ -2,7 +2,7 @@
  *
  * 1. Formes des avatars (Réglages → Apparence, menu « Forme des avatars » et cadre « 🔷 Formes des avatars »)
  *    Les six formes de l'app restent ; on en ajoute (prise dans la bibliothèque des tableaux, polygone dessiné point
- *    par point, SVG importé et nettoyé : seulement des chemins) ; on range la liste, on cache des formes, ↺ Réinitialiser.
+ *    par point, SVG importé et nettoyé : seulement des chemins) ; on range la liste, on cache des formes, ↺ Remettre comme au départ.
  *    localStorage['genealogie-avatar-shapes'] = {custom: {shp_x: {name, kind: 'poly', pts: [[x, y]…]} |
  *                                                          {name, kind: 'path', paths: [{d, eo, m}], vb: [x, y, w, h], src}},
  *                                                 order: [clés], hidden: [clés]}
@@ -144,7 +144,7 @@
         sel.innerHTML = avatarSelectHtml(cur); sel.dataset.lcCur = sel.value;
     }
 
-    /* ── Le cadre « 🔷 Formes des avatars » (ranger, cacher, ajouter, ↺ Réinitialiser) ── */
+    /* ── Le cadre « 🔷 Formes des avatars » (ranger, cacher, ajouter, ↺ Remettre comme au départ) ── */
     function shapesPanelHtml() {
         const list = orderedShapes(), open = uiSections()['avatar-shapes-manage'] ? ' open' : '';
         return `<section class="maintenance-panel my-presets lc-shapes" id="lc-avatar-shapes"><div class="item-title-row"><h3 data-help="La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas." data-help-faq="forme des avatars">🔷 Formes des avatars</h3><div class="page-actions"><button type="button" class="button small" data-shp-new>＋ Nouvelle forme…</button>${A().settingImportButton ? A().settingImportButton('data-shp-import') : ''}</div></div>
@@ -152,7 +152,7 @@
             <p class="muted">Les formes proposées dans « Forme des avatars » : coche celles à montrer, range-les en glissant ⠿ (ou ↑ ↓). Celles de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiennes (✎) se modifient, se dupliquent, s’exportent.</p>
             <div class="order-list my-preset-list lc-shp-list" data-shp-list>${list.map((s, i) => `<div class="order-row has-visibility" data-order-key="${esc(s.id)}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="${s.id === 'tilted' ? 'Toujours proposée (la forme de départ)' : 'Proposer dans le menu'}"><input type="checkbox" data-shp-show aria-label="Montrer « ${esc(s.name)} »" ${s.hidden ? '' : 'checked'} ${s.id === 'tilted' ? 'disabled' : ''}></label><span class="lc-shp-thumb">${shapeSvg(s.shape, 24)}</span><b>${esc(s.name)}${s.own ? ' <small class="muted">✎</small>' : ''}${s.shape.src ? ` <small class="muted">· ${esc(s.shape.src)}</small>` : ''}</b>
                 <span class="page-actions"><button type="button" class="icon-button small" data-shp-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-shp-move="1" title="Descendre" aria-label="Descendre">↓</button>${s.own ? '<button type="button" class="button small secondary" data-shp-edit>Modifier</button>' : ''}<button type="button" class="button small secondary" data-shp-dup title="Créer une forme à partir de celle-ci">Dupliquer</button>${s.own && A().settingExportButton ? A().settingExportButton('data-shp-export') : ''}${s.own ? '<button type="button" class="button small secondary danger" data-shp-del>Supprimer</button>' : ''}</span></div>`).join('')}</div>
-            <div class="page-actions"><button type="button" class="button small" data-shp-saveorder>Enregistrer l’ordre et les formes montrées</button><button type="button" class="button small secondary" data-shp-reset title="La liste de départ : l’ordre de l’app et toutes les formes montrées (tes formes restent, à la fin)">↺ Réinitialiser</button></div></details></section>`;
+            <div class="page-actions"><button type="button" class="button small" data-shp-saveorder>Enregistrer l’ordre et les formes montrées</button><button type="button" class="button small secondary" data-shp-reset title="La liste de départ : l’ordre de l’app et toutes les formes montrées (tes formes restent, à la fin)">↺ Remettre comme au départ</button></div></details></section>`;
     }
     function renumber(list) { [...list.querySelectorAll('.order-row')].forEach((row, i) => { const n = row.querySelector('.order-number'); if (n) n.textContent = String(i + 1).padStart(2, '0'); }); }
     function redrawDesignBits() {
@@ -312,7 +312,7 @@
                     <div class="page-actions"><button type="button" class="button small secondary" data-svg-read>Lire ce SVG</button></div><div data-svg-msg></div></div>
             </div>
             <aside class="lc-shp-aside"><span class="section-label">Aperçu</span><div class="lc-shp-preview" data-preview></div><div data-msg></div></aside></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">${own ? 'Enregistrer' : '＋ Créer la forme'}</button></div></form>`;
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">${own ? 'Enregistrer' : 'Créer la forme'}</button></div></form>`;
         document.body.appendChild(dlg);
         const q = s => dlg.querySelector(s);
         const nameInput = q('[data-f="name"]');

@@ -254,7 +254,7 @@
             <div data-presets-slot="txb"></div>
             <p class="muted">Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿)${B ? ', et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir »' : ''}. Gardé aussitôt ; l’outil ouvert suit tout de suite.</p>
             <ol class="h-pet-layout h-txb-list" data-txb-list>${cfg.order.map(row).join('')}</ol>
-            <button type="button" class="button small secondary" data-txb-reset>↺ Réinitialiser</button></div>`;
+            <button type="button" class="button small secondary" data-txb-reset>↺ Remettre comme au départ</button></div>`;
     }
     function prefsBind(box, redraw) {
         const cur = () => { const lis = [...box.querySelectorAll('[data-txb-list] > li')], c = barCfg(); return cleanBar({layout: c.layout, order: lis.map(l => l.dataset.k), hidden: lis.filter(l => !l.querySelector('input[type=checkbox]').checked).map(l => l.dataset.k),

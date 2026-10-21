@@ -47,7 +47,7 @@
             open: (id, again) => ext.openLayoutDoc?.(id, again),
             create: again => ext.newLayoutDoc?.('family', again),
             rename: async (id, name) => { const r = await api('layout_doc', {id}); await post('save_layout_doc', {id, name, is_design: r.is_design, doc: r.doc}); },
-            remove: id => post('delete_layout_doc', {id}), createLabel: '＋ Nouveau livre', extra: '<button type="button" class="button secondary" data-et-blank>⬜ Livre vide</button><button type="button" class="button secondary" data-et-studio>📐 Ouvrir l’atelier</button>'},
+            remove: id => post('delete_layout_doc', {id}), createLabel: '＋ Nouveau livre', extra: '<button type="button" class="button secondary" data-et-blank>⬜ Livre vide</button><button type="button" class="button secondary" data-et-studio>↗ Ouvrir l’atelier</button>'},
     ];
 
     // d'autres fichiers ajoutent leur outil (arbre décoratif, transcription, diaporama, plan de maison…) : ext.editToolsExtra.push({key, icon, label, …})

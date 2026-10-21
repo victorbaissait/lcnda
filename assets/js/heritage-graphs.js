@@ -85,7 +85,7 @@
         return it?.uid || null;
     };
 
-    /* ── le bloc « Diagramme » d'une Fiche (heritage-fiches.js) : à côté de « + Nouveau diagramme », « 📈 Un de mes graphiques » ── */
+    /* ── le bloc « Diagramme » d'une Fiche (heritage-fiches.js) : à côté de « ＋ Nouveau diagramme », « 📈 Un de mes graphiques » ── */
     new MutationObserver(() => {
         if (!document.querySelector('[data-fi-dgnew]:not([data-gr-hook])')) return;
         document.querySelectorAll('[data-fi-dgnew]:not([data-gr-hook])').forEach(b => { b.dataset.grHook = '1'; if (ext.pickMyGraph && ext.myGraphDiagram) b.insertAdjacentHTML('afterend', ' <button type="button" class="button small secondary" data-gr-fimine title="Un graphique de l’Éditeur de graphiques, tenu à jour">📈 Un de mes graphiques</button>'); });

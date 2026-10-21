@@ -233,7 +233,7 @@
 
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page av-page" data-av-kind="${kind}">
-            <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${K.icon} ${esc(K.title)}</h2><p>${esc(K.intro)}</p></div><div class="page-actions"><button type="button" class="button" data-av-montage="${kind}" title="${kind === 'video' ? 'Monter des vidéos : morceaux, titres, fondus, incrustations, musiques' : 'Assembler et retoucher des sons'}">🎬 Montage</button>${kind === 'audio' ? '<button type="button" class="button secondary" data-av-projnew title="Un son de la base ou de l’ordinateur, à travailler et à garder comme projet">🎧 Nouveau projet son</button><button type="button" class="button secondary" data-av-projects title="Revenir sur un son en cours de travail">📂 Projets son</button>' : ''}</div></header>
+            <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${K.icon} ${esc(K.title)}</h2><p>${esc(K.intro)}</p></div><div class="page-actions"><button type="button" class="button" data-av-montage="${kind}" title="${kind === 'video' ? 'Monter des vidéos : morceaux, titres, fondus, incrustations, musiques' : 'Assembler et retoucher des sons'}">🎬 Montage</button>${kind === 'audio' ? '<button type="button" class="button secondary" data-av-projnew title="Un son de la base ou de l’ordinateur, à travailler et à garder comme projet">＋ Nouveau projet son</button><button type="button" class="button secondary" data-av-projects title="Revenir sur un son en cours de travail">📂 Projets son</button>' : ''}</div></header>
             ${items.length ? `<div id="av-bar"></div>
             <div id="av-cards" hidden></div><div class="data-table-wrap" id="av-tablewrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th><th>Titre</th><th>Durée</th><th>Rattaché à</th><th>Date</th><th>Ajouté le</th><th>Taille</th><th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
             <div id="av-player-host"></div>` : A().empty(`Aucun${kind === 'video' ? 'e vidéo' : ' son'} : ajoute un fichier ${kind === 'video' ? 'MP4, MOV ou WEBM' : 'MP3, M4A, WAV, AIFF ou OGG'} sur une fiche, une battue, une enquête… et ${kind === 'video' ? 'elle' : 'il'} apparaîtra ici.`)}
@@ -296,7 +296,7 @@
                 when: it.created_at, whenLabel: 'Ajouté',
                 // K9 : ▶ reste à côté (comme « Ouvrir ») ; le reste dans ⋯
                 quick: it.exists ? `<button type="button" class="button small" data-av-play="${it.id}" aria-label="Lire">${playing && !player.paused ? '❚❚' : '▶'}</button>` : '',
-                menu: [it.original ? `<button type="button" data-av-original="${it.id}">🕰️ ${kind === 'video' ? 'Voir' : 'Écouter'} l’original</button>` : '', it.exists ? `<button type="button" data-av-edit="${it.id}">✏️ Modifier (couper, améliorer…)</button>` : ''].filter(Boolean)};
+                menu: [it.original ? `<button type="button" data-av-original="${it.id}">🕰️ ${kind === 'video' ? 'Voir' : 'Écouter'} l’original</button>` : '', it.exists ? `<button type="button" data-av-edit="${it.id}">✎ Modifier (couper, améliorer…)</button>` : ''].filter(Boolean)};
         };
         const draw = () => {
             view = sorted(filtered(items, p), p.sort);

@@ -1,7 +1,7 @@
 /**
  * 📅 Calendriers (onglet Listes ; serveur : lib/calendars.php).
  *  - « 🗓️ Mon agenda » : salons, visites d'archives, rappels, courriers (envoi, relance), circuits, renouvellements, tâches
- *    de l'Atelier, rappels d'enquête ; « + Nouveau » range la création dans la bonne liste.
+ *    de l'Atelier, rappels d'enquête ; « ＋ Nouveau » range la création dans la bonne liste.
  *  - « 📜 Calendrier de la famille » : les événements des fiches au jour, au mois ou à l'année ; sous chaque jour, la date
  *    dans les calendriers choisis (julien, républicain, juif, musulman…) ; mode « anniversaires » ; une personne seule.
  * Vues : siècle, décennie, année, mois, semaine, jour, liste. Réglages : premier jour de la semaine, style, taille,
@@ -118,7 +118,7 @@
                     const list = ix.day.get(iso(cy, cm, cd)) || [];
                     const corr = A().converterCalendarOptions.filter(([t]) => t !== 'gregorian').map(([t, n]) => [n, altText(cy, cm, cd, t)]).filter(x => x[1]);
                     body = `<div class="h-cal-dayview"><div><h3>${list.length ? A().plural(list.length, 'élément') : 'Rien ce jour-là'}</h3>${list.map(it => `<div class="h-cal-dayitem" style="--c:${colorOf(key, p, it.group)}">${chip(it, true)}</div>`).join('')}
-                            ${onNew ? `<button type="button" class="button small" data-cal-new="${iso(cy, cm, cd)}">+ Créer ce jour-là</button>` : ''}</div>
+                            ${onNew ? `<button type="button" class="button small" data-cal-new="${iso(cy, cm, cd)}">＋ Créer ce jour-là</button>` : ''}</div>
                         <aside class="h-cal-corr"><h4>Ce jour dans les autres calendriers</h4><dl>${corr.map(([n, t]) => `<dt>${esc(n)}</dt><dd>${esc(t)}</dd>`).join('')}</dl></aside></div>`;
                 } else if (c.view === 'year') {
                     label = String(cy);
@@ -146,7 +146,7 @@
                 const viewBtns = VIEWS.map(([v, l]) => `<button type="button" class="${c.view === v ? 'is-active' : ''}" data-cal-view="${v}">${l}</button>`).join('');
                 const legend = groupsOf(key).map(([g, l]) => `<button type="button" class="h-cal-leg ${(p.hidden || []).includes(g) ? 'is-off' : ''}" data-cal-leg="${g}" style="--c:${colorOf(key, p, g)}" title="Montrer / cacher"><i></i>${esc(l)}</button>`).join('');
                 ws.innerHTML = `<section class="page collection-page h-cal h-cal-style-${p.style} h-cal-size-${p.size}">
-                    <header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${title}</h2><p>${intro}</p></div><div class="page-actions">${onNew ? '<button type="button" class="button" data-cal-new="">+ Nouveau</button>' : ''}<button type="button" class="button secondary" data-cal-settings>⚙️ Réglages</button></div></header>
+                    <header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${title}</h2><p>${intro}</p></div><div class="page-actions">${onNew ? '<button type="button" class="button" data-cal-new="">＋ Nouveau</button>' : ''}<button type="button" class="button secondary" data-cal-settings>⚙️ Réglages</button></div></header>
                     <div class="h-cal-bar"><span class="h-cal-nav"><button type="button" class="button small secondary" data-cal-step="-1" title="Précédent">‹</button><button type="button" class="button small secondary" data-cal-today>Aujourd’hui</button><button type="button" class="button small secondary" data-cal-step="1" title="Suivant">›</button></span>
                         <h3 class="h-cal-label">${esc(label)}</h3>
                         <span class="h-cal-jump"><select data-cal-month aria-label="Mois">${MONTHS.map((mn, i) => `<option value="${i + 1}" ${i + 1 === cm ? 'selected' : ''}>${mn}</option>`).join('')}</select><input type="number" data-cal-year value="${cy}" min="1" max="9999" aria-label="Année"></span>
@@ -183,7 +183,7 @@
 
     function settingsDialog(key, p, after) {
         const alts = A().converterCalendarOptions.filter(([t]) => t !== 'gregorian');
-        ext.openDialog({eyebrow: 'RÉGLAGES DU CALENDRIER', title: key === 'genea' ? 'Calendrier de la famille' : 'Mon agenda', wide: true, submitLabel: 'Appliquer',
+        ext.openDialog({eyebrow: 'RÉGLAGES DU CALENDRIER', title: key === 'genea' ? 'Calendrier de la famille' : 'Mon agenda', wide: true, submitLabel: 'Enregistrer',
             body: `<div class="form-grid"><label>La semaine commence le<select name="weekStart">${[[1, 'lundi (France, Europe)'], [0, 'dimanche (Amériques, Japon…)'], [6, 'samedi (Moyen-Orient)']].map(([v, l]) => `<option value="${v}" ${p.weekStart === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label>Style<select name="style">${[['classique', 'Classique'], ['papier', 'Papier ancien'], ['aere', 'Aéré'], ['compact', 'Compact'], ['contraste', 'Contrasté'], ['couleur', 'Cases colorées']].map(([v, l]) => `<option value="${v}" ${p.style === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label>Taille du texte<select name="size">${[['petit', 'Petite'], ['normal', 'Normale'], ['grand', 'Grande']].map(([v, l]) => `<option value="${v}" ${p.size === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -223,10 +223,10 @@
         const opts = [...m.entries()].sort((a, b) => b[1] - a[1]).map(([key, n]) => { const [k, v] = key.split(/:(.*)/s); return `<option value="${esc(placeLabel(k, v, n))}" data-key="${esc(key)}">`; }).join('');
         return `<span class="h-cal-place"><input type="search" data-cal-place placeholder="📍 Un lieu : commune, département, région, pays…" list="h-cal-places"><datalist id="h-cal-places">${opts}</datalist></span>`;
     }
-    /* ─── 📅 Exporter les anniversaires dans un fichier .ics (calendrier du téléphone, de l'ordinateur) ─── */
+    /* ─── ⤓ Exporter les anniversaires dans un fichier .ics (calendrier du téléphone, de l'ordinateur) ─── */
     function icsExportDialog() {
         const PK = window.LCNDA_PICKER;
-        ext.openDialog({eyebrow: 'CALENDRIER', title: '📅 Exporter les anniversaires (.ics)', submitLabel: '📅 Télécharger le fichier',
+        ext.openDialog({eyebrow: 'CALENDRIER', title: '⤓ Exporter les anniversaires (.ics)', submitLabel: '⤓ Télécharger le fichier',
             body: `<p class="muted">Un fichier à ouvrir dans ton calendrier (Apple, Google, Outlook…) : chaque anniversaire revient tous les ans. Le réimporter plus tard met à jour sans créer de doublon.</p>
                 <fieldset class="h-rc-modes"><legend>Les personnes</legend>
                     <label class="checkbox-line"><input type="radio" name="who" value="sosa" checked> Mes ancêtres directs (numérotés Sosa)</label>
@@ -278,7 +278,7 @@
             return data.events.filter(e => !pk || String(e[pk] || '') === pv).map(e => ({uid: 'g' + e.id, y: e.y, m: e.m, d: e.d, approx: e.approx, group: e.group === 'other' && !p.groupOthers ? 'type:' + e.type : e.group,
             title: `${e.type}${e.who.length ? ' — ' + e.who.map(w => w.name).join(' et ') : ''}`, sub: [e.text && e.text !== String(e.y) ? e.text : '', e.place].filter(Boolean).join(' · '), raw: e}));
         },
-        extraToolbar: (data) => '<button type="button" class="button small secondary" data-cal-ics title="Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…)">📅 Exporter les anniversaires (.ics)</button>' + placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : window.LCNDA_PICKER.pickerField({name: 'cal_person', kind: 'person', placeholder: 'Une seule personne…'})}</span>${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
+        extraToolbar: (data) => '<button type="button" class="button small secondary" data-cal-ics title="Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…)">⤓ Exporter les anniversaires (.ics)</button>' + placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : window.LCNDA_PICKER.pickerField({name: 'cal_person', kind: 'person', placeholder: 'Une seule personne…'})}</span>${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
         bindExtra: (sec, data, p, c, {reload, draw}) => {
             sec.querySelector('[data-cal-ics]')?.addEventListener('click', () => icsExportDialog());
             sec.querySelector('[data-cal-place-clear]')?.addEventListener('click', () => { genea().place = ''; draw(); });
@@ -348,7 +348,7 @@
     }
     ext.lists.my_calendar = calendarScreen({
         key: 'agenda', eyebrow: 'LISTES · CALENDRIERS', title: '🗓️ Mon agenda',
-        intro: 'Tout ce que tu as prévu, rassemblé depuis tes listes : salons, visites d’archives, rappels, courriers et relances, circuits, renouvellements, tâches de l’Atelier, rappels d’enquête. « + Nouveau » range ce que tu crées dans la bonne liste.',
+        intro: 'Tout ce que tu as prévu, rassemblé depuis tes listes : salons, visites d’archives, rappels, courriers et relances, circuits, renouvellements, tâches de l’Atelier, rappels d’enquête. « ＋ Nouveau » range ce que tu crées dans la bonne liste.',
         load: () => A().api('my_agenda'),
         toItems: data => data.items.map(it => { const [y, m, d] = it.start.split('-').map(Number); return {uid: it.src + it.id, y, m, d, end: it.end || '', group: it.src, title: it.title, sub: it.sub, done: it.done, raw: it}; }),
         onNew: (date, after) => A().api('my_agenda').then(d => newDialog(date, d.atelier_projects || [], after)),
@@ -400,7 +400,7 @@
                 const [src, id] = b.dataset.agwItem.split(':'), it = (data.agenda.items || []).find(x => x.src === src && String(x.id) === id);
                 if (it) ext.lists.my_calendar_open?.(it);
             }); }), 0);
-            return A().card(index, `Mon agenda : ${c.days === 1 ? 'aujourd’hui' : c.days === 7 ? '7 jours' : c.days === 31 ? 'le mois' : `${c.days} jours`}`, rows.length || '', html + `<p><button type="button" class="link-button" data-h-open-list="my_calendar">🗓️ Ouvrir mon agenda</button></p>`, span);
+            return A().card(index, `Mon agenda : ${c.days === 1 ? 'aujourd’hui' : c.days === 7 ? '7 jours' : c.days === 31 ? 'le mois' : `${c.days} jours`}`, rows.length || '', html + `<p><button type="button" class="link-button" data-h-open-list="my_calendar">↗ Ouvrir mon agenda</button></p>`, span);
         },
     };
 })();

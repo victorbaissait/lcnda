@@ -147,7 +147,7 @@
         const data = read(kind);
         if (data.folders.length >= MAX_FOLDERS) { toast(`${MAX_FOLDERS} dossiers au plus.`, 'error'); return null; }
         if (parent && depthOf(data, parent) >= MAX_DEPTH) { toast('Trois niveaux de dossiers au plus : choisis un dossier moins profond.', 'error'); return null; }
-        const name = cleanName(await A().askText({title: '📁 Nouveau dossier', message: `Le nom du dossier, pour ranger tes ${WORD[kind][1]}.`, placeholder: 'Ex. Assemblées', okLabel: 'Créer le dossier'}));
+        const name = cleanName(await A().askText({title: '＋ Nouveau dossier', message: `Le nom du dossier, pour ranger tes ${WORD[kind][1]}.`, placeholder: 'Ex. Assemblées', okLabel: 'Créer le dossier'}));
         if (!name) return null;
         return {id: newId(), name, parent: parent || null};
     }
@@ -207,7 +207,7 @@
         dialog.querySelector('[data-sf-new]').addEventListener('click', async () => {
             if (work.folders.length >= MAX_FOLDERS) return toast(`${MAX_FOLDERS} dossiers au plus.`, 'error');
             if (chosen && depthOf(work, chosen) >= MAX_DEPTH) return toast('Trois niveaux de dossiers au plus : le nouveau dossier ne peut pas aller dans celui-ci.', 'error');
-            const name = cleanName(await A().askText({title: '📁 Nouveau dossier', message: chosen ? `Il sera rangé dans « ${folderById(work, chosen)?.name || ''} ».` : 'Il sera au premier niveau.', placeholder: 'Ex. Assemblées', okLabel: 'Créer le dossier'}));
+            const name = cleanName(await A().askText({title: '＋ Nouveau dossier', message: chosen ? `Il sera rangé dans « ${folderById(work, chosen)?.name || ''} ».` : 'Il sera au premier niveau.', placeholder: 'Ex. Assemblées', okLabel: 'Créer le dossier'}));
             if (!name) return;
             const f = {id: newId(), name, parent: chosen || null};
             work.folders.push(f); chosen = f.id; draw();

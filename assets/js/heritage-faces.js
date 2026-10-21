@@ -7,7 +7,7 @@
  *      Puis la liste des photos où des visages attendent un nom, à ouvrir dans la visionneuse (« Ouvrir et identifier »).
  *   ② Qui est-ce ? : les visages déjà identifiés à la main servent de modèles ; propositions (« c'est sans doute Marie
  *      Martin »), inconnus qui se ressemblent regroupés, nommés d'un coup.
- * Remplace « + Détection de visage » (détection seule, avec le détecteur du navigateur) et « 🏷️ Qui est qui ? » : la
+ * Remplace « ＋ Détection de visage » (détection seule, avec le détecteur du navigateur) et « 🏷️ Qui est qui ? » : la
  * détection simple du navigateur reste le dernier recours quand le modèle ne peut pas être chargé.
  * Le modèle (face-api, licence MIT, ≈ 13 Mo) vient une fois de jsDelivr et n'est utilisé que si son empreinte est exactement
  * celle attendue ; les photos ne quittent jamais l'ordinateur. On garde seulement l'« empreinte » de chaque visage (128 nombres).

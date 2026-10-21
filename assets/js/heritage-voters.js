@@ -89,7 +89,7 @@
         // la phrase « a pu voter à partir de… » arrive avec les dates du droit de vote (chargées une fois)
         if (!worldReady) loadWorld().then(w => { const box = document.getElementById(id); if (box) { box.innerHTML = voterHtml(d, p, w); A().bindTableLinks(); } }).catch(() => {});
         return card(index, 'Cartes d’électeur', (d.votes || []).length || (d.cards || []).length || '', `<div id="${id}">${voterHtml(d, p, worldReady)}</div>`, 'span-12',
-            editOnly(has ? tools(`data-h-voter-edit="${p.id}"`, `data-h-voter-clear="${p.id}"`, 'les cartes d’électeur') : `<button type="button" class="button small secondary" data-h-voter-edit="${p.id}">+ Carte, votes</button>`));
+            editOnly(has ? tools(`data-h-voter-edit="${p.id}"`, `data-h-voter-clear="${p.id}"`, 'les cartes d’électeur') : `<button type="button" class="button small secondary" data-h-voter-edit="${p.id}">＋ Carte, votes</button>`));
     };
     document.addEventListener('click', async event => {
         const edit = event.target.closest?.('[data-h-voter-edit]');
@@ -132,10 +132,10 @@
         ext.openDialog({
             eyebrow: 'CARTES D’ÉLECTEUR', title: 'Cartes d’électeur et votes', wide: true, labels: ['voter', d.labels],
             body: `<p class="muted">Une carte par période ou par commune. Les dates de vote sont souvent tamponnées au dos (une case par élection).</p>
-                <div data-h-voter-cards>${(d.cards.length ? d.cards : [{}]).map(cardRow).join('')}</div><button type="button" class="button small secondary" data-h-voter-addcard>+ Carte</button>
+                <div data-h-voter-cards>${(d.cards.length ? d.cards : [{}]).map(cardRow).join('')}</div><button type="button" class="button small secondary" data-h-voter-addcard>＋ Carte</button>
                 <h4>Les dates où la personne a voté</h4>
                 <div class="h-voter-votes" data-h-voter-votes>${d.votes.map(voteRow).join('')}</div>
-                <p><button type="button" class="button small secondary" data-h-voter-addvote>+ Vote</button> <button type="button" class="link-button" data-h-voter-many>Ajouter plusieurs dates d’un coup…</button></p>
+                <p><button type="button" class="button small secondary" data-h-voter-addvote>＋ Vote</button> <button type="button" class="link-button" data-h-voter-many>Ajouter plusieurs dates d’un coup…</button></p>
                 <div class="h-voter-many" hidden><label>Une date par ligne (ou séparées par des virgules ou des points-virgules)<textarea rows="3" data-h-voter-many-text placeholder="11 mai 1924&#10;29 avril 1928&#10;1er mai 1932"></textarea></label>
                     <label>Élection<select data-h-voter-many-election><option value="">—</option>${Object.entries(elections).map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label><button type="button" class="button small" data-h-voter-many-add>Ajouter ces dates</button></div>
                 <h4>Photos</h4>${ext.mediaEditorHtml ? ext.mediaEditorHtml('voter', personId, own, [['recto', 'Recto des cartes', 'image/*,application/pdf'], ['verso', 'Verso (tampons des votes)', 'image/*,application/pdf'], ['', 'Autres documents (listes électorales, convocations…)', 'image/*,application/pdf']]) : ''}

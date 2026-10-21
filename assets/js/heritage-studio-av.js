@@ -349,7 +349,7 @@
             ['cut', '✂️ Supprimer la sélection', 'sel'], ['keep', '⬚ Garder seulement la sélection', 'sel'], ['silence', '🔇 Silence', 'sel'],
             ['fadein', '↗ Fondu d’entrée', 'any'], ['fadeout', '↘ Fondu de sortie', 'any'], ['gain', '🔊 Volume…', 'any'], ['normalize', '📏 Normaliser', 'any'],
             ['denoise', '🧹 Réduire le souffle', 'any'], ['clarity', '🗣️ Voix plus nette', 'any'], ['hum', '〰️ Enlever le bourdonnement', 'any'], ['silences', '⏩ Raccourcir les longs blancs', 'all'], ['mono', '🎧 Mono', 'all'],
-            ['insert', '➕ Ajouter un son…', 'all'],
+            ['insert', '＋ Ajouter un son…', 'all'],
         ];
         const dl = bigDialog({eyebrow: 'MODIFIER LE SON', id: 'audio', title: projName || media.title || media.filename,
             bar: {icon: '🎧', undo: '<span class="ui-topbar-hist"><button type="button" class="icon-button small" data-avx-undo disabled data-shortcut="⌘Z" title="Annuler">↶</button><button type="button" class="icon-button small" data-avx-redo disabled data-shortcut="⇧⌘Z" title="Rétablir">↷</button></span>', exportAttrs: 'data-au-export', saveAttrs: 'data-au-saveproj', saveTitle: 'Enregistrer le projet son, pour y revenir plus tard (⌘S)'}, onClose: async () => { stop(); return !dirty || await A().confirmBox('Les modifications du son seront perdues.', {title: 'Fermer sans enregistrer les modifications ?', okLabel: 'Fermer sans enregistrer', danger: true}); },
@@ -362,7 +362,7 @@
                 <div class="h-avx-ops" data-tbg="au-ops" data-tbg-label="Outils du son">${OPS.map(([k, label, need]) => `<button type="button" class="button small secondary" data-avx-op="${k}" data-need="${need}"${k === 'cut' ? ' data-shortcut="⌫"' : ''}>${label}</button>`).join('')}</div>
                 <p class="muted h-avx-help" data-avx-help>Les réglages s’appliquent à la sélection ; sans sélection, à tout le son.</p><p class="muted h-avx-help2"><span data-help="« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer." data-help-faq="modifier un son">Que fait chaque outil ?</span></p>
                 ${ver.html}
-                <div class="modal-actions"><button type="button" class="button small secondary" data-au-projects title="Rouvrir un son en cours de travail">📂 Projets…</button><span class="h-mt-projname" data-au-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé">📥 Garder dans les médias…</button></div>`});
+                <div class="modal-actions"><button type="button" class="button small secondary" data-au-projects title="Rouvrir un son en cours de travail">📂 Projets…</button><span class="h-mt-projname" data-au-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé">💾 Garder dans les médias…</button></div>`});
         ext.tbApply?.(dl, 'audio');
         const $ = s => dl.querySelector(s), cv = $('[data-avx-canvas]'), g = cv.getContext('2d');
         bindVersions(dl, media, 'audio', () => { onDone?.(); if (dirty) return toast('Tes modifications en cours restent ouvertes ici.'); dl.close(); }); // une version montrée ou supprimée : le travail en cours n'est pas perdu
@@ -396,7 +396,7 @@
                 if (o.saveCopy && f !== 'aiff') { await uploadResult(media, blob, f, {mode: 'copy', duration: buf.duration, title: `${nm} (${f.toUpperCase()})`}); toast('Fichier téléchargé, et une copie est rangée dans les médias.'); onDone?.(); } };
             const formats = [{id: 'mp3', label: '🎵 MP3', hint: `lu partout · ~${mb(16000)} Mo`, ext: 'mp3', run: run('mp3')}, {id: 'wav', label: '🎚 WAV', hint: `sans perte · ~${mb(pcm)} Mo`, ext: 'wav', run: run('wav')}, {id: 'flac', label: '🗜 FLAC', hint: `sans perte, léger · ~${mb(pcm * .55)} Mo`, ext: 'flac', run: run('flac')}];
             if (await opusSupported()) formats.push({id: 'ogg', label: '🗣 Ogg Opus', hint: `le plus léger · ~${mb(buf.numberOfChannels > 1 ? 16000 : 9000)} Mo`, ext: 'ogg', run: run('ogg')});
-            formats.push({id: 'aiff', label: '🍎 AIFF', hint: 'GarageBand, Logic', ext: 'aiff', run: run('aiff')}, {id: 'base', label: '📥 Dans les médias…', hint: 'nouvelle version, copie (réglages)', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
+            formats.push({id: 'aiff', label: '🍎 AIFF', hint: 'GarageBand, Logic', ext: 'aiff', run: run('aiff')}, {id: 'base', label: '💾 Dans les médias…', hint: 'nouvelle version, copie (réglages)', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
             await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, info: `${fmt(buf.duration, false)} · ${buf.numberOfChannels > 1 ? 'stéréo' : 'mono'} · ${(buf.sampleRate / 1000).toLocaleString('fr-FR')} kHz${media.id ? ' · la copie est rattachée aux mêmes fiches' : ''}`, formats});
         });
         $('[data-avx-name]')?.addEventListener('input', () => { dirty = true; showProj(); });
@@ -1252,7 +1252,7 @@
                 <div class="h-mt-tl" data-mt-tl></div>
                 <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus.</p>
                 ${ver.html}
-                <div class="modal-actions"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo">📥 Garder dans les médias…</button></div></div>`});
+                <div class="modal-actions"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo">💾 Garder dans les médias…</button></div></div>`});
         dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
         dl.style.setProperty('--mt-stage', MP.stage + 'vh'); dl.style.setProperty('--mt-lane', MP.lane + 'px'); dl.style.setProperty('--mt-side', MP.sideW + 'px');
         [['colV1', 'v1'], ['colV2', 'v2'], ['colT', 't'], ['colA', 'a']].forEach(([k, v]) => { dl.style.setProperty(`--mt-c-${v}`, MP[k]); dl.style.setProperty(`--mt-i-${v}`, inkOn(MP[k])); });
@@ -1334,12 +1334,12 @@
         // 🎞️ vieux film : d'un morceau (old) ou de tout le film (pold)
         const oldHtml = (o, pre, label) => `<details class="h-mt-isec h-mt-old" ${o?.on ? 'open' : ''}><summary><b>🎞️ ${label}</b></summary>${chk(pre + '.on', 'Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris', o?.on)}
             ${rng(pre + '.amt', 'Intensité', 0.05, 1, 0.05, o?.amt ?? OLD0.amt, '%')}${chk(pre + '.sepia', 'sépia (couleurs passées, brunes)', o ? o.sepia !== false : true)}${chk(pre + '.weave', 'l’image tremble un peu, comme dans un vieux projecteur', o ? o.weave !== false : true)}${pre === 'old' && oldClean(P.old) ? '<p class="muted">Tout le film a déjà l’effet (onglet 🎨 Couleurs) : ces réglages-ci passent avant pour ce morceau.</p>' : ''}</details>`;
-        // 📐 stabilisation légère d'une vidéo : analyse une fois (avec sa barre et ✕ Annuler), puis réglages
+        // 📐 stabilisation légère d'une vidéo : analyse une fois (avec sa barre et Annuler), puis réglages
         let stabJob = null, beatJob = null, beatEvery = 1;
         const STAB_HELP = 'Corrige les petites secousses d’une vidéo filmée à la main. L’analyse regarde, sur une image réduite, de combien toute l’image bouge d’un instant à l’autre (vers le haut, le bas, les côtés), garde le mouvement voulu (un panoramique lent) et compense le reste, en agrandissant un peu l’image pour cacher les bords. Elle ne corrige ni les rotations, ni le flou de bougé, ni un sujet qui bouge seul devant un fond fixe.';
         const stabHtml = c => { if (isImg(c) || P.sources[c.s]?.kind !== 'video') return ''; const st = c.stab, job = stabJob?.id === c.id ? stabJob : null;
             return `<details class="h-mt-isec h-mt-stab" ${st || job ? 'open' : ''}><summary><b>📐 Stabiliser (léger)</b><span data-help="${esc(STAB_HELP)}"></span></summary>
-                ${job ? `<div class="h-mt-prog"><progress max="1" value="${job.p}" data-mt-stabprog></progress><button type="button" class="button small secondary" data-mt-stabcancel>✕ Annuler</button></div><p class="muted">Analyse de la vidéo… (elle est regardée image par image, cela peut prendre un moment)</p>`
+                ${job ? `<div class="h-mt-prog"><progress max="1" value="${job.p}" data-mt-stabprog></progress><button type="button" class="button small secondary" data-mt-stabcancel>Annuler</button></div><p class="muted">Analyse de la vidéo… (elle est regardée image par image, cela peut prendre un moment)</p>`
                 : st ? `${chk('stabon', 'stabilisation active', !st.off)}${rng('stab.z', 'Agrandir (cache les bords)', 1.02, 1.2, 0.01, st.z, '%')}${rng('stab.sm', 'Lissage du mouvement', 0.3, 4, 0.1, st.sm, ' s')}<div class="h-mt-quick"><button type="button" data-mt-stab>↻ Refaire l’analyse</button><button type="button" data-mt-stabdel>Enlever la stabilisation</button></div>`
                 : `<button type="button" class="button small secondary" data-mt-stab>📐 Analyser et stabiliser</button><p class="muted">Pour une vidéo filmée à la main qui tremble un peu. L’image est légèrement agrandie.</p>`}</details>`; };
         // 🥁 les temps d'une musique : repérés une fois, ils se voient sur la frise et attirent les éléments qu'on glisse
@@ -1522,7 +1522,7 @@
         const laneIdOf = (track, c) => track === 'v1' ? P.tracks.find(t => t.kind === 'main')?.id : trackOf(P, c, track);
         const isLocked = (track, c) => !!P.tracks.find(t => t.id === laneIdOf(track, c))?.locked;
         const lockToast = () => toast('🔒 Piste verrouillée : clique sur 🔒 à côté de son nom pour la déverrouiller.', 'error');
-        /** 📐 Analyse et stabilise une vidéo (une seule analyse à la fois ; ✕ Annuler l'arrête) */
+        /** 📐 Analyse et stabilise une vidéo (une seule analyse à la fois ; Annuler l'arrête) */
         async function stabGo(c) {
             if (stabJob) return toast('Une analyse est déjà en cours.', 'error');
             const so = P.sources[c.s]; if (!so || so.kind !== 'video') return;
@@ -1779,7 +1779,7 @@
             const rows = [], walk = (id, depth) => subOf(id).sort((a, b) => a.name.localeCompare(b.name, 'fr')).forEach(f => { if (skip && inside(f.id, skip)) return; rows.push([f.id, depth, f.name]); walk(f.id, depth + 1); });
             walk('', 1);
             const d = document.createElement('dialog'); d.className = 'h-mt-rpick';
-            d.innerHTML = `<form method="dialog"><h4>${esc(title)}</h4><div class="h-mt-rpicklist"><button value="" type="submit">🎞️ Tous les rushes (racine)</button>${rows.map(([id, dep, n]) => `<button value="${esc(id)}" type="submit" style="padding-left:${dep * 14}px">📁 ${esc(n)}</button>`).join('')}<button value="__new" type="submit">📁＋ Nouveau dossier…</button></div><menu><button value="__cancel" type="submit" class="button small secondary">Annuler</button></menu></form>`;
+            d.innerHTML = `<form method="dialog"><h4>${esc(title)}</h4><div class="h-mt-rpicklist"><button value="" type="submit">🎞️ Tous les rushes (racine)</button>${rows.map(([id, dep, n]) => `<button value="${esc(id)}" type="submit" style="padding-left:${dep * 14}px">📁 ${esc(n)}</button>`).join('')}<button value="__new" type="submit">＋ Nouveau dossier…</button></div><menu><button value="__cancel" type="submit" class="button small secondary">Annuler</button></menu></form>`;
             dl.appendChild(d); d.addEventListener('close', () => { const v = d.returnValue; d.remove(); res(v === '__cancel' || v === undefined ? null : v); }, {once: true});
             d.addEventListener('cancel', () => { d.returnValue = '__cancel'; });
             d.showModal();
@@ -1905,7 +1905,7 @@
         /** 🪄 Modèles : « La vie de… » (les photos d'une personne, ses dates) ou « Une famille » (la personne, ses parents, conjoints, enfants) */
         function templateDialog(kind) {
             let chosen = 0;
-            ext.openDialog({eyebrow: 'MODÈLE DE MONTAGE', title: kind === 'life' ? '🪄 « La vie de… »' : '🪄 « Une famille »', wide: true, submitLabel: 'Fabriquer le montage',
+            ext.openDialog({eyebrow: 'MODÈLE DE MONTAGE', title: kind === 'life' ? '🪄 « La vie de… »' : '🪄 « Une famille »', wide: true, submitLabel: 'Créer le montage',
                 body: `<p class="muted">${kind === 'life' ? 'Les photos de la personne, dans l’ordre des dates, avec un titre, sa naissance, ses grandes dates et un mot de la fin.' : 'Le portrait de la personne, puis de ses parents, conjoints et enfants, chacun avec son nom et ses dates.'} Tout reste modifiable ensuite.</p>
                     <div><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'av_tpl', kind: 'person'})}</div>
                     <div class="form-grid"><label>Durée par photo <select name="dur">${[3, 4, 5, 6, 8].map(v => `<option value="${v}" ${v === 5 ? 'selected' : ''}>${v} s</option>`).join('')}</select></label>
@@ -1932,7 +1932,7 @@
                         const rel = [...(r.parents || []).map(x => [x, 'Parent']), ...(r.partners || []).map(x => [x, 'Conjoint']), ...(r.children || []).map(x => [x, 'Enfant'])].slice(0, 16);
                         for (const [x, role] of rel) { const id = Number(x.id || x.person_id); if (!id) continue; try { const rr = await A().api('person', {id}), pic = portrait(rr); if (pic) slides.push({m: pic, caption: `${role} : ${nm(rr.person)}`, chapter: role === 'Parent' && !slides.some(s0 => s0.chapter === 'Les parents') ? 'Les parents' : role === 'Conjoint' && !slides.some(s0 => s0.chapter === 'En couple') ? 'En couple' : role === 'Enfant' && !slides.some(s0 => s0.chapter === 'Les enfants') ? 'Les enfants' : ''}); } catch (_) {} }
                     }
-                    if (!slides.length) { btn.textContent = 'Fabriquer le montage'; toast(kind === 'life' ? 'Cette personne n’a pas de photo dans sa fiche.' : 'Aucun portrait trouvé dans ces fiches.', 'error'); return false; }
+                    if (!slides.length) { btn.textContent = 'Créer le montage'; toast(kind === 'life' ? 'Cette personne n’a pas de photo dans sa fiche.' : 'Aucun portrait trouvé dans ces fiches.', 'error'); return false; }
                     if ((P.v1.length || P.texts.length) && !await A().confirmBox('Le montage n’est pas vide.', {title: 'Ajouter ce modèle à la suite ?', okLabel: 'Ajouter à la suite'})) return false;
                     btn.textContent = 'Les photos arrivent…';
                     const start = montageEnd(P) > 0.2 && P.v1.length ? layoutV1(P).at(-1).end : 0;
@@ -1953,7 +1953,7 @@
                     fin.track = freeTrack('t', fin.at, fin.dur); P.texts.push(fin);
                     P.fadeStart = true; P.fadeEnd = true;
                     if (f.music) { const s0 = await addSource('audio'); if (s0 !== null) { const T = montageEnd(P), k = {id: nid('a'), s: s0, from: 0, to: Math.min(P.sources[s0].dur, T - start), at: start, vol: 0.6, fadeIn: 1, fadeOut: 3}; k.track = freeTrack('a', start, k.to); P.audio.push(k); } }
-                    sel = null; await touch(2); record(); toast(`Montage fabriqué : ${A().plural(slides.length, 'photo')}. Retouche ce que tu veux, puis 📤 Exporter.`);
+                    sel = null; await touch(2); record(); toast(`Montage fabriqué : ${A().plural(slides.length, 'photo')}. Retouche ce que tu veux, puis ⤓ Exporter.`);
                 }});
         }
         dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
@@ -2016,7 +2016,7 @@
         $('[data-mt-saveproj]').addEventListener('click', () => saveProject());
         $('[data-avx-name]')?.addEventListener('input', () => { dirty = true; showProjName(); });
         // ⤓ Exporter (E3, la fenêtre commune) : un fichier MP4 / WebM avec les réglages de départ (Maintenance), une copie dans les médias si on veut ;
-        // « 📥 Dans les médias… » garde la fenêtre complète (plusieurs formats d'image, nouvelle version…)
+        // « 💾 Dans les médias… » garde la fenêtre complète (plusieurs formats d'image, nouvelle version…)
         $('[data-mt-export]').addEventListener('click', async () => {
             eng?.pause();
             if (!UIx().openExportDialog) return $('[data-avx-save]').click();
@@ -2040,16 +2040,16 @@
                 finally { release(); await rebuild(); drawTl(); }
             };
             formats.push({id: 'mp3', label: '🎵 Son seul (MP3)', hint: 'musiques, voix et son des vidéos', ext: 'mp3', run: aud('mp3')}, {id: 'wav', label: '🎚 Son seul (WAV)', hint: 'sans perte', ext: 'wav', run: aud('wav')});
-            formats.push({id: 'srt', label: '💬 Sous-titres', hint: 'fichier .srt', ext: '', run: async () => exportSubs()}, {id: 'base', label: '📥 Dans les médias…', hint: 'plusieurs formats, nouvelle version', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
+            formats.push({id: 'srt', label: '💬 Sous-titres', hint: 'fichier .srt', ext: '', run: async () => exportSubs()}, {id: 'base', label: '💾 Dans les médias…', hint: 'plusieurs formats, nouvelle version', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
             await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, value: MP2.fmt, info: `${fmt(T, false)} · rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité et images par seconde : Maintenance → Montage`, formats});
         });
         $('[data-mt-projects]').addEventListener('click', () => projectsDialog({current: projId, onOpen: async pr => { if (dirty && !await A().confirmBox('Les modifications du montage seront perdues.', {title: 'Ouvrir un autre projet sans enregistrer celui-ci ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; dirty = false; dl.close(); await openProject(pr.id, onDone); }}));
         document.addEventListener('keydown', e => { if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } }, {signal: keyAc.signal});
         // ── Un menu en haut, à côté du titre (comme la Retouche) : tout ce que fait le montage ──
         const MT_MENUS = [
-            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '📤 Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '💬 Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['close', 'Fermer']]],
+            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '⤓ Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫']]],
-            ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '💬 Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
+            ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '⤒ Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
             ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante'], ['-'], ['snap', '🧲 Aimanter (marche / arrêt)']]],
             ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['full', '⛶ Plein écran']]],
@@ -2081,7 +2081,7 @@
         });
         dl.addEventListener('keydown', e => { if (e.key === 'Escape' && dl.querySelector('.h-mt-menubar details[open]')) { e.preventDefault(); e.stopPropagation(); closeMenus(); } }, true);
         const markDirty = () => showProjName(); dl.addEventListener('input', markDirty); dl.addEventListener('click', () => setTimeout(markDirty, 0));
-        // 📤 Exporter la vidéo : un fichier MP4 / WebM (le projet, lui, reste ouvert)
+        // ⤓ Exporter la vidéo : un fichier MP4 / WebM (le projet, lui, reste ouvert)
         $('[data-avx-save]').addEventListener('click', () => {
             eng.pause();
             if (!P.v1.length && !P.v2.length) return toast('Le montage est vide : ajoute une vidéo.', 'error');
@@ -2094,7 +2094,7 @@
                 <label>Son ${sel2('abr', [[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], MP2.abr)}</label></div>
                 <div class="h-mt-fmts"><span>Formats (un fichier par format coché, l’un après l’autre) :</span>${ASPECTS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="fmt_${k || 'src'}" ${(P.aspect || '') === k ? 'checked' : ''}> ${l}</label>`).join('')}<label class="checkbox-line"><input type="checkbox" name="blurbars" ${P.blurBars ? 'checked' : ''}> bandes floues plutôt que noires</label></div>
                 <p class="muted">Réglages de départ : Maintenance → Montage, retouche, mise en page et son.</p></fieldset>`;
-            ext.openDialog({eyebrow: 'EXPORTER LA VIDÉO', title: projName || media.title || 'Montage', wide: true, submitLabel: '📤 Exporter',
+            ext.openDialog({eyebrow: 'EXPORTER LA VIDÉO', title: projName || media.title || 'Montage', wide: true, submitLabel: '⤓ Exporter',
                 body: `<p class="h-cfg-explain">Le montage est rejoué pour être enregistré : cela prend <b>${fmt(T, false)}</b> (sa durée). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))).replace('<fieldset class="h-rc-modes"><legend>Comment', exportHtml + '<fieldset class="h-rc-modes"><legend>Comment').replace('<input type="hidden" name="mode" value="new">', exportHtml + '<input type="hidden" name="mode" value="new">'),
                 onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { const ct = d.querySelector('[data-avx-copytitle]'); if (ct) ct.hidden = d.querySelector('[name=mode]:checked')?.value !== 'copy'; })),
                 onSubmit: async form => {
@@ -2179,7 +2179,7 @@
                     <h4>🎨 Couleur des blocs sur la frise</h4><div class="h-mtp-colors">${MT_COLORS.map(([k, l]) => `<label class="h-mtp-color"><input type="color" data-mtp="${k}" value="${esc(p[k])}"> <span class="h-mtp-swatch" data-mtp-sw="${k}" style="background:${esc(p[k])};color:${inkOn(p[k])}">${esc(l)}</span></label>`).join('')}</div>
                     <button type="button" class="button small secondary" data-mtp-colreset>Couleurs de départ</button>
                 </section>
-                <section class="maintenance-panel" data-mtp-blk="export"><h3>📤 Enregistrement des vidéos (par défaut)${blkMove}</h3>
+                <section class="maintenance-panel" data-mtp-blk="export"><h3>⤓ Enregistrement des vidéos (par défaut)${blkMove}</h3>
                     <div class="form-grid h-mtp-grid">
                     <label>Format<select data-mtp="fmt">${opt([['mp4', 'MP4 (H.264) — lu partout'], ['webm', 'WebM — léger']], p.fmt)}</select></label>
                     <label>Taille<select data-mtp="height">${opt(MT_SIZES, p.height)}</select></label>

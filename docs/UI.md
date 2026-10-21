@@ -484,3 +484,46 @@ UI.contextMenu(event, items);   // le même menu à l’endroit de la souris (cl
 - « ⋯ » fait d’un `<details class="ui-more | ui-ph-more | ui-card-more">` : ouvre ce menu tout seul (ses boutons sont cliqués pour de vrai).
 - Clic droit sur une ligne (`tbody tr`, `.ui-row`, `.ui-card`, `[data-ctx-menu]`, vignettes…) : le menu de son ⋯ à la souris, sinon un menu fait de ses boutons (↗ Ouvrir d’abord). Sur un objet d’un éditeur (`.vx-stage`, `.ly-canvas`, `.kn-stage`, `.h-board-stage`, `.h-hs-stage`) : l’objet est choisi, puis Couper, Copier, Coller, Dupliquer, Premier plan, Avancer, Reculer, Arrière-plan, Grouper, Dissocier, Verrouiller, Supprimer — les commandes de l’éditeur, avec leurs touches.
 - Maj + clic droit, une case de texte, du texte choisi, une carte Leaflet : le menu du navigateur. `data-ctx-off` : pas de menu de l’app.
+
+## K3 et K11 — Les mêmes mots, un symbole par action (app-mots.js)
+
+**K3 — un seul mot par geste**
+
+| Pour… | On écrit |
+|---|---|
+| une chose nouvelle (bouton principal d’une fenêtre « Nouveau… ») | « Créer » + ce qu’on crée : « Créer le livre », « Créer l’enquête » |
+| une chose qui existe | « Enregistrer » |
+| mettre une chose dans une autre (une photo dans un recueil, un témoin dans un événement) | « Ajouter » (« ＋ Ajouter… » sur la page) |
+| attacher deux fiches | « Relier » (« 🔗 Relier un recueil ») ; l’inverse : « Retirer » — jamais Rattacher, Lier, Associer |
+| revenir au départ | « ↺ Remettre comme au départ » — jamais Réinitialiser, Revenir au standard, Tout remettre à zéro… (un départ précis peut se dire : « ↺ Remettre le Sosa 1 de la base ») |
+| une fenêtre qui ne fait que montrer | « Fermer » seul, à droite (jamais « Annuler » + « Fermer ») |
+| un réglage | « Enregistrer » (« Appliquer » reste pour une opération : un filtre sur une image, une transformation) |
+
+```js
+UI.createLabel('Nouvelle enquête')    // « Créer l’enquête » ; « Nouveaux… » → « Créer les … » ; null si le titre n’est pas « Nouveau… »
+openDialog({title: 'Nouveau livret', onSubmit})            // bouton « Créer le livret » tout seul (sans submitLabel)
+openDialog({title: 'Organiser', submitLabel: 'Fermer', onSubmit})   // « Fermer » seul (pas d’« Annuler »)
+```
+Filet de sécurité : à l’ouverture d’une fenêtre (`showModal`) dont le titre est « Nouveau… », un bouton principal qui dit seulement « Enregistrer » ou « Créer » devient « Créer le … » ; il reprend son mot quand la même fenêtre s’ouvre pour modifier. `data-k3-off` sur la fenêtre ou le bouton pour l’éviter.
+
+**K11 — une action = un symbole** (`UI.SYMBOLS`)
+
+| Action | Symbole | | Action | Symbole |
+|---|---|---|---|---|
+| Importer | ⤒ | | Exporter, Télécharger | ⤓ |
+| Enregistrer | 💾 | | Imprimer | 🖨 |
+| Modifier | ✎ | | Supprimer | 🗑 |
+| Fermer, retirer d’une liste | × | | Ouvrir | ↗ |
+| Annuler / Rétablir (défaire) | ↶ ↷ | | Réglages, Personnaliser | ⚙️ |
+| Chercher | 🔍 | | Ajouter, Nouveau, Créer (sur la page) | ＋ |
+| Copier, Coller | 📋 | | Dupliquer | ⧉ |
+| Plus d’actions | ⋯ | | Favori, raccourci | ⭐ |
+| Fichier, dossier, choisir un fichier | 📁 | | Relier | 🔗 |
+| Remettre comme au départ | ↺ | | Plein écran | ⛶ |
+| Envoyer, confier à quelqu’un | 📤 | | | |
+
+- Un seul signe devant le mot : « ＋ Nouveau livret » (jamais « 📘 + Nouveau livret », « 🐾 + Nouvel animal ») ; toujours « ＋ » (pas « + », ➕, ⊕).
+- 📥 n’est plus une action (ni importer, ni exporter) ; il ne reste que pour une boîte d’arrivée (« Non classés », dossier surveillé).
+- Le nom du format va dans le menu : « ⤓ Exporter ▾ → CSV, PDF… » ; un bouton à un seul format : « ⤓ Exporter en CSV ».
+- Les menus d’un éditeur gardent l’icône de l’objet (« 🎚 Nouveau calque de réglage ») ; les choix de format d’une fenêtre d’export E3 (📄 PDF, 🖼 PNG…) aussi.
+- Le test `tests/test-harmo-mots-symboles.js` cherche les variantes interdites dans le code.

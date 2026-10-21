@@ -55,10 +55,10 @@
         if (cfg.order.length) cols.sort((a, b) => { const ia = cfg.order.indexOf(a.id), ib = cfg.order.indexOf(b.id); return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib); });
         const row = (c, i) => `<div class="h-cfg-row ${c.on ? '' : 'is-hidden'}" data-col="${i}"><span class="h-rb-tools"><button type="button" class="icon-button" data-col-move="-1" ${i ? '' : 'disabled'}>↑</button><button type="button" class="icon-button" data-col-move="1" ${i < cols.length - 1 ? '' : 'disabled'}>↓</button></span>
             <label class="checkbox-line"><input type="checkbox" data-col-on ${c.on ? 'checked' : ''}> ${esc(c.label || '(sans titre)')}</label>${c.extra ? '<small class="h-cfg-tag is-mine">ajoutée</small><button type="button" class="icon-button danger" data-col-del title="Retirer cette colonne">🗑</button>' : ''}</div>`;
-        ext.openDialog({eyebrow: 'COLONNES DE LA LISTE', title: 'Colonnes', wide: true, submitLabel: 'Appliquer',
+        ext.openDialog({eyebrow: 'COLONNES DE LA LISTE', title: 'Colonnes', wide: true, submitLabel: 'Enregistrer',
             body: `<p class="muted">Coche ce qui doit apparaître, range avec ↑ ↓.${model.canAdd ? ' Tu peux aussi ajouter une colonne tirée des données.' : ''}</p><div class="h-cfg-list" data-cols></div>
-                ${model.canAdd && model.extras.length ? `<div class="h-avx-row"><select data-col-add><option value="">+ Ajouter une colonne…</option>${model.extras.map(k => `<option value="${esc(k)}">${esc(label(k))}</option>`).join('')}</select></div>` : ''}
-                <button type="button" class="button small secondary" data-col-reset>↺ Comme au départ</button>`,
+                ${model.canAdd && model.extras.length ? `<div class="h-avx-row"><select data-col-add><option value="">＋ Ajouter une colonne…</option>${model.extras.map(k => `<option value="${esc(k)}">${esc(label(k))}</option>`).join('')}</select></div>` : ''}
+                <button type="button" class="button small secondary" data-col-reset>↺ Remettre comme au départ</button>`,
             onOpen: d => {
                 const box = d.querySelector('[data-cols]'), drawCols = () => { box.innerHTML = cols.map(row).join(''); };
                 drawCols();

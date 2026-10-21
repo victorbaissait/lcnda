@@ -47,18 +47,18 @@
                 f('date', 'Du', {width: 'half'}), f('date', 'Au', {width: 'half'}), f('heading', 'Pour qui ?'), f('people', 'Ancêtres ou personnes'),
                 f('heading', 'Étapes'), f('steps', 'Étapes', {item: 'Étape', checkable: true, fields: [f('number', 'Jour', {width: 'half'}), f('time', 'Arrivée', {width: 'half'}), f('text', 'Titre', {placeholder: 'Église Saint-Martin'}), f('place', 'Lieu'), f('text', 'Transport, accès'), f('longtext', 'Ce que je cherche'), f('longtext', 'Compte rendu')]}),
                 f('longtext', 'Notes (hébergement, rendez-vous, personnes à rencontrer…)')],
-            record: {status: true, todo: 'À faire', done: 'Faits', mark: 'Marquer fait', item: 'circuit', new: '+ Circuit', form: 'Nouveau circuit', meta: [], map: true}},
+            record: {status: true, todo: 'À faire', done: 'Faits', mark: 'Marquer fait', item: 'circuit', new: '＋ Circuit', form: 'Nouveau circuit', meta: [], map: true}},
         {icon: '🔎', name: 'Projets de recherche', description: 'Une question à résoudre (« Qui sont les parents de Jean ? »), les pistes à suivre une par une, et la conclusion.',
             fields: [f('text', 'Question', {required: true, placeholder: 'Qui sont les parents de Jean Dupont ?'}), f('person', 'Personne concernée', {width: 'half'}), f('select', 'Priorité', {width: 'half', options: ['Haute', 'Moyenne', 'Basse']}),
                 f('steps', 'Pistes à suivre', {item: 'Piste', checkable: true, fields: [f('text', 'Piste', {placeholder: 'Registres paroissiaux de Tulle 1740-1760'}), f('text', 'Où chercher'), f('select', 'Résultat', {options: ['À faire', 'Trouvé', 'Rien trouvé']})]}),
                 f('longtext', 'Ce que j’ai trouvé'), f('longtext', 'Conclusion')],
-            record: {status: true, todo: 'En cours', done: 'Résolus', mark: 'Marquer résolu', item: 'projet', new: '+ Projet', form: 'Nouveau projet', meta: [], map: false}},
+            record: {status: true, todo: 'En cours', done: 'Résolus', mark: 'Marquer résolu', item: 'projet', new: '＋ Projet', form: 'Nouveau projet', meta: [], map: false}},
         {icon: '📅', name: 'Rendez-vous et visites', description: 'Mairies, archives, cousins à rencontrer : quand, où, avec qui, et quoi emporter.',
             fields: [f('text', 'Objet', {required: true}), f('date', 'Date', {width: 'half'}), f('time', 'Heure', {width: 'half'}), f('place', 'Lieu'), f('text', 'Contact', {width: 'half'}), f('text', 'Téléphone', {width: 'half'}),
                 f('steps', 'À emporter', {item: 'Chose', checkable: true, fields: [f('text', 'Chose')]}), f('longtext', 'Compte rendu')],
-            record: {status: true, todo: 'À venir', done: 'Passés', mark: 'Marquer passé', item: 'rendez-vous', new: '+ Rendez-vous', form: 'Nouveau rendez-vous', meta: [], map: true}},
+            record: {status: true, todo: 'À venir', done: 'Passés', mark: 'Marquer passé', item: 'rendez-vous', new: '＋ Rendez-vous', form: 'Nouveau rendez-vous', meta: [], map: true}},
         {icon: '📇', name: 'Liste de fiches vide', description: '',
-            fields: [f('text', 'Titre', {required: true})], record: {status: true, todo: 'À faire', done: 'Faits', mark: 'Marquer fait', item: 'fiche', new: '+ Nouvelle fiche', form: 'Nouvelle fiche', meta: [], map: false}},
+            fields: [f('text', 'Titre', {required: true})], record: {status: true, todo: 'À faire', done: 'Faits', mark: 'Marquer fait', item: 'fiche', new: '＋ Nouvelle fiche', form: 'Nouvelle fiche', meta: [], map: false}},
     ];
     ext.recordTemplates = () => TEMPLATES().map(t => ({icon: t.icon, name: t.name, description: t.description, source: 'records', definition: {fields: t.fields, record: t.record}}));
     // les métadonnées (« Du », « Point de départ ») sous le titre des cartes : choisies après coup dans l'éditeur ; par défaut les 2 premiers champs courts
@@ -66,7 +66,7 @@
 
     /* ─────────── Constructeur du formulaire (dans l'éditeur de listes) ─────────── */
     ext.recordsBuilderHtml = L => {
-        const d = L.definition, r = d.record = {status: true, todo: 'À faire', done: 'Faits', mark: 'Marquer fait', item: 'fiche', new: '+ Nouvelle fiche', form: 'Nouvelle fiche', meta: [], map: false, sort: 'created', ...(d.record || {})};
+        const d = L.definition, r = d.record = {status: true, todo: 'À faire', done: 'Faits', mark: 'Marquer fait', item: 'fiche', new: '＋ Nouvelle fiche', form: 'Nouvelle fiche', meta: [], map: false, sort: 'created', ...(d.record || {})};
         d.fields ??= [];
         const keys = d.fields.filter(x => !['heading', 'steps', 'media'].includes(x.type));
         const sub = (sf, j) => `<div class="h-rb-sub" data-rb-sub="${j}"><input data-rbs="label" value="${esc(sf.label)}" placeholder="Nom du champ"><select data-rbs="type">${SUB_TYPES.map(t => `<option value="${t}" ${sf.type === t ? 'selected' : ''}>${typeOf(t)[1]} ${esc(typeOf(t)[2])}</option>`).join('')}</select>
@@ -83,13 +83,13 @@
                 ${['heading', 'steps', 'checkbox', 'media', 'people', 'person'].includes(x.type) ? '' : `<input data-rb="placeholder" value="${esc(x.placeholder || '')}" placeholder="Exemple grisé dans la case (facultatif)">`}
                 <input data-rb="help" value="${esc(x.help || '')}" placeholder="Aide sous le champ (facultatif)">
                 ${x.type === 'steps' ? `<div class="h-rb-steps"><div class="h-rb-steps-head"><label>Une ligne s’appelle <input data-rb="item" value="${esc(x.item || 'Étape')}" class="h-rb-item"></label><label class="checkbox-line"><input type="checkbox" data-rb="checkable" ${x.checkable !== false ? 'checked' : ''}> chaque ligne se coche (barre d’avancement)</label></div>
-                    <p class="muted">Les champs de chaque ligne :</p><div data-rb-subs>${(x.fields || []).map(sub).join('')}</div><button type="button" class="button small secondary" data-rbs-add>+ Champ de la ligne</button></div>` : ''}</div></div>`; };
+                    <p class="muted">Les champs de chaque ligne :</p><div data-rb-subs>${(x.fields || []).map(sub).join('')}</div><button type="button" class="button small secondary" data-rbs-add>＋ Champ de la ligne</button></div>` : ''}</div></div>`; };
         return `<section class="maintenance-panel"><h3>2. Le formulaire d’une fiche</h3><p class="muted">Clique sur une sorte de champ pour l’ajouter, puis donne-lui un nom. « demi-largeur » met deux champs côte à côte. Les <b>Étapes</b> sont une sous-liste sans limite, chaque ligne avec ses propres champs.</p>
                 <div class="h-be-palette">${TYPES.map(([t, icon, label, help]) => `<button type="button" class="button small secondary" data-rb-add="${t}" title="${esc(help)}">${icon} ${esc(label)}</button>`).join('')}</div>
                 <div class="h-rb-fields" data-rb-fields>${d.fields.map(row).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun champ pour l’instant.</span></p>'}</div>
                 <button type="button" class="button small secondary" data-rb-preview>👁 Voir le formulaire</button></section>
             <section class="maintenance-panel"><h3>3. La liste des fiches</h3><div class="form-grid">
-                <label>Bouton pour créer<input data-rr="new" value="${esc(r.new)}" placeholder="+ Circuit"></label><label>Titre du formulaire<input data-rr="form" value="${esc(r.form)}" placeholder="Nouveau circuit"></label><label>Une fiche s’appelle<input data-rr="item" value="${esc(r.item)}" placeholder="circuit"></label>
+                <label>Bouton pour créer<input data-rr="new" value="${esc(r.new)}" placeholder="＋ Circuit"></label><label>Titre du formulaire<input data-rr="form" value="${esc(r.form)}" placeholder="Nouveau circuit"></label><label>Une fiche s’appelle<input data-rr="item" value="${esc(r.item)}" placeholder="circuit"></label>
                 <label>Titre des cartes<select data-rr="title">${keys.map(x => `<option value="${esc(x.key)}" ${r.title === x.key ? 'selected' : ''}>${esc(x.label)}</option>`).join('')}</select></label>
                 <label>Ordre<select data-rr="sort">${[['created', 'dans l’ordre de création'], ['manual', 'à la main (↑ ↓)'], ['title', 'par titre'], ['date', 'par la première date']].map(([v, l]) => `<option value="${v}" ${r.sort === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <div class="span-2"><span class="section-label">Sous le titre de chaque carte</span><div class="h-village-maps-grid">${keys.map(x => `<label class="checkbox-line"><input type="checkbox" data-rr-meta="${esc(x.key)}" ${(r.meta.length ? r.meta : defaultMeta(d)).includes(x.key) ? 'checked' : ''}> ${esc(x.label)}</label>`).join('') || '<span class="muted">Ajoute d’abord des champs.</span>'}</div></div>
@@ -254,7 +254,7 @@
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page h-recs">${header(inLists ? 'LISTES' : 'ÉDITEUR DE LISTES', (L.icon || '📇') + ' ' + L.name, esc(L.description || '') + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
                 `${inLists ? '' : '<button type="button" class="button secondary" data-rv-back>← Éditeur de listes</button>'}<button type="button" class="button secondary" data-rv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-rv-print>Imprimer</button>${tools('data-rv-edit', 'data-rv-del', 'cette liste')}`)}
-            <div class="collection-toolbar"><button type="button" class="button" data-rv-new>${esc(r.new || '+ Nouvelle fiche')}</button>
+            <div class="collection-toolbar"><button type="button" class="button" data-rv-new>${esc(r.new || '＋ Nouvelle fiche')}</button>
                 ${r.status ? `<div class="segmented-filter" role="group">${[['todo', `${r.todo} (${counts.todo})`], ['done', `${r.done} (${counts.done})`], ['all', `Tous (${counts.todo + counts.done})`]].map(([k, l]) => `<button type="button" class="button small ${v.filter === k ? '' : 'secondary'}" data-rv-filter="${k}" aria-pressed="${v.filter === k}">${esc(l)}</button>`).join('')}</div>` : ''}
                 ${data.rows.length > 5 ? `<input type="search" class="h-rec-search" data-rv-q value="${esc(v.q || '')}" placeholder="Chercher dans les fiches…">` : ''}</div>
             ${editing ? `<form class="maintenance-panel collection-form h-rec-form" data-rv-form><h3>${editing.id ? 'Modifier' : esc(r.form || 'Nouvelle fiche')}</h3>${formInner(d, editing, people)}

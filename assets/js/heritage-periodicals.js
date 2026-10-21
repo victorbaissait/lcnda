@@ -155,7 +155,7 @@
         const newBtns = (f.fam ? [f.fam] : allFams()).map((k, n) => `<button type="button" class="button ${n ? 'secondary' : ''}" data-pr-new="issue" data-fam="${esc(k)}">＋ ${esc(Wf(k).item)}</button>`).join('');
         ws.innerHTML = `<section class="page h-pr">
             <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📚 Revues, livres et documentaires</h2><p>Ce que tu as lu, vu, ce que tu veux acheter ; chaque article, chapitre ou moment, et qui ou quoi y est cité.</p></div>
-                <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? Wf(f.fam).cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⬇️ CSV</button><button type="button" class="button secondary" data-pr-types title="Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage">⚙️ Réglages</button></div></header>
+                <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? Wf(f.fam).cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⤓ Exporter en CSV</button><button type="button" class="button secondary" data-pr-types title="Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage">⚙️ Réglages</button></div></header>
             <div class="h-pr-views h-pr-fams">${fams.map(([k, l]) => `<button type="button" class="${f.fam === k ? 'is-on' : ''}" data-pr-fam="${esc(k)}">${esc(l)}</button>`).join('')}</div>
             <div class="h-pr-views">${views.map(([k, l]) => `<button type="button" class="${f.view === k ? 'is-on' : ''}" data-pr-view="${esc(k)}">${esc(l)}</button>`).join('')}</div>
             ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><label class="checkbox-line"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}> Grouper par catégorie</label></div>` : ''}
@@ -617,13 +617,13 @@
                 toast(`${A().plural((r.result || r).created, 'élément ajouté', 'éléments ajoutés')} au projet de l’Atelier.`);
             }});
     }
-    /** Depuis l'Atelier : « + Ajouter ▾ → 📚 Revues, livres, documentaires… » */
+    /** Depuis l'Atelier : « ＋ Ajouter ▾ → 📚 Revues, livres, documentaires… » */
     ext.pickLibraryForAtelier = async (projectId, folderId, done) => {
         try { D = await api('periodicals'); } catch (e) { return toast(e.message, 'error'); }
         if (!D.issues.length) return toast('Rien encore dans Listes → Revues, livres et documentaires.');
         const rows = [...D.issues.map(i => ({key: 'issue:' + i.id, fam: famOf(i), label: issueName(i), sub: [i.data?.creators, i.date_text].filter(Boolean).join(' · ')})),
             ...D.articles.map(a => { const i = issueOf(a); return {key: 'article:' + a.id, fam: famOf(a), label: (timed(famOf(a)) && a.pages ? `⏱ ${a.pages} — ` : '') + a.title, sub: `dans ${i ? issueName(i) : '?'}${a.authors ? ' · ' + a.authors : ''}`, child: true}; })];
-        ext.openDialog({eyebrow: 'ATELIER', title: '📚 Ajouter des revues, livres, documentaires', wide: true, submitLabel: 'Ajouter au projet',
+        ext.openDialog({eyebrow: 'ATELIER', title: '＋ Ajouter des revues, livres, documentaires', wide: true, submitLabel: 'Ajouter au projet',
             body: `<div class="h-pr-pickbar"><input type="search" data-pk-q placeholder="Chercher…"><select data-pk-fam><option value="">Tout</option>${allFams().map(k => `<option value="${esc(k)}">${Wf(k).ic} ${esc(Wf(k).items)}</option>`).join('')}</select><button type="button" class="link-button" data-pk-all>tout cocher (affichés)</button></div>
                 <div class="h-pr-pick">${rows.map(r => `<label class="checkbox-line ${r.child ? 'is-child' : ''}" data-fam="${r.fam}"><input type="checkbox" value="${r.key}"> ${Wf(r.fam).ic} <span><b>${esc(r.label)}</b> <small class="muted">${esc(r.sub)}</small></span></label>`).join('')}</div>`,
             onOpen: dl => {

@@ -10,7 +10,7 @@
             // images A et B : la fenêtre unique des médias, dans un champ (pastille, « 🖼 Changer », ×) — comme les personnes A et B
             const mfSide=(side,label)=>{const it=state.imageCompare[side];const value=it?.id?{...it,thumb:it.thumb||(normalizedMediaType(it)==='image'&&(it.thumbnail||it.filename)?`media/${encodeURIComponent(it.thumbnail||it.filename)}`:'')}:null;return `<div class="pk-host"><span>${label}</span><div data-compare-mf="${side}">${window.LCNDA_PICKER?.mediaField?window.LCNDA_PICKER.mediaField({name:'',types:['image','document'],value,title:`Choisir ${label.toLowerCase()}`,okLabel:'Comparer'}):''}</div></div>`;};
             content.innerHTML=`${modeToggle}<div class="search-box comparison-pickers">${mfSide('left','L’image A')}${mfSide('right','L’image B')}</div>`;
-            footer.innerHTML=`<button class="button small secondary" id="clear-image-comparison">Réinitialiser</button>`;
+            footer.innerHTML=`<button class="button small secondary" id="clear-image-comparison">↺ Remettre comme au départ</button>`;
             content.addEventListener('media-change',async event=>{
                 const side=event.target.closest('[data-compare-mf]')?.dataset.compareMf;if(!side)return;
                 const it=event.detail.item;
@@ -27,7 +27,7 @@
         // personnes A et B : menu de choix unique
         const pkSide=(side,label)=>{const id=Number(state.comparison[side])||0;return `<div class="pk-host"><span>${label}</span><div data-compare-pk="${side}">${(window.LCNDA_PICKER?.pickerField({name:'compare_'+side,kind:'person',allowCreate:false,value:id?{id,title:state.comparison[`${side}Name`]||'',kind:'person'}:null})||'').replace(` name="compare_${side}"`,'')}</div></div>`;};
         content.innerHTML=`${modeToggle}<div class="search-box comparison-pickers">${pkSide('left','Personne A')}${pkSide('right','Personne B')}</div>`;
-        footer.innerHTML=`<button class="button small secondary" id="clear-comparison">Réinitialiser</button>`;
+        footer.innerHTML=`<button class="button small secondary" id="clear-comparison">↺ Remettre comme au départ</button>`;
         content.addEventListener('picker-change',async event=>{const side=event.target.closest('[data-compare-pk]')?.dataset.comparePk;if(!side)return;const it=event.detail.item;state.comparison[side]=it&&!it.free?Number(it.id):0;state.comparison[`${side}Name`]=it?it.title:'';persistUiState();await renderComparison();},{signal:sidebarSignal()});
         content.addEventListener('click',async event=>{const modeBtn=event.target.closest('[data-comparison-mode]');if(modeBtn){state.comparisonMode=modeBtn.dataset.comparisonMode;persistUiState();renderSidebar();await renderComparison();}},{signal:sidebarSignal()});
         $('#clear-comparison').addEventListener('click',async()=>{state.comparison={left:0,right:0,leftName:'',rightName:'',query:''};persistUiState();renderSidebar();await renderComparison();},{signal:sidebarSignal()});

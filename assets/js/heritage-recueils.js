@@ -81,7 +81,7 @@
         ws.innerHTML = `<section class="page collection-page h-rc">
             <header class="page-header"><div><span class="eyebrow">LISTES · MÉDIAS</span><h2>📚 Recueils</h2>
                 <p>Un recueil rassemble des pages photographiées dans l’ordre : un registre, une liste de prisonniers, un cahier, un album. Tu peux y transcrire chaque page, garder plusieurs campagnes de photos (celles d’il y a dix ans et les nouvelles) et choisir, page par page, la meilleure image.</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>+ Nouveau recueil</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>＋ Nouveau recueil</button></div></header>
             ${rows.length || s.q ? '<div data-rc-bar></div>' : ''}${rows.length && view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: r.title, open: `data-open-recueil="${r.id}"`, lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '), `${plural(r.pages, 'page', 'pages')} · ${pctOf(r)} % transcrit`], when: r.updated_at, whenLabel: 'Modifié'}))) : rows.length ? UI.cardsHtml(rows.map(r => { const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0; // K9 : la vignette unique
                 return {thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: `${r.icon || '📚'} ${r.title}`, open: `data-open-recueil="${r.id}"`,
                     lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ') || 'Sans cote', `${plural(r.pages, 'page', 'pages')} · ${plural(r.versions, 'version', 'versions')}${r.links ? ` · 🔗 ${r.links}` : ''}`],
@@ -153,7 +153,7 @@
         ws.innerHTML = `<section class="page collection-page h-rc h-rc-one">
             <header class="page-header"><div><button type="button" class="back-link" data-rc-back>← Tous les recueils</button><span class="eyebrow">RECUEIL</span><h2>${esc(r.icon || '📚')} ${esc(r.title)}</h2>
                 <p class="muted">${esc([r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ')) || '&nbsp;'}</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-rc-cover title="Choisir l’image de couverture du recueil">🖼️ Couverture</button><button type="button" class="button secondary" data-rc-edit>Modifier</button><button type="button" class="button" data-rc-add>+ Ajouter des photos</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-rc-cover title="Choisir l’image de couverture du recueil">🖼️ Couverture</button><button type="button" class="button secondary" data-rc-edit>Modifier</button><button type="button" class="button" data-rc-add>＋ Ajouter des photos</button></div></header>
             <div class="h-rc-tabs segmented">${tabs.map(([k, icon, label, n]) => `<button type="button" class="${s.tab === k ? 'is-active' : ''}" data-rc-tab="${k}">${icon} ${label}${n !== '' ? ` <small>${n}</small>` : ''}</button>`).join('')}
                 <span class="h-rc-tabs-info muted">${plural(D.pages.length, 'page', 'pages')} · ${pct} % transcrit${loose().length ? ` · <button type="button" class="link-button h-rc-warn" data-rc-goloose>${plural(loose().length, 'photo à ranger', 'photos à ranger')}</button>` : ''}</span></div>
             <div class="h-rc-body"></div></section>`;
@@ -185,7 +185,7 @@
         const ls = loose();
         body.innerHTML = `<div class="collection-toolbar h-rc-toolbar"><input type="search" data-rc-q2 value="${esc(s.q || '')}" placeholder="Chercher dans les transcriptions, les noms de page…">
                 <span class="segmented"><button type="button" class="${s.view !== 'table' ? 'is-active' : ''}" data-rc-view="grid">▦ Mosaïque</button><button type="button" class="${s.view === 'table' ? 'is-active' : ''}" data-rc-view="table">☰ Tableau</button></span>
-                <button type="button" class="button small secondary" data-rc-newpage>+ Page sans photo</button></div>
+                <button type="button" class="button small secondary" data-rc-newpage>＋ Page sans photo</button></div>
             ${ls.length || trays().length ? looseHtml(ls) : ''}
             ${!D.pages.length ? A().emptyState({icon: '📄', text: 'Aucune page pour l’instant', hint: 'Chaque photo devient une page, dans l’ordre.', action: {label: '＋ Ajouter des photos', attrs: 'data-rc-add-empty'}}) :
             s.view === 'table' ? `<div class="data-table-wrap"><table class="data-table h-rc-table"><thead><tr><th>N°</th><th>Page</th>${D.versions.map(v => `<th>${esc(v.name)}</th>`).join('')}<th>Transcription</th></tr></thead><tbody>${pages.map(p => {
@@ -256,7 +256,7 @@
                 <span class="h-rc-tray-tools">${ts.length > 1 ? `<button type="button" class="icon-button" data-rc-traymove="-1" ${k ? '' : 'disabled'} title="Monter le dossier">↑</button><button type="button" class="icon-button" data-rc-traymove="1" ${k < ts.length - 1 ? '' : 'disabled'} title="Descendre le dossier">↓</button>` : ''}<button type="button" class="icon-button" data-rc-trayren="${esc(name)}" title="Renommer le dossier">✎</button><button type="button" class="icon-button" data-rc-traydel="${esc(name)}" title="Supprimer le dossier (ses photos restent à ranger)">🗑</button></span></summary>
                 <div class="h-rc-loose-list">${list.map(looseItem).join('') || '<p class="muted">Vide : glisse des photos ici, ou choisis ce dossier sous une photo.</p>'}</div></details>`;
         return `<div class="h-rc-loose maintenance-panel"><div class="h-rc-loose-head"><h3>🧺 À ranger <small class="muted">${plural(ls.length, 'photo', 'photos')} sans page${ts.length ? ' · trie-les d’abord dans des dossiers, puis choisis leur page' : ' : choisis sa page'}</small></h3>
-                <span class="h-rc-loose-tools"><button type="button" class="button small secondary" data-rc-traynew>+ Dossier</button>${ls.length ? `<button type="button" class="button small secondary" data-rc-pickall>${n ? 'Tout décocher' : 'Tout cocher'}</button>` : ''}</span></div>
+                <span class="h-rc-loose-tools"><button type="button" class="button small secondary" data-rc-traynew>＋ Dossier</button>${ls.length ? `<button type="button" class="button small secondary" data-rc-pickall>${n ? 'Tout décocher' : 'Tout cocher'}</button>` : ''}</span></div>
             ${n ? `<div class="h-rc-bulk"><strong>${plural(n, 'photo choisie', 'photos choisies')}</strong>
                 <label>Mettre dans <select data-rc-bulktray><option value="">—</option><option value="__none">📂 Sans dossier</option>${ts.map(t => `<option value="${esc(t)}">📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ Nouveau dossier…</option></select></label>
                 <label>Mettre sur ${pageSelect('data-rc-bulkpage', 0, true)}</label><small class="muted">Une nouvelle page = une page par photo, dans l’ordre.</small></div>` : ''}
@@ -341,14 +341,14 @@
                 <span class="muted">${p.num} / ${D.pages.length}</span></div>
             <div class="h-rc-pageview">
                 <div class="h-rc-stage-wrap">
-                    <div class="h-rc-stage ${cmp ? 'is-compare' : ''}">${imgs.length > 1 && !cmp && cur ? `<button type="button" class="h-rc-imgnav is-prev" data-rc-imgstep="-1" title="Image précédente de cette page" data-shortcut="←">‹</button><button type="button" class="h-rc-imgnav is-next" data-rc-imgstep="1" title="Image suivante de cette page" data-shortcut="→">›</button><span class="h-rc-imgcount">${imgs.indexOf(cur) + 1} / ${imgs.length}</span>` : ''}${cur ? stage(cur) + (cmp ? stage(cmp) : '') : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-rc-addhere>+ Ajouter une photo de cette page</button></div>`}</div>
+                    <div class="h-rc-stage ${cmp ? 'is-compare' : ''}">${imgs.length > 1 && !cmp && cur ? `<button type="button" class="h-rc-imgnav is-prev" data-rc-imgstep="-1" title="Image précédente de cette page" data-shortcut="←">‹</button><button type="button" class="h-rc-imgnav is-next" data-rc-imgstep="1" title="Image suivante de cette page" data-shortcut="→">›</button><span class="h-rc-imgcount">${imgs.indexOf(cur) + 1} / ${imgs.length}</span>` : ''}${cur ? stage(cur) + (cmp ? stage(cmp) : '') : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-rc-addhere>＋ Ajouter une photo de cette page</button></div>`}</div>
                     ${cur ? `<div class="h-rc-imgactions">
                         ${p.best_image_id === cur.id ? '<span class="h-rc-kept">⭐ Image retenue pour cette page</span>' : `<button type="button" class="button small" data-rc-best="${cur.id}" title="C’est elle qu’on voit dans la mosaïque, le résumé et les fiches">⭐ Garder celle-ci</button>`}
                         <button type="button" class="button small secondary" data-rc-zoom="${cur.id}">🔍 Agrandir, pivoter, retoucher</button>
                         ${ext.openAssembler ? `<button type="button" class="button small secondary" data-rc-assemble title="Mettre ensemble les photos de cette page (morceaux, zoom…) : le résultat devient l’image retenue">🧩 Assembler</button>` : ''}
                         ${imgs.length > 1 ? `<button type="button" class="button small secondary" data-rc-compare="${cmp ? 0 : (imgs.find(i => i.id !== cur.id)?.id || 0)}">${cmp ? '✕ Fin de la comparaison' : '⇄ Comparer côte à côte'}</button>` : ''}
                         <button type="button" class="button small secondary" data-rc-role="${cur.id}">${cur.role === 'detail' ? '📄 C’est la page entière' : '🔍 C’est un détail (zoom)'}</button>
-                        <button type="button" class="button small secondary" data-rc-linkimg title="Rattacher juste cette image à une fiche (ses médias ou un bloc), une enquête, une battue, l’Atelier, un village">🔗 Rattacher cette image…</button>
+                        <button type="button" class="button small secondary" data-rc-linkimg title="Relier juste cette image à une fiche (ses médias ou un bloc), une enquête, une battue, l’Atelier, un village">🔗 Relier cette image…</button>
                         <label class="h-rc-move">Déplacer vers ${pageSelect('data-rc-moveimg', p.id)}</label>
                         <button type="button" class="icon-button danger" data-rc-remove="${cur.id}" title="Retirer cette photo du recueil (elle reste dans Médias)">🗑</button></div>` : ''}
                     ${cur ? '<p class="h-rc-owners muted" data-rc-owners></p>' : ''}
@@ -361,12 +361,12 @@
                     ${cur?.media_transcription && !p.transcription.trim() ? `<button type="button" class="link-button" data-rc-usemedia>↧ Reprendre la transcription déjà faite sur cette photo</button>` : ''}
                     <button type="button" class="link-button h-rc-totable" data-rc-totable>📊 ${p.table ? 'Voir le tableau de la page' : 'Une liste à transposer ? Faire un tableau'} ↓</button>
                     <label>Notes<textarea data-rc-field="notes" rows="4" placeholder="Abréviations, mots incertains, ce qu’il reste à vérifier…">${esc(p.notes)}</textarea></label>
-                    <div class="h-rc-sideactions"><button type="button" class="button small secondary" data-rc-pagemove="-1" ${idx ? '' : 'disabled'}>↑ Avancer la page</button><button type="button" class="button small secondary" data-rc-pagemove="1" ${next ? '' : 'disabled'}>↓ Reculer la page</button><button type="button" class="button small secondary" data-rc-insert>+ Page après</button><button type="button" class="button small secondary" data-rc-linkpage title="Rattacher cette page à une fiche, un village, une enquête, un projet de l’Atelier, une battue">🔗 Rattacher la page…</button><button type="button" class="button small secondary danger" data-rc-delpage>Supprimer la page</button></div>
+                    <div class="h-rc-sideactions"><button type="button" class="button small secondary" data-rc-pagemove="-1" ${idx ? '' : 'disabled'}>↑ Avancer la page</button><button type="button" class="button small secondary" data-rc-pagemove="1" ${next ? '' : 'disabled'}>↓ Reculer la page</button><button type="button" class="button small secondary" data-rc-insert>＋ Page après</button><button type="button" class="button small secondary" data-rc-linkpage title="Relier cette page à une fiche, un village, une enquête, un projet de l’Atelier, une battue">🔗 Relier la page…</button><button type="button" class="button small secondary danger" data-rc-delpage>Supprimer la page</button></div>
                     ${(() => { const ls = D.links.filter(l => l.from_num ? p.num >= l.from_num && p.num <= (l.to_num || l.from_num) : true); const chips = [...new Set(ls.map(l => `<span class="h-rc-chip">${esc(l.type_label)} · ${esc(l.label)}${l.from_num ? '' : ' <small>(tout le recueil)</small>'}</span>`))]; return chips.length ? `<p class="h-rc-pagelinks"><b>🔗 Cette page est rattachée à :</b> ${chips.join(' ')}</p>` : ''; })()}
                     <p class="muted h-rc-hint">Supprimer une page ne supprime pas ses photos : elles passent « à ranger ».</p>
                 </div></div>
             <details class="h-rc-tablebox maintenance-panel" data-rc-tablebox ${p.table || s.tableOpen ? 'open' : ''}><summary><b>📊 Tableau de la page</b> <small class="muted">${p.table ? plural(p.table.rows?.length || 0, 'ligne', 'lignes') + ' · ' + plural(p.table.cols?.length || 0, 'colonne', 'colonnes') : 'pour transposer une liste (noms, âges, lieux…) ligne par ligne'}</small> <span class="h-rc-saved muted" data-rc-tsaved></span></summary>
-                <div data-rc-table>${p.table ? '' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas encore de tableau sur cette page.</span></p><button type="button" class="button small" data-rc-tnew>📊 Créer le tableau</button>'}</div></details>`;
+                <div data-rc-table>${p.table ? '' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas encore de tableau sur cette page.</span></p><button type="button" class="button small" data-rc-tnew>＋ Créer le tableau</button>'}</div></details>`;
         const go = id => { if (!id) return; s.page = Number(id); s.image = 0; s.compare = 0; paint(); };
         bindPageTable(body, p);
         body.querySelector('[data-rc-totable]')?.addEventListener('click', () => { const tb = body.querySelector('[data-rc-tablebox]'); tb.open = true; tb.scrollIntoView({behavior: 'smooth', block: 'start'}); });
@@ -501,7 +501,7 @@
             let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
             const guess = t.cols.map(c => (row.c[c.id] || '').trim()).filter(v => /\p{L}{2}/u.test(v)).slice(0, 2).join(' ');
             let picker = null;
-            dialog({eyebrow: 'LIGNE ' + (t.rows.indexOf(row) + 1), title: 'Rattacher cette ligne à une fiche', submitLabel: 'Rattacher',
+            dialog({eyebrow: 'LIGNE ' + (t.rows.indexOf(row) + 1), title: 'Relier cette ligne à une fiche', submitLabel: 'Relier',
                 body: `<p class="muted">${esc(ext.recueilTableRowText(t, row) || 'Ligne vide')}</p>` + ext.personPickerHtml({guess}),
                 onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true}); picker = ext.bindPersonPicker(d); },
                 onSubmit: async form => {
@@ -527,7 +527,7 @@
         const dl = dialog({eyebrow: 'RECUEIL', title: 'Image de couverture', wide: true,
             body: `<div class="h-rc-covnow">${cur ? `<img src="${esc(thumbUrl(cur))}" alt="">` : `<span class="h-rc-cover-empty">${esc(r.icon || '📚')}</span>`}
                     <p>${cur?.chosen ? '<b>Couverture choisie.</b>' : 'Pour l’instant : <b>la première page</b> (automatique).'}<br><small class="muted">Clique sur une image ci-dessous pour en faire la couverture.</small>${cur?.chosen ? '<br><button type="button" class="link-button" data-rc-covreset>↺ Revenir à la première page</button>' : ''}</p></div>
-                <h4>📤 Une image à part, juste pour la couverture</h4>
+                <h4>🖼 Une image à part, juste pour la couverture</h4>
                 <label class="h-rc-drop"><input type="file" accept="image/*" data-rc-covfile><span>📷 Choisir une image sur l’ordinateur</span></label>
                 <h4>📚 Une photo du recueil</h4>
                 <div class="h-rc-covgrid">${shown.concat(others).map(i => tile(i.media_id, thumbUrl(i), (pageById(i.page_id) ? pageName(pageById(i.page_id)) : 'À ranger') + ' · ' + (versionById(i.version_id)?.name || ''), cur?.chosen && cur.media_id === i.media_id)).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Pas encore de photo dans le recueil.</span></p>'}</div>
@@ -556,7 +556,7 @@
     const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🧭 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village'], ['family_booklet', '📘 Un livret de famille'], ['pet', '🐾 Un animal']];
     function pageLinkDialog({page, image, scope = 'page'}) {
         let pkItem = null; // la chose choisie dans le menu de choix unique
-        dialog({eyebrow: 'RATTACHER', title: `${D.recueil.title} — ${pageName(page)}`, wide: true, submitLabel: 'Rattacher',
+        dialog({eyebrow: 'RATTACHER', title: `${D.recueil.title} — ${pageName(page)}`, wide: true, submitLabel: 'Relier',
             body: `<fieldset class="h-rc-modes"><legend>Quoi ?</legend>
                     <label class="checkbox-line"><input type="radio" name="scope" value="page" ${scope === 'page' ? 'checked' : ''}> <b>Toute la page</b> <small class="muted">(elle apparaîtra dans « Recueils » de la fiche, du village, de l’enquête…)</small></label>
                     <label class="checkbox-line"><input type="radio" name="scope" value="image" ${scope === 'image' ? 'checked' : ''} ${image ? '' : 'disabled'}> <b>Juste cette image</b> <small class="muted">(elle s’ajoute aux médias de la fiche, à un bloc, aux pièces de l’enquête…)</small></label></fieldset>
@@ -630,10 +630,10 @@
             ${D.versions.map((v, k) => { const imgs = D.images.filter(i => i.version_id === v.id); const covered = new Set(imgs.filter(i => i.page_id && i.role === 'page').map(i => i.page_id)).size;
                 return `<section class="maintenance-panel h-rc-version" data-rc-v="${v.id}"><div class="h-cfg-head"><h3>🗂️ ${esc(v.name)} <small class="muted">${esc(v.date_text || '')} · ${plural(imgs.length, 'photo', 'photos')} · ${plural(covered, 'page', 'pages')} sur ${D.pages.length}</small></h3>
                     <span class="h-cfg-actions"><button type="button" class="icon-button" data-rc-vmove="-1" ${k ? '' : 'disabled'} title="Monter">↑</button><button type="button" class="icon-button" data-rc-vmove="1" ${k < D.versions.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>
-                    <button type="button" class="button small secondary" data-rc-vedit>Renommer…</button><button type="button" class="button small" data-rc-vadd>+ Photos</button>${D.versions.length > 1 ? '<button type="button" class="icon-button danger" data-rc-vdel title="Supprimer cette version">🗑</button>' : ''}</span></div>
+                    <button type="button" class="button small secondary" data-rc-vedit>Renommer…</button><button type="button" class="button small" data-rc-vadd>＋ Photos</button>${D.versions.length > 1 ? '<button type="button" class="icon-button danger" data-rc-vdel title="Supprimer cette version">🗑</button>' : ''}</span></div>
                     ${v.notes ? `<p class="muted">${nl(v.notes)}</p>` : ''}
                     <div class="h-rc-vstrip">${imgs.map(i => { const p = pageById(i.page_id); return `<button type="button" class="h-rc-thumb" ${p ? `data-rc-open="${p.id}" data-rc-image="${i.id}"` : `data-rc-zoomv="${i.id}"`} title="${p ? esc(pageName(p)) : 'À ranger'}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"><small>${p ? (i.role === 'detail' ? '🔍 ' : '') + 'p. ' + p.num : '🧺 à ranger'}</small>${p && i.id === p.shown_image_id ? '<b>⭐</b>' : ''}</button>`; }).join('') || '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Pas encore de photo.</span></span>'}</div></section>`; }).join('')}
-            <button type="button" class="button secondary" data-rc-vnew>+ Nouvelle série de photos</button>`;
+            <button type="button" class="button secondary" data-rc-vnew>＋ Nouvelle série de photos</button>`;
         body.querySelectorAll('[data-rc-cmp]').forEach(sel => sel.addEventListener('change', () => { s['cmp' + sel.dataset.rcCmp] = Number(sel.value); paintVersions(body); }));
         body.querySelectorAll('[data-rc-keep]').forEach(btn => btn.addEventListener('click', () => { const [pid, iid] = btn.dataset.rcKeep.split(':').map(Number); run('save_recueil_page', {id: pid, best_image_id: iid}); }));
         body.querySelectorAll('[data-rc-open]').forEach(btn => btn.addEventListener('click', () => { s.tab = 'pages'; s.page = Number(btn.dataset.rcOpen); s.image = Number(btn.dataset.rcImage || 0); paint(); }));
@@ -666,7 +666,7 @@
         body.innerHTML = `<p class="muted">Rattache tout le recueil, ou seulement quelques pages, à une fiche, un village, une enquête, un projet de l’Atelier ou une battue. Le recueil y apparaît, avec les pages concernées.</p>
             ${D.links.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Rattaché à</th><th>Sorte</th><th>Pages</th><th>Note</th><th></th></tr></thead><tbody>${D.links.map(l => `<tr><td>${linkLabel(l)}</td><td>${esc(l.type_label)}</td><td>${esc(linkPages(l))}</td><td>${esc(l.note)}</td>
                 <td class="h-rc-actions"><button type="button" class="button small secondary" data-rc-ledit="${l.id}">Modifier</button><button type="button" class="icon-button danger" data-rc-ldel="${l.id}" title="Détacher">🗑</button></td></tr>`).join('')}</tbody></table></div>` : A().empty('Rattaché à rien pour l’instant.')}
-            <button type="button" class="button" data-rc-lnew>+ Rattacher</button>`;
+            <button type="button" class="button" data-rc-lnew>🔗 Relier</button>`;
         body.querySelector('[data-rc-lnew]').addEventListener('click', () => linkDialog(null));
         body.querySelectorAll('[data-rc-ledit]').forEach(b => b.addEventListener('click', () => linkDialog(D.links.find(l => l.id === Number(b.dataset.rcLedit)))));
         body.querySelectorAll('[data-rc-ldel]').forEach(b => b.addEventListener('click', async () => { if (await A().confirmBox('Détacher ce lien du recueil ?', {title: 'Détacher', okLabel: 'Détacher'})) run('delete_recueil_link', {id: Number(b.dataset.rcLdel)}, 'Détaché.'); }));
@@ -777,7 +777,7 @@
                 ${b.type === 'note' ? `<textarea data-sb-f="text" rows="2" placeholder="Ta note…" class="span-all">${esc(b.text || '')}</textarea><button type="button" class="icon-button danger" data-sb-del title="Supprimer">🗑</button>` : ''}</div>`; };
         dialog({eyebrow: 'RÉSUMÉ DU RECUEIL', title: 'Ce qu’on voit dans le résumé', wide: true, submitLabel: 'Enregistrer',
             body: `<p class="muted">Coche les blocs à afficher, range-les avec ↑ ↓, renomme-les, choisis combien d’éléments ils montrent.</p><div class="h-cfg-list" data-sb-list></div>
-                <div class="page-actions"><button type="button" class="button small secondary" data-sb-note>+ Note libre</button><button type="button" class="button small secondary" data-sb-reset>↺ Comme au départ</button></div>`,
+                <div class="page-actions"><button type="button" class="button small secondary" data-sb-note>＋ Note libre</button><button type="button" class="button small secondary" data-sb-reset>↺ Remettre comme au départ</button></div>`,
             onOpen: dl => {
                 const box = dl.querySelector('[data-sb-list]');
                 const read = () => box.querySelectorAll('[data-sb]').forEach(r => { const b = blocks[Number(r.dataset.sb)]; r.querySelectorAll('[data-sb-f]').forEach(el => { const k = el.dataset.sbF; b[k] = el.type === 'checkbox' ? el.checked : k === 'n' ? Number(el.value) || 12 : el.value; }); });
@@ -805,15 +805,15 @@
                 <button type="button" class="icon-button" data-rc-unlink="${r.link_id}" title="Détacher">✕</button></div>
                 ${r.note ? `<p class="muted">${esc(r.note)}</p>` : ''}
                 <div class="h-rc-for-strip">${r.thumbs.map(t => `<button type="button" class="h-rc-thumb" data-open-recueil="${r.recueil_id}" data-recueil-page="${t.page_id}" title="${esc(t.label || 'Page ' + t.num)}">${t.thumbnail ? `<img src="media/${encodeURIComponent(t.thumbnail)}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">—</span>'}<small>${t.num}</small></button>`).join('')}${r.pages > r.thumbs.length ? `<button type="button" class="h-rc-thumb h-rc-more" data-open-recueil="${r.recueil_id}">+${r.pages - r.thumbs.length}</button>` : ''}</div></div>`).join('')}
-            <button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">+ Rattacher un recueil</button></div>`;
+            <button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">🔗 Relier un recueil</button></div>`;
     }
-    /** Fenêtre « Rattacher un recueil » depuis une fiche, un village… */
+    /** Fenêtre « Relier un recueil » depuis une fiche, un village… */
     ext.recueilAttachDialog = async (type, key, after, {folderId = null, folders = null} = {}) => {
         if (type === 'investigation' && !folders) { const host = document.querySelector(`[data-rc-host][data-rc-type="investigation"][data-rc-key="${CSS.escape(String(key))}"]`); try { folders = JSON.parse(host?.dataset.rcFolders || '[]'); } catch (_) { folders = []; } }
         const list = (await get('recueils').catch(() => ({recueils: []}))).recueils || [];
         if (!list.length) { if (await A().confirmBox('Pas encore de recueil. En créer un maintenant (Listes › Recueils) ?', {title: 'Aucun recueil', okLabel: 'Créer un recueil'})) { S().listType = 'recueils'; Object.assign(st(), {id: 0}); A().setModule('listes'); } return; }
         let pages = [];
-        dialog({eyebrow: 'RECUEIL', title: 'Rattacher un recueil', wide: true, submitLabel: 'Rattacher',
+        dialog({eyebrow: 'RECUEIL', title: 'Relier un recueil', wide: true, submitLabel: 'Relier',
             body: `<label>Recueil<select name="recueil_id">${list.map(r => `<option value="${r.id}">${esc(r.icon || '📚')} ${esc(r.title)} (${r.pages} p.)</option>`).join('')}</select></label><div data-rc-range></div>
                 ${type === 'investigation' ? `<label>Où le montrer dans l’enquête<select name="folder_id">${folderOptions(folders || [], folderId == null ? null : Number(folderId))}</select><small class="muted">« Partout » : visible dans chaque dossier (pratique pour un registre qui sert souvent). Tu pourras le déplacer ensuite.</small></label>` : ''}
                 <label>Note <small class="muted">(facultatif)</small><input name="note" placeholder="Il est cité à la ligne 12"></label>`,
@@ -841,7 +841,7 @@
         }
         const elsewhere = all.length - rows.length;
         const more = elsewhere ? `<p class="muted h-rc-elsewhere">${plural(elsewhere, 'autre recueil est rangé', 'autres recueils sont rangés')} dans d’autres dossiers de l’enquête.</p>` : '';
-        if (!rows.length && hideEmpty) { box.innerHTML = place ? (elsewhere ? more : '') : `<button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">📚 Rattacher un recueil</button>`; }
+        if (!rows.length && hideEmpty) { box.innerHTML = place ? (elsewhere ? more : '') : `<button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">🔗 Relier un recueil</button>`; }
         else box.innerHTML = `<section class="maintenance-panel h-rc-section"><h3>${title}</h3>${rows.length ? '' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun recueil rattaché.</span></p>'}${forEntityHtml(rows, type, key, place)}${more}</section>`;
         const again = () => ext.recueilsSection(box, type, key, {title, hideEmpty});
         bindFor(box, again, place);
@@ -867,6 +867,6 @@
         const rows = detail.heritage?.recueils || [];
         const pid = detail.person?.id;
         setTimeout(() => { const box = document.querySelector('[data-rc-person-block]'); if (box) bindFor(box, () => ext.refreshView?.()); }, 0);
-        return A().card(index, 'Recueils', rows.length, `<div data-rc-person-block>${rows.length ? forEntityHtml(rows, 'person', String(pid)) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucun recueil (registre, liste, cahier photographié) ne parle de cette personne.</span></p><button type="button" class="button small secondary" data-rc-attach="person:${pid}">+ Rattacher un recueil</button>`}</div>`, 'span-12');
+        return A().card(index, 'Recueils', rows.length, `<div data-rc-person-block>${rows.length ? forEntityHtml(rows, 'person', String(pid)) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucun recueil (registre, liste, cahier photographié) ne parle de cette personne.</span></p><button type="button" class="button small secondary" data-rc-attach="person:${pid}">🔗 Relier un recueil</button>`}</div>`, 'span-12');
     };
 })();

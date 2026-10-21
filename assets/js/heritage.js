@@ -103,7 +103,7 @@
                 return `<div class="h-media-role"><h5>${esc(label)}</h5><div class="collection-media-edit">${items.map(m => `<span class="collection-media-item">${A().mediaThumbHtml(m)}<button type="button" data-h-media-remove="${m.id}" aria-label="Retirer">✕</button></span>`).join('')}</div>
                 <input type="file" multiple data-h-upload-role="${esc(role)}" accept="${esc(accept || 'image/*,application/pdf')}"></div>`;
             }).join('')}
-            ${id ? `<div class="h-media-link h-pk-solo"><span class="pk-lab">Ou lier un média déjà dans l’application</span>${window.LCNDA_PICKER?.mediaField ? window.LCNDA_PICKER.mediaField({name: '', types: ['image', 'document', 'audio', 'video'], title: 'Lier un média de l’application', okLabel: 'Lier ce média', placeholder: 'Choisir dans les médias…'}) : pfLocal({name: 'h_media_link', kind: 'media', placeholder: 'Titre, cote, nom du fichier…'})}<select data-h-media-link-role>${roles.map(([role, label]) => `<option value="${esc(role)}">${esc(label)}</option>`).join('')}</select></div>` : '<small class="muted">Les fichiers choisis sont envoyés à l’enregistrement.</small>'}
+            ${id ? `<div class="h-media-link h-pk-solo"><span class="pk-lab">Ou lier un média déjà dans l’application</span>${window.LCNDA_PICKER?.mediaField ? window.LCNDA_PICKER.mediaField({name: '', types: ['image', 'document', 'audio', 'video'], title: 'Relier un média de l’application', okLabel: 'Relier ce média', placeholder: 'Choisir dans les médias…'}) : pfLocal({name: 'h_media_link', kind: 'media', placeholder: 'Titre, cote, nom du fichier…'})}<select data-h-media-link-role>${roles.map(([role, label]) => `<option value="${esc(role)}">${esc(label)}</option>`).join('')}</select></div>` : '<small class="muted">Les fichiers choisis sont envoyés à l’enregistrement.</small>'}
         </div>`;
     }
     function bindMediaEditor(root) {
@@ -196,12 +196,16 @@
     document.addEventListener('picker-open', event => { if (event.target.closest?.('.h-place-menu') && !event.detail.id) { event.preventDefault(); toast('Ce lieu est écrit en texte : choisis-le dans la liste pour le relier à un lieu de ta base.'); } });
 
     /** Fenêtre de saisie (même allure que les autres fenêtres de l'application). */
-    function openDialog({eyebrow = '', title = '', body = '', wide = false, submitLabel = 'Enregistrer', onSubmit, onDelete, onOpen, labels = null, closeLabel = ''}) {
+    function openDialog({eyebrow = '', title = '', body = '', wide = false, submitLabel = null, onSubmit, onDelete, onOpen, labels = null, closeLabel = ''}) {
+        // K3 : « Créer le … » pour une chose nouvelle (titre « Nouveau… »), « Enregistrer » pour une chose qui existe
+        if (submitLabel == null) submitLabel = window.LCNDA_UI?.createLabel?.(title) || 'Enregistrer';
+        // K3 : une fenêtre qui ne fait que montrer (bouton « Fermer » ou « Annuler » seul) : « Fermer » seul, à droite, pas « Annuler » + « Fermer »
+        const onlyClose = !!onSubmit && /^(Fermer|Annuler)$/.test(String(submitLabel).trim());
         const dialog = document.createElement('dialog');
         dialog.className = `modal h-modal${wide ? ' h-modal-wide' : ''}`;
         dialog.innerHTML = `<form method="dialog" class="h-dialog-form"><div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><button class="icon-button" value="cancel" type="button" data-h-close aria-label="Fermer">×</button></div>
             <div class="h-dialog-body">${body}${labels ? LP(labels[0], labels[1]) : ''}</div>
-            <div class="modal-actions">${onDelete ? '<button type="button" class="button secondary danger" data-h-delete>Supprimer</button>' : ''}<span class="spacer"></span><button type="button" class="button secondary" data-h-close>${esc(closeLabel || (onSubmit ? 'Annuler' : 'Fermer'))}</button>${onSubmit ? `<button type="submit" class="button">${esc(submitLabel)}</button>` : ''}</div></form>`;
+            <div class="modal-actions">${onDelete ? '<button type="button" class="button secondary danger" data-h-delete>Supprimer</button>' : ''}<span class="spacer"></span>${onlyClose ? '<button type="submit" class="button secondary">Fermer</button>' : `<button type="button" class="button secondary" data-h-close>${esc(closeLabel || (onSubmit ? 'Annuler' : 'Fermer'))}</button>${onSubmit ? `<button type="submit" class="button">${esc(submitLabel)}</button>` : ''}`}</div></form>`;
         document.body.appendChild(dialog);
         const form = dialog.querySelector('form');
         dialog.addEventListener('close', () => dialog.remove());
@@ -426,7 +430,7 @@
         const rows = detail.heritage?.voyages || [];
         const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(v => voyageCardHtml(v, {editable: !Number(p.is_locked)})).join('')}</div><div class="h-voyage-map">${voyagePaths(rows)}<small class="muted">Trajet en mer tracé au plus court en ne passant que par la mer (détroits ; canaux de Suez, Kiel et Panama seulement après leur ouverture) ; en pointillés, le trajet à terre jusqu’à la destination.</small></div></div>`
             : empty('Aucun voyage pour l’instant', {icon: '🚢', hint: 'Ajoute le départ : date, port, navire, destination, liste de passagers, naturalisation…', action: editOnly('x') ? {label: '＋ Voyage', attrs: `data-h-voyage-edit="0" data-h-voyage-person="${p.id}"`} : null});
-        return card(index, 'Départs / émigration', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-voyage-edit="0" data-h-voyage-person="${p.id}">+ Voyage</button>`));
+        return card(index, 'Départs / émigration', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-voyage-edit="0" data-h-voyage-person="${p.id}">＋ Voyage</button>`));
     };
     // Champs préfixés « c_ » : ne pas se mélanger avec la naturalisation de la personne principale
     function companionRow(c = {}) {
@@ -455,7 +459,7 @@
                 <label>Lien en ligne<input name="passenger_list_url" value="${f('passenger_list_url')}" placeholder="https://…"></label>
                 <label class="span-2">Ce qui est écrit (transcription)<textarea name="passenger_list_text" rows="3">${f('passenger_list_text')}</textarea></label></div>
             <h4>Partis ensemble (fiches)</h4><p class="muted">Le voyage s’affichera aussi sur leur fiche. Chacun a sa propre naturalisation à l’arrivée.</p>
-            <div class="h-rows" data-h-rows="companions">${(v.companion_people || []).map(companionRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="companions">+ Personne partie avec</button><template data-h-template="companions">${companionRow()}</template>
+            <div class="h-rows" data-h-rows="companions">${(v.companion_people || []).map(companionRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="companions">＋ Personne partie avec</button><template data-h-template="companions">${companionRow()}</template>
             <h4>Naturalisation à l’arrivée${(v.companion_people || []).length ? ' de ' + esc(v.person_name || 'la personne') : ''}</h4><div class="form-grid">
                 <label>Date<input name="naturalization_date" data-ui-date value="${f('naturalization_date')}" placeholder="1892"></label>
                 <label>Lieu / tribunal<input name="naturalization_place" value="${f('naturalization_place')}" placeholder="Cour de district de Chicago"></label>
@@ -536,7 +540,7 @@
         const rows = detail.heritage?.placements || [];
         const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(r => placementCardHtml(r, {editable: !Number(p.is_locked)})).join('')}</div><div>${placementMap(rows)}</div></div>`
             : empty('Aucun placement pour l’instant', {icon: '👶', hint: 'Nourrice, abandon, hospice, Assistance publique… avec le lieu et la durée.', action: editOnly('x') ? {label: '＋ Placement', attrs: `data-h-placement-edit="0" data-h-placement-person="${p.id}"`} : null});
-        return card(index, 'Enfant placé', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-placement-edit="0" data-h-placement-person="${p.id}">+ Placement</button>`));
+        return card(index, 'Enfant placé', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-placement-edit="0" data-h-placement-person="${p.id}">＋ Placement</button>`));
     };
     async function openPlacementDialog(id, personId) {
         let r = {person_id: personId, kind: 'nourrice', media: []};
@@ -595,7 +599,7 @@
         const rows = detail.heritage?.coats_of_arms || [];
         registerCoatMedia(rows);
         const body = rows.length ? `<div class="h-coats">${rows.map(c => coatCardHtml(c, {compact: true, currentPersonId: p.id})).join('')}</div>` : empty('Aucune armoirie pour l’instant', {icon: '🛡️', hint: 'Lie des armoiries à cette personne.', action: editOnly('x') ? {label: '＋ Armoiries', attrs: `data-h-coat-link="${p.id}"`} : null});
-        return card(index, 'Blason / noblesse', rows.length || '', body, 'span-6', editOnly(`<button type="button" class="button small secondary" data-h-coat-link="${p.id}">+ Armoiries</button>`));
+        return card(index, 'Blason / noblesse', rows.length || '', body, 'span-6', editOnly(`<button type="button" class="button small secondary" data-h-coat-link="${p.id}">＋ Armoiries</button>`));
     };
     async function openCoatDialog(id, presetPerson = null) {
         let c = {people: presetPerson ? [{person: presetPerson, note: ''}] : [], media: []};
@@ -612,7 +616,7 @@
                 <label>Devise<input name="motto" value="${f('motto')}" placeholder="Fidèle à mon roi"></label>
                 <label>Origine, sources<textarea name="origin_text" rows="2" placeholder="Armorial général de 1696, généralité de Limoges">${f('origin_text')}</textarea></label>
                 <label class="span-2">Notes<textarea name="notes" rows="2">${f('notes')}</textarea></label></div>
-                <h4>Personnes qui l’ont porté</h4><div class="h-rows" data-h-rows="people">${(c.people?.length ? c.people : [{}]).map(personRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="people">+ Personne</button><template data-h-template="people">${personRow()}</template>
+                <h4>Personnes qui l’ont porté</h4><div class="h-rows" data-h-rows="people">${(c.people?.length ? c.people : [{}]).map(personRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="people">＋ Personne</button><template data-h-template="people">${personRow()}</template>
                 <h4>Image du blason</h4>${ext.openVectorEditor ? `<p class="h-coat-vec"><button type="button" class="button small" data-h-coat-vector>✒️ ${c.media?.length ? 'Refaire / retoucher le blason en vectoriel' : 'Dessiner le blason (écu, partitions, émaux, meubles)'}</button> <small class="muted">${c.id ? 'Le dessin vient s’ajouter ici en image, et le blasonnement se remplit s’il est vide.' : 'Enregistre d’abord les armoiries.'}</small></p>` : ''}${mediaEditorHtml('coat_of_arms', c.id, c.media, [['', 'Blason (image), sceau, ex-libris, armorial']])}`,
             onSubmit: async form => {
                 const val = values(form);
@@ -645,7 +649,7 @@
         const [data, detail] = await Promise.all([api('coats_of_arms'), api('person', {id: personId})]);
         const person = detail.person, coats = (data.coats || []).filter(c => !(c.people || []).some(l => Number(l.person.id) === Number(personId)));
         openDialog({
-            eyebrow: 'ARMOIRIES', title: 'Lier des armoiries à ' + A().personName(person), submitLabel: 'Lier',
+            eyebrow: 'ARMOIRIES', title: 'Relier des armoiries à ' + A().personName(person), submitLabel: 'Relier',
             body: `${coats.length ? `<label class="h-block-label">Armoiries déjà enregistrées<select name="coat_id"><option value="">— Choisir —</option>${coats.map(c => `<option value="${c.id}">${esc(c.title)}${c.blazon ? ' — ' + esc(c.blazon.slice(0, 60)) : ''}</option>`).join('')}</select></label>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune autre armoirie enregistrée.</span></p>'}
                 <label class="h-block-label">Rôle (facultatif)<input name="note" placeholder="Chef de nom, branche cadette…"></label>
                 <p><button type="button" class="button secondary" data-h-coat-new>Créer de nouvelles armoiries…</button></p>`,
@@ -716,9 +720,9 @@
         openDialog({
             eyebrow: 'POILU 14-18', title: 'Parcours de ' + A().personName(detail.person), wide: true, labels: ['poilu', data.labels],
             body: `<p class="muted">Le registre matricule (bloc Militaire) donne les unités successives et leurs dates, les blessures, les citations.</p>
-                <h4>Unités (régiments, bataillons…)</h4><div class="h-rows" data-h-rows="units">${(data.units.length ? data.units : [{}]).map(unitRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="units">+ Unité</button><template data-h-template="units">${unitRow()}</template>
+                <h4>Unités (régiments, bataillons…)</h4><div class="h-rows" data-h-rows="units">${(data.units.length ? data.units : [{}]).map(unitRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="units">＋ Unité</button><template data-h-template="units">${unitRow()}</template>
                 <datalist id="h-units"><option>régiment d’infanterie</option><option>régiment d’infanterie territoriale</option><option>bataillon de chasseurs à pied</option><option>régiment d’artillerie de campagne</option><option>régiment de dragons</option><option>régiment du génie</option><option>régiment de tirailleurs</option><option>régiment d’infanterie coloniale</option></datalist>
-                <h4>Événements datés</h4><div class="h-rows" data-h-rows="events">${(data.events.length ? data.events : [{}]).map(eventRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="events">+ Événement</button><template data-h-template="events">${eventRow()}</template>`,
+                <h4>Événements datés</h4><div class="h-rows" data-h-rows="events">${(data.events.length ? data.events : [{}]).map(eventRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="events">＋ Événement</button><template data-h-template="events">${eventRow()}</template>`,
             onSubmit: async form => {
                 const units = [...form.querySelectorAll('.h-unit-row')].map(r => Object.fromEntries(['unit_name', 'date_from', 'date_to', 'jmo_cote', 'jmo_url', 'note'].map(k => [k, r.querySelector(`[name=${k}]`).value])));
                 const events = [...form.querySelectorAll('.h-event-row')].map(r => Object.fromEntries(['event_date', 'kind', 'place_text', 'note'].map(k => [k, r.querySelector(`[name=${k}]`).value])));
@@ -767,7 +771,7 @@
     ext.personBlocks.probate = (index, detail) => {
         const rows = detail.heritage?.probate_inventories || [];
         if (!rows.length) return '';
-        return card(index, 'Inventaire après décès', rows.length, rows.map(probateSummaryHtml).join(''), 'span-12', `<button type="button" class="button small secondary" data-h-open-list="probate" data-h-edit="0" data-h-person-id="${detail.person.id}">+ Inventaire</button>`);
+        return card(index, 'Inventaire après décès', rows.length, rows.map(probateSummaryHtml).join(''), 'span-12', `<button type="button" class="button small secondary" data-h-open-list="probate" data-h-edit="0" data-h-person-id="${detail.person.id}">＋ Inventaire</button>`);
     };
 
     /* ═══════════════════════ 🗄️ PAPIERS DE FAMILLE ═══════════════════════ */
@@ -797,7 +801,7 @@
         const destinations = {};
         rows.forEach(v => { const d = (v.destination || v.arrival_port || '?').split(',')[0].trim(); destinations[d] = (destinations[d] || 0) + 1; });
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Départs et émigration', 'Les branches parties au Québec, aux États-Unis, en Argentine, en Algérie… Chaque voyage se remplit depuis le bloc « Départs / émigration » de la fiche (case à cocher dans IDENTITÉ → Modifier la personne).')}
-            <div class="collection-toolbar">${personPickerAdd('+ Voyage', 'data-h-voyage-add-list')}</div>
+            <div class="collection-toolbar">${personPickerAdd('＋ Voyage', 'data-h-voyage-add-list')}</div>
             ${rows.length ? `<p class="muted">${plural(rows.length, 'voyage', 'voyages')} · ${Object.entries(destinations).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${voyagePaths(rows)}<div class="h-records h-records-grid">${rows.map(v => voyageCardHtml(v, {withPerson: true})).join('')}</div>` : A().emptyState({text: 'Aucun voyage pour l’instant', icon: '🚢', hint: 'Coche « Départs / émigration » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le voyage dans son bloc.'})}</section>`;
         A().$('[data-h-voyage-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return window.LCNDA_UI.fail(event.currentTarget.closest('.h-person-add')?.querySelector('[name=h_add_person]'), 'Choisis d’abord la personne.'); openVoyageDialog(0, pid); });
     };
@@ -810,7 +814,7 @@
         const places = {};
         rows.forEach(r => { const d = (r.place_text || '?').split(',')[0].trim(); places[d] = (places[d] || 0) + 1; });
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Enfants placés', 'Enfants mis en nourrice, abandonnés ou recueillis par l’hospice : lieu et durée du placement. Beaucoup d’enfants de Paris partaient en nourrice dans le Morvan.')}
-            <div class="collection-toolbar">${personPickerAdd('+ Placement', 'data-h-placement-add-list')}</div>
+            <div class="collection-toolbar">${personPickerAdd('＋ Placement', 'data-h-placement-add-list')}</div>
             ${rows.length ? `<p class="muted">${plural(rows.length, 'placement', 'placements')} · ${Object.entries(places).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${placementMap(rows)}
             <table class="data-table"><thead><tr><th>Enfant</th><th>Situation</th><th>Lieu</th><th>Période</th><th>Durée</th><th>Nourrice / institution</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.kind_label)}</td><td>${esc(r.place_text)}${r.origin_text ? `<br><small>depuis ${esc(r.origin_text)}</small>` : ''}</td><td>${esc([r.start_date, r.end_date].filter(Boolean).join(' → '))}</td><td>${esc(r.duration)}</td><td>${esc([r.nurse_person_name, r.nurse_name, r.institution].filter(Boolean).join(' · '))}</td><td>${tools(`data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}"`, `data-h-placement-delete="${r.id}"`, 'ce placement')}</td></tr>`).join('')}</tbody></table>` : A().emptyState({text: 'Aucun placement pour l’instant', icon: '👶', hint: 'Coche « Enfant placé » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le placement dans son bloc.'})}</section>`;
         A().$('[data-h-placement-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return window.LCNDA_UI.fail(event.currentTarget.closest('.h-person-add')?.querySelector('[name=h_add_person]'), 'Choisis d’abord la personne.'); openPlacementDialog(0, pid); });
@@ -824,7 +828,7 @@
         const rows = data.coats || [];
         registerCoatMedia(rows);
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Armoiries', 'Les blasons de ta famille : l’image, la description dans la langue des héraldistes (« d’azur à trois fleurs de lys d’or »), la devise et les personnes qui l’ont porté. Sur une fiche, coche « Noblesse / blason » pour l’afficher.')}
-            <div class="collection-toolbar"><input type="search" id="h-coats-q" value="${esc(q)}" placeholder="Chercher (nom, blasonnement, famille)…"><button type="button" class="button" data-h-coat-edit="0">+ Armoiries</button></div>
+            <div class="collection-toolbar"><input type="search" id="h-coats-q" value="${esc(q)}" placeholder="Chercher (nom, blasonnement, famille)…"><button type="button" class="button" data-h-coat-edit="0">＋ Armoiries</button></div>
             <div class="h-coats h-coats-grid">${rows.map(c => coatCardHtml(c)).join('') || A().emptyState({text: 'Aucune armoirie pour l’instant', icon: '🛡️', hint: 'Image du blason, blasonnement, porteurs.', action: {label: '＋ Armoiries', attrs: 'data-h-coat-edit="0"'}})}</div></section>`;
         A().$('#h-coats-q').addEventListener('change', event => { S().hCoatsQuery = event.target.value.trim(); A().renderList(); });
     };
@@ -851,7 +855,7 @@
         if (edit) editing = edit.id ? rows.find(r => Number(r.id) === Number(edit.id)) : {id: 0, person_id: edit.personId || 0, currency: 'livre', items: [], media: []};
         if (editing && !editing.person && editing.person_id) { try { editing.person = (await api('person', {id: editing.person_id})).person; } catch (_) {} }
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Inventaires après décès', 'Saisis un inventaire pièce par pièce (meubles, bétail, outils, linge…) avec la valeur de chaque objet. Le total est converti en journées de travail d’un journalier pour comparer la richesse d’une génération à l’autre (Graphiques → Statistiques → Richesse).')}
-            <div class="collection-toolbar"><button type="button" class="button" data-h-probate-new>+ Inventaire</button><button type="button" class="button secondary" data-h-probate-compare>Comparer les générations</button></div>
+            <div class="collection-toolbar"><button type="button" class="button" data-h-probate-new>＋ Inventaire</button><button type="button" class="button secondary" data-h-probate-compare>Comparer les générations</button></div>
             ${editing ? probateFormHtml(editing) : ''}
             ${rows.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Notaire</th><th>Total</th><th>Net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => { const d = workDays(r.net, r.currency, r.year); return `<tr><td>${personLink(r.person_id, r.person_name)}${LC(r.labels)}</td><td>${esc(r.date_text)}</td><td>${esc(r.notary)}</td><td>${esc(moneyText(r.total, r.currency))}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${d ? fmt(d) : '—'}</td><td>${tools(`data-h-probate-edit="${r.id}"`, `data-h-probate-delete="${r.id}"`, 'cet inventaire')}</td></tr>`; }).join('')}</tbody></table>` : (editing ? '' : A().emptyState({text: 'Aucun inventaire après décès pour l’instant', icon: '📜', action: {label: '＋ Inventaire', attrs: 'data-h-probate-new'}}))}</section>`;
         const ws = A().$('#workspace');
@@ -872,7 +876,7 @@
             <h4>Objets, pièce par pièce</h4><p class="muted">Valeur : « 12 l 5 s 3 d » (livres, sols, deniers), « 12 livres 5 sols », ou un nombre (« 152,50 »). La catégorie « Dettes » est déduite du total.</p>
             <table class="data-table h-items"><thead><tr><th>Pièce</th><th>Catégorie</th><th>Objet</th><th>Qté</th><th>Valeur</th><th></th></tr></thead><tbody data-h-rows="items">${(inv.items?.length ? inv.items : [{}, {}, {}]).map(probateItemRow).join('')}</tbody></table>
             <datalist id="h-rooms"><option>Cuisine</option><option>Chambre</option><option>Grenier</option><option>Cave</option><option>Écurie</option><option>Étable</option><option>Grange</option><option>Boutique</option><option>Atelier</option><option>Cour</option></datalist>
-            <p><button type="button" class="button small secondary" data-h-item-add>+ Ligne</button> <button type="button" class="button small secondary" data-h-item-add5>+ 5 lignes</button> <strong class="h-probate-live"></strong></p>
+            <p><button type="button" class="button small secondary" data-h-item-add>＋ Ligne</button> <button type="button" class="button small secondary" data-h-item-add5>+ 5 lignes</button> <strong class="h-probate-live"></strong></p>
             <label class="h-block-label">Notes<textarea name="notes" rows="2">${f('notes')}</textarea></label>
             <h4>Scans de l’inventaire</h4>${mediaEditorHtml('probate_inventory', inv.id, inv.media, [['', 'Pages de l’inventaire']])}
             ${LP('probate_inventory', inv.labels)}<div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" data-h-probate-cancel>Annuler</button>${inv.id ? '<button class="button secondary danger" type="button" data-h-probate-delete>Supprimer</button>' : ''}</div></form>`;
@@ -918,7 +922,7 @@
         const groups = {};
         rows.forEach(r => { (groups[r.storage_location || 'Rangement à préciser'] ||= []).push(r); });
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Papiers de famille', 'L’inventaire de tes originaux papier (livrets de famille, actes anciens, lettres, photos papier) : où chacun est rangé, son numéro de classement, une étiquette à imprimer et à coller sur la chemise, et le lien vers son scan.')}
-            <div class="collection-toolbar"><input type="search" id="h-papers-q" value="${esc(q)}" placeholder="Chercher (titre, n°, rangement, chez qui)…"><button type="button" class="button" data-h-paper-new>+ Document</button><button type="button" class="button secondary" data-h-paper-labels>Imprimer les étiquettes</button><button type="button" class="button secondary" data-h-paper-print>Imprimer l’inventaire</button></div>
+            <div class="collection-toolbar"><input type="search" id="h-papers-q" value="${esc(q)}" placeholder="Chercher (titre, n°, rangement, chez qui)…"><button type="button" class="button" data-h-paper-new>＋ Document</button><button type="button" class="button secondary" data-h-paper-labels>Imprimer les étiquettes</button><button type="button" class="button secondary" data-h-paper-print>Imprimer l’inventaire</button></div>
             ${editing ? paperFormHtml(editing, locations) : ''}
             ${rows.length ? Object.entries(groups).map(([loc, list]) => `<h3>📦 ${esc(loc)} <small>(${list.length})</small></h3><table class="data-table h-papers"><thead><tr><th><input type="checkbox" data-h-paper-all title="Tout cocher"></th><th>N°</th><th>Document</th><th>Date</th><th>Chez</th><th>Personnes</th><th>Scan</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${LC(r.labels)}${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">État : ${esc(r.condition_text)}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td>${tools(`data-h-paper-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')}</td></tr>`).join('')}</tbody></table>`).join('') : (editing ? '' : A().emptyState({text: 'Aucun document pour l’instant', icon: '🗄️', hint: 'Actes, livrets, lettres, photos… et où ils sont rangés.', action: {label: '＋ Document', attrs: 'data-h-paper-new'}}))}</section>`;
         const ws = A().$('#workspace');
@@ -978,7 +982,7 @@
             `<main><h1>Inventaire des papiers de famille</h1><p>${plural(rows.length, 'document', 'documents')} — ${new Date().toLocaleDateString('fr-FR')}</p><table><thead><tr><th>N°</th><th>Document</th><th>Date</th><th>Rangement</th><th>Chez</th><th>Scan</th></tr></thead><tbody>${rows.map(r => `<tr><td class="n">${esc(r.class_number)}</td><td><b>${esc(r.title)}</b>${r.kind ? `<br>${esc(r.kind)}` : ''}${r.people?.length ? `<br><small>${esc(r.people.map(p => A().personName(p)).join(', '))}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.storage_location)}</td><td>${esc(r.holder_text)}</td><td>${r.media?.length ? 'oui' : '—'}</td></tr>`).join('')}</tbody></table></main>`);
     }
 
-    // Les listes ouvertes depuis une fiche (« + Inventaire », « Ouvrir ») passent par S().hEdit
+    // Les listes ouvertes depuis une fiche (« ＋ Inventaire », « Ouvrir ») passent par S().hEdit
     const originalPapers = ext.lists.family_papers;
     ext.lists.family_papers = (token, editOverride = null) => {
         const pending = S().hEdit?.list === 'family_papers' ? S().hEdit : null;
@@ -1018,7 +1022,7 @@
         if (!isCurrent(token)) return; // on a changé d'écran pendant le chargement
         const counts = data.counts || {todo: 0, done: 0};
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Circuits sur le terrain', 'Un circuit « sur les traces de mes ancêtres » : choisis une branche ou quelques ancêtres, et l’app prépare la liste des lieux à voir (églises, maisons, tombes, mairies, archives), le trajet jour par jour à ouvrir dans Plans ou Google Maps, et un carnet de route à imprimer.')}
-            <div class="collection-toolbar"><button type="button" class="button" data-h-trip-new>+ Circuit</button><div class="segmented-filter" role="group">${[['todo', `À faire (${counts.todo})`], ['done', `Faits (${counts.done})`], ['all', `Tous (${counts.todo + counts.done})`]].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-trip-filter="${k}" aria-pressed="${filter === k}">${esc(l)}</button>`).join('')}</div></div>
+            <div class="collection-toolbar"><button type="button" class="button" data-h-trip-new>＋ Circuit</button><div class="segmented-filter" role="group">${[['todo', `À faire (${counts.todo})`], ['done', `Faits (${counts.done})`], ['all', `Tous (${counts.todo + counts.done})`]].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-trip-filter="${k}" aria-pressed="${filter === k}">${esc(l)}</button>`).join('')}</div></div>
             ${editing ? tripFormHtml(editing) : ''}
             <div class="h-trip-list">${(data.trips || []).map(t => `<article class="h-record h-trip ${t.status === 'done' ? 'is-done' : ''}"><header><div><strong>${t.status === 'done' ? '✅' : '🚗'} ${esc(t.title)}</strong>${LC(t.labels)}<div class="muted">${esc([t.date_start ? dateFr(t.date_start) : 'dates à fixer', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''}</div>
                 <div>${plural(Number(t.stop_count), 'étape', 'étapes')}${Number(t.day_count) ? ` sur ${plural(Number(t.day_count), 'jour', 'jours')}` : ''}${Number(t.stop_count) ? ` · ${fmt(t.done_count)} faite${t.done_count > 1 ? 's' : ''}` : ''}${t.status === 'done' && t.done_at ? ` · fait le ${esc(dateFr(t.done_at))}` : ''}</div>
@@ -1038,8 +1042,8 @@
             <div class="form-grid"><label>Nom<input name="title" required value="${esc(t.title || '')}" placeholder="Sur les traces des Dupont en Corrèze"></label><label>Point de départ<input name="start_place" value="${esc(t.start_place || '')}" placeholder="Brive-la-Gaillarde (hôtel, gîte…)"></label>
             <label>Du<input type="date" name="date_start" value="${esc(t.date_start || '')}"></label><label>Au<input type="date" name="date_end" value="${esc(t.date_end || '')}"></label>
             <label>Étapes par jour, au plus<input type="number" name="stops_per_day" min="1" max="20" value="${Number(t.stops_per_day) || 6}"></label></div>
-            <h4>Pour qui ?</h4><div class="h-rows" data-h-rows="trip-people">${(people.length ? people : [{}]).map(row).join('')}</div><button type="button" class="button small secondary" data-h-row-add="trip-people">+ Personne ou branche</button><template data-h-template="trip-people">${row()}</template>
-            ${t.id ? '' : `<h4>Étapes</h4><p class="muted">Ajoute dès maintenant autant d’étapes que tu veux, avec leur logistique, leur matériel, ce que tu vas chercher et une liste à cocher. « Préparer le circuit » ajoutera en plus les lieux de tes ancêtres.</p><div class="h-trip-drafts" data-h-trip-drafts></div><button type="button" class="button small secondary" data-h-draft-add>+ Étape</button>`}
+            <h4>Pour qui ?</h4><div class="h-rows" data-h-rows="trip-people">${(people.length ? people : [{}]).map(row).join('')}</div><button type="button" class="button small secondary" data-h-row-add="trip-people">＋ Personne ou branche</button><template data-h-template="trip-people">${row()}</template>
+            ${t.id ? '' : `<h4>Étapes</h4><p class="muted">Ajoute dès maintenant autant d’étapes que tu veux, avec leur logistique, leur matériel, ce que tu vas chercher et une liste à cocher. « Préparer le circuit » ajoutera en plus les lieux de tes ancêtres.</p><div class="h-trip-drafts" data-h-trip-drafts></div><button type="button" class="button small secondary" data-h-draft-add>＋ Étape</button>`}
             <label class="h-block-label">Notes (hébergement, rendez-vous, personnes à rencontrer…)<textarea name="notes" rows="2">${esc(t.notes || '')}</textarea></label>
             ${LP('field_trip', t.labels)}<div class="page-actions action-zone"><button class="button" type="submit" name="generate" value="1">Enregistrer et préparer le circuit</button><button class="button secondary" type="submit" name="generate" value="0">Enregistrer seulement</button><button class="button secondary" type="button" data-h-trip-cancel>Annuler</button></div>
             <p class="muted">Préparer à nouveau remplace les étapes non faites ; les étapes cochées « faite » sont gardées.</p></form>`;
@@ -1103,7 +1107,7 @@
                 <div class="span-2"><span class="section-label">Personnes recherchées</span><div class="h-x-people" data-x-people>${pf({name: 'x_person_pick', kind: 'person', multiple: true, value: (x.person_ids || []).map(Number).filter(Boolean)})}</div></div>
                 <label>Résultat<select name="x_result">${[['todo', 'À faire'], ['found', 'Trouvé'], ['partial', 'En partie'], ['none', 'Rien trouvé']].map(([k, l]) => `<option value="${k}" ${(x.result || 'todo') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="span-2">Ce que j’ai trouvé (compte rendu après la visite)<textarea name="x_findings" rows="3">${v('findings')}</textarea></label></div></details>
-            <details class="h-stop-sec" open><summary>✅ Liste à cocher</summary><div data-ck-list>${(x.checklist || []).map(ck).join('')}</div><button type="button" class="button small secondary" data-ck-add>+ Ligne</button></details>`;
+            <details class="h-stop-sec" open><summary>✅ Liste à cocher</summary><div data-ck-list>${(x.checklist || []).map(ck).join('')}</div><button type="button" class="button small secondary" data-ck-add>＋ Ligne</button></details>`;
     }
     function bindStopExtraForm(dlg) {
         const list = dlg.querySelector('[data-ck-list]');
@@ -1164,7 +1168,7 @@
             `<button type="button" class="button secondary" data-h-trip-back>← Tous les circuits</button><button type="button" class="button secondary" data-h-trip-edit>Modifier</button><button type="button" class="button secondary" data-h-trip-regen>Préparer à nouveau</button><button type="button" class="button" data-h-trip-print>Carnet de route à imprimer</button><button type="button" class="button secondary" data-h-trip-done>${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button><button type="button" class="button secondary danger" data-h-trip-delete>Supprimer</button>`)}
             ${t.stops.length ? miniMap(points, paths) : ''}
             ${dayNums.map((d, i) => `<section class="h-day"><header class="h-day-head"><h3><span class="h-day-dot" style="background:${dayColors[i % dayColors.length]}"></span>Jour ${d}${dayDate(d) ? ` — ${esc(dayDate(d))}` : ''}</h3>${dayRouteLinks(days[d], i === 0 ? t.start_place : '')}</header><ol class="h-stops">${days[d].map(stopHtml).join('')}</ol></section>`).join('') || A().emptyState({text: 'Aucune étape pour l’instant', icon: '📍', hint: '« Préparer à nouveau » (il faut des événements avec un lieu), ou ajoute une étape à la main.', action: {label: '＋ Étape', attrs: 'data-h-stop-edit="0"'}})}
-            <p><button type="button" class="button small secondary" data-h-stop-edit="0">+ Étape</button></p>
+            <p><button type="button" class="button small secondary" data-h-stop-edit="0">＋ Étape</button></p>
             ${t.notes ? `<div class="maintenance-panel"><h4>Notes</h4><p>${nl(t.notes)}</p></div>` : ''}</section>`;
         const ws = A().$('#workspace');
         const reload = () => renderTrip(++S().workspaceToken, id);
@@ -1292,7 +1296,7 @@
         if (!isCurrent(token)) return;
         if (editId !== null) return renderOldMapEditor(token, editId ? maps.find(m => Number(m.id) === Number(editId)) : null);
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Cartes anciennes', 'Pose ta propre carte ancienne sur la carte : un plan cadastral photographié aux archives, un vieux plan de village… Indique 3 points que tu reconnais (l’église, un carrefour, le moulin) et l’app la superpose exactement à la carte, avec un réglage de transparence. Places-y ensuite les maisons de tes ancêtres.')}
-            <div class="collection-toolbar"><button type="button" class="button" data-h-oldmap-new>+ Carte ancienne</button></div>
+            <div class="collection-toolbar"><button type="button" class="button" data-h-oldmap-new>＋ Carte ancienne</button></div>
             <div class="collection-grid">${maps.map(m => `<article class="collection-card">${m.filename ? `<div class="collection-photo"><img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy"></div>` : ''}<div class="collection-body"><strong>${esc(m.title)}</strong>${LC(m.labels)}${m.year_text ? ` <span class="collection-kind">${esc(m.year_text)}</span>` : ''}<p class="muted">${m.transform ? `✅ Calée (${m.control_points.length} points)` : `⚠ À caler : ${m.control_points.length}/3 points`} · ${plural(m.markers.length, 'maison placée', 'maisons placées')}</p>
                 <div class="page-actions"><button type="button" class="button small" data-h-oldmap-edit="${m.id}">Caler / placer</button>${m.transform ? `<button type="button" class="button small secondary" data-h-oldmap-show="${m.id}">Voir sur la carte</button>` : ''}</div></div></article>`).join('') || A().emptyState({text: 'Aucune carte ancienne pour l’instant', icon: '🗺️', hint: 'Ajoute une photo de plan, puis cale-la sur la carte.', action: {label: '＋ Carte ancienne', attrs: 'data-h-oldmap-new'}})}</div></section>`;
         const ws = A().$('#workspace');
@@ -1317,7 +1321,7 @@
             <label class="span-2">Notes, cote<input name="notes" value="${esc(ed.notes)}" placeholder="AD87, 3 P 1234"></label></div>
             ${LP('old_map', ed.labels)}<div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button>${ed.id ? `<button class="button secondary" type="button" data-h-oldmap-show>Voir sur la carte</button><button class="button secondary danger" type="button" data-h-oldmap-delete>Supprimer</button>` : ''}</div></form>
             ${ed.filename ? `<div class="h-calib-help maintenance-panel"><p><b>Caler la carte :</b> 1. choisis un point ci-dessous ; 2. clique sur ce point dans <b>ton image</b> (à gauche) ; 3. clique au même endroit sur <b>la carte d’aujourd’hui</b> (à droite). Trois points bien écartés suffisent (plus, c’est encore mieux).<br><b>Placer une maison :</b> clique « Placer une maison », puis sur l’image.</p>
-                <div class="h-calib-tools"><span data-h-calib-points></span><button type="button" class="button small secondary" data-h-calib-add>+ Point</button><button type="button" class="button small secondary" data-h-house-mode>🏠 Placer une maison</button><label class="h-inline"><input type="checkbox" data-h-calib-preview checked> Aperçu superposé</label><span data-h-calib-quality class="muted"></span></div></div>
+                <div class="h-calib-tools"><span data-h-calib-points></span><button type="button" class="button small secondary" data-h-calib-add>＋ Point</button><button type="button" class="button small secondary" data-h-house-mode>🏠 Placer une maison</button><label class="h-inline"><input type="checkbox" data-h-calib-preview checked> Aperçu superposé</label><span data-h-calib-quality class="muted"></span></div></div>
                 <div class="h-calib"><div class="h-calib-image"><div class="h-calib-imgwrap"><img src="media/${encodeURIComponent(ed.filename)}" alt="" draggable="false"><div class="h-calib-pins"></div></div></div><div class="h-calib-map"></div></div>
                 <div class="maintenance-panel"><h4>Maisons placées</h4><ul class="h-houses"></ul></div>` : '<p class="muted">Enregistre d’abord la carte avec son image ; tu pourras ensuite la caler.</p>'}</section>`;
         const ws = A().$('#workspace'), form = ws.querySelector('#h-oldmap-form');
@@ -1544,7 +1548,7 @@
                 <form id="h-prenoms-import" class="page-actions"><input type="file" name="file" accept=".csv,.txt,.zip" required><button class="button small" type="submit">${meta ? 'Remplacer' : 'Importer'}</button><span class="muted" data-h-import-status></span></form>
                 <label class="h-inline">Prénoms donnés à partir de <select id="h-names-min">${[1900, 1920, 1945, 1970].map(y => `<option value="${y}" ${minYear === y ? 'selected' : ''}>${y}</option>`).join('')}</select></label></section>
             ${rows.length ? `<table class="data-table h-names-table"><thead><tr><th>Prénom</th><th>Dans la famille</th><th>En France (${from}–${to})</th><th>Comparaison</th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.name)}</strong> <small>${r.sex === 2 ? '♀' : r.sex === 1 ? '♂' : ''}</small></td><td>${r.people.slice(0, 6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}${r.people.length > 6 ? `<span data-h-names-more hidden><br>${r.people.slice(6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}</span><br><button type="button" class="link-button" data-h-names-toggle data-more="${r.people.length - 6}" aria-expanded="false">+ ${r.people.length - 6} personne${r.people.length - 6 > 1 ? 's' : ''}</button>` : ''}</td><td>${meta && r.peak_year ? sparkline(r.series, r.family_years, from, to, r.peak_year) : '—'}</td><td>${phrase(r)}</td></tr>`).join('')}</tbody></table><p class="muted">Courbe : nombre de naissances en France chaque année ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.</p>` : empty(`Aucune naissance datée depuis ${minYear} dans ta base.`)}</section>`;
-        // « + 12 personnes » : déplie (ou replie) le reste de la liste
+        // « ＋ 12 personnes » : déplie (ou replie) le reste de la liste
         A().$('#workspace > section').addEventListener('click', event => {
             const button = event.target.closest('[data-h-names-toggle]'); if (!button) return;
             const more = button.parentElement.querySelector('[data-h-names-more]'), open = more.hidden;

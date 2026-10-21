@@ -240,7 +240,7 @@ header('X-Content-Type-Options: nosniff');
         <div class="form-section-label" style="margin:0 0 .5rem;font-size:.75em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Documents</div>
         <div class="form-grid">
             <div class="span-2" id="military-media-list"></div>
-            <div class="span-2"><button type="button" class="button small secondary" id="military-manage-media-btn">+ Ajouter ou lier un média</button></div>
+            <div class="span-2"><button type="button" class="button small secondary" id="military-manage-media-btn">＋ Ajouter ou relier un média</button></div>
         </div>
 
         <div class="form-section-label" style="margin:0 0 .5rem;font-size:.75em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Matricule &amp; Recrutement</div>
@@ -347,7 +347,7 @@ header('X-Content-Type-Options: nosniff');
         <div class="form-section-label" style="margin:1rem 0 .5rem;font-size:.75em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Photos datées</div>
         <div class="form-grid">
             <div class="span-2" id="grave-media-list"></div>
-            <div class="span-2"><button type="button" class="button small secondary" id="grave-manage-media-btn" disabled>+ Ajouter ou lier une photo</button></div>
+            <div class="span-2"><button type="button" class="button small secondary" id="grave-manage-media-btn" disabled>＋ Ajouter ou relier une photo</button></div>
         </div>
 
         <div class="form-section-label" style="margin:1rem 0 .5rem;font-size:.75em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Notes</div>
@@ -414,7 +414,7 @@ header('X-Content-Type-Options: nosniff');
             <label>Informations complémentaires<input name="extra_info" placeholder="précisions sur le lieu, l'adresse…" autocomplete="off"></label>
             <div class="span-2 former-place-toggle-wrap">
                 <button type="button" class="former-place-toggle" id="former-place-toggle" aria-expanded="false">
-                    + Ancien nom ou ancien pays du lieu
+                    ＋ Ancien nom ou ancien pays du lieu
                 </button>
             </div>
             <div class="span-2 former-place-fields" id="former-place-fields" hidden>
@@ -425,9 +425,9 @@ header('X-Content-Type-Options: nosniff');
             </div>
             <label class="span-2">Description<textarea name="description" rows="4"></textarea></label>
         </div>
-        <div class="dialog-labels-block"><span class="section-label">Documents</span><div id="event-media-block"><div id="event-media-list"></div><button type="button" class="button small secondary" id="event-manage-media-btn">+ Ajouter ou lier un média</button></div></div>
-        <div class="dialog-labels-block" id="event-sponsors-section" hidden><span class="section-label">Parrain/Marraine</span><div id="event-sponsors-block"><div id="event-sponsors-list"></div><button type="button" class="button small secondary" id="add-sponsor-btn">+ Ajouter un parrain / une marraine</button></div></div>
-        <div class="dialog-labels-block"><span class="section-label">Témoins</span><div id="event-witnesses-block"><div id="event-witnesses-list"></div><button type="button" class="button small secondary" id="add-witness-btn">+ Ajouter un témoin</button></div></div>
+        <div class="dialog-labels-block"><span class="section-label">Documents</span><div id="event-media-block"><div id="event-media-list"></div><button type="button" class="button small secondary" id="event-manage-media-btn">＋ Ajouter ou relier un média</button></div></div>
+        <div class="dialog-labels-block" id="event-sponsors-section" hidden><span class="section-label">Parrain/Marraine</span><div id="event-sponsors-block"><div id="event-sponsors-list"></div><button type="button" class="button small secondary" id="add-sponsor-btn">＋ Ajouter un parrain / une marraine</button></div></div>
+        <div class="dialog-labels-block"><span class="section-label">Témoins</span><div id="event-witnesses-block"><div id="event-witnesses-list"></div><button type="button" class="button small secondary" id="add-witness-btn">＋ Ajouter un témoin</button></div></div>
         <div class="dialog-labels-block"><span class="section-label">Étiquettes</span><div id="event-label-picker"></div></div>
         <div class="dialog-labels-block event-confidence-block"><span class="section-label">Fiabilité du fait</span><div class="event-confidence-grid"><label>Niveau de confiance<select name="fact_confidence"><option value="unknown">Non évalué</option><option value="certain">Certain</option><option value="deduced">Déduit</option><option value="estimated">Estimé</option><option value="doubt">Doute</option></select></label><label>Origine / raisonnement<div class="place-input-wrap event-confidence-origin-wrap"><input name="confidence_origin" id="event-confidence-origin" placeholder="Ex. âge indiqué au mariage de son frère…" autocomplete="off"><div id="event-confidence-person-suggestions" class="place-suggestions" hidden></div></div><small class="form-help">Commence un prénom ou un nom à la fin de la phrase pour le compléter.</small></label><div class="span-2 event-confidence-media-field pk-host"><span>Média de preuve <small>(facultatif)</small></span><div class="pk" data-picker="media" id="event-confidence-media" data-pk-opts='{"name":"confidence_media_id","kind":"media","multiple":false,"placeholder":"Acte, photo, document… (titre ou nom du fichier)","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="confidence_media_id" value=""></div><small class="form-help">Le lien déjà présent sur une autre fiche est conservé.</small></div></div></div>
         <div class="modal-actions"><button type="button" class="button secondary" id="open-event-type">Nouveau type</button><span class="spacer"></span><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="event-submit">Ajouter</button></div>
@@ -441,7 +441,7 @@ header('X-Content-Type-Options: nosniff');
         <input type="hidden" name="investigation_id">
         <input type="hidden" name="battue_item_id">
         <div class="form-grid one-column">
-            <label>Rattacher à<select name="event_id"><option value="">La fiche entière</option></select></label>
+            <label>Relier à<select name="event_id"><option value="">La fiche entière</option></select></label>
             <label id="media-census-label">Ou à un recensement<select name="census_id"><option value="">Aucun recensement</option></select></label>
             <label id="media-create-event-toggle" class="checkbox-line"><input type="checkbox" name="create_event" value="1"> Créer un événement pour ce média</label>
             <div id="media-create-event-fields" class="nested-fields" hidden>
@@ -541,7 +541,7 @@ header('X-Content-Type-Options: nosniff');
             <span class="section-label">Vérification champ par champ</span>
             <p class="muted">Pour chaque information de cette fiche, indique si elle est exacte, inexacte, incomplète, approximative ou inconnue par rapport à ta fiche. Ajoute un commentaire si besoin (ex : « date de mariage inexacte : c’est 1892 et non 1898 »).</p>
             <div id="online-sheet-checks-list"></div>
-            <button type="button" class="button small secondary" id="online-sheet-add-field">+ Ajouter un champ</button>
+            <button type="button" class="button small secondary" id="online-sheet-add-field">＋ Ajouter un champ</button>
         </div>
         <div class="dialog-labels-block">
             <span class="section-label">Capture d’écran de l’arbre</span>
@@ -572,7 +572,7 @@ header('X-Content-Type-Options: nosniff');
         <input type="hidden" name="person_id">
         <div class="form-grid">
             <label>Type de source<select name="source_type"><option value="internet">Source Internet</option><option value="book">Livre / registre papier</option><option value="archive">Archive sans média</option><option value="testimony">Témoignage</option><option value="other">Autre source</option></select></label>
-            <label>Rattacher à<select name="entity_type"><option value="person">Toute la fiche</option><option value="event">Un événement précis</option></select></label>
+            <label>Relier à<select name="entity_type"><option value="person">Toute la fiche</option><option value="event">Un événement précis</option></select></label>
             <label class="span-2" id="source-event-label">Événement<select name="event_id"></select></label>
             <label class="span-2">Titre de la source<input name="title" required placeholder="Fiche Geneanet, Paris Table décennale 1881-1891, livre familial…"></label>
             <label class="span-2">Lien web, si disponible<input name="url" type="url" placeholder="https://…"></label>
@@ -596,7 +596,7 @@ header('X-Content-Type-Options: nosniff');
             <label>Portée<select name="scope"><option value="person">Personne</option><option value="family">Famille</option></select></label>
             <label>Couleur<input name="color" type="color" value="#0066cc"></label>
         </div>
-        <div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Créer</button></div>
+        <div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Créer le type</button></div>
     </form>
 </dialog>
 
@@ -653,10 +653,10 @@ header('X-Content-Type-Options: nosniff');
     <form method="dialog" id="investigation-item-form"><div class="modal-head"><div><span class="eyebrow" id="investigation-item-eyebrow">PISTE EXPLORÉE</span><h2 id="investigation-item-dialog-title">Ajouter une piste ou une source</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><input type="hidden" name="archive_digest_id"><div class="form-grid one-column"><label>Nature<select name="kind"><option value="lead">Piste</option><option value="link">Lien consulté</option><option value="source">Source</option><option value="document">Document</option><option value="note">Note</option></select></label><label>Intitulé<input name="title" required></label><label>Adresse Internet<input name="url" type="url" placeholder="https://…"></label><label>Conclusion<textarea name="notes" rows="5"></textarea></label><label>Résultat<select name="status"><option value="explored">Explorée</option><option value="promising">Prometteuse</option><option value="to_explore_priority">À explorer (prioritaire)</option><option value="to_explore">À explorer (pas prioritaire)</option><option value="closed">Fermée / écartée</option></select></label><div class="reminder-fields"><label>Rappel<select name="reminder_mode"><option value="none">Aucun rappel</option><option value="on">À faire à cette date</option><option value="before">À faire avant cette date</option><option value="after">À faire après cette date</option></select></label><label>Date du rappel<input name="reminder_due_at" type="date"></label><button type="button" class="button small secondary" id="download-investigation-reminder">Télécharger calendrier</button></div><label>Suivi des registres dépouillés <small>(facultatif)</small><input name="archive_digest_search" autocomplete="off" placeholder="Ex : recensement 1921, Vulaines-sur-Seine…"><div class="relation-results" data-investigation-archive-digest-results></div><small data-investigation-archive-digest-selected></small></label><div class="pk-host"><span>Personnes liées</span><div class="pk" data-picker="person" id="investigation-item-person-search" data-pk-opts='{"name":"linked_person_ids","kind":"person","multiple":true,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="linked_person_ids" value=""></div></div></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="investigation-item-submit">Ajouter</button></div></form>
 </dialog>
 <dialog class="modal small-modal" id="investigation-media-dialog">
-    <form method="dialog" id="investigation-media-form"><div class="modal-head"><div><span class="eyebrow">MÉDIA D’ENQUÊTE</span><h2>Associer des médias existants</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><div class="form-grid one-column"><div class="pk-host"><span>Personne</span><div class="pk" data-picker="person" id="inv-media-person-search" data-pk-opts='{"name":"inv_media_person_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":false,"roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="inv_media_person_id" value=""></div><input type="hidden" name="inv_media_person_name"></div><div id="inv-media-preview-wrap" style="display:none;margin:.4rem 0"><div id="inv-media-preview" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start"></div></div><label>Média(s)<select name="media_ids[]" multiple size="8" required></select><small>Maintiens ⌘ pour choisir plusieurs médias. Choisis d’abord une personne pour voir ses médias.</small></label><label>Dossier de l’enquête<select name="folder_id" id="investigation-media-folder"></select></label><label>Piste(s) concernée(s)<select name="item_ids[]" multiple size="6"></select><small>Facultatif : un média peut concerner plusieurs pistes.</small></label><label>Classement<select name="verdict"><option value="interesting">Intéressant</option><option value="rejected">Rejeté</option></select></label><label>Pourquoi ?<textarea name="reason" rows="5" required placeholder="Intéressant car la date indiquée est 1856…"></textarea></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Associer</button></div></form>
+    <form method="dialog" id="investigation-media-form"><div class="modal-head"><div><span class="eyebrow">MÉDIA D’ENQUÊTE</span><h2>Relier des médias existants</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><div class="form-grid one-column"><div class="pk-host"><span>Personne</span><div class="pk" data-picker="person" id="inv-media-person-search" data-pk-opts='{"name":"inv_media_person_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":false,"roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="inv_media_person_id" value=""></div><input type="hidden" name="inv_media_person_name"></div><div id="inv-media-preview-wrap" style="display:none;margin:.4rem 0"><div id="inv-media-preview" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start"></div></div><label>Média(s)<select name="media_ids[]" multiple size="8" required></select><small>Maintiens ⌘ pour choisir plusieurs médias. Choisis d’abord une personne pour voir ses médias.</small></label><label>Dossier de l’enquête<select name="folder_id" id="investigation-media-folder"></select></label><label>Piste(s) concernée(s)<select name="item_ids[]" multiple size="6"></select><small>Facultatif : un média peut concerner plusieurs pistes.</small></label><label>Classement<select name="verdict"><option value="interesting">Intéressant</option><option value="rejected">Rejeté</option></select></label><label>Pourquoi ?<textarea name="reason" rows="5" required placeholder="Intéressant car la date indiquée est 1856…"></textarea></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Relier</button></div></form>
 </dialog>
 <dialog class="modal small-modal" id="investigation-item-event-dialog">
-    <form method="dialog" id="investigation-item-event-form"><div class="modal-head"><div><span class="eyebrow">ÉVÉNEMENT D’ENQUÊTE</span><h2>Lier un événement</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><input type="hidden" name="item_id"><div class="form-grid one-column"><div class="pk-host"><span>Personne</span><div class="pk" data-picker="person" id="investigation-item-event-person-search" data-pk-opts='{"name":"person_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":false,"roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="person_id" value=""></div></div><label>Événement<select name="event_id" id="investigation-item-event-select" size="8" required></select><small>Choisis d’abord une personne pour voir ses événements.</small></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="investigation-item-event-submit">Lier</button></div></form>
+    <form method="dialog" id="investigation-item-event-form"><div class="modal-head"><div><span class="eyebrow">ÉVÉNEMENT D’ENQUÊTE</span><h2>Relier un événement</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><input type="hidden" name="item_id"><div class="form-grid one-column"><div class="pk-host"><span>Personne</span><div class="pk" data-picker="person" id="investigation-item-event-person-search" data-pk-opts='{"name":"person_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":false,"roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="person_id" value=""></div></div><label>Événement<select name="event_id" id="investigation-item-event-select" size="8" required></select><small>Choisis d’abord une personne pour voir ses événements.</small></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="investigation-item-event-submit">Relier</button></div></form>
 </dialog>
 
 <dialog class="modal small-modal" id="view-dialog">
@@ -843,9 +843,9 @@ header('X-Content-Type-Options: nosniff');
             <label>Nationalité<input name="nationality"></label>
             <label class="span-2">Rubriques supplémentaires<textarea name="extra_info" rows="3"></textarea></label>
             <label class="span-2">Notes de recherche<textarea name="notes" rows="4"></textarea></label>
-            <div class="span-2"><button type="button" class="button small secondary" id="census-manage-media-btn">+ Ajouter ou lier un média</button></div>
+            <div class="span-2"><button type="button" class="button small secondary" id="census-manage-media-btn">＋ Ajouter ou relier un média</button></div>
         </div>
-        <div class="dialog-labels-block" id="census-dialog-household-block"><span class="section-label">Membres du foyer</span><div class="census-household" id="census-dialog-household"></div><button type="button" class="button small secondary" id="census-dialog-add-member">+ Membre du foyer</button></div>
+        <div class="dialog-labels-block" id="census-dialog-household-block"><span class="section-label">Membres du foyer</span><div class="census-household" id="census-dialog-household"></div><button type="button" class="button small secondary" id="census-dialog-add-member">＋ Membre du foyer</button></div>
         <div class="dialog-labels-block"><span class="section-label">Étiquettes</span><div id="census-label-picker"></div></div>
         <div class="census-field-hint" id="census-field-hint"></div>
         <div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Enregistrer</button></div>
@@ -949,7 +949,7 @@ header('X-Content-Type-Options: nosniff');
         <aside class="lightbox-details">
             <span class="eyebrow" id="lightbox-counter"></span>
             <h2 id="lightbox-caption"></h2>
-            <div class="lightbox-attachment-block"><span class="lightbox-attachment-label">RATTACHÉ À</span><div id="lightbox-attachment-list"></div><button type="button" class="button small secondary" id="lightbox-add-link">+ Rattacher à un autre élément</button></div>
+            <div class="lightbox-attachment-block"><span class="lightbox-attachment-label">RATTACHÉ À</span><div id="lightbox-attachment-list"></div><button type="button" class="button small secondary" id="lightbox-add-link">🔗 Relier à un autre élément</button></div>
             <label class="checkbox-line lightbox-checkbox"><input id="lightbox-person-photo" type="checkbox"> Photo de la personne</label>
             <label for="lightbox-title">Intitulé du média</label>
             <input id="lightbox-title" class="lightbox-input" placeholder="Acte de mariage, portrait…">
@@ -1075,7 +1075,7 @@ header('X-Content-Type-Options: nosniff');
                 <span class="section-label">Personnes identifiées</span>
                 <label class="checkbox-line lightbox-checkbox" id="lightbox-tags-visible-line"><input id="lightbox-tags-visible-toggle" type="checkbox" checked> Afficher les zones sur la photo</label>
                 <div id="lightbox-tags-list"></div>
-                <button type="button" class="button small secondary" id="lightbox-tag-toggle">+ Identifier quelqu'un</button>
+                <button type="button" class="button small secondary" id="lightbox-tag-toggle">＋ Identifier quelqu'un</button>
                 <p class="lightbox-tag-hint" id="lightbox-tag-hint" hidden>🖱️ Cliquez et faites glisser sur la photo pour délimiter la zone où apparaît la personne, puis remplissez le formulaire.</p>
                 <div id="lightbox-tag-form" hidden></div>
             </div>
@@ -1083,7 +1083,7 @@ header('X-Content-Type-Options: nosniff');
                 <span class="section-label">Signatures identifiées</span>
                 <label class="checkbox-line lightbox-checkbox" id="lightbox-signatures-visible-line"><input id="lightbox-signatures-visible-toggle" type="checkbox" checked> Afficher les zones sur la photo</label>
                 <div id="lightbox-signatures-list"></div>
-                <button type="button" class="button small secondary" id="lightbox-signature-toggle">+ Identifier une signature</button>
+                <button type="button" class="button small secondary" id="lightbox-signature-toggle">＋ Identifier une signature</button>
                 <p class="lightbox-tag-hint" id="lightbox-signature-hint" hidden>Tracez la zone de la signature, puis choisissez la personne à laquelle elle appartient.</p>
                 <div id="lightbox-signature-form" hidden></div>
             </div>
@@ -1094,100 +1094,101 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=436" defer></script>
+<script src="assets/js/app.js?v=437" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
-<script src="assets/js/app-picker.js?v=11" defer></script>
+<script src="assets/js/app-picker.js?v=12" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
-<script src="assets/js/app-piece-archives.js?v=7" defer></script>
+<script src="assets/js/app-piece-archives.js?v=8" defer></script>
 <script src="assets/js/app-puzzle.js?v=5" defer></script>
-<script src="assets/js/app-jeu.js?v=8" defer></script>
+<script src="assets/js/app-jeu.js?v=9" defer></script>
 <script src="assets/js/app-chronologie.js?v=8" defer></script>
-<script src="assets/js/app-comparaison.js?v=6" defer></script>
-<script src="assets/js/app-carte.js?v=9" defer></script>
-<script src="assets/js/app-enquetes.js?v=9" defer></script>
-<script src="assets/js/app-tableau-de-bord.js?v=13" defer></script>
-<script src="assets/js/app-harmony.js?v=8" defer></script>
+<script src="assets/js/app-comparaison.js?v=7" defer></script>
+<script src="assets/js/app-carte.js?v=10" defer></script>
+<script src="assets/js/app-enquetes.js?v=10" defer></script>
+<script src="assets/js/app-tableau-de-bord.js?v=14" defer></script>
+<script src="assets/js/app-harmony.js?v=9" defer></script>
 <script src="assets/js/app-ui.js?v=19" defer></script>
 <script src="assets/js/app-forms.js?v=1" defer></script>
+<script src="assets/js/app-mots.js?v=1" defer></script>
 <script src="assets/js/app-portraits.js?v=1" defer></script>
 <script src="assets/js/app-colonne.js?v=1" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
 <script src="assets/js/app-actions.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=2" defer></script>
 <script src="assets/js/app-access.js?v=6" defer></script>
-<script src="assets/js/app-sidegroups.js?v=7" defer></script>
-<script src="assets/js/app-listes.js?v=23" defer></script>
-<script src="assets/js/app-maintenance.js?v=17" defer></script>
-<script src="assets/js/app-recherche.js?v=16" defer></script>
-<script src="assets/js/app-graphiques.js?v=11" defer></script>
-<script src="assets/js/app-side-folders.js?v=1" defer></script>
+<script src="assets/js/app-sidegroups.js?v=8" defer></script>
+<script src="assets/js/app-listes.js?v=24" defer></script>
+<script src="assets/js/app-maintenance.js?v=18" defer></script>
+<script src="assets/js/app-recherche.js?v=17" defer></script>
+<script src="assets/js/app-graphiques.js?v=12" defer></script>
+<script src="assets/js/app-side-folders.js?v=2" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
-<script src="assets/js/heritage.js?v=26" defer></script>
-<script src="assets/js/heritage-tools.js?v=12" defer></script>
+<script src="assets/js/heritage.js?v=27" defer></script>
+<script src="assets/js/heritage-tools.js?v=13" defer></script>
 <script src="assets/js/heritage-alphabets-data.js?v=1" defer></script>
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=2" defer></script>
-<script src="assets/js/heritage-links.js?v=16" defer></script>
-<script src="assets/js/heritage-more.js?v=171" defer></script>
-<script src="assets/js/heritage-records.js?v=8" defer></script>
-<script src="assets/js/heritage-research.js?v=30" defer></script>
-<script src="assets/js/heritage-av.js?v=14" defer></script>
-<script src="assets/js/heritage-recueil-table.js?v=7" defer></script>
-<script src="assets/js/heritage-recueils.js?v=23" defer></script>
-<script src="assets/js/heritage-depouillements.js?v=18" defer></script>
-<script src="assets/js/heritage-addrmap.js?v=7" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=55" defer></script>
-<script src="assets/js/heritage-calendars.js?v=12" defer></script>
-<script src="assets/js/heritage-assemble.js?v=8" defer></script>
-<script src="assets/js/heritage-columns.js?v=2" defer></script>
-<script src="assets/js/heritage-atelier-widgets.js?v=3" defer></script>
-<script src="assets/js/heritage-voters.js?v=6" defer></script>
-<script src="assets/js/heritage-widgets.js?v=45" defer></script>
+<script src="assets/js/heritage-links.js?v=17" defer></script>
+<script src="assets/js/heritage-more.js?v=172" defer></script>
+<script src="assets/js/heritage-records.js?v=9" defer></script>
+<script src="assets/js/heritage-research.js?v=31" defer></script>
+<script src="assets/js/heritage-av.js?v=15" defer></script>
+<script src="assets/js/heritage-recueil-table.js?v=8" defer></script>
+<script src="assets/js/heritage-recueils.js?v=24" defer></script>
+<script src="assets/js/heritage-depouillements.js?v=19" defer></script>
+<script src="assets/js/heritage-addrmap.js?v=8" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=56" defer></script>
+<script src="assets/js/heritage-calendars.js?v=13" defer></script>
+<script src="assets/js/heritage-assemble.js?v=9" defer></script>
+<script src="assets/js/heritage-columns.js?v=3" defer></script>
+<script src="assets/js/heritage-atelier-widgets.js?v=4" defer></script>
+<script src="assets/js/heritage-voters.js?v=7" defer></script>
+<script src="assets/js/heritage-widgets.js?v=46" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=9" defer></script>
-<script src="assets/js/heritage-tabs.js?v=12" defer></script>
+<script src="assets/js/heritage-tabs.js?v=13" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=2" defer></script>
-<script src="assets/js/heritage-employers.js?v=7" defer></script>
-<script src="assets/js/heritage-book.js?v=6" defer></script>
+<script src="assets/js/heritage-employers.js?v=8" defer></script>
+<script src="assets/js/heritage-book.js?v=7" defer></script>
 <script src="assets/js/heritage-layout-facts.js?v=3" defer></script>
 <script src="assets/js/heritage-qr.js?v=1" defer></script>
-<script src="assets/js/heritage-layout.js?v=43" defer></script>
-<script src="assets/js/heritage-edittools.js?v=18" defer></script>
-<script src="assets/js/heritage-editorkeys.js?v=12" defer></script>
-<script src="assets/js/heritage-livrets.js?v=14" defer></script>
-<script src="assets/js/heritage-pets.js?v=25" defer></script>
+<script src="assets/js/heritage-layout.js?v=44" defer></script>
+<script src="assets/js/heritage-edittools.js?v=19" defer></script>
+<script src="assets/js/heritage-editorkeys.js?v=13" defer></script>
+<script src="assets/js/heritage-livrets.js?v=15" defer></script>
+<script src="assets/js/heritage-pets.js?v=26" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
-<script src="assets/js/heritage-board-kit.js?v=24" defer></script>
+<script src="assets/js/heritage-board-kit.js?v=25" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=1" defer></script>
-<script src="assets/js/heritage-boards.js?v=35" defer></script>
+<script src="assets/js/heritage-boards.js?v=36" defer></script>
 <script src="assets/js/heritage-dnd.js?v=9" defer></script>
-<script src="assets/js/heritage-studio.js?v=84" defer></script>
+<script src="assets/js/heritage-studio.js?v=85" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
-<script src="assets/js/heritage-retouch-simple.js?v=8" defer></script>
-<script src="assets/js/heritage-fiches.js?v=19" defer></script>
+<script src="assets/js/heritage-retouch-simple.js?v=9" defer></script>
+<script src="assets/js/heritage-fiches.js?v=20" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=4" defer></script>
-<script src="assets/js/heritage-periodicals.js?v=14" defer></script>
+<script src="assets/js/heritage-periodicals.js?v=15" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=5" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=16" defer></script>
-<script src="assets/js/heritage-diagram-genea.js?v=3" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=17" defer></script>
+<script src="assets/js/heritage-diagram-genea.js?v=4" defer></script>
 <script src="assets/js/heritage-vector.js?v=26" defer></script>
-<script src="assets/js/heritage-vector-map.js?v=15" defer></script>
-<script src="assets/js/heritage-vector-tree.js?v=10" defer></script>
-<script src="assets/js/heritage-vector-cards.js?v=8" defer></script>
+<script src="assets/js/heritage-vector-map.js?v=16" defer></script>
+<script src="assets/js/heritage-vector-tree.js?v=11" defer></script>
+<script src="assets/js/heritage-vector-cards.js?v=9" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=9" defer></script>
-<script src="assets/js/heritage-research-gaps.js?v=2" defer></script>
-<script src="assets/js/heritage-faces.js?v=8" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=3" defer></script>
+<script src="assets/js/heritage-faces.js?v=9" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=3" defer></script>
-<script src="assets/js/heritage-diagram-kinds.js?v=10" defer></script>
-<script src="assets/js/heritage-graphs.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-kinds.js?v=11" defer></script>
+<script src="assets/js/heritage-graphs.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-chiffres.js?v=2" defer></script>
-<script src="assets/js/heritage-diagram-cartes.js?v=6" defer></script>
+<script src="assets/js/heritage-diagram-cartes.js?v=7" defer></script>
 <script src="assets/js/heritage-diagram-more.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-famille.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-adn-chiffres.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-cartes2.js?v=1" defer></script>
-<script src="assets/js/heritage-artist.js?v=17" defer></script>
-<script src="assets/js/heritage-artist-fields.js?v=9" defer></script>
-<script src="assets/js/heritage-artist-panel.js?v=11" defer></script>
+<script src="assets/js/heritage-artist.js?v=18" defer></script>
+<script src="assets/js/heritage-artist-fields.js?v=10" defer></script>
+<script src="assets/js/heritage-artist-panel.js?v=12" defer></script>
 <script src="assets/js/heritage-artist-music.js?v=11" defer></script>
 <script src="assets/js/heritage-artist-art.js?v=10" defer></script>
 <script src="assets/js/heritage-artist-books.js?v=10" defer></script>
@@ -1198,43 +1199,43 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-artist-page.js?v=14" defer></script>
 <script src="assets/js/heritage-artist-list.js?v=11" defer></script>
 <script src="assets/js/heritage-artist-import.js?v=13" defer></script>
-<script src="assets/js/heritage-artist-catalogue.js?v=10" defer></script>
+<script src="assets/js/heritage-artist-catalogue.js?v=11" defer></script>
 <script src="assets/js/heritage-scene.js?v=3" defer></script>
 <script src="assets/js/heritage-scene-list.js?v=4" defer></script>
 <script src="assets/js/heritage-scene-actor.js?v=3" defer></script>
 <script src="assets/js/heritage-scene-series.js?v=3" defer></script>
-<script src="assets/js/heritage-oeuvres.js?v=4" defer></script>
+<script src="assets/js/heritage-oeuvres.js?v=5" defer></script>
 <script src="assets/js/heritage-oeuvres-fiches.js?v=3" defer></script>
 <script src="assets/js/heritage-oeuvres-types.js?v=1" defer></script>
-<script src="assets/js/heritage-oeuvres-wizard.js?v=4" defer></script>
+<script src="assets/js/heritage-oeuvres-wizard.js?v=5" defer></script>
 <script src="assets/js/heritage-oeuvres-metiers.js?v=3" defer></script>
-<script src="assets/js/heritage-profils.js?v=7" defer></script>
+<script src="assets/js/heritage-profils.js?v=8" defer></script>
 <script src="assets/js/heritage-profils-politique.js?v=2" defer></script>
 <script src="assets/js/heritage-profils-sport.js?v=2" defer></script>
-<script src="assets/js/heritage-profils-liste.js?v=8" defer></script>
+<script src="assets/js/heritage-profils-liste.js?v=9" defer></script>
 <script src="assets/js/heritage-blocs.js?v=5" defer></script>
 <script src="assets/js/heritage-blocs-press.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-awards.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=2" defer></script>
-<script src="assets/js/heritage-creations.js?v=3" defer></script>
-<script src="assets/js/heritage-transcribe-view.js?v=3" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=14" defer></script>
+<script src="assets/js/heritage-creations.js?v=4" defer></script>
+<script src="assets/js/heritage-transcribe-view.js?v=4" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=15" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=10" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=3" defer></script>
-<script src="assets/js/heritage-slideshow.js?v=12" defer></script>
-<script src="assets/js/heritage-keynote.js?v=13" defer></script>
-<script src="assets/js/heritage-house.js?v=27" defer></script>
-<script src="assets/js/heritage-house3d.js?v=12" defer></script>
-<script src="assets/js/heritage-house-lib.js?v=9" defer></script>
+<script src="assets/js/heritage-slideshow.js?v=13" defer></script>
+<script src="assets/js/heritage-keynote.js?v=14" defer></script>
+<script src="assets/js/heritage-house.js?v=28" defer></script>
+<script src="assets/js/heritage-house3d.js?v=13" defer></script>
+<script src="assets/js/heritage-house-lib.js?v=10" defer></script>
 <script src="assets/js/heritage-house-more.js?v=2" defer></script>
 <script src="assets/js/heritage-house-pics.js?v=1" defer></script>
 <script src="assets/js/heritage-house-metiers.js?v=1" defer></script>
-<script src="assets/js/heritage-dna.js?v=12" defer></script>
+<script src="assets/js/heritage-dna.js?v=13" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=8" defer></script>
 <script src="assets/js/museum-viewer.js?v=10" defer></script>
-<script src="assets/js/heritage-museum.js?v=15" defer></script>
-<script src="assets/js/app-apparence.js?v=6" defer></script>
+<script src="assets/js/heritage-museum.js?v=16" defer></script>
+<script src="assets/js/app-apparence.js?v=7" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

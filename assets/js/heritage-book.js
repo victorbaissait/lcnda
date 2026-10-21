@@ -71,7 +71,7 @@
     </div></fieldset>
     <fieldset><legend>6. Le format</legend><div class="h-book-formats">${FORMATS.map(([k, l, h, main]) => `<button type="button" class="button ${main ? '' : 'secondary'} small" data-book-format="${k}" title="${esc(h)}">${l}</button>`).join('')}</div>
       <p class="muted h-book-note">PDF : ouvre le livre, puis « Imprimer / enregistrer en PDF ». Les photos sont rangées dans les fichiers HTML, Word et ePub quand elles sont petites ; en Markdown, elles restent des liens vers le dossier des médias.</p>
-      <p class="h-book-regl" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button type="button" class="button small secondary" data-book-export title="Un fichier .json, à garder ou à passer à un autre ordinateur">⤓ Exporter mes réglages</button><button type="button" class="button small secondary" data-book-import title="Remettre des réglages exportés (fichier .json)">⤒ Importer un réglage</button><button type="button" class="link-button" data-book-reset>Remettre les réglages de départ</button></p></fieldset>
+      <p class="h-book-regl" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button type="button" class="button small secondary" data-book-export title="Un fichier .json, à garder ou à passer à un autre ordinateur">⤓ Exporter mes réglages</button><button type="button" class="button small secondary" data-book-import title="Remettre des réglages exportés (fichier .json)">⤒ Importer un réglage</button><button type="button" class="link-button" data-book-reset>↺ Remettre comme au départ</button></p></fieldset>
   </form>
 </section>`;
     };
@@ -116,7 +116,7 @@
                 });
                 inp.click(); return;
             }
-            if (e.target.closest('[data-book-reset]')) { if (!await A().confirmBox('', {title: 'Remettre tous les réglages du livre comme au départ ?', okLabel: 'Réinitialiser'})) return; localStorage.removeItem(KEY); const sec = form.closest('.h-book'); sec.outerHTML = ext.familyBookPanelHtml(); ext.bindFamilyBook(exportUrl); return; }
+            if (e.target.closest('[data-book-reset]')) { if (!await A().confirmBox('', {title: 'Remettre tous les réglages du livre comme au départ ?', okLabel: 'Remettre comme au départ'})) return; localStorage.removeItem(KEY); const sec = form.closest('.h-book'); sec.outerHTML = ext.familyBookPanelHtml(); ext.bindFamilyBook(exportUrl); return; }
             const f = e.target.closest('[data-book-format]'); if (!f) return;
             const c = read(form); save(c);
             const root = form.elements.book_root?.value || String(A().state.bootstrap?.startPersonId || '');

@@ -96,7 +96,7 @@
         sidebar(content, footer) {
             const cur = S().adnTab || 'home';
             content.innerHTML = `<div class="side-menu">${visibleSections().map(([k, ic, l], i) => `<button class="side-menu-item ${cur === k ? 'is-active' : ''}" data-dna-go="${k}"><span class="side-number">${String(i + 1).padStart(2, '0')}</span>${ic} ${esc(l)}</button>`).join('')}</div>`;
-            footer.innerHTML = '<div style="display:flex;flex-direction:column;gap:8px"><button class="button small" data-dna-go="kits">+ Nouveau test</button><button class="button small secondary" data-dna-go="matches">+ Correspondances</button></div>';
+            footer.innerHTML = '<div style="display:flex;flex-direction:column;gap:8px"><button class="button small" data-dna-go="kits">＋ Nouveau test</button><button class="button small secondary" data-dna-go="matches">＋ Correspondances</button></div>';
         },
         async render(token) {
             const ws = A().$('#workspace'); const sec = S().adnTab || 'home';
@@ -166,7 +166,7 @@
     }
     RENDER.kits = {html() {
         const {kits, matches} = data;
-        return `${header('ADN', '🧬 Mes tests', 'Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs.', '<button type="button" class="button" data-dna-newkit>+ Nouveau test</button>')}
+        return `${header('ADN', '🧬 Mes tests', 'Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs.', '<button type="button" class="button" data-dna-newkit>＋ Nouveau test</button>')}
             <div class="h-dna-cards">${kits.map(k => `<article class="card h-dna-kit"><header><h3>${esc(kitName(k))}</h3><button type="button" class="icon-action" data-dna-kit="${k.id}" title="Modifier">✎</button></header>
                 <p>${esc(label(TYPES, k.test_type))}${k.kit_number ? ` · n° ${esc(k.kit_number)}` : ''}${k.test_date ? ` · ${esc(k.test_date)}` : ''}</p>
                 ${k.person_id ? `<p><button type="button" class="table-link" data-open-person="${k.person_id}">👤 ${esc(k.person_name)}</button></p>` : ''}
@@ -214,7 +214,7 @@
         const f = filt(), p = prefs(), list = filtered(), size = Math.max(50, num(p.pageSize) || 200), shown = list.slice(0, size + (f.shown || 0));
         const sel = (k, opts, v) => `<select data-dna-f="${k}">${opts.map(([a, b]) => `<option value="${esc(a)}" ${String(v ?? '') === String(a) ? 'selected' : ''}>${esc(b)}</option>`).join('')}</select>`;
         return `${header('ADN', '👥 Correspondances', `${fmt(list.length)} sur ${fmt(data.matches.length)}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable.`,
-            `<button type="button" class="button" data-dna-newmatch>+ Correspondance</button><button type="button" class="button secondary" data-dna-import>⤒ Importer (CSV)</button><button type="button" class="button secondary" data-dna-export>⤓ CSV</button><button type="button" class="button secondary" data-dna-cols>⚙ Colonnes</button>`)}
+            `<button type="button" class="button" data-dna-newmatch>＋ Correspondance</button><button type="button" class="button secondary" data-dna-import>⤒ Importer (CSV)</button><button type="button" class="button secondary" data-dna-export>⤓ Exporter en CSV</button><button type="button" class="button secondary" data-dna-cols>⚙ Colonnes</button>`)}
             ${!data.kits.length ? `<p class="h-dna-warn">Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent.</p>` : ''}
             <div class="h-dna-filters">${sel('kit', [[0, 'Tous les tests'], ...data.kits.map(k => [k.id, kitName(k)])], f.kit)}<input type="search" data-dna-f="q" value="${esc(f.q || '')}" placeholder="Nom, nom de famille, lieu, note…">
                 ${sel('side', [['', 'Tous les côtés'], ...SIDES.slice(1)], f.side)}${sel('status', [['', 'Tout suivi'], ...STATUSES.slice(1)], f.status)}${sel('group', [[0, 'Tous les groupes'], [-1, 'Sans groupe'], ...data.groups.map(g => [g.id, g.name])], f.group)}
@@ -358,7 +358,7 @@
     }
     RENDER.groups = {html() {
         const kit = Number(filt().kit) || 0, L = leeds(kit);
-        return `${header('ADN', '🗂️ Groupes et méthode de Leeds', 'Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ».', '<button type="button" class="button" data-dna-newgroup>+ Nouveau groupe</button>')}
+        return `${header('ADN', '🗂️ Groupes et méthode de Leeds', 'Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ».', '<button type="button" class="button" data-dna-newgroup>＋ Nouveau groupe</button>')}
             <div class="h-dna-cards">${data.groups.map(g => `<article class="card h-dna-group" style="--c:${color(g.color)}"><header><h3><span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></h3><button type="button" class="icon-action" data-dna-group="${g.id}">✎</button></header>
                 <p>${esc(label(SIDES, g.side))}${g.ancestor ? ` · ${esc(g.ancestor)}` : ''}</p><p class="muted">${plural(data.matches.filter(m => m.groups.includes(g.id)).length, 'correspondance', 'correspondances')} · <button type="button" class="link-button" data-dna-gmatches="${g.id}">les voir</button></p>${g.notes ? `<p><small>${esc(g.notes)}</small></p>` : ''}</article>`).join('') || A().emptyState({icon: '🗂️', text: 'Aucun groupe pour l’instant', hint: 'Un groupe range ensemble les correspondances d’une même branche.', action: {label: '＋ Nouveau groupe', attrs: 'data-dna-newgroup'}})}</div>
             <h3>Méthode de Leeds automatique</h3>
@@ -534,7 +534,7 @@
         const ov = overlaps(segs);
         const svg = `<svg viewBox="0 0 ${W} ${CHR.length * rowH + 10}" class="h-dna-chr">${CHR.map(([c, L], i) => { const y = i * rowH + 4, k = (W - 50) / maxL;
             return `<text x="4" y="${y + 12}" font-size="11">${c}</text><rect x="40" y="${y + 3}" width="${(L * k).toFixed(1)}" height="12" rx="6" fill="#e9ecef" stroke="#c4c9cf"/>${segs.filter(s => s.chromosome === c).map(s => `<rect x="${(40 + mb(s.start) * k).toFixed(1)}" y="${y + 3}" width="${Math.max(1.5, (mb(s.end) - mb(s.start)) * k).toFixed(1)}" height="12" fill="${esc(segColor(s, by))}" opacity=".85"><title>${esc(segName(s))} — chr ${c} : ${fmt(mb(s.start), 1)}–${fmt(mb(s.end), 1)} Mb, ${fmt(s.cm, 1)} cM${s.ancestor ? ' — ' + esc(s.ancestor) : ''}</title></rect>`).join('')}`; }).join('')}</svg>`;
-        return `${header('ADN', '🧩 Chromosomes et segments', 'Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment).', '<button type="button" class="button secondary" data-dna-segimport>⤒ Importer des segments (CSV)</button><button type="button" class="button secondary" data-dna-segadd>+ Segment</button>')}
+        return `${header('ADN', '🧩 Chromosomes et segments', 'Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment).', '<button type="button" class="button secondary" data-dna-segimport>⤒ Importer des segments (CSV)</button><button type="button" class="button secondary" data-dna-segadd>＋ Segment</button>')}
             <div class="h-dna-filters"><select data-dna-ck>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('') || '<option>Aucun test</option>'}</select><select data-dna-paint>${[['match', 'Couleur par correspondance'], ['group', 'Par groupe'], ['side', 'Par côté']].map(([v, l]) => `<option value="${v}" ${by === v ? 'selected' : ''}>${l}</option>`).join('')}</select><span class="muted">${plural(segs.length, 'segment', 'segments')}</span></div>
             <div class="card">${svg}</div>
             <h3>Chevauchements (triangulation possible) <small>${fmt(ov.length)}</small></h3>

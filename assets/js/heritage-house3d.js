@@ -514,7 +514,7 @@
             if (walk) { if (document.pointerLockElement !== el) { wyaw -= dx * .004; wpitch = clamp(wpitch - dy * .004, -1.3, 1.3); } return; }
             if (dragM.pan) { const right = new T.Vector3(Math.cos(yaw), 0, -Math.sin(yaw)), fwd = new T.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), k = dist * .0018; target.addScaledVector(right, -dx * k).addScaledVector(fwd, dy * k); }
             else { yaw -= dx * .006; pitch = clamp(pitch + dy * .005, .05, 1.5); } });
-        el.addEventListener('pointerup', e => { const d = dragM; dragM = null; if (d && e.button === 2 && !walk && Math.hypot(e.clientX - d.x0, e.clientY - d.y0) < 5 && window.LCNDA_UI?.contextMenu) { window.LCNDA_UI.contextMenu(e, [{icon: '⌂', label: 'Revenir à la vue de départ', run: () => home()}]); return; } if (!d || e.button !== 0 || Math.hypot(e.clientX - d.x0, e.clientY - d.y0) >= 5) return;
+        el.addEventListener('pointerup', e => { const d = dragM; dragM = null; if (d && e.button === 2 && !walk && Math.hypot(e.clientX - d.x0, e.clientY - d.y0) < 5 && window.LCNDA_UI?.contextMenu) { window.LCNDA_UI.contextMenu(e, [{icon: '↺', label: 'Remettre la vue comme au départ', run: () => home()}]); return; } if (!d || e.button !== 0 || Math.hypot(e.clientX - d.x0, e.clientY - d.y0) >= 5) return;
             const locked = document.pointerLockElement === el;
             if (pickMemory(locked ? null : e)) { if (locked) document.exitPointerLock(); return; }
             if (measuring) return pickMeasure(e);
