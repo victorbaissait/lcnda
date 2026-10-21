@@ -67,7 +67,8 @@
         return new Blob(parts, {type: 'application/pdf'});
     }
     /* les styles des nouveautés (barre du haut, ✦ souvenirs, ☀️ lumière, 🚶 visite, 📐 cadastre), clair et sombre */
-    const HS_CSS = `@media (min-width:1001px){.h-hs-dlg .h-hs-top{justify-content:flex-end;row-gap:6px}}.h-hs-hist{display:inline-flex;gap:3px}.h-hs-msg{font-size:12px;color:#667;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    // la barre du haut ne change pas de hauteur quand « • modifié », « Enregistrement… » ou le petit message apparaissent (sinon le plan saute de 40 px sous la souris)
+    const HS_CSS = `@media (min-width:1001px){.h-hs-dlg .h-hs-top{justify-content:flex-end;row-gap:6px}.h-hs-top>.h-hs-msg{flex:1 1 0;min-width:0}.h-hs-top>[data-ui-status]{flex:0 0 88px;width:88px;justify-content:flex-end;overflow:visible}}.h-hs-hist{display:inline-flex;gap:3px}.h-hs-msg{font-size:12px;color:#667;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .h-hs-memk{cursor:pointer}.h-hs-memk circle{fill:#c9962a;stroke:#fff}.h-hs-memk text{fill:#fff;font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none}.h-hs-memk:hover circle{fill:#a8781a}
 .h-hs-compass{position:absolute;right:12px;bottom:34px;width:46px;height:46px;border-radius:50%;background:#ffffffe0;border:1px solid #d6dbe2;display:grid;place-items:center;cursor:pointer;z-index:2;padding:0}.h-hs-compass svg{width:40px;height:40px}
 .h-hs-stage.is-tracing .h-hs-room path{fill-opacity:.18}.h-hs-stage.is-tracing .h-hs-wall{opacity:.8}
@@ -907,7 +908,7 @@
             view3d?.setSun?.(); return true;
         }
         let setsBox = null;
-        const setsPut = (name, v, at = -1) => { const l = setsList(), i = l.findIndex(x => x.name === name), row = {name, date: new Date().toISOString().slice(0, 10), v}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return setsSave(l); };
+        const setsPut = (name, v, at = -1) => { const l = setsList(), i = l.findIndex(x => x.name === name), row = {name, date: new Date().toLocaleDateString('fr-FR'), v}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return setsSave(l); };
         const setsFrame = () => { const box = window.LCNDA_UI.presetsFrame({id: SETS_TOOL, what: 'les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière', list: setsList, quietApply: true,
             apply: i => { const cur = setsList()[i]; applySet(cur.v); paintSnap(); commit(`Réglage « ${cur.name} » appliqué`); return false; },
             save: name => setsPut(name, setsData()),
@@ -924,7 +925,7 @@
             if (d.outil !== SETS_TOOL) { toast(`Ce réglage est celui d’un autre outil (« ${String(d.outil || '?').slice(0, 40)} ») : importe-le dans cet outil-là, pas dans la Maison.`, 'error'); return false; }
             const l = setsList(); let n = String(d.nom || 'Réglage importé').trim().slice(0, 60) || 'Réglage importé';
             while (l.some(x => x.name === n)) { const n2 = String(await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${n} ». Nom du réglage importé :`, value: window.LCNDA_UI.freeName(n, l.map(x => x.name)), okLabel: 'Importer'}) || '').trim().slice(0, 60); if (!n2) return false; n = n2; }
-            l.push({name: n, date: new Date().toISOString().slice(0, 10), v: d.donnees}); if (!setsSave(l)) return false; setsBox?.refresh(); toast(`Réglage « ${n} » importé : « Appliquer » pour t’en servir.`);
+            l.push({name: n, date: new Date().toLocaleDateString('fr-FR'), v: d.donnees}); if (!setsSave(l)) return false; setsBox?.refresh(); toast(`Réglage « ${n} » importé : « Appliquer » pour t’en servir.`);
         }
 
         /* ─── ⤓ E3 : la fenêtre d'export unique ; 🏠 le fichier de la maison ─── */
@@ -1120,7 +1121,8 @@
             }
         });
         pane.addEventListener('change', e => { if (tmr) { clearTimeout(tmr); tmr = 0; } const el = e.target; if (sel?.type === 'wall' && ['len', 'ang', 'ax', 'ay', 'bx', 'by'].includes(el.dataset?.hsP)) { el._geo = true; el.dispatchEvent(new Event('input', {bubbles: true})); el._geo = false; } });
-        stage.addEventListener('h3-roof', () => { hist = hist.slice(0, hpos + 1); hist.push(snap0()); hpos = hist.length - 1; dirty = true; status(H.roof?.on ? '✓ Toit ajouté' : '✓ Toit retiré'); }); // la case Toit de la vue 3D est gardée avec la maison
+        stage.addEventListener('h3-roof', () => { hist = hist.slice(0, hpos + 1); hist.push(snap0()); hpos = hist.length - 1; dirty = true; const topW = [...H.floors].filter(f => f.walls.length).sort((a, b) => b.level - a.level)[0];
+            status(!H.roof?.on ? '✓ Toit retiré' : topW && F().level < topW.level ? `✓ Toit ajouté : il se voit depuis « ${topW.name} », l’étage du haut` : !topW ? '✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant)' : '✓ Toit ajouté'); }); // la case Toit de la vue 3D est gardée avec la maison
         stage.addEventListener('h3-change', e => { quietCommit(e.detail?.what === 'walk' ? 'Hauteur des yeux' : 'Lumière'); paintCompass(); if (tab === 'house') paintSide(); }); // ☀️ la lumière et 🚶 la hauteur des yeux, réglées dans la vue 3D
         stage.addEventListener('h3-floor', e => { const n = Number(e.detail?.fi); if (!H.floors[n]) return; fi = n; sel = null; draft = null; paintFloors(); paintSide(); }); // 🚶 un escalier pris pendant la visite
         let laterT = 0; const later = label => { render(); clearTimeout(laterT); laterT = setTimeout(() => commit(label), 500); };

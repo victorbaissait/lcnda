@@ -765,13 +765,15 @@
         const defaults = {fill: '#f4c430', stroke: '#222222', sw: 2};
         /** les deux carrés de la colonne d'outils : la couleur de la sélection, ou celle des prochaines formes s'il n'y a rien de choisi */
         const fsGet = k => { const o = selObjs()[0]; if (!o) return k === 'fill' ? defaults.fill : defaults.stroke; return k === 'fill' ? o.fill : (num(o.sw) ? o.stroke : 'none'); };
-        const fsSet = (k, v) => { const objs = selObjs().filter(o => !o.locked); v = v ? String(v).slice(0, 7) : 'none';
+        const fsSet = (k, v, quiet = false) => { const objs = selObjs().filter(o => !o.locked); v = v ? String(v).slice(0, 7) : 'none';
             if (!objs.length) { defaults[k] = v; paintPanel(); paintFs(); return; }
             objs.forEach(o => { if (o.type === 'group') { if (v !== 'none') recolor(o, k, v); } else if (k === 'fill') { o.fill = v; delete o.grad; delete o.pat; } else if (v === 'none') o.sw = 0; else { o.stroke = v; if (!num(o.sw)) o.sw = 2; } });
-            commit(k === 'fill' ? 'Remplissage' : 'Contour'); };
+            if (!quiet) commit(k === 'fill' ? 'Remplissage' : 'Contour'); };
+        /** ⤾ (ou ⇧X) : remplissage et contour échangés, en une seule étape de l'historique */
+        const fsSwap = () => { const f = fsGet('fill'), st = fsGet('stroke'); fsSet('fill', st === 'none' ? '' : st, true); fsSet('stroke', f === 'none' ? '' : f, true); if (selObjs().some(o => !o.locked)) commit('Remplissage ⇄ contour'); };
         dlg.querySelector('.vx-fs').addEventListener('click', e => {
             const b = e.target.closest('button'); if (!b) return;
-            if (b.matches('[data-vx-fsswap]')) { const f = fsGet('fill'), st = fsGet('stroke'); fsSet('fill', st === 'none' ? '' : st); fsSet('stroke', f === 'none' ? '' : f); return; }
+            if (b.matches('[data-vx-fsswap]')) { fsSwap(); return; }
             const k = b.matches('[data-vx-fsfill]') ? 'fill' : 'stroke', ui = UI();
             if (!ui?.openColorBox) return toast('Le choix des couleurs n’est pas disponible.', 'error');
             ui.openColorBox(b, {get: () => { const v = fsGet(k); return v === 'none' ? '' : col(v, '#000'); }, set: v => fsSet(k, v), allowNone: true});
@@ -937,7 +939,7 @@
             let id = hitId(e), o = id && byId(id);
             if (!o && tool === 'select') { const [x, y] = toDoc(e); o = selObjs().find(g => (() => { const r = rbox(g); return x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h; })()); id = o?.id; } // le cadre de sélection est par-dessus
             if (!o) { if (scope.length && tool === 'select') { scope = scope.slice(0, -1); sel = []; render(); } return; }
-            if (o.type === 'text' || (o.type === 'textpath' && tool !== 'direct')) { sel = [id]; tab = 'props'; render(); pane.querySelector('[data-vx-p="text"]')?.focus(); return; }
+            if (o.type === 'text' || (o.type === 'textpath' && tool !== 'direct')) { sel = [id]; tab = 'props'; render(); setTimeout(() => pane.querySelector('[data-vx-p="text"]')?.focus(), 30); return; } // (après le clic : sinon le plan de travail reprend la main)
             if (tool === 'direct' && (o.type === 'path' || o.type === 'textpath')) { // ajouter un point au plus près
                 const [x, y] = unrot(o, ...toDoc(e)); let best = 0, bd = Infinity; o.pts.forEach((p, i) => { const q = o.pts[(i + 1) % o.pts.length]; if (!o.closed && i === o.pts.length - 1) return; const mx = (p.x + q.x) / 2, my = (p.y + q.y) / 2, dd = Math.hypot(mx - x, my - y); if (dd < bd) { bd = dd; best = i; } });
                 o.pts.splice(best + 1, 0, P(x, y)); nodeSel = {id, i: best + 1}; commit('Point ajouté'); return; }
@@ -1037,7 +1039,7 @@
                 <p class="muted vx-mhelp">Chaque page s’imprime sur sa propre feuille : ⤓ Exporter → PDF (une page par face) ou Imprimer. « 🗞 Recto-verso sur A4 » place les faces sur des feuilles A4, avec les traits de coupe et de pli.</p>` : '';
             const grid = `${fld('dgrid', 'Pas de la grille (0 = aucune)', doc.grid, {min: 0, max: 500})}<label class="checkbox-line"><input type="checkbox" data-vx-p="dsnap" ${doc.snap ? 'checked' : ''}> Aimanter à la grille</label>
                 <label class="checkbox-line"><input type="checkbox" data-vx-p="dsmart" ${smart ? 'checked' : ''}> <span data-help="En déplaçant, en agrandissant ou en dessinant, l’objet s’aimante aux bords et aux centres des autres objets, du plan de travail et des pages ; un trait rose le montre. ⌘ (ou Ctrl) maintenu : sans aimant.">Repères aimantés (traits roses)</span></label>`;
-            const keys = '<p class="muted vx-keys">V sélection · A sélection directe · P plume · N crayon · M rectangle · L ellipse · Y polygone · S étoile · \\ ligne · T texte · I pipette · H main · Z loupe · Espace : main · ⌘Z/⇧⌘Z · ⌘C/⌘V/⌘D · ⌘G/⇧⌘G · flèches : 1 px (⇧ : 10 px) · ⌘0 tout voir</p>';
+            const keys = '<p class="muted vx-keys">V sélection · A sélection directe · P plume · N crayon · M rectangle · L ellipse · Y polygone · S étoile · \\ ligne · T texte · I pipette · H main · Z loupe · ⇧X remplissage ⇄ contour · Espace : main · ⌘Z/⇧⌘Z · ⌘C/⌘V/⌘D · ⌘G/⇧⌘G · flèches : 1 px (⇧ : 10 px) · ⌘0 tout voir</p>';
             return `<div class="vx-form">${SEC({title: 'Plan de travail', key: 'vx-doc-board', open: true, body: board})}${pages ? SEC({title: 'Pages et volets', key: 'vx-doc-pages', open: true, body: pages}) : ''}${SEC({title: 'Grille et repères', key: 'vx-doc-grid', open: true, body: grid})}${SEC({title: '💾 Réglages enregistrés', key: 'vx-doc-presets', open: false, body: '<p class="muted vx-mhelp">La taille, le fond, la grille et les couleurs par défaut, gardés sous un nom.</p><div data-vx-presets-slot></div>'})}${SEC({title: 'Raccourcis', key: 'vx-doc-keys', open: false, body: keys})}</div>`;
         }
         function mountPresets() {
@@ -1299,8 +1301,10 @@
         let lastLClick = {};
         pane.addEventListener('click', e => {
             if (tab !== 'layers' || e.target.closest('button, input')) return;
+            // double-clic : renommer — le 1er clic peut redessiner la liste (sortir d'un calque fait disparaître une ligne) : le 2e clic, au même endroit, renomme la ligne du 1er
+            const now = Date.now(); if (lastLClick.id && now - lastLClick.t < 450 && Math.hypot(e.clientX - lastLClick.x, e.clientY - lastLClick.y) < 8) { const id = lastLClick.id; lastLClick = {}; renameLayer(id); return; }
             const row = e.target.closest('[data-vx-layer]'); if (!row) return;
-            const now = Date.now(); if (lastLClick.id === row.dataset.vxLayer && now - lastLClick.t < 450) { lastLClick = {}; renameLayer(row.dataset.vxLayer); return; } lastLClick = {id: row.dataset.vxLayer, t: now}; // double-clic : renommer
+            lastLClick = {id: row.dataset.vxLayer, t: now, x: e.clientX, y: e.clientY};
             const f = findAny(row.dataset.vxLayer); if (!f || f.o.hidden) return;
             if (!samePath(f.path, scope) && !enterScope(f.path)) return;
             if (f.o.locked) { render(); return; }
@@ -1473,6 +1477,7 @@
             if (k === 'escape') { e.preventDefault(); if (tool === 'mref') setTool('select'); else if (penPath) finishPen(); else if (sel.length) CMDS.none(); else if (scope.length) { scope = scope.slice(0, -1); render(); } else close(); return; } // rien à désélectionner : Échap ferme (avec la question s'il reste des modifications)
             if (k === 'enter' && penPath) { finishPen(); return; }
             if (k.startsWith('arrow') && sel.length) { e.preventDefault(); const s2 = e.shiftKey ? 10 : 1, dx = k === 'arrowleft' ? -s2 : k === 'arrowright' ? s2 : 0, dy = k === 'arrowup' ? -s2 : k === 'arrowdown' ? s2 : 0; selObjs().filter(o => !o.locked).forEach(o => moveObj(o, dx, dy)); clearTimeout(laterT); renderNoPanel(); laterT = setTimeout(() => { laterT = 0; commit('Déplacé'); }, 400); return; }
+            if (!mod && !e.altKey && e.shiftKey && k === 'x') { e.preventDefault(); fsSwap(); return; } // ⇧X : intervertir remplissage et contour (comme Illustrator)
             if (!mod && !e.altKey) { const t = TOOLS.find(x => x[3].toLowerCase() === k); if (t) { setTool(t[0]); e.preventDefault(); } }
         };
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
@@ -1672,7 +1677,7 @@
             if (ctx.coat?.id) { status('Envoi…'); try { await upload({collection_type: 'coat_of_arms', collection_id: ctx.coat.id, collection_role: ''}, await pngFile()); status('✓ Envoyé'); toast(`Image ajoutée aux armoiries « ${ctx.coat.title || ''} ».`); ctx.onCoatSaved?.(); } catch (e) { status(''); toast(e.message, 'error'); } return; }
             const coats = (await api('coats_of_arms').catch(() => ({coats: []}))).coats || [];
             ext.openDialog({eyebrow: 'ARMOIRIES', title: 'Enregistrer comme image d’armoiries', submitLabel: 'Enregistrer',
-                body: `<label>Armoiries<select name="coat"><option value="new">➕ Nouvelles armoiries…</option>${coats.map(c => `<option value="${Number(c.id)}">${esc(c.title)}</option>`).join('')}</select></label><label>Nom (si nouvelles)<input name="title" value="${esc($('[data-vx-name]').value || 'Armes de la famille')}"></label><label>Blasonnement (si nouvelles)<textarea name="blazon" rows="2">${esc(lastBlazon)}</textarea></label>`,
+                body: `<div class="form-grid"><label>Armoiries<select name="coat"><option value="new">➕ Nouvelles armoiries…</option>${coats.map(c => `<option value="${Number(c.id)}">${esc(c.title)}</option>`).join('')}</select></label><label>Nom (si nouvelles)<input name="title" value="${esc($('[data-vx-name]').value || 'Armes de la famille')}"></label><label class="span-2">Blasonnement (si nouvelles)<textarea name="blazon" rows="2">${esc(lastBlazon)}</textarea></label></div>`,
                 onSubmit: async f => { try { let id = f.querySelector('[name=coat]').value; if (id === 'new') { const t = f.querySelector('[name=title]').value.trim(); if (!t) { toast('Donne un nom aux armoiries.', 'error'); return false; } const r = await post('save_coat_of_arms', {id: 0, title: t, blazon: f.querySelector('[name=blazon]').value}); id = r.result.id; }
                     await upload({collection_type: 'coat_of_arms', collection_id: Number(id), collection_role: ''}, await pngFile()); toast('Image enregistrée dans les armoiries (fiche d’une personne → bloc Blason, ou Listes → Armoiries).'); } catch (e) { toast(e.message, 'error'); return false; } }});
         }
@@ -1680,7 +1685,7 @@
         const close = async () => { if (dirty && !await A().confirmBox('Ce qui n’est pas enregistré sera perdu.', {title: 'Fermer sans enregistrer le dessin ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); document.removeEventListener('paste', onPaste); try { blObs.disconnect(); rsObs.disconnect(); } catch (_) {} dlg.close(); dlg.remove(); ctx.onClose?.(); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); if (penPath) { finishPen(); return; } close(); });
         $('[data-vx-close]').addEventListener('click', close);
-        $('[data-vx-name]').addEventListener('input', () => markDirty());
+        $('[data-vx-name]').addEventListener('input', () => { name = $('[data-vx-name]').value.trim() || 'Mon dessin'; markDirty(); }); // le nom tapé sert tout de suite (export, copie dans les médias…)
         /* largeur du panneau de droite : réglable en le tirant par son bord, comme dans Photoshop */
         const PW_KEY = 'lcnda-vx-panel-w', mainEl = $('.vx-main');
         const setPw = w => { if (w) mainEl.style.setProperty('--vx-pw', `${Math.round(w)}px`); else mainEl.style.removeProperty('--vx-pw'); };
@@ -1707,6 +1712,7 @@
             const d = K().pathStr(segs.map(([c, ...a]) => { const o = [c]; for (let j = 0; j < a.length; j += 2) o.push(100 + (a[j] - b.x) * k + (400 - b.w * k) / 2, 100 + (a[j + 1] - b.y) * k + (400 - b.h * k) / 2); return o; }));
             const one = dToPts(d); cur().push({id: uid(), type: one ? 'path' : 'svgpath', name: sh.n || 'Forme', fill: '#3a3a3a', stroke: '#222222', sw: 0, evenodd: !!sh.eo, ...(one ? {pts: one.pts, closed: one.closed} : {d})}); }
         commit(); dirty = false; saved(docId ? 'saved' : ''); status(''); setTool('select'); fit();
+        if (ctx.doc?.objs?.length && !docId) markDirty(); // un dessin tout fait (faire-part, arbre, sceau…) n'est pas encore enregistré : fermer demande avant de le perdre
         if (ctx.svg) addImported(importSvgText(ctx.svg), 'SVG importé');
         if (ctx.imageSrc) { try { const im = await normImage(/^media\//.test(ctx.imageSrc) ? await toDataUrl(ctx.imageSrc) : ctx.imageSrc), k = Math.min(1, doc.w * .9 / im.w, doc.h * .9 / im.h); addImported([{id: uid(), type: 'image', name: 'Image d’origine', src: im.src, x: 0, y: 0, w: im.w * k, h: im.h * k}], 'Image importée'); dirty = false; saved(''); hint('L’image d’origine est là : Blason → « Vectoriser une image » pour la refaire en tracés, ou dessine par-dessus à la plume.'); } catch (e) { toast(e.message, 'error'); } }
         const rsObs = new ResizeObserver(() => { if (dlg.isConnected) applyView(); }); rsObs.observe(stage);

@@ -347,8 +347,9 @@
             scene.remove(house); house.traverse(o => { if (o.isSprite) { if (!o.userData.mem) o.material.map?.dispose(); o.material.dispose(); } }); house = new T.Group();
             const floors = opts.all ? Hcur.floors.filter(f => f.level <= Hcur.floors[fiCur].level) : [Hcur.floors[fiCur]];
             floors.forEach(f => house.add(buildFloor(Hcur, f, {cut: opts.cut && f === Hcur.floors[fiCur], ceil: walk && f === Hcur.floors[fiCur]})));
-            const top = [...Hcur.floors].sort((a, b) => b.level - a.level)[0];
-            if (opts.roof && opts.all && top === Hcur.floors[fiCur] && !walk) { const r = buildRoof(Hcur, top); if (r) house.add(r); }
+            // le toit se pose sur l'étage le plus haut qui a des murs (un étage ajouté mais encore vide ne le fait pas disparaître) ; il se voit depuis cet étage ou plus haut
+            const top = [...Hcur.floors].filter(f => f.walls?.length).sort((a, b) => b.level - a.level)[0];
+            if (opts.roof && opts.all && top && Hcur.floors[fiCur].level >= top.level && !walk) { const r = buildRoof(Hcur, top); if (r) house.add(r); }
             if (opts.dims) { const f = Hcur.floors[fiCur], y0 = floorBase(Hcur, f); f.walls.forEach(w => { const L = Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]); if (L < 20) return; const sp = label3d(fmt3(L)); sp.position.set(M((w.a[0] + w.b[0]) / 2), y0 + M(w.h || f.height) + .25, M((w.a[1] + w.b[1]) / 2)); house.add(sp); });
                 const hh = label3d(`↕ ${fmt3(f.height)}`, '#1d5fb8'), xs = f.walls.flatMap(w => [w.a[0], w.b[0]]), zs = f.walls.flatMap(w => [w.a[1], w.b[1]]); if (xs.length) { hh.position.set(M(Math.min(...xs)) - .4, y0 + M(f.height) / 2, M(Math.min(...zs)) - .4); house.add(hh); } }
             // 💡 les lampes posées (12 au plus, les plus proches de l'étage montré d'abord)

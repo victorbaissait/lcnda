@@ -21,8 +21,9 @@ function vector_ensure(PDO $pdo): void
 function vector_docs_list(PDO $pdo): array
 {
     vector_ensure($pdo);
-    return array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => $r['name'], 'thumb' => $r['thumb'], 'updated_at' => $r['updated_at'], 'objects' => (int) $r['n'], 'kind' => (string) ($r['kind'] ?? '')],
-        $pdo->query("SELECT id, name, thumb, updated_at, COALESCE(json_array_length(doc_json, '$.objs'), 0) AS n, COALESCE(json_extract(doc_json, '$.kind'), '') AS kind FROM vector_docs ORDER BY updated_at DESC")->fetchAll());
+    return array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => $r['name'], 'thumb' => $r['thumb'], 'updated_at' => $r['updated_at'], 'objects' => (int) $r['n'], 'layers' => (int) $r['nl'], 'kind' => (string) ($r['kind'] ?? '')],
+        $pdo->query("SELECT id, name, thumb, updated_at, (SELECT COUNT(*) FROM json_tree(vector_docs.doc_json, '$.objs') t WHERE t.type = 'object' AND (t.path = '$.objs' OR t.path LIKE '%.children')
+            AND COALESCE(json_extract(t.value, '$.type'), '') <> 'group') AS n, COALESCE(json_array_length(doc_json, '$.objs'), 0) AS nl, COALESCE(json_extract(doc_json, '$.kind'), '') AS kind FROM vector_docs ORDER BY updated_at DESC")->fetchAll());
 }
 
 function vector_doc_get(PDO $pdo, int $id): array

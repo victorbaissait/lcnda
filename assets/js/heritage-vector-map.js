@@ -212,7 +212,7 @@
     ext.newMapDoc = newMapDoc;
     ext.editToolsExtra = ext.editToolsExtra || [];
     ext.editToolsExtra.push({key: 'maps', icon: '🗺️', label: 'Carte', what: 'carte',
-        load: async () => ((await A().api('vector_docs')).docs || []).filter(d => d.kind === 'map').map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">🗺️</span>', info: `${d.objects} calque${d.objects > 1 ? 's' : ''} ou objet${d.objects > 1 ? 's' : ''}`})),
+        load: async () => ((await A().api('vector_docs')).docs || []).filter(d => d.kind === 'map').map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">🗺️</span>', info: `${d.layers ?? d.objects} calque${(d.layers ?? d.objects) > 1 ? 's' : ''} · ${d.objects} objet${d.objects > 1 ? 's' : ''}`})),
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => newMapDoc(again),
         rename: (id, name) => A().api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
@@ -468,7 +468,7 @@
             const y0 = Math.min(1600, ...years), y1 = Math.max(new Date().getFullYear(), ...years);
             const ref = d.ref;
             return `<div class="vx-form vx-map">
-                <label class="checkbox-line vx-mon"><input type="checkbox" data-vm="on" ${on ? 'checked' : ''}> <b>Mode Plan</b> : dessiner une carte (routes, rivières, bâtiments…)</label>
+                <label class="checkbox-line vx-mon"><input type="checkbox" data-vm="on" ${on ? 'checked' : ''}> <span><b>Mode Plan</b> : dessiner une carte (routes, rivières, bâtiments…)</span></label>
                 ${on ? `<div class="vx-row"><label>Style<select data-vm="style">${Object.entries(STYLES).map(([k, s]) => `<option value="${k}" ${st === k ? 'selected' : ''}>${esc(s.name || k)}</option>`).join('')}</select></label></div>
                 <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="layers" title="Relief, Eau, Végétation, Parcelles, Routes, Bâti, Limites, Noms, Généalogie, Habillage">🗂 Créer les calques d’un plan</button><label class="checkbox-line" title="Chaque objet va tout seul dans son calque (Routes, Eau, Bâti…)"><input type="checkbox" data-vm="auto" ${m.auto !== false ? 'checked' : ''}> Ranger tout seul</label></div>
                 <p class="muted vx-mhelp">Choisis ce que tu dessines, puis : <b>traits et zones</b> — un clic par point, double-clic ou Entrée pour finir (les courbes se lissent toutes seules) ; <b>bâtiment</b> — glisse un rectangle ; <b>symbole, nom</b> — un clic.</p>

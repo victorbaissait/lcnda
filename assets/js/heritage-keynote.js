@@ -40,7 +40,7 @@
     const KN_CSS = `.kn-is.ui-section{display:block;padding:0}.kn-is.ui-section>summary{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--kn-mute);padding:8px 0;cursor:pointer}
 .kn-is.ui-section>.ui-section-body{display:grid;gap:6px;padding:0 0 8px}.kn-is .ui-section-body>textarea{width:100%;min-width:0;font:12.5px inherit;padding:4px 6px;border:1px solid var(--kn-line);border-radius:5px;background:var(--kn-field);color:var(--kn-ink)}
 .kn-fontbtn{width:100%;text-align:left;justify-content:space-between;display:flex;gap:6px;align-items:center;font-size:14px;padding:4px 8px;border:1px solid var(--kn-line);border-radius:5px;background:var(--kn-field);color:var(--kn-ink);cursor:pointer}
-.kn-top .kn-state{font-size:12px}.kn-canvas.is-drag-over{outline:3px dashed #2a7de1;outline-offset:-6px}`;
+.kn-top .kn-state{font-size:12px}@media (min-width:1001px){.kn-top>.kn-state{flex:0 0 96px;width:96px;display:inline-flex;justify-content:flex-end;overflow:visible}}.kn-canvas.is-drag-over{outline:3px dashed #2a7de1;outline-offset:-6px}`;
     const knCss = () => { if (document.getElementById('kn-css2')) return; const st = document.createElement('style'); st.id = 'kn-css2'; st.textContent = KN_CSS; document.head.appendChild(st); };
     const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
     const safeName = n => (A().safeExportFilename ? A().safeExportFilename(n, 'presentation') : String(n || 'presentation').replace(/[^\p{L}\p{N} _-]/gu, '').trim() || 'presentation');
@@ -1110,7 +1110,7 @@
                     {id: 'pdfnotes', label: '📝 PDF + notes', hint: 'avec les notes de l’orateur', ext: '', run: async () => exportPrint(show, n, true)},
                     {id: 'png', hint: 'cette diapositive', run: o => exportPng(show, n, [cur], {...o, direct: true})},
                     {id: 'zip', label: '🗂 Toutes en PNG', hint: 'un fichier .zip', ext: 'zip', run: o => exportPng(show, n, null, {...o, direct: true, saveCopy: false})},
-                    {id: 'video', label: '🎬 Vidéo', hint: 'WebM, avec la musique', ext: 'webm', run: o => exportVideo(show, n, status, {...o, direct: true})},
+                    {id: 'video', label: '🎬 Vidéo', hint: 'WebM, avec la musique', ext: 'webm', run: o => exportVideo(show, n, status, {...o, direct: true, alive: () => dlg.isConnected})},
                     {id: 'print', hint: 'tout de suite', run: async () => exportPrint(show, n, false)},
                     {id: 'file', hint: 'pour la rouvrir ou la partager', ext: 'json', run: async o => download(new Blob([JSON.stringify({type: 'lcnda-presentation', version: 1, name: n, show: forSave()}, null, 1)], {type: 'application/json'}), o.filename)},
                 ]});
@@ -1140,7 +1140,7 @@
                 case 'exp_pdf': return exportPrint(show, ctl.name, false); case 'exp_pdfnotes': return exportPrint(show, ctl.name, true);
                 case 'exp_png': return exportPng(show, ctl.name, [cur]); case 'exp_pngall': return exportPng(show, ctl.name, null);
                 case 'exp_json': return download(new Blob([JSON.stringify({type: 'lcnda-presentation', version: 1, name: ctl.name, show: forSave()}, null, 1)], {type: 'application/json'}), `${safeName(ctl.name)}.json`);
-                case 'exp_video': return exportVideo(show, ctl.name, status);
+                case 'exp_video': return exportVideo(show, ctl.name, status, {alive: () => dlg.isConnected});
                 case 'export': return exportDialog();
                 case 'story': return storyHere();
                 case 'newslide': return addSlide();
@@ -1544,8 +1544,9 @@
                 if (l === 'frame') {
                     if (['page-number', 'footer', 'date-time', 'header'].includes(cls)) continue;
                     const geo = geoOf(el), img = kid(el, 'image'), tb = kid(el, 'text-box'), tbl = desc1(el, 'table');
-                    if (img && !tb) { const f = await imageFor(attr(img, 'href')); if (f) s.objs.push({id: uid(), t: 'image', filename: f, fit: 'fill', ...geo}); continue; }
+                    // un tableau d'abord : son cadre porte aussi une image d'aperçu (TablePreview.svm) qu'un navigateur ne sait pas lire
                     if (tbl) { const rows = desc(tbl, 'table-row').slice(0, 40).map(r => kids(r, 'table-cell').slice(0, 16).map(c => desc(c, 'p').map(p => p.textContent).join('\n'))); s.objs.push({id: uid(), t: 'table', rows, head: true, size: Math.round(H * .028), ...geo}); continue; }
+                    if (img && !tb) { const f = await imageFor(attr(img, 'href')); if (f) s.objs.push({id: uid(), t: 'image', filename: f, fit: 'fill', ...geo}); continue; }
                     if (tb) { const tx = textOf(tb); if (!tx.plain.trim() && !['title', 'subtitle', 'outline'].includes(cls)) continue; const g2 = gfx(el), o = {id: uid(), t: 'text', html: tx.html, size: tx.size || Math.round(H * (cls === 'title' ? .07 : .04)), ...geo}; if (tx.align) o.align = tx.align; if (g2.fill) o.fill = g2.fill; if (cls === 'title') { o.role = 'title'; o.valign = 'middle'; } if (cls === 'subtitle') o.role = 'sub'; if (cls === 'outline') { o.role = 'body'; if (!/<ul|<ol/.test(o.html)) o.html = cleanHtml(`<ul>${tx.plain.split('\n').filter(Boolean).map(x => `<li>${esc(x)}</li>`).join('')}</ul>`); } s.objs.push(o); }
                     continue;
                 }
@@ -1674,7 +1675,7 @@
         }
         if (all.length) ctl.addSlides(all, {replace, meta});
         const s = all.length > 1 ? 's' : '';
-        if (notes.length) ext.openDialog({eyebrow: 'IMPORT', title: all.length ? `${all.length} diapositive${s} importée${s}` : 'Rien n’a été importé', body: `<ul>${notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`});
+        if (notes.length) ext.openDialog({eyebrow: 'IMPORT', title: all.length ? `${all.length} diapositive${s} importée${s}` : 'Rien n’a été importé', body: `<ul>${notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`, submitLabel: 'OK', onSubmit: () => {}}); // un compte rendu : un bouton pour le fermer, pas seulement « Annuler »
         else toast(`${all.length} diapositive${s} importée${s}.`);
     }
     function openImport(ctl) {
@@ -1736,8 +1737,11 @@
                 else g.drawImage(frames[i], 0, 0); return i; };
             draw(0); mr.start(500); mus?.play().catch(() => {});
             const t0 = performance.now();
-            await new Promise(res => { const step = () => { const t = (performance.now() - t0) / 1000; if (t >= total) { draw(total - .01); return res(); } draw(t); status(`⏺ Vidéo : ${Math.round(t / total * 100)} %`); requestAnimationFrame(step); }; step(); });
+            // la présentation fermée pendant l'enregistrement : on arrête là, sans téléchargement surprise plus tard
+            let stopped = false;
+            await new Promise(res => { const step = () => { if (o.alive && !o.alive()) { stopped = true; return res(); } const t = (performance.now() - t0) / 1000; if (t >= total) { draw(total - .01); return res(); } draw(t); status(`⏺ Vidéo : ${Math.round(t / total * 100)} %`); requestAnimationFrame(step); }; step(); });
             mr.stop(); mus?.pause(); await done; ac.close().catch(() => {}); status('');
+            if (stopped) { toast('Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement.'); return; }
             const blob = new Blob(chunks, {type: 'video/webm'}); if (!blob.size) { if (o.direct) throw new Error('la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur'); return toast('La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur.', 'error'); }
             if (o.direct) { download(blob, o.filename || `${safeName(name)}.webm`); if (o.saveCopy) await uploadBlob(blob, o.filename || 'presentation.webm', 'video', name || 'Présentation'); toast(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.'); return; }
             if (await A().confirmBox('Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger.', {title: 'Vidéo prête', okLabel: 'Ajouter aux Médias', cancelLabel: 'Télécharger seulement', danger: false})) { const u = await uploadBlob(blob, 'presentation.webm', 'video', name || 'Présentation'); toast(u ? 'Vidéo ajoutée aux Médias.' : 'Envoi impossible.'); }

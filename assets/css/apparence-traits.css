@@ -1562,8 +1562,8 @@ html.lc-frame.side-right:not(.is-screen-embed) .sidebar-reopen{border-left:var(-
 :root.lc-frame .vx-menu-list hr{border:0;border-top:1px solid #e3e3e8}
 :root.lc-frame .vx-hist button{border:1px solid #ccc}
 :root.lc-frame .vx-tools button{border:0}
-:root.lc-frame .vx-fsfill{border:1px solid #888}
-:root.lc-frame .vx-fsstroke{border:5px solid #000}
+:root.lc-frame .vx-tools .vx-fsfill{border:1px solid #888}
+:root.lc-frame .vx-tools .vx-fsstroke{border:5px solid #000}
 :root.lc-frame .vx-panel{border-left:1px solid #d6d6db}
 :root.lc-frame .vx-sw button{border:1px solid #bbb}
 :root.lc-frame .vx-layer{border:1px solid transparent}

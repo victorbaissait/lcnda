@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=233">
     <link rel="stylesheet" href="assets/css/picker.css?v=5">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=229">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=230">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -53,7 +53,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/transcribe.css?v=3">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=8">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=1" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=2" id="lc-frame-css" media="not all">
 </head></html>
 <body>
 <div class="app-shell<?= $ready ? '' : ' is-not-ready' ?>" id="app">
@@ -1204,14 +1204,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-blocs-school.js?v=1" defer></script>
 <script src="assets/js/heritage-creations.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=3" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=10" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=11" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=7" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=1" defer></script>
-<script src="assets/js/heritage-slideshow.js?v=10" defer></script>
-<script src="assets/js/heritage-keynote.js?v=9" defer></script>
-<script src="assets/js/heritage-house.js?v=22" defer></script>
-<script src="assets/js/heritage-house3d.js?v=10" defer></script>
+<script src="assets/js/heritage-slideshow.js?v=11" defer></script>
+<script src="assets/js/heritage-keynote.js?v=10" defer></script>
+<script src="assets/js/heritage-house.js?v=23" defer></script>
+<script src="assets/js/heritage-house3d.js?v=11" defer></script>
 <script src="assets/js/heritage-house-lib.js?v=6" defer></script>
 <script src="assets/js/heritage-house-more.js?v=2" defer></script>
 <script src="assets/js/heritage-house-pics.js?v=1" defer></script>

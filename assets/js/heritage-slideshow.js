@@ -51,7 +51,7 @@
 .h-ss-top.ui-topbar{border-width:0 0 1px;border-color:#d6d6db;border-style:solid;padding:6px 10px}
 .h-ss-extra{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .h-ss-extra label{display:flex;align-items:center;gap:4px;font-size:12px}
-.h-ss-progress{font-size:12px;color:var(--muted,#6d6d6d)}
+.h-ss-progress{font-size:12px;color:var(--muted,#6d6d6d)}@media (min-width:1001px){.h-ss-top .h-ss-progress{flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.h-ss-top [data-ui-status]{flex:0 0 96px;width:96px;justify-content:flex-end;overflow:visible}} /* la barre ne change pas de hauteur pendant l’enregistrement ou l’export */
 .h-ss-top .ui-topbar-name.ui-topbar-name{width:200px}
 @media (max-width:1500px){.h-ss-hide-s{display:none}}
 .h-ss-tgrp{display:flex;gap:6px;align-items:center}
@@ -512,7 +512,7 @@
             box.innerHTML = h.join('') + doc; paintMusic();
         }
         function paint() { paintList(); paintProps(); drawAt(t); }
-        function drawAt(tt) { t = clamp(tt, 0, eng.total()); const i = eng.frame(t); if (i >= 0 && playing && i !== cur) { cur = i; paintList(); paintProps(); } const tot = eng.total() || 1; $('[data-ss-seek]').value = Math.round(t / tot * 1000); $('[data-ss-time]').textContent = `${fmt(t)} / ${fmt(tot)}`; }
+        function drawAt(tt) { t = clamp(tt, 0, eng.total()); const i = eng.frame(t); if (i >= 0 && playing && i !== cur) { cur = i; paintList(); paintProps(); } const tot = eng.total() || 1; $('[data-ss-seek]').value = Math.round(t / tot * 1000); $('[data-ss-time]').textContent = `${fmt(t)} / ${fmt(eng.total())}`; }
         const goSlide = i => { cur = clamp(i, 0, Math.max(0, show.slides.length - 1)); t = (eng.starts()[cur] || 0) + .9; paint(); };
         /* ─── son : musique et voix ─── */
         let music = null, voice = null, voiceFor = -1;
@@ -618,10 +618,11 @@
             mr.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
             const done = new Promise(r => { mr.onstop = r; });
             mr.start(500); if (mus) { mus.gain.gain.value = show.musicVol ?? .5; mus.a.play().catch(() => {}); }
-            const start = performance.now(); let lastI = -1;
-            await new Promise(resolve => { const step = () => { const tt = (performance.now() - start) / 1000; if (tt >= total) { eng.frame(total); return resolve(); } const i = eng.frame(tt); if (i !== lastI) { voices.get(lastI)?.a.pause(); const v = voices.get(i); if (v) { v.a.currentTime = 0; v.a.play().catch(() => {}); } lastI = i; }
+            const start = performance.now(); let lastI = -1, stopped = false; // le diaporama fermé pendant l'enregistrement : on arrête là (pas de téléchargement surprise plus tard)
+            await new Promise(resolve => { const step = () => { if (!dlg.isConnected) { stopped = true; return resolve(); } const tt = (performance.now() - start) / 1000; if (tt >= total) { eng.frame(total); return resolve(); } const i = eng.frame(tt); if (i !== lastI) { voices.get(lastI)?.a.pause(); const v = voices.get(i); if (v) { v.a.currentTime = 0; v.a.play().catch(() => {}); } lastI = i; }
                 if (mus) { const v = voices.get(i); mus.gain.gain.value = (show.musicVol ?? .5) * (v && !v.a.paused && !v.a.ended ? .3 : 1); } const pc = `⏺ ${Math.round(tt / total * 100)} % (${fmt(tt)} / ${fmt(total)})`; progress(pc); goBtn(pc); requestAnimationFrame(step); }; step(); });
             mr.stop(); mus?.a.pause(); voices.forEach(v => v.a.pause()); await done; ac.close(); progress('');
+            if (stopped) throw new Error('vidéo arrêtée : le diaporama a été fermé pendant l’enregistrement');
             const blob = new Blob(chunks, {type: 'video/webm'});
             if (!blob.size) throw new Error('la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur');
             return {blob, total};
@@ -698,6 +699,8 @@
             if (el.dataset.ssG) { const k = el.dataset.ssG; if (k === 'musicVol') { show.musicVol = Number(el.value) / 100; if (music) music.volume = show.musicVol; touch(); return; } show[k] = el.value; touch(); await rebuild(); return; }
             if (el.matches('[data-ss-name]')) touch();
         });
+        // la durée tapée hors des bornes (0, 99999, vide) : la case montre la valeur vraiment gardée (1 à 120 s)
+        dlg.addEventListener('change', e => { const el = e.target, s = show.slides[cur]; if (el.dataset?.ssP === 'dur' && s) el.value = s.dur; });
         // ＋ un lieu au trajet : le menu de choix unique (sorte place) ; ses coordonnées viennent de la recherche des lieux
         dlg.addEventListener('picker-change', async e => {
             const it = e.detail.item, s = show.slides[cur], field = e.target.closest('[data-ss-addplace] .pk');

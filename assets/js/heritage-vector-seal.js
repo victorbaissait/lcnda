@@ -154,7 +154,7 @@
         const S = 600, cx = S / 2, cy = S / 2, C = COLORS[o.color] || COLORS.waxred, shape = SHAPES[o.shape] ? o.shape : 'wax', st = LETTERS[o.letters] ? o.letters : 'script', L = LETTERS[st];
         const back = [], mid = [], legend = [];
         const top = String(o.top || '').trim(), bot = String(o.bottom || '').trim(), hasLeg = SHAPES[shape].legend && (top || bot);
-        let R = S * .4, mono = S * (hasLeg ? .26 : .36), emboss = null, ink = C.main, legFont = 'Didot, "Bodoni 72", Georgia, serif';
+        let R = S * .4, ringRy = 1, mono = S * (hasLeg ? .26 : .36), emboss = null, ink = C.main, legFont = 'Didot, "Bodoni 72", Georgia, serif';
         if (shape === 'wax') {
             back.push(P(waxD(cx + 6, cy + 9, R * 1.08, Number(o.seed) || 3), {fill: '#000000', op: .22, name: 'Ombre portée'}), P(waxD(cx, cy, R * 1.08, Number(o.seed) || 3), {fill: C.main, grad: {type: 'radial', c1: C.light, c2: C.dark}, name: 'Cire'}));
             back.push(P(circleD(cx, cy, R * .8), {fill: C.main, stroke: C.dark, sw: 6, name: 'Empreinte'}), P(circleD(cx - 2, cy - 2, R * .8), {stroke: C.light, sw: 2, op: .6, name: 'Reflet de l’empreinte'}));
@@ -164,7 +164,7 @@
             if (hasLeg) back.push(P(circleD(cx, cy, R * .66), {stroke: C.main, sw: 3, op: .9, name: 'Cercle intérieur'}));
             R = R * .8;
         } else if (shape === 'circle' || shape === 'oval') {
-            const ry = shape === 'oval' ? 1.18 : 1;
+            const ry = shape === 'oval' ? 1.18 : 1; ringRy = ry; // la légende suit l'ovale, entre ses deux filets
             back.push(P(circleD(cx, cy, R, R * ry), {stroke: C.main, sw: 5, name: 'Cadre'}), P(circleD(cx, cy, R * .94, R * .94 * ry), {stroke: C.main, sw: 1.5, name: 'Filet'}));
             if (hasLeg) { back.push(P(circleD(cx, cy, R * .68, R * .68 * ry), {stroke: C.main, sw: 1.5, name: 'Filet intérieur'})); }
             if (!hasLeg) back.push(laurel(cx, cy, R * .8, R * .8 * ry, C.main));
@@ -186,13 +186,15 @@
         // la légende autour
         if (hasLeg) { const ls = shape === 'wax' ? 22 : 26, lr = R; const lf = shape === 'wax' ? C.light : C.main;
             // ➰ un texte qui suit le cercle (modifiable ensuite : texte, police, position) ; sinon, une lettre par objet
-            const V = ext.vectorInternals, ring = (t, bottom) => V?.ringPts ? {id: uid(), type: 'textpath', name: bottom ? 'Légende du bas' : 'Légende du haut', text: t, pts: V.ringPts(cx, cy, lr), closed: true, start: 25, align: 'middle', side: bottom ? 'bottom' : 'top', offset: n2(-ls * .36), size: ls, font: legFont, fill: lf, sw: 0, ls: n2(ls * .1)} : ringText(t, cx, cy, lr, ls, legFont, lf, {bottom});
+            const V = ext.vectorInternals, ring = (t, bottom) => V?.ringPts ? {id: uid(), type: 'textpath', name: bottom ? 'Légende du bas' : 'Légende du haut', text: t, pts: V.ringPts(cx, cy, lr, lr * ringRy), closed: true, start: 25, align: 'middle', side: bottom ? 'bottom' : 'top', offset: n2(-ls * .36), size: ls, font: legFont, fill: lf, sw: 0, ls: n2(ls * .1)} : ringText(t, cx, cy, lr, ls, legFont, lf, {bottom});
             if (top) legend.push(ring(top.toLocaleUpperCase('fr-FR'), false));
             if (bot) legend.push(ring(bot.toLocaleUpperCase('fr-FR'), true));
             if (top && bot) [-1, 1].forEach(sd => legend.push(T('✦', cx + sd * lr, cy + 7, 16, legFont, lf, {name: 'Étoile'})));
         }
         return {w: S, h: S, bg: 'transparent', kind: 'seal', objs: [{id: uid(), type: 'group', layer: true, name: 'Fond et cadre', children: back}, {id: uid(), type: 'group', layer: true, name: 'Monogramme', children: mid}, ...(legend.length ? [{id: uid(), type: 'group', layer: true, name: 'Légende', children: legend}] : [])]};
     }
+    /** « de Jean », « d’Antoine » */
+    const deName = n => `${/^[aeiouyhàâäéèêëîïôöûùüœæ]/i.test(String(n || '').trim()) ? 'd’' : 'de '}${String(n || '').trim()}`;
     const initialsOf = (first, last) => { const f = String(first || '').split(/[\s-]+/).filter(Boolean).map(w => w[0]).slice(0, 2), l = String(last || '').trim()[0] || ''; return f.length >= 2 ? `${f[0]}${l}${f[1]}` : `${f[0] || ''}${l}`; };
 
     /* ═════════ La fenêtre ═════════ */
@@ -300,7 +302,7 @@
                 const cr = crop || {x: 0, y: 0, w: img.naturalWidth, h: img.naturalHeight}; f = f || flatten(img, cr);
                 const m = inkMask(f, {thr: Number(o.thr), speck: Number(o.speck), grow: Number(o.grow), lines: !!o.lines});
                 try {
-                    const name = person ? `Signature de ${person.name}` : 'Signature', doc = await signatureDoc(f, m, {ink: o.ink, caption: String(o.caption || '').trim(), name});
+                    const name = person ? `Signature ${deName(person.name)}` : 'Signature', doc = await signatureDoc(f, m, {ink: o.ink, caption: String(o.caption || '').trim(), name});
                     if (person && o.tomedia) await toMedia(maskCanvas(f, m, o.ink), person, name).catch(e => toast(`Image non rangée : ${e.message}`, 'error'));
                     ext.openVectorEditor({doc, name, onSaved: onDone, onClose: onDone});
                 } catch (e) { toast(e.message, 'error'); return false; }
@@ -312,7 +314,7 @@
         const fd = new FormData(); fd.append('person_id', person.id); fd.append('title', title); fd.append('csrf', A().state.csrf); fd.append('files[]', new File([blob], `${title.replace(/[^\p{L}\d]+/gu, '-').toLowerCase()}.png`, {type: 'image/png'}));
         const r = await fetch('upload.php', {method: 'POST', body: fd}); const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
         if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
-        toast(`Signature rangée dans les médias de ${person.name}.`);
+        toast(`Signature rangée dans les médias ${deName(person.name)}.`);
     }
     const pickMedia = () => ext.pickImage({eyebrow: 'SIGNATURES', title: 'L’image d’un acte', intro: 'Clique sur l’image ; tu encadreras ensuite la signature. Le filtre « Avec une signature repérée » montre les actes où une signature a déjà été identifiée.'});
     /** ✍️ les signatures déjà repérées sur les images (visionneuse → Signatures identifiées) */
@@ -340,7 +342,7 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sigWatch); else sigWatch();
 
     ext.openSeals = open;
-    ext.sealInternals = {otsu, flatten, inkMask, maskCanvas, signatureDoc, buildSeal, monogram, ringText, initialsOf, LETTERS, SHAPES, COLORS};
+    ext.sealInternals = {otsu, flatten, inkMask, maskCanvas, signatureDoc, buildSeal, monogram, ringText, initialsOf, deName, LETTERS, SHAPES, COLORS};
     ext.editToolsExtra = ext.editToolsExtra || [];
     ext.editToolsExtra.push({key: 'seals', icon: '🔤', label: 'Signatures et sceaux', what: 'signature ou sceau',
         load: async () => ((await api('vector_docs')).docs || []).filter(d => d.kind === 'seal').map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">🔤</span>', info: 'Dessin vectoriel'})),

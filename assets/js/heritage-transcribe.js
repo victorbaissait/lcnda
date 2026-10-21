@@ -493,7 +493,7 @@
                 if (useEnh() && viewChanged()) { status('Préparation de l’image améliorée…'); const c = await filteredCanvas(); const b = await new Promise(r2 => c.toBlob(r2, 'image/jpeg', .92)); body.image_b64 = await new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); }); status('Reconnaissance de l’écriture…'); }
                 const r = await post('htr_recognize', body); const txt = String(r.result?.text || r.text || '').trim(); if (!txt) { status(''); return toast('Aucun texte reconnu.', 'error'); }
                 area.value += (area.value.trim() ? '\n\n— Lu automatiquement (à relire) —\n' : '') + txt; before = area.value; t.body = area.value; touch(); paintMirror(); status('Texte manuscrit ajouté (à relire)'); }
-            catch (e) { status(''); toast(`${e.message || 'Reconnaissance impossible.'} (Maintenance → Reconnaissance manuscrite pour installer un modèle)`, 'error'); }
+            catch (e) { status(''); const m = e.message || 'Reconnaissance impossible.'; toast(/Maintenance/.test(m) ? m : `${m} (Maintenance → Reconnaissance d’écriture (HTR) pour installer un modèle)`, 'error'); } // le serveur dit déjà où l'installer : pas deux fois
         }
         /* ─── image : de la base ou de l'ordinateur ─── */
         async function pickImage() {

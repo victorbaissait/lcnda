@@ -167,7 +167,7 @@
         // la couronne : des arcs de cercle concentriques au-dessus d'un tronc court ; le pied (la personne) en bas
         const usableW = W - 2 * m, availH = H - 2 * m - top - bottom, rootH = Math.min(availH * .1, usableW * .12);
         // couronne ovale : aussi large que la page, aussi haute que la place le permet
-        const crownRx = usableW / 2 * .97, crownRy = Math.min(crownRx * 1.45, (availH - rootH * 1.6) / 1.38), crownR = (crownRx + crownRy) / 2, ccx = W / 2, ccy = m + top + crownRy * 1.03;
+        const crownRx = usableW / 2 * .97, crownRy = Math.min(crownRx * 1.45, (availH - rootH * 1.6) / 1.52), crownR = (crownRx + crownRy) / 2, ccx = W / 2, ccy = m + top + crownRy * 1.16; // (les médaillons du bord dépassent la couronne d'environ 14 % : ils restent dans la page)
         const span = 224, start = -span / 2, rootX = W / 2, rootY = Math.min(H - m - bottom - rootH * .6, ccy + crownRy * .38 + rootH);
         // anneaux plus larges près du tronc (peu de monde, de grands médaillons) et au bord (les noms y sont écrits en long)
         const wts = Array.from({length: G}, (_, i) => i === 0 ? 1.5 : i === 1 ? 1.3 : i === G - 1 ? 1.35 : 1), wsum = wts.reduce((a, b) => a + b, 0), fr = [.16]; wts.forEach(w => fr.push(fr.at(-1) + .84 * w / wsum));
@@ -200,7 +200,11 @@
             const arc = kl * fr[g] * span * Math.PI / 180 / n, deep = g === G ? kl * .3 : kl * (fr[g] - fr[g - 1]);
             // assez de place en travers : médaillon couché ; sinon, il suit sa branche (dans le sens du rayon)
             const radial = s > 1 && arc < deep * 1.05, ang = s > 1 ? angOf(s) : 0;
-            const mw = s === 1 ? Math.min(usableW * .34, rootH * 2.6) : radial ? deep * .92 : Math.min(arc * .82, crownR * .4), mh = s === 1 ? rootH * 1.1 : radial ? Math.min(arc * .86, deep * .6) : Math.min(deep * .72, mw * .62);
+            let mw = s === 1 ? Math.min(usableW * .34, rootH * 2.6) : radial ? deep * .92 : Math.min(arc * .82, crownR * .4), mh = s === 1 ? rootH * 1.1 : radial ? Math.min(arc * .86, deep * .6) : Math.min(deep * .72, mw * .62);
+            // un médaillon couché, sur le côté de la couronne, s'étend vers les anneaux voisins : sa largeur est bornée pour ne pas couvrir la génération d'à côté
+            if (s > 1 && !radial) { const room = Math.min(kl * (fr[g] - fr[g - 1]), g < G ? kl * (fr[g + 1] - fr[g]) : Infinity) * .5, sn = Math.abs(Math.sin(tt + Math.PI / 2)), cs = Math.abs(Math.cos(tt + Math.PI / 2));
+                if (sn > .05) { const a = Math.sqrt(Math.max(0, room * room - (mh / 2 * cs) ** 2)) / sn; if (2 * a < mw) { mw = Math.max(mh * 1.15, 2 * a); mh = Math.min(mh, mw * .7); } }
+                const over = Math.max(m - (x - mw / 2), x + mw / 2 - (W - m)); if (over > 0) mw = Math.max(mh * 1.1, mw - 2 * over); } // ni hors de la page sur les côtés
             let rotE = radial ? ang - 90 : 0; const nrm = ((rotE % 360) + 360) % 360; if (nrm > 90 && nrm < 270) rotE += 180;
             const fill = fillOf(s, p, o, T, G), kids = [{id: uid(), type: 'ellipse', name: 'Médaillon', x: n2(x - mw / 2), y: n2(y - mh / 2), w: n2(mw), h: n2(mh), fill, stroke: T.ink, sw: n2(Math.max(.6, 1.4 * unit)), ...(radial ? {rot: n2(((rotE % 360) + 360) % 360)} : {})}];
             let ty = y, th = mh * .78;
@@ -262,9 +266,11 @@
 
     /** fabrique le dessin complet */
     async function build(o) {
+        // « N générations » : la personne compte pour la première (comme le dit le choix) ; les formes dessinent ensuite N − 1 rangées d'ancêtres
+        o = {...o, gens: clamp((Number(o.gens) || 5) - 1, 1, (SHAPES.find(x => x[0] === o.shape)?.[3] || 10) - 1)};
         const T = themeOf(o.theme), fmt = formats().find(f => f[0] === o.format) || formats().find(f => f[0] === 'a3'), land = o.orient === 'land' || (o.orient === 'auto' && SHAPES.find(s => s[0] === o.shape)?.[2] === 'land');
         const W = land ? fmt[3] : fmt[2], H = land ? fmt[2] : fmt[3], band = (o.title || o.subtitle) ? Math.min(W, H) * .11 : 0;
-        const r = await api('tree', {id: o.person, mode: 'ancestors', depth: Math.min(o.gens, SHAPES.find(x => x[0] === o.shape)?.[3] || 10), places: 1});
+        const r = await api('tree', {id: o.person, mode: 'ancestors', depth: o.gens, places: 1});
         if (!r.tree) throw new Error('Aucune ascendance pour cette personne.');
         const people = bySosa(r.tree);
         if (o.photos) { let n = 0; for (const [s, p] of people) { if (n >= 40 || genOf(s) > 4) continue; if (p?.portrait) { p.portraitData = await portraitData(p.portrait); n++; } } }
@@ -316,7 +322,7 @@
         const saved = readJ(PREF, {});
         const v = (k, d) => saved[k] ?? d, sel = (name, list, cur2) => `<select name="${name}">${list.map(([k, l]) => `<option value="${esc(k)}" ${String(cur2) === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
         const chk = (name, label, on) => `<label class="checkbox-line"><input type="checkbox" name="${name}" ${on ? 'checked' : ''}> ${label}</label>`;
-        const gensOpts = shape => { const max = SHAPES.find(x => x[0] === shape)?.[3] || 10; return Array.from({length: max - 1}, (_, i) => i + 2).map(n => [n, `${n} générations${n >= 9 ? ` (${2 ** (n + 1) - 1} cases)` : ''}`]); };
+        const gensOpts = shape => { const max = SHAPES.find(x => x[0] === shape)?.[3] || 10; return Array.from({length: max - 1}, (_, i) => i + 2).map(n => [n, `${n} générations${n >= 9 ? ` (${2 ** n - 1} cases)` : ''}`]); };
         const fmtOpts = cur2 => { const vis = formats(true), list = vis.some(f => f[0] === cur2) ? vis : [...vis, ...formats().filter(f => f[0] === cur2)]; return list.map(f => [f[0], f[1]]); };
         const themeSel = cur2 => { const vis = themes(true), list = vis.some(x => x[0] === cur2) ? vis : [...vis, ...themes().filter(x => x[0] === cur2)], base = list.filter(x => !x[2]), mine = list.filter(x => x[2]);
             const o = l => l.map(([k, t]) => `<option value="${esc(k)}" ${k === cur2 ? 'selected' : ''}>${esc(t.label)}</option>`).join(''); return `<select name="theme">${o(base)}${mine.length ? `<optgroup label="Mes styles">${o(mine)}</optgroup>` : ''}</select>`; };
@@ -401,7 +407,7 @@
     // Listes → Outils de modification : l'onglet des arbres décoratifs (des dessins vectoriels marqués « tree »)
     ext.editToolsExtra = ext.editToolsExtra || [];
     ext.editToolsExtra.push({key: 'decortree', icon: '🌳', label: 'Arbre décoratif', what: 'arbre',
-        load: async () => ((await api('vector_docs')).docs || []).filter(d => d.kind === 'tree').map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">🌳</span>', info: `${d.objects} calque${d.objects > 1 ? 's' : ''}`})),
+        load: async () => ((await api('vector_docs')).docs || []).filter(d => d.kind === 'tree').map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">🌳</span>', info: `${d.layers ?? d.objects} calque${(d.layers ?? d.objects) > 1 ? 's' : ''}`})),
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => openMaker(again),
         rename: (id, name) => api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
