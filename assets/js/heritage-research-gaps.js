@@ -25,7 +25,7 @@
 
     function row(it, opts = {}) {
         const [ico, label] = KINDS[it.kind] || ['•', it.what];
-        const done = (it.digested || []).map(d => `<span class="h-gap-dig ${d.status === 'done' ? 'ok' : ''}" title="Déjà dans le suivi des dépouillements">${esc(d.year_text || 'sans période')} · ${esc(STATUS[d.status] || d.status)}</span>`).join('');
+        const done = (it.digested || []).map(d => `<span class="h-gap-dig ${d.status === 'done' ? 'ok' : ''}" title="Déjà dans le suivi des dépouillements">${esc(d.year_text || 'sans période')} · ${esc(d.result_label || STATUS[d.status] || d.status)}</span>`).join('');
         const where = (it.where || []).map(w => `<li><b>${esc(w.series)}</b> — ${esc(w.detail)}</li>`).join('');
         const links = [it.archive?.france && it.place ? `<a href="${esc(faSearch(`${it.place} ${it.what}`))}" target="_blank" rel="noopener">FranceArchives</a>` : '',
             it.kind === 'death' && it.gender === 'male' && it.from <= 1921 && it.to >= 1914 ? `<a href="${esc(webSearch(`Mémoire des hommes ${it.name}`))}" target="_blank" rel="noopener">Mémoire des hommes</a>` : '',

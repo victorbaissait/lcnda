@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=238">
     <link rel="stylesheet" href="assets/css/picker.css?v=6">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=232">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=234">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -57,7 +57,15 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/photomaps.css?v=8">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=1">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=2" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/mode-simple.css?v=1">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=3" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=1" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs.css?v=1">
+    <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
+    (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v1')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
+    for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
+    for(k in c.v||{})if(/^--lc-[a-z0-9-]+$/.test(k)&&/^[#a-z0-9.%() ,-]{1,40}$/i.test(String(c.v[k])))r.style.setProperty(k,c.v[k]);
+    var g=document.getElementById('lc-designs-gen');if(g)g.media='all';if(c.a['data-lc-lines']){var s=document.getElementById('lc-frame-css');if(s)s.media='all';}}catch(e){}})();</script>
 </head></html>
 <body>
 <div class="app-shell<?= $ready ? '' : ' is-not-ready' ?>" id="app">
@@ -84,6 +92,7 @@ header('X-Content-Type-Options: nosniff');
             <button type="button" class="screen-tool" id="side-panel-open" title="Diviser l’écran en deux — ou ⇧ + Entrée dans la recherche rapide" aria-label="Diviser l’écran en deux"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"/></svg></button>
             <button type="button" class="screen-tool" id="new-window-open" title="Ouvrir cet écran dans une nouvelle fenêtre" aria-label="Ouvrir dans une nouvelle fenêtre"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="7" width="14" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 4h10v10" fill="none" stroke="currentColor" stroke-width="2"/><line x1="20" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2"/></svg></button>
             <button type="button" class="screen-tool" id="kiosk-toggle" title="Mode consultation : la famille peut tout parcourir sans rien modifier" aria-label="Mode consultation"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+            <button type="button" class="screen-tool ms-entry" id="mode-simple-open" hidden title="Mode simple : montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur (gros boutons, rien à modifier)" aria-label="Mode simple"><span aria-hidden="true">🧓</span><span class="ms-entry-t">Mode simple</span></button>
             <button type="button" class="screen-tool genealogy-switch" id="genealogy-switch" title="Mes généalogies : changer, en créer une autre" aria-label="Mes généalogies"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M5 16.5V14h14v2.5M12 11.5V14"/></svg><span data-gen-name hidden></span></button>
             <span class="status-dot"></span>
             <span id="database-status">Base locale</span>
@@ -1093,10 +1102,11 @@ header('X-Content-Type-Options: nosniff');
     </div>
 </dialog>
 
+<script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=437" defer></script>
+<script src="assets/js/app.js?v=440" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
-<script src="assets/js/app-picker.js?v=12" defer></script>
+<script src="assets/js/app-picker.js?v=14" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
 <script src="assets/js/app-piece-archives.js?v=8" defer></script>
 <script src="assets/js/app-puzzle.js?v=5" defer></script>
@@ -1107,20 +1117,21 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-enquetes.js?v=10" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=14" defer></script>
 <script src="assets/js/app-harmony.js?v=9" defer></script>
-<script src="assets/js/app-ui.js?v=19" defer></script>
+<script src="assets/js/app-ui.js?v=20" defer></script>
 <script src="assets/js/app-forms.js?v=1" defer></script>
 <script src="assets/js/app-mots.js?v=1" defer></script>
 <script src="assets/js/app-portraits.js?v=1" defer></script>
 <script src="assets/js/app-colonne.js?v=1" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
 <script src="assets/js/app-actions.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=2" defer></script>
-<script src="assets/js/app-access.js?v=6" defer></script>
+<script src="assets/js/app-pages.js?v=3" defer></script>
+<script src="assets/js/app-access.js?v=7" defer></script>
+<script src="assets/js/app-mode-simple.js?v=1" defer></script>
 <script src="assets/js/app-sidegroups.js?v=8" defer></script>
-<script src="assets/js/app-listes.js?v=24" defer></script>
-<script src="assets/js/app-maintenance.js?v=18" defer></script>
-<script src="assets/js/app-recherche.js?v=17" defer></script>
-<script src="assets/js/app-graphiques.js?v=12" defer></script>
+<script src="assets/js/app-listes.js?v=27" defer></script>
+<script src="assets/js/app-maintenance.js?v=19" defer></script>
+<script src="assets/js/app-recherche.js?v=18" defer></script>
+<script src="assets/js/app-graphiques.js?v=13" defer></script>
 <script src="assets/js/app-side-folders.js?v=2" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=27" defer></script>
@@ -1129,13 +1140,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=2" defer></script>
 <script src="assets/js/heritage-links.js?v=17" defer></script>
-<script src="assets/js/heritage-more.js?v=172" defer></script>
+<script src="assets/js/heritage-more.js?v=176" defer></script>
 <script src="assets/js/heritage-records.js?v=9" defer></script>
 <script src="assets/js/heritage-research.js?v=31" defer></script>
 <script src="assets/js/heritage-av.js?v=15" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=8" defer></script>
 <script src="assets/js/heritage-recueils.js?v=24" defer></script>
-<script src="assets/js/heritage-depouillements.js?v=19" defer></script>
+<script src="assets/js/heritage-depouillements.js?v=20" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=8" defer></script>
 <script src="assets/js/heritage-studio-av.js?v=56" defer></script>
 <script src="assets/js/heritage-calendars.js?v=13" defer></script>
@@ -1161,7 +1172,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-shapelib.js?v=1" defer></script>
 <script src="assets/js/heritage-boards.js?v=36" defer></script>
 <script src="assets/js/heritage-dnd.js?v=9" defer></script>
-<script src="assets/js/heritage-studio.js?v=85" defer></script>
+<script src="assets/js/heritage-studio.js?v=86" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=9" defer></script>
 <script src="assets/js/heritage-fiches.js?v=20" defer></script>
@@ -1175,7 +1186,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector-tree.js?v=11" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=9" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=9" defer></script>
-<script src="assets/js/heritage-research-gaps.js?v=3" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=4" defer></script>
+<script src="assets/js/heritage-journal.js?v=1" defer></script>
 <script src="assets/js/heritage-faces.js?v=9" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-kinds.js?v=11" defer></script>
@@ -1235,7 +1247,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-press-ads.js?v=8" defer></script>
 <script src="assets/js/museum-viewer.js?v=10" defer></script>
 <script src="assets/js/heritage-museum.js?v=16" defer></script>
+<script src="assets/js/heritage-questions.js?v=1" defer></script>
 <script src="assets/js/app-apparence.js?v=7" defer></script>
+<script src="assets/js/app-designs.js?v=1" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

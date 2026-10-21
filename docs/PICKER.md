@@ -56,6 +56,7 @@ P.pickerField({name: 'people_json', kind: 'person', roles: {main: true}, value: 
 // 5. Afficher (lecture) les personnes d'une enquête : principale en grand, ★ Principales, ☆ Secondaires
 box.innerHTML = P.pickerView(JSON.parse(row.people_json));
 // les entrées sans titre (simples numéros) sont relues toutes seules ; clic = ouvrir la fiche ; « ? » = sans fiche
+// labels: {primary: '🎯 Cherché pour', secondary: '…'} change le nom des deux lignes (ex. les personnes cherchées d'un dépouillement)
 
 // 6. Un lieu (une ville du monde choisie entre dans la base au moment du choix : la valeur est toujours un id de places)
 P.pickerField({name: 'place_id', kind: 'place', value: event.place_id});
@@ -67,6 +68,7 @@ P.pickerField({name: 'label_ids', kind: 'label', multiple: true});
 // kinds : person, place, source, media, investigation, battue, label, house, periodical, employer, census, artwork, graph,
 //         sheet (📒 Fiches), atelier (📚 projets de l'Atelier), board (🧩 tableaux), layout (📐 mises en page), diagram (🏛️), oldmap (🗺️ cartes anciennes), act (📜 transcriptions)
 //         — ces 7 dernières : lib/widget_links.php (widget « Raccourcis », assets/js/heritage-shortcuts.js)
+//         digest (📜 dépouillements d'archive : commune, cote, service, années ; badge = le résultat « Trouvé / Rien trouvé / En partie » — lib/research_journal.php)
 
 // 📈 un de mes graphiques (table custom_widgets, lib/graphs.php) : la valeur est le numéro de ligne (item.id) ; l'identifiant
 // du graphique (cw_…) est dans item.uid. Case vide = tous les graphiques ; « ＋ Nouveau graphique » / « ＋ Créer le graphique « … » »

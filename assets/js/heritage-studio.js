@@ -46,7 +46,8 @@
         'genealogie-battue-level-colors', 'genealogie-person-badge-colors', 'genealogie-archive-digest-category-order', 'genealogie-heritage-flags',
         'genealogie-village-maps', 'genealogie-transcription-layout',
         'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
-        'genealogie-portraits', 'genealogie-left-column' // K7 portraits, K15 colonne de gauche (app-portraits.js, app-colonne.js)
+        'genealogie-portraits', 'genealogie-left-column', // K7 portraits, K15 colonne de gauche (app-portraits.js, app-colonne.js)
+        'genealogie-designs' // 🎨 Designs au choix A1–A10 (app-designs.js)
     ];
     const LAYOUT_PREFIXES = ['genealogie-tile-items-'];
     const PROFILES_KEY = 'genealogie-layout-profiles';
@@ -73,6 +74,7 @@
         if (Object.keys(settings).some(k => /colors/.test(k))) parts.push('couleurs');
         if (settings['genealogie-portraits']) parts.push('portraits');
         if (settings['genealogie-left-column']) parts.push('colonne de gauche');
+        if (settings['genealogie-designs']) parts.push('designs au choix');
         return parts.join(' · ') || 'réglages de départ';
     };
     /** Applique une mise en page : chaque réglage enregistré est remis, les autres reviennent au réglage de départ. */

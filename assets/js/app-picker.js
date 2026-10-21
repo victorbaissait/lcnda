@@ -37,6 +37,8 @@
         oldmap: {sym: '🗺️', add: '＋ Ajouter une carte…', one: 'carte', fem: true, none: 'Aucune carte', label: '🗺️ Cartes'},
         act: {sym: '📜', add: '＋ Ajouter une transcription…', one: 'transcription', fem: true, none: 'Aucune transcription', label: '📜 Transcriptions'},
         photomap: {sym: '📸', add: '＋ Ajouter une carte de photos…', one: 'carte', fem: true, none: 'Aucune carte de photos', label: '📸 Cartes de photos'}, // lib/photomaps.php
+        digest: {sym: '📜', ph: 'Commune, cote, année… (2 lettres suffisent)', add: '🔗 Relier un dépouillement…', one: 'dépouillement', none: 'Aucun dépouillement', label: '📜 Dépouillements'}, // journal des recherches (lib/picker.php)
+        contact: {sym: '📇', ph: 'Nom, prénom d’un contact… (2 lettres suffisent)', add: '＋ Ajouter un contact…', one: 'contact', none: 'Aucun contact', label: '📇 Contacts'}, // Répertoire des vivants (Questions aux proches)
     };
     const kindOf = k => K[k] ? k : 'person';
     const isPerson = it => it && (it.kind === 'person' || it.kind === 'animal');
@@ -267,7 +269,7 @@
     // ── la recherche dans une case ──
     const SS = new WeakMap();
     const S = s => { if (!SS.has(s)) SS.set(s, {seq: 0, q: '', groups: [], flat: [], more: false, next: 0, active: 0, filter: 'all', counts: null, loading: false, timer: 0, kind: ''}); return SS.get(s); };
-    const EMPTY_OK = ['label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph', 'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', 'photomap'];
+    const EMPTY_OK = ['label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph', 'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', 'photomap', 'digest'];
     function minLen(c) { const kinds = c.opts.kind.split(','); return kinds.length > 1 ? 2 : (K[kinds[0]]?.min ?? 1); }
     function onFocus(c, s) { const inp = s.querySelector('.pk-input'); if (inp.value.trim().length >= minLen(c) || (!inp.value.trim() && !c.opts.kind.includes(',') && EMPTY_OK.includes(c.kind))) { if (s.querySelector('.pk-list').hidden) run(c, s); } }
     function schedule(c, s) {
@@ -604,6 +606,7 @@
         if (isPerson(it) && app.openPersonById) { close(); app.openPersonById(it.id); return; }
         if (it.kind === 'investigation' && app.state && app.setModule) { close(); app.state.currentInvestigationId = it.id; app.state.enquetesTab = 'enquetes'; app.setModule('enquetes'); return; }
         if (it.kind === 'battue' && app.state && app.setModule) { close(); app.state.currentBattueId = it.id; app.state.enquetesTab = 'battues'; app.setModule('enquetes'); return; }
+        if (it.kind === 'digest' && window.LCNDA_EXT?.openDepouillement) { close(); window.LCNDA_EXT.openDepouillement(it.id); return; } // 📜 Listes › Dépouillements
         if (it.kind === 'house' && window.LCNDA_EXT?.openHouse) { window.LCNDA_EXT.openHouse({id: it.id}); return; }
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
         if (it.kind === 'graph' && window.LCNDA_EXT?.openMyGraph) { close(); window.LCNDA_EXT.openMyGraph(it.uid); return; }
@@ -701,8 +704,8 @@
         const sm = main ? sosaOf(main) : 0, sub = main ? [main.meta || main.short, sm ? `Sosa ${sm}` : ''].filter(Boolean).join(' · ') : '';
         return `<div class="pk-view"${need ? ` data-pk-view="${esc(JSON.stringify(data))}"` : ''}>`
             + (main ? `<div class="pk-view-main" data-pkv="${main.free ? 'free' : 'open'}" data-id="${main.id || ''}" data-title="${esc(main.title)}" role="button" tabindex="0">${sym(main, 48).replace('class="pk-av', 'class="pk-av big')}<div><b>${esc(main.title || `#${main.id}`)}</b> <span class="pk-star">★ PRINCIPALE</span>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}</div></div>` : '')
-            + (prim.length ? `<div class="pk-vrow"><span class="lbl">★ Principales</span><span class="pk-vchips">${prim.map(chip).join('')}</span></div>` : '')
-            + (sec.length ? `<div class="pk-vrow sec"><span class="lbl">☆ Secondaires</span><span class="pk-vchips">${sec.map(chip).join('')}</span></div>` : '')
+            + (prim.length ? `<div class="pk-vrow"><span class="lbl">${esc(data.labels?.primary || '★ Principales')}</span><span class="pk-vchips">${prim.map(chip).join('')}</span></div>` : '')
+            + (sec.length ? `<div class="pk-vrow sec"><span class="lbl">${esc(data.labels?.secondary || '☆ Secondaires')}</span><span class="pk-vchips">${sec.map(chip).join('')}</span></div>` : '')
             + (!all.length ? '<div class="pk-vrow sec"><span class="lbl">Personne</span><small>Aucune personne choisie</small></div>' : '') + '</div>';
     }
     async function resolveView(v) {
@@ -714,7 +717,7 @@
             const d = await get({kind: 'person', ids: ids.join(',')}), found = {};
             (d.groups || []).forEach(g => g.items.forEach(x => { found[x.id] = x; }));
             const fill = x => { const id = typeof x === 'object' && x ? Number(x.id) : Number(x); return found[id] ? {...found[id], ...(typeof x === 'object' && x ? {role: x.role, primary: x.primary} : {})} : x; };
-            v.outerHTML = pickerView({main: fill(data.main), people: (data.people || []).map(fill)});
+            v.outerHTML = pickerView({main: fill(data.main), people: (data.people || []).map(fill), labels: data.labels});
         } catch (_) {}
     }
     document.addEventListener('click', e => {

@@ -75,7 +75,7 @@ echo json_encode(['version' => (int) $pdo->query('PRAGMA user_version')->fetchCo
     'people' => (int) $pdo->query('SELECT count(*) FROM item_people WHERE person_id=2')->fetchColumn(), 'rows' => (int) $pdo->query('SELECT count(*) FROM item_rows')->fetchColumn(),
     'old' => (int) $pdo->query("SELECT count(*) FROM sqlite_master WHERE name='artist_items'")->fetchColumn(),
     'profile' => (int) $pdo->query("SELECT count(*) FROM person_profiles WHERE person_id=1 AND profile_key='artist'")->fetchColumn()]);`);
-assert.equal(migrated.version, 47);
+assert.equal(migrated.version, Number(require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'lib/migrations.php'), 'utf8').match(/const SCHEMA_VERSION = (\d+);/)[1]));
 assert.equal(migrated.items, 2000, 'toutes les fiches sont recopiées');
 assert.equal(migrated.same_ids, 2000, 'avec leurs numéros');
 assert.equal(migrated.no_dates, 0, 'dates calculées');

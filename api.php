@@ -207,6 +207,10 @@ try {
         require_once __DIR__ . '/lib/photomaps.php';
         photomaps_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['qp_list', 'qp_get', 'qp_templates', 'qp_write'], true)) { // 💬 questions aux proches (lib/questions_proches.php)
+        require_once __DIR__ . '/lib/questions_proches.php';
+        qp_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     // Imports qui interrogent un site (Discogs, MusicBrainz…, DOI, ORCID, HAL) : rien n'est écrit dans la base, donc pas de
     // transaction d'écriture ouverte pendant l'attente du site (jusqu'à 25 s par demande) — sinon tout enregistrement fait
     // en même temps attendait, puis échouait en « base verrouillée ».
@@ -426,6 +430,8 @@ try {
         'employer_record' => json_response(employer_record_detail($pdo, safe_text($_GET['name'] ?? ''))),
         'research_suggestions' => json_response(research_suggestions_data($pdo, max(1, min(200, safe_int($_GET['limit'] ?? 40))))),
         'research_gaps' => json_response(research_gaps_data($pdo, $_GET)),
+        'research_journal' => json_response(research_journal_data($pdo, $_GET)), // 🗓 Journal des recherches (lib/research_journal.php) ; &person_id= : bloc « 🔍 Déjà cherché »
+        'research_already' => json_response(research_already_data($pdo, $_GET)), // ⚠️ « Déjà dans ton suivi » pendant la saisie
         'faces_index' => json_response(faces_index($pdo)),
         'artist_items' => json_response(['items' => artist_items_for($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'scene' => json_response(scene_api_get($pdo, $_GET)), // 🎤 scène : coordonnées des lieux (lib/scene.php)
@@ -433,6 +439,7 @@ try {
         'sciences' => json_response(sciences_api_get($pdo, $_GET)), // 🔬 coordonnées des lieux (lib/sciences.php)
         'blocs' => json_response(blocs_api_get($pdo, $_GET)), // 📰 🏆 🎓 blocs communs (lib/blocs.php)
         'creations' => (static function () use ($pdo) { require_once __DIR__ . '/lib/creations.php'; json_response(creations_api_get($pdo, $_GET)); })(), // 🎨 Listes « Créations et carrières » (lecture seule)
+        'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
@@ -673,6 +680,10 @@ function site_defaults_allowed_keys(): array
         'genealogie-board-prefs-sets',
         'genealogie-portraits', // K7 : un seul portrait (app-portraits.js)
         'genealogie-left-column', // K15 : la colonne de gauche (app-colonne.js)
+        'genealogie-designs', // 🎨 Designs au choix A1–A10 (app-designs.js)
+        'genealogie-designs-presets', // 🎨 Designs au choix : réglages enregistrés
+        'genealogie-mode-simple', // 🧓 Mode simple : ses réglages (app-mode-simple.js)
+        'genealogie-mode-simple-presets', // 🧓 Mode simple : réglages enregistrés
     ];
 }
 
@@ -8738,8 +8749,11 @@ function archive_digest_search_data(PDO $pdo): never
     $rows = $stmt->fetchAll();
     $media = $pdo->prepare("SELECT m.id,m.title,m.media_type,m.filename,m.thumbnail,adm.page_number AS archive_page_number FROM archive_digest_media adm JOIN media m ON m.id=adm.media_id WHERE adm.archive_digest_id=? ORDER BY adm.id");
     $people = $pdo->prepare("SELECT adp.*, COALESCE(NULLIF(trim(COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')),''), NULLIF(trim(COALESCE(adp.first_name,'') || ' ' || COALESCE(adp.last_name,'')),''), 'Personne non nommée') AS person_name FROM archive_digest_people adp LEFT JOIN persons p ON p.id=adp.person_id WHERE adp.archive_digest_id=? ORDER BY adp.id");
+    $sought = null;
+    try { $sought = $pdo->prepare("SELECT p.id,p.first_name,p.last_name,p.gender FROM archive_digest_sought s JOIN persons p ON p.id=s.person_id WHERE s.archive_digest_id=? ORDER BY s.rowid"); } catch (Throwable $_) {}
     foreach ($rows as &$row) {
         $row['pages'] = json_decode((string)($row['pages_json'] ?? '[]'), true) ?: [];
+        if ($sought) { $sought->execute([(int)$row['id']]); $row['sought'] = array_map(static fn($p) => ['id' => (int)$p['id'], 'title' => journal_person_title($p), 'gender' => (string)$p['gender']], $sought->fetchAll()); }
         $media->execute([(int)$row['id']]);
         $row['media'] = $media->fetchAll();
         $people->execute([(int)$row['id']]);
@@ -8874,6 +8888,9 @@ function save_archive_visit_item(PDO $pdo, array $data): array
     $values=[$visitId,$digestId,safe_text($data['archive_service']??($digest['archive_service']??'')),$reference,$title,safe_text($data['place_label']??($digest['city_name']??'')),safe_text($data['notes']??''),safe_int($data['checked']??0)?1:0];
     if($id){$stmt=$pdo->prepare('SELECT * FROM archive_visit_items WHERE id=?');$stmt->execute([$id]);$old=$stmt->fetch();if(!$old)throw new RuntimeException('Cote de visite introuvable.');$pdo->prepare('UPDATE archive_visit_items SET visit_id=?,archive_digest_id=?,archive_service=?,archive_reference=?,title=?,place_label=?,notes=?,checked=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$values,$id]);}
     else{$pdo->prepare('INSERT INTO archive_visit_items(visit_id,archive_digest_id,archive_service,archive_reference,title,place_label,notes,checked) VALUES(?,?,?,?,?,?,?,?)')->execute($values);$id=(int)$pdo->lastInsertId();}
+    // 🗓 après la visite : trouvé / rien trouvé / en partie / pas consulté, et une note (lib/research_journal.php)
+    if(array_key_exists('result',$data)&&function_exists('journal_result_value'))$pdo->prepare('UPDATE archive_visit_items SET result=? WHERE id=?')->execute([journal_result_value($data['result'],true),$id]);
+    if(array_key_exists('result_note',$data))$pdo->prepare('UPDATE archive_visit_items SET result_note=? WHERE id=?')->execute([mb_substr(safe_text($data['result_note']),0,4000),$id]);
     return ['id'=>$id];
 }
 
@@ -9080,6 +9097,9 @@ function save_archive_digest(PDO $pdo, array $data): array
         'pages_json' => json_encode($pages, JSON_UNESCAPED_UNICODE),
     ];
     if ($row['archive_url'] !== '' && !filter_var($row['archive_url'], FILTER_VALIDATE_URL)) throw new RuntimeException('Lien direct vers l’archive invalide.');
+    // 🗓 résultat simple (Trouvé / Rien trouvé / En partie) et personnes cherchées : seulement quand la page les envoie
+    $hasResult = array_key_exists('result', $data) && function_exists('journal_result_value');
+    $hasSought = array_key_exists('sought_ids', $data) && function_exists('archive_digest_set_sought');
     if (($row['city_name'] === '') && $placeId) {
         $place = $pdo->prepare('SELECT name FROM places WHERE id = ?');
         $place->execute([$placeId]);
@@ -9096,6 +9116,8 @@ function save_archive_digest(PDO $pdo, array $data): array
         $id = (int)$pdo->lastInsertId();
         log_change($pdo, 'archive_digest', $id, 'create', 'Dépouillement d’archive ajouté', null, $row);
     }
+    if ($hasResult) $pdo->prepare('UPDATE archive_digest_entries SET result=? WHERE id=?')->execute([journal_result_value($data['result']), $id]);
+    if ($hasSought) archive_digest_set_sought($pdo, $id, $data['sought_ids']);
     return ['id' => $id];
 }
 
@@ -9110,6 +9132,7 @@ function delete_archive_digest(PDO $pdo, array $data): array
     $pdo->prepare('UPDATE investigation_items SET archive_digest_id = NULL WHERE archive_digest_id = ?')->execute([$id]);
     $pdo->prepare('DELETE FROM battue_item_archive_digests WHERE archive_digest_id = ?')->execute([$id]);
     $pdo->prepare('DELETE FROM investigation_item_archive_digests WHERE archive_digest_id = ?')->execute([$id]);
+    try { $pdo->prepare('DELETE FROM archive_digest_sought WHERE archive_digest_id = ?')->execute([$id]); } catch (Throwable $_) {}
     $pdo->prepare('DELETE FROM archive_digest_entries WHERE id = ?')->execute([$id]);
     log_change($pdo, 'archive_digest', $id, 'delete', 'Dépouillement d’archive supprimé', $before, null);
     return ['id' => $id];
@@ -9623,6 +9646,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_archive_visit_plan' => save_archive_visit_plan($pdo,$data),
             'delete_archive_visit_plan' => delete_archive_visit_plan($pdo,$data),
             'save_archive_visit_item' => save_archive_visit_item($pdo,$data),
+            'save_archive_visit_done' => save_archive_visit_done($pdo,$data), // 🗓 « ✓ Fait le … » (lib/research_journal.php)
+            'archive_visit_item_make_digest' => archive_visit_item_make_digest($pdo,$data),
             'delete_archive_visit_item' => delete_archive_visit_item($pdo,$data),
             'save_archive_visit_links' => save_archive_visit_links($pdo,$data),
             'save_archive_digest_transcription_line' => save_archive_digest_transcription_line($pdo,$data),
@@ -11337,7 +11362,9 @@ function living_contact_rows(PDO $pdo,string $like,int $limit,int $offset): arra
         $where=' WHERE lc.first_name LIKE ? OR lc.last_name LIKE ? OR lc.relationship LIKE ? OR lc.email LIKE ? OR lc.phone LIKE ? OR lc.phone_mobile LIKE ? OR lc.phone_landline LIKE ? OR lc.address LIKE ? OR lc.postal_code LIKE ? OR lc.city LIKE ? OR lc.country LIKE ? OR lc.notes LIKE ? OR p.first_name LIKE ? OR p.middle_name LIKE ? OR p.last_name LIKE ?';
         $params=array_fill(0,15,$like);
     }
-    $stmt=$pdo->prepare("SELECT lc.*,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')) AS linked_person_name FROM living_contacts lc LEFT JOIN persons p ON p.id=lc.person_id{$where} ORDER BY lc.last_name COLLATE NOCASE,lc.first_name COLLATE NOCASE,lc.id DESC LIMIT {$limit} OFFSET {$offset}");
+    // 💬 les questionnaires de chaque contact (Questions aux proches) : « état:nombre » séparés par des virgules
+    $qp=picker_table_exists($pdo,'family_questionnaires')?",(SELECT group_concat(status,',') FROM family_questionnaires fq WHERE fq.contact_id=lc.id) AS questionnaire_statuses":",'' AS questionnaire_statuses";
+    $stmt=$pdo->prepare("SELECT lc.*,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')) AS linked_person_name{$qp} FROM living_contacts lc LEFT JOIN persons p ON p.id=lc.person_id{$where} ORDER BY lc.last_name COLLATE NOCASE,lc.first_name COLLATE NOCASE,lc.id DESC LIMIT {$limit} OFFSET {$offset}");
     $stmt->execute($params);
     return $stmt->fetchAll();
 }

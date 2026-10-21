@@ -379,7 +379,7 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
     const treePets=()=>{try{return localStorage.getItem('genealogie-tree-pets')==='1';}catch(_){return false;}};
     const treePetsHtml=p=>(p.pets||[]).length?`<div class="tree-pets">${p.pets.map(a=>`<button type="button" class="tree-pet-card" ${a.person_id?`data-tree-person="${a.person_id}"`:`data-pet-goto="${a.id}"`} title="${escapeHtml(a.role||'')}">🐾 ${escapeHtml(a.title)}</button>`).join('')}</div>`:'';
     /** K7 : le portrait commun (48 px) dans les cases de l'arbre, seulement si Apparence → Portraits n'est pas « Comme avant » */
-    const treeAv=p=>window.LCNDA_UI?.avatarOn?.()&&p?window.LCNDA_UI.avatar({...p,name:personName(p),photo:p.portrait?`media/${encodeURIComponent(p.portrait)}`:''},48):'';
+    const treeAv=p=>(window.LCNDA_UI?.avatarOn?.()||window.LCNDA_DESIGNS?.treePhoto?.())&&p?window.LCNDA_UI.avatar({...p,name:personName(p),photo:p.portrait?`media/${encodeURIComponent(p.portrait)}`:''},48):'';
     function treeHtml(node) {
         const p=node.person;
         const tFields=getTreeCardFields();
@@ -392,6 +392,6 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
     }
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
-    Object.assign(window.LCNDA_PARTS, {renderGraph, renderGraphSidebar});
+    Object.assign(window.LCNDA_PARTS, {renderGraph, renderGraphSidebar, treeHtml}); // treeHtml : aussi pour les aperçus de Designs au choix (A5)
     if (state.module === 'graphiques' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();

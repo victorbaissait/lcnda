@@ -528,7 +528,7 @@
 
     /* ═════ Mode « une chose à la fois » ═════ */
     /* Presque tout est en CSS (html.a11y-simple dans access.css) ; ici : l'écran ouvert (html[data-a11y-module]) et le bandeau
-       « Mode simple — Tout afficher », toujours là pour tout réafficher. */
+       « 🧩 Une chose à la fois — Tout afficher », toujours là pour tout réafficher (le « 🧓 Mode simple » est autre chose : app-mode-simple.js). */
     function trackModule() {
         const a = document.querySelector('.main-nav .nav-item.is-active'), m = a?.dataset.module || '';
         if (root.dataset.a11yModule !== m) root.dataset.a11yModule = m;
@@ -538,15 +538,15 @@
     function updateSimpleBar() {
         if (!P.simple) { simpleBar?.remove(); return; }
         if (!simpleBar) {
-            simpleBar = document.createElement('div'); simpleBar.className = 'a11y-simplebar'; simpleBar.setAttribute('role', 'region'); simpleBar.setAttribute('aria-label', 'Mode simple');
-            simpleBar.innerHTML = '<span class="a11y-simplebar-txt"><span aria-hidden="true">🧩</span> Mode simple</span><button type="button" data-a11y-simple-off title="Remettre tous les boutons et tous les outils à l’écran">Tout afficher</button>';
+            simpleBar = document.createElement('div'); simpleBar.className = 'a11y-simplebar'; simpleBar.setAttribute('role', 'region'); simpleBar.setAttribute('aria-label', 'Une chose à la fois');
+            simpleBar.innerHTML = '<span class="a11y-simplebar-txt"><span aria-hidden="true">🧩</span> Une chose à la fois</span><button type="button" data-a11y-simple-off title="Remettre tous les boutons et tous les outils à l’écran">Tout afficher</button>';
             simpleBar.addEventListener('click', e => { if (e.target.closest('[data-a11y-simple-off]')) simpleOff(); });
         }
         if (simpleBar.parentNode !== document.body) document.body.appendChild(simpleBar);
     }
     function simpleOff() {
         P.simple = false; save(); apply(); refreshPage();
-        toast('Tout est réaffiché. Pour revenir au mode simple : Maintenance → Accessibilité.');
+        toast('Tout est réaffiché. Pour revenir à « une chose à la fois » : Maintenance → Accessibilité.');
     }
 
     /* ═════ Dictée vocale ═════ */
@@ -718,7 +718,7 @@
         const voices = TTS ? frVoices() : [];
         const reduceOs = matchMedia?.('(prefers-reduced-motion: reduce)').matches;
         return `<section class="page a11y-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>♿ Accessibilité</h2>
-            <p>Pour voir, lire et utiliser l’app plus facilement : couleurs, texte, contraste, interface simplifiée, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée. Chaque réglage s’applique tout de suite, partout dans l’app, et reste gardé avec ta généalogie.</p></div>
+            <p>Pour voir, lire et utiliser l’app plus facilement (couleurs, texte, contraste, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée), et pour préparer le mode simple. Chaque réglage s’applique tout de suite et reste gardé avec ta généalogie.</p></div>
             <div class="page-actions"><button type="button" class="button secondary" data-a11y-reset>↺ Remettre comme au départ</button></div></header>
 
         <section class="maintenance-panel a11y-sec" id="a11y-colors"><h3>🎨 Couleurs et daltonisme ${help('Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues.')}</h3>
@@ -758,7 +758,7 @@
         </section>
 
         <section class="maintenance-panel a11y-sec" id="a11y-simple"><h3>🧩 Une chose à la fois</h3>
-            <p class="muted">Une interface plus calme : moins de boutons, de chiffres et de décorations, les actions principales plus grandes, et un seul panneau à la fois (le tableau de bord sans sa colonne de réglages, les fiches sur une seule colonne, pas d’écran divisé). Rien n’est supprimé : le petit bandeau « Mode simple — Tout afficher », en bas à droite, remet tout d’un clic.</p>
+            <p class="muted">Une interface plus calme : moins de boutons, de chiffres et de décorations, les actions principales plus grandes, et un seul panneau à la fois (le tableau de bord sans sa colonne de réglages, les fiches sur une seule colonne, pas d’écran divisé). Rien n’est supprimé : le petit bandeau « 🧩 Une chose à la fois — Tout afficher », en bas à droite, remet tout d’un clic.</p>
             <div class="a11y-toggles">${toggle('simple', 'Mode « une chose à la fois »', 'Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte…', {help: 'Moins de choses à l’écran pour se concentrer sur l’essentiel. Les outils cachés reviennent avec « Tout afficher », en bas à droite de l’écran.', faq: 'Comment simplifier l’écran (mode « une chose à la fois ») ?'})}</div>
         </section>
 
@@ -883,13 +883,20 @@
         const y = keepScroll ? ws.scrollTop : 0;
         ws.innerHTML = pageHtml(); ws.scrollTop = y;
         const page = ws.querySelector('.a11y-page'); pageToken++;
+        // onglets de page « ♿ Toute l'app » / « 🧓 Mode simple » (le second est dessiné par app-mode-simple.js)
+        const MS = ext.modeSimple;
+        if (MS?.tabsHtml) {
+            page.querySelector('.page-header')?.insertAdjacentHTML('afterend', MS.tabsHtml());
+            if (MS.tabNow() === 'simple') { page.querySelectorAll(':scope > .a11y-sec').forEach(x => x.remove()); page.insertAdjacentHTML('beforeend', '<div class="ms-box" data-ms-box></div>'); }
+        }
         bindRanges(page); mountHelp(page); afterChange('cb'); afterChange('tts'); afterChange('dictate');
         remapCharts(page);
         // K2 : tout est gardé tout de suite ; « ↶ Annuler » (message) relit les réglages et les remet en place
         window.LCNDA_UI?.autoSave?.(page, {redraw: () => { load(); apply(); refreshPage(); }});
+        MS?.mountTab?.(page);
         page.addEventListener('change', e => {
             const t = e.target;
-            if (t.matches('[data-a11y-bool]')) { P[t.dataset.a11yBool] = t.checked; save(); apply(); afterChange(t.dataset.a11yBool); if (t.dataset.a11yBool === 'simple' && t.checked) toast('Mode simple : moins de boutons. Pour tout réafficher, clique sur « Tout afficher » en bas à droite.'); return; }
+            if (t.matches('[data-a11y-bool]')) { P[t.dataset.a11yBool] = t.checked; save(); apply(); afterChange(t.dataset.a11yBool); if (t.dataset.a11yBool === 'simple' && t.checked) toast('Une chose à la fois : moins de boutons. Pour tout réafficher, clique sur « Tout afficher » en bas à droite.'); return; }
             if (t.name === 'a11y-cb') { P.cb = t.value; if (t.value !== 'none' && !P.safe) { P.safe = true; const s = page.querySelector('[data-a11y-bool="safe"]'); if (s) s.checked = true; } save(); apply(); afterChange('cb'); return; }
             if (t.name === 'a11y-font') { P.font = t.value; save(); apply(); afterChange('font'); return; }
             if (t.matches('[data-a11y-voice]')) { P.voice = t.value; save(); }
@@ -902,7 +909,7 @@
             if (b.hasAttribute('data-a11y-try')) { speak('Bonjour ! Voici la voix qui lira tes textes. Jean-Baptiste Martin, né le 7 mai 1784 à Figeac, dans le Lot.'); return; }
             if (b.hasAttribute('data-a11y-stop')) { stop(); return; }
             if (b.hasAttribute('data-a11y-dys')) { P.lh = 1.5; P.ls = 0.12; P.ws = 0.16; save(); apply(); refreshPage(); toast('Espacements conseillés appliqués.'); return; }
-            if (b.hasAttribute('data-a11y-reset')) { reset(); } // K2 : sans question, « ↶ Annuler » dans le message
+            if (b.hasAttribute('data-a11y-reset')) { if (ext.modeSimple?.tabNow?.() === 'simple') ext.modeSimple.reset(); else reset(); } // K2 : sans question, « ↶ Annuler » dans le message (onglet 🧓 : les réglages du mode simple)
         });
     };
 

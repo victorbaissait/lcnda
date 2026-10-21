@@ -63,7 +63,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°47)', () => assert.equal(out.version, 47)],
+  ['structure à jour (n° de lib/migrations.php)', () => assert.equal(out.version, Number(require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'lib/migrations.php'), 'utf8').match(/const SCHEMA_VERSION = (\d+);/)[1]))],
   ['voyage : année, trajet Le Havre → Québec, bloc coché', () => assert.deepEqual(out.voyage, [1850, 2, 1])],
   ['enfant placé : durée calculée', () => assert.equal(out.placement, '2 ans et 3 mois')],
   ['armoiries liées à leurs porteurs', () => assert.equal(out.coat, 1)],

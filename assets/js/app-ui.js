@@ -1002,8 +1002,8 @@
     /** un nom de police sûr partout (attribut, style font-family) : ni guillemets, ni \, ni ; { }, ni retour à la ligne */
     const cleanFont = f => (typeof f === 'string' ? f.replace(/["'<>\\;{}\u0000-\u001f\u007f]/g, '').replace(/\s+/g, ' ').trim().slice(0, 80) : '');
     UI.rememberFont = f => { f = cleanFont(f); if (!f) return; const r = store.get(RECENT_F, []); store.set(RECENT_F, [f, ...(Array.isArray(r) ? r : []).filter(x => x !== f)].slice(0, 8)); };
-    /** E5 — openFontPicker({value, sample}) → Promise<nom de la police | null> */
-    UI.openFontPicker = ({value = '', sample = 'Louise Borie', title = 'Choisir une police'} = {}) => new Promise(resolve => {
+    /** E5 — openFontPicker({value, sample, top}) → Promise<nom de la police | null> ; top = polices conseillées, en tête */
+    UI.openFontPicker = ({value = '', sample = 'Louise Borie', title = 'Choisir une police', top = []} = {}) => new Promise(resolve => {
         const dlg = h('dialog', 'modal small-modal ui-fontpick');
         dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">POLICE</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-ui-x aria-label="Fermer">×</button></div>
             <div class="ui-fontpick-body"><div data-ui-fq></div><div class="ui-fontpick-list" role="listbox" tabindex="-1" data-ui-fl>${UI.spinner('Les polices de l’ordinateur…')}</div><div class="ui-fontpick-more" data-ui-fmore></div></div>
@@ -1028,7 +1028,7 @@
             const q = fold(sf.input.value).trim(), m = f => !q || fold(f).includes(q), seen = new Set();
             const r0 = store.get(RECENT_F, []), rec = (Array.isArray(r0) ? r0 : []).map(cleanFont).filter(Boolean).filter(m), app = APP_FONTS.filter(m), pc = comp.filter(m);
             const part = (arr, tag) => arr.filter(f => !seen.has(f.toLowerCase()) && seen.add(f.toLowerCase())).map(f => [f, tag]);
-            rows = [...part(rec, 'RÉCENTE'), ...part(app, 'DE L’APP'), ...part(pc, 'ORDINATEUR')];
+            rows = [...part((Array.isArray(top) ? top : []).map(cleanFont).filter(Boolean).filter(m), 'CONSEILLÉE'), ...part(rec, 'RÉCENTE'), ...part(app, 'DE L’APP'), ...part(pc, 'ORDINATEUR')]; // top : polices conseillées par l'outil, en tête (🧓 mode simple)
             if (q && !rows.some(([f]) => fold(f) === q)) { const typed = cleanFont(sf.input.value); if (typed) rows.push([typed, 'TAPÉE']); }
             if (chosen && !q) { const i = rows.findIndex(([f]) => f === chosen); if (i >= STEP) rows.unshift(rows.splice(i, 1)[0]); } // la police en cours, visible tout de suite
             shown = 0; more0 = null; io?.disconnect(); list.innerHTML = '';

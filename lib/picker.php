@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'battue', 'label', 'house', 'periodical', 'employer', 'census', 'artwork', 'graph',
     'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', // ces 7 : lib/widget_links.php (widget « Raccourcis »)
-    'photomap']; // 📸 cartes de photos (lib/photomaps.php)
+    'photomap', // 📸 cartes de photos (lib/photomaps.php)
+    'digest', // 📜 dépouillements d'archive (journal des recherches, lib/research_journal.php)
+    'contact']; // 📇 Répertoire des vivants (destinataires des « Questions aux proches »)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
@@ -22,6 +24,8 @@ const PICKER_LABELS = [
     'artwork' => '🎨 Œuvres', 'graph' => '📈 Graphiques',
     'sheet' => '📒 Fiches', 'atelier' => '📚 Atelier', 'board' => '🧩 Tableaux', 'layout' => '📐 Mises en page', 'diagram' => '🏛️ Diagrammes', 'oldmap' => '🗺️ Cartes', 'act' => '📜 Transcriptions',
     'photomap' => '📸 Cartes de photos',
+    'digest' => '📜 Dépouillements',
+    'contact' => '📇 Contacts',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -175,6 +179,8 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'periodical' => picker_periodicals($pdo, $q, $offset, $limit),
             'employer' => picker_employers($pdo, $q, $offset, $limit),
             'census' => picker_census($pdo, $q, $offset, $limit),
+            'digest' => picker_digests($pdo, $q, $offset, $limit),
+            'contact' => picker_contacts($pdo, $q, $offset, $limit),
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             // 🔗 sortes du widget « Raccourcis » (lib/widget_links.php) : fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions
@@ -952,5 +958,43 @@ function picker_census(PDO $pdo, string $q, int $offset, int $limit): array
         'kind' => 'census', 'id' => (int) $r['id'], 'title' => 'Recensement ' . $r['year'] . (trim((string) $r['place']) !== '' ? ' · ' . trim((string) $r['place']) : ''),
         'meta' => implode(' · ', array_filter(['Recensement', trim((string) $r['place']), trim((string) $r['address'])])),
         'badge' => (string) $r['year'], 'badge_style' => '', 'group' => 'census', 'icon' => '📋', 'short' => trim((string) $r['place']),
+    ], $rows)];
+}
+
+/** 📜 Dépouillements d'archive : commune, cote, service, années ; badge = le résultat (Trouvé, Rien trouvé…) sinon l'état. */
+function picker_digests(PDO $pdo, string $q, int $offset, int $limit): array
+{
+    if (!picker_table_exists($pdo, 'archive_digest_entries')) { return ['total' => 0, 'items' => []]; }
+    $params = [];
+    $where = picker_text_where(['a.city_name', 'a.city_alias', 'pl.name', 'a.archive_reference', 'a.archive_service', 'a.year_text', 'a.searched'], $q, $params);
+    $res = function_exists('journal_has_column') && journal_has_column($pdo, 'archive_digest_entries', 'result') ? 'a.result' : "''";
+    [$total, $rows] = picker_page($pdo, "SELECT a.id, a.city_name, a.archive_reference, a.archive_service, a.year_text, a.record_type, a.status, {$res} AS result, pl.name AS place",
+        "FROM archive_digest_entries a LEFT JOIN places pl ON pl.id=a.place_id WHERE {$where}", 'a.updated_at DESC, a.id DESC', $params, $offset, $limit);
+    $types = function_exists('archive_digest_record_types') ? archive_digest_record_types() : [];
+    $statuses = function_exists('archive_digest_statuses') ? archive_digest_statuses() : [];
+    $results = function_exists('journal_results') ? journal_results() : [];
+    return ['total' => $total, 'items' => array_map(static function ($r) use ($types, $statuses, $results) {
+        $commune = trim((string) ($r['place'] ?: $r['city_name']));
+        return ['kind' => 'digest', 'id' => (int) $r['id'],
+            'title' => function_exists('journal_digest_title') ? journal_digest_title($r, $types, $commune) : (implode(' · ', array_filter([$types[$r['record_type']] ?? '', $commune, trim((string) $r['year_text'])])) ?: 'Dépouillement #' . $r['id']),
+            'meta' => implode(' · ', array_filter(['Dépouillement', trim((string) $r['archive_service']), trim((string) $r['archive_reference'])])),
+            'badge' => $results[$r['result']] ?? ($statuses[$r['status']] ?? ''), 'badge_style' => '', 'group' => 'digest', 'icon' => '📜', 'short' => trim((string) $r['archive_reference'])];
+    }, $rows)];
+}
+
+/** 📇 Répertoire des vivants (living_contacts) : prénom NOM, lien de parenté, ville, e-mail ; badge = fiche liée. */
+function picker_contacts(PDO $pdo, string $q, int $offset, int $limit): array
+{
+    if (!picker_table_exists($pdo, 'living_contacts')) { return ['total' => 0, 'items' => []]; }
+    $params = [];
+    $where = picker_text_where(['c.first_name', 'c.last_name', "c.first_name||' '||c.last_name", 'c.relationship', 'c.city', 'c.email'], $q, $params);
+    [$total, $rows] = picker_page($pdo, 'SELECT c.id, c.first_name, c.last_name, c.relationship, c.city, c.email, c.person_id', "FROM living_contacts c WHERE {$where}", 'c.last_name COLLATE NOCASE, c.first_name COLLATE NOCASE, c.id', $params, $offset, $limit);
+    return ['total' => $total, 'items' => array_map(static fn($r) => [
+        'kind' => 'contact', 'id' => (int) $r['id'],
+        'title' => trim(trim((string) $r['first_name']) . ' ' . mb_strtoupper(trim((string) $r['last_name']))) ?: 'Contact sans nom',
+        'first_name' => trim((string) $r['first_name']),
+        'meta' => implode(' · ', array_filter(['Contact', trim((string) $r['relationship']), trim((string) $r['city']), trim((string) $r['email'])])),
+        'badge' => (int) $r['person_id'] ? 'Fiche' : '', 'badge_style' => '', 'group' => 'contact', 'icon' => '📇', 'short' => trim((string) $r['relationship']),
+        'email' => trim((string) $r['email']), 'person_id' => (int) $r['person_id'],
     ], $rows)];
 }

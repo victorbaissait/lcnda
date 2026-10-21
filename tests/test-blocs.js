@@ -118,7 +118,7 @@ fake.reply = (action, q) => action === 'blocs' && q.op === 'person' ? {items: [.
     const listCols = JSON.parse(JSON.stringify(ART.layout(st, 'award', 'liste').fields.filter(f => f.on).map(f => f.key)));
     const T = ART.ft;
     const checks = [
-        ['structure inchangée (pas de nouvelle migration : n°47)', () => assert.equal(out.version, 47)],
+        ['structure à jour (n° de lib/migrations.php)', () => assert.equal(out.version, Number(require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'lib/migrations.php'), 'utf8').match(/const SCHEMA_VERSION = (\d+);/)[1]))],
         ['une personne qui n’est pas « Artiste » : fiche enregistrée, sans la cocher ; année tirée de la date', () => assert.deepEqual(out.saved, [true, 0, 1958])],
         ['personnes avec rôles en zones (★ principales / ☆ secondaires), nom sans fiche gardé', () => assert.deepEqual(out.zones, ['2:invité:main', '3:citée:secondary', '0:journaliste:main'])],
         ['le média est relié à « Revues et magazines » (index des liens)', () => assert.equal(out.periodical_link, 1)],

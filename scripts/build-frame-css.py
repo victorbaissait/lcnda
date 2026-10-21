@@ -16,7 +16,7 @@ import colorsys, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'assets', 'css', 'apparence-traits.css')
-SKIP = {'apparence.css', 'apparence-traits.css'}
+SKIP = {'apparence.css', 'apparence-traits.css', 'designs.css', 'designs-gen.css'}
 
 PROP = re.compile(r'^border(-(top|right|bottom|left))?(-(color|width|style))?$')
 PX = re.compile(r'^(\d*\.?\d+)px$')
@@ -82,15 +82,17 @@ def rewrite(prop, value, dark):
     return '%s:%s%s' % (prop, ' '.join(out), imp)
 
 
+# un thème à soi (classe lc-frame) ou un design de Maintenance → 🎨 Designs au choix (A1, attribut data-lc-lines)
+ON = ':is(.lc-frame,[data-lc-lines])'
+
+
 def prefix(sel):
     sel = sel.strip()
     if sel.startswith(':root'):
-        return ':root.lc-frame' + sel[5:]
+        return ':root' + ON + sel[5:]
     if re.match(r'^html\b', sel):
-        return 'html.lc-frame' + sel[4:]
-    if sel.startswith('body') or sel.startswith('*'):
-        return ':root.lc-frame ' + sel
-    return ':root.lc-frame ' + sel
+        return 'html' + ON + sel[4:]
+    return ':root' + ON + ' ' + sel
 
 
 def build():
@@ -118,9 +120,9 @@ def build():
                     rules.append('%s{%s}' % (','.join(prefix(s) for s in sels), ';'.join(decls)))
         if rules:
             out.append('/* %s */\n%s' % (name, '\n'.join(rules)))
-    head = ('/* LCNDA — traits qui entourent d’un thème à soi (« ✎ Mes thèmes »).\n'
+    head = ('/* LCNDA — traits qui entourent d’un thème à soi (« ✎ Mes thèmes », et A1 de 🎨 Designs au choix).\n'
             ' * FICHIER FABRIQUÉ par scripts/build-frame-css.py : ne pas modifier à la main. */\n'
-            ':root.lc-frame{--line:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}\n')
+            ':root' + ON + '{--line:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}\n')
     open(OUT, 'w', encoding='utf-8').write(head + '\n'.join(out) + '\n')
     print('%s : %d octets' % (os.path.relpath(OUT, ROOT), os.path.getsize(OUT)))
 

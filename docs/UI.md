@@ -527,3 +527,37 @@ Filet de sécurité : à l’ouverture d’une fenêtre (`showModal`) dont le ti
 - Le nom du format va dans le menu : « ⤓ Exporter ▾ → CSV, PDF… » ; un bouton à un seul format : « ⤓ Exporter en CSV ».
 - Les menus d’un éditeur gardent l’icône de l’objet (« 🎚 Nouveau calque de réglage ») ; les choix de format d’une fenêtre d’export E3 (📄 PDF, 🖼 PNG…) aussi.
 - Le test `tests/test-harmo-mots-symboles.js` cherche les variantes interdites dans le code.
+
+## 🧓 Mode simple (app-mode-simple.js, mode-simple.css, lib/mode_simple.php)
+
+Le mode grand-parent validé : de très gros boutons, l’arbre, les photos, les personnes et « Ce jour-là », rien à modifier.
+
+```js
+const MS = window.LCNDA_EXT.modeSimple;
+MS.enter();            // l’entrée normale : la 1re fois les réglages (« Préparer »), ensuite le mode
+MS.open();  MS.close(); MS.isOpen();
+MS.settings();         // les réglages nettoyés ; MS.write(s) les garde (K2 les voit et propose « ↶ Annuler »)
+MS.eff(s);             // ce qui s’applique vraiment (avec « Pareil que l’app » : daltonisme, contraste, taille, mouvement, voix)
+MS.kin(qui, cible);    // « ta grand-mère », « le mari de ta petite-fille Émilie » (après MS.loadData())
+MS.makeMode(cadre, {preview: true, settings}); // le même moteur dans un cadre (aperçu, « Essayer ici »)
+```
+
+- Données : GET `api.php?action=mode_simple_data` → `{persons, families, media, start}` (dates lues par `cal_parse_date`, vivants comme l’export « pour partager », fiches confidentielles marquées `priv`).
+- Réglages : `localStorage['genealogie-mode-simple']` (copié dans la base, défaut du site) et `genealogie-mode-simple-presets` ; « Réglages de base » coupé → `lcnda-mode-simple-local` (cet appareil) ; `lcnda-mode-simple-device` = `{start, viewer}`. Le code de sortie : `codeHash` = sel + SHA-256, jamais en clair.
+- Lecture seule : pendant le mode, `fetch` / `XMLHttpRequest` / `sendBeacon` non-GET sont refusés (les réglages d’affichage en attente partent après la sortie), `body.is-kiosk`, l’app est `inert` et cachée.
+- Lien de parenté : mêmes mots que `qm_kin_label_g` (lib/question_more.php), puis les alliances.
+- Onglet de réglages : `app-access.js` pose les onglets « ♿ Toute l’app » / « 🧓 Mode simple » (sessionStorage `lcnda-a11y-tab`) et appelle `MS.mountTab(page)`.
+- Test : `tests/test-mode-simple.js`.
+
+## 🎨 Designs au choix A1–A10 (app-designs.js, designs.css, designs-gen.css)
+
+Maintenance → « 🎨 Designs au choix » (`ext.maintenance.designs`, juste après « Apparence »). Réglage : `localStorage['genealogie-designs']` (suit la base comme les autres « genealogie-* »), réglages enregistrés : `genealogie-designs-presets` (`UI.presetsFrame`, outil `designs` pour ⤓ / ⤒). Les deux sont dans `SITE_DEFAULT_KEYS` et `site_defaults_allowed_keys()` ; le premier dans `LAYOUT_KEYS` et dans les designs de l’Apparence (`lookFlat` → `a_designs`).
+
+- `LCNDA_DESIGNS.read()` / `write(G)` / `clean(raw)` : `G = {a1: {v, …réglages en plus}, … a10}` ; `defOf(id, carte)`, `isOn(G, id)` (une carte ≠ « Comme avant » ou une retouche), `isModified(G, id)` (« retouché »), `presetState(ensemble)`, `presetOf(G)`.
+- `attrsOf(G)` → `{attrs, vars}` posés par `applyTo(<html>, G)` ; rien du tout pour « Comme avant ». Attribut principal par réglage : `data-lc-style` (A1), `data-lc-density` (A2), `data-lc-icons` (A3), `data-lc-fiche` (A4), `data-lc-tree` (A5), `data-lc-btn` (A6), `data-lc-font` (A7), `data-lc-motion` (A8), `data-lc-list` (A9), `data-lc-dash` (A10) ; un attribut par retouche (`data-lc-r`, `data-lc-sh`, `data-lc-acc`, `data-lc-lines`, `data-lc-fz`, `data-lc-caps`, `data-lc-lsel`…).
+- Pose au plus tôt : `index.php` relit `lcnda-designs-ui-v1` (copie des attributs) avant le premier dessin ; il allume aussi `designs-gen.css` (`media="not all"` sinon) et `apparence-traits.css` (traits d’A1, préfixe `:root:is(.lc-frame,[data-lc-lines])`).
+- `designs-gen.css` est fabriqué par `python3 scripts/build-designs-css.py` (ombres, coins, fonds de palette, marges × `--lc-sp`, survol) depuis toutes les feuilles d’`index.php` : à relancer après un gros changement de CSS, puis monter son `?v=`.
+- Passages sur l’écran (`decorate(root, G)`, MutationObserver léger, rien si aucun réglage ne le demande) : A3 icônes au trait (`.lc-ic`, l’émoji reste dans le texte, caché à l’œil), A4 en-tête de la fiche (`ext.afterPerson`, éléments `.lc-dz`), A7 noms en minuscules, A9 petit portrait des lignes, A10 date du journal, A5 Sosa des cases, A8 secondes des messages (`toast.dataset.lcTotal`).
+- Aperçus : petites pages (iframe `srcdoc`) avec les feuilles de l’app, le réglage montré posé sur leur `<html>` et de vrais écrans (fiche ouverte, personnes, `LCNDA_PARTS.treeHtml`, dernier tableau de bord affiché).
+- Test : `tests/test-designs.js`.
+

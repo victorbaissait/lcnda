@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 47;
+const SCHEMA_VERSION = 49;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -68,6 +68,8 @@ function migration_steps(): array
         45 => 'schema_v45',
         46 => 'schema_v46',
         47 => 'schema_v47',
+        48 => 'schema_v48',
+        49 => 'schema_v49',
     ];
 }
 
@@ -2046,4 +2048,67 @@ function schema_v47(PDO $pdo): void
 {
     if (!function_exists('art_schema')) { require_once __DIR__ . '/art_engine.php'; }
     art_schema($pdo);
+}
+
+/** 🗓 Journal des recherches (lib/research_journal.php) : résultat simple d'un dépouillement (Trouvé / Rien trouvé / En partie),
+ *  personnes cherchées d'un dépouillement (à part des personnes relevées), « ✓ Fait le … » d'une visite d'archives et
+ *  résultat + note de chaque cote consultée. */
+function schema_v48(PDO $pdo): void
+{
+    $has = static function (string $table, string $col) use ($pdo): bool {
+        foreach ($pdo->query('PRAGMA table_info(' . $table . ')') as $c) { if ($c['name'] === $col) { return true; } }
+        return false;
+    };
+    if (!$has('archive_digest_entries', 'result')) { $pdo->exec("ALTER TABLE archive_digest_entries ADD COLUMN result TEXT NOT NULL DEFAULT ''"); }
+    if (!$has('archive_visit_plans', 'done_at')) { $pdo->exec("ALTER TABLE archive_visit_plans ADD COLUMN done_at TEXT NOT NULL DEFAULT ''"); }
+    if (!$has('archive_visit_items', 'result')) { $pdo->exec("ALTER TABLE archive_visit_items ADD COLUMN result TEXT NOT NULL DEFAULT ''"); }
+    if (!$has('archive_visit_items', 'result_note')) { $pdo->exec("ALTER TABLE archive_visit_items ADD COLUMN result_note TEXT NOT NULL DEFAULT ''"); }
+    $pdo->exec("CREATE TABLE IF NOT EXISTS archive_digest_sought (
+        archive_digest_id INTEGER NOT NULL,
+        person_id INTEGER NOT NULL,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY(archive_digest_id, person_id),
+        FOREIGN KEY(archive_digest_id) REFERENCES archive_digest_entries(id) ON DELETE CASCADE,
+        FOREIGN KEY(person_id) REFERENCES persons(id) ON DELETE CASCADE
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_archive_digest_sought_person ON archive_digest_sought(person_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_archive_digest_result ON archive_digest_entries(result)');
+}
+
+/** 💬 Questions aux proches (lib/questions_proches.php) : les questionnaires envoyés aux cousins (destinataire du Répertoire des
+ *  vivants ou nom libre, questions, état préparé / envoyé / répondu / rangé, date d'envoi et de relance, versions envoyées,
+ *  réponses importées) et mes propres questions (modèles). Les réponses deviennent des family_memories (sorte « testimony »
+ *  pour un témoignage sur une fiche). */
+function schema_v49(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_questionnaires (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        uid TEXT NOT NULL UNIQUE,
+        title TEXT NOT NULL DEFAULT '',
+        intro TEXT NOT NULL DEFAULT '',
+        contact_id INTEGER REFERENCES living_contacts(id) ON DELETE SET NULL,
+        recipient_text TEXT NOT NULL DEFAULT '',
+        person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        questions_json TEXT NOT NULL DEFAULT '[]',
+        status TEXT NOT NULL DEFAULT 'prepared' CHECK(status IN ('prepared','sent','answered','filed')),
+        sent_at TEXT NOT NULL DEFAULT '',
+        remind_at TEXT NOT NULL DEFAULT '',
+        answered_at TEXT NOT NULL DEFAULT '',
+        answered_by TEXT NOT NULL DEFAULT '',
+        answers_json TEXT NOT NULL DEFAULT '{}',
+        imports_json TEXT NOT NULL DEFAULT '[]',
+        checksums_json TEXT NOT NULL DEFAULT '[]',
+        notes TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_questionnaires_contact ON family_questionnaires(contact_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_questionnaires_person ON family_questionnaires(person_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS questionnaire_templates (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        theme TEXT NOT NULL DEFAULT 'mine',
+        kind TEXT NOT NULL DEFAULT 'text' CHECK(kind IN ('text','person','photo')),
+        text TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
 }

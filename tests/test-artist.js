@@ -111,7 +111,7 @@ fakeApi.reply = body => (body.what === 'release' ? {id: 249504, title: 'Never', 
     ART.setVisible(st, 'release', 'fiche', 'barcode', true);
     const L2 = ART.layout(st, 'release', 'fiche');
     const checks = [
-        ['structure à jour (n°47)', () => assert.equal(out.version, 47)],
+        ['structure à jour (n° de lib/migrations.php)', () => assert.equal(out.version, Number(require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'lib/migrations.php'), 'utf8').match(/const SCHEMA_VERSION = (\d+);/)[1]))],
         ['migration : artist_items recopiée dans items (même numéro), profil « Artiste » créé', () => assert.deepEqual(out.migrated, [1, '', 1])],
         ['fiche non « Artiste » : refusée avec un message clair', () => assert.equal(out.refused, true)],
         ['… ou cochée « Artiste » quand on le demande', () => assert.equal(out.made_artist, 1)],

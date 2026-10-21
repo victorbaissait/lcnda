@@ -68,6 +68,15 @@ function gaps_overlap(string $text, ?int $from, ?int $to): bool
     return min($ys) <= ($to ?? $from) && max($ys) >= $from;
 }
 
+/** « Déjà cherché » : un dépouillement du même type d'acte, dans la même commune (lieu de la base ou nom), sur des années qui se recoupent.
+ *  Sert aussi au journal des recherches (lib/research_journal.php, « Déjà dans ton suivi »). */
+function gaps_digest_match(array $r, string $recordType, int $placeId, string $place, ?int $from, ?int $to): bool
+{
+    return (string) $r['record_type'] === $recordType
+        && (($placeId && (int) $r['place_id'] === $placeId) || ($place !== '' && gaps_norm((string) $r['city_name']) === gaps_norm($place)))
+        && gaps_overlap((string) $r['year_text'], $from, $to);
+}
+
 /** les tables décennales qui couvrent une fenêtre d'années (1792-1802, puis 1803-1812, 1813-1822…) */
 function gaps_decennial(int $from, int $to): array
 {
@@ -207,7 +216,8 @@ function research_gaps_data(PDO $pdo, array $q = []): array
     };
     // ce qui est déjà dans le suivi des dépouillements
     $digest = [];
-    try { foreach ($pdo->query("SELECT id, place_id, city_name, record_type, year_text, status FROM archive_digest_entries") as $r) { $digest[] = $r; } } catch (Throwable $_) {}
+    try { foreach ($pdo->query("SELECT * FROM archive_digest_entries") as $r) { $digest[] = $r; } } catch (Throwable $_) {}
+    $resultLabels = function_exists('journal_results') ? journal_results() : [];
     $recType = ['birth' => 'naissance', 'marriage' => 'mariage', 'death' => 'deces', 'parents' => 'mariage', 'census' => 'recensement', 'military' => 'fiche_militaire', 'succession' => 'succession', 'contract' => 'autre'];
     $archives = [];
     foreach ($items as &$it) {
@@ -219,9 +229,8 @@ function research_gaps_data(PDO $pdo, array $q = []): array
         if (in_array($it['kind'], ['birth', 'death'], true) && $it['to'] !== null && $it['to'] < 1792) { $it['record_type'] = $it['kind'] === 'birth' ? 'bapteme' : 'deces'; }
         $it['where'] = gaps_where($it['kind'], $it['from'], $it['to'], $arch, (string) $it['place']);
         $it['decennial'] = ($it['to'] ?? 0) >= 1792 && in_array($it['kind'], ['birth', 'marriage', 'death', 'parents'], true) ? gaps_decennial((int) ($it['from'] ?? $it['to']), (int) $it['to']) : [];
-        $it['digested'] = array_values(array_map(static fn($r) => ['id' => (int) $r['id'], 'year_text' => (string) $r['year_text'], 'status' => (string) $r['status']], array_filter($digest, static fn($r) => $r['record_type'] === $it['record_type']
-            && (($it['place_id'] && (int) $r['place_id'] === $it['place_id']) || ($it['place'] !== '' && gaps_norm((string) $r['city_name']) === gaps_norm((string) $it['place'])))
-            && gaps_overlap((string) $r['year_text'], $it['from'], $it['to']))));
+        $it['digested'] = array_values(array_map(static fn($r) => ['id' => (int) $r['id'], 'year_text' => (string) $r['year_text'], 'status' => (string) $r['status'], 'result' => (string) ($r['result'] ?? ''), 'result_label' => $resultLabels[$r['result'] ?? ''] ?? ''],
+            array_filter($digest, static fn($r) => gaps_digest_match($r, $it['record_type'], (int) $it['place_id'], (string) $it['place'], $it['from'], $it['to']))));
         $k = $arch['key'];
         $archives[$k] ??= ['key' => $k, 'label' => $arch['label'], 'department' => $arch['department'], 'code' => $arch['code'], 'count' => 0, 'communes' => []];
         $archives[$k]['count']++;
