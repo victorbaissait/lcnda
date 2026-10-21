@@ -1093,7 +1093,8 @@
         if (op.type === 'fillmask') { // une sélection remplie d'une couleur, sur un calque
             const m = env?.masks?.get(op.mask); if (!m) { c.restore(); return; }
             const t = document.createElement('canvas'); t.width = W; t.height = H; const g = t.getContext('2d'); g.fillStyle = op.color; g.fillRect(0, 0, W, H); g.globalCompositeOperation = 'destination-in'; g.drawImage(m, 0, 0, W, H);
-            c.globalAlpha = op.opacity ?? 1; c.drawImage(t, (op.dx || 0) * W, (op.dy || 0) * H); c.restore(); return;
+            c.globalAlpha = op.opacity ?? 1; if (op.erase) c.globalCompositeOperation = 'destination-out'; // ⌫ dans une sélection : effacée de ce calque
+            c.drawImage(t, (op.dx || 0) * W, (op.dy || 0) * H); c.restore(); return;
         }
         if (op.type === 'pixels') { // une zone de la photo (sélection) posée sur un calque
             const m = env?.masks?.get(op.mask); if (!m || !env.photo) { c.restore(); return; }
@@ -1849,6 +1850,14 @@
         }
         try { const rl = JSON.parse(localStorage.getItem('genealogie-retouch-layout') || '{}') || {}; if (['left', 'right'].includes(rl.tools)) dlg.classList.add('rt-tools-' + rl.tools); if (rl.side === 'left') dlg.classList.add('rt-side-left'); } catch (_) {} // Maintenance → Montage, retouche, mise en page et son
         ext.fullInit(dlg, 'retouch');
+        // les menus du haut : sur un petit écran, la barre défile de côté et les couperait ; sur un écran bas, la fin d'un long menu sortirait de l'écran
+        dlg.querySelectorAll('.h-rt-head details.h-rt-menu').forEach(d => d.addEventListener('toggle', () => {
+            const l = d.querySelector(':scope > .h-rt-menulist'); if (!l) return;
+            Object.assign(l.style, {position: '', left: '', top: '', maxHeight: '', overflowY: ''}); if (!d.open) return;
+            const r = d.querySelector('summary').getBoundingClientRect(), head = d.closest('.h-rt-head'), clipped = head && getComputedStyle(head).overflowX !== 'visible';
+            if (clipped) Object.assign(l.style, {position: 'fixed', top: `${r.bottom + 3}px`, left: `${Math.max(4, Math.min(r.left, innerWidth - l.offsetWidth - 4))}px`});
+            if (!l.querySelector('.h-rt-sub') || innerWidth <= 700) { const room = innerHeight - l.getBoundingClientRect().top - 8; if (l.scrollHeight > room || innerWidth <= 700) Object.assign(l.style, {maxHeight: `${Math.max(160, room)}px`, overflowY: 'auto'}); } // (sur grand écran, les sous-menus du menu Filtre s'ouvrent à côté : pas de défilement pour lui)
+        }));
         const $ = q => dlg.querySelector(q), $$ = q => [...dlg.querySelectorAll(q)];
         const canvas = $('[data-rt-canvas]'), ctx = canvas.getContext('2d'), out = ctx.createImageData(pw, ph);
         const overlay = $('[data-rt-overlay]'), octx = overlay.getContext('2d'), cropEl = $('[data-rt-crop]');
@@ -1874,7 +1883,7 @@
             g.putImageData(id, 0, 0);
             // toujours le même calque de retouches (tant qu'il existe) : ses retouches s'ajoutent, une seule image à la taille de la photo
             let l = drawLayers().find(x => x.restorePatch && x.name === name && !x.locked);
-            if (l) { const op = l.ops.find(x => x.type === 'image'), prev = op && masks.get(op.mask); if (prev) { const m = blank(pw, ph), mg = m.getContext('2d'); mg.drawImage(prev, 0, 0, pw, ph); mg.drawImage(c, 0, 0); l.ops = [{type: 'image', mask: addMask(m), x: 0, y: 0, w: 1, h: 1, rot: 0, opacity: 1}]; renderLayer(l); return l; } }
+            if (l) { const op = l.ops.find(x => x.type === 'image'), prev = op && masks.get(op.mask); if (prev) { const m = blank(pw, ph), mg = m.getContext('2d'); mg.globalAlpha = op.opacity ?? 1; mg.drawImage(prev, op.x * pw, op.y * ph, op.w * pw, op.h * ph); mg.globalAlpha = 1; mg.drawImage(c, 0, 0); l.ops = l.ops.map(x => x === op ? {type: 'image', mask: addMask(m), x: 0, y: 0, w: 1, h: 1, rot: 0, opacity: 1} : x); renderLayer(l); return l; } } // ce qui a été dessiné d'autre sur ce calque reste
             const keep = activeLayer; activeLayer = ''; l = newLayer(name); l.restorePatch = true; activeLayer = keep && nodeById(keep) ? keep : l.id;
             l.ops = [{type: 'image', mask: addMask(c), x: 0, y: 0, w: 1, h: 1, rot: 0, opacity: 1}]; renderLayer(l); return l;
         }
@@ -2131,8 +2140,8 @@
                 if (act === 'replace') return placeDialog({l, op});
                 if (act === 'orig') { const src = masks.get(op.mask), nw = op.nw || src?.width, nh = op.nh || src?.height; if (!nw) return; const cx = op.x + op.w / 2, cy = op.y + op.h / 2; op.w = nw / pw; op.h = nh / ph; op.x = cx - op.w / 2; op.y = cy - op.h / 2; op.rot = 0; renderLayer(l); draw(); refreshLayers(); return commit(`« ${l.name} » à sa taille d’origine`); }
                 if (act === 'filter') { const a = newAdjust(`✨ Filtre sur « ${l.name} »`), loc = locate(a.id), li = loc.arr.indexOf(l); loc.arr.splice(loc.arr.indexOf(a), 1); const tl = locate(l.id); tl.arr.splice(tl.arr.indexOf(l) + 1, 0, a); a.clip = true; activeLayer = a.id; refreshLayers(); syncControls(); draw(); showTab('filters'); commit('Filtre dynamique'); return toast('Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable.'); }
-                if (act === 'raster') { if (!await A().confirmBox('L’image sera figée en pixels à sa taille actuelle : l’agrandir ensuite la rendra floue.', {title: 'Pixelliser l’objet dynamique ?', okLabel: 'Pixelliser'})) return;
-                    const src = layerCanvas(l), c = document.createElement('canvas'); c.width = pw; c.height = ph; c.getContext('2d').drawImage(src, 0, 0); l.ops = [{type: 'image', mask: addMask(c), x: 0, y: 0, w: 1, h: 1, rot: 0, opacity: 1}]; delete l.smart; renderLayer(l); draw(); refreshLayers(); return commit(`« ${l.name} » pixellisé`); }
+                if (act === 'raster') { // H7 : pas de question, « ↶ Annuler » dans le message (ou ⌘Z)
+                    const src = layerCanvas(l), c = document.createElement('canvas'); c.width = pw; c.height = ph; c.getContext('2d').drawImage(src, 0, 0); l.ops = [{type: 'image', mask: addMask(c), x: 0, y: 0, w: 1, h: 1, rot: 0, opacity: 1}]; delete l.smart; renderLayer(l); draw(); refreshLayers(); const h0 = hpos; commit(`« ${l.name} » pixellisé`); if (hpos !== h0) undoable(`« ${l.name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou)`); return; }
                 return; }
             const lfx = e.target.closest('[data-rt-lfxedit]'); if (lfx) { const i = Number(lfx.dataset.rtLfxedit), f = l.st?.filters?.chain?.[i]; if (!f) return; activeLayer = id; refreshLayers(); syncControls(); return fxDialog(f.t, {node: id, i}); }
             if (e.target.closest('[data-rt-ladj]')) { activeLayer = id; refreshLayers(); syncControls(); const onlyFx = (l.st?.filters?.chain || []).length && JSON.stringify({...l.st, filters: {}}) === JSON.stringify({...adjDefault(), filters: {}}); showTab(onlyFx ? 'filters' : 'adjust'); return; }
@@ -2302,7 +2311,12 @@
             canvas.dataset.tool = m;
             brushEl.hidden = true; srcEl.hidden = true;
             if (m === 'gradient') { try { syncGrad(); } catch (_) {} if (changed) showTab('layers'); }
-            if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } if (changed) showTab(m === 'text' ? 'char' : 'layers'); }
+            if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { // le calque ✨ Retouches garde les corrections de la photo : on dessine à côté, sur un calque à soi
+                const textOnly = l => !!l?.ops?.length && l.ops.every(o => o.type === 'text'); // un calque de texte (comme dans Photoshop) : le pinceau et les formes vont ailleurs
+                const own = () => drawLayers().filter(l => !l.restorePatch && (m === 'text' || !textOnly(l)));
+                if (!own().length) { const keep = activeLayer; if (nodeById(keep)?.restorePatch || textOnly(nodeById(keep))) activeLayer = ''; newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); }
+                const cur = nodeById(activeLayer);
+                if (!cur || (changed && typeOf(cur) === 'layer' && (cur.restorePatch || (m !== 'text' && textOnly(cur))))) { activeLayer = own().at(-1).id; refreshLayers(); } if (changed) showTab(m === 'text' ? 'char' : 'layers'); }
             if (m === 'adjust' && changed) showTab('adjust');
             syncChips(); draw();
         };
@@ -2427,7 +2441,8 @@
             if (k === 'kern' || k === 'aa') return chSet({[k]: el.value});
             if (k === 'hyph') return chSet({hyph: el.checked});
             if (k === 'color') { setColor(el.value); return chSet({color: el.value}); }
-            const n = Number(String(el.value).replace(',', '.')); if (el.value !== '' && !Number.isFinite(n)) return;
+            let n = Number(String(el.value).replace(',', '.')); if (el.value !== '' && !Number.isFinite(n)) { syncChar(); return; }
+            if (el.value !== '' && el.type === 'number') { const lo = el.min === '' ? -Infinity : Number(el.min), hi = el.max === '' ? Infinity : Number(el.max), n2 = Math.min(hi, Math.max(lo, n)); if (n2 !== n) { n = n2; el.value = n; } } // dans les bornes de la case (une taille de 99 999 bloquerait l'aperçu)
             if (k === 'size') { if (!(n > 0)) return; return chSet({tsize: Math.round(n), size: Math.round(n)}); }
             chSet({[k]: el.value === '' ? (k === 'hs' || k === 'vs' ? 100 : 0) : n});
         });
@@ -2627,7 +2642,7 @@
         patPane.addEventListener('change', e => { if (e.target.matches('[data-pt-transp]')) { patSt.transp = e.target.checked; savePat(); renderPats(); } });
         patPane.addEventListener('click', async e => {
             const pk = e.target.closest('[data-pt-pick]'); if (pk) { patSt.id = pk.dataset.ptPick; savePat(); const t = patTarget(); if (t && !lockedDeep(t.l)) { const tile = await patTile(patSt.id); t.op.mask = addMask(tile); t.op.pid = patSt.id; t.op.refW = pw; renderLayer(t.l); draw(); refreshLayers(); commit(`Motif « ${patName(patSt.id)} » sur « ${t.l.name} »`); } renderPats(); return; }
-            const del = e.target.closest('[data-pt-del]'); if (del) { if (!await A().confirmBox(`Supprimer le motif « ${patName(del.dataset.ptDel)} » de la bibliothèque ? (les calques qui l’utilisent le gardent)`, {okLabel: 'Supprimer'})) return; lsSet(PUSER, JSON.stringify(userPats().filter(p => p.id !== del.dataset.ptDel))); renderPats(); return; }
+            const del = e.target.closest('[data-pt-del]'); if (del) { const id = del.dataset.ptDel, msg = `Motif « ${patName(id)} » retiré de la bibliothèque (les calques qui l’utilisent le gardent)`, rm = () => { lsSet(PUSER, JSON.stringify(userPats().filter(p => p.id !== id))); renderPats(); }; if (A().undoLocalChange) A().undoLocalChange(msg, [PUSER], rm, () => renderPats()); else rm(); return; } // H7 : « ↶ Annuler » au lieu d'une question
             if (e.target.closest('[data-pt-fill]')) return patFill();
             if (e.target.closest('[data-pt-make]')) return patMaker();
         });
@@ -2801,7 +2816,7 @@
             pn.addEventListener('click', async e => {
                 const pre = e.target.closest('[data-g-pre]'); if (pre) { const st0 = presetStops(pre.dataset.gPre); if (!st0) return; w.stops = rtGSorted(st0); sel = w.stops[0]; preset = pre.dataset.gPre; paintPresets(); paintStop(); apply(); return; }
                 const del = e.target.closest('[data-g-predel]'); if (del) { lsSet(GUSER, JSON.stringify(userPresets().filter(u => u.id !== del.dataset.gPredel))); if (preset === del.dataset.gPredel) preset = ''; paintPresets(); return; }
-                if (e.target.closest('[data-g-col]')) { const s = sel; UI.openColorBox(e.target.closest('[data-g-col]'), {get: () => s.c, set: v => { if (!v) return; s.c = v.slice(0, 7); edited(); apply(); paintStop(); }}); return; }
+                if (e.target.closest('[data-g-col]')) { const s = sel, UI = window.LCNDA_UI; if (!UI?.openColorBox) return; UI.openColorBox(e.target.closest('[data-g-col]'), {get: () => s.c, set: v => { if (!v) return; s.c = v.slice(0, 7); edited(); apply(); paintStop(); }}); return; }
                 if (e.target.closest('[data-g-del]')) { if (w.stops.length <= 2) return; w.stops.splice(w.stops.indexOf(sel), 1); sel = w.stops[0]; edited(); apply(); paintStop(); return; }
                 if (e.target.closest('[data-g-flip]')) { w.stops.forEach(s => { s.p = 1 - s.p; }); const sorted = [...w.stops].sort((a, b) => a.p - b.p); const ms = sorted.map(s => s.m ?? 0.5); sorted.forEach((s, i) => { const m = ms[sorted.length - 2 - i]; if (m !== undefined) s.m = 1 - m; else delete s.m; }); edited(); apply(); paintStop(); return; }
                 if (e.target.closest('[data-g-even]')) { const sorted = [...w.stops].sort((a, b) => a.p - b.p); sorted.forEach((s, i) => { s.p = i / (sorted.length - 1); }); edited(); apply(); paintStop(); return; }
@@ -2905,6 +2920,7 @@
             if (op.type === 'image') return {x: op.x, y: op.y, w: op.w, h: op.h};
             if (op.type === 'shape' || op.type === 'gradient') { const x = Math.min(op.x1, op.x2), y = Math.min(op.y1, op.y2); return {x, y, w: Math.abs(op.x2 - op.x1), h: Math.abs(op.y2 - op.y1)}; }
             if (op.type === 'text') { mctx.save(); const b = rtDrawText(mctx, op, pw, ph, true); mctx.restore(); return {x: b.x / pw, y: b.y / ph, w: b.w / pw, h: b.h / ph}; }
+            if (op.erase) return null; // une zone effacée ne se prend pas avec ➤
             if (op.type === 'pixels' || op.type === 'fillmask') { const m = masks.get(op.mask), b = m && (op._bb || (op._bb = maskBox(m))); return b ? {x: b.x / pw + (op.dx || 0), y: b.y / ph + (op.dy || 0), w: b.w / pw, h: b.h / ph} : null; }
             if (op.points?.length) { const xs = op.points.map(p => p[0]), ys = op.points.map(p => p[1]), pad = (op.size || 0) / 2; const x = Math.min(...xs) - pad, y = Math.min(...ys) - pad * pw / ph; return {x, y, w: Math.max(...xs) - Math.min(...xs) + pad * 2, h: Math.max(...ys) - Math.min(...ys) + pad * 2 * pw / ph}; }
             return null;
@@ -2951,15 +2967,27 @@
             const f = [...(e.clipboardData?.files || [])].find(x => /^image\//.test(x.type)); if (f) { e.preventDefault(); placeFile(f); }
         });
         const hitOp = (x, y) => { const rx = x / pw, ry = y / ph, tolx = 6 / pw * (pw / canvas.getBoundingClientRect().width), toly = tolx * pw / ph;
-            for (const l of hitList()) { for (let i = l.ops.length - 1; i >= 0; i--) { const b = opBox(l.ops[i]); if (b && rx >= b.x - tolx && rx <= b.x + b.w + tolx && ry >= b.y - toly && ry <= b.y + b.h + toly) return {layer: l.id, i}; } }
+            for (const l of hitList()) { for (let i = l.ops.length - 1; i >= 0; i--) { const b = opBox(l.ops[i]); if (b && rx >= b.x - tolx && rx <= b.x + b.w + tolx && ry >= b.y - toly && ry <= b.y + b.h + toly && opSolidAt(l.ops[i], x, y)) return {layer: l.id, i}; } }
             return null; };
+        // une image (calque ✨ Retouches, zone copiée, image placée) ne se prend que là où elle a des points : ses parties transparentes laissent passer le clic
+        const opSolidAt = (op, x, y) => {
+            if (op.type !== 'image') return true;
+            const c = masks.get(op.mask); if (!c?.width) return true;
+            const r = -(op.rot || 0) * Math.PI / 180, cx = (op.x + op.w / 2) * pw, cy = (op.y + op.h / 2) * ph, dx = x - cx, dy = y - cy;
+            const u = (dx * Math.cos(r) - dy * Math.sin(r)) / (op.w * pw) + 0.5, v = (dx * Math.sin(r) + dy * Math.cos(r)) / (op.h * ph) + 0.5;
+            if (u < 0 || v < 0 || u > 1 || v > 1) return u > -0.02 && v > -0.02 && u < 1.02 && v < 1.02; // tout près du bord : la poignée
+            const k = 3, px = Math.min(c.width - 1, Math.floor(u * c.width)), py = Math.min(c.height - 1, Math.floor(v * c.height));
+            const d = c.getContext('2d').getImageData(Math.max(0, px - k), Math.max(0, py - k), 2 * k + 1, 2 * k + 1).data; // un petit carré autour du clic
+            for (let i = 3; i < d.length; i += 4) if (d[i] > 8) return true;
+            return false;
+        };
         const moveOp = (op, dx, dy) => {
             if (op.type === 'shape' || op.type === 'gradient') { op.x1 += dx; op.x2 += dx; op.y1 += dy; op.y2 += dy; }
             else if (op.type === 'text' || op.type === 'image') { op.x += dx; op.y += dy; }
             else if (op.type === 'pixels' || op.type === 'fillmask') { op.dx = (op.dx || 0) + dx; op.dy = (op.dy || 0) + dy; }
             else if (op.points) op.points = op.points.map(([px, py]) => [px + dx, py + dy]);
         };
-        const delMoveSel = () => { const l = moveSel && nodeById(moveSel.layer); if (!l || lockedDeep(l)) return false; l.ops.splice(moveSel.i, 1); moveSel = null; renderLayer(l); draw(); refreshLayers(); commit(`Élément supprimé de « ${l.name} »`); return true; };
+        const delMoveSel = () => { const l = moveSel && nodeById(moveSel.layer); if (!l || lockedDeep(l)) return false; l.ops.splice(moveSel.i, 1); moveSel = null; renderLayer(l); draw(); refreshLayers(); const h0 = hpos; commit(`Élément supprimé de « ${l.name} »`); if (hpos !== h0) undoable(`Élément supprimé de « ${l.name} »`); return true; }; // H7 : « ↶ Annuler » dans le message
         canvas.addEventListener('dblclick', e => { if (mode === 'polysel') { finishPoly(); return; } if (mode !== 'move') return; const [x, y] = toCanvas(e), h = hitOp(x, y); if (!h) return; const op = nodeById(h.layer).ops[h.i]; if (op.type === 'text') { e.preventDefault(); placeText(op.x * pw, op.y * ph, h); } });
         canvas.addEventListener('pointerdown', e => {
             if (mode === 'hand' || spaceDown || e.button === 1) { panning = {x: e.clientX, y: e.clientY, l: stage.scrollLeft, t: stage.scrollTop}; canvas.setPointerCapture(e.pointerId); e.preventDefault(); return; }
@@ -3166,7 +3194,8 @@
             if (edit) { node = nodeById(edit.node); step = node?.st.filters?.chain?.[edit.i]; if (!step) return; }
             else { node = fxNew(key); step = node.st.filters.chain[0]; created = true; refreshLayers(); }
             activeLayer = node.id; refreshLayers(); syncControls(); draw();
-            const before = JSON.stringify(step), op0 = node.opacity ?? 1;
+            const before = JSON.stringify(step), op0 = node.opacity ?? 1, vis0 = created || node.visible !== false; // un calque caché le reste après « Annuler » ou « OK »
+            node.visible = true; // l'aperçu pendant le réglage
             dlg.querySelector('.h-rt-fxpanel')?.remove();
             const pn = document.createElement('div'); pn.className = 'h-rt-fxpanel';
             pn.innerHTML = `<header><b>✨ ${esc(def[1])}</b><small>${esc(def[0])} · calque « ${esc(node.name)} »${node.mask ? ' · limité à la sélection' : ''}</small></header>
@@ -3180,8 +3209,9 @@
             pn.addEventListener('input', e => { const k = e.target.dataset.fxp; if (!k) return; const v = Number(e.target.value); if (k === '__op') { node.opacity = v / 100; pn.querySelector('[data-fxo="__op"]').textContent = v + ' %'; draw(); return; } step[k] = v; pn.querySelector(`[data-fxo="${k}"]`).textContent = v; later(); });
             pn.querySelector('[data-fxprev]').addEventListener('change', e => { node.visible = e.target.checked; draw(); });
             pn.querySelector('[data-fxreset]').addEventListener('click', () => { Object.assign(step, fxDefaults(key)); pn.querySelectorAll('[data-fxp]').forEach(i => { if (i.dataset.fxp !== '__op') { i.value = step[i.dataset.fxp]; pn.querySelector(`[data-fxo="${i.dataset.fxp}"]`).textContent = i.value; } }); draw(); });
-            pn.querySelector('[data-fxcancel]').addEventListener('click', () => { pn.remove(); if (created) { const l = locate(node.id); if (l) l.arr.splice(l.arr.indexOf(node), 1); activeLayer = ''; } else { Object.keys(step).forEach(k => delete step[k]); Object.assign(step, JSON.parse(before)); node.opacity = op0; node.visible = true; } refreshLayers(); syncControls(); draw(); });
-            pn.querySelector('[data-fxok]').addEventListener('click', () => { pn.remove(); node.visible = true; lastFx = {key, params: Object.fromEntries(def[2].map(([k]) => [k, step[k]]))}; refreshLayers(); syncControls(); draw(); commit(created ? `Filtre « ${def[1]} »` : `Filtre « ${def[1]} » réglé`); });
+            pn.querySelector('[data-fxcancel]').addEventListener('click', () => { pn.remove(); if (created) { const l = locate(node.id); if (l) l.arr.splice(l.arr.indexOf(node), 1); activeLayer = ''; } else if (edit.added) { const ch = node.st.filters?.chain || [], j = ch.indexOf(step); if (j >= 0) ch.splice(j, 1); node.opacity = op0; node.visible = vis0; } // un filtre tout juste ajouté au calque : « Annuler » le retire
+                else { Object.keys(step).forEach(k => delete step[k]); Object.assign(step, JSON.parse(before)); node.opacity = op0; node.visible = vis0; } refreshLayers(); syncControls(); draw(); });
+            pn.querySelector('[data-fxok]').addEventListener('click', () => { pn.remove(); node.visible = vis0; lastFx = {key, params: Object.fromEntries(def[2].map(([k]) => [k, step[k]]))}; refreshLayers(); syncControls(); draw(); commit(created ? `Filtre « ${def[1]} »` : edit?.added ? `Filtre « ${def[1]} » ajouté au calque` : `Filtre « ${def[1]} » réglé`); });
         }
         dlg.addEventListener('click', e => {
             const ed = e.target.closest('[data-rt-fxedit]'), del = e.target.closest('[data-rt-fxdel]'), up = e.target.closest('[data-rt-fxup]'), n = adjNode(); if (!n || !(ed || del || up)) return;
@@ -3190,7 +3220,7 @@
             if (del) { ch.splice(i, 1); syncControls(); draw(); return commit('Filtre enlevé du calque'); }
             if (up && i > 0) { [ch[i - 1], ch[i]] = [ch[i], ch[i - 1]]; syncControls(); draw(); return commit('Ordre des filtres'); }
         });
-        dlg.addEventListener('change', e => { if (!e.target.matches('[data-rt-fxadd]')) return; const k = e.target.value, n = adjNode(); e.target.value = ''; if (!k || !n) return; n.st.filters = n.st.filters || {}; const ch = n.st.filters.chain = n.st.filters.chain || []; ch.push({t: k, ...fxDefaults(k)}); syncControls(); fxDialog(k, {node: n.id, i: ch.length - 1}); });
+        dlg.addEventListener('change', e => { if (!e.target.matches('[data-rt-fxadd]')) return; const k = e.target.value, n = adjNode(); e.target.value = ''; if (!k || !n) return; n.st.filters = n.st.filters || {}; const ch = n.st.filters.chain = n.st.filters.chain || []; ch.push({t: k, ...fxDefaults(k)}); syncControls(); fxDialog(k, {node: n.id, i: ch.length - 1, added: true}); }); // « Annuler » l'enlève
         /* ⚡ Actions : les réglages de la photo (niveaux, courbe, filtres, colorisation…) et ses calques de réglage sans masque,
            gardés sous un nom, pour les remettre ici ou les appliquer d'un coup à plusieurs photos (une nouvelle version de chacune). */
         const ACT_KEY = 'genealogie-retouch-actions';
@@ -3572,6 +3602,7 @@
             }
             if (k === 'sel:copy') { const l = newLayer('Copie de la sélection'); l.ops.push({type: 'pixels', mask: selId, dx: 0, dy: 0, opacity: 1}); renderLayer(l); refreshLayers(); draw(); showTab('layers'); return commit('Sélection copiée sur un calque'); }
             if (k === 'sel:fill') { let l = activeL(); if (!l || lockedDeep(l)) { l = newLayer('Remplissage'); } l.ops.push({type: 'fillmask', mask: selId, color, opacity: opac / 100}); renderLayer(l); refreshLayers(); draw(); return commit(`Sélection remplie (${color})`); }
+            if (k === 'sel:clear' && !maskEdit) { const l = nodeById(activeLayer); if (typeOf(l) === 'layer' && !l.restorePatch && !lockedDeep(l)) { l.ops.push({type: 'fillmask', mask: selId, color: '#000', opacity: 1, erase: true}); renderLayer(l); refreshLayers(); draw(); return commit(`Sélection effacée sur « ${l.name} »`); } } // un calque choisi (dessin, texte, image) : effacé de lui, pas de la photo
             if (k === 'sel:clear') { st.strokes.push({tool: 'clear', mask: selId}); rtReplayStrokes(srcData, [st.strokes[st.strokes.length - 1]], masks); strokeVer++; draw(); refreshLayers(); toast('Zone effacée de la photo : elle sera transparente (image enregistrée en PNG).'); return commit('Sélection effacée'); }
             if (k === 'mask:sel') { const id = activeLayer && nodeById(activeLayer) ? activeLayer : 'photo'; if (!target(id)) return toast('Choisis d’abord un calque.', 'error'); addMaskTo(id, [{type: 'sel', mask: selId}]); showTab('layers'); return commit(`Masque d’après la sélection (${id === 'photo' ? 'photo' : target(id).name})`); }
             if (k === 'sel:crop') { const bx = maskBox(m); if (!bx) return; st.crop = {x: bx.x / pw, y: bx.y / ph, w: bx.w / pw, h: bx.h / ph, a: 0}; selId = null; refreshLayers(); draw(); return commit('Recadré sur la sélection'); }
@@ -3781,7 +3812,9 @@
             fctx.putImageData(rtApply(data, data, st), 0, 0);
             const comp = document.createElement('canvas'); comp.width = W; comp.height = H; const cg = comp.getContext('2d');
             const RF = {W, H, layer: l => { if (typeOf(l) === 'photo') return pc; const lc = blank(W, H); rtDrawLayer(lc, l, {masks, photo: pc}); return lc; }, mask: n => n.maskOff ? null : n.mask};
-            cg.drawImage(renderStack($('[data-rt-merge]').checked ? layers : P() ? [P()] : [], null, RF), 0, 0);
+            // sans les annotations : la photo et ses corrections (le calque ✨ Retouches : taches, plis, tampon), rien d'autre
+            const onlyPhoto = () => { const out = []; walk(layers, n => { if (n === P() || (typeOf(n) === 'layer' && n.restorePatch && n.visible)) out.push(n); }); return out; };
+            cg.drawImage(renderStack($('[data-rt-merge]').checked ? layers : onlyPhoto(), null, RF), 0, 0);
             return cropOf(comp);
         }
         /** L'original en pleine taille, avec la même perspective et le même cadre que la retouche (l'« avant ») */
@@ -3818,7 +3851,7 @@
                 if (!r.ok || j.error) throw new Error(j.error || 'Enregistrement impossible.');
                 saved = true;
                 if (saveMode === 'copy') { toast('Copie retouchée ajoutée aux mêmes fiches.'); dlg.close(); refreshAfter(); return; }
-                if (saveMode === 'show') { applyShown(j.result.filename); toast('Nouvelle version affichée. L’original est gardé dans les versions.'); dlg.close(); return; }
+                if (saveMode === 'show') { applyShown(j.result.filename); toast(fresh ? 'Image enregistrée dans les Médias.' : 'Nouvelle version affichée. L’original est gardé dans les versions.'); dlg.close(); return; } // un canevas vide n'a pas de « versions » à montrer
                 versions = j.result.versions; toast('Version enregistrée (non affichée).'); dlg.close();
             } catch (error) {
                 toast(error.message, 'error');

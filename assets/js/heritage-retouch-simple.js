@@ -358,7 +358,7 @@
                 try { const r = await api('retouch_delete_version', {}, {method: 'POST', body: {media_id: item.id, version_id: b.dataset.rsVdel}}); versions = r.result.versions; applyShown(r.result.filename); drawVersions(); toast('Version supprimée.'); }
                 catch (error) { toast(error.message, 'error'); }
             }));
-            box.querySelectorAll('[data-rs-vfrom]').forEach(b => b.addEventListener('click', () => { dlg.close(); openRetouchSimple(b.dataset.rsVfrom); }));
+            box.querySelectorAll('[data-rs-vfrom]').forEach(b => b.addEventListener('click', async () => { if (!saved && hpos > 0 && !await A().confirmBox('Les retouches en cours seront perdues.', {title: 'Quitter cette retouche sans l’enregistrer ?', okLabel: 'Quitter sans enregistrer', danger: true})) return; saved = true; dlg.close(); openRetouchSimple(b.dataset.rsVfrom); })); // comme la retouche complète : on demande avant de perdre le travail
         };
         drawVersions();
         dlg.querySelectorAll('[data-rs-save]').forEach(b => b.addEventListener('click', async () => {

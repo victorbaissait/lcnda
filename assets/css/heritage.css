@@ -2785,7 +2785,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 :root[data-theme="dark"] .h-rt-menulist{background:#24272c;border-color:#3a3f46;color:#eee}
 :root[data-theme="dark"] .h-rt-vtools{background:#24272c;border-color:#3a3f46}
 :root[data-theme="dark"] .h-rt-vtools>button:hover{background:#2d3138}
-@media (max-width:900px){.h-rt2 .h-rt-main{grid-template-columns:1fr}.h-rt-vtools{flex-direction:row;flex-wrap:wrap;order:-1}.h-rt-resize{display:none}}
+@media (max-width:900px){.h-rt2>*{flex-shrink:0}.h-rt2 .h-rt-main{grid-template-columns:1fr;flex:none}.h-rt2 .h-rt-left,.h-rt2 .h-rt-side{min-height:auto}.h-rt-vtools{flex-direction:row;flex-wrap:wrap;order:-1}.h-rt-resize{display:none}}
 :root[data-theme="dark"] .h-rt-tabs button{background:#24272c;border-color:#3a3f46;color:#ddd}
 :root[data-theme="dark"] .h-rt-tabs button.is-active{background:#eee;color:#111;border-color:#eee}
 :root[data-theme="dark"] .h-rt-opts{background:#24272c;border-color:#3a3f46;color:#ddd}
@@ -3156,6 +3156,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-rt-sub > .h-rt-sublist { display: none; position: absolute; left: calc(100% - 4px); top: -6px; min-width: 300px; z-index: 70; }
 .h-rt-sub:hover > .h-rt-sublist, .h-rt-sub:focus-within > .h-rt-sublist { display: block; }
 .h-rt-sub:hover > .h-rt-subh { background: #2a7de1; color: #fff; }
+@media (max-width:700px) { .h-rt-sub > .h-rt-sublist { position: static; min-width: 0; margin: 2px 0 4px 12px; box-shadow: none; } } /* petit écran : les sous-menus s'ouvrent dans le menu, pas à côté (hors de l'écran) */
 .h-rt-left { position: relative; }
 .h-rt-fxpanel { position: absolute; top: 10px; right: 10px; z-index: 40; width: min(340px, 90%); max-height: calc(100% - 20px); overflow: auto; background: var(--panel, #fff); color: inherit; border: 1px solid #d9dce1; border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,.25); padding: .7rem .8rem; }
 .h-rt-fxpanel header { display: flex; flex-direction: column; margin-bottom: .4rem; }
