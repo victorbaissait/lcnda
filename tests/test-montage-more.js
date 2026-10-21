@@ -5,6 +5,8 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  * Transitions (glissements, volets, iris, zoom, flou, fondu en couleur) lues sur les pixels de l'image, effet « vieux film »
  * (animé mais le même à chaque passage), pistes verrouillées, aimant (tête de lecture, Alt pour s'en passer), temps d'une
  * musique (120 battements par minute), stabilisation (une vidéo qui tremble), enregistrement du film.
+ * Corrections de la revue : pistes après ↶ ↷ (et « ↶ Annuler » du message), dépôt refusé, vitesse, coupe d'un son sans fondu,
+ * export qu'Échap n'interrompt plus en cachette, projet supprimé entre-temps, petit écran ; 🎧 son : questions fermées, sélection.
  * Le test fabrique ses vidéos (ffmpeg), sa base et son serveur PHP dans un dossier temporaire, puis efface tout.
  * MONTAGE_SHOTS=dossier : garde des captures d'écran.
  */
@@ -195,6 +197,85 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
                 P.audio = []; P.texts = []; P.v1 = P.v1.slice(0, 2); P.v1[1].old = { on: true, amt: 0.8 }; P.v1[0].to = 1.5; P.v1[1].to = 1.5;
                 const mime = ['video/webm;codecs=vp8,opus', 'video/webm'].find(x => MediaRecorder.isTypeSupported(x)); const blob = await S.recordMontage(P, mime); return blob.size; }, M);
             assert.ok(size > 5000, `fichier de ${size} octets`);
+        });
+        // ── corrections de la revue des outils (montage et son) ──
+        const at = (sel) => p.locator(sel).boundingBox();
+        const dragTo = async (from, to, dx = 30) => { await p.locator(to).scrollIntoViewIfNeeded(); await p.locator(from).scrollIntoViewIfNeeded(); const b = await at(from), l = await at(to);
+            await p.mouse.move(b.x + 8, b.y + 8); await p.mouse.down(); await p.mouse.move(b.x + 8 + dx, l.y + l.height / 2, { steps: 8 }); await p.mouse.up(); await p.waitForTimeout(400); };
+        await t('pistes : après ↶ ↷, supprimer une piste enlève bien ses éléments ; « ↶ Annuler » du message les remet', async () => {
+            await p.click('[data-mt-addtrack="a"]'); const tid = await p.evaluate(m => eval(m).P.tracks.filter(x => x.kind === 'a').at(-1).id, M);
+            await selectClip('aa'); await p.selectOption('[data-mt-pane="item"] [data-mt-k="track"]', tid); await p.waitForTimeout(450);
+            await p.click('[data-mt-cmd="undo"][data-mt-op="undo"]'); await p.waitForTimeout(200); await p.click('[data-mt-cmd="redo"][data-mt-op="redo"]'); await p.waitForTimeout(200); // ↶ ↷ remplacent les listes
+            assert.equal(await p.evaluate(m => eval(m).P.audio[0].track, M), tid);
+            await p.click(`[data-mt-tdel="${tid}"]`); await p.waitForTimeout(300);
+            assert.equal(await p.$('dialog.confirm-box-dialog[open]'), null, 'plus de question avant (H7)');
+            assert.equal(await p.evaluate(m => eval(m).P.audio.length, M), 0, 'le son de la piste supprimée est parti avec elle');
+            await p.click('.ui-toast .ui-toast-btn:has-text("Annuler")'); await p.waitForTimeout(400);
+            assert.deepEqual(await p.evaluate(([m, tid]) => [eval(m).P.audio.length, eval(m).P.audio[0]?.track, eval(m).P.tracks.some(x => x.id === tid)], [M, tid]), [1, tid, true]);
+        });
+        await t('glisser un élément sur une piste d’un autre genre : refusé, il garde sa place, et aucun texte de la page ne se sélectionne', async () => {
+            const at0 = await p.evaluate(m => eval(m).P.texts[0].at, M);
+            await dragTo('[data-mt-clip="texts:ta"]', '[data-mt-lane="A1"]', 60);
+            assert.equal(await p.evaluate(m => eval(m).P.texts[0].at, M), at0, 'le texte n’a pas bougé dans le temps');
+            assert.match(await lastToast(), /Pas sur cette piste/);
+            const b = await at('[data-mt-clip="texts:ta"]'); await p.mouse.move(b.x + 8, b.y + 8); await p.mouse.down(); await p.mouse.move(b.x + 300, b.y + 400, { steps: 12 }); await p.mouse.up(); await p.waitForTimeout(300);
+            assert.equal(await p.evaluate(() => String(getSelection()).length), 0, 'pas de texte sélectionné en glissant');
+            await p.keyboard.press('Control+z'); await p.waitForTimeout(300);
+        });
+        await t('vitesse : la case, le curseur et les boutons restent d’accord', async () => {
+            await selectClip('vb'); await p.fill('[data-mt-pane="item"] [data-mt-k="speedn"]', '50'); await p.waitForTimeout(150);
+            assert.equal(await p.evaluate(m => eval(m).P.v1[1].speed, M), 10);
+            assert.equal(await p.inputValue('[data-mt-pane="item"] [data-mt-k="speed"]'), '10', 'le curseur suit la case');
+            await p.press('[data-mt-pane="item"] [data-mt-k="speedn"]', 'Tab'); assert.equal(await p.inputValue('[data-mt-pane="item"] [data-mt-k="speedn"]'), '10', 'la case reprend la vitesse gardée');
+            await p.$eval('[data-mt-pane="item"] [data-mt-k="speed"]', el => { el.value = '0.5'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+            assert.equal(await p.inputValue('[data-mt-pane="item"] [data-mt-k="speedn"]'), '0.5', 'la case suit le curseur');
+            await p.click('[data-mt-pane="item"] [data-mt-speed="1"]'); await p.waitForFunction(m => eval(m).P.v1[1].speed === 1, M);
+        });
+        await t('couper un son (B) : pas de fondu ajouté à l’endroit de la coupe', async () => {
+            await p.evaluate(m => { const a = eval(m).P.audio[0]; a.fadeIn = 0.5; a.fadeOut = 1; }, M);
+            await selectClip('aa'); await seek(4); await p.keyboard.press('b'); await p.waitForFunction(m => eval(m).P.audio.length === 2, M);
+            assert.deepEqual(await p.evaluate(m => eval(m).P.audio.map(a => [a.fadeIn, a.fadeOut]), M), [[0.5, 0], [0, 1]]);
+            await p.keyboard.press('Control+z'); await p.waitForFunction(m => eval(m).P.audio.length === 1, M);
+        });
+        await t('export : pendant l’enregistrement, Échap ne ferme pas la fenêtre (l’export ne continue plus en cachette)', async () => {
+            await p.click('[data-mt-export]'); await p.waitForSelector('dialog.ui-export[open]');
+            const dl = p.waitForEvent('download', { timeout: 60000 });
+            await p.click('dialog.ui-export[open] [data-ui-go]'); await p.waitForTimeout(800); await p.keyboard.press('Escape'); await p.waitForTimeout(300);
+            assert.ok(await p.$('dialog.ui-export[open]'), 'la fenêtre d’export reste ouverte');
+            assert.match(await lastToast(), /Enregistrement en cours/);
+            await dl; await p.waitForFunction(() => !document.querySelector('dialog.ui-export[open]'), null, { timeout: 20000 });
+            await p.click('[data-mt-play]'); await p.click('[data-mt-play]'); // l'aperçu marche de nouveau
+        });
+        await t('enregistrer un projet supprimé entre-temps (liste, autre fenêtre) : il est enregistré de nouveau', async () => {
+            await p.evaluate(id => window.LCNDA_APP.api('delete_montage_project', {}, { method: 'POST', body: { id } }), projId);
+            await p.evaluate(() => { const i = document.querySelector('dialog[open] [data-avx-name]'); i.value = 'Essai revenu'; i.dispatchEvent(new Event('input', { bubbles: true })); });
+            await p.click('[data-mt-saveproj]'); await p.waitForFunction(() => /Enregistré/.test(document.querySelector('dialog[open] [data-ui-status]')?.textContent || ''), null, { timeout: 15000 });
+            const names = (await p.evaluate(() => window.LCNDA_APP.api('montage_projects'))).projects.map(x => x.name);
+            assert.deepEqual(names, ['Essai revenu']);
+        });
+        await t('petit écran : la barre du montage défile, × et ⛶ restent visibles', async () => {
+            await p.setViewportSize({ width: 390, height: 844 }); await p.waitForTimeout(300);
+            const [x, w] = await p.evaluate(() => { const b = document.querySelector('dialog[open] [data-avx-close]').getBoundingClientRect(); return [b.x, b.width]; });
+            assert.ok(x > 200 && x + w <= 390, `× à ${x}`);
+            const f = await p.evaluate(() => document.querySelector('dialog[open] [data-full-toggle]')?.getBoundingClientRect().x ?? 999);
+            assert.ok(f > 150 && f < 390, `⛶ à ${f}`);
+            await p.setViewportSize({ width: 1500, height: 1000 }); await p.waitForTimeout(300);
+        });
+        await t('🎧 son : fermer une question (Échap) n’applique rien ; sélectionner marche même après un texte sélectionné', async () => {
+            await p.click('dialog[open] [data-avx-close]'); if (await p.$('dialog.confirm-box-dialog[open]')) await p.click('dialog.confirm-box-dialog[open] [data-cb-ok]');
+            await p.evaluate(() => window.LCNDA_EXT.openAvEditor({ id: 0, title: 'Musique', src: 'media/musique.webm', media_type: 'audio' }));
+            const D = 'dialog[open].h-avx:not(.h-avx-montage)'; await p.waitForSelector(D + ' [data-avx-canvas]'); await p.waitForTimeout(500);
+            await p.click(D + ' [data-avx-op="hum"]'); await p.waitForSelector('dialog.confirm-box-dialog[open]'); await p.keyboard.press('Escape'); await p.waitForTimeout(400);
+            assert.equal(await p.isEnabled(D + ' [data-avx-undo]'), false, 'Échap : le son n’a pas changé');
+            await p.click(D + ' [data-avx-op="hum"]'); await p.click('dialog.confirm-box-dialog[open] [data-c2="b"]'); await p.waitForFunction(D => !document.querySelector(D + ' [data-avx-undo]').disabled, D);
+            await p.click(D + ' [data-avx-undo]');
+            await p.click(D + ' [data-avx-op="silences"]'); await p.fill('dialog.ask-text-dialog[open] input', '30'); await p.click('dialog.ask-text-dialog[open] [data-ask-ok]'); await p.waitForTimeout(300);
+            assert.match(await lastToast(), /Aucun blanc/); assert.equal(await p.isEnabled(D + ' [data-avx-undo]'), false, 'pas d’étape ↶ pour rien');
+            const b = await at(D + ' [data-avx-canvas]');
+            await p.mouse.move(b.x - 20, b.y + 40); await p.mouse.down(); await p.mouse.move(b.x + b.width + 30, b.y + 60, { steps: 6 }); await p.mouse.up(); // sélectionne du texte de la fenêtre
+            await p.mouse.move(b.x + 2, b.y + 40); await p.mouse.down(); await p.mouse.move(b.x + b.width + 30, b.y + 60, { steps: 6 }); await p.mouse.up(); await p.waitForTimeout(150);
+            assert.match(await p.textContent(D + ' [data-avx-seltxt]'), /→ 0:08\.0/, 'la sélection va jusqu’au bout');
+            await p.click(D + ' [data-avx-close]');
         });
         await t('aucune erreur dans la page', async () => assert.deepEqual(errors, []));
     } catch (e) { failed++; console.error('✗ préparation', e && e.stack || e); }
