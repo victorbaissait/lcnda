@@ -1,0 +1,174 @@
+/* LCNDA — 🎲 Jeux de la famille : Qui est-ce ?, Memory, La bonne date, Morpion (assets/js/app-jeu-famille.js et app-jeu-*.js).
+ * Même allure noir et blanc que le jeu de l'oie, le puzzle et le labyrinthe. */
+
+.jf-page [hidden] { display: none !important; }
+.jf-small { font-size: 12.5px; margin: 0; }
+.jf-msg .ui-notice, .jf-err .ui-notice { margin: 0; }
+.jf-big { font-size: 20px; font-weight: 900; margin: 0; }
+.jf-row { display: grid; gap: 6px; }
+.jf-lab { font-weight: 800; font-size: 13px; }
+.jf-seg { flex-wrap: wrap; }
+.jf-seg button { min-height: 40px; }
+.jf-checks { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.jf-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+/* ── préparation ── */
+.jf-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: 22px; align-items: start; }
+.jf-main { display: grid; gap: 16px; min-width: 0; }
+.jf-setup .jf-top { grid-template-columns: minmax(180px, 1fr) minmax(200px, 1.4fr); }
+.jf-fs { display: grid; gap: 12px; min-width: 0; border: 2px solid #000; padding: 12px 16px 16px; margin: 0; }
+.jf-fs legend { font-weight: 900; padding: 0 6px; }
+.jf-fs legend small { font-weight: 600; color: #555; }
+.jf-fields { display: grid; gap: 12px; }
+[data-jf-count].is-low { color: #b42318; font-weight: 700; }
+.jf-players { display: grid; gap: 10px; }
+.jf-player { display: flex; align-items: end; gap: 10px; flex-wrap: wrap; }
+.jf-player > label { flex: 1; min-width: 140px; }
+.jf-player .jfx-pk { flex: 1 1 220px; min-width: 200px; }
+.jf-dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: var(--pc, #d93636); border: 2px solid #fff; box-shadow: 0 0 0 1.5px #000; flex: none; margin-bottom: 12px; }
+.jf-aside { display: grid; gap: 14px; position: sticky; top: 12px; min-width: 0; }
+.jf-ready { display: grid; gap: 8px; }
+.jf-ready-list { display: grid; gap: 8px; }
+.jf-ready-b { display: grid; gap: 2px; text-align: left; padding: 10px 12px; border: 2px solid #000; background: #fff; color: #000; font: inherit; cursor: pointer; }
+.jf-ready-b:hover { background: #f3f3f3; }
+.jf-ready-b small { color: #555; font-weight: 600; font-size: 12.5px; }
+.jf-setup footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.jf-search { min-width: 0; display: flex; align-items: center; gap: 6px; border: 2px solid #000; padding: 0 8px; background: #fff; }
+.jf-search input { border: 0; flex: 1; min-width: 0; min-height: 36px; background: transparent; }
+
+/* ── en jeu : joueurs, chrono ── */
+.jf-play { min-width: 0; }
+.jf-turns { display: grid; gap: 6px; margin-bottom: 10px; }
+.jf-turn { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 2px solid transparent; font-weight: 800; flex-wrap: wrap; }
+.jf-turn i { width: 14px; height: 14px; border-radius: 50%; background: var(--pc, #000); box-shadow: 0 0 0 1.5px #000; flex: none; }
+.jf-turn small { margin-left: auto; font-weight: 600; color: #555; }
+.jf-turn.is-on { border-color: var(--pc, #000); background: #f6f6f6; }
+.jf-turn.is-out { opacity: .5; text-decoration: line-through; }
+.jf-clock { font-size: 22px; font-weight: 900; font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+.jfq-endbox { display: grid; gap: 10px; justify-items: start; }
+
+/* ── 🕵️ Qui est-ce ? ── */
+.jfq-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px; align-content: start; }
+.jfq-card { display: grid; justify-items: center; gap: 4px; padding: 10px 6px; min-height: 64px; border: 2px solid #000; background: #fff; color: #000; font: inherit; cursor: pointer; text-align: center; }
+.jfq-card b { font-size: 13px; line-height: 1.2; }
+.jfq-card small { color: #555; font-size: 12px; }
+.jfq-card:hover { background: #f3f3f3; }
+.jfq-card.is-out { opacity: .32; filter: grayscale(1); }
+.jfq-card.is-out b { text-decoration: line-through; }
+.jfq-card.is-win { outline: 4px solid #198754; outline-offset: 2px; opacity: 1; filter: none; }
+.jfq-board.is-guessing .jfq-card:not(.is-out) { box-shadow: 0 0 0 3px #f2c230; }
+.jfq-panel { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.jfq-panel > *, .jfq-qs > *, .jfq-cat > * { min-width: 0; }
+.jfq-guess { white-space: normal; width: 100%; }
+.jfq-answer { display: grid; gap: 2px; padding: 10px 12px; border: 3px solid #000; }
+.jfq-answer b { font-size: 24px; }
+.jfq-answer.is-oui { border-color: #198754; background: #e9f7ef; }
+.jfq-answer.is-non { border-color: #b42318; background: #fdecea; }
+.jfq-answer.is-inconnu { border-color: #8a6d00; background: #fff7d6; }
+.jfq-qs { min-width: 0; display: grid; gap: 8px; max-height: 52vh; overflow: auto; padding-right: 2px; }
+.jfq-cat { display: grid; gap: 4px; }
+.jfq-cat small { font-weight: 900; text-transform: uppercase; letter-spacing: .06em; font-size: 11px; color: #555; }
+.jfq-q { white-space: normal; width: 100%; min-width: 0; overflow-wrap: anywhere; text-align: left; padding: 8px 10px; min-height: 40px; border: 2px solid #000; background: #fff; color: #000; font: inherit; font-weight: 600; cursor: pointer; }
+.jfq-q:hover { background: #f3f3f3; }
+.jfq-hist ol { margin: 6px 0 0; padding-left: 20px; font-size: 13px; }
+.jfq-end { display: grid; justify-items: start; gap: 4px; border: 2px solid #000; padding: 10px 12px; width: 100%; }
+.jfq-end small { font-weight: 800; color: #555; }
+.jfq-end b { font-size: 18px; }
+.jfq-choose { display: grid; gap: 12px; }
+
+/* ── 🃏 Memory ── */
+.jfm-grid { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: 10px; }
+.jfm-card { aspect-ratio: 3 / 4; min-height: 64px; border: 3px solid #000; background: #111; color: #fff; padding: 0; cursor: pointer; font: inherit; perspective: 600px; }
+.jfm-in { display: grid; place-items: center; align-content: center; gap: 6px; width: 100%; height: 100%; padding: 6px; text-align: center; }
+.jfm-back { font-size: 34px; opacity: .85; }
+.jfm-card.is-up { background: #fff; color: #000; }
+.jfm-card.is-up .jfm-in { animation: jf-flip .28s ease-out; }
+.jfm-card.is-found { border-color: var(--pc, #198754); box-shadow: inset 0 0 0 3px var(--pc, #198754); cursor: default; }
+.jfm-card b { font-size: 14px; line-height: 1.2; word-break: break-word; }
+.jfm-val { font-size: 18px !important; }
+.jfm-card small { color: #555; font-size: 11.5px; }
+@keyframes jf-flip { from { transform: rotateY(90deg); } to { transform: none; } }
+
+/* ── 📅 La bonne date ── */
+.jft { display: grid; gap: 16px; }
+.jft-top { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+.jft-hand { border: 4px solid #000; background: #fff; padding: 14px; display: grid; gap: 10px; justify-items: start; box-shadow: 10px 10px 0 #d7d7d7; }
+.jft-hand > small { font-weight: 800; }
+.jft-card { display: grid; gap: 4px; min-width: 150px; max-width: 220px; padding: 10px 12px; border: 2px solid #000; background: #fff; color: #000; }
+.jft-card.is-hand { max-width: 360px; font-size: 18px; border-width: 3px; cursor: grab; background: #fffbe6; }
+.jft-card.k-naissance { border-left: 6px solid #198754; }
+.jft-card.k-mariage { border-left: 6px solid #7c3aed; }
+.jft-card.k-deces { border-left: 6px solid #111; }
+.jft-card.k-histoire { border-left: 6px solid #e87818; }
+.jft-card.is-ok { box-shadow: 0 0 0 3px #198754; }
+.jft-card.is-bad { box-shadow: 0 0 0 3px #b42318; }
+.jft-ico { font-size: 20px; }
+.jft-date { font-size: 18px; font-variant-numeric: tabular-nums; }
+.jft-t { font-weight: 700; line-height: 1.25; }
+.jft-card small { color: #555; }
+.jft-line { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; border: 4px solid #000; background: #fff; padding: 12px; box-shadow: 10px 10px 0 #d7d7d7; }
+.jft-end { align-self: center; font-weight: 800; color: #555; font-size: 12.5px; padding: 0 4px; }
+.jft-slot { min-width: 64px; min-height: 64px; border: 2px dashed #888; background: #fafafa; color: #333; font: inherit; font-weight: 800; font-size: 12.5px; cursor: pointer; display: grid; place-items: center; }
+.jft-slot:hover, .jft-slot:focus-visible, .jft-slot.is-over { border-color: #000; border-style: solid; background: #fff1a8; }
+.jft-slot[disabled] { display: none; }
+
+/* ── ❌ Morpion ── */
+.jfx-wrap { display: grid; place-items: center; }
+.jfx-grid { display: grid; grid-template-columns: repeat(var(--cols), var(--cell)); grid-template-rows: repeat(var(--rows), var(--cell)); gap: 0; border: 3px solid #000; background: #000; width: max-content; }
+.jfx-cell { width: var(--cell); height: var(--cell); border: 1px solid #000; background: #fff; padding: 0; display: grid; place-items: center; cursor: pointer; font: inherit; }
+.jfx-cell:hover:not([aria-disabled]) { background: #f3f3f3; }
+.jfx-cell[aria-disabled] { cursor: default; }
+.jfx-cell.is-last { box-shadow: inset 0 0 0 3px #f2c230; }
+.jfx-cell.is-win { background: #d8f3dc; box-shadow: inset 0 0 0 3px #198754; }
+.jfx-sym { font-size: calc(var(--cell, 40px) * .58); line-height: 1; color: var(--pc, #000); }
+.jf-turn .jfx-sym { font-size: 18px; }
+.jfx-let { font-weight: 900; font-family: inherit; }
+.jfx-grid.is-gravity .jfx-cell { border-radius: 0; }
+.jfx-cell .lc-av { pointer-events: none; }
+
+html.a11y-calm .jfm-card.is-up .jfm-in { animation: none; }
+@media (prefers-reduced-motion: reduce) { .jfm-card.is-up .jfm-in { animation: none; } }
+@media (max-width: 900px) { .jft-top { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+    .jf-cols, .jf-setup .jf-top, .jf-grid2 { grid-template-columns: minmax(0, 1fr); }
+    .jf-aside { position: static; }
+    .jf-fs { padding: 10px 10px 12px; }
+    .jfq-board { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+    .jfm-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .jft-card { min-width: 120px; }
+    .jfx-wrap { place-items: start; }
+}
+:root[data-theme="dark"] .jf-page { color: #f2f2f2; } /* le texte des jeux reste lisible en sombre (le jeu de l'oie écrit en noir) */
+:root[data-theme="dark"] .jf-page .muted, :root[data-theme="dark"] .jf-turn small, :root[data-theme="dark"] .jfq-cat small { color: #c7c7c7; }
+:root[data-theme="dark"] .jfq-answer.is-oui { background: #16351f; }
+:root[data-theme="dark"] .jfq-answer.is-non { background: #3d1714; }
+:root[data-theme="dark"] .jfq-answer.is-inconnu { background: #3a3110; }
+:root[data-theme="dark"] .jfm-card { background: #000; border-color: #8a8a8a; }
+:root[data-theme="dark"] .jfm-card.is-up { background: #2a2a2a; color: #fff; }
+:root[data-theme="dark"] .jft-card.is-hand { background: #3a3518; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] [data-jf-count].is-low{color:#e9a9a5}
+:root[data-theme="dark"] .jf-dot{border:2px solid #4c4c4c}
+:root[data-theme="dark"] .jf-ready-b{background:#212121;color:#ffffff}
+:root[data-theme="dark"] .jf-ready-b:hover{background:#272727}
+:root[data-theme="dark"] .jf-ready-b small{color:#c7c7c7}
+:root[data-theme="dark"] .jf-search{background:#212121}
+:root[data-theme="dark"] .jf-turn.is-on{background:#252525}
+:root[data-theme="dark"] .jfq-card{background:#212121;color:#ffffff}
+:root[data-theme="dark"] .jfq-card small{color:#c7c7c7}
+:root[data-theme="dark"] .jfq-card:hover{background:#272727}
+:root[data-theme="dark"] .jfq-q{background:#212121;color:#ffffff}
+:root[data-theme="dark"] .jfq-q:hover{background:#272727}
+:root[data-theme="dark"] .jfq-end small{color:#c7c7c7}
+:root[data-theme="dark"] .jfm-card small{color:#c7c7c7}
+:root[data-theme="dark"] .jft-hand{background:#212121}
+:root[data-theme="dark"] .jft-card{background:#212121;color:#ffffff}
+:root[data-theme="dark"] .jft-card small{color:#c7c7c7}
+:root[data-theme="dark"] .jft-line{background:#212121}
+:root[data-theme="dark"] .jft-end{color:#c7c7c7}
+:root[data-theme="dark"] .jft-slot{background:#232323;color:#d1d1d1}
+:root[data-theme="dark"] .jft-slot:hover,:root[data-theme="dark"] .jft-slot:focus-visible,:root[data-theme="dark"] .jft-slot.is-over{background:#524818}
+:root[data-theme="dark"] .jfx-cell{background:#212121}
+:root[data-theme="dark"] .jfx-cell:hover:not([aria-disabled]){background:#272727}
+:root[data-theme="dark"] .jfx-cell.is-win{background:#203a23}
+/* ═════ fin du mode sombre automatique ═════ */
