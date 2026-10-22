@@ -251,6 +251,16 @@ mark{background:#fff1a8}
 .bk>div.on{border:2px solid #055dff;background:#f5f8ff}.bk>div.off{opacity:.45;cursor:not-allowed}
 @media (max-width:900px){.dash{grid-template-columns:minmax(0,1fr)}.wgrid>.crd{grid-column:1/-1}.side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}.sidefoot{grid-column:1/-1}}
 @media (max-width:520px){.side{grid-template-columns:minmax(0,1fr)}.minic{grid-template-columns:repeat(3,minmax(0,1fr))}.bk{grid-template-columns:minmax(0,1fr)}}
+.s16{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}.s16>div{min-width:0}
+.s16 .pill{flex-wrap:nowrap;white-space:nowrap}
+@media (max-width:900px){.s16{grid-template-columns:minmax(0,1fr)}}
+.pgbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.frz{display:flex;height:18px;border:2px solid #111}.frz i{display:block;border-right:2px solid #fff}
+.frzl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;font-size:11px;margin-top:6px;color:#555}.frzl .b{font-size:9.5px;padding:3px 5px}
+.hev{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid #eee;font-size:12.5px}.hev.on{background:#f5f8ff;margin:0 -8px;padding:8px}
+.hev small{color:#555;line-height:1.7}
+.rub{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#055dff;margin:12px 0 6px;border-top:2px solid #111;padding-top:8px}
+@media (max-width:520px){.frzl{grid-template-columns:repeat(2,minmax(0,1fr))}.hev{grid-template-columns:minmax(0,1fr)}}
 /* sombre */
 .dk{background:#121418;color:#e8e8e8;border-color:#444;box-shadow:6px 6px 0 rgba(77,159,255,.25)}
 .dk>.tag{color:#7fb0ff}
@@ -278,7 +288,7 @@ mark{background:#fff1a8}
 <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><rect width="2" height="6" fill="#c9ccd3"/></pattern></defs></svg>
 
 <h1>🐾 Suivi des animaux — marques, observations et trajets</h1>
-<p class="sub">Un onglet à part, <b>« 🐾 Suivi des animaux »</b>, caché au départ, pour tout animal, sauvage ou de la famille : ses marques (bagues, puce, tatouage, collier, boucle d'oreille, balise…, selon l'espèce), les observations signalées, la carte des passages, les trajets d'une balise ou d'un collier GPS, le recensement et les chiffres. Sa page est faite de blocs modulables, comme le Tableau de bord. Ça s'ajoute à la fiche d'un animal (🐾 Animaux), sans rien changer à ce qui existe. Deux exemples : les corneilles noires de Paris (<b>Gaston</b>, bagué aux Buttes-Chaumont, et <b>Margot</b>, qui porte une balise GPS), et <b>Minette</b>, une chatte avec un collier GPS (S13).</p>
+<p class="sub">Un onglet à part, <b>« 🐾 Suivi des animaux »</b>, caché au départ, pour tout animal, sauvage ou de la famille : ses marques (bagues, puce, tatouage, collier, boucle d'oreille, balise…, selon l'espèce), les observations signalées, la carte des passages, les trajets d'une balise ou d'un collier GPS, le recensement et les chiffres. Sa page est faite de blocs modulables, comme le Tableau de bord, sur une ou plusieurs pages (une par espèce, par exemple), avec un suivi vétérinaire ; ces blocs peuvent aussi aller dans le Tableau de bord. Ça s'ajoute à la fiche d'un animal (🐾 Animaux), sans rien changer à ce qui existe. Deux exemples : les corneilles noires de Paris (<b>Gaston</b>, bagué aux Buttes-Chaumont, et <b>Margot</b>, qui porte une balise GPS), et <b>Minette</b>, une chatte avec un collier GPS (S13).</p>
 
 <div class="grid">
 
@@ -323,10 +333,11 @@ mark{background:#fff1a8}
    <div class="ci"><div><span>09</span>Retrouver par bague ou puce</div><div class="ca"><i>i</i><i>＋</i></div></div>
    <div class="ci"><div><span>10</span>Import GPS rapide</div><div class="ca"><i>i</i><i>＋</i></div></div>
    <div class="ci"><div><span>11</span>Météo du jour d'observation</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>12</span>🩺 Suivi vétérinaire et état</div><div class="ca"><i>i</i><i>＋</i></div></div>
    <div class="sidefoot"><span class="btn s">Réordonner les widgets</span><span class="btn s">＋ Créer un widget</span><small>Blocs duplicables et réglables.</small></div>
   </aside>
   <div>
-   <div class="ph" style="margin-bottom:12px"><div class="t"><small>Suivi des animaux · Vue générale</small><h2>🐾 Suivi des animaux</h2><p>Tes animaux suivis, ce qu'on a vu d'eux et leurs trajets.</p></div><span class="btn p">＋ Nouvelle observation</span><span class="btn">⤒ Importer un trajet…</span><span class="btn">⋯</span></div>
+   <div class="ph" style="margin-bottom:12px"><div class="t"><small>Suivi des animaux · Page « Corneilles »</small><h2>🐦 Corneilles</h2><p>Tes animaux suivis, ce qu'on a vu d'eux et leurs trajets.</p><div class="pgbar"><span class="seg sm"><span class="is-active">🐦 Corneilles</span><span>🦔 Hérissons</span><span>🐈 Chats du quartier</span></span></div></div><span class="btn p">＋ Nouvelle observation</span><span class="btn">⤒ Importer un trajet…</span><span class="btn">⋯</span></div>
    <div class="wgrid">
     <div class="crd w23"><div class="crd-h"><span class="idx">01</span><h4>Carte des observations <small>(30 jours)</small></h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div>
      <svg viewBox="0 0 520 210" style="display:block;width:100%;height:auto" role="img" aria-label="Carte des 30 derniers jours"><rect width="520" height="210" fill="#f1efe9"/><g stroke="#fff" stroke-width="7"><path d="M0 50L520 20"/><path d="M0 160L520 130"/><path d="M90 0L150 210"/><path d="M300 0L340 210"/></g><path d="M80 10L200 95L210 86L95 0Z" fill="#a9d3f0"/><path d="M330 8H500V75H345Z" fill="#cfe5bf" stroke="#9bc283"/><path d="M215 120C230 95 290 92 310 112C330 135 315 170 280 178C245 184 212 165 215 120Z" fill="#cfe5bf" stroke="#9bc283"/>
@@ -357,11 +368,11 @@ mark{background:#fff1a8}
    </div>
   </div>
  </div>
- <p class="note">Même cadre que les widgets du tableau de bord : numéro bleu, titre, ✎ (réglages, S4) et × (retiré, avec « ↶ Annuler »). La colonne de gauche liste les sortes de blocs (i = à quoi ça sert, ＋ = ajouter) ; « Réordonner les widgets » et « ＋ Créer un widget » comme au tableau de bord. Largeurs 1, ½, ⅓, ¼, ⅔, ¾. Ici : carte ⅔ + recherche ⅓, deux blocs ½, animaux ⅔ + chiffres ⅓. Les autres écrans (fiche, liste, site…) s'ouvrent depuis ces blocs.</p>
+ <p class="note">Même cadre que les widgets du tableau de bord : numéro bleu, titre, ✎ (réglages, S4) et × (retiré, avec « ↶ Annuler »). La colonne de gauche liste les sortes de blocs (i = à quoi ça sert, ＋ = ajouter) ; « Réordonner les widgets » et « ＋ Créer un widget » comme au tableau de bord. Largeurs 1, ½, ⅓, ¼, ⅔, ¾. Ici : carte ⅔ + recherche ⅓, deux blocs ½, animaux ⅔ + chiffres ⅓. Les autres écrans (fiche, liste, site…) s'ouvrent depuis ces blocs. Plusieurs pages (une par espèce…) : S15 ; les blocs vont aussi dans le Tableau de bord : S19.</p>
 </div>
 
 <!-- S3 -->
-<div class="case"><span class="tag"><span class="num">S3</span>Fenêtre « ＋ Ajouter un bloc »</span><h3>Les sortes de blocs, avec ce qu'elles montrent</h3>
+<div class="case"><span class="tag"><span class="num">S3</span>Fenêtre « ＋ Ajouter un bloc »</span><h3>Les sortes de blocs, avec ce qu'elles montrent (11)</h3>
  <div class="win" style="width:100%"><div class="win-h"><div class="t"><small>🐾 Suivi des animaux</small><b>Ajouter un bloc</b></div><button class="x">×</button></div>
   <div class="win-b"><div class="pk" style="margin-bottom:10px">🔍 Chercher un bloc…</div>
    <div class="bk">
@@ -374,6 +385,7 @@ mark{background:#fff1a8}
     <div><span>⏳</span><b>Animaux à retrouver</b><small>pas revus depuis N jours</small></div>
     <div><span>🔖</span><b>Retrouver par bague ou puce</b><small>case de recherche</small></div>
     <div><span>⤒</span><b>Import GPS rapide</b><small>déposer un GPX / CSV</small></div>
+    <div><span>🩺</span><b>Suivi vétérinaire et état</b><small>état de chacun, soins, causes</small></div>
     <div class="off"><span>🌦</span><b>Météo du jour d'observation</b><small>si la Météo d'autrefois est installée</small></div>
    </div></div>
   <div class="win-f"><span class="btn">Annuler</span><span class="btn p">＋ Ajouter le bloc</span></div></div>
@@ -665,6 +677,7 @@ mark{background:#fff1a8}
    </ul>
    <p class="note" style="margin-top:8px">Délai réglable (6 mois par défaut). Clic = la fiche.</p></div>
  </div>
+ <div class="chart" style="margin-top:16px"><h5>🩺 Causes de blessures les plus fréquentes</h5><div class="hb"><span>🚗 Collision voiture</span><i style="width:100%"></i><span>12</span></div><div class="hb"><span>🪟 Vitre</span><i style="width:67%"></i><span>8</span></div><div class="hb"><span>🐈 Attaque de chat</span><i style="width:58%"></i><span>7</span></div><div class="hb"><span>🎣 Fil de pêche</span><i style="width:42%"></i><span>5</span></div></div>
  <p class="note">Un seul menu « ⤓ Exporter ▾ » ; « 🧮 Ouvrir dans le tableur » passe par le moteur commun (une seule grille). Les chiffres suivent le choix du haut (tous, un animal, un site).</p>
 </div>
 
@@ -777,5 +790,122 @@ mark{background:#fff1a8}
  </div>
  <p class="note">Couleurs des bagues inchangées en sombre (ce sont de vraies couleurs) ; seul leur bord s'éclaircit pour rester visible. Fond « Sombre » proposé d'office en mode sombre.</p>
 </div>
+<!-- S15 -->
+<div class="case full"><span class="tag"><span class="num">S15</span>Suivi · Plusieurs pages</span><h3>Une page par espèce (ou par site) : chacune a ses blocs et son filtre par défaut</h3>
+ <div class="two w">
+  <div>
+   <div class="ph" style="margin-bottom:10px"><div class="t"><small>Suivi des animaux</small><h2>🦔 Hérissons</h2><p>Les hérissons du quartier, soignés ou suivis.</p>
+    <div class="pgbar"><span class="seg"><span>🐦 Corneilles</span><span class="is-active">🦔 Hérissons</span><span>🐈 Chats du quartier</span></span><span class="btn s">＋ Nouvelle page</span></div></div><span class="btn p">＋ Nouvelle observation</span><span class="btn">⋯</span></div>
+   <div class="notice i">🦔 <span>Cette page montre seulement : <b>Hérisson d'Europe</b> · tous les sites. Tous ses blocs s'y règlent d'office (un bloc peut garder son propre choix). <span class="lnk">✎ Changer</span></span></div>
+   <div class="wgrid">
+    <div class="crd w2"><div class="crd-h"><span class="idx">01</span><h4>🩺 Suivi vétérinaire et état</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="orow"><b>Noisette</b><span>maigreur · relâchée le 12 oct.</span><span class="b">Relâché</span></div><div class="orow"><b>Pique</b><span>patte blessée · tondeuse</span><span class="b bl">En soins</span></div><div class="orow"><b>Gribouille</b><span>vue le 20 oct.</span><span class="b g">Bonne santé</span></div></div></div>
+    <div class="crd w2"><div class="crd-h"><span class="idx">02</span><h4>Animaux à retrouver</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><ul class="lost"><li><span><b>Hérisson 4F</b> · jardin Truillot</span><span class="b y">35 jours</span></li><li><span><b>Caramel</b> · square Maurice-Gardette</span><span class="b">4 mois</span></li></ul></div></div>
+   </div>
+  </div>
+  <div>
+   <div class="menu" style="margin-bottom:14px"><h6>Page « 🦔 Hérissons » ⋯</h6><div class="it">✎ Renommer</div><div class="it">🦔 Changer l'icône</div><div class="it">🐾 Espèce et site par défaut…</div><div class="it">⧉ Dupliquer la page</div><div class="it">⭐ Page affichée à l'ouverture</div><hr><div class="it" style="color:#d62828">🗑 Supprimer la page</div></div>
+   <div class="crd"><div class="crd-h"><h4>Pages du suivi <small>· dans « Réordonner les widgets »</small></h4></div>
+    <div class="crd-b">
+     <div class="tabrow" style="grid-template-columns:20px auto minmax(0,1fr) auto"><span class="grip">⠿</span><span class="radio" style="margin:0"></span><span>🐦 Corneilles <small class="muted">· Corneille noire</small></span><span class="ia d">×</span></div>
+     <div class="tabrow" style="grid-template-columns:20px auto minmax(0,1fr) auto;background:#eaf1ff"><span class="grip">⠿</span><span class="radio on" style="margin:0"></span><span><b>🦔 Hérissons</b> <small class="muted">· Hérisson d'Europe</small></span><span class="ia d">×</span></div>
+     <div class="tabrow" style="grid-template-columns:20px auto minmax(0,1fr) auto"><span class="grip">⠿</span><span class="radio" style="margin:0"></span><span>🐈 Chats du quartier <small class="muted">· Chat · Montreuil</small></span><span class="ia d">×</span></div>
+     <div style="margin-top:8px"><span class="btn s">＋ Nouvelle page</span> <small class="muted">● = page affichée à l'ouverture</small></div>
+    </div></div>
+  </div>
+ </div>
+ <p class="note">Même modèle que les pages du Tableau de bord : boutons des pages (C5 segmenté) sous le titre, pages rangées, nommées et supprimées dans « Réordonner les widgets », une page « par défaut ». En plus pour le Suivi : le filtre d'espèce ou de site de la page, et le menu ⋯ (K14, aussi au clic droit sur un bouton de page) ; on range aussi les pages en glissant leurs boutons. « ＋ Nouvelle page » demande le nom, l'espèce et le site (menu de choix), et part de blocs proposés pour cette espèce. Supprimer une page retire ses blocs, pas les animaux (« ↶ Annuler »).</p>
+</div>
+
+<!-- S16 -->
+<div class="case full"><span class="tag"><span class="num">S16</span>Suivi · Bloc « 🩺 Suivi vétérinaire et état »</span><h3>L'état de chacun d'un coup d'œil, les derniers soins, et les causes de blessures</h3>
+ <div class="s16">
+  <div class="crd"><div class="crd-h"><span class="idx">07</span><h4>🩺 Suivi vétérinaire et état <small>(6 animaux)</small></h4><span class="btn s">＋ Événement de santé</span><span class="tools"><span class="ia">✎</span><span class="ia">⋯</span><span class="ia d">×</span></span></div>
+   <div class="crd-b scroll" style="padding-top:0"><table class="mtbl" style="min-width:640px">
+    <tr><th>Animal</th><th>État</th><th>Dernier événement</th><th>Pourquoi</th><th>Soigné par</th><th>Suite</th></tr>
+    <tr><td>🦔 Pique</td><td><span class="b bl">En soins</span></td><td>18 oct. 2026<small>patte arrière blessée · 540 g</small></td><td><span class="chip">🌿 Tondeuse / débroussailleuse</span></td><td><span class="pill"><span class="ic">🏥</span>Centre de soins</span></td><td class="muted">—</td></tr>
+    <tr><td>🐦 Lulu</td><td><span class="b r">Blessé</span></td><td>15 oct. 2026<small>patte serrée, plaie</small></td><td><span class="chip">🎣 Fil de pêche</span></td><td><span class="pill"><span class="ini f">SB</span>Dr S. BERNARD</span></td><td class="muted">fil retiré, à revoir</td></tr>
+    <tr><td>🦔 Noisette</td><td><span class="b">Relâché</span></td><td>2 sept. 2026<small>maigreur · 380 g</small></td><td><span class="chip">❓ Inconnue</span></td><td><span class="pill"><span class="ic">🏥</span>Centre de soins</span></td><td>relâchée le 12 oct. · 720 g</td></tr>
+    <tr><td>🐈 Minette</td><td><span class="b y">Malade</span></td><td>10 oct. 2026<small>toux, ne mange plus</small></td><td><span class="chip">🦠 Coryza</span></td><td><span class="pill"><span class="ini f">SB</span>Dr S. BERNARD</span></td><td class="muted">antibiotique 7 j</td></tr>
+    <tr><td>🐦 Titus</td><td><span class="b blk">† Mort</span></td><td>4 janv. 2026<small>trouvé au sol</small></td><td><span class="chip">☠️ Empoisonnement ?</span></td><td class="muted">—</td><td>mort le 4 janv.</td></tr>
+    <tr><td>🐦 Gaston</td><td><span class="b g">Bonne santé</span></td><td>3 févr. 2026<small>contrôle à la recapture · 520 g</small></td><td class="muted">—</td><td><span class="pill"><span class="ini">AL</span>A. LEROY</span></td><td class="muted">—</td></tr>
+   </table></div></div>
+  <div>
+   <div class="chart"><h5>Causes de blessures les plus fréquentes <small class="muted">· 2025–2026, 41 animaux</small></h5>
+    <div class="hb"><span>🚗 Collision voiture</span><i style="width:100%"></i><span>12</span></div>
+    <div class="hb"><span>🪟 Vitre</span><i style="width:67%"></i><span>8</span></div>
+    <div class="hb"><span>🐈 Attaque de chat</span><i style="width:58%"></i><span>7</span></div>
+    <div class="hb"><span>🎣 Fil de pêche</span><i style="width:42%"></i><span>5</span></div>
+    <div class="hb"><span>🌿 Tondeuse</span><i style="width:25%"></i><span>3</span></div>
+    <div class="hb"><span>☠️ Empoisonnement</span><i style="width:17%"></i><span>2</span></div>
+    <div class="hb"><span>❓ Inconnue</span><i style="width:33%;background:#9aa0aa"></i><span>4</span></div>
+    <p class="note" style="margin-top:8px">Aussi dans S11 Chiffres. Clic sur une barre = la liste de ces animaux (Recensement filtré).</p></div>
+   <span class="lab">États (pastilles K8)</span>
+   <div class="chips"><span class="b g">Bonne santé</span><span class="b r">Blessé</span><span class="b y">Malade</span><span class="b bl">En soins</span><span class="b">Relâché</span><span class="b blk">† Mort</span></div>
+  </div>
+ </div>
+ <p class="note">Bloc comme les autres : réglable (✎ : animaux, page, période, « seulement ceux qui ne vont pas bien »), largeur, ⋯. L'état actuel est celui du dernier événement de santé. Il s'ajoute aussi au tableau de bord (S19).</p>
+</div>
+
+<!-- S17 -->
+<div class="case full"><span class="tag"><span class="num">S17</span>Suivi · Fiche d'un animal · onglet « 🩺 Santé »</span><h3>La frise de ses états, la courbe de son poids, et chaque soin</h3>
+ <div class="hero"><span class="hero-ic">🦔</span><div><span class="eyebrow">🦔 Hérisson d'Europe</span><h2>Noisette <span style="font-size:20px;color:#d9488f">♀</span></h2><p>Trouvée le 2 sept. 2026 rue Saint-Maur · jeune de l'année</p><div class="chips" style="margin-top:6px"><span class="b">Relâché</span></div></div><div class="acts"><span class="btn p">＋ Événement de santé</span><span class="btn s">⋯</span></div></div>
+ <div class="seg" style="margin-bottom:14px"><span>🪪 Fiche</span><span>🔖 Marques</span><span>👁 Observations (4)</span><span class="is-active">🩺 Santé (5)</span><span>📷 Photos</span></div>
+ <div class="two">
+  <div class="crd"><div class="crd-h"><h4>Frise des états</h4></div><div class="crd-b">
+   <div class="frz"><i style="flex:1;background:#e1a500" title="Malade"></i><i style="flex:5;background:#055dff"></i><i style="flex:1;background:#9aa0aa"></i><i style="flex:1.2;background:#1aa34a"></i></div>
+   <div class="frzl"><span><span class="b y">Malade</span><br>2 sept.</span><span><span class="b bl">En soins</span><br>2 sept. → 10 oct.</span><span><span class="b">Relâché</span><br>12 oct.</span><span><span class="b g">Bonne santé</span><br>vue le 20 oct.</span></div>
+   <span class="lab">Poids</span>
+   <svg viewBox="0 0 320 120" style="width:100%;display:block" role="img" aria-label="Courbe du poids de 380 à 720 g"><line x1="30" y1="100" x2="315" y2="100" stroke="#111"/><line x1="30" y1="10" x2="30" y2="100" stroke="#111"/><g font-size="9" fill="#666" font-family="system-ui"><text x="2" y="98">300 g</text><text x="2" y="18">800 g</text><text x="30" y="113">2 sept.</text><text x="270" y="113">20 oct.</text></g><line x1="30" y1="38" x2="315" y2="38" stroke="#1aa34a" stroke-dasharray="4 3"/><text x="60" y="33" font-size="9" fill="#14532d" font-family="system-ui">assez pour l'hiver ≈ 600 g</text>
+    <polyline points="35,86 75,80 120,68 165,52 210,40 255,30 300,27" fill="none" stroke="#055dff" stroke-width="2.5"/><g fill="#055dff"><circle cx="35" cy="86" r="3.5"/><circle cx="75" cy="80" r="3.5"/><circle cx="120" cy="68" r="3.5"/><circle cx="165" cy="52" r="3.5"/><circle cx="210" cy="40" r="3.5"/><circle cx="255" cy="30" r="3.5"/><circle cx="300" cy="27" r="3.5"/></g><text x="38" y="80" font-size="10" font-weight="700" font-family="system-ui">380 g</text><text x="276" y="22" font-size="10" font-weight="700" font-family="system-ui">720 g</text></svg>
+  </div></div>
+  <div class="crd"><div class="crd-h"><h4>Événements de santé <small>(5)</small></h4><span class="dd">Trier : plus récents ▾</span></div><div class="crd-b">
+   <div class="hev"><b>12 oct. 2026</b><div><b>Relâchée</b> au jardin Truillot · 720 g <span class="b">Relâché</span></div></div>
+   <div class="hev"><b>25 sept. 2026</b><div><b>Contrôle</b> · vermifuge 2ᵉ dose · 610 g <span class="b bl">En soins</span></div></div>
+   <div class="hev on"><b>2 sept. 2026</b><div><b>Maigreur, déshydratée, tiques</b> <span class="b y">Malade</span><br><small>Pourquoi : <span class="chip">❓ Inconnue</span> « trouvée de jour, sortie seule » · Où : 📍 rue Saint-Maur, Paris 11ᵉ</small><br><small>Soignée par <span class="pill"><span class="ic">🏥</span>Centre de soins de la faune</span> · réhydratation, tiques retirées · <b>vermifuge</b> · 380 g</small><br><span class="thumb" style="display:inline-grid;margin-top:5px">📷</span> <span class="thumb" style="display:inline-grid">📷</span></div></div>
+  </div></div>
+ </div>
+ <p class="note">Onglet de page C5, nombre entre parenthèses. Frise et courbe partent des événements de santé (le poids d'une mesure ou d'un soin compte). Pour un chat ou un chien, les vaccins et traitements de la partie « 🩺 Santé » d'avant restent là, rangés dans cette frise.</p>
+</div>
+
+<!-- S18 -->
+<div class="case"><span class="tag"><span class="num">S18</span>Suivi · Fenêtre « Nouvel événement de santé » (760)</span><h3>Ce qu'il a, pourquoi, où, qui l'a soigné, et la suite</h3>
+ <div class="win" style="width:100%"><div class="win-h"><div class="t"><small>🩺 Santé · Pique</small><b>Nouvel événement de santé</b></div><button class="x">×</button></div>
+  <div class="win-b">
+   <div class="row2"><div><span class="lab">Date</span><div class="inp">18/10/2026</div><div class="ok">✓ Compris : dimanche 18 octobre 2026</div></div><div><span class="lab">État après</span><span class="seg sm"><span>Bonne santé</span><span>Blessé</span><span>Malade</span><span class="is-active">En soins</span><span>Relâché</span><span>Mort</span></span></div></div>
+   <span class="lab">Ce qu'il a</span><div class="chips"><span class="chip on">🩹 Blessure</span><span class="chip">🦠 Maladie</span><span class="chip">🦴 Maigreur</span><span class="chip">🪱 Parasites</span><span class="chip">🩺 Contrôle</span><span class="chip">＋ Autre…</span></div><div class="inp" style="margin-top:6px">Patte arrière gauche entaillée</div>
+   <span class="lab">Pourquoi</span><div class="chips"><span class="chip">🚗 Voiture</span><span class="chip">🪟 Vitre</span><span class="chip">🐈 Chat</span><span class="chip">🪤 Piège</span><span class="chip">🎣 Fil de pêche</span><span class="chip">☠️ Poison</span><span class="chip on">🌿 Tondeuse</span><span class="chip">❓ Inconnue</span><span class="chip">✎ Autre…</span></div><div class="inp" style="margin-top:6px;color:#888">Précise si tu veux… (« débroussailleuse du voisin, sous la haie »)</div>
+   <div class="row2"><div><span class="lab">Où</span><span class="pill"><span class="ic">📍</span><span class="lbl">Jardin Truillot <small>Paris (75)</small></span><span class="x">×</span></span></div><div><span class="lab">Soigné par</span><span class="pill"><span class="ic">🏥</span><span class="lbl">Centre de soins de la faune</span><span class="o">↗ Ouvrir</span><span class="x">×</span></span><div class="pk" style="margin-top:5px">🔍 ＋ Ajouter une personne…</div></div></div>
+   <div class="row2"><div><span class="lab">Soins</span><div class="inp">Plaie nettoyée, bandage</div><span class="lab">Médicaments</span><div class="inp">Antibiotique 5 jours, anti-douleur</div></div><div><span class="lab">Poids</span><span class="inp u"><b>540</b><i>g</i></span><span class="lab">Photos</span><div class="dropz" style="padding:10px;font-size:12.5px">📁 Glisse une image, colle-la ou <b>🖼 Choisir dans les médias</b></div></div></div>
+   <span class="lab">Suite</span><div class="radio on">Pas encore</div><div class="radio">Relâché le <span class="inp" style="width:110px;display:inline-block">…</span></div><div class="radio">Mort le <span class="inp" style="width:110px;display:inline-block">…</span></div>
+  </div>
+  <div class="win-f"><span class="btn">Annuler</span><span class="btn p">Créer l'événement</span></div></div>
+ <p class="note">Causes proposées selon l'espèce (oiseau : vitre, fil de pêche ; hérisson : tondeuse, piège ; chat : voiture, bagarre…) + texte libre. Vétérinaire ou centre de soins par le menu de choix (personne ou fiche « tout le reste »). Poids : unité dans la case (K17). Photos par la fenêtre unique.</p>
+</div>
+
+<!-- S19 -->
+<div class="case"><span class="tag"><span class="num">S19</span>Tableau de bord · les blocs du Suivi en widgets</span><h3>Les mêmes blocs dans le tableau de bord, même si l'onglet Suivi est caché</h3>
+ <span class="lab">Colonne de gauche du Tableau de bord · ajouter un widget</span>
+ <div class="side" style="display:block">
+  <div class="ci"><div><span>12</span>Anniversaires</div><div class="ca"><i>i</i><i>＋</i></div></div>
+  <div class="ci"><div><span>13</span>Dernières modifications</div><div class="ca"><i>i</i><i>＋</i></div></div>
+  <div class="rub">🐾 Suivi des animaux</div>
+  <div class="ci"><div><span>30</span>Carte des observations</div><div class="ca"><i>i</i><i>＋</i></div></div>
+  <div class="ci"><div><span>31</span>Dernières observations</div><div class="ca"><i>i</i><i>＋</i></div></div>
+  <div class="ci"><div><span>32</span>Animaux à retrouver</div><div class="ca"><i>i</i><i>＋</i></div></div>
+  <div class="ci"><div><span>33</span>🩺 Suivi vétérinaire et état</div><div class="ca"><i>i</i><i>＋</i></div></div>
+  <div class="ci"><div><span>34</span>Trajet GPS du jour · Chiffres · …</div><div class="ca"><i>i</i><i>＋</i></div></div>
+ </div>
+ <span class="lab">Le Tableau de bord avec 2 blocs du Suivi</span>
+ <div class="wgrid">
+  <div class="crd w2"><div class="crd-h"><span class="idx">01</span><h4>Anniversaires</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b" style="font-size:12.5px">🎂 Lucie DUPOUY · 34 ans demain<br>🎂 Henri MARTIN · né il y a 120 ans</div></div>
+  <div class="crd w2"><div class="crd-h"><span class="idx">02</span><h4>🐾 À retrouver</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b" style="font-size:12.5px"><b>Prune</b> 43 jours · <b>Hector</b> 8 mois</div></div>
+  <div class="crd w1"><div class="crd-h"><span class="idx">03</span><h4>🩺 Suivi vétérinaire et état</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="chips"><span class="pill">🦔 Pique <span class="b bl">En soins</span></span><span class="pill">🐦 Lulu <span class="b r">Blessé</span></span><span class="pill">🐈 Minette <span class="b y">Malade</span></span></div></div></div>
+ </div>
+ <span class="lab">Depuis le Suivi : ⋯ d'un bloc</span>
+ <div class="menu" style="max-width:320px"><div class="it">✎ Régler</div><div class="it">⛶ Voir en grand</div><div class="it">⧉ Dupliquer</div><div class="it on">📌 Mettre aussi dans le tableau de bord</div><div class="it">📄 Copier vers une autre page…</div><hr><div class="it" style="color:#d62828">🗑 Supprimer</div></div>
+ <div class="toast2">✓ Bloc mis dans le tableau de bord, page « Vue d'ensemble »<span class="u">↶ Annuler</span><span class="bar" style="width:65%"></span></div>
+ <p class="note">Une rubrique de plus dans le catalogue des widgets (colonne de gauche, i et ＋), comme les autres. « 📌 » copie le bloc avec ses réglages (animaux, site, période) ; ensuite chacun vit sa vie. Le préfixe 🐾 dans le titre dit d'où vient le widget ; le clic ouvre le Suivi même caché (la page s'affiche sans l'onglet).</p>
+</div>
+
 </div>
 </body></html>
