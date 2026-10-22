@@ -4488,6 +4488,9 @@ body.k-print-doc :is(.page-actions,.card-head-actions,.person-hero-tools,.person
 :root[data-theme="dark"] .k-import .modal-actions{border-top-color:#e8e8e8}
 /* 🔎 Recherche → types de recherche à ranger (fenêtre « Réordonner » et Maintenance → Apparence) : sur un téléphone, les boutons passent sous le nom */
 @media (max-width:560px){.research-kind-dialog .dashboard-reorder-row,#research-kinds-config .dashboard-reorder-row{grid-template-columns:18px 26px minmax(0,1fr)}.research-kind-dialog .dashboard-reorder-row b,#research-kinds-config .dashboard-reorder-row b{overflow-wrap:normal}.research-kind-dialog .dashboard-reorder-row .order-actions,#research-kinds-config .dashboard-reorder-row .order-actions{grid-column:2/-1;justify-self:end;margin-left:auto}.research-kind-dialog .dashboard-reorder-row.ord-row,#research-kinds-config .dashboard-reorder-row.ord-row{flex-wrap:wrap}.research-kind-dialog .dashboard-reorder-row.ord-row>b,#research-kinds-config .dashboard-reorder-row.ord-row>b{flex:1 1 150px!important}}
+/* Personnes : « Recherche phonétique » détachée de la case de recherche */
+.search-box > label.ui-toggle.ui-toggle { margin: 12px 0 2px; font-weight: 600; }
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}
