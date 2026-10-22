@@ -1,0 +1,531 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Premier lancement</title>
+<link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+*{box-sizing:border-box}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px;max-width:1180px;line-height:1.5}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px 30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;min-width:0}
+.case.full{grid-column:1/-1}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.note{font-size:12.5px;color:#555;margin-top:14px;line-height:1.5}
+.muted{color:#666}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.two.w{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.three>div,.two>div{min-width:0}
+/* K8 */
+.b{display:inline-flex;align-items:center;gap:4px;font:800 11px/1 system-ui;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid;padding:4px 7px;white-space:nowrap;vertical-align:middle;color:#444;background:#f0f1f3;border-color:#8a8f99}
+.b.g{color:#14532d;background:#ecfaf0;border-color:#1aa34a}
+.b.y{color:#6b4e00;background:#fff8e1;border-color:#e1a500}
+.b.r{color:#8a1111;background:#fdecec;border-color:#d62828}
+.b.bl{color:#0a3fae;background:#eaf1ff;border-color:#055dff}
+.b.blk{color:#fff;background:#111;border-color:#111}
+.b.dt{text-transform:none;letter-spacing:0;font-weight:700}
+.lnk{color:#055dff;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+.btn{display:inline-block;border:2px solid #111;padding:8px 13px;font:700 13px system-ui;background:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3);white-space:nowrap;cursor:pointer;color:#111}
+.btn.p{background:#055dff;color:#fff}
+.btn.s{padding:4px 9px;font-size:12px;box-shadow:none;border-width:1.5px}
+/* fiche animal */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.34);padding:14px 16px;margin-bottom:14px;background:#fff}
+.hero-ic{width:64px;height:64px;display:grid;place-items:center;font-size:34px;background:#fff1e6;border:2px solid #111}
+.eyebrow{font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.hero h2{font-size:30px;margin:2px 0 3px;line-height:1;letter-spacing:-.03em}
+.hero p{margin:0;color:#666;font-size:13px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.seg{display:inline-flex;border:2px solid #111;flex-wrap:wrap;max-width:100%}.seg span{padding:7px 12px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff;white-space:nowrap}.seg span:last-child{border-right:0}.seg span.is-active{background:#055dff;color:#fff}
+.seg.sm span{padding:4px 9px;font-size:12px}
+.crd{border:2px solid #111;background:#fff;min-width:0}
+.crd+.crd{margin-top:14px}
+.crd-h{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:2px solid #111;background:#fafafa;flex-wrap:wrap}
+.crd-h h4{margin:0;font-size:15px;flex:1;min-width:150px}.crd-h h4 small{color:#999;font-weight:400}
+.crd-b{padding:12px 14px}
+.kv{display:grid;grid-template-columns:118px minmax(0,1fr);gap:9px 12px;font-size:13px;align-items:center}
+.kv dt{color:#666}.kv dd{margin:0;font-weight:600;min-width:0}
+.ok{font-size:12px;color:#055dff;margin-top:3px;font-weight:600}
+.inp{border:2px solid #111;padding:6px 9px;font:600 13px system-ui;background:#fff;min-width:0;width:100%}
+.inp.u{display:inline-flex;padding:0;width:auto}.inp.u b{padding:6px 9px;min-width:44px}.inp.u i{font-style:normal;padding:6px 8px;background:#f0f1f3;border-left:1.5px solid #c9ccd3;color:#555;font-weight:700}
+/* pastilles du menu de choix */
+.pill{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px 7px;border:1.5px solid #c9ccd3;background:#fff;padding:3px 6px 3px 3px;font-size:12.5px;font-weight:700;max-width:100%;vertical-align:middle}
+.pill .ini{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 10px system-ui;background:#3c78d8;flex:none}
+.pill .ini.f{background:#d9488f}.pill .ini.a{background:#e8590c}.pill .ini.u{background:#9aa0aa}
+.pill .ic{width:22px;height:22px;display:grid;place-items:center;flex:none}
+.pill small{color:#777;font-weight:500}
+.pill .x{color:#777;font-weight:400;padding:0 2px}
+.pill .o{color:#055dff;font-size:11.5px}
+.pill.sec{background:#f4f5f7}
+.pill .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.pk{display:flex;align-items:center;gap:8px;border:2px solid #111;padding:6px 9px;font-size:13px;color:#888;background:#fff}
+.pk.on{border-color:#055dff;box-shadow:0 0 0 3px rgba(5,93,255,.18);color:#111}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid #c9ccd3;padding:4px 9px;font:700 12px system-ui;background:#fff;white-space:nowrap}
+.chip.on{border-color:#055dff;background:#eaf1ff;color:#0a3fae}
+.chip.blk{background:#111;color:#fff;border-color:#111}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);vertical-align:-1px;margin-right:2px}
+/* pattes */
+.legs{width:100%;max-width:300px;height:auto;display:block;margin:0 auto}
+.legkey{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;font-size:12.5px;margin-top:8px;text-align:center}
+.legkey b{display:block;font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777}
+.code{font:800 13px ui-monospace,Menlo,monospace;background:#f0f1f3;border:1.5px solid #c9ccd3;padding:3px 7px;display:inline-block}
+.hist{list-style:none;margin:10px 0 0;padding:0;font-size:12.5px}
+.hist li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;padding:6px 0;border-top:1px solid #eee}
+.hist li b{font-size:12px}
+.metal{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:2px solid #555;border-radius:4px;background:linear-gradient(180deg,#eef0f3,#b8bec7 55%,#dfe3e8);font:800 12px ui-monospace,Menlo,monospace;letter-spacing:.06em;color:#333}
+.mtbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.mtbl th{text-align:left;font:700 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#777;border-bottom:2px solid #111;padding:6px 7px;white-space:nowrap}
+.mtbl td{padding:8px 7px;border-bottom:1px solid #eef0f3;vertical-align:top}
+.mtbl td small{display:block;color:#777}
+.scroll{overflow-x:auto}
+.scroll .mtbl{min-width:820px}
+.empty-line{display:flex;gap:8px;align-items:center;padding:8px 10px;background:#f6f7f9;border:1.5px dashed #c9ccd3;font-size:12.5px;color:#555;line-height:1.4;flex-wrap:wrap}
+.empty-line .btn{margin-left:auto}
+.ex{border:1.5px dashed #055dff;background:#f5f8ff;padding:9px 11px;margin-top:10px;font-size:12.5px;line-height:1.5}
+/* H10 */
+.h10{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.h10 .srch{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;border:2px solid #111;padding:6px 9px;font-size:13px;color:#888;background:#fff}
+.h10 .srch kbd{margin-left:auto}
+.dd{border:2px solid #111;padding:6px 10px;font:700 12.5px system-ui;background:#fff;white-space:nowrap}
+.dd .n{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:9px;background:#055dff;color:#fff;font-size:10.5px;margin-left:4px}
+kbd{border:1px solid #c9ccd3;border-bottom-width:2px;background:#f4f5f7;padding:0 5px;font:700 11px system-ui;color:#555}
+.actf{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px;font-size:12px}
+.actf .chip{background:#055dff;border-color:#055dff;color:#fff}
+.cnt{font-size:12.5px;color:#555;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:6px 0;border-bottom:2px solid #111}
+.more{text-align:center;padding:10px;font:700 13px system-ui;color:#055dff}
+.thumb{width:40px;height:32px;display:grid;place-items:center;background:#dfe6d6;border:1.5px solid #999;font-size:15px;position:relative}
+.thumb.v{background:#22262d;color:#fff;font-size:11px}
+/* fenêtre */
+.win{border:2px solid #111;background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.25);width:540px;max-width:100%}
+.win.m{width:760px}
+.win-h{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:2px solid #111;background:#fafafa}
+.win-h .t{flex:1;min-width:0}.win-h .t small{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin-bottom:3px}
+.win-h b{font-size:16px}
+.win-h .x{border:0;background:none;font-size:22px;line-height:1;cursor:pointer;color:#555;padding:0 2px}
+.win-b{padding:14px 16px}
+.win-f{display:flex;gap:10px;justify-content:flex-end;padding:10px 16px;border-top:2px solid #111;align-items:center;flex-wrap:wrap}
+.win-f .sp{flex:1}
+.lab{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin:14px 0 6px}
+.lab:first-child{margin-top:0}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.find{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;border:2px solid #111;padding:12px;background:#fcfcfd}
+.pal{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.pal span{width:26px;height:26px;border:2px solid #111;display:grid;place-items:center;font:800 11px system-ui;cursor:pointer}
+.pal span.on{outline:3px solid #055dff;outline-offset:1px}
+.match{list-style:none;margin:0;padding:0}
+.match li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px;border:1.5px solid #e3e5ea;margin-bottom:6px;font-size:12.5px}
+.match li.on{border:2px solid #055dff;background:#f5f8ff}
+.match li b{display:block;font-size:13.5px}
+.match li small{color:#666}
+.score{font:800 16px system-ui;text-align:right}
+.score small{display:block;font:600 10.5px system-ui;color:#777}
+.mini-legs{width:46px;height:36px}
+.notice{border:2px solid;padding:8px 12px;font-size:13px;display:flex;gap:8px;margin:8px 0;line-height:1.4}
+.notice.i{border-color:#055dff;background:#eef4ff}.notice.ok{border-color:#1aa34a;background:#ecfaf0}.notice.w{border-color:#e1a500;background:#fff8e1}
+.mz{display:flex;align-items:center;gap:10px;border:1.5px solid #c9ccd3;padding:5px;font-size:12.5px;max-width:100%}
+.mz .thumb{width:52px;height:40px}
+/* carte */
+.mapbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.mapwrap{position:relative;border:2px solid #111;overflow:hidden;background:#eef0e8}
+.mapwrap svg{display:block;width:100%;height:auto}
+.mapwrap .pop{position:absolute;left:52%;top:9%;max-width:260px}
+.pop{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:9px 11px;font-size:12.5px;line-height:1.45}
+.pop b{font-size:13.5px}
+.mapside{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.95);border:2px solid #111;padding:8px 10px;font-size:12px;line-height:1.7}
+.mapside b{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777;display:block}
+.timeline{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;border:2px solid #111;border-top:0;padding:9px 12px;background:#fff;font-size:12.5px}
+.track{position:relative;height:6px;background:#dfe3e8}
+.track i{position:absolute;left:0;top:0;bottom:0;width:72%;background:#055dff}
+.track b{position:absolute;left:72%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;background:#fff;border:2px solid #055dff;border-radius:50%}
+.track span{position:absolute;top:12px;font-size:10.5px;color:#777;transform:translateX(-50%);white-space:nowrap}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font:600 13px system-ui;white-space:nowrap}
+.ui-toggle i{width:36px;height:20px;border-radius:10px;background:#055dff;position:relative;flex:none}
+.ui-toggle i:after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.ui-toggle.off i{background:#c2c7cf}.ui-toggle.off i:after{right:auto;left:2px}
+.sel{border:2px solid #111;padding:6px 10px;font:600 12.5px system-ui;background:#fff;white-space:nowrap}
+/* import */
+.steps{display:flex;gap:0;border:2px solid #111;margin-bottom:14px}
+.steps span{flex:1;padding:7px 6px;font:700 12px system-ui;border-right:2px solid #111;background:#fff;color:#777;text-align:center}
+.steps span:last-child{border:0}.steps span.done{color:#14532d;background:#ecfaf0}.steps span.on{background:#055dff;color:#fff}
+.dropz{border:2.5px dashed #055dff;background:#f5f8ff;padding:18px;text-align:center;font-size:13.5px;line-height:1.5}
+.radio{display:flex;gap:8px;align-items:center;font-size:13px;margin:6px 0;flex-wrap:wrap}
+.radio:before{content:"";width:14px;height:14px;border:2px solid #111;border-radius:50%;flex:none}
+.radio.on:before{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.toast2{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:11px 14px;font-size:13.5px;box-shadow:5px 5px 0 rgba(5,93,255,.45);max-width:470px;position:relative;margin:12px 0 0;flex-wrap:wrap}
+.toast2 .u{border:1.5px solid #fff;padding:4px 9px;font:700 12.5px system-ui;margin-left:auto;white-space:nowrap}
+.toast2 .bar{position:absolute;left:0;bottom:0;height:3px;background:#5b9bff}
+/* en-tête K5 */
+.ph{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:14px}
+.ph .t{flex:1;min-width:220px}
+.ph small{display:block;font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.ph h2{margin:3px 0 4px;font-size:24px}
+.ph p{margin:0;color:#666;font-size:13px}
+/* K9 */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.uc{border:2px solid #111;background:#fff;display:flex;flex-direction:column;min-width:0}
+.uc .im{height:92px;background:#eef0e8;display:grid;place-items:center;border-bottom:2px solid #111}
+.uc .im svg{width:84px;height:66px}
+.uc .bd{padding:9px 10px;flex:1}
+.uc .bd b{display:block;font-size:14px}
+.uc .bd small{display:block;color:#666;font-size:12px;line-height:1.4}
+.uc .bd .chips{margin-top:7px}
+.uc .b{white-space:normal;line-height:1.25}
+.uc .wh{font-size:11.5px;color:#888;margin-top:6px}
+.uc .ft{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e3e5ea;padding:6px 10px;font:700 12.5px system-ui;color:#055dff}
+.uc .ft span:last-child{color:#555}
+.menu{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:6px 0;font-size:13px;min-width:0}
+.menu h6{margin:8px 12px 4px;font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777}
+.menu .it{padding:5px 12px;display:flex;gap:8px;align-items:center}
+.menu .it.on{background:#eaf1ff;font-weight:700}
+.menu .ck:before{content:"";width:13px;height:13px;border:2px solid #111;flex:none}
+.menu .ck.on:before{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.menu hr{border:0;border-top:1px solid #e3e5ea;margin:6px 0}
+/* chiffres */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.tile{border:2px solid #111;padding:10px 12px;min-width:0}
+.tile b{display:block;font:800 26px system-ui;letter-spacing:-.02em}
+.tile small{color:#666;font-size:12px;display:block;line-height:1.35}
+.chart{border:2px solid #111;padding:10px 12px}
+.chart h5{margin:0 0 8px;font-size:13px}
+.chart svg{display:block;width:100%;height:auto}
+.hb{display:grid;grid-template-columns:130px minmax(0,1fr) 40px;gap:8px;align-items:center;font-size:12.5px;margin:5px 0}
+.hb i{display:block;height:14px;background:#055dff}
+.hb span:last-child{text-align:right;font-weight:700}
+.lost li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #eee;font-size:12.5px;flex-wrap:wrap}
+.lost{list-style:none;margin:0;padding:0}
+@media (max-width:900px){
+ body{padding:16px}
+ .grid,.two,.two.w,.three{grid-template-columns:minmax(0,1fr)}
+ .case{padding:14px 14px 18px}
+ .cards,.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .find{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){
+ .hero{grid-template-columns:auto minmax(0,1fr)}.hero .acts{grid-column:1/-1;justify-content:flex-start}
+ .hero h2{font-size:24px}
+ .kv{grid-template-columns:minmax(0,1fr)}.kv dt{margin-top:4px}
+ .row2{grid-template-columns:minmax(0,1fr)}
+ .cards{grid-template-columns:minmax(0,1fr)}
+ .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .mapwrap .pop{position:static;max-width:none;border-width:0 0 2px;box-shadow:none}
+ .mapside{position:static;border-width:2px 0 0}
+ .timeline{grid-template-columns:auto minmax(0,1fr)}.timeline>span:last-child{grid-column:1/-1}
+ .hb{grid-template-columns:96px minmax(0,1fr) 34px}
+ .h10 .srch{min-width:100%}
+ .track span:nth-of-type(2){display:none}
+}
+.topnav{display:flex;gap:8px;overflow-x:auto;padding:8px 10px;border:2px solid #111;background:#fff}
+.ni{border:2px solid #111;padding:6px 10px;font:700 12.5px system-ui;white-space:nowrap;background:#fff}
+.ni span{display:block;font-size:9px;color:#055dff;letter-spacing:.12em;margin-bottom:3px}
+.ni.on{background:#055dff;color:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3)}.ni.on span{color:#fff}
+.ni.new{outline:3px dashed #e1a500;outline-offset:2px}
+.saved{color:#1aa34a;font:700 12.5px system-ui;white-space:nowrap}
+.idx{display:grid;place-items:center;width:26px;height:26px;background:#055dff;color:#fff;font:800 11px system-ui;border:1.5px solid #111;transform:rotate(-3deg);flex:none}
+.tabrow{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:8px;align-items:center;padding:7px 4px;border-bottom:1px solid #eee;font-size:13px}
+.tabrow.hl{background:#fff8e1}
+.grip{color:#9aa0aa;font-size:16px}
+.dash{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:start}
+.side .ci{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;border:2px solid #111;background:#fff;box-shadow:2px 2px 0 rgba(5,93,255,.3);padding:6px 8px;margin-bottom:6px;font-size:12px}
+.side .ci div:first-child{display:flex;gap:8px;align-items:center;min-width:0}
+.side .ci span{font:800 9.5px system-ui;color:#055dff;letter-spacing:.1em}
+.side .ci.on{background:#055dff;color:#fff}.side .ci.on span{color:#fff}
+.ca{display:flex;gap:4px}.ca i{font-style:normal;width:20px;height:20px;border:1.5px solid #111;display:grid;place-items:center;font:700 11px system-ui}
+.sidefoot{display:flex;flex-direction:column;gap:6px;margin-top:10px}.sidefoot small{color:#666;font-size:11.5px}
+.wgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.wgrid>.crd{margin:0}
+.wgrid .crd-h{flex-wrap:nowrap}.wgrid .crd-h h4{min-width:0}.w1{grid-column:span 12}.w2{grid-column:span 6}.w3{grid-column:span 4}.w4{grid-column:span 3}.w23{grid-column:span 8}.w34{grid-column:span 9}
+.tools{display:inline-flex;gap:5px;border-left:2px solid #111;padding-left:9px}
+.ia{width:26px;height:26px;border:2px solid #111;display:grid;place-items:center;font-size:13px;background:#fff}.ia.d{color:#d62828}.ia.on{background:#055dff;color:#fff}
+.frow{display:flex;gap:9px;align-items:center;padding:6px 0;border-top:1px solid #eee;font-size:12.5px}
+.frow .ini{border-radius:50%;display:grid;place-items:center;background:#e8590c;color:#fff;font-size:13px}
+mark{background:#fff1a8}
+.orow{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid #eee;font-size:12.5px}
+.minic{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.minic>div{border:1.5px solid #c9ccd3;padding:6px;text-align:center;font-size:12px;min-width:0}
+.minic svg{width:46px;height:36px;display:block;margin:0 auto 3px}.minic .big{font-size:26px;display:block;height:36px;line-height:36px}
+.minic b{display:block}.minic small{color:#777;font-size:11px}
+.bk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.bk>div{border:1.5px solid #c9ccd3;padding:8px;display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 6px;font-size:12.5px}
+.bk>div span{grid-row:span 2;font-size:20px}.bk>div small{color:#666;font-size:11.5px}
+.bk>div.on{border:2px solid #055dff;background:#f5f8ff}.bk>div.off{opacity:.45;cursor:not-allowed}
+@media (max-width:900px){.dash{grid-template-columns:minmax(0,1fr)}.wgrid>.crd{grid-column:1/-1}.side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}.sidefoot{grid-column:1/-1}}
+@media (max-width:520px){.side{grid-template-columns:minmax(0,1fr)}.minic{grid-template-columns:repeat(3,minmax(0,1fr))}.bk{grid-template-columns:minmax(0,1fr)}}
+.s16{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}.s16>div{min-width:0}
+.s16 .pill{flex-wrap:nowrap;white-space:nowrap}
+@media (max-width:900px){.s16{grid-template-columns:minmax(0,1fr)}}
+.pgbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.frz{display:flex;height:18px;border:2px solid #111}.frz i{display:block;border-right:2px solid #fff}
+.frzl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;font-size:11px;margin-top:6px;color:#555}.frzl .b{font-size:9.5px;padding:3px 5px}
+.hev{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid #eee;font-size:12.5px}.hev.on{background:#f5f8ff;margin:0 -8px;padding:8px}
+.hev small{color:#555;line-height:1.7}
+.rub{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#055dff;margin:12px 0 6px;border-top:2px solid #111;padding-top:8px}
+@media (max-width:520px){.frzl{grid-template-columns:repeat(2,minmax(0,1fr))}.hev{grid-template-columns:minmax(0,1fr)}}
+/* sombre */
+.dk{background:#121418;color:#e8e8e8;border-color:#444;box-shadow:6px 6px 0 rgba(77,159,255,.25)}
+.dk>.tag{color:#7fb0ff}
+.dk .hero,.dk .crd,.dk .mapwrap,.dk .timeline{background:#1b1e24;border-color:#444;box-shadow:none}
+.dk .crd-h{background:#20242b;border-color:#444}
+.dk .hero-ic{background:#3a2717;border-color:#666}
+.dk .hero p,.dk .kv dt,.dk .muted,.dk .note,.dk .eyebrow,.dk .legkey b,.dk .hist,.dk .crd-h h4 small{color:#a5abb6}
+.dk .hist li{border-color:#2d3139}
+.dk .seg{border-color:#666}.dk .seg span{background:#1b1e24;border-color:#666;color:#ddd}.dk .seg span.is-active{background:#2f7bff;color:#fff}
+.dk .pill{background:#1b1e24;border-color:#555;color:#e8e8e8}.dk .pill small{color:#a5abb6}.dk .pill .o{color:#7fb0ff}
+.dk .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}.dk .btn.p{background:#2f7bff;border-color:#2f7bff}
+.dk .code{background:#262a31;border-color:#555;color:#eee}
+.dk .b.g{background:#13301f;color:#8fe0ad;border-color:#3ccf73}.dk .b.bl{background:#1a2a3d;color:#9cc2ff;border-color:#5599ff}
+.dk .b.y{background:#33290b;color:#ffd666;border-color:#e1a500}
+.dk .chip{background:#1b1e24;border-color:#555;color:#ddd}.dk .chip.on{background:#1a2a3d;border-color:#5599ff;color:#9cc2ff}
+.dk .ui-toggle i{background:#2f7bff}
+.dk .sel{background:#1b1e24;border-color:#666;color:#ddd}
+.dk .mapside,.dk .pop{background:#1b1e24;border-color:#555;color:#e8e8e8}
+.dk .track{background:#333}
+.dk .ok{color:#7fb0ff}
+/* ===== premier lancement ===== */
+.inst{border:2px solid #111;background:#fff;box-shadow:4px 4px 0 rgba(5,93,255,.25);padding:30px 36px 32px;max-width:880px;margin:0 auto;min-width:0}
+.inst .eyebrow{color:#055dff}
+.inst h2{margin:10px 0 4px;font-size:26px;letter-spacing:-.02em;line-height:1.15}
+.inst>p{margin:0 0 6px;line-height:1.5;color:#333;font-size:14px}
+.iopts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:22px}
+.icard{border:2px solid #111;padding:18px;background:#fff;min-width:0}
+.icard h3{margin:0 0 8px;font-size:16px}
+.icard p{margin:0 0 10px;font-size:12.5px;color:#666;line-height:1.45}
+.fl{display:block;font:700 12.5px system-ui;margin:0 0 9px}
+.fl .inp,.fl .sel{display:block;width:100%;margin-top:4px;font-weight:500;color:#111}
+.fl .inp.ph{color:#999}
+.fbtn{display:inline-flex;align-items:center;gap:6px;border:2px dashed #888;padding:7px 11px;font:700 12.5px system-ui;background:#fafafa;margin-bottom:10px}
+.other{display:inline-flex;align-items:center;gap:5px;margin-top:12px;font:600 13px system-ui;color:#555;text-decoration:underline dotted;text-underline-offset:3px;cursor:pointer}
+.other.on{color:#055dff;text-decoration-style:solid}
+.ofold{border-top:2px solid #111;margin-top:24px;padding-top:18px}
+.ofold h3{margin:0 0 2px;font-size:18px}
+.ofold>p{margin:0 0 14px;font-size:13px;color:#666}
+.usages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.uz{padding:11px 11px 10px!important;grid-template-columns:34px minmax(0,1fr)!important;gap:2px 8px!important}.uz .ui{width:34px!important;height:34px!important;line-height:34px!important;font-size:22px!important}
+.uz{border:2px solid #111;background:#fff;padding:12px 13px 11px;display:grid;grid-template-columns:40px minmax(0,1fr);gap:2px 10px;align-content:start;min-width:0;cursor:pointer;position:relative}
+.uz .ui{grid-row:span 3;font-size:28px;line-height:40px;text-align:center;width:40px;height:40px;background:#f4f5f7;border:1.5px solid #c9ccd3}
+.uz b{font-size:14px;line-height:1.25;padding-right:14px}
+.uz span.pp{font-size:12.5px;color:#444;line-height:1.4}
+.uz small{display:block;font-size:11.5px;color:#777;line-height:1.4;margin-top:5px;border-top:1px dashed #d5d8de;padding-top:5px}
+.uz small em{font-style:normal;font:800 10px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#999;display:block}
+.uz.on{border-color:#055dff;background:#f5f8ff;box-shadow:0 0 0 3px rgba(5,93,255,.18)}
+.uz.on .ui{background:#055dff;border-color:#055dff}
+.uz .rk{position:absolute;right:8px;top:8px;width:16px;height:16px;border:2px solid #111;border-radius:50%;background:#fff}
+.uz.on .rk{background:#055dff;box-shadow:inset 0 0 0 2px #fff;border-color:#055dff}
+.uz.def b:after{content:" · comme d'habitude";font-weight:500;color:#888;font-size:12px}
+.ofoot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:#555}
+.ofoot .lnk{margin-left:auto}
+/* app ouverte */
+.appwin{border:2px solid #111;background:#f4f5f7;min-width:0;overflow:hidden}
+.appbar{display:grid;grid-template-columns:130px minmax(0,1fr);border-bottom:2px solid #111;background:#fff}
+.brand2{border-right:2px solid #111;display:grid;place-content:center;justify-items:center;gap:3px;padding:8px 6px;text-align:center}
+.brand2 span{border:1px solid #055dff;color:#055dff;font:800 10px system-ui;padding:2px 4px;transform:rotate(-5deg);text-transform:uppercase;white-space:nowrap}
+.brand2 strong{background:#055dff;color:#fff;font:800 11px system-ui;padding:3px 5px;transform:rotate(-5deg);text-transform:uppercase;white-space:nowrap}
+.brand2 small{font:700 8px system-ui;letter-spacing:.16em;color:#888}
+.appbar .topnav{border:0;align-items:center}
+.appbody{padding:14px;min-width:0}
+.ni.gone{opacity:.45;text-decoration:line-through;border-style:dashed}
+.ni.mv{outline:3px dashed #1aa34a;outline-offset:2px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#555;margin:6px 0 0}
+.legend i{display:inline-block;width:16px;height:12px;vertical-align:-1px;margin-right:4px;border:2px solid #111}
+.legend i.n{outline:2px dashed #e1a500;outline-offset:1px}.legend i.m{outline:2px dashed #1aa34a;outline-offset:1px}.legend i.g{opacity:.45;border-style:dashed}
+.side2{border:2px solid #111;background:#fff;padding:8px 10px;font-size:12px}
+.side2 .eyebrow{color:#055dff}
+.side2 h5{margin:2px 0 8px;font-size:16px}
+.side2 .r{display:flex;gap:8px;align-items:center;padding:5px 0;border-top:1px solid #eee}
+.ped{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:center}
+.pb{border:2px solid #111;padding:6px 8px;font-size:12px;background:#fff;min-width:0}
+.pb b{display:block;font-size:13px}
+.pb.e{border:1.5px dashed #9aa0aa;color:#666;background:#fafafa}
+.pb.e b{color:#055dff;font-size:12.5px}
+.pfam{display:grid;gap:8px}
+.wiz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.wiz .win{width:100%;box-shadow:4px 4px 0 rgba(5,93,255,.2)}
+.sp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.sp-grid .chip{display:flex;gap:6px;align-items:center;padding:7px 9px;font-size:12.5px}
+.sw{width:22px;height:22px;border:2px solid #111;display:inline-block;vertical-align:middle}
+.swl{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.swl span{width:26px;height:26px;border:2px solid #111;position:relative}
+.swl span.on:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;font:800 13px system-ui;color:#fff;text-shadow:0 0 2px #000}
+.mapmini{height:150px;border:2px solid #111;background:#e7eee0;position:relative;overflow:hidden}
+.mapmini svg{width:100%;height:100%;display:block}
+.cmp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.usewrap .ui-toggle{white-space:normal}
+.urow{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 4px;border-bottom:1px solid #eee;font-size:13px}
+.urow .ic{font-size:20px;text-align:center}
+.urow small{display:block;color:#777;font-size:11.5px;line-height:1.35}
+.urow.hl{background:#f5f8ff}
+.urow .ui-toggle.dis{opacity:.45;cursor:not-allowed}
+.phd{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.phd .sp{flex:1}
+.rst{color:#055dff;font:700 12.5px system-ui;white-space:nowrap}
+.phone{width:390px;max-width:100%;border:2px solid #111;background:#f4f5f7;padding:12px;min-width:0}
+.phone .inst{padding:18px 16px;box-shadow:none}
+.phone .inst h2{font-size:21px}
+.phone .iopts,.phone .usages{grid-template-columns:minmax(0,1fr)}
+.phone .iopts{gap:14px;margin-top:14px}
+.phone .icard{padding:14px}
+.phone .uz small{display:none}
+.phone .uz.on small{display:block}
+.p6{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:22px;align-items:start}
+.p6>div{min-width:0}
+/* sombre pour les nouveaux morceaux */
+.dkw{background:#121418;color:#e8e8e8;padding:16px;border:2px solid #444}
+.dkw .inst,.dkw .icard{background:#1b1e24;border-color:#555;color:#e8e8e8;box-shadow:none}
+.dkw .inst>p{color:#c9ced8}.dkw .icard p,.dkw .ofold>p,.dkw .ofoot,.dkw .uz small,.dkw .muted{color:#a5abb6}
+.dkw .inst .eyebrow{color:#7fb0ff}
+.dkw .ofold{border-color:#555}
+.dkw .inp{background:#121418;border-color:#666;color:#e8e8e8}
+.dkw .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}.dkw .btn.p{background:#2f7bff;border-color:#2f7bff;color:#fff}
+.dkw .other{color:#a5abb6}.dkw .other.on{color:#7fb0ff}
+.dkw .fbtn{background:#20242b;border-color:#777;color:#ddd}
+.dkw .uz{background:#1b1e24;border-color:#555}
+.dkw .uz span.pp{color:#c9ced8}.dkw .uz small{border-color:#333}.dkw .uz small em{color:#8a909b}
+.dkw .uz .ui{background:#262a31;border-color:#444}
+.dkw .uz .rk{background:#1b1e24;border-color:#888}
+.dkw .uz.on{background:#16233a;border-color:#5599ff;box-shadow:0 0 0 3px rgba(85,153,255,.25)}
+.dkw .uz.on .ui{background:#2f7bff;border-color:#2f7bff}.dkw .uz.on .rk{background:#5599ff;border-color:#5599ff;box-shadow:inset 0 0 0 2px #1b1e24}
+.dkw .notice.i{background:#16233a;border-color:#5599ff;color:#dce6ff}
+.dkw .lnk{color:#7fb0ff}
+@media (max-width:900px){
+ .usages{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .wiz,.cmp,.p6{grid-template-columns:minmax(0,1fr)}
+ .inst{padding:20px 18px}
+}
+@media (max-width:520px){
+ .iopts,.usages{grid-template-columns:minmax(0,1fr)}
+ .inst h2{font-size:21px}
+ .appbar{grid-template-columns:minmax(0,1fr)}.brand2{border-right:0;border-bottom:2px solid #111;grid-auto-flow:column;place-content:start;gap:6px}
+ .ped{grid-template-columns:minmax(0,1fr)}
+ .urow{grid-template-columns:26px minmax(0,1fr)}.urow>label{grid-column:2}
+ .phone{padding:8px}
+}
+.mini{border:2px solid #111;background:#fff;padding:12px 14px;min-width:0}
+.mini h4{margin:0 0 4px;font-size:15px}
+.mini>p{margin:0 0 8px;font-size:12.5px;color:#555;line-height:1.45}
+.mini .topnav{padding:5px 6px;gap:5px}
+.mini .ni{padding:4px 7px;font-size:11px}.mini .ni span{font-size:8px;margin-bottom:2px}
+.mini .lab{margin:10px 0 4px}
+.scr{border:2px solid #111;background:#f4f5f7;padding:10px;font-size:12.5px;min-width:0}
+.scr .ph{margin-bottom:8px;padding-bottom:8px}.scr .ph h2{font-size:17px}
+.mgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.mgrid .wide{grid-column:1/-1}
+.kgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.kgrid>div{border:1.5px solid #c9ccd3;background:#fff;padding:7px 8px;min-width:0}
+.kgrid b{display:block;font-size:12.5px}.kgrid small{color:#777;font-size:11.5px}
+@media (max-width:900px){.mgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.kgrid{grid-template-columns:minmax(0,1fr)}}
+
+.icard .seg{flex-wrap:nowrap}.icard .seg span{flex:1 1 auto;text-align:center;padding:5px 6px}
+
+.dkw .usages{grid-template-columns:repeat(2,minmax(0,1fr))}@media (max-width:520px){.dkw .usages{grid-template-columns:minmax(0,1fr)}.dkw{padding:8px}}
+</style></head><body>
+<h1>🧭 Premier lancement — « Je veux faire autre chose »</h1>
+<p class="sub">Sur l’écran d’installation, sous « Créer et ouvrir la base », un lien discret <b>« Je veux faire autre chose ▾ »</b> déplie des grandes cartes d’usages. Le choix ouvre l’app avec les onglets et le premier écran qui vont avec : <b>🐾 Animaux</b> à la place de Personnes pour un élevage, le <b>Suivi des animaux</b> pour un recensement, les Maisons, les Artistes, les Archives… Ce n’est qu’un réglage d’affichage : <b>aucune donnée n’est supprimée</b>, on peut rebasculer ou combiner plus tard (Maintenance → Apparence → « 🧭 Usage de l’app »). Par défaut, rien ne change : « 🌳 Ma généalogie ».</p>
+<div class="grid"><div class="case full"><span class="tag"><span class="num">P1</span>Écran d’installation · replié puis déplié</span><h3>Le même écran qu’aujourd’hui, avec un lien discret sous « Créer et ouvrir la base »</h3><span class="lab">Replié (au départ)</span><div class="inst"><span class="eyebrow">INSTALLATION</span><h2>La base généalogique doit être importée.</h2>
+<p>Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d’une base vide.</p>
+<div class="iopts"><div class="icard"><h3>Importer un fichier</h3><p>GEDCOM (.ged), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés.</p>
+<span class="fbtn">📁 Choisir un fichier</span><br><span class="btn">⤒ Importer</span></div><div class="icard"><h3>Créer une première personne</h3><p>Initialise une base vide avec une première fiche, à compléter ensuite.</p>
+<label class="fl">Prénom<span class="inp">&nbsp;</span></label><label class="fl">Nom<span class="inp">&nbsp;</span></label>
+<span class="btn">Créer et ouvrir la base</span><br><span class="other">Je veux faire autre chose ▾</span></div></div></div><span class="lab" style="margin-top:22px">Déplié : 8 grandes cartes, « 🌳 Ma généalogie » choisie d’office</span><div class="inst"><span class="eyebrow">INSTALLATION</span><h2>La base généalogique doit être importée.</h2>
+<p>Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d’une base vide.</p>
+<div class="iopts"><div class="icard"><h3>Importer un fichier</h3><p>GEDCOM (.ged), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés.</p>
+<span class="fbtn">📁 Choisir un fichier</span><br><span class="btn">⤒ Importer</span></div><div class="icard"><h3>Créer une première personne</h3><p>Initialise une base vide avec une première fiche, à compléter ensuite.</p>
+<label class="fl">Prénom<span class="inp">&nbsp;</span></label><label class="fl">Nom<span class="inp">&nbsp;</span></label>
+<span class="btn">Créer et ouvrir la base</span><br><span class="other on">Je veux faire autre chose ▴</span></div></div><div class="ofold"><h3>Qu’est-ce que tu veux faire avec l’app ?</h3><p>Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après.</p>
+<div class="usages"><div class="uz on def"><span class="rk"></span><span class="ui">🌳</span><b>Ma généalogie</b><span class="pp">Ta famille, tes ancêtres, leurs actes et leurs photos.</span><small><em>Ce qui change</em>Rien : l’app telle qu’elle est. Premier écran : « Créer la première personne ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🐾</span><b>Une lignée d’animaux</b><span class="pp">Un élevage, le pedigree de tes chiens, chats, chevaux…</span><small><em>Ce qui change</em>Personnes → 🐾 Animaux. Premier écran : « Créer le premier animal ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🔭</span><b>Recenser des animaux</b><span class="pp">Suivre des animaux : baguage, puces, observations, trajets.</span><small><em>Ce qui change</em>Personnes → 🐾 Animaux, + 🐾 Suivi des animaux. Premier écran : le Suivi.</small></div><div class="uz"><span class="rk"></span><span class="ui">🏠</span><b>L’histoire d’une maison ou d’un village</b><span class="pp">Qui a vécu où, de génération en génération, pièce par pièce.</span><small><em>Ce qui change</em>+ 🏠 Maisons et lieux, Carte en avant. Premier écran : « Créer la maison ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🎨</span><b>Le catalogue d’un artiste ou d’une collection</b><span class="pp">Ses œuvres, ses expositions, son catalogue raisonné.</span><small><em>Ce qui change</em>+ 🎨 Artistes et œuvres. Premier écran : « Créer l’artiste ».</small></div><div class="uz"><span class="rk"></span><span class="ui">📚</span><b>Un fonds d’archives ou un musée familial</b><span class="pp">Des photos, des lettres, des objets à classer et à décrire.</span><small><em>Ce qui change</em>+ 📚 Archives et médias, + 🏛 Musée. Premier écran : « ⤒ Importer les premiers fichiers ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🔤</span><b>L’étude d’un nom de famille</b><span class="pp">Tous les porteurs d’un nom, ses variantes, d’où ils viennent.</span><small><em>Ce qui change</em>+ 🔤 Le nom étudié, Carte des porteurs. Premier écran : « Choisir le nom ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🏭</span><b>L’histoire d’une entreprise ou d’une association</b><span class="pp">Ses lieux, ses dirigeants, ses salariés ou ses membres.</span><small><em>Ce qui change</em>+ 🏭 L’entreprise, Personnes = « Membres ». Premier écran : « Créer l’entreprise ».</small></div></div>
+<div class="ofoot"><span>ℹ️ Rien n’est figé : Maintenance → Apparence → « 🧭 Usage de l’app ».</span><span class="lnk">▴ Replier</span></div></div></div><p class=note>Le lien est petit et gris (souligné en pointillé) : la personne qui fait sa généalogie ne le remarque pas. Les cartes se choisissent comme des boutons radio (une seule à la fois ici ; on combine plus tard en P5), au clavier ↑ ↓ ← → et Entrée. Choisir une carte change seulement la carte de droite (« Créer une première personne » devient le premier formulaire de l’usage) ; « Importer un fichier » reste toujours là, pour tous les usages. « ▴ Replier » (ou Échap) revient à l’écran d’avant, « 🌳 Ma généalogie » remise.</p></div>
+<div class="case full"><span class="tag"><span class="num">P2</span>Usage « 🐾 Une lignée d’animaux »</span><h3>Le premier formulaire devient « Créer le premier animal », puis l’app s’ouvre avec 🐾 Animaux à la place de Personnes</h3><div class="two w"><div><div class="inst"><span class="eyebrow">INSTALLATION</span><h2>La base généalogique doit être importée.</h2>
+<p>Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d’une base vide.</p>
+<div class="iopts"><div class="icard"><h3>Importer un fichier</h3><p>GEDCOM (.ged), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés.</p>
+<span class="fbtn">📁 Choisir un fichier</span><br><span class="btn">⤒ Importer</span></div><div class="icard" style="border-color:#055dff;box-shadow:0 0 0 3px rgba(5,93,255,.18)"><h3>🐾 Créer le premier animal</h3><p>Une base vide avec une première fiche d’animal, à compléter ensuite (parents, portées, photos…).</p>
+<label class="fl">Nom<span class="inp">Ulysse</span></label>
+<div class="row2"><label class="fl">Espèce<span class="sel" style="display:block;margin-top:4px">Chien ▾</span></label><label class="fl">Race<span class="inp">Berger australien</span></label></div>
+<span class="fl" style="margin-bottom:4px">Sexe</span><div class="seg sm" style="margin-bottom:10px"><span class="is-active">♂ Mâle</span><span>♀ Femelle</span><span>Inconnu</span></div>
+<label class="fl">Affixe / élevage<span class="inp">du Val d’Argent</span></label>
+<span class="fl" style="margin-bottom:4px">N° d’identification</span><div class="seg sm" style="margin-bottom:6px"><span class="is-active">Puce</span><span>Tatouage</span><span>N° de livre</span></div><span class="inp" style="margin-bottom:12px">250 26 9 60 1234567</span>
+<span class="btn p">Créer le premier animal</span><br><span class="other on">Je veux faire autre chose ▴</span></div></div></div></div><div><span class="lab">Ce que le choix règle</span><div class="kgrid" style="grid-template-columns:minmax(0,1fr)"><div><b>Onglets</b><small>Personnes masqué, « 🐾 Animaux » à la même place (02).</small></div><div><b>Premier écran</b><small>Le tableau de bord de l’élevage (chiffres : animaux, portées, races, rappels).</small></div><div><b>Le reste suit</b><small>Graphiques s’ouvre sur le pedigree ; Listes met « 🐾 Animaux » et « 🐣 Portées » en haut ; la Recherche et la Carte cherchent d’abord les animaux ; le logo prend l’affixe (« VAL D’ARGENT · ÉLEVAGE », Apparence → Nom affiché).</small></div><div><b>Espèce</b><small>Petit menu à choix fixes (Chien, Chat, Cheval, poney, âne, Lapin, Rongeur, Oiseau, Poisson, Reptile, tortue, Animal de la ferme, Autre) : ce sont celles des fiches d’animaux existantes.</small></div></div></div></div><span class="lab" style="margin-top:20px">Menu du haut · avant</span><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>06</span>Chronologie</span><span class="ni "><span>07</span>Recherche</span><span class="ni "><span>08</span>Enquêtes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div><span class="lab">Menu du haut · après</span><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni gone"><span>02</span>Personnes</span><span class="ni mv"><span>02</span>🐾 Animaux</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>06</span>Chronologie</span><span class="ni "><span>07</span>Recherche</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div><div class="legend"><span><i class="n"></i>onglet montré par le choix</span><span><i class="m"></i>onglet mis à la place</span><span><i class="g"></i>masqué (rien n’est supprimé)</span></div><span class="lab" style="margin-top:18px">L’app ouverte</span><div class="appwin"><div class="appbar"><div class="brand2"><span>VAL D’ARGENT</span><strong>ÉLEVAGE</strong><small>PEDIGREE</small></div><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni gone"><span>02</span>Personnes</span><span class="ni mv"><span>02</span>🐾 Animaux</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>06</span>Chronologie</span><span class="ni "><span>07</span>Recherche</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="appbody"><div class="ph"><div class="t"><small>Accueil · Élevage du Val d’Argent</small><h2>🏠 Tableau de bord</h2><p>Ton élevage d’un coup d’œil. Les blocs se rangent, se règlent et se retirent comme d’habitude.</p></div><span class="btn p">＋ Nouvel animal</span><span class="btn">＋ Nouvelle portée</span><span class="btn">⋯</span></div>
+<div class="toast2" style="margin:0 0 12px">✓ Fiche « Ulysse du Val d’Argent » créée<span class="u">↶ Annuler</span><span class="bar" style="width:55%"></span></div>
+<div class="tiles"><div class="tile"><b>1</b><small>animal · 1 mâle, 0 femelle</small></div><div class="tile"><b>0</b><small>portée · 0 petit</small></div><div class="tile"><b>1</b><small>race · Berger australien</small></div><div class="tile"><b>0</b><small>rappel à venir (vaccins, vermifuge)</small></div></div>
+<div class="wgrid">
+<div class="crd w2"><div class="crd-h"><span class="idx">01</span><h4>🧬 Pedigree d’Ulysse</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="ped"><div class="pb"><b>Ulysse du Val d’Argent</b>♂ Berger australien<br><span class="b bl">Puce</span></div><div class="pfam"><div class="pb e"><b>＋ Ajouter son père</b>étalon</div><div class="pb e"><b>＋ Ajouter sa mère</b>lice</div></div></div></div></div>
+<div class="crd w2"><div class="crd-h"><span class="idx">02</span><h4>🐣 Dernières portées</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="empty-line"><span>🐣</span><span>Pas encore de portée.</span><span class="btn s">＋ Nouvelle portée</span></div></div></div>
+<div class="crd w2"><div class="crd-h"><span class="idx">03</span><h4>💉 Rappels et soins</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="empty-line"><span>💉</span><span>Aucun rappel prévu.</span><span class="btn s">＋ Ajouter un rappel</span></div></div></div>
+<div class="crd w2"><div class="crd-h"><span class="idx">04</span><h4>🎂 Anniversaires des animaux</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="empty-line"><span>🎂</span><span>Donne une date de naissance à Ulysse pour le voir ici.</span></div></div></div>
+</div></div></div><p class=note>Les champs sont ceux de la fiche d’animal (nom, espèce, race, sexe, affixe, puce / tatouage / n° de livre) ; le reste se remplit sur la fiche. « Créer le premier animal » (K3, bouton principal bleu). Si le nom manque : « ⛔ Donne un nom à ton animal. » sous la case (K1). Le message H7 « ↶ Annuler » défait la création.</p></div>
+<div class="case full"><span class="tag"><span class="num">P3</span>Usage « 🔭 Recenser des animaux »</span><h3>Un mini assistant en 3 étapes, puis l’app s’ouvre sur l’onglet Suivi avec ses blocs de départ</h3><span class="lab">Le mini assistant (fenêtre moyenne 760, montrée ici réduite côte à côte)</span><div class="wiz">
+<div class="win"><div class="win-h"><div class="t"><small>Recenser des animaux · 1 / 3</small><b>Quelle espèce suis-tu ?</b></div><button class="x">×</button></div><div class="win-b">
+<div class="steps"><span class="on">1 Espèce</span><span>2 Site</span><span>3 Marques</span></div>
+<div class="sp-grid"><span class="chip on">🐦 Oiseau</span><span class="chip">🦔 Hérisson</span><span class="chip">🦇 Chauve-souris</span><span class="chip">🐢 Tortue</span><span class="chip">🐈 Chat</span><span class="chip">🦌 Grand animal</span><span class="chip">🐟 Poisson</span><span class="chip">＋ Autre…</span></div>
+<label class="fl" style="margin-top:12px">Précise si tu veux<span class="inp">Hirondelle rustique</span></label>
+<p class="muted" style="font-size:12px;margin:0">Tu pourras en ajouter d’autres après.</p></div>
+<div class="win-f"><span class="btn">Annuler</span><span class="btn p">Suivant →</span></div></div>
+
+<div class="win"><div class="win-h"><div class="t"><small>Recenser des animaux · 2 / 3</small><b>Où ?</b></div><button class="x">×</button></div><div class="win-b">
+<div class="steps"><span class="done">✓ Espèce</span><span class="on">2 Site</span><span>3 Marques</span></div>
+<span class="fl" style="margin-bottom:4px">Site suivi</span>
+<span class="pill" style="margin-bottom:8px"><span class="ic">📍</span><span class="lbl">Marais de Brière</span><small>Loire-Atlantique (44)</small><span class="o">↗ Lieu</span><span class="o">🗺</span><span class="x">×</span></span>
+<div class="pk">📍 ＋ Ajouter un lieu…</div>
+<p class="muted" style="font-size:12px;margin:10px 0 0">Un parc, un quartier, un dortoir, un jardin… Le menu de choix des lieux, comme partout.</p></div>
+<div class="win-f"><span class="btn">← Retour</span><span class="sp"></span><span class="lnk">Passer</span><span class="btn p">Suivant →</span></div></div>
+
+<div class="win"><div class="win-h"><div class="t"><small>Recenser des animaux · 3 / 3</small><b>Comment tu les reconnais ?</b></div><button class="x">×</button></div><div class="win-b">
+<div class="steps"><span class="done">✓ Espèce</span><span class="done">✓ Site</span><span class="on">3 Marques</span></div>
+<div class="radio on">Bagues de couleur</div><div class="radio">N° de puce ou de bague métal</div><div class="radio">Les deux</div>
+<span class="fl" style="margin:10px 0 0">Couleurs de bagues utilisées</span>
+<div class="swl"><span class="on" style="background:#d62828"></span><span class="on" style="background:#1aa34a"></span><span class="on" style="background:#f2c400"></span><span class="on" style="background:#fff"></span><span style="background:#055dff"></span><span style="background:#111"></span><span style="background:#ff8a00"></span></div>
+<p class="muted" style="font-size:12px;margin:8px 0 0">4 couleurs choisies · modifiables dans le Suivi.</p></div>
+<div class="win-f"><span class="btn">← Retour</span><span class="sp"></span><span class="lnk">Passer</span><span class="btn p">Créer le suivi</span></div></div>
+</div><span class="lab" style="margin-top:20px">Menu du haut · avant</span><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>06</span>Chronologie</span><span class="ni "><span>07</span>Recherche</span><span class="ni "><span>08</span>Enquêtes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div><span class="lab">Menu du haut · après</span><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni gone"><span>02</span>Personnes</span><span class="ni mv"><span>02</span>🐾 Animaux</span><span class="ni on new"><span>02</span>🐾 Suivi des animaux</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div><div class="legend"><span><i class="n"></i>onglet montré par le choix</span><span><i class="m"></i>onglet mis à la place</span><span><i class="g"></i>masqué (rien n’est supprimé)</span></div><span class="lab" style="margin-top:18px">L’app ouverte sur le Suivi</span><div class="appwin"><div class="appbar"><div class="brand2"><span>MARAIS</span><strong>SUIVI</strong><small>RECENSEMENT</small></div><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni gone"><span>02</span>Personnes</span><span class="ni mv"><span>02</span>🐾 Animaux</span><span class="ni on new"><span>02</span>🐾 Suivi des animaux</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="appbody"><div class="ph"><div class="t"><small>Suivi des animaux · Vue générale</small><h2>🐾 Suivi des animaux</h2><p>Hirondelle rustique · Marais de Brière. Les blocs de départ ; ajoute, range et retire comme dans le tableau de bord.</p></div><span class="btn p">＋ Noter une observation</span><span class="btn">＋ Baguer un animal</span><span class="btn">⋯</span></div>
+<div class="toast2" style="margin:0 0 12px">✓ Suivi « Hirondelle rustique · Marais de Brière » créé<span class="u">↶ Annuler</span><span class="bar" style="width:70%"></span></div>
+<div class="dash"><aside class="side"><div class="ci on"><div><span>01</span><b>Vue générale</b></div></div><div class="ci"><div><span>02</span>Carte des observations</div><div class="ca"><i>i</i><i>＋</i></div></div><div class="ci"><div><span>03</span>Dernières observations</div><div class="ca"><i>i</i><i>＋</i></div></div><div class="ci"><div><span>04</span>Animaux suivis</div><div class="ca"><i>i</i><i>＋</i></div></div><div class="ci"><div><span>05</span>Chiffres</div><div class="ca"><i>i</i><i>＋</i></div></div><div class="ci"><div><span>06</span>🔖 Bagues de couleur</div><div class="ca"><i>i</i><i>＋</i></div></div></aside>
+<div class="wgrid">
+<div class="crd w1"><div class="crd-h"><span class="idx">01</span><h4>Chiffres</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="tiles" style="margin:0"><div class="tile"><b>0</b><small>animal bagué</small></div><div class="tile"><b>0</b><small>observation</small></div><div class="tile"><b>1</b><small>site</small></div><div class="tile"><b>4</b><small>couleurs de bagues</small></div></div></div></div>
+<div class="crd w23"><div class="crd-h"><span class="idx">02</span><h4>Carte des observations</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="mapmini"><svg viewBox="0 0 400 150" preserveAspectRatio="none"><path d="M0 110 C80 90 140 120 220 100 S340 70 400 90 V150 H0Z" fill="#cfe0f0"/><path d="M110 30 L250 22 L300 70 L230 118 L120 104 Z" fill="rgba(5,93,255,.12)" stroke="#055dff" stroke-width="2" stroke-dasharray="6 4"/><text x="175" y="72" font-size="13" font-weight="700" fill="#0a3fae" font-family="system-ui">Marais de Brière</text></svg></div><div class="empty-line" style="margin-top:8px"><span>📍</span><span>Pas encore d’observation sur la carte.</span><span class="btn s">＋ Noter une observation</span></div></div></div>
+<div class="crd w3"><div class="crd-h"><span class="idx">03</span><h4>🔖 Bagues</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="swl"><span style="background:#d62828"></span><span style="background:#1aa34a"></span><span style="background:#f2c400"></span><span style="background:#fff"></span></div><p class="muted" style="font-size:12px;margin:8px 0 0">Rouge, vert, jaune, blanc.</p></div></div>
+<div class="crd w2"><div class="crd-h"><span class="idx">04</span><h4>Dernières observations</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="empty-line"><span>👁</span><span>Rien de noté pour l’instant.</span><span class="btn s">＋ Noter une observation</span></div></div></div>
+<div class="crd w2"><div class="crd-h"><span class="idx">05</span><h4>Animaux suivis</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div><div class="crd-b"><div class="empty-line"><span>🐦</span><span>Aucun animal bagué.</span><span class="btn s">＋ Baguer un animal</span></div></div></div>
+</div></div></div></div><p class=note>Ici, la carte de droite de l’installation devient « 🔭 Commencer le suivi », qui ouvre l’assistant. « Passer » laisse une étape vide (à remplir plus tard dans le Suivi). « Créer le suivi » (K3) crée la page Suivi avec ses blocs par défaut, réglés sur l’espèce et le site ; chaque bloc vide a sa petite ligne K10 et son bouton pour commencer. L’onglet « 🐾 Animaux » reste là pour les fiches.</p></div>
+<div class="case full"><span class="tag"><span class="num">P4</span>Les 5 autres usages · aperçus</span><h3>Pour chacun : le menu avant / après et le premier écran</h3><div class="mgrid"><div class="mini wide"><h4>🏠 L’histoire d’une maison ou d’un village</h4><p>Personnes reste (ceux qui y ont vécu) ; Maisons et Carte passent devant.</p><span class="lab">Menu · avant</span><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span></div><span class="lab">Menu · après</span><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni on new"><span>02</span>🏠 Maisons et lieux</span><span class="ni mv"><span>03</span>Personnes</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Graphiques</span><span class="ni "><span>…</span>…</span></div><span class="lab">Premier écran</span><div class="scr"><div class="ph"><div class="t"><small>Premier lancement</small><h2>🏠 Créer la maison</h2></div></div>
+<div class="seg sm" style="margin-bottom:8px"><span class="is-active">Une maison</span><span>Un village</span></div>
+<label class="fl">Nom de la maison<span class="inp">La Borde</span></label>
+<span class="fl" style="margin-bottom:4px">Commune</span><span class="pill" style="margin-bottom:8px"><span class="ic">📍</span><span class="lbl">Saint-Martin-d’Arrossa</span><small>Pyrénées-Atlantiques (64)</small><span class="x">×</span></span>
+<label class="fl">Construite<span class="inp">vers 1780</span><span class="ok">✓ Compris : vers 1780</span></label>
+<span class="btn p">Créer la maison</span><div class="kgrid" style="margin-top:10px"><div><b>✏️ Plan</b><small>＋ Dessiner la première pièce</small></div><div><b>👪 Qui a vécu ici</b><small>menu de choix à rôles</small></div><div><b>📖 Monographie</b><small>de la commune, en un clic</small></div></div></div></div><div class="mini"><h4>🎨 Le catalogue d’un artiste ou d’une collection</h4><p>Un onglet Artistes et œuvres ; le catalogue raisonné à portée.</p><span class="lab">Menu · avant</span><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span></div><span class="lab">Menu · après</span><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni on new"><span>02</span>🎨 Artistes et œuvres</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span></div><span class="lab">Premier écran</span><div class="scr"><div class="ph"><div class="t"><small>Premier lancement</small><h2>🎨 Créer l’artiste</h2></div></div>
+<label class="fl">Prénom et nom<span class="inp">Jeanne Lacaze</span></label><label class="fl">Ce qu’elle fait<span class="sel" style="display:block;margin-top:4px">Peinture ▾</span></label>
+<span class="btn p">Créer l’artiste</span><div class="empty-line" style="margin-top:10px"><span>🖼</span><span>Ensuite : ses œuvres, puis « 📖 Nouveau catalogue raisonné ».</span></div></div></div><div class="mini"><h4>📚 Un fonds d’archives ou un musée familial</h4><p>Médias et pièces d’archives passent en 02 ; le plan du musée suit.</p><span class="lab">Menu · avant</span><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span></div><span class="lab">Menu · après</span><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni on new"><span>02</span>📚 Archives et médias</span><span class="ni new"><span>02</span>🏛 Musée</span><span class="ni mv"><span>03</span>Personnes</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span></div><span class="lab">Premier écran</span><div class="scr"><div class="ph"><div class="t"><small>Premier lancement</small><h2>📚 Archives et médias</h2></div></div>
+<div class="dropz">📁 Glisse ici tes photos, lettres, scans, colle-les ou choisis-les</div>
+<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><span class="btn p">⤒ Importer les premiers fichiers</span><span class="btn">＋ Nouvelle pièce d’archives</span></div></div></div><div class="mini"><h4>🔤 L’étude d’un nom de famille</h4><p>Tout part du nom : ses porteurs, ses variantes, la carte.</p><span class="lab">Menu · avant</span><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span></div><span class="lab">Menu · après</span><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni on new"><span>02</span>🔤 Le nom étudié</span><span class="ni mv"><span>02</span>Personnes</span><span class="ni new"><span>04</span>Carte des porteurs</span><span class="ni "><span>07</span>Recherche</span><span class="ni "><span>…</span>…</span></div><span class="lab">Premier écran</span><div class="scr"><div class="ph"><div class="t"><small>Premier lancement</small><h2>🔤 Choisir le nom</h2></div></div>
+<label class="fl">Le nom étudié<span class="inp">Etcheverry</span></label><label class="fl">Variantes connues<span class="inp">Etchebarne, Echeverría…</span></label>
+<span class="btn p">Créer l’étude</span><div class="kgrid" style="margin-top:10px"><div><b>🗺 Carte</b><small>des porteurs</small></div><div><b>📊 Origine</b><small>du nom</small></div><div><b>👥 Porteurs</b><small>par lieu, par siècle</small></div></div></div></div><div class="mini"><h4>🏭 L’histoire d’une entreprise ou d’une association</h4><p>Une fiche pour l’entreprise ; Personnes s’appelle « Membres ».</p><span class="lab">Menu · avant</span><div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span></div><span class="lab">Menu · après</span><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni on new"><span>02</span>🏭 L’entreprise</span><span class="ni mv"><span>02</span>👥 Membres</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>06</span>Chronologie</span><span class="ni "><span>…</span>…</span></div><span class="lab">Premier écran</span><div class="scr"><div class="ph"><div class="t"><small>Premier lancement</small><h2>🏭 Créer l’entreprise</h2></div></div>
+<label class="fl">Nom<span class="inp">Tissages Duval &amp; fils</span></label>
+<div class="row2"><label class="fl">Sorte<span class="sel" style="display:block;margin-top:4px">Entreprise ▾</span></label><label class="fl">Fondée<span class="inp">1872</span></label></div>
+<span class="btn p">Créer l’entreprise</span><div class="empty-line" style="margin-top:10px"><span>👥</span><span>Ensuite : dirigeants, salariés ou membres, avec un rôle.</span></div></div></div></div><div class="legend"><span><i class="n"></i>onglet montré par le choix</span><span><i class="m"></i>onglet mis à la place</span><span><i class="g"></i>masqué (rien n’est supprimé)</span></div><p class=note>Même règle partout : le choix montre ou met devant des onglets qui existent déjà (Maisons, Artistes, Médias, Musée, Carte…), et remplace la carte « Créer une première personne » par le premier formulaire de l’usage (K3 : « Créer la maison », « Créer l’artiste », « Créer l’étude », « Créer l’entreprise » ; « ⤒ Importer les premiers fichiers » pour les archives, par la fenêtre Importer K13). Personnes n’est masqué que pour les animaux ; ailleurs il descend d’un cran ou change de nom (« 👥 Membres »).</p></div>
+<div class="case full"><span class="tag"><span class="num">P5</span>On peut tout changer après</span><h3>Maintenance → Apparence : les onglets du menu, et « 🧭 Usage de l’app » pour rebasculer ou combiner</h3><div class="two">
+<div class="crd"><div class="crd-h"><span class="idx">03</span><h4>Onglets du haut <small>· Maintenance → Apparence</small></h4><span class="saved">✓ Enregistré</span></div><div class="crd-b"><div class="tabrow "><span class="grip">⠿</span><span>01 Tableau de bord</span><label class="ui-toggle"><i></i></label></div><div class="tabrow hl"><span class="grip">⠿</span><span>02 Personnes <small class=muted>· masqué par « 🐾 Une lignée d’animaux »</small></span><label class="ui-toggle off"><i></i></label></div><div class="tabrow hl"><span class="grip">⠿</span><span>02 🐾 Animaux <small class=muted>· montré par « 🐾 Une lignée d’animaux »</small></span><label class="ui-toggle"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>02 🐾 Suivi des animaux</span><label class="ui-toggle off"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>03 Graphiques</span><label class="ui-toggle"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>04 Carte</span><label class="ui-toggle"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>08 🧬 ADN</span><label class="ui-toggle off"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>…</span></div>
+<p class="note" style="margin-top:8px">Les interrupteurs déjà posés par le choix du premier lancement (en jaune). On peut les changer un par un, comme avant.</p></div></div>
+<div class="crd"><div class="crd-h"><span class="idx">04</span><h4>🧭 Usage de l’app</h4><span class="saved">✓ Enregistré</span><span class="rst">↺ Remettre comme au départ</span></div><div class="crd-b">
+<div class="notice i">ℹ️ <span>Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché.</span></div>
+<div class="urow hl"><span class="ic">🌳</span><span><b>Ma généalogie</b><small>Personnes, arbre, actes.</small></span><label class="ui-toggle"><i></i></label></div><div class="urow hl"><span class="ic">🐾</span><span><b>Une lignée d’animaux</b><small>🐾 Animaux, portées, pedigree.</small></span><label class="ui-toggle"><i></i></label></div><div class="urow "><span class="ic">🔭</span><span><b>Recenser des animaux</b><small>🐾 Suivi des animaux.</small></span><label class="ui-toggle off"><i></i></label></div><div class="urow "><span class="ic">🏠</span><span><b>Maison ou village</b><small>🏠 Maisons et lieux.</small></span><label class="ui-toggle off"><i></i></label></div><div class="urow "><span class="ic">🎨</span><span><b>Artiste ou collection</b><small>🎨 Artistes et œuvres.</small></span><label class="ui-toggle off"><i></i></label></div><div class="urow "><span class="ic">📚</span><span><b>Archives ou musée</b><small>📚 Archives, 🏛 Musée.</small></span><label class="ui-toggle off"><i></i></label></div><div class="urow "><span class="ic">🔤</span><span><b>Un nom de famille</b><small>🔤 Le nom étudié.</small></span><label class="ui-toggle off"><i></i></label></div><div class="urow "><span class="ic">🏭</span><span><b>Entreprise ou association</b><small>🏭 L’entreprise, 👥 Membres.</small></span><label class="ui-toggle off"><i></i></label></div>
+<label class="fl" style="margin-top:12px">Premier écran à l’ouverture<span class="sel" style="display:block;margin-top:4px">Tableau de bord ▾</span></label>
+</div></div></div>
+<span class="lab" style="margin-top:18px">On combine : « 🌳 Ma généalogie » rallumée à côté de « 🐾 Une lignée d’animaux »</span>
+<div class="toast2" style="margin:0 0 10px">✓ Usage « 🌳 Ma généalogie » ajouté : onglet Personnes remis<span class="u">↶ Annuler</span><span class="bar" style="width:35%"></span></div>
+<div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni mv"><span>02</span>Personnes</span><span class="ni "><span>02</span>🐾 Animaux</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div><p class=note>Interrupteurs K16 gardés tout de suite (K2), « ✓ Enregistré » à droite du titre, message H7 avec « ↶ Annuler », « ↺ Remettre comme au départ » sans question (= 🌳 Ma généalogie seule). On peut en allumer plusieurs : les onglets de chacun s’additionnent (généalogie + animaux = Personnes et 🐾 Animaux côte à côte). Le dernier usage allumé ne peut pas s’éteindre (aspect désactivé). Éteindre un usage cache ses onglets ; un interrupteur d’onglet changé à la main reste comme on l’a mis. « Premier écran » est un petit menu à choix fixes (Tableau de bord, la liste de l’usage, le Suivi…). Le choix est aussi proposé dans « Mes généalogies » quand on crée une autre base.</p></div>
+<div class="case full"><span class="tag"><span class="num">P6</span>Mode sombre · téléphone 390 px</span><h3>P1 déplié en mode sombre, et sur un téléphone</h3><div class="p6"><div><span class="lab">Mode sombre (« 🐾 Une lignée d’animaux » choisie)</span><div class="dkw"><div class="inst"><span class="eyebrow">INSTALLATION</span><h2>La base généalogique doit être importée.</h2>
+<p>Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d’une base vide.</p>
+<div class="iopts"><div class="icard"><h3>Importer un fichier</h3><p>GEDCOM (.ged), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés.</p>
+<span class="fbtn">📁 Choisir un fichier</span><br><span class="btn">⤒ Importer</span></div><div class="icard"><h3>Créer une première personne</h3><p>Initialise une base vide avec une première fiche, à compléter ensuite.</p>
+<label class="fl">Prénom<span class="inp">&nbsp;</span></label><label class="fl">Nom<span class="inp">&nbsp;</span></label>
+<span class="btn">Créer et ouvrir la base</span><br><span class="other on">Je veux faire autre chose ▴</span></div></div><div class="ofold"><h3>Qu’est-ce que tu veux faire avec l’app ?</h3><p>Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après.</p>
+<div class="usages"><div class="uz def"><span class="rk"></span><span class="ui">🌳</span><b>Ma généalogie</b><span class="pp">Ta famille, tes ancêtres, leurs actes et leurs photos.</span><small><em>Ce qui change</em>Rien : l’app telle qu’elle est. Premier écran : « Créer la première personne ».</small></div><div class="uz on"><span class="rk"></span><span class="ui">🐾</span><b>Une lignée d’animaux</b><span class="pp">Un élevage, le pedigree de tes chiens, chats, chevaux…</span><small><em>Ce qui change</em>Personnes → 🐾 Animaux. Premier écran : « Créer le premier animal ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🔭</span><b>Recenser des animaux</b><span class="pp">Suivre des animaux : baguage, puces, observations, trajets.</span><small><em>Ce qui change</em>Personnes → 🐾 Animaux, + 🐾 Suivi des animaux. Premier écran : le Suivi.</small></div><div class="uz"><span class="rk"></span><span class="ui">🏠</span><b>L’histoire d’une maison ou d’un village</b><span class="pp">Qui a vécu où, de génération en génération, pièce par pièce.</span><small><em>Ce qui change</em>+ 🏠 Maisons et lieux, Carte en avant. Premier écran : « Créer la maison ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🎨</span><b>Le catalogue d’un artiste ou d’une collection</b><span class="pp">Ses œuvres, ses expositions, son catalogue raisonné.</span><small><em>Ce qui change</em>+ 🎨 Artistes et œuvres. Premier écran : « Créer l’artiste ».</small></div><div class="uz"><span class="rk"></span><span class="ui">📚</span><b>Un fonds d’archives ou un musée familial</b><span class="pp">Des photos, des lettres, des objets à classer et à décrire.</span><small><em>Ce qui change</em>+ 📚 Archives et médias, + 🏛 Musée. Premier écran : « ⤒ Importer les premiers fichiers ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🔤</span><b>L’étude d’un nom de famille</b><span class="pp">Tous les porteurs d’un nom, ses variantes, d’où ils viennent.</span><small><em>Ce qui change</em>+ 🔤 Le nom étudié, Carte des porteurs. Premier écran : « Choisir le nom ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🏭</span><b>L’histoire d’une entreprise ou d’une association</b><span class="pp">Ses lieux, ses dirigeants, ses salariés ou ses membres.</span><small><em>Ce qui change</em>+ 🏭 L’entreprise, Personnes = « Membres ». Premier écran : « Créer l’entreprise ».</small></div></div>
+<div class="ofoot"><span>ℹ️ Rien n’est figé : Maintenance → Apparence → « 🧭 Usage de l’app ».</span><span class="lnk">▴ Replier</span></div></div></div></div></div><div><span class="lab">Téléphone · 390 px</span><div class="phone"><div class="inst"><span class="eyebrow">INSTALLATION</span><h2>La base généalogique doit être importée.</h2>
+<p>Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d’une base vide.</p>
+<div class="iopts"><div class="icard"><h3>Importer un fichier</h3><p>GEDCOM (.ged), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés.</p>
+<span class="fbtn">📁 Choisir un fichier</span><br><span class="btn">⤒ Importer</span></div><div class="icard"><h3>Créer une première personne</h3><p>Initialise une base vide avec une première fiche, à compléter ensuite.</p>
+<label class="fl">Prénom<span class="inp">&nbsp;</span></label><label class="fl">Nom<span class="inp">&nbsp;</span></label>
+<span class="btn">Créer et ouvrir la base</span><br><span class="other on">Je veux faire autre chose ▴</span></div></div><div class="ofold"><h3>Qu’est-ce que tu veux faire avec l’app ?</h3><p>Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après.</p>
+<div class="usages"><div class="uz def"><span class="rk"></span><span class="ui">🌳</span><b>Ma généalogie</b><span class="pp">Ta famille, tes ancêtres, leurs actes et leurs photos.</span><small><em>Ce qui change</em>Rien : l’app telle qu’elle est. Premier écran : « Créer la première personne ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🐾</span><b>Une lignée d’animaux</b><span class="pp">Un élevage, le pedigree de tes chiens, chats, chevaux…</span><small><em>Ce qui change</em>Personnes → 🐾 Animaux. Premier écran : « Créer le premier animal ».</small></div><div class="uz on"><span class="rk"></span><span class="ui">🔭</span><b>Recenser des animaux</b><span class="pp">Suivre des animaux : baguage, puces, observations, trajets.</span><small><em>Ce qui change</em>Personnes → 🐾 Animaux, + 🐾 Suivi des animaux. Premier écran : le Suivi.</small></div><div class="uz"><span class="rk"></span><span class="ui">🏠</span><b>L’histoire d’une maison ou d’un village</b><span class="pp">Qui a vécu où, de génération en génération, pièce par pièce.</span><small><em>Ce qui change</em>+ 🏠 Maisons et lieux, Carte en avant. Premier écran : « Créer la maison ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🎨</span><b>Le catalogue d’un artiste ou d’une collection</b><span class="pp">Ses œuvres, ses expositions, son catalogue raisonné.</span><small><em>Ce qui change</em>+ 🎨 Artistes et œuvres. Premier écran : « Créer l’artiste ».</small></div><div class="uz"><span class="rk"></span><span class="ui">📚</span><b>Un fonds d’archives ou un musée familial</b><span class="pp">Des photos, des lettres, des objets à classer et à décrire.</span><small><em>Ce qui change</em>+ 📚 Archives et médias, + 🏛 Musée. Premier écran : « ⤒ Importer les premiers fichiers ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🔤</span><b>L’étude d’un nom de famille</b><span class="pp">Tous les porteurs d’un nom, ses variantes, d’où ils viennent.</span><small><em>Ce qui change</em>+ 🔤 Le nom étudié, Carte des porteurs. Premier écran : « Choisir le nom ».</small></div><div class="uz"><span class="rk"></span><span class="ui">🏭</span><b>L’histoire d’une entreprise ou d’une association</b><span class="pp">Ses lieux, ses dirigeants, ses salariés ou ses membres.</span><small><em>Ce qui change</em>+ 🏭 L’entreprise, Personnes = « Membres ». Premier écran : « Créer l’entreprise ».</small></div></div>
+<div class="ofoot"><span>ℹ️ Rien n’est figé : Maintenance → Apparence → « 🧭 Usage de l’app ».</span><span class="lnk">▴ Replier</span></div></div></div></div></div></div><p class=note>Sur un téléphone, tout passe sur une colonne : les deux cartes d’installation l’une sous l’autre, puis les 8 usages en liste ; la ligne « Ce qui change » ne s’affiche que pour la carte choisie, pour rester court. Cibles d’au moins 44 px. En sombre : la carte choisie garde son bord bleu clair et sa coche, lisibles sur fond foncé.</p></div>
+</div>
+<p class="sub" style="margin-top:22px">Usages proposés : 🌳 Ma généalogie (par défaut) · 🐾 Une lignée d’animaux · 🔭 Recenser des animaux · 🏠 L’histoire d’une maison ou d’un village · 🎨 Le catalogue d’un artiste ou d’une collection · 📚 Un fonds d’archives ou un musée familial · 🔤 L’étude d’un nom de famille · 🏭 L’histoire d’une entreprise ou d’une association.</p>
+</body></html>
