@@ -35,12 +35,14 @@ STATIONS = [
 
 def relief(lat, lon):
     """altitudes fabriquées : le Gers presque plat (≈ 70–90 m), une montagne près de Chamonix, 0 ailleurs (mer)"""
+    if 46 <= lat < 47 and 12 <= lon < 13:  # Dolomites (Cortina d'Ampezzo ≈ 1 220 m) : l'altitude seulement, pas de météo
+        return 1100 + 150 * math.exp(-((lat - 46.6) ** 2 + (lon - 12.2) ** 2) / 0.05)
     if 45 <= lat < 47 and 6 <= lon < 8:
         return 400 + 700 * math.exp(-((lat - 45.92) ** 2 + (lon - 6.85) ** 2) / 0.02)
     return 80 + 10 * math.sin(lat * 50) * math.cos(lon * 40)
 
 
-RELIEF_TILES = [(43, 0), (44, 0), (45, 6)]
+RELIEF_TILES = [(43, 0), (44, 0), (45, 6), (46, 12)]
 # carreaux ERA5 (0,25°) : autour du Gers, de Mende (Lozère, loin des stations), d'Uccle, de Genève, de Findel
 ERA5 = [(43.5, 0.25), (43.5, 0.5), (43.75, 0.5), (43.75, 0.75), (44.0, 0.5), (44.0, 0.75), (43.5, 0.0), (43.5, 0.75),
         (44.5, 3.5), (50.75, 4.25), (46.25, 6.0), (49.5, 6.25)]
@@ -151,7 +153,7 @@ def main(out):
     if os.path.exists(path):
         os.remove(path)
     db = F.open_db(path, 'socle', 'Socle (jeu d’essai fabriqué)')
-    F.set_meta(db, countries='FR,BE,CH,LU', built='2026-10-22', fixture='1')
+    F.set_meta(db, countries='FR,BE,CH,LU', built='2026-10-22', fixture='1', relief_countries='FR,BE,CH,LU,IT,NL,ES,DE,PT,GB,PL,DK,CZ,SK')
     F.add_sources(db, ['meteofrance', 'meteoswiss', 'irm', 'meteolux', 'era5', '20cr', 'copdem'], 2025)
     n = F.ELEVATION_N
     for la, lo in RELIEF_TILES:
@@ -190,6 +192,24 @@ def main(out):
     db.execute('VACUUM')
     db.close()
     info = F.wrap_pack(tmp, os.path.join(out, 'meteo-pack-complet.lcmeteo'))
+    os.remove(tmp)
+    # Un « pack Europe » : une longue série d'Italie (GHCN) et la reconstitution 20CR autour des Dolomites (1836–1939)
+    tmp = os.path.join(out, 'meteo-europe.tmp.sqlite')
+    if os.path.exists(tmp):
+        os.remove(tmp)
+    db = F.open_db(tmp, 'europe', 'Pack Europe (jeu d’essai fabriqué)')
+    F.set_meta(db, countries='EUROPE', station_countries='IT', built='2026-10-22', fixture='1')
+    F.add_sources(db, ['ghcn', '20cr'], 2025)
+    db.execute('INSERT INTO stations(id, source, code, nom, pays, lat, lon, alt, debut, fin) VALUES(?,?,?,?,?,?,?,?,?,?)',
+               (1, 'ghcn', 'ITE00100554', 'Milan', 'IT', 45.4717, 9.1892, 150, 1880, 1890))
+    write_series(db, 'daily', 'station_id', 1, range(1880, 1891), gen_year, 45.47, 150, 4242, normals_kind='station')
+    for k, (lat, lon) in enumerate([(46.0, 12.0), (47.0, 12.0), (46.0, 13.0)]):
+        db.execute('INSERT INTO grid(id, source, lat, lon, alt, debut, fin, pas) VALUES(?,?,?,?,?,?,?,?)', (k + 1, '20cr', lat, lon, 1200, 1836, 1939, 1.0))
+        write_series(db, 'grid_daily', 'grid_id', k + 1, range(1836, 1940), gen_year, lat, 1200, 7700 + k, normals_kind='grid')
+    db.commit()
+    db.execute('VACUUM')
+    db.close()
+    F.wrap_pack(tmp, os.path.join(out, 'meteo-pack-europe.lcmeteo'))
     os.remove(tmp)
     for f in sorted(os.listdir(out)):
         if f.startswith('meteo'):

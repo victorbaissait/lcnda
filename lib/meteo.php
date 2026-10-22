@@ -26,15 +26,25 @@ const METEO_STATION_KM = 40.0;
 const METEO_MAX_ALT = 150.0;
 const METEO_CACHE_VERSION = 4; // à monter quand le calcul change
 const METEO_HEADER_SIZE = 4096;
+/** les pays dont la grille des altitudes est dans le socle (meta.relief_countries) ; la météo, elle, reste FR, BE, CH, LU */
+const METEO_COUNTRY_NAMES = ['FR' => 'France', 'BE' => 'Belgique', 'CH' => 'Suisse', 'LU' => 'Luxembourg', 'IT' => 'Italie', 'NL' => 'Pays-Bas', 'ES' => 'Espagne',
+    'DE' => 'Allemagne', 'PT' => 'Portugal', 'GB' => 'Royaume-Uni', 'PL' => 'Pologne', 'DK' => 'Danemark', 'CZ' => 'Tchéquie', 'SK' => 'Slovaquie'];
 const METEO_SOURCES_INFO = [
     'meteofrance' => ['Météo-France', 'Stations de France, chaque jour ; heure par heure (synoptiques)', '≈ 1850 / 1878 → 2025 ; heures depuis 1950', 'Socle (≈ 300) · Pack complet (toutes)', 'Licence Ouverte 2.0', 'Source : Météo-France'],
     'meteoswiss' => ['MétéoSuisse', 'Stations de Suisse, chaque jour', '1864 → 2025', 'Socle · Pack complet', 'CC BY 4.0', 'Source: MeteoSwiss'],
     'irm' => ['IRM / KMI', 'Stations de Belgique, chaque jour', '1995 → 2025', 'Socle · Pack complet', 'CC BY 4.0', 'Source : IRM / KMI'],
     'meteolux' => ['MeteoLux', 'Luxembourg-Findel, chaque jour', '1947 → 2025', 'Socle', 'CC0', 'Source : MeteoLux'],
     'dwd' => ['DWD (Deutscher Wetterdienst)', 'Stations d’Allemagne, chaque jour', '≈ 1880 → 2025', 'Pack Europe', 'Datenlizenz Deutschland – Namensnennung 2.0', 'Quelle: Deutscher Wetterdienst'],
-    'copdem' => ['Copernicus DEM GLO-90', 'Altitude du sol : grille ≈ 1 km (30″), tirée du modèle à 90 m', '—', 'Socle (France, Belgique, Suisse, Luxembourg) · Pack Europe (en option)', 'Licence Copernicus DEM GLO-90 (libre, redistribution permise avec mention)', 'Altitudes : Copernicus DEM GLO-90 © DLR e.V. 2010-2014 et © Airbus Defence and Space GmbH 2014-2018, fourni dans le cadre de COPERNICUS par l’Union européenne et l’ESA'],
+    'copdem' => ['Copernicus DEM GLO-90', 'Altitude du sol : grille ≈ 1 km (30″), tirée du modèle à 90 m', '—', 'Socle (France, Belgique, Suisse, Luxembourg, Italie, Pays-Bas, Espagne, Allemagne, Portugal, Royaume-Uni, Pologne, Danemark, Tchéquie, Slovaquie) · Pack Europe (en option)', 'Licence Copernicus DEM GLO-90 (libre, redistribution permise avec mention)', 'Altitudes : Copernicus DEM GLO-90 © DLR e.V. 2010-2014 et © Airbus Defence and Space GmbH 2014-2018, fourni dans le cadre de COPERNICUS par l’Union européenne et l’ESA'],
+    'knmi' => ['KNMI (Pays-Bas)', 'Stations des Pays-Bas, chaque jour', '1901 → 2025', 'Pack Europe', 'CC BY 4.0', 'Bron: KNMI'],
+    'dmi' => ['DMI (Danemark)', 'Stations du Danemark, chaque jour', '≈ 1953 → 2025', 'Pack Europe', 'CC BY 4.0', 'Kilde: DMI'],
+    'midas' => ['Met Office MIDAS-Open (Royaume-Uni)', 'Stations du Royaume-Uni, chaque jour', '≈ 1853 → 2025', 'Pack Europe', 'Open Government Licence v3', 'Contains public sector information licensed under the Open Government Licence v3.0 — Met Office MIDAS Open (CEDA)'],
+    'aemet' => ['AEMET (Espagne)', 'Stations d’Espagne, chaque jour', '≈ 1920 → 2025', 'Pack Europe', 'Réutilisation libre avec mention', '© AEMET — Información elaborada por la Agencia Estatal de Meteorología'],
+    'imgw' => ['IMGW-PIB (Pologne)', 'Stations synoptiques de Pologne, chaque jour', '1951 → 2025', 'Pack Europe', 'Données publiques, mention obligatoire', 'Źródło: Instytut Meteorologii i Gospodarki Wodnej – Państwowy Instytut Badawczy'],
+    'chmi' => ['ČHMÚ (Tchéquie)', 'Stations de Tchéquie, chaque jour', '≈ 1961 → 2025', 'Pack Europe', 'CC BY 4.0', 'Zdroj: Český hydrometeorologický ústav'],
+    'ghcn' => ['GHCN-Daily (NOAA)', 'Quelques longues séries d’Italie, du Portugal et de Slovaquie', '≈ 1860 → 2025', 'Pack Europe', 'Domaine public (données américaines) ; autres pays : échange OMM, usage non commercial conseillé', 'Menne et al., Global Historical Climatology Network – Daily (GHCN-Daily), NOAA NCEI'],
     'era5' => ['ERA5 (Copernicus)', 'Réanalyse : carreaux ≈ 30 km, 4 heures par jour (socle) ou toutes les heures (packs)', '1940 → 2025', 'Socle · Pack complet · Pack Europe', 'CC BY 4.0', 'Generated using Copernicus Climate Change Service information [2025]'],
-    '20cr' => ['20CRv3 (NOAA / DOE)', 'Reconstitution quotidienne, ≈ 100 km', '1836 → 1939', 'Socle', 'CC BY 4.0 — usage libre avec mention', '20th Century Reanalysis V3, NOAA / DOE'],
+    '20cr' => ['20CRv3 (NOAA / DOE)', 'Reconstitution quotidienne, ≈ 100 km', '1836 → 1939', 'Socle (France, Belgique, Suisse, Luxembourg) · Pack Europe (toute l’Europe)', 'CC BY 4.0 — usage libre avec mention', '20th Century Reanalysis V3, NOAA / DOE'],
 ];
 
 /* ═════════════════════════ Les fichiers ═════════════════════════ */
@@ -546,6 +556,8 @@ function meteo_day(float $lat, float $lon, ?float $alt, string $date, ?string $t
     if (!$series) {
         $res['ok'] = false; $res['reliability'] = 'none'; $res['why'] = 'far';
         $res['first'] = meteo_first_station($lat, $lon);
+        // ni station à moins de 120 km, ni carreau : hors de la zone de la météo (ex. l'Italie, qui n'a que l'altitude)
+        if (!$res['first'] && !meteo_near_cell('era5', $lat, $lon, max(1940, $y)) && !meteo_near_cell('20cr', $lat, $lon, min(1939, max(1836, $y)))) { $res['why'] = 'out'; }
         return $res;
     }
 
@@ -888,6 +900,10 @@ function meteo_status_data(): array
                 $info += ['title' => $meta['title'] ?? '', 'built' => $meta['built'] ?? '', 'countries' => $meta['countries'] ?? '', 'fixture' => !empty($meta['fixture']),
                     'stations' => (int) $st['n'], 'cells' => (int) $gr['n'], 'from' => min(array_filter([(int) $st['a'], (int) $gr['a']]) ?: [0]), 'to' => max((int) $st['b'], (int) $gr['b']),
                     'hours_from' => min(array_filter([(int) $st['h'], (int) $gr['h']]) ?: [0])];
+                $info['station_countries'] = array_values(array_filter(array_column($pdo->query('SELECT DISTINCT pays FROM stations ORDER BY pays')->fetchAll(), 'pays')));
+                $info['sources'] = array_column($pdo->query('SELECT id FROM sources ORDER BY id')->fetchAll(), 'id');
+                $info['c20'] = $pdo->query("SELECT MIN(debut) a, MAX(fin) b, COUNT(*) n FROM grid WHERE source='20cr'")->fetch();
+                $info['relief_countries'] = array_values(array_filter(explode(',', (string) ($meta['relief_countries'] ?? ''))));
                 $info['relief'] = (int) ($pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='elevation'")->fetchColumn() ? $pdo->query('SELECT COUNT(*) FROM elevation')->fetchColumn() : 0);
             } catch (Throwable) { $info['ok'] = false; }
         }
@@ -910,6 +926,11 @@ function meteo_about_data(): array
         $u = $used[$id] ?? null;
         $rows[] = ['id' => $id, 'nom' => $nom, 'what' => $what, 'years' => $years, 'in' => $in, 'licence' => $u['licence'] ?? $lic, 'mention' => $u['mention'] ?? $mention, 'url' => $u['url'] ?? '', 'installed' => $u ? $u['in'] : []];
     }
+    // les pays qui ont l'altitude (grille du relief) : dits sur la ligne Copernicus DEM
+    $rc = [];
+    foreach (meteo_files() as $f) { $pdo = meteo_pdo($f['path']); if ($pdo) { $v = $pdo->query("SELECT value FROM meta WHERE key='relief_countries'")->fetchColumn(); foreach (array_filter(explode(',', (string) $v)) as $c) { $rc[$c] = METEO_COUNTRY_NAMES[$c] ?? $c; } } }
+    foreach ($rows as &$row) { if ($row['id'] === 'copdem' && $rc) { $row['in'] = 'Socle : ' . implode(', ', $rc); $row['countries'] = array_keys($rc); } }
+    unset($row);
     $rows[] = ['id' => 'normals', 'nom' => 'Normales', 'what' => 'Moyennes sur 30 ans par station et par mois', 'years' => '1901–1930 → 1991–2020', 'in' => 'Socle', 'licence' => 'Calculées par l’app depuis les sources ci-dessus', 'mention' => '', 'url' => '', 'installed' => []];
     return ['sources' => $rows];
 }

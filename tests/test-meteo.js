@@ -53,7 +53,7 @@ require 'lib/paths.php';
 $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p = null;
 require 'lib/bootstrap.php'; $pdo = db();
 $t = fn($tag) => (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='$tag' LIMIT 1")->fetchColumn();
-$pdo->exec("INSERT INTO places(id,name,county,state,country,latitude,longitude) VALUES(1,'Lectoure','Gers','Occitanie','France',43.934,0.622),(2,'Auch','Gers','Occitanie','France',43.646,0.586),(3,'Mauvezin','Gers','Occitanie','France',43.728,0.873),(4,'Mende','Lozère','Occitanie','France',44.518,3.5),(5,'Sans coordonnées','Gers','','France',NULL,NULL),(6,'Les Praz','Haute-Savoie','Auvergne-Rhône-Alpes','France',45.93,6.80)");
+$pdo->exec("INSERT INTO places(id,name,county,state,country,latitude,longitude) VALUES(1,'Lectoure','Gers','Occitanie','France',43.934,0.622),(2,'Auch','Gers','Occitanie','France',43.646,0.586),(3,'Mauvezin','Gers','Occitanie','France',43.728,0.873),(4,'Mende','Lozère','Occitanie','France',44.518,3.5),(5,'Sans coordonnées','Gers','','France',NULL,NULL),(6,'Les Praz','Haute-Savoie','Auvergne-Rhône-Alpes','France',45.93,6.80),(7,'Cortina d’Ampezzo','Belluno','Vénétie','Italie',46.537,12.136)");
 $pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status,is_start) VALUES(1,'Jean','DUPOUY','male','deceased',1),(2,'Marie','LABARTHE','female','deceased',0),(3,'Pierre','DUPOUY','male','deceased',0),(4,'Germaine','DUPOUY','female','deceased',0),(5,'Bertrand','DUPOUY','male','deceased',0),(6,'Jeanne','SÉGUÉLA','female','deceased',0),(7,'Dominique','DUPOUY','male','deceased',0),(8,'Léa','VIVANTE','female','living',0),(9,'Hugo','VIVANT','male','living',0),(10,'Léon','MONTAGNARD','male','deceased',0)");
 $pdo->exec("INSERT INTO families(id,partner1_id,partner2_id) VALUES(1,1,2),(2,9,8)");
 $pdo->exec("INSERT INTO family_children(family_id,child_id) VALUES(1,3)");
@@ -63,7 +63,7 @@ foreach ([
  [4,'person',1,null,'BURI','6 février 1978',1978,1,''], [5,'family',null,1,'MARR','22 octobre 1926',1926,2,''], [6,'person',4,null,'BIRT','9 mars 1920',1920,3,''],
  [7,'person',5,null,'DEAT','17 décembre 1944',1944,4,''], [8,'person',6,null,'CHR','2 mai 1852',1852,1,''], [9,'person',7,null,'BIRT','11 avril 1790',1790,1,''],
  [10,'person',3,null,'BIRT','vers 1930',1930,1,''], [11,'person',2,null,'DEAT','14 juillet 1985',1985,1,'16:00'], [12,'family',null,2,'MARR','22 octobre 1976',1976,2,''],
- [13,'person',3,null,'DEAT','2 mars 1990',1990,5,''], [14,'person',10,null,'DEAT','3 février 1978',1978,6,''],
+ [13,'person',3,null,'DEAT','2 mars 1990',1990,5,''], [14,'person',10,null,'DEAT','3 février 1978',1978,6,''], [15,'person',10,null,'BIRT','12 mai 1880',1880,7,''], [16,'person',10,null,'BURI','8 février 1978',1978,7,''],
 ] as $r) { $r[4] = $t($r[4]); $ev->execute($r); }
 echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
 if (seedOut.status !== 0 || !String(seedOut.stdout).includes('ok')) { console.error(seedOut.stderr || seedOut.stdout); process.exit(1); }
@@ -194,6 +194,24 @@ async function importPack(S, file = pack) {
             assert.equal((await post('meteo_pack_remove', { kind: 'socle' })).status, 422, 'le socle livré avec l’app ne se supprime pas');
             assert.equal((await post('meteo_pack_remove', { kind: 'complet' })).status, 200);
         });
+        await t('pack Europe : un lieu italien en 1880 reçoit « Reconstitution grossière » (20CR), rien sans le pack ; les nouvelles sources sont citées', async () => {
+            assert.equal((await get('meteo_events', { ids: '15' })).events[15].why, 'out', 'sans le pack Europe : pas de météo inventée');
+            const r = await importPack(S, path.join(fx, 'meteo-pack-europe.lcmeteo'));
+            assert.equal(r.status, 200, JSON.stringify(r.body)); assert.equal(r.body.kind, 'europe');
+            const st = (await get('meteo_status')).files.europe;
+            assert.deepEqual(st.station_countries, ['IT']); assert.deepEqual([st.c20.a, st.c20.b], [1836, 1939]); assert.ok(st.sources.includes('ghcn'));
+            const e = (await get('meteo_events', { ids: '15' })).events[15];
+            assert.deepEqual([e.reliability, e.cell.source], ['coarse', '20cr']);
+            assert.match(e.sources.map(x => x.mention).join(' | '), /20th Century Reanalysis/);
+            const milan = (await get('meteo_point', { lat: 45.47, lon: 9.19, date: '1885-06-01', detail: '0' })).result;
+            assert.deepEqual([milan.reliability, milan.station.short], ['measured', 'Milan']);
+            assert.match(milan.sources[0].mention, /GHCN-Daily/);
+            const about = Object.fromEntries((await get('meteo_about')).sources.map(x => [x.id, x]));
+            assert.deepEqual(about.ghcn.installed, ['europe']); assert.match(about.ghcn.licence, /OMM/);
+            for (const id of ['knmi', 'dmi', 'midas', 'aemet', 'imgw', 'chmi']) assert.ok(about[id]?.mention, id);
+            assert.equal((await post('meteo_pack_undo', { kind: 'europe' })).status, 200);
+            assert.equal((await get('meteo_events', { ids: '15' })).events[15].why, 'out', '↶ Annuler : de nouveau rien');
+        });
         await t('un fichier abîmé ou qui n’est pas un pack est refusé ; CSRF ; envoi inconnu', async () => {
             const bad = path.join(tmp, 'abime.lcmeteo');
             const buf = fs.readFileSync(pack); buf[5000] ^= 0xff; fs.writeFileSync(bad, buf);
@@ -227,6 +245,17 @@ async function importPack(S, file = pack) {
             assert.equal(r.result?.altitude ?? r.body.altitude ?? null, null);
             assert.equal((await get('meteo_place', { id: 6 })).altitude, null, '↺ remet l’altitude de la carte');
             assert.equal((await get('meteo_events', { ids: '14' })).events[14].station.short, 'Chamonix');
+        });
+        await t('⛰ hors de la zone météo (Italie) : l’altitude de la carte du relief, aucune météo inventée', async () => {
+            const p = await get('meteo_place', { id: 7 });
+            assert.ok(p.altitude === null && Math.abs(p.auto - 1228) < 8, JSON.stringify(p));
+            const ev = (await get('meteo_events', { ids: '15,16' })).events;
+            for (const id of [15, 16]) { assert.equal(ev[id].ok, false); assert.equal(ev[id].why, 'out', JSON.stringify(ev[id])); assert.equal(ev[id].alt.from, 'carte'); }
+            const st = await get('meteo_status');
+            assert.ok(st.files.socle.relief_countries.includes('IT') && st.files.socle.relief_countries.includes('ES'));
+            assert.equal(st.files.socle.relief, 4);
+            const about = await get('meteo_about');
+            assert.match(about.sources.find(x => x.id === 'copdem').in, /Italie.*Slovaquie/);
         });
         await t('« À propos des données » : chaque source et sa licence', async () => {
             const d = await get('meteo_about');
@@ -390,6 +419,12 @@ async function importPack(S, file = pack) {
                         await p.waitForSelector('.toast:has-text("Altitude remise")');
                         assert.equal((await get('meteo_place', { id: 6 })).altitude, null);
                         await p.keyboard.press('Escape'); await p.keyboard.press('Escape');
+                        // un lieu italien : la ligne vide K10 (pas de météo) et son altitude ≈ (carte du relief)
+                        await p.evaluate(() => window.LCNDA_EXT.meteo.openDay(16));
+                        await p.waitForSelector('dialog.wx-dialog .empty-line');
+                        assert.match(await p.textContent('dialog.wx-dialog .wx-body'), /Pas de météo pour ce lieu/);
+                        assert.match(await p.textContent('dialog.wx-dialog .wx-body'), /Ton lieu≈ 1\u202f?\s?2[0-9]{2} m \(carte du relief\)/);
+                        await p.keyboard.press('Escape');
                         // la monographie de la commune (Graphiques → Lieux) : la case Altitude
                         await p.evaluate(() => { const A = window.LCNDA_APP; A.state.graphMode = 'place_monograph'; A.state.graphPlaceMonograph = {...(A.state.graphPlaceMonograph || {}), id: 6, name: 'Les Praz'}; A.setModule('graphiques'); });
                         await p.waitForSelector('[data-wx-place-alt] .wx-alt', { timeout: 8000 });

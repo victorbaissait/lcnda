@@ -101,8 +101,10 @@
         return '';
     }
     const badgeShort = r => (r.reliability === 'station' ? (UI().badge ? UI().badge(`${Math.round(r.station?.km || 0)} km`, 'yellow') : '') : badge(r));
+    const COUNTRY = {FR: 'France', BE: 'Belgique', CH: 'Suisse', LU: 'Luxembourg', IT: 'Italie', NL: 'Pays-Bas', ES: 'Espagne', DE: 'Allemagne', PT: 'Portugal', GB: 'Royaume-Uni', PL: 'Pologne', DK: 'Danemark', CZ: 'Tchéquie', SK: 'Slovaquie'};
     const emptyText = r => (r.why === 'nodata' ? 'Les données météo ne sont pas installées.' : r.why === 'place' ? 'Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'
-        : r.why === 'date' ? 'La date n’est pas connue au jour près.' : `Pas de relevé connu près d’ici avant ${r.first?.year || 1836}${r.first ? ` (première station : ${r.first.name})` : ''}.`);
+        : r.why === 'date' ? 'La date n’est pas connue au jour près.'
+        : r.why === 'out' ? 'Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste).' : `Pas de relevé connu près d’ici avant ${r.first?.year || 1836}${r.first ? ` (première station : ${r.first.name})` : ''}.`);
     const sourcesLine = r => (r.sources || []).map(x => { const m = x.mention || x.nom || ''; return `${x.id === 'era5' && r.hours_source && r.reliability !== 'estimated' ? 'Heures : ' : ''}${m}${x.licence && !/Copernicus|20th/.test(m) ? ', ' + x.licence : ''}`; }).join(' · ');
     const shown = (r, s = settings()) => r && r.ok && (r.reliability !== 'coarse' || s.coarse);
 
@@ -207,7 +209,7 @@
     /* ═════════════════ M2 : le détail d'un jour ═════════════════ */
     const MOMENTS = {0: 'Nuit', 6: 'Matin', 12: 'Midi', 18: 'Soir'};
     function dayHtml(r, s = settings(), {compact = false} = {}) {
-        if (!r.ok) return A().empty ? A().empty(emptyText(r), {icon: '🌦'}) : esc(emptyText(r));
+        if (!r.ok) return (A().empty ? A().empty(emptyText(r), {icon: '🌦'}) : esc(emptyText(r))) + (r.alt ? `<dl class="wx-kv"><dt>Ton lieu</dt><dd>${esc(`${r.alt.from === 'carte' ? '≈ ' : ''}${metres(r.alt.m)}${r.alt.from === 'carte' ? ' (carte du relief)' : ''}`)}</dd></dl>` : '');
         const lk = look(r, s), parts = [];
         parts.push(`<div class="wx-say"><span class="wx-big" aria-hidden="true">${lk.icon}</span><p><b>${esc(lk.title)}.</b>${s.phrase ? `<br>${esc(lk.desc)}` : ''}</p></div>`);
         if (r.hours?.length) {
@@ -426,7 +428,7 @@
     const fmtSize = b => (b >= 1e9 ? `${String(Math.round(b / 1e8) / 10).replace('.', ',')} Go` : b >= 1e6 ? `${Math.round(b / 1e6)} Mo` : `${Math.max(1, Math.round(b / 1e3))} Ko`);
     const PACKS = [['socle', 'Socle inclus', '1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo'],
         ['complet', 'Pack complet', 'Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go'],
-        ['europe', 'Pack Europe', 'Stations d’Europe (Italie, Espagne, Allemagne…) + ERA5 Europe · ≈ 2 Go']];
+        ['europe', 'Pack Europe', 'Stations d’Allemagne, des Pays-Bas, du Danemark, du Royaume-Uni, d’Espagne, de Pologne, de Tchéquie, d’Italie, du Portugal et de Slovaquie + reconstitution 20CR (1836–1939) et ERA5 sur toute l’Europe · ≈ 1,5 à 3,5 Go']];
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.meteo = async token => {
         const ws = document.getElementById('workspace'); if (!ws) return;
@@ -441,7 +443,7 @@
             const dataRows = PACKS.map(([k, name, sub]) => {
                 const f = files[k];
                 const on = f && f.ok;
-                const desc = on ? `${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · relief : ${A().plural(f.relief, 'carré')} de 1°` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
+                const desc = on ? `${k === 'europe' && f.station_countries?.length ? `Stations : ${f.station_countries.map(c => COUNTRY[c] || c).join(', ')} · ` : ''}${k === 'europe' && f.c20?.n ? `20CR ${f.c20.a}–${f.c20.b} (toute l’Europe) · ` : ''}${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · altitudes : ${A().plural(f.relief, 'carré')} de 1°${f.relief_countries?.length ? ` (${f.relief_countries.map(c => COUNTRY[c] || c).join(', ')})` : ''}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
                 const acts = on ? (f.removable ? `<button type="button" class="button small secondary" data-wx-remove="${k}">🗑 Supprimer le pack</button>` : '')
                     : `<button type="button" class="button small secondary" data-wx-howto="${k}">⤓ ${k === 'socle' ? 'Comment l’obtenir' : `Télécharger le ${k === 'complet' ? 'pack complet (≈ 3 Go)' : 'pack Europe (≈ 2 Go)'}`}</button><button type="button" class="button small secondary" data-wx-import="${k}">⤒ Importer le fichier…</button>`;
                 return `<div class="wx-data-row"><span><b>${esc(name)}</b><small>${esc(desc)}</small></span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;

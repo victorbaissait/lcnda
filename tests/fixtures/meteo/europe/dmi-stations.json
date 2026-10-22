@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [12.5269, 55.6764]}, "properties": {"stationId": "06180", "name": "K\u00f8benhavn Lufthavn", "stationHeight": 5.0, "status": "Active", "type": "Synop"}}]}

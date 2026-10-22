@@ -112,6 +112,8 @@ Thumbs.db
 
 # Exceptions : fichiers d'essai des tests (fictifs)
 !/tests/fixtures/*.ged
+# Fichiers d'exemple des sources météo (format réel, valeurs fabriquées)
+!/tests/fixtures/meteo/europe/*.zip
 
 # Limites officielles espagnoles (CNIG), téléchargées par Victor : source de scripts/build-reference-europe.php
 /lineas_limite/

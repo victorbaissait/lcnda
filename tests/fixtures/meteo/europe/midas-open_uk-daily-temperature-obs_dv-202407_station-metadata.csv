@@ -1,0 +1,6 @@
+Conventions,G,BADC-CSV,1
+title,G,Station metadata for the MIDAS Open: UK daily temperature data
+data
+src_id,station_name,station_file_name,historic_county,height,station_latitude,station_longitude,first_year,last_year
+00009,LERWICK,lerwick,shetland,82,60.139,-1.183,1930,2025
+end data

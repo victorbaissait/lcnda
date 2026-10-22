@@ -69,6 +69,43 @@ COPDEM_NAME = 'Copernicus_DSM_COG_30_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM'
 # DWD (Allemagne, pack Europe) : relevés quotidiens « KL »
 DWD_KL_HIST = 'https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/historical/'
 DWD_KL_STATIONS = DWD_KL_HIST + 'KL_Tageswerte_Beschreibung_Stationen.txt'
+DWD_MIN_YEARS = 60
+# ── Pack Europe : les stations des pays qui publient librement (une fonction par source ; adresses à corriger ici si elles changent) ──
+# Pays-Bas — KNMI (open data, CC BY 4.0) : un fichier zip par station (« etmgeg »)
+KNMI_DAILY = 'https://cdn.knmi.nl/knmi/map/page/klimatologie/gegevens/daggegevens/etmgeg_{stn}.zip'
+KNMI_STATIONS = ['260', '240', '235', '270', '280', '290', '310', '344', '350', '370', '375', '380', '391', '279', '251', '377']
+# Danemark — DMI (open data, CC BY 4.0) : API « climateData » (clé facultative : variable DMI_API_KEY)
+DMI_API = 'https://dmigw.govcloud.dk/v2/climateData/collections'
+DMI_STATIONS = ['06180', '06030', '06060', '06110', '06120', '06149', '06170', '06190', '06041', '06079', '06102', '06156']
+DMI_PARAMS = {'min_temp': 'TN', 'max_temp_w_date': 'TX', 'acc_precip': 'RR', 'max_wind_speed_3sec': 'FX', 'bright_sunshine': 'SS', 'mean_cloud_cover': 'NN'}
+# Royaume-Uni — Met Office MIDAS-Open via CEDA (Open Government Licence v3) : compte CEDA gratuit, jeton dans CEDA_TOKEN
+MIDAS_BASE = 'https://dap.ceda.ac.uk/badc/ukmo-midas-open/data/'
+MIDAS_VERSION = 'dataset-version-202407'
+MIDAS_TEMP = 'uk-daily-temperature-obs'
+MIDAS_RAIN = 'uk-daily-rain-obs'
+MIDAS_MAX_STATIONS = 40
+# Espagne — AEMET OpenData (réutilisation libre avec mention) : clé gratuite, dans AEMET_API_KEY ou --aemet-cle
+AEMET_API = 'https://opendata.aemet.es/opendata/api'
+AEMET_STATIONS = ['3195', '0076', '8416', '5783', '1082', '6155A', '9434', '2422', '1428', '9981A', 'C447A', 'C649I', 'B278', '4452', '3469A',
+                  '1249X', '2867', '5530E', '7178I', '8025', '1495', '9170', '2030', '6325O', '0016A', '1690A', '5270B', '4121', '3260B', '2614']
+AEMET_CHUNK_YEARS = 4
+# Pologne — IMGW-PIB (danepubliczne.imgw.pl, données publiques, mention de la source) : un zip par station et par an (ou par 5 ans avant 2001)
+IMGW_BASE = 'https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_meteorologiczne/dobowe/synop/'
+IMGW_STATIONS = {  # code IMGW : (nom, lat, lon, alt)
+    '375': ('Warszawa-Okęcie', 52.163, 20.961, 106), '566': ('Kraków-Balice', 50.078, 19.785, 237), '330': ('Poznań', 52.417, 16.835, 84),
+    '424': ('Wrocław', 51.103, 16.880, 120), '155': ('Gdańsk-Rębiechowo', 54.384, 18.466, 138), '205': ('Szczecin', 53.395, 14.622, 1),
+    '495': ('Lublin-Radawiec', 51.217, 22.393, 240), '295': ('Białystok', 53.107, 23.162, 148), '520': ('Katowice', 50.241, 19.033, 278),
+    '625': ('Zakopane', 49.294, 19.960, 855), '250': ('Toruń', 53.042, 18.595, 69), '360': ('Łódź-Lublinek', 51.721, 19.398, 187),
+    '670': ('Kasprowy Wierch', 49.233, 19.982, 1991), '135': ('Łeba', 54.754, 17.535, 2), '580': ('Rzeszów-Jasionka', 50.110, 22.042, 200)}
+# Tchéquie — ČHMÚ (opendata.chmi.cz, CC BY 4.0) : un fichier par station et par élément
+CHMI_BASE = 'https://opendata.chmi.cz/meteorology/climate/historical/'
+CHMI_META = CHMI_BASE + 'metadata/meta1.csv'
+CHMI_DAILY = CHMI_BASE + 'data/daily/{elem}/dly-{wsi}-{elem}.csv'
+CHMI_ELEMENTS = {'TMA': 'TX', 'TMI': 'TN', 'SRA': 'RR', 'SCE': 'SN', 'SSV': 'SS', 'Fmax': 'FX'}
+CHMI_MAX_STATIONS = 25
+# Italie, Portugal, Slovaquie — GHCN-Daily (NOAA, domaine public pour les données des États-Unis ; voir la note OMM, docs/METEO.md)
+GHCN_BASE = 'https://www.ncei.noaa.gov/pub/data/ghcn/daily/'
+GHCN_COUNTRIES = {'IT': ('IT', 18), 'PO': ('PT', 8), 'LO': ('SK', 6)}  # code FIPS de GHCN → (pays ISO, combien de stations)
 # 20CRv3 (NOAA PSL) : fichiers quotidiens, lus par OPeNDAP (seule la boîte voulue voyage), sinon téléchargés en entier
 C20_OPENDAP = 'https://psl.noaa.gov/thredds/dodsC/Datasets/20thC_ReanV3/Dailies/'
 C20_HTTP = 'https://downloads.psl.noaa.gov/Datasets/20thC_ReanV3/Dailies/'
@@ -112,7 +149,7 @@ class Net:
     def path(self, name):
         return os.path.join(self.offline or self.cache, name)
 
-    def get(self, url, name, what='', binary=True, missing_ok=False):
+    def get(self, url, name, what='', binary=True, missing_ok=False, headers=None):
         """télécharge une fois (reprise d'un fichier .part) → chemin du fichier gardé ; missing_ok : None si la source n'a pas ce fichier"""
         dest = self.path(name)
         if os.path.exists(dest) and os.path.getsize(dest) > 0:
@@ -127,7 +164,7 @@ class Net:
         for attempt in range(4):
             try:
                 have = os.path.getsize(part) if os.path.exists(part) else 0
-                req = urllib.request.Request(url, headers={'User-Agent': UA, **({'Range': f'bytes={have}-'} if have else {})})
+                req = urllib.request.Request(url, headers={'User-Agent': UA, **(headers or {}), **({'Range': f'bytes={have}-'} if have else {})})
                 with urllib.request.urlopen(req, timeout=120) as r, open(part, 'ab' if have and r.status == 206 else 'wb') as out:
                     shutil.copyfileobj(r, out, 1 << 20)
                 os.replace(part, dest)
@@ -136,6 +173,8 @@ class Net:
                 if e.code == 416 and os.path.exists(part):
                     os.replace(part, dest)
                     return dest
+                if e.code in (401, 403) and headers:
+                    raise Stop(f'{what or name} : accès refusé (erreur {e.code}) : la clé ou le jeton est faux ou expiré (voir docs/METEO.md).')
                 if missing_ok and e.code in (403, 404):
                     open(dest + '.absent', 'w').close()
                     return None
@@ -382,6 +421,207 @@ def parse_generic_daily(text):
         g = lambda k: num(r[ci[k]]) if ci[k] is not None and ci[k] < len(r) else None
         days[int(f'{y}{mo}{d}')] = {'TN': tenth(g('TN')), 'TX': tenth(g('TX')), 'RR': tenth(g('RR')), 'FX': tenth(g('FX')),
                                     'SS': None if g('SS') is None else int(round(g('SS') * (60 if (g('SS') or 0) < 24 else 1)))}
+    return days
+
+
+def parse_knmi(text):
+    """KNMI « etmgeg_260.txt » : en-tête « # STN LON(east) LAT(north) ALT(m) NAME », puis « STN,YYYYMMDD,…,TN,…,TX,…,SQ,…,RH,…,NG,… »"""
+    meta, out, head = {}, {}, None
+    for line in text.splitlines():
+        m = re.match(r'^#?\s*(\d{3}):?\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+(.+?)\s*$', line)
+        if m and not head:
+            meta[m.group(1)] = {'code': m.group(1), 'nom': m.group(5).strip().title(), 'pays': 'NL', 'lon': float(m.group(2)), 'lat': float(m.group(3)), 'alt': float(m.group(4))}
+            continue
+        if re.match(r'^#\s*STN,YYYYMMDD', line):
+            head = [h.strip() for h in line.lstrip('#').split(',')]
+            continue
+        if head and line.strip() and not line.startswith('#'):
+            v = dict(zip(head, [x.strip() for x in line.split(',')]))
+            d = v.get('YYYYMMDD', '')
+            if not re.match(r'^\d{8}$', d):
+                continue
+            g = lambda k: num(v.get(k))
+            rh, sq, ng = g('RH'), g('SQ'), g('NG')
+            out.setdefault(v['STN'], {})[int(d)] = {'TN': None if g('TN') is None else int(g('TN')), 'TX': None if g('TX') is None else int(g('TX')),
+                'RR': None if rh is None else max(0, int(rh)), 'FX': None if g('FXX') is None else int(g('FXX')),
+                'SS': None if sq is None else max(0, int(round(sq * 6))), 'NN': None if ng is None else int(round(min(8, ng) / 8 * 100))}
+    return meta, out
+
+
+def parse_dmi(features):
+    """DMI « stationValue » (GeoJSON) → {stationId: {AAAAMMJJ: valeurs}}"""
+    out = {}
+    for f in features:
+        p = f.get('properties') or {}
+        k = DMI_PARAMS.get(p.get('parameterId'))
+        t = str(p.get('from') or '')[:10]
+        if not k or not re.match(r'^\d{4}-\d{2}-\d{2}$', t) or p.get('value') is None:
+            continue
+        v = float(p['value'])
+        val = int(round(v * 10)) if k in ('TN', 'TX', 'RR', 'FX') else int(round(v * 60)) if k == 'SS' else int(round(v))
+        out.setdefault(str(p.get('stationId')), {}).setdefault(int(t.replace('-', '')), {})[k] = val
+    return out
+
+
+def parse_dmi_stations(features):
+    out = {}
+    for f in features:
+        p, g = f.get('properties') or {}, (f.get('geometry') or {}).get('coordinates') or [None, None]
+        sid = str(p.get('stationId') or '')
+        if sid and g[0] is not None:
+            out[sid] = {'code': sid, 'nom': str(p.get('name') or sid).title(), 'pays': 'DK', 'lat': float(g[1]), 'lon': float(g[0]), 'alt': p.get('stationHeight')}
+    return out
+
+
+def parse_midas(text, kind='temp'):
+    """MIDAS-Open (BADC-CSV) : métadonnées (observation_station, location, height), puis « data » … « end data »
+    → (meta, {AAAAMMJJ: valeurs}). Températures : relevé de 9 h → la journée d'avant ; pluie : ob_date."""
+    meta = {'pays': 'GB'}
+    rows = list(csv.reader(io.StringIO(text)))
+    days = {}
+    try:
+        start = next(i for i, r in enumerate(rows) if r and r[0].strip() == 'data')
+    except StopIteration:
+        return meta, days
+    for r in rows[:start]:
+        if len(r) >= 3 and r[0] == 'observation_station':
+            meta['nom'] = r[2].strip().title()
+        elif len(r) >= 4 and r[0] == 'location':
+            meta['lat'], meta['lon'] = float(r[2]), float(r[3])
+        elif len(r) >= 3 and r[0] == 'height':
+            meta['alt'] = num(r[2])
+        elif len(r) >= 3 and r[0] == 'midas_station_id':
+            meta['code'] = r[2].strip()
+    head = [h.strip() for h in rows[start + 1]]
+    for r in rows[start + 2:]:
+        if r and r[0].strip() == 'end data':
+            break
+        v = dict(zip(head, [x.strip() for x in r]))
+        if kind == 'temp':
+            t = v.get('ob_end_time', '')
+            if not re.match(r'^\d{4}-\d{2}-\d{2} \d{2}', t) or v.get('ob_hour_count', '').strip() not in ('', '12', '24'):
+                continue
+            d = datetime.date(int(t[:4]), int(t[5:7]), int(t[8:10]))
+            if int(t[11:13]) <= 12:
+                d -= datetime.timedelta(days=1)
+            x = days.setdefault(int(d.strftime('%Y%m%d')), {})
+            if num(v.get('max_air_temp')) is not None:
+                x['TX'] = tenth(num(v.get('max_air_temp')))
+            if num(v.get('min_air_temp')) is not None:
+                x['TN'] = tenth(num(v.get('min_air_temp')))
+        else:
+            t = v.get('ob_date', '')
+            if not re.match(r'^\d{4}-\d{2}-\d{2}', t) or num(v.get('prcp_amt')) is None:
+                continue
+            days.setdefault(int(t[:10].replace('-', '')), {})['RR'] = tenth(num(v.get('prcp_amt')))
+        if not meta.get('code'):
+            meta['code'] = v.get('src_id', '')
+    return meta, days
+
+
+def aemet_dms(v):
+    """« 402443N » → 40,41 ; « 034041W » → −3,68"""
+    m = re.match(r'^(\d{2,3})(\d{2})(\d{2})([NSEW])$', str(v or '').strip())
+    if not m:
+        return None
+    d = int(m.group(1)) + int(m.group(2)) / 60 + int(m.group(3)) / 3600
+    return -d if m.group(4) in 'SW' else d
+
+
+def parse_aemet(rows):
+    """AEMET « valores/climatologicos/diarios » (liste JSON, virgule décimale, « Ip » = traces) → {indicativo: {AAAAMMJJ: valeurs}}"""
+    out = {}
+    def n(v):
+        v = str(v or '').strip()
+        if v in ('Ip',):
+            return 0.0
+        return num(v) if v not in ('Acum', 'Varias') else None
+    for r in rows:
+        t = str(r.get('fecha', ''))
+        if not re.match(r'^\d{4}-\d{2}-\d{2}$', t):
+            continue
+        sol = n(r.get('sol'))
+        out.setdefault(str(r.get('indicativo')), {})[int(t.replace('-', ''))] = {'TN': tenth(n(r.get('tmin'))), 'TX': tenth(n(r.get('tmax'))), 'RR': tenth(n(r.get('prec'))),
+            'FX': tenth(n(r.get('racha'))), 'SS': None if sol is None else int(round(sol * 60))}
+    return out
+
+
+def parse_imgw(text):
+    """IMGW « s_d_375_1990.csv » (synop, quotidien, sans en-tête, Windows-1250) → {code: {AAAAMMJJ: valeurs}}"""
+    out = {}
+    for r in csv.reader(io.StringIO(text)):
+        if len(r) < 21:
+            continue
+        try:
+            code = r[0].strip()[-3:]
+            d = int(f'{int(r[2]):04d}{int(r[3]):02d}{int(r[4]):02d}')
+        except ValueError:
+            continue
+        g = lambda i: num(r[i]) if r[i + 1].strip() != '8' else None  # statut 8 = pas de mesure
+        sn, ss = g(16), g(20)
+        out.setdefault(code, {})[d] = {'TX': tenth(g(5)), 'TN': tenth(g(7)), 'RR': tenth(g(13)), 'SN': None if sn is None else int(sn), 'SS': None if ss is None else int(round(ss * 60))}
+    return out
+
+
+def parse_chmi_meta(text):
+    """ČHMÚ « meta1.csv » : WSI, GH_ID, BEGIN_DATE, END_DATE, FULL_NAME, GEOGR1 (longitude), GEOGR2 (latitude), ELEVATION"""
+    out = {}
+    for r in csv.DictReader(io.StringIO(text)):
+        k = {a.strip().upper(): (b or '').strip() for a, b in r.items() if a}
+        wsi = k.get('WSI')
+        lon, lat = num(k.get('GEOGR1')), num(k.get('GEOGR2'))
+        if wsi and lat is not None and lon is not None:
+            out[wsi] = {'code': wsi, 'nom': (k.get('FULL_NAME') or wsi).title(), 'pays': 'CZ', 'lat': lat, 'lon': lon, 'alt': num(k.get('ELEVATION')),
+                        'debut': (k.get('BEGIN_DATE') or '')[:4], 'fin': (k.get('END_DATE') or '')[:4]}
+    return out
+
+
+def parse_chmi(text, key):
+    """ČHMÚ « dly-0-20000-0-11518-TMA.csv » : STATION, ELEMENT, VTYPE, DT, VALUE, FLAG, QUALITY → {AAAAMMJJ: {clé: valeur}}"""
+    out = {}
+    for r in csv.DictReader(io.StringIO(text)):
+        t, v = (r.get('DT') or '')[:10], num(r.get('VALUE'))
+        if v is None or not re.match(r'^\d{4}-\d{2}-\d{2}$', t):
+            continue
+        out[int(t.replace('-', ''))] = {key: int(round(v * 10)) if key in ('TN', 'TX', 'RR', 'FX') else int(round(v * 60)) if key == 'SS' else int(round(v))}
+    return out
+
+
+def parse_ghcn_stations(text, prefixes):
+    """ghcnd-stations.txt (colonnes fixes) → {ID: meta} pour les pays voulus (codes FIPS des 2 premières lettres)"""
+    out = {}
+    for l in text.splitlines():
+        sid = l[0:11].strip()
+        if sid[:2] not in prefixes:
+            continue
+        try:
+            out[sid] = {'code': sid, 'lat': float(l[12:20]), 'lon': float(l[21:30]), 'alt': num(l[31:37]), 'nom': l[41:71].strip().title(), 'pays': prefixes[sid[:2]]}
+        except ValueError:
+            continue
+    return out
+
+
+def parse_ghcn_inventory(text):
+    """ghcnd-inventory.txt → {ID: années de TMAX}"""
+    out = {}
+    for l in text.splitlines():
+        p = l.split()
+        if len(p) >= 6 and p[3] == 'TMAX':
+            out[p[0]] = int(p[5]) - int(p[4]) + 1
+    return out
+
+
+def parse_ghcn(text):
+    """GHCN-Daily « by_station/ITE00100554.csv » : ID, AAAAMMJJ, ÉLÉMENT, VALEUR (dixièmes), drapeaux → {AAAAMMJJ: valeurs}"""
+    days = {}
+    for r in csv.reader(io.StringIO(text)):
+        if len(r) < 4 or not re.match(r'^\d{8}$', r[1]) or (len(r) > 5 and r[5].strip()):  # QFLAG rempli = valeur douteuse
+            continue
+        k = {'TMAX': 'TX', 'TMIN': 'TN', 'PRCP': 'RR', 'SNWD': 'SN', 'TSUN': 'SS', 'WSFG': 'FX'}.get(r[2])
+        if not k:
+            continue
+        v = int(r[3])
+        days.setdefault(int(r[1]), {})[k] = v // 10 if k == 'SN' else v
     return days
 
 
@@ -715,6 +955,8 @@ def do_dwd(net, work, years, test=False):
     else:
         listing = open_text(net.get(DWD_KL_HIST, 'dwd-liste.html', 'DWD (liste des fichiers)'))
         zips = sorted(set(re.findall(r'tageswerte_KL_\d{5}_\d{8}_\d{8}_hist\.zip', listing)))
+    # seulement les longues séries (au moins DWD_MIN_YEARS ans dans le nom du fichier)
+    zips = [z for z in zips if int(z.split('_')[4][:4]) - int(z.split('_')[3][:4]) + 1 >= DWD_MIN_YEARS] or zips
     if test:
         zips = zips[:3]
     for z in zips:
@@ -728,6 +970,252 @@ def do_dwd(net, work, years, test=False):
         work.mark(step)
     say(f'   • DWD : {len(zips)} stations')
     work.mark('dwd')
+
+
+# ── Pack Europe : une fonction par source. Chacune reprend où elle s'était arrêtée (work.done) et lève Stop avec une phrase
+#    claire si la source ne répond pas ou demande une clé : le pack se fabrique quand même sans elle (europe_sources). ──
+def _keep(work, source, metas, days_by, years):
+    n = 0
+    for code, days in days_by.items():
+        m = metas.get(code)
+        if m and m.get('lat') is not None and days:
+            fill_clouds(days, m['lat'])
+            work.add_daily(source, m, days, years); n += 1
+    return n
+
+
+def do_knmi(net, work, years, test=False):
+    if work.done('knmi'):
+        return
+    n = 0
+    for stn in (KNMI_STATIONS[:2] if test else KNMI_STATIONS):
+        if work.done('knmi-' + stn):
+            continue
+        p = net.get(KNMI_DAILY.format(stn=stn), f'knmi-etmgeg_{stn}.zip', f'KNMI {stn}', missing_ok=True)
+        if p:
+            meta, days = parse_knmi(open_text(p))
+            n += _keep(work, 'knmi', meta, days, years)
+        work.mark('knmi-' + stn)
+    say(f'   • KNMI (Pays-Bas) : {plural(n, "station")}')
+    work.mark('knmi')
+
+
+def do_dmi(net, work, years, key='', test=False):
+    if work.done('dmi'):
+        return
+    hk = {'X-Gravitee-Api-Key': key} if key else None
+    q = lambda extra: '&'.join(f'{k}={urllib.parse.quote(str(v))}' for k, v in extra.items()) + (f'&api-key={key}' if key else '')
+    st = net.json(f'{DMI_API}/station/items?{q({"limit": 10000})}', 'dmi-stations.json', 'DMI (stations)')
+    metas = parse_dmi_stations(st.get('features', []))
+    n = 0
+    for sid in (DMI_STATIONS[:2] if test else DMI_STATIONS):
+        if work.done('dmi-' + sid) or sid not in metas:
+            continue
+        feats, off = [], 0
+        while True:
+            name = f'dmi-{sid}-{off}.json'
+            d = net.json(f'{DMI_API}/stationValue/items?{q({"stationId": sid, "timeResolution": "day", "limit": 300000, "offset": off})}', name, f'DMI {sid}')
+            fs = d.get('features', [])
+            feats += fs
+            if len(fs) < 300000 or test:
+                break
+            off += 300000
+        n += _keep(work, 'dmi', metas, {sid: parse_dmi(feats).get(sid, {})}, years)
+        work.mark('dmi-' + sid)
+    say(f'   • DMI (Danemark) : {plural(n, "station")}')
+    work.mark('dmi')
+
+
+def do_midas(net, work, years, token='', test=False):
+    """Met Office MIDAS-Open (CEDA) : la liste des stations (métadonnées), les plus longues séries, puis un fichier par an"""
+    if work.done('midas'):
+        return
+    if not token and not net.offline:
+        raise Stop('MIDAS-Open (Royaume-Uni) demande un jeton CEDA : crée un compte gratuit sur ceda.ac.uk, puis mets le jeton dans la variable CEDA_TOKEN ou --ceda-jeton (voir docs/METEO.md).')
+    hk = {'Authorization': f'Bearer {token}'} if token else None
+    base = f'{MIDAS_BASE}{MIDAS_TEMP}/{MIDAS_VERSION}/'
+    meta_name = f'midas-open_{MIDAS_TEMP}_dv-{MIDAS_VERSION.split("-")[-1]}_station-metadata.csv'
+    p = net.get(base + meta_name, meta_name, 'MIDAS-Open (stations)', headers=hk)
+    rows = list(csv.reader(io.StringIO(open_text(p))))
+    start = next((i for i, r in enumerate(rows) if r and r[0].strip() == 'data'), -1)
+    head = [h.strip() for h in rows[start + 1]] if start >= 0 else []
+    stations = []
+    for r in rows[start + 2:]:
+        if not r or r[0].strip() == 'end data':
+            break
+        v = dict(zip(head, [x.strip() for x in r]))
+        try:
+            stations.append((int(v.get('last_year', 0)) - int(v.get('first_year', 0)), v))
+        except ValueError:
+            continue
+    stations.sort(key=lambda x: x[0], reverse=True)
+    n = 0
+    for _, v in stations[:2 if test else MIDAS_MAX_STATIONS]:
+        sid, county, name = v.get('src_id', '').zfill(5), v.get('historic_county', '').lower().replace(' ', '-'), v.get('station_file_name') or v.get('station_name', '').lower().replace(' ', '-')
+        step = 'midas-' + sid
+        if work.done(step):
+            continue
+        days, meta = {}, None
+        y0, y1 = max(years[0], int(v.get('first_year') or years[0])), min(years[1], int(v.get('last_year') or years[1]))
+        for kind, ds in (('temp', MIDAS_TEMP), ('rain', MIDAS_RAIN)):
+            for y in range(y0, y1 + 1):
+                fn = f'midas-open_{ds}_dv-{MIDAS_VERSION.split("-")[-1]}_{county}_{sid}_{name}_qcv-1_{y}.csv'
+                url = f'{MIDAS_BASE}{ds}/{MIDAS_VERSION}/{county}/{sid}_{name}/qc-version-1/{fn}'
+                fp = net.get(url, fn, f'MIDAS {name} {y}', missing_ok=True, headers=hk)
+                if not fp:
+                    continue
+                m, d = parse_midas(open_text(fp), kind)
+                meta = meta or m
+                for k, x in d.items():
+                    days.setdefault(k, {}).update(x)
+        if meta and meta.get('lat') is not None:
+            meta['code'] = sid
+            meta.setdefault('nom', v.get('station_name', sid).title())
+            work.add_daily('midas', meta, fill_clouds(days, meta['lat']), years); n += 1
+        work.mark(step)
+    say(f'   • MIDAS-Open (Royaume-Uni) : {plural(n, "station")}')
+    work.mark('midas')
+
+
+def do_aemet(net, work, years, key='', test=False):
+    """AEMET OpenData : l'inventaire des stations, puis les relevés quotidiens par tranches de quelques années (deux appels :
+    la réponse donne l'adresse des données)"""
+    if work.done('aemet'):
+        return
+    if not key and not net.offline:
+        raise Stop('AEMET (Espagne) demande une clé gratuite : demande-la sur opendata.aemet.es (« Obtención de API Key »), puis mets-la dans AEMET_API_KEY ou --aemet-cle (voir docs/METEO.md).')
+    def two_step(url, name, what):
+        if net.offline:
+            return net.json('', name, what)
+        first = net.json(f'{url}?api_key={key}', name + '.lien.json', what)
+        if not first.get('datos'):
+            raise Stop(f'{what} : {first.get("descripcion") or "pas de données"}')
+        return net.json(first['datos'], name, what)
+    inv = two_step(f'{AEMET_API}/valores/climatologicos/inventarioestaciones/todasestaciones', 'aemet-inventaire.json', 'AEMET (stations)')
+    metas = {}
+    for r in inv:
+        lat, lon = aemet_dms(r.get('latitud')), aemet_dms(r.get('longitud'))
+        if lat is not None:
+            metas[str(r.get('indicativo'))] = {'code': str(r.get('indicativo')), 'nom': str(r.get('nombre', '')).title(), 'pays': 'ES', 'lat': lat, 'lon': lon, 'alt': num(str(r.get('altitud', '')))}
+    n = 0
+    for ind in (AEMET_STATIONS[:1] if test else AEMET_STATIONS):
+        if work.done('aemet-' + ind) or ind not in metas:
+            continue
+        days = {}
+        for y in range(max(1920, years[0]), years[1] + 1, AEMET_CHUNK_YEARS):
+            y2 = min(years[1], y + AEMET_CHUNK_YEARS - 1)
+            url = f'{AEMET_API}/valores/climatologicos/diarios/datos/fechaini/{y}-01-01T00:00:00UTC/fechafin/{y2}-12-31T23:59:59UTC/estacion/{ind}'
+            try:
+                rows = two_step(url, f'aemet-{ind}-{y}.json', f'AEMET {ind} {y}–{y2}')
+            except Stop as e:
+                if 'No hay datos' in str(e) or 'pas de données' in str(e):
+                    continue
+                raise
+            days.update(parse_aemet(rows).get(ind, {}))
+            time.sleep(0 if net.offline else 1.5)  # AEMET limite le nombre d'appels par minute
+        n += _keep(work, 'aemet', metas, {ind: days}, years)
+        work.mark('aemet-' + ind)
+    say(f'   • AEMET (Espagne) : {plural(n, "station")}')
+    work.mark('aemet')
+
+
+def do_imgw(net, work, years, test=False):
+    """IMGW-PIB : un zip par station et par an depuis 2001, par tranches de 5 ans avant (1951–1955…)"""
+    if work.done('imgw'):
+        return
+    n = 0
+    for code, (nom, lat, lon, alt) in (list(IMGW_STATIONS.items())[:1] if test else IMGW_STATIONS.items()):
+        if work.done('imgw-' + code):
+            continue
+        days = {}
+        periods = [(y, y + 4) for y in range(1951, 2001, 5)] + [(y, y) for y in range(2001, years[1] + 1)]
+        for a, b in periods:
+            if b < years[0] or a > years[1]:
+                continue
+            folder = f'{a}_{b}' if a != b else f'{a}'
+            name = f'{folder}_{code}_s.zip'
+            p = net.get(f'{IMGW_BASE}{folder}/{name}', f'imgw-{name}', f'IMGW {nom} {folder}', missing_ok=True)
+            if not p:
+                continue
+            with zipfile.ZipFile(p) as z:
+                for zn in z.namelist():
+                    if re.match(r'^s_d_\d', os.path.basename(zn)):
+                        days.update(parse_imgw(z.read(zn).decode('cp1250', 'replace')).get(code, {}))
+            if test:
+                break
+        n += _keep(work, 'imgw', {code: {'code': code, 'nom': nom, 'pays': 'PL', 'lat': lat, 'lon': lon, 'alt': alt}}, {code: days}, years)
+        work.mark('imgw-' + code)
+    say(f'   • IMGW-PIB (Pologne) : {plural(n, "station")}')
+    work.mark('imgw')
+
+
+def do_chmi(net, work, years, test=False):
+    """ČHMÚ : les métadonnées, les plus longues séries, puis un fichier par élément"""
+    if work.done('chmi'):
+        return
+    metas = parse_chmi_meta(open_text(net.get(CHMI_META, 'chmi-meta1.csv', 'ČHMÚ (stations)')))
+    best = sorted(metas.values(), key=lambda m: (int(m['fin'] or 0) - int(m['debut'] or 9999)), reverse=True)[:2 if test else CHMI_MAX_STATIONS]
+    n = 0
+    for m in best:
+        wsi = m['code']
+        if work.done('chmi-' + wsi):
+            continue
+        days = {}
+        for elem, key in CHMI_ELEMENTS.items():
+            p = net.get(CHMI_DAILY.format(elem=elem, wsi=wsi), f'chmi-dly-{wsi}-{elem}.csv', f'ČHMÚ {m["nom"]} {elem}', missing_ok=True)
+            if p:
+                for d, v in parse_chmi(open_text(p), key).items():
+                    days.setdefault(d, {}).update(v)
+        n += _keep(work, 'chmi', {wsi: m}, {wsi: days}, years)
+        work.mark('chmi-' + wsi)
+    say(f'   • ČHMÚ (Tchéquie) : {plural(n, "station")}')
+    work.mark('chmi')
+
+
+def do_ghcn(net, work, years, test=False):
+    """GHCN-Daily pour l'Italie, le Portugal et la Slovaquie : les plus longues séries de températures"""
+    if work.done('ghcn'):
+        return
+    metas = parse_ghcn_stations(open_text(net.get(GHCN_BASE + 'ghcnd-stations.txt', 'ghcnd-stations.txt', 'GHCN (stations)')), {k: v[0] for k, v in GHCN_COUNTRIES.items()})
+    inv = parse_ghcn_inventory(open_text(net.get(GHCN_BASE + 'ghcnd-inventory.txt', 'ghcnd-inventory.txt', 'GHCN (inventaire)')))
+    n = 0
+    for fips, (iso, howmany) in GHCN_COUNTRIES.items():
+        ids = sorted([i for i in metas if i.startswith(fips) and i in inv], key=lambda i: inv[i], reverse=True)[:1 if test else howmany]
+        for sid in ids:
+            if work.done('ghcn-' + sid):
+                continue
+            p = net.get(f'{GHCN_BASE}by_station/{sid}.csv.gz', f'ghcn-{sid}.csv.gz', f'GHCN {metas[sid]["nom"]}', missing_ok=True)
+            if p:
+                n += _keep(work, 'ghcn', metas, {sid: parse_ghcn(open_text(p))}, years)
+            work.mark('ghcn-' + sid)
+    say(f'   • GHCN-Daily (Italie, Portugal, Slovaquie) : {plural(n, "station")}')
+    work.mark('ghcn')
+
+
+EUROPE_SOURCES = ['dwd', 'knmi', 'dmi', 'midas', 'aemet', 'imgw', 'chmi', 'ghcn']
+
+
+def europe_sources(net, work, years, a):
+    """les stations du pack Europe : chaque source à part ; une source qui ne répond pas (ou sans sa clé) est sautée avec un message"""
+    want = [x.strip() for x in (a.sources_europe or ','.join(EUROPE_SOURCES)).split(',') if x.strip()]
+    if a.sans_ghcn and 'ghcn' in want:
+        want.remove('ghcn')
+    done = []
+    for src in want:
+        fn = {'dwd': lambda: do_dwd(net, work, years, a.test), 'knmi': lambda: do_knmi(net, work, years, a.test),
+              'dmi': lambda: do_dmi(net, work, years, a.dmi_cle or os.environ.get('DMI_API_KEY', ''), a.test),
+              'midas': lambda: do_midas(net, work, years, a.ceda_jeton or os.environ.get('CEDA_TOKEN', ''), a.test),
+              'aemet': lambda: do_aemet(net, work, years, a.aemet_cle or os.environ.get('AEMET_API_KEY', ''), a.test),
+              'imgw': lambda: do_imgw(net, work, years, a.test), 'chmi': lambda: do_chmi(net, work, years, a.test),
+              'ghcn': lambda: do_ghcn(net, work, years, a.test)}.get(src)
+        if not fn:
+            say(f'   ⚠️ source inconnue : {src} (au choix : {", ".join(EUROPE_SOURCES)})')
+            continue
+        try:
+            fn(); done.append(src)
+        except Stop as e:
+            say(f'   ⚠️ {src} sauté : {str(e).splitlines()[0]}\n      Le pack se fabrique sans elle ; relance plus tard pour l’ajouter (le reste ne sera pas refait).')
+    return done
 
 
 # ═══════════════════════ Les réanalyses (facultatives) ═══════════════════════
@@ -782,10 +1270,17 @@ def do_20cr(db, years, boxes, test=False, net=None):
             lo = ds.variables['lon'][:]
             li = [i for i, x in enumerate(la) if s_ - 1 <= x <= n_ + 1]
             oi = [i for i, x in enumerate(lo) if (w_ - 1) % 360 <= x <= 360 or x <= e_ + 1] if w_ < 0 else [i for i, x in enumerate(lo) if w_ - 1 <= x <= e_ + 1]
-            data = ds.variables[var][:, min(li):max(li) + 1, :]
+            # seulement la boîte (par morceaux de longitudes contiguës : par OPeNDAP, seul ce morceau voyage)
+            import numpy as np  # livré avec netCDF4
+            runs, start = [], oi[0]
+            for prev, cur in zip(oi, oi[1:] + [None]):
+                if cur != prev + 1:
+                    runs.append((start, prev)); start = cur
+            v = ds.variables[var]
+            data = np.concatenate([v[:, min(li):max(li) + 1, r0:r1 + 1] for r0, r1 in runs], axis=2)
             lats = [float(la[i]) for i in range(min(li), max(li) + 1)]
             lons = [float(lo[i]) for i in oi]
-            cols[k] = (data, oi)
+            cols[k] = (data, list(range(len(oi))))
             ds.close()
         nd = F.days_in_year(y)
         for a, lat in enumerate(lats):
@@ -1041,12 +1536,100 @@ def copdem_name(lat0, lon0):
     return COPDEM_NAME.format(ns='N' if lat0 >= 0 else 'S', lat=abs(lat0), ew='E' if lon0 >= 0 else 'W', lon=abs(lon0))
 
 
-def do_altitudes(net, db, boxes, work_path, test=False):
-    """la grille des altitudes (30″) des carrés de 1° qui touchent les boîtes ; gardée dans travail/altitudes.sqlite pour reprendre"""
+def box_tiles(boxes):
+    """les carrés de 1° (coin sud-ouest) qui touchent des boîtes (nord, ouest, sud, est)"""
+    return sorted({(la, lo) for n_, w_, s_, e_ in boxes for la in range(math.floor(s_), math.ceil(n_)) for lo in range(math.floor(w_), math.ceil(e_))})
+
+
+# Les pays du socle pour l'ALTITUDE seulement (la météo reste France, Belgique, Suisse, Luxembourg) — codes ISO 3166
+ALT_COUNTRIES = ['FR', 'BE', 'CH', 'LU', 'IT', 'NL', 'ES', 'DE', 'PT', 'GB', 'PL', 'DK', 'CZ', 'SK']
+ALT_WINDOW = (72, -32, 27, 33)  # nord, ouest, sud, est : l'Europe, Açores, Madère et Canaries comprises
+# leurs contours simplifiés : Natural Earth 1:50 m (domaine public), le fichier des cartes de l'app
+WORLD_50M = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'assets', 'data', 'geo', 'monde-50m.json')
+# à défaut de contours : des boîtes par pays, îles comprises (Corse, Sardaigne, Sicile, Baléares, Canaries, Madère, Açores, Bornholm…)
+ALT_BOXES = {
+    'FR': [(51.1, -5.2, 41.3, 9.6)], 'BE': [(51.55, 2.5, 49.45, 6.45)], 'CH': [(47.85, 5.9, 45.8, 10.5)], 'LU': [(50.2, 5.7, 49.4, 6.55)],
+    'IT': [(47.1, 6.6, 37.9, 18.6), (38.4, 12.3, 36.6, 15.7), (41.3, 8.1, 38.8, 9.9), (35.6, 12.3, 35.4, 12.7)], 'NL': [(53.6, 3.3, 50.7, 7.3)],
+    'ES': [(43.8, -9.4, 36.0, 3.4), (40.1, 1.1, 38.6, 4.4), (29.5, -18.2, 27.6, -13.4), (35.95, -5.4, 35.2, -2.9)], 'DE': [(55.1, 5.8, 47.2, 15.1)],
+    'PT': [(42.2, -9.6, 36.9, -6.1), (33.2, -17.3, 32.4, -16.2), (39.8, -31.3, 36.9, -24.9)], 'GB': [(60.9, -8.7, 49.8, 1.8)],
+    'PL': [(54.9, 14.1, 49.0, 24.2)], 'DK': [(57.8, 8.0, 54.5, 12.7), (55.3, 14.6, 54.9, 15.2)], 'CZ': [(51.1, 12.0, 48.5, 18.9)], 'SK': [(49.7, 16.8, 47.7, 22.6)],
+}
+
+
+def country_rings(codes, path=WORLD_50M):
+    """les contours (anneaux de [lon, lat]) des pays, lus dans le TopoJSON des cartes de l'app ; {} si le fichier manque"""
+    try:
+        with open(path, encoding='utf-8') as f:
+            d = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    t = d.get('topo', d)
+    sx, sy = t['transform']['scale']; tx, ty = t['transform']['translate']
+    arcs = []
+    for arc in t['arcs']:
+        x = y = 0; pts = []
+        for dx, dy in arc:
+            x += dx; y += dy; pts.append((x * sx + tx, y * sy + ty))
+        arcs.append(pts)
+    def ring(ids):
+        out = []
+        for i in ids:
+            pts = arcs[i] if i >= 0 else arcs[~i][::-1]
+            out += pts if not out else pts[1:]
+        return out
+    res = {}
+    for obj in t['objects'].values():
+        for g in obj.get('geometries', []):
+            code = (g.get('properties') or {}).get('i')
+            if code not in codes:
+                continue
+            polys = [g['arcs']] if g['type'] == 'Polygon' else g['arcs'] if g['type'] == 'MultiPolygon' else []
+            res.setdefault(code, []).extend([[ring(r) for r in poly] for poly in polys])
+    return res
+
+
+def _inside(x, y, rings):
+    ins = False
+    for r in rings:
+        for k in range(len(r)):
+            (x1, y1), (x2, y2) = r[k - 1], r[k]
+            if (y1 > y) != (y2 > y) and x < (x2 - x1) * (y - y1) / ((y2 - y1) or 1e-12) + x1:
+                ins = not ins
+    return ins
+
+
+def country_tiles(codes, path=WORLD_50M, margin=0.08):
+    """les carrés de 1° qui touchent ces pays : un sommet du contour dans le carré (un peu élargi), ou un coin / le centre du
+    carré dans le pays. Sans contours : les boîtes ALT_BOXES. Les carrés en mer sont ensuite sautés (fichier absent)."""
+    rings = country_rings(set(codes), path)
+    tiles = set()
+    for code in codes:
+        polys = rings.get(code)
+        if not polys:
+            tiles.update(box_tiles(ALT_BOXES.get(code, [])))
+            continue
+        for poly in polys:
+            pts = [p for r in poly for p in r]
+            for lon, lat in pts:
+                for la in {math.floor(lat - margin), math.floor(lat + margin)}:
+                    for lo in {math.floor(lon - margin), math.floor(lon + margin)}:
+                        tiles.add((la, lo))
+            xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+            for la in range(math.floor(min(ys)), math.ceil(max(ys))):
+                for lo in range(math.floor(min(xs)), math.ceil(max(xs))):
+                    if (la, lo) not in tiles and any(_inside(lo + dx, la + dy, poly) for dx, dy in ((0.5, 0.5), (0, 0), (1, 0), (0, 1), (1, 1))):
+                        tiles.add((la, lo))
+    # seulement l'Europe et ses îles de l'Atlantique (Canaries, Madère, Açores) : pas l'outre-mer (Guyane, Antilles, Réunion…)
+    return sorted(t for t in tiles if ALT_WINDOW[2] <= t[0] < ALT_WINDOW[0] and ALT_WINDOW[1] <= t[1] < ALT_WINDOW[3])
+
+
+def do_altitudes(net, db, boxes=None, work_path=None, test=False, tiles=None):
+    """la grille des altitudes (30″) des carrés de 1° voulus (tiles, ou ceux qui touchent les boîtes) ; gardée dans travail/altitudes.sqlite pour reprendre"""
     wk = sqlite3.connect(work_path)
     wk.executescript(F.SCHEMA)
     wk.execute('CREATE TABLE IF NOT EXISTS absent(lat0 INTEGER, lon0 INTEGER, PRIMARY KEY(lat0, lon0))')
-    tiles = sorted({(la, lo) for n_, w_, s_, e_ in boxes for la in range(math.floor(s_), math.ceil(n_)) for lo in range(math.floor(w_), math.ceil(e_))})
+    tiles = sorted(set(tiles)) if tiles is not None else box_tiles(boxes or [])
+    want = set(tiles)
     if test:
         tiles = [t for t in tiles if t == (43, 0)] or tiles[:1]
     done = sea = 0
@@ -1066,7 +1649,7 @@ def do_altitudes(net, db, boxes, work_path, test=False):
             os.remove(p)  # le fichier d'origine (≈ 3 Mo) n'est plus utile : la grille est gardée
     n = 0
     for la, lo, nn, blob in wk.execute('SELECT lat0, lon0, n, blob FROM elevation'):
-        if any(math.floor(s_) <= la < math.ceil(n_) and math.floor(w_) <= lo < math.ceil(e_) for n_, w_, s_, e_ in boxes):
+        if (la, lo) in want:
             db.execute('INSERT OR REPLACE INTO elevation(lat0, lon0, n, blob) VALUES(?,?,?,?)', (la, lo, nn, blob)); n += 1
     db.commit()
     wk.close()
@@ -1132,6 +1715,11 @@ def main(argv=None):
     ap.add_argument('--jusqu-a', dest='until', type=int, default=datetime.date.today().year)
     ap.add_argument('--departements', default='')
     ap.add_argument('--meteolux-csv')
+    ap.add_argument('--sources-europe', default='', help='les sources du pack Europe, séparées par des virgules : ' + ','.join(EUROPE_SOURCES))
+    ap.add_argument('--sans-ghcn', action='store_true', help='sans GHCN-Daily (Italie, Portugal, Slovaquie)')
+    ap.add_argument('--aemet-cle', default='', help='la clé AEMET OpenData (sinon la variable AEMET_API_KEY)')
+    ap.add_argument('--ceda-jeton', default='', help='le jeton CEDA pour MIDAS-Open (sinon la variable CEDA_TOKEN)')
+    ap.add_argument('--dmi-cle', default='', help='la clé DMI si elle est demandée (sinon la variable DMI_API_KEY)')
     a = ap.parse_args(argv)
     if a.test:
         a.departements = a.departements or '32'
@@ -1159,13 +1747,8 @@ def main(argv=None):
                     say(f'   (hors ligne : {fn.__name__[3:]} ignoré — {str(e).splitlines()[0]})')
             work.compute_scores()
         if 'europe' in kinds:
-            say('1b. Les stations d’Europe (DWD, Allemagne)')
-            try:
-                do_dwd(net, work, years, a.test)
-            except Stop as e:
-                if not a.offline:
-                    raise
-                say(f'   (hors ligne : DWD ignoré — {str(e).splitlines()[0]})')
+            say('1b. Les stations d’Europe (DWD, KNMI, DMI, MIDAS-Open, AEMET, IMGW, ČHMÚ, GHCN)')
+            europe_done = europe_sources(net, work, years, a)
             work.compute_scores()
         if 'socle' in kinds:
             say('2. Le socle : les meilleures stations, bien réparties')
@@ -1199,7 +1782,10 @@ def main(argv=None):
             if not a.sans_altitudes:
                 say('4b. Les altitudes (Copernicus DEM GLO-90, grille de 30″)')
                 F.add_sources(db, ['copdem'], a.until)
-                do_altitudes(net, db, boxes, os.path.join(out, 'travail', 'altitudes.sqlite'), a.test)
+                tiles = country_tiles(ALT_COUNTRIES)
+                say(f'   {len(tiles)} carrés de 1° touchent {len(ALT_COUNTRIES)} pays (ceux en mer seront sautés)')
+                do_altitudes(net, db, None, os.path.join(out, 'travail', 'altitudes.sqlite'), a.test, tiles=tiles)
+                F.set_meta(db, relief_countries=','.join(ALT_COUNTRIES))
             db.close()
             finish(path, out, 'socle')
         if a.quoi == 'altitudes':
@@ -1208,7 +1794,10 @@ def main(argv=None):
             db = sqlite3.connect(path) if os.path.exists(path) else F.open_db(path, 'socle', 'Socle')
             db.executescript(F.SCHEMA)
             F.add_sources(db, ['copdem'], a.until)
-            do_altitudes(net, db, list(COUNTRY_BOXES.values()), os.path.join(out, 'travail', 'altitudes.sqlite'), a.test)
+            tiles = country_tiles(ALT_COUNTRIES)
+            say(f'   {len(tiles)} carrés de 1° touchent {len(ALT_COUNTRIES)} pays (ceux en mer seront sautés)')
+            do_altitudes(net, db, None, os.path.join(out, 'travail', 'altitudes.sqlite'), a.test, tiles=tiles)
+            F.set_meta(db, relief_countries=','.join(ALT_COUNTRIES))
             db.close()
             finish(path, out, 'socle')
         if 'complet' in kinds:
@@ -1225,16 +1814,25 @@ def main(argv=None):
             db.close()
             finish(path, out, 'complet')
         if 'europe' in kinds:
-            say('6. Le pack Europe : stations d’Allemagne + ERA5 Europe (toutes les heures)')
+            say('6. Le pack Europe : stations d’Europe + 20CR (1836–1939) + ERA5 Europe (toutes les heures)')
             path = os.path.join(out, 'meteo-europe.sqlite')
             if os.path.exists(path):
                 os.remove(path)
             db = F.open_db(path, 'europe', 'Pack Europe')
-            F.set_meta(db, countries='EUROPE')
-            F.add_sources(db, ['dwd'], a.until)
             ids = [r[0] for r in work.db.execute("SELECT id FROM stations WHERE pays NOT IN ('FR','BE','CH','LU')")]
+            pays = sorted({r[0] for r in work.db.execute("SELECT DISTINCT pays FROM stations WHERE pays NOT IN ('FR','BE','CH','LU')")})
+            F.set_meta(db, countries='EUROPE', station_countries=','.join(pays))
+            used = sorted({r[0] for r in work.db.execute("SELECT DISTINCT source FROM stations WHERE pays NOT IN ('FR','BE','CH','LU')")})
+            F.add_sources(db, [x for x in used if x in F.SOURCES], a.until)
             copy_stations(work.db, db, ids)
             write_normals(db, 'station', 'daily', 'station_id')
+            if not a.sans_20cr:
+                say('   20CRv3 sur toute l’Europe (1836–1939)')
+                F.add_sources(db, ['20cr'], a.until)
+                rdb = sqlite3.connect(os.path.join(out, 'travail', 'reanalyses-europe-20cr.sqlite'))
+                rdb.executescript(F.SCHEMA)
+                do_20cr(rdb, years, [BOX_EUROPE], a.test, net)
+                merge_grid(rdb, db, '20cr')
             if not a.sans_era5:
                 F.add_sources(db, ['era5'], a.until)
                 rdb = sqlite3.connect(os.path.join(out, 'travail', 'reanalyses-europe.sqlite'))

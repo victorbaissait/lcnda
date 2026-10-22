@@ -171,6 +171,19 @@ class Altitudes(unittest.TestCase):
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 
+    def test_country_tiles(self):
+        t = set(B.country_tiles(B.ALT_COUNTRIES))
+        for tile, what in (((40, -4), 'Madrid'), ((46, 12), 'Cortina d’Ampezzo'), ((52, 4), 'Pays-Bas'), ((28, -16), 'Canaries'), ((32, -17), 'Madère'),
+                           ((37, -26), 'Açores'), ((39, 3), 'Baléares'), ((54, -6), 'Irlande du Nord'), ((60, -2), 'Shetland'), ((55, 14), 'Bornholm'),
+                           ((49, 21), 'Slovaquie'), ((41, 9), 'Corse'), ((37, 14), 'Sicile'), ((48, 2), 'Paris')):
+            self.assertIn(tile, t, what)
+        for tile, what in (((4, -53), 'Guyane'), ((-21, 55), 'La Réunion'), ((64, -19), 'Islande'), ((47, 25), 'Roumanie'), ((60, 10), 'Norvège'), ((45, -10), 'plein océan')):
+            self.assertNotIn(tile, t, what)
+        self.assertTrue(400 < len(t) < 600, len(t))
+        # sans le fichier des contours : les boîtes par pays (îles comprises)
+        fb = set(B.country_tiles(['ES', 'PT'], path='/nulle/part.json'))
+        self.assertIn((28, -16), fb); self.assertIn((37, -26), fb); self.assertIn((40, -4), fb)
+
     def test_lzw(self):
         # « TOBEORNOTTOBEORTOBEORNOT » codé en LZW TIFF (codes de 9 bits)
         codes = [256, 84, 79, 66, 69, 79, 82, 78, 79, 84, 258, 260, 262, 267, 261, 263, 265, 257]
@@ -178,6 +191,86 @@ class Altitudes(unittest.TestCase):
         bits += '0' * (-len(bits) % 8)
         data = bytes(int(bits[i:i + 8], 2) for i in range(0, len(bits), 8))
         self.assertEqual(B.lzw_decode(data), b'TOBEORNOTTOBEORTOBEORNOT')
+
+
+EU = os.path.join(FIX, 'europe')
+
+
+class EuropeSources(unittest.TestCase):
+    """un petit fichier au format réel par source du pack Europe (tests/fixtures/meteo/europe), lu sans Internet"""
+    def read(self, name):
+        return B.open_text(os.path.join(EU, name))
+
+    def test_knmi(self):
+        meta, days = B.parse_knmi(self.read('knmi-etmgeg_260.zip'))
+        self.assertEqual((meta['260']['nom'], meta['260']['lat'], meta['260']['pays']), ('De Bilt', 52.1, 'NL'))
+        d = days['260'][20250115]
+        self.assertEqual((d['TN'], d['TX']), (-52, 13))
+        self.assertTrue(all(v['RR'] >= 0 for v in days['260'].values()), 'RH = −1 (traces) → 0')
+
+    def test_dmi(self):
+        st = B.parse_dmi_stations(json.load(open(os.path.join(EU, 'dmi-stations.json')))['features'])
+        self.assertAlmostEqual(st['06180']['lat'], 55.6764, places=3)
+        d = B.parse_dmi(json.load(open(os.path.join(EU, 'dmi-06180-0.json')))['features'])['06180']
+        self.assertEqual(len(d), 60)
+        self.assertEqual(set(d[20250101]), {'TN', 'TX', 'RR', 'SS', 'NN'})
+
+    def test_midas(self):
+        meta, days = B.parse_midas(self.read('midas-open_uk-daily-temperature-obs_dv-202407_shetland_00009_lerwick_qcv-1_2025.csv'), 'temp')
+        self.assertEqual((meta['nom'], meta['lat'], meta['code']), ('Lerwick', 60.139, '00009'))
+        self.assertIn(20250101, days, 'le relevé de 9 h du 2 janvier → le 1er janvier')
+        _, rain = B.parse_midas(self.read('midas-open_uk-daily-rain-obs_dv-202407_shetland_00009_lerwick_qcv-1_2025.csv'), 'rain')
+        self.assertEqual(len(rain), 60)
+
+    def test_aemet(self):
+        self.assertAlmostEqual(B.aemet_dms('402443N'), 40.4119, places=3)
+        self.assertAlmostEqual(B.aemet_dms('034041W'), -3.678, places=3)
+        d = B.parse_aemet(json.load(open(os.path.join(EU, 'aemet-3195-2025.json'))))['3195']
+        self.assertEqual(len(d), 60)
+        self.assertTrue(all(v['RR'] is not None for v in d.values()), '« Ip » (traces) → 0')
+
+    def test_imgw(self):
+        import zipfile
+        with zipfile.ZipFile(os.path.join(EU, 'imgw-2025_375_s.zip')) as z:
+            d = B.parse_imgw(z.read('s_d_375_2025.csv').decode('cp1250'))['375']
+        self.assertEqual(len(d), 60)
+        self.assertEqual(d[20250101]['SN'], 5)
+        self.assertIsNotNone(d[20250101]['SS'])
+
+    def test_chmi(self):
+        m = B.parse_chmi_meta(self.read('chmi-meta1.csv'))['0-20000-0-11518']
+        self.assertEqual((m['nom'], m['lat'], m['lon'], m['pays']), ('Praha Ruzyně', 50.1, 14.255, 'CZ'))
+        d = B.parse_chmi(self.read('chmi-dly-0-20000-0-11518-TMA.csv'), 'TX')
+        self.assertEqual(len(d), 60)
+
+    def test_ghcn(self):
+        st = B.parse_ghcn_stations(self.read('ghcnd-stations.txt'), {'IT': 'IT', 'PO': 'PT'})
+        self.assertEqual((st['ITE00100554']['nom'], st['PO000008535']['pays']), ('Milan', 'PT'))
+        self.assertEqual(B.parse_ghcn_inventory(self.read('ghcnd-inventory.txt'))['ITE00100554'], 263)
+        d = B.parse_ghcn(self.read('ghcn-ITE00100554.csv.gz'))
+        self.assertEqual(len(d), 60, 'la valeur marquée douteuse (QFLAG) est écartée')
+
+    def test_europe_pack_offline(self):
+        """le pack Europe fabriqué hors ligne (--test) : une station par source, les sources absentes sautées sans arrêter"""
+        tmp = tempfile.mkdtemp(prefix='meteo-eu-')
+        try:
+            code = B.main(['europe', '--test', '--hors-ligne', EU, '--sans-era5', '--sans-20cr', '--dossier', os.path.join(tmp, 'out')])
+            self.assertEqual(code, 0)
+            db = sqlite3.connect(os.path.join(tmp, 'out', 'meteo-europe.sqlite'))
+            pays = sorted(r[0] for r in db.execute('SELECT DISTINCT pays FROM stations'))
+            self.assertEqual(pays, ['CZ', 'DK', 'ES', 'GB', 'IT', 'NL', 'PL'])
+            srcs = sorted(r[0] for r in db.execute('SELECT id FROM sources'))
+            self.assertEqual(srcs, ['aemet', 'chmi', 'dmi', 'ghcn', 'imgw', 'knmi', 'midas'])
+            self.assertEqual(dict(db.execute('SELECT key, value FROM meta'))['station_countries'], 'CZ,DK,ES,GB,IT,NL,PL')
+            self.assertEqual(db.execute('SELECT COUNT(*) FROM daily').fetchone()[0], 7)
+            db.close()
+            # --sans-ghcn : sans l'Italie
+            code = B.main(['europe', '--test', '--hors-ligne', EU, '--sans-era5', '--sans-20cr', '--sans-ghcn', '--dossier', os.path.join(tmp, 'out2')])
+            db = sqlite3.connect(os.path.join(tmp, 'out2', 'meteo-europe.sqlite'))
+            self.assertNotIn('IT', [r[0] for r in db.execute('SELECT DISTINCT pays FROM stations')])
+            db.close()
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
 
 
 class Build(unittest.TestCase):
