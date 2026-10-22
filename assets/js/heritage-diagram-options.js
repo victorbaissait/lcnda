@@ -27,16 +27,16 @@
         ['events', 'Tous les événements'], ['families', 'Familles (couples)'], ['places', 'Lieux'], ['media', 'Médias']];
     const WHAT_SUM = {persons: 'Personnes', births: 'Naissances', baptisms: 'Baptêmes', marriages: 'Mariages', deaths: 'Décès', burials: 'Sépultures', events: 'Événements', families: 'Familles', places: 'Lieux', media: 'Médias'};
     const BY_LABEL = {none: 'Rien (un seul total)', last_name: 'Nom de famille', first_name: 'Prénom', sex: 'Sexe', occupation: 'Métier', generation: 'Génération', commune: 'Commune', county: 'Département', state: 'Région', country: 'Pays',
-        century: 'Siècle', decade: 'Décennie', year: 'Année', month: 'Mois', age5: 'Âge (par 5 ans)', age10: 'Âge (par 10 ans)', kids: 'Nombre d’enfants', cause: 'Cause du décès', type: 'Sorte d’événement', mtype: 'Sorte de média'};
+        century: 'Siècle', decade: 'Décennie', year: 'Année', month: 'Mois', age5: 'Âge (par 5 ans)', age10: 'Âge (par 10 ans)', kids: 'Nombre d’enfants', marr_age5: 'Âge au mariage (par 5 ans)', child_age5: 'Âge au premier enfant (par 5 ans)', unions: 'Nombre d’unions', branch: 'Branche (côté père, côté mère)', living: 'En vie ou décédé', sourced: 'Avec ou sans source', cause: 'Cause du décès', type: 'Sorte d’événement', mtype: 'Sorte de média'};
     const BY_SUM = {none: '', last_name: 'par nom', first_name: 'par prénom', sex: 'par sexe', occupation: 'par métier', generation: 'par génération', commune: 'par commune', county: 'par département', state: 'par région', country: 'par pays',
-        century: 'par siècle', decade: 'par décennie', year: 'par année', month: 'par mois', age5: 'par âge (5 ans)', age10: 'par âge (10 ans)', kids: 'par nombre d’enfants', cause: 'par cause', type: 'par sorte d’événement', mtype: 'par sorte de média'};
-    const PERSON_BY = ['last_name', 'first_name', 'sex', 'occupation', 'generation', 'commune', 'county', 'state', 'country', 'century', 'decade', 'year', 'month', 'age5', 'age10', 'kids', 'none'];
+        century: 'par siècle', decade: 'par décennie', year: 'par année', month: 'par mois', age5: 'par âge (5 ans)', age10: 'par âge (10 ans)', kids: 'par nombre d’enfants', marr_age5: 'par âge au mariage', child_age5: 'par âge au premier enfant', unions: 'par nombre d’unions', branch: 'par branche', living: 'en vie ou décédés', sourced: 'avec ou sans source', cause: 'par cause', type: 'par sorte d’événement', mtype: 'par sorte de média'};
+    const PERSON_BY = ['last_name', 'first_name', 'sex', 'occupation', 'generation', 'commune', 'county', 'state', 'country', 'century', 'decade', 'year', 'month', 'age5', 'age10', 'kids', 'marr_age5', 'child_age5', 'unions', 'branch', 'living', 'sourced', 'none'];
     const BY = {persons: PERSON_BY, births: PERSON_BY, baptisms: PERSON_BY, burials: PERSON_BY, deaths: [...PERSON_BY.slice(0, -1), 'cause', 'none'], events: ['type', ...PERSON_BY],
         marriages: ['last_name', 'commune', 'county', 'state', 'country', 'century', 'decade', 'year', 'month', 'kids', 'none'], families: ['last_name', 'commune', 'county', 'state', 'country', 'century', 'decade', 'year', 'month', 'kids', 'none'],
         places: ['county', 'state', 'country', 'none'], media: ['mtype', 'last_name', 'century', 'decade', 'year', 'none']};
-    const TIME_BY = ['century', 'decade', 'year', 'month', 'age5', 'age10', 'generation', 'kids'];
-    const VALUES = {persons: ['age_death', 'age_marriage', 'kids'], births: ['age_death', 'age_marriage', 'kids'], baptisms: ['age_death', 'kids'], deaths: ['age_death', 'kids'], burials: ['age_death'], events: ['age_death'], marriages: ['age_marriage', 'kids'], families: ['age_marriage', 'kids'], places: [], media: []};
-    const VALUE_L = {age_death: 'l’âge au décès', age_marriage: 'l’âge au mariage', kids: 'le nombre d’enfants'};
+    const TIME_BY = ['century', 'decade', 'year', 'month', 'age5', 'age10', 'generation', 'kids', 'marr_age5', 'child_age5', 'unions'];
+    const VALUES = {persons: ['age_death', 'age_marriage', 'kids', 'age_first_child'], births: ['age_death', 'age_marriage', 'kids', 'age_first_child'], baptisms: ['age_death', 'kids'], deaths: ['age_death', 'kids'], burials: ['age_death'], events: ['age_death'], marriages: ['age_marriage', 'kids'], families: ['age_marriage', 'kids'], places: [], media: []};
+    const VALUE_L = {age_death: 'l’âge au décès', age_marriage: 'l’âge au mariage', kids: 'le nombre d’enfants', age_first_child: 'l’âge au premier enfant'};
     const POP = [['', 'Toute ma base'], ['anc', 'Mes ancêtres'], ['desc', 'Mes descendants'], ['pat', 'Branche paternelle (côté père)'], ['mat', 'Branche maternelle (côté mère)'],
         ['label', 'Une étiquette'], ['list', 'Une de mes listes'], ['search', 'Une recherche dans les noms'], ['people', 'Les personnes que je choisis']];
     const SERIES = [['', 'Une seule série'], ['sex', 'Une série par sexe'], ['century', 'Une série par siècle']];
@@ -46,6 +46,7 @@
     const HELP = {
         what: 'Ce que chaque barre (ou part) compte : des personnes, des naissances, des mariages, des lieux, des médias…',
         distinct: 'Une personne qui a plusieurs de ces événements dans le même groupe ne compte qu’une fois.',
+        rules: 'Pour ne garder que certaines personnes : un métier, un nombre d’enfants, un lieu de naissance, une période, un âge au décès, une étiquette, une génération Sosa… Ajoute autant de critères que tu veux : « tous » les veut tous (ET), « au moins un » se contente d’un seul (OU).',
         pop: 'Les personnes prises en compte : toute ta base, tes ancêtres ou tes descendants, une branche, une étiquette, une de tes listes, une recherche, ou des personnes que tu choisis.',
         root: 'La personne d’où l’on part pour ses ancêtres, ses descendants ou ses branches (elle est comptée avec ses ancêtres et ses descendants).',
         gens: 'Jusqu’à combien de générations on remonte (ou on descend). 0 = toutes.',
@@ -64,23 +65,49 @@
         unit: 'Un nombre, une part en %, ou la moyenne (la médiane) d’une valeur : âge au décès, âge au mariage, nombre d’enfants.',
         live: 'Le diagramme se recalcule à chaque affichage : il suit les changements de ta base.',
     };
-    // « 🧮 Compter dans ma base » : des points de départ tout prêts (ceux de « Statistiques de l'app », et d'autres)
-    const PRESETS = [['custom', '✏️ Sur mesure (tout se règle ci-dessous)', {}],
-        ['surnames', 'Noms de famille', {what: 'persons', by: 'last_name'}], ['firstnames', 'Prénoms', {what: 'persons', by: 'first_name'}], ['sex', 'Femmes et hommes', {what: 'persons', by: 'sex'}],
-        ['occupations', 'Métiers', {what: 'persons', by: 'occupation'}], ['generation', 'Mes ancêtres par génération', {what: 'persons', pop: 'anc', by: 'generation', limit: 0}],
-        ['births_place', 'Lieux de naissance (communes)', {what: 'births', by: 'commune'}], ['births_county', 'Naissances par département', {what: 'births', by: 'county'}], ['births_country', 'Pays de naissance', {what: 'births', by: 'country'}],
-        ['births_decade', 'Naissances par décennie', {what: 'births', by: 'decade', limit: 0}], ['marriages_place', 'Lieux de mariage', {what: 'marriages', by: 'commune'}], ['marriages_month', 'Mariages par mois', {what: 'marriages', by: 'month', limit: 0}],
-        ['deaths_place', 'Lieux de décès', {what: 'deaths', by: 'commune'}], ['deaths_country', 'Pays de décès', {what: 'deaths', by: 'country'}], ['deaths_decade', 'Décès par décennie', {what: 'deaths', by: 'decade', limit: 0}],
-        ['age_death', 'Âge au décès (par 5 ans)', {what: 'deaths', by: 'age5', limit: 0}], ['life_century', 'Âge moyen au décès, par siècle de naissance', {what: 'persons', by: 'century', unit: 'avg', value: 'age_death', limit: 0}],
-        ['causes', 'Causes de décès', {what: 'deaths', by: 'cause'}], ['kids', 'Enfants par famille', {what: 'families', by: 'kids', limit: 0}],
-        ['events_type', 'Événements par sorte', {what: 'events', by: 'type'}], ['places_county', 'Lieux par département', {what: 'places', by: 'county'}], ['media_type', 'Médias par sorte', {what: 'media', by: 'mtype'}]];
+    // « 🧮 Compter dans ma base » : des points de départ tout prêts, rangés par rubrique : [id, nom, réglage, rubrique, forme]
+    // la forme dit pour quels diagrammes le point de départ a un sens (FITS) : cat = des catégories (noms, lieux, métiers),
+    // few = peu de parts (sexe, branche, vivant), time = le temps (siècle, décennie), month = les mois, age = des nombres rangés (âges, enfants, générations), sex2 = hommes et femmes face à face
+    const PRESETS = [['custom', '✏️ Sur mesure (critères, ce qu’on compte, regroupé par…)', {}, '', ''],
+        ['surnames', 'Noms de famille', {what: 'persons', by: 'last_name'}, 'Personnes', 'cat'], ['firstnames', 'Prénoms', {what: 'persons', by: 'first_name'}, 'Personnes', 'cat'],
+        ['firstnames_century', 'Prénoms, par siècle', {what: 'persons', by: 'first_name', series: 'century', limit: 12}, 'Personnes', 'cat'],
+        ['sex', 'Femmes et hommes', {what: 'persons', by: 'sex'}, 'Personnes', 'few'], ['living', 'En vie ou décédés', {what: 'persons', by: 'living'}, 'Personnes', 'few'],
+        ['age_death', 'Âge au décès (par 5 ans)', {what: 'deaths', by: 'age5', limit: 0}, 'Personnes', 'age'], ['age_death_sex', 'Âge au décès, hommes et femmes', {what: 'deaths', by: 'age10', series: 'sex', limit: 0}, 'Personnes', 'sex2'],
+        ['life_century', 'Âge moyen au décès, par siècle de naissance', {what: 'persons', by: 'century', unit: 'avg', value: 'age_death', limit: 0}, 'Personnes', 'time'],
+        ['causes', 'Causes de décès', {what: 'deaths', by: 'cause'}, 'Personnes', 'cat'], ['causes_century', 'Causes de décès, par siècle', {what: 'deaths', by: 'cause', series: 'century', limit: 10}, 'Personnes', 'cat'],
+        ['marriages_decade', 'Mariages par décennie', {what: 'marriages', by: 'decade', limit: 0}, 'Couples', 'time'], ['marriages_month', 'Mariages par mois', {what: 'marriages', by: 'month', limit: 0}, 'Couples', 'month'],
+        ['age_marriage', 'Âge au mariage (par 5 ans)', {what: 'persons', by: 'marr_age5', limit: 0}, 'Couples', 'age'], ['age_marriage_sex', 'Âge au mariage, hommes et femmes', {what: 'persons', by: 'marr_age5', series: 'sex', limit: 0}, 'Couples', 'sex2'],
+        ['age_marriage_century', 'Âge moyen au mariage, par siècle de naissance', {what: 'persons', by: 'century', unit: 'avg', value: 'age_marriage', limit: 0}, 'Couples', 'time'],
+        ['unions', 'Nombre d’unions par personne', {what: 'persons', by: 'unions', limit: 0}, 'Couples', 'age'],
+        ['kids', 'Enfants par famille', {what: 'families', by: 'kids', limit: 0}, 'Enfants', 'age'], ['kids_century', 'Nombre moyen d’enfants par famille, par siècle', {what: 'families', by: 'century', unit: 'avg', value: 'kids', limit: 0}, 'Enfants', 'time'],
+        ['age_first_child', 'Âge au premier enfant (par 5 ans)', {what: 'persons', by: 'child_age5', limit: 0}, 'Enfants', 'age'], ['age_first_child_sex', 'Âge au premier enfant, pères et mères', {what: 'persons', by: 'child_age5', series: 'sex', limit: 0}, 'Enfants', 'sex2'],
+        ['age_first_child_century', 'Âge moyen au premier enfant, par siècle de naissance', {what: 'persons', by: 'century', unit: 'avg', value: 'age_first_child', limit: 0}, 'Enfants', 'time'],
+        ['births_month', 'Naissances par mois', {what: 'births', by: 'month', limit: 0}, 'Enfants', 'month'],
+        ['births_place', 'Lieux de naissance (communes)', {what: 'births', by: 'commune'}, 'Lieux', 'cat'], ['births_county', 'Naissances par département', {what: 'births', by: 'county'}, 'Lieux', 'cat'], ['births_country', 'Pays de naissance', {what: 'births', by: 'country'}, 'Lieux', 'cat'],
+        ['marriages_place', 'Lieux de mariage', {what: 'marriages', by: 'commune'}, 'Lieux', 'cat'], ['marriages_county_century', 'Mariages par département, par siècle', {what: 'marriages', by: 'county', series: 'century', limit: 12}, 'Lieux', 'cat'],
+        ['deaths_place', 'Lieux de décès', {what: 'deaths', by: 'commune'}, 'Lieux', 'cat'], ['deaths_country', 'Pays de décès', {what: 'deaths', by: 'country'}, 'Lieux', 'cat'], ['places_county', 'Lieux par département', {what: 'places', by: 'county'}, 'Lieux', 'cat'],
+        ['occupations', 'Métiers', {what: 'persons', by: 'occupation'}, 'Métiers', 'cat'], ['occupations_century', 'Métiers, par siècle', {what: 'persons', by: 'occupation', series: 'century', limit: 12}, 'Métiers', 'cat'],
+        ['occupations_sex', 'Métiers des femmes et des hommes', {what: 'persons', by: 'occupation', series: 'sex', limit: 12}, 'Métiers', 'cat'],
+        ['occupations_age', 'Âge moyen au décès, par métier', {what: 'persons', by: 'occupation', unit: 'avg', value: 'age_death', limit: 12}, 'Métiers', 'cat'],
+        ['births_decade', 'Naissances par décennie', {what: 'births', by: 'decade', limit: 0}, 'Dates', 'time'], ['deaths_decade', 'Décès par décennie', {what: 'deaths', by: 'decade', limit: 0}, 'Dates', 'time'],
+        ['deaths_month', 'Décès par mois', {what: 'deaths', by: 'month', limit: 0}, 'Dates', 'month'], ['events_century', 'Événements par siècle', {what: 'events', by: 'century', limit: 0}, 'Dates', 'time'],
+        ['generation', 'Mes ancêtres par génération', {what: 'persons', pop: 'anc', by: 'generation', limit: 0}, 'Ma recherche', 'age'], ['branch', 'Mes ancêtres, côté père et côté mère', {what: 'persons', pop: 'anc', by: 'branch', limit: 0}, 'Ma recherche', 'few'],
+        ['sourced', 'Fiches avec ou sans source', {what: 'persons', by: 'sourced', limit: 0}, 'Ma recherche', 'few'], ['sourced_anc', 'Mes ancêtres avec ou sans source', {what: 'persons', pop: 'anc', by: 'sourced', limit: 0}, 'Ma recherche', 'few'],
+        ['events_type', 'Événements par sorte', {what: 'events', by: 'type'}, 'Ma recherche', 'cat'],
+        ['media_type', 'Médias par sorte', {what: 'media', by: 'mtype'}, 'Médias', 'few'], ['media_decade', 'Médias par décennie', {what: 'media', by: 'decade', limit: 0}, 'Médias', 'time'], ['media_surname', 'Médias par nom de famille', {what: 'media', by: 'last_name'}, 'Médias', 'cat']];
+    // les formes qui ont un sens pour chaque diagramme (un type absent d'ici accepte tout)
+    const PARTS = ['few', 'cat'];
+    const FITS = {pie: PARTS, donut: PARTS, halfdonut: PARTS, waffle: PARTS, funnel: PARTS, parliament: PARTS, pictogram: PARTS, gauge: PARTS, treemap: PARTS, marimekko: PARTS, wordcloud: ['cat'],
+        nightingale: [...PARTS, 'month'], radar: [...PARTS, 'month'], line: ['time', 'month', 'age', 'sex2'], area: ['time', 'month', 'age', 'sex2'], stream: ['time', 'month', 'age', 'sex2'], bump: ['time', 'month', 'age'],
+        pyramid: ['sex2', 'age'], dumbbell: [...PARTS, 'sex2'], slope: [...PARTS, 'sex2']};
+    const fits = (kind, shape) => !shape || !FITS[kind] || FITS[kind].includes(shape);
     // les statistiques de l'app et leur équivalent à compter (pour « Refaire avec Compter dans ma base »)
     const FROM_APPSTAT = {'app:surnames': 'surnames', 'app:firstnames': 'firstnames', 'app:birth_places': 'births_place', 'app:marriage_places': 'marriages_place', 'app:death_places': 'deaths_place',
         'app:birth_countries': 'births_country', 'app:death_countries': 'deaths_country', 'app:sex_distribution': 'sex', 'app:birth_years': 'births_decade', 'app:death_years': 'deaths_decade',
         'app:age_at_death': 'age_death', 'app:death_causes': 'causes', 'app:children_per_family': 'kids'};
-    const DEF = {what: 'persons', distinct: false, pop: '', root: 0, gens: 0, label: 0, list: 0, search: '', ids: '', from: '', to: '', by: 'last_name', series: '', sort: '', limit: 15, others: true, empty: false, unit: 'count', value: '', live: false};
-    const ORDER = ['what', 'distinct', 'pop', 'period', 'by', 'series', 'sort', 'limit', 'others', 'empty', 'unit', 'live'];
-    const COUNT_ONLY = ['what', 'distinct', 'pop', 'period', 'by', 'series']; // ce qui demande « Compter dans ma base »
+    const DEF = {what: 'persons', distinct: false, rules: [], match: 'all', pop: '', root: 0, gens: 0, label: 0, list: 0, search: '', ids: '', from: '', to: '', by: 'last_name', series: '', sort: '', limit: 15, others: true, empty: false, unit: 'count', value: '', live: false};
+    const ORDER = ['what', 'distinct', 'rules', 'pop', 'period', 'by', 'series', 'sort', 'limit', 'others', 'empty', 'unit', 'live'];
+    const COUNT_ONLY = ['what', 'distinct', 'rules', 'pop', 'period', 'by', 'series']; // ce qui demande « Compter dans ma base »
 
     /** q complet et propre (valeurs connues seulement) */
     function norm(q0 = {}) {
@@ -99,6 +126,8 @@
         q.ids = String(q.ids || '').split(',').map(Number).filter(x => x > 0).slice(0, 500).join(',');
         q.search = String(q.search || '').slice(0, 80); q.from = String(q.from || '').slice(0, 60); q.to = String(q.to || '').slice(0, 60);
         ['distinct', 'others', 'empty', 'live'].forEach(k => { q[k] = !!q[k]; });
+        q.rules = (Array.isArray(q.rules) ? q.rules : []).filter(r => r && typeof r === 'object' && /^[a-z_]{2,30}$/.test(String(r.field || ''))).slice(0, 30).map(r => clone(r));
+        q.match = q.match === 'any' ? 'any' : 'all';
         return q;
     }
     /** les années d'une date écrite librement (« vers 1850 », « entre 1880 et 1885 », « 7 mai 1925 ») */
@@ -129,7 +158,8 @@
     }
     function params(q0) {
         const q = norm(q0);
-        return {what: q.what, by: q.by, series: q.series, sort: q.sort, limit: q.limit, others: q.others ? 1 : 0, empty: q.empty ? 1 : 0, unit: q.unit, value: q.value, distinct: q.distinct ? 1 : 0, ...dgParams(q)};
+        return {what: q.what, by: q.by, series: q.series, sort: q.sort, limit: q.limit, others: q.others ? 1 : 0, empty: q.empty ? 1 : 0, unit: q.unit, value: q.value, distinct: q.distinct ? 1 : 0, ...dgParams(q),
+            ...(q.rules.length ? {rules: JSON.stringify(q.rules), match: q.match} : {})};
     }
 
     /* ─── Le HTML du bloc ─── */
@@ -138,6 +168,58 @@
     const toggle = (k, text, on, attrs = '') => `<label class="ui-toggle h-dgo-row" data-dgo-row="${k}"><input type="checkbox" data-dgo="${k}" ${on ? 'checked' : ''} ${attrs}><i></i>${lab(k, text)}</label>`;
     const byOptions = q => BY[q.what].map(k => [k, BY_LABEL[k]]);
     const multiSeries = kind => { const g = R()?.KINDS?.[kind]?.grids?.[0]; return !!g && g.key === 'rows' && (g.series === true || Number(g.series) >= 2); };
+
+    /* ─── « ＋ Critère » : les mêmes critères que Mes listes et les Distributions (lib/my_lists.php, ext.listRuleRowHtml) ─── */
+    let ruleMeta = null, ruleMetaP = null; // types d'événements et étiquettes, pour les lignes de critères
+    const loadRuleMeta = () => ruleMeta ? Promise.resolve(ruleMeta) : (ruleMetaP ||= (A().state?.statsRuleMeta ? Promise.resolve(A().state.statsRuleMeta) : A().api('my_lists')).then(m => { ruleMeta = m; return m; }).catch(() => { ruleMetaP = null; return null; }));
+    const RULE_DEF = {gender: 'female', living: 'deceased', of_person: 'ancestors'};
+    const ruleRows = rules => ruleMeta && ext.listRuleRowHtml ? rules.map((r, i) => ext.listRuleRowHtml(r, i, 'persons', ruleMeta)).join('') : '';
+    const rulesBlock = q => `<div class="h-dgo-row h-dgo-rules" data-dgo-row="rules">${lab('rules', 'Seulement les personnes…')}<div class="h-dgo-rulebox">
+        <label class="h-dgo-match" ${q.rules.length > 1 ? '' : 'hidden'}>qui ont <select data-dgo="match">${opt([['all', 'tous ces critères (ET)'], ['any', 'au moins un de ces critères (OU)']], q.match)}</select></label>
+        <div class="h-dgo-rulelist" data-dgo-rules data-rules="${esc(JSON.stringify(q.rules))}">${ruleRows(q.rules)}</div>
+        <label class="h-dgo-addrule">＋ Critère <select data-dgo-addrule><option value="">choisir… (métier, enfants, lieu, période…)</option>${ext.ruleOptionsHtml ? ext.ruleOptionsHtml('pe') : ''}</select></label></div></div>`;
+    /** un critère en clair : « métier « bûcheron » », « ayant 3 enfants », « nés à « Pernay » » */
+    function ruleText(r) {
+        const not = r.not ? 'sauf ' : '', v = r.value ? `« ${r.value} »` : '';
+        const n = x => (x === null || x === undefined || x === '' ? null : Number(x));
+        const a = n(r.from), b = n(r.to);
+        const range = (u = '') => a !== null && b !== null ? (a === b ? `${a}${u}` : `de ${a} à ${b}${u}`) : a !== null ? `au moins ${a}${u}` : b !== null ? `au plus ${b}${u}` : '';
+        const years = () => a !== null && b !== null ? (a === b ? `en ${a}` : `entre ${a} et ${b}`) : a !== null ? `depuis ${a}` : b !== null ? `jusqu’en ${b}` : '';
+        const many = (x, w) => { const t = range(); const m = b ?? a; return t ? `ayant ${t} ${w}${m !== null && m > 1 ? 's' : ''}` : ''; };
+        const types = () => (ruleMeta?.event_types || []).filter(t => (r.values || []).map(Number).includes(Number(t.id))).map(t => String(t.label).toLowerCase()).join(' ou ');
+        let t = '';
+        switch (r.field) {
+            case 'occupation': t = v && `métier ${v}`; break;
+            case 'last_name': t = v && `nom ${v}`; break;
+            case 'first_name': t = v && `prénom ${v}`; break;
+            case 'children_count': t = many(null, 'enfant'); break;
+            case 'unions_count': t = many(null, 'union'); break;
+            case 'source_count': t = many(null, 'source'); break;
+            case 'place': t = v && `nés à ${v}`; break;
+            case 'death_place': t = v && `morts ou inhumés à ${v}`; break;
+            case 'any_place': t = v && `avec un événement à ${v}`; break;
+            case 'county': t = v && `avec un événement dans ${v}`; break;
+            case 'near_place': t = v && `à moins de ${r.km || 20} km de ${v}`; break;
+            case 'gender': t = {female: 'femmes', male: 'hommes', unknown: 'sexe inconnu'}[r.value] || ''; break;
+            case 'living': t = {living: 'en vie', deceased: 'décédés', unknown: 'statut à vérifier'}[r.value] || ''; break;
+            case 'year': t = years() && `nés ${years()}`; break;
+            case 'death_year': t = years() && `morts ${years()}`; break;
+            case 'lifespan': t = range(' ans') && `ayant vécu ${range(' ans')}`; break;
+            case 'age_at': t = range(' ans') && `âgés ${range(' ans')}${types() ? ' à : ' + types() : ''}`; break;
+            case 'sosa': t = 'mes ancêtres (Sosa)'; break;
+            case 'sosa_generation': t = range() && `génération Sosa ${range()}`; break;
+            case 'no_source': t = 'sans source'; break;
+            case 'has_media': t = 'avec une photo ou un document'; break;
+            case 'no_parents': t = 'parents inconnus'; break;
+            case 'bookmarked': t = 'dans mes favoris'; break;
+            case 'death_cause': t = v && `cause de décès ${v}`; break;
+            case 'event_type': t = types() && `ayant eu : ${types()}`; break;
+            case 'label': t = (ruleMeta?.labels || []).filter(x => (r.values || []).map(Number).includes(Number(x.id))).map(x => x.name).join(' ou '); t = t && `étiquette « ${t} »`; break;
+            default: { const L = ext.listRules?.()?.[r.field]?.pe; t = L ? `${L.toLowerCase().replace(/\s*\(lieu contient\)/, '')}${v ? ' ' + v : range() ? ' ' + range() : ''}` : ''; }
+        }
+        return t ? not + t : '';
+    }
+    const rulesText = q => q.rules.map(ruleText).filter(Boolean).join(q.match === 'any' ? ' ou ' : ', ');
 
     /** cfg : {fields: [...], kind, period: 'event' | 'birth', locked: true (les champs de « Compter » grisés), note} */
     function html(q0, cfg = {}) {
@@ -148,6 +230,7 @@
         for (const k of ORDER) {
             if (!F.has(k)) continue;
             if (k === 'what') rows.push(`<label class="h-dgo-row" data-dgo-row="what">${lab('what', 'Ce qu’on compte')}<select data-dgo="what" ${dis('what')}>${opt(WHAT, q.what)}</select></label>`);
+            if (k === 'rules' && !cfg.locked) rows.push(rulesBlock(q));
             if (k === 'distinct') rows.push(toggle('distinct', 'Compter chaque personne une seule fois', q.distinct, dis('distinct')).replace('data-dgo-row="distinct"', `data-dgo-row="distinct" ${['baptisms', 'burials', 'events'].includes(q.what) ? '' : 'hidden'}`));
             if (k === 'pop') {
                 rows.push(`<label class="h-dgo-row" data-dgo-row="pop">${lab('pop', 'Groupe de personnes')}<select data-dgo="pop" ${dis('pop')}>${opt(POP, q.pop)}</select></label>`);
@@ -190,9 +273,11 @@
         if (box.querySelector('[data-dgo-row="label"]')) q.label = Number(hid('dgo_label')) || 0;
         if (box.querySelector('[data-dgo-row="list"]')) q.list = Number(hid('dgo_list')) || 0;
         if (box.querySelector('[data-dgo-row="people"]')) q.ids = hid('dgo_ids');
+        if (box.querySelector('[data-dgo-rules]')) { q.rules = clone(box._rules || rulesOf(box)); q.match = v('match')?.value === 'any' ? 'any' : 'all'; }
         Object.assign(q, box._names || {});
         return norm(q);
     }
+    const rulesOf = box => { try { const r = JSON.parse(box.querySelector('[data-dgo-rules]')?.dataset.rules || '[]'); return Array.isArray(r) ? r : []; } catch (_) { return []; } };
     /** la période et le groupe sont-ils remplis comme il faut ? (K1 : le champ fautif encadré, la phrase dessous) */
     function check(box) {
         const q = read(box), fail = (sel, m) => { const el = box.querySelector(sel); UI()?.fail ? UI().fail(el, m) : A().toast(m, 'error'); try { el?.focus(); } catch (_) {} return false; };
@@ -224,7 +309,22 @@
         if (!box) return;
         box._cfg = cfg; box._names = box._names || {};
         const fire = () => { refresh(box); onChange?.(read(box)); };
-        box.addEventListener('change', e => { if (e.target.matches('[data-dgo="what"]')) { const b = box.querySelector('[data-dgo="by"]'); if (b) b.dataset.what = ''; } fire(); });
+        // « ＋ Critère » : la liste des critères est gardée sur le bloc (box._rules), chaque ligne relue à chaque changement
+        const list = box.querySelector('[data-dgo-rules]');
+        if (list) {
+            box._rules = rulesOf(box);
+            const paintRules = () => { list.innerHTML = ruleRows(box._rules); const m = box.querySelector('.h-dgo-match'); if (m) m.hidden = box._rules.length < 2; };
+            const readRule = row => { const r = box._rules[Number(row.dataset.lrI)]; if (!r) return;
+                row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : ['from', 'to', 'km'].includes(f) ? (el.value === '' ? null : Number(el.value)) : el.value; }); };
+            if (box._rules.length && !ruleMeta) loadRuleMeta().then(paintRules);
+            box.querySelector('[data-dgo-addrule]')?.addEventListener('change', async e => { const field = e.target.value; e.target.value = ''; if (!field) return;
+                await loadRuleMeta(); box._rules.push({field, value: RULE_DEF[field] || '', values: []}); paintRules();
+                list.querySelector(`[data-lr-i="${box._rules.length - 1}"] input:not([type=checkbox]), [data-lr-i="${box._rules.length - 1}"] select`)?.focus(); fire(); });
+            list.addEventListener('change', e => { const row = e.target.closest('[data-lr-i]'); if (row) readRule(row); });
+            list.addEventListener('input', e => { const row = e.target.closest('[data-lr-i]'); if (row && e.target.matches('input')) { readRule(row); onChange?.(read(box)); } });
+            list.addEventListener('click', e => { const row = e.target.closest('[data-lr-i]'); if (!row || !e.target.closest('[data-lr-del]')) return; box._rules.splice(Number(row.dataset.lrI), 1); paintRules(); fire(); });
+        }
+        box.addEventListener('change', e => { if (e.target.matches('[data-dgo-addrule]')) return; if (e.target.matches('[data-dgo="what"]')) { const b = box.querySelector('[data-dgo="by"]'); if (b) b.dataset.what = ''; } fire(); });
         box.addEventListener('input', e => { if (e.target.matches('input[type=range], input[data-ui-date], input[type=search]')) { UI()?.clearFieldError?.(e.target); onChange?.(read(box)); } });
         box.addEventListener('picker-change', e => {
             const n = e.detail?.name, it = e.detail?.item, items = e.detail?.items;
@@ -262,7 +362,9 @@
             const head = ['avg', 'median'].includes(q.unit) ? `${q.unit === 'avg' ? 'Moyenne' : 'Médiane'} de ${VALUE_L[q.value]} (${w.toLowerCase()}${p ? ' ' + p : ''})` : `${w}${p ? ' ' + p : ''}`;
             parts.push(head + (q.distinct && ['baptisms', 'burials', 'events'].includes(q.what) ? ', chaque personne une fois' : ''));
         } else if (cfg.source) parts.push(cfg.source);
-        if (F.has('pop') && !cfg.locked) parts.push(popText(q));
+        const crit = F.has('rules') && !cfg.locked ? rulesText(q) : '';
+        if (F.has('pop') && !cfg.locked && !(crit && !q.pop)) parts.push(popText(q));
+        if (crit) parts.push(crit);
         if (!F.has('what') && F.has('period') && !cfg.locked) { const p = periodText(q, cfg.period === 'birth'); if (p) parts.push(cfg.period === 'birth' ? `personnes ${p}` : p); }
         if (F.has('by') && !cfg.locked && BY_SUM[q.by]) parts.push(BY_SUM[q.by]);
         if (F.has('series') && !cfg.locked && q.series) parts.push(q.series === 'sex' ? 'une série par sexe' : 'une série par siècle');
@@ -272,7 +374,8 @@
         if (F.has('unit') && q.unit === 'pct') parts.push('en %');
         if (F.has('live') && q.live) parts.push('tenu à jour');
         const s = parts.filter(Boolean).join(', ');
-        return s ? s.charAt(0).toUpperCase() + s.slice(1) + '.' : '';
+        const found = Number.isFinite(cfg.found) ? ` — ${A()?.plural ? A().plural(cfg.found, 'personne trouvée', 'personnes trouvées') : cfg.found + ' personnes'}` : '';
+        return s ? s.charAt(0).toUpperCase() + s.slice(1) + found + '.' : '';
     }
 
     /* ─── Des paires [valeur, nombre] déjà comptées (exemples, statistiques de l'app, mes graphiques) ─── */
@@ -309,13 +412,16 @@
         const s = clone(spec), kind = s.kind, keep = (s.rows || []).reduce((m, r) => { const k = r.label ?? r.name ?? r.word; if (k !== undefined && r.color) m[k] = r.color; return m; }, {});
         const rows = res?.rows || [], names = res?.series || [];
         if (names.length && multiSeries(kind)) {
-            s.rows = rows.map(r => { const o = {label: r.label, color: keep[r.label] || ''}; (r.values || []).forEach((v, i) => { o['s' + i] = v; }); return o; });
+            s.rows = rows.map(r => { const o = {label: r.label, color: keep[r.label] || ''}; (r.values || []).forEach((v, i) => { o['s' + i] = v; if (r.ids_s?.[i]) o['ids' + i] = r.ids_s[i]; }); return o; });
             const old = s.series || [];
             s.series = names.map((n, i) => ({name: n, ...(old[i]?.color ? {color: old[i].color} : n === 'Hommes' ? {color: '#4e79a7'} : n === 'Femmes' ? {color: '#e15759'} : {})}));
             return s;
         }
         const pairs = rows.map(r => [r.label, r.value]);
         const out = ext.diagramFillFrom ? ext.diagramFillFrom(s, pairs, label) : s;
+        // les personnes derrière chaque barre (un clic ouvre leur liste)
+        const idsOf = new Map(rows.filter(r => r.ids).map(r => [String(r.label), r.ids]));
+        if (idsOf.size) (out.rows || []).forEach(r => { const k = String(r.label ?? r.name ?? r.word ?? ''); if (idsOf.has(k)) r.ids = idsOf.get(k); });
         // le nom de la série : ce qu'on compte (sauf un nom donné à la main)
         const smp = (() => { try { return R()?.KINDS?.[kind]?.sample?.()?.series?.[0]?.name || ''; } catch (_) { return ''; } })(), cur = out.series?.[0]?.name || '';
         const auto = Object.values(WHAT_SUM).flatMap(w => [w, w + ' (%)']).concat(['Moyenne', 'Médiane', 'Nombre', smp]);
@@ -347,6 +453,9 @@
         famois: {...FAM, hide: [...FAM.hide, '.dfa-period'], own: ['[data-dfa="from"]', '[data-dfa="to"]'], period: 'own'},
         crises: {go: '[data-dm-go]', hide: ['.dmo-period'], own: ['[data-dm="from"]', '[data-dm="to"]'], period: 'own'},
         alivepyr: {go: '[data-dm-go]', period: false}, chord: {go: '[data-dm-go]', period: false}, violin: {go: '[data-dm-go]', period: 'birth'},
+        // D23–D31 (heritage-diagram-vie.js) : même bouton que D1–D8, leurs propres « Personnes comptées » et personne de départ cachés
+        ...Object.fromEntries([['vieenfants', 'birth'], ['viefratries', 'event'], ['viesaisons', 'event'], ['vieveuvage', 'event'], ['viedurees', 'event'], ['vieparents', 'birth'], ['vieavant', 'event'], ['vieecart', 'event']]
+            .map(([k, period]) => [k, {go: '[data-dfa-go]', hide: ['[data-dvi="scope"]', 'dvi_root'], root: 'dvi_root', period}])),
     };
     // les types dont « 🌳 Des données de mon arbre » (kind.app) accepte le groupe et la période (lib/diagram_chiffres.php, diagram_adn_chiffres.php)
     const TREE = new Set(['bump', 'stream', 'histogram', 'boxplot', 'dumbbell', 'slope', 'waterfall', 'beeswarm', 'smallmult', 'ridgeline', 'marimekko', 'dotplot', 'nightingale', 'mobility']);
@@ -380,6 +489,6 @@
         return box;
     }
 
-    ext.diagramAppOpts = {DEF, ORDER, PRESETS, FROM_APPSTAT, WHAT, BY, POP, HELP, FAQ, norm, html, bind, read, check, refresh, summary, popText, periodText, params, dgParams, post, postOf, count, toSpec, extra, setCurrent, adopt,
+    ext.diagramAppOpts = {DEF, ORDER, PRESETS, FITS, fits, ruleText, rulesText, FROM_APPSTAT, WHAT, BY, POP, HELP, FAQ, norm, html, bind, read, check, refresh, summary, popText, periodText, params, dgParams, post, postOf, count, toSpec, extra, setCurrent, adopt,
         customFields, treeFields, multiSeries, yearsOf, fromYear, toYear, CUSTOM, TREE, get current() { return current; }};
 })();

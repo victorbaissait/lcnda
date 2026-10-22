@@ -414,6 +414,7 @@ try {
         'diagram_more' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_more.php'; json_response(diagram_more_data($pdo, $_GET)); })(), // 📊 arbre en frise, crises, fratrie, pyramide, accordéon, cousinages, matrice, patronymes, accord (lib/diagram_more.php)
         'diagram_cartes2' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes2.php'; json_response(diagram_cartes2_data($pdo, $_GET)); })(), // 🗺️ carte en points, hexagones, carte qui raconte, prénoms transmis, causes de décès (lib/diagram_cartes2.php)
         'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
+        'diagram_vie' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_vie.php'; json_response(diagram_vie_data($pdo, $_GET)); })(), // 📊 D23–D38 : mortalité des enfants, fratries, saisons, veuvage, durée des mariages, âge des parents, conceptions, écart d'âge, loin du berceau, savoir signer, ce que tu as prouvé, registres consultés (lib/diagram_vie.php)
         'diagram_famille' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_famille.php'; json_response(diagram_famille_data($pdo, $_GET)); })(), // 📊 D1–D8 : qui a connu qui, survie, métiers, rayon des mariages, implexe, mois, naissances, lieux de vie (lib/diagram_famille.php)
         'diagram_adn_numbers' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_adn_chiffres.php'; json_response(diagram_adn_numbers($pdo, $_GET)); })(), // 📊 diagrammes ADN et Chiffres (mobilité, mois, âges moyens) : lib/diagram_adn_chiffres.php
         'diagram_app_count' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_appcount.php'; json_response(diagram_app_count($pdo, $_GET)); })(), // 📊 « Depuis l'app → Graphique » : compter dans ma base, avec les options communes (lib/diagram_appcount.php, lib/diagram_options.php)
@@ -2229,7 +2230,7 @@ function person_detail(PDO $pdo, int $id): never
     $eventIds = array_column($eventRows, 'id');
     if ($eventIds) {
         $marks = implode(',', array_fill(0, count($eventIds), '?'));
-        $wStmt = $pdo->prepare("SELECT ew.event_id, ew.note, ew.position,
+        $wStmt = $pdo->prepare("SELECT ew.event_id, ew.note, ew.position, ew.signed,
             p.id AS person_id, p.first_name, p.last_name, p.middle_name, p.prefix, p.suffix
             FROM event_witnesses ew JOIN persons p ON p.id=ew.person_id
             WHERE ew.event_id IN ($marks) ORDER BY ew.position,ew.id");
@@ -8138,13 +8139,15 @@ function save_event_witnesses(PDO $pdo, array $data): array
     if (!is_array($witnesses)) $witnesses = [];
     // rien n'a changé (cas le plus courant : « Enregistrer » d'un événement) : rien n'est écrit ni journalisé
     $want = [];
-    foreach ($witnesses as $pos => $w) { $pid = (int)($w['person_id'] ?? 0); if ($pid) $want[] = [$pid, (string)($w['note'] ?? ''), (int)$pos]; }
-    $cur = $pdo->prepare('SELECT person_id,note,position FROM event_witnesses WHERE event_id=? ORDER BY position,id'); $cur->execute([$eventId]);
-    $have = array_map(static fn($r) => [(int)$r['person_id'], (string)$r['note'], (int)$r['position']], $cur->fetchAll(PDO::FETCH_ASSOC));
+    // ✍️ signed : 1 = a signé, 0 = n'a pas signé, null = on ne sait pas (diagramme « Savoir signer »)
+    $sig = static fn($v) => ($v === 1 || $v === '1' || $v === true) ? 1 : (($v === 0 || $v === '0' || $v === false) ? 0 : null);
+    foreach ($witnesses as $pos => $w) { if (!is_array($w)) continue; $pid = (int)($w['person_id'] ?? 0); if ($pid) $want[] = [$pid, (string)($w['note'] ?? ''), (int)$pos, $sig($w['signed'] ?? null)]; }
+    $cur = $pdo->prepare('SELECT person_id,note,position,signed FROM event_witnesses WHERE event_id=? ORDER BY position,id'); $cur->execute([$eventId]);
+    $have = array_map(static fn($r) => [(int)$r['person_id'], (string)$r['note'], (int)$r['position'], $r['signed'] === null ? null : (int)$r['signed']], $cur->fetchAll(PDO::FETCH_ASSOC));
     if ($have === $want) return ['event_id' => $eventId, 'unchanged' => true];
     $pdo->prepare('DELETE FROM event_witnesses WHERE event_id=?')->execute([$eventId]);
-    $stmt = $pdo->prepare('INSERT INTO event_witnesses(event_id,person_id,note,position) VALUES(?,?,?,?)');
-    foreach ($want as [$pid, $note, $pos]) $stmt->execute([$eventId, $pid, $note, $pos]);
+    $stmt = $pdo->prepare('INSERT INTO event_witnesses(event_id,person_id,note,position,signed) VALUES(?,?,?,?,?)');
+    foreach ($want as [$pid, $note, $pos, $signed]) $stmt->execute([$eventId, $pid, $note, $pos, $signed]);
     log_change($pdo, 'event', $eventId, 'update', 'Mise à jour des témoins - événement #' . $eventId);
     return ['event_id' => $eventId];
 }
@@ -12394,6 +12397,7 @@ function add_event(PDO $pdo,array $data): array
     $stmt=$pdo->prepare("INSERT INTO events(scope,person_id,family_id,event_type_id,date_text,date_calendar,date_converted,date_alternative,year,place_id,title,description,address,extra_info,former_place_name,former_country,precise_lat,precise_lon,first_name,last_name,work_fields,fact_confidence,confidence_origin,confidence_media_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     $stmt->execute([$scope,$scope==='person'?$personId:null,$scope==='family'?$familyId:null,$typeId,$date,$dateCalendar,$dateConverted,safe_text($data['date_alternative']??''),$year,$placeId?:null,safe_text($data['title']??''),safe_text($data['description']??''),safe_text($data['address']??''),safe_text($data['extra_info']??''),safe_text($data['former_place_name']??''),safe_text($data['former_country']??''),$preciseLat,$preciseLon,safe_text($data['first_name']??''),safe_text($data['last_name']??''),$workFields,$factConfidence,$confidenceOrigin,$confidenceMediaId]);
     $id=(int)$pdo->lastInsertId();
+    foreach(['signed1','signed2'] as $sk)if(array_key_exists($sk,$data)){$sv=is_scalar($data[$sk])?(string)$data[$sk]:'';$pdo->prepare("UPDATE events SET $sk=? WHERE id=?")->execute([$sv==='1'?1:($sv==='0'?0:null),$id]);} // ✍️ qui a signé l'acte (D35 « Savoir signer »)
     if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]);
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     log_change($pdo,'event',$id,'create',$scope==='family'?'Ajout d’un événement à la famille #'.$familyId:'Ajout d’un événement à la fiche #'.$personId);
@@ -12452,6 +12456,7 @@ function save_event(PDO $pdo,array $data): array
         $pdo->prepare('UPDATE events SET event_type_id=?,date_text=?,date_calendar=?,date_converted=?,date_alternative=?,year=?,place_id=?,title=?,description=?,address=?,extra_info=?,former_place_name=?,former_country=?,first_name=?,last_name=?,work_fields=?,fact_confidence=?,confidence_origin=?,confidence_media_id=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
             ->execute([$typeId,$date,$dateCalendar,$dateConverted,$dateAlternative,$year,$placeId?:null,safe_text($data['title']??''),safe_text($data['description']??''),safe_text($data['address']??''),safe_text($data['extra_info']??''),safe_text($data['former_place_name']??''),safe_text($data['former_country']??''),safe_text($data['first_name']??''),safe_text($data['last_name']??''),$workFields,$factConfidence,$confidenceOrigin,$confidenceMediaId,$id]);
     }
+    foreach(['signed1','signed2'] as $sk)if(array_key_exists($sk,$data)){$sv=is_scalar($data[$sk])?(string)$data[$sk]:'';$pdo->prepare("UPDATE events SET $sk=? WHERE id=?")->execute([$sv==='1'?1:($sv==='0'?0:null),$id]);} // ✍️ qui a signé l'acte (D35 « Savoir signer »)
     if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]); // « date incertaine » cochée
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     $stmt->execute([$id]);$after=$stmt->fetch();

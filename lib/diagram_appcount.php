@@ -20,7 +20,8 @@ require_once __DIR__ . '/diagram_options.php';
 require_once __DIR__ . '/diagram_chiffres.php'; // dchf_date, dchf_age, dchf_century, dchf_first_given
 
 const DAC_WHAT = ['persons', 'births', 'baptisms', 'marriages', 'deaths', 'burials', 'events', 'families', 'places', 'media'];
-const DAC_PERSON_BY = ['none', 'last_name', 'first_name', 'sex', 'occupation', 'generation', 'commune', 'county', 'state', 'country', 'century', 'decade', 'year', 'month', 'age5', 'age10', 'kids'];
+const DAC_PERSON_BY = ['none', 'last_name', 'first_name', 'sex', 'occupation', 'generation', 'commune', 'county', 'state', 'country', 'century', 'decade', 'year', 'month', 'age5', 'age10', 'kids',
+    'marr_age5', 'child_age5', 'branch', 'living', 'sourced', 'unions']; // + âge au (premier) mariage, âge au premier enfant, branche, vivant ou non, a une source, nombre d'unions
 const DAC_BY = [
     'persons' => DAC_PERSON_BY, 'births' => DAC_PERSON_BY, 'baptisms' => DAC_PERSON_BY, 'burials' => DAC_PERSON_BY,
     'deaths' => [...DAC_PERSON_BY, 'cause'],
@@ -30,8 +31,8 @@ const DAC_BY = [
     'places' => ['none', 'county', 'state', 'country'],
     'media' => ['none', 'mtype', 'last_name', 'century', 'decade', 'year'],
 ];
-const DAC_TIME_BY = ['century', 'decade', 'year', 'month', 'age5', 'age10', 'generation', 'kids'];
-const DAC_VALUES = ['persons' => ['age_death', 'age_marriage', 'kids'], 'births' => ['age_death', 'age_marriage', 'kids'], 'baptisms' => ['age_death', 'kids'],
+const DAC_TIME_BY = ['century', 'decade', 'year', 'month', 'age5', 'age10', 'generation', 'kids', 'marr_age5', 'child_age5', 'unions'];
+const DAC_VALUES = ['persons' => ['age_death', 'age_marriage', 'kids', 'age_first_child'], 'births' => ['age_death', 'age_marriage', 'kids', 'age_first_child'], 'baptisms' => ['age_death', 'kids'],
     'deaths' => ['age_death', 'kids'], 'burials' => ['age_death'], 'events' => ['age_death'], 'marriages' => ['age_marriage', 'kids'], 'families' => ['age_marriage', 'kids'], 'places' => [], 'media' => []];
 const DAC_MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 const DAC_MEDIA_TYPES = ['image' => 'Photos', 'document' => 'Documents', 'audio' => 'Sons', 'video' => 'Vidéos'];
@@ -62,7 +63,7 @@ function dac_clean(array $q): array
     if ($series === 'sex' && in_array($what, ['places', 'media', 'marriages', 'families'], true)) { dgo_bad('Une série par sexe ne va pas avec ce qu’on compte.'); }
     if ($series !== '' && $series === ($by === 'sex' ? 'sex' : ($by === 'century' ? 'century' : ''))) { $series = ''; }
     $unit = dac_enum($q, 'unit', ['count', 'pct', 'avg', 'median'], 'count', 'Unité inconnue.');
-    $value = dac_enum($q, 'value', ['age_death', 'age_marriage', 'kids'], '', 'Valeur inconnue.');
+    $value = dac_enum($q, 'value', ['age_death', 'age_marriage', 'kids', 'age_first_child'], '', 'Valeur inconnue.');
     if (in_array($unit, ['avg', 'median'], true)) {
         if (!DAC_VALUES[$what]) { dgo_bad('Pas de moyenne possible pour ce qu’on compte.'); }
         if ($value === '') { $value = DAC_VALUES[$what][0]; }
@@ -71,7 +72,15 @@ function dac_clean(array $q): array
     $limit = dgo_scalar($q, 'limit');
     if ($limit !== '' && !preg_match('/^\d{1,4}$/', $limit)) { dgo_bad('Nombre de valeurs de mauvaise forme.'); }
     $limit = $limit === '' ? (in_array($by, DAC_TIME_BY, true) ? 0 : 15) : min(200, (int) $limit);
-    return ['what' => $what, 'by' => $by, 'series' => $series, 'unit' => $unit, 'value' => $value, 'limit' => $limit,
+    // « ＋ Critère » : les mêmes critères que Mes listes et les distributions (lib/my_lists.php), ET ou OU
+    $rules = []; $rawRules = dgo_scalar($q, 'rules');
+    if ($rawRules !== '') {
+        if (strlen($rawRules) > 20000) { dgo_bad('Trop de critères.'); }
+        $dec = json_decode($rawRules, true); if (!is_array($dec)) { dgo_bad('Critères de mauvaise forme.'); }
+        if (!function_exists('my_list_clean_definition')) { require_once __DIR__ . '/my_lists.php'; }
+        $rules = array_slice(my_list_clean_definition(['rules' => array_slice(array_values($dec), 0, 30), 'match' => dgo_scalar($q, 'match')], 'persons')['rules'], 0, 30);
+    }
+    return ['what' => $what, 'by' => $by, 'series' => $series, 'unit' => $unit, 'value' => $value, 'limit' => $limit, 'rules' => $rules, 'match' => dgo_scalar($q, 'match') === 'any' ? 'any' : 'all',
         'sort' => dac_enum($q, 'sort', ['', 'big', 'small', 'az', 'za', 'natural'], '', 'Tri inconnu.'),
         'others' => dac_bool($q, 'others', true), 'empty' => dac_bool($q, 'empty', false), 'distinct' => dac_bool($q, 'distinct', false),
         'opts' => dgo_clean($q)];
@@ -86,7 +95,7 @@ function dac_people(PDO $pdo): array
     $hasKind = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='kind'")->fetchColumn();
     foreach ($pdo->query('SELECT id, first_name, last_name, gender, COALESCE(occupation,\'\') AS occupation FROM persons' . ($hasKind ? " WHERE COALESCE(kind,'')<>'animal'" : '')) as $r) {
         $out[(int) $r['id']] = ['first' => (string) $r['first_name'], 'last' => trim((string) $r['last_name']), 'g' => (string) $r['gender'], 'occ' => (string) $r['occupation'],
-            'b' => null, 'bp' => 0, 'br' => 9, 'd' => null, 'dp' => 0, 'dr' => 9, 'cause' => '', 'kids' => 0, 'm' => null];
+            'b' => null, 'bp' => 0, 'br' => 9, 'd' => null, 'dp' => 0, 'dr' => 9, 'cause' => '', 'kids' => 0, 'm' => null, 'fc' => null, 'unions' => 0, 'src' => false, 'living' => ''];
     }
     $rank = ['BIRT' => 0, 'CHR' => 1, 'BAPM' => 2, 'DEAT' => 0, 'BURI' => 1];
     foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag AS tag, e.sort_date, e.year, e.place_id, COALESCE(e.cause,'') AS cause FROM events e JOIN event_types t ON t.id=e.event_type_id
@@ -103,6 +112,16 @@ function dac_people(PDO $pdo): array
         foreach ([(int) $r['partner1_id'], (int) $r['partner2_id']] as $p) { if ($p && isset($out[$p])) { $out[$p]['kids'] += (int) $r['n']; } }
     }
     foreach (dac_marriages($pdo) as $m) { foreach ([$m['p1'], $m['p2']] as $p) { if ($p && isset($out[$p]) && $m['d'] && (!$out[$p]['m'] || $m['d'][0] < $out[$p]['m'][0])) { $out[$p]['m'] = $m['d']; } } }
+    // la naissance du premier enfant, le nombre d'unions, une source sur la fiche ou un de ses événements, vivant ou non
+    $firstKid = [];
+    foreach ($pdo->query('SELECT f.partner1_id, f.partner2_id, fc.child_id FROM families f JOIN family_children fc ON fc.family_id=f.id') as $r) {
+        $cb = $out[(int) $r['child_id']]['b'] ?? null; if (!$cb) { continue; }
+        foreach ([(int) $r['partner1_id'], (int) $r['partner2_id']] as $p) { if ($p && isset($out[$p]) && (!$out[$p]['fc'] || [$cb[0], $cb[1], $cb[2]] < [$out[$p]['fc'][0], $out[$p]['fc'][1], $out[$p]['fc'][2]])) { $out[$p]['fc'] = $cb; } }
+    }
+    foreach ($pdo->query('SELECT partner1_id, partner2_id FROM families') as $r) { foreach ([(int) $r['partner1_id'], (int) $r['partner2_id']] as $p) { if ($p && isset($out[$p])) { $out[$p]['unions']++; } } }
+    foreach ($pdo->query("SELECT DISTINCT entity_id FROM source_links WHERE entity_type='person'") as $r) { $p = (int) $r['entity_id']; if (isset($out[$p])) { $out[$p]['src'] = true; } }
+    foreach ($pdo->query("SELECT DISTINCT e.person_id FROM source_links sl JOIN events e ON e.id=sl.entity_id WHERE sl.entity_type='event' AND e.person_id IS NOT NULL") as $r) { $p = (int) $r['person_id']; if (isset($out[$p])) { $out[$p]['src'] = true; } }
+    foreach ($pdo->query('SELECT id, COALESCE(living_status,\'\') AS l FROM persons') as $r) { $p = (int) $r['id']; if (isset($out[$p])) { $out[$p]['living'] = (string) $r['l']; } }
     return $cache = $out;
 }
 
@@ -165,6 +184,12 @@ function diagram_app_count(PDO $pdo, array $q): array
     $t0 = microtime(true);
     $c = dac_clean($q); $o = $c['opts']; $what = $c['what']; $by = $c['by'];
     $keep = dgo_people($pdo, $o);
+    if ($c['rules']) { // « ＋ Critère » : les personnes qui répondent aux critères, croisées avec le groupe
+        $ruleIds = dac_rule_ids($pdo, $c['rules'], $c['match']);
+        $keep = $keep === null ? $ruleIds : array_intersect_key($keep, $ruleIds);
+    }
+    $branch = [];
+    if ($by === 'branch' || $c['series'] === 'branch') { foreach (dgn_sosa($pdo, dgn_root($pdo, $o['root']), 30, 120000) as $s => $id) { if ($s > 1 && !isset($branch[$id])) { $branch[$id] = (($s >> (strlen(decbin($s)) - 2)) & 1) === 0 ? 'Côté père' : 'Côté mère'; } } }
     // la génération : celle du groupe (ancêtres, descendants, branche), sinon celle des ancêtres de la personne de départ
     $gens = null; $up = $o['pop'] !== 'desc';
     if ($by === 'generation') { $gens = in_array($o['pop'], ['anc', 'desc', 'pat', 'mat'], true) ? $keep : dgo_walk($pdo, dgn_root($pdo, $o['root']), 0, true); }
@@ -226,7 +251,7 @@ function diagram_app_count(PDO $pdo, array $q): array
         if (in_array($what, ['marriages', 'families'], true)) { return $it['d'] ? dchf_age($p['b'], $it['d']) : null; }
         return $p['d'] ? dchf_age($p['b'], $p['d']) : null;
     };
-    $keyOf = static function (array $it, string $how) use ($P, $PL, $gens, $up, $sexL, $ageOf): string {
+    $keyOf = static function (array $it, string $how) use ($P, $PL, $gens, $up, $sexL, $ageOf, $branch): string {
         $p = $P[$it['ref']] ?? null; $d = $it['d']; $pl = $PL[$it['pl']] ?? null;
         switch ($how) {
             case 'none': return 'Tout';
@@ -245,6 +270,13 @@ function diagram_app_count(PDO $pdo, array $q): array
             case 'cause': return $p ? mb_substr($p['cause'], 0, 60) : '';
             case 'type': return (string) ($it['x']['type'] ?? '');
             case 'mtype': return (string) ($it['x']['mtype'] ?? '');
+            case 'marr_age5': case 'child_age5':
+                $to = $how === 'marr_age5' ? ($p['m'] ?? null) : ($p['fc'] ?? null); if (!$p || !$p['b'] || !$to) { return ''; }
+                $a = dchf_age($p['b'], $to); if ($a === null || $a < 10) { return ''; } $b = intdiv($a, 5) * 5; return $b . '–' . ($b + 4) . ' ans';
+            case 'branch': return $branch[$it['ref']] ?? '';
+            case 'living': return !$p ? '' : ($p['living'] === 'living' ? 'En vie' : ($p['d'] || $p['living'] === 'deceased' ? 'Décédé(e)' : ''));
+            case 'sourced': return !$p ? '' : ($p['src'] ? 'Avec une source' : 'Sans source');
+            case 'unions': return !$p ? '' : ($p['unions'] >= 4 ? '4 et plus' : (string) $p['unions']);
         }
         return '';
     };
@@ -258,6 +290,7 @@ function diagram_app_count(PDO $pdo, array $q): array
     };
     $valOf = static function (array $it) use ($P, $c, $what, $ageOf): ?float {
         if ($c['value'] === 'kids') { return (float) ($it['x']['kids'] ?? ($P[$it['ref']]['kids'] ?? 0)); }
+        if ($c['value'] === 'age_first_child') { $p = $P[$it['ref']] ?? null; if (!$p || !$p['b'] || !$p['fc']) { return null; } $a = dchf_age($p['b'], $p['fc']); return $a === null || $a < 10 ? null : (float) $a; }
         if ($c['value'] === 'age_marriage') {
             if (in_array($what, ['marriages', 'families'], true)) { $a = $ageOf($it); return $a === null ? null : (float) $a; }
             $p = $P[$it['ref']] ?? null; if (!$p || !$p['b'] || !$p['m']) { return null; } $a = dchf_age($p['b'], $p['m']); return $a === null ? null : (float) $a;
@@ -274,7 +307,8 @@ function diagram_app_count(PDO $pdo, array $q): array
         if ($c['series'] !== '' && $s === '') { $s = 'Inconnu'; }
         $v = $avg ? $valOf($it) : null; if ($avg && $v === null) { continue; }
         $g = &$groups[$k][$s];
-        if ($g === null) { $g = ['n' => 0, 'v' => [], 'seen' => []]; }
+        if ($g === null) { $g = ['n' => 0, 'v' => [], 'seen' => [], 'ids' => []]; }
+        foreach ($it['who'] as $wid) { if (count($g['ids']) < 400) { $g['ids'][$wid] = true; } } // pour le clic : la liste des personnes
         if ($c['distinct'] && in_array($what, ['baptisms', 'burials', 'events'], true)) { $pid = $it['who'][0] ?? 0; if (isset($g['seen'][$pid])) { unset($g); continue; } $g['seen'][$pid] = true; }
         $g['n']++; if ($avg) { $g['v'][] = $v; }
         unset($g);
@@ -320,14 +354,28 @@ function diagram_app_count(PDO $pdo, array $q): array
     $out = [];
     foreach ($rows as $r) {
         $label = $r['k'] === '' ? 'Inconnu' : $r['k'];
-        if ($c['series'] === '') { $x = $r['s'][''] ?? ['n' => 0, 'v' => []]; $out[] = ['label' => $label, 'value' => $num($x)]; continue; }
+        $idsOf = static fn(?array $x) => implode(',', array_slice(array_keys($x['ids'] ?? []), 0, 400));
+        if ($c['series'] === '') { $x = $r['s'][''] ?? ['n' => 0, 'v' => []]; $out[] = ['label' => $label, 'value' => $num($x), 'ids' => empty($r['other']) ? $idsOf($x) : '']; continue; }
         $vals = array_map(static fn($s) => isset($r['s'][$s]) ? $num($r['s'][$s]) : 0.0, $seriesNames);
         $all = ['n' => $r['n'], 'v' => []]; foreach ($r['s'] as $x) { array_push($all['v'], ...$x['v']); }
-        $out[] = ['label' => $label, 'value' => $num($all), 'values' => $vals];
+        $out[] = ['label' => $label, 'value' => $num($all), 'values' => $vals, 'ids_s' => empty($r['other']) ? array_map(static fn($s) => $idsOf($r['s'][$s] ?? null), $seriesNames) : []];
     }
     $unitLabel = match ($c['unit']) { 'pct' => '%', 'avg', 'median' => $c['value'] === 'kids' ? 'enfants' : 'ans', default => '' };
     return ['rows' => $out, 'series' => $c['series'] === '' ? [] : array_values($seriesNames), 'total' => $total, 'counted' => $counted,
-        'unit' => $c['unit'], 'unit_label' => $unitLabel, 'what' => $what, 'by' => $by, 'ms' => (int) round((microtime(true) - $t0) * 1000)];
+        'unit' => $c['unit'], 'unit_label' => $unitLabel, 'what' => $what, 'by' => $by, 'people' => $keep === null ? count($P) : count(array_intersect_key($keep, $P)), 'ms' => (int) round((microtime(true) - $t0) * 1000)];
+}
+
+/** les personnes qui répondent aux critères « ＋ Critère » (moteur de Mes listes) : id → true */
+function dac_rule_ids(PDO $pdo, array $rules, string $match): array
+{
+    if (!function_exists('my_list_rows_for')) { require_once __DIR__ . '/my_lists.php'; }
+    $res = my_list_rows_for($pdo, ['id' => 0, 'source' => 'persons', 'definition_json' => json_encode(['rules' => $rules, 'match' => $match, 'columns' => ['name']])]);
+    $out = [];
+    foreach ($res['rows'] ?? [] as $r) { // une ligne de liste : key « p:12 » et ses personnes
+        if (preg_match('/^p:(\d+)$/', (string) ($r['key'] ?? ''), $m)) { $out[(int) $m[1]] = true; continue; }
+        foreach ($r['people'] ?? [] as $pp) { $id = (int) ($pp['id'] ?? 0); if ($id > 0) { $out[$id] = true; } }
+    }
+    return $out;
 }
 
 /** pour ranger de A à Z sans tenir compte des accents ni des capitales */

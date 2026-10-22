@@ -18,6 +18,8 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const clone = v => JSON.parse(JSON.stringify(v ?? null));
     const LINK_IC = {person: '👤', investigation: '🔎', investigation_item: '🧩', atelier_project: '📚'};
+    // les autres types qui prennent aussi « 📊 Des chiffres de l’app » (une ou plusieurs séries par catégorie)
+    const STAT_KINDS = ['parliament', 'wordcloud', 'pictogram', 'gauge', 'bump', 'stream', 'smallmult', 'marimekko', 'dumbbell', 'slope'];
     const TABLE_KINDS = ['columns', 'bars', 'stacked', 'stacked100', 'line', 'area', 'pie', 'donut', 'halfdonut', 'waffle', 'treemap', 'funnel', 'radar', 'pyramid', 'heatmap'];
 
     /* ─── Les diagrammes enregistrés ─── */
@@ -332,12 +334,13 @@
         /* données prises dans l'app */
         // la phrase du réglage (« Personnes nées entre 1800 et 1900, mes ancêtres, par département, 10 premiers ») au-dessus de l'aperçu
         let lastSum = '', appSum = '';
+        let appDraft = null; // le réglage de « Graphique » en cours (critères compris), gardé quand on passe d'un onglet à l'autre
         const showSum = t => { const el = dlg.querySelector('[data-dg-sum]'); if (!el) return; el.textContent = t ? '⚙️ ' + t : ''; el.hidden = !t; };
         const setSum = t => { lastSum = t; showSum(t); };
         const DGO = () => ext.diagramAppOpts;
         const appPaneHtml = () => {
             if (kindOf().fromApp?.html) return kindOf().fromApp.html(spec); // une sorte avec son propre panneau : kind.fromApp = {html(spec), bind(pane, {spec, apply})} (heritage-diagram-genea.js)
-            const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || ['parliament', 'wordcloud', 'pictogram', 'gauge'].includes(k) || !!kindOf().pairs, kApp = kindOf().app;
+            const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || STAT_KINDS.includes(k) || !!kindOf().pairs, kApp = kindOf().app;
             const tf = DGO()?.treeFields(k) || [], tq = DGO() ? DGO().norm({...(spec.live?.tq || {}), live: !!spec.live?.tree}) : null;
             // une sorte peut apporter ses propres données de l'arbre : kind.app = {sources: [[clé, nom]], fill: async (spec, clé) => spec}
             return `<div class="h-dg-app">${kApp?.sources?.length ? `<h4>🌳 Des données de mon arbre</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main).</p><label>Données<select data-dg-kapp>${kApp.sources.map(([key, label]) => `<option value="${esc(key)}" ${spec.live?.tree === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label>${tf.length ? `<div data-dgo-tree>${DGO().html(tq, {fields: tf, kind: k, period: 'birth'})}</div>` : ''}<button type="button" class="button small" data-dg-kappgo>Prendre ces données</button>` : ''}${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques).</p>
@@ -379,7 +382,9 @@
             const fieldsFor = () => O.ORDER.filter(f => f !== 'series' || O.multiSeries(k));
             const presetOf = key => O.PRESETS.find(([id]) => 'q:' + id === key);
             let srcKey = spec.live?.q ? 'q:' + (spec.live.preset || 'custom') : spec.live?.key && !spec.live.follow ? spec.live.key : 'q:custom';
-            let draft = O.norm(spec.live?.q ? {...spec.live.q, live: true} : {...(k === 'pyramid' ? {series: 'sex', by: 'age10', what: 'deaths'} : {}), limit: srcKey.startsWith('q:') ? 15 : 0, ...(spec.live?.post || {}), live: !!spec.live?.key});
+            const two = R().KINDS[k]?.grids?.[0]?.series === 2; // pyramide, haltères, pente : deux séries face à face (hommes et femmes)
+            let draft = O.norm(spec.live?.q ? {...spec.live.q, live: true} : {...(k === 'pyramid' ? {series: 'sex', by: 'age10', what: 'deaths'} : two ? {series: 'sex'} : {}), limit: srcKey.startsWith('q:') ? 15 : 0, ...(spec.live?.post || {}), live: !!spec.live?.key});
+            if (appDraft?.kind === k) { srcKey = appDraft.key; draft = appDraft.q; }
             const labelOf = key => sel.querySelector(`option[value="${CSS.escape(key)}"]`)?.textContent || presetOf(key)?.[1] || '';
             const cfgFor = key => { const locked = !key.startsWith('q:'), redo = O.FROM_APPSTAT[key];
                 return {fields: fieldsFor(), kind: k, period: 'event', locked, source: labelOf(key), liveAttr: 'data-dg-srclive',
@@ -388,34 +393,41 @@
                 if (!shost || !O) return;
                 const cfg = cfgFor(srcKey); shost.innerHTML = O.html(draft, cfg);
                 const box = shost.querySelector('[data-dgo-box]');
-                O.bind(box, {cfg, onChange: q => { draft = q; setSum(O.summary(q, cfg)); }});
-                setSum(O.summary(draft, cfg));
+                O.bind(box, {cfg, onChange: q => { draft = q; appDraft = {kind: k, key: srcKey, q}; setSum(O.summary(q, cfg)); found(q, cfg); }});
+                setSum(O.summary(draft, cfg)); found(draft, cfg);
             };
-            const fillSel = src => { const g = {'🧮 Compter dans ma base': O ? O.PRESETS.map(([id, l]) => ['q:' + id, l]) : []}; src.forEach(([key, label, grp]) => { (g[grp] = g[grp] || []).push([key, label]); });
-                sel.innerHTML = Object.entries(g).filter(([, items]) => items.length).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([key, label]) => `<option value="${esc(key)}" ${srcKey === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</optgroup>`).join('');
+            // la phrase dit aussi combien de personnes sont comptées (« — 3 personnes trouvées »), relue un peu après chaque changement
+            let foundT = 0;
+            const found = (q, cfg) => { clearTimeout(foundT); if (cfg.locked) return;
+                foundT = setTimeout(() => O.count(q).then(res => { if (draft !== q && JSON.stringify(O.params(draft)) !== JSON.stringify(O.params(q))) return; if (Number.isFinite(res?.people)) setSum(O.summary(q, {...cfg, found: res.people})); }).catch(() => {}), 450); };
+            // « 🧮 Compter dans ma base » rangé par rubrique ; ce qui n'a pas de sens pour ce diagramme est grisé (« pas pour ce diagramme »)
+            const fillSel = src => { const g = {};
+                (O ? O.PRESETS : []).forEach(([id, l, , rub, shape]) => { const fit = O.fits(k, shape) || srcKey === 'q:' + id; (g['🧮 Compter dans ma base' + (rub ? ' · ' + rub : '')] ||= []).push(['q:' + id, fit ? l : l + ' — pas pour ce diagramme', !fit]); });
+                src.forEach(([key, label, grp]) => { (g[grp] = g[grp] || []).push([key, label]); });
+                sel.innerHTML = Object.entries(g).filter(([, items]) => items.length).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([key, label, off]) => `<option value="${esc(key)}" ${srcKey === key ? 'selected' : ''} ${off ? 'disabled' : ''}>${esc(label)}</option>`).join('')}</optgroup>`).join('');
                 if (sel.value !== srcKey) srcKey = sel.value; paintHost(); };
             if (ext.diagramStatSources) ext.diagramStatSources().then(fillSel).catch(() => fillSel([]));
             else fillSel([]);
             sel.addEventListener('change', () => {
                 const key = sel.value, p = presetOf(key);
                 if (p) { const who = ['pop', 'root', 'gens', 'label', 'list', 'search', 'ids', 'from', 'to', 'live', 'rootName', 'labelName', 'listName', 'idsCount'].reduce((m, x) => { if (draft[x] !== undefined) m[x] = draft[x]; return m; }, {});
-                    draft = O.norm({...O.DEF, ...(k === 'pyramid' ? {series: 'sex'} : {}), ...who, ...p[2]}); }
+                    draft = O.norm({...O.DEF, ...(two ? {series: 'sex'} : {}), ...who, ...p[2]}); }
                 else if (srcKey.startsWith('q:')) draft = O.norm({...draft, limit: 0, others: true}); // déjà compté : tout garder, sauf si on le demande
-                srcKey = key; paintHost();
+                srcKey = key; appDraft = {kind: k, key, q: draft}; paintHost();
             });
             shost?.addEventListener('click', e => { const b = e.target.closest('[data-dgo-redo]'); if (!b) return; sel.value = 'q:' + b.dataset.dgoRedo; sel.dispatchEvent(new Event('change', {bubbles: true})); });
             pane.querySelector('[data-dg-srcgo]')?.addEventListener('click', async e => {
                 const key = sel.value; if (!key) return; const b = e.currentTarget, box = shost?.querySelector('[data-dgo-box]'), cfg = cfgFor(key);
                 const q = box && O ? O.read(box) : O?.norm({}) || {}, preset = presetOf(key);
                 if (box && !O.check(box)) return;
-                const label = preset ? (preset[0] === 'custom' ? O.summary(q, {...cfg, fields: ['what', 'pop', 'by']}).replace(/\.$/, '').slice(0, 120) : preset[1]) : labelOf(key);
+                const label = preset ? (preset[0] === 'custom' ? O.summary(q, {...cfg, fields: ['what', 'rules', 'pop', 'by']}).replace(/\.$/, '').slice(0, 120) : preset[1]) : labelOf(key);
                 b.disabled = true;
                 try {
                     if (preset) {
                         const res = await O.count(q); if (!res.rows?.length) return toast('Aucun chiffre pour ces réglages : essaie un autre groupe, une autre période ou montre « Inconnu ».', 'error');
                         spec = O.toSpec(spec, res, label);
                         if (q.live) spec.live = {key, label, q, preset: preset[0], sum: O.summary(q, cfg)}; else delete spec.live;
-                        appSum = O.summary(q, cfg);
+                        appSum = O.summary(q, {...cfg, found: res.people});
                         if (!spec.o.title || spec.o.title === kindOf().sample().o?.title) spec.o.title = label;
                         tab = 'data'; paint(); later(); toast(`${res.rows.length} valeur${res.rows.length > 1 ? 's' : ''} prise${res.rows.length > 1 ? 's' : ''} dans ta base${res.counted ? ` (${res.counted} compté${res.counted > 1 ? 's' : ''})` : ''}.`);
                         return;

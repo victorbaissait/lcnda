@@ -53,7 +53,7 @@ step('chaque type a sa place : « Graphique », « Des données de mon arbre »,
 step('mêmes champs dans le même ordre, chacun avec sa bulle d’aide', () => {
     const order = html => [...html.matchAll(/data-dgo-row="([a-z]+)"/g)].map(m => m[1]).filter(k => O.ORDER.includes(k) || k === 'period');
     const full = order(O.html({}, { fields: O.ORDER, kind: 'stacked' }));
-    same(full, ['what', 'distinct', 'pop', 'period', 'by', 'series', 'sort', 'limit', 'others', 'empty', 'unit', 'live']);
+    same(full, ['what', 'distinct', 'rules', 'pop', 'period', 'by', 'series', 'sort', 'limit', 'others', 'empty', 'unit', 'live']);
     for (const k of [...CUSTOM, ...TREE]) {
         const fields = O.CUSTOM[k] ? O.customFields(k) : O.treeFields(k), got = order(O.html({}, { fields, kind: k }));
         same(got, full.filter(f => fields.includes(f)), k);

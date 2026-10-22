@@ -15,6 +15,17 @@
 .h-dgo .ui-range-pair{min-width:0}
 .h-dgo .h-dgo-note{margin:0;font-size:.88em}
 .h-dgo select:disabled,.h-dgo input:disabled{opacity:.45;cursor:not-allowed}
+.h-dgo .h-dgo-rulebox{display:grid;gap:6px;min-width:0}
+.h-dgo .h-dgo-match,.h-dgo .h-dgo-addrule{display:grid;gap:3px;font-size:.9em}
+.h-dgo .h-dgo-match[hidden]{display:none}
+.h-dgo .h-dgo-rulelist:empty{display:none}
+.h-dgo .h-lr-row{position:relative;margin:0;padding:6px 40px 6px 8px;gap:4px 6px;border-radius:8px;min-width:0}
+.h-dgo .h-lr-row>strong{flex:1 1 auto;min-width:0;font-size:.92em}
+.h-dgo .h-lr-row [data-lr-del]{position:absolute;top:4px;right:4px}
+.h-dgo .h-lr-row input.h-lr-year{width:5.5em;flex:0 0 auto}
+.h-dgo .h-lr-row input[data-lr="value"]{flex:1 1 140px;width:auto}
+.h-dgo .h-lr-row select[multiple]{flex:1 1 100%}
+.h-dgo .h-lr-row small{flex:1 1 100%}
 .h-dg-pane .h-dg-app{grid-template-columns:minmax(0,1fr)}
 .h-dg-pane .h-dg-app select{max-width:100%;min-width:0}
 .h-dg-sum{margin:0 0 10px;padding:8px 12px;border-radius:8px;background:var(--paper,#fff);border:1px solid var(--line,#d9dde3);color:var(--ink,#1f2328);font-size:.92em;line-height:1.35;box-shadow:0 1px 4px rgba(0,0,0,.06)}
@@ -23,3 +34,5 @@
 :root[data-theme="dark"] .h-dg-sum{background:#1f2328;border-color:#3a3f47;color:#e8eaed;box-shadow:none}
 :root[data-theme="dark"] .h-dgo,:root[data-theme="dark"] .h-dg-app fieldset.h-dgo{border-color:#3a3f47}
 :root[data-theme="dark"] .h-dgo .h-dgo-sub{border-left-color:#2c4a7a}
+:root[data-theme="dark"] .h-dgo .h-lr-row{background:#1f2328;border-color:#3a3f47;color:#e8eaed}
+:root[data-theme="dark"] .h-dgo .h-lr-row small{color:#b8bec7}

@@ -292,9 +292,12 @@
     /* ═════════ 📊 Tableaux de chiffres (catégories × séries) ═════════ */
     function table(spec) {
         const series = (Array.isArray(spec.series) && spec.series.length ? spec.series : [{name: 'Valeur'}]).map((s, j) => ({name: String(s?.name || `Série ${j + 1}`), color: pick(spec, j, s?.color)}));
-        const cats = rows(spec).map((r, i) => ({label: String(r.label ?? ''), color: pick(spec, i, r.color), v: series.map((_, j) => num(r['s' + j]))}));
+        // ids / ids0, ids1… : les personnes derrière une barre ou une part (« Compter dans ma base ») → un clic ouvre leur liste (heritage-diagram-famille.js)
+        const idl = v => String(v ?? '').split(',').map(x => Math.floor(Number(x))).filter(x => x > 0 && x < 1e9).slice(0, 400);
+        const cats = rows(spec).map((r, i) => ({label: String(r.label ?? ''), color: pick(spec, i, r.color), v: series.map((_, j) => num(r['s' + j])), ids: series.map((_, j) => idl(r['ids' + j] ?? (j === 0 ? r.ids : '')))}));
         return {series, cats};
     }
+    const pidAttr = (c, j, label) => (c.ids?.[j]?.length ? ` data-dfa-pids="${c.ids[j].join(',')}" data-dfa-t="${esc(label)}" style="cursor:pointer"` : '');
     const seriesLegend = (series, cats, single) => single ? cats.map(c => ({label: c.label, color: c.color})) : series.map(s => ({label: s.name, color: s.color}));
     function cartesian(spec, W, fs, mode) {
         const o = spec.o || {}, {series, cats} = table(spec), horiz = mode === 'bars', stacked = mode === 'stacked' || mode === 'stacked100', pct = mode === 'stacked100';
@@ -325,7 +328,7 @@
                 const d = pts.map((p, i) => (i ? 'L' : 'M') + r2(p[0]) + ' ' + r2(p[1])).join(' ');
                 if (mode === 'area') svg += `<path d="${d} L${r2(pts[pts.length - 1][0])} ${r2(y0 + plotH - V(Math.max(lo, 0)) * plotH)} L${r2(pts[0][0])} ${r2(y0 + plotH - V(Math.max(lo, 0)) * plotH)} Z" fill="${s.color}" fill-opacity=".25"/>`;
                 svg += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linejoin="round"/>`;
-                pts.forEach((p, i) => { svg += `<circle cx="${r2(p[0])}" cy="${r2(p[1])}" r="3.5" fill="${s.color}"><title>${esc(cats[i].label)} — ${esc(s.name)} : ${fmt(vals[i][j])}${esc(unit)}</title></circle>`; if (showV && n <= 24) svg += T(p[0], p[1] - fs * .8, fmt(vals[i][j]), {size: fs * .8, anchor: 'middle'}); });
+                pts.forEach((p, i) => { svg += `<circle cx="${r2(p[0])}" cy="${r2(p[1])}" r="3.5" fill="${s.color}"${pidAttr(cats[i], j, cats[i].label)}><title>${esc(cats[i].label)} — ${esc(s.name)} : ${fmt(vals[i][j])}${esc(unit)}</title></circle>`; if (showV && n <= 24) svg += T(p[0], p[1] - fs * .8, fmt(vals[i][j]), {size: fs * .8, anchor: 'middle'}); });
             });
         } else {
             cats.forEach((c, i) => {
@@ -336,9 +339,9 @@
                     if (stacked) { if (v >= 0) { a = accP; b = accP += v; } else { a = accN; b = accN += v; } } else { a = 0; b = v; }
                     const pa = V(Math.max(lo, Math.min(a, b))), pb = V(Math.min(hi, Math.max(a, b))), fill = single ? c.color : s.color;
                     const tip = `<title>${esc(c.label)}${single ? '' : ' — ' + esc(s.name)} : ${fmt(c.v[j])}${esc(unit)}${pct ? ` (${fmt(v, 1)} %)` : ''}</title>`;
-                    if (horiz) { const y = y0 + band * i + (band - gw) / 2 + (stacked ? 0 : j * bw); svg += `<rect x="${r2(x0 + pa * plotW)}" y="${r2(y)}" width="${r2(Math.max(0, (pb - pa) * plotW))}" height="${r2(bw * .92)}" fill="${fill}">${tip}</rect>`;
+                    if (horiz) { const y = y0 + band * i + (band - gw) / 2 + (stacked ? 0 : j * bw); svg += `<rect x="${r2(x0 + pa * plotW)}" y="${r2(y)}" width="${r2(Math.max(0, (pb - pa) * plotW))}" height="${r2(bw * .92)}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
                         if (showV && !stacked && v) svg += T(x0 + pb * plotW + 4, y + bw * .46, fmt(v) + unit, {size: fs * .8}); }
-                    else { const x = x0 + band * i + (band - gw) / 2 + (stacked ? 0 : j * bw); svg += `<rect x="${r2(x)}" y="${r2(y0 + plotH - pb * plotH)}" width="${r2(bw * .92)}" height="${r2(Math.max(0, (pb - pa) * plotH))}" fill="${fill}">${tip}</rect>`;
+                    else { const x = x0 + band * i + (band - gw) / 2 + (stacked ? 0 : j * bw); svg += `<rect x="${r2(x)}" y="${r2(y0 + plotH - pb * plotH)}" width="${r2(bw * .92)}" height="${r2(Math.max(0, (pb - pa) * plotH))}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
                         if (showV && v && (stacked ? (pb - pa) * plotH > fs * 1.2 : true) && bw > fs * 1.2) svg += stacked ? T(x + bw * .46, y0 + plotH - (pa + pb) / 2 * plotH, fmt(v, pct ? 0 : 2), {size: fs * .75, anchor: 'middle', fill: contrast(fill)}) : T(x + bw * .46, y0 + plotH - pb * plotH - fs * .6, fmt(v), {size: fs * .78, anchor: 'middle'}); }
                 });
             });
@@ -359,7 +362,7 @@
             const d = c.v[0] / tot * span, b = a + d, large = d > Math.PI ? 1 : 0, [x1, y1] = P(a, R), [x2, y2] = P(b, R), [x3, y3] = P(b, hole), [x4, y4] = P(a, hole);
             const path = d >= 2 * Math.PI - 1e-6 ? `M${cx - R} ${cy}a${R} ${R} 0 1 0 ${2 * R} 0a${R} ${R} 0 1 0 ${-2 * R} 0${hole ? `M${cx - hole} ${cy}a${hole} ${hole} 0 1 1 ${2 * hole} 0a${hole} ${hole} 0 1 1 ${-2 * hole} 0` : ''}`
                 : `M${r2(x1)} ${r2(y1)}A${r2(R)} ${r2(R)} 0 ${large} 1 ${r2(x2)} ${r2(y2)}` + (hole ? `L${r2(x3)} ${r2(y3)}A${r2(hole)} ${r2(hole)} 0 ${large} 0 ${r2(x4)} ${r2(y4)}Z` : `L${cx} ${cy}Z`);
-            svg += `<path d="${path}" fill="${c.color}" fill-rule="evenodd" stroke="${o.bg === 'transparent' ? 'none' : '#fff'}" stroke-width="1.2"><title>${esc(c.label)} : ${fmt(c.v[0])} (${fmt(c.v[0] / tot * 100, 1)} %)</title></path>`;
+            svg += `<path d="${path}" fill="${c.color}" fill-rule="evenodd" stroke="${o.bg === 'transparent' ? 'none' : '#fff'}" stroke-width="1.2"${pidAttr(c, 0, c.label)}><title>${esc(c.label)} : ${fmt(c.v[0])} (${fmt(c.v[0] / tot * 100, 1)} %)</title></path>`;
             if (o.values !== false && d > .25) { const [lx, ly] = P(a + d / 2, hole ? (hole + R) / 2 : R * .64); svg += T(lx, ly, o.pieLabel === 'value' ? fmt(c.v[0]) : `${fmt(c.v[0] / tot * 100, 0)} %`, {size: fs * .9, anchor: 'middle', fill: contrast(c.color), weight: 600}); }
             a = b;
         });

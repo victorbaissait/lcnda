@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 58;
+const SCHEMA_VERSION = 59;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -79,6 +79,7 @@ function migration_steps(): array
         56 => 'schema_v56',
         57 => 'schema_v57',
         58 => 'schema_v58',
+        59 => 'schema_v59',
     ];
 }
 
@@ -2242,4 +2243,17 @@ function schema_v58(PDO $pdo): void
 {
     if (!function_exists('sheet_link_schema')) { require_once __DIR__ . '/sheet_link.php'; }
     sheet_link_schema($pdo);
+}
+
+/** ✍️ Savoir signer (diagramme D35 « Savoir signer », assets/js/heritage-diagram-vie.js) : qui a signé l'acte.
+ *  events.signed1 / signed2 : la personne de l'acte (ou le 1er époux) / le 2e époux — NULL = on ne sait pas, 1 = a signé,
+ *  0 = n'a pas signé (« ne sait pas signer ») ; event_witnesses.signed : pareil pour chaque témoin, parrain, marraine. */
+function schema_v59(PDO $pdo): void
+{
+    $cols = static fn(string $t) => array_column($pdo->query("PRAGMA table_info($t)")->fetchAll(), 'name');
+    $ev = $cols('events');
+    if ($ev && !in_array('signed1', $ev, true)) { $pdo->exec('ALTER TABLE events ADD COLUMN signed1 INTEGER'); }
+    if ($ev && !in_array('signed2', $ev, true)) { $pdo->exec('ALTER TABLE events ADD COLUMN signed2 INTEGER'); }
+    $ew = $cols('event_witnesses');
+    if ($ew && !in_array('signed', $ew, true)) { $pdo->exec('ALTER TABLE event_witnesses ADD COLUMN signed INTEGER'); }
 }

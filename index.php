@@ -37,7 +37,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/heritage-diagram-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-adn-chiffres.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes2.css?v=1">
-    <link rel="stylesheet" href="assets/css/heritage-diagram-options.css?v=3">
+    <link rel="stylesheet" href="assets/css/heritage-diagram-options.css?v=6">
     <link rel="stylesheet" href="assets/css/layout.css?v=16">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -445,6 +445,7 @@ header('X-Content-Type-Options: nosniff');
         <div class="dialog-labels-block"><span class="section-label">Documents</span><div id="event-media-block"><div id="event-media-list"></div><button type="button" class="button small secondary" id="event-manage-media-btn">＋ Ajouter ou relier un média</button></div></div>
         <div class="dialog-labels-block" id="event-sponsors-section" hidden><span class="section-label">Parrain/Marraine</span><div id="event-sponsors-block"><div id="event-sponsors-list"></div><button type="button" class="button small secondary" id="add-sponsor-btn">＋ Ajouter un parrain / une marraine</button></div></div>
         <div class="dialog-labels-block"><span class="section-label">Témoins</span><div id="event-witnesses-block"><div id="event-witnesses-list"></div><button type="button" class="button small secondary" id="add-witness-btn">＋ Ajouter un témoin</button></div></div>
+        <div class="event-signatures form-grid" title="Pour le diagramme « Savoir signer » : qui a signé l’acte (ou « ne sait pas signer »)"><label>✍️ La personne (ou l’époux) a signé<select name="signed1"><option value="">On ne sait pas</option><option value="1">Oui</option><option value="0">Non (ne sait pas signer)</option></select></label><label>✍️ L’épouse a signé (mariage)<select name="signed2"><option value="">On ne sait pas</option><option value="1">Oui</option><option value="0">Non (ne sait pas signer)</option></select></label></div>
         <div class="dialog-labels-block"><span class="section-label">Étiquettes</span><div id="event-label-picker"></div></div>
         <div class="dialog-labels-block event-confidence-block"><span class="section-label">Fiabilité du fait</span><div class="event-confidence-grid"><label>Niveau de confiance<select name="fact_confidence"><option value="unknown">Non évalué</option><option value="certain">Certain</option><option value="deduced">Déduit</option><option value="estimated">Estimé</option><option value="doubt">Doute</option></select></label><label>Origine / raisonnement<div class="place-input-wrap event-confidence-origin-wrap"><input name="confidence_origin" id="event-confidence-origin" placeholder="Ex. âge indiqué au mariage de son frère…" autocomplete="off"><div id="event-confidence-person-suggestions" class="place-suggestions" hidden></div></div><small class="form-help">Commence un prénom ou un nom à la fin de la phrase pour le compléter.</small></label><div class="span-2 event-confidence-media-field pk-host"><span>Média de preuve <small>(facultatif)</small></span><div class="pk" data-picker="media" id="event-confidence-media" data-pk-opts='{"name":"confidence_media_id","kind":"media","multiple":false,"placeholder":"Acte, photo, document… (titre ou nom du fichier)","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="confidence_media_id" value=""></div><small class="form-help">Le lien déjà présent sur une autre fiche est conservé.</small></div></div></div>
         <div class="modal-actions"><button type="button" class="button secondary" id="open-event-type">Nouveau type</button><span class="spacer"></span><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="event-submit">Ajouter</button></div>
@@ -1125,7 +1126,7 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=452" defer></script>
+<script src="assets/js/app.js?v=453" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=18" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1175,7 +1176,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=3" defer></script>
 <script src="assets/js/heritage-links.js?v=18" defer></script>
-<script src="assets/js/heritage-more.js?v=201" defer></script>
+<script src="assets/js/heritage-more.js?v=203" defer></script>
 <script src="assets/js/heritage-controle.js?v=3" defer></script>
 <script src="assets/js/heritage-records.js?v=10" defer></script>
 <script src="assets/js/heritage-research.js?v=34" defer></script>
@@ -1219,9 +1220,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-fiches.js?v=20" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=4" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=16" defer></script>
-<script src="assets/js/heritage-diagrams-render.js?v=6" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=21" defer></script>
-<script src="assets/js/heritage-diagram-options.js?v=1" defer></script>
+<script src="assets/js/heritage-diagrams-render.js?v=7" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=22" defer></script>
+<script src="assets/js/heritage-diagram-options.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=6" defer></script>
 <script src="assets/js/heritage-vector.js?v=30" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=18" defer></script>
@@ -1245,6 +1246,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-cartes.js?v=9" defer></script>
 <script src="assets/js/heritage-diagram-more.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-famille.js?v=3" defer></script>
+<script src="assets/js/heritage-diagram-vie.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-adn-chiffres.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-cartes2.js?v=3" defer></script>
 <script src="assets/js/heritage-artist.js?v=18" defer></script>
