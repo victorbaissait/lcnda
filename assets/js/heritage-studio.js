@@ -952,6 +952,8 @@
         const x0 = op.x * W, y0 = op.y * H, bx = L.bw ? x0 : x0 + (al === 'center' ? -BW / 2 : al === 'right' ? -BW : 0), last = L.lines[L.lines.length - 1];
         const box = {x: bx, y: y0 - shift, w: BW, h: (last?.y || 0) + size * 1.2 * vs};
         if (measureOnly) return box;
+        const turned = !!(op.rot || op.mirror); // Image → Rotation / Symétrie : le texte tourne (ou se retourne) autour de son point d'accroche
+        if (turned) { c.save(); c.translate(x0, y0); c.rotate((op.rot || 0) * Math.PI / 180); if (op.mirror) c.scale(-1, 1); c.translate(-x0, -y0); }
         const lastAl = just ? (al === 'justify-all' ? 'justify' : al.slice(8)) : al;
         const put = (t, lx, ly, uw) => { c.save(); c.translate(lx, ly); c.scale(hs, vs); if (op.halo) c.strokeText(t, 0, 0); c.fillText(t, 0, 0);
             if (uw && (op.under || op.strike)) { const th = Math.max(1, size / 14); c.shadowColor = 'transparent'; c.fillStyle = op.color; if (op.under) c.fillRect(0, size * 0.98, uw / hs, th); if (op.strike) c.fillRect(0, size * 0.55, uw / hs, th); }
@@ -965,6 +967,7 @@
             const off = a === 'center' ? (room - w) / 2 : a === 'right' ? room - w : 0;
             put(l.words.join(' '), bx + ind(l) + off, ly, w);
         });
+        if (turned) c.restore();
         return box;
     }
     /* ▦ Dégradés (comme Photoshop) : linéaire, radial, angle, réfléchi, losange. Arrêts de couleur avec leur opacité et leur milieu,
@@ -1118,7 +1121,7 @@
         c.save();
         if (op.type === 'pattern') { // ▩ un motif répété (échelle, angle, décalage) ; dans une sélection : seulement dedans
             const tile = env?.masks?.get(op.mask); if (!tile) { c.restore(); return; }
-            const k = (op.scale ?? 1) * W / (op.refW || W), pat = c.createPattern(tile, 'repeat'); pat.setTransform(new DOMMatrix().translate((op.ox || 0) * W, (op.oy || 0) * H).rotate(op.angle || 0).scale(k));
+            const k = (op.scale ?? 1) * W / (op.refW || W), pat = c.createPattern(tile, 'repeat'); pat.setTransform(new DOMMatrix().translate((op.ox || 0) * W, (op.oy || 0) * H).rotate(op.angle || 0).scale(k).scale(op.mirror ? -1 : 1, 1)); // retourné : Image → Symétrie
             const m = op.clip && env?.masks?.get(op.clip), u = m ? document.createElement('canvas') : null, g = u ? u.getContext('2d') : c; if (u) { u.width = W; u.height = H; }
             c.globalAlpha = op.opacity ?? 1; g.fillStyle = pat; g.fillRect(0, 0, W, H); if (u) { g.globalCompositeOperation = 'destination-in'; g.drawImage(m, 0, 0, W, H); c.drawImage(u, 0, 0); }
             c.restore(); return;
@@ -1131,6 +1134,7 @@
         if (op.type === 'shape') { // rectangle, ellipse, ligne, flèche
             const x1 = op.x1 * W, y1 = op.y1 * H, x2 = op.x2 * W, y2 = op.y2 * H, lw = Math.max(0.5, op.size * W);
             c.globalAlpha = op.opacity ?? 1; c.lineWidth = lw; c.strokeStyle = op.color; c.lineJoin = 'round'; c.lineCap = 'round';
+            if (op.rot && !['line', 'arrow'].includes(op.kind)) { const mx = (x1 + x2) / 2, my = (y1 + y2) / 2; c.translate(mx, my); c.rotate(op.rot * Math.PI / 180); c.translate(-mx, -my); } // tournée avec l'image (Image → Rotation, angle libre)
             c.beginPath();
             if (op.kind === 'rect') c.rect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
             else if (op.kind === 'round') { const x = Math.min(x1, x2), y = Math.min(y1, y2), w = Math.abs(x2 - x1), h = Math.abs(y2 - y1), r = Math.min(w, h) * 0.18; c.roundRect ? c.roundRect(x, y, w, h, r) : c.rect(x, y, w, h); }
@@ -1143,7 +1147,7 @@
         }
         if (op.type === 'image') { // une image placée (Calque → Placer une image) : boîte x, y, w, h (0 à 1), rotation en degrés
             const im = env?.masks?.get(op.mask); if (!im) { c.restore(); return; }
-            c.globalAlpha = op.opacity ?? 1; c.translate((op.x + op.w / 2) * W, (op.y + op.h / 2) * H); c.rotate((op.rot || 0) * Math.PI / 180);
+            c.globalAlpha = op.opacity ?? 1; c.translate((op.x + op.w / 2) * W, (op.y + op.h / 2) * H); c.rotate((op.rot || 0) * Math.PI / 180); if (op.mirror) c.scale(-1, 1);
             c.imageSmoothingQuality = 'high'; c.drawImage(im, -op.w * W / 2, -op.h * H / 2, op.w * W, op.h * H); c.restore(); return;
         }
         if (op.type === 'fillmask') { // une sélection remplie d'une couleur, sur un calque
@@ -1443,6 +1447,7 @@
         return Object.assign(S, {
             toggle(on = !S.on) { S.on = !!on; cv.hidden = line.hidden = !S.on; place(); onChange?.(S); return S.on; },
             setVertical(v) { S.vertical = !!v; place(); onChange?.(S); },
+            setBefore(b) { cv.width = b.width; cv.height = b.height; if (b instanceof ImageData) cv.getContext('2d').putImageData(b, 0, 0); else cv.getContext('2d').drawImage(b, 0, 0); place(); }, // 🔄 l'image a tourné
             place, destroy() { ro.disconnect(); cv.remove(); line.remove(); },
         });
     };
@@ -1797,6 +1802,9 @@
 :root[data-theme="dark"] .h-ra-step,:root[data-theme="dark"] .h-idp-card{border-color:#3a3f46;background:#24272c}
 :root[data-theme="dark"] .h-ra-step small,:root[data-theme="dark"] .h-idp-card small{color:#a8b0bb}
 :root[data-theme="dark"] .h-ra-thumbs canvas,:root[data-theme="dark"] .h-idp-card img,:root[data-theme="dark"] .h-idp-none,:root[data-theme="dark"] .h-ba-prev,:root[data-theme="dark"] .h-idp-prev{background:#1b1d21;border-color:#3a3f46}
+/* 🔄 Image → Rotation de l'image : 📐 tracer l'horizon (viseur), 📱 « ↻ Remettre droite » d'une photo de téléphone couchée */
+.h-rt2 .is-leveling canvas{cursor:crosshair}
+.h-rt-exif{margin:6px 10px 0;flex:0 0 auto}.h-rt-exif>*{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0}.h-rt-exif .icon-button{margin-left:auto}
 `;
     ext.rtEnsureCss = () => { if (document.getElementById('h-rt-css2')) return; const s = document.createElement('style'); s.id = 'h-rt-css2'; s.textContent = RT_CSS; document.head.appendChild(s); };
     /* 💾 Réglages enregistrés : un fichier par réglage (⤓ Exporter / ⤒ Importer un réglage), par les outils communs de l'app */
@@ -1827,16 +1835,18 @@
         let versions = [];
         try { versions = (await api('media_versions', {id: item.id})).versions || []; } catch (_) {}
         const from = source || item.filename;
-        const img = new Image(); img.decoding = 'async';
-        img.src = `media/${encodeURIComponent(from)}?v=${item._cacheBust || ''}`;
-        try { await img.decode(); } catch (_) { return toast('Impossible d’ouvrir cette image.', 'error'); }
+        const img0 = new Image(); img0.decoding = 'async';
+        img0.src = `media/${encodeURIComponent(from)}?v=${item._cacheBust || ''}`;
+        try { await img0.decode(); } catch (_) { return toast('Impossible d’ouvrir cette image.', 'error'); }
+        // 🔄 Image → Rotation de l'image : img est l'image de départ avec ses étapes (st.docXf), img0 l'original (jamais touché)
+        let img = img0;
         const st = rtDefault(); let channel = 'rgb';
         // aperçu assez grand pour zoomer et corriger un détail (l'enregistrement se fait toujours en pleine taille)
         const scale = Math.min(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
-        const pw = Math.max(1, Math.round(img.naturalWidth * scale)), ph = Math.max(1, Math.round(img.naturalHeight * scale));
+        let pw = Math.max(1, Math.round(img.naturalWidth * scale)), ph = Math.max(1, Math.round(img.naturalHeight * scale));
         const work = document.createElement('canvas'); work.width = pw; work.height = ph;
         const wctx = work.getContext('2d', {willReadFrequently: true}); wctx.drawImage(img, 0, 0, pw, ph);
-        const srcData = wctx.getImageData(0, 0, pw, ph);
+        let srcData = wctx.getImageData(0, 0, pw, ph);
         const hist = new Array(256).fill(0); for (let i = 0; i < srcData.data.length; i += 4) hist[Math.round(0.299 * srcData.data[i] + 0.587 * srcData.data[i + 1] + 0.114 * srcData.data[i + 2])]++;
         const hmax = Math.max(...hist.slice(2, 254), 1);
         const histPath = 'M0,256 ' + hist.map((h, x) => `L${x},${256 - Math.min(256, h / hmax * 230)}`).join(' ') + ' L255,256 Z';
@@ -1847,7 +1857,8 @@
         const MENUS = [
             ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['info', 'ℹ️ Informations…'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
-            ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['hs:photo', '🎨 Teinte/Saturation…'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'], ['imgsize', '📏 Taille de l’image…'], ['canvassize', '⬚ Taille de la zone de travail…'], ['-'],
+            ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['hs:photo', '🎨 Teinte/Saturation…'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'], ['imgsize', '📏 Taille de l’image…'], ['canvassize', '⬚ Taille de la zone de travail…'],
+                ['>', '🔄 Rotation de l’image', [['rot:cw', '↻ 90° horaire'], ['rot:ccw', '↺ 90° antihoraire'], ['rot:180', '180°'], ['rot:angle', 'Angle…'], ['rot:level', '📐 Redresser l’horizon (tracer une ligne)…'], ['flip:h', '⇆ Symétrie horizontale de l’image'], ['flip:v', '⇅ Symétrie verticale de l’image']]], ['-'],
                 ['restore:all', '✨ Restaurer en une fois…'], ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['repair:detect', '🔍 Repérer les plis et rayures…'], ['mode:repair', '🪡 Réparer au pinceau (plis, déchirures)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['idphoto', '🪪 Recadrer en photo d’identité…'], ['idbatch', '🪪 Portraits de plusieurs fiches…'], ['-'], ['plus:sky', '☁️ Remplacer le ciel…'], ['plus:cutout', '✂️ Détourer une personne (fond transparent, flou, uni)…'], ['plus:upscale', '🔍 Agrandir ×2 / ×4…'], ['plus:pano', '🧩 Panorama : assembler avec d’autres photos…'], ['-'], ['reset', 'Remettre comme au départ']]],
             ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['hs:layer', '🎨 Nouveau réglage Teinte/Saturation'], ['img:place', '🖼️ Placer une image…'], ['grad:layer', '▦ Nouveau calque de dégradé…'], ['pat:fill', '▩ Nouveau calque de motif…'], ['pat:make', '▩ Créer un motif…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:subject', '🎯 Sélectionner le sujet (automatique)'], ['plus:cutout', '✂️ Détourer une personne…'], ['-'], ['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
@@ -1994,14 +2005,15 @@
             if (!l.querySelector('.h-rt-sub') || innerWidth <= 700) { const room = innerHeight - l.getBoundingClientRect().top - 8; if (l.scrollHeight > room || innerWidth <= 700) Object.assign(l.style, {maxHeight: `${Math.max(160, room)}px`, overflowY: 'auto'}); } // (sur grand écran, les sous-menus du menu Filtre s'ouvrent à côté : pas de défilement pour lui)
         }));
         const $ = q => dlg.querySelector(q), $$ = q => [...dlg.querySelectorAll(q)];
-        const canvas = $('[data-rt-canvas]'), ctx = canvas.getContext('2d'), out = ctx.createImageData(pw, ph);
+        const canvas = $('[data-rt-canvas]'), ctx = canvas.getContext('2d'); let out = ctx.createImageData(pw, ph);
         const overlay = $('[data-rt-overlay]'), octx = overlay.getContext('2d'), cropEl = $('[data-rt-crop]');
         const stage = $('[data-rt-stage]'), wrap = $('[data-rt-wrap]');
         let raf = 0, showBefore = false, selPt = -1, outside = -1;
-        const baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); // l'image d'origine (avant / après, annuler)
+        let baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); // l'image d'origine (avant / après, annuler)
         let curtain = null, idp = null, creaseProp = null; // ◧ le rideau avant / après ; 🪪 la photo d'identité en cours ; 🔍 les plis repérés (proposition)
         // la perspective redressée : l'image de départ remise à plat (gardée tant que les 4 coins ne changent pas)
         let persp = null, warpCache = {key: '', data: null};
+        const docCache = new Map(); let docKey = '[]', leveling = false, levelLine = null; // 🔄 Image → Rotation de l'image (plus bas : setDoc, rotateDoc)
         const baseFor = () => { if (!st.persp) return baseData; const key = JSON.stringify(st.persp); if (warpCache.key !== key) warpCache = {key, data: rtWarp(baseData, st.persp)}; return warpCache.data; };
         const applyBase = () => { srcData.data.set(baseFor().data); if (st.strokes.length) rtReplayStrokes(srcData, st.strokes, masks); strokeVer++; photoKey = ''; draw(); };
         // ── Masques (sélections) : des toiles pw × ph jamais modifiées une fois créées, rangées par numéro (l'historique les garde) ──
@@ -2157,6 +2169,9 @@
                     octx.restore(); } }
             if (painting?.tool === 'repair' && painting.dabs.length) { octx.save(); octx.fillStyle = 'rgba(230,40,40,.45)'; for (const d of painting.dabs) { octx.beginPath(); octx.arc(d.x * pw, d.y * ph, d.r * pw, 0, Math.PI * 2); octx.fill(); } octx.restore(); }
             if (creaseProp?.canvas) { octx.save(); octx.globalAlpha = 0.8; octx.drawImage(creaseProp.canvas, 0, 0); octx.restore(); }
+            if (levelLine) { // 📐 la ligne de l'horizon en cours de tracé
+                const L = levelLine, lw = Math.max(1, pw / 600); octx.save(); octx.lineCap = 'round'; octx.strokeStyle = 'rgba(0,0,0,.55)'; octx.lineWidth = lw * 4; octx.beginPath(); octx.moveTo(L.x0, L.y0); octx.lineTo(L.x1, L.y1); octx.stroke();
+                octx.strokeStyle = '#fff'; octx.lineWidth = lw * 1.6; octx.setLineDash([lw * 6, lw * 4]); octx.stroke(); octx.setLineDash([]); octx.fillStyle = '#2a7de1'; [[L.x0, L.y0], [L.x1, L.y1]].forEach(([x, y]) => { octx.beginPath(); octx.arc(x, y, lw * 4, 0, Math.PI * 2); octx.fill(); }); octx.restore(); }
             if (idp?.crop && mode === 'idphoto') { // le cadre (tourné pour mettre les yeux à l'horizontale), la ligne des yeux et les deux ronds à glisser
                 const c = idp.crop, rot = g => { g.translate(pw / 2, ph / 2); g.rotate(-c.a * Math.PI / 180); g.translate(-pw / 2, -ph / 2); }, lw = Math.max(1, pw / 600), k = handleSize();
                 octx.save(); octx.fillStyle = 'rgba(0,0,0,.45)'; octx.fillRect(0, 0, pw, ph); octx.globalCompositeOperation = 'destination-out'; rot(octx); octx.fillRect(c.x * pw, c.y * ph, c.w * pw, c.h * ph); octx.restore();
@@ -2179,6 +2194,7 @@
             const s = history[i]?.snap; if (!s) return;
             Object.keys(st).forEach(k => { if (k !== 'strokes') delete st[k]; }); Object.assign(st, rtClone(s.st));
             st.strokes = rtClone(s.strokes);
+            setDoc(st.docXf); // 🔄 l'image tournée (ou pas) de cette étape
             srcData.data.set(baseFor().data); if (st.strokes.length) rtReplayStrokes(srcData, st.strokes, masks); strokeVer++;
             layers = rtClone(s.layers); activeLayer = s.activeLayer === 'photo' ? '' : s.activeLayer; selId = s.selId; moveSel = null;
             if (s.photoL && !nodeById('photo')) layers.unshift(mkPhoto(s.photoL)); // un projet d'avant : la photo hors de l'arbre
@@ -2434,6 +2450,7 @@
         const optsFor = m => m === 'brush' && maskEdit ? 'mask' : m;
         const setMode = m => {
             const changed = m !== mode; // le même outil redemandé (rafraîchir) ne change pas d'onglet
+            if (leveling) { leveling = false; levelLine = null; wrap.classList.remove('is-leveling'); } // 📐 redresser l'horizon : un autre outil l'arrête
             if (m === 'crop' && mode !== 'crop') startCrop();
             if (m === 'persp' && mode !== 'persp') { persp = st.persp ? st.persp.map(p => [...p]) : [[0.06, 0.06], [0.94, 0.06], [0.94, 0.94], [0.06, 0.94]]; if (st.persp) { const s0 = st.persp; st.persp = null; srcData.data.set(baseData.data); if (st.strokes.length) rtReplayStrokes(srcData, st.strokes, masks); strokeVer++; photoKey = ''; st._persp0 = s0; } }
             if (m !== 'persp' && mode === 'persp' && st._persp0 !== undefined) { if (!st.persp) st.persp = st._persp0; delete st._persp0; applyBase(); } // abandon : on remet la perspective d'avant
@@ -3017,7 +3034,7 @@
                 const lines = ta.value.split('\n'); mctx.save(); const bx = rtDrawText(mctx, {...op, text: ta.value || 'M'}, pw, ph, true); mctx.restore();
                 Object.assign(ta.style, {left: (r.left - wr.left + bx.x * k) + 'px', top: (r.top - wr.top + op.y * ph * k - (op.shift || 0) * pw * k) + 'px', font: rtTextFont(op, size), lineHeight: lead + 'px', letterSpacing: ((op.track || 0) / 1000 * size) + 'px',
                     color: op.color, textAlign: (op.align || 'left').startsWith('justify') ? 'justify' : op.align || 'left', textAlignLast: op.align === 'justify-all' ? 'justify' : (op.align || '').startsWith('justify-') ? op.align.slice(8) : 'auto', textIndent: (op.fi || 0) * pw * k + 'px', paddingLeft: (op.il || 0) * pw * k + 'px', paddingRight: (op.ir || 0) * pw * k + 'px', hyphens: op.hyph ? 'auto' : 'manual', whiteSpace: op.boxW ? 'pre-wrap' : 'pre', textTransform: op.caps === 'all' ? 'uppercase' : 'none', textDecoration: [op.under ? 'underline' : '', op.strike ? 'line-through' : ''].filter(Boolean).join(' ') || 'none',
-                    transform: `scale(${(op.hs || 100) / 100}, ${(op.vs || 100) / 100})`, transformOrigin: '0 0', paddingTop: '0', paddingBottom: '0', margin: '0', border: '0', outline: '1px dashed #0066cc', outlineOffset: '2px', background: 'rgba(255,255,255,.25)', boxSizing: 'content-box', overflow: 'hidden', resize: 'none',
+                    transform: `${op.rot || op.mirror ? (() => { const ox = (op.x * pw - bx.x) * k, oy = (op.shift || 0) * pw * k; return `translate(${ox}px, ${oy}px) rotate(${op.rot || 0}deg) scale(${op.mirror ? -1 : 1}, 1) translate(${-ox}px, ${-oy}px) `; })() : ''}scale(${(op.hs || 100) / 100}, ${(op.vs || 100) / 100})`, transformOrigin: '0 0', paddingTop: '0', paddingBottom: '0', margin: '0', border: '0', outline: '1px dashed #0066cc', outlineOffset: '2px', background: 'rgba(255,255,255,.25)', boxSizing: 'content-box', overflow: 'hidden', resize: 'none',
                     width: (op.boxW ? Math.max(size * 2, (op.boxW * pw - (op.il || 0) * pw - (op.ir || 0) * pw) * k / ((op.hs || 100) / 100)) : Math.max(size * 2, bx.w * k / ((op.hs || 100) / 100) + size)) + 'px', height: Math.max(lead, lines.length * lead, bx.h * k / ((op.vs || 100) / 100)) + 'px', minWidth: '0', minHeight: '0'}); };
             ta.addEventListener('input', () => { op.text = ta.value; restyle(); });
             wrap.appendChild(ta); restyle(); ta.focus(); if (edit) ta.select();
@@ -3059,7 +3076,10 @@
         function opBox(op) {
             if (op.type === 'image') return {x: op.x, y: op.y, w: op.w, h: op.h};
             if (op.type === 'shape' || op.type === 'gradient') { const x = Math.min(op.x1, op.x2), y = Math.min(op.y1, op.y2); return {x, y, w: Math.abs(op.x2 - op.x1), h: Math.abs(op.y2 - op.y1)}; }
-            if (op.type === 'text') { mctx.save(); const b = rtDrawText(mctx, op, pw, ph, true); mctx.restore(); return {x: b.x / pw, y: b.y / ph, w: b.w / pw, h: b.h / ph}; }
+            if (op.type === 'text') { mctx.save(); const b = rtDrawText(mctx, op, pw, ph, true); mctx.restore(); if (!op.rot) return {x: b.x / pw, y: b.y / ph, w: b.w / pw, h: b.h / ph};
+                // tourné avec l'image : la boîte qui contient le texte tourné autour de son point d'accroche
+                const ax = op.x * pw, ay = op.y * ph, r = op.rot * Math.PI / 180, cs = Math.cos(r), sn = Math.sin(r), m = op.mirror ? -1 : 1, P4 = [[b.x, b.y], [b.x + b.w, b.y], [b.x + b.w, b.y + b.h], [b.x, b.y + b.h]].map(([x, y]) => { const dx = (x - ax) * m, dy = y - ay; return [ax + dx * cs - dy * sn, ay + dx * sn + dy * cs]; });
+                const xs = P4.map(p => p[0]), ys = P4.map(p => p[1]); return {x: Math.min(...xs) / pw, y: Math.min(...ys) / ph, w: (Math.max(...xs) - Math.min(...xs)) / pw, h: (Math.max(...ys) - Math.min(...ys)) / ph}; }
             if (op.erase) return null; // une zone effacée ne se prend pas avec ➤
             if (op.type === 'pixels' || op.type === 'fillmask') { const m = masks.get(op.mask), b = m && (op._bb || (op._bb = maskBox(m))); return b ? {x: b.x / pw + (op.dx || 0), y: b.y / ph + (op.dy || 0), w: b.w / pw, h: b.h / ph} : null; }
             if (op.points?.length) { const xs = op.points.map(p => p[0]), ys = op.points.map(p => p[1]), pad = (op.size || 0) / 2; const x = Math.min(...xs) - pad, y = Math.min(...ys) - pad * pw / ph; return {x, y, w: Math.max(...xs) - Math.min(...xs) + pad * 2, h: Math.max(...ys) - Math.min(...ys) + pad * 2 * pw / ph}; }
@@ -3604,16 +3624,140 @@
             });
         }
         // ☁️ ✂️ 🔍 les outils de heritage-retouch-plus.js : ce qu'ils peuvent toucher dans la retouche (calques, masques, sélection…)
-        const plusCtx = {pw, ph, dlg, left: $('.h-rt-left'), fresh, mediaId: item.id || 0, title: () => dlg.querySelector('[data-rt-name]')?.value || item.title || item.filename,
+        const plusCtx = {get pw() { return pw; }, get ph() { return ph; }, dlg, left: $('.h-rt-left'), fresh, mediaId: item.id || 0, title: () => dlg.querySelector('[data-rt-name]')?.value || item.title || item.filename,
             photo: () => photo(), addMask, blankMask, maskBox, selMask: () => (selId ? masks.get(selId) : null), clearSel: () => { selId = null; refreshLayers(); draw(); },
             newLayer, newAdjust, aboveP: fn => { activeLayer = 'photo'; return fn(); }, photoNode: () => P(), nodeById,
             removeNode: id => { const l = locate(id); if (l) l.arr.splice(l.arr.indexOf(l.n), 1); if (activeLayer === id) activeLayer = ''; if (maskEdit === id) maskEdit = ''; },
             setActive: id => { activeLayer = id; }, setMaskEdit: id => { maskEdit = id; refreshLayers(); }, renderLayer,
             refresh: () => { refreshLayers(); syncControls(); draw(); }, commit, showTab, setMode, renderFull: () => renderFull(), hasAlpha: () => hasAlpha(), applyShown: f => applyShown(f),
             busy: t => { help.textContent = t || HELP[optsFor(mode)] || ''; if (t) $('[data-rt-opts]').hidden = false; }};
+        /* ── 🔄 Image → Rotation de l'image (comme Photoshop) : tout le document tourne d'un bloc — chaque calque, masque, sélection,
+              texte, forme, calque de réglage, la perspective, le recadrage, la zone de travail ; largeur et hauteur échangées, résolution
+              gardée ; une seule étape d'historique. Le moteur (étapes, coordonnées, toiles, Exif) : heritage-retouch-rotation.js ── */
+        function rtWarpCanvas(c, q) { const t = blank(c.naturalWidth || c.width, c.naturalHeight || c.height), g = t.getContext('2d', {willReadFrequently: true}); g.drawImage(c, 0, 0); const o = rtWarp(g.getImageData(0, 0, t.width, t.height), q); g.putImageData(o, 0, 0); return t; }
+        /** l'image de départ avec ses étapes (les dernières gardées : ↶ ↷ ne refont pas le calcul) */
+        function docImage(xf) {
+            const key = JSON.stringify(xf || []); if (key === '[]' || !ext.rtOrient) return img0;
+            let c = docCache.get(key); if (!c) { c = ext.rtOrient.applySteps(img0, xf, {warp: rtWarpCanvas}); docCache.set(key, c); if (docCache.size > 6) docCache.delete(docCache.keys().next().value); }
+            return c;
+        }
+        /** l'image de départ (et la taille de l'aperçu) suivent les étapes ; false si rien ne change */
+        function setDoc(xf) {
+            const key = JSON.stringify(ext.rtOrient ? ext.rtOrient.cleanList(xf) : []); if (key === docKey) return false;
+            docKey = key; img = docImage(JSON.parse(key));
+            pw = Math.max(1, Math.round(img.naturalWidth * scale)); ph = Math.max(1, Math.round(img.naturalHeight * scale));
+            work.width = pw; work.height = ph; wctx.drawImage(img, 0, 0, pw, ph);
+            srcData = wctx.getImageData(0, 0, pw, ph); baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); out = ctx.createImageData(pw, ph);
+            canvas.width = overlay.width = photoCanvas.width = pw; canvas.height = overlay.height = photoCanvas.height = ph;
+            layerCanvases.clear(); adjCache.clear(); warpCache = {key: '', data: null}; photoKey = ''; strokeVer++;
+            curtain?.setBefore?.(baseData); rtBar?.setWhere(`${img.naturalWidth} × ${img.naturalHeight} px`);
+            requestAnimationFrame(() => setZoom(1));
+            return true;
+        }
+        /** Tourne (ou retourne) tout le document, en une seule étape d'historique : {r: degrés horaires, bg} ou {f: 'h' | 'v'} (ou une liste) */
+        function rotateDoc(steps, {label = '', autoCrop = false} = {}) {
+            const OR = ext.rtOrient; if (!OR) return toast('La rotation n’est pas encore prête : réessaie dans un instant.', 'error');
+            const list = (Array.isArray(steps) ? steps : [steps]).map(OR.clean).filter(x => x && !x.p); if (!list.length) return;
+            if (editingTA) editingTA.finish(true);
+            if (leveling) stopLevel();
+            if (['crop', 'persp', 'idphoto'].includes(mode)) setMode('adjust');
+            painting = null; drag = null; poly = null; polyHover = null; moveSel = null; idp = null; creaseProp = null; cloneOff = null; cloneSrc = null;
+            dlg.querySelector('.h-rt-fxpanel')?.remove(); dlg.querySelector('.h-rt-exif')?.remove();
+            let dropped = false;
+            list.forEach(s => { if (turnDoc(s, autoCrop && s === list[list.length - 1])) dropped = true; });
+            syncControls(); refreshLayers(); syncCrop(); draw();
+            commit(label || (list.length === 1 ? OR.label(list[0]) : 'Rotation de l’image'));
+            if (dropped && !autoCrop) toast('Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler.');
+        }
+        /** une étape, sans l'historique ; true si le recadrage a dû être retiré */
+        function turnDoc(s, autoCrop) {
+            const OR = ext.rtOrient, W0 = pw, H0 = ph;
+            let xf0 = OR.cleanList(st.docXf);
+            const base = {...rtClone({...st, strokes: undefined})};
+            if (base.persp && !OR.isQuarter(s)) { xf0 = [...xf0, {p: base.persp}]; base.persp = null; } // un angle libre : la perspective est figée dans l'image d'abord
+            base.docXf = xf0;
+            const im1 = docImage(OR.push(xf0, s)), W1 = Math.max(1, Math.round(im1.naturalWidth * scale)), H1 = Math.max(1, Math.round(im1.naturalHeight * scale));
+            const mask = (id, kind) => { const c = masks.get(id); return c && kind === 'doc' ? addMask(OR.canvasStep(c, s, {W1, H1, ref: [W0, H0]})) : id; };
+            const res = OR.doc({st: base, strokes: st.strokes, layers, selId}, s, {W0, H0, W1, H1, mask});
+            Object.keys(st).forEach(k => { if (k !== 'strokes') delete st[k]; }); Object.assign(st, res.st); delete st.strokes; st.strokes = res.strokes;
+            if (!st.docXf?.length) delete st.docXf; // 4 × 90° : l'image de départ, telle quelle
+            if (autoCrop && !OR.isQuarter(s)) { const [w, h] = OR.innerRect(W0, H0, s.r); st.crop = {x: (W1 - w) / 2 / W1, y: (H1 - h) / 2 / H1, w: Math.min(1, w / W1), h: Math.min(1, h / H1), a: 0}; }
+            layers = res.layers; selId = res.selId;
+            setDoc(st.docXf);
+            srcData.data.set(baseFor().data); if (st.strokes.length) rtReplayStrokes(srcData, st.strokes, masks); strokeVer++; photoKey = '';
+            photo(); drawLayers().forEach(renderLayer);
+            return !!res.notes?.includes('crop');
+        }
+        ext.rtRotateDoc = (s, o) => rotateDoc(s, o); // pour les essais
+        /** 🔄 Image → Rotation de l'image → Angle… : un angle libre, la zone de travail s'agrandit (coins transparents ou d'une couleur) */
+        function rotateAngleDialog(a0 = null, {level = false} = {}) {
+            let pref = {}; try { pref = JSON.parse(localStorage.getItem('genealogie-retouch-rotate') || '{}') || {}; } catch (_) {}
+            const OR = ext.rtOrient, a = a0 ?? (Number.isFinite(pref.a) ? pref.a : 15), bg0 = /^#[0-9a-f]{6}$/i.test(pref.bg || '') ? pref.bg : '#ffffff', transp0 = pref.bg ? pref.bg === 'transparent' : true;
+            const S = {a: Math.abs(a), cw: a >= 0};
+            return rtDialog({eyebrow: 'IMAGE', title: level ? '📐 Redresser l’horizon' : '🔄 Rotation de l’image', submitLabel: '↻ Faire pivoter',
+                body: `<div class="fmt-dlg-grid"><div>
+                    ${level ? '<p class="muted">L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite.</p>' : ''}
+                    <fieldset><legend>Angle</legend><div class="fmt-row"><label><span>De combien</span><input type="number" data-ra-angle min="0" max="359.99" step="0.01" data-unit="°" value="${String(Math.round(S.a * 100) / 100)}" required></label></div>
+                        <div class="segmented" role="radiogroup" aria-label="Sens"><button type="button" role="radio" data-ra-dir="cw">↻ Horaire</button><button type="button" role="radio" data-ra-dir="ccw">↺ Antihoraire</button></div></fieldset>
+                    <fieldset><legend>Coins ajoutés autour</legend><label class="checkbox-line"><input type="checkbox" data-ra-transp${transp0 ? ' checked' : ''}> Transparents (PNG)</label><label data-ra-bgrow${transp0 ? ' hidden' : ''}><span>Couleur</span><input type="color" data-ra-bg value="${esc(bg0)}"></label>
+                        <label class="checkbox-line"><input type="checkbox" data-ra-crop${level || pref.crop ? ' checked' : ''}> <span data-help="Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire.">✂️ Recadrer pour enlever les coins vides</span></label></fieldset>
+                </div><div><dl class="fmt-before-after"><dt>Maintenant</dt><dd>${img.naturalWidth} × ${img.naturalHeight} px</dd><dt>Après</dt><dd data-ra-after></dd></dl><p class="muted">Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant.</p></div></div>`,
+                onOpen: d => {
+                    const q = s0 => d.querySelector(s0), aI = q('[data-ra-angle]');
+                    const paint = () => { d.querySelectorAll('[data-ra-dir]').forEach(b => { const on = (b.dataset.raDir === 'cw') === S.cw; b.classList.toggle('is-active', on); b.setAttribute('aria-checked', on); });
+                        const v = Number(aI.value), r = Number.isFinite(v) ? (S.cw ? v : -v) : 0, [w, h] = OR ? OR.dims(img.naturalWidth, img.naturalHeight, {r}) : [img.naturalWidth, img.naturalHeight];
+                        q('[data-ra-after]').textContent = q('[data-ra-crop]').checked && r % 90 ? (() => { const [iw, ih] = OR.innerRect(img.naturalWidth, img.naturalHeight, r); return `${Math.round(iw)} × ${Math.round(ih)} px (recadrée)`; })() : `${w} × ${h} px`; };
+                    d.addEventListener('click', e => { const b = e.target.closest('[data-ra-dir]'); if (!b) return; S.cw = b.dataset.raDir === 'cw'; paint(); });
+                    aI.addEventListener('input', paint); q('[data-ra-crop]').addEventListener('change', paint);
+                    q('[data-ra-transp]').addEventListener('change', e => { q('[data-ra-bgrow]').hidden = e.target.checked; });
+                    paint(); setTimeout(() => { aI.focus(); aI.select(); }, 30);
+                },
+                onSubmit: f => {
+                    const aI = f.querySelector('[data-ra-angle]'), v = Number(String(aI.value).replace(',', '.'));
+                    if (!Number.isFinite(v) || v <= 0 || v >= 360) return window.LCNDA_UI?.fail ? window.LCNDA_UI.fail(aI, 'Donne un angle entre 0,01 et 359,99°.') : false;
+                    const r = S.cw ? v : -v, bg = f.querySelector('[data-ra-transp]').checked ? 'transparent' : (/^#[0-9a-f]{6}$/i.test(f.querySelector('[data-ra-bg]').value) ? f.querySelector('[data-ra-bg]').value : '#ffffff'), crop = f.querySelector('[data-ra-crop]').checked;
+                    if (!level) try { localStorage.setItem('genealogie-retouch-rotate', JSON.stringify({a: r, bg, crop})); } catch (_) {}
+                    rotateDoc({r, bg}, {autoCrop: crop, label: level ? `Horizon redressé (${String(Math.round(r * 100) / 100).replace('.', ',')}°)` : ''});
+                }});
+        }
+        /* 📐 Redresser l'horizon : on trace une ligne le long de l'horizon (ou d'un mur bien droit), la photo tourne pour la remettre droite */
+        function startLevel() {
+            setMode('adjust'); leveling = true; levelLine = null; wrap.classList.add('is-leveling');
+            const t = 'Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter.';
+            help.textContent = t; rtBar?.setHelp?.(t);
+        }
+        function stopLevel() { leveling = false; levelLine = null; wrap.classList.remove('is-leveling'); help.textContent = HELP[optsFor(mode)] || ''; drawOverlay(); }
+        wrap.addEventListener('pointerdown', e => { if (!leveling || e.button !== 0 || !e.target.closest('canvas')) return; e.preventDefault(); e.stopPropagation(); const [x, y] = toCanvas(e); levelLine = {x0: x, y0: y, x1: x, y1: y}; try { wrap.setPointerCapture(e.pointerId); } catch (_) {} }, true);
+        wrap.addEventListener('pointermove', e => { if (!leveling || !levelLine) return; e.stopPropagation(); const [x, y] = toCanvas(e); levelLine.x1 = x; levelLine.y1 = y; drawOverlay(); }, true);
+        wrap.addEventListener('pointerup', e => {
+            if (!leveling || !levelLine) return; e.stopPropagation(); const L = levelLine; levelLine = null;
+            const dx = L.x1 - L.x0, dy = L.y1 - L.y0; if (Math.hypot(dx, dy) * canvas.getBoundingClientRect().width / pw < 12) { drawOverlay(); return; } // un simple clic : on attend une vraie ligne
+            let ang = Math.atan2(dy, dx) * 180 / Math.PI; if (ang > 90) ang -= 180; if (ang < -90) ang += 180; // −90° à 90°
+            const r = Math.abs(ang) > 45 ? (ang > 0 ? 90 - ang : -90 - ang) : -ang; // près de la verticale : on redresse un mur
+            stopLevel();
+            if (Math.abs(r) < 0.05) return toast('Cette ligne est déjà droite : rien à tourner.');
+            rotateAngleDialog(Math.round(r * 100) / 100, {level: true});
+        }, true);
+        window.addEventListener('keydown', e => { if (leveling && e.key === 'Escape' && dlg.open) { e.preventDefault(); e.stopImmediatePropagation(); stopLevel(); } }, true);
+        /* 📱 Une photo de téléphone « couchée » : l'orientation Exif n'est pas appliquée par ce navigateur → « ↻ Remettre droite » */
+        async function checkExif() {
+            const OR = ext.rtOrient; if (!OR || project || fresh || st.docXf?.length) return;
+            let state = null;
+            try { const r = await fetch(img0.src, {credentials: 'same-origin'}); if (!r.ok) return; state = OR.exifState(new Uint8Array(await r.arrayBuffer()), img0.naturalWidth, img0.naturalHeight); } catch (_) { return; }
+            if (!state || state.applied || !state.steps.length || !dlg.isConnected || hpos > 0) return;
+            const box = document.createElement('div'); box.className = 'h-rt-exif';
+            box.innerHTML = window.LCNDA_UI?.notice ? window.LCNDA_UI.notice('info', 'Photo prise avec le téléphone tourné : elle est enregistrée couchée.') : '<p>Photo prise avec le téléphone tourné : elle est enregistrée couchée.</p>';
+            const host = box.firstElementChild || box, b = document.createElement('button'); b.type = 'button'; b.className = 'button small'; b.dataset.rtExifFix = ''; b.textContent = '↻ Remettre droite';
+            const x = document.createElement('button'); x.type = 'button'; x.className = 'icon-button small'; x.setAttribute('aria-label', 'Fermer'); x.title = 'Fermer'; x.textContent = '×';
+            host.append(' ', b, x); stage.parentElement.insertBefore(box, stage);
+            b.addEventListener('click', () => { box.remove(); rotateDoc(state.steps, {label: 'Photo remise droite (orientation du téléphone)'}); });
+            x.addEventListener('click', () => box.remove());
+        }
         async function cmd(k) {
             dlg.querySelectorAll('details.h-rt-menu[open]').forEach(d => d.removeAttribute('open'));
             const [a, b] = k.split(':');
+            if (a === 'rot') return b === 'angle' ? rotateAngleDialog() : b === 'level' ? startLevel() : rotateDoc({r: b === 'cw' ? 90 : b === 'ccw' ? -90 : 180}); // 🔄 Image → Rotation de l'image
+            if (a === 'flip') return rotateDoc({f: b === 'v' ? 'v' : 'h'});
             if (a === 'tab') return showTab(b);
             if (a === 'mode') return setMode(b);
             if (a === 'save') return dlg.querySelector(`[data-rt-save="${b}"]`)?.click();
@@ -3945,7 +4089,7 @@
         };
         drawVersions();
         // ── L'image en pleine taille : la photo retouchée (corrections, réglages, filtres, masque), les calques visibles, puis le recadrage ──
-        const hasAlpha = () => { const p = P(); if (st.board?.bg === 'transparent' && (st.board.w > 1 || st.board.h > 1)) return true; return !!(st.persp || st._persp0) && (st.persp || st._persp0).some(([x, y]) => x < 0 || y < 0 || x > 1 || y > 1) || !p || !p.visible || p.opacity < 1 || !!p.mask || layers[0] !== p || st.strokes.some(s => s.tool === 'clear'); };
+        const hasAlpha = () => { const p = P(); if (st.board?.bg === 'transparent' && (st.board.w > 1 || st.board.h > 1)) return true; if (!st.crop && (st.docXf || []).some(x => x.bg === 'transparent')) return true; return !!(st.persp || st._persp0) && (st.persp || st._persp0).some(([x, y]) => x < 0 || y < 0 || x > 1 || y > 1) || !p || !p.visible || p.opacity < 1 || !!p.mask || layers[0] !== p || st.strokes.some(s => s.tool === 'clear'); };
         async function renderFull() {
             const W = img.naturalWidth, H = img.naturalHeight;
             const pc = document.createElement('canvas'); pc.width = W; pc.height = H;
@@ -4168,6 +4312,7 @@
         if (project?.project) { // un projet rouvert : ses masques (images), puis tout son état, comme une étape de l'historique
             const d = project.project;
             try {
+                setDoc(d.st?.docXf); // 🔄 un projet tourné : ses masques sont à la taille de l'image tournée
                 const imgIds = new Set(); (function walk(v) { if (Array.isArray(v)) v.forEach(walk); else if (v && typeof v === 'object') { if (v.type === 'image' && typeof v.mask === 'string') imgIds.add(v.mask); Object.values(v).forEach(walk); } })(d.layers);
                 for (const [id, src] of Object.entries(d.masks || {})) { if (!/^k\d+$/.test(id) || !/^data:image\/png;base64,/.test(src)) continue; const im = new Image(); im.src = src; await im.decode(); const c = imgIds.has(id) ? Object.assign(document.createElement('canvas'), {width: im.naturalWidth, height: im.naturalHeight}) : blankMask(); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); masks.set(id, c); maskSeq = Math.max(maskSeq, Number(id.slice(1)) || 0); } // une image placée garde sa vraie taille
                 const snap = {st: {...rtDefault(), ...(d.st || {}), strokes: undefined}, strokes: Array.isArray(d.strokes) ? d.strokes : [], layers: Array.isArray(d.layers) ? d.layers : [], activeLayer: String(d.activeLayer || ''), photoL: d.photoL || {}, selId: d.selId && masks.has(d.selId) ? d.selId : null};
@@ -4180,6 +4325,7 @@
         refreshLayers();
         syncControls();
         requestAnimationFrame(() => setZoom(1));
+        checkExif();
     }
     /** 📂 Les projets de retouche enregistrés : ouvrir, renommer, supprimer */
     async function retouchProjectsDialog({current = 0, onOpen} = {}) {

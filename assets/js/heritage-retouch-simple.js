@@ -145,15 +145,16 @@
         let versions = [];
         try { versions = (await api('media_versions', {id: item.id})).versions || []; } catch (_) {}
         const from = source || item.filename;
-        const img = new Image(); img.decoding = 'async';
-        img.src = `media/${encodeURIComponent(from)}?v=${item._cacheBust || ''}`;
-        try { await img.decode(); } catch (_) { return toast('Impossible d’ouvrir cette image.', 'error'); }
+        const img0 = new Image(); img0.decoding = 'async';
+        img0.src = `media/${encodeURIComponent(from)}?v=${item._cacheBust || ''}`;
+        try { await img0.decode(); } catch (_) { return toast('Impossible d’ouvrir cette image.', 'error'); }
+        let img = img0; // ↺ ↻ : l'image de départ tournée (st.docXf, même moteur que la retouche complète : heritage-retouch-rotation.js)
         const st = rtDefault(); let channel = 'rgb';
         const scale = Math.min(1, 1100 / Math.max(img.naturalWidth, img.naturalHeight));
-        const pw = Math.max(1, Math.round(img.naturalWidth * scale)), ph = Math.max(1, Math.round(img.naturalHeight * scale));
+        let pw = Math.max(1, Math.round(img.naturalWidth * scale)), ph = Math.max(1, Math.round(img.naturalHeight * scale));
         const work = document.createElement('canvas'); work.width = pw; work.height = ph;
         const wctx = work.getContext('2d', {willReadFrequently: true}); wctx.drawImage(img, 0, 0, pw, ph);
-        const srcData = wctx.getImageData(0, 0, pw, ph);
+        let srcData = wctx.getImageData(0, 0, pw, ph);
         const hist = new Array(256).fill(0); for (let i = 0; i < srcData.data.length; i += 4) hist[Math.round(0.299 * srcData.data[i] + 0.587 * srcData.data[i + 1] + 0.114 * srcData.data[i + 2])]++;
         const hmax = Math.max(...hist.slice(2, 254), 1);
         const histPath = 'M0,256 ' + hist.map((h, x) => `L${x},${256 - Math.min(256, h / hmax * 230)}`).join(' ') + ' L255,256 Z';
@@ -169,7 +170,7 @@
             <div class="h-rs-paint" data-tbg="rs-paint" data-tbg-label="Barre des outils">
                 <label class="h-rs-size" hidden>Taille <input type="range" min="3" max="120" value="18" data-rs-size> <output data-rs-size-out>18</output></label>
                 </div>
-            <div class="h-rs-body"><nav class="h-rs-rail" data-tbg="rs-modes" data-tbg-label="Colonne d’outils">${[['adjust', '🎚', 'Réglages : couleur, lumière, courbe', 'A'], ['heal', '🩹', 'Correcteur de taches : clique sur une tache, une poussière, une rayure', 'J'], ['clone', '🧬', `Tampon de duplication : ${/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt'} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir`, 'S']].map(([k, i, l, sc]) => `<button type="button" class="${k === 'adjust' ? 'is-active' : ''}" data-rs-mode="${k}" title="${esc(l)}" aria-label="${esc(l.split(' :')[0])}" data-shortcut="${sc}">${i}</button>`).join('')}<button type="button" data-rs-railcmd="advanced" title="Retouche complète : calques, sélections, masques, texte, filtres" aria-label="Retouche complète">🎛️</button></nav><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span>${ext.rtBaButtons ? ext.rtBaButtons('rs') : '<button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button>'}</div>
+            <div class="h-rs-body"><nav class="h-rs-rail" data-tbg="rs-modes" data-tbg-label="Colonne d’outils">${[['adjust', '🎚', 'Réglages : couleur, lumière, courbe', 'A'], ['heal', '🩹', 'Correcteur de taches : clique sur une tache, une poussière, une rayure', 'J'], ['clone', '🧬', `Tampon de duplication : ${/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt'} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir`, 'S']].map(([k, i, l, sc]) => `<button type="button" class="${k === 'adjust' ? 'is-active' : ''}" data-rs-mode="${k}" title="${esc(l)}" aria-label="${esc(l.split(' :')[0])}" data-shortcut="${sc}">${i}</button>`).join('')}<button type="button" data-rs-rot="ccw" title="Faire pivoter de 90° vers la gauche (antihoraire)" aria-label="Pivoter à gauche">↺</button><button type="button" data-rs-rot="cw" title="Faire pivoter de 90° vers la droite (horaire)" aria-label="Pivoter à droite">↻</button><button type="button" data-rs-railcmd="advanced" title="Retouche complète : calques, sélections, masques, texte, filtres" aria-label="Retouche complète">🎛️</button></nav><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span>${ext.rtBaButtons ? ext.rtBaButtons('rs') : '<button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button>'}</div>
             <div class="h-rs-tools" data-tbg="rs-tools" data-tbg-label="Panneau de droite"><div class="h-rs-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rs-preset="${i}"${i === 0 ? ' data-help="Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant."' : ''}>${esc(l)}</button>`).join('')}</div>
                 ${sec('Couleur', 'rs-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rs-slider"><span${k === 'shadows' ? ' data-help="Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires."' : ''}>${esc(l)} <output data-rs-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rs="${k}"></label>`).join('')}
                 <div class="h-rs-toggles"><label class="ui-toggle"><input type="checkbox" data-rs-t="bw"><i></i>Noir et blanc</label><label class="ui-toggle"><input type="checkbox" data-rs-t="sepia"><i></i>Sépia</label><label class="ui-toggle"><input type="checkbox" data-rs-t="invert" data-help="Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent."><i></i>Négatif</label></div>`)}
@@ -198,9 +199,9 @@
         };
         dlg.querySelector('[data-rs-advanced]').addEventListener('click', () => toAdvanced());
         dlg.querySelector('[data-rs-restoreall]').addEventListener('click', () => toAdvanced({restoreAll: true}));
-        const canvas = dlg.querySelector('[data-rs-canvas]'), ctx = canvas.getContext('2d'), out = ctx.createImageData(pw, ph);
+        const canvas = dlg.querySelector('[data-rs-canvas]'), ctx = canvas.getContext('2d'); let out = ctx.createImageData(pw, ph);
         let raf = 0, showBefore = false, selPt = -1, outside = -1;
-        const baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); // l'image d'origine (avant / après, annuler)
+        let baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); // l'image d'origine (avant / après, annuler)
         const draw = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (showBefore) ctx.putImageData(baseData, 0, 0); else ctx.putImageData(rtApply(srcData, out, st), 0, 0); }); };
         // ── Correcteur de taches et tampon ──
         st.strokes = [];
@@ -213,6 +214,7 @@
         const goHist = i => {
             if (i < 0 || i >= steps.length) return; hpos = i; const o = JSON.parse(steps[i]), strokes = o.strokes || [];
             Object.keys(st).forEach(k => delete st[k]); Object.assign(st, rtDefault(), o.st, {strokes});
+            setDoc(st.docXf); // ↺ ↻ : l'image tournée de cette étape
             srcData.data.set(baseData.data); if (strokes.length) rtReplayStrokes(srcData, strokes); activePreset = -1; markPreset(); syncControls(); syncHist();
         };
         let sbar = null; // K18 : la barre du bas commune (la photo · l'aide de l'outil · le zoom)
@@ -299,7 +301,31 @@
             sbar = UI.editorStatus({zoom: {get: () => (zoom || fitK()) * scale, set: k => setZoom(k / scale <= fitK() * 1.001 && k / scale >= fitK() * .999 ? 0 : k / scale), fit: () => setZoom(0), min: .1 * scale, max: 8 * scale}});
             dlg.appendChild(sbar); setMode(mode); addEventListener('resize', () => sbar.sync()); 
         }
-        UI?.editorRail?.(dlg.querySelector('.h-rs-rail'), {breaks: ['[data-rs-railcmd]']}); // K19 : colonne de 36 px
+        UI?.editorRail?.(dlg.querySelector('.h-rs-rail'), {breaks: ['[data-rs-rot="ccw"]', '[data-rs-railcmd]']}); // K19 : colonne de 36 px
+        /* ↺ ↻ Faire pivoter la photo (et les symétries) : le même moteur que Image → Rotation de l'image de la retouche complète ;
+           les corrections de taches et du tampon tournent avec elle ; une étape d'historique ; l'enregistrement reste une nouvelle version */
+        const docCache = new Map(); let docKey = '[]';
+        const docImage = xf => { const key = JSON.stringify(xf || []); if (key === '[]' || !ext.rtOrient) return img0; let c = docCache.get(key); if (!c) { c = ext.rtOrient.applySteps(img0, xf); docCache.set(key, c); if (docCache.size > 6) docCache.delete(docCache.keys().next().value); } return c; };
+        function setDoc(xf) {
+            const key = JSON.stringify(ext.rtOrient ? ext.rtOrient.cleanList(xf) : []); if (key === docKey) return false;
+            docKey = key; img = docImage(JSON.parse(key));
+            pw = Math.max(1, Math.round(img.naturalWidth * scale)); ph = Math.max(1, Math.round(img.naturalHeight * scale));
+            work.width = pw; work.height = ph; wctx.drawImage(img, 0, 0, pw, ph);
+            srcData = wctx.getImageData(0, 0, pw, ph); baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); out = ctx.createImageData(pw, ph);
+            canvas.width = pw; canvas.height = ph; curtain?.setBefore?.(baseData); setMode(mode); setZoom(zoom);
+            return true;
+        }
+        const rotate = (step, label = '') => {
+            const OR = ext.rtOrient, s = OR?.clean(step); if (!s || s.p) return;
+            painting = null; cloneOff = null; delete canvas.dataset.cloneFrom;
+            const W0 = pw, H0 = ph, im1 = docImage(OR.push(st.docXf, s)), W1 = Math.max(1, Math.round(im1.naturalWidth * scale)), H1 = Math.max(1, Math.round(im1.naturalHeight * scale));
+            const res = OR.doc({st: JSON.parse(JSON.stringify({...st, strokes: undefined})), strokes: st.strokes, layers: [], selId: null}, s, {W0, H0, W1, H1});
+            Object.keys(st).forEach(k => delete st[k]); Object.assign(st, res.st, {strokes: res.strokes}); if (!st.docXf?.length) delete st.docXf;
+            setDoc(st.docXf); srcData.data.set(baseData.data); if (st.strokes.length) rtReplayStrokes(srcData, st.strokes);
+            draw(); commit(); sbar?.flash?.(label || OR.label(s));
+        };
+        dlg.querySelectorAll('[data-rs-rot]').forEach(b => b.addEventListener('click', () => rotate({r: b.dataset.rsRot === 'cw' ? 90 : -90})));
+        ext.rsRotate = rotate; // pour les essais
         stage.addEventListener('wheel', e => { if (!e.ctrlKey && !e.metaKey) return; e.preventDefault(); const z = zoom || fitK(); setZoom(e.deltaY < 0 ? z * 1.12 : (z / 1.12 <= fitK() ? 0 : z / 1.12)); }, {passive: false});
         dlg.querySelector('[data-rs-reset]').addEventListener('click', () => { Object.assign(st, rtDefault(), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); commit(); }); // les corrections de taches restent (↶ pour les défaire)
         const before = dlg.querySelector('[data-rs-before]');
@@ -418,6 +444,7 @@
         UI?.editorMenus?.(dlg.querySelector('[data-rs-menus]'), {
             Fichier: () => [...saveItems(), '-', {icon: '⤓', label: 'Exporter la photo retouchée (PNG, JPG, imprimer)…', run: press('[data-rs-export="image"]')}, {icon: '⤓', label: 'Exporter l’avant / après…', run: press('[data-rs-export="ba"]')}, '-', {icon: '🎛️', label: 'Passer à la retouche complète', run: press('[data-rs-advanced]')}, {icon: '✨', label: 'Restaurer en une fois…', run: press('[data-rs-restoreall]')}, '-', {icon: '×', label: 'Fermer', run: press('[data-rs-close]')}],
             Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: hpos <= 0, run: () => goHist(hpos - 1)}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: hpos >= steps.length - 1, run: () => goHist(hpos + 1)}, '-', {icon: '↺', label: 'Remettre comme au départ', run: press('[data-rs-reset]')}],
+            Image: () => [{icon: '↻', label: 'Pivoter de 90° à droite (horaire)', run: () => rotate({r: 90})}, {icon: '↺', label: 'Pivoter de 90° à gauche (antihoraire)', run: () => rotate({r: -90})}, {label: 'Pivoter de 180°', run: () => rotate({r: 180})}, '-', {icon: '⇆', label: 'Symétrie horizontale de l’image', run: () => rotate({f: 'h'})}, {icon: '⇅', label: 'Symétrie verticale de l’image', run: () => rotate({f: 'v'})}],
             Outils: () => [['adjust', '🎚', 'A'], ['heal', '🩹', 'J'], ['clone', '🧬', 'S']].map(([k, i, sc]) => ({icon: i, label: MODE_NAME[k] + (mode === k ? ' ✓' : ''), shortcut: sc, run: () => setMode(k)})),
             Affichage: () => [{icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => sbar?.zoom.fit()}, {label: '100 %', shortcut: '⌘1', run: () => sbar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => sbar?.zoom.in()}, {icon: '−', label: 'Zoom arrière', shortcut: '⌘−', run: () => sbar?.zoom.out()}, '-', {icon: '◧', label: 'Avant / après en rideau', run: press('[data-rs-curtain]')}]});
         dlg.querySelector('[data-rs-railcmd="advanced"]')?.addEventListener('click', press('[data-rs-advanced]'));

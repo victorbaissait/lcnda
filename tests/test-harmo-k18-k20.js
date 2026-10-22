@@ -233,7 +233,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
         await t('E1 / K19 : Retouche rapide — menus, ↶ défait un réglage, actions de fin dans « 💾 Enregistrer ▾ », outils dans la colonne', async () => {
             await closeAll(page); await page.evaluate(e => { (0, eval)(e); }, `${lightbox} localStorage.setItem('genealogie-retouch-mode', 'simple'); window.LCNDA_EXT.openRetouch('')`); await page.waitForTimeout(1800);
             const D = 'dialog.h-retouch-simple[open]';
-            assert.deepEqual(await page.$$eval(`${D} [data-ui-menu]`, l => l.map(x => x.textContent)), ['Fichier', 'Édition', 'Outils', 'Affichage']);
+            assert.deepEqual(await page.$$eval(`${D} [data-ui-menu]`, l => l.map(x => x.textContent)), ['Fichier', 'Édition', 'Image', 'Outils', 'Affichage']);
             await page.evaluate(D => { const i = document.querySelector(D + ' [data-rs="contrast"]'); i.value = '40'; i.dispatchEvent(new Event('input', {bubbles: true})); i.dispatchEvent(new Event('change', {bubbles: true})); }, D);
             await page.click(`${D} [data-rs-undo]`); assert.equal(await page.inputValue(`${D} [data-rs="contrast"]`), '0', '↶ remet le réglage');
             assert.equal(await page.$$eval(`${D} .modal-actions button`, l => l.filter(b => b.getClientRects().length).length), 0, 'plus de boutons de fin en bas');

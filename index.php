@@ -1181,7 +1181,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=3" defer></script>
 <script src="assets/js/heritage-links.js?v=18" defer></script>
-<script src="assets/js/heritage-more.js?v=214" defer></script>
+<script src="assets/js/heritage-more.js?v=215" defer></script>
 <script src="assets/js/heritage-controle.js?v=3" defer></script>
 <script src="assets/js/heritage-records.js?v=10" defer></script>
 <script src="assets/js/heritage-research.js?v=34" defer></script>
@@ -1211,7 +1211,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-qr.js?v=1" defer></script>
 <script src="assets/js/heritage-layout.js?v=54" defer></script>
 <script src="assets/js/heritage-edittools.js?v=22" defer></script>
-<script src="assets/js/heritage-editorkeys.js?v=17" defer></script>
+<script src="assets/js/heritage-editorkeys.js?v=18" defer></script>
 <script src="assets/js/heritage-livrets.js?v=15" defer></script>
 <script src="assets/js/heritage-pets.js?v=27" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
@@ -1219,9 +1219,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-shapelib.js?v=1" defer></script>
 <script src="assets/js/heritage-boards.js?v=42" defer></script>
 <script src="assets/js/heritage-dnd.js?v=10" defer></script>
-<script src="assets/js/heritage-studio.js?v=93" defer></script>
+<script src="assets/js/heritage-retouch-rotation.js?v=1" defer></script>
+<script src="assets/js/heritage-studio.js?v=94" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
-<script src="assets/js/heritage-retouch-simple.js?v=11" defer></script>
+<script src="assets/js/heritage-retouch-simple.js?v=12" defer></script>
 <script src="assets/js/heritage-fiches.js?v=20" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=4" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=16" defer></script>
