@@ -426,6 +426,16 @@
         const rects = ext.housePlus.roofWings(top, 20, H); if (rects.length < 2) return buildRoof(H, top);
         const g = new T.Group(); rects.forEach((rc, i) => { const p = buildRoof(H, top, {rect: rc, wing: i, noChimney: i > 0}); if (p) g.add(p); }); return g;
     }
+    /** 🕰 une autre époque en fantôme : les murs de ses étages (mêmes niveaux que ceux montrés), très transparents, arêtes en pointillés */
+    function epochGhost3d(H, floors) {
+        const EG = ext.housePlus?.epochGhost?.(H, H.verGhost || 'prev'); if (!EG) return null;
+        const g = new T.Group(); g.userData.epochGhost = true; const col = '#a8743a', mat = new T.MeshBasicMaterial({color: col, transparent: true, opacity: .1, depthWrite: false}), lm = new T.LineDashedMaterial({color: col, dashSize: .12, gapSize: .08, transparent: true, opacity: .85});
+        floors.forEach(f => { const q = EG.floors.find(x => x.level === f.level); if (!q) return; const y0 = floorBase(H, f);
+            (q.walls || []).forEach(w => { if (!w?.a || !w?.b) return; const L = Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]); if (L < 1) return; const hgt = M(w.h || q.height || f.height || 250), geo = new T.BoxGeometry(M(L), hgt, M(w.t || q.wallT || 20));
+                const m = new T.Mesh(geo, mat); m.position.set(M((w.a[0] + w.b[0]) / 2), y0 + hgt / 2, M((w.a[1] + w.b[1]) / 2)); m.rotation.y = -Math.atan2(w.b[1] - w.a[1], w.b[0] - w.a[0]); m.renderOrder = 5;
+                const e = new T.LineSegments(new T.EdgesGeometry(geo), lm); e.computeLineDistances(); m.add(e); g.add(m); }); });
+        return g.children.length ? g : null;
+    }
     /** la vue 3D dans « box » : tourner, approcher, ☀️ lumière du jour, 🚶 visiter à la première personne
      *  o3 : {geo: {lat, lon}, onMemory({type, id, floor})} ; émet sur box2 « h3-roof », « h3-change » ({what: 'sun'|'walk'}), « h3-floor » ({fi}) */
     async function mount(box2, H, fi, o3 = {}) {
@@ -434,7 +444,7 @@
         const renderer = new T.WebGLRenderer({antialias: true, preserveDrawingBuffer: true}); renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.setSize(W(), Hh()); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap; renderer.outputColorSpace = T.SRGBColorSpace;
         // la barre de la vue 3D est dans l'éditeur (pour pouvoir la ranger avec ⚙️ Personnaliser) ; sinon on la crée ici
         let bar = box2.parentElement?.querySelector('[data-h3bar]'), ownBar = false;
-        if (!bar) { ownBar = true; box2.innerHTML = '<div class="h-hs-3dbar"><label class="ui-toggle"><input type="checkbox" data-h3="all" checked><i></i>Tous les étages</label><label class="ui-toggle"><input type="checkbox" data-h3="roof"><i></i>Toit</label><label class="checkbox-line"><input type="checkbox" data-h3="cut"> Murs coupés</label><label class="ui-toggle"><input type="checkbox" data-h3="dims"><i></i>Cotes</label><button type="button" class="button small secondary" data-h3="measure">📏 Mesurer</button><button type="button" class="button small secondary" data-h3="sun">☀️ Lumière</button><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div>'; bar = box2.querySelector('.h-hs-3dbar'); }
+        if (!bar) { ownBar = true; box2.innerHTML = '<div class="h-hs-3dbar"><label class="ui-toggle"><input type="checkbox" data-h3="all" checked><i></i>Tous les étages</label><label class="ui-toggle"><input type="checkbox" data-h3="roof"><i></i>Toit</label><label class="checkbox-line"><input type="checkbox" data-h3="cut"> Murs coupés</label><label class="ui-toggle"><input type="checkbox" data-h3="dims"><i></i>Cotes</label><label class="ui-toggle" hidden><input type="checkbox" data-h3="epoch"><i></i>🕰 Autre époque</label><button type="button" class="button small secondary" data-h3="measure">📏 Mesurer</button><button type="button" class="button small secondary" data-h3="sun">☀️ Lumière</button><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div>'; bar = box2.querySelector('.h-hs-3dbar'); }
         else { box2.innerHTML = ''; bar.hidden = false; bar.querySelectorAll('input[data-h3]').forEach(i => { i.checked = i.dataset.h3 === 'all'; }); bar.querySelectorAll('.is-on').forEach(b => b.classList.remove('is-on')); const wb = bar.querySelector('[data-h3="walk"]'); if (wb) wb.textContent = '🚶 Visiter'; }
         const barAc = new AbortController(), sig = {signal: barAc.signal};
         box2.appendChild(renderer.domElement);
@@ -444,9 +454,11 @@
         const groundMat = new T.MeshStandardMaterial({color: '#a9b88f', roughness: 1}), ground = new T.Mesh(new T.PlaneGeometry(400, 400), groundMat); ground.rotation.x = -Math.PI / 2; ground.position.y = -.06; ground.receiveShadow = true; scene.add(ground);
         const cam = new T.PerspectiveCamera(50, W() / Hh(), .05, 500);
         let house = new T.Group(); scene.add(house);
-        const opts = {all: true, roof: !!H.roof?.on, cut: false, dims: false}; // pas de toit tant qu'on ne l'a pas demandé
+        const opts = {all: true, roof: !!H.roof?.on, cut: false, dims: false, epoch: !!H.verGhost3d}; // pas de toit tant qu'on ne l'a pas demandé
         bar.querySelector('[data-h3="roof"]').checked = opts.roof;
+        const paintEpoch = () => { const i = bar.querySelector('[data-h3="epoch"]'); if (!i) return; i.checked = opts.epoch; const lb = i.closest('label'); if (lb) lb.hidden = (Hcur.versions || []).length < 2; }; // 🕰 seulement s'il y a des époques
         let target = new T.Vector3(), dist = 20, yaw = .8, pitch = .7, walk = false, fiCur = fi, Hcur = H, geo = o3.geo && Number.isFinite(+o3.geo.lat) && Number.isFinite(+o3.geo.lon) ? {lat: +o3.geo.lat, lon: +o3.geo.lon} : null;
+        paintEpoch();
         let lampLights = [], bulbs = [];
         const emit = (type, detail = {}) => box2.dispatchEvent(new CustomEvent(type, {bubbles: true, detail}));
         /* ─── 🏘 M9 : les autres bâtiments du terrain (d'autres maisons de la liste), posés à côté ─── */
@@ -489,6 +501,7 @@
             lampLights.forEach(l => scene.remove(l)); bulbs.forEach(b => scene.remove(b)); lampLights = []; bulbs = [];
             const lampPts = house.children.filter(g => g.userData.lamps).sort((a, b) => (b.userData.floorId === Hcur.floors[fiCur].id) - (a.userData.floorId === Hcur.floors[fiCur].id)).flatMap(g => g.userData.lamps.map(v => v.clone().add(g.position))).slice(0, 12);
             lampPts.forEach(p => { const l = new T.PointLight('#ffc977', 0, 7.5, 2); l.position.copy(p); scene.add(l); lampLights.push(l); const b = new T.Mesh(new T.SphereGeometry(.06, 12, 8), new T.MeshBasicMaterial({color: '#ffe2a8'})); b.position.copy(p); b.visible = false; scene.add(b); bulbs.push(b); });
+            if (opts.epoch && !walk) { const eg = epochGhost3d(Hcur, floors); if (eg) house.add(eg); } // 🕰 pas pendant la visite
             scene.add(house); measureObjs.forEach(o => scene.add(o)); applySun();
         }
         const fmt3 = cm => cm >= 100 ? `${(Math.round(cm) / 100).toFixed(2).replace('.', ',')} m` : `${Math.round(cm)} cm`;
@@ -724,7 +737,7 @@
             if (walk && !e.metaKey && !e.ctrlKey) { if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' ', 'pageup', 'pagedown'].includes(k)) e.preventDefault(); if (k === 'e' || k === 'pageup') goFloor(1); if (k === 'c' || k === 'pagedown') goFloor(-1); } },
             ku = e => keys.delete(e.key.toLowerCase()), blur = () => keys.clear();
         document.addEventListener('keydown', kd); document.addEventListener('keyup', ku); window.addEventListener('blur', blur);
-        bar.addEventListener('input', e => { const k = e.target.dataset.h3; if (k in opts) { opts[k] = e.target.checked; if (k === 'roof') { Hcur.roof = {...(Hcur.roof || {}), on: opts.roof}; box2.dispatchEvent(new CustomEvent('h3-roof', {bubbles: true})); } rebuild(); } }, sig);
+        bar.addEventListener('input', e => { const k = e.target.dataset.h3; if (k in opts) { opts[k] = e.target.checked; if (k === 'epoch') { Hcur.verGhost3d = opts.epoch; emit('h3-change', {what: 'epoch'}); } if (k === 'roof') { Hcur.roof = {...(Hcur.roof || {}), on: opts.roof}; box2.dispatchEvent(new CustomEvent('h3-roof', {bubbles: true})); } rebuild(); } }, sig);
         bar.addEventListener('click', e => { const bt = e.target.closest('button'), k = bt?.dataset.h3;
             if (k === 'measure') { if (walk) stopWalk(); measuring = !measuring; bt.classList.toggle('is-on', measuring); el.style.cursor = measuring ? 'crosshair' : ''; if (!measuring) clearMeasure(); return; }
             if (k === 'sun') { sunBox.style.top = `${under()}px`; sunBox.hidden = !sunBox.hidden; bt.classList.toggle('is-on', !sunBox.hidden); if (!sunBox.hidden) { paintSunBox(); applySun(); } return; }
@@ -746,10 +759,11 @@
             placeLabel(); renderer.render(scene, cam); rec?.frame(); raf = requestAnimationFrame(loop); };
         raf = requestAnimationFrame(loop);
         const ro = new ResizeObserver(() => { renderer.setSize(W(), Hh()); cam.aspect = W() / Hh(); cam.updateProjectionMatrix(); }); ro.observe(box2);
-        return {update: (H2, fi2) => { const siteChanged = JSON.stringify(H2.site || []) !== JSON.stringify(Hcur.site || []) || H2 !== Hcur; Hcur = H2; if (!walk) fiCur = fi2; if (siteChanged) refreshSite(); opts.roof = !!H2.roof?.on; const rb = bar.querySelector('[data-h3="roof"]'); if (rb) rb.checked = opts.roof; rebuild(); if (walk) buildSegs(); paintSunBox(); },
+        return {update: (H2, fi2) => { const siteChanged = JSON.stringify(H2.site || []) !== JSON.stringify(Hcur.site || []) || H2 !== Hcur; Hcur = H2; if (!walk) fiCur = fi2; opts.epoch = !!H2.verGhost3d; paintEpoch(); if (siteChanged) refreshSite(); opts.roof = !!H2.roof?.on; const rb = bar.querySelector('[data-h3="roof"]'); if (rb) rb.checked = opts.roof; rebuild(); if (walk) buildSegs(); paintSunBox(); },
             shot: () => new Promise(ok => { renderer.render(scene, cam); renderer.domElement.toBlob(ok, 'image/png'); }),
             setGeo: g => { geo = g && Number.isFinite(+g.lat) && Number.isFinite(+g.lon) && (g.lat !== '' && g.lon !== '') ? {lat: +g.lat, lon: +g.lon} : null; applySun(); },
             setSun: () => { paintSunBox(); applySun(); }, sunInfo: () => applySun(),
+            epochWalls: () => house.children.find(o => o.userData.epochGhost)?.children.length || 0, // 🕰 nombre de murs du fantôme (tests)
             walking: () => walk, justUnlocked: () => performance.now() - unlockAt < 500, startWalk, stopWalk: () => stopWalk(), goFloor,
             walkState: () => ({x: P.x, z: P.z, yaw: wyaw, fi: fiCur, stair: onStair}), walkTo: (x, z) => { [P.x, P.z] = collide(x, z); },
             memPoints: () => { const r = el.getBoundingClientRect(), out = []; house.traverse(o => { if (o.isSprite && o.userData.mem) { const v = o.getWorldPosition(new T.Vector3()).project(cam); if (v.z < 1) out.push({...o.userData.mem, x: r.left + (v.x + 1) / 2 * r.width, y: r.top + (1 - v.y) / 2 * r.height}); } }); return out; }, // où sont les ✦ à l'écran

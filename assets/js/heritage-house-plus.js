@@ -271,7 +271,7 @@ var fi=0;(H.floors||[]).forEach(function(f,i){if(f.level===0)fi=i;});window.LCND
             <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="plus:surfaces">📐 Surfaces par pièce</button><button type="button" class="button small secondary" data-hs-cmd="plus:sheet" title="Le tableau des surfaces, ouvert dans le 🧮 Tableur">🧮 Dans le tableur</button></div>
             <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="plus:cutline" title="Clique deux points sur le plan : la ligne de coupe">✂ Tracer la ligne de coupe</button>${H.cut ? '<button type="button" class="button small secondary" data-hs-cmd="plus:cut">✂ Voir la coupe</button>' : ''}</div>
             <div class="h-hs-row"><button type="button" class="button small ${red ? '' : 'secondary'}" data-hs-cmd="plus:check">⚠️ Vérifier le plan${n.length ? ` (${n.length})` : ' ✓'}</button></div>
-            ${y1 > y0 ? `<label><span data-help="Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale)." data-help-faq="époques de la maison">🕰 L’année</span><input type="range" min="${y0}" max="${y1}" step="1" value="${Number(ctx.year) || y1}" data-hs-plus="year" data-ui-off><small class="muted" data-hs-plus-out="year">${Number(ctx.year) || y1}</small></label>` : ''}
+            ${y1 > y0 ? `<label><span data-help="Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale)." data-help-faq="époques de la maison">🕰 L’année</span><input type="range" min="${y0}" max="${y1}" step="1" value="${Number(ctx.year) || y1}" data-hs-plus="year" data-ui-off><small class="muted" data-hs-plus-out="year">${Number(ctx.year) || y1}</small></label><label class="ui-toggle" title="Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia"><input type="checkbox" data-hs-plus="epghost" ${H.verGhost === 'prev' ? 'checked' : ''}><i></i>👻 Voir l’époque d’avant en fantôme</label>` : ''}
             <p class="small"><b>🗺 Visite guidée</b> : ${tour.length ? `${tour.length} arrêt${tour.length > 1 ? 's' : ''}` : 'aucun arrêt'} · <b>📷 Photos d’époque</b> : ${ph.length}</p>
             <div class="h-hs-row">${tour.length ? '<button type="button" class="button small secondary" data-hs-cmd="plus:tourplay">▶ Visite guidée</button><button type="button" class="button small secondary" data-hs-cmd="plus:tourlist">✎ Les arrêts</button><button type="button" class="button small secondary" data-hs-cmd="plus:tourvideo" title="La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre">🎬 Vidéo de la visite…</button><button type="button" class="button small secondary" data-hs-cmd="plus:tourshots" title="Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage">⤓ Images de la visite</button>' : ''}<button type="button" class="button small secondary" data-hs-cmd="plus:tourhelp" title="Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D)">＋ Arrêt, 📷 photo…</button></div>
             ${ph.length ? `<ul class="h-hs-people">${ph.map((p, i) => `<li><button type="button" class="link-button" data-hs-cmd="plus:photo:${i}">📷 ${esc(p.title || 'Photo')}</button><button type="button" class="icon-button" data-hs-cmd="plus:photodel:${i}" title="Retirer">×</button></li>`).join('')}</ul>` : ''}
@@ -354,9 +354,26 @@ var fi=0;(H.floors||[]).forEach(function(f,i){if(f.level===0)fi=i;});window.LCND
         const vs = (H.versions || []).map(v => ({v, y: Number((String(v.date || '').match(/\d{4}/) || [])[0])})).filter(x => x.y).sort((a, b) => a.y - b.y); if (!vs.length) return null;
         let best = vs[0].v; vs.forEach(x => { if (x.y <= year) best = x.v; }); return best;
     }
+    /** 🕰 une autre époque en fantôme (H.verGhost : 'prev', 'next' ou l'id d'une époque) : {v, floors, before} ou null */
+    const verKey = v => { const t = String(v.date || ''), iso = t.match(/(\d{4})-(\d{1,2})-(\d{1,2})/), fr = t.match(/(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})/), y = t.match(/\d{4}/); return iso ? +iso[1] * 1e4 + +iso[2] * 100 + +iso[3] : fr ? +fr[3] * 1e4 + +fr[2] * 100 + +fr[1] : y ? +y[0] * 1e4 : 9e8; }; // sans date : à la fin
+    const epochList = H => (H.versions || []).map((v, i) => [v, i]).sort((a, b) => verKey(a[0]) - verKey(b[0]) || a[1] - b[1]).map(x => x[0]);
+    function epochGhost(H, mode = H.verGhost) {
+        if (!mode || (H.versions || []).length < 2) return null; const l = epochList(H), i = l.findIndex(v => v.id === H.ver); if (i < 0) return null;
+        const v = mode === 'prev' ? l[i - 1] : mode === 'next' ? l[i + 1] : l.find(q => q.id === mode && q.id !== H.ver);
+        return v && Array.isArray(v.floors) ? {v, floors: v.floors, before: l.indexOf(v) < i} : null;
+    }
+    /** les murs de fa absents de fb (added) et ceux de fb absents de fa (gone) : par segments, à quelques cm près */
+    function epochDiff(fa, fb, tol = 6) {
+        const segD = (p, w) => { const dx = w.b[0] - w.a[0], dy = w.b[1] - w.a[1], L2 = dx * dx + dy * dy || 1, t = clamp(((p[0] - w.a[0]) * dx + (p[1] - w.a[1]) * dy) / L2, 0, 1); return Math.hypot(p[0] - w.a[0] - dx * t, p[1] - w.a[1] - dy * t); };
+        const dir = w => { const dx = w.b[0] - w.a[0], dy = w.b[1] - w.a[1], L = Math.hypot(dx, dy) || 1; return [dx / L, dy / L]; };
+        const covered = (w, set) => { const d0 = dir(w), pts = [0, .25, .5, .75, 1].map(t => [w.a[0] + (w.b[0] - w.a[0]) * t, w.a[1] + (w.b[1] - w.a[1]) * t]);
+            return pts.every(p => set.some(q => { const d1 = dir(q); return Math.abs(d0[0] * d1[1] - d0[1] * d1[0]) < .05 && segD(p, q) <= tol; })); };
+        const A = (fa?.walls || []).filter(w => w?.a && w?.b), B = (fb?.walls || []).filter(w => w?.a && w?.b);
+        return {added: A.filter(w => !covered(w, B)), gone: B.filter(w => !covered(w, A))};
+    }
     /** M6 : les personnes de la pièce où l'on est (visite) */
     const roomAt = (f, x, y) => (f?.rooms || []).find(r => !r.void && r.pts?.length > 2 && pointIn(r.pts, [x, y])) || null;
 
-    ext.housePlus = {tangentAt, roomOutline, roofItemsPlan, roofGeom, slopeH, bulgeOf, bez, wallPts, arcLen, wallD, roofWings, topFloor, atticOf, heightAt, roomSurfaces, lowZones, surfaces, surfacesWorkbook, checks, sectionSvg, stripHouse, shareHtml, paneHouse, cmd, versionForYear, roomAt, baseOf, crossPoly};
+    ext.housePlus = {tangentAt, roomOutline, roofItemsPlan, roofGeom, slopeH, bulgeOf, bez, wallPts, arcLen, wallD, roofWings, topFloor, atticOf, heightAt, roomSurfaces, lowZones, surfaces, surfacesWorkbook, checks, sectionSvg, stripHouse, shareHtml, paneHouse, cmd, versionForYear, verKey, epochList, epochGhost, epochDiff, roomAt, baseOf, crossPoly};
     if (typeof module !== 'undefined' && module.exports) module.exports = ext.housePlus;
 })();

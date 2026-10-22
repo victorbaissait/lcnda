@@ -887,6 +887,15 @@ Une seule géométrie, `assets/js/heritage-house-vides.js` → `LCNDA_EXT.houseV
 - **M14** : existait (plan ancien, calage par deux points et une longueur, redresser, décalquer).
 - Test : `tests/test-maison-plus.js` (Node + navigateur, `SHOTS=dossier` pour les captures).
 
+### 🏠 Maison : une autre époque en fantôme
+
+- Le menu calque 👻 (barre des étages et onglet Étage) propose aussi « 🕰 Époque d'avant », « 🕰 Époque d'après » et « 🕰 Choisir une époque… » (les époques de `H.versions`, rangées par `ext.housePlus.verKey`). Réglage dans `H.verGhost` (`'prev'`, `'next'` ou l'id d'une époque) ; il s'ajoute au calque d'étage déjà choisi.
+- `ext.housePlus.epochGhost(H)` → `{v, floors, before}` (une époque non montrée garde ses étages dans `v.floors`) ; le plan dessine le même niveau (`level`) avec la même fonction `ghost(…)` que les étages, en sépia `#a8743a`, même transparence `H.ghostOp`. Jamais dans les exports.
+- Légende (interrupteur, `H.verLegend`) : `epochDiff(fa, fb, tol = 6)` compare les murs par segments (5 points par mur, parallèles, à 6 cm près) → `added` (trait plein vert) et `gone` (pointillés sépia) ; bandeau `[data-hs-eplegend]` (`data-added`, `data-gone`).
+- 3D : interrupteur « 🕰 Autre époque » de la barre (`H.verGhost3d`, époque du calque sinon celle d'avant) → `epochGhost3d` (murs à 10 % d'opacité, arêtes en pointillés) ; jamais pendant la visite.
+- Curseur des années (M5) : « 👻 Voir l'époque d'avant en fantôme » met `H.verGhost = 'prev'` ; une époque fixe repasse à `'prev'` quand on glisse l'année. `verGhost` (prev/next) et `verLegend` vont dans les 💾 réglages enregistrés.
+- Test : `tests/test-maison-epoques.js`.
+
 ### 🏠 Maison : les 5 limites levées (après M1–M14)
 
 - **Mur courbe** : `ext.housePlus.roomOutline(f, rm)` (le côté d'une pièce posé sur un mur courbe suit la Bézier) sert au sol et au plafond 3D, au plan, aux surfaces et à la loi Carrez ; `tangentAt(w, t)` pose portes et fenêtres sur la courbe (`openingSvg`, battant 3D dans `chunkWall`) ; la cote d'un mur courbe = l'arc décalé, « ⌒ longueur d'arc · flèche » ; la coupe découpe le mur en morceaux (fenêtres comprises) ; la visite s'arrête contre la courbe (`buildSegs`), la petite carte la dessine. Le paramètre d'une ouverture (`o.pos`) est le paramètre de la courbe.
