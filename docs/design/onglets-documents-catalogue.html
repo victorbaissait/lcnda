@@ -1,0 +1,689 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documents et catalogue</title>
+<link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+*{box-sizing:border-box}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px;max-width:1180px;line-height:1.5}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px 30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;min-width:0}
+.case.full{grid-column:1/-1}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.note{font-size:12.5px;color:#555;margin-top:14px;line-height:1.5}
+.muted{color:#666}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.two.w{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.three>div,.two>div{min-width:0}
+/* K8 */
+.b{display:inline-flex;align-items:center;gap:4px;font:800 11px/1 system-ui;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid;padding:4px 7px;white-space:nowrap;vertical-align:middle;color:#444;background:#f0f1f3;border-color:#8a8f99}
+.b.g{color:#14532d;background:#ecfaf0;border-color:#1aa34a}
+.b.y{color:#6b4e00;background:#fff8e1;border-color:#e1a500}
+.b.r{color:#8a1111;background:#fdecec;border-color:#d62828}
+.b.bl{color:#0a3fae;background:#eaf1ff;border-color:#055dff}
+.b.blk{color:#fff;background:#111;border-color:#111}
+.b.dt{text-transform:none;letter-spacing:0;font-weight:700}
+.lnk{color:#055dff;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+.btn{display:inline-block;border:2px solid #111;padding:8px 13px;font:700 13px system-ui;background:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3);white-space:nowrap;cursor:pointer;color:#111}
+.btn.p{background:#055dff;color:#fff}
+.btn.s{padding:4px 9px;font-size:12px;box-shadow:none;border-width:1.5px}
+/* fiche animal */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.34);padding:14px 16px;margin-bottom:14px;background:#fff}
+.hero-ic{width:64px;height:64px;display:grid;place-items:center;font-size:34px;background:#fff1e6;border:2px solid #111}
+.eyebrow{font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.hero h2{font-size:30px;margin:2px 0 3px;line-height:1;letter-spacing:-.03em}
+.hero p{margin:0;color:#666;font-size:13px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.seg{display:inline-flex;border:2px solid #111;flex-wrap:wrap;max-width:100%}.seg span{padding:7px 12px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff;white-space:nowrap}.seg span:last-child{border-right:0}.seg span.is-active{background:#055dff;color:#fff}
+.seg.sm span{padding:4px 9px;font-size:12px}
+.crd{border:2px solid #111;background:#fff;min-width:0}
+.crd+.crd{margin-top:14px}
+.crd-h{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:2px solid #111;background:#fafafa;flex-wrap:wrap}
+.crd-h h4{margin:0;font-size:15px;flex:1;min-width:150px}.crd-h h4 small{color:#999;font-weight:400}
+.crd-b{padding:12px 14px}
+.kv{display:grid;grid-template-columns:118px minmax(0,1fr);gap:9px 12px;font-size:13px;align-items:center}
+.kv dt{color:#666}.kv dd{margin:0;font-weight:600;min-width:0}
+.ok{font-size:12px;color:#055dff;margin-top:3px;font-weight:600}
+.inp{border:2px solid #111;padding:6px 9px;font:600 13px system-ui;background:#fff;min-width:0;width:100%}
+.inp.u{display:inline-flex;padding:0;width:auto}.inp.u b{padding:6px 9px;min-width:44px}.inp.u i{font-style:normal;padding:6px 8px;background:#f0f1f3;border-left:1.5px solid #c9ccd3;color:#555;font-weight:700}
+/* pastilles du menu de choix */
+.pill{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px 7px;border:1.5px solid #c9ccd3;background:#fff;padding:3px 6px 3px 3px;font-size:12.5px;font-weight:700;max-width:100%;vertical-align:middle}
+.pill .ini{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 10px system-ui;background:#3c78d8;flex:none}
+.pill .ini.f{background:#d9488f}.pill .ini.a{background:#e8590c}.pill .ini.u{background:#9aa0aa}
+.pill .ic{width:22px;height:22px;display:grid;place-items:center;flex:none}
+.pill small{color:#777;font-weight:500}
+.pill .x{color:#777;font-weight:400;padding:0 2px}
+.pill .o{color:#055dff;font-size:11.5px}
+.pill.sec{background:#f4f5f7}
+.pill .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.pk{display:flex;align-items:center;gap:8px;border:2px solid #111;padding:6px 9px;font-size:13px;color:#888;background:#fff}
+.pk.on{border-color:#055dff;box-shadow:0 0 0 3px rgba(5,93,255,.18);color:#111}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid #c9ccd3;padding:4px 9px;font:700 12px system-ui;background:#fff;white-space:nowrap}
+.chip.on{border-color:#055dff;background:#eaf1ff;color:#0a3fae}
+.chip.blk{background:#111;color:#fff;border-color:#111}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);vertical-align:-1px;margin-right:2px}
+/* pattes */
+.legs{width:100%;max-width:300px;height:auto;display:block;margin:0 auto}
+.legkey{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;font-size:12.5px;margin-top:8px;text-align:center}
+.legkey b{display:block;font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777}
+.code{font:800 13px ui-monospace,Menlo,monospace;background:#f0f1f3;border:1.5px solid #c9ccd3;padding:3px 7px;display:inline-block}
+.hist{list-style:none;margin:10px 0 0;padding:0;font-size:12.5px}
+.hist li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;padding:6px 0;border-top:1px solid #eee}
+.hist li b{font-size:12px}
+.metal{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:2px solid #555;border-radius:4px;background:linear-gradient(180deg,#eef0f3,#b8bec7 55%,#dfe3e8);font:800 12px ui-monospace,Menlo,monospace;letter-spacing:.06em;color:#333}
+.mtbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.mtbl th{text-align:left;font:700 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#777;border-bottom:2px solid #111;padding:6px 7px;white-space:nowrap}
+.mtbl td{padding:8px 7px;border-bottom:1px solid #eef0f3;vertical-align:top}
+.mtbl td small{display:block;color:#777}
+.scroll{overflow-x:auto}
+.scroll .mtbl{min-width:820px}
+.empty-line{display:flex;gap:8px;align-items:center;padding:8px 10px;background:#f6f7f9;border:1.5px dashed #c9ccd3;font-size:12.5px;color:#555;line-height:1.4;flex-wrap:wrap}
+.empty-line .btn{margin-left:auto}
+.ex{border:1.5px dashed #055dff;background:#f5f8ff;padding:9px 11px;margin-top:10px;font-size:12.5px;line-height:1.5}
+/* H10 */
+.h10{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.h10 .srch{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;border:2px solid #111;padding:6px 9px;font-size:13px;color:#888;background:#fff}
+.h10 .srch kbd{margin-left:auto}
+.dd{border:2px solid #111;padding:6px 10px;font:700 12.5px system-ui;background:#fff;white-space:nowrap}
+.dd .n{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:9px;background:#055dff;color:#fff;font-size:10.5px;margin-left:4px}
+kbd{border:1px solid #c9ccd3;border-bottom-width:2px;background:#f4f5f7;padding:0 5px;font:700 11px system-ui;color:#555}
+.actf{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px;font-size:12px}
+.actf .chip{background:#055dff;border-color:#055dff;color:#fff}
+.cnt{font-size:12.5px;color:#555;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:6px 0;border-bottom:2px solid #111}
+.more{text-align:center;padding:10px;font:700 13px system-ui;color:#055dff}
+.thumb{width:40px;height:32px;display:grid;place-items:center;background:#dfe6d6;border:1.5px solid #999;font-size:15px;position:relative}
+.thumb.v{background:#22262d;color:#fff;font-size:11px}
+/* fenêtre */
+.win{border:2px solid #111;background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.25);width:540px;max-width:100%}
+.win.m{width:760px}
+.win-h{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:2px solid #111;background:#fafafa}
+.win-h .t{flex:1;min-width:0}.win-h .t small{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin-bottom:3px}
+.win-h b{font-size:16px}
+.win-h .x{border:0;background:none;font-size:22px;line-height:1;cursor:pointer;color:#555;padding:0 2px}
+.win-b{padding:14px 16px}
+.win-f{display:flex;gap:10px;justify-content:flex-end;padding:10px 16px;border-top:2px solid #111;align-items:center;flex-wrap:wrap}
+.win-f .sp{flex:1}
+.lab{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin:14px 0 6px}
+.lab:first-child{margin-top:0}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.find{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;border:2px solid #111;padding:12px;background:#fcfcfd}
+.pal{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.pal span{width:26px;height:26px;border:2px solid #111;display:grid;place-items:center;font:800 11px system-ui;cursor:pointer}
+.pal span.on{outline:3px solid #055dff;outline-offset:1px}
+.match{list-style:none;margin:0;padding:0}
+.match li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px;border:1.5px solid #e3e5ea;margin-bottom:6px;font-size:12.5px}
+.match li.on{border:2px solid #055dff;background:#f5f8ff}
+.match li b{display:block;font-size:13.5px}
+.match li small{color:#666}
+.score{font:800 16px system-ui;text-align:right}
+.score small{display:block;font:600 10.5px system-ui;color:#777}
+.mini-legs{width:46px;height:36px}
+.notice{border:2px solid;padding:8px 12px;font-size:13px;display:flex;gap:8px;margin:8px 0;line-height:1.4}
+.notice.i{border-color:#055dff;background:#eef4ff}.notice.ok{border-color:#1aa34a;background:#ecfaf0}.notice.w{border-color:#e1a500;background:#fff8e1}
+.mz{display:flex;align-items:center;gap:10px;border:1.5px solid #c9ccd3;padding:5px;font-size:12.5px;max-width:100%}
+.mz .thumb{width:52px;height:40px}
+/* carte */
+.mapbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.mapwrap{position:relative;border:2px solid #111;overflow:hidden;background:#eef0e8}
+.mapwrap svg{display:block;width:100%;height:auto}
+.mapwrap .pop{position:absolute;left:52%;top:9%;max-width:260px}
+.pop{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:9px 11px;font-size:12.5px;line-height:1.45}
+.pop b{font-size:13.5px}
+.mapside{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.95);border:2px solid #111;padding:8px 10px;font-size:12px;line-height:1.7}
+.mapside b{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777;display:block}
+.timeline{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;border:2px solid #111;border-top:0;padding:9px 12px;background:#fff;font-size:12.5px}
+.track{position:relative;height:6px;background:#dfe3e8}
+.track i{position:absolute;left:0;top:0;bottom:0;width:72%;background:#055dff}
+.track b{position:absolute;left:72%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;background:#fff;border:2px solid #055dff;border-radius:50%}
+.track span{position:absolute;top:12px;font-size:10.5px;color:#777;transform:translateX(-50%);white-space:nowrap}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font:600 13px system-ui;white-space:nowrap}
+.ui-toggle i{width:36px;height:20px;border-radius:10px;background:#055dff;position:relative;flex:none}
+.ui-toggle i:after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.ui-toggle.off i{background:#c2c7cf}.ui-toggle.off i:after{right:auto;left:2px}
+.sel{border:2px solid #111;padding:6px 10px;font:600 12.5px system-ui;background:#fff;white-space:nowrap}
+/* import */
+.steps{display:flex;gap:0;border:2px solid #111;margin-bottom:14px}
+.steps span{flex:1;padding:7px 6px;font:700 12px system-ui;border-right:2px solid #111;background:#fff;color:#777;text-align:center}
+.steps span:last-child{border:0}.steps span.done{color:#14532d;background:#ecfaf0}.steps span.on{background:#055dff;color:#fff}
+.dropz{border:2.5px dashed #055dff;background:#f5f8ff;padding:18px;text-align:center;font-size:13.5px;line-height:1.5}
+.radio{display:flex;gap:8px;align-items:center;font-size:13px;margin:6px 0;flex-wrap:wrap}
+.radio:before{content:"";width:14px;height:14px;border:2px solid #111;border-radius:50%;flex:none}
+.radio.on:before{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.toast2{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:11px 14px;font-size:13.5px;box-shadow:5px 5px 0 rgba(5,93,255,.45);max-width:470px;position:relative;margin:12px 0 0;flex-wrap:wrap}
+.toast2 .u{border:1.5px solid #fff;padding:4px 9px;font:700 12.5px system-ui;margin-left:auto;white-space:nowrap}
+.toast2 .bar{position:absolute;left:0;bottom:0;height:3px;background:#5b9bff}
+/* en-tête K5 */
+.ph{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:14px}
+.ph .t{flex:1;min-width:220px}
+.ph small{display:block;font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.ph h2{margin:3px 0 4px;font-size:24px}
+.ph p{margin:0;color:#666;font-size:13px}
+/* K9 */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.uc{border:2px solid #111;background:#fff;display:flex;flex-direction:column;min-width:0}
+.uc .im{height:92px;background:#eef0e8;display:grid;place-items:center;border-bottom:2px solid #111}
+.uc .im svg{width:84px;height:66px}
+.uc .bd{padding:9px 10px;flex:1}
+.uc .bd b{display:block;font-size:14px}
+.uc .bd small{display:block;color:#666;font-size:12px;line-height:1.4}
+.uc .bd .chips{margin-top:7px}
+.uc .b{white-space:normal;line-height:1.25}
+.uc .wh{font-size:11.5px;color:#888;margin-top:6px}
+.uc .ft{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e3e5ea;padding:6px 10px;font:700 12.5px system-ui;color:#055dff}
+.uc .ft span:last-child{color:#555}
+.menu{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:6px 0;font-size:13px;min-width:0}
+.menu h6{margin:8px 12px 4px;font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777}
+.menu .it{padding:5px 12px;display:flex;gap:8px;align-items:center}
+.menu .it.on{background:#eaf1ff;font-weight:700}
+.menu .ck:before{content:"";width:13px;height:13px;border:2px solid #111;flex:none}
+.menu .ck.on:before{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.menu hr{border:0;border-top:1px solid #e3e5ea;margin:6px 0}
+/* chiffres */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.tile{border:2px solid #111;padding:10px 12px;min-width:0}
+.tile b{display:block;font:800 26px system-ui;letter-spacing:-.02em}
+.tile small{color:#666;font-size:12px;display:block;line-height:1.35}
+.chart{border:2px solid #111;padding:10px 12px}
+.chart h5{margin:0 0 8px;font-size:13px}
+.chart svg{display:block;width:100%;height:auto}
+.hb{display:grid;grid-template-columns:130px minmax(0,1fr) 40px;gap:8px;align-items:center;font-size:12.5px;margin:5px 0}
+.hb i{display:block;height:14px;background:#055dff}
+.hb span:last-child{text-align:right;font-weight:700}
+.lost li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #eee;font-size:12.5px;flex-wrap:wrap}
+.lost{list-style:none;margin:0;padding:0}
+@media (max-width:900px){
+ body{padding:16px}
+ .grid,.two,.two.w,.three{grid-template-columns:minmax(0,1fr)}
+ .case{padding:14px 14px 18px}
+ .cards,.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .find{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){
+ .hero{grid-template-columns:auto minmax(0,1fr)}.hero .acts{grid-column:1/-1;justify-content:flex-start}
+ .hero h2{font-size:24px}
+ .kv{grid-template-columns:minmax(0,1fr)}.kv dt{margin-top:4px}
+ .row2{grid-template-columns:minmax(0,1fr)}
+ .cards{grid-template-columns:minmax(0,1fr)}
+ .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .mapwrap .pop{position:static;max-width:none;border-width:0 0 2px;box-shadow:none}
+ .mapside{position:static;border-width:2px 0 0}
+ .timeline{grid-template-columns:auto minmax(0,1fr)}.timeline>span:last-child{grid-column:1/-1}
+ .hb{grid-template-columns:96px minmax(0,1fr) 34px}
+ .h10 .srch{min-width:100%}
+ .track span:nth-of-type(2){display:none}
+}
+.topnav{display:flex;gap:8px;overflow-x:auto;padding:8px 10px;border:2px solid #111;background:#fff}
+.ni{border:2px solid #111;padding:6px 10px;font:700 12.5px system-ui;white-space:nowrap;background:#fff}
+.ni span{display:block;font-size:9px;color:#055dff;letter-spacing:.12em;margin-bottom:3px}
+.ni.on{background:#055dff;color:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3)}.ni.on span{color:#fff}
+.ni.new{outline:3px dashed #e1a500;outline-offset:2px}
+.saved{color:#1aa34a;font:700 12.5px system-ui;white-space:nowrap}
+.idx{display:grid;place-items:center;width:26px;height:26px;background:#055dff;color:#fff;font:800 11px system-ui;border:1.5px solid #111;transform:rotate(-3deg);flex:none}
+.tabrow{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:8px;align-items:center;padding:7px 4px;border-bottom:1px solid #eee;font-size:13px}
+.tabrow.hl{background:#fff8e1}
+.grip{color:#9aa0aa;font-size:16px}
+.dash{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:start}
+.side .ci{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;border:2px solid #111;background:#fff;box-shadow:2px 2px 0 rgba(5,93,255,.3);padding:6px 8px;margin-bottom:6px;font-size:12px}
+.side .ci div:first-child{display:flex;gap:8px;align-items:center;min-width:0}
+.side .ci span{font:800 9.5px system-ui;color:#055dff;letter-spacing:.1em}
+.side .ci.on{background:#055dff;color:#fff}.side .ci.on span{color:#fff}
+.ca{display:flex;gap:4px}.ca i{font-style:normal;width:20px;height:20px;border:1.5px solid #111;display:grid;place-items:center;font:700 11px system-ui}
+.sidefoot{display:flex;flex-direction:column;gap:6px;margin-top:10px}.sidefoot small{color:#666;font-size:11.5px}
+.wgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.wgrid>.crd{margin:0}
+.wgrid .crd-h{flex-wrap:nowrap}.wgrid .crd-h h4{min-width:0}.w1{grid-column:span 12}.w2{grid-column:span 6}.w3{grid-column:span 4}.w4{grid-column:span 3}.w23{grid-column:span 8}.w34{grid-column:span 9}
+.tools{display:inline-flex;gap:5px;border-left:2px solid #111;padding-left:9px}
+.ia{width:26px;height:26px;border:2px solid #111;display:grid;place-items:center;font-size:13px;background:#fff}.ia.d{color:#d62828}.ia.on{background:#055dff;color:#fff}
+.frow{display:flex;gap:9px;align-items:center;padding:6px 0;border-top:1px solid #eee;font-size:12.5px}
+.frow .ini{border-radius:50%;display:grid;place-items:center;background:#e8590c;color:#fff;font-size:13px}
+mark{background:#fff1a8}
+.orow{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid #eee;font-size:12.5px}
+.minic{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.minic>div{border:1.5px solid #c9ccd3;padding:6px;text-align:center;font-size:12px;min-width:0}
+.minic svg{width:46px;height:36px;display:block;margin:0 auto 3px}.minic .big{font-size:26px;display:block;height:36px;line-height:36px}
+.minic b{display:block}.minic small{color:#777;font-size:11px}
+.bk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.bk>div{border:1.5px solid #c9ccd3;padding:8px;display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 6px;font-size:12.5px}
+.bk>div span{grid-row:span 2;font-size:20px}.bk>div small{color:#666;font-size:11.5px}
+.bk>div.on{border:2px solid #055dff;background:#f5f8ff}.bk>div.off{opacity:.45;cursor:not-allowed}
+@media (max-width:900px){.dash{grid-template-columns:minmax(0,1fr)}.wgrid>.crd{grid-column:1/-1}.side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}.sidefoot{grid-column:1/-1}}
+@media (max-width:520px){.side{grid-template-columns:minmax(0,1fr)}.minic{grid-template-columns:repeat(3,minmax(0,1fr))}.bk{grid-template-columns:minmax(0,1fr)}}
+.s16{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}.s16>div{min-width:0}
+.s16 .pill{flex-wrap:nowrap;white-space:nowrap}
+@media (max-width:900px){.s16{grid-template-columns:minmax(0,1fr)}}
+.pgbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.frz{display:flex;height:18px;border:2px solid #111}.frz i{display:block;border-right:2px solid #fff}
+.frzl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;font-size:11px;margin-top:6px;color:#555}.frzl .b{font-size:9.5px;padding:3px 5px}
+.hev{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;padding:8px 0;border-bottom:1px solid #eee;font-size:12.5px}.hev.on{background:#f5f8ff;margin:0 -8px;padding:8px}
+.hev small{color:#555;line-height:1.7}
+.rub{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#055dff;margin:12px 0 6px;border-top:2px solid #111;padding-top:8px}
+@media (max-width:520px){.frzl{grid-template-columns:repeat(2,minmax(0,1fr))}.hev{grid-template-columns:minmax(0,1fr)}}
+/* sombre */
+.dk{background:#121418;color:#e8e8e8;border-color:#444;box-shadow:6px 6px 0 rgba(77,159,255,.25)}
+.dk>.tag{color:#7fb0ff}
+.dk .hero,.dk .crd,.dk .mapwrap,.dk .timeline{background:#1b1e24;border-color:#444;box-shadow:none}
+.dk .crd-h{background:#20242b;border-color:#444}
+.dk .hero-ic{background:#3a2717;border-color:#666}
+.dk .hero p,.dk .kv dt,.dk .muted,.dk .note,.dk .eyebrow,.dk .legkey b,.dk .hist,.dk .crd-h h4 small{color:#a5abb6}
+.dk .hist li{border-color:#2d3139}
+.dk .seg{border-color:#666}.dk .seg span{background:#1b1e24;border-color:#666;color:#ddd}.dk .seg span.is-active{background:#2f7bff;color:#fff}
+.dk .pill{background:#1b1e24;border-color:#555;color:#e8e8e8}.dk .pill small{color:#a5abb6}.dk .pill .o{color:#7fb0ff}
+.dk .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}.dk .btn.p{background:#2f7bff;border-color:#2f7bff}
+.dk .code{background:#262a31;border-color:#555;color:#eee}
+.dk .b.g{background:#13301f;color:#8fe0ad;border-color:#3ccf73}.dk .b.bl{background:#1a2a3d;color:#9cc2ff;border-color:#5599ff}
+.dk .b.y{background:#33290b;color:#ffd666;border-color:#e1a500}
+.dk .chip{background:#1b1e24;border-color:#555;color:#ddd}.dk .chip.on{background:#1a2a3d;border-color:#5599ff;color:#9cc2ff}
+.dk .ui-toggle i{background:#2f7bff}
+.dk .sel{background:#1b1e24;border-color:#666;color:#ddd}
+.dk .mapside,.dk .pop{background:#1b1e24;border-color:#555;color:#e8e8e8}
+.dk .track{background:#333}
+.dk .ok{color:#7fb0ff}
+/* ===== premier lancement ===== */
+.inst{border:2px solid #111;background:#fff;box-shadow:4px 4px 0 rgba(5,93,255,.25);padding:30px 36px 32px;max-width:880px;margin:0 auto;min-width:0}
+.inst .eyebrow{color:#055dff}
+.inst h2{margin:10px 0 4px;font-size:26px;letter-spacing:-.02em;line-height:1.15}
+.inst>p{margin:0 0 6px;line-height:1.5;color:#333;font-size:14px}
+.iopts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:22px}
+.icard{border:2px solid #111;padding:18px;background:#fff;min-width:0}
+.icard h3{margin:0 0 8px;font-size:16px}
+.icard p{margin:0 0 10px;font-size:12.5px;color:#666;line-height:1.45}
+.fl{display:block;font:700 12.5px system-ui;margin:0 0 9px}
+.fl .inp,.fl .sel{display:block;width:100%;margin-top:4px;font-weight:500;color:#111}
+.fl .inp.ph{color:#999}
+.fbtn{display:inline-flex;align-items:center;gap:6px;border:2px dashed #888;padding:7px 11px;font:700 12.5px system-ui;background:#fafafa;margin-bottom:10px}
+.other{display:inline-flex;align-items:center;gap:5px;margin-top:12px;font:600 13px system-ui;color:#555;text-decoration:underline dotted;text-underline-offset:3px;cursor:pointer}
+.other.on{color:#055dff;text-decoration-style:solid}
+.ofold{border-top:2px solid #111;margin-top:24px;padding-top:18px}
+.ofold h3{margin:0 0 2px;font-size:18px}
+.ofold>p{margin:0 0 14px;font-size:13px;color:#666}
+.usages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.uz{padding:11px 11px 10px!important;grid-template-columns:34px minmax(0,1fr)!important;gap:2px 8px!important}.uz .ui{width:34px!important;height:34px!important;line-height:34px!important;font-size:22px!important}
+.uz{border:2px solid #111;background:#fff;padding:12px 13px 11px;display:grid;grid-template-columns:40px minmax(0,1fr);gap:2px 10px;align-content:start;min-width:0;cursor:pointer;position:relative}
+.uz .ui{grid-row:span 3;font-size:28px;line-height:40px;text-align:center;width:40px;height:40px;background:#f4f5f7;border:1.5px solid #c9ccd3}
+.uz b{font-size:14px;line-height:1.25;padding-right:14px}
+.uz span.pp{font-size:12.5px;color:#444;line-height:1.4}
+.uz small{display:block;font-size:11.5px;color:#777;line-height:1.4;margin-top:5px;border-top:1px dashed #d5d8de;padding-top:5px}
+.uz small em{font-style:normal;font:800 10px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#999;display:block}
+.uz.on{border-color:#055dff;background:#f5f8ff;box-shadow:0 0 0 3px rgba(5,93,255,.18)}
+.uz.on .ui{background:#055dff;border-color:#055dff}
+.uz .rk{position:absolute;right:8px;top:8px;width:16px;height:16px;border:2px solid #111;border-radius:50%;background:#fff}
+.uz.on .rk{background:#055dff;box-shadow:inset 0 0 0 2px #fff;border-color:#055dff}
+.uz.def b:after{content:" · comme d'habitude";font-weight:500;color:#888;font-size:12px}
+.ofoot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:#555}
+.ofoot .lnk{margin-left:auto}
+/* app ouverte */
+.appwin{border:2px solid #111;background:#f4f5f7;min-width:0;overflow:hidden}
+.appbar{display:grid;grid-template-columns:130px minmax(0,1fr);border-bottom:2px solid #111;background:#fff}
+.brand2{border-right:2px solid #111;display:grid;place-content:center;justify-items:center;gap:3px;padding:8px 6px;text-align:center}
+.brand2 span{border:1px solid #055dff;color:#055dff;font:800 10px system-ui;padding:2px 4px;transform:rotate(-5deg);text-transform:uppercase;white-space:nowrap}
+.brand2 strong{background:#055dff;color:#fff;font:800 11px system-ui;padding:3px 5px;transform:rotate(-5deg);text-transform:uppercase;white-space:nowrap}
+.brand2 small{font:700 8px system-ui;letter-spacing:.16em;color:#888}
+.appbar .topnav{border:0;align-items:center}
+.appbody{padding:14px;min-width:0}
+.ni.gone{opacity:.45;text-decoration:line-through;border-style:dashed}
+.ni.mv{outline:3px dashed #1aa34a;outline-offset:2px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#555;margin:6px 0 0}
+.legend i{display:inline-block;width:16px;height:12px;vertical-align:-1px;margin-right:4px;border:2px solid #111}
+.legend i.n{outline:2px dashed #e1a500;outline-offset:1px}.legend i.m{outline:2px dashed #1aa34a;outline-offset:1px}.legend i.g{opacity:.45;border-style:dashed}
+.side2{border:2px solid #111;background:#fff;padding:8px 10px;font-size:12px}
+.side2 .eyebrow{color:#055dff}
+.side2 h5{margin:2px 0 8px;font-size:16px}
+.side2 .r{display:flex;gap:8px;align-items:center;padding:5px 0;border-top:1px solid #eee}
+.ped{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:center}
+.pb{border:2px solid #111;padding:6px 8px;font-size:12px;background:#fff;min-width:0}
+.pb b{display:block;font-size:13px}
+.pb.e{border:1.5px dashed #9aa0aa;color:#666;background:#fafafa}
+.pb.e b{color:#055dff;font-size:12.5px}
+.pfam{display:grid;gap:8px}
+.wiz{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.wiz .win{width:100%;box-shadow:4px 4px 0 rgba(5,93,255,.2)}
+.sp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.sp-grid .chip{display:flex;gap:6px;align-items:center;padding:7px 9px;font-size:12.5px}
+.sw{width:22px;height:22px;border:2px solid #111;display:inline-block;vertical-align:middle}
+.swl{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.swl span{width:26px;height:26px;border:2px solid #111;position:relative}
+.swl span.on:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;font:800 13px system-ui;color:#fff;text-shadow:0 0 2px #000}
+.mapmini{height:150px;border:2px solid #111;background:#e7eee0;position:relative;overflow:hidden}
+.mapmini svg{width:100%;height:100%;display:block}
+.cmp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.usewrap .ui-toggle{white-space:normal}
+.urow{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 4px;border-bottom:1px solid #eee;font-size:13px}
+.urow .ic{font-size:20px;text-align:center}
+.urow small{display:block;color:#777;font-size:11.5px;line-height:1.35}
+.urow.hl{background:#f5f8ff}
+.urow .ui-toggle.dis{opacity:.45;cursor:not-allowed}
+.phd{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.phd .sp{flex:1}
+.rst{color:#055dff;font:700 12.5px system-ui;white-space:nowrap}
+.phone{width:390px;max-width:100%;border:2px solid #111;background:#f4f5f7;padding:12px;min-width:0}
+.phone .inst{padding:18px 16px;box-shadow:none}
+.phone .inst h2{font-size:21px}
+.phone .iopts,.phone .usages{grid-template-columns:minmax(0,1fr)}
+.phone .iopts{gap:14px;margin-top:14px}
+.phone .icard{padding:14px}
+.phone .uz small{display:none}
+.phone .uz.on small{display:block}
+.p6{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:22px;align-items:start}
+.p6>div{min-width:0}
+/* sombre pour les nouveaux morceaux */
+.dkw{background:#121418;color:#e8e8e8;padding:16px;border:2px solid #444}
+.dkw .inst,.dkw .icard{background:#1b1e24;border-color:#555;color:#e8e8e8;box-shadow:none}
+.dkw .inst>p{color:#c9ced8}.dkw .icard p,.dkw .ofold>p,.dkw .ofoot,.dkw .uz small,.dkw .muted{color:#a5abb6}
+.dkw .inst .eyebrow{color:#7fb0ff}
+.dkw .ofold{border-color:#555}
+.dkw .inp{background:#121418;border-color:#666;color:#e8e8e8}
+.dkw .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}.dkw .btn.p{background:#2f7bff;border-color:#2f7bff;color:#fff}
+.dkw .other{color:#a5abb6}.dkw .other.on{color:#7fb0ff}
+.dkw .fbtn{background:#20242b;border-color:#777;color:#ddd}
+.dkw .uz{background:#1b1e24;border-color:#555}
+.dkw .uz span.pp{color:#c9ced8}.dkw .uz small{border-color:#333}.dkw .uz small em{color:#8a909b}
+.dkw .uz .ui{background:#262a31;border-color:#444}
+.dkw .uz .rk{background:#1b1e24;border-color:#888}
+.dkw .uz.on{background:#16233a;border-color:#5599ff;box-shadow:0 0 0 3px rgba(85,153,255,.25)}
+.dkw .uz.on .ui{background:#2f7bff;border-color:#2f7bff}.dkw .uz.on .rk{background:#5599ff;border-color:#5599ff;box-shadow:inset 0 0 0 2px #1b1e24}
+.dkw .notice.i{background:#16233a;border-color:#5599ff;color:#dce6ff}
+.dkw .lnk{color:#7fb0ff}
+@media (max-width:900px){
+ .usages{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .wiz,.cmp,.p6{grid-template-columns:minmax(0,1fr)}
+ .inst{padding:20px 18px}
+}
+@media (max-width:520px){
+ .iopts,.usages{grid-template-columns:minmax(0,1fr)}
+ .inst h2{font-size:21px}
+ .appbar{grid-template-columns:minmax(0,1fr)}.brand2{border-right:0;border-bottom:2px solid #111;grid-auto-flow:column;place-content:start;gap:6px}
+ .ped{grid-template-columns:minmax(0,1fr)}
+ .urow{grid-template-columns:26px minmax(0,1fr)}.urow>label{grid-column:2}
+ .phone{padding:8px}
+}
+.mini{border:2px solid #111;background:#fff;padding:12px 14px;min-width:0}
+.mini h4{margin:0 0 4px;font-size:15px}
+.mini>p{margin:0 0 8px;font-size:12.5px;color:#555;line-height:1.45}
+.mini .topnav{padding:5px 6px;gap:5px}
+.mini .ni{padding:4px 7px;font-size:11px}.mini .ni span{font-size:8px;margin-bottom:2px}
+.mini .lab{margin:10px 0 4px}
+.scr{border:2px solid #111;background:#f4f5f7;padding:10px;font-size:12.5px;min-width:0}
+.scr .ph{margin-bottom:8px;padding-bottom:8px}.scr .ph h2{font-size:17px}
+.mgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.mgrid .wide{grid-column:1/-1}
+.kgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.kgrid>div{border:1.5px solid #c9ccd3;background:#fff;padding:7px 8px;min-width:0}
+.kgrid b{display:block;font-size:12.5px}.kgrid small{color:#777;font-size:11.5px}
+@media (max-width:900px){.mgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.kgrid{grid-template-columns:minmax(0,1fr)}}
+
+.icard .seg{flex-wrap:nowrap}.icard .seg span{flex:1 1 auto;text-align:center;padding:5px 6px}
+
+.dkw .usages{grid-template-columns:repeat(2,minmax(0,1fr))}@media (max-width:520px){.dkw .usages{grid-template-columns:minmax(0,1fr)}.dkw{padding:8px}}
+
+/* ===== onglets Documents et Catalogue ===== */
+.app2{border:2px solid #111;background:#f4f5f7;min-width:0;overflow:hidden}
+.cols{display:grid;grid-template-columns:300px minmax(0,1fr);min-width:0}
+.sb{border-right:2px solid #111;background:#fff;min-width:0;display:flex;flex-direction:column}
+.sb-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:2px solid #111;background:#fafafa}
+.sb-top .eyebrow{color:#055dff;font-size:10px;letter-spacing:.14em}
+.sb-top h5{margin:3px 0 0;font-size:21px;line-height:1}
+.icb{width:30px;height:30px;border:2px solid #111;background:#fff;display:grid;place-items:center;font:700 15px system-ui;box-shadow:2px 2px 0 rgba(5,93,255,.28);flex:none}
+.sb-c{padding:12px;display:grid;gap:9px;align-content:start;min-width:0}
+.sb-f{border-top:2px solid #111;padding:8px 12px;font-size:11px;color:#777}
+.srch1{display:flex;align-items:center;gap:7px;border:2px solid #111;padding:6px 8px;font-size:12.5px;color:#888;background:#fff;min-width:0}
+.srch1 span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srch1 b{color:#111;font-weight:600}
+.segm{display:flex;border:2px solid #111;min-width:0}
+.segm span{flex:1;text-align:center;padding:6px 4px;font:700 12px system-ui;border-right:2px solid #111;background:#fff;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.segm span:last-child{border-right:0}.segm span.is-active{background:#055dff;color:#fff}
+.bar2{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px}
+.bar2 .dd{padding:4px 8px;font-size:12px}
+.fpill{display:inline-flex;gap:4px;align-items:center;background:#055dff;color:#fff;font:700 11.5px system-ui;padding:3px 7px;white-space:nowrap}
+.letters{display:flex;flex-wrap:wrap;gap:2px;font:800 10.5px system-ui;color:#055dff}
+.letters span{width:17px;text-align:center;padding:2px 0}
+.letters span.off{color:#c2c7cf}
+.letters span.on{background:#055dff;color:#fff}
+.slab{margin:6px 0 0;color:#777;font:700 10px system-ui;letter-spacing:.13em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.slab.big{font-size:15px;letter-spacing:0;color:#055dff;border-bottom:2px solid #111;padding-bottom:2px}
+.pli{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:9px;align-items:center;border:2px solid #111;background:#fff;padding:7px 8px;box-shadow:3px 3px 0 rgba(5,93,255,.18);min-width:0;font-size:12px;position:relative}
+.pli strong{display:block;font-size:13px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pli small{display:block;font-size:11px;color:#777;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pli.on{background:#055dff;color:#fff;box-shadow:4px 4px 0 #111}.pli.on small{color:rgba(255,255,255,.8)}
+.pli.noth{grid-template-columns:minmax(0,1fr) auto}
+.th{width:38px;height:38px;border:1.5px solid #888;display:grid;place-items:center;font-size:17px;background:#efe7d6;overflow:hidden}
+.th.ph{background:#d9dfe6}.th.cv{background:#22262d;color:#fff}.th.pa{background:#e9d7c2}
+.tag2{font:800 9.5px system-ui;letter-spacing:.06em;border:1.5px solid #8a8f99;padding:2px 4px;color:#444;background:#f0f1f3;white-space:nowrap}
+.pli.on .tag2{background:#fff;color:#055dff;border-color:#fff}
+/* dossiers (reprend app-side-folders.js) */
+.sf-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 0 0}
+.sf-label .slab{margin:0}
+.sf-add{border:2px solid #111;background:#fff;font:700 12px system-ui;padding:3px 7px;white-space:nowrap;box-shadow:2px 2px 0 rgba(5,93,255,.22)}
+.sfh{display:flex;align-items:center;gap:7px;min-height:38px;padding:6px 9px;border:2px solid #111;background:#fafafa;font:700 13px system-ui;min-width:0}
+.sfh .car{width:12px;color:#055dff;font-size:12px;flex:none}
+.sfh .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sfh .cn{color:#777;font-weight:600;font-size:12px;flex:none}
+.sfh .tl{display:inline-flex;gap:4px;flex:none}.sfh .tl i{font-style:normal;width:22px;height:22px;border:1.5px solid #111;background:#fff;display:grid;place-items:center;font-size:11px}
+.sfh .grip{font-size:14px;flex:none}
+.sfh.drop{outline:3px dashed #055dff;outline-offset:2px;background:#eaf1ff}
+.sfb{display:grid;gap:8px;margin:0 0 0 12px;padding-left:9px;border-left:3px solid #c8d6f5;min-width:0}
+.sfe{margin:0;padding:3px 0;color:#777;font-size:11.5px}
+.ghost{transform:rotate(-2deg);opacity:.75;box-shadow:6px 6px 0 rgba(5,93,255,.3)!important;margin-left:40px}
+.mark{height:4px;background:#055dff;border-radius:2px}
+/* fiche à droite */
+.ws{padding:16px 18px;min-width:0;background:#f4f5f7}
+.ph .acts2{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.fgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:14px;align-items:start}
+.fgrid>div{min-width:0}
+.prev{border:2px solid #111;background:#fff;padding:10px;min-width:0}
+.prev svg{display:block;width:100%;height:auto;background:#f6efdd;border:1.5px solid #c9b98f}
+.prevbar{display:flex;gap:6px;align-items:center;margin-top:8px;font-size:12px;color:#555;flex-wrap:wrap}
+.prevbar .sp{flex:1}
+.thumbs{display:flex;gap:6px;margin-top:8px}.thumbs span{width:44px;height:56px;border:1.5px solid #999;background:#f6efdd;display:grid;place-items:end center;font:700 9px system-ui;color:#555;padding-bottom:2px}.thumbs span.on{outline:3px solid #055dff;outline-offset:1px}
+.kv2{display:grid;grid-template-columns:112px minmax(0,1fr);gap:7px 10px;font-size:12.5px;align-items:start}
+.kv2 dt{color:#666;padding-top:2px}.kv2 dd{margin:0;font-weight:600;min-width:0}
+.kv2 dd small{display:block;font-weight:500;color:#777}
+.trans{font:500 13px/1.6 Georgia,serif;background:#fffdf6;border:1.5px solid #e3d9bd;padding:10px 12px;color:#333}
+.mainp{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;border:2px solid #055dff;background:#f5f8ff;padding:8px 10px;margin-bottom:8px}
+.mainp .av{width:44px;height:44px;border-radius:50%;background:#3c78d8;color:#fff;display:grid;place-items:center;font:800 15px system-ui}
+.mainp small{display:block;color:#666;font-size:11.5px}
+.zl{font:800 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#0a3fae;margin:8px 0 4px}.zl.s{color:#777}
+.pill.blue{border-color:#9cc0ff;background:#eef4ff}
+.pill .rl{color:#055dff;font-weight:600;font-size:11.5px}
+.fil{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #eee;font-size:12.5px}
+.fil small{color:#777}
+.histo li{grid-template-columns:150px minmax(0,1fr)!important}
+/* catalogue */
+.alb{border:2px solid #111;background:#fff;min-width:0}
+.alb-h{display:grid;grid-template-columns:14px 40px minmax(0,1fr) auto;gap:8px;align-items:center;padding:7px 8px;font-size:12px}
+.alb-h .car{color:#055dff;font-size:12px}
+.alb-h strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.alb-h small{display:block;color:#777;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.alb.open .alb-h{border-bottom:2px solid #111;background:#fafafa}
+.alb.on .alb-h{background:#055dff;color:#fff}.alb.on .alb-h small{color:rgba(255,255,255,.8)}.alb.on .alb-h .car{color:#fff}
+.cov{width:40px;height:40px;border:1.5px solid #111;display:grid;place-items:center;font:800 9px/1.1 system-ui;color:#fff;text-align:center;padding:2px}
+.trs{padding:6px 8px 8px;display:grid;gap:5px}
+.face{font:800 9.5px system-ui;letter-spacing:.12em;color:#777;text-transform:uppercase;margin:4px 0 0;display:flex;gap:6px;align-items:center}
+.face:after{content:"";flex:1;border-top:1px dashed #c9ccd3}
+.tr{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center;border:1.5px solid #c9ccd3;padding:5px 7px;font-size:12.5px;background:#fff;min-width:0}
+.tr .n{font:800 11px ui-monospace,Menlo,monospace;color:#055dff}
+.tr span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tr .d{font:600 11.5px ui-monospace,Menlo,monospace;color:#666}
+.tr.on{border:2px solid #111;background:#055dff;color:#fff;box-shadow:3px 3px 0 #111}.tr.on .n,.tr.on .d{color:#fff}
+.sub3{display:grid;gap:5px;margin:6px 0 0 14px;padding-left:9px;border-left:3px solid #c8d6f5}
+.player{display:flex;align-items:center;gap:10px;border:2px solid #111;background:#fff;padding:8px 10px;font:600 12.5px system-ui;flex-wrap:wrap}
+.player .pl{width:30px;height:30px;border-radius:50%;background:#055dff;color:#fff;display:grid;place-items:center;font-size:12px;flex:none}
+.player .tk{flex:1;min-width:120px;height:6px;background:#dfe3e8;position:relative}.player .tk i{position:absolute;left:0;top:0;bottom:0;width:38%;background:#055dff}
+.player .ck{font-family:ui-monospace,Menlo,monospace}
+.ptab{width:100%;border-collapse:collapse;font-size:12.5px}
+.ptab th{text-align:left;font:700 10px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777;border-bottom:2px solid #111;padding:5px 6px}
+.ptab td{padding:6px;border-bottom:1px solid #eef0f3}
+.ptab td.n{font:800 11px ui-monospace,Menlo,monospace;color:#055dff;width:34px}
+.ptab td.d{text-align:right;font-family:ui-monospace,Menlo,monospace;width:50px}
+.ptab tr.fc td{font:800 10px system-ui;letter-spacing:.12em;color:#777;background:#fafafa;text-transform:uppercase}
+.ddmenu{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:6px 0;font-size:12.5px}
+.ddmenu .it{padding:5px 12px;display:flex;gap:8px;align-items:center}
+.ddmenu .it.on{background:#eaf1ff;font-weight:700}.ddmenu .it.on:after{content:"✓";margin-left:auto;color:#055dff}
+.ddmenu h6{margin:6px 12px 3px;font:700 10px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777}
+.ddmenu hr{border:0;border-top:1px solid #e3e5ea;margin:5px 0}
+.stbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.stbl th,.stbl td{border:1.5px solid #c9ccd3;padding:6px 8px;text-align:left;vertical-align:top}
+.stbl th{background:#fafafa;font-size:12px}
+.paint{display:block;width:100%;height:auto;border:2px solid #111}
+.prov li{grid-template-columns:90px minmax(0,1fr)!important}
+.bcrumb{font:700 11px system-ui;color:#777;letter-spacing:.04em}
+.sbs{display:grid;grid-template-columns:repeat(2,minmax(0,300px));gap:16px}
+.sbs .sb{border:2px solid #111}
+/* sombre */
+.dk2{background:#121418;color:#e8e8e8}
+.dk2 .app2{background:#121418;border-color:#555}
+.dk2 .appbar,.dk2 .sb,.dk2 .sb-top,.dk2 .pli,.dk2 .srch1,.dk2 .segm span,.dk2 .icb,.dk2 .prev,.dk2 .crd,.dk2 .alb,.dk2 .tr,.dk2 .sfh,.dk2 .dd,.dk2 .ni{background:#1b1e24;border-color:#555;color:#e8e8e8;box-shadow:none}
+.dk2 .ws{background:#121418}
+.dk2 .segm,.dk2 .sb-f,.dk2 .brand2,.dk2 .ph{border-color:#555}
+.dk2 .segm span.is-active,.dk2 .pli.on,.dk2 .ni.on,.dk2 .tr.on{background:#2f7bff;border-color:#7fb0ff;color:#fff}
+.dk2 .crd-h{background:#20242b;border-color:#555}
+.dk2 .pli small,.dk2 .kv2 dt,.dk2 .slab,.dk2 .sb-f,.dk2 .ph p,.dk2 .ph small,.dk2 .muted{color:#a5abb6}
+.dk2 .trans{background:#1f1d17;border-color:#5a5038;color:#e8e2cf}
+.dk2 .tag2{background:#262a31;color:#ccc;border-color:#666}
+.dk2 .letters span.off{color:#4a4f58}.dk2 .letters,.dk2 .tr .n,.dk2 .slab.big{color:#7fb0ff}
+.dk2 .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}.dk2 .btn.p{background:#2f7bff;border-color:#2f7bff}
+.dk2 .pill{background:#1b1e24;border-color:#555;color:#e8e8e8}.dk2 .pill .rl,.dk2 .pill .o{color:#7fb0ff}
+.dk2 .mainp{background:#16233a;border-color:#5599ff}
+.dk2 .b.y{background:#33290b;color:#ffd666}.dk2 .b.bl{background:#1a2a3d;color:#9cc2ff;border-color:#5599ff}
+.dk2 .prev svg{filter:brightness(.85)}
+.dk2 .face{color:#a5abb6}.dk2 .alb.open .alb-h{background:#20242b;border-color:#555}
+.dk2 .sfb{border-color:#2f4a7a}
+.phone2{width:390px;max-width:100%;border:2px solid #111;background:#f4f5f7;min-width:0}
+.phone2 .cols{grid-template-columns:minmax(0,1fr)}
+.phone2 .sb{border-right:0;border-bottom:2px solid #111}
+.phone2 .fgrid{grid-template-columns:minmax(0,1fr)}
+.phone2 .appbar{grid-template-columns:minmax(0,1fr)}.phone2 .brand2{display:none}
+.c5{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:20px;align-items:start}.c5>div{min-width:0}
+@media (max-width:1100px){.cols{grid-template-columns:260px minmax(0,1fr)}.fgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){.cols{grid-template-columns:minmax(0,1fr)}.sb{border-right:0;border-bottom:2px solid #111}.c5,.sbs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.kv2{grid-template-columns:minmax(0,1fr)}.kv2 dt{padding-top:6px}.appbar{grid-template-columns:minmax(0,1fr)}.brand2{display:none}.ws{padding:12px 10px}.mainp{grid-template-columns:40px minmax(0,1fr)}.mainp>span:last-child{grid-column:1/-1}.histo li{grid-template-columns:minmax(0,1fr)!important}.ptab{font-size:12px}}
+.dk2 .fgrid{grid-template-columns:minmax(0,1fr)}.dk2 .cols{grid-template-columns:250px minmax(0,1fr)}@media (max-width:900px){.dk2 .cols{grid-template-columns:minmax(0,1fr)}}
+.dk2 .code,.dk2 .inp,.dk2 .ia,.dk2 .brand2,.dk2 .topnav,.dk2 .thumbs span{background:#262a31;color:#eee;border-color:#555}.dk2 .inp.u i{background:#20242b;color:#bbb;border-color:#555}.dk2 .brand2 span{background:transparent;color:#7fb0ff}.dk2 .crd-h h4,.dk2 .kv2 dd{color:#e8e8e8}.dk2 .kv2 dd small{color:#a5abb6}.dk2 .pill .ini{color:#fff}
+</style></head><body>
+<h1>📄 Documents et 🎨 Catalogue raisonné — deux onglets comme Personnes</h1>
+<p class="sub">Deux onglets <b>cachés au départ</b> (on les allume dans Maintenance → Apparence → Onglets du haut, ou en choisissant l’usage au premier lancement — voir <a class="lnk" href="premier-lancement.html">premier-lancement.html</a>). Ils sont faits <b>comme l’onglet Personnes</b> : la liste dans la colonne de gauche, la fiche à droite. <b>📄 Documents</b> montre les médias et pièces d’archives déjà dans la base (rien à ressaisir), en <b>A → Z</b> ou rangés en <b>📁 dossiers</b> (le même rangement que « Mes diagrammes » dans Graphiques). <b>🎨 Catalogue raisonné</b> montre les fiches d’œuvres du moteur des Artistes, avec des <b>façons de trier propres à chaque sorte d’œuvre</b> : par albums ou par chansons pour un musicien, par période ou par technique pour un peintre…</p>
+<div class="grid"><div class="case full" id=d1><span class="tag"><span class="num">D1</span>📄 Documents · liste A → Z</span><h3>La colonne de gauche comme celle des Personnes : recherche, A → Z avec lettres repères, et la fiche à droite</h3><div class="app2"><div class="appbar"><div class="brand2"><span>MARTIN</span><strong>ARCHIVES</strong><small>FONDS FAMILIAL</small></div><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni on"><span>02</span>📄 Documents</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="cols"><aside class="sb"><div class="sb-top"><div><span class="eyebrow">02 — EXPLORER</span><h5>Documents</h5></div><span class="icb">←</span></div><div class="sb-c"><div class="srch1">🔍 <span>Chercher… (titre, cote, personne, lieu, année)</span><kbd>/</kbd></div><div class="segm"><span class="is-active">A → Z</span><span class="">📁 Dossiers</span></div><div class="bar2"><span class="dd">Filtrer ▾<span class=n>2</span></span><span class="dd">Trier : A → Z ▾</span></div><div class="bar2"><span class="fpill">Lettres ×</span><span class="fpill">1900–1920 ×</span><span class="lnk" style="font-size:11.5px">Tout effacer</span></div><div class="letters"><span class="">A</span><span class="">B</span><span class="">C</span><span class="off">D</span><span class="">E</span><span class="">F</span><span class="off">G</span><span class="off">H</span><span class="off">I</span><span class="off">J</span><span class="off">K</span><span class="on">L</span><span class="">M</span><span class="off">N</span><span class="off">O</span><span class="">P</span><span class="off">Q</span><span class="">R</span><span class="">S</span><span class="">T</span><span class="off">U</span><span class="off">V</span><span class="off">W</span><span class="off">X</span><span class="off">Y</span><span class="off">Z</span></div><div class="slab big">A</div><div class="pli"><span class="th">📄</span><span style="min-width:0"><strong>Acte de mariage Martin – Roux</strong><small>1908 · Lyon (69) · 3 E 1234</small></span><span class="tag2">ACTE</span></div><div class="pli"><span class="th ph">📷</span><span style="min-width:0"><strong>Album de la communion</strong><small>1921 · 24 photos</small></span><span class="tag2">PHOTO</span></div><div class="slab big">B</div><div class="pli"><span class="th">📄</span><span style="min-width:0"><strong>Bail de la ferme des Granges</strong><small>1897 · Saint-Genis (69)</small></span><span class="tag2">ACTE</span></div><div class="slab big">L</div><div class="pli on"><span class="th">✉️</span><span style="min-width:0"><strong>Lettre de Jean à Marie</strong><small>12 mars 1916 · Verdun · L 14/3</small></span><span class="tag2">LETTRE</span></div><div class="pli"><span class="th">✉️</span><span style="min-width:0"><strong>Lettre de Marie à Jean</strong><small>2 avril 1916 · Lyon · L 14/4</small></span><span class="tag2">LETTRE</span></div><div class="pli"><span class="th">📒</span><span style="min-width:0"><strong>Livret militaire de Jean Martin</strong><small>1912 · Lyon · M 2</small></span><span class="tag2">LIVRET</span></div><div class="slab big">M</div><div class="pli"><span class="th">🗺</span><span style="min-width:0"><strong>Matrice cadastrale (extrait)</strong><small>1913 · Saint-Genis · section B</small></span><span class="tag2">CARTE</span></div><div class="more" style="padding:4px">Voir les 30 suivants ↓</div></div><div class="sb-f">312 documents · 2 filtres</div></aside><div class="ws"><div class="ph"><div class="t"><small>Documents · Correspondance › Guerre 1914-1918</small><h2>✉️ Lettre de Jean à Marie</h2><p>Lettre du front, 4 pages. Écrite à Verdun, reçue à Lyon.</p></div>
+<div class="acts2"><span class="btn p" data-k="E">✎ Modifier</span><span class="btn">📁 Ranger</span><span class="btn">⋯</span><span class="btn">⭐</span></div></div><div class="fgrid"><div><div class="prev"><svg viewBox="0 0 300 380"><rect x="0" y="0" width="300" height="380" fill="#f6efdd"/>
+<text x="140" y="40" font-family="Georgia" font-style="italic" font-size="12" fill="#3a3326">Verdun, le 12 mars 1916</text>
+<text x="28" y="78" font-family="Georgia" font-style="italic" font-size="14" fill="#3a3326">Ma chère Marie,</text><path d="M28 104 q 30 -5 60 0 t 60 0 t 60 0 t 40 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 126 q 30 -5 60 0 t 60 0 t 60 0 t 77 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 148 q 30 -5 60 0 t 60 0 t 60 0 t 64 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 170 q 30 -5 60 0 t 60 0 t 60 0 t 51 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 192 q 30 -5 60 0 t 60 0 t 60 0 t 88 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 214 q 30 -5 60 0 t 60 0 t 60 0 t 75 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 236 q 30 -5 60 0 t 60 0 t 60 0 t 62 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 258 q 30 -5 60 0 t 60 0 t 60 0 t 49 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 280 q 30 -5 60 0 t 60 0 t 60 0 t 86 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 302 q 30 -5 60 0 t 60 0 t 60 0 t 73 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 324 q 30 -5 60 0 t 60 0 t 60 0 t 60 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/>
+<text x="170" y="360" font-family="Georgia" font-style="italic" font-size="14" fill="#3a3326">Ton Jean</text></svg><div class="prevbar"><span>Page 1 / 4</span><span class="sp"></span><span class="btn s">🔍</span><span class="btn s">⛶</span><span class="btn s">↗ Ouvrir le média</span></div>
+<div class="thumbs"><span class="on">1</span><span>2</span><span>3</span><span>4</span><span style="background:#e9e2cf">env.</span></div>
+<p class="muted" style="font-size:11.5px;margin:6px 0 0">2480 × 3508 px · assez grande pour imprimer en A5</p></div></div><div><div class="crd"><div class="crd-h"><h4>Description</h4><span class="ia">✎</span></div><div class="crd-b"><dl class="kv2">
+<dt>Sorte</dt><dd><span class="b">Lettre</span> <small>correspondance privée</small></dd>
+<dt>Cote</dt><dd><span class="code">L 14/3</span></dd>
+<dt>Date</dt><dd>12 mars 1916<span class="ok">✓ Compris : dimanche 12 mars 1916</span></dd>
+<dt>Lieu</dt><dd><span class="pill"><span class="ic">📍</span><span class="lbl">Verdun</span><small>Meuse (55)</small><span class="o">↗</span></span></dd>
+<dt>Auteur</dt><dd><span class="pill"><span class="ini">JM</span><span class="lbl">Jean MARTIN</span><small>1892–1958</small><span class="b bl" style="padding:2px 4px">Sosa 4</span></span></dd>
+<dt>Fonds · série · article</dt><dd>Fonds de la famille Martin <small>› 1 Correspondance › 1.3 Guerre 1914-1918 › art. 14</small></dd>
+<dt>Support</dt><dd>Papier quadrillé, encre violette, crayon</dd>
+<dt>Dimensions</dt><dd><span class="inp u"><b>21 × 27</b><i>cm</i></span> <small>4 pages + enveloppe</small></dd>
+<dt>État</dt><dd><span class="b y">À restaurer</span> <small>pliure déchirée p. 2</small></dd>
+<dt>Langue</dt><dd>Français</dd>
+<dt>Où il est</dt><dd>Boîte « Guerre » · 🏛 Musée, salle 2, vitrine A</dd>
+</dl></div></div></div></div></div></div></div><p class=note>Barre H10 dans la colonne : 🔍 Chercher (C1, « / » pour y aller, Échap vide), bascule « A → Z | 📁 Dossiers » (C5), « Filtrer ▾ » (Sorte, Année, Lieu, Personne, Fonds, État, Étiquette — menu de choix pour lieu et personne) et « Trier : » (A → Z, Z → A, plus récents, plus anciens, par cote, par date du document). Les lettres repères sautent à la lettre ; une lettre sans document est grisée. Chaque ligne : vignette, titre, « date · lieu · cote », pastille de sorte. Clic = la fiche à droite ; ↑ ↓ au clavier. La liste retient sa recherche, ses filtres, son tri et son mode.</p></div>
+<div class="case full"><span class="tag"><span class="num">D2</span>📄 Documents · en dossiers</span><h3>Des dossiers et sous-dossiers à volonté, exactement comme « Mes diagrammes » dans Graphiques</h3><div class="app2"><div class="appbar"><div class="brand2"><span>MARTIN</span><strong>ARCHIVES</strong><small>FONDS FAMILIAL</small></div><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni on"><span>02</span>📄 Documents</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="cols"><aside class="sb"><div class="sb-top"><div><span class="eyebrow">02 — EXPLORER</span><h5>Documents</h5></div><span class="icb">←</span></div><div class="sb-c"><div class="srch1">🔍 <span>Chercher…</span><kbd>/</kbd></div><div class="segm"><span class="">A → Z</span><span class="is-active">📁 Dossiers</span></div><div class="bar2"><span class="dd">Filtrer ▾</span><span class="dd">Trier : A → Z ▾</span></div><div class="sf-label"><span class="slab">Mes dossiers</span><span class="sf-add">＋ 📁 Dossier</span></div><div class="sfh"><span class="car">▾</span><span>📁</span><span class="nm">1 Correspondance</span><span class="cn">58</span></div><div class="sfb"><div class="sfh"><span class="car">▸</span><span>📁</span><span class="nm">1.1 Avant 1900</span><span class="cn">12</span></div><div class="sfh drop"><span class="car">▾</span><span>📁</span><span class="nm">1.3 Guerre 1914-1918</span><span class="cn">31</span><span class="tl"><i>✎</i><i>🗑</i></span></div><div class="sfb"><div class="mark"></div><div class="pli on"><span class="th">✉️</span><span style="min-width:0"><strong>Lettre de Jean à Marie</strong><small>12 mars 1916 · L 14/3</small></span><span class="tag2">LETTRE</span></div><div class="pli"><span class="th">✉️</span><span style="min-width:0"><strong>Lettre de Marie à Jean</strong><small>2 avril 1916 · L 14/4</small></span><span class="tag2">LETTRE</span></div><div class="sfh"><span class="car">▸</span><span>📁</span><span class="nm">Cartes postales du front</span><span class="cn">9</span></div></div></div><div class="sfh"><span class="car">▸</span><span>📁</span><span class="nm">2 Actes et papiers</span><span class="cn">74</span></div><div class="sfh"><span class="car">▾</span><span>📁</span><span class="nm">3 Photographies</span><span class="cn">0</span></div><div class="sfb"><p class="sfe">Dossier vide : glisse un document ici.</p></div><span class="slab">Sans dossier · 169</span><div class="pli ghost"><span class="th">📒</span><span style="min-width:0"><strong>Livret militaire de Jean</strong><small>1912 · M 2</small></span><span class="tag2">LIVRET</span></div><div class="pli"><span class="th">📄</span><span style="min-width:0"><strong>Acte de mariage Martin – Roux</strong><small>1908 · 3 E 1234</small></span><span class="tag2">ACTE</span></div><div class="pli"><span class="th">📄</span><span style="min-width:0"><strong>Bail de la ferme des Granges</strong><small>1897</small></span><span class="tag2">ACTE</span></div></div><div class="sb-f">312 documents · 6 dossiers</div></aside><div class="ws"><span class="lab">Ce qu’on peut faire</span>
+<div class="kgrid" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div><b>Glisser</b><small>Prends une ligne (ou un dossier) et lâche-la sur un dossier : il s’entoure de pointillés bleus ; entre deux lignes, un trait bleu montre la place.</small></div><div><b>＋ 📁 Dossier</b><small>« ＋ Nouveau dossier » : son nom, puis « Créer le dossier ». Glisse-le dans un autre pour en faire un sous-dossier (3 niveaux).</small></div><div><b>✎ / 🗑 au survol</b><small>Renommer ; supprimer le dossier : son contenu remonte d’un niveau, aucun document n’est supprimé.</small></div><div><b>📁 Ranger</b><small>Depuis la fiche, sans glisser (au doigt, au clavier) : la fenêtre « 📁 Ranger « … » » avec les dossiers et « ＋ Nouveau dossier… ».</small></div></div>
+<span class="lab">La fenêtre « 📁 Ranger » (petite, 540)</span>
+<div class="win"><div class="win-h"><div class="t"><small>Mes documents</small><b>📁 Ranger « Livret militaire de Jean »</b></div><button class="x">×</button></div><div class="win-b">
+<div class="radio">Sans dossier</div><div class="radio">📁 1 Correspondance</div><div class="radio" style="margin-left:18px">📁 1.1 Avant 1900</div><div class="radio on" style="margin-left:18px">📁 1.3 Guerre 1914-1918</div><div class="radio" style="margin-left:36px">📁 Cartes postales du front</div><div class="radio">📁 2 Actes et papiers</div>
+<span class="btn s" style="margin-top:6px">＋ Nouveau dossier…</span></div><div class="win-f"><span class="btn">Annuler</span><span class="btn p">Ranger</span></div></div>
+<div class="toast2">✓ « Livret militaire de Jean » rangé dans « Guerre 1914-1918 »<span class="u">↶ Annuler</span><span class="bar" style="width:60%"></span></div></div></div></div><p class=note>Reprise telle quelle du rangement de Graphiques (<code>app-side-folders.js</code>) : tête de dossier ▸/▾ 📁 nom + nombre, ✎ et 🗑 au survol, contenu en retrait avec le trait bleu clair, « ＋ 📁 Dossier » à droite de « Mes dossiers », « Sans dossier » en bas, 3 niveaux et 200 dossiers au plus, dossiers ouverts retenus, chaque rangement se défait (H7 « ↶ Annuler »). Le même document peut être dans un dossier ici et dans plusieurs fiches (rien ne bouge dans les médias). En mode consultation 🔒 : on ouvre les dossiers, rien d’autre. Un dossier se range dans un autre en le glissant par sa tête (Alt + ↑ / ↓ au clavier, K20).</p></div>
+<div class="case full"><span class="tag"><span class="num">D3</span>📄 Documents · la fiche complète</span><h3>À droite, tout ce qu’on sait du document</h3><div class="app2"><div class="appbar"><div class="brand2"><span>MARTIN</span><strong>ARCHIVES</strong><small>FONDS FAMILIAL</small></div><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni on"><span>02</span>📄 Documents</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="cols"><aside class="sb"><div class="sb-top"><div><span class="eyebrow">02 — EXPLORER</span><h5>Documents</h5></div><span class="icb">←</span></div><div class="sb-c"><div class="srch1">🔍 <span>Chercher… (titre, cote, personne, lieu, année)</span><kbd>/</kbd></div><div class="segm"><span class="is-active">A → Z</span><span class="">📁 Dossiers</span></div><div class="bar2"><span class="dd">Filtrer ▾<span class=n>2</span></span><span class="dd">Trier : A → Z ▾</span></div><div class="bar2"><span class="fpill">Lettres ×</span><span class="fpill">1900–1920 ×</span><span class="lnk" style="font-size:11.5px">Tout effacer</span></div><div class="letters"><span class="">A</span><span class="">B</span><span class="">C</span><span class="off">D</span><span class="">E</span><span class="">F</span><span class="off">G</span><span class="off">H</span><span class="off">I</span><span class="off">J</span><span class="off">K</span><span class="on">L</span><span class="">M</span><span class="off">N</span><span class="off">O</span><span class="">P</span><span class="off">Q</span><span class="">R</span><span class="">S</span><span class="">T</span><span class="off">U</span><span class="off">V</span><span class="off">W</span><span class="off">X</span><span class="off">Y</span><span class="off">Z</span></div><div class="slab big">A</div><div class="pli"><span class="th">📄</span><span style="min-width:0"><strong>Acte de mariage Martin – Roux</strong><small>1908 · Lyon (69) · 3 E 1234</small></span><span class="tag2">ACTE</span></div><div class="pli"><span class="th ph">📷</span><span style="min-width:0"><strong>Album de la communion</strong><small>1921 · 24 photos</small></span><span class="tag2">PHOTO</span></div><div class="slab big">B</div><div class="pli"><span class="th">📄</span><span style="min-width:0"><strong>Bail de la ferme des Granges</strong><small>1897 · Saint-Genis (69)</small></span><span class="tag2">ACTE</span></div><div class="slab big">L</div><div class="pli on"><span class="th">✉️</span><span style="min-width:0"><strong>Lettre de Jean à Marie</strong><small>12 mars 1916 · Verdun · L 14/3</small></span><span class="tag2">LETTRE</span></div><div class="pli"><span class="th">✉️</span><span style="min-width:0"><strong>Lettre de Marie à Jean</strong><small>2 avril 1916 · Lyon · L 14/4</small></span><span class="tag2">LETTRE</span></div><div class="pli"><span class="th">📒</span><span style="min-width:0"><strong>Livret militaire de Jean Martin</strong><small>1912 · Lyon · M 2</small></span><span class="tag2">LIVRET</span></div><div class="slab big">M</div><div class="pli"><span class="th">🗺</span><span style="min-width:0"><strong>Matrice cadastrale (extrait)</strong><small>1913 · Saint-Genis · section B</small></span><span class="tag2">CARTE</span></div><div class="more" style="padding:4px">Voir les 30 suivants ↓</div></div><div class="sb-f">312 documents · 2 filtres</div></aside><div class="ws"><div class="ph"><div class="t"><small>Documents · Correspondance › Guerre 1914-1918</small><h2>✉️ Lettre de Jean à Marie</h2><p>Lettre du front, 4 pages. Écrite à Verdun, reçue à Lyon.</p></div>
+<div class="acts2"><span class="btn p" data-k="E">✎ Modifier</span><span class="btn">📁 Ranger</span><span class="btn">⋯</span><span class="btn">⭐</span></div></div><div class="fgrid"><div><div class="prev"><svg viewBox="0 0 300 380"><rect x="0" y="0" width="300" height="380" fill="#f6efdd"/>
+<text x="140" y="40" font-family="Georgia" font-style="italic" font-size="12" fill="#3a3326">Verdun, le 12 mars 1916</text>
+<text x="28" y="78" font-family="Georgia" font-style="italic" font-size="14" fill="#3a3326">Ma chère Marie,</text><path d="M28 104 q 30 -5 60 0 t 60 0 t 60 0 t 40 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 126 q 30 -5 60 0 t 60 0 t 60 0 t 77 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 148 q 30 -5 60 0 t 60 0 t 60 0 t 64 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 170 q 30 -5 60 0 t 60 0 t 60 0 t 51 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 192 q 30 -5 60 0 t 60 0 t 60 0 t 88 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 214 q 30 -5 60 0 t 60 0 t 60 0 t 75 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 236 q 30 -5 60 0 t 60 0 t 60 0 t 62 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 258 q 30 -5 60 0 t 60 0 t 60 0 t 49 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 280 q 30 -5 60 0 t 60 0 t 60 0 t 86 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 302 q 30 -5 60 0 t 60 0 t 60 0 t 73 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 324 q 30 -5 60 0 t 60 0 t 60 0 t 60 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/>
+<text x="170" y="360" font-family="Georgia" font-style="italic" font-size="14" fill="#3a3326">Ton Jean</text></svg><div class="prevbar"><span>Page 1 / 4</span><span class="sp"></span><span class="btn s">🔍</span><span class="btn s">⛶</span><span class="btn s">↗ Ouvrir le média</span></div>
+<div class="thumbs"><span class="on">1</span><span>2</span><span>3</span><span>4</span><span style="background:#e9e2cf">env.</span></div>
+<p class="muted" style="font-size:11.5px;margin:6px 0 0">2480 × 3508 px · assez grande pour imprimer en A5</p></div><div class="crd"><div class="crd-h"><h4>Transcription <small>· 4 pages</small></h4><span class="btn s">📝 Dans le traitement de texte</span></div><div class="crd-b"><div class="trans">Ma chère Marie,<br>Je t’écris de la cagna, à la lueur d’une bougie. Nous sommes montés en ligne dimanche. Le pays est tout retourné, plus un arbre debout… Embrasse bien fort la petite Louise pour moi.<br>Ton Jean</div></div></div></div><div><div class="crd"><div class="crd-h"><h4>Description</h4><span class="ia">✎</span></div><div class="crd-b"><dl class="kv2">
+<dt>Sorte</dt><dd><span class="b">Lettre</span> <small>correspondance privée</small></dd>
+<dt>Cote</dt><dd><span class="code">L 14/3</span></dd>
+<dt>Date</dt><dd>12 mars 1916<span class="ok">✓ Compris : dimanche 12 mars 1916</span></dd>
+<dt>Lieu</dt><dd><span class="pill"><span class="ic">📍</span><span class="lbl">Verdun</span><small>Meuse (55)</small><span class="o">↗</span></span></dd>
+<dt>Auteur</dt><dd><span class="pill"><span class="ini">JM</span><span class="lbl">Jean MARTIN</span><small>1892–1958</small><span class="b bl" style="padding:2px 4px">Sosa 4</span></span></dd>
+<dt>Fonds · série · article</dt><dd>Fonds de la famille Martin <small>› 1 Correspondance › 1.3 Guerre 1914-1918 › art. 14</small></dd>
+<dt>Support</dt><dd>Papier quadrillé, encre violette, crayon</dd>
+<dt>Dimensions</dt><dd><span class="inp u"><b>21 × 27</b><i>cm</i></span> <small>4 pages + enveloppe</small></dd>
+<dt>État</dt><dd><span class="b y">À restaurer</span> <small>pliure déchirée p. 2</small></dd>
+<dt>Langue</dt><dd>Français</dd>
+<dt>Où il est</dt><dd>Boîte « Guerre » · 🏛 Musée, salle 2, vitrine A</dd>
+</dl></div></div><div class="crd"><div class="crd-h"><h4>Personnes liées <small>· 4</small></h4><span class="btn s">＋ Ajouter une personne…</span></div><div class="crd-b">
+<div class="mainp"><span class="av">JM</span><span><b>Jean MARTIN</b> <span class="b bl" style="padding:2px 4px">Sosa 4</span><small>° 1892 Lyon · † 1958 Lyon · <span style="color:#055dff">auteur</span></small></span><span class="lnk">↗ Fiche</span></div>
+<div class="zl">★ Principales</div><div class="chips"><span class="pill blue"><span class="ini f">MR</span><span class="lbl">Marie ROUX</span><span class="rl">destinataire</span></span></div>
+<div class="zl s">☆ Secondaires</div><div class="chips"><span class="pill sec"><span class="ini f">LM</span><span class="lbl">Louise MARTIN</span><span class="rl">citée</span></span><span class="pill sec"><span class="ini u">?</span><span class="lbl">« le lieutenant Brun »</span><span class="rl">cité</span></span></div></div></div><div class="crd"><div class="crd-h"><h4>Sources et notes</h4></div><div class="crd-b">
+<div class="fil"><span>📚</span><span><b>Fonds de la famille Martin</b><br><small>don de Paulette Martin, 1998</small></span><span class="lnk">↗ Ouvrir</span></div>
+<div class="fil"><span>🗒</span><span>Le cachet de la poste est du 15 mars : 3 jours pour arriver.<br><small>Note · modifiée hier à 18 h 40</small></span><span class="ia">✎</span></div></div></div>
+<div class="crd"><div class="crd-h"><h4>Fichiers <small>· 6</small></h4><span class="btn s">＋ Ajouter un fichier</span></div><div class="crd-b">
+<div class="fil"><span>🖼</span><span>lettre-1916-03-12-p1.jpg<br><small>Recto p. 1 · 2480 × 3508 px</small></span><span class="lnk">↗</span></div>
+<div class="fil"><span>🖼</span><span>p. 2 à 4, enveloppe<br><small>4 images</small></span><span class="lnk">↗</span></div>
+<div class="fil"><span>📝</span><span>transcription.docx<br><small>Traitement de texte</small></span><span class="lnk">↗</span></div></div></div>
+<div class="crd"><div class="crd-h"><h4>Historique</h4></div><div class="crd-b"><ul class="hist histo" style="margin:0">
+<li><b>aujourd’hui à 10 h 22</b><span>Transcription complétée (p. 4)</span></li><li><b>hier à 18 h 40</b><span>Note ajoutée · rangé dans « Guerre 1914-1918 »</span></li><li><b>17 oct. 2026</b><span>Créé par l’import « Scans de la boîte Guerre »</span></li></ul>
+<p class="muted" style="font-size:11.5px;margin:6px 0 0">Créé le 17 oct. 2026 · Modifié aujourd’hui à 10 h 22</p></div></div></div></div></div></div></div><p class=note>En-tête K5 : sur-titre = où il est rangé, titre = icône de la sorte + titre, une phrase, « ✎ Modifier » en bleu, « 📁 Ranger », « ⋯ » (Dupliquer, ⤓ Télécharger, 🖨 Imprimer, 🏛 Mettre au musée, 🔗 Relier à…, puis 🗑 Supprimer en rouge), ⭐. Aperçu en grand avec ses pages. Champs : sorte (pastille K8 grise, l’état en jaune « À restaurer »), cote, date C4 avec « ✓ Compris », lieu et personnes par le menu de choix, fonds › série › article, support, dimensions (unité dans la case, K17), langue, où il est. Personnes liées avec rôles (principale, ★ principales, ☆ secondaires ; « ? » = sans fiche). Sources, notes, fichiers, historique avec les dates K4. Chaque bloc se cache ou se range par ⚙️ Champs affichés. Ce sont les champs des médias existants (titre, date, cote, transcription, liens) ; ceux qui manquent (support, dimensions, état, fonds › série › article) s’ajoutent au même endroit.</p></div>
+<div class="case full"><span class="tag"><span class="num">D4</span>Où l’allumer</span><h3>Maintenance → Apparence → Onglets du haut, ou l’usage « 📚 Un fonds d’archives » au premier lancement</h3><div class="two"><div class="crd"><div class="crd-h"><span class="idx">03</span><h4>Onglets du haut <small>· Maintenance → Apparence</small></h4><span class="saved">✓ Enregistré</span></div><div class="crd-b"><div class="tabrow "><span class="grip">⠿</span><span>01 Tableau de bord</span><label class="ui-toggle"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>02 Personnes</span><label class="ui-toggle"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>02 🐾 Animaux</span><label class="ui-toggle off"><i></i></label></div><div class="tabrow hl"><span class="grip">⠿</span><span>02 📄 Documents <small class=muted>· médias et pièces d’archives, liste + fiche</small></span><label class="ui-toggle off"><i></i></label></div><div class="tabrow hl"><span class="grip">⠿</span><span>02 🎨 Catalogue raisonné <small class=muted>· les œuvres d’un artiste, liste + fiche</small></span><label class="ui-toggle off"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>03 Graphiques</span><label class="ui-toggle"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>08 🧬 ADN</span><label class="ui-toggle off"><i></i></label></div><div class="tabrow "><span class="grip">⠿</span><span>…</span></div><p class="note" style="margin-top:8px">Au départ, les deux sont éteints (comme 🧬 ADN). Rien ne change pour qui ne les allume pas.</p></div></div>
+<div><div class="crd"><div class="crd-h"><span class="idx">04</span><h4>🧭 Usage de l’app</h4><span class="saved">✓ Enregistré</span></div><div class="crd-b">
+<div class="urow hl"><span class="ic">📚</span><span><b>Archives ou musée</b><small>allume 📄 Documents (en 02) et 🏛 Musée</small></span><label class="ui-toggle"><i></i></label></div>
+<div class="urow"><span class="ic">🎨</span><span><b>Artiste ou collection</b><small>allume 🎨 Catalogue raisonné</small></span><label class="ui-toggle off"><i></i></label></div></div></div>
+<div class="toast2">✓ Onglet « 📄 Documents » affiché<span class="u">↶ Annuler</span><span class="bar" style="width:45%"></span></div>
+<div class="notice i" style="margin-top:12px">ℹ️ <span><b>Tu as beaucoup de documents ?</b> L’onglet « 📄 Documents » les montre comme les personnes : la liste à gauche, la fiche à droite. <span class="lnk">↗ Afficher l’onglet</span></span></div>
+<p class="note" style="margin-top:4px">Ce message apparaît une fois, dans Listes → Médias, à partir de 50 documents (× pour le fermer).</p></div></div>
+<span class="lab" style="margin-top:16px">Menu après « Archives ou musée »</span><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni on new"><span>02</span>📄 Documents</span><span class="ni new"><span>02</span>🏛 Musée</span><span class="ni "><span>03</span>Personnes</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div><p class=note>Interrupteurs K16, gardés tout de suite (K2), poignée ⠿ pour ranger l’onglet. L’usage « 📚 Un fonds d’archives ou un musée familial » (premier-lancement.html, P1 et P4) allume « 📄 Documents » et le met en 02 ; pour les autres usages, il reste éteint mais disponible. Éteindre l’onglet ne touche à aucun document ni à aucun dossier.</p></div>
+<div class="case full" id=c1><span class="tag"><span class="num">C1</span>🎨 Catalogue raisonné · musicien, classé par albums</span><h3>Un album se déplie : une case par chanson, dans l’ordre des pistes, faces A et B</h3><div class="app2"><div class="appbar"><div class="brand2"><span>LUCIEN</span><strong>DARDEL</strong><small>CATALOGUE</small></div><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni on"><span>02</span>🎨 Catalogue raisonné</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="cols"><aside class="sb"><div class="sb-top"><div><span class="eyebrow">02 — EXPLORER</span><h5>Catalogue raisonné</h5></div><span class="icb">←</span></div><div class="sb-c"><div class="pill" style="width:100%"><span class="ini">LD</span><span class="lbl">Lucien DARDEL</span><small>1931–2004</small><span class="o">↗ Fiche</span><span class="x">×</span></div><div class="srch1">🔍 <span>Chercher… (titre, année, n°)</span><kbd>/</kbd></div><div class="bar2"><span class="dd">Classer : 💽 Par albums ▾</span><span class="dd">Filtrer ▾</span><span class="dd">Trier : par date ▾</span></div><span class="slab">Albums · 6 <span>Liste | Fiches</span></span><div class="alb open"><div class="alb-h"><span class="car">▾</span><span class="cov" style="background:#c0392b">LES<br>SAI</span><span style="min-width:0"><strong>Les Saisons</strong><small>1968 · Barclay · LP 33 t · 7 titres</small></span><span class="tag2">LP</span></div><div class="trs"><div class="face">Face A</div><div class="tr"><span class="n">A1</span><span>Printemps</span><span class="d">3:20</span></div><div class="tr on"><span class="n">A2</span><span>La Mer à Sète</span><span class="d">4:05</span></div><div class="tr"><span class="n">A3</span><span>Les Vendanges</span><span class="d">2:58</span></div><div class="tr"><span class="n">A4</span><span>Ma mère</span><span class="d">3:41</span></div><div class="face">Face B</div><div class="tr"><span class="n">B1</span><span>L’Hiver</span><span class="d">3:12</span></div><div class="tr"><span class="n">B2</span><span>Valse des Granges</span><span class="d">2:47</span></div><div class="tr"><span class="n">B3</span><span>Le Dernier Train</span><span class="d">5:30</span></div></div></div><div class="alb"><div class="alb-h"><span class="car">▸</span><span class="cov" style="background:#2d6a4f">RIVE</span><span style="min-width:0"><strong>Rive gauche</strong><small>1965 · Barclay · LP 33 t · 10 titres</small></span><span class="tag2">LP</span></div></div><div class="alb"><div class="alb-h"><span class="car">▸</span><span class="cov" style="background:#1d3557">LIVE</span><span style="min-width:0"><strong>En public à Bobino</strong><small>1972 · Philips · 2 LP · 18 titres</small></span><span class="tag2">LP</span></div></div><div class="alb"><div class="alb-h"><span class="car">▸</span><span class="cov" style="background:#6c584c">INT</span><span style="min-width:0"><strong>L’Intégrale</strong><small>1998 · Universal · 4 CD · 64 titres</small></span><span class="tag2">CD</span></div></div></div><div class="sb-f">6 albums · 52 chansons</div></aside><div class="ws"><div class="ph"><div class="t"><small>Catalogue raisonné · Lucien Dardel › Les Saisons › A2</small><h2>🎵 La Mer à Sète</h2><p>Chanson de 1967, sur 3 albums. 2 enregistrements.</p></div><div class="acts2"><span class="btn p">✎ Modifier</span><span class="btn">⋯</span><span class="btn">⭐</span></div></div>
+<div class="player"><span class="pl">▶</span><span class="ck">1:33</span><span class="tk"><i></i></span><span class="ck">4:05</span><span class="muted" style="font-size:12px">Prise studio, 1967</span></div>
+<div class="fgrid" style="margin-top:12px"><div>
+<div class="crd"><div class="crd-h"><h4>La chanson</h4></div><div class="crd-b"><dl class="kv2"><dt>N° catalogue</dt><dd><span class="code">LD-1967-04</span></dd><dt>Écrite</dt><dd>été 1967<span class="ok">✓ Compris : entre juin et septembre 1967</span></dd><dt>Lieu</dt><dd><span class="pill"><span class="ic">📍</span><span class="lbl">Sète</span><small>Hérault (34)</small></span></dd><dt>Genre</dt><dd>Chanson française</dd><dt>Durée</dt><dd>4:05</dd><dt>Langue</dt><dd>Français</dd></dl></div></div>
+<div class="crd"><div class="crd-h"><h4>Crédits</h4></div><div class="crd-b"><div class="chips"><span class="pill blue"><span class="ini">LD</span><span class="lbl">Lucien DARDEL</span><span class="rl">paroles, musique, chant</span></span><span class="pill sec"><span class="ini">AR</span><span class="lbl">André ROCHE</span><span class="rl">arrangements</span></span><span class="pill sec"><span class="ini f">CB</span><span class="lbl">Claire BESSON</span><span class="rl">accordéon</span></span></div></div></div></div>
+<div><div class="crd"><div class="crd-h"><h4>🎙 Enregistrements <small>· 2</small></h4></div><div class="crd-b"><div class="fil"><span>🎙</span><span><b>Prise studio</b><br><small>Studio Barclay, Paris · oct. 1967 · 4:05</small></span><span class="lnk">↗</span></div><div class="fil"><span>🎤</span><span><b>En public</b><br><small>Bobino · 1972 · 4:48</small></span><span class="lnk">↗</span></div></div></div>
+<div class="crd"><div class="crd-h"><h4>💿 Sur 3 albums</h4></div><div class="crd-b"><div class="fil"><span class="cov" style="background:#c0392b;width:28px;height:28px">LS</span><span>Les Saisons <small>· 1968 · face A, piste 2</small></span><span class="lnk">↗</span></div><div class="fil"><span class="cov" style="background:#1d3557;width:28px;height:28px">LV</span><span>En public à Bobino <small>· 1972 · disque 1, piste 7</small></span><span class="lnk">↗</span></div><div class="fil"><span class="cov" style="background:#6c584c;width:28px;height:28px">IN</span><span>L’Intégrale <small>· 1998 · CD 2, piste 3</small></span><span class="lnk">↗</span></div></div></div></div></div></div></div></div><p class=note>En haut de la colonne : l’artiste du catalogue (pastille du menu de choix, × pour en prendre un autre). « Classer : » change la façon de ranger la liste selon la sorte d’œuvre (C3) ; « Trier : » range dans chaque groupe. Chaque album ▸ se déplie ▾ : ses pistes dans l’ordre (n° de piste, titre, durée en 3:20 par UI.clock), avec « Face A / Face B » pour un vinyle, « CD 1 / CD 2 » pour un coffret. Clic sur une chanson = sa fiche à droite (ici « La Mer à Sète », piste A2) ; clic sur l’album = la fiche de l’album (C4). Albums ouverts retenus. Moteur des Artistes : album (master) → parutions, morceau → enregistrements → pistes.</p></div>
+<div class="case full"><span class="tag"><span class="num">C2</span>🎨 Catalogue raisonné · musicien, classé par chansons</span><h3>Toutes les chansons de A à Z ; « sur 3 albums » se déplie</h3><div class="app2"><div class="appbar"><div class="brand2"><span>LUCIEN</span><strong>DARDEL</strong><small>CATALOGUE</small></div><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni on"><span>02</span>🎨 Catalogue raisonné</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="cols"><aside class="sb"><div class="sb-top"><div><span class="eyebrow">02 — EXPLORER</span><h5>Catalogue raisonné</h5></div><span class="icb">←</span></div><div class="sb-c"><div class="pill" style="width:100%"><span class="ini">LD</span><span class="lbl">Lucien DARDEL</span><small>1931–2004</small><span class="o">↗ Fiche</span><span class="x">×</span></div><div class="srch1">🔍 <span>Chercher… (titre, année, n°)</span><kbd>/</kbd></div><div class="bar2"><span class="dd">Classer : 🎵 Par chansons ▾</span><span class="dd">Filtrer ▾</span><span class="dd">Trier : A → Z ▾</span></div><div class="letters"><span class="off">A</span><span class="">B</span><span class="">C</span><span class="">D</span><span class="off">E</span><span class="off">F</span><span class="off">G</span><span class="off">H</span><span class="off">I</span><span class="off">J</span><span class="off">K</span><span class="on">L</span><span class="">M</span><span class="off">N</span><span class="off">O</span><span class="">P</span><span class="off">Q</span><span class="">R</span><span class="">S</span><span class="off">T</span><span class="off">U</span><span class="">V</span><span class="off">W</span><span class="off">X</span><span class="off">Y</span><span class="off">Z</span></div><div class="slab big">L</div><div class="pli noth on"><span style="min-width:0"><strong>🎵 La Mer à Sète</strong><small>1967 · 4:05</small></span><span class="tag2">▾ sur 3</span></div><div class="sub3"><div class="tr"><span class="n">A2</span><span>Les Saisons · 1968</span><span class="d">4:05</span></div><div class="tr"><span class="n">1·7</span><span>En public à Bobino · 1972</span><span class="d">4:48</span></div><div class="tr"><span class="n">2·3</span><span>L’Intégrale · 1998</span><span class="d">4:05</span></div></div><div class="pli noth"><span style="min-width:0"><strong>🎵 Le Dernier Train</strong><small>1968 · 5:30</small></span><span class="tag2">▸ sur 2</span></div><div class="pli noth"><span style="min-width:0"><strong>🎵 Les Vendanges</strong><small>1968 · 2:58</small></span><span class="tag2">▸ sur 1</span></div><div class="pli noth"><span style="min-width:0"><strong>🎵 L’Hiver</strong><small>1966 · 3:12</small></span><span class="tag2">▸ sur 2</span></div><div class="slab big">M</div><div class="pli noth"><span style="min-width:0"><strong>🎵 Ma mère</strong><small>1968 · 3:41</small></span><span class="tag2">▸ sur 2</span></div></div><div class="sb-f">52 chansons · 6 albums</div></aside><div class="ws"><div class="ph"><div class="t"><small>Catalogue raisonné · Lucien Dardel › Chansons › L</small><h2>🎵 La Mer à Sète</h2><p>Chanson de 1967, sur 3 albums. 2 enregistrements.</p></div><div class="acts2"><span class="btn p">✎ Modifier</span><span class="btn">⋯</span><span class="btn">⭐</span></div></div>
+<div class="player"><span class="pl">▶</span><span class="ck">1:33</span><span class="tk"><i></i></span><span class="ck">4:05</span><span class="muted" style="font-size:12px">Prise studio, 1967</span></div>
+<div class="fgrid" style="margin-top:12px"><div>
+<div class="crd"><div class="crd-h"><h4>La chanson</h4></div><div class="crd-b"><dl class="kv2"><dt>N° catalogue</dt><dd><span class="code">LD-1967-04</span></dd><dt>Écrite</dt><dd>été 1967<span class="ok">✓ Compris : entre juin et septembre 1967</span></dd><dt>Lieu</dt><dd><span class="pill"><span class="ic">📍</span><span class="lbl">Sète</span><small>Hérault (34)</small></span></dd><dt>Genre</dt><dd>Chanson française</dd><dt>Durée</dt><dd>4:05</dd><dt>Langue</dt><dd>Français</dd></dl></div></div>
+<div class="crd"><div class="crd-h"><h4>Crédits</h4></div><div class="crd-b"><div class="chips"><span class="pill blue"><span class="ini">LD</span><span class="lbl">Lucien DARDEL</span><span class="rl">paroles, musique, chant</span></span><span class="pill sec"><span class="ini">AR</span><span class="lbl">André ROCHE</span><span class="rl">arrangements</span></span><span class="pill sec"><span class="ini f">CB</span><span class="lbl">Claire BESSON</span><span class="rl">accordéon</span></span></div></div></div></div>
+<div><div class="crd"><div class="crd-h"><h4>🎙 Enregistrements <small>· 2</small></h4></div><div class="crd-b"><div class="fil"><span>🎙</span><span><b>Prise studio</b><br><small>Studio Barclay, Paris · oct. 1967 · 4:05</small></span><span class="lnk">↗</span></div><div class="fil"><span>🎤</span><span><b>En public</b><br><small>Bobino · 1972 · 4:48</small></span><span class="lnk">↗</span></div></div></div>
+<div class="crd"><div class="crd-h"><h4>💿 Sur 3 albums</h4></div><div class="crd-b"><div class="fil"><span class="cov" style="background:#c0392b;width:28px;height:28px">LS</span><span>Les Saisons <small>· 1968 · face A, piste 2</small></span><span class="lnk">↗</span></div><div class="fil"><span class="cov" style="background:#1d3557;width:28px;height:28px">LV</span><span>En public à Bobino <small>· 1972 · disque 1, piste 7</small></span><span class="lnk">↗</span></div><div class="fil"><span class="cov" style="background:#6c584c;width:28px;height:28px">IN</span><span>L’Intégrale <small>· 1998 · CD 2, piste 3</small></span><span class="lnk">↗</span></div></div></div></div></div></div></div></div><p class=note>Une ligne par chanson (le morceau, pas chaque enregistrement), avec lettres repères. « ▸ sur 3 » déplie les albums où elle figure, avec la place de la piste (A2, disque 1 piste 7…) et la durée de cet enregistrement ; clic sur une de ces lignes = la fiche de l’album, ouverte sur la piste. Les autres classements d’un musicien : par année, par label, par genre, par album.</p></div>
+<div class="case full"><span class="tag"><span class="num">C3</span>🎨 Catalogue raisonné · peintre, par période et par technique</span><h3>D’autres façons de classer, propres à la peinture</h3><div class="sbs"><aside class="sb"><div class="sb-top"><div><span class="eyebrow">CLASSER : PAR PÉRIODE</span><h5>Catalogue raisonné</h5></div></div><div class="sb-c"><div class="pill" style="width:100%"><span class="ini f">HV</span><span class="lbl">Hélène VARIN</span><small>1908–1987</small><span class="x">×</span></div><div class="bar2"><span class="dd">Classer : 🕰 Par période ▾</span><span class="dd">Trier : n° ▾</span></div><div class="sfh"><span class="car">▸</span><span class="nm">Les débuts · 1928–1939</span><span class="cn">18</span></div><div class="sfh"><span class="car">▾</span><span class="nm">Période bleue · 1946–1952</span><span class="cn">14</span></div><div class="sfb"><div class="pli on"><span class="th pa" style="background:#3d5a80"></span><span style="min-width:0"><strong>Le Port de Sète</strong><small>1947 · huile sur toile</small></span><span class="tag2">CR 112</span></div><div class="pli"><span class="th pa" style="background:#4a6fa5"></span><span style="min-width:0"><strong>Femme à la fenêtre</strong><small>1947 · huile sur toile</small></span><span class="tag2">CR 113</span></div><div class="pli"><span class="th pa" style="background:#98c1d9"></span><span style="min-width:0"><strong>Barques</strong><small>1949 · gouache</small></span><span class="tag2">CR 120</span></div><div class="more" style="padding:2px;font-size:12px">＋ 11 autres</div></div><div class="sfh"><span class="car">▸</span><span class="nm">Les Cévennes · 1953–1968</span><span class="cn">41</span></div><div class="sfh"><span class="car">▸</span><span class="nm">Dernières années · 1969–1987</span><span class="cn">23</span></div><div class="sfh"><span class="car">▸</span><span class="nm">Sans période</span><span class="cn">3</span></div></div><div class="sb-f">99 œuvres</div></aside><aside class="sb"><div class="sb-top"><div><span class="eyebrow">CLASSER : PAR TECHNIQUE</span><h5>Catalogue raisonné</h5></div></div><div class="sb-c"><div class="bar2"><span class="dd">Classer : 🖌 Par technique ▾</span><span class="dd">Trier : année ▾</span></div><div class="sfh"><span class="car">▾</span><span class="nm">Huile sur toile</span><span class="cn">52</span></div><div class="sfb"><div class="pli on"><span class="th pa" style="background:#3d5a80"></span><span style="min-width:0"><strong>Le Port de Sète</strong><small>1947 · Période bleue</small></span><span class="tag2">CR 112</span></div><div class="pli"><span class="th pa" style="background:#7a6c5d"></span><span style="min-width:0"><strong>Mas des Granges</strong><small>1955 · Les Cévennes</small></span><span class="tag2">CR 140</span></div><div class="more" style="padding:2px;font-size:12px">＋ 50 autres</div></div><div class="sfh"><span class="car">▸</span><span class="nm">Gouache</span><span class="cn">21</span></div><div class="sfh"><span class="car">▸</span><span class="nm">Dessin (fusain, crayon)</span><span class="cn">17</span></div><div class="sfh"><span class="car">▸</span><span class="nm">Gravure · 4 tirages et plus</span><span class="cn">9</span></div></div><div class="sb-f">99 œuvres</div></aside></div>
+<div class="two" style="margin-top:16px"><div><span class="lab">Le menu « Classer : » d’un peintre</span><div class="ddmenu"><h6>Classer (peintre)</h6><div class="it on">🕰 Par période</div><div class="it">🖌 Par technique</div><div class="it">🏛 Par lieu de conservation</div><div class="it">🔢 Par n° de catalogue</div><div class="it">📅 Par année</div><div class="it">🔤 A → Z</div><div class="it">📁 Mes dossiers</div><hr><div class="it">⚙️ Choisir les classements…</div></div></div><div><span class="lab">Selon la sorte d’œuvre</span><table class="stbl"><tr><th>Sorte d’œuvre</th><th>Façons de classer proposées</th></tr>
+<tr><td>🎵 Musique</td><td>Par albums (pistes dans l’ordre) · par chansons · par année · par label · par genre</td></tr>
+<tr><td>🖼 Peinture, dessin</td><td>Par période · par technique · par lieu de conservation · par n° de catalogue · par année</td></tr>
+<tr><td>🗿 Sculpture</td><td>Par œuvre (fontes et tirages dépliés) · par matériau · par fondeur · par lieu</td></tr>
+<tr><td>📚 Écrit</td><td>Par livre (éditions dépliées) · par genre · par éditeur · par année</td></tr>
+<tr><td>🎬 Film, scène</td><td>Par œuvre (représentations, tournées dépliées) · par rôle · par année</td></tr>
+<tr><td>📷 Photo</td><td>Par série · par sujet · par lieu · par année</td></tr>
+<tr><td>Partout</td><td>A → Z · par année · 📁 Mes dossiers (comme D2) · et un classement par n’importe quel champ du type (« ⚙️ Choisir les classements… »)</td></tr></table></div></div><p class=note>Les groupes se déplient comme les dossiers (▸/▾, nombre à droite) ; ils ne se créent pas à la main : ils viennent d’un champ de la fiche (période, technique, lieu de conservation…). Les périodes se définissent une fois (nom + années) dans la page de l’artiste ; une œuvre sans valeur va dans « Sans période ». Chaque ligne : vignette (fenêtre unique des images), titre, « année · technique », n° de catalogue raisonné en pastille. Le classement choisi est retenu par artiste. Les classements proposés viennent de la définition du type (moteur des Artistes, art_engine.php).</p></div>
+<div class="case full"><span class="tag"><span class="num">C4</span>🎨 Catalogue raisonné · les fiches</span><h3>La fiche d’une œuvre (peinture) et la fiche d’un album</h3><div class="two"><div class="crd"><div class="crd-h"><h4>🖼 Le Port de Sète <small>· CR 112</small></h4><span class="btn s">✎ Modifier</span><span class="ia">⋯</span></div><div class="crd-b"><svg class="paint" viewBox="0 0 300 220"><rect width="300" height="220" fill="#3d5a80"/><rect y="130" width="300" height="90" fill="#293241"/><circle cx="230" cy="55" r="22" fill="#e0fbfc" opacity=".8"/><path d="M40 150 l40 -50 l10 50z" fill="#ee6c4d"/><path d="M120 160 l30 -60 l8 60z" fill="#e0fbfc"/><rect x="34" y="150" width="70" height="10" fill="#98c1d9"/><rect x="112" y="160" width="56" height="9" fill="#98c1d9"/></svg>
+<dl class="kv2" style="margin-top:10px"><dt>N° catalogue</dt><dd><span class="code">CR 112</span> <small>inventaire musée : 1989.4.2</small></dd><dt>Date</dt><dd>1947<span class="ok">✓ Compris : 1947</span></dd><dt>Période</dt><dd>Période bleue</dd><dt>Technique</dt><dd>Huile sur toile</dd><dt>Dimensions</dt><dd><span class="inp u"><b>65 × 81</b><i>cm</i></span></dd><dt>Signature</dt><dd>« H. Varin 47 », en bas à droite</dd><dt>Conservée à</dt><dd><span class="pill"><span class="ic">🏛</span><span class="lbl">Musée Paul-Valéry</span><small>Sète</small></span></dd><dt>Propriétaire</dt><dd>Ville de Sète · don de 1989</dd><dt>Attribution</dt><dd><span class="b g">Certaine</span></dd></dl>
+<span class="lab">Provenance</span><ul class="hist prov"><li><b>1947</b><span>Atelier de l’artiste</span></li><li><b>1962</b><span>Vente Drouot, lot 34 · 4 200 F</span></li><li><b>1989</b><span>Don au musée</span></li></ul>
+<span class="lab">Expositions · bibliographie</span><div class="chips"><span class="pill"><span class="ic">🏛</span><span class="lbl">Rétrospective, Montpellier 1978</span></span><span class="pill"><span class="ic">📚</span><span class="lbl">Varin, cat. 1990, n° 112</span></span></div></div></div><div class="crd"><div class="crd-h"><h4>💿 Les Saisons <small>· album, 1968</small></h4><span class="btn s">✎ Modifier</span><span class="ia">⋯</span></div><div class="crd-b">
+<div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:start"><div class="cov" style="width:120px;height:120px;background:#c0392b;font-size:16px">LES<br>SAISONS</div>
+<dl class="kv2"><dt>Label</dt><dd>Barclay</dd><dt>N° catalogue</dt><dd><span class="code">80 412</span></dd><dt>Sortie</dt><dd>mars 1968<span class="ok">✓ Compris : mars 1968</span></dd><dt>Format</dt><dd>LP 33 t, 30 cm · France</dd><dt>Parutions</dt><dd>3 <small>réédition CD 1991, vinyle 2018</small></dd></dl></div>
+<span class="lab">Crédits</span><div class="chips"><span class="pill blue"><span class="ini">LD</span><span class="lbl">Lucien DARDEL</span><span class="rl">chant, auteur</span></span><span class="pill sec"><span class="ini">AR</span><span class="lbl">André ROCHE</span><span class="rl">direction d’orchestre</span></span><span class="pill sec"><span class="ini u">?</span><span class="lbl">« Jacques Aubert »</span><span class="rl">photo de pochette</span></span></div>
+<span class="lab">Pistes · 7 · 25:33</span><table class="ptab"><tr><th>N°</th><th>Titre</th><th style="text-align:right">Durée</th></tr><tr class="fc"><td colspan="3">Face A</td></tr><tr><td class="n">A1</td><td>Printemps</td><td class="d">3:20</td></tr><tr><td class="n">A2</td><td><b>La Mer à Sète</b></td><td class="d">4:05</td></tr><tr><td class="n">A3</td><td>Les Vendanges</td><td class="d">2:58</td></tr><tr><td class="n">A4</td><td>Ma mère</td><td class="d">3:41</td></tr><tr class="fc"><td colspan="3">Face B</td></tr><tr><td class="n">B1</td><td>L’Hiver</td><td class="d">3:12</td></tr><tr><td class="n">B2</td><td>Valse des Granges</td><td class="d">2:47</td></tr><tr><td class="n">B3</td><td>Le Dernier Train</td><td class="d">5:30</td></tr></table></div></div></div><p class=note>Ce sont les fiches du moteur des Artistes (artistes.html) affichées à droite de la liste : mêmes champs, même « ⚙️ Champs affichés », même ✎ Modifier. Album : pochette (fenêtre unique des images), label, n° de catalogue, date C4, format, pays, parutions, crédits avec rôles, pistes avec faces et durées ; clic sur une piste = la fiche de la chanson (C1). Œuvre : n° du catalogue raisonné et d’inventaire, technique, dimensions (K17), signature, lieu de conservation, propriétaire, attribution (K8), provenance, expositions, bibliographie.</p></div>
+<div class="case full"><span class="tag"><span class="num">C5</span>Mode sombre · téléphone 390 px</span><h3>📄 Documents en sombre ; le catalogue sur un téléphone</h3><div class="c5"><div><span class="lab">Mode sombre · Documents (A → Z + fiche)</span><div class="dk2" style="padding:12px;border:2px solid #444"><div class="app2"><div class="appbar"><div class="brand2"><span>MARTIN</span><strong>ARCHIVES</strong><small>FONDS FAMILIAL</small></div><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni on"><span>02</span>📄 Documents</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="cols"><aside class="sb"><div class="sb-top"><div><span class="eyebrow">02 — EXPLORER</span><h5>Documents</h5></div><span class="icb">←</span></div><div class="sb-c"><div class="srch1">🔍 <span>Chercher… (titre, cote, personne, lieu, année)</span><kbd>/</kbd></div><div class="segm"><span class="is-active">A → Z</span><span class="">📁 Dossiers</span></div><div class="bar2"><span class="dd">Filtrer ▾<span class=n>2</span></span><span class="dd">Trier : A → Z ▾</span></div><div class="bar2"><span class="fpill">Lettres ×</span><span class="fpill">1900–1920 ×</span><span class="lnk" style="font-size:11.5px">Tout effacer</span></div><div class="letters"><span class="">A</span><span class="">B</span><span class="">C</span><span class="off">D</span><span class="">E</span><span class="">F</span><span class="off">G</span><span class="off">H</span><span class="off">I</span><span class="off">J</span><span class="off">K</span><span class="on">L</span><span class="">M</span><span class="off">N</span><span class="off">O</span><span class="">P</span><span class="off">Q</span><span class="">R</span><span class="">S</span><span class="">T</span><span class="off">U</span><span class="off">V</span><span class="off">W</span><span class="off">X</span><span class="off">Y</span><span class="off">Z</span></div><div class="slab big">A</div><div class="pli"><span class="th">📄</span><span style="min-width:0"><strong>Acte de mariage Martin – Roux</strong><small>1908 · Lyon (69) · 3 E 1234</small></span><span class="tag2">ACTE</span></div><div class="pli"><span class="th ph">📷</span><span style="min-width:0"><strong>Album de la communion</strong><small>1921 · 24 photos</small></span><span class="tag2">PHOTO</span></div><div class="slab big">B</div><div class="pli"><span class="th">📄</span><span style="min-width:0"><strong>Bail de la ferme des Granges</strong><small>1897 · Saint-Genis (69)</small></span><span class="tag2">ACTE</span></div><div class="slab big">L</div><div class="pli on"><span class="th">✉️</span><span style="min-width:0"><strong>Lettre de Jean à Marie</strong><small>12 mars 1916 · Verdun · L 14/3</small></span><span class="tag2">LETTRE</span></div><div class="pli"><span class="th">✉️</span><span style="min-width:0"><strong>Lettre de Marie à Jean</strong><small>2 avril 1916 · Lyon · L 14/4</small></span><span class="tag2">LETTRE</span></div><div class="pli"><span class="th">📒</span><span style="min-width:0"><strong>Livret militaire de Jean Martin</strong><small>1912 · Lyon · M 2</small></span><span class="tag2">LIVRET</span></div><div class="slab big">M</div><div class="pli"><span class="th">🗺</span><span style="min-width:0"><strong>Matrice cadastrale (extrait)</strong><small>1913 · Saint-Genis · section B</small></span><span class="tag2">CARTE</span></div><div class="more" style="padding:4px">Voir les 30 suivants ↓</div></div><div class="sb-f">312 documents · 2 filtres</div></aside><div class="ws"><div class="ph"><div class="t"><small>Documents · Correspondance › Guerre 1914-1918</small><h2>✉️ Lettre de Jean à Marie</h2><p>Lettre du front, 4 pages. Écrite à Verdun, reçue à Lyon.</p></div>
+<div class="acts2"><span class="btn p" data-k="E">✎ Modifier</span><span class="btn">📁 Ranger</span><span class="btn">⋯</span><span class="btn">⭐</span></div></div><div class="fgrid"><div><div class="prev"><svg viewBox="0 0 300 380"><rect x="0" y="0" width="300" height="380" fill="#f6efdd"/>
+<text x="140" y="40" font-family="Georgia" font-style="italic" font-size="12" fill="#3a3326">Verdun, le 12 mars 1916</text>
+<text x="28" y="78" font-family="Georgia" font-style="italic" font-size="14" fill="#3a3326">Ma chère Marie,</text><path d="M28 104 q 30 -5 60 0 t 60 0 t 60 0 t 40 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 126 q 30 -5 60 0 t 60 0 t 60 0 t 77 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 148 q 30 -5 60 0 t 60 0 t 60 0 t 64 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 170 q 30 -5 60 0 t 60 0 t 60 0 t 51 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 192 q 30 -5 60 0 t 60 0 t 60 0 t 88 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 214 q 30 -5 60 0 t 60 0 t 60 0 t 75 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 236 q 30 -5 60 0 t 60 0 t 60 0 t 62 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 258 q 30 -5 60 0 t 60 0 t 60 0 t 49 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 280 q 30 -5 60 0 t 60 0 t 60 0 t 86 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 302 q 30 -5 60 0 t 60 0 t 60 0 t 73 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/><path d="M28 324 q 30 -5 60 0 t 60 0 t 60 0 t 60 0" fill="none" stroke="#4a4234" stroke-width="1.4" opacity=".8"/>
+<text x="170" y="360" font-family="Georgia" font-style="italic" font-size="14" fill="#3a3326">Ton Jean</text></svg><div class="prevbar"><span>Page 1 / 4</span><span class="sp"></span><span class="btn s">🔍</span><span class="btn s">⛶</span><span class="btn s">↗ Ouvrir le média</span></div>
+<div class="thumbs"><span class="on">1</span><span>2</span><span>3</span><span>4</span><span style="background:#e9e2cf">env.</span></div>
+<p class="muted" style="font-size:11.5px;margin:6px 0 0">2480 × 3508 px · assez grande pour imprimer en A5</p></div></div><div><div class="crd"><div class="crd-h"><h4>Description</h4><span class="ia">✎</span></div><div class="crd-b"><dl class="kv2">
+<dt>Sorte</dt><dd><span class="b">Lettre</span> <small>correspondance privée</small></dd>
+<dt>Cote</dt><dd><span class="code">L 14/3</span></dd>
+<dt>Date</dt><dd>12 mars 1916<span class="ok">✓ Compris : dimanche 12 mars 1916</span></dd>
+<dt>Lieu</dt><dd><span class="pill"><span class="ic">📍</span><span class="lbl">Verdun</span><small>Meuse (55)</small><span class="o">↗</span></span></dd>
+<dt>Auteur</dt><dd><span class="pill"><span class="ini">JM</span><span class="lbl">Jean MARTIN</span><small>1892–1958</small><span class="b bl" style="padding:2px 4px">Sosa 4</span></span></dd>
+<dt>Fonds · série · article</dt><dd>Fonds de la famille Martin <small>› 1 Correspondance › 1.3 Guerre 1914-1918 › art. 14</small></dd>
+<dt>Support</dt><dd>Papier quadrillé, encre violette, crayon</dd>
+<dt>Dimensions</dt><dd><span class="inp u"><b>21 × 27</b><i>cm</i></span> <small>4 pages + enveloppe</small></dd>
+<dt>État</dt><dd><span class="b y">À restaurer</span> <small>pliure déchirée p. 2</small></dd>
+<dt>Langue</dt><dd>Français</dd>
+<dt>Où il est</dt><dd>Boîte « Guerre » · 🏛 Musée, salle 2, vitrine A</dd>
+</dl></div></div></div></div></div></div></div></div></div><div><span class="lab">Téléphone · 390 px · la liste, puis la fiche</span><div class="phone2"><div class="app2" style="border:0"><div class="appbar"><div class="brand2"><span>LUCIEN</span><strong>DARDEL</strong><small>CATALOGUE</small></div><div class="topnav"><span class="ni "><span>01</span>Tableau de bord</span><span class="ni "><span>02</span>Personnes</span><span class="ni on"><span>02</span>🎨 Catalogue raisonné</span><span class="ni "><span>03</span>Graphiques</span><span class="ni "><span>04</span>Carte</span><span class="ni "><span>05</span>Listes</span><span class="ni "><span>…</span>…</span><span class="ni "><span>10</span>Maintenance</span></div></div><div class="cols"><aside class="sb"><div class="sb-top"><div><span class="eyebrow">02 — EXPLORER</span><h5>Catalogue raisonné</h5></div><span class="icb">←</span></div><div class="sb-c"><div class="pill" style="width:100%"><span class="ini">LD</span><span class="lbl">Lucien DARDEL</span><small>1931–2004</small><span class="o">↗ Fiche</span><span class="x">×</span></div><div class="srch1">🔍 <span>Chercher… (titre, année, n°)</span><kbd>/</kbd></div><div class="bar2"><span class="dd">Classer : 💽 Par albums ▾</span><span class="dd">Filtrer ▾</span><span class="dd">Trier : par date ▾</span></div><div class="alb open"><div class="alb-h"><span class="car">▾</span><span class="cov" style="background:#c0392b">LES<br>SAI</span><span style="min-width:0"><strong>Les Saisons</strong><small>1968 · Barclay · LP 33 t · 7 titres</small></span><span class="tag2">LP</span></div><div class="trs"><div class="face">Face A</div><div class="tr"><span class="n">A1</span><span>Printemps</span><span class="d">3:20</span></div><div class="tr on"><span class="n">A2</span><span>La Mer à Sète</span><span class="d">4:05</span></div><div class="tr"><span class="n">A3</span><span>Les Vendanges</span><span class="d">2:58</span></div><div class="tr"><span class="n">A4</span><span>Ma mère</span><span class="d">3:41</span></div><div class="face">Face B</div><div class="tr"><span class="n">B1</span><span>L’Hiver</span><span class="d">3:12</span></div><div class="tr"><span class="n">B2</span><span>Valse des Granges</span><span class="d">2:47</span></div><div class="tr"><span class="n">B3</span><span>Le Dernier Train</span><span class="d">5:30</span></div></div></div><div class="alb"><div class="alb-h"><span class="car">▸</span><span class="cov" style="background:#2d6a4f">RIVE</span><span style="min-width:0"><strong>Rive gauche</strong><small>1965 · Barclay · LP 33 t · 10 titres</small></span><span class="tag2">LP</span></div></div></div></aside></div></div></div><div class="phone2" style="margin-top:14px"><div class="ws"><span class="btn s" style="margin-bottom:8px">← Liste</span><div><div class="ph"><div class="t"><small>Catalogue raisonné · Lucien Dardel › Les Saisons › A2</small><h2>🎵 La Mer à Sète</h2><p>Chanson de 1967, sur 3 albums. 2 enregistrements.</p></div><div class="acts2"><span class="btn p">✎ Modifier</span><span class="btn">⋯</span><span class="btn">⭐</span></div></div>
+<div class="player"><span class="pl">▶</span><span class="ck">1:33</span><span class="tk"><i></i></span><span class="ck">4:05</span><span class="muted" style="font-size:12px">Prise studio, 1967</span></div>
+<div class="fgrid" style="margin-top:12px"><div>
+<div class="crd"><div class="crd-h"><h4>La chanson</h4></div><div class="crd-b"><dl class="kv2"><dt>N° catalogue</dt><dd><span class="code">LD-1967-04</span></dd><dt>Écrite</dt><dd>été 1967<span class="ok">✓ Compris : entre juin et septembre 1967</span></dd><dt>Lieu</dt><dd><span class="pill"><span class="ic">📍</span><span class="lbl">Sète</span><small>Hérault (34)</small></span></dd><dt>Genre</dt><dd>Chanson française</dd><dt>Durée</dt><dd>4:05</dd><dt>Langue</dt><dd>Français</dd></dl></div></div>
+<div class="crd"><div class="crd-h"><h4>Crédits</h4></div><div class="crd-b"><div class="chips"><span class="pill blue"><span class="ini">LD</span><span class="lbl">Lucien DARDEL</span><span class="rl">paroles, musique, chant</span></span><span class="pill sec"><span class="ini">AR</span><span class="lbl">André ROCHE</span><span class="rl">arrangements</span></span><span class="pill sec"><span class="ini f">CB</span><span class="lbl">Claire BESSON</span><span class="rl">accordéon</span></span></div></div></div></div>
+<div><div class="crd"><div class="crd-h"><h4>🎙 Enregistrements <small>· 2</small></h4></div><div class="crd-b"><div class="fil"><span>🎙</span><span><b>Prise studio</b><br><small>Studio Barclay, Paris · oct. 1967 · 4:05</small></span><span class="lnk">↗</span></div><div class="fil"><span>🎤</span><span><b>En public</b><br><small>Bobino · 1972 · 4:48</small></span><span class="lnk">↗</span></div></div></div>
+<div class="crd"><div class="crd-h"><h4>💿 Sur 3 albums</h4></div><div class="crd-b"><div class="fil"><span class="cov" style="background:#c0392b;width:28px;height:28px">LS</span><span>Les Saisons <small>· 1968 · face A, piste 2</small></span><span class="lnk">↗</span></div><div class="fil"><span class="cov" style="background:#1d3557;width:28px;height:28px">LV</span><span>En public à Bobino <small>· 1972 · disque 1, piste 7</small></span><span class="lnk">↗</span></div><div class="fil"><span class="cov" style="background:#6c584c;width:28px;height:28px">IN</span><span>L’Intégrale <small>· 1998 · CD 2, piste 3</small></span><span class="lnk">↗</span></div></div></div></div></div></div></div></div></div></div><p class=note>Sur un téléphone, la colonne prend tout l’écran ; toucher une chanson ouvre sa fiche en plein écran avec « ← Liste » (comme l’onglet Personnes avec « Liste → »). Les pistes gardent leur n° et leur durée sur une ligne ; le titre se coupe avec « … ». En sombre : ligne choisie en bleu clair, pastilles et transcription restent lisibles.</p></div>
+</div></body></html>
