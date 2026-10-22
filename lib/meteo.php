@@ -19,12 +19,12 @@ declare(strict_types=1);
  * Résultats gardés dans DATA_DIR/cache/meteo-cache.sqlite (la clé change quand un fichier de données change).
  */
 
-const METEO_COLS = [1 => 'TN', 2 => 'TX', 3 => 'T', 4 => 'RR', 5 => 'SN', 6 => 'FX', 7 => 'NN', 8 => 'SS', 9 => 'WW'];
+const METEO_COLS = [1 => 'TN', 2 => 'TX', 3 => 'T', 4 => 'RR', 5 => 'SN', 6 => 'FX', 7 => 'NN', 8 => 'SS', 9 => 'WW', 10 => 'Z'];
 const METEO_KINDS = ['complet' => 3, 'europe' => 2, 'socle' => 1]; // ordre de préférence quand une station est dans deux fichiers
 const METEO_MEASURED_KM = 15.0;
 const METEO_STATION_KM = 40.0;
 const METEO_MAX_ALT = 150.0;
-const METEO_CACHE_VERSION = 3; // à monter quand le calcul change
+const METEO_CACHE_VERSION = 4; // à monter quand le calcul change
 const METEO_HEADER_SIZE = 4096;
 const METEO_SOURCES_INFO = [
     'meteofrance' => ['Météo-France', 'Stations de France, chaque jour ; heure par heure (synoptiques)', '≈ 1850 / 1878 → 2025 ; heures depuis 1950', 'Socle (≈ 300) · Pack complet (toutes)', 'Licence Ouverte 2.0', 'Source : Météo-France'],
@@ -32,6 +32,7 @@ const METEO_SOURCES_INFO = [
     'irm' => ['IRM / KMI', 'Stations de Belgique, chaque jour', '1995 → 2025', 'Socle · Pack complet', 'CC BY 4.0', 'Source : IRM / KMI'],
     'meteolux' => ['MeteoLux', 'Luxembourg-Findel, chaque jour', '1947 → 2025', 'Socle', 'CC0', 'Source : MeteoLux'],
     'dwd' => ['DWD (Deutscher Wetterdienst)', 'Stations d’Allemagne, chaque jour', '≈ 1880 → 2025', 'Pack Europe', 'Datenlizenz Deutschland – Namensnennung 2.0', 'Quelle: Deutscher Wetterdienst'],
+    'copdem' => ['Copernicus DEM GLO-90', 'Altitude du sol : grille ≈ 1 km (30″), tirée du modèle à 90 m', '—', 'Socle (France, Belgique, Suisse, Luxembourg) · Pack Europe (en option)', 'Licence Copernicus DEM GLO-90 (libre, redistribution permise avec mention)', 'Altitudes : Copernicus DEM GLO-90 © DLR e.V. 2010-2014 et © Airbus Defence and Space GmbH 2014-2018, fourni dans le cadre de COPERNICUS par l’Union européenne et l’ESA'],
     'era5' => ['ERA5 (Copernicus)', 'Réanalyse : carreaux ≈ 30 km, 4 heures par jour (socle) ou toutes les heures (packs)', '1940 → 2025', 'Socle · Pack complet · Pack Europe', 'CC BY 4.0', 'Generated using Copernicus Climate Change Service information [2025]'],
     '20cr' => ['20CRv3 (NOAA / DOE)', 'Reconstitution quotidienne, ≈ 100 km', '1836 → 1939', 'Socle', 'CC BY 4.0 — usage libre avec mention', '20th Century Reanalysis V3, NOAA / DOE'],
 ];
@@ -212,6 +213,81 @@ function meteo_first_station(float $lat, float $lon): ?array
 }
 
 function meteo_short_name(string $n): string { return trim(preg_split('/\s+[–-]\s+/u', $n)[0] ?? $n); }
+
+/* ═════════════════════════ Les altitudes (grille de 30″, Copernicus DEM GLO-90) ═════════════════════════ */
+
+/** un carré de 1° de la grille des altitudes (table « elevation » du socle ou d'un pack) → ['n', 'z' => [...]] ou null */
+function meteo_alt_tile(int $la, int $lo): ?array
+{
+    static $memo = [], $has = [];
+    $k = "$la|$lo";
+    if (array_key_exists($k, $memo)) { return $memo[$k]; }
+    if (count($memo) > 64) { $memo = []; }
+    foreach (meteo_files() as $f) {
+        $pdo = meteo_pdo($f['path']); if (!$pdo) { continue; }
+        $has[$f['path']] ??= (bool) $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='elevation'")->fetchColumn();
+        if (!$has[$f['path']]) { continue; }
+        $s = $pdo->prepare('SELECT n, blob FROM elevation WHERE lat0=? AND lon0=?'); $s->execute([$la, $lo]);
+        if ($r = $s->fetch()) { $b = meteo_decode((string) $r['blob']); if ($b && isset($b['cols']['Z'])) { return $memo[$k] = ['n' => (int) $r['n'], 'z' => $b['cols']['Z']]; } }
+    }
+    return $memo[$k] = null;
+}
+
+/** l'altitude du sol en un point (m), par interpolation bilinéaire entre les 4 nœuds de la grille ; null si inconnue (mer, hors de la grille) */
+function meteo_altitude(float $lat, float $lon): ?float
+{
+    $t = meteo_alt_tile((int) floor($lat), (int) floor($lon));
+    if (!$t) { return null; }
+    $n = $t['n'];
+    $gy = $lat * $n; $gx = $lon * $n; $i0 = (int) floor($gy); $j0 = (int) floor($gx); $fy = $gy - $i0; $fx = $gx - $j0;
+    $node = static function (int $i, int $j) use ($n): ?int {
+        $la = intdiv($i - (($i % $n + $n) % $n), $n); $lo = intdiv($j - (($j % $n + $n) % $n), $n);
+        $tt = meteo_alt_tile($la, $lo); if (!$tt || $tt['n'] !== $n) { return null; }
+        return $tt['z'][($i - $la * $n) * $n + ($j - $lo * $n)] ?? null;
+    };
+    $sum = 0.0; $w = 0.0;
+    foreach ([[0, 0, (1 - $fy) * (1 - $fx)], [0, 1, (1 - $fy) * $fx], [1, 0, $fy * (1 - $fx)], [1, 1, $fy * $fx]] as [$di, $dj, $wt]) {
+        $z = $node($i0 + $di, $j0 + $dj);
+        if ($z !== null && $wt > 0) { $sum += $z * $wt; $w += $wt; }
+    }
+    return $w > 0 ? round($sum / $w, 1) : null;
+}
+
+/** GET meteo_place&id= → l'altitude d'un lieu : saisie (ou null = automatique) et celle de la carte du relief */
+function meteo_place_data(PDO $pdo, int $id): array
+{
+    meteo_place_column($pdo);
+    $s = $pdo->prepare('SELECT id, name, county, country, latitude, longitude, altitude FROM places WHERE id=?'); $s->execute([$id]);
+    $p = $s->fetch();
+    if (!$p) { throw new RuntimeException('Lieu introuvable.'); }
+    $auto = $p['latitude'] !== null && $p['longitude'] !== null ? meteo_altitude((float) $p['latitude'], (float) $p['longitude']) : null;
+    return ['id' => (int) $p['id'], 'name' => (string) $p['name'], 'county' => (string) $p['county'], 'altitude' => $p['altitude'] === null ? null : (float) $p['altitude'],
+        'auto' => $auto === null ? null : (int) round($auto), 'has_coords' => $p['latitude'] !== null && $p['longitude'] !== null];
+}
+
+function meteo_place_column(PDO $pdo): void
+{
+    if (!in_array('altitude', array_column($pdo->query('PRAGMA table_info(places)')->fetchAll(), 'name'), true)) { throw new RuntimeException('La base doit d’abord être mise à jour (structure n° 64).'); }
+}
+
+/** POST meteo_place_altitude {id, altitude} : altitude saisie à la main (m), ou null = « ↺ Remettre l'altitude de la carte » */
+function meteo_place_altitude_save(PDO $pdo, array $data): array
+{
+    meteo_place_column($pdo);
+    $id = (int) ($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT * FROM places WHERE id=?'); $s->execute([$id]); $before = $s->fetch();
+    if (!$before) { throw new RuntimeException('Lieu introuvable.'); }
+    $v = $data['altitude'] ?? null;
+    if ($v === '' || $v === null) { $alt = null; }
+    else {
+        $v = str_replace([' ', ' ', ','], ['', '', '.'], (string) $v);
+        if (!is_numeric($v) || (float) $v < -450 || (float) $v > 8900) { throw new RuntimeException('Altitude impossible : entre −450 et 8 900 m.'); }
+        $alt = round((float) $v, 1);
+    }
+    $pdo->prepare('UPDATE places SET altitude=? WHERE id=?')->execute([$alt, $id]);
+    if (function_exists('log_change')) { log_change($pdo, 'place', $id, 'update', $alt === null ? 'Altitude du lieu remise à celle de la carte : ' . $before['name'] : 'Altitude du lieu : ' . $before['name'] . ' (' . $alt . ' m)', $before, ['altitude' => $alt]); }
+    return meteo_place_data($pdo, $id);
+}
 
 /* ═════════════════════════ L'heure de l'acte ═════════════════════════ */
 
@@ -428,6 +504,9 @@ function meteo_day(float $lat, float $lon, ?float $alt, string $date, ?string $t
     $placeName = (string) ($opt['place'] ?? '');
     $cc = meteo_country((string) ($opt['country'] ?? ''), $lat, $lon);
     $res = ['ok' => true, 'date' => $date, 'lat' => $lat, 'lon' => $lon];
+    // l'altitude du lieu : saisie sur la fiche du lieu > grille des altitudes (carte du relief) > rien (pas de pénalité)
+    if ($alt !== null) { $res['alt'] = ['m' => (int) round($alt), 'from' => 'saisie']; }
+    elseif (($ga = meteo_altitude($lat, $lon)) !== null) { $alt = $ga; $res['alt'] = ['m' => (int) round($ga), 'from' => 'carte']; }
     $utc = $time ? meteo_local_to_utc($date, $time, $lat, $lon, $cc, $placeName) : null;
     if ($utc) { $res['time'] = $utc + ['local' => $time]; }
     $i = meteo_doy($y, $mo, $d);
@@ -445,7 +524,7 @@ function meteo_day(float $lat, float $lon, ?float $alt, string $date, ?string $t
         $st = $pick['st'];
         $measured = $st['eff'] < METEO_MEASURED_KM && ($st['dalt'] === null || abs($st['dalt']) < METEO_MAX_ALT);
         $res += ['reliability' => $measured ? 'measured' : 'station', 'day' => $pick['row'],
-            'station' => ['name' => (string) $st['nom'], 'short' => meteo_short_name((string) $st['nom']), 'km' => round($st['km'], 1), 'dalt' => $st['dalt'] === null ? null : (int) round($st['dalt']), 'country' => $st['pays'], 'source' => $st['source'], 'lat' => (float) $st['lat'], 'lon' => (float) $st['lon']]];
+            'station' => ['name' => (string) $st['nom'], 'short' => meteo_short_name((string) $st['nom']), 'km' => round($st['km'], 1), 'dalt' => $st['dalt'] === null ? null : (int) round($st['dalt']), 'alt' => $st['alt'] === null ? null : (int) round((float) $st['alt']), 'country' => $st['pays'], 'source' => $st['source'], 'lat' => (float) $st['lat'], 'lon' => (float) $st['lon']]];
         if (!$measured) { $res['regional_rain'] = true; }
         $sources[] = $st['source'];
         $series = [$st['file'], 'daily', (int) $st['id'], 'station'];
@@ -571,9 +650,10 @@ function meteo_event_rows(PDO $pdo, array $ids): array
     $cols = array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(), 'name');
     $extra = (in_array('event_time', $cols, true) ? ', e.event_time' : ", '' AS event_time") . (in_array('date_uncertain', $cols, true) ? ', e.date_uncertain' : ', 0 AS date_uncertain')
         . (in_array('precise_lat', $cols, true) ? ', e.precise_lat, e.precise_lon' : ', NULL AS precise_lat, NULL AS precise_lon');
+    $alt = in_array('altitude', array_column($pdo->query('PRAGMA table_info(places)')->fetchAll(), 'name'), true) ? ', pl.altitude AS alt' : ', NULL AS alt';
     $marks = implode(',', array_fill(0, count($ids), '?'));
-    $s = $pdo->prepare("SELECT e.id, e.person_id, e.family_id, e.date_text, e.date_calendar, e.date_converted, e.year, t.gedcom_tag AS tag, t.label AS type_label,
-            pl.name AS place_name, pl.county, pl.country, pl.latitude AS lat, pl.longitude AS lon $extra
+    $s = $pdo->prepare("SELECT e.id, e.person_id, e.family_id, e.place_id, e.date_text, e.date_calendar, e.date_converted, e.year, t.gedcom_tag AS tag, t.label AS type_label,
+            pl.name AS place_name, pl.county, pl.country, pl.latitude AS lat, pl.longitude AS lon$alt $extra
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE e.id IN ($marks)");
     $s->execute($ids);
     return $s->fetchAll();
@@ -584,7 +664,7 @@ function meteo_for_event(array $e, bool $detail = false): array
 {
     $lat = $e['precise_lat'] !== null && $e['precise_lat'] !== '' ? (float) $e['precise_lat'] : ($e['lat'] !== null && $e['lat'] !== '' ? (float) $e['lat'] : null);
     $lon = $e['precise_lon'] !== null && $e['precise_lon'] !== '' ? (float) $e['precise_lon'] : ($e['lon'] !== null && $e['lon'] !== '' ? (float) $e['lon'] : null);
-    $base = ['event_id' => (int) $e['id'], 'tag' => (string) $e['tag'], 'type' => (string) $e['type_label'], 'place' => (string) ($e['place_name'] ?? '')];
+    $base = ['event_id' => (int) $e['id'], 'tag' => (string) $e['tag'], 'type' => (string) $e['type_label'], 'place' => (string) ($e['place_name'] ?? ''), 'place_id' => (int) ($e['place_id'] ?? 0)];
     $date = meteo_event_date($e);
     if (!$date) { return $base + ['ok' => false, 'reliability' => 'none', 'why' => 'date']; }
     if ($lat === null || $lon === null || ($lat == 0.0 && $lon == 0.0)) { return $base + ['ok' => false, 'reliability' => 'none', 'why' => 'place', 'date' => $date]; }
@@ -808,6 +888,7 @@ function meteo_status_data(): array
                 $info += ['title' => $meta['title'] ?? '', 'built' => $meta['built'] ?? '', 'countries' => $meta['countries'] ?? '', 'fixture' => !empty($meta['fixture']),
                     'stations' => (int) $st['n'], 'cells' => (int) $gr['n'], 'from' => min(array_filter([(int) $st['a'], (int) $gr['a']]) ?: [0]), 'to' => max((int) $st['b'], (int) $gr['b']),
                     'hours_from' => min(array_filter([(int) $st['h'], (int) $gr['h']]) ?: [0])];
+                $info['relief'] = (int) ($pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='elevation'")->fetchColumn() ? $pdo->query('SELECT COUNT(*) FROM elevation')->fetchColumn() : 0);
             } catch (Throwable) { $info['ok'] = false; }
         }
         $files[$f['kind']] = $info;
@@ -956,6 +1037,8 @@ function meteo_api_get(PDO $pdo, string $action, array $q): array
         'meteo_point' => meteo_point_data($q),
         'meteo_time' => meteo_time_data($q, $pdo),
         'meteo_today' => meteo_today_data($pdo, $q),
+        'meteo_place' => meteo_place_data($pdo, safe_int($q['id'] ?? 0)),
+        'meteo_altitude' => ['m' => meteo_altitude((float) ($q['lat'] ?? 0), (float) ($q['lon'] ?? 0))],
         default => throw new RuntimeException('Action météo inconnue.'),
     };
 }

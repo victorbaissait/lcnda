@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 63;
+const SCHEMA_VERSION = 64;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -84,6 +84,7 @@ function migration_steps(): array
         61 => 'schema_v61',
         62 => 'schema_v62',
         63 => 'schema_v63',
+        64 => 'schema_v64',
     ];
 }
 
@@ -2295,4 +2296,12 @@ function schema_v63(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(), 'name');
     if ($cols && !in_array('event_time', $cols, true)) { $pdo->exec("ALTER TABLE events ADD COLUMN event_time TEXT NOT NULL DEFAULT ''"); }
+}
+
+/** 🌦 ⛰ Altitude d'un lieu (lib/meteo.php) : saisie à la main (m) ; NULL = automatique, prise sur la grille des altitudes
+ *  (carte du relief, Copernicus DEM GLO-90) livrée avec la météo. Sert à choisir la station météo la plus semblable. */
+function schema_v64(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(places)')->fetchAll(), 'name');
+    if ($cols && !in_array('altitude', $cols, true)) { $pdo->exec('ALTER TABLE places ADD COLUMN altitude REAL'); }
 }

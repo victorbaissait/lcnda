@@ -9,6 +9,7 @@ Il y a trois fichiers possibles :
 | Fichier | Ce qu'il contient | Taille | Où il va |
 |---|---|---|---|
 | **Le socle** `meteo-socle.sqlite` | ≈ 300 meilleures stations de France, Belgique, Suisse, Luxembourg (chaque jour) + ERA5 (1940 →, 4 heures par jour) + 20CR (1836–1939) + normales | ≈ 550 Mo | dans le dossier `data-meteo` de l'app (il est alors livré avec l'app) |
+| **La grille des altitudes** (dans le socle) | l'altitude du sol tous les ≈ 1 km (30″), tirée du Copernicus DEM GLO-90 : sert à choisir la station la plus semblable en montagne | ≈ 2 à 3 Mo | dans le socle (étape « altitudes ») |
 | **Le pack complet** `meteo-pack-complet.lcmeteo` | toutes les stations (≈ 14 700), et heure par heure pour Météo-France depuis 1950 | ≈ 3 Go | à importer dans l'app (Maintenance → 🌦 Météo d'autrefois → « ⤒ Importer le fichier… ») |
 | **Le pack Europe** `meteo-pack-europe.lcmeteo` | stations d'Allemagne (DWD) + ERA5 sur toute l'Europe, toutes les heures | ≈ 2 Go et plus | à importer de la même façon |
 
@@ -66,7 +67,7 @@ cd ~/Documents/lcnda
 python3 scripts/meteo/build-meteo.py --test
 ```
 
-Il fabrique un tout petit socle (le Gers, une année, Genève) dans le dossier `meteo-sortie-test`. Si tout se passe bien, la dernière ligne dit « ✓ Fini ». Sinon, le message explique quoi faire (connexion, clé Copernicus, adresse qui a changé…).
+Il fabrique un tout petit socle (le Gers, une année, Genève, et les altitudes d'un carré du Gers) dans le dossier `meteo-sortie-test`. Si tout se passe bien, la dernière ligne dit « ✓ Fini ». Sinon, le message explique quoi faire (connexion, clé Copernicus, adresse qui a changé…).
 
 ## 6. Fabriquer pour de vrai
 
@@ -74,6 +75,7 @@ Il fabrique un tout petit socle (le Gers, une année, Genève) dans le dossier `
 python3 scripts/meteo/build-meteo.py socle       # ≈ 4 à 12 heures (surtout ERA5)
 python3 scripts/meteo/build-meteo.py complet     # ≈ 1 à 2 nuits (toutes les stations, heure par heure)
 python3 scripts/meteo/build-meteo.py europe      # ≈ 1 à 3 nuits (ERA5 sur toute l'Europe)
+python3 scripts/meteo/build-meteo.py altitudes   # ≈ 15 à 30 minutes : seulement la grille des altitudes (déjà faite avec « socle »)
 ```
 
 - Le Mac doit rester allumé (empêche la mise en veille : Réglages → Économiseur d'énergie, ou tape `caffeinate -i` devant la commande).
@@ -99,6 +101,7 @@ Ensuite, tu peux effacer le dossier `meteo-sortie` (il est gros).
 | IRM / KMI (opendata.meteo.be) | CC BY 4.0 | « Source : IRM / KMI » |
 | MeteoLux (data.public.lu) | CC0 | « Source : MeteoLux » |
 | DWD (opendata.dwd.de, pack Europe) | Datenlizenz Deutschland – Namensnennung 2.0 | « Quelle: Deutscher Wetterdienst » |
+| Copernicus DEM GLO-90 (altitudes, AWS Open Data) | licence Copernicus DEM GLO-90 : libre, gratuite, redistribution permise avec mention | « Altitudes : Copernicus DEM GLO-90 © DLR e.V. 2010-2014 et © Airbus Defence and Space GmbH 2014-2018, fourni dans le cadre de COPERNICUS par l’Union européenne et l’ESA » |
 | ERA5 (Copernicus) | CC BY 4.0 (licence Copernicus) | « Generated using Copernicus Climate Change Service information [année] » |
 | 20CRv3 (NOAA / DOE) | usage libre avec mention | « 20th Century Reanalysis V3, NOAA / DOE » |
 
@@ -111,3 +114,9 @@ Les adresses des sources sont toutes en haut de `scripts/meteo/build-meteo.py` (
 ## Pour vérifier sans Internet (développeurs)
 
 `python3 tests/test_meteo_builder.py` fabrique un petit socle avec les fichiers d'exemple de `tests/fixtures/meteo` (format réel de Météo-France et de MétéoSuisse) et le relit avec l'app. `python3 scripts/meteo/make-fixture.py DOSSIER` fabrique un jeu d'essai synthétique complet (stations, carreaux, 1836–2025) pour les captures et `tests/test-meteo.js`.
+
+## L'altitude des lieux
+
+La grille des altitudes vient du **Copernicus DEM GLO-90** (modèle du relief à 90 m, réduit à un point tous les ≈ 1 km). Les fichiers d'origine (un par carré de 1°, ≈ 3 Mo chacun) sont lus puis effacés : seule la petite grille est gardée. Les carrés en pleine mer n'existent pas : ils sont simplement sautés. Pas besoin de compte ni de bibliothèque en plus.
+Dans l'app, chaque lieu reçoit tout seul l'altitude de la carte du relief ; on peut la corriger à la main (Graphiques → Lieux → la commune, ou « ⛰ Altitude du lieu » dans le détail d'un jour).
+

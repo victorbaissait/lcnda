@@ -8,10 +8,12 @@ Mode d'emploi pas à pas, en français simple : docs/METEO.md. En bref :
     python3 scripts/meteo/build-meteo.py complet       # le pack complet (≈ 3 Go, une nuit ou plus)
     python3 scripts/meteo/build-meteo.py europe        # le pack Europe (≈ 2 Go, une nuit ou plus)
     python3 scripts/meteo/build-meteo.py tout          # les trois
+    python3 scripts/meteo/build-meteo.py altitudes     # seulement la grille des altitudes (≈ 2–3 Mo, rangée dans le socle ; faite aussi avec « socle »)
 
 Options utiles :
     --dossier meteo-sortie     où tout est rangé (téléchargements, travail, fichiers finis) — par défaut ./meteo-sortie
     --sans-era5 / --sans-20cr  sans les réanalyses (pas besoin de compte Copernicus ni de netCDF4)
+    --sans-altitudes           sans la grille des altitudes (Copernicus DEM GLO-90) ; --altitudes-europe : aussi celle de l'Europe (pack Europe)
     --stations 300             combien de stations dans le socle
     --hors-ligne DOSSIER       ne télécharge rien : lit les fichiers déjà posés dans DOSSIER (essais, tests)
     --meteolux-csv FICHIER     le fichier de MeteoLux (Findel) téléchargé à la main, si l'adresse automatique ne marche plus
@@ -42,6 +44,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
+import zlib
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import meteo_format as F  # noqa: E402
@@ -60,6 +63,9 @@ IRM_DAILY = IRM_WFS + '?service=WFS&version=2.0.0&request=GetFeature&typenames=a
 # MeteoLux : Luxembourg-Findel (data.public.lu, CC0)
 LU_DATASET_API = 'https://data.public.lu/api/1/datasets/climatological-daily-data-luxembourg-findel/'
 LU_FINDEL = ('Luxembourg – Findel', 49.6266, 6.2045, 376.0)
+# Copernicus DEM GLO-90 (altitudes, carrés de 1° en GeoTIFF « COG » sur AWS Open Data ; absents en pleine mer)
+COPDEM_URL = 'https://copernicus-dem-90m.s3.amazonaws.com/{name}/{name}.tif'
+COPDEM_NAME = 'Copernicus_DSM_COG_30_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM'
 # DWD (Allemagne, pack Europe) : relevés quotidiens « KL »
 DWD_KL_HIST = 'https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/historical/'
 DWD_KL_STATIONS = DWD_KL_HIST + 'KL_Tageswerte_Beschreibung_Stationen.txt'
@@ -106,12 +112,16 @@ class Net:
     def path(self, name):
         return os.path.join(self.offline or self.cache, name)
 
-    def get(self, url, name, what='', binary=True):
-        """télécharge une fois (reprise d'un fichier .part) → chemin du fichier gardé"""
+    def get(self, url, name, what='', binary=True, missing_ok=False):
+        """télécharge une fois (reprise d'un fichier .part) → chemin du fichier gardé ; missing_ok : None si la source n'a pas ce fichier"""
         dest = self.path(name)
         if os.path.exists(dest) and os.path.getsize(dest) > 0:
             return dest
+        if missing_ok and os.path.exists(dest + '.absent'):
+            return None
         if self.offline:
+            if missing_ok:
+                return None
             raise Stop(f'Mode hors ligne : le fichier « {name} » manque dans {self.offline}.')
         part = dest + '.part'
         for attempt in range(4):
@@ -126,6 +136,9 @@ class Net:
                 if e.code == 416 and os.path.exists(part):
                     os.replace(part, dest)
                     return dest
+                if missing_ok and e.code in (403, 404):
+                    open(dest + '.absent', 'w').close()
+                    return None
                 if e.code in (404, 410):
                     raise Stop(f'{what or name} : l’adresse n’existe plus (erreur {e.code}).\n  Adresse : {url}\n'
                                '  La source a peut-être déménagé : corrige l’adresse en haut de build-meteo.py (constantes en MAJUSCULES).')
@@ -886,6 +899,182 @@ def do_era5(db, years, box, boxes, cache, hours_step=6, test=False):
             break
 
 
+# ═══════════════════════ Les altitudes (Copernicus DEM GLO-90 → grille de 30″) ═══════════════════════
+import struct  # noqa: E402
+from itertools import accumulate  # noqa: E402
+
+TIFF_TYPES = {1: ('B', 1), 2: ('s', 1), 3: ('H', 2), 4: ('I', 4), 5: ('II', 8), 6: ('b', 1), 7: ('B', 1), 8: ('h', 2), 9: ('i', 4), 11: ('f', 4), 12: ('d', 8), 16: ('Q', 8), 17: ('q', 8)}
+
+
+def lzw_decode(data):
+    """LZW des TIFF (compression 5), sans bibliothèque"""
+    out = bytearray()
+    table = [bytes([i]) for i in range(256)] + [b'', b'']
+    bitpos, nbits, prev = 0, 9, None
+    total = len(data) * 8
+    while bitpos + nbits <= total:
+        byte = bitpos >> 3
+        chunk = int.from_bytes(data[byte:byte + 4].ljust(4, b'\0'), 'big')
+        code = (chunk >> (32 - nbits - (bitpos & 7))) & ((1 << nbits) - 1)
+        bitpos += nbits
+        if code == 256:
+            table = table[:258]; nbits = 9; prev = None
+            continue
+        if code == 257:
+            break
+        if prev is None:
+            entry = table[code]
+        else:
+            entry = table[code] if code < len(table) else prev + prev[:1]
+            table.append(prev + entry[:1])
+        out += entry
+        prev = entry
+        if len(table) + 1 >= (1 << nbits) and nbits < 12:
+            nbits += 1
+    return bytes(out)
+
+
+class Tiff:
+    """lecteur minimal de GeoTIFF (aussi BigTIFF, COG) : tuiles ou bandes, sans compression, deflate ou LZW,
+    prédicteur 1, 2 ou 3 (virgule flottante), entiers 16 bits ou flottants 32 bits ; une ligne à la fois"""
+
+    def __init__(self, data):
+        self.d = data
+        self.bo = '<' if data[:2] == b'II' else '>'
+        magic = struct.unpack(self.bo + 'H', data[2:4])[0]
+        big = magic == 43
+        off = struct.unpack(self.bo + ('Q' if big else 'I'), data[8 if big else 4:16 if big else 8])[0]
+        n = struct.unpack(self.bo + ('Q' if big else 'H'), data[off:off + (8 if big else 2)])[0]
+        pos, esz = off + (8 if big else 2), (20 if big else 12)
+        self.tags = {}
+        for k in range(n):
+            e = data[pos + k * esz:pos + (k + 1) * esz]
+            tag, typ = struct.unpack(self.bo + 'HH', e[:4])
+            cnt = struct.unpack(self.bo + ('Q' if big else 'I'), e[4:12 if big else 8])[0]
+            fmt, size = TIFF_TYPES.get(typ, ('B', 1))
+            raw_len = size * cnt
+            inline = e[12:20] if big else e[8:12]
+            raw = inline[:raw_len] if raw_len <= len(inline) else data[struct.unpack(self.bo + ('Q' if big else 'I'), inline)[0]:][:raw_len]
+            if typ == 2:
+                self.tags[tag] = raw.rstrip(b'\0').decode('latin-1')
+            else:
+                self.tags[tag] = list(struct.unpack(self.bo + fmt[0] * (cnt * (2 if typ == 5 else 1)), raw))
+        g = lambda t, d=None: (self.tags.get(t) or [d])[0]
+        self.w, self.h = g(256), g(257)
+        self.bps, self.comp, self.pred, self.fmt = g(258, 16), g(259, 1), g(317, 1), g(339, 1)
+        self.tw, self.th = g(322), g(323)
+        self.rps = g(278, self.h)
+        self.offsets = self.tags.get(324) or self.tags.get(273)
+        self.counts = self.tags.get(325) or self.tags.get(279)
+        sc, tp = self.tags.get(33550), self.tags.get(33922)
+        if not sc or not tp:
+            raise Stop('GeoTIFF sans géoréférence (ModelPixelScale / ModelTiepoint).')
+        self.sx, self.sy = sc[0], sc[1]
+        self.x0, self.y0 = tp[3] - tp[0] * sc[0], tp[4] + tp[1] * sc[1]
+        nd = self.tags.get(42113)
+        self.nodata = float(nd) if isinstance(nd, str) and nd.strip() not in ('', 'nan') else None
+        self.cache = {}
+
+    def _block(self, i):
+        if i not in self.cache:
+            raw = self.d[self.offsets[i]:self.offsets[i] + self.counts[i]]
+            if self.comp == 8 or self.comp == 32946:
+                raw = zlib.decompress(raw)
+            elif self.comp == 5:
+                raw = lzw_decode(raw)
+            elif self.comp != 1:
+                raise Stop(f'GeoTIFF : compression {self.comp} pas prise en charge.')
+            if len(self.cache) > 64:
+                self.cache.clear()
+            self.cache[i] = raw
+        return self.cache[i]
+
+    def _decode_row(self, raw, width):
+        b = self.bps // 8
+        if self.pred == 3:  # prédicteur « virgule flottante » : différences d'octets, puis octets rangés par poids
+            acc = bytes(accumulate(raw[:width * b], lambda x, y: (x + y) & 255))
+            planes = [acc[k * width:(k + 1) * width] for k in range(b)]
+            be = bytes(x for quad in zip(*planes) for x in quad)
+            return list(struct.unpack('>%d%s' % (width, 'f' if b == 4 else 'd'), be))
+        fmt = {(1, 16): 'H', (2, 16): 'h', (3, 32): 'f', (1, 8): 'B', (2, 32): 'i', (1, 32): 'I', (3, 64): 'd'}.get((self.fmt, self.bps), 'h')
+        vals = list(struct.unpack(self.bo + fmt * width, raw[:width * b]))
+        if self.pred == 2:
+            vals = list(accumulate(vals))
+        return vals
+
+    def row(self, y):
+        """la ligne y entière (valeurs ; None = pas de donnée)"""
+        b = self.bps // 8
+        if self.tw:
+            ty, out = y // self.th, []
+            across = -(-self.w // self.tw)
+            for tx in range(across):
+                blk = self._block(ty * across + tx)
+                r = y - ty * self.th
+                out += self._decode_row(blk[r * self.tw * b:(r + 1) * self.tw * b], self.tw)
+            out = out[:self.w]
+        else:
+            s = y // self.rps
+            blk = self._block(s)
+            r = y - s * self.rps
+            out = self._decode_row(blk[r * self.w * b:(r + 1) * self.w * b], self.w)
+        nd = self.nodata
+        return [None if (v != v or (nd is not None and v == nd) or v < -1000) else v for v in out]
+
+    def sample_grid(self, lat0, lon0, n):
+        """les n × n nœuds lat0 + i/n, lon0 + j/n (plus proche pixel), en mètres entiers"""
+        vals, rows = [], {}
+        for i in range(n):
+            lat = lat0 + i / n
+            y = min(self.h - 1, max(0, int(round((self.y0 - lat) / self.sy - 0.5))))
+            if y not in rows:
+                rows[y] = self.row(y)
+            r = rows[y]
+            for j in range(n):
+                x = min(self.w - 1, max(0, int(round((lon0 + j / n - self.x0) / self.sx - 0.5))))
+                v = r[x]
+                vals.append(None if v is None else int(round(v)))
+        return vals
+
+
+def copdem_name(lat0, lon0):
+    return COPDEM_NAME.format(ns='N' if lat0 >= 0 else 'S', lat=abs(lat0), ew='E' if lon0 >= 0 else 'W', lon=abs(lon0))
+
+
+def do_altitudes(net, db, boxes, work_path, test=False):
+    """la grille des altitudes (30″) des carrés de 1° qui touchent les boîtes ; gardée dans travail/altitudes.sqlite pour reprendre"""
+    wk = sqlite3.connect(work_path)
+    wk.executescript(F.SCHEMA)
+    wk.execute('CREATE TABLE IF NOT EXISTS absent(lat0 INTEGER, lon0 INTEGER, PRIMARY KEY(lat0, lon0))')
+    tiles = sorted({(la, lo) for n_, w_, s_, e_ in boxes for la in range(math.floor(s_), math.ceil(n_)) for lo in range(math.floor(w_), math.ceil(e_))})
+    if test:
+        tiles = [t for t in tiles if t == (43, 0)] or tiles[:1]
+    done = sea = 0
+    for la, lo in tiles:
+        if wk.execute('SELECT 1 FROM elevation WHERE lat0=? AND lon0=?', (la, lo)).fetchone() or wk.execute('SELECT 1 FROM absent WHERE lat0=? AND lon0=?', (la, lo)).fetchone():
+            continue
+        name = copdem_name(la, lo)
+        p = net.get(COPDEM_URL.format(name=name), name + '.tif', f'altitudes {name}', missing_ok=True)
+        if not p:
+            wk.execute('INSERT OR IGNORE INTO absent(lat0, lon0) VALUES(?,?)', (la, lo)); wk.commit(); sea += 1
+            continue
+        with open(p, 'rb') as f:
+            vals = Tiff(f.read()).sample_grid(la, lo, F.ELEVATION_N)
+        wk.execute('INSERT OR REPLACE INTO elevation(lat0, lon0, n, blob) VALUES(?,?,?,?)', (la, lo, F.ELEVATION_N, F.encode_tile(vals)))
+        wk.commit(); done += 1
+        if not net.offline and os.path.exists(p) and not test:
+            os.remove(p)  # le fichier d'origine (≈ 3 Mo) n'est plus utile : la grille est gardée
+    n = 0
+    for la, lo, nn, blob in wk.execute('SELECT lat0, lon0, n, blob FROM elevation'):
+        if any(math.floor(s_) <= la < math.ceil(n_) and math.floor(w_) <= lo < math.ceil(e_) for n_, w_, s_, e_ in boxes):
+            db.execute('INSERT OR REPLACE INTO elevation(lat0, lon0, n, blob) VALUES(?,?,?,?)', (la, lo, nn, blob)); n += 1
+    db.commit()
+    wk.close()
+    size = db.execute('SELECT COALESCE(SUM(LENGTH(blob)), 0) FROM elevation').fetchone()[0]
+    say(f'   • altitudes : {plural(n, "carré")} de 1° ({done} nouveaux, {sea} en mer) · {size_text(size)}')
+    return n
+
+
 # ═══════════════════════ Fabriquer les fichiers finis ═══════════════════════
 def normals_for(db, table, key, ref):
     vals = {}
@@ -930,12 +1119,14 @@ def finish(path, out_dir, kind, wrap=True):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description='Fabrique les données de la « Météo d’autrefois » de LCNDA (voir docs/METEO.md).')
-    ap.add_argument('quoi', nargs='?', default='socle', choices=['socle', 'complet', 'europe', 'tout'])
+    ap.add_argument('quoi', nargs='?', default='socle', choices=['socle', 'complet', 'europe', 'altitudes', 'tout'])
     ap.add_argument('--test', action='store_true', help='essai rapide : le Gers (32), une année, quelques stations')
     ap.add_argument('--dossier', default='meteo-sortie')
     ap.add_argument('--hors-ligne', dest='offline')
     ap.add_argument('--sans-era5', action='store_true')
     ap.add_argument('--sans-20cr', action='store_true')
+    ap.add_argument('--sans-altitudes', action='store_true', help='sans la grille des altitudes (Copernicus DEM)')
+    ap.add_argument('--altitudes-europe', action='store_true', help='aussi la grille des altitudes de toute l’Europe dans le pack Europe (long : ≈ 2 600 carrés à lire)')
     ap.add_argument('--stations', type=int, default=300)
     ap.add_argument('--depuis', type=int, default=1836)
     ap.add_argument('--jusqu-a', dest='until', type=int, default=datetime.date.today().year)
@@ -1005,6 +1196,19 @@ def main(argv=None):
                 do_era5(rdb, years, BOX_4, boxes, os.path.join(out, 'telechargements', 'era5'), 6, a.test)
                 merge_grid(rdb, db, 'era5')
             write_normals(db, 'grid', 'grid_daily', 'grid_id')
+            if not a.sans_altitudes:
+                say('4b. Les altitudes (Copernicus DEM GLO-90, grille de 30″)')
+                F.add_sources(db, ['copdem'], a.until)
+                do_altitudes(net, db, boxes, os.path.join(out, 'travail', 'altitudes.sqlite'), a.test)
+            db.close()
+            finish(path, out, 'socle')
+        if a.quoi == 'altitudes':
+            say('Les altitudes (Copernicus DEM GLO-90, grille de 30″), rangées dans le socle')
+            path = os.path.join(out, 'meteo-socle.sqlite')
+            db = sqlite3.connect(path) if os.path.exists(path) else F.open_db(path, 'socle', 'Socle')
+            db.executescript(F.SCHEMA)
+            F.add_sources(db, ['copdem'], a.until)
+            do_altitudes(net, db, list(COUNTRY_BOXES.values()), os.path.join(out, 'travail', 'altitudes.sqlite'), a.test)
             db.close()
             finish(path, out, 'socle')
         if 'complet' in kinds:
@@ -1038,6 +1242,9 @@ def main(argv=None):
                 do_era5(rdb, years, BOX_EUROPE, [BOX_EUROPE], os.path.join(out, 'telechargements', 'era5-europe'), 1, a.test)
                 merge_grid(rdb, db, 'era5')
                 write_normals(db, 'grid', 'grid_daily', 'grid_id')
+            if a.altitudes_europe and not a.sans_altitudes:
+                F.add_sources(db, ['copdem'], a.until)
+                do_altitudes(net, db, [BOX_EUROPE], os.path.join(out, 'travail', 'altitudes.sqlite'), a.test)
             db.close()
             finish(path, out, 'europe')
     except Stop as e:

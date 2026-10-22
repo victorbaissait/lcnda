@@ -83,6 +83,103 @@ class Sources(unittest.TestCase):
         self.assertNotIn(2, pick)  # trop près de la n° 1, et moins bonne
 
 
+def write_geotiff(path, lat0, lon0, size, fn, tile=64, predictor=3, compression=8):
+    """un petit GeoTIFF au format du Copernicus DEM (flottants 32 bits, tuiles, deflate, prédicteur 3 ; ou LZW/sans) pour les essais"""
+    import struct, zlib
+    sx = 1.0 / size
+    tiles = []
+    across = -(-size // tile)
+    for ty in range(across):
+        for tx in range(across):
+            rows = []
+            for r in range(tile):
+                y = ty * tile + r
+                vals = []
+                for c in range(tile):
+                    x = tx * tile + c
+                    lat = lat0 + 1 - (y + 0.5) * sx
+                    lon = lon0 + (x + 0.5) * sx
+                    vals.append(float(fn(lat, lon)) if x < size and y < size else -32767.0)
+                be = struct.pack('>%df' % tile, *vals)
+                if predictor == 3:
+                    planes = bytes(be[k + 4 * j] for k in range(4) for j in range(tile))  # octets rangés par poids
+                    diff = bytes([planes[0]] + [(planes[i] - planes[i - 1]) & 255 for i in range(1, len(planes))])
+                    rows.append(diff)
+                else:
+                    rows.append(struct.pack('<%df' % tile, *vals))
+            raw = b''.join(rows)
+            tiles.append(zlib.compress(raw) if compression == 8 else raw)
+    entries = []
+    def tag(t, typ, vals):
+        entries.append((t, typ, vals))
+    tag(256, 3, [size]); tag(257, 3, [size]); tag(258, 3, [32]); tag(259, 3, [compression]); tag(277, 3, [1]); tag(317, 3, [predictor]); tag(339, 3, [3])
+    tag(322, 3, [tile]); tag(323, 3, [tile])
+    tag(33550, 12, [sx, sx, 0.0]); tag(33922, 12, [0.0, 0.0, 0.0, float(lon0), float(lat0 + 1), 0.0]); tag(42113, 2, b'-32767\0')
+    data_off = 8
+    body = b''.join(tiles)
+    offsets, pos = [], data_off
+    for t in tiles:
+        offsets.append(pos); pos += len(t)
+    tag(324, 4, offsets); tag(325, 4, [len(t) for t in tiles])
+    entries.sort()
+    ifd_off = data_off + len(body)
+    extra_off = ifd_off + 2 + 12 * len(entries) + 4
+    ifd, extra = b'', b''
+    fmt = {3: ('H', 2), 4: ('I', 4), 12: ('d', 8), 2: ('s', 1)}
+    for t, typ, vals in entries:
+        f, sz = fmt[typ]
+        raw = vals if typ == 2 else struct.pack('<' + f * len(vals), *vals)
+        cnt = len(raw) // sz if typ != 2 else len(raw)
+        if len(raw) <= 4:
+            ifd += struct.pack('<HHI', t, typ, cnt) + raw.ljust(4, b'\0')
+        else:
+            ifd += struct.pack('<HHII', t, typ, cnt, extra_off + len(extra)); extra += raw
+    with open(path, 'wb') as out:
+        out.write(b'II' + struct.pack('<HI', 42, ifd_off) + body + struct.pack('<H', len(entries)) + ifd + struct.pack('<I', 0) + extra)
+
+
+class Altitudes(unittest.TestCase):
+    def test_geotiff_reader_and_grid(self):
+        tmp = tempfile.mkdtemp(prefix='meteo-alt-')
+        try:
+            relief = lambda la, lo: 100 + 1000 * (la - 43) + 200 * (lo - 0)
+            for pred, comp in ((3, 8), (1, 1)):
+                p = os.path.join(tmp, f't{pred}.tif')
+                write_geotiff(p, 43, 0, 240, relief, predictor=pred, compression=comp)
+                t = B.Tiff(open(p, 'rb').read())
+                self.assertEqual((t.w, t.h), (240, 240))
+                v = t.row(0)
+                self.assertAlmostEqual(v[0], relief(43 + 1 - 0.5 / 240, 0.5 / 240), places=2)
+                g = t.sample_grid(43, 0, F.ELEVATION_N)
+                self.assertEqual(len(g), F.ELEVATION_N ** 2)
+                self.assertAlmostEqual(g[60 * F.ELEVATION_N + 60], relief(43.5, 0.5), delta=6)
+            # le carré, tel que le fabricant le range, puis relu par l'app (bilinéaire)
+            dl = os.path.join(tmp, 'dl'); os.makedirs(dl)
+            shutil.copy(os.path.join(tmp, 't3.tif'), os.path.join(dl, B.copdem_name(43, 0) + '.tif'))
+            db = F.open_db(os.path.join(tmp, 'meteo-socle.sqlite'), 'socle', 'Socle')
+            n = B.do_altitudes(B.Net(os.path.join(tmp, 'cache'), dl), db, [(43.9, 0.1, 43.1, 0.9), (44.5, 0.1, 44.1, 0.9)], os.path.join(tmp, 'alt-travail.sqlite'))
+            self.assertEqual(n, 1, 'le carré N44 (absent : en mer) est sauté')
+            db.close()
+            # n = 1 carré ; relu par meteo_altitude
+            php = ("define('APP_ROOT', %r); define('SHARED_DATA_DIR', %r); define('DATA_DIR', %r); require %r; function safe_int($v){return (int)$v;} require %r;"
+                   "echo json_encode([meteo_altitude(43.5, 0.5), meteo_altitude(43.25, 0.75), meteo_altitude(45.0, 6.0)]);") % (
+                ROOT, tmp, tmp, os.path.join(ROOT, 'lib', 'calendars.php'), os.path.join(ROOT, 'lib', 'meteo.php'))
+            out = json.loads(subprocess.run(['php', '-r', php], env={**os.environ, 'LCNDA_METEO_DIR': tmp}, capture_output=True, text=True, check=True).stdout)
+            self.assertAlmostEqual(out[0], relief(43.5, 0.5), delta=6)
+            self.assertAlmostEqual(out[1], relief(43.25, 0.75), delta=6)
+            self.assertIsNone(out[2])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_lzw(self):
+        # « TOBEORNOTTOBEORTOBEORNOT » codé en LZW TIFF (codes de 9 bits)
+        codes = [256, 84, 79, 66, 69, 79, 82, 78, 79, 84, 258, 260, 262, 267, 261, 263, 265, 257]
+        bits = ''.join(format(c, '09b') for c in codes)
+        bits += '0' * (-len(bits) % 8)
+        data = bytes(int(bits[i:i + 8], 2) for i in range(0, len(bits), 8))
+        self.assertEqual(B.lzw_decode(data), b'TOBEORNOTTOBEORTOBEORNOT')
+
+
 class Build(unittest.TestCase):
     def test_offline_socle_read_by_php(self):
         tmp = tempfile.mkdtemp(prefix='meteo-build-')

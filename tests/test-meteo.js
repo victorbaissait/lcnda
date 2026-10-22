@@ -53,8 +53,8 @@ require 'lib/paths.php';
 $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p = null;
 require 'lib/bootstrap.php'; $pdo = db();
 $t = fn($tag) => (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='$tag' LIMIT 1")->fetchColumn();
-$pdo->exec("INSERT INTO places(id,name,county,state,country,latitude,longitude) VALUES(1,'Lectoure','Gers','Occitanie','France',43.934,0.622),(2,'Auch','Gers','Occitanie','France',43.646,0.586),(3,'Mauvezin','Gers','Occitanie','France',43.728,0.873),(4,'Mende','Lozère','Occitanie','France',44.518,3.5),(5,'Sans coordonnées','Gers','','France',NULL,NULL)");
-$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status,is_start) VALUES(1,'Jean','DUPOUY','male','deceased',1),(2,'Marie','LABARTHE','female','deceased',0),(3,'Pierre','DUPOUY','male','deceased',0),(4,'Germaine','DUPOUY','female','deceased',0),(5,'Bertrand','DUPOUY','male','deceased',0),(6,'Jeanne','SÉGUÉLA','female','deceased',0),(7,'Dominique','DUPOUY','male','deceased',0),(8,'Léa','VIVANTE','female','living',0),(9,'Hugo','VIVANT','male','living',0)");
+$pdo->exec("INSERT INTO places(id,name,county,state,country,latitude,longitude) VALUES(1,'Lectoure','Gers','Occitanie','France',43.934,0.622),(2,'Auch','Gers','Occitanie','France',43.646,0.586),(3,'Mauvezin','Gers','Occitanie','France',43.728,0.873),(4,'Mende','Lozère','Occitanie','France',44.518,3.5),(5,'Sans coordonnées','Gers','','France',NULL,NULL),(6,'Les Praz','Haute-Savoie','Auvergne-Rhône-Alpes','France',45.93,6.80)");
+$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status,is_start) VALUES(1,'Jean','DUPOUY','male','deceased',1),(2,'Marie','LABARTHE','female','deceased',0),(3,'Pierre','DUPOUY','male','deceased',0),(4,'Germaine','DUPOUY','female','deceased',0),(5,'Bertrand','DUPOUY','male','deceased',0),(6,'Jeanne','SÉGUÉLA','female','deceased',0),(7,'Dominique','DUPOUY','male','deceased',0),(8,'Léa','VIVANTE','female','living',0),(9,'Hugo','VIVANT','male','living',0),(10,'Léon','MONTAGNARD','male','deceased',0)");
 $pdo->exec("INSERT INTO families(id,partner1_id,partner2_id) VALUES(1,1,2),(2,9,8)");
 $pdo->exec("INSERT INTO family_children(family_id,child_id) VALUES(1,3)");
 $ev = $pdo->prepare('INSERT INTO events(id,scope,person_id,family_id,event_type_id,date_text,year,place_id,event_time) VALUES(?,?,?,?,?,?,?,?,?)');
@@ -63,7 +63,7 @@ foreach ([
  [4,'person',1,null,'BURI','6 février 1978',1978,1,''], [5,'family',null,1,'MARR','22 octobre 1926',1926,2,''], [6,'person',4,null,'BIRT','9 mars 1920',1920,3,''],
  [7,'person',5,null,'DEAT','17 décembre 1944',1944,4,''], [8,'person',6,null,'CHR','2 mai 1852',1852,1,''], [9,'person',7,null,'BIRT','11 avril 1790',1790,1,''],
  [10,'person',3,null,'BIRT','vers 1930',1930,1,''], [11,'person',2,null,'DEAT','14 juillet 1985',1985,1,'16:00'], [12,'family',null,2,'MARR','22 octobre 1976',1976,2,''],
- [13,'person',3,null,'DEAT','2 mars 1990',1990,5,''],
+ [13,'person',3,null,'DEAT','2 mars 1990',1990,5,''], [14,'person',10,null,'DEAT','3 février 1978',1978,6,''],
 ] as $r) { $r[4] = $t($r[4]); $ev->execute($r); }
 echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
 if (seedOut.status !== 0 || !String(seedOut.stdout).includes('ok')) { console.error(seedOut.stderr || seedOut.stdout); process.exit(1); }
@@ -206,10 +206,32 @@ async function importPack(S, file = pack) {
             assert.equal((await S.raw('meteo_pack_chunk', { id: '../../etc', offset: 0 }, Buffer.from('a'))).status, 422);
             assert.ok(!fs.existsSync(path.join(dir, 'meteo', 'meteo-complet.sqlite')));
         });
+        await t('⛰ montagne : la station d’altitude (Chamonix, 6 km) gagne sur la plaine plus proche (3 km, 500 m plus bas) ; saisie à la main prioritaire ; ↺', async () => {
+            const alt = await get('meteo_altitude', { lat: 45.93, lon: 6.80 });
+            assert.ok(Math.abs(alt.m - 1014) < 3, 'grille des altitudes (bilinéaire) : ' + alt.m);
+            assert.equal((await get('meteo_altitude', { lat: 48.8, lon: 2.3 })).m, null, 'hors de la grille');
+            let e = (await get('meteo_events', { ids: '14' })).events[14];
+            assert.deepEqual([e.reliability, e.station.short, e.alt.from, e.station.alt], ['measured', 'Chamonix', 'carte', 1042]);
+            // sans altitude du tout, la plaine (plus proche) gagnerait : c'est bien l'altitude qui décide
+            assert.equal((await get('meteo_point', { lat: 45.93, lon: 6.80, date: '1978-02-03', alt: 530, detail: '0' })).result.station.short, 'Passy');
+            // écart de plus de 150 m : jamais « Mesuré »
+            assert.equal((await get('meteo_point', { lat: 45.93, lon: 6.80, date: '1978-02-03', alt: 1200, detail: '0' })).result.reliability, 'station');
+            let p = await get('meteo_place', { id: 6 });
+            assert.deepEqual([p.altitude, Math.abs(p.auto - 1014) < 3], [null, true]);
+            let r = await post('meteo_place_altitude', { id: 6, altitude: '530' });
+            assert.equal(r.status, 200, JSON.stringify(r.body));
+            e = (await get('meteo_events', { ids: '14' })).events[14];
+            assert.deepEqual([e.station.short, e.alt.from, e.alt.m, e.reliability], ['Passy', 'saisie', 530, 'measured']);
+            assert.equal((await post('meteo_place_altitude', { id: 6, altitude: 99999 })).status, 422);
+            r = await post('meteo_place_altitude', { id: 6, altitude: null });
+            assert.equal(r.result?.altitude ?? r.body.altitude ?? null, null);
+            assert.equal((await get('meteo_place', { id: 6 })).altitude, null, '↺ remet l’altitude de la carte');
+            assert.equal((await get('meteo_events', { ids: '14' })).events[14].station.short, 'Chamonix');
+        });
         await t('« À propos des données » : chaque source et sa licence', async () => {
             const d = await get('meteo_about');
             const by = Object.fromEntries(d.sources.map(s => [s.id, s]));
-            assert.match(by.meteofrance.licence, /Licence Ouverte/); assert.match(by.era5.mention, /Copernicus/); assert.match(by['20cr'].mention, /20th Century/);
+            assert.match(by.meteofrance.licence, /Licence Ouverte/); assert.match(by.copdem.mention, /Copernicus DEM GLO-90/); assert.match(by.era5.mention, /Copernicus/); assert.match(by['20cr'].mention, /20th Century/);
             assert.deepEqual(by.meteofrance.installed, ['socle']);
         });
 
@@ -349,6 +371,29 @@ async function importPack(S, file = pack) {
                         assert.match(notice, /Auch/); assert.match(notice, /Météo : Source : Météo-France/);
                         await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.state.timeline.meteo = true; A.setModule('chronologie'); });
                         await p.waitForSelector('.timeline-row .wx-pill, .timeline-card-line .wx-pill', { timeout: 8000 });
+                    });
+                    await t('⛰ l’altitude dans le détail du jour et sa fenêtre : saisie, puis ↺ Remettre l’altitude de la carte', async () => {
+                        await p.evaluate(() => window.LCNDA_EXT.meteo.openDay(14));
+                        await p.waitForSelector('dialog.wx-dialog .wx-kv');
+                        assert.match(await p.textContent('dialog.wx-dialog .wx-kv'), /Chamonix · à 6 km, 1\u202f?\s?042 m — ton lieu ≈ 1\u202f?\s?01[0-9] m/);
+                        await p.click('dialog.wx-dialog [data-wx-place-edit]');
+                        await p.waitForSelector('dialog.wx-alt-dialog');
+                        assert.match(await p.textContent('dialog.wx-alt-dialog .wx-alt-auto'), /≈ 1\u202f?\s?01[0-9] m \(carte du relief\)/);
+                        await p.fill('dialog.wx-alt-dialog input[name=altitude]', '530'); await p.press('dialog.wx-alt-dialog input[name=altitude]', 'Tab');
+                        await p.waitForSelector('.toast:has-text("Altitude enregistrée")');
+                        await p.waitForSelector('dialog.wx-alt-dialog [data-wx-alt-reset]');
+                        await shot(p, 'meteo-altitude-1440.png');
+                        await p.click('dialog.wx-alt-dialog .modal-actions button');
+                        await p.waitForFunction(() => /Passy/.test(document.querySelector('dialog.wx-dialog .wx-kv')?.textContent || ''), null, { timeout: 8000 });
+                        await p.evaluate(() => window.LCNDA_EXT.meteo.editPlaceAltitude(6));
+                        await p.waitForSelector('dialog.wx-alt-dialog [data-wx-alt-reset]'); await p.click('dialog.wx-alt-dialog [data-wx-alt-reset]');
+                        await p.waitForSelector('.toast:has-text("Altitude remise")');
+                        assert.equal((await get('meteo_place', { id: 6 })).altitude, null);
+                        await p.keyboard.press('Escape'); await p.keyboard.press('Escape');
+                        // la monographie de la commune (Graphiques → Lieux) : la case Altitude
+                        await p.evaluate(() => { const A = window.LCNDA_APP; A.state.graphMode = 'place_monograph'; A.state.graphPlaceMonograph = {...(A.state.graphPlaceMonograph || {}), id: 6, name: 'Les Praz'}; A.setModule('graphiques'); });
+                        await p.waitForSelector('[data-wx-place-alt] .wx-alt', { timeout: 8000 });
+                        assert.match(await p.textContent('[data-wx-place-alt]'), /carte du relief/);
                     });
                     await t('mode simple : lecture seule, aucun POST', async () => {
                         const posts = [];

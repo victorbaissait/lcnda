@@ -27,7 +27,20 @@ STATIONS = [
     (4, 'irm', '6447', 'Uccle', 'BE', 50.7965, 4.3581, 101, 1995, 2025),
     (5, 'meteoswiss', 'GVE', 'Genève – Cointrin', 'CH', 46.2475, 6.1278, 411, 1864, 2025),
     (6, 'meteolux', 'FINDEL', 'Luxembourg – Findel', 'LU', 49.6266, 6.2045, 376, 1947, 2025),
+    # montagne (essais de l'altitude) : la station d'altitude et une station de plaine plus proche
+    (7, 'meteofrance', '74056001', 'Chamonix', 'FR', 45.9296, 6.8752, 1042, 1934, 2025),
+    (8, 'meteofrance', '74256001', 'Passy – Plaine', 'FR', 45.9400, 6.7600, 520, 1950, 2025),
 ]
+
+
+def relief(lat, lon):
+    """altitudes fabriquées : le Gers presque plat (≈ 70–90 m), une montagne près de Chamonix, 0 ailleurs (mer)"""
+    if 45 <= lat < 47 and 6 <= lon < 8:
+        return 400 + 700 * math.exp(-((lat - 45.92) ** 2 + (lon - 6.85) ** 2) / 0.02)
+    return 80 + 10 * math.sin(lat * 50) * math.cos(lon * 40)
+
+
+RELIEF_TILES = [(43, 0), (44, 0), (45, 6)]
 # carreaux ERA5 (0,25°) : autour du Gers, de Mende (Lozère, loin des stations), d'Uccle, de Genève, de Findel
 ERA5 = [(43.5, 0.25), (43.5, 0.5), (43.75, 0.5), (43.75, 0.75), (44.0, 0.5), (44.0, 0.75), (43.5, 0.0), (43.5, 0.75),
         (44.5, 3.5), (50.75, 4.25), (46.25, 6.0), (49.5, 6.25)]
@@ -139,7 +152,11 @@ def main(out):
         os.remove(path)
     db = F.open_db(path, 'socle', 'Socle (jeu d’essai fabriqué)')
     F.set_meta(db, countries='FR,BE,CH,LU', built='2026-10-22', fixture='1')
-    F.add_sources(db, ['meteofrance', 'meteoswiss', 'irm', 'meteolux', 'era5', '20cr'], 2025)
+    F.add_sources(db, ['meteofrance', 'meteoswiss', 'irm', 'meteolux', 'era5', '20cr', 'copdem'], 2025)
+    n = F.ELEVATION_N
+    for la, lo in RELIEF_TILES:
+        vals = [int(round(relief(la + i / n, lo + j / n))) for i in range(n) for j in range(n)]
+        db.execute('INSERT INTO elevation(lat0, lon0, n, blob) VALUES(?,?,?,?)', (la, lo, n, F.encode_tile(vals)))
     for sid, src, code, nom, pays, lat, lon, alt, deb, fin in STATIONS:
         db.execute('INSERT INTO stations(id, source, code, nom, pays, lat, lon, alt, debut, fin) VALUES(?,?,?,?,?,?,?,?,?,?)',
                    (sid, src, code, nom, pays, lat, lon, alt, deb, fin))

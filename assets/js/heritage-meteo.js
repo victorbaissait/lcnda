@@ -222,7 +222,8 @@
         }
         if (!compact) {
             const rows = [['Fiabilité', badge(r)]];
-            if (r.station) rows.push(['Station', esc(`${r.station.name} · à ${Math.round(r.station.km)} km${r.station.dalt ? ` · ${Math.abs(r.station.dalt)} m plus ${r.station.dalt < 0 ? 'bas' : 'haut'}` : ''}`)]);
+            if (r.station) rows.push(['Station', esc(`${r.station.name} · à ${Math.round(r.station.km)} km${r.station.alt != null ? `, ${metres(r.station.alt)}` : ''}${r.alt ? ` — ton lieu ${r.alt.from === 'carte' ? '≈ ' : ''}${metres(r.alt.m)}` : ''}`)]);
+            else if (r.alt) rows.push(['Ton lieu', esc(`${r.alt.from === 'carte' ? '≈ ' : ''}${metres(r.alt.m)}${r.alt.from === 'carte' ? ' (carte du relief)' : ''}`)]);
             if (r.cell) rows.push(['Carreau', esc(`${r.cell.source === '20cr' ? '20CR, ≈ 100 km' : 'ERA5, ≈ 30 km'} · centre à ${Math.round(r.cell.km)} km`)]);
             if (r.hours_source) rows.push(['Heures', esc(r.hours_source)]);
             parts.push(`<dl class="wx-kv">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')}</dl>`);
@@ -231,7 +232,7 @@
         } else {
             parts.push(`<div class="wx-fold-meta">${badge(r)}<span class="muted">${esc([r.station ? `${r.station.short}, ${Math.round(r.station.km)} km` : '', r.normal?.anomaly != null && Math.abs(r.normal.anomaly) >= 1 ? `${dT(r.normal.anomaly, s)} ${r.normal.anomaly < 0 ? 'sous' : 'au-dessus de'} la normale` : ''].filter(Boolean).join(' · '))}</span></div>`);
         }
-        parts.push(`<div class="wx-links">${compact ? `<button type="button" class="link-button" data-wx-full="${Number(r.event_id) || ''}">Tout le détail…</button>` : ''}<button type="button" class="link-button" data-wx-about>↗ Source</button><button type="button" class="link-button" data-wx-map>🗺 Voir sur la carte</button>${r.event_id ? `<button type="button" class="icon-button wx-more" data-wx-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>` : ''}</div>`);
+        parts.push(`<div class="wx-links">${compact ? `<button type="button" class="link-button" data-wx-full="${Number(r.event_id) || ''}">Tout le détail…</button>` : ''}<button type="button" class="link-button" data-wx-about>↗ Source</button><button type="button" class="link-button" data-wx-map>🗺 Voir sur la carte</button>${r.place_id && !kiosk() && !compact ? `<button type="button" class="link-button" data-wx-place-edit="${Number(r.place_id)}">⛰ Altitude du lieu</button>` : ''}${r.event_id ? `<button type="button" class="icon-button wx-more" data-wx-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>` : ''}</div>`);
         if (!compact || s.sources) parts.push(`<div class="wx-src">${esc(sourcesLine(r))}</div>`); // la ligne des sources reste toujours dans le détail (licences)
         return parts.join('');
     }
@@ -258,6 +259,7 @@
         box.addEventListener('click', e => {
             if (e.target.closest('[data-wx-about]')) return openAbout();
             if (e.target.closest('[data-wx-map]')) return openMap(r);
+            const pe = e.target.closest('[data-wx-place-edit]'); if (pe) return editPlaceAltitude(Number(pe.dataset.wxPlaceEdit), () => { cache.clear(); close?.(); openDay(r.event_id); A().state?.module === 'personnes' && A().refreshScreen?.(); });
             const full = e.target.closest('[data-wx-full]'); if (full) return openDay(Number(full.dataset.wxFull));
             const more = e.target.closest('[data-wx-more]'); if (more) UI().menuAt?.(more, menuItems(r, {after: () => close?.()}));
         });
@@ -281,6 +283,55 @@
         const map = ext.miniMap ? ext.miniMap(pts, paths, {height: 380}) : '';
         const legend = `<ul class="wx-map-legend"><li><i style="--c:#0057d9"></i>${esc(r.place || 'Le lieu de l’événement')}</li>${r.station ? `<li><i style="--c:#1f8a3b"></i>Station ${esc(r.station.name)} (${Math.round(r.station.km)} km)</li>` : ''}${r.cell ? `<li><i class="sq"></i>Carreau ${r.cell.source === '20cr' ? '20CR (≈ 100 km)' : 'ERA5 (≈ 30 km)'}</li>` : ''}</ul>`;
         if (ext.openDialog) ext.openDialog({eyebrow: '🌦 MÉTÉO D’AUTREFOIS', title: 'Le lieu, la station et le carreau', body: `${map}${legend}`});
+    }
+
+    /* ═════════════════ ⛰ L'altitude d'un lieu (saisie > carte du relief) ═════════════════ */
+    const metres = m => `${Math.round(Number(m)).toLocaleString('fr-FR')} m`;
+    /** la case « Altitude » : vide = automatique (« ≈ 312 m (carte du relief) » en gris) ; un nombre = saisi à la main */
+    function altFieldHtml(d) {
+        const auto = d.auto != null ? `≈ ${metres(d.auto)} (carte du relief)` : (d.has_coords ? 'pas d’altitude sur la carte du relief ici' : 'place d’abord le lieu sur la carte');
+        return `<div class="wx-alt" data-wx-alt-id="${Number(d.id)}"><label class="wx-alt-l">Altitude<input type="number" name="altitude" step="1" min="-450" max="8900" data-unit="m" value="${d.altitude != null ? esc(Math.round(d.altitude)) : ''}" placeholder="${esc(d.auto != null ? '≈ ' + d.auto : '')}" ${kiosk() ? 'disabled' : ''}></label>
+            <small class="wx-alt-auto">${d.altitude != null ? `saisie à la main · carte du relief : ${esc(d.auto != null ? '≈ ' + metres(d.auto) : '—')}` : esc(auto)}</small>
+            ${d.altitude != null && !kiosk() ? '<button type="button" class="link-button" data-wx-alt-reset>↺ Remettre l’altitude de la carte</button>' : ''}</div>`;
+    }
+    async function saveAltitude(id, value, before, after) {
+        try { await api('meteo_place_altitude', {}, {method: 'POST', body: {id, altitude: value}}); }
+        catch (e) { A().toast(e.message, 'error'); return false; }
+        cache.clear();
+        A().undoToast?.(value === null ? '↺ Altitude remise à celle de la carte' : `⛰ Altitude enregistrée : ${metres(value)}`, {
+            undo: async () => { await api('meteo_place_altitude', {}, {method: 'POST', body: {id, altitude: before}}); cache.clear(); after?.(); },
+            redo: async () => { await api('meteo_place_altitude', {}, {method: 'POST', body: {id, altitude: value}}); cache.clear(); after?.(); }});
+        after?.();
+        return true;
+    }
+    function bindAlt(box, d, after) {
+        box.querySelector('[name=altitude]')?.addEventListener('change', async e => {
+            const raw = e.target.value.trim(), v = raw === '' ? null : Number(raw);
+            if (v !== null && (!Number.isFinite(v) || v < -450 || v > 8900)) { UI().fieldError ? UI().fieldError(e.target, 'Entre −450 et 8 900 m.') : A().toast('Altitude impossible.', 'error'); return; }
+            await saveAltitude(d.id, v, d.altitude, after);
+        });
+        box.querySelector('[data-wx-alt-reset]')?.addEventListener('click', () => saveAltitude(d.id, null, d.altitude, after));
+    }
+    /** dans la monographie de la commune (Graphiques → Lieux) : la case Altitude du lieu */
+    async function placeAltitudeInto(host) {
+        const id = Number(host.dataset.wxPlaceAlt); if (!id) return;
+        let d; try { d = await api('meteo_place', {id}); } catch (_) { return; }
+        if (!host.isConnected) return;
+        host.innerHTML = altFieldHtml(d);
+        bindAlt(host, d, () => placeAltitudeInto(host));
+    }
+    /** la fenêtre « Altitude du lieu » (depuis le détail du jour) */
+    async function editPlaceAltitude(id, onDone) {
+        let changed = false; const after = () => { changed = true; };
+        let d; try { d = await api('meteo_place', {id}); } catch (e) { return A().toast(e.message, 'error'); }
+        const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal wx-alt-dialog';
+        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">⛰ LIEU</span><h2>Altitude de ${esc(d.name || 'ce lieu')}</h2></div><button type="button" class="icon-button" data-wx-x aria-label="Fermer">×</button></div>
+            <div class="wx-body"><p class="muted">Elle sert à choisir la station météo la plus semblable (en montagne, une station de plaine toute proche ne dit pas le temps qu’il faisait là-haut). Laisse la case vide pour garder celle de la carte du relief.</p>${altFieldHtml(d)}</div>
+            <div class="modal-actions"><span class="spacer"></span><button type="submit" class="button secondary">Fermer</button></div></form>`;
+        document.body.appendChild(dlg); dlg.addEventListener('close', () => { dlg.remove(); if (changed) onDone?.(); }); dlg.querySelector('[data-wx-x]').addEventListener('click', () => dlg.close());
+        const redraw = async () => { const n = await api('meteo_place', {id}); d = n; const box = dlg.querySelector('.wx-alt'); if (box) { box.outerHTML = altFieldHtml(n); bindAlt(dlg.querySelector('.wx-alt'), n, () => { redraw(); after?.(); }); } };
+        bindAlt(dlg.querySelector('.wx-alt'), d, () => { redraw(); after?.(); });
+        dlg.showModal();
     }
 
     /* ═════════════════ M10 : à propos des données ═════════════════ */
@@ -390,7 +441,7 @@
             const dataRows = PACKS.map(([k, name, sub]) => {
                 const f = files[k];
                 const on = f && f.ok;
-                const desc = on ? `${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
+                const desc = on ? `${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · relief : ${A().plural(f.relief, 'carré')} de 1°` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
                 const acts = on ? (f.removable ? `<button type="button" class="button small secondary" data-wx-remove="${k}">🗑 Supprimer le pack</button>` : '')
                     : `<button type="button" class="button small secondary" data-wx-howto="${k}">⤓ ${k === 'socle' ? 'Comment l’obtenir' : `Télécharger le ${k === 'complet' ? 'pack complet (≈ 3 Go)' : 'pack Europe (≈ 2 Go)'}`}</button><button type="button" class="button small secondary" data-wx-import="${k}">⤒ Importer le fichier…</button>`;
                 return `<div class="wx-data-row"><span><b>${esc(name)}</b><small>${esc(desc)}</small></span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
@@ -551,5 +602,5 @@
         return `<p data-ps="ps-name">${lk.icon} ${esc(r.place || '')}${r.date ? `, ${esc(dayShort(r.date))}` : ''}</p><p data-ps="ps-body"><b>${esc(lk.title)}</b>${vals ? ` — ${esc(vals)}` : ''}${s.phrase ? `<br>${esc(lk.desc)}` : ''}</p><p data-ps="ps-list"><small>Météo : ${esc(sourcesLine(r))}</small></p>`;
     }
 
-    ext.meteo = {noticeHtml, settings, save, look, badge, decorate, decorateDates, decorateTimeline, openDay, openAbout, openSettings, importPack, cache, installed: null, T, R, kindOf};
+    ext.meteo = {noticeHtml, placeAltitudeInto, editPlaceAltitude, settings, save, look, badge, decorate, decorateDates, decorateTimeline, openDay, openAbout, openSettings, importPack, cache, installed: null, T, R, kindOf};
 })();

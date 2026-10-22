@@ -531,7 +531,7 @@ try {
         'blocs' => json_response(blocs_api_get($pdo, $_GET)), // 📰 🏆 🎓 blocs communs (lib/blocs.php)
         'creations' => (static function () use ($pdo) { require_once __DIR__ . '/lib/creations.php'; json_response(creations_api_get($pdo, $_GET)); })(), // 🎨 Listes « Créations et carrières » (lecture seule)
         'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
-        'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
+        'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today', 'meteo_place', 'meteo_altitude' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
@@ -9546,6 +9546,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'controle_undismiss' => controle_undismiss($pdo,$data), // ✅ « ↺ Signaler de nouveau »
             'controle_fix_date' => controle_fix_date($pdo,$data), // ✅ « Une à une » : date corrigée sur place
             'controle_seuils_save' => controle_seuils_save($pdo,$data), // ✅ ⚙️ Seuils du contrôle
+            'meteo_place_altitude' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/meteo.php'; return meteo_place_altitude_save($pdo, $data); })(), // 🌦 ⛰ altitude d’un lieu (saisie ou « ↺ » carte du relief)
             'bulk_group' => bulk_group($pdo,$data),
             'save_branch' => save_branch($pdo,$data),
             'delete_branch' => delete_branch($pdo,$data),

@@ -60,7 +60,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/transcribe.css?v=4">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
-    <link rel="stylesheet" href="assets/css/meteo.css?v=1">
+    <link rel="stylesheet" href="assets/css/meteo.css?v=2">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=1">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=5">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
@@ -1174,7 +1174,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes.js?v=34" defer></script>
 <script src="assets/js/app-maintenance.js?v=26" defer></script>
 <script src="assets/js/app-recherche.js?v=23" defer></script>
-<script src="assets/js/app-graphiques.js?v=16" defer></script>
+<script src="assets/js/app-graphiques.js?v=17" defer></script>
 <script src="assets/js/app-side-folders.js?v=2" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=30" defer></script>
@@ -1183,7 +1183,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=3" defer></script>
 <script src="assets/js/heritage-links.js?v=18" defer></script>
-<script src="assets/js/heritage-more.js?v=217" defer></script>
+<script src="assets/js/heritage-more.js?v=218" defer></script>
 <script src="assets/js/heritage-controle.js?v=3" defer></script>
 <script src="assets/js/heritage-records.js?v=10" defer></script>
 <script src="assets/js/heritage-research.js?v=34" defer></script>
@@ -1328,7 +1328,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-questions.js?v=1" defer></script>
 <script src="assets/js/heritage-postcards.js?v=1" defer></script>
 <script src="assets/js/heritage-dates-feter.js?v=2" defer></script>
-<script src="assets/js/heritage-meteo.js?v=1" defer></script>
+<script src="assets/js/heritage-meteo.js?v=2" defer></script>
 <script src="assets/js/heritage-partage.js?v=1" defer></script>
 <script src="assets/js/app-apparence.js?v=9" defer></script>
 <script src="assets/js/app-designs.js?v=4" defer></script>

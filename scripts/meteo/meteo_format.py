@@ -29,6 +29,7 @@ COLUMNS = {
     7: ('NN', '%', 'nuages (0 = ciel clair, 100 = couvert)'),
     8: ('SS', 'min', 'soleil (durée d’ensoleillement)'),
     9: ('WW', 'bits', 'phénomènes : 1 brouillard, 2 orage, 4 grêle, 8 neige tombée, 16 gel ou verglas, 32 brume'),
+    10: ('Z', 'm', 'altitude du sol (grille des altitudes)'),
 }
 CODE = {v[0]: k for k, v in COLUMNS.items()}
 WW_FOG, WW_STORM, WW_HAIL, WW_SNOW, WW_ICE, WW_MIST = 1, 2, 4, 8, 16, 32
@@ -48,6 +49,8 @@ CREATE TABLE IF NOT EXISTS daily(station_id INTEGER NOT NULL, annee INTEGER NOT 
 CREATE TABLE IF NOT EXISTS hourly(station_id INTEGER NOT NULL, annee INTEGER NOT NULL, blob BLOB NOT NULL, PRIMARY KEY(station_id, annee)) WITHOUT ROWID;
 CREATE TABLE IF NOT EXISTS grid_daily(grid_id INTEGER NOT NULL, annee INTEGER NOT NULL, blob BLOB NOT NULL, PRIMARY KEY(grid_id, annee)) WITHOUT ROWID;
 CREATE TABLE IF NOT EXISTS grid_hourly(grid_id INTEGER NOT NULL, annee INTEGER NOT NULL, blob BLOB NOT NULL, PRIMARY KEY(grid_id, annee)) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS elevation(lat0 INTEGER NOT NULL, lon0 INTEGER NOT NULL, n INTEGER NOT NULL, blob BLOB NOT NULL,
+    PRIMARY KEY(lat0, lon0)) WITHOUT ROWID;
 CREATE TABLE IF NOT EXISTS normals(sorte TEXT NOT NULL, ref_id INTEGER NOT NULL, debut INTEGER NOT NULL, fin INTEGER NOT NULL, blob BLOB NOT NULL,
     PRIMARY KEY(sorte, ref_id, fin)) WITHOUT ROWID;
 """
@@ -65,6 +68,10 @@ SOURCES = {
                      sorte='station', annees='1947 → aujourd’hui', contenu='Luxembourg-Findel, chaque jour'),
     'dwd': dict(nom='DWD (Deutscher Wetterdienst)', licence='Datenlizenz Deutschland – Namensnennung 2.0', mention='Quelle: Deutscher Wetterdienst',
                 url='https://opendata.dwd.de', sorte='station', annees='≈ 1880 → aujourd’hui', contenu='Stations d’Allemagne, chaque jour (pack Europe)'),
+    'copdem': dict(nom='Copernicus DEM GLO-90', licence='Licence Copernicus DEM GLO-90 (libre, redistribution permise avec mention)',
+                   mention='Altitudes : Copernicus DEM GLO-90 © DLR e.V. 2010-2014 et © Airbus Defence and Space GmbH 2014-2018, fourni dans le cadre de COPERNICUS par l’Union européenne et l’ESA',
+                   url='https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM',
+                   sorte='relief', annees='—', contenu='Altitude du sol, grille ≈ 1 km (30″), tirée du modèle à 90 m'),
     'era5': dict(nom='ERA5 (Copernicus)', licence='CC BY 4.0 (licence Copernicus)',
                  mention='Generated using Copernicus Climate Change Service information [{year}]',
                  url='https://cds.climate.copernicus.eu', sorte='grid', annees='1940 → aujourd’hui',
@@ -241,3 +248,15 @@ def wrap_pack(sqlite_path, out_path):
         for chunk in iter(lambda: f.read(1 << 20), b''):
             out.write(chunk)
     return info
+
+
+# ═══ Grille des altitudes : un bloc par carré de 1° (lat0, lon0 = coin sud-ouest), n × n nœuds aux points
+# lat0 + i/n, lon0 + j/n (i lignes vers le nord, j colonnes vers l'est), rangés ligne par ligne ; colonne « Z » en mètres ;
+# MISSING = mer ou inconnu. n = 120 → un nœud toutes les 30″ (≈ 1 km). Lecture : meteo_altitude() (lib/meteo.php), bilinéaire.
+ELEVATION_N = 120
+
+
+def encode_tile(values, n=ELEVATION_N):
+    if len(values) != n * n:
+        raise ValueError('carré d’altitudes de mauvaise taille')
+    return encode([('Z', values)])
