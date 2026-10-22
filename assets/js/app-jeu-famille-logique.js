@@ -162,6 +162,20 @@
         }
         return null;
     }
+    /** « on joue jusqu'à remplir la grille » : chaque suite d'au moins k pions d'un joueur rapporte floor(longueur / k) points
+     *  (une suite de 6 avec k = 3 vaut 2). Renvoie {pts: [points par joueur], lines: [[cases]…]} */
+    function morpionCount(board, k, diag = true, players = 2) {
+        const pts = Array(players).fill(0), lines = [], rows = board.length, cols = board[0]?.length || 0;
+        for (const [dr, dc] of DIRS) {
+            if (!diag && dr && dc) continue;
+            for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+                const who = board[r][c]; if (who < 0 || board[r - dr]?.[c - dc] === who) continue; // le début d'une suite seulement
+                const cells = []; let i = r, j = c; while (board[i]?.[j] === who) { cells.push([i, j]); i += dr; j += dc; }
+                if (cells.length >= k) { if (who < players) pts[who] += Math.floor(cells.length / k); lines.push(cells); }
+            }
+        }
+        return {pts, lines};
+    }
     const emptyBoard = (rows, cols) => Array.from({length: rows}, () => Array(cols).fill(-1));
     /** les cases jouables (avec la gravité : la plus basse de chaque colonne) */
     function morpionMoves(board, gravity) {
@@ -209,7 +223,7 @@
     const API = {rng, newSeed, shuffle, sosaGen, sosaSide, pool, avatarOf, lifeOf, fullName, townOf,
         quizQuestions, quizAnswer, quizRemaining, genLabel, MEMORY_KINDS, memoryDeck, memoryMatch,
         HISTORY, cmpDate, timelineEvents, timelineDeck, timelineFits, timelinePlace, dateText,
-        morpionLine, emptyBoard, morpionMoves, morpionDrop, morpionGrow, morpionAI};
+        morpionLine, morpionCount, emptyBoard, morpionMoves, morpionDrop, morpionGrow, morpionAI};
     if (typeof module !== 'undefined' && module.exports) module.exports = API;
     root.LCNDA_JEUX_LOGIQUE = API;
 })(typeof window !== 'undefined' ? window : globalThis);

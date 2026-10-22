@@ -97,6 +97,10 @@ console.log('Logique');
             assert.equal(L.morpionLine(b, last[0], last[1], k + 1, true), null, 'pas assez');
         }
         const d = L.emptyBoard(4, 4); put(d, [[0, 0], [1, 1], [2, 2]], 0); assert.equal(L.morpionLine(d, 1, 1, 3, false), null, 'sans diagonales');
+        { // « jusqu'à remplir la grille » : une suite de 6 avec k = 3 vaut 2 points, une diagonale de 3 en vaut 1, sans diagonales elle ne compte pas
+            const f = L.emptyBoard(6, 6); put(f, [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5]], 0); put(f, [[2, 0], [3, 1], [4, 2]], 1);
+            assert.deepEqual(L.morpionCount(f, 3, true, 2).pts, [2, 1]); assert.deepEqual(L.morpionCount(f, 3, false, 2).pts, [2, 0]);
+        }
         const mixed = L.emptyBoard(3, 3); put(mixed, [[0, 0], [0, 1]], 0); mixed[0][2] = 1; assert.equal(L.morpionLine(mixed, 0, 1, 3, true), null);
         const g = L.emptyBoard(6, 7); assert.deepEqual(L.morpionDrop(g, 3), [5, 3]); g[5][3] = 0; assert.deepEqual(L.morpionDrop(g, 3), [4, 3]);
         assert.equal(L.morpionMoves(g, true).length, 7); for (let r = 0; r < 6; r++) g[r][0] = 1; assert.equal(L.morpionMoves(g, true).length, 6, 'colonne pleine');

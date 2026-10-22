@@ -54,7 +54,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/creations.css?v=1">
     <link rel="stylesheet" href="assets/css/puzzle.css?v=3">
     <link rel="stylesheet" href="assets/css/labyrinthe.css?v=1">
-    <link rel="stylesheet" href="assets/css/jeux-famille.css?v=1">
+    <link rel="stylesheet" href="assets/css/jeux-famille.css?v=2">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=2">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=4">
@@ -1133,12 +1133,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-puzzle.js?v=7" defer></script>
 <script src="assets/js/app-labyrinthe-core.js?v=1" defer></script>
 <script src="assets/js/app-labyrinthe.js?v=1" defer></script>
-<script src="assets/js/app-jeu-famille-logique.js?v=1" defer></script>
+<script src="assets/js/app-jeu-famille-logique.js?v=2" defer></script>
 <script src="assets/js/app-jeu-famille.js?v=1" defer></script>
 <script src="assets/js/app-jeu-quiestce.js?v=1" defer></script>
 <script src="assets/js/app-jeu-memory.js?v=1" defer></script>
 <script src="assets/js/app-jeu-timeline.js?v=1" defer></script>
-<script src="assets/js/app-jeu-morpion.js?v=1" defer></script>
+<script src="assets/js/app-jeu-morpion.js?v=2" defer></script>
 <script src="assets/js/app-jeu.js?v=11" defer></script>
 <script src="assets/js/app-chronologie.js?v=10" defer></script>
 <script src="assets/js/app-comparaison.js?v=8" defer></script>
