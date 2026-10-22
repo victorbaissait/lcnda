@@ -83,6 +83,12 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                 await p.evaluate(() => { localStorage.clear(); if (document.documentElement.dataset) {} });
                 const kinds = () => p.$$eval('#research-form [name=search_kind] option', o => o.map(x => x.value));
                 const lsGet = k => p.evaluate(k => localStorage.getItem(k), k);
+                // K20 : à la souris, les flèches ↑ ↓ d'une ligne à poignée sont cachées (on glisse ⠿, ou Alt + ↑ au clavier sur la poignée) ;
+                // au doigt, elles restent. La poignée est posée juste après le dessin : on l'attend avant de choisir.
+                const moveUp = async row => { const arrow = `${row} [data-move="-1"]`;
+                    await p.waitForSelector(`${row} .order-grip[data-grip-done]`, { timeout: 3000 }).catch(() => {}); await p.waitForTimeout(100);
+                    if (await p.isVisible(arrow)) return p.click(arrow);
+                    await p.focus(`${row} .order-grip`); await p.keyboard.press('Alt+ArrowUp'); await p.waitForTimeout(150); };
 
                 /* ── 1. Types de recherche ── */
                 await t(`[${tag}] Recherche → « Réordonner » : ordre et types cachés gardés tout de suite, ↶ Annuler`, async () => {
@@ -93,8 +99,10 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     await p.click('#research-reorder');
                     await p.waitForSelector('dialog[open].research-kind-dialog [data-rk-list] li');
                     assert.equal(await p.$$eval('.research-kind-dialog .modal-actions button', b => b.map(x => x.textContent.trim()).join('|')), 'Fermer', 'K2/K3 : pas d’Enregistrer, « Fermer » seul');
-                    await p.click('.research-kind-dialog [data-index="2"] [data-move="-1"]'); // texte monte
-                    await p.click('.research-kind-dialog [data-index="1"] [data-move="-1"]'); // texte en premier
+                    // K20 : à la souris, les flèches ↑ ↓ sont cachées (on glisse ⠿, ou Alt + ↑ au clavier sur la poignée) ; au doigt, elles restent
+                    const up = i => moveUp(`.research-kind-dialog [data-index="${i}"]`);
+                    await up(2); // texte monte
+                    await up(1); // texte en premier
                     await p.click('.research-kind-dialog [data-rk="insee"] [data-eye]'); // INSEE caché
                     assert.deepEqual(JSON.parse(await lsGet(RK[0])).slice(0, 3), ['text', 'question', 'gaps']);
                     assert.deepEqual(JSON.parse(await lsGet(RK[1])), ['insee']);
@@ -140,7 +148,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     await p.evaluate(() => [...document.querySelectorAll('.toast')].reverse().find(x => /Réglage changé/.test(x.textContent) && [...x.querySelectorAll('button')].some(b => /Annuler/.test(b.textContent))).querySelectorAll('button').forEach(b => { if (/Annuler/.test(b.textContent)) b.click(); }));
                     await p.waitForFunction(() => !localStorage.getItem('genealogie-research-kind-hidden'));
                     await p.waitForSelector('#research-kinds-config [data-rk="web"] [data-eye][aria-pressed="true"]');
-                    await p.click('#research-kinds-config [data-rk="saved"] [data-move="-1"]');
+                    await moveUp('#research-kinds-config [data-rk="saved"]');
                     assert.ok(await lsGet(RK[0]));
                     await p.click('#research-kinds-config [data-rk-reset]');
                     assert.equal(await lsGet(RK[0]), null);
@@ -166,16 +174,18 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                         const list = document.querySelector('#tile-cat-order'), hist = list.querySelector('[data-tile-cat="historical"]');
                         list.prepend(hist);
                         const items = hist.querySelector('.tile-cat-items'); items.prepend(items.querySelector('[data-order-key="etatmajor"]'));
-                        items.querySelector('[data-order-key="cassini_royal"] .order-visible input').checked = false;
                     });
-                    await p.click('[data-order-save="tile-layers"]');
+                    // K2 : plus de bouton « Enregistrer » (caché) : décocher une case enregistre toute la liste, tout de suite
+                    assert.equal(await p.isVisible('[data-order-save="tile-layers"]'), false, 'K2 : bouton « Enregistrer » caché');
+                    await p.click('#tile-cat-order [data-order-key="cassini_royal"] .order-visible input');
                     await p.waitForFunction(() => window.LCNDA_APP.tileLayerCategories[0].id === 'historical');
                     const cats = await p.evaluate(() => window.LCNDA_APP.tileLayerCategories.map(c => [c.id, c.items.map(i => i[0])]));
                     assert.equal(cats[0][1][0], 'etatmajor');
                     assert.ok(!cats.some(([, k]) => k.includes('cassini_royal')), 'fond décoché absent');
                     assert.deepEqual(await p.evaluate(() => window.LCNDA_APP.sortTileKeys(['osmfr', 'cassini', 'etatmajor'])), ['etatmajor', 'cassini', 'osmfr']);
                     // les deux réglages de la même page suivent
-                    await p.waitForSelector('#h-village-maps-config details summary');
+                    // la page se redessine après l'enregistrement tout seul (K2) : on attend le nouveau dessin
+                    await p.waitForFunction(() => document.querySelector('#h-village-maps-config details summary')?.textContent.trim() === 'Cartes historiques', null, { timeout: 10000 }).catch(() => {});
                     assert.equal(await p.$eval('#h-village-maps-config details summary', s => s.textContent.trim()), 'Cartes historiques', 'Fonds de carte en boutons');
                     assert.equal(await p.$eval('#h-village-maps-config details .h-village-maps-grid input', i => i.dataset.hVmap), 'etatmajor');
                     assert.equal(await p.$eval('#h-addrmap-config details summary', s => s.textContent.trim()), 'Cartes historiques', 'Fonds de carte du plan des adresses');

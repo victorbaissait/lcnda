@@ -200,7 +200,9 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
         });
         // ── corrections de la revue des outils (montage et son) ──
         const at = (sel) => p.locator(sel).boundingBox();
-        const dragTo = async (from, to, dx = 30) => { await p.locator(to).scrollIntoViewIfNeeded(); await p.locator(from).scrollIntoViewIfNeeded(); const b = await at(from), l = await at(to);
+        // les messages (en bas à gauche, H7) passent par-dessus le bas de la frise : on les ferme pour saisir l'élément et viser la piste elle-même
+        const noToasts = async () => { await p.evaluate(() => document.querySelectorAll('.ui-toast').forEach(x => x.close ? x.close() : x.remove())); await p.waitForTimeout(250); };
+        const dragTo = async (from, to, dx = 30) => { await noToasts(); await p.locator(to).scrollIntoViewIfNeeded(); await p.locator(from).scrollIntoViewIfNeeded(); const b = await at(from), l = await at(to);
             await p.mouse.move(b.x + 8, b.y + 8); await p.mouse.down(); await p.mouse.move(b.x + 8 + dx, l.y + l.height / 2, { steps: 8 }); await p.mouse.up(); await p.waitForTimeout(400); };
         await t('pistes : après ↶ ↷, supprimer une piste enlève bien ses éléments ; « ↶ Annuler » du message les remet', async () => {
             await p.click('[data-mt-addtrack="a"]'); const tid = await p.evaluate(m => eval(m).P.tracks.filter(x => x.kind === 'a').at(-1).id, M);
@@ -218,12 +220,14 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
             await dragTo('[data-mt-clip="texts:ta"]', '[data-mt-lane="A1"]', 60);
             assert.equal(await p.evaluate(m => eval(m).P.texts[0].at, M), at0, 'le texte n’a pas bougé dans le temps');
             assert.match(await lastToast(), /Pas sur cette piste/);
+            await noToasts();
             const b = await at('[data-mt-clip="texts:ta"]'); await p.mouse.move(b.x + 8, b.y + 8); await p.mouse.down(); await p.mouse.move(b.x + 300, b.y + 400, { steps: 12 }); await p.mouse.up(); await p.waitForTimeout(300);
             assert.equal(await p.evaluate(() => String(getSelection()).length), 0, 'pas de texte sélectionné en glissant');
             await p.keyboard.press('Control+z'); await p.waitForTimeout(300);
         });
         await t('vitesse : la case, le curseur et les boutons restent d’accord', async () => {
-            await selectClip('vb'); await p.fill('[data-mt-pane="item"] [data-mt-k="speedn"]', '50'); await p.waitForTimeout(150);
+            await selectClip('vb'); await p.fill('[data-mt-pane="item"] [data-mt-k="speedn"]', '50');
+            await p.waitForFunction(m => eval(m).P.v1[1].speed === 10, M, { timeout: 3000 }).catch(() => {}); // la case est relue après un court délai
             assert.equal(await p.evaluate(m => eval(m).P.v1[1].speed, M), 10);
             assert.equal(await p.inputValue('[data-mt-pane="item"] [data-mt-k="speed"]'), '10', 'le curseur suit la case');
             await p.press('[data-mt-pane="item"] [data-mt-k="speedn"]', 'Tab'); assert.equal(await p.inputValue('[data-mt-pane="item"] [data-mt-k="speedn"]'), '10', 'la case reprend la vitesse gardée');

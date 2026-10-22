@@ -310,13 +310,15 @@ echo 'ok';`;
             const ctx = await browser.newContext({ ...opts, acceptDownloads: true });
             const p = await ctx.newPage(), narrow = opts.viewport.width < 500, tag = narrow ? '390-sombre' : '1280';
             p.on('pageerror', e => errors.push(e.message));
+            // les fichiers demandés (le tampon « performance » du navigateur s'arrête à 250 entrées, déjà pleines au démarrage)
+            const asked = []; p.on('request', q => asked.push(q.url()));
             p.on('console', m => { if (m.type() === 'error' && !/favicon|Failed to load resource/.test(m.text())) errors.push(m.text()); });
             p.on('dialog', d => { errors.push('dialogue : ' + d.message()); d.dismiss(); });
             await p.goto(base);
             await p.waitForFunction(() => window.LCNDA_APP?.state && window.LCNDA_EXT?.diagramsInternals && window.LCNDA_EXT?.diagramCartes, null, { timeout: 20000 });
             await p.waitForTimeout(500);
             await t(`les fonds ne se chargent pas au démarrage (${label})`, async () => {
-                assert.equal(await p.evaluate(() => performance.getEntriesByType('resource').filter(e => /assets\/data\/geo\//.test(e.name)).length), 0);
+                assert.equal(asked.filter(u => /assets\/data\/geo\//.test(u)).length, 0);
             });
             await t(`chaque dessin est un SVG valide, qui s’ouvre comme une image (${label})`, async () => {
                 const r = await p.evaluate(async () => { const R = window.LCNDA_EXT.diagramRender, out = [];
@@ -456,7 +458,7 @@ echo 'ok';`;
                 assert.equal(await p.$eval('.h-dg-opts select[data-opt="idf"]', e => e.value), 'pc');
                 await p.selectOption('.h-dg-opts select[data-opt="level"]', 'com');
                 await p.waitForFunction(() => /INSEE COG 2025/.test(document.querySelector('[data-dg-preview]')?.innerHTML || '') && !document.querySelector('[data-dg-preview] [data-geo-wait]'), null, { timeout: 20000 });
-                assert.ok(await p.evaluate(() => performance.getEntriesByType('resource').some(e => /fr-communes\.json\.gz/.test(e.name))), 'fichier des communes chargé à la demande');
+                assert.ok(asked.some(u => /fr-communes\.json\.gz/.test(u)), 'fichier des communes chargé à la demande');
                 assert.ok(await p.$('[data-dg-preview] [data-geo-inset="idf"]'), 'encart sur la carte des communes');
                 assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'pas de défilement de côté');
                 await shot(p, `communes-france-${tag}`);

@@ -57,6 +57,10 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
         const design = async () => { await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'design'; await A.setModule('maintenance'); }); await p.waitForSelector('[data-menu-icon="fiches"]'); };
         const nav = key => p.evaluate(k => { const b = document.querySelector(`.main-nav .nav-item[data-module="${k}"]:not(.nav-custom-tab)`) || document.querySelector(`.main-nav .nav-custom-tab[data-board="${k}"]`); return b ? b.textContent.replace(/^\d+/, '') : null; }, key);
         const stored = () => p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-menu-icons') || '{}'));
+        // K2 : la liste s'enregistre toute seule quand on quitte la case (le bouton « Enregistrer » est caché)
+        const leave = async sel => { assert.equal(await p.isVisible('[data-order-save="menu-order"]'), false, 'K2 : plus de bouton « Enregistrer »'); await p.press(sel, 'Tab'); await p.waitForTimeout(500);
+            // la page redessinée garde le curseur dans la case suivante (sinon ce qu'on tape après Tab part dans le vide)
+            assert.ok(await p.evaluate(() => document.activeElement !== document.body && !!document.getElementById('workspace')?.contains(document.activeElement)), 'le curseur reste dans la page après l’enregistrement'); };
         await p.goto(base, { waitUntil: 'domcontentloaded' }); await ready();
 
         const CASES = [
@@ -71,9 +75,11 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
         await t('émojis piégés : HTML en texte, ZWJ et drapeaux entiers, 4 au plus, sans U+202E, case vide = aucun', async () => {
             await design();
             assert.equal(await p.$eval('[data-menu-icon="fiches"]', e => e.value), '📒', 'émoji d’origine proposé');
-            for (const [k, v] of CASES) await p.fill(`[data-menu-icon="${k}"]`, v);
-            assert.equal(await p.$eval('[data-menu-icon="personnes"]', e => e.value), '👨‍👩‍👧‍👦', 'la case garde un émoji famille entier (maxlength)');
-            await p.click('[data-order-save="menu-order"]'); await p.waitForTimeout(300);
+            for (const [k, v] of CASES) {
+                await p.fill(`[data-menu-icon="${k}"]`, v);
+                if (k === 'personnes') assert.equal(await p.$eval('[data-menu-icon="personnes"]', e => e.value), '👨‍👩‍👧‍👦', 'la case garde un émoji famille entier (maxlength)');
+                await leave(`[data-menu-icon="${k}"]`);
+            }
             const s = await stored();
             for (const [k, , want] of CASES) assert.equal(s[k], want, k);
             assert.equal(await nav('fiches'), 'Fiches'); assert.equal(await nav('personnes'), '👨‍👩‍👧‍👦 Personnes'); assert.equal(await nav('dashboard'), 'imgs Tableau de bord');
@@ -87,7 +93,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
             assert.equal(await nav('ct_test01'), '🎯 Mon <img src=x onerror="window.__xss=1"> onglet');
         });
         await t('un onglet à soi reçoit l’émoji choisi, gardé au rechargement', async () => {
-            await design(); await p.fill('[data-menu-icon="ct_test01"]', '🐝'); await p.click('[data-order-save="menu-order"]'); await p.waitForTimeout(1500);
+            await design(); await p.fill('[data-menu-icon="ct_test01"]', '🐝'); await leave('[data-menu-icon="ct_test01"]'); await p.waitForTimeout(1000);
             await p.reload({ waitUntil: 'domcontentloaded' }); await ready();
             assert.equal(await nav('ct_test01'), '🐝 Mon <img src=x onerror="window.__xss=1"> onglet');
             assert.equal(await nav('personnes'), '👨‍👩‍👧‍👦 Personnes');

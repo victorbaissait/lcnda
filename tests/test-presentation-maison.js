@@ -123,7 +123,8 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         for (let i = 0; i < 40; i++) { await p.waitForTimeout(150); if ((await p.$eval(`${D} [data-ui-status]`, e => e.innerText)).includes('✓')) break; }
         out.door = await p.evaluate(async () => { const l = (await window.LCNDA_APP.api('houses')).items; const h = await window.LCNDA_APP.api('house', {id: l.find(x => x.name === 'Maison du test').id}); return h.house.floors[0].openings.map(o => o.type); });
         // 🧲 réglages enregistrés : la date au format commun (K4)
-        await p.click(`${D} summary:has-text("Aimants")`); await p.waitForTimeout(200);
+        // K18 : les réglages de l'aimant sont dans la barre du bas (▾ à côté du bouton 🧲)
+        await p.click(`${D} [data-hs-snapmenu] > summary`); await p.waitForTimeout(200);
         if (!await p.$(`${D} [data-hs-snapbox] [data-ps-new]`)) await p.click(`${D} [data-hs-snapbox] [data-ps-toggle]`);
         await p.click(`${D} [data-hs-snapbox] [data-ps-new]`); await p.fill(`${D} [data-hs-snapbox] [data-ps-name]`, 'Précis'); await p.keyboard.press('Enter'); await p.waitForTimeout(300);
         out.presetDate = await p.$eval(`${D} [data-hs-snapbox] .ui-presets-name small`, e => e.textContent);

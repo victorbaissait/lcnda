@@ -70,6 +70,9 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         await p.waitForFunction(() => window.LCNDA_APP?.state && window.LCNDA_SIDE_FOLDERS && window.LCNDA_EXT?.diagramItems && window.LCNDA_EXT?.customStatItems, null, { timeout: 20000 });
         await p.evaluate(([mode, extra]) => { const A = window.LCNDA_APP; Object.assign(A.state, { graphMode: mode, graphTab: 'types' }, extra); A.setModule('graphiques'); }, [mode, extra]);
         await p.waitForFunction(() => document.querySelectorAll('#sidebar-content [data-sf-kind="diagram"] [data-sf-item]').length >= 6, null, { timeout: 15000 });
+        // la colonne se redessine encore une fois quand les réglages de la base arrivent : on attend qu'elle ne bouge plus
+        // (sinon un glisser commencé pendant ce dessin tombe sur une ligne déjà remplacée)
+        await p.evaluate(() => new Promise(res => { const c = document.getElementById('sidebar-content'); let t = setTimeout(done, 600); const mo = new MutationObserver(() => { clearTimeout(t); t = setTimeout(done, 600); }); function done() { mo.disconnect(); res(); } mo.observe(c, { childList: true }); setTimeout(done, 6000); }));
         await p.evaluate(() => { const c = document.getElementById('sidebar-content'); c.scrollTop = c.scrollHeight; });
     };
     const data = (p, kind = 'diagram') => p.evaluate(k => window.LCNDA_SIDE_FOLDERS.read(k), kind);
@@ -96,7 +99,8 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         await p.mouse.up();
         await p.waitForTimeout(150);
     };
-    const lastToast = p => p.evaluate(() => [...document.querySelectorAll('.ui-toast:not(.is-leaving) .ui-toast-text')].map(e => e.textContent).pop() || '');
+    // le rappel de copie (🛟, heritage.js) peut arriver à tout moment : ce n'est pas la réponse à l'action
+    const lastToast = p => p.evaluate(() => [...document.querySelectorAll('.ui-toast:not(.is-leaving) .ui-toast-text')].map(e => e.textContent).filter(t => !t.startsWith('🛟')).pop() || '');
     const clickUndo = async p => { await p.locator('.ui-toast:not(.is-leaving) .ui-toast-btn', { hasText: '↶ Annuler' }).last().click(); await p.waitForTimeout(150); };
 
     let ctx = null, p = null;

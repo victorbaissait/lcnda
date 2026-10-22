@@ -164,7 +164,27 @@
     const AUTO_ORDER = ['menu-order', 'list-order', 'map-order', 'maintenance-order', 'graph-diagram-order', 'graph-stats-order', 'tile-layers', 'dashboard-widget-catalog-order'];
     const autoOrderBtn = el => { const sec = el?.closest?.('.order-editor'); if (!sec) return null; const b = sec.querySelector('[data-order-save]'); return b && AUTO_ORDER.includes(b.dataset.orderSave) ? b : null; };
     let orderT = 0;
-    const autoOrder = (el, ms = 30) => { const b = autoOrderBtn(el); if (!b) return; clearTimeout(orderT); orderT = setTimeout(() => { if (!b.isConnected) return; const h = b.closest('.order-editor')?.querySelector('h3, h4')?.textContent.trim(); if (h) b.setAttribute('aria-label', h); b.dataset.edAuto = '1'; try { b.click(); } finally { delete b.dataset.edAuto; } }, ms); };
+    // l'enregistrement redessine la page : on remet le curseur dans la même case (et ce qu'on y a tapé entre-temps),
+    // sinon, après Tab, ce qu'on tape part dans le vide
+    const FOCUSABLE = 'input, select, textarea, button, [tabindex]';
+    const keepFocus = () => {
+        const old = document.activeElement, ws = document.getElementById('workspace');
+        if (!old || !ws?.contains(old) || old === ws) return;
+        const all = () => [...ws.querySelectorAll(FOCUSABLE)];
+        const sig = el => el.tagName + [...el.attributes].filter(a => /^(data-|name$|type$|id$)/.test(a.name)).map(a => `${a.name}=${a.value}`).sort().join('|');
+        const want = sig(old), idx = all().filter(e => sig(e) === want).indexOf(old), t0 = performance.now(), atSave = old.value;
+        const look = () => {
+            if (old.isConnected) { if (performance.now() - t0 < 3000) requestAnimationFrame(look); return; }
+            const a = document.activeElement; if (a && a !== document.body && a !== document.documentElement) return; // on a cliqué ailleurs
+            const el = all().filter(e => sig(e) === want)[Math.max(0, idx)]; if (!el) return;
+            const typed = 'value' in old && 'value' in el && !/^(checkbox|radio)$/.test(old.type || '') && old.value !== atSave && old.value !== el.value ? old.value : null; // tapé après l'enregistrement
+            el.focus({preventScroll: true});
+            if (typed != null) { el.value = typed; el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true})); }
+            try { if (typeof old.selectionStart === 'number' && typeof el.setSelectionRange === 'function') el.setSelectionRange(old.selectionStart, old.selectionEnd); } catch (_) { /* case sans sélection */ }
+        };
+        requestAnimationFrame(look);
+    };
+    const autoOrder = (el, ms = 30) => { const b = autoOrderBtn(el); if (!b) return; clearTimeout(orderT); orderT = setTimeout(() => { if (!b.isConnected) return; const h = b.closest('.order-editor')?.querySelector('h3, h4')?.textContent.trim(); if (h) b.setAttribute('aria-label', h); b.dataset.edAuto = '1'; keepFocus(); try { b.click(); } finally { delete b.dataset.edAuto; } }, ms); };
     document.addEventListener('change', e => { if (e.target.closest?.('#workspace .order-editor') && !e.target.closest('[data-order-save]')) autoOrder(e.target); }, true);
     ['drop', 'dragend'].forEach(t => document.addEventListener(t, e => { if (e.target.closest?.('#workspace .order-editor')) autoOrder(e.target, 60); }));
     document.addEventListener('click', e => { const b = e.target.closest?.('#workspace .order-editor button'); if (b && !b.matches('[data-order-save]') && /^[↑↓]$/.test(b.textContent.trim())) autoOrder(b, 60); });

@@ -1131,7 +1131,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-colonne.js?v=1" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
 <script src="assets/js/app-actions.js?v=2" defer></script>
-<script src="assets/js/app-editeurs.js?v=2" defer></script>
+<script src="assets/js/app-editeurs.js?v=3" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=3" defer></script>
 <script src="assets/js/app-access.js?v=8" defer></script>

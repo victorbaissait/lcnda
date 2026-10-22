@@ -83,12 +83,12 @@ function sandbox(store = {}) {
         'assets/js/app.js': 2, 'assets/js/app-picker.js': 1, 'assets/js/app-media-picker.js': 1, 'assets/js/app-tableau-de-bord.js': 1,
         'assets/js/app-recherche.js': 2, 'assets/js/app-graphiques.js': 1, 'assets/js/heritage-creations.js': 1, 'assets/js/heritage-profils-liste.js': 1,
         'assets/js/heritage-artist.js': 1, 'assets/js/heritage-blocs-school.js': 1, 'assets/js/heritage-artist-page.js': 1, 'assets/js/heritage-profils.js': 1,
-        'assets/js/heritage-employers.js': 1, 'assets/js/heritage-boards.js': 1,
+        'assets/js/heritage-employers.js': 1, 'assets/js/heritage-boards.js': 1, 'assets/js/heritage-controle.js': 1,
     };
     // à part, voulus : les exemples de l'accessibilité et des formes d'avatar, le « TXT » d'un média trouvé dans la Recherche
     const ALLOWED = new Set(['assets/js/app-access.js', 'assets/js/app-apparence.js']);
     for (const [f, n] of Object.entries(MIGRATED)) {
-        const t = read(f), c = (t.match(/avatarOn\?\.\(\)/g) || []).length + (t.match(/\blcAv\b/g) ? 1 : 0) + (t.match(/treeAv\(/g) ? 1 : 0);
+        const t = read(f), c = (t.match(/avatarOn\?\.\(\)|\.avatarOr\(/g) || []).length + (t.match(/\blcAv\b/g) ? 1 : 0) + (t.match(/treeAv\(/g) ? 1 : 0);
         assert.ok(c >= n, `${f} : le portrait commun n’est pas branché (${c}/${n})`);
     }
     const js = fs.readdirSync(path.join(root, 'assets/js')).filter(f => f.endsWith('.js')).map(f => 'assets/js/' + f);
