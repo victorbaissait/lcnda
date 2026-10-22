@@ -182,7 +182,8 @@
             this.bind();
             this.paintLeft(); this.paintPages(); this.paintPanel(); this.applyView(); this.applyDevice(); this.setMode('select', true);
             this.reload();
-            if (!this.blocksCss) api('website_render', {blocks: '[]'}).then(r => { if (r?.css && !this.blocksCss) { this.blocksCss = r.css; this.pushCss(); } }).catch(() => {}); // les styles des blocs (menu…), même sans bloc de la généalogie
+            api('website_render', {blocks: '[]'}).then(r => { if (r?.live && typeof r.live === 'object' && !Array.isArray(r.live)) { this._live = r.live; this.pushHtml(); } if (r?.css && !this.blocksCss) { this.blocksCss = r.css; this.pushCss(); } }).catch(() => {}); // styles des blocs, fonds des cartes interactives
+            fetch(document.querySelector('script[src*="site-carte-vive"]')?.src || 'assets/js/site-carte-vive.js?v=2').then(r => (r.ok ? r.text() : '')).then(t => { if (t && !this.carteJs) { this.carteJs = t; if (this.frame) this.reload(); } }).catch(() => {}); // la carte interactive bouge aussi ici // les styles des blocs (menu…), même sans bloc de la généalogie
             this.hist.reset();
             if (this.dirty) U.savedStatus?.(dlg, 'dirty');
             setTimeout(() => this.refreshFrozen().catch(() => {}), 50);
@@ -230,12 +231,14 @@
                 if (c.swBlock) return this.insertBlock(c.swBlock);
                 if (c.swOpenPage) return this.goPage(Number(c.swOpenPage));
                 if (c.swPage) return this.pageAction(c.swPage, Number(c.swPi));
+                if (c.swState !== undefined) { this.styleState = c.swState; return this.paintPanel(); }
+                if (c.swScreen) { this.styleScreen = c.swScreen; if (c.swScreen !== 'all' && this.device !== {tablet: 'tablet', phone: 'phone'}[c.swScreen]) this.setDevice(c.swScreen); return this.paintPanel(); }
                 if (c.swAct) return this.panelAction(c.swAct, b);
                 if (c.swRole) return this.setRole(Number(c.swRole));
                 if (c.swFont) return this.pickFont(c.swFont);
             });
             d.querySelector('[data-sw-name]').addEventListener('input', e => { this.name = e.target.value.trim() || 'Mon site'; this.changed(); });
-            d.querySelector('[data-sw-page]').addEventListener('change', e => this.goPage(Number(e.target.value)));
+            d.querySelector('select[data-sw-page]').addEventListener('change', e => this.goPage(Number(e.target.value)));
             // ⌘S, ⌘Z, V / T / P / B (hors des cases de saisie)
             // ⌘S et ⌘Z même quand le curseur est hors de l'éditeur (après une petite fenêtre) : seulement si l'éditeur est au premier plan
             this.onDocKey = e => {
@@ -260,7 +263,7 @@
             // glisser un bloc depuis ＋ Blocs vers l'aperçu (le bloc est retenu ici : le cadre isolé ne reçoit que la position)
             d.addEventListener('dragstart', e => { const b = e.target.closest?.('[data-sw-block]'); if (!b) return; this.dragKey = b.dataset.swBlock; e.dataTransfer.setData('text/plain', `bloc:${this.dragKey}`); e.dataTransfer.effectAllowed = 'copy'; this.stage.classList.add('is-drop'); });
             d.addEventListener('dragend', () => { this.stage.classList.remove('is-drop'); setTimeout(() => { this.dragKey = ''; }, 200); });
-            this.frame.addEventListener('load', () => { this.ready = false; });
+            // (pas de « load → pas prêt » : l'évènement load arrive APRÈS le message « prêt » du pont et l'effaçait ; seul reload() change la page)
         }
 
         /* ── l'aperçu ── */
@@ -271,7 +274,9 @@
                 if (a.kind === 'menu') { el.innerHTML = `<ul class="lc-menu-list">${this.site.pages.map(p => `<li><a href="${esc(p.slug)}.html"${p === this.page() ? ' aria-current="page"' : ''}>${esc(p.name)}</a></li>`).join('')}</ul>`; return; }
                 if (a.kind === 'diagram') { const fz = this.site.frozen[`diagram:${Number(a.diagram) || 0}`]; if (typeof fz === 'string' && fz) el.innerHTML = `<figure class="lc-diagramme">${fz}</figure>`; else { el.innerHTML = '<p class="lc-note">⏳ Je dessine le diagramme…</p>'; this.freezeDiagram(Number(a.diagram) || 0); } return; }
                 if (a.kind === 'map' && a.fond && a.fond !== 'svg') { const mk = mapKey(a), fz = this.site.frozen[mk], pts = this.mapPts.get(ptsKey(a));
-                    if (fz?.img && pts) { el.innerHTML = `<figure class="lc-map"><img class="lc-map-img" src="${esc(fz.img)}" alt="Carte des lieux"><figcaption><small class="lc-map-credit">${esc(fz.credit || '')}</small>${String(a.vive) === '1' ? '<small class="lc-map-credit">🖐 Dans le site publié, cette carte se déplace et se zoome.</small>' : ''}<ul class="lc-map-list">${pts.map(p => `<li>${esc(p.name)} <small>(${Number(p.n) || 0})</small></li>`).join('')}</ul></figcaption></figure>`; return; }
+                    if (fz?.img && pts) { const live = String(a.vive) === '1' && fz.view ? (this.liveFonds[a.fond] || this.liveFonds.osm) : null;
+                        const img = `<img class="lc-map-img" src="${esc(fz.img)}" alt="Carte des lieux">`;
+                        el.innerHTML = `<figure class="lc-map">${live ? `<div class="lc-carte-vive" data-carte="${esc(JSON.stringify({tiles: live[0], credit: live[1], max: live[2], view: fz.view, pts: pts.slice(0, 300).map(p => [p.lat, p.lng, String(p.name || '').slice(0, 80), p.n])}))}">${img}</div>` : img}<figcaption><small class="lc-map-credit">${esc(fz.credit || '')}</small>${String(a.vive) === '1' ? '<small class="lc-map-credit">🖐 Dans le site publié, cette carte se déplace et se zoome.</small>' : ''}<ul class="lc-map-list">${pts.map(p => `<li>${esc(p.name)} <small>(${Number(p.n) || 0})</small></li>`).join('')}</ul></figcaption></figure>`; return; }
                     el.innerHTML = '<p class="lc-note">⏳ Je dessine la carte sur son fond…</p>'; this.freezeMap(a); return; }
                 const key = k.blockKey(a);
                 if (this.blockCache.has(key)) { el.innerHTML = this.blockCache.get(key); return; }
@@ -342,6 +347,7 @@
             todo.forEach(([key]) => this.pending.delete(key));
             this.pushHtml(); this.pushCss();
         }
+        get liveFonds() { return this._live || {}; }
         cssFor() { const base = this.mediaBase; return this.site.css.replace(/url\(\s*(["']?)media\//gi, `url($1${base}`); }
         themeFull() { return `${themeCss(this.site.theme)}\n${this.blocksCss}`; }
         srcdoc() {
@@ -350,9 +356,15 @@
             const safe = s => String(s).replace(/<\/(style|script)/gi, '<\\/$1');
             return `<!doctype html><html lang="${esc(this.site.settings.lang || 'fr')}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${esc(csp)}">`
                 + `<style id="lcb-theme">${safe(this.themeFull())}</style><style id="lcb-user">${safe(this.cssFor())}</style><style id="lcb-bridge">${k.BRIDGE_CSS}</style></head><body>${this.fillBlocks(this.page().html)}`
-                + `<script data-lcb>${k.BRIDGE}<\/script>${play && this.site.js.trim() ? `<script data-lcb>${safe(this.site.js)}<\/script>` : ''}</body></html>`;
+                + `<script data-lcb>${k.BRIDGE}<\/script>${this.carteJs ? `<script data-lcb>${safe(this.carteJs)}<\/script>` : ''}${play && this.site.js.trim() ? `<script data-lcb>${safe(this.site.js)}<\/script>` : ''}</body></html>`;
         }
-        reload() { this.ready = false; this.frame.srcdoc = this.srcdoc(); }
+        /** recharge l'aperçu ; pendant un chargement, les demandes se regroupent (une seule recharge, à la fin) ;
+         *  toujours un texte nouveau (<!--n-->) : sinon le navigateur ne recharge pas un srcdoc identique et « prêt » n'arrive jamais */
+        reload() {
+            if (this.loadingAt && Date.now() - this.loadingAt < 4000) { this.reloadPending = true; return; }
+            this.reloadPending = false; this.loadingAt = Date.now(); this.ready = false;
+            this.frame.srcdoc = `${this.srcdoc()}<!--${this.loads = (this.loads || 0) + 1}-->`;
+        }
         post(m) { try { this.frame.contentWindow?.postMessage(m, '*'); } catch (_) {} }
         pushHtml() { if (!this.ready || this.mode === 'play') return this.reload(); this.post({type: 'set', html: this.fillBlocks(this.page().html), sel: this.sel?.path || null, mode: this.mode}); }
         pushCss() { if (!this.ready) return; this.post({type: 'css', css: this.cssFor(), theme: this.themeFull()}); }
@@ -360,11 +372,12 @@
             if (!this.frame || e.source !== this.frame.contentWindow) return; // seulement l'aperçu de cet éditeur
             const m = e.data; if (!m || typeof m !== 'object' || m.lcSite !== 1 || typeof m.type !== 'string') return;
             switch (m.type) {
-                case 'ready': this.ready = true; this.post({type: 'mode', mode: this.mode}); this.pushCss(); if (this.sel?.path) this.post({type: 'select', path: this.sel.path, report: true}); return;
+                case 'ready': this.loadingAt = 0; if (this.reloadPending) return this.reload(); this.ready = true; this.post({type: 'mode', mode: this.mode}); this.pushCss(); if (this.sel?.path) this.post({type: 'select', path: this.sel.path, report: true}); return;
                 case 'select': return this.selected(m.info, 'frame');
                 case 'html': {
                     if (typeof m.html !== 'string' || m.html.length > MAX_HTML) return;
-                    this.page().html = m.html; this.changed(); if (this.codeTab === 'html') this.code.value = m.html;
+                    const base = this.mediaBase, html = m.html.split(base).join('media/').split(base.replace(/&/g, '&amp;')).join('media/'); // l'aperçu montre les images par leur adresse complète : le code garde « media/… » (relatif)
+                    this.page().html = html; this.changed(); if (this.codeTab === 'html') this.code.value = html;
                     if (Array.isArray(m.sel)) this.post({type: 'info'});
                     return;
                 }
@@ -442,14 +455,21 @@
             UI()?.scan?.(pane);
         }
         paintPages() {
-            const sel = this.$('[data-sw-page]'); sel.innerHTML = this.site.pages.map((p, i) => `<option value="${i}"${i === this.pageIdx ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
+            const sel = this.$('select[data-sw-page]'); sel.innerHTML = this.site.pages.map((p, i) => `<option value="${i}"${i === this.pageIdx ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
             if (this.left === 'pages') this.paintLeft();
         }
         goPage(i) { if (i < 0 || i >= this.site.pages.length) return; this.pageIdx = i; this.sel = null; this.paintPages(); this.paintPanel(); if (this.codeTab === 'html') this.code.value = this.page().html; this.reload(); this.whereText(); }
+        /** une page change d'adresse : les liens des autres pages vers elle suivent (href="ancienne.html" → "nouvelle.html") */
+        relink(from, to) {
+            if (!from || !to || from === to) return;
+            const re = new RegExp(`(\\shref\\s*=\\s*["'])${from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\.html(?=[#"'])`, 'gi');
+            this.site.pages.forEach(pg => { pg.html = pg.html.replace(re, `$1${to}.html`); });
+            if (this.codeTab === 'html') this.code.value = this.page().html;
+        }
         async pageAction(act, i) {
             const pages = this.site.pages, p = pages[i];
             if (act === 'add') return this.addPage();
-            if (act === 'rename') { const n = await A().askText({title: '✎ Renommer la page', message: 'Le nom de la page (il apparaît dans le menu) :', value: p.name, okLabel: 'Enregistrer'}); if (!n?.trim()) return; p.name = n.trim().slice(0, 80); if (i) p.slug = this.uniqueSlug(slugOf(p.name), i); this.changed(true); this.paintPages(); return this.pushHtml(); }
+            if (act === 'rename') { const n = await A().askText({title: '✎ Renommer la page', message: 'Le nom de la page (il apparaît dans le menu) :', value: p.name, okLabel: 'Enregistrer'}); if (!n?.trim()) return; p.name = n.trim().slice(0, 80); if (i) { const old = p.slug; p.slug = this.uniqueSlug(slugOf(p.name), i); this.relink(old, p.slug); } this.changed(true); this.paintPages(); return this.pushHtml(); }
             if (act === 'up' || act === 'down') { const j = act === 'up' ? i - 1 : i + 1; if (j < 1 || j >= pages.length || i < 1) return; [pages[i], pages[j]] = [pages[j], pages[i]]; if (this.pageIdx === i) this.pageIdx = j; else if (this.pageIdx === j) this.pageIdx = i; this.changed(true); this.paintPages(); return this.pushHtml(); }
             if (act === 'dup') { const c = {...p, id: newId(), name: `${p.name} (copie)`}; c.slug = this.uniqueSlug(slugOf(c.name), -1); pages.splice(i + 1, 0, c); this.changed(true); return this.goPage(i + 1); }
             if (act === 'del' && i > 0) {
@@ -479,7 +499,8 @@
             const t = e.target; if (!this.dlg.contains(t)) return;
             if (t.dataset.swTh) { const k2 = t.dataset.swTh; this.site.theme[k2] = t.type === 'range' ? Number(t.value) : t.value; this.changed(final); this.pushCss(); return; }
             if (t.dataset.swSf) { this.site.settings[t.dataset.swSf] = t.value; this.changed(final); if (t.dataset.swSf === 'lang' && final) this.reload(); return; }
-            if (t.dataset.swPf) { const p = this.page(); if (t.dataset.swPf === 'slug') { if (!final) return; p.slug = this.uniqueSlug(slugOf(t.value), this.pageIdx); t.value = p.slug; this.pushHtml(); } else p[t.dataset.swPf] = t.value; this.changed(final); return; }
+            if (t.dataset.swPf) { const p = this.page(); if (t.dataset.swPf === 'slug') { if (!final) return; const old = p.slug; p.slug = this.uniqueSlug(slugOf(t.value), this.pageIdx); t.value = p.slug; this.relink(old, p.slug); this.pushHtml(); } else p[t.dataset.swPf] = t.value; this.changed(final); return; }
+            if (t.matches('[data-sw-to]') && this.sel) { this.styleTo = t.value; return this.paintPanel(); }
             if (t.dataset.swSt && this.sel) return this.setStyle(t.dataset.swSt, t, final);
             if (t.dataset.swAt && this.sel && final) return this.setAttr(t.dataset.swAt, t.value);
             if (t.dataset.swBa && this.sel && final) { this.setBlockAttr(t.dataset.swBa, t.type === 'checkbox' ? (t.checked ? '1' : '0') : t.value); if (t.dataset.swBa === 'fond' || t.dataset.swBa === 'vive') { this.sel.battrs = {...(this.sel.battrs || {}), [t.dataset.swBa]: t.type === 'checkbox' ? (t.checked ? '1' : '0') : t.value}; this.paintPanel(); } return; }
@@ -497,6 +518,29 @@
         setStyle(prop, input, final) {
             const unit = input.dataset.unit || '', raw = input.type === 'checkbox' ? (input.checked ? input.value : '') : input.value;
             const val = raw === '' || (unit && Number(raw) === 0 && input.dataset.zeroOff) ? '' : `${raw}${unit && /^-?[\d.]+$/.test(raw) ? unit : ''}`;
+            return this.applyDecl(prop, val, final);
+        }
+        /** où va le style : « style="…" » de l'élément, ou une vraie règle de la feuille (classe, survol, taille d'écran) */
+        styleTarget() {
+            const s = this.sel; if (!s) return null;
+            const to = this.styleTo || 'el', state = this.styleState || '', screen = this.styleScreen || 'all';
+            const media = {tablet: '(max-width: 820px)', phone: '(max-width: 480px)'}[screen] || null;
+            if (to.startsWith('class:')) return {sel: `.${to.slice(6)}${state}`, media};
+            if (!state && !media) return {inline: true};
+            if (!s.id) { const id = `el-${Math.random().toString(36).slice(2, 7)}`; this.setAttr('id', id); }
+            return {sel: `#${this.sel.id}${state}`, media};
+        }
+        /** une propriété posée (valeur vide : retirée) là où il faut ; le code CSS et l'aperçu suivent */
+        applyDecl(prop, val, final = true) {
+            const t = this.styleTarget(); if (!t) return;
+            if (!t.inline) {
+                const css = CODE().cssSetDecl(this.site.css, {sel: t.sel, media: t.media, prop, value: val});
+                if (css === this.site.css) return;
+                this.site.css = css; if (this.codeTab === 'css') this.code.value = css;
+                this.pushCss(); this.changed(final);
+                if (final) setTimeout(() => this.post({type: 'info'}), 60);
+                return;
+            }
             let style = '';
             this.mutate((doc, el) => { if (!el) return false; const m = styleMap(el.getAttribute('style')); if (val) m.set(prop, val); else m.delete(prop); style = styleStr(m); if (style) el.setAttribute('style', style); else el.removeAttribute('style'); }, {push: false});
             this.sel.style = style;
@@ -586,8 +630,11 @@
         selected(info, from) {
             if (!info || typeof info !== 'object' || !Array.isArray(info.path)) return;
             const s = v => String(v ?? '').slice(0, 400);
+            const samePath = this.sel && JSON.stringify(this.sel.path) === JSON.stringify(info.path);
             this.sel = {path: info.path.map(Number).filter(n => Number.isInteger(n) && n >= 0).slice(0, 60), tag: s(info.tag).toLowerCase().replace(/[^a-z0-9-]/g, ''), id: s(info.id), cls: s(info.cls), name: s(info.name), block: s(info.block), text: s(info.text), src: s(info.src), href: s(info.href), alt: s(info.alt), style: s(info.style), cs: info.cs && typeof info.cs === 'object' ? Object.fromEntries(Object.entries(info.cs).map(([k2, v]) => [k2, s(v)])) : {}};
             if (this.sel.block) { const doc = K().parse(this.page().html), el = K().elByPath(doc, this.sel.path); this.sel.battrs = el ? K().blockAttrs(el) : {}; }
+            const classes = this.sel.cls.split(/\s+/).filter(c => /^[A-Za-z_-][\w-]*$/.test(c));
+            if (!samePath || !(this.styleTo === 'el' || classes.includes(String(this.styleTo).slice(6)))) this.styleTo = classes.length ? `class:${classes[0]}` : 'el'; // par défaut : sa classe
             this.paintPanel(); this.whereText();
             if (from === 'frame') this.revealInCode(false);
         }
@@ -629,6 +676,7 @@
                     <label>Classe(s)<input type="text" data-sw-at="class" value="${esc(s.cls)}" maxlength="200" placeholder="carte-famille" spellcheck="false"></label>
                     <label>id<input type="text" data-sw-at="id" value="${esc(s.id)}" maxlength="60" placeholder="haut-de-page" spellcheck="false"></label></div>`})}
                 ${blockOpts()}${content}
+                ${this.targetHtml()}
                 ${U.panelSection({title: 'Position et taille', key: 'sw-pos', open: false, body: range('margin-top', 'Marge en haut', 0, 160, px(cs.mt)) + range('margin-bottom', 'Marge en bas', 0, 160, px(cs.mb)) + range('padding', 'Espace intérieur', 0, 120, px(cs.pt)) + range('max-width', 'Largeur au plus (0 = toute)', 0, 1600, px(st.get('max-width') || 0)) + range('border-radius', 'Arrondi', 0, 60, px(cs.radius))})}
                 ${U.panelSection({title: 'Couleur', key: 'sw-color', open: false, body: `<div class="sw-colors">${color('color', 'Texte', cs.color)}${color('background-color', 'Fond', cs.bg)}</div><button type="button" class="button small secondary" data-sw-act="nobg">Sans fond</button>`})}
                 ${U.panelSection({title: 'Texte', key: 'sw-text', open: false, body: `<div class="sw-fonts"><button type="button" class="button small secondary" data-sw-act="font">Aa · ${esc((st.get('font-family') || cs.font || '').split(',')[0].replace(/["']/g, '') || 'Police')}</button></div>${range('font-size', 'Taille', 10, 96, px(cs.size), 17)}
@@ -638,15 +686,25 @@
             pane.querySelectorAll('input[type=range][data-sw-st="max-width"]').forEach(r => { r.dataset.zeroOff = '1'; });
             U.scan?.(pane);
         }
+        /** « Appliquer à » : cet élément ou tous ceux de sa classe ; normal ou survol ; tous les écrans, tablette ou téléphone */
+        targetHtml() {
+            const s = this.sel, classes = s.cls.split(/\s+/).filter(c => /^[A-Za-z_-][\w-]*$/.test(c)), to = this.styleTo || 'el', st = this.styleState || '', sc = this.styleScreen || 'all';
+            const t = to.startsWith('class:') ? `.${to.slice(6)}${st}` : (st || sc !== 'all' ? `#${s.id || '…'}${st}` : 'style="…" de l’élément');
+            const media = {tablet: ' dans @media (max-width: 820px)', phone: ' dans @media (max-width: 480px)'}[sc] || '';
+            return `<div class="sw-target"><label>Appliquer à<select data-sw-to>${classes.map(c => `<option value="class:${esc(c)}"${to === `class:${c}` ? ' selected' : ''}>Tous les éléments .${esc(c)}</option>`).join('')}<option value="el"${to === 'el' ? ' selected' : ''}>Cet élément seulement</option></select></label>
+                <div class="segmented sw-seg" role="tablist" aria-label="État">${[['', 'Normal'], [':hover', 'Au survol']].map(([v, l]) => `<button type="button" data-sw-state="${v}" class="${st === v ? 'is-active' : ''}">${l}</button>`).join('')}</div>
+                <div class="segmented sw-seg" role="tablist" aria-label="Écran">${[['all', '🖥 Partout'], ['tablet', '💻 Tablette'], ['phone', '📱 Téléphone']].map(([v, l]) => `<button type="button" data-sw-screen="${v}" class="${sc === v ? 'is-active' : ''}" title="${v === 'all' ? 'Partout' : v === 'tablet' ? 'Écrans de 820 px ou moins' : 'Écrans de 480 px ou moins'}">${l}</button>`).join('')}</div>
+                <small class="sw-hint">Écrit dans : <code>${esc(t)}</code>${esc(media)}${t.startsWith('style') ? '' : ' — CSS du site'}</small></div>`;
+        }
         async panelAction(act, b) {
             const s = this.sel; if (!s) return;
             if (act === 'up') return this.move(-1); if (act === 'down') return this.move(1); if (act === 'dup') return this.duplicate(); if (act === 'del') return this.remove();
             if (act === 'code') return this.revealInCode(true);
             if (act === 'parent') { if (s.path.length > 1) this.post({type: 'select', path: s.path.slice(0, -1), report: true}); return; }
-            if (act === 'nobg') { const m = styleMap(s.style); m.delete('background-color'); m.delete('background'); return this.setAttrStyle(styleStr(m)); }
-            if (act === 'align') { const m = styleMap(s.style); m.set('text-align', b.dataset.v); this.setAttrStyle(styleStr(m)); return this.paintPanel(); }
+            if (act === 'nobg') { this.applyDecl('background-color', '', false); this.applyDecl('background', ''); return this.hist.commit(); }
+            if (act === 'align') { this.applyDecl('text-align', b.dataset.v); return this.paintPanel(); }
             if (act === 'link') return this.setAttr('href', b.dataset.v);
-            if (act === 'font') { const f = await UI()?.openFontPicker?.({value: (s.cs?.font || '').split(',')[0].replace(/["']/g, ''), sample: s.text?.slice(0, 30) || 'Mon site'}); if (!f) return; const m = styleMap(s.style); m.set('font-family', `'${String(f).replace(/[^\p{L}\p{N} \-.]/gu, '')}', sans-serif`); this.setAttrStyle(styleStr(m)); return this.post({type: 'info'}); }
+            if (act === 'font') { const f = await UI()?.openFontPicker?.({value: (s.cs?.font || '').split(',')[0].replace(/["']/g, ''), sample: s.text?.slice(0, 30) || 'Mon site'}); if (!f) return; this.applyDecl('font-family', `'${String(f).replace(/[^\p{L}\p{N} \-.]/gu, '')}', sans-serif`); return this.post({type: 'info'}); }
             if (act === 'image') { const l = await K().pickImages(false, 'Une autre image'); if (!l?.[0]) return; this.setAttr('src', K().mediaSrc(l[0])); if (!s.alt) this.setAttr('alt', l[0].title || ''); return; }
             if (act === 'block-person') { const p = await K().pickPerson('Quelle personne ?'); if (!p) return; this.setBlockAttr('person', String(p.id)); const w = {tree: 'Arbre', person: 'Fiche', timeline: 'Frise', map: 'Carte', photos: 'Photos'}[s.block]; if (w && p.name) this.setAttr('data-lc-name', `${w} de ${p.name}`); return; }
             if (act === 'dg-pick' || act === 'dg-new') {
@@ -677,7 +735,7 @@
         }
         codeChanged(v) {
             if (this.codeTab === 'html') { if (v.length > MAX_HTML) return; this.page().html = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => { this.checkSel(); this.pushHtml(); }, 220); }
-            else if (this.codeTab === 'css') { this.site.css = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => this.pushCss(), 120); }
+            else if (this.codeTab === 'css') { this.site.css = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => { this.pushCss(); if (this.sel) setTimeout(() => this.post({type: 'info'}), 80); }, 120); } // le panneau relit les valeurs
             else { this.site.js = v; if (this.mode === 'play') { clearTimeout(this.codeT); this.codeT = setTimeout(() => this.reload(), 900); } }
             this.changed();
         }
@@ -783,16 +841,16 @@
             const url = new URL('api.php', location.href); url.searchParams.set('action', 'website_preview'); url.searchParams.set('id', String(this.id)); url.searchParams.set('page', this.page().slug);
             window.open(url.href, '_blank', 'noopener'); // une page isolée (CSP sandbox) : elle ne voit ni l'app ni ta base
         }
-        async download(format) {
+        async download(format, filename = '') {
             const url = new URL('api.php', location.href); url.searchParams.set('action', 'website_export'); url.searchParams.set('id', String(this.id)); url.searchParams.set('format', format); if (format === 'html') url.searchParams.set('page', this.page().slug);
             const r = await fetch(url, {credentials: 'same-origin'});
             const type = r.headers.get('content-type') || '';
             if (!r.ok || !(format === 'zip' ? /zip/ : /html/).test(type)) { const j = await r.json().catch(() => ({})); throw new Error(j.error || 'Le site n’a pas pu être fabriqué.'); }
-            const name = (/filename="([^"]+)"/.exec(r.headers.get('content-disposition') || '') || [])[1] || (format === 'zip' ? 'site.zip' : 'page.html');
+            const name = filename || (/filename="([^"]+)"/.exec(r.headers.get('content-disposition') || '') || [])[1] || (format === 'zip' ? 'site.zip' : 'page.html');
             const blob = await r.blob(), a = document.createElement('a');
             a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
             setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
-            toast(format === 'zip' ? `Site prêt : ${name}. Décompresse-le et ouvre index.html ; pour le mettre en ligne, envoie tout le dossier chez ton hébergeur.` : `Page prête : ${name} (tout est dedans, à ouvrir d’un double-clic).`, 'success');
+            toast(format === 'zip' ? `Site prêt : ${name}. Décompresse-le et ouvre index.html (ou pose le dossier dans MAMP, WAMP, chez ton hébergeur) : le mode d’emploi est dans LISEZ-MOI.html.` : `Page prête : ${name} (tout est dedans, à ouvrir d’un double-clic).`, 'success');
         }
         async exportDialog() {
             if (!await this.ensureSaved()) return;
@@ -800,10 +858,11 @@
             const bits = [plural(s.pages || 0, 'page'), plural(s.images || 0, 'image') + ' réduite' + ((s.images || 0) > 1 ? 's' : '') + ' (sans GPS ni appareil)'];
             if (s.refused) bits.push(`⚠️ ${plural(s.refused, 'image')} pas mise${s.refused > 1 ? 's' : ''} (une personne vivante ou confidentielle dessus${s.refused_titles?.length ? ' : ' + s.refused_titles.join(', ') : ''})`);
             if (s.names) bits.push(`⚠️ ${plural(s.names, 'nom')} de personne vivante remplacé${s.names > 1 ? 's' : ''} par « [nom retiré] »`);
+            if (s.broken) bits.push(`⚠️ ${plural(s.broken, 'lien')} vers une page qui n’existe plus`);
             if (s.missing) bits.push(`${plural(s.missing, 'image')} introuvable${s.missing > 1 ? 's' : ''} dans tes médias`);
-            await UI().openExportDialog({title: 'Exporter le site', defaultName: `site-${this.name}`, quality: false, info: bits.join(' · ') + '. Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers.',
-                formats: [{id: 'zip', label: '🗜 Site complet', hint: 'index.html, pages, css, js, images', ext: 'zip', run: () => this.download('zip'), goLabel: '⤓ Exporter le site (.zip)'},
-                    {id: 'html', label: '🌐 Cette page seule', hint: 'un seul fichier .html', ext: 'html', run: () => this.download('html'), goLabel: '⤓ Exporter la page (.html)'}]});
+            await UI().openExportDialog({title: 'Exporter le site', defaultName: `${this.name}-${new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10)}`, quality: false, info: bits.join(' · ') + '. Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers.',
+                formats: [{id: 'zip', label: '📦 Tout le site en .zip', hint: 'à ouvrir partout : double-clic, MAMP, WAMP, hébergeur', ext: 'zip', run: o => this.download('zip', o?.filename), goLabel: '⤓ Exporter tout le site (.zip)'},
+                    {id: 'html', label: '🌐 Cette page seule', hint: 'un seul fichier .html', ext: 'html', run: o => this.download('html', o?.filename), goLabel: '⤓ Exporter la page (.html)'}]});
         }
         /** 📤 Publier en ligne : Netlify, GitHub Pages ou FTP sécurisé ; tout passe par le serveur, les jetons ne reviennent jamais ici */
         async publishDialog() {

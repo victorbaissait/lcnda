@@ -810,7 +810,7 @@ function website_page_body(PDO $pdo, array $site, int $idx, callable $img, strin
     $page = $site['pages'][$idx];
     $ctx = ['pages' => array_map(static fn($p) => ['slug' => $p['slug'], 'name' => $p['name']], $site['pages']), 'current' => $page['slug'],
         'frozen' => is_array($site['frozen'] ?? null) ? $site['frozen'] : [], 'asset' => $asset, 'live' => $live];
-    $html = website_fill_blocks($page['html'], static fn($a) => website_block_html($pdo, $a, $img, $ctx));
+    $html = website_fill_blocks(website_local_media($page['html']), static fn($a) => website_block_html($pdo, $a, $img, $ctx));
     // les images de la page et des styles écrits dans la page : media/… → l'adresse de l'export (ou rien si refusée)
     $refused = 0;
     // une image refusée (une personne cachée dessus) part en entier : la balise et son texte de remplacement
@@ -828,8 +828,19 @@ function website_page_body(PDO $pdo, array $site, int $idx, callable $img, strin
     return [$html, $names, $refused];
 }
 
+/** Une image de l'app écrite avec son adresse complète (http://127.0.0.1:8000/media/x.jpg, celle de l'aperçu) redevient « media/x.jpg » :
+ *  elle part alors dans images/ comme les autres, et le site exporté n'a aucune adresse de cet ordinateur. */
+function website_local_media(string $s): string
+{
+    $hosts = ['127\\.0\\.0\\.1', 'localhost', '\\[::1\\]'];
+    $h = strtolower((string) preg_replace('/:\\d+$/', '', (string) ($_SERVER['HTTP_HOST'] ?? '')));
+    if ($h !== '' && preg_match('/^[a-z0-9.\\-]+$/', $h)) { $hosts[] = preg_quote($h, '#'); }
+    return (string) preg_replace('#(["\'(]\\s*)https?://(?:' . implode('|', $hosts) . ')(?::\\d+)?/(?:[^"\'()\\s<>]*/)?media/#i', '$1media/', $s);
+}
+
 function website_css_with_media(PDO $pdo, string $css, callable $img, int &$refused): string
 {
+    $css = website_local_media($css);
     return (string) preg_replace_callback('#url\(\s*(["\']?)media/([^"\')]+)\1\s*\)#i', static function ($m) use ($img, &$refused) { $u = $img(rawurldecode($m[2])); if ($u === '') { $refused++; return 'none'; } return 'url("' . $u . '")'; }, $css);
 }
 
@@ -905,6 +916,56 @@ function website_load(PDO $pdo, int $id): array
     return [$r, $clean];
 }
 
+/** 📦 Le mode d'emploi rangé dans le .zip (texte et page) : double-clic, MAMP, WAMP / XAMPP, autre serveur, hébergeur. */
+function website_readme(array $site, array $files, bool $live): array
+{
+    $title = trim((string) ($site['settings']['title'] ?? '')) ?: 'Mon site';
+    $pages = array_values(array_filter(array_keys($files), static fn($f) => str_ends_with($f, '.html')));
+    $fonts = (bool) array_filter([$site['theme']['font'] ?? '', $site['theme']['headFont'] ?? ''], static fn($f) => $f !== '' && !preg_match('/^(Georgia|Verdana|Arial|Helvetica|Times|Trebuchet|Tahoma|Courier|system-ui|serif|sans-serif)/i', (string) $f));
+    $parts = [
+        ['Ce qu’il y a dans ce dossier', [
+            count($pages) . ' page' . (count($pages) > 1 ? 's' : '') . ' (index.html est l’accueil), le dossier css/ (les styles), js/ (les scripts), images/ (les photos, réduites et sans données GPS).',
+            'Tout est rangé avec des adresses relatives : le dossier marche tel quel, où que tu le poses, même dans un sous-dossier (par exemple http://localhost/mon-site/).',
+            'Il n’y a besoin ni de PHP ni de base de données : ce sont des pages simples, lisibles par n’importe quel navigateur et n’importe quel hébergeur.',
+            'Les personnes vivantes et les fiches confidentielles n’y figurent pas.',
+        ]],
+        ['1. Sans rien installer (double-clic)', [
+            'Décompresse le .zip, puis ouvre index.html d’un double-clic : le site s’ouvre dans ton navigateur, avec ses pages, ses photos et ses scripts.',
+            $live ? 'La carte interactive se déplace et zoome ; son fond (les tuiles) vient d’Internet : sans connexion, c’est l’image de la carte rangée dans images/ qui s’affiche.' : '',
+            $fonts ? 'Les polices choisies viennent de Google Fonts : sans connexion, le navigateur prend une police proche.' : '',
+        ]],
+        ['2. Avec MAMP (Mac)', [
+            'Ouvre MAMP et clique sur « Start ».',
+            'Copie le dossier du site dans /Applications/MAMP/htdocs/ (par exemple /Applications/MAMP/htdocs/mon-site/).',
+            'Ouvre http://localhost:8888/mon-site/ dans ton navigateur (8888 est le port de MAMP ; avec MAMP PRO, souvent http://localhost/mon-site/).',
+        ]],
+        ['3. Avec WAMP ou XAMPP (Windows)', [
+            'WAMP : lance WampServer (l’icône devient verte), copie le dossier dans C:\\wamp64\\www\\mon-site\\, puis ouvre http://localhost/mon-site/.',
+            'XAMPP : démarre « Apache » dans le panneau XAMPP, copie le dossier dans C:\\xampp\\htdocs\\mon-site\\, puis ouvre http://localhost/mon-site/.',
+        ]],
+        ['4. Avec un autre petit serveur', [
+            'Dans le dossier du site : « php -S localhost:8000 » ou « python3 -m http.server 8000 », puis ouvre http://localhost:8000/.',
+        ]],
+        ['5. Le mettre en ligne', [
+            'Envoie TOUT le contenu du dossier (index.html, les autres pages .html, css/, js/, images/) chez ton hébergeur (OVH, o2switch, Infomaniak…) avec son outil d’envoi ou un logiciel FTP comme FileZilla, dans le dossier « www » ou « public_html ».',
+            'Tu peux aussi le publier depuis LCNDA : Mon site web → 📤 Publier (Netlify, GitHub Pages ou FTP sécurisé).',
+        ]],
+    ];
+    $date = date('d/m/Y');
+    $txt = "« {$title} » — site fait avec LCNDA ({$date})\r\n";
+    $htm = '';
+    foreach ($parts as [$h, $lines]) {
+        $lines = array_values(array_filter($lines));
+        $txt .= "\r\n" . mb_strtoupper($h) . "\r\n" . implode('', array_map(static fn($l) => "  - {$l}\r\n", $lines));
+        $htm .= '<h2>' . htmlspecialchars($h) . "</h2>\n<ul>" . implode('', array_map(static fn($l) => '<li>' . htmlspecialchars($l) . '</li>', $lines)) . "</ul>\n";
+    }
+    $htm = "<!doctype html>\n<html lang=\"fr\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+        . "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'\">\n<title>Lisez-moi — " . htmlspecialchars($title) . "</title>\n"
+        . "<style>body{font:17px/1.6 system-ui,sans-serif;max-width:760px;margin:32px auto;padding:0 16px;color:#222;background:#fff}h1{font-size:1.6em}h2{font-size:1.15em;margin-top:1.6em}li{margin:.3em 0}code{background:#f2f2f2;padding:0 .3em}@media (prefers-color-scheme:dark){body{background:#1b1b1b;color:#eee}code{background:#333}}</style>\n</head>\n<body>\n"
+        . '<h1>« ' . htmlspecialchars($title) . " » — comment l’ouvrir</h1>\n<p>Site fait avec LCNDA le {$date}. <a href=\"index.html\">→ Ouvrir le site</a></p>\n" . $htm . "</body>\n</html>\n";
+    return [$txt, $htm];
+}
+
 /** Tout le site : fichiers à mettre dans le .zip (chemin → octets) et le résumé ; rien n'est écrit sur le disque. */
 function website_build(PDO $pdo, array $site, string $mode = 'export'): array
 {
@@ -951,14 +1012,16 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
         $name = $i === 0 ? 'index.html' : $site['pages'][$i]['slug'] . '.html';
         $files[$name] = $mode === 'inline' ? website_document($site, $i, $body, $cssRed, $js, 'preview', isset($livePages[$i])) : website_document($site, $i, $body, null, null, 'export', isset($livePages[$i]));
     }
+    // les liens vers une page qui n'existe plus (supprimée) : comptés pour le dire avant l'export
+    $sum['broken'] = 0;
+    foreach ($site['pages'] as $p) { if (preg_match_all('#\shref\s*=\s*["\']([a-z0-9\-]+\.html)(?:\#[^"\']*)?["\']#i', (string) $p['html'], $mm)) { foreach ($mm[1] as $f) { if (!isset($files[strtolower($f)])) { $sum['broken']++; } } } }
     if ($livePages && $mode !== 'inline') { $files['js/carte-lcnda.js'] = website_live_map_js(); } // la carte interactive : notre petit script, pas de bibliothèque
     if ($mode !== 'inline') {
         $files['css/style.css'] = $cssRed;
         if (trim($js) !== '') { $files['js/script.js'] = $js; }
-        $files['LISEZ-MOI.txt'] = "« " . ($site['settings']['title'] ?: 'Mon site') . " » — site fait avec LCNDA (" . date('d/m/Y') . ")\r\n\r\n"
-            . "Pour le voir : décompresse le dossier, puis ouvre index.html (double-clic).\r\n"
-            . "Pour le mettre en ligne : envoie TOUT le contenu du dossier (index.html, les autres pages .html, css/, js/, images/) chez ton hébergeur (OVH, o2switch, Netlify, GitHub Pages…).\r\n\r\n"
-            . "Les personnes vivantes et les fiches confidentielles n’y figurent pas ; les photos ont été réduites et nettoyées (sans données GPS ni appareil).\r\n";
+        [$txt, $htm] = website_readme($site, $files, (bool) $livePages);
+        $files['LISEZ-MOI.txt'] = $txt;
+        $files['LISEZ-MOI.html'] = $htm;
     }
     return ['files' => $files, 'summary' => $sum];
 }
@@ -979,7 +1042,7 @@ function website_render(PDO $pdo, array $q): array
         $a = array_map(static fn($v) => is_scalar($v) ? mb_substr((string) $v, 0, 200) : '', $a);
         $out[] = website_block_html($pdo, $a, $img, $ctx);
     }
-    return ['html' => $out, 'css' => website_blocks_css(), 'live' => array_keys(SITE_MAP_LIVE)];
+    return ['html' => $out, 'css' => website_blocks_css(), 'live' => SITE_MAP_LIVE]; // les fonds des cartes interactives : [modèle de tuile, mention, zoom maxi]
 }
 
 /** GET website_preview / website_export / website_export_check */
@@ -1028,7 +1091,7 @@ function website_dispatch(PDO $pdo, string $action, array $q): never
         if ($zip->open($tmp, ZipArchive::OVERWRITE) !== true) { throw new RuntimeException('Impossible de préparer le fichier.'); }
         foreach ($b['files'] as $path => $bytes) { $zip->addFromString($path, $bytes); }
         $zip->close();
-        $name = 'site-' . website_slug($row['name']) . '-' . date('Ymd') . '.zip';
+        $name = website_slug($row['name']) . '-' . date('Y-m-d') . '.zip'; // nom-du-site-AAAA-MM-JJ.zip
         header('Content-Type: application/zip');
         header('Content-Disposition: attachment; filename="' . $name . '"');
         header('Content-Length: ' . filesize($tmp));

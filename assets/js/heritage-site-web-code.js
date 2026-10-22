@@ -134,7 +134,7 @@
         while (i < n) {
             if (code.startsWith('<!--', i)) { const j = code.indexOf('-->', i + 4); const e = j < 0 ? n : j + 3; out += span('com', code.slice(i, e)); i = e; continue; }
             if (code[i] === '<' && /[a-zA-Z/!]/.test(code[i + 1] || '')) {
-                const m = /^<\/?[a-zA-Z!][\w:-]*/.exec(code.slice(i, i + 80)); out += span('tag', m[0]); i += m[0].length;
+                const m = /^<\/?[a-zA-Z!][\w:-]*/.exec(code.slice(i, i + 80)); if (!m) { out += esc(code[i]); i++; continue; } out += span('tag', m[0]); i += m[0].length;
                 while (i < n && code[i] !== '>') {
                     if (code[i] === '"' || code[i] === "'") { const q = code[i]; const j = code.indexOf(q, i + 1); const e = j < 0 ? n : j + 1; out += span('str', code.slice(i, e)); i = e; continue; }
                     const a = /^[^\s=>"'/]+/.exec(code.slice(i, i + 200));
@@ -236,6 +236,68 @@
         return s.slice(j);
     }
 
+    /* ═════ Les règles de la feuille de styles (le panneau « Ceci est… » écrit de vraies règles) ═════ */
+    const normSel = x => String(x || '').replace(/\s+/g, ' ').replace(/\s*([>+~,])\s*/g, '$1').trim();
+    const normMedia = x => String(x || '').replace(/\s+/g, ' ').replace(/\(\s+/g, '(').replace(/\s+\)/g, ')').replace(/\s*:\s*/g, ': ').trim().toLowerCase();
+    /** les règles d'une feuille : [{sel, media, start, open, close}] et les blocs @media : [{query, start, open, close}] (commentaires et textes sautés) */
+    function cssScan(text) {
+        const rules = [], medias = [], n = text.length;
+        const skip = i => { // saute un commentaire ou un texte entre guillemets ; rend la position suivante (ou i)
+            if (text[i] === '/' && text[i + 1] === '*') { const j = text.indexOf('*/', i + 2); return j < 0 ? n : j + 2; }
+            if (text[i] === '"' || text[i] === "'") { const q = text[i]; let j = i + 1; while (j < n && text[j] !== q) { if (text[j] === '\\') j++; j++; } return j + 1; }
+            return i;
+        };
+        const match = i => { let d = 0; while (i < n) { const k = skip(i); if (k !== i) { i = k; continue; } if (text[i] === '{') d++; else if (text[i] === '}') { d--; if (!d) return i; } i++; } return n - 1; };
+        const block = (i, end, media) => {
+            while (i < end) {
+                let k = skip(i); if (k !== i) { i = k; continue; }
+                if (/\s/.test(text[i]) || text[i] === '}' || text[i] === ';') { i++; continue; }
+                const start = i; let j = i;
+                while (j < end && text[j] !== '{' && text[j] !== ';' && text[j] !== '}') { const s2 = skip(j); j = s2 !== j ? s2 : j + 1; }
+                if (j >= end || text[j] !== '{') { i = j + 1; continue; }
+                const prelude = text.slice(start, j).replace(/\/\*[\s\S]*?\*\//g, '').trim(), close = match(j);
+                if (/^@media\b/i.test(prelude)) { const query = normMedia(prelude.slice(6)); medias.push({query, start, open: j, close}); block(j + 1, close, query); }
+                else if (!prelude.startsWith('@')) rules.push({sel: normSel(prelude), media, start, open: j, close});
+                i = close + 1;
+            }
+        };
+        block(0, n, null);
+        return {rules, medias};
+    }
+    const declsOf = body => { const m = new Map(); let depth = 0, cur = '', q = ''; const flush = () => { const i = cur.indexOf(':'); if (i > 0) { const k = cur.slice(0, i).trim().toLowerCase(), v = cur.slice(i + 1).trim(); if (k && v) { m.delete(k); m.set(k, v); } } cur = ''; };
+        for (const ch of body.replace(/\/\*[\s\S]*?\*\//g, '')) { if (q) { if (ch === q) q = ''; cur += ch; continue; } if (ch === '"' || ch === "'") { q = ch; cur += ch; continue; } if (ch === '(') depth++; if (ch === ')') depth--; if (ch === ';' && depth <= 0) { flush(); continue; } cur += ch; } flush(); return m; };
+    /** les déclarations d'une règle ({sel, media}) → Map, vide si la règle n'existe pas */
+    function cssGetDecls(text, {sel, media = null}) {
+        const {rules} = cssScan(String(text || '')), want = normSel(sel), wm = media ? normMedia(media) : null;
+        const r = rules.filter(x => x.sel === want && x.media === wm).pop();
+        return r ? declsOf(text.slice(r.open + 1, r.close)) : new Map();
+    }
+    /** pose (ou retire, valeur vide) une propriété dans la règle {sel, media} : la règle est retrouvée (pas de doublon), créée sinon,
+     *  à sa place (une règle sans écran avant le premier @media qui touche le même sélecteur, sinon à la fin ; une règle d'écran
+     *  dans le bloc @media qui existe déjà) ; une règle qui n'a plus rien est retirée. → le nouveau texte */
+    function cssSetDecl(text, {sel, media = null, prop, value = ''}) {
+        text = String(text || ''); const {rules, medias} = cssScan(text), want = normSel(sel), wm = media ? normMedia(media) : null;
+        prop = String(prop || '').trim().toLowerCase(); value = String(value ?? '').trim();
+        if (!/^[a-z-]{1,40}$/.test(prop) || /[;{}<>]/.test(value) || /[{};<>]/.test(want) || !want) return text;
+        const pad = wm ? '    ' : '  ', close = wm ? '  }' : '}';
+        const r = rules.filter(x => x.sel === want && x.media === wm).pop();
+        if (r) {
+            const d = declsOf(text.slice(r.open + 1, r.close)); if (value) d.set(prop, value); else d.delete(prop); // une propriété déjà là garde sa place
+            if (!d.size) { let a = r.start, b = r.close + 1; while (a > 0 && text[a - 1] === ' ') a--; if (text[b] === '\n') b++; return (text.slice(0, a) + text.slice(b)).replace(/\n{3,}/g, '\n\n'); }
+            return `${text.slice(0, r.open + 1)}\n${[...d].map(([k, v]) => `${pad}${k}: ${v};`).join('\n')}\n${close}${text.slice(r.close + 1)}`;
+        }
+        if (!value) return text;
+        const rule = `${wm ? '  ' : ''}${want} {\n${pad}${prop}: ${value};\n${close}\n`;
+        if (wm) {
+            const mb = medias.filter(x => x.query === wm).pop();
+            if (mb) { let at = mb.close; while (at > mb.open && /\s/.test(text[at - 1])) at--; return `${text.slice(0, at)}\n${rule.replace(/\n$/, '')}\n${text.slice(at).replace(/^\s*/, '')}`; }
+            return `${text.replace(/\s*$/, '')}\n\n@media ${media.trim()} {\n${rule}}\n`;
+        }
+        const firstMedia = rules.find(x => x.media && x.sel === want);
+        if (firstMedia) { const mb = medias.find(x => x.open < firstMedia.open && x.close > firstMedia.close); if (mb) return `${text.slice(0, mb.start)}${rule}\n${text.slice(mb.start)}`; }
+        return `${text.replace(/\s*$/, '')}\n\n${rule}`;
+    }
+
     /* ═════ L'éditeur ═════ */
     function create(host, {lang = 'html', value = '', onChange = () => {}, onCursor = () => {}, label = 'Code'} = {}) {
         const el = document.createElement('div'); el.className = 'swc'; el.dataset.lang = lang;
@@ -295,6 +357,8 @@
             if (e.inputType === 'insertText' && e.data === '>' && lang === 'html') {
                 const m = /<([a-zA-Z][\w-]*)(\s[^<>]*)?>$/.exec(ta.value.slice(0, s));
                 if (m && !VOID.has(m[1].toLowerCase()) && !/\/>$/.test(m[0]) && !ta.value.slice(s, s + m[1].length + 3).startsWith(`</${m[1]}`)) { ta.setRangeText(`</${m[1]}>`, s, s, 'start'); ta.setSelectionRange(s, s); change(); }
+                const c = /<\/([a-zA-Z][\w-]*)>$/.exec(ta.value.slice(0, s)); // une fermeture tapée à la main devant celle posée toute seule : on « passe dessus » (pas de doublon)
+                if (c && ta.value.startsWith(`</${c[1]}>`, s)) { ta.setRangeText('', s, s + c[0].length, 'start'); change(); }
             }
             if (e.inputType === 'insertText' && /[\w<-]/.test(e.data || '')) showPop(completions(ta.value, ta.selectionStart, lang)); else closePop();
         });
@@ -323,7 +387,7 @@
         };
     }
 
-    const API = {expandAbbr, expandCss, highlight, completions, abbrBefore, create, TAGS, VOID, CSS_PROPS, ATTRS};
+    const API = {expandAbbr, expandCss, highlight, completions, abbrBefore, create, cssScan, cssGetDecls, cssSetDecl, TAGS, VOID, CSS_PROPS, ATTRS};
     if (typeof module === 'object' && module.exports) module.exports = API;
     else { root.LCNDA_EXT = root.LCNDA_EXT || {}; root.LCNDA_EXT.siteCode = API; }
 })(typeof window !== 'undefined' ? window : globalThis);

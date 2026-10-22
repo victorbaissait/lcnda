@@ -10,6 +10,7 @@
     function y2lat(y, z) { var n = Math.PI - 2 * Math.PI * y / (T * Math.pow(2, z)); return 180 / Math.PI * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n))); }
     function el(tag, cls, css) { var e = document.createElement(tag); if (cls) e.className = cls; if (css) e.style.cssText = css; return e; }
     function start(box) {
+        if (box.getAttribute('data-lcv-on')) return; box.setAttribute('data-lcv-on', '1');
         var c; try { c = JSON.parse(box.getAttribute('data-carte') || '{}'); } catch (e) { return; }
         if (!/^https:\/\/[^\s"'<>]+\{z\}[^\s"'<>]*\{x\}[^\s"'<>]*\{y\}/.test(c.tiles || '') || !c.view) return;
         var max = Math.min(19, Math.max(2, c.max | 0)), z = Math.max(2, Math.min(max, c.view.z | 0)), lat = +c.view.lat || 0, lng = +c.view.lng || 0;
@@ -53,6 +54,7 @@
         draw();
         if (window.ResizeObserver) new ResizeObserver(draw).observe(box);
     }
+    window.LCNDA_CARTE_VIVE = function () { all(); }; // l'aperçu de LCNDA la relance quand la page change
     function all() { var l = document.querySelectorAll('.lc-carte-vive[data-carte]'); for (var i = 0; i < l.length; i++) start(l[i]); }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', all); else all();
 })();

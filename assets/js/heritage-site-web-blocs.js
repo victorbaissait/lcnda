@@ -207,6 +207,7 @@ document.addEventListener('mousemove',function(e){if(mode==='play'){box(bh,null)
 document.addEventListener('mouseleave',function(){hov=null;box(bh,null);});
 document.addEventListener('click',function(e){
  if(skipClick){skipClick=false;e.preventDefault();e.stopPropagation();return;}
+ if(e.target.closest&&e.target.closest('.lc-carte-vive button'))return; // ＋ − de la carte interactive : ils marchent aussi ici
  var a=e.target.closest&&e.target.closest('a[href]');
  if(mode==='play'){if(!a)return;var h=a.getAttribute('href')||'';var m=/^([a-z0-9-]+)\.html(#.*)?$/i.exec(h);if(m){e.preventDefault();send({type:'goto',slug:m[1]});return;}if(h.charAt(0)==='#')return;e.preventDefault();send({type:'external',href:h.slice(0,300)});return;}
  if(edit&&edit.contains(e.target))return;
@@ -221,7 +222,7 @@ var BOXY='section,div,main,nav,header,footer,article,aside,ul,ol,figure,blockquo
 function moveTarget(e){var p=document.elementFromPoint(e.clientX,e.clientY);if(!p||ov.contains(p))return null;var t=root(p);if(!t||!mv||t===mv.el||mv.el.contains(t))return null;var r=t.getBoundingClientRect();
  var inside=t.matches(BOXY)&&!t.matches('[data-lc-block]')&&e.clientY>r.top+r.height*.28&&e.clientY<r.bottom-r.height*.28&&r.height>24;
  return{el:t,r:r,where:inside?'inside':(e.clientY<r.top+r.height/2?'before':'after')};}
-document.addEventListener('mousedown',function(e){if(mode!=='select'||e.button!==0||edit)return;var el=root(e.target);if(!el)return;mv={el:el,x:e.clientX,y:e.clientY,on:false,t:null};},true);
+document.addEventListener('mousedown',function(e){if(mode!=='select'||e.button!==0||edit)return;if(e.target.closest&&e.target.closest('.lc-carte-vive'))return;var el=root(e.target);if(!el)return;mv={el:el,x:e.clientX,y:e.clientY,on:false,t:null};},true);
 document.addEventListener('mousemove',function(e){if(!mv)return;if(!mv.on){if(Math.abs(e.clientX-mv.x)+Math.abs(e.clientY-mv.y)<7)return;mv.on=true;H.classList.add('lcb-moving');select(mv.el,false);}
  e.preventDefault();var t=moveTarget(e);mv.t=t;if(!t){bd.style.display='none';return;}bd.style.display='block';bd.classList.toggle('is-in',t.where==='inside');bd.style.left=(t.r.left+scrollX)+'px';bd.style.width=t.r.width+'px';
  if(t.where==='inside'){bd.style.top=(t.r.top+scrollY)+'px';bd.style.height=t.r.height+'px';}else{bd.style.height='';bd.style.top=((t.where==='before'?t.r.top:t.r.bottom)+scrollY-2)+'px';}},true);
@@ -238,7 +239,7 @@ document.addEventListener('dragover',function(e){if(mode==='play')return;e.preve
 document.addEventListener('dragleave',function(e){if(e.target===H||e.target===B)bd.style.display='none';},true);
 document.addEventListener('drop',function(e){if(mode==='play')return;e.preventDefault();bd.style.display='none';var t=dropAt||dropTarget(e);send({type:'drop',path:t?path(t.el):null,where:t?t.where:'after'});},true);
 addEventListener('message',function(e){if(e.source!==parent)return;var m=e.data||{};
- if(m.type==='set'){stopEdit();var y=scrollY;B.innerHTML=m.html;scrollTo(0,y);sel=m.sel?byPath(m.sel):null;select(sel,false);if(m.mode)mode=m.mode;}
+ if(m.type==='set'){stopEdit();var y=scrollY;B.innerHTML=m.html;scrollTo(0,y);sel=m.sel?byPath(m.sel):null;select(sel,false);if(m.mode)mode=m.mode;if(window.LCNDA_CARTE_VIVE)window.LCNDA_CARTE_VIVE();}
  else if(m.type==='css'){var s=document.getElementById('lcb-user');if(s)s.textContent=m.css;var t=document.getElementById('lcb-theme');if(t&&typeof m.theme==='string')t.textContent=m.theme;setTimeout(function(){select(sel,false);},30);}
  else if(m.type==='mode'){mode=m.mode;stopEdit();H.classList.toggle('lcb-text',mode==='text');H.classList.toggle('lcb-play',mode==='play');box(bh,null);}
  else if(m.type==='select'){var el=m.path?byPath(m.path):null;select(el,true);if(el&&m.report)send({type:'select',info:info(el)});}

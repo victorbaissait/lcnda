@@ -139,6 +139,12 @@ dialog.modal.sw-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
     .sw-bar [data-sw-cmd="browser"] { display: none; }
     .sw-stage { padding: 8px; }
 }
+/* « Appliquer à » : l'élément ou sa classe, l'état, la taille d'écran */
+.sw-target { padding: 8px 12px 10px; border-bottom: 1px solid var(--sw-line); display: grid; gap: 6px; }
+.sw-target label { font-size: 12px; display: grid; gap: 3px; }
+.sw-seg { display: flex; }
+.sw-seg button { flex: 1 1 0; min-width: 0; font-size: 11.5px; padding-left: 4px; padding-right: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sw-target code { font: 600 11.5px/1.3 ui-monospace, Menlo, monospace; color: var(--sw-blue); }
 /* 📤 Publier en ligne */
 .sw-pubtabs { display: flex; flex-wrap: wrap; margin: 10px 0; }
 [data-pub-pane][hidden] { display: none !important; }

@@ -61,6 +61,18 @@ const hasPy = spawnSync('python3', ['-c', 'import zipfile'], { encoding: 'utf8' 
     const hl = C.highlight('<div onclick="x()"><script>alert(1)</script></div>', 'html') + C.highlight('a{color:red}</style><script>', 'css') + C.highlight('"<img src=x onerror=alert(1)>"', 'js');
     ok(!/<(script|img|div)\b/i.test(hl.replace(/<\/?span[^>]*>/g, '')), 'coloration : tout est échappé');
     eq(C.abbrBefore('  <p class="x">ul>li*2'), 'ul>li*2', 'Emmet : l’abréviation après une balise');
+    // les styles du panneau écrits dans le CSS du site (une règle par sélecteur, sans doublon ; @media réutilisé)
+    let css = '.carte { color: red; }\n@media (max-width: 640px) {\n  .bandeau { padding: 4px; }\n}\n';
+    css = C.cssSetDecl(css, { sel: '.carte', prop: 'padding', value: '8px' }); css = C.cssSetDecl(css, { sel: '.carte', prop: 'color', value: 'blue' });
+    eq((css.match(/\.carte \{/g) || []).length, 1, 'CSS : la règle .carte mise à jour, pas de doublon');
+    eq([...C.cssGetDecls(css, { sel: '.carte' })], [['color', 'blue'], ['padding', '8px']], 'CSS : l’ordre des propriétés gardé');
+    css = C.cssSetDecl(css, { sel: '.carte:hover', prop: 'color', value: '#f00' }); css = C.cssSetDecl(css, { sel: '.carte', media: '(max-width:640px)', prop: 'padding', value: '2px' });
+    eq((css.match(/@media/g) || []).length, 1, 'CSS : @media déjà là, réutilisé');
+    eq(C.cssGetDecls(css, { sel: '.carte', media: '(max-width: 640px)' }).get('padding'), '2px', 'CSS : la règle d’écran lue');
+    eq(C.cssGetDecls(css, { sel: '.carte:hover' }).get('color'), '#f00', 'CSS : la règle :hover');
+    ok(!/\.carte:hover/.test(C.cssSetDecl(css, { sel: '.carte:hover', prop: 'color', value: '' })), 'CSS : une règle vidée est retirée');
+    eq(C.cssSetDecl(css, { sel: '.carte', prop: 'color', value: 'red; } body { x: y' }), css, 'CSS : une valeur qui casserait la feuille est refusée');
+    ok(!/<span class="swc-tag">undefined/.test(C.highlight('a </ b <// c </>', 'html')) && C.highlight('a </ b', 'html').includes('&lt;/ b'), 'coloration : « </ » tapé à moitié ne casse rien');
 
     eq(DW.cleanOptions('countdown', { onTop: 'yes', label: 'Cousinade\u0000 <b>', date: '2027-07-14', extra: 1 }), { onTop: false, label: 'Cousinade  <b>', date: '2027-07-14' }, 'widget : options nettoyées (onTop seulement si true)');
     eq(DW.cleanOptions('countdown', { date: '2027-02-30' }).date, '', 'widget : date impossible refusée');
@@ -221,7 +233,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         const zipFile = path.join(dir, 'site.zip'); fs.writeFileSync(zipFile, Buffer.from(await zipRes.arrayBuffer()));
         if (hasPy) {
             const z = JSON.parse(spawnSync('python3', ['-I', '-c', 'import zipfile,sys,json\nz=zipfile.ZipFile(sys.argv[1])\nassert z.testzip() is None\nprint(json.dumps({n:z.read(n).decode("utf-8","replace") if n.endswith((".html",".css",".js",".txt")) else len(z.read(n)) for n in z.namelist()}))', zipFile], { encoding: 'utf8' }).stdout);
-            eq(Object.keys(z).sort(), ['LISEZ-MOI.txt', 'css/style.css', 'images/m1.jpg', 'index.html', 'js/script.js', 'nous-ecrire.html'], 'le .zip : pages, css, js, images');
+            eq(Object.keys(z).sort(), ['LISEZ-MOI.html', 'LISEZ-MOI.txt', 'css/style.css', 'images/m1.jpg', 'index.html', 'js/script.js', 'nous-ecrire.html'], 'le .zip : pages, css, js, images');
             const ix = z['index.html'];
             ok(/<meta http-equiv="Content-Security-Policy" content="default-src 'self';[^"]*script-src 'self'/.test(ix) && /<script src="js\/script\.js" defer><\/script>/.test(ix), 'index.html : CSP et script en fichier');
             ok(!/Lucie/.test(ix) && /\[nom retiré\]/.test(ix), 'le nom de la vivante écrit à la main est remplacé');
@@ -437,7 +449,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         await page.click('.ui-topbar [data-sw-cmd="export"]'); await page.waitForSelector('dialog.ui-export[open]');
         if (SHOTS) await page.screenshot({ path: path.join(SHOTS, 'site-export.png') });
         const [dl] = await Promise.all([page.waitForEvent('download'), page.click('dialog.ui-export[open] [data-ui-go]')]);
-        ok(/^site-.*\.zip$/.test(dl.suggestedFilename()), 'export : le .zip se télécharge');
+        ok(/-\d{4}-\d{2}-\d{2}\.zip$/.test(dl.suggestedFilename()), 'export : le .zip se télécharge');
         await page.waitForTimeout(300);
         // sombre, 390 px
         await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); await page.waitForTimeout(200);
