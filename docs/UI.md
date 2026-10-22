@@ -841,6 +841,16 @@ Quatre jeux de plus dans la page **Jeu**, choisis dans « Jeu ▾ » comme le je
 - Branchement dans `app-jeu.js` : `FAM_KEYS`, `fam()`, `famCtx()`, `variantOn()` (un seul filtre des jeux présents pour « Jeu ▾ »).
 - Test : `tests/test-jeux-famille.js` (logique dans Node + une partie de chaque dans le navigateur, aucun POST des jeux, 390 px, sombre).
 
+## 🏠 Maison : vides, mezzanines, garde-corps et trémies d'escalier (heritage-house-vides.js)
+
+Une seule géométrie, `assets/js/heritage-house-vides.js` → `LCNDA_EXT.houseVoids` (aussi `require()` dans Node), pour le plan 2D, la 3D et la visite :
+- **Vide** : une pièce avec `void: true` (outil ▨ « Vide », touche O, ou « Pas de plancher : vide sur l'étage du dessous » dans Propriétés). Plan : hachures « VIDE » + « vide sur séjour » ; l'étage du dessous montre « double hauteur » en pointillés. 3D : `holesOf(H, f)` perce le sol (et le plafond de l'étage du dessous) avec des trous rognés à chaque pièce (`holesForRoom`).
+- **Garde-corps** : `railsOf(H, f)` le long des bords d'un vide qui ne touchent pas un mur (`alongWall`), coupé à l'arrivée d'un escalier (`arrivalGap`), et sur 3 côtés d'une trémie ; `rail` = bois, metal, verre, muret, none ; `railH` (cm, 100). Aussi l'objet « Garde-corps, rampe » à poser à la main.
+- **Escaliers** : `isStair`/`stairShape` ; `open: true` (posé d'office sur un nouvel escalier, « Ouvrir les trémies de tous les escaliers » pour les anciens) perce le plancher du dessus ; le haut de l'escalier = le côté −d/2 de l'objet (la flèche) ; hauteur `stairH` = étage + `H.slab` sauf `hFix` ; `blondel()` (marches, hauteur, giron, 2h+g) ; `turn: 'r'` pour le quart tournant à droite.
+- **Visite** : `blockersOf(H, f)` arrête la marche au bord des vides (même sans garde-corps) ; en montant on arrive à `stairTop(it, 35)`.
+- **🏗 Mezzanine ouverte** (Propriétés d'une pièce) : étage du dessus (créé avec les murs de la pièce s'il manque), mezzanine ~45 %, vide sur le reste, garde-corps, escalier droit qui arrive au bord.
+- Test : `tests/test-maison-vides.js`.
+
 ## 📊 Diagrammes D23–D38 et le menu « Graphique » (heritage-diagram-vie.js, lib/diagram_vie.php, heritage-diagram-options.js, lib/diagram_appcount.php)
 
 - **Les 12 sortes** (`ext.diagramVie.KINDS`) s'ajoutent au catalogue commun `ext.diagramRender.KINDS` : `vieenfants`, `viefratries`, `viesaisons` (Vie et mort) ; `vieveuvage`, `viedurees`, `vieparents`, `vieavant`, `vieecart` (Couples et familles) ; `vieberceau` (Lieux) ; `viesigner`, `viepreuves`, `vieregistres` (Ma recherche). Dessins faits avec les formes communes (colonnes, barres couchées, pyramide, nuage de points, grille) ; données modifiables (onglet Données), exemple dans la galerie. D24, D32, D33, D38 existaient déjà : `crises`, `surnametree`, `chord`, `network`.
@@ -853,3 +863,24 @@ Quatre jeux de plus dans la page **Jeu**, choisis dans « Jeu ▾ » comme le je
   - La phrase (`O.summary(q, {…, found})`) relit les critères en clair (`O.ruleText`) et dit « N personnes trouvées » (réponse `people` du serveur, relue 0,45 s après chaque changement). Le réglage en cours est gardé quand on change d'onglet.
   - `O.toSpec` reporte `ids` (une série) ou `ids0`, `ids1`… (plusieurs séries) : colonnes, barres, courbes et camemberts les rendent cliquables (`pidAttr`, heritage-diagrams-render.js).
 - Test : `tests/test-diagrammes-d23-d38.js` (fixture `tests/fixtures/diagram-vie-seed.php` : bûcheron + 3 enfants + né à Pernay = 2 personnes).
+
+## 🏠 Maison : les outils en plus M1 à M14 (heritage-house-plus.js)
+
+`assets/js/heritage-house-plus.js` → `ext.housePlus` (aussi `require()` dans Node, comme `heritage-house-vides.js`). Les calculs sont des fonctions pures ; l'éditeur (`heritage-house.js`) lui passe un `ctx` (`plusCtx()` : `H`, `name`, `houseId`, `commit`, `quiet`, `paint`, `render`, `status`, `view3d()`, `toggle3d`, `planSvg`, `pickTwo` = `twoClicks`, `goto`, `refreshSite`). Boutons : `data-hs-cmd="plus:…"` → `ext.housePlus.cmd(nom, ctx)` ; une commande de l'éditeur peut aussi prendre un argument (`data-hs-cmd="roofit:velux"`, `roofitdel:2`).
+
+- **Données ajoutées** (toutes facultatives ; une maison ancienne s'ouvre comme avant) : `H.roof.gutter`, `H.roof.wings`, `H.roof.items[{id, type: velux|dormer|shed, side: a|b, pos, at, w, h, wing}]` ; `f.attic`, `f.knee` (cm) ; `w.bulge` (flèche d'un mur, cm) ; `rm.people[].role`, `.years` ; `H.cut {a, b}` ; `H.tour[{id, fid, x, z, yaw, pitch, text}]` ; `H.oldPhotos[{id, fid, x, z, yaw, pitch, mid, src, title}]` ; `H.site[{id, name, dx, dy, rot}]` ; `H.meta.foyer`. `cleanHouse` : `role`, `years`, `foyer` sont du texte libre (`H_FREE`) — avant, un rôle avec des accents était vidé à la relecture.
+- **M1 Toits** : `roofExtras` (heritage-house3d.js) — gouttières et descentes, Velux posés sur la pente, lucarnes (jacobines) et chiens-assis devant au droit du mur ; `roofWings(f, 20, H)` découpe l'emprise (les pièces de tous les étages) en rectangles (histogramme), la petite aile prolongée jusqu'au faîtage de la grande ; `roofGroup` = un `buildRoof(H, top, {rect, wing})` par aile, même pente : les noues se font par intersection.
+- **M2 Combles et murs courbes** : `roofGeom`, `atticOf`, `slopeH`, `heightAt(H, f, p, at)` (passer `at` dans les boucles) ; le toit des combles part de `knee` au droit du mur ; les murs des combles et les murs courbes sont construits en tranches (`chunkWall`), coupées sous la pente (la plus basse des deux faces). Mur courbe = Bézier quadratique (point de contrôle à 2 × la flèche) : `bez`, `wallPts`, `arcLen`, `wallD` (2D `Q`, 3D, coupe). Le sol d'une pièce reste son polygone (il ne suit pas la courbe).
+- **M3 Coupe** : `sectionSvg(H, cut, {title})` ; `crossPoly` ; ligne posée par `twoClicks`, dessinée sur le plan (`.h-hs-cutline`) ; impression par `UI.openPrintDialog` (K13), export SVG / PNG.
+- **M4 Surfaces** : `roomSurfaces` (grille de 10 cm), `surfaces`, `surfacesWorkbook` → `ext.openSheetEditor({data, name})` (moteur `LCNDA_SHEET`, totaux en `=SOMME`). Combles : `lowZones` hachure le plan, la pastille Carrez sur chaque pièce, la hauteur sous plafond dans la barre du bas.
+- **M5** : `versionForYear(H, année)` + curseur `data-hs-plus="year"`.
+- **M6** : en visite, `showRoomCard` (heritage-house3d.js) montre les personnes de la pièce (rôle, années, ✦) ; `o3.onPerson` ouvre la fiche (même question qu'un clic sur une pastille).
+- **M7** : HUD de la visite « 📍 Arrêt ici » → évènement `h3-tour-add {pose}` ; `playTour`, `stopTour`, `goPose` (glisse), `say` (speechSynthesis, jamais bloquant) ; `tourShots()` → ZIP par `LCNDA_SHEET.makeZip` (une image par arrêt + textes) : le Montage n'a pas d'entrée « images » à lui passer.
+- **M8** : « 📷 Photo d'époque ici » → `h3-photo-add {pose}` → `openMediaPicker` ; `showPhoto(i)` (curseur Autrefois ⟷ Aujourd'hui), repères `photoSprite` cliquables.
+- **M9** : `refreshSite` (3D : `o3.loadHouse(id)` → `buildFloor` + `roofGroup` décalés) ; plan : contours en pointillés (`siteData`).
+- **M10** : existait (soleil, ombres, « ▶ Voir la journée ») ; ajouté « ▶ Voir l'année ».
+- **M11** : `shareHtml(H, {name, plans})` — three.js en `<script type="text/plain">` importé par blob, les scripts de la maison en ligne, `stripHouse` (ni habitants, ni souvenirs, ni notes, ni photos, ni recensements), CSP `default-src 'none'`, rien demandé au réseau. `mount(…, {share: true})` cache les boutons qui écrivent.
+- **M12** : cadre `house` du mode simple (`CUSTOM_KINDS.house`, `tx.hid`, écran `rHouse`) — `mount(…, {share: true})`, API `orbit`, `zoomBy`, `showFloor`, `floorIndex`, `spin`, `playTour` ; lecture seule (GET `house` seulement).
+- **M13** : `checks(H)` → `{level: red|orange|yellow, kind, text, fid, type, id, x, y}` ; clic = `ctx.goto` (étage, sélection, centrage).
+- **M14** : existait (plan ancien, calage par deux points et une longueur, redresser, décalquer).
+- Test : `tests/test-maison-plus.js` (Node + navigateur, `SHOTS=dossier` pour les captures).

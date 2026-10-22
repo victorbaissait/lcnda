@@ -465,6 +465,14 @@ html.ms-open.ms-own-cb { filter: none !important; } /* un daltonisme « propre a
 .ms-sl { font-weight: 700; font-size: 13px; }
 @media (max-width: 640px) { .ms-tf { grid-template-columns: minmax(0, 1fr); } .ms-tile-edit { padding-left: 0; } }
 
+/* 🏠 La maison (un cadre ajouté) : la vue 3D en lecture seule, de gros boutons */
+.ms-house{display:grid;gap:16px}
+.ms-house-view{position:relative;height:min(60vh,620px);min-height:320px;border-radius:18px;overflow:hidden;background:#dfe8ef;border:3px solid var(--ms-line,#222)}
+.ms-house-view canvas{display:block;width:100%!important;height:100%!important}
+.ms-house-view .h-hs-3dbar,.ms-house-view .h-hs-sunbox,.ms-house-view .h-hs-walkhud,.ms-house-view .h-hs-minimap,.ms-house-view .h-hs-cross,.ms-house-view .h-hs-joy{display:none!important}
+.ms-house-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.ms-house-view .h-hs-tourbox{position:absolute;left:12px;right:12px;bottom:12px;background:#fff;color:#111;border:3px solid #111;border-radius:14px;padding:12px 16px;font-size:22px}
+.ms-house-view .h-hs-tourbox .icon-button{min-width:64px;min-height:64px;font-size:26px}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .ms-host{background:#232323}
 :root[data-theme="dark"] .ms-tablet-in{background:#232323}

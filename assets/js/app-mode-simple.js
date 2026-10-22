@@ -42,7 +42,7 @@
     /* ═════════════════════════ Réglages ═════════════════════════ */
     const TILE_KEYS = ['tree', 'photo', 'people', 'day'];
     /** les cadres qu'on ajoute (« ＋ Ajouter un cadre ») : [icône, nom, petite phrase, couleur de départ (celle d'un cadre de base)] */
-    const CUSTOM_KINDS = {person: ['⭐', 'Une personne', 'Sa fiche, en phrases', 'people'], album: ['📸', 'Un album', 'Ses photos, en diaporama', 'photo'], note: ['💌', 'Un mot de la famille', 'À lire et à écouter', 'day']};
+    const CUSTOM_KINDS = {person: ['⭐', 'Une personne', 'Sa fiche, en phrases', 'people'], album: ['📸', 'Un album', 'Ses photos, en diaporama', 'photo'], note: ['💌', 'Un mot de la famille', 'À lire et à écouter', 'day'], house: ['🏠', 'La maison', 'La regarder en 3D, étage par étage', 'tree']};
     const TILE_ICONS = ['🌳', '📷', '👥', '🎂', '⭐', '📸', '💌', '❤️', '🏠', '👵', '👴', '👶', '🐶', '🌻', '🎵', '📖', '✉️', '🎉', '⛪', '🌍', '⚓', '🚜', '🍰', '☀️'];
     const isCustom = k => typeof k === 'string' && /^c\d{1,9}$/.test(k);
     const MAX_CUSTOM = 12;
@@ -90,6 +90,7 @@
             if (isCustom(k)) {
                 y.kind = x.kind; const c = HEX(x.color); if (c) y.color = c;
                 if (x.kind === 'note') { const tt = typeof x.text === 'string' ? x.text.replace(/[<>\u0000-\u0009\u000b-\u001f\u007f]/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 800) : ''; if (tt) y.text = tt; }
+                else if (x.kind === 'house') { const hid = Math.round(num(x.hid, 0, 1e9, 0)); if (hid) y.hid = hid; }
                 else { const pid = Math.round(num(x.pid, 0, 1e9, 0)); if (pid) y.pid = pid; }
             }
             if (Object.keys(y).length) tx[k] = y;
@@ -326,7 +327,7 @@
 
     /* ═════════════════════════ Le mode : un « moteur » dessiné dans un cadre ═════════════════════════
      * Le même moteur sert au plein écran, à « 👁 Essayer ici » (dans la page des réglages) et à l'aperçu vivant (non cliquable). */
-    const TITLES = {who: ['👋', 'Qui regarde ?'], tree: ['🌳', 'L’arbre'], photos: ['📷', 'Les photos'], slides: ['📷', 'Les photos'], person: ['👤', 'Sa fiche'], note: ['💌', 'Un mot'], people: ['👥', 'Les personnes'], day: ['🎂', 'Ce jour-là'], code: ['🔒', 'Quitter'], loading: ['', 'Un instant…'], error: ['', 'Mode simple']};
+    const TITLES = {who: ['👋', 'Qui regarde ?'], tree: ['🌳', 'L’arbre'], photos: ['📷', 'Les photos'], slides: ['📷', 'Les photos'], person: ['👤', 'Sa fiche'], note: ['💌', 'Un mot'], house: ['🏠', 'La maison'], people: ['👥', 'Les personnes'], day: ['🎂', 'Ce jour-là'], code: ['🔒', 'Quitter'], loading: ['', 'Un instant…'], error: ['', 'Mode simple']};
     const TILE = {tree: ['🌳', 'L’arbre', 'Toute la famille, de case en case'], photo: ['📷', 'Les photos', ''], people: ['👥', 'Les personnes', 'Chercher quelqu’un par son nom'], day: ['🎂', 'Ce jour-là', '']};
 
     function makeMode(host, opts = {}) {
@@ -398,7 +399,7 @@
             if (full) document.documentElement.classList.toggle('ms-own-cb', !S.link.cb);
         }
         /* ── navigation ── */
-        const snapshot = () => ({screen: V.screen, note: V.note, center: V.center, slide: V.slide, slideList: V.slideList, person: V.person, peopleTab: V.peopleTab, letter: V.letter, choosing: V.choosing, slideTags: V.slideTags});
+        const snapshot = () => ({screen: V.screen, house: V.house, houseTitle: V.houseTitle, note: V.note, center: V.center, slide: V.slide, slideList: V.slideList, person: V.person, peopleTab: V.peopleTab, letter: V.letter, choosing: V.choosing, slideTags: V.slideTags});
         function go(screen, o = {}) { stopSlide(); stopSpeak(); if ((o.push !== false && V.screen !== screen) || o.forcePush) V.stack.push(snapshot()); Object.assign(V, o.state || {}); V.screen = screen; render(true); }
         function back() { stopSlide(); stopSpeak(); const s = V.stack.pop(); if (!s) { goHome(); return; } Object.assign(V, s); render(true); }
         function goHome() { stopSlide(); stopSpeak(); V.stack = []; V.screen = 'home'; V.choosing = false; render(true); }
@@ -415,7 +416,8 @@
         }
         function render(focus) {
             applyLook(); bar(); MAIN.className = 'ms-main'; MAIN.scrollTop = 0;
-            const r = {home: rHome, note: rNote, who: rWho, tree: rTree, photos: rPhotos, slides: rSlides, person: rPerson, people: rPeople, day: rDay, code: rCode, loading: rLoading, error: rError}[V.screen] || rHome;
+            if (houseView && V.screen !== 'house') { try { houseView.destroy(); } catch (_) {} houseView = null; }
+            const r = {home: rHome, house: rHouse, note: rNote, who: rWho, tree: rTree, photos: rPhotos, slides: rSlides, person: rPerson, people: rPeople, day: rDay, code: rCode, loading: rLoading, error: rError}[V.screen] || rHome;
             r();
             MAIN.firstElementChild?.classList.add('ms-fade');
             if (focus && live) { const t = $('h1', MAIN) || $('.ms-title', BAR); if (t && V.screen !== 'code' && V.screen !== 'people') { t.setAttribute('tabindex', '-1'); try { t.focus({preventScroll: true}); } catch (_) {} } }
@@ -423,6 +425,27 @@
         }
         function rLoading() { MAIN.innerHTML = `<div class="ms-center"><span class="ms-spin" aria-hidden="true"></span><p class="ms-lead">Un instant, on prépare l’arbre…</p></div>`; }
         function rError() { MAIN.innerHTML = `<div class="ms-center"><p class="ms-lead">L’arbre n’a pas pu être lu. Demande à la personne qui a préparé l’app.</p><button type="button" class="ms-btn primary" data-act="retry"><span class="ms-ico" aria-hidden="true">↻</span><span>Réessayer</span></button></div>`; }
+        /* ── 🏠 La maison (un cadre ajouté) : la vue 3D en lecture seule, de gros boutons pour tourner, approcher et changer d'étage ── */
+        let houseView = null, houseH = null;
+        async function rHouse() {
+            const hid = Number(V.house) || 0; if (!hid || !window.LCNDA_EXT?.house3d) { goHome(); return; }
+            MAIN.innerHTML = `<div class="ms-house"><h1 class="ms-sr" tabindex="-1">${esc(V.houseTitle || 'La maison')}</h1><div class="ms-house-view" data-ms-house><div class="ms-center"><span class="ms-spin" aria-hidden="true"></span><p class="ms-lead">Un instant, on construit la maison…</p></div></div><div class="ms-row ms-house-btns" data-ms-hbtns></div></div>`;
+            try {
+                const u = new URL('api.php', location.href); u.searchParams.set('action', 'house'); u.searchParams.set('id', String(hid));
+                const r = await realFetch(u.toString(), {headers: {Accept: 'application/json'}, credentials: 'same-origin'}).then(x => { if (!x.ok) throw new Error('HTTP ' + x.status); return x.json(); });
+                if (V.screen !== 'house') return; const P2 = window.LCNDA_EXT.housePlus;
+                houseH = P2?.stripHouse ? P2.stripHouse(r.house || {}) : {...(r.house || {}), meta: undefined}; if (!Array.isArray(houseH.floors) || !houseH.floors.length) throw new Error('vide');
+                const box = $('[data-ms-house]', MAIN); box.innerHTML = ''; let fi = houseH.floors.findIndex(f => f.level === 0); if (fi < 0) fi = 0;
+                houseView = await window.LCNDA_EXT.house3d.mount(box, houseH, fi, {share: true}); if (V.screen !== 'house') { houseView.destroy(); houseView = null; return; }
+                houseView.spin?.(!E.calm); paintHouseBtns();
+            } catch (_) { const b = $('[data-ms-house]', MAIN); if (b) b.innerHTML = '<div class="ms-center"><p class="ms-lead">La maison n’a pas pu être montrée.</p></div>'; }
+        }
+        function paintHouseBtns() {
+            const el = $('[data-ms-hbtns]', MAIN); if (!el || !houseH) return; const cur = houseView?.floorIndex?.() ?? 0, fl = houseH.floors.map((f, i) => [f, i]).sort((a, b) => b[0].level - a[0].level);
+            const big = (act, ic, lb, extra = '') => `<button type="button" class="ms-btn" data-act="${act}" ${extra}><span class="ms-ico" aria-hidden="true">${ic}</span><span>${lb}</span></button>`;
+            el.innerHTML = `${big('hleft', '↺', 'Tourner à gauche')}${big('hright', '↻', 'Tourner à droite')}${big('hin', '＋', 'Plus près')}${big('hout', '−', 'Plus loin')}${(houseH.tour || []).length ? big('htour', '▶', 'La visite', 'aria-label="Écouter la visite guidée"') : ''}
+                ${fl.length > 1 ? fl.map(([f, i]) => big('hfloor', i === cur ? '●' : '○', esc(f.name || 'Étage'), `data-id="${i + 1}" aria-pressed="${i === cur}"`)).join('') : ''}`;
+        }
         /* ── 💌 Un mot de la famille (un cadre ajouté) : le texte en grand, lu à voix haute ── */
         function rNote() {
             const t = V.note ? tileOf(V.note) : null; if (!t || !t.text) { goHome(); return; }
@@ -441,6 +464,7 @@
             const ph2 = okP ? visPhotos().filter(m => !m.doc && m.people.includes(p.id)) : [];
             const label = x.label || (x.kind === 'person' && okP ? nameT(p) : x.kind === 'album' && okP ? `Les photos de ${p.first || nameT(p)}` : K[1]);
             const sub = x.sub || (x.kind === 'person' && okP ? (rel(p.id) ? (rel(p.id) === 'toi' ? 'C’est toi' : rel(p.id).charAt(0).toUpperCase() + rel(p.id).slice(1)) : years(p) || K[2]) : x.kind === 'album' ? plural(ph2.length, 'photo') : x.kind === 'note' && x.text ? x.text.slice(0, 70) + (x.text.length > 70 ? '…' : '') : K[2]);
+            if (x.kind === 'house') return {k, kind: 'house', base: K[3], icon: x.icon || K[0], label: x.label || K[1], sub: x.sub || K[2], color: E.contrast ? null : (x.color || null), hid: Number(x.hid) || 0, ready: !!x.hid};
             const ready = x.kind === 'note' ? !!x.text : x.kind === 'album' ? okP && ph2.length > 0 : !!okP;
             return {k, kind: x.kind, base: K[3], icon: x.icon || K[0], label, sub, color: E.contrast ? null : (x.color || null), pid: okP ? p.id : 0, text: x.text || '', photos: ph2, ready};
         }
@@ -739,10 +763,15 @@
             case 'tile': {
                 if (isCustom(b.dataset.to)) { const t = tileOf(b.dataset.to); if (!t?.ready) break;
                     if (t.kind === 'person') { V.person = t.pid; go('person', {forcePush: true}); }
+                    else if (t.kind === 'house') { V.house = t.hid; V.houseTitle = t.label; go('house', {forcePush: true}); }
                     else if (t.kind === 'album') { V.slideList = t.photos.map(m => m.id); V.slide = 0; V.auto = S.slideAuto; go('slides'); }
                     else { V.note = t.k; go('note'); }
                     break; }
                 const to = b.dataset.to === 'photo' ? 'photos' : b.dataset.to; if (to === 'tree') V.center = 0; if (to === 'photos') V.slideList = null; if (to === 'people') { V.choosing = false; V.letter = null; } go(to); break; }
+            case 'hleft': case 'hright': houseView?.spin?.(false); houseView?.orbit?.(a === 'hleft' ? -.45 : .45); break;
+            case 'hin': case 'hout': houseView?.zoomBy?.(a === 'hin' ? .78 : 1.28); break;
+            case 'hfloor': houseView?.showFloor?.(id - 1); paintHouseBtns(); break;
+            case 'htour': houseView?.spin?.(false); houseView?.playTour?.(); break;
             case 'who': go('who'); break;
             case 'setviewer': V.viewer = id && P(id) ? id : 0; if (full) setDev({viewer: V.viewer || undefined}); nearCache = null; V.choosing = false; V.stack = []; V.screen = 'home'; V.center = 0; render(true); msg(V.viewer ? `Bonjour ${P(V.viewer).first} ! L’app dira « ta mère », « ton petit-fils »…` : 'D’accord. L’app ne dira pas les liens de famille.'); break;
             case 'chooseother': V.choosing = true; go('people', {state: {peopleTab: 'family', letter: null}}); break;
@@ -942,13 +971,13 @@
         const nCustom = s.tiles.filter(t => isCustom(t[0])).length;
         const rows = s.tiles.map(([k, on], i) => {
             const x = s.tx[k] || {}, cu = isCustom(k), K = cu ? CUSTOM_KINDS[x.kind] : null, icon = x.icon || (cu ? K[0] : TILE[k][0]), name = tileName(s, k), open = openTile === k;
-            const pickLbl = x.kind === 'album' ? 'Les photos de' : 'La personne';
+            const pickLbl = x.kind === 'album' ? 'Les photos de' : x.kind === 'house' ? 'La maison' : 'La personne';
             const noPh = cu && x.kind === 'album' && x.pid && D && !D.media.some(m => !m.doc && m.people.includes(Number(x.pid)));
-            const warn = cu && (x.kind === 'note' ? !x.text : !x.pid) ? `<small class="ms-tr-warn">${x.kind === 'note' ? '⚠️ Écris le mot pour qu’il apparaisse' : '⚠️ Choisis la personne pour qu’il apparaisse'}</small>` : noPh ? '<small class="ms-tr-warn">⚠️ Pas encore de photo de cette personne : le cadre est caché</small>' : '';
+            const warn = cu && (x.kind === 'note' ? !x.text : x.kind === 'house' ? !x.hid : !x.pid) ? `<small class="ms-tr-warn">${x.kind === 'note' ? '⚠️ Écris le mot pour qu’il apparaisse' : x.kind === 'house' ? '⚠️ Choisis la maison pour qu’il apparaisse' : '⚠️ Choisis la personne pour qu’il apparaisse'}</small>` : noPh ? '<small class="ms-tr-warn">⚠️ Pas encore de photo de cette personne : le cadre est caché</small>' : '';
             const edit = open ? `<div class="ms-tile-edit">
                 <label class="ms-tf"><span>Nom</span><input type="text" maxlength="40" data-ms-tlabel="${k}" value="${esc(x.label || '')}" placeholder="${esc(cu ? (x.label ? K[1] : name) : TILE[k][1])}"></label>
                 <label class="ms-tf"><span>Petite phrase</span><input type="text" maxlength="90" data-ms-tsub="${k}" value="${esc(x.sub || '')}" placeholder="${esc(cu ? K[2] : TILE[k][2] || 'Écrite toute seule (nombre de photos, souvenirs du jour)')}"></label>
-                ${cu && x.kind !== 'note' ? `<div class="ms-tf"><span>${pickLbl}</span><div data-ms-tile-pick="${k}">${A().pickerField ? A().pickerField({name: '', hiddenName: false, kind: 'person', value: x.pid || null}) : ''}</div></div>` : ''}
+                ${cu && x.kind !== 'note' ? `<div class="ms-tf"><span>${pickLbl}</span><div data-ms-tile-pick="${k}">${A().pickerField ? A().pickerField({name: '', hiddenName: false, kind: x.kind === 'house' ? 'house' : 'person', value: (x.kind === 'house' ? x.hid : x.pid) || null, allowCreate: x.kind === 'house' ? false : undefined}) : ''}</div></div>` : ''}
                 ${cu && x.kind === 'note' ? `<label class="ms-tf"><span>Le mot</span><textarea rows="4" maxlength="800" data-ms-ttext="${k}" placeholder="Un petit mot de la famille, lu à voix haute avec 🔊">${esc(x.text || '')}</textarea></label>` : ''}
                 <div class="ms-tf"><span>Icône</span><div class="ms-icons" role="radiogroup" aria-label="Icône du cadre">${TILE_ICONS.map(ic => `<button type="button" class="ms-ic ${ic === icon ? 'is-active' : ''}" data-ms-ticon="${k}" data-v="${ic}" aria-pressed="${ic === icon}" aria-label="Icône ${ic}">${ic}</button>`).join('')}</div></div>
                 <div class="ms-tf"><span>Couleur</span>${cu ? `<span data-ms-tcolor-slot="${k}" data-v="${esc(x.color || pal[K[3]])}"></span><small class="ms-cv">${x.color ? 'Ta couleur · ' + esc(x.color.toUpperCase()) : 'Celle du thème'}</small>` : `<span data-ms-color-slot="${k}" data-v="${esc(s.colors[k] || pal[k])}"></span><small class="ms-cv">${s.colors[k] ? 'Ta couleur · ' + esc(s.colors[k].toUpperCase()) : 'Celle du thème'}</small>`}</div>
@@ -1172,7 +1201,7 @@
             if (b.dataset.msTdup) { const k = b.dataset.msTdup; let id = ''; change(st => { if (st.tiles.filter(t => isCustom(t[0])).length >= MAX_CUSTOM) return; let n = 1; while (st.tx['c' + n] || st.tiles.some(t => t[0] === 'c' + n)) n++; id = 'c' + n; const i = st.tiles.findIndex(t => t[0] === k); st.tiles.splice(i + 1, 0, [id, true]); st.tx[id] = clone(st.tx[k] || {}); }); openTile = id || openTile; renderSettings(box); return; }
             if (b.dataset.msTdel) { const k = b.dataset.msTdel; if (openTile === k) openTile = null; change(st => { st.tiles = st.tiles.filter(t => t[0] !== k); delete st.tx[k]; }, true); return; } // H7 : « ↶ Annuler » en bas à gauche (K2)
             if (b.dataset.msTicon) { const k = b.dataset.msTicon, v = b.dataset.v; change(st => { st.tx[k] = {...(st.tx[k] || {}), icon: v}; }, true); return; }
-            if (b.dataset.msTreset) { const k = b.dataset.msTreset; change(st => { const x = st.tx[k] || {}; if (isCustom(k)) { st.tx[k] = {kind: x.kind}; if (x.pid) st.tx[k].pid = x.pid; if (x.text) st.tx[k].text = x.text; } else { delete st.tx[k]; st.colors[k] = null; } }, true); return; }
+            if (b.dataset.msTreset) { const k = b.dataset.msTreset; change(st => { const x = st.tx[k] || {}; if (isCustom(k)) { st.tx[k] = {kind: x.kind}; if (x.pid) st.tx[k].pid = x.pid; if (x.hid) st.tx[k].hid = x.hid; if (x.text) st.tx[k].text = x.text; } else { delete st.tx[k]; st.colors[k] = null; } }, true); return; }
             if (b.dataset.msTfix) { const k = b.dataset.msTfix; change(st => { const c = st.tx[k]?.color; if (c) st.tx[k].color = fixColor(c, b.dataset.against); }, true); return; }
             if (b.hasAttribute('data-ms-tfont')) { const s0 = read(); const f = await UIx().openFontPicker?.({value: s0.tileFont || s0.font || 'Inter', sample: 'L’arbre · Les photos', title: 'La police des gros boutons', top: ['Atkinson Hyperlegible', 'Luciole', 'OpenDyslexic']}); if (f) { UIx().rememberFont?.(f); change(st => { st.tileFont = f === 'Inter' && !st.font ? '' : f; }, true); } return; }
             if (b.hasAttribute('data-ms-tfont-reset')) { change(st => { st.tileFont = ''; }, true); return; }
@@ -1219,7 +1248,7 @@
         page.addEventListener('picker-change', e => {
             if (!e.target.closest?.('[data-ms-box]')) return; const v = Number(e.detail?.value) || 0;
             const tp = e.target.closest('[data-ms-tile-pick]'); // la personne d'un cadre ajouté (⭐ Une personne, 📸 Un album)
-            if (tp) { const k = tp.dataset.msTilePick; change(st => { st.tx[k] = {...(st.tx[k] || {}), pid: v}; if (!v) delete st.tx[k].pid; }, true); kick(e.target.closest('[data-ms-box]') || page); return; }
+            if (tp) { const k = tp.dataset.msTilePick; change(st => { const f = st.tx[k]?.kind === 'house' ? 'hid' : 'pid'; st.tx[k] = {...(st.tx[k] || {}), [f]: v}; if (!v) delete st.tx[k][f]; }, true); kick(e.target.closest('[data-ms-box]') || page); return; }
             change(st => { st.viewer = v; if (v) st.notInTree = false; }, true); kick(e.target.closest('[data-ms-box]') || page);
         });
     }
