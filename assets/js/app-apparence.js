@@ -438,6 +438,7 @@
         ['delete', '🗑', 'Supprimer la fiche', '[data-delete-person]'],
         ['lock', '🔓', 'Verrouiller / déverrouiller', '[data-toggle-person-lock]'],
         ['history', '🕘', 'Historique de la fiche', '[data-person-history]'],
+        ['write', '📝', 'Écrire sur cette personne (traitement de texte)', '[data-wp-write]'],
         ['profils', '🧩', 'Cette personne était… (ses profils)', '[data-lc-pf]'],
     ];
     const HEAD_KEYS = HEAD_BUTTONS.map(b => b[0]);

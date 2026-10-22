@@ -1282,7 +1282,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-postcards.js?v=1" defer></script>
 <script src="assets/js/heritage-dates-feter.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=1" defer></script>
-<script src="assets/js/app-apparence.js?v=8" defer></script>
+<script src="assets/js/app-apparence.js?v=9" defer></script>
 <script src="assets/js/app-designs.js?v=3" defer></script>
 <script>
 (function () {
