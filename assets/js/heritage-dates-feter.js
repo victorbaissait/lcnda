@@ -75,7 +75,8 @@
             ? `<ul class="h-df-list">${items.slice(0, limit).map(rowHtml).join('')}</ul>${items.length > limit ? `<p class="muted h-df-more">… et ${A().plural(items.length - limit, 'autre date', 'autres dates')} ${when}. <button type="button" class="link-button" data-df-all>Tout voir</button></p>` : ''}${r.kiosk ? '<p class="muted">🔒 Mode consultation : les vivants n’apparaissent que par leur prénom.</p>' : ''}`
             : A().empty(`Rien à fêter ${when}${c.who === 'living' ? ' chez les vivants' : c.who === 'dead' ? ' chez les ancêtres' : ''}${c.branch ? ' dans cette branche' : ''}.`, {icon: '🎂', action: c.period !== 'month' ? {label: 'Voir le mois', attrs: 'data-df-period="month"'} : null});
         box._items = items;
-        box.querySelector('[data-df-all]')?.addEventListener('click', e => { e.currentTarget.closest('p').remove(); list.querySelector('.h-df-list').insertAdjacentHTML('beforeend', items.slice(limit).map((it, k) => rowHtml(it, k + limit)).join('')); });
+        ext.meteo?.decorateDates?.(list, items); // 🌦 la météo du jour pour les ancêtres (heritage-meteo.js)
+        box.querySelector('[data-df-all]')?.addEventListener('click', e => { e.currentTarget.closest('p').remove(); list.querySelector('.h-df-list').insertAdjacentHTML('beforeend', items.slice(limit).map((it, k) => rowHtml(it, k + limit)).join('')); ext.meteo?.decorateDates?.(list, items); });
     }
     /** un réglage changé dans le widget (période, filtre) est gardé dans le widget lui-même, comme le crayon ✎ */
     function saveCfg(widget, patch) {

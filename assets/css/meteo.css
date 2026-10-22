@@ -1,0 +1,147 @@
+/* LCNDA — 🌦 Météo d'autrefois (assets/js/heritage-meteo.js ; maquette docs/design/meteo.html, M1 à M11).
+ * Couleurs : variables de l'app (--ink, --blue-bright, --blue-soft, --card-bg, --muted…) ; le mode sombre suit tout seul,
+ * le reste est écrit par scripts/build-dark-css.py (bloc en fin de fichier). */
+
+/* ── M1 : la pastille sous le lieu ── */
+.wx-line { margin-top: 5px; }
+.wx-line.wx-inline { display: inline-block; margin: 0 0 0 8px; vertical-align: middle; }
+.wx-pill { display: inline-flex; align-items: center; gap: 4px; border: 1.5px solid #c9ccd3; background: var(--card-bg, #fff); padding: 2px 7px; font: 700 11.5px/1.5 system-ui, sans-serif; color: var(--ink); cursor: pointer; white-space: nowrap; min-height: 24px; }
+.wx-pill:hover, .wx-pill:focus-visible, .wx-pill.is-open { border-color: var(--blue-bright); background: var(--blue-soft); color: var(--blue-bright); }
+.wx-hover-only .wx-pill { opacity: 0; transition: opacity .15s; }
+.wx-hover-only .event-row:hover .wx-pill, .wx-hover-only .wx-pill:focus-visible, .wx-hover-only .wx-pill.is-open { opacity: 1; }
+@media (hover: none) { .wx-hover-only .wx-pill { opacity: 1; } }
+.wx-pop { position: fixed; z-index: 9000; border: 2px solid var(--ink); background: var(--card-bg, #fff); color: var(--ink); box-shadow: 5px 5px 0 rgba(5, 93, 255, .3); padding: 11px 13px; max-width: 330px; font-size: 13px; line-height: 1.45; pointer-events: none; }
+.wx-pop b { font-size: 14px; }
+.wx-pop .muted { color: var(--muted); font-size: 12px; }
+.wx-pop-foot { margin-top: 7px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.wx-link { color: var(--blue-bright); font-weight: 700; font-size: 13px; }
+
+/* ── M2 : le détail d'un jour (fenêtre 540, K6) ── */
+.wx-dialog .wx-body, .wx-about .wx-body { padding: 14px 18px; }
+.wx-say { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.wx-big { font-size: 40px; line-height: 1; flex: none; }
+.wx-say p { margin: 0; font-size: 15px; line-height: 1.4; }
+.wx-say p b { font-size: 16px; }
+.wx-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 2px solid var(--ink); }
+.wx-cols > div { padding: 8px 4px; text-align: center; border-right: 1px solid #e3e5ea; }
+.wx-cols > div:last-child { border-right: 0; }
+.wx-cols > div.is-on { background: var(--blue-soft); box-shadow: inset 0 -4px 0 var(--blue-bright); }
+.wx-cols small { display: block; font: 700 10.5px system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.wx-cols .wx-i { font-size: 24px; display: block; margin: 4px 0; }
+.wx-cols .wx-d { font: 800 16px system-ui, sans-serif; display: block; }
+.wx-cols .wx-e { font-size: 11.5px; color: var(--muted); display: block; margin-top: 2px; line-height: 1.35; }
+.wx-ok { font-size: 12.5px; color: var(--blue-bright); margin-top: 6px; font-weight: 600; }
+.wx-norm { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-top: 10px; padding: 7px 10px; background: var(--blue-soft); border-left: 4px solid var(--blue-bright); }
+.wx-kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 5px 12px; font-size: 13px; margin: 12px 0 0; }
+.wx-kv dt { color: var(--muted); }
+.wx-kv dd { margin: 0; font-weight: 600; }
+.wx-lab { display: block; font: 700 10.5px system-ui, sans-serif; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; margin: 14px 0 6px; }
+.wx-strip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.wx-strip > div { border: 1.5px solid #d6d9df; text-align: center; padding: 5px 2px; font-size: 11px; line-height: 1.3; }
+.wx-strip > div.is-on { border: 2px solid var(--blue-bright); background: var(--blue-soft); font-weight: 800; }
+.wx-strip .wx-i { font-size: 17px; display: block; }
+.wx-strip small { display: block; color: var(--muted); font-size: 10px; }
+.wx-links { display: flex; gap: 14px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
+.wx-links .link-button { font-weight: 700; font-size: 13px; }
+.wx-links .wx-more { margin-left: auto; }
+.wx-src { font-size: 11px; color: var(--muted); line-height: 1.45; margin-top: 8px; }
+.wx-fold { border-top: 1.5px dashed #c9ccd3; padding: 10px 0 12px; margin-top: 8px; }
+.wx-fold .wx-big { font-size: 30px; }
+.wx-fold .wx-say p { font-size: 13.5px; }
+.wx-fold-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; font-size: 12px; }
+.wx-map-legend { list-style: none; padding: 0; margin: 10px 0 0; display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+.wx-map-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--c); margin-right: 6px; vertical-align: -1px; border: 2px solid #fff; box-shadow: 0 0 0 1px #888; }
+.wx-map-legend i.sq { border-radius: 0; background: transparent; border: 2px dashed #c98a00; box-shadow: none; }
+
+/* ── M4 : le bloc « Météo de sa vie » ── */
+.wx-life { display: grid; }
+.wx-row { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 0; border: 0; border-bottom: 1px solid #eee; font: inherit; font-size: 13px; text-align: left; background: none; color: inherit; width: 100%; cursor: pointer; }
+.wx-row:hover { background: var(--blue-soft); }
+.wx-row.is-empty { cursor: default; opacity: .75; }
+.wx-row.is-empty:hover { background: none; }
+.wx-row .wx-i { font-size: 22px; text-align: center; }
+.wx-row b { display: block; }
+.wx-row small { color: var(--muted); }
+.wx-cur { margin-top: 12px; display: grid; gap: 6px; }
+.wx-cur div { background: #fffbe6; border-left: 4px solid #e1a500; padding: 7px 10px; font-size: 13px; }
+
+/* ── M5 : les réglages ── */
+.wx-set { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px 28px; align-items: start; }
+.wx-card { padding: 16px 18px; min-width: 0; }
+.wx-card h3 { margin: 0 0 8px; font-size: 16px; }
+.wx-card h4 { margin: 18px 0 8px; font-size: 14px; border-bottom: 1px solid #e3e5ea; padding-bottom: 5px; }
+.wx-line-set { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 8px 0; font-size: 13.5px; flex-wrap: wrap; }
+.wx-tg { margin: 10px 0; }
+.wx-card .ui-toggle small { display: block; font-weight: 400; font-size: 12px; }
+.wx-seg { margin: 0; flex-wrap: wrap; }
+.wx-seg button { min-height: 32px; padding: 5px 11px; font-size: 12.5px; }
+.wx-chks { font-size: 13.5px; }
+.wx-chks .checkbox-line { margin: 4px 0; }
+.wx-chks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px; }
+.wx-hidden { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.wx-hidden li { display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 1.5px solid #e3e5ea; padding: 4px 6px 4px 10px; font-size: 13px; }
+.wx-data { border: 2px solid var(--ink); margin-top: 4px; }
+.wx-data-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; padding: 10px 12px; border-bottom: 1px solid #e3e5ea; align-items: center; }
+.wx-data-row:last-child { border-bottom: 0; }
+.wx-data-row b { font-size: 14px; }
+.wx-data-row small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.wx-acts { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
+.wx-about-link { margin: 12px 0 0; }
+.wx-steps { padding-left: 20px; line-height: 1.55; font-size: 14px; }
+.wx-steps code { font-size: 12.5px; }
+
+/* ── M6 : l'import ── */
+.wx-what { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 10px 0; }
+.wx-what div { border: 2px solid var(--ink); padding: 9px 8px; text-align: center; }
+.wx-what b { display: block; font-size: 18px; }
+.wx-what small { font-size: 11.5px; color: var(--muted); }
+.wx-prog-box { margin-top: 12px; border: 2px solid var(--ink); padding: 12px; }
+.wx-prog { height: 10px; border: 2px solid var(--ink); background: var(--card-bg, #fff); margin: 8px 0; }
+.wx-prog i { display: block; height: 100%; width: 0; background: var(--blue-bright); transition: width .2s; }
+
+/* ── M7 : le widget ── */
+.wx-wid-host { position: relative; }
+.wx-wid-date { position: absolute; top: -2px; right: 0; font-size: 12px; }
+.wx-wid { display: flex; gap: 14px; align-items: center; padding: 10px 0 4px; }
+.wx-wid .wx-big { font-size: 46px; }
+.wx-wid p { margin: 0; font-size: 15px; line-height: 1.45; }
+.wx-wid-ft { display: flex; gap: 8px 14px; align-items: center; padding: 8px 0 0; margin-top: 8px; border-top: 1px solid #e3e5ea; font-size: 12px; flex-wrap: wrap; }
+.wx-wid-ft .link-button { font-weight: 700; }
+
+/* ── M10 ── */
+.wx-scroll { overflow-x: auto; }
+.wx-tbl { min-width: 640px; width: 100%; }
+.wx-tbl td:first-child { font-weight: 700; }
+.wx-tbl .wx-lic { font-size: 11.5px; color: var(--muted); }
+.wx-about-note { font-size: 12.5px; line-height: 1.5; }
+.meteo-time-hint { display: block; font-size: 12px; color: var(--blue-bright); font-weight: 600; margin-top: 4px; }
+.event-time { display: block; font-weight: 400; color: var(--muted); }
+
+@media (max-width: 900px) {
+    .wx-set { grid-template-columns: minmax(0, 1fr); }
+    .wx-what { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+    .wx-strip { gap: 2px; }
+    .wx-strip small { display: none; }
+    .wx-cols .wx-d { font-size: 14px; }
+    .wx-cols .wx-i { font-size: 20px; }
+    .wx-chks { grid-template-columns: minmax(0, 1fr); }
+    .wx-wid { flex-direction: column; align-items: flex-start; }
+    .wx-wid-date { position: static; display: block; }
+}
+
+/* M11 : le mode sombre écrit à la main (le reste suit les variables de l'app) */
+:root[data-theme="dark"] .wx-cur div { background: #33290b; border-color: #e1a500; color: #f3e6bf; }
+:root[data-theme="dark"] .wx-pop { box-shadow: 5px 5px 0 rgba(77, 159, 255, .25); }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .wx-pill{border:1.5px solid #494b50}
+:root[data-theme="dark"] .wx-cols > div{border-right:1px solid #474a52}
+:root[data-theme="dark"] .wx-strip > div{border:1.5px solid #484b51}
+:root[data-theme="dark"] .wx-fold{border-top:1.5px dashed #494b50}
+:root[data-theme="dark"] .wx-row{border-bottom:1px solid #4c4c4c}
+:root[data-theme="dark"] .wx-card h4{border-bottom:1px solid #474a52}
+:root[data-theme="dark"] .wx-hidden li{border:1.5px solid #474a52}
+:root[data-theme="dark"] .wx-data-row{border-bottom:1px solid #474a52}
+:root[data-theme="dark"] .wx-wid-ft{border-top:1px solid #474a52}
+/* ═════ fin du mode sombre automatique ═════ */

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 62;
+const SCHEMA_VERSION = 63;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -83,6 +83,7 @@ function migration_steps(): array
         60 => 'schema_v60',
         61 => 'schema_v61',
         62 => 'schema_v62',
+        63 => 'schema_v63',
     ];
 }
 
@@ -2286,4 +2287,12 @@ function schema_v62(PDO $pdo): void
 {
     if (!function_exists('website_schema')) { require_once __DIR__ . '/website.php'; }
     website_schema($pdo);
+}
+
+/** 🌦 Météo d'autrefois (lib/meteo.php, assets/js/heritage-meteo.js) : l'heure écrite dans l'acte (« 14:30 », saisie libre K17
+ *  « à 3 heures du matin ») ; elle sert seulement à prendre la valeur météo la plus proche (remise en heure universelle). */
+function schema_v63(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(), 'name');
+    if ($cols && !in_array('event_time', $cols, true)) { $pdo->exec("ALTER TABLE events ADD COLUMN event_time TEXT NOT NULL DEFAULT ''"); }
 }

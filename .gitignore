@@ -93,6 +93,10 @@
 /models/
 
 # ─── Fichiers produits ou téléchargés (se recréent automatiquement) ─────────────────────
+# 🌦 Météo d'autrefois : socle et packs fabriqués par scripts/meteo/build-meteo.py (plusieurs centaines de Mo), et sa sortie
+/data-meteo/
+/meteo-sortie/
+*.lcmeteo
 /node_modules/
 /vendor/php
 /vendor/geo/

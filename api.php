@@ -303,6 +303,12 @@ try {
     if ($isWrite && $action === 'export_full_backup') {
         export_full_backup($pdo, (string) ($payload['password'] ?? ''));
     }
+    // 🌦 Météo d'autrefois : importer / retirer un pack (fichiers à part, rien n'est écrit dans la généalogie : lib/meteo.php)
+    if ($isWrite && str_starts_with((string) $action, 'meteo_pack_')) {
+        require_once __DIR__ . '/lib/meteo.php';
+        try { json_response(meteo_api_post((string) $action, $payload, $_GET)); }
+        catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
+    }
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
     }
@@ -525,6 +531,7 @@ try {
         'blocs' => json_response(blocs_api_get($pdo, $_GET)), // 📰 🏆 🎓 blocs communs (lib/blocs.php)
         'creations' => (static function () use ($pdo) { require_once __DIR__ . '/lib/creations.php'; json_response(creations_api_get($pdo, $_GET)); })(), // 🎨 Listes « Créations et carrières » (lecture seule)
         'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
+        'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
@@ -713,6 +720,7 @@ function site_defaults_allowed_keys(): array
 {
     // même liste que SITE_DEFAULT_KEYS (assets/js/app.js) : une clé absente d'ici est jetée sans rien dire
     return [
+        'genealogie-meteo', // 🌦 Météo d’autrefois
         'genealogie-menu-names',
         'genealogie-menu-icons',
         'genealogie-lightbox-sections',
@@ -12446,6 +12454,7 @@ function add_event(PDO $pdo,array $data): array
     $id=(int)$pdo->lastInsertId();
     foreach(['signed1','signed2'] as $sk)if(array_key_exists($sk,$data)){$sv=is_scalar($data[$sk])?(string)$data[$sk]:'';$pdo->prepare("UPDATE events SET $sk=? WHERE id=?")->execute([$sv==='1'?1:($sv==='0'?0:null),$id]);} // ✍️ qui a signé l'acte (D35 « Savoir signer »)
     if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]);
+    if(array_key_exists('event_time',$data))$pdo->prepare('UPDATE events SET event_time=? WHERE id=?')->execute([event_time_value($data['event_time']),$id]); // 🌦 l'heure écrite dans l'acte (« 14:30 »)
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     log_change($pdo,'event',$id,'create',$scope==='family'?'Ajout d’un événement à la famille #'.$familyId:'Ajout d’un événement à la fiche #'.$personId);
     return ['id'=>$id];
@@ -12471,6 +12480,14 @@ function work_fields_from_data(PDO $pdo, int $typeId, array $data): string
         if ($value !== '') $values[$fieldName] = $value;
     }
     return $values ? json_encode($values, JSON_UNESCAPED_UNICODE) : '';
+}
+
+/** 🌦 L'heure d'un événement : « HH:MM » (la case K17 « data-ui-time » l'écrit ainsi), sinon rien. */
+function event_time_value($v): string
+{
+    $v=is_scalar($v)?trim((string)$v):'';
+    if(!preg_match('/^(\d{1,2}):(\d{2})(?::\d{2})?$/',$v,$m)||(int)$m[1]>23||(int)$m[2]>59)return '';
+    return sprintf('%02d:%02d',(int)$m[1],(int)$m[2]);
 }
 
 function save_event(PDO $pdo,array $data): array
@@ -12505,6 +12522,7 @@ function save_event(PDO $pdo,array $data): array
     }
     foreach(['signed1','signed2'] as $sk)if(array_key_exists($sk,$data)){$sv=is_scalar($data[$sk])?(string)$data[$sk]:'';$pdo->prepare("UPDATE events SET $sk=? WHERE id=?")->execute([$sv==='1'?1:($sv==='0'?0:null),$id]);} // ✍️ qui a signé l'acte (D35 « Savoir signer »)
     if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]); // « date incertaine » cochée
+    if(array_key_exists('event_time',$data))$pdo->prepare('UPDATE events SET event_time=? WHERE id=?')->execute([event_time_value($data['event_time']),$id]); // 🌦 l'heure écrite dans l'acte (« 14:30 »)
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     $stmt->execute([$id]);$after=$stmt->fetch();
     log_change($pdo,'event',$id,'update','Modification de l’événement #'.$id,$before,$after);

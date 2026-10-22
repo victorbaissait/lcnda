@@ -76,10 +76,25 @@ function checkReference(dir, problems) {
   }
 }
 
+/**
+ * 🌦 data-meteo/meteo-socle.sqlite (Météo d'autrefois, scripts/meteo/build-meteo.py) : données publiques de météo, permises
+ * seulement à cet endroit, sous ce nom, et si leur schéma est bien celui de la météo (aucune table de généalogie).
+ */
+function isMeteoData(full, problems) {
+  if (!/[\\/]php-app[\\/]data-meteo[\\/]meteo-(socle|complet|europe)\.sqlite$/.test(full)) return false;
+  const fd = fs.openSync(full, 'r'); const head = Buffer.alloc(Math.min(2 * 1024 * 1024, fs.fstatSync(fd).size)); fs.readSync(fd, head, 0, head.length, 0); fs.closeSync(fd);
+  const text = head.toString('latin1');
+  if (!text.startsWith('SQLite format 3') || !/CREATE TABLE (IF NOT EXISTS )?stations/.test(text) || !/CREATE TABLE (IF NOT EXISTS )?meta/.test(text)) { problems.push('données météo illisibles : ' + full); return true; }
+  for (const table of ['persons', 'events', 'families', 'media', 'notes', 'sources_links']) {
+    if (new RegExp('CREATE TABLE "?' + table + '"?\\s*\\(').test(text)) problems.push(`table « ${table} » dans les données météo : ` + full);
+  }
+  return true;
+}
+
 function verifyPackage(context) {
   const problems = [];
   walk(context.appOutDir, (full, entry) => {
-    if (entry.isFile() && FORBIDDEN_ANYWHERE.test(entry.name)) problems.push('fichier de données : ' + full);
+    if (entry.isFile() && FORBIDDEN_ANYWHERE.test(entry.name) && !isMeteoData(full, problems)) problems.push('fichier de données : ' + full);
   });
   const phpApp = path.join(resourcesDir(context), 'php-app');
   if (!fs.existsSync(path.join(phpApp, 'api.php'))) problems.push('code de l’application absent : ' + phpApp);
