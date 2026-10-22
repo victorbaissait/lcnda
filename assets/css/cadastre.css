@@ -1,0 +1,110 @@
+/* 🗺 Cadastre (assets/js/heritage-cadastre.js) : liste, fiche d'une parcelle, petite carte, calque de la Carte, blocs.
+ * Couleurs de l'app (--ink, --paper, --card-bg, --blue, --line-color) ; règles sombres écrites à la main en bas. */
+
+/* la petite carte (fiche, fenêtre « Ajouter ») */
+.cad-map { position: relative; overflow: hidden; height: 300px; border: var(--line); border-radius: 10px; background: #dde3e6; touch-action: none; cursor: grab; user-select: none; }
+.cad-map:active { cursor: grabbing; }
+.cad-map-base, .cad-map-cad { position: absolute; inset: 0; pointer-events: none; }
+.cad-map-base img { position: absolute; width: 256px; height: 256px; filter: grayscale(.35); }
+.cad-map-cad img, .cad-layer-tiles img, .h-am-tiles.is-cad img.cad-tile { position: absolute; max-width: none; pointer-events: none; }
+.cad-map-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cad-map-zoom { position: absolute; right: 8px; top: 8px; display: grid; gap: 4px; z-index: 2; }
+.cad-map-zoom button { width: 32px; height: 32px; border-radius: 8px; border: var(--line); background: var(--card-bg); color: var(--ink); font-size: 18px; cursor: pointer; }
+.cad-map-tog { position: absolute; left: 8px; top: 8px; z-index: 2; background: var(--card-bg); color: var(--ink); padding: 4px 8px; border-radius: 8px; border: var(--line); font-size: 13px; }
+.cad-map-attr { position: absolute; right: 6px; bottom: 4px; z-index: 2; font-size: 10px; background: rgba(255,255,255,.75); color: #333; padding: 1px 5px; border-radius: 4px; max-width: calc(100% - 12px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cad-map-hint { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 2; background: rgba(0,0,0,.72); color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 13px; }
+.cad-poly { fill: rgba(0,102,204,.12); stroke: var(--blue, #0066cc); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.cad-poly.is-sel { fill: rgba(204,71,0,.22); stroke: #cc4700; stroke-width: 3; }
+.cad-poly.is-found { fill: rgba(204,71,0,.18); stroke: #cc4700; stroke-width: 3; stroke-dasharray: 6 4; pointer-events: none; }
+.cad-mark { fill: #cc4700; stroke: #fff; stroke-width: 2; }
+
+/* la Carte : calque et commandes */
+.cad-layer { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.cad-layer-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cad-layer .cad-poly.is-mine { pointer-events: visiblePainted; cursor: pointer; }
+.cad-ctl { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cad-ctl .is-active, .cad-find-btns .is-active { background: var(--blue, #0066cc); color: #fff; }
+.map-stage.is-cad-pick { cursor: crosshair; }
+.cad-pop { position: absolute; z-index: 30; width: 280px; max-width: calc(100% - 16px); background: var(--card-bg); color: var(--ink); border: var(--line); border-radius: 10px; box-shadow: var(--shadow); padding: 10px 12px; display: grid; gap: 4px; }
+.cad-pop-x { position: absolute; right: 6px; top: 6px; }
+.cad-pop b { padding-right: 28px; }
+.cad-pop-act { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0; }
+
+/* la liste et la fiche */
+.cad-shape { display: block; }
+.cad-shape path { fill: rgba(0,102,204,.14); stroke: var(--blue, #0066cc); stroke-width: 1.6; stroke-linejoin: round; }
+.ui-card .cad-shape { width: 100%; height: 100%; max-height: 150px; }
+.cad-attr { margin-top: 18px; }
+.cad-sheet { display: grid; gap: 16px; }
+.cad-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.cad-card .card-head h3 small { font-weight: 400; color: var(--muted); }
+.cad-sheet-map { height: 320px; }
+.cad-dl { display: grid; gap: 4px; margin: 0; }
+.cad-dl-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; padding: 3px 0; border-bottom: 1px solid var(--line-color, rgba(0,0,0,.08)); }
+.cad-dl-row dt { color: var(--muted); }
+.cad-dl-row dd { margin: 0; overflow-wrap: anywhere; }
+.cad-sub { margin: 10px 0 4px; font-size: 14px; }
+.cad-free, .cad-ini { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #d9d9d9; color: #555; font-weight: 700; font-size: 13px; }
+.cad-media { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+.cad-mthumb { display: grid; gap: 4px; padding: 6px; border: var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); cursor: pointer; text-align: left; }
+.cad-mthumb img { width: 100%; height: 90px; object-fit: cover; border-radius: 5px; }
+.cad-mthumb span { display: grid; place-items: center; height: 90px; font-size: 32px; }
+.cad-mthumb small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cad-ar { margin: 8px 0; padding-left: 20px; }
+.cad-ar li { margin: 4px 0; }
+.cad-notes-view { white-space: normal; margin: 0; }
+
+/* la fenêtre « Ajouter / Modifier » */
+.cad-edit { display: grid; gap: 14px; }
+.cad-find { border: var(--line); border-radius: 10px; padding: 12px; background: var(--paper); display: grid; gap: 10px; }
+.cad-find h4 { margin: 0; }
+.cad-find h4 small { font-weight: 400; }
+.cad-find-row.form-grid { padding: 0; background: transparent; grid-template-columns: minmax(200px, 2fr) 90px 100px auto; gap: 10px; align-items: end; }
+.cad-find-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.cad-secs { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+.cad-secbtn { min-width: 34px; padding: 3px 8px; border: var(--line); border-radius: 6px; background: var(--card-bg); color: var(--ink); cursor: pointer; font-weight: 600; }
+.cad-secbtn:hover { border-color: var(--blue, #0066cc); }
+.cad-found { display: grid; gap: 6px; max-height: 260px; overflow: auto; }
+.cad-hit { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 6px 8px; border: var(--line); border-radius: 8px; background: var(--card-bg); }
+.cad-hit.is-on { border-color: #cc4700; box-shadow: 0 0 0 2px rgba(204,71,0,.25); }
+.cad-hit small { display: block; }
+.cad-edit-map { height: 260px; }
+.cad-edit-map[hidden] { display: none; }
+.cad-addr { display: flex; gap: 6px; align-items: center; }
+.cad-addr input { flex: 1; min-width: 0; }
+.cad-h { margin: 6px 0 0; }
+.cad-dates { display: grid; gap: 6px; }
+.cad-daterow { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: start; padding: 6px 8px; border-radius: 8px; background: var(--paper); }
+.cad-daterow > b, .cad-daterow > small { grid-column: 1; }
+.cad-daterow label { display: grid; gap: 2px; font-size: 13px; }
+.cad-links { align-items: start; }
+.cad-edit > .form-grid { padding: 0; background: transparent; }
+
+/* les blocs (village, maison, personne) */
+.cad-host-btns { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+.cad-host-pk { flex: 1; min-width: 220px; }
+
+@media (max-width: 720px) {
+    .cad-grid { grid-template-columns: 1fr; }
+    .cad-find-row.form-grid { grid-template-columns: 1fr 1fr; }
+    .cad-find-commune, .cad-find-btns { grid-column: 1 / -1; }
+    .cad-dl-row { grid-template-columns: 110px minmax(0, 1fr); }
+    .cad-daterow { grid-template-columns: 1fr 1fr; }
+    .cad-daterow > b, .cad-daterow > small { grid-column: 1 / -1; }
+    .cad-addr { flex-wrap: wrap; }
+    .cad-map, .cad-sheet-map { height: 240px; }
+}
+
+/* mode sombre (écrit à la main) */
+:root[data-theme="dark"] .cad-map { background: #1d2226; }
+:root[data-theme="dark"] .cad-map-base img { filter: grayscale(.35) brightness(.8); }
+:root[data-theme="dark"] .cad-map-attr { background: rgba(0,0,0,.6); color: #ddd; }
+:root[data-theme="dark"] .cad-poly { fill: rgba(77,159,255,.18); stroke: #4d9fff; }
+:root[data-theme="dark"] .cad-shape path { fill: rgba(77,159,255,.2); stroke: #4d9fff; }
+:root[data-theme="dark"] .cad-free, :root[data-theme="dark"] .cad-ini { background: #444; color: #ddd; }
+:root[data-theme="dark"] .cad-find, :root[data-theme="dark"] .cad-daterow { background: #1f1f1f; border-color: #555; }
+:root[data-theme="dark"] .cad-find-row.form-grid, :root[data-theme="dark"] .cad-edit > .form-grid { background: transparent; }
+:root[data-theme="dark"] .cad-hit, :root[data-theme="dark"] .cad-pop, :root[data-theme="dark"] .cad-mthumb, :root[data-theme="dark"] .cad-secbtn,
+:root[data-theme="dark"] .cad-map-zoom button, :root[data-theme="dark"] .cad-map-tog { background: #242424; color: #e8e8e8; border-color: #555; }
+:root[data-theme="dark"] .cad-dl-row { border-bottom-color: #3a3a3a; }
+:root[data-theme="dark"] .cad-dl-row dt, :root[data-theme="dark"] .cad-card .card-head h3 small { color: #aaa; }

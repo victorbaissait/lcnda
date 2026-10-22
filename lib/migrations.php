@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 59;
+const SCHEMA_VERSION = 62;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -80,6 +80,9 @@ function migration_steps(): array
         57 => 'schema_v57',
         58 => 'schema_v58',
         59 => 'schema_v59',
+        60 => 'schema_v60',
+        61 => 'schema_v61',
+        62 => 'schema_v62',
     ];
 }
 
@@ -2256,4 +2259,31 @@ function schema_v59(PDO $pdo): void
     if ($ev && !in_array('signed2', $ev, true)) { $pdo->exec('ALTER TABLE events ADD COLUMN signed2 INTEGER'); }
     $ew = $cols('event_witnesses');
     if ($ew && !in_array('signed', $ew, true)) { $pdo->exec('ALTER TABLE event_witnesses ADD COLUMN signed INTEGER'); }
+}
+
+/** 🗺 Cadastre (lib/cadastre.php, assets/js/heritage-cadastre.js) : les parcelles (commune, section, numéro, lieu-dit,
+ *  surface, nature, adresse, ancien numéro, contour GeoJSON) et leurs liens (personnes avec rôle et dates, maisons, lieux,
+ *  événements, médias, sources, cartes anciennes calées). */
+function schema_v60(PDO $pdo): void
+{
+    if (!function_exists('cadastre_schema')) { require_once __DIR__ . '/cadastre.php'; }
+    cadastre_schema($pdo);
+}
+
+/** 🔍 Images semblables et 👯 doublons d'images (lib/image_prints.php, assets/js/app-image-prints.js) : les empreintes des
+ *  photos calculées dans le navigateur (image_prints : hachages perceptuels, couleurs, points caractéristiques, taille et date
+ *  du fichier pour les recalculer quand la photo change), les « Ce n'est pas un doublon » (image_not_duplicates) et les
+ *  fusions de doublons notées pas à pas pour « ↶ Annuler » (image_dup_merges). */
+function schema_v61(PDO $pdo): void
+{
+    if (!function_exists('image_prints_schema')) { require_once __DIR__ . '/image_prints.php'; }
+    image_prints_schema($pdo);
+}
+
+/** 🌐 Mon site web (lib/website.php, assets/js/heritage-site-web.js) : les sites (websites : pages HTML, feuille de styles,
+ *  script, couleurs et polices, gardés en JSON ; info = petit résumé pour la liste) et leurs versions (website_versions). */
+function schema_v62(PDO $pdo): void
+{
+    if (!function_exists('website_schema')) { require_once __DIR__ . '/website.php'; }
+    website_schema($pdo);
 }

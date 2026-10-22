@@ -273,7 +273,7 @@
         // les sols des pièces (ou une dalle sous les murs)
         const V = ext.houseVoids, holes = V ? V.holesOf(H, f) : [];
         const slabs = f.rooms.length ? f.rooms.filter(r => !r.void) : []; // ▨ un vide n'a pas de plancher
-        slabs.forEach(rm => { const sh = holedShape(rm.pts, holes); if (!sh) return; const geo = new T.ShapeGeometry(sh); const pos = geo.attributes.position, uv = geo.attributes.uv; for (let i = 0; i < pos.count; i++) uv.setXY(i, pos.getX(i) / 1.2, pos.getY(i) / 1.2);
+        slabs.forEach(rm => { const sh = holedShape(ext.housePlus?.roomOutline?.(f, rm) || rm.pts, holes); if (!sh) return; const geo = new T.ShapeGeometry(sh); const pos = geo.attributes.position, uv = geo.attributes.uv; for (let i = 0; i < pos.count; i++) uv.setXY(i, pos.getX(i) / 1.2, pos.getY(i) / 1.2);
             const fm = L.FLOOR_MATS.find(m => m[0] === (rm.floor || 'parquet')), m = new T.Mesh(geo, mat(rm.color || fm?.[2] || '#b98b5c', rm.floor || 'parquet', {side: T.DoubleSide})); m.rotation.x = Math.PI / 2; m.position.y = .005; m.receiveShadow = true; g.add(m); });
         if (!f.rooms.length && f.walls.length) { const xs = f.walls.flatMap(w => [w.a[0], w.b[0]]), zs = f.walls.flatMap(w => [w.a[1], w.b[1]]), x0 = M(Math.min(...xs)), x1 = M(Math.max(...xs)), z0 = M(Math.min(...zs)), z1 = M(Math.max(...zs)); const m = box(x1 - x0, .05, z1 - z0, mat('#c9bfae', 'beton'), 1.2); m.position.set((x0 + x1) / 2, -.025, (z0 + z1) / 2); g.add(m); }
         // les murs, percés de leurs portes et fenêtres
@@ -288,6 +288,10 @@
                 const nx0 = -(p1[1] - p0[1]) / (len * 100 || 1) * (t * 50), ny0 = (p1[0] - p0[0]) / (len * 100 || 1) * (t * 50), cap = attic ? Math.min(whF, ...[p0, p1].flatMap(q => [[q[0] + nx0, q[1] + ny0], [q[0] - nx0, q[1] - ny0]]).map(q => M(HP.heightAt(H, f, q, attic)))) : whF /* sous la pente : le plus bas des deux faces */, hh = holes.find(q => tm >= q.t0 && tm <= q.t1);
                 const piece = (y0, y1, m0 = null) => { if (y1 - y0 < .005) return; const m = box(len + (m0 ? 0 : .012), y1 - y0, m0 ? .02 : t + .002, m0 || faces, tile); m.position.set(cx, y0 + (y1 - y0) / 2, cz); m.rotation.y = -ang; if (!m0) m.castShadow = m.receiveShadow = true; g.add(m); };
                 if (!hh) piece(0, cap); else { piece(0, Math.min(cap, hh.y0)); piece(Math.min(cap, hh.y1), cap); if (hh.o.type === 'window') piece(hh.y0, Math.min(cap, hh.y1), glassM); } }
+            // 🚪 les portes : le battant entrouvert, posé sur la courbe (ou sous la pente)
+            holes.filter(q => q.o.type !== 'window' && q.o.style !== 'arche').forEach(q => { const o = q.o, [cx, cz] = HP.bez(w, clamp(o.pos, 0, 1)), [tx, tz] = HP.tangentAt(w, clamp(o.pos, 0, 1)), ang = Math.atan2(tz, tx), ow = M(o.w), oh = Math.min(whF, q.y1) - q.y0; if (oh < .05) return;
+                const door = box(ow - .02, oh - .01, .04, mat(o.style === 'grange' ? '#6a4a2a' : '#8a5a32', 'lambris'), .8), sg = o.flip ? -1 : 1, hinge = o.swing === 'right' ? 1 : -1, pivot = new T.Group();
+                pivot.position.set(M(cx) + Math.cos(ang) * hinge * ow / 2, q.y0, M(cz) + Math.sin(ang) * hinge * ow / 2); pivot.rotation.y = -ang + hinge * sg * .9; door.position.set(-hinge * (ow - .02) / 2, (oh - .01) / 2, 0); pivot.add(door); g.add(pivot); });
         };
         f.walls.forEach(w => {
             if (HP && (attic || HP.bulgeOf(w))) return chunkWall(w);
@@ -325,7 +329,7 @@
         // 🪵 le plafond (pendant la visite) : uni, ou avec ses poutres apparentes
         if (ceil && f.ceil && f.ceil !== 'none' && !attic) { const cc = /^#[0-9a-f]{6}$/i.test(f.ceilColor || '') ? f.ceilColor : '#f1ece2';
             const up = V?.floorAbove(H, f), upHoles = up ? V.holesOf(H, up) : [];
-            (f.rooms.length ? f.rooms.filter(r => !r.void) : []).forEach(rm => { if (!rm.pts?.length) return; const sh = holedShape(rm.pts, upHoles); if (!sh) return; const geo = new T.ShapeGeometry(sh); const m = new T.Mesh(geo, mat(cc, 'platre', {side: T.DoubleSide})); m.rotation.x = Math.PI / 2; m.position.y = fh - .01; g.add(m);
+            (f.rooms.length ? f.rooms.filter(r => !r.void) : []).forEach(rm => { if (!rm.pts?.length) return; const sh = holedShape(ext.housePlus?.roomOutline?.(f, rm) || rm.pts, upHoles); if (!sh) return; const geo = new T.ShapeGeometry(sh); const m = new T.Mesh(geo, mat(cc, 'platre', {side: T.DoubleSide})); m.rotation.x = Math.PI / 2; m.position.y = fh - .01; g.add(m);
                 if (f.ceil === 'poutres') { const xs = rm.pts.map(p => M(p[0])), zs = rm.pts.map(p => M(p[1])), x0 = Math.min(...xs), x1 = Math.max(...xs), z0 = Math.min(...zs), z1 = Math.max(...zs), alongX = x1 - x0 <= z1 - z0, span = alongX ? x1 - x0 : z1 - z0, run = alongX ? z1 - z0 : x1 - x0, n = Math.max(1, Math.floor(run / .65)), bm = mat('#6a4a2e', 'poutres');
                     for (let i = 1; i <= n; i++) { const b = box(alongX ? span : .14, .18, alongX ? .14 : span, bm, .9), off = (alongX ? z0 : x0) + run * i / (n + 1); b.position.set(alongX ? (x0 + x1) / 2 : off, fh - .1, alongX ? off : (z0 + z1) / 2); b.castShadow = true; g.add(b); } } }); }
         // 📷 les photos d'époque, là où elles ont été prises (un clic : s'y placer et comparer)
@@ -372,7 +376,18 @@
     }
     /** M1 : gouttières et descentes ; fenêtres de toit (Velux), lucarnes (jacobines) et chiens-assis, posées sur un pan */
     function roofExtras({r, o, g, P, y0, hu, hv, ov, run, shape, pitch, along, mRoof, mWall, face}) {
-        if (shape === 'flat') return;
+        if (shape === 'flat') { // un toit plat : verrière, lanterneau (pointe vitrée), édicule (la sortie sur le toit)
+            const top = y0 + .25, glassM = new T.MeshStandardMaterial({color: '#a9cde0', transparent: true, opacity: .6, roughness: .1, metalness: .2}), zinc = mat('#6b6f73', 'zinc');
+            (Array.isArray(r.items) ? r.items : []).filter(it => (Number(it.wing) || 0) === (o.wing || 0)).slice(0, 40).forEach(it => {
+                const u = clamp(-hu + ov + (run - 2 * ov) * clamp(Number(it.pos ?? 50), 0, 100) / 100, -hu + .3, hu - .3), a = (clamp(Number(it.at ?? 50), 5, 95) / 100 * 2 - 1) * Math.max(.1, hv - ov - .3);
+                const w = M(clamp(Number(it.w) || (it.type === 'velux' ? 120 : it.type === 'shed' ? 100 : 160), 30, 600)), ln = M(clamp(Number(it.h) || (it.type === 'dormer' ? 160 : 120), 30, 600)), dims = (x, h, z) => along ? [x, h, z] : [z, h, x];
+                if (it.type === 'dormer') { const hh = 2.2, e = box(...dims(w, hh, ln), mWall, 1); e.position.copy(P(u, top + hh / 2, a)); e.castShadow = true; g.add(e); const cap = box(...dims(w + .16, .12, ln + .16), zinc, 1); cap.position.copy(P(u, top + hh + .06, a)); g.add(cap);
+                    const door = box(...dims(.8, 1.95, .04), mat('#7a5a3a', 'lambris'), .8); door.position.copy(P(u, top + .98, a - ln / 2 - .01)); g.add(door); return; }
+                const fr = box(...dims(w + .1, .18, ln + .1), zinc, 1); fr.position.copy(P(u, top + .09, a)); g.add(fr);
+                if (it.type === 'shed') { const pyr = new T.Mesh(new T.ConeGeometry(Math.SQRT1_2, 1, 4, 1), glassM); pyr.rotation.y = Math.PI / 4; pyr.scale.set(along ? w : ln, Math.min(w, ln) * .55, along ? ln : w); pyr.position.copy(P(u, top + .18 + Math.min(w, ln) * .275, a)); g.add(pyr); }
+                else { const gl = box(...dims(w, .05, ln), glassM, 1); gl.position.copy(P(u, top + .2, a)); g.add(gl); }
+            });
+            return; }
         const tp = Math.tan(pitch), low = Math.tan(Math.max(pitch, 60 * DEG)), inset = Math.min(hv, hu) * .28, h1 = inset * low, top2 = Math.tan(Math.min(pitch, 30 * DEG));
         /** la hauteur du pan à « a » mètres du milieu (vers l'égout), et sa pente */
         const hA = a => shape === 'mansard' ? (hv - a < inset ? y0 + (hv - a) * low : y0 + h1 + (hv - inset - a) * top2) : y0 + tp * (hv - a);
@@ -451,10 +466,10 @@
         let roomCur = null, roomT = 0;
         const escH = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
         function showRoomCard(rm, f) {
-            clearTimeout(roomT); const ppl = (rm?.people || []).slice(0, 8), mem = Array.isArray(rm?.mem) && rm.mem.length;
+            clearTimeout(roomT); const ppl = [...(rm?.people || [])].sort((a, b) => (b.primary !== false) - (a.primary !== false)).slice(0, 8), mem = Array.isArray(rm?.mem) && rm.mem.length;
             if (!rm || (!ppl.length && !mem && !rm.note) || o3.share) { roomCard.hidden = true; return; }
             roomCard.innerHTML = `<div class="h-hs-rchd"><b>🚪 ${escH(rm.name || 'Pièce')}</b>${rm.period ? `<small>${escH(rm.period)}</small>` : ''}<button type="button" class="icon-button small" data-rc="close" title="Fermer" aria-label="Fermer">×</button></div>
-                ${ppl.length ? `<ul>${ppl.map(p => `<li><button type="button" class="link-button" data-rc-p="${Number(p.id) || 0}">👤 ${escH(p.label || 'Personne')}</button>${p.role || p.years ? `<small>${escH([p.role, p.years].filter(Boolean).join(' · '))}</small>` : ''}</li>`).join('')}</ul>` : ''}
+                ${ppl.length ? `<ul>${ppl.map(p => `<li>${Number(p.id) ? `<button type="button" class="link-button" data-rc-p="${Number(p.id)}">${p.primary !== false ? '★' : '☆'} ${escH(p.label || 'Personne')}</button>` : `<span>${p.primary !== false ? '★' : '☆'} ${escH(p.label || 'Personne')}</span>`}${p.role || p.years ? `<small>${escH([p.role, p.years].filter(Boolean).join(' · '))}</small>` : ''}</li>`).join('')}</ul>` : ''}
                 ${rm.note ? `<p>${escH(String(rm.note).slice(0, 220))}${String(rm.note).length > 220 ? '…' : ''}</p>` : ''}${mem ? '<button type="button" class="button small secondary" data-rc="mem">✦ Les souvenirs de la pièce</button>' : ''}`;
             roomCard.dataset.room = rm.id; roomCard.dataset.floor = f.id; roomCard.style.top = `${under()}px`; roomCard.hidden = false; roomT = setTimeout(() => { roomCard.hidden = true; }, 9000);
         }
@@ -558,7 +573,9 @@
         /** les murs de l'étage, en segments pleins (mètres) : les portes et les passages laissent passer, pas les fenêtres */
         function buildSegs() {
             const f = Hcur.floors[fiCur]; segs = [];
-            (f.walls || []).forEach(w => { const ax = M(w.a[0]), az = M(w.a[1]), bx = M(w.b[0]), bz = M(w.b[1]), len = Math.hypot(bx - ax, bz - az); if (len < .02) return; const ux = (bx - ax) / len, uz = (bz - az) / len, t = M(w.t || f.wallT || 20);
+            (f.walls || []).forEach(w => { const HP = ext.housePlus; if (HP?.bulgeOf?.(w)) { const pts = HP.wallPts(w, 25), n = pts.length - 1, Lc = HP.arcLen(w), t = M(w.t || f.wallT || 20), doors = (f.openings || []).filter(o => o.wall === w.id && o.type !== 'window').map(o => [o.pos - o.w / 2 / Lc, o.pos + o.w / 2 / Lc]); // ⌒ un mur courbe : en petits morceaux
+                    for (let i = 0; i < n; i++) { const tm = (i + .5) / n; if (doors.some(([d0, d1]) => tm >= d0 && tm <= d1)) continue; segs.push([M(pts[i][0]), M(pts[i][1]), M(pts[i + 1][0]), M(pts[i + 1][1]), t]); } return; }
+                const ax = M(w.a[0]), az = M(w.a[1]), bx = M(w.b[0]), bz = M(w.b[1]), len = Math.hypot(bx - ax, bz - az); if (len < .02) return; const ux = (bx - ax) / len, uz = (bz - az) / len, t = M(w.t || f.wallT || 20);
                 const holes = (f.openings || []).filter(o => o.wall === w.id && o.type !== 'window').map(o => [o.pos * len - M(o.w) / 2, o.pos * len + M(o.w) / 2]).sort((a, b) => a[0] - b[0]);
                 let s = 0; holes.forEach(([h0, h1]) => { if (h0 > s) segs.push([ax + ux * s, az + uz * s, ax + ux * h0, az + uz * h0, t]); s = Math.max(s, h1); }); if (s < len) segs.push([ax + ux * s, az + uz * s, bx, bz, t]); });
             // ▨ on ne marche pas dans un vide : ses bords (et le tour des trémies) arrêtent comme un mur, sauf à l'arrivée d'un escalier
@@ -614,7 +631,7 @@
             const x0 = Math.min(...pts.map(p => p[0])), x1 = Math.max(...pts.map(p => p[0])), y0 = Math.min(...pts.map(p => p[1])), y1 = Math.max(...pts.map(p => p[1])), k = (S - 40) / Math.max(100, x1 - x0, y1 - y0), ox = (S - (x1 - x0) * k) / 2 - x0 * k, oy = (S - (y1 - y0) * k) / 2 - y0 * k, X = v => v * k + ox, Y = v => v * k + oy;
             mini._map = {k, ox, oy};
             (f.rooms || []).forEach(r => { if (!r.pts?.length) return; x.beginPath(); r.pts.forEach((p, i) => (i ? x.lineTo(X(p[0]), Y(p[1])) : x.moveTo(X(p[0]), Y(p[1])))); x.closePath(); x.fillStyle = '#efe6d4'; x.fill(); });
-            x.strokeStyle = '#2f2b27'; x.lineCap = 'square'; (f.walls || []).forEach(w => { x.lineWidth = Math.max(2, (w.t || f.wallT || 20) * k); x.beginPath(); x.moveTo(X(w.a[0]), Y(w.a[1])); x.lineTo(X(w.b[0]), Y(w.b[1])); x.stroke(); });
+            x.strokeStyle = '#2f2b27'; x.lineCap = 'square'; (f.walls || []).forEach(w => { x.lineWidth = Math.max(2, (w.t || f.wallT || 20) * k); x.beginPath(); (ext.housePlus?.wallPts?.(w, 25) || [w.a, w.b]).forEach((p, i) => (i ? x.lineTo(X(p[0]), Y(p[1])) : x.moveTo(X(p[0]), Y(p[1])))); x.stroke(); });
             x.strokeStyle = '#fbfaf7'; x.lineWidth = Math.max(3, 16 * k); (f.openings || []).forEach(o => { const w = f.walls.find(q => q.id === o.wall); if (!w || o.type === 'window') return; const L = Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]) || 1, ux = (w.b[0] - w.a[0]) / L, uy = (w.b[1] - w.a[1]) / L, c = o.pos * L; x.beginPath(); x.moveTo(X(w.a[0] + ux * (c - o.w / 2)), Y(w.a[1] + uy * (c - o.w / 2))); x.lineTo(X(w.a[0] + ux * (c + o.w / 2)), Y(w.a[1] + uy * (c + o.w / 2))); x.stroke(); });
             x.font = '700 20px system-ui, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
             (f.items || []).forEach(it => { if (STAIR.test(`${it.kind || ''} ${it.s2 || ''}`)) { x.fillStyle = '#9a7a5a'; x.fillText('🪜', X(it.x), Y(it.y)); } if (it.mem?.length) { x.fillStyle = '#c9962a'; x.fillText('✦', X(it.x), Y(it.y)); } });
@@ -666,6 +683,25 @@
         async function tourShots(w = 1600, h = 900) { const stops = Hcur.tour || [], out = [], w0 = W(), h0 = Hh(); renderer.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix();
             try { for (const t of stops) { await goPose(t); cam.position.set(P.x, floorBase(Hcur, Hcur.floors[fiCur]) + eyeM(), P.z); cam.lookAt(P.x - Math.sin(wyaw) * Math.cos(wpitch), cam.position.y + Math.sin(wpitch), P.z - Math.cos(wyaw) * Math.cos(wpitch)); renderer.render(scene, cam); out.push({text: t.text || '', blob: await new Promise(ok => renderer.domElement.toBlob(ok, 'image/jpeg', .9))}); } }
             finally { renderer.setSize(w0, h0); cam.aspect = w0 / h0; cam.updateProjectionMatrix(); } return out; }
+        /** 🎬 M7 : la vidéo de la visite guidée — on glisse d'un arrêt à l'autre, le texte en sous-titre, enregistrée depuis la vue 3D (MediaRecorder) */
+        let rec = null;
+        const videoMime = () => { if (typeof MediaRecorder === 'undefined') return null; for (const m of ['video/mp4;codecs=avc1.42E01E', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm']) { if (MediaRecorder.isTypeSupported?.(m)) return m; } return null; };
+        async function recordTour({w = 1280, h = 720, title = '', onProgress} = {}) {
+            const stops = (Hcur.tour || []).filter(t => t && Hcur.floors.some(f => f.id === t.fid)), mime = videoMime(); if (!stops.length) throw new Error('Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici).'); if (!mime) throw new Error('Ce navigateur ne sait pas enregistrer de vidéo.');
+            stopTour(); roomCard.hidden = true; photoBox.hidden = true; if (!walk) startWalk(); const hudWas = [hud.hidden, mini.hidden, cross.hidden]; hud.hidden = mini.hidden = cross.hidden = true;
+            const off = document.createElement('canvas'); off.width = w; off.height = h; const g2 = off.getContext('2d'), w0 = W(), h0 = Hh(); renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
+            let sub = '', big = title; const wrap = (t, max) => { const out = []; let line = ''; String(t).split(/\s+/).forEach(word => { const tt = line ? line + ' ' + word : word; if (g2.measureText(tt).width > max && line) { out.push(line); line = word; } else line = tt; }); if (line) out.push(line); return out.slice(0, 4); };
+            rec = {frame: () => { g2.drawImage(renderer.domElement, 0, 0, w, h); const fs = Math.round(h / 22);
+                if (big) { g2.fillStyle = 'rgba(0,0,0,.45)'; g2.fillRect(0, 0, w, h); g2.font = `700 ${fs * 2}px Georgia, serif`; g2.fillStyle = '#fff'; g2.textAlign = 'center'; g2.textBaseline = 'middle'; g2.fillText(big, w / 2, h / 2); }
+                else if (sub) { g2.font = `600 ${fs}px system-ui, sans-serif`; const ls = wrap(sub, w * .84), bh = ls.length * fs * 1.3 + fs; g2.fillStyle = 'rgba(0,0,0,.62)'; g2.fillRect(w * .06, h - bh - fs, w * .88, bh); g2.fillStyle = '#fff'; g2.textAlign = 'center'; g2.textBaseline = 'top'; ls.forEach((l, i) => g2.fillText(l, w / 2, h - bh - fs / 2 + i * fs * 1.3)); } }};
+            const mr = new MediaRecorder(off.captureStream(30), {mimeType: mime, videoBitsPerSecond: 6e6}), chunks = []; mr.ondataavailable = e => { if (e.data?.size) chunks.push(e.data); };
+            const done = new Promise(ok => { mr.onstop = ok; }), wait = ms => new Promise(r => setTimeout(r, ms));
+            try { await goPose(stops[0]); rec.frame(); mr.start(250); if (big) await wait(1800); big = '';
+                for (let i = 0; i < stops.length; i++) { sub = ''; if (i) await goPose(stops[i], 1600); sub = String(stops[i].text || ''); await wait(Math.max(3500, sub.length * 65)); onProgress?.((i + 1) / stops.length); }
+                sub = ''; await wait(400); mr.stop(); await done; }
+            finally { rec = null; renderer.setSize(w0, h0); cam.aspect = w0 / h0; cam.updateProjectionMatrix(); [hud.hidden, mini.hidden, cross.hidden] = hudWas; }
+            return new Blob(chunks, {type: mime.split(';')[0]});
+        }
         let spinT = 0;
         rebuild(); home(); paintSunBox(); refreshSite();
         // souris : tourner, déplacer, approcher ; en visite : regarder
@@ -681,7 +717,7 @@
             if (pickPhoto(locked ? null : e)) { if (locked) document.exitPointerLock(); return; }
             if (pickMemory(locked ? null : e)) { if (locked) document.exitPointerLock(); return; }
             if (measuring) return pickMeasure(e);
-            if (walk && !locked && e.pointerType === 'mouse') { try { const p = el.requestPointerLock?.(); p?.catch?.(() => {}); } catch (_) {} } });
+            if (walk && !locked && e.pointerType === 'mouse' && !o3.simple) { try { const p = el.requestPointerLock?.(); p?.catch?.(() => {}); } catch (_) {} } });
         el.addEventListener('wheel', e => { e.preventDefault(); if (walk) return; dist = clamp(dist * Math.exp(e.deltaY * .0012), 1.5, 200); }, {passive: false});
         const keys = new Set();
         const kd = e => { if (e.target.closest?.('input, textarea, select') || !box2.isConnected || box2.closest('dialog')?.querySelector('dialog[open]')) return; const k = e.key.toLowerCase(); keys.add(k);
@@ -707,7 +743,7 @@
                 if (now - stairT > 120) { stairT = now; drawMini(); const rmH = ext.housePlus?.roomAt?.(f, P.x * 100, P.z * 100) || null; if ((rmH?.id || null) !== roomCur) { roomCur = rmH?.id || null; if (!touring) showRoomCard(rmH, f); } const fl = sortedFloors(), i = fl.indexOf(f), up = stairAt(f, P.x, P.z) && fl[i + 1], down = fl[i - 1] && stairAt(fl[i - 1], P.x, P.z), s2 = up ? 1 : down ? -1 : 0;
                     if (s2 !== onStair) { onStair = s2; const sb = hud.querySelector('[data-wk="stair"]'); sb.hidden = !s2; sb.innerHTML = s2 ? `🪜 Un escalier : ${up ? '<button type="button" class="button small" data-wk="stairup">⬆ Monter (E)</button>' : ''}${down ? '<button type="button" class="button small secondary" data-wk="stairdown">⬇ Descendre (C)</button>' : ''}` : ''; } }
             } else place();
-            placeLabel(); renderer.render(scene, cam); raf = requestAnimationFrame(loop); };
+            placeLabel(); renderer.render(scene, cam); rec?.frame(); raf = requestAnimationFrame(loop); };
         raf = requestAnimationFrame(loop);
         const ro = new ResizeObserver(() => { renderer.setSize(W(), Hh()); cam.aspect = W() / Hh(); cam.updateProjectionMatrix(); }); ro.observe(box2);
         return {update: (H2, fi2) => { const siteChanged = JSON.stringify(H2.site || []) !== JSON.stringify(Hcur.site || []) || H2 !== Hcur; Hcur = H2; if (!walk) fiCur = fi2; if (siteChanged) refreshSite(); opts.roof = !!H2.roof?.on; const rb = bar.querySelector('[data-h3="roof"]'); if (rb) rb.checked = opts.roof; rebuild(); if (walk) buildSegs(); paintSunBox(); },
@@ -718,10 +754,14 @@
             walkState: () => ({x: P.x, z: P.z, yaw: wyaw, fi: fiCur, stair: onStair}), walkTo: (x, z) => { [P.x, P.z] = collide(x, z); },
             memPoints: () => { const r = el.getBoundingClientRect(), out = []; house.traverse(o => { if (o.isSprite && o.userData.mem) { const v = o.getWorldPosition(new T.Vector3()).project(cam); if (v.z < 1) out.push({...o.userData.mem, x: r.left + (v.x + 1) / 2 * r.width, y: r.top + (1 - v.y) / 2 * r.height}); } }); return out; }, // où sont les ✦ à l'écran
             walkKeys: keys, setWalkYaw: v => { wyaw = v; },
-            playTour, stopTour, touring: () => touring, showPhoto, pose: () => (walk ? pose() : null), goPose, tourShots, refreshSite, roomCard: () => roomCard,
+            playTour, stopTour, touring: () => touring, recordTour, videoMime, showPhoto, pose: () => (walk ? pose() : null), goPose, tourShots, refreshSite, roomCard: () => roomCard,
             /* le mode simple : de gros boutons au lieu de la souris */
             orbit: (dy, dp = 0) => { yaw += dy; pitch = clamp(pitch + dp, .05, 1.5); }, zoomBy: k => { dist = clamp(dist * k, 1.5, 200); }, home: () => home(),
             showFloor: i => { if (!Hcur.floors[i]) return; fiCur = i; rebuild(); }, floorIndex: () => fiCur,
+            /** 🚶 se promener avec de gros boutons (mode simple) : avancer ou reculer de « d » mètres, tourner de « a » radians, en glissant */
+            walkStep: (d = .8) => new Promise(ok => { if (!walk) startWalk(); const fx = -Math.sin(wyaw), fz = -Math.cos(wyaw), n = 12; let i = 0; const st = () => { if (!walk || i++ >= n) return ok(); [P.x, P.z] = collide(P.x + fx * d / n, P.z + fz * d / n); requestAnimationFrame(st); }; requestAnimationFrame(st); }),
+            walkTurn: (a = Math.PI / 6) => new Promise(ok => { if (!walk) startWalk(); const n = 10; let i = 0; const st = () => { if (!walk || i++ >= n) return ok(); wyaw += a / n; requestAnimationFrame(st); }; requestAnimationFrame(st); }),
+            floorsAround: () => { const fl = sortedFloors(), i = fl.indexOf(Hcur.floors[fiCur]); return {up: !!fl[i + 1], down: !!fl[i - 1], name: Hcur.floors[fiCur]?.name || ''}; },
             spin: on => { if (spinT) { clearInterval(spinT); spinT = 0; } if (on) spinT = setInterval(() => { if (!walk) yaw += .006; }, 16); },
             itemAt: (cx, cy) => { rayAt({clientX: cx, clientY: cy}); const hit = ray.intersectObjects(house.children, true).find(h => h.object.isMesh); let o = hit?.object; while (o && o.userData?.hsItem == null) o = o.parent; return o ? {id: o.userData.hsItem, obj: o, point: hit.point} : null; }, // 🖼 l'objet sous la souris (une image déposée dessus)
             destroy: () => { stopPlay(); stopTour(); if (spinT) clearInterval(spinT); clearTimeout(roomT); cancelAnimationFrame(raf); ro.disconnect(); try { if (document.pointerLockElement === el) document.exitPointerLock(); } catch (_) {} document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); window.removeEventListener('blur', blur); renderer.dispose(); box2.innerHTML = ''; box2.classList.remove('is-walking'); barAc.abort(); if (!ownBar) { bar.hidden = true; bar.querySelectorAll('.is-on').forEach(b => b.classList.remove('is-on')); } }};

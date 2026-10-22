@@ -16,6 +16,7 @@
      * cfg : key (réglages), defaults [[id, icône, nom, [clés]]], allKeys(), label(k), defaultEnabled,
      *       flatOrder() / setFlatOrder(keys) / flatDefaults(), canHide + hidden() / setHidden(keys),
      *       mine() → [[valeur, icône, nom]] et mineKey (ordre de « Mes listes »), current(), eyebrow, what (« pages », « listes »), searchPh
+     *       keywords {valeur: 'mots'} (facultatif) : la case de recherche trouve aussi une page par ce qu'elle contient
      */
     function make(cfg) {
         const defaults = () => cfg.defaults.map(([id, icon, label, items]) => ({id, icon, label, items: [...items]}));
@@ -59,7 +60,7 @@
             content.querySelectorAll('[data-mt-group]').forEach(d => d.addEventListener('toggle', () => { const q = prefs(); if (q.open === 'closed' && q.closedMode === 'remember') { q.openState[d.dataset.mtGroup] = d.open; save(q); } }, {signal}));
             const q = content.querySelector('[data-mt-search]');
             q?.addEventListener('input', () => { const v = fold(q.value.trim());
-                content.querySelectorAll('[data-mt-group], [data-mt-flat]').forEach(d => { let any = false; d.querySelectorAll('[data-side-value]').forEach(b => { const hit = !v || fold(b.textContent).includes(v); b.hidden = !hit; any = any || hit; }); d.hidden = !any; if (v && any && d.tagName === 'DETAILS') d.open = true; });
+                content.querySelectorAll('[data-mt-group], [data-mt-flat]').forEach(d => { let any = false; d.querySelectorAll('[data-side-value]').forEach(b => { const hit = !v || fold(`${b.textContent} ${cfg.keywords?.[b.dataset.sideValue] || ''}`).includes(v); b.hidden = !hit; any = any || hit; }); d.hidden = !any; if (v && any && d.tagName === 'DETAILS') d.open = true; });
                 const sep = content.querySelector('[data-mt-minesep]'); if (sep) sep.hidden = !!sep.nextElementSibling?.hidden; }, {signal});
         }
         /** « Réordonner » : activer ou non les groupes, puis ranger (groupes ou liste simple) ; « Mes listes » à part, en bas */

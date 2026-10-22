@@ -53,10 +53,10 @@
     function heightAt(H, f, p, at = atticOf(H, f)) { const full = Number(f?.height || 270); return at ? Math.min(full, slopeH(at, at.knee, p)) : full; }
     /** surface d'une pièce (cm²) et surface « loi Carrez » (hauteur ≥ 1,80 m), sur une grille de 10 cm */
     function roomSurfaces(H, f, rm) {
-        const tot = area(rm.pts); if (rm.void) return {area: 0, carrez: 0, hmin: 0, hmax: 0};
+        const pts = roomOutline(f, rm), tot = area(pts); if (rm.void) return {area: 0, carrez: 0, hmin: 0, hmax: 0};
         const at = atticOf(H, f), full = Number(f.height || 270); if (!at) return {area: tot, carrez: full >= 180 ? tot : 0, hmin: full, hmax: full};
-        const xs = rm.pts.map(p => p[0]), ys = rm.pts.map(p => p[1]), step = 10; let n = 0, ok = 0, hmin = Infinity, hmax = 0;
-        for (let x = Math.min(...xs) + step / 2; x < Math.max(...xs); x += step) for (let y = Math.min(...ys) + step / 2; y < Math.max(...ys); y += step) { if (!pointIn(rm.pts, [x, y])) continue; n++; const h = heightAt(H, f, [x, y], at); hmin = Math.min(hmin, h); hmax = Math.max(hmax, h); if (h >= 180) ok++; }
+        const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), step = 10; let n = 0, ok = 0, hmin = Infinity, hmax = 0;
+        for (let x = Math.min(...xs) + step / 2; x < Math.max(...xs); x += step) for (let y = Math.min(...ys) + step / 2; y < Math.max(...ys); y += step) { if (!pointIn(pts, [x, y])) continue; n++; const h = heightAt(H, f, [x, y], at); hmin = Math.min(hmin, h); hmax = Math.max(hmax, h); if (h >= 180) ok++; }
         return {area: tot, carrez: n ? tot * ok / n : 0, hmin: n ? hmin : full, hmax: n ? hmax : full};
     }
     /** les bandes de moins de 1,80 m (plan des combles) : des carrés de 20 cm, regroupés par ligne */
@@ -76,6 +76,16 @@
     /** les points du mur, tous les « step » cm environ (2 points pour un mur droit) */
     function wallPts(w, step = 25) { if (!bulgeOf(w)) return [[...w.a], [...w.b]]; const L = arcLen(w), n = clamp(Math.ceil(L / step), 6, 80); return Array.from({length: n + 1}, (_, i) => bez(w, i / n)); }
     function arcLen(w) { if (!bulgeOf(w)) return Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]); let L = 0, p = w.a; for (let i = 1; i <= 24; i++) { const q = bez(w, i / 24); L += Math.hypot(q[0] - p[0], q[1] - p[1]); p = q; } return L; }
+    /** la direction du mur au paramètre t (unitaire) */
+    const tangentAt = (w, t) => { const p = bez(w, clamp(t - .01, 0, 1)), q = bez(w, clamp(t + .01, 0, 1)), L = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1; return [(q[0] - p[0]) / L, (q[1] - p[1]) / L]; };
+    /** le contour d'une pièce dont un côté est un mur courbe : ce côté suit la courbe (plan, sol et plafond 3D, surfaces) */
+    function roomOutline(f, rm) {
+        const pts = rm?.pts || [], curved = (f?.walls || []).filter(w => bulgeOf(w)); if (!curved.length || pts.length < 3) return pts;
+        const near = (p, q) => Math.abs(p[0] - q[0]) < 3 && Math.abs(p[1] - q[1]) < 3, out = [];
+        pts.forEach((p, i) => { const q = pts[(i + 1) % pts.length]; out.push(p); const w = curved.find(c => (near(c.a, p) && near(c.b, q)) || (near(c.a, q) && near(c.b, p))); if (!w) return;
+            const mid = wallPts(w, 20).slice(1, -1); out.push(...(near(w.a, p) ? mid : mid.reverse())); });
+        return out;
+    }
     /** le chemin SVG d'un mur courbe (ou droit) */
     const wallD = w => { if (!bulgeOf(w)) return `M${w.a[0]} ${w.a[1]}L${w.b[0]} ${w.b[1]}`; const c = ctrlOf(w); return `M${w.a[0]} ${w.a[1]}Q${r1(c[0])} ${r1(c[1])} ${w.b[0]} ${w.b[1]}`; };
 
@@ -147,6 +157,25 @@
         const rank = {red: 0, orange: 1, yellow: 2}; return out.sort((a, b) => rank[a.level] - rank[b.level]);
     }
 
+    /** M1/M3 : les lucarnes, fenêtres de toit, verrières… en plan (cm) : {it, type, poly, base (le bas, cm au-dessus du sol), top, flat} — les mêmes places que la 3D */
+    function roofItemsPlan(H) {
+        const r = H?.roof || {}, tf = topFloor(H); if (!r.on || !tf || !(r.items || []).length) return [];
+        const flat = r.shape === 'flat', rg = flat ? null : roofGeom(H, tf), at = atticOf(H, tf), knee = at ? at.knee : Number(tf.height || 270), b0 = baseOf(H, tf);
+        const xs = (tf.walls || []).flatMap(w => [w.a[0], w.b[0]]), ys = (tf.walls || []).flatMap(w => [w.a[1], w.b[1]]); if (!xs.length) return [];
+        const rects = flat ? [{box: {x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys)}, along: Math.max(...xs) - Math.min(...xs) >= Math.max(...ys) - Math.min(...ys)}] : (rg?.rects || []);
+        return (r.items || []).slice(0, 40).map(it => {
+            const rc = rects[Number(it.wing) || 0] || rects[0]; if (!rc) return null; const {box, along} = rc, L = along ? box.x1 - box.x0 : box.y1 - box.y0, S = along ? box.y1 - box.y0 : box.x1 - box.x0, half = S / 2;
+            const u = (along ? box.x0 : box.y0) + clamp(L * clamp(Number(it.pos ?? 50), 0, 100) / 100, 30, Math.max(30, L - 30)), cA = (along ? box.y0 : box.x0) + half, s = r.shape === 'shed' ? -1 : it.side === 'b' ? 1 : -1;
+            const P2 = (uu, a) => along ? [uu, cA + a] : [cA + a, uu], rectP = (u0, u1, a0, a1) => [P2(u0, a0), P2(u1, a0), P2(u1, a1), P2(u0, a1)];
+            if (flat) { const w = clamp(Number(it.w) || (it.type === 'velux' ? 120 : it.type === 'shed' ? 100 : 160), 30, 600), ln = clamp(Number(it.h) || (it.type === 'dormer' ? 160 : 120), 30, 600), a = (clamp(Number(it.at ?? 50), 5, 95) / 100 * 2 - 1) * Math.max(10, half - 30), top0 = b0 + Number(tf.height || 270) + 25;
+                return {it, type: it.type, flat: true, poly: rectP(u - w / 2, u + w / 2, a - ln / 2, a + ln / 2), base: top0, top: top0 + (it.type === 'dormer' ? 220 : it.type === 'shed' ? 18 + Math.min(w, ln) * .55 : 25)}; }
+            const hA = a => slopeH(rg, knee, P2(u, s * a)), w = clamp(Number(it.w) || (it.type === 'velux' ? 78 : 110), 30, 600);
+            if (it.type === 'velux') { const a = clamp(Number(it.at ?? 50), 5, 95) / 100 * half, ln = clamp(Number(it.h) || 98, 30, 300) * Math.cos(rg.pitch * Math.PI / 180); return {it, type: 'velux', poly: rectP(u - w / 2, u + w / 2, s * (a - ln / 2), s * (a + ln / 2)), base: b0 + hA(a), top: b0 + hA(a - ln / 2)}; }
+            const aF = Math.max(40, half - 5), yW = hA(aF), yT = yW + clamp(Number(it.h) || 120, 60, 260); let lo = 0, hi = aF; for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (hA(m) > yT) lo = m; else hi = m; } const aB = Math.max(25, (lo + hi) / 2);
+            return aF - aB < 30 ? null : {it, type: it.type, poly: rectP(u - w / 2, u + w / 2, s * aB, s * aF), base: b0 + yW, top: b0 + yT + (it.type === 'shed' ? 10 : w / 2 * Math.tan(Math.max(35, rg.pitch) * Math.PI / 180))};
+        }).filter(Boolean);
+    }
+
     /* ═════════ M3 · Coupe ═════════ */
     /** les intervalles [u0, u1] (cm le long de la coupe) où la ligne traverse un polygone */
     function crossPoly(poly, a, dir, L) {
@@ -162,6 +191,8 @@
         const rg = roof ? roofGeom(H, tf) : null, atT = atticOf(H, tf), kneeT = atT ? atT.knee : Number(tf?.height || 270);
         const roofAt = u => { if (!rg) return null; const p = [a[0] + dir[0] * u, a[1] + dir[1] * u]; if (!rg.rects.some(({box}) => p[0] >= box.x0 - 1 && p[0] <= box.x1 + 1 && p[1] >= box.y0 - 1 && p[1] <= box.y1 + 1)) return null; return baseOf(H, tf) + slopeH(rg, kneeT, p); };
         if (roof && roof.shape !== 'flat') for (let i = 0; i <= 80; i++) { const h = roofAt(L * i / 80); if (h != null) roofTop = Math.max(roofTop, h); }
+        const rItems = roofItemsPlan(H).map(x => ({...x, cr: crossPoly(x.poly, a, dir, L)})).filter(x => x.cr.length); rItems.forEach(x => { roofTop = Math.max(roofTop, x.top); });
+        if (roof?.shape === 'flat' && tf) roofTop = Math.max(roofTop, baseOf(H, tf) + Number(tf.height || 270) + 70);
         const pad = 120, W = L + 2 * pad, Ht = roofTop - bottom + 2 * pad, X = u => pad + u, Y = h => pad + (roofTop - h);
         let s = `<rect x="0" y="0" width="${W}" height="${Ht}" fill="#fbf8f2"/><defs><pattern id="cuthatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="#d9cfbf"/><path d="M0 0V12" stroke="#8a7a66" stroke-width="2"/></pattern></defs>`;
         s += `<path d="M0 ${Y(0)}H${W}" stroke="#6a8a4a" stroke-width="3"/><rect x="0" y="${Y(0)}" width="${W}" height="${Ht - Y(0)}" fill="#e7e1d2" opacity=".55"/>`;
@@ -171,13 +202,14 @@
             (f.rooms || []).filter(r => !r.void && r.pts?.length > 2).forEach(rm => crossPoly(rm.pts, a, dir, L).forEach(([u0, u1]) => { let segs = [[u0, u1]]; holes.forEach(hp => crossPoly(hp, a, dir, L).forEach(([h0, h1]) => { segs = segs.flatMap(([s0, s1]) => h1 <= s0 || h0 >= s1 ? [[s0, s1]] : [[s0, Math.max(s0, h0)], [Math.min(s1, h1), s1]].filter(([p, q]) => q - p > .5)); }));
                 segs.forEach(([s0, s1]) => { s += `<rect x="${X(s0)}" y="${Y(y0)}" width="${s1 - s0}" height="${sl}" fill="url(#cuthatch)" stroke="#3a3530" stroke-width="1.5"/>`; }); }));
             // les murs coupés (pleins), percés là où la coupe passe dans une porte ou une fenêtre
-            (f.walls || []).forEach(w => { const t = Number(w.t || f.wallT || 20), wl = wallLen(w); if (wl < 1) return; const ux = (w.b[0] - w.a[0]) / wl, uy = (w.b[1] - w.a[1]) / wl, nx = -uy * t / 2, ny = ux * t / 2;
-                const poly = [[w.a[0] + nx, w.a[1] + ny], [w.b[0] + nx, w.b[1] + ny], [w.b[0] - nx, w.b[1] - ny], [w.a[0] - nx, w.a[1] - ny]];
-                crossPoly(poly, a, dir, L).forEach(([u0, u1]) => { const um = (u0 + u1) / 2, p = [a[0] + dir[0] * um, a[1] + dir[1] * um], k = ((p[0] - w.a[0]) * ux + (p[1] - w.a[1]) * uy) / wl, wh = Math.min(Number(w.h || fh), heightAt(H, f, p));
+            (f.walls || []).forEach(w => { const t = Number(w.t || f.wallT || 20), wl = arcLen(w); if (wl < 1) return; const wp = wallPts(w, 20), n = wp.length - 1;
+                for (let i = 0; i < n; i++) { const p0 = wp[i], p1 = wp[i + 1], sl = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]); if (sl < .1) continue; const ux = (p1[0] - p0[0]) / sl, uy = (p1[1] - p0[1]) / sl, nx = -uy * t / 2, ny = ux * t / 2, ex = n > 1 ? ux * 1 : 0, ey = n > 1 ? uy * 1 : 0;
+                const poly = [[p0[0] + nx - ex, p0[1] + ny - ey], [p1[0] + nx + ex, p1[1] + ny + ey], [p1[0] - nx + ex, p1[1] - ny + ey], [p0[0] - nx - ex, p0[1] - ny - ey]];
+                crossPoly(poly, a, dir, L).forEach(([u0, u1]) => { const um = (u0 + u1) / 2, p = [a[0] + dir[0] * um, a[1] + dir[1] * um], k = (i + clamp(((p[0] - p0[0]) * ux + (p[1] - p0[1]) * uy) / sl, 0, 1)) / n, wh = Math.min(Number(w.h || fh), heightAt(H, f, p));
                     const o = (f.openings || []).find(q => q.wall === w.id && Math.abs(k * wl - q.pos * wl) <= q.w / 2);
-                    const pieces = !o ? [[0, wh]] : (() => { const s0 = o.type === 'window' ? Number(o.sill ?? 90) : 0, s1 = Math.min(wh, s0 + Number(o.h || 0)); return [[0, s0], [s1, wh]].filter(([p0, p1]) => p1 - p0 > .5); })();
+                    const pieces = !o ? [[0, wh]] : (() => { const s0 = o.type === 'window' ? Number(o.sill ?? 90) : 0, s1 = Math.min(wh, s0 + Number(o.h || 0)); return [[0, s0], [s1, wh]].filter(([p0b, p1b]) => p1b - p0b > .5); })();
                     pieces.forEach(([h0, h1]) => { s += `<rect x="${X(u0)}" y="${Y(y0 + h1)}" width="${Math.max(2, u1 - u0)}" height="${h1 - h0}" fill="#4a423a" stroke="#2a2420" stroke-width="1"/>`; });
-                    if (o?.type === 'window') s += `<rect x="${X(u0)}" y="${Y(y0 + Math.min(wh, Number(o.sill ?? 90) + Number(o.h || 0)))}" width="${Math.max(2, u1 - u0)}" height="${Math.min(wh, Number(o.sill ?? 90) + Number(o.h || 0)) - Number(o.sill ?? 90)}" fill="#bcd8e8" stroke="#5a8aa8"/>`; }); });
+                    if (o?.type === 'window') s += `<rect x="${X(u0)}" y="${Y(y0 + Math.min(wh, Number(o.sill ?? 90) + Number(o.h || 0)))}" width="${Math.max(2, u1 - u0)}" height="${Math.min(wh, Number(o.sill ?? 90) + Number(o.h || 0)) - Number(o.sill ?? 90)}" fill="#bcd8e8" stroke="#5a8aa8"/>`; }); } });
             // les escaliers traversés : une pente de marches
             if (Vd) (f.items || []).filter(it => Vd.isStair(it)).forEach(it => { const poly = Vd.itemPoly(it), cr = crossPoly(poly, a, dir, L); if (!cr.length) return; const hh = Vd.stairH(H, f, it), [lo, hi] = [Vd.rotPt(it, 0, it.d / 2), Vd.rotPt(it, 0, -it.d / 2)], ul = (lo[0] - a[0]) * dir[0] + (lo[1] - a[1]) * dir[1], uh = (hi[0] - a[0]) * dir[0] + (hi[1] - a[1]) * dir[1];
                 if (Math.abs(uh - ul) > 20) { const n = Math.max(6, Math.round(hh / 18)); let d = `M${X(ul)} ${Y(y0)}`; for (let i = 0; i < n; i++) { const u2 = ul + (uh - ul) * (i + 1) / n; d += `V${Y(y0 + hh * (i + 1) / n)}H${X(u2)}`; } s += `<path d="${d}" fill="none" stroke="#7a4f2a" stroke-width="3"/>`; }
@@ -185,6 +217,14 @@
             // la hauteur sous plafond et le nom de l'étage
             s += `<g font-family="Helvetica, sans-serif" font-size="22" fill="#3a3530"><text x="${X(-pad + 10)}" y="${Y(y0 + fh / 2)}">${esc(f.name || '')}</text><text x="${X(-pad + 10)}" y="${Y(y0 + fh / 2) + 26}" fill="#6a6560" font-size="18">${String(r1(fh / 100)).replace('.', ',')} m</text></g>`;
             s += `<path d="M${X(-18)} ${Y(y0)}V${Y(y0 + fh)}" stroke="#2a7de1" stroke-width="2" marker-start="url(#carr)" marker-end="url(#carr)"/>`; });
+        // le toit plat (dalle et acrotère), puis les lucarnes, fenêtres de toit, verrières, lanterneaux et édicules coupés
+        if (roof?.shape === 'flat' && tf) { const xs = tf.walls.flatMap(w => [w.a[0], w.b[0]]), ys = tf.walls.flatMap(w => [w.a[1], w.b[1]]), y1 = baseOf(H, tf) + Number(tf.height || 270);
+            crossPoly([[Math.min(...xs), Math.min(...ys)], [Math.max(...xs), Math.min(...ys)], [Math.max(...xs), Math.max(...ys)], [Math.min(...xs), Math.max(...ys)]], a, dir, L).forEach(([u0, u1]) => { s += `<rect x="${X(u0)}" y="${Y(y1 + 25)}" width="${u1 - u0}" height="25" fill="#8a4b3a"/>`; if (roof.parapet !== false) [u0, u1 - 12].forEach(u => { s += `<rect x="${X(u)}" y="${Y(y1 + 70)}" width="12" height="45" fill="#4a423a"/>`; }); }); }
+        rItems.forEach(x => x.cr.forEach(([u0, u1]) => { const wd = Math.max(2, u1 - u0);
+            if (x.type === 'velux' && !x.flat) { s += `<path d="M${X(u0)} ${Y(roofAt(u0) ?? x.base)}L${X(u1)} ${Y(roofAt(u1) ?? x.top)}" stroke="#2b3f4f" stroke-width="12"/>`; return; }
+            if (x.flat) { s += x.type === 'dormer' ? `<rect x="${X(u0)}" y="${Y(x.top)}" width="${wd}" height="${x.top - x.base}" fill="#e9e1cf" stroke="#4a423a" stroke-width="2"/><rect x="${X(u0)}" y="${Y(x.top) - 6}" width="${wd}" height="8" fill="#6b6f73"/>`
+                : x.type === 'shed' ? `<path d="M${X(u0)} ${Y(x.base + 18)}L${X((u0 + u1) / 2)} ${Y(x.top)}L${X(u1)} ${Y(x.base + 18)}Z" fill="#a9cde0" stroke="#5a8aa8" stroke-width="2"/><rect x="${X(u0)}" y="${Y(x.base + 18)}" width="${wd}" height="18" fill="#6b6f73"/>` : `<rect x="${X(u0)}" y="${Y(x.top)}" width="${wd}" height="${x.top - x.base}" fill="#a9cde0" stroke="#5a8aa8" stroke-width="2"/>`; return; }
+            const hW = (x.top - x.base) * .55; s += `<rect x="${X(u0)}" y="${Y(x.base + hW + 20)}" width="${wd}" height="${hW + 20}" fill="#e9e1cf" stroke="#4a423a" stroke-width="2"/><rect x="${X(u0) + wd * .2}" y="${Y(x.base + hW)}" width="${wd * .6}" height="${hW * .7}" fill="#bcd8e8" stroke="#5a8aa8"/><path d="M${X(u0) - 10} ${Y(x.base + hW + 20)}L${X((u0 + u1) / 2)} ${Y(x.top)}L${X(u1) + 10} ${Y(x.base + hW + 20)}" fill="none" stroke="#8a4b3a" stroke-width="6"/>`; }));
         if (roof && roof.shape !== 'flat') { let d = '', pen = false; for (let i = 0; i <= 120; i++) { const u = L * i / 120, h = roofAt(u); if (h == null) { pen = false; continue; } d += `${pen ? 'L' : 'M'}${X(u)} ${Y(h)}`; pen = true; } if (d) s += `<path d="${d}" fill="none" stroke="#8a4b3a" stroke-width="8" stroke-linejoin="round"/>`; }
         s = `<defs><marker id="carr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2a7de1"/></marker></defs>` + s;
         if (title) s += `<text x="${W / 2}" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="700" fill="#3a3530">${esc(title)}</text>`;
@@ -233,7 +273,7 @@ var fi=0;(H.floors||[]).forEach(function(f,i){if(f.level===0)fi=i;});window.LCND
             <div class="h-hs-row"><button type="button" class="button small ${red ? '' : 'secondary'}" data-hs-cmd="plus:check">⚠️ Vérifier le plan${n.length ? ` (${n.length})` : ' ✓'}</button></div>
             ${y1 > y0 ? `<label><span data-help="Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale)." data-help-faq="époques de la maison">🕰 L’année</span><input type="range" min="${y0}" max="${y1}" step="1" value="${Number(ctx.year) || y1}" data-hs-plus="year" data-ui-off><small class="muted" data-hs-plus-out="year">${Number(ctx.year) || y1}</small></label>` : ''}
             <p class="small"><b>🗺 Visite guidée</b> : ${tour.length ? `${tour.length} arrêt${tour.length > 1 ? 's' : ''}` : 'aucun arrêt'} · <b>📷 Photos d’époque</b> : ${ph.length}</p>
-            <div class="h-hs-row">${tour.length ? '<button type="button" class="button small secondary" data-hs-cmd="plus:tourplay">▶ Visite guidée</button><button type="button" class="button small secondary" data-hs-cmd="plus:tourlist">✎ Les arrêts</button><button type="button" class="button small secondary" data-hs-cmd="plus:tourshots" title="Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage">⤓ Images de la visite</button>' : ''}<button type="button" class="button small secondary" data-hs-cmd="plus:tourhelp" title="Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D)">＋ Arrêt, 📷 photo…</button></div>
+            <div class="h-hs-row">${tour.length ? '<button type="button" class="button small secondary" data-hs-cmd="plus:tourplay">▶ Visite guidée</button><button type="button" class="button small secondary" data-hs-cmd="plus:tourlist">✎ Les arrêts</button><button type="button" class="button small secondary" data-hs-cmd="plus:tourvideo" title="La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre">🎬 Vidéo de la visite…</button><button type="button" class="button small secondary" data-hs-cmd="plus:tourshots" title="Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage">⤓ Images de la visite</button>' : ''}<button type="button" class="button small secondary" data-hs-cmd="plus:tourhelp" title="Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D)">＋ Arrêt, 📷 photo…</button></div>
             ${ph.length ? `<ul class="h-hs-people">${ph.map((p, i) => `<li><button type="button" class="link-button" data-hs-cmd="plus:photo:${i}">📷 ${esc(p.title || 'Photo')}</button><button type="button" class="icon-button" data-hs-cmd="plus:photodel:${i}" title="Retirer">×</button></li>`).join('')}</ul>` : ''}
             <p class="small"><b>🏘 Le hameau</b> : ${site.length ? site.map(x => esc(x.name || 'Bâtiment')).join(', ') : 'cette maison seule'}${H.meta?.foyer ? ` · foyer n° ${esc(H.meta.foyer)}` : ''}</p>
             <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="plus:site">🏘 Bâtiments du terrain…</button></div>
@@ -275,6 +315,22 @@ var fi=0;(H.floors||[]).forEach(function(f,i){if(f.level===0)fi=i;});window.LCND
             const shots = await v3.tourShots(); v3.stopWalk?.(); if (!shots.length) return; const files = []; for (let i = 0; i < shots.length; i++) files.push({name: `${String(i + 1).padStart(2, '0')}-arret.jpg`, data: new Uint8Array(await shots[i].blob.arrayBuffer())});
             files.push({name: 'textes.txt', data: new TextEncoder().encode(shots.map((x, i) => `${i + 1}. ${x.text}`).join('\n\n'))});
             download(await root.LCNDA_SHEET.makeZip(files), `${slugOf(ctx.name)}-visite-guidee.zip`); return toast(`✓ ${shots.length} image${shots.length > 1 ? 's' : ''} : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off).`); }
+        if (k === 'tourvideo') { const n = (H.tour || []).length; if (!n) return toast('Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici.', 'error');
+            const mimeOk = typeof MediaRecorder !== 'undefined', mp4 = mimeOk && ['video/mp4;codecs=avc1.42E01E', 'video/mp4'].some(m => MediaRecorder.isTypeSupported?.(m));
+            return open({eyebrow: 'MAISON', title: '🎬 La vidéo de la visite guidée', submitLabel: `⤓ Exporter la vidéo en ${mp4 ? 'MP4' : 'WebM'}`, body: `<p class="muted small">${n} arrêt${n > 1 ? 's' : ''} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ ${Math.round((H.tour || []).reduce((a, t) => a + Math.max(3.5, String(t.text || '').length * .065) + 1.6, 2.2))} secondes) : laisse la fenêtre ouverte.</p>
+                <div class="form-grid"><label>Format<select name="size"><option value="1280x720">Paysage 1280 × 720 (écran)</option><option value="1080x1080">Carré 1080 × 1080 (messages)</option><option value="720x1280">Portrait 720 × 1280 (téléphone)</option></select></label>
+                <label>Titre au début<input name="title" maxlength="80" value="${esc(ctx.name || 'Maison de famille')}"></label></div>
+                <label class="checkbox-line"><input type="checkbox" name="keep" checked> Ranger aussi une copie dans les médias</label>${mimeOk ? '' : '<p class="small">⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ».</p>'}
+                <div class="h-progress" hidden data-hs-vprog><span></span></div><p class="muted small" data-hs-vstat></p>`,
+                onSubmit: async form => { if (!mimeOk) return false; const [w, h] = form.querySelector('[name=size]').value.split('x').map(Number), keep = form.querySelector('[name=keep]').checked, title = form.querySelector('[name=title]').value.trim().slice(0, 80);
+                    const bar = form.querySelector('[data-hs-vprog]'), st = form.querySelector('[data-hs-vstat]'); bar.hidden = false; st.textContent = '🔴 Enregistrement de la visite…'; form.querySelectorAll('button, input, select').forEach(b => { b.disabled = true; });
+                    try { await ctx.toggle3d?.(true); const v3 = ctx.view3d?.(); if (!v3?.recordTour) throw new Error('Vue 3D indisponible.');
+                        const blob = await v3.recordTour({w, h, title, onProgress: k2 => { bar.querySelector('span').style.width = `${Math.round(k2 * 100)}%`; }}); v3.stopWalk?.();
+                        const ext2 = /mp4/.test(blob.type) ? 'mp4' : 'webm', fname = `${slugOf(ctx.name)}-visite-guidee.${ext2}`; download(blob, fname);
+                        if (keep) { const imp = root.LCNDA_MEDIA_PICKER?.importMediaFile || root.LCNDA_PICKER?.importMediaFile || A()?.importMediaFile; try { if (!imp) throw new Error('fenêtre des médias indisponible'); await imp(new File([blob], fname, {type: blob.type}), ['video']); toast('✓ Vidéo exportée, et une copie rangée dans les médias.'); } catch (e) { toast(`Vidéo exportée, mais pas rangée dans les médias : ${e.message}`, 'error'); } }
+                        else toast('✓ Vidéo exportée.');
+                        return true; }
+                    catch (e) { st.textContent = `⛔ ${e.message}`; form.querySelectorAll('button, input, select').forEach(b => { b.disabled = false; }); return false; } }}); }
         if (k === 'photo') { await ctx.toggle3d?.(true); return ctx.view3d?.()?.showPhoto?.(Number(arg)); }
         if (k === 'photodel') { (H.oldPhotos || []).splice(Number(arg), 1); ctx.commit('Photo retirée'); return ctx.paint?.(); }
         if (k === 'site') return siteDialog(ctx);
@@ -301,6 +357,6 @@ var fi=0;(H.floors||[]).forEach(function(f,i){if(f.level===0)fi=i;});window.LCND
     /** M6 : les personnes de la pièce où l'on est (visite) */
     const roomAt = (f, x, y) => (f?.rooms || []).find(r => !r.void && r.pts?.length > 2 && pointIn(r.pts, [x, y])) || null;
 
-    ext.housePlus = {roofGeom, slopeH, bulgeOf, bez, wallPts, arcLen, wallD, roofWings, topFloor, atticOf, heightAt, roomSurfaces, lowZones, surfaces, surfacesWorkbook, checks, sectionSvg, stripHouse, shareHtml, paneHouse, cmd, versionForYear, roomAt, baseOf, crossPoly};
+    ext.housePlus = {tangentAt, roomOutline, roofItemsPlan, roofGeom, slopeH, bulgeOf, bez, wallPts, arcLen, wallD, roofWings, topFloor, atticOf, heightAt, roomSurfaces, lowZones, surfaces, surfacesWorkbook, checks, sectionSvg, stripHouse, shareHtml, paneHouse, cmd, versionForYear, roomAt, baseOf, crossPoly};
     if (typeof module !== 'undefined' && module.exports) module.exports = ext.housePlus;
 })();

@@ -22,7 +22,8 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, Number(v) || 0));
     const nid = p => T().nid(p);
     const R1 = v => Math.round(Number(v) * 10) / 10;
-    const T2 = (ed, html) => { ed.focusBack(); ed.commit(); ed.insertHtml(html); ed.commit(); ed.layoutSoon(0); };
+    // la place gardée avant d'ouvrir une fenêtre (menu de choix, part du nom…) passe devant le curseur que le navigateur remet en haut du texte au retour
+    const T2 = (ed, html) => { ed.focusBack(); const lr = ed.lastRange; if (lr && lr.startContainer.isConnected && ed.secOf(lr.startContainer)) { const s = getSelection(); s.removeAllRanges(); s.addRange(lr); } ed.commit(); ed.insertHtml(html); ed.commit(); ed.layoutSoon(0); };
     const dateFr = (d = new Date()) => d.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'});
     const tools = ext.textDocTools = ext.textDocTools || {};
     const pref = (k, d) => K().pref(k, d), prefs = () => K().prefs(), setPrefs = p => K().setPrefs(p);
@@ -507,7 +508,10 @@
             <div class="wp-row"><select data-set aria-label="Groupe de caractères">${sets.map(([k, l]) => `<option value="${k}" ${k === cur ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div><div class="wp-glyphs" data-list role="listbox"></div>`,
             onOpen: d => { const paint = () => { d.querySelector('[data-list]').innerHTML = (sets.find(s => s[0] === cur) || sets[0])[2].filter(Boolean).map(btn).join(''); }; paint();
                 d.querySelector('[data-set]').addEventListener('change', e => { cur = e.target.value; setPrefs({...prefs(), glyphSet: cur}); paint(); });
-                d.addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (!b) return; const c = b.dataset.g; ed.focusBack(); if (ed.doc.track) ed.trackInsert(c); else document.execCommand('insertText', false, c); ed.lastRange = ed.sel()?.cloneRange() || ed.lastRange; ed.commitSoon(); const r = [c, ...recent().filter(x => x !== c)].slice(0, 24); try { localStorage.setItem(KEY, JSON.stringify(r)); } catch (_) {} d.querySelector('[data-rec]').innerHTML = r.map(btn).join(''); }); },
+                d.addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (!b) return; const c = b.dataset.g; // posé dans le texte sans le navigateur : sous cette fenêtre, le document ne reçoit pas le clavier
+                    const r0 = ed.lastRange; if (!r0 || !r0.startContainer.isConnected || !ed.secOf(r0.startContainer)) return toast('Place d’abord le curseur dans le texte.'); const r = r0.cloneRange(); if (!r.collapsed) { if (ed.doc.track) ed.markDeleted?.(r); else r.deleteContents(); r.collapse(false); }
+                    let node = document.createTextNode(c); if (ed.doc.track) { const ins = document.createElement('ins'); ins.className = 'wp-ins'; Object.assign(ins.dataset, {tc: nid('t'), a: ed.author, t: new Date().toISOString().replace(/\.\d+Z$/, 'Z')}); ins.appendChild(node); node = ins; }
+                    r.insertNode(node); r.setStartAfter(node); r.collapse(true); ed.lastRange = r; ed.commitSoon(); ed.layoutSoon(); const rc = [c, ...recent().filter(x => x !== c)].slice(0, 24); try { localStorage.setItem(KEY, JSON.stringify(rc)); } catch (_) {} d.querySelector('[data-rec]').innerHTML = rc.map(btn).join(''); }); },
             onSubmit: () => {}});
     }
     function fieldMenu(ed, anchor) {

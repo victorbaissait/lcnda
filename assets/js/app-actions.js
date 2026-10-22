@@ -70,7 +70,7 @@
     /* ── clic droit ── */
     const MORE_BTN = '[data-ps-more], .ui-presets-more, button[data-more], button[aria-label="Plus d’actions"], button[aria-label="Plus d\'actions"]';
     const isMoreBtn = b => b.matches(MORE_BTN) || clean(b.textContent) === '⋯';
-    const ROW = '[data-ctx-menu], .ui-row, .ui-card, .ui-presets-list > li, tbody > tr, .dashboard-row, .media-card, .media-tile, .media-thumb, .h-hs-card, article[class*="card"], li[class*="card"], div[class*="-card"]:not([class*="-cards"]), li[class*="-item"], div[class*="-item"][data-id], .list-row, .result-row, [class*="-row"][data-id]';
+    const ROW = '[data-ctx-menu], .ui-row, .ui-card, .ui-presets-list > li, tbody > tr, .dashboard-row, .media-card, .media-tile, .media-thumb, .h-hs-card, article[class*="card"], li[class*="card"], div[class*="-card"]:not([class*="-cards"]):not([class*="ui-card-"]), li[class*="-item"], div[class*="-item"][data-id], .list-row, .result-row, [class*="-row"][data-id]';
     const NOT_ITEM = 'input[type=checkbox], input[type=radio], select, summary, [data-ctx-skip], .drag-handle, [draggable="true"] > .order-grip';
     function rowMenu(row, at) {
         // son « ⋯ » d'abord (le même menu, à l'endroit de la souris)

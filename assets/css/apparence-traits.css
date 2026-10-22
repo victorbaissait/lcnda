@@ -2141,6 +2141,26 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) .h-as-left,:root:is(.lc-frame,[data-lc-lines]) .h-as-side{border:0;border-top:1px solid var(--ui-line)}
 :root:is(.lc-frame,[data-lc-lines]) .h-aq-guide{border:2px solid var(--ui-blue)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-as-rackpill{border-color:#8a6d10}
+:root:is(.lc-frame,[data-lc-lines]) .h-lot-file,:root:is(.lc-frame,[data-lc-lines]) .h-lot-prow{border:1px solid var(--ui-line, var(--line-color) )}
+:root:is(.lc-frame,[data-lc-lines]) .h-lot-file.is-bad{border-color:#d33}
+:root:is(.lc-frame,[data-lc-lines]) .h-lot-card{border:2px solid var(--ui-line, var(--line-color) )}
+:root:is(.lc-frame,[data-lc-lines]) .h-lot-chead{border-bottom:1px solid var(--ui-line, var(--line-color) )}
+:root:is(.lc-frame,[data-lc-lines]) .h-lot-grip{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .h-lot-fold{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .h-lot-card.is-folded .h-lot-chead{border-bottom:0}
+:root:is(.lc-frame,[data-lc-lines]) .h-lot-out{border:1px solid var(--ui-line, var(--line-color) )}
+:root:is(.lc-frame,[data-lc-lines]) dialog.modal.h-lot > .modal-actions{border-top:var(--line)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-lot-card,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-lot-file,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-lot-prow,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] dialog.modal.h-lot > .modal-actions{border-color:var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-lot-chead,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-lot-fth,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-lot-pth{border-color:var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-lot-out{border-color:var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-lot-file.is-bad{border-color:#ff7b7b}
+:root:is(.lc-frame,[data-lc-lines]) .isim-qthumb{border:1.5px solid var(--ui-line)}
+:root:is(.lc-frame,[data-lc-lines]) .isim-progress{border:1.5px solid var(--ui-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .isim-prev{border:1.5px solid var(--ui-line)}
+:root:is(.lc-frame,[data-lc-lines]) .isim-figimg{border:1.5px solid var(--ui-line)}
+:root:is(.lc-frame,[data-lc-lines]) .isim-zone{border:2.5px solid var(--ui-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .isim-group{border:1.5px solid var(--ui-line)}
+:root:is(.lc-frame,[data-lc-lines]) .isim-mini{border:1px solid var(--ui-line)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-pin{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-slippy-mark{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-question-homonyms{border:1px solid #4c4c4c}
@@ -2364,11 +2384,14 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]):not([data-theme="light"]) .dac-person:hover{border-color:#6d9bd1}
 /* heritage-diagram-options.css */
 :root:is(.lc-frame,[data-lc-lines]) .h-dgo,:root:is(.lc-frame,[data-lc-lines]) .h-dg-app fieldset.h-dgo{border:1px solid var(--line,#d9dde3)}
+:root:is(.lc-frame,[data-lc-lines]) .h-dgg{border:1.5px solid var(--blue-soft,#dbe7ff)}
 :root:is(.lc-frame,[data-lc-lines]) .h-dgo .h-dgo-sub{border-left:2px solid var(--blue-soft,#dbe7ff)}
 :root:is(.lc-frame,[data-lc-lines]) .h-dg-sum{border:1px solid var(--line,#d9dde3)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-dg-sum{border-color:var(--lc-frame-color)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-dgo,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-dg-app fieldset.h-dgo{border-color:var(--lc-frame-color)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-dgo .h-dgo-sub{border-left-color:#2c4a7a}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-dgo .h-lr-row{border-color:var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-dgg{border-color:#2c4a7a}
 /* layout.css */
 :root:is(.lc-frame,[data-lc-lines]) .h-book-studio{border:2px solid var(--ink,#111)}
 :root:is(.lc-frame,[data-lc-lines]) .ly-editor{border:0}
@@ -2862,6 +2885,50 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .pz-btn,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .pz-count,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .pz-meter{border-color:var(--lc-frame-color)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .pz-pause > div,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .pz-win-card,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .pz-model,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .pz-image-card{border-color:var(--lc-frame-color)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .pz-name:hover:not([readonly]){border-bottom-color:var(--lc-frame-color)}
+/* labyrinthe.css */
+:root:is(.lc-frame,[data-lc-lines]) .lb-fs{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .lb-dot{border:2px solid #fff}
+:root:is(.lc-frame,[data-lc-lines]) .lb-pv-card{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .lb-pv-head{border-bottom:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .lb-ready-b{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .lb-foot{border-top:3px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .lb-board{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .lb-pcard{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .lb-card{border:2px solid #c9a227}
+:root:is(.lc-frame,[data-lc-lines]) .lb-card-in img{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .lb-endbox{border:3px solid #000}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .lb-dot{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+/* jeux-famille.css */
+:root:is(.lc-frame,[data-lc-lines]) .jf-fs{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jf-dot{border:2px solid #fff}
+:root:is(.lc-frame,[data-lc-lines]) .jf-ready-b{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jf-search{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jf-search input{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .jf-turn{border:2px solid transparent}
+:root:is(.lc-frame,[data-lc-lines]) .jf-turn.is-on{border-color:var(--pc, #000)}
+:root:is(.lc-frame,[data-lc-lines]) .jfq-card{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jfq-answer{border:3px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jfq-answer.is-oui{border-color:#198754}
+:root:is(.lc-frame,[data-lc-lines]) .jfq-answer.is-non{border-color:#b42318}
+:root:is(.lc-frame,[data-lc-lines]) .jfq-answer.is-inconnu{border-color:#8a6d00}
+:root:is(.lc-frame,[data-lc-lines]) .jfq-q{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jfq-end{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jfm-card{border:3px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jfm-card.is-found{border-color:var(--pc, #198754)}
+:root:is(.lc-frame,[data-lc-lines]) .jft-hand{border:4px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jft-card{border:2px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jft-card.is-hand{border-width:calc(3px * var(--lc-frame-k))}
+:root:is(.lc-frame,[data-lc-lines]) .jft-card.k-naissance{border-left:6px solid #198754}
+:root:is(.lc-frame,[data-lc-lines]) .jft-card.k-mariage{border-left:6px solid #7c3aed}
+:root:is(.lc-frame,[data-lc-lines]) .jft-card.k-deces{border-left:6px solid #111}
+:root:is(.lc-frame,[data-lc-lines]) .jft-card.k-histoire{border-left:6px solid #e87818}
+:root:is(.lc-frame,[data-lc-lines]) .jft-line{border:4px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jft-slot{border:2px dashed #888}
+:root:is(.lc-frame,[data-lc-lines]) .jft-slot:hover,:root:is(.lc-frame,[data-lc-lines]) .jft-slot:focus-visible,:root:is(.lc-frame,[data-lc-lines]) .jft-slot.is-over{border-color:#000;border-style:solid}
+:root:is(.lc-frame,[data-lc-lines]) .jfx-grid{border:3px solid #000}
+:root:is(.lc-frame,[data-lc-lines]) .jfx-cell{border:1px solid #000}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .jfm-card{border-color:var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .jf-dot{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 /* transcribe.css */
 :root:is(.lc-frame,[data-lc-lines]) .h-tx-ctl+.h-tx-ctl{border-left:1px solid #e6e6ea}
 :root:is(.lc-frame,[data-lc-lines]) .h-tx-ctl[data-tx-item=tools]+.h-tx-ctl,:root:is(.lc-frame,[data-lc-lines]) .h-tx-ctl[data-tx-item=zoom]+.h-tx-ctl[data-tx-item=rot]{border-left:0}
@@ -2975,6 +3042,7 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) .ms-dots i{border:var(--bw) solid var(--bd)}
 :root:is(.lc-frame,[data-lc-lines]) .ms-new{border:1.5px solid currentColor}
 :root:is(.lc-frame,[data-lc-lines]) .ms-intro-ico{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .ms-topbtn{border-top:1px solid var(--line-color, #ddd)}
 :root:is(.lc-frame,[data-lc-lines]) .ms-try-in{border:var(--line)}
 :root:is(.lc-frame,[data-lc-lines]) .ms-link{border-top:1px solid var(--line-color)}
 :root:is(.lc-frame,[data-lc-lines]) .ms-ready-c{border:var(--line)}
@@ -2998,6 +3066,11 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) .ms-forall{border-top:2px solid var(--line-color)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .ms-check{border-color:#3fa35c}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .ms-check.is-bad{border-color:#d4a21d}
+:root:is(.lc-frame,[data-lc-lines]) .ms-note-t{border:var(--bw) solid var(--bd)}
+:root:is(.lc-frame,[data-lc-lines]) .ms-tile-edit{border-top:1px dashed var(--line-color, #ccc)}
+:root:is(.lc-frame,[data-lc-lines]) .ms-ic{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .ms-house-view{border:3px solid var(--ms-line,#222)}
+:root:is(.lc-frame,[data-lc-lines]) .ms-house-view .h-hs-tourbox{border:3px solid #111}
 /* formats.css */
 :root:is(.lc-frame,[data-lc-lines]) .fmt-dlg-grid fieldset{border:1px solid var(--ui-line)}
 :root:is(.lc-frame,[data-lc-lines]) .fmt-anchor button{border:1.5px solid var(--ui-line)}
@@ -3066,6 +3139,63 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .xl-back{border-bottom:1.5px solid #304669}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .xl-baselink{border-bottom:1.5px solid #415845}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .xl-steps li.is-done{border-color:#3e5b46}
+/* calculette.css */
+:root:is(.lc-frame,[data-lc-lines]) .cm-win{border:2px solid var(--cm-line)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-head{border-bottom:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-tabs.segmented button{border:1.5px solid var(--cm-line)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-tabs.segmented button.is-active,:root:is(.lc-frame,[data-lc-lines]) .cm-angle.segmented button.is-active{border-color:var(--cm-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-ib{border:1.5px solid transparent}
+:root:is(.lc-frame,[data-lc-lines]) .cm-ib:hover{border-color:var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-tape-wrap{border:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-tape-bar{border-bottom:1px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-tr{border-bottom:1px dashed var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-tr:last-child{border-bottom:0}
+:root:is(.lc-frame,[data-lc-lines]) .cm-tr-main{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .cm-screen{border:2px solid var(--cm-line)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-input{border:0;border-bottom:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-win .cm-line .cm-input{border:0;border-bottom:2px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-win .cm-line .cm-input:focus,:root:is(.lc-frame,[data-lc-lines]) .cm-win .cm-line .cm-input:focus-visible{border-bottom-color:var(--cm-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-win .cm-line .cm-input.is-invalid{border-bottom-color:var(--cm-err)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-input.is-invalid{border-bottom-color:var(--cm-err)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-err{border-left:4px solid var(--cm-err)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-fr-n{border-bottom:1.5px solid currentColor}
+:root:is(.lc-frame,[data-lc-lines]) .cm-rt-b{border-top:1.5px solid currentColor}
+:root:is(.lc-frame,[data-lc-lines]) .cm-ans{border:1px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-mk{border:1.5px solid var(--cm-line)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-angle.segmented button{border:1.5px solid var(--cm-line)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-key{border:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-key.is-op{border-color:transparent}
+:root:is(.lc-frame,[data-lc-lines]) .cm-key.is-fn{border-color:var(--cm-line)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-key.is-eq{border-color:var(--cm-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-chip{border:1.5px solid var(--cm-line)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-fk{border:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-fk:hover{border-color:var(--cm-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-exb{border:1px dashed var(--cm-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-mx{border:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-mx-cell{border:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-conv input,:root:is(.lc-frame,[data-lc-lines]) .cm-conv select,:root:is(.lc-frame,[data-lc-lines]) .cm-dform input{border:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-dform{border:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-cv-l input{border:1.5px solid var(--cm-soft)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-cv-l input:focus{border-color:var(--cm-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-cv-l input.is-invalid{border-color:var(--cm-err)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-canvas-wrap{border:2px solid var(--cm-line)}
+:root:is(.lc-frame,[data-lc-lines]) .screen-tool.cm-entry.is-on{border-color:var(--blue-bright, #055dff)}
+:root:is(.lc-frame,[data-lc-lines]) .cm-win.is-phone{border-width:calc(2px * var(--lc-frame-k)) 0 0}
+/* cadastre.css */
+:root:is(.lc-frame,[data-lc-lines]) .cad-map{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-map-zoom button{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-map-tog{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-pop{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-dl-row{border-bottom:1px solid var(--line-color, rgba(0,0,0,.08) )}
+:root:is(.lc-frame,[data-lc-lines]) .cad-mthumb{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-find{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-secbtn{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-secbtn:hover{border-color:var(--blue, #0066cc)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-hit{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .cad-hit.is-on{border-color:#cc4700}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-find,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-daterow{border-color:var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-hit,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-pop,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-mthumb,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-secbtn,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-map-zoom button,:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-map-tog{border-color:var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .cad-dl-row{border-bottom-color:var(--lc-frame-color)}
 /* traitement-texte.css */
 :root:is(.lc-frame,[data-lc-lines]) dialog.modal.wp-dlg.is-full{border:0}
 :root:is(.lc-frame,[data-lc-lines]) .wp-menus summary{border:1.5px solid transparent}
@@ -3121,6 +3251,35 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) dialog.modal.wp-dlg{border:0}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wp-doc:not(.no-marks) .wp-body .wp-gen{border-color:#c6ccd8}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wp-mini{border:1px solid #c9ced8}
+/* site-web.css */
+:root:is(.lc-frame,[data-lc-lines]) dialog.modal.sw-dlg.is-full{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .sw-rail{border-right:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-left{border-right:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-block{border:1.5px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-block:hover,:root:is(.lc-frame,[data-lc-lines]) .sw-block:focus-visible{border-color:var(--sw-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-pagerow{border:1.5px solid transparent}
+:root:is(.lc-frame,[data-lc-lines]) .sw-pagerow.is-active{border-color:var(--sw-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-pagename{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .sw-bar{border-bottom:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-frame{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .sw-code{border-left:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-codebar{border-bottom:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-panel{border-left:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-this{border-bottom:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-acts{border-bottom:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-chip{border:1.5px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-chip:hover,:root:is(.lc-frame,[data-lc-lines]) .sw-chip:focus-visible{border-color:var(--sw-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-chip.is-active{border-color:var(--sw-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .swc-gutter{border-right:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .swc-mark{border-left:3px solid var(--sw-blue)}
+:root:is(.lc-frame,[data-lc-lines]) .swc-ta{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .swc-pop{border:1.5px solid var(--sw-ink)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-tpl{border:2px solid var(--line, #d9dce2)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-tpl:hover,:root:is(.lc-frame,[data-lc-lines]) .sw-tpl:focus-visible{border-color:var(--blue-bright, #055dff)}
+:root:is(.lc-frame,[data-lc-lines]) .dw-kind{border:2px solid var(--line, #d9dce2)}
+:root:is(.lc-frame,[data-lc-lines]) .dw-kind.is-open{border-color:var(--blue-bright, #055dff)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-work[data-view="split"] .sw-code{border-left:0;border-top:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-panel{border-left:0;border-top:1px solid var(--sw-line)}
 /* editeurs.css */
 :root:is(.lc-frame,[data-lc-lines]) .ed-status{border-top:1px solid var(--ui-line)}
 :root:is(.lc-frame,[data-lc-lines]) .ed-status .ed-tog,:root:is(.lc-frame,[data-lc-lines]) .ed-zoom-b,:root:is(.lc-frame,[data-lc-lines]) .ed-zoom-v{border:1px solid transparent !important}

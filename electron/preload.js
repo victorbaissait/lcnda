@@ -2,10 +2,11 @@
 /**
  * Pont minimal entre la page et l'application de bureau (fenêtre isolée, sandbox). La page peut seulement :
  * ouvrir la fenêtre système de choix d'un fichier à importer, puis lancer l'import du fichier choisi ; télécharger les
- * communes d'un pays des battues (code pays seulement).
+ * communes d'un pays des battues (code pays seulement) ; poser, retirer ou régler un widget sur le bureau (sorte connue seulement).
  * Elle ne voit jamais de chemin et ne peut pas en désigner un elle-même.
  */
 const { contextBridge, ipcRenderer } = require('electron');
+const deskOpts = (o) => (o && typeof o === 'object' ? { onTop: o.onTop === true, label: String(o.label || '').slice(0, 60), date: String(o.date || '').slice(0, 10) } : {});
 
 contextBridge.exposeInMainWorld('lcnda', {
   /** @returns {Promise<{canceled: true} | {token: string, name: string}>} */
@@ -20,4 +21,12 @@ contextBridge.exposeInMainWorld('lcnda', {
   /** Raccourcis clavier choisis dans l'application, pour les afficher dans le menu ({id: {combo, label, register}}). */
   setShortcuts: (items) => ipcRenderer.send('lcnda:set-shortcuts', items && typeof items === 'object' ? JSON.parse(JSON.stringify(items)) : {}),
   onCommand: (callback) => ipcRenderer.on('lcnda:command', (_event, command) => callback(String(command || ''))),
+  /** 🪟 Widgets sur le bureau : seulement une sorte connue et trois réglages (au-dessus, texte et date du compte à rebours). */
+  desktopWidgets: {
+    list: () => ipcRenderer.invoke('lcnda:desk-widgets', 'list', '', {}),
+    open: (kind, opts) => ipcRenderer.invoke('lcnda:desk-widgets', 'open', String(kind || ''), deskOpts(opts)),
+    set: (kind, opts) => ipcRenderer.invoke('lcnda:desk-widgets', 'set', String(kind || ''), deskOpts(opts)),
+    close: (kind) => ipcRenderer.invoke('lcnda:desk-widgets', 'close', String(kind || ''), {}),
+    autostart: (on) => ipcRenderer.invoke('lcnda:desk-widgets', 'autostart', '', { on: on === true }),
+  },
 });

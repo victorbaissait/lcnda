@@ -39,6 +39,7 @@
         photomap: {sym: '📸', add: '＋ Ajouter une carte de photos…', one: 'carte', fem: true, none: 'Aucune carte de photos', label: '📸 Cartes de photos'}, // lib/photomaps.php
         workbook: {sym: '🧮', add: '＋ Ajouter un classeur…', one: 'classeur', none: 'Aucun classeur', label: '🧮 Classeurs'}, // lib/textdocs.php
         textdoc: {sym: '📝', add: '＋ Ajouter un document…', one: 'document', none: 'Aucun document', label: '📝 Documents'}, // 📝 Traitement de texte
+        parcel: {sym: '▦', add: '＋ Ajouter une parcelle…', one: 'parcelle', fem: true, none: 'Aucune parcelle', label: '▦ Parcelles'}, // 🗺 Cadastre (heritage-cadastre.js)
         digest: {sym: '📜', ph: 'Commune, cote, année… (2 lettres suffisent)', add: '🔗 Relier un dépouillement…', one: 'dépouillement', none: 'Aucun dépouillement', label: '📜 Dépouillements'}, // journal des recherches (lib/picker.php)
         contact: {sym: '📇', ph: 'Nom, prénom d’un contact… (2 lettres suffisent)', add: '＋ Ajouter un contact…', one: 'contact', none: 'Aucun contact', label: '📇 Contacts'}, // Répertoire des vivants (Questions aux proches)
         mylist: {sym: '📋', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📋 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme
@@ -153,7 +154,7 @@
     function pickerField(o = {}) {
         const f = o.filter && typeof o.filter === 'object' ? o.filter : {};
         const opts = {name: o.name == null ? 'picker' : String(o.name), kind: String(o.kind || 'person'), multiple: !!o.multiple, placeholder: o.placeholder || '', allowFree: !!o.allowFree,
-            allowCreate: o.allowCreate === undefined ? 'auto' : !!o.allowCreate, roles: o.roles ? {main: o.roles.main !== false, roleList: roleListOf(o.roles)} : null,
+            allowCreate: o.allowCreate === undefined ? 'auto' : !!o.allowCreate, roles: o.roles ? {main: o.roles.main !== false, roleList: roleListOf(o.roles), zones: o.roles.zones && typeof o.roles.zones === 'object' ? o.roles.zones : null} : null,
             animals: o.animals === false ? 0 : 1, label: o.label || '',
             noName: o.hiddenName === false || o.name === '', inline: !!o.inline,
             filter: {person_id: Number(f.person_id) || 0, media_type: ['image', 'audio', 'video', 'document'].includes(f.media_type) ? f.media_type : '', art_kind: String(f.art_kind || '').replace(/[^a-z0-9_,]/g, ''), art_person: Number(f.art_person) || 0}};
@@ -181,8 +182,8 @@
         const o = c.opts, k = K[c.kind], hid = `<input type="hidden"${o.noName ? '' : ` name="${esc(o.name)}"`} value="${esc(hiddenValue(c))}">`; // hiddenName:false → rien d'ajouté au formulaire autour
         if (o.roles) {
             return hid + (o.roles.main ? `<span class="pk-lab">⭐ Personne principale <small>— une seule</small></span><div class="pk-mainslot">${mainHtml(c)}</div>${searchHtml('person', 'main', o.placeholder || 'Choisir la personne principale…', !!c.main)}` : '')
-                + `<div class="pk-zone prim" data-zone="primary"><div class="pk-zone-h"><b>★ ${o.roles.main ? 'Autres personnes principales' : 'Personnes principales'}</b><small>au cœur de la recherche</small></div><div class="pk-chips2" data-zone-chips="primary">${zoneChips(c, true)}</div>${searchHtml('person', 'primary', '＋ Ajouter une personne principale…')}</div>`
-                + `<div class="pk-zone" data-zone="secondary"><div class="pk-zone-h"><b>☆ Personnes secondaires</b><small>témoins, voisins, parrains, pistes…</small></div><div class="pk-chips2" data-zone-chips="secondary">${zoneChips(c, false)}</div>${searchHtml('person', 'secondary', '＋ Ajouter une personne secondaire…')}</div>`;
+                + `<div class="pk-zone prim" data-zone="primary"><div class="pk-zone-h"><b>★ ${esc(o.roles.zones?.primary?.[0] || (o.roles.main ? 'Autres personnes principales' : 'Personnes principales'))}</b><small>${esc(o.roles.zones?.primary?.[1] || 'au cœur de la recherche')}</small></div><div class="pk-chips2" data-zone-chips="primary">${zoneChips(c, true)}</div>${searchHtml('person', 'primary', o.roles.zones?.primary?.[2] || '＋ Ajouter une personne principale…')}</div>`
+                + `<div class="pk-zone" data-zone="secondary"><div class="pk-zone-h"><b>☆ ${esc(o.roles.zones?.secondary?.[0] || 'Personnes secondaires')}</b><small>${esc(o.roles.zones?.secondary?.[1] || 'témoins, voisins, parrains, pistes…')}</small></div><div class="pk-chips2" data-zone-chips="secondary">${zoneChips(c, false)}</div>${searchHtml('person', 'secondary', o.roles.zones?.secondary?.[2] || '＋ Ajouter une personne secondaire…')}</div>`;
         }
         const mixed = o.kind.includes(',');
         const ph = o.placeholder || (mixed ? 'Rechercher…' : k.ph || 'Rechercher…');
@@ -614,6 +615,7 @@
         if (it.kind === 'archive_service' && window.LCNDA_EXT?.archiveServices?.open) { close(); window.LCNDA_EXT.archiveServices.open(it.id); return; } // 🏛 Listes › Services d'archives
         if (it.kind === 'digest' && window.LCNDA_EXT?.openDepouillement) { close(); window.LCNDA_EXT.openDepouillement(it.id); return; } // 📜 Listes › Dépouillements
         if (it.kind === 'house' && window.LCNDA_EXT?.openHouse) { window.LCNDA_EXT.openHouse({id: it.id}); return; }
+        if (it.kind === 'parcel' && window.LCNDA_EXT?.cadastre?.open) { window.LCNDA_EXT.cadastre.open(it.id, {dialog: true}); return; } // 🗺 la fiche de la parcelle, par-dessus
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
         if (it.kind === 'graph' && window.LCNDA_EXT?.openMyGraph) { close(); window.LCNDA_EXT.openMyGraph(it.uid); return; }
         if (it.kind === 'photomap' && app.state && app.setModule) { close(); app.state.mapMode = 'photos'; window.LCNDA_PHOTOMAPS?.setCurrent?.(it.id); app.setModule('carte'); return; } // 📸 heritage-photomaps.js

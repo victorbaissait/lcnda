@@ -479,7 +479,7 @@
             if (h.zone === 'corner') { e.preventDefault(); this.commitIfEditing(); this.selectAll(); return; }
             if ((h.zone === 'colh' || h.zone === 'rowh') && h.edge >= 0 && !touch) { e.preventDefault(); this.drag = {kind: h.zone === 'colh' ? 'colw' : 'rowh', i: h.edge, start: h.zone === 'colh' ? e.clientX : e.clientY, size: h.zone === 'colh' ? this.colW(h.edge) : this.rowH(h.edge)}; this.trackDrag(e); return; }
             // une formule en cours : un clic met la référence
-            if (this.edit && this.canPoint()) { e.preventDefault(); if (h.zone === 'cell') { this.pointAt = [h.r, h.c]; this.insertRef(h.r, h.c, h.r, h.c); this.drag = {kind: 'ref', a: [h.r, h.c]}; this.trackDrag(e); } return; }
+            if (this.edit && this.canPoint()) { e.preventDefault(); if (h.zone === 'cell') { this.pointAt = [h.r, h.c]; this.pointAnchor = [h.r, h.c]; this.insertRef(h.r, h.c, h.r, h.c); this.drag = {kind: 'ref', a: [h.r, h.c]}; this.trackDrag(e); } return; }
             if (touch) { this.touchStart = {x: e.clientX, y: e.clientY, h}; const up = ev => { window.removeEventListener('pointerup', up); if (Math.hypot(ev.clientX - this.touchStart.x, ev.clientY - this.touchStart.y) < 8) this.clickAt(this.touchStart.h, ev); }; window.addEventListener('pointerup', up); return; }
             e.preventDefault();
             this.clickAt(h, e);
@@ -598,7 +598,10 @@
         commitIfEditing() { if (this.edit) this.commitEdit(0, 0); },
         commitEdit(dr = 1, dc = 0) {
             const E = this.edit; if (!E) return true;
-            const S = X(), sh = this.wb.sheets[E.si], k = S.addr(E.r, E.c), old = sh.cells[k], st = this.wb.styles[old?.s] || {}, text = this.ed.value;
+            const S = X(), sh = this.wb.sheets[E.si], k = S.addr(E.r, E.c), old = sh.cells[k], st = this.wb.styles[old?.s] || {};
+            let text = this.ed.value;
+            // « =SOMME(A2:A4 » : les parenthèses oubliées à la fin sont fermées, comme dans Excel et LibreOffice
+            if (S.isFormula(text)) { let d = 0, q = false; for (const ch of text) { if (ch === '"') q = !q; else if (!q && ch === '(') d++; else if (!q && ch === ')') d--; } if (d > 0 && d < 20 && !q) text += ')'.repeat(d); }
             const dv = this.dvAt(E.r, E.c, sh);
             if (text !== '' && dv && !S.isFormula(text)) { // validation
                 const bad = dv.kind === 'list' && dv.list?.length && !dv.allowFree && !dv.list.some(x => S.fold(x) === S.fold(text.trim())) ? `« ${text.trim()} » n’est pas dans la liste : ${dv.list.slice(0, 8).join(', ')}${dv.list.length > 8 ? '…' : ''}`
@@ -618,7 +621,7 @@
             return true;
         },
         cancelEdit() { this.endEdit(); this.render(); },
-        endEdit() { this.edit = null; this.refPick = null; this.ed.hidden = true; this.ac.hidden = true; this.pointAt = null; this.showHelp(); this.focusGrid(); },
+        endEdit() { this.edit = null; this.refPick = null; this.ed.hidden = true; this.ac.hidden = true; this.pointAt = null; this.pointAnchor = null; this.showHelp(); this.focusGrid(); },
         onEditKey(e, el) {
             const k = e.key, mod = e.metaKey || e.ctrlKey;
             if (!this.ac.hidden && this.acItems?.length) {
@@ -633,7 +636,7 @@
             if (k === 'F4') { e.preventDefault(); const r = X().cycleAbs(el.value, el.selectionStart); el.value = r.f; el.setSelectionRange(r.pos, r.pos); el.dispatchEvent(new Event('input')); return; }
             if (mod && k.toLowerCase() === 'z') return; // le ↶ du texte
             const arrows = {ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1]};
-            if (arrows[k] && this.canPoint()) { e.preventDefault(); const [dr, dc] = arrows[k]; const p = this.pointAt || [this.edit.r, this.edit.c]; const r = Math.max(0, p[0] + dr), c = Math.max(0, p[1] + dc); this.pointAt = [r, c]; this.insertRef(r, c, r, c); this.reveal(r, c); return; }
+            if (arrows[k] && this.canPoint()) { e.preventDefault(); const [dr, dc] = arrows[k]; const p = this.pointAt || [this.edit.r, this.edit.c]; const r = Math.max(0, p[0] + dr), c = Math.max(0, p[1] + dc); const grow = e.shiftKey && this.pointAt && this.refPick && this.pointAnchor; if (!grow) this.pointAnchor = [r, c]; this.pointAt = [r, c]; const a = this.pointAnchor; this.insertRef(a[0], a[1], r, c); this.reveal(r, c); return; } // Maj + flèche : la plage s'agrandit (A2 → A2:A5)
             if (arrows[k] && el === this.ed && !String(el.value).startsWith('=') && this.edit?.enterMode) { e.preventDefault(); return this.commitEdit(...arrows[k]); }
         },
         onEditInput(el) {
@@ -811,7 +814,7 @@
                 case 'formulas': this.showFormulas = !this.showFormulas; return this.render();
                 case 'gridlines': setPrefs({...prefs(), grid: pref('grid', true) === false}); return this.render();
                 case 'keys': return this.keysDialog();
-                case 'help': return UI().openFaq?.('Comment se servir du tableur ?');
+                case 'help': return ext.faqPopup?.('Comment se servir du tableur ?') || UI().openFaq?.('Comment se servir du tableur ?');
                 case 'delsheet': return this.deleteSheet(this.si);
                 default: { const fn = ext.sheetCommands?.[p]; if (typeof fn === 'function') return fn(this, arg, btn); } // commandes ajoutées par d'autres fichiers (Préparer pour…)
             }
@@ -1328,6 +1331,9 @@
                     const src = an.data.wb, added = [];
                     this.begin('Importer');
                     src.sheets.forEach(s => { const sh = {...s, cells: {}}; for (const k in s.cells) { const c = {...s.cells[k]}; if (c.s) c.s = S.styleId(this.wb, src.styles[c.s] || {}); sh.cells[k] = c; } sh.id = S.newSheet().id; sh.name = S.cleanSheetName(s.name, this.wb.sheets.map(x => x.name)); this.wb.sheets.push(sh); added.push(sh); });
+                    // une feuille renommée (le nom était déjà pris) : les formules du fichier la suivent ; les noms (Insertion → Nom pour la plage) du fichier arrivent aussi
+                    added.forEach((sh, i) => { const was = src.sheets[i].name; if (was === sh.name) return; added.forEach(o => { for (const k in o.cells) { const v = o.cells[k]?.v; if (S.isFormula(v)) o.cells[k] = {...o.cells[k], v: S.renameInFormula(v, was, sh.name)}; } }); Object.keys(src.names || {}).forEach(n => { const m = /^(?:'((?:[^']|'')+)'|([^'!]+))!(.+)$/.exec(src.names[n]); if (m && S.fold((m[1] || m[2]).replace(/''/g, "'")) === S.fold(was)) src.names[n] = `${S.quoteSheet(sh.name)}!${m[3]}`; }); });
+                    Object.entries(src.names || {}).forEach(([n, v]) => { if (!(this.wb.names || {})[n]) this.wb.names = {...(this.wb.names || {}), [n]: v}; });
                     if (this.wb.sheets.length > S.LIMITS.sheets) { this.wb.sheets.splice(S.LIMITS.sheets); }
                     // un classeur vide au départ : on garde seulement ce qui arrive
                     const first = this.wb.sheets[0]; if (this.wb.sheets.length > added.length && !Object.keys(first.cells).length && this.wb.sheets.indexOf(first) === 0 && !this.id && !this.undoStack.length) this.wb.sheets.splice(0, 1);

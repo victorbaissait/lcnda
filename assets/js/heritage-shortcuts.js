@@ -82,6 +82,7 @@
         ['assembler', '🧷', 'Assembler des photos', () => ext.openAssembler?.()],
         ['visages', '🙂', 'Visages (reconnaissance)', () => ext.openFaces?.()],
         ['musee', '🏛️', 'Musée de famille', () => ext.openMuseum?.()],
+        ['calculette', '🧮', 'Calculette (simple, scientifique, courbes)', () => ext.calculator?.open()],
         ['transcription', '📜', 'Transcription d’actes', () => ext.openActTranscriber?.({})],
         ['puzzle', '🧩', 'Jeux et puzzle', () => A().setModule('jeu')],
         ['battues', '🧭', 'Battues', enq('battue')],
@@ -341,8 +342,8 @@
             const picks = {base: [], screens: new Map(), web: []};
             const total = () => picks.base.length + picks.screens.size + picks.web.length;
             const finish = v => { if (done) return; done = true; resolve(v); };
-            const body = `<div class="segmented h-sc-tabs" role="tablist">${[['base', '🔎 Dans ta base'], ['screens', '🧭 Écrans et outils'], ['web', '🌐 Site web']].map(([k, l], i) => `<button type="button" role="tab" class="${i ? '' : 'is-active'}" data-sc-tab="${k}" aria-selected="${i ? 'false' : 'true'}">${l}</button>`).join('')}</div>
-                <section class="h-sc-pane" data-sc-pane="base"><p class="muted">Une personne, un lieu, une fiche, une enquête, un projet, un tableau, un livre, un média, un diagramme, une maison… Les filtres en haut de la liste rangent par sorte (Tab passe de l’un à l’autre).</p>
+            const body = `<div class="segmented h-sc-tabs" role="tablist">${[['base', '🔎 Dans ta base'], ['create', '＋ Créer…'], ['screens', '🧭 Écrans et outils'], ['web', '🌐 Site web']].map(([k, l], i) => `<button type="button" role="tab" class="${i ? '' : 'is-active'}" data-sc-tab="${k}" aria-selected="${i ? 'false' : 'true'}">${l}</button>`).join('')}</div>
+                <section class="h-sc-pane" data-sc-pane="base"><p class="muted">Une personne, un lieu, une fiche, une enquête, un projet, un tableau, un livre, un média, un diagramme, une maison… Les filtres en haut de la liste rangent par sorte (Tab passe de l’un à l’autre). Pour commencer une <b>nouvelle</b> chose (maison, montage, livre, dessin, classeur…) : onglet « ＋ Créer… ».</p>
                     <span class="pk-lab">Chercher dans ta base</span>${PK().pickerField({name: '', hiddenName: false, kind: MIXED, multiple: true, inline: true, allowCreate: false, placeholder: 'Une personne, un lieu, une enquête… (2 lettres suffisent)'})}</section>
                 <section class="h-sc-pane" data-sc-pane="screens" hidden><div data-sc-qslot></div><div class="h-sc-cat" data-sc-cat role="listbox" aria-multiselectable="true"></div></section>
                 <section class="h-sc-pane" data-sc-pane="web" hidden><div class="form-grid"><label class="span-2">Adresse du site<input data-sc-url type="url" inputmode="url" maxlength="500" placeholder="https://www.geneanet.org/" autocomplete="off" spellcheck="false"></label>
@@ -356,14 +357,15 @@
                     const count = () => { const n = total(), sub = dg.querySelector('[type=submit]'); $('[data-sc-count]').textContent = n ? `${plural(n, 'raccourci choisi', 'raccourcis choisis')} : ${[...picks.base.map(i => i.title), ...[...picks.screens.values()].map(r => r.label), ...picks.web.map(w => w.label || host(webUrl(w.target)))].slice(0, 6).join(', ')}${n > 6 ? '…' : ''}` : 'Aucun raccourci choisi pour l’instant.'; if (sub) { sub.textContent = n ? `Ajouter (${n})` : 'Ajouter'; sub.disabled = !n; } };
                     count();
                     dg.addEventListener('picker-change', e => { if (!e.target.closest('[data-sc-pane="base"]')) return; picks.base = (e.detail.items || (e.detail.item ? [e.detail.item] : [])).filter(i => i && !i.free && (i.id || i.uid)); count(); });
-                    const setTab = k => { tab = k; dg.querySelectorAll('[data-sc-tab]').forEach(b => { const on = b.dataset.scTab === k; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); }); dg.querySelectorAll('[data-sc-pane]').forEach(p => { p.hidden = p.dataset.scPane !== k; });
-                        if (k === 'screens') { paintCat(); loadProjects(); setTimeout(() => $('[data-sc-qslot] input')?.focus(), 0); } if (k === 'web') setTimeout(() => $('[data-sc-url]')?.focus(), 0); if (k === 'base') setTimeout(() => $('[data-sc-pane="base"] .pk-input')?.focus(), 0); };
+                    const setTab = k => { tab = k; dg.querySelectorAll('[data-sc-tab]').forEach(b => { const on = b.dataset.scTab === k; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); }); dg.querySelectorAll('[data-sc-pane]').forEach(p => { p.hidden = p.dataset.scPane !== (k === 'create' ? 'screens' : k); });
+                        if (k === 'create') { act = -1; paintCat(); setTimeout(() => $('[data-sc-qslot] input')?.focus(), 0); } // ＋ Créer… : seulement les « nouvelle chose » de chaque outil de modification
+                        if (k === 'screens') { act = -1; paintCat(); loadProjects(); setTimeout(() => $('[data-sc-qslot] input')?.focus(), 0); } if (k === 'web') setTimeout(() => $('[data-sc-url]')?.focus(), 0); if (k === 'base') setTimeout(() => $('[data-sc-pane="base"] .pk-input')?.focus(), 0); };
                     dg.querySelectorAll('[data-sc-tab]').forEach(b => b.addEventListener('click', () => setTab(b.dataset.scTab)));
                     // 🔍 C1 : la case de recherche des écrans
                     const slot = $('[data-sc-qslot]');
                     if (UI()?.searchField) { const sf = UI().searchField({placeholder: 'Chercher un écran, une liste, un outil… (ex. carte, sauvegarde, retouche)', value: '', delay: 120, onInput: v => { q = v; act = -1; paintCat(); }}); slot.appendChild(sf); sf.input?.addEventListener('keydown', e => { if (e.key === 'ArrowDown') { e.preventDefault(); moveAct(1); } else if (e.key === 'Enter') { e.preventDefault(); if (act < 0) moveAct(1); toggleAct(); } }); }
                     else { slot.innerHTML = '<input type="search" data-sc-q placeholder="Chercher un écran, une liste, un outil…">'; slot.querySelector('input').addEventListener('input', e => { q = e.target.value; paintCat(); }); }
-                    const shown = () => { const words = fold(q).split(/\s+/).filter(Boolean); return cat.filter(r => words.every(w => fold(`${r.label} ${r.group} ${r.hint}`).includes(w))); };
+                    const shown = () => { const words = fold(q).split(/\s+/).filter(Boolean); return cat.filter(r => (tab !== 'create' || r.target.startsWith('create:')) && words.every(w => fold(`${r.label} ${r.group} ${r.hint}`).includes(w))); };
                     function paintCat() {
                         const rows = shown(), box = $('[data-sc-cat]'); let g = '', out = '';
                         rows.slice(0, 400).forEach((r, i) => { if (r.group !== g) { g = r.group; out += `<div class="h-sc-catg">${esc(g)}</div>`; } const on = picks.screens.has(r.target);

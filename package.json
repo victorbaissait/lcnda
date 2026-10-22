@@ -66,6 +66,7 @@
       "electron/main.js",
       "electron/php-server.js",
       "electron/preload.js",
+      "electron/desk-widgets.js",
       "electron/loading.html"
     ],
     "extraResources": [

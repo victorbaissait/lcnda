@@ -29,7 +29,7 @@ function router_serve_media(string $relative): bool
 
     $types = [
         'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'webp' => 'image/webp',
-        'gif' => 'image/gif', 'tif' => 'image/tiff', 'tiff' => 'image/tiff', 'bmp' => 'image/bmp', 'heic' => 'image/heic',
+        'gif' => 'image/gif', 'avif' => 'image/avif', 'tif' => 'image/tiff', 'tiff' => 'image/tiff', 'bmp' => 'image/bmp', 'heic' => 'image/heic',
         'pdf' => 'application/pdf',
         'mp3' => 'audio/mpeg', 'm4a' => 'audio/mp4', 'wav' => 'audio/wav', 'ogg' => 'audio/ogg',
         'aif' => 'audio/aiff', 'aiff' => 'audio/aiff', 'aifc' => 'audio/aiff',

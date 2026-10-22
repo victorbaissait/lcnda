@@ -52,6 +52,7 @@ P.pickerField({name: 'author', kind: 'person', allowFree: true, value: 'txt:le c
 P.pickerField({name: 'people_json', kind: 'person', roles: {main: true}, value: {main: 12, people: [{id: 45, role: 'épouse', primary: true}, {txt: 'le curé Lafon', role: 'témoin'}]}});
 // roles: {main: false} → pas de « Personne principale », seulement les deux zones
 // roles: {main: true, roleList: ['témoin', 'parrain', …]} → autre liste de rôles proposés (un mot libre reste possible)
+// roles: {main: false, zones: {primary: ['Propriétaires', 'petite ligne', '＋ Ajouter un propriétaire…'], secondary: [...]}} → les noms des deux zones (cadastre)
 
 // 5. Afficher (lecture) les personnes d'une enquête : principale en grand, ★ Principales, ☆ Secondaires
 box.innerHTML = P.pickerView(JSON.parse(row.people_json));
@@ -71,6 +72,7 @@ P.pickerField({name: 'label_ids', kind: 'label', multiple: true});
 //         event (📅 événements : titre ou sorte, personne ou couple, date, lieu — un passage d'un son relié, Studio son, lib/audio_studio.php)
 //         digest (📜 dépouillements d'archive : commune, cote, service, années ; badge = le résultat « Trouvé / Rien trouvé / En partie » — lib/research_journal.php)
 //         archive_service (🏛 services d'archives : nom, sigle, ville ; « ＋ Créer le service » ouvre sa fenêtre ; ↗ Ouvrir = sa fiche — lib/archive_services.php)
+//         parcel (▦ parcelles du cadastre : « ab 100 », commune, lieu-dit, adresse ; ↗ Ouvrir = la fiche par-dessus — lib/cadastre.php, heritage-cadastre.js)
 
 // 📈 un de mes graphiques (table custom_widgets, lib/graphs.php) : la valeur est le numéro de ligne (item.id) ; l'identifiant
 // du graphique (cw_…) est dans item.uid. Case vide = tous les graphiques ; « ＋ Nouveau graphique » / « ＋ Créer le graphique « … » »

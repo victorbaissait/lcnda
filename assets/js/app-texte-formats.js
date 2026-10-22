@@ -289,7 +289,7 @@
     const NAME_TO_ST = n => { n = String(n || '').toLowerCase().trim(); let m;
         if ((m = /^(heading|titre)\s*(\d)$/.exec(n))) return 'h' + Math.min(6, Number(m[2]));
         if (n === 'title' || n === 'titre') return 'title'; if (n === 'subtitle' || n === 'sous-titre') return 'subtitle';
-        if (/^(quote|intense quote|citation|quotations|citation intense|block text)$/.test(n)) return 'quote';
+        if (/^(quote|intense quote|citation|quotations|citation intense|block text|block quotation|bloc de citation)$/.test(n)) return 'quote';
         if (n === 'caption' || n === 'légende') return 'caption'; if (/^(normal|standard|default|default paragraph style|list paragraph|paragraphe de liste|body text|corps de texte|no spacing|sans interligne|text body|first paragraph|compact|text_20_body|text)$/.test(n)) return 'normal';
         if ((m = /^(?:toc|contents)\s*(\d)$/.exec(n))) return '__toc' + m[1]; if (/^(toc heading|contents heading)$/.test(n)) return '__toc0'; if (/^index\s*(\d|heading)$/.test(n)) return '__index'; if (/^(bibliography|bibliographie|bibliography heading|bibliography 1)$/.test(n)) return '__bib';
         return null; };
@@ -418,8 +418,9 @@
             if (ps && !st) { const sm = styleMap.get(ps), lv = kid(sm?.pPr, 'outlineLvl'); st = lv && Number(attr(lv, 'w:val')) < 6 ? 'h' + (Number(attr(lv, 'w:val')) + 1) : customOf(ps, 'p') || 'normal'; }
             if (base._ol != null && base._ol < 6 && st === 'normal') st = 'h' + (base._ol + 1); delete base._ol;
             const np = kid(pPr, 'numPr'); let list = null;
-            if (np) { const id = attr(kid(np, 'numId'), 'w:val'), l = Number(attr(kid(np, 'ilvl'), 'w:val') || 0); const fmts = nums.get(id); if (id && id !== '0' && fmts) list = {k: (fmts[l] || fmts[0]) === 'bullet' ? 'ul' : 'ol', l: clamp(l, 0, 8)}; }
-            if (!np && ps) { const sm = styleMap.get(ps), snp = kid(sm?.pPr, 'numPr'); if (snp) { const id = attr(kid(snp, 'numId'), 'w:val'), fmts = nums.get(id); if (fmts) list = {k: fmts[0] === 'bullet' ? 'ul' : 'ol', l: 0}; } }
+            // « none » : la numérotation des titres de LibreOffice (rien d'écrit devant) — pas une liste
+            if (np) { const id = attr(kid(np, 'numId'), 'w:val'), l = Number(attr(kid(np, 'ilvl'), 'w:val') || 0); const fmts = nums.get(id), f = fmts && (fmts[l] || fmts[0]); if (id && id !== '0' && fmts && f !== 'none') list = {k: f === 'bullet' ? 'ul' : 'ol', l: clamp(l, 0, 8)}; }
+            if (!np && ps) { const sm = styleMap.get(ps), snp = kid(sm?.pPr, 'numPr'); if (snp) { const id = attr(kid(snp, 'numId'), 'w:val'), fmts = nums.get(id), l0 = Number(attr(kid(snp, 'ilvl'), 'w:val') || 0), lv = /(list|liste)/i.test(sm.name) && /\s(\d)$/.exec(sm.name) ? Number(/\s(\d)$/.exec(sm.name)[1]) - 1 : l0; const f = fmts && (fmts[l0] || fmts[0]); if (fmts && f !== 'none') list = {k: f === 'bullet' ? 'ul' : 'ol', l: clamp(lv, 0, 8)}; } } // « List Bullet 2 » de Word : le 2e niveau
             const drop = kid(pPr, 'framePr') && /drop|margin/.test(attr(kid(pPr, 'framePr'), 'w:dropCap') || '');
             const runs = await runsOf(p, ctx);
             const out = []; let cur = [];
@@ -501,7 +502,9 @@
             const read = async ref => { if (!ref) return []; const r = rels.get(attr(ref, 'r:id')); if (!r) return []; const x = await xml(r.target), hr = await relsOf(r.target); const root = kid(x, kind === 'header' ? 'hdr' : 'ftr'); return root ? await bodyBlocks(root, {rels: hr, cm: new Set(), fld: null, secEnds: []}) : []; };
             const first = kid(sectPr, 'titlePg') && onOff(kid(sectPr, 'titlePg'));
             return {blocks: await read(pick('default')), first: !!first, firstBlocks: first ? await read(pick('first')) : []}; };
-        if (lastSect) { doc.header = await hfOf(lastSect, 'header'); doc.footer = await hfOf(lastSect, 'footer'); }
+        // une section sans en-tête reprend celui de la section d'avant (comme Word) : on prend le dernier qui existe
+        const sects = [...ctx.secEnds.map(x => x.sectPr), lastSect].filter(Boolean), hfSect = kind => [...sects].reverse().find(sp => kids(sp, `${kind}Reference`).length) || lastSect;
+        if (lastSect || sects.length) { doc.header = await hfOf(hfSect('header'), 'header'); doc.footer = await hfOf(hfSect('footer'), 'footer'); }
         const bg = kid(kid(docXml, 'document'), 'background'); if (bg && /^[0-9a-f]{6}$/i.test(attr(bg, 'w:color') || '')) doc.page.color = '#' + attr(bg, 'w:color').toLowerCase();
         const settings = await xml('word/settings.xml'); if (kid(kid(settings, 'settings'), 'trackRevisions')) doc.track = true;
         const core = await xml('docProps/core.xml'); const title = findAll(core, 'title')[0], author = findAll(core, 'creator')[0]; if (title) doc.title = xtext(title).trim().slice(0, 200); if (author) doc.meta.author = xtext(author).trim().slice(0, 120);
@@ -869,7 +872,11 @@
     }
 
     /* ═════════ RTF ═════════ */
-    const rtfEsc = t => String(t || '').replace(/[\\{}]/g, c => '\\' + c).replace(/\t/g, '\\tab ').replace(/\n/g, '\\line ').replace(/[^\x00-\x7f]/g, c => { const n = c.charCodeAt(0); return `\\u${n > 32767 ? n - 65536 : n}?`; });
+    /** le numéro d'un élément de liste : chaque niveau compte à part, et repart à 1 quand la sorte change (puces → numéros) */
+    const listNum = (cnt, list) => { const l = list.l || 0; cnt.length = l + 1; const c = cnt[l]; cnt[l] = c && c.k === list.k ? {k: list.k, n: c.n + 1} : {k: list.k, n: 1}; return cnt[l].n; };
+    // \u233\'e9 : le caractère, puis sa copie Windows-1252 (« ? » s'il n'y en a pas) — lu pareil par Word, LibreOffice et pandoc
+    let CP_BACK = null; const cpByte = n => { if (!CP_BACK) { CP_BACK = new Map(); Object.entries(CP1252).forEach(([b, u]) => CP_BACK.set(u, Number(b))); } return n >= 160 && n <= 255 ? n : CP_BACK.get(n) || 0x3f; };
+    const rtfEsc = t => String(t || '').replace(/[\\{}]/g, c => '\\' + c).replace(/\t/g, '\\tab ').replace(/\n/g, '\\line ').replace(/[^\x00-\x7f]/g, c => { const n = c.charCodeAt(0); return `\\u${n > 32767 ? n - 65536 : n}\\'${cpByte(n).toString(16).padStart(2, '0')}`; });
     function toRtf(doc) {
         const fonts = ['Georgia'], colors = [''];
         const fi = f => { f = fontOk(f) || 'Georgia'; let i = fonts.indexOf(f); if (i < 0) { fonts.push(f); i = fonts.length - 1; } return i; };
@@ -898,15 +905,21 @@
             const il = (b.il || st.il || 0) + (b.list ? 6.35 * (b.list.l + 1) : 0); if (il) c += `\\li${MMTW(il)}`; if (b.ir || st.ir) c += `\\ri${MMTW(b.ir || st.ir)}`; const fi0 = b.list ? -6.35 : b.fi || st.fi; if (fi0) c += `\\fi${MMTW(fi0)}`;
             if (b.pb) c += '\\pagebb'; if (b.bd) c += '\\box\\brdrs\\brdrw10\\brsp80'; if (b.bg) c += `\\cbpat${ci(b.bg)}`;
             c += `\\f${fi(o.font || normal.font)}\\fs${Math.round((o.size || normal.size || 12) * 2)}${o.b ? '\\b' : ''}${o.i ? '\\i' : ''}${o.color ? `\\cf${ci(o.color)}` : ''} `;
-            const bullet = b.list ? (b.list.k === 'ol' ? `${b._n || 1}.\\tab ` : '\\u8226?\\tab ') : '';
+            // une vraie liste pour Word et LibreOffice (\\pn), avec la puce écrite à côté (\\pntext) pour les autres lecteurs
+            const bullet = b.list ? (b.list.k === 'ol' ? `{\\pntext\\f0 ${b._n || 1}.\\tab}{\\*\\pn\\pnlvlbody\\pnf0\\pnindent360\\pnstart${b._n || 1}\\pndec{\\pntxta.}}` : `{\\pntext\\f0 \\'95\\tab}{\\*\\pn\\pnlvlblt\\pnf0\\pnindent360{\\pntxtb\\'95}}`) : '';
             return `{${c}${bullet}${mergeRuns(b.runs).map(runR).join('')}\\par}\n`;
         };
         const blocksR = (blocks, inTable = false) => { const cnt = []; return blocks.map(b => {
-            if (b.t === 'p') { if (b.list) { cnt.length = b.list.l + 1; cnt[b.list.l] = (cnt[b.list.l] || 0) + 1; b = {...b, _n: cnt[b.list.l]}; } else cnt.length = 0; return paraR(b, inTable); }
+            if (b.t === 'p') { if (b.list) b = {...b, _n: listNum(cnt, b.list)}; else cnt.length = 0; return paraR(b, inTable); }
             cnt.length = 0;
             if (b.t === 'pb') return '\\page\n'; if (b.t === 'hr') return '{\\pard\\brdrb\\brdrs\\brdrw10\\brsp20 \\par}\n';
             if (b.t === 'img') return `{\\pard\\q${b.al === 'right' ? 'r' : b.al === 'left' ? 'l' : 'c'} ${pictR(b)}\\par}\n${b.cap ? paraR({st: 'caption', runs: [run(b.cap)]}) : ''}`;
-            if (b.t === 'table') { const n = Math.max(1, ...b.rows.map(r => r.reduce((k, c) => k + (c.cs || 1), 0))), tw = MMTW(160); return b.rows.map(r => { let x = 0; const defs = r.map(c => { x += (c.cs || 1); return `\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs${c.bg ? `\\clcbpat${ci(c.bg)}` : ''}\\cellx${Math.round(tw * x / n)}`; }).join(''); return `\\trowd\\trgaph108${defs}\n${r.map(c => blocksR(c.blocks || [], true).replace(/\\par}\n$/, '}') + '\\cell ').join('')}\\row\n`; }).join('') + '\\pard\n'; }
+            if (b.t === 'table') { // cases fusionnées : en largeur par \\cellx, en hauteur par \\clvmgf (la première) et \\clvmrg (les suivantes)
+                const n = Math.max(1, ...b.rows.map(r => r.reduce((k, c) => k + (c.cs || 1), 0))), tw = MMTW(160), occ = [];
+                return b.rows.map((r, ri) => { const ents = []; let col = 0; const take = () => { while (occ[ri]?.[col]) { const o = occ[ri][col]; ents.push({cont: true, cs: o.cs, bg: o.bg}); col += o.cs; } };
+                    r.forEach(c => { take(); const cs = c.cs || 1, rs = c.rs || 1; ents.push({c, cs, first: rs > 1, bg: c.bg}); for (let k = 1; k < rs; k++) (occ[ri + k] = occ[ri + k] || [])[col] = {cs, bg: c.bg}; col += cs; }); take();
+                    let x = 0; const defs = ents.map(e => { x += e.cs; return `${e.first ? '\\clvmgf' : e.cont ? '\\clvmrg' : ''}\\clbrdrt\\brdrs\\clbrdrl\\brdrs\\clbrdrb\\brdrs\\clbrdrr\\brdrs${e.bg ? `\\clcbpat${ci(e.bg)}` : ''}\\cellx${Math.round(tw * x / n)}`; }).join('');
+                    return `\\trowd\\trgaph108${defs}\n${ents.map(e => (e.cont ? '{\\pard\\intbl }' : blocksR(e.c.blocks || [], true).replace(/\\par}\n$/, '}')) + '\\cell ').join('')}\\row\n`; }).join('') + '\\pard\n'; }
             if (b.blocks) return blocksR(b.blocks);
             return '';
         }).join(''); };
@@ -922,17 +935,24 @@
         if (!/^\s*\{\\rtf/.test(src)) throw new Error('ce n’est pas un fichier RTF');
         if (src.length > T.LIMITS.textBytes) throw new Error('fichier refusé : trop gros');
         const doc = T.newDoc(), blocks = [], colors = [], fonts = {};
-        let cur = [], para0 = {}, st = {}, stack = [], skip = 0, uc = 1, ucSkip = 0, i = 0, depth = 0;
-        let row = null, rows = null, cellBlocks = [], inTable = false, note = null, field = null, pict = null;
-        const flushPara = () => { const sty = T.BASE_STYLES.find(x => x.id === (para0.st || 'normal')) || T.BASE_STYLES[0], nrm = T.BASE_STYLES[0]; cur.forEach(r => { if (r.font && r.font === (sty.font || nrm.font)) delete r.font; if (r.sz && (r.sz === (sty.size || nrm.size))) delete r.sz; if (r.col && (r.col === sty.color || r.col === nrm.color)) delete r.col; if (r.b && sty.b) delete r.b; }); const b = {t: 'p', st: para0.st || 'normal', ...para0, runs: mergeRuns(cur)}; delete b.intbl; if (inTable && row) cellBlocks.push(b); else { if (rows) { blocks.push({t: 'table', head: 0, rows}); rows = null; } blocks.push(b); } cur = []; };
-        const push = t => { if (!t) return; if (note) { note.text += t; return; } if (field && field.inst) { field.instr += t; return; } if (pict) return; const f = {...st}; delete f.f; delete f.fs; if (field?.href) f.href = field.href; cur.push(run(t, f)); };
+        // les noms des styles (« {\s1 … heading 1;} ») : un titre de Word ou de LibreOffice reste un titre
+        const sNames = {}; { const a = src.indexOf('{\\stylesheet'); if (a >= 0 && a < 2e6) { let d = 0, b = a; for (; b < src.length && b < a + 2e6; b++) { if (src[b] === '{') d++; else if (src[b] === '}' && --d === 0) break; } const sheet = src.slice(a + 12, b); const rx = /\{(?:\\\*)?\\s(\d{1,4})\b([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g; let m; while ((m = rx.exec(sheet))) { const name = m[2].replace(/\{[^{}]*\}/g, '').replace(/\\[a-z]+-?\d* ?/gi, '').replace(/;\s*$/, '').trim(); const k = NAME_TO_ST(name); if (k) sNames[m[1]] = k; } } }
+        let cur = [], para0 = {}, st = {}, stack = [], skip = 0, uc = 1, ucSkip = 0, i = 0, depth = 0, cap = null; const hf = {header: '', footer: ''};
+        let row = null, rows = null, cellBlocks = [], inTable = false, note = null, field = null, pict = null, rowDefs = [], pend = {};
+        // un tableau lu : \\clvmrg (case fusionnée avec celle du dessus) devient rs, les \\cellx plus larges deviennent cs
+        const tableOf = rws => { const xs = [...new Set(rws.flatMap(r => r.map(c => c._x).filter(x => x > 0)))].sort((a, b) => a - b), out = [];
+            rws.forEach(r => { const row2 = []; let prev = 0; r.forEach(c => { const x = c._x || 0, cs = x ? Math.max(1, xs.filter(v => v > prev && v <= x).length) : 1; const cell = {blocks: c.blocks}; if (cs > 1) cell.cs = cs; cell._a = prev; cell._m = c._m; prev = x || prev; row2.push(cell); }); out.push(row2); });
+            out.forEach((r, ri) => { for (let k = r.length - 1; k >= 0; k--) { const c = r[k]; if (!c._m || !ri) continue; for (let up = ri - 1; up >= 0; up--) { const o = out[up].find(x => x._a === c._a && !x._m); if (o) { o.rs = (o.rs || 1) + 1; break; } } r.splice(k, 1); } });
+            out.forEach(r => r.forEach(c => { delete c._a; delete c._m; })); return {t: 'table', head: 0, rows: out}; };
+        const flushPara = () => { if (para0._lt != null) { const lt = para0._lt.trim(); if (lt) para0.list = {k: /^[\dIVXLCivxlc]+[.)]?$|^[a-z][.)]$/.test(lt) ? 'ol' : 'ul', l: clamp(para0._lvl != null ? para0._lvl : para0.il ? Math.round(para0.il / 6.35) - 1 : 0, 0, 8)}; delete para0.il; delete para0.fi; } delete para0._lt; delete para0._lvl; const sty = T.BASE_STYLES.find(x => x.id === (para0.st || 'normal')) || T.BASE_STYLES[0], nrm = T.BASE_STYLES[0]; cur.forEach(r => { if (r.font && r.font === (sty.font || nrm.font)) delete r.font; if (r.sz && (r.sz === (sty.size || nrm.size))) delete r.sz; if (r.col && (r.col === sty.color || r.col === nrm.color)) delete r.col; if (r.b && sty.b) delete r.b; }); const b = {t: 'p', st: para0.st || 'normal', ...para0, runs: mergeRuns(cur)}; delete b.intbl; if (inTable && row) cellBlocks.push(b); else { if (rows) { blocks.push(tableOf(rows)); rows = null; } blocks.push(b); } cur = []; };
+        const push = t => { if (!t) return; if (cap) { cap.text += t; return; } if (note) { note.text += t; return; } if (field && field.inst) { field.instr += t; return; } if (pict) return; const f = {...st}; delete f.f; delete f.fs; if (field?.href) f.href = field.href; cur.push(run(t, f)); };
         const DEST = new Set(['fonttbl', 'colortbl', 'stylesheet', 'info', 'header', 'footer', 'headerl', 'headerr', 'headerf', 'footerl', 'footerr', 'footerf', 'listtable', 'listoverridetable', 'revtbl', 'rsidtbl', 'generator', 'xmlnstbl', 'themedata', 'colorschememapping', 'latentstyles', 'datastore', 'object', 'objdata', 'mmathPr', 'pgdsctbl', 'fldtype', 'bkmkstart', 'bkmkend', 'listtext', 'pntext', 'pntxtb', 'pntxta']);
         let tokens = 0;
         while (i < src.length) {
             if (++tokens > 8000000) throw new Error('fichier refusé : trop compliqué');
             const c = src[i];
             if (c === '{') { stack.push({st: {...st}, skip, dest: null, uc}); if (++depth > 200) throw new Error('fichier RTF trop imbriqué'); i++; continue; }
-            if (c === '}') { const top = stack.pop(); depth--; if (top) { if (top.dest === 'footnote' && note) { cur.push({note: {id: nid('n'), k: 'foot', text: note.text.trim()}}); note = null; } if (top.dest === 'fldinst' && field) { field.inst = false; const hm = /HYPERLINK\s+"([^"]+)"/i.exec(field.instr); if (hm && /^(https?:\/\/|mailto:)/i.test(hm[1])) field.href = hm[1]; const fw = field.instr.trim().split(/\s+/)[0].toUpperCase(); if (fw === 'PAGE' || fw === 'NUMPAGES') field.page = fw === 'PAGE' ? 'page' : 'pages'; } if (top.dest === 'field' && field) { field = null; } if (top.dest === 'fldrslt' && field?.page) { cur = cur.filter(r => !r._fr); cur.push({field: field.page, fieldText: '1'}); } if (top.dest === 'pict' && pict) { const hx = pict.hex.replace(/[^0-9a-f]/gi, ''); if (hx.length > 16 && hx.length < 2 * T.LIMITS.imageBytes) { const u8 = new Uint8Array(hx.length >> 1); for (let k = 0; k < u8.length; k++) u8[k] = parseInt(hx.substr(k * 2, 2), 16); const t = sniffImage(u8); if (['png', 'jpeg'].includes(t)) cur.push({img: {src: dataUrl(u8, t), w: pict.w || (imageSize(u8) || {}).w || 200, alt: ''}}); } pict = null; } st = top.st; skip = top.skip; uc = top.uc; } i++; continue; }
+            if (c === '}') { const top = stack.pop(); depth--; if (top) { if (top.cap && cap === top.cap) { if (cap.kind === 'listtext') para0._lt = (para0._lt || '') + cap.text; else if (cap.kind === 'annotation') { const t = cap.text.trim(); if (t && doc.comments.length < 2000) doc.comments.push({id: nid('c'), text: t.slice(0, 4000), author: '', at: ''}); } else hf[cap.kind] = hf[cap.kind] || cap.text; cap = null; } if (top.dest === 'footnote' && note) { cur.push({note: {id: nid('n'), k: 'foot', text: note.text.trim()}}); note = null; } if (top.dest === 'fldinst' && field) { field.inst = false; const hm = /HYPERLINK\s+"([^"]+)"/i.exec(field.instr); if (hm && /^(https?:\/\/|mailto:)/i.test(hm[1])) field.href = hm[1]; const fw = field.instr.trim().split(/\s+/)[0].toUpperCase(); if (fw === 'PAGE' || fw === 'NUMPAGES') field.page = fw === 'PAGE' ? 'page' : 'pages'; } if (top.dest === 'field' && field) { field = null; } if (top.dest === 'fldrslt' && field?.page) { cur = cur.filter(r => !r._fr); cur.push({field: field.page, fieldText: '1'}); } if (top.dest === 'pict' && pict) { const hx = pict.hex.replace(/[^0-9a-f]/gi, ''); if (hx.length > 16 && hx.length < 2 * T.LIMITS.imageBytes) { const u8 = new Uint8Array(hx.length >> 1); for (let k = 0; k < u8.length; k++) u8[k] = parseInt(hx.substr(k * 2, 2), 16); const t = sniffImage(u8); if (['png', 'jpeg'].includes(t)) cur.push({img: {src: dataUrl(u8, t), w: pict.w || (imageSize(u8) || {}).w || 200, alt: ''}}); } pict = null; } st = top.st; skip = top.skip; uc = top.uc; } i++; continue; }
             if (c === '\\') {
                 const n1 = src[i + 1];
                 if (n1 === '\\' || n1 === '{' || n1 === '}') { if (!skip) push(n1); i += 2; continue; }
@@ -944,6 +964,12 @@
                 i += m[0].length; const w = m[1], arg = m[2] != null ? Number(m[2]) : null;
                 const top = stack[stack.length - 1];
                 if (top && !top.dest) {
+                    // groupes lus à part : la puce d'une liste, un commentaire, l'en-tête et le pied ; « shppict » : l'image (la suite de « nonshppict » est sa copie WMF)
+                    if (!skip && !cap && ['listtext', 'pntext'].includes(w)) { top.dest = w; top.cap = cap = {kind: 'listtext', text: ''}; continue; }
+                    if (!skip && !cap && w === 'annotation') { top.dest = w; top.cap = cap = {kind: 'annotation', text: ''}; continue; }
+                    if (!skip && !cap && /^(header|footer)[rf]?$/.test(w)) { top.dest = w; top.cap = cap = {kind: w.startsWith('header') ? 'header' : 'footer', text: ''}; continue; }
+                    if (w === 'shppict') { top.dest = w; continue; }
+                    if (w === 'footnote' && top.star) { top.dest = 'footnote'; note = {text: ''}; continue; }
                     if (DEST.has(w) || (top.star && !['fldinst'].includes(w))) { top.dest = w; if (w === 'colortbl') { top.dest = 'colortbl'; } else { skip = 1; } if (w !== 'colortbl') continue; }
                     if (w === 'footnote') { top.dest = 'footnote'; note = {text: ''}; continue; }
                     if (w === 'field') { top.dest = 'field'; field = {instr: '', inst: false}; continue; }
@@ -955,7 +981,9 @@
                 if (pict) { if (w === 'picwgoal') pict.w = Math.round(arg / 15); continue; }
                 if (skip) continue;
                 switch (w) {
-                    case 'par': flushPara(); break; case 'line': cur.push({br: true}); break; case 'tab': cur.push({tab: true, x: ''}); break;
+                    case 'par': if (cap) { cap.text += '\n'; break; } if (note) { note.text += ' '; break; } flushPara(); break; case 'line': if (cap) { cap.text += '\n'; break; } cur.push({br: true}); break; case 'tab': if (cap) { cap.text += '\t'; break; } cur.push({tab: true, x: ''}); break;
+                    case 'chpgn': if (cap) cap.text += '\u0001'; break; case 'ilvl': para0._lvl = arg || 0; break;
+                    case 's': if (sNames[arg] && !cap) para0.st = sNames[arg]; break;
                     case 'page': flushPara(); blocks.push({t: 'pb'}); break; case 'sect': break;
                     case 'pard': para0 = {}; if (!inTable) row = null; break; case 'plain': st = {}; break;
                     case 'b': st.b = arg === 0 ? 0 : 1; break; case 'i': st.i = arg === 0 ? 0 : 1; break; case 'ul': st.u = arg === 0 ? 0 : 1; break; case 'ulnone': st.u = 0; break;
@@ -967,9 +995,10 @@
                     case 'sb': para0.sb = arg / 20; break; case 'sa': para0.sa = arg / 20; break; case 'li': if (arg) para0.il = TWMM(arg); break; case 'ri': if (arg) para0.ir = TWMM(arg); break; case 'fi': if (arg) para0.fi = TWMM(arg); break;
                     case 'outlinelevel': if (arg >= 0 && arg < 6) para0.st = 'h' + (arg + 1); break; case 'pagebb': para0.pb = true; break;
                     case 'intbl': inTable = true; if (!row) { row = []; rows = rows || []; } break;
-                    case 'cell': flushPara(); if (row) row.push({blocks: cellBlocks.length ? cellBlocks : [para([])]}); cellBlocks = []; break;
+                    case 'cell': if (cur.length || !cellBlocks.length) flushPara(); if (row) { const df = rowDefs[row.length] || {}; row.push({blocks: cellBlocks.length ? cellBlocks : [para([])], _x: df.x || 0, _m: !!df.m}); } cellBlocks = []; break;
+                    case 'clvmgf': pend.f = 1; break; case 'clvmrg': pend.m = 1; break; case 'cellx': rowDefs.push({...pend, x: arg || 0}); pend = {}; break;
                     case 'row': if (row) { rows = rows || []; rows.push(row); } row = []; inTable = false; break;
-                    case 'trowd': row = []; break;
+                    case 'trowd': row = []; rowDefs = []; pend = {}; break;
                     case 'u': { const cp = arg < 0 ? arg + 65536 : arg; push(String.fromCharCode(cp)); ucSkip = uc; break; }
                     case 'uc': uc = arg || 0; break;
                     case 'emdash': push('—'); break; case 'endash': push('–'); break; case 'bullet': push('•'); break; case 'lquote': push('‘'); break; case 'rquote': push('’'); break; case 'ldblquote': push('“'); break; case 'rdblquote': push('”'); break;
@@ -987,9 +1016,13 @@
             if (ucSkip > 0) { ucSkip--; i++; continue; }
             const e = src.slice(i).search(/[\\{}\r\n]/); const chunk = e < 0 ? src.slice(i) : src.slice(i, i + e); push(chunk); i += chunk.length || 1;
         }
-        if (cur.length) flushPara(); if (rows?.length) blocks.push({t: 'table', head: 0, rows});
+        if (cur.length) flushPara(); if (rows?.length) blocks.push(tableOf(rows));
+        { const inf = k => { const m = new RegExp('\\{\\\\' + k + ' ([^{}\\\\]{1,300})\\}').exec(src.slice(0, 400000)); return m ? m[1].trim() : ''; }; const ti = inf('title'), au = inf('author'); if (ti) doc.title = ti; if (au) doc.meta.author = au; } // {\info{\title …}{\author …}}
+        // en-tête et pied : des lignes simples (le numéro de page reste un champ)
+        const hfBlocks = t => String(t || '').split('\n').map(x => x.replace(/\s+$/, '')).filter(x => x.trim()).slice(0, 20).map(x => para(x.split('\u0001').flatMap((y, k) => (k ? [{field: 'page', fieldText: '1'}] : []).concat(y ? [run(y)] : []))));
+        if (hf.header.trim()) doc.header = {blocks: hfBlocks(hf.header), first: false, firstBlocks: []}; if (hf.footer.trim()) doc.footer = {blocks: hfBlocks(hf.footer), first: false, firstBlocks: []};
         // les puces écrites en texte (« • », « 1. ») redeviennent des listes
-        blocks.forEach(b => { if (b.t !== 'p' || !b.runs.length) return; const t = b.runs[0].x || ''; const m = /^(•|·|-|\d{1,3}[.)])\s*$/.exec(t) && b.runs[1]?.tab ? t : null; if (m) { b.list = {k: /\d/.test(m) ? 'ol' : 'ul', l: clamp(Math.round(((b.il || 6.35) - 6.35) / 6.35), 0, 8)}; b.runs = b.runs.slice(2); delete b.il; delete b.fi; } });
+        blocks.forEach(b => { if (b.t !== 'p' || !b.runs.length) return; const t = b.runs[0].x || ''; const m = /^(•|·|-|–|—|◦|▪|o|\d{1,3}[.)])\s*$/.exec(t) && b.runs[1]?.tab ? t : null; if (m) { b.list = {k: /\d/.test(m) ? 'ol' : 'ul', l: clamp(Math.round(((b.il || 6.35) - 6.35) / 6.35), 0, 8)}; b.runs = b.runs.slice(2); delete b.il; delete b.fi; } });
         doc.sections = [{page: null, blocks: blocks.filter(b => !(b.t === 'p' && !b.runs.length && blocks.length > 1)).slice(0, T.LIMITS.blocks)}];
         return {doc: finish(doc), notices: []};
     }
@@ -1012,7 +1045,7 @@
         const blk = (b, cnt) => {
             if (b.t === 'p') {
                 const t = inlineMd(b.runs); const lv = /^h([1-6])$/.exec(b.st || '');
-                if (b.list) { const n = (cnt[b.list.l] = (cnt[b.list.l] || 0) + 1); cnt.length = b.list.l + 1; return `${'    '.repeat(b.list.l)}${b.list.k === 'ol' ? `${n}.` : '-'} ${t}`; }
+                if (b.list) { const n = listNum(cnt, b.list); return `${'    '.repeat(b.list.l)}${b.list.k === 'ol' ? `${n}.` : '-'} ${t}`; }
                 cnt.length = 0;
                 if (lv) return `${'#'.repeat(Number(lv[1]))} ${t}`; if (b.st === 'title') return `# ${t}`; if (b.st === 'subtitle') return `## ${t}`;
                 if (b.st === 'quote') return t.split('\n').map(l => `> ${l}`).join('\n');
@@ -1055,9 +1088,11 @@
     }
     function fromMarkdown(text) {
         const src = String(text || '').replace(/\r\n?/g, '\n'); if (src.length > T.LIMITS.textBytes) throw new Error('fichier refusé : trop gros');
-        const lines = src.split('\n'), blocks = [], notesDef = new Map();
+        const lines = src.split('\n'), blocks = [], notesDef = new Map(), front = {};
         lines.forEach(l => { const m = /^\[\^([^\]]+)\]:\s*(.*)$/.exec(l); if (m) notesDef.set(m[1], m[2]); });
         let i = 0, paraBuf = [];
+        // l'en-tête YAML (« --- title: … author: … --- ») de pandoc, Obsidian… : le titre et l'auteur, pas du texte
+        if (/^---\s*$/.test(lines[0] || '')) { const end = lines.slice(1, 80).findIndex(l => /^(---|\.\.\.)\s*$/.test(l)); if (end >= 0) { lines.slice(1, end + 1).forEach(l => { const m = /^(title|titre|author|auteur|subject|sujet)\s*:\s*["']?(.*?)["']?\s*$/i.exec(l); if (m) front[m[1].toLowerCase()] = m[2].slice(0, 200); }); i = end + 2; } }
         const flush = () => { if (paraBuf.length) { blocks.push(para(mdInline(paraBuf.join('\n'), notesDef))); paraBuf = []; } };
         while (i < lines.length && blocks.length < T.LIMITS.blocks) {
             const l = lines[i];
@@ -1078,6 +1113,7 @@
         }
         flush();
         const doc = T.newDoc(); doc.sections = [{page: null, blocks: blocks.map(b => (b.t === 'p' ? {...b, runs: mergeRuns(b.runs)} : b))}];
+        if (front.title || front.titre) doc.title = front.title || front.titre; if (front.author || front.auteur) doc.meta.author = front.author || front.auteur; if (front.subject || front.sujet) doc.meta.subject = front.subject || front.sujet;
         return {doc: finish(doc), notices: []};
     }
 
@@ -1085,7 +1121,7 @@
     function toText(doc) {
         const lines = [];
         const blk = (b, cnt) => {
-            if (b.t === 'p') { const t = plainOf(b.runs); if (b.list) { const n = (cnt[b.list.l] = (cnt[b.list.l] || 0) + 1); cnt.length = b.list.l + 1; lines.push(`${'  '.repeat(b.list.l)}${b.list.k === 'ol' ? n + '.' : '•'} ${t}`); return; } cnt.length = 0; lines.push(t); return; }
+            if (b.t === 'p') { const t = plainOf(b.runs); if (b.list) { const n = listNum(cnt, b.list); lines.push(`${'  '.repeat(b.list.l)}${b.list.k === 'ol' ? n + '.' : '•'} ${t}`); return; } cnt.length = 0; lines.push(t); return; }
             cnt.length = 0;
             if (b.t === 'table') b.rows.forEach(r => lines.push(r.map(c => (c.blocks || []).map(T.blockText).join(' ')).join('\t')));
             else if (b.t === 'img') { if (b.cap) lines.push(b.cap); }

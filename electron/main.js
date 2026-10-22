@@ -12,6 +12,7 @@ const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const { PhpServer, findPhp, checkPhp, devBundledPhp, SECRET_HEADER } = require('./php-server');
+const desk = require('./desk-widgets'); // 🪟 widgets sur le bureau
 
 const APP_TITLE = 'Carnet numérique des ancêtres';
 app.setName(APP_TITLE);
@@ -31,6 +32,8 @@ const BUNDLED_PHP = app.isPackaged
 
 const useProjectData = process.argv.includes('--use-project-data');
 const selfTestFile = process.env.CARNET_SELFTEST || ''; // chemin d'une capture d'écran : test automatique puis fermeture
+// 🪟 lancé au démarrage de l'ordinateur (« Démarrer avec l'ordinateur ») : les widgets seulement, la grande fenêtre reste cachée
+let startHidden = process.argv.includes('--widgets') && !selfTestFile;
 
 let server = null;
 let win = null;
@@ -115,7 +118,7 @@ function buildMenu(p) {
       label: 'Fichier',
       submenu: [
         sk('new_window', 'Nouvelle fenêtre'), sk('new_person', 'Nouvelle personne…'), { type: 'separator' },
-        sk('quick_search', 'Recherche rapide…'), sk('find', 'Chercher dans l’écran…'), { type: 'separator' },
+        sk('quick_search', 'Recherche rapide…'), sk('find', 'Chercher dans l’écran…'), sk('calculator', 'Calculette…'), { type: 'separator' },
         sk('backup_now', 'Sauvegarder maintenant'), sk('print', 'Imprimer…'), { type: 'separator' },
         ...(isMac ? [] : [sk('settings', 'Réglages (Apparence)'), { type: 'separator' }]),
         { label: 'Ouvrir le dossier des données', click: open(p.dataDir) },
@@ -202,7 +205,7 @@ function createWindow() {
     show: false, title: APP_TITLE, backgroundColor: '#fbfbfb',
     webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false, preload: path.join(__dirname, 'preload.js') },
   });
-  win.once('ready-to-show', () => win.show());
+  win.once('ready-to-show', () => { if (!startHidden) win.show(); });
   win.on('closed', () => { win = null; });
   // Si PHP est prêt avant que cette page ait fini de s'afficher, l'application la remplace aussitôt : ce
   // chargement interrompu (code -3, ERR_ABORTED) est normal, on ne le signale pas comme une erreur.
@@ -250,6 +253,95 @@ async function checkReminders() {
   writeConfig(file, { keys: [...notified].slice(-500) });
 }
 ipcMain.on('lcnda:refresh-reminders', (event) => { if (fromApp(event)) checkReminders(); });
+
+/**
+ * 🪟 Widgets sur le bureau (Tableau de bord → 🪟) : petites fenêtres sans cadre, en lecture seule, qui montrent une page
+ * de PHP (lib/desk_widgets.php). Pas de preload, pas de Node, isolées (sandbox) ; la page ne peut que se fermer.
+ * Place, « toujours au-dessus » et « ouvert » sont retenus dans config.json (deskWidgets) ; rouverts au lancement suivant.
+ */
+const deskWins = new Map();
+function deskConfig() { return readConfig(paths().configFile).deskWidgets || {}; }
+function saveDesk(kind, patch) {
+  const p = paths(); const c = readConfig(p.configFile); const all = { ...(c.deskWidgets || {}) };
+  all[kind] = { ...(all[kind] || {}), ...patch };
+  writeConfig(p.configFile, { ...c, deskWidgets: all });
+}
+function showMain() {
+  if (!server) return;
+  if (!win || win.isDestroyed()) { createWindow(); win.loadURL(server.origin + '/').catch(() => {}); }
+  startHidden = false;
+  if (win.isMinimized()) win.restore();
+  win.show(); win.focus();
+}
+function openDeskWidget(kind, opts = {}) {
+  if (!server || !desk.KINDS[kind]) return false;
+  const saved = deskConfig()[kind] || {};
+  const o = desk.cleanOptions(kind, { ...saved, ...opts });
+  const old = deskWins.get(kind);
+  if (old && !old.isDestroyed()) { old.removeAllListeners('closed'); old.destroy(); }
+  const { screen } = require('electron');
+  const bounds = desk.fitBounds(saved.bounds, screen.getAllDisplays(), desk.KINDS[kind], Object.keys(desk.KINDS).indexOf(kind));
+  const w = new BrowserWindow(desk.windowOptions(kind, o, bounds));
+  deskWins.set(kind, w);
+  let t = null;
+  const keep = () => { clearTimeout(t); t = setTimeout(() => { if (!w.isDestroyed()) saveDesk(kind, { bounds: w.getBounds() }); }, 400); };
+  w.on('move', keep); w.on('resize', keep);
+  w.on('closed', () => { if (deskWins.get(kind) === w) deskWins.delete(kind); if (!quitting) saveDesk(kind, { open: false }); });
+  w.webContents.on('will-navigate', (event, url) => { if (!desk.isWidgetUrl(url, server.origin)) event.preventDefault(); }); // rien d'autre que sa page
+  w.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  w.webContents.on('context-menu', () => {
+    Menu.buildFromTemplate([
+      { label: 'Toujours au-dessus', type: 'checkbox', checked: w.isAlwaysOnTop(), click: (item) => { w.setAlwaysOnTop(item.checked); saveDesk(kind, { onTop: item.checked }); } },
+      { label: 'Remettre à jour', click: () => w.webContents.reload() },
+      { type: 'separator' },
+      { label: 'Ouvrir LCNDA', click: () => showMain() },
+      { label: 'Retirer ce widget du bureau', click: () => w.close() },
+      { type: 'separator' },
+      { label: 'Quitter LCNDA', click: () => app.quit() },
+    ]).popup({ window: w });
+  });
+  w.once('ready-to-show', () => w.showInactive());
+  w.loadURL(server.origin + desk.widgetPath(kind, o)).catch(() => {});
+  saveDesk(kind, { ...o, open: true });
+  return true;
+}
+const AUTOSTART_ARGS = ['--widgets'];
+function autostartFile() { return path.join(app.getPath('home'), '.config', 'autostart', 'lcnda-widgets.desktop'); }
+function getAutostart() {
+  try {
+    if (process.platform === 'linux') return fs.existsSync(autostartFile());
+    return !!app.getLoginItemSettings({ args: AUTOSTART_ARGS }).openAtLogin;
+  } catch { return false; }
+}
+function setAutostart(on) {
+  try {
+    if (process.platform === 'linux') {
+      const f = autostartFile();
+      if (!on) { fs.rmSync(f, { force: true }); return true; }
+      fs.mkdirSync(path.dirname(f), { recursive: true });
+      const args = app.isPackaged ? AUTOSTART_ARGS : [path.resolve(__dirname, '..'), ...AUTOSTART_ARGS];
+      fs.writeFileSync(f, desk.linuxAutostartEntry({ exec: process.env.APPIMAGE || process.execPath, args, name: APP_TITLE }));
+      return true;
+    }
+    app.setLoginItemSettings({ openAtLogin: !!on, args: AUTOSTART_ARGS }); // Mac : les arguments sont ignorés (wasOpenedAtLogin, voir boot)
+    return true;
+  } catch { return false; }
+}
+ipcMain.handle('lcnda:desk-widgets', (event, cmd, kind, opts) => {
+  if (!fromApp(event)) return { ok: false, error: 'Refusé' };
+  cmd = String(cmd || ''); kind = String(kind || '');
+  if (cmd === 'list') {
+    const cfg = deskConfig();
+    return { ok: true, platform: process.platform, autostart: getAutostart(),
+      widgets: Object.fromEntries(Object.keys(desk.KINDS).map((k) => [k, { open: deskWins.has(k), onTop: !!(cfg[k] && cfg[k].onTop), label: (cfg[k] && cfg[k].label) || '', date: (cfg[k] && cfg[k].date) || '' }])) };
+  }
+  if (cmd === 'autostart') { const on = !!(opts && opts.on === true); const ok = setAutostart(on); if (ok) writeConfig(paths().configFile, { ...readConfig(paths().configFile), deskAutostart: on }); return ok ? { ok: true } : { ok: false, error: 'Le démarrage avec l’ordinateur n’a pas pu être réglé.' }; }
+  if (!Object.prototype.hasOwnProperty.call(desk.KINDS, kind)) return { ok: false, error: 'Widget inconnu.' };
+  if (cmd === 'open') return { ok: openDeskWidget(kind, opts && typeof opts === 'object' ? opts : {}) };
+  if (cmd === 'set') { saveDesk(kind, desk.cleanOptions(kind, { ...(deskConfig()[kind] || {}), ...(opts && typeof opts === 'object' ? opts : {}) })); return { ok: true }; }
+  if (cmd === 'close') { const w = deskWins.get(kind); if (w && !w.isDestroyed()) w.close(); saveDesk(kind, { open: false }); return { ok: true }; }
+  return { ok: false, error: 'Commande inconnue.' };
+});
 
 /**
  * Import d'un fichier choisi dans la fenêtre système (écran de démarrage). Un paquet MacFamilyTree (.mftpkg) est
@@ -379,6 +471,12 @@ function lockNavigation(webContents, origin) {
     if (sideWindows.has(webContents)) { if (sideSafe(url)) webContents.loadURL(url); return { action: 'deny' }; }
     if (frameName === SIDE_FRAME && sideSafe(url)) { openSideWindow(url); return { action: 'deny' }; }
     // Deuxième écran détaché (« Fenêtre ↗ » du panneau À côté) : vraie fenêtre de l'application, même pont et même sécurité
+    // 🌐 « ↗ Aperçu » de Mon site web : une page isolée (CSP sandbox, origine opaque), SANS le pont de l'application
+    if (desk.isSitePreviewUrl(url, origin)) {
+      return { action: 'allow', overrideBrowserWindowOptions: { width: 1280, height: 860, autoHideMenuBar: true, title: 'Aperçu du site',
+        webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false, preload: undefined } } };
+    }
+    if (desk.isWidgetUrl(url, origin)) return { action: 'deny' }; // un widget s'ouvre seulement par le menu de l'application
     if (sameOrigin(url, origin)) {
       return { action: 'allow', overrideBrowserWindowOptions: { width: 1280, height: 860, minWidth: 700, minHeight: 500, backgroundColor: '#fbfbfb',
         webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false, preload: path.join(__dirname, 'preload.js') } } };
@@ -487,6 +585,13 @@ async function boot() {
     await win.loadURL(server.origin + (selfTestFile && process.env.CARNET_SELFTEST_PATH ? process.env.CARNET_SELFTEST_PATH : '/'));
     if (selfTestFile) await selfTest(selfTestFile);
   }
+  // 🪟 les widgets laissés sur le bureau la dernière fois ; Mac : ouvert au démarrage de la session = les widgets seulement
+  if (!selfTestFile && !prepared.noDatabase) {
+    try { if (process.platform === 'darwin' && app.getLoginItemSettings().wasOpenedAtLogin && readConfig(p.configFile).deskAutostart) startHidden = true; } catch { /* ignore */ }
+    let opened = 0;
+    for (const [kind, c] of Object.entries(deskConfig())) { if (c && c.open && desk.KINDS[kind] && openDeskWidget(kind, c)) opened++; }
+    if (startHidden && !opened) showMain(); // rien à montrer : la grande fenêtre
+  } else if (startHidden) showMain();
   if (!selfTestFile && !prepared.noDatabase) {
     setTimeout(() => checkReminders(), 8000);
     reminderTimer = setInterval(() => checkReminders(), 15 * 60 * 1000);
@@ -555,7 +660,8 @@ async function selfTest(outFile) {
 if (!app.requestSingleInstanceLock()) {
   app.quit(); // une seule fenêtre à la fois : deux instances se disputeraient la même base
 } else {
-  app.on('second-instance', () => { if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
+  app.on('second-instance', () => { if (win && !win.isDestroyed()) { startHidden = false; if (win.isMinimized()) win.restore(); win.show(); win.focus(); } else showMain(); });
+  app.on('activate', () => { if (server && (!win || win.isDestroyed() || !win.isVisible())) showMain(); }); // Mac : clic sur l'icône du Dock
   app.whenReady().then(boot);
   app.on('window-all-closed', () => app.quit());
   app.on('will-quit', () => { if (worldFetch) { try { worldFetch.kill(); fs.rmSync(worldFetch.marker, { force: true }); } catch (_) {} } }); // repris au prochain lancement

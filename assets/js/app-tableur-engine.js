@@ -63,7 +63,7 @@
     /** Un tableau de résultats (UNIQUE, TRIER, FILTRE) qui « déborde » sur les cases voisines */
     class SArr { constructor(rows) { this.rows = rows; this.h = rows.length; this.w = rows.reduce((m, r) => Math.max(m, r.length), 0); } get(i, j) { const v = this.rows[i]?.[j]; return v === undefined ? null : v; } values() { const o = []; this.rows.forEach(r => { for (let j = 0; j < this.w; j++) o.push(r[j] === undefined ? null : r[j]); }); return o; } }
     const EPOCH = Date.UTC(1899, 11, 30);
-    const ymdSerial = (y, m = 1, d = 1) => { const dt = new Date(Date.UTC(2000, m - 1, d)); dt.setUTCFullYear(y); return Math.round((dt.getTime() - EPOCH) / 864e5); };
+    const ymdSerial = (y, m = 1, d = 1) => { const dt = new Date(Date.UTC(2000, 0, 1)); dt.setUTCFullYear(y, m - 1, d); return Math.round((dt.getTime() - EPOCH) / 864e5); };
     const serialYmd = s => { const dt = new Date(EPOCH + Math.floor(s) * 864e5); return {y: dt.getUTCFullYear(), m: dt.getUTCMonth() + 1, d: dt.getUTCDate()}; };
     /** « 1 234,5 », « 12,40 € », « 35 % », « -2.5 » → nombre ; sinon null */
     const NUM_RX = /^[-+]?(\d{1,3}([   ]\d{3})+|\d+)?([.,]\d+)?([eE][-+]?\d+)?$/;
@@ -182,6 +182,7 @@
     }
     const actSerial = d => ymdSerial(d.y, d.m || 1, d.d || 1);
     /** l'âge en années entières entre deux dates d'acte */
+    const monthsBetween = (a, b) => ((b.y - a.y) * 12 + ((b.m || 1) - (a.m || 1)) - (a.d && b.d && b.d < a.d ? 1 : 0));
     const yearsBetween = (a, b) => { let n = b.y - a.y; if (a.m && b.m && (b.m < a.m || (b.m === a.m && a.d && b.d && b.d < a.d))) n--; return n; };
 
     /* ═════════ Lecture des formules : jetons, puis arbre (sans eval) ═════════ */
@@ -191,8 +192,21 @@
     function formulaMode(src) {
         let q = false, semi = false, commaIn = false, depth = 0;
         for (let i = 0; i < src.length; i++) { const ch = src[i]; if (ch === '"') q = !q; if (q) continue; if (ch === ';') semi = true; if (ch === '(') depth++; if (ch === ')') depth--; if (ch === ',' && depth > 0 && !(/\d/.test(src[i - 1] || '') && /\d/.test(src[i + 1] || ''))) commaIn = true; }
-        return semi || !commaIn ? 'fr' : 'en';
+        if (semi) return 'fr';
+        if (commaIn) return 'en';
+        // seulement des virgules entre chiffres : « DATE(1925,5,7) » (deux virgules d'affilée) ou une fonction au nom anglais (« ROUND(2,5) ») → anglais
+        const bare = src.replace(/"[^"]*"/g, '""');
+        if (!/\d,\d/.test(bare)) return 'fr';
+        if (/\d+,\d+,\d/.test(bare)) return 'en';
+        const names = bare.match(/[A-Za-z_][\w.]*(?=\s*\()/g) || [];
+        if (names.some(nm => { const u = nm.toUpperCase(); return !FN[u] && ALIAS[u] && FN[ALIAS[u]].en === u; })) return 'en';
+        // « MOD(-7,3) » : lu en français, MOD n'aurait qu'un morceau alors qu'il en faut deux → c'est de l'anglais
+        const short = mode => { try { let bad = false; const walk = nd => { if (!nd || typeof nd !== 'object') return; if (nd.k === 'fn') { const k = fnKey(nd.name); if (k && (nd.args || []).length < minArgs(k)) bad = true; (nd.args || []).forEach(walk); } else Object.values(nd).forEach(x => (Array.isArray(x) ? x.forEach(walk) : x && typeof x === 'object' ? walk(x) : 0)); }; walk(parseTokens(tokenize(src, mode))); return bad; } catch (_) { return true; } };
+        return short('fr') && !short('en') ? 'en' : 'fr';
     }
+    /** le nombre de morceaux obligatoires d'une fonction (lu dans sa signature : « MOD(nombre; diviseur) » → 2) */
+    const MIN_ARGS = new Map();
+    function minArgs(k) { if (MIN_ARGS.has(k)) return MIN_ARGS.get(k); const m = /\((.*)\)/.exec(FN[k]?.sig || ''); const n = m && m[1].trim() ? m[1].split(';').map(x => x.trim()).filter(x => x && !x.startsWith('[') && x !== '…' && !/^\.\.\./.test(x)).length : 0; MIN_ARGS.set(k, n); return n; }
     /**
      * Découpe une formule (sans le « = ») en jetons {t, raw, …, pre} : num, str, bool, err, ref, rng, name, fn, op, sep, lp, rp.
      * pre = les espaces avant le jeton (pour réécrire la formule telle quelle).
@@ -363,16 +377,28 @@
     };
     const sosaN = v => { const n = num(v); if (!(n >= 1) || !Number.isInteger(n)) throw err('#VALEUR!', {why: 'un numéro Sosa est un nombre entier qui commence à 1'}); return n; };
     const today = ctx => { const d = ctx.now(); return {y: d.getFullYear(), m: d.getMonth() + 1, d: d.getDate(), prec: 'jour'}; };
+    const DAYS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+    const MONTHS_ABBR = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
     const textFmt = (v, f) => { // TEXTE(valeur; "0,00") : les formats les plus courants
-        const F = String(f || ''), fl = fold(F);
+        const F = String(f || '');
         if (/[jdmay]/i.test(F) && !/^[#0,. %€]+$/.test(F)) {
             const d = v instanceof SDate ? serialYmd(v.serial) : typeof v === 'number' ? serialYmd(v) : readActDate(v); if (!d || d.error) return toStr(v);
-            const p = n => String(n).padStart(2, '0');
-            return fl.replace(/aaaa|yyyy/g, d.y).replace(/aa|yy/g, String(d.y).slice(-2)).replace(/mmmm/g, MONTHS[(d.m || 1) - 1]).replace(/mm/g, p(d.m || 1)).replace(/jj|dd/g, p(d.d || 1));
+            const p = n => String(n).padStart(2, '0'), fr = /j/i.test(F) || /a/i.test(F), wd = d.d ? DAYS[(((ymdSerial(d.y, d.m || 1, d.d) + 6) % 7) + 7) % 7] : '';
+            // un seul passage : « jjjj jj mmmm aaaa » → « jeudi 07 mai 1925 » (un nom de mois n'est pas relu comme un format)
+            const rx = fr ? /"[^"]*"|aaaa|aa|mmmm|mmm|mm|m|jjjj|jjj|jj|j/gi : /"[^"]*"|yyyy|yy|mmmm|mmm|mm|m|dddd|ddd|dd|d/gi;
+            return F.replace(rx, t => {
+                if (t[0] === '"') return t.slice(1, -1);
+                const k = t.toLowerCase(), m = d.m || 1, dd = d.d || 1;
+                switch (k) {
+                    case 'aaaa': case 'yyyy': return String(d.y); case 'aa': case 'yy': return String(d.y).slice(-2);
+                    case 'mmmm': return MONTHS[m - 1]; case 'mmm': return MONTHS_ABBR[m - 1]; case 'mm': return p(m); case 'm': return String(m);
+                    case 'jjjj': case 'dddd': return wd; case 'jjj': case 'ddd': return wd.slice(0, 3) + '.'; case 'jj': case 'dd': return p(dd); default: return String(dd);
+                }
+            });
         }
         const n = toNum(v); if (n === null) return toStr(v);
         const dec = (F.split(/[.,]/)[1] || '').replace(/[^0#]/g, '').length, pct = F.includes('%'), x = pct ? n * 100 : n;
-        return fmtFr(x, {minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: /#\s|\s0|# /.test(F)}) + (pct ? ' %' : '') + (F.includes('€') ? ' €' : '');
+        return fmtFr(x, {minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: /#\s|\s0|# /.test(F)}) + (pct ? (/\s%/.test(F) ? ' %' : '%') : '') + (F.includes('€') ? (/\s€/.test(F) ? ' €' : '€') : '');
     };
     /* La liste : [famille, signature, ce que ça fait, nom anglais (ou ''), fonction(args, ctx), paresseuse ?] */
     const FN = {};
@@ -406,6 +432,8 @@
     def('SI.NON.DISP', 'Conditions', 'SI.NON.DISP(valeur; si_absent)', 'La valeur, ou autre chose si elle n’est pas trouvée (#N/A).', 'IFNA', a => { const v = a[0](); return isErr(v) && v.code === '#N/A' ? (a[1] ? a[1]() : '') : v; }, {lazy: true});
     def('ET', 'Conditions', 'ET(test1; test2; …)', 'VRAI si tous les tests sont vrais.', 'AND', a => { const f = flat(a), e = firstErr(f); return e || f.filter(v => v !== null).every(truthy); });
     def('OU', 'Conditions', 'OU(test1; test2; …)', 'VRAI si au moins un test est vrai.', 'OR', a => { const f = flat(a), e = firstErr(f); return e || f.some(truthy); });
+    def('VRAI', 'Conditions', 'VRAI()', 'La valeur VRAI (comme le mot VRAI).', 'TRUE', () => true);
+    def('FAUX', 'Conditions', 'FAUX()', 'La valeur FAUX (comme le mot FAUX).', 'FALSE', () => false);
     def('NON', 'Conditions', 'NON(test)', 'Inverse un test.', 'NOT', a => (isErr(a[0]) ? a[0] : !truthy(a[0])));
     def('NB.SI', 'Conditions', 'NB.SI(plage; critère)', 'Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*").', 'COUNTIF', a => { const f = crit(a[1]); return mat(a[0]).values().filter(f).length; });
     def('NB.SI.ENS', 'Conditions', 'NB.SI.ENS(plage1; critère1; [plage2; critère2]; …)', 'Compte les lignes qui remplissent toutes les conditions.', 'COUNTIFS', a => { const ps = []; for (let i = 0; i + 1 < a.length; i += 2) ps.push([mat(a[i]).values(), crit(a[i + 1])]); if (!ps.length) return 0; const n = ps[0][0].length; if (ps.some(p => p[0].length !== n)) return err('#VALEUR!', {why: 'les plages n’ont pas la même taille'}); let k = 0; for (let i = 0; i < n; i++) if (ps.every(([v, f]) => f(v[i]))) k++; return k; });
@@ -414,7 +442,7 @@
     def('MOYENNE.SI', 'Conditions', 'MOYENNE.SI(plage; critère; [plage_moyenne])', 'La moyenne des cellules qui remplissent une condition.', 'AVERAGEIF', a => { const f = crit(a[1]), k = mat(a[0]).values(), s = mat(a[2] ?? a[0]).values(); let t = 0, n = 0; k.forEach((v, i) => { if (f(v) && typeof s[i] === 'number') { t += s[i]; n++; } }); return n ? t / n : err('#DIV/0!', {why: 'aucune cellule ne remplit la condition'}); });
     // Chercher
     def('RECHERCHEV', 'Chercher', 'RECHERCHEV(valeur; tableau; n°_colonne; [proche])', 'Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne.', 'VLOOKUP', a => { const t = a[1]; if (!isMat(t)) return err('#VALEUR!', {why: 'le 2e morceau doit être une plage, par exemple A2:C40'}); const col = int(a[2]); if (col < 1 || col > t.w) return err('#REF!', {what: `la colonne ${col} du tableau (il en a ${t.w})`}); const exact = a[3] != null && !truthy(a[3]); let best = -1; for (let i = 0; i < t.h; i++) { const v = t.get(i, 0); if (eqVals(v, a[0])) return t.get(i, col - 1); if (!exact && typeof a[0] === 'number' && typeof v === 'number' && v <= a[0]) best = i; } return best >= 0 ? t.get(best, col - 1) : err('#N/A', {what: toStr(a[0]), fn: 'RECHERCHEV'}); });
-    def('RECHERCHEH', 'Chercher', 'RECHERCHEH(valeur; tableau; n°_ligne; [proche])', 'Cherche dans la 1re ligne d’un tableau.', 'HLOOKUP', a => { const t = a[1]; if (!isMat(t)) return err('#VALEUR!', {why: 'le 2e morceau doit être une plage'}); const row = int(a[2]); if (row < 1 || row > t.h) return err('#REF!', {what: `la ligne ${row} du tableau`}); for (let j = 0; j < t.w; j++) if (eqVals(t.get(0, j), a[0])) return t.get(row - 1, j); return err('#N/A', {what: toStr(a[0]), fn: 'RECHERCHEH'}); });
+    def('RECHERCHEH', 'Chercher', 'RECHERCHEH(valeur; tableau; n°_ligne; [proche])', 'Cherche dans la 1re ligne d’un tableau.', 'HLOOKUP', a => { const t = a[1]; if (!isMat(t)) return err('#VALEUR!', {why: 'le 2e morceau doit être une plage'}); const row = int(a[2]); if (row < 1 || row > t.h) return err('#REF!', {what: `la ligne ${row} du tableau`}); const exact = a[3] != null && !truthy(a[3]); let best = -1; for (let j = 0; j < t.w; j++) { const v = t.get(0, j); if (eqVals(v, a[0])) return t.get(row - 1, j); if (!exact && typeof a[0] === 'number' && typeof v === 'number' && v <= a[0]) best = j; } return best >= 0 ? t.get(row - 1, best) : err('#N/A', {what: toStr(a[0]), fn: 'RECHERCHEH'}); });
     def('RECHERCHEX', 'Chercher', 'RECHERCHEX(valeur; où_chercher; quoi_rendre; [si_absent])', 'Cherche une valeur et rend celle d’à côté.', 'XLOOKUP', a => { const k = mat(a[1]).values(), r = mat(a[2]); const i = k.findIndex(x => eqVals(x, a[0])); if (i < 0) return a[3] !== undefined && a[3] !== null ? a[3] : err('#N/A', {what: toStr(a[0]), fn: 'RECHERCHEX'}); return r.w === 1 || r.h === 1 ? r.values()[i] ?? null : new SArr([Array.from({length: r.w}, (_, j) => r.get(i, j))]); });
     def('INDEX', 'Chercher', 'INDEX(plage; ligne; [colonne])', 'La valeur à une ligne et une colonne de la plage.', 'INDEX', a => { const t = mat(a[0]); let r = a[1] == null ? 0 : int(a[1]), c = a[2] == null ? 0 : int(a[2]); if (t.h === 1 && a[2] == null && r) { c = r; r = 1; } if (!r) r = 1; if (!c) c = 1; if (r < 1 || r > t.h || c < 1 || c > t.w) return err('#REF!', {what: `la ligne ${r}, colonne ${c} de la plage (${t.h} × ${t.w})`}); return t.get(r - 1, c - 1); });
     def('EQUIV', 'Chercher', 'EQUIV(valeur; plage; [type])', 'La position d’une valeur dans une plage (type 0 = exactement).', 'MATCH', a => { const v = mat(a[1]).values(), ty = a[2] == null ? 1 : int(a[2]); if (ty === 0) { const f = typeof a[0] === 'string' && /[*?]/.test(a[0]) ? crit(a[0]) : x => eqVals(x, a[0]); const i = v.findIndex(f); return i >= 0 ? i + 1 : err('#N/A', {what: toStr(a[0]), fn: 'EQUIV'}); } let best = -1; v.forEach((x, i) => { const c = cmpVals(x, a[0]); if (ty > 0 ? c <= 0 : c >= 0) best = i; }); return best >= 0 ? best + 1 : err('#N/A', {what: toStr(a[0]), fn: 'EQUIV'}); });
@@ -444,17 +472,27 @@
     def('ANNEE', 'Dates', 'ANNEE(date)', 'L’année d’une date (date d’acte comprise).', 'YEAR', (a, ctx) => needDate(a[0], ctx).y);
     def('MOIS', 'Dates', 'MOIS(date)', 'Le mois d’une date (1 à 12).', 'MONTH', (a, ctx) => { const d = needDate(a[0], ctx); return d.m || err('#DATE?', {text: toStr(a[0]), why: 'cette date n’a pas de mois'}); });
     def('JOUR', 'Dates', 'JOUR(date)', 'Le jour du mois.', 'DAY', (a, ctx) => { const d = needDate(a[0], ctx); return d.d || err('#DATE?', {text: toStr(a[0]), why: 'cette date n’a pas de jour'}); });
-    def('JOURSEM', 'Dates', 'JOURSEM(date)', 'Le jour de la semaine (1 = dimanche).', 'WEEKDAY', (a, ctx) => { const d = needDate(a[0], ctx); if (!d.d) return err('#DATE?', {text: toStr(a[0]), why: 'il faut le jour'}); return (((actSerial(d) + 6) % 7) + 7) % 7 + 1; });
+    def('JOURSEM', 'Dates', 'JOURSEM(date; [type])', 'Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi).', 'WEEKDAY', (a, ctx) => { const d = needDate(a[0], ctx); if (!d.d) return err('#DATE?', {text: toStr(a[0]), why: 'il faut le jour'}); const w = (((actSerial(d) + 6) % 7) + 7) % 7, ty = a[1] == null ? 1 : int(a[1]); if (ty === 1 || ty === 17) return w + 1; if (ty === 2 || ty === 11) return (w + 6) % 7 + 1; if (ty === 3) return (w + 6) % 7; if (ty >= 12 && ty <= 16) return (w - (ty - 10) + 7) % 7 + 1; return err('#NOMBRE!', {why: 'le type de JOURSEM va de 1 à 3 (ou 11 à 17)'}); });
     def('AUJOURDHUI', 'Dates', 'AUJOURDHUI()', 'La date du jour.', 'TODAY', (a, ctx) => { const t = today(ctx); return new SDate(ymdSerial(t.y, t.m, t.d)); }, {volatile: true});
     def('MAINTENANT', 'Dates', 'MAINTENANT()', 'La date et l’heure.', 'NOW', (a, ctx) => { const d = ctx.now(); return new SDate(ymdSerial(d.getFullYear(), d.getMonth() + 1, d.getDate()) + (d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds()) / 86400, true); }, {volatile: true});
-    def('DATEDIF', 'Dates', 'DATEDIF(début; fin; "A"|"M"|"J")', 'L’écart entre deux dates, en années, mois ou jours.', 'DATEDIF', (a, ctx) => { const x = needDate(a[0], ctx, 'le début'), y = needDate(a[1], ctx, 'la fin'), u = fold(a[2] == null ? 'a' : S1(a[2])); if (actSerial(y) < actSerial(x)) return err('#NOMBRE!', {why: 'la fin est avant le début'}); if (u.startsWith('m')) return yearsBetween(x, y) * 12 + (((y.m || 1) - (x.m || 1) + 12) % 12) - ((y.d || 1) < (x.d || 1) ? 1 : 0) + (((y.m || 1) - (x.m || 1) + 12) % 12 === 0 && (y.d || 1) < (x.d || 1) ? 12 : 0); if (u.startsWith('j') || u.startsWith('d')) return actSerial(y) - actSerial(x); return yearsBetween(x, y); });
+    def('DATEDIF', 'Dates', 'DATEDIF(début; fin; "A"|"M"|"J"|"AM"|"MJ"|"AJ")', 'L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris).', 'DATEDIF', (a, ctx) => {
+        const x = needDate(a[0], ctx, 'le début'), y = needDate(a[1], ctx, 'la fin'), u = fold(a[2] == null ? 'a' : S1(a[2])).trim().replace(/a/g, 'y').replace(/j/g, 'd');
+        if (actSerial(y) < actSerial(x)) return err('#NOMBRE!', {why: 'la fin est avant le début'});
+        if (u === 'ym') return monthsBetween(x, y) % 12;
+        if (u === 'md') { const dd = (y.d || 1) - (x.d || 1); if (dd >= 0) return dd; const pm = (y.m || 1) === 1 ? 12 : (y.m || 1) - 1, py = (y.m || 1) === 1 ? y.y - 1 : y.y; return Math.max(dim(pm, py), x.d || 1) - (x.d || 1) + (y.d || 1); }
+        if (u === 'yd') { let s0 = ymdSerial(y.y, x.m || 1, x.d || 1); if (s0 > actSerial(y)) s0 = ymdSerial(y.y - 1, x.m || 1, x.d || 1); return actSerial(y) - s0; }
+        if (u === 'm') return monthsBetween(x, y);
+        if (u === 'd') return actSerial(y) - actSerial(x);
+        if (u === 'y') return yearsBetween(x, y);
+        return err('#NOMBRE!', {why: `l’unité « ${S1(a[2])} » n’existe pas : « A » (années), « M » (mois), « J » (jours), « AM », « MJ » ou « AJ »`});
+    });
     // Généalogie
     def('AGE', 'Généalogie', 'AGE(naissance; [décès]; [unité])', 'L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ».', '', (a, ctx) => {
         const x = needDate(a[0], ctx, 'la naissance'), y = a[1] == null || a[1] === '' ? today(ctx) : needDate(a[1], ctx, 'le décès'), u = fold(a[2] == null ? 'ans' : S1(a[2]));
         if (actSerial(y) < actSerial(x) && y.y < x.y) return err('#DATE?', {why: 'la seconde date est avant la première'});
         if (u.startsWith('j') || u.startsWith('d')) return actSerial(y) - actSerial(x);
         const n = yearsBetween(x, y); if (n < 0) return err('#DATE?', {why: 'la seconde date est avant la première'});
-        if (u.startsWith('m')) return n * 12 + ((((y.m || 1) - (x.m || 1)) % 12) + 12) % 12;
+        if (u.startsWith('m')) return monthsBetween(x, y);
         if (!(x.m && y.m)) ctx.approx = ctx.approx || !(x.prec === 'jour' && y.prec === 'jour') && (x.approx || y.approx);
         return n;
     });
@@ -911,10 +949,24 @@
         return {f: out, pos: q};
     }
     /** la formule en anglais (pour Excel) ; null si une fonction n'existe pas en anglais (on gardera la valeur) */
-    function toEnglish(f) {
-        const T = safeTok(f); if (!T) return null; let ok = true;
+    /** DATEDIF(…; "A") → DATEDIF(…; "Y") : les unités françaises (A, J, AM, MJ, AJ) dans celles d'Excel et de LibreOffice */
+    const DATEDIF_EN = {a: 'Y', y: 'Y', m: 'M', j: 'D', d: 'D', am: 'YM', ym: 'YM', mj: 'MD', md: 'MD', aj: 'YD', yd: 'YD'};
+    function datedifUnits(toks) {
+        const st = []; let pend = null;
+        toks.forEach(t => {
+            if (t.t === 'fn') { pend = fnKey(t.v); return; }
+            if (t.t === 'lp') { st.push({fn: pend, arg: 0}); pend = null; return; }
+            pend = null; const top = st[st.length - 1];
+            if (t.t === 'rp') st.pop(); else if (t.t === 'sep' && top) top.arg++;
+            else if (t.t === 'str' && top && top.fn === 'DATEDIF' && top.arg === 2) { const u = DATEDIF_EN[fold(t.v).trim()]; if (u) t.v = u; }
+        });
+        return toks;
+    }
+    const knownName = (names, v) => !!names && Object.keys(names).some(k => fold(k) === fold(v));
+    function toEnglish(f, names = null) {
+        const T = safeTok(f); if (!T) return null; let ok = true; datedifUnits(T.toks);
         const out = serialize(T.toks, 'en', t => { const k = fnKey(t.v); if (!k || !FN[k].en) { ok = false; return t.v; } const en = FN[k].en; return ['SORT', 'FILTER'].includes(en) ? '_xlfn._xlws.' + en : ['UNIQUE', 'XLOOKUP', 'CONCAT', 'TEXTJOIN', 'IFS', 'IFNA'].includes(en) ? '_xlfn.' + en : en; });
-        if (T.toks.some(t => t.t === 'name')) ok = false;
+        if (T.toks.some(t => t.t === 'name' && !knownName(names, t.v))) ok = false; // un nom du classeur (Formules → Noms) part tel quel, avec sa définition
         return ok ? out : null;
     }
     /** une formule d'Excel ou de LibreOffice (noms anglais) → en français ; null si une fonction est inconnue */
@@ -1276,8 +1328,50 @@
     }
     const BUILTIN_FMT = {1: '0', 2: '0.00', 3: '#,##0', 4: '#,##0.00', 9: '0%', 10: '0.00%', 14: 'dd/mm/yyyy', 15: 'd-mmm-yy', 16: 'd-mmm', 17: 'mmm-yy', 22: 'm/d/yy h:mm', 49: '@'};
     /** le classeur → fichier .xlsx (Blob) ; les formules en anglais (traduites), leurs résultats gardés pour l'aperçu */
+    /* ── XLSX : notes, validation, filtre et mise en forme conditionnelle (écrits et relus) ── */
+    const CF_XL = {'>': 'greaterThan', '<': 'lessThan', '>=': 'greaterThanOrEqual', '<=': 'lessThanOrEqual', '=': 'equal', '<>': 'notEqual', between: 'between'};
+    const CF_XL_BACK = Object.fromEntries(Object.entries(CF_XL).map(([k, v]) => [v, k]));
+    const xlLit = v => { const t = String(v ?? '').trim(), n = toNum(t); return n !== null && t !== '' ? String(n) : `"${t.replace(/"/g, '""')}"`; };
+    const xlUnLit = f => { const t = String(f ?? '').trim(); return /^".*"$/s.test(t) ? t.slice(1, -1).replace(/""/g, '"') : t; };
+    /** les morceaux d'une feuille .xlsx qui suivent sheetData : filtre, règles de couleur, validations ; dxfs : les styles des règles */
+    function xlsxSheetExtras(sh, dxfs) {
+        const sq = r => xmlEsc(r);
+        const autoF = sh.filter?.range ? `<autoFilter ref="${sq(sh.filter.range)}"/>` : '';
+        let prio = 0;
+        const cf = (sh.cf || []).map(x => {
+            const g = parseRange(x.range); if (!g) return '';
+            const tl = addr(g.r0, g.c0); let rule = '';
+            const dxf = () => { const st = x.style || {}; const font = st.b || argb(st.color) ? `<font>${st.b ? '<b/>' : ''}${argb(st.color) ? `<color rgb="${argb(st.color)}"/>` : ''}</font>` : ''; const fill = argb(st.fill) ? `<fill><patternFill patternType="solid"><fgColor rgb="${argb(st.fill)}"/><bgColor rgb="${argb(st.fill)}"/></patternFill></fill>` : ''; dxfs.push(`<dxf>${font}${fill}</dxf>`); return dxfs.length - 1; };
+            prio++;
+            if (CF_XL[x.op]) rule = `<cfRule type="cellIs" dxfId="${dxf()}" priority="${prio}" operator="${CF_XL[x.op]}"><formula>${xmlEsc(xlLit(x.v))}</formula>${x.op === 'between' ? `<formula>${xmlEsc(xlLit(x.v2))}</formula>` : ''}</cfRule>`;
+            else if (x.op === 'contains') rule = `<cfRule type="containsText" dxfId="${dxf()}" priority="${prio}" operator="containsText" text="${xmlEsc(x.v)}"><formula>NOT(ISERROR(SEARCH(${xmlEsc(`"${String(x.v ?? '').replace(/"/g, '""')}"`)},${tl})))</formula></cfRule>`;
+            else if (x.op === 'empty') rule = `<cfRule type="containsBlanks" dxfId="${dxf()}" priority="${prio}"><formula>LEN(TRIM(${tl}))=0</formula></cfRule>`;
+            else if (x.op === 'notempty') rule = `<cfRule type="notContainsBlanks" dxfId="${dxf()}" priority="${prio}"><formula>LEN(TRIM(${tl}))&gt;0</formula></cfRule>`;
+            else if (x.op === 'dup') rule = `<cfRule type="duplicateValues" dxfId="${dxf()}" priority="${prio}"/>`;
+            else if (x.op === 'scale') rule = `<cfRule type="dataBar" priority="${prio}"><dataBar><cfvo type="min"/><cfvo type="max"/><color rgb="${argb(x.style?.fill) || 'FF638EC6'}"/></dataBar></cfRule>`;
+            return rule ? `<conditionalFormatting sqref="${sq(x.range)}">${rule}</conditionalFormatting>` : ''; // « date impossible » n'existe pas dans Excel
+        }).join('');
+        const dvs = (sh.dv || []).map(d => {
+            const err = d.allowFree ? ' showErrorMessage="0" errorStyle="warning"' : ' showErrorMessage="1"';
+            if (d.kind === 'list') { const items = (d.list || []).filter(v => !/[,"]/.test(v)); const f = `"${items.join(',')}"`; if (!items.length || f.length > 257) return ''; return `<dataValidation type="list" allowBlank="1"${err} sqref="${sq(d.range)}"><formula1>${xmlEsc(f)}</formula1></dataValidation>`; }
+            if (d.kind === 'number') { const a = d.min != null, b = d.max != null; if (!a && !b) return `<dataValidation type="decimal" allowBlank="1"${err} operator="between" sqref="${sq(d.range)}"><formula1>-1E+307</formula1><formula2>1E+307</formula2></dataValidation>`; return `<dataValidation type="decimal" allowBlank="1"${err} operator="${a && b ? 'between' : a ? 'greaterThanOrEqual' : 'lessThanOrEqual'}" sqref="${sq(d.range)}"><formula1>${a ? d.min : d.max}</formula1>${a && b ? `<formula2>${d.max}</formula2>` : ''}</dataValidation>`; }
+            return ''; // personne, lieu, date d'acte : propres à l'app
+        }).filter(Boolean);
+        return {autoF, cf, dv: dvs.length ? `<dataValidations count="${dvs.length}">${dvs.join('')}</dataValidations>` : ''};
+    }
+    /** les notes d'une feuille : comments.xml (le texte) + vmlDrawing (la bulle, pour qu'Excel la montre) */
+    function xlsxNotes(sh, n) {
+        const notes = Object.entries(sh.cells).filter(([k, c]) => c && c.note && parseAddr(k));
+        if (!notes.length) return null;
+        const comments = `${XML_HEAD}<comments xmlns="${NS_MAIN}"><authors><author>LCNDA</author></authors><commentList>${notes.map(([k, c]) => `<comment ref="${k}" authorId="0" shapeId="0"><text><t xml:space="preserve">${xmlEsc(String(c.note))}</t></text></comment>`).join('')}</commentList></comments>`;
+        const shapes = notes.map(([k], i) => { const [r, c] = parseAddr(k); return `<v:shape id="_x0000_s${1025 + i}" type="#_x0000_t202" style="position:absolute;margin-left:80pt;margin-top:2pt;width:120pt;height:60pt;z-index:${i + 1};visibility:hidden" fillcolor="#ffffe1" o:insetmode="auto"><v:fill color2="#ffffe1"/><v:shadow on="t" color="black" obscured="t"/><v:path o:connecttype="none"/><v:textbox style="mso-direction-alt:auto"><div style="text-align:left"></div></v:textbox><x:ClientData ObjectType="Note"><x:MoveWithCells/><x:SizeWithCells/><x:Anchor>${c + 1}, 15, ${r}, 2, ${c + 3}, 15, ${r + 4}, 16</x:Anchor><x:AutoFill>False</x:AutoFill><x:Row>${r}</x:Row><x:Column>${c}</x:Column></x:ClientData></v:shape>`; }).join('');
+        const vml = `<xml xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"><o:shapelayout v:ext="edit"><o:idmap v:ext="edit" data="${n}"/></o:shapelayout><v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202" path="m,l,21600r21600,l21600,xe"><v:stroke joinstyle="miter"/><v:path gradientshapeok="t" o:connecttype="rect"/></v:shapetype>${shapes}</xml>`;
+        const rels = `${XML_HEAD}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdC" Type="${NS_R}/comments" Target="../comments${n}.xml"/><Relationship Id="rIdV" Type="${NS_R}/vmlDrawing" Target="../drawings/vmlDrawing${n}.vml"/></Relationships>`;
+        return {comments, vml, rels};
+    }
     async function toXlsx(wb, calc) {
         calc = calc || new Calc(wb);
+        const dxfs = [], noteSheets = [], filterNames = [];
         const files = [], used = new Map(), xfs = [], fonts = ['<font><sz val="11"/><name val="Calibri"/></font>'], fills = ['<fill><patternFill patternType="none"/></fill>', '<fill><patternFill patternType="gray125"/></fill>'], borders = ['<border><left/><right/><top/><bottom/><diagonal/></border>'], numFmts = [];
         const fontIx = new Map(), fillIx = new Map(), bordIx = new Map(), nfIx = new Map();
         const xf0 = '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>'; xfs.push(xf0);
@@ -1304,7 +1398,7 @@
                 const cells = rowsMap.get(r).sort((a, b) => a[0] - b[0]).map(([c, k, spilled]) => {
                     const cell = sh.cells[k], raw = spilled ? null : cellRaw(cell), st = wb.styles[cell?.s] || {}, v = calc.val(si, r, c);
                     let s = cell?.s || st.fmt ? xfFor(st) : 0, f = '', body = '', t = '';
-                    if (isFormula(raw) && !calc.spillOf.has(ROWKEY(si, r, c))) { const en = toEnglish(raw); if (en) f = `<f>${xmlEsc(en)}</f>`; }
+                    if (isFormula(raw) && !calc.spillOf.has(ROWKEY(si, r, c))) { const en = toEnglish(raw, wb.names); if (en) f = `<f>${xmlEsc(en)}</f>`; }
                     if (v == null || v === '') { if (!s && !f) return ''; }
                     else if (isErr(v)) { t = 'e'; body = `<v>${xmlEsc(ERR_EN[v.code] || '#VALUE!')}</v>`; }
                     else if (typeof v === 'boolean') { t = 'b'; body = `<v>${v ? 1 : 0}</v>`; }
@@ -1320,16 +1414,19 @@
             }).join('');
             const cols = Object.entries(sh.cols).map(([k, x]) => [colNum(k), x]).sort((a, b) => a[0] - b[0]).map(([c, x]) => `<col min="${c + 1}" max="${c + 1}" width="${pxToW(x.w || 90)}" customWidth="1"${x.hidden ? ' hidden="1"' : ''}/>`).join('');
             const fz = sh.freeze || {}, pane = fz.r || fz.c ? `<pane${fz.c ? ` xSplit="${fz.c}"` : ''}${fz.r ? ` ySplit="${fz.r}"` : ''} topLeftCell="${addr(fz.r || 0, fz.c || 0)}" activePane="${fz.r && fz.c ? 'bottomRight' : fz.r ? 'bottomLeft' : 'topRight'}" state="frozen"/>` : '';
+            const ex = xlsxSheetExtras(sh, dxfs), nt = xlsxNotes(sh, si + 1);
             const merges = sh.merges.length ? `<mergeCells count="${sh.merges.length}">${sh.merges.map(m => `<mergeCell ref="${m}"/>`).join('')}</mergeCells>` : '';
-            files.push({name: `xl/worksheets/sheet${si + 1}.xml`, data: `${XML_HEAD}<worksheet xmlns="${NS_MAIN}" xmlns:r="${NS_R}">${sh.color && argb(sh.color) ? `<sheetPr><tabColor rgb="${argb(sh.color)}"/></sheetPr>` : ''}<dimension ref="${g ? rangeStr(g) : 'A1'}"/><sheetViews><sheetView workbookViewId="0"${si === (wb.active || 0) ? ' tabSelected="1"' : ''}>${pane}</sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/>${cols ? `<cols>${cols}</cols>` : ''}<sheetData>${rowsXml}</sheetData>${merges}</worksheet>`});
+            files.push({name: `xl/worksheets/sheet${si + 1}.xml`, data: `${XML_HEAD}<worksheet xmlns="${NS_MAIN}" xmlns:r="${NS_R}">${sh.color && argb(sh.color) ? `<sheetPr><tabColor rgb="${argb(sh.color)}"/></sheetPr>` : ''}<dimension ref="${g ? rangeStr(g) : 'A1'}"/><sheetViews><sheetView workbookViewId="0"${si === (wb.active || 0) ? ' tabSelected="1"' : ''}>${pane}</sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/>${cols ? `<cols>${cols}</cols>` : ''}<sheetData>${rowsXml}</sheetData>${ex.autoF}${merges}${ex.cf}${ex.dv}${nt ? '<legacyDrawing r:id="rIdV"/>' : ''}</worksheet>`});
+            if (nt) { noteSheets.push(si + 1); files.push({name: `xl/comments${si + 1}.xml`, data: nt.comments}, {name: `xl/drawings/vmlDrawing${si + 1}.vml`, data: nt.vml}, {name: `xl/worksheets/_rels/sheet${si + 1}.xml.rels`, data: nt.rels}); }
+            if (sh.filter?.range && parseRange(sh.filter.range)) { const q = parseRange(sh.filter.range); filterNames.push(`<definedName name="_xlnm._FilterDatabase" localSheetId="${si}" hidden="1">${xmlEsc(quoteSheet(sheetNames[si]) + '!$' + colName(q.c0) + '$' + (q.r0 + 1) + ':$' + colName(q.c1) + '$' + (q.r1 + 1))}</definedName>`); }
         });
-        const defNames = Object.entries(wb.names || {}).map(([k, v]) => `<definedName name="${xmlEsc(k)}">${xmlEsc(String(v).replace(/^([^'!]+)!/, (m, n) => quoteSheet(n) + '!').replace(/([A-Z]+)(\d+)/g, '$$$1$$$2'))}</definedName>`).join('');
-        files.push({name: 'xl/workbook.xml', data: `${XML_HEAD}<workbook xmlns="${NS_MAIN}" xmlns:r="${NS_R}"><bookViews><workbookView activeTab="${wb.active || 0}"/></bookViews><sheets>${sheetNames.map((n, i) => `<sheet name="${xmlEsc(n)}" sheetId="${i + 1}"${wb.sheets[i].hidden ? ' state="hidden"' : ''} r:id="rId${i + 1}"/>`).join('')}</sheets>${defNames ? `<definedNames>${defNames}</definedNames>` : ''}<calcPr calcId="191029" fullCalcOnLoad="1"/></workbook>`});
+        const defNames = Object.entries(wb.names || {}).map(([k, v]) => { const m = /^(?:'((?:[^']|'')+)'|([^'!]+))!(.+)$/.exec(String(v)); const ref = m ? `${quoteSheet((m[1] || m[2]).replace(/''/g, "'"))}!${m[3].replace(/\$/g, '').replace(/([A-Z]+)(\d+)/gi, '$$$1$$$2')}` : String(v).replace(/\$/g, '').replace(/([A-Z]+)(\d+)/gi, '$$$1$$$2'); return `<definedName name="${xmlEsc(k)}">${xmlEsc(ref)}</definedName>`; }).join('');
+        files.push({name: 'xl/workbook.xml', data: `${XML_HEAD}<workbook xmlns="${NS_MAIN}" xmlns:r="${NS_R}"><bookViews><workbookView activeTab="${wb.active || 0}"/></bookViews><sheets>${sheetNames.map((n, i) => `<sheet name="${xmlEsc(n)}" sheetId="${i + 1}"${wb.sheets[i].hidden ? ' state="hidden"' : ''} r:id="rId${i + 1}"/>`).join('')}</sheets>${defNames || filterNames.length ? `<definedNames>${filterNames.join('')}${defNames}</definedNames>` : ''}<calcPr calcId="191029" fullCalcOnLoad="1"/></workbook>`});
         files.push({name: 'xl/_rels/workbook.xml.rels', data: `${XML_HEAD}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${wb.sheets.map((_, i) => `<Relationship Id="rId${i + 1}" Type="${NS_R}/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join('')}<Relationship Id="rIdS" Type="${NS_R}/styles" Target="styles.xml"/></Relationships>`});
-        files.push({name: 'xl/styles.xml', data: `${XML_HEAD}<styleSheet xmlns="${NS_MAIN}">${numFmts.length ? `<numFmts count="${numFmts.length}">${numFmts.join('')}</numFmts>` : ''}<fonts count="${fonts.length}">${fonts.join('')}</fonts><fills count="${fills.length}">${fills.join('')}</fills><borders count="${borders.length}">${borders.join('')}</borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="${xfs.length}">${xfs.join('')}</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`});
+        files.push({name: 'xl/styles.xml', data: `${XML_HEAD}<styleSheet xmlns="${NS_MAIN}">${numFmts.length ? `<numFmts count="${numFmts.length}">${numFmts.join('')}</numFmts>` : ''}<fonts count="${fonts.length}">${fonts.join('')}</fonts><fills count="${fills.length}">${fills.join('')}</fills><borders count="${borders.length}">${borders.join('')}</borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="${xfs.length}">${xfs.join('')}</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>${dxfs.length ? `<dxfs count="${dxfs.length}">${dxfs.join('')}</dxfs>` : ''}</styleSheet>`});
         files.push({name: '_rels/.rels', data: `${XML_HEAD}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="${NS_R}/officeDocument" Target="xl/workbook.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/></Relationships>`});
         files.push({name: 'docProps/core.xml', data: `${XML_HEAD}<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>${xmlEsc(wb.title || '')}</dc:title><dc:creator>LCNDA</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">${new Date().toISOString().replace(/\.\d+Z$/, 'Z')}</dcterms:created></cp:coreProperties>`});
-        files.unshift({name: '[Content_Types].xml', data: `${XML_HEAD}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${wb.sheets.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/></Types>`});
+        files.unshift({name: '[Content_Types].xml', data: `${XML_HEAD}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>${noteSheets.length ? '<Default Extension="vml" ContentType="application/vnd.openxmlformats-officedocument.vmlDrawing"/>' : ''}<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${wb.sheets.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${noteSheets.map(n => `<Override PartName="/xl/comments${n}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml"/>`).join('')}<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/></Types>`});
         return makeZip(files, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     }
     const relTarget = (base, t) => { if (t.startsWith('/')) return t.slice(1); const parts = base.split('/'); parts.pop(); t.split('/').forEach(x => { if (x === '..') parts.pop(); else if (x !== '.') parts.push(x); }); return parts.join('/'); };
@@ -1342,7 +1439,7 @@
         const shared = []; { const t = await z.text('xl/sharedStrings.xml'); if (t) findAll(parseXml(t), 'si').forEach(si => shared.push(findAll(si, 't').filter(x => !findAll(si, 'rPh').some(rp => rp.c.includes(x) || findAll(rp, 't').includes(x))).map(xtext).join(''))); }
         // styles
         const wb = newWorkbook(); wb.sheets = [];
-        const xfStyle = []; {
+        const xfStyle = [], dxfStyle = []; {
             const t = await z.text('xl/styles.xml');
             if (t) {
                 const S = parseXml(t), nf = {...BUILTIN_FMT}; findAll(S, 'numFmt').forEach(n => { nf[n.a.numFmtId] = n.a.formatCode; });
@@ -1354,9 +1451,10 @@
                     const fl = fills[x.a.fillId]; if (fl && fl !== '#ffffff') st.fill = fl;
                     const bd = borders[x.a.borderId]; if (bd?.bd) { st.bd = bd.bd; if (bd.bs) st.bs = bd.bs; }
                     Object.assign(st, fmtFromCode(nf[x.a.numFmtId]));
-                    const al = kid(x, 'alignment'); if (al) { if (['left', 'center', 'right'].includes(al.a.horizontal)) st.h = al.a.horizontal; if (al.a.vertical) st.v = al.a.vertical === 'center' ? 'middle' : ['top', 'bottom'].includes(al.a.vertical) ? al.a.vertical : undefined; if (al.a.wrapText === '1' || al.a.wrapText === 'true') st.wrap = 1; }
+                    const al = kid(x, 'alignment'); if (al) { if (['left', 'center', 'right'].includes(al.a.horizontal)) st.h = al.a.horizontal; if (al.a.vertical === 'center' || al.a.vertical === 'top') st.v = al.a.vertical === 'center' ? 'middle' : 'top'; /* « bottom » : la valeur par défaut d'Excel */ if (al.a.wrapText === '1' || al.a.wrapText === 'true') st.wrap = 1; }
                     xfStyle.push(st);
                 });
+                kids(kid(findAll(S, 'styleSheet')[0], 'dxfs'), 'dxf').slice(0, 500).forEach(d => { const f = kid(d, 'font'), pf = kid(kid(d, 'fill'), 'patternFill'), st = {}; if (f && kid(f, 'b') && kid(f, 'b').a.val !== '0' && kid(f, 'b').a.val !== 'false') st.b = 1; const fc = fromArgb(kid(f, 'color')?.a.rgb); if (fc) st.color = fc; const fl = fromArgb(kid(pf, 'bgColor')?.a.rgb) || fromArgb(kid(pf, 'fgColor')?.a.rgb); if (fl) st.fill = fl; dxfStyle.push(st); });
             }
         }
         const sIx = xfStyle.map(st => styleId(wb, st)), dateXf = new Set(xfStyle.map((s, i) => (s.fmt === 'date' ? i : -1)).filter(i => i >= 0));
@@ -1371,8 +1469,8 @@
             const masters = new Map();
             for (const row of findAll(X, 'row')) {
                 const rr = Number(row.a.r) - 1;
-                if (row.a.ht && row.a.customHeight === '1' && rr >= 0) (sh.rows[String(rr + 1)] = sh.rows[String(rr + 1)] || {}).h = Math.round(Number(row.a.ht) / 0.75);
-                if (row.a.hidden === '1' && rr >= 0) (sh.rows[String(rr + 1)] = sh.rows[String(rr + 1)] || {}).hidden = true;
+                if (row.a.ht && (row.a.customHeight === '1' || row.a.customHeight === 'true') && rr >= 0) (sh.rows[String(rr + 1)] = sh.rows[String(rr + 1)] || {}).h = Math.round(Number(row.a.ht) / 0.75);
+                if ((row.a.hidden === '1' || row.a.hidden === 'true') && rr >= 0) (sh.rows[String(rr + 1)] = sh.rows[String(rr + 1)] || {}).hidden = true;
                 for (const c of kids(row, 'c')) {
                     const p = parseAddr(c.a.r || ''); if (!p) continue;
                     if (++total > LIMITS.cells) throw new Error('fichier refusé : trop de cellules');
@@ -1396,9 +1494,33 @@
                     sh.cells[addr(p[0], p[1])] = cell;
                 }
             }
-            findAll(X, 'col').forEach(col => { const a = Number(col.a.min), b = Math.min(Number(col.a.max), a + 300); for (let c = a; c <= b; c++) { if (c < 1 || c > LIMITS.cols) continue; const o = {}; if (col.a.width && (col.a.customWidth === '1' || col.a.customWidth === 'true')) o.w = Math.max(16, Math.min(1200, wToPx(col.a.width))); if (col.a.hidden === '1') o.hidden = true; if (Object.keys(o).length) sh.cols[colName(c - 1)] = o; } });
+            findAll(X, 'col').forEach(col => { const a = Number(col.a.min), b = Math.min(Number(col.a.max), a + 300); for (let c = a; c <= b; c++) { if (c < 1 || c > LIMITS.cols) continue; const o = {}; if (col.a.width && (col.a.customWidth === '1' || col.a.customWidth === 'true')) o.w = Math.max(16, Math.min(1200, wToPx(col.a.width))); if (col.a.hidden === '1' || col.a.hidden === 'true') o.hidden = true; if (Object.keys(o).length) sh.cols[colName(c - 1)] = o; } });
             sh.merges = findAll(X, 'mergeCell').slice(0, 10000).map(m => cleanRange(m.a.ref)).filter(Boolean);
             const pane = findAll(X, 'pane')[0]; if (pane && /frozen/.test(pane.a.state || '')) sh.freeze = {r: Math.min(500, Number(pane.a.ySplit) || 0), c: Math.min(100, Number(pane.a.xSplit) || 0)};
+            // filtre, validation, mise en forme conditionnelle, notes
+            const af = findAll(X, 'autoFilter')[0]; if (af && cleanRange(af.a.ref)) sh.filter = {range: cleanRange(af.a.ref)};
+            findAll(X, 'dataValidation').slice(0, 60).forEach(d => {
+                const range = cleanRange(String(d.a.sqref || '').split(/\s+/)[0]); if (!range) return; const f1 = xtext(kid(d, 'formula1')), f2 = xtext(kid(d, 'formula2')), free = !(d.a.showErrorMessage === '1' || d.a.showErrorMessage === 'true') || d.a.errorStyle === 'warning' || d.a.errorStyle === 'information';
+                if (d.a.type === 'list' && /^".*"$/s.test(f1.trim())) { const list = xlUnLit(f1).split(',').map(x => x.trim()).filter(Boolean).slice(0, 300); if (list.length) sh.dv.push({range, kind: 'list', list, ...(free ? {allowFree: true} : {})}); }
+                else if (d.a.type === 'decimal' || d.a.type === 'whole') { const a = Number(f1), b = Number(f2), op = d.a.operator || 'between', o = {range, kind: 'number'}; if (op === 'between' && Number.isFinite(a) && Math.abs(a) < 1e300) o.min = a; if (op === 'between' && Number.isFinite(b) && Math.abs(b) < 1e300) o.max = b; if ((op === 'greaterThanOrEqual' || op === 'greaterThan') && Number.isFinite(a)) o.min = a; if ((op === 'lessThanOrEqual' || op === 'lessThan') && Number.isFinite(a)) o.max = a; if (free) o.allowFree = true; sh.dv.push(o); }
+            });
+            findAll(X, 'conditionalFormatting').slice(0, 60).forEach(cfx => {
+                const range = cleanRange(String(cfx.a.sqref || '').split(/\s+/)[0]); if (!range) return;
+                kids(cfx, 'cfRule').slice(0, 5).forEach(rl => {
+                    const st = dxfStyle[Number(rl.a.dxfId)] || {}, style = {fill: st.fill || '', color: st.color || '', b: st.b || 0}, fs = kids(rl, 'formula').map(xtext);
+                    let o = null;
+                    if (rl.a.type === 'cellIs' && CF_XL_BACK[rl.a.operator]) o = {op: CF_XL_BACK[rl.a.operator], v: xlUnLit(fs[0]), v2: rl.a.operator === 'between' ? xlUnLit(fs[1]) : ''};
+                    else if (rl.a.type === 'containsText' && rl.a.text != null) o = {op: 'contains', v: rl.a.text, v2: ''};
+                    else if (rl.a.type === 'containsBlanks') o = {op: 'empty', v: '', v2: ''};
+                    else if (rl.a.type === 'notContainsBlanks') o = {op: 'notempty', v: '', v2: ''};
+                    else if (rl.a.type === 'duplicateValues') o = {op: 'dup', v: '', v2: ''};
+                    else if (rl.a.type === 'dataBar') o = {op: 'scale', v: '', v2: '', style: {fill: fromArgb(findAll(rl, 'color')[0]?.a.rgb) || '#dbe8ff', color: '', b: 0}};
+                    if (o && sh.cf.length < 60) sh.cf.push({range, style, ...o});
+                });
+            });
+            const srel = path.replace(/([^/]+)$/, '_rels/$1.rels'), srx = await z.text(srel);
+            if (srx) { const cm = findAll(parseXml(srx), 'Relationship').find(r => /\/comments$/.test(r.a.Type || '')); const ctx = cm ? await z.text(relTarget(path, cm.a.Target || '')) : null;
+                if (ctx) findAll(parseXml(ctx), 'comment').slice(0, 20000).forEach(c => { const k = cleanRange(c.a.ref); if (!k || k.includes(':')) return; const txt = findAll(c, 't').map(xtext).join('').trim().slice(0, 2000); if (!txt) return; const cell = sh.cells[k] || (sh.cells[k] = {v: null}); cell.note = txt; }); }
             wb.sheets.push(sh);
         }
         if (!wb.sheets.length) wb.sheets.push(newSheet('Feuille 1'));
@@ -1407,13 +1529,19 @@
     }
 
     /* ═════════ ODS (LibreOffice) : écrire et lire ═════════ */
-    const ODS_NS = 'xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" office:version="1.2"';
+    const ODS_NS = 'xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:dc="http://purl.org/dc/elements/1.1/" office:version="1.2"';
+    /** « 'Relevé 1836'.A1:'Relevé 1836'.C5 » (ou avec des $) → {sheet, range} */
+    const odsRange = t => { const parts = String(t || '').replace(/\$/g, '').split(':'); let sheet = null; const cells = parts.map(p => { const m = /^(?:(?:'((?:[^']|'')*)'|([^.']*))\.)?([A-Za-z]{1,3}\d{1,7})$/.exec(p.trim()); if (!m) return null; if (m[1] != null || m[2]) sheet = sheet ?? (m[1] != null ? m[1].replace(/''/g, "'") : m[2]); return m[3]; }); if (cells.some(x => !x)) return null; const range = cleanRange(cells.join(':')); return range ? {sheet, range} : null; };
+    const odsSheetRef = (name, g) => { const q = `'${String(name).replace(/'/g, "''")}'`; return `${q}.${addr(g.r0, g.c0)}${g.r0 === g.r1 && g.c0 === g.c1 ? '' : `:${q}.${addr(g.r1, g.c1)}`}`; };
+    const odsList = c => { const m = /cell-content-is-in-list\(([\s\S]*)\)\s*$/.exec(c || ''); if (!m) return null; const out = []; let cur = '', q = false; for (let i = 0; i < m[1].length; i++) { const ch = m[1][i]; if (ch === '"') { if (q && m[1][i + 1] === '"') { cur += '"'; i++; } else q = !q; } else if (ch === ';' && !q) { out.push(cur); cur = ''; } else cur += ch; } out.push(cur); return out.map(x => x.trim()).filter(Boolean).slice(0, 300); };
     const odsRef = (t, own) => { const sh = t.sheet != null ? `$${quoteSheet(t.sheet)}` : ''; const one = (r, c, ac, ar) => `${ac ? '$' : ''}${colName(c)}${ar ? '$' : ''}${r + 1}`; if (t.t === 'ref') return `[${sh}.${one(t.r, t.c, t.a[0], t.a[1])}]`; return `[${sh}.${one(t.r0, t.c0, t.a[0], t.a[1])}:${sh ? sh : ''}.${one(t.r1, t.c1, t.a[2], t.a[3])}]`; };
     /** formule française → « of:=SUM([.A1:.A3]) » (null si une fonction n'existe pas en anglais) */
-    function toOds(f) {
+    const ODS_MS = ['IFS', 'CONCAT', 'TEXTJOIN', 'XLOOKUP', 'UNIQUE', 'SORT', 'FILTER']; // noms d'Excel que LibreOffice range sous « COM.MICROSOFT. » dans un .ods
+    function toOds(f, names = null) {
         const T = safeTok(f); if (!T) return null; let ok = true;
-        if (T.toks.some(t => t.t === 'name' || (t.t === 'rng' && t.whole))) return null;
-        const out = T.toks.map(t => { let x; if (t.t === 'ref' || t.t === 'rng') x = odsRef(t); else if (t.t === 'fn') { const k = fnKey(t.v); if (!k || !FN[k].en) { ok = false; x = t.v; } else x = FN[k].en; } else if (t.t === 'sep') x = ';'; else if (t.t === 'num') x = String(t.v); else if (t.t === 'str') x = `"${t.v.replace(/"/g, '""')}"`; else if (t.t === 'bool') x = t.v ? 'TRUE()' : 'FALSE()'; else x = t.raw; return (t.pre || '') + x; }).join('');
+        if (T.toks.some(t => (t.t === 'name' && !knownName(names, t.v)) || (t.t === 'rng' && t.whole))) return null;
+        datedifUnits(T.toks);
+        const out = T.toks.map(t => { let x; if (t.t === 'ref' || t.t === 'rng') x = odsRef(t); else if (t.t === 'fn') { const k = fnKey(t.v); if (!k || !FN[k].en) { ok = false; x = t.v; } else x = ODS_MS.includes(FN[k].en) ? 'COM.MICROSOFT.' + FN[k].en : FN[k].en; } else if (t.t === 'sep') x = ';'; else if (t.t === 'num') x = String(t.v); else if (t.t === 'str') x = `"${t.v.replace(/"/g, '""')}"`; else if (t.t === 'bool') x = t.v ? 'TRUE()' : 'FALSE()'; else x = t.raw; return (t.pre || '') + x; }).join('');
         return ok ? 'of:=' + out : null;
     }
     /** « of:=SUM([.A1:.A3]) » → « =SOMME(A1:A3) » */
@@ -1443,8 +1571,18 @@
         };
         const co = w => { const k = String(w); if (colStyle.has(k)) return colStyle.get(k); const n = 'co' + (colStyle.size + 1); auto.push(`<style:style style:name="${n}" style:family="table-column"><style:table-column-properties style:column-width="${(w / 37.8).toFixed(3)}cm"/></style:style>`); colStyle.set(k, n); return n; };
         const ro = h => { const k = String(h); if (rowStyle.has(k)) return rowStyle.get(k); const n = 'ro' + (rowStyle.size + 1); auto.push(`<style:style style:name="${n}" style:family="table-row"><style:table-row-properties style:row-height="${(h / 37.8).toFixed(3)}cm" style:use-optimal-row-height="false"/></style:style>`); rowStyle.set(k, n); return n; };
+        const vals = [], filters = [], qv = v => `"${String(v).replace(/"/g, '""')}"`;
         const tables = wb.sheets.map((sh, si) => {
             const g = usedRange(sh); let rMax = g ? g.r1 : 0, cMax = g ? g.c1 : 0;
+            // validations (liste, nombre) : posées case par case, jusqu'à 5 000 lignes
+            const dvs = (sh.dv || []).map(d => { const q = parseRange(d.range); if (!q) return null; let cond = '';
+                if (d.kind === 'list' && d.list?.length) cond = `of:cell-content-is-in-list(${d.list.map(qv).join(';')})`;
+                else if (d.kind === 'number') cond = 'of:cell-content-is-decimal-number()' + (d.min != null && d.max != null ? ` and cell-content-is-between(${d.min},${d.max})` : d.min != null ? ` and cell-content()>=${d.min}` : d.max != null ? ` and cell-content()<=${d.max}` : '');
+                if (!cond) return null; const name = 'val' + (vals.length + 1); vals.push(`<table:content-validation table:name="${name}" table:condition="${xmlEsc(cond)}" table:allow-empty-cell="true"${d.kind === 'list' ? ' table:display-list="unsorted"' : ''} table:base-cell-address="${xmlEsc(odsSheetRef(sh.name, {r0: q.r0, c0: q.c0, r1: q.r0, c1: q.c0}))}"><table:error-message table:display="${d.allowFree ? 'false' : 'true'}" table:message-type="stop"/></table:content-validation>`);
+                const g2 = {r0: q.r0, c0: q.c0, r1: Math.min(q.r1, q.r0 + 4999), c1: Math.min(q.c1, q.c0 + 200)}; rMax = Math.max(rMax, g2.r1); cMax = Math.max(cMax, g2.c1); return {g: g2, name}; }).filter(Boolean);
+            const dvAt = (r, c) => dvs.find(d => inRange(d.g, r, c))?.name || '';
+            for (const k in sh.cells) if (sh.cells[k]?.note) { const p = parseAddr(k); if (p) { rMax = Math.max(rMax, p[0]); cMax = Math.max(cMax, p[1]); } }
+            if (sh.filter?.range && parseRange(sh.filter.range)) filters.push(`<table:database-range table:name="__Anonymous_Sheet_DB__${si}" table:target-range-address="${xmlEsc(odsSheetRef(sh.name, parseRange(sh.filter.range)))}" table:display-filter-buttons="true"/>`);
             calc.spillOf.forEach((sz, key) => { const [s, r, c] = unkey(key); if (s === si) { rMax = Math.max(rMax, r + sz.h - 1); cMax = Math.max(cMax, c + sz.w - 1); } });
             const merges = new Map(), covered = new Set();
             sh.merges.forEach(m => { const q = parseRange(m); if (!q) return; merges.set(addr(q.r0, q.c0), q); for (let r = q.r0; r <= q.r1; r++) for (let c = q.c0; c <= q.c1; c++) if (r !== q.r0 || c !== q.c0) covered.add(addr(r, c)); });
@@ -1456,10 +1594,11 @@
                 for (let c = 0; c <= cMax; c++) {
                     const k = addr(r, c), cell = sh.cells[k], raw = cellRaw(cell), v = calc.val(si, r, c), st = wb.styles[cell?.s] || {};
                     if (covered.has(k)) { flush(); cells += '<table:covered-table-cell/>'; continue; }
-                    if ((v == null || v === '') && !cell?.s && !merges.has(k)) { empty++; continue; }
+                    const vn = dvs.length ? dvAt(r, c) : '', va = vn ? ` table:content-validation-name="${vn}"` : '', note = cell?.note ? `<office:annotation><dc:creator>LCNDA</dc:creator>${String(cell.note).split('\n').map(x => `<text:p>${xmlEsc(x)}</text:p>`).join('')}</office:annotation>` : '';
+                    if ((v == null || v === '') && !cell?.s && !merges.has(k) && !vn && !note) { empty++; continue; }
                     flush();
                     const m = merges.get(k), span = m ? ` table:number-columns-spanned="${m.c1 - m.c0 + 1}" table:number-rows-spanned="${m.r1 - m.r0 + 1}"` : '';
-                    const fml = isFormula(raw) && !calc.spillOf.has(ROWKEY(si, r, c)) ? toOds(raw) : null, fa = fml ? ` table:formula="${xmlEsc(fml)}"` : '';
+                    const fml = isFormula(raw) && !calc.spillOf.has(ROWKEY(si, r, c)) ? toOds(raw, wb.names) : null, fa = fml ? ` table:formula="${xmlEsc(fml)}"` : '';
                     let sty = cell?.s ? ce(st) : '', attrs = '', p = formatValue(v, st);
                     if (v == null || v === '') attrs = '';
                     else if (typeof v === 'number') attrs = st.fmt === 'pct' ? ` office:value-type="percentage" office:value="${v}"` : st.fmt === 'eur' ? ` office:value-type="currency" office:currency="EUR" office:value="${v}"` : ` office:value-type="float" office:value="${v}"`;
@@ -1468,18 +1607,24 @@
                     else if (isErr(v)) attrs = ' office:value-type="string"';
                     else attrs = ' office:value-type="string"';
                     const text = String(p).split('\n').map(x => `<text:p>${xmlEsc(x)}</text:p>`).join('');
-                    cells += `<table:table-cell${sty ? ` table:style-name="${sty}"` : ''}${attrs}${fa}${span}>${v == null || v === '' ? '' : text}</table:table-cell>`;
+                    cells += `<table:table-cell${sty ? ` table:style-name="${sty}"` : ''}${attrs}${fa}${span}${va}>${note}${v == null || v === '' ? '' : text}</table:table-cell>`;
                 }
                 flush();
                 rows += `<table:table-row${ri.h ? ` table:style-name="${ro(ri.h)}"` : ''}${ri.hidden ? ' table:visibility="collapse"' : ''}>${cells || '<table:table-cell/>'}</table:table-row>`;
             }
             return `<table:table table:name="${xmlEsc(sh.name)}">${cols}${rows}</table:table>`;
         });
-        const content = `${XML_HEAD}<office:document-content ${ODS_NS}><office:automatic-styles>${auto.join('')}</office:automatic-styles><office:body><office:spreadsheet>${tables.join('')}</office:spreadsheet></office:body></office:document-content>`;
-        const manifest = `${XML_HEAD}<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2"><manifest:file-entry manifest:full-path="/" manifest:version="1.2" manifest:media-type="application/vnd.oasis.opendocument.spreadsheet"/><manifest:file-entry manifest:full-path="content.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="styles.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="meta.xml" manifest:media-type="text/xml"/></manifest:manifest>`;
+        // les noms (Insertion → Nom pour la plage) : des plages nommées de LibreOffice
+        const namedX = (() => { const items = Object.entries(wb.names || {}).map(([k, v]) => { const m = /^(?:'((?:[^']|'')+)'|([^'!]+))!(.+)$/.exec(String(v)); const sn = m ? (m[1] || m[2]).replace(/''/g, "'") : wb.sheets[0].name, g = parseRange(m ? m[3] : v); if (!g) return ''; const q = `$'${sn.replace(/'/g, "''")}'`; return `<table:named-range table:name="${xmlEsc(k)}" table:base-cell-address="${xmlEsc(q + '.$A$1')}" table:cell-range-address="${xmlEsc(`${q}.$${colName(g.c0)}$${g.r0 + 1}:.$${colName(g.c1)}$${g.r1 + 1}`)}"/>`; }).filter(Boolean); return items.length ? `<table:named-expressions>${items.join('')}</table:named-expressions>` : ''; })();
+        // volets figés : dans settings.xml, comme LibreOffice
+        const fzSheets = wb.sheets.filter(sh => sh.freeze && (sh.freeze.r || sh.freeze.c));
+        const ci = (n, t, v) => `<config:config-item config:name="${n}" config:type="${t}">${v}</config:config-item>`;
+        const settings = `${XML_HEAD}<office:document-settings xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" office:version="1.2"><office:settings><config:config-item-set config:name="ooo:view-settings"><config:config-item-map-indexed config:name="Views"><config:config-item-map-entry>${ci('ViewId', 'string', 'view1')}<config:config-item-map-named config:name="Tables">${fzSheets.map(sh => { const {r = 0, c = 0} = sh.freeze; return `<config:config-item-map-entry config:name="${xmlEsc(sh.name)}">${ci('HorizontalSplitMode', 'short', c ? 2 : 0)}${ci('VerticalSplitMode', 'short', r ? 2 : 0)}${ci('HorizontalSplitPosition', 'int', c)}${ci('VerticalSplitPosition', 'int', r)}${ci('ActiveSplitRange', 'short', r && c ? 3 : r ? 2 : 1)}${ci('PositionLeft', 'int', 0)}${ci('PositionRight', 'int', c)}${ci('PositionTop', 'int', 0)}${ci('PositionBottom', 'int', r)}</config:config-item-map-entry>`; }).join('')}</config:config-item-map-named>${ci('ActiveTable', 'string', xmlEsc(wb.sheets[wb.active || 0]?.name || ''))}${ci('ZoomType', 'short', 0)}${ci('ZoomValue', 'int', 100)}${ci('PageViewZoomValue', 'int', 60)}${ci('ShowGrid', 'boolean', 'true')}${ci('HasColumnRowHeaders', 'boolean', 'true')}${ci('HasSheetTabs', 'boolean', 'true')}</config:config-item-map-entry></config:config-item-map-indexed></config:config-item-set></office:settings></office:document-settings>`;
+        const content = `${XML_HEAD}<office:document-content ${ODS_NS}><office:automatic-styles>${auto.join('')}</office:automatic-styles><office:body><office:spreadsheet><table:calculation-settings table:case-sensitive="false" table:use-wildcards="true"/>${vals.length ? `<table:content-validations>${vals.join('')}</table:content-validations>` : ''}${tables.join('')}${namedX}${filters.length ? `<table:database-ranges>${filters.join('')}</table:database-ranges>` : ''}</office:spreadsheet></office:body></office:document-content>`;
+        const manifest = `${XML_HEAD}<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2"><manifest:file-entry manifest:full-path="/" manifest:version="1.2" manifest:media-type="application/vnd.oasis.opendocument.spreadsheet"/><manifest:file-entry manifest:full-path="content.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="styles.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="meta.xml" manifest:media-type="text/xml"/><manifest:file-entry manifest:full-path="settings.xml" manifest:media-type="text/xml"/></manifest:manifest>`;
         const styles = `${XML_HEAD}<office:document-styles ${ODS_NS}><office:styles/></office:document-styles>`;
         const meta = `${XML_HEAD}<office:document-meta xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" office:version="1.2"><office:meta><meta:generator>LCNDA</meta:generator></office:meta></office:document-meta>`;
-        return makeZip([{name: 'mimetype', data: 'application/vnd.oasis.opendocument.spreadsheet', store: true}, {name: 'META-INF/manifest.xml', data: manifest}, {name: 'content.xml', data: content}, {name: 'styles.xml', data: styles}, {name: 'meta.xml', data: meta}], 'application/vnd.oasis.opendocument.spreadsheet');
+        return makeZip([{name: 'mimetype', data: 'application/vnd.oasis.opendocument.spreadsheet', store: true}, {name: 'META-INF/manifest.xml', data: manifest}, {name: 'content.xml', data: content}, {name: 'styles.xml', data: styles}, {name: 'meta.xml', data: meta}, {name: 'settings.xml', data: settings}], 'application/vnd.oasis.opendocument.spreadsheet');
     }
     async function fromOdsFile(buf) {
         const z = await unzip(buf);
@@ -1504,17 +1649,19 @@
             cellSt[name] = st;
         });
         let total = 0;
+        const valDefs = {}; findAll(X, 'content-validation').slice(0, 500).forEach(v => { const name = v.a['table:name'], cond = v.a['table:condition'] || '', em = kid(v, 'error-message'), free = em ? em.a['table:display'] === 'false' || (em.a['table:message-type'] && em.a['table:message-type'] !== 'stop') : true; const list = odsList(cond); if (list?.length) { valDefs[name] = {kind: 'list', list, ...(free ? {allowFree: true} : {})}; return; } if (/cell-content-is-(decimal-number|whole-number)/.test(cond)) { const o = {kind: 'number'}; const b = /between\(\s*(-?[\d.]+)\s*[;,]\s*(-?[\d.]+)\s*\)/.exec(cond), ge = /cell-content\(\)\s*>=?\s*(-?[\d.]+)/.exec(cond), le = /cell-content\(\)\s*<=?\s*(-?[\d.]+)/.exec(cond); if (b) { o.min = Number(b[1]); o.max = Number(b[2]); } if (ge) o.min = Number(ge[1]); if (le) o.max = Number(le[1]); if (free) o.allowFree = true; valDefs[name] = o; } });
         const tables = findAll(X, 'table').filter(t => t.n === 'table:table' || local(t.n) === 'table');
         if (tables.length > LIMITS.sheets) throw new Error('fichier refusé : trop de feuilles');
         for (const tb of tables) {
-            const sh = newSheet(cleanSheetName(tb.a['table:name'], wb.sheets.map(s => s.name)));
+            const sh = newSheet(cleanSheetName(tb.a['table:name'], wb.sheets.map(s => s.name))), valBox = {};
+            const markVal = (name, r, cc, n) => { if (!name || !valDefs[name]) return; const b = valBox[name] || (valBox[name] = {r0: r, c0: cc, r1: r, c1: cc}); b.r0 = Math.min(b.r0, r); b.c0 = Math.min(b.c0, cc); b.r1 = Math.max(b.r1, r); b.c1 = Math.max(b.c1, cc + n - 1); };
             let c = 0; findAll(tb, 'table-column').forEach(col => { const rep = Math.min(Number(col.a['table:number-columns-repeated']) || 1, 1024); const w = colW[col.a['table:style-name']]; for (let i = 0; i < rep && c < LIMITS.cols; i++, c++) { const o = {}; if (w && Math.abs(w - 85) > 3) o.w = Math.max(16, Math.min(1200, w)); if (col.a['table:visibility'] === 'collapse') o.hidden = true; if (Object.keys(o).length) sh.cols[colName(c)] = o; } });
             let r = 0;
             for (const row of findAll(tb, 'table-row')) {
                 const rrep = Number(row.a['table:number-rows-repeated']) || 1;
                 const cellEls = (row.c || []).filter(x => typeof x === 'object' && /table-cell$/.test(x.n));
                 const hasContent = cellEls.some(x => local(x.n) === 'table-cell' && (x.a['office:value-type'] || x.a['table:formula'] || x.c.length));
-                if (!hasContent) { r += rrep; if (r > LIMITS.rows) break; continue; }
+                if (!hasContent) { let cc0 = 0; cellEls.forEach(x => { const n = Math.min(Number(x.a['table:number-columns-repeated']) || 1, 1024); markVal(x.a['table:content-validation-name'], r, cc0, n); if (rrep > 1) markVal(x.a['table:content-validation-name'], Math.min(r + rrep - 1, r + 5000), cc0, n); cc0 += n; }); r += rrep; if (r > LIMITS.rows) break; continue; }
                 const times = Math.min(rrep, 1000);
                 for (let k = 0; k < times && r < LIMITS.rows; k++, r++) {
                     const rh = rowH[row.a['table:style-name']]; if (rh && Math.abs(rh - 17) > 2) (sh.rows[String(r + 1)] = sh.rows[String(r + 1)] || {}).h = Math.max(12, Math.min(600, rh));
@@ -1524,6 +1671,7 @@
                         const crep = Number(ce.a['table:number-columns-repeated']) || 1;
                         if (local(ce.n) === 'covered-table-cell') { cc += crep; continue; }
                         const vt = ce.a['office:value-type'], fml = ce.a['table:formula'], has = vt || fml || ce.c.length;
+                        markVal(ce.a['table:content-validation-name'], r, cc, Math.min(crep, 1024));
                         if (!has && !ce.a['table:style-name']) { cc += crep; continue; }
                         const n = has ? Math.min(crep, 1024) : 0;
                         for (let j = 0; j < n && cc < LIMITS.cols; j++, cc++) {
@@ -1538,7 +1686,8 @@
                             if (typeof v === 'string' && /^[=+\-@]/.test(v)) v = "'" + v;
                             const f = fml ? fromOds(fml) : null, st = cellSt[ce.a['table:style-name']] || {}, sid = styleId(wb, st);
                             const cell = {v: f || v}; if (sid) cell.s = sid;
-                            if (cell.v != null || cell.s) sh.cells[addr(r, cc)] = cell;
+                            const ann = kid(ce, 'annotation'); if (ann) { const t = kids(ann, 'p').map(xtext).join('\n').trim().slice(0, 2000); if (t) cell.note = t; }
+                            if (cell.v != null || cell.s || cell.note) sh.cells[addr(r, cc)] = cell;
                             const cs = Number(ce.a['table:number-columns-spanned']) || 1, rs = Number(ce.a['table:number-rows-spanned']) || 1;
                             if ((cs > 1 || rs > 1) && j === 0 && sh.merges.length < 10000) sh.merges.push(rangeStr({r0: r, c0: cc, r1: r + Math.min(rs, 5000) - 1, c1: cc + Math.min(cs, 500) - 1}));
                         }
@@ -1548,9 +1697,15 @@
                 }
                 if (rrep > times) r += rrep - times;
             }
+            Object.entries(valBox).forEach(([name, b]) => { if (sh.dv.length < 60) sh.dv.push({range: rangeStr(b), ...valDefs[name]}); });
             wb.sheets.push(sh);
         }
         if (!wb.sheets.length) wb.sheets.push(newSheet('Feuille 1'));
+        // plages nommées, filtres, volets figés
+        findAll(X, 'named-range').slice(0, 300).forEach(n => { const nm = n.a['table:name'], q = odsRange(n.a['table:cell-range-address']); if (!nm || !q || !/^[A-Za-zÀ-ÿ_][\wÀ-ÿ.]{0,60}$/.test(nm) || ADDR_RX.test(nm)) return; const sh = q.sheet != null ? wb.sheets.find(x => fold(x.name) === fold(q.sheet)) : wb.sheets[0]; wb.names[nm] = `${quoteSheet(sh ? sh.name : q.sheet || wb.sheets[0].name)}!${q.range}`; });
+        findAll(X, 'database-range').forEach(d => { if (d.a['table:display-filter-buttons'] !== 'true') return; const q = odsRange(d.a['table:target-range-address']); const sh = q && (q.sheet != null ? wb.sheets.find(x => fold(x.name) === fold(q.sheet)) : wb.sheets[0]); if (sh && !sh.filter) sh.filter = {range: q.range}; });
+        const st = await z.text('settings.xml');
+        if (st) { const SX = parseXml(st); findAll(SX, 'config-item-map-named').filter(m => m.a['config:name'] === 'Tables').forEach(m => kids(m, 'config-item-map-entry').forEach(e => { const sh = wb.sheets.find(x => x.name === e.a['config:name']); if (!sh) return; const it = n => xtext(kids(e, 'config-item').find(x => x.a['config:name'] === n)); const r = it('VerticalSplitMode') === '2' ? Number(it('VerticalSplitPosition')) || 0 : 0, c = it('HorizontalSplitMode') === '2' ? Number(it('HorizontalSplitPosition')) || 0 : 0; if (r || c) sh.freeze = {r: Math.min(500, r), c: Math.min(100, c)}; })); }
         return wb;
     }
 

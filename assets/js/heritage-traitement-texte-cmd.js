@@ -134,7 +134,7 @@
                 if (this.picked && !e.target.closest('.wp-h')) this.unpick();
             },
             openLink(a) {
-                if (a.dataset.wpPerson) { this.dlg.close; return ext.textDocTools?.openPerson?.(Number(a.dataset.wpPerson)); }
+                if (a.dataset.wpPerson) return ext.textDocTools?.openPerson?.(Number(a.dataset.wpPerson));
                 if (a.dataset.wpPlace) return ext.textDocTools?.openPlace?.(Number(a.dataset.wpPlace));
                 const h = a.getAttribute('href') || ''; if (/^https?:\/\/|^mailto:/i.test(h)) window.open(h, '_blank', 'noopener');
             },
@@ -243,7 +243,7 @@
                     case 'paste': case 'pasteplain': this.focusBack(); return navigator.clipboard?.readText ? navigator.clipboard.readText().then(t => { this.commit(); this.insertText(t); this.commit(); this.layoutSoon(0); }).catch(() => toast(`Utilise ${kbd(c === 'paste' ? '⌘V' : '⇧⌘V')} dans le texte.`)) : toast(`Utilise ${kbd('⌘V')}.`);
                     case 'selectall': { this.focusBack(); const b = this.curBody(); const r = document.createRange(); r.selectNodeContents(b); getSelection().removeAllRanges(); getSelection().addRange(r); return; }
                     case 'al': return this.paraStyle(p => { p.style.textAlign = v === 'left' ? '' : v; });
-                    case 'ul': return exec('insertUnorderedList'); case 'ol': return exec('insertOrderedList');
+                    case 'ul': case 'ol': return this.toggleList(c);
                     case 'indent': case 'outdent': { const bs = this.selBlocks(); if (bs.some(b => b.tagName === 'LI')) { const pos = this.selPos(); bs.filter(b => b.tagName === 'LI').forEach(li => (c === 'indent' ? this.indentLi(li) : this.outdentLi(li))); this.normalize(this.curBody() || this.secs[0].body); this.setSelPos(pos); this.commit(); return this.layoutSoon(0); } return this.paraStyle(p => { const m = parseFloat(p.style.marginLeft) || 0, mm = p.style.marginLeft.endsWith('mm') ? m : m / K().MM; const n = Math.max(0, Math.round((mm + (c === 'indent' ? 12.5 : -12.5)) * 10) / 10); p.style.marginLeft = n ? `${n}mm` : ''; }); }
                     case 'style': return this.setStyle(v || arg);
                     case 'clearfmt': { this.restoreSel(); this.focusBack(); document.execCommand('removeFormat'); const r = this.sel(); if (r) this.secOf(r.startContainer).body.querySelectorAll('span[data-cs], span[style]').forEach(s => { if (r.intersectsNode(s) && !s.matches('.wp-field, .wp-cm')) s.replaceWith(...s.childNodes); }); this.selBlocks().forEach(p => { p.removeAttribute('style'); p.removeAttribute('data-drop'); }); this.commit(); this.layoutSoon(); this.syncTools(); return; }
@@ -266,7 +266,7 @@
                     case 'showcm': setPrefs({...prefs(), showcm: pref('showcm', true) === false}); this.applyView(); return this.layout();
                     case 'spell': setPrefs({...prefs(), spell: pref('spell', true) === false}); this.bodies().forEach(b => this.spellOn(b)); this.applyView(); return this.status?.flash(pref('spell', true) !== false ? 'Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections).' : 'Vérification de l’orthographe arrêtée.');
                     case 'zoomfit': return this.setZoom(0, 'fit'); case 'zoom100': return this.setZoom(1, 'manual');
-                    case 'help': return A().openFaq ? A().openFaq('traitement de texte') : (window.location.hash = '#faq');
+                    case 'help': return ext.faqPopup?.('traitement de texte document Word') || UI().openFaq?.('traitement de texte');
                     case 'close': return this.close();
                     case 'save': return this.save();
                     case 'headrow': case 'tborders': case 'rowabove': case 'rowbelow': case 'colleft': case 'colright': case 'delrow': case 'delcol': case 'deltable': case 'merge': case 'split': case 'cellbg': case 'sortaz': case 'sortza': return this.tableCmd(c, arg);
@@ -275,6 +275,24 @@
                     case 'styles': return this.showPanel('format', 'styles');
                     default: return ext.textDocTools?.run(this, cmd, arg);
                 }
+            },
+            /** • ou 1. sur les paragraphes choisis, sans le navigateur (qui laissait un paragraphe vide et des tailles écrites en dur) :
+             *  des paragraphes → une liste (qui continue la liste d'à côté) ; une liste de l'autre sorte → elle change ; la même → les éléments en sortent */
+            toggleList(kind) {
+                this.restoreSel(); const tag = kind === 'ol' ? 'OL' : 'UL', bs = this.selBlocks().filter(b => b.closest('.wp-body')); if (!bs.length) return toast('Place le curseur dans un paragraphe.');
+                const body = this.secOf(bs[0])?.body; if (!body) return; const pos = this.selPos(); this.commit();
+                const lis = bs.filter(b => b.tagName === 'LI');
+                if (lis.length === bs.length && lis.every(li => li.parentElement?.tagName === tag)) lis.forEach(li => { let x = li, n = 0; while (x?.tagName === 'LI' && n++ < 10) x = this.outdentLi(x); });
+                else if (lis.length === bs.length) new Set(lis.map(li => li.parentElement)).forEach(l => { if (l && l.tagName !== tag) this.retag(l, tag); });
+                else bs.forEach(b => {
+                    if (b.tagName === 'LI') { if (b.parentElement?.tagName !== tag) this.retag(b.parentElement, tag); return; }
+                    if (!/^(P|H[1-6]|DIV|BLOCKQUOTE)$/.test(b.tagName) || b.closest('td, th, figcaption')) return;
+                    const li = this.retag(b, 'LI'); if (!li.dataset.st) li.dataset.st = 'normal'; li.style.removeProperty('margin-left'); li.style.removeProperty('text-indent'); if (!li.getAttribute('style')) li.removeAttribute('style');
+                    const prev = li.previousElementSibling; let list;
+                    if (prev && prev.tagName === tag) { list = prev; list.appendChild(li); } else { list = document.createElement(tag); li.before(list); list.appendChild(li); }
+                    const next = list.nextElementSibling; if (next && next.tagName === tag) { list.append(...next.childNodes); next.remove(); }
+                });
+                this.normalize(body); this.setSelPos(pos); this.commit(); this.syncTools(); this.layoutSoon(0);
             },
             /** les niveaux d'une liste, sans compter sur le navigateur */
             indentLi(li) {
@@ -462,7 +480,9 @@
             tableCmd(cmd, arg) {
                 this.restoreSel(); const c = this.cell(); if (!c) return toast('Place le curseur dans un tableau.');
                 const t = c.closest('table'), {g, pos, w} = this.grid(t), p = pos.get(c), mk = (tag = 'td') => { const x = document.createElement(tag); x.innerHTML = '<br>'; return x; };
-                const done = msg => { this.commit(); this.layoutSoon(0); if (msg) this.status?.flash(msg); };
+                // le curseur reste dans la case (déplacer une ligne ou changer th ↔ td le ferait tomber hors du tableau : la commande suivante ne trouverait plus la case)
+                const keepCaret = () => { if (!t.isConnected) return; const x = c.isConnected && c.closest('table') === t ? c : t.rows[Math.min(p.r, t.rows.length - 1)]?.cells[Math.min(p.c, (t.rows[Math.min(p.r, t.rows.length - 1)]?.cells.length || 1) - 1)]; if (!x) return; const r = document.createRange(); r.selectNodeContents(x); r.collapse(true); const s = getSelection(); s.removeAllRanges(); s.addRange(r); this.lastRange = r.cloneRange(); };
+                const done = msg => { keepCaret(); this.commit(); this.layoutSoon(0); if (msg) this.status?.flash(msg); };
                 if (cmd === 'rowabove' || cmd === 'rowbelow') {
                     const at = cmd === 'rowabove' ? p.r : p.r + c.rowSpan, tr = document.createElement('tr'), ref = t.rows[at] || null;
                     for (let ci = 0; ci < w; ci++) { const above = g[at - 1]?.[ci], here = g[at]?.[ci]; if (above && above === here) { if (pos.get(above).c === ci) above.rowSpan++; continue; } tr.appendChild(mk(ref?.parentElement?.tagName === 'THEAD' ? 'th' : 'td')); }

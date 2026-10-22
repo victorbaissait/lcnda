@@ -537,6 +537,7 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'houses' => function_exists('house_links_lookup') ? house_links_lookup($pdo, $personId, 0) : [], // 🏠 les maisons de famille où elle a vécu (lib/houses.php)
         'profiles' => function_exists('profils_of_person') ? profils_of_person($pdo, $personId) : [], // 🧩 « Cette personne était… » (lib/profils.php)
         'heard' => function_exists('audio_regions_for_person') ? audio_regions_for_person($pdo, $personId) : [], // 🎧 « On l'entend » : passages de sons reliés (lib/audio_studio.php)
+        'parcels' => function_exists('cadastre_for_person') ? cadastre_for_person($pdo, $personId) : [], // 🗺 « Propriétaire de… » : les parcelles du cadastre reliées (lib/cadastre.php)
     ];
 }
 
@@ -1099,6 +1100,13 @@ function old_map_transform(array $points): ?array
         if (!is_array($p) || !is_numeric($p['u'] ?? null) || !is_numeric($p['v'] ?? null) || !is_numeric($p['lat'] ?? null) || !is_numeric($p['lon'] ?? null)) { continue; }
         [$x, $y] = h_mercator((float) $p['lat'], (float) $p['lon']);
         $pts[] = [(float) $p['u'], (float) $p['v'], $x, $y];
+    }
+    if (count($pts) === 2) { // 2 points : même échelle dans les deux sens, rotation, déplacement (même calcul que heritage.js)
+        [[$u1, $v1, $x1, $y1], [$u2, $v2, $x2, $y2]] = $pts;
+        $du = $u2 - $u1; $dv = $v2 - $v1; $dx = $x2 - $x1; $dy = $y2 - $y1; $n2 = $du * $du + $dv * $dv;
+        if ($n2 < 1e-9) { return null; }
+        $a = ($dx * $du + $dy * $dv) / $n2; $b = ($dy * $du - $dx * $dv) / $n2;
+        return [$a, $b, -$b, $a, $x1 - ($a * $u1 - $b * $v1), $y1 - ($b * $u1 + $a * $v1)];
     }
     if (count($pts) < 3) { return null; }
     // Équations normales : [Σuu Σuv Σu; Σuv Σvv Σv; Σu Σv n] · [a c e] = [Σux Σvx Σx]

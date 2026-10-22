@@ -436,14 +436,17 @@
                 if (V.screen !== 'house') return; const P2 = window.LCNDA_EXT.housePlus;
                 houseH = P2?.stripHouse ? P2.stripHouse(r.house || {}) : {...(r.house || {}), meta: undefined}; if (!Array.isArray(houseH.floors) || !houseH.floors.length) throw new Error('vide');
                 const box = $('[data-ms-house]', MAIN); box.innerHTML = ''; let fi = houseH.floors.findIndex(f => f.level === 0); if (fi < 0) fi = 0;
-                houseView = await window.LCNDA_EXT.house3d.mount(box, houseH, fi, {share: true}); if (V.screen !== 'house') { houseView.destroy(); houseView = null; return; }
+                houseView = await window.LCNDA_EXT.house3d.mount(box, houseH, fi, {share: true, simple: true}); if (V.screen !== 'house') { houseView.destroy(); houseView = null; return; }
                 houseView.spin?.(!E.calm); paintHouseBtns();
             } catch (_) { const b = $('[data-ms-house]', MAIN); if (b) b.innerHTML = '<div class="ms-center"><p class="ms-lead">La maison n’a pas pu être montrée.</p></div>'; }
         }
         function paintHouseBtns() {
-            const el = $('[data-ms-hbtns]', MAIN); if (!el || !houseH) return; const cur = houseView?.floorIndex?.() ?? 0, fl = houseH.floors.map((f, i) => [f, i]).sort((a, b) => b[0].level - a[0].level);
+            const el = $('[data-ms-hbtns]', MAIN); if (!el || !houseH) return;
+            if (houseView?.walking?.()) { const fa = houseView.floorsAround?.() || {}, big = (act, ic, lb, extra = '') => `<button type="button" class="ms-btn" data-act="${act}" ${extra}><span class="ms-ico" aria-hidden="true">${ic}</span><span>${lb}</span></button>`;
+                el.innerHTML = `<div class="ms-walkpad">${big('wleft', '⬅', 'Tourner à gauche')}${big('wfwd', '⬆', 'Avancer')}${big('wright', '➡', 'Tourner à droite')}${big('wback', '⬇', 'Reculer')}</div>
+                    ${fa.up ? big('wup', '⏫', 'Monter d’un étage') : ''}${fa.down ? big('wdown', '⏬', 'Descendre d’un étage') : ''}${big('wstop', '🏠', 'Voir toute la maison')}`; return; } const cur = houseView?.floorIndex?.() ?? 0, fl = houseH.floors.map((f, i) => [f, i]).sort((a, b) => b[0].level - a[0].level);
             const big = (act, ic, lb, extra = '') => `<button type="button" class="ms-btn" data-act="${act}" ${extra}><span class="ms-ico" aria-hidden="true">${ic}</span><span>${lb}</span></button>`;
-            el.innerHTML = `${big('hleft', '↺', 'Tourner à gauche')}${big('hright', '↻', 'Tourner à droite')}${big('hin', '＋', 'Plus près')}${big('hout', '−', 'Plus loin')}${(houseH.tour || []).length ? big('htour', '▶', 'La visite', 'aria-label="Écouter la visite guidée"') : ''}
+            el.innerHTML = `${big('hleft', '↺', 'Tourner à gauche')}${big('hright', '↻', 'Tourner à droite')}${big('hin', '＋', 'Plus près')}${big('hout', '−', 'Plus loin')}${big('hwalk', '🚶', 'Se promener dedans')}${(houseH.tour || []).length ? big('htour', '▶', 'La visite', 'aria-label="Écouter la visite guidée"') : ''}
                 ${fl.length > 1 ? fl.map(([f, i]) => big('hfloor', i === cur ? '●' : '○', esc(f.name || 'Étage'), `data-id="${i + 1}" aria-pressed="${i === cur}"`)).join('') : ''}`;
         }
         /* ── 💌 Un mot de la famille (un cadre ajouté) : le texte en grand, lu à voix haute ── */
@@ -772,6 +775,11 @@
             case 'hin': case 'hout': houseView?.zoomBy?.(a === 'hin' ? .78 : 1.28); break;
             case 'hfloor': houseView?.showFloor?.(id - 1); paintHouseBtns(); break;
             case 'htour': houseView?.spin?.(false); houseView?.playTour?.(); break;
+            case 'hwalk': houseView?.spin?.(false); houseView?.startWalk?.(); paintHouseBtns(); msg('Les gros boutons : avancer, reculer, tourner. On passe par les portes.'); break;
+            case 'wfwd': case 'wback': houseView?.walkStep?.(a === 'wfwd' ? .8 : -.8); break;
+            case 'wleft': case 'wright': houseView?.walkTurn?.(a === 'wleft' ? Math.PI / 6 : -Math.PI / 6); break;
+            case 'wup': case 'wdown': houseView?.goFloor?.(a === 'wup' ? 1 : -1); paintHouseBtns(); break;
+            case 'wstop': houseView?.stopWalk?.(); paintHouseBtns(); break;
             case 'who': go('who'); break;
             case 'setviewer': V.viewer = id && P(id) ? id : 0; if (full) setDev({viewer: V.viewer || undefined}); nearCache = null; V.choosing = false; V.stack = []; V.screen = 'home'; V.center = 0; render(true); msg(V.viewer ? `Bonjour ${P(V.viewer).first} ! L’app dira « ta mère », « ton petit-fils »…` : 'D’accord. L’app ne dira pas les liens de famille.'); break;
             case 'chooseother': V.choosing = true; go('people', {state: {peopleTab: 'family', letter: null}}); break;

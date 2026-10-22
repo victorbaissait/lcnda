@@ -1,0 +1,40 @@
+[
+ {
+  "match": "cadastre/parcelle?code_insee=19272&section=AB&numero=0100",
+  "file": "apicarto-parcelle-AB-0100.json"
+ },
+ {
+  "match": "cadastre/parcelle?code_insee=19272&section=AB&_limit",
+  "file": "apicarto-section-AB.json"
+ },
+ {
+  "match": "cadastre/parcelle?code_insee=19272&section=ZZ",
+  "status": 500,
+  "file": "x"
+ },
+ {
+  "match": "CADASTRALPARCELS.PARCELLAIRE_EXPRESS:parcelle&OUTPUTFORMAT=application/json&SRSNAME=CRS:84&COUNT=10&CQL_FILTER=code_insee='19272' AND section='ZZ'",
+  "file": "wfs-ZZ-0007.json"
+ },
+ {
+  "match": "cadastre/parcelle?geom=",
+  "file": "apicarto-point.json"
+ },
+ {
+  "match": "cadastre/feuille?code_insee=19272",
+  "file": "apicarto-feuilles.json"
+ },
+ {
+  "match": "geocodage/reverse",
+  "file": "reverse.json"
+ },
+ {
+  "match": "geo-dvf/latest/csv/2023/communes/19/19272.csv",
+  "file": "dvf-2023.csv"
+ },
+ {
+  "match": "geo-dvf/latest/csv/",
+  "status": 404,
+  "file": "x"
+ }
+]

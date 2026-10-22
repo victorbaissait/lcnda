@@ -1237,6 +1237,12 @@
     function computeTransform(points) {
         // Même calcul que old_map_transform (lib/heritage.php), pour l'aperçu immédiat
         const pts = points.filter(p => finite(p.u) && finite(p.lat)).map(p => [Number(p.u), Number(p.v), A().lngToX(Number(p.lon), 0), A().latToY(Number(p.lat), 0)]);
+        if (pts.length === 2) { // 2 points : même échelle dans les deux sens, rotation, déplacement (plan napoléonien, cadastre)
+            const [[u1, v1, x1, y1], [u2, v2, x2, y2]] = pts, du = u2 - u1, dv = v2 - v1, dx = x2 - x1, dy = y2 - y1, n2 = du * du + dv * dv;
+            if (n2 < 1e-9) return null;
+            const a = (dx * du + dy * dv) / n2, b = (dy * du - dx * dv) / n2;
+            return [a, b, -b, a, x1 - (a * u1 - b * v1), y1 - (b * u1 + a * v1)];
+        }
         if (pts.length < 3) return null;
         const s = {uu: 0, uv: 0, u: 0, vv: 0, v: 0, n: 0, ux: 0, vx: 0, x: 0, uy: 0, vy: 0, y: 0};
         pts.forEach(([u, v, x, y]) => { s.uu += u * u; s.uv += u * v; s.u += u; s.vv += v * v; s.v += v; s.n++; s.ux += u * x; s.vx += v * x; s.x += x; s.uy += u * y; s.vy += v * y; s.y += y; });
@@ -1297,7 +1303,7 @@
         if (editId !== null) return renderOldMapEditor(token, editId ? maps.find(m => Number(m.id) === Number(editId)) : null);
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Cartes anciennes', 'Pose ta propre carte ancienne sur la carte : un plan cadastral photographié aux archives, un vieux plan de village… Indique 3 points que tu reconnais (l’église, un carrefour, le moulin) et l’app la superpose exactement à la carte, avec un réglage de transparence. Places-y ensuite les maisons de tes ancêtres.')}
             <div class="collection-toolbar"><button type="button" class="button" data-h-oldmap-new>＋ Carte ancienne</button></div>
-            <div class="collection-grid">${maps.map(m => `<article class="collection-card">${m.filename ? `<div class="collection-photo"><img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy"></div>` : ''}<div class="collection-body"><strong>${esc(m.title)}</strong>${LC(m.labels)}${m.year_text ? ` <span class="collection-kind">${esc(m.year_text)}</span>` : ''}<p class="muted">${m.transform ? `✅ Calée (${m.control_points.length} points)` : `⚠ À caler : ${m.control_points.length}/3 points`} · ${plural(m.markers.length, 'maison placée', 'maisons placées')}</p>
+            <div class="collection-grid">${maps.map(m => `<article class="collection-card">${m.filename ? `<div class="collection-photo"><img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy"></div>` : ''}<div class="collection-body"><strong>${esc(m.title)}</strong>${LC(m.labels)}${m.year_text ? ` <span class="collection-kind">${esc(m.year_text)}</span>` : ''}<p class="muted">${m.transform ? `✅ Calée (${m.control_points.length} points)` : `⚠ À caler : ${m.control_points.length}/2 points au moins`} · ${plural(m.markers.length, 'maison placée', 'maisons placées')}</p>
                 <div class="page-actions"><button type="button" class="button small" data-h-oldmap-edit="${m.id}">Caler / placer</button>${m.transform ? `<button type="button" class="button small secondary" data-h-oldmap-show="${m.id}">Voir sur la carte</button>` : ''}</div></div></article>`).join('') || A().emptyState({text: 'Aucune carte ancienne pour l’instant', icon: '🗺️', hint: 'Ajoute une photo de plan, puis cale-la sur la carte.', action: {label: '＋ Carte ancienne', attrs: 'data-h-oldmap-new'}})}</div></section>`;
         const ws = A().$('#workspace');
         ws.querySelectorAll('[data-h-oldmap-new]').forEach(b => b.addEventListener('click', () => ext.lists.old_maps(++S().workspaceToken, 0)));
@@ -1314,7 +1320,8 @@
         A().setModule('carte');
     }
     function renderOldMapEditor(token, m) {
-        const ed = m ? {...m, control_points: [...m.control_points], markers: [...m.markers]} : {id: 0, title: '', year_text: '', notes: '', control_points: [], markers: [], opacity: 70};
+        const pre = !m ? S().hOldMapPrefill || null : null; // 🗺 Cadastre (heritage-cadastre.js) : nom et centre venus d'une parcelle
+        const ed = m ? {...m, control_points: [...m.control_points], markers: [...m.markers]} : {id: 0, title: pre?.title || '', year_text: pre?.year || '', notes: '', control_points: [], markers: [], opacity: 70};
         A().$('#workspace').innerHTML = `<section class="page collection-page h-oldmap-page">${pageHeader('CARTE ANCIENNE', ed.id ? ed.title : 'Nouvelle carte ancienne', '', '<button type="button" class="button secondary" data-h-oldmap-back>← Toutes les cartes</button>')}
             <form class="maintenance-panel collection-form" id="h-oldmap-form"><div class="form-grid"><label>Nom<input name="title" required value="${esc(ed.title)}" placeholder="Cadastre napoléonien de Saint-Yrieix, section B"></label><label>Date<input name="year_text" value="${esc(ed.year_text)}" placeholder="1834"></label>
             <label>Image (photo ou scan du plan)<input type="file" name="image" accept="image/*"></label><label>Transparence sur la carte<input type="range" name="opacity" min="10" max="100" value="${Number(ed.opacity) || 70}"></label>
@@ -1337,7 +1344,7 @@
             if (!img || !img.isConnected) return;
             const pts = ed.control_points, t = computeTransform(pts);
             ws.querySelector('[data-h-calib-points]').innerHTML = pts.map((p, i) => `<button type="button" class="button small ${i === active && !houseMode ? '' : 'secondary'}" data-h-calib-pick="${i}">${i + 1}. ${esc(p.label || 'Point')} ${finite(p.u) ? '🖼' : '·'}${finite(p.lat) ? '🌍' : '·'}</button>`).join('');
-            ws.querySelector('[data-h-calib-quality]').textContent = t ? `Calée : écart moyen ${fmt(transformError(t, pts))} m${pts.filter(p => finite(p.u) && finite(p.lat)).length === 3 ? ' (3 points : ajoute-en un 4e pour vérifier)' : ''}` : 'Pas encore calée (3 points complets nécessaires).';
+            ws.querySelector('[data-h-calib-quality]').textContent = t ? `Calée : écart moyen ${fmt(transformError(t, pts))} m${pts.filter(p => finite(p.u) && finite(p.lat)).length === 3 ? ' (3 points : ajoute-en un 4e pour vérifier)' : ''}` : 'Pas encore calée (2 points complets au moins ; 3 ou plus, c’est mieux).';
             const k = img.clientWidth / (img.naturalWidth || 1);
             ws.querySelector('.h-calib-pins').innerHTML = pts.map((p, i) => finite(p.u) ? `<span class="h-pin ${i === active ? 'is-active' : ''}" style="left:${p.u * k}px;top:${p.v * k}px">${i + 1}</span>` : '').join('') + ed.markers.map(mk => `<span class="h-pin is-house" style="left:${mk.u * k}px;top:${mk.v * k}px" title="${esc(mk.label)}">🏠</span>`).join('');
             ws.querySelector('.h-houses').innerHTML = ed.markers.map((mk, i) => `<li>🏠 ${esc(mk.label || 'Maison')}${mk.person_id ? ` — ${personLink(mk.person_id, mk.person_name || 'fiche')}` : ''} <button type="button" class="link-button" data-h-house-remove="${i}">retirer</button></li>`).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune maison placée.</span></li>';
@@ -1359,7 +1366,8 @@
                 if (active < 0) active = ed.control_points.length - 1;
                 refresh();
             }});
-            if (!firstLat) { // centrée sur les lieux de la base si possible
+            if (!firstLat && finite(S().hOldMapPrefill?.lat)) map.center(+S().hOldMapPrefill.lat, +S().hOldMapPrefill.lon, 17); // 🗺 centrée sur la parcelle
+            else if (!firstLat) { // centrée sur les lieux de la base si possible
                 api('heritage_place_search', {q: (ed.title.match(/\b(?:de|d’|d')\s*([A-ZÉÈ][\wÀ-ÿ'’-]+(?:[- ][A-ZÉÈ][\wÀ-ÿ'’-]+)*)/u)?.[1]) || ''}).then(d => { const p = d.places?.[0]; if (p) map.center(p.lat, p.lon, 14); }).catch(() => {});
             }
             img.addEventListener('load', refresh);
@@ -1377,7 +1385,7 @@
                 refresh();
             });
             ws.querySelector('[data-h-calib-add]').addEventListener('click', () => { ed.control_points.push({label: ''}); active = ed.control_points.length - 1; refresh(); });
-            ws.querySelector('[data-h-house-mode]').addEventListener('click', () => { if (!computeTransform(ed.control_points)) toast('Cale d’abord la carte (3 points), pour que les maisons apparaissent aussi sur la carte.'); houseMode = true; toast('Clique sur la maison dans l’image.'); });
+            ws.querySelector('[data-h-house-mode]').addEventListener('click', () => { if (!computeTransform(ed.control_points)) toast('Cale d’abord la carte (2 points au moins), pour que les maisons apparaissent aussi sur la carte.'); houseMode = true; toast('Clique sur la maison dans l’image.'); });
             ws.querySelector('[data-h-calib-preview]').addEventListener('change', refresh);
             form.elements.opacity.addEventListener('input', refresh);
             ws.addEventListener('click', async event => {
@@ -1402,6 +1410,7 @@
                     saved = await api('save_old_map', {}, {method: 'POST', body: {...body, id: saved.result.id, img_w: dims[0], img_h: dims[1], control_points: file && ed.id ? [] : body.control_points, markers: file && ed.id ? [] : body.markers}});
                 }
                 toast(saved.result.transform ? 'Carte enregistrée et calée.' : 'Carte enregistrée.');
+                document.dispatchEvent(new CustomEvent('lcnda:oldmap-saved', {detail: {id: Number(saved.result.id)}})); // 🗺 Cadastre : la parcelle d'où l'on vient la relie
                 ext.lists.old_maps(++S().workspaceToken, saved.result.id);
             } catch (error) { toast(error.message, 'error'); }
         });

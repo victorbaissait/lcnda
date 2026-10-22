@@ -10,11 +10,16 @@
         ['g_build', '🧱', 'Construire (éditeurs)', ['block_editor', 'widget_editor', 'stats_editor', 'tabs_editor', 'my_lists']], ['g_quality', '🧹', 'Qualité des données', ['controle', 'duplicates', 'harmonize', 'controle_seuils', 'bulk', 'branches']],
         ['g_data', '📦', 'Données : import, export, sauvegarde', ['export', 'import', 'fusion', 'cousin_vault', 'scan_inbox', 'sync', 'safety', 'entretien', 'changes']], ['g_ref', '📚', 'Référentiels', ['labels', 'event_types', 'calendar_measures', 'help']], ['g_help', '❓', 'Aide', ['faq', 'infos']]];
     /* même rangement que Listes (app-sidegroups.js) : en groupes ou en une seule liste, chaque façon garde ses réglages */
+    /* « Chercher un réglage… » trouve aussi une page par ce qu'elle contient (préférences, types de recherche, fonds de carte…) */
+    const MAINT_KEYWORDS = {design: 'préférences réglages types de recherche type de recherche ordre du menu onglets ordre des listes couleurs des badges messages après une action police couleur principale réglages enregistrés',
+        design_maps: 'préférences fonds de carte fonds de cartes ordre des fonds boutons plan des adresses village carte par défaut ordre des cartes',
+        design_board: 'préférences widgets bibliothèque', design_sheets: 'préférences blocs de la fiche en-tête boutons profils', raccourcis: 'touches clavier préférences',
+        diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations'};
     const MO_KEY = 'genealogie-maintenance-order', mKeys = () => defaultMaintenanceTabs.map(t => t[0]);
     const MG = window.LCNDA_SIDEGROUPS({name: 'maintenance', panelTitle: 'Ordre des pages de Maintenance', key: MG_KEY, defaults: MG_DEFAULT, allKeys: mKeys, label: k => defaultMaintenanceTabs.find(t => t[0] === k)?.[2] || k, defaultEnabled: true,
         flatOrder: () => { let o = []; try { o = JSON.parse(localStorage.getItem(MO_KEY) || '[]'); } catch (_) {} const d = mKeys(); o = Array.isArray(o) ? o.filter(k => d.includes(k)) : []; return [...o, ...d.filter(k => !o.includes(k))]; },
         setFlatOrder: keys => { try { localStorage.setItem(MO_KEY, JSON.stringify(keys)); } catch (_) {} }, flatDefaults: mKeys,
-        current: () => state.maintenanceTab, eyebrow: 'MAINTENANCE', what: 'pages', searchPh: 'Chercher un réglage…'});
+        current: () => state.maintenanceTab, eyebrow: 'MAINTENANCE', what: 'pages', searchPh: 'Chercher un réglage…', keywords: MAINT_KEYWORDS});
     function renderMaintenanceSidebar(content,footer){
         MG.render(content, sidebarSignal());
         content.addEventListener('click',async event=>{const item=event.target.closest('[data-side-value]');if(item){state.maintenanceTab=item.dataset.sideValue;persistUiState();const hash=moduleHash('maintenance');saveLastRoute(hash);updateBrowserRoute(hash,true,'maintenance');renderSidebar();await renderMaintenance();}},{signal:sidebarSignal()});

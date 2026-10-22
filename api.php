@@ -223,13 +223,28 @@ try {
         require_once __DIR__ . '/lib/family_share.php';
         family_share_dispatch($pdo, (string) $action, $_GET);
     }
+    if (!$isWrite && in_array($action, ['website_preview', 'website_export', 'website_export_check'], true)) { // 🌐 Mon site web : aperçu isolé, .zip, résumé (lib/website.php)
+        website_dispatch($pdo, (string) $action, $_GET);
+    }
+    if (!$isWrite && in_array($action, ['desk_widget_page', 'desk_widget_file'], true)) { // 🪟 widgets sur le bureau (lib/desk_widgets.php)
+        require_once __DIR__ . '/lib/desk_widgets.php';
+        desk_widget_dispatch($pdo, (string) $action, $_GET);
+    }
     if (in_array($action, ['photo_comparisons', 'photo_comparison', 'photo_compare_faces', 'photo_comparison_write'], true)) { // 🔍 comparer deux photos (lib/photo_compare.php)
         require_once __DIR__ . '/lib/photo_compare.php';
         photo_cmp_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['image_prints_status', 'image_prints_todo', 'image_prints_all', 'image_dup_state', 'image_prints_save', 'image_dup_dismiss', 'image_dup_merge', 'image_dup_undo'], true)) { // 🔍 images semblables, 👯 doublons d'images (lib/image_prints.php)
+        require_once __DIR__ . '/lib/image_prints.php';
+        image_prints_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['sheet_sources', 'sheet_fill', 'sheet_refs', 'sheet_push', 'sheet_push_undo'], true)) { // 🧮 Tableur : remplir depuis l'app, envoyer vers la base, ↶ Annuler (lib/sheet_link.php)
         require_once __DIR__ . '/lib/sheet_link.php';
         sheet_link_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, ['lot_begin', 'lot_item', 'lot_undo'], true)) { // ⚙️ Traitements par lot : ranger les fichiers traités, ↶ Annuler (lib/lots.php)
+        require_once __DIR__ . '/lib/lots.php';
+        lot_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
     // Imports qui interrogent un site (Discogs, MusicBrainz…, DOI, ORCID, HAL) : rien n'est écrit dans la base, donc pas de
     // transaction d'écriture ouverte pendant l'attente du site (jusqu'à 25 s par demande) — sinon tout enregistrement fait
@@ -397,7 +412,18 @@ try {
         'textdoc_version' => json_response(textdoc_version($pdo, safe_int($_GET['id'] ?? 0))),
         'textdoc_people' => json_response(['people' => (object) textdoc_people($pdo, explode(',', (string) ($_GET['ids'] ?? '')))]),
         'textdoc_tree' => json_response(textdoc_tree($pdo, safe_int($_GET['id'] ?? 0), safe_int($_GET['gens'] ?? 3))),
+        'websites' => json_response(['items' => websites_list($pdo)]), // 🌐 Mon site web (lib/website.php)
+        'website' => json_response(website_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'website_versions' => json_response(['items' => website_versions($pdo, safe_int($_GET['site_id'] ?? 0))]),
+        'website_version' => json_response(website_version($pdo, safe_int($_GET['id'] ?? 0))),
+        'website_render' => json_response(website_render($pdo, $_GET)),
         'houses' => json_response(['items' => houses_list($pdo)]),
+        'cadastre_parcels' => json_response(cadastre_list($pdo, $_GET)), // 🗺 Cadastre (lib/cadastre.php)
+        'cadastre_parcel' => json_response(cadastre_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'cadastre_for' => json_response(['items' => cadastre_for($pdo, (string) ($_GET['kind'] ?? ''), safe_int($_GET['id'] ?? 0), cadastre_insee($_GET['insee'] ?? ''))]),
+        'cadastre_place' => json_response(cadastre_place_info($pdo, safe_int($_GET['id'] ?? 0))),
+        'cadastre_lookup' => json_response(cadastre_lookup($pdo, $_GET)), // en ligne, par le serveur : API Carto IGN, WFS Géoplateforme (cache, délais, limite)
+        'cadastre_dvf' => json_response(cadastre_dvf($pdo, $_GET)),
         'house' => json_response(house_get($pdo, safe_int($_GET['id'] ?? 0))),
         'house_links' => json_response(['items' => house_links_lookup($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['census_id'] ?? 0))]),
         'house_models' => json_response(['items' => house_models_list($pdo)]),
@@ -9603,6 +9629,18 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_textdoc_version' => delete_textdoc_version($pdo,$data),
             'restore_textdoc_version' => restore_textdoc_version($pdo,$data),
             'textdoc_to_media' => textdoc_to_media($pdo,$data),
+            'save_website' => save_website($pdo,$data), // 🌐 Mon site web
+            'rename_website' => rename_website($pdo,$data),
+            'delete_website' => delete_website($pdo,$data),
+            'restore_website' => restore_website($pdo,$data),
+            'duplicate_website' => duplicate_website($pdo,$data),
+            'save_website_version' => save_website_version($pdo,$data),
+            'delete_website_version' => delete_website_version($pdo,$data),
+            'restore_website_version' => restore_website_version($pdo,$data),
+            'save_cadastre_parcel' => save_cadastre_parcel($pdo,$data), // 🗺 Cadastre (lib/cadastre.php)
+            'delete_cadastre_parcel' => delete_cadastre_parcel($pdo,$data),
+            'restore_cadastre_parcel' => restore_cadastre_parcel($pdo,$data),
+            'cadastre_link' => cadastre_link($pdo,$data),
             'save_dna_kit' => save_dna_kit($pdo,$data),
             'delete_dna_kit' => delete_dna_kit($pdo,$data),
             'save_dna_match' => save_dna_match($pdo,$data),

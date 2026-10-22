@@ -535,7 +535,7 @@
     /** 📐 Format du document : l'unité montrée, la résolution de l'export image, le format choisi (liste commune) et les informations (titre, auteur…) */
     const INFO_KEYS = [['title', 200], ['author', 200], ['subject', 300], ['desc', 2000], ['keywords', 400], ['rights', 300], ['lang', 12], ['date', 40]];
     const cleanInfo = v => { const out = {}; if (v && typeof v === 'object') INFO_KEYS.forEach(([k, n]) => { const t = typeof v[k] === 'string' ? v[k].replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').trim().slice(0, n) : ''; if (t) out[k] = t; }); return out; };
-    const cleanFmt = o => { const out = {}; if (['mm', 'cm', 'px', 'in'].includes(o.unit)) out.unit = o.unit; if (Number(o.dpi) >= 36 && Number(o.dpi) <= 1200) out.dpi = Math.round(Number(o.dpi)); if (/^[A-Za-z0-9_:-]{1,40}$/.test(String(o.fmt || ''))) out.fmt = String(o.fmt); const info = cleanInfo(o.info); if (Object.keys(info).length) out.info = info; return out; };
+    const cleanFmt = o => { const out = {}; if (['mm', 'cm', 'px', 'in'].includes(o.unit)) out.unit = o.unit; if (Number(o.dpi) >= 36 && Number(o.dpi) <= 1200) out.dpi = Math.round(Number(o.dpi)); if (/^[A-Za-z0-9_:-]{1,40}$/.test(String(o.fmt || ''))) out.fmt = String(o.fmt); if (o.bleed !== undefined && o.bleed !== null && o.bleed !== '' && Number.isFinite(Number(o.bleed))) out.bleed = Math.round(clamp(Number(o.bleed), 0, 20) * 10) / 10; const info = cleanInfo(o.info); if (Object.keys(info).length) out.info = info; return out; };
     const cleanDoc = d => { const o = d && typeof d === 'object' ? d : {}; return {w: clamp(num(o.w, 800), 10, 20000), h: clamp(num(o.h, 600), 10, 20000), bg: o.bg === 'transparent' ? 'transparent' : col(o.bg, '#ffffff'), grid: clamp(num(o.grid), 0, 500), snap: !!o.snap, objs: Array.isArray(o.objs) ? o.objs.filter(x => x && typeof x === 'object').slice(0, 20000) : [], ...cleanMap(o), ...cleanPages(o), ...(/^[a-z]{2,20}$/.test(o.kind || '') ? {kind: o.kind} : {}), ...(typeof o.blasonOn === 'boolean' ? {blasonOn: o.blasonOn} : {}), ...cleanFmt(o)}; }; // kind : « tree » pour un arbre décoratif, etc.
     /** 📄 les pages d'un document à plusieurs faces (faire-part recto-verso, carte pliée, enveloppe) : des rectangles du plan de travail,
      *  chacun imprimé sur sa propre feuille ; panels = les volets (plis entre eux) ; back = le dos de la page d'avant (impression recto-verso) */
@@ -1470,6 +1470,7 @@
         Object.assign(CMDS, {pf_union: pf('union'), pf_subtract: pf('subtract'), pf_intersect: pf('intersect'), pf_exclude: pf('exclude')});
         /* 📐 Fichier → Format du document / plans de travail (comme Illustrator) : taille (liste commune ou format libre), unité, sens, résolution, fond ;
            les objets restent en place ou sont remis à l'échelle ; une seule étape de l'historique (↶), enregistrée avec le dessin */
+        const bleedMm = () => (Number.isFinite(Number(doc.bleed)) && doc.bleed !== null && doc.bleed !== '' ? clamp(Number(doc.bleed), 0, 20) : 3);
         const fmtOfDoc = () => window.LCNDA_FORMATS.fromSize(doc.w / MM, doc.h / MM, 'mm', doc.dpi || 300, doc.unit || 'cm');
         function docFormatDialog() {
             const F = window.LCNDA_FORMATS; if (!F) return toast('La liste des formats n’est pas chargée.', 'error');
@@ -1478,7 +1479,8 @@
             const dlg0 = ext.openDialog({eyebrow: 'DOCUMENT', title: '📐 Format du document', wide: true, submitLabel: 'Enregistrer',
                 body: `<div class="fmt-dlg-grid"><div>${multi ? boards : `<fieldset><legend>Plan de travail</legend>${F.boxHtml({value: fmtOfDoc(), units: ['mm', 'cm', 'px', 'in'], dpi: true, hint: 'résolution proposée à l’export en image (PNG, JPG, PDF)'})}</fieldset>`}
                     ${multi ? `<fieldset><legend>Unité et résolution</legend><div class="fmt-row"><label><span>Unité montrée</span><select name="vx_unit">${Object.entries(F.UNITS).map(([k, l]) => `<option value="${k}"${(doc.unit || 'cm') === k ? ' selected' : ''}>${l}</option>`).join('')}</select></label><label><span>Résolution</span><input data-unit="ppp" type="number" name="vx_dpi" min="36" max="1200" value="${doc.dpi || 300}"></label></div></fieldset>` : ''}
-                    <fieldset><legend>Fond</legend><label class="checkbox-line"><input type="checkbox" name="vx_transp"${transparent ? ' checked' : ''}> Transparent (PNG, SVG)</label><label data-vx-fbgc${transparent ? ' hidden' : ''}><span>Couleur du fond</span><input type="color" name="vx_bg" value="${esc(/^#[0-9a-f]{6}$/i.test(doc.bg) ? doc.bg : '#ffffff')}"></label></fieldset></div>
+                    <fieldset><legend>Fond</legend><label class="checkbox-line"><input type="checkbox" name="vx_transp"${transparent ? ' checked' : ''}> Transparent (PNG, SVG)</label><label data-vx-fbgc${transparent ? ' hidden' : ''}><span>Couleur du fond</span><input type="color" name="vx_bg" value="${esc(/^#[0-9a-f]{6}$/i.test(doc.bg) ? doc.bg : '#ffffff')}"></label></fieldset>
+                    <fieldset><legend>Fond perdu</legend><label><span data-help="La marge ajoutée autour de chaque page à l’export « avec fond perdu et traits de coupe », pour que l’imprimeur coupe sans liseré blanc. 3 mm le plus souvent.">Fond perdu</span><input type="number" name="vx_bleed" data-unit="mm" min="0" max="20" step="0.5" value="${bleedMm()}"></label></fieldset></div>
                     <div>${multi ? '' : `<fieldset><legend>Les objets</legend><label class="checkbox-line"><input type="radio" name="vx_objs" value="keep" checked> Restent en place (le plan de travail s’agrandit ou rétrécit autour)</label><label class="checkbox-line"><input type="radio" name="vx_objs" value="scale"> Sont remis à l’échelle (agrandis ou réduits avec le plan, centrés)</label><label class="checkbox-line"><input type="radio" name="vx_objs" value="center"> Restent à leur taille, recentrés</label></fieldset>`}
                     <dl class="fmt-before-after"><dt>Maintenant</dt><dd>${cmTxt(doc.w)} × ${cmTxt(doc.h)} cm</dd><dt>Après</dt><dd data-vx-fafter>—</dd></dl><p class="muted">↶ Annuler (⌘Z) revient au format d’avant.</p></div></div>`,
                 onOpen: d => {
@@ -1489,6 +1491,7 @@
                 },
                 onSubmit: f => {
                     const transp = f.querySelector('[name=vx_transp]').checked, bg = transp ? 'transparent' : col(f.querySelector('[name=vx_bg]').value, '#ffffff');
+                    doc.bleed = Math.round(clamp(num(f.querySelector('[name=vx_bleed]')?.value, 3), 0, 20) * 10) / 10; if (doc.bleed === 3) delete doc.bleed; // 3 mm : celui de départ
                     if (multi) { doc.unit = ['mm', 'cm', 'px', 'in'].includes(f.querySelector('[name=vx_unit]').value) ? f.querySelector('[name=vx_unit]').value : 'cm'; doc.dpi = clamp(Math.round(num(f.querySelector('[name=vx_dpi]').value, 300)), 36, 1200); doc.bg = bg; commit('Format du document'); return; }
                     const box = F.bindBox(f.querySelector('[data-fmt-box]')), v = box.get(), [mw, mh] = F.inMm(v), W = n2(mw * MM), H = n2(mh * MM);
                     if (W < 10 || H < 10 || W > 20000 || H > 20000) return UI()?.fail ? UI().fail(f.querySelector('[data-fmt-w]'), 'Choisis une taille entre 3 mm et 5 m de côté.') : false;
@@ -1615,10 +1618,10 @@
         }
         /* ⤓ E3 : une seule fenêtre d'export (PDF de plusieurs pages, PNG, JPG, WEBP, SVG, Imprimer, recto-verso sur A4, fichier du dessin) */
         const pagesOf = () => doc.pages?.length ? doc.pages : [{name: 'Dessin', x: 0, y: 0, w: doc.w, h: doc.h, panels: [], role: 'face'}];
-        const BLEED = 3 * MM;
+        const BLEED_MM = () => bleedMm(); // 📐 Fichier → Format du document → Fond perdu (3 mm au départ)
         /** une page prête à imprimer (SVG d'une feuille, images de la base intégrées) */
         async function pageSheet(p, {bleed = false, marks = false, sheet = null, rot = false} = {}) {
-            const b = bleed ? BLEED : 0, art = await inlineMedia(docSvg(doc, {page: p, bleed: b}));
+            const b = bleed ? BLEED_MM() * MM : 0, art = await inlineMedia(docSvg(doc, {page: p, bleed: b}));
             return sheetSvg(art, {tw: p.w, th: p.h, bleed: b, marks, sw: sheet?.[0] || 0, sh: sheet?.[1] || 0, panels: p.panels || [], rot});
         }
         const scaleFor = (w, h, ppp) => Math.max(.05, Math.min((ppp || 300) / 96, 8000 / w, 8000 / h, Math.sqrt(48e6 / (w * h))));
@@ -1659,7 +1662,7 @@
                 else if (o.format === 'print') { const sheets = []; for (const p of pgs) { const env = p.role === 'env', svg = await pageSheet(p, {bleed: o.bleed && !env, marks: o.bleed && !env}), m = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/); sheets.push({svg, w: Number(m[1]), h: Number(m[2])}); } printSheets(sheets, name); }
                 else if (o.format === 'impose') { const ch = await askFlip(); if (!ch) return; const sheets = [];
                     for (const p of pgs) { const env = p.role === 'env'; if (env) { const svg = await pageSheet(p); sheets.push({svg, w: p.w, h: p.h}); continue; }
-                        const b = o.bleed ? BLEED : 0, need = [p.w + 2 * (b + (ch.marks ? 9 * MM : 0)), p.h + 2 * (b + (ch.marks ? 9 * MM : 0))], sh = sheetFor(need[0], need[1]);
+                        const b = o.bleed ? BLEED_MM() * MM : 0, need = [p.w + 2 * (b + (ch.marks ? 9 * MM : 0)), p.h + 2 * (b + (ch.marks ? 9 * MM : 0))], sh = sheetFor(need[0], need[1]);
                         sheets.push({svg: await pageSheet(p, {bleed: !!o.bleed, marks: ch.marks, sheet: sh, rot: !!p.back && ch.flip === 'top'}), w: sh[0], h: sh[1]}); }
                     printSheets(sheets, name); }
                 else if (o.format === 'file') downloadBlob(new Blob([JSON.stringify({lcnda: 'dessin', version: 1, name, doc}, null, 1)], {type: 'application/json'}), o.filename);

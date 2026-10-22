@@ -51,7 +51,7 @@
         let D;
         try { D = await get('addr_map', {insee, digest_id: digestId || ''}); } catch (e) { box.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
         if (!D.insee) { box.innerHTML = `<div class="maintenance-panel"><p>${esc(D.error || 'Commune inconnue.')}</p></div>`; return; }
-        const st = {year: Number(year) || 0, old: pref('old', favsShown('old')[0]), now: pref('now', favsShown('now')[0]), opacity: pref('opacity', 70), auto: pref('auto', true), zoom: 16, lat: D.commune.lat ?? 46.6, lon: D.commune.lon ?? 2.4, mode: null, sel: null, draw: null};
+        const st = {year: Number(year) || 0, old: pref('old', favsShown('old')[0]), now: pref('now', favsShown('now')[0]), opacity: pref('opacity', 70), auto: pref('auto', true), cad: !!pref('cad', false), zoom: 16, lat: D.commune.lat ?? 46.6, lon: D.commune.lon ?? 2.4, mode: null, sel: null, draw: null};
         if (st.year && !D.years.includes(st.year)) st.year = 0;
         const yearColor = y => YEAR_COLORS[Math.max(0, D.years.indexOf(Number(y))) % YEAR_COLORS.length];
         const visible = () => D.addresses.filter(a => !st.year || a.years[st.year]);
@@ -79,13 +79,14 @@
                     <label>Carte ancienne <select data-am-old>${mapOptions('old', st.old)}</select></label>
                     <label class="h-am-op" title="0 : la carte d’aujourd’hui ; 100 : la carte ancienne">Ancienne <input type="range" min="0" max="100" value="${st.opacity}" data-am-op> Aujourd’hui</label>
                     <label>Aujourd’hui <select data-am-now>${mapOptions('now', st.now)}</select></label>
+                    ${ext.cadastre ? `<label class="ui-toggle" title="Les parcelles du cadastre d’aujourd’hui (IGN), par-dessus les deux cartes"><input type="checkbox" data-am-cad ${st.cad ? 'checked' : ''}><i></i>▦ Parcelles</label>` : ''}
                 </div>
                 <div class="h-am-bar is-ban">${banLine}
                     <span class="h-am-actions"><label class="ui-toggle" title="Placer tout seul les nouvelles adresses à l’ouverture du plan"><input type="checkbox" data-am-auto ${st.auto ? 'checked' : ''}><i></i>placement automatique</label>
                     <button type="button" class="button small secondary" data-am-place ${b.count ? '' : 'disabled'} title="Placer les adresses pas encore placées (les points posés à la main ne bougent jamais)">📍 Placer</button>
                     <button type="button" class="button small secondary" data-am-online title="Chercher sur Internet (IGN) les adresses qui restent à placer">🌐 En ligne</button>
                     <button type="button" class="button small secondary" data-am-streets>🛣️ Anciens noms de rues${D.streets.length ? ` <small>${D.streets.length}</small>` : ''}</button></span></div>
-                <div class="h-am-main"><div class="h-am-map" tabindex="0"><div class="h-am-tiles is-now"></div><div class="h-am-tiles is-old"></div><svg class="h-am-svg"></svg>
+                <div class="h-am-main"><div class="h-am-map" tabindex="0"><div class="h-am-tiles is-now"></div><div class="h-am-tiles is-old"></div><div class="h-am-tiles is-cad"></div><svg class="h-am-svg"></svg>
                         <div class="h-am-zoom"><button type="button" data-am-z="1" title="Zoomer">＋</button><button type="button" data-am-z="-1" title="Dézoomer">−</button><button type="button" data-am-fit title="Voir toutes les adresses">⤢</button></div>
                         <div class="h-am-banner" hidden></div><div class="h-am-pop" hidden></div>
                         <div class="h-am-legend"></div></div>
@@ -100,6 +101,7 @@
             const tiles = bg => { if (!bg) return ''; let out = ''; for (let tx = Math.floor(left / 256); tx <= Math.floor((left + w) / 256); tx++) for (let ty = Math.floor(top / 256); ty <= Math.floor((top + h) / 256); ty++) { if (ty < 0 || ty >= world) continue; out += `<img draggable="false" referrerpolicy="no-referrer" alt="" src="${A().mapTileUrl(bg, z, ((tx % world) + world) % world, ty)}" style="left:${Math.round(tx * 256 - left)}px;top:${Math.round(ty * 256 - top)}px">`; } return out; };
             map.querySelector('.is-now').innerHTML = tiles(st.now);
             const old = map.querySelector('.is-old'); old.innerHTML = tiles(st.old); old.style.opacity = st.old ? (100 - st.opacity) / 100 : 0;
+            const cad = map.querySelector('.is-cad'); if (cad) cad.innerHTML = st.cad && ext.cadastre?.tilesHtml ? ext.cadastre.tilesHtml(left, top, w, h, z) : ''; // 🗺 heritage-cadastre.js
             const px = (lat, lon) => [X(lon, z) - left, Y(lat, z) - top];
             const svg = map.querySelector('svg'); svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
             const paths = D.streets.filter(s => (s.path || []).length > 1).map(s => { const pts = s.path.map(p => px(p[0], p[1]).map(v => v.toFixed(1)).join(',')).join(' '); const [lx, ly] = px(...s.path[Math.floor(s.path.length / 2)]);
@@ -204,6 +206,7 @@
             q('[data-am-year]').addEventListener('change', e => { st.year = Number(e.target.value); q('.h-am-pop').hidden = true; draw(); side(); });
             q('[data-am-old]').addEventListener('change', e => { st.old = e.target.value; setPref('old', st.old); draw(); });
             q('[data-am-now]').addEventListener('change', e => { st.now = e.target.value; setPref('now', st.now); draw(); });
+            q('[data-am-cad]')?.addEventListener('change', e => { st.cad = e.target.checked; setPref('cad', st.cad); draw(); });
             q('[data-am-op]').addEventListener('input', e => { st.opacity = Number(e.target.value); setPref('opacity', st.opacity); q('.is-old').style.opacity = st.old ? (100 - st.opacity) / 100 : 0; });
             q('[data-am-auto]').addEventListener('change', e => { st.auto = e.target.checked; setPref('auto', st.auto); });
             q('[data-am-place]').addEventListener('click', e => autoPlace(e.shiftKey));

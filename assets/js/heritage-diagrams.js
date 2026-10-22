@@ -343,7 +343,7 @@
             const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || STAT_KINDS.includes(k) || !!kindOf().pairs, kApp = kindOf().app;
             const tf = DGO()?.treeFields(k) || [], tq = DGO() ? DGO().norm({...(spec.live?.tq || {}), live: !!spec.live?.tree}) : null;
             // une sorte peut apporter ses propres données de l'arbre : kind.app = {sources: [[clé, nom]], fill: async (spec, clé) => spec}
-            return `<div class="h-dg-app">${kApp?.sources?.length ? `<h4>🌳 Des données de mon arbre</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main).</p><label>Données<select data-dg-kapp>${kApp.sources.map(([key, label]) => `<option value="${esc(key)}" ${spec.live?.tree === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label>${tf.length ? `<div data-dgo-tree>${DGO().html(tq, {fields: tf, kind: k, period: 'birth'})}</div>` : ''}<button type="button" class="button small" data-dg-kappgo>Prendre ces données</button>` : ''}${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques).</p>
+            return `<div class="h-dg-app">${kApp?.sources?.length ? `<h4>🌳 Des données de mon arbre</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main).</p><label>${stats ? 'Données' : 'Graphique'}<select data-dg-kapp>${kApp.sources.map(([key, label]) => `<option value="${esc(key)}" ${spec.live?.tree === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label>${tf.length ? `<div data-dgo-tree>${DGO().html(tq, {fields: tf, kind: k, period: 'birth'})}</div>` : ''}<button type="button" class="button small" data-dg-kappgo>Prendre ces données</button>` : ''}${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques).</p>
                 <label>Graphique<select data-dg-src><option value="">Chargement…</option></select></label><div data-dgo-stats></div><button type="button" class="button small" data-dg-srcgo>Prendre ces chiffres</button>` : ''}
                 ${people ? `<h4>👥 Des personnes de la base</h4><p class="muted">${k === 'timeline' ? 'Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté).' : 'Leurs naissances, mariages et décès deviennent des dates de la frise.'}</p>
                 <div class="h-pr-addlink" data-dg-pq>${window.LCNDA_PICKER.pickerField({name: 'dg_addp', kind: 'person'})}</div>` : ''}
@@ -355,12 +355,13 @@
                 kindOf().fromApp.bind(pane, {spec: () => clone(spec), apply: s => { spec = s; delete spec.live; appSum = lastSum; tab = 'data'; paint(); later(); }, set: s => { spec = s; appSum = lastSum; later(); } /* set : sans changer d'onglet, spec.live gardé */});
                 // le groupe de personnes et la période communs, ajoutés au panneau propre du type (heritage-diagram-options.js)
                 const c = O?.CUSTOM[k], title = pane.querySelector('h4')?.textContent.replace(/^\W+\s*/u, '') || kindOf().label;
-                if (!c) return;
+                if (!c) { ext.diagramGraphique?.mount(pane, k); return; } // « Graphique » : des points de départ tout prêts (heritage-diagram-graphique.js)
                 let box = null;
                 // la phrase : le premier choix du type (« Naissances (ou baptêmes) »…), puis le groupe et la période
                 function upd() { if (!box) return; const first = [...pane.querySelectorAll('select')].find(x => !x.closest('[data-dgo-box]') && !x.closest('.h-dgo-legacy') && x.offsetParent !== null);
                     setSum(O.summary(O.read(box), {fields: O.customFields(k), period: c.period, source: first?.selectedOptions[0]?.textContent.trim() || title})); }
                 box = O.adopt(pane, k, {onChange: () => upd()}); upd();
+                ext.diagramGraphique?.mount(pane, k, {onApply: () => upd()});
                 pane.addEventListener('change', e => { if (!e.target.closest('[data-dgo-box]')) upd(); });
                 return;
             }

@@ -128,17 +128,28 @@ const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJA
             assert.equal(st.f.attic, true); assert.equal(st.f.knee, 80); assert.match(st.txt, /loi Carrez/); assert.match(st.svg, /Moins de 1,80 m/); assert.match(st.svg, /m² Carrez/);
             await shot(p, 'maison-combles-plan.png', '.h-hs-dlg [data-hs-stage]');
         });
-        await t('navigateur : mur courbe (⌒ Courbure) dessiné en arc', async () => {
+        await t('navigateur : mur courbe — dessiné en arc, le sol de la pièce suit la courbe, cote en longueur d’arc et flèche, fenêtre posée sur la courbe', async () => {
             await blur();
             await p.evaluate(() => { const b = [...document.querySelectorAll('.h-hs-dlg [data-hs-floor]')].find(x => /Rez/.test(x.textContent)); b.click(); window.__ed.select('wall', 'w1'); }); await p.waitForTimeout(200); await openAll();
             await p.fill('.h-hs-dlg [data-hs-p="bulge"]', '-80'); await p.waitForTimeout(700);
             assert.equal(await p.evaluate(() => window.__ed.house.floors[0].walls.find(w => w.id === 'w1').bulge), -80);
             assert.match(await p.$eval('.h-hs-dlg [data-hs="wall:w1"]', el => el.getAttribute('d')), /Q/);
+            await p.evaluate(() => { const f = window.__ed.house.floors[0]; f.openings.push({id: 'oc', type: 'window', wall: 'w1', pos: .3, w: 100, h: 120, sill: 90}); f.showDims = true; window.__ed.commit('f'); }); await p.waitForTimeout(200);
+            const pl = await p.$eval('.h-hs-dlg [data-hs-world]', el => ({room: el.querySelector('[data-hs="room:r2"] path').getAttribute('d'), txt: el.textContent, op: el.querySelector('[data-hs="opening:oc"]')?.getAttribute('transform')}));
+            assert.ok(pl.room.split('L').length > 8, 'le sol suit la courbe'); assert.match(pl.txt, /⌒ .* · flèche 80 cm/); await shot(p, 'maison-mur-courbe.png', '.h-hs-dlg [data-hs-stage]');
+            const [, ox] = pl.op.match(/translate\(([-\d.]+)/); assert.ok(Number(ox) > 1010, `la fenêtre est sur la courbe (${ox})`);
+            const sec = await p.evaluate(() => window.LCNDA_EXT.housePlus.sectionSvg(window.__ed.house, {a: [-100, 300], b: [1300, 300]})); assert.match(sec, /#bcd8e8/, 'la fenêtre du mur courbe dans la coupe');
         });
-        await t('navigateur : une personne dans une pièce, avec son rôle et ses années (accents gardés à l’enregistrement)', async () => {
+        await t('navigateur : les personnes d’une pièce — menu de choix à rôles (principales / secondaires), anciens rôles repris, années gardées', async () => {
             await blur();
-            await p.evaluate(() => { const rm = window.__ed.house.floors[0].rooms[0]; rm.people = [{id: 1, label: 'Marie Durand'}]; window.__ed.commit('p'); window.__ed.select('room', 'r1'); }); await p.waitForTimeout(200); await openAll();
-            await p.fill('.h-hs-dlg [data-hs-rprole="0"]', 'née ici, sa chambre'); await p.fill('.h-hs-dlg [data-hs-rpyears="0"]', '1890 – 1925'); await p.waitForTimeout(700);
+            await p.evaluate(() => { const rm = window.__ed.house.floors[0].rooms[0]; rm.people = [{id: 1, label: 'Marie Durand', role: 'née ici, sa chambre'}]; window.__ed.commit('p'); window.__ed.select('room', 'r1'); }); await p.waitForTimeout(200); await openAll();
+            const pk = await p.$eval('.h-hs-dlg [data-hs-rpk] .pk', el => ({roles: el.classList.contains('pk-roles'), txt: el.textContent, val: el.dataset.pkValue}));
+            assert.equal(pk.roles, true, 'le modèle à rôles'); assert.match(pk.txt, /Marie Durand/); assert.match(pk.val, /née ici, sa chambre/, 'l’ancien rôle texte est repris'); assert.match(pk.val, /"primary":true/, 'une ancienne personne devient principale');
+            await p.fill('.h-hs-dlg [data-hs-rpyears="0"]', '1890 – 1925'); await p.waitForTimeout(700); await blur();
+            await p.$eval('.h-hs-dlg [data-hs-rpk] .pk', el => el.dispatchEvent(new CustomEvent('picker-change', {bubbles: true, detail: {items: {main: null, people: [{kind: 'person', id: 1, title: 'Marie Durand', role: 'née ici, sa chambre', primary: true}, {kind: 'person', id: null, title: 'le curé Lafon', free: true, role: 'témoin', primary: false}]}}})));
+            await p.waitForTimeout(300);
+            const ppl = await p.evaluate(() => window.__ed.house.floors[0].rooms[0].people); assert.equal(ppl.length, 2); assert.equal(ppl[0].years, '1890 – 1925', 'les années restent'); assert.equal(ppl[1].free, true); assert.equal(ppl[1].primary, false); assert.equal(ppl[1].role, 'témoin');
+            await p.evaluate(() => { const rm = window.__ed.house.floors[0].rooms[0]; rm.people = rm.people.slice(0, 1); window.__ed.commit('p'); });
             await p.evaluate(() => window.__ed.save()); await p.waitForTimeout(800);
             const id = await p.evaluate(async () => { const r = await window.LCNDA_APP.api('houses'); return r.items.find(h => h.name === 'Maison de famille')?.id; });
             const back = await p.evaluate(async id => (await window.LCNDA_APP.api('house', {id})).house.floors[0].rooms[0].people[0], id);
@@ -203,6 +214,28 @@ const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJA
             await p.evaluate(() => window.__ed.view3d.stopWalk()); await p.evaluate(() => window.__ed.toggle3d(false)); await p.waitForTimeout(300);
             const svg = await p.$eval('.h-hs-dlg [data-hs-world]', el => el.innerHTML); assert.match(svg, /📷/); assert.match(svg, /La grange/, 'le voisin en pointillés'); assert.match(svg, />1<\/text>/, 'l’arrêt n° 1');
         });
+        await t('navigateur : 🎬 la vidéo de la visite guidée (sous-titres), exportée et rangée dans les médias', async () => {
+            await blur(); await p.evaluate(() => window.__ed.setTab('house')); await p.waitForTimeout(200); await openAll();
+            await p.click('.h-hs-dlg [data-hs-cmd="plus:tourvideo"]'); await p.waitForTimeout(300);
+            const lab = await p.evaluate(() => [...document.querySelectorAll('dialog[open]')].pop().textContent); assert.match(lab, /Exporter la vidéo en (MP4|WebM)/); assert.match(lab, /Ranger aussi une copie dans les médias/);
+            await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].pop(); d.querySelector('[name=size]').value = '1280x720'; });
+            posts.length = 0; const dl = p.waitForEvent('download', {timeout: 60000});
+            await p.evaluate(() => [...document.querySelectorAll('dialog[open]')].pop().querySelector('[type=submit]').click());
+            const d = await dl; assert.match(d.suggestedFilename(), /visite-guidee\.(mp4|webm)$/); const fp = path.join(tmp, d.suggestedFilename()); await d.saveAs(fp); assert.ok(fs.statSync(fp).size > 5000, `vidéo de ${fs.statSync(fp).size} octets`);
+            await p.waitForTimeout(1500); assert.ok(posts.some(u => /retouch_media/.test(u)), 'une copie dans les médias');
+            await p.evaluate(() => window.__ed.toggle3d(false)); await p.waitForTimeout(200);
+        });
+        await t('navigateur : toit plat — verrière, lanterneau, édicule (3D et coupe)', async () => {
+            await blur(); const keep = await p.evaluate(() => JSON.stringify(window.__ed.house.roof));
+            await p.evaluate(() => { const H2 = window.__ed.house; H2.roof = {on: true, shape: 'flat', items: []}; window.__ed.commit('plat'); window.__ed.setTab('floor'); }); await p.waitForTimeout(200);
+            await p.evaluate(() => { const d = document.querySelector('.h-hs-dlg [data-ui-section="hs-fl-roof"]'); if (d) d.open = true; });
+            for (const k of ['velux', 'shed', 'dormer']) { await p.click(`.h-hs-dlg [data-hs-cmd="roofit:${k}"]`); await p.waitForTimeout(150); }
+            const txt = await p.$eval('.h-hs-dlg [data-hs-pane]', el => el.textContent); assert.match(txt, /Verrière/); assert.match(txt, /Lanterneau/); assert.match(txt, /Édicule/);
+            await p.evaluate(() => { const b = [...document.querySelectorAll('.h-hs-dlg [data-hs-floor]')].find(x => /Combles/.test(x.textContent)); b.click(); }); await p.evaluate(() => window.__ed.toggle3d(true)); await p.waitForTimeout(1500); await p.evaluate(() => { const r = document.querySelector('.h-hs-dlg [data-h3="roof"]'); if (r && !r.checked) r.click(); }); await p.waitForTimeout(1200); await shot(p, 'maison-toit-plat.png', '.h-hs-dlg [data-hs-stage]'); await p.evaluate(() => window.__ed.toggle3d(false));
+            const sec = await p.evaluate(() => { const H2 = window.__ed.house, it = window.LCNDA_EXT.housePlus.roofItemsPlan(H2); const c = it[2].poly.reduce((a, q) => [a[0] + q[0] / 4, a[1] + q[1] / 4], [0, 0]); return window.LCNDA_EXT.housePlus.sectionSvg(H2, {a: [c[0], -200], b: [c[0], 1200]}); });
+            assert.match(sec, /#e9e1cf/, 'l’édicule dans la coupe');
+            await p.evaluate(k => { window.__ed.house.roof = JSON.parse(k); window.__ed.commit('toit'); }, keep);
+        });
         let shareFile = '';
         await t('navigateur : 📤 partager — un fichier qui s’ouvre sans l’app, sans personnes ni souvenirs, avec une CSP stricte', async () => {
             const html = await p.evaluate(async () => window.LCNDA_EXT.housePlus.shareHtml(window.__ed.house, {name: 'Maison de famille', plans: [{name: 'Rez', svg: '<svg xmlns="http://www.w3.org/2000/svg"></svg>'}]}));
@@ -225,6 +258,12 @@ const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJA
             const btns = await p.$$eval('#ms-root [data-ms-hbtns] button', l => l.map(b => [b.textContent.trim(), b.getBoundingClientRect().height]));
             assert.ok(btns.length >= 5, btns.map(b => b[0]).join(' | ')); assert.ok(btns.every(b => b[1] >= 64), 'cibles de 64 px');
             await p.click('#ms-root [data-act="hfloor"]'); await p.click('#ms-root [data-act="hleft"]'); await p.waitForTimeout(300);
+            await p.click('#ms-root [data-act="hwalk"]'); await p.waitForTimeout(400);
+            const pad = await p.$$eval('#ms-root [data-ms-hbtns] button', l => l.map(b => [b.dataset.act, b.getBoundingClientRect().height]));
+            assert.ok(['wfwd', 'wback', 'wleft', 'wright', 'wstop'].every(a => pad.some(x => x[0] === a)), pad.map(x => x[0]).join(' ')); assert.ok(pad.every(x => x[1] >= 64), 'cibles de 64 px');
+            await p.click('#ms-root [data-act="wright"]'); await p.waitForTimeout(400); await p.click('#ms-root [data-act="wfwd"]'); await p.waitForTimeout(500);
+            await shot(p, 'maison-mode-simple-promenade.png');
+            await p.click('#ms-root [data-act="wstop"]'); await p.waitForTimeout(300); assert.ok(await p.$('#ms-root [data-act="hwalk"]'), 'retour à la vue de la maison');
             await shot(p, 'maison-mode-simple.png');
             await p.click('#ms-root [data-act="back"]'); await p.waitForTimeout(400);
             assert.equal(await p.$$eval('#ms-root canvas', l => l.length), 0, 'la 3D est retirée en sortant'); assert.deepEqual(posts, [], 'aucun envoi au serveur');

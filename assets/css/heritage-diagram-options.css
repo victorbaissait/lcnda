@@ -3,6 +3,11 @@
 .h-dgo,.h-dg-app fieldset.h-dgo{display:grid;gap:8px;margin:4px 0 2px;padding:10px 12px 12px;border:1px solid var(--line,#d9dde3);border-radius:10px;background:var(--panel-soft,transparent);min-width:0}
 .h-dgo>legend,.h-dg-app fieldset.h-dgo>legend{padding:0 6px;font-weight:700;font-size:.92em;color:inherit}
 .h-dgo .h-dgo-row{display:grid;gap:3px;min-width:0}
+/* « Graphique » en tête des panneaux propres (heritage-diagram-graphique.js) */
+.h-dgg{display:grid;gap:3px;min-width:0;padding:8px 10px;border:1.5px solid var(--blue-soft,#dbe7ff);border-radius:8px;background:color-mix(in srgb,var(--blue,#0066cc) 5%,transparent)}
+.h-dgg>span{font-weight:700}
+.h-dgg select{width:100%;min-width:0;box-sizing:border-box}
+.h-dgg [data-dgg-hint]{font-size:.85em}
 .h-dgo .h-dgo-row[hidden],.h-dgo-legacy[hidden]{display:none !important}
 .h-dgo .h-dgo-sub{margin-left:12px;padding-left:10px;border-left:2px solid var(--blue-soft,#dbe7ff)}
 .h-dgo .h-dgo-lab{font-weight:600;font-size:.9em}
@@ -36,3 +41,4 @@
 :root[data-theme="dark"] .h-dgo .h-dgo-sub{border-left-color:#2c4a7a}
 :root[data-theme="dark"] .h-dgo .h-lr-row{background:#1f2328;border-color:#3a3f47;color:#e8eaed}
 :root[data-theme="dark"] .h-dgo .h-lr-row small{color:#b8bec7}
+:root[data-theme="dark"] .h-dgg{border-color:#2c4a7a;background:#1b2433}
