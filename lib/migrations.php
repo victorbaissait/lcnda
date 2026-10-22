@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 56;
+const SCHEMA_VERSION = 57;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -77,6 +77,7 @@ function migration_steps(): array
         54 => 'schema_v54',
         55 => 'schema_v55',
         56 => 'schema_v56',
+        57 => 'schema_v57',
     ];
 }
 
@@ -2223,4 +2224,13 @@ function schema_v56(PDO $pdo): void
 {
     if (!function_exists('audio_studio_schema')) { require_once __DIR__ . '/audio_studio.php'; }
     audio_studio_schema($pdo);
+}
+
+/** 📝 Traitement de texte (lib/textdocs.php, assets/js/heritage-traitement-texte.js) : les documents (lettre, récit, rapport…)
+ *  gardés en JSON (text_documents ; kind = 'doc' ou 'template' pour « Mes modèles » ; info = petit résumé pour la liste)
+ *  et leurs versions (text_document_versions : « Enregistrer comme nouvelle version », « Comparer »). */
+function schema_v57(PDO $pdo): void
+{
+    if (!function_exists('textdocs_schema')) { require_once __DIR__ . '/textdocs.php'; }
+    textdocs_schema($pdo);
 }

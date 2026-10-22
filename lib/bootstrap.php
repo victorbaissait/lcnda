@@ -34,6 +34,7 @@ require_once __DIR__ . '/topic_sheets.php'; // 📒 Fiches sur un sujet
 require_once __DIR__ . '/diagrams.php';
 require_once __DIR__ . '/vector.php';
 require_once __DIR__ . '/workbooks.php'; // 🧮 Tableur : les classeurs (Outils de modification)
+require_once __DIR__ . '/textdocs.php'; // 📝 Traitement de texte : les documents et leurs versions (Outils de modification)
 require_once __DIR__ . '/transcriptions.php'; // 📜 Transcription d'actes
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
 require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille

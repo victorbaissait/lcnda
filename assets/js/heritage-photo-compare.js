@@ -177,7 +177,10 @@
             canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + 'px'; canvas.style.height = H + 'px'; draw();
         }
         const filter = () => [st.gray ? 'grayscale(1)' : '', st.contrast !== 100 ? `contrast(${st.contrast}%)` : '', st.bright !== 100 ? `brightness(${st.bright}%)` : ''].filter(Boolean).join(' ') || 'none';
-        const dark = () => document.documentElement.dataset.theme === 'dark' || (!document.documentElement.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+        const dark = () => { // le fond réel de l'app (le thème « auto » peut rester clair quand l'Apparence fixe les couleurs)
+            const m = getComputedStyle(document.body).backgroundColor.match(/\d+(\.\d+)?/g);
+            if (m && m.length >= 3 && !(m.length > 3 && +m[3] === 0)) return (0.299 * m[0] + 0.587 * m[1] + 0.114 * m[2]) < 110;
+            return document.documentElement.dataset.theme === 'dark'; };
         function drawImg(i, S) { if (!S.img) return; ctx.save(); ctx.setTransform(new DOMMatrix().scale(dpr).multiply(fullM(i, S))); ctx.filter = filter(); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(S.img, 0, 0); ctx.restore(); }
         function drawEyes(i, S, color) {
             if (!S.img || !S.eyes) return; const m = fullM(i, S), iw = S.img.naturalWidth, ih = S.img.naturalHeight;

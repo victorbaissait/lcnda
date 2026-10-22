@@ -748,3 +748,30 @@ ext.audioExport({title, media, getBuffer, regions, lines, tracks, getTrack, toMe
 - **Base** : `audio_regions` (zones et marqueurs d’**un fichier précis** : media + filename), `audio_region_links` (personne, événement, rôle), `audio_transcripts` ; `audio_projects.data_json` garde rack, zones, multipiste, transcription. API : `audio_regions`, `save_audio_regions`, `person_audio_regions`, `audio_transcript`, `save_audio_transcript`, `audio_transcript_search`. Bloc de fiche : `heard` (« 🎧 On l’entend »).
 - **Menu de choix** : la sorte `event` (📅 événements) a été ajoutée pour relier un passage à un événement.
 - **Export** : `UI.openExportDialog` accepte maintenant `fields` (menus Qualité, Quoi, Canaux, Fréquence…, avec `show(format)`), `checks` et `onPick` ; un format peut avoir `copy: false` et `goLabel`.
+
+## 📝 Traitement de texte et moteur commun des documents (app-texte-engine.js, app-texte-formats.js, heritage-traitement-texte*.js, traitement-texte.css, lib/textdocs.php)
+
+Listes → 🛠️ Outils de modification → « 📝 Traitement de texte » : documents enregistrés dans `text_documents` (migration `schema_v57` ; `kind` : `doc` ou `template` pour « Mes modèles ») et leurs versions dans `text_document_versions` (200 au plus par document). API — GET : `textdocs`, `textdoc`, `textdoc_versions`, `textdoc_version`, `textdoc_people` (personnes pour le récit), `textdoc_tree` (petit arbre) ; POST : `save_textdoc` (`rev` : un enregistrement fait ailleurs entre-temps → conflit, la personne choisit), `rename_textdoc`, `delete_textdoc` (rend le document et ses versions, pour « ↶ Annuler »), `restore_textdoc`, `duplicate_textdoc`, `save_textdoc_version`, `delete_textdoc_version`, `restore_textdoc_version`, `textdoc_to_media` (copie .docx / .odt + vignette rangée dans les médias). Menu de choix : sortes `textdoc` (📝) et `workbook` (🧮).
+
+**Le moteur (`window.LCNDA_TEXT`, sans écran, testable dans Node)** — à utiliser pour tout texte mis en forme qui entre ou sort de l’app :
+
+```js
+const T = window.LCNDA_TEXT;
+const doc = T.newDoc({title});                // {v, title, meta, lang, set, page:{w,h,orient,m:{t,r,b,l},bg,wm}, header, footer, styles, comments, notes,
+                                              //  sections:[{page?, blocks:[{t:'p', st, lvl, list, align, runs:[{text, b, i, u, s, sup, sub, font, size, color, bg, href, note, field, tc, cm}]}, {t:'table'}, {t:'img'}, {t:'pb'}, {t:'toc'}, {t:'index'}, {t:'bib'}…]}]}
+T.htmlOf(section) ; T.blocksHtml(blocks) ; T.blockText(bloc) ; T.wordCount(doc) ; T.stylesCss(doc) ; T.styleSet('classique')
+await T.toDocx(doc) ; await T.fromDocx(arrayBuffer) ; await T.toOdt(doc) ; await T.fromOdt(arrayBuffer)   // → Blob ; ← {doc, notices}
+T.toRtf(doc) ; T.fromRtf(texte) ; T.toMarkdown(doc) ; T.fromMarkdown(texte) ; T.toText(doc) ; T.fromText(texte)
+await T.readFile(nom, arrayBuffer)            // devine le format ; refuse .doc, PDF, classeur, fichier > 60 Mo
+```
+
+- .docx / .odt écrits et relus par nous (ZIP de `LCNDA_SHEET`) : styles (noms de Word en français et en anglais compris), listes à niveaux, tableaux, images en ligne ou ancrées, notes de bas de page et de fin, en-têtes et pieds (première page à part), sections et colonnes, lettrine, liens, signets des personnes, commentaires, suivi des modifications, sommaire / index / bibliographie (champs que Word met à jour). Vérifiés avec LibreOffice, pandoc et python-docx.
+- Sûreté : XML sans DOCTYPE ni ENTITY, ZIP bornés (bombe zip), couleurs et polices filtrées (`col`, `fontOk`), liens limités à http(s), mailto et aux ancres du document.
+
+**L’éditeur** : `ext.openTextDoc({id})` ou `ext.openTextDoc({data, name, onSaved, onClose})` ; l’éditeur au premier plan : `ext.textDocKit.current` (les ouverts : `ext.textDocKit.open`). Une `section.wp-sec` par section : feuilles dessinées derrière (`.wp-sheet`, en-tête, pied, notes de la page, filigrane) et une seule zone `contenteditable` (`.wp-body`) ; la mise en pages pousse un bloc qui ne tient pas (`data-wp-push`, `--wp-push`) ; les notes de bas de page sont gardées en bas de leur page. ↶ ↷ : un instantané par étape, les paragraphes qui ne changent pas sont partagés (pas de limite). Commandes : `ed.run('nom')` (les mêmes que `data-wp-cmd` dans les menus et `heritage-editorkeys.js`, outil `textdoc`) ; outils ajoutés dans `ext.textDocTools` (insertions, panneaux, modèles `TEMPLATES`, `writeAbout(personne)`, `reportFromJournal`, `reportFromVisit`, `toLayout`).
+- HTML qui entre (collage Word / Google Docs / web, import, données enregistrées) : toujours `ext.textDocKit.cleanHtml` (liste blanche de balises, classes `wp-*` connues, styles filtrés) ; côté serveur `textdoc_defuse` et `textdoc_check` (taille, nombre de sections, résumé pour la vignette).
+- Impression et PDF : `ed.pagedHtml()` (chaque page comme à l’écran) → `UI.printDocument` / fenêtre E3 ; page web à part : `ed.htmlFile()`.
+- Réglages : `localStorage['genealogie-traitement-texte']` par `UI.autoSaveDialog` (K2) + « 💾 Réglages enregistrés » (`UI.presetsFrame`) ; barre et panneau rangés par ⚙️ Personnaliser.
+- Mode sombre : la feuille reste du papier blanc ; ses règles sombres sont écrites à la main dans `traitement-texte.css` pour que `build-dark-css.py` n’y touche pas.
+- Pas encore fait : couper un paragraphe entre deux pages (il passe entier à la page suivante), colonnes sur toute la page (ce sont des passages en colonnes équilibrées), filigrane dans le .docx / .odt, mise en forme dans le texte des notes.
+- Test : `tests/test-traitement-texte.js` (moteur, API, navigateur ; `TEXTE_SHOTS=dossier` pour les captures).

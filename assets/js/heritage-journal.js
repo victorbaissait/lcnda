@@ -107,7 +107,8 @@
         const header = UI().pageHeader({title: 'Journal des recherches', where: where === 'recherche' ? 'Recherche' : undefined,
             help: 'Tout ce que tu as déjà cherché, du plus récent au plus ancien : pour ne pas chercher deux fois au même endroit.',
             primary: '<button type="button" class="button" data-rj-new-digest>＋ Nouveau dépouillement</button>',
-            actions: ['<button type="button" class="button secondary" data-rj-csv>⤓ Exporter en CSV</button>', '<button type="button" class="button secondary" data-rj-visits>🗄️ Visites d’archives</button>']});
+            actions: ['<button type="button" class="button secondary" data-rj-csv>⤓ Exporter en CSV</button>', '<button type="button" class="button secondary" data-rj-visits>🗄️ Visites d’archives</button>'],
+            more: [ext.textDocTools ? '<button type="button" data-rj-report title="Un compte rendu des recherches montrées (avec les filtres), dans le traitement de texte">📝 Compte rendu</button>' : '']});
         ws.innerHTML = `<section class="page h-rj">${header}<div data-rj-bar></div><div data-rj-list>${UI().spinner('Chargement du journal…')}</div></section>`;
         let data;
         try { data = await A().api('research_journal'); } catch (e) { if (isCurrent()) ws.querySelector('[data-rj-list]').innerHTML = `<div class="ui-notice ui-notice-error" role="alert"><span class="ui-notice-ico" aria-hidden="true">⛔</span><span>${esc(e.message || 'Chargement impossible.')}</span></div>`; return; }
@@ -151,6 +152,7 @@
         paint();
         ws.querySelector('[data-rj-csv]')?.addEventListener('click', () => csvExport(filtered));
         ws.querySelector('[data-rj-visits]')?.addEventListener('click', () => { S().listType = 'archive_visits'; A().setModule('listes'); });
+        ws.querySelector('[data-rj-report]')?.addEventListener('click', () => ext.textDocTools?.reportFromJournal?.(filtered, KINDS)); // 📝 Traitement de texte
     }
     ext.researchJournal = token => renderJournal(token, 'recherche');
     ext.lists.research_journal = token => renderJournal(token, 'listes');

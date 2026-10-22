@@ -37,6 +37,8 @@
         oldmap: {sym: '🗺️', add: '＋ Ajouter une carte…', one: 'carte', fem: true, none: 'Aucune carte', label: '🗺️ Cartes'},
         act: {sym: '📜', add: '＋ Ajouter une transcription…', one: 'transcription', fem: true, none: 'Aucune transcription', label: '📜 Transcriptions'},
         photomap: {sym: '📸', add: '＋ Ajouter une carte de photos…', one: 'carte', fem: true, none: 'Aucune carte de photos', label: '📸 Cartes de photos'}, // lib/photomaps.php
+        workbook: {sym: '🧮', add: '＋ Ajouter un classeur…', one: 'classeur', none: 'Aucun classeur', label: '🧮 Classeurs'}, // lib/textdocs.php
+        textdoc: {sym: '📝', add: '＋ Ajouter un document…', one: 'document', none: 'Aucun document', label: '📝 Documents'}, // 📝 Traitement de texte
         digest: {sym: '📜', ph: 'Commune, cote, année… (2 lettres suffisent)', add: '🔗 Relier un dépouillement…', one: 'dépouillement', none: 'Aucun dépouillement', label: '📜 Dépouillements'}, // journal des recherches (lib/picker.php)
         contact: {sym: '📇', ph: 'Nom, prénom d’un contact… (2 lettres suffisent)', add: '＋ Ajouter un contact…', one: 'contact', none: 'Aucun contact', label: '📇 Contacts'}, // Répertoire des vivants (Questions aux proches)
         mylist: {sym: '📋', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📋 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme

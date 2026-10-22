@@ -643,7 +643,7 @@
             catch (e) { if (isErr(e)) v = e; else if (e instanceof RangeError) v = err('#TROP!', 'la formule demande trop de calculs'); else throw e; }
             finally { this.computing.delete(key); }
             if (v instanceof RangeVal) v = v.h === 1 && v.w === 1 ? v.get(0, 0) : new SArr(Array.from({length: Math.min(v.h, 5000)}, (_, i) => Array.from({length: v.w}, (_, j) => v.get(i, j))));
-            if (typeof v === 'number' && !Number.isFinite(v)) v = Number.isNaN(v) ? err('#NOMBRE!', {why: 'le calcul n’a pas de résultat'}) : err('#DIV/0!', {why: 'le résultat est infini'});
+            if (typeof v === 'number' && !Number.isFinite(v)) v = Number.isNaN(v) ? err('#NOMBRE!', {why: 'le calcul n’a pas de résultat'}) : err('#NOMBRE!', {why: 'le résultat est trop grand pour être calculé'});
             this.clearSpill(key);
             if (v instanceof SArr) v = this.placeSpill(key, v);
             if (ctx.approx) this.approx.add(key); else this.approx.delete(key);

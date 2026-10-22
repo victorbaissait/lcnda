@@ -387,6 +387,12 @@ try {
         'vector_doc' => json_response(vector_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
         'workbooks' => json_response(['items' => workbooks_list($pdo, (string) ($_GET['kind'] ?? 'book'))]), // 🧮 Tableur (lib/workbooks.php)
         'workbook' => json_response(workbook_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'textdocs' => json_response(['items' => textdocs_list($pdo, (string) ($_GET['kind'] ?? 'doc'))]), // 📝 Traitement de texte (lib/textdocs.php)
+        'textdoc' => json_response(textdoc_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'textdoc_versions' => json_response(['items' => textdoc_versions($pdo, safe_int($_GET['doc_id'] ?? 0))]),
+        'textdoc_version' => json_response(textdoc_version($pdo, safe_int($_GET['id'] ?? 0))),
+        'textdoc_people' => json_response(['people' => (object) textdoc_people($pdo, explode(',', (string) ($_GET['ids'] ?? '')))]),
+        'textdoc_tree' => json_response(textdoc_tree($pdo, safe_int($_GET['id'] ?? 0), safe_int($_GET['gens'] ?? 3))),
         'houses' => json_response(['items' => houses_list($pdo)]),
         'house' => json_response(house_get($pdo, safe_int($_GET['id'] ?? 0))),
         'house_links' => json_response(['items' => house_links_lookup($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['census_id'] ?? 0))]),
@@ -9581,6 +9587,15 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'rename_workbook' => rename_workbook($pdo,$data),
             'delete_workbook' => delete_workbook($pdo,$data),
             'duplicate_workbook' => duplicate_workbook($pdo,$data),
+            'save_textdoc' => save_textdoc($pdo,$data), // 📝 Traitement de texte
+            'rename_textdoc' => rename_textdoc($pdo,$data),
+            'delete_textdoc' => delete_textdoc($pdo,$data),
+            'restore_textdoc' => restore_textdoc($pdo,$data),
+            'duplicate_textdoc' => duplicate_textdoc($pdo,$data),
+            'save_textdoc_version' => save_textdoc_version($pdo,$data),
+            'delete_textdoc_version' => delete_textdoc_version($pdo,$data),
+            'restore_textdoc_version' => restore_textdoc_version($pdo,$data),
+            'textdoc_to_media' => textdoc_to_media($pdo,$data),
             'save_dna_kit' => save_dna_kit($pdo,$data),
             'delete_dna_kit' => delete_dna_kit($pdo,$data),
             'save_dna_match' => save_dna_match($pdo,$data),

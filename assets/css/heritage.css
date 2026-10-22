@@ -4500,7 +4500,8 @@ canvas.is-picking{cursor:crosshair}
 .h-td-fpick { flex: 1 1 260px; min-width: 0; }
 .h-td-linked { color: #2f7d4f; font-weight: 600; }
 @media (max-width: 860px) {
-  .h-td-s1, .h-td-s4 { grid-template-columns: 1fr; }
+  .h-td-s1, .h-td-s4 { grid-template-columns: minmax(0, 1fr); }
+  .h-td-s1-form, .h-td-s1-form > *, .h-td-s1-form label > * { min-width: 0; }
   .h-td-s4-img { max-height: 32vh; }
   .h-td-fiche { grid-template-columns: 1fr; }
   .h-td-gridwrap { max-height: none; overflow-x: auto; }

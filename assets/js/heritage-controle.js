@@ -396,7 +396,7 @@
         ws.querySelectorAll('[data-ctl-date]').forEach(inp => {
             const save = async () => {
                 const v = inp.value.trim(); if (v === inp.dataset.was) return;
-                const chk = UI().readDate?.(v); if (v && chk && !chk.ok) return UI().fail(inp, `⛔ ${chk.text || 'Date impossible'}`);
+                const chk = UI().readDate?.(v); if (v && chk && !chk.ok) return UI().fail(inp, chk.text || 'Date impossible');
                 try {
                     const eid = Number(inp.dataset.ctlDate), was = inp.dataset.was;
                     await api('controle_fix_date', {}, {method: 'POST', body: {event_id: eid, date_text: v}});
@@ -459,9 +459,9 @@
         ws.querySelectorAll('[data-ctl-seuil]').forEach(inp => inp.addEventListener('change', () => {
             const k = inp.dataset.ctlSeuil, prev = {...vals}, v = Number(inp.value);
             if (v === Number(prev[k])) return;
-            clearTimeout(timer); timer = setTimeout(() => save({...vals, [k]: v}, `${label(k)} : ${String(prev[k]).replace('.', ',')} → ${String(v).replace('.', ',')} ${bounds[k] ? (SEUILS.flatMap(s => s[1]).find(r => r[0] === k)?.[3] || '') : ''}`, prev), 150);
+            clearTimeout(timer); timer = setTimeout(() => save({[k]: v}, `${label(k)} : ${String(prev[k]).replace('.', ',')} → ${String(v).replace('.', ',')} ${bounds[k] ? (SEUILS.flatMap(s => s[1]).find(r => r[0] === k)?.[3] || '') : ''}`, {[k]: prev[k]}), 150); // seulement ce seuil : un autre onglet garde les siens
         }));
-        ws.querySelector('[data-ctl-banner]').addEventListener('change', e => { const prev = {...vals}; save({...vals, banner: e.target.value}, `Bandeau sur la fiche : ${e.target.selectedOptions[0].textContent}`, prev); });
+        ws.querySelector('[data-ctl-banner]').addEventListener('change', e => { const prev = {banner: vals.banner}; save({banner: e.target.value}, `Bandeau sur la fiche : ${e.target.selectedOptions[0].textContent}`, prev); });
         ws.querySelector('[data-ctl-reset]').addEventListener('click', async () => { const prev = {...vals}; const def = Object.fromEntries(Object.entries(bounds).map(([k, b]) => [k, b[0]])); await save({...def, banner: 'all'}, 'Seuils remis comme au départ', prev); ext.maintenance.controle_seuils(++S().workspaceToken); });
         ws.querySelector('[data-ctl-go]').addEventListener('click', e => { e.preventDefault(); goControle(filt()); });
     };
@@ -527,7 +527,7 @@
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         const f1 = v => v === null || v === undefined ? '—' : Number(v).toLocaleString('fr-FR', {maximumFractionDigits: 1});
         A().$('#workspace').innerHTML = `<section class="page">${UI().pageHeader({where: 'Graphiques · Statistiques', title: 'Moyennes de la famille', icon: '📊', help: 'Âge au mariage et écart entre les naissances, par quart de siècle. Repères en France : au XVIIIe siècle, les femmes se marient vers 25-26 ans et les hommes vers 27-28 ans ; un enfant naît en moyenne tous les 24 à 30 mois.'})}
-            ${(d.periods || []).length ? `<table class="data-table"><thead><tr><th>Période</th><th>Âge au mariage des hommes</th><th>des femmes</th><th>Mariages</th><th>Écart entre naissances</th></tr></thead><tbody>${d.periods.map(r => `<tr><td>${esc(r.period)}</td><td>${r.men !== null ? f1(r.men) + ' ans' : '—'}</td><td>${r.women !== null ? f1(r.women) + ' ans' : '—'}</td><td>${fmt(r.n)}</td><td>${r.spacing !== null ? f1(r.spacing) + ' mois' : '—'}${r.spacing_n ? ` <small class="muted">(${r.spacing_n})</small>` : ''}</td></tr>`).join('')}</tbody></table>` : A().emptyState({icon: '📊', text: 'Pas assez de dates', hint: 'Il faut des mariages et des naissances datés pour calculer ces moyennes.'})}</section>`;
+            ${(d.periods || []).length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Période</th><th>Âge au mariage des hommes</th><th>des femmes</th><th>Mariages</th><th>Écart entre naissances</th></tr></thead><tbody>${d.periods.map(r => `<tr><td>${esc(r.period)}</td><td>${r.men !== null ? f1(r.men) + ' ans' : '—'}</td><td>${r.women !== null ? f1(r.women) + ' ans' : '—'}</td><td>${fmt(r.n)}</td><td>${r.spacing !== null ? f1(r.spacing) + ' mois' : '—'}${r.spacing_n ? ` <small class="muted">(${r.spacing_n})</small>` : ''}</td></tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '📊', text: 'Pas assez de dates', hint: 'Il faut des mariages et des naissances datés pour calculer ces moyennes.'})}</section>`;
     };
 
     /* ═══════════ Entretien : « Supprimer les familles vides » (venu de l'ancien écran Incohérences) ═══════════ */

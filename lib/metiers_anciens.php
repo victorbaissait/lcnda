@@ -211,9 +211,9 @@ function trades_list(PDO $pdo, array $q): array
 /** POST save_old_trade : {key, notes, sheet_id, media_ids} */
 function trade_save(PDO $pdo, array $d): array
 {
-    $key = trim((string) ($d['key'] ?? ''));
+    $key = is_scalar($d['key'] ?? null) ? trim((string) $d['key']) : '';
     if (!preg_match('/^[a-z0-9-]{2,90}$/', $key) || (!isset(trades_dict()['by'][$key]) && !str_starts_with($key, 'perso-'))) { throw new RuntimeException('Métier introuvable.'); }
-    $notes = mb_substr(trim(str_replace("\r", '', (string) ($d['notes'] ?? ''))), 0, 20000);
+    $notes = mb_substr(trim(str_replace("\r", '', is_scalar($d['notes'] ?? null) ? (string) $d['notes'] : '')), 0, 20000);
     $sheet = safe_int($d['sheet_id'] ?? 0) ?: null;
     if ($sheet) { $s = $pdo->prepare('SELECT id FROM topic_sheets WHERE id=?'); $s->execute([$sheet]); if (!$s->fetchColumn()) { $sheet = null; } }
     $ids = array_slice(array_values(array_unique(array_filter(array_map('intval', is_array($d['media_ids'] ?? null) ? $d['media_ids'] : explode(',', (string) ($d['media_ids'] ?? '')))))), 0, 60);

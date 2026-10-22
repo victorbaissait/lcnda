@@ -402,7 +402,7 @@
                     dg.addEventListener('close', () => finish(null));
                     setTimeout(() => $('[data-sc-pane="base"] .pk-input')?.focus(), 30);
                 },
-                onSubmit: () => {
+                onSubmit: f => {
                     const out = [
                         ...picks.base.map(it => ({target: it.kind === 'graph' ? `mygraph:${it.uid}` : `${it.kind === 'animal' ? 'person' : it.kind}:${Number(it.id)}`, label: '', name: str(it.title, 120)})),
                         ...[...picks.screens.values()].map(r => ({target: r.target, label: '', name: str(r.label, 120)})),

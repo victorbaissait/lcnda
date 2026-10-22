@@ -100,7 +100,7 @@ function workbook_get(PDO $pdo, int $id): array
     workbook_ready($pdo);
     $s = $pdo->prepare('SELECT * FROM workbooks WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
     if (!$r) { throw new RuntimeException('Classeur introuvable.'); }
-    return ['id' => (int) $r['id'], 'name' => (string) $r['name'], 'kind' => (string) $r['kind'], 'data' => json_decode((string) $r['data_json'], true) ?: new stdClass(), 'updated_at' => $r['updated_at'], 'created_at' => $r['created_at']];
+    return ['id' => (int) $r['id'], 'name' => (string) $r['name'], 'kind' => (string) $r['kind'], 'data' => json_decode((string) $r['data_json'], true) ?: new stdClass(), 'updated_at' => $r['updated_at'], 'created_at' => $r['created_at'], 'rev' => content_rev((string) $r['data_json'])];
 }
 
 function save_workbook(PDO $pdo, array $data): array
@@ -114,6 +114,13 @@ function save_workbook(PDO $pdo, array $data): array
     if ($json === false || strlen($json) > WORKBOOK_MAX) { throw new RuntimeException('Classeur trop lourd (plus de 40 Mo) : partage-le en plusieurs classeurs.'); }
     $infoJson = json_encode($info, JSON_UNESCAPED_UNICODE) ?: '{}';
     if ($id > 0) {
+        // deux onglets sur le même classeur : on n'écrase pas sans le dire ce que l'autre a enregistré entre-temps (409, « Recharger / Garder ma version »)
+        if (isset($data['base_rev']) && is_string($data['base_rev']) && $data['base_rev'] !== '' && empty($data['force'])) {
+            $c = $pdo->prepare('SELECT data_json FROM workbooks WHERE id=?'); $c->execute([$id]); $now = $c->fetchColumn();
+            if ($now !== false && content_rev((string) $now) !== $data['base_rev'] && (string) $now !== $json) {
+                throw new LcndaConflict('Ce classeur a été modifié dans une autre fenêtre depuis que tu l’as ouvert.');
+            }
+        }
         $s = $pdo->prepare('UPDATE workbooks SET name=?, kind=?, data_json=?, info_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?'); $s->execute([$name, $kind, $json, $infoJson, $id]);
         if (!$s->rowCount()) { throw new RuntimeException('Classeur introuvable.'); }
     } else {
@@ -122,7 +129,7 @@ function save_workbook(PDO $pdo, array $data): array
     }
     log_change($pdo, 'meta', 0, 'update', ($kind === 'template' ? 'Modèle de classeur enregistré : ' : 'Classeur enregistré : ') . $name);
     $u = $pdo->prepare('SELECT updated_at FROM workbooks WHERE id=?'); $u->execute([$id]);
-    return ['id' => $id, 'updated_at' => $u->fetchColumn()];
+    return ['id' => $id, 'updated_at' => $u->fetchColumn(), 'rev' => content_rev($json)];
 }
 
 function rename_workbook(PDO $pdo, array $data): array

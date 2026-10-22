@@ -463,7 +463,7 @@
                 let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
                 const guess = [x.first_name, x.last_name].filter(Boolean).join(' ');
                 let picker = null;
-                dialog({eyebrow: 'PERSONNE RELEVÉE', title: guess || 'Rattacher à une fiche', submitLabel: 'Relier',
+                dialog({eyebrow: 'PERSONNE RELEVÉE', title: guess || 'Relier à une fiche', submitLabel: 'Relier',
                     body: `<p class="muted">Choisis la fiche de cette personne : elle sera rattachée à ce relevé (et au recensement de la fiche).</p>` + ext.personPickerHtml({guess, createLabel: `Créer la fiche « ${esc(guess || 'sans nom')} » (marquée à vérifier)`}),
                     onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true}); picker = ext.bindPersonPicker(d); },
                     onSubmit: async form => {

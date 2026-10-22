@@ -74,9 +74,10 @@
     async function openWorkbook(ctx = {}) {
         if (!X()) return toast('Le moteur du tableur n’est pas chargé.', 'error');
         let id = 0, name = ctx.name || 'Mon classeur', kind = ctx.kind === 'template' ? 'template' : 'book', wb;
-        if (ctx.id) { try { const r = await api('workbook', {id: ctx.id}); id = r.id; name = r.name; kind = r.kind; wb = X().normalize(r.data); } catch (e) { return toast(e.message, 'error'); } }
+        let rev = '';
+        if (ctx.id) { try { const r = await api('workbook', {id: ctx.id}); id = r.id; name = r.name; kind = r.kind; rev = r.rev || ''; wb = X().normalize(r.data); } catch (e) { return toast(e.message, 'error'); } }
         else wb = X().normalize(ctx.data || X().newWorkbook());
-        return new Editor({...ctx, id, name, kind, wb}).open();
+        return new Editor({...ctx, id, name, kind, wb, rev}).open();
     }
     ext.openWorkbook = openWorkbook;
     ext.openSheetEditor = openWorkbook; // le nom prévu par la maquette (vague 2 : openSheetEditor({data, columns, onSave}))
@@ -84,7 +85,7 @@
     /* ═════════ L'éditeur ═════════ */
     class Editor {
         constructor(o) {
-            Object.assign(this, {id: o.id, name: o.name, kind: o.kind, wb: o.wb, ctx: o});
+            Object.assign(this, {id: o.id, name: o.name, kind: o.kind, wb: o.wb, ctx: o, rev: o.rev || ''});
             this.si = Math.max(0, Math.min(this.wb.sheets.length - 1, this.wb.active || 0));
             this.calc = new (X().Calc)(this.wb);
             this.undoStack = []; this.redoStack = []; this.tx = null; this.dirty = !!o.data && !o.id; this.savedAt = 0;
@@ -1356,16 +1357,26 @@
         },
 
         /* ═════════ Enregistrer, fermer ═════════ */
-        async save({asNew = false, kind = this.kind, name = this.name} = {}) {
+        async save({asNew = false, kind = this.kind, name = this.name, force = false} = {}) {
             const S = X(); this.wb.active = this.si;
             UI()?.savedStatus?.(this.dlg, 'saving');
             try {
-                const r = await post('save_workbook', {id: asNew ? 0 : this.id, name, kind, data: S.compact(this.wb)}), id = Number(r.result?.id || 0);
-                if (!asNew) { const first = !this.id; this.id = id; this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved'); if (first) toast('Rangé dans Listes → Outils de modification → 🧮 Tableur.'); }
+                const own = !asNew && this.id;
+                const r = await post('save_workbook', {id: asNew ? 0 : this.id, name, kind, data: S.compact(this.wb), ...(own && this.rev ? {base_rev: this.rev} : {}), ...(force ? {force: 1} : {})}), id = Number(r.result?.id || 0);
+                if (!asNew) { const first = !this.id; this.id = id; this.rev = r.result?.rev || ''; this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved'); if (first) toast('Rangé dans Listes → Outils de modification → 🧮 Tableur.'); }
                 else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(kind === 'template' ? `Modèle « ${name} » enregistré (Partir d’un modèle → Mes modèles).` : `Copie « ${name} » enregistrée.`); }
                 this.ctx.onSaved?.(this.id);
                 return id;
-            } catch (e) { UI()?.savedStatus?.(this.dlg, 'error'); toast(`Impossible d’enregistrer : ${e.message}`, 'error', {retry: () => this.save({asNew, kind, name})}); return 0; }
+            } catch (e) {
+                UI()?.savedStatus?.(this.dlg, 'error');
+                if (e.conflict && !asNew) { // un autre onglet a enregistré ce classeur entre-temps
+                    const choice = await (A().conflictBox?.({what: 'Ce classeur'}) ?? Promise.resolve(null));
+                    if (choice === 'overwrite') return this.save({asNew, kind, name, force: true});
+                    if (choice === 'reload') { const keep = this.id; this.dirty = false; this.dlg.close(); setTimeout(() => openWorkbook({...this.ctx, id: keep, data: undefined}), 50); }
+                    return 0;
+                }
+                toast(`Impossible d’enregistrer : ${e.message}`, 'error', {retry: () => this.save({asNew, kind, name})}); return 0;
+            }
         },
         saveAs(template = false) {
             A().askText({title: template ? 'Enregistrer comme modèle' : 'Enregistrer une copie', message: template ? 'Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) :' : 'Le nom de la copie :', value: template ? this.name : `${this.name} (copie)`, okLabel: 'Enregistrer'}).then(n => { n = String(n || '').trim(); if (n) this.save({asNew: true, kind: template ? 'template' : 'book', name: n.slice(0, 200)}); });

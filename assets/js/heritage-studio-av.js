@@ -1047,7 +1047,7 @@
             bar: {icon: '🎬', undo: '<span class="ui-topbar-hist"><button type="button" class="icon-button small" data-mt-cmd="undo" data-mt-op="undo" title="Annuler (⌘Z)" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-mt-cmd="redo" data-mt-op="redo" title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z" disabled>↷</button></span>', exportAttrs: 'data-mt-export', saveAttrs: 'data-mt-saveproj', saveTitle: 'Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S)'}, onClose: async () => { eng?.pause(); return !dirty || await A().confirmBox('💾 Enregistrer le projet le garde pour plus tard.', {title: 'Fermer sans enregistrer le projet ?', okLabel: 'Fermer sans enregistrer', danger: true}); },
             body: `<div class="h-mt">
                 <div class="h-mt-top">
-                    <div class="h-mt-stage"><canvas data-mt-canvas width="1280" height="720"></canvas><p class="h-mt-empty" data-mt-empty hidden>Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ➕ Vidéo / photo à la suite »).</p></div>
+                    <div class="h-mt-stage"><canvas data-mt-canvas width="1280" height="720"></canvas><p class="h-mt-empty" data-mt-empty hidden>Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »).</p></div>
                     <div class="h-mt-split" data-mt-split title="Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ)"></div>
                     <aside class="h-mt-side">
                         <div class="h-rt-tabs" data-tbg="mt-tabs" data-tbg-label="Onglets de droite"><button type="button" data-mt-tab="rush" title="Les vidéos, photos et sons du projet">🎞️ Rush</button><button type="button" class="is-active" data-mt-tab="item">🎯 Élément</button><button type="button" data-mt-tab="color">🎨 Couleurs</button><button type="button" data-mt-tab="sound">🔊 Son</button><button type="button" data-mt-tab="film">🎞️ Film</button></div>
@@ -1069,12 +1069,12 @@
                     <button type="button" class="button small secondary" data-mt-op="right" title="Reculer le morceau dans la piste 1">Reculer →</button>
                     <button type="button" class="button small secondary" data-mt-op="detach" title="Le son du morceau passe sur une piste son, à part">🔊 Détacher le son</button>
                     <button type="button" class="button small secondary" data-mt-op="del" title="Enlever l'élément choisi" data-shortcut="⌫">🗑 Enlever</button>
-                    <button type="button" class="button small" data-mt-op="addv1" title="Une vidéo ou une photo, à la suite dans la piste Vidéo 1">➕ Vidéo / photo à la suite</button>
-                    <button type="button" class="button small secondary" data-mt-op="addv2" title="Une vidéo ou une photo dans un coin de l'image, à la tête de lecture">➕ Incrustation</button>
+                    <button type="button" class="button small" data-mt-op="addv1" title="Une vidéo ou une photo, à la suite dans la piste Vidéo 1">＋ Vidéo / photo à la suite</button>
+                    <button type="button" class="button small secondary" data-mt-op="addv2" title="Une vidéo ou une photo dans un coin de l'image, à la tête de lecture">＋ Incrustation</button>
                     <button type="button" class="button small secondary" data-mt-op="kfprev" title="Aller à l'image clé précédente de l'élément choisi">◀ ◆</button>
                     <button type="button" class="button small secondary" data-mt-op="kfnext" title="Aller à l'image clé suivante de l'élément choisi">◆ ▶</button>
-                    <button type="button" class="button small secondary" data-mt-op="addtext">➕ Titre / texte</button>
-                    <button type="button" class="button small secondary" data-mt-op="adda">➕ Son / musique</button>
+                    <button type="button" class="button small secondary" data-mt-op="addtext">＋ Titre / texte</button>
+                    <button type="button" class="button small secondary" data-mt-op="adda">＋ Son / musique</button>
                     <button type="button" class="button small secondary" data-mt-op="voice" title="Enregistre ta voix au micro pendant que le film défile (casque conseillé)">🎙 Voix off</button>
                     <button type="button" class="button small secondary" data-mt-op="sub" title="Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres »">💬 Sous-titre ici</button>
                     <button type="button" class="button small secondary" data-mt-op="chapter" title="Un chapitre commence à la tête de lecture">🔖 Chapitre ici</button>
@@ -1704,7 +1704,7 @@
             if (so.kind === 'audio' && kind !== 'a') return toast('Un son se pose sur une piste son.', 'error');
             if (so.kind === 'image' && kind === 'a') return toast('Une photo se pose sur une piste vidéo.', 'error');
             if (so.kind === 'video' && kind === 'a') return placeRush(s, lane.dataset.mtLane, at); // une vidéo sur une piste son : seulement son son
-            if (kind === 't') return toast('Une piste texte reçoit des titres (« ➕ Titre / texte »).', 'error');
+            if (kind === 't') return toast('Une piste texte reçoit des titres (« ＋ Titre / texte »).', 'error');
             placeRush(s, kind === 'main' ? 'v1' : kind === 'a' ? lane.dataset.mtLane : lane?.dataset.mtLane || 'v2', at);
         });
         /* ── 🔖 Chapitres, 💬 sous-titres, 🎙 voix off, 🪄 modèles ── */
@@ -1889,7 +1889,7 @@
         const MT_MENUS = [
             ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '⤓ Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫']]],
-            ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '⤒ Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
+            ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '＋ Vidéo / photo à la suite'], ['op:addv2', '＋ Incrustation'], ['op:addtext', '＋ Titre / texte'], ['op:adda', '＋ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '⤒ Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
             ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante'], ['-'], ['snap', '🧲 Aimanter (marche / arrêt)']]],
             ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['full', '⛶ Plein écran']]],

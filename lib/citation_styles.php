@@ -73,6 +73,13 @@ function cite_act(array $c, string $style): string
     return $style === 'ee' ? 'no. ' . $a : 'acte n° ' . $a;
 }
 
+/** Une date de consultation (« 23 juin 2026 », « 2026-06-23 », « 23/06/2026 », « juin 2026 », « 2026 ») et pas une autre mention. */
+function cite_is_date(string $s): bool
+{
+    $s = trim($s);
+    return $s !== '' && (bool) preg_match('/^(le\s+)?(\d{1,2}(er)?\s+\p{L}+\.?\s+\d{4}|\d{4}-\d{1,2}(-\d{1,2})?|\d{1,2}[\/.]\d{1,2}[\/.]\d{2,4}|\p{L}+\.?\s+\d{4}|\d{4})$/u', $s);
+}
+
 /**
  * Les éléments d'une citation, à plat. $src : ligne de sources (+ service relié), $c : citation_json décodé,
  * $ctx : ['page', 'what' (Naissance), 'who' (Jean MARTIN), 'date' (7 mai 1825), 'place' (Tulle), 'url'].
@@ -175,13 +182,17 @@ function cite_format(array $p): array
         $out['forum'] = ['note' => cite_join([$subject !== '' ? cite_subject($p, true) : '', 'Source : témoignage de ' . $who . ($p['date'] !== '' ? ' (' . $p['date'] . ')' : '')], ' — '), 'biblio' => 'Témoignage de ' . $who];
     } else { // internet
         $site = $p['publisher'];
+        // « consulté le » seulement devant une vraie date : la case peut aussi tenir une publication ou une cote (import GEDCOM PUBL…)
+        $seen = cite_is_date($p['date']);
+        $frSeen = $p['date'] === '' ? '' : ($seen ? 'consulté le ' . $p['date'] : $p['date']);
+        $eeSeen = $p['date'] === '' ? '' : ($seen ? 'accessed ' . $p['date'] : $p['date']);
         $frAuthor = $a['org'] !== '' ? $a['org'] : cite_join([cite_upper($a['last']), $a['first']], ' ');
-        $out['fr'] = ['note' => cite_end(cite_join([$frAuthor, $p['title'] !== '' ? '« ' . $p['title'] . ' »' : '', $site, $page, $subject !== '' ? '(' . $subject . ')' : '', $p['url'] !== '' ? 'en ligne : ' . $p['url'] : '', $p['date'] !== '' ? 'consulté le ' . $p['date'] : ''])),
+        $out['fr'] = ['note' => cite_end(cite_join([$frAuthor, $p['title'] !== '' ? '« ' . $p['title'] . ' »' : '', $site, $page, $subject !== '' ? '(' . $subject . ')' : '', $p['url'] !== '' ? 'en ligne : ' . $p['url'] : '', $frSeen])),
             'biblio' => cite_end(cite_join([$frAuthor, $p['title'] !== '' ? '« ' . $p['title'] . ' »' : '', $site, $p['url']]))];
         $eeAuthor = $a['org'] !== '' ? $a['org'] : cite_join([$a['first'], $a['last']], ' ');
-        $out['ee'] = ['note' => cite_end(cite_join([cite_join([$eeAuthor, $p['title'] !== '' ? '"' . $p['title'] . ',"' : ''], ', '), cite_join([$site, $p['url'] !== '' || $p['date'] !== '' ? '(' . cite_join([$p['url'], $p['date'] !== '' ? 'accessed ' . $p['date'] : ''], ' : ') . ')' : ''], ' '), $page, $subject], ' ')),
+        $out['ee'] = ['note' => cite_end(cite_join([cite_join([$eeAuthor, $p['title'] !== '' ? '"' . $p['title'] . ',"' : ''], ', '), cite_join([$site, $p['url'] !== '' || $p['date'] !== '' ? '(' . cite_join([$p['url'], $eeSeen], ' : ') . ')' : ''], ' '), $page, $subject], ' ')),
             'biblio' => cite_end(cite_join([$eeAuthor, $p['title'] !== '' ? '"' . $p['title'] . '."' : '', $site, $p['url']], ' '))];
-        $out['chicago'] = ['note' => cite_end(cite_join([$eeAuthor, $p['title'] !== '' ? '« ' . $p['title'] . ' »' : '', $site, $page, $p['date'] !== '' ? 'consulté le ' . $p['date'] : '', $p['url']])),
+        $out['chicago'] = ['note' => cite_end(cite_join([$eeAuthor, $p['title'] !== '' ? '« ' . $p['title'] . ' »' : '', $site, $page, $frSeen, $p['url']])),
             'biblio' => cite_end(cite_join([$a['org'] !== '' ? $a['org'] : cite_join([$a['last'], $a['first']]), $p['title'] !== '' ? '« ' . $p['title'] . ' »' : '', $site, $p['url']], '. '))];
         $out['forum'] = ['note' => cite_join([$subject !== '' ? cite_subject($p, true) : '', 'Source : ' . cite_join([$site, $p['title'], $page]), $p['url'] !== '' ? 'lien : ' . $p['url'] : ''], ' — '),
             'biblio' => cite_join([$site, $p['title'], $p['url']])];

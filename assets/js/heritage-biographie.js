@@ -123,6 +123,7 @@
                     toast('Fiche créée', '', {action: {label: '↗ Ouvrir', run: () => { A().state.ficheId = Number(r.id); A().setModule('fiches'); }}});
                 } catch (e) { toast(e.message, 'error'); } }},
             {icon: '📐', label: 'Dans un livre (mise en page)', run: () => { if (ext.layoutTemplates?.wizard) ext.layoutTemplates.wizard(() => {}, 'bio', pid); else toast('La mise en page n’est pas encore prête.', 'error'); }},
+            {icon: '📝', label: 'Dans le traitement de texte (récit à compléter)', run: () => { if (ext.textDocTools?.writeAbout) ext.textDocTools.writeAbout(pid); else toast('Le traitement de texte n’est pas encore prêt.', 'error'); }},
             {icon: '🎞️', label: 'Dans une présentation (✨ Récit d’une vie)', run: () => { const b = document.createElement('button'); b.hidden = true; b.dataset.ssStoryPerson = String(pid); document.body.appendChild(b); b.click(); b.remove(); }},
             '-',
             {icon: '📋', label: 'Copier le texte', run: async () => { try { await navigator.clipboard.writeText(d.text); toast('Texte copié : colle-le où tu veux.'); } catch (_) { toast('Copie impossible dans ce navigateur.', 'error'); } }},

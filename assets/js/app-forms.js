@@ -85,7 +85,7 @@
     /** Marque un champ ; renvoie l'encadré (ou null si le champ est introuvable : le message part alors en toast). */
     function fieldError(field, message, {scope = null, toastIfMissing = true} = {}) {
         const el = resolve(field, scope);
-        const text = String(message ?? '').trim() || 'À corriger.';
+        const text = String(message ?? '').trim().replace(/^⛔\s*/u, '') || 'À corriger.'; // le ⛔ est déjà dessiné devant
         if (!el) { if (toastIfMissing) toast(text, 'error'); return null; }
         const box = boxOf(el), form = formOf(el) || formOf(box);
         if (box.classList.contains(BAD) && box._uiErrMsg) { box._uiErrMsg.querySelector('span').textContent = text; }
