@@ -1,0 +1,781 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suivi des animaux</title>
+<link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+*{box-sizing:border-box}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px;max-width:1180px;line-height:1.5}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px 30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;min-width:0}
+.case.full{grid-column:1/-1}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.note{font-size:12.5px;color:#555;margin-top:14px;line-height:1.5}
+.muted{color:#666}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.two.w{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.three>div,.two>div{min-width:0}
+/* K8 */
+.b{display:inline-flex;align-items:center;gap:4px;font:800 11px/1 system-ui;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid;padding:4px 7px;white-space:nowrap;vertical-align:middle;color:#444;background:#f0f1f3;border-color:#8a8f99}
+.b.g{color:#14532d;background:#ecfaf0;border-color:#1aa34a}
+.b.y{color:#6b4e00;background:#fff8e1;border-color:#e1a500}
+.b.r{color:#8a1111;background:#fdecec;border-color:#d62828}
+.b.bl{color:#0a3fae;background:#eaf1ff;border-color:#055dff}
+.b.blk{color:#fff;background:#111;border-color:#111}
+.b.dt{text-transform:none;letter-spacing:0;font-weight:700}
+.lnk{color:#055dff;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+.btn{display:inline-block;border:2px solid #111;padding:8px 13px;font:700 13px system-ui;background:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3);white-space:nowrap;cursor:pointer;color:#111}
+.btn.p{background:#055dff;color:#fff}
+.btn.s{padding:4px 9px;font-size:12px;box-shadow:none;border-width:1.5px}
+/* fiche animal */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.34);padding:14px 16px;margin-bottom:14px;background:#fff}
+.hero-ic{width:64px;height:64px;display:grid;place-items:center;font-size:34px;background:#fff1e6;border:2px solid #111}
+.eyebrow{font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.hero h2{font-size:30px;margin:2px 0 3px;line-height:1;letter-spacing:-.03em}
+.hero p{margin:0;color:#666;font-size:13px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.seg{display:inline-flex;border:2px solid #111;flex-wrap:wrap;max-width:100%}.seg span{padding:7px 12px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff;white-space:nowrap}.seg span:last-child{border-right:0}.seg span.is-active{background:#055dff;color:#fff}
+.seg.sm span{padding:4px 9px;font-size:12px}
+.crd{border:2px solid #111;background:#fff;min-width:0}
+.crd+.crd{margin-top:14px}
+.crd-h{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:2px solid #111;background:#fafafa;flex-wrap:wrap}
+.crd-h h4{margin:0;font-size:15px;flex:1;min-width:150px}.crd-h h4 small{color:#999;font-weight:400}
+.crd-b{padding:12px 14px}
+.kv{display:grid;grid-template-columns:118px minmax(0,1fr);gap:9px 12px;font-size:13px;align-items:center}
+.kv dt{color:#666}.kv dd{margin:0;font-weight:600;min-width:0}
+.ok{font-size:12px;color:#055dff;margin-top:3px;font-weight:600}
+.inp{border:2px solid #111;padding:6px 9px;font:600 13px system-ui;background:#fff;min-width:0;width:100%}
+.inp.u{display:inline-flex;padding:0;width:auto}.inp.u b{padding:6px 9px;min-width:44px}.inp.u i{font-style:normal;padding:6px 8px;background:#f0f1f3;border-left:1.5px solid #c9ccd3;color:#555;font-weight:700}
+/* pastilles du menu de choix */
+.pill{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px 7px;border:1.5px solid #c9ccd3;background:#fff;padding:3px 6px 3px 3px;font-size:12.5px;font-weight:700;max-width:100%;vertical-align:middle}
+.pill .ini{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 10px system-ui;background:#3c78d8;flex:none}
+.pill .ini.f{background:#d9488f}.pill .ini.a{background:#e8590c}.pill .ini.u{background:#9aa0aa}
+.pill .ic{width:22px;height:22px;display:grid;place-items:center;flex:none}
+.pill small{color:#777;font-weight:500}
+.pill .x{color:#777;font-weight:400;padding:0 2px}
+.pill .o{color:#055dff;font-size:11.5px}
+.pill.sec{background:#f4f5f7}
+.pill .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.pk{display:flex;align-items:center;gap:8px;border:2px solid #111;padding:6px 9px;font-size:13px;color:#888;background:#fff}
+.pk.on{border-color:#055dff;box-shadow:0 0 0 3px rgba(5,93,255,.18);color:#111}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid #c9ccd3;padding:4px 9px;font:700 12px system-ui;background:#fff;white-space:nowrap}
+.chip.on{border-color:#055dff;background:#eaf1ff;color:#0a3fae}
+.chip.blk{background:#111;color:#fff;border-color:#111}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);vertical-align:-1px;margin-right:2px}
+/* pattes */
+.legs{width:100%;max-width:300px;height:auto;display:block;margin:0 auto}
+.legkey{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;font-size:12.5px;margin-top:8px;text-align:center}
+.legkey b{display:block;font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777}
+.code{font:800 13px ui-monospace,Menlo,monospace;background:#f0f1f3;border:1.5px solid #c9ccd3;padding:3px 7px;display:inline-block}
+.hist{list-style:none;margin:10px 0 0;padding:0;font-size:12.5px}
+.hist li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;padding:6px 0;border-top:1px solid #eee}
+.hist li b{font-size:12px}
+.metal{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:2px solid #555;border-radius:4px;background:linear-gradient(180deg,#eef0f3,#b8bec7 55%,#dfe3e8);font:800 12px ui-monospace,Menlo,monospace;letter-spacing:.06em;color:#333}
+.mtbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.mtbl th{text-align:left;font:700 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#777;border-bottom:2px solid #111;padding:6px 7px;white-space:nowrap}
+.mtbl td{padding:8px 7px;border-bottom:1px solid #eef0f3;vertical-align:top}
+.mtbl td small{display:block;color:#777}
+.scroll{overflow-x:auto}
+.scroll .mtbl{min-width:820px}
+.empty-line{display:flex;gap:8px;align-items:center;padding:8px 10px;background:#f6f7f9;border:1.5px dashed #c9ccd3;font-size:12.5px;color:#555;line-height:1.4;flex-wrap:wrap}
+.empty-line .btn{margin-left:auto}
+.ex{border:1.5px dashed #055dff;background:#f5f8ff;padding:9px 11px;margin-top:10px;font-size:12.5px;line-height:1.5}
+/* H10 */
+.h10{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.h10 .srch{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;border:2px solid #111;padding:6px 9px;font-size:13px;color:#888;background:#fff}
+.h10 .srch kbd{margin-left:auto}
+.dd{border:2px solid #111;padding:6px 10px;font:700 12.5px system-ui;background:#fff;white-space:nowrap}
+.dd .n{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:9px;background:#055dff;color:#fff;font-size:10.5px;margin-left:4px}
+kbd{border:1px solid #c9ccd3;border-bottom-width:2px;background:#f4f5f7;padding:0 5px;font:700 11px system-ui;color:#555}
+.actf{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px;font-size:12px}
+.actf .chip{background:#055dff;border-color:#055dff;color:#fff}
+.cnt{font-size:12.5px;color:#555;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:6px 0;border-bottom:2px solid #111}
+.more{text-align:center;padding:10px;font:700 13px system-ui;color:#055dff}
+.thumb{width:40px;height:32px;display:grid;place-items:center;background:#dfe6d6;border:1.5px solid #999;font-size:15px;position:relative}
+.thumb.v{background:#22262d;color:#fff;font-size:11px}
+/* fenêtre */
+.win{border:2px solid #111;background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.25);width:540px;max-width:100%}
+.win.m{width:760px}
+.win-h{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:2px solid #111;background:#fafafa}
+.win-h .t{flex:1;min-width:0}.win-h .t small{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin-bottom:3px}
+.win-h b{font-size:16px}
+.win-h .x{border:0;background:none;font-size:22px;line-height:1;cursor:pointer;color:#555;padding:0 2px}
+.win-b{padding:14px 16px}
+.win-f{display:flex;gap:10px;justify-content:flex-end;padding:10px 16px;border-top:2px solid #111;align-items:center;flex-wrap:wrap}
+.win-f .sp{flex:1}
+.lab{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin:14px 0 6px}
+.lab:first-child{margin-top:0}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.find{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;border:2px solid #111;padding:12px;background:#fcfcfd}
+.pal{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.pal span{width:26px;height:26px;border:2px solid #111;display:grid;place-items:center;font:800 11px system-ui;cursor:pointer}
+.pal span.on{outline:3px solid #055dff;outline-offset:1px}
+.match{list-style:none;margin:0;padding:0}
+.match li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px;border:1.5px solid #e3e5ea;margin-bottom:6px;font-size:12.5px}
+.match li.on{border:2px solid #055dff;background:#f5f8ff}
+.match li b{display:block;font-size:13.5px}
+.match li small{color:#666}
+.score{font:800 16px system-ui;text-align:right}
+.score small{display:block;font:600 10.5px system-ui;color:#777}
+.mini-legs{width:46px;height:36px}
+.notice{border:2px solid;padding:8px 12px;font-size:13px;display:flex;gap:8px;margin:8px 0;line-height:1.4}
+.notice.i{border-color:#055dff;background:#eef4ff}.notice.ok{border-color:#1aa34a;background:#ecfaf0}.notice.w{border-color:#e1a500;background:#fff8e1}
+.mz{display:flex;align-items:center;gap:10px;border:1.5px solid #c9ccd3;padding:5px;font-size:12.5px;max-width:100%}
+.mz .thumb{width:52px;height:40px}
+/* carte */
+.mapbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.mapwrap{position:relative;border:2px solid #111;overflow:hidden;background:#eef0e8}
+.mapwrap svg{display:block;width:100%;height:auto}
+.mapwrap .pop{position:absolute;left:52%;top:9%;max-width:260px}
+.pop{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:9px 11px;font-size:12.5px;line-height:1.45}
+.pop b{font-size:13.5px}
+.mapside{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.95);border:2px solid #111;padding:8px 10px;font-size:12px;line-height:1.7}
+.mapside b{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777;display:block}
+.timeline{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;border:2px solid #111;border-top:0;padding:9px 12px;background:#fff;font-size:12.5px}
+.track{position:relative;height:6px;background:#dfe3e8}
+.track i{position:absolute;left:0;top:0;bottom:0;width:72%;background:#055dff}
+.track b{position:absolute;left:72%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;background:#fff;border:2px solid #055dff;border-radius:50%}
+.track span{position:absolute;top:12px;font-size:10.5px;color:#777;transform:translateX(-50%);white-space:nowrap}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font:600 13px system-ui;white-space:nowrap}
+.ui-toggle i{width:36px;height:20px;border-radius:10px;background:#055dff;position:relative;flex:none}
+.ui-toggle i:after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.ui-toggle.off i{background:#c2c7cf}.ui-toggle.off i:after{right:auto;left:2px}
+.sel{border:2px solid #111;padding:6px 10px;font:600 12.5px system-ui;background:#fff;white-space:nowrap}
+/* import */
+.steps{display:flex;gap:0;border:2px solid #111;margin-bottom:14px}
+.steps span{flex:1;padding:7px 6px;font:700 12px system-ui;border-right:2px solid #111;background:#fff;color:#777;text-align:center}
+.steps span:last-child{border:0}.steps span.done{color:#14532d;background:#ecfaf0}.steps span.on{background:#055dff;color:#fff}
+.dropz{border:2.5px dashed #055dff;background:#f5f8ff;padding:18px;text-align:center;font-size:13.5px;line-height:1.5}
+.radio{display:flex;gap:8px;align-items:center;font-size:13px;margin:6px 0;flex-wrap:wrap}
+.radio:before{content:"";width:14px;height:14px;border:2px solid #111;border-radius:50%;flex:none}
+.radio.on:before{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.toast2{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:11px 14px;font-size:13.5px;box-shadow:5px 5px 0 rgba(5,93,255,.45);max-width:470px;position:relative;margin:12px 0 0;flex-wrap:wrap}
+.toast2 .u{border:1.5px solid #fff;padding:4px 9px;font:700 12.5px system-ui;margin-left:auto;white-space:nowrap}
+.toast2 .bar{position:absolute;left:0;bottom:0;height:3px;background:#5b9bff}
+/* en-tête K5 */
+.ph{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:14px}
+.ph .t{flex:1;min-width:220px}
+.ph small{display:block;font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.ph h2{margin:3px 0 4px;font-size:24px}
+.ph p{margin:0;color:#666;font-size:13px}
+/* K9 */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.uc{border:2px solid #111;background:#fff;display:flex;flex-direction:column;min-width:0}
+.uc .im{height:92px;background:#eef0e8;display:grid;place-items:center;border-bottom:2px solid #111}
+.uc .im svg{width:84px;height:66px}
+.uc .bd{padding:9px 10px;flex:1}
+.uc .bd b{display:block;font-size:14px}
+.uc .bd small{display:block;color:#666;font-size:12px;line-height:1.4}
+.uc .bd .chips{margin-top:7px}
+.uc .b{white-space:normal;line-height:1.25}
+.uc .wh{font-size:11.5px;color:#888;margin-top:6px}
+.uc .ft{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e3e5ea;padding:6px 10px;font:700 12.5px system-ui;color:#055dff}
+.uc .ft span:last-child{color:#555}
+.menu{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:6px 0;font-size:13px;min-width:0}
+.menu h6{margin:8px 12px 4px;font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777}
+.menu .it{padding:5px 12px;display:flex;gap:8px;align-items:center}
+.menu .it.on{background:#eaf1ff;font-weight:700}
+.menu .ck:before{content:"";width:13px;height:13px;border:2px solid #111;flex:none}
+.menu .ck.on:before{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.menu hr{border:0;border-top:1px solid #e3e5ea;margin:6px 0}
+/* chiffres */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.tile{border:2px solid #111;padding:10px 12px;min-width:0}
+.tile b{display:block;font:800 26px system-ui;letter-spacing:-.02em}
+.tile small{color:#666;font-size:12px;display:block;line-height:1.35}
+.chart{border:2px solid #111;padding:10px 12px}
+.chart h5{margin:0 0 8px;font-size:13px}
+.chart svg{display:block;width:100%;height:auto}
+.hb{display:grid;grid-template-columns:130px minmax(0,1fr) 40px;gap:8px;align-items:center;font-size:12.5px;margin:5px 0}
+.hb i{display:block;height:14px;background:#055dff}
+.hb span:last-child{text-align:right;font-weight:700}
+.lost li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #eee;font-size:12.5px;flex-wrap:wrap}
+.lost{list-style:none;margin:0;padding:0}
+@media (max-width:900px){
+ body{padding:16px}
+ .grid,.two,.two.w,.three{grid-template-columns:minmax(0,1fr)}
+ .case{padding:14px 14px 18px}
+ .cards,.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .find{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){
+ .hero{grid-template-columns:auto minmax(0,1fr)}.hero .acts{grid-column:1/-1;justify-content:flex-start}
+ .hero h2{font-size:24px}
+ .kv{grid-template-columns:minmax(0,1fr)}.kv dt{margin-top:4px}
+ .row2{grid-template-columns:minmax(0,1fr)}
+ .cards{grid-template-columns:minmax(0,1fr)}
+ .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .mapwrap .pop{position:static;max-width:none;border-width:0 0 2px;box-shadow:none}
+ .mapside{position:static;border-width:2px 0 0}
+ .timeline{grid-template-columns:auto minmax(0,1fr)}.timeline>span:last-child{grid-column:1/-1}
+ .hb{grid-template-columns:96px minmax(0,1fr) 34px}
+ .h10 .srch{min-width:100%}
+ .track span:nth-of-type(2){display:none}
+}
+.topnav{display:flex;gap:8px;overflow-x:auto;padding:8px 10px;border:2px solid #111;background:#fff}
+.ni{border:2px solid #111;padding:6px 10px;font:700 12.5px system-ui;white-space:nowrap;background:#fff}
+.ni span{display:block;font-size:9px;color:#055dff;letter-spacing:.12em;margin-bottom:3px}
+.ni.on{background:#055dff;color:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3)}.ni.on span{color:#fff}
+.ni.new{outline:3px dashed #e1a500;outline-offset:2px}
+.saved{color:#1aa34a;font:700 12.5px system-ui;white-space:nowrap}
+.idx{display:grid;place-items:center;width:26px;height:26px;background:#055dff;color:#fff;font:800 11px system-ui;border:1.5px solid #111;transform:rotate(-3deg);flex:none}
+.tabrow{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:8px;align-items:center;padding:7px 4px;border-bottom:1px solid #eee;font-size:13px}
+.tabrow.hl{background:#fff8e1}
+.grip{color:#9aa0aa;font-size:16px}
+.dash{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:start}
+.side .ci{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;border:2px solid #111;background:#fff;box-shadow:2px 2px 0 rgba(5,93,255,.3);padding:6px 8px;margin-bottom:6px;font-size:12px}
+.side .ci div:first-child{display:flex;gap:8px;align-items:center;min-width:0}
+.side .ci span{font:800 9.5px system-ui;color:#055dff;letter-spacing:.1em}
+.side .ci.on{background:#055dff;color:#fff}.side .ci.on span{color:#fff}
+.ca{display:flex;gap:4px}.ca i{font-style:normal;width:20px;height:20px;border:1.5px solid #111;display:grid;place-items:center;font:700 11px system-ui}
+.sidefoot{display:flex;flex-direction:column;gap:6px;margin-top:10px}.sidefoot small{color:#666;font-size:11.5px}
+.wgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.wgrid>.crd{margin:0}
+.wgrid .crd-h{flex-wrap:nowrap}.wgrid .crd-h h4{min-width:0}.w1{grid-column:span 12}.w2{grid-column:span 6}.w3{grid-column:span 4}.w4{grid-column:span 3}.w23{grid-column:span 8}.w34{grid-column:span 9}
+.tools{display:inline-flex;gap:5px;border-left:2px solid #111;padding-left:9px}
+.ia{width:26px;height:26px;border:2px solid #111;display:grid;place-items:center;font-size:13px;background:#fff}.ia.d{color:#d62828}.ia.on{background:#055dff;color:#fff}
+.frow{display:flex;gap:9px;align-items:center;padding:6px 0;border-top:1px solid #eee;font-size:12.5px}
+.frow .ini{border-radius:50%;display:grid;place-items:center;background:#e8590c;color:#fff;font-size:13px}
+mark{background:#fff1a8}
+.orow{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid #eee;font-size:12.5px}
+.minic{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.minic>div{border:1.5px solid #c9ccd3;padding:6px;text-align:center;font-size:12px;min-width:0}
+.minic svg{width:46px;height:36px;display:block;margin:0 auto 3px}.minic .big{font-size:26px;display:block;height:36px;line-height:36px}
+.minic b{display:block}.minic small{color:#777;font-size:11px}
+.bk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.bk>div{border:1.5px solid #c9ccd3;padding:8px;display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 6px;font-size:12.5px}
+.bk>div span{grid-row:span 2;font-size:20px}.bk>div small{color:#666;font-size:11.5px}
+.bk>div.on{border:2px solid #055dff;background:#f5f8ff}.bk>div.off{opacity:.45;cursor:not-allowed}
+@media (max-width:900px){.dash{grid-template-columns:minmax(0,1fr)}.wgrid>.crd{grid-column:1/-1}.side{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}.sidefoot{grid-column:1/-1}}
+@media (max-width:520px){.side{grid-template-columns:minmax(0,1fr)}.minic{grid-template-columns:repeat(3,minmax(0,1fr))}.bk{grid-template-columns:minmax(0,1fr)}}
+/* sombre */
+.dk{background:#121418;color:#e8e8e8;border-color:#444;box-shadow:6px 6px 0 rgba(77,159,255,.25)}
+.dk>.tag{color:#7fb0ff}
+.dk .hero,.dk .crd,.dk .mapwrap,.dk .timeline{background:#1b1e24;border-color:#444;box-shadow:none}
+.dk .crd-h{background:#20242b;border-color:#444}
+.dk .hero-ic{background:#3a2717;border-color:#666}
+.dk .hero p,.dk .kv dt,.dk .muted,.dk .note,.dk .eyebrow,.dk .legkey b,.dk .hist,.dk .crd-h h4 small{color:#a5abb6}
+.dk .hist li{border-color:#2d3139}
+.dk .seg{border-color:#666}.dk .seg span{background:#1b1e24;border-color:#666;color:#ddd}.dk .seg span.is-active{background:#2f7bff;color:#fff}
+.dk .pill{background:#1b1e24;border-color:#555;color:#e8e8e8}.dk .pill small{color:#a5abb6}.dk .pill .o{color:#7fb0ff}
+.dk .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}.dk .btn.p{background:#2f7bff;border-color:#2f7bff}
+.dk .code{background:#262a31;border-color:#555;color:#eee}
+.dk .b.g{background:#13301f;color:#8fe0ad;border-color:#3ccf73}.dk .b.bl{background:#1a2a3d;color:#9cc2ff;border-color:#5599ff}
+.dk .b.y{background:#33290b;color:#ffd666;border-color:#e1a500}
+.dk .chip{background:#1b1e24;border-color:#555;color:#ddd}.dk .chip.on{background:#1a2a3d;border-color:#5599ff;color:#9cc2ff}
+.dk .ui-toggle i{background:#2f7bff}
+.dk .sel{background:#1b1e24;border-color:#666;color:#ddd}
+.dk .mapside,.dk .pop{background:#1b1e24;border-color:#555;color:#e8e8e8}
+.dk .track{background:#333}
+.dk .ok{color:#7fb0ff}
+</style></head><body>
+
+<!-- dégradé du métal, partagé par les dessins -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="mt" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f1f3f5"/><stop offset=".55" stop-color="#aab1ba"/><stop offset="1" stop-color="#dfe3e8"/></linearGradient>
+<pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><rect width="2" height="6" fill="#c9ccd3"/></pattern></defs></svg>
+
+<h1>🐾 Suivi des animaux — marques, observations et trajets</h1>
+<p class="sub">Un onglet à part, <b>« 🐾 Suivi des animaux »</b>, caché au départ, pour tout animal, sauvage ou de la famille : ses marques (bagues, puce, tatouage, collier, boucle d'oreille, balise…, selon l'espèce), les observations signalées, la carte des passages, les trajets d'une balise ou d'un collier GPS, le recensement et les chiffres. Sa page est faite de blocs modulables, comme le Tableau de bord. Ça s'ajoute à la fiche d'un animal (🐾 Animaux), sans rien changer à ce qui existe. Deux exemples : les corneilles noires de Paris (<b>Gaston</b>, bagué aux Buttes-Chaumont, et <b>Margot</b>, qui porte une balise GPS), et <b>Minette</b>, une chatte avec un collier GPS (S13).</p>
+
+<div class="grid">
+
+<!-- S1 -->
+<div class="case full"><span class="tag"><span class="num">S1</span>Menu du haut · avant / après</span><h3>Un onglet « 🐾 Suivi des animaux », caché au départ : on l'allume quand on en a besoin</h3>
+ <span class="lab">Avant (par défaut, rien ne change)</span>
+ <div class="topnav"><span class="ni on"><span>01</span>Tableau de bord</span><span class="ni"><span>02</span>Personnes</span><span class="ni"><span>02</span>🐾 Animaux</span><span class="ni"><span>03</span>Graphiques</span><span class="ni"><span>04</span>Carte</span><span class="ni"><span>05</span>Listes</span><span class="ni"><span>06</span>Chronologie</span><span class="ni"><span>…</span>…</span><span class="ni"><span>10</span>Maintenance</span></div>
+ <span class="lab">Après (onglet allumé)</span>
+ <div class="topnav"><span class="ni"><span>01</span>Tableau de bord</span><span class="ni"><span>02</span>Personnes</span><span class="ni"><span>02</span>🐾 Animaux</span><span class="ni on new"><span>02</span>🐾 Suivi des animaux</span><span class="ni"><span>03</span>Graphiques</span><span class="ni"><span>04</span>Carte</span><span class="ni"><span>05</span>Listes</span><span class="ni"><span>…</span>…</span><span class="ni"><span>10</span>Maintenance</span></div>
+ <div class="two" style="margin-top:16px">
+  <div class="crd"><div class="crd-h"><span class="idx">03</span><h4>Onglets du haut <small>· Maintenance → Apparence</small></h4><span class="saved">✓ Enregistré</span></div>
+   <div class="crd-b">
+    <div class="tabrow"><span class="grip">⠿</span><span>01 Tableau de bord</span><label class="ui-toggle"><i></i></label></div>
+    <div class="tabrow"><span class="grip">⠿</span><span>02 Personnes</span><label class="ui-toggle"><i></i></label></div>
+    <div class="tabrow"><span class="grip">⠿</span><span>02 🐾 Animaux</span><label class="ui-toggle"><i></i></label></div>
+    <div class="tabrow hl"><span class="grip">⠿</span><span><b>02 🐾 Suivi des animaux</b> <small class="muted">bagues, puces, observations, GPS</small></span><label class="ui-toggle off"><i></i></label></div>
+    <div class="tabrow"><span class="grip">⠿</span><span>08 🧬 ADN</span><label class="ui-toggle off"><i></i></label></div>
+    <div class="tabrow"><span class="grip">⠿</span><span>…</span><span></span></div>
+   </div></div>
+  <div>
+   <span class="lab">Là où on en a besoin, une phrase pour l'afficher</span>
+   <div class="notice i">ℹ️ <span><b>Tu suis des animaux sauvages ou un chat avec un collier GPS ?</b> L'onglet « 🐾 Suivi des animaux » est caché. Pour l'afficher : Maintenance → Apparence → Onglets du haut. <span class="lnk">↗ Afficher l'onglet</span></span></div>
+   <p class="note" style="margin-top:6px">Ce message apparaît dans la liste 🐾 Animaux et sur la fiche d'un animal (onglet « 🔖 Marques »), une seule fois, avec × pour le fermer. « ↗ Afficher l'onglet » allume l'interrupteur et montre le message H7 « ✓ Onglet affiché · ↶ Annuler ».</p>
+   <div class="toast2">✓ Onglet « 🐾 Suivi des animaux » affiché<span class="u">↶ Annuler</span><span class="bar" style="width:40%"></span></div>
+  </div>
+ </div>
+ <p class="note">Même réglage que les autres onglets cachés (comme 🧬 ADN) : interrupteur K16, gardé tout de suite (K2), poignée ⠿ pour le ranger. Les données restent même quand l'onglet est caché : la fiche d'un animal garde ses marques et ses observations.</p>
+</div>
+
+<!-- S2 -->
+<div class="case full"><span class="tag"><span class="num">S2</span>Page de l'onglet · blocs modulables</span><h3>Comme le Tableau de bord : une colonne « Vue générale » à gauche, des blocs qu'on ajoute, range, règle et retire</h3>
+ <div class="dash">
+  <aside class="side">
+   <div class="ci on"><div><span>01</span><b>Vue générale</b></div></div>
+   <div class="ci"><div><span>02</span>Carte des observations</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>03</span>Dernières observations</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>04</span>Animaux suivis</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>05</span>Trajet GPS du jour</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>06</span>Chiffres</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>07</span>Comptages d'un site</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>08</span>Animaux à retrouver</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>09</span>Retrouver par bague ou puce</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>10</span>Import GPS rapide</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="ci"><div><span>11</span>Météo du jour d'observation</div><div class="ca"><i>i</i><i>＋</i></div></div>
+   <div class="sidefoot"><span class="btn s">Réordonner les widgets</span><span class="btn s">＋ Créer un widget</span><small>Blocs duplicables et réglables.</small></div>
+  </aside>
+  <div>
+   <div class="ph" style="margin-bottom:12px"><div class="t"><small>Suivi des animaux · Vue générale</small><h2>🐾 Suivi des animaux</h2><p>Tes animaux suivis, ce qu'on a vu d'eux et leurs trajets.</p></div><span class="btn p">＋ Nouvelle observation</span><span class="btn">⤒ Importer un trajet…</span><span class="btn">⋯</span></div>
+   <div class="wgrid">
+    <div class="crd w23"><div class="crd-h"><span class="idx">01</span><h4>Carte des observations <small>(30 jours)</small></h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div>
+     <svg viewBox="0 0 520 210" style="display:block;width:100%;height:auto" role="img" aria-label="Carte des 30 derniers jours"><rect width="520" height="210" fill="#f1efe9"/><g stroke="#fff" stroke-width="7"><path d="M0 50L520 20"/><path d="M0 160L520 130"/><path d="M90 0L150 210"/><path d="M300 0L340 210"/></g><path d="M80 10L200 95L210 86L95 0Z" fill="#a9d3f0"/><path d="M330 8H500V75H345Z" fill="#cfe5bf" stroke="#9bc283"/><path d="M215 120C230 95 290 92 310 112C330 135 315 170 280 178C245 184 212 165 215 120Z" fill="#cfe5bf" stroke="#9bc283"/>
+      <polyline points="250,140 275,132 255,165 180,70 420,40" fill="none" stroke="#055dff" stroke-width="2.5" stroke-dasharray="6 4"/><g fill="#055dff" stroke="#fff" stroke-width="2"><circle cx="250" cy="140" r="7"/><circle cx="275" cy="132" r="7"/><circle cx="255" cy="165" r="7"/><circle cx="180" cy="70" r="7"/><circle cx="420" cy="40" r="9"/></g>
+      <polyline points="280,150 320,110 380,60 420,80 360,130 300,165 380,190 450,195" fill="none" stroke="#e8590c" stroke-width="2"/><text x="10" y="200" font-size="10" fill="#666" font-family="system-ui">● Gaston  ● Margot · Plan IGN v2</text></svg></div>
+    <div class="crd w3"><div class="crd-h"><span class="idx">02</span><h4>Retrouver par bague ou puce</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div>
+     <div class="crd-b"><div class="pk on">🔍 <span style="color:#111">7K</span><span style="margin-left:auto;color:#888">×</span></div>
+      <div style="font-size:12px;color:#666;margin:8px 0 4px">2 animaux trouvés</div>
+      <div class="frow"><svg class="mini-legs" viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="url(#mt)" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="#fff" stroke="#111"/></svg><span><b>Gaston</b><br><small class="muted">D blanc « <mark>7K</mark> »</small></span></div>
+      <div class="frow"><span class="ini a" style="width:30px;height:30px">🐾</span><span><b>Minette</b><br><small class="muted">collier TRCAT4<mark>K</mark>7Q</small></span></div>
+      <p class="note" style="margin-top:8px">Couleurs (« vert rouge »), code gravé, bague métal, puce, tatouage, boucle.</p></div></div>
+    <div class="crd w2"><div class="crd-h"><span class="idx">03</span><h4>Dernières observations</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div>
+     <div class="crd-b"><div class="orow"><b>auj. 6 h 15</b><span>📡 Margot · Parc de la Villette</span><span class="b dt">GPS</span></div><div class="orow"><b>hier 8 h 40</b><span>🐦 Gaston · Parc de la Villette</span><span class="b g">Lue</span></div><div class="orow"><b>hier 5 h 50</b><span>🐈 Minette · rentrée à la maison</span><span class="b dt">GPS</span></div><div class="orow"><b>18 oct.</b><span>🐦 Gaston · Buttes-Chaumont</span><span class="b y">Partielle</span></div><div class="more" style="padding:6px">Voir les 20 suivantes ↓</div></div></div>
+    <div class="crd w2"><div class="crd-h"><span class="idx">04</span><h4>Animaux à retrouver <small>· pas revus depuis 30 jours</small></h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div>
+     <div class="crd-b"><ul class="lost"><li><span><b>Hector</b> · Bassin de la Villette</span><span class="b">8 mois</span></li><li><span><b>Lulu</b> · Père-Lachaise</span><span class="b">10 mois</span></li><li><span><b>Prune</b> · Buttes-Chaumont</span><span class="b y">43 jours</span></li></ul>
+      <p class="note" style="margin-top:6px">Clic = la fiche ; « ＋ Nouvelle observation » sur la ligne si on vient de le revoir.</p></div></div>
+    <div class="crd w23"><div class="crd-h"><span class="idx">05</span><h4>Animaux suivis <small>(5)</small></h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div>
+     <div class="crd-b"><div class="minic">
+      <div><svg viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="url(#mt)" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="#fff" stroke="#111"/></svg><b>Gaston</b><small>vu hier</small></div>
+      <div><span class="big">📡</span><b>Margot</b><small>GPS · auj.</small></div>
+      <div><span class="big">🐈</span><b>Minette</b><small>GPS · cette nuit</small></div>
+      <div><svg viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="#f2c400" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="#fff" stroke="#111"/></svg><b>Prune</b><small>9 oct.</small></div>
+      <div><svg viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="#fff" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="url(#mt)" stroke="#111"/></svg><b>Hector</b><small>févr.</small></div>
+     </div></div></div>
+    <div class="crd w3"><div class="crd-h"><span class="idx">06</span><h4>Chiffres</h4><span class="tools"><span class="ia">✎</span><span class="ia d">×</span></span></div>
+     <div class="crd-b"><svg viewBox="0 0 200 80" style="width:100%;display:block" role="img" aria-label="Animaux vus par mois"><g fill="#055dff"><rect x="4" y="40" width="14" height="30"/><rect x="24" y="32" width="14" height="38"/><rect x="44" y="18" width="14" height="52"/><rect x="64" y="10" width="14" height="60"/><rect x="84" y="22" width="14" height="48"/><rect x="104" y="36" width="14" height="34"/><rect x="124" y="50" width="14" height="20"/><rect x="144" y="52" width="14" height="18"/><rect x="164" y="38" width="14" height="32"/><rect x="184" y="28" width="14" height="42"/></g><line x1="0" y1="70" x2="200" y2="70" stroke="#111"/><text x="0" y="79" font-size="8" fill="#666" font-family="system-ui">janv. → oct. 2026 · animaux vus par mois</text></svg>
+      <div class="kv" style="grid-template-columns:auto minmax(0,1fr);margin-top:8px;font-size:12px"><dt>Ce mois</dt><dd>22 animaux</dd><dt>Plus loin</dt><dd>Minette, 640 m</dd></div></div></div>
+   </div>
+  </div>
+ </div>
+ <p class="note">Même cadre que les widgets du tableau de bord : numéro bleu, titre, ✎ (réglages, S4) et × (retiré, avec « ↶ Annuler »). La colonne de gauche liste les sortes de blocs (i = à quoi ça sert, ＋ = ajouter) ; « Réordonner les widgets » et « ＋ Créer un widget » comme au tableau de bord. Largeurs 1, ½, ⅓, ¼, ⅔, ¾. Ici : carte ⅔ + recherche ⅓, deux blocs ½, animaux ⅔ + chiffres ⅓. Les autres écrans (fiche, liste, site…) s'ouvrent depuis ces blocs.</p>
+</div>
+
+<!-- S3 -->
+<div class="case"><span class="tag"><span class="num">S3</span>Fenêtre « ＋ Ajouter un bloc »</span><h3>Les sortes de blocs, avec ce qu'elles montrent</h3>
+ <div class="win" style="width:100%"><div class="win-h"><div class="t"><small>🐾 Suivi des animaux</small><b>Ajouter un bloc</b></div><button class="x">×</button></div>
+  <div class="win-b"><div class="pk" style="margin-bottom:10px">🔍 Chercher un bloc…</div>
+   <div class="bk">
+    <div class="on"><span>🗺</span><b>Carte des observations</b><small>points datés, reliés, rejouer</small></div>
+    <div><span>👁</span><b>Dernières observations</b><small>quand, où, qui, bague lue</small></div>
+    <div><span>🐾</span><b>Animaux suivis</b><small>vignettes, dernière fois vu</small></div>
+    <div><span>📡</span><b>Trajet GPS du jour</b><small>un animal, sa journée ou sa nuit</small></div>
+    <div><span>📊</span><b>Chiffres</b><small>vus par mois, distance, zone</small></div>
+    <div><span>🔢</span><b>Comptages d'un site</b><small>dortoir, nids, courbe</small></div>
+    <div><span>⏳</span><b>Animaux à retrouver</b><small>pas revus depuis N jours</small></div>
+    <div><span>🔖</span><b>Retrouver par bague ou puce</b><small>case de recherche</small></div>
+    <div><span>⤒</span><b>Import GPS rapide</b><small>déposer un GPX / CSV</small></div>
+    <div class="off"><span>🌦</span><b>Météo du jour d'observation</b><small>si la Météo d'autrefois est installée</small></div>
+   </div></div>
+  <div class="win-f"><span class="btn">Annuler</span><span class="btn p">＋ Ajouter le bloc</span></div></div>
+ <p class="note">Petite fenêtre K6 (540). Un clic choisit, Entrée ajoute (en bas de la vue, largeur proposée par la sorte). La météo est grisée (aspect désactivé unique) tant que le socle météo manque, avec la raison au survol.</p>
+</div>
+
+<!-- S4 -->
+<div class="case"><span class="tag"><span class="num">S4</span>Réglage d'un bloc (✎)</span><h3>Le bloc se retourne : titre, animaux, site, période, largeur</h3>
+ <div class="crd" style="box-shadow:6px 6px 0 rgba(5,93,255,.34)"><div class="crd-h"><span class="idx">01</span><h4>Carte des observations</h4><span class="saved">✓ Enregistré</span><span class="tools"><span class="ia on">↩</span><span class="ia d">×</span></span></div>
+  <div class="crd-b">
+   <span class="lab">Titre</span><div class="inp">Carte des observations</div>
+   <span class="lab">Animaux</span><div class="chips"><span class="pill"><span class="ini a">🐾</span>Gaston<span class="x">×</span></span><span class="pill"><span class="ini a">🐾</span>Margot<span class="x">×</span></span></div><div class="pk" style="margin-top:6px">🔍 ＋ Ajouter un animal… <small style="margin-left:auto">vide = tous</small></div>
+   <span class="lab">Site</span><div class="pk">🏞 Tous les sites · <span style="color:#888">Nom du site… (2 lettres suffisent)</span></div>
+   <span class="lab">Période</span><span class="seg sm"><span>7 jours</span><span class="is-active">30 jours</span><span>Cette année</span><span>Tout</span><span>Entre…</span></span>
+   <span class="lab">Largeur</span><span class="seg sm"><span>1</span><span>½</span><span>⅓</span><span>¼</span><span class="is-active">⅔</span><span>¾</span></span>
+   <span class="lab">Options</span><label class="ui-toggle"><i></i>Relier les points dans l'ordre</label><br><label class="ui-toggle off" style="margin-top:6px"><i></i>Montrer les trajets GPS</label>
+   <div style="margin-top:12px;text-align:right"><span class="lnk">↺ Remettre comme au départ</span></div>
+  </div></div>
+ <p class="note">Comme les widgets du tableau de bord (✎ ↔ ↩) ; chaque changement est gardé tout de suite (K2, « ✓ Enregistré »). Animaux et site par le menu de choix ; largeurs dans l'ordre validé.</p>
+</div>
+
+
+<!-- S5 -->
+<div class="case full"><span class="tag"><span class="num">S5</span>Suivi · Fiche d'un animal</span><h3>Nouvel onglet « 🔖 Bagues et marques » : le baguage, la bague métal, les bagues de couleur dessinées et les autres marques</h3>
+ <div class="hero">
+  <span class="hero-ic">🐦</span>
+  <div><span class="eyebrow">🐦 Oiseau · Corneille noire</span><h2>Gaston <span style="font-size:20px;color:#3c78d8">♂</span></h2><p>Bagué le 12 mai 2025 · 1 an et 5 mois · vu pour la dernière fois hier</p>
+   <div class="chips" style="margin-top:7px"><span class="b bl">Suivi en cours</span><span class="b g">Bague lue en entier</span><span class="code">G V/M · D R/B « 7K »</span></div></div>
+  <div class="acts"><span class="btn s">← Tous les animaux</span><span class="btn p">＋ Nouvelle observation</span><span class="btn s">✎ Modifier</span><span class="btn s">⋯</span></div>
+ </div>
+ <div class="seg" style="margin-bottom:14px"><span>🪪 Fiche</span><span class="is-active">🔖 Bagues et marques</span><span>👁 Observations (23)</span><span>🗺 Carte</span><span>📷 Photos (9)</span></div>
+
+ <div class="three">
+  <div>
+   <div class="crd"><div class="crd-h"><h4>🐣 Baguage</h4><span class="btn s">✎ Modifier</span></div>
+    <div class="crd-b"><dl class="kv">
+     <dt>Espèce</dt><dd><span class="pill"><span class="ic">🐦</span><span class="lbl">Corneille noire <small>Corvus corone</small></span><span class="o">↗ Ouvrir</span><span class="x">×</span></span></dd>
+     <dt>Sexe</dt><dd><span class="seg sm"><span class="is-active">♂ Mâle</span><span>♀ Femelle</span><span>? Inconnu</span></span><div class="ok" style="color:#666;font-weight:500">D'après les mesures (aile 330 mm)</div></dd>
+     <dt>Âge au baguage</dt><dd><span class="seg sm"><span class="is-active">Poussin</span><span>Jeune</span><span>Adulte</span></span><div class="ok" style="color:#666;font-weight:500">Aujourd'hui : 2ᵉ année</div></dd>
+     <dt>Date</dt><dd><div class="inp">12 mai 2025</div><div class="ok">✓ Compris : lundi 12 mai 2025</div></dd>
+     <dt>Lieu</dt><dd><span class="pill"><span class="ic">📍</span><span class="lbl">Parc des Buttes-Chaumont <small>Paris (75)</small></span><span class="o">↗ Lieu</span><span class="o">🗺</span><span class="x">×</span></span></dd>
+     <dt>Bagueur</dt><dd><span class="pill"><span class="ini">AL</span><span class="lbl">Antoine LEROY <small>bagueur</small></span><span class="o">↗ Fiche</span><span class="x">×</span></span></dd>
+     <dt>Programme</dt><dd><span class="pill"><span class="ic">📚</span><span class="lbl">Corneilles de Paris <small>programme 2024 →</small></span><span class="o">↗ Ouvrir</span><span class="x">×</span></span></dd>
+    </dl></div></div>
+   <div class="crd"><div class="crd-h"><h4>🔩 Bague métal</h4></div>
+    <div class="crd-b"><span class="metal">MUSEUM PARIS · EA123456</span>
+     <dl class="kv" style="margin-top:10px"><dt>Centre</dt><dd>CRBPO — Muséum, Paris</dd><dt>Numéro</dt><dd><span class="code">EA123456</span></dd><dt>Patte</dt><dd>Gauche, en bas</dd></dl></div></div>
+  </div>
+
+  <div class="crd"><div class="crd-h"><h4>🎨 Bagues de couleur</h4><span class="btn s">✎ Modifier</span></div>
+   <div class="crd-b">
+    <svg class="legs" viewBox="0 0 220 168" role="img" aria-label="Pattes de Gaston : gauche vert sur métal, droite rouge sur blanc 7K">
+     <path d="M14 0H206Q196 38 110 42Q24 38 14 0Z" fill="#1d1d1f"/>
+     <rect x="49" y="34" width="12" height="104" fill="#3b3b3d"/><rect x="159" y="34" width="12" height="104" fill="#3b3b3d"/>
+     <path d="M55 138l-22 16M55 138v20M55 138l22 16M165 138l-22 16M165 138v20M165 138l22 16" stroke="#3b3b3d" stroke-width="5" stroke-linecap="round"/>
+     <rect x="40" y="46" width="30" height="28" rx="3" fill="#1f9d55" stroke="#111" stroke-width="2"/>
+     <rect x="40" y="80" width="30" height="28" rx="3" fill="url(#mt)" stroke="#111" stroke-width="2"/><text x="55" y="98" font-size="8" font-weight="800" text-anchor="middle" fill="#333" font-family="monospace">EA…</text>
+     <rect x="150" y="46" width="30" height="28" rx="3" fill="#d62828" stroke="#111" stroke-width="2"/>
+     <rect x="150" y="80" width="30" height="28" rx="3" fill="#fff" stroke="#111" stroke-width="2"/><text x="165" y="100" font-size="14" font-weight="800" text-anchor="middle" fill="#d62828" font-family="system-ui">7K</text>
+    </svg>
+    <div class="legkey"><div><b>Patte gauche</b>Haut : 🟩 vert<br>Bas : bague métal</div><div><b>Patte droite</b>Haut : 🟥 rouge<br>Bas : ⬜ blanc, gravé « 7K »</div></div>
+    <p class="note" style="margin-top:8px">Gauche et droite <b>de l'oiseau</b> (vu de dos). Chaque bague se règle d'un clic : couleur (C2, avec les couleurs des bagues en tête), code gravé, couleur du code.</p>
+    <ul class="hist">
+     <li><b>12 mai 2025</b><span>Pose des 4 bagues · <span class="pill"><span class="ini">AL</span>Antoine LEROY</span></span></li>
+     <li><b>3 févr. 2026</b><span>Bague blanche changée : l'ancienne « 7H » était usée, remplacée par « 7K » <span class="b g">Fait</span></span></li>
+    </ul>
+   </div></div>
+
+  <div class="crd"><div class="crd-h"><h4>📡 Autres marques</h4><span class="btn s">＋ Ajouter une marque ▾</span></div>
+   <div class="crd-b">
+    <div class="empty-line"><span>🏷️</span><span>Pas de puce, de collier, de marque d'aile ni de balise.</span></div>
+    <div class="menu" style="margin-top:10px"><div class="it">💉 Puce électronique</div><div class="it">⭕ Collier</div><div class="it">🏷️ Marque d'aile</div><div class="it on">📡 Balise GPS</div><div class="it">✎ Autre marque…</div></div>
+    <div class="ex"><b>Sur la fiche de Margot :</b><br>📡 <b>Balise GPS</b> · OrniTrack-10 · n° <span class="code">213547</span><br>Posée le 3 mars 2026 · un point toutes les 15 min<br>Fin : <i>toujours en place</i> <span class="b bl">Émet</span><br><span class="lnk">⤒ Importer un trajet…</span> (S9)</div>
+   </div></div>
+ </div>
+ <div class="crd" style="margin-top:14px"><div class="crd-h"><h4>🧬 Les marques proposées suivent l'espèce <small>· on ne montre que ce qui a du sens</small></h4></div>
+  <div class="crd-b scroll"><table class="mtbl" style="min-width:640px">
+   <tr><th>Espèce</th><th>Marques proposées</th><th>Retrouver l'animal (S7) par…</th></tr>
+   <tr><td>🐦 Oiseaux</td><td>bague métal (centre, n°), bagues de couleur dessinées, marque d'aile, balise GPS</td><td>couleurs des bagues + code</td></tr>
+   <tr><td>🐈 Chat · 🐕 Chien</td><td>puce électronique (15 chiffres), tatouage, collier, médaille, collier GPS (Tractive, Weenect, Invoxia… : modèle, n°)</td><td>n° de puce ou de tatouage</td></tr>
+   <tr><td>🐎 Cheval</td><td>puce, n° SIRE / UELN, signalement (marques blanches, épis)</td><td>puce, UELN</td></tr>
+   <tr><td>🐄 Vache, mouton, chèvre</td><td>boucles d'oreille (n° national), tatouage</td><td>n° de boucle</td></tr>
+   <tr><td>🐟 Poisson · 🐢 Tortue · 🦇 Chauve-souris</td><td>marque PIT, marque d'écaille, bague d'avant-bras, émetteur</td><td>n° ou code</td></tr>
+   <tr><td>Partout</td><td>✎ Autre marque (libre : nom, n°, dates, photo)</td><td>texte de la marque</td></tr>
+  </table></div></div>
+ <p class="note">L'onglet s'appelle « 🔖 Bagues et marques » pour un oiseau, « 🔖 Marques » pour les autres (S13). Onglets de page C5 (bleu = actif). Lieu, bagueur, espèce et programme par le menu de choix (📍 lieux, personnes, « tout le reste ») ; date C4. Le code court en haut (« G V/M · D R/B « 7K » ») est celui que lisent les observateurs ; il sert à retrouver l'animal (S7).</p>
+</div>
+
+<!-- S6 -->
+<div class="case full"><span class="tag"><span class="num">S6</span>Suivi · Fiche d'un animal · onglet « 👁 Observations »</span><h3>Chaque fois qu'on l'a vu : quand, où, ce qu'il faisait, avec qui, par qui, et si la bague a été bien lue</h3>
+ <div class="h10"><span class="srch">🔍 Chercher… (lieu, observateur, note) <kbd>/</kbd></span><span class="dd">Filtrer ▾<span class="n">1</span></span><span class="seg sm"><span class="is-active">Liste</span><span>Fiches</span></span><span class="dd">Trier : plus récentes ▾</span><span class="btn p">＋ Nouvelle observation</span></div>
+ <div class="actf"><span class="chip">2026 ×</span><span class="lnk">Tout effacer</span></div>
+ <div class="cnt"><span>23 observations · 17 en 2026</span><span>Vu sur 4 sites</span></div>
+ <div class="scroll"><table class="mtbl">
+  <tr><th>Quand</th><th>Où</th><th>Ce qu'il faisait</th><th>Avec qui</th><th>Vu par</th><th>Photo, son</th><th>Bague</th></tr>
+  <tr><td><b>21 oct. 2026</b><small>8 h 40</small></td><td>📍 Parc de la Villette<small>prairie du Triangle</small></td><td><div class="chips"><span class="chip">🍽 Se nourrit</span><span class="chip">👥 En groupe (6)</span></div></td><td><span class="pill"><span class="ini a">🐾</span>Margot</span></td><td><span class="pill"><span class="ini f">CM</span>Claire MARTIN</span></td><td><span class="thumb">📷</span></td><td><span class="b g">Lue en entier</span></td></tr>
+  <tr><td><b>18 oct. 2026</b><small>17 h 15</small></td><td>📍 Buttes-Chaumont<small>près du lac</small></td><td><div class="chips"><span class="chip">🪶 Toilette</span></div></td><td><span class="muted">seul</span></td><td><span class="pill"><span class="ini">AL</span>Antoine LEROY</span></td><td><span class="thumb v">▶ 0:12</span></td><td><span class="b y">Partielle « 7? »</span></td></tr>
+  <tr><td><b>2 oct. 2026</b><small>7 h 05</small></td><td>📍 Bassin de la Villette<small>quai de la Loire</small></td><td><div class="chips"><span class="chip">🍽 Se nourrit</span><span class="chip">⚔️ Chasse un goéland</span></div></td><td><span class="pill sec"><span class="ini u">?</span>2 corneilles sans bague</span></td><td><span class="pill"><span class="ini u">?</span>Signalé sur le site</span></td><td><span class="muted">—</span></td><td><span class="b y">Couleurs seules</span></td></tr>
+  <tr><td><b>14 avr. 2026</b><small>vers 6 h</small></td><td>📍 Buttes-Chaumont<small>platane de l'île</small></td><td><div class="chips"><span class="chip">🪺 Niche</span><span class="chip">💞 En couple</span></div></td><td><span class="pill"><span class="ini a">🐾</span>Prune <small>sa femelle</small></span></td><td><span class="pill"><span class="ini">AL</span>Antoine LEROY</span></td><td><span class="thumb">📷</span></td><td><span class="b g">Lue en entier</span></td></tr>
+  <tr><td><b>3 févr. 2026</b><small>10 h 30</small></td><td>📍 Buttes-Chaumont<small>recapture</small></td><td><div class="chips"><span class="chip">🔖 Bague changée</span></div></td><td><span class="muted">—</span></td><td><span class="pill"><span class="ini">AL</span>Antoine LEROY</span></td><td><span class="thumb">📷</span></td><td><span class="b g">Bague métal lue</span></td></tr>
+ </table></div>
+ <div class="more">Voir les 12 suivantes ↓</div>
+ <p class="note">Barre H10 commune ; heures écrites librement (K17 : « 8 h 40 », « vers 6 h »). Les photos et sons viennent de la fenêtre unique (vignette, ▶ et durée). Fiabilité de la lecture en pastille K8 : <span class="b g">Lue en entier</span> · <span class="b y">Partielle</span> / couleurs seules (à vérifier) · <span class="b r">Doute</span> si deux animaux correspondent autant. Clic droit sur une ligne = menu ⋯ (Modifier, ⧉ Dupliquer, Supprimer avec « ↶ Annuler »).</p>
+</div>
+
+<!-- S7 -->
+<div class="case full"><span class="tag"><span class="num">S7</span>Suivi · Fenêtre « Nouvelle observation » (moyenne, 760)</span><h3>On clique les couleurs vues sur les pattes : l'app propose les animaux qui correspondent</h3>
+ <div class="win m">
+  <div class="win-h"><div class="t"><small>👁 Observation</small><b>Nouvelle observation</b></div><button class="x" aria-label="Fermer">×</button></div>
+  <div class="win-b">
+   <div class="row2">
+    <div><span class="lab">Quand</span><div class="inp">aujourd'hui 8 h 40</div><div class="ok">✓ Compris : jeudi 22 octobre 2026, 8 h 40</div></div>
+    <div><span class="lab">Où</span><span class="pill"><span class="ic">📍</span><span class="lbl">Parc de la Villette <small>Paris (75)</small></span><span class="o">↗ Lieu</span><span class="o">🗺</span><span class="x">×</span></span><div style="margin-top:6px"><span class="btn s">🗺 Choisir sur la carte</span> <span class="btn s">📍 Ma position</span></div></div>
+   </div>
+   <span class="lab">Retrouver l'animal · <span style="text-transform:none;letter-spacing:0">selon l'espèce :</span> <span class="seg sm" style="vertical-align:middle"><span class="is-active">🐦 Corneille noire</span><span>Autre ▾</span></span></span>
+   <div class="find">
+    <div>
+     <svg class="legs" viewBox="0 0 220 168" role="img" aria-label="Couleurs vues">
+      <path d="M14 0H206Q196 38 110 42Q24 38 14 0Z" fill="#1d1d1f"/>
+      <rect x="49" y="34" width="12" height="104" fill="#3b3b3d"/><rect x="159" y="34" width="12" height="104" fill="#3b3b3d"/>
+      <path d="M55 138l-22 16M55 138v20M55 138l22 16M165 138l-22 16M165 138v20M165 138l22 16" stroke="#3b3b3d" stroke-width="5" stroke-linecap="round"/>
+      <rect x="40" y="46" width="30" height="28" rx="3" fill="#1f9d55" stroke="#111" stroke-width="2"/>
+      <rect x="40" y="80" width="30" height="28" rx="3" fill="url(#hatch)" stroke="#888" stroke-width="2" stroke-dasharray="4 3"/><text x="55" y="99" font-size="13" font-weight="800" text-anchor="middle" fill="#666">?</text>
+      <rect x="150" y="46" width="30" height="28" rx="3" fill="#d62828" stroke="#111" stroke-width="2"/>
+      <rect x="146" y="76" width="38" height="36" rx="4" fill="none" stroke="#055dff" stroke-width="3"/>
+      <rect x="150" y="80" width="30" height="28" rx="3" fill="#fff" stroke="#111" stroke-width="2"/><text x="165" y="100" font-size="14" font-weight="800" text-anchor="middle" fill="#d62828" font-family="system-ui">7?</text>
+     </svg>
+     <div style="font-size:12px;margin-top:6px"><b>Droite, en bas :</b> choisis la couleur</div>
+     <div class="pal"><span style="background:#1f9d55"></span><span style="background:#d62828"></span><span class="on" style="background:#fff"></span><span style="background:#f2c400"></span><span style="background:#1c64d6"></span><span style="background:#111"></span><span style="background:#f08c00"></span><span style="background:url(#)linear-gradient(#eee,#aab1ba)" title="Métal"></span><span title="Pas vue">?</span><span title="Rien">∅</span></div>
+     <div style="display:flex;gap:8px;align-items:center;margin-top:8px;font-size:12px"><b>Code lu</b><span class="inp" style="width:70px">7?</span><span class="muted">« ? » = pas lu</span></div>
+    </div>
+    <div>
+     <div style="font-size:12.5px;margin-bottom:8px"><b>3 animaux correspondent</b> <span class="muted">· les plus probables d'abord (couleurs, code, vus près d'ici)</span></div>
+     <ul class="match">
+      <li class="on"><svg class="mini-legs" viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="url(#mt)" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="#fff" stroke="#111"/></svg><div><b>Gaston</b><small>G V/M · D R/B « 7K » · vu ici le 21 oct.</small></div><div class="score">92 %<small>très probable</small></div></li>
+      <li><svg class="mini-legs" viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="#f2c400" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="#fff" stroke="#111"/></svg><div><b>Prune</b><small>G V/J · D R/B « 7A » · Buttes-Chaumont</small></div><div class="score">58 %<small>possible</small></div></li>
+      <li><svg class="mini-legs" viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="#fff" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="url(#mt)" stroke="#111"/></svg><div><b>Hector</b><small>pattes inversées · pas vu depuis 8 mois</small></div><div class="score">31 %<small>peu probable</small></div></li>
+     </ul>
+     <div style="font-size:12.5px"><span class="lnk">＋ Créer la fiche d'un nouvel animal</span> · <span class="lnk">✎ Garder sans fiche (« bagues V/? · R/B 7? »)</span></div>
+    </div>
+   </div>
+   <div class="ex" style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;align-items:center"><b style="grid-column:1/-1">Pour un chat, un chien, un cheval, une vache… le dessin des pattes est remplacé par une case :</b>
+    <span class="inp" style="width:auto">250 26 9…</span><span>n° de puce, de tatouage ou de boucle (même en partie) → <span class="pill"><span class="ini a">🐾</span>Minette <small>250269…4471</small></span> <b>100 %</b></span></div>
+   <div class="row2">
+    <div><span class="lab">Ce qu'il faisait</span><div class="chips"><span class="chip on">🍽 Se nourrit</span><span class="chip">🪺 Niche</span><span class="chip on">👥 En groupe</span><span class="chip">🪶 Toilette</span><span class="chip">💤 Au dortoir</span><span class="chip">📣 Crie</span><span class="chip">＋ Autre…</span></div></div>
+    <div><span class="lab">Nombre de corneilles vues</span><span class="inp u"><b>6</b><i>oiseaux</i></span>
+     <span class="lab">Avec qui</span><span class="pill"><span class="ini a">🐾</span>Margot<span class="x">×</span></span> <span class="pk" style="display:inline-flex;margin-top:4px">🔍 ＋ Ajouter un animal…</span></div>
+   </div>
+   <div class="row2">
+    <div><span class="lab">Photo ou son</span><span class="mz"><span class="thumb">📷</span><span><b>IMG_4021</b><br><small class="muted">2026 · Parc de la Villette</small></span><span class="lnk">↗ Ouvrir</span><span class="lnk">🖼 Changer</span><span class="muted">×</span></span></div>
+    <div><span class="lab">Lecture de la bague</span><span class="b y">Partielle « 7? »</span> <span class="muted" style="font-size:12px">mise toute seule d'après ce que tu as cliqué</span></div>
+   </div>
+  </div>
+  <div class="win-f"><span class="btn">Annuler</span><span class="btn p">Créer l'observation</span></div>
+ </div>
+ <p class="note">Fenêtre moyenne K6, bas toujours visible. Date et heure en texte libre (C4 + K17). « ? » = bague vue mais couleur pas sûre ; « ∅ » = pas de bague à cet endroit. Le score tient compte des couleurs, du code (même partiel), et de la distance au dernier endroit où l'animal a été vu. Les photos passent par la fenêtre unique en vignettes.</p>
+</div>
+
+<!-- S8 -->
+<div class="case full"><span class="tag"><span class="num">S8</span>Suivi · Bloc ⛶ en grand · Carte des observations</span><h3>Les passages datés sur la carte, reliés dans l'ordre, et le temps qu'on peut rejouer</h3>
+ <div class="mapbar">
+  <span class="chip on"><span class="dot" style="--c:#055dff"></span> Gaston (23) ×</span><span class="chip on"><span class="dot" style="--c:#e8590c"></span> Margot (1 248) ×</span><span class="chip"><span class="dot" style="--c:#7c3aed"></span> Prune (11)</span><span class="chip">＋ Ajouter un animal…</span>
+  <span style="flex:1"></span>
+  <label class="ui-toggle"><i></i>Relier les points dans l'ordre</label>
+  <span class="seg sm"><span class="is-active">Par animal</span><span>Par année</span></span>
+  <span class="sel">🗺 Plan IGN v2 (actuel) ▾</span>
+ </div>
+ <div class="mapwrap">
+  <svg viewBox="0 0 800 420" role="img" aria-label="Carte du nord-est de Paris avec les passages de Gaston et Margot">
+   <rect width="800" height="420" fill="#f1efe9"/>
+   <g stroke="#fff" stroke-width="9" fill="none"><path d="M0 90L800 40"/><path d="M0 300L800 250"/><path d="M120 0L240 420"/><path d="M430 0L520 420"/><path d="M640 0L700 420"/><path d="M0 200L800 160"/></g>
+   <g stroke="#dcd8cf" stroke-width="1" fill="none"><path d="M0 90L800 40"/><path d="M0 300L800 250"/><path d="M120 0L240 420"/><path d="M430 0L520 420"/><path d="M640 0L700 420"/></g>
+   <path d="M150 20L330 180L345 168L168 6Z" fill="#a9d3f0"/><text x="190" y="62" font-size="12" fill="#3a6a8c" transform="rotate(41 190 62)" font-family="system-ui">Bassin de la Villette</text>
+   <path d="M480 10H700V120H500Z" fill="#cfe5bf" stroke="#9bc283"/><text x="545" y="40" font-size="13" font-weight="700" fill="#3d6b2a" font-family="system-ui">Parc de la Villette</text>
+   <path d="M330 230C350 200 440 190 480 215C510 240 500 300 450 315C400 330 340 300 330 230Z" fill="#cfe5bf" stroke="#9bc283"/>
+   <path d="M385 255C400 245 425 250 428 265C430 280 405 288 392 280C380 272 378 262 385 255Z" fill="#a9d3f0"/>
+   <text x="345" y="345" font-size="13" font-weight="700" fill="#3d6b2a" font-family="system-ui">Buttes-Chaumont</text>
+   <path d="M600 330H780V420H610Z" fill="#d6dccd" stroke="#a9b39c"/><text x="625" y="372" font-size="12" font-weight="700" fill="#566049" font-family="system-ui">Père-Lachaise</text>
+   <!-- Margot : trajet GPS -->
+   <polyline points="455,300 470,280 500,250 540,210 560,170 590,120 610,80 640,60 660,90 630,130 600,160 560,200 520,240 480,270 440,290 420,310 450,330 520,340 600,360 660,380 700,370 650,345 560,320 480,300" fill="none" stroke="#e8590c" stroke-width="2.5" stroke-linejoin="round" opacity=".85"/>
+   <g fill="#e8590c"><circle cx="455" cy="300" r="3"/><circle cx="540" cy="210" r="3"/><circle cx="610" cy="80" r="3"/><circle cx="600" cy="160" r="3"/><circle cx="480" cy="270" r="3"/><circle cx="600" cy="360" r="3"/><circle cx="700" cy="370" r="3"/><circle cx="480" cy="300" r="3"/></g>
+   <!-- Gaston : observations -->
+   <polyline points="405,240 440,230 395,295 300,140 600,70" fill="none" stroke="#055dff" stroke-width="3" stroke-dasharray="7 5"/>
+   <g font-family="system-ui" font-size="11" font-weight="800" text-anchor="middle">
+    <circle cx="405" cy="240" r="11" fill="#055dff" stroke="#fff" stroke-width="2"/><text x="405" y="244" fill="#fff">1</text>
+    <circle cx="440" cy="230" r="11" fill="#055dff" stroke="#fff" stroke-width="2"/><text x="440" y="234" fill="#fff">2</text>
+    <circle cx="395" cy="295" r="11" fill="#055dff" stroke="#fff" stroke-width="2"/><text x="395" y="299" fill="#fff">3</text>
+    <circle cx="300" cy="140" r="11" fill="#055dff" stroke="#fff" stroke-width="2"/><text x="300" y="144" fill="#fff">4</text>
+    <circle cx="600" cy="70" r="14" fill="#055dff" stroke="#111" stroke-width="3"/><text x="600" y="74" fill="#fff">5</text>
+   </g>
+  </svg>
+  <div class="pop"><b>🐦 Gaston · n° 5</b><br>Jeudi 21 octobre 2026, 8 h 40<br>📍 Parc de la Villette · 🍽 se nourrit, en groupe (6)<br><span class="b g">Lue en entier</span> <span class="lnk">↗ Ouvrir l'observation</span></div>
+  <div class="mapside"><b>Légende</b><span class="dot" style="--c:#055dff"></span> Gaston · observations (n° = ordre)<br><span class="dot" style="--c:#e8590c"></span> Margot · balise GPS<br>- - - relié dans l'ordre · 1 km ≈ 60 px</div>
+ </div>
+ <div class="timeline"><span class="btn s">▶ Rejouer</span><div class="track"><i></i><b></b><span style="left:0">12 mai 2025</span><span style="left:72%">avril 2026</span><span style="left:100%;transform:translateX(-100%)">22 oct. 2026</span></div><span class="sel">1 jour par seconde ▾</span></div>
+ <p class="note" style="margin-top:26px">Même carte que l'onglet Carte (fonds au choix : Noir & blanc, Couleur (OSM), Plan IGN v2, Satellite, Cassini…). Interrupteur K16 pour relier les points (s'applique tout de suite). Pastilles des animaux = filtres ; « Par année » colore les points selon l'année. « ▶ Rejouer » fait apparaître les points dans l'ordre ; on peut aussi tirer le curseur. Les réglages de la carte sont retenus.</p>
+</div>
+
+<!-- S9 -->
+<div class="case full"><span class="tag"><span class="num">S9</span>Suivi · Importer un trajet GPS (K13)</span><h3>La fenêtre « Importer » en 3 étapes : déposer, voir ce qui va entrer, importer — puis « ↶ Annuler »</h3>
+ <div class="three">
+  <div class="win" style="width:100%"><div class="win-h"><div class="t"><small>⤒ Importer</small><b>Un trajet GPS</b></div><button class="x">×</button></div>
+   <div class="win-b"><div class="steps"><span class="on">1 · Fichier</span><span>2 · Vérifier</span><span>3 · Importer</span></div>
+    <div class="dropz">📁 <b>Glisse ici le fichier</b>, colle-le (<kbd>⌘V</kbd>) ou choisis-le<br><span class="btn s" style="margin-top:8px">📁 Choisir un fichier</span></div>
+    <p class="note">GPX, KML, CSV, GeoJSON · <b>faune sauvage</b> : export Movebank, balises Ornitela, e-obs, Druid… · <b>colliers d'animaux de compagnie</b> : export des applis Tractive, Weenect, Invoxia, Kippy… Il faut date, heure, latitude, longitude.</p></div>
+   <div class="win-f"><span class="btn">Annuler</span><span class="btn p" style="opacity:.45">Continuer</span></div></div>
+
+  <div class="win" style="width:100%"><div class="win-h"><div class="t"><small>⤒ Importer · margot-mars.csv</small><b>Un trajet GPS</b></div><button class="x">×</button></div>
+   <div class="win-b"><div class="steps"><span class="done">1 ✓</span><span class="on">2 · Vérifier</span><span>3</span></div>
+    <p style="margin:0 0 8px;font-size:13.5px;line-height:1.45"><b>Voilà ce qui va entrer :</b> 1 248 points du 3 au 17 mars 2026 pour Margot, 14,2 km.</p>
+    <svg viewBox="0 0 300 80" style="width:100%;border:1.5px solid #c9ccd3;background:#f1efe9;display:block"><polyline points="20,60 50,40 80,50 110,20 150,30 180,15 210,40 250,35 280,55" fill="none" stroke="#e8590c" stroke-width="2.5"/></svg>
+    <span class="lab">Points à garder</span>
+    <div class="radio">Tous les points (1 248)</div>
+    <div class="radio on">Un toutes les <span class="inp u"><b>15</b><i>min</i></span> → 912 points</div>
+    <span class="lab">Pour l'animal</span><span class="pill"><span class="ini a">🐾</span><span class="lbl">Margot <small>balise 213547</small></span><span class="o">↗ Fiche</span><span class="x">×</span></span>
+    <div class="notice i">ℹ️ <span>12 points déjà dans la base seront sautés.</span></div></div>
+   <div class="win-f"><span class="btn">Annuler</span><span class="btn p">Continuer</span></div></div>
+
+  <div class="win" style="width:100%"><div class="win-h"><div class="t"><small>⤒ Importer</small><b>Un trajet GPS</b></div><button class="x">×</button></div>
+   <div class="win-b"><div class="steps"><span class="done">1 ✓</span><span class="done">2 ✓</span><span class="on">3 · Importer</span></div>
+    <p style="margin:0;font-size:13.5px">Tout est prêt : 912 points pour Margot, du 3 au 17 mars 2026.</p>
+    <div class="toast2">✓ 912 points importés pour Margot<span class="u">↶ Annuler</span><span class="bar" style="width:58%"></span></div>
+    <p class="note">Le message apparaît en bas à gauche 6 s (H7). Le fichier d'origine est rangé dans les médias de Margot.</p></div>
+   <div class="win-f"><span class="btn">Annuler</span><span class="btn p">⤒ Importer 912 points</span></div></div>
+ </div>
+ <p class="note">Le nombre « un toutes les N min » (K17, unité dans la case) recalcule tout de suite le nombre de points. L'animal se choisit par le menu de choix ; si la balise est déjà sur une fiche (S5), elle est proposée d'office.</p>
+</div>
+
+<!-- S10 -->
+<div class="case full"><span class="tag"><span class="num">S10</span>Suivi · 🐾 Recensement (aussi dans Listes)</span><h3>Toutes les observations, ou tous les animaux bagués, avec la barre commune et le mode Fiches</h3>
+ <div class="ph"><div class="t"><small>Listes · Animaux</small><h2>🐾 Recensement</h2><p>Les animaux suivis et tout ce qu'on a vu d'eux, sur tous les sites.</p></div><span class="btn p">＋ Nouvelle observation</span><span class="btn">⋯</span><span class="btn">⭐</span></div>
+ <div class="seg" style="margin-bottom:12px"><span>👁 Observations</span><span class="is-active">🔖 Animaux bagués</span><span>🏞 Sites</span></div>
+ <div class="two w">
+  <div>
+   <div class="h10"><span class="srch">🔍 Chercher… (nom, code « 7K », bague EA…) <kbd>/</kbd></span><span class="dd">Filtrer ▾<span class="n">3</span></span><span class="seg sm"><span>Liste</span><span class="is-active">Fiches</span></span><span class="dd">Trier : vus récemment ▾</span></div>
+   <div class="actf"><span class="chip">🐦 Corneille noire ×</span><span class="chip">🏞 Buttes-Chaumont ×</span><span class="chip">2026 ×</span><span class="lnk">Tout effacer</span></div>
+   <div class="cnt" style="margin-bottom:12px"><span>4 animaux</span></div>
+   <div class="cards" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    <div class="uc"><div class="im"><svg viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="url(#mt)" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="#fff" stroke="#111"/></svg></div><div class="bd"><b>Gaston ♂</b><small>G V/M · D R/B « 7K » · EA123456</small><small>23 observations · 4 sites</small><div class="chips"><span class="b bl">Suivi en cours</span></div><div class="wh">Vu hier à 8 h 40</div></div><div class="ft"><span>Ouvrir</span><span>⋯</span></div></div>
+    <div class="uc"><div class="im" style="font-size:34px">📡</div><div class="bd"><b>Margot ♀</b><small>Balise 213547 · EA123511</small><small>1 248 points GPS · 14,2 km</small><div class="chips"><span class="b bl">Émet</span></div><div class="wh">Vu aujourd'hui à 6 h 15</div></div><div class="ft"><span>Ouvrir</span><span>⋯</span></div></div>
+    <div class="uc"><div class="im"><svg viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="#f2c400" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="#fff" stroke="#111"/></svg></div><div class="bd"><b>Prune ♀</b><small>G V/J · D R/B « 7A »</small><small>11 observations · niche</small><div class="chips"><span class="b y">Lecture à vérifier</span></div><div class="wh">Vu le 9 oct. 2026</div></div><div class="ft"><span>Ouvrir</span><span>⋯</span></div></div>
+    <div class="uc"><div class="im"><svg viewBox="0 0 46 36"><rect x="6" y="4" width="12" height="12" fill="#d62828" stroke="#111"/><rect x="6" y="19" width="12" height="12" fill="#fff" stroke="#111"/><rect x="28" y="4" width="12" height="12" fill="#1f9d55" stroke="#111"/><rect x="28" y="19" width="12" height="12" fill="url(#mt)" stroke="#111"/></svg></div><div class="bd"><b>Hector</b><small>G R/B · D V/M « 2C »</small><small>6 observations</small><div class="chips"><span class="b">Pas revu depuis 8 mois</span></div><div class="wh">Vu le 17 févr. 2026</div></div><div class="ft"><span>Ouvrir</span><span>⋯</span></div></div>
+   </div>
+  </div>
+  <div class="menu"><h6>Espèce</h6><div class="it ck on">🐦 Corneille noire (31)</div><div class="it ck">🐦 Pie bavarde (5)</div><div class="it ck">🐦 Choucas (2)</div>
+   <hr><h6>Site</h6><div style="padding:2px 12px 6px"><span class="pill"><span class="ic">🏞</span>Buttes-Chaumont<span class="x">×</span></span><div class="pk" style="margin-top:6px">🔍 ＋ Ajouter un site…</div></div>
+   <hr><h6>Année</h6><div style="padding:2px 12px"><span class="seg sm"><span>2025</span><span class="is-active">2026</span><span>Toutes</span></span></div>
+   <hr><h6>Bague lue</h6><div class="it ck">En entier</div><div class="it ck">Partielle</div><div class="it ck">Couleurs seules</div>
+   <hr><h6>Suivi</h6><div class="it ck">Balise GPS</div><div class="it ck">Pas revus depuis 6 mois</div></div>
+ </div>
+ <p class="note">Barre H10 dans l'ordre (Chercher · Filtrer ▾ · Liste | Fiches · Trier) ; le menu Filtrer est rangé par rubriques, le site avec le menu de choix. Mode Fiches = la vignette commune K9 (image : les bagues dessinées en petit), date K4 (« Vu hier à 8 h 40 »). Le mode Liste reprend les colonnes de S6. Chaque onglet retient ses réglages.</p>
+</div>
+
+<!-- S11 -->
+<div class="case full"><span class="tag"><span class="num">S11</span>Suivi · Bloc ⛶ en grand · Chiffres</span><h3>Combien, où, depuis quand, quelle distance — et qui n'a plus été revu</h3>
+ <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:flex-start">
+  <span class="seg sm"><span class="is-active">Tous les animaux</span><span>Gaston</span><span>Margot</span><span>Buttes-Chaumont</span></span>
+  <div style="position:relative"><span class="btn">⤓ Exporter ▾</span>
+   <div class="menu" style="margin-top:6px;min-width:220px"><div class="it">📄 CSV</div><div class="it">📡 Movebank (CSV)</div><div class="it">📍 GPX / KML (trajets)</div><hr><div class="it">🧮 Ouvrir dans le tableur</div></div></div>
+ </div>
+ <div class="tiles">
+  <div class="tile"><b>38</b><small>animaux bagués</small></div>
+  <div class="tile"><b>412</b><small>observations · 61 observateurs</small></div>
+  <div class="tile"><b>12 mai 2025</b><small>première observation<br>dernière : aujourd'hui à 6 h 15</small></div>
+  <div class="tile"><b>14,2 km</b><small>parcourus par Margot (3–17 mars 2026)</small></div>
+ </div>
+ <div class="three">
+  <div class="chart"><h5>Animaux vus par mois · 2026</h5>
+   <svg viewBox="0 0 300 140" role="img" aria-label="Animaux vus par mois">
+    <g fill="#055dff"><rect x="8" y="60" width="16" height="60"/><rect x="32" y="48" width="16" height="72"/><rect x="56" y="30" width="16" height="90"/><rect x="80" y="20" width="16" height="100"/><rect x="104" y="36" width="16" height="84"/><rect x="128" y="56" width="16" height="64"/><rect x="152" y="80" width="16" height="40"/><rect x="176" y="86" width="16" height="34"/><rect x="200" y="62" width="16" height="58"/><rect x="224" y="44" width="16" height="76"/></g>
+    <g fill="#ccd1d8"><rect x="248" y="120" width="16" height="0"/><rect x="272" y="120" width="16" height="0"/></g>
+    <line x1="0" y1="120" x2="300" y2="120" stroke="#111" stroke-width="1.5"/>
+    <g font-size="9" fill="#666" text-anchor="middle" font-family="system-ui"><text x="16" y="133">J</text><text x="40" y="133">F</text><text x="64" y="133">M</text><text x="88" y="133">A</text><text x="112" y="133">M</text><text x="136" y="133">J</text><text x="160" y="133">J</text><text x="184" y="133">A</text><text x="208" y="133">S</text><text x="232" y="133">O</text><text x="256" y="133">N</text><text x="280" y="133">D</text></g>
+    <text x="88" y="14" font-size="10" font-weight="700" text-anchor="middle" font-family="system-ui">25</text>
+   </svg></div>
+  <div class="chart"><h5>Par site · observations</h5>
+   <div class="hb"><span>Buttes-Chaumont</span><i style="width:100%"></i><span>186</span></div>
+   <div class="hb"><span>Parc de la Villette</span><i style="width:62%"></i><span>115</span></div>
+   <div class="hb"><span>Bassin de la Villette</span><i style="width:38%"></i><span>71</span></div>
+   <div class="hb"><span>Père-Lachaise</span><i style="width:21%"></i><span>40</span></div>
+   <h5 style="margin-top:12px">Zone fréquentée · Gaston</h5>
+   <svg viewBox="0 0 300 90" role="img" aria-label="Zone fréquentée"><rect width="300" height="90" fill="#f1efe9"/><path d="M40 70L80 20L190 10L260 40L220 80L110 82Z" fill="rgba(5,93,255,.15)" stroke="#055dff" stroke-width="2"/><g fill="#055dff"><circle cx="80" cy="22" r="4"/><circle cx="190" cy="12" r="4"/><circle cx="255" cy="40" r="4"/><circle cx="120" cy="60" r="4"/><circle cx="60" cy="66" r="4"/></g><text x="150" y="52" font-size="11" font-weight="700" text-anchor="middle" font-family="system-ui">≈ 1,9 km²</text></svg></div>
+  <div class="chart"><h5>Jamais revus depuis…</h5>
+   <ul class="lost">
+    <li><span><b>Hector</b> · Bassin de la Villette</span><span class="b">17 févr. 2026 · 8 mois</span></li>
+    <li><span><b>Lulu</b> · Père-Lachaise</span><span class="b">2 déc. 2025 · 10 mois</span></li>
+    <li><span><b>Sans nom 2C9</b> · Buttes-Chaumont</span><span class="b">juin 2025 · 16 mois</span></li>
+    <li><span><b>Titus</b> · trouvé mort</span><span class="b blk">† 4 janv. 2026</span></li>
+   </ul>
+   <p class="note" style="margin-top:8px">Délai réglable (6 mois par défaut). Clic = la fiche.</p></div>
+ </div>
+ <p class="note">Un seul menu « ⤓ Exporter ▾ » ; « 🧮 Ouvrir dans le tableur » passe par le moteur commun (une seule grille). Les chiffres suivent le choix du haut (tous, un animal, un site).</p>
+</div>
+
+<!-- S12 -->
+<div class="case full"><span class="tag"><span class="num">S12</span>Suivi · Fiche « 🏞 Site de suivi »</span><h3>Un parc, un quartier, un dortoir : les animaux vus, les comptages par date et la carte du site</h3>
+ <div class="hero"><span class="hero-ic" style="background:#e7f3df">🏞</span>
+  <div><span class="eyebrow">🏞 Site de suivi · Parc</span><h2>Parc des Buttes-Chaumont</h2><p>Paris 19ᵉ · 25 ha · suivi depuis mars 2024 · 186 observations</p>
+   <div style="margin-top:7px"><span class="pill"><span class="ic">📍</span><span class="lbl">Parc des Buttes-Chaumont <small>Paris (75)</small></span><span class="o">↗ Lieu</span><span class="o">🗺</span></span></div></div>
+  <div class="acts"><span class="btn p">＋ Nouveau comptage</span><span class="btn s">✎ Modifier</span><span class="btn s">⋯</span></div></div>
+ <div class="two">
+  <div>
+   <div class="crd"><div class="crd-h"><h4>🔢 Comptages <small>· 14</small></h4><span class="dd">Trier : plus récents ▾</span></div>
+    <div class="crd-b" style="padding-top:0"><div class="scroll"><table class="mtbl" style="min-width:420px">
+     <tr><th>Date</th><th>Quoi</th><th>Nombre</th><th>Par</th></tr>
+     <tr><td><b>2 janv. 2026</b><small>17 h 10</small></td><td>💤 Dortoir · île</td><td><b>140</b> corneilles</td><td><span class="pill"><span class="ini">AL</span>A. LEROY</span></td></tr>
+     <tr><td><b>5 déc. 2025</b><small>16 h 50</small></td><td>💤 Dortoir · île</td><td><b>118</b> corneilles</td><td><span class="pill"><span class="ini f">CM</span>C. MARTIN</span></td></tr>
+     <tr><td><b>14 avr. 2026</b><small>matin</small></td><td>🪺 Nids occupés</td><td><b>9</b> nids</td><td><span class="pill"><span class="ini">AL</span>A. LEROY</span></td></tr>
+     <tr><td><b>3 juin 2025</b><small>—</small></td><td>🐣 Poussins bagués</td><td><b>12</b></td><td><span class="pill"><span class="ini">AL</span>A. LEROY</span></td></tr>
+    </table></div>
+    <svg viewBox="0 0 300 60" style="width:100%;margin-top:10px" role="img" aria-label="Dortoir, évolution"><polyline points="10,48 60,40 110,30 160,22 210,12 260,8" fill="none" stroke="#055dff" stroke-width="2.5"/><g fill="#055dff"><circle cx="10" cy="48" r="3"/><circle cx="60" cy="40" r="3"/><circle cx="110" cy="30" r="3"/><circle cx="160" cy="22" r="3"/><circle cx="210" cy="12" r="3"/><circle cx="260" cy="8" r="4"/></g><text x="268" y="20" font-size="10" font-weight="700" font-family="system-ui">140</text><text x="10" y="58" font-size="9" fill="#666" font-family="system-ui">dortoir · août 2025 → janv. 2026</text></svg></div></div>
+   <div class="crd"><div class="crd-h"><h4>🐦 Animaux vus ici <small>· 17</small></h4><span class="lnk">↗ Voir dans le Recensement</span></div>
+    <div class="crd-b"><div class="chips"><span class="pill"><span class="ini a">🐾</span>Gaston <small>23×</small></span><span class="pill"><span class="ini a">🐾</span>Margot <small>40×</small></span><span class="pill"><span class="ini a">🐾</span>Prune <small>11×</small></span><span class="pill"><span class="ini a">🐾</span>Hector <small>3×</small></span><span class="pill sec"><span class="ini u">?</span>Non bagués <small>≈ 120</small></span><span class="chip">＋ 12 autres</span></div></div></div>
+  </div>
+  <div class="mapwrap">
+   <svg viewBox="0 0 400 330" role="img" aria-label="Carte du parc"><rect width="400" height="330" fill="#f1efe9"/><path d="M40 160C60 70 220 40 320 90C390 130 380 250 300 285C200 320 60 280 40 160Z" fill="#cfe5bf" stroke="#3d6b2a" stroke-width="2.5" stroke-dasharray="8 4"/>
+    <path d="M160 150C185 130 235 138 240 165C245 195 200 210 175 198C152 186 148 165 160 150Z" fill="#a9d3f0"/><circle cx="200" cy="168" r="16" fill="#cfe5bf" stroke="#9bc283"/>
+    <circle cx="200" cy="168" r="30" fill="rgba(124,58,237,.18)" stroke="#7c3aed" stroke-width="2"/><text x="200" y="128" font-size="11" font-weight="800" fill="#5b21b6" text-anchor="middle" font-family="system-ui">💤 Dortoir · 140</text>
+    <g fill="#e1a500" stroke="#111"><circle cx="110" cy="120" r="6"/><circle cx="290" cy="110" r="6"/><circle cx="270" cy="240" r="6"/><circle cx="120" cy="230" r="6"/></g>
+    <g fill="#055dff"><circle cx="150" cy="100" r="4"/><circle cx="250" cy="90" r="4"/><circle cx="320" cy="180" r="4"/><circle cx="90" cy="180" r="4"/><circle cx="220" cy="260" r="4"/><circle cx="170" cy="250" r="4"/></g>
+   </svg>
+   <div class="mapside"><b>Légende</b>- - - contour du site<br><span class="dot" style="--c:#7c3aed"></span> dortoir · <span class="dot" style="--c:#e1a500"></span> nids · <span class="dot" style="--c:#055dff"></span> observations</div>
+  </div>
+ </div>
+ <p class="note">Un site est une fiche « tout le reste » (🏞, menu de choix) reliée à un lieu ; son contour se dessine sur la carte. Comptage = date + heure (C4, K17), sorte, nombre (unité dans la case), observateur. La courbe suit les comptages d'une même sorte.</p>
+</div>
+
+<!-- S13 -->
+<div class="case full"><span class="tag"><span class="num">S13</span>Suivi · Un chat avec un collier GPS</span><h3>Minette : sa puce et son collier GPS, et sa nuit dehors sur la carte</h3>
+ <div class="hero"><span class="hero-ic" style="background:#fdf0dc">🐈</span>
+  <div><span class="eyebrow">🐈 Chat · Européen</span><h2>Minette <span style="font-size:20px;color:#d9488f">♀</span></h2><p>Tigrée brune · 6 ans · chez <b>Claire MARTIN</b>, Montreuil</p>
+   <div class="chips" style="margin-top:7px"><span class="b bl">Collier GPS</span><span class="b g">Puce enregistrée</span></div></div>
+  <div class="acts"><span class="btn p">⤒ Importer un trajet…</span><span class="btn s">✎ Modifier</span><span class="btn s">⋯</span></div></div>
+ <div class="seg" style="margin-bottom:14px"><span>🪪 Fiche</span><span class="is-active">🔖 Marques</span><span>👁 Observations (3)</span><span>🗺 Trajets (14 nuits)</span><span>📷 Photos</span></div>
+ <div class="two w">
+  <div class="mapwrap">
+   <svg viewBox="0 0 520 380" role="img" aria-label="Trajet de Minette la nuit du 20 au 21 octobre 2026">
+    <rect width="520" height="380" fill="#f1efe9"/>
+    <g fill="#e2ded4"><rect x="20" y="20" width="120" height="90"/><rect x="170" y="20" width="150" height="90"/><rect x="350" y="20" width="150" height="90"/><rect x="20" y="140" width="120" height="100"/><rect x="350" y="140" width="150" height="100"/><rect x="20" y="270" width="120" height="90"/><rect x="170" y="270" width="150" height="90"/><rect x="350" y="270" width="150" height="90"/></g>
+    <rect x="170" y="140" width="150" height="100" fill="#d7e8c9"/><text x="245" y="232" font-size="10" fill="#3d6b2a" text-anchor="middle" font-family="system-ui">jardins</text>
+    <g fill="none" stroke="#055dff" stroke-dasharray="3 4" opacity=".5"><circle cx="230" cy="180" r="60"/><circle cx="230" cy="180" r="150"/></g>
+    <text x="292" y="132" font-size="10" fill="#055dff" font-family="system-ui">100 m</text><text x="360" y="58" font-size="10" fill="#055dff" font-family="system-ui">250 m</text>
+    <path d="M180 140L280 130L300 200L250 250L175 230Z" fill="rgba(217,72,143,.14)" stroke="#d9488f" stroke-width="1.5"/>
+    <polyline points="230,180 250,160 280,150 300,190 340,250 390,300 445,335 420,300 360,260 310,230 270,240 220,225 190,200 215,190 230,180" fill="none" stroke="#d9488f" stroke-width="2.5" stroke-linejoin="round"/>
+    <g fill="#d9488f"><circle cx="250" cy="160" r="3"/><circle cx="280" cy="150" r="3"/><circle cx="300" cy="190" r="3"/><circle cx="340" cy="250" r="3"/><circle cx="390" cy="300" r="3"/><circle cx="420" cy="300" r="3"/><circle cx="360" cy="260" r="3"/><circle cx="310" cy="230" r="3"/><circle cx="270" cy="240" r="3"/><circle cx="220" cy="225" r="3"/><circle cx="190" cy="200" r="3"/></g>
+    <circle cx="445" cy="335" r="8" fill="#fff" stroke="#d9488f" stroke-width="3"/>
+    <rect x="218" y="168" width="24" height="24" fill="#111"/><text x="230" y="186" font-size="14" text-anchor="middle">🏠</text>
+    <g font-family="system-ui" font-size="10.5" font-weight="700" fill="#111"><text x="256" y="152">21 h 10</text><text x="306" y="186">22 h 30</text><text x="400" y="296">1 h 40</text><text x="168" y="214">5 h 50</text></g>
+    <g font-family="system-ui"><rect x="300" y="345" width="200" height="22" fill="#fff" stroke="#111" stroke-width="1.5"/><text x="400" y="360" font-size="11" font-weight="800" text-anchor="middle">📏 plus loin : 640 m de la maison</text></g>
+   </svg>
+   <div class="mapside" style="bottom:auto;top:10px"><b>Nuit du 20 au 21 oct. 2026</b><span class="dot" style="--c:#d9488f"></span> trajet (412 points)<br>▱ zone fréquentée · 🏠 maison</div>
+  </div>
+  <div>
+   <div class="tiles" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:12px">
+    <div class="tile"><b>8 h 40</b><small>dehors cette nuit<br>sortie 21 h 10 · rentrée 5 h 50</small></div>
+    <div class="tile"><b>640 m</b><small>le plus loin de la maison (1 h 40)</small></div>
+    <div class="tile"><b>3,1 km</b><small>parcourus</small></div>
+    <div class="tile"><b>0,9 ha</b><small>zone fréquentée (14 nuits)</small></div>
+   </div>
+   <div class="crd"><div class="crd-h"><h4>🔖 Marques</h4><span class="btn s">＋ Ajouter une marque ▾</span></div>
+    <div class="crd-b"><dl class="kv">
+     <dt>💉 Puce</dt><dd><span class="code">250269604124471</span><div class="ok">✓ 15 chiffres · posée le 4 juin 2020</div></dd>
+     <dt>📡 Collier GPS</dt><dd>Tractive CAT Mini · n° <span class="code">TRCAT4K7Q</span><div class="ok" style="color:#666;font-weight:500">depuis le 1ᵉʳ sept. 2026 · un point toutes les 1 min la nuit</div></dd>
+     <dt>⭕ Collier</dt><dd>Rouge, avec médaille « Minette · 06 … »</dd>
+    </dl>
+    <div class="empty-line" style="margin-top:10px"><span>🐈</span><span>Pour un chat : pas de bague ; tatouage et autres marques dans « ＋ Ajouter une marque ».</span></div></div></div>
+   <div class="win" style="width:100%;margin-top:14px"><div class="win-h"><div class="t"><small>⤒ Importer · tractive-2026-10-21.gpx</small><b>Un trajet GPS</b></div><button class="x">×</button></div>
+    <div class="win-b"><div class="steps"><span class="done">1 ✓</span><span class="on">2 · Vérifier</span><span>3</span></div>
+     <p style="margin:0;font-size:13.5px;line-height:1.45"><b>Voilà ce qui va entrer :</b> 412 points de la nuit du 20 au 21 oct. 2026 pour Minette, 3,1 km. <span class="b bl">Tractive (GPX)</span></p>
+     <div class="radio on">Couper en nuits (une sortie = un trajet)</div></div>
+    <div class="win-f"><span class="btn">Annuler</span><span class="btn p">Continuer</span></div></div>
+  </div>
+ </div>
+ <p class="note">Même outil que pour les corneilles : seules les marques changent avec l'espèce (S5). La maison vient du lieu de ses maîtres ; « plus loin » et « temps dehors » sont calculés à partir de la maison. Le curseur du temps et « ▶ Rejouer » de S8 marchent aussi ici ; « Couper en nuits » range chaque sortie à part dans l'onglet « 🗺 Trajets ».</p>
+</div>
+
+<!-- S14 -->
+<div class="case full dk"><span class="tag"><span class="num">S14</span>Mode sombre</span><h3>La fiche de Gaston et la carte en mode sombre</h3>
+ <div class="two">
+  <div>
+   <div class="hero"><span class="hero-ic">🐦</span><div><span class="eyebrow">🐦 Oiseau · Corneille noire</span><h2>Gaston</h2><p>Bagué le 12 mai 2025 · vu hier</p><div class="chips" style="margin-top:6px"><span class="b bl">Suivi en cours</span><span class="b g">Lue en entier</span></div></div></div>
+   <div class="seg" style="margin-bottom:12px"><span>🪪 Fiche</span><span class="is-active">🔖 Bagues</span><span>👁 Observations</span></div>
+   <div class="crd"><div class="crd-h"><h4>🎨 Bagues de couleur</h4></div><div class="crd-b">
+    <svg class="legs" viewBox="0 0 220 168" role="img" aria-label="Pattes de Gaston"><path d="M14 0H206Q196 38 110 42Q24 38 14 0Z" fill="#000"/><rect x="49" y="34" width="12" height="104" fill="#55575c"/><rect x="159" y="34" width="12" height="104" fill="#55575c"/><path d="M55 138l-22 16M55 138v20M55 138l22 16M165 138l-22 16M165 138v20M165 138l22 16" stroke="#55575c" stroke-width="5" stroke-linecap="round"/><rect x="40" y="46" width="30" height="28" rx="3" fill="#1f9d55" stroke="#ddd" stroke-width="2"/><rect x="40" y="80" width="30" height="28" rx="3" fill="url(#mt)" stroke="#ddd" stroke-width="2"/><rect x="150" y="46" width="30" height="28" rx="3" fill="#d62828" stroke="#ddd" stroke-width="2"/><rect x="150" y="80" width="30" height="28" rx="3" fill="#fff" stroke="#ddd" stroke-width="2"/><text x="165" y="100" font-size="14" font-weight="800" text-anchor="middle" fill="#d62828" font-family="system-ui">7K</text></svg>
+    <div class="legkey"><div><b>Patte gauche</b>vert · métal</div><div><b>Patte droite</b>rouge · blanc « 7K »</div></div>
+    <dl class="kv" style="margin-top:10px"><dt>Bague métal</dt><dd><span class="code">EA123456</span></dd><dt>Bagueur</dt><dd><span class="pill"><span class="ini">AL</span>Antoine LEROY<span class="o">↗ Fiche</span></span></dd></dl>
+   </div></div>
+  </div>
+  <div>
+   <div class="mapbar"><label class="ui-toggle"><i></i>Relier dans l'ordre</label><span class="sel">🗺 Sombre ▾</span></div>
+   <div class="mapwrap">
+    <svg viewBox="0 0 400 300" role="img" aria-label="Carte sombre"><rect width="400" height="300" fill="#1e2127"/><g stroke="#2e333b" stroke-width="7"><path d="M0 60L400 30"/><path d="M0 220L400 190"/><path d="M80 0L140 300"/><path d="M260 0L300 300"/></g>
+     <path d="M90 10L190 110L200 100L102 0Z" fill="#1c3a52"/><path d="M180 160C195 135 250 130 270 150C290 175 270 215 235 222C200 228 175 205 180 160Z" fill="#203826" stroke="#2f5a38"/><path d="M270 10H390V80H280Z" fill="#203826" stroke="#2f5a38"/>
+     <polyline points="215,170 240,165 210,205 150,85 335,45" fill="none" stroke="#5b9bff" stroke-width="3" stroke-dasharray="7 5"/>
+     <g font-family="system-ui" font-size="10" font-weight="800" text-anchor="middle"><circle cx="215" cy="170" r="9" fill="#2f7bff" stroke="#1b1e24" stroke-width="2"/><text x="215" y="174" fill="#fff">1</text><circle cx="240" cy="165" r="9" fill="#2f7bff" stroke="#1b1e24" stroke-width="2"/><text x="240" y="169" fill="#fff">2</text><circle cx="210" cy="205" r="9" fill="#2f7bff" stroke="#1b1e24" stroke-width="2"/><text x="210" y="209" fill="#fff">3</text><circle cx="150" cy="85" r="9" fill="#2f7bff" stroke="#1b1e24" stroke-width="2"/><text x="150" y="89" fill="#fff">4</text><circle cx="335" cy="45" r="12" fill="#2f7bff" stroke="#fff" stroke-width="2"/><text x="335" y="49" fill="#fff">5</text></g>
+    </svg>
+    <div class="mapside"><b>Légende</b><span class="dot" style="--c:#5b9bff"></span> Gaston · 5 passages</div>
+   </div>
+   <div class="timeline"><span class="btn s">▶ Rejouer</span><div class="track"><i></i><b></b></div><span class="muted">avril 2026</span></div>
+  </div>
+ </div>
+ <p class="note">Couleurs des bagues inchangées en sombre (ce sont de vraies couleurs) ; seul leur bord s'éclaircit pour rester visible. Fond « Sombre » proposé d'office en mode sombre.</p>
+</div>
+</div>
+</body></html>
