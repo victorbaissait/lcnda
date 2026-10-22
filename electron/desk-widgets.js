@@ -9,6 +9,7 @@ const KINDS = {
     ancestor: { title: 'Un ancêtre', w: 320, h: 240 },
     photo: { title: 'Photo du jour', w: 340, h: 300 },
     countdown: { title: 'Compte à rebours', w: 300, h: 210 },
+    calc: { title: 'Calculette', w: 320, h: 340 },
 };
 
 /** Ce que la page peut demander : seulement ces champs, nettoyés (la page ne choisit jamais d'adresse ni de fichier). */

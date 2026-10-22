@@ -253,6 +253,14 @@ try {
         try { json_response(['ok' => true, 'result' => $action === 'artist_remote' ? artist_remote($payload) : sciences_remote($payload)]); }
         catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
     }
+    // 📤 Mon site web → Publier en ligne (lib/website_publish.php) : pas de transaction ouverte pendant l'envoi (jusqu'à quelques minutes)
+    if (in_array($action, ['website_publish', 'website_publish_settings', 'website_publish_state'], true)) {
+        require_once __DIR__ . '/lib/website_publish.php';
+        try {
+            if (!$isWrite) { json_response(website_publish_state($pdo, safe_int($_GET['id'] ?? 0))); }
+            json_response(['ok' => true, 'result' => $action === 'website_publish' ? website_publish($pdo, $payload) : website_publish_settings($pdo, $payload)]);
+        } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
+    }
     if ($isWrite && $action === 'house_model_upload') {
         house_model_upload($pdo, $_FILES['file'] ?? null, $_POST);
     }
@@ -417,6 +425,7 @@ try {
         'website_versions' => json_response(['items' => website_versions($pdo, safe_int($_GET['site_id'] ?? 0))]),
         'website_version' => json_response(website_version($pdo, safe_int($_GET['id'] ?? 0))),
         'website_render' => json_response(website_render($pdo, $_GET)),
+        'website_map_points' => json_response(['points' => website_map_points($pdo, $_GET)]), // 🗺 les lieux d'une carte (sans personne cachée), pour la dessiner sur son fond
         'houses' => json_response(['items' => houses_list($pdo)]),
         'cadastre_parcels' => json_response(cadastre_list($pdo, $_GET)), // 🗺 Cadastre (lib/cadastre.php)
         'cadastre_parcel' => json_response(cadastre_get($pdo, safe_int($_GET['id'] ?? 0))),

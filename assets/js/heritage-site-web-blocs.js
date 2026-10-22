@@ -18,6 +18,23 @@
     const year = new Date().getFullYear();
     const pickPerson = async (title = 'Quelle personne ?') => { const it = await PK().openPicker?.({kind: 'person', title}); return it ? {id: Number(it.id), name: String(it.title || it.label || it.name || '').trim()} : null; };
     const pickPlace = async (title = 'Quel lieu ?') => { const it = await PK().openPicker?.({kind: 'place', title}); return it && Number(it.id) > 0 ? {id: Number(it.id), name: String(it.title || it.label || it.name || '').trim()} : null; };
+    /** le fond de carte de l'app (Maintenance → Cartes et fonds de carte), sinon Voyager */
+    const defaultFond = () => { try { const v = A()?.mapBackgroundValue?.(A()?.readDesignSettings?.()?.mapBackground); return /^[a-z0-9_]{1,30}$/.test(v || '') && v !== 'offline' ? v : 'voyager'; } catch (_) { return 'voyager'; } };
+    /** un diagramme : un des miens (menu de choix, sorte « diagramme »), ou un nouveau (l'éditeur de diagrammes) → {id, name} */
+    const pickDiagram = () => new Promise(resolve => {
+        let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
+        ext.openDialog({eyebrow: 'MON SITE WEB', title: '🏛️ Quel diagramme ?', submitLabel: 'Fermer',
+            body: '<div class="sw-tpls"><button type="button" class="sw-tpl" data-dg-way="pick"><span class="sw-tpl-ico" aria-hidden="true">🔍</span><b>Un de mes diagrammes</b><small>Graphiques → Mes diagrammes</small></button><button type="button" class="sw-tpl" data-dg-way="new"><span class="sw-tpl-ico" aria-hidden="true">＋</span><b>Créer un diagramme</b><small>Hémicycle, frise, barres, camembert… avec tes données ou celles de l’app</small></button></div>',
+            onOpen: d => {
+                d.addEventListener('close', () => setTimeout(() => end(null), 0));
+                d.addEventListener('click', async e => {
+                    const b = e.target.closest('[data-dg-way]'); if (!b) return; done = true; d.close();
+                    if (b.dataset.dgWay === 'pick') { const it = await PK().openPicker?.({kind: 'diagram', title: 'Quel diagramme ?'}); resolve(it ? {id: Number(it.id), name: String(it.title || 'Diagramme')} : null); return; }
+                    if (!ext.openDiagramEditor) { resolve(null); return; }
+                    let saved = 0; await ext.openDiagramEditor(null, {onSave: id => { saved = Number(id) || saved; }, onClose: () => resolve(saved ? {id: saved, name: 'Mon diagramme'} : null)});
+                });
+            }, onSubmit: () => {}});
+    });
     const mediaSrc = m => `media/${encodeURIComponent(m.filename || m.file || '')}`;
     const pickImages = async (multiple, title) => { const r = await PK().openMediaPicker?.({types: ['image'], multiple, title, okLabel: multiple ? 'Utiliser ces images' : 'Utiliser cette image'}); if (!r) return null; return (Array.isArray(r) ? r : [r]).filter(m => m && (m.filename || m.file)); };
     const section = (name, inner, cls = 'section') => `<section class="${cls}" data-lc-name="${esc(name)}">\n  <div class="conteneur">\n${inner}\n  </div>\n</section>`;
@@ -83,7 +100,9 @@ a { color: var(--lc-principale); }
         {key: 'timeline', group: 'genea', icon: '📅', label: 'Frise', hint: 'Sa vie, année par année', ask: async () => { const p = await pickPerson('La frise de qui ?'); return p && {p}; },
             html: (ctx, o) => geneaBlock('timeline', {person: o.p.id}, `Frise de ${o.p.name}`, `La vie de ${o.p.name}`)},
         {key: 'map', group: 'genea', icon: '🗺', label: 'Carte', hint: 'Les lieux d’une personne (ou de ses ancêtres)', ask: async () => { const p = await pickPerson('La carte de qui ?'); return p && {p}; },
-            html: (ctx, o) => geneaBlock('map', {person: o.p.id, scope: 'ancestors', gens: 6}, `Carte de ${o.p.name}`, `Les lieux de ${o.p.name} et de ses ancêtres`)},
+            html: (ctx, o) => geneaBlock('map', {person: o.p.id, scope: 'ancestors', gens: 6, fond: defaultFond(), vive: 0}, `Carte de ${o.p.name}`, `Les lieux de ${o.p.name} et de ses ancêtres`)},
+        {key: 'diagram', group: 'genea', icon: '🏛️', label: 'Diagramme', hint: 'Un de tes diagrammes (Graphiques → Mes diagrammes), ou un nouveau ; redessiné à chaque ouverture, figé à l’export', ask: async () => { const d = await pickDiagram(); return d && {d}; },
+            html: (ctx, o) => geneaBlock('diagram', {diagram: o.d.id}, `Diagramme ${o.d.name}`, o.d.name)},
         {key: 'chart', group: 'genea', icon: '📊', label: 'Chiffres', hint: 'Naissances par décennie, prénoms les plus portés', html: () => geneaBlock('chart', {chart: 'naissances'}, 'Chiffres de la famille', 'La famille en chiffres')},
         {key: 'photos', group: 'genea', icon: '📷', label: 'Photos d’une personne', hint: 'Ses photos publiables, toutes seules', ask: async () => { const p = await pickPerson('Les photos de qui ?'); return p && {p}; },
             html: (ctx, o) => geneaBlock('photos', {person: o.p.id, max: 12}, `Photos de ${o.p.name}`, `Les photos de ${o.p.name}`)},
@@ -168,7 +187,7 @@ a { color: var(--lc-principale); }
     /* ═════ Le pont : le script posé dans l'aperçu isolé (iframe sandbox, origine opaque) ═════ */
     // Il ne voit que le site ; il parle à l'éditeur par postMessage ; l'éditeur vérifie que le message vient bien de l'aperçu.
     const BRIDGE = String.raw`(function(){'use strict';
-var mode='select',sel=null,edit=null,hov=null,T=0,dropAt=null;var H=document.documentElement,B=document.body;
+var mode='select',sel=null,edit=null,hov=null,T=0,dropAt=null,mv=null,skipClick=false;var H=document.documentElement,B=document.body;
 var ov=document.createElement('div');ov.id='lcb-ov';ov.innerHTML='<div class="lcb-hov"><span></span></div><div class="lcb-sel"><span></span></div><div class="lcb-drop"></div>';H.appendChild(ov);
 var bh=ov.children[0],bs=ov.children[1],bd=ov.children[2];
 function send(m){m.lcSite=1;try{parent.postMessage(m,'*');}catch(e){}}
@@ -187,6 +206,7 @@ function stopEdit(){if(!edit)return;edit.removeAttribute('contenteditable');edit
 document.addEventListener('mousemove',function(e){if(mode==='play'){box(bh,null);return;}var el=root(e.target);if(el!==hov){hov=el;box(bh,el&&el!==sel?el:null);}},true);
 document.addEventListener('mouseleave',function(){hov=null;box(bh,null);});
 document.addEventListener('click',function(e){
+ if(skipClick){skipClick=false;e.preventDefault();e.stopPropagation();return;}
  var a=e.target.closest&&e.target.closest('a[href]');
  if(mode==='play'){if(!a)return;var h=a.getAttribute('href')||'';var m=/^([a-z0-9-]+)\.html(#.*)?$/i.exec(h);if(m){e.preventDefault();send({type:'goto',slug:m[1]});return;}if(h.charAt(0)==='#')return;e.preventDefault();send({type:'external',href:h.slice(0,300)});return;}
  if(edit&&edit.contains(e.target))return;
@@ -196,8 +216,20 @@ document.addEventListener('click',function(e){
  select(el);send({type:'select',info:info(el)});},true);
 document.addEventListener('dblclick',function(e){if(mode!=='select')return;var el=root(e.target);if(el&&el.matches(TEXTY)&&!el.closest('[data-lc-block]')){send({type:'want-text'});}},true);
 document.addEventListener('submit',function(e){e.preventDefault();},true);
+// déplacer un élément à la souris : on le prend, une ligne bleue montre où il ira (avant, après, ou dedans en pointillés)
+var BOXY='section,div,main,nav,header,footer,article,aside,ul,ol,figure,blockquote,form,table';
+function moveTarget(e){var p=document.elementFromPoint(e.clientX,e.clientY);if(!p||ov.contains(p))return null;var t=root(p);if(!t||!mv||t===mv.el||mv.el.contains(t))return null;var r=t.getBoundingClientRect();
+ var inside=t.matches(BOXY)&&!t.matches('[data-lc-block]')&&e.clientY>r.top+r.height*.28&&e.clientY<r.bottom-r.height*.28&&r.height>24;
+ return{el:t,r:r,where:inside?'inside':(e.clientY<r.top+r.height/2?'before':'after')};}
+document.addEventListener('mousedown',function(e){if(mode!=='select'||e.button!==0||edit)return;var el=root(e.target);if(!el)return;mv={el:el,x:e.clientX,y:e.clientY,on:false,t:null};},true);
+document.addEventListener('mousemove',function(e){if(!mv)return;if(!mv.on){if(Math.abs(e.clientX-mv.x)+Math.abs(e.clientY-mv.y)<7)return;mv.on=true;H.classList.add('lcb-moving');select(mv.el,false);}
+ e.preventDefault();var t=moveTarget(e);mv.t=t;if(!t){bd.style.display='none';return;}bd.style.display='block';bd.classList.toggle('is-in',t.where==='inside');bd.style.left=(t.r.left+scrollX)+'px';bd.style.width=t.r.width+'px';
+ if(t.where==='inside'){bd.style.top=(t.r.top+scrollY)+'px';bd.style.height=t.r.height+'px';}else{bd.style.height='';bd.style.top=((t.where==='before'?t.r.top:t.r.bottom)+scrollY-2)+'px';}},true);
+document.addEventListener('mouseup',function(e){if(!mv)return;var m=mv;mv=null;H.classList.remove('lcb-moving');bd.style.display='none';bd.classList.remove('is-in');if(!m.on)return;skipClick=true;setTimeout(function(){skipClick=false;},300);
+ if(m.t){var from=path(m.el),to=path(m.t.el);if(from&&to)send({type:'move',from:from,to:to,where:m.t.where});}},true);
 document.addEventListener('input',function(){clearTimeout(T);T=setTimeout(function(){send({type:'html',html:serialize(),sel:sel?path(sel):null});box(bs,sel);},280);},true);
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&edit){stopEdit();send({type:'html',html:serialize(),sel:sel?path(sel):null});return;}
+document.addEventListener('keydown',function(e){if(e.altKey&&!edit&&sel&&mode!=='play'&&(e.key==='ArrowUp'||e.key==='ArrowDown')){e.preventDefault();send({type:'key',key:e.key==='ArrowUp'?'moveup':'movedown'});return;}
+ if(e.key==='Escape'&&edit){stopEdit();send({type:'html',html:serialize(),sel:sel?path(sel):null});return;}
  if((e.metaKey||e.ctrlKey)&&/^[szy]$/i.test(e.key)&&!edit){e.preventDefault();send({type:'key',key:e.key.toLowerCase(),shift:e.shiftKey});}
  if(!edit&&mode!=='play'&&sel&&(e.key==='Delete'||e.key==='Backspace')){e.preventDefault();send({type:'key',key:'delete'});}},true);
 addEventListener('scroll',function(){box(bs,sel);box(bh,null);},{passive:true});addEventListener('resize',function(){box(bs,sel);});
@@ -223,9 +255,11 @@ H.classList.toggle('lcb-text',mode==='text');send({type:'ready',h:document.docum
 #lcb-ov .is-low span{top:0;border-radius:0 0 3px 0}
 .lcb-hov span{background:#5b7cc9}
 .lcb-drop{height:4px;background:#055dff;border-radius:2px;box-shadow:0 0 0 2px rgba(255,255,255,.8)}
+.lcb-drop.is-in{background:rgba(5,93,255,.06);outline:2px dashed #055dff;outline-offset:-2px;box-shadow:none}
+html.lcb-moving,html.lcb-moving *{cursor:grabbing!important;user-select:none!important}
 html.lcb-text [contenteditable]{outline:2px solid #12a150!important;outline-offset:2px;cursor:text}
 html:not(.lcb-play) a,html:not(.lcb-play) button{cursor:default}
 html.lcb-text body :is(p,h1,h2,h3,h4,h5,h6,li,a,span,blockquote,figcaption,td,th,cite):not([data-lc-block] *){cursor:text}`;
 
-    ext.siteKit = {BLOCKS, GROUPS, TEMPLATES, BASE_CSS, BRIDGE, BRIDGE_CSS, parse, elByPath, pathOf, blockAttrs, blockKey, insertHtml, pickPerson, pickPlace, pickImages, mediaSrc, esc};
+    ext.siteKit = {BLOCKS, GROUPS, TEMPLATES, BASE_CSS, BRIDGE, BRIDGE_CSS, parse, elByPath, pathOf, blockAttrs, blockKey, insertHtml, pickPerson, pickPlace, pickImages, pickDiagram, defaultFond, mediaSrc, esc};
 })();

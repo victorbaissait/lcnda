@@ -15,7 +15,7 @@ declare(strict_types=1);
  * fiches confidentielles).
  */
 
-const DESK_KINDS = ['today' => ['🎂', 'Ce jour-là'], 'ancestor' => ['🌳', 'Un ancêtre'], 'photo' => ['📷', 'Photo du jour'], 'countdown' => ['⏳', 'Compte à rebours']];
+const DESK_KINDS = ['today' => ['🎂', 'Ce jour-là'], 'ancestor' => ['🌳', 'Un ancêtre'], 'photo' => ['📷', 'Photo du jour'], 'countdown' => ['⏳', 'Compte à rebours'], 'calc' => ['🧮', 'Calculette']];
 
 function desk_widget_opts(array $q): array
 {
@@ -82,6 +82,8 @@ function desk_widget_data(PDO $pdo, array $o, bool $file): array
                 $out[] = ['t' => (string) ($m['title'] ?: 'Photo'), 'y' => trim((string) $m['date_text']), 'src' => $u];
             }
             return ['photos' => $out];
+        case 'calc':
+            return []; // le moteur de la Calculette (assets/js/app-calculette-engine.js) est mis dans la page : tout se calcule sur place
         case 'countdown':
             return ['label' => $o['label'] !== '' ? $o['label'] : 'La cousinade', 'date' => $o['date'] !== '' ? $o['date'] : date('Y-m-d', strtotime('+30 days'))];
     }
@@ -115,6 +117,9 @@ li small{display:block;color:var(--muted)}h4{margin:8px 0 2px;font-size:11px;let
 .photo p{margin:0;padding:6px 12px;font-size:12.5px;background:var(--bg)}
 .count{display:flex;gap:8px;justify-content:center;margin:12px 0}.count div{text-align:center;min-width:52px}.count b{display:block;font-size:30px;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums}
 .empty{color:var(--muted);text-align:center;padding:24px 8px}.c{text-align:center}
+.calc input{width:100%;font:16px/1.3 ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);-webkit-app-region:no-drag}
+.calc output{display:block;font:700 22px/1.3 ui-monospace,Menlo,Consolas,monospace;margin:8px 2px;word-break:break-all;min-height:1.3em}.calc output.err{font:13px/1.4 inherit;color:#b3261e}
+.calc li{cursor:pointer;font:13px/1.3 ui-monospace,Menlo,Consolas,monospace}.calc li:hover{background:var(--soft)}
 CSS;
     $js = <<<'JS'
 (()=>{const C=JSON.parse(document.getElementById('dw-data').textContent);const D=C.data||{};const m=document.querySelector('main');
@@ -132,6 +137,15 @@ function draw(){
   m.innerHTML=`<div class="anc">${p.ph?`<img src="${esc(p.ph)}" alt="">`:`<div class="ph">${p.g==='female'?'👩':p.g==='male'?'👨':'🌳'}</div>`}<div><p class="big">${esc(p.n)}</p><p class="muted">${esc(p.y)}</p>${p.b?`<p>° ${esc(p.b)}</p>`:''}${p.d?`<p>† ${esc(p.d)}</p>`:''}</div></div>`;}
  else if(C.kind==='photo'){const L=D.photos||[];if(!L.length){m.innerHTML='<p class="empty">Pas encore de photo à montrer.</p>';return;}const p=L[(doy+shift)%L.length];
   m.innerHTML=`<div class="photo"><img src="${esc(p.src)}" alt="${esc(p.t)}"><p><b>${esc(p.t)}</b>${p.y?` · ${esc(p.y)}`:''}</p></div>`;}
+ else if(C.kind==='calc'){if(m.querySelector('.calc'))return;
+  m.innerHTML='<form class="calc" autocomplete="off"><input name="q" aria-label="Calcul" placeholder="2 × (3 + 4), 15 % × 80, 2/3 + 1/6…" spellcheck="false"><output aria-live="polite"></output><ul class="hist"></ul><p class="muted">Entrée : calculer · ↑ : reprendre le dernier calcul</p></form>';
+  var f=m.querySelector('form'),q=f.q,out=f.querySelector('output'),hist=f.querySelector('.hist'),H=[];
+  f.addEventListener('submit',function(e){e.preventDefault();var s=q.value.trim();if(!s)return;var r;try{r=window.LCNDA_CALC.evaluate(s);}catch(x){r={ok:false,error:String(x&&x.message||x)};}
+   if(r&&r.ok){out.className='';out.textContent='= '+r.text;H.unshift([s,r.text]);H=H.slice(0,8);hist.innerHTML=H.map(function(h,i){return '<li data-i="'+i+'">'+esc(h[0])+' = <b>'+esc(h[1])+'</b></li>';}).join('');}
+   else{out.className='err';out.textContent='⚠️ '+(r&&r.error||'Je ne comprends pas ce calcul.');}});
+  hist.addEventListener('click',function(e){var li=e.target.closest('li');if(!li)return;q.value=H[+li.dataset.i][0];q.focus();});
+  q.addEventListener('keydown',function(e){if(e.key==='ArrowUp'&&H.length&&!q.value){e.preventDefault();q.value=H[0][0];}});
+  setTimeout(function(){q.focus();},50);}
  else if(C.kind==='countdown'){const t=new Date(D.date+'T00:00:00');let s=Math.round((t-new Date())/1000);const past=s<0;s=Math.abs(s);
   const j=Math.floor(s/86400),h=Math.floor(s%86400/3600),mi=Math.floor(s%3600/60);
   m.innerHTML=`<p class="muted c">${past?'C’était le':'Le'} ${esc(t.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}))}</p><div class="count"><div><b>${j}</b>${j>1?'jours':'jour'}</div><div><b>${h}</b>h</div><div><b>${mi}</b>min</div></div><p class="muted c">${past?'Déjà passé.':'Encore un peu de patience !'}</p>`;}
@@ -151,7 +165,9 @@ JS;
         . '<header><span aria-hidden="true">' . $e($icon) . '</span><b>' . $e($title) . '</b>'
         . ($hasNext ? '<button type="button" data-next title="Un autre" aria-label="Un autre">↻</button>' : '')
         . ($file ? '' : '<button type="button" data-close title="Fermer le widget" aria-label="Fermer le widget">×</button>') . '</header><main></main>'
-        . '<script id="dw-data" type="application/json">' . $json . '</script><script' . $n . '>' . $js . '</script></body></html>';
+        . '<script id="dw-data" type="application/json">' . $json . '</script>'
+        . ($o['kind'] === 'calc' ? '<script' . $n . '>' . str_ireplace('</script', '<\/script', (string) @file_get_contents(APP_ROOT . '/assets/js/app-calculette-engine.js')) . '</script>' : '')
+        . '<script' . $n . '>' . $js . '</script></body></html>';
 }
 
 /** GET desk_widget_page (fenêtre de bureau) et desk_widget_file (fichier autonome) */

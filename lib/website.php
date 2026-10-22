@@ -26,7 +26,24 @@ const SITE_JS_MAX = 600000;
 const SITE_VERSIONS_MAX = 100;
 const SITE_IMG_MAX = 1600;
 const SITE_REDACTED = '[nom retiré]';
-const SITE_BLOCK_KINDS = ['menu', 'person', 'tree', 'timeline', 'map', 'chart', 'photos', 'place'];
+const SITE_BLOCK_KINDS = ['menu', 'person', 'tree', 'timeline', 'map', 'chart', 'photos', 'place', 'diagram'];
+const SITE_FROZEN_MAX = 3500000;  // une carte figée (image) ou un diagramme figé (SVG)
+/** 🗺 Fonds qu'on peut aussi montrer en « carte interactive » dans le site publié : leurs conditions permettent qu'un site
+ *  les affiche avec leur mention (OpenStreetMap, CARTO, OpenTopoMap, OpenHistoricalMap). Les autres fonds (Esri, IGN,
+ *  bibliothèques…) restent en image figée ; leur carte interactive passe au fond OpenStreetMap. */
+const SITE_MAP_LIVE = [
+    'osm' => ['https://tile.openstreetmap.org/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap', 19],
+    'osmfr' => ['https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', '© OpenStreetMap France · © les contributeurs d’OpenStreetMap', 19],
+    'osmde' => ['https://a.tile.openstreetmap.de/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap', 18],
+    'cyclosm' => ['https://a.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', '© CyclOSM · © les contributeurs d’OpenStreetMap', 19],
+    'relief' => ['https://a.tile.opentopomap.org/{z}/{x}/{y}.png', '© OpenTopoMap (CC-BY-SA) · © les contributeurs d’OpenStreetMap', 17],
+    'light' => ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
+    'dark' => ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
+    'minimal' => ['https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
+    'roads' => ['https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
+    'voyager' => ['https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
+    'ohm' => ['https://tile.openhistoricalmap.org/map/{z}/{x}/{y}.png', '© les contributeurs d’OpenHistoricalMap', 18],
+];
 
 function website_ready(PDO $pdo): void
 {
@@ -94,6 +111,59 @@ function website_defuse(string $html, int &$removed = 0): string
     }, $html);
     $html = (string) preg_replace('#(java|vb|live)script\s*:#i', '', $html);
     return $html;
+}
+
+/** Un SVG dessiné par l'app (diagramme) : seulement la balise <svg>, désamorcé comme une page (pas de script, d'événement, de lien) */
+function website_svg_clean(string $svg, int &$removed = 0): string
+{
+    $svg = trim($svg);
+    if (!preg_match('#^<svg\b[^>]*>.*</svg>$#is', $svg)) { return ''; }
+    $svg = website_defuse($svg, $removed);
+    $svg = (string) preg_replace('#\s(href)\s*=\s*("(?!\#)[^"]*"|\'(?!\#)[^\']*\')#i', '', $svg); // dans un SVG : seulement des liens internes (#…)
+    return preg_match('#^<svg\b#i', ltrim($svg)) ? $svg : '';
+}
+
+/** Une image envoyée en data: (carte figée) : relue et réenregistrée par GD (sans métadonnées), 2000 px au plus ; [octets, extension] */
+function website_image_from_data(string $data): ?array
+{
+    if (!preg_match('#^data:image/(jpeg|png);base64,([A-Za-z0-9+/=]+)$#', $data, $m) || !extension_loaded('gd')) { return null; }
+    $bytes = base64_decode($m[2], true);
+    $info = $bytes !== false ? @getimagesizefromstring($bytes) : false;
+    if (!$info || $info[0] * $info[1] > 8000000) { return null; }
+    $im = @imagecreatefromstring($bytes);
+    if (!$im) { return null; }
+    $r = min(1, 2000 / max($info[0], $info[1])); $w = max(1, (int) round($info[0] * $r)); $h = max(1, (int) round($info[1] * $r));
+    $out = imagecreatetruecolor($w, $h); imagefill($out, 0, 0, imagecolorallocate($out, 255, 255, 255));
+    imagecopyresampled($out, $im, 0, 0, 0, 0, $w, $h, $info[0], $info[1]);
+    ob_start(); imagejpeg($out, null, 86); $b = (string) ob_get_clean();
+    imagedestroy($out); imagedestroy($im);
+    return [$b, 'jpg'];
+}
+
+/** La clé d'une carte figée : la même que dans l'app (heritage-site-web.js, mapKey) */
+function website_map_key(array $a): string
+{
+    return 'map:' . safe_int($a['person'] ?? 0) . ':' . (($a['scope'] ?? '') === 'ancestors' ? 'ancestors' : 'person') . ':' . max(1, min(12, safe_int($a['gens'] ?? 6) ?: 6)) . ':' . (preg_match('/^[a-z0-9_]{1,30}$/', (string) ($a['fond'] ?? '')) ? $a['fond'] : 'svg');
+}
+
+/** Les lieux d'une carte (personne seule, ou avec ses ancêtres), sans personne cachée : [{lat, lng, name, n}] */
+function website_map_points(PDO $pdo, array $a): array
+{
+    $pid = safe_int($a['person'] ?? 0);
+    if (!website_open($pdo, $pid)) { return []; }
+    $ids = ($a['scope'] ?? '') === 'ancestors' ? array_keys(h_ancestors($pdo, $pid, max(1, min(12, safe_int($a['gens'] ?? 6) ?: 6)))) : [$pid];
+    $pts = [];
+    foreach (array_slice($ids, 0, 400) as $id) {
+        foreach (website_events($pdo, (int) $id) as $e) {
+            if (($e['lat'] === null || $e['lng'] === null) && $e['p'] !== '') { $g = website_geo($pdo, $e['p']); if ($g) { $e['lat'] = $g[0]; $e['lng'] = $g[1]; } } // lieu sans coordonnées : villes du monde de l'app
+            if ($e['lat'] === null || $e['lng'] === null || abs($e['lat']) > 85 || abs($e['lng']) > 180) { continue; }
+            $k = round($e['lat'], 3) . ',' . round($e['lng'], 3);
+            $pts[$k] ??= ['lat' => round($e['lat'], 5), 'lng' => round($e['lng'], 5), 'name' => $e['p'], 'n' => 0];
+            $pts[$k]['n']++;
+        }
+    }
+    uasort($pts, static fn($x, $y) => $y['n'] <=> $x['n']);
+    return array_values($pts);
 }
 
 function website_css_value_clean(string $css): string
@@ -175,7 +245,21 @@ function website_check(mixed $data): array
     $settings = ['lang' => is_string($s['lang'] ?? null) && preg_match('/^[a-z]{2}(-[A-Z]{2})?$/', $s['lang']) ? $s['lang'] : 'fr',
         'title' => mb_substr(safe_text($s['title'] ?? ''), 0, 120), 'desc' => mb_substr(safe_text($s['desc'] ?? ''), 0, 300),
         'tpl' => is_string($s['tpl'] ?? null) && preg_match('/^[\w-]{1,40}$/', $s['tpl']) ? $s['tpl'] : '', 'credit' => !array_key_exists('credit', $s) || !empty($s['credit'])];
-    $clean = ['v' => 1, 'pages' => $pages, 'css' => $cssClean, 'js' => website_js_clean($js), 'theme' => $theme, 'settings' => $settings];
+    // ce qui a été figé dans l'app : diagrammes (SVG, dessinés par Graphiques → Mes diagrammes) et cartes avec leur fond (image)
+    $frozen = [];
+    $allHtml = implode('', array_column($pages, 'html'));
+    foreach (is_array($data['frozen'] ?? null) ? array_slice($data['frozen'], 0, 200, true) : [] as $k => $v) {
+        $k = (string) $k;
+        if (preg_match('/^diagram:(\d{1,9})$/', $k, $m) && is_string($v) && strlen($v) <= SITE_FROZEN_MAX && preg_match('#data-diagram\s*=\s*["\']?' . $m[1] . '\b#', $allHtml)) {
+            $svg = website_svg_clean($v, $removed);
+            if ($svg !== '') { $frozen[$k] = $svg; }
+        } elseif (preg_match('/^map:\d{1,9}:(person|ancestors):\d{1,2}:[a-z0-9_]{1,30}$/', $k) && is_array($v) && is_string($v['img'] ?? null) && strlen($v['img']) <= SITE_FROZEN_MAX
+            && preg_match('#^data:image/(jpeg|png);base64,[A-Za-z0-9+/=]+$#', $v['img'])) {
+            $frozen[$k] = ['img' => $v['img'], 'credit' => mb_substr(safe_text($v['credit'] ?? ''), 0, 200), 'w' => max(100, min(2000, (int) ($v['w'] ?? 760))), 'h' => max(80, min(2000, (int) ($v['h'] ?? 460))),
+                'view' => is_array($v['view'] ?? null) ? ['lat' => max(-85, min(85, (float) ($v['view']['lat'] ?? 0))), 'lng' => max(-180, min(180, (float) ($v['view']['lng'] ?? 0))), 'z' => max(1, min(18, (int) ($v['view']['z'] ?? 6)))] : null];
+        }
+    }
+    $clean = ['v' => 1, 'pages' => $pages, 'css' => $cssClean, 'js' => website_js_clean($js), 'theme' => $theme, 'settings' => $settings, 'frozen' => $frozen ?: new stdClass()];
     $first = ''; $blocks = 0;
     foreach ($pages as $p) {
         if ($first === '' && preg_match('#<h[1-2]\b[^>]*>(.*?)</h[1-2]>#is', $p['html'], $m)) { $first = mb_substr(trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8')), 0, 120); }
@@ -545,34 +629,43 @@ function website_block_html(PDO $pdo, array $a, callable $img, array $ctx = []):
             return '<ol class="lc-frise">' . implode('', array_map(static fn($e) => '<li><span class="lc-frise-an">' . website_e($e['y'] ?? '') . '</span><div><b>' . website_e($e['t']) . '</b><br><small>' . website_e(trim($e['d'] . ($e['p'] !== '' ? ' · ' . $e['p'] : ''))) . '</small></div></li>', array_slice($ev, 0, 60))) . '</ol>';
         case 'map':
             if (!website_open($pdo, $pid)) { return website_hidden_note('Cette carte'); }
-            $ids = ($a['scope'] ?? '') === 'ancestors' ? array_keys(h_ancestors($pdo, $pid, max(1, min(12, safe_int($a['gens'] ?? 6) ?: 6)))) : [$pid];
-            $pts = [];
-            foreach (array_slice($ids, 0, 400) as $id) {
-                foreach (website_events($pdo, (int) $id) as $e) {
-                    if (($e['lat'] === null || $e['lng'] === null) && $e['p'] !== '') { $g = website_geo($pdo, $e['p']); if ($g) { $e['lat'] = $g[0]; $e['lng'] = $g[1]; } } // lieu sans coordonnées : villes du monde de l'app
-                    if ($e['lat'] === null || $e['lng'] === null || abs($e['lat']) > 90 || abs($e['lng']) > 180) { continue; }
-                    $k = round($e['lat'], 3) . ',' . round($e['lng'], 3);
-                    $pts[$k] ??= ['lat' => $e['lat'], 'lng' => $e['lng'], 'name' => $e['p'], 'n' => 0];
-                    $pts[$k]['n']++;
+            $pts = website_map_points($pdo, $a);
+            if (!$pts) { return '<p class="lc-note">Pas encore de lieu placé sur la carte (coordonnées) pour ' . (($a['scope'] ?? '') === 'ancestors' ? 'ces personnes' : 'cette personne') . '.</p>'; }
+            $list = '';
+            foreach ($pts as $pt) { $list .= '<li>' . website_e($pt['name']) . ' <small>(' . $pt['n'] . ')</small></li>'; }
+            // une carte avec son fond (figée en image dans l'app) ; « interactive » : on peut la déplacer et zoomer dans le site
+            $fz = $ctx['frozen'][website_map_key($a)] ?? null;
+            $asset = $ctx['asset'] ?? null;
+            if (is_array($fz) && $asset) {
+                $url = $asset($fz['img'], 'carte');
+                if ($url !== '') {
+                    $img = '<img class="lc-map-img" src="' . website_e($url) . '" alt="Carte des lieux" width="' . (int) $fz['w'] . '" height="' . (int) $fz['h'] . '">';
+                    $credit = '<small class="lc-map-credit">' . website_e($fz['credit']) . '</small>';
+                    if (($a['vive'] ?? '') === '1' && !empty($fz['view'])) {
+                        $live = SITE_MAP_LIVE[(string) ($a['fond'] ?? '')] ?? SITE_MAP_LIVE['osm'];
+                        $data = json_encode(['tiles' => $live[0], 'credit' => $live[1], 'max' => $live[2], 'view' => $fz['view'], 'pts' => array_map(static fn($p) => [$p['lat'], $p['lng'], mb_substr((string) $p['name'], 0, 80), $p['n']], array_slice($pts, 0, 300))], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                        if (isset($ctx['live'])) { $ctx['live'](); }
+                        return '<figure class="lc-map"><div class="lc-carte-vive" data-carte="' . website_e((string) $data) . '">' . $img . '</div><figcaption>' . $credit . '<ul class="lc-map-list">' . $list . '</ul></figcaption></figure>';
+                    }
+                    return '<figure class="lc-map">' . $img . '<figcaption>' . $credit . '<ul class="lc-map-list">' . $list . '</ul></figcaption></figure>';
                 }
             }
-            if (!$pts) { return '<p class="lc-note">Pas encore de lieu placé sur la carte (coordonnées) pour ' . (count($ids) > 1 ? 'ces personnes' : 'cette personne') . '.</p>'; }
             $lats = array_column($pts, 'lat'); $lngs = array_column($pts, 'lng');
             $minLa = min($lats); $maxLa = max($lats); $minLo = min($lngs); $maxLo = max($lngs);
             $padLa = max(0.2, ($maxLa - $minLa) * 0.15); $padLo = max(0.3, ($maxLo - $minLo) * 0.15);
             $minLa -= $padLa; $maxLa += $padLa; $minLo -= $padLo; $maxLo += $padLo;
             $W = 600; $H = (int) max(220, min(600, round($W * ($maxLa - $minLa) / max(0.0001, ($maxLo - $minLo) * cos(deg2rad(($minLa + $maxLa) / 2))))));
             $svg = '<svg class="lc-map-svg" viewBox="0 0 ' . $W . ' ' . $H . '" role="img" aria-label="Carte des lieux"><rect width="100%" height="100%" class="lc-map-bg"/>';
-            $list = '';
-            uasort($pts, static fn($x, $y) => $y['n'] <=> $x['n']);
             foreach ($pts as $pt) {
                 $x = round(($pt['lng'] - $minLo) / ($maxLo - $minLo) * $W, 1); $y = round(($maxLa - $pt['lat']) / ($maxLa - $minLa) * $H, 1);
                 $r = min(14, 4 + 2 * $pt['n']);
                 $svg .= '<circle cx="' . $x . '" cy="' . $y . '" r="' . $r . '" class="lc-map-dot"><title>' . website_e($pt['name']) . '</title></circle>';
                 if ($pt['n'] > 1 || count($pts) < 12) { $svg .= '<text x="' . ($x + $r + 3) . '" y="' . ($y + 4) . '" class="lc-map-lbl">' . website_e(mb_substr((string) preg_replace('/,.*$/', '', $pt['name']), 0, 30)) . '</text>'; }
-                $list .= '<li>' . website_e($pt['name']) . ' <small>(' . $pt['n'] . ')</small></li>';
             }
             return '<figure class="lc-map">' . $svg . '</svg><figcaption><ul class="lc-map-list">' . $list . '</ul></figcaption></figure>';
+        case 'diagram':
+            $svg = $ctx['frozen']['diagram:' . safe_int($a['diagram'] ?? 0)] ?? '';
+            return is_string($svg) && $svg !== '' ? '<figure class="lc-diagramme">' . $svg . '</figure>' : '<p class="lc-note">Ce diagramme n’a pas encore été dessiné : ouvre le site dans LCNDA (il se dessine tout seul), puis enregistre.</p>';
         case 'chart':
             $ids = $pid && website_open($pdo, $pid) ? array_keys(h_ancestors($pdo, $pid, 20)) : array_keys($pv['persons']);
             $ids = array_values(array_filter($ids, static fn($id) => website_open($pdo, (int) $id)));
@@ -652,6 +745,9 @@ function website_blocks_css(): string
 .lc-frise li{display:flex;gap:.8em;margin:0 0 .9em;padding-left:.8em;position:relative}
 .lc-frise li::before{content:'';position:absolute;left:-8px;top:.35em;width:13px;height:13px;border-radius:50%;background:var(--lc-principale,#7a2a2a)}
 .lc-frise-an{font-weight:700;min-width:3.2em}
+.lc-map-img{display:block;width:100%;max-width:760px;height:auto;border-radius:var(--lc-arrondi,8px)}.lc-map-credit{display:block;font-size:.75em;color:#6b625b;margin:.3em 0}
+.lc-carte-vive{position:relative;max-width:760px;aspect-ratio:760/460;overflow:hidden;border-radius:var(--lc-arrondi,8px);background:#e8eef3;touch-action:none}.lc-carte-vive .lc-map-img{position:absolute;inset:0;height:100%}
+.lc-diagramme{margin:0;max-width:900px}.lc-diagramme svg{width:100%;height:auto;display:block}
 .lc-map{margin:0}.lc-map-svg{width:100%;max-width:720px;height:auto;display:block;border-radius:var(--lc-arrondi,8px)}.lc-map-bg{fill:#e8eef3}
 .lc-map-dot{fill:var(--lc-principale,#7a2a2a);fill-opacity:.75;stroke:#fff;stroke-width:1.5}.lc-map-lbl{font:12px sans-serif;fill:#333}
 .lc-map-list{columns:2;font-size:.9em}
@@ -709,10 +805,11 @@ function website_fill_blocks(string $html, callable $fill): string
  * $mode : 'preview' (dans l'app : adresses media/…), 'export' (le .zip), 'inline' (un seul fichier, images en data:).
  * Rend [html du corps, nombre de noms retirés, images refusées].
  */
-function website_page_body(PDO $pdo, array $site, int $idx, callable $img, string $mode): array
+function website_page_body(PDO $pdo, array $site, int $idx, callable $img, string $mode, ?callable $asset = null, ?callable $live = null): array
 {
     $page = $site['pages'][$idx];
-    $ctx = ['pages' => array_map(static fn($p) => ['slug' => $p['slug'], 'name' => $p['name']], $site['pages']), 'current' => $page['slug']];
+    $ctx = ['pages' => array_map(static fn($p) => ['slug' => $p['slug'], 'name' => $p['name']], $site['pages']), 'current' => $page['slug'],
+        'frozen' => is_array($site['frozen'] ?? null) ? $site['frozen'] : [], 'asset' => $asset, 'live' => $live];
     $html = website_fill_blocks($page['html'], static fn($a) => website_block_html($pdo, $a, $img, $ctx));
     // les images de la page et des styles écrits dans la page : media/… → l'adresse de l'export (ou rien si refusée)
     $refused = 0;
@@ -774,7 +871,13 @@ function website_csp(string $mode): string
 }
 
 /** Le document HTML complet d'une page. $css / $js : le texte (inline) ou null (fichiers css/style.css et js/script.js). */
-function website_document(array $site, int $idx, string $body, ?string $css, ?string $js, string $mode): string
+/** Le petit script des cartes interactives (assets/js/site-carte-vive.js), copié dans le site */
+function website_live_map_js(): string
+{
+    return (string) @file_get_contents(APP_ROOT . '/assets/js/site-carte-vive.js');
+}
+
+function website_document(array $site, int $idx, string $body, ?string $css, ?string $js, string $mode, bool $live = false): string
 {
     $page = $site['pages'][$idx];
     $title = $page['title'] !== '' ? $page['title'] : trim($page['name'] . ($site['settings']['title'] !== '' && $idx > 0 ? ' — ' . $site['settings']['title'] : ($idx === 0 && $site['settings']['title'] !== '' ? ' — ' . $site['settings']['title'] : '')));
@@ -783,8 +886,8 @@ function website_document(array $site, int $idx, string $body, ?string $css, ?st
         . '<meta http-equiv="Content-Security-Policy" content="' . htmlspecialchars(website_csp($mode), ENT_COMPAT) . "\">\n<meta name=\"referrer\" content=\"strict-origin-when-cross-origin\">\n"
         . '<title>' . website_e($title) . "</title>\n" . ($desc !== '' ? '<meta name="description" content="' . website_e($desc) . "\">\n" : '') . '<meta name="generator" content="LCNDA — Mon site web">' . "\n"
         . ($css === null ? "<link rel=\"stylesheet\" href=\"css/style.css\">\n" : '<style>' . str_ireplace('</style', '<\/style', $css) . "</style>\n") . "</head>\n<body>\n" . $body . "\n";
-    if ($js === null) { $h .= trim($site['js']) !== '' ? "<script src=\"js/script.js\" defer></script>\n" : ''; }
-    elseif (trim($js) !== '') { $h .= '<script>' . website_js_clean($js) . "</script>\n"; }
+    if ($js === null) { $h .= ($live ? "<script src=\"js/carte-lcnda.js\" defer></script>\n" : '') . (trim($site['js']) !== '' ? "<script src=\"js/script.js\" defer></script>\n" : ''); }
+    else { if ($live) { $h .= '<script>' . website_js_clean(website_live_map_js()) . "</script>\n"; } if (trim($js) !== '') { $h .= '<script>' . website_js_clean($js) . "</script>\n"; } }
     return $h . "</body>\n</html>\n";
 }
 
@@ -822,9 +925,20 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
         $files[$name] = $bytes[0]; $sum['images']++; $sum['bytes'] += strlen($bytes[0]);
         return $assets[$file] = $name;
     };
+    // les cartes figées (image envoyée par l'app) : réenregistrées, nom fabriqué
+    $c = 0;
+    $asset = static function (string $data, string $base) use (&$files, &$sum, &$c, $mode): string {
+        if ($mode === 'check') { $c++; $sum['images']++; return "images/{$base}-{$c}.jpg"; }
+        $b = website_image_from_data($data); if (!$b) { $sum['missing']++; return ''; }
+        $c++;
+        if ($mode === 'inline') { return 'data:image/jpeg;base64,' . base64_encode($b[0]); }
+        $name = "images/{$base}-{$c}.{$b[1]}"; $files[$name] = $b[0]; $sum['images']++; $sum['bytes'] += strlen($b[0]);
+        return $name;
+    };
+    $livePages = [];
     $pages = [];
     foreach ($site['pages'] as $i => $p) {
-        [$body, $names, $refused] = website_page_body($pdo, $site, $i, $img, $mode);
+        [$body, $names, $refused] = website_page_body($pdo, $site, $i, $img, $mode, $asset, static function () use (&$livePages, $i) { $livePages[$i] = true; });
         $sum['names'] += $names;
         $pages[$i] = $body;
         $sum['pages']++;
@@ -835,8 +949,9 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
     [$js, $n3] = website_redact($pdo, $site['js']); $sum['names'] += $n3;
     foreach ($pages as $i => $body) {
         $name = $i === 0 ? 'index.html' : $site['pages'][$i]['slug'] . '.html';
-        $files[$name] = $mode === 'inline' ? website_document($site, $i, $body, $cssRed, $js, 'preview') : website_document($site, $i, $body, null, null, 'export');
+        $files[$name] = $mode === 'inline' ? website_document($site, $i, $body, $cssRed, $js, 'preview', isset($livePages[$i])) : website_document($site, $i, $body, null, null, 'export', isset($livePages[$i]));
     }
+    if ($livePages && $mode !== 'inline') { $files['js/carte-lcnda.js'] = website_live_map_js(); } // la carte interactive : notre petit script, pas de bibliothèque
     if ($mode !== 'inline') {
         $files['css/style.css'] = $cssRed;
         if (trim($js) !== '') { $files['js/script.js'] = $js; }
@@ -864,7 +979,7 @@ function website_render(PDO $pdo, array $q): array
         $a = array_map(static fn($v) => is_scalar($v) ? mb_substr((string) $v, 0, 200) : '', $a);
         $out[] = website_block_html($pdo, $a, $img, $ctx);
     }
-    return ['html' => $out, 'css' => website_blocks_css()];
+    return ['html' => $out, 'css' => website_blocks_css(), 'live' => array_keys(SITE_MAP_LIVE)];
 }
 
 /** GET website_preview / website_export / website_export_check */

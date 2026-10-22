@@ -67,7 +67,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
     <link rel="stylesheet" href="assets/css/cadastre.css?v=1">
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=2">
-    <link rel="stylesheet" href="assets/css/site-web.css?v=1">
+    <link rel="stylesheet" href="assets/css/site-web.css?v=2">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=5" id="lc-frame-css" media="not all">
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=5" id="lc-designs-gen" media="not all">
@@ -1181,7 +1181,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=3" defer></script>
 <script src="assets/js/heritage-links.js?v=18" defer></script>
-<script src="assets/js/heritage-more.js?v=213" defer></script>
+<script src="assets/js/heritage-more.js?v=214" defer></script>
 <script src="assets/js/heritage-controle.js?v=3" defer></script>
 <script src="assets/js/heritage-records.js?v=10" defer></script>
 <script src="assets/js/heritage-research.js?v=34" defer></script>
@@ -1304,10 +1304,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=3" defer></script>
 <script src="assets/js/heritage-traitement-texte-outils.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-fichiers.js?v=1" defer></script>
-<script src="assets/js/heritage-site-web-code.js?v=1" defer></script>
-<script src="assets/js/heritage-site-web-blocs.js?v=1" defer></script>
-<script src="assets/js/heritage-site-web.js?v=1" defer></script>
-<script src="assets/js/heritage-desk-widgets.js?v=1" defer></script>
+<script src="assets/js/heritage-site-web-code.js?v=2" defer></script>
+<script src="assets/js/heritage-site-web-blocs.js?v=2" defer></script>
+<script src="assets/js/heritage-site-web.js?v=2" defer></script>
+<script src="assets/js/heritage-desk-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-lot.js?v=1" defer></script>
 <script src="assets/js/heritage-house-vides.js?v=1" defer></script>
 <script src="assets/js/heritage-house-plus.js?v=2" defer></script>

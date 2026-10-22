@@ -139,5 +139,8 @@ dialog.modal.sw-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
     .sw-bar [data-sw-cmd="browser"] { display: none; }
     .sw-stage { padding: 8px; }
 }
+/* 📤 Publier en ligne */
+.sw-pubtabs { display: flex; flex-wrap: wrap; margin: 10px 0; }
+[data-pub-pane][hidden] { display: none !important; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 /* ═════ fin du mode sombre automatique ═════ */

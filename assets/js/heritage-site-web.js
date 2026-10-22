@@ -33,7 +33,7 @@
     const ROLES = [['header', 'En-tête', 'site-entete'], ['nav', 'Menu', 'site-menu'], ['main', 'Contenu principal', 'contenu'], ['section', 'Section', 'section'], ['footer', 'Pied de page', 'site-pied'], ['div', 'Carte', 'carte']];
     const NAMES = ['En-tête', 'Menu', 'Bandeau', 'Contenu principal', 'Section', 'Texte', 'Carte', 'Galerie', 'Image', 'Colonne', 'Citation', 'Contact', 'Pied de page'];
     const HELP = {select: 'Clic : choisir un élément (« Ceci est… ») · double-clic sur un texte : l’écrire · glisse un bloc depuis ＋ Blocs', text: 'Clic dans un texte pour l’écrire · Échap : fini · le code suit tout seul', play: '▶ Ton site comme un visiteur : tes scripts tournent, les liens entre pages marchent'};
-    const KIND_LABEL = {menu: 'Menu (tenu à jour)', person: 'Fiche', tree: 'Arbre', timeline: 'Frise', map: 'Carte', chart: 'Chiffres', photos: 'Photos d’une personne', place: 'Gens d’un lieu'};
+    const KIND_LABEL = {menu: 'Menu (tenu à jour)', person: 'Fiche', tree: 'Arbre', timeline: 'Frise', map: 'Carte', chart: 'Chiffres', photos: 'Photos d’une personne', place: 'Gens d’un lieu', diagram: 'Diagramme'};
     const MAX_HTML = 2000000;
 
     const themeCss = t => { const f = x => `'${String(x || 'Georgia').replace(/'/g, '')}', Georgia, serif`; return `:root{--lc-principale:${t.primary};--lc-accent:${t.accent};--lc-fond:${t.bg};--lc-texte:${t.text};--lc-police:${f(t.font)};--lc-police-titres:${f(t.headFont)};--lc-largeur:${t.width}px;--lc-arrondi:${t.radius}px;--lc-taille:${t.size}px}`; };
@@ -53,14 +53,73 @@
     function normalizeSite(d) {
         const b = blankSite(); d = d && typeof d === 'object' ? d : {};
         const pages = Array.isArray(d.pages) && d.pages.length ? d.pages.map((p, i) => ({id: String(p.id || newId()), name: String(p.name || (i ? `Page ${i + 1}` : 'Accueil')), slug: i ? String(p.slug || slugOf(p.name)) : 'index', title: String(p.title || ''), desc: String(p.desc || ''), html: String(p.html || '')})) : b.pages;
-        return {v: 1, settings: {...b.settings, ...(d.settings || {})}, theme: {...b.theme, ...(d.theme || {})}, css: typeof d.css === 'string' ? d.css : b.css, js: typeof d.js === 'string' ? d.js : '', pages};
+        const frozen = d.frozen && typeof d.frozen === 'object' && !Array.isArray(d.frozen) ? {...d.frozen} : {};
+        return {v: 1, settings: {...b.settings, ...(d.settings || {})}, theme: {...b.theme, ...(d.theme || {})}, css: typeof d.css === 'string' ? d.css : b.css, js: typeof d.js === 'string' ? d.js : '', pages, frozen};
+    }
+
+    /* ═════ 🗺 Les cartes sur leur fond ═════ */
+    const mapKey = a => `map:${Number(a.person) || 0}:${a.scope === 'ancestors' ? 'ancestors' : 'person'}:${clamp(Number(a.gens) || 6, 1, 12)}:${/^[a-z0-9_]{1,30}$/.test(a.fond || '') ? a.fond : 'svg'}`;
+    const ptsKey = a => `${Number(a.person) || 0}:${a.scope === 'ancestors' ? 'ancestors' : 'person'}:${clamp(Number(a.gens) || 6, 1, 12)}`;
+    /** la mention à garder sous la carte (les conditions de chaque fond) */
+    const creditOf = bg => {
+        const b = String(bg || '');
+        if (/^(dark|light|minimal|roads|voyager)$/.test(b)) return '© les contributeurs d’OpenStreetMap · © CARTO';
+        if (b === 'relief') return '© OpenTopoMap (CC-BY-SA) · © les contributeurs d’OpenStreetMap';
+        if (b === 'ohm') return '© les contributeurs d’OpenHistoricalMap';
+        if (b === 'cyclosm') return '© CyclOSM · © les contributeurs d’OpenStreetMap';
+        if (b === 'wikimedia') return '© Wikimedia · © les contributeurs d’OpenStreetMap';
+        if (/^(satellite|esri_)/.test(b)) return '© Esri et ses fournisseurs';
+        if (/^cassini/.test(b)) return '© BnF · IGN (Géoplateforme) — carte de Cassini';
+        if (b === 'etatmajor' || /^ign_(ortho|scan|hr|planv2|parcels)/.test(b)) return '© IGN — Géoplateforme';
+        if (/^ign_es/.test(b)) return '© Instituto Geográfico Nacional (Espagne)';
+        if (/^(nls_|gsgs|london)/.test(b)) return '© National Library of Scotland';
+        if (/^swisstopo/.test(b)) return '© swisstopo';
+        if (/^(ferraris|vandermaelen|popp|frickx|buurtwegen)$/.test(b)) return '© Digitaal Vlaanderen (Geopunt)';
+        if (b === 'cartoweb') return '© IGN Belgique (Cartoweb)';
+        if (/^usgs/.test(b)) return '© USGS';
+        if (/^nasa/.test(b)) return '© NASA (GIBS)';
+        if (b === 'offline') return 'Fond hors ligne de LCNDA (contours des communes)';
+        return '© les contributeurs d’OpenStreetMap';
+    };
+    /** les fonds qu'un site publié peut aussi montrer en carte interactive (même liste que SITE_MAP_LIVE, lib/website.php) */
+    const LIVE_FONDS = ['osm', 'osmfr', 'osmde', 'cyclosm', 'relief', 'light', 'dark', 'minimal', 'roads', 'voyager', 'ohm'];
+    const TILE = 256, lon2x = (lng, z) => (lng + 180) / 360 * TILE * 2 ** z, lat2y = (lat, z) => { const r = lat * Math.PI / 180; return (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * TILE * 2 ** z; };
+    const loadTile = (src, cors) => new Promise(res => { const im = new Image(); if (cors) im.crossOrigin = 'anonymous'; const t = setTimeout(() => { im.src = ''; res(null); }, 9000); im.onload = () => { clearTimeout(t); res(im); }; im.onerror = () => { clearTimeout(t); res(null); }; im.referrerPolicy = 'strict-origin-when-cross-origin'; im.src = src; });
+    const offlineTile = (z, x, y) => `api.php?action=offline_tile&z=${z}&x=${x}&y=${y}`;
+    /** les lieux posés sur les tuiles du fond choisi → {img (JPEG), credit, w, h, view} ; sans réseau, ou si un fond ne permet pas la copie : le fond hors ligne */
+    async function composeMap(pts, bg, W = 760, H = 460) {
+        const lats = pts.map(p => p.lat), lngs = pts.map(p => p.lng);
+        let z = 13;
+        for (; z > 2; z--) { const w = lon2x(Math.max(...lngs), z) - lon2x(Math.min(...lngs), z), h = lat2y(Math.min(...lats), z) - lat2y(Math.max(...lats), z); if (w <= W - 140 && h <= H - 110) break; }
+        if (pts.length === 1) z = Math.min(z, 10);
+        const cx = (lon2x(Math.min(...lngs), z) + lon2x(Math.max(...lngs), z)) / 2, cy = (lat2y(Math.min(...lats), z) + lat2y(Math.max(...lats), z)) / 2, x0 = cx - W / 2, y0 = cy - H / 2, n = 2 ** z;
+        const toLng = x => x / (TILE * n) * 360 - 180, toLat = y => { const m = Math.PI - 2 * Math.PI * y / (TILE * n); return 180 / Math.PI * Math.atan(0.5 * (Math.exp(m) - Math.exp(-m))); };
+        const draw = async useOffline => {
+            const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const g = cv.getContext('2d');
+            g.fillStyle = '#e8eef3'; g.fillRect(0, 0, W, H);
+            const jobs = [];
+            for (let tx = Math.floor(x0 / TILE); tx <= Math.floor((x0 + W) / TILE); tx++) for (let ty = Math.floor(y0 / TILE); ty <= Math.floor((y0 + H) / TILE); ty++) {
+                if (ty < 0 || ty >= n) continue; const xx = ((tx % n) + n) % n;
+                const online = !useOffline && A()?.mapTileUrl ? String(A().mapTileUrl(bg, z, xx, ty) || '') : '';
+                jobs.push((async () => { let im = /^https:/.test(online) ? await loadTile(online, true) : null; if (!im) im = await loadTile(offlineTile(z, xx, ty), false); if (im) g.drawImage(im, tx * TILE - x0, ty * TILE - y0, TILE, TILE); })());
+            }
+            await Promise.all(jobs);
+            const shown = pts.slice(0, 300);
+            shown.forEach(p => { const x = lon2x(p.lng, z) - x0, y = lat2y(p.lat, z) - y0, r = Math.min(14, 4 + 2 * p.n); g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fillStyle = 'rgba(122,42,42,.85)'; g.fill(); g.lineWidth = 2; g.strokeStyle = '#fff'; g.stroke(); });
+            g.font = '600 13px system-ui, sans-serif'; g.lineJoin = 'round';
+            shown.slice(0, 14).forEach(p => { const x = lon2x(p.lng, z) - x0, y = lat2y(p.lat, z) - y0, r = Math.min(14, 4 + 2 * p.n), t = String(p.name || '').split(',')[0].slice(0, 30); g.lineWidth = 4; g.strokeStyle = 'rgba(255,255,255,.9)'; g.strokeText(t, x + r + 4, y + 4); g.fillStyle = '#222'; g.fillText(t, x + r + 4, y + 4); });
+            const credit = useOffline ? creditOf('offline') : creditOf(bg);
+            g.font = '11px system-ui, sans-serif'; const cw = g.measureText(credit).width + 12; g.fillStyle = 'rgba(255,255,255,.85)'; g.fillRect(W - cw, H - 18, cw, 18); g.fillStyle = '#333'; g.fillText(credit, W - cw + 6, H - 5);
+            return {img: cv.toDataURL('image/jpeg', .86), credit, w: W, h: H, view: {lat: Math.round(toLat(cy) * 1e5) / 1e5, lng: Math.round(toLng(cx) * 1e5) / 1e5, z}};
+        };
+        try { return await draw(bg === 'offline'); } catch (_) { return draw(true); } // un fond dont l'image ne peut pas être copiée (canvas « sali ») : le fond hors ligne
     }
 
     class Editor {
         constructor(o = {}) {
             this.ctx = o; this.id = Number(o.id || 0); this.name = o.name || 'Mon site'; this.rev = o.rev || '';
             this.site = normalizeSite(o.data); this.pageIdx = 0; this.sel = null; this.mode = 'select'; this.dirty = !!o.dirty;
-            this.blockCache = new Map(); this.blocksCss = ''; this.ready = false; this.codeTab = pref('codeTab', 'html');
+            this.blockCache = new Map(); this.mapPts = new Map(); this.blocksCss = ''; this.ready = false; this.codeTab = pref('codeTab', 'html');
             this.view = innerWidth < 760 ? 'visual' : pref('view', innerWidth < 900 ? 'visual' : 'split'); this.device = innerWidth < 760 ? 'phone' : pref('device', 'desktop'); this.zoom = 1; this.zoomMode = 'fit'; this.left = pref('left', 'blocks');
         }
         $(s) { return this.dlg?.querySelector(s); }
@@ -93,6 +152,7 @@
                             <div class="segmented sw-views" role="tablist" aria-label="Affichage">${[['visual', '✨ Visuel'], ['split', '◫ Les deux'], ['code', '</> Code']].map(([k, l]) => `<button type="button" data-sw-view="${k}">${esc(l)}</button>`).join('')}</div>
                             <div class="segmented sw-devices" role="tablist" aria-label="Taille de l’écran">${dev}</div>
                             <span class="spacer"></span>
+                            <button type="button" class="button small secondary" data-sw-cmd="publish" title="Mettre le site en ligne : Netlify, GitHub Pages ou ton hébergement (FTP sécurisé)">📤 Publier</button>
                             <button type="button" class="button small secondary" data-sw-cmd="browser" title="Ouvrir cette page dans un onglet du navigateur, comme un visiteur (isolée de l’app)">↗ Aperçu</button>
                         </div>
                         <div class="sw-work" data-sw-work>
@@ -115,7 +175,7 @@
             U.saveMenu?.(this.$('.ui-topbar [data-sw-cmd="save"]'), () => [{icon: '⧉', label: 'Enregistrer une copie…', run: () => this.saveAs()}, {icon: '🕘', label: 'Enregistrer comme nouvelle version', run: () => this.saveVersion()}, '-', {icon: '↗', label: 'Ouvrir l’aperçu dans le navigateur', run: () => this.openBrowser()}]);
             U.editorMenus?.(this.$('[data-sw-menus]'), this.menus());
             this.code = CODE().create(this.$('[data-sw-codehost]'), {lang: this.codeTab, value: this.codeValue(), label: 'Code du site', onChange: v => this.codeChanged(v), onCursor: p => this.codeCursor(p)});
-            this.hist = U.editorHistory({get: () => JSON.stringify({site: this.site, page: this.pageIdx}), set: s => { this.site = normalizeSite(s.site); this.pageIdx = clamp(s.page, 0, this.site.pages.length - 1); this.sel = null; this.afterRestore(); }, onChange: h => this.histButtons(h)});
+            this.hist = U.editorHistory({get: () => JSON.stringify({site: {...this.site, frozen: undefined}, page: this.pageIdx}), set: s => { const fz = this.site.frozen; this.site = normalizeSite(s.site); this.site.frozen = fz; this.pageIdx = clamp(s.page, 0, this.site.pages.length - 1); this.sel = null; this.afterRestore(); }, onChange: h => this.histButtons(h)});
             this.onMsg = e => this.message(e); window.addEventListener('message', this.onMsg);
             this.ro = new ResizeObserver(() => { if (this.zoomMode === 'fit') this.fit(); }); this.ro.observe(this.stage);
             if (matchMedia('(max-width: 760px)').matches) this.$('[data-sw-leftpane]').hidden = true; // téléphone : le panneau s'ouvre par la colonne d'outils
@@ -125,6 +185,7 @@
             if (!this.blocksCss) api('website_render', {blocks: '[]'}).then(r => { if (r?.css && !this.blocksCss) { this.blocksCss = r.css; this.pushCss(); } }).catch(() => {}); // les styles des blocs (menu…), même sans bloc de la généalogie
             this.hist.reset();
             if (this.dirty) U.savedStatus?.(dlg, 'dirty');
+            setTimeout(() => this.refreshFrozen().catch(() => {}), 50);
             ext.siteWeb.current = this;
             return this;
         }
@@ -135,7 +196,7 @@
             return {
                 Fichier: () => [{icon: '＋', label: 'Nouveau site…', run: () => chooseTemplate(this.ctx)}, {icon: '💾', label: 'Enregistrer', shortcut: '⌘S', run: () => this.save()}, {icon: '⧉', label: 'Enregistrer une copie…', run: () => this.saveAs()},
                     {icon: '🕘', label: 'Enregistrer comme nouvelle version', run: () => this.saveVersion()}, {icon: '🕘', label: 'Versions du site…', run: () => this.versions()}, '-',
-                    {icon: '⤓', label: 'Exporter…', run: () => this.exportDialog()}, {icon: '↗', label: 'Ouvrir l’aperçu dans le navigateur', run: () => this.openBrowser()}, '-', {icon: '×', label: 'Fermer', run: () => this.close()}],
+                    {icon: '⤓', label: 'Exporter…', run: () => this.exportDialog()}, {icon: '📤', label: 'Publier en ligne…', run: () => this.publishDialog()}, {icon: '↗', label: 'Ouvrir l’aperçu dans le navigateur', run: () => this.openBrowser()}, '-', {icon: '×', label: 'Fermer', run: () => this.close()}],
                 Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !this.hist.canUndo(), run: () => this.undo()}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !this.hist.canRedo(), run: () => this.redo()}, '-',
                     {icon: '↑', label: 'Monter l’élément', disabled: !this.sel, run: () => this.move(-1)}, {icon: '↓', label: 'Descendre l’élément', disabled: !this.sel, run: () => this.move(1)}, {icon: '⧉', label: 'Dupliquer l’élément', disabled: !this.sel, run: () => this.duplicate()},
                     {icon: '</>', label: 'Voir l’élément dans le code', disabled: !this.sel, run: () => this.revealInCode(true)}, '-', {icon: '🗑', label: 'Supprimer l’élément', danger: true, disabled: !this.sel, run: () => this.remove()}],
@@ -159,6 +220,7 @@
                 if (c.swCmd === 'close') return this.close();
                 if (c.swCmd === 'export') return this.exportDialog();
                 if (c.swCmd === 'browser') return this.openBrowser();
+                if (c.swCmd === 'publish') return this.publishDialog();
                 if (c.swMode) return this.setMode(c.swMode);
                 if (c.swLeft) { const pane = this.$('[data-sw-leftpane]'); if (b.closest('.sw-rail') && this.left === c.swLeft && !pane.hidden) { pane.hidden = true; return; } this.left = c.swLeft; setPref('left', this.left); this.paintLeft(); pane.hidden = false; return; }
                 if (b.matches('[data-sw-view-toggle]')) return this.setView(this.view === 'visual' ? 'split' : 'visual');
@@ -186,6 +248,7 @@
                 const mod = e.metaKey || e.ctrlKey, typing = e.target.closest?.('input, textarea, select, [contenteditable]');
                 if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); return this.save(); }
                 if (mod && e.key.toLowerCase() === 'z' && !typing) { e.preventDefault(); return e.shiftKey ? this.redo() : this.undo(); }
+                if (e.altKey && !typing && this.sel && (e.key === 'ArrowUp' || e.key === 'ArrowDown') && !e.target.closest?.('.ui-grip, .dnd-grip, [draggable]')) { e.preventDefault(); return this.move(e.key === 'ArrowUp' ? -1 : 1); }
                 if (typing || mod || e.altKey) return;
                 const k = e.key.toLowerCase();
                 if (k === 'v') this.setMode('select'); else if (k === 't') this.setMode('text'); else if (k === 'p') this.setMode('play'); else if (k === 'b') { this.left = 'blocks'; this.paintLeft(); }
@@ -206,6 +269,10 @@
             doc.querySelectorAll('[data-lc-block]').forEach(el => {
                 const a = k.blockAttrs(el);
                 if (a.kind === 'menu') { el.innerHTML = `<ul class="lc-menu-list">${this.site.pages.map(p => `<li><a href="${esc(p.slug)}.html"${p === this.page() ? ' aria-current="page"' : ''}>${esc(p.name)}</a></li>`).join('')}</ul>`; return; }
+                if (a.kind === 'diagram') { const fz = this.site.frozen[`diagram:${Number(a.diagram) || 0}`]; if (typeof fz === 'string' && fz) el.innerHTML = `<figure class="lc-diagramme">${fz}</figure>`; else { el.innerHTML = '<p class="lc-note">⏳ Je dessine le diagramme…</p>'; this.freezeDiagram(Number(a.diagram) || 0); } return; }
+                if (a.kind === 'map' && a.fond && a.fond !== 'svg') { const mk = mapKey(a), fz = this.site.frozen[mk], pts = this.mapPts.get(ptsKey(a));
+                    if (fz?.img && pts) { el.innerHTML = `<figure class="lc-map"><img class="lc-map-img" src="${esc(fz.img)}" alt="Carte des lieux"><figcaption><small class="lc-map-credit">${esc(fz.credit || '')}</small>${String(a.vive) === '1' ? '<small class="lc-map-credit">🖐 Dans le site publié, cette carte se déplace et se zoome.</small>' : ''}<ul class="lc-map-list">${pts.map(p => `<li>${esc(p.name)} <small>(${Number(p.n) || 0})</small></li>`).join('')}</ul></figcaption></figure>`; return; }
+                    el.innerHTML = '<p class="lc-note">⏳ Je dessine la carte sur son fond…</p>'; this.freezeMap(a); return; }
                 const key = k.blockKey(a);
                 if (this.blockCache.has(key)) { el.innerHTML = this.blockCache.get(key); return; }
                 el.innerHTML = '<p class="lc-note">⏳ Je remplis ce bloc avec ta généalogie…</p>'; missing.push([key, a]);
@@ -213,6 +280,56 @@
             if (missing.length) this.fetchBlocks(missing);
             const base = this.mediaBase;
             return doc.body.innerHTML.replace(/(\s(?:src|href|poster)\s*=\s*["'])media\//gi, `$1${base}`).replace(/url\(\s*(["']?)media\//gi, `url($1${base}`);
+        }
+        /** 🏛️ un diagramme de l'app, dessiné en SVG (Graphiques → Mes diagrammes, avec ses données à jour), gardé dans le site */
+        async freezeDiagram(id, force = false) {
+            const key = `diagram:${id}`; this.dgPending = this.dgPending || new Set();
+            if (!id || this.dgPending.has(key) || (!force && this.site.frozen[key])) return false;
+            this.dgPending.add(key);
+            let svg = '';
+            try { svg = String(await ext.diagramSvg?.(id) || ''); } catch (_) { svg = ''; }
+            this.dgPending.delete(key);
+            if (!/^\s*<svg\b/i.test(svg)) svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 60"><text x="10" y="35" font-size="14">Diagramme introuvable (supprimé ?)</text></svg>';
+            const changed = this.site.frozen[key] !== svg; this.site.frozen[key] = svg;
+            if (changed) { this.frozenChanged(); this.pushHtml(); }
+            return changed;
+        }
+        /** 🗺 une carte sur son fond : les lieux (sans personne cachée) viennent du serveur, les tuiles sont assemblées ici en une image */
+        async freezeMap(a, force = false) {
+            const mk = mapKey(a), pk = ptsKey(a); this.mapPending = this.mapPending || new Set();
+            if (this.mapPending.has(mk) || (!force && this.site.frozen[mk] && this.mapPts.has(pk))) return false;
+            this.mapPending.add(mk);
+            let changed = false;
+            try {
+                const pts = (await api('website_map_points', {person: a.person, scope: a.scope || 'person', gens: a.gens || 6})).points || [];
+                this.mapPts.set(pk, pts);
+                if (!pts.length) { if (this.site.frozen[mk]) { delete this.site.frozen[mk]; changed = true; } }
+                else if (force || !this.site.frozen[mk]) { const img = await composeMap(pts, a.fond); changed = JSON.stringify(this.site.frozen[mk]?.view) !== JSON.stringify(img.view) || this.site.frozen[mk]?.credit !== img.credit || !this.site.frozen[mk]; this.site.frozen[mk] = img; }
+            } catch (e) { this.mapPts.set(pk, []); toast(`Carte : ${e.message}`, 'error'); }
+            this.mapPending.delete(mk);
+            if (changed) this.frozenChanged();
+            this.pushHtml();
+            return changed;
+        }
+        frozenChanged() { if (this.opening) return; this.dirty = true; UI()?.savedStatus?.(this.dlg, 'dirty'); }
+        /** à l'ouverture : les diagrammes et les cartes sont redessinés avec la base d'aujourd'hui */
+        async refreshFrozen() {
+            const k = K(), dgs = new Set(), maps = new Map();
+            this.site.pages.forEach(p => k.parse(p.html).querySelectorAll('[data-lc-block="diagram"], [data-lc-block="map"]').forEach(el => { const a = k.blockAttrs(el); if (a.kind === 'diagram') dgs.add(Number(a.diagram) || 0); else if (a.fond && a.fond !== 'svg') maps.set(mapKey(a), a); }));
+            if (!dgs.size && !maps.size) return;
+            const before = JSON.stringify(Object.keys(this.site.frozen).sort().map(key => [key, typeof this.site.frozen[key] === 'string' ? this.site.frozen[key] : this.site.frozen[key]?.view]));
+            this.opening = true;
+            for (const id of dgs) await this.freezeDiagram(id, true);
+            for (const a of maps.values()) await this.freezeMap(a, true);
+            this.opening = false;
+            const after = JSON.stringify(Object.keys(this.site.frozen).sort().map(key => [key, typeof this.site.frozen[key] === 'string' ? this.site.frozen[key] : this.site.frozen[key]?.view]));
+            if (before !== after && this.id) { this.dirty = true; UI()?.savedStatus?.(this.dlg, 'dirty'); this.flash('Diagrammes et cartes redessinés avec ta base : 💾 pour les garder'); }
+        }
+        /** ce qui a été figé et ne sert plus (bloc retiré) part à l'enregistrement */
+        pruneFrozen() {
+            const k = K(), used = new Set();
+            this.site.pages.forEach(p => k.parse(p.html).querySelectorAll('[data-lc-block="diagram"], [data-lc-block="map"]').forEach(el => { const a = k.blockAttrs(el); used.add(a.kind === 'diagram' ? `diagram:${Number(a.diagram) || 0}` : mapKey(a)); }));
+            Object.keys(this.site.frozen).forEach(key => { if (!used.has(key)) delete this.site.frozen[key]; });
         }
         async fetchBlocks(list) {
             const todo = list.filter(([key]) => !this.pending?.has(key)); if (!todo.length) return;
@@ -255,7 +372,8 @@
                 case 'goto': { const i = this.site.pages.findIndex(p => p.slug === String(m.slug || '')); if (i >= 0) this.goPage(i); return; }
                 case 'external': return toast(`Ce lien mène hors du site (${String(m.href || '').slice(0, 80)}) : il marchera dans le site exporté.`);
                 case 'want-text': return this.setMode('text');
-                case 'key': if (m.key === 's') return this.save(); if (m.key === 'z') return m.shift ? this.redo() : this.undo(); if (m.key === 'y') return this.redo(); if (m.key === 'delete') return this.remove(); return;
+                case 'move': return this.moveTo(m.from, m.to, m.where);
+                case 'key': if (m.key === 'moveup' || m.key === 'movedown') return this.move(m.key === 'moveup' ? -1 : 1); if (m.key === 's') return this.save(); if (m.key === 'z') return m.shift ? this.redo() : this.undo(); if (m.key === 'y') return this.redo(); if (m.key === 'delete') return this.remove(); return;
             }
         }
         setMode(mode, quiet = false) {
@@ -364,7 +482,7 @@
             if (t.dataset.swPf) { const p = this.page(); if (t.dataset.swPf === 'slug') { if (!final) return; p.slug = this.uniqueSlug(slugOf(t.value), this.pageIdx); t.value = p.slug; this.pushHtml(); } else p[t.dataset.swPf] = t.value; this.changed(final); return; }
             if (t.dataset.swSt && this.sel) return this.setStyle(t.dataset.swSt, t, final);
             if (t.dataset.swAt && this.sel && final) return this.setAttr(t.dataset.swAt, t.value);
-            if (t.dataset.swBa && this.sel && final) return this.setBlockAttr(t.dataset.swBa, t.value);
+            if (t.dataset.swBa && this.sel && final) { this.setBlockAttr(t.dataset.swBa, t.type === 'checkbox' ? (t.checked ? '1' : '0') : t.value); if (t.dataset.swBa === 'fond' || t.dataset.swBa === 'vive') { this.sel.battrs = {...(this.sel.battrs || {}), [t.dataset.swBa]: t.type === 'checkbox' ? (t.checked ? '1' : '0') : t.value}; this.paintPanel(); } return; }
         }
 
         /* ── la page comme DOM (DOMParser : rien ne s'exécute) ── */
@@ -424,6 +542,21 @@
             this.mutate((doc, el) => { if (!el) return false; const sib = dir < 0 ? el.previousElementSibling : el.nextElementSibling; if (!sib) return false; if (dir < 0) sib.before(el); else sib.after(el); np = K().pathOf(el); });
             if (np) { this.sel.path = np; this.post({type: 'select', path: np}); this.hist.commit(); }
         }
+        /** déplacer à la souris dans l'aperçu : avant, après ou dans un autre élément (le code et ↶ ↷ suivent) */
+        moveTo(from, to, where) {
+            const ok = p => Array.isArray(p) && p.length && p.length <= 60 && p.every(n => Number.isInteger(n) && n >= 0);
+            if (!ok(from) || !ok(to) || !['before', 'after', 'inside'].includes(where)) return;
+            let np = null;
+            this.mutate(doc => {
+                const k = K(), el = k.elByPath(doc, from), ref = k.elByPath(doc, to);
+                if (!el || !ref || el === ref || el.contains(ref)) return false;
+                if (where === 'inside') ref.append(doc.createTextNode('\n'), el); else if (where === 'before') ref.before(el); else ref.after(el);
+                np = k.pathOf(el);
+            });
+            if (!np) return;
+            this.sel = {...(this.sel || {}), path: np}; this.post({type: 'select', path: np, report: true}); this.hist.commit();
+            this.flash(where === 'inside' ? 'Déplacé dedans' : 'Déplacé');
+        }
         duplicate() {
             if (!this.sel) return; let np = null;
             this.mutate((doc, el) => { if (!el) return false; const c = el.cloneNode(true); if (c.id) c.id = `${c.id}-2`; el.after(doc.createTextNode('\n'), c); np = K().pathOf(c); });
@@ -474,6 +607,12 @@
                 if (s.block === 'menu') opts.push('<p class="sw-hint">Le menu se fait tout seul avec les pages du site (📄 Pages).</p>');
                 if (['person', 'tree', 'timeline', 'map', 'photos'].includes(s.block)) opts.push(`<label>Personne<span class="sw-pick">${esc(a.person ? (s.name || '').replace(/^(Arbre|Fiche|Frise|Carte|Photos) de /, '') || `n° ${a.person}` : '—')} <button type="button" class="button small secondary" data-sw-act="block-person">Changer…</button></span></label>`);
                 if (s.block === 'tree') opts.push(`<label>Générations<select data-sw-ba="gens">${[2, 3, 4, 5].map(n => `<option${Number(a.gens) === n ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`);
+                if (s.block === 'map') {
+                    const fond = a.fond || 'svg', sel = A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml(fond === 'svg' ? '' : fond) : '';
+                    opts.push(`<label>Fond de carte<select data-sw-ba="fond"><option value="svg"${fond === 'svg' ? ' selected' : ''}>Sans fond (dessin simple)</option>${sel}</select></label>`);
+                    if (fond !== 'svg') opts.push(`<label class="ui-toggle"><input type="checkbox" data-sw-ba="vive" value="1"${String(a.vive) === '1' ? ' checked' : ''}><i></i>Carte interactive dans le site (on la déplace et on zoome)</label>${String(a.vive) === '1' && !LIVE_FONDS.includes(fond) ? '<p class="sw-hint">Ce fond ne se montre qu’en image : la carte interactive du site prendra le fond OpenStreetMap (avec sa mention).</p>' : ''}<p class="sw-hint">La carte est faite en image avec ce fond (et sa mention : ${esc(creditOf(fond))}), redessinée à chaque ouverture.</p>`);
+                }
+                if (s.block === 'diagram') opts.push(`<div class="sw-row"><button type="button" class="button small secondary" data-sw-act="dg-pick">Changer…</button><button type="button" class="button small secondary" data-sw-act="dg-edit">✎ Modifier le diagramme</button><button type="button" class="button small secondary" data-sw-act="dg-new">＋ Nouveau diagramme</button></div><p class="sw-hint">Dessiné par Graphiques → Mes diagrammes, avec les données d’aujourd’hui, puis figé dans le site (les noms des personnes vivantes y sont retirés à l’export).</p>`);
                 if (s.block === 'map') opts.push(`<label>Lieux de<select data-sw-ba="scope"><option value="person"${a.scope !== 'ancestors' ? ' selected' : ''}>la personne seule</option><option value="ancestors"${a.scope === 'ancestors' ? ' selected' : ''}>la personne et ses ancêtres</option></select></label>`);
                 if (s.block === 'chart') opts.push(`<label>Chiffres<select data-sw-ba="chart"><option value="naissances"${a.chart !== 'prenoms' ? ' selected' : ''}>Naissances par décennie</option><option value="prenoms"${a.chart === 'prenoms' ? ' selected' : ''}>Prénoms les plus portés</option></select></label>`);
                 if (s.block === 'photos') opts.push(`<label>Au plus<select data-sw-ba="max">${[6, 12, 24, 48].map(n => `<option${Number(a.max) === n ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`);
@@ -510,6 +649,13 @@
             if (act === 'font') { const f = await UI()?.openFontPicker?.({value: (s.cs?.font || '').split(',')[0].replace(/["']/g, ''), sample: s.text?.slice(0, 30) || 'Mon site'}); if (!f) return; const m = styleMap(s.style); m.set('font-family', `'${String(f).replace(/[^\p{L}\p{N} \-.]/gu, '')}', sans-serif`); this.setAttrStyle(styleStr(m)); return this.post({type: 'info'}); }
             if (act === 'image') { const l = await K().pickImages(false, 'Une autre image'); if (!l?.[0]) return; this.setAttr('src', K().mediaSrc(l[0])); if (!s.alt) this.setAttr('alt', l[0].title || ''); return; }
             if (act === 'block-person') { const p = await K().pickPerson('Quelle personne ?'); if (!p) return; this.setBlockAttr('person', String(p.id)); const w = {tree: 'Arbre', person: 'Fiche', timeline: 'Frise', map: 'Carte', photos: 'Photos'}[s.block]; if (w && p.name) this.setAttr('data-lc-name', `${w} de ${p.name}`); return; }
+            if (act === 'dg-pick' || act === 'dg-new') {
+                let d = null;
+                if (act === 'dg-pick') { const it = await (window.LCNDA_PICKER || A()).openPicker?.({kind: 'diagram', title: 'Quel diagramme ?'}); d = it ? {id: Number(it.id), name: String(it.title || 'Diagramme')} : null; }
+                else if (ext.openDiagramEditor) d = await new Promise(res => { let id = 0; ext.openDiagramEditor(null, {onSave: x => { id = Number(x) || id; }, onClose: () => res(id ? {id, name: 'Mon diagramme'} : null)}); });
+                if (!d) return; this.setBlockAttr('diagram', String(d.id)); this.setAttr('data-lc-name', `Diagramme ${d.name}`); return;
+            }
+            if (act === 'dg-edit') { const id = Number(s.battrs?.diagram) || 0; if (!id || !ext.openDiagramEditor) return; ext.openDiagramEditor(id, {onSave: () => { delete this.site.frozen[`diagram:${id}`]; this.freezeDiagram(id, true); }}); return; }
             if (act === 'block-place') { const p = await K().pickPlace('Quel lieu ?'); if (!p) return; this.setBlockAttr('place', String(p.id)); if (p.name) this.setAttr('data-lc-name', `Gens de ${p.name}`); }
         }
         setAttrStyle(style) {
@@ -591,7 +737,7 @@
 
         /* ── enregistrer, versions, exporter ── */
         async save({asNew = false, name = this.name, quiet = false, force = false} = {}) {
-            clearTimeout(this.histT);
+            clearTimeout(this.histT); this.pruneFrozen();
             UI()?.savedStatus?.(this.dlg, 'saving');
             try {
                 const r = await post('save_website', {id: asNew ? 0 : this.id, name, data: this.site, rev: asNew ? '' : this.rev, force}), res = r.result || r, id = Number(res.id || 0);
@@ -658,6 +804,66 @@
             await UI().openExportDialog({title: 'Exporter le site', defaultName: `site-${this.name}`, quality: false, info: bits.join(' · ') + '. Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers.',
                 formats: [{id: 'zip', label: '🗜 Site complet', hint: 'index.html, pages, css, js, images', ext: 'zip', run: () => this.download('zip'), goLabel: '⤓ Exporter le site (.zip)'},
                     {id: 'html', label: '🌐 Cette page seule', hint: 'un seul fichier .html', ext: 'html', run: () => this.download('html'), goLabel: '⤓ Exporter la page (.html)'}]});
+        }
+        /** 📤 Publier en ligne : Netlify, GitHub Pages ou FTP sécurisé ; tout passe par le serveur, les jetons ne reviennent jamais ici */
+        async publishDialog() {
+            if (!await this.ensureSaved()) return;
+            let st; try { st = await api('website_publish_state', {id: this.id}); } catch (e) { return toast(e.message, 'error'); }
+            const U = UI(), last = ['netlify', 'github', 'ftps'].includes(pref('publish', '')) ? pref('publish', '') : (st.site.last || 'netlify');
+            const kept = has => (has ? 'Jeton gardé sur cet ordinateur (laisse vide pour le garder)' : 'Colle ton jeton ici');
+            const tabs = [['netlify', 'Netlify'], ['github', 'GitHub Pages'], ...(st.ftps.available ? [['ftps', 'FTP sécurisé']] : [])];
+            const where = st.site.netlify_url || st.site.github_url ? `<p class="sw-hint">Déjà en ligne : ${[st.site.netlify_url, st.site.github_url].filter(Boolean).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>`).join(' · ')}</p>` : '';
+            const body = `${U.notice('info', 'Ton site est envoyé tel qu’à l’export (.zip) : sans personne vivante ni fiche confidentielle. Le jeton ou le mot de passe reste sur cet ordinateur : il n’est jamais montré, ni mis dans une sauvegarde ou dans le site.')}${where}
+                <div class="segmented sw-pubtabs" role="tablist">${tabs.map(([k, l]) => `<button type="button" data-pub-tab="${k}">${esc(l)}</button>`).join('')}</div>
+                <div class="form-grid one-column" data-pub-pane="netlify"><p class="sw-hint">Netlify héberge ton site gratuitement, à une adresse en …netlify.app. 1. Crée un compte sur netlify.com. 2. Dans « User settings → Applications → Personal access tokens », crée un jeton (« New access token »). 3. Colle-le ici.</p>
+                    <label>Jeton Netlify<input type="password" name="token_netlify" autocomplete="off" spellcheck="false" placeholder="${esc(kept(st.netlify.has_token))}"></label>${st.netlify.has_token ? '<button type="button" class="button small secondary" data-pub-forget="netlify">× Oublier le jeton Netlify</button>' : ''}</div>
+                <div class="form-grid one-column" data-pub-pane="github"><p class="sw-hint">GitHub Pages met ton site à l’adresse « ton-compte.github.io/nom-du-depot ». Crée un jeton dans GitHub → Settings → Developer settings → « Fine-grained tokens », avec les droits « Contents » et « Pages » en lecture et écriture (et « Administration » si le dépôt n’existe pas encore).</p>
+                    <label>Jeton GitHub<input type="password" name="token_github" autocomplete="off" spellcheck="false" placeholder="${esc(kept(st.github.has_token))}"></label>
+                    <label>Dépôt<input type="text" name="repo" maxlength="140" spellcheck="false" value="${esc(st.site.github_repo || slugOf(this.name))}" placeholder="mon-site (ou compte/mon-site)"></label>${st.github.has_token ? '<button type="button" class="button small secondary" data-pub-forget="github">× Oublier le jeton GitHub</button>' : ''}</div>
+                ${st.ftps.available ? `<div class="form-grid one-column" data-pub-pane="ftps"><p class="sw-hint">Ton hébergeur (OVH, o2switch, Infomaniak…) te donne un serveur FTP. La connexion est toujours chiffrée (FTPS) et son certificat vérifié : un serveur sans chiffrement est refusé.</p>
+                    <label>Serveur<input type="text" name="host" maxlength="253" spellcheck="false" value="${esc(st.ftps.host)}" placeholder="ftp.mon-hebergeur.fr"></label>
+                    <label>Port<input type="number" name="port" min="1" max="65535" value="${Number(st.ftps.port) || 21}"></label>
+                    <label>Identifiant<input type="text" name="user" maxlength="120" spellcheck="false" autocomplete="off" value="${esc(st.ftps.user)}"></label>
+                    <label>Mot de passe<input type="password" name="pass" autocomplete="off" placeholder="${st.ftps.has_password ? 'Gardé sur cet ordinateur (laisse vide pour le garder)' : ''}"></label>
+                    <label>Dossier du site sur le serveur<input type="text" name="dir" maxlength="200" spellcheck="false" value="${esc(st.ftps.dir || '/www/')}"></label>${st.ftps.has ? '<button type="button" class="button small secondary" data-pub-forget="ftps">× Oublier cet accès FTP</button>' : ''}</div>` : '<p class="sw-hint">FTP sécurisé : pas disponible avec le PHP de cet ordinateur.</p>'}
+                <div data-pub-out></div>`;
+            let tab = last;
+            ext.openDialog({eyebrow: 'MON SITE WEB', title: '📤 Publier en ligne', wide: true, submitLabel: '📤 Publier le site', body,
+                onOpen: d => {
+                    const show = t => { tab = t; d.querySelectorAll('[data-pub-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.pubTab === t)); d.querySelectorAll('[data-pub-pane]').forEach(p => { p.hidden = p.dataset.pubPane !== t; }); };
+                    show(tabs.some(([k]) => k === tab) ? tab : 'netlify');
+                    d.addEventListener('click', async e => {
+                        const t = e.target.closest('[data-pub-tab]'); if (t) { e.preventDefault(); show(t.dataset.pubTab); setPref('publish', t.dataset.pubTab); return; }
+                        const f = e.target.closest('[data-pub-forget]'); if (!f) return; e.preventDefault();
+                        try { await post('website_publish_settings', {provider: f.dataset.pubForget, forget: true}); f.remove(); toast('Oublié : il faudra le coller de nouveau pour publier.', 'success'); } catch (err) { toast(err.message, 'error'); }
+                    });
+                },
+                onSubmit: async form => {
+                    const v = n => form.elements[n]?.value?.trim() || '';
+                    const out = form.querySelector('[data-pub-out]'); out.innerHTML = '';
+                    const body2 = {id: this.id, provider: tab};
+                    if (tab === 'netlify') { if (v('token_netlify')) body2.token = v('token_netlify'); else if (!st.netlify.has_token) return U.fail(form.elements.token_netlify, '⛔ Colle ton jeton Netlify.'); }
+                    if (tab === 'github') { if (v('token_github')) body2.token = v('token_github'); else if (!st.github.has_token) return U.fail(form.elements.token_github, '⛔ Colle ton jeton GitHub.'); if (!/^([A-Za-z0-9-]{1,39}\/)?[A-Za-z0-9_.-]{1,100}$/.test(v('repo'))) return U.fail(form.elements.repo, '⛔ Le dépôt s’écrit « nom » ou « compte/nom », sans espace.'); body2.repo = v('repo'); }
+                    if (tab === 'ftps') {
+                        if (!/^([a-z0-9-]+\.)+[a-z]{2,}$/i.test(v('host'))) return U.fail(form.elements.host, '⛔ Donne le nom du serveur (exemple : ftp.mon-hebergeur.fr).');
+                        if (!v('user')) return U.fail(form.elements.user, '⛔ Donne l’identifiant FTP.');
+                        if (!v('pass') && !st.ftps.has_password) return U.fail(form.elements.pass, '⛔ Donne le mot de passe FTP.');
+                        Object.assign(body2, {host: v('host'), port: Number(v('port')) || 21, user: v('user'), pass: v('pass'), dir: v('dir') || '/'});
+                    }
+                    setPref('publish', tab);
+                    out.innerHTML = U.spinner ? U.spinner('J’envoie le site…') : '…';
+                    try {
+                        const r = await post('website_publish', body2), res = r.result || r;
+                        ['token_netlify', 'token_github', 'pass'].forEach(n => { if (form.elements[n]) form.elements[n].value = ''; });
+                        out.innerHTML = U.notice('ok', res.url ? `Ton site est en ligne (${res.files} fichiers). Il peut falloir une minute avant qu’il s’affiche.` : `Ton site est envoyé (${res.files} fichiers).`) + (res.url ? `<p><a class="button small" href="${esc(res.url)}" target="_blank" rel="noopener noreferrer">↗ Ouvrir ${esc(res.url)}</a></p>` : '');
+                        const cancel = form.querySelector('.modal-actions [data-h-close]'); if (cancel) cancel.textContent = 'Fermer';
+                        toast('📤 Site publié.', 'success');
+                    } catch (e) {
+                        out.innerHTML = U.notice('error', e.message);
+                        if (/jeton/i.test(e.message)) U.fail(form.elements[tab === 'github' ? 'token_github' : 'token_netlify'] || form.elements.pass, `⛔ ${e.message}`);
+                    }
+                    return false;
+                }});
         }
         async close() {
             if (this.dirty && !await A().confirmBox('Les changements faits depuis le dernier enregistrement seront perdus.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return;

@@ -18,6 +18,7 @@
         ancestor: ['🌳', 'Un ancêtre', 'Un de tes ancêtres, un nouveau chaque jour (↻ pour en voir un autre) : son portrait, ses dates, ses lieux.'],
         photo: ['📷', 'Photo du jour', 'Une photo de tes médias, une nouvelle chaque jour.'],
         countdown: ['⏳', 'Compte à rebours', 'Les jours qui restent avant une date : la cousinade, un anniversaire, un voyage aux archives…'],
+        calc: ['🧮', 'Calculette', 'La calculette de l’app (fractions, pourcentages, dates des actes, unités…) toujours à portée de main.'],
     };
     // les widgets du tableau de bord qui ont leur widget de bureau
     const FROM_DASH = {today: 'today', upcoming: 'today', saint_day: 'today', random_person: 'ancestor', chosen_person: 'ancestor', random_media: 'photo', favorite_image: 'photo'};
@@ -108,8 +109,11 @@
             b.title = desk() ? `🪟 Mettre sur le bureau (« ${KINDS[kind][1]} », une petite fenêtre à part)` : `🪟 Mettre sur le bureau (« ${KINDS[kind][1]} » : un fichier .html autonome dans un navigateur)`; b.setAttribute('aria-label', 'Mettre sur le bureau'); b.textContent = '🪟';
             tools.prepend(b);
         });
+        // 🧮 la calculette flottante de l'app : « 🪟 Mettre sur le bureau »
+        const ch = document.querySelector('#calculette .cm-head');
+        if (ch && !ch.querySelector('[data-dw-put]')) { const b = document.createElement('button'); b.type = 'button'; b.className = 'icon-button small cm-ib'; b.dataset.dwPut = 'calc'; b.title = desk() ? '🪟 Mettre la calculette sur le bureau (une petite fenêtre à part)' : '🪟 Mettre la calculette sur le bureau (un fichier .html autonome)'; b.setAttribute('aria-label', 'Mettre sur le bureau'); b.textContent = '🪟'; const x = ch.querySelector('[data-cm-close]'); if (x) x.before(b); else ch.appendChild(b); }
         const foot = document.querySelector('.dashboard-footer-actions');
-        if (foot && !foot.querySelector('[data-dw-all]')) { const b = document.createElement('button'); b.type = 'button'; b.className = 'button small secondary'; b.dataset.dwAll = '1'; b.textContent = '🪟 Widgets sur le bureau…'; b.title = 'Ce jour-là, un ancêtre, la photo du jour, un compte à rebours : sur le bureau de l’ordinateur'; foot.appendChild(b); }
+        if (foot && !foot.querySelector('[data-dw-all]')) { const b = document.createElement('button'); b.type = 'button'; b.className = 'button small secondary'; b.dataset.dwAll = '1'; b.textContent = '🪟 Widgets sur le bureau…'; b.title = 'Ce jour-là, un ancêtre, la photo du jour, un compte à rebours, la calculette : sur le bureau de l’ordinateur'; foot.appendChild(b); }
     };
     let raf = 0;
     new MutationObserver(() => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; decorate(); }); }).observe(document.body, {childList: true, subtree: true});

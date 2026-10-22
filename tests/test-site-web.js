@@ -74,6 +74,7 @@ const hasPy = spawnSync('python3', ['-c', 'import zipfile'], { encoding: 'utf8' 
     eq(DW.fitBounds({ x: 100, y: 120, width: 320, height: 300 }, displays, DW.KINDS.today), { x: 100, y: 120, width: 320, height: 300 }, 'widget : place retenue');
     eq(DW.fitBounds({ x: 5000, y: 3000, width: 320, height: 300 }, displays, DW.KINDS.today), { x: 1440 - 320 - 24, y: 24, width: 320, height: 300 }, 'widget : écran débranché → ramené sur l’écran');
     ok(/^Exec="\/opt\/LCNDA app\/lcnda" --widgets$/m.test(DW.linuxAutostartEntry({ exec: '/opt/LCNDA app/lcnda', args: ['--widgets'] })), 'widget : démarrage Linux (.desktop, chemin avec espace)');
+    ok(DW.KINDS.calc && DW.cleanOptions('calc', { label: 'x', date: '2027-01-01', onTop: true }).label === '' && DW.isWidgetUrl('http://127.0.0.1:9/api.php?action=desk_widget_page&kind=calc', 'http://127.0.0.1:9'), 'widget calculette : sorte connue d’Electron');
     for (const f of ['electron/main.js', 'electron/preload.js', 'electron/desk-widgets.js']) ok(spawnSync(process.execPath, ['--check', path.join(appRoot, f)]).status === 0, `${f} : lisible`);
     const mainJs = fs.readFileSync(path.join(appRoot, 'electron/main.js'), 'utf8'), preJs = fs.readFileSync(path.join(appRoot, 'electron/preload.js'), 'utf8');
     ok(/new BrowserWindow\(desk\.windowOptions\(kind, o, bounds\)\)/.test(mainJs) && /if \(!fromApp\(event\)\) return \{ ok: false, error: 'Refusé' \};\s*\n\s*cmd = String/.test(mainJs), 'main.js : la fenêtre du widget vient de desk.windowOptions ; seules les demandes de l’app sont écoutées');
@@ -104,6 +105,41 @@ $pdo->exec("INSERT INTO media_links(media_id,entity_type,entity_id) VALUES(1,'pe
 echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         if (r.status !== 0 || !/ok$/.test(r.stdout)) { console.error(r.stderr || r.stdout); process.exit(1); }
     }
+    /* le faux Netlify et le faux GitHub (réponses simulées) : le serveur PHP les appelle à la place des vrais */
+    const http = require('node:http');
+    const mock = { calls: [], down: false, repo: false, token: 'nfp_essai_0123456789abcdefghij', ghToken: 'github_pat_essai_0123456789abcdef' };
+    const mockSrv = http.createServer((req, res) => {
+        let body = []; req.on('data', c => body.push(c)); req.on('end', () => {
+            body = Buffer.concat(body); const u = req.url, auth = req.headers.authorization || '';
+            mock.calls.push({ m: req.method, u, auth, type: req.headers['content-type'] || '', size: body.length, head: body.subarray(0, 2).toString('latin1') });
+            if (mock.down) { req.socket.destroy(); return; }
+            const send = (code, o) => { res.writeHead(code, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(o)); };
+            if (u.startsWith('/netlify/')) {
+                if (auth !== `Bearer ${mock.token}`) return send(401, { message: 'Access Denied' });
+                if (req.method === 'POST' && u === '/netlify/sites') return send(201, { id: 'abc123-site-id', ssl_url: 'https://essai-lcnda.netlify.app' });
+                if (req.method === 'POST' && u === '/netlify/sites/abc123-site-id/deploys') return send(body.subarray(0, 2).toString('latin1') === 'PK' ? 200 : 422, { id: 'd1', state: 'uploaded', ssl_url: 'https://essai-lcnda.netlify.app' });
+                return send(404, { message: 'Not found' });
+            }
+            if (u.startsWith('/github/')) {
+                if (auth !== `Bearer ${mock.ghToken}`) return send(401, { message: 'Bad credentials' });
+                const g = u.slice(7), sha = c => c.repeat(40);
+                if (g === '/user') return send(200, { login: 'victor' });
+                if (g === '/repos/victor/notre-site' && req.method === 'GET') return mock.repo ? send(200, { name: 'notre-site' }) : send(404, { message: 'Not Found' });
+                if (g === '/user/repos') { mock.repo = true; return send(201, { name: 'notre-site' }); }
+                if (g.endsWith('/git/blobs')) return send(201, { sha: sha('b') });
+                if (g.endsWith('/git/trees')) return send(201, { sha: sha('t') });
+                if (g.includes('/git/ref/heads/')) return send(404, { message: 'Not Found' });
+                if (g.endsWith('/git/commits')) return send(201, { sha: sha('c') });
+                if (g.endsWith('/git/refs')) return send(201, { ref: 'refs/heads/gh-pages' });
+                if (g.endsWith('/pages') && req.method === 'POST') return send(201, {});
+                if (g.endsWith('/pages')) return send(200, { html_url: 'https://victor.github.io/notre-site/' });
+                return send(404, { message: 'Not Found' });
+            }
+            send(404, {});
+        });
+    });
+    const mockPort = await freePort(); await new Promise(r => mockSrv.listen(mockPort, '127.0.0.1', r));
+    env.LCNDA_PUBLISH_TEST_BASE = `http://127.0.0.1:${mockPort}`;
     const port = Number(process.env.SITE_PORT) || await freePort();
     const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-d', 'post_max_size=64M', '-d', 'memory_limit=1024M', '-S', `127.0.0.1:${port}`, '-t', appRoot, path.join(appRoot, 'router.php')], { cwd: appRoot, env, stdio: 'ignore' });
     const base = `http://127.0.0.1:${port}/`;
@@ -200,10 +236,64 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         const pv = await fetch(`${base}api.php?action=website_preview&id=${id}&page=nous-ecrire`);
         ok(/^sandbox allow-scripts/.test(pv.headers.get('content-security-policy') || '') && /connect-src 'none'/.test(pv.headers.get('content-security-policy')), '↗ aperçu : isolé (CSP sandbox, pas de connexion)');
         ok(/api\.php\?action=website_preview&amp;id=\d+&amp;page=index/.test(await pv.text()), '↗ aperçu : les liens du menu restent dans l’aperçu');
+        // 🏛️ diagrammes et 🗺 cartes figés dans le site (dessinés par l'app), carte interactive
+        const dgId = (await api('save_diagram', { name: 'Barres', kind: 'columns', spec: { kind: 'columns', rows: [] } })).r.result.id;
+        const PNG2 = 'data:image/jpeg;base64,' + fs.readFileSync(path.join(dir, 'media', 'jean.jpg')).toString('base64'); // une vraie image (comme celle que l'app assemble)
+        const s2 = JSON.parse(JSON.stringify(site)); s2.pages = [s2.pages[0]];
+        s2.pages[0].html = `<header><nav data-lc-block="menu"></nav></header><div data-lc-block="diagram" data-diagram="${dgId}"></div><div data-lc-block="map" data-person="1" data-scope="ancestors" data-gens="6" data-fond="osm" data-vive="1"></div><div data-lc-block="map" data-person="1" data-scope="person" data-gens="6" data-fond="satellite"></div>`;
+        s2.frozen = { [`diagram:${dgId}`]: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40"><text x="1" y="20">Lucie Martin</text><script>alert(1)</script><a href="javascript:alert(2)"><rect onclick="alert(3)" width="5" height="5"/></a><use href="https://evil.test/x.svg#a"/></svg>',
+            'map:1:ancestors:6:osm': { img: PNG2, credit: '© OSM <b>gras</b>', w: 760, h: 460, view: { lat: 45.2, lng: 1.7, z: 8 } },
+            'map:1:person:6:satellite': { img: PNG2, credit: '© Esri', w: 760, h: 460, view: { lat: 45.2, lng: 1.7, z: 9 } },
+            'diagram:999999': '<svg xmlns="http://www.w3.org/2000/svg"></svg>', 'map:1:person:6:osm': { img: 'data:text/html;base64,PHNjcmlwdD4=', credit: 'x' } };
+        const sv2 = await api('save_website', { name: 'Site cartes', data: s2 }); ok(sv2.ok, 'site avec diagramme et cartes figés ' + (sv2.e || '')); const id2 = sv2.r.result.id;
+        const fz = (await api('website', { id: id2 }, true)).r.data.frozen;
+        eq(Object.keys(fz).sort(), [`diagram:${dgId}`, 'map:1:ancestors:6:osm', 'map:1:person:6:satellite'].sort(), 'figés : seulement ceux des blocs de la page, et des images vraies (pas de data:text/html)');
+        ok(!/<script|onclick|javascript:|evil\.test/i.test(fz[`diagram:${dgId}`]) && /Lucie Martin/.test(fz[`diagram:${dgId}`]), 'diagramme figé : SVG désamorcé');
+        const mp = await api('website_map_points', { person: 1, scope: 'ancestors', gens: 6 }, true);
+        ok(mp.ok && mp.r.points.some(p => /Tulle/.test(p.name)) && mp.r.points.every(p => Number.isFinite(p.lat) && Number.isFinite(p.lng)), 'les lieux de la carte (pour la dessiner sur son fond)');
+        eq((await api('website_map_points', { person: 4 }, true)).r.points, [], 'les lieux d’une personne vivante : rien');
+        if (hasPy) {
+            const zf = path.join(dir, 'site2.zip'); fs.writeFileSync(zf, Buffer.from(await (await fetch(`${base}api.php?action=website_export&id=${id2}&format=zip`)).arrayBuffer()));
+            const z2 = JSON.parse(spawnSync('python3', ['-I', '-c', 'import zipfile,sys,json\nz=zipfile.ZipFile(sys.argv[1])\nprint(json.dumps({n:z.read(n).decode("utf-8","replace") if n.endswith((".html",".css",".js",".txt")) else len(z.read(n)) for n in z.namelist()}))', zf], { encoding: 'utf8' }).stdout);
+            ok(z2['images/carte-1.jpg'] > 0 && z2['images/carte-2.jpg'] > 0, 'les cartes figées partent en images (réenregistrées)');
+            ok(/<script src="js\/carte-lcnda\.js" defer><\/script>/.test(z2['index.html']) && /class="lc-carte-vive" data-carte="/.test(z2['index.html']) && /tile\.openstreetmap\.org/.test(z2['index.html']) && /lc-carte-vive/.test(z2['js/carte-lcnda.js']), 'carte interactive : le petit script du site, les tuiles OpenStreetMap et leur mention');
+            ok(/© OSM &lt;b&gt;gras&lt;\/b&gt;/.test(z2['index.html']) && /© Esri/.test(z2['index.html']), 'la mention de chaque fond est sous sa carte (échappée)');
+            ok(/<figure class="lc-diagramme"><svg/.test(z2['index.html']) && !/Lucie/.test(z2['index.html']) && /\[nom retiré\]/.test(z2['index.html']), 'diagramme figé dans la page, nom de la vivante retiré');
+        }
+        await api('delete_website', { id: id2 });
+        // 🧮 la calculette sur le bureau
+        const calcPage = await (await get({ action: 'desk_widget_page', kind: 'calc' }, true)).text();
+        ok(/LCNDA_CALC/.test(calcPage) && (calcPage.match(/<script nonce="[\w-]+">/g) || []).length === 2 && !/<script>/.test(calcPage), 'widget calculette : le moteur de la Calculette dans la page, scripts avec nonce');
+        ok(/class="calc"/.test(await (await get({ action: 'desk_widget_file', kind: 'calc' }, true)).text()), 'widget calculette en fichier autonome');
+        // 📤 publier en ligne (réponses simulées)
+        let pst = (await api('website_publish_state', { id }, true)).r;
+        eq([pst.netlify.has_token, pst.github.has_token], [false, false], 'publier : pas encore de jeton');
+        ok(/forme/.test((await api('website_publish', { id, provider: 'netlify', token: 'court' })).e || ''), 'jeton de mauvaise forme : refusé');
+        ok(/Colle d’abord ton jeton Netlify/.test((await api('website_publish', { id, provider: 'netlify' })).e || ''), 'sans jeton : message clair');
+        const pub = await api('website_publish', { id, provider: 'netlify', token: mock.token }); ok(pub.ok, 'publier sur Netlify ' + (pub.e || ''));
+        eq(pub.r.result.url, 'https://essai-lcnda.netlify.app', 'Netlify : l’adresse du site');
+        const dep = mock.calls.find(c => c.u.endsWith('/deploys')); ok(dep && dep.type === 'application/zip' && dep.head === 'PK' && dep.size > 1000, 'Netlify : le .zip du site est envoyé');
+        pst = (await api('website_publish_state', { id }, true)).r;
+        ok(pst.netlify.has_token && !JSON.stringify(pst).includes(mock.token) && pst.site.netlify_url === 'https://essai-lcnda.netlify.app', 'l’écran sait qu’il y a un jeton, sans jamais le voir');
+        const secretFile = path.join(dir, 'site-publish.json');
+        ok(fs.existsSync(secretFile) && (fs.statSync(secretFile).mode & 0o777) === 0o600, 'jetons gardés hors de la base, fichier lisible par toi seul (600)');
+        ok(!JSON.stringify((await api('website', { id }, true)).r).includes(mock.token), 'le jeton n’est pas dans le site');
+        const pub2 = await api('website_publish', { id, provider: 'netlify' }); ok(pub2.ok && mock.calls.filter(c => c.m === 'POST' && c.u === '/netlify/sites').length === 1, 'republier : le même site Netlify (pas de doublon)');
+        mock.down = true; ok(/Pas de réseau/.test((await api('website_publish', { id, provider: 'netlify' })).e || ''), 'réseau coupé : message clair'); mock.down = false;
+        const bad = await api('website_publish_settings', { provider: 'netlify', token: 'nfp_mauvais_0123456789abcdefghij' }); ok(bad.ok, 'changer de jeton');
+        ok(/refusé/.test((await api('website_publish', { id, provider: 'netlify' })).e || ''), 'jeton refusé par le service : message clair');
+        const gh = await api('website_publish', { id, provider: 'github', token: mock.ghToken, repo: 'notre-site' }); ok(gh.ok, 'publier sur GitHub Pages ' + (gh.e || ''));
+        eq(gh.r.result.url, 'https://victor.github.io/notre-site/', 'GitHub Pages : l’adresse du site');
+        ok(mock.calls.some(c => c.u === '/github/user/repos') && mock.calls.some(c => c.u.endsWith('/git/refs')) && mock.calls.filter(c => c.u.endsWith('/git/blobs')).length >= 3, 'GitHub : dépôt créé, fichiers, branche gh-pages');
+        ok(!/(Bearer|github_pat|nfp_)/.test(JSON.stringify(gh.r)), 'aucun jeton dans la réponse');
+        ok((await api('website_publish', { id, provider: 'github', repo: '../x y' })).e, 'dépôt mal écrit : refusé');
+        ok((await api('website_publish_settings', { provider: 'github', forget: true })).ok && !(await api('website_publish_state', { id }, true)).r.github.has_token, '× Oublier le jeton');
+        ok(/serveur FTP/.test((await api('website_publish_settings', { provider: 'ftps', host: 'pas un nom', user: 'a', pass: 'b' })).e || ''), 'FTP : nom de serveur vérifié');
         // mode consultation : pas d'export
         await api('kiosk_enter', { password: 'secret1' });
         eq((await fetch(`${base}api.php?action=website_export&id=${id}&format=zip`)).status, 423, 'mode consultation : export refusé');
         eq((await fetch(`${base}api.php?action=desk_widget_file&kind=today`)).status, 423, 'mode consultation : fichier du widget refusé');
+        ok(/consultation/i.test((await api('website_publish', { id, provider: 'netlify' })).e || ''), 'mode consultation : publier refusé');
         await api('kiosk_exit', { password: 'secret1' });
         await api('delete_website', { id });
         console.log(`✓ API : ${n} vérifications`);
@@ -284,6 +374,55 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         eq(await until(() => fr.locator('body').getAttribute('data-essai'), 'bloqué'), 'bloqué', '▶ Tester : le script tourne mais ne voit pas l’app');
         eq(await fr.locator('body').getAttribute('data-cookie'), 'bloqué', '▶ Tester : pas de cookie de l’app');
         await page.click('[data-sw-mode="select"]'); await page.waitForTimeout(300);
+        // déplacer à la souris dans l'aperçu (ligne bleue), puis au clavier (Alt + ↑ / ↓), ↶ ↷ suivent
+        await page.click('[data-sw-view="visual"]'); await page.waitForTimeout(500);
+        const pf = page.frames().find(f => f.url() === 'about:srcdoc');
+        const html0 = await page.evaluate(() => window.LCNDA_EXT.siteWeb.current.page().html);
+        const footBox = await pf.locator('footer').boundingBox(), firstSec = await pf.locator('body > section').first().boundingBox();
+        await page.mouse.move(footBox.x + 30, footBox.y + 8); await page.mouse.down();
+        await page.mouse.move(firstSec.x + 40, firstSec.y + 6, { steps: 10 }); await page.mouse.move(firstSec.x + 40, firstSec.y + 3, { steps: 2 });
+        ok(await pf.locator('#lcb-ov .lcb-drop').evaluate(e => getComputedStyle(e).display) === 'block', 'en glissant : la ligne bleue montre où il ira');
+        await page.mouse.up(); await page.waitForTimeout(500);
+        const html1 = await page.evaluate(() => window.LCNDA_EXT.siteWeb.current.page().html);
+        ok(html1.indexOf('<footer') < html1.indexOf('<section') && html0.indexOf('<footer') > html0.indexOf('<section'), 'glissé à la souris : le pied de page passe avant la section (le code suit)');
+        eq(await page.textContent('.sw-this code'), 'footer.site-pied', 'l’élément déplacé reste choisi');
+        await pf.locator('footer').click({ position: { x: 5, y: 5 } }); await pf.locator('body').press('Alt+ArrowDown'); await page.waitForTimeout(400);
+        const html2 = await page.evaluate(() => window.LCNDA_EXT.siteWeb.current.page().html);
+        ok(html2.indexOf('<footer') > html2.indexOf('<section'), 'Alt + ↓ : il redescend');
+        await page.click('.ui-topbar [data-ui-cmd="undo"]'); await page.waitForTimeout(400);
+        ok((await page.evaluate(() => window.LCNDA_EXT.siteWeb.current.page().html)).indexOf('<footer') < html2.indexOf('<footer'), '↶ annule le déplacement');
+        await page.click('.ui-topbar [data-ui-cmd="redo"]'); await page.waitForTimeout(300);
+        // 🏛️ un diagramme de l'app (menu de choix « diagramme »)
+        const dgB = (await api('save_diagram', { name: 'Les âges', kind: 'columns', spec: { kind: 'columns', o: { title: 'Les âges' } } })).r.result.id;
+        await page.evaluate(id => { const P = window.LCNDA_PICKER || window.LCNDA_APP; P.openPicker = async o => (o.kind === 'diagram' ? { id, title: 'Les âges' } : { id: 1, title: 'Jean MARTIN' }); }, dgB);
+        await fr.locator('header.site-entete').click({ position: { x: 4, y: 4 } }); await page.waitForTimeout(200);
+        if (!await page.locator('[data-sw-block="diagram"]').isVisible()) await page.click('.sw-rail [data-sw-left="blocks"]');
+        await page.click('[data-sw-block="diagram"]'); await page.waitForSelector('dialog[open] [data-dg-way="pick"]');
+        if (SHOTS) await page.screenshot({ path: path.join(SHOTS, 'site-diagramme-choix.png') });
+        await page.click('dialog[open] [data-dg-way="pick"]');
+        await fr.locator('.lc-diagramme svg').waitFor({ timeout: 8000 });
+        ok(await page.evaluate(id => /^<svg/.test(window.LCNDA_EXT.siteWeb.current.site.frozen[`diagram:${id}`] || ''), dgB), 'diagramme de l’app : dessiné par Graphiques, gardé (figé) dans le site');
+        // 🗺 une carte sur un fond de l'app (même liste que Maintenance → fonds de carte)
+        await page.click('[data-sw-block="map"]'); await fr.locator('[data-lc-block="map"] .lc-map-img').waitFor({ timeout: 20000 });
+        ok(await page.evaluate(() => Object.keys(window.LCNDA_EXT.siteWeb.current.site.frozen).some(k => /^map:1:ancestors:6:[a-z0-9_]+$/.test(k))), 'carte : assemblée en image sur son fond');
+        await fr.locator('[data-lc-block="map"]').click(); await page.waitForTimeout(300);
+        const fondSel = page.locator('[data-sw-panel] select[data-sw-ba="fond"]');
+        ok(await fondSel.count() === 1 && await fondSel.locator('optgroup').count() >= 2, 'le choix du fond : la liste des fonds de l’app, rangée comme dans Maintenance');
+        await page.check('[data-sw-panel] input[data-sw-ba="vive"]'); await page.waitForTimeout(400);
+        ok(/data-vive="1"/.test(await page.evaluate(() => window.LCNDA_EXT.siteWeb.current.page().html)), '« Carte interactive » cochée');
+        if (SHOTS) await page.screenshot({ path: path.join(SHOTS, 'site-carte-fond.png') });
+        // 📤 publier (faux Netlify)
+        await page.evaluate(() => window.LCNDA_EXT.siteWeb.current.save({ quiet: true }));
+        await page.click('[data-sw-cmd="publish"]'); await page.waitForSelector('dialog[open] [data-pub-pane="netlify"]');
+        await page.click('dialog[open] [data-pub-tab="netlify"]');
+        await page.click('dialog[open] .modal-actions button[type="submit"]'); await page.waitForTimeout(300);
+        ok(await page.locator('dialog[open] input[name="token_netlify"].is-invalid, dialog[open] input[name="token_netlify"][aria-invalid="true"]').count() === 1, 'publier sans jeton : erreur sous le champ (K1)');
+        await page.fill('dialog[open] input[name="token_netlify"]', mock.token);
+        await page.click('dialog[open] .modal-actions button[type="submit"]');
+        await page.waitForSelector('dialog[open] [data-pub-out] a[href="https://essai-lcnda.netlify.app"]', { timeout: 20000 });
+        eq(await page.inputValue('dialog[open] input[name="token_netlify"]'), '', 'le jeton ne reste pas affiché');
+        if (SHOTS) await page.screenshot({ path: path.join(SHOTS, 'site-publier.png') });
+        await page.click('dialog[open] .modal-actions [data-h-close]'); await page.waitForTimeout(200);
         // pages
         await page.click('.sw-rail [data-sw-left="pages"]');
         page.once('dialog', () => {}); // askText est une fenêtre de l'app
@@ -321,6 +460,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         const put = page.locator('[data-dw-put]');
         if (await put.count()) await put.first().click(); else await page.evaluate(() => window.LCNDA_EXT.deskWidgets.open('today'));
         await page.waitForSelector('dialog[open] .dw-kinds');
+        ok(await page.locator('dialog[open] [data-dw-kind="calc"]').count() === 1, '🧮 la calculette est parmi les widgets de bureau');
         ok(/navigateur/.test(await page.textContent('dialog[open] .ui-notice')), 'navigateur : la fenêtre dit qu’il faut l’application de bureau, et propose le fichier');
         if (SHOTS) await page.screenshot({ path: path.join(SHOTS, 'widgets-bureau.png') });
         await page.click('dialog[open] [data-dw-file="countdown"]'); await page.waitForTimeout(300);
@@ -332,7 +472,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         console.log(`✓ navigateur : ${n} vérifications en tout`);
     } finally {
         if (browser) await browser.close();
-        proc.kill();
+        proc.kill(); mockSrv.close();
         fs.rmSync(dir, { recursive: true, force: true });
     }
     console.log(`✓ Mon site web et widgets de bureau : ${n} vérifications`);
