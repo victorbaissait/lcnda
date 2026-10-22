@@ -278,6 +278,12 @@
         XMLHttpRequest.prototype.open = function (m, ...a) { this.__msMethod = m; this.__msUrl = a[0]; return XO.call(this, m, ...a); };
         XMLHttpRequest.prototype.send = function (...a) { if (guard.on && !isRead(this.__msMethod)) { guard.blocked.push(String(this.__msUrl || '')); setTimeout(() => this.dispatchEvent(new Event('error')), 0); return; } return XS.apply(this, a); };
         if (navigator.sendBeacon) { const SB = navigator.sendBeacon.bind(navigator); navigator.sendBeacon = (u, d) => { if (guard.on) { guard.blocked.push(String(u)); return false; } return SB(u, d); }; }
+        // un formulaire envoyé en POST (ex. la sauvegarde protégée, qui porte son jeton) : arrêté aussi pendant le mode
+        const postForm = f => f instanceof HTMLFormElement && /^post$/i.test(f.getAttribute('method') || '');
+        const FS = HTMLFormElement.prototype.submit, FR = HTMLFormElement.prototype.requestSubmit;
+        HTMLFormElement.prototype.submit = function (...a) { if (guard.on && postForm(this)) { guard.blocked.push(String(this.action || '')); return; } return FS.apply(this, a); };
+        if (FR) HTMLFormElement.prototype.requestSubmit = function (...a) { if (guard.on && postForm(this)) { guard.blocked.push(String(this.action || '')); return; } return FR.apply(this, a); };
+        addEventListener('submit', e => { if (guard.on && postForm(e.target)) { e.preventDefault(); e.stopImmediatePropagation(); guard.blocked.push(String(e.target.action || '')); } }, true);
     })();
 
     /* ═════════════════════════ Le mode : un « moteur » dessiné dans un cadre ═════════════════════════

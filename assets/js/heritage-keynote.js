@@ -1335,7 +1335,7 @@
     const zipStore = files => window.LCNDA_SHEET.zipStore(files);
 
     /* ═════════ Importer ═════════ */
-    const parseXml = s => { const d = new DOMParser().parseFromString(String(s || ''), 'application/xml'); if (d.getElementsByTagName('parsererror').length) throw new Error('XML illisible dans le fichier'); return d; };
+    const parseXml = s => { if (/<!DOCTYPE|<!ENTITY/i.test(String(s || ''))) throw new Error('fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY)'); const d = new DOMParser().parseFromString(String(s || ''), 'application/xml'); if (d.getElementsByTagName('parsererror').length) throw new Error('XML illisible dans le fichier'); return d; };
     const kids = (el, l) => el ? [...el.children].filter(c => c.localName === l) : [];
     const kid = (el, l) => el ? [...el.children].find(c => c.localName === l) || null : null;
     const desc = (el, l) => el ? [...el.getElementsByTagNameNS('*', l)] : [];
