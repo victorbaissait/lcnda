@@ -1,0 +1,503 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Météo d'autrefois</title>
+<link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+*{box-sizing:border-box}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px;max-width:1180px;line-height:1.5}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px 30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;min-width:0}
+.case.full{grid-column:1/-1}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.note{font-size:12.5px;color:#555;margin-top:14px;line-height:1.5}
+.muted{color:#666}
+/* K8 pastille */
+.b{display:inline-flex;align-items:center;gap:4px;font:800 11px/1 system-ui;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid;padding:4px 7px;white-space:nowrap;vertical-align:middle;color:#444;background:#f0f1f3;border-color:#8a8f99}
+.b.g{color:#14532d;background:#ecfaf0;border-color:#1aa34a}
+.b.y{color:#6b4e00;background:#fff8e1;border-color:#e1a500}
+.b.bl{color:#0a3fae;background:#eaf1ff;border-color:#055dff}
+.b.sosa{color:#fff;background:#055dff;border-color:#055dff}
+.b.blk{color:#fff;background:#111;border-color:#111}
+.src{font-size:11px;color:#888;line-height:1.45;margin-top:8px}
+.lnk{color:#055dff;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+.btn{display:inline-block;border:2px solid #111;padding:8px 13px;font:700 13px system-ui;background:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3);white-space:nowrap;cursor:pointer;color:#111}
+.btn.p{background:#055dff;color:#fff}
+.btn.s{padding:4px 9px;font-size:12px;box-shadow:none;border-width:1.5px}
+/* fiche */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.34);padding:14px 16px;margin-bottom:18px;background:#fff}
+.av{width:56px;height:56px;display:grid;place-items:center;background:#3c78d8;color:#fff;font:800 20px system-ui;border:2px solid #111}
+.av.r{border-radius:50%;width:34px;height:34px;font-size:13px;border:0}
+.av.f{background:#d9488f}
+.hero h2{font-size:30px;margin:0;line-height:1;letter-spacing:-.03em}
+.hero small{color:#666;font-size:13px}
+.hst{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.crd{border:2px solid #111;background:#fff}
+.crd-h{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:2px solid #111;background:#fafafa}
+.crd-h h4{margin:0;font-size:16px;flex:1}.crd-h h4 small{color:#aaa;font-weight:400}
+.idx{display:grid;place-items:center;width:26px;height:26px;background:#055dff;color:#fff;font:800 11px system-ui;border:1.5px solid #111;transform:rotate(-3deg)}
+.crd-b{padding:0 14px}
+.ev{display:grid;grid-template-columns:38px 132px minmax(0,1fr);gap:11px;padding:12px 0;border-bottom:1px solid #ddd;align-items:start}
+.ev:last-child{border:0}
+.evi{width:34px;height:34px;display:grid;place-items:center;border:2px solid #111;color:#fff;background:var(--c,#055dff);font-weight:800}
+.evd{font-size:12px;font-weight:700}
+.evc strong{display:block;font-size:13px}.evc small{color:#666;font-size:12px}
+.wx{display:inline-flex;align-items:center;gap:4px;margin-top:5px;border:1.5px solid #c9ccd3;background:#fff;padding:2px 6px;font:700 11.5px system-ui;color:#333;cursor:pointer;white-space:nowrap}
+.wx:hover,.wx.on{border-color:#055dff;background:#eaf1ff;color:#0a3fae}
+.wx.dim{opacity:.7}
+/* bulle survol */
+.pop{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:11px 13px;max-width:330px;font-size:13px;line-height:1.45;position:relative;margin-top:10px}
+.pop:before{content:"";position:absolute;top:-9px;left:30px;width:14px;height:14px;background:#fff;border-left:2px solid #111;border-top:2px solid #111;transform:rotate(45deg)}
+.pop b{font-size:14px}
+/* fenêtre */
+.win{border:2px solid #111;background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.25);width:540px;max-width:100%}
+.win.m{width:760px}
+.win-h{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:2px solid #111;background:#fafafa}
+.win-h .t{flex:1;min-width:0}.win-h .t small{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin-bottom:3px}
+.win-h b{font-size:16px}
+.win-h .x{border:0;background:none;font-size:22px;line-height:1;cursor:pointer;color:#555;padding:0 2px}
+.win-b{padding:14px 16px}
+.win-f{display:flex;gap:10px;justify-content:flex-end;padding:10px 16px;border-top:2px solid #111;align-items:center;flex-wrap:wrap}
+.win-f .sp{flex:1}
+.say{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.say .big{font-size:40px;line-height:1}
+.say p{margin:0;font-size:15px;line-height:1.4}.say p b{font-size:16px}
+.cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid #111}
+.cols>div{padding:8px 4px;text-align:center;border-right:1px solid #e3e5ea}
+.cols>div:last-child{border:0}
+.cols>div.on{background:#eaf1ff;box-shadow:inset 0 -4px 0 #055dff}
+.cols small{display:block;font:700 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#777}
+.cols .i{font-size:24px;display:block;margin:4px 0}
+.cols .d{font:800 16px system-ui;display:block}
+.cols .e{font-size:11.5px;color:#555;display:block;margin-top:2px;line-height:1.35}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 12px;font-size:13px;margin-top:12px}
+.kv dt{color:#666}.kv dd{margin:0;font-weight:600}
+.norm{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:10px;padding:7px 10px;background:#eef4ff;border-left:4px solid #055dff}
+.strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:12px}
+.strip>div{border:1.5px solid #d6d9df;text-align:center;padding:5px 2px;font-size:11px;line-height:1.3}
+.strip>div.on{border:2px solid #055dff;background:#eaf1ff;font-weight:800}
+.strip .i{font-size:17px;display:block}
+.strip small{display:block;color:#777;font-size:10px}
+.lab{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin:14px 0 6px}
+.ok{font-size:12.5px;color:#055dff;margin-top:5px;font-weight:600}
+.m2wrap{display:grid;grid-template-columns:540px minmax(0,1fr);gap:28px;align-items:start}
+.fold{border-top:1.5px dashed #c9ccd3;padding:10px 0 12px 49px}
+.mini{display:flex;gap:4px;flex-wrap:wrap}.mini span{border:1.5px solid #d6d9df;padding:3px 6px;font:700 11.5px system-ui;white-space:nowrap}.mini span.on{border-color:#055dff;background:#eaf1ff;color:#0a3fae}
+/* M3 */
+.rel{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.rel>div{border:2px solid #111;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rel .ic{font-size:30px}
+.rel .b{white-space:normal;line-height:1.25;align-self:flex-start;max-width:100%}
+.rel h5{margin:0;font-size:13px}.rel .w{font-size:12.5px;line-height:1.4}
+.rel .p{font-size:11.5px;color:#666}
+.empty-line{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;background:#f6f7f9;border:1.5px dashed #c9ccd3;font-size:12.5px;color:#555;line-height:1.4}
+/* M4 */
+.life .row{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #eee;font-size:13px}
+.life .row .i{font-size:22px;text-align:center}
+.life .row b{display:block}
+.life .row small{color:#666}
+.cur{margin-top:12px;display:grid;gap:6px}
+.cur div{background:#fffbe6;border-left:4px solid #e1a500;padding:7px 10px;font-size:13px}
+/* réglages */
+.ph{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:14px}
+.ph .t{flex:1;min-width:220px}
+.ph small{display:block;font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.ph h2{margin:3px 0 4px;font-size:24px}
+.ph p{margin:0;color:#666;font-size:13px}
+.saved{color:#1aa34a;font:700 12.5px system-ui;white-space:nowrap}
+.set{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 28px}
+.set section{min-width:0}
+.set h4{margin:0 0 8px;font-size:14px;border-bottom:1px solid #e3e5ea;padding-bottom:5px}
+.line{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0;font-size:13.5px;flex-wrap:wrap}
+.seg{display:inline-flex;border:2px solid #111;flex-wrap:wrap}.seg span{padding:6px 11px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff}.seg span:last-child{border-right:0}.seg span.on{background:#055dff;color:#fff}
+.tg{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;margin:9px 0;line-height:1.3}
+.tg i{flex:none;width:34px;height:20px;border-radius:20px;background:#c9ccd3;position:relative;border:1.5px solid #111}
+.tg i:after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#fff;border:1.5px solid #111}
+.tg.on i{background:#055dff}.tg.on i:after{left:16px}
+.tg small{display:block;font-weight:400;color:#666;font-size:12px}
+.chk{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:5px 0}
+.chk input{accent-color:#055dff;width:16px;height:16px;margin:0}
+.chks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}
+.data{border:2px solid #111;margin-top:4px}
+.data>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:10px 12px;border-bottom:1px solid #e3e5ea;align-items:center}
+.data>div:last-child{border:0}
+.data b{font-size:14px}.data small{display:block;color:#666;font-size:12px;margin-top:2px}
+.data .acts{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}
+/* import */
+.steps{display:flex;gap:0;border:2px solid #111;margin-bottom:14px}
+.steps span{flex:1;padding:7px 8px;font:700 12px system-ui;border-right:2px solid #111;background:#fff;color:#777;text-align:center}
+.steps span:last-child{border:0}.steps span.done{color:#14532d;background:#ecfaf0}.steps span.on{background:#055dff;color:#fff}
+.dropz{border:2.5px dashed #055dff;background:#f5f8ff;padding:18px;text-align:center;font-size:14px}
+.file{display:flex;gap:10px;align-items:center;border:2px solid #111;padding:8px 10px;margin-bottom:12px;font-size:13px;flex-wrap:wrap}
+.file b{flex:1;min-width:0;overflow-wrap:anywhere}
+.what{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
+.what div{border:2px solid #111;padding:9px 8px;text-align:center}
+.what b{display:block;font-size:18px}.what small{font-size:11.5px;color:#666}
+.notice{border:2px solid;padding:8px 12px;font-size:13px;display:flex;gap:8px;margin:8px 0;line-height:1.4}
+.notice.i{border-color:#055dff;background:#eef4ff}.notice.ok{border-color:#1aa34a;background:#ecfaf0}.notice.w{border-color:#e1a500;background:#fff8e1}
+.prog{height:10px;border:2px solid #111;background:#fff;margin:8px 0}.prog i{display:block;height:100%;width:64%;background:#055dff}
+.spin{width:16px;height:16px;border:3px solid #cdd6e6;border-top-color:#055dff;border-radius:50%;display:inline-block;vertical-align:-3px;margin-right:6px}
+.toast2{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:11px 14px;font-size:14px;box-shadow:5px 5px 0 rgba(5,93,255,.45);max-width:470px;position:relative;margin:12px 0 0;flex-wrap:wrap}
+.toast2 .u{border:1.5px solid #fff;padding:4px 9px;font:700 12.5px system-ui;margin-left:auto;white-space:nowrap}
+.toast2 .bar{position:absolute;left:0;bottom:0;height:3px;background:#5b9bff}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.three>div{min-width:0}
+.three h5{margin:0 0 8px;font-size:13px}
+.three .what{grid-template-columns:repeat(2,minmax(0,1fr))}
+.three{grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr) minmax(0,1fr)}
+/* widget */
+.wid{border:2px solid #111;background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.34)}
+.wid .crd-h{padding:9px 12px}
+.wid .bd{padding:14px;display:flex;gap:14px;align-items:center}
+.wid .big{font-size:46px;line-height:1}
+.wid p{margin:0;font-size:15px;line-height:1.45}
+.wid .ft{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:8px 14px;border-top:1px solid #e3e5ea;font-size:12px;flex-wrap:wrap}
+.cj{border:2px solid #111;padding:12px;margin-top:14px;background:#fffdf7}
+.cj .d{font:800 13px system-ui;color:#055dff;letter-spacing:.04em;text-transform:uppercase}
+.cj ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:13.5px}
+/* frise / livret */
+.frise{position:relative;padding:58px 6px 30px;overflow:hidden}
+.frise .axe{position:absolute;left:6px;right:6px;top:84px;height:3px;background:#111}
+.frise .pt{position:absolute;top:66px;transform:translateX(-50%);text-align:center;width:78px}
+.frise .pt .w{position:absolute;top:-48px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700;white-space:nowrap}
+.frise .pt .w span{display:block;font-size:20px}
+.frise .pt .dot{width:16px;height:16px;border:2px solid #111;background:var(--c,#055dff);margin:10px auto 6px}
+.frise .pt small{display:block;font-size:11px;line-height:1.25}
+.page{border:1.5px solid #c9ccd3;background:#fdfbf5;padding:22px 24px;font-family:Georgia,serif;font-size:14.5px;line-height:1.6;color:#2b2416;box-shadow:3px 3px 0 rgba(0,0,0,.08)}
+.page h6{font:700 18px Georgia,serif;margin:0 0 6px}
+.page .enc{float:right;border:1.5px solid #8a7650;padding:6px 9px;margin:0 0 8px 12px;font:12px/1.35 system-ui;color:#5b4a2a;text-align:center;background:#fff}
+.page .enc span{font-size:24px;display:block}
+.page .s{font:10.5px system-ui;color:#8a7650;margin-top:10px;clear:both}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font:700 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#777;border-bottom:2px solid #111;padding:6px 8px}
+.tbl td{padding:7px 8px;border-bottom:1px solid #eef0f3;vertical-align:top}
+.tbl td:first-child{font-weight:700}
+.tbl .lic{font-size:11.5px;color:#666}
+.scroll{overflow-x:auto}
+/* sombre */
+.dk{background:#121418;color:#e8e8e8;border-color:#444;box-shadow:6px 6px 0 rgba(77,159,255,.25)}
+.dk>.tag{color:#7fb0ff}
+.dk .crd,.dk .win{background:#1b1e24;border-color:#444;box-shadow:none}
+.dk .crd-h,.dk .win-h{background:#20242b;border-color:#444}
+.dk .crd-h h4 small,.dk .muted,.dk .evc small,.dk .kv dt,.dk .note{color:#a5abb6}
+.dk .ev{border-color:#2d3139}.dk .evi{border-color:#888}
+.dk .wx{background:#1b1e24;border-color:#555;color:#ddd}
+.dk .wx.on{background:#1a2a3d;border-color:#5599ff;color:#9cc2ff}
+.dk .cols{border-color:#555}.dk .cols>div{border-color:#2d3139}.dk .cols>div.on{background:#1a2a3d;box-shadow:inset 0 -4px 0 #5599ff}.dk .cols small,.dk .cols .e{color:#a5abb6}
+.dk .norm{background:#1a2a3d;border-color:#5599ff}
+.dk .b.g{background:#13301f;color:#8fe0ad;border-color:#3ccf73}
+.dk .b.y{background:#33290b;color:#ffd666;border-color:#e1a500}
+.dk .src{color:#8b919c}.dk .lnk{color:#7fb0ff}
+.dk .win-f,.dk .win-h{border-color:#444}
+.dk .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}
+.dk .win-h .x{color:#bbb}
+.dk .idx{border-color:#888}
+@media (max-width:900px){
+ body{padding:16px}
+ .grid{grid-template-columns:minmax(0,1fr)}
+ .case{padding:14px 14px 18px}
+ .rel{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .m2wrap{grid-template-columns:minmax(0,1fr)}
+ .set,.three{grid-template-columns:minmax(0,1fr)}
+ .what{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+ .hero{grid-template-columns:auto minmax(0,1fr)}.hero .hst{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center}
+ .hero h2{font-size:24px}
+ .ev{grid-template-columns:34px minmax(0,1fr)}.ev .evc{grid-column:2}
+ .rel{grid-template-columns:minmax(0,1fr)}
+ .strip{grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}.strip small{display:none}
+ .cols .d{font-size:14px}.cols .i{font-size:20px}
+ .chks{grid-template-columns:minmax(0,1fr)}
+ .fold{padding-left:0}
+ .frise .pt{width:56px}.frise .pt small{font-size:10px}
+ .wid .bd{flex-direction:column;align-items:flex-start}
+}
+</style></head><body>
+
+<h1>🌦 Météo d'autrefois — le temps qu'il faisait le jour d'un événement</h1>
+<p class="sub">Pour chaque naissance, baptême, mariage, décès ou inhumation, l'app dit le temps qu'il faisait ce jour-là (et à l'heure de l'acte quand on la connaît), en France, Belgique, Suisse et Luxembourg, puis en Europe. Tout marche sans Internet : le socle (≈ 550 Mo) est inclus, les packs plus précis s'importent une fois. Exemple suivi d'un écran à l'autre : la famille DUPOUY, de Lectoure et d'Auch (Gers).</p>
+
+<div class="grid">
+
+<!-- M1 -->
+<div class="case full"><span class="tag"><span class="num">M1</span>Sur la fiche</span><h3>Une petite pastille météo dans la ligne de chaque événement</h3>
+<div class="hero">
+ <div class="av">JD</div>
+ <div><h2>Jean DUPOUY</h2><small>° 14 janvier 1901 Lectoure · † 3 février 1978 Auch</small></div>
+ <div class="hst"><span class="b sosa">Sosa 12</span><span class="b blk">Décédé</span></div>
+</div>
+<div class="crd">
+ <div class="crd-h"><span class="idx">02</span><h4>Événements <small>(5)</small></h4></div>
+ <div class="crd-b">
+  <div class="ev"><span class="evi">✶</span><div class="evd">14 janvier 1901<small class="muted" style="display:block;font-weight:400">à 3 h du matin</small></div>
+   <div class="evc"><strong>Naissance</strong><small>Lectoure, Gers</small><br><span class="wx on" title="Il faisait très froid : −6 °C au matin">❄️ −6 °C</span></div></div>
+  <div class="ev"><span class="evi" style="--c:#7a5cff">✚</span><div class="evd">20 janvier 1901</div>
+   <div class="evc"><strong>Baptême</strong><small>Église Saint-Gervais, Lectoure</small><br><span class="wx">☁️ 3 °C</span></div></div>
+  <div class="ev"><span class="evi" style="--c:#d9488f">∞</span><div class="evd">22 octobre 1926</div>
+   <div class="evc"><strong>Mariage avec Marie LABARTHE</strong><small>Auch, Gers</small><br><span class="wx">🌧️ 9 °C</span></div></div>
+  <div class="ev"><span class="evi" style="--c:#111">✝</span><div class="evd">3 février 1978<small class="muted" style="display:block;font-weight:400">à 6 h 30</small></div>
+   <div class="evc"><strong>Décès</strong><small>Auch, Gers</small><br><span class="wx">🌫️ −2 °C</span></div></div>
+  <div class="ev"><span class="evi" style="--c:#555">⚱</span><div class="evd">6 février 1978</div>
+   <div class="evc"><strong>Inhumation</strong><small>Cimetière de Lectoure</small><br><span class="wx">🌧️ 6 °C</span></div></div>
+ </div>
+</div>
+<div class="pop"><b>❄️ Il faisait très froid</b><br>−6 °C au matin, 1 °C l'après-midi, ciel clair.<br><span class="muted" style="font-size:12px">À 3 h du matin ≈ la nuit la plus froide de la semaine.</span><div style="margin-top:7px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="b y">Station à 31 km</span><span class="lnk">Cliquer pour le détail</span></div></div>
+<p class="note">La pastille est discrète (icône + température du moment de l'acte, sinon de l'après-midi), juste sous le lieu. Au survol : la bulle (une phrase + la fiabilité). Au clic : le détail M2. Rien n'est écrit dans la fiche : la météo est calculée à l'affichage, depuis les données rangées dans l'app.</p>
+</div>
+
+<!-- M2 -->
+<div class="case full"><span class="tag"><span class="num">M2</span>Détail d'un jour</span><h3>La journée en 4 moments, la normale, la fiabilité et les jours autour</h3>
+<div class="m2wrap"><div class="win">
+ <div class="win-h"><div class="t"><small>🌦 Météo d'autrefois · Décès de Jean DUPOUY</small><b>Vendredi 3 février 1978 · Auch</b></div><button class="x" aria-label="Fermer">×</button></div>
+ <div class="win-b">
+  <div class="say"><span class="big">🌫️</span><p><b>Matin de brouillard glacé.</b><br>−2 °C au lever, 7 °C l'après-midi, pas de pluie, vent faible.</p></div>
+  <div class="cols">
+   <div><small>Nuit · 0 h</small><span class="i">🌫️</span><span class="d">−1 °C</span><span class="e">0 mm<br>vent 4 km/h</span></div>
+   <div class="on"><small>Matin · 6 h</small><span class="i">🌫️</span><span class="d">−2 °C</span><span class="e">0 mm<br>vent 3 km/h</span></div>
+   <div><small>Midi · 12 h</small><span class="i">⛅</span><span class="d">6 °C</span><span class="e">0 mm<br>vent 9 km/h</span></div>
+   <div><small>Soir · 18 h</small><span class="i">☁️</span><span class="d">4 °C</span><span class="e">0 mm<br>vent 7 km/h</span></div>
+  </div>
+  <div class="ok">✓ Compris : 6 h 30, heure légale (UTC+1) ≈ 5 h 30 UTC → valeur la plus proche : 6 h UTC (en bleu).</div>
+  <div class="norm">📉 <span><b>3 °C sous la normale</b> de février 1951–1980 à Auch (min. 1 °C, max. 10 °C).</span></div>
+  <dl class="kv">
+   <dt>Fiabilité</dt><dd><span class="b g">Mesuré</span></dd>
+   <dt>Station</dt><dd>Auch – Lamothe · à 5 km · 40 m plus bas</dd>
+   <dt>Heures</dt><dd>ERA5, carreau ≈ 30 km</dd>
+  </dl>
+  <span class="lab">3 jours avant · 3 jours après</span>
+  <div class="strip">
+   <div><small>31 janv.</small><span class="i">🌧️</span>8°</div>
+   <div><small>1er févr.</small><span class="i">☁️</span>5°</div>
+   <div><small>2 févr.</small><span class="i">🌫️</span>4°</div>
+   <div class="on"><small>3 févr.</small><span class="i">🌫️</span>7°</div>
+   <div><small>4 févr.</small><span class="i">☀️</span>9°</div>
+   <div><small>5 févr.</small><span class="i">☁️</span>8°</div>
+   <div><small>6 févr.</small><span class="i">🌧️</span>6°</div>
+  </div>
+  <div style="display:flex;gap:14px;margin-top:12px;flex-wrap:wrap"><span class="lnk">↗ Source</span><span class="lnk">🗺 Voir sur la carte</span></div>
+  <div class="src">Source : Météo-France, Licence Ouverte 2.0 · Heures : Generated using Copernicus Climate Change Service information [2025].</div>
+ </div>
+ <div class="win-f"><span class="btn">Fermer</span></div>
+</div>
+ <div class="alt"><span class="lab" style="margin-top:0">Variante : panneau qui se déplie sous l'événement</span>
+ <div class="crd"><div class="crd-b">
+  <div class="ev" style="border:0"><span class="evi" style="--c:#111">✝</span><div class="evd">3 février 1978<small class="muted" style="display:block;font-weight:400">à 6 h 30</small></div>
+   <div class="evc"><strong>Décès</strong><small>Auch, Gers</small><br><span class="wx on">🌫️ −2 °C ▴</span></div></div>
+  <div class="fold"><div class="say" style="margin-bottom:8px"><span class="big" style="font-size:30px">🌫️</span><p style="font-size:13.5px"><b>Matin de brouillard glacé.</b><br>−2 °C au lever, 7 °C l'après-midi, pas de pluie.</p></div>
+   <div class="mini"><span>🌫️ 0 h −1°</span><span class="on">🌫️ 6 h −2°</span><span>⛅ 12 h 6°</span><span>☁️ 18 h 4°</span></div>
+   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><span class="b g">Mesuré</span><span style="font-size:12px" class="muted">Auch – Lamothe, 5 km · 3 °C sous la normale</span></div>
+   <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap"><span class="lnk">Tout le détail…</span><span class="lnk">↗ Source</span><span class="lnk">🗺 Voir sur la carte</span></div>
+   <div class="src">Source : Météo-France, Licence Ouverte 2.0 · Copernicus Climate Change Service</div></div>
+ </div></div>
+ <p class="note" style="margin-top:10px">Pour qui préfère rester dans la fiche : le clic sur la pastille déplie ce résumé ; « Tout le détail… » ouvre la fenêtre.</p></div>
+</div>
+<p class="note">Petite fenêtre (540, K6) qui ne fait que montrer : « Fermer » seul en bas, × en haut. Le moment de l'acte est en bleu dans les 4 colonnes. La température des jours autour = le maximum de la journée. « 🗺 Voir sur la carte » ouvre la Carte avec le lieu, la station et le carreau ERA5.</p>
+</div>
+
+<!-- M3 -->
+<div class="case full"><span class="tag"><span class="num">M3</span>Fiabilité</span><h3>Plus la mesure est loin ou ancienne, plus l'app le dit clairement</h3>
+<div class="rel">
+ <div><span class="ic">☀️</span><h5>Mariage de Pierre DUPOUY et Odette CASTÈRA</h5><span class="p">samedi 4 août 1956 · Auch</span>
+  <span class="w">Grand soleil et chaleur : 31 °C l'après-midi.</span><span class="b g">Mesuré</span><span class="p">Station d'Auch, 4 km</span><span class="src">Météo-France, Licence Ouverte 2.0</span></div>
+ <div><span class="ic">🌧️</span><h5>Naissance de Germaine DUPOUY</h5><span class="p">mardi 9 mars 1920 · Mauvezin</span>
+  <span class="w">Doux et gris, 11 °C ; <b>il a plu dans la région</b>.</span><span class="b y">Station à 28 km</span><span class="p">Station d'Auch · indicatif</span><span class="src">Météo-France, Licence Ouverte 2.0</span></div>
+ <div><span class="ic">☁️</span><h5>Décès de Bertrand DUPOUY</h5><span class="p">dimanche 17 décembre 1944 · Marciac</span>
+  <span class="w">Couvert et frais : 2 °C au matin, 8 °C l'après-midi.</span><span class="b y">Estimé (carreau ≈ 30 km)</span><span class="p">Aucune station à moins de 40 km</span><span class="src">Generated using Copernicus Climate Change Service information</span></div>
+ <div><span class="ic">⛅</span><h5>Baptême de Jeanne SÉGUÉLA</h5><span class="p">dimanche 2 mai 1852 · Lectoure</span>
+  <span class="w">Sans doute doux, entre 9 et 19 °C.</span><span class="b">Reconstitution grossière (≈ 100 km)</span><span class="p">Pas de station si tôt</span><span class="src">20CRv3, NOAA / DOE</span></div>
+ <div><span class="ic" style="opacity:.35">🌦</span><h5>Naissance de Dominique DUPOUY</h5><span class="p">dimanche 11 avril 1790 · Lectoure</span>
+  <div class="empty-line"><span>🌦</span><span>Pas de relevé connu près d'ici avant 1863 (première station : Toulouse).</span></div></div>
+</div>
+<p class="note">Les règles : station à moins de 15 km et moins de 150 m d'écart d'altitude → <span class="b g">Mesuré</span> ; de 15 à 40 km → <span class="b y">Station à 28 km</span> (la pluie, elle, devient « il a plu dans la région », car elle change vite d'un village à l'autre) ; sinon la réanalyse ERA5 (1940 → 2025) → <span class="b y">Estimé</span> ; de 1836 à 1939 la reconstitution 20CR → <span class="b">Reconstitution grossière</span> ; avant, ou rien : la petite ligne vide (K10), sans pastille.</p>
+</div>
+
+<!-- M4 -->
+<div class="case"><span class="tag"><span class="num">M4</span>Bloc de la fiche (facultatif)</span><h3>🌦 Météo de sa vie</h3>
+<div class="crd">
+ <div class="crd-h"><span class="idx">07</span><h4>🌦 Météo de sa vie <small>(5)</small></h4></div>
+ <div class="crd-b life">
+  <div class="row"><span class="i">❄️</span><span><b>Naissance · 14 janv. 1901</b><small>−6 °C la nuit, 1 °C l'après-midi</small></span><span class="b y">31 km</span></div>
+  <div class="row"><span class="i">☁️</span><span><b>Baptême · 20 janv. 1901</b><small>Gris, 3 °C</small></span><span class="b y">31 km</span></div>
+  <div class="row"><span class="i">🌧️</span><span><b>Mariage · 22 oct. 1926</b><small>Pluie toute la journée, 14 mm, 9 °C</small></span><span class="b g">Mesuré</span></div>
+  <div class="row"><span class="i">🌫️</span><span><b>Décès · 3 févr. 1978</b><small>Brouillard, −2 °C au matin</small></span><span class="b g">Mesuré</span></div>
+  <div class="row" style="border:0"><span class="i">🌧️</span><span><b>Inhumation · 6 févr. 1978</b><small>Pluie faible, 6 °C</small></span><span class="b y">33 km</span></div>
+  <div class="cur">
+   <div>🥶 Né pendant la semaine la plus froide de l'hiver 1900–1901 à Agen.</div>
+   <div>☔ Marié le jour le plus pluvieux d'octobre 1926 à Auch.</div>
+   <div>📊 Sur ses 5 grands jours : 3 gris ou pluvieux, aucun de soleil.</div>
+  </div>
+ </div>
+</div>
+<p class="note">Bloc qu'on range et qu'on cache comme les autres blocs de la fiche (largeurs 1, ½, ⅓…). Clic sur une ligne = le détail M2. Les phrases curieuses ne viennent que des données « Mesuré » ou « Station à … km ».</p>
+</div>
+
+<!-- M9 -->
+<div class="case"><span class="tag"><span class="num">M9</span>L'heure de l'acte</span><h3>L'heure écrite dans l'acte est remise à l'heure du monde</h3>
+<label style="display:block;font-weight:700;font-size:13px;margin-bottom:6px">Heure de l'événement</label>
+<div style="border:2px solid #111;padding:9px 10px;font-size:15px">à 3 heures du matin</div>
+<div class="ok">✓ Compris : 3 h du matin, heure solaire de Lectoure ≈ 2 h 57 UTC</div>
+<table class="tbl" style="margin-top:14px">
+<tr><th>Acte</th><th>Heure de l'époque</th><th>Montrée</th></tr>
+<tr><td>Bertrand, 20 nov. 1868, « à 3 heures du matin »</td><td>Heure solaire de Lectoure (avant 1891) → ≈ 2 h 57 UTC</td><td>La nuit (avant 1940 : la journée seulement)</td></tr>
+<tr><td>Jean, 14 janv. 1901, « à 3 heures du matin »</td><td>Heure de Paris (1891–1911) → ≈ 2 h 51 UTC</td><td>Minimum de la nuit</td></tr>
+<tr><td>Un acte du 9 juin 1943, « à 14 heures »</td><td>Heure allemande (1940–1944) → 12 h UTC</td><td>12 h UTC</td></tr>
+<tr><td>Jean, 3 févr. 1978, « à 6 h 30 »</td><td>Heure légale UTC+1 → 5 h 30 UTC</td><td>6 h UTC</td></tr>
+<tr><td>Un acte du 14 juil. 1985, « à 16 h »</td><td>Heure d'été UTC+2 → 14 h UTC</td><td>12 h (socle) · 14 h (pack complet)</td></tr>
+</table>
+<p class="note">Même saisie libre que les heures K17 (« 14 h 30 », « 3 heures du matin »…), avec « ✓ Compris : … » dessous. L'heure enregistrée ne change pas : la conversion sert seulement à choisir la valeur la plus proche.</p>
+</div>
+
+<!-- M5 -->
+<div class="case full"><span class="tag"><span class="num">M5</span>Réglages · Maintenance</span><h3>Gardés tout seuls (K2), avec l'état des données</h3>
+<div class="ph">
+ <div class="t"><small>Maintenance · Données</small><h2>🌦 Météo d'autrefois</h2><p>Le temps qu'il faisait le jour de chaque événement, sans Internet.</p></div>
+ <span class="saved">✓ Enregistré</span><span class="btn s">↺ Remettre comme au départ</span>
+</div>
+<div class="set">
+ <section>
+  <h4>Ce qu'on montre</h4>
+  <div class="line"><span>Météo sur les fiches</span><span class="seg"><span class="on">Toujours</span><span>Au survol</span><span>Jamais</span></span></div>
+  <div class="line"><span>Températures</span><span class="seg"><span class="on">°C</span><span>°F</span></span></div>
+  <div class="line"><span>Pluie</span><span class="seg"><span class="on">mm</span><span>pouces</span></span></div>
+  <label class="tg on"><i></i><span>La phrase simple<small>« Il faisait froid : −4 °C au matin… »</small></span></label>
+  <label class="tg on"><i></i><span>Comparer à la normale</span></label>
+  <label class="tg on"><i></i><span>Ligne des sources sous le détail<small>Obligatoire pour certaines licences : elle reste dans le détail M2 et à l'export.</small></span></label>
+  <label class="tg"><i></i><span>Bloc « 🌦 Météo de sa vie » sur les fiches</span></label>
+  <label class="tg on"><i></i><span>Phrases curieuses (« Né le jour le plus froid… »)</span></label>
+  <label class="tg on"><i></i><span>Dans « Ce jour-là » et le tableau de bord</span></label>
+  <label class="tg"><i></i><span>Montrer aussi les reconstitutions grossières (avant 1940)</span></label>
+  <h4 style="margin-top:16px">Pour quels événements</h4>
+  <div class="chks">
+   <label class="chk"><input type="checkbox" checked> Naissance</label><label class="chk"><input type="checkbox" checked> Baptême</label>
+   <label class="chk"><input type="checkbox" checked> Mariage</label><label class="chk"><input type="checkbox" checked> Décès</label>
+   <label class="chk"><input type="checkbox" checked> Inhumation</label><label class="chk"><input type="checkbox"> Recensement</label>
+   <label class="chk"><input type="checkbox"> Départ, voyage</label><label class="chk"><input type="checkbox"> Tous les autres</label>
+  </div>
+ </section>
+ <section>
+  <h4>Les données dans l'app</h4>
+  <div class="data">
+   <div><span><b>Socle inclus</b><small>1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · 550 Mo</small></span><span class="b g">Installé</span></div>
+   <div><span><b>Pack complet</b><small>Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go</small></span><span class="b">Pas installé</span>
+    <span class="acts"><span class="btn s">⤓ Télécharger le pack complet (≈ 3 Go)</span><span class="btn s">⤒ Importer le fichier…</span></span></div>
+   <div><span><b>Pack Europe</b><small>Stations d'Europe (Italie, Espagne, Allemagne…) + ERA5 Europe · ≈ 2 Go</small></span><span class="b">Pas installé</span>
+    <span class="acts"><span class="btn s">⤓ Télécharger le pack Europe (≈ 2 Go)</span><span class="btn s">⤒ Importer le fichier…</span></span></div>
+  </div>
+  <div class="notice i">ℹ️ <span>Le téléchargement se fait une fois, depuis n'importe quel ordinateur. Ensuite on importe le fichier ici et l'app n'a plus besoin d'Internet.</span></div>
+  <span class="lnk">↗ À propos des données et des licences</span>
+ </section>
+</div>
+<p class="note">K2 : chaque changement est gardé tout de suite, « ✓ Enregistré » et « ↺ Remettre comme au départ » à droite du titre, message H7 « ↶ Annuler ». Interrupteurs (K16) pour ce qui s'applique tout de suite ; cases à cocher pour choisir les événements ; petits menus à choix fixes en boutons segmentés.</p>
+</div>
+
+<!-- M6 -->
+<div class="case full"><span class="tag"><span class="num">M6</span>Importer un pack (K13)</span><h3>La fenêtre « Importer » en 3 étapes, puis le message H7</h3>
+<div class="three">
+ <div><h5>1. Déposer le fichier</h5>
+  <div class="dropz">📁 Glisse le fichier du pack ici, colle-le ou <b>choisis-le</b><br><small class="muted">meteo-pack-complet-2025.lcmeteo</small></div>
+ </div>
+ <div><h5>2. Voilà ce qui va entrer</h5>
+  <div class="win m" style="width:100%">
+   <div class="win-h"><div class="t"><small>⤒ Importer</small><b>Pack complet météo</b></div><button class="x" aria-label="Fermer">×</button></div>
+   <div class="win-b">
+    <div class="steps"><span class="done">✓ Fichier</span><span class="on">2 · Contenu</span><span>3 · Import</span></div>
+    <div class="file">📦 <b>meteo-pack-complet-2025.lcmeteo</b><span class="b g">Vérifié</span></div>
+    <p style="margin:0 0 6px;font-size:14px"><b>Voilà ce qui va entrer :</b></p>
+    <div class="what"><div><b>14 700</b><small>stations</small></div><div><b>1850–2025</b><small>chaque jour</small></div><div><b>1950 →</b><small>heure par heure</small></div><div><b>3,1 Go</b><small>sur le disque</small></div></div>
+    <div class="notice ok">✓ <span>Le socle reste : le pack s'ajoute par-dessus. 412 fiches gagnent une météo « Mesuré ».</span></div>
+   </div>
+   <div class="win-f"><span class="btn">Annuler</span><span class="btn p">⤒ Importer le pack</span></div>
+  </div>
+ </div>
+ <div><h5>3. Import, puis message</h5>
+  <div style="border:2px solid #111;padding:12px">
+   <div class="steps"><span class="done">✓ Fichier</span><span class="done">✓ Contenu</span><span class="on">3 · Import</span></div>
+   <div style="font-size:13.5px"><span class="spin"></span>Import des stations… 9 400 / 14 700</div>
+   <div class="prog"><i></i></div>
+   <small class="muted">Tu peux continuer à travailler pendant ce temps.</small>
+  </div>
+  <div class="toast2">✓ Pack complet importé : 14 700 stations<span class="u">↶ Annuler</span><span class="bar" style="width:58%"></span></div>
+ </div>
+</div>
+<p class="note">Fenêtre moyenne (760, K6). Le fichier est vérifié avant l'étape 2 (bonne sorte, pas abîmé). Après l'import, la ligne « Pack complet » de M5 passe en <span class="b g">Installé</span> avec « 🗑 Supprimer le pack ».</p>
+</div>
+
+<!-- M7 -->
+<div class="case"><span class="tag"><span class="num">M7</span>Tableau de bord · Ce jour-là</span><h3>Il y a 100 ans, aujourd'hui…</h3>
+<div class="wid">
+ <div class="crd-h"><span class="idx">🌦</span><h4>Météo d'autrefois</h4><span class="muted" style="font-size:12px">22 octobre</span></div>
+ <div class="bd"><span class="big">🌧️</span><p>Il y a <b>100 ans</b>, le jour du mariage de <b>Jean</b> et <b>Marie</b>, il <b>pleuvait à Auch</b> : 14 mm et 9 °C.</p></div>
+ <div class="ft"><span class="b g">Mesuré</span><span class="lnk">↗ Voir le mariage</span></div>
+</div>
+<div class="cj">
+ <div class="d">🎂 Ce jour-là · 22 octobre</div>
+ <ul>
+  <li>💍 1926 — Mariage de Jean DUPOUY et Marie LABARTHE à Auch · 🌧️ 9 °C</li>
+  <li>✶ 1888 — Naissance de Paul LABARTHE à Fleurance · ☀️ 14 °C</li>
+  <li>✝ 1962 — Décès de Rose SÉGUÉLA à Lectoure · ☁️ 12 °C</li>
+ </ul>
+</div>
+<p class="note">Le widget choisit un événement d'un anniversaire rond (10, 50, 100 ans…) qui a une météo « Mesuré » ou « Station à … km ». Jamais un vivant ni une fiche confidentielle (comme le mode simple).</p>
+</div>
+
+<!-- M8 -->
+<div class="case"><span class="tag"><span class="num">M8</span>Frise et livret</span><h3>La météo dans la frise de la vie et dans la mise en page</h3>
+<div class="frise">
+ <div class="axe"></div>
+ <div class="pt" style="left:6%"><div class="w"><span>❄️</span>−6°</div><div class="dot"></div><small>1901<br>Naissance</small></div>
+ <div class="pt" style="left:36%"><div class="w"><span>🌧️</span>9°</div><div class="dot" style="--c:#d9488f"></div><small>1926<br>Mariage</small></div>
+ <div class="pt" style="left:66%"><div class="w"><span>☀️</span>31°</div><div class="dot" style="--c:#7a5cff"></div><small>1956<br>Mariage du fils</small></div>
+ <div class="pt" style="left:93%"><div class="w"><span>🌫️</span>−2°</div><div class="dot" style="--c:#111"></div><small>1978<br>Décès</small></div>
+</div>
+<div class="page">
+ <div class="enc"><span>🌧️</span>Auch, 22 oct. 1926<br>9 °C · 14 mm</div>
+ <h6>Le mariage</h6>
+ Ce vendredi 22 octobre 1926, il pleuvait sur Auch depuis le matin quand Jean DUPOUY épousa Marie LABARTHE à la mairie…
+ <div class="s">Météo : Météo-France, Licence Ouverte 2.0</div>
+</div>
+<p class="note">Frise : interrupteur « 🌦 Météo » dans ses options d'affichage. Mise en page / livret : « ＋ Ajouter → 🌦 Encadré météo » sur un événement (icône, phrase, source) et une phrase toute prête dans le texte de la biographie. La ligne des sources suit à l'export.</p>
+</div>
+
+<!-- M10 -->
+<div class="case full"><span class="tag"><span class="num">M10</span>À propos des données</span><h3>D'où vient chaque chiffre, et sous quelle licence</h3>
+<div class="scroll"><table class="tbl" style="min-width:640px">
+<tr><th>Source</th><th>Ce qu'elle donne</th><th>Années</th><th>Dans</th><th>Licence et mention</th></tr>
+<tr><td>Météo-France</td><td>Stations de France, chaque jour ; heure par heure (synoptiques)</td><td>≈ 1850 / 1878 → 2025 ; heures depuis 1950</td><td>Socle (≈ 300) · Pack complet (toutes)</td><td class="lic">Licence Ouverte 2.0 — « Source : Météo-France »</td></tr>
+<tr><td>MétéoSuisse</td><td>Stations de Suisse, chaque jour</td><td>1864 → 2025</td><td>Socle · Pack complet</td><td class="lic">Open data — « Source: MeteoSwiss »</td></tr>
+<tr><td>IRM / KMI</td><td>Stations de Belgique, chaque jour</td><td>1995 → 2025</td><td>Socle · Pack complet</td><td class="lic">Données ouvertes — « Source : IRM / KMI »</td></tr>
+<tr><td>MeteoLux</td><td>Luxembourg-Findel, chaque jour</td><td>1947 → 2025</td><td>Socle</td><td class="lic">Données ouvertes — « Source : MeteoLux »</td></tr>
+<tr><td>ERA5 (Copernicus)</td><td>Réanalyse : carreaux ≈ 30 km, 4 heures par jour (socle) ou toutes les heures (packs)</td><td>1940 → 2025</td><td>Socle · Pack complet · Pack Europe</td><td class="lic">« Generated using Copernicus Climate Change Service information [2025] »</td></tr>
+<tr><td>20CRv3 (NOAA / DOE)</td><td>Reconstitution quotidienne, ≈ 100 km</td><td>1836 → 1939</td><td>Socle</td><td class="lic">« 20th Century Reanalysis V3, NOAA / DOE » — usage libre avec mention</td></tr>
+<tr><td>Normales</td><td>Moyennes sur 30 ans par station et par mois</td><td>1901–1930 → 1991–2020</td><td>Socle</td><td class="lic">Calculées par l'app depuis les sources ci-dessus</td></tr>
+</table></div>
+<div class="notice w">⚠️ <span>Une météo ancienne reste une estimation : elle aide à imaginer la journée, elle ne remplace pas ce que dit l'acte ou un journal de l'époque.</span></div>
+<p class="note">Page ouverte depuis M5 (« ↗ À propos des données ») et depuis « ↗ Source » du détail. Rien n'est envoyé sur Internet : toutes ces données sont dans l'app ou dans les packs importés.</p>
+</div>
+
+<!-- M11 -->
+<div class="case full dk"><span class="tag"><span class="num">M11</span>Mode sombre</span><h3>La pastille et le détail en mode sombre</h3>
+<div class="grid" style="gap:20px">
+ <div class="crd">
+  <div class="crd-h"><span class="idx">02</span><h4>Événements <small>(5)</small></h4></div>
+  <div class="crd-b">
+   <div class="ev"><span class="evi">✶</span><div class="evd">14 janvier 1901</div><div class="evc"><strong>Naissance</strong><small>Lectoure, Gers</small><br><span class="wx">❄️ −6 °C</span></div></div>
+   <div class="ev"><span class="evi" style="--c:#d9488f">∞</span><div class="evd">22 octobre 1926</div><div class="evc"><strong>Mariage</strong><small>Auch, Gers</small><br><span class="wx on">🌧️ 9 °C</span></div></div>
+  </div>
+ </div>
+ <div class="win" style="width:100%">
+  <div class="win-h"><div class="t"><small style="color:#a5abb6">🌦 Météo d'autrefois</small><b>Vendredi 22 octobre 1926 · Auch</b></div><button class="x" aria-label="Fermer">×</button></div>
+  <div class="win-b">
+   <div class="say"><span class="big">🌧️</span><p><b>Pluie toute la journée.</b><br>7 °C au matin, 9 °C l'après-midi, 14 mm.</p></div>
+   <div class="norm">📉 <span><b>4 °C sous la normale</b> d'octobre 1901–1930.</span></div>
+   <dl class="kv"><dt>Fiabilité</dt><dd><span class="b g">Mesuré</span></dd><dt>Station</dt><dd>Auch · à 4 km</dd></dl>
+   <div class="src">Source : Météo-France, Licence Ouverte 2.0</div>
+  </div>
+  <div class="win-f"><span class="btn">Fermer</span></div>
+ </div>
+</div>
+</div>
+
+</div>
+</body></html>
