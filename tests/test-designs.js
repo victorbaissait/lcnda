@@ -228,8 +228,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         await t('la page : sommaire, sections repliables fermées par défaut, ouvertes retenues', async () => {
             await page.evaluate(() => localStorage.removeItem('lcnda-designs-open-v2'));
             await toDesigns(page); await page.waitForSelector('.lcd-page .lcd-toc');
-            assert.equal(await page.locator('.lcd-toc-i').count(), 8);
-            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10').count(), 0, 'ni ensembles, ni A9, ni A10');
+            assert.equal(await page.locator('.lcd-toc-i').count(), 7, 'A1 à A8 sans A5');
+            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs)');
+            assert.equal(await page.locator('[data-lcd-trees]').count(), 1, 'le lien vers les cases des arbres');
             assert.equal(await page.locator('details.lcd-sec[open]').count(), 0, 'tout fermé');
             assert.match(await page.locator('#lcd-a1 > summary').innerText(), /A1\s+🎨\s*Style général\s*—\s*Comme avant/);
             await page.click('[data-lcd-go="a1"]');
@@ -266,11 +267,15 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await page.evaluate(() => document.documentElement.classList.add('a11y-calm'));
             assert.match(await anim(), /^(0s|1e-0\d*s|0\.00\d*s)$/, 'Réduire les animations : rien ne bouge');
             await page.evaluate(() => document.documentElement.classList.remove('a11y-calm'));
-            await toDesigns(page);
-            await page.evaluate(() => { const d = document.getElementById('lcd-a5'); d.open = true; });
-            await page.waitForSelector('#lcd-a5 [data-lcd-k="m"]', {state: 'attached'});
-            await page.evaluate(() => { const i = document.querySelector('#lcd-a5 input[data-lcd-k="m"]'); i.value = '#123456'; i.dispatchEvent(new Event('change', {bubbles: true})); });
+            // A5 est dans Graphiques → 🎨 Couleurs des stats et des arbres : la couleur des hommes y est celle des portraits (K7)
+            await toDesigns(page); await page.click('[data-lcd-trees]');
+            await page.waitForSelector('#stats-colors-dialog[open] #tree-cards-panel [data-tc-v="genre"]');
+            await page.click('#tree-cards-panel [data-tc-v="genre"]');
+            await page.evaluate(() => { const i = document.querySelector('#stats-colors-dialog [name="gender_male_color"]'); i.value = '#123456'; i.dispatchEvent(new Event('input', {bubbles: true})); });
+            await page.click('#stats-colors-dialog button[type="submit"]');
             await page.waitForFunction(() => JSON.parse(localStorage.getItem('genealogie-portraits') || '{}').m === '#123456');
+            assert.equal(JSON.parse(await page.evaluate(() => localStorage.getItem('genealogie-designs'))).a5.v, 'genre', 'le choix est gardé au même endroit');
+            assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-tree')), 'genre');
             assert.equal(await page.evaluate(() => window.LCNDA_PORTRAITS.read().m), '#123456');
             await setDesigns(page, null);
         });

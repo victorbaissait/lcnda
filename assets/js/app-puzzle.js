@@ -31,7 +31,7 @@
     const fmtTime = ms => { if (window.LCNDA_UI?.clock) return window.LCNDA_UI.clock(Math.max(0, Number(ms) || 0) / 1000); // K17 : « 3:20 », « 1:05:00 »
         const s = Math.floor(Math.max(0, Number(ms) || 0) / 1000), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = s % 60; return h ? `${h}:${p2(m)}:${p2(x)}` : `${p2(m)}:${p2(x)}`; };
 
-    const TITLE = 'Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle';
+    const TITLE = 'Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe';
     const PREFS_KEY = 'lcnda_puzzle-prefs-v1';
     const MAX_GAMES = 30, MIN_PIECES = 4, MAX_PIECES = 1000;
     const COUNTS = [12, 24, 48, 100, 150, 300, 500, 1000];

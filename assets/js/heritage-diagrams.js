@@ -34,6 +34,7 @@
     /** chiffres « tenus à jour » : relus dans l'app à chaque affichage (une minute de mémoire) */
     const liveMem = new Map();
     async function resolveLive(spec) {
+        if (spec?.live?.sheet && ext.sheetLink) { try { return await ext.sheetLink.resolve(spec); } catch (_) { return spec; } } // 🔗 une plage d'un classeur du Tableur (heritage-tableur-cibles.js)
         const kr = R().KINDS[spec?.kind]?.resolve; if (kr) { try { return await kr(spec); } catch (_) { return spec; } } // kind.resolve(spec) → Promise<spec> : une sorte qui prépare son dessin (fond de carte à charger, chiffres relus…) — heritage-diagram-cartes.js
         if (spec.live?.follow) return resolveFollow(spec);
         const DGO = ext.diagramAppOpts;
@@ -135,6 +136,7 @@
             formats: [{id: 'png', run: run('png')}, {id: 'jpg', run: run('jpg')}, {id: 'svg', hint: 'net à toutes les tailles', run: run('svg')},
                 {id: 'pdf', hint: 'par l’impression : « Enregistrer en PDF »', ext: '', quality: false, run: run('print')}, {id: 'print', quality: false, run: run('print')},
                 {id: 'csv', label: '📄 CSV', hint: 'les chiffres, pour un tableur', ext: 'csv', quality: false, run: run('csv')},
+                ...(ext.openSheetEditor ? [{id: 'sheet', label: '🧮 Tableur', hint: 'ouvrir les chiffres dans le tableur', ext: '', quality: false, copy: false, goLabel: '🧮 Ouvrir dans le tableur', run: async () => { const sp = await resolveLive(getSpec()); setTimeout(() => ext.openRowsInSheet ? (() => { const t = ext.sheetTargets?.diagram?.fromData(sp); const sh = t?.sheets?.[0]; if (sh) ext.openRowsInSheet({name: name || 'Diagramme', rows: [sh.header, ...sh.rows]}); })() : null, 30); }}] : []),
                 {id: 'file', label: '💾 Fichier', hint: 'du diagramme, à réimporter', ext: 'diagramme.json', run: run('json')},
                 {id: 'copy', label: '📋 Copier l’image', hint: 'à coller ailleurs (⌘V)', ext: '', run: run('copy')}]});
     }
@@ -149,12 +151,11 @@
         }
         return cols;
     }
-    const GRID_SHOWN = 400; // au-delà, les lignes ne s'affichent pas dans le tableau (des milliers de cases figeraient la fenêtre)
+    const GRID_SHOWN = 400; // C6 : 400 lignes d'abord, puis « Voir les N suivants ↓ » / « Tout voir » (ajoutées par morceaux : la fenêtre ne gèle pas)
     function ensureFixed(g, spec) { if (!g.fixed) return; const have = spec[g.key] || []; spec[g.key] = (typeof g.fixed === 'function' ? g.fixed(spec) : g.fixed).map(f => ({...(have.find(r => r.region === f) || {}), region: f})); }
-    function gridHtml(g, gi, spec) {
-        ensureFixed(g, spec);
-        const cols = gridCols(g, spec), rows = spec[g.key] = Array.isArray(spec[g.key]) ? spec[g.key] : [];
-        const pal = R().PALETTES[spec.o?.palette] || R().PALETTES.vive;
+    /** les lignes [from, to[ d'un tableau (HTML), pour la grille et pour « Voir les suivants » */
+    function gridRowsHtml(g, gi, spec, from, to) {
+        const cols = gridCols(g, spec), rows = spec[g.key] || [], pal = R().PALETTES[spec.o?.palette] || R().PALETTES.vive;
         const cell = (c, r, ri) => {
             const v = r[c.k] ?? '', at = `data-g="${gi}" data-r="${ri}" data-k="${esc(c.k)}"`;
             if (c.type === 'readonly') return `<td class="h-dg-ro">${esc(v)}</td>`;
@@ -162,15 +163,25 @@
             if (c.type === 'select') return `<td><select ${at}>${c.choices.map(([k, l]) => `<option value="${esc(k)}" ${String(v) === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></td>`;
             return `<td><input ${at} value="${esc(v)}" ${c.type === 'number' ? 'inputmode="decimal" class="is-num"' : ''} placeholder="${esc(c.ph || '')}"></td>`;
         };
+        return rows.slice(from, to).map((r, k) => { const ri = from + k; return `<tr>${cols.map(c => cell(c, r, ri)).join('')}<td class="h-dg-rowtools">${g.fixed ? '' : `<button type="button" data-dg-row="up" data-g="${gi}" data-r="${ri}" title="Monter">↑</button><button type="button" data-dg-row="down" data-g="${gi}" data-r="${ri}" title="Descendre">↓</button><button type="button" data-dg-row="dup" data-g="${gi}" data-r="${ri}" title="Dupliquer">⧉</button><button type="button" data-dg-row="del" data-g="${gi}" data-r="${ri}" title="Supprimer">✕</button>`}</td></tr>`; }).join('');
+    }
+    const moreHtml = (gi, shown, total) => (total > shown ? `<div class="h-dg-more" data-dg-morebar="${gi}"><span class="muted">${shown.toLocaleString('fr-FR')} lignes sur ${total.toLocaleString('fr-FR')} (toutes comptent dans le dessin)</span><button type="button" class="button small secondary" data-dg-more="${gi}">Voir les ${Math.min(GRID_SHOWN, total - shown).toLocaleString('fr-FR')} suivantes ↓</button><button type="button" class="link-button" data-dg-moreall="${gi}">Tout voir</button>${ext.openSheetEditor ? '<button type="button" class="link-button" data-dg-sheet>🧮 Tout voir dans le tableur</button>' : ''}</div>` : '');
+    function gridHtml(g, gi, spec, shown = GRID_SHOWN) {
+        ensureFixed(g, spec);
+        const cols = gridCols(g, spec), rows = spec[g.key] = Array.isArray(spec[g.key]) ? spec[g.key] : [];
+        const pal = R().PALETTES[spec.o?.palette] || R().PALETTES.vive;
+        shown = Math.max(GRID_SHOWN, Math.min(rows.length, shown));
         const head = cols.map(c => c.series !== undefined && g.series === true ? `<th><span class="h-dg-sername"><input data-dg-sername="${c.series}" value="${esc(spec.series?.[c.series]?.name || '')}" placeholder="${esc(c.label)}"><input type="color" data-dg-sercolor="${c.series}" value="${esc(/^#[0-9a-f]{6}$/i.test(spec.series?.[c.series]?.color || '') ? spec.series[c.series].color : pal[c.series % pal.length])}" title="Couleur de la série">${(spec.series || []).length > 1 ? `<button type="button" class="h-dg-x" data-dg-delser="${c.series}" title="Supprimer cette série">✕</button>` : ''}</span></th>`
             : c.series !== undefined ? `<th><span class="h-dg-sername"><input data-dg-sername="${c.series}" value="${esc(spec.series?.[c.series]?.name || '')}" placeholder="${esc(c.label)}"><input type="color" data-dg-sercolor="${c.series}" value="${esc(/^#[0-9a-f]{6}$/i.test(spec.series?.[c.series]?.color || '') ? spec.series[c.series].color : pal[c.series % pal.length])}" title="Couleur"></span></th>` : `<th>${esc(c.label)}</th>`).join('');
         const canAdd = !g.fixed && !(g.max && rows.length >= g.max);
         return `<section class="h-dg-grid" data-grid="${gi}"><h4>${esc(g.label)}</h4>${rows.length > 1 && !g.fixed ? `<div data-dg-sortbar="${gi}" data-count="${rows.length}"></div>` : `<small class="muted">(${rows.length})</small>`}
-            <div class="h-dg-tablewrap"><table><thead><tr>${head}<th></th></tr></thead><tbody>${rows.slice(0, GRID_SHOWN).map((r, ri) => `<tr>${cols.map(c => cell(c, r, ri)).join('')}<td class="h-dg-rowtools">${g.fixed ? '' : `<button type="button" data-dg-row="up" data-g="${gi}" data-r="${ri}" title="Monter">↑</button><button type="button" data-dg-row="down" data-g="${gi}" data-r="${ri}" title="Descendre">↓</button><button type="button" data-dg-row="dup" data-g="${gi}" data-r="${ri}" title="Dupliquer">⧉</button><button type="button" data-dg-row="del" data-g="${gi}" data-r="${ri}" title="Supprimer">✕</button>`}</td></tr>`).join('')}</tbody></table></div>${rows.length > GRID_SHOWN ? `<p class="muted h-dg-more">… et ${(rows.length - GRID_SHOWN).toLocaleString('fr-FR')} autres lignes, cachées ici pour rester rapide : elles comptent dans le dessin (⤓ Exporter → CSV pour toutes les voir).</p>` : ''}
-            <div class="h-dg-gridtools">${canAdd ? `<button type="button" class="button small" data-dg-add="${gi}">＋ Ligne</button>` : ''}${g.series === true ? `<button type="button" class="button small secondary" data-dg-addser="${gi}">＋ Série (colonne de chiffres)</button>` : ''}${g.fixed ? '' : `<button type="button" class="button small secondary" data-dg-paste="${gi}" title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">⤒ Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-dg-csv="${gi}" hidden></label>`}${rows.length && !g.fixed ? `<button type="button" class="link-button" data-dg-clear="${gi}">Vider</button>` : ''}</div></section>`;
+            <div class="h-dg-tablewrap"><table><thead><tr>${head}<th></th></tr></thead><tbody data-dg-body="${gi}">${gridRowsHtml(g, gi, spec, 0, shown)}</tbody></table></div>${moreHtml(gi, shown, rows.length)}
+            <div class="h-dg-gridtools">${canAdd ? `<button type="button" class="button small" data-dg-add="${gi}">＋ Ligne</button>` : ''}${g.series === true ? `<button type="button" class="button small secondary" data-dg-addser="${gi}">＋ Série (colonne de chiffres)</button>` : ''}${g.fixed ? '' : `<button type="button" class="button small secondary" data-dg-paste="${gi}" title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">⤒ Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-dg-csv="${gi}" hidden></label>${ext.chooseSheetRange ? `<button type="button" class="button small secondary" data-dg-book="${gi}" title="Un classeur déjà fait dans le Tableur : une feuille, une plage, copiée une fois ou liée">🧮 Prendre un classeur du Tableur</button>` : ''}`}${rows.length && !g.fixed ? `<button type="button" class="link-button" data-dg-clear="${gi}">Vider</button>` : ''}</div></section>`;
     }
     /** texte d'un tableur (tabulations) ou CSV (; ou ,) → lignes de cellules */
     function parseTable(text) {
+        const SH = window.LCNDA_SHEET; // le lecteur commun (app-tableur-engine.js) : guillemets, retours dans une case, séparateur deviné
+        if (SH?.parseCSV) { const t0 = String(text || '').replace(/^\ufeff/, '').replace(/\n+$/, ''); try { return SH.parseCSV(t0, {sep: t0.includes('\t') ? '\t' : SH.sniffSep(t0.slice(0, 20000)), maxRows: 5000}).map(r => r.map(c => String(c).trim())); } catch (_) { /* trop de cellules : l'ancienne lecture, bornée */ } }
         const t = String(text || '').replace(/\r\n?/g, '\n').replace(/\n+$/, '');
         const sep = t.includes('\t') ? '\t' : (t.split('\n')[0].split(';').length >= t.split('\n')[0].split(',').length ? ';' : ',');
         const out = []; let row = [], cur = '', q = false;
@@ -277,6 +288,7 @@
             rec = {id: 0, name: spec.o.title || R().KINDS[t.kind].label, spec, links: link ? [link] : []};
         }
         let spec = rec.spec, tab = 'data', dirty = !rec.id, timer = 0;
+        const shownRows = {}; // C6 : combien de lignes chaque tableau montre (« Voir les suivantes », « Tout voir »)
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-dlg'; dlg.dataset.ownClose = '1';
         const kindOf = () => R().KINDS[spec.kind] || R().KINDS.columns;
         dlg.innerHTML = `<div class="h-dg-shell">
@@ -296,7 +308,7 @@
         const paint = () => {
             dlg.querySelector('[data-dg-type]').textContent = `${kindOf().icon} ${kindOf().label} ▾`;
             dlg.querySelectorAll('[data-dg-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.dgTab === tab));
-            if (tab === 'data') pane.innerHTML = (spec.live ? `<p class="h-dg-live">🔄 Chiffres tenus à jour depuis « ${esc(spec.live.label || 'l’app')} » : ils sont relus à chaque affichage. <button type="button" class="link-button" data-dg-unlive>Les figer (les modifier à la main)</button></p>` : '') + kindOf().grids.map((g, gi) => gridHtml(g, gi, spec)).join('');
+            if (tab === 'data') pane.innerHTML = (spec.live?.sheet && ext.sheetLink ? ext.sheetLink.bannerHtml(spec) : spec.live ? `<p class="h-dg-live">🔄 Chiffres tenus à jour depuis « ${esc(spec.live.label || 'l’app')} » : ils sont relus à chaque affichage. <button type="button" class="link-button" data-dg-unlive>Les figer (les modifier à la main)</button></p>` : ext.openSheetEditor && !kindOf().noSheet ? '<div class="h-dg-sheetbar"><button type="button" class="button small secondary" data-dg-sheet title="Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir »">🧮 Modifier les données</button><small class="muted">dans le tableur (formules, tri, Excel…)</small></div>' : '') + kindOf().grids.map((g, gi) => gridHtml(g, gi, spec, shownRows[gi] || GRID_SHOWN)).join('');
             else if (tab === 'opts') pane.innerHTML = `<div class="h-dg-opts"><h4>${esc(kindOf().label)}</h4>${kindOf().options.map(o => optHtml(o, spec)).join('') || '<p class="muted">Pas de réglage particulier.</p>'}<h4>Présentation</h4>${R().COMMON.map(o => optHtml(o, spec)).join('')}</div>`;
             else if (tab === 'app') pane.innerHTML = appPaneHtml();
             else pane.innerHTML = linksHtml();
@@ -482,7 +494,8 @@
         pane.addEventListener('change', async e => {
             const f = e.target.closest('[data-dg-csv]'); if (!f?.files?.[0]) return;
             if (f.files[0].size > 5e6) return toast('Fichier trop gros (5 Mo au plus).', 'error');
-            pasteInto(grid(f.dataset.dgCsv), spec, parseTable(await f.files[0].text())); delete spec.live; paint(); later(); toast('Tableau importé.');
+            const SH = window.LCNDA_SHEET, txt = SH?.decodeBytes ? SH.decodeBytes(await f.files[0].arrayBuffer()).text : await f.files[0].text(); // accents des vieux fichiers Excel (Windows-1252)
+            pasteInto(grid(f.dataset.dgCsv), spec, parseTable(txt)); delete spec.live; paint(); later(); toast('Tableau importé.');
         });
         pane.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;
@@ -499,12 +512,40 @@
             if (b.dataset.dgSort !== undefined) { const g = grid(b.dataset.dgSort), c = gridCols(g, spec).find(x => x.type === 'number'); spec[g.key].sort((x, y) => R().num(y[c.k]) - R().num(x[c.k])); return keep(); }
             if (b.dataset.dgClear !== undefined) { if (!await A().confirmBox('Vider ce tableau ?', {title: 'Vider le tableau', okLabel: 'Vider le tableau'})) return; spec[grid(b.dataset.dgClear).key] = []; delete spec.live; return keep(); }
             if (b.hasAttribute('data-dg-unlive')) { delete spec.live; return keep(); }
+            if (b.hasAttribute('data-dg-sheet')) return openSheet();
+            if (b.dataset.dgMore !== undefined || b.dataset.dgMoreall !== undefined) return showMore(Number(b.dataset.dgMore ?? b.dataset.dgMoreall), b.dataset.dgMoreall !== undefined);
+            if (b.dataset.dgBook !== undefined) return takeBook(Number(b.dataset.dgBook));
             if (b.dataset.dgPaste !== undefined) {
                 const gi = b.dataset.dgPaste;
-                ext.openDialog({eyebrow: 'DIAGRAMME', title: 'Coller un tableau', body: '<p class="muted">Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé.</p><textarea name="t" rows="12" class="h-dg-pastearea" placeholder="Rennes&#9;42&#10;Nantes&#9;25"></textarea>', submitLabel: 'Remplacer le tableau',
+                ext.openDialog({eyebrow: 'DIAGRAMME', title: 'Coller un tableau', onOpen: d => d.querySelector('[data-dg-pastebook]')?.addEventListener('click', () => { d.close(); takeBook(Number(gi)); }), body: (ext.chooseSheetRange ? '<p class="h-dg-pastebook"><button type="button" class="button small secondary" data-dg-pastebook>🧮 Prendre un classeur du Tableur</button> <small class="muted">une feuille, une plage : copiée une fois ou liée (tenue à jour)</small></p>' : '') + '<p class="muted">Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé.</p><textarea name="t" rows="12" class="h-dg-pastearea" placeholder="Rennes&#9;42&#10;Nantes&#9;25"></textarea>', submitLabel: 'Remplacer le tableau',
                     onSubmit: form => { const t = form.querySelector('[name=t]').value; if (!t.trim()) return false; pasteInto(grid(gi), spec, parseTable(t)); delete spec.live; keep(); }});
             }
         });
+        /* C6 : les lignes suivantes, ajoutées par morceaux de 400 (la grille reste rapide) ; modifiables comme les autres, couleur comprise */
+        function showMore(gi, all) {
+            const g = grid(gi), total = (spec[g.key] || []).length, body = pane.querySelector(`[data-dg-body="${gi}"]`); if (!body) return;
+            const target = all ? total : Math.min(total, (shownRows[gi] || GRID_SHOWN) + GRID_SHOWN);
+            const step = () => { if (!body.isConnected) return; const from = shownRows[gi] || GRID_SHOWN, to = Math.min(target, from + GRID_SHOWN); body.insertAdjacentHTML('beforeend', gridRowsHtml(g, gi, spec, from, to)); shownRows[gi] = to;
+                const bar = pane.querySelector(`[data-dg-morebar="${gi}"]`), html = moreHtml(gi, to, total); if (bar) { if (html) bar.outerHTML = html; else bar.remove(); }
+                if (to < target) requestAnimationFrame(step); };
+            step();
+        }
+        /* 🧮 Prendre un classeur du Tableur : une plage copiée une fois, ou liée (tenue à jour) */
+        async function takeBook(gi) {
+            const r = await ext.chooseSheetRange?.({title: 'Prendre un classeur du Tableur', link: gi === 0}); if (!r) return;
+            const g = grid(gi);
+            if (r.mode === 'link' && gi === 0) { spec.live = {sheet: r.link, label: `« ${r.link.name} » ! ${r.link.range}`}; const s = await resolveLive(spec); spec[g.key] = s[g.key]; if (s.series) spec.series = s.series; spec.live = s.live; }
+            else { pasteInto(g, spec, r.cells); if (gi === 0) delete spec.live; }
+            appSum = ''; showSum(''); dirty = true; tab = 'data'; paint(); later(); toast(r.mode === 'link' ? 'Données liées au classeur : elles suivent le Tableur.' : `${r.cells.length.toLocaleString('fr-FR')} lignes copiées du classeur.`);
+        }
+        /* 🧮 Modifier les données : le tableur préparé (une feuille par tableau), ou le classeur de la plage liée */
+        async function openSheet() {
+            if (spec.live?.sheet && ext.sheetLink) return ext.sheetLink.open(spec, async () => { const s = await resolveLive(spec); kindOf().grids.forEach(g => { spec[g.key] = s[g.key]; }); if (s.series) spec.series = s.series; spec.live = s.live; dirty = true; if (tab === 'data') paint(); later(); });
+            ext.openSheetEditor({target: 'diagram', data: clone(spec), name: rec.name || spec.o?.title || 'Diagramme', onSave: s => { spec = s; delete spec.live; appSum = ''; showSum(''); dirty = true; tab = 'data'; paint(); later(); toast('Données reprises du tableur.'); }});
+        }
+        const onBook = () => { if (spec.live?.sheet && dlg.isConnected) { resolveLive(spec).then(s => { if (!dlg.isConnected) return; kindOf().grids.forEach(g => { spec[g.key] = s[g.key]; }); if (s.series) spec.series = s.series; if (tab === 'data') paint(); later(); }).catch(() => {}); } };
+        document.addEventListener('lcnda:workbook-saved', onBook);
+        dlg.addEventListener('close', () => document.removeEventListener('lcnda:workbook-saved', onBook));
         const close = async () => { if (dirty && !await A().confirmBox('Fermer sans enregistrer les changements ?', {title: 'Changements non enregistrés', okLabel: 'Fermer sans enregistrer', danger: true})) return; dlg.close(); dlg.remove(); onClose?.(); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         dlg.querySelector('[data-dg-close]').addEventListener('click', close);
@@ -597,6 +638,13 @@
         }, 120);
     });
 
+    // un classeur enregistré : les diagrammes liés à une de ses plages se redessinent partout (🔗 heritage-tableur-cibles.js)
+    document.addEventListener('lcnda:workbook-saved', e => {
+        const id = Number(e.detail?.id) || 0;
+        document.querySelectorAll('[data-dg-embed]').forEach(b => { const L = byId(b.dataset.dgEmbed)?.spec?.live?.sheet; if (L && (!id || Number(L.wb) === id)) delete b.dataset.dgDone; }); fillAll();
+        const st = S(); if (st.module === 'graphiques' && st.graphMode === 'diagram' && byId(st.graphDiagramId)?.spec?.live?.sheet && !document.querySelector('dialog[open]')) A().setModule('graphiques');
+    });
+
     /* ─── Graphiques → « Mes diagrammes » ─── */
     ext.diagramItems = () => (cache || []).map(d => [d.id, `${followId(d.spec) ? '📈' : R()?.KINDS[d.kind]?.icon || '📊'} ${d.name}`]);
     ext.diagramList = (force = false) => list(force);
@@ -606,7 +654,7 @@
         const d = id ? await get(id) : null;
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         if (!d) { ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES</span><h2>Créer un diagramme</h2><p>Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page.</p></div><div class="page-actions"><button type="button" class="button" data-dg-new>＋ Nouveau diagramme</button><label class="button secondary h-dg-file">⤒ Importer un fichier<input type="file" accept=".json,application/json" data-dg-import hidden></label></div></header></section>`; bindPage(ws, null); return; }
-        ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${followId(d.spec) ? `<p>📈 Ce diagramme montre ton graphique « ${esc(d.name)} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé.</p>` : d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
+        ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${followId(d.spec) ? `<p>📈 Ce diagramme montre ton graphique « ${esc(d.name)} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé.</p>` : d.spec?.live?.sheet ? `<p>🔗 Données : ${esc(d.spec.live.label || 'un classeur du Tableur')} · tenu à jour.</p>` : d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
             <div class="page-actions"><button type="button" class="button" data-dg-edit="${d.id}">${followId(d.spec) ? '✎ Modifier le graphique' : '✎ Modifier'}</button><button type="button" class="button secondary" data-dg-dup title="${followId(d.spec) ? 'Une copie figée, à retoucher comme un diagramme' : 'Une copie à modifier'}">⧉ Dupliquer</button>${window.LCNDA_SIDE_FOLDERS && !document.body.classList.contains('is-kiosk') ? window.LCNDA_SIDE_FOLDERS.rangeButtonHtml('diagram', d.id, d.name) : ''}<button type="button" class="button secondary" data-dg-dash title="Le poser sur le tableau de bord, comme un widget">＋ Tableau de bord</button><button type="button" class="button danger" data-dg-del>Supprimer</button></div></header>
             <div class="h-dg-pagetools"><button type="button" class="button small secondary" data-dg-pexpdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter</button></div>
             <div class="card h-dg-big"><div class="h-dg-svg">${await svgOf(d)}</div></div>

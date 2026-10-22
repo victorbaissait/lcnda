@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 57;
+const SCHEMA_VERSION = 58;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -78,6 +78,7 @@ function migration_steps(): array
         55 => 'schema_v55',
         56 => 'schema_v56',
         57 => 'schema_v57',
+        58 => 'schema_v58',
     ];
 }
 
@@ -2233,4 +2234,12 @@ function schema_v57(PDO $pdo): void
 {
     if (!function_exists('textdocs_schema')) { require_once __DIR__ . '/textdocs.php'; }
     textdocs_schema($pdo);
+}
+
+/** 🧮 Tableur, lien avec la base (lib/sheet_link.php) : les envois « 📤 Envoyer vers la base » (sheet_pushes : jeton
+ *  d'annulation, ce que l'envoi a créé et les liens qu'il a posés), pour que « ↶ Annuler » remette la base comme avant. */
+function schema_v58(PDO $pdo): void
+{
+    if (!function_exists('sheet_link_schema')) { require_once __DIR__ . '/sheet_link.php'; }
+    sheet_link_schema($pdo);
 }

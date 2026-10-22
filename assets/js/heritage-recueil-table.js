@@ -64,6 +64,7 @@
                     <button type="button" class="button small secondary" data-rt-delrow ${g ? '' : 'disabled'}>🗑 ${g && g.r1 > g.r0 ? 'Lignes' : 'Ligne'}</button>
                     <button type="button" class="button small secondary" data-rt-delcol ${g ? '' : 'disabled'}>🗑 ${g && g.c1 > g.c0 ? 'Colonnes' : 'Colonne'}</button>
                     <span class="h-rt-sep"></span>
+                    ${ext.openSheetEditor ? '<button type="button" class="button small secondary" data-rt-sheet title="Le tableur en grand : formules, tri, filtres, coller depuis Excel… puis « ✓ Enregistrer et revenir » (les lignes reliées à une fiche le restent)">🧮 Ouvrir dans le tableur</button>' : ''}
                     <button type="button" class="button small secondary" data-rt-csv title="Télécharger le tableau (s’ouvre dans Excel, Numbers, LibreOffice)">⤓ Exporter en CSV</button>
                     <span class="muted h-rt-hint">Coller depuis un tableur (ou glisser un fichier .csv) remplit les cellules · Entrée : cellule du dessous · Maj + Entrée : à la ligne</span></div>
                 <div class="h-rt-wrap"><table class="h-rt ${free ? 'is-free' : ''}"><thead><tr><th class="h-rt-corner">#</th>${t.cols.map((c, ci) => `<th data-rt-col="${ci}">${free ? '<span class="h-rt-grip" draggable="true" title="Glisser pour déplacer la colonne">⠿</span>' : ''}<input data-rt-colname="${ci}" value="${esc(c.name)}" placeholder="Colonne ${ci + 1}"></th>`).join('')}</tr></thead>
@@ -94,6 +95,9 @@
                 gone.forEach(c => t.rows.forEach(r => delete r.c[c.id])); mergesRemove('c', g.c0, gone.length); t.cols.splice(g.c0, gone.length); sel = null; changed(); paint();
             });
             q('[data-rt-csv]').addEventListener('click', csv);
+            q('[data-rt-sheet]')?.addEventListener('click', () => ext.openSheetEditor({target: 'recueil', data: JSON.parse(JSON.stringify(t)), name: 'Tableau de la page', onSave: async v => {
+                if (!v) return; for (const r of v._gone || []) await onPerson?.(r, null); // une ligne reliée à une fiche, supprimée dans le tableur : le lien part aussi
+                t.cols = v.cols; t.rows = v.rows; t.merges = v.merges; sel = null; changed(); paint(); A().toast?.('Tableau repris du tableur.'); }}));
             qa('[data-rt-colname]').forEach(inp => inp.addEventListener('input', () => { t.cols[Number(inp.dataset.rtColname)].name = inp.value; changed(); }));
             qa('[data-rt-cell]').forEach(td => {
                 const [ri, ci] = td.dataset.rtCell.split(':').map(Number), div = td.querySelector('[data-rt-text]');
@@ -148,6 +152,8 @@
             A().toast?.(`${A().plural(lines.length, 'ligne collée', 'lignes collées')}.`);
         }
         function csv() {
+            const SH = window.LCNDA_SHEET;
+            if (SH?.toCSV) { const blob = new Blob([SH.toCSV([t.cols.map(c => c.name || ''), ...t.rows.map(r => t.cols.map(c => String(r.c[c.id] || '')))], {sep: ';'})], {type: 'text/csv;charset=utf-8'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'tableau.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); return; } // le CSV commun (protégé contre les formules glissées)
             const cell = v0 => { const v = (A().csvSafe || (x => String(x ?? '')))(v0); return /[";\n\r]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; }; // pas de formule glissée dans un tableur
             const out = [t.cols.map(c => cell(c.name || '')).join(';'), ...t.rows.map(r => t.cols.map(c => cell(String(r.c[c.id] || ''))).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + out], {type: 'text/csv;charset=utf-8'})); a.download = 'tableau.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
@@ -175,6 +181,8 @@
         }
         // E4 : un fichier de tableur (.csv, .tsv, .txt) glissé sur le tableau remplit les cellules, comme un collage
         const parseCsv = text => {
+            const SH = window.LCNDA_SHEET; // le lecteur commun (app-tableur-engine.js)
+            if (SH?.parseCSV) { const t0 = String(text || '').replace(/^\ufeff/, ''); return SH.parseCSV(t0, {sep: SH.sniffSep(t0.slice(0, 20000))}).filter(r => r.some(v => String(v).trim())).map(r => r.map(v => String(v).replace(/[\t\n\r]/g, ' ')).join('\t')).join('\n'); }
             text = text.replace(/^\ufeff/, '').replace(/\r\n?/g, '\n');
             const first = text.split('\n')[0], sep = ['\t', ';', ','].map(c => [c, first.split(c).length]).sort((a, b) => b[1] - a[1])[0][0];
             const rows = [[]]; let cur = '', q = false;
@@ -191,7 +199,7 @@
         };
         box._rtOnFiles = async files => {
             const f = files[0]; let txt = '';
-            try { txt = parseCsv(await f.text()); } catch (_) {}
+            try { const SH = window.LCNDA_SHEET; txt = parseCsv(SH?.decodeBytes ? SH.decodeBytes(await f.arrayBuffer()).text : await f.text()); } catch (_) {} // accents des vieux fichiers Excel
             if (!txt) { A().toast?.('Ce fichier ne contient pas de tableau lisible.', 'error'); return; }
             // tableau encore vide : la première ligne du fichier donne les titres des colonnes
             if (!ext.recueilTableHasText(t) && txt.includes('\n')) {

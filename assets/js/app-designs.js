@@ -813,13 +813,15 @@
     const tagHtml = (v, mod) => `${v.k === 'avant' ? '<span class="lcd-tag">Par défaut</span>' : '<span class="lcd-tag is-new">Nouveau</span>'}${mod ? '<span class="lcd-tag is-mod">retouché</span>' : ''}`;
     const whyList = why => `<ul class="lcd-why-list">${why.map(([i, t]) => `<li><span aria-hidden="true">${i}</span><span>${t}</span></li>`).join('')}</ul>`;
     let PAGE = null; // {box, data, G}
+    /** la page n'a plus A5 : les cases des arbres se règlent dans Graphiques → 🎨 Couleurs (fenêtre « Statistiques et arbres », ext.treeCards plus bas) */
+    const PAGE_IDS = IDS.filter(id => id !== 'a5');
 
     function summaryHtml(id, G) {
         const D = DEFS[id], mod = isModified(G, id);
         return `<span class="lcd-step">${D.n}</span><span class="lcd-sec-ic" aria-hidden="true">${D.icon}</span><b class="lcd-sec-t">${esc(D.title)}</b><span class="lcd-sep">—</span><span class="lcd-cur${isOn(G, id) ? ' is-chg' : ''}">${esc(V(id, G[id].v).t)}</span>${mod ? '<span class="lcd-tag is-mod">retouché</span>' : ''}`;
     }
     function tocHtml(G) {
-        return `<nav class="lcd-toc" aria-label="Aller à un réglage"><ol>${IDS.map(id => [id, DEFS[id].n, DEFS[id].title]).map(([id, n, t]) => {
+        return `<nav class="lcd-toc" aria-label="Aller à un réglage"><ol>${PAGE_IDS.map(id => [id, DEFS[id].n, DEFS[id].title]).map(([id, n, t]) => {
             const curT = choiceName(G, id) + (isModified(G, id) ? ' · retouché' : '');
             const chg = isOn(G, id);
             return `<li><button type="button" class="lcd-toc-i" data-lcd-go="${id}"><span class="lcd-step">${n}</span><span class="lcd-toc-tx"><b>${esc(t)}</b><small class="${chg ? 'is-chg' : ''}">${esc(curT)}</small></span></button></li>`;
@@ -908,7 +910,7 @@
     function refreshAll(only) {
         if (!PAGE || !PAGE.box.isConnected) { PAGE = null; return; }
         PAGE.box.querySelector('.lcd-toc').outerHTML = tocHtml(cur());
-        IDS.forEach(id => { if (!only || only.includes(id)) fillSection(id); else { const sec = PAGE.box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, cur()); } });
+        PAGE_IDS.forEach(id => { if (!only || only.includes(id)) fillSection(id); else { const sec = PAGE.box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, cur()); } });
     }
     function flash(id) {
         const s = PAGE?.box.querySelector(`[data-lcd-sec="${id}"] [data-lcd-saved]`); if (s) { s.textContent = '✓ Enregistré'; s.classList.remove('is-fresh'); void s.offsetWidth; s.classList.add('is-fresh'); }
@@ -947,17 +949,18 @@
         const st = A().state; if (st && token !== st.workspaceToken) return;
         const ws = document.getElementById('workspace'); if (!ws) return;
         const G = cur(), opened = openSet();
-        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>🎨 Designs au choix</h2><p>Huit réglages pour changer la forme des éléments de l’app : traits, densité, icônes, en-tête des fiches, cases des arbres, boutons, mouvements, listes. Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
+        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>🎨 Designs au choix</h2><p>Sept réglages pour changer la forme des éléments de l’app : traits, densité, icônes, en-tête des fiches, boutons, mouvements, listes. Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
             <div class="lcd-intro ui-notice ui-notice-info"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Ici, seulement la forme. La police, la taille du texte et les couleurs (Preset, Couleur principale) se règlent dans <button type="button" class="link-button" data-lcd-apparence>Maintenance → Apparence</button> : elles passent toujours devant, quel que soit le design.</span></div>
+            <div class="ui-notice ui-notice-info lcd-trees-moved"><span class="ui-notice-ic" aria-hidden="true">🌳</span><span>Les cases des arbres (A5) se règlent maintenant avec leurs couleurs, dans <button type="button" class="link-button" data-lcd-trees>Graphiques → 🎨 Couleurs des statistiques et des arbres →</button></span></div>
             ${tocHtml(G)}
-            <div class="lcd-secs">${IDS.map(id => sectionShell(id, opened.has(id))).join('')}</div></section>`;
+            <div class="lcd-secs">${PAGE_IDS.map(id => sectionShell(id, opened.has(id))).join('')}</div></section>`;
         const box = ws.querySelector('.lcd-page');
         PAGE = {box, data: {stats: st?.bootstrap?.stats || {}, people: st?.people || []}, G};
-        IDS.forEach(id => { const sec = box.querySelector(`[data-lcd-sec="${id}"]`); sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, G); });
+        PAGE_IDS.forEach(id => { const sec = box.querySelector(`[data-lcd-sec="${id}"]`); sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, G); });
         bindPage(box);
         PAGE.data = await loadData();
         if (st && token !== st.workspaceToken) return;
-        IDS.forEach(id => fillSection(id));
+        PAGE_IDS.forEach(id => fillSection(id));
         UI().autoSave?.(box, {redraw: () => { apply(); refreshAll(); }});
     }
     function bindPage(box) {
@@ -969,9 +972,10 @@
         box.addEventListener('click', e => {
             const go = e.target.closest('[data-lcd-go]');
             if (go) { const sec = box.querySelector(`[data-lcd-sec="${go.dataset.lcdGo}"]`); if (sec) { if (!sec.open) sec.open = true; sec.scrollIntoView({behavior: document.documentElement.classList.contains('a11y-calm') ? 'auto' : 'smooth', block: 'start'}); sec.querySelector('summary')?.focus({preventScroll: true}); } return; }
+            if (e.target.closest('[data-lcd-trees]')) { const st = A().state; A().openStatsColorsDialog?.(); return; }
             if (e.target.closest('[data-lcd-apparence]')) { const st = A().state; if (st) { st.maintenanceTab = 'design'; } A().setModule?.('maintenance'); return; }
             const rs = e.target.closest('[data-lcd-reset]');
-            if (rs) { const id = rs.dataset.lcdReset, G = cur(); if (id === 'all') { if (IDS.every(i => !isOn(G, i))) return; commit(defaults(G.a5), 'Designs remis comme au départ', null); return; } if (!isOn(G, id)) return; const N = clone(G); N[id] = {...defOf(id, 'avant'), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; commit(N, `${DEFS[id].n} ${DEFS[id].title} remis comme au départ`, id); return; }
+            if (rs) { const id = rs.dataset.lcdReset, G = cur(); if (id === 'all') { if (PAGE_IDS.every(i => !isOn(G, i))) return; const N = defaults(G.a5); N.a5 = clone(G.a5); commit(N, 'Designs remis comme au départ', null); return; } /* A5 (cases des arbres) a sa place ailleurs : il ne bouge pas */ if (!isOn(G, id)) return; const N = clone(G); N[id] = {...defOf(id, 'avant'), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; commit(N, `${DEFS[id].n} ${DEFS[id].title} remis comme au départ`, id); return; }
             const ch = e.target.closest('[data-lcd-v]'); if (ch) { pickVariant(ch); return; }
             const md = e.target.closest('[data-lcd-mode] button');
             if (md) { const id = md.closest('[data-lcd-mode]').dataset.lcdMode, p = prevPrefs(); p[id] = md.dataset.m; lsSet(PREV_KEY, p); const sec = box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) previewFill(sec, id, cur(), PAGE.data); }
@@ -1008,6 +1012,72 @@
         commit(N, `${DEFS[id].n} ${DEFS[id].title} : ${V(id, k).t}`, id);
         requestAnimationFrame(() => PAGE?.box.querySelector(`[data-lcd-sec="${id}"] [data-lcd-v="${k}"]`)?.focus({preventScroll: true}));
     }
+    /* ═════════════════════════ 🌳 Cases des arbres (A5) : dans la fenêtre « Couleurs des statistiques et des arbres » ═════════════════════════
+     * Graphiques → 🎨 Couleurs (index.php #stats-colors-dialog, app.js openStatsColorsDialog) : les 4 choix et leurs réglages,
+     * gardés comme avant dans 'genealogie-designs'.a5 (réglages enregistrés, défaut du site, anciens réglages : rien ne change).
+     * Les couleurs homme / femme (celles des portraits K7) sont dans la rubrique « Couleurs par sexe » de la même fenêtre.
+     * La fenêtre a son bouton « Enregistrer » : ici on prépare, rien n'est gardé avant (ext.treeCards.save). */
+    const TC_SET = ['tw', 'links', 'dates', 'sosa'];
+    const tcSettings = () => DEFS.a5.settings.filter(x => TC_SET.includes(x.k));
+    function tcMount(host) {
+        if (!host) return null;
+        const st = {w: clone(cur().a5), data: null};
+        const paintCards = () => {
+            const box = host.querySelector('[data-tc-choices]'); if (!box) return;
+            const mod = isModified({a5: st.w}, 'a5');
+            box.innerHTML = DEFS.a5.variants.map(v => { const on = st.w.v === v.k;
+                return `<div class="lcd-choice${on ? ' is-active' : ''}" role="radio" tabindex="${on ? 0 : -1}" aria-checked="${on}" data-tc-v="${v.k}"><div class="lcd-choice-top"><span class="lcd-radio"></span><h3>${esc(v.t)}</h3>${tagHtml(v, on && mod)}</div><div class="lcd-choice-sub muted">${esc(v.sub || '')}</div><div class="lcd-stage" data-tc-stage></div></div>`; }).join('');
+            box.querySelectorAll('[data-tc-v]').forEach(c => { const w = c.dataset.tcV === st.w.v ? clone(st.w) : {...defOf('a5', c.dataset.tcV), m: st.w.m, f: st.w.f}; const S = clone(cur()); S.a5 = w; mountFrame(c.querySelector('[data-tc-stage]'), {G: S, dark: document.documentElement.dataset.theme === 'dark', screens: ['arbre'], data: st.data || {}, W: 880}); });
+        };
+        const paintSet = () => {
+            const box = host.querySelector('[data-tc-set]'); if (!box) return;
+            box.innerHTML = tcSettings().map(x => {
+                let ctl = '';
+                if (x.type === 'select') ctl = `<select data-tc-k="${x.k}" aria-label="${esc(x.label)}">${x.options.map(([v, t]) => `<option value="${v}"${st.w[x.k] === v ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select>`;
+                if (x.type === 'toggle') ctl = `<label class="ui-toggle"><input type="checkbox" data-tc-k="${x.k}"${st.w[x.k] ? ' checked' : ''}><i></i><span>${esc(x.text)}</span></label>`;
+                if (x.type === 'range') ctl = '<span class="lcd-slot" data-tc-slot></span>';
+                return `<div class="lcd-set"><div class="lcd-set-row"><span class="lcd-lab">${esc(x.label)}</span><div class="lcd-ctl">${ctl}</div></div><p class="lcd-why muted"><b>Pourquoi ?</b> ${esc(x.why)}</p></div>`;
+            }).join('');
+            const r = tcSettings().find(x => x.type === 'range'), slot = box.querySelector('[data-tc-slot]');
+            if (r && slot) {
+                const field = UI().rangeField ? UI().rangeField({min: r.min, max: r.max, step: r.step, value: st.w[r.k], unit: r.unit, default: defOf('a5', st.w.v)[r.k], label: ''}) : null;
+                let inp; if (field) { slot.appendChild(field); inp = field.input; } else { slot.innerHTML = `<input type="number" min="${r.min}" max="${r.max}" step="${r.step}" value="${st.w[r.k]}" data-unit="${r.unit}">`; inp = slot.querySelector('input'); }
+                inp.dataset.tcK = r.k; inp.setAttribute('aria-label', r.label);
+            }
+            UI().scan?.(box);
+        };
+        host.innerHTML = `<div class="lcd-trees"><div class="lcd-choices two" role="radiogroup" aria-label="Cases des arbres" data-tc-choices></div><div class="lcd-trees-set" data-tc-set></div></div>`;
+        st.pick = el => { const k = el.dataset.tcV; if (k === st.w.v && !isModified({a5: st.w}, 'a5')) return; st.w = {...defOf('a5', k), m: st.w.m, f: st.w.f}; paintCards(); paintSet(); host.querySelector(`[data-tc-v="${k}"]`)?.focus({preventScroll: true}); };
+        st.set = t => { const k = t.dataset?.tcK, x = k && tcSettings().find(y => y.k === k); if (!x) return; st.w[k] = x.type === 'toggle' ? !!t.checked : x.type === 'range' ? snap(Number(t.value), x) : t.value; paintCards(); };
+        if (!host.dataset.tcBound) { // une seule écoute par fenêtre, même si on la rouvre
+            host.dataset.tcBound = '1';
+            host.addEventListener('click', e => { const c = e.target.closest('[data-tc-v]'); if (c) host.tcState?.pick(c); });
+            host.addEventListener('keydown', e => {
+                const c = e.target.closest?.('[data-tc-v]'), S = host.tcState; if (!c || !S) return;
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); S.pick(c); return; }
+                if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) { e.preventDefault(); const all = [...c.parentElement.querySelectorAll('[data-tc-v]')], i = all.indexOf(c); S.pick(all[(i + (/Right|Down/.test(e.key) ? 1 : all.length - 1)) % all.length]); }
+            });
+            host.addEventListener('change', e => host.tcState?.set(e.target));
+        }
+        host.tcState = st; st.paintCards = paintCards; st.paint = () => { paintCards(); paintSet(); };
+        paintCards(); paintSet();
+        loadData().then(d => { if (!host.isConnected || host.tcState !== st) return; st.data = d; paintCards(); }).catch(() => {});
+        return st;
+    }
+    ext.treeCards = {
+        /** dessine les choix dans host (la fenêtre des couleurs) à partir du réglage gardé */
+        mount: host => tcMount(host),
+        /** les couleurs homme / femme de la rubrique « Couleurs par sexe » : les aperçus les suivent */
+        colors: (host, m, f) => { const st = host?.tcState; if (!st) return; if (HEX.test(m || '')) st.w.m = m.toLowerCase(); if (HEX.test(f || '')) st.w.f = f.toLowerCase(); clearTimeout(st.t); st.t = setTimeout(() => { if (host.isConnected) st.paintCards(); }, 250); },
+        /** comme au départ (avant « Enregistrer ») */
+        reset: host => { const st = host?.tcState; if (!st) return; st.w = {...defOf('a5', 'avant'), m: K7_DEF.m, f: K7_DEF.f}; st.paint(); return {m: K7_DEF.m, f: K7_DEF.f}; },
+        /** les couleurs gardées (portraits K7) pour remplir la rubrique */
+        current: () => ({m: cur().a5.m, f: cur().a5.f}),
+        /** « Enregistrer » de la fenêtre : garde A5 (et les couleurs des portraits), redessine l'app */
+        save: (host, m, f) => { const st = host?.tcState; const N = clone(cur()); N.a5 = {...(st ? st.w : N.a5)}; if (HEX.test(m || '')) N.a5.m = m.toLowerCase(); if (HEX.test(f || '')) N.a5.f = f.toLowerCase(); write(N); scheduleDecorate(); refreshAll(); },
+        isOn: () => isOn(cur(), 'a5'),
+    };
+
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.designs = token => renderPage(token);
 
@@ -1016,7 +1086,7 @@
      * Le petit cadre en haut d'Apparence le dit, avec le lien et les designs changés. */
     const goDesigns = () => { const st = A().state; if (st) st.maintenanceTab = 'designs'; A().setModule?.('maintenance'); };
     function apparenceNoteHtml(G) {
-        const on = IDS.filter(id => isOn(G, id));
+        const on = PAGE_IDS.filter(id => isOn(G, id));
         const list = on.length ? `<small class="lcd-link-on">${esc(`${A().plural ? A().plural(on.length, 'design changé', 'designs changés') : on.length} : ${on.map(id => `${DEFS[id].n} ${V(id, G[id].v).t}${isModified(G, id) ? ' (retouché)' : ''}`).join(', ')}.`)}</small>` : '<small class="muted lcd-link-on">Tout est encore « comme avant ».</small>';
         return `<div class="ui-notice ui-notice-info lcd-link" id="lcd-apparence-link"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span><button type="button" class="link-button" data-lcd-go-designs>🎨 Designs au choix</button> : la forme des éléments (traits, densité, icônes, en-tête des fiches, cases des arbres, boutons, listes, mouvements). La police, la taille et les couleurs se règlent ici, dans Apparence. ${list}</span></div>`;
     }

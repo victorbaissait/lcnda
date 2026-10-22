@@ -5,7 +5,9 @@
  * lignes défilent sans gel), panneau E2, onglets des feuilles en bas, barre d'état (somme, moyenne, nombre), ↶ ↷.
  * Le calcul, les fichiers (CSV, TSV, XLSX, ODS, JSON) et le ZIP sont dans le moteur commun : app-tableur-engine.js (LCNDA_SHEET).
  * Classeurs gardés en base : lib/workbooks.php (table workbooks). Styles : assets/css/tableur.css.
- * Vague 2 (pas encore ici) : « Modifier les données » des Diagrammes, Tableaux, Recueils… et le lien avec la base.
+ * Vague 2 : « 🧮 Modifier les données » des autres outils, « 🎯 Préparer pour… », « 📊 Graphique ▾ » lié à une plage :
+ * heritage-tableur-cibles.js (ext.sheetTargets, ext.openSheetEditor, ext.sheetLink) ; ici seulement ctx.back, ctx.select, les crochets
+ * ext.sheetMenuExtra / ext.sheetCommands / ext.sheetChartMenu et l'évènement « lcnda:workbook-saved ».
  */
 (() => {
     'use strict';
@@ -80,7 +82,7 @@
         return new Editor({...ctx, id, name, kind, wb, rev}).open();
     }
     ext.openWorkbook = openWorkbook;
-    ext.openSheetEditor = openWorkbook; // le nom prévu par la maquette (vague 2 : openSheetEditor({data, columns, onSave}))
+    ext.openSheetEditor = openWorkbook; // remplacé par heritage-tableur-cibles.js : openSheetEditor({target, data, onSave}) avec « ✓ Enregistrer et revenir »
 
     /* ═════════ L'éditeur ═════════ */
     class Editor {
@@ -88,7 +90,7 @@
             Object.assign(this, {id: o.id, name: o.name, kind: o.kind, wb: o.wb, ctx: o, rev: o.rev || ''});
             this.si = Math.max(0, Math.min(this.wb.sheets.length - 1, this.wb.active || 0));
             this.calc = new (X().Calc)(this.wb);
-            this.undoStack = []; this.redoStack = []; this.tx = null; this.dirty = !!o.data && !o.id; this.savedAt = 0;
+            this.undoStack = []; this.redoStack = []; this.tx = null; this.dirty = !!o.data && !o.id && !o.back; this.savedAt = 0; // « Modifier les données » : rien de changé tant qu'on n'a rien tapé
             this.sel = {r0: 0, c0: 0, r1: 0, c1: 0}; this.act = [0, 0]; this.anchor = [0, 0];
             this.edit = null; this.refPick = null; this.clip = null; this.hiddenRows = new Map(); this.showFormulas = false;
             this.view = new Map(); this.win = null; this.geo = null;
@@ -131,7 +133,7 @@
             const changed = new Map();
             t.swaps.forEach((x, sh) => { sh.cells = x[dir]; });
             t.cells.forEach(x => { if (x[dir]) x.sh.cells[x.k] = {...x[dir]}; else delete x.sh.cells[x.k]; const p = X().parseAddr(x.k); let l = changed.get(x.sh); if (!l) changed.set(x.sh, l = []); l.push(p); });
-            t.metas.forEach((x, sh) => { Object.assign(sh, JSON.parse(x[dir])); if (!JSON.parse(x[dir]).filter) delete sh.filter; if (!JSON.parse(x[dir]).color) delete sh.color; });
+            t.metas.forEach((x, sh) => { Object.assign(sh, JSON.parse(x[dir])); if (!JSON.parse(x[dir]).filter) delete sh.filter; if (!JSON.parse(x[dir]).color) delete sh.color; if (!JSON.parse(x[dir]).link) delete sh.link; });
             this.wb.sheets = (dir === 'before' ? t.sheets : t.sheetsAfter).slice();
             this.wb.names = JSON.parse(dir === 'before' ? t.names : t.namesAfter);
             this.si = Math.min(this.wb.sheets.length - 1, dir === 'before' ? t.si : t.siAfter);
@@ -166,7 +168,7 @@
         colAt(x) { const a = this.geometry().colX; let lo = 0, hi = a.length - 2; if (x <= 0) return 0; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (a[m] <= x) lo = m; else hi = m - 1; } return lo; }
         mergeOf(r, c) { const g = this.geometry(); for (const m of g.merges) if (r >= m.r0 && r <= m.r1 && c >= m.c0 && c <= m.c1) return m; return null; }
     }
-    const metaOf = sh => JSON.stringify({name: sh.name, color: sh.color || '', cols: sh.cols, rows: sh.rows, merges: sh.merges, freeze: sh.freeze, cf: sh.cf, dv: sh.dv, filter: sh.filter || null, hidden: !!sh.hidden, zebra: !!sh.zebra});
+    const metaOf = sh => JSON.stringify({name: sh.name, color: sh.color || '', cols: sh.cols, rows: sh.rows, merges: sh.merges, freeze: sh.freeze, cf: sh.cf, dv: sh.dv, filter: sh.filter || null, hidden: !!sh.hidden, zebra: !!sh.zebra, link: sh.link || null}); // link : plage tenue à jour (heritage-tableur-base.js)
 
     /* ═════════ Les menus du haut (E1) : chaque ligne a sa commande (data-xl-cmd), réglable dans les raccourcis ═════════ */
     const M = (cmd, label, key = '') => ({cmd, label, key});
@@ -178,14 +180,16 @@
         ['Données', [M('sortaz', '↕ Trier A → Z'), M('sortza', '↕ Trier Z → A'), M('sort', 'Trier sur plusieurs colonnes…'), M('filter', '⚲ Filtrer', '⇧⌘L'), '-', M('dedupe', 'Supprimer les doublons…'), M('split', 'Convertir le texte en colonnes…'), M('validate', 'Validation des données…'), M('trim', 'Retirer les espaces en trop')]],
         ['Affichage', [M('fz:row', 'Figer la 1re ligne'), M('fz:col', 'Figer la 1re colonne'), M('fz:here', 'Figer jusqu’à la cellule choisie'), M('fz:none', 'Libérer les volets'), '-', M('panel', 'Panneau de droite'), M('formulas', 'Montrer les formules', '⌘`'), M('gridlines', 'Quadrillage'), '-', M('keys', '⌨️ Raccourcis du tableur…'), M('help', '❓ Aide (FAQ)')]],
     ];
-    const menusHtml = () => MENUS.map(([title, items]) => `<details class="xl-menu" data-xl-menu="${esc(title)}"><summary>${esc(title)}</summary><div class="xl-menu-list" role="menu">${items.map(it => (it === '-' ? '<hr>' : `<button type="button" role="menuitem" data-xl-cmd="${esc(it.cmd)}"><span>${esc(it.label)}</span>${it.key ? `<kbd>${esc(kbd(it.key))}</kbd>` : ''}</button>`)).join('')}</div></details>`).join('');
+    // ext.sheetMenuExtra : [{menu: 'Données', cmd, label, key}] — des lignes ajoutées par d'autres fichiers (heritage-tableur-cibles.js…), leur commande dans ext.sheetCommands
+    const menuItems = (title, base) => { const more = (ext.sheetMenuExtra || []).filter(x => x && x.menu === title && x.cmd); return more.length ? [...base, '-', ...more.map(x => M(x.cmd, x.label, x.key || ''))] : base; };
+    const menusHtml = () => MENUS.map(([title, base]) => [title, menuItems(title, base)]).map(([title, items]) => `<details class="xl-menu" data-xl-menu="${esc(title)}"><summary>${esc(title)}</summary><div class="xl-menu-list" role="menu">${items.map(it => (it === '-' ? '<hr>' : `<button type="button" role="menuitem" data-xl-cmd="${esc(it.cmd)}"><span>${esc(it.label)}</span>${it.key ? `<kbd>${esc(kbd(it.key))}</kbd>` : ''}</button>`)).join('')}</div></details>`).join('');
     const toolsHtml = () => `<div class="xl-tools" data-tbg="xl-tools" data-tbg-label="Barre d’outils">
         <span class="xl-g" data-tb="text" data-tb-label="Police et gras"><button type="button" class="icon-button small" data-xl-cmd="bold" title="Gras" data-shortcut="⌘B"><b>G</b></button><button type="button" class="icon-button small" data-xl-cmd="italic" title="Italique" data-shortcut="⌘I"><i>I</i></button><button type="button" class="icon-button small" data-xl-cmd="underline" title="Souligné" data-shortcut="⌘U"><u>S</u></button><button type="button" class="icon-button small" data-xl-cmd="wrap" title="Renvoi à la ligne">↵</button><button type="button" class="icon-button small" data-xl-cmd="merge" title="Fusionner / séparer">⊞</button><button type="button" class="icon-button small" data-xl-cmd="al:left" title="Aligner à gauche">⟸</button><button type="button" class="icon-button small" data-xl-cmd="al:center" title="Centrer">≡</button><button type="button" class="icon-button small" data-xl-cmd="al:right" title="Aligner à droite">⟹</button></span>
         <span class="xl-g" data-tb="colors" data-tb-label="Couleurs (C2)"><button type="button" class="icon-button small xl-colbtn" data-xl-cmd="color:color" title="Couleur du texte"><b>A</b><i data-xl-sw="color"></i></button><button type="button" class="icon-button small xl-colbtn" data-xl-cmd="color:fill" title="Couleur du fond">◧<i data-xl-sw="fill"></i></button></span>
         <span class="xl-g" data-tb="format" data-tb-label="Format de cellule"><select data-xl-fmt aria-label="Format de la cellule" title="Format de la cellule">${FORMATS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select><button type="button" class="icon-button small" data-xl-cmd="dec-" title="Une décimale de moins">.0</button><button type="button" class="icon-button small" data-xl-cmd="dec+" title="Une décimale de plus">.00</button></span>
         <span class="xl-g" data-tb="borders" data-tb-label="Bordures"><button type="button" class="icon-button small" data-xl-cmd="bd:all" title="Bordures : tout">▦</button><button type="button" class="icon-button small" data-xl-cmd="bd:out" title="Bordures : contour">▭</button><button type="button" class="icon-button small" data-xl-cmd="bd:bottom" title="Bordure du bas">▁</button><button type="button" class="icon-button small" data-xl-cmd="bd:none" title="Sans bordure">⊘</button></span>
         <span class="xl-g" data-tb="data" data-tb-label="Trier, filtrer, Σ"><button type="button" class="button small secondary" data-xl-cmd="sortmenu" title="Trier la plage">↕ Trier ▾</button><button type="button" class="button small secondary" data-xl-cmd="filter" title="Filtrer (barre de recherche et filtres au-dessus)" data-shortcut="⇧⌘L">⚲ Filtrer</button><button type="button" class="button small secondary" data-xl-cmd="summenu" title="Somme, moyenne, nombre…">Σ ▾</button></span>
-        <span class="xl-g" data-tb="chart" data-tb-label="Graphique"><button type="button" class="button small secondary" data-xl-cmd="chart" title="Un diagramme avec les chiffres de la sélection">📊 Graphique</button><button type="button" class="button small secondary" data-xl-cmd="fn" title="Choisir une fonction">ƒ Fonction</button></span>
+        <span class="xl-g" data-tb="chart" data-tb-label="Graphique"><button type="button" class="button small secondary" data-xl-cmd="chart" title="Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage">📊 Graphique ▾</button><button type="button" class="button small secondary" data-xl-cmd="fn" title="Choisir une fonction">ƒ Fonction</button></span>
     </div>`;
 
     Object.assign(Editor.prototype, {
@@ -193,8 +197,10 @@
             const U = UI(), dlg = this.dlg = document.createElement('dialog');
             dlg.className = 'modal xl-dlg'; dlg.dataset.ownClose = '1'; dlg.dataset.noFoot = '1'; dlg.setAttribute('data-no-foot', '');
             const top = U.editorTopbar({icon: '🧮', name: this.name, nameAttrs: 'data-xl-name', menus: [{html: `<nav class="xl-menus">${menusHtml()}</nav>`}], undo: true, status: this.id && !this.dirty ? 'saved' : '',
-                buttons: {customize: ext.tbButton ? {html: '⚙️ Personnaliser', attrs: 'data-tb-config="sheet"'} : null, export: {attrs: 'data-xl-cmd="export"', title: 'XLSX, ODS, CSV, TSV, JSON, PDF, impression'}, save: {attrs: 'data-xl-cmd="save"'}, full: ext.fullButton ? {attrs: 'data-full-toggle="sheet"', title: 'Plein écran (⛶)'} : null, close: {attrs: 'data-xl-cmd="close"'}}});
-            dlg.innerHTML = `<div class="xl">${top}${toolsHtml()}
+                buttons: {customize: ext.tbButton ? {html: '⚙️ Personnaliser', attrs: 'data-tb-config="sheet"'} : null, export: {attrs: 'data-xl-cmd="export"', title: 'XLSX, ODS, CSV, TSV, JSON, PDF, impression'}, save: this.ctx.back ? {attrs: 'data-xl-cmd="save" data-xl-back-save', html: '✓ Enregistrer et revenir', title: this.ctx.back.title || 'Renvoyer les données là d’où elles viennent'} : {attrs: 'data-xl-cmd="save"'}, full: ext.fullButton ? {attrs: 'data-full-toggle="sheet"', title: 'Plein écran (⛶)'} : null, close: {attrs: 'data-xl-cmd="close"'}}});
+            // « 🧮 Modifier les données » d'un autre outil (vague 2) : le bandeau dit d'où viennent les données et ce qu'on y attend
+            const back = this.ctx.back ? `<div class="xl-back" data-xl-backbar role="note"><span class="xl-back-txt">${this.ctx.back.html || esc(this.ctx.back.label || 'Données d’un autre outil')}</span><span class="xl-back-btns"><button type="button" class="button small secondary" data-xl-cmd="close">Annuler</button><button type="button" class="button small" data-xl-cmd="save">✓ Enregistrer et revenir</button></span></div>` : '';
+            dlg.innerHTML = `<div class="xl">${top}${back}${toolsHtml()}
                 <div class="xl-fbar"><input class="xl-nbox" data-xl-nbox aria-label="Adresse (tape D12 ou un nom pour y aller)" title="Tape une adresse (D12, B2:C9) ou un nom pour y aller" spellcheck="false"><span class="xl-fxlab" aria-hidden="true">fx</span><textarea class="xl-fx" data-xl-fx rows="1" aria-label="Contenu ou formule de la cellule" spellcheck="false"></textarea></div>
                 <div class="xl-ac" data-xl-ac hidden role="listbox"></div>
                 <div class="xl-help" data-xl-help aria-live="polite"></div>
@@ -213,11 +219,18 @@
             this.histBtns();
             if (this.dirty) U.savedStatus?.(dlg, 'dirty');
             this.refreshFilter();
-            this.render(); this.focusGrid();
+            this.render();
+            if (this.ctx.select) this.selectRange(this.ctx.select); // ouvert sur une plage (plage liée d'un diagramme…)
+            this.focusGrid();
             if (ext.tableurInternals) ext.tableurInternals.current = this; // pour les essais
             return this;
         },
         focusGrid() { if (!this.edit) this.kb.focus({preventScroll: true}); },
+        /** {sheet: id ou nom, range: 'A1:C4'} : montre la feuille et choisit la plage */
+        selectRange({sheet = '', range = ''} = {}) {
+            const S = X(), i = this.wb.sheets.findIndex(x => x.id === sheet || S.fold(x.name) === S.fold(sheet)); if (i >= 0 && i !== this.si) this.showSheet(i);
+            const g = S.parseRange(range); if (!g) return; this.select(g.r0, g.c0); this.setSel(g.r0, g.c0, g.r1, g.c1); this.paint(true);
+        },
 
         /* ═════════ Dessin de la grille (seules les cases visibles) ═════════ */
         render() {
@@ -765,7 +778,7 @@
                 case 'name': return this.defineName();
                 case 'comment': return this.noteDialog();
                 case 'person': case 'place': return this.openPicker(p, '', true);
-                case 'chart': return this.chartMenu(btn);
+                case 'chart': return ext.sheetChartMenu ? ext.sheetChartMenu(this, btn) : this.chartMenu(btn); // heritage-tableur-cibles.js : types conseillés, plage liée
                 case 'bold': return this.styleSel(s => { if (st.b) delete s.b; else s.b = 1; }, 'Gras');
                 case 'italic': return this.styleSel(s => { if (st.i) delete s.i; else s.i = 1; }, 'Italique');
                 case 'underline': return this.styleSel(s => { if (st.u) delete s.u; else s.u = 1; }, 'Souligné');
@@ -800,6 +813,7 @@
                 case 'keys': return this.keysDialog();
                 case 'help': return UI().openFaq?.('Comment se servir du tableur ?');
                 case 'delsheet': return this.deleteSheet(this.si);
+                default: { const fn = ext.sheetCommands?.[p]; if (typeof fn === 'function') return fn(this, arg, btn); } // commandes ajoutées par d'autres fichiers (Préparer pour…)
             }
         },
         clearSel(all) {
@@ -1359,6 +1373,12 @@
         /* ═════════ Enregistrer, fermer ═════════ */
         async save({asNew = false, kind = this.kind, name = this.name, force = false} = {}) {
             const S = X(); this.wb.active = this.si;
+            // « ✓ Enregistrer et revenir » : les données repartent dans l'outil qui les a confiées (rien n'est rangé dans le Tableur, sauf « Enregistrer une copie… »)
+            if (this.ctx.back && !asNew) {
+                if (this.edit && !this.commitEdit(0, 0)) return 0;
+                try { if (await this.ctx.back.save(this) === false) return 0; } catch (e) { toast(e.message || String(e), 'error'); return 0; }
+                this.dirty = false; this.dlg.close(); return 0;
+            }
             UI()?.savedStatus?.(this.dlg, 'saving');
             try {
                 const own = !asNew && this.id;
@@ -1366,6 +1386,7 @@
                 if (!asNew) { const first = !this.id; this.id = id; this.rev = r.result?.rev || ''; this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved'); if (first) toast('Rangé dans Listes → Outils de modification → 🧮 Tableur.'); }
                 else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(kind === 'template' ? `Modèle « ${name} » enregistré (Partir d’un modèle → Mes modèles).` : `Copie « ${name} » enregistrée.`); }
                 this.ctx.onSaved?.(this.id);
+                document.dispatchEvent(new CustomEvent('lcnda:workbook-saved', {detail: {id: this.id || id}})); // les diagrammes liés à une plage se redessinent
                 return id;
             } catch (e) {
                 UI()?.savedStatus?.(this.dlg, 'error');

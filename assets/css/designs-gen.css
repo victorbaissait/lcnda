@@ -1601,6 +1601,7 @@
 :root[data-lc-r] .k-import-prev{border-radius:var(--lc-r)}
 :root[data-lc-density] .k-import-prev th,:root[data-lc-density] .k-import-prev td{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .k-import .modal-actions{padding:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] #stats-colors-form > .eyebrow{margin-top:calc(18px * var(--lc-sp))}
 /* picker.css */
 :root[data-lc-density] .pk-box{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-r] .pk-box{border-radius:var(--lc-r)}
@@ -4781,6 +4782,39 @@
 :root[data-lc-density] .ui-card-thumb .xl-mini td{padding:calc(2px * var(--lc-sp)) calc(5px * var(--lc-sp))}
 @media (max-width: 760px){
   :root[data-lc-density] .xl-menus summary{padding:calc(6px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+}
+:root[data-lc-density] .xl-back{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .xl-back{padding:calc(7px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .xl-back-btns{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .xl-prep-kind{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .xl-prep-cols{gap:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .xl-prep-warns{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .xl-prep-seg{margin-bottom:calc(8px * var(--lc-sp))}
+@media (max-width: 760px){
+  :root[data-lc-density] .xl-back{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+}
+:root[data-lc-density] .xl-baselink{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .xl-baselink{padding:calc(5px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .xl-baselink-pk{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .xl-base-body{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .xl-base-row{gap:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .xl-base-row label{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .xl-base-cols{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .xl-base-col{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .xl-base-col{padding:calc(3px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-r] .xl-base-col{border-radius:var(--lc-r)}
+:root[data-lc-density] .xl-base-cl{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .xl-base-where{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .xl-steps{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .xl-steps{padding:0 calc(20px * var(--lc-sp))}
+:root[data-lc-density] .xl-steps li{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-r] .xl-steps li{border-radius:var(--lc-r)}
+:root[data-lc-density] .xl-push-target{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .xl-push-ctx{gap:calc(10px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .xl-push-ctx label{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .xl-push-ctx > span{gap:calc(3px * var(--lc-sp))}
+@media (max-width: 760px){
+  :root[data-lc-density] .xl-baselink{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 }
 /* traitement-texte.css */
 :root[data-lc-density] .wp .ui-topbar{row-gap:calc(4px * var(--lc-sp))}

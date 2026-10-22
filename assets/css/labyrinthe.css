@@ -1,0 +1,118 @@
+/* LCNDA — 🌀 Labyrinthe (outil Jeu, assets/js/app-labyrinthe.js). Même allure noir et blanc que le jeu de l'oie et le puzzle. */
+
+.lb-page [hidden] { display: none !important; }
+.lb-msgline .ui-notice, .lb-setup .ui-notice { margin: 0; }
+.lb-small { font-size: 12.5px; margin: 0; }
+
+/* ── préparation ── */
+.lb-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 380px); gap: 22px; align-items: start; }
+.lb-main { display: grid; gap: 16px; min-width: 0; }
+.lb-setup .lb-top { grid-template-columns: minmax(150px, 1fr) minmax(180px, 1.4fr) minmax(200px, 1.2fr); }
+.lb-seedrow { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+.lb-seedrow input { flex: 1; min-width: 0; font-family: ui-monospace, monospace; letter-spacing: .08em; }
+.lb-fs { display: grid; gap: 12px; min-width: 0; border: 2px solid #000; padding: 12px 16px 16px; margin: 0; }
+.lb-fs legend { font-weight: 900; padding: 0 6px; }
+.lb-fs legend small { font-weight: 600; color: #555; }
+.lb-seg { flex-wrap: wrap; }
+.lb-seg button { min-height: 38px; }
+.lb-shapes button span, .lb-seg button span { font-size: 15px; }
+.lb-ranges { display: grid; gap: 8px; }
+.lb-grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lb-colors { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: end; }
+.lb-cl { display: grid; gap: 4px; }
+.lb-checks { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.lb-stage-opts { display: grid; gap: 12px; }
+.lb-players { display: grid; gap: 8px; }
+.lb-player { display: flex; align-items: end; gap: 10px; flex-wrap: wrap; }
+.lb-player label { flex: 1; min-width: 160px; }
+.lb-dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: var(--pawn, #d93636); border: 2px solid #fff; box-shadow: 0 0 0 1.5px #000; flex: none; margin-bottom: 12px; vertical-align: middle; }
+.lb-prow { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: end; }
+.lb-aside { display: grid; gap: 14px; position: sticky; top: 12px; min-width: 0; }
+.lb-pv-card { border: 2px solid #000; background: #fff; }
+.lb-pv-head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; padding: 8px 12px; border-bottom: 2px solid #000; }
+.lb-pv-head small { color: #555; font-weight: 600; font-size: 12px; text-align: right; }
+.lb-pv { padding: 8px; }
+.lb-pv svg { display: block; width: 100%; height: auto; max-height: 420px; }
+.lb-ready { display: grid; gap: 8px; }
+.lb-ready-list { display: grid; gap: 8px; }
+.lb-ready-b { display: grid; gap: 2px; text-align: left; padding: 10px 12px; border: 2px solid #000; background: #fff; color: #000; font: inherit; cursor: pointer; }
+.lb-ready-b:hover { background: #f3f3f3; }
+.lb-ready-b small { color: #555; font-weight: 600; font-size: 12.5px; }
+.lb-foot { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; border-top: 3px solid #000; margin-top: 18px; padding-top: 14px; }
+.lb-start { font-size: 16px; }
+
+/* ── partie ── */
+.lb-game { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: 18px; align-items: start; }
+.lb-board { border: 2px solid #000; background: #fff; padding: 8px; outline: none; touch-action: none; position: relative; }
+.lb-board:focus-visible { box-shadow: 0 0 0 3px var(--blue, #0066cc); }
+.lb-board.is-paused .lb-svg { filter: blur(6px) grayscale(.6); }
+.lb-board.is-paused::after { content: "⏸ Pause"; position: absolute; inset: 0; display: grid; place-items: center; font-weight: 900; font-size: 28px; color: #000; }
+.lb-svg svg { display: block; width: 100%; height: auto; max-height: calc(100vh - 230px); user-select: none; }
+.lb-pawn { transition: transform .11s ease-out; }
+.lb-pawn.is-on circle { filter: drop-shadow(0 0 .05px #000); }
+.lb-pawn.is-bump { animation: lb-bump .22s; }
+@keyframes lb-bump { 25% { opacity: .55; } 50% { opacity: 1; } 75% { opacity: .55; } }
+.lb-hintdot { animation: lb-hint 1s ease-in-out infinite alternate; }
+@keyframes lb-hint { from { opacity: .35; } to { opacity: 1; } }
+html.a11y-calm .lb-pawn, html.a11y-calm .lb-hintdot, html.a11y-calm .lb-pawn.is-bump { transition: none; animation: none; }
+@media (prefers-reduced-motion: reduce) { .lb-pawn, .lb-hintdot, .lb-pawn.is-bump { transition: none; animation: none; } }
+.lb-side { display: grid; gap: 12px; min-width: 0; }
+.lb-bar { display: flex; flex-wrap: wrap; gap: 8px; }
+.lb-players-st { display: grid; gap: 8px; }
+.lb-pcard { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: center; border: 2px solid #000; background: #fff; padding: 8px 10px; }
+.lb-pcard .lb-dot { margin: 0; grid-row: span 2; }
+.lb-pcard.is-turn { box-shadow: 4px 4px 0 var(--blue, #0066cc); }
+.lb-pcard.is-done { background: #eef8ee; }
+.lb-tag { font-weight: 800; font-size: 11px; text-transform: uppercase; color: #0f5132; }
+.lb-tag.is-ok { color: #0f5132; }
+.lb-stats { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.lb-live { min-height: 22px; font-weight: 700; font-size: 14px; }
+.lb-live.is-warn { color: #8a5a00; }
+.lb-live.is-ok { color: #0f5132; }
+.lb-card { border: 2px solid #c9a227; background: #fffbe8; padding: 10px 12px; display: grid; gap: 6px; }
+.lb-card-in { display: flex; gap: 12px; align-items: center; }
+.lb-card-in img { width: 64px; height: 64px; object-fit: cover; border: 2px solid #000; flex: none; }
+.lb-card-in > div { display: grid; gap: 2px; min-width: 0; overflow-wrap: anywhere; }
+.lb-card-in small { color: #555; font-weight: 600; }
+.lb-ico { font-size: 30px; line-height: 1; }
+.lb-endbox { border: 3px solid #000; background: #fff; padding: 12px 14px; display: grid; gap: 10px; }
+.lb-endbox h3, .lb-endbox h4 { margin: 0; }
+.lb-score td, .lb-score th { padding: 6px 8px; }
+.lb-score .lb-dot { margin: 0 4px 0 0; width: 12px; height: 12px; }
+.lb-met { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.lb-met li { display: flex; gap: 10px; align-items: center; }
+.lb-met li > div { flex: 1; min-width: 0; display: grid; }
+.lb-met small { color: #555; font-weight: 600; }
+.lb-endacts { display: flex; flex-wrap: wrap; gap: 8px; }
+.lb-help { line-height: 1.5; }
+.lb-side.lb-side { text-align: left; }
+.side-button.lb-side strong { overflow-wrap: anywhere; }
+
+@media (max-width: 1000px) {
+    .lb-cols, .lb-game { grid-template-columns: minmax(0, 1fr); }
+    .lb-aside { position: static; }
+}
+@media (max-width: 640px) {
+    .lb-setup .lb-top, .lb-grid2 { grid-template-columns: minmax(0, 1fr); }
+    .lb-fs { padding: 10px 10px 12px; }
+    .lb-svg svg { max-height: 70vh; }
+    .lb-foot { flex-direction: column; align-items: stretch; }
+}
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .lb-dot{border:2px solid #4c4c4c}
+:root[data-theme="dark"] .lb-ready-b{background:#212121;color:#ffffff}
+:root[data-theme="dark"] .lb-ready-b:hover{background:#272727}
+:root[data-theme="dark"] .lb-ready-b small{color:#c7c7c7}
+:root[data-theme="dark"] .lb-board{background:#212121}
+:root[data-theme="dark"] .lb-board.is-paused::after{color:#ffffff}
+:root[data-theme="dark"] .lb-pcard{background:#212121}
+:root[data-theme="dark"] .lb-pcard.is-done{background:#1e2f1e}
+:root[data-theme="dark"] .lb-tag{color:#bcecd5}
+:root[data-theme="dark"] .lb-tag.is-ok{color:#bcecd5}
+:root[data-theme="dark"] .lb-live.is-warn{color:#f4d59a}
+:root[data-theme="dark"] .lb-live.is-ok{color:#bcecd5}
+:root[data-theme="dark"] .lb-card{background:#3b3411}
+:root[data-theme="dark"] .lb-card-in small{color:#c7c7c7}
+:root[data-theme="dark"] .lb-endbox{background:#212121}
+:root[data-theme="dark"] .lb-met small{color:#c7c7c7}
+/* ═════ fin du mode sombre automatique ═════ */

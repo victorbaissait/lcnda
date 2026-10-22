@@ -3053,7 +3053,19 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) dialog.modal.xl-dlg{border:0}
 :root:is(.lc-frame,[data-lc-lines]) .xl-panel .ui-section:not([open]) + .ui-section{border-top:0}
 :root:is(.lc-frame,[data-lc-lines]) .xl-panel{border-left:0;border-top:2px solid var(--xl-line)}
+:root:is(.lc-frame,[data-lc-lines]) .xl-back{border-bottom:1.5px solid #b9d0f5}
+:root:is(.lc-frame,[data-lc-lines]) .xl-prep-map th{border-bottom:1.5px solid var(--xl-line, #cfd3da)}
+:root:is(.lc-frame,[data-lc-lines]) .xl-prep-map td{border-bottom:1px solid var(--xl-grid, #e1e3e8)}
+:root:is(.lc-frame,[data-lc-lines]) .xl-baselink{border-bottom:1.5px solid #b7d8bd}
+:root:is(.lc-frame,[data-lc-lines]) .xl-base-col{border:1.5px solid var(--line, #d7dbe2)}
+:root:is(.lc-frame,[data-lc-lines]) .xl-base-dlg .xl-chip{border-color:#9aa3b2}
+:root:is(.lc-frame,[data-lc-lines]) .xl-steps li{border:1.5px solid var(--line, #d7dbe2)}
+:root:is(.lc-frame,[data-lc-lines]) .xl-steps li.is-active{border-color:#055dff}
+:root:is(.lc-frame,[data-lc-lines]) .xl-steps li.is-done{border-color:#9fd3ae}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .xl-mini td{border:1px solid #484b51}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .xl-back{border-bottom:1.5px solid #304669}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .xl-baselink{border-bottom:1.5px solid #415845}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .xl-steps li.is-done{border-color:#3e5b46}
 /* traitement-texte.css */
 :root:is(.lc-frame,[data-lc-lines]) dialog.modal.wp-dlg.is-full{border:0}
 :root:is(.lc-frame,[data-lc-lines]) .wp-menus summary{border:1.5px solid transparent}

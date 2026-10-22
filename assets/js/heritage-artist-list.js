@@ -100,9 +100,10 @@
     ART.exportList = (C, kind) => {
         const def = ART.defs[kind], store = C.store, ids = C.listIds ? C.listIds() : store.of(kind).map(i => i.id), list = ids.map(id => store.get(id)).filter(Boolean);
         const title = `${store.name} — ${def.many}`;
-        const csv = filename => { const L = ART.layout(store, kind, 'liste'), all = ART.fieldsOf(def, store.customFields(kind)).filter(f => f.type !== 'computed' && f.type !== 'photos'), cols = [...new Set([...L.fields.filter(f => f.on && f.type !== 'photos'), ...all].map(f => f.key))].map(k => all.find(f => f.key === k) || L.fields.find(f => f.key === k)).filter(Boolean);
+        const tableRows = () => { const L = ART.layout(store, kind, 'liste'), all = ART.fieldsOf(def, store.customFields(kind)).filter(f => f.type !== 'computed' && f.type !== 'photos'), cols = [...new Set([...L.fields.filter(f => f.on && f.type !== 'photos'), ...all].map(f => f.key))].map(k => all.find(f => f.key === k) || L.fields.find(f => f.key === k)).filter(Boolean);
+            return [cols.map(f => f.label), ...list.map(it => cols.map(f => ART.text(ART.ctx(store, it), it, f)))]; };
+        const csv = filename => { const rows = tableRows();
             const cellc = v => A().csvCell ? A().csvCell(v, {sep: ';', quote: 'always'}) : `"${String(v ?? '').replace(/"/g, '""')}"`;
-            const rows = [cols.map(f => f.label), ...list.map(it => cols.map(f => ART.text(ART.ctx(store, it), it, f)))];
             dl(new Blob(['﻿' + rows.map(r => r.map(cellc).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'}), filename || `${fname(C, kind)}.csv`); };
         const file = filename => dl(new Blob([JSON.stringify({lcnda: 'artistes', version: 2, kind, exporte: new Date().toISOString(), items: list.map(it => ({kind: it.kind, data: it.data}))}, null, 1)], {type: 'application/json'}), filename || `${fname(C, kind)}.json`);
         const print = () => printDoc(title, list.map(it => ART.noticeHtmlFor(store, it)).join(''));
@@ -111,6 +112,7 @@
             {id: 'pdf', hint: 'les notices illustrées (« Enregistrer en PDF »)', ext: '', run: async () => print()},
             {id: 'print', hint: 'les notices illustrées', run: async () => print()},
             {id: 'csv', label: '📊 Tableur', hint: 'CSV (Excel, Numbers, LibreOffice)', ext: 'csv', run: async o => csv(o.filename)},
+            ...(window.LCNDA_EXT?.sheetExportFormat ? [window.LCNDA_EXT.sheetExportFormat(tableRows, title)] : []), // 🧮 les mêmes colonnes, ouvertes dans le tableur
             {id: 'file', label: '💾 Fichier', hint: 'pour une autre base : « ⤒ Importer » → « Un fichier exporté d’ici »', ext: 'json', run: async o => file(o.filename)}]});
     };
     /* ═════════ Exporter (E3) : une fiche ═════════ */

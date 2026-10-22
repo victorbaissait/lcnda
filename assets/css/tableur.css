@@ -179,9 +179,95 @@ dialog.modal.xl-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
     .xl-status { font-size: 11px; }
     .xl-menu-list { position: fixed; left: 8px; right: 8px; top: auto; min-width: 0; }
 }
+/* ═════ Vague 2 : « 🧮 Modifier les données », « 🎯 Préparer pour… », plage liée (heritage-tableur-cibles.js) ═════ */
+.xl-back { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 7px 12px; background: #eaf2ff; border-bottom: 1.5px solid #b9d0f5; color: #12305e; }
+.xl-back-txt { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 1px; font-size: 13px; }
+.xl-back-txt small { color: #3d5a86; font-size: 12px; }
+.xl-back-btns { display: flex; gap: 6px; flex: none; }
+.xl-prep-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin-top: 8px; }
+.xl-prep-kind { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.xl-prep-kind select { flex: 1 1 auto; min-width: 0; max-width: 360px; }
+.xl-prep-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; margin-top: 6px; }
+.xl-prep-map { border-collapse: collapse; width: 100%; font-size: 13px; }
+.xl-prep-map th { text-align: left; font-size: 12px; color: var(--muted, #6d6d6d); padding: 3px 6px; border-bottom: 1.5px solid var(--xl-line, #cfd3da); }
+.xl-prep-map td { padding: 4px 6px; border-bottom: 1px solid var(--xl-grid, #e1e3e8); vertical-align: top; }
+.xl-prep-map td small { color: var(--muted, #6d6d6d); }
+.xl-prep-map tr.is-ok td:last-child { color: #1a7f3c; font-weight: 700; }
+.xl-prep-map tr.is-missing td { color: #b3261e; }
+.xl-prep-warns { display: grid; gap: 4px; margin: 8px 0; }
+.xl-prep-prev { min-width: 0; }
+.xl-prep-prev .h-dg-svg svg { width: 100%; height: auto; max-height: 300px; }
+.xl-prep-seg { margin-bottom: 8px; }
+.h-dg-sheetbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 8px; }
+.xl-linkbar { line-height: 1.6; }
+/* une case avec un fond choisi (fonds clairs : titres, modèles) garde un texte foncé, aussi en mode sombre */
+:root[data-theme="dark"] .xl-c.has-fill { color: #111; }
+@media (max-width: 760px) {
+    .xl-back { padding: 6px 8px; }
+    .xl-back-btns { width: 100%; justify-content: flex-end; }
+    .xl-prep-cols { grid-template-columns: minmax(0, 1fr); }
+}
+/* ═════ Lien avec la base : ⤒ Remplir depuis l'app, 🔗 tenir à jour, 📤 Envoyer vers la base (heritage-tableur-base.js) ═════ */
+.xl-baselink { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 5px 12px; background: #eef6ee; border-bottom: 1.5px solid #b7d8bd; color: #173d1f; font-size: 13px; }
+.xl-baselink[hidden] { display: none; }
+.xl-baselink-t { min-width: 0; flex: 1 1 260px; }
+.xl-baselink .spacer { flex: 1 1 auto; }
+.xl-baselink-y select { margin-left: 4px; }
+.xl-baselink-pk { display: inline-flex; align-items: center; gap: 6px; min-width: 220px; flex: 0 1 320px; }
+.xl-baselink-pk .pk { flex: 1 1 auto; min-width: 0; }
+.xl-base-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; min-width: 0; }
+.xl-base-body > * { min-width: 0; }
+.xl-base-priv, .xl-base-keep { align-items: flex-start; white-space: normal; }
+.xl-base-h { margin: 8px 0 0; font-size: 14px; }
+.xl-base-priv, .xl-base-keep { font-size: 14px; }
+.xl-base-src { flex-wrap: wrap; }
+.xl-base-row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: end; }
+.xl-base-row label { display: grid; gap: 3px; min-width: 0; }
+.xl-base-row label.checkbox-line { display: flex; }
+.xl-base-row select { max-width: 100%; }
+.xl-base-cols { display: grid; gap: 4px; }
+.xl-base-col { display: flex; align-items: center; gap: 6px; padding: 3px 6px; border: 1.5px solid var(--line, #d7dbe2); background: var(--surface, #fff); min-width: 0; }
+.xl-base-cl { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline; gap: 6px; text-align: left; overflow: hidden; }
+.xl-base-cl b { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.xl-base-cn { font: 700 11px/1 ui-monospace, monospace; color: #3a6fd8; width: 20px; text-align: center; flex: none; }
+.xl-base-dlg .xl-chip { border-color: #9aa3b2; background: transparent; color: inherit; cursor: default; }
+.xl-base-dlg .xl-prev { max-height: 300px; }
+.xl-base-where { display: inline-flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+.xl-base-where select { max-width: 260px; }
+.xl-steps { display: flex; gap: 6px; flex-wrap: wrap; list-style: none; margin: 0 0 6px; padding: 0 20px; font-size: 13px; }
+.xl-steps li { padding: 3px 10px; border: 1.5px solid var(--line, #d7dbe2); color: var(--muted, #6d6d6d); }
+.xl-steps li.is-active { border-color: #055dff; color: #055dff; font-weight: 700; }
+.xl-steps li.is-done { color: #1a7f3c; border-color: #9fd3ae; }
+.xl-push-target { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.xl-push-ctx { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: end; }
+.xl-push-ctx[hidden] { display: none; }
+.xl-push-ctx label { display: grid; gap: 3px; }
+.xl-push-ctx > span { display: grid; gap: 3px; min-width: 240px; flex: 1 1 260px; }
+.xl-push-map select { max-width: 100%; }
+.xl-push-tablewrap { overflow: auto; max-height: 52vh; }
+.xl-push-res td:last-child { white-space: nowrap; text-align: right; }
+.xl-push-res tr[data-ps="problem"] td:nth-child(2) { color: #b3261e; }
+.xl-push-res select { margin-left: 6px; max-width: 100%; }
+.xl-push-sum { font-size: 13px; }
+.xl-push-line { font-size: 13px; margin: 4px 0 0; }
+.xl-push-ctx label { font-size: 14px; }
+@media (max-width: 760px) {
+    .xl-baselink { padding: 5px 8px; }
+    .xl-baselink-pk { flex-basis: 100%; }
+    .xl-base-where { flex-basis: 100%; }
+    .xl-base-where select { max-width: none; flex: 1 1 auto; min-width: 0; }
+    .xl-push-map th:nth-child(2), .xl-push-map td:nth-child(2) { display: none; }
+    .xl-push-res td:first-child small { display: block; }
+}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
-:root[data-theme="dark"] .xl-c.has-fill{color:#f0f0f0}
 :root[data-theme="dark"] .xl-mini table{background:#212121;color:#f0f0f0}
 :root[data-theme="dark"] .xl-mini td{border:1px solid #484b51}
 :root[data-theme="dark"] .xl-mini tr:first-child td{background:#1d2633}
+:root[data-theme="dark"] .xl-back{background:#11213b;border-bottom:1.5px solid #304669;color:#b1c7e8}
+:root[data-theme="dark"] .xl-back-txt small{color:#b6c3d8}
+:root[data-theme="dark"] .xl-prep-map tr.is-ok td:last-child{color:#a9e5bd}
+:root[data-theme="dark"] .xl-prep-map tr.is-missing td{color:#e7aaa7}
+:root[data-theme="dark"] .xl-baselink{background:#202e20;border-bottom:1.5px solid #415845;color:#cce7d1}
+:root[data-theme="dark"] .xl-steps li.is-done{color:#a9e5bd;border-color:#3e5b46}
+:root[data-theme="dark"] .xl-push-res tr[data-ps="problem"] td:nth-child(2){color:#e7aaa7}
 /* ═════ fin du mode sombre automatique ═════ */

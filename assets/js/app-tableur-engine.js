@@ -1213,6 +1213,7 @@
             sh.dv = (Array.isArray(s.dv) ? s.dv : []).slice(0, 60).map(x => { const range = cleanRange(x?.range); if (!range || !['list', 'person', 'place', 'number', 'date'].includes(x.kind)) return null; const d = {range, kind: x.kind}; if (x.kind === 'list') d.list = (Array.isArray(x.list) ? x.list : []).slice(0, 300).map(v => String(v ?? '').slice(0, 200)).filter(Boolean); if (x.kind === 'number') { if (Number.isFinite(Number(x.min))) d.min = Number(x.min); if (Number.isFinite(Number(x.max))) d.max = Number(x.max); } if (x.allowFree) d.allowFree = true; return d; }).filter(Boolean);
             if (s.filter && typeof s.filter === 'object' && cleanRange(s.filter.range)) sh.filter = {range: cleanRange(s.filter.range)};
             if (s.zebra) sh.zebra = true;
+            if (s.link && typeof s.link === 'object' && !Array.isArray(s.link)) { try { const j = JSON.stringify(s.link); if (j.length < 800000) sh.link = JSON.parse(j); } catch (_) {} } // 🔗 plage tenue à jour (heritage-tableur-base.js)
             return sh;
         });
         if (!sheets.length) sheets.push(newSheet('Feuille 1'));
@@ -1224,7 +1225,7 @@
         return {v: 1, active: wb.active || 0, styles: wb.styles, names: wb.names || {}, sheets: wb.sheets.map(sh => {
             const cells = {}; for (const k in sh.cells) { const c = sh.cells[k]; if (c == null) continue; if (typeof c !== 'object') { cells[k] = c; continue; } if (!c.s && !c.ref && !c.note) { if (c.v != null) cells[k] = c.v; } else { const o = {v: c.v}; if (c.s) o.s = c.s; if (c.ref) o.ref = c.ref; if (c.note) o.note = c.note; cells[k] = o; } }
             const out = {id: sh.id, name: sh.name, cells, cols: sh.cols, rows: sh.rows, merges: sh.merges, freeze: sh.freeze, cf: sh.cf, dv: sh.dv};
-            if (sh.color) out.color = sh.color; if (sh.hidden) out.hidden = true; if (sh.filter) out.filter = {range: sh.filter.range}; if (sh.zebra) out.zebra = true;
+            if (sh.color) out.color = sh.color; if (sh.hidden) out.hidden = true; if (sh.filter) out.filter = {range: sh.filter.range}; if (sh.zebra) out.zebra = true; if (sh.link) out.link = sh.link;
             return out;
         })};
     }

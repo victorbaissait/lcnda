@@ -77,6 +77,8 @@ function workbook_check(mixed $data): array
         foreach (['color' => 'string', 'filter' => 'array'] as $key => $type) { if (isset($sh[$key]) && gettype($sh[$key]) === $type) { $out[$key] = $sh[$key]; } }
         if (!empty($sh['hidden'])) { $out['hidden'] = true; }
         if (!empty($sh['zebra'])) { $out['zebra'] = true; }
+        // 🔗 plage tenue à jour (lib/sheet_link.php, assets/js/heritage-tableur-base.js) : la source, ses colonnes et la clé de chaque ligne
+        if (is_array($sh['link'] ?? null)) { $lj = json_encode($sh['link'], JSON_UNESCAPED_UNICODE); if ($lj !== false && strlen($lj) < 800000) { $out['link'] = $sh['link']; } }
         $sheets[] = $out; $rows += $maxR; $names[] = $name;
     }
     $styles = is_array($data['styles'] ?? null) && array_is_list($data['styles']) ? array_slice($data['styles'], 0, 5000) : [new stdClass()];

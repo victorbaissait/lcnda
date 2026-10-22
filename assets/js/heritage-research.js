@@ -577,9 +577,9 @@
     }
     /* ─── 🔗 Venant du logiciel : une fiche, un bloc, un village, une liste, un recueil… ─── */
     const APP_KINDS = {person: ['👤', 'Une fiche (personne)'], person_block: ['🧩', 'Un bloc d’une fiche'], village: ['🏘️', 'La fiche d’un village'], list: ['📋', 'Une liste'],
-        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier']};
+        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier'], workbook: ['🧮', 'Un classeur (budget, planning, tableau des sources…)']};
     // ces sortes se choisissent avec le menu de choix unique (docs/PICKER.md) ; villages, listes, recueils et projets gardent leur recherche
-    const APP_PK = {person: 'person', person_block: 'person', investigation: 'investigation', battue: 'battue', media: 'media'};
+    const APP_PK = {person: 'person', person_block: 'person', investigation: 'investigation', battue: 'battue', media: 'media', workbook: 'workbook'};
     async function appSearch(kind, q) {
         if (['person', 'person_block', 'village', 'investigation', 'battue', 'atelier_project'].includes(kind)) return ((await api('recueil_search', {type: kind === 'person_block' ? 'person' : kind, q})).results || []).filter(r => kind !== 'atelier_project' || Number(r.key) !== Number(P.project.id));
         if (kind === 'media') return ((await api('list', {type: 'media', q, limit: 40})).rows || []).map(r => ({key: String(r.id), label: r.title || r.filename, extra: r.date_text || r.media_type || '', thumb: r.media_type === 'image' || !r.media_type ? (r.thumbnail || r.filename) : ''}));
@@ -608,16 +608,21 @@
                     else if (k === 'recueil' && chosen) { const rd = await api('recueil', {id: chosen.key}).catch(() => ({pages: []})); pages = rd.pages || [];
                         more.innerHTML = pages.length ? `<fieldset class="h-rc-modes"><legend>Quelles pages ?</legend><label class="checkbox-line"><input type="radio" name="scope" value="all" ${d.page_from ? '' : 'checked'}> Tout le recueil</label>
                             <label class="checkbox-line"><input type="radio" name="scope" value="some" ${d.page_from ? 'checked' : ''}> De la page <select name="page_from">${pages.map(p => `<option value="${p.id}" ${Number(d.page_from) === p.id ? 'selected' : ''}>${p.num}${p.label ? ' — ' + esc(p.label) : ''}</option>`).join('')}</select> à <select name="page_to">${pages.map(p => `<option value="${p.id}" ${Number(d.page_to || d.page_from) === p.id ? 'selected' : ''}>${p.num}${p.label ? ' — ' + esc(p.label) : ''}</option>`).join('')}</select></label></fieldset>` : ''; }
+                    else if (k === 'workbook') more.innerHTML = `<div class="form-grid"><label>Ou un nouveau classeur d’après un modèle<select name="wb_tpl"><option value="">— aucun —</option>${(ext.sheetTemplates || []).map(t => `<option value="${esc(t.key)}">${esc(t.icon)} ${esc(t.name)}</option>`).join('')}</select></label></div>`;
                     else more.innerHTML = ''; };
                 let timer = 0;
                 const pk = dl.querySelector('[data-app-pk]');
+                pk.addEventListener('picker-create', e => { // 🧮 « ＋ Créer le classeur « … » » : un classeur vide, rangé dans le Tableur
+                    if (e.detail?.kind !== 'workbook') return; e.preventDefault();
+                    post('save_workbook', {name: e.detail.text || 'Mon classeur', kind: 'book', data: window.LCNDA_SHEET.compact(window.LCNDA_SHEET.newWorkbook())}).then(r => e.detail.pick({id: Number(r.result.id), title: e.detail.text || 'Mon classeur'})).catch(err => toast(err.message, 'error'));
+                });
                 pk.addEventListener('picker-change', e => { const it = e.detail.item; chosen = it?.id ? {key: String(it.id), label: it.title, extra: it.short || ''} : null; drawMore(); });
                 const search = async () => {
                     const pkKind = APP_PK[kindSel.value]; pk.hidden = !pkKind; dl.querySelector('[data-app-qbox]').hidden = !!pkKind;
                     res.hidden = !!pkKind;
                     if (pkKind) { res.innerHTML = ''; const val = chosen && APP_PK[d.kind] === pkKind ? {id: Number(chosen.key), title: chosen.label, short: chosen.extra || ''} : null;
                         // une image, un son, une vidéo : la fenêtre unique des médias ; le reste : le menu de choix unique
-                        if (!pk.querySelector('.pk, [data-media-field]')) pk.innerHTML = pkKind === 'media' && window.LCNDA_PICKER.mediaField ? window.LCNDA_PICKER.mediaField({name: '', types: ['image', 'audio', 'video', 'document'], value: val, title: 'Une image, un son, une vidéo'}) : window.LCNDA_PICKER.pickerField({name: 'app_pick', kind: pkKind, value: val}); return; }
+                        if (!pk.querySelector('.pk, [data-media-field]')) pk.innerHTML = pkKind === 'media' && window.LCNDA_PICKER.mediaField ? window.LCNDA_PICKER.mediaField({name: '', types: ['image', 'audio', 'video', 'document'], value: val, title: 'Une image, un son, une vidéo'}) : window.LCNDA_PICKER.pickerField({name: 'app_pick', kind: pkKind, value: val, ...(pkKind === 'workbook' ? {allowCreate: true} : {})}); return; }
                     pk.innerHTML = '';
                     const list = await appSearch(kindSel.value, q.value.trim()).catch(() => []);
                     res.innerHTML = list.map(x => `<label class="checkbox-line"><input type="radio" name="pick" value="${esc(x.key)}" data-label="${esc(x.label)}" data-extra="${esc(x.extra || '')}" ${chosen?.key === x.key ? 'checked' : ''}>${x.thumb ? `<img src="media/${encodeURIComponent(x.thumb)}" alt="" class="h-at-appthumb">` : ''} ${esc(x.label)} ${x.extra ? `<small class="muted">${esc(x.extra)}</small>` : ''}</label>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>';
@@ -627,8 +632,13 @@
                 search(); drawMore();
             },
             onSubmit: async form => {
-                if (!chosen) return window.LCNDA_UI.fail(form.querySelector('.pk'), 'Choisis dans la liste.');
+                const tplKey = form.wb_tpl?.value || '';
+                if (!chosen && !(form.kind.value === 'workbook' && tplKey)) return window.LCNDA_UI.fail(form.querySelector('.pk') || form.querySelector('[data-app-q]'), 'Choisis dans la liste.');
                 const f = Object.fromEntries(new FormData(form)), kind = f.kind;
+                if (kind === 'workbook' && tplKey) { // 🧮 un nouveau classeur d'après un modèle : rangé dans le Tableur, puis ajouté au projet
+                    const t = (ext.sheetTemplates || []).find(x => x.key === tplKey), name = (f.title || '').trim() || t.name;
+                    const r = await post('save_workbook', {name, kind: 'book', data: window.LCNDA_SHEET.compact(t.make())}); chosen = {key: String(r.result.id), label: name, extra: '🧮 classeur'};
+                }
                 const blockLabel = kind === 'person_block' ? (blocks.find(b => b[0] === f.sub) || [, f.sub])[1] : '';
                 const some = kind === 'recueil' && f.scope === 'some', pf = pages.find(p => p.id === Number(f.page_from)), pt = pages.find(p => p.id === Number(f.page_to));
                 const label = kind === 'person_block' ? `${blockLabel} — ${chosen.label}` : chosen.label;
@@ -651,6 +661,7 @@
         if (d.kind === 'investigation') { s.enquetesTab = 'enquetes'; s.currentBattueId = 0; s.currentInvestigationId = Number(d.key); return A().setModule('enquetes'); }
         if (d.kind === 'battue') { s.enquetesTab = 'battue'; s.currentInvestigationId = 0; s.currentBattueId = Number(d.key); return A().setModule('enquetes'); }
         if (d.kind === 'atelier_project') { Object.assign(st(), {project: Number(d.key), node: firstNode(), sel: [], tags: [], q: '', type: ''}); return ext.atelier(++S().workspaceToken); }
+        if (d.kind === 'workbook') return ext.openWorkbook?.({id: Number(d.key)});
         if (d.kind === 'media') { A().api('list', {type: 'media', q: d.label, limit: 40}).then(r => { const m = (r.rows || []).find(x => String(x.id) === String(d.key)); if (m) A().openLightbox([m], 0, false); else toast('Média introuvable.', 'error'); }); }
     }
     /** Aperçu vivant dans le panneau de droite. */
@@ -668,6 +679,8 @@
                 html = `<p><b>${esc(r.recueil.title)}</b> · ${plural(pg.length, 'page', 'pages')}</p><div class="h-rc-for-strip">${pg.slice(0, 12).map(p => { const im = imgs.get(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-open-recueil="${d.key}" data-recueil-page="${p.id}" title="Page ${p.num}">${im ? `<img src="media/${encodeURIComponent(im.thumbnail)}" alt="">` : ''}<small>${p.num}</small></button>`; }).join('')}</div>`; }
             else if (d.kind === 'media') { const r = await api('list', {type: 'media', q: d.label, limit: 40}); const m = (r.rows || []).find(x => String(x.id) === String(d.key));
                 html = m ? ((m.media_type || 'image') === 'image' ? `<img class="h-at-appimg" src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="">` : `<p>${esc(m.media_type)} · ${esc(m.filename)}</p>`) + (m.transcription ? `<p class="h-at-notetext">${esc(m.transcription.slice(0, 400))}</p>` : '') : '<p class="muted">Média introuvable (supprimé ?).</p>'; }
+            else if (d.kind === 'workbook') { const r = await api('workbook', {id: d.key}); const sh0 = r.data?.sheets?.[0], S = window.LCNDA_SHEET, wb = S ? S.normalize(r.data) : null, m = wb ? S.matrix(wb, new S.Calc(wb), 0, null, {display: true}).slice(0, 8).map(row => row.slice(0, 6)) : [];
+                html = `<p><b>🧮 ${esc(r.name)}</b> · ${plural((r.data?.sheets || []).length, 'feuille', 'feuilles')}${sh0 ? ` (${esc((r.data.sheets || []).map(x => x.name).slice(0, 5).join(', '))})` : ''}</p>${m.length ? `<div class="xl-prev"><table><tbody>${m.map((row, i) => `<tr>${row.map(v => `<${i ? 'td' : 'th'}>${esc(v)}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table></div>` : ''}`; }
             else html = `<p class="muted">${esc(d.extra || '')}</p>`;
         } catch (e) { html = `<p class="muted">Aperçu impossible : ${esc(e.message)}</p>`; }
         if (box.isConnected) box.innerHTML = html;
@@ -803,6 +816,7 @@
             <button type="button" class="button secondary" data-x="print">🖨 Imprimer ou enregistrer en PDF<small>Le plan et les textes, mis en page, avec la bibliographie à la fin</small></button>
             <button type="button" class="button secondary" data-x="csl">📚 Références (CSL JSON)<small>Pour Zotero, Zettlr, Pandoc : garde les auteurs, dates et pages au mieux</small></button>
             <button type="button" class="button secondary" data-x="csv">📊 Tableau de tous les éléments (.csv)<small>Pour un tableur</small></button>
+            ${ext.openWorkbook ? '<button type="button" class="button secondary" data-x="sheet">🧮 Tableau de tous les éléments, dans le tableur<small>Ouvert tout de suite dans le 🧮 Tableur de l’app (trier, filtrer, compter, enregistrer)</small></button>' : ''}
             <button type="button" class="button secondary" data-x="full">💾 Projet complet (.json)<small>Sauvegarde ou partage : dossiers, éléments, liens, étiquettes ; se réimporte tel quel avec « Importer… » (sans les fichiers joints)</small></button>
             <button type="button" class="button secondary" data-x="plan">🗂️ Enregistrer ce plan comme plan de départ<small>Les dossiers de ce projet seront proposés à la création d’un nouveau projet</small></button></div>`,
             onOpen: dl => dl.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => {
@@ -815,7 +829,9 @@
                 if (x === 'full') ext.downloadText(slug + '.lcnda-projet.json', JSON.stringify(fullProject(), null, 1), 'application/json');
                 if (x === 'docx') { const a = document.createElement('a'); a.href = URL.createObjectURL(toDocx()); a.download = slug + '.docx'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
                 if (x === 'print') { printProject(); return; }
-                if (x === 'csv') { const q = s => '"' + (A().csvSafe || (x => String(x ?? '')))(s).replace(/"/g, '""') + '"'; /* pas de formule glissée dans un tableur */ ext.downloadText(slug + '.csv', '﻿' + [['Sorte', 'Titre', 'Auteurs', 'Date', 'Dossiers', 'Étiquettes', 'Référence'].map(q).join(';'), ...live().map(i => [tl(i), i.title, i.type === 'reference' ? creatorsOf(i).map(c => [c.last, c.first].filter(Boolean).join(' ')).join(' ; ') : '', year(i) || i.data.date || '', i.folders.map(f => pathOf(f).map(y => y.name).join(' › ')).join(' ; '), (i.tags || []).join(', '), i.type === 'reference' ? cite(i, false) : ''].map(q).join(';'))].join('\n'), 'text/csv'); }
+                const allRows = () => [['Sorte', 'Titre', 'Auteurs', 'Date', 'Dossiers', 'Étiquettes', 'Référence'], ...live().map(i => [tl(i), i.title, i.type === 'reference' ? creatorsOf(i).map(c => [c.last, c.first].filter(Boolean).join(' ')).join(' ; ') : '', year(i) || i.data.date || '', i.folders.map(f => pathOf(f).map(y => y.name).join(' › ')).join(' ; '), (i.tags || []).join(', '), i.type === 'reference' ? cite(i, false) : ''])];
+                if (x === 'csv') { const q = s => '"' + (A().csvSafe || (x => String(x ?? '')))(s).replace(/"/g, '""') + '"'; /* pas de formule glissée dans un tableur */ ext.downloadText(slug + '.csv', '﻿' + allRows().map(r => r.map(q).join(';')).join('\n'), 'text/csv'); }
+                if (x === 'sheet') { dl.close(); const rows = allRows().map(r => r.map(v => (typeof v === 'string' && /^[='+]/.test(v) ? "'" + v : v))); /* une formule glissée reste du texte */ if (ext.openRowsInSheet) ext.openRowsInSheet({name: `${P.project.title} — éléments`, rows}); else { const S = window.LCNDA_SHEET, wb = S.newWorkbook(); wb.sheets[0].cells = S.rowsToCells(rows); wb.sheets[0].name = 'Éléments'; ext.openWorkbook({data: wb, name: `${P.project.title} — éléments`}); } return; }
                 toast('Fichier prêt.');
             })),
         });

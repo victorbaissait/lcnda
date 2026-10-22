@@ -146,8 +146,11 @@ const ok = (msg) => console.log('  ✓ ' + msg);
         ok('liens de parenté : sang, alliances, cousins (« le mari de ta petite-fille Émilie »)');
 
         /* 3. entrée : la 1re fois, « Préparer » (les réglages) */
-        await page.click('#mode-simple-open');
+        assert.equal(await page.evaluate(() => document.getElementById('mode-simple-open').hidden), true, 'le bouton 🧓 en haut est caché au départ');
+        await page.evaluate(() => document.getElementById('mode-simple-open').click()); // il marche aussi caché (et montré par « Montrer le bouton » en haut de l’onglet)
         await page.waitForSelector('.a11y-page [data-ms-box] .ms-set');
+        assert.ok(await page.$('.a11y-page [data-ms-box] .ms-intro .ms-topbtn [data-ms-bool="forAll"]'), 'le réglage du bouton 🧓 est tout en haut de l’onglet');
+        ok('bouton 🧓 caché au départ ; son réglage tout en haut de l’onglet');
         assert.equal(await MS(() => !!window.LCNDA_EXT.modeSimple.isOpen()), false);
         ok('1re fois : le bouton 🧓 ouvre « Préparer » (Maintenance → Accessibilité → 🧓 Mode simple)');
         posts.length = 0;
@@ -287,6 +290,46 @@ const ok = (msg) => console.log('  ✓ ' + msg);
         assert.equal(await MS(() => window.LCNDA_EXT.modeSimple.isOpen()), false);
         assert.deepEqual(posts.filter(p => !/save_settings/.test(p)), [], 'aucune écriture pendant le mode');
         ok('sortie avec le code : mauvais code refusé (message), bon code → l’app normale');
+        /* les gros boutons réglables : ordre, nom, icône, couleur, par ligne, cadres ajoutés (une personne, un mot) */
+        const cl = await MS(() => { const M = window.LCNDA_EXT.modeSimple; return M.clean({tiles: [['c9', true], ['tree', false], ['zz', true], ['c8', true]], tx: {c9: {kind: 'note', text: '<b>Coucou</b>', color: '#ffeedd'}, c8: {kind: 'pirate'}, tree: {label: 'x'.repeat(80), icon: '💣'}}, perRow: 7, tileH: 5000}); });
+        assert.deepEqual(cl.tiles.map(t => t[0]), ['c9', 'tree', 'photo', 'people', 'day'], 'sorte inconnue et clé inconnue écartées, les 4 de base toujours là');
+        assert.equal(cl.tx.c9.text, 'bCoucou/b'); assert.equal(cl.tx.tree.label.length, 40); assert.equal(cl.tx.tree.icon, undefined); assert.equal(cl.perRow, 0); assert.equal(cl.tileH, 360);
+        await page.evaluate(async () => { sessionStorage.setItem('lcnda-a11y-tab', 'simple'); localStorage.setItem('lcnda-mode-simple-open', JSON.stringify({show: 1})); const A = window.LCNDA_APP; A.state.maintenanceTab = 'accessibilite'; await A.setModule('maintenance'); });
+        await page.waitForSelector('[data-ms-box] [data-ms-tadd="note"]');
+        await page.click('[data-ms-tadd="note"]'); await page.waitForSelector('[data-ms-ttext]');
+        await page.fill('[data-ms-ttext]', 'Bon anniversaire Mamie !'); await page.press('[data-ms-ttext]', 'Tab'); await page.waitForTimeout(400);
+        await page.fill('[data-ms-tlabel]', 'Un mot pour toi'); await page.press('[data-ms-tlabel]', 'Tab'); await page.waitForTimeout(400);
+        await page.click('[data-ms-ticon][data-v="❤️"]'); await page.waitForTimeout(300);
+        await page.click('[data-ms-tadd="person"]'); await page.waitForTimeout(400);
+        await page.evaluate(id => { const M = window.LCNDA_EXT.modeSimple, s = M.settings(), k = s.tiles.find(t => s.tx[t[0]]?.kind === 'person')[0]; s.tx[k].pid = id; s.tx[k].color = '#f1e4ff'; M.write(s); }, ID.p2);
+        await page.click('[data-ms-set="perRow"][data-v="3"]'); await page.waitForTimeout(300);
+        const st = await MS(() => window.LCNDA_EXT.modeSimple.settings());
+        const noteK = st.tiles.find(t => st.tx[t[0]]?.kind === 'note')[0], persK = st.tiles.find(t => st.tx[t[0]]?.kind === 'person')[0];
+        assert.deepEqual([st.tx[noteK].label, st.tx[noteK].icon, st.tx[noteK].text, st.perRow], ['Un mot pour toi', '❤️', 'Bon anniversaire Mamie !', 3]);
+        // ranger : le mot en premier (↑ autant de fois qu'il faut)
+        for (let i = 0; i < 8; i++) { const up = await page.$(`[data-ms-tile-up="${noteK}"]:not([disabled])`); if (!up) break; await up.evaluate(b => b.click()); await page.waitForTimeout(150); }
+        assert.equal((await MS(() => window.LCNDA_EXT.modeSimple.settings())).tiles[0][0], noteK, 'le mot est rangé en premier');
+        // aperçu vivant, puis 💾 réglages : la disposition et les cadres y entrent (sans la personne qui regarde ni le code)
+        assert.equal(await page.evaluate(() => document.querySelector('[data-ms-pv-host] .ms').dataset.cols), '3');
+        const port = await MS(() => window.LCNDA_EXT.modeSimple.portable(window.LCNDA_EXT.modeSimple.settings()));
+        assert.ok(port.tx && port.perRow === 3 && !('codeHash' in port), 'les cadres vont dans les réglages enregistrés');
+        await page.click('[data-ms-ready="column"]'); await page.waitForTimeout(300);
+        assert.equal((await MS(() => window.LCNDA_EXT.modeSimple.settings())).perRow, 1, 'Ensemble prêt « Une grande colonne »');
+        await page.click('[data-ms-set="perRow"][data-v="3"]'); await page.waitForTimeout(300);
+        // dans le mode : l'ordre, la couleur, 3 par ligne, la fiche de la personne, le mot lu
+        posts.length = 0;
+        await page.click('[data-ms-open="now"]'); await page.waitForSelector('#ms-root .ms-home');
+        const home = await page.evaluate(() => ({tiles: [...document.querySelectorAll('#ms-root .ms-tile')].map(t => t.dataset.to), cols: getComputedStyle(document.querySelector('#ms-root .ms-tiles')).gridTemplateColumns.split(' ').length, bg: [...document.querySelectorAll('#ms-root .ms-tile')].map(t => t.style.background)}));
+        assert.equal(home.tiles[0], noteK); assert.ok(home.tiles.includes(persK)); assert.equal(home.cols, 3, '3 cadres par ligne');
+        assert.ok(home.bg.some(b => /241, 228, 255|f1e4ff/i.test(b)), 'la couleur du cadre ajouté');
+        await page.click(`#ms-root [data-to="${noteK}"]`); await page.waitForSelector('#ms-root .ms-note-t');
+        assert.match(await page.textContent('#ms-root .ms-note-t'), /Bon anniversaire Mamie/); assert.match(await page.textContent('#ms-root .ms-title'), /Un mot pour toi/);
+        await page.click('#ms-root [data-act=home]'); await page.waitForSelector('#ms-root .ms-home');
+        await page.click(`#ms-root [data-to="${persK}"]`); await page.waitForFunction(() => /Sa fiche/.test(document.querySelector('#ms-root .ms-title')?.textContent || ''));
+        assert.equal(await MS(() => window.LCNDA_EXT.modeSimple.isOpen()), true);
+        assert.deepEqual(posts.filter(p => !/save_settings/.test(p)), [], 'aucune écriture pendant le mode');
+        await page.evaluate(() => window.LCNDA_EXT.modeSimple.close());
+        ok('gros boutons : ordre, nom, icône, couleur, 3 par ligne, « Une personne », « Un mot », ensemble prêt et réglages enregistrés');
         /* widget et « Ouvrir l'app en mode simple sur cet appareil » */
         await page.evaluate(() => localStorage.setItem('lcnda-mode-simple-device', JSON.stringify({start: true})));
         await page.goto(base); await page.waitForSelector('#ms-root .ms-home', { timeout: 15000 });

@@ -41,6 +41,11 @@
 
     /* ═════════════════════════ Réglages ═════════════════════════ */
     const TILE_KEYS = ['tree', 'photo', 'people', 'day'];
+    /** les cadres qu'on ajoute (« ＋ Ajouter un cadre ») : [icône, nom, petite phrase, couleur de départ (celle d'un cadre de base)] */
+    const CUSTOM_KINDS = {person: ['⭐', 'Une personne', 'Sa fiche, en phrases', 'people'], album: ['📸', 'Un album', 'Ses photos, en diaporama', 'photo'], note: ['💌', 'Un mot de la famille', 'À lire et à écouter', 'day']};
+    const TILE_ICONS = ['🌳', '📷', '👥', '🎂', '⭐', '📸', '💌', '❤️', '🏠', '👵', '👴', '👶', '🐶', '🌻', '🎵', '📖', '✉️', '🎉', '⛪', '🌍', '⚓', '🚜', '🍰', '☀️'];
+    const isCustom = k => typeof k === 'string' && /^c\d{1,9}$/.test(k);
+    const MAX_CUSTOM = 12;
     const DEF = () => ({
         v: 1, ready: false,
         viewer: 0, notInTree: false, askViewer: false,
@@ -49,10 +54,12 @@
         fs: 24, btnH: 72, caseS: 80, gap: 22, font: '', lnCaps: true,
         voice: true, voiceName: '', rate: 90, autoRead: false, autoCaptions: false,
         tiles: TILE_KEYS.map(k => [k, true]),
+        tx: {}, // les cadres : nom, petite phrase, icône (et, pour un cadre ajouté : sa sorte, sa couleur, la personne ou le texte)
+        perRow: 0, tileH: 0, tileGap: 0, tileTitle: 0, tileFont: '', // la disposition des cadres (0 / '' = comme avant)
         living: 'show', branchesOff: [], hiddenPhotos: [], docs: false,
         slideSec: 8, slideAuto: false, idleFrame: false, idleMin: 5,
         holdSec: 3, useCode: false, codeHash: '',
-        forAll: true, baseAll: true,
+        forAll: false, baseAll: true, // le bouton 🧓 en haut : caché au départ (choix de l’utilisateur), il se montre dans l’onglet
         link: {cb: true, contrast: true, size: true, motion: true, voice: true},
     });
     const HEX = v => (typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v) ? v.toLowerCase() : null);
@@ -70,11 +77,31 @@
         o.font = typeof r.font === 'string' ? r.font.replace(/["'<>\\;{}\u0000-\u001f\u007f]/g, '').trim().slice(0, 60) : '';
         o.voiceName = typeof r.voiceName === 'string' ? r.voiceName.slice(0, 200) : '';
         o.rate = Math.round(num(r.rate, 60, 130, 90));
-        const seen = new Set(), tiles = [];
-        (Array.isArray(r.tiles) ? r.tiles : []).forEach(t => { if (Array.isArray(t) && TILE_KEYS.includes(t[0]) && !seen.has(t[0])) { seen.add(t[0]); tiles.push([t[0], t[1] !== false]); } });
+        const txt = (v, n) => (typeof v === 'string' ? v.replace(/[<>\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n) : '');
+        const rtx = r.tx && typeof r.tx === 'object' && !Array.isArray(r.tx) ? r.tx : {}, tx = {};
+        const seen = new Set(), tiles = []; let nc = 0;
+        (Array.isArray(r.tiles) ? r.tiles : []).forEach(t => {
+            if (!Array.isArray(t) || seen.has(t[0])) return;
+            const k = t[0], x = rtx[k] && typeof rtx[k] === 'object' && !Array.isArray(rtx[k]) ? rtx[k] : {};
+            if (isCustom(k)) { if (!CUSTOM_KINDS[x.kind] || nc >= MAX_CUSTOM) return; nc++; } else if (!TILE_KEYS.includes(k)) return;
+            seen.add(k); tiles.push([k, t[1] !== false]);
+            const y = {}, lb = txt(x.label, 40), sb = txt(x.sub, 90);
+            if (lb) y.label = lb; if (sb) y.sub = sb; if (TILE_ICONS.includes(x.icon)) y.icon = x.icon;
+            if (isCustom(k)) {
+                y.kind = x.kind; const c = HEX(x.color); if (c) y.color = c;
+                if (x.kind === 'note') { const tt = typeof x.text === 'string' ? x.text.replace(/[<>\u0000-\u0009\u000b-\u001f\u007f]/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 800) : ''; if (tt) y.text = tt; }
+                else { const pid = Math.round(num(x.pid, 0, 1e9, 0)); if (pid) y.pid = pid; }
+            }
+            if (Object.keys(y).length) tx[k] = y;
+        });
         TILE_KEYS.forEach(k => { if (!seen.has(k)) tiles.push([k, true]); });
         if (!tiles.some(t => t[1])) tiles[0][1] = true; // au moins un gros bouton
-        o.tiles = tiles;
+        o.tiles = tiles; o.tx = tx;
+        o.perRow = [0, 1, 2, 3, 4].includes(Number(r.perRow)) ? Number(r.perRow) : 0;
+        o.tileH = Number(r.tileH) ? Math.round(num(r.tileH, 100, 360, 150)) : 0;
+        o.tileGap = Number(r.tileGap) ? Math.round(num(r.tileGap, 8, 60, 22)) : 0;
+        o.tileTitle = Number(r.tileTitle) ? Math.round(num(r.tileTitle, 26, 64, 35)) : 0;
+        o.tileFont = typeof r.tileFont === 'string' ? r.tileFont.replace(/["'<>\\;{}\u0000-\u001f\u007f]/g, '').trim().slice(0, 60) : '';
         o.living = ['show', 'first', 'hide'].includes(r.living) ? r.living : 'show';
         o.branchesOff = (Array.isArray(r.branchesOff) ? r.branchesOff : []).filter(x => typeof x === 'string' && x.length < 80).slice(0, 200);
         o.hiddenPhotos = (Array.isArray(r.hiddenPhotos) ? r.hiddenPhotos : []).map(Number).filter(x => Number.isInteger(x) && x > 0).slice(0, 5000);
@@ -131,7 +158,18 @@
         return {contrast, cb, calm, fs, mult, rate, voiceName, pal, btnH: Math.max(64, Math.round(st.btnH * Math.min(1.25, Math.max(1, mult)))), caseS: st.caseS, gap: st.gap};
     }
     const CHECKS = [['ink', 'bg', 'Le texte sur le fond'], ['onBtn', 'btn', 'Le texte des boutons principaux'], ['ink', 'tree', 'Le texte sur « L’arbre »'], ['ink', 'photo', 'Le texte sur « Les photos »'], ['ink', 'people', 'Le texte sur « Les personnes »'], ['ink', 'day', 'Le texte sur « Ce jour-là »']];
-    const contrastRows = pal => CHECKS.map(([a, b, label]) => ({a, b, label, r: ratio(pal[a], pal[b])}));
+    /** + les cadres ajoutés qui ont leur propre couleur (le texte des cadres est celui de la page) */
+    const contrastRows = (pal, st = null) => [...CHECKS.map(([a, b, label]) => ({a, b, label, r: ratio(pal[a], pal[b])})),
+        ...(st && !eff(st).contrast ? st.tiles.filter(t => isCustom(t[0]) && st.tx[t[0]]?.color).map(([k]) => ({a: 'ink', b: k, bg: st.tx[k].color, label: `Le texte sur « ${tileName(st, k)} »`, r: ratio(pal.ink, st.tx[k].color)})) : [])];
+    /** le nom d'un cadre (réglages, aperçu) : le sien, sinon celui de départ */
+    function tileName(st, k) {
+        const x = st.tx?.[k] || {}; if (x.label) return x.label;
+        if (!isCustom(k)) return TILE[k][1];
+        const p = x.pid && D ? D.P.get(Number(x.pid)) : null;
+        if (x.kind === 'person' && p) return `${p.first || ''} ${titleCase(p.last || '')}`.trim();
+        if (x.kind === 'album' && p) return `Les photos de ${p.first || titleCase(p.last || '')}`;
+        return CUSTOM_KINDS[x.kind]?.[1] || 'Un cadre';
+    }
     const FONTS = {
         '': {label: 'Inter (celle du prototype)', stack: "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif"},
         'Atkinson Hyperlegible': {label: 'Atkinson Hyperlegible', stack: "'Atkinson Hyperlegible', Verdana, Tahoma, sans-serif"},
@@ -288,13 +326,13 @@
 
     /* ═════════════════════════ Le mode : un « moteur » dessiné dans un cadre ═════════════════════════
      * Le même moteur sert au plein écran, à « 👁 Essayer ici » (dans la page des réglages) et à l'aperçu vivant (non cliquable). */
-    const TITLES = {who: ['👋', 'Qui regarde ?'], tree: ['🌳', 'L’arbre'], photos: ['📷', 'Les photos'], slides: ['📷', 'Les photos'], person: ['👤', 'Sa fiche'], people: ['👥', 'Les personnes'], day: ['🎂', 'Ce jour-là'], code: ['🔒', 'Quitter'], loading: ['', 'Un instant…'], error: ['', 'Mode simple']};
+    const TITLES = {who: ['👋', 'Qui regarde ?'], tree: ['🌳', 'L’arbre'], photos: ['📷', 'Les photos'], slides: ['📷', 'Les photos'], person: ['👤', 'Sa fiche'], note: ['💌', 'Un mot'], people: ['👥', 'Les personnes'], day: ['🎂', 'Ce jour-là'], code: ['🔒', 'Quitter'], loading: ['', 'Un instant…'], error: ['', 'Mode simple']};
     const TILE = {tree: ['🌳', 'L’arbre', 'Toute la famille, de case en case'], photo: ['📷', 'Les photos', ''], people: ['👥', 'Les personnes', 'Chercher quelqu’un par son nom'], day: ['🎂', 'Ce jour-là', '']};
 
     function makeMode(host, opts = {}) {
         const live = !opts.preview, full = !!opts.full;
         let S = opts.settings ? clean(opts.settings) : read();
-        const V = {screen: 'home', stack: [], center: 0, zoom: 3, slide: 0, slideList: null, slideTags: false, slideTimer: 0, peopleTab: 'family', letter: null, query: '', choosing: false, code: '', photoFilter: 'all', person: 0, viewer: null, auto: false};
+        const V = {screen: 'home', note: '', stack: [], center: 0, zoom: 3, slide: 0, slideList: null, slideTags: false, slideTimer: 0, peopleTab: 'family', letter: null, query: '', choosing: false, code: '', photoFilter: 'all', person: 0, viewer: null, auto: false};
         host.innerHTML = `<div class="ms" role="region" aria-label="Mode simple"><header class="ms-bar"></header><main class="ms-main"></main><div class="ms-msg" role="status" aria-live="polite" hidden></div></div>`;
         const GP = host.firstElementChild, BAR = $('.ms-bar', GP), MAIN = $('.ms-main', GP), MSG = $('.ms-msg', GP);
         if (!live) GP.setAttribute('inert', '');
@@ -349,6 +387,10 @@
             [['--bg', pal.bg], ['--ink', pal.ink], ['--card', pal.card], ['--muted', pal.muted], ['--blue', pal.btn], ['--on-blue', pal.onBtn], ['--t-tree', pal.tree], ['--t-photo', pal.photo], ['--t-people', pal.people], ['--t-day', pal.day]].forEach(([k, v]) => st.setProperty(k, v));
             st.setProperty('--fs', E.fs + 'px'); st.setProperty('--btn-h', E.btnH + 'px'); st.setProperty('--case', E.caseS + 'px'); st.setProperty('--gap', E.gap + 'px');
             st.setProperty('--font', fontStack(S.font));
+            // la disposition des cadres de l'accueil (rien de posé = comme avant)
+            if (S.perRow) { GP.dataset.cols = String(S.perRow); st.setProperty('--tile-cols', String(S.perRow)); } else { delete GP.dataset.cols; st.removeProperty('--tile-cols'); }
+            [['--tile-h', S.tileH], ['--tile-gap', S.tileGap], ['--tile-title', S.tileTitle]].forEach(([k, v]) => (v ? st.setProperty(k, v + 'px') : st.removeProperty(k)));
+            if (S.tileFont) st.setProperty('--tile-font', fontStack(S.tileFont)); else st.removeProperty('--tile-font');
             GP.dataset.cb = E.cb;
             const own = !S.link.cb && E.cb !== 'none';
             st.filter = own ? `url(#ms-cb-${E.cb})` : '';
@@ -356,7 +398,7 @@
             if (full) document.documentElement.classList.toggle('ms-own-cb', !S.link.cb);
         }
         /* ── navigation ── */
-        const snapshot = () => ({screen: V.screen, center: V.center, slide: V.slide, slideList: V.slideList, person: V.person, peopleTab: V.peopleTab, letter: V.letter, choosing: V.choosing, slideTags: V.slideTags});
+        const snapshot = () => ({screen: V.screen, note: V.note, center: V.center, slide: V.slide, slideList: V.slideList, person: V.person, peopleTab: V.peopleTab, letter: V.letter, choosing: V.choosing, slideTags: V.slideTags});
         function go(screen, o = {}) { stopSlide(); stopSpeak(); if ((o.push !== false && V.screen !== screen) || o.forcePush) V.stack.push(snapshot()); Object.assign(V, o.state || {}); V.screen = screen; render(true); }
         function back() { stopSlide(); stopSpeak(); const s = V.stack.pop(); if (!s) { goHome(); return; } Object.assign(V, s); render(true); }
         function goHome() { stopSlide(); stopSpeak(); V.stack = []; V.screen = 'home'; V.choosing = false; render(true); }
@@ -367,13 +409,13 @@
                 BAR.innerHTML = `<span class="ms-date">📅 ${esc(d.charAt(0).toUpperCase() + d.slice(1))}</span><span></span>${speakBtn(homeSpeech(), 'Écouter') || '<span></span>'}`; return;
             }
             if (V.screen === 'loading' || V.screen === 'error') { BAR.innerHTML = `<span></span><h1 class="ms-title" tabindex="-1">${esc(TITLES[V.screen][1])}</h1><span></span>`; return; }
-            const [ic, t] = TITLES[V.screen] || ['', ''];
+            const [ic, t] = V.screen === 'note' && V.note ? (() => { const x = tileOf(V.note); return [x.icon, x.label]; })() : (TITLES[V.screen] || ['', '']);
             const noHome = V.screen === 'who' && !V.stack.length;
             BAR.innerHTML = `<button type="button" class="ms-btn" data-act="back" aria-label="Retour à l’écran d’avant"><span class="ms-ico" aria-hidden="true">←</span><span class="ms-lbl">Retour</span></button><h1 class="ms-title" tabindex="-1">${ic ? `<span aria-hidden="true">${ic}</span> ` : ''}${esc(t)}</h1>${noHome ? '<span></span>' : '<button type="button" class="ms-btn" data-act="home" aria-label="Accueil"><span class="ms-ico" aria-hidden="true">🏠</span><span class="ms-lbl">Accueil</span></button>'}`;
         }
         function render(focus) {
             applyLook(); bar(); MAIN.className = 'ms-main'; MAIN.scrollTop = 0;
-            const r = {home: rHome, who: rWho, tree: rTree, photos: rPhotos, slides: rSlides, person: rPerson, people: rPeople, day: rDay, code: rCode, loading: rLoading, error: rError}[V.screen] || rHome;
+            const r = {home: rHome, note: rNote, who: rWho, tree: rTree, photos: rPhotos, slides: rSlides, person: rPerson, people: rPeople, day: rDay, code: rCode, loading: rLoading, error: rError}[V.screen] || rHome;
             r();
             MAIN.firstElementChild?.classList.add('ms-fade');
             if (focus && live) { const t = $('h1', MAIN) || $('.ms-title', BAR); if (t && V.screen !== 'code' && V.screen !== 'people') { t.setAttribute('tabindex', '-1'); try { t.focus({preventScroll: true}); } catch (_) {} } }
@@ -381,15 +423,34 @@
         }
         function rLoading() { MAIN.innerHTML = `<div class="ms-center"><span class="ms-spin" aria-hidden="true"></span><p class="ms-lead">Un instant, on prépare l’arbre…</p></div>`; }
         function rError() { MAIN.innerHTML = `<div class="ms-center"><p class="ms-lead">L’arbre n’a pas pu être lu. Demande à la personne qui a préparé l’app.</p><button type="button" class="ms-btn primary" data-act="retry"><span class="ms-ico" aria-hidden="true">↻</span><span>Réessayer</span></button></div>`; }
+        /* ── 💌 Un mot de la famille (un cadre ajouté) : le texte en grand, lu à voix haute ── */
+        function rNote() {
+            const t = V.note ? tileOf(V.note) : null; if (!t || !t.text) { goHome(); return; }
+            MAIN.innerHTML = `<div class="ms-note"><h1 class="ms-h2" tabindex="-1"><span aria-hidden="true">${esc(t.icon)}</span> ${esc(t.label)}</h1>
+                <div class="ms-note-t">${esc(t.text).replace(/\n/g, '<br>')}</div><div class="ms-row">${speakBtn(t.text, 'Écouter')}</div></div>`;
+        }
 
         /* ── Accueil ── */
         const viewerFirst = () => { const v = viewerId(); return v && P(v) ? P(v).first : ''; };
-        const homeSpeech = () => { const n = viewerFirst(), t = S.tiles.filter(x => x[1]).map(x => TILE[x[0]][1].replace(/^(L’|Les |Ce )/, m => m.toLowerCase())); return `Bonjour${n ? ' ' + n : ''}. Touche un gros bouton : ${joinFr(t)}.`; };
+        /** un cadre de l'accueil : ses textes (les siens ou ceux de départ), son icône, sa couleur ; null s'il n'a rien à montrer */
+        function tileOf(k) {
+            const x = S.tx[k] || {};
+            if (!isCustom(k)) return {k, kind: k, base: k, icon: x.icon || TILE[k][0], label: x.label || TILE[k][1], sub: x.sub || '', color: null};
+            const K = CUSTOM_KINDS[x.kind]; if (!K) return null;
+            const p = x.pid && D ? P(x.pid) : null, okP = p && vis(p.id);
+            const ph2 = okP ? visPhotos().filter(m => !m.doc && m.people.includes(p.id)) : [];
+            const label = x.label || (x.kind === 'person' && okP ? nameT(p) : x.kind === 'album' && okP ? `Les photos de ${p.first || nameT(p)}` : K[1]);
+            const sub = x.sub || (x.kind === 'person' && okP ? (rel(p.id) ? (rel(p.id) === 'toi' ? 'C’est toi' : rel(p.id).charAt(0).toUpperCase() + rel(p.id).slice(1)) : years(p) || K[2]) : x.kind === 'album' ? plural(ph2.length, 'photo') : x.kind === 'note' && x.text ? x.text.slice(0, 70) + (x.text.length > 70 ? '…' : '') : K[2]);
+            const ready = x.kind === 'note' ? !!x.text : x.kind === 'album' ? okP && ph2.length > 0 : !!okP;
+            return {k, kind: x.kind, base: K[3], icon: x.icon || K[0], label, sub, color: E.contrast ? null : (x.color || null), pid: okP ? p.id : 0, text: x.text || '', photos: ph2, ready};
+        }
+        const homeTiles = () => S.tiles.filter(t => t[1]).map(t => tileOf(t[0])).filter(t => t && (!isCustom(t.k) || t.ready));
+        const homeSpeech = () => { const n = viewerFirst(), t = homeTiles().map(x => x.label.replace(/^(L’|Les |Ce |Un |Une )/, m => m.toLowerCase())); return `Bonjour${n ? ' ' + n : ''}. Touche un gros bouton : ${joinFr(t)}.`; };
         function rHome() {
-            const n = viewerFirst(), cnt = dayData().today.length, tiles = S.tiles.filter(t => t[1]).map(t => t[0]);
-            const sub = k => (k === 'photo' ? `${plural(visPhotos().length, 'photo')} de famille` : k === 'day' ? (cnt ? 'Il se passe quelque chose aujourd’hui !' : 'Anniversaires et souvenirs') : TILE[k][2]);
+            const n = viewerFirst(), cnt = dayData().today.length, tiles = homeTiles();
+            const sub = t => (isCustom(t.k) || t.sub ? t.sub : t.k === 'photo' ? `${plural(visPhotos().length, 'photo')} de famille` : t.k === 'day' ? (cnt ? 'Il se passe quelque chose aujourd’hui !' : 'Anniversaires et souvenirs') : TILE[t.k][2]);
             MAIN.innerHTML = `<div class="ms-home"><div class="ms-hello"><div><h1 tabindex="-1">Bonjour${n ? ' ' + esc(n) : ''} !</h1><p>Touche un gros bouton pour commencer.</p></div></div>
-                <div class="ms-tiles" data-n="${tiles.length}">${tiles.map(k => `<button type="button" class="ms-tile k-${k}" data-act="tile" data-to="${k}"><span class="ms-big" aria-hidden="true">${TILE[k][0]}</span><span><b>${TILE[k][1]}</b><small>${esc(sub(k))}</small>${k === 'day' && cnt ? `<span class="ms-badge">${plural(cnt, 'souvenir')} aujourd’hui</span>` : ''}</span></button>`).join('')}</div>
+                <div class="ms-tiles" data-n="${tiles.length}">${tiles.map(t => `<button type="button" class="ms-tile k-${t.base}${isCustom(t.k) ? ' is-added' : ''}" data-act="tile" data-to="${t.k}"${t.color ? ` style="background:${t.color}"` : ''}><span class="ms-big" aria-hidden="true">${esc(t.icon)}</span><span><b>${esc(t.label)}</b><small>${esc(sub(t))}</small>${t.k === 'day' && cnt ? `<span class="ms-badge">${plural(cnt, 'souvenir')} aujourd’hui</span>` : ''}</span></button>`).join('')}</div>
                 <div class="ms-foot"><button type="button" class="ms-btn" data-act="who"><span class="ms-ico" aria-hidden="true">👋</span><span>${n ? 'Ce n’est pas ' + esc(n) + ' ?' : 'Qui regarde ?'}</span></button>
                 <button type="button" class="ms-btn ms-hold" data-act="hold" aria-label="Quitter le mode simple : garde le doigt appuyé ${String(S.holdSec).replace('.', ',')} secondes, ou garde la touche Entrée enfoncée"><span class="ms-fill" aria-hidden="true"></span><span class="ms-ico" aria-hidden="true">🔒</span><span class="ms-hold-t">Quitter le mode simple<br><span class="ms-hint">garde le doigt appuyé ${String(S.holdSec).replace('.', ',')} s</span></span></button></div></div>`;
             if (live) bindHold();
@@ -675,7 +736,13 @@
             case 'back': back(); break;
             case 'home': goHome(); break;
             case 'retry': start(); break;
-            case 'tile': { const to = b.dataset.to === 'photo' ? 'photos' : b.dataset.to; if (to === 'tree') V.center = 0; if (to === 'photos') V.slideList = null; if (to === 'people') { V.choosing = false; V.letter = null; } go(to); break; }
+            case 'tile': {
+                if (isCustom(b.dataset.to)) { const t = tileOf(b.dataset.to); if (!t?.ready) break;
+                    if (t.kind === 'person') { V.person = t.pid; go('person', {forcePush: true}); }
+                    else if (t.kind === 'album') { V.slideList = t.photos.map(m => m.id); V.slide = 0; V.auto = S.slideAuto; go('slides'); }
+                    else { V.note = t.k; go('note'); }
+                    break; }
+                const to = b.dataset.to === 'photo' ? 'photos' : b.dataset.to; if (to === 'tree') V.center = 0; if (to === 'photos') V.slideList = null; if (to === 'people') { V.choosing = false; V.letter = null; } go(to); break; }
             case 'who': go('who'); break;
             case 'setviewer': V.viewer = id && P(id) ? id : 0; if (full) setDev({viewer: V.viewer || undefined}); nearCache = null; V.choosing = false; V.stack = []; V.screen = 'home'; V.center = 0; render(true); msg(V.viewer ? `Bonjour ${P(V.viewer).first} ! L’app dira « ta mère », « ton petit-fils »…` : 'D’accord. L’app ne dira pas les liens de famille.'); break;
             case 'chooseother': V.choosing = true; go('people', {state: {peopleTab: 'family', letter: null}}); break;
@@ -847,9 +914,11 @@
         {k: 'sepia', name: 'Sépia doux', hint: 'Fond crème, police de livre, doux pour les yeux', set: {theme: 'sepia', font: 'Georgia', fs: 26, contrast: false}},
         {k: 'night', name: 'Nuit', hint: 'Fond sombre et texte clair, n’éblouit pas le soir', set: {theme: 'dark', contrast: false}},
         {k: 'contrast', name: 'Contraste fort', hint: 'Noir sur blanc pur, traits épais, 21:1', set: {contrast: true, theme: 'light', link: {contrast: false}}},
-        {k: 'proto', name: 'Comme le prototype', hint: 'Les réglages du prototype que tu as aimé', set: {theme: 'light', font: '', fs: 24, btnH: 72, caseS: 80, gap: 22, contrast: false, colors: {bg: null, ink: null, btn: null, tree: null, photo: null, people: null, day: null}}},
+        {k: 'proto', name: 'Comme le prototype', hint: 'Les réglages du prototype que tu as aimé', set: {theme: 'light', font: '', fs: 24, btnH: 72, caseS: 80, gap: 22, contrast: false, colors: {bg: null, ink: null, btn: null, tree: null, photo: null, people: null, day: null}, perRow: 0, tileH: 0, tileGap: 0, tileTitle: 0, tileFont: ''}},
+        {k: 'column', name: 'Une grande colonne', hint: 'Un cadre par ligne, large et facile à viser', set: {perRow: 1, tileH: 120, tileGap: 18}},
+        {k: 'three', name: 'Trois par ligne', hint: 'Plus de cadres d’un coup d’œil, sur un grand écran', set: {perRow: 3, tileH: 190, tileGap: 20}},
     ];
-    const LOOK_KEYS = ['theme', 'contrast', 'cb', 'calm', 'colors', 'fs', 'btnH', 'caseS', 'gap', 'font', 'lnCaps'];
+    const LOOK_KEYS = ['theme', 'contrast', 'cb', 'calm', 'colors', 'fs', 'btnH', 'caseS', 'gap', 'font', 'lnCaps', 'perRow', 'tileH', 'tileGap', 'tileTitle', 'tileFont'];
     const applyPreset = (s, set) => { const o = clone(s); Object.entries(set).forEach(([k, v]) => { o[k] = v && typeof v === 'object' && !Array.isArray(v) ? {...o[k], ...v} : v; }); return clean(o); };
     const presetOn = (s, set) => Object.entries(set).every(([k, v]) => (v && typeof v === 'object' ? Object.entries(v).every(([x, y]) => s[k][x] === y) : s[k] === v));
     const presets = () => { const l = lsGet(PKEY); return Array.isArray(l) ? l.filter(x => x && typeof x.name === 'string' && x.data && typeof x.data === 'object') : []; };
@@ -867,8 +936,34 @@
     /** C2 : la pastille montre la couleur qui s'applique ; « Aucune » (ou la couleur du thème) = revenir à celle du thème */
     function colorCtl(k, label, s, pal) { const v = s.colors[k]; return `<div class="ms-color"><span class="ms-clab">${label}</span><span data-ms-color-slot="${k}" data-v="${esc(v || pal[k])}"></span><small class="ms-cv">${v ? 'Ta couleur · ' + esc(v.toUpperCase()) : 'Celle du thème'}</small></div>`; }
 
+    let openTile = null; // le cadre ouvert pour être modifié (cet onglet)
+    /** l'éditeur des gros boutons : une ligne par cadre (⠿ / ↑ ↓ pour ranger, ✎ pour le modifier, case pour l'afficher) */
+    function tilesEditor(s, pal) {
+        const nCustom = s.tiles.filter(t => isCustom(t[0])).length;
+        const rows = s.tiles.map(([k, on], i) => {
+            const x = s.tx[k] || {}, cu = isCustom(k), K = cu ? CUSTOM_KINDS[x.kind] : null, icon = x.icon || (cu ? K[0] : TILE[k][0]), name = tileName(s, k), open = openTile === k;
+            const pickLbl = x.kind === 'album' ? 'Les photos de' : 'La personne';
+            const noPh = cu && x.kind === 'album' && x.pid && D && !D.media.some(m => !m.doc && m.people.includes(Number(x.pid)));
+            const warn = cu && (x.kind === 'note' ? !x.text : !x.pid) ? `<small class="ms-tr-warn">${x.kind === 'note' ? '⚠️ Écris le mot pour qu’il apparaisse' : '⚠️ Choisis la personne pour qu’il apparaisse'}</small>` : noPh ? '<small class="ms-tr-warn">⚠️ Pas encore de photo de cette personne : le cadre est caché</small>' : '';
+            const edit = open ? `<div class="ms-tile-edit">
+                <label class="ms-tf"><span>Nom</span><input type="text" maxlength="40" data-ms-tlabel="${k}" value="${esc(x.label || '')}" placeholder="${esc(cu ? (x.label ? K[1] : name) : TILE[k][1])}"></label>
+                <label class="ms-tf"><span>Petite phrase</span><input type="text" maxlength="90" data-ms-tsub="${k}" value="${esc(x.sub || '')}" placeholder="${esc(cu ? K[2] : TILE[k][2] || 'Écrite toute seule (nombre de photos, souvenirs du jour)')}"></label>
+                ${cu && x.kind !== 'note' ? `<div class="ms-tf"><span>${pickLbl}</span><div data-ms-tile-pick="${k}">${A().pickerField ? A().pickerField({name: '', hiddenName: false, kind: 'person', value: x.pid || null}) : ''}</div></div>` : ''}
+                ${cu && x.kind === 'note' ? `<label class="ms-tf"><span>Le mot</span><textarea rows="4" maxlength="800" data-ms-ttext="${k}" placeholder="Un petit mot de la famille, lu à voix haute avec 🔊">${esc(x.text || '')}</textarea></label>` : ''}
+                <div class="ms-tf"><span>Icône</span><div class="ms-icons" role="radiogroup" aria-label="Icône du cadre">${TILE_ICONS.map(ic => `<button type="button" class="ms-ic ${ic === icon ? 'is-active' : ''}" data-ms-ticon="${k}" data-v="${ic}" aria-pressed="${ic === icon}" aria-label="Icône ${ic}">${ic}</button>`).join('')}</div></div>
+                <div class="ms-tf"><span>Couleur</span>${cu ? `<span data-ms-tcolor-slot="${k}" data-v="${esc(x.color || pal[K[3]])}"></span><small class="ms-cv">${x.color ? 'Ta couleur · ' + esc(x.color.toUpperCase()) : 'Celle du thème'}</small>` : `<span data-ms-color-slot="${k}" data-v="${esc(s.colors[k] || pal[k])}"></span><small class="ms-cv">${s.colors[k] ? 'Ta couleur · ' + esc(s.colors[k].toUpperCase()) : 'Celle du thème'}</small>`}</div>
+                <p><button type="button" class="button small secondary" data-ms-treset="${k}">↺ Remettre ce cadre comme au départ</button></p></div>` : '';
+            return `<div class="ms-tile-row${open ? ' is-open' : ''}${on ? '' : ' is-off'}" data-k="${k}"><span class="ms-tr-ico" aria-hidden="true">${esc(icon)}</span><span class="ms-tr-t"><b>${esc(name)}</b>${cu ? `<small>${esc(K[1])}</small>` : ''}${warn}</span><span class="ms-sp"></span>
+                <button type="button" class="icon-button small" data-ms-tedit="${k}" aria-expanded="${open}" title="Modifier ce cadre" aria-label="Modifier « ${esc(name)} »">✎</button>
+                ${cu ? `<button type="button" class="icon-button small" data-ms-tdup="${k}" ${nCustom >= MAX_CUSTOM ? 'disabled' : ''} title="Dupliquer" aria-label="Dupliquer « ${esc(name)} »">⧉</button><button type="button" class="icon-button small" data-ms-tdel="${k}" title="Retirer ce cadre" aria-label="Retirer « ${esc(name)} »">×</button>` : ''}
+                <button type="button" class="icon-button small" data-ms-tile-up="${k}" ${i === 0 ? 'disabled' : ''} aria-label="Monter « ${esc(name)} »" title="Monter">↑</button><button type="button" class="icon-button small" data-ms-tile-down="${k}" ${i === s.tiles.length - 1 ? 'disabled' : ''} aria-label="Descendre « ${esc(name)} »" title="Descendre">↓</button>
+                <label class="ui-toggle ms-tg"><input type="checkbox" data-ms-tile="${k}" ${on ? 'checked' : ''} aria-label="Montrer « ${esc(name)} »"><i></i></label>${edit}</div>`;
+        }).join('');
+        const add = `<div class="ms-tadd"><span class="ms-sl">＋ Ajouter un cadre</span>${Object.entries(CUSTOM_KINDS).map(([kd, [ic, lb]]) => `<button type="button" class="button small secondary" data-ms-tadd="${kd}" ${nCustom >= MAX_CUSTOM ? 'disabled' : ''}><span aria-hidden="true">${ic}</span> ${lb}</button>`).join('')}${nCustom >= MAX_CUSTOM ? `<small class="ms-help">${MAX_CUSTOM} cadres ajoutés au plus.</small>` : ''}</div>`;
+        return `<div class="ms-tiles-set" data-ms-tiles>${rows}</div>${add}`;
+    }
     function settingsHtml(s) {
-        const ap = appA11y(), e = eff(s), pal = e.pal, rows = contrastRows(pal), bad = rows.filter(r => r.r < 7);
+        const ap = appA11y(), e = eff(s), pal = e.pal, rows = contrastRows(pal, s), bad = rows.filter(r => r.r < 7);
         const apCb = {none: 'Normal', protan: 'Protanopie', deutan: 'Deutéranopie', tritan: 'Tritanopie', achroma: 'Achromatopsie', protanomaly: 'Protanomalie', deuteranomaly: 'Deutéranomalie', tritanomaly: 'Tritanomalie'};
         const linkRow = (k, ico, label, appTxt, own) => `<div class="ms-link"><div class="ms-link-l"><b><span aria-hidden="true">${ico}</span> ${label}</b><span class="ui-badge is-gray">App : ${esc(appTxt)}</span></div><div class="ms-link-r">${tg(`data-ms-link="${k}"`, s.link[k], s.link[k] ? 'Pareil que l’app' : 'Propre au mode simple')}${s.link[k] ? '' : `<div class="ms-own">${own}</div>`}</div></div>`;
         const sec = (k, n, body, summary) => { const [, ico, t] = SECTIONS.find(x => x[0] === k); const o = isOpenSec(k); return `<section class="ms-sec-s ${o ? 'is-open' : ''}" id="ms-s-${k}"><button type="button" class="ms-sec-h" data-ms-sec="${k}" aria-expanded="${o}"><span class="ms-num">${String(n).padStart(2, '0')}</span><span aria-hidden="true">${ico}</span><span class="ms-sec-t">${t}</span><span class="ms-sec-sum">${summary}</span><span class="ms-car" aria-hidden="true">${o ? '▴' : '▾'}</span></button>${o ? `<div class="ms-sec-b">${body}</div>` : ''}</section>`; };
@@ -882,7 +977,7 @@
         <section class="maintenance-panel ms-intro"><span class="ms-intro-ico" aria-hidden="true">🧓</span><div><h3>Le mode simple ${UI().badge ? UI().badge('Nouveau', 'blue') : ''}</h3>
             <p>De très gros boutons pour regarder l’arbre, les photos et les fiches, sans rien pouvoir modifier ni supprimer par erreur — pour une personne âgée, un enfant, ou n’importe qui qui veut juste regarder.</p>
             <div class="ms-intro-acts"><button type="button" class="button" data-ms-open="now">▶ Ouvrir le mode simple</button><button type="button" class="button secondary" data-ms-try>${TRY ? '✕ Fermer l’essai' : '👁 Essayer ici'}</button></div>
-            <p class="muted ms-small">On le trouve aussi avec le bouton « 🧓 Mode simple » en haut de l’app et sur le tableau de bord.</p>
+            <div class="ms-topbtn">${tg('data-ms-bool="forAll"', s.forAll, 'Montrer le bouton « 🧓 Mode simple » en haut de l’app', s.forAll ? 'Il est en haut à droite, à côté du 🔒, pour toute personne qui ouvre cette généalogie.' : 'Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord.')}</div>
             <div class="ms-try" data-ms-try-box ${TRY ? '' : 'hidden'}></div></div></section>
 
         <section class="maintenance-panel"><h3><span aria-hidden="true">🔗</span> Tes réglages d’accessibilité valent aussi ici</h3>
@@ -909,7 +1004,7 @@
             ${e.contrast ? `<div class="ms-line"><div class="ms-lab"></div><div class="ms-ctl">${UI().notice ? UI().notice('info', 'Le contraste fort est allumé : les couleurs choisies ici reviendront quand tu l’éteindras.') : ''}</div></div>` : ''}
             ${line('Fond, texte et boutons', `<div class="ms-colors">${colorCtl('bg', 'Fond', s, PAL[s.theme])}${colorCtl('ink', 'Texte et traits', s, PAL[s.theme])}${colorCtl('btn', 'Boutons principaux', s, PAL[s.theme])}</div>${why('Une couleur de fond douce et un texte très foncé fatiguent moins.')}`)}
             ${line('Les gros boutons', `<div class="ms-colors">${colorCtl('tree', '🌳 L’arbre', s, PAL[s.theme])}${colorCtl('photo', '📷 Les photos', s, PAL[s.theme])}${colorCtl('people', '👥 Les personnes', s, PAL[s.theme])}${colorCtl('day', '🎂 Ce jour-là', s, PAL[s.theme])}</div>${why('Chaque gros bouton garde sa couleur partout : on se repère sans lire.')}`)}
-            ${line('Lisible ?', `<div class="ms-checks" data-ms-checks>${checksHtml(pal)}</div>${why('On vise 7:1 au moins (le plus haut niveau des règles d’accessibilité). « Corriger » garde la teinte et change seulement sa clarté.')}`)}`,
+            ${line('Lisible ?', `<div class="ms-checks" data-ms-checks>${checksHtml(pal, s)}</div>${why('On vise 7:1 au moins (le plus haut niveau des règles d’accessibilité). « Corriger » garde la teinte et change seulement sa clarté.')}`)}`,
             `${{light: '☀️ Clair', sepia: '📜 Sépia', dark: '🌙 Sombre'}[s.theme]} · ${bad.length ? '⚠️ à corriger' : '✓ très lisible'}`)}
 
         ${sec('sizes', 3, `${line('Texte', `${rangeH('fs', 'Taille du texte', s.fs, 22, 40, 1, 'px', 24)}<p class="ms-help">${s.link.size ? `× ${ap.size} % (taille du texte de l’app) = <b>${e.fs} px</b> à l’écran. ` : ''}Jamais moins de 22 px.</p>${why('À 24 px on lit sans lunettes à 50 cm ; à 30 px et plus, de loin.')}`)}
@@ -933,7 +1028,12 @@
             ${line('Tout seul', `${tg('data-ms-bool="autoCaptions"', s.autoCaptions, 'Lire les légendes des photos dans le diaporama')}${tg('data-ms-bool="autoRead"', s.autoRead, 'Lire l’histoire dès qu’on ouvre une fiche')}${why('Pour une personne qui voit très mal : elle n’a rien à toucher pour entendre.')}`)}`,
             `${s.link.voice ? 'Comme l’app' : 'Propre'} · ${e.rate} %`)}
 
-        ${sec('show', 6, `${line('Les gros boutons', `<div class="ms-tiles-set" data-ms-tiles>${s.tiles.map(([k, on], i) => `<div class="ms-tile-row" data-k="${k}"><span aria-hidden="true">${tileName[k][0]}</span><b>${tileName[k][1]}</b><span class="ms-sp"></span><button type="button" class="icon-button small" data-ms-tile-up="${k}" ${i === 0 ? 'disabled' : ''} aria-label="Monter « ${tileName[k][1]} »" title="Monter">↑</button><button type="button" class="icon-button small" data-ms-tile-down="${k}" ${i === s.tiles.length - 1 ? 'disabled' : ''} aria-label="Descendre « ${tileName[k][1]} »" title="Descendre">↓</button><label class="ui-toggle ms-tg"><input type="checkbox" data-ms-tile="${k}" ${on ? 'checked' : ''} aria-label="Montrer « ${tileName[k][1]} »"><i></i></label></div>`).join('')}</div>${why('Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder.')}`)}
+        ${sec('show', 6, `${line('Les gros boutons', `${tilesEditor(s, pal)}${why('Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder. Un cadre ajouté peut ouvrir directement la fiche d’une personne, ses photos ou un petit mot.')}`, 'ms-line-wide')}
+            ${line('Disposition', `<div class="ms-lay"><span class="ms-sl">Par ligne</span>${segH('perRow', s.perRow, [['0', 'Comme avant'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4']])}</div>
+                ${rangeH('tileH', 'Hauteur des cadres', s.tileH || 150, 100, 360, 10, 'px', 150)}${rangeH('tileGap', 'Espace entre les cadres', s.tileGap || s.gap, 8, 60, 2, 'px', 22)}${rangeH('tileTitle', 'Taille du titre des cadres', s.tileTitle || Math.round(eff(s).fs * 1.45), 26, 64, 1, 'px', 35)}
+                <div class="ms-lay"><span class="ms-sl">Police des cadres</span><button type="button" class="button small secondary" data-ms-tfont style="font-family:${esc(fontStack(s.tileFont || s.font))}">${s.tileFont ? esc(fontLabel(s.tileFont)) : 'Comme le reste'}</button>${s.tileFont ? '<button type="button" class="link-button" data-ms-tfont-reset>↺ Comme le reste</button>' : ''}</div>
+                ${s.perRow || s.tileH || s.tileGap || s.tileTitle ? '<p><button type="button" class="link-button" data-ms-lay-reset>↺ Remettre la disposition comme au départ</button></p>' : ''}
+                ${why('Un cadre par ligne se vise sans peine sur une tablette ; trois ou quatre par ligne montrent tout d’un coup sur un grand écran. Sur un téléphone, il n’y en a jamais plus de deux.')}`)}
             ${line('Personnes vivantes', `${segH('living', s.living, [['show', 'Tout montrer'], ['first', 'Prénom seulement'], ['hide', 'Cacher']])}${privacyOn() && s.living === 'show' ? '<p class="ms-help">ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement.</p>' : ''}<p class="ms-help">Les fiches marquées « confidentielles » ne sont jamais montrées.</p>${why('Pour montrer l’arbre à un voisin ou à l’école sans dévoiler les vivants.')}`)}
             ${line('Branches', `${branches.length ? `<div class="ms-branches">${branches.map(b => `<label class="ms-branch"><input type="checkbox" data-ms-branch="${esc(b.key)}" ${s.branchesOff.includes(b.key) ? '' : 'checked'}><b>Côté ${esc(b.name)}</b> <small>${plural(b.n, 'personne')}</small></label>`).join('')}</div>` : '<p class="ms-help">Les branches apparaîtront quand l’arbre sera lu.</p>'}${why('La personne qui regarde, sa famille proche et ses descendants restent toujours visibles.')}`)}
             ${line('Photos retirées', `<div class="ms-hidden-ph">${hidden.map(m => `<span class="ms-hph"><img src="${esc(m.thumb)}" alt=""><b>${esc(m.title || 'Photo')}</b> <small>${esc(m.date ? String(m.date.y) : '')}</small><button type="button" class="ms-hph-x" data-ms-unhide="${m.id}" aria-label="Remettre « ${esc(m.title || 'Photo')} » dans le mode simple" title="Remettre dans le mode simple">×</button></span>`).join('')}</div>
@@ -951,7 +1051,6 @@
                 <p class="ms-help">${s.codeHash ? '🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer.' : 'Tape 4 chiffres : le code est gardé caché, jamais en clair.'}</p>${why('Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur.')}`)}
             ${line('Sur cet appareil', `${tg('data-ms-dev="start"', !!dev().start, 'Ouvrir l’app directement en mode simple')}<div class="ms-addr"><code>…/#mode-simple</code><button type="button" class="button small secondary" data-ms-copy>📋 Copier</button></div>${why('Sur la tablette de Mamie, l’app s’ouvre toute seule sur les gros boutons. Ajoute l’adresse à l’écran d’accueil de la tablette.')}`)}
             <h4 class="ms-forall">Pour tout le monde</h4>
-            ${line('Le bouton 🧓', `${tg('data-ms-bool="forAll"', s.forAll, 'Montrer « 🧓 Mode simple » en haut de l’app, pour tous', 'Toute personne qui ouvre cette généalogie peut passer en mode simple.')}${why('Le mode simple n’est pas réservé aux grands-parents : c’est la façon la plus calme de regarder l’arbre.')}`)}
             ${line('Réglages de base', `${tg('data-ms-bool="baseAll"', s.baseAll, 'Ces réglages servent de base sur tous les appareils', s.baseAll ? 'Ils sont gardés avec ta généalogie : chaque tablette ou ordinateur part d’ici.' : 'Coupé : cet appareil garde ses propres réglages du mode simple.')}${why('Tu prépares une fois, et chaque tablette ou ordinateur de la famille démarre pareil.')}`)}`,
             `Appui long ${String(s.holdSec).replace('.', ',')} s · ${s.useCode && s.codeHash ? 'avec code' : 'sans code'}`)}
         </div>
@@ -964,7 +1063,7 @@
         <button type="button" class="button ms-pv-jump" data-ms-pv-jump aria-label="Voir l’aperçu">👁 Aperçu</button>
         </div>`;
     }
-    function checksHtml(pal) { return contrastRows(pal).map(r => { const ok = r.r >= 7, fixable = !ok && ['tree', 'photo', 'people', 'day', 'btn', 'bg'].includes(r.b); return `<div class="ms-check ${ok ? 'is-ok' : 'is-bad'}"><span class="ms-aa" style="background:${pal[r.b]};color:${pal[r.a]}">Aa</span><span class="ms-check-t">${esc(r.label)}</span><b class="ms-check-r">${ok ? '✓ Très lisible' : '⚠️ Pas assez lisible'} ${r.r.toFixed(1).replace('.', ',').replace(',0', '')}:1</b>${fixable ? `<button type="button" class="button small secondary" data-ms-fix="${r.b}" data-against="${pal[r.a]}">Corriger</button>` : ''}</div>`; }).join(''); }
+    function checksHtml(pal, st = null) { return contrastRows(pal, st).map(r => { const bg = r.bg || pal[r.b], ok = r.r >= 7, fixable = !ok && (r.bg || ['tree', 'photo', 'people', 'day', 'btn', 'bg'].includes(r.b)); return `<div class="ms-check ${ok ? 'is-ok' : 'is-bad'}"><span class="ms-aa" style="background:${bg};color:${pal[r.a]}">Aa</span><span class="ms-check-t">${esc(r.label)}</span><b class="ms-check-r">${ok ? '✓ Très lisible' : '⚠️ Pas assez lisible'} ${r.r.toFixed(1).replace('.', ',').replace(',0', '')}:1</b>${fixable ? `<button type="button" class="button small secondary" ${r.bg ? `data-ms-tfix="${r.b}"` : `data-ms-fix="${r.b}"`} data-against="${pal[r.a]}">Corriger</button>` : ''}</div>`; }).join(''); }
     function branchList() {
         if (!D) return [];
         const m = new Map(); D.P.forEach(p => { const k = norm(p.last).trim(); if (!k) return; const x = m.get(k) || {key: k, name: String(p.last).toUpperCase(), n: 0}; x.n++; m.set(k, x); });
@@ -988,6 +1087,17 @@
             const val = st => { const x = HEX(f.value); return !x || x === PAL[st.theme][k] ? null : x; };
             f.input?.addEventListener('change', () => change(st => { st.colors[k] = val(st); }, true));
             f.input?.addEventListener('input', () => { const st = read(); st.colors[k] = val(st); live(box, clean(st)); });
+        });
+        // C2 : la couleur d'un cadre ajouté (« Aucune » = celle du thème)
+        $$('[data-ms-tcolor-slot]', box).forEach(slot => {
+            const k = slot.dataset.msTcolorSlot, v = slot.dataset.v, base = CUSTOM_KINDS[read().tx[k]?.kind]?.[3] || 'tree';
+            const val = st => { const x = HEX(f.value); return !x || x === eff(st).pal[base] ? null : x; };
+            let f;
+            if (!UIx.colorField) { slot.outerHTML = `<input type="color" value="${esc(v)}" data-ms-tcolor="${k}">`; return; }
+            f = UIx.colorField({name: '', value: v, allowNone: true}); f.dataset.msTcolor = k; f.classList.add('ms-cfield'); slot.replaceWith(f);
+            const put = (st, c) => { st.tx[k] = {...(st.tx[k] || {}), color: c}; if (!c) delete st.tx[k].color; };
+            f.input?.addEventListener('change', () => change(st => put(st, val(st)), true));
+            f.input?.addEventListener('input', () => { const st = read(); put(st, val(st)); live(box, clean(st)); });
         });
         // 💾 Réglages enregistrés (le cadre commun) : enregistrer, renommer, exporter, importer
         const slot = $('[data-ms-presets]', box);
@@ -1045,7 +1155,7 @@
     /** sans tout redessiner (un curseur qu'on glisse) : l'aperçu, le contraste, les résumés */
     function live(box, s) {
         PV?.setSettings(s); TRY?.setSettings?.(s);
-        const ch = $('[data-ms-checks]', box); if (ch) ch.innerHTML = checksHtml(eff(s).pal);
+        const ch = $('[data-ms-checks]', box); if (ch) ch.innerHTML = checksHtml(eff(s).pal, s);
         const meta = $('.ms-pv-meta', box), e = eff(s); if (meta) meta.innerHTML = `Texte <b>${e.fs} px</b> · boutons <b>${e.btnH} px</b> · police <b>${esc(fontLabel(s.font).replace(/ \(.*\)$/, ''))}</b>`;
     }
     function bindSettings(page) {
@@ -1057,6 +1167,16 @@
             if (b.dataset.msSet) { const k = b.dataset.msSet, v = b.dataset.v; change(st => { st[k] = k === 'lnCaps' ? v === 'on' : v; }, true); return; }
             if (b.dataset.msReady) { const p = PRESETS_READY.find(x => x.k === b.dataset.msReady); if (p) change(st => Object.assign(st, applyPreset(st, p.set)), true); return; }
             if (b.dataset.msFix) { const k = b.dataset.msFix; change(st => { const pal = eff(st).pal; st.colors[k] = fixColor(pal[k], b.dataset.against); }, true); return; }
+            if (b.dataset.msTedit) { openTile = openTile === b.dataset.msTedit ? null : b.dataset.msTedit; renderSettings(box); if (openTile) setTimeout(() => $(`[data-ms-tlabel="${CSS.escape(openTile)}"]`, box)?.focus({preventScroll: false}), 0); return; }
+            if (b.dataset.msTadd) { const kd = b.dataset.msTadd; let id = ''; change(st => { if (st.tiles.filter(t => isCustom(t[0])).length >= MAX_CUSTOM) return; let n = 1; while (st.tx['c' + n] || st.tiles.some(t => t[0] === 'c' + n)) n++; id = 'c' + n; st.tiles.push([id, true]); st.tx[id] = {kind: kd}; }); openTile = id || openTile; renderSettings(box); return; }
+            if (b.dataset.msTdup) { const k = b.dataset.msTdup; let id = ''; change(st => { if (st.tiles.filter(t => isCustom(t[0])).length >= MAX_CUSTOM) return; let n = 1; while (st.tx['c' + n] || st.tiles.some(t => t[0] === 'c' + n)) n++; id = 'c' + n; const i = st.tiles.findIndex(t => t[0] === k); st.tiles.splice(i + 1, 0, [id, true]); st.tx[id] = clone(st.tx[k] || {}); }); openTile = id || openTile; renderSettings(box); return; }
+            if (b.dataset.msTdel) { const k = b.dataset.msTdel; if (openTile === k) openTile = null; change(st => { st.tiles = st.tiles.filter(t => t[0] !== k); delete st.tx[k]; }, true); return; } // H7 : « ↶ Annuler » en bas à gauche (K2)
+            if (b.dataset.msTicon) { const k = b.dataset.msTicon, v = b.dataset.v; change(st => { st.tx[k] = {...(st.tx[k] || {}), icon: v}; }, true); return; }
+            if (b.dataset.msTreset) { const k = b.dataset.msTreset; change(st => { const x = st.tx[k] || {}; if (isCustom(k)) { st.tx[k] = {kind: x.kind}; if (x.pid) st.tx[k].pid = x.pid; if (x.text) st.tx[k].text = x.text; } else { delete st.tx[k]; st.colors[k] = null; } }, true); return; }
+            if (b.dataset.msTfix) { const k = b.dataset.msTfix; change(st => { const c = st.tx[k]?.color; if (c) st.tx[k].color = fixColor(c, b.dataset.against); }, true); return; }
+            if (b.hasAttribute('data-ms-tfont')) { const s0 = read(); const f = await UIx().openFontPicker?.({value: s0.tileFont || s0.font || 'Inter', sample: 'L’arbre · Les photos', title: 'La police des gros boutons', top: ['Atkinson Hyperlegible', 'Luciole', 'OpenDyslexic']}); if (f) { UIx().rememberFont?.(f); change(st => { st.tileFont = f === 'Inter' && !st.font ? '' : f; }, true); } return; }
+            if (b.hasAttribute('data-ms-tfont-reset')) { change(st => { st.tileFont = ''; }, true); return; }
+            if (b.hasAttribute('data-ms-lay-reset')) { change(st => { st.perRow = 0; st.tileH = 0; st.tileGap = 0; st.tileTitle = 0; }, true); return; }
             if (b.dataset.msTileUp || b.dataset.msTileDown) { const k = b.dataset.msTileUp || b.dataset.msTileDown, d = b.dataset.msTileUp ? -1 : 1; change(st => { const i = st.tiles.findIndex(t => t[0] === k), j = i + d; if (j < 0 || j >= st.tiles.length) return; [st.tiles[i], st.tiles[j]] = [st.tiles[j], st.tiles[i]]; }, true); return; }
             if (b.dataset.msUnhide) { const id = Number(b.dataset.msUnhide); change(st => { st.hiddenPhotos = st.hiddenPhotos.filter(x => x !== id); }, true); return; }
             if (b.hasAttribute('data-ms-pick-hidden')) {
@@ -1079,6 +1199,7 @@
             if (t.dataset.msLink) { change(st => { st.link[t.dataset.msLink] = t.checked; }, true); return; }
             if (t.dataset.msSel) { change(st => { st[t.dataset.msSel] = t.value; }, true); return; }
             if (t.dataset.msTile) { const k = t.dataset.msTile; if (!t.checked && read().tiles.filter(x => x[1]).length <= 1) { t.checked = true; toast('Il faut garder au moins un gros bouton.'); return; } change(st => { st.tiles = st.tiles.map(x => (x[0] === k ? [k, t.checked] : x)); }, true); return; }
+            if (t.dataset.msTlabel || t.dataset.msTsub || t.dataset.msTtext) { const k = t.dataset.msTlabel || t.dataset.msTsub || t.dataset.msTtext, f = t.dataset.msTlabel ? 'label' : t.dataset.msTsub ? 'sub' : 'text'; change(st => { st.tx[k] = {...(st.tx[k] || {}), [f]: t.value}; }, true); return; }
             if (t.dataset.msBranch) { const k = t.dataset.msBranch; change(st => { st.branchesOff = t.checked ? st.branchesOff.filter(x => x !== k) : [...new Set([...st.branchesOff, k])]; }, true); return; }
             if (t.dataset.msDev) { setDev({[t.dataset.msDev]: t.checked || undefined}); if (t.checked) markReady(); return; }
             if (t.dataset.msRange) { change(st => { st[t.dataset.msRange] = Number(t.value); }, true); }
@@ -1097,6 +1218,8 @@
         page.addEventListener('keydown', e => { const t = e.target; if (t.closest?.('[data-ms-codein]') && e.key === 'Backspace' && !t.value) { const all = $$('[data-ms-codein] input', page), i = all.indexOf(t); if (all[i - 1]) { all[i - 1].focus(); all[i - 1].value = ''; } } });
         page.addEventListener('picker-change', e => {
             if (!e.target.closest?.('[data-ms-box]')) return; const v = Number(e.detail?.value) || 0;
+            const tp = e.target.closest('[data-ms-tile-pick]'); // la personne d'un cadre ajouté (⭐ Une personne, 📸 Un album)
+            if (tp) { const k = tp.dataset.msTilePick; change(st => { st.tx[k] = {...(st.tx[k] || {}), pid: v}; if (!v) delete st.tx[k].pid; }, true); kick(e.target.closest('[data-ms-box]') || page); return; }
             change(st => { st.viewer = v; if (v) st.notInTree = false; }, true); kick(e.target.closest('[data-ms-box]') || page);
         });
     }

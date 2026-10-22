@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=244">
+    <link rel="stylesheet" href="assets/css/app.css?v=245">
     <link rel="stylesheet" href="assets/css/picker.css?v=6">
     <link rel="stylesheet" href="assets/css/heritage.css?v=244">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -53,20 +53,21 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/blocs.css?v=1">
     <link rel="stylesheet" href="assets/css/creations.css?v=1">
     <link rel="stylesheet" href="assets/css/puzzle.css?v=3">
+    <link rel="stylesheet" href="assets/css/labyrinthe.css?v=1">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=2">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=4">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=1">
-    <link rel="stylesheet" href="assets/css/mode-simple.css?v=1">
+    <link rel="stylesheet" href="assets/css/mode-simple.css?v=3">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
-    <link rel="stylesheet" href="assets/css/tableur.css?v=1">
+    <link rel="stylesheet" href="assets/css/tableur.css?v=3">
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=2">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=4" id="lc-frame-css" media="not all">
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=4" id="lc-designs-gen" media="not all">
-    <link rel="stylesheet" href="assets/css/designs.css?v=3">
+    <link rel="stylesheet" href="assets/css/designs.css?v=4">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
     for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
@@ -685,16 +686,18 @@ header('X-Content-Type-Options: nosniff');
     </form>
 </dialog>
 
-<dialog class="modal small-modal" id="stats-colors-dialog">
+<dialog class="modal" id="stats-colors-dialog">
     <form method="dialog" id="stats-colors-form">
-        <div class="modal-head"><div><span class="eyebrow">COULEURS DES STATISTIQUES</span><h2>Palette personnalisée</h2></div><button class="icon-button" value="cancel" type="button">×</button></div>
+        <div class="modal-head"><div><span class="eyebrow">COULEURS</span><h2>Statistiques et arbres</h2></div><button class="icon-button" value="cancel" type="button">×</button></div>
 
+        <span class="eyebrow">STATISTIQUES</span>
+        <strong style="font-size:.95em;display:block;margin:.3rem 0 .4rem">Palette des barres et des colonnes</strong>
         <div style="display:flex;align-items:center;gap:10px;background:var(--blue-soft);border-radius:6px;padding:.65rem .9rem;margin:.25rem 0 1.25rem">
             <span style="font-size:1.2em">🎨</span>
             <p style="margin:0;font-size:.83em;color:var(--muted);line-height:1.45">40 couleurs utilisées <strong>en séquence</strong> pour colorer les barres et colonnes. Le cycle recommence automatiquement au-delà du 40ème élément.</p>
         </div>
 
-        <div id="stats-colors-swatches" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px 12px;margin-bottom:1.5rem">
+        <div id="stats-colors-swatches" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px 12px;margin-bottom:1.5rem">
             <?php for($i=0;$i<40;$i++): ?>
             <label style="display:flex;align-items:center;gap:5px;font-size:.8em">
                 <span style="width:18px;text-align:right;color:var(--muted);flex-shrink:0"><?= $i+1 ?></span>
@@ -705,28 +708,39 @@ header('X-Content-Type-Options: nosniff');
 
         <hr style="border:none;border-top:1px solid var(--line-color);margin:1.5rem 0 1.25rem">
 
+        <div style="margin-bottom:1.5rem" class="tc-block">
+            <span class="eyebrow">ARBRES</span>
+            <strong style="font-size:.95em;display:block;margin:.3rem 0 .4rem">🌳 Cases des arbres</strong>
+            <p style="margin:0 0 1rem;font-size:.83em;color:var(--muted);line-height:1.45">La forme des cases des personnes dans les arbres (Ascendants, Descendants, Sablier…). Choisis une carte, puis affine en dessous ; c’est gardé avec « Enregistrer ».</p>
+            <div id="tree-cards-panel"></div>
+        </div>
+
         <div style="margin-bottom:1.5rem">
-            <span class="eyebrow">ARBRE GÉNÉALOGIQUE</span>
+            <span class="eyebrow">ARBRES</span>
             <strong style="font-size:.95em;display:block;margin:.3rem 0 .4rem">Couleurs par sexe</strong>
-            <p style="margin:0 0 1rem;font-size:.83em;color:var(--muted);line-height:1.45">Couleurs de fond et de texte des fiches personnes dans l’arbre (Ascendants, Descendants, Sablier, Éventail, formes spéciales, Liens de parenté). Ne s’applique pas aux Statistiques.</p>
+            <p style="margin:0 0 1rem;font-size:.83em;color:var(--muted);line-height:1.45">La <b>couleur</b> de chaque sexe sert aux cases « Couleurs homme / femme » (une bande et un fond pâle de cette couleur), « Avec photo » et « Mini », et aux portraits ronds (listes, menu de choix). Le <b>fond</b> et le <b>texte</b> servent aux cases « Blanches », à l’éventail et aux liens de parenté. Rien de tout ça ne touche les Statistiques.</p>
             <div style="display:grid;gap:10px">
-                <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:10px;align-items:center">
+                <div style="display:grid;grid-template-columns:minmax(64px,120px) repeat(3,minmax(0,1fr));gap:10px;align-items:center">
                     <strong style="font-size:.85em"></strong>
+                    <span style="font-size:.78em;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Couleur</span>
                     <span style="font-size:.78em;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Fond</span>
                     <span style="font-size:.78em;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Texte</span>
                 </div>
-                <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:10px;align-items:center">
+                <div style="display:grid;grid-template-columns:minmax(64px,120px) repeat(3,minmax(0,1fr));gap:10px;align-items:center">
                     <strong style="font-size:.85em">Hommes</strong>
+                    <input type="color" name="gender_male_color" value="#3c78d8" aria-label="Couleur des hommes" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                     <input type="color" name="gender_male_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                     <input type="color" name="gender_male_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                 </div>
-                <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:10px;align-items:center">
+                <div style="display:grid;grid-template-columns:minmax(64px,120px) repeat(3,minmax(0,1fr));gap:10px;align-items:center">
                     <strong style="font-size:.85em">Femmes</strong>
+                    <input type="color" name="gender_female_color" value="#d9488f" aria-label="Couleur des femmes" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                     <input type="color" name="gender_female_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                     <input type="color" name="gender_female_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                 </div>
-                <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:10px;align-items:center">
+                <div style="display:grid;grid-template-columns:minmax(64px,120px) repeat(3,minmax(0,1fr));gap:10px;align-items:center">
                     <strong style="font-size:.85em">Sexe inconnu</strong>
+                    <span style="font-size:.8em;color:var(--muted)">gris</span>
                     <input type="color" name="gender_unknown_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                     <input type="color" name="gender_unknown_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                 </div>
@@ -804,7 +818,7 @@ header('X-Content-Type-Options: nosniff');
         <div class="modal-actions">
             <button type="button" class="button secondary" id="stats-colors-reset">↺ Remettre comme au départ</button>
             <button value="cancel" class="button secondary" type="button">Annuler</button>
-            <button type="submit" value="default" class="button">Enregistrer la palette</button>
+            <button type="submit" value="default" class="button">Enregistrer</button>
         </div>
     </form>
 </dialog>
@@ -1110,13 +1124,15 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=450" defer></script>
+<script src="assets/js/app.js?v=452" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=18" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
 <script src="assets/js/app-piece-archives.js?v=8" defer></script>
-<script src="assets/js/app-puzzle.js?v=6" defer></script>
-<script src="assets/js/app-jeu.js?v=9" defer></script>
+<script src="assets/js/app-puzzle.js?v=7" defer></script>
+<script src="assets/js/app-labyrinthe-core.js?v=1" defer></script>
+<script src="assets/js/app-labyrinthe.js?v=1" defer></script>
+<script src="assets/js/app-jeu.js?v=10" defer></script>
 <script src="assets/js/app-chronologie.js?v=10" defer></script>
 <script src="assets/js/app-comparaison.js?v=8" defer></script>
 <script src="assets/js/app-carte.js?v=11" defer></script>
@@ -1124,7 +1140,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=15" defer></script>
 <script src="assets/js/app-harmony.js?v=9" defer></script>
 <script src="assets/js/app-ui.js?v=22" defer></script>
-<script src="assets/js/app-tableur-engine.js?v=2" defer></script>
+<script src="assets/js/app-tableur-engine.js?v=3" defer></script>
 <script src="assets/js/app-texte-engine.js?v=1" defer></script>
 <script src="assets/js/app-texte-formats.js?v=1" defer></script>
 <script src="assets/js/app-saisies.js?v=1" defer></script>
@@ -1138,12 +1154,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-formats.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=3" defer></script>
 <script src="assets/js/app-access.js?v=8" defer></script>
-<script src="assets/js/app-mode-simple.js?v=3" defer></script>
+<script src="assets/js/app-mode-simple.js?v=5" defer></script>
 <script src="assets/js/app-sidegroups.js?v=9" defer></script>
 <script src="assets/js/app-listes.js?v=32" defer></script>
 <script src="assets/js/app-maintenance.js?v=24" defer></script>
 <script src="assets/js/app-recherche.js?v=23" defer></script>
-<script src="assets/js/app-graphiques.js?v=15" defer></script>
+<script src="assets/js/app-graphiques.js?v=16" defer></script>
 <script src="assets/js/app-side-folders.js?v=2" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=29" defer></script>
@@ -1152,14 +1168,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=3" defer></script>
 <script src="assets/js/heritage-links.js?v=18" defer></script>
-<script src="assets/js/heritage-more.js?v=194" defer></script>
+<script src="assets/js/heritage-more.js?v=200" defer></script>
 <script src="assets/js/heritage-controle.js?v=3" defer></script>
 <script src="assets/js/heritage-records.js?v=10" defer></script>
-<script src="assets/js/heritage-research.js?v=33" defer></script>
+<script src="assets/js/heritage-research.js?v=34" defer></script>
 <script src="assets/js/heritage-av.js?v=16" defer></script>
-<script src="assets/js/heritage-recueil-table.js?v=8" defer></script>
+<script src="assets/js/heritage-recueil-table.js?v=9" defer></script>
 <script src="assets/js/heritage-recueils.js?v=24" defer></script>
-<script src="assets/js/heritage-depouillements.js?v=22" defer></script>
+<script src="assets/js/heritage-depouillements.js?v=23" defer></script>
 <script src="assets/js/heritage-decennales.js?v=2" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=10" defer></script>
 <script src="assets/js/heritage-audio-engine.js?v=2" defer></script>
@@ -1169,10 +1185,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-audio-multi.js?v=2" defer></script>
 <script src="assets/js/heritage-calendars.js?v=15" defer></script>
 <script src="assets/js/heritage-assemble.js?v=10" defer></script>
-<script src="assets/js/heritage-columns.js?v=3" defer></script>
+<script src="assets/js/heritage-columns.js?v=4" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=5" defer></script>
 <script src="assets/js/heritage-voters.js?v=8" defer></script>
-<script src="assets/js/heritage-widgets.js?v=47" defer></script>
+<script src="assets/js/heritage-widgets.js?v=48" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=11" defer></script>
 <script src="assets/js/heritage-tabs.js?v=13" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=2" defer></script>
@@ -1188,7 +1204,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=27" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=1" defer></script>
-<script src="assets/js/heritage-boards.js?v=41" defer></script>
+<script src="assets/js/heritage-boards.js?v=42" defer></script>
 <script src="assets/js/heritage-dnd.js?v=10" defer></script>
 <script src="assets/js/heritage-studio.js?v=93" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
@@ -1197,7 +1213,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-genealogies.js?v=4" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=16" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=6" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=20" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=21" defer></script>
 <script src="assets/js/heritage-diagram-options.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=6" defer></script>
 <script src="assets/js/heritage-vector.js?v=30" defer></script>
@@ -1235,8 +1251,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-sciences-explore.js?v=3" defer></script>
 <script src="assets/js/heritage-sciences-profile.js?v=5" defer></script>
 <script src="assets/js/heritage-artist-page.js?v=14" defer></script>
-<script src="assets/js/heritage-artist-list.js?v=11" defer></script>
-<script src="assets/js/heritage-artist-import.js?v=13" defer></script>
+<script src="assets/js/heritage-artist-list.js?v=12" defer></script>
+<script src="assets/js/heritage-artist-import.js?v=14" defer></script>
 <script src="assets/js/heritage-artist-catalogue.js?v=11" defer></script>
 <script src="assets/js/heritage-scene.js?v=3" defer></script>
 <script src="assets/js/heritage-scene-list.js?v=4" defer></script>
@@ -1262,8 +1278,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-photomaps.js?v=11" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=3" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=16" defer></script>
-<script src="assets/js/heritage-keynote.js?v=18" defer></script>
-<script src="assets/js/heritage-tableur.js?v=3" defer></script>
+<script src="assets/js/heritage-keynote.js?v=19" defer></script>
+<script src="assets/js/heritage-tableur.js?v=5" defer></script>
+<script src="assets/js/heritage-tableur-cibles.js?v=1" defer></script>
+<script src="assets/js/heritage-tableur-base.js?v=1" defer></script>
 <script src="assets/js/heritage-traitement-texte.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-outils.js?v=1" defer></script>
@@ -1283,7 +1301,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-dates-feter.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=1" defer></script>
 <script src="assets/js/app-apparence.js?v=9" defer></script>
-<script src="assets/js/app-designs.js?v=3" defer></script>
+<script src="assets/js/app-designs.js?v=4" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

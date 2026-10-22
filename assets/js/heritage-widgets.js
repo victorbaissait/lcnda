@@ -942,11 +942,13 @@
         return `<section class="h-dg-grid h-cw-free" data-cw-free><h4>✍️ Mes chiffres <small class="muted">(${plural(f.rows.length, 'ligne', 'lignes')}${many ? ' · ' + plural(f.series.length, 'série', 'séries') : ''})</small></h4>
             <p class="muted">Première colonne : le nom de chaque valeur ; puis les chiffres. Tu peux coller des cellules d’un tableur directement dans une case.${many ? ' Toutes les séries se voient en barres, colonnes, courbe, aire, tableau et avec les dessins de « Mes diagrammes » (empilées, radar…) ; le camembert, l’anneau et la mosaïque montrent la première.' : ''}</p>
             <div class="h-dg-tablewrap"><table><thead><tr>${head}</tr></thead><tbody>${rows || `<tr><td colspan="${f.series.length + 2}" class="muted">Tableau vide : « ＋ Ligne » ou « 📋 Coller un tableau ».</td></tr>`}</tbody></table></div>
-            <div class="h-dg-gridtools">${f.rows.length < FREE_ROWS ? '<button type="button" class="button small" data-fr-add>＋ Ligne</button>' : ''}${f.series.length < FREE_SERIES ? '<button type="button" class="button small secondary" data-fr-addser>＋ Série (colonne de chiffres)</button>' : ''}<button type="button" class="button small secondary" data-fr-paste title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">⤒ Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-fr-csv hidden></label><button type="button" class="button small secondary" data-fr-fromstat title="Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher">📊 Partir d’un graphique</button>${f.rows.length ? '<button type="button" class="link-button" data-fr-clear>Vider</button>' : ''}</div></section>`;
+            <div class="h-dg-gridtools">${f.rows.length < FREE_ROWS ? '<button type="button" class="button small" data-fr-add>＋ Ligne</button>' : ''}${f.series.length < FREE_SERIES ? '<button type="button" class="button small secondary" data-fr-addser>＋ Série (colonne de chiffres)</button>' : ''}<button type="button" class="button small secondary" data-fr-paste title="Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici">📋 Coller un tableau</button><label class="button small secondary h-dg-file">⤒ Importer un CSV<input type="file" accept=".csv,.tsv,.txt,text/csv" data-fr-csv hidden></label><button type="button" class="button small secondary" data-fr-fromstat title="Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher">📊 Partir d’un graphique</button>${ext.openSheetEditor ? '<button type="button" class="button small secondary" data-fr-sheet title="Le tableur en grand, préparé « Nom + séries » : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir »">🧮 Modifier les données</button>' : ''}${f.rows.length ? '<button type="button" class="link-button" data-fr-clear>Vider</button>' : ''}</div></section>`;
     }
     const isNumCell = v => /^-?[\d\s  .,]+%?$/.test(String(v ?? '').trim());
     /** texte d'un tableur (tabulations) ou d'un CSV (; ou ,), avec les guillemets → lignes de cellules */
     function parseCells(text) {
+        const SH = window.LCNDA_SHEET; // le lecteur commun (app-tableur-engine.js) ; mêmes bornes qu'avant : 5 000 lignes, 100 colonnes, 200 caractères par case
+        if (SH?.parseCSV) { const t0 = String(text || '').slice(0, 1500000).replace(/^\ufeff/, '').replace(/\n+$/, ''); try { return SH.parseCSV(t0, {sep: t0.includes('\t') ? '\t' : SH.sniffSep(t0.slice(0, 20000)), maxRows: 5000}).map(r => r.slice(0, 100).map(c => String(c).slice(0, 200).trim())).filter(r => r.some(c => c !== '')); } catch (_) { /* l'ancienne lecture, ci-dessous */ } }
         const t = String(text || '').slice(0, 1500000).replace(/\r\n?/g, '\n').replace(/\n+$/, ''); // le tableau garde 300 lignes : 1,5 million de caractères suffisent
         const head = t.slice(0, t.indexOf('\n') + 1 || t.length), sep = t.includes('\t') ? '\t' : (head.split(';').length >= head.split(',').length ? ';' : ',');
         const out = []; let row = [], cur = '', q = false;
@@ -1009,7 +1011,8 @@
         box.addEventListener('change', async e => {
             const input = e.target.closest?.('[data-fr-csv]'); const file = input?.files?.[0]; if (!file) return;
             if (file.size > 5e6) { input.value = ''; return toast('Fichier trop gros (5 Mo au plus).', 'error'); }
-            const before = snap(); pasteFree(d, parseCells(await file.text())); again(); undoable(`Tableau importé (${plural(d.free.rows.length, 'ligne', 'lignes')})`, before);
+            const SH = window.LCNDA_SHEET, txt = SH?.decodeBytes ? SH.decodeBytes(await file.arrayBuffer()).text : await file.text(); // accents des vieux fichiers Excel (Windows-1252)
+            const before = snap(); pasteFree(d, parseCells(txt)); again(); undoable(`Tableau importé (${plural(d.free.rows.length, 'ligne', 'lignes')})`, before);
         });
         box.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b || !b.closest('[data-cw-free]')) return;
@@ -1021,6 +1024,7 @@
                 if (b.dataset.frRow === 'del') { const before = snap(); f.rows.splice(i, 1); again(); undoable('Ligne retirée', before); return; }
                 const j = b.dataset.frRow === 'up' ? i - 1 : i + 1; if (j >= 0 && j < f.rows.length) [f.rows[i], f.rows[j]] = [f.rows[j], f.rows[i]]; again(); return; }
             if (b.hasAttribute('data-fr-clear')) { const before = snap(); f.rows = []; again(); undoable('Tableau vidé', before); return; }
+            if (b.hasAttribute('data-fr-sheet')) { const before = snap(); ext.openSheetEditor({target: 'graph', data: before, name: editing?.name || 'Mon graphique', onSave: free => { d.free = cleanFree(free); again(); undoable(`Chiffres repris du tableur (${plural(d.free.rows.length, 'ligne', 'lignes')})`, before); }}); return; }
             if (b.hasAttribute('data-fr-paste')) {
                 ext.openDialog({eyebrow: 'MES CHIFFRES', title: '📋 Coller un tableau', submitLabel: 'Remplacer le tableau', body: '<p class="muted">Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Première colonne : les noms ; colonnes suivantes : les chiffres. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé.</p><textarea name="t" rows="12" class="h-dg-pastearea" placeholder="Ville&#9;1900&#9;1950&#10;Rennes&#9;42&#9;51&#10;Nantes&#9;25&#9;30"></textarea><label>La première ligne<select name="head"><option value="auto">à deviner</option><option value="1">donne les titres (noms des séries)</option><option value="0">est une ligne de chiffres comme les autres</option></select></label>',
                     onSubmit: form => { const t = form.querySelector('[name=t]').value; if (!t.trim()) return false; const hv = form.querySelector('[name=head]')?.value || 'auto'; const before = snap(); pasteFree(d, parseCells(t), null, 0, hv === 'auto' ? null : hv === '1'); again(); undoable(`Tableau collé (${plural(d.free.rows.length, 'ligne', 'lignes')})`, before); }});
@@ -1528,6 +1532,7 @@
                 {id: 'pdf', hint: 'par l’impression : « Enregistrer en PDF »', ext: '', run: () => exportStat('print', d, datas, cardEl)},
                 {id: 'print', run: () => exportStat('print', d, datas, cardEl)},
                 {id: 'file', label: '📄 CSV', hint: 'les chiffres, pour un tableur', ext: 'csv', run: o => exportStat('csv', d, datas, cardEl, o)},
+                ...(ext.sheetExportFormat ? [ext.sheetExportFormat(() => statCsv(d, datas), name)] : []), // 🧮 les mêmes chiffres, ouverts dans le tableur
             ]});
     }
     async function exportStat(kind, d, datas, cardEl, opts = {}) {

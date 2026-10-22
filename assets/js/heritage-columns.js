@@ -111,9 +111,10 @@
             const wrap = table.closest('.data-table-wrap') || table;
             if (wrap.previousElementSibling?.classList.contains('h-cols-bar')) return;
             const bar = document.createElement('div'); bar.className = 'h-cols-bar';
-            bar.innerHTML = '<button type="button" class="button small secondary" title="Masquer, montrer, ranger les colonnes">⚙️ Colonnes</button>';
+            bar.innerHTML = '<button type="button" class="button small secondary" data-cols-cfg title="Masquer, montrer, ranger les colonnes">⚙️ Colonnes</button>' + (ext.openRowsInSheet ? '<button type="button" class="button small secondary" data-cols-export title="La liste telle qu’elle est affichée (mêmes colonnes, mêmes filtres) : dans le tableur ou en CSV">⤓ Exporter ▾</button>' : '');
             wrap.before(bar);
-            bar.querySelector('button').addEventListener('click', () => {
+            bar.querySelector('[data-cols-export]')?.addEventListener('click', e => exportMenu(e.currentTarget, table));
+            bar.querySelector('[data-cols-cfg]').addEventListener('click', () => {
                 if (appList) {
                     const rows = S().currentListRows || [];
                     const base = [...table.tHead.rows[0].cells].map(c => [norm(c.textContent), c.dataset.colKey]).filter(c => c[1]);
@@ -127,6 +128,25 @@
             });
         });
     }
+    /* ⤓ Exporter ▾ : la liste telle qu'elle est affichée (colonnes montrées, lignes filtrées) → 🧮 le tableur, ou un CSV */
+    const cellText = c => (c.innerText || c.textContent || '').replace(/[↑↓]/g, '').replace(/\s+/g, ' ').trim();
+    function shownRows(table) {
+        const vis = c => !c.hidden && c.offsetParent !== null || (!c.hidden && !c.closest('[hidden]'));
+        const head = [...table.tHead.rows[0].cells].map((c, i) => ({i, vis: vis(c), t: cellText(c)}));
+        const keep = head.filter(h => h.vis && !(h.t === '' && !table.tBodies[0]?.rows[0]?.cells[h.i]?.textContent.trim()));
+        const rows = [...(table.tBodies[0]?.rows || [])].filter(tr => !tr.hidden && tr.cells.length === head.length).map(tr => keep.map(h => cellText(tr.cells[h.i])));
+        return [keep.map(h => h.t || `Colonne ${h.i + 1}`), ...rows];
+    }
+    function listName() { const ws = A().$('#workspace'); return (ws?.querySelector('.page-header h2, .ui-page-head h2, h2')?.textContent || 'Liste').replace(/\s+/g, ' ').trim().slice(0, 120); }
+    function exportMenu(btn, table) {
+        const UI = window.LCNDA_UI, rows = () => shownRows(table);
+        UI.menuAt(btn, [
+            {icon: '🧮', label: 'Ouvrir dans le tableur', help: 'mêmes colonnes, mêmes filtres', run: () => ext.openRowsInSheet({name: listName(), rows: rows()})},
+            {icon: '🧾', label: 'En CSV (Excel, LibreOffice…)', run: () => { const SH = window.LCNDA_SHEET, m = rows(); if (!SH || m.length < 2) return A().toast('Rien à exporter : la liste est vide.'); const name = (A().safeExportFilename ? A().safeExportFilename(listName(), 'liste') : 'liste') + '.csv';
+                const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([SH.toCSV(m, {sep: ';'})], {type: 'text/csv;charset=utf-8'})); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+        ], {title: `${Math.max(0, rows().length - 1)} lignes affichées`});
+    }
+    ext.listShownRows = shownRows; // pour les essais
     let timer = 0;
     new MutationObserver(() => { clearTimeout(timer); timer = setTimeout(scan, 30); }).observe(document.body, {childList: true, subtree: true});
 })();

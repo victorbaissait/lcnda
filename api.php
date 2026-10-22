@@ -227,6 +227,10 @@ try {
         require_once __DIR__ . '/lib/photo_compare.php';
         photo_cmp_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['sheet_sources', 'sheet_fill', 'sheet_refs', 'sheet_push', 'sheet_push_undo'], true)) { // 🧮 Tableur : remplir depuis l'app, envoyer vers la base, ↶ Annuler (lib/sheet_link.php)
+        require_once __DIR__ . '/lib/sheet_link.php';
+        sheet_link_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     // Imports qui interrogent un site (Discogs, MusicBrainz…, DOI, ORCID, HAL) : rien n'est écrit dans la base, donc pas de
     // transaction d'écriture ouverte pendant l'attente du site (jusqu'à 25 s par demande) — sinon tout enregistrement fait
     // en même temps attendait, puis échouait en « base verrouillée ».

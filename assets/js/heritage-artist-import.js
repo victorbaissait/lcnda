@@ -213,7 +213,8 @@
                 versions: rs.map(r => ({title: r.title !== rg.title ? r.title : '', format: (r.media || []).map(m => m.format).filter(Boolean).join(' + '), label: (r['label-info'] || [])[0]?.label?.name || '', catno: (r['label-info'] || [])[0]?.['catalog-number'] || '', country: r.country || '', year: String(r.date || '').slice(0, 4), barcode: r.barcode || '', note: r.status && r.status !== 'Official' ? r.status : ''})),
                 photos: [{u: `https://coverartarchive.org/release-group/${rg.id}/front-500`, k: 'recto'}]}};
         }
-        const parseCsv = txt => { const lines = String(txt).replace(/\r/g, '').split('\n').filter(l => l.trim()); const sep = (lines[0].match(/\t/g) || []).length ? '\t' : (lines[0].match(/;/g) || []).length >= (lines[0].match(/,/g) || []).length ? ';' : ',';
+        const parseCsv = txt => { const SH = window.LCNDA_SHEET; if (SH?.parseCSV) { const t0 = String(txt).replace(/^\ufeff/, ''), first = t0.split(/\r?\n/).find(l => l.trim()) || ''; const sep = (first.match(/\t/g) || []).length ? '\t' : (first.match(/;/g) || []).length >= (first.match(/,/g) || []).length ? ';' : ','; return SH.parseCSV(t0, {sep}).filter(r => r.some(c => String(c).trim())); } // le lecteur commun (guillemets, retours dans une case)
+            const lines = String(txt).replace(/\r/g, '').split('\n').filter(l => l.trim()); const sep = (lines[0].match(/\t/g) || []).length ? '\t' : (lines[0].match(/;/g) || []).length >= (lines[0].match(/,/g) || []).length ? ';' : ',';
             return lines.map(l => { const out = []; let cur = '', inq = false; for (let i = 0; i < l.length; i++) { const ch = l[i]; if (inq) { if (ch === '"' && l[i + 1] === '"') { cur += '"'; i++; } else if (ch === '"') inq = false; else cur += ch; } else if (ch === '"') inq = true; else if (ch === sep) { out.push(cur); cur = ''; } else cur += ch; } out.push(cur); return out; }); };
         openImport();
     };

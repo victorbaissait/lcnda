@@ -1115,9 +1115,17 @@
             const R = t0.cells.length - 1, C = Math.max(0, ...t0.cells.map(x => x.length)) - 1, cl = (v, m) => Math.max(0, Math.min(m, v));
             cellSel = {...cellSel, r: cl(cellSel.r, R), c: cl(cellSel.c, C), ...(cellSel.r2 !== undefined ? {r2: cl(cellSel.r2, R), c2: cl(cellSel.c2, C)} : {})};
         }
+        /** 🧮 l'objet ▦ Tableur ouvert dans le tableur commun (heritage-tableur-cibles.js), puis revenu ici : cellules, formules, fusions, largeurs, fonds */
+        function tableSheet(it) {
+            if (!ext.openSheetEditor || ro()) return;
+            ext.openSheetEditor({target: 'board', data: JSON.parse(JSON.stringify(it)), name: root.querySelector('[data-bd-title]')?.value.trim() || 'Tableau', onSave: v => {
+                const cur = byId(it.id); if (!cur || !v) return;
+                Object.assign(cur, {cells: v.cells, merges: v.merges, colw: v.colw, cfill: v.cfill}); if (!Object.keys(v.cfill || {}).length) delete cur.cfill;
+                normTable(cur); clampCell(); sigs.delete(cur.id); render(); commit(); toast('Tableau repris du tableur.'); }});
+        }
         function tableCsv(it) {
             const vals = tableValues(it.cells), q = v => /[";\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
-            const csv = '\ufeff' + vals.map(r => r.map(v => q(typeof v === 'number' ? String(v).replace('.', ',') : (A().csvSafe || (x => String(x ?? '')))(String(v)))).join(';')).join('\n'); // pas de formule glissée dans un tableur
+            const csv = window.LCNDA_SHEET?.toCSV ? window.LCNDA_SHEET.toCSV(vals, {sep: ';'}) : '\ufeff' + vals.map(r => r.map(v => q(typeof v === 'number' ? String(v).replace('.', ',') : (A().csvSafe || (x => String(x ?? '')))(String(v)))).join(';')).join('\n'); // pas de formule glissée dans un tableur
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (root.querySelector('[data-bd-title]').value.trim() || 'tableau') + ' - tableur.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
         }
         async function openItem(it) {
@@ -1288,7 +1296,7 @@
                     <details class="h-bd-lbopts" ${one.text ? 'open' : ''}><summary>Réglages de la légende</summary>${legendParts(one)}</details>` : '',
                 table: () => t === 'table' ? `<div class="h-bd-tbl"><p class="muted">${cs ? `Cellule <strong>${colName(cs.c)}${cs.r + 1}</strong>${range && range.rs * range.cs > 1 ? ` à <strong>${colName(range.c + range.cs - 1)}${range.r + range.rs}</strong>` : ''}${String(one.cells?.[cs.r]?.[cs.c] ?? '').startsWith('=') ? ` : <code>${esc(one.cells[cs.r][cs.c])}</code>` : ''}` : 'Clique une cellule pour la choisir'} · ⇧ + clic : plusieurs · double-clic : écrire</p>
                     <div class="h-bd-row"><button type="button" class="h-bt" data-bd-tbl="row+" title="Ajouter une ligne dessous">＋ ligne</button><button type="button" class="h-bt" data-bd-tbl="row-" title="Enlever la ligne">− ligne</button><button type="button" class="h-bt" data-bd-tbl="col+" title="Ajouter une colonne à droite">＋ colonne</button><button type="button" class="h-bt" data-bd-tbl="col-" title="Enlever la colonne">− colonne</button></div>
-                    <div class="h-bd-row">${range && range.rs * range.cs > 1 ? '<button type="button" class="h-bt" data-bd-tbl="merge" title="Fusionner les cellules choisies">⊞ Fusionner</button>' : ''}${merged ? '<button type="button" class="h-bt" data-bd-tbl="unmerge" title="Séparer les cellules">⊟ Séparer</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="narrower" title="Colonne plus étroite">⇤⇥ −</button><button type="button" class="h-bt" data-bd-tbl="wider" title="Colonne plus large">⇤⇥ ＋</button>${cs ? '<button type="button" class="h-bt" data-bd-tbl="clear" title="Vider la cellule">⌫ vider</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="csv" title="Télécharger en CSV (Excel, Numbers…)">⤓ Exporter en CSV</button></div>
+                    <div class="h-bd-row">${range && range.rs * range.cs > 1 ? '<button type="button" class="h-bt" data-bd-tbl="merge" title="Fusionner les cellules choisies">⊞ Fusionner</button>' : ''}${merged ? '<button type="button" class="h-bt" data-bd-tbl="unmerge" title="Séparer les cellules">⊟ Séparer</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="narrower" title="Colonne plus étroite">⇤⇥ −</button><button type="button" class="h-bt" data-bd-tbl="wider" title="Colonne plus large">⇤⇥ ＋</button>${cs ? '<button type="button" class="h-bt" data-bd-tbl="clear" title="Vider la cellule">⌫ vider</button>' : ''}${ext.openSheetEditor ? '<button type="button" class="h-bt" data-bd-tbl="sheet" title="Le tableur en grand : plus de fonctions, tri, filtres, Excel… puis « ✓ Enregistrer et revenir »">🧮 Ouvrir dans le tableur</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="csv" title="Télécharger en CSV (Excel, Numbers…)">⤓ Exporter en CSV</button></div>
                     <label class="ui-toggle"><input type="checkbox" data-bd-check="header" ${one.header ? 'checked' : ''}><i></i><span>première ligne en titre</span></label><label class="ui-toggle"><input type="checkbox" data-bd-check="hcol" ${one.hcol ? 'checked' : ''}><i></i><span>première colonne en titre</span></label><label class="ui-toggle"><input type="checkbox" data-bd-check="stripes" ${one.stripes ? 'checked' : ''}><i></i><span>une ligne sur deux teintée</span></label>
                     <label>Fond des titres</label>${swatches('hfill', ['#e8eef7', ...pal('fill').filter(c => c !== '#e8eef7')])}
                     ${cs ? `<label>Fond de la cellule${range && range.rs * range.cs > 1 ? ' (les cellules choisies)' : ''}</label><div class="h-bd-sws">${pal('fill').map(c => `<button type="button" class="h-sw" style="background:${c === 'transparent' ? 'repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0/8px 8px' : c}" data-bd-cellfill="${c}"></button>`).join('')}<input type="color" data-bd-cellfill2 value="#fff3a3" title="Autre couleur"></div>` : ''}
@@ -1345,7 +1353,7 @@
                 if (!f) return; setOnSel(key, f); commit(); renderInspector();
             })(); return; }
             if (e.target.closest('[data-bd-shapefrom]')) { const one = selItems()[0]; if (!one) return; KIT().openComposer?.({base: one.shape, onSave: k => applyShape(k)}); return; }
-            const tb = e.target.closest('[data-bd-tbl]'); if (tb) { const it = selItems()[0]; if (it?.type !== 'table') return; if (tb.dataset.bdTbl === 'csv') return tableCsv(it); tableOp(it, tb.dataset.bdTbl); return; }
+            const tb = e.target.closest('[data-bd-tbl]'); if (tb) { const it = selItems()[0]; if (it?.type !== 'table') return; if (tb.dataset.bdTbl === 'csv') return tableCsv(it); if (tb.dataset.bdTbl === 'sheet') return tableSheet(it); tableOp(it, tb.dataset.bdTbl); return; }
             const cf = e.target.closest('[data-bd-cellfill]'); if (cf && cellSel && !ro()) { const it = byId(cellSel.id); if (!it) return; it.cfill = {...(it.cfill || {})}; const k = cellSel.r + ':' + cellSel.c; setCellFill(it, cf.dataset.bdCellfill); return; }
             const a = e.target.closest('[data-bd-act]'); if (a) { if (a.dataset.bdAct === 'open') return openItem(selItems()[0]); actions[a.dataset.bdAct]?.(); }
             inspectorMore(e);

@@ -36,6 +36,7 @@ sandbox.window.LCNDA_APP = {
     orderedDashboardWidgetTypes: () => [['stats', '01', 'Chiffres clés']], dashboardWidgetLabel: k => k, syncCustomDashboardWidgets() {}, dashboardBlockSettings: () => ({ widgets: [] }),
 };
 vm.createContext(sandbox);
+vm.runInContext(fs.readFileSync(path.join(appRoot, 'assets/js/app-tableur-engine.js'), 'utf8'), sandbox, { filename: 'app-tableur-engine.js' }); // le lecteur commun des tableaux (parseCells passe par lui)
 vm.runInContext(fs.readFileSync(path.join(appRoot, 'assets/js/heritage-widgets.js'), 'utf8'), sandbox, { filename: 'heritage-widgets.js' });
 const ext = sandbox.window.LCNDA_EXT, F = ext.graphsFreeInternals;
 
