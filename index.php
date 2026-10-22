@@ -63,7 +63,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
     <link rel="stylesheet" href="assets/css/tableur.css?v=1">
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=2">
-    <link rel="stylesheet" href="assets/css/editeurs.css?v=3">
+    <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=4" id="lc-frame-css" media="not all">
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=4" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=2">
@@ -1152,7 +1152,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=3" defer></script>
 <script src="assets/js/heritage-links.js?v=18" defer></script>
-<script src="assets/js/heritage-more.js?v=193" defer></script>
+<script src="assets/js/heritage-more.js?v=194" defer></script>
 <script src="assets/js/heritage-controle.js?v=3" defer></script>
 <script src="assets/js/heritage-records.js?v=10" defer></script>
 <script src="assets/js/heritage-research.js?v=33" defer></script>
@@ -1163,7 +1163,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-decennales.js?v=2" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=10" defer></script>
 <script src="assets/js/heritage-audio-engine.js?v=2" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=62" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=64" defer></script>
 <script src="assets/js/heritage-audio-quick.js?v=2" defer></script>
 <script src="assets/js/heritage-audio-studio.js?v=2" defer></script>
 <script src="assets/js/heritage-audio-multi.js?v=2" defer></script>

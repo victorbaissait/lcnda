@@ -145,7 +145,7 @@ html body .ed-old-hidden.ed-old-hidden.ed-old-hidden.ed-old-hidden { display: no
 /* K2 : les listes à ranger d’Apparence s’enregistrent toutes seules (le bouton reste pour son écouteur, caché) */
 .order-editor :is([data-order-save="menu-order"], [data-order-save="list-order"], [data-order-save="map-order"], [data-order-save="maintenance-order"], [data-order-save="graph-diagram-order"], [data-order-save="graph-stats-order"], [data-order-save="tile-layers"], [data-order-save="dashboard-widget-catalog-order"]) { display: none !important; }
 /* 🎬 Montage et 🎧 Son : la colonne d’outils posée à gauche, sur toute la hauteur */
-.h-mt, .h-avx:not(.h-avx-montage) .h-avx-body { position: relative; padding-left: calc(var(--ed-tool) + 8px) !important; }
+.h-mt, .h-avx:not(.h-avx-montage) .h-avx-body:has(> .h-au-rail) { position: relative; padding-left: calc(var(--ed-tool) + 8px) !important; }
 .h-mt > .h-mt-rail, .h-avx-body > .h-au-rail { position: absolute; left: 0; top: 0; bottom: 0; border: 1px solid var(--ui-line) !important; border-radius: 4px; }
 .h-avx:not(.h-avx-montage) .h-avx-body { display: flex; flex-direction: column; }
 .h-avx:not(.h-avx-montage) .h-avx-body > .ed-status { margin-top: auto; }

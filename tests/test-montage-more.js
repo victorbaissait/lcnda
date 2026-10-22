@@ -269,11 +269,11 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
             await p.click('dialog[open] [data-avx-close]'); if (await p.$('dialog.confirm-box-dialog[open]')) await p.click('dialog.confirm-box-dialog[open] [data-cb-ok]');
             await p.evaluate(() => window.LCNDA_EXT.openAvEditor({ id: 0, title: 'Musique', src: 'media/musique.webm', media_type: 'audio' }));
             const D = 'dialog[open].h-avx:not(.h-avx-montage)'; await p.waitForSelector(D + ' [data-avx-canvas]'); await p.waitForTimeout(500);
-            await p.click(D + ' [data-ed-proxy="hum"]'); await p.waitForSelector('dialog.confirm-box-dialog[open]'); await p.keyboard.press('Escape'); await p.waitForTimeout(400);
+            await p.click(D + ' [data-avx-op="hum"]'); await p.waitForSelector('dialog.confirm-box-dialog[open]'); await p.keyboard.press('Escape'); await p.waitForTimeout(400);
             assert.equal(await p.isEnabled(D + ' [data-avx-undo]'), false, 'Échap : le son n’a pas changé');
-            await p.click(D + ' [data-ed-proxy="hum"]'); await p.click('dialog.confirm-box-dialog[open] [data-c2="b"]'); await p.waitForFunction(D => !document.querySelector(D + ' [data-avx-undo]').disabled, D);
+            await p.click(D + ' [data-avx-op="hum"]'); await p.click('dialog.confirm-box-dialog[open] [data-c2="b"]'); await p.waitForFunction(D => !document.querySelector(D + ' [data-avx-undo]').disabled, D);
             await p.click(D + ' [data-avx-undo]');
-            await p.click(D + ' [data-ed-proxy="silences"]'); await p.fill('dialog.ask-text-dialog[open] input', '30'); await p.click('dialog.ask-text-dialog[open] [data-ask-ok]'); await p.waitForTimeout(300);
+            await p.click(D + ' [data-avx-op="silences"]'); await p.fill('dialog.ask-text-dialog[open] input', '30'); await p.click('dialog.ask-text-dialog[open] [data-ask-ok]'); await p.waitForTimeout(300);
             assert.match(await lastToast(), /Aucun blanc/); assert.equal(await p.isEnabled(D + ' [data-avx-undo]'), false, 'pas d’étape ↶ pour rien');
             const b = await at(D + ' [data-avx-canvas]');
             await p.mouse.move(b.x - 20, b.y + 40); await p.mouse.down(); await p.mouse.move(b.x + b.width + 30, b.y + 60, { steps: 6 }); await p.mouse.up(); // sélectionne du texte de la fenêtre

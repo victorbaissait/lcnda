@@ -46,7 +46,7 @@ const EDITORS = {
     await t('K18 : plus de variante du zoom ni de l’aimant dans les éditeurs', () => {
         const bad = [], rx = [
             [/data-rs-zoom-label|>Ajusté</, 'zoom « Ajusté » (retouche rapide)'], [/<select data-ly-zoom/, 'menu « Page entière ▾ » (mise en page)'], [/<span data-vx-zoom><\/span>/, '« 137 % » seul (dessin)'],
-            [/<span class="h-rt-zoom">/, 'zoom en haut (retouche)'], [/'－ ⤢ ＋ Zoom'/, 'zoom de la barre (transcription)'], [/<button[^>]*data-avx-zoom="(in|out|fit)"/, 'zoom ⤢ Tout (son)'],
+            [/<span class="h-rt-zoom">/, 'zoom en haut (retouche)'], [/'－ ⤢ ＋ Zoom'/, 'zoom de la barre (transcription)'],
             [/🧲 Aimants<|Grille et magnétisme|Repères aimantés|'Magnétisme'|Magnétisme activé/, 'un autre nom pour l’aimant'], [/class="h-mt-zoomr"(?![^>]*ed-old-hidden)/, '« Zoom de la frise » visible'],
             [/<label class="kn-sbi" data-kn-zoomw>/, 'zoom de la présentation (menu)'], [/<span class="h-bt-zoom">/, 'zoom en haut (tableaux)']];
         for (const f of [...Object.keys(EDITORS), 'heritage-transcribe-view.js']) { const s = js(f).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, ''); rx.forEach(([r, w]) => { if (r.test(s)) bad.push(`${f} : ${w}`); }); }
@@ -55,7 +55,7 @@ const EDITORS = {
     await t('K19 : les actions de fin seulement en haut (« 💾 Enregistrer ▾ ») ; la barre de la Maison sans le petit message', () => {
         assert.match(js('heritage-retouch-simple.js'), /<div class="modal-actions ed-old-hidden"/);
         assert.match(js('heritage-studio.js'), /acts\?\.classList\.add\('ed-old-hidden'\)/);
-        assert.equal((js('heritage-studio-av.js').match(/<div class="modal-actions ed-old-hidden"/g) || []).length, 2, 'montage et son');
+        assert.equal((js('heritage-studio-av.js').match(/<div class="modal-actions ed-old-hidden"/g) || []).length, 1, 'montage (le son « comme avant » garde son bas d’origine, choix de l’utilisateur)');
         ['heritage-retouch-simple.js', 'heritage-studio.js', 'heritage-studio-av.js'].forEach(f => assert.match(js(f), /saveMenu\?\.\(/, f));
         assert.ok(!/<span class="h-hs-msg" data-hs-msg><\/span>/.test(js('heritage-house.js')), 'Maison : plus de message dans la barre du haut');
     });
@@ -165,7 +165,8 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
         ['Retouche rapide', `${lightbox} localStorage.setItem('genealogie-retouch-mode', 'simple'); window.LCNDA_EXT.openRetouch('')`, 'zoom'],
         ['Retouche', `${lightbox} window.LCNDA_EXT.openRetouch('', null, {advanced: true})`, 'zoom'],
         ['Montage', 'window.LCNDA_EXT.newMontage()', 'zoom'],
-        ['Son', `window.LCNDA_EXT.openAvEditor({id: 0, title: 'Essai', media_type: 'audio', filename: 'essai.wav', src: (${wav})()})`, 'zoom'],
+        // « 🎧 Modifier le son » : « Comme avant » garde sa présentation d'origine (choix de l'utilisateur) ; « Comme avant, rangé » a K18 / K19.
+        ['Son (rangé)', `localStorage.setItem('genealogie-audio-quick-design', 'harmo'); window.LCNDA_EXT.openAvEditor({id: 0, title: 'Essai', media_type: 'audio', filename: 'essai.wav', src: (${wav})()})`, 'zoom'],
         ['Transcription', "window.LCNDA_EXT.openActTranscriber({mediaId: 1, filename: 'photo.png', title: 'Acte'})", 'zoom'],
         ['Diaporama', 'window.LCNDA_EXT.openSlideshow({})', 'zoom'],
         ['Présentation', 'window.LCNDA_EXT.openKeynote({})', 'zoom'],
@@ -186,7 +187,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
                 if (p.overflow > 2) bad.push(`${name} : la barre du bas déborde`);
                 const [z0, z1, z2] = await zoomKeys(page);
                 if (z0 === z1) bad.push(`${name} : ⌘+ ne zoome pas (${z0})`);
-                if (z1 === z2 && name !== 'Son') bad.push(`${name} : ⌘0 n’ajuste pas (${z1} → ${z2})`);
+                if (z1 === z2 && !name.startsWith('Son')) bad.push(`${name} : ⌘0 n’ajuste pas (${z1} → ${z2})`);
                 if (shots) await page.screenshot({path: path.join(shots, `k18-${name.replace(/\W+/g, '-')}.png`)});
             }
             assert.deepEqual(bad, []);
