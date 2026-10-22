@@ -66,7 +66,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=4" id="lc-frame-css" media="not all">
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=4" id="lc-designs-gen" media="not all">
-    <link rel="stylesheet" href="assets/css/designs.css?v=2">
+    <link rel="stylesheet" href="assets/css/designs.css?v=3">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
     for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
@@ -1283,7 +1283,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-dates-feter.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=1" defer></script>
 <script src="assets/js/app-apparence.js?v=8" defer></script>
-<script src="assets/js/app-designs.js?v=2" defer></script>
+<script src="assets/js/app-designs.js?v=3" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

@@ -96,7 +96,7 @@
 :root[data-lc-fbadges="sous"] .lc-hero-bandeau .person-hero-status { grid-area: bd; margin-top: -4px; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: center; }
 .lc-hero-bandeau .person-hero-labels { grid-column: 1 / -1; }
 /* — style « acte ancien » — */
-.person-hero.lc-hero-acte { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "orn orn" "nm nm" "pt txt" "st st" "tl tl"; gap: 10px 22px; justify-items: stretch; text-align: left;
+.person-hero.lc-hero-acte { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "orn orn orn" "nm nm nm" "pt txt tl"; gap: 10px 22px; justify-items: stretch; text-align: left;
     background: #f6edd8 linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,0)); color: #3a2a18; border: 3px double #8c7457; box-shadow: inset 0 0 0 6px #f6edd8, inset 0 0 0 7px rgba(140,116,87,.5), var(--shadow-small); padding: 22px 30px; }
 .lc-hero-acte > .lc-acte-orn { grid-area: orn; text-align: center; color: #8c7457; letter-spacing: .3em; font-size: 14px; }
 .lc-hero-acte > .lc-h-nm { grid-area: nm; text-align: center; }
@@ -107,9 +107,9 @@
 .lc-hero-acte > .lc-h-pt { grid-area: pt; width: 92px; height: 112px; border-radius: 50% !important; border: 3px solid #8c7457 !important; filter: sepia(.75) contrast(.95); object-fit: cover; overflow: hidden; align-self: center; background: #ead9b6; color: #6b4a26; }
 .lc-hero-acte > .portrait-lc.lc-h-pt .lc-av { width: 100%; height: 100%; border-radius: 50%; }
 .lc-hero-acte > .lc-acte-txt { grid-area: txt; margin: 0; align-self: center; font-size: 15px; line-height: 1.6; color: #3a2a18; }
-.lc-hero-acte .person-hero-tools { display: contents; }
-.lc-hero-acte .person-hero-status { grid-area: st; flex-direction: row; justify-content: center; align-items: center; gap: 10px; }
-.lc-hero-acte .person-hero-actions { grid-area: tl; flex-direction: row; justify-content: center; border-left: 0 !important; padding: 6px 0 0; border-top: 1px solid rgba(140,116,87,.45); gap: 14px; min-height: 0; }
+.lc-hero.lc-hero-acte.person-hero .person-hero-tools.lc-h-tl { grid-area: tl; display: flex; flex-direction: column; align-items: flex-end; align-self: center; gap: 10px; } /* le statut et les boutons à droite, comme sur les autres fiches */
+.lc-hero-acte .person-hero-status { flex-direction: row; justify-content: flex-end; align-items: center; gap: 10px; }
+.lc-hero-acte .person-hero-actions { border-left: 1px solid rgba(140,116,87,.45) !important; min-height: 0; }
 .lc-hero-acte .person-hero-actions .icon-action { background: transparent; border-color: #8c7457; color: #5a4128; box-shadow: none; }
 .lc-hero-acte .person-hero-labels { grid-column: 1 / -1; }
 .lc-acte-stamp { display: inline-grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; border: 2px solid #9b2f22; color: #9b2f22; transform: rotate(-8deg); box-shadow: inset 0 0 0 3px rgba(255,255,255,.5), inset 0 0 0 4px rgba(155,47,34,.55); font-weight: 700; font-size: 8px; line-height: 1; letter-spacing: .12em; text-align: center; }
@@ -120,7 +120,7 @@
 :root[data-theme="dark"] .lc-hero-acte .person-hero-actions .icon-action { color: #e3cfae; border-color: #a58b67; }
 :root[data-theme="dark"] .lc-acte-stamp { color: #ff8f80; border-color: #ff8f80; }
 /* — style « carte d'identité » — */
-.person-hero.lc-hero-carte { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "top top top" "pt f tl" "mrz mrz mrz"; gap: 12px 16px; padding: 0 0 0; overflow: hidden; background: linear-gradient(160deg, #eef4fb, #f7f2fb); color: #13233a; }
+.person-hero.lc-hero-carte { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "top top top" "pt f tl"; gap: 12px 16px; padding: 0 0 16px; overflow: hidden; background: linear-gradient(160deg, #eef4fb, #f7f2fb); color: #13233a; }
 .lc-hero-carte > .lc-carte-top { grid-area: top; display: flex; justify-content: space-between; padding: 7px 16px; background: #1d3f73; color: #fff; font-weight: 800; font-size: 10.5px; line-height: 1.2; letter-spacing: .2em; }
 .lc-hero-carte > .lc-h-pt { grid-area: pt; margin-left: 16px; width: 92px; height: 116px; object-fit: cover; border: 1.5px solid #6c7f9a !important; overflow: hidden; }
 .lc-hero-carte > .portrait-lc.lc-h-pt .lc-av { width: 100%; height: 100%; border-radius: 0; }
@@ -132,23 +132,22 @@
 .lc-carte-f b { display: block; font-size: 14px; overflow-wrap: anywhere; }
 .lc-carte-f > .is-wide:first-child b { font-size: 22px; letter-spacing: .02em; }
 .lc-hero-carte .person-hero-tools { grid-area: tl; margin-right: 14px; align-self: start; }
-.lc-hero-carte > .lc-carte-mrz { grid-area: mrz; padding: 8px 16px 10px; background: rgba(29,63,115,.07); font: 12px/1.45 "OCR B", "Courier New", ui-monospace, monospace; letter-spacing: .14em; color: #2a3a52; white-space: nowrap; overflow: hidden; }
 :root[data-lc-fbadges="sous"] .lc-hero-carte .person-hero-tools { display: contents; }
 :root[data-lc-fbadges="sous"] .lc-hero-carte .person-hero-status { grid-column: 1 / -1; grid-row: 3; flex-direction: row; justify-content: flex-start; padding: 0 16px; }
 :root[data-lc-fbadges="sous"] .lc-hero-carte .person-hero-actions { grid-area: tl; margin-right: 14px; }
 .lc-hero-carte .person-hero-labels { grid-column: 1 / -1; margin: 0 16px; }
 :root[data-theme="dark"] .person-hero.lc-hero-carte { background: linear-gradient(160deg, #1a2433, #241d2c); color: #e3eaf5; }
 :root[data-theme="dark"] .lc-carte-f small { color: #a9b8cf; }
-:root[data-theme="dark"] .lc-hero-carte > .lc-carte-mrz { background: rgba(255,255,255,.05); color: #c7d3e6; }
 :root[data-theme="dark"] .lc-carte-f > div { border-color: #50607a; }
 @media (max-width: 760px) {
     :root .person-hero.lc-hero-bandeau.lc-hero-bandeau { grid-template-columns: minmax(0, 1fr); grid-template-areas: "band" "pt" "nm" "bd" "st"; }
     .lc-hero-bandeau > .lc-h-pt { margin-top: -56px; }
     .lc-hero-bandeau .person-hero-status { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
     .lc-hero-bandeau .person-hero-actions { flex-wrap: wrap; max-width: calc(100% - 24px); }
-    .person-hero.lc-hero-acte { grid-template-columns: minmax(0, 1fr); grid-template-areas: "orn" "nm" "pt" "txt" "st" "tl"; padding: 18px; }
+    .person-hero.lc-hero-acte { grid-template-columns: minmax(0, 1fr); grid-template-areas: "orn" "nm" "pt" "txt" "tl"; padding: 18px; }
+    .lc-hero.lc-hero-acte.person-hero .person-hero-tools.lc-h-tl { align-items: center; }
     .lc-hero-acte > .lc-h-pt { justify-self: center; }
-    .person-hero.lc-hero-carte { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "top top" "pt f" "tl tl" "mrz mrz"; }
+    .person-hero.lc-hero-carte { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "top top" "pt f" "tl tl"; }
     .lc-hero-carte .person-hero-tools { margin: 0 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
     .lc-hero-carte .person-hero-status { flex-direction: row; flex-wrap: wrap; }
     .lc-hero-carte .person-hero-actions { flex-direction: row; flex-wrap: wrap; border-left: 0 !important; padding-left: 0; gap: 8px; min-height: 0; }
@@ -253,9 +252,10 @@
 :root[data-lc-lhover="trait"] :is(.person-list-item, .side-menu-item):not(.is-active):hover { box-shadow: inset 4px 0 0 var(--blue); transform: none; }
 :root[data-lc-lhover="trait"] .pk-item:hover { box-shadow: inset 4px 0 0 var(--blue); }
 /* ligne choisie : bleu pâle avec un trait */
-:root[data-lc-lsel="pale"] :is(.person-list-item, .side-menu-item, .saved-item).is-active { background: var(--blue-soft); color: var(--ink); box-shadow: inset 4px 0 0 var(--blue); }
+:root[data-lc-lsel="pale"] { --lc-sel-pale: color-mix(in srgb, var(--blue) 16%, transparent); } /* la couleur principale de l’Apparence, en pâle (rouge → rouge pâle) */
+:root[data-lc-lsel="pale"] :is(.person-list-item, .side-menu-item, .saved-item).is-active { background: var(--lc-sel-pale); color: var(--ink); box-shadow: inset 4px 0 0 var(--blue); }
 :root[data-lc-lsel="pale"] .person-list-item.is-active small, :root[data-lc-lsel="pale"] .side-menu-item.is-active .side-number { color: var(--muted); }
-:root[data-lc-lsel="pale"] .data-table tr.is-selected td { background: var(--blue-soft); box-shadow: none; }
+:root[data-lc-lsel="pale"] .data-table tr.is-selected td { background: var(--lc-sel-pale); box-shadow: none; }
 :root[data-lc-lsel="pale"] .data-table tr.is-selected td:first-child { box-shadow: inset 4px 0 0 var(--blue); }
 :root[data-lc-list]:not([data-lc-lsel="pale"]) .data-table tr.is-selected td { background: var(--blue); color: #fff; }
 :root[data-lc-list]:not([data-lc-lsel="pale"]) .data-table tr.is-selected .table-link { color: #fff; }

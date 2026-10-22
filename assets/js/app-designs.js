@@ -164,8 +164,8 @@
                     why: [['👍', '<b>Chaque fiche est un objet</b> qu’on attrape : facile à glisser, à viser sur une tablette.'], ['👎', 'Moins de lignes visibles ; plus de défilement.']]},
             ],
             settings: [
-                {k: 'hover', type: 'select', label: 'Sous la souris', options: [['pale', 'Fond bleu pâle (comme avant)'], ['trait', 'Trait bleu à gauche']], why: 'Le fond pâle se voit de loin ; le trait à gauche ne cache pas le gris des lignes alternées.'},
-                {k: 'sel', type: 'select', label: 'Ligne choisie', options: [['plein', 'Bleu plein, texte blanc (comme avant)'], ['pale', 'Bleu pâle avec un trait']], why: 'Le bleu plein ne peut pas se rater ; le bleu pâle laisse lire les gris et les badges.'},
+                {k: 'hover', type: 'select', label: 'Sous la souris', options: [['pale', 'Fond pâle (comme avant)'], ['trait', 'Trait de la couleur principale à gauche']], why: 'Le fond pâle se voit de loin ; le trait à gauche ne cache pas le gris des lignes alternées.'},
+                {k: 'sel', type: 'select', label: 'Ligne choisie', options: [['plein', 'Couleur principale pleine, texte blanc (comme avant)'], ['pale', 'Couleur principale pâle avec un trait']], why: 'Elle prend la couleur principale de l’Apparence (un rouge devient rouge pâle). La couleur pleine ne peut pas se rater ; la couleur pâle laisse lire les gris et les badges.'},
                 {k: 'av', type: 'toggle', label: 'Portrait', text: 'Un petit portrait au début de chaque ligne', why: 'Les visages et les couleurs du genre aident à retrouver une personne sans lire.'},
                 {k: 'sticky', type: 'toggle', label: 'En-têtes', text: 'Les titres des colonnes restent en haut quand on fait défiler', why: 'Dans une longue liste, tu sais toujours quelle colonne est la naissance et laquelle est le décès.'},
             ]},
@@ -529,9 +529,6 @@
             if (d.under === 'tout') rows.push(cell('Métier', occ, true));
             add(`<div class="lc-carte-top lc-dz" aria-hidden="true"><span>FICHE DE FAMILLE</span><span>N° ${esc(String(p.id).padStart(6, '0'))}</span></div>`, 'afterbegin');
             (pt || hero.firstElementChild).insertAdjacentHTML('afterend', `<div class="lc-carte-f lc-dz">${rows.join('')}</div>`);
-            const mrzName = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/[^A-Z]+/g, '<');
-            const yy = e => { const m = String(e?.date_text || '').match(/\b(\d{4})\b/); return m ? m[1] : '????'; };
-            add(`<div class="lc-carte-mrz lc-dz" aria-hidden="true">FICHE&lt;&lt;${esc(mrzName(p.last_name))}&lt;&lt;${esc(mrzName(p.first_name))}${'&lt;'.repeat(8)}<br>${esc(yy(b))}${gender}&lt;${esc(yy(dd))}&lt;&lt;N${esc(p.id)}${'&lt;'.repeat(6)}</div>`);
         }
     }
     /** la fiche ouverte : redessinée si le réglage change */
