@@ -722,13 +722,13 @@
         C('hoverAll', 'Bulle aussi sur les zones sans chiffre', 'check', {def: true, when: s => levelOf(s.o || {})[0] !== 'com'}), C('hoverAll', 'Bulle aussi sur les communes sans chiffre (plus lent)', 'check', {def: false, when: s => levelOf(s.o || {})[0] === 'com'}), C('showMissing', 'Signaler les lignes pas trouvées sur la carte', 'check', {def: true})];
     const FLOW_OPTS = [...mapOpts(), C('fit', 'Cadrer tout seul sur les lieux', 'check', {def: true, when: s => !s.o?.frame}),
         C('maxWidth', 'Épaisseur du plus gros flux', 'range', {min: 2, max: 50, def: 14}), C('minWidth', 'Épaisseur du plus petit flux', 'range', {min: .3, max: 10, step: .1, def: 1.2}),
-        C('curve', 'Courbure des flèches (%)', 'range', {min: 0, max: 60, def: 25}), C('arrows', 'Pointes de flèche', 'check', {def: true}), C('opacity', 'Opacité des flèches (%)', 'range', {min: 10, max: 100, def: 75}),
+        C('curve', 'Courbure des flèches', 'range', {unit: '%', min: 0, max: 60, def: 25}), C('arrows', 'Pointes de flèche', 'check', {def: true}), C('opacity', 'Opacité des flèches', 'range', {unit: '%', min: 10, max: 100, def: 75}),
         C('colorBy', 'Couleur des flèches', 'select', {choices: [['', 'Une seule couleur'], ['origin', 'Selon le lieu de départ'], ['dest', 'Selon le lieu d’arrivée']]}), C('flowColor', 'Couleur des flèches', 'color', {def: '#c0392b', when: s => !s.o?.colorBy}),
         C('dots', 'Ronds sur les lieux', 'check', {def: true}), C('dotSize', 'Taille des ronds', 'range', {min: 1, max: 30, def: 7}), C('dotColor', 'Couleur du tour des ronds', 'color', {def: '#1d1d1f'}),
         C('placeLabels', 'Noms des lieux', 'select', {choices: [['', 'Tous (sans se chevaucher)'], ['big', 'Les 12 plus importants'], ['none', 'Aucun']]}), C('labelSize', 'Taille des noms', 'range', {min: .5, max: 2.5, step: .1, def: 1}),
         C('zoneColor', 'Couleur des terres', 'color', {def: LAND}), C('borderColor', 'Couleur des limites', 'color', {def: '#cfcabe'}), C('unit', 'Unité (ex. : personnes)'), C('showMissing', 'Signaler les lieux sans position', 'check', {def: true})];
     const BUBBLE_OPTS = [...mapOpts(), C('fit', 'Cadrer tout seul sur les lieux', 'check', {def: true, when: s => !s.o?.frame}), C('byZone', 'Regrouper par zone (un rond au centre de chaque zone du fond)', 'check'),
-        C('maxRadius', 'Rayon du plus gros rond (px, vide = auto)', 'number', {min: 3, max: 200}), C('bubbleColor', 'Couleur des ronds', 'color', {def: '#e15759'}), C('opacity', 'Opacité des ronds (%)', 'range', {min: 10, max: 100, def: 60}),
+        C('maxRadius', 'Rayon du plus gros rond (px, vide = auto)', 'number', {min: 3, max: 200}), C('bubbleColor', 'Couleur des ronds', 'color', {def: '#e15759'}), C('opacity', 'Opacité des ronds', 'range', {unit: '%', min: 10, max: 100, def: 60}),
         C('placeLabels', 'Noms des lieux', 'select', {choices: [['', 'Les 15 plus gros (sans se chevaucher)'], ['all', 'Tous (sans se chevaucher)'], ['none', 'Aucun']]}), C('valueLabels', 'Chiffre à côté du nom', 'check', {def: true}), C('labelSize', 'Taille des noms', 'range', {min: .5, max: 2.5, step: .1, def: 1}),
         C('zoneColor', 'Couleur des terres', 'color', {def: LAND}), C('borderColor', 'Couleur des limites', 'color', {def: '#cfcabe'}), C('unit', 'Unité (ex. : naissances)'), C('showMissing', 'Signaler les lieux sans position', 'check', {def: true})];
     const BUBBLE_SAMPLE = () => ({o: {title: 'Où sont nés mes ancêtres', subtitle: 'un rond par commune', map: 'fr', level: 'dep', unit: 'naissances'}, series: [{name: 'Naissances'}],
@@ -836,7 +836,7 @@
 
     /** avant le dessin : le fond (et le fond autour) chargés, les chiffres tenus à jour relus */
     async function resolve(spec) {
-        const s = JSON.parse(JSON.stringify(spec || {})), o = s.o || {}, q = parseLive(s.live?.key);
+        const s = JSON.parse(JSON.stringify(spec || {})), o = s.o || {}, q0 = parseLive(s.live?.key), q = q0 && s.live?.dg && typeof s.live.dg === 'object' ? {...q0, ...Object.fromEntries(Object.entries(s.live.dg).filter(([k, v]) => /^dg_[a-z]+$/.test(k) && (typeof v === 'string' || typeof v === 'number') && String(v).length <= 4000))} : q0; // dg : le groupe de personnes gardé avec « Tenir à jour »
         if (q) { try { if (s.kind === 'flowmap') await fillFlows(s, q); else if (s.kind === 'bubblemap') await fillBubbles(s, q); else await fillZones(s, q); } catch (_) {} }
         if (MAPS[mapOf(o)].zoneBase) await load(MAPS[mapOf(o)].zoneBase).catch(() => {}); // cadrage sur un département, « nom (département) »
         const view = viewOf(o), ids = [baseIdOf(o, view), ctxIdOf(o, baseIdOf(o, view), view)];
@@ -933,14 +933,14 @@
         const msg = t => { box.querySelector('[data-dgm-msg]').textContent = t; };
         if (!flows) loadTypes().then(() => { const sel = box.querySelector('[data-dgm-type]'); if (sel && box.isConnected) { const v = sel.value || cur.type; sel.innerHTML = typeOptions(v); } });
         box.querySelector('[data-dgm-what]').addEventListener('change', e => { const tb = box.querySelector('[data-dgm-typebox]'); if (tb) tb.hidden = e.target.value !== 'type'; });
-        const query = () => { const q = {what: box.querySelector('[data-dgm-what]').value}; if (q.what === 'type') q.type = Number(box.querySelector('[data-dgm-type]')?.value) || 0; if (box.querySelector('[data-dgm-anc]').checked) q.ancestors = 1; const f = box.querySelector('[data-dgm-from]').value.trim(), t = box.querySelector('[data-dgm-to]').value.trim(); if (/^-?\d{1,4}$/.test(f)) q.from = Number(f); if (/^-?\d{1,4}$/.test(t)) q.to = Number(t); return q; };
+        const query = () => { const q = {what: box.querySelector('[data-dgm-what]').value}; if (q.what === 'type') q.type = Number(box.querySelector('[data-dgm-type]')?.value) || 0; if (box.querySelector('[data-dgm-anc]').checked) q.ancestors = 1; const f = box.querySelector('[data-dgm-from]').value.trim(), t = box.querySelector('[data-dgm-to]').value.trim(); if (/^-?\d{1,4}$/.test(f)) q.from = Number(f); if (/^-?\d{1,4}$/.test(t)) q.to = Number(t); return {...q, ...(window.LCNDA_EXT?.diagramAppOpts?.extra() || {})}; }; // + le groupe de personnes commun (heritage-diagram-options.js)
         box.querySelector('[data-dgm-go]').addEventListener('click', async e => {
             const b = e.currentTarget, q = query(); if (q.what === 'type' && !q.type) return msg('Choisis d’abord une sorte d’événement.');
             b.disabled = true; msg('⏳ Lecture de l’arbre…');
             try {
                 const s = api.spec(), prevLabel = box._lastLabel || s.live?.label || '', label = srcLabel(q).replace(/…$/, '') + (q.ancestors ? ' (mes ancêtres)' : '') + (q.from || q.to ? ` ${q.from ?? '…'}–${q.to ?? '…'}` : '');
                 const rep = flows ? await fillFlows(s, q) : bub ? await fillBubbles(s, q) : await fillZones(s, q);
-                if (box.querySelector('[data-dgm-live]').checked) s.live = {key: liveKey(q), label}; else delete s.live;
+                if (box.querySelector('[data-dgm-live]').checked) { const dg = Object.fromEntries(Object.entries(q).filter(([k]) => k.startsWith('dg_'))); s.live = {key: liveKey(q), label, ...(Object.keys(dg).length ? {dg} : {})}; } else delete s.live;
                 const smp = (flows ? FLOW_SAMPLE() : bub ? BUBBLE_SAMPLE() : CHORO_SAMPLE()).o; if (!s.o.title || s.o.title === smp.title || (prevLabel && s.o.title === prevLabel)) s.o.title = label; box._lastLabel = label; if (s.o.subtitle === smp.subtitle) s.o.subtitle = ''; if (s.o.unit === smp.unit && !flows) s.o.unit = '';
                 if (bub) msg(rep.points ? `✓ ${pl(rep.points, 'lieu')} pris dans l’arbre.${rep.lost ? ` ${pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')} : cherché${rep.lost > 1 ? 's' : ''} par leur nom sur la carte.` : ''}` : 'Aucun lieu dans ton arbre pour ce choix.');
                 else if (flows) { if (!rep.flows) { msg('Aucun déplacement trouvé (il faut deux lieux différents pour une même personne).'); } else msg(`✓ ${pl(rep.flows, 'flux')} pris dans l’arbre.${rep.lost ? ` ${pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')} : voir « Les lieux du tableau ».` : ''}`); }

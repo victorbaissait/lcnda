@@ -124,7 +124,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
             assert.equal(await p.evaluate(m => eval(m).P.audio[0].at, M), 0, 'le son n’a pas bougé');
             assert.match(await lastToast(), /Piste verrouillée/);
             await p.click('[data-mt-tlock="V1"]'); await selectClip('va');
-            await p.click('[data-mt-op="del"]'); await p.click('[data-mt-op="split"]');
+            await p.click('[data-ed-proxy="del"]'); await p.click('[data-ed-proxy="split"]'); /* K19 : la colonne d’outils */
             assert.equal(await p.evaluate(m => eval(m).P.v1.length, M), 3, 'rien d’enlevé ni de coupé sur la piste verrouillée');
             const kept = await p.evaluate(m => window.LCNDA_EXT._montage.projectModel(JSON.parse(JSON.stringify(eval(m).P))).tracks.filter(x => x.locked).map(x => x.id), M);
             assert.deepEqual(kept, ['V1', 'A1']);
@@ -155,9 +155,9 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
             };
             const [snapped, g1] = await drag(2.93, false); assert.equal(snapped, 3, 'collé à 3,0 s'); assert.equal(g1, 1, 'la ligne de l’aimant se montre');
             const [free, g2] = await drag(2.93, true); assert.ok(Math.abs(free - 2.9) < 0.051, `sans aimant : ${free}`); assert.equal(g2, 0);
-            await p.click('[data-mt-snap]'); const [off] = await drag(2.93, false); assert.ok(Math.abs(off - 2.9) < 0.051, `aimant arrêté : ${off}`);
+            await p.click('dialog.h-avx-montage .ed-status .ed-magnet'); /* K18 : 🧲 dans la barre du bas */ const [off] = await drag(2.93, false); assert.ok(Math.abs(off - 2.9) < 0.051, `aimant arrêté : ${off}`);
             assert.equal(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-montage-prefs')).snap), false, 'retenu dans les réglages');
-            await p.click('[data-mt-snap]');
+            await p.click('dialog.h-avx-montage .ed-status .ed-magnet'); /* K18 : 🧲 dans la barre du bas */
             // les temps de la musique attirent aussi (vers 1 s)
             await p.evaluate(([m, b]) => { eval(m).P.audio[0].beats = b; }, [M, beats]);
             const near = beats.reduce((x, y) => Math.abs(y - 0.97) < Math.abs(x - 0.97) ? y : x);
@@ -265,16 +265,16 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
             await p.click('dialog[open] [data-avx-close]'); if (await p.$('dialog.confirm-box-dialog[open]')) await p.click('dialog.confirm-box-dialog[open] [data-cb-ok]');
             await p.evaluate(() => window.LCNDA_EXT.openAvEditor({ id: 0, title: 'Musique', src: 'media/musique.webm', media_type: 'audio' }));
             const D = 'dialog[open].h-avx:not(.h-avx-montage)'; await p.waitForSelector(D + ' [data-avx-canvas]'); await p.waitForTimeout(500);
-            await p.click(D + ' [data-avx-op="hum"]'); await p.waitForSelector('dialog.confirm-box-dialog[open]'); await p.keyboard.press('Escape'); await p.waitForTimeout(400);
+            await p.click(D + ' [data-ed-proxy="hum"]'); await p.waitForSelector('dialog.confirm-box-dialog[open]'); await p.keyboard.press('Escape'); await p.waitForTimeout(400);
             assert.equal(await p.isEnabled(D + ' [data-avx-undo]'), false, 'Échap : le son n’a pas changé');
-            await p.click(D + ' [data-avx-op="hum"]'); await p.click('dialog.confirm-box-dialog[open] [data-c2="b"]'); await p.waitForFunction(D => !document.querySelector(D + ' [data-avx-undo]').disabled, D);
+            await p.click(D + ' [data-ed-proxy="hum"]'); await p.click('dialog.confirm-box-dialog[open] [data-c2="b"]'); await p.waitForFunction(D => !document.querySelector(D + ' [data-avx-undo]').disabled, D);
             await p.click(D + ' [data-avx-undo]');
-            await p.click(D + ' [data-avx-op="silences"]'); await p.fill('dialog.ask-text-dialog[open] input', '30'); await p.click('dialog.ask-text-dialog[open] [data-ask-ok]'); await p.waitForTimeout(300);
+            await p.click(D + ' [data-ed-proxy="silences"]'); await p.fill('dialog.ask-text-dialog[open] input', '30'); await p.click('dialog.ask-text-dialog[open] [data-ask-ok]'); await p.waitForTimeout(300);
             assert.match(await lastToast(), /Aucun blanc/); assert.equal(await p.isEnabled(D + ' [data-avx-undo]'), false, 'pas d’étape ↶ pour rien');
             const b = await at(D + ' [data-avx-canvas]');
             await p.mouse.move(b.x - 20, b.y + 40); await p.mouse.down(); await p.mouse.move(b.x + b.width + 30, b.y + 60, { steps: 6 }); await p.mouse.up(); // sélectionne du texte de la fenêtre
             await p.mouse.move(b.x + 2, b.y + 40); await p.mouse.down(); await p.mouse.move(b.x + b.width + 30, b.y + 60, { steps: 6 }); await p.mouse.up(); await p.waitForTimeout(150);
-            assert.match(await p.textContent(D + ' [data-avx-seltxt]'), /→ 0:08\.0/, 'la sélection va jusqu’au bout');
+            assert.match(await p.textContent(D + ' [data-avx-seltxt]'), /→ 0:08[.,]0/, 'la sélection va jusqu’au bout');
             await p.click(D + ' [data-avx-close]');
         });
         await t('aucune erreur dans la page', async () => assert.deepEqual(errors, []));

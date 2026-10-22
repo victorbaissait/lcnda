@@ -98,7 +98,7 @@
         ws.innerHTML = `<section class="page collection-page h-rc h-dp">
             <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES</span><h2>📜 Dépouillements</h2>
                 <p>Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-dp-research>↗ Ouvrir dans Recherche</button><button type="button" class="button" data-dp-new>＋ Nouveau dépouillement</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-dp-research>↗ Ouvrir dans Recherche</button><button type="button" class="button secondary" data-dp-decennale title="La photo d’une table décennale : l’app lit les noms, les dates et les sortes d’actes, tu relis, puis le dépouillement est créé">📑 Lire une table décennale</button><button type="button" class="button" data-dp-new>＋ Nouveau dépouillement</button></div></header>
             <div data-dp-bar></div>
             ${rows.length ? [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3>${group(list)}`).join('')
             : (s.q || s.type || s.status ? A().emptyState({icon: '🔍', text: 'Aucun dépouillement ne correspond.'}) : A().emptyState({icon: '📑', text: 'Aucun dépouillement pour l’instant', hint: 'La fiche du dépouillement se remplit dans Recherche.', action: {label: '＋ Nouveau dépouillement', attrs: 'data-dp-new'}}))}</section>`;
@@ -115,6 +115,7 @@
         sec.querySelectorAll('[data-dp-open]').forEach(b => b.addEventListener('click', () => { Object.assign(s, {id: Number(b.dataset.dpOpen), page: '', tab: 'pages', image: 0}); ext.lists.depouillements(++S().workspaceToken); }));
         sec.querySelectorAll('[data-dp-new]').forEach(b => b.addEventListener('click', newInResearch));
         sec.querySelector('[data-dp-research]').addEventListener('click', () => openInResearch(0));
+        sec.querySelector('[data-dp-decennale]')?.addEventListener('click', () => ext.openDecennale?.({onClose: id => { if (id && isCurrent(S().workspaceToken)) ext.lists.depouillements(++S().workspaceToken); }}));
     };
 
     /* ─────────── Un dépouillement ─────────── */
@@ -334,7 +335,10 @@
         /** Foyers dans l'ordre où ils apparaissent dans le document (première ligne saisie), personnes dans l'ordre de saisie. */
         const sorted = () => { const first = new Map(); all().forEach(x => { const k = uidOf(x), v = rank(x); if (!first.has(k) || v < first.get(k)) first.set(k, v); }); return all().slice().sort((a, b) => (first.get(uidOf(a)) - first.get(uidOf(b))) || (rank(a) - rank(b))); };
         const suggestKey = () => { const ks = (r.people || []).concat(draft).map(x => parseInt(x.household_key, 10)).filter(Number.isFinite); const lastOnPage = sorted().map(x => parseInt(x.household_key, 10)).filter(Number.isFinite).pop(); return String(Number.isFinite(lastOnPage) ? lastOnPage + 1 : ks.length ? Math.max(...ks) + 1 : 1); };
-        const COLS2 = [['last_name', 'Nom', 13], ['first_name', 'Prénom', 13], ['age_text', 'Âge', 5], ['household_position', 'Place dans le foyer', 12], ['occupation', 'Profession', 13], ['birth_place', 'Né(e) à', 12], ['nationality', 'Nationalité', 9], ['notes', 'Notes', 14]];
+        // 📑 table décennale : une ligne par acte (nom, prénoms, date, sorte d'acte), sans foyers ni adresses
+        const isTable = r.template_key === 'table' || r.record_type === 'table_decennale';
+        const COLS2 = isTable ? [['last_name', 'Nom', 20], ['first_name', 'Prénoms', 22], ['extra_info', 'Date', 16], ['personal_status', 'Acte', 11], ['notes', 'Notes', 19]]
+            : [['last_name', 'Nom', 13], ['first_name', 'Prénom', 13], ['age_text', 'Âge', 5], ['household_position', 'Place dans le foyer', 12], ['occupation', 'Profession', 13], ['birth_place', 'Né(e) à', 12], ['nationality', 'Nationalité', 9], ['notes', 'Notes', 14]];
         const streets = () => [...new Set((r.people || []).map(x => parseAddr(x.address).street).filter(Boolean))];
         const render = focus => {
             // garder la case où l'on écrit (le tableau se redessine quand un foyer ou une adresse change)
@@ -344,7 +348,8 @@
             const FICHE_AT = COLS2.findIndex(([c]) => c === 'first_name') + 1; // la fiche juste après le prénom : visible sans faire défiler
             box.innerHTML = `<datalist id="h-dp-streets">${streets().map(n => `<option value="${esc(n)}">`).join('')}</datalist><table class="h-dp-table ${locked ? 'is-locked' : ''}"><colgroup>${COLS2.map(([k, l, w], j) => `${j === FICHE_AT ? '<col class="h-dp-fiche">' : ''}<col style="width:${w}%">`).join('')}<col></colgroup><tbody>${list.map(x => {
                 const i = all().indexOf(x), uid = uidOf(x); let bands = '';
-                if (uid !== lastUid) {
+                if (isTable && lastUid === null) { bands += `<tr class="h-dp-colhead">${COLS2.map(([c, l], j) => `${j === FICHE_AT ? '<th class="h-dp-fiche">Fiche</th>' : ''}<th>${esc(l)}</th>`).join('')}<th></th></tr>`; lastUid = ''; }
+                if (uid !== lastUid && !isTable) {
                     const ms = list.filter(y => uidOf(y) === uid), head = ms[0], ad = parseAddr(head.address), k = keyOf(head);
                     if (ad.street.toLowerCase() !== (lastStreet ?? '').toLowerCase() || lastStreet === null) { if (ad.street || lastStreet !== null) bands += `<tr class="h-dp-band is-street"><td colspan="${span}">🛣️ ${ad.street ? esc(ad.street) : '<span class="muted">Rue non précisée</span>'}</td></tr>`; lastStreet = ad.street; lastHouse = null; }
                     if (ad.house !== lastHouse) { if (ad.house) bands += `<tr class="h-dp-band is-house"><td colspan="${span}">🏠 n° ${esc(ad.house)}${ad.street ? ` <small class="muted">${esc(ad.street)}</small>` : ''}</td></tr>`; lastHouse = ad.house; }

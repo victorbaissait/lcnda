@@ -1,0 +1,46 @@
+/* LCNDA — K16 (interrupteur ou case) et K17 (nombres avec unité, heures et durées écrites librement).
+ * Code : assets/js/app-saisies.js · mode d'emploi : docs/UI.md (« K16 », « K17 »). À charger après ui.css.
+ */
+
+/* ═════ K17 L'unité dans la case : « 12 | px » ═════ */
+.ui-unit { position: relative; display: inline-flex; align-items: center; vertical-align: middle; max-width: 100%; min-width: 0; box-sizing: border-box; }
+.ui-unit.is-full { display: flex; width: 100%; }
+.ui-unit > input { width: 100% !important; min-width: 0; box-sizing: border-box; padding-right: calc(var(--ui-unit-w, 24px) + 10px) !important; -moz-appearance: textfield; appearance: textfield; margin: 0; }
+.ui-unit > input::-webkit-inner-spin-button, .ui-unit > input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.ui-unit-u { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 600; color: var(--ui-muted, #666); pointer-events: none; white-space: nowrap; line-height: 1; }
+.ui-unit:has(> input:disabled) .ui-unit-u { opacity: .45; }
+
+/* ═════ K17 Heures et durées écrites librement (« 14 h 30 », « 1 min 30 ») ═════ */
+.ui-hm { display: inline-grid; gap: 3px; min-width: 0; max-width: 100%; vertical-align: top; }
+.ui-hm.is-full { display: grid; width: 100%; }
+.ui-hm-box { display: flex; align-items: center; min-width: 0; }
+.ui-hm-box > .ui-hm-input { flex: 1 1 auto; width: 100%; min-width: 72px; box-sizing: border-box; margin: 0; }
+.ui-hm.is-time:not(.is-full) .ui-hm-input { width: 120px; }
+.ui-hm.is-duration:not(.is-full) .ui-hm-input { width: 130px; }
+.ui-hm.is-compact:not(.is-full) .ui-hm-input { width: 100px; }
+.ui-hm-carrier.ui-hm-carrier { display: none !important; }
+.ui-hm-help { font-size: 12px; font-weight: 400; line-height: 1.35; color: var(--ui-blue, #055dff); text-transform: none; letter-spacing: 0; }
+.ui-hm-help:empty { display: none; }
+.ui-hm-help.is-warn { color: #a15c00; }
+.ui-hm.is-compact .ui-hm-help.is-ok { display: none; }
+.ui-hm.is-compact:focus-within .ui-hm-help.is-ok { display: block; }
+.ui-hm.is-bad .ui-hm-input { border-color: #c77700 !important; }
+.ui-hm.is-invalid .ui-hm-input { border-color: #d0182f !important; }
+.ui-hm.is-invalid .ui-hm-help.is-warn { display: none; } /* K1 écrit déjà la phrase dessous */
+
+/* ═════ K16 Interrupteur : un long libellé passe à la ligne sans pousser le bouton ═════ */
+/* même aspect partout, même dans une grille de formulaire (.form-grid label { display: grid }) */
+label.ui-toggle.ui-toggle:not([hidden]) { display: inline-flex !important; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; text-transform: none; letter-spacing: 0; line-height: 1.35; cursor: pointer; }
+/* la vraie case, invisible, sur la moitié gauche du bouton qui glisse : un clic n’importe où sur le libellé la coche, et les outils d’essai trouvent la case comme le bouton */
+label.ui-toggle.ui-toggle > input[type=checkbox] { position: absolute; left: 0; top: 50%; transform: translateY(-50%); opacity: 0; width: 16px; height: 20px; margin: 0; padding: 0; pointer-events: auto; cursor: pointer; z-index: 1; }
+label.ui-toggle.ui-toggle > i { display: inline-block; flex: none; }
+.ui-toggle > span { min-width: 0; }
+.ui-toggle > span > small, .ui-toggle > small { display: block; font-weight: 400; color: var(--ui-muted, #666); margin-top: 1px; }
+.ui-toggle:has(> input:disabled) { cursor: not-allowed; }
+.ui-toggle:has(> input:disabled) > span { opacity: .45; }
+
+/* ═════ Mode sombre ═════ */
+:root[data-theme="dark"] .ui-unit-u { color: #aaa; }
+:root[data-theme="dark"] .ui-hm-help { color: #7fb0ff; }
+:root[data-theme="dark"] .ui-hm-help.is-warn { color: #f0b54a; }
+:root[data-theme="dark"] .ui-toggle > span > small, :root[data-theme="dark"] .ui-toggle > small { color: #aaa; }

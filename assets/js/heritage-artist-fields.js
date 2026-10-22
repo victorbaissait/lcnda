@@ -21,7 +21,7 @@
     /* ── simples ── */
     T.text = {label: 'Texte', badge: 'texte', tile: 'Aa Texte', edit: (f, v) => inp(v, f.ph ? `placeholder="${esc(f.ph)}"` : ''), get: val, read: (f, v) => esc(v) + (f.unit ? ` <small class="ar-g">${esc(f.unit)}</small>` : ''), text: (f, v) => String(v)};
     T.longtext = {label: 'Texte long', badge: '¶', tile: '¶ Texte long', wide: true, edit: (f, v) => `<textarea class="ar-in" data-v rows="${f.rows || 4}">${esc(v ?? '')}</textarea>`, get: val, read: (f, v) => `<div class="ar-long">${nl2br(v)}</div>`, text: (f, v) => String(v)};
-    T.number = {label: 'Nombre', badge: '123', tile: '123 Nombre', edit: (f, v) => inp(v, 'inputmode="decimal" autocomplete="off"'), get: el => val(el).trim(), // texte : la virgule française reste (« 46,5 »)
+    T.number = {label: 'Nombre', badge: '123', tile: '123 Nombre', edit: (f, v) => inp(v, `inputmode="decimal" autocomplete="off"${f.unit ? ` data-unit="${esc(f.unit)}"` : ''}`), get: el => val(el).trim(), // K17 : l'unité dans la case ; texte : la virgule française reste (« 46,5 »)
         read: (f, v) => `${esc(String(v).replace('.', ','))}${f.unit ? ` ${esc(f.unit)}` : ''}`, text: (f, v) => `${String(v).replace('.', ',')}${f.unit ? ` ${f.unit}` : ''}`};
     T.date = {label: 'Date', badge: '📅', tile: '📅 Date', edit: (f, v) => inp(v, `data-ui-date placeholder="${esc(f.ph || '7 mai 1925, vers 1784, mars 1958…')}"`), get: val, read: (f, v) => esc(v), text: (f, v) => String(v)};
     const safeUrl = u => /^https?:\/\//i.test(String(u || '').trim()) ? String(u).trim() : '';
@@ -151,7 +151,7 @@
         edit: (f, v) => `<div class="ar-period">${inp(v.from, 'data-p="from" data-ui-date="nocal" placeholder="début"')} – ${inp(v.to, 'data-p="to" data-ui-date="nocal" placeholder="fin"')}</div>`,
         get: el => ({from: el.querySelector('[data-p="from"]').value.trim(), to: el.querySelector('[data-p="to"]').value.trim()}),
         read: (f, v) => esc([v.from, v.to].filter(Boolean).join(' – ')), text: (f, v) => [v.from, v.to].filter(Boolean).join(' – '), empty: v => !v || (!v.from && !v.to)};
-    T.duration = {...T.text, label: 'Durée', badge: '⏱', tile: '⏱ Durée', edit: (f, v) => inp(v, 'placeholder="2:58, 3 h, 2 jours…"')};
+    T.duration = {...T.text, label: 'Durée', badge: '⏱', tile: '⏱ Durée', edit: (f, v) => inp(v, 'placeholder="2:58, 3 h, 2 jours…" data-ui-duration-hint="s"')}; // K17 : « ✓ Compris : 2 min 58 s » dessous (le texte reste libre)
     T.measure = {label: 'Mesure + unité', badge: '⚖', tile: '⚖ Mesure + unité', value: (d, f) => { const v = d[f.key]; return v && typeof v === 'object' ? {n: v.n ?? '', unit: v.unit || f.unit || ''} : {n: v ?? '', unit: f.unit || ''}; },
         edit: (f, v) => `<div class="ar-measure">${inp(v.n, 'data-m="n" inputmode="decimal"')}${inp(v.unit, 'data-m="unit" placeholder="m, kg, km…" class="ar-in ar-unit"')}</div>`,
         get: el => ({n: el.querySelector('[data-m="n"]').value.trim(), unit: el.querySelector('[data-m="unit"]').value.trim()}),

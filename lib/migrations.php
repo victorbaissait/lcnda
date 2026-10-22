@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 49;
+const SCHEMA_VERSION = 56;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -70,6 +70,13 @@ function migration_steps(): array
         47 => 'schema_v47',
         48 => 'schema_v48',
         49 => 'schema_v49',
+        50 => 'schema_v50',
+        51 => 'schema_v51',
+        52 => 'schema_v52',
+        53 => 'schema_v53',
+        54 => 'schema_v54',
+        55 => 'schema_v55',
+        56 => 'schema_v56',
     ];
 }
 
@@ -2111,4 +2118,109 @@ function schema_v49(PDO $pdo): void
         text TEXT NOT NULL DEFAULT '',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
+}
+
+/** 🧮 Tableur (lib/workbooks.php, assets/js/heritage-tableur.js) : les classeurs (plusieurs feuilles, formules, mise en forme)
+ *  gardés en JSON ; kind = 'book' (un classeur) ou 'template' (« Mes modèles ») ; info = petit résumé pour la liste. */
+function schema_v50(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS workbooks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL DEFAULT '',
+        kind TEXT NOT NULL DEFAULT 'book' CHECK(kind IN ('book','template')),
+        data_json TEXT NOT NULL DEFAULT '{}',
+        info_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_workbooks_kind ON workbooks(kind, updated_at)');
+}
+
+/** 🏞 Cartes postales anciennes (lib/postcards.php, assets/js/heritage-postcards.js) : une carte = un média (le recto) et,
+ *  à part, le verso ; l'éditeur, le numéro, la date d'envoi, qui l'a écrite et à qui (fiche ou nom libre), l'adresse, le lieu
+ *  montré (places) et, si on le veut, le point d'où la vue a été prise et sa direction (angle de vue sur la Carte). Le texte
+ *  du dos reste la transcription du média du verso (media.transcription), comme pour tout document. */
+function schema_v51(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS postcards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        media_id INTEGER NOT NULL UNIQUE REFERENCES media(id) ON DELETE CASCADE,
+        verso_media_id INTEGER REFERENCES media(id) ON DELETE SET NULL,
+        title TEXT NOT NULL DEFAULT '',
+        publisher TEXT NOT NULL DEFAULT '',
+        card_number TEXT NOT NULL DEFAULT '',
+        sent_date TEXT NOT NULL DEFAULT '',
+        postmark TEXT NOT NULL DEFAULT '',
+        writer_person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        writer_text TEXT NOT NULL DEFAULT '',
+        recipient_person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        recipient_text TEXT NOT NULL DEFAULT '',
+        recipient_address TEXT NOT NULL DEFAULT '',
+        place_id INTEGER REFERENCES places(id) ON DELETE SET NULL,
+        view_lat REAL,
+        view_lon REAL,
+        view_bearing REAL,
+        notes TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_postcards_place ON postcards(place_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_postcards_verso ON postcards(verso_media_id)');
+}
+
+/** 🔍 Comparer deux photos (lib/photo_compare.php, assets/js/heritage-photo-compare.js) : une comparaison enregistrée relie
+ *  deux médias (A et B) et des personnes (people_json : numéros de fiches) ; mode (côte à côte, fondu, rideau), réglages de la
+ *  vue (yeux posés, noir et blanc, contraste…), notes, ressemblance calculée par le modèle local (score, verdict prudent). */
+function schema_v52(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS photo_comparisons (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        media_a INTEGER NOT NULL REFERENCES media(id) ON DELETE CASCADE,
+        media_b INTEGER NOT NULL REFERENCES media(id) ON DELETE CASCADE,
+        people_json TEXT NOT NULL DEFAULT '[]',
+        notes TEXT NOT NULL DEFAULT '',
+        mode TEXT NOT NULL DEFAULT 'side',
+        settings_json TEXT NOT NULL DEFAULT '{}',
+        score REAL,
+        verdict TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_photo_comparisons_a ON photo_comparisons(media_a)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_photo_comparisons_b ON photo_comparisons(media_b)');
+}
+
+/** F2 + F14 (2026-10-21) : ⚖️ hypothèses à comparer (réponses, preuves pour / contre et leur poids, conclusion ; lib/hypothesis_compare.php)
+ *  et 🏛 services d'archives (table archive_services ; service, série et cote sur les sources et les médias ; lib/archive_services.php). */
+function schema_v53(PDO $pdo): void
+{
+    hypothesis_compare_schema($pdo);
+    archive_services_schema($pdo);
+}
+
+/** F3 (2026-10-21) : ✅ Contrôle de la base (lib/controle.php) : dismissed_issues garde les exceptions de toutes les sortes
+ *  (sorte, titre, raison, note, empreinte des dates, « signaler de nouveau si une date change », fiches, lieu) ; les lieux
+ *  écartés par l'ancien écran « Lieux mal placés » (réglage lcnda-place-ignored) y entrent. */
+function schema_v54(PDO $pdo): void
+{
+    controle_schema($pdo);
+}
+
+/** 📖 🌍 🛠️ Biographie écrite par l'app (lib/biographie.php : ta version gardée et le texte de l'app du moment),
+ *  le monde autour (lib/monde_autour.php : mes événements à moi, rattachés à une commune, un département, la France ou le monde)
+ *  et la fiche d'un métier ancien (lib/metiers_anciens.php : ce que tu ajoutes, images, Fiche reliée). */
+function schema_v55(PDO $pdo): void
+{
+    if (!function_exists('recits_schema')) { require_once __DIR__ . '/biographie.php'; }
+    recits_schema($pdo);
+}
+
+/** 🎚️ Studio son (lib/audio_studio.php) : marqueurs et zones nommées d'un son (audio_regions, pour un fichier précis),
+ *  passages reliés aux fiches (audio_region_links : personne, événement, rôle), transcription à la main (audio_transcripts),
+ *  et le rack d'effets, l'historique et le multipiste d'un projet son (audio_projects.data_json). */
+function schema_v56(PDO $pdo): void
+{
+    if (!function_exists('audio_studio_schema')) { require_once __DIR__ . '/audio_studio.php'; }
+    audio_studio_schema($pdo);
 }

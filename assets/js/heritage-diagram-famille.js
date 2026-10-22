@@ -42,7 +42,7 @@
     const yearOf = v => { const y = when(v); return y === null ? null : Math.floor(y + 1e-9); };
     const pid = v => { const n = Math.floor(num(v)); return n > 0 && n < 1e9 ? n : 0; };
     const pids = v => String(v ?? '').split(',').map(x => pid(x)).filter(Boolean).slice(0, 400);
-    const H_OPT = C('height', 'Hauteur au plus (px)', 'number', {min: 120, max: 3000});
+    const H_OPT = C('height', 'Hauteur au plus', 'number', {unit: 'px', min: 120, max: 3000});
     const fold = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
     const sexOf = v => { const t = fold(v).trim(); return /^(h|m|homme|male|masculin|garcon|fils|♂)/.test(t) ? 'h' : /^(f|femme|female|feminin|fille|♀)/.test(t) ? 'f' : ''; };
     const SEX = {h: ['Homme', '#4e79a7'], f: ['Femme', '#e15759'], '': ['Sexe inconnu', '#9aa3ad']};
@@ -564,7 +564,7 @@
         ['Louis MARTIN', 'Nantes', '1848', '1872'], ['Louis MARTIN', 'Paris', '1872', '1930']].map(([person, place, start, end]) => ({person, place, start, end, county: '', country: 'France', what: ''}));
 
     /* ═════════ « Depuis l'app » : petits outils communs ═════════ */
-    const getF = q => A().api('diagram_famille', q);
+    const getF = q => A().api('diagram_famille', {...q, ...(window.LCNDA_EXT?.diagramAppOpts?.extra() || {})}); // + le groupe de personnes et la période communs (heritage-diagram-options.js)
     const PK = (name, o = {}) => (window.LCNDA_PICKER?.pickerField ? window.LCNDA_PICKER.pickerField({name, kind: 'person', ...o}) : '');
     const startId = () => Number(A().state?.bootstrap?.startPersonId) || null;
     const rootField = (label = 'Personne de départ') => `<span class="pk-lab">${esc(label)}</span>${PK('dfa_root', {value: startId()})}`;
@@ -680,8 +680,8 @@
             sample: sampleKnown},
         fasurvie: {icon: '📉', label: 'Courbe de survie (part encore en vie à chaque âge)', group: 'Chiffres', render: survival, legend: 'bottom', fromApp: survivalApp, fromPeople: survivalFromPeople,
             help: 'Pour chaque âge, la part des personnes encore en vie : une courbe par siècle, par sexe ou par branche.',
-            grids: [{key: 'rows', label: 'Les personnes (une ligne chacune)', cols: [C('group', 'Groupe (siècle, sexe, branche…)'), C('age', 'Âge (ans)', 'number'), C('dead', 'À cet âge', 'select', {choices: [['1', 'Décès'], ['0', 'Encore en vie']]})]}, CATS('Couleur de chaque groupe (facultatif)', 'Groupe')],
-            options: [C('median', 'Montrer l’âge médian (la moitié encore en vie)', 'check', {def: true}), C('markAge', 'Lire la part en vie à l’âge de… (ans)', 'number', {min: 0, max: 120}), C('living', 'Compter les vivants (jusqu’à leur âge d’aujourd’hui)', 'check', {def: true}),
+            grids: [{key: 'rows', label: 'Les personnes (une ligne chacune)', cols: [C('group', 'Groupe (siècle, sexe, branche…)'), C('age', 'Âge', 'number', {unit: 'ans'}), C('dead', 'À cet âge', 'select', {choices: [['1', 'Décès'], ['0', 'Encore en vie']]})]}, CATS('Couleur de chaque groupe (facultatif)', 'Groupe')],
+            options: [C('median', 'Montrer l’âge médian (la moitié encore en vie)', 'check', {def: true}), C('markAge', 'Lire la part en vie à l’âge de…', 'number', {unit: 'ans', min: 0, max: 120}), C('living', 'Compter les vivants (jusqu’à leur âge d’aujourd’hui)', 'check', {def: true}),
                 C('smooth', 'Lignes droites (au lieu des marches)', 'check'), C('lineWidth', 'Épaisseur des courbes', 'range', {min: 1, max: 6, step: .2, def: 2.4}), C('maxAge', 'Âge au plus (vide = auto)', 'number', {min: 5, max: 125}),
                 C('sort', 'Ordre des groupes', 'select', {choices: [['', 'Les plus nombreux d’abord'], ['az', 'A → Z'], ['given', 'Comme dans le tableau']]}), C('groupBy', 'Éditeur de graphiques : une courbe par', 'select', {choices: [['century', 'Siècle de naissance'], ['sex', 'Sexe']]}), C('hoverStep', 'Bulles au survol tous les … ans', 'range', {min: 1, max: 20, def: 5}), H_OPT],
             sample: () => ({o: {title: 'Combien étaient encore en vie à chaque âge', markAge: 5}, rows: sampleSurvival()})},
@@ -694,7 +694,7 @@
             sample: () => ({o: {title: 'Métiers de père en fils', colNames: 'Arrière-grand-père, Grand-père, Père, Fils'}, rows: sampleOcc()})},
         famariages: {icon: '💍', label: 'Rayon des mariages (distance entre les villages des époux)', group: 'Généalogie', render: radius, legend: 'bottom', fromApp: radiusApp,
             help: 'Chaque couple est un point : sa distance au centre est celle qui séparait les lieux de naissance des deux époux.',
-            grids: [{key: 'rows', label: 'Les couples', cols: [C('a', 'Époux'), C('b', 'Épouse'), C('pa', 'Né à'), C('pb', 'Née à'), C('km', 'Distance (km)', 'number'), C('bearing', 'Direction (N, NE… ou degrés)'), C('year', 'Année du mariage')]}, CATS('Couleur de chaque siècle (facultatif)', 'Siècle (ex. XIXe s.)')],
+            grids: [{key: 'rows', label: 'Les couples', cols: [C('a', 'Époux'), C('b', 'Épouse'), C('pa', 'Né à'), C('pb', 'Née à'), C('km', 'Distance', 'number', {unit: 'km'}), C('bearing', 'Direction (N, NE… ou degrés)'), C('year', 'Année du mariage')]}, CATS('Couleur de chaque siècle (facultatif)', 'Siècle (ex. XIXe s.)')],
             options: [C('scale', 'Échelle des distances', 'select', {choices: [['sqrt', 'Douce (racine carrée)'], ['log', 'Logarithmique (le proche en grand)'], ['linear', 'Proportionnelle']], def: 'sqrt'}), C('maxKm', 'Cercle extérieur (km, vide = auto)', 'number', {min: 1, max: 20000}), C('rings', 'Cercles (km, ex. 5, 10, 20, 50)'),
                 C('colorBy', 'Couleur des points', 'select', {choices: [['', 'Par siècle du mariage'], ['distance', 'Selon la distance'], ['none', 'Une seule couleur']]}), C('dotColor', 'Couleur unique', 'color', {def: '#4e79a7', when: s => s.o?.colorBy === 'none'}),
                 C('medians', 'Cercle de la distance médiane de chaque siècle', 'check', {def: true}), C('table', 'Tableau par siècle', 'check', {def: true}), C('dot', 'Taille des points', 'range', {min: 1.5, max: 12, step: .5, def: 4}), C('center', 'Nom du centre', 'text', {def: 'le village de l’époux'}), H_OPT],

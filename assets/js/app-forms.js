@@ -24,7 +24,7 @@
     let seq = 0, current = null; // le formulaire en cours d'envoi (pour UI.fail('nom', …))
 
     const visible = el => !!el && el.isConnected && el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
-    const WRAPS = '.pk, .h-place, .mpk-field, .ui-color, .ui-date-box, .ui-search, .ui-num, .ui-range-pair, .file-pick, .ui-font, .ui-toggle';
+    const WRAPS = '.pk, .h-place, .mpk-field, .ui-color, .ui-date-box, .ui-search, .ui-num, .ui-range-pair, .file-pick, .ui-font, .ui-toggle, .ui-hm, .ui-unit';
     const FOCUSABLE = 'input:not([type=hidden]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"]), [contenteditable=""], [contenteditable=true]';
 
     /** Le champ désigné : un élément, un nom (form.elements) ou un sélecteur, cherché dans le formulaire en cours. */

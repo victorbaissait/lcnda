@@ -20,7 +20,7 @@
                 {key: 'title', label: 'Titre', type: 'text', star: true, head: true}, {key: 'original', label: 'Titre original', type: 'text', star: true, head: true}, {key: 'year', label: 'Année', type: 'date', star: true},
                 {key: 'fkind', label: 'Genre', type: 'select', choices: FILM_KINDS, star: true}, {key: 'jobs', label: 'Métier', type: 'text', star: true, ph: 'acteur, réalisation, scénario…'}, {key: 'role', label: 'Rôle (personnage)', type: 'text', star: true},
                 {key: 'director', label: 'Réalisation', type: 'person', star: true, roleWord: 'réalisation'},
-                {key: 'duration', label: 'Durée (min)', type: 'number', star: false}, {key: 'country', label: 'Pays', type: 'text', star: false}, {key: 'production', label: 'Production', type: 'text', star: false}]},
+                {key: 'duration', label: 'Durée', type: 'number', unit: 'min', star: false}, {key: 'country', label: 'Pays', type: 'text', star: false}, {key: 'production', label: 'Production', type: 'text', star: false}]},
             {key: 'cast', label: 'Distribution', zone: 'main', fields: [{key: 'cast', label: 'Distribution', type: 'people', star: false, view: 'credits', section: true, addLabel: 'Un acteur, une actrice', rolePh: 'personnage, métier'}]},
             {key: 'synopsis', label: 'Résumé', zone: 'main', fields: [{key: 'synopsis', label: 'Résumé', type: 'longtext', star: true, section: true}]},
             {key: 'releases', label: 'Sorties, festivals, versions', zone: 'main', fields: [

@@ -1,0 +1,25 @@
+/* LCNDA — 📊 Diagrammes, onglet « Depuis l'app » : le bloc des options communes (assets/js/heritage-diagram-options.js)
+ * et la phrase du réglage au-dessus de l'aperçu. Couleurs de l'app (variables) : suit le mode sombre tout seul. */
+.h-dgo,.h-dg-app fieldset.h-dgo{display:grid;gap:8px;margin:4px 0 2px;padding:10px 12px 12px;border:1px solid var(--line,#d9dde3);border-radius:10px;background:var(--panel-soft,transparent);min-width:0}
+.h-dgo>legend,.h-dg-app fieldset.h-dgo>legend{padding:0 6px;font-weight:700;font-size:.92em;color:inherit}
+.h-dgo .h-dgo-row{display:grid;gap:3px;min-width:0}
+.h-dgo .h-dgo-row[hidden],.h-dgo-legacy[hidden]{display:none !important}
+.h-dgo .h-dgo-sub{margin-left:12px;padding-left:10px;border-left:2px solid var(--blue-soft,#dbe7ff)}
+.h-dgo .h-dgo-lab{font-weight:600;font-size:.9em}
+.h-dgo select,.h-dgo input:not([type=checkbox]):not([type=range]){width:100%;min-width:0;box-sizing:border-box}
+.h-dgo .h-dgo-two{display:flex;flex-wrap:wrap;gap:8px}
+.h-dgo .h-dgo-two>label{display:grid;gap:3px;flex:1 1 130px;min-width:0;font-size:.9em}
+.h-dgo .ui-toggle.h-dgo-row{display:flex;align-items:center;gap:8px}
+.h-dgo .ui-date,.h-dgo .ui-date-box{min-width:0;max-width:100%;box-sizing:border-box}
+.h-dgo .ui-date-box>input.ui-date-input.ui-date-input{min-width:0;width:100% !important}
+.h-dgo .ui-range-pair{min-width:0}
+.h-dgo .h-dgo-note{margin:0;font-size:.88em}
+.h-dgo select:disabled,.h-dgo input:disabled{opacity:.45;cursor:not-allowed}
+.h-dg-pane .h-dg-app{grid-template-columns:minmax(0,1fr)}
+.h-dg-pane .h-dg-app select{max-width:100%;min-width:0}
+.h-dg-sum{margin:0 0 10px;padding:8px 12px;border-radius:8px;background:var(--paper,#fff);border:1px solid var(--line,#d9dde3);color:var(--ink,#1f2328);font-size:.92em;line-height:1.35;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.h-dg-sum[hidden]{display:none}
+@media (max-width:480px){.h-dgo{padding:8px 9px 10px}.h-dgo .h-dgo-sub{margin-left:4px;padding-left:8px}}
+:root[data-theme="dark"] .h-dg-sum{background:#1f2328;border-color:#3a3f47;color:#e8eaed;box-shadow:none}
+:root[data-theme="dark"] .h-dgo,:root[data-theme="dark"] .h-dg-app fieldset.h-dgo{border-color:#3a3f47}
+:root[data-theme="dark"] .h-dgo .h-dgo-sub{border-left-color:#2c4a7a}

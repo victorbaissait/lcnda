@@ -32,7 +32,9 @@
     /* Formats à soi (« Enregistrer ce format » dans Nouveau document), proposés partout avec ceux de l'app */
     const FORMATS_KEY = 'genealogie-layout-formats';
     const myFormats = () => { let v = []; try { v = JSON.parse(localStorage.getItem(FORMATS_KEY) || '[]'); } catch (_) {} return (Array.isArray(v) ? v : []).filter(f => f && /^my_[a-z0-9]{1,24}$/.test(String(f.k)) && Number(f.w) >= 30 && Number(f.h) >= 30).slice(0, 60).map(f => ({k: f.k, name: String(f.name || 'Mon format').replace(/[<>"`]/g, '').slice(0, 60), w: clamp(f.w, 30, 1500), h: clamp(f.h, 30, 1500)})); };
-    const allSizes = () => [...SIZES, ...myFormats().map(f => [f.k, `★ ${f.name} (${String(r1(f.w / 10)).replace('.', ',')} × ${String(r1(f.h / 10)).replace('.', ',')} cm)`, f.w, f.h])];
+    // (plus ceux de « Mes formats », la liste commune des outils : app-formats.js)
+    const commonMine = () => { const F = window.LCNDA_FORMATS; return F?.own ? F.own().filter(m => m.unit !== 'px').map(m => { const [w, h] = F.inMm(m); return [m.id, `★ ${m.name}`, r1(w), r1(h)]; }).filter(x => x[2] >= 30 && x[3] >= 30) : []; };
+    const allSizes = () => [...SIZES, ...myFormats().map(f => [f.k, `★ ${f.name} (${String(r1(f.w / 10)).replace('.', ',')} × ${String(r1(f.h / 10)).replace('.', ',')} cm)`, f.w, f.h]), ...commonMine()];
     const UNITS = [['mm', 'mm', 1], ['cm', 'cm', 10], ['in', 'pouces', 25.4], ['pt', 'points', 25.4 / 72]];
     /** Le choix du format : ceux de l'app, les miens, ou à mes mesures (unité, portrait / paysage), et l'enregistrer pour la prochaine fois */
     function formatFieldsHtml(w, h, {designOwn = false} = {}) {
@@ -189,13 +191,17 @@
         if (!out.layers.length) out.layers = [{id: 'L1', name: 'Calque 1', visible: true, locked: false, color: '#4a7dff'}];
         const items = list => (Array.isArray(list) ? list : []).slice(0, 3000).map(cleanItem).filter(Boolean).map(it => { if (!out.layers.some(l => l.id === it.layer)) it.layer = out.layers[0].id; return it; });
         out.masters = (Array.isArray(d.masters) ? d.masters : []).filter(m => m && idOk(m.id)).slice(0, 40).map(m => ({id: m.id, name: String(m.name || 'Gabarit').slice(0, 60), items: items(m.items)}));
-        out.pages = (Array.isArray(d.pages) ? d.pages : []).slice(0, 2000).map(p => ({id: idOk(p?.id) ? p.id : nid('p'), master: out.masters.some(m => m.id === p?.master) ? p.master : '', items: items(p?.items)}));
+        out.pages = (Array.isArray(d.pages) ? d.pages : []).slice(0, 2000).map(p => ({id: idOk(p?.id) ? p.id : nid('p'), master: out.masters.some(m => m.id === p?.master) ? p.master : '', items: items(p?.items), ...(p?.size && Number(p.size.w) > 0 && Number(p.size.h) > 0 ? {size: {w: clamp(p.size.w, 30, 1500), h: clamp(p.size.h, 30, 1500)}} : {})}));
         if (!out.pages.length) out.pages.push({id: nid('p'), master: out.masters[0]?.id || '', items: []});
         // l'identité du document (relecture), ses notes de bas de page et les commentaires des relecteurs
         out.uid = /^[a-z0-9]{6,40}$/i.test(String(d.uid || '')) ? d.uid : nid('d');
         out.fn = {place: d.fn?.place === 'chapter' ? 'chapter' : 'block', restart: ['none', 'chapter', 'page'].includes(d.fn?.restart) ? d.fn.restart : (d.fn?.place === 'chapter' ? 'chapter' : 'none')};
         out.notes = {}; Object.entries(d.notes && typeof d.notes === 'object' ? d.notes : {}).slice(0, 5000).forEach(([k, n]) => { if (!idOk(k) || !n || typeof n !== 'object') return; const o = {text: String(n.text || '').slice(0, 3000)}; if (Number(n.src) > 0) { o.src = Math.round(Number(n.src)); o.srcLabel = String(n.srcLabel || '').slice(0, 400); } out.notes[k] = o; });
         out.review = cleanReview(d.review);
+        // ℹ️ Fichier → Informations du document (titre, auteur, sujet, mots-clés, langue, ISBN) : vont dans le PDF et l'ePub
+        const info = window.LCNDA_FORMATS?.cleanInfo ? window.LCNDA_FORMATS.cleanInfo(d.info, ['title', 'author', 'subject', 'keywords', 'lang', 'isbn']) : {}; if (Object.keys(info).length) out.info = info;
+        if (/^[A-Za-z0-9_:-]{1,40}$/.test(String(P.fmt || ''))) out.page.fmt = String(P.fmt);
+        if (['mm', 'cm', 'in'].includes(P.unit)) out.page.unit = P.unit;
         return out;
     }
     /** Les commentaires de relecture : texte, auteur, réponses, résolu, suggestion de changement (remplacer « … » par « … ») */
@@ -423,13 +429,17 @@
     }
     /** Les objets d'une page dans l'ordre d'affichage : calque du bas d'abord */
     const ordered = (doc, items) => doc.layers.slice().reverse().flatMap(l => items.filter(it => it.layer === l.id)).concat(items.filter(it => !doc.layers.some(l => l.id === it.layer)));
+    /** 📐 la taille d'une page : celle du document, ou la sienne (Fichier → Format du document → « certaines pages ») */
+    const pageSize = (doc, i) => { const s = doc.pages[i]?.size; return s && s.w > 0 && s.h > 0 ? {w: s.w, h: s.h} : {w: doc.page.w, h: doc.page.h}; };
     function pageHtml(doc, i, ctx = {}) {
-        const pg = doc.pages[i], master = doc.masters.find(m => m.id === pg.master), W = px(doc.page.w), H = px(doc.page.h), m = pageMargins(doc, i);
+        const pg = doc.pages[i], master = doc.masters.find(m => m.id === pg.master), PS = pageSize(doc, i), W = px(PS.w), H = px(PS.h), m = pageMargins(doc, i);
         const c = {...ctx, pageNo: i + (doc.page.start || 1), pages: doc.pages.length + (doc.page.start || 1) - 1, title: doc.title};
         if (master?.items.some(x => (x.html || '').includes('{chapitre}'))) c.chapter = chapterAt(doc, i);
-        const masterItems = master && !ctx.editMaster ? ordered(doc, master.items) : [];
+        // une page à sa propre taille : les objets du gabarit (numéro, titre courant…) suivent ses bords
+        const kx = PS.w / doc.page.w, ky = PS.h / doc.page.h, fitM = it => (kx === 1 && ky === 1 ? it : {...it, x: r1(it.x * kx), y: r1(it.y * ky), w: r1(it.w * kx), h: r1(it.h * ky)});
+        const masterItems = master && !ctx.editMaster ? ordered(doc, master.items).map(fitM) : [];
         const all = [...masterItems, ...pg.items];
-        const guides = ctx.print || ctx.preview ? '' : `<div class="ly-margins" style="left:${px(m.l)}px;top:${px(m.t)}px;right:${px(m.r)}px;bottom:${px(m.b)}px">${doc.page.columns > 1 ? Array.from({length: doc.page.columns - 1}, (_, k) => { const cw = (doc.page.w - m.l - m.r - doc.page.gutter * (doc.page.columns - 1)) / doc.page.columns; const x = (cw + doc.page.gutter) * (k + 1); return `<i style="left:${px(x - doc.page.gutter)}px;width:${px(doc.page.gutter)}px"></i>`; }).join('') : ''}</div>`;
+        const guides = ctx.print || ctx.preview ? '' : `<div class="ly-margins" style="left:${px(m.l)}px;top:${px(m.t)}px;right:${px(m.r)}px;bottom:${px(m.b)}px">${doc.page.columns > 1 ? Array.from({length: doc.page.columns - 1}, (_, k) => { const cw = (PS.w - m.l - m.r - doc.page.gutter * (doc.page.columns - 1)) / doc.page.columns; const x = (cw + doc.page.gutter) * (k + 1); return `<i style="left:${px(x - doc.page.gutter)}px;width:${px(doc.page.gutter)}px"></i>`; }).join('') : ''}</div>`;
         const items = ordered(doc, pg.items);
         const outer = ctx.print || ctx.preview ? '' : `${doc.page.bleed ? `<div class="ly-bleed" style="inset:-${px(doc.page.bleed)}px"></div>` : ''}${doc.page.slug ? `<div class="ly-slug" style="inset:-${px((doc.page.bleed || 0) + doc.page.slug)}px"></div>` : ''}`;
         return `<div class="ly-page${isLeftPage(doc, i) ? ' is-left' : ''}" data-page="${i}" style="width:${W}px;height:${H}px;background:${cssPaint(doc, doc.page.paper)}">${outer}${guides}${masterItems.map(it => itemHtml(doc, it, {...c, master: true, others: all})).join('')}${items.map(it => itemHtml(doc, it, {...c, others: all})).join('')}${ctx.annot?.size ? items.filter(it => ctx.annot.has(it.id)).map(it => `<span class="ly-cmark" style="left:${px(it.x + it.w) - 7}px;top:${Math.max(0, px(it.y) - 7)}px">${ctx.annot.get(it.id).join(',')}</span>`).join('') : ''}${ctx.print ? '' : `<span class="ly-pageno">${c.pageNo}${master ? ` · ${esc(master.name.split('-')[0])}` : ''}</span>`}</div>`;
@@ -468,7 +478,7 @@
         const d = defaults(), sz = SIZES.find(x => x[0] === size);
         return newDoc({...pageOpts, w: sz ? sz[2] : (pageOpts.w || d.w), h: sz ? sz[3] : (pageOpts.h || d.h), titleFont: th.titleFont, bodyFont: th.bodyFont, accent: th.accent, paper: th.paper, theme: th});
     };
-    const box = (doc, i) => { const m = pageMargins(doc, i); return {x: m.l, y: m.t, w: doc.page.w - m.l - m.r, h: doc.page.h - m.t - m.b}; };
+    const box = (doc, i) => { const m = pageMargins(doc, i), PS = pageSize(doc, i); return {x: m.l, y: m.t, w: PS.w - m.l - m.r, h: PS.h - m.t - m.b}; };
     /** Couverture d'après le design */
     function coverItems(doc, th, info) {
         const W = doc.page.w, H = doc.page.h, b = box(doc, 0), items = [], photo = info.photo || '';
@@ -697,8 +707,8 @@
         return doc;
     }
     /** 📚 Nouveau livre d'après un gabarit prêt à l'emploi */
-    function templateWizard(onSaved, kind = 'bio') {
-        const d = defaults(), start = A().state.bootstrap?.startPersonId, P = window.LCNDA_PICKER || A();
+    function templateWizard(onSaved, kind = 'bio', root0 = 0) {
+        const d = defaults(), start = Number(root0) || A().state.bootstrap?.startPersonId, P = window.LCNDA_PICKER || A();
         ext.openDialog({eyebrow: 'NOUVEAU DOCUMENT', title: '📚 Un livre de famille prêt à l’emploi', wide: true, submitLabel: 'Créer le livre',
             body: `<div class="ly-tplpick">${BOOK_TEMPLATES.map(([k, l, h]) => `<label class="ly-tplcard"><input type="radio" name="tpl" value="${k}" ${k === kind ? 'checked' : ''}><b>${l}</b><small>${esc(h)}</small></label>`).join('')}</div>
                 <div class="form-grid"><div><span class="pk-lab" data-tplwho>Personne</span>${P.pickerField({name: 'tpl_root', kind: 'person', value: start || null})}</div>
@@ -723,6 +733,10 @@
     ext.layoutTemplates = {list: BOOK_TEMPLATES, build: templateDoc, wizard: templateWizard};
     /* ═════════════ L'éditeur ═════════════ */
     const TOOLS = [['select', '➤', 'Sélection (V)', 'v'], ['text', 'T', 'Texte (T)', 't'], ['frame', '⊠', 'Cadre d’image (F)', 'f'], ['rect', '▭', 'Rectangle (M)', 'm'], ['ellipse', '◯', 'Ellipse (L)', 'l'], ['polygon', '⬡', 'Polygone (Y)', 'y'], ['star', '☆', 'Étoile (E)', 'e'], ['line', '╲', 'Ligne (\\)', '\\'], ['pen', '✒︎', 'Plume (P) : clic = point, double-clic ou Entrée = fini', 'p'], ['hand', '✋', 'Main (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — Alt pour reculer', 'z']];
+    const TOOL_HELP = {select: 'Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir · double-clic : écrire ou placer une image',
+        text: 'Glisse pour tracer un bloc de texte, puis écris', frame: 'Glisse pour tracer un cadre, puis double-clic pour y placer une image',
+        rect: 'Glisse pour dessiner (⇧ : un carré)', ellipse: 'Glisse pour dessiner (⇧ : un cercle)', polygon: 'Glisse pour dessiner un polygone', star: 'Glisse pour dessiner une étoile', line: 'Glisse pour tracer une ligne (⇧ : droite ou à 45°)',
+        pen: 'Clic : un point · glisser : une courbe · double-clic ou Entrée : fini', hand: 'Glisse pour déplacer la vue (ou barre d’espace)', zoom: 'Clic : zoomer · Alt + clic : reculer'};
     const PANELS = [['pages', '📄', 'Pages'], ['layers', '🗂', 'Calques'], ['obj', '🔧', 'Objet'], ['text', '🅰', 'Texte'], ['color', '🎨', 'Couleur'], ['links', '🔗', 'Liens'], ['review', '💬', 'Relecture'], ['history', '🕘', 'Historique'], ['doc', '⚙️', 'Document']];
     let localFonts = null;
     const fontList = () => { let mine = []; try { mine = JSON.parse(localStorage.getItem(FONTS_KEY) || '[]'); } catch (_) {} return [...new Set([...(Array.isArray(mine) ? mine : []).map(fontOk).filter(Boolean), ...(localFonts || []), ...BASE_FONTS])]; };
@@ -750,28 +764,29 @@
         const dl = document.createElement('dialog'); dl.className = 'modal ly-editor'; dl.dataset.dndOff = ''; dl.dataset.ownClose = '1'; // l'atelier a ses propres flèches : pas de poignée ⠿ de l'app (elle cassait la grille avec un seul calque)
         dl.innerHTML = `<div class="ly-top">
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
-                <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['export', '⤓ Exporter (PDF, ePub, HTML, fichier)…'], ['-'], ['preflight', '✅ Contrôle avant impression…'], ['relink', '↻ Mettre à jour les objets dynamiques (photos, fiches, arbres)'], ['stylelib', '🎨 Mes styles (pour tous mes documents)…'], ['-'], ['close', 'Fermer']])}
+                <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['docformat', '📐 Format du document…'], ['docinfo', 'ℹ️ Informations du document…'], ['-'], ['export', '⤓ Exporter (PDF, ePub, HTML, fichier)…'], ['-'], ['preflight', '✅ Contrôle avant impression…'], ['relink', '↻ Mettre à jour les objets dynamiques (photos, fiches, arbres)'], ['stylelib', '🎨 Mes styles (pour tous mes documents)…'], ['-'], ['close', 'Fermer']])}
                 ${menu('Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['cut', 'Couper', '⌘X'], ['copy', 'Copier', '⌘C'], ['paste', 'Coller', '⌘V'], ['dup', 'Dupliquer', '⌘D'], ['del', 'Supprimer', '⌫'], ['-'], ['all', 'Tout sélectionner', '⌘A'], ['none', 'Désélectionner', 'Échap']])}
                 ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['idxplaces', '📍 Insérer un index des lieux'], ['idxjobs', '🔨 Insérer un index des métiers'], ['-'], ['fnote', '¹ Insérer une note de bas de page…'], ['cite', '📚 Citer une source (en note)…'], ['notesblock', '🗒 Insérer les notes du chapitre'], ['biblio', '📚 Insérer la bibliographie'], ['-'], ['tree', '🌳 Insérer un arbre généalogique (objet dynamique)…'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…'], ['dyndiagram', '📊 Insérer un diagramme (objet dynamique)…'], ['-'], ['qr', '▦ Insérer un QR code (fiche, adresse, texte)…']])}
                 ${menu('Page', [['addend', '＋ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['masters', '📄 Gabarit de plusieurs pages…'], ['-'], ['merge', '📨 Publipostage : une page par personne…'], ['mergesample', '📨 Page modèle de publipostage (avec des champs)'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
                 ${menu('Relecture', [['comment', '💬 Commenter le passage ou l’objet choisi…'], ['suggest', '✎ Suggérer une modification du texte choisi…'], ['reviewpanel', '🗂 Voir les commentaires'], ['-'], ['sendreview', '📨 Envoyer à un cousin (fichier de relecture)…'], ['importreview', '⤒ Importer les commentaires d’un cousin…'], ['annot', '📝 PDF annoté (avec les commentaires)…']])}
-                ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Page entière', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['guides', 'Repères et marges'], ['snap', 'Magnétisme'], ['preview', 'Aperçu (sans repères)', 'W']])}</span>
+                ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', '⤢ Ajuster à la fenêtre', '⌘0'], ['z100', '100 % (taille réelle)', '⌘1'], ['-'], ['guides', '📏 Repères et marges'], ['snap', '🧲 Aimanter'], ['preview', 'Aperçu (sans repères)', 'W']])}</span>
                 <span class="ly-hbtns" data-tbg="ly-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state data-ui-status></span>${ext.tbButton ? ext.tbButton('layout') : ''}<button type="button" class="button small secondary" data-ly-cmd="export" title="Exporter : PDF, ePub, HTML, impression, fichier du document">⤓ Exporter ▾</button><button type="button" class="button small" data-ly-cmd="save" title="Enregistrer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('layout') : ''}<button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
             <div class="ly-main"><div class="ly-tools" data-tbg="ly-tools" data-tbg-label="Outils (colonne de gauche)">${TOOLS.map(([k, ic, l, key]) => `<button type="button" data-ly-tool="${k}" title="${esc(l.replace(` (${String(key || '').toUpperCase()})`, ''))}" data-shortcut="${esc(String(key || '').toUpperCase())}" class="${k === 'select' ? 'is-on' : ''}">${ic}</button>`).join('')}<div class="ly-fs" title="Fond et contour de l’objet choisi : clic = choisir la couleur" data-shortcut="X"><button type="button" data-ly-target="fill" class="ly-fs-fill" title="Fond : clic pour choisir la couleur"></button><button type="button" data-ly-target="stroke" class="ly-fs-stroke" title="Contour : clic pour choisir la couleur"></button><button type="button" class="ly-fs-swap" data-ly-fsswap title="Intervertir fond et contour (⇧X)" data-shortcut="⇧X">⇄</button><button type="button" class="ly-fs-none" data-ly-fsnone title="Aucune couleur pour le fond ou le contour choisi (/)" data-shortcut="/">⧄</button><input type="color" data-ly-fspick tabindex="-1" aria-hidden="true"></div></div>
                 <div class="ly-canvas" data-ly-canvas tabindex="0"><div class="ly-board" data-ly-board></div></div>
                 <aside class="ly-panels"><span class="ly-resize" data-ly-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span><div class="ly-ptabs" data-tbg="ly-tabs" data-tbg-label="Onglets du panneau de droite">${PANELS.map(([k, ic, l]) => `<button type="button" data-ly-panel="${k}" class="${k === panel ? 'is-on' : ''}" title="${l}" data-tb-label="${ic} ${l}">${ic}<span>${l}</span></button>`).join('')}</div><div class="ly-pbody" data-ly-pbody data-dnd-off></div></aside></div>
             <div class="ly-status" data-tbg="ly-status" data-tbg-label="Barre du bas"><button type="button" data-ly-cmd="first" title="Première page">⏮</button><button type="button" data-ly-cmd="prev" title="Page précédente">‹</button><span data-tb="page" data-tb-label="Numéro de la page">Page <input type="number" min="1" data-ly-goto> / <b data-ly-total></b></span><button type="button" data-ly-cmd="next" title="Page suivante">›</button><button type="button" data-ly-cmd="last" title="Dernière page">⏭</button>
-                <select data-ly-zoom aria-label="Zoom" data-tb-label="Zoom">${[25, 33, 50, 66, 75, 100, 125, 150, 200, 300, 400].map(z => `<option value="${z / 100}">${z} %</option>`).join('')}<option value="fit">Page entière</option></select><span class="ly-pos" data-ly-pos data-tb-label="Position du pointeur (mm)"></span><button type="button" class="ly-light" data-ly-light data-ly-cmd="preflight" data-tb-label="Voyant des erreurs (contrôle en direct)" title="Contrôle en direct"><i></i><span>…</span></button><span class="ly-msg" data-ly-msg data-tb-label="Messages"></span></div>
+                <span class="ly-pos" data-ly-pos data-tb-label="Position du pointeur (mm)"></span><button type="button" class="ly-light" data-ly-light data-ly-cmd="preflight" data-tb-label="Voyant des erreurs (contrôle en direct)" title="Contrôle en direct"><i></i><span>…</span></button><span class="ly-msg" data-ly-msg data-tb-label="Messages"></span></div>
             <style data-ly-css></style>`;
         document.body.appendChild(dl);
         ext.tbApply?.(dl, 'layout');
         window.LCNDA_UI?.harmonizeTopbar?.(dl.querySelector('.ly-top')); // E1 : ✓ Enregistré · ⚙️ · ⤓ Exporter · 💾 · ⛶ · ×
+        window.LCNDA_UI?.editorRail?.(dl.querySelector('.ly-tools'), {breaks: ['[data-ly-tool=text]', '[data-ly-tool=rect]', '[data-ly-tool=hand]', '.ly-fs']}); // K19
         ext.editorKeysAttach?.(dl, 'layout'); // ⌨️ raccourcis à soi // menus, outils, onglets et barre du bas rangés ou cachés à sa façon (⚙️ Personnaliser, ou Maintenance)
         const $ = q => dl.querySelector(q), board = $('[data-ly-board]'), canvas = $('[data-ly-canvas]'), pbody = $('[data-ly-pbody]');
         bindFontPick(pbody);
         // le panneau de droite s'élargit ou se rétrécit en tirant sa bordure (gardé pour la prochaine fois)
         const PW_KEY = 'genealogie-layout-panel-w', main = $('.ly-main');
-        const setPanelW = w => { w = Math.round(clamp(w, 260, Math.max(320, window.innerWidth - 420))); main.style.gridTemplateColumns = `46px minmax(0,1fr) ${w}px`; return w; };
+        const setPanelW = w => { w = Math.round(clamp(w, 260, Math.max(320, window.innerWidth - 420))); main.style.gridTemplateColumns = `36px minmax(0,1fr) ${w}px`; return w; };
         try { const w0 = Number(localStorage.getItem(PW_KEY)); if (w0) setPanelW(w0); } catch (_) {}
         $('[data-ly-resize]').addEventListener('pointerdown', e => {
             e.preventDefault(); const x0 = e.clientX, w0 = $('.ly-panels').getBoundingClientRect().width; let w = w0;
@@ -781,7 +796,8 @@
         });
         $('[data-ly-resize]').addEventListener('dblclick', () => { main.style.gridTemplateColumns = ''; try { localStorage.removeItem(PW_KEY); } catch (_) {} });
         function menu(label, items) { return `<details class="ly-menu" data-tb="menu-${esc(label)}" data-tb-label="Menu ${esc(label)}"><summary>${label}</summary><div class="ly-menu-list">${items.map(([k, l, sc]) => k === '-' ? '<hr>' : `<button type="button" data-ly-cmd="${k}"><span>${l}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`; }
-        const msg = t => { $('[data-ly-msg]').textContent = t || ''; };
+        let sbar = null; // K18 : la barre du bas commune (page · aide de l'outil · 🧲 📏 · zoom)
+        const msg = t => { if (sbar) sbar.flash(t || ''); else { const m = $('[data-ly-msg]'); if (m) m.textContent = t || ''; } };
         // « quitter la page ? » seulement s'il reste des changements pas enregistrés (pas après un zoom ou un document enregistré)
         ['input', 'change'].forEach(t => dl.addEventListener(t, () => queueMicrotask(() => { dl.dataset.dirty = dirty ? '1' : ''; })));
         const status = st => { const el = $('[data-ly-state]'); if (!el) return; if (window.LCNDA_UI?.savedStatus) window.LCNDA_UI.savedStatus(el, st); else el.textContent = {saved: '✓ Enregistré', dirty: '• modifié', saving: 'Enregistrement…', error: '⚠️ Pas enregistré'}[st] || st; };
@@ -842,7 +858,7 @@
         function syncChrome() {
             $('[data-ly-total]').textContent = D.pages.length; const g = $('[data-ly-goto]'); if (document.activeElement !== g) g.value = cur + 1; g.max = D.pages.length;
             dl.querySelectorAll('[data-ly-tool]').forEach(b => b.classList.toggle('is-on', b.dataset.lyTool === tool)); canvas.dataset.tool = tool;
-            const z = $('[data-ly-zoom]'); z.value = [...z.options].some(o => o.value === String(zoom)) ? String(zoom) : 'fit';
+            sbar?.sync(); sbar?.setHelp(TOOL_HELP[tool] || '');
             const it = one(); const fs = dl.querySelector('.ly-fs-fill'), ss = dl.querySelector('.ly-fs-stroke');
             fs.style.background = it ? cssPaint(D, it.fill) : '#fff'; ss.style.borderColor = it ? colorOf(D, it.stroke?.c, 'transparent') : '#111';
             fs.classList.toggle('is-on', fillTarget === 'fill'); ss.classList.toggle('is-on', fillTarget === 'stroke');
@@ -851,9 +867,16 @@
         const goPage = (i, scroll = true) => { if (editingId) stopEditing(); cur = clamp(Math.round(i), 0, D.pages.length - 1); sel = []; editMaster = null; render(); if (scroll) pageEl()?.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'}); };
         const setZoom = z => { const cx = canvas.scrollLeft + canvas.clientWidth / 2, cy = canvas.scrollTop + canvas.clientHeight / 2, k = z / zoom; zoom = clamp(z, 0.1, 8); board.style.zoom = zoom; canvas.scrollLeft = cx * k - canvas.clientWidth / 2; canvas.scrollTop = cy * k - canvas.clientHeight / 2; syncChrome(); };
         const zoomFit = () => { const W = px(D.page.w) * (D.page.facing ? 2 : 1) + 60, H = px(D.page.h) + 60; setZoom(Math.min(canvas.clientWidth / W, canvas.clientHeight / H)); pageEl()?.scrollIntoView({block: 'center', inline: 'center'}); };
+        if (window.LCNDA_UI?.editorStatus) { // K18 : à gauche la page (et la position), au milieu l'aide de l'outil, à droite 🧲 📏 et le zoom
+            sbar = window.LCNDA_UI.editorStatus({magnetTitle: 'Aimanter : les objets se collent aux marges, aux repères et aux autres objets',
+                magnet: {get: () => snapOn, set: v => { snapOn = !!v; syncChrome(); }},
+                rulersTitle: 'Repères et marges : montrer ou cacher', rulers: {get: () => guides, set: v => { guides = !!v; render(); }},
+                zoom: {get: () => zoom, set: k => setZoom(k), fit: () => zoomFit(), min: 0.1, max: 8}});
+            const old = $('.ly-status'), wh = document.createDocumentFragment(); old.querySelector('[data-ly-msg]')?.remove(); wh.append(...old.childNodes); sbar.setWhere(wh); sbar.querySelector('[data-ed-where]').classList.add('ly-status-where'); sbar.querySelector('[data-ed-help]').setAttribute('data-ly-msg', ''); old.replaceWith(sbar);
+        }
 
         /* — coordonnées : millimètres de la page sous la souris — */
-        const mmAt = (e, pe = pageEl()) => { const r = pe.getBoundingClientRect(), k = r.width / D.page.w; return {x: (e.clientX - r.left) / k, y: (e.clientY - r.top) / k, k}; };
+        const mmAt = (e, pe = pageEl()) => { const r = pe.getBoundingClientRect(), k = r.width / (pe.classList.contains('is-master') ? D.page.w : pageSize(D, Number(pe.dataset.page) || 0).w); return {x: (e.clientX - r.left) / k, y: (e.clientY - r.top) / k, k}; };
         const pageOfEvent = e => e.target.closest?.('.ly-page');
 
         /* — texte : édition dans le cadre — */
@@ -961,7 +984,7 @@
         canvas.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey) { e.preventDefault(); setZoom(zoom * (e.deltaY < 0 ? 1.1 : 1 / 1.1)); } }, {passive: false});
         /** Repères aimantés : bords et milieux de la page, marges, autres objets */
         function snapLines(skip) {
-            const m = editMaster ? {t: D.page.margin.t, b: D.page.margin.b, l: D.page.margin.o, r: D.page.margin.i} : pageMargins(D, cur), W = D.page.w, H = D.page.h;
+            const m = editMaster ? {t: D.page.margin.t, b: D.page.margin.b, l: D.page.margin.o, r: D.page.margin.i} : pageMargins(D, cur), W = editMaster ? D.page.w : pageSize(D, cur).w, H = editMaster ? D.page.h : pageSize(D, cur).h;
             const xs = [0, W, W / 2, m.l, W - m.r], ys = [0, H, H / 2, m.t, H - m.b];
             curList().forEach(o => { if (skip.includes(o.id) || o.hidden) return; xs.push(o.x, o.x + o.w, o.x + o.w / 2); ys.push(o.y, o.y + o.h, o.y + o.h / 2); });
             return {xs, ys};
@@ -1044,7 +1067,7 @@
         }
         function drawPen(P) {
             const pe = pageEl(); if (!pe || !pen) return; let g = pe.querySelector('.ly-penline'); if (!g) { g = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); g.setAttribute('class', 'ly-penline'); pe.appendChild(g); }
-            g.setAttribute('width', px(D.page.w)); g.setAttribute('height', px(D.page.h));
+            g.setAttribute('width', px(pageSize(D, cur).w)); g.setAttribute('height', px(pageSize(D, cur).h));
             g.innerHTML = `<polyline points="${[...pen.pts, [P.x, P.y]].map(([x, y]) => `${px(x)},${px(y)}`).join(' ')}" fill="none" stroke="#2f6bff" stroke-width="1.2"/>${pen.pts.map(([x, y]) => `<rect x="${px(x) - 3}" y="${px(y) - 3}" width="6" height="6" fill="#fff" stroke="#2f6bff"/>`).join('')}`;
         }
         function finishPen(closed) {
@@ -1073,6 +1096,64 @@
                     <label>Page <input type="number" name="page" min="1" max="${D.pages.length}" value="${cur + 1}"></label>
                     <label>Gabarit <select name="master">${D.masters.map(m => `<option value="${esc(m.id)}" ${m.id === (D.pages[cur]?.master || 'A') ? 'selected' : ''}>${esc(m.name)}</option>`).join('')}<option value="">Aucun</option></select></label></div>`,
                 onSubmit: f => { const n = Number(f.n.value) || 1, p = clamp(Number(f.page.value) || 1, 1, D.pages.length) - 1, w = f.where.value; addPages(n, w === 'start' ? 0 : w === 'end' ? D.pages.length : w === 'before' ? p : p + 1, f.master.value); }});
+        }
+        /** 📐 Fichier → Format du document (comme InDesign) : format de page (liste commune ou format libre), sens, pages en vis-à-vis, marges, fond perdu, colonnes ;
+         *  à toutes les pages ou à certaines ; les objets restent en place ou sont remis à l'échelle ; une seule étape de l'historique (↶) */
+        const pagesOfText = (t, n) => { const out = new Set(); String(t || '').split(/[,;]+/).forEach(part => { const m = part.trim().match(/^(\d+)\s*(?:[-–à]\s*(\d+))?$/); if (!m) return; const a = Number(m[1]), b = Number(m[2] || m[1]); for (let k = Math.min(a, b); k <= Math.max(a, b) && k - 1 < n; k++) if (k >= 1) out.add(k - 1); }); return [...out].sort((x, y) => x - y); };
+        function docFormatDialog() {
+            const F = window.LCNDA_FORMATS; if (!F) return msg('La liste des formats n’est pas chargée.');
+            if (editingId) stopEditing();
+            const P = D.page, M = P.margin, PS = pageSize(D, cur), st0 = P.start || 1;
+            const v0 = F.fromSize(PS.w, PS.h, 'mm', 300, P.unit || 'cm');
+            const n3 = (name, label, v, min = 0, max = 300, step = 0.5, unit = 'mm') => `<label><span>${label}</span><input type="number" name="${name}" value="${r1(v)}" min="${min}" max="${max}" step="${step}"${unit ? ` data-unit="${unit}"` : ''}></label>`; // K17 : l'unité dans la case
+            const dlg0 = ext.openDialog({eyebrow: 'DOCUMENT', title: '📐 Format du document', wide: true, submitLabel: 'Enregistrer',
+                body: `<div class="fmt-dlg-grid"><div>
+                    <fieldset><legend>Format de page</legend>${F.boxHtml({value: v0, units: ['mm', 'cm', 'in'], dpi: false})}
+                        <label class="checkbox-line"><input type="checkbox" name="ly_facing"${P.facing ? ' checked' : ''}> Pages en vis-à-vis (livre)</label></fieldset>
+                    <fieldset><legend>Appliquer le format à</legend><div class="fmt-pagesel">
+                        <label class="checkbox-line"><input type="radio" name="ly_to" value="all" checked> Toutes les pages (${A().plural(D.pages.length, 'page')})</label>
+                        <label class="checkbox-line"><input type="radio" name="ly_to" value="cur"> La page ${cur + st0} seulement</label>
+                        <label class="checkbox-line"><input type="radio" name="ly_to" value="some"> Les pages : <input type="text" name="ly_pages" placeholder="2-5, 8" aria-label="Numéros des pages" value="${cur + st0}"></label></div>
+                        <p class="muted">Les marges, colonnes et le fond perdu valent pour tout le document.</p></fieldset>
+                    <fieldset><legend>Les objets</legend><label class="checkbox-line"><input type="radio" name="ly_objs" value="keep" checked> Restent en place</label><label class="checkbox-line"><input type="radio" name="ly_objs" value="scale"> Sont remis à l’échelle (agrandis ou réduits avec la page)</label></fieldset>
+                </div><div>
+                    <fieldset><legend>Marges</legend><div class="fmt-row">${n3('ly_mt', 'Haut', M.t)}${n3('ly_mb', 'Bas', M.b)}${n3('ly_mi', P.facing ? 'Petit fond (intérieur)' : 'Gauche', M.i)}${n3('ly_mo', P.facing ? 'Grand fond (extérieur)' : 'Droite', M.o)}</div></fieldset>
+                    <fieldset><legend>Colonnes et fond perdu</legend><div class="fmt-row">${n3('ly_cols', 'Colonnes', P.columns, 1, 12, 1, '')}${n3('ly_gut', 'Gouttière', P.gutter, 0, 60)}${n3('ly_bleed', 'Fond perdu', P.bleed, 0, 30)}</div></fieldset>
+                    <dl class="fmt-before-after"><dt>Maintenant</dt><dd>${String(r1(PS.w / 10)).replace('.', ',')} × ${String(r1(PS.h / 10)).replace('.', ',')} cm</dd><dt>Après</dt><dd data-ly-fafter>—</dd></dl><p class="muted">↶ Annuler (⌘Z) revient au format d’avant.</p>
+                </div></div>`,
+                onOpen: d => {
+                    const box = F.bindBox(d.querySelector('[data-fmt-box]'), {onChange: () => after()});
+                    const after = () => { const [w, h] = F.inMm(box.get()); d.querySelector('[data-ly-fafter]').textContent = `${String(r1(w / 10)).replace('.', ',')} × ${String(r1(h / 10)).replace('.', ',')} cm`; }; after();
+                    d.querySelector('[name=ly_pages]').addEventListener('focus', () => { d.querySelector('[name=ly_to][value=some]').checked = true; });
+                },
+                onSubmit: f => {
+                    const box = F.bindBox(f.querySelector('[data-fmt-box]')), v = box.get(), [w0, h0] = F.inMm(v), W = r1(w0), H = r1(h0);
+                    if (W < 30 || H < 30 || W > 1500 || H > 1500) return window.LCNDA_UI?.fail ? window.LCNDA_UI.fail(f.querySelector('[data-fmt-w]'), 'Choisis une page entre 3 cm et 1,5 m de côté.') : false;
+                    const to = f.querySelector('[name=ly_to]:checked').value, list = to === 'all' ? D.pages.map((_, i) => i) : to === 'cur' ? [cur] : pagesOfText(f.ly_pages.value, D.pages.length + st0 - 1).map(k => k - (st0 - 1)).filter(k => k >= 0 && k < D.pages.length);
+                    if (!list.length) return window.LCNDA_UI?.fail ? window.LCNDA_UI.fail(f.ly_pages, `Écris les numéros des pages, par exemple « ${st0 + 1}-${st0 + 3}, ${st0 + 5} ».`) : false;
+                    const scale = f.querySelector('[name=ly_objs]:checked').value === 'scale';
+                    const fit = (items, ow, oh) => { const k = Math.min(W / ow, H / oh), dx = (W - ow * k) / 2, dy = (H - oh * k) / 2; items.forEach(it => { it.x = r1(it.x * k + dx); it.y = r1(it.y * k + dy); it.w = r1(it.w * k); it.h = r1(it.h * k); }); };
+                    if (to === 'all') {
+                        D.pages.forEach((pg, i) => { const o = pageSize(D, i); if (scale && (o.w !== W || o.h !== H)) fit(pg.items, o.w, o.h); delete pg.size; });
+                        if (scale && (P.w !== W || P.h !== H)) D.masters.forEach(m => fit(m.items, P.w, P.h));
+                        P.w = W; P.h = H; P.fmt = v.id;
+                    } else list.forEach(i => { const pg = D.pages[i], o = pageSize(D, i); if (scale && (o.w !== W || o.h !== H)) fit(pg.items, o.w, o.h); if (W === P.w && H === P.h) delete pg.size; else pg.size = {w: W, h: H}; });
+                    P.unit = v.unit; P.facing = f.ly_facing.checked;
+                    P.margin = {t: clamp(Number(f.ly_mt.value), 0, 300), b: clamp(Number(f.ly_mb.value), 0, 300), i: clamp(Number(f.ly_mi.value), 0, 300), o: clamp(Number(f.ly_mo.value), 0, 300)};
+                    P.columns = clamp(Math.round(Number(f.ly_cols.value) || 1), 1, 12); P.gutter = clamp(Number(f.ly_gut.value), 0, 60); P.bleed = clamp(Number(f.ly_bleed.value), 0, 30);
+                    const used = F.use('mise-en-page', v);
+                    commit(`Format du document : ${F.label(used || v)}${to === 'all' ? '' : ` (${A().plural(list.length, 'page')})`}`); render(); zoomFit();
+                }});
+            return dlg0;
+        }
+        /** ℹ️ Fichier → Informations du document : titre, auteur, sujet, mots-clés, langue, ISBN (dans le PDF et l'ePub exportés) */
+        async function docInfoDialog() {
+            const F = window.LCNDA_FORMATS; if (!F) return;
+            if (editingId) stopEditing();
+            const v = await F.openInfoDialog({value: {title: D.title || docName, lang: 'fr', ...(D.info || {})}, keys: ['title', 'author', 'subject', 'keywords', 'lang', 'isbn'], what: 'Ces informations vont dans le PDF (titre du fichier, auteur, sujet, mots-clés) et dans l’ePub exportés.'});
+            if (!v) return;
+            D.info = v; if (!Object.keys(v).length) delete D.info; if (v.title) D.title = v.title;
+            commit('Informations du document'); render();
         }
         /** Mettre, enlever ou remplacer un gabarit sur plusieurs pages */
         function mastersDialog() {
@@ -1265,7 +1346,7 @@
                     <div class="form-grid"><label>Couleur <input type="color" name="qdark" value="${esc(q0.dark)}"></label><label>Fond <input type="color" name="qlight" value="${esc(q0.light === 'none' ? '#ffffff' : q0.light)}"></label>
                         <label class="checkbox-line"><input type="checkbox" name="qnobg" ${q0.light === 'none' ? 'checked' : ''}> fond transparent</label>
                         <label><span data-help="La marge claire autour du code : 4 modules d’après la norme, pour que les téléphones le lisent bien.">Marge (modules)</span> <input type="number" name="qquiet" min="0" max="10" value="${q0.quiet}"></label>
-                        ${it ? '' : '<label>Taille (mm) <input type="number" name="qsize" min="10" max="200" value="30"></label>'}</div></div>
+                        ${it ? '' : '<label>Taille<input data-unit="mm" type="number" name="qsize" min="10" max="200" value="30"></label>'}</div></div>
                     <figure class="ly-qrprev"><div data-qprev></div><figcaption data-qinfo class="muted"></figcaption></figure></div>`,
                 onOpen: dg => {
                     const f = dg.querySelector('form') || dg, kind = () => dg.querySelector('[name=qkind]:checked')?.value || 'text';
@@ -1392,24 +1473,45 @@
         function citeDialog() {
             if (!caretBlock()) return;
             const P = window.LCNDA_PICKER || A(); let src = null;
+            // ❝ F4 : le style de la note (heritage-citations.js, lib/citation_styles.php) ; « Comme les archives » = la forme courte d'avant
+            const CS = ext.citations, STY = {archives: 'Comme les archives (« AD Corrèze, 3 E 123, f° 12 »)', ...(CS?.STYLES || {})};
+            let style = 'archives'; try { const v = localStorage.getItem('lcnda-layout-cite-style') || (CS ? CS.preferred() : ''); if (STY[v]) style = v; } catch (_) {}
+            let styled = null, pending = null, seq = 0, timer = 0;
             ext.openDialog({eyebrow: 'NOTE · SOURCE', title: '📚 Citer une source', submitLabel: 'Écrire la note',
-                body: `<p class="muted">La référence s’écrit en note, à l’endroit du curseur, au format des archives (« AD Corrèze, 3 E 123, f° 12 ») ; la source entre dans la bibliographie (Objet → Insérer la bibliographie).</p>
+                body: `<p class="muted">La référence s’écrit en note, à l’endroit du curseur, dans le style choisi ; la source entre dans la bibliographie (Objet → Insérer la bibliographie).</p>
                     <div><span class="pk-lab">Source</span>${P.pickerField({name: 'ly_src', kind: 'source'})}</div>
-                    <div class="form-grid"><label>Dépôt (archives) <input name="agency" placeholder="AD Corrèze" maxlength="200"></label><label>Cote <input name="cote" placeholder="3 E 123" maxlength="200"></label>
+                    <div class="form-grid"><label class="span-2">Style <select name="style">${Object.entries(STY).map(([k, l]) => `<option value="${k}"${k === style ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                    <label>Dépôt (archives) <input name="agency" placeholder="AD Corrèze" maxlength="200"></label><label>Cote <input name="cote" placeholder="3 E 123" maxlength="200"></label>
                     <label><span data-help="Le numéro de la feuille (f° 12, f° 12 v° pour le verso), de la page ou de la vue en ligne.">Folio, page ou vue</span> <input name="folio" placeholder="12" maxlength="60"></label><label>Date de l’acte <input name="date" data-ui-date="nocal" placeholder="7 mai 1850" maxlength="80"></label>
                     <label class="span-2">À ajouter (facultatif) <input name="extra" placeholder="acte de baptême de Jean" maxlength="300"></label></div>
                     <p class="ly-citeprev" data-cite-prev></p>`,
                 onOpen: dg => {
                     const f = dg.querySelector('form'), prev = dg.querySelector('[data-cite-prev]');
-                    const draw = () => { const t = src ? citeText(f, src) : ''; prev.textContent = t ? `Note : ${t}` : 'Choisis une source : la note s’écrit ici.'; };
+                    const draw = () => { const t = !src ? '' : style === 'archives' ? citeText(f, src) : (styled?.note || '…'); prev.textContent = t ? `Note : ${t}` : 'Choisis une source : la note s’écrit ici.'; };
+                    const refetch = () => {
+                        clearTimeout(timer); if (!src || style === 'archives' || !CS) { styled = null; pending = null; draw(); return; }
+                        const my = ++seq;
+                        pending = new Promise(res => { timer = setTimeout(async () => {
+                            try { const r = await CS.load({source_id: src.id, only: 1, archive: f.agency.value, cote: f.cote.value, folio: f.folio.value, date: f.date.value, extra: f.extra.value}); if (my === seq) styled = r.items?.[0]?.styles?.[style] || null; }
+                            catch (err) { if (my === seq) styled = null; }
+                            if (my === seq) draw(); res();
+                        }, 250); });
+                        draw();
+                    };
                     dg.addEventListener('picker-change', async e => {
                         if (e.detail?.name !== 'ly_src') return; const id = Number(e.detail.value) || 0; src = null;
                         if (id) { try { const r = await api('layout_source', {id}); src = r.source; f.agency.value = src.agency || ''; f.cote.value = src.cote || ''; const c = (r.citations || []).find(x => x.folio || x.date); if (c && !f.folio.value) f.folio.value = c.folio || ''; } catch (err) { toast(err.message, 'error'); } }
-                        draw();
+                        refetch();
                     });
-                    dg.addEventListener('input', draw); draw(); setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30);
+                    f.elements.style.addEventListener('change', () => { style = f.elements.style.value; try { localStorage.setItem('lcnda-layout-cite-style', style); } catch (_) {} refetch(); });
+                    dg.addEventListener('input', e => { if (e.target.name !== 'style') refetch(); }); draw(); setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30);
                 },
-                onSubmit: f => { if (!src) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une source.'); putNote(citeText(f, src), {src: src.id, srcLabel: biblioLabel(f, src)}); msg('📚 Citation ajoutée en note (et dans la bibliographie).'); }});
+                onSubmit: async f => {
+                    if (!src) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une source.');
+                    if (style !== 'archives' && pending) await pending;
+                    if (style !== 'archives' && styled?.note) putNote(styled.note, {src: src.id, srcLabel: styled.biblio || styled.note, style});
+                    else putNote(citeText(f, src), {src: src.id, srcLabel: biblioLabel(f, src)});
+                    msg('📚 Citation ajoutée en note (et dans la bibliographie).'); }});
         }
         /** Les appels de note d'un bloc, dans le texte qu'on écrit ou dans le document */
         function editNote(k, remove = false) {
@@ -1613,7 +1715,7 @@
                     if (it.hidden) continue;
                     if (it.type === 'text') {
                         if (measureOverflow(V, it, pg.items.filter(o => o !== it))) add('err', i, it.id, it.next ? 'Texte qui déborde (alors qu’il est chaîné : vérifie le bloc suivant).' : 'Texte qui déborde de son bloc (⊞) : agrandis le bloc, chaîne-le, ou « Faire couler le texte ».');
-                        if (it.x < m.l - 0.5 || it.y < m.t - 0.5 || it.x + it.w > D.page.w - m.r + 0.5 || it.y + it.h > D.page.h - m.b + 0.5) add('warn', i, it.id, 'Texte hors des marges : il risque d’être coupé ou trop près du bord.');
+                        if (it.x < m.l - 0.5 || it.y < m.t - 0.5 || it.x + it.w > pageSize(D, i).w - m.r + 0.5 || it.y + it.h > pageSize(D, i).h - m.b + 0.5) add('warn', i, it.id, 'Texte hors des marges : il risque d’être coupé ou trop près du bord.');
                         if (!plainOf(it.html).trim() && !it._follow) add('info', i, it.id, 'Bloc de texte vide.');
                     }
                     if (it.type === 'frame') {
@@ -1627,7 +1729,7 @@
                     }
                     if (it.type !== 'text' && B > 0) { // touche le bord sans aller jusqu'au fond perdu
                         const near = (a, b) => Math.abs(a - b) < 1;
-                        if ((near(it.x, 0) && it.x > -B + 0.2) || (near(it.y, 0) && it.y > -B + 0.2) || (near(it.x + it.w, D.page.w) && it.x + it.w < D.page.w + B - 0.2) || (near(it.y + it.h, D.page.h) && it.y + it.h < D.page.h + B - 0.2)) add('warn', i, it.id, `Touche le bord de la page sans aller jusqu’au fond perdu (${B} mm) : un liseré blanc peut apparaître à la coupe.`);
+                        if ((near(it.x, 0) && it.x > -B + 0.2) || (near(it.y, 0) && it.y > -B + 0.2) || (near(it.x + it.w, pageSize(D, i).w) && it.x + it.w < pageSize(D, i).w + B - 0.2) || (near(it.y + it.h, pageSize(D, i).h) && it.y + it.h < pageSize(D, i).h + B - 0.2)) add('warn', i, it.id, `Touche le bord de la page sans aller jusqu’au fond perdu (${B} mm) : un liseré blanc peut apparaître à la coupe.`);
                     }
                 }
             }
@@ -1656,9 +1758,9 @@
                 undo, redo, cut: () => copy(true), copy: () => copy(), paste: () => paste(), dup, del, all: () => { sel = curList().filter(x => !x.hidden && !locked(x)).map(x => x.id); drawSel(); renderPanel(); }, none: () => { sel = []; drawSel(); renderPanel(); },
                 front: () => arrange('front'), fwd: () => arrange('fwd'), back: () => arrange('back'), bottom: () => arrange('bottom'), lock: lockToggle, hide: () => { selected().forEach(x => { x.hidden = true; }); sel = []; commit(); render(); }, showall: () => { curList().forEach(x => { delete x.hidden; }); commit(); render(); }, fitframe: fitFrame, place: () => placeImage(),
                 addend: () => addPages(1, D.pages.length), insert: insertPagesDialog, masters: () => mastersDialog(), duppage: dupPage, delpage: delPage, goto: gotoDialog, first: () => goPage(0), prev: () => goPage(cur - 1), next: () => goPage(cur + 1), last: () => goPage(D.pages.length - 1),
-                zin: () => setZoom(zoom * 1.25), zout: () => setZoom(zoom / 1.25), zfit: zoomFit, z100: () => setZoom(1), guides: () => { guides = !guides; render(); }, snap: () => { snapOn = !snapOn; syncChrome(); msg(snapOn ? 'Magnétisme activé.' : 'Magnétisme coupé.'); }, preview: () => { preview = !preview; render(); },
+                zin: () => setZoom(zoom * 1.25), zout: () => setZoom(zoom / 1.25), zfit: zoomFit, z100: () => setZoom(1), guides: () => { guides = !guides; render(); }, snap: () => { snapOn = !snapOn; syncChrome(); msg(snapOn ? '🧲 Aimanter : oui.' : '🧲 Aimanter : arrêté.'); }, preview: () => { preview = !preview; render(); },
                 endmaster: () => { editMaster = null; sel = []; render(); },
-                preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), idxplaces: () => insertAuto('places'), idxjobs: () => insertAuto('jobs'), notesblock: () => insertAuto('notes'), biblio: () => insertAuto('biblio'), dynperson: () => dynPersonDialog(), dyndiagram: () => insertDiagram(),
+                docformat: () => docFormatDialog(), docinfo: () => docInfoDialog(), preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), idxplaces: () => insertAuto('places'), idxjobs: () => insertAuto('jobs'), notesblock: () => insertAuto('notes'), biblio: () => insertAuto('biblio'), dynperson: () => dynPersonDialog(), dyndiagram: () => insertDiagram(),
                 tree: () => treeDialog(), fnote: () => insertNote(), cite: () => citeDialog(), qr: () => qrDialog(), merge: () => mergeDialog(), mergesample: () => mergeSample(),
                 comment: () => addComment(false), suggest: () => addComment(true), reviewpanel: () => { panel = 'review'; renderPanel(); }, sendreview: () => exportDialog('review'), importreview: () => importReview(), annot: () => exportDialog('annot'),
                 chain: () => { const it = one(); if (it?.type !== 'text') return msg('Choisis d’abord un bloc de texte.'); if (it.next) return msg('Ce bloc est déjà chaîné (« Couper le chaînage » d’abord).'); linkFrom = it.id; canvas.classList.add('is-linking'); render(); msg('➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler.'); },
@@ -1670,7 +1772,7 @@
         }
         dl.addEventListener('click', e => {
             const c = e.target.closest('[data-ly-cmd]'); if (c) { e.preventDefault(); exec(c.dataset.lyCmd); return; }
-            const t = e.target.closest('[data-ly-tool]'); if (t) { if (editingId) stopEditing(); tool = t.dataset.lyTool; pen = null; syncChrome(); msg(TOOLS.find(x => x[0] === tool)?.[2] || ''); return; }
+            const t = e.target.closest('[data-ly-tool]'); if (t) { if (editingId) stopEditing(); tool = t.dataset.lyTool; pen = null; syncChrome(); return; }
             const pt = e.target.closest('[data-ly-panel]'); if (pt) { panel = pt.dataset.lyPanel; dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b === pt)); renderPanel(); return; }
             if (e.target.closest('[data-ly-fsswap]')) { swapPaint(); return; }
             if (e.target.closest('[data-ly-fsnone]')) { if (!selected().length) return msg('Choisis un objet.'); applyPaint('none'); return; }
@@ -1682,7 +1784,6 @@
         });
         dl.addEventListener('toggle', e => { if (e.target.matches?.('details.ly-menu[open]')) dl.querySelectorAll('details.ly-menu[open]').forEach(d => { if (d !== e.target) d.removeAttribute('open'); }); }, true);
         $('[data-ly-goto]').addEventListener('change', e => goPage(Number(e.target.value) - 1));
-        $('[data-ly-zoom]').addEventListener('change', e => { if (e.target.value === 'fit') zoomFit(); else setZoom(Number(e.target.value)); });
         $('[data-ly-name]').addEventListener('input', e => { docName = e.target.value.slice(0, 160); setDirty(); });
         // raccourcis clavier (quand la fenêtre est au premier plan)
         const keyAc = new AbortController();
@@ -1707,7 +1808,7 @@
             if (k === 'x' && !mod && e.shiftKey) { swapPaint(); return; }
             if (k === 'x' && !mod) { fillTarget = fillTarget === 'fill' ? 'stroke' : 'fill'; syncChrome(); if (panel === 'color') renderPanel(); return; }
             if (e.key === '/' && !mod) { if (selected().length) applyPaint('none'); return; }
-            const t = TOOLS.find(x => x[3] === k); if (t && !mod) { tool = t[0]; pen = null; syncChrome(); msg(t[2]); }
+            const t = TOOLS.find(x => x[3] === k); if (t && !mod) { tool = t[0]; pen = null; syncChrome(); }
         }, {signal: keyAc.signal});
 
         /* — enregistrer, exporter, fermer — */
@@ -1779,7 +1880,7 @@
             if (panel === 'history') pbody.querySelector('.is-current')?.scrollIntoView({block: 'nearest'});
             pbody.scrollTop = keepScroll;
             // vignette : réduite, avec un contour à son échelle (sinon une page blanche disparaît sur le panneau blanc)
-            const thumbZoom = (pg, w) => { const z = w / px(D.page.w); pg.style.zoom = String(z); pg.style.outline = `${(1 / z).toFixed(1)}px solid #b9b9c3`; };
+            const thumbZoom = (pg, w) => { const z = w / Math.max(1, parseFloat(pg.style.width) || px(D.page.w)); pg.style.zoom = String(z); pg.style.outline = `${(1 / z).toFixed(1)}px solid #b9b9c3`; };
             pbody.querySelectorAll('.ly-thumb .ly-page').forEach(p => thumbZoom(p, 120));
             // Beaucoup de pages : petites vignettes, dessinées seulement quand elles arrivent à l'écran
             const lazy = pbody.querySelectorAll('.ly-thumb[data-ly-lazy]');
@@ -1816,16 +1917,16 @@
             if (!its.length) return `<p class="ly-help">Choisis un objet sur la page (outil ➤). Double-clic sur un texte pour l’écrire, sur un cadre pour y placer une image.</p>` + sec('Outils', `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="place">🖼️ Placer une image</button></div>`);
             let h = '';
             if (it) {
-                h += sec('Position et taille', `<div class="ly-grid2">${num('x', 'X', it.x)}${num('y', 'Y', it.y)}${num('w', 'L', it.w, {min: 0})}${num('h', 'H', it.h, {min: 0})}${num('rot', 'Angle', it.rot || 0, {min: -360, max: 360, step: 1, unit: '°'})}<label class="ly-f ly-check"><input type="checkbox" data-ly-set="lockRatio" ${it.lockRatio ? 'checked' : ''}> Proportions</label></div>
+                h += sec('Position et taille', `<div class="ly-grid2">${num('x', 'X', it.x)}${num('y', 'Y', it.y)}${num('w', 'L', it.w, {min: 0})}${num('h', 'H', it.h, {min: 0})}${num('rot', 'Angle', it.rot || 0, {min: -360, max: 360, step: 1, unit: '°'})}<label class="ui-toggle ly-f ly-check"><input type="checkbox" data-ly-set="lockRatio" ${it.lockRatio ? 'checked' : ''}><i></i>Proportions</label></div>
                     <div class="ly-row"><button type="button" class="button small secondary" data-ly-flip="flipX">⇋ Miroir H</button><button type="button" class="button small secondary" data-ly-flip="flipY">⇵ Miroir V</button></div><label class="ly-f"><span>Nom</span><input type="text" data-ly-set="name" value="${esc(it.name || '')}" placeholder="(dans Calques)"></label>`);
             }
             const f0 = its[0];
             h += sec('Couleur', `${paintSel('fill', 'Fond', f0.fill)}${paintSel('stroke.c', 'Contour', f0.stroke?.c || 'none')}<div class="ly-grid2">${num('stroke.w', 'Épaisseur', f0.stroke?.w || 0, {min: 0, max: 100, step: 0.25, unit: 'pt'})}${sel2('stroke.dash', 'Type', DASHES, f0.stroke?.dash || 'solid')}${sel2('stroke.cap', 'Bouts', [['butt', 'Droits'], ['round', 'Arrondis'], ['square', 'Carrés']], f0.stroke?.cap || 'butt')}${sel2('stroke.join', 'Angles', [['miter', 'Pointus'], ['round', 'Arrondis'], ['bevel', 'Biseautés']], f0.stroke?.join || 'miter')}</div>${['rect', 'frame', 'text'].includes(f0.type) ? num('radius', 'Angles arrondis', f0.radius || 0, {min: 0, max: 500, step: 0.5}) : ''}`);
             h += sec('Effets', `<div class="ly-grid2">${num('opacity', 'Opacité', f0.opacity ?? 100, {min: 0, max: 100, step: 1, unit: '%'})}${sel2('blend', help('Fusion', 'Comment la couleur de l’objet se mélange à ce qui est dessous : « Produit » assombrit, « Superposition » éclaircit.'), BLENDS, f0.blend || 'normal')}${num('feather', help('Contour progressif', 'Adoucit les bords de l’objet sur cette largeur, comme un flou du pourtour.'), f0.feather || 0, {min: 0, max: 50, step: 0.5})}</div>
-                <label class="ly-f ly-check"><input type="checkbox" data-ly-set="shadow.on" ${f0.shadow?.on ? 'checked' : ''}> Ombre portée</label>${f0.shadow?.on ? `<div class="ly-grid2">${num('shadow.x', 'Décalage X', f0.shadow.x ?? 1.5)}${num('shadow.y', 'Décalage Y', f0.shadow.y ?? 1.5)}${num('shadow.blur', 'Flou', f0.shadow.blur ?? 2, {min: 0, max: 50})}${num('shadow.o', 'Opacité', f0.shadow.o ?? 50, {min: 0, max: 100, step: 1, unit: '%'})}<label class="ly-f"><span>Couleur</span><input type="color" data-ly-set="shadow.c" value="${esc(f0.shadow.c || '#000000')}"></label></div>` : ''}`, false);
+                <label class="ui-toggle ly-f ly-check"><input type="checkbox" data-ly-set="shadow.on" ${f0.shadow?.on ? 'checked' : ''}><i></i>Ombre portée</label>${f0.shadow?.on ? `<div class="ly-grid2">${num('shadow.x', 'Décalage X', f0.shadow.x ?? 1.5)}${num('shadow.y', 'Décalage Y', f0.shadow.y ?? 1.5)}${num('shadow.blur', 'Flou', f0.shadow.blur ?? 2, {min: 0, max: 50})}${num('shadow.o', 'Opacité', f0.shadow.o ?? 50, {min: 0, max: 100, step: 1, unit: '%'})}<label class="ly-f"><span>Couleur</span><input type="color" data-ly-set="shadow.c" value="${esc(f0.shadow.c || '#000000')}"></label></div>` : ''}`, false);
             if (it) {
                 if (it.type === 'polygon' || it.type === 'star') h += sec('Forme', `${num('sides', it.type === 'star' ? 'Branches' : 'Côtés', it.sides || (it.type === 'star' ? 5 : 6), {min: 3, max: 60, step: 1, unit: ''})}${it.type === 'star' ? num('inner', 'Creux', it.inner || 45, {min: 5, max: 100, step: 1, unit: '%'}) : ''}`);
-                if (it.type === 'path') h += sec('Tracé', `<label class="ly-f ly-check"><input type="checkbox" data-ly-set="smooth" ${it.smooth ? 'checked' : ''}> Courbe douce</label><label class="ly-f ly-check"><input type="checkbox" data-ly-set="closed" ${it.closed ? 'checked' : ''}> Fermé</label>`);
+                if (it.type === 'path') h += sec('Tracé', `<label class="ui-toggle ly-f ly-check"><input type="checkbox" data-ly-set="smooth" ${it.smooth ? 'checked' : ''}><i></i>Courbe douce</label><label class="ui-toggle ly-f ly-check"><input type="checkbox" data-ly-set="closed" ${it.closed ? 'checked' : ''}><i></i>Fermé</label>`);
                 if (['rect', 'ellipse', 'polygon', 'star', 'frame'].includes(it.type)) h += sec('Convertir la forme', `<div class="ly-row">${[['rect', '▭'], ['ellipse', '◯'], ['polygon', '⬡'], ['star', '☆']].map(([k, ic]) => `<button type="button" class="button small secondary" data-ly-convert="${k}" title="En ${k}">${ic}</button>`).join('')}</div>`, false);
             }
             if (it && it.type !== 'text') h += sec('Habillage du texte', `${sel2('wrap.mode', help('Le texte voisin', 'Les blocs de texte posés sous cet objet le contournent au lieu de passer dessous.', 'habillage'), WRAPS, it.wrap?.mode || 'none')}${num('wrap.off', 'Distance', it.wrap?.off ?? 3, {min: 0, max: 100, step: 0.5})}<p class="ly-help">Les blocs de texte de la page contournent cet objet.</p>`, !!it.wrap?.mode && it.wrap.mode !== 'none');
@@ -1842,7 +1943,7 @@
                 if (['places', 'jobs'].includes(it.auto)) h += sec(it.auto === 'places' ? '📍 Index des lieux' : '🔨 Index des métiers', `<p class="ly-help">Mots marqués avec le style de caractère « ${it.auto === 'places' ? 'Lieu' : 'Métier'} à indexer »${it.terms?.length ? `, et ${A().plural(it.terms.length, it.auto === 'places' ? 'lieu' : 'métier', it.auto === 'places' ? 'lieux' : 'métiers')} de ta base ${it.terms.length > 1 ? 'cherchés' : 'cherché'} dans le texte` : ''}. Rangé de A à Z, avec les pages.</p>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-list')}<div class="ly-row"><button type="button" class="button small secondary" data-ly-idxterms>${it.terms?.length ? '↻ Recharger ceux de la base' : '＋ Chercher ceux de la base'}</button>${it.terms?.length ? '<button type="button" class="button small secondary" data-ly-idxtermsnone>Seulement les mots marqués</button>' : ''}</div>`);
                 else if (['notes', 'biblio'].includes(it.auto)) h += sec(it.auto === 'notes' ? '🗒 Notes du chapitre' : '📚 Bibliographie', `<p class="ly-help">${it.auto === 'notes' ? 'Les notes appelées dans le chapitre où se trouve ce bloc s’y rangent toutes seules, numérotées (Document → Notes de bas de page).' : 'Les sources citées en note (« 📚 Citer une source ») s’y rangent toutes seules, de A à Z.'}</p>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-list')}`);
                 else if (it.auto) h += sec(it.auto === 'toc' ? '📑 Table des matières' : '🔤 Index des noms', it.auto === 'toc'
-                    ? `<p class="ly-help">Elle reprend, dans l’ordre des pages, les paragraphes de ces styles (le 1er au premier niveau, les suivants en retrait) :</p><div class="ly-autost">${D.paraStyles.map(s0 => `<label class="ly-f ly-check"><input type="checkbox" data-ly-autost="${esc(s0.id)}" ${(it.autoStyles || []).includes(s0.id) ? 'checked' : ''}> ${esc(s0.name)}${(it.autoStyles || []).includes(s0.id) ? ` <small>(niveau ${(it.autoStyles || []).indexOf(s0.id) + 1})</small>` : ''}</label>`).join('')}</div>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-body')}<label class="ly-f ly-check"><input type="checkbox" data-ly-set="autoDots" ${it.autoDots !== false ? 'checked' : ''}> Points de conduite (……… 12)</label>`
+                    ? `<p class="ly-help">Elle reprend, dans l’ordre des pages, les paragraphes de ces styles (le 1er au premier niveau, les suivants en retrait) :</p><div class="ly-autost">${D.paraStyles.map(s0 => `<label class="ly-f ly-check"><input type="checkbox" data-ly-autost="${esc(s0.id)}" ${(it.autoStyles || []).includes(s0.id) ? 'checked' : ''}> ${esc(s0.name)}${(it.autoStyles || []).includes(s0.id) ? ` <small>(niveau ${(it.autoStyles || []).indexOf(s0.id) + 1})</small>` : ''}</label>`).join('')}</div>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-body')}<label class="ui-toggle ly-f ly-check"><input type="checkbox" data-ly-set="autoDots" ${it.autoDots !== false ? 'checked' : ''}><i></i>Points de conduite (……… 12)</label>`
                     : `<p class="ly-help">Noms marqués avec le style de caractère « Nom à indexer »${it.names?.length ? `, et ${A().plural(it.names.length, 'personne')} de la généalogie ${it.names.length > 1 ? 'cherchées' : 'cherchée'} dans le texte` : ''}. Rangé par nom de famille, avec les pages.</p>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-list')}<div class="ly-row"><button type="button" class="button small secondary" data-ly-idxnames>${it.names?.length ? '↻ Recharger les noms de la généalogie' : '＋ Chercher les noms de la généalogie'}</button>${it.names?.length ? '<button type="button" class="button small secondary" data-ly-idxnone>Seulement les noms marqués</button>' : ''}</div>`);
                 if (it.dyn) h += sec('👤 Objet dynamique : fiche', `<p class="ly-help">Ce texte suit une fiche de la généalogie${it.dyn.at ? ` (${window.LCNDA_UI?.whenText?.(it.dyn.at, {label: 'mis à jour'}) || esc(it.dyn.at)})` : ''}. L’écrire à la main le détache.</p><div class="ly-row"><button type="button" class="button small" data-ly-dynupd>↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-dynedit>Changer la fiche ou ce qu’on montre…</button><button type="button" class="button small secondary" data-ly-dynopen>↗ Ouvrir la fiche</button><button type="button" class="button small secondary" data-ly-dyndetach>Détacher</button></div>`);
             }
@@ -1897,9 +1998,10 @@
         function panelDoc() {
             const P = D.page, M = P.margin;
             return sec('Format du document', `<label class="ly-f"><span>Titre du livre ({titre})</span><input type="text" data-ly-doc="title" value="${esc(D.title || '')}"></label>
+                <p class="ly-help"><button type="button" class="button small secondary" data-ly-cmd="docformat">📐 Format du document…</button> <button type="button" class="button small secondary" data-ly-cmd="docinfo">ℹ️ Informations…</button></p>
                 <label class="ly-f"><span>Format</span><select data-ly-doc="size"><option value="">Personnalisé</option>${allSizes().map(([k, l, w, h]) => `<option value="${k}" ${Math.abs(P.w - w) < 0.2 && Math.abs(P.h - h) < 0.2 ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <div class="ly-grid2">${num('w', 'Largeur', P.w, {min: 30, max: 1500, attr: 'data-ly-doc'})}${num('h', 'Hauteur', P.h, {min: 30, max: 1500, attr: 'data-ly-doc'})}${num('m.t', 'Haut', M.t, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.b', 'Bas', M.b, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.i', P.facing ? 'Petit fond' : 'Gauche', M.i, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.o', P.facing ? 'Grand fond' : 'Droite', M.o, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('columns', 'Colonnes', P.columns, {min: 1, max: 12, step: 1, unit: '', attr: 'data-ly-doc'})}${num('gutter', 'Gouttière', P.gutter, {min: 0, max: 60, attr: 'data-ly-doc'})}${num('bleed', help('Fond perdu', 'La marge de 3 à 5 mm autour de la page, coupée par l’imprimeur : les images qui vont jusqu’au bord doivent la remplir.', 'fond perdu'), P.bleed, {min: 0, max: 30, attr: 'data-ly-doc'})}${num('slug', help('Ligne-bloc', 'Une bande en dehors du fond perdu pour les notes à l’imprimeur (titre, date) ; elle ne s’imprime qu’avec les traits de coupe.'), P.slug || 0, {min: 0, max: 80, attr: 'data-ly-doc'})}${num('start', '1re page n°', P.start || 1, {min: 1, max: 9999, step: 1, unit: '', attr: 'data-ly-doc'})}</div>
-                <label class="ly-f ly-check"><input type="checkbox" data-ly-doc="facing" ${P.facing ? 'checked' : ''}> Pages en vis-à-vis (livre)</label>${paintSel('paper', 'Papier', P.paper).replace('data-ly-set="paper"', 'data-ly-doc="paper"')}
+                <label class="ui-toggle ly-f ly-check"><input type="checkbox" data-ly-doc="facing" ${P.facing ? 'checked' : ''}><i></i>Pages en vis-à-vis (livre)</label>${paintSel('paper', 'Papier', P.paper).replace('data-ly-set="paper"', 'data-ly-doc="paper"')}
                 <p class="ly-help">Les nouveaux documents partent des <button type="button" class="link-button" data-ly-defaults>réglages par défaut</button>.</p>`)
                 + sec('Notes de bas de page', `${sel2('fnplace', help('Les notes vont', 'En bas du bloc : chaque note s’écrit sous le texte qui l’appelle. En fin de chapitre : toutes les notes du chapitre se rangent dans le bloc « Notes du chapitre » (Objet → Insérer les notes du chapitre).', 'notes de bas de page'), [['block', 'en bas du bloc de texte'], ['chapter', 'en fin de chapitre']], D.fn?.place || 'block', 'data-ly-fn')}${sel2('fnrestart', 'Numéros', [['none', 'qui se suivent dans tout le livre'], ['chapter', 'qui recommencent à 1 à chaque chapitre'], ['page', 'qui recommencent à 1 à chaque page']], D.fn?.restart || 'none', 'data-ly-fn')}
                     <p class="ly-help">${A().plural(Object.keys(D.notes || {}).length, 'note')} dans le document. Pour en ajouter une : double-clic dans un texte, place le curseur, puis Texte → « ¹ Note » ou « 📚 Citer une source ».</p>`, false);
@@ -2065,8 +2167,8 @@
         }
         function align(k) {
             const its = selected().filter(x => !locked(x)); if (!its.length) return;
-            const to = dl.dataset.alignTo || (its.length > 1 ? 'sel' : 'margins'), m = pageMargins(D, cur);
-            const ref = to === 'sel' && its.length > 1 ? bounds(its) : to === 'page' ? {x: 0, y: 0, w: D.page.w, h: D.page.h} : {x: m.l, y: m.t, w: D.page.w - m.l - m.r, h: D.page.h - m.t - m.b};
+            const to = dl.dataset.alignTo || (its.length > 1 ? 'sel' : 'margins'), m = pageMargins(D, cur), PS = editMaster ? {w: D.page.w, h: D.page.h} : pageSize(D, cur);
+            const ref = to === 'sel' && its.length > 1 ? bounds(its) : to === 'page' ? {x: 0, y: 0, w: PS.w, h: PS.h} : {x: m.l, y: m.t, w: PS.w - m.l - m.r, h: PS.h - m.t - m.b};
             its.forEach(it => { if (k === 'l') it.x = ref.x; if (k === 'r') it.x = r1(ref.x + ref.w - it.w); if (k === 'ch') it.x = r1(ref.x + (ref.w - it.w) / 2); if (k === 't') it.y = ref.y; if (k === 'b') it.y = r1(ref.y + ref.h - it.h); if (k === 'cv') it.y = r1(ref.y + (ref.h - it.h) / 2); });
             commit(); render();
         }
@@ -2089,14 +2191,14 @@
             const fonts = fontList();
             ext.openDialog({eyebrow: kind === 'para' ? 'STYLE DE PARAGRAPHE' : 'STYLE DE CARACTÈRE', title: s0.name, wide: true, submitLabel: 'Enregistrer le style', onOpen: bindFontPick, onDelete: sid && !STYLE_IDS.includes(sid) ? () => { const i = list.indexOf(s0); if (i >= 0) list.splice(i, 1); commit(); render(); } : undefined,
                 body: `<div class="form-grid"><label>Nom <input name="name" value="${esc(s0.name)}" maxlength="60"></label><label>Police ${fontPickHtml('name="font"', s0.font || '')}</label>
-                    <label>Corps (pt) <input type="number" step="0.5" name="size" value="${s0.size ?? ''}"></label><label>Interlignage (pt) <input type="number" step="0.5" name="lead" value="${s0.lead ?? ''}"></label>
+                    <label>Corps<input data-unit="pt" type="number" step="0.5" name="size" value="${s0.size ?? ''}"></label><label>Interlignage<input data-unit="pt" type="number" step="0.5" name="lead" value="${s0.lead ?? ''}"></label>
                     <label>Graisse <select name="weight"><option value="">—</option>${[300, 400, 500, 600, 700, 900].map(w => `<option ${Number(s0.weight) === w ? 'selected' : ''}>${w}</option>`).join('')}</select></label><label>Couleur <select name="color"><option value="">—</option>${D.swatches.filter(x => x.type !== 'grad').map(x => `<option value="${esc(x.id)}" ${s0.color === x.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</select></label>
                     <label>Approche (‰) <input type="number" step="5" name="track" value="${s0.track ?? ''}"></label><label>Capitales <select name="caps"><option value="">—</option><option value="small" ${s0.caps === 'small' ? 'selected' : ''}>Petites capitales</option><option value="all" ${s0.caps === 'all' ? 'selected' : ''}>Toutes capitales</option></select></label>
                     <label class="checkbox-line"><input type="checkbox" name="italic" ${s0.italic ? 'checked' : ''}> Italique</label><label class="checkbox-line"><input type="checkbox" name="underline" ${s0.underline ? 'checked' : ''}> Souligné</label>
                     ${kind === 'para' ? `<label>Alignement <select name="align">${[['left', 'À gauche'], ['center', 'Centré'], ['right', 'À droite'], ['justify', 'Justifié'], ['justify-all', 'Justifié (tout)']].map(([k, l]) => `<option value="${k}" ${s0.align === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                    <label>Espace avant (mm) <input type="number" step="0.5" name="before" value="${s0.before ?? ''}"></label><label>Espace après (mm) <input type="number" step="0.5" name="after" value="${s0.after ?? ''}"></label>
-                    <label>Retrait gauche (mm) <input type="number" step="0.5" name="left" value="${s0.left ?? ''}"></label><label>Retrait droit (mm) <input type="number" step="0.5" name="right" value="${s0.right ?? ''}"></label>
-                    <label>Retrait 1re ligne (mm) <input type="number" step="0.5" name="indent" value="${s0.indent ?? ''}"></label><label>Lettrine (lignes, 0 = aucune) <input type="number" min="0" max="8" name="drop" value="${s0.drop ?? 0}"></label>
+                    <label>Espace avant<input data-unit="mm" type="number" step="0.5" name="before" value="${s0.before ?? ''}"></label><label>Espace après<input data-unit="mm" type="number" step="0.5" name="after" value="${s0.after ?? ''}"></label>
+                    <label>Retrait gauche<input data-unit="mm" type="number" step="0.5" name="left" value="${s0.left ?? ''}"></label><label>Retrait droit<input data-unit="mm" type="number" step="0.5" name="right" value="${s0.right ?? ''}"></label>
+                    <label>Retrait 1re ligne<input data-unit="mm" type="number" step="0.5" name="indent" value="${s0.indent ?? ''}"></label><label>Lettrine (lignes, 0 = aucune) <input type="number" min="0" max="8" name="drop" value="${s0.drop ?? 0}"></label>
                     <label class="checkbox-line"><input type="checkbox" name="hyph" ${s0.hyph ? 'checked' : ''}> Césure</label>` : ''}</div><p class="muted">Tous les paragraphes${kind === 'char' ? ' (mots)' : ''} qui ont ce style changent dans tout le livre.</p>`,
                 onSubmit: f => {
                     const v = Object.fromEntries(new FormData(f)); const o = {id: s0.id, name: (v.name || 'Style').slice(0, 60)};
@@ -2383,31 +2485,12 @@
         return {svg, w, h, name: `${kind} de ${data.root?.name || 'la personne'}`, count: new Set(people.filter(Boolean).map(p => p.id)).size};
     }
     /* ═════════════ 📱 ePub (EPUB 3) : fabriqué dans le navigateur, un petit ZIP (« stored », ou deflate si le navigateur sait) ═════════════ */
-    const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
-    const crc32 = u8 => { let c = 0xffffffff; for (let i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
-    async function deflateRaw(u8) { if (typeof CompressionStream !== 'function') return null; try { const st = new Blob([u8]).stream().pipeThrough(new CompressionStream('deflate-raw')); return new Uint8Array(await new Response(st).arrayBuffer()); } catch (_) { return null; } }
     /** files : [{name, data (Uint8Array ou texte), store}] → Blob ZIP (le premier fichier tel quel : le « mimetype » de l'ePub) */
-    async function makeZip(files, type = 'application/zip') {
-        const enc = new TextEncoder(), parts = [], central = []; let offset = 0;
-        const d = new Date(), dosTime = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1), dosDate = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
-        for (const f of files) {
-            const name = enc.encode(f.name), raw = typeof f.data === 'string' ? enc.encode(f.data) : f.data, crc = crc32(raw);
-            let body = raw, method = 0; if (!f.store && raw.length > 64) { const z = await deflateRaw(raw); if (z && z.length < raw.length) { body = z; method = 8; } }
-            const utf = /[^\x20-\x7e]/.test(f.name) ? 0x0800 : 0;
-            const h = new DataView(new ArrayBuffer(30)); h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, utf, true); h.setUint16(8, method, true); h.setUint16(10, dosTime, true); h.setUint16(12, dosDate, true); h.setUint32(14, crc, true); h.setUint32(18, body.length, true); h.setUint32(22, raw.length, true); h.setUint16(26, name.length, true); h.setUint16(28, 0, true);
-            parts.push(new Uint8Array(h.buffer), name, body);
-            const c = new DataView(new ArrayBuffer(46)); c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, utf, true); c.setUint16(10, method, true); c.setUint16(12, dosTime, true); c.setUint16(14, dosDate, true); c.setUint32(16, crc, true); c.setUint32(20, body.length, true); c.setUint32(24, raw.length, true); c.setUint16(28, name.length, true); c.setUint32(42, offset, true);
-            central.push(new Uint8Array(c.buffer), name);
-            offset += 30 + name.length + body.length;
-        }
-        const cdSize = central.reduce((a, x) => a + x.length, 0), e = new DataView(new ArrayBuffer(22));
-        e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cdSize, true); e.setUint32(16, offset, true);
-        return new Blob([...parts, ...central, new Uint8Array(e.buffer)], {type});
-    }
+    const makeZip = (files, type = 'application/zip') => window.LCNDA_SHEET.makeZip(files, type); // le fabricant commun (app-tableur-engine.js)
     const xmlEsc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     /** Le livre en ePub : un fichier XHTML par chapitre (style « Chapitre »), les images, les notes à la fin de chaque chapitre, la couverture, la table des matières */
     async function buildEpub(doc0, name) {
-        const V = resolveDoc(doc0), title = String(doc0.title || name || 'Mon livre').trim() || 'Mon livre', enc = new TextEncoder();
+        const V = resolveDoc(doc0), INF = doc0.info || {}, title = String(INF.title || doc0.title || name || 'Mon livre').trim() || 'Mon livre', enc = new TextEncoder();
         const images = [], imgBySrc = new Map();
         const addImage = async src => {
             if (imgBySrc.has(src)) return imgBySrc.get(src);
@@ -2452,7 +2535,7 @@
         if (!chapters.length) newChapter(title);
         // 3. la couverture : une image (la photo de la couverture, le titre, le sous-titre)
         const cov = coverPage >= 0 ? V.pages[coverPage] : null, covText = id => { const it = cov?.items.find(x => x.type === 'text' && (x.html || '').includes(`data-ps="${id}"`)); if (!it) return ''; const d = document.createElement('div'); d.innerHTML = it.html; return (d.querySelector(`[data-ps="${id}"]`)?.textContent || '').trim(); };
-        const subtitle = covText('ps-subtitle'), author = covText('ps-author').replace(/^par\s+/i, ''), look = {accent: colorOf(V, 'sw-accent', '#7a2e2e'), paper: colorOf(V, 'sw-paper', '#ffffff'), text: colorOf(V, 'sw-text', '#222')};
+        const subtitle = covText('ps-subtitle'), author = INF.author || covText('ps-author').replace(/^par\s+/i, ''), look = {accent: colorOf(V, 'sw-accent', '#7a2e2e'), paper: colorOf(V, 'sw-paper', '#ffffff'), text: colorOf(V, 'sw-text', '#222')};
         let photo = ''; const ph = cov?.items.find(x => (x.type === 'frame' || x.type === 'image') && x.src && !x.tree); if (ph) { try { photo = ph.src.startsWith('data:') ? ph.src : await new Promise(res => { const im = new Image(); im.onload = () => { try { const c = document.createElement('canvas'), k = Math.min(1, 1200 / im.naturalWidth); c.width = im.naturalWidth * k; c.height = im.naturalHeight * k; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', 0.85)); } catch (_) { res(''); } }; im.onerror = () => res(''); im.src = ph.src; }); } catch (_) { photo = ''; } }
         const wrapT = (t, n) => { const w = String(t).split(/\s+/), out = []; let l = ''; w.forEach(x => { if ((l + ' ' + x).trim().length > n && l) { out.push(l); l = x; } else l = (l + ' ' + x).trim(); }); if (l) out.push(l); return out.slice(0, 4); };
         const tl = wrapT(title, 18), coverSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 900" width="600" height="900"><rect width="600" height="900" fill="${xmlEsc(look.paper)}"/>${photo ? `<image x="0" y="0" width="600" height="520" preserveAspectRatio="xMidYMid slice" href="${photo}" xlink:href="${photo}"/>` : `<rect x="40" y="40" width="520" height="820" fill="none" stroke="${xmlEsc(look.accent)}" stroke-width="3"/>`}
@@ -2467,12 +2550,12 @@ ${V.charStyles.map(s0 => `.${s0.id}{${[s0.weight && `font-weight:${clamp(s0.weig
         const xhtml = (t, inner, extra = '') => `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="fr" xml:lang="fr"><head><meta charset="UTF-8"/><title>${xmlEsc(t)}</title><link rel="stylesheet" type="text/css" href="style.css"/></head><body${extra}>${inner}</body></html>`;
         const chFiles = chapters.map((c, k) => ({file: `chap${String(k + 1).padStart(3, '0')}.xhtml`, title: c.title,
             data: xhtml(c.title, `<section epub:type="chapter">${c.body[0]?.startsWith('<h1') ? '' : `<h1 class="ps-chapter">${xmlEsc(c.title)}</h1>`}${c.body.join('\n')}</section>${c.notes.length ? `<aside class="notes" epub:type="footnotes">${c.notes.map(n => `<aside epub:type="footnote" id="fn${n.k}"><p><a href="#fnref${n.k}">${xmlEsc(n.n)}</a>. ${xmlEsc(n.text)}</p></aside>`).join('')}</aside>` : ''}`)}));
-        const uid = `urn:lcnda:${doc0.uid || nid('d')}`;
+        const uid = INF.isbn ? `urn:isbn:${INF.isbn.replace(/[\s-]/g, '')}` : `urn:lcnda:${doc0.uid || nid('d')}`, epLang = /^[a-z]{2,3}$/.test(INF.lang || '') ? INF.lang : 'fr';
         const modified = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
         const nav = xhtml('Table des matières', `<nav epub:type="toc" id="toc"><h1>Table des matières</h1><ol>${chFiles.map(c => `<li><a href="${c.file}">${xmlEsc(c.title)}</a></li>`).join('')}</ol></nav><nav epub:type="landmarks" hidden="hidden"><ol><li><a epub:type="cover" href="cover.xhtml">Couverture</a></li><li><a epub:type="bodymatter" href="${chFiles[0].file}">Début du livre</a></li></ol></nav>`);
         const ncx = `<?xml version="1.0" encoding="UTF-8"?>\n<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1"><head><meta name="dtb:uid" content="${xmlEsc(uid)}"/><meta name="dtb:depth" content="1"/><meta name="dtb:totalPageCount" content="0"/><meta name="dtb:maxPageNumber" content="0"/></head><docTitle><text>${xmlEsc(title)}</text></docTitle><navMap>${chFiles.map((c, k) => `<navPoint id="np${k + 1}" playOrder="${k + 1}"><navLabel><text>${xmlEsc(c.title)}</text></navLabel><content src="${c.file}"/></navPoint>`).join('')}</navMap></ncx>`;
         const coverX = xhtml(title, '<div class="cover"><img src="images/cover.svg" alt="Couverture"/></div>', ' epub:type="cover"');
-        const opf = `<?xml version="1.0" encoding="UTF-8"?>\n<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="bookid" xml:lang="fr"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:identifier id="bookid">${xmlEsc(uid)}</dc:identifier><dc:title>${xmlEsc(title)}</dc:title><dc:language>fr</dc:language>${author ? `<dc:creator>${xmlEsc(author)}</dc:creator>` : ''}<dc:publisher>LCNDA</dc:publisher><meta property="dcterms:modified">${modified}</meta><meta name="cover" content="cover-image"/></metadata>
+        const opf = `<?xml version="1.0" encoding="UTF-8"?>\n<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="bookid" xml:lang="${xmlEsc(epLang)}"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:identifier id="bookid">${xmlEsc(uid)}</dc:identifier><dc:title>${xmlEsc(title)}</dc:title><dc:language>${xmlEsc(epLang)}</dc:language>${author ? `<dc:creator>${xmlEsc(author)}</dc:creator>` : ''}${INF.subject ? `<dc:description>${xmlEsc(INF.subject)}</dc:description>` : ''}${(INF.keywords || '').split(/[,;]/).map(k => k.trim()).filter(Boolean).slice(0, 30).map(k => `<dc:subject>${xmlEsc(k)}</dc:subject>`).join('')}<dc:publisher>LCNDA</dc:publisher><meta property="dcterms:modified">${modified}</meta><meta name="cover" content="cover-image"/></metadata>
 <manifest><item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/><item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/><item id="css" href="style.css" media-type="text/css"/><item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>
 ${images.map((im, k) => `<item id="${im.cover ? 'cover-image' : `img${k}`}" href="${im.file}" media-type="${im.mt}"${im.cover ? ' properties="cover-image"' : ''}/>`).join('\n')}
 ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="application/xhtml+xml"/>`).join('\n')}</manifest>
@@ -2496,14 +2579,21 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
         // avec fond perdu : la feuille est agrandie du fond perdu et d'une bande pour les traits de coupe (la ligne-bloc, sinon 8 mm)
         const B = bleed ? doc.page.bleed || 0 : 0, M = bleed ? Math.max(8, doc.page.slug || 0) : 0, W = doc.page.w + 2 * (B + M), H = doc.page.h + 2 * (B + M);
         // traits de coupe, repères de montage (cibles), gamme de couleurs et ligne d'informations, comme pour un imprimeur
-        const marks = i => { const pw = px(doc.page.w), ph = px(doc.page.h), o = px(B + M), L = px(Math.max(3, M - 2)), g = px(B + 1), mid = px(M / 2); const ln = (x1, y1, x2, y2) => `<line x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(x2)}" y2="${r1(y2)}"/>`;
+        const marks = i => { const PS = pageSize(doc, i), W = PS.w + 2 * (B + M), H = PS.h + 2 * (B + M), pw = px(PS.w), ph = px(PS.h), o = px(B + M), L = px(Math.max(3, M - 2)), g = px(B + 1), mid = px(M / 2); const ln = (x1, y1, x2, y2) => `<line x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(x2)}" y2="${r1(y2)}"/>`;
             const reg = (cx, cy) => { const r = px(2.2); return `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r1(r)}" fill="none"/><circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r1(r / 2.2)}" fill="#000"/>${ln(cx - r * 1.6, cy, cx + r * 1.6, cy)}${ln(cx, cy - r * 1.6, cx, cy + r * 1.6)}`; };
             const bar = ['#00aeef', '#ec008c', '#fff200', '#000000', '#00a651', '#ed1c24', '#2e3192', '#808080', '#bfbfbf'].map((c, k) => `<rect x="${r1(o + px(6) + k * px(4))}" y="${r1(mid - px(1.6))}" width="${r1(px(4))}" height="${r1(px(3.2))}" fill="${c}" stroke="none"/>`).join('');
-            const info = `<text x="${r1(o)}" y="${r1(px(H) - mid + px(1))}" font-size="${r1(px(2.2))}" font-family="Arial, sans-serif" fill="#000" stroke="none">${esc(name)} · page ${i + (doc.page.start || 1)} · ${r1(doc.page.w)} × ${r1(doc.page.h)} mm · fond perdu ${r1(B)} mm · ${new Date().toLocaleString('fr-FR')}</text>`;
+            const info = `<text x="${r1(o)}" y="${r1(px(H) - mid + px(1))}" font-size="${r1(px(2.2))}" font-family="Arial, sans-serif" fill="#000" stroke="none">${esc(name)} · page ${i + (doc.page.start || 1)} · ${r1(PS.w)} × ${r1(PS.h)} mm · fond perdu ${r1(B)} mm · ${new Date().toLocaleString('fr-FR')}</text>`;
             return `<svg class="ly-marks" width="${px(W)}" height="${px(H)}" stroke="#000" stroke-width="0.5">${[[o, o], [o + pw, o], [o, o + ph], [o + pw, o + ph]].map(([x, y], k) => { const sx = k % 2 ? 1 : -1, sy = k > 1 ? 1 : -1; return ln(x + sx * g, y, x + sx * (g + L), y) + ln(x, y + sy * g, x, y + sy * (g + L)); }).join('')}${M >= 6 ? reg(o + pw / 2, mid) + reg(o + pw / 2, px(H) - mid) + reg(mid, o + ph / 2) + reg(px(W) - mid, o + ph / 2) + bar + info : ''}</svg>`; };
-        const pages = doc.pages.map((_, i) => { const pg = pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'p' + i, annot: annotMap}); return bleed ? `<div class="ly-sheet" style="width:${px(W)}px;height:${px(H)}px">${marks(i)}<div class="ly-bleedclip" style="left:${px(M)}px;top:${px(M)}px;width:${px(doc.page.w + 2 * B)}px;height:${px(doc.page.h + 2 * B)}px;background:${cssPaint(doc, doc.page.paper)}"><div style="position:absolute;left:${px(B)}px;top:${px(B)}px">${pg.replace('class="ly-page', 'class="ly-page is-bleed')}</div></div></div>` : pg; }).join('');
-        return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name)}</title><base href="${esc(location.href.replace(/[^/]*$/, ''))}"><style>${BASE_CSS}${docCss(doc, 'body')}
-            @page{size:${W}mm ${H}mm;margin:0}html,body{margin:0;padding:0;background:#888}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+        // 📐 une page qui a sa propre taille s'imprime sur une feuille à sa taille (pages nommées @page)
+        const sizes = [], sizeName = i => { const PS = pageSize(doc, i); if (PS.w === doc.page.w && PS.h === doc.page.h) return ''; let k = sizes.findIndex(z => z.w === PS.w && z.h === PS.h); if (k < 0) { sizes.push(PS); k = sizes.length - 1; } return 'lysz' + k; };
+        const named = (html, i) => { const n = sizeName(i); return n ? html.replace(/^<div class="(ly-sheet|ly-page)/, `<div class="$1 ${n}`) : html; };
+        const pages = doc.pages.map((_, i) => { const PS = pageSize(doc, i), pg = pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'p' + i, annot: annotMap}); return named(bleed ? `<div class="ly-sheet" style="width:${px(PS.w + 2 * (B + M))}px;height:${px(PS.h + 2 * (B + M))}px">${marks(i)}<div class="ly-bleedclip" style="left:${px(M)}px;top:${px(M)}px;width:${px(PS.w + 2 * B)}px;height:${px(PS.h + 2 * B)}px;background:${cssPaint(doc, doc.page.paper)}"><div style="position:absolute;left:${px(B)}px;top:${px(B)}px">${pg.replace('class="ly-page', 'class="ly-page is-bleed')}</div></div></div>` : pg, i); }).join('');
+        const sizeCss = sizes.map((z, k) => `@page lysz${k}{size:${r1(z.w + 2 * (B + M))}mm ${r1(z.h + 2 * (B + M))}mm;margin:0}.lysz${k}{page:lysz${k}}`).join('');
+        // ℹ️ les informations du document : titre (le titre du PDF), auteur, sujet, mots-clés, langue
+        const info = doc.info || {}, docTitle = info.title || name, lang = /^[a-z]{2,3}$/.test(info.lang || '') ? info.lang : 'fr';
+        const metas = [['author', info.author], ['description', info.subject], ['keywords', info.keywords], ['dcterms.identifier', info.isbn ? `urn:isbn:${info.isbn.replace(/[\s-]/g, '')}` : ''], ['generator', 'LCNDA']].filter(([, v]) => v).map(([k, v]) => `<meta name="${k}" content="${esc(v)}">`).join('');
+        return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><title>${esc(docTitle)}</title>${metas}<base href="${esc(location.href.replace(/[^/]*$/, ''))}"><style>${BASE_CSS}${docCss(doc, 'body')}
+            @page{size:${W}mm ${H}mm;margin:0}${sizeCss}html,body{margin:0;padding:0;background:#888}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             .ly-page{margin:12px auto;box-shadow:0 2px 12px rgba(0,0,0,.35)}.ly-page.is-bleed{overflow:visible;margin:0;box-shadow:none}.ly-sheet{position:relative;margin:12px auto;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.35)}.ly-bleedclip{position:absolute;overflow:hidden}.ly-marks{position:absolute;left:0;top:0}.ly-bar{position:sticky;top:0;z-index:9;display:flex;gap:10px;align-items:center;padding:10px 16px;background:#111;color:#fff;font:14px system-ui}.ly-bar button{font:inherit;padding:6px 14px;border-radius:6px;border:0;background:#2f6bff;color:#fff;cursor:pointer}
             @media print{html,body{background:none}.ly-bar{display:none}.ly-page,.ly-sheet{margin:0;box-shadow:none;break-after:page;page-break-after:always}.ly-sheet .ly-page{break-after:auto;page-break-after:auto}.ly-annot{margin:0}}${annotCss}</style></head><body>${withButton ? `<div class="ly-bar"><b>${esc(name)}</b> · ${A().plural(doc.pages.length, 'page')} · ${r1(W)} × ${r1(H)} mm${bleed ? ` (page ${r1(doc.page.w)} × ${r1(doc.page.h)} + fond perdu ${r1(B)} mm et traits de coupe)` : ''}${annot ? ` · ${A().plural(cms.length, 'commentaire')}` : ''}<span style="flex:1"></span><button onclick="print()">🖨 Imprimer / enregistrer en PDF</button></div>` : ''}${pages}${annotList}${autoPrint ? '<script>addEventListener("load",()=>setTimeout(()=>print(),400))<\/script>' : ''}</body></html>`;
     }
@@ -2532,20 +2622,24 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     /* ═════════════ Réglages par défaut ═════════════ */
     function defaultsDialog(onDone) {
         const d = defaults(), fonts = fontList();
-        ext.openDialog({eyebrow: 'MISE EN PAGE', title: 'Réglages par défaut des nouveaux documents', wide: true, submitLabel: 'Enregistrer',
+        ext.openDialog({eyebrow: 'MISE EN PAGE', title: 'Réglages par défaut des nouveaux documents', wide: true, // K2 : chaque changement est gardé tout de suite (« ✓ Enregistré », « ↶ Annuler »), « Fermer » seul en bas
             body: `<div class="form-grid"><label>Format <select name="size">${allSizes().map(([k, l, w, h]) => `<option value="${k}" ${Math.abs(d.w - w) < 0.2 && Math.abs(d.h - h) < 0.2 ? 'selected' : ''}>${esc(l)}</option>`).join('')}<option value="custom" ${allSizes().some(x => Math.abs(d.w - x[2]) < 0.2 && Math.abs(d.h - x[3]) < 0.2) ? '' : 'selected'}>Personnalisé</option></select></label>
-                <label>Largeur (mm) <input type="number" name="w" value="${d.w}" step="0.1"></label><label>Hauteur (mm) <input type="number" name="h" value="${d.h}" step="0.1"></label>
+                <label>Largeur<input data-unit="mm" type="number" name="w" value="${d.w}" step="0.1"></label><label>Hauteur<input data-unit="mm" type="number" name="h" value="${d.h}" step="0.1"></label>
                 <label class="checkbox-line"><input type="checkbox" name="facing" ${d.facing ? 'checked' : ''}> Pages en vis-à-vis (livre)</label>
-                <label>Marge haut (mm) <input type="number" name="mt" value="${d.mt}"></label><label>Marge bas (mm) <input type="number" name="mb" value="${d.mb}"></label><label>Petit fond / intérieur (mm) <input type="number" name="mi" value="${d.mi}"></label><label>Grand fond / extérieur (mm) <input type="number" name="mo" value="${d.mo}"></label>
-                <label>Colonnes <input type="number" name="columns" min="1" max="12" value="${d.columns}"></label><label>Gouttière (mm) <input type="number" name="gutter" value="${d.gutter}"></label>
-                <label>Fond perdu (mm) <input type="number" name="bleed" min="0" max="20" step="0.5" value="${d.bleed}"></label><label>Ligne-bloc (mm) <input type="number" name="slug" min="0" max="60" step="0.5" value="${d.slug}"></label>
+                <label>Marge haut<input data-unit="mm" type="number" name="mt" value="${d.mt}"></label><label>Marge bas<input data-unit="mm" type="number" name="mb" value="${d.mb}"></label><label>Petit fond / intérieur<input data-unit="mm" type="number" name="mi" value="${d.mi}"></label><label>Grand fond / extérieur<input data-unit="mm" type="number" name="mo" value="${d.mo}"></label>
+                <label>Colonnes <input type="number" name="columns" min="1" max="12" value="${d.columns}"></label><label>Gouttière<input data-unit="mm" type="number" name="gutter" value="${d.gutter}"></label>
+                <label>Fond perdu<input data-unit="mm" type="number" name="bleed" min="0" max="20" step="0.5" value="${d.bleed}"></label><label>Ligne-bloc<input data-unit="mm" type="number" name="slug" min="0" max="60" step="0.5" value="${d.slug}"></label>
                 <label>Police des titres ${fontPickHtml('name="titleFont"', d.titleFont)}</label><label>Police du texte ${fontPickHtml('name="bodyFont"', d.bodyFont)}</label>
-                <label>Corps du texte (pt) <input type="number" step="0.5" name="bodySize" value="${d.bodySize}"></label><label>Interlignage (pt) <input type="number" step="0.5" name="lead" value="${d.lead}"></label>
+                <label>Corps du texte<input data-unit="pt" type="number" step="0.5" name="bodySize" value="${d.bodySize}"></label><label>Interlignage<input data-unit="pt" type="number" step="0.5" name="lead" value="${d.lead}"></label>
                 <label>Couleur du livre <input type="color" name="accent" value="${d.accent}"></label><label>Papier <input type="color" name="paper" value="${d.paper}"></label>
                 <label>Numéro de la 1re page <input type="number" name="startPage" min="1" value="${d.startPage}"></label><label class="checkbox-line"><input type="checkbox" name="folio" ${d.folio ? 'checked' : ''}> Folio et titre courant sur le gabarit</label></div>
-                <p><button type="button" class="link-button" data-reset>↺ Remettre comme au départ</button></p>`,
-            onOpen: dg => { bindFontPick(dg); dg.querySelector('[name=size]').addEventListener('change', e => { const s0 = allSizes().find(x => x[0] === e.target.value); if (s0) { dg.querySelector('[name=w]').value = s0[2]; dg.querySelector('[name=h]').value = s0[3]; } }); dg.querySelector('[data-reset]').addEventListener('click', () => { try { localStorage.removeItem(DEF_KEY); } catch (_) {} toast('Réglages de départ remis.'); dg.close(); onDone?.(); }); },
-            onSubmit: f => { const v = Object.fromEntries(new FormData(f)); const o = {}; ['w', 'h', 'mt', 'mb', 'mi', 'mo', 'columns', 'gutter', 'bleed', 'slug', 'bodySize', 'lead', 'startPage'].forEach(k => { o[k] = Number(v[k]); }); o.facing = !!v.facing; o.folio = !!v.folio; o.titleFont = fontOk(v.titleFont); o.bodyFont = fontOk(v.bodyFont); o.accent = v.accent; o.paper = v.paper; o.size = v.size; try { localStorage.setItem(DEF_KEY, JSON.stringify(o)); } catch (_) {} toast('Réglages par défaut enregistrés : ils servent aux nouveaux documents.'); onDone?.(); }});
+                <p><button type="button" class="link-button" data-ui-reset>↺ Remettre comme au départ</button></p>`,
+            onOpen: dg => { bindFontPick(dg); dg.querySelector('[name=size]').addEventListener('change', e => { const s0 = allSizes().find(x => x[0] === e.target.value); if (s0) { dg.querySelector('[name=w]').value = s0[2]; dg.querySelector('[name=h]').value = s0[3]; } }); const form = dg.querySelector('form') || dg;
+                const fill = () => { const d1 = defaults(); Object.entries(d1).forEach(([k, v]) => { const el = form.querySelector(`[name="${k}"]`); if (!el) return; if (el.type === 'checkbox') el.checked = !!v; else el.value = v; }); };
+                window.LCNDA_UI?.autoSaveDialog?.(dg, {keys: [DEF_KEY], label: 'Réglages par défaut des livres',
+                    save: () => { const v = Object.fromEntries(new FormData(form)); const o = {}; ['w', 'h', 'mt', 'mb', 'mi', 'mo', 'columns', 'gutter', 'bleed', 'slug', 'bodySize', 'lead', 'startPage'].forEach(k => { o[k] = Number(v[k]); }); o.facing = !!v.facing; o.folio = !!v.folio; o.titleFont = fontOk(v.titleFont); o.bodyFont = fontOk(v.bodyFont); o.accent = v.accent; o.paper = v.paper; o.size = v.size; try { localStorage.setItem(DEF_KEY, JSON.stringify(o)); } catch (_) {} },
+                    reload: fill, reset: () => { try { localStorage.removeItem(DEF_KEY); } catch (_) {} }});
+                dg.addEventListener('close', () => onDone?.()); },});
     }
 
     /* ═════════════ La bibliothèque : mes livres, mes designs, ceux de l'app ═════════════ */
@@ -2618,8 +2712,8 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
                 ${mode !== 'design' ? `<fieldset class="span-2 ly-newpage"><legend>Pages, marges et colonnes</legend><div class="ly-newgrid">
                     <label class="checkbox-line"><input type="checkbox" name="facing" ${d.facing ? 'checked' : ''}> Pages en vis-à-vis (livre)</label>
                     <label>Marge haut <input type="number" step="0.5" min="0" name="mt" value="${d.mt}"></label><label>Marge bas <input type="number" step="0.5" min="0" name="mb" value="${d.mb}"></label><label data-in>Petit fond (intérieur) <input type="number" step="0.5" min="0" name="mi" value="${d.mi}"></label><label data-out>Grand fond (extérieur) <input type="number" step="0.5" min="0" name="mo" value="${d.mo}"></label>
-                    <label>Colonnes <input type="number" min="1" max="12" name="columns" value="${d.columns}"></label><label>Gouttière (mm) <input type="number" step="0.5" min="0" name="gutter" value="${d.gutter}"></label>
-                    <label>Fond perdu (mm) <input type="number" step="0.5" min="0" max="20" name="bleed" value="${d.bleed}"></label><label>Ligne-bloc (mm) <input type="number" step="0.5" min="0" max="60" name="slug" value="${d.slug}"></label></div>
+                    <label>Colonnes <input type="number" min="1" max="12" name="columns" value="${d.columns}"></label><label>Gouttière<input data-unit="mm" type="number" step="0.5" min="0" name="gutter" value="${d.gutter}"></label>
+                    <label>Fond perdu<input data-unit="mm" type="number" step="0.5" min="0" max="20" name="bleed" value="${d.bleed}"></label><label>Ligne-bloc<input data-unit="mm" type="number" step="0.5" min="0" max="60" name="slug" value="${d.slug}"></label></div>
                     <p class="muted">Marges en millimètres. Le fond perdu (trait rouge) dépasse de la page pour les images à bord perdu ; la ligne-bloc (trait bleu) garde la place des notes pour l’imprimeur. Les deux s’impriment avec « PDF avec fond perdu et traits de coupe ».</p></fieldset>` : ''}
                 ${mode === 'family' ? `<label>Qui <select name="scope"><option value="ancestors">les ancêtres de…</option><option value="descendants">les descendants de…</option><option value="both">ancêtres et descendants de…</option><option value="all">toute la base</option></select></label>
                 <div><span class="pk-lab">Personne de départ</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'book_root', kind: 'person', value: start || null})}</div>

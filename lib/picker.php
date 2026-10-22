@@ -16,7 +16,10 @@ const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'ba
     'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', // ces 7 : lib/widget_links.php (widget « Raccourcis »)
     'photomap', // 📸 cartes de photos (lib/photomaps.php)
     'digest', // 📜 dépouillements d'archive (journal des recherches, lib/research_journal.php)
-    'contact']; // 📇 Répertoire des vivants (destinataires des « Questions aux proches »)
+    'contact', // 📇 Répertoire des vivants (destinataires des « Questions aux proches »)
+    'archive_service', // 🏛 services d'archives (lib/archive_services.php)
+    'event', // 📅 événements (personnes et couples) : un passage d'un son relié à un événement (Studio son, lib/audio_studio.php)
+    'mylist']; // 📋 Mes listes (custom_lists) : le groupe de personnes d'un diagramme (« Depuis l'app », lib/diagram_options.php)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
@@ -26,6 +29,9 @@ const PICKER_LABELS = [
     'photomap' => '📸 Cartes de photos',
     'digest' => '📜 Dépouillements',
     'contact' => '📇 Contacts',
+    'mylist' => '📋 Mes listes',
+    'archive_service' => '🏛 Services d’archives',
+    'event' => '📅 Événements',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -181,6 +187,9 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'census' => picker_census($pdo, $q, $offset, $limit),
             'digest' => picker_digests($pdo, $q, $offset, $limit),
             'contact' => picker_contacts($pdo, $q, $offset, $limit),
+            'mylist' => picker_mylists($pdo, $q, $offset, $limit),
+            'event' => picker_events($pdo, $q, $offset, $limit),
+            'archive_service' => function_exists('picker_archive_services') ? picker_archive_services($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🏛 lib/archive_services.php
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             // 🔗 sortes du widget « Raccourcis » (lib/widget_links.php) : fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions
@@ -226,6 +235,24 @@ function picker_text_where(array $columns, string $q, array &$params, string $pr
         $parts[] = "picker_fold({$col}) LIKE :{$prefix}f";
     }
     return '(' . implode(' OR ', $parts) . ')';
+}
+
+// ─── 📅 Événements ──────────────────────────────────────────────────────────
+/** Un événement : son titre (ou sa sorte), la personne ou le couple, la date et le lieu ; on cherche aussi par nom de la personne */
+function picker_events(PDO $pdo, string $q, int $offset, int $limit): array
+{
+    $params = [];
+    $who = "COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')";
+    $couple = "COALESCE(p1.first_name,'') || ' ' || COALESCE(p1.last_name,'') || ' et ' || COALESCE(p2.first_name,'') || ' ' || COALESCE(p2.last_name,'')";
+    $where = picker_text_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params);
+    [$total, $rows] = picker_page($pdo, "SELECT e.id, e.title, e.date_text, e.year, t.label, pl.name AS place, e.scope, {$who} AS who, {$couple} AS couple",
+        "FROM events e LEFT JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id WHERE {$where}",
+        'e.year IS NULL, e.year, e.id', $params, $offset, $limit);
+    return ['total' => $total, 'items' => array_map(static fn($r) => [
+        'kind' => 'event', 'id' => (int) $r['id'], 'title' => trim((string) ($r['title'] ?: $r['label'] ?: 'Événement')),
+        'meta' => implode(' · ', array_filter([trim((string) ($r['scope'] === 'family' ? $r['couple'] : $r['who'])), trim((string) $r['date_text']), trim((string) $r['place'])])),
+        'badge' => $r['year'] ? (string) $r['year'] : '', 'badge_style' => '', 'group' => 'event', 'icon' => '📅', 'short' => (string) ($r['year'] ?? ''),
+    ], $rows)];
 }
 
 // ─── 👤 Personnes ───────────────────────────────────────────────────────────
@@ -902,6 +929,21 @@ function picker_labels(PDO $pdo, string $q, int $offset, int $limit): array
     return ['total' => $total, 'items' => array_map(static fn($r) => [
         'kind' => 'label', 'id' => (int) $r['id'], 'title' => (string) $r['name'], 'meta' => 'Étiquette · ' . picker_plural((int) $r['n'], 'fiche'),
         'badge' => '', 'badge_style' => '', 'group' => 'label', 'color' => preg_match('/^#[0-9a-f]{3,8}$/i', (string) $r['color']) ? (string) $r['color'] : '#0066cc', 'short' => '',
+    ], $rows)];
+}
+
+/** 📋 Mes listes (Maintenance → Mes listes) : nom, sorte de liste */
+function picker_mylists(PDO $pdo, string $q, int $offset, int $limit): array
+{
+    if (!picker_table_exists($pdo, 'custom_lists')) { return ['total' => 0, 'items' => []]; }
+    $params = [];
+    $where = picker_text_where(['c.name', 'c.description'], $q, $params);
+    [$total, $rows] = picker_page($pdo, 'SELECT c.id, c.name, c.icon, c.source', "FROM custom_lists c WHERE {$where}", 'c.position, c.name COLLATE NOCASE', $params, $offset, $limit);
+    $what = ['persons' => 'Liste de personnes', 'events' => 'Liste d’événements', 'free' => 'Liste écrite à la main', 'records' => 'Liste de relevés'];
+    return ['total' => $total, 'items' => array_map(static fn($r) => [
+        'kind' => 'mylist', 'id' => (int) $r['id'], 'title' => trim((string) $r['name']) !== '' ? mb_substr(trim((string) $r['name']), 0, 120) : 'Ma liste',
+        'meta' => $what[(string) $r['source']] ?? 'Liste', 'badge' => '', 'badge_style' => '', 'group' => 'mylist',
+        'icon' => mb_substr(trim((string) $r['icon']), 0, 4) ?: '📋', 'short' => '',
     ], $rows)];
 }
 

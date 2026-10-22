@@ -72,15 +72,15 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         await p.waitForSelector('.h-ss-dlg [data-ss-time]'); await p.waitForTimeout(400);
         out.emptyTime = await p.$eval('.h-ss-dlg [data-ss-time]', e => e.textContent);
         await p.click('.h-ss-dlg [data-ss-cmd=addtitle]'); await p.waitForTimeout(300);
-        const dur = '.h-ss-dlg [data-ss-p=dur]';
-        await p.fill(dur, '0'); await p.press(dur, 'Tab'); out.dur0 = [await p.$eval(dur, e => e.value), await p.evaluate(() => window.__ss.show.slides[0].dur)];
-        await p.fill(dur, '99999'); await p.press(dur, 'Tab'); out.durBig = [await p.$eval(dur, e => e.value), await p.evaluate(() => window.__ss.show.slides[0].dur)];
+        const dur = '.h-ss-dlg [data-ss-p=dur]', durTxt = '.h-ss-dlg .ui-hm:has([data-ss-p=dur]) .ui-hm-input'; // K17 : la durée s'écrit dans la case texte, la valeur reste dans la case d'origine
+        await p.fill(durTxt, '0'); await p.press(durTxt, 'Tab'); out.dur0 = [await p.$eval(dur, e => e.value), await p.evaluate(() => window.__ss.show.slides[0].dur)];
+        await p.fill(durTxt, '99999'); await p.press(durTxt, 'Tab'); out.durBig = [await p.$eval(dur, e => e.value), await p.evaluate(() => window.__ss.show.slides[0].dur)];
         // les barres du haut gardent leur hauteur
         const height = sel => p.evaluate(s => Math.round(document.querySelector(s).getBoundingClientRect().height), sel);
         out.ssBar = [await height('.h-ss-dlg .ui-topbar')];
         for (const st of ['dirty', 'saving', 'error']) { await p.evaluate(s => { window.LCNDA_UI.savedStatus(document.querySelector('.h-ss-dlg'), s); document.querySelector('.h-ss-dlg [data-ss-progress]').textContent = '⏺ 45 % (0:12 / 0:31)'; }, st); out.ssBar.push(await height('.h-ss-dlg .ui-topbar')); }
         // fermé pendant la vidéo : plus rien n'arrive ensuite
-        await p.fill(dur, '8'); await p.press(dur, 'Tab');
+        await p.fill(durTxt, '8'); await p.press(durTxt, 'Tab');
         let downloads = 0; p.on('download', () => { downloads++; });
         await p.evaluate(() => { window.__ss.save = () => {}; }); // rien à enregistrer pour fermer
         await p.click('.h-ss-dlg [data-ss-cmd=export]'); await p.waitForSelector('dialog.ui-export[open] [data-fmt=video]');

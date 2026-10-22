@@ -667,7 +667,7 @@
     /* ═════════ « Depuis l'app » : petits outils communs ═════════ */
     // couleurs habituelles de l'app (bleu homme, rose femme…) pour les catégories venues de l'arbre
     const KNOWN = {homme: '#4e79a7', femme: '#e15759', inconnu: '#9aa3ad', personne: '#76b7b2', naissance: '#59a14f', bapteme: '#76b7b2', mariage: '#f28e2b', deces: '#5f6b7a', sepulture: '#9c755f'};
-    const get = q => A().api('diagram_genea', q);
+    const get = q => A().api('diagram_genea', {...q, ...(window.LCNDA_EXT?.diagramAppOpts?.extra() || {})}); // + le groupe de personnes et la période communs (heritage-diagram-options.js)
     const val = (pane, k) => pane.querySelector(`[data-gn="${k}"]`)?.value || '';
     const rootOf = pane => Number(pane.querySelector('[name="gn_root"]')?.value) || Number(A().state?.bootstrap?.startPersonId) || 0;
     function bindApp(pane, run) {
@@ -677,7 +677,7 @@
     }
 
     /* ═════════ Les types ═════════ */
-    const H_OPT = C('height', 'Hauteur au plus (px)', 'number', {min: 80, max: 2400});
+    const H_OPT = C('height', 'Hauteur au plus', 'number', {unit: 'px', min: 80, max: 2400});
     const LABELS = C('labels', 'Noms', 'select', {choices: [['', 'Les plus reliés (30)'], ['all', 'Tous'], ['none', 'Aucun']]});
     const COLORBY = C('colorBy', 'Couleur des points', 'select', {choices: [['', 'Par groupe (colonne « Groupe »)'], ['community', 'Groupes trouvés tout seuls'], ['kind', 'Une seule (les liens en couleur)'], ['none', 'Couleur du tableau']]});
     const LINKS_GRID = {key: 'rows', label: 'Les liens (une ligne par lien)', cols: [C('a', 'Personne A'), C('b', 'Personne B'), C('kind', 'Sorte de lien (témoin, parrain…)'), C('weight', 'Force (nombre)', 'number')]};
@@ -692,30 +692,30 @@
                 C('scale', 'Couleurs', 'select', {choices: [['', 'Automatique'], ['num', 'Un dégradé (chiffres)'], ['cat', 'Une couleur par catégorie']]}),
                 C('lowColor', 'Couleur des petits chiffres', 'color', {def: '#fde0c5', when: s => s.o?.scale !== 'cat'}), C('highColor', 'Couleur des grands chiffres', 'color', {def: '#b3261e', when: s => s.o?.scale !== 'cat'}),
                 C('min', 'Dégradé : minimum (vide = auto)', 'number', {when: s => s.o?.scale !== 'cat'}), C('max', 'Dégradé : maximum (vide = auto)', 'number', {when: s => s.o?.scale !== 'cat'}), C('unit', 'Unité (%, ans…)', 'text', {when: s => s.o?.scale !== 'cat'}),
-                C('center', 'Taille du centre (%)', 'range', {min: 6, max: 40, def: 16}), C('border', 'Traits blancs entre les cases', 'check', {def: true}), C('genLabels', 'Numéro des générations', 'check', {def: true, when: s => (s.o?.shape || 'half') === 'half'}), H_OPT],
+                C('center', 'Taille du centre', 'range', {unit: '%', min: 6, max: 40, def: 16}), C('border', 'Traits blancs entre les cases', 'check', {def: true}), C('genLabels', 'Numéro des générations', 'check', {def: true, when: s => (s.o?.shape || 'half') === 'half'}), H_OPT],
             sample: () => ({o: {title: 'Origines de mes ancêtres', shape: 'half', gens: 5, scale: 'cat'}, rows: sampleAncestors(5), cats: [{value: 'Bretagne', color: '#4e79a7'}, {value: 'Normandie', color: '#59a14f'}, {value: 'Anjou', color: '#f28e2b'}, {value: 'Poitou', color: '#b07aa1'}, {value: 'Paris', color: '#e15759'}]})},
         sunburst: {icon: '🌞', label: 'Soleil des lignées (anneaux)', group: 'Généalogie', render: sunburst, legend: 'bottom', fromApp: sunApp,
             grids: [{key: 'rows', label: 'Les parts (parent → enfant → chiffre)', cols: [C('name', 'Nom (unique)'), C('parent', 'Au-dessus (vide = au centre)'), C('value', 'Chiffre', 'number'), C('color', 'Couleur', 'color')]}],
             options: [C('sizeBy', 'Taille des parts', 'select', {choices: [['value', 'Le chiffre (ou la somme des parts)'], ['desc', 'Le nombre de descendants'], ['leaves', 'Le nombre de bouts de branche']], def: 'value'}),
-                C('angle', 'Forme', 'select', {choices: [['', 'Cercle complet'], ['half', 'Demi-cercle']]}), C('depth', 'Anneaux au plus', 'range', {min: 1, max: 12, def: 6}), C('hole', 'Trou au centre (%)', 'range', {min: 0, max: 60, def: 18}),
+                C('angle', 'Forme', 'select', {choices: [['', 'Cercle complet'], ['half', 'Demi-cercle']]}), C('depth', 'Anneaux au plus', 'range', {min: 1, max: 12, def: 6}), C('hole', 'Trou au centre', 'range', {unit: '%', min: 0, max: 60, def: 18}),
                 C('colorBy', 'Couleurs', 'select', {choices: [['', 'Une par branche (plus clair vers l’extérieur)'], ['depth', 'Une par anneau']]}), C('labels', 'Noms', 'select', {choices: [['', 'Le nom'], ['value', 'Le nom et le chiffre'], ['none', 'Aucun']]}),
                 C('sort', 'Ordre des parts', 'select', {choices: [['', 'Comme dans le tableau'], ['size', 'De la plus grande à la plus petite']]}), C('centerText', 'Texte au centre'), C('border', 'Traits blancs entre les parts', 'check', {def: true}), H_OPT],
             sample: () => ({o: {title: 'Descendance de Jean Martin', sizeBy: 'desc'}, rows: sampleSun()})},
         network: {icon: '🕸️', label: 'Réseau de relations (témoins, parrains…)', group: 'Généalogie', render: network, legend: 'bottom', fromApp: netApp,
             grids: [LINKS_GRID, NODES_GRID, KINDS_GRID],
             options: [COLORBY, C('cluster', 'Rapprocher les points de même couleur', 'check'), C('edgeKinds', 'Liens colorés selon leur sorte', 'check', {def: true}), LABELS, C('sizeBy', 'Taille des points', 'select', {choices: [['', 'Selon le nombre de liens'], ['same', 'Tous pareils']]}),
-                C('nodeSize', 'Taille des points', 'range', {min: 3, max: 30, def: 9}), C('strength', 'Écartement', 'range', {min: .2, max: 4, step: .1, def: 1}), C('height', 'Hauteur (px)', 'number', {min: 220, max: 2400})],
+                C('nodeSize', 'Taille des points', 'range', {min: 3, max: 30, def: 9}), C('strength', 'Écartement', 'range', {min: .2, max: 4, step: .1, def: 1}), C('height', 'Hauteur', 'number', {unit: 'px', min: 220, max: 2400})],
             sample: () => ({o: {title: 'Témoins et parrains au village'}, ...sampleNet()})},
         arcs: {icon: '🌈', label: 'Arcs de liens (implexe, mariages entre familles)', group: 'Généalogie', render: arcs, legend: 'bottom', fromApp: arcsApp,
             grids: [LINKS_GRID, {...NODES_GRID, label: 'Les personnes, dans l’ordre de la ligne (facultatif)'}, KINDS_GRID],
             options: [C('order', 'Ordre sur la ligne', 'select', {choices: [['', 'Comme dans les tableaux'], ['group', 'Par groupe'], ['degree', 'Les plus reliés d’abord'], ['az', 'A → Z'], ['number', 'Par numéro (Sosa 2, 3, 10…)']]}),
-                C('side', 'Arcs', 'select', {choices: [['', 'Au-dessus'], ['kind', 'Au-dessus et en dessous selon la sorte'], ['below', 'En dessous']]}), C('arcHeight', 'Hauteur des arcs (%)', 'range', {min: 10, max: 120, def: 55}),
+                C('side', 'Arcs', 'select', {choices: [['', 'Au-dessus'], ['kind', 'Au-dessus et en dessous selon la sorte'], ['below', 'En dessous']]}), C('arcHeight', 'Hauteur des arcs', 'range', {unit: '%', min: 10, max: 120, def: 55}),
                 {...COLORBY, choices: COLORBY.choices}, C('edgeKinds', 'Arcs colorés selon leur sorte', 'check', {def: true}), C('labels', 'Noms', 'select', {choices: [['', 'Sous la ligne'], ['none', 'Aucun']]})],
             sample: () => ({o: {title: 'Mariages entre familles du village', order: 'degree', colorBy: 'community'}, rows: sampleArcs(), nodes: []})},
         venn: {icon: '⭕', label: 'Diagramme de Venn (2 à 4 ensembles)', group: 'Généalogie', render: venn, noLegend: true, fromApp: vennApp,
             grids: [{key: 'sets', label: 'Les ensembles (2 à 4) : A, B, C, D', max: 4, cols: [C('name', 'Nom'), C('color', 'Couleur', 'color')]},
                 {key: 'rows', label: 'Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres)', fixed: spec => ZONES(clamp(rows(spec, 'sets').length, 2, 4)), cols: [C('region', 'Zone', 'readonly'), C('value', 'Nombre ou texte')]}],
-            options: [C('pct', 'Ajouter le pourcentage', 'check'), C('totals', 'Total de chaque ensemble à côté de son nom', 'check', {def: true}), C('opacity', 'Transparence des formes (%)', 'range', {min: 5, max: 80, def: 30}), H_OPT],
+            options: [C('pct', 'Ajouter le pourcentage', 'check'), C('totals', 'Total de chaque ensemble à côté de son nom', 'check', {def: true}), C('opacity', 'Transparence des formes', 'range', {unit: '%', min: 5, max: 80, def: 30}), H_OPT],
             sample: () => ({o: {title: 'Mes sources'}, sets: [{name: 'État civil'}, {name: 'Registres paroissiaux'}, {name: 'Notaires'}, {name: 'Recensements'}], rows: ZONES(4).map((region, i) => ({region, value: String([120, 85, 30, 64, 40, 12, 22, 9, 15, 11, 5, 6, 4, 3, 2][i])}))})},
         calendar: {icon: '🗓️', label: 'Calendrier coloré (jour par jour)', group: 'Frises', render: calendar, legend: 'bottom', fromApp: calApp,
             grids: [{key: 'rows', label: 'Les dates (une ligne par événement, ou une date et un nombre)', cols: [C('date', 'Date', 'text', {ph: '7 mai 1925, 08/12/1960, 12 thermidor an II'}), C('value', 'Nombre (vide = 1)', 'number'), C('label', 'Quoi')]}],
@@ -726,7 +726,7 @@
         monthrose: {icon: '🌸', label: 'Rose des mois (12 parts)', group: 'Frises', render: monthrose, legend: 'bottom', fromApp: roseApp,
             grids: [{key: 'rows', label: 'Les mois (janvier à décembre)', series: true, cols: [C('label', 'Mois')]}],
             options: [C('style', 'Plusieurs séries', 'select', {choices: [['side', 'Côte à côte'], ['stack', 'Empilées'], ['overlap', 'Superposées (transparentes)']], def: 'side'}), C('scale', 'Longueur des rayons', 'select', {choices: [['', 'Surface juste (racine carrée)'], ['linear', 'Proportionnelle']]}),
-                C('hole', 'Trou au centre (%)', 'range', {min: 0, max: 60, def: 10}), C('values', 'Écrire les nombres (une seule série)', 'check'), C('short', 'Mois en abrégé', 'check', {def: true}), H_OPT],
+                C('hole', 'Trou au centre', 'range', {unit: '%', min: 0, max: 60, def: 10}), C('values', 'Écrire les nombres (une seule série)', 'check'), C('short', 'Mois en abrégé', 'check', {def: true}), H_OPT],
             sample: () => ({o: {title: 'Naissances, mariages et décès par mois'}, ...sampleRose()})},
         spiral: {icon: '🌀', label: 'Spirale du temps (une spire par siècle)', group: 'Frises', render: spiral, legend: 'bottom', fromApp: spiralApp,
             grids: [{key: 'rows', label: 'Les événements (une date = un point ; un début et une fin = un trait)', cols: [C('start', 'Date ou début', 'text', {ph: '1789, 7 mai 1925'}), C('end', 'Fin (facultatif)'), C('label', 'Nom'), C('kind', 'Sorte (couleur)'), C('color', 'Couleur', 'color')]}],

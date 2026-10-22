@@ -14,7 +14,7 @@
     const TAB_KEY = 'genealogie-edittools-tab', VIEW_KEY = 'genealogie-edittools-view', SORT_KEY = 'genealogie-edittools-sort', STEP = 24;
     const UI = () => window.LCNDA_UI;
     const fmtDate = d => window.LCNDA_UI?.when?.(d) || ''; // K4 : HTML <time>, date complète au survol
-    const fmtDur = s => { s = Math.round(Number(s) || 0); return s ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` : ''; };
+    const fmtDur = s => { s = Math.round(Number(s) || 0); return s ? (window.LCNDA_UI?.clock?.(s) || `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`) : ''; }; // K17 : « 3:20 », « 1:05:00 »
 
     /** Chaque outil : comment lire ses projets, les ouvrir, les renommer, les supprimer, en créer un */
     const TOOLS = [
@@ -25,11 +25,19 @@
             rename: async (id, name) => { const r = await api('montage_project', {id}); await post('save_montage_project', {id, name, project: r.project}); },
             remove: id => post('delete_montage_project', {id}), createLabel: '＋ Nouveau montage'},
         {key: 'audio', icon: '🎧', label: 'Son', what: 'son',
-            load: async () => ((await api('audio_projects')).projects || []).map(p => ({id: p.id, name: p.name, date: p.updated_at, thumb: '<span class="h-et-ico">🎧</span>', info: [p.media_title || 'son importé', fmtDur(p.duration), p.exists ? '' : '⚠ fichier de travail introuvable'].filter(Boolean).join(' · '), disabled: !p.exists})),
+            load: async () => ((await api('audio_projects')).projects || []).map(p => ({id: p.id, name: p.name, date: p.updated_at, thumb: '<span class="h-et-ico">🎧</span>', info: [p.summary || '', p.media_title || 'son importé', fmtDur(p.duration), p.exists ? '' : '⚠ fichier de travail introuvable'].filter(Boolean).join(' · '), disabled: !p.exists})),
             open: (id, again) => ext.openAudioProject?.(id, again),
             create: again => ext.newAudioProject?.(again),
             rename: (id, name) => post('rename_audio_project', {id, name}),
-            remove: id => post('delete_audio_project', {id}), createLabel: '＋ Nouveau projet son'},
+            remove: id => post('delete_audio_project', {id}), createLabel: '＋ Nouveau projet son',
+            extra: '<button type="button" class="button secondary" data-et-x="cassette" title="Une vieille cassette ou un dictaphone : souffle, bourdonnement, voix, volume, début et fin, pas à pas">🧭 Sauver une vieille cassette</button><button type="button" class="button secondary" data-et-x="mic" title="Une lettre lue, un souvenir raconté : le son entre dans les médias puis s’ouvre dans le Studio son">🎙️ Enregistrer au micro</button><button type="button" class="button secondary" data-et-x="quick" title="Un son de la base, nettoyé en deux minutes">⚡ Son rapide…</button>',
+            onExtra: async (k, again) => { // 🎧 maquette « Studio son » § 10
+                if (k === 'mic') return ext.recordNewSound?.(again);
+                const o = await ext._av?.pickOther('audio'); if (!o) return;
+                const m = o.media ? {...o.media, media_type: 'audio'} : {id: 0, title: o.title || 'Son', media_type: 'audio', src: o.src};
+                if (k === 'cassette') return ext.openQuickSound?.(m, {onDone: again, guide: true});
+                return ext.openSound?.(m, {onDone: again, mode: 'quick'});
+            }},
         {key: 'retouch', icon: '🎚️', label: 'Retouche des photos', what: 'retouche',
             load: async () => ((await api('retouch_projects')).projects || []).map(p => ({id: p.id, name: p.name, date: p.updated_at, thumb: p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-et-ico">🎚️</span>', info: [p.media_title || p.source, p.exists ? '' : '⚠ photo de départ introuvable'].filter(Boolean).join(' · '), disabled: !p.exists})),
             open: id => ext.openRetouchProject?.(id),

@@ -150,7 +150,7 @@
             ${L.inherited.length ? `<p class="h-lang-inherited">Par sa famille : ${L.inherited.map(l => `${langChip(l)} <small class="muted">de ${personLink(l.person_id, l.from_name)}${l.generations > 1 ? `, ${l.generations} générations au-dessus` : ''}</small>`).join(' · ')}</p>` : ''}
             ${!L.own.length && !L.inherited.length ? '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune langue notée.</span></p>' : ''}
             ${events ? `<h5>Langue des actes</h5><ul class="h-lang-events">${events}</ul>` : ''}
-            ${editOnly(`<label class="checkbox-line h-lang-noinherit"><input type="checkbox" data-h-lang-noinherit="${p.id}" ${Number(L.no_inherited) ? 'checked' : ''}> Ne pas reprendre les langues de ses ancêtres</label>`)}`;
+            ${editOnly(`<label class="ui-toggle h-lang-noinherit"><input type="checkbox" data-h-lang-noinherit="${p.id}" ${Number(L.no_inherited) ? 'checked' : ''}><i></i>Ne pas reprendre les langues de ses ancêtres</label>`)}`;
         return card(index, 'Langues', L.own.length + L.inherited.length || '', body, 'span-6', editOnly(`<button type="button" class="button small secondary" data-h-lang-add="${p.id}">＋ Langue</button>`));
     };
     function personLanguageDialog(personId, l = {}) {

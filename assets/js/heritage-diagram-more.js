@@ -40,7 +40,7 @@
     const when = v => { const t = String(v ?? '').replace(/-00\b/g, '').trim(); if (!t) return null; const y = R.when(t, false); return y === null || !Number.isFinite(y) || y < -3000 || y > 3000 ? null : y; };
     const P = (cx, cy, r, a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
     const isNumText = v => /^\s*[-+]?[\d\s ]*[.,]?\d+\s*%?\s*$/.test(String(v ?? ''));
-    const H_OPT = C('height', 'Hauteur au plus (px)', 'number', {min: 120, max: 3000});
+    const H_OPT = C('height', 'Hauteur au plus', 'number', {unit: 'px', min: 120, max: 3000});
     /** les années en bas : traits légers et nombres */
     function yearAxis(from, to, X, y0, h, fs, W) {
         const tk = R.ticks(from, to, clamp(Math.round(W / 80), 2, 24)); let s = '';
@@ -579,7 +579,7 @@
     }
 
     /* ═════════ « Depuis l'app » : petits outils communs ═════════ */
-    const getM = q => A().api('diagram_more', q), getG = q => A().api('diagram_genea', q);
+    const getM = q => A().api('diagram_more', {...q, ...(window.LCNDA_EXT?.diagramAppOpts?.extra() || {})}), getG = q => A().api('diagram_genea', q); // getM : + le groupe et la période communs (heritage-diagram-options.js)
     const PK = (name, o = {}) => (window.LCNDA_PICKER?.pickerField ? window.LCNDA_PICKER.pickerField({name, kind: 'person', ...o}) : '');
     const startId = () => Number(A().state?.bootstrap?.startPersonId) || null;
     const rootField = (label = 'Personne de départ') => `<span class="pk-lab">${esc(label)}</span>${PK('dm_root', {value: startId()})}`;
@@ -682,7 +682,7 @@
     const violinApp = {
         html: () => box('🎻 Des âges de ma base', 'Chaque personne donne une valeur (son âge au décès, ou au mariage), rangée dans une catégorie (son siècle, son sexe).', `<label>Valeur${sel('what', [['ages_death', 'Âge au décès'], ['ages_marriage', 'Âge au mariage']], 'ages_death')}</label><label>Catégorie${sel('by', [['century', 'Siècle'], ['group', 'Sexe']], 'century')}</label>`),
         bind: (pane, io) => bindApp(pane, async () => {
-            const what = val(pane, 'what'), by = val(pane, 'by'), r = await A().api('diagram_numbers', {what}); if (!r.items?.length) throw new Error('Aucune personne avec les deux dates.');
+            const what = val(pane, 'what'), by = val(pane, 'by'), r = await A().api('diagram_numbers', {what, ...(window.LCNDA_EXT?.diagramAppOpts?.extra() || {})}); if (!r.items?.length) throw new Error('Aucune personne avec les deux dates.');
             const s = io.spec(); s.rows = r.items.map(it => ({group: by === 'group' ? it.group : it.century, value: it.value})).sort((a, b) => (by === 'century' ? centuryN(a.group) - centuryN(b.group) : 0));
             s.o = {...s.o, unit: 'ans', yLabel: what === 'ages_marriage' ? 'Âge au mariage' : 'Âge au décès', sort: by === 'century' ? '' : s.o.sort}; titleIf(s, K.violin.sample(), `${what === 'ages_marriage' ? 'Âge au mariage' : 'Âge au décès'} par ${by === 'group' ? 'sexe' : 'siècle'}`); io.apply(s);
             return `${r.items.length} valeurs prises dans ta base.`;
@@ -716,7 +716,7 @@
             grids: [{key: 'rows', label: 'Les années', cols: [C('year', 'Année'), C('births', 'Naissances', 'number'), C('deaths', 'Décès', 'number')]},
                 {key: 'crises', label: 'Les crises (à changer ou compléter)', cols: [C('start', 'Début'), C('end', 'Fin (vide = une année)'), C('label', 'Nom'), C('color', 'Couleur', 'color')]}],
             options: [C('smooth', 'Lisser les courbes (moyenne sur … ans)', 'select', {choices: [['0', 'Non'], ['3', '3 ans'], ['5', '5 ans'], ['9', '9 ans']], def: '0'}), C('crises', 'Montrer les crises', 'check', {def: true}), C('excess', 'Colorer quand les décès dépassent les naissances', 'check', {def: true}),
-                C('birthColor', 'Couleur des naissances', 'color', {def: '#59a14f'}), C('deathColor', 'Couleur des décès', 'color', {def: '#5f6b7a'}), C('from', 'Début (année, vide = auto)'), C('to', 'Fin (année, vide = auto)'), C('yLabel', 'Nom de l’axe des valeurs'), C('height', 'Hauteur du dessin (px)', 'number', {min: 140, max: 2400})],
+                C('birthColor', 'Couleur des naissances', 'color', {def: '#59a14f'}), C('deathColor', 'Couleur des décès', 'color', {def: '#5f6b7a'}), C('from', 'Début (année, vide = auto)'), C('to', 'Fin (année, vide = auto)'), C('yLabel', 'Nom de l’axe des valeurs'), C('height', 'Hauteur du dessin', 'number', {unit: 'px', min: 140, max: 2400})],
             sample: () => ({o: {title: 'Naissances et décès au village', smooth: '3'}, rows: sampleCrises(), crises: CRISES.map(([start, end, label, c]) => ({start, end, label, color: c}))})},
         siblings: {icon: '👨‍👩‍👧', label: 'Âges comparés d’une fratrie', group: 'Frises', render: siblings, legend: 'bottom', fromApp: sibApp,
             grids: [{key: 'rows', label: 'Les enfants (dans l’ordre de naissance)', cols: [C('name', 'Prénom / nom'), C('sex', 'Sexe', 'select', {choices: [['', '?'], ['h', 'Homme'], ['f', 'Femme']]}), C('birth', 'Naissance'), C('death', 'Décès (vide = vivant ou inconnu)'), C('marriages', 'Mariages (dates, séparées par des virgules)'), C('children', 'Naissance de ses enfants (dates)'), C('note', 'Note')]}],
@@ -724,17 +724,17 @@
             sample: () => ({o: {title: 'Les enfants de Jean et Marie'}, rows: sampleSib()})},
         alivepyr: {icon: '🔺', label: 'Pyramide « qui vivait en … »', group: 'Frises', render: alivePyr, legend: 'bottom', fromApp: pyrApp,
             grids: [{key: 'rows', label: 'Les personnes (à la main ; celles de ta base : « Depuis l’app »)', cols: [C('name', 'Nom'), C('sex', 'Sexe', 'select', {choices: [['', '?'], ['h', 'Homme'], ['f', 'Femme']]}), C('birth', 'Naissance'), C('death', 'Décès')]}],
-            options: [C('year', 'Année montrée', 'number', {min: -3000, max: 3000}), C('band', 'Tranches d’âge', 'select', {choices: [['5', '5 ans'], ['10', '10 ans'], ['20', '20 ans']], def: '10'}), C('maxAge', 'Dernière tranche à partir de (ans)', 'number', {min: 20, max: 120, def: 90}),
+            options: [C('year', 'Année montrée', 'number', {min: -3000, max: 3000}), C('band', 'Tranches d’âge', 'select', {choices: [['5', '5 ans'], ['10', '10 ans'], ['20', '20 ans']], def: '10'}), C('maxAge', 'Dernière tranche à partir de', 'number', {unit: 'ans', min: 20, max: 120, def: 90}),
                 C('unknownAge', 'Décès inconnu : supposer une vie de … ans (0 = ne pas compter)', 'number', {min: 0, max: 110, def: 0}), C('fixedScale', 'Même échelle pour toutes les années (lecture)', 'check', {def: true}), C('values', 'Afficher les nombres', 'check', {def: true}),
                 C('menColor', 'Couleur des hommes', 'color', {def: '#4e79a7'}), C('womenColor', 'Couleur des femmes', 'color', {def: '#e15759'}), C('height', 'Hauteur des barres (px, au total)', 'number', {min: 100, max: 2400})],
             sample: () => ({o: {title: 'Qui vivait en 1850 ?', year: 1850, maxAge: 90}, rows: samplePyr()}), afterDraw: keepApi},
         accordion: {icon: '🪗', label: 'Arbre en accordéon (cousins)', group: 'Généalogie', render: accordion, legend: 'bottom', fromApp: accApp, afterDraw: accAfterDraw,
             grids: [{key: 'rows', label: 'Les personnes (même nom au-dessus = branche)', cols: [C('name', 'Nom'), C('parent', 'Au-dessus (nom ; vide pour le haut)'), C('years', 'Années'), C('kin', 'Lien de parenté'), C('degree', 'Degré (couleur)', 'number')]}],
-            options: [C('kin', 'Montrer le lien de parenté', 'check', {def: true}), C('open', 'Générations ouvertes au départ (0 = toutes)', 'number', {min: 0, max: 12, def: 0}), C('indent', 'Décalage d’une génération (px)', 'range', {min: 8, max: 60, def: 20})],
+            options: [C('kin', 'Montrer le lien de parenté', 'check', {def: true}), C('open', 'Générations ouvertes au départ (0 = toutes)', 'number', {min: 0, max: 12, def: 0}), C('indent', 'Décalage d’une génération', 'range', {unit: 'px', min: 8, max: 60, def: 20})],
             sample: () => ({o: {title: 'Mes cousins'}, rows: sampleAcc()})},
         cousinage: {icon: '🧶', label: 'Graphe des cousinages', group: 'Généalogie', render: cousinage, legend: 'bottom', fromApp: cousApp,
             grids: [{key: 'rows', label: 'Les liens (deux personnes et leur lien)', cols: [C('a', 'Personne A'), C('b', 'Personne B'), C('kind', 'Lien (cousins germains…)')]}, {key: 'nodes', label: 'Les personnes (facultatif : famille pour la couleur)', cols: [C('name', 'Nom'), C('group', 'Famille / groupe')]}],
-            options: [C('edgeLabels', 'Noms des liens sur les traits', 'select', {choices: [['', 'Si pas trop nombreux (60)'], ['all', 'Toujours'], ['none', 'Jamais']]}), C('colorBy', 'Couleur des points', 'select', {choices: [['', 'Par famille'], ['none', 'Une seule']]}), C('height', 'Hauteur (px)', 'number', {min: 220, max: 2400})],
+            options: [C('edgeLabels', 'Noms des liens sur les traits', 'select', {choices: [['', 'Si pas trop nombreux (60)'], ['all', 'Toujours'], ['none', 'Jamais']]}), C('colorBy', 'Couleur des points', 'select', {choices: [['', 'Par famille'], ['none', 'Une seule']]}), C('height', 'Hauteur', 'number', {unit: 'px', min: 220, max: 2400})],
             sample: () => ({o: {title: 'Les cousinages de la famille'}, ...sampleCous()})},
         kinmatrix: {icon: '🔢', label: 'Matrice de parenté (qui est quoi pour qui)', group: 'Généalogie', render: kinMatrix, legend: 'bottom', fromApp: matApp,
             grids: [{key: 'people', label: 'Les personnes (lignes et colonnes, 40 au plus)', cols: [C('name', 'Nom')]}, {key: 'rows', label: 'Les cases : ce que B est pour A', cols: [C('a', 'A (ligne)'), C('b', 'B (colonne)'), C('label', 'Lien (père, cousin germain…)'), C('degree', 'Degré (couleur)', 'number')]}],
@@ -748,17 +748,17 @@
             options: [C('layout', 'Disposition', 'select', {choices: [['', 'Une ligne par génération'], ['square', 'Un carré (cases dans l’ordre des numéros)']]}), C('gens', 'Générations', 'range', {min: 2, max: 12, def: 7}),
                 C('labels', 'Dans les cases', 'select', {choices: [['', 'Le nom (si la place le permet)'], ['sosa', 'Le n° Sosa'], ['both', 'Le nom et le n° Sosa'], ['none', 'Rien']]}), C('scale', 'Couleurs', 'select', {choices: [['', 'Automatique'], ['num', 'Un dégradé (chiffres)'], ['cat', 'Une couleur par catégorie']]}),
                 C('lowColor', 'Couleur des petits chiffres', 'color', {def: '#fde0c5', when: s => s.o?.scale !== 'cat'}), C('highColor', 'Couleur des grands chiffres', 'color', {def: '#2e7d32', when: s => s.o?.scale !== 'cat'}), C('min', 'Dégradé : minimum', 'number', {when: s => s.o?.scale === 'num'}), C('max', 'Dégradé : maximum', 'number', {when: s => s.o?.scale === 'num'}),
-                C('missingColor', 'Couleur des ancêtres pas trouvés', 'color', {def: '#e3e5e8'}), C('rowHeight', 'Hauteur des lignes (px)', 'range', {min: 6, max: 80, def: 24, when: s => s.o?.layout !== 'square'})],
+                C('missingColor', 'Couleur des ancêtres pas trouvés', 'color', {def: '#e3e5e8'}), C('rowHeight', 'Hauteur des lignes', 'range', {unit: 'px', min: 6, max: 80, def: 24, when: s => s.o?.layout !== 'square'})],
             sample: () => ({o: {title: 'Ce que je sais de mes ancêtres', gens: 6, scale: 'cat'}, rows: sampleGrid(), cats: COMPLETE.map(([value, c]) => ({value, color: c}))})},
         chord: {icon: '🎼', label: 'Diagramme d’accord (mariages entre villages)', group: 'Liens', render: chord, noLegend: true, fromApp: chordApp,
             grids: [{key: 'rows', label: 'Les paires de lieux', cols: [C('from', 'Lieu A'), C('to', 'Lieu B'), C('value', 'Mariages', 'number'), C('color', 'Couleur de A', 'color')]}],
             options: [C('top', 'Lieux gardés (les autres : « Autres »)', 'range', {min: 2, max: 40, def: 12}), C('self', 'Mariages dans le même lieu (boucles)', 'check', {def: true}), C('sort', 'Ordre', 'select', {choices: [['', 'Du plus grand au plus petit'], ['az', 'A → Z']]}),
-                C('opacity', 'Opacité des rubans (%)', 'range', {min: 10, max: 100, def: 65}), C('labels', 'Noms', 'select', {choices: [['', 'Là où il y a la place'], ['all', 'Tous']]}), C('unit', 'Unité (ex. : mariages)'), C('height', 'Hauteur au plus (px)', 'number', {min: 200, max: 2400})],
+                C('opacity', 'Opacité des rubans', 'range', {unit: '%', min: 10, max: 100, def: 65}), C('labels', 'Noms', 'select', {choices: [['', 'Là où il y a la place'], ['all', 'Tous']]}), C('unit', 'Unité (ex. : mariages)'), C('height', 'Hauteur au plus', 'number', {unit: 'px', min: 200, max: 2400})],
             sample: () => ({o: {title: 'Mariages entre villages'}, rows: sampleChord()})},
         violin: {icon: '🎻', label: 'Violon (répartition par catégorie)', group: 'Chiffres', render: violin, noLegend: true, fromApp: violinApp,
             grids: [{key: 'rows', label: 'Les valeurs (une par ligne)', cols: [C('group', 'Catégorie (siècle, sexe…)'), C('value', 'Valeur', 'number')]}],
             options: [C('box', 'Médiane et quartiles', 'check', {def: true}), C('points', 'Montrer chaque valeur (points)', 'check'), C('values', 'Écrire la médiane', 'check', {def: true}), C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['median', 'Par médiane'], ['az', 'A → Z']]}),
-                C('bandwidth', 'Lissage (vide = automatique)', 'number'), C('min', 'Axe : minimum'), C('max', 'Axe : maximum'), C('unit', 'Unité (ex. : ans)'), C('yLabel', 'Nom de l’axe'), C('height', 'Hauteur du dessin (px)', 'number', {min: 140, max: 2400})],
+                C('bandwidth', 'Lissage (vide = automatique)', 'number'), C('min', 'Axe : minimum'), C('max', 'Axe : maximum'), C('unit', 'Unité (ex. : ans)'), C('yLabel', 'Nom de l’axe'), C('height', 'Hauteur du dessin', 'number', {unit: 'px', min: 140, max: 2400})],
             sample: () => ({o: {title: 'Âge au décès par siècle', unit: 'ans', yLabel: 'Âge au décès'}, rows: sampleViolin()})},
     };
     for (const [k, kind] of Object.entries(NEW)) { if (!K[k]) K[k] = kind; }

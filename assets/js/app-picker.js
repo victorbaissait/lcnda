@@ -39,6 +39,9 @@
         photomap: {sym: '📸', add: '＋ Ajouter une carte de photos…', one: 'carte', fem: true, none: 'Aucune carte de photos', label: '📸 Cartes de photos'}, // lib/photomaps.php
         digest: {sym: '📜', ph: 'Commune, cote, année… (2 lettres suffisent)', add: '🔗 Relier un dépouillement…', one: 'dépouillement', none: 'Aucun dépouillement', label: '📜 Dépouillements'}, // journal des recherches (lib/picker.php)
         contact: {sym: '📇', ph: 'Nom, prénom d’un contact… (2 lettres suffisent)', add: '＋ Ajouter un contact…', one: 'contact', none: 'Aucun contact', label: '📇 Contacts'}, // Répertoire des vivants (Questions aux proches)
+        mylist: {sym: '📋', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📋 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme
+        event: {sym: '📅', ph: 'Événement, personne, année… (2 lettres suffisent)', add: '＋ Ajouter un événement…', one: 'événement', none: 'Aucun événement', label: '📅 Événements'}, // 📅 événements (Studio son : un passage relié)
+        archive_service: {sym: '🏛', ph: 'Nom, sigle, ville… (ex. AD 19, Tulle)', add: '＋ Ajouter un service d’archives…', one: 'service d’archives', many: 'services d’archives', none: 'Aucun service d’archives', create: 'Créer le service', label: '🏛 Services d’archives'}, // lib/archive_services.php (heritage-archive-services.js)
     };
     const kindOf = k => K[k] ? k : 'person';
     const isPerson = it => it && (it.kind === 'person' || it.kind === 'animal');
@@ -606,6 +609,7 @@
         if (isPerson(it) && app.openPersonById) { close(); app.openPersonById(it.id); return; }
         if (it.kind === 'investigation' && app.state && app.setModule) { close(); app.state.currentInvestigationId = it.id; app.state.enquetesTab = 'enquetes'; app.setModule('enquetes'); return; }
         if (it.kind === 'battue' && app.state && app.setModule) { close(); app.state.currentBattueId = it.id; app.state.enquetesTab = 'battues'; app.setModule('enquetes'); return; }
+        if (it.kind === 'archive_service' && window.LCNDA_EXT?.archiveServices?.open) { close(); window.LCNDA_EXT.archiveServices.open(it.id); return; } // 🏛 Listes › Services d'archives
         if (it.kind === 'digest' && window.LCNDA_EXT?.openDepouillement) { close(); window.LCNDA_EXT.openDepouillement(it.id); return; } // 📜 Listes › Dépouillements
         if (it.kind === 'house' && window.LCNDA_EXT?.openHouse) { window.LCNDA_EXT.openHouse({id: it.id}); return; }
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }

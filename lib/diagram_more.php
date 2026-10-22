@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/diagram_chiffres.php'; // dchf_date, dchf_age
 require_once __DIR__ . '/diagram_genea.php';    // dgn_links, dgn_root, dgn_sosa, dgn_name
+require_once __DIR__ . '/diagram_options.php';  // dgo_request, dgo_restrict : options communes de « Depuis l'app »
 
 const DMO_BIRTH = ['BIRT' => 0, 'CHR' => 1, 'BAPM' => 2];
 const DMO_DEATH = ['DEAT' => 0, 'BURI' => 1];
@@ -69,8 +70,9 @@ function dmo_crises(PDO $pdo, array $q): array
     $place = (int) ($q['place'] ?? 0);
     [$ids, $pname] = $place > 0 ? dmo_same_places($pdo, $place) : [null, ''];
     $from = is_numeric($q['from'] ?? '') ? (int) $q['from'] : null; $to = is_numeric($q['to'] ?? '') ? (int) $q['to'] : null;
-    $b = []; $d = [];
+    $b = []; $d = []; $grp = dgo_restrict($pdo, null); // le groupe de personnes choisi (« Depuis l'app »)
     foreach (dmo_lives($pdo) as $p) {
+        if ($grp !== null && !isset($grp[$p['id']])) { continue; }
         if ($p['b'] && ($ids === null || isset($ids[$p['bp']]))) { $y = intdiv($p['b'][0], $step) * $step; $b[$y] = ($b[$y] ?? 0) + 1; }
         if ($p['d'] && ($ids === null || isset($ids[$p['dp']]))) { $y = intdiv($p['d'][0], $step) * $step; $d[$y] = ($d[$y] ?? 0) + 1; }
     }
@@ -126,9 +128,9 @@ function dmo_siblings(PDO $pdo, int $person, string $mode): array
 /* ═════════ 🔺 Qui vivait en … : [naissance, décès, sexe, vivant] ═════════ */
 function dmo_alive(PDO $pdo): array
 {
-    $people = []; $lo = null; $hi = null;
+    $people = []; $lo = null; $hi = null; $grp = dgo_restrict($pdo, null);
     foreach (dmo_lives($pdo) as $p) {
-        if (!$p['b']) { continue; }
+        if (!$p['b'] || ($grp !== null && !isset($grp[$p['id']]))) { continue; }
         $by = $p['b'][0]; $dy = $p['d'][0] ?? null;
         if ($dy !== null && $dy < $by) { continue; }
         $people[] = [$by, $dy, $p['g'] === 'male' ? 1 : ($p['g'] === 'female' ? 2 : 0), $p['living'] ? 1 : 0];
@@ -357,8 +359,9 @@ function dmo_chord(PDO $pdo, string $mode, int $top): array
     $names = [];
     foreach ($pdo->query("SELECT id, name FROM places") as $r) { $n = trim(explode(',', (string) $r['name'])[0]); if ($n !== '') { $names[(int) $r['id']] = mb_substr($n, 0, 60); } }
     $sql = "SELECT f.id, f.partner1_id AS a, f.partner2_id AS b, (SELECT e.place_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag IN ('MARR','MARB','MARC') AND e.place_id IS NOT NULL ORDER BY t.gedcom_tag='MARR' DESC LIMIT 1) AS mp FROM families f";
-    $pairs = []; $count = [];
+    $pairs = []; $count = []; $grp = dgo_restrict($pdo, null);
     foreach ($pdo->query($sql) as $f) {
+        if ($grp !== null && !isset($grp[(int) $f['a']]) && !isset($grp[(int) $f['b']])) { continue; } // un des deux époux dans le groupe choisi
         $pa = $names[$lives[(int) $f['a']]['bp'] ?? 0] ?? ''; $pb = $names[$lives[(int) $f['b']]['bp'] ?? 0] ?? ''; $pm = $names[(int) $f['mp']] ?? '';
         $list = $mode === 'marriage' ? [[$pa, $pm], [$pb, $pm]] : [[$pa, $pb]];
         foreach ($list as [$x, $y]) {
@@ -379,6 +382,7 @@ function diagram_more_data(PDO $pdo, array $q): array
 {
     $q = array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $q);
     $what = $q['what'] ?? '';
+    dgo_request($q); // groupe de personnes et période communs (onglet « Depuis l'app »)
     return match ($what) {
         'crises' => dmo_crises($pdo, $q),
         'siblings' => dmo_siblings($pdo, (int) ($q['person'] ?? 0), ($q['mode'] ?? '') === 'children' ? 'children' : 'siblings'),

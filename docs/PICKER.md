@@ -68,7 +68,9 @@ P.pickerField({name: 'label_ids', kind: 'label', multiple: true});
 // kinds : person, place, source, media, investigation, battue, label, house, periodical, employer, census, artwork, graph,
 //         sheet (📒 Fiches), atelier (📚 projets de l'Atelier), board (🧩 tableaux), layout (📐 mises en page), diagram (🏛️), oldmap (🗺️ cartes anciennes), act (📜 transcriptions)
 //         — ces 7 dernières : lib/widget_links.php (widget « Raccourcis », assets/js/heritage-shortcuts.js)
+//         event (📅 événements : titre ou sorte, personne ou couple, date, lieu — un passage d'un son relié, Studio son, lib/audio_studio.php)
 //         digest (📜 dépouillements d'archive : commune, cote, service, années ; badge = le résultat « Trouvé / Rien trouvé / En partie » — lib/research_journal.php)
+//         archive_service (🏛 services d'archives : nom, sigle, ville ; « ＋ Créer le service » ouvre sa fenêtre ; ↗ Ouvrir = sa fiche — lib/archive_services.php)
 
 // 📈 un de mes graphiques (table custom_widgets, lib/graphs.php) : la valeur est le numéro de ligne (item.id) ; l'identifiant
 // du graphique (cw_…) est dans item.uid. Case vide = tous les graphiques ; « ＋ Nouveau graphique » / « ＋ Créer le graphique « … » »

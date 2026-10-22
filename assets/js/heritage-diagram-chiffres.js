@@ -475,7 +475,7 @@
     }
 
     /* ═════════ Données prises dans l'arbre ═════════ */
-    const fetchN = (what, extra = {}) => A().api('diagram_numbers', {what, ...extra});
+    const fetchN = (what, extra = {}, spec = null) => A().api('diagram_numbers', {what, ...extra, ...(spec ? window.LCNDA_EXT?.diagramAppOpts?.extra(spec) || {} : {})}); // spec : le groupe de personnes et la période choisis dans « Depuis l'app » (heritage-diagram-options.js)
     const GENDER = [['', 'tout le monde'], ['female', 'les femmes'], ['male', 'les hommes']];
     const sourceKey = k => String(k || '').split(':');
     /** des valeurs (âges, années) → les lignes d'un histogramme, d'une boîte ou d'un essaim */
@@ -483,7 +483,7 @@
         ['ages_marriage:', 'Âge au mariage'], ['birth_years:', 'Années de naissance']];
     const centuryOrder = g => romanN(g) ?? 999;
     async function fillValues(spec, key, groupBy) {
-        const [what, gender] = sourceKey(key), r = await fetchN(what, gender ? {gender} : {}), items = r.items || [];
+        const [what, gender] = sourceKey(key), r = await fetchN(what, gender ? {gender} : {}, spec), items = r.items || [];
         if (!items.length) throw new Error('Aucune donnée dans l’arbre pour ce choix (dates manquantes ?).');
         const g = groupBy === 'century' ? x => x.century : groupBy === 'sex' ? x => x.group : () => '';
         let rows = items.map(x => ({label: x.name, value: x.value, group: g(x)}));
@@ -495,7 +495,7 @@
         return spec;
     }
     async function fillTable(spec, key) { // périodes × noms (courants, petites courbes)
-        const [what, step] = sourceKey(key), r = await fetchN(what, step ? {step} : {});
+        const [what, step] = sourceKey(key), r = await fetchN(what, step ? {step} : {}, spec);
         if (!r.rows?.length) throw new Error('Aucune donnée dans l’arbre pour ce choix.');
         spec.series = r.series.map(name => ({name})); spec.rows = r.rows;
         spec.o = {...(spec.o || {}), title: {occupations: 'Les métiers de la famille', births_places: 'Naissances par commune', births_surnames: 'Naissances par nom de famille'}[what] || '', subtitle: `par tranches de ${r.step} ans`, source: 'D’après les fiches de l’arbre'};
@@ -503,7 +503,7 @@
     }
     const APP = {
         bump: {sources: GENDER.map(([g, l]) => [`firstnames:${g}`, `Prénoms les plus donnés par décennie (${l})`]),
-            fill: async (spec, key) => { const [, gender] = sourceKey(key), r = await fetchN('firstnames', gender ? {gender} : {}); if (!r.rows?.length) throw new Error('Pas assez de naissances datées.');
+            fill: async (spec, key) => { const [, gender] = sourceKey(key), r = await fetchN('firstnames', gender ? {gender} : {}, spec); if (!r.rows?.length) throw new Error('Pas assez de naissances datées.');
                 const names = [...new Set(r.rows.map(x => x[1]))]; spec.series = r.periods.map(name => ({name}));
                 spec.rows = names.map(n => { const row = {label: n}; r.periods.forEach((p, j) => { const hit = r.rows.find(x => x[0] === p && x[1] === n); row['s' + j] = hit ? hit[2] : ''; }); return row; });
                 spec.o = {...(spec.o || {}), mode: 'value', top: 10, title: 'Les 10 prénoms les plus donnés par décennie', source: 'D’après les naissances de l’arbre'}; return spec; }},
@@ -514,17 +514,17 @@
         boxplot: {sources: [['ages_death:', 'Âge au décès, par siècle de naissance'], ['ages_marriage:', 'Âge au mariage, par siècle'], ['ages_death:|sex', 'Âge au décès, femmes et hommes'], ['ages_marriage:|sex', 'Âge au mariage, femmes et hommes']],
             fill: (s, k) => fillValues(s, k.split('|')[0], k.endsWith('|sex') ? 'sex' : 'century')},
         dumbbell: {sources: [['couples:25', 'Âges des époux au mariage (25 couples les plus récents)'], ['couples:50', 'Âges des époux au mariage (50 couples)']],
-            fill: async (spec, key) => { const r = await fetchN('couples'), n = Number(sourceKey(key)[1]) || 25; if (!r.items?.length) throw new Error('Aucun couple marié avec les deux dates de naissance.');
+            fill: async (spec, key) => { const r = await fetchN('couples', {}, spec), n = Number(sourceKey(key)[1]) || 25; if (!r.items?.length) throw new Error('Aucun couple marié avec les deux dates de naissance.');
                 spec.series = [{name: 'Lui', color: spec.series?.[0]?.color || '#4e79a7'}, {name: 'Elle', color: spec.series?.[1]?.color || '#e15759'}];
                 spec.rows = r.items.slice(0, n).map(x => ({label: `${x.label} (${x.year})`, s0: x.a, s1: x.b})); spec.o = {...(spec.o || {}), title: 'Âge des époux au mariage', unit: 'ans', source: 'D’après les mariages de l’arbre'}; return spec; }},
         slope: {sources: [['births_places:100', 'Naissances par commune : un siècle et le suivant']],
-            fill: async (spec) => { const r = await fetchN('births_places', {step: 100}); const rows = (r.rows || []).filter(x => r.series.some((_, j) => x['s' + j]));
+            fill: async (spec) => { const r = await fetchN('births_places', {step: 100}, spec); const rows = (r.rows || []).filter(x => r.series.some((_, j) => x['s' + j]));
                 if (rows.length < 2) throw new Error('Il faut des naissances sur au moins deux siècles.');
                 const a = rows[rows.length - 2], b = rows[rows.length - 1], cn = y => { const c = Math.floor((Number(y) - 1) / 100) + 2; return `${['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'][c - 1] || c}e siècle`; };
                 spec.series = [{name: cn(a.label)}, {name: cn(b.label)}]; spec.rows = r.series.map((name, j) => ({label: name, s0: a['s' + j] || 0, s1: b['s' + j] || 0}));
                 spec.o = {...(spec.o || {}), title: 'Naissances par commune, d’un siècle à l’autre', source: 'D’après les naissances de l’arbre'}; return spec; }},
         waterfall: {sources: [['living:50', 'Naissances et décès dans l’arbre (par 50 ans)'], ['living:25', 'Naissances et décès dans l’arbre (par 25 ans)'], ['living:100', 'Naissances et décès dans l’arbre (par siècle)']],
-            fill: async (spec, key) => { const r = await fetchN('living', {step: sourceKey(key)[1] || 50}); if (!r.rows?.length) throw new Error('Aucune naissance datée.');
+            fill: async (spec, key) => { const r = await fetchN('living', {step: sourceKey(key)[1] || 50}, spec); if (!r.rows?.length) throw new Error('Aucune naissance datée.');
                 spec.rows = r.rows; spec.o = {...(spec.o || {}), title: 'Les vivants de l’arbre, période par période', subtitle: 'naissances (+) et décès (−) ; décès inconnu d’une naissance ancienne : compté 60 ans après', source: 'D’après les fiches de l’arbre'}; return spec; }},
         kpi: {sources: [['counters', 'Les compteurs de ma base (personnes, familles, médias…)']],
             fill: async (spec) => { const [r, s] = await Promise.all([fetchN('counters'), fetchN('sosa').catch(() => ({rows: []}))]);
@@ -540,7 +540,7 @@
     /* ═════════ Les sortes : tableaux, réglages, exemples ═════════ */
     const C = (k, label, type = 'text', extra = {}) => ({k, label, type, ...extra});
     const O = {
-        values: C('values', 'Afficher les valeurs', 'check', {def: true}), height: C('height', 'Hauteur du dessin (px)', 'range', {min: 80, max: 1600, step: 10, def: 380}),
+        values: C('values', 'Afficher les valeurs', 'check', {def: true}), height: C('height', 'Hauteur du dessin', 'range', {unit: 'px', min: 80, max: 1600, step: 10, def: 380}),
         unit: C('unit', 'Unité (ex. : ans, personnes)'), xLabel: C('xLabel', 'Nom de l’axe des valeurs'), yLabel: C('yLabel', 'Nom de l’axe des valeurs'),
         highlight: C('highlight', 'Mettre en avant (un nom ; les autres pâlissent)'), fromZero: C('fromZero', 'Axe à partir de zéro', 'check'),
     };
@@ -579,17 +579,17 @@
         bullet: () => ({o: {title: 'Ancêtres trouvés, génération par génération', unit: ' %', source: 'Objectif : 75 %'}, rows: [['Génér. 2 (parents)', 100], ['Génér. 3', 100], ['Génér. 4', 87.5], ['Génér. 5', 81], ['Génér. 6', 75], ['Génér. 7', 70], ['Génér. 8', 64], ['Génér. 9', 41]].map(([label, value]) => ({label, value, target: 75, max: 100, zones: '50;75'}))}),
     };
     const SORT_DUMB = C('sort', 'Ordre des lignes', 'select', {choices: [['', 'Comme dans le tableau'], ['gap', 'Par écart'], ['a', 'Par la 1re valeur'], ['b', 'Par la 2e valeur']]});
-    const LOLLI = [O.values, C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['desc', 'Du plus grand au plus petit'], ['asc', 'Du plus petit au plus grand']]}), C('dot', 'Taille des ronds (px)', 'range', {min: 2, max: 30, def: 7}),
+    const LOLLI = [O.values, C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['desc', 'Du plus grand au plus petit'], ['asc', 'Du plus petit au plus grand']]}), C('dot', 'Taille des ronds', 'range', {unit: 'px', min: 2, max: 30, def: 7}),
         C('oneColor', 'Une seule couleur', 'check', {def: true}), C('dotColor', 'Couleur', 'color', {def: '#4e79a7', when: s => s.o?.oneColor !== false}), O.unit];
     const KINDS = {
         bump: {icon: '🏁', label: 'Classement qui évolue (prénoms par décennie…)', group: 'Chiffres', render: bump, noLegend: true, table: true,
             grids: [TABLE('Les noms (lignes) et les périodes (colonnes)', 'Nom / prénom')],
             options: [C('mode', 'Les chiffres du tableau sont', 'select', {choices: [['', 'Des nombres : l’app calcule le rang'], ['rank', 'Déjà des rangs (1 = premier)']]}), C('top', 'Combien de rangs montrer', 'range', {min: 3, max: 30, def: 10}),
-                C('rowHeight', 'Hauteur d’un rang (px)', 'range', {min: 14, max: 60, def: 28}), O.highlight]},
+                C('rowHeight', 'Hauteur d’un rang', 'range', {unit: 'px', min: 14, max: 60, def: 28}), O.highlight]},
         stream: {icon: '🌊', label: 'Courants empilés (métiers sur 200 ans…)', group: 'Chiffres', render: stream, table: true,
             grids: [TABLE('Les périodes (lignes) et les catégories (colonnes)', 'Période')],
             options: [C('offset', 'Forme', 'select', {choices: [['wiggle', 'Courants (centrés, le moins de mouvement)'], ['silhouette', 'Centrés sur l’axe'], ['zero', 'Empilés sur le sol'], ['expand', 'En parts (100 %)']], def: 'wiggle'}),
-                C('curve', 'Courbes arrondies', 'check', {def: true}), C('values', 'Noms dans les courants', 'check', {def: true}), C('opacity', 'Opacité (%)', 'range', {min: 10, max: 100, def: 90}), O.height]},
+                C('curve', 'Courbes arrondies', 'check', {def: true}), C('values', 'Noms dans les courants', 'check', {def: true}), C('opacity', 'Opacité', 'range', {unit: '%', min: 10, max: 100, def: 90}), O.height]},
         histogram: {icon: '📶', label: 'Histogramme (valeurs rangées en tranches)', group: 'Chiffres', render: histogram, noLegend: true,
             grids: [VALUES('Les valeurs (une par ligne : l’app les range en tranches)')],
             options: [C('bin', 'Largeur des tranches (0 = automatique)', 'range', {min: 0, max: 100, step: 1, def: 0}), C('start', 'Début de la première tranche (vide = automatique)', 'number'), O.unit, C('barColor', 'Couleur des colonnes', 'color', {def: '#4e79a7'}),
@@ -611,10 +611,10 @@
         lollipop_v: {icon: '🍡', label: 'Sucettes debout', group: 'Chiffres', render: (s, W, fs) => lollipop(s, W, fs, true), noLegend: true, table: true, pairs: true, grids: [TABLE('Les chiffres', 'Catégorie', 1)], options: [...LOLLI, O.height]},
         beeswarm: {icon: '🐝', label: 'Essaim de points (une personne = un point)', group: 'Chiffres', render: beeswarm,
             grids: [VALUES('Les points (une ligne = une personne)', 'Groupe (couleur)')],
-            options: [C('dot', 'Taille des points (px)', 'range', {min: 2, max: 20, def: 5}), C('median', 'Montrer la médiane', 'check', {def: true}), O.unit, O.xLabel, C('height', 'Hauteur au plus (px)', 'range', {min: 80, max: 1600, step: 10, def: 450})]},
+            options: [C('dot', 'Taille des points', 'range', {unit: 'px', min: 2, max: 20, def: 5}), C('median', 'Montrer la médiane', 'check', {def: true}), O.unit, O.xLabel, C('height', 'Hauteur au plus', 'range', {unit: 'px', min: 80, max: 1600, step: 10, def: 450})]},
         smallmult: {icon: '🔲', label: 'Petites courbes en grille', group: 'Chiffres', render: smallMultiples, noLegend: true, table: true,
             grids: [TABLE('Les périodes (lignes) et une colonne par petite courbe', 'Période')],
-            options: [C('sameScale', 'Même échelle pour toutes', 'check', {def: true}), C('cols', 'Courbes par ligne (0 = automatique)', 'range', {min: 0, max: 8, def: 0}), C('chartHeight', 'Hauteur d’une courbe (px)', 'range', {min: 40, max: 400, def: 110}),
+            options: [C('sameScale', 'Même échelle pour toutes', 'check', {def: true}), C('cols', 'Courbes par ligne (0 = automatique)', 'range', {min: 0, max: 8, def: 0}), C('chartHeight', 'Hauteur d’une courbe', 'range', {unit: 'px', min: 40, max: 400, def: 110}),
                 C('area', 'Remplir sous la courbe', 'check', {def: true}), C('values', 'Écrire la dernière valeur', 'check', {def: true})]},
         kpi: {icon: '🔢', label: 'Cartes de chiffres (KPI)', group: 'Chiffres clés', render: kpi, noLegend: true,
             grids: [{key: 'rows', label: 'Les cartes', cols: [C('label', 'Nom'), C('value', 'Chiffre'), C('unit', 'Unité'), C('previous', 'Valeur d’avant (flèche, écart)', 'number'), C('prevLabel', 'Texte « avant » (ex. : l’an dernier)'),
@@ -623,7 +623,7 @@
                 C('spark', 'Mini-courbes', 'check', {def: true}), C('goodColor', 'Couleur « bien »', 'color', {def: '#2e8b57'}), C('midColor', 'Couleur « moyen »', 'color', {def: '#e8a33d'}), C('badColor', 'Couleur « à surveiller »', 'color', {def: '#d1495b'}), C('accent', 'Couleur sans seuil', 'color', {def: '#4e79a7'})]},
         bullet: {icon: '🎯', label: 'Barre d’objectif (valeur, objectif, zones)', group: 'Chiffres clés', render: bullet,
             grids: [{key: 'rows', label: 'Les barres', cols: [C('label', 'Nom'), C('value', 'Valeur', 'number'), C('target', 'Objectif', 'number'), C('max', 'Maximum (vide = auto)', 'number'), C('zones', 'Zones (seuils, ex. 50;75)', 'text', {ph: '50;75'}), C('color', 'Couleur', 'color')]}],
-            options: [O.values, C('unit', 'Unité (ex. : %)'), C('barHeight', 'Épaisseur des barres (px)', 'range', {min: 10, max: 60, def: 24}), C('scale', 'Graduations sous la dernière barre', 'check', {def: true}),
+            options: [O.values, C('unit', 'Unité (ex. : %)'), C('barHeight', 'Épaisseur des barres', 'range', {unit: 'px', min: 10, max: 60, def: 24}), C('scale', 'Graduations sous la dernière barre', 'check', {def: true}),
                 C('barColor', 'Couleur de la valeur', 'color', {def: '#1d1d1f'}), C('targetColor', 'Couleur de l’objectif', 'color', {def: '#d1495b'}), C('zoneColor', 'Couleur des zones', 'color', {def: '#7f8c99'})]},
     };
     for (const [k, kind] of Object.entries(KINDS)) { if (DR.KINDS[k]) continue; DR.KINDS[k] = {...kind, sample: sample[k], ...(APP[k] ? {app: APP[k]} : {})}; }

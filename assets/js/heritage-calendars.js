@@ -183,12 +183,12 @@
 
     function settingsDialog(key, p, after) {
         const alts = A().converterCalendarOptions.filter(([t]) => t !== 'gregorian');
-        ext.openDialog({eyebrow: 'RÉGLAGES DU CALENDRIER', title: key === 'genea' ? 'Calendrier de la famille' : 'Mon agenda', wide: true, submitLabel: 'Enregistrer',
+        ext.openDialog({eyebrow: 'RÉGLAGES DU CALENDRIER', title: key === 'genea' ? 'Calendrier de la famille' : 'Mon agenda', wide: true, // K2 : chaque changement est gardé tout de suite, « Fermer » seul en bas
             body: `<div class="form-grid"><label>La semaine commence le<select name="weekStart">${[[1, 'lundi (France, Europe)'], [0, 'dimanche (Amériques, Japon…)'], [6, 'samedi (Moyen-Orient)']].map(([v, l]) => `<option value="${v}" ${p.weekStart === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label>Style<select name="style">${[['classique', 'Classique'], ['papier', 'Papier ancien'], ['aere', 'Aéré'], ['compact', 'Compact'], ['contraste', 'Contrasté'], ['couleur', 'Cases colorées']].map(([v, l]) => `<option value="${v}" ${p.style === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label>Taille du texte<select name="size">${[['petit', 'Petite'], ['normal', 'Normale'], ['grand', 'Grande']].map(([v, l]) => `<option value="${v}" ${p.size === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label>Vue de départ<select name="view">${VIEWS.map(([v, l]) => `<option value="${v}" ${p.view === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                <label>Éléments par case (mois)<input type="number" name="max" min="1" max="20" value="${p.max}"></label></div>
+                <label>Éléments par case du mois<input type="number" name="max" min="1" max="20" value="${p.max}"></label></div>
                 <fieldset class="h-rc-modes"><legend>Affichage</legend>
                     <label class="checkbox-line"><input type="checkbox" name="weekNumbers" ${p.weekNumbers ? 'checked' : ''}> Numéros de semaine</label>
                     <label class="checkbox-line"><input type="checkbox" name="weekend" ${p.weekend ? 'checked' : ''}> Week-ends grisés</label>
@@ -197,16 +197,23 @@
                     <label class="checkbox-line"><input type="checkbox" name="groupOthers" ${p.groupOthers ? 'checked' : ''}> Regrouper les autres sortes d’événements (métier, résidence…) sous « 📌 Autres événements »</label>` : `<label class="checkbox-line"><input type="checkbox" name="showDone" ${p.showDone !== false ? 'checked' : ''}> Montrer ce qui est fait ou passé</label>`}</fieldset>
                 <fieldset class="h-rc-modes"><legend>Sous chaque jour, la date dans ces calendriers</legend><div class="h-cal-altpick">${alts.map(([t, n]) => `<label class="checkbox-line"><input type="checkbox" name="alt" value="${t}" ${p.alt.includes(t) ? 'checked' : ''}> ${esc(n)}</label>`).join('')}</div></fieldset>
                 <fieldset class="h-rc-modes"><legend>Couleurs</legend><div class="h-cal-colors">${groupsOf(key).map(([g, l]) => `<label><input type="color" name="color_${g}" value="${colorOf(key, p, g)}"> ${esc(l)}</label>`).join('')}</div></fieldset>
-                <button type="button" class="button small secondary" data-cal-reset>↺ Remettre comme au départ</button>`,
-            onOpen: d => d.querySelector('[data-cal-reset]').addEventListener('click', async () => { if (!await A().confirmBox('Remettre tous les réglages de ce calendrier comme au départ ?', {title: 'Réglages de départ', okLabel: 'Remettre comme au départ', danger: true})) return; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, JSON.parse(JSON.stringify(DEFAULTS[key]))); savePrefs(key, p); d.close(); after(); }),
-            onSubmit: form => {
-                const fd = new FormData(form);
-                Object.assign(p, {weekStart: Number(fd.get('weekStart')), style: fd.get('style'), size: fd.get('size'), view: fd.get('view'), max: Math.max(1, Math.min(20, Number(fd.get('max')) || 3)),
-                    weekNumbers: fd.has('weekNumbers'), weekend: fd.has('weekend'), alt: fd.getAll('alt')});
-                if (key === 'genea') Object.assign(p, {anniv: fd.has('anniv'), approx: fd.has('approx'), groupOthers: fd.has('groupOthers')}); else p.showDone = fd.has('showDone');
-                groupsOf(key).forEach(([g, , def]) => { const v = fd.get('color_' + g); if (v && v !== def) p.colors[g] = v; else delete p.colors[g]; });
-                const st = S().hCal?.[key]; if (st) st.view = p.view;
-                savePrefs(key, p); after();
+                <button type="button" class="button small secondary" data-ui-reset data-cal-reset>↺ Remettre comme au départ</button>`,
+            onOpen: d => {
+                const form = d.querySelector('form') || d;
+                const fill = () => { const q = prefs(key), c0 = p.cursor; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, q); if (c0 !== undefined) p.cursor = c0;
+                    ['weekStart', 'style', 'size', 'view', 'max'].forEach(n => { const el = form.querySelector(`[name="${n}"]`); if (el) el.value = String(p[n]); });
+                    ['weekNumbers', 'weekend', 'anniv', 'groupOthers', 'showDone'].forEach(n => { const el = form.querySelector(`[name="${n}"]`); if (el) el.checked = !!p[n]; });
+                    const ap = form.querySelector('[name="approx"]'); if (ap) ap.checked = p.approx !== false;
+                    form.querySelectorAll('[name="alt"]').forEach(el => { el.checked = (p.alt || []).includes(el.value); });
+                    groupsOf(key).forEach(([g]) => { const el = form.querySelector(`[name="color_${g}"]`); if (el) { el.value = colorOf(key, p, g); el.dispatchEvent(new Event('ui-sync')); } }); };
+                window.LCNDA_UI?.autoSaveDialog?.(d, {keys: [prefsKey(key)], label: 'Réglage du calendrier', onChange: () => after(),
+                    save: () => { const fd = new FormData(form);
+                        Object.assign(p, {weekStart: Number(fd.get('weekStart')), style: fd.get('style'), size: fd.get('size'), view: fd.get('view'), max: Math.max(1, Math.min(20, Number(fd.get('max')) || 3)),
+                            weekNumbers: fd.has('weekNumbers'), weekend: fd.has('weekend'), alt: fd.getAll('alt')});
+                        if (key === 'genea') Object.assign(p, {anniv: fd.has('anniv'), approx: fd.has('approx'), groupOthers: fd.has('groupOthers')}); else p.showDone = fd.has('showDone');
+                        groupsOf(key).forEach(([g, , def]) => { const v = fd.get('color_' + g); if (v && v !== def) p.colors[g] = v; else delete p.colors[g]; });
+                        const st = S().hCal?.[key]; if (st) st.view = p.view; savePrefs(key, p); },
+                    reload: fill, reset: () => { const c0 = p.cursor; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, JSON.parse(JSON.stringify(DEFAULTS[key]))); if (c0 !== undefined) p.cursor = c0; savePrefs(key, p); }});
             },
         });
     }

@@ -289,8 +289,17 @@ function dgn_venn(PDO $pdo, array $keys, int $root): array
 /** les personnes concernées : toute la base, ou les ancêtres d'une personne */
 function dgn_scope_ids(PDO $pdo, string $scope, int $root): ?array
 {
-    if ($scope !== 'ancestors') { return null; }
-    return array_values(array_unique(dgn_sosa($pdo, dgn_root($pdo, $root), 40, 60000)));
+    $ids = $scope === 'ancestors' ? array_values(array_unique(dgn_sosa($pdo, dgn_root($pdo, $root), 40, 60000))) : null;
+    if (!function_exists('dgo_restrict')) { return $ids; }
+    $set = dgo_restrict($pdo, $ids === null ? null : array_fill_keys($ids, true)); // le groupe de personnes choisi (« Depuis l'app », lib/diagram_options.php)
+    return $set === null ? null : array_keys($set);
+}
+
+/** la période choisie (lib/diagram_options.php) : l'année d'une date « 1784-05-07 » ou « 1784 » */
+function dgn_year_ok(string $d): bool
+{
+    if (!function_exists('dgo_year_ok')) { return true; }
+    return dgo_year_ok(preg_match('/^(-?\d{1,4})/', $d, $m) ? (int) $m[1] : null);
 }
 
 const DGN_TAGS = ['birth' => ['BIRT'], 'bapt' => ['CHR', 'BAPM'], 'marriage' => ['MARR'], 'death' => ['DEAT'], 'burial' => ['BURI']];
@@ -313,6 +322,7 @@ function dgn_dates(PDO $pdo, array $types, string $scope, int $root): array
         $sql = "SELECT substr(e.sort_date,1,10) AS d, count(*) AS n FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN families f ON f.id=e.family_id
             WHERE t.gedcom_tag IN ($tags) AND COALESCE(e.sort_date,'')<>''$where GROUP BY substr(e.sort_date,1,10) LIMIT 60000";
         foreach ($pdo->query($sql) as $r) {
+            if (!dgn_year_ok((string) $r['d'])) { continue; }
             $n = (int) $r['n']; $total += $n;
             if (!preg_match('/^(\d{3,4})-(\d{2})(?:-(\d{2}))?/', (string) $r['d'], $m)) { $noDay += $n; continue; }
             $mo = (int) $m[2]; $da = (int) ($m[3] ?? 0);
@@ -335,6 +345,7 @@ function dgn_lives(PDO $pdo, string $scope, int $root): array
     $out = [];
     foreach ($rows as $r) {
         if (!$r['b'] && !$r['d']) { continue; }
+        if (!dgn_year_ok((string) ($r['b'] ?: $r['d']))) { continue; }
         $out[] = ['name' => dgn_name($r), 'gender' => (string) $r['gender'], 'birth' => str_replace('-00', '', (string) $r['b']), 'death' => str_replace('-00', '', (string) $r['d'])];
         if (count($out) >= 1500) { break; }
     }
@@ -356,6 +367,7 @@ function dgn_events(PDO $pdo, array $types, string $scope, int $root): array
             FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons a ON a.id=f.partner1_id LEFT JOIN persons b ON b.id=f.partner2_id
             WHERE t.gedcom_tag IN ($tags) AND (COALESCE(e.sort_date,'')<>'' OR e.year IS NOT NULL)$where ORDER BY e.sort_date LIMIT 1500";
         foreach ($pdo->query($sql) as $r) {
+            if (!dgn_year_ok((string) $r['d'])) { continue; }
             $who = $type === 'marriage' ? trim(dgn_name(['first_name' => $r['a1'], 'last_name' => $r['a2']]) . ' et ' . dgn_name(['first_name' => $r['b1'], 'last_name' => $r['b2']])) : dgn_name($r);
             $out[] = ['date' => str_replace('-00', '', (string) $r['d']), 'label' => $label[$type] . ' de ' . $who, 'kind' => $label[$type]];
         }
@@ -372,6 +384,7 @@ function diagram_genea_data(PDO $pdo, array $q): array
     $gens = (int) ($q['gens'] ?? 5);
     $scope = ($q['scope'] ?? 'all') === 'ancestors' ? 'ancestors' : 'all';
     $types = array_slice(explode(',', $q['types'] ?? 'birth'), 0, 5);
+    if (in_array($what, ['dates', 'lives', 'events'], true)) { require_once __DIR__ . '/diagram_options.php'; dgo_request($q); } // groupe de personnes et période (onglet « Depuis l'app »)
     return match ($what) {
         'fan' => dgn_fan($pdo, $root, $gens),
         'desc' => dgn_desc($pdo, $root, $gens),

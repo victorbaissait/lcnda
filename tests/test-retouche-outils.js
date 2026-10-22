@@ -124,8 +124,8 @@ async function launch(pw) {
         await page.keyboard.press('Control+d');
         // ── 4. 💾 « sans les annotations » : la poussière enlevée reste enlevée ──
         await mode('heal'); await click(150 / 600, 100 / 400); await page.waitForTimeout(300);
-        await page.uncheck(`${D} [data-rt-merge]`);
-        await page.click(`${D} .modal-actions [data-rt-save="keep"]`);
+        await page.click(`${D} .ed-save-more`); await page.click('.ui-actmenu-i:has-text("Avec les annotations")'); // K19 : les actions de fin dans « 💾 Enregistrer ▾ »
+        await page.click(`${D} .ed-save-more`); await page.click('.ui-actmenu-i:has-text("Enregistrer sans l’afficher")'); // K19 : les actions de fin dans « 💾 Enregistrer ▾ »
         await page.waitForFunction(() => !document.querySelector('dialog.h-retouch'), null, { timeout: 30000 });
         out.noAnnot = await page.evaluate(async () => {
             const v = (await window.LCNDA_APP.api('media_versions', {id: 1})).versions.find(x => !x.is_original); if (!v) return null;
@@ -182,7 +182,7 @@ async function launch(pw) {
         await page.click('dialog[open] .modal-actions .button:not(.secondary)');
         await page.waitForSelector(`${D} [data-rt-canvas]`); await page.waitForTimeout(400);
         await mode('shape'); await drag([0.2, 0.2], [0.6, 0.6]);
-        await page.click(`${D} .modal-actions [data-rt-save="show"]`);
+        await page.click(`${D} .ed-save-more`); await page.click('.ui-actmenu-i:has-text("Enregistrer l’image dans les Médias")'); // K19 : les actions de fin dans « 💾 Enregistrer ▾ »
         await page.waitForFunction(() => !document.querySelector('dialog.h-retouch'), null, { timeout: 30000 });
         out.freshToast = await page.$$eval('.toast, [class*=toast]', l => l.map(x => x.textContent).join(' | '));
     } catch (e) { errors.push('test : ' + (e.stack || e.message)); }

@@ -132,15 +132,15 @@
 
     /* ─── Les règles d'un journal ─── */
     const RFIELDS = [['unit', 'Comment c’est compté', 'select'], ['price', 'Prix (€ par mot / ligne / caractère, ou forfait)'], ['member_price', 'Prix adhérent / abonné'], ['chars_per_line', 'Caractères par ligne'],
-        ['count_spaces', 'Les espaces comptent', 'yesno'], ['free_units', 'Premiers mots / lignes gratuits'], ['min_units', 'Minimum compté (mots / lignes)'], ['min_price', 'Prix minimum d’une parution (€)'], ['max_units', 'Maximum (mots / lignes)'],
-        ['fixed_fee', 'Frais fixes (€)'], ['title_price', 'Option titre (€)'], ['bold_price', 'Option gras (€)'], ['photo_price', 'Option photo / logo (€)'], ['box_price', 'Option encadré (€)'], ['domiciliation_price', 'Domiciliation (€)'],
-        ['web_price', 'Aussi sur internet (€)'], ['discount_from', 'Remise à partir de (parutions)'], ['discount_pct', 'Remise (%)'], ['tax_pct', 'TVA (%)'], ['tax_included', 'Prix déjà TTC', 'yesno'], ['deadline', 'Date limite d’envoi'],
+        ['count_spaces', 'Les espaces comptent', 'yesno'], ['free_units', 'Premiers mots / lignes gratuits'], ['min_units', 'Minimum compté (mots / lignes)'], ['min_price', 'Prix minimum d’une parution', '€'], ['max_units', 'Maximum (mots / lignes)'],
+        ['fixed_fee', 'Frais fixes', '€'], ['title_price', 'Option titre', '€'], ['bold_price', 'Option gras', '€'], ['photo_price', 'Option photo / logo', '€'], ['box_price', 'Option encadré', '€'], ['domiciliation_price', 'Domiciliation', '€'],
+        ['web_price', 'Aussi sur internet', '€'], ['discount_from', 'Remise à partir de', 'parutions'], ['discount_pct', 'Remise', '%'], ['tax_pct', 'TVA', '%'], ['tax_included', 'Prix déjà TTC', 'yesno'], ['deadline', 'Date limite d’envoi'],
         ['send_to', 'Où envoyer (courriel, adresse)'], ['payment', 'Paiement (chèque, en ligne…)'], ['other', 'Autres règles (abréviations, interdits…)', 'textarea']];
     function rulesDialog(r, {ocrNow = false} = {}) {
         const v = r?.rules || {};
         const input = ([k, l, type]) => type === 'select' ? `<label>${esc(l)}<select name="r_${k}"><option value="">—</option>${UNITS.map(([u, ul]) => `<option value="${u}" ${v[k] === u ? 'selected' : ''}>${ul}</option>`).join('')}</select></label>`
             : type === 'yesno' ? `<label>${esc(l)}<select name="r_${k}"><option value="">—</option><option value="1" ${v[k] === '1' ? 'selected' : ''}>oui</option><option value="0" ${v[k] === '0' ? 'selected' : ''}>non</option></select></label>`
-            : type === 'textarea' ? `<label class="span-2">${esc(l)}<textarea name="r_${k}" rows="3">${esc(v[k] || '')}</textarea></label>` : `<label>${esc(l)}<input name="r_${k}" value="${esc(v[k] || '')}"></label>`;
+            : type === 'textarea' ? `<label class="span-2">${esc(l)}<textarea name="r_${k}" rows="3">${esc(v[k] || '')}</textarea></label>` : `<label>${esc(l)}<input name="r_${k}" value="${esc(v[k] || '')}"${type ? ` inputmode="decimal" data-unit="${esc(type)}"` : ''}></label>`; // K17 : 3e case = l'unité (€, %), dans la case
         const dl = ext.openDialog({eyebrow: 'RÈGLES D’UN JOURNAL', title: r ? r.name : 'Nouvelles règles', wide: true,
             body: `<div class="form-grid"><label>Nom (journal, rubrique)<input name="name" value="${esc(r?.name || '')}" required placeholder="Ouest-France, petites annonces du dimanche…"></label>
                 <div><span class="pk-lab">Revue de la liste « Revues »</span>${window.LCNDA_PICKER.pickerField({name: 'periodical_id', kind: 'periodical', value: Number(r?.periodical_id) || null})}</div></div>

@@ -38,14 +38,21 @@
         subs: false, alt: false, simple: false, dictate: false,
     });
     let P = DEFAULTS();
+    /** des réglages lus (ici, un fichier importé…) : seulement les clés connues, du bon type, bornées */
+    const cleanPrefs = raw => {
+        const s = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {}, d = DEFAULTS(), o = {};
+        Object.keys(d).forEach(k => { o[k] = typeof d[k] === 'boolean' ? (typeof s[k] === 'boolean' ? s[k] : d[k]) : s[k] ?? d[k]; });
+        const clamp = (v, a, b, def) => { const n = Number(v); return v !== '' && v !== null && Number.isFinite(n) ? Math.min(b, Math.max(a, n)) : def; };
+        if (typeof o.cb !== 'string' || !CB[o.cb]) o.cb = 'none';
+        o.fix = clamp(o.fix, 0, 100, d.fix); o.size = clamp(o.size, 90, 160, 100); o.lh = o.lh == null ? null : clamp(o.lh, 1, 2, null);
+        o.ls = clamp(o.ls, 0, 0.2, 0); o.ws = clamp(o.ws, 0, 0.5, 0); o.rate = clamp(o.rate, 0.5, 2, 1); o.toastX = [1, 2, 3].includes(Number(o.toastX)) ? Number(o.toastX) : 1;
+        if (typeof o.font !== 'string' || !FONTS[o.font]) o.font = 'app';
+        o.voice = typeof o.voice === 'string' ? o.voice.slice(0, 200) : '';
+        return o;
+    };
     const load = () => {
         let s = null; try { s = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (_) { s = null; }
-        const d = DEFAULTS(); P = {...d, ...(s && typeof s === 'object' ? s : {})};
-        const clamp = (v, a, b, def) => { const n = Number(v); return Number.isFinite(n) ? Math.min(b, Math.max(a, n)) : def; };
-        if (!CB[P.cb]) P.cb = 'none';
-        P.fix = clamp(P.fix, 0, 100, d.fix); P.size = clamp(P.size, 90, 160, 100); P.lh = P.lh == null ? null : clamp(P.lh, 1, 2, null);
-        P.ls = clamp(P.ls, 0, 0.2, 0); P.ws = clamp(P.ws, 0, 0.5, 0); P.rate = clamp(P.rate, 0.5, 2, 1); P.toastX = [1, 2, 3].includes(Number(P.toastX)) ? Number(P.toastX) : 1;
-        if (!FONTS[P.font]) P.font = 'app';
+        P = cleanPrefs(s);
         return P;
     };
     const save = () => { try { localStorage.setItem(KEY, JSON.stringify(P)); } catch (_) {} };
@@ -916,7 +923,7 @@
     function reset() { P = DEFAULTS(); try { localStorage.removeItem(KEY); } catch (_) {} stop(); sim = ''; try { sessionStorage.removeItem(SIM_KEY); } catch (_) {} apply(); refreshPage(); }
     function set(k, v) { if (typeof k === 'object') Object.assign(P, k); else P[k] = v; save(); apply(); }
 
-    ext.access = {get: () => ({...P}), set, reset, apply, simulate, speak, stop, personPageText, fixMatrix, OI, KEY,
+    ext.access = {get: () => ({...P}), set, reset, apply, clean: cleanPrefs, reload: () => { load(); apply(); }, simulate, speak, stop, personPageText, fixMatrix, OI, KEY,
         punctuate, insertDictated, dictationWhy, altFor, mediaAlts: readAlts, setMediaAlt: writeAlt, simpleOff};
 
     /* ═════ Démarrage : appliqué tout de suite, avant même l'app ═════ */

@@ -40,6 +40,7 @@
         'genealogie-design', 'genealogie-menu-order', 'genealogie-menu-hidden', 'genealogie-menu-names', 'genealogie-menu-icons',
         'genealogie-list-order', 'genealogie-list-hidden', 'genealogie-map-order', 'genealogie-map-hidden', 'genealogie-maintenance-order', 'genealogie-maintenance-groups', 'genealogie-list-groups', 'genealogie-mylists-order',
         'genealogie-graph-diagram-order', 'genealogie-graph-diagram-hidden', 'genealogie-graph-stats-order', 'genealogie-graph-stats-hidden',
+        'genealogie-research-kind-order', 'genealogie-research-kind-hidden', // 🔎 Recherche → ordre et types cachés de « Type de recherche »
         'genealogie-tile-cat-order', 'genealogie-tile-hidden-cats', 'genealogie-tile-hidden', 'genealogie-tile-custom-cats',
         'genealogie-person-blocks', 'genealogie-dashboard-blocks', 'genealogie-dashboard-widget-catalog-order', 'genealogie-dashboard-widget-catalog-hidden',
         'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display',
@@ -47,7 +48,7 @@
         'genealogie-village-maps', 'genealogie-transcription-layout',
         'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
         'genealogie-portraits', 'genealogie-left-column', // K7 portraits, K15 colonne de gauche (app-portraits.js, app-colonne.js)
-        'genealogie-designs' // 🎨 Designs au choix A1–A10 (app-designs.js)
+        'genealogie-designs' // 🎨 Designs au choix A1–A8 (app-designs.js)
     ];
     const LAYOUT_PREFIXES = ['genealogie-tile-items-'];
     const PROFILES_KEY = 'genealogie-layout-profiles';
@@ -77,8 +78,14 @@
         if (settings['genealogie-designs']) parts.push('designs au choix');
         return parts.join(' · ') || 'réglages de départ';
     };
-    /** Applique une mise en page : chaque réglage enregistré est remis, les autres reviennent au réglage de départ. */
+    /** Avant d'appliquer : la page de réglages (K2) ne doit pas réécrire, juste après, ce qu'elle montre encore (l'ancien design) */
+    const holdAutoSave = () => { const p = window.LCNDA_UI?.autoSavePage?.(); if (!p) return () => {}; const save = p.save; clearTimeout(p.timer); p.pending = false; p.save = null; return () => { p.save = save; }; };
+    /** Après avoir écrit : la copie des designs au choix lue par index.php avant tout le reste suit tout de suite (pas de reste de l'ancien au rechargement) */
+    const refreshEarly = () => { try { window.LCNDA_DESIGNS?.apply?.(); } catch (_) {} };
+    /** Applique une mise en page : chaque réglage enregistré est remis, les autres reviennent au réglage de départ
+     *  (une mise en page d'avant les designs au choix, les portraits ou la colonne les remet « Comme avant »). */
     async function applyLayout(settings) {
+        const release = holdAutoSave();
         const removed = []; // (un fichier reçu a déjà été vérifié à l'import)
         for (let i = localStorage.length - 1; i >= 0; i--) {
             const key = localStorage.key(i);
@@ -86,13 +93,14 @@
         }
         const set = {};
         Object.entries(settings).forEach(([key, value]) => { if (isLayoutKey(key) && typeof value === 'string') { set[key] = value; lsSet(key, value); } });
+        refreshEarly();
         // Les réglages sont aussi gardés dans la base : on attend qu'elle les ait reçus avant de recharger l'écran,
         // sinon la page rechargée reprendrait les anciens.
         try {
             const csrf = window.INSTALL_CSRF || S().csrf || '';
             const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed, csrf})});
             if (!r.ok) throw new Error();
-        } catch (_) { toast('La base n’a pas pu enregistrer la mise en page : réessaie.', 'error'); return; }
+        } catch (_) { release(); toast('La base n’a pas pu enregistrer la mise en page : réessaie.', 'error'); return; }
         // Tout l'écran se redessine avec la nouvelle mise en page (menus, blocs, couleurs).
         location.reload();
     }
@@ -109,7 +117,19 @@
         if (COLOR_KEYS.includes(key)) return leaves.every(v => typeof v === 'string' && /^#[0-9a-f]{3,8}$/i.test(v));
         return leaves.every(v => typeof v !== 'string' || !/["\\]/.test(v));
     }
-    const cleanLayout = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k, v]) => isLayoutKey(k) && safeLayoutValue(k, v)));
+    /* Un fichier reçu : les réglages des nouveaux outils sont relus par l'outil lui-même (valeurs connues, bornées) ;
+       le mode simple n'emporte ni le code de sortie, ni la personne qui regarde, ni les photos cachées (cette base-ci). */
+    const reparse = (fn, v) => JSON.stringify(fn(JSON.parse(v)));
+    const TIDY = {
+        'genealogie-designs': v => { const D = window.LCNDA_DESIGNS; if (D?.portable) return D.portable(v) || null; if (!D?.clean) return v; const g = D.clean(JSON.parse(v)); delete g.a5?.m; delete g.a5?.f; return JSON.stringify(g); }, // un ancien réglage (A7, A10…) revient à neuf
+        'genealogie-portraits': v => window.LCNDA_PORTRAITS?.clean ? reparse(window.LCNDA_PORTRAITS.clean, v) : v,
+        'genealogie-left-column': v => window.LCNDA_COLUMN?.clean ? reparse(window.LCNDA_COLUMN.clean, v) : v,
+        'genealogie-accessibilite': v => ext.access?.clean ? reparse(ext.access.clean, v) : v,
+        'genealogie-mode-simple': v => ext.modeSimple?.portable ? reparse(ext.modeSimple.portable, v) : null,
+    };
+    const tidy = (k, v) => { const f = TIDY[k] || (isListKey(k) ? listValue : null); if (!f) return v; try { const out = f(v, k); return typeof out === 'string' && out.length <= 200000 ? out : null; } catch (_) { return null; } };
+    const cleanWith = (ok, settings) => Object.fromEntries(Object.entries(settings || {}).slice(0, 3000).filter(([k, v]) => ok(k) && safeLayoutValue(k, v)).map(([k, v]) => [k, tidy(k, v)]).filter(([, v]) => v !== null));
+    const cleanLayout = settings => cleanWith(isLayoutKey, settings);
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
     /** 💾 le cadre commun pour une liste {name, saved, settings, from…} (mises en page, ensembles de tous les réglages) */
     const profilesFrame = o => {
@@ -127,7 +147,7 @@
             importOne: o.importOne});
         return frame;
     };
-    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-layouts"><header><span class="eyebrow">APPARENCE</span><h3>💾 Réglages enregistrés : l’Apparence</h3><p>Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA.</p></header>
+    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-layouts"><header><span class="eyebrow">APPARENCE</span><h3>💾 Réglages enregistrés : l’Apparence</h3><p>Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, designs au choix, portraits, colonne de gauche, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA.</p></header>
             <div data-presets-slot="layouts"></div></section>`); // tout en bas de l'Apparence : on enregistre une fois tout réglé
     ext.afterDesign.push(() => {
         const slot = document.querySelector('#h-layouts [data-presets-slot="layouts"]');
@@ -163,13 +183,32 @@
     const ALL_PROFILES_KEY = 'genealogie-settings-profiles';
     const ALL_SKIP = ['genealogie-auto-backup-lock', 'genealogie-baissait-ui-v2', 'genealogie-last-route', PROFILES_KEY, ALL_PROFILES_KEY, 'genealogie-site-defaults-applied',
         'genealogie-dashboard-recent-people', 'genealogie-sosa-root', 'genealogie-sosa-root-name', 'genealogie-sosa-map', 'genealogie-daboville-root', 'genealogie-daboville-root-name', 'genealogie-daboville-map', 'genealogie-atelier-timers'];
-    const isAllKey = key => /^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !/-\d+$/.test(key);
+    // (et pas non plus : un chemin de dossier de cet ordinateur, les fiches du Sosa multiple, les descriptions des médias de cette base,
+    //  le nom de la personne qui relit, ni ce que l'app note toute seule : sections ouvertes, boutons et commandes des éditeurs)
+    ALL_SKIP.push('genealogie-auto-backup-settings', 'genealogie-sosa-multi', 'genealogie-media-alt', 'genealogie-layout-reviewer', 'genealogie-reglages-ouverts', 'genealogie-toolbar-defs', 'genealogie-editor-cmds');
+    ALL_SKIP.push('genealogie-designs-presets'); // les « Ensembles prêts » des designs au choix et leurs réglages enregistrés : retirés (un vieux fichier qui les a s’applique sans eux)
+    // 🔍 le tri et l'affichage (Liste | Fiches) de chaque liste (barre H10, UI.sortOf / UI.viewOf) : sans la recherche tapée ni les filtres
+    const isListKey = key => /^lcnda-(sort|view|listbar):[A-Za-z0-9_:.-]{1,120}$/.test(key);
+    const isBarKey = key => key.startsWith('lcnda-listbar:');
+    function listValue(v, key) {
+        if (!isBarKey(key)) return key.startsWith('lcnda-view:') ? (v === 'cards' || v === 'list' ? v : null) : /^[A-Za-z0-9_.:-]{1,60}$/.test(v) ? v : null;
+        const o = JSON.parse(v), out = {};
+        if (typeof o?.sort === 'string' && /^[A-Za-z0-9_.:-]{1,60}$/.test(o.sort)) out.sort = o.sort;
+        if (o?.view === 'cards' || o?.view === 'list') out.view = o.view;
+        return Object.keys(out).length ? JSON.stringify(out) : null;
+    }
+    const isAllKey = key => (/^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !/-\d+$/.test(key)) || isListKey(key);
+    const MS_KEY = 'genealogie-mode-simple';
+    /** un ensemble qui part dans un fichier (même enregistré avant ces précautions) : sans ce qui ne doit pas quitter cet ordinateur */
+    const portableAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k]) => isAllKey(k)).map(([k, v]) => [k, k === MS_KEY || isListKey(k) ? tidy(k, v) : v]).filter(([, v]) => typeof v === 'string'));
     // 📈 mes graphiques et widgets sont rangés dans la base (lib/graphs.php) : l'ensemble en garde une copie sous leur
     // ancienne clé ; « Appliquer » les remet dans la base (sans effacer ceux faits depuis : ce sont des données)
     const GRAPHS_KEY = 'genealogie-custom-widgets';
     function currentAll() {
         const settings = {};
         for (let i = 0; i < localStorage.length; i++) { const key = localStorage.key(i); if (key && isAllKey(key)) settings[key] = localStorage.getItem(key); }
+        // le mode simple : sans le code de sortie (même haché), la personne qui regarde ni les photos cachées ; la liste : son tri et son affichage
+        Object.keys(settings).forEach(key => { if (key === MS_KEY || isListKey(key)) { const v = tidy(key, settings[key]); if (v === null) delete settings[key]; else settings[key] = v; } });
         const graphs = ext.customWidgetList?.();
         if (Array.isArray(graphs) && graphs.length) settings[GRAPHS_KEY] = JSON.stringify(graphs);
         return settings;
@@ -185,24 +224,35 @@
     /** Remet un ensemble : ses réglages remplacent tous les réglages actuels (les autres reviennent à ceux de départ). */
     async function applyAll(settings, {layoutOnly = false, keep = []} = {}) {
         // un fichier reçu : ce qui a été laissé de côté à l'import (illisible) n'efface rien ; une mise en page ne touche qu'à l'Apparence
+        const release = holdAutoSave();
         const removed = [];
         if (!layoutOnly && typeof settings[GRAPHS_KEY] === 'string') {
-            try { await restoreGraphs(settings[GRAPHS_KEY]); } catch (e) { toast('Tes graphiques n’ont pas pu être remis : ' + e.message, 'error'); return; }
+            try { await restoreGraphs(settings[GRAPHS_KEY]); } catch (e) { release(); toast('Tes graphiques n’ont pas pu être remis : ' + e.message, 'error'); return; }
         }
         settings = Object.fromEntries(Object.entries(settings).filter(([key]) => key !== GRAPHS_KEY));
-        for (let i = localStorage.length - 1; i >= 0; i--) { const key = localStorage.key(i); if (key && key !== GRAPHS_KEY && isAllKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
+        // le mode simple garde toujours, ici, son code de sortie, la personne qui regarde et ses photos cachées (un ensemble ne les a pas) ;
+        // un ensemble d'avant le mode simple le remet comme au départ, sans rien de tout cela perdu
+        const msNow = ls(MS_KEY);
+        if (msNow && ext.modeSimple?.keepPrivate && (!layoutOnly) && !keep.includes(MS_KEY)) { try { settings = {...settings, [MS_KEY]: JSON.stringify(ext.modeSimple.keepPrivate(typeof settings[MS_KEY] === 'string' ? JSON.parse(settings[MS_KEY]) : {}, JSON.parse(msNow)))}; } catch (_) {} }
+        // la barre d'une liste garde la recherche tapée et les filtres : seuls le tri et l'affichage sont remis (une liste absente ne bouge pas)
+        for (let i = localStorage.length - 1; i >= 0; i--) { const key = localStorage.key(i); if (key && key !== GRAPHS_KEY && isAllKey(key) && !isBarKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
         const set = {};
-        Object.entries(settings).forEach(([key, value]) => { if (isAllKey(key) && typeof value === 'string') { set[key] = value; lsSet(key, value); } });
+        Object.entries(settings).forEach(([key, value]) => {
+            if (!isAllKey(key) || typeof value !== 'string') return;
+            if (isBarKey(key)) { let o = {}; try { o = JSON.parse(ls(key, '{}')) || {}; } catch (_) {} try { value = JSON.stringify({...o, ...JSON.parse(value)}); } catch (_) { return; } }
+            lsSet(key, value); if (!isListKey(key)) set[key] = value;
+        });
+        refreshEarly();
         try {
             const csrf = window.INSTALL_CSRF || S().csrf || '';
-            const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed, csrf})});
+            const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed.filter(k => !isListKey(k)), csrf})});
             if (!r.ok) throw new Error();
-        } catch (_) { toast('La base n’a pas pu enregistrer ces réglages : réessaie.', 'error'); return; }
+        } catch (_) { release(); toast('La base n’a pas pu enregistrer ces réglages : réessaie.', 'error'); return; }
         location.reload();
     }
     // un fichier reçu : les mêmes précautions que pour une mise en page
-    const cleanAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k, v]) => isAllKey(k) && safeLayoutValue(k, v)));
-    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">TOUS LES RÉGLAGES</span><h3>💾 Réglages enregistrés : toute l’app</h3><p>Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche) et ce qui est propre à cet ordinateur.</p></header>
+    const cleanAll = settings => cleanWith(isAllKey, settings);
+    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">TOUS LES RÉGLAGES</span><h3>💾 Réglages enregistrés : toute l’app</h3><p>Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche), le code pour quitter le mode simple et la personne qui regarde, et ce qui est propre à cet ordinateur.</p></header>
             <div data-presets-slot="allsets"></div><div class="h-layouts-save"><button type="button" class="button small secondary" data-h-allset-export-now>⤓ Exporter les réglages actuels</button></div></section>`);
     ext.afterDesign.push(() => {
         const box = document.getElementById('h-allsets'), slot = box?.querySelector('[data-presets-slot="allsets"]');
@@ -215,7 +265,7 @@
                 if (!await A().confirmBox('Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.', {title: `Appliquer l’ensemble « ${p.name} » ?`, okLabel: 'Appliquer'})) return false;
                 toast(`Ensemble « ${p.name} » appliqué.`); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []}); return false;
             },
-            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, p.settings)); toast('Fichier prêt : il s’importe dans Maintenance → Apparence → « Mes ensembles de réglages ».'); },
+            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings))); toast('Fichier prêt : il s’importe dans Maintenance → Apparence → « Mes ensembles de réglages ».'); },
             importOne: async () => {
                 const text = await pickFile('.json,application/json');
                 if (text === null) return false;
@@ -288,6 +338,7 @@
     /* ⌘ + / ⌘ − / ⌘ 0 (Ctrl sur PC et Linux) dans un éditeur ouvert : la frise du montage, l'onde du son, la photo retouchée.
      * Renvoie true si un éditeur a zoomé (sinon l'app zoome toute la page). */
     ext.editorZoom = dir => {
+        if (window.LCNDA_UI?.editorZoomKey?.(dir)) return true; // K18 : le zoom commun de la barre du bas (tous les éditeurs)
         const open = [...document.querySelectorAll('dialog[open]')].pop(); if (!open) return false;
         const click = sel => { const b = open.querySelector(sel); if (!b) return false; b.click(); return true; };
         if (open.classList.contains('h-avx-montage')) {
@@ -630,22 +681,22 @@
     function fxMinMax(img, r, isMax) { const W = img.width, H = img.height, d = img.data, t = new Uint8ClampedArray(d); const pass = (src, dst, horiz) => { for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = (y * W + x) * 4; for (let c = 0; c < 3; c++) { let v = isMax ? 0 : 255; for (let k = -r; k <= r; k++) { const xx = horiz ? Math.min(W - 1, Math.max(0, x + k)) : x, yy = horiz ? y : Math.min(H - 1, Math.max(0, y + k)); const u = src[(yy * W + xx) * 4 + c]; v = isMax ? Math.max(v, u) : Math.min(v, u); } dst[i + c] = v; } } }; pass(d, t, true); pass(t, d, false); }
     function fxNoise2(seed) { const R = fxRng(seed), N = 256, perm = Array.from({length: N}, (_, i) => i).sort(() => R() - 0.5), val = Array.from({length: N}, R); const h = (x, y) => val[perm[(perm[x & 255] + y) & 255]]; const sm = t => t * t * (3 - 2 * t);
         return (x, y) => { const x0 = Math.floor(x), y0 = Math.floor(y), fx = sm(x - x0), fy = sm(y - y0); return (h(x0, y0) * (1 - fx) + h(x0 + 1, y0) * fx) * (1 - fy) + (h(x0, y0 + 1) * (1 - fx) + h(x0 + 1, y0 + 1) * fx) * fy; }; }
-    // [catégorie, nom, réglages [clé, libellé, min, max, départ, pas?], fonction(img, p, s)]
+    // [catégorie, nom, réglages [clé, libellé, min, max, départ, pas?, unité? (K17 : dans la case, pas dans le libellé)], fonction(img, p, s)]
     const RT_FX = {
         gauss: ['Flou', 'Flou gaussien', [['r', 'Rayon', 0, 100, 8, 0.5]], (img, p, s) => { const b = rtBlurred(img, p.r * s); img.data.set(b); }],
-        motion: ['Flou', 'Flou de mouvement', [['angle', 'Angle (°)', -180, 180, 0, 1], ['dist', 'Distance', 1, 300, 40, 1]], (img, p, s) => { const a = p.angle * Math.PI / 180, D = p.dist * s, n = Math.max(4, Math.min(48, Math.round(D / 2))); fxAccum(img, n, (g, u) => g.translate(Math.cos(a) * D * (u - 0.5), Math.sin(a) * D * (u - 0.5))); }],
-        radial: ['Flou', 'Flou radial (zoom)', [['amount', 'Force', 1, 100, 25, 1], ['cx', 'Centre X (%)', 0, 100, 50, 1], ['cy', 'Centre Y (%)', 0, 100, 50, 1]], (img, p) => { const cx = p.cx / 100 * img.width, cy = p.cy / 100 * img.height; fxAccum(img, 32, (g, u) => { const k = 1 + u * p.amount / 250; g.translate(cx, cy); g.scale(k, k); g.translate(-cx, -cy); }); }],
-        spin: ['Flou', 'Flou rotatif', [['angle', 'Angle (°)', 1, 60, 8, 0.5], ['cx', 'Centre X (%)', 0, 100, 50, 1], ['cy', 'Centre Y (%)', 0, 100, 50, 1]], (img, p) => { const cx = p.cx / 100 * img.width, cy = p.cy / 100 * img.height; fxAccum(img, 36, (g, u) => { g.translate(cx, cy); g.rotate((u - 0.5) * p.angle * Math.PI / 180); g.translate(-cx, -cy); }); }],
+        motion: ['Flou', 'Flou de mouvement', [['angle', 'Angle', -180, 180, 0, 1, '°'], ['dist', 'Distance', 1, 300, 40, 1]], (img, p, s) => { const a = p.angle * Math.PI / 180, D = p.dist * s, n = Math.max(4, Math.min(48, Math.round(D / 2))); fxAccum(img, n, (g, u) => g.translate(Math.cos(a) * D * (u - 0.5), Math.sin(a) * D * (u - 0.5))); }],
+        radial: ['Flou', 'Flou radial (zoom)', [['amount', 'Force', 1, 100, 25, 1], ['cx', 'Centre X', 0, 100, 50, 1, '%'], ['cy', 'Centre Y', 0, 100, 50, 1, '%']], (img, p) => { const cx = p.cx / 100 * img.width, cy = p.cy / 100 * img.height; fxAccum(img, 32, (g, u) => { const k = 1 + u * p.amount / 250; g.translate(cx, cy); g.scale(k, k); g.translate(-cx, -cy); }); }],
+        spin: ['Flou', 'Flou rotatif', [['angle', 'Angle', 1, 60, 8, 0.5, '°'], ['cx', 'Centre X', 0, 100, 50, 1, '%'], ['cy', 'Centre Y', 0, 100, 50, 1, '%']], (img, p) => { const cx = p.cx / 100 * img.width, cy = p.cy / 100 * img.height; fxAccum(img, 36, (g, u) => { g.translate(cx, cy); g.rotate((u - 0.5) * p.angle * Math.PI / 180); g.translate(-cx, -cy); }); }],
         surface: ['Flou', 'Flou de surface (garde les contours)', [['r', 'Rayon', 1, 60, 8, 0.5], ['thr', 'Seuil', 1, 100, 25, 1]], (img, p, s) => { const d = img.data, b = rtBlurred(img, p.r * s); for (let i = 0; i < d.length; i += 4) { const df = (Math.abs(d[i] - b[i]) + Math.abs(d[i + 1] - b[i + 1]) + Math.abs(d[i + 2] - b[i + 2])) / 3, w = Math.max(0, 1 - df / (p.thr * 1.2)); for (let c = 0; c < 3; c++) d[i + c] += (b[i + c] - d[i + c]) * w; } }],
-        tilt: ['Flou', 'Décentrement (maquette, tilt-shift)', [['pos', 'Bande nette, hauteur (%)', 0, 100, 55, 1], ['band', 'Largeur de la bande (%)', 2, 90, 22, 1], ['r', 'Flou', 1, 80, 18, 0.5]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, b = rtBlurred(img, p.r * s); for (let y = 0; y < H; y++) { const t = Math.max(0, Math.min(1, (Math.abs(y / H - p.pos / 100) - p.band / 200) / Math.max(0.01, p.band / 200))); if (!t) continue; for (let x = 0; x < W; x++) { const i = (y * W + x) * 4; for (let c = 0; c < 3; c++) d[i + c] += (b[i + c] - d[i + c]) * t; } } }],
+        tilt: ['Flou', 'Décentrement (maquette, tilt-shift)', [['pos', 'Bande nette, hauteur', 0, 100, 55, 1, '%'], ['band', 'Largeur de la bande', 2, 90, 22, 1, '%'], ['r', 'Flou', 1, 80, 18, 0.5]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, b = rtBlurred(img, p.r * s); for (let y = 0; y < H; y++) { const t = Math.max(0, Math.min(1, (Math.abs(y / H - p.pos / 100) - p.band / 200) / Math.max(0.01, p.band / 200))); if (!t) continue; for (let x = 0; x < W; x++) { const i = (y * W + x) * 4; for (let c = 0; c < 3; c++) d[i + c] += (b[i + c] - d[i + c]) * t; } } }],
         bokeh: ['Flou', 'Flou de l’objectif (bokeh)', [['r', 'Rayon', 1, 60, 12, 0.5], ['bright', 'Points lumineux', 0, 100, 50, 1]], (img, p, s) => { const d = img.data, hi = new ImageData(new Uint8ClampedArray(d), img.width, img.height), th = 235 - p.bright; for (let i = 0; i < hi.data.length; i += 4) { if (fxLum(hi.data, i) < th) { hi.data[i] = hi.data[i + 1] = hi.data[i + 2] = 0; } } const b = rtBlurred(img, p.r * s), h2 = rtBlurred(hi, p.r * s * 0.8), k = p.bright / 40; for (let i = 0; i < d.length; i += 4) for (let c = 0; c < 3; c++) d[i + c] = clamp255(255 - (255 - b[i + c]) * (255 - h2[i + c] * k) / 255); }],
         noise: ['Bruit', 'Ajouter du bruit', [['amount', 'Quantité', 0, 100, 18, 1], ['mono', 'Monochrome (0 / 1)', 0, 1, 1, 1]], (img, p) => { const d = img.data, R = fxRng(777), a = p.amount * 2.2; for (let i = 0; i < d.length; i += 4) { if (p.mono) { const n = (R() - 0.5) * a; d[i] = clamp255(d[i] + n); d[i + 1] = clamp255(d[i + 1] + n); d[i + 2] = clamp255(d[i + 2] + n); } else for (let c = 0; c < 3; c++) d[i + c] = clamp255(d[i + c] + (R() - 0.5) * a); } }],
         median: ['Bruit', 'Médiane', [['r', 'Rayon', 1, 4, 1, 1]], (img, p) => { const W = img.width, H = img.height, d = img.data, src = new Uint8ClampedArray(d), r = p.r, st = r > 2 ? 2 : 1, win = []; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = (y * W + x) * 4; for (let c = 0; c < 3; c++) { win.length = 0; for (let dy = -r; dy <= r; dy += st) for (let dx = -r; dx <= r; dx += st) win.push(src[(Math.min(H - 1, Math.max(0, y + dy)) * W + Math.min(W - 1, Math.max(0, x + dx))) * 4 + c]); win.sort((a, b) => a - b); d[i + c] = win[win.length >> 1]; } } }],
         dust: ['Bruit', 'Poussière et rayures', [['amount', 'Force', 1, 100, 50, 1]], (img, p) => rtDust(img, p.amount)],
         denoise2: ['Bruit', 'Réduire le bruit', [['amount', 'Force', 1, 100, 50, 1]], (img, p, s) => { rtFilters(img, {denoise: p.amount}); void s; }],
-        unsharp: ['Netteté', 'Accentuation (masque flou)', [['amount', 'Gain (%)', 0, 400, 100, 1], ['r', 'Rayon', 0.2, 30, 2, 0.1], ['thr', 'Seuil', 0, 80, 0, 1]], (img, p, s) => { const d = img.data, b = rtBlurred(img, Math.max(0.3, p.r * s)); for (let i = 0; i < d.length; i += 4) for (let c = 0; c < 3; c++) { const df = d[i + c] - b[i + c]; if (Math.abs(df) > p.thr) d[i + c] = clamp255(d[i + c] + df * p.amount / 100); } }],
+        unsharp: ['Netteté', 'Accentuation (masque flou)', [['amount', 'Gain', 0, 400, 100, 1, '%'], ['r', 'Rayon', 0.2, 30, 2, 0.1], ['thr', 'Seuil', 0, 80, 0, 1]], (img, p, s) => { const d = img.data, b = rtBlurred(img, Math.max(0.3, p.r * s)); for (let i = 0; i < d.length; i += 4) for (let c = 0; c < 3; c++) { const df = d[i + c] - b[i + c]; if (Math.abs(df) > p.thr) d[i + c] = clamp255(d[i + c] + df * p.amount / 100); } }],
         highpass: ['Netteté', 'Passe-haut (pour accentuer en Incrustation)', [['r', 'Rayon', 0.5, 100, 8, 0.5]], (img, p, s) => { const d = img.data, b = rtBlurred(img, p.r * s); for (let i = 0; i < d.length; i += 4) for (let c = 0; c < 3; c++) d[i + c] = clamp255(128 + d[i + c] - b[i + c]); }],
-        emboss: ['Esthétiques', 'Estampage (relief)', [['angle', 'Angle (°)', -180, 180, 135, 1], ['h', 'Hauteur', 1, 10, 2, 1], ['amount', 'Force (%)', 1, 400, 120, 1], ['color', 'Garder les couleurs (0 / 1)', 0, 1, 0, 1]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, L = fxLumArr(img), a = p.angle * Math.PI / 180, ox = Math.round(Math.cos(a) * p.h * Math.max(1, s)), oy = Math.round(Math.sin(a) * p.h * Math.max(1, s)); const at = (x, y) => L[Math.min(H - 1, Math.max(0, y)) * W + Math.min(W - 1, Math.max(0, x))]; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const v = (at(x + ox, y + oy) - at(x - ox, y - oy)) * p.amount / 100, i = (y * W + x) * 4; if (p.color) for (let c = 0; c < 3; c++) d[i + c] = clamp255(d[i + c] + v); else d[i] = d[i + 1] = d[i + 2] = clamp255(128 + v); } }],
+        emboss: ['Esthétiques', 'Estampage (relief)', [['angle', 'Angle', -180, 180, 135, 1, '°'], ['h', 'Hauteur', 1, 10, 2, 1], ['amount', 'Force', 1, 400, 120, 1, '%'], ['color', 'Garder les couleurs (0 / 1)', 0, 1, 0, 1]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, L = fxLumArr(img), a = p.angle * Math.PI / 180, ox = Math.round(Math.cos(a) * p.h * Math.max(1, s)), oy = Math.round(Math.sin(a) * p.h * Math.max(1, s)); const at = (x, y) => L[Math.min(H - 1, Math.max(0, y)) * W + Math.min(W - 1, Math.max(0, x))]; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const v = (at(x + ox, y + oy) - at(x - ox, y - oy)) * p.amount / 100, i = (y * W + x) * 4; if (p.color) for (let c = 0; c < 3; c++) d[i + c] = clamp255(d[i + c] + v); else d[i] = d[i + 1] = d[i + 2] = clamp255(128 + v); } }],
         edges: ['Esthétiques', 'Tracé des contours', [['amount', 'Force', 10, 300, 100, 1]], (img, p) => { const W = img.width, H = img.height, d = img.data, ch = [0, 1, 2].map(c => { const a = new Float32Array(W * H); for (let q = 0; q < a.length; q++) a[q] = d[q * 4 + c]; return fxSobel(a, W, H); }); for (let q = 0; q < W * H; q++) for (let c = 0; c < 3; c++) d[q * 4 + c] = clamp255(255 - ch[c][q] * p.amount / 400); }],
         glowedges: ['Esthétiques', 'Contours lumineux (néon)', [['w', 'Épaisseur', 0, 10, 1, 0.5], ['bright', 'Luminosité', 1, 20, 8, 0.5]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, b = p.w ? new ImageData(rtBlurred(img, p.w * s), W, H) : img, ch = [0, 1, 2].map(c => { const a = new Float32Array(W * H); for (let q = 0; q < a.length; q++) a[q] = b.data[q * 4 + c]; return fxSobel(a, W, H); }); for (let q = 0; q < W * H; q++) for (let c = 0; c < 3; c++) d[q * 4 + c] = clamp255(ch[c][q] * p.bright / 12); }],
         solarize: ['Esthétiques', 'Solarisation', [['thr', 'Seuil', 0, 255, 128, 1]], (img, p) => { const d = img.data; for (let i = 0; i < d.length; i += 4) for (let c = 0; c < 3; c++) if (d[i + c] > p.thr) d[i + c] = 255 - d[i + c]; }],
@@ -669,20 +720,20 @@
             for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const gi = Math.floor(x / z), gj = Math.floor(y / z); let best = 1e18, bk = 0; for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const ii = gi + di, jj = gj + dj; if (ii < 0 || jj < 0 || ii >= gw || jj >= gh) continue; const k = jj * gw + ii, dx = seeds[k][0] - x, dy = seeds[k][1] - y, dd = dx * dx + dy * dy; if (dd < best) { best = dd; bk = k; } } const o = (y * W + x) * 4; d[o] = col[bk][0]; d[o + 1] = col[bk][1]; d[o + 2] = col[bk][2]; } }],
         pointil: ['Pixellisation', 'Pointillisme', [['size', 'Taille des points', 3, 60, 10, 1]], (img, p, s) => { const W = img.width, H = img.height, d = img.data, z = Math.max(3, p.size * s), R = fxRng(8), c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d'); g.fillStyle = '#f6f1e6'; g.fillRect(0, 0, W, H); const n = Math.round(W * H / (z * z) * 2.2);
             for (let k = 0; k < n; k++) { const x = R() * W, y = R() * H, i = ((y | 0) * W + (x | 0)) * 4; g.fillStyle = `rgb(${clamp255(d[i] + (R() - 0.5) * 30) | 0},${clamp255(d[i + 1] + (R() - 0.5) * 30) | 0},${clamp255(d[i + 2] + (R() - 0.5) * 30) | 0})`; g.beginPath(); g.arc(x, y, z * (0.35 + R() * 0.3), 0, Math.PI * 2); g.fill(); } fxBack(img, c); }],
-        lighting: ['Rendu', 'Éclairage (projecteur)', [['x', 'Lumière X (%)', 0, 100, 30, 1], ['y', 'Lumière Y (%)', 0, 100, 25, 1], ['radius', 'Portée (%)', 10, 200, 80, 1], ['power', 'Intensité (%)', 0, 200, 80, 1], ['ambient', 'Lumière ambiante (%)', 0, 100, 45, 1]], (img, p) => { const W = img.width, H = img.height, d = img.data, lx = p.x / 100 * W, ly = p.y / 100 * H, R = p.radius / 100 * Math.max(W, H); for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const t = Math.max(0, 1 - Math.hypot(x - lx, y - ly) / R), f = p.ambient / 100 + p.power / 100 * t * t * (3 - 2 * t), i = (y * W + x) * 4; for (let c = 0; c < 3; c++) d[i + c] = clamp255(d[i + c] * f); } }],
+        lighting: ['Rendu', 'Éclairage (projecteur)', [['x', 'Lumière X', 0, 100, 30, 1, '%'], ['y', 'Lumière Y', 0, 100, 25, 1, '%'], ['radius', 'Portée', 10, 200, 80, 1, '%'], ['power', 'Intensité', 0, 200, 80, 1, '%'], ['ambient', 'Lumière ambiante', 0, 100, 45, 1, '%']], (img, p) => { const W = img.width, H = img.height, d = img.data, lx = p.x / 100 * W, ly = p.y / 100 * H, R = p.radius / 100 * Math.max(W, H); for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const t = Math.max(0, 1 - Math.hypot(x - lx, y - ly) / R), f = p.ambient / 100 + p.power / 100 * t * t * (3 - 2 * t), i = (y * W + x) * 4; for (let c = 0; c < 3; c++) d[i + c] = clamp255(d[i + c] * f); } }],
         clouds: ['Rendu', 'Nuages (texture)', [['scale', 'Taille', 1, 100, 30, 1], ['amount', 'Force', 0, 100, 40, 1]], (img, p) => { const W = img.width, H = img.height, d = img.data, nz = fxNoise2(42), sc = (101 - p.scale) / 100 * 12 / Math.max(W, H), a = p.amount / 100; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { let v = 0, f = 1, am = 0.5; for (let o = 0; o < 5; o++) { v += nz(x * sc * f, y * sc * f) * am; f *= 2; am /= 2; } const i = (y * W + x) * 4, n = v * 255; for (let c = 0; c < 3; c++) { const b = d[i + c], sl = n < 128 ? b - (1 - 2 * n / 255) * b * (1 - b / 255) : b + (2 * n / 255 - 1) * (Math.sqrt(b / 255) * 255 - b); d[i + c] = clamp255(b + (sl - b) * a); } } }],
-        flare: ['Rendu', 'Halo de lumière (flare)', [['x', 'Position X (%)', 0, 100, 25, 1], ['y', 'Position Y (%)', 0, 100, 25, 1], ['bright', 'Luminosité (%)', 10, 200, 100, 1]], (img, p) => { const W = img.width, H = img.height, c = fxCanvas(img), g = c.getContext('2d'), x = p.x / 100 * W, y = p.y / 100 * H, M = Math.max(W, H), k = p.bright / 100; g.globalCompositeOperation = 'screen';
+        flare: ['Rendu', 'Halo de lumière (flare)', [['x', 'Position X', 0, 100, 25, 1, '%'], ['y', 'Position Y', 0, 100, 25, 1, '%'], ['bright', 'Luminosité', 10, 200, 100, 1, '%']], (img, p) => { const W = img.width, H = img.height, c = fxCanvas(img), g = c.getContext('2d'), x = p.x / 100 * W, y = p.y / 100 * H, M = Math.max(W, H), k = p.bright / 100; g.globalCompositeOperation = 'screen';
             const blob = (cx, cy, r, col, a) => { const gr = g.createRadialGradient(cx, cy, 0, cx, cy, r); gr.addColorStop(0, `rgba(${col},${a})`); gr.addColorStop(1, `rgba(${col},0)`); g.fillStyle = gr; g.fillRect(cx - r, cy - r, r * 2, r * 2); };
             blob(x, y, M * 0.25 * k, '255,240,210', 0.9); blob(x, y, M * 0.05 * k, '255,255,255', 1); [[0.3, 0.04, '120,200,255', 0.35], [0.55, 0.025, '255,170,90', 0.4], [0.8, 0.07, '150,255,170', 0.2], [1.2, 0.05, '200,140,255', 0.25]].forEach(([t, r, col, a]) => blob(x + (W / 2 - x) * t * 2, y + (H / 2 - y) * t * 2, M * r * k, col, a * k)); fxBack(img, c); }],
-        glow: ['Rendu', 'Lueur diffuse', [['thr', 'À partir de (luminosité)', 0, 255, 190, 1], ['r', 'Rayon', 1, 100, 20, 0.5], ['amount', 'Force (%)', 0, 200, 80, 1]], (img, p, s) => { const d = img.data, hi = new ImageData(new Uint8ClampedArray(d), img.width, img.height); for (let i = 0; i < hi.data.length; i += 4) if (fxLum(hi.data, i) < p.thr) hi.data[i] = hi.data[i + 1] = hi.data[i + 2] = 0; const b = rtBlurred(hi, p.r * s), k = p.amount / 100; for (let i = 0; i < d.length; i += 4) for (let c = 0; c < 3; c++) d[i + c] = clamp255(255 - (255 - d[i + c]) * (255 - b[i + c] * k) / 255); }],
-        twirl: ['Déformation', 'Tourbillon', [['angle', 'Angle (°)', -720, 720, 180, 1], ['radius', 'Rayon (%)', 5, 100, 50, 1], ['cx', 'Centre X (%)', 0, 100, 50, 1], ['cy', 'Centre Y (%)', 0, 100, 50, 1]], (img, p) => { const W = img.width, H = img.height, cx = p.cx / 100 * W, cy = p.cy / 100 * H, R = p.radius / 100 * Math.min(W, H), A = p.angle * Math.PI / 180; fxDisplace(img, (x, y) => { const dx = x - cx, dy = y - cy, r = Math.hypot(dx, dy); if (r >= R) return null; const t = 1 - r / R, a = A * t * t, c = Math.cos(a), si = Math.sin(a); return [cx + dx * c - dy * si, cy + dx * si + dy * c]; }); }],
-        pinch: ['Déformation', 'Pincement / sphérisation', [['amount', 'Force (− sphère, + pincement)', -100, 100, 50, 1], ['radius', 'Rayon (%)', 5, 100, 50, 1], ['cx', 'Centre X (%)', 0, 100, 50, 1], ['cy', 'Centre Y (%)', 0, 100, 50, 1]], (img, p) => { const W = img.width, H = img.height, cx = p.cx / 100 * W, cy = p.cy / 100 * H, R = p.radius / 100 * Math.min(W, H), e = p.amount >= 0 ? 1 / (1 + p.amount / 60) : 1 + -p.amount / 60; fxDisplace(img, (x, y) => { const dx = x - cx, dy = y - cy, r = Math.hypot(dx, dy); if (r >= R || r < 0.5) return null; const nr = Math.pow(r / R, e) * R / r; return [cx + dx * nr, cy + dy * nr]; }); }],
+        glow: ['Rendu', 'Lueur diffuse', [['thr', 'À partir de (luminosité)', 0, 255, 190, 1], ['r', 'Rayon', 1, 100, 20, 0.5], ['amount', 'Force', 0, 200, 80, 1, '%']], (img, p, s) => { const d = img.data, hi = new ImageData(new Uint8ClampedArray(d), img.width, img.height); for (let i = 0; i < hi.data.length; i += 4) if (fxLum(hi.data, i) < p.thr) hi.data[i] = hi.data[i + 1] = hi.data[i + 2] = 0; const b = rtBlurred(hi, p.r * s), k = p.amount / 100; for (let i = 0; i < d.length; i += 4) for (let c = 0; c < 3; c++) d[i + c] = clamp255(255 - (255 - d[i + c]) * (255 - b[i + c] * k) / 255); }],
+        twirl: ['Déformation', 'Tourbillon', [['angle', 'Angle', -720, 720, 180, 1, '°'], ['radius', 'Rayon', 5, 100, 50, 1, '%'], ['cx', 'Centre X', 0, 100, 50, 1, '%'], ['cy', 'Centre Y', 0, 100, 50, 1, '%']], (img, p) => { const W = img.width, H = img.height, cx = p.cx / 100 * W, cy = p.cy / 100 * H, R = p.radius / 100 * Math.min(W, H), A = p.angle * Math.PI / 180; fxDisplace(img, (x, y) => { const dx = x - cx, dy = y - cy, r = Math.hypot(dx, dy); if (r >= R) return null; const t = 1 - r / R, a = A * t * t, c = Math.cos(a), si = Math.sin(a); return [cx + dx * c - dy * si, cy + dx * si + dy * c]; }); }],
+        pinch: ['Déformation', 'Pincement / sphérisation', [['amount', 'Force (− sphère, + pincement)', -100, 100, 50, 1], ['radius', 'Rayon', 5, 100, 50, 1, '%'], ['cx', 'Centre X', 0, 100, 50, 1, '%'], ['cy', 'Centre Y', 0, 100, 50, 1, '%']], (img, p) => { const W = img.width, H = img.height, cx = p.cx / 100 * W, cy = p.cy / 100 * H, R = p.radius / 100 * Math.min(W, H), e = p.amount >= 0 ? 1 / (1 + p.amount / 60) : 1 + -p.amount / 60; fxDisplace(img, (x, y) => { const dx = x - cx, dy = y - cy, r = Math.hypot(dx, dy); if (r >= R || r < 0.5) return null; const nr = Math.pow(r / R, e) * R / r; return [cx + dx * nr, cy + dy * nr]; }); }],
         wave: ['Déformation', 'Onde', [['amp', 'Amplitude', 0, 100, 10, 0.5], ['wl', 'Longueur d’onde', 5, 400, 80, 1], ['dir', 'Horizontale (0) / verticale (1)', 0, 1, 0, 1]], (img, p, s) => { const a = p.amp * s, L = p.wl * s; fxDisplace(img, (x, y) => p.dir ? [x, y + a * Math.sin(2 * Math.PI * x / L)] : [x + a * Math.sin(2 * Math.PI * y / L), y]); }],
-        ripple: ['Déformation', 'Ondulation (ronds dans l’eau)', [['amp', 'Amplitude', 0, 60, 8, 0.5], ['wl', 'Écart des ronds', 5, 200, 30, 1], ['cx', 'Centre X (%)', 0, 100, 50, 1], ['cy', 'Centre Y (%)', 0, 100, 50, 1]], (img, p, s) => { const W = img.width, H = img.height, cx = p.cx / 100 * W, cy = p.cy / 100 * H, a = p.amp * s, L = p.wl * s; fxDisplace(img, (x, y) => { const dx = x - cx, dy = y - cy, r = Math.hypot(dx, dy) || 1, k = a * Math.sin(2 * Math.PI * r / L) / r; return [x + dx * k, y + dy * k]; }); }],
+        ripple: ['Déformation', 'Ondulation (ronds dans l’eau)', [['amp', 'Amplitude', 0, 60, 8, 0.5], ['wl', 'Écart des ronds', 5, 200, 30, 1], ['cx', 'Centre X', 0, 100, 50, 1, '%'], ['cy', 'Centre Y', 0, 100, 50, 1, '%']], (img, p, s) => { const W = img.width, H = img.height, cx = p.cx / 100 * W, cy = p.cy / 100 * H, a = p.amp * s, L = p.wl * s; fxDisplace(img, (x, y) => { const dx = x - cx, dy = y - cy, r = Math.hypot(dx, dy) || 1, k = a * Math.sin(2 * Math.PI * r / L) / r; return [x + dx * k, y + dy * k]; }); }],
         polar: ['Déformation', 'Coordonnées polaires', [['mode', 'Rectangle → polaire (0) / l’inverse (1)', 0, 1, 0, 1]], (img, p) => { const W = img.width, H = img.height, cx = W / 2, cy = H / 2, M = Math.hypot(cx, cy); fxDisplace(img, (x, y) => { if (!p.mode) { const dx = x - cx, dy = y - cy, a = (Math.atan2(dy, dx) + Math.PI) / (2 * Math.PI); return [a * W, Math.hypot(dx, dy) / M * H]; } const a = x / W * 2 * Math.PI - Math.PI, r = y / H * M; return [cx + Math.cos(a) * r, cy + Math.sin(a) * r]; }); }],
         minimum: ['Autres', 'Minimum (assombrit, épaissit le sombre)', [['r', 'Rayon', 1, 20, 2, 1]], (img, p, s) => fxMinMax(img, Math.max(1, Math.round(p.r * Math.max(1, s / 2))), false)],
         maximum: ['Autres', 'Maximum (éclaircit, épaissit le clair)', [['r', 'Rayon', 1, 20, 2, 1]], (img, p, s) => fxMinMax(img, Math.max(1, Math.round(p.r * Math.max(1, s / 2))), true)],
-        offset: ['Autres', 'Décalage (avec retour de l’autre côté)', [['dx', 'Horizontal (%)', -100, 100, 25, 1], ['dy', 'Vertical (%)', -100, 100, 0, 1]], (img, p) => { const W = img.width, H = img.height, ox = Math.round(p.dx / 100 * W), oy = Math.round(p.dy / 100 * H); fxDisplace(img, (x, y) => [((x - ox) % W + W) % W, ((y - oy) % H + H) % H]); }],
+        offset: ['Autres', 'Décalage (avec retour de l’autre côté)', [['dx', 'Horizontal', -100, 100, 25, 1, '%'], ['dy', 'Vertical', -100, 100, 0, 1, '%']], (img, p) => { const W = img.width, H = img.height, ox = Math.round(p.dx / 100 * W), oy = Math.round(p.dy / 100 * H); fxDisplace(img, (x, y) => [((x - ox) % W + W) % W, ((y - oy) % H + H) % H]); }],
         deglare: ['Autres', 'Enlever les reflets (vitre)', [['amount', 'Reflets en moins', 0, 100, 60, 1], ['size', 'Taille des reflets (0 = moyenne)', 0, 100, 0, 1]], (img, p) => rtDeglare(img, p.amount, p.size)],
     };
     const fxDefaults = t => Object.fromEntries((RT_FX[t]?.[2] || []).map(r => [r[0], r[4]]));
@@ -1416,6 +1467,75 @@
         if (cap) { g.fillStyle = '#222'; g.font = `500 ${Math.round(fs * 0.9)}px Georgia, "Times New Roman", serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(cap.length > 160 ? cap.slice(0, 159) + '…' : cap, c.width / 2, c.height - capH / 2, c.width - fs * 2); }
         return c;
     }
+    /* ── 📏 Image → Taille de l'image / ⬚ Taille de la zone de travail / ℹ️ Fichier → Informations : le rendu et le fichier ── */
+    /** rééchantillonner une toile à w × h : auto / smooth (bicubique, plus lisse) / sharp (réduire en gardant le détail) / bilinear / nearest (contours nets) */
+    function rtResample(src, w, h, method = 'auto') {
+        w = Math.max(1, Math.round(w)); h = Math.max(1, Math.round(h));
+        if (w === src.width && h === src.height) return src;
+        const out = document.createElement('canvas'); out.width = w; out.height = h; const g = out.getContext('2d');
+        if (method === 'nearest') { g.imageSmoothingEnabled = false; g.drawImage(src, 0, 0, w, h); return out; }
+        g.imageSmoothingEnabled = true; g.imageSmoothingQuality = method === 'bilinear' ? 'low' : 'high';
+        // une forte réduction : par moitiés successives (plus net, sans moirage) ; « plus net » ajoute un léger renforcement
+        let cur = src;
+        if (method !== 'bilinear') while (cur.width / 2 >= w * 1.0001 && cur.height / 2 >= h * 1.0001) { const t = document.createElement('canvas'); t.width = Math.round(cur.width / 2); t.height = Math.round(cur.height / 2); const tg = t.getContext('2d'); tg.imageSmoothingQuality = 'high'; tg.drawImage(cur, 0, 0, t.width, t.height); cur = t; }
+        g.drawImage(cur, 0, 0, w, h);
+        if (method === 'sharp' && w * h <= 40e6) { try { const id = g.getImageData(0, 0, w, h), d = id.data, c0 = new Uint8ClampedArray(d), W4 = w * 4, a = 0.35; for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) { const i = y * W4 + x * 4; for (let k = 0; k < 3; k++) { const v = c0[i + k]; d[i + k] = v + a * (4 * v - c0[i + k - 4] - c0[i + k + 4] - c0[i + k - W4] - c0[i + k + W4]); } } g.putImageData(id, 0, 0); } catch (_) {} }
+        return out;
+    }
+    /** la zone de travail : la toile agrandie (fond choisi ou transparent) ou recadrée, autour de l'image, selon l'ancrage */
+    function rtCanvasSize(src, b) {
+        if (!b) return src;
+        const W = Math.max(1, Math.round(src.width * b.w)), H = Math.max(1, Math.round(src.height * b.h));
+        if (W === src.width && H === src.height) return src;
+        const out = document.createElement('canvas'); out.width = W; out.height = H; const g = out.getContext('2d');
+        if (b.bg && b.bg !== 'transparent') { g.fillStyle = b.bg; g.fillRect(0, 0, W, H); }
+        g.drawImage(src, Math.round((W - src.width) * b.ax), Math.round((H - src.height) * b.ay));
+        return out;
+    }
+    const rtXmlEsc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'}[c]));
+    /** le paquet XMP (Dublin Core, IPTC : personnes sur la photo) des informations de l'image */
+    function rtXmp(info = {}, names = []) {
+        const alt = (tag, v) => v ? `<dc:${tag}><rdf:Alt><rdf:li xml:lang="x-default">${rtXmlEsc(v)}</rdf:li></rdf:Alt></dc:${tag}>` : '';
+        const kw = String(info.keywords || '').split(/[,;]/).map(k => k.trim()).filter(Boolean);
+        const iso = info.date ? (A()?.freeDateToIso?.(info.date) || (/^\d{4}(-\d{2}(-\d{2})?)?$/.test(info.date) ? info.date : '')) : '';
+        return `<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?><x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" xmlns:xmpRights="http://ns.adobe.com/xap/1.0/rights/" xmlns:Iptc4xmpExt="http://iptc.org/std/Iptc4xmpExt/2008-02-29/">`
+            + alt('title', info.title) + (info.author ? `<dc:creator><rdf:Seq><rdf:li>${rtXmlEsc(info.author)}</rdf:li></rdf:Seq></dc:creator>` : '') + alt('rights', info.rights) + alt('description', info.desc)
+            + (kw.length ? `<dc:subject><rdf:Bag>${kw.map(k => `<rdf:li>${rtXmlEsc(k)}</rdf:li>`).join('')}</rdf:Bag></dc:subject>` : '')
+            + (iso ? `<photoshop:DateCreated>${rtXmlEsc(iso)}</photoshop:DateCreated>` : '') + (info.date ? `<dc:coverage>${rtXmlEsc(info.date)}</dc:coverage>` : '')
+            + (names.length ? `<Iptc4xmpExt:PersonInImage><rdf:Bag>${names.map(n => `<rdf:li>${rtXmlEsc(n)}</rdf:li>`).join('')}</rdf:Bag></Iptc4xmpExt:PersonInImage>` : '')
+            + `<xmp:CreatorTool>LCNDA</xmp:CreatorTool></rdf:Description></rdf:RDF></x:xmpmeta><?xpacket end="w"?>`;
+    }
+    let rtCrcT = null;
+    const rtCrc = bytes => { if (!rtCrcT) { rtCrcT = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; rtCrcT[n] = c >>> 0; } } let c = 0xffffffff; for (let i = 0; i < bytes.length; i++) c = rtCrcT[(c ^ bytes[i]) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
+    /** ℹ️ les informations (XMP) et la résolution (ppp) écrites dans le fichier PNG ou JPG, comme Photoshop */
+    async function rtEmbedMeta(blob, {info = null, names = [], dpi = 0} = {}) {
+        const has = info && Object.keys(info).some(k => k !== 'people' && info[k]);
+        if (!blob || (!has && !names.length && !dpi)) return blob;
+        try {
+            const b = new Uint8Array(await blob.arrayBuffer()), enc = new TextEncoder(), xmp = enc.encode(rtXmp(info || {}, names));
+            const be32 = n => [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255];
+            if (b[0] === 0x89 && b[1] === 0x50) { // PNG : pHYs + iTXt « XML:com.adobe.xmp », juste après IHDR
+                const chunk = (type, data) => { const t = enc.encode(type), body = new Uint8Array(t.length + data.length); body.set(t); body.set(data, t.length); return new Uint8Array([...be32(data.length), ...body, ...be32(rtCrc(body))]); };
+                const parts = [];
+                if (dpi) { const ppm = Math.round(dpi / 0.0254); parts.push(chunk('pHYs', new Uint8Array([...be32(ppm), ...be32(ppm), 1]))); }
+                if (has || names.length) { const key = enc.encode('XML:com.adobe.xmp'), d = new Uint8Array(key.length + 5 + xmp.length); d.set(key); d.set([0, 0, 0, 0, 0], key.length); d.set(xmp, key.length + 5); parts.push(chunk('iTXt', d)); }
+                const at = 8 + 25, out = new Uint8Array(b.length + parts.reduce((n, p) => n + p.length, 0)); out.set(b.subarray(0, at)); let o = at; parts.forEach(p => { out.set(p, o); o += p.length; }); out.set(b.subarray(at), o);
+                return new Blob([out], {type: 'image/png'});
+            }
+            if (b[0] === 0xff && b[1] === 0xd8) { // JPG : densité du JFIF + segment APP1 XMP
+                let at = 2;
+                if (b[2] === 0xff && b[3] === 0xe0 && dpi) { const d = Math.min(65535, Math.round(dpi)); b[13] = 1; b[14] = d >> 8; b[15] = d & 255; b[16] = d >> 8; b[17] = d & 255; }
+                if (b[2] === 0xff && b[3] === 0xe0) at = 4 + ((b[4] << 8) | b[5]);
+                if (!(has || names.length)) return new Blob([b], {type: 'image/jpeg'});
+                const ns = enc.encode('http://ns.adobe.com/xap/1.0/\0'), len = 2 + ns.length + xmp.length; if (len > 65535) return new Blob([b], {type: 'image/jpeg'});
+                const seg = new Uint8Array(2 + len); seg.set([0xff, 0xe1, len >> 8, len & 255]); seg.set(ns, 4); seg.set(xmp, 4 + ns.length);
+                const out = new Uint8Array(b.length + seg.length); out.set(b.subarray(0, at)); out.set(seg, at); out.set(b.subarray(at), at + seg.length);
+                return new Blob([out], {type: 'image/jpeg'});
+            }
+        } catch (_) {}
+        return blob;
+    }
+    ext.rtEmbedMeta = rtEmbedMeta; ext.rtResample = rtResample; ext.rtCanvasSize = rtCanvasSize;
     const canvasBlob = (c, type = 'image/jpeg', q = 0.92) => new Promise((ok, ko) => c.toBlob(b => (b ? ok(b) : ko(new Error('Image trop grande pour le navigateur.'))), type, q));
     const saveBlobAs = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
     /** 🖨 Imprimer une image (une page, centrée) sans quitter l'outil */
@@ -1437,7 +1557,7 @@
     /** Une image glissée ou collée dans un outil entre dans les médias (sans fiche) : renvoie {media_id, filename} */
     ext.rtImportImage = async file => rtUploadCopy(file, {title: String(file.name || 'Image importée').replace(/\.[a-z0-9]{2,5}$/i, '')});
     /** ⤓ La fenêtre d'export unique pour une image faite par un outil (PNG, JPG, imprimer ; copie dans les médias) */
-    ext.rtExportImage = ({title = 'Image', render, mediaId = 0, copyTitle = '', png = false} = {}) => {
+    ext.rtExportImage = ({title = 'Image', render, mediaId = 0, copyTitle = '', png = false, meta = null} = {}) => {
         ext.rtEnsureCss();
         const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return toast('La fenêtre d’export n’est pas encore prête.', 'error');
         let cache = null; const full = async () => (cache = cache || await render());
@@ -1445,7 +1565,7 @@
             let c = await full();
             if (o.format === 'print' || type === 'image/jpeg') { const w = document.createElement('canvas'); w.width = c.width; w.height = c.height; const g = w.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, w.width, w.height); g.drawImage(c, 0, 0); c = w; } // le JPG n'a pas de transparence : fond blanc
             if (o.format === 'print') return printBlob(await canvasBlob(c, 'image/jpeg', 0.95), title);
-            const blob = await canvasBlob(c, type, 0.93); saveBlobAs(blob, o.filename);
+            let blob = await canvasBlob(c, type, 0.93); if (meta) blob = await rtEmbedMeta(blob, await meta()); saveBlobAs(blob, o.filename);
             if (o.saveCopy) { await rtUploadCopy(blob, {mediaId, title: copyTitle || title}); toast('Image téléchargée ; une copie est rangée dans les médias.'); }
         };
         return UI.openExportDialog({title, defaultName: title, quality: false, saveCopy: !!mediaId, copyChecked: !!mediaId, info: '',
@@ -1465,7 +1585,7 @@
         box.innerHTML = `<label>Disposition <select data-ba-layout><option value="curtain-v">Rideau vertical (avant à gauche)</option><option value="curtain-h">Rideau horizontal (avant en haut)</option><option value="side">Côte à côte</option><option value="stack">L’une sous l’autre</option></select></label>
             <label data-ba-posrow>Position du rideau <input type="range" min="5" max="95" value="${Math.round(pos * 100)}" data-ba-pos data-unit="%"></label>
             <label>Légende <input type="text" maxlength="160" data-ba-cap value="${esc(title)}" placeholder="ex. Mariage de Jean et Marie, 1925"></label>
-            <label class="checkbox-line"><input type="checkbox" data-ba-labels checked> Écrire « Avant » et « Après »</label>`;
+            <label class="ui-toggle"><input type="checkbox" data-ba-labels checked><i></i>Écrire « Avant » et « Après »</label>`;
         const $ = s => box.querySelector(s);
         $('[data-ba-layout]').value = o.layout;
         let tm = 0; const redraw = async () => { $('[data-ba-posrow]').hidden = !o.layout.startsWith('curtain'); try { smallP = smallP || small(); const [b, a] = await smallP; pimg.src = rtCompose(b, a, o, 900).toDataURL('image/jpeg', 0.85); } catch (err) { pimg.alt = err.message; } };
@@ -1725,9 +1845,9 @@
         const VTOOLS = [['move', '➤', 'Déplacer un élément d’un calque (V)', 'v'], ['marquee', '⬚', 'Sélection rectangle (M)', 'm'], ['ellipsesel', '◯', 'Sélection ellipse (⇧M)', ''], ['lasso', '➰', 'Lasso : entourer à main levée (L)', 'l'], ['polysel', '✒︎', 'Plume : sélection point par point (P) — double-clic ou Entrée pour fermer', 'p'], ['wand', '🪄', 'Sélection automatique (baguette magique) (W)', 'w'], ['crop', '⌗', 'Recadrer et redresser (C)', 'c'],
             ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['repair', '🪡', 'Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours', 'r'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['eraser', '🧽', 'Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu)', 'e'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['gradient', '▦', 'Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque', 'g'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main, ou barre d’espace (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
         const MENUS = [
-            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
+            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['info', 'ℹ️ Informations…'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
-            ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['hs:photo', '🎨 Teinte/Saturation…'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'],
+            ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['hs:photo', '🎨 Teinte/Saturation…'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'], ['imgsize', '📏 Taille de l’image…'], ['canvassize', '⬚ Taille de la zone de travail…'], ['-'],
                 ['restore:all', '✨ Restaurer en une fois…'], ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['repair:detect', '🔍 Repérer les plis et rayures…'], ['mode:repair', '🪡 Réparer au pinceau (plis, déchirures)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['idphoto', '🪪 Recadrer en photo d’identité…'], ['idbatch', '🪪 Portraits de plusieurs fiches…'], ['-'], ['plus:sky', '☁️ Remplacer le ciel…'], ['plus:cutout', '✂️ Détourer une personne (fond transparent, flou, uni)…'], ['plus:upscale', '🔍 Agrandir ×2 / ×4…'], ['plus:pano', '🧩 Panorama : assembler avec d’autres photos…'], ['-'], ['reset', 'Remettre comme au départ']]],
             ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['hs:layer', '🎨 Nouveau réglage Teinte/Saturation'], ['img:place', '🖼️ Placer une image…'], ['grad:layer', '▦ Nouveau calque de dégradé…'], ['pat:fill', '▩ Nouveau calque de motif…'], ['pat:make', '▩ Créer un motif…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:subject', '🎯 Sélectionner le sujet (automatique)'], ['plus:cutout', '✂️ Détourer une personne…'], ['-'], ['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
@@ -1741,7 +1861,6 @@
         dlg.innerHTML = `<div class="h-rt-head h-rt-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name" data-rt-name value="${esc(project?.name || item.title || item.filename || 'Photo')}" maxlength="160" aria-label="Nom du projet de retouche" title="Le nom du projet de retouche (tape pour le changer)"><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : k === '>' ? `<div class="h-rt-sub"><button type="button" class="h-rt-subh"><span>${esc(t)}</span><kbd>▸</kbd></button><div class="h-rt-menulist h-rt-sublist">${sc.map(([k2, t2]) => `<button type="button" data-rt-cmd="${k2}"><span>${esc(t2)}</span></button>`).join('')}</div></div>` : `<button type="button" data-rt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="ui-topbar-hist h-rt-hist-btns"><button type="button" class="icon-button small" data-rt-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rt-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span><button type="button" class="button small secondary" data-rt-cmd="simple" title="Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons">⚡ Rapide</button><span class="spacer"></span><span class="ui-status" data-ui-status data-rt-status></span>${ext.tbButton('retouch')}<details class="h-rt-menu h-rt-exportmenu"><summary title="Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rt-cmd="export:image"><span>🖼 L’image retouchée (PNG, JPG, imprimer)…</span></button><button type="button" data-rt-cmd="export:ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details><button type="button" class="button small" data-rt-projsave data-ui-cmd="save" title="Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer" title="Fermer">×</button></div>
             <div class="h-rt-bar" data-tbg="rt-bar" data-tbg-label="Barre du haut (groupes)">
                 <span class="h-rt-modes" role="toolbar" data-tb="modes" data-tb-label="Les outils" data-tbg="rt-modes" data-tbg-label="Outils">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(l)}" data-shortcut="${esc((VTOOLS.find(v => v[0] === k)?.[3] || '').toUpperCase())}">${i} ${esc(l)}</button>`).join('')}</span>
-                <span class="h-rt-zoom"><button type="button" class="button small secondary" data-rt-zoom="-1" title="Dézoomer (−)" data-shortcut="−">−</button><output data-rt-zoomout>100 %</output><button type="button" class="button small secondary" data-rt-zoom="1" title="Zoomer (+)" data-shortcut="+">+</button><button type="button" class="button small secondary" data-rt-zoomfit title="Toute l’image (0)" data-shortcut="0">Ajuster</button><button type="button" class="button small secondary" data-rt-zoom100 title="Taille réelle (1)" data-shortcut="1">1:1</button></span>
             </div>
             <div class="h-rt-opts" data-rt-opts hidden data-tbg="rt-opts" data-tbg-label="Options des outils (pinceau, texte…)">
                 <label data-o="size">Taille <input type="range" min="1" max="200" value="18" data-rt-size> <output data-rt-size-out>18</output> <small class="muted">[ ]</small></label>
@@ -1751,18 +1870,18 @@
                 <label data-o="color">Couleur <input type="color" value="#000000" data-rt-color></label>
                 <span data-o="swatches" class="h-rt-swatches" data-tb-label="Couleurs rapides">${['#d0021b', '#f5a623', '#f8e71c', '#7ed321', '#2a7de1', '#9013fe', '#ffffff', '#000000', '#e2b195', '#c98f78', '#8fb3d9', '#6f8f4e', '#8b5a2b', '#c9a227', '#7a4b6b'].map(c => `<button type="button" style="background:${c}" data-rt-swatch="${c}" aria-label="${c}"></button>`).join('')}</span>
                 <span data-o="font" data-tb-label="Police" class="h-rt-fontrow">Police <button type="button" class="button small secondary" data-rt-fontpick title="Choisir la police (celles de l’app et de l’ordinateur)">${esc(RT_FONTS[0][1])} ▾</button></span>
-                <label data-o="font" class="checkbox-line" data-tb-label="Contour du texte"><input type="checkbox" data-rt-halo checked> <span>contour</span></label><input data-o="font" type="color" value="#ffffff" data-rt-halocolor title="Couleur du contour" data-tb-label="Couleur du contour"><label data-o="font" data-tb-label="Épaisseur du contour">épaisseur <input type="range" min="1" max="8" value="1" data-rt-halow></label>
-                <label data-o="font" class="checkbox-line" data-tb-label="Ombre du texte"><input type="checkbox" data-rt-shadow> <span>ombre</span></label><input data-o="font" type="color" value="#000000" data-rt-shadowcolor title="Couleur de l’ombre" data-tb-label="Couleur de l’ombre">
-                <span data-o="clone" class="h-rt-clone" data-tb-label="Tampon : endroit à recopier, aligné"><button type="button" class="button small" data-rt-pick>🎯 Choisir l’endroit à recopier</button><label class="checkbox-line" data-help="Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit."><input type="checkbox" data-rt-aligned checked> <span>aligné</span></label></span>
-                <span data-o="repair" class="h-rt-cropops" data-tb-label="Réparer : grain, repérer les plis"><label class="checkbox-line" data-help="Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse."><input type="checkbox" data-rt-rgrain checked> <span>garder le grain</span></label><button type="button" class="button small secondary" data-rt-cmd="repair:detect" title="Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler">🔍 Repérer les plis</button></span>
-                <label data-o="textstyle" class="checkbox-line" data-tb-label="Texte gras"><input type="checkbox" data-rt-bold> <span><b>Gras</b></span></label><label data-o="textstyle" class="checkbox-line" data-tb-label="Texte italique"><input type="checkbox" data-rt-italic> <span><i>Italique</i></span></label>
+                <label data-o="font" class="ui-toggle" data-tb-label="Contour du texte"><input type="checkbox" data-rt-halo checked><i></i><span>contour</span></label><input data-o="font" type="color" value="#ffffff" data-rt-halocolor title="Couleur du contour" data-tb-label="Couleur du contour"><label data-o="font" data-tb-label="Épaisseur du contour">épaisseur <input type="range" min="1" max="8" value="1" data-rt-halow></label>
+                <label data-o="font" class="ui-toggle" data-tb-label="Ombre du texte"><input type="checkbox" data-rt-shadow><i></i><span>ombre</span></label><input data-o="font" type="color" value="#000000" data-rt-shadowcolor title="Couleur de l’ombre" data-tb-label="Couleur de l’ombre">
+                <span data-o="clone" class="h-rt-clone" data-tb-label="Tampon : endroit à recopier, aligné"><button type="button" class="button small" data-rt-pick>🎯 Choisir l’endroit à recopier</button><label class="ui-toggle" data-help="Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit."><input type="checkbox" data-rt-aligned checked><i></i><span>aligné</span></label></span>
+                <span data-o="repair" class="h-rt-cropops" data-tb-label="Réparer : grain, repérer les plis"><label class="ui-toggle" data-help="Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse."><input type="checkbox" data-rt-rgrain checked><i></i><span>garder le grain</span></label><button type="button" class="button small secondary" data-rt-cmd="repair:detect" title="Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler">🔍 Repérer les plis</button></span>
+                <label data-o="textstyle" class="ui-toggle" data-tb-label="Texte gras"><input type="checkbox" data-rt-bold><i></i><span><b>Gras</b></span></label><label data-o="textstyle" class="ui-toggle" data-tb-label="Texte italique"><input type="checkbox" data-rt-italic><i></i><span><i>Italique</i></span></label>
                 <label data-o="shape" data-tb-label="Forme (rectangle, ellipse, flèche…)">Forme <select data-rt-shape><option value="rect">Rectangle</option><option value="round">Rectangle arrondi</option><option value="ellipse">Ellipse</option><option value="line">Ligne</option><option value="arrow">Flèche</option></select></label>
-                <label data-o="shape" class="checkbox-line" data-tb-label="Forme remplie"><input type="checkbox" data-rt-fillon> <span>remplie</span></label><label data-o="shape" data-tb-label="Couleur de fond des formes">Fond <input type="color" value="#ffffff" data-rt-fill></label>
-                <label data-o="wand" data-tb-label="Baguette : tolérance" data-help="Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi.">Tolérance <input type="range" min="1" max="100" value="24" data-rt-tol> <output data-rt-tol-out>24</output></label><label data-o="wand" class="checkbox-line" data-tb-label="Baguette : contiguë"><input type="checkbox" data-rt-contig checked> <span>contiguë</span></label><button type="button" data-o="wand" class="button small" data-rt-cmd="sel:subject" data-tb-label="Sélectionner le sujet" title="Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va">🎯 Sujet</button>
+                <label data-o="shape" class="ui-toggle" data-tb-label="Forme remplie"><input type="checkbox" data-rt-fillon><i></i><span>remplie</span></label><label data-o="shape" data-tb-label="Couleur de fond des formes">Fond <input type="color" value="#ffffff" data-rt-fill></label>
+                <label data-o="wand" data-tb-label="Baguette : tolérance" data-help="Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi.">Tolérance <input type="range" min="1" max="100" value="24" data-rt-tol> <output data-rt-tol-out>24</output></label><label data-o="wand" class="ui-toggle" data-tb-label="Baguette : contiguë"><input type="checkbox" data-rt-contig checked><i></i><span>contiguë</span></label><button type="button" data-o="wand" class="button small" data-rt-cmd="sel:subject" data-tb-label="Sélectionner le sujet" title="Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va">🎯 Sujet</button>
                 <span data-o="sel" class="h-rt-selops" data-tb-label="Actions de la sélection"><small class="muted">⇧ ajouter · ⌥ enlever</small><button type="button" class="button small secondary" data-rt-cmd="sel:all">Tout</button><button type="button" class="button small secondary" data-rt-cmd="sel:none">Aucune</button><button type="button" class="button small secondary" data-rt-cmd="sel:invert">Inverser</button><button type="button" class="button small secondary" data-rt-cmd="sel:feather">Contour progressif</button><button type="button" class="button small secondary" data-rt-cmd="sel:copy">→ Calque</button><button type="button" class="button small secondary" data-rt-cmd="sel:fill">Remplir</button><button type="button" class="button small secondary" data-rt-cmd="sel:clear">Effacer</button><button type="button" class="button small secondary" data-rt-cmd="mask:sel">Masque</button><button type="button" class="button small secondary" data-rt-cmd="sel:crop">Recadrer</button></span>
                 <span data-o="crop" class="h-rt-cropops" data-tb-label="Recadrage : proportions, redresser"><label>Proportions <select data-rt-ratio><option value="">Libres</option><option value="orig">Celles de la photo</option><option value="1">Carré 1:1</option><option value="1.3333">4:3</option><option value="0.75">3:4</option><option value="1.5">3:2</option><option value="0.6667">2:3</option><option value="1.7778">16:9</option><option value="0.7071">A4 portrait</option><option value="1.4142">A4 paysage</option></select></label><label>Redresser <input type="range" min="-45" max="45" step="0.5" value="0" data-rt-angle> <output data-rt-angle-out>0°</output></label><button type="button" class="button small secondary" data-rt-cmd="straighten:auto" title="Trouve l’angle des grandes lignes (horizon, murs, cadres)">📐 Auto</button><button type="button" class="button small" data-rt-cmd="cropok">✓ Valider</button><button type="button" class="button small secondary" data-rt-cmd="cropclear">Annuler le recadrage</button></span>
                 <span data-o="persp" class="h-rt-cropops" data-tb-label="Perspective"><small class="muted">Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade).</small><button type="button" class="button small" data-rt-cmd="persp:ok">✓ Valider</button><button type="button" class="button small secondary" data-rt-cmd="persp:reset">Coins aux bords</button><button type="button" class="button small secondary" data-rt-cmd="persp:cancel">Annuler</button></span>
-                <span data-o="gradient" class="h-rt-gopts" data-tb-label="Dégradé : couleurs, forme, options"><button type="button" class="h-rt-gprev" data-rt-gprev title="Modifier le dégradé : couleurs, transparence, préréglages"><i></i><span aria-hidden="true">▾</span></button><span class="h-rt-gkinds" role="group" aria-label="Forme du dégradé">${RT_GKINDS.map(([k, , l]) => `<button type="button" data-rt-gkind="${k}" title="${esc(l)}" aria-label="${esc(l)}"><i class="h-rt-gk is-${k}"></i></button>`).join('')}</span><label class="checkbox-line" data-tb-label="Inverser le dégradé"><input type="checkbox" data-rt-grev> <span>inverser</span></label><label class="checkbox-line" data-tb-label="Tramage" data-help="Un très léger grain qui évite les « marches » visibles dans les dégradés doux."><input type="checkbox" data-rt-gdith> <span>tramage</span></label></span>
+                <span data-o="gradient" class="h-rt-gopts" data-tb-label="Dégradé : couleurs, forme, options"><button type="button" class="h-rt-gprev" data-rt-gprev title="Modifier le dégradé : couleurs, transparence, préréglages"><i></i><span aria-hidden="true">▾</span></button><span class="h-rt-gkinds" role="group" aria-label="Forme du dégradé">${RT_GKINDS.map(([k, , l]) => `<button type="button" data-rt-gkind="${k}" title="${esc(l)}" aria-label="${esc(l)}"><i class="h-rt-gk is-${k}"></i></button>`).join('')}</span><label class="ui-toggle" data-tb-label="Inverser le dégradé"><input type="checkbox" data-rt-grev><i></i><span>inverser</span></label><label class="checkbox-line" data-tb-label="Tramage" data-help="Un très léger grain qui évite les « marches » visibles dans les dégradés doux."><input type="checkbox" data-rt-gdith> <span>tramage</span></label></span>
                 <span data-o="maskmode" class="h-rt-maskmode" data-tb-label="Masque : cacher / montrer"><label class="checkbox-line"><input type="radio" name="rt-maskmode" value="hide" checked data-rt-maskmode> <span>⬛ cacher</span></label><label class="checkbox-line"><input type="radio" name="rt-maskmode" value="show" data-rt-maskmode> <span>⬜ montrer</span></label></span>
                 <small class="muted" data-rt-paint-help data-tb-label="Aide de l’outil"></small>
             </div>
@@ -1777,7 +1896,7 @@
                     <div class="h-rt-tabs" data-tbg="rt-tabs" data-tbg-label="Onglets du panneau de droite"><button type="button" class="is-active" data-rt-tab="adjust" title="Réglages" data-tb-label="🎚 Réglages"><span class="h-rt-ti" aria-hidden="true">🎚</span><span class="h-rt-tl">Réglages</span></button><button type="button" data-rt-tab="filters" title="Filtres" data-tb-label="✨ Filtres"><span class="h-rt-ti" aria-hidden="true">✨</span><span class="h-rt-tl">Filtres</span></button><button type="button" data-rt-tab="layers" title="Calques" data-tb-label="🗂 Calques"><span class="h-rt-ti" aria-hidden="true">🗂</span><span class="h-rt-tl">Calques</span></button><button type="button" data-rt-tab="props" title="Propriétés : Teinte/Saturation, masque, position et taille du calque choisi" data-tb-label="ⓘ Propriétés"><span class="h-rt-ti" aria-hidden="true">ⓘ</span><span class="h-rt-tl">Propriétés</span></button><button type="button" data-rt-tab="char" title="Caractère : police, variante (graisse), taille, interligne, approche…" data-tb-label="🔤 Caractère"><span class="h-rt-ti" aria-hidden="true">🔤</span><span class="h-rt-tl">Caractère</span></button><button type="button" data-rt-tab="pat" title="Motifs : remplir d’un motif, créer les siens" data-tb-label="▩ Motifs"><span class="h-rt-ti" aria-hidden="true">▩</span><span class="h-rt-tl">Motifs</span></button><button type="button" data-rt-tab="brushes" title="Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection" data-tb-label="🖌 Formes"><span class="h-rt-ti" aria-hidden="true">🖌</span><span class="h-rt-tl">Formes</span></button><button type="button" data-rt-tab="history" title="Historique" data-tb-label="🕘 Historique"><span class="h-rt-ti" aria-hidden="true">🕘</span><span class="h-rt-tl">Historique</span></button><button type="button" data-rt-tab="restore" title="Restaurer une vieille photo, pas à pas" data-tb-label="🧭 Restaurer"><span class="h-rt-ti" aria-hidden="true">🧭</span><span class="h-rt-tl">Restaurer</span></button></div>
                     <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-target" data-rt-target></div><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
                         ${sec('Couleur', 'rt-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span${k === 'vibrance' ? ' data-help="Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord."' : ''}>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
-                        <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>`)}
+                        <div class="h-rt-toggles"><label class="ui-toggle"><input type="checkbox" data-rt-t="bw"><i></i>Noir et blanc</label><label class="ui-toggle"><input type="checkbox" data-rt-t="sepia"><i></i>Sépia</label><label class="ui-toggle"><input type="checkbox" data-rt-t="invert"><i></i>Négatif</label></div>`)}
                         ${sec('Niveaux : point noir, tons moyens, point blanc', 'rt-levels', `${RT_LEVELS.map(([k, l, mn, mx, dv]) => `<label class="h-rt-slider"><span${k === 'lvl_gamma' ? ' data-help="Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre."' : ''}>${esc(l)} <output data-rt-out="${k}">${dv}</output></span><input type="range" min="${mn}" max="${mx}" value="${dv}" data-rt="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-lvlauto>Niveaux automatiques</button>`, false)}
                         ${sec('Courbe', 'rt-curve', `<div class="h-rt-curve-head"><strong data-help="Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur.">Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rt-ch ${k === 'rgb' ? 'is-active' : ''}" data-rt-ch="${k}">${l}</button>`).join('')}</span></div>
                         <svg class="h-rt-curve" viewBox="-6 -6 268 268" data-rt-curve><path class="h-rt-hist" d="${histPath}"/><g class="h-rt-grid">${[64, 128, 192].map(v => `<line x1="${v}" y1="0" x2="${v}" y2="256"/><line x1="0" y1="${v}" x2="256" y2="${v}"/>`).join('')}<line x1="0" y1="256" x2="256" y2="0" class="h-rt-diag"/></g><path class="h-rt-line" data-rt-line/><g data-rt-points></g></svg>
@@ -1824,7 +1943,7 @@
                                 <label title="Espace avant chaque paragraphe"><span class="h-rt-chi">⇡¶</span><input type="number" min="0" max="4000" step="1" data-rt-ch="sb"><small>px</small></label>
                                 <label title="Espace après chaque paragraphe"><span class="h-rt-chi">¶⇣</span><input type="number" min="0" max="4000" step="1" data-rt-ch="sa"><small>px</small></label>
                             </div>
-                            <label class="checkbox-line" title="Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier)"><input type="checkbox" data-rt-ch="hyph"> <span>Césure</span></label>
+                            <label class="ui-toggle" title="Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier)"><input type="checkbox" data-rt-ch="hyph"><i></i><span>Césure</span></label>
                             <p class="muted">Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc.</p>
                         </div>
                         <div data-chp="glyph" hidden>
@@ -1853,8 +1972,19 @@
             const ms = dlg.querySelector('[data-rt-cmd="save:show"] span'); if (ms) ms.textContent = '🖼 Enregistrer l’image dans les Médias';
             dlg.querySelector('.h-rt-note')?.remove();
         }
-        try { const rl = JSON.parse(localStorage.getItem('genealogie-retouch-layout') || '{}') || {}; if (['left', 'right'].includes(rl.tools)) dlg.classList.add('rt-tools-' + rl.tools); if (rl.side === 'left') dlg.classList.add('rt-side-left'); } catch (_) {} // Maintenance → Montage, retouche, mise en page et son
+        try { const rl = JSON.parse(localStorage.getItem('genealogie-retouch-layout') || '{}') || {}; if (rl.tools !== 'side') dlg.classList.add('rt-tools-' + (rl.tools === 'right' ? 'right' : 'left')); /* K19 : la colonne d'outils à gauche, sauf si on l'a mise à droite */ if (rl.side === 'left') dlg.classList.add('rt-side-left'); } catch (_) {} // Maintenance → Montage, retouche, mise en page et son
         ext.fullInit(dlg, 'retouch');
+        { // K19 : la colonne d'outils de 36 px, et les actions de fin seulement en haut (« 💾 Enregistrer ▾ ») ; les boutons d'en bas restent pour leurs écouteurs, cachés
+            const UIr = window.LCNDA_UI;
+            UIr?.editorRail?.(dlg.querySelector('.h-rt-vtools'), {breaks: ['[data-rt-mode=marquee]', '[data-rt-mode=crop]', '[data-rt-mode=heal]', '[data-rt-mode=brush]', '[data-rt-mode=text]', '[data-rt-mode=hand]', '.h-rt-fgbg']});
+            const acts = dlg.querySelector(':scope > .modal-actions'); acts?.classList.add('ed-old-hidden');
+            UIr?.saveMenu?.(dlg.querySelector('[data-rt-projsave]'), () => {
+                const bs = [...(acts?.querySelectorAll('[data-rt-save]') || [])].filter(b => b.style.display !== 'none'), mb = dlg.querySelector('[data-rt-mergebox]'), m = dlg.querySelector('[data-rt-merge]');
+                return [{icon: '💾', label: 'Enregistrer le projet (calques, masques, réglages)', shortcut: '⌘S', run: () => dlg.querySelector('[data-rt-projsave]')?.click()}, '-',
+                    ...bs.reverse().map(b => ({icon: b.dataset.rtSave === 'copy' ? '⧉' : b.dataset.rtSave === 'keep' ? '🗂' : '🖼', label: b.textContent.replace(/^\S*🖼\s*/u, '').trim(), run: () => b.click()})),
+                    ...(mb && !mb.hidden && m ? ['-', {icon: m.checked ? '☑' : '☐', label: 'Avec les annotations (calques visibles)', run: () => { m.checked = !m.checked; m.dispatchEvent(new Event('change', {bubbles: true})); }}] : [])];
+            });
+        }
         // les menus du haut : sur un petit écran, la barre défile de côté et les couperait ; sur un écran bas, la fin d'un long menu sortirait de l'écran
         dlg.querySelectorAll('.h-rt-head details.h-rt-menu').forEach(d => d.addEventListener('toggle', () => {
             const l = d.querySelector(':scope > .h-rt-menulist'); if (!l) return;
@@ -2060,6 +2190,7 @@
         const undoable = message => { const at = hpos; A().undoToast?.(message, {undo: () => { if (!dlg.isConnected) throw new Error('la retouche est fermée'); if (hpos !== at) throw new Error('d’autres changements ont suivi : utilise ↶ dans la barre de l’outil'); restore(at - 1); }, redo: () => { if (dlg.isConnected && hpos === at - 1) restore(at); }}); };
         const undoBtn = $('[data-rt-undo]'), redoBtn = $('[data-rt-redo]');
         function refreshHistory() {
+            try { paintBoard(); } catch (_) {} // 📏 la zone de travail et la taille finale suivent ↶ ↷
             undoBtn.disabled = hpos <= 0; redoBtn.disabled = hpos >= history.length - 1; onHist?.();
             const pane = $('[data-rt-pane="history"]');
             pane.innerHTML = `<p class="muted">Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre.</p><ol class="h-rt-history">${history.map((h, i) => `<li class="${i === hpos ? 'is-current' : i > hpos ? 'is-future' : ''}"><button type="button" data-rt-hist="${i}"><span>${esc(h.label)}</span><small>${h.at.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</small></button></li>`).join('')}</ol>`;
@@ -2094,7 +2225,7 @@
                 ${n.smart && n.ops?.some(o => o.type === 'image') ? `<div class="h-rt-smart"><span class="h-rt-smartb" title="Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée)">🧩 Objet dynamique</span><button type="button" class="link-button" data-rt-smart="replace" title="Une autre image à la même place, même taille, même rotation">Remplacer…</button><button type="button" class="link-button" data-rt-smart="orig" title="Remettre l’image à sa taille d’origine (et droite)">Taille d’origine</button><button type="button" class="link-button" data-rt-smart="filter" title="Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher">✨ Filtre dynamique</button><button type="button" class="link-button" data-rt-smart="raster" title="Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte)">Pixelliser</button></div>` : ''}
                 ${n.gradLayer && n.ops?.some(o => o.type === 'gradient') ? (() => { const g0 = [...n.ops].reverse().find(o => o.type === 'gradient'); return `<div class="h-rt-smart"><span class="h-rt-gsw" style="background:${rtGradCss(g0.stops)}" title="${esc(RT_GKINDS.find(k => k[0] === g0.kind)?.[2] || 'Dégradé')}"></span><button type="button" class="link-button" data-rt-gedit title="Couleurs, transparence, forme, préréglages">▦ Modifier le dégradé…</button></div>`; })() : ''}
                 ${n.patLayer && n.ops?.some(o => o.type === 'pattern') ? '<div class="h-rt-smart"><button type="button" class="link-button" data-rt-patedit title="Motif, échelle, angle, décalage">▩ Modifier le motif…</button></div>' : ''}
-                ${t === 'adjust' ? `<div class="h-rt-adjrow"><label class="checkbox-line" title="Comme un masque d’écrêtage de Photoshop"><input type="checkbox" data-rt-lclip ${n.clip ? 'checked' : ''}> <span>seulement sur ${(() => { const i = loc.arr.indexOf(n), below = loc.arr.slice(0, i).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)); return below ? `« ${esc(below.name)} »` : 'ce qui est juste dessous'; })()}</span></label><button type="button" class="link-button" data-rt-ladj>régler…</button></div><small class="muted">${n.clip ? 'ne touche que l’élément juste dessous' : loc.parent ? `touche tout ce qui est dessous dans « ${esc(loc.parent.name)} »` : 'touche tout ce qui est dessous'}</small>${(n.st?.filters?.chain || []).length ? `<div class="h-rt-lfx"><span class="muted">✨ Filtres :</span>${n.st.filters.chain.map((f, i) => `<button type="button" class="h-rt-lfxb" data-rt-lfxedit="${i}" title="Changer les réglages de ce filtre">${esc(RT_FX[f.t]?.[1] || f.t)} <b>régler…</b></button>`).join('')}</div>` : ''}`
+                ${t === 'adjust' ? `<div class="h-rt-adjrow"><label class="ui-toggle" title="Comme un masque d’écrêtage de Photoshop"><input type="checkbox" data-rt-lclip ${n.clip ? 'checked' : ''}><i></i><span>seulement sur ${(() => { const i = loc.arr.indexOf(n), below = loc.arr.slice(0, i).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)); return below ? `« ${esc(below.name)} »` : 'ce qui est juste dessous'; })()}</span></label><button type="button" class="link-button" data-rt-ladj>régler…</button></div><small class="muted">${n.clip ? 'ne touche que l’élément juste dessous' : loc.parent ? `touche tout ce qui est dessous dans « ${esc(loc.parent.name)} »` : 'touche tout ce qui est dessous'}</small>${(n.st?.filters?.chain || []).length ? `<div class="h-rt-lfx"><span class="muted">✨ Filtres :</span>${n.st.filters.chain.map((f, i) => `<button type="button" class="h-rt-lfxb" data-rt-lfxedit="${i}" title="Changer les réglages de ce filtre">${esc(RT_FX[f.t]?.[1] || f.t)} <b>régler…</b></button>`).join('')}</div>` : ''}`
                 : t === 'photo' ? `<small class="muted">réglages, ${st.strokes.length} correction${st.strokes.length > 1 ? 's' : ''}</small>`
                 : t === 'group' ? `<small class="muted">${n.children.length} élément${n.children.length > 1 ? 's' : ''}</small>` : `<small class="muted">${n.ops.length} élément${n.ops.length > 1 ? 's' : ''}</small>${n.ops.length ? '<button type="button" class="link-button" data-rt-lclear>vider</button>' : ''}`}
                 ${mops}</li>`;
@@ -2243,9 +2374,9 @@
         $('[data-rt-resize]').addEventListener('dblclick', () => { mainEl.style.removeProperty('--rt-side'); try { localStorage.removeItem(SIDE_KEY); } catch (_) {} setZoom(zoom); });
 
         // ── Zoom : boutons, molette avec ⌘ / Ctrl (ou pincer), barre d'espace ou ✋ pour se déplacer ──
-        let zoom = 1; // 1 = toute l'image dans le cadre
+        let zoom = 1, rtBar = null; // 1 = toute l'image dans le cadre
         const fitScale = () => { const r = stage.getBoundingClientRect(); return Math.max(0.01, Math.min((r.width - 24) / pw, (r.height - 24) / ph)); };
-        const placeOver = () => { Object.assign(overlay.style, {left: canvas.offsetLeft + 'px', top: canvas.offsetTop + 'px', width: canvas.offsetWidth + 'px', height: canvas.offsetHeight + 'px'}); syncCrop(); curtain?.place(); };
+        const placeOver = () => { Object.assign(overlay.style, {left: canvas.offsetLeft + 'px', top: canvas.offsetTop + 'px', width: canvas.offsetWidth + 'px', height: canvas.offsetHeight + 'px'}); syncCrop(); curtain?.place(); try { paintBoard(); } catch (_) {} };
         const setZoom = (z, cx, cy) => {
             const r = stage.getBoundingClientRect(), before = canvas.getBoundingClientRect();
             const ax = cx ?? r.left + r.width / 2, ay = cy ?? r.top + r.height / 2, fx = (ax - before.left) / before.width, fy = (ay - before.top) / before.height;
@@ -2253,13 +2384,17 @@
             const k = fitScale() * zoom; canvas.style.width = pw * k + 'px'; canvas.style.height = ph * k + 'px';
             const after = canvas.getBoundingClientRect();
             stage.scrollLeft += (after.left + fx * after.width) - ax; stage.scrollTop += (after.top + fy * after.height) - ay;
-            $('[data-rt-zoomout]').textContent = Math.round(k / scale * 100) + ' %';
+            rtBar?.sync();
             canvas.classList.toggle('is-pixelated', k / scale > 2);
             placeOver();
         };
-        $$('[data-rt-zoom]').forEach(b => b.addEventListener('click', () => setZoom(zoom * (b.dataset.rtZoom === '1' ? 1.5 : 1 / 1.5))));
-        $('[data-rt-zoomfit]').addEventListener('click', () => setZoom(1));
-        $('[data-rt-zoom100]').addEventListener('click', () => setZoom(scale / fitScale()));
+        // K18 : la barre du bas commune (taille et calque · aide de l'outil · zoom) ; 100 % = un point de l'écran pour un point de la photo
+        const UIk = window.LCNDA_UI;
+        if (UIk?.editorStatus) {
+            rtBar = UIk.editorStatus({zoom: {get: () => fitScale() * zoom * scale, set: k => setZoom(k / (scale * fitScale())), fit: () => setZoom(1), min: .02, max: 16}});
+            dlg.appendChild(rtBar); rtBar.setWhere(`${img.naturalWidth} × ${img.naturalHeight} px`);
+            const hp = $('[data-rt-paint-help]'); if (hp) { hp.classList.add('ed-old-hidden'); const mirror = () => rtBar.setHelp(hp.textContent); new MutationObserver(mirror).observe(hp, {childList: true, characterData: true, subtree: true}); mirror(); }
+        }
         stage.addEventListener('wheel', e => { if (!(e.ctrlKey || e.metaKey)) return; e.preventDefault(); setZoom(zoom * Math.exp(-e.deltaY * 0.0025), e.clientX, e.clientY); }, {passive: false});
         const ro = new ResizeObserver(() => setZoom(zoom)); ro.observe(stage);
         // ◧ Avant / après en rideau : l'original par-dessus, coupé là où on glisse la ligne
@@ -2505,7 +2640,7 @@
                 <label class="h-rt-pline">Préréglage <select data-hs-preset><option value="__custom" ${H.preset === '__custom' ? 'selected' : ''}>Personnalisé</option>${RT_HS_PRESETS.map(([k, l]) => `<option value="${k}" ${(H.preset ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <div class="h-rt-pline"><button type="button" class="h-rt-hsbtn${hsTool === 'target' ? ' is-on' : ''}" data-hs-tool="target" title="Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change" aria-label="Réglage ciblé">👆↔</button><select data-hs-ch ${cz ? 'disabled' : ''}>${RT_HS_CH.map(([k, l]) => `<option value="${k}" ${k === hsCh ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
                 ${sl('h', 'Teinte', cz ? 0 : -180, cz ? 360 : 180, cz ? 'is-hue0' : 'is-hue')}${sl('s', 'Saturation', cz ? 0 : -100, 100, 'is-sat')}${sl('l', 'Luminosité', -100, 100, 'is-light')}
-                <div class="h-rt-pline"><span class="h-rt-hspick" role="group" aria-label="Pipettes de la gamme">${[['pick', '⊙', 'Pipette : la gamme se centre sur la couleur cliquée dans la photo'], ['add', '⊕', 'Ajouter à la gamme la couleur cliquée'], ['sub', '⊖', 'Retirer de la gamme la couleur cliquée']].map(([k, i, t]) => `<button type="button" class="h-rt-hsbtn${hsTool === k ? ' is-on' : ''}" data-hs-tool="${k}" title="${t}" aria-label="${t}" ${cz ? 'disabled' : ''}>💧${i}</button>`).join('')}</span><label class="checkbox-line"><input type="checkbox" data-hs-colorize ${cz ? 'checked' : ''}> <span>Coloriser</span></label></div>
+                <div class="h-rt-pline"><span class="h-rt-hspick" role="group" aria-label="Pipettes de la gamme">${[['pick', '⊙', 'Pipette : la gamme se centre sur la couleur cliquée dans la photo'], ['add', '⊕', 'Ajouter à la gamme la couleur cliquée'], ['sub', '⊖', 'Retirer de la gamme la couleur cliquée']].map(([k, i, t]) => `<button type="button" class="h-rt-hsbtn${hsTool === k ? ' is-on' : ''}" data-hs-tool="${k}" title="${t}" aria-label="${t}" ${cz ? 'disabled' : ''}>💧${i}</button>`).join('')}</span><label class="ui-toggle"><input type="checkbox" data-hs-colorize ${cz ? 'checked' : ''}><i></i><span>Coloriser</span></label></div>
                 <div class="h-rt-hsbars"><canvas data-hs-bar="in" width="360" height="12"></canvas><div class="h-rt-hsrg" data-hs-rg ${master ? 'hidden' : ''}>${[0, 1, 2, 3].map(i => `<i data-hs-h="${i}" class="${i === 1 || i === 2 ? 'is-in' : ''}" title="${i === 1 || i === 2 ? 'Bord intérieur : plein effet jusqu’ici' : 'Bord extérieur : l’effet s’éteint ici'}"></i>`).join('')}<b data-hs-band></b></div><canvas data-hs-bar="out" width="360" height="12"></canvas></div>
                 <small class="muted" data-hs-rgtxt>${master ? 'Haut : les couleurs avant ; bas : après.' : ''}</small>
                 <div class="h-rt-pbtns"><button type="button" class="link-button" data-hs-reset>↺ Remettre comme au départ</button><button type="button" class="link-button" data-rt-tab-go="adjust">🎚 Autres réglages…</button></div></section>`;
@@ -2531,7 +2666,7 @@
             const kind = img ? (n.smart ? '🧩 Objet dynamique' : '🖼 Image') : txt ? '🔤 Calque de texte' : gr ? '▦ Calque de dégradé' : pat ? '▩ Calque de motif' : '🖌 Calque';
             const num = (k, label, v, unit = 'px', step = 1) => `<label class="h-rt-pnum"><span>${label}</span><input type="number" step="${step}" value="${Math.round(v * 10) / 10}" data-pl="${k}"><small>${unit}</small></label>`;
             return `<section class="h-rt-player"><div class="h-rt-phead"><span class="h-rt-pico">${kind.split(' ')[0]}</span><b>${kind.slice(kind.indexOf(' ') + 1)}</b><small>« ${esc(n.name)} »</small></div>
-                ${img ? `<div class="h-rt-pgrid">${num('w', 'L', img.w * pw)}${num('h', 'H', img.h * ph)}${num('x', 'X', img.x * pw)}${num('y', 'Y', img.y * ph)}${num('rot', 'Angle', img.rot || 0, '°')}</div><label class="checkbox-line"><input type="checkbox" data-pl-ratio checked> <span>garder les proportions</span></label>` : ''}
+                ${img ? `<div class="h-rt-pgrid">${num('w', 'L', img.w * pw)}${num('h', 'H', img.h * ph)}${num('x', 'X', img.x * pw)}${num('y', 'Y', img.y * ph)}${num('rot', 'Angle', img.rot || 0, '°')}</div><label class="ui-toggle"><input type="checkbox" data-pl-ratio checked><i></i><span>garder les proportions</span></label>` : ''}
                 ${txt ? `<div class="h-rt-pbtns"><button type="button" class="button small secondary" data-pl-go="char">🔤 Caractère</button><button type="button" class="button small secondary" data-pl-go="para">¶ Paragraphe</button><button type="button" class="button small secondary" data-pl-go="glyph">Ω Glyphes</button></div>` : ''}
                 ${gr ? '<div class="h-rt-pbtns"><button type="button" class="button small secondary" data-pl-go="grad">▦ Modifier le dégradé…</button></div>' : ''}
                 ${pat ? '<div class="h-rt-pbtns"><button type="button" class="button small secondary" data-pl-go="pat">▩ Modifier le motif…</button></div>' : ''}
@@ -2628,7 +2763,7 @@
             const sl = (k, label, mn, mx, v, unit) => `<label class="h-rt-slider"><span>${label} <output>${v}${unit}</output></span><input type="range" min="${mn}" max="${mx}" value="${v}" data-pt="${k}"></label>`;
             pane.innerHTML = `<p class="muted">${t ? `Calque de motif <b>« ${esc(t.l.name)} »</b> : tout se règle ici, tout de suite.` : 'Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs.'}</p>
                 <div class="h-rt-patgrid">${RT_PATTERNS.map(([id, name]) => sw(id, name, rtPatternTile(id, color, fillColor, patSt.transp).toDataURL(), false)).join('')}${userPats().map(p => sw(p.id, p.name, p.url, true)).join('')}</div>
-                <label class="checkbox-line"><input type="checkbox" data-pt-transp ${patSt.transp ? 'checked' : ''}> <span>fond transparent (motifs de l’app)</span></label>
+                <label class="ui-toggle"><input type="checkbox" data-pt-transp ${patSt.transp ? 'checked' : ''}><i></i><span>fond transparent (motifs de l’app)</span></label>
                 ${sl('scale', 'Échelle', 5, 800, Math.round((cur.scale ?? 1) * 100), ' %')}${sl('angle', 'Angle', -180, 180, Math.round(cur.angle || 0), '°')}${sl('ox', 'Décalage horizontal', 0, 100, Math.round((cur.ox || 0) * 100), ' %')}${sl('oy', 'Décalage vertical', 0, 100, Math.round((cur.oy || 0) * 100), ' %')}${sl('opacity', 'Opacité', 0, 100, Math.round((cur.opacity ?? 1) * 100), ' %')}
                 <div class="h-rt-pbtns"><button type="button" class="button small" data-pt-fill>▩ Remplir : nouveau calque de motif</button><button type="button" class="button small secondary" data-pt-make>＋ Créer un motif…</button></div>`;
         }
@@ -2657,7 +2792,7 @@
             const pn = panel('h-rt-patmake', `<header><b>▩ Créer un motif</b><small>Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur).</small></header>
                 <label class="h-rt-pline">D’après <select data-pc-src>${selId ? '<option value="sel">la sélection</option>' : ''}${hasL ? `<option value="layer">le calque « ${esc(al.name)} »</option>` : ''}<option value="all">l’image visible</option></select></label>
                 <label class="h-rt-slider"><span>Taille du carreau <output>128 px</output></span><input type="range" min="16" max="384" step="8" value="128" data-pc-size></label>
-                <label class="checkbox-line"><input type="checkbox" data-pc-seam checked> <span>raccord sans couture (les bords se fondent)</span></label>
+                <label class="ui-toggle"><input type="checkbox" data-pc-seam checked><i></i><span>raccord sans couture (les bords se fondent)</span></label>
                 <canvas class="h-rt-patprev" data-pc-prev width="300" height="180"></canvas>
                 <label class="h-rt-pline">Nom <input type="text" data-pc-name value="Mon motif ${userPats().length + 1}" maxlength="60"></label>
                 <div class="h-rt-fxbtns"><span class="spacer"></span><button type="button" class="button small secondary" data-pc-cancel>Annuler</button><button type="button" class="button small secondary" data-pc-save>Garder</button><button type="button" class="button small" data-pc-fill>Garder et remplir</button></div>`);
@@ -2697,7 +2832,7 @@
                 <div class="h-rt-bgrid">${pres.map(p => `<span class="h-rt-bpre${p.id === tipPreset ? ' is-on' : ''}"><button type="button" data-tp-pre="${esc(p.id)}" title="${esc(p.name)}" aria-label="${esc(p.name)}"><canvas width="96" height="34" data-tp-cv="${esc(p.id)}"></canvas><small>${esc(p.name)}</small></button>${p.user ? `<button type="button" class="h-rt-gpredel" data-tp-del="${esc(p.id)}" title="Supprimer" aria-label="Supprimer">×</button>` : ''}</span>`).join('')}</div>
                 <canvas class="h-rt-bprev" width="300" height="70" data-tp-prev></canvas>
                 <label class="h-rt-pline">Forme <select data-tp="shape">${RT_TIP_SHAPES.map(([k, l]) => `<option value="${k}" ${t.shape === k ? 'selected' : ''} ${k === 'custom' && !t.customUrl ? 'disabled' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <details class="h-rt-lsec" open><summary><b>Forme de la pointe</b></summary>${sl('hard', 'Dureté', 0, 100)}${sl('spacing', 'Pas (écart entre les empreintes)', 1, 300, ' %', 'Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles).')}${sl('angle', 'Angle', -180, 180, '°')}${sl('round', 'Arrondi', 2, 100, ' %', 'À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat).')}<label class="checkbox-line"><input type="checkbox" data-tp="follow" ${t.follow ? 'checked' : ''}> <span>l’angle suit le trait</span></label></details>
+                <details class="h-rt-lsec" open><summary><b>Forme de la pointe</b></summary>${sl('hard', 'Dureté', 0, 100)}${sl('spacing', 'Pas (écart entre les empreintes)', 1, 300, ' %', 'Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles).')}${sl('angle', 'Angle', -180, 180, '°')}${sl('round', 'Arrondi', 2, 100, ' %', 'À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat).')}<label class="ui-toggle"><input type="checkbox" data-tp="follow" ${t.follow ? 'checked' : ''}><i></i><span>l’angle suit le trait</span></label></details>
                 <details class="h-rt-lsec" ${t.sj || t.aj || t.scatter || t.count > 1 ? 'open' : ''}><summary><b>Dynamique et dispersion</b></summary>${sl('sj', 'Variation de taille', 0, 100)}${sl('aj', 'Variation d’angle', 0, 100)}${sl('scatter', 'Dispersion', 0, 400)}${sl('count', 'Nombre par empreinte', 1, 8, '')}</details>
                 <details class="h-rt-lsec" ${t.oj || t.cj || t.flow < 100 ? 'open' : ''}><summary><b>Transfert et couleur</b></summary>${sl('flow', 'Flux (chaque empreinte)', 1, 100)}${sl('oj', 'Variation d’opacité', 0, 100)}${sl('cj', 'Variation de couleur', 0, 100)}</details>
                 <div class="h-rt-pbtns"><button type="button" class="button small secondary" data-tp-make ${selId ? '' : 'disabled title="Fais d’abord une sélection autour du dessin"'}>＋ Forme d’après la sélection</button><button type="button" class="button small secondary" data-tp-save>Garder comme préréglage</button></div>`;
@@ -2775,7 +2910,7 @@
                     <label data-help="Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel.">Mélange <select data-g="interp">${opt([['rgb', 'Classique (RVB)'], ['oklab', 'Perceptuel (plus doux)'], ['hsl', 'Par les teintes']], w.interp)}</select></label>
                     <label>Au-delà des bouts <select data-g="repeat">${opt([['none', 'Couleur des bouts'], ['repeat', 'Répéter'], ['mirror', 'Répéter en miroir']], w.repeat)}</select></label>
                     ${live && !live.mask ? `<label class="h-rt-slider"><span>Opacité <output>${Math.round(w.opacity * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round(w.opacity * 100)}" data-g="opacity"></label>` : ''}
-                    <span class="h-rt-gchecks"><label class="checkbox-line"><input type="checkbox" data-g="reverse" ${w.reverse ? 'checked' : ''}> <span>inverser</span></label><label class="checkbox-line" data-help="Un très léger grain qui évite les « marches » visibles dans les dégradés doux."><input type="checkbox" data-g="dither" ${w.dither ? 'checked' : ''}> <span>tramage</span></label></span>
+                    <span class="h-rt-gchecks"><label class="ui-toggle"><input type="checkbox" data-g="reverse" ${w.reverse ? 'checked' : ''}><i></i><span>inverser</span></label><label class="ui-toggle" data-help="Un très léger grain qui évite les « marches » visibles dans les dégradés doux."><input type="checkbox" data-g="dither" ${w.dither ? 'checked' : ''}><i></i><span>tramage</span></label></span>
                 </div>
                 <div class="h-rt-gtools"><button type="button" class="link-button" data-g-flip title="Le début devient la fin">⇄ Retourner les arrêts</button><button type="button" class="link-button" data-g-even>Espacer également</button><button type="button" class="link-button" data-g-save>＋ Garder comme préréglage</button></div>
                 <div class="h-rt-fxbtns"><span class="spacer"></span><button type="button" class="button small secondary" data-g-cancel>Annuler</button><button type="button" class="button small" data-g-ok>OK</button></div>`);
@@ -2794,7 +2929,7 @@
                 const s = sel, sorted = [...w.stops].sort((a, b) => a.p - b.p), next = sorted[sorted.indexOf(s) + 1];
                 box.innerHTML = `<b>Arrêt choisi</b><button type="button" class="ui-color-btn h-rt-gcol" data-g-col title="Couleur de l’arrêt"><span style="background:${s.c}"></span>${esc(s.c.toUpperCase())} ▾</button>
                     <label class="h-rt-slider"><span>Opacité <output>${Math.round(s.a * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round(s.a * 100)}" data-gs="a"></label>
-                    <label class="h-rt-gpos">Position <input type="number" min="0" max="100" step="1" value="${Math.round(s.p * 100)}" data-gs="p"> %</label>
+                    <label class="h-rt-gpos">Position <input data-unit="%" type="number" min="0" max="100" step="1" value="${Math.round(s.p * 100)}" data-gs="p"></label>
                     ${next ? `<label class="h-rt-slider" data-help="Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop)."><span>Milieu vers le suivant <output>${Math.round((s.m ?? 0.5) * 100)} %</output></span><input type="range" min="5" max="95" value="${Math.round((s.m ?? 0.5) * 100)}" data-gs="m"></label>` : ''}
                     <button type="button" class="button small secondary" data-g-del ${w.stops.length <= 2 ? 'disabled' : ''}>✕ Enlever cet arrêt</button>`;
             };
@@ -3186,7 +3321,7 @@
         const full = () => { const c = blankMask(), g = c.getContext('2d'); g.fillRect(0, 0, pw, ph); return c; };
         const downloadFull = async type => {
             if (mode === 'persp') setMode('adjust');
-            try { const c = await renderFull(); const blob = await new Promise(r => c.toBlob(r, type, 0.93)); if (!blob) throw new Error('Image trop grande pour le navigateur.'); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${String(item.title || item.filename || 'photo').replace(/\.[a-z0-9]+$/i, '').replace(/[^\p{L}\p{N} _-]+/gu, '').trim().slice(0, 60) || 'photo'}-retouche.${type === 'image/png' ? 'png' : 'jpg'}`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+            try { const c = await renderFull(); let blob = await new Promise(r => c.toBlob(r, type, 0.93)); if (!blob) throw new Error('Image trop grande pour le navigateur.'); blob = await rtEmbedMeta(blob, await metaOf()); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${String(item.title || item.filename || 'photo').replace(/\.[a-z0-9]+$/i, '').replace(/[^\p{L}\p{N} _-]+/gu, '').trim().slice(0, 60) || 'photo'}-retouche.${type === 'image/png' ? 'png' : 'jpg'}`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
             catch (err) { toast(err.message, 'error'); }
         };
         /* ✨ Menu Filtre : un calque de réglage par filtre, une fenêtre pour le régler en direct */
@@ -3204,9 +3339,9 @@
             dlg.querySelector('.h-rt-fxpanel')?.remove();
             const pn = document.createElement('div'); pn.className = 'h-rt-fxpanel';
             pn.innerHTML = `<header><b>✨ ${esc(def[1])}</b><small>${esc(def[0])} · calque « ${esc(node.name)} »${node.mask ? ' · limité à la sélection' : ''}</small></header>
-                ${def[2].map(([k, l, mn, mx, dv, stp]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-fxo="${k}">${step[k] ?? dv}</output></span><input type="range" min="${mn}" max="${mx}" step="${stp || 1}" value="${step[k] ?? dv}" data-fxp="${k}"></label>`).join('')}
+                ${def[2].map(([k, l, mn, mx, dv, stp, un]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-fxo="${k}">${step[k] ?? dv}</output></span><input type="range" min="${mn}" max="${mx}" step="${stp || 1}" value="${step[k] ?? dv}" data-fxp="${k}"${un ? ` data-unit="${esc(un)}"` : ''}></label>`).join('')}
                 <label class="h-rt-slider"><span>Opacité du calque (dosage) <output data-fxo="__op">${Math.round(op0 * 100)} %</output></span><input type="range" min="0" max="100" value="${Math.round(op0 * 100)}" data-fxp="__op"></label>
-                <label class="checkbox-line"><input type="checkbox" data-fxprev checked> Aperçu</label>
+                <label class="ui-toggle"><input type="checkbox" data-fxprev checked><i></i>Aperçu</label>
                 <div class="h-rt-fxbtns"><button type="button" class="button small secondary" data-fxreset>Valeurs de départ</button><span class="spacer"></span><button type="button" class="button small secondary" data-fxcancel>Annuler</button><button type="button" class="button small" data-fxok>✓ OK</button></div>
                 <small class="muted">Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ».</small>`;
             $('.h-rt-left').appendChild(pn);
@@ -3281,7 +3416,7 @@
             const chosen = new Map();
             // les photos : la fenêtre unique des médias, en plusieurs (cases ✓) ; elles s'affichent en pastilles
             const field = window.LCNDA_PICKER?.mediaField ? window.LCNDA_PICKER.mediaField({name: '', multiple: true, types: ['image'], title: 'Les photos à retoucher', okLabel: 'Prendre ces photos', placeholder: '＋ Choisir des photos…'}) : '';
-            box.innerHTML = `<section class="h-rt-batch"><h3>« ${esc(a.name)} » sur plusieurs photos</h3><div class="h-rt-batchbar"><div class="h-rt-batchfield" style="flex:1 1 260px;min-width:0">${field}</div><label class="checkbox-line"><input type="checkbox" data-bshow checked> afficher la nouvelle version</label></div>
+            box.innerHTML = `<section class="h-rt-batch"><h3>« ${esc(a.name)} » sur plusieurs photos</h3><div class="h-rt-batchbar"><div class="h-rt-batchfield" style="flex:1 1 260px;min-width:0">${field}</div><label class="ui-toggle"><input type="checkbox" data-bshow checked><i></i>afficher la nouvelle version</label></div>
                 <p data-bsel class="muted">Aucune photo choisie.</p><div class="h-rt-batchgo"><button type="button" class="button" data-bgo disabled>Appliquer</button><progress data-bprog max="1" value="0" hidden></progress><small data-bstate></small></div></section>`;
             const go = box.querySelector('[data-bgo]');
             const syncSel = () => { box.querySelector('[data-bsel]').textContent = chosen.size ? `${A().plural(chosen.size, 'photo choisie', 'photos choisies')}.` : 'Aucune photo choisie.'; go.disabled = !chosen.size; };
@@ -3306,7 +3441,7 @@
         /* ⤓ Exporter (E3) : l'image retouchée, ou l'avant / après ; une copie peut aller dans les médias */
         const docTitle = () => (dlg.querySelector('[data-rt-name]')?.value || '').trim() || item.title || String(item.filename || 'photo').replace(/\.[a-z0-9]+$/i, '');
         const readyFull = () => { if (mode === 'persp') setMode('adjust'); if (mode === 'crop') endCrop(true); };
-        const exportImage = () => { readyFull(); return ext.rtExportImage({title: docTitle(), mediaId: item.id || 0, copyTitle: `${docTitle()} (retouchée)`, png: hasAlpha(), render: () => renderFull()}); };
+        const exportImage = () => { readyFull(); return ext.rtExportImage({title: st.info?.title || docTitle(), mediaId: item.id || 0, copyTitle: `${docTitle()} (retouchée)`, png: hasAlpha(), render: () => renderFull(), meta: metaOf}); };
         const exportBA = () => { readyFull(); return ext.rtBeforeAfterExport({title: docTitle(), mediaId: item.id || 0, pos: curtain?.pos ?? 0.5, vertical: curtain?.vertical !== false, getBefore: () => renderBefore(), getAfter: () => renderFull()}); };
         const tick = () => new Promise(r => setTimeout(r, 30));
         const panel = (cls, html) => { dlg.querySelector('.h-rt-fxpanel')?.remove(); const pn = document.createElement('div'); pn.className = `h-rt-fxpanel h-rt-panel2 ${cls}`; pn.innerHTML = html; $('.h-rt-left').appendChild(pn); return pn; };
@@ -3338,7 +3473,7 @@
             const pn = panel('h-rt-crease', `<header><b>🔍 Plis et rayures</b><small>Les lignes fines, claires ou sombres, sont repérées en rouge${selId ? ' (dans la sélection)' : ''}. Vérifie, puis « Réparer ces lignes ».</small></header>
                 <p data-cr-count class="muted">Recherche…</p>
                 <label data-help="Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge.">Sensibilité <input type="range" min="1" max="100" value="${Number(ls('genealogie-retouch-crease', 50))}" data-cr-sens data-unit="%"></label>
-                <label class="checkbox-line"><input type="checkbox" data-cr-grain checked> <span>garder le grain autour</span></label>
+                <label class="ui-toggle"><input type="checkbox" data-cr-grain checked><i></i><span>garder le grain autour</span></label>
                 <div class="h-rt-panelbtns"><button type="button" class="link-button" data-cr-hand>🪡 Plutôt à la main</button><span class="spacer"></span><button type="button" class="button small secondary" data-cr-cancel>Annuler</button><button type="button" class="button small" data-cr-ok disabled>✓ Réparer ces lignes</button></div>`);
             const count = pn.querySelector('[data-cr-count]'), ok = pn.querySelector('[data-cr-ok]');
             const run = async () => {
@@ -3511,6 +3646,9 @@
             if (k === 'curtain') return curtain.toggle();
             if (k === 'restore:all') return restoreAllPanel();
             if (k === 'repair:detect') return creasePanel();
+            if (k === 'imgsize') return imageSizeDialog();
+            if (k === 'canvassize') return canvasSizeDialog();
+            if (k === 'info') return infoDialog();
             if (k === 'idphoto') return openIdPhoto();
             if (k === 'idbatch') return idpBatchDialog();
             if (a === 'plus') { // ☁️ ciel, ✂️ détourer, 🔍 agrandir (heritage-retouch-plus.js) ; 🧩 panorama (l'assemblage de photos)
@@ -3702,7 +3840,7 @@
         // ── Clavier : outils (V M L P W C J S B U T H Z), ⌘Z / ⇧⌘Z, ⌘A ⌘D ⇧⌘I ⌘J, [ ] taille, + − 0 1 zoom, espace, ⌫ ──
         const typing = e => e.target.closest?.('input:not([type=range]):not([type=checkbox]):not([type=color]):not([type=radio]), textarea, select, [contenteditable]');
         const onKey = e => {
-            if (!dlg.open || typing(e) || document.querySelector('dialog[open].ask-text-dialog, dialog[open].confirm-box-dialog')) return;
+            if (!dlg.open || typing(e) || document.querySelector('dialog[open].ask-text-dialog, dialog[open].confirm-box-dialog, dialog[open].rt-fmt-dlg')) return;
             const mod = (e.metaKey || e.ctrlKey) && !e.getModifierState?.('AltGraph') && !(e.ctrlKey && e.altKey && e.key === '\\'), k = e.key.toLowerCase(); // AltGr (clavier AZERTY Windows) arrive comme Ctrl+Alt : ce n'est pas un raccourci (« \ » = AltGr+8)
             if (mod && k === 'z') { e.preventDefault(); e.stopImmediatePropagation(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
             if (mod && k === 's') { e.preventDefault(); e.stopImmediatePropagation(); saveProject(e.shiftKey); return; }
@@ -3807,7 +3945,7 @@
         };
         drawVersions();
         // ── L'image en pleine taille : la photo retouchée (corrections, réglages, filtres, masque), les calques visibles, puis le recadrage ──
-        const hasAlpha = () => { const p = P(); return !!(st.persp || st._persp0) && (st.persp || st._persp0).some(([x, y]) => x < 0 || y < 0 || x > 1 || y > 1) || !p || !p.visible || p.opacity < 1 || !!p.mask || layers[0] !== p || st.strokes.some(s => s.tool === 'clear'); };
+        const hasAlpha = () => { const p = P(); if (st.board?.bg === 'transparent' && (st.board.w > 1 || st.board.h > 1)) return true; return !!(st.persp || st._persp0) && (st.persp || st._persp0).some(([x, y]) => x < 0 || y < 0 || x > 1 || y > 1) || !p || !p.visible || p.opacity < 1 || !!p.mask || layers[0] !== p || st.strokes.some(s => s.tool === 'clear'); };
         async function renderFull() {
             const W = img.naturalWidth, H = img.naturalHeight;
             const pc = document.createElement('canvas'); pc.width = W; pc.height = H;
@@ -3821,13 +3959,168 @@
             // sans les annotations : la photo et ses corrections (le calque ✨ Retouches : taches, plis, tampon), rien d'autre
             const onlyPhoto = () => { const out = []; walk(layers, n => { if (n === P() || (typeOf(n) === 'layer' && n.restorePatch && n.visible)) out.push(n); }); return out; };
             cg.drawImage(renderStack($('[data-rt-merge]').checked ? layers : onlyPhoto(), null, RF), 0, 0);
-            return cropOf(comp);
+            return finishOut(cropOf(comp));
         }
         /** L'original en pleine taille, avec la même perspective et le même cadre que la retouche (l'« avant ») */
         async function renderBefore() {
             const W = img.naturalWidth, H = img.naturalHeight, pc = blank(W, H), g = pc.getContext('2d', {willReadFrequently: true}); g.drawImage(img, 0, 0);
             if (st.persp) g.putImageData(rtWarp(g.getImageData(0, 0, W, H), st.persp), 0, 0);
-            return cropOf(pc);
+            return finishOut(cropOf(pc));
+        }
+        /* ── 📏 Taille de l'image, ⬚ zone de travail, ℹ️ informations (comme Photoshop) : gardées dans l'état de la retouche (st),
+              donc dans l'historique (↶ ↷) et dans le projet enregistré ; appliquées à l'image finale (enregistrer, exporter) ── */
+        const RS_METHODS = [['auto', 'Automatique'], ['smooth', 'Bicubique, plus lisse (pour agrandir)'], ['sharp', 'Bicubique, plus net (pour réduire)'], ['bilinear', 'Bilinéaire'], ['nearest', 'Au plus proche (contours nets, pixels)']];
+        /** les dimensions en pleine taille : après le recadrage, après la zone de travail, puis la taille finale */
+        function dimsOf() {
+            const W = img.naturalWidth, H = img.naturalHeight, c = st.crop;
+            const cw = Math.max(1, Math.round(c ? c.w * W : W)), ch = Math.max(1, Math.round(c ? c.h * H : H));
+            const b = st.board, bw = b ? Math.max(1, Math.round(cw * b.w)) : cw, bh = b ? Math.max(1, Math.round(ch * b.h)) : ch;
+            const z = st.size; let ow = bw, oh = bh;
+            if (z) { ow = Math.max(1, Math.round(z.w)); oh = z.keep ? Math.max(1, Math.round(ow * bh / bw)) : Math.max(1, Math.round(z.h)); }
+            return {cw, ch, bw, bh, ow, oh, dpi: z?.dpi || 0};
+        }
+        function finishOut(c) {
+            let out = st.board ? rtCanvasSize(c, st.board) : c;
+            if (st.size) { const d = dimsOf(), kx = out.width / d.bw; out = rtResample(out, d.ow * kx, d.oh * kx, st.size.method || 'auto'); }
+            return out;
+        }
+        /** la zone de travail dessinée autour de la photo (suit le zoom), et une pastille « taille finale » */
+        function paintBoard() {
+            if (!wrap || !canvas) return;
+            let el = wrap.querySelector('.h-rt-board'), chip = wrap.querySelector('.h-rt-sizechip');
+            const b = st.board, c = st.crop && mode !== 'crop' ? st.crop : {x: 0, y: 0, w: 1, h: 1};
+            if (b) {
+                if (!el) { el = document.createElement('div'); el.className = 'h-rt-board'; el.setAttribute('aria-hidden', 'true'); wrap.appendChild(el); }
+                const cw = canvas.offsetWidth, chh = canvas.offsetHeight, W = c.w * b.w, H = c.h * b.h, left = c.x - (W - c.w) * b.ax, top = c.y - (H - c.h) * b.ay, grow = b.w >= 1 && b.h >= 1;
+                Object.assign(el.style, {left: canvas.offsetLeft + left * cw + 'px', top: canvas.offsetTop + top * chh + 'px', width: W * cw + 'px', height: H * chh + 'px', zIndex: grow ? '0' : '2', background: grow && b.bg !== 'transparent' ? b.bg : '', boxShadow: grow ? '' : '0 0 0 9999px rgba(0,0,0,.45)'});
+                el.classList.toggle('is-transparent', grow && b.bg === 'transparent'); wrap.classList.add('has-board');
+            } else if (el) { el.remove(); wrap.classList.remove('has-board'); }
+            if (st.board || st.size) {
+                const d = dimsOf(); if (!chip) { chip = document.createElement('span'); chip.className = 'h-rt-sizechip'; wrap.appendChild(chip); }
+                chip.textContent = `${d.ow} × ${d.oh} px${d.dpi ? ` · ${d.dpi} ppp` : ''}`; chip.title = 'La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail)';
+                Object.assign(chip.style, {left: canvas.offsetLeft + canvas.offsetWidth / 2 + 'px', top: Math.max(canvas.offsetTop + 4, canvas.offsetTop + canvas.offsetHeight - 28) + 'px', bottom: 'auto'});
+            } else chip?.remove();
+        }
+        /** ℹ️ ce qui va dans le fichier : les informations, les noms des personnes reliées, la résolution */
+        async function metaOf() {
+            const info = st.info || null, ids = info?.people || [];
+            let names = [];
+            if (ids.length) { try { const r = await A().api('picker_search', {kind: 'person', ids: ids.join(',')}); names = (r?.groups || []).flatMap(g => g.items || []).filter(x => ids.includes(Number(x.id))).map(x => String(x.title || x.label || '').replace(/\s+/g, ' ').trim()).filter(Boolean); } catch (_) {} }
+            return {info, names, dpi: st.size?.dpi || 0};
+        }
+        const fmtNum = (v, d = 2) => String(Math.round(v * 10 ** d) / 10 ** d).replace('.', ',');
+        const UNITS_RT = [['px', 'pixels'], ['pc', 'pour cent'], ['cm', 'cm'], ['mm', 'mm'], ['in', 'pouces']];
+        const toPx = (v, u, dpi, base) => u === 'px' ? v : u === 'pc' ? v * base / 100 : u === 'cm' ? v / 2.54 * dpi : u === 'mm' ? v / 25.4 * dpi : v * dpi;
+        const fromPx = (p, u, dpi, base) => u === 'px' ? p : u === 'pc' ? p / base * 100 : u === 'cm' ? p / dpi * 2.54 : u === 'mm' ? p / dpi * 25.4 : p / dpi;
+        /** sans rééchantillonner : les pixels restent, la résolution suit la taille à l'impression */
+        const dpiFor = (px, v, u) => Math.max(36, Math.min(1200, Math.round(px / (u === 'cm' ? v / 2.54 : u === 'mm' ? v / 25.4 : v))));
+        const rtDialog = o => { const d = ext.openDialog(o); d.classList.add('rt-fmt-dlg'); d.dataset.dndOff = ''; return d; };
+        /** 📏 Image → Taille de l'image… : largeur, hauteur (px, %, cm, mm, pouces), résolution, conserver les proportions, rééchantillonner (méthode) */
+        function imageSizeDialog() {
+            readyFull();
+            const d0 = dimsOf(), F = window.LCNDA_FORMATS, z = st.size || {};
+            const S = {w: d0.ow, h: d0.oh, dpi: z.dpi || 300, keep: z.keep !== false, resample: true, unit: 'px', method: z.method || 'auto'};
+            const opt = (list, v) => list.map(([k, l]) => `<option value="${k}"${k === v ? ' selected' : ''}>${esc(l)}</option>`).join('');
+            const dlgS = rtDialog({eyebrow: 'IMAGE', title: '📏 Taille de l’image', wide: true, submitLabel: 'Enregistrer',
+                body: `<div class="fmt-dlg-grid"><div>
+                    <fieldset><legend>Dimensions</legend>
+                        ${F ? `<label><span>Ajuster à un format</span><select data-rs-fmt><option value="">— garder ces mesures —</option>${F.optionsHtml('').replace(/<option value="free"[^>]*>[^<]*<\/option>/, '')}</select></label>` : ''}
+                        <div class="fmt-row"><label><span>Largeur</span><input type="number" data-rs-w min="0.01" step="any"></label><label><span>Hauteur</span><input type="number" data-rs-h min="0.01" step="any"></label><label><span>Unité</span><select data-rs-unit>${opt(UNITS_RT, 'px')}</select></label></div>
+                        <label class="checkbox-line"><input type="checkbox" data-rs-keep${S.keep ? ' checked' : ''}> 🔗 Conserver les proportions</label>
+                        <div class="fmt-row"><label><span>Résolution</span><input data-unit="ppp" type="number" data-rs-dpi min="36" max="1200" step="1" value="${S.dpi}"></label></div>
+                        <label class="checkbox-line"><input type="checkbox" data-rs-resample checked> <span data-help="Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes.">Rééchantillonner</span></label>
+                        <label data-rs-mrow><span>Méthode</span><select data-rs-method>${opt(RS_METHODS, S.method)}</select></label>
+                    </fieldset></div><div>
+                    <dl class="fmt-before-after"><dt>Maintenant</dt><dd>${d0.ow} × ${d0.oh} px</dd><dt>Après</dt><dd data-rs-after></dd><dt>À l’impression</dt><dd data-rs-print></dd><dt>Poids</dt><dd data-rs-mb></dd></dl>
+                    <p class="muted" data-rs-a5></p>
+                    ${st.size ? '<p><button type="button" class="button small secondary" data-rs-orig>↺ Remettre la taille d’origine</button></p>' : ''}
+                    <p class="muted">La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant.</p></div></div>`,
+                onOpen: d => {
+                    const q = s0 => d.querySelector(s0), wI = q('[data-rs-w]'), hI = q('[data-rs-h]'), uS = q('[data-rs-unit]'), dI = q('[data-rs-dpi]'), kC = q('[data-rs-keep]'), rC = q('[data-rs-resample]');
+                    const ratio = d0.bw / d0.bh;
+                    const paint = () => { const u = S.unit; wI.value = fmtNum(fromPx(S.w, u, S.dpi, d0.ow), u === 'px' ? 0 : 2).replace(',', '.'); hI.value = fmtNum(fromPx(S.h, u, S.dpi, d0.oh), u === 'px' ? 0 : 2).replace(',', '.'); dI.value = S.dpi;
+                        q('[data-rs-mrow]').hidden = !S.resample; [...uS.options].forEach(o => { o.disabled = !S.resample && (o.value === 'px' || o.value === 'pc'); });
+                        q('[data-rs-after]').textContent = `${Math.round(S.w)} × ${Math.round(S.h)} px`; q('[data-rs-print]').textContent = `${fmtNum(S.w / S.dpi * 2.54, 1)} × ${fmtNum(S.h / S.dpi * 2.54, 1)} cm à ${S.dpi} ppp`;
+                        q('[data-rs-mb]').textContent = `≈ ${fmtNum(S.w * S.h * 4 / 1048576, 1)} Mo en mémoire`;
+                        const a5 = Math.min(S.w, S.h) / S.dpi * 25.4 >= 140 && Math.max(S.w, S.h) / S.dpi * 25.4 >= 200; q('[data-rs-a5]').textContent = Math.min(S.w, S.h) >= 1748 && Math.max(S.w, S.h) >= 2480 ? '✓ Assez grande pour imprimer en A5 à 300 ppp.' : a5 ? '' : '⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px).'; };
+                    const setW = px => { S.w = Math.max(1, px); if (S.keep) S.h = Math.max(1, S.w / ratio); };
+                    const setH = px => { S.h = Math.max(1, px); if (S.keep) S.w = Math.max(1, S.h * ratio); };
+                    wI.addEventListener('change', () => { const v = Number(wI.value); if (!(v > 0)) return paint(); if (S.resample) setW(toPx(v, S.unit, S.dpi, d0.ow)); else S.dpi = dpiFor(S.w, v, S.unit); q('[data-rs-fmt]') && (q('[data-rs-fmt]').value = ''); paint(); });
+                    hI.addEventListener('change', () => { const v = Number(hI.value); if (!(v > 0)) return paint(); if (S.resample) setH(toPx(v, S.unit, S.dpi, d0.oh)); else S.dpi = dpiFor(S.h, v, S.unit); q('[data-rs-fmt]') && (q('[data-rs-fmt]').value = ''); paint(); });
+                    uS.addEventListener('change', () => { S.unit = uS.value; paint(); });
+                    dI.addEventListener('change', () => { const v = Math.max(36, Math.min(1200, Math.round(Number(dI.value) || 300))); if (!S.resample) S.dpi = v; else if (S.unit !== 'px' && S.unit !== 'pc') { const wv = fromPx(S.w, S.unit, S.dpi, d0.ow), hv = fromPx(S.h, S.unit, S.dpi, d0.oh); S.dpi = v; S.w = Math.max(1, toPx(wv, S.unit, v, d0.ow)); S.h = Math.max(1, toPx(hv, S.unit, v, d0.oh)); } else S.dpi = v; paint(); });
+                    kC.addEventListener('change', () => { S.keep = kC.checked; if (S.keep) S.h = Math.max(1, S.w / ratio); paint(); });
+                    rC.addEventListener('change', () => { S.resample = rC.checked; if (!S.resample) { S.w = d0.bw; S.h = d0.bh; S.keep = true; kC.checked = true; if (S.unit === 'px' || S.unit === 'pc') S.unit = 'cm'; uS.value = S.unit; } paint(); });
+                    q('[data-rs-fmt]')?.addEventListener('change', e => { const p = F.find(e.target.value); if (!p) return; let [fw, fh] = p.unit === 'px' ? [p.w, p.h] : F.inPx({...p, dpi: S.dpi}, S.dpi); if ((fw > fh) !== (ratio > 1) && p.group !== 'Écrans') [fw, fh] = [fh, fw];
+                        if (S.keep) { const k = Math.min(fw / d0.bw, fh / d0.bh); S.w = Math.max(1, d0.bw * k); S.h = Math.max(1, d0.bh * k); } else { S.w = fw; S.h = fh; } S.resample = true; rC.checked = true; paint(); });
+                    q('[data-rs-orig]')?.addEventListener('click', () => { st.size = null; d.close(); draw(); commit('Taille d’origine'); paintBoard(); });
+                    d._rs = S; paint();
+                },
+                onSubmit: f => {
+                    const S2 = f.closest('dialog')._rs; if (!S2) return;
+                    const w = Math.round(S2.w), h = Math.round(S2.h);
+                    if (w < 1 || h < 1 || w > 30000 || h > 30000 || w * h > 2.6e8) return window.LCNDA_UI?.fail ? window.LCNDA_UI.fail(f.querySelector('[data-rs-w]'), 'Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus).') : false;
+                    const same = w === d0.bw && h === d0.bh;
+                    st.size = same && S2.dpi === (st.size?.dpi || 0) ? null : {w, h, keep: !!S2.keep, dpi: S2.dpi, method: f.querySelector('[data-rs-method]').value || 'auto'};
+                    commit(st.size ? `Taille de l’image : ${w} × ${h} px` : 'Taille d’origine'); paintBoard();
+                }});
+            return dlgS;
+        }
+        /** ⬚ Image → Taille de la zone de travail… : agrandir ou recadrer la toile, ancrage sur 9 points, couleur de fond (C2) ou transparent */
+        function canvasSizeDialog() {
+            readyFull();
+            // tout se compte en pixels de l'image finale (après Taille de l'image) : « + 200 px » ajoute 200 px au fichier
+            const d0 = dimsOf(), b0 = st.board || {w: 1, h: 1, ax: 0.5, ay: 0.5, bg: '#ffffff'}, dpi = st.size?.dpi || 300, f0 = d0.ow / d0.bw;
+            const cur = {w: d0.ow, h: d0.oh}, base = {w: d0.cw * f0, h: d0.ch * f0};
+            const S = {w: cur.w, h: cur.h, ax: b0.ax, ay: b0.ay, unit: 'px', rel: false};
+            const ARROWS = ['⬉', '⬆', '⬈', '⬅', '●', '➡', '⬋', '⬇', '⬊']; // (pas ↑ ↓ : ce sont les flèches de rangement des listes, heritage-dnd.js)
+            const dlgC = rtDialog({eyebrow: 'IMAGE', title: '⬚ Taille de la zone de travail', wide: true, submitLabel: 'Enregistrer',
+                body: `<div class="fmt-dlg-grid"><div>
+                    <fieldset><legend>Nouvelle taille</legend>
+                        <div class="fmt-row"><label><span>Largeur</span><input type="number" data-cs-w step="any"></label><label><span>Hauteur</span><input type="number" data-cs-h step="any"></label><label><span>Unité</span><select data-cs-unit>${UNITS_RT.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label></div>
+                        <label class="checkbox-line"><input type="checkbox" data-cs-rel> <span data-help="Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image.">Relative (ajouter à la taille actuelle)</span></label>
+                    </fieldset>
+                    <fieldset><legend>Ancrage</legend><div class="fmt-anchor" role="radiogroup" aria-label="Où reste l’image">${ARROWS.map((a, k) => `<button type="button" role="radio" data-cs-anchor="${k}" aria-label="${['En haut à gauche', 'En haut', 'En haut à droite', 'À gauche', 'Au centre', 'À droite', 'En bas à gauche', 'En bas', 'En bas à droite'][k]}">${a}</button>`).join('')}</div><small class="muted">L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour.</small></fieldset>
+                    <fieldset><legend>Fond de la zone ajoutée</legend><label class="checkbox-line"><input type="checkbox" data-cs-transp${b0.bg === 'transparent' ? ' checked' : ''}> Transparent (PNG)</label><label data-cs-bgrow${b0.bg === 'transparent' ? ' hidden' : ''}><span>Couleur</span><input type="color" data-cs-bg value="${esc(/^#[0-9a-f]{6}$/i.test(b0.bg) ? b0.bg : '#ffffff')}"></label></fieldset>
+                </div><div>
+                    <dl class="fmt-before-after"><dt>Maintenant</dt><dd>${cur.w} × ${cur.h} px</dd><dt>Après</dt><dd data-cs-after></dd><dt>À l’impression</dt><dd data-cs-print></dd></dl>
+                    ${st.board ? '<p><button type="button" class="button small secondary" data-cs-orig>↺ Remettre la zone de départ</button></p>' : ''}
+                    <p class="muted">↶ Annuler (⌘Z) revient à la zone d’avant.</p></div></div>`,
+                onOpen: d => {
+                    const q = s0 => d.querySelector(s0), wI = q('[data-cs-w]'), hI = q('[data-cs-h]'), uS = q('[data-cs-unit]'), rC = q('[data-cs-rel]');
+                    const shown = (px, base, cur) => S.rel ? fromPx(px - cur, S.unit, dpi, base) : fromPx(px, S.unit, dpi, base);
+                    const paint = () => { wI.value = String(Math.round(shown(S.w, base.w, cur.w) * (S.unit === 'px' ? 1 : 100)) / (S.unit === 'px' ? 1 : 100)); hI.value = String(Math.round(shown(S.h, base.h, cur.h) * (S.unit === 'px' ? 1 : 100)) / (S.unit === 'px' ? 1 : 100));
+                        d.querySelectorAll('[data-cs-anchor]').forEach(b => { const k = Number(b.dataset.csAnchor), on = k % 3 / 2 === S.ax && Math.floor(k / 3) / 2 === S.ay; b.classList.toggle('is-active', on); b.setAttribute('aria-checked', on); });
+                        q('[data-cs-after]').textContent = `${Math.round(S.w)} × ${Math.round(S.h)} px`; q('[data-cs-print]').textContent = `${fmtNum(S.w / dpi * 2.54, 1)} × ${fmtNum(S.h / dpi * 2.54, 1)} cm à ${dpi} ppp`; };
+                    const read = (inp, base, cur) => { const v = Number(inp.value); if (!Number.isFinite(v)) return null; const px = S.rel ? cur + toPx(v, S.unit, dpi, base) : toPx(v, S.unit, dpi, base); return px >= 1 ? px : null; };
+                    wI.addEventListener('change', () => { const v = read(wI, base.w, cur.w); if (v) S.w = v; paint(); });
+                    hI.addEventListener('change', () => { const v = read(hI, base.h, cur.h); if (v) S.h = v; paint(); });
+                    uS.addEventListener('change', () => { S.unit = uS.value; paint(); });
+                    rC.addEventListener('change', () => { S.rel = rC.checked; paint(); });
+                    d.addEventListener('click', e => { const b = e.target.closest('[data-cs-anchor]'); if (!b) return; const k = Number(b.dataset.csAnchor); S.ax = k % 3 / 2; S.ay = Math.floor(k / 3) / 2; paint(); });
+                    d.addEventListener('keydown', e => { const b = e.target.closest?.('[data-cs-anchor]'); if (!b || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return; e.preventDefault(); let k = Number(b.dataset.csAnchor); k = e.key === 'ArrowLeft' ? (k % 3 ? k - 1 : k) : e.key === 'ArrowRight' ? (k % 3 < 2 ? k + 1 : k) : e.key === 'ArrowUp' ? (k > 2 ? k - 3 : k) : (k < 6 ? k + 3 : k); S.ax = k % 3 / 2; S.ay = Math.floor(k / 3) / 2; paint(); d.querySelector(`[data-cs-anchor="${k}"]`)?.focus(); });
+                    q('[data-cs-transp]').addEventListener('change', e => { q('[data-cs-bgrow]').hidden = e.target.checked; });
+                    q('[data-cs-orig]')?.addEventListener('click', () => { st.board = null; d.close(); draw(); commit('Zone de travail de départ'); paintBoard(); });
+                    d._cs = S; paint();
+                },
+                onSubmit: f => {
+                    const S2 = f.closest('dialog')._cs; if (!S2) return;
+                    const w = Math.round(S2.w), h = Math.round(S2.h);
+                    if (w < 1 || h < 1 || w > 30000 || h > 30000 || w * h > 2.6e8) return window.LCNDA_UI?.fail ? window.LCNDA_UI.fail(f.querySelector('[data-cs-w]'), 'Choisis une taille entre 1 et 30 000 pixels de côté.') : false;
+                    const bg = f.querySelector('[data-cs-transp]').checked ? 'transparent' : (/^#[0-9a-f]{6}$/i.test(f.querySelector('[data-cs-bg]').value) ? f.querySelector('[data-cs-bg]').value : '#ffffff');
+                    st.board = Math.abs(w - base.w) < 1 && Math.abs(h - base.h) < 1 ? null : {w: w / base.w, h: h / base.h, ax: S2.ax, ay: S2.ay, bg};
+                    if (st.size) st.size = {...st.size, w, h, keep: true}; // la taille finale suit la nouvelle zone
+                    draw(); commit(st.board ? `Zone de travail : ${w} × ${h} px` : 'Zone de travail de départ'); paintBoard();
+                }});
+            return dlgC;
+        }
+        /** ℹ️ Fichier → Informations… : titre, auteur, droits, description, mots-clés, date, personnes reliées (dans le fichier enregistré ou exporté) */
+        async function infoDialog() {
+            const F = window.LCNDA_FORMATS; if (!F) return;
+            const v = await F.openInfoDialog({title: 'Informations de l’image', value: {title: docTitle(), ...(st.info || {})}, keys: ['title', 'author', 'rights', 'desc', 'keywords', 'date', 'people'], what: 'Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…).'});
+            if (!v) return;
+            st.info = Object.keys(v).length ? v : null; if (!st.info) delete st.info;
+            commit('Informations de l’image');
         }
         function cropOf(comp) {
             const W = comp.width, H = comp.height;
@@ -3849,8 +4142,9 @@
                 const fullC = await renderFull();
                 const ext0 = String(from || '').split('.').pop().toLowerCase();
                 const type = hasAlpha() ? 'image/png' : ext0 === 'png' ? 'image/png' : ext0 === 'webp' ? 'image/webp' : ext0 === 'gif' ? 'image/png' : 'image/jpeg';
-                const blob = await new Promise(res => fullC.toBlob(res, type, 0.93));
+                let blob = await new Promise(res => fullC.toBlob(res, type, 0.93));
                 if (!blob) throw new Error('Image trop grande pour être enregistrée par le navigateur.');
+                blob = await rtEmbedMeta(blob, await metaOf()); // ℹ️ les informations et la résolution dans le fichier
                 const fd = new FormData(); fd.append('file', blob, 'retouche.' + (type.split('/')[1] === 'jpeg' ? 'jpg' : type.split('/')[1])); fd.append('media_id', item.id); fd.append('mode', saveMode === 'copy' ? 'copy' : 'version'); fd.append('show', saveMode === 'show' ? '1' : '0'); fd.append('csrf', A().state.csrf);
                 const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
                 const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
@@ -3922,7 +4216,7 @@
             const SIZES = [['1920x1080', 'Écran 16:9 — 1920 × 1080'], ['1080x1080', 'Carré — 1080 × 1080'], ['1240x1754', 'A4 portrait (150 dpi) — 1240 × 1754'], ['1754x1240', 'A4 paysage (150 dpi) — 1754 × 1240'], ['2480x3508', 'A4 portrait (300 dpi) — 2480 × 3508'], ['1500x2100', 'Carte postale — 1500 × 2100'], ['custom', 'Autre taille…']];
             ext.openDialog({eyebrow: 'RETOUCHE', title: '⬜ Partir d’un canevas vide', submitLabel: 'Créer et ouvrir',
                 body: `<div class="form-grid"><label class="span-2">Format<select name="size">${SIZES.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
-                    <label>Largeur (pixels)<input type="number" name="w" value="1920" min="16" max="8000"></label><label>Hauteur (pixels)<input type="number" name="h" value="1080" min="16" max="8000"></label>
+                    <label>Largeur<input data-unit="px" type="number" name="w" value="1920" min="16" max="8000"></label><label>Hauteur<input data-unit="px" type="number" name="h" value="1080" min="16" max="8000"></label>
                     <label>Fond<select name="bg"><option value="white">Blanc</option><option value="transparent">Transparent</option><option value="color">Une couleur…</option></select></label><label>Couleur du fond<input type="color" name="color" value="#f3ece4"></label>
                     <label class="span-2">Nom<input name="title" value="Canevas" maxlength="200"></label></div><p class="muted">Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)…</p>`,
                 onOpen: d => { const sz = d.querySelector('[name=size]'), w = d.querySelector('[name=w]'), h = d.querySelector('[name=h]'); sz.addEventListener('change', () => { if (sz.value !== 'custom') { const [a, b] = sz.value.split('x'); w.value = a; h.value = b; } }); [w, h].forEach(x => x.addEventListener('input', () => { sz.value = SIZES.find(([k]) => k === `${w.value}x${h.value}`)?.[0] || 'custom'; })); },

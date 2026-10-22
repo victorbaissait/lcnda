@@ -276,8 +276,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .person-hero-status { display: flex; flex-direction: column; gap: 7px; align-items: flex-end; justify-content: center; }
 .outside-genealogy-badge { border: var(--line); padding: 5px 10px; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; background: var(--person-badge-outside-bg, #ffeac0); color: var(--person-badge-outside-text, #7a3800); }
 .artist-badge { border: var(--line); padding: 5px 10px; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; background: var(--person-badge-artist-bg, #e8d5f5); color: var(--person-badge-artist-text, #5c1a99); }
-.event-type-artistic-toggle { display: flex; align-items: center; gap: 5px; font-size: .8em; cursor: pointer; white-space: nowrap; }
-.event-type-artistic-toggle input { cursor: pointer; }
+.event-type-artistic-check { display: flex; align-items: center; gap: 5px; font-size: .8em; cursor: pointer; white-space: nowrap; }
+.event-type-artistic-check input { cursor: pointer; }
 #person-artist-discipline-wrap { display: inline-flex; align-items: center; }
 #person-artist-display-wrap { padding: 6px 0 0 2px; }
 .status-badge.living { background: var(--person-badge-living-bg, #bdffd7); color: var(--person-badge-living-text, #000); }
@@ -4486,6 +4486,8 @@ body.k-print-doc :is(.page-actions,.card-head-actions,.person-hero-tools,.person
 :root[data-theme="dark"] .k-import-prev th{background:#2a2d33}
 :root[data-theme="dark"] .k-import-prev th,:root[data-theme="dark"] .k-import-prev td{border-color:#3a3f46}
 :root[data-theme="dark"] .k-import .modal-actions{border-top-color:#e8e8e8}
+/* 🔎 Recherche → types de recherche à ranger (fenêtre « Réordonner » et Maintenance → Apparence) : sur un téléphone, les boutons passent sous le nom */
+@media (max-width:560px){.research-kind-dialog .dashboard-reorder-row,#research-kinds-config .dashboard-reorder-row{grid-template-columns:18px 26px minmax(0,1fr)}.research-kind-dialog .dashboard-reorder-row b,#research-kinds-config .dashboard-reorder-row b{overflow-wrap:normal}.research-kind-dialog .dashboard-reorder-row .order-actions,#research-kinds-config .dashboard-reorder-row .order-actions{grid-column:2/-1;justify-self:end;margin-left:auto}.research-kind-dialog .dashboard-reorder-row.ord-row,#research-kinds-config .dashboard-reorder-row.ord-row{flex-wrap:wrap}.research-kind-dialog .dashboard-reorder-row.ord-row>b,#research-kinds-config .dashboard-reorder-row.ord-row>b{flex:1 1 150px!important}}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

@@ -47,8 +47,9 @@
     /** Enregistre seulement les champs donnés (la liste garde tri et filtre, le lecteur vitesse et enchaînement). */
     const savePrefs = (kind, fields) => { try { const all = loadPrefs(); all[kind] = {...(all[kind] || {}), ...fields}; localStorage.setItem(PREFS_KEY, JSON.stringify(all)); } catch (_) {} };
 
-    const fmtDur = sec => {
+    const fmtDur = sec => { // K17 : l'affichage commun des durées (« 3:20 », « 1:05:00 »)
         if (sec == null || !isFinite(sec)) return '';
+        if (window.LCNDA_UI?.clock) return window.LCNDA_UI.clock(Math.round(sec));
         const s = Math.round(sec), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), r = s % 60;
         return h ? `${h}:${String(m).padStart(2, '0')}:${String(r).padStart(2, '0')}` : `${m}:${String(r).padStart(2, '0')}`;
     };
@@ -139,7 +140,7 @@
                 <button type="button" class="button small secondary" data-av="fwd" title="Avancer de ${fmtSkip(skip)} (réglable dans Maintenance › Apparence)">+${fmtSkip(skip)}</button>
                 <button type="button" class="button small secondary" data-av="next" title="${word} suivant(e)">⏭</button>
                 <span class="av-rate">Vitesse <select class="av-rate-select" aria-label="Vitesse">${rateOptions(p.rate)}</select><input type="range" class="av-rate-range" min="${RATE_MIN}" max="${RATE_MAX}" step="0.05" value="${p.rate}" aria-label="Vitesse (curseur)" title="Glisser : de ${fmtRate(RATE_MIN)} à ${fmtRate(RATE_MAX)} · double-clic : 1×"><output class="av-rate-out">${fmtRate(p.rate)}</output><button type="button" class="button small secondary av-rate-reset" title="Remettre la vitesse normale (1×)"${p.rate === 1 ? ' disabled' : ''}>↺ 1×</button></span>
-                <label class="av-auto"><input type="checkbox" class="av-auto-box"${p.auto ? ' checked' : ''}> Enchaîner ${opts.chainLabel || (kind === 'audio' ? 'les sons' : 'les vidéos')}<span data-help="À la fin d’un${kind === 'audio' ? ' son, le suivant' : 'e vidéo, la suivante'} de la liste démarre tout${kind === 'audio' ? ' seul' : 'e seule'}, dans l’ordre du tri choisi."></span></label>
+                <label class="ui-toggle av-auto"><input type="checkbox" class="av-auto-box"${p.auto ? ' checked' : ''}><i></i>Enchaîner ${opts.chainLabel || (kind === 'audio' ? 'les sons' : 'les vidéos')}<span data-help="À la fin d’un${kind === 'audio' ? ' son, le suivant' : 'e vidéo, la suivante'} de la liste démarre tout${kind === 'audio' ? ' seul' : 'e seule'}, dans l’ordre du tri choisi."></span></label>
                 <button type="button" class="button small secondary" data-av="size" title="Agrandir / réduire la vidéo" hidden>⤢</button>
                 <button type="button" class="button small ghost" data-av="close" title="Fermer le lecteur">✕</button>
             </div>

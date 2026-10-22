@@ -14,21 +14,25 @@
     const toast = (...a) => A().toast(...a);
     const kit = () => A()?.shortcutKit;
     const KEY = 'genealogie-editor-shortcuts', CMDS = 'genealogie-editor-cmds', TAB = 'genealogie-editor-shortcuts-tab';
-    const EDITORS = [['montage', '🎬', 'Montage vidéo'], ['audio', '🎧', 'Son'], ['retouch', '🎚️', 'Retouche des photos'], ['layout', '📐', 'Mise en page'], ['vector', '✒️', 'Dessin vectoriel'], ['house', '🏠', 'Maison (plan et 3D)'], ['decortree', '🌳', 'Arbre décoratif'], ['keynote', '🎤', 'Présentation (Keynote)']];
+    const EDITORS = [['montage', '🎬', 'Montage vidéo'], ['audio', '🎧', 'Son'], ['audio-quick', '⚡', 'Son rapide'], ['audio-studio', '🎚️', 'Studio son'], ['retouch', '🎚️', 'Retouche des photos'], ['layout', '📐', 'Mise en page'], ['vector', '✒️', 'Dessin vectoriel'], ['house', '🏠', 'Maison (plan et 3D)'], ['decortree', '🌳', 'Arbre décoratif'], ['keynote', '🎤', 'Présentation (Keynote)'], ['sheet', '🧮', 'Tableur']];
     // les attributs qui disent « quelle commande » sur les boutons de chaque outil
     const ATTR = {
         montage: /^data-mt-cmd$/, // ses menus disent tout (lecture, outils, onglets, pistes)
         audio: /^data-(avx-(play|home|undo|redo|op|zoom|save)|au-(projects|saveproj))$/,
+        'audio-quick': /^data-aq-(cmd|tog|force|ab|save)$/, // ⚡ Son rapide (heritage-audio-quick.js)
+        'audio-studio': /^data-as-cmd$/, // 🎚️ Studio son : toutes ses commandes ont un bouton (même celles des menus)
         retouch: /^data-rt-(cmd|mode)$/,
         layout: /^data-ly-(cmd|tool|ptab)$/,
         vector: /^data-vx-(cmd|tool|tab)$/,
         house: /^data-hs-(cmd|tool|tab|mode)$/,
         decortree: /^data-dt-(cmd|shape)$/,
         keynote: /^data-kn-(cmd|ins|tab)$/,
+        sheet: /^data-xl-cmd$/,
     };
     const ID_RX = /^data-[a-z0-9-]{2,40}(=[^<>"`\\\u0000-\u001f]{0,60})?$/, COMBO_RX = /^[^<>"`\u0000-\u001f]{1,40}$/;
     // les touches que l'outil connaît déjà (une touche à soi les remplace, on prévient)
     const BUILTIN = {
+        sheet: {'Mod+S': 'Enregistrer', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', 'Mod+Y': 'Rétablir', 'Mod+C': 'Copier', 'Mod+X': 'Couper', 'Mod+V': 'Coller', 'Mod+Shift+V': 'Coller les valeurs', 'Mod+A': 'Tout sélectionner', 'Mod+B': 'Gras', 'Mod+I': 'Italique', 'Mod+U': 'Souligné', 'Mod+D': 'Recopier vers le bas', 'Mod+R': 'Recopier vers la droite', 'Mod+F': 'Rechercher et remplacer', 'Mod+K': 'Une personne dans la cellule', 'Mod+;': 'Date du jour', 'Mod+P': 'Imprimer', 'Mod+O': 'Importer', 'Mod+Shift+L': 'Filtrer', 'Mod+Shift+E': 'Exporter', F2: 'Écrire dans la case', F4: '$A$1 ↔ A1 (dans une formule)', 'Shift+F3': 'Choisir une fonction', 'Alt+=': 'Somme automatique', Enter: 'Valider et descendre', Tab: 'Valider et aller à droite', Escape: 'Annuler la saisie', Delete: 'Effacer le contenu', Backspace: 'Effacer le contenu'},
         decortree: {Escape: 'Fermer la fenêtre', Enter: 'Créer l’arbre'},
         keynote: {'Mod+S': 'Enregistrer', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', 'Mod+Y': 'Rétablir', 'Mod+C': 'Copier', 'Mod+X': 'Couper', 'Mod+V': 'Coller', 'Mod+D': 'Dupliquer', 'Mod+A': 'Tout sélectionner', 'Mod+G': 'Grouper', 'Mod+Shift+G': 'Dissocier', 'Mod+L': 'Verrouiller / déverrouiller',
             'Mod+]': 'Avancer', 'Mod+[': 'Reculer', 'Mod+Shift+]': 'Tout devant', 'Mod+Shift+[': 'Tout derrière', 'Mod+Enter': 'Lire depuis cette diapositive', 'Mod+Alt+Enter': 'Lire depuis le début', Enter: 'Écrire dans l’objet choisi', Escape: 'Ne rien choisir / finir d’écrire',
@@ -37,6 +41,9 @@
             V: 'Choisir', H: 'Main', R: 'Pièce (ou tourner l’objet choisi)', W: 'Mur', P: 'Pièce de forme libre', D: 'Porte', F: 'Fenêtre', M: 'Cote', T: 'Texte'},
         montage: {'Mod+S': 'Enregistrer le projet', 'Mod+Shift+S': 'Enregistrer le projet sous un autre nom', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', 'Mod+Y': 'Rétablir', Space: 'Lire / pause', B: 'Couper ici', Backspace: 'Enlever l’élément choisi', Delete: 'Enlever l’élément choisi'},
         audio: {'Mod+S': 'Enregistrer le projet', 'Mod+Shift+S': 'Enregistrer une copie du projet', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', Space: 'Écouter / pause', Backspace: 'Couper la sélection', Delete: 'Couper la sélection'},
+        'audio-quick': {'Mod+S': 'Enregistrer et afficher cette version', 'Mod+Shift+S': 'Enregistrer le projet sous un autre nom', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', Space: 'Écouter / pause', A: 'Écouter l’avant (maintenu)'},
+        'audio-studio': {'Mod+S': 'Enregistrer le projet', 'Mod+Shift+S': 'Enregistrer le projet sous…', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', 'Mod+Y': 'Rétablir', 'Mod+X': 'Couper', 'Mod+C': 'Copier', 'Mod+V': 'Coller', 'Mod+A': 'Tout sélectionner', 'Mod+E': 'Zoom sur la sélection', 'Mod+T': 'Insérer l’heure (transcription)',
+            Space: 'Écouter / pause', M: 'Marqueur ici', 'Shift+M': 'Nouvelle zone (la sélection)', A: 'Écouter l’avant (maintenu)', B: 'Pinceau de réparation', V: 'Sélection', Backspace: 'Supprimer la sélection', Delete: 'Supprimer la sélection', ArrowLeft: 'Reculer (⇧ : agrandir la sélection)', ArrowRight: 'Avancer (⇧ : agrandir la sélection)'},
         retouch: {'Mod+S': 'Enregistrer le projet', 'Mod+Shift+S': 'Enregistrer le projet sous un autre nom', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', 'Mod+A': 'Tout sélectionner', 'Mod+D': 'Désélectionner', 'Mod+Shift+I': 'Inverser la sélection', 'Mod+J': 'Sélection → calque', 'Mod+G': 'Grouper',
             Enter: 'Valider (recadrage, plume)', '[': 'Pinceau plus petit', ']': 'Pinceau plus grand', '+': 'Zoom avant', '=': 'Zoom avant', '-': 'Zoom arrière', 0: 'Ajuster', 1: 'Taille réelle', Space: 'Main (en restant appuyé)', Backspace: 'Supprimer', Delete: 'Supprimer', X: 'Intervertir couleur et fond', 'Shift+M': 'Sélection ellipse',
             V: 'Déplacer', M: 'Sélection rectangle', L: 'Lasso', P: 'Plume', W: 'Baguette magique', C: 'Recadrer', J: 'Correcteur de taches', R: 'Réparer (plis, déchirures)', S: 'Tampon', B: 'Pinceau', U: 'Formes', T: 'Texte', H: 'Main', Z: 'Zoom'},
@@ -74,7 +81,7 @@
         dl.querySelectorAll('button').forEach(b => {
             const a = [...b.attributes].find(x => rx.test(x.name)); if (!a) return;
             const id = a.value ? `${a.name}=${a.value}` : a.name; if (!ID_RX.test(id)) return;
-            const menu = b.closest('.h-rt-menu, .ly-menus details, .h-mt-menubar details, .vx-menus details');
+            const menu = b.closest('.h-rt-menu, .ly-menus details, .h-mt-menubar details, .vx-menus details, .xl-menus details');
             if (found.has(id) && (!menu || found.get(id).menu)) return; // le nom du menu passe avant celui d'un bouton
             const txt = clean(b.textContent), hasWords = (txt.match(/\p{L}/gu) || []).length >= 3;
             const label = (clean(b.querySelector(':scope > span')?.textContent) || (hasWords ? txt : '') || clean(b.dataset.tbLabel) || clean(b.title) || txt)
@@ -91,7 +98,7 @@
     }
     /* ── ⌨️ La touche dans la bulle d'aide des boutons : la touche à soi si on en a donné une, sinon celle de l'outil
      *     (data-shortcut posé par l'outil, ou la touche écrite dans le menu pour la même commande) ── */
-    const MENU_SEL = '.h-rt-menu, .ly-menus details, .h-mt-menubar details, .vx-menus details';
+    const MENU_SEL = '.h-rt-menu, .ly-menus details, .h-mt-menubar details, .vx-menus details, .xl-menus details';
     // les boutons de barre qui font la même chose qu'une commande de menu (pour y lire la touche à soi)
     const ALIAS = {
         montage: b => b.dataset.mtOp ? `data-mt-cmd=${['undo', 'redo'].includes(b.dataset.mtOp) ? '' : 'op:'}${b.dataset.mtOp}` : b.hasAttribute('data-mt-play') ? 'data-mt-cmd=play' : b.hasAttribute('data-mt-saveproj') ? 'data-mt-cmd=proj' : '',

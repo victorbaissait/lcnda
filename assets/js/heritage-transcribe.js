@@ -134,17 +134,18 @@
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
         let t = {id: 0, title: '', kind: 'bapteme', media_id: 0, filename: '', date_text: '', place: '', source: '', body: '', data: {zones: [], people: [], status: 'todo', view: TV.viewOf()}};
         if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = TV.viewOf(r.data?.view); if (!['todo', 'doing', 'done'].includes(t.data.status)) t.data.status = String(t.body || '').trim() ? 'doing' : 'todo'; } catch (e) { return toast(e.message, 'error'); } }
-        else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = ctx.title || ''; t.body = ctx.text || ''; }
+        else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = ctx.title || ''; t.body = ctx.text || ''; if (KINDS.some(k => k[0] === ctx.kind)) t.kind = ctx.kind; } // kind : ex. « lettre » pour le dos d'une carte postale
         let dirty = false, tool = 'pan', fitMode = 'page', fitOn = true, zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-tx-dlg';
         dlg.innerHTML = `<div class="h-tx">
-            <header class="h-tx-top"><span class="h-tx-logo">📜</span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="Titre de l’acte (ex. Baptême de Jean Martin, 1790)" value="${esc(t.title)}">
+            <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="Annuler" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="Rétablir" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="Titre de l’acte (ex. Baptême de Jean Martin, 1790)" value="${esc(t.title)}">
                 <select data-tx="kind" title="Genre d’acte">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <input data-tx="date_text" placeholder="Date" value="${esc(t.date_text)}" title="Date de l’acte"><input data-tx="place" placeholder="Lieu" value="${esc(t.place)}" title="Paroisse, commune"><input data-tx="source" placeholder="Source (AD, cote, vue)" value="${esc(t.source)}" title="Archives, cote, numéro de vue">
                 <select data-tx-state title="Où en est cette transcription (pour la liste « Transcriptions d’actes »)">${[['todo', 'À faire'], ['doing', 'En cours'], ['done', 'Finie']].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <span class="spacer"></span><span class="muted h-tx-status" data-tx-status data-ui-status></span>
                 <button type="button" class="button small secondary" data-tx-cmd="export" title="Le texte (.txt), l’impression ou un PDF (image + texte)">⤓ Exporter ▾</button><button type="button" class="button small" data-tx-cmd="save" title="Enregistrer" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
             <div class="h-tx-main">
+                <nav class="h-tx-rail" data-tx-rail aria-label="Outils"><button type="button" data-tx-tool="pan" title="Déplacer l’image, ou barre d’espace" aria-label="Déplacer l’image" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)" aria-label="Dessiner une zone" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="Loupe qui suit la souris (la molette change le grossissement)" aria-label="Loupe" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="Tourner l’image de 90°" aria-label="Tourner de 90°">⟳</button><button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)" aria-label="Image de l’acte">🖼️</button></nav>
                 <section class="h-tx-left">
                     <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}</div>
                     <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).</p></div>
@@ -154,7 +155,7 @@
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Reconnaissance d’écriture manuscrite, si un modèle est installé (Maintenance)" data-help="La lecture d’une écriture à la main (HTR) : elle demande un modèle installé dans Maintenance. Relis toujours : elle se trompe sur les noms." data-help-faq="transcription">✍️ Lire (manuscrit)</button>
                         <select data-tx-lang title="Langue du texte"><option value="fra">Français</option><option value="lat">Latin</option><option value="fra+lat">Français + latin</option><option value="eng">Anglais</option><option value="deu">Allemand</option><option value="ita">Italien</option><option value="spa">Espagnol</option></select>
                         <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
-                        <details class="h-tx-more"><summary>Plus ▾</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="checkbox-line h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}> Lire et exporter l’image améliorée</label></div></details></div>
+                        <details class="h-tx-more"><summary>Plus ▾</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="ui-toggle h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>Lire et exporter l’image améliorée</label></div></details></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="Insérer ${esc(c)}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.">${esc(t.body)}</textarea></div>
                     <div class="h-tx-found" data-tx-found></div>
@@ -164,7 +165,9 @@
         const $ = s => dlg.querySelector(s), area = $('[data-tx-body]'), mirror = $('[data-tx-mirror]'), svg = $('[data-tx-svg]'), world = $('[data-tx-world]'), img = $('[data-tx-img]'), stage = $('[data-tx-stage]');
         const UI = window.LCNDA_UI || {}, STATES = {'modifié': 'dirty', '✓ Enregistré': 'saved', 'Enregistrement…': 'saving'};
         const status = s => { const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
-        const touch = () => { dirty = true; status('modifié'); };
+        let commitT = 0, HX = null, txBar = null; // E1 : un vrai historique ↶ ↷ (texte, zones, personnes, réglages de l'image, fiche de l'acte) ; K18 : la barre du bas
+        const flushCommit = () => { if (commitT) { clearTimeout(commitT); commitT = 0; } HX?.commit(); };
+        const touch = () => { dirty = true; status('modifié'); clearTimeout(commitT); commitT = setTimeout(() => { commitT = 0; HX?.commit(); }, 450); };
         // E4 : une image glissée (ou collée) sur l'acte entre dans les Médias et devient l'image de l'acte
         UI.bindFileDrop?.(stage, async files => {
             const f = files[0], fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
@@ -202,7 +205,7 @@
             $('[data-tx-zoomtxt]').textContent = now; b.dataset.fit = on ? fitMode : '';
             b.title = `Zoom : ${on ? FIT_HELP[fitMode] : now}. Clic : ${FIT_HELP[next]} (puis ${FIT_HELP[FIT_NEXT[next]]}, ${FIT_HELP[FIT_NEXT[FIT_NEXT[next]]]})`;
         }
-        const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); paintOverlay(); paintZoomLabel(); };
+        const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); paintOverlay(); paintZoomLabel(); txBar?.sync(); };
         /** ⤢ : trois façons d'ajuster — toute l'image, la largeur (on lit l'acte de haut en bas), la taille réelle (100 %) */
         function applyFit(mode = 'page', {keepY = false} = {}) {
             if (!imgW) return; const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return;
@@ -272,7 +275,7 @@
             g.innerHTML = t.data.zones.map((z, i) => `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id ? ' class="is-sel"' : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${selZone === z.id ? .38 : .2}" stroke="${colorOf(z, i)}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || 'Zone non reliée')}${selZone === z.id ? ' — glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)' : ''}</title></rect>`).join('');
             paintHandles();
         }
-        function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); }
+        function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); paintTxBar(); }
         /* ─── la zone choisie : 8 poignées (coins et milieux), toujours de la même taille à l'écran ─── */
         // les poignées sont nommées dans l'image (nw = coin haut-gauche de l'image) ; leur curseur suit leur direction à l'écran
         const HANDLES = [['n', .5, 0], ['e', 1, .5], ['s', .5, 1], ['w', 0, .5], ['nw', 0, 0], ['ne', 1, 0], ['se', 1, 1], ['sw', 0, 1]]; // les coins par-dessus
@@ -314,10 +317,10 @@
         /* ─── ⌘Z / ⇧⌘Z pour les zones (le texte garde l'annulation de la case) ─── */
         const hist = {undo: [], redo: []}, cloneZones = () => t.data.zones.map(z => ({...z}));
         /** à appeler juste AVANT de changer les zones */
-        const snap = () => { hist.undo.push(cloneZones()); if (hist.undo.length > 100) hist.undo.shift(); hist.redo = []; };
+        const snap = () => flushCommit(); // l'état d'avant est gardé dans l'historique
         function undoZones(redo = false) {
-            const from = redo ? hist.redo : hist.undo, to = redo ? hist.undo : hist.redo; if (!from.length) { status(redo ? 'Rien à rétablir' : 'Rien à annuler'); return false; }
-            to.push(cloneZones()); t.data.zones = from.pop(); if (!t.data.zones.some(z => z.id === selZone)) selZone = null; touch(); drawZones(); status(redo ? '↷ Zone rétablie' : '↶ Zone annulée'); return true;
+            flushCommit(); const ok = HX ? (redo ? HX.redo() : HX.undo()) : false;
+            status(ok ? (redo ? '↷ Rétabli' : '↶ Annulé') : (redo ? 'Rien à rétablir' : 'Rien à annuler')); return ok;
         }
         /** H7 : la zone part tout de suite, « ↶ Annuler » la remet à sa place (liée au même passage) */
         function deleteZone(id = selZone) {
@@ -417,7 +420,9 @@
             const corner = resize ? [['nw', 0, 0], ['ne', 1, 0], ['se', 1, 1], ['sw', 0, 1]].map(([k, fx, fy]) => { const [X, Y] = rotPt(z.x + z.w * fx, z.y + z.h * fy); return [k, X + Y]; }).sort((a, b) => b[1] - a[1])[0][0] : 'move';
             setGeom(z, editRect({x: z.x, y: z.y, w: z.w, h: z.h}, corner, dx, dy)); touch(); paintZoneRects(); reveal(z);
         }
-        const setTool = k => { tool = k; dlg.querySelectorAll('[data-tx-tool]').forEach(b => b.classList.toggle('is-active', b.dataset.txTool === k)); stage.dataset.tool = k; };
+        const TOOL_HELP = {pan: 'Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir', zone: 'Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés'};
+        function paintTxBar() { if (!txBar) return; txBar.setHelp(TOOL_HELP[tool] || ''); txBar.setWhere(imgW ? `${imgW} × ${imgH} px · ${A().plural ? A().plural(t.data.zones.length, 'zone') : t.data.zones.length + ' zones'}` : 'Pas encore d’image'); txBar.sync(); }
+        const setTool = k => { tool = k; dlg.querySelectorAll('[data-tx-tool]').forEach(b => { b.classList.toggle('is-active', b.dataset.txTool === k); b.setAttribute('aria-pressed', String(b.dataset.txTool === k)); }); stage.dataset.tool = k; paintTxBar(); };
         setTool('pan');
         /* ─── ce qui est repéré : noms (et fiches), dates, lieux, métiers ─── */
         function paintPeople() {
@@ -619,6 +624,27 @@
         // la fenêtre change de taille (⛶, panneau) : l'ajustement choisi (toute l'image, largeur) suit
         let roW = 0, roH = 0; const ro = new ResizeObserver(() => { const r = stage.getBoundingClientRect(); if (!imgW || drag || (r.width === roW && r.height === roH)) return; roW = r.width; roH = r.height; if (fitOn && fitMode !== 'real') applyFit(fitMode, {keepY: true}); else applyView(); }); ro.observe(stage);
         renderBar(); paintMirror(); paintPeople(); await loadImage();
+        /* E1 : l'historique (instantanés de tout l'acte) ; ⌘Z dans une case de texte garde l'annulation de la case */
+        const F_KEYS = ['title', 'kind', 'date_text', 'place', 'source'];
+        HX = UI.editorHistory?.({get: () => ({f: Object.fromEntries(F_KEYS.map(k => [k, $(`[data-tx="${k}"]`).value])), st: $('[data-tx-state]').value, body: area.value, zones: t.data.zones, people: t.data.people, view: t.data.view}),
+            set: o => { F_KEYS.forEach(k => { $(`[data-tx="${k}"]`).value = o.f[k] ?? ''; t[k] = o.f[k] ?? ''; }); $('[data-tx-state]').value = o.st; t.data.status = o.st;
+                area.value = o.body; before = o.body; t.body = o.body; t.data.zones = o.zones || []; t.data.people = o.people || []; if (!t.data.zones.some(z => z.id === selZone)) selZone = null;
+                const vOld = JSON.stringify(t.data.view); t.data.view = TV.viewOf(o.view); syncControls(); if (JSON.stringify(t.data.view) !== vOld) { geom(); applyImage(); }
+                dirty = true; status('modifié'); drawZones(); paintMirror(); paintPeople(); },
+            onChange: h => { $('[data-tx-hist="undo"]').disabled = !h.canUndo(); $('[data-tx-hist="redo"]').disabled = !h.canRedo(); }});
+        HX?.reset();
+        dlg.addEventListener('click', e => { const hb = e.target.closest('[data-tx-hist]'); if (hb) undoZones(hb.dataset.txHist === 'redo'); });
+        const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
+        UI.editorMenus?.($('[data-tx-menus]'), {
+            Fichier: () => [{icon: '💾', label: 'Enregistrer', shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: 'Exporter (texte, PDF, imprimer)…', run: cmdOf('export')}, '-', {icon: '🖼️', label: 'Image de l’acte…', run: cmdOf('image')}, {icon: '↪', label: 'Mettre le texte dans le média', run: cmdOf('tomedia')}, {icon: '📋', label: 'Copier le texte', run: cmdOf('copy')}, '-', {icon: '×', label: 'Fermer', run: cmdOf('close')}],
+            Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: 'Modèle d’acte', run: cmdOf('template')}, {icon: '🧭', label: 'Repérer les noms, dates, lieux', run: cmdOf('detect')}, {icon: '🔎', label: 'Lire (imprimé)', run: cmdOf('ocr')}, {icon: '✍️', label: 'Lire (manuscrit)', run: cmdOf('htr')}],
+            Outils: () => [{icon: '✋', label: 'Déplacer l’image', shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: 'Dessiner une zone', shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: 'Loupe', shortcut: 'L', run: cmdOf('loupe')}],
+            Affichage: () => [{icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: 'Toute la largeur (pour lire)', run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: 'Zoom arrière', shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-', {icon: '⟳', label: 'Tourner de 90°', run: cmdOf('rot')}, {icon: '↺', label: 'Image d’origine', run: cmdOf('resetview')}]});
+        UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});
+        if (UI.editorStatus) { // K18 : l'image à gauche, l'aide de l'outil au milieu, le zoom à droite (⌘ + molette, ⌘0, ⌘1)
+            txBar = UI.editorStatus({zoom: {get: () => zoom, set: k => { if (!imgW) return; const r = stage.getBoundingClientRect(); zoomAt(k, r.width / 2, r.height / 2); }, fit: () => imgW && applyFit('page'), min: .02, max: 20}});
+            $('.h-tx').appendChild(txBar); paintTxBar();
+        }
         if (!t.filename && !ctx.id) setTimeout(pickImage, 50);
         return {get t() { return t; }, detect: runDetect, save};
     }

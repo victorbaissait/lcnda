@@ -38,8 +38,9 @@ function dchf_century(int $y): string
     return ($roman[$c] ?? (string) $c) . 'e s.';
 }
 
-/** les personnes (sans les animaux) avec naissance et décès choisis au mieux */
-function dchf_people(PDO $pdo): array
+/** les personnes (sans les animaux) avec naissance et décès choisis au mieux ; seulement le groupe et la période choisis
+ *  dans « Depuis l'app » (lib/diagram_options.php), sauf $all */
+function dchf_people(PDO $pdo, bool $all = false): array
 {
     $people = [];
     foreach ($pdo->query("SELECT id, first_name, last_name, gender, COALESCE(occupation,'') AS occupation FROM persons WHERE COALESCE(kind,'')<>'animal'") as $r) {
@@ -55,7 +56,17 @@ function dchf_people(PDO $pdo): array
         $isBirth = in_array($e['tag'], ['BIRT', 'CHR', 'BAPM'], true); $k = $isBirth ? 'birth' : 'death'; $rk = $isBirth ? 'bRank' : 'dRank';
         if ($rank[$e['tag']] < $people[$pid][$rk]) { $people[$pid][$k] = $d; $people[$pid][$rk] = $rank[$e['tag']]; }
     }
+    if (!$all && dchf_filtered()) {
+        $keep = dgo_restrict($pdo, null);
+        $people = array_filter($people, static fn($p) => ($keep === null || isset($keep[$p['id']])) && dgo_year_ok($p['birth'][0] ?? null));
+    }
     return $people;
+}
+
+/** un groupe de personnes ou une période est-il choisi (« Depuis l'app ») ? */
+function dchf_filtered(): bool
+{
+    return function_exists('dgo_request') && dgo_active(dgo_request());
 }
 
 /** les mariages : famille, date, les deux conjoints */
@@ -84,6 +95,7 @@ function diagram_numbers(PDO $pdo, array $q): array
 {
     $what = (string) ($q['what'] ?? '');
     if (!in_array($what, DIAGRAM_NUMBERS_WHAT, true)) { throw new LcndaBadInput('Donnée inconnue.'); }
+    require_once __DIR__ . '/diagram_options.php'; dgo_request($q); // groupe de personnes et période (onglet « Depuis l'app »)
     $gender = in_array($q['gender'] ?? '', ['male', 'female'], true) ? (string) $q['gender'] : '';
     $limit = 6000; // assez pour l'essaim et l'histogramme, sans tout figer
     $gLabel = static fn(string $g) => $g === 'male' ? 'Hommes' : ($g === 'female' ? 'Femmes' : 'Inconnu');
@@ -141,12 +153,13 @@ function diagram_numbers(PDO $pdo, array $q): array
             $people = dchf_people($pdo);
             foreach ($people as $p) { if ($p['occupation'] !== '' && $p['birth']) { $pairs[] = [$p['birth'][0] + 30, $p['occupation']]; } }
             $occ = $pdo->query("SELECT e.person_id, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) AS val, e.sort_date, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag='OCCU'");
-            foreach ($occ as $r) { $d = dchf_date($r['sort_date'], $r['year']); $v = trim((string) $r['val']); if ($v === '') { continue; } if (!$d && isset($people[(int) $r['person_id']]['birth'])) { $d = [$people[(int) $r['person_id']]['birth'][0] + 30]; } if ($d) { $pairs[] = [$d[0], $v]; } }
+            foreach ($occ as $r) { if (dchf_filtered() && !isset($people[(int) $r['person_id']])) { continue; } $d = dchf_date($r['sort_date'], $r['year']); $v = trim((string) $r['val']); if ($v === '') { continue; } if (!$d && isset($people[(int) $r['person_id']]['birth'])) { $d = [$people[(int) $r['person_id']]['birth'][0] + 30]; } if ($d) { $pairs[] = [$d[0], $v]; } }
         } elseif ($what === 'births_surnames') {
             foreach (dchf_people($pdo) as $p) { if ($p['birth'] && trim($p['last']) !== '') { $pairs[] = [$p['birth'][0], mb_convert_case(mb_strtolower(trim($p['last'])), MB_CASE_TITLE, 'UTF-8')]; } }
         } else {
-            $q2 = $pdo->query("SELECT pl.name, e.sort_date, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','CHR','BAPM') AND TRIM(COALESCE(pl.name,''))<>''");
-            foreach ($q2 as $r) { $d = dchf_date($r['sort_date'], $r['year']); if ($d) { $pairs[] = [$d[0], trim(explode(',', (string) $r['name'])[0])]; } }
+            $only = dchf_filtered() ? dchf_people($pdo) : null;
+            $q2 = $pdo->query("SELECT e.person_id, pl.name, e.sort_date, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','CHR','BAPM') AND TRIM(COALESCE(pl.name,''))<>''");
+            foreach ($q2 as $r) { if ($only !== null && !isset($only[(int) $r['person_id']])) { continue; } $d = dchf_date($r['sort_date'], $r['year']); if ($d) { $pairs[] = [$d[0], trim(explode(',', (string) $r['name'])[0])]; } }
         }
         $tot = [];
         foreach ($pairs as [, $v]) { $k = mb_strtolower($v); $tot[$k] = ($tot[$k] ?? 0) + 1; }

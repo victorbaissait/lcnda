@@ -70,6 +70,7 @@ function diagram_cartes2_data(PDO $pdo, array $get): array
         if (!$root) { $root = (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn(); }
         if ($root) { $only[$root] = true; }
     }
+    if ($what !== 'people' && $what !== 'story') { require_once __DIR__ . '/diagram_options.php'; dgo_request($get); $only = dgo_restrict($pdo, $only); } // le groupe de personnes choisi (« Depuis l'app »)
     $okPerson = static fn(int $p) => $p > 0 && ($only === null || isset($only[$p]));
 
     if ($what === 'people') { // les personnes derrière un point, une alvéole, une cause (au plus 500)

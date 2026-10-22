@@ -161,26 +161,25 @@
         const UI = window.LCNDA_UI, sec = (title, key, body, open = true) => UI?.panelSection ? UI.panelSection({title, key, open, body}) : `<details ${open ? 'open' : ''}><summary>${esc(title)}</summary>${body}</details>`;
         // E1 : icône · nom · ↶ ↷ · … · ✓ Enregistré · ⚙️ Personnaliser · ⤓ Exporter ▾ · 💾 Enregistrer · ⛶ · ×
         dlg.innerHTML = `<div class="h-rs-head h-rt-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name" data-rs-name value="${esc(item.title || item.filename || 'Photo')}" maxlength="200" aria-label="Nom de la photo retouchée" title="Le nom de la copie et des fichiers exportés">
-                <span class="ui-topbar-hist"><button type="button" class="icon-button small" data-rs-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rs-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span>
+                <nav class="h-rs-menus" data-rs-menus data-tb="rs-menus" data-tb-label="Menus du haut"></nav><span class="ui-topbar-hist"><button type="button" class="icon-button small" data-rs-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rs-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span>
                 <button type="button" class="button small secondary" data-rs-advanced title="La retouche complète : calques, sélections, masques, texte, formes, filtres, projets">🎛️ Retouche complète</button><button type="button" class="button small secondary" data-rs-restoreall title="Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète)">✨ Restaurer en une fois</button>
                 <span class="spacer"></span><span class="ui-status" data-ui-status data-rs-status></span>${ext.tbButton ? ext.tbButton('retouch-simple') : ''}
                 <details class="h-rt-menu h-rt-exportmenu"><summary title="Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rs-export="image"><span>🖼 La photo retouchée (PNG, JPG, imprimer)…</span></button><button type="button" data-rs-export="ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details>
                 <button type="button" class="button small" data-rs-topsave data-ui-cmd="save" data-shortcut="⌘S" title="Enregistrer et afficher cette version de la photo (l’original est gardé)">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('retouch-simple') : ''}<button type="button" class="icon-button" data-rs-close aria-label="Fermer" title="Fermer">×</button></div>
-            <div class="h-rs-paint" data-tbg="rs-paint" data-tbg-label="Barre des outils"><span class="h-rs-modes">${[['adjust', '🎚 Réglages'], ['heal', '🩹 Correcteur de taches'], ['clone', '🧬 Tampon de duplication']].map(([k, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rs-mode="${k}"${k === 'clone' ? ' title="' + (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt') + ' + clic : l’endroit à recopier, puis peins sur la zone à couvrir"' : ''}>${l}</button>`).join('')}</span>
+            <div class="h-rs-paint" data-tbg="rs-paint" data-tbg-label="Barre des outils">
                 <label class="h-rs-size" hidden>Taille <input type="range" min="3" max="120" value="18" data-rs-size> <output data-rs-size-out>18</output></label>
-                <span class="h-rs-zoom" title="Zoom"><span class="muted">🔍</span><button type="button" class="button small secondary" data-rs-zoom="out" title="Dézoomer (⌘/Ctrl + molette)">−</button><button type="button" class="button small secondary" data-rs-zoom="fit" title="Toute l’image (clic : 100 %)" data-rs-zoom-label>Ajusté</button><button type="button" class="button small secondary" data-rs-zoom="in" title="Zoomer (⌘/Ctrl + molette)">+</button></span>
-                <small class="muted" data-rs-paint-help></small></div>
-            <div class="h-rs-body"><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span>${ext.rtBaButtons ? ext.rtBaButtons('rs') : '<button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button>'}</div>
+                </div>
+            <div class="h-rs-body"><nav class="h-rs-rail" data-tbg="rs-modes" data-tbg-label="Colonne d’outils">${[['adjust', '🎚', 'Réglages : couleur, lumière, courbe', 'A'], ['heal', '🩹', 'Correcteur de taches : clique sur une tache, une poussière, une rayure', 'J'], ['clone', '🧬', `Tampon de duplication : ${/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt'} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir`, 'S']].map(([k, i, l, sc]) => `<button type="button" class="${k === 'adjust' ? 'is-active' : ''}" data-rs-mode="${k}" title="${esc(l)}" aria-label="${esc(l.split(' :')[0])}" data-shortcut="${sc}">${i}</button>`).join('')}<button type="button" data-rs-railcmd="advanced" title="Retouche complète : calques, sélections, masques, texte, filtres" aria-label="Retouche complète">🎛️</button></nav><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span>${ext.rtBaButtons ? ext.rtBaButtons('rs') : '<button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button>'}</div>
             <div class="h-rs-tools" data-tbg="rs-tools" data-tbg-label="Panneau de droite"><div class="h-rs-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rs-preset="${i}"${i === 0 ? ' data-help="Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant."' : ''}>${esc(l)}</button>`).join('')}</div>
                 ${sec('Couleur', 'rs-color', `${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rs-slider"><span${k === 'shadows' ? ' data-help="Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires."' : ''}>${esc(l)} <output data-rs-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rs="${k}"></label>`).join('')}
-                <div class="h-rs-toggles"><label class="checkbox-line"><input type="checkbox" data-rs-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rs-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rs-t="invert" data-help="Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent."> Négatif</label></div>`)}
+                <div class="h-rs-toggles"><label class="ui-toggle"><input type="checkbox" data-rs-t="bw"><i></i>Noir et blanc</label><label class="ui-toggle"><input type="checkbox" data-rs-t="sepia"><i></i>Sépia</label><label class="ui-toggle"><input type="checkbox" data-rs-t="invert" data-help="Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent."><i></i>Négatif</label></div>`)}
                 ${sec('Courbe', 'rs-curve', `<div class="h-rs-curve-head"><strong data-help="Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur.">Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rs-ch ${k === 'rgb' ? 'is-active' : ''}" data-rs-ch="${k}">${l}</button>`).join('')}</span></div>
                 <svg class="h-rs-curve" viewBox="-6 -6 268 268" data-rs-curve><path class="h-rs-hist" d="${histPath}"/><g class="h-rs-grid">${[64, 128, 192].map(v => `<line x1="${v}" y1="0" x2="${v}" y2="256"/><line x1="0" y1="${v}" x2="256" y2="${v}"/>`).join('')}<line x1="0" y1="256" x2="256" y2="0" class="h-rs-diag"/></g><path class="h-rs-line" data-rs-line/><g data-rs-points></g></svg>
                 <div class="h-rs-curve-tools"><button type="button" class="button small secondary" data-rs-ptdel disabled>Enlever le point</button></div>
                 <p class="muted h-rs-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre.</p>`)}
                 <button type="button" class="link-button" data-rs-reset>↺ Remettre comme au départ</button></div></div>
             <section class="h-rs-versions" data-rs-versions></section>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-rs-close>Annuler</button><button type="button" class="button secondary" data-rs-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rs-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rs-save="show">Enregistrer et afficher cette version</button></div>
+            <div class="modal-actions ed-old-hidden" aria-hidden="true"><span class="spacer"></span><button type="button" class="button secondary" data-rs-close>Annuler</button><button type="button" class="button secondary" data-rs-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rs-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rs-save="show">Enregistrer et afficher cette version</button></div>
             <p class="muted h-rs-note">L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout.</p>`;
         document.body.appendChild(dlg);
         ext.rtEnsureCss?.();
@@ -206,7 +205,7 @@
         // ── Correcteur de taches et tampon ──
         st.strokes = [];
         let mode = 'adjust', brush = 18, cloneOff = null, painting = null;
-        const brushEl = dlg.querySelector('[data-rs-brush]'), srcEl = dlg.querySelector('[data-rs-src]'), help = dlg.querySelector('[data-rs-paint-help]'), undoBtn = dlg.querySelector('[data-rs-undo]'), redoBtn = dlg.querySelector('[data-rs-redo]'), statusEl = dlg.querySelector('[data-rs-status]');
+        const brushEl = dlg.querySelector('[data-rs-brush]'), srcEl = dlg.querySelector('[data-rs-src]'), undoBtn = dlg.querySelector('[data-rs-undo]'), redoBtn = dlg.querySelector('[data-rs-redo]'), statusEl = dlg.querySelector('[data-rs-status]');
         let steps = [], hpos = -1;
         const snap = () => JSON.stringify({st: {...st, strokes: undefined}, strokes: st.strokes});
         const syncHist = () => { undoBtn.disabled = hpos <= 0; redoBtn.disabled = hpos >= steps.length - 1; if (hpos > 0) UI?.savedStatus?.(statusEl, 'dirty'); else statusEl.textContent = ''; };
@@ -216,14 +215,16 @@
             Object.keys(st).forEach(k => delete st[k]); Object.assign(st, rtDefault(), o.st, {strokes});
             srcData.data.set(baseData.data); if (strokes.length) rtReplayStrokes(srcData, strokes); activePreset = -1; markPreset(); syncControls(); syncHist();
         };
-        const HELP = {adjust: '', heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long.', clone: (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt') + ' + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir.'};
+        let sbar = null; // K18 : la barre du bas commune (la photo · l'aide de l'outil · le zoom)
+        const MODE_NAME = {adjust: 'Réglages', heal: 'Correcteur de taches', clone: 'Tampon'};
+        const HELP = {adjust: 'Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer', heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long.', clone: (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '') ? '⌥' : 'Alt') + ' + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir.'};
         // l'image est centrée dans le cadre (marges sur les côtés ou en haut et en bas) : on en tient compte
         const fit = () => { const r = canvas.getBoundingClientRect(), k = Math.min(r.width / pw, r.height / ph); return {r, k, ox: r.left + (r.width - pw * k) / 2, oy: r.top + (r.height - ph * k) / 2}; };
         const toCanvas = e => { const f = fit(); return [(e.clientX - f.ox) / f.k, (e.clientY - f.oy) / f.k, f]; };
         const setMode = m => {
             mode = m; cloneOff = m === 'clone' ? cloneOff : null;
-            dlg.querySelectorAll('[data-rs-mode]').forEach(b => b.classList.toggle('secondary', b.dataset.rsMode !== m));
-            dlg.querySelector('.h-rs-size').hidden = m === 'adjust'; help.textContent = HELP[m];
+            dlg.querySelectorAll('[data-rs-mode]').forEach(b => { b.classList.toggle('is-active', b.dataset.rsMode === m); b.setAttribute('aria-pressed', b.dataset.rsMode === m ? 'true' : 'false'); });
+            dlg.querySelector('.h-rs-size').hidden = m === 'adjust'; sbar?.setHelp(HELP[m]); sbar?.setWhere(`${img.naturalWidth} × ${img.naturalHeight} px · ${MODE_NAME[m]}`);
             canvas.classList.toggle('is-painting', m !== 'adjust'); brushEl.hidden = true; srcEl.hidden = true;
         };
         dlg.querySelectorAll('[data-rs-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.rsMode)));
@@ -290,10 +291,15 @@
             const keep = {bw: false, sepia: false, invert: false, strokes: st.strokes}; Object.assign(st, rtDefault(), keep); RT_PRESETS[i][1](st); if (st._auto) { delete st._auto; rtAuto(srcData, st); }
             activePreset = i; markPreset(); syncControls(); commit(); }));
         // zoom : « Ajusté » (toute l'image) ou un facteur ; ⌘/Ctrl + molette ; l'aperçu défile quand il dépasse
-        let zoom = 0; const stage = canvas.parentElement, zLabel = dlg.querySelector('[data-rs-zoom-label]');
+        let zoom = 0; const stage = canvas.parentElement;
         const fitK = () => { const r = stage.getBoundingClientRect(); return Math.min(1, (r.width - 4) / pw, (r.height - 4) / ph) || 1; };
-        const setZoom = z => { zoom = z ? Math.max(.1, Math.min(8, z)) : 0; stage.classList.toggle('is-zoomed', !!zoom); canvas.style.width = zoom ? `${Math.round(pw * zoom)}px` : ''; canvas.style.height = zoom ? `${Math.round(ph * zoom)}px` : ''; zLabel.textContent = zoom ? `${Math.round(zoom * 100 / scale)} %` : 'Ajusté'; requestAnimationFrame(() => curtain?.place()); };
-        dlg.querySelectorAll('[data-rs-zoom]').forEach(b => b.addEventListener('click', () => { const z = zoom || fitK(), k = b.dataset.rsZoom; setZoom(k === 'in' ? z * 1.25 : k === 'out' ? (z / 1.25 <= fitK() ? 0 : z / 1.25) : (zoom ? 0 : scale)); }));
+        const setZoom = z => { zoom = z ? Math.max(.1, Math.min(8, z)) : 0; stage.classList.toggle('is-zoomed', !!zoom); canvas.style.width = zoom ? `${Math.round(pw * zoom)}px` : ''; canvas.style.height = zoom ? `${Math.round(ph * zoom)}px` : ''; sbar?.sync(); requestAnimationFrame(() => curtain?.place()); };
+        // K18 : la barre du bas (taille de la photo et outil · aide · zoom) ; 100 % = un point de l'écran pour un point de la photo
+        if (UI?.editorStatus) {
+            sbar = UI.editorStatus({zoom: {get: () => (zoom || fitK()) * scale, set: k => setZoom(k / scale <= fitK() * 1.001 && k / scale >= fitK() * .999 ? 0 : k / scale), fit: () => setZoom(0), min: .1 * scale, max: 8 * scale}});
+            dlg.appendChild(sbar); setMode(mode); addEventListener('resize', () => sbar.sync()); 
+        }
+        UI?.editorRail?.(dlg.querySelector('.h-rs-rail'), {breaks: ['[data-rs-railcmd]']}); // K19 : colonne de 36 px
         stage.addEventListener('wheel', e => { if (!e.ctrlKey && !e.metaKey) return; e.preventDefault(); const z = zoom || fitK(); setZoom(e.deltaY < 0 ? z * 1.12 : (z / 1.12 <= fitK() ? 0 : z / 1.12)); }, {passive: false});
         dlg.querySelector('[data-rs-reset]').addEventListener('click', () => { Object.assign(st, rtDefault(), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); commit(); }); // les corrections de taches restent (↶ pour les défaire)
         const before = dlg.querySelector('[data-rs-before]');
@@ -329,7 +335,8 @@
             const mod = (e.metaKey || e.ctrlKey) && !e.altKey, k = e.key.toLowerCase();
             if (mod && k === 'z') { e.preventDefault(); e.stopImmediatePropagation(); goHist(e.shiftKey ? hpos + 1 : hpos - 1); return; }
             if (mod && k === 's') { e.preventDefault(); e.stopImmediatePropagation(); dlg.querySelector('[data-rs-save="show"]').click(); return; }
-            if ((e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0) { e.preventDefault(); removePoint(selPt); }
+            if ((e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0) { e.preventDefault(); removePoint(selPt); return; }
+            const tk = !mod && !e.altKey && !e.shiftKey && ({a: 'adjust', j: 'heal', s: 'clone'})[k]; if (tk && e.target.closest?.('dialog') === dlg) { e.preventDefault(); setMode(tk); }
         };
         window.addEventListener('keydown', onKey, true); dlg.addEventListener('close', () => window.removeEventListener('keydown', onKey, true));
         svg.addEventListener('contextmenu', e => { const hit = e.target.closest('[data-rs-pt]'); if (!hit) return; e.preventDefault(); const i = Number(hit.dataset.rsPt); if (!window.LCNDA_UI?.contextMenu) return removePoint(i); window.LCNDA_UI.contextMenu(e, [{icon: '🗑', label: 'Supprimer ce point', shortcut: '⌫', danger: true, run: () => removePoint(i)}], {title: 'Point de la courbe'}); }); // K14 : le menu de l'app
@@ -405,6 +412,15 @@
             ext.rtExportImage?.({title: docTitle(), mediaId: item.id || 0, copyTitle: `${docTitle()} (retouchée)`, render: async () => renderFull()});
         });
         dlg.querySelector('[data-rs-topsave]').addEventListener('click', () => dlg.querySelector('[data-rs-save="show"]').click());
+        const press = sel0 => () => dlg.querySelector(sel0)?.click();
+        const saveItems = () => [{icon: '💾', label: 'Enregistrer et afficher cette version', shortcut: '⌘S', run: press('[data-rs-save="show"]')}, {icon: '🗂', label: 'Enregistrer sans l’afficher (gardée dans les versions)', run: press('[data-rs-save="keep"]')}, {icon: '⧉', label: 'Copie séparée (un autre média, relié aux mêmes fiches)', run: press('[data-rs-save="copy"]')}];
+        UI?.saveMenu?.(dlg.querySelector('[data-rs-topsave]'), () => saveItems().slice(1));
+        UI?.editorMenus?.(dlg.querySelector('[data-rs-menus]'), {
+            Fichier: () => [...saveItems(), '-', {icon: '⤓', label: 'Exporter la photo retouchée (PNG, JPG, imprimer)…', run: press('[data-rs-export="image"]')}, {icon: '⤓', label: 'Exporter l’avant / après…', run: press('[data-rs-export="ba"]')}, '-', {icon: '🎛️', label: 'Passer à la retouche complète', run: press('[data-rs-advanced]')}, {icon: '✨', label: 'Restaurer en une fois…', run: press('[data-rs-restoreall]')}, '-', {icon: '×', label: 'Fermer', run: press('[data-rs-close]')}],
+            Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: hpos <= 0, run: () => goHist(hpos - 1)}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: hpos >= steps.length - 1, run: () => goHist(hpos + 1)}, '-', {icon: '↺', label: 'Remettre comme au départ', run: press('[data-rs-reset]')}],
+            Outils: () => [['adjust', '🎚', 'A'], ['heal', '🩹', 'J'], ['clone', '🧬', 'S']].map(([k, i, sc]) => ({icon: i, label: MODE_NAME[k] + (mode === k ? ' ✓' : ''), shortcut: sc, run: () => setMode(k)})),
+            Affichage: () => [{icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => sbar?.zoom.fit()}, {label: '100 %', shortcut: '⌘1', run: () => sbar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => sbar?.zoom.in()}, {icon: '−', label: 'Zoom arrière', shortcut: '⌘−', run: () => sbar?.zoom.out()}, '-', {icon: '◧', label: 'Avant / après en rideau', run: press('[data-rs-curtain]')}]});
+        dlg.querySelector('[data-rs-railcmd="advanced"]')?.addEventListener('click', press('[data-rs-advanced]'));
         // ◧ Avant / après en rideau
         const curtain = ext.rtCurtain ? ext.rtCurtain({host: stage, target: canvas, before: baseData, onChange: S0 => { const q = s0 => dlg.querySelector(s0); q('[data-rs-curtain]').classList.toggle('is-active', S0.on); q('[data-rs-curdir]').hidden = q('[data-rs-curexp]').hidden = !S0.on; q('[data-rs-curdir]').textContent = S0.vertical ? '⇅' : '⇆'; }}) : null;
         dlg.querySelector('[data-rs-curtain]')?.addEventListener('click', () => curtain?.toggle());
@@ -418,7 +434,7 @@
             catch (err) { toast(err.message, 'error'); }
         }, {accept: 'image/*'});
         dlg.showModal(); stage.tabIndex = -1; stage.focus({preventScroll: true}); // pas dans la case du nom : ⌘Z, ⌘S marchent tout de suite
-        syncControls(); commit();
+        syncControls(); commit(); requestAnimationFrame(() => sbar?.sync());
     }
 
     ext.openRetouchSimple = openRetouchSimple;

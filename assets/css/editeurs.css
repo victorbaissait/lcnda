@@ -1,0 +1,153 @@
+/* LCNDA — ✏️ Harmonisation K18, K19, K20 (validé) : barre du bas, colonne d’outils et poignées, les mêmes dans tous les éditeurs.
+ * Composants : assets/js/app-editeurs.js (UI.editorStatus, UI.zoomControl, UI.editorRail, UI.saveMenu) ; mode d’emploi : docs/UI.md.
+ * À charger après ui.css (couleurs --ui-*). Mode sombre : les couleurs --ui-* changent toutes seules.
+ */
+:root { --ed-tool: 36px; --ed-handle: 9px; --ed-handle-line: var(--ui-blue, #055dff); --ed-grip: #8a9099; }
+
+/* ═════ K18 Barre du bas ═════ */
+.ed-status { display: flex; align-items: center; gap: 12px; min-height: 30px; padding: 2px 8px 2px 10px; box-sizing: border-box; flex: none; grid-column: 1 / -1;
+    border-top: 1px solid var(--ui-line); background: var(--ui-bg); color: var(--ui-muted); font: 12px/1.3 system-ui, -apple-system, sans-serif; position: relative; z-index: 3; min-width: 0; }
+.ed-status-where { flex: 0 1 auto; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; color: var(--ui-ink); font-weight: 600; }
+.ed-status-where:empty { display: none; }
+.ed-status-help { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+.ed-status-right { flex: none; display: inline-flex; align-items: center; gap: 4px; margin-left: auto; }
+.ed-status button { font: inherit; }
+.ed-status .ed-tog, .ed-zoom-b, .ed-zoom-v { min-height: 24px !important; height: 24px; padding: 0 6px !important; border: 1px solid transparent !important; background: transparent !important; color: var(--ui-ink) !important;
+    box-shadow: none !important; border-radius: 4px !important; cursor: pointer; line-height: 1; transform: none !important; margin: 0 !important; width: auto !important; min-width: 0 !important; }
+.ed-status .ed-tog { font-size: 14px; opacity: .55; }
+.ed-status .ed-tog.is-active { opacity: 1; background: var(--ui-soft) !important; border-color: var(--ui-blue) !important; }
+.ed-status .ed-tog:hover, .ed-zoom-b:hover:not(:disabled), .ed-zoom-v:hover, .ed-zoom-v[aria-expanded="true"] { background: var(--ui-soft) !important; opacity: 1; }
+.ed-zoom { display: inline-flex; align-items: center; gap: 0; border: 1px solid var(--ui-line); border-radius: 5px; margin-left: 4px; background: var(--ui-bg); }
+.ed-zoom-b { font-size: 15px !important; font-weight: 700; width: 26px !important; }
+.ed-zoom-b:disabled { opacity: .45; cursor: not-allowed; }
+.ed-zoom-v { font-size: 12px !important; font-weight: 600; min-width: 62px !important; font-variant-numeric: tabular-nums; display: inline-flex !important; align-items: center; justify-content: center; gap: 3px; }
+.ed-zoom-caret { font-size: 9px; opacity: .6; }
+/* l’ancien bas d’un éditeur, gardé pour ses écouteurs, ne se voit plus */
+html body .ed-old-hidden.ed-old-hidden.ed-old-hidden.ed-old-hidden { display: none !important; }
+
+/* ═════ K19 Colonne d’outils : 36 px, groupes séparés par un trait ═════ */
+.ed-rail.ed-rail { width: var(--ed-tool) !important; min-width: var(--ed-tool) !important; max-width: var(--ed-tool) !important; flex: 0 0 var(--ed-tool) !important; box-sizing: border-box;
+    display: flex !important; flex-direction: column !important; align-items: center !important; gap: 1px !important; padding: 4px 0 !important; overflow-x: hidden; overflow-y: auto; scrollbar-width: none;
+    background: var(--ui-bg) !important; border-right: 1px solid var(--ui-line) !important; color: var(--ui-ink) !important; }
+.ed-rail.ed-rail > button, .ed-rail.ed-rail > div > button:not([class*="fs"]):not([class*="fg"]):not([class*="bg"]), .ed-rail.ed-rail > .ed-tool {
+    width: 32px !important; height: 32px !important; min-width: 0 !important; min-height: 0 !important; padding: 0 !important; margin: 0 !important; flex: none !important;
+    display: inline-flex !important; align-items: center !important; justify-content: center !important; font-size: 16px !important; line-height: 1 !important;
+    border: 1px solid transparent !important; border-radius: 5px !important; background: transparent !important; color: inherit !important; box-shadow: none !important; transform: none !important; cursor: pointer; }
+.ed-rail.ed-rail > button:hover, .ed-rail.ed-rail > div > button:hover { background: var(--ui-soft) !important; }
+.ed-rail.ed-rail > button:is(.is-active, .is-on, [aria-pressed="true"]), .ed-rail.ed-rail > div > button:is(.is-active, .is-on, [aria-pressed="true"]) { background: var(--ui-blue) !important; color: #fff !important; border-color: var(--ui-blue) !important; }
+.ed-rail.ed-rail > div { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 0 !important; margin: 0 !important; border: 0 !important; }
+.ed-rail-sep { display: block; flex: none; width: 20px; height: 0; border-top: 1px solid var(--ui-line); margin: 4px 0 !important; }
+.ed-rail.ed-rail::-webkit-scrollbar { display: none; }
+
+/* « 💾 Enregistrer ▾ » : le bouton et son menu collés */
+.ed-save { display: inline-flex; align-items: stretch; gap: 0; flex: none; }
+.ed-save > .ed-save-main { border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; margin-right: 0 !important; }
+.ed-save > .ed-save-more { border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important; margin-left: 0 !important; padding-left: 7px !important; padding-right: 7px !important; min-width: 0 !important; border-left: 1px solid rgba(255, 255, 255, .45) !important; }
+
+/* E1 : les menus du haut faits avec le menu de l’app */
+.ed-menus { display: inline-flex; gap: 2px; flex-wrap: nowrap; }
+
+/* ═════ K20 Poignées pour glisser une ligne : ⠿ gris de 16 px à gauche ═════ */
+.dnd-grip, .order-grip, .saved-grip, .tile-cat-grip, .event-media-order-grip, .h-rc-tray-grip, .h-rt-grip, .h-bp-grip, .ar-grip, .h-sc-grip, .qp-grip, .investigation-item-grip, .h-ba-grip, .ms-grip, .ui-grip, [data-event-order-grip] {
+    color: var(--ed-grip) !important; font-size: 16px !important; line-height: 1 !important; width: 16px !important; min-width: 16px !important; cursor: grab; user-select: none; -webkit-user-select: none;
+    display: inline-flex; align-items: center; justify-content: center; flex: 0 0 16px; padding: 0 !important; touch-action: none; }
+:is(.dnd-grip, .order-grip, .saved-grip, .tile-cat-grip, .h-rt-grip, .ar-grip, .h-sc-grip, .ui-grip):focus-visible { outline: 2px solid var(--ui-blue); outline-offset: 1px; border-radius: 3px; }
+:is(.dnd-grip, .order-grip, .saved-grip, .tile-cat-grip, .h-rt-grip, .ar-grip, .h-sc-grip, .ui-grip):active { cursor: grabbing; }
+/* plus de flèches ↑ ↓ sur chaque ligne (souris) : on glisse ⠿, ou Alt + ↑ / ↓ au clavier ; au doigt, elles restent */
+@media (pointer: fine) { .ord-row:has(.dnd-grip, .order-grip, .saved-grip, .ar-grip, .h-rt-grip, .h-sc-grip, .qp-grip, .ui-grip) .ord-arrow { display: none !important; } }
+.ord-row.is-alt-moved { outline: 2px solid var(--ui-blue); outline-offset: 1px; transition: outline-color .6s; }
+
+/* ═════ K20 Poignées autour des objets : petits carrés blancs au bord bleu de l’app, un rond pour tourner ═════ */
+/* SVG : Dessin (et carte, arbre, faire-part, sceau), Maison, Transcription */
+.vx-handle, .h-hs-handle, .h-tx-handle { fill: #fff !important; stroke: var(--ed-handle-line) !important; stroke-width: 1.5px !important; vector-effect: non-scaling-stroke; filter: none !important; }
+.vx-handle:hover, .h-hs-handle:hover, .h-tx-handle:hover { fill: var(--ui-soft) !important; }
+.vx-selbox { stroke: var(--ed-handle-line) !important; }
+/* HTML : Présentation, Mise en page, Tableaux, Retouche (recadrage) */
+.kn-h, .ly-h, .h-bh, .h-rt-crop i { background: #fff !important; border: 1.5px solid var(--ed-handle-line) !important; border-radius: 1px !important; box-shadow: none !important; box-sizing: border-box !important; }
+.kn-h:not(.kn-h-rot), .h-bh, .h-rt-crop i { width: var(--ed-handle) !important; height: var(--ed-handle) !important; margin: calc(var(--ed-handle) / -2) 0 0 calc(var(--ed-handle) / -2) !important; }
+.kn-h-rot, .ly-h-rot, .h-bh-rot { border-radius: 50% !important; background: #fff !important; border: 1.5px solid var(--ed-handle-line) !important; }
+.kn-selbox, .kn-handles.is-multi { --kn-sel: var(--ed-handle-line); }
+.kn { --kn-sel: var(--ed-handle-line); }
+.ly-editor { --ly-acc: var(--ed-handle-line); }
+
+/* ═════ Réglages par éditeur (la colonne passe à 36 px, la barre du bas commune remplace l’ancienne) ═════ */
+.ed-rail > [hidden] { display: none !important; }
+/* ✒️ Dessin vectoriel (et carte, arbre, faire-part, sceau) */
+.vx-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) var(--vx-pw, 300px) !important; }
+@media (max-width: 900px) { .vx-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) !important; } }
+.vx-tools.ed-rail .vx-fsstroke { background: var(--ui-bg) !important; }
+.vx-tools.ed-rail .vx-fsswap { color: var(--ui-muted) !important; }
+.vx-tools.ed-rail .vx-maptools { border-top: 1px solid var(--ui-line) !important; margin-top: 4px !important; padding-top: 4px !important; }
+.vx-shell > .ed-status .vx-last { color: var(--ui-muted); font-weight: 400; }
+.ed-status-help.is-flash { color: var(--ui-ink); }
+/* 📐 Mise en page : la navigation des pages à gauche de la barre du bas */
+.ly-status-where { gap: 4px !important; font-weight: 400 !important; }
+.ly-status-where button { border: 1px solid var(--ui-line); background: var(--ui-bg); color: inherit; border-radius: 4px; padding: 2px 7px; cursor: pointer; min-height: 22px; line-height: 1.2; }
+.ly-status-where input { width: 48px; padding: 1px 4px; border: 1px solid var(--ui-line); border-radius: 4px; background: var(--ui-bg); color: inherit; min-height: 0; height: 22px; }
+.ly-status-where .ly-light { display: inline-flex; align-items: center; gap: 6px; border-color: transparent; border-radius: 10px; }
+.ly-status-where .ly-pos { min-width: 0; color: var(--ui-muted); }
+/* 🏠 Maison : colonne de 36 px, la barre du haut sur une ligne, réglages de l’aimant ▾ ouverts vers le haut */
+.h-hs-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) 310px !important; }
+@media (max-width: 1000px) { .h-hs-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) !important; } }
+.h-hs-dlg .h-hs-top { flex-wrap: nowrap !important; min-width: 0; }
+.h-hs-dlg .h-hs-top > * { flex-shrink: 0; }
+.h-hs-dlg .h-hs-top > .h-hs-floors { flex: 0 1 auto; min-width: 60px; overflow-x: auto; scrollbar-width: thin; }
+.h-hs-dlg .h-hs-top > .h-hs-name { flex: 0 1 auto; min-width: 90px; }
+.h-hs-dlg .h-hs-top > [data-ui-status] { flex: 0 0 auto !important; width: auto !important; }
+.ed-status .h-hs-snapm > summary { list-style: none; opacity: .8; font-size: 10px; padding: 0 4px !important; display: inline-flex; align-items: center; }
+.ed-status .h-hs-snapm > summary::-webkit-details-marker { display: none; }
+.ed-status .h-hs-snapm > div { top: auto !important; bottom: calc(100% + 6px); right: 0; max-height: 70vh; overflow: auto; }
+/* 🎚️ Retouche rapide : colonne d’outils à gauche de la photo, barre du bas collée en bas de la fenêtre */
+.h-retouch-simple .h-rs-body { grid-template-columns: var(--ed-tool) minmax(0, 1fr) 310px !important; }
+.h-retouch-simple .h-rs-rail { align-self: stretch; }
+.h-retouch-simple .h-rs-paint:not(:has(.h-rs-size:not([hidden]))) { display: none !important; }
+.h-retouch-simple > .ed-status { position: sticky; bottom: -18px; margin: 10px -20px -18px; }
+.h-retouch-simple .h-rs-menus { display: inline-flex; }
+@media (max-width: 760px) { .h-retouch-simple .h-rs-body { grid-template-columns: var(--ed-tool) minmax(0, 1fr) !important; } .h-retouch-simple .h-rs-tools { grid-column: 1 / -1; } }
+/* 🎚️ Retouche complète : colonne de 36 px, barre du bas sous la photo */
+.h-rt2 > .ed-status { margin: 8px -18px -14px; }
+.h-rt-vtools.ed-rail { border-radius: 0 !important; border-width: 0 1px 0 0 !important; }
+@media (max-width: 900px) { .h-rt-vtools.ed-rail { flex-direction: row !important; flex-wrap: wrap !important; width: auto !important; max-width: none !important; min-width: 0 !important; flex: none !important; border-width: 0 0 1px 0 !important; }
+    .h-rt-vtools.ed-rail .ed-rail-sep { width: 0; height: 20px; border-top: 0; border-left: 1px solid var(--ui-line); margin: 0 4px !important; } }
+/* 🎬 Montage et 🎧 Son : la barre du bas sous la frise (ou sous l’onde) */
+.h-mt > .ed-status, .h-avx-body > .ed-status { margin: 8px 0 0; border: 1px solid var(--ui-line); border-radius: 4px; }
+.h-avx .ed-status-where .h-mt-projname { font-weight: 600; }
+/* 📜 Transcription d’actes : menus et ↶ ↷ en haut, colonne d’outils à gauche de l’image, barre du bas */
+.h-tx-main { grid-template-columns: var(--ed-tool) minmax(0, 1.15fr) minmax(340px, 1fr) !important; }
+@media (max-width: 900px) { .h-tx-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) !important; grid-template-rows: 1fr 1fr !important; } .h-tx-main > .h-tx-rail { grid-row: 1; } .h-tx-main > .h-tx-right { grid-column: 1 / -1; } }
+.h-tx-top .h-tx-menus { flex: none; }
+.h-tx-top .h-tx-hist { flex: none; display: inline-flex; gap: 3px; margin-right: 4px; }
+.h-tx-top [data-tx=title] { flex: 1 1 200px; min-width: 120px; }
+@media (min-width: 1100px) { .h-tx-dlg .h-tx-top { flex-wrap: nowrap !important; } .h-tx-dlg .h-tx-top > * { flex-shrink: 0; } .h-tx-dlg .h-tx-top > input, .h-tx-dlg .h-tx-top > select[data-tx=kind] { flex-shrink: 1; min-width: 70px; } .h-tx-dlg .h-tx-top .h-tx-status { flex: 0 1 90px !important; min-width: 0 !important; } }
+/* 🎞️ Diaporama : colonne d’outils, barre du bas, aperçu zoomable */
+.h-ss-dlg .h-ss-main { grid-template-columns: var(--ed-tool) 250px minmax(0, 1fr) 320px !important; }
+.h-ss-dlg .h-ss-add [data-ss-cmd="addphotos"], .h-ss-dlg .h-ss-add [data-ss-cmd="addtitle"], .h-ss-dlg .h-ss-add [data-ss-cmd="addmap"] { display: none !important; }
+.h-ss-stage.is-zoomed { overflow: auto; place-items: start; }
+@media (max-width: 1000px) { .h-ss-dlg .h-ss-main { grid-template-columns: var(--ed-tool) 200px minmax(0, 1fr) !important; } .h-ss-dlg .h-ss-props { grid-column: 2 / -1 !important; } .h-ss-dlg .h-ss-main > .h-ss-rail { grid-row: span 2; } }
+@media (max-width: 700px) { .h-ss-dlg .h-ss-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) !important; } .h-ss-dlg .h-ss-main > :not(.h-ss-rail) { grid-column: 2 !important; } .h-ss-dlg .h-ss-main > .h-ss-rail { grid-row: span 3; } }
+/* 🎤 Présentation : colonne d’outils (insérer), barre du bas sur toute la largeur */
+.kn-main { grid-template-columns: var(--ed-tool) 200px minmax(0, 1fr) 300px !important; }
+@media (max-width: 1100px) { .kn-main { grid-template-columns: var(--ed-tool) 160px minmax(0, 1fr) 270px !important; } }
+@media (max-width: 820px) { .kn-main { grid-template-columns: var(--ed-tool) 120px minmax(0, 1fr) !important; } .kn-main > .kn-rail { grid-row: span 2; } .kn-main > .kn-insp { grid-column: 2 / -1 !important; } }
+.ed-status .kn-status-in { display: inline-flex; flex-wrap: nowrap; padding: 0; background: none; border: 0; gap: 4px; font-weight: 400; }
+/* 🧩 Tableaux : la colonne d’outils de 36 px à gauche du tableau, la barre du bas commune */
+.h-board-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) 250px !important; }
+.h-board.insp-left .h-board-main { grid-template-columns: var(--ed-tool) 250px minmax(0, 1fr) !important; }
+.h-board.insp-left .h-bd-rail { order: -2; }
+.h-board.insp-hidden .h-board-main, .h-board.is-present .h-board-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) !important; }
+.h-board.is-present .h-bd-rail, .h-board.is-present > .ed-status { display: none !important; }
+@media (max-width: 900px) { .h-board-main { grid-template-columns: var(--ed-tool) minmax(0, 1fr) !important; } }
+.h-bd-rail .h-bt > span { font-size: 16px; }
+/* E5 : le bouton de police (Tableaux, Apparence) ouvre la liste commune */
+.h-bd-fontrow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 4px 0; }
+.h-bd-flab { font-size: 12px; color: var(--ui-muted); }
+.ui-fontbtn { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* K2 : les listes à ranger d’Apparence s’enregistrent toutes seules (le bouton reste pour son écouteur, caché) */
+.order-editor :is([data-order-save="menu-order"], [data-order-save="list-order"], [data-order-save="map-order"], [data-order-save="maintenance-order"], [data-order-save="graph-diagram-order"], [data-order-save="graph-stats-order"], [data-order-save="tile-layers"], [data-order-save="dashboard-widget-catalog-order"]) { display: none !important; }
+/* 🎬 Montage et 🎧 Son : la colonne d’outils posée à gauche, sur toute la hauteur */
+.h-mt, .h-avx:not(.h-avx-montage) .h-avx-body { position: relative; padding-left: calc(var(--ed-tool) + 8px) !important; }
+.h-mt > .h-mt-rail, .h-avx-body > .h-au-rail { position: absolute; left: 0; top: 0; bottom: 0; border: 1px solid var(--ui-line) !important; border-radius: 4px; }
+.h-avx:not(.h-avx-montage) .h-avx-body { display: flex; flex-direction: column; }
+.h-avx:not(.h-avx-montage) .h-avx-body > .ed-status { margin-top: auto; }
+.ly-tools.ed-rail .ly-fs { width: 32px !important; height: 38px !important; flex: none; }
+.ly-tools.ed-rail .ly-fs button { width: 18px !important; height: 18px !important; }

@@ -1082,7 +1082,7 @@
                 <label>Nombre de lignes<input type="number" min="1" max="100" data-cw-limit value="${esc(d.limit || 8)}"></label></div>`;
             return `${common}<div class="form-grid"><label>Compter par <select data-cw-group>${cols.map(([k, l]) => `<option value="${esc(k)}" ${(d.group || cols[0]?.[0]) === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <label>Regrouper <select data-cw-groupby>${[['value', 'par valeur'], ['year', 'par année'], ['decade', 'par décennie'], ['step', 'par tranche (de … ans, ou de … pour un nombre)'], ['century', 'par siècle'], ['month', 'par mois de l’année']].map(([v, l]) => `<option value="${v}" ${d.groupBy === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                ${d.groupBy === 'step' ? `<label>Tranche de<input type="number" min="1" max="500" data-cw-groupstep value="${esc(d.groupStep || 25)}"> ans</label>` : ''}
+                ${d.groupBy === 'step' ? `<label>Tranche de<input data-unit="ans" type="number" min="1" max="500" data-cw-groupstep value="${esc(d.groupStep || 25)}"></label>` : ''}
                 <label>Seulement du <small>(date précise ou année, facultatif)</small><input data-cw-range="rangeFrom" value="${esc(d.rangeFrom || '')}" placeholder="12 mars 1750 ou 1750"></label>
                 <label>au<input data-cw-range="rangeTo" value="${esc(d.rangeTo || '')}" placeholder="31/12/1800 ou 1800"></label>
                 ${drawHtml(d)}

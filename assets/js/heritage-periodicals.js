@@ -57,7 +57,8 @@
         if (m[3] !== undefined) return ok(m[2], m[3]) ? Number(m[1]) * 3600 + Number(m[2]) * 60 + Number(m[3]) : null;
         return ok(m[2]) ? Number(m[1]) * 60 + Number(m[2]) : null;
     }
-    const fmtTc = s => { s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = String(s % 60).padStart(2, '0'); return h ? `${h}:${String(m).padStart(2, '0')}:${x}` : `${m}:${x}`; };
+    const fmtTc = s => { if (window.LCNDA_UI?.clock) return window.LCNDA_UI.clock(s); s = Math.max(0, Math.floor(s)); // K17 : « 52:34 », « 1:02:10 »
+        const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = String(s % 60).padStart(2, '0'); return h ? `${h}:${String(m).padStart(2, '0')}:${x}` : `${m}:${x}`; };
     /** un lien qui ouvre la vidéo en ligne au bon moment (YouTube, Vimeo, Dailymotion, INA…) */
     function urlAt(url, sec) {
         if (!/^https?:\/\//i.test(url || '') || sec === null) return /^https?:\/\//i.test(url || '') ? url : '';
@@ -158,7 +159,7 @@
                 <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? Wf(f.fam).cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⤓ Exporter en CSV</button><button type="button" class="button secondary" data-pr-types title="Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage">⚙️ Réglages</button></div></header>
             <div class="h-pr-views h-pr-fams">${fams.map(([k, l]) => `<button type="button" class="${f.fam === k ? 'is-on' : ''}" data-pr-fam="${esc(k)}">${esc(l)}</button>`).join('')}</div>
             <div class="h-pr-views">${views.map(([k, l]) => `<button type="button" class="${f.view === k ? 'is-on' : ''}" data-pr-view="${esc(k)}">${esc(l)}</button>`).join('')}</div>
-            ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><label class="checkbox-line"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}> Grouper par catégorie</label></div>` : ''}
+            ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><label class="ui-toggle"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}><i></i>Grouper par catégorie</label></div>` : ''}
             <div data-pr-sortbar data-count="${f.view === 'articles' ? articles.length : f.view === 'periodicals' ? conts.length : f.view === 'wanted' ? wanted.length : issues.length}"></div>
             <div class="h-pr-filters h-pr-then"><span class="h-pr-sorts">Ensuite par ${sortSel(1)} puis ${sortSel(2)}</span></div>
             <div data-pr-body>${f.view === 'articles' ? articlesTable(articles) : f.view === 'periodicals' ? periodicalCards(conts) : f.view === 'wanted' ? `<p class="h-pr-total">${wanted.length} à acheter ou commandé${wanted.length > 1 ? 's' : ''}${total ? ` · environ <strong>${esc(euro(total))}</strong> au prix affiché` : ''}</p>${issuesShown(wanted, f, true)}` : issuesShown(issues, f)}</div>
@@ -388,7 +389,7 @@
             if (c.type === 'cat') return `<label>${esc(lab)}<input name="category" list="h-pr-cats" value="${esc(v || '')}" placeholder="Généalogie, histoire locale, guerre…" autocomplete="off"></label>`;
             const t = f.k.startsWith('cf_') ? ({textarea: 'textarea', check: 'check', number: 'number', date: 'date', url: 'url'}[f.type] || 'text') : c.type || 'text';
             const html = field(f.k, lab, v ?? '', {type: t, span: c.span || t === 'textarea', ph, list: c.list, rows: c.rows || 3});
-            return f.k === 'date_text' ? html.replace('<input ', '<input data-ui-date="nocal" ') : html; }; // C4 : « ✓ Compris : mars 2024 »
+            return f.k === 'date_text' ? html.replace('<input ', '<input data-ui-date="nocal" ') : f.k === 'duration' ? html.replace('<input ', '<input data-ui-duration-hint="min" data-ui-colon="ms" ') : html; }; // C4 : « ✓ Compris : mars 2024 » ; K17 : « ✓ Compris : 1 h 32 min »
         const fields = fieldsFor(fam).filter(f => f.show).map(one).join('') + `<datalist id="h-pr-cats">${categories().map(c => `<option value="${esc(c)}">`).join('')}</datalist>`;
         const roles = bf === 'doc' ? [['cover', '🖼️ Affiche, vignette', 'image/*'], ['video', '🎞️ Le film lui-même (fichier vidéo, si tu l’as)', 'video/*'], ['', '📸 Captures d’écran, documents', 'image/*,application/pdf']]
             : bf === 'podcast' ? [['cover', '🖼️ Image de l’émission', 'image/*'], ['audio', '🎧 L’épisode lui-même (fichier audio, si tu l’as)', 'audio/*'], ['', '📸 Captures, documents', 'image/*,application/pdf']]

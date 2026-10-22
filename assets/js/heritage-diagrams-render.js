@@ -564,10 +564,10 @@
     const ONE_SERIES = {key: 'rows', label: 'Les chiffres', series: 1, cols: [C('label', 'Catégorie'), C('color', 'Couleur', 'color')]};
     const O = {
         values: C('values', 'Afficher les valeurs', 'check', {def: true}),
-        height: C('height', 'Hauteur du dessin (px)', 'number', {min: 80, max: 2000}),
+        height: C('height', 'Hauteur du dessin', 'number', {unit: 'px', min: 80, max: 2000}),
         unit: C('unit', 'Unité (ex. : personnes, €)'),
         yLabel: C('yLabel', 'Nom de l’axe des valeurs'),
-        hole: C('hole', 'Trou au centre (%)', 'range', {min: 10, max: 90, def: 55}),
+        hole: C('hole', 'Trou au centre', 'range', {unit: '%', min: 10, max: 90, def: 55}),
         centerText: C('centerText', 'Texte au centre (sinon le total)'),
         total: C('total', 'Total au centre', 'check', {def: true}),
     };
@@ -575,10 +575,10 @@
         parliament: {icon: '🏛️', label: 'Parlement, assemblée, conseil', group: 'Assemblées', render: parliament, legend: 'bottom',
             grids: [{key: 'rows', label: 'Les groupes (de gauche à droite)', cols: [C('name', 'Groupe / parti'), C('seats', 'Sièges', 'number'), C('color', 'Couleur', 'color'), C('side', 'Côté (Westminster)', 'select', {choices: SIDES, when: s => s.o?.layout === 'westminster'})]}],
             options: [C('layout', 'Disposition', 'select', {choices: [['hemicycle', 'Hémicycle (demi-cercle)'], ['arc', 'Arc élargi (angle au choix)'], ['horseshoe', 'Fer à cheval'], ['westminster', 'Westminster (bancs face à face)'], ['circle', 'Cercle complet'], ['classroom', 'Salle (rangées face à la tribune)']], def: 'hemicycle'}),
-                C('angle', 'Angle de l’arc (°)', 'range', {min: 90, max: 350, def: 220, when: s => s.o?.layout === 'arc'}), C('arm', 'Longueur des bancs droits (%)', 'range', {min: 10, max: 300, def: 80, when: s => s.o?.layout === 'horseshoe'}),
-                C('inner', 'Trou au centre (%)', 'range', {min: 5, max: 90, def: 38, when: s => ['hemicycle', 'arc', 'horseshoe', 'circle', undefined].includes(s.o?.layout)}),
+                C('angle', 'Angle de l’arc', 'range', {unit: '°', min: 90, max: 350, def: 220, when: s => s.o?.layout === 'arc'}), C('arm', 'Longueur des bancs droits', 'range', {unit: '%', min: 10, max: 300, def: 80, when: s => s.o?.layout === 'horseshoe'}),
+                C('inner', 'Trou au centre', 'range', {unit: '%', min: 5, max: 90, def: 38, when: s => ['hemicycle', 'arc', 'horseshoe', 'circle', undefined].includes(s.o?.layout)}),
                 C('rows', 'Nombre de rangées (0 = automatique)', 'number', {min: 0, max: 80, def: 0}), C('shape', 'Forme des sièges', 'select', {choices: [['circle', 'Ronds'], ['square', 'Carrés'], ['rounded', 'Carrés arrondis']], def: 'circle'}),
-                C('gap', 'Espace entre les sièges (%)', 'range', {min: 0, max: 60, def: 15}), C('outline', 'Contour des sièges', 'check'), C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['desc', 'Du plus grand au plus petit']]}),
+                C('gap', 'Espace entre les sièges', 'range', {unit: '%', min: 0, max: 60, def: 15}), C('outline', 'Contour des sièges', 'check'), C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['desc', 'Du plus grand au plus petit']]}),
                 O.total, C('centerText', 'Texte au centre (sinon le nombre de sièges)'), C('centerSub', 'Petit texte sous le nombre'), C('majority', 'Majorité absolue', 'select', {choices: [['none', 'Ne pas montrer'], ['text', 'En texte'], ['line', 'En texte et ligne au milieu']], def: 'none'}),
                 C('legendSeats', 'Sièges dans la légende', 'check', {def: true})],
             sample: () => ({o: {layout: 'hemicycle', title: 'Assemblée', majority: 'text'}, rows: [['Gauche radicale', 22, '#dd0000'], ['Socialistes', 66, '#ff8080'], ['Écologistes', 23, '#00c000'], ['Centre gauche', 18, '#dda0dd'], ['Centre', 30, '#ffeb00'], ['Libéraux', 16, '#0000c0'], ['Majorité', 98, '#00ffff'], ['Droite', 62, '#0066cc'], ['Droite nationale', 11, '#0d378a'], ['Non-inscrits', 2, '#eeeeee']].map(([name, seats, color]) => ({name, seats, color}))})},
@@ -638,7 +638,7 @@
     // réglages communs à tous
     const COMMON = [C('title', 'Titre'), C('subtitle', 'Sous-titre'), C('source', 'Source / note en bas'), C('titleAlign', 'Titre', 'select', {choices: [['', 'Centré'], ['left', 'À gauche']]}),
         C('legend', 'Légende', 'select', {choices: [['', 'Selon le type'], ['bottom', 'En bas'], ['right', 'À droite'], ['none', 'Aucune']]}), C('palette', 'Couleurs par défaut', 'select', {choices: [['', 'Vives'], ['pastel', 'Pastel'], ['terre', 'Terre'], ['mer', 'Mer'], ['sepia', 'Sépia (ancien)'], ['gris', 'Gris']]}),
-        C('width', 'Largeur de l’image (px)', 'number', {min: 300, max: 4000, def: 900}), C('scale', 'Taille des textes', 'range', {min: .6, max: 2.5, step: .1, def: 1}),
+        C('width', 'Largeur de l’image', 'number', {unit: 'px', min: 300, max: 4000, def: 900}), C('scale', 'Taille des textes', 'range', {min: .6, max: 2.5, step: .1, def: 1}),
         C('bg', 'Fond', 'select', {choices: [['', 'Blanc'], ['transparent', 'Transparent'], ['custom', 'Couleur…']]}), C('bgColor', 'Couleur du fond', 'color', {def: '#fdf8ee', when: s => s.o?.bg === 'custom'}), C('fg', 'Couleur des textes', 'color', {def: '#1d1d1f'})];
 
     function svg(spec, width) {

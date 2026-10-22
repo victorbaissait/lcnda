@@ -33,6 +33,7 @@ require_once __DIR__ . '/boards.php'; // tableaux (façon Freeform) // livrets d
 require_once __DIR__ . '/topic_sheets.php'; // 📒 Fiches sur un sujet
 require_once __DIR__ . '/diagrams.php';
 require_once __DIR__ . '/vector.php';
+require_once __DIR__ . '/workbooks.php'; // 🧮 Tableur : les classeurs (Outils de modification)
 require_once __DIR__ . '/transcriptions.php'; // 📜 Transcription d'actes
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
 require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille
@@ -43,10 +44,15 @@ require_once __DIR__ . '/layout_docs.php'; // 📐 Atelier de mise en page
 require_once __DIR__ . '/montage_projects.php'; // 🎬 Projets de montage vidéo
 require_once __DIR__ . '/retouch_projects.php'; // 🎚️ Projets de retouche
 require_once __DIR__ . '/audio_projects.php'; // 🎧 Projets audio
+require_once __DIR__ . '/audio_studio.php'; // 🎚️ Studio son : zones, passages reliés, transcription
 require_once __DIR__ . '/family_book.php'; // livre de famille (parties, formats) // fiches d'employeurs
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)
 require_once __DIR__ . '/research_gaps.php'; // « Que manque-t-il ? » : les actes à chercher, où et dans quelle série
 require_once __DIR__ . '/research_journal.php'; // 🗓 Journal des recherches : tout ce qui a été cherché, « Déjà dans ton suivi », visites faites
+require_once __DIR__ . '/archive_services.php'; // 🏛 Services d'archives (F14) : fiches, séries, ce qui a été consulté chez eux
+require_once __DIR__ . '/citation_styles.php'; // ❝ Citation des sources toute prête (F4) : classique, Evidence Explained, Chicago, forum
+require_once __DIR__ . '/hypothesis_compare.php'; // ⚖️ Hypothèses à comparer (F2) : réponses, preuves pour / contre, conclusion
+require_once __DIR__ . '/controle.php'; // ✅ Contrôle de la base (F3) : une seule liste d'alertes, exceptions, seuils, widget, bandeau de la fiche
 require_once __DIR__ . '/artist_catalog.php'; // 🎨 catalogue d'un artiste : bibliographie, œuvres, discographie, filmographie
 require_once __DIR__ . '/oeuvres.php'; // 🧩 types d'œuvres (sculpture, affiche, concerto, pièce, ferronnerie… 131 types) : clés permises du moteur
 require_once __DIR__ . '/profils.php'; // 🧩 profils d'une personne (politique, sportif, militaire… et les siens) : sortes du moteur, « Cette personne était… »
@@ -59,6 +65,9 @@ require_once __DIR__ . '/heritage.php';
 require_once __DIR__ . '/heritage_tools.php';
 require_once __DIR__ . '/heritage_links.php'; // question en français, langues, liens @, citations détaillées, entraide // dossier Scans, paroisses, noms cités, voyages impossibles, travail à deux, consultation    // départs, enfants placés, armoiries, poilus, circuits, papiers, cartes anciennes…
 require_once __DIR__ . '/heritage_more.php';
+require_once __DIR__ . '/biographie.php';     // 📖 biographie écrite par l'app (fiche, livres, Fiches, présentations)
+require_once __DIR__ . '/monde_autour.php';   // 🌍 le monde autour : grands événements et histoire locale
+require_once __DIR__ . '/metiers_anciens.php'; // 🛠️ fiche d'un métier ancien (dictionnaire livré)
 require_once __DIR__ . '/village.php';
 require_once __DIR__ . '/voters.php';         // cartes d'électeur, dates de vote, droit de vote dans le monde
 require_once __DIR__ . '/insee_remote.php';   // décès INSEE : fichiers de data.gouv.fr téléchargés et importés

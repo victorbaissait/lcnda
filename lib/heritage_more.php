@@ -136,36 +136,8 @@ function act_open_reminder(PDO $pdo, array $data): array
 
 /* ─── 🌡️ Épidémies, guerres, hivers terribles ────────────────────────── */
 
-/** [année début, fin, catégorie, titre, portée (France, ou départements « 13,83 », ou régions), description] */
-const HISTORICAL_CRISES = [
-    [1630, 1632, 'épidémie', 'Peste (vague de 1630-1632)', 'France', 'Dernière grande vague de peste dans le centre et le sud-est, après celle de 1628 à Lyon.'],
-    [1661, 1662, 'famine', 'Crise de l’Avènement', 'France', 'Mauvaises récoltes, prix du blé multiplié par trois : forte mortalité dans le Bassin parisien et le Centre.'],
-    [1693, 1694, 'famine', 'Grande famine de 1693-1694', 'France', 'Étés pourris et récoltes perdues : sans doute 1,3 million de morts en France.'],
-    [1709, 1710, 'hiver', 'Grand Hiver de 1709', 'France', 'Gel extrême en janvier-février 1709, blés et vignes gelés, famine : environ 600 000 morts.'],
-    [1719, 1719, 'épidémie', 'Dysenterie de 1719', 'France', 'Été très chaud et sec, dysenterie meurtrière, surtout chez les enfants.'],
-    [1720, 1722, 'épidémie', 'Peste de Marseille', '13,83,84,04,05,30,48', 'La dernière grande peste de France : la moitié de Marseille meurt, la Provence et le Gévaudan sont touchés.'],
-    [1740, 1741, 'hiver', 'Hiver et disette de 1740', 'France', 'Hiver long, printemps froid, cherté du pain.'],
-    [1779, 1779, 'épidémie', 'Dysenterie de 1779', 'Bretagne,Anjou,Maine', 'Épidémie de dysenterie très meurtrière dans l’Ouest.'],
-    [1788, 1789, 'hiver', 'Hiver 1788-1789', 'France', 'Grêle de juillet 1788 puis hiver glacial : disette à la veille de la Révolution.'],
-    [1793, 1796, 'guerre', 'Guerres de Vendée', '85,49,44,79', 'Guerre civile dans l’Ouest : massacres, colonnes infernales.'],
-    [1812, 1812, 'guerre', 'Campagne de Russie', 'France', 'Grande Armée décimée : beaucoup de jeunes hommes ne reviennent pas.'],
-    [1813, 1815, 'guerre', 'Campagnes de 1813-1815 et invasions', 'France', 'Levées massives, invasion de l’Est et du Nord, typhus des armées.'],
-    [1816, 1817, 'hiver', 'Année sans été', 'France', 'Après l’éruption du Tambora : été froid et pluvieux, disette.'],
-    [1832, 1832, 'épidémie', 'Choléra de 1832', 'France', 'Première épidémie de choléra en France : plus de 100 000 morts, Paris très touché.'],
-    [1846, 1847, 'famine', 'Crise des subsistances', 'France', 'Maladie de la pomme de terre et mauvaise récolte de blé.'],
-    [1849, 1849, 'épidémie', 'Choléra de 1849', 'France', 'Deuxième épidémie de choléra.'],
-    [1853, 1855, 'épidémie', 'Choléra de 1853-1855', 'France', 'Troisième épidémie de choléra, la plus meurtrière (environ 140 000 morts).'],
-    [1865, 1866, 'épidémie', 'Choléra de 1865-1866', 'France', 'Choléra arrivé par Marseille.'],
-    [1870, 1871, 'guerre', 'Guerre franco-prussienne et variole', 'France', 'Guerre, siège de Paris, et grande épidémie de variole (environ 90 000 morts).'],
-    [1879, 1880, 'hiver', 'Hiver 1879-1880', 'France', 'Un des hivers les plus froids du XIXe siècle (Loire et Seine gelées).'],
-    [1875, 1895, 'crise', 'Phylloxéra', 'France', 'Le vignoble est détruit : ruine et départs de nombreuses familles de vignerons.'],
-    [1884, 1885, 'épidémie', 'Choléra de 1884', '13,83,06,30,34,75', 'Choléra à Toulon, Marseille, puis Paris.'],
-    [1914, 1918, 'guerre', 'Première Guerre mondiale', 'France', '1,4 million de soldats français tués ; départements du Nord et de l’Est occupés.'],
-    [1918, 1919, 'épidémie', 'Grippe espagnole', 'France', 'Environ 240 000 morts en France, surtout des jeunes adultes, d’octobre 1918 au printemps 1919.'],
-    [1939, 1945, 'guerre', 'Seconde Guerre mondiale', 'France', 'Combats de 1940, bombardements, déportations, Libération.'],
-    [1944, 1944, 'guerre', 'Débarquement et bombardements de Normandie', '14,50,61,76,27', 'Villes normandes détruites, nombreuses victimes civiles.'],
-    [1956, 1956, 'hiver', 'Hiver de février 1956', 'France', 'Vague de froid exceptionnelle.'],
-];
+/* Les crises [début, fin, catégorie, titre, portée (France, départements « 13,83 » ou régions), description] viennent de la liste
+ * unique « Le monde autour » (assets/data/monde-autour.json, événements marqués crisis) : historical_crises(), lib/monde_autour.php. */
 
 /** Code du département d'un lieu (par son code INSEE, sinon par son nom de département). */
 function crisis_in_scope(string $scope, array $place): bool
@@ -194,7 +166,7 @@ function historical_context(PDO $pdo): array
     $people = collection_people($pdo, array_keys($byPerson));
     $crises = [];
     $min = $byYear ? min(array_keys($byYear)) : 0; $max = $byYear ? max(array_keys($byYear)) : 0;
-    foreach (HISTORICAL_CRISES as [$from, $to, $cat, $title, $scope, $desc]) {
+    foreach (historical_crises() as [$from, $to, $cat, $title, $scope, $desc]) {
         if ($to < $min - 1 || $from > $max + 1) { continue; }
         $victims = [];
         foreach ($deaths as $d) {
@@ -216,7 +188,7 @@ function historical_context(PDO $pdo): array
         $around = []; for ($k = $y - 5; $k <= $y + 5; $k++) { if ($k !== $y) { $around[] = $byYear[$k] ?? 0; } }
         $avg = array_sum($around) / count($around);
         if ($n >= 3 && $n >= 2.5 * max(0.5, $avg)) {
-            $explained = array_values(array_filter(array_map(static fn($c) => $y >= $c[0] && $y <= $c[1] ? $c[3] : null, HISTORICAL_CRISES)));
+            $explained = array_values(array_filter(array_map(static fn($c) => $y >= $c[0] && $y <= $c[1] ? $c[3] : null, historical_crises())));
             $spikes[] = ['year' => $y, 'deaths' => $n, 'usual' => round($avg, 1), 'explained' => $explained];
         }
     }
@@ -853,11 +825,8 @@ function suspicious_places(PDO $pdo): array
 function fix_place(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
-    if (!empty($data['ignore'])) {
-        $s = ht_setting($pdo, 'lcnda-place-ignored', ['ids' => []]);
-        $s['ids'] = array_values(array_unique([...($s['ids'] ?? []), $id]));
-        ht_save_setting($pdo, 'lcnda-place-ignored', $s);
-        return ['ok' => true];
+    if (!empty($data['ignore'])) { // ✅ écarté comme toutes les alertes du Contrôle de la base (dismissed_issues, « ↺ Signaler de nouveau »)
+        return controle_dismiss($pdo, ['key' => 'place:' . $id, 'reason' => 'Le lieu est juste', 'watch' => 1]) + ['ok' => true];
     }
     $lat = h_coord($data['lat'] ?? null, 90); $lon = h_coord($data['lon'] ?? null, 180);
     if ($lat === null || $lon === null) { throw new RuntimeException('Coordonnées invalides.'); }

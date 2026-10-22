@@ -27,7 +27,9 @@
     const cats = () => A().tileLayerCategories || [];
     const label = k => SHORT[k] || cats().flatMap(c => c.items).find(i => i[0] === k)?.[1] || k;
     const favs = which => { try { const v = JSON.parse(localStorage.getItem(`genealogie-addrmap-${which}`) || 'null'); if (Array.isArray(v) && v.length) return v; } catch (_) {} return which === 'old' ? OLD_DEFAULT : NOW_DEFAULT; };
-    const mapOptions = (which, cur) => { const f = favs(which); const opt = (k, l) => `<option value="${esc(k)}" ${k === cur ? 'selected' : ''}>${esc(l)}</option>`;
+    /** Les fonds proposés en premier : dans l'ordre de « Fonds de cartes » (Maintenance → Cartes et fonds de carte), sans ceux qui y sont décochés */
+    const favsShown = which => { const raw = favs(which), keys = A().sortTileKeys ? A().sortTileKeys(raw) : raw; const vis = new Set(cats().flatMap(c => c.items.map(i => i[0]))); const f = vis.size ? keys.filter(k => vis.has(k)) : keys; return f.length ? f : keys; };
+    const mapOptions = (which, cur) => { const f = favsShown(which); const opt = (k, l) => `<option value="${esc(k)}" ${k === cur ? 'selected' : ''}>${esc(l)}</option>`;
         return (which === 'old' ? opt('', 'Aucune') : '') + f.map(k => opt(k, label(k))).join('') + (f.includes(cur) || !cur ? '' : opt(cur, label(cur)))
             + cats().map(c => { const items = c.items.filter(([k]) => !f.includes(k) && k !== cur); return items.length ? `<optgroup label="${esc(c.label)}">${items.map(([k, l]) => opt(k, l)).join('')}</optgroup>` : ''; }).join(''); };
     const PREC = {exact: ['✓', 'Adresse retrouvée telle quelle'], approx: ['≈', 'Numéro disparu : numéro voisin du même côté'], street: ['~', 'Sans numéro : milieu de la rue'], fuzzy: ['?', 'Nom de rue proche : à vérifier'], manual: ['📌', 'Placée à la main'], online: ['🌐', 'Trouvée en ligne']};
@@ -49,7 +51,7 @@
         let D;
         try { D = await get('addr_map', {insee, digest_id: digestId || ''}); } catch (e) { box.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
         if (!D.insee) { box.innerHTML = `<div class="maintenance-panel"><p>${esc(D.error || 'Commune inconnue.')}</p></div>`; return; }
-        const st = {year: Number(year) || 0, old: pref('old', favs('old')[0]), now: pref('now', favs('now')[0]), opacity: pref('opacity', 70), auto: pref('auto', true), zoom: 16, lat: D.commune.lat ?? 46.6, lon: D.commune.lon ?? 2.4, mode: null, sel: null, draw: null};
+        const st = {year: Number(year) || 0, old: pref('old', favsShown('old')[0]), now: pref('now', favsShown('now')[0]), opacity: pref('opacity', 70), auto: pref('auto', true), zoom: 16, lat: D.commune.lat ?? 46.6, lon: D.commune.lon ?? 2.4, mode: null, sel: null, draw: null};
         if (st.year && !D.years.includes(st.year)) st.year = 0;
         const yearColor = y => YEAR_COLORS[Math.max(0, D.years.indexOf(Number(y))) % YEAR_COLORS.length];
         const visible = () => D.addresses.filter(a => !st.year || a.years[st.year]);
@@ -79,7 +81,7 @@
                     <label>Aujourd’hui <select data-am-now>${mapOptions('now', st.now)}</select></label>
                 </div>
                 <div class="h-am-bar is-ban">${banLine}
-                    <span class="h-am-actions"><label class="checkbox-line" title="Placer tout seul les nouvelles adresses à l’ouverture du plan"><input type="checkbox" data-am-auto ${st.auto ? 'checked' : ''}> placement automatique</label>
+                    <span class="h-am-actions"><label class="ui-toggle" title="Placer tout seul les nouvelles adresses à l’ouverture du plan"><input type="checkbox" data-am-auto ${st.auto ? 'checked' : ''}><i></i>placement automatique</label>
                     <button type="button" class="button small secondary" data-am-place ${b.count ? '' : 'disabled'} title="Placer les adresses pas encore placées (les points posés à la main ne bougent jamais)">📍 Placer</button>
                     <button type="button" class="button small secondary" data-am-online title="Chercher sur Internet (IGN) les adresses qui restent à placer">🌐 En ligne</button>
                     <button type="button" class="button small secondary" data-am-streets>🛣️ Anciens noms de rues${D.streets.length ? ` <small>${D.streets.length}</small>` : ''}</button></span></div>

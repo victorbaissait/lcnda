@@ -1,0 +1,63 @@
+/* LCNDA — 📐 la boîte « Format » commune (app-formats.js) et les fenêtres Format du document / Taille de l'image / Informations */
+.fmt-box { display: grid; gap: 10px; min-width: 0; }
+.fmt-box label > span { display: block; font-size: 12px; font-weight: 700; color: var(--ui-muted); margin-bottom: 3px; }
+.fmt-box .fmt-preset select { width: 100%; max-width: 100%; }
+.fmt-dims { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) minmax(90px, auto); gap: 8px; align-items: end; }
+.fmt-dims input, .fmt-dims select { width: 100%; min-width: 0; box-sizing: border-box; }
+.fmt-x { padding-bottom: 9px; font-weight: 700; color: var(--ui-muted); }
+.fmt-orient { display: inline-grid; grid-template-columns: auto auto; justify-self: start; }
+.fmt-dpi { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.fmt-dpi > span { flex-basis: 100%; }
+.fmt-box .fmt-dpi input[type=number] { width: 100px; flex: none; }
+.fmt-dpi em { font-style: normal; font-weight: 700; }
+.fmt-info { margin: 0; font-size: 13px; }
+.fmt-forget { justify-self: start; }
+/* fenêtres : deux colonnes (réglages · aperçu ou détails) ; une seule sur téléphone */
+.fmt-dlg-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px 22px; align-items: start; }
+.fmt-dlg-grid fieldset { border: 1px solid var(--ui-line); border-radius: 8px; padding: 10px 12px 12px; margin: 0; min-width: 0; display: grid; gap: 8px; }
+.fmt-dlg-grid legend { font-weight: 700; padding: 0 4px; }
+.fmt-dlg-grid .fmt-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; }
+.fmt-dlg-grid .fmt-row label > span, .fmt-dlg-grid fieldset > label > span { display: block; font-size: 12px; font-weight: 700; color: var(--ui-muted); margin-bottom: 3px; }
+.fmt-dlg-grid input[type=number], .fmt-dlg-grid input[type=text], .fmt-dlg-grid select, .fmt-dlg-grid textarea { width: 100%; box-sizing: border-box; min-width: 0; }
+.fmt-before-after { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; font-size: 13px; }
+.fmt-before-after dt { color: var(--ui-muted); }
+.fmt-before-after dd { margin: 0; font-weight: 700; }
+.fmt-anchor { display: inline-grid; grid-template-columns: repeat(3, 34px); grid-template-rows: repeat(3, 34px); gap: 3px; }
+.fmt-anchor button { width: 34px; height: 34px; padding: 0; border: 1.5px solid var(--ui-line); background: var(--ui-bg); color: var(--ui-ink); border-radius: 4px; cursor: pointer; font-size: 15px; line-height: 1; }
+.fmt-anchor button.is-active { background: var(--ui-blue); border-color: var(--ui-blue); color: #fff; }
+.fmt-anchor button:focus-visible { outline: 2px solid var(--ui-blue); outline-offset: 2px; }
+.fmt-pagesel { display: grid; gap: 6px; }
+.fmt-pagesel input[type=text] { max-width: 220px; }
+.fmt-preview { border: 1px dashed var(--ui-line); border-radius: 8px; padding: 12px; display: grid; place-items: center; min-height: 160px; background: var(--ui-soft); }
+.fmt-preview .fmt-sheet { background: #fff; box-shadow: 0 1px 6px rgba(0, 0, 0, .25); position: relative; max-width: 100%; }
+.fmt-preview .fmt-sheet i { position: absolute; border: 1px dashed #e0457b; }
+.fmt-preview small { display: block; text-align: center; margin-top: 6px; color: var(--ui-muted); }
+.fmt-info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; }
+.fmt-info-grid .is-wide { grid-column: 1 / -1; }
+.fmt-info-grid label > span { display: block; font-size: 12px; font-weight: 700; color: var(--ui-muted); margin-bottom: 3px; }
+.fmt-info-grid input, .fmt-info-grid textarea, .fmt-info-grid select { width: 100%; box-sizing: border-box; }
+/* 🎚️ retouche : la zone de travail agrandie, dessinée autour de la photo (suit le zoom), et la taille finale */
+.h-rt-board { position: absolute; z-index: 0; pointer-events: none; outline: 1.5px dashed var(--ui-blue); outline-offset: 0; }
+.h-rt-board.is-transparent { background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 16px 16px; background-position: 0 0, 0 8px, 8px -8px, -8px 0; background-color: #fff; }
+.h-rt-canvaswrap.has-board > canvas[data-rt-canvas] { position: relative; z-index: 1; }
+.h-rt-canvaswrap.has-board > canvas.h-rt-overlay { z-index: 2; }
+.h-rt-sizechip { position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%); z-index: 3; white-space: nowrap; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: var(--ui-blue); color: #fff; pointer-events: none; }
+@media (max-width: 700px) {
+    .fmt-dlg-grid, .fmt-info-grid { grid-template-columns: minmax(0, 1fr); }
+    .fmt-dims { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
+    .fmt-dims > label:last-child { grid-column: 1 / -1; }
+}
+/* les cases des fenêtres : même allure que les formulaires de l'app (.form-grid) */
+.fmt-box input[type=number], .fmt-box input[type=text], .fmt-box select,
+.fmt-dlg-grid input[type=number], .fmt-dlg-grid input[type=text], .fmt-dlg-grid select, .fmt-dlg-grid textarea,
+.fmt-info-grid input[type=text], .fmt-info-grid select, .fmt-info-grid textarea,
+.k-print-custom input, .k-print-custom select { border: 2px solid var(--ui-ink); border-radius: 0; background: var(--ui-bg); color: var(--ui-ink); padding: 8px 10px; min-height: 40px; font: inherit; }
+.fmt-box label > span, .fmt-dlg-grid label > span, .fmt-info-grid label > span, .fmt-info-grid .pk-lab { font-size: 11px; font-weight: 700; color: var(--ui-ink); }
+.fmt-info-grid textarea { resize: vertical; }
+.fmt-dlg-grid .checkbox-line, .fmt-box .checkbox-line { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; }
+.fmt-dlg-grid .checkbox-line input[type=text] { min-height: 32px; padding: 4px 8px; width: 140px; }
+.k-print-custom { margin-top: 10px; }
+/* dans un .form-grid (la nouvelle carte) : les libellés et cases gardent l'allure de la boîte */
+.form-grid .fmt-in-grid label { display: block; font-size: 14px; font-weight: 400; }
+.form-grid .fmt-in-grid label.fmt-dpi { display: flex; }
+.form-grid .fmt-in-grid .fmt-dims input, .form-grid .fmt-in-grid .fmt-dims select, .form-grid .fmt-in-grid .fmt-preset select { min-height: 40px; padding: 8px 10px; }

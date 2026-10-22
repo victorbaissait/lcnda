@@ -528,6 +528,111 @@ Filet de sécurité : à l’ouverture d’une fenêtre (`showModal`) dont le ti
 - Les menus d’un éditeur gardent l’icône de l’objet (« 🎚 Nouveau calque de réglage ») ; les choix de format d’une fenêtre d’export E3 (📄 PDF, 🖼 PNG…) aussi.
 - Le test `tests/test-harmo-mots-symboles.js` cherche les variantes interdites dans le code.
 
+## K16 — Interrupteur ou case à cocher (app-saisies.js, saisies.css)
+
+Une règle simple :
+
+| Quoi | Composant |
+|---|---|
+| Un réglage qui s’applique **tout de suite** (Maintenance et toute page K2, panneau d’un éditeur, option d’un affichage : « Afficher les valeurs », « Aimanter à la grille », « Masquer les vivants dans GEDCOM ») | **interrupteur** |
+| **Choisir des éléments dans une liste** (lignes ou blocs à montrer, colonnes, filtres, types, personnes) | case à cocher |
+| Une option qu’on **valide ensuite par un bouton** (« Enregistrer », « Créer », « ⤓ Exporter », « ⤒ Importer ») : « Inclure les médias », « Date incertaine » | case à cocher |
+
+```html
+<label class="ui-toggle"><input type="checkbox" data-x="dates" checked><i></i>Afficher les dates</label>   <!-- interrupteur : <i></i> juste après la case -->
+<label class="checkbox-line"><input type="checkbox" name="include_media" checked> Inclure les médias</label>
+```
+
+```js
+UI.toggleHtml('Afficher les dates', {checked: true, attrs: 'data-x="dates"', sub: 'petite ligne grise'});
+UI.checkHtml('Inclure les médias', {checked: true, attrs: 'name="include_media"'});
+UI.asToggle(label)   // montre une ancienne « .checkbox-line » en interrupteur (même case : mêmes noms, mêmes événements)
+```
+
+- C’est toujours un vrai `input type=checkbox` : `name`, `checked`, `change`, `FormData` ne changent pas.
+- L’interrupteur garde son aspect même dans une grille de formulaire (`.form-grid label { display: grid }`).
+- Jamais de « switch » fait à la main, ni de case appelée « …-toggle » ; un diagramme (`type: 'check'`) et `iChk` de la présentation donnent déjà un interrupteur.
+
+## K17 — Nombres avec unité, heures et durées écrites librement (app-saisies.js)
+
+**L’unité est dans la case** (« 12 | px », comme la case des curseurs C3), jamais dans le libellé (« Taille (px) », « Durée (s) », « (cM) ») ni écrite après la case.
+
+```html
+<label>Taille<input type="number" name="size" value="12" data-unit="px"></label>          <!-- « 12 | px », la case reste la même -->
+<label>Arrivée<input data-ui-time name="time_from" value="09:30"></label>              <!-- « 9 h 30 » ; la valeur reste « 09:30 » -->
+<label>Durée<input type="number" data-ui-duration="s" name="dur" min="0.1" step="0.1" value="90"></label>   <!-- « 1 min 30 s » ; la valeur reste 90 -->
+<label>Durée<input name="duration" data-ui-duration-hint="min" data-ui-colon="ms"></label>     <!-- texte libre gardé tel quel, « ✓ Compris » quand c’est compris -->
+```
+
+- Habillage tout seul (comme C1–C4) : `input[data-unit]` (nombre ou texte `inputmode=decimal`), `input[type=number]` dont le libellé finit par « (px) » (l’unité passe dans la case — filet), `input[type=time]` et `input[data-ui-time]`, `input[data-ui-duration]`, `input[data-ui-duration-hint]`. `data-ui-off` pour l’éviter.
+- **Heures** : « 14 h 30 », « 14h30 », « 14:30 », « 9h05 », « 1430 », « 14 », « midi », « minuit et demie », « 2 pm ». Dessous « ✓ Compris : 14 h 30 » ou « ⚠️ Heure impossible : 25 h ».
+- **Durées** : « 2 h 15 », « 1 min 30 », « 90 s », « 800 ms », « 1:30 », « 1:05:00 », « 3'20 », « 0,8 » (un nombre seul est dans l’unité de la case). « 1:30 » = 1 min 30 s (ou 1 h 30 pour une case en minutes ; `data-ui-colon="ms"` pour forcer minutes:secondes). `min`, `max`, `step` de la case sont respectés (« trop long : au plus 5 s », « arrondi à 1 min près »). ↑ ↓ (⇧ ×10) changent d’un pas.
+- **Les valeurs enregistrées ne changent pas** : la case d’origine reste là (cachée), avec son nom, sa valeur (« 14:30 », un nombre dans son unité) et ses écouteurs ; elle reçoit `input` pendant la frappe et `change` à la fin ; `champ.value = …` écrit par l’outil met la case visible à jour. Une saisie pas comprise : la case d’origine garde l’ancienne valeur et `setCustomValidity` → K1 montre l’erreur et garde la fenêtre ouverte.
+- Aides : diagrammes `C('height', 'Hauteur au plus', 'number', {unit: 'px'})` ; dessin vectoriel `fld(k, label, v, {unit: 'px'})` ; champs des types (artistes) `{type: 'number', unit: 'min'}` ; filtres de la retouche `[clé, libellé, min, max, départ, pas, unité]`.
+
+```js
+UI.numberField({name: 'w', value: 120, unit: 'mm', min: 1, step: 0.5});   // .input
+UI.timeField({name: 'at', value: '14:30'});                                // .input = la case enregistrée, .text = la case visible
+UI.durationField({name: 'dur', value: 90, unit: 's', max: 600});
+UI.readTime('14h30')                        // {ok: true, value: '14:30', label: '14 h 30'}
+UI.readDuration('1 min 30', {unit: 's'})    // {ok: true, value: 90, seconds: 90, label: '1 min 30 s'}
+UI.formatDuration(90, {unit: 's'})          // « 1 min 30 s »
+UI.clock(3920)                              // « 1:05:20 » — l’affichage commun d’une durée dans un lecteur (« 3:20 », « 1:05:00 » ; {tenths: true} → « 0:03,5 »)
+```
+
+## K18 — Barre du bas des éditeurs : `UI.editorStatus`, `UI.zoomControl` (app-editeurs.js, editeurs.css)
+
+Une seule barre en bas de tous les éditeurs (Retouche, Retouche rapide, Montage, Son, Mise en page, Dessin et ses outils carte / arbre / faire-part / sceau, Présentation, Diaporama, Transcription, Maison, Tableaux, Tableur) : à gauche **où l’on est**, au milieu **l’aide de l’outil choisi**, à droite **🧲 · 📏 · [− 100 % ▾ +]**.
+
+```js
+const bar = UI.editorStatus({
+    where: 'Page 1 / 38',                     // texte, ou un élément (la navigation des pages…) déplacé dans la barre
+    help: 'Clic : choisir · glisser : déplacer',
+    zoom: {get: () => zoom, set: k => setZoom(k), fit: () => zoomFit(), min: .1, max: 8},   // 1 = 100 % ; fit = « Ajuster à la fenêtre »
+    magnet: {get: () => snapOn, set: v => { snapOn = v; }}, magnetTitle: 'Aimanter : …',     // facultatif
+    rulers: {get: () => guides, set: v => { guides = v; render(); }}, rulersTitle: '…',      // facultatif (📏)
+    wheel: stage,                             // facultatif : ⌘ + molette sur cet élément (si l’outil ne le fait pas déjà)
+});
+host.appendChild(bar);
+bar.setWhere('Calque 2'); bar.setHelp(AIDES[outil]); bar.flash('Objet verrouillé.');   // flash : 5 s à la place de l’aide
+bar.sync();                                    // après un zoom fait par l’outil (molette, pincement…) : relit le zoom et 🧲 📏
+```
+
+- Le zoom : `[−]` `[100 % ▾]` `[+]` ; le menu propose « ⤢ Ajuster à la fenêtre » ⌘0, 50 %, 100 % ⌘1, 200 %. **⌘0, ⌘1, ⌘+ et ⌘−** sont pris par une seule écoute (avant les touches de l’outil) pour l’éditeur du dessus (`UI.editorZoomKey`, aussi appelé par le menu Affichage de l’app Electron via `ext.editorZoom`).
+- Un seul nom pour l’aimant : **🧲 Aimanter** (bulle : ce qui s’aimante et la touche pour s’en passer). Mêmes noms dans le menu Affichage : « ⤢ Ajuster à la fenêtre », « 100 % (taille réelle) », « 📏 … », « 🧲 Aimanter ».
+- L’ancien bas d’un outil gardé pour ses écouteurs : classe `ed-old-hidden` (caché).
+
+## K19 — Colonne d’outils : `UI.editorRail`, `UI.railProxy`, et « 💾 Enregistrer ▾ » : `UI.saveMenu`
+
+```js
+UI.editorRail(nav, {breaks: ['[data-x-tool=pen]', '[data-x-tool=text]', '[data-x-tool=hand]']});   // 36 px, un trait avant chaque groupe
+UI.railProxy(nav, rangée.querySelectorAll('[data-op]'), {icons: {split: '✂️'}});   // des boutons à texte → cases à icône (texte en bulle), l’original caché
+UI.saveMenu(bouton💾, () => [{icon: '🗂', label: 'Enregistrer sans l’afficher', run}, …]);           // « ▾ » collé à 💾 : les autres façons d’enregistrer
+UI.editorMenus(nav, {Fichier: () => items, Édition: () => items, Affichage: () => items});            // E1 : menus du haut avec le menu de l’app
+const h = UI.editorHistory({get: () => état, set: é => remettre(é), onChange: h => majBoutons(h)});    // E1 : ↶ ↷ par instantanés ; h.commit() après chaque changement
+```
+
+- Cases de 36 px, l’outil actif en bleu (`.is-active`, `.is-on` ou `aria-pressed`), groupes séparés par `.ed-rail-sep`. Sur téléphone la colonne reste (36 px) ; la Retouche complète la met en ligne sous 900 px.
+- Les actions de fin (Enregistrer et afficher, Enregistrer sans l’afficher, Copie séparée, Garder dans les médias…) ne sont **qu’en haut**, dans « 💾 Enregistrer ▾ ». Les boutons d’en bas restent dans la page (cachés) pour leurs écouteurs et les essais.
+- La barre du haut tient sur une ligne : ce qui ne tient pas passe dans un menu (Maison : l’aimant est allé dans la barre du bas).
+
+## K20 — Poignées : ⠿ pour ranger, carrés blancs au bord bleu autour des objets
+
+- Ranger une ligne : `⠿` gris de 16 px à gauche (classes `.dnd-grip`, `.order-grip`, `.ui-grip`…, style commun dans editeurs.css). `heritage-dnd.js` la rend prenable au clavier (Tab) et déplace la ligne avec **Alt + ↑ / ↓** (il presse les flèches ↑ ↓ de la ligne, ou rejoue le glisser-déposer d’une ligne). À la souris, les flèches ↑ ↓ des lignes qui ont une poignée sont cachées (elles restent au doigt).
+- Autour d’un objet : petits carrés blancs au bord `--ed-handle-line` (le bleu de l’app), un rond pour tourner — mêmes réglages pour `.vx-handle`, `.h-hs-handle`, `.h-tx-handle` (SVG) et `.kn-h`, `.ly-h`, `.h-bh`, `.h-rt-crop i` (HTML). Un nouvel éditeur reprend une de ces classes, jamais une autre couleur.
+
+## K2 dans une fenêtre de réglages : `UI.autoSaveDialog`
+
+```js
+openDialog({title: 'Réglages par défaut des livres', body, onOpen: dg => UI.autoSaveDialog(dg, {
+    keys: ['genealogie-layout-defaults'],      // les clés localStorage des réglages
+    save: () => { écrireLesClésDepuisLaFenêtre(); }, reload: () => { remplirLaFenêtre(); },
+    reset: () => { localStorage.removeItem('genealogie-layout-defaults'); },   // bouton [data-ui-reset] « ↺ Remettre comme au départ », sans question
+    onChange: () => redessinerDerrière()})});   // pas d’onSubmit : « Fermer » seul en bas
+```
+
+« ✓ Enregistré » s’affiche dans le haut de la fenêtre ; chaque changement donne un message H7 avec « ↶ Annuler » / « ↷ Rétablir ». Les listes à ranger d’Apparence (menu, listes, cartes, onglets de Maintenance, graphiques, fonds de cartes, bibliothèque des widgets) s’enregistrent toutes seules (app-editeurs.js presse leur bouton caché après chaque case, nom, ⠿ ou Alt + ↑ / ↓).
+
 ## 🧓 Mode simple (app-mode-simple.js, mode-simple.css, lib/mode_simple.php)
 
 Le mode grand-parent validé : de très gros boutons, l’arbre, les photos, les personnes et « Ce jour-là », rien à modifier.
@@ -549,15 +654,97 @@ MS.makeMode(cadre, {preview: true, settings}); // le même moteur dans un cadre 
 - Onglet de réglages : `app-access.js` pose les onglets « ♿ Toute l’app » / « 🧓 Mode simple » (sessionStorage `lcnda-a11y-tab`) et appelle `MS.mountTab(page)`.
 - Test : `tests/test-mode-simple.js`.
 
-## 🎨 Designs au choix A1–A10 (app-designs.js, designs.css, designs-gen.css)
+## 🎨 Designs au choix A1–A8 (app-designs.js, designs.css, designs-gen.css)
 
-Maintenance → « 🎨 Designs au choix » (`ext.maintenance.designs`, juste après « Apparence »). Réglage : `localStorage['genealogie-designs']` (suit la base comme les autres « genealogie-* »), réglages enregistrés : `genealogie-designs-presets` (`UI.presetsFrame`, outil `designs` pour ⤓ / ⤒). Les deux sont dans `SITE_DEFAULT_KEYS` et `site_defaults_allowed_keys()` ; le premier dans `LAYOUT_KEYS` et dans les designs de l’Apparence (`lookFlat` → `a_designs`).
+Maintenance → « 🎨 Designs au choix » (`ext.maintenance.designs`, juste après « Apparence »). Huit réglages de **forme** : A1 Style général (traits, ombres, coins, quadrillage), A2 Densité, A3 Icônes, A4 Fiche d’une personne, A5 Cases des arbres, A6 Boutons, A7 Mouvements, A8 Listes. Réglage : `localStorage['genealogie-designs']` (suit la base comme les autres « genealogie-* »), dans `SITE_DEFAULT_KEYS`, `site_defaults_allowed_keys()`, `LAYOUT_KEYS` et les designs de l’Apparence (`lookFlat` → `a_designs`).
 
-- `LCNDA_DESIGNS.read()` / `write(G)` / `clean(raw)` : `G = {a1: {v, …réglages en plus}, … a10}` ; `defOf(id, carte)`, `isOn(G, id)` (une carte ≠ « Comme avant » ou une retouche), `isModified(G, id)` (« retouché »), `presetState(ensemble)`, `presetOf(G)`.
-- `attrsOf(G)` → `{attrs, vars}` posés par `applyTo(<html>, G)` ; rien du tout pour « Comme avant ». Attribut principal par réglage : `data-lc-style` (A1), `data-lc-density` (A2), `data-lc-icons` (A3), `data-lc-fiche` (A4), `data-lc-tree` (A5), `data-lc-btn` (A6), `data-lc-font` (A7), `data-lc-motion` (A8), `data-lc-list` (A9), `data-lc-dash` (A10) ; un attribut par retouche (`data-lc-r`, `data-lc-sh`, `data-lc-acc`, `data-lc-lines`, `data-lc-fz`, `data-lc-caps`, `data-lc-lsel`…).
-- Pose au plus tôt : `index.php` relit `lcnda-designs-ui-v1` (copie des attributs) avant le premier dessin ; il allume aussi `designs-gen.css` (`media="not all"` sinon) et `apparence-traits.css` (traits d’A1, préfixe `:root:is(.lc-frame,[data-lc-lines])`).
-- `designs-gen.css` est fabriqué par `python3 scripts/build-designs-css.py` (ombres, coins, fonds de palette, marges × `--lc-sp`, survol) depuis toutes les feuilles d’`index.php` : à relancer après un gros changement de CSS, puis monter son `?v=`.
-- Passages sur l’écran (`decorate(root, G)`, MutationObserver léger, rien si aucun réglage ne le demande) : A3 icônes au trait (`.lc-ic`, l’émoji reste dans le texte, caché à l’œil), A4 en-tête de la fiche (`ext.afterPerson`, éléments `.lc-dz`), A7 noms en minuscules, A9 petit portrait des lignes, A10 date du journal, A5 Sosa des cases, A8 secondes des messages (`toast.dataset.lcTotal`).
+- **Apparence passe devant, toujours** : le premier cadre d’Apparence (Preset, Couleur principale, Police de caractères, Taille typographique, Menu des onglets…) n’est jamais remplacé par un design. Aucune règle de designs.css / designs-gen.css ne touche à `--font-family`, à la taille du texte, à `--blue`, `--bg`, `--paper`, `--card-bg`, `--card-head-bg`, `--ink`. La couleur des traits d’A1 est tirée des couleurs de l’Apparence (`color-mix(var(--ink), var(--card-bg))`), le gris des lignes d’A8 aussi ; un thème à soi avec ses propres traits (`html.lc-frame`) garde les siens (`:root[data-lc-lines]:not(.lc-frame)`). Toute nouvelle règle de design : de la forme seulement, jamais de police, de taille de texte ni de couleur principale.
+- Retirés (doublons avec Apparence) : « ★ Ensembles prêts » et leurs réglages enregistrés (`genealogie-designs-presets`), l’ancienne A7 « Police de l’interface », l’ancienne A10 « Tableau de bord », la « couleur d’accent » d’A1 et la palette de fonds des styles.
+- `LCNDA_DESIGNS.read()` / `write(G)` / `clean(raw)` : `G = {ver: 2, a1: {v, …réglages en plus}, … a8}` ; `defOf(id, carte)`, `isOn(G, id)` (une carte ≠ « Comme avant » ou une retouche), `isModified(G, id)` (« retouché »), `defaults()`.
+- Anciens réglages : `migrate(raw)` relit un réglage sans `ver` (A1–A10) sans erreur — A7 police et A10 ignorés, A8 → A7, A9 → A8, couleur d’accent oubliée. `portable(raw)` rend la valeur à neuf (`''` si tout est « Comme avant ») : utilisé par `lookFlat` / `lookFromFlat` (💾 l’Apparence) et `TIDY` de heritage-studio.js (💾 toute l’app). Au chargement, `tidyStorage()` réécrit la copie du navigateur et efface `OLD_KEYS` (`genealogie-designs-presets`, `lcnda-designs-ui-v1`…) ; `applyTo` retire aussi les anciens attributs (`OLD_ATTRS`).
+- `attrsOf(G)` → `{attrs, vars}` posés par `applyTo(<html>, G)` ; rien du tout pour « Comme avant ». Attribut principal par réglage : `data-lc-style` (A1), `data-lc-density` (A2), `data-lc-icons` (A3), `data-lc-fiche` (A4), `data-lc-tree` (A5), `data-lc-btn` (A6), `data-lc-motion` (A7), `data-lc-list` (A8) ; un attribut par retouche (`data-lc-r`, `data-lc-sh`, `data-lc-lines`, `data-lc-lsel`…).
+- Pose au plus tôt : `index.php` relit `lcnda-designs-ui-v2` (copie des attributs) avant le premier dessin ; il allume aussi `designs-gen.css` (`media="not all"` sinon) et `apparence-traits.css` (traits d’A1, préfixe `:root:is(.lc-frame,[data-lc-lines])`).
+- `designs-gen.css` est fabriqué par `python3 scripts/build-designs-css.py` (ombres, coins, marges × `--lc-sp`, survol ; jamais de fond ni de couleur) depuis toutes les feuilles d’`index.php` : à relancer après un gros changement de CSS, puis monter son `?v=`.
+- Passages sur l’écran (`decorate(root, G)`, MutationObserver léger, rien si aucun réglage ne le demande) : A3 icônes au trait (`.lc-ic`, l’émoji reste dans le texte, caché à l’œil), A4 en-tête de la fiche (`ext.afterPerson`, éléments `.lc-dz`), A8 petit portrait des lignes, A5 Sosa des cases, A7 secondes des messages (`toast.dataset.lcTotal`).
+- Le cadre ℹ️ en haut d’Apparence (`apparenceNoteHtml`) : ce que règlent les designs, que la police, la taille et les couleurs se règlent dans Apparence, et la liste des designs changés.
 - Aperçus : petites pages (iframe `srcdoc`) avec les feuilles de l’app, le réglage montré posé sur leur `<html>` et de vrais écrans (fiche ouverte, personnes, `LCNDA_PARTS.treeHtml`, dernier tableau de bord affiché).
-- Test : `tests/test-designs.js`.
+- Tests : `tests/test-designs.js`, `tests/test-designs-apparence.js` (Apparence passe devant chaque design ; ancien réglage nettoyé).
 
+
+## 📐 Formats de document et informations (app-formats.js, formats.css)
+
+Une seule liste de formats pour tous les outils : `window.LCNDA_FORMATS` (A0 à A6, B5, Lettre / Legal / Tabloïd US, carte postale, carte de visite, carton DL, carrés, livres, album, photos 9×13 à 50×70, écrans 16:9, 4:3, 1:1, 9:16, 4K) et « ✎ Format libre… ».
+
+- La boîte « Format » : `F.boxHtml({value, units: ['mm','cm','px','in'], dpi: true, orientation: true, hint})` puis `F.bindBox(el, {onChange})` → `{get(), set(v)}`. Valeur : `{id, w, h, unit, dpi, orient}` (w × h dans l’unité, déjà dans le sens choisi). `F.inMm(v)`, `F.inPx(v, ppp)`, `F.fromSize(w, h, unité, ppp, unité montrée)`, `F.preset(id, {orient, unit})`, `F.label(v)`.
+- Mémoire (`localStorage['genealogie-formats']`) : `F.use(outil, v)` retient le format de l’outil (`F.last(outil)`) et range un format libre dans « ⭐ Mes formats » (12 au plus, en haut de la liste ; « × Retirer de Mes formats » avec ↶). Les formats gardés par la mise en page (`genealogie-layout-formats`) y sont aussi proposés.
+- Informations du document : `F.openInfoDialog({value, keys, what})` → `Promise<info|null>` ; champs possibles `title, author, subject, desc, keywords, rights, lang, date (C4), isbn (clé vérifiée, F.isbnOk), people (menu de choix, plusieurs)` ; `F.cleanInfo(v, keys)`.
+- Où : 🗺️ « Une nouvelle carte » (heritage-vector-map.js) ; ✒️ Fichier → Format du document / Informations (heritage-vector.js : `doc.unit`, `doc.dpi`, `doc.fmt`, `doc.info` → `<title>`, `<desc>`, `<metadata>` du SVG, `/Title /Author /Subject /Keywords` du PDF) ; 📐 Fichier → Format du document / Informations (heritage-layout.js : `page.size` d’une page à sa taille, `@page` nommées à l’impression, `doc.info` → `<title>`, `<meta>` et `lang` du HTML / PDF, `dc:*` et `urn:isbn` de l’ePub) ; 🎚️ Image → Taille de l’image / Taille de la zone de travail, Fichier → Informations (heritage-studio.js : `st.size`, `st.board`, `st.info` dans l’historique et le projet ; XMP, `pHYs` / densité JFIF dans le PNG / JPG, `ext.rtEmbedMeta`) ; 🖨 « ✎ Autre… » dans la fenêtre Imprimer (app-actions.js).
+- Test : `tests/test-formats-documents.js`.
+
+## ✅ Contrôle de la base (lib/controle.php, heritage-controle.js)
+
+Une seule liste d’alertes pour toute l’app (validé, F3). Serveur :
+
+```php
+controle_run($pdo, $fresh = false);   // tout le contrôle (sans les exceptions), gardé dans DATA_DIR/cache/controle.json tant que la signature ne bouge pas
+controle_state($pdo);                 // ['alerts' => actives (dont « returned » : écartée mais une date a changé), 'exceptions' => …, 'people' => …]
+controle_summary($pdo);               // le widget : total, by_sort, by_level, exceptions, pct_ok (fiches sans alerte), top
+controle_person($pdo, $id);           // le bandeau de la fiche : les alertes de la fiche, avec « view » écrit de son point de vue
+```
+
+Une alerte : `{key, check, sort: dates|ages|parents|doublons|lieux, sub?, level: red|orange|yellow, title, detail, people: [ids], place?, dates: [{label, text, y, j, event_id, person_id}], fix?: {event_id, person_id}, views?: {id: texte}, rule?, checks? (doublons), score?, fp}`.
+- **Ajouter un contrôle** : dans `controle_compute`, avec `$add([...])` ; la clé = sorte de contrôle + fiches (`old-parent:12:45`) : un problème = une ligne ; `fp` = empreinte des dates en cause (l’exception revient si elle change) ; un seuil nouveau va dans `CONTROLE_SEUILS` (valeur, min, max, pas) et dans la page des seuils (`SEUILS` de heritage-controle.js) ; monter `CONTROLE_VERSION`.
+- **Ouvrir la page filtrée** depuis un autre outil : `LCNDA_EXT.openControle({sort: 'ages', level: 'red', sub: 'journeys'})`.
+- Écarter / remettre : POST `controle_dismiss` `{key, reason, note, watch}`, `controle_undismiss` `{key}` (rend l’exception d’avant pour « ↶ Annuler »). Corriger une date sur place : `controle_fix_date` `{event_id, date_text}`.
+
+
+## 🧮 Tableur et moteur commun des tableaux (app-tableur-engine.js, heritage-tableur.js, tableur.css, lib/workbooks.php)
+
+Listes → 🛠️ Outils de modification → « 🧮 Tableur » : classeurs à plusieurs feuilles, enregistrés dans la table `workbooks` (migration `schema_v50` ; GET `workbooks`, `workbook` ; POST `save_workbook`, `rename_workbook`, `delete_workbook` (rend le classeur, pour « ↶ Annuler »), `duplicate_workbook`). `kind` : `book` ou `template` (« Mes modèles »).
+
+**Le moteur (`window.LCNDA_SHEET`, sans écran, testable dans Node)** — à utiliser pour tout nouveau tableau de l'app :
+
+```js
+const S = window.LCNDA_SHEET;
+const wb = S.normalize(données);            // forme sûre et bornée : {v, sheets:[{id, name, cells:{A1:{v, s, ref, note}}, cols, rows, merges, freeze, cf, dv, filter}], styles, names}
+const calc = new S.Calc(wb);                // calcule tout ; calc.val(feuille, ligne, colonne) ; calc.isApprox(…) (≈)
+wb.sheets[0].cells.B4 = {v: '=SOMME(B2:B3)'}; calc.setCellChanged(0, [[3, 1]]);   // recalcule seulement ce qui en dépend
+S.formatValue(v, wb.styles[cell.s], {approx}); S.explain(erreur);                  // affichage ; erreur expliquée en français
+S.parseInput('12,5 %') ; S.readActDate('3 frimaire an XII') ; S.shiftFormula('=A1+$B$1', 1, 0) ; S.toEnglish('=SOMME(A1;2,5)')
+S.parseCSV(texte) ; S.sniffSep(texte) ; S.decodeBytes(octets) ; S.toCSV(lignes, {sep: ';', bom: true}) ; S.parseClipboard(texte, html)
+await S.toXlsx(wb, calc) ; await S.fromXlsx(arrayBuffer) ; await S.toOds(wb, calc) ; await S.fromOds(arrayBuffer) ; S.fromJson(texte) ; await S.readFile(nom, arrayBuffer)
+S.zipStore([{name, data}]) ; await S.makeZip([{name, data, store}], type) ; await S.unzip(arrayBuffer)   // le seul fabricant de ZIP de l'app
+S.matrix(wb, calc, feuille, plage) ; S.rowsToCells(lignes) ; S.compact(wb) (pour enregistrer)
+```
+
+- Cellule : `v` = ce qu'on a tapé (nombre, VRAI/FAUX, texte ; « = » formule ; « ' » texte forcé), `s` = n° de style dans `wb.styles` (`S.styleId(wb, {b, i, color, fill, fmt, dec, h, wrap, bd…})`), `ref` = `{kind: 'person'|'place', id}` (choisi avec le menu de choix), `note`.
+- Formats : `num`, `int`, `pct`, `eur`, `date`, `actdate`, `text`. Couleurs filtrées (`safeCol`) ; un fichier importé ne peut rien glisser dans un style.
+- Sûreté : pas d'eval ni de Function ; formule ≤ 8 192 caractères, profondeur ≤ 100 ; 2 millions de cellules ; fichiers ≤ 60 Mo ; ZIP : tailles annoncées et réelles bornées (bombe zip), éléments chiffrés refusés ; XML lu par un petit lecteur maison qui refuse DOCTYPE et ENTITY (pas d'entité externe) ; CSV exportés protégés (`csvSafe`, même règle que `A().csvSafe`).
+- Fonctions : `S.FN[nom] = {fam, sig, desc, en, f}` ; `S.fnKey('SUM')` → « SOMME ». Ajouter une fonction : `def(…)` dans le moteur (famille, signature, phrase, nom anglais ou '' si elle n'existe pas ailleurs — elle part alors en valeur dans un XLSX).
+
+**L'éditeur** : `ext.openWorkbook({id})` ou `ext.openWorkbook({data, name, onSaved, onClose})` (aussi `ext.openSheetEditor`). E1 (menus `data-xl-cmd`, réglables dans les raccourcis : `heritage-editorkeys.js`, outil `sheet`), barre d'outils et panneau rangés par ⚙️ Personnaliser (`data-tbg="xl-tools"`, `"xl-panel"`) avec « 💾 Réglages enregistrés », grille virtuelle (calques collants pour les volets figés), H10 pour filtrer, K13 import / impression, E3 export, H7 pour défaire. Modèles : `ext.sheetTemplates`. Réglages : `localStorage['genealogie-tableur']`. Test : `tests/test-tableur-moteur.js`, `tests/test-tableur.js`.
+
+**Vague 2** (à faire) : « 🧮 Modifier les données » des Diagrammes, de l'Éditeur de graphiques, des Tableaux (remplacer `tableValues` de heritage-boards.js par `new S.Calc`), des Recueils et de la Présentation ; remplacer les lecteurs CSV à part par `S.parseCSV` / `S.readFile` ; lien avec la base (`sheet_fill`, `sheet_push`).
+
+## 🎧 Studio son et ⚡ Son rapide (heritage-audio-engine.js, heritage-audio-quick.js, heritage-audio-studio.js, heritage-audio-multi.js, lib/audio_studio.php)
+
+Maquette validée : `studio-son.html`. Un seul moteur pour le son et le montage ; deux fenêtres qui montrent les mêmes réglages.
+
+```js
+const E = window.LCNDA_EXT.audioEngine;
+const buf = await E.load('media/son.wav');                        // AudioBuffer
+const fx = E.newFx('denoise', {reduction: 70});                    // un effet du rack : {id, type, on, params, range?}
+const out = await E.renderRack(buf, [fx, E.newFx('limit')]);       // le rack rejoué (non destructif)
+E.bandEnergy(out, 4000, 8000);  E.lufs(out);  E.detectHum(buf);   // mesures (tests, aperçu)
+const blob = await E.encode('mp3', out, {kbps: 192, tags: {title, chapters}});
+ext.openSound(media, {onDone});          // l'aiguillage : dernier mode (⚡ / 🎚️) et le design du Son rapide
+ext.openAudioStudio(media, {onDone, onSaved, proj, carry});   // carry : {buf, rack, regions, name, edits} = le travail qui arrive
+ext.audioExport({title, media, getBuffer, regions, lines, tracks, getTrack, toMedia}); // E3 complété (son)
+```
+
+- **Effets** (`E.FX`) : chaque sorte a ses paramètres `[clé, libellé, min, max, pas, unité, départ]` (le panneau E2 dessine les curseurs C3 tout seul), `render(buf, params)`, et `lengthChange` si elle change la durée. Pour en ajouter une : une entrée dans `FX`, un test qui **mesure** son effet (`tests/test-studio-son.js`).
+- **Son rapide ⇄ rack** : `E.quickToRack(q)` et `E.rackToQuick(rack)` → `{q, extras}` ; `extras` = ce qui reste appliqué (pastille « N réglages du Studio restent appliqués »).
+- **Réglage** : `genealogie-audio-quick-design` = `'new'` (rien = « Comme avant ») ; `genealogie-audio-mode` = dernier choix ; `genealogie-audio-fx-presets` = 💾 Réglages enregistrés partagés.
+- **Base** : `audio_regions` (zones et marqueurs d’**un fichier précis** : media + filename), `audio_region_links` (personne, événement, rôle), `audio_transcripts` ; `audio_projects.data_json` garde rack, zones, multipiste, transcription. API : `audio_regions`, `save_audio_regions`, `person_audio_regions`, `audio_transcript`, `save_audio_transcript`, `audio_transcript_search`. Bloc de fiche : `heard` (« 🎧 On l’entend »).
+- **Menu de choix** : la sorte `event` (📅 événements) a été ajoutée pour relier un passage à un événement.
+- **Export** : `UI.openExportDialog` accepte maintenant `fields` (menus Qualité, Quoi, Canaux, Fréquence…, avec `show(format)`), `checks` et `onPick` ; un format peut avoir `copy: false` et `goLabel`.

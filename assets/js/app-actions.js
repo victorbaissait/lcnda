@@ -155,6 +155,7 @@
     const plural = (n, one, many) => (A().plural ? A().plural(n, one, many) : `${n} ${Math.abs(n) < 2 ? one : (many || one + 's')}`);
     const PAPER = {A4: [210, 297], A5: [148, 210], A3: [297, 420], Lettre: [216, 279]};
     const MM = 96 / 25.4;
+    const F = () => window.LCNDA_FORMATS;
     /** les règles @media print de l'app, réécrites pour l'aperçu (on voit ce qui sera imprimé) */
     function printRules() {
         const out = [];
@@ -173,7 +174,10 @@
         const html = document.documentElement, cls = [...html.classList].join(' ');
         return `<!doctype html><html lang="fr" class="${esc(cls)}" data-theme="light"><head><meta charset="utf-8"><base href="${esc(location.href)}">${links}<style>${printRules()}</style></head><body class="${esc(document.body.className)} ${esc(bodyClass)} k-print-doc">${root === document.body ? body.innerHTML : body.outerHTML}</body></html>`;
     }
-    const pageCss = o => `@page{size:${o.paper} ${o.orientation === 'landscape' ? 'landscape' : 'portrait'}}${o.photos === false ? 'img,picture,svg image,.media-thumb,.person-photo,[class*="photo"] img{display:none!important}' : ''}`;
+    /** 📐 un format libre (« ✎ Autre format… », liste commune app-formats.js) : [largeur, hauteur] en mm, en portrait */
+    const paperMm = o => (o.paper === 'custom' && Array.isArray(o.size) ? [Math.min(...o.size), Math.max(...o.size)] : PAPER[o.paper] || PAPER.A4);
+    const pageSize = o => { if (o.paper !== 'custom') return `${o.paper} ${o.orientation === 'landscape' ? 'landscape' : 'portrait'}`; const [w, h] = paperMm(o), land = o.orientation === 'landscape'; return `${Math.round((land ? h : w) * 10) / 10}mm ${Math.round((land ? w : h) * 10) / 10}mm`; };
+    const pageCss = o => `@page{size:${pageSize(o)}}${o.photos === false ? 'img,picture,svg image,.media-thumb,.person-photo,[class*="photo"] img{display:none!important}' : ''}`;
     const withPageCss = (doc, o) => { const css = `<style data-k-print>${pageCss(o)}@media screen{html{background:#fff}body{margin:0}}</style>`; return /<\/head>/i.test(doc) ? doc.replace(/<\/head>/i, css + '</head>') : /^\s*<!doctype[^>]*>/i.test(doc) ? doc.replace(/^\s*<!doctype[^>]*>/i, m => m + css) : `<!doctype html><html lang="fr"><head><meta charset="utf-8"><base href="${esc(location.href)}">${css}</head><body>${doc}</body></html>`; };
     const imagesReady = doc => Promise.all([...(doc?.images || [])].map(im => (im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; setTimeout(r, 4000); }))));
     /** la page imprimée d'un document (dans un cadre caché, sans scripts) */
@@ -195,8 +199,9 @@
         const dlg = document.createElement('dialog'); dlg.className = 'modal ui-export k-print';
         dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">IMPRIMER</span><h2>🖨 ${esc(o.title || 'Imprimer')}</h2></div><button type="button" class="icon-button" data-k-x aria-label="Fermer">×</button></div>
             <div class="ui-export-body k-print-body"><div class="ui-export-main">
-                <div class="k-print-row"><div class="segmented k-seg" role="radiogroup" aria-label="Format du papier">${(o.papers || ['A4', 'A5']).map(p => `<button type="button" role="radio" data-k-paper="${p}">${p}</button>`).join('')}</div>
+                <div class="k-print-row"><div class="segmented k-seg" role="radiogroup" aria-label="Format du papier">${(o.papers || ['A4', 'A5']).map(p => `<button type="button" role="radio" data-k-paper="${p}">${p}</button>`).join('')}${F() ? '<button type="button" role="radio" data-k-paper="custom" title="Un autre format de la liste, ou un format libre (gardé dans « Mes formats »)">✎ Autre…</button>' : ''}</div>
                 <div class="segmented k-seg" role="radiogroup" aria-label="Sens"><button type="button" role="radio" data-k-or="portrait">Portrait</button><button type="button" role="radio" data-k-or="landscape">Paysage</button></div></div>
+                ${F() ? `<div class="k-print-custom" data-k-custom hidden>${F().boxHtml({value: F().last('impression') || F().preset('A3', {unit: 'cm'}), units: ['mm', 'cm', 'in'], dpi: false, orientation: false, title: 'Format du papier'})}</div>` : ''}
                 ${opts.length ? `<div class="k-print-opts"><span class="ui-export-lab">Ce qu’on imprime</span>${opts.map(x => `<label class="checkbox-line ui-export-check"><input type="checkbox" data-k-opt="${esc(x.key)}"${st[x.key] ? ' checked' : ''}> ${esc(x.label)}</label>`).join('')}</div>` : ''}
                 ${o.info ? `<small class="ui-export-info">${esc(o.info)}</small>` : ''}
                 <small class="ui-export-info" data-k-pdfhint hidden>Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante.</small>
@@ -204,11 +209,13 @@
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-k-x>Annuler</button>${o.pdf === false ? '' : '<button type="button" class="button secondary" data-k-pdf>⤓ PDF</button>'}<button type="submit" class="button" data-k-go>🖨 Imprimer</button></div></form>`;
         document.body.appendChild(dlg);
         const $ = s => dlg.querySelector(s), prev = $('[data-k-prev]');
-        const paint = () => { dlg.querySelectorAll('[data-k-paper]').forEach(b => { const on = b.dataset.kPaper === st.paper; b.classList.toggle('is-active', on); b.setAttribute('aria-checked', on); }); dlg.querySelectorAll('[data-k-or]').forEach(b => { const on = b.dataset.kOr === st.orientation; b.classList.toggle('is-active', on); b.setAttribute('aria-checked', on); }); };
+        const cbox = F() ? F().bindBox(dlg.querySelector('[data-k-custom] [data-fmt-box]'), {onChange: v => { const [w, h] = F().inMm(v); st.size = [w, h]; if (st.paper === 'custom') later(); }}) : null;
+        if (cbox) { const [w, h] = F().inMm(cbox.get()); st.size = [w, h]; }
+        const paint = () => { const cu = dlg.querySelector('[data-k-custom]'); if (cu) cu.hidden = st.paper !== 'custom'; dlg.querySelectorAll('[data-k-paper]').forEach(b => { const on = b.dataset.kPaper === st.paper; b.classList.toggle('is-active', on); b.setAttribute('aria-checked', on); }); dlg.querySelectorAll('[data-k-or]').forEach(b => { const on = b.dataset.kOr === st.orientation; b.classList.toggle('is-active', on); b.setAttribute('aria-checked', on); }); };
         let snap = null, t = 0;
         const docFor = async () => (o.page ? (snap = snap || pageSnapshot(o.bodyClass, o.element)) : typeof o.html === 'function' ? await o.html({...st}) : String(o.html || ''));
         async function preview() {
-            const [w0, h0] = PAPER[st.paper] || PAPER.A4, land = st.orientation === 'landscape', pw = (land ? h0 : w0) * MM, ph = (land ? w0 : h0) * MM;
+            const [w0, h0] = paperMm(st), land = st.orientation === 'landscape', pw = (land ? h0 : w0) * MM, ph = (land ? w0 : h0) * MM;
             let doc; try { doc = withPageCss(await docFor(), st); } catch (e) { prev.textContent = 'Pas d’aperçu'; return; }
             const boxW = prev.clientWidth || 240, k = boxW / pw;
             prev.style.aspectRatio = `${pw} / ${ph}`;
@@ -232,6 +239,7 @@
             try {
                 if (st.pdf) toast('Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ».');
                 result = {...st};
+                if (st.paper === 'custom' && cbox) F().use('impression', cbox.get());
                 const doc = withPageCss(await docFor(), st); dlg.close(); await printDoc(doc); // l'écran affiché : seulement son contenu (sans menus ni barres)
                 o.onPrint?.(result);
             } catch (e) { btn.disabled = false; toast(`Impression impossible : ${e?.message || e}`, 'error'); }

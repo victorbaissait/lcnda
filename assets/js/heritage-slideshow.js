@@ -19,7 +19,7 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     let seq = 0; const sid = () => 's' + Date.now().toString(36) + (++seq);
     const mediaUrl = f => `media/${encodeURIComponent(f)}`;
-    const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+    const fmt = s => window.LCNDA_UI?.clock?.(s) || `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`; // K17 : « 3:20 », « 1:05:00 »
     const plural = (n, one, many) => A().plural(n, one, many);
     const help = (txt, faq = '') => ` data-help="${esc(txt)}"${faq ? ` data-help-faq="${esc(faq)}"` : ''}`;
     const safeName = (n, d = 'diaporama') => (A().safeExportFilename ? A().safeExportFilename(n, d) : d);
@@ -343,6 +343,11 @@
                 if (crises.length) add(Math.max(crises[0].from, birthY), 8, newSlide('title', {title: 'Pendant sa vie', sub: crises.map(c => `${c.from === c.to ? c.from : `${c.from}–${c.to}`} · ${c.title}`).join('\n'), dur: clamp(5 + crises.length * 2, 6, 14), notes: crises.map(c => `${c.title} : ${c.description}`).join('\n')}));
             } catch (_) { /* la liste historique n'est pas là : pas de diapositive */ }
         }
+        // 📖 sa biographie (lib/biographie.php : ta version, sinon le texte court de l'app), juste après le titre
+        if (o.bio) {
+            try { const bi = await api('biography', {id: pid, length: 'short'}); const txt = clean(String(bi.own || bi.generated || '').split(/\n\s*Notes :/)[0].replace(/\n+/g, ' '));
+                if (txt) add(-1, 0, newSlide('title', {title: 'Sa vie en quelques mots', sub: txt.length > 700 ? txt.slice(0, 697).replace(/\s+\S*$/, '') + '…' : txt, dur: durFor(txt), notes: bi.own ? 'Ta version de la biographie (📖 sur la fiche).' : 'Biographie écrite par l’app d’après la fiche.'})); } catch (_) {}
+        }
         // la carte des lieux de vie, reliés dans l'ordre (seulement s'il y a au moins deux lieux)
         const route = []; [...evs, ...(r.census?.records || []).map(c => ({...c, type_label: `recensement ${c.year}`}))].filter(e => e.latitude && e.longitude).sort((a, b) => (a.year || 9999) - (b.year || 9999))
             .forEach(e => { const last = route[route.length - 1]; if (last && Math.abs(last.lat - e.latitude) < 1e-4 && Math.abs(last.lon - e.longitude) < 1e-4) return; route.push({name: e.place_name, label: `${e.place_name}${e.type_label ? ` (${String(e.type_label).toLowerCase()})` : ''}`, year: e.year || '', lat: +e.latitude, lon: +e.longitude}); });
@@ -390,7 +395,8 @@
                     <div class="h-st-opts">
                         <label class="ui-toggle"><input type="checkbox" name="siblings" ${saved.siblings ? 'checked' : ''}><i></i>Inclure les frères et sœurs</label>
                         <label class="ui-toggle"><input type="checkbox" name="sources" ${saved.sources !== false ? 'checked' : ''}><i></i><span${help('Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture.')}>Mettre les sources dans les notes</span></label>
-                        <label class="ui-toggle"><input type="checkbox" name="history" ${saved.history !== false ? 'checked' : ''}><i></i><span${help('Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie.')}>Ajouter les événements historiques de l’époque</span></label></div>`,
+                        <label class="ui-toggle"><input type="checkbox" name="history" ${saved.history !== false ? 'checked' : ''}><i></i><span${help('Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie.')}>Ajouter les événements historiques de l’époque</span></label>
+                        <label class="ui-toggle"><input type="checkbox" name="bio" ${saved.bio !== false ? 'checked' : ''}><i></i><span${help('Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive.')}>Ajouter sa biographie (📖)</span></label></div>`,
                 onOpen: dg => {
                     const sum = dg.querySelector('[data-st-sum]'), cnt = dg.querySelector('[data-st-photocount]'), th = dg.querySelector('[data-st-thumbs]');
                     const paintPhotos = () => {
@@ -424,8 +430,8 @@
                 },
                 onSubmit: f => {
                     if (!pid) return window.LCNDA_UI.fail(f.querySelector('.pk'), 'Choisis une personne.');
-                    const o = {pid, target: Number(f.elements.target.value) || 0, theme: f.elements.theme.value, aspect: f.elements.aspect.value, siblings: f.elements.siblings.checked, sources: f.elements.sources.checked, history: f.elements.history.checked, photoIds, photoItems, music};
-                    writeJ(STORY_KEY, {target: o.target, theme: o.theme, aspect: o.aspect, siblings: o.siblings, sources: o.sources, history: o.history, music});
+                    const o = {pid, target: Number(f.elements.target.value) || 0, theme: f.elements.theme.value, aspect: f.elements.aspect.value, siblings: f.elements.siblings.checked, sources: f.elements.sources.checked, history: f.elements.history.checked, bio: !!f.elements.bio?.checked, photoIds, photoItems, music};
+                    writeJ(STORY_KEY, {target: o.target, theme: o.theme, aspect: o.aspect, siblings: o.siblings, sources: o.sources, history: o.history, bio: o.bio, music});
                     done = true; res(o);
                 }});
         });
@@ -450,6 +456,7 @@
             : `<header class="h-ss-top"><span class="h-ss-logo">🎞️</span><input class="h-ss-name" data-ss-name value="${esc(name)}" maxlength="200">${extra}<span class="spacer"></span><span data-ui-status></span><button type="button" class="button small secondary" data-ss-cmd="export">⤓ Exporter ▾</button><button type="button" class="button small" data-ss-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ss-cmd="close">×</button></header>`;
         dlg.innerHTML = `<div class="h-ss">${top}
             <div class="h-ss-main">
+                <nav class="h-ss-rail" data-ss-rail aria-label="Outils"><button type="button" data-ss-cmd="addphotos" title="Ajouter des photos" aria-label="Ajouter des photos">🖼️</button><button type="button" data-ss-cmd="addtitle" title="Ajouter un titre" aria-label="Ajouter un titre">🔤</button><button type="button" data-ss-cmd="addmap" title="Ajouter une carte (trajet)" aria-label="Ajouter une carte">🗺️</button><button type="button" data-ss-cmd="story" title="✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne" aria-label="Récit d’une vie">✨</button><button type="button" data-ss-cmd="play" title="Lire / pause" aria-label="Lire" data-shortcut="Espace">▶</button><button type="button" data-ss-cmd="watch" title="Regarder en plein écran (Échap pour revenir)" aria-label="Regarder">📺</button></nav>
                 <aside class="h-ss-list"><div class="h-ss-add" data-tbg="ss-add" data-tbg-label="Ajouter (à gauche)"><button type="button" data-ss-cmd="addphotos">＋ Photos</button><button type="button" data-ss-cmd="addtitle">＋ Titre</button><button type="button" data-ss-cmd="addmap">＋ Carte (trajet)</button><button type="button" class="is-story" data-ss-cmd="story" title="Un diaporama tout fait à partir de la fiche d’une personne">✨ Récit d’une vie</button></div><ol data-ss-slides></ol></aside>
                 <section class="h-ss-center"><div class="h-ss-stage" data-ss-stage><canvas data-ss-canvas></canvas></div>
                     <div class="h-ss-transport"><span class="h-ss-tgrp" data-tbg="ss-transport" data-tbg-label="Lecture"><button type="button" class="button small" data-ss-cmd="play" data-shortcut="Espace">▶ Lire</button><button type="button" class="button small secondary" data-ss-cmd="watch" title="Regarder en plein écran (Échap pour revenir)">📺 Regarder</button></span><input type="range" data-ss-seek min="0" max="1000" value="0" aria-label="Avancer dans le diaporama" data-ui-done="other-scale"><output data-ss-time>0:00 / 0:00</output></div></section>
@@ -457,6 +464,13 @@
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'slideshow', true); dlg.showModal();
         const $ = s => dlg.querySelector(s), canvas = $('[data-ss-canvas]');
         ext.tbApply?.(dlg, 'slideshow');
+        // K19 : la colonne d'outils de 36 px ; K18 : la barre du bas (la diapositive · l'aide · le zoom de l'aperçu, 100 % = la taille de la vidéo)
+        ui.editorRail?.($('[data-ss-rail]'), {breaks: ['[data-ss-cmd="story"]', '[data-ss-cmd="play"]']});
+        const ssStage = $('[data-ss-stage]');
+        const ssZoom = k => { ssStage.classList.toggle('is-zoomed', !!k); canvas.style.width = k ? `${Math.round(canvas.width * k)}px` : ''; canvas.style.maxWidth = canvas.style.maxHeight = k ? 'none' : ''; ssBar?.sync(); };
+        const ssBar = ui.editorStatus?.({help: 'Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire',
+            zoom: {get: () => (canvas.getBoundingClientRect().width || canvas.width) / (canvas.width || 1), set: k => ssZoom(k), fit: () => ssZoom(0), min: .1, max: 4}, wheel: ssStage});
+        if (ssBar) { $('.h-ss').appendChild(ssBar); addEventListener('resize', () => ssBar.sync()); }
         let eng = makeEngine(show, canvas);
         const progress = s => { $('[data-ss-progress]').textContent = s || ''; };
         const state = st => (ui.savedStatus ? ui.savedStatus(dlg, st) : (($('[data-ui-status]') || {}).textContent = st === 'saved' ? '✓ Enregistré' : st === 'dirty' ? '• modifié' : ''));
@@ -496,7 +510,7 @@
             h.push(sec('fx', 'Effets', `<div class="h-ss-grid">${F('Transition', `<select data-ss-p="trans">${TRANS.map(([k, l]) => `<option value="${k}" ${s.trans === k ? 'selected' : ''}>${l}</option>`).join('')}</select>`, 'Comment on passe de la diapositive d’avant à celle-ci : fondu, glissement, passage par le noir, ou coupe nette.')}${s.type === 'photo' ? F('Mouvement', `<select data-ss-p="kb">${KB.map(([k, l]) => `<option value="${k}" ${s.kb === k ? 'selected' : ''}>${l}</option>`).join('')}</select>`, 'Un lent mouvement de caméra sur la photo (effet « Ken Burns ») : elle s’approche, s’éloigne ou glisse doucement.') : ''}</div>
                 ${s.type === 'photo' ? F('Cadrage', `<select data-ss-p="fit"><option value="cover" ${s.fit !== 'contain' ? 'selected' : ''}>Plein écran (recadrée)</option><option value="contain" ${s.fit === 'contain' ? 'selected' : ''}>Photo entière (fond flou)</option></select>`, '« Plein écran » remplit l’écran et coupe un peu les bords ; « Photo entière » la montre en entier sur un fond flou.') : ''}`));
             // Durée
-            h.push(sec('time', 'Durée', `${F('Durée (secondes)', `<input type="number" min="1" max="120" step="0.5" value="${s.dur}" data-ss-p="dur">`)}${s.voice ? `<button type="button" class="link-button" data-ss-cmd="voicefit"${help('La diapositive dure exactement le temps de la voix enregistrée, plus un petit silence.')}>⇥ durée = voix</button>` : ''}`));
+            h.push(sec('time', 'Durée', `${F('Durée', `<input data-ui-duration="s" type="number" min="1" max="120" step="0.5" value="${s.dur}" data-ss-p="dur">`)}${s.voice ? `<button type="button" class="link-button" data-ss-cmd="voicefit"${help('La diapositive dure exactement le temps de la voix enregistrée, plus un petit silence.')}>⇥ durée = voix</button>` : ''}`));
             // Photo / portrait
             if (s.type === 'photo') h.push(sec('photo', 'Photo', '<button type="button" class="button small secondary" data-ss-cmd="rephoto">🖼️ Changer la photo</button>'));
             if (s.type === 'title') h.push(sec('photo', 'Portrait', `<div class="h-ss-portrait">${s.filename ? `<img src="${esc(mediaUrl(s.filename))}" alt="">` : ''}<button type="button" class="button small secondary" data-ss-cmd="portrait">🖼 ${s.filename ? 'Changer' : 'Une photo ronde au-dessus du titre…'}</button>${s.filename ? '<button type="button" class="icon-button small" data-ss-cmd="noportrait" title="Retirer la photo">✕</button>' : ''}</div>`, !!s.filename));
@@ -511,7 +525,7 @@
             h.push(sec('notes', '📝 Notes', F('Notes (sources, rappels)', `<textarea rows="3" data-ss-p="notes" placeholder="Pour toi : les sources, ce qu’il reste à vérifier…">${esc(s.notes || '')}</textarea>`, 'Les notes ne se voient pas pendant la lecture ; elles suivent la diapositive quand on en fait une présentation (notes de l’orateur).'), !!s.notes));
             box.innerHTML = h.join('') + doc; paintMusic();
         }
-        function paint() { paintList(); paintProps(); drawAt(t); }
+        function paint() { paintList(); paintProps(); drawAt(t); ssBar?.setWhere(show.slides.length ? `Diapositive ${cur + 1} / ${show.slides.length}` : 'Aucune diapositive'); ssBar?.sync(); }
         function drawAt(tt) { t = clamp(tt, 0, eng.total()); const i = eng.frame(t); if (i >= 0 && playing && i !== cur) { cur = i; paintList(); paintProps(); } const tot = eng.total() || 1; $('[data-ss-seek]').value = Math.round(t / tot * 1000); $('[data-ss-time]').textContent = `${fmt(t)} / ${fmt(eng.total())}`; }
         const goSlide = i => { cur = clamp(i, 0, Math.max(0, show.slides.length - 1)); t = (eng.starts()[cur] || 0) + .9; paint(); };
         /* ─── son : musique et voix ─── */

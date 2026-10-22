@@ -46,6 +46,7 @@ function diagram_geo_data(PDO $pdo, array $get): array
         if (!$root) { $root = (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn(); }
         if ($root) { $only[$root] = true; }
     }
+    require_once __DIR__ . '/diagram_options.php'; dgo_request($get); $only = dgo_restrict($pdo, $only); // le groupe de personnes choisi (« Depuis l'app »)
     $okYear = static fn($y) => ($from === null || ($y !== null && (int) $y >= $from)) && ($to === null || ($y !== null && (int) $y <= $to));
     $okPerson = static fn(int $pid) => $only === null || isset($only[$pid]);
 

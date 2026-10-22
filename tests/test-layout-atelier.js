@@ -131,7 +131,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
         // 💾 enregistré : plus de « quitter la page ? »
         out.dirtyBefore = await page.$eval('dialog.ly-editor', d => d.dataset.dirty);
         await page.keyboard.press('Control+s'); await page.waitForFunction(() => /Enregistré/.test(document.querySelector('dialog.ly-editor [data-ly-state]')?.textContent || ''), null, { timeout: 10000 });
-        await page.selectOption(`${E}[data-ly-zoom]`, '1'); await page.waitForTimeout(100); // un zoom ne change pas le document
+        await page.click(`${E}[data-ed-zoom="in"]`); // K18 : le zoom commun de la barre du bas await page.waitForTimeout(100); // un zoom ne change pas le document
         out.dirtyAfter = await page.$eval('dialog.ly-editor', d => d.dataset.dirty);
         // 🔎 le fait sans date : « naquit à Amboise » alors que la fiche dit Tours
         out.facts = await page.evaluate(async () => (await window.LCNDA_EXT.factCheck([{ page: 0, id: 'x', text: 'Jean MARTIN naquit à Amboise. Jean MARTIN naquit à Tours.', ctx: [] }])).map(x => `${x.lvl} ${x.text}`));

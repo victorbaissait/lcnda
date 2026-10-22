@@ -187,12 +187,11 @@
     /* ═════════ La barre d'outils : A (tout dans la barre) ou B (barre courte + « 🎚️ Mieux voir ») ═════════ */
     const RUBRICS = [['ink', 'Faire ressortir l’encre'], ['bw', 'Noir et blanc'], ['pos', 'Position'], ['nav', 'Autres outils'], ['act', '']];
     const rg = (key, label, min, max, step, val, unit, def, extra = '') => `<label class="h-tx-rg" title="${esc(label)} — double-clic : valeur de départ"><span class="h-tx-rgl">${label}</span><input type="range" data-tx-view="${key}" min="${min}" max="${max}" step="${step}" value="${val}" data-unit="${unit}" data-default="${def}" aria-label="${esc(label)}"${extra}></label>`;
-    const ck = (key, label, v, title = '') => `<label class="checkbox-line h-tx-ck"${title ? ` title="${esc(title)}"` : ''}><input type="checkbox" data-tx-view="${key}" ${v[key] ? 'checked' : ''}>${label}</label>`;
+    const ck = (key, label, v, title = '') => `<label class="ui-toggle h-tx-ck"${title ? ` title="${esc(title)}"` : ''}><input type="checkbox" data-tx-view="${key}" ${v[key] ? 'checked' : ''}><i></i>${label}</label>`;
     /** [clé, nom (Maintenance), rubrique, html(v, dansLePanneau)] — l'ordre est celui de départ */
+    // K18 / K19 : ✋ Déplacer, ▭ Zone et 🔍 Loupe sont dans la colonne d'outils de gauche, le zoom dans la barre du bas (heritage-transcribe.js)
     const ITEMS = [
         ['image', '🖼️ Image de l’acte', 'nav', () => `<button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)">🖼️ Image…</button>`],
-        ['tools', '✋ Déplacer · ▭ Zone', 'nav', () => `<button type="button" data-tx-tool="pan" title="Déplacer l’image, ou barre d’espace" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="Dessiner une zone (elle se relie au passage choisi dans le texte)" data-shortcut="Z" data-help="Choisis un passage dans le texte, puis dessine un rectangle sur l’image : les deux restent liés (un clic sur l’un montre l’autre). Une zone choisie a 8 poignées pour changer sa taille ; glisse-la pour la déplacer.">▭ Zone</button>`],
-        ['zoom', '－ ⤢ ＋ Zoom', 'nav', () => `<button type="button" data-tx-cmd="zout" title="Zoom arrière (ou la molette, ou pincer)">－</button><button type="button" class="h-tx-zoomlab" data-tx-cmd="fit" data-tx-zoomlab title="Ajuster l’image : Toute l’image → Largeur → Taille réelle (100 %)"><span aria-hidden="true">⤢</span> <b data-tx-zoomtxt>Toute l’image</b></button><button type="button" data-tx-cmd="zin" title="Zoom avant (ou la molette, ou pincer)">＋</button>`],
         ['rot', '⟳ Tourner de 90°', 'pos', () => `<button type="button" data-tx-cmd="rot" title="Tourner de 90°">⟳</button>`],
         ['contrast', '◐ Contraste', 'ink', v => rg('contrast', '◐', 50, 300, 1, v.contrast, '%', 100)],
         ['bright', '☀ Luminosité', 'ink', v => rg('bright', '☀', 40, 220, 1, v.bright, '%', 100)],
@@ -206,7 +205,6 @@
         ['invert', 'Négatif', 'pos', v => ck('invert', 'Négatif', v, 'Négatif : encre claire sur fond sombre')],
         ['gray', 'Gris', 'pos', v => ck('gray', 'Gris', v)],
         ['mirror', 'Miroir', 'pos', v => ck('mirror', 'Miroir', v, 'Retourner l’image : pour lire un texte vu par transparence (le verso)')],
-        ['loupe', '🔍 Loupe', 'nav', () => `<button type="button" data-tx-cmd="loupe" title="Loupe qui suit la souris (la molette change le grossissement)" data-shortcut="L">🔍 Loupe</button>`],
         ['keep', '💾 Retenir pour cet acte', 'act', () => `<button type="button" data-tx-cmd="keepview" title="Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture">💾 Retenir pour cet acte</button>`],
         ['reset', '↺ Image d’origine', 'act', (v, inPanel, layout) => `<button type="button" data-tx-cmd="resetview" title="Remettre l’image d’origine (tous les réglages de l’image à zéro)">↺ ${layout === 'B' && !inPanel ? 'Origine' : 'Image d’origine'}</button>`],
     ];

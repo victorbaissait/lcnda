@@ -36,10 +36,21 @@
     async function resolveLive(spec) {
         const kr = R().KINDS[spec?.kind]?.resolve; if (kr) { try { return await kr(spec); } catch (_) { return spec; } } // kind.resolve(spec) → Promise<spec> : une sorte qui prépare son dessin (fond de carte à charger, chiffres relus…) — heritage-diagram-cartes.js
         if (spec.live?.follow) return resolveFollow(spec);
+        const DGO = ext.diagramAppOpts;
+        // 🧮 « Compter dans ma base » (heritage-diagram-options.js) : recompté à chaque affichage, avec ses options
+        if (spec.live?.q && DGO) { try { return DGO.toSpec(spec, await DGO.count(spec.live.q), spec.live.label); } catch (_) { return spec; } }
+        // 🌳 « Des données de mon arbre » d'un type (kind.app), avec le groupe et la période choisis
+        const kApp = R().KINDS[spec.kind]?.app;
+        if (spec.live?.tree && kApp?.fill) {
+            const key = 'tree:' + spec.kind + ':' + spec.live.tree + ':' + JSON.stringify(spec.live.dg || {});
+            let hit = liveMem.get(key);
+            if (!hit || Date.now() - hit.t > 60000) { hit = {t: Date.now(), rows: kApp.fill({...clone(spec), __dg: spec.live.dg || {}}, spec.live.tree)}; liveMem.set(key, hit); }
+            try { const s = clone(await hit.rows); delete s.__dg; s.live = spec.live; s.o = {...(s.o || {}), ...(spec.o || {})}; return s; } catch (_) { liveMem.delete(key); return spec; }
+        }
         if (!spec.live?.key || !ext.diagramStatRows) return spec;
         let hit = liveMem.get(spec.live.key);
         if (!hit || Date.now() - hit.t > 60000) { hit = {t: Date.now(), rows: ext.diagramStatRows(spec.live.key)}; liveMem.set(spec.live.key, hit); }
-        try { return fillFrom(spec, await hit.rows, spec.live.label); } catch (e) { liveMem.delete(spec.live.key); return spec; }
+        try { const pairs = await hit.rows; return fillFrom(spec, spec.live.post && DGO ? DGO.post(pairs, spec.live.post) : pairs, spec.live.label); } catch (e) { liveMem.delete(spec.live.key); return spec; } // post : tri, N premiers, « Autres », « Inconnu », % (options de « Depuis l'app »)
     }
     /** des paires [valeur, nombre] → les lignes du diagramme, selon son type */
     function fillFrom(spec, pairs, label = '') {
@@ -50,6 +61,7 @@
         else { s.rows = pairs.map(([v, n]) => ({label: v, s0: n, color: keep[v] || ''})); s.series = [{...(s.series?.[0] || {}), name: s.series?.[0]?.name || label || 'Nombre'}]; }
         return s;
     }
+    ext.diagramFillFrom = (spec, pairs, label) => fillFrom(spec, pairs, label);
     /** 📈 un de mes graphiques (Éditeur de graphiques) posé comme un diagramme : son dessin, ses couleurs et ses chiffres suivent le graphique */
     const followId = spec => (spec?.live?.follow && /^my:cw_[a-z0-9]{4,24}$/.test(String(spec.live.key || '')) ? String(spec.live.key).slice(3) : '');
     async function resolveFollow(spec) {
@@ -199,11 +211,12 @@
     function optHtml(o, spec) {
         if (o.when && !o.when(spec)) return '';
         const v = spec.o?.[o.k], at = `data-opt="${esc(o.k)}"`;
-        if (o.type === 'check') return `<label class="checkbox-line"><input type="checkbox" ${at} ${(v ?? o.def) ? 'checked' : ''}> ${esc(o.label)}</label>`;
+        if (o.type === 'check') return `<label class="ui-toggle"><input type="checkbox" ${at} ${(v ?? o.def) ? 'checked' : ''}><i></i>${esc(o.label)}</label>`;
         if (o.type === 'select') return `<label>${esc(o.label)}<select ${at}>${o.choices.map(([k, l]) => `<option value="${esc(k)}" ${String(v ?? o.def ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
-        if (o.type === 'range') return `<label>${esc(o.label)} <output>${esc(v ?? o.def ?? '')}</output><input type="range" ${at} min="${o.min}" max="${o.max}" step="${o.step || 1}" value="${esc(v ?? o.def ?? o.min)}"></label>`;
+        const un = o.unit != null ? ` data-unit="${esc(o.unit)}"` : ''; // K17 : l'unité dans la case, pas dans le libellé
+        if (o.type === 'range') return `<label>${esc(o.label)} <output>${esc(v ?? o.def ?? '')}</output><input type="range" ${at} min="${o.min}" max="${o.max}" step="${o.step || 1}" value="${esc(v ?? o.def ?? o.min)}"${un}></label>`;
         if (o.type === 'color') return `<label class="h-dg-colopt">${esc(o.label)}<input type="color" ${at} value="${esc(/^#[0-9a-f]{6}$/i.test(v || '') ? v : o.def || '#000000')}"></label>`;
-        return `<label>${esc(o.label)}<input ${at} value="${esc(v ?? '')}" ${o.type === 'number' ? 'inputmode="decimal"' : ''} placeholder="${esc(o.def ?? '')}"></label>`;
+        return `<label>${esc(o.label)}<input ${at} value="${esc(v ?? '')}" ${o.type === 'number' ? 'inputmode="decimal"' : ''}${un} placeholder="${esc(o.def ?? '')}"></label>`;
     }
 
     /* ─── Choisir un type (galerie avec aperçus) ─── */
@@ -270,7 +283,7 @@
             <header class="h-dg-top"><span class="ui-topbar-icon" aria-hidden="true">📊</span><input class="h-dg-name" data-dg-name value="${esc(rec.name)}" maxlength="200" aria-label="Nom du diagramme"><button type="button" class="button small secondary" data-dg-type title="Changer de type de diagramme"></button>
                 <span class="h-dg-spacer"></span><span class="ui-status" data-ui-status></span><button type="button" class="button small secondary" data-dg-expdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter ▾</button><button type="button" class="button small" data-dg-save data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button><button type="button" class="icon-button" data-dg-close title="Fermer" aria-label="Fermer">×</button></header>
             <div class="h-dg-body"><aside class="h-dg-side"><nav class="segmented h-dg-tabs"><button type="button" data-dg-tab="data">Données</button><button type="button" data-dg-tab="opts">Réglages</button><button type="button" data-dg-tab="app">Depuis l’app</button><button type="button" data-dg-tab="links">Relier</button></nav><div class="h-dg-pane"></div></aside>
-                <main class="h-dg-preview"><div class="h-dg-svg" data-dg-preview></div></main></div></div>`;
+                <main class="h-dg-preview"><p class="h-dg-sum" data-dg-sum aria-live="polite" hidden></p><div class="h-dg-svg" data-dg-preview></div></main></div></div>`;
         document.body.appendChild(dlg);
         const pane = dlg.querySelector('.h-dg-pane'), prev = dlg.querySelector('[data-dg-preview]');
         // « ✓ Enregistré » / « • modifié » au même endroit, sans toast (E1)
@@ -287,6 +300,7 @@
             else if (tab === 'opts') pane.innerHTML = `<div class="h-dg-opts"><h4>${esc(kindOf().label)}</h4>${kindOf().options.map(o => optHtml(o, spec)).join('') || '<p class="muted">Pas de réglage particulier.</p>'}<h4>Présentation</h4>${R().COMMON.map(o => optHtml(o, spec)).join('')}</div>`;
             else if (tab === 'app') pane.innerHTML = appPaneHtml();
             else pane.innerHTML = linksHtml();
+            showSum(tab === 'app' ? lastSum : spec.live?.sum || appSum); // la phrase du réglage au-dessus de l'aperçu (options de « Depuis l'app ») : celle des chiffres pris, tant qu'on ne les retouche pas
             if (tab === 'app') bindAppPane(); if (tab === 'links') bindLinks();
             if (tab === 'data') { sortBars(); kindOf().dataPane?.(pane, kindApi); }
         };
@@ -304,29 +318,104 @@
                 const y = pane.scrollTop; paint(); pane.scrollTop = y; later(); }}));
         });
         /* données prises dans l'app */
+        // la phrase du réglage (« Personnes nées entre 1800 et 1900, mes ancêtres, par département, 10 premiers ») au-dessus de l'aperçu
+        let lastSum = '', appSum = '';
+        const showSum = t => { const el = dlg.querySelector('[data-dg-sum]'); if (!el) return; el.textContent = t ? '⚙️ ' + t : ''; el.hidden = !t; };
+        const setSum = t => { lastSum = t; showSum(t); };
+        const DGO = () => ext.diagramAppOpts;
         const appPaneHtml = () => {
             if (kindOf().fromApp?.html) return kindOf().fromApp.html(spec); // une sorte avec son propre panneau : kind.fromApp = {html(spec), bind(pane, {spec, apply})} (heritage-diagram-genea.js)
-            const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || ['parliament', 'wordcloud', 'pictogram'].includes(k) || !!kindOf().pairs, kApp = kindOf().app;
+            const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || ['parliament', 'wordcloud', 'pictogram', 'gauge'].includes(k) || !!kindOf().pairs, kApp = kindOf().app;
+            const tf = DGO()?.treeFields(k) || [], tq = DGO() ? DGO().norm({...(spec.live?.tq || {}), live: !!spec.live?.tree}) : null;
             // une sorte peut apporter ses propres données de l'arbre : kind.app = {sources: [[clé, nom]], fill: async (spec, clé) => spec}
-            return `<div class="h-dg-app">${kApp?.sources?.length ? `<h4>🌳 Des données de mon arbre</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main).</p><label>Données<select data-dg-kapp>${kApp.sources.map(([key, label]) => `<option value="${esc(key)}">${esc(label)}</option>`).join('')}</select></label><button type="button" class="button small" data-dg-kappgo>Prendre ces données</button>` : ''}${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres tenus à jour : un exemple, une statistique de l’app (noms, lieux, âges…) ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques, avec tous leurs critères).</p>
-                <label>Graphique<select data-dg-src><option value="">Chargement…</option></select></label><label class="checkbox-line"><input type="checkbox" data-dg-srclive> 🔄 Tenir à jour (relire les chiffres à chaque affichage)</label><button type="button" class="button small" data-dg-srcgo>Prendre ces chiffres</button>` : ''}
+            return `<div class="h-dg-app">${kApp?.sources?.length ? `<h4>🌳 Des données de mon arbre</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main).</p><label>Données<select data-dg-kapp>${kApp.sources.map(([key, label]) => `<option value="${esc(key)}" ${spec.live?.tree === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label>${tf.length ? `<div data-dgo-tree>${DGO().html(tq, {fields: tf, kind: k, period: 'birth'})}</div>` : ''}<button type="button" class="button small" data-dg-kappgo>Prendre ces données</button>` : ''}${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques).</p>
+                <label>Graphique<select data-dg-src><option value="">Chargement…</option></select></label><div data-dgo-stats></div><button type="button" class="button small" data-dg-srcgo>Prendre ces chiffres</button>` : ''}
                 ${people ? `<h4>👥 Des personnes de la base</h4><p class="muted">${k === 'timeline' ? 'Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté).' : 'Leurs naissances, mariages et décès deviennent des dates de la frise.'}</p>
                 <div class="h-pr-addlink" data-dg-pq>${window.LCNDA_PICKER.pickerField({name: 'dg_addp', kind: 'person'})}</div>` : ''}
                 ${!stats && !people && !kApp?.sources?.length ? '<p class="muted">Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données).</p>' : ''}</div>`;
         };
         function bindAppPane() {
-            if (kindOf().fromApp?.bind) return kindOf().fromApp.bind(pane, {spec: () => clone(spec), apply: s => { spec = s; delete spec.live; tab = 'data'; paint(); later(); }, set: s => { spec = s; later(); } /* set : sans changer d'onglet, spec.live gardé */});
-            pane.querySelector('[data-dg-kappgo]')?.addEventListener('click', async e => { const key = pane.querySelector('[data-dg-kapp]').value, b = e.currentTarget; b.disabled = true;
-                try { spec = await kindOf().app.fill(clone(spec), key); delete spec.live; tab = 'data'; paint(); later(); toast('Données prises dans ton arbre.'); } catch (err) { toast(err.message, 'error'); } finally { b.disabled = false; } });
-            const sel = pane.querySelector('[data-dg-src]');
-            if (sel && ext.diagramStatSources) ext.diagramStatSources().then(src => { const g = {}; src.forEach(([key, label, grp]) => { (g[grp] = g[grp] || []).push([key, label]); }); sel.innerHTML = Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([key, label]) => `<option value="${esc(key)}" ${spec.live?.key === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</optgroup>`).join(''); }).catch(() => { sel.innerHTML = '<option value="">Indisponible</option>'; });
-            else if (sel) sel.innerHTML = '<option value="">Indisponible</option>';
-            pane.querySelector('[data-dg-srcgo]')?.addEventListener('click', async () => {
-                const key = sel.value; if (!key) return; const label = sel.selectedOptions[0]?.textContent || '';
-                try { const pairs = await ext.diagramStatRows(key); if (!pairs.length) return toast('Aucun chiffre pour ce graphique.', 'error');
-                    spec = fillFrom(spec, pairs, label); if (pane.querySelector('[data-dg-srclive]').checked) spec.live = {key, label}; else delete spec.live;
+            const O = DGO(), k = spec.kind;
+            if (kindOf().fromApp?.bind) {
+                kindOf().fromApp.bind(pane, {spec: () => clone(spec), apply: s => { spec = s; delete spec.live; appSum = lastSum; tab = 'data'; paint(); later(); }, set: s => { spec = s; appSum = lastSum; later(); } /* set : sans changer d'onglet, spec.live gardé */});
+                // le groupe de personnes et la période communs, ajoutés au panneau propre du type (heritage-diagram-options.js)
+                const c = O?.CUSTOM[k], title = pane.querySelector('h4')?.textContent.replace(/^\W+\s*/u, '') || kindOf().label;
+                if (!c) return;
+                let box = null;
+                // la phrase : le premier choix du type (« Naissances (ou baptêmes) »…), puis le groupe et la période
+                function upd() { if (!box) return; const first = [...pane.querySelectorAll('select')].find(x => !x.closest('[data-dgo-box]') && !x.closest('.h-dgo-legacy') && x.offsetParent !== null);
+                    setSum(O.summary(O.read(box), {fields: O.customFields(k), period: c.period, source: first?.selectedOptions[0]?.textContent.trim() || title})); }
+                box = O.adopt(pane, k, {onChange: () => upd()}); upd();
+                pane.addEventListener('change', e => { if (!e.target.closest('[data-dgo-box]')) upd(); });
+                return;
+            }
+            // 🌳 des données de mon arbre (kind.app) : + le groupe de personnes, la période, « Tenir à jour »
+            const tbox = pane.querySelector('[data-dgo-tree] [data-dgo-box]'), kSel = pane.querySelector('[data-dg-kapp]'), tcfg = {fields: O?.treeFields(k) || [], kind: k, period: 'birth'};
+            const tsum = q => O.summary(q, {...tcfg, source: kSel?.selectedOptions[0]?.textContent || ''});
+            if (tbox) O.bind(tbox, {cfg: tcfg, onChange: q => setSum(tsum(q))});
+            pane.querySelector('[data-dg-kappgo]')?.addEventListener('click', async e => { const key = kSel.value, b = e.currentTarget;
+                if (tbox && !O.check(tbox)) return;
+                if (tbox) O.setCurrent(tbox);
+                b.disabled = true;
+                try { const tq = tbox ? O.read(tbox) : null; spec = await kindOf().app.fill(clone(spec), key); delete spec.live;
+                    if (tq?.live) spec.live = {tree: key, label: kSel.selectedOptions[0]?.textContent || '', dg: O.dgParams(tq), tq: {...tq, live: true}, sum: tsum(tq)};
+                    appSum = tq ? tsum(tq) : '';
+                    tab = 'data'; paint(); later(); toast('Données prises dans ton arbre.'); } catch (err) { toast(err.message, 'error'); } finally { b.disabled = false; } });
+            // 📊 des chiffres de l'app (« Graphique ») : la source, puis les options communes (ce qu'on compte, groupe, période, regroupement, tri, N premiers, Autres, Inconnu, unité, Tenir à jour)
+            const sel = pane.querySelector('[data-dg-src]'), shost = pane.querySelector('[data-dgo-stats]');
+            if (!sel) return;
+            const fieldsFor = () => O.ORDER.filter(f => f !== 'series' || O.multiSeries(k));
+            const presetOf = key => O.PRESETS.find(([id]) => 'q:' + id === key);
+            let srcKey = spec.live?.q ? 'q:' + (spec.live.preset || 'custom') : spec.live?.key && !spec.live.follow ? spec.live.key : 'q:custom';
+            let draft = O.norm(spec.live?.q ? {...spec.live.q, live: true} : {...(k === 'pyramid' ? {series: 'sex', by: 'age10', what: 'deaths'} : {}), limit: srcKey.startsWith('q:') ? 15 : 0, ...(spec.live?.post || {}), live: !!spec.live?.key});
+            const labelOf = key => sel.querySelector(`option[value="${CSS.escape(key)}"]`)?.textContent || presetOf(key)?.[1] || '';
+            const cfgFor = key => { const locked = !key.startsWith('q:'), redo = O.FROM_APPSTAT[key];
+                return {fields: fieldsFor(), kind: k, period: 'event', locked, source: labelOf(key), liveAttr: 'data-dg-srclive',
+                    note: locked ? `Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base »${redo ? ` : <button type="button" class="link-button" data-dgo-redo="${esc(redo)}">🧮 Refaire avec « Compter dans ma base »</button>` : '.'}` : ''}; };
+            const paintHost = () => {
+                if (!shost || !O) return;
+                const cfg = cfgFor(srcKey); shost.innerHTML = O.html(draft, cfg);
+                const box = shost.querySelector('[data-dgo-box]');
+                O.bind(box, {cfg, onChange: q => { draft = q; setSum(O.summary(q, cfg)); }});
+                setSum(O.summary(draft, cfg));
+            };
+            const fillSel = src => { const g = {'🧮 Compter dans ma base': O ? O.PRESETS.map(([id, l]) => ['q:' + id, l]) : []}; src.forEach(([key, label, grp]) => { (g[grp] = g[grp] || []).push([key, label]); });
+                sel.innerHTML = Object.entries(g).filter(([, items]) => items.length).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([key, label]) => `<option value="${esc(key)}" ${srcKey === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</optgroup>`).join('');
+                if (sel.value !== srcKey) srcKey = sel.value; paintHost(); };
+            if (ext.diagramStatSources) ext.diagramStatSources().then(fillSel).catch(() => fillSel([]));
+            else fillSel([]);
+            sel.addEventListener('change', () => {
+                const key = sel.value, p = presetOf(key);
+                if (p) { const who = ['pop', 'root', 'gens', 'label', 'list', 'search', 'ids', 'from', 'to', 'live', 'rootName', 'labelName', 'listName', 'idsCount'].reduce((m, x) => { if (draft[x] !== undefined) m[x] = draft[x]; return m; }, {});
+                    draft = O.norm({...O.DEF, ...(k === 'pyramid' ? {series: 'sex'} : {}), ...who, ...p[2]}); }
+                else if (srcKey.startsWith('q:')) draft = O.norm({...draft, limit: 0, others: true}); // déjà compté : tout garder, sauf si on le demande
+                srcKey = key; paintHost();
+            });
+            shost?.addEventListener('click', e => { const b = e.target.closest('[data-dgo-redo]'); if (!b) return; sel.value = 'q:' + b.dataset.dgoRedo; sel.dispatchEvent(new Event('change', {bubbles: true})); });
+            pane.querySelector('[data-dg-srcgo]')?.addEventListener('click', async e => {
+                const key = sel.value; if (!key) return; const b = e.currentTarget, box = shost?.querySelector('[data-dgo-box]'), cfg = cfgFor(key);
+                const q = box && O ? O.read(box) : O?.norm({}) || {}, preset = presetOf(key);
+                if (box && !O.check(box)) return;
+                const label = preset ? (preset[0] === 'custom' ? O.summary(q, {...cfg, fields: ['what', 'pop', 'by']}).replace(/\.$/, '').slice(0, 120) : preset[1]) : labelOf(key);
+                b.disabled = true;
+                try {
+                    if (preset) {
+                        const res = await O.count(q); if (!res.rows?.length) return toast('Aucun chiffre pour ces réglages : essaie un autre groupe, une autre période ou montre « Inconnu ».', 'error');
+                        spec = O.toSpec(spec, res, label);
+                        if (q.live) spec.live = {key, label, q, preset: preset[0], sum: O.summary(q, cfg)}; else delete spec.live;
+                        appSum = O.summary(q, cfg);
+                        if (!spec.o.title || spec.o.title === kindOf().sample().o?.title) spec.o.title = label;
+                        tab = 'data'; paint(); later(); toast(`${res.rows.length} valeur${res.rows.length > 1 ? 's' : ''} prise${res.rows.length > 1 ? 's' : ''} dans ta base${res.counted ? ` (${res.counted} compté${res.counted > 1 ? 's' : ''})` : ''}.`);
+                        return;
+                    }
+                    let pairs = await ext.diagramStatRows(key); if (!pairs.length) return toast('Aucun chiffre pour ce graphique.', 'error');
+                    pairs = O ? O.post(pairs, q) : pairs;
+                    spec = fillFrom(spec, pairs, label);
+                    if (q.live) { spec.live = {key, label}; const po = O?.postOf(q); if (po) { spec.live.post = po; spec.live.sum = O.summary(q, cfg); } } else delete spec.live;
+                    appSum = O ? O.summary(q, cfg) : '';
                     if (!spec.o.title || spec.o.title === kindOf().sample().o?.title) spec.o.title = label;
-                    tab = 'data'; paint(); later(); toast(`${pairs.length} valeur${pairs.length > 1 ? 's' : ''} prise${pairs.length > 1 ? 's' : ''} dans l’app.`); } catch (e) { toast(e.message, 'error'); }
+                    tab = 'data'; paint(); later(); toast(`${pairs.length} valeur${pairs.length > 1 ? 's' : ''} prise${pairs.length > 1 ? 's' : ''} dans l’app.`);
+                } catch (err) { toast(err.message, 'error'); } finally { b.disabled = false; }
             });
             const box = pane.querySelector('[data-dg-pq]'); if (!box) return;
             // une personne choisie avec le menu de choix unique : ses dates entrent dans le diagramme
@@ -373,7 +462,7 @@
         const grid = gi => kindOf().grids[Number(gi)];
         pane.addEventListener('input', e => {
             const el = e.target;
-            if (el.dataset.k !== undefined && el.dataset.g !== undefined) { const g = grid(el.dataset.g), row = spec[g.key][Number(el.dataset.r)]; if (!row) return; row[el.dataset.k] = el.value; if (el.type === 'color') { el.classList.remove('is-auto'); } if (spec.live && g.key === 'rows' && el.type !== 'color') { delete spec.live; } return later(); }
+            if (el.dataset.k !== undefined && el.dataset.g !== undefined) { const g = grid(el.dataset.g), row = spec[g.key][Number(el.dataset.r)]; if (!row) return; row[el.dataset.k] = el.value; if (el.type === 'color') { el.classList.remove('is-auto'); } if (g.key === 'rows' && el.type !== 'color') { if (spec.live || appSum) { delete spec.live; appSum = ''; showSum(''); } } return later(); }
             if (el.dataset.dgSername !== undefined) { spec.series = spec.series || []; const j = Number(el.dataset.dgSername); spec.series[j] = {...(spec.series[j] || {}), name: el.value}; return later(); }
             if (el.dataset.dgSercolor !== undefined) { spec.series = spec.series || []; const j = Number(el.dataset.dgSercolor); spec.series[j] = {...(spec.series[j] || {}), color: el.value}; return later(); }
             if (el.dataset.opt) { const o = [...kindOf().options, ...R().COMMON].find(x => x.k === el.dataset.opt); spec.o = spec.o || {};

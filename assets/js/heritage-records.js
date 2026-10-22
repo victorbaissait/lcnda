@@ -142,7 +142,7 @@
         switch (x.type) {
             case 'longtext': return `<textarea name="${name}" rows="3"${ph}${req(x)}>${esc(v ?? '')}</textarea>`;
             case 'date': return `<input type="date" data-iso-date name="${name}" value="${esc(v ?? '')}"${req(x)}>`;
-            case 'time': return `<input type="time" name="${name}" value="${esc(v ?? '')}"${req(x)}>`;
+            case 'time': return `<input data-ui-time name="${name}" value="${esc(v ?? '')}"${req(x)}>`; // K17 : « 9 h 30 » écrit librement, la valeur reste « 09:30 »
             case 'number': return `<input type="text" inputmode="decimal" name="${name}" value="${esc(v ?? '')}"${ph}${req(x)}>`;
             case 'select': return `<select name="${name}"${req(x)}><option value="">—</option>${(x.options || []).map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
             case 'url': return `<input type="url" name="${name}" value="${esc(v ?? '')}" placeholder="${esc(x.placeholder || 'https://…')}">`;

@@ -393,7 +393,7 @@
             <div class="pm-bar">
                 <span class="pm-filters" role="group" aria-label="Sorte">${[['all', 'Tout'], ['image', '📷 Photos'], ['video', '🎬 Vidéos']].map(([k, l]) => `<button type="button" class="pm-filter" data-pm-type="${k}">${l} <b data-pm-n="${k}"></b></button>`).join('')}</span>
                 ${embed ? '' : `<span class="segmented pm-shape" role="group" aria-label="Forme des vignettes"><button type="button" data-pm-shape="round" title="Vignettes rondes">◯</button><button type="button" data-pm-shape="square" title="Vignettes carrées">▢</button></span>
-                <label class="pm-switch"><input type="checkbox" data-pm="track" ${V.track ? 'checked' : ''}> <span>Le trajet</span></label>
+                <label class="ui-toggle"><input type="checkbox" data-pm="track" ${V.track ? 'checked' : ''}><i></i><span>Le trajet</span></label>
                 <label class="pm-bg">Fond <select data-pm="bg">${A().mapBackgroundSelectHtml?.(bgOf()) || ''}</select></label>`}
                 <span class="pm-visible" data-pm="visible"></span>
                 ${embed ? `<button type="button" class="button small secondary" data-pm="open">↗ Ouvrir</button>` : ''}

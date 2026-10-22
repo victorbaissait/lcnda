@@ -19,7 +19,8 @@
     const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const uid = () => 'w' + Math.random().toString(36).slice(2, 9);
     const pad = n => String(n).padStart(2, '0');
-    const hms = ms => { const s = Math.max(0, Math.round(ms / 1000)); return `${Math.floor(s / 3600) ? Math.floor(s / 3600) + ':' : ''}${pad(Math.floor(s % 3600 / 60))}:${pad(s % 60)}`; };
+    const hms = ms => { if (window.LCNDA_UI?.clock) return window.LCNDA_UI.clock(Math.max(0, Math.round(ms / 1000))); // K17 : « 25:00 », « 1:05:00 »
+        const s = Math.max(0, Math.round(ms / 1000)); return `${Math.floor(s / 3600) ? Math.floor(s / 3600) + ':' : ''}${pad(Math.floor(s % 3600 / 60))}:${pad(s % 60)}`; };
     const todayIso = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
     const words = t => (String(t || '').match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu) || []).length;
 
@@ -99,7 +100,7 @@
     function settingsDialog(w, after, ctx) {
         const c = {...DEFAULT_CFG[w.type], ...(w.cfg || {})};
         let body = `<label>Titre<input name="title" value="${esc(w.title || '')}" placeholder="${esc(TYPES[w.type][1])}"></label>`;
-        if (w.type === 'timer') body += `<label>Durée (minutes)<input type="number" name="minutes" min="1" max="600" value="${c.minutes}"></label><label class="checkbox-line"><input type="checkbox" name="pomodoro" ${c.pomodoro ? 'checked' : ''}> Pomodoro : travail puis pause de 5 min, en boucle</label>`;
+        if (w.type === 'timer') body += `<label>Durée<input data-ui-duration="min" type="number" name="minutes" min="1" max="600" value="${c.minutes}"></label><label class="checkbox-line"><input type="checkbox" name="pomodoro" ${c.pomodoro ? 'checked' : ''}> Pomodoro : travail puis pause de 5 min, en boucle</label>`;
         if (w.type === 'words') body += `<label>Objectif de mots par jour<input type="number" name="goal" min="10" max="100000" value="${c.goal}"></label>`;
         if (w.type === 'todo') body += `<label>Les tâches à faire dans les … prochains jours<input type="number" name="days" min="1" max="3650" value="${c.days}"></label>`;
         if (w.type === 'reminders' || w.type === 'agenda') body += `<label>Sur combien de jours ?<input type="number" name="days" min="1" max="3650" value="${c.days}"></label><label>Combien au plus ?<input type="number" name="n" min="1" max="50" value="${c.n || 10}"></label>`;

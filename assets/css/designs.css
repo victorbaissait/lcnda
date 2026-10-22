@@ -1,4 +1,6 @@
-/* LCNDA — 🎨 Designs au choix (A1 à A10) : les styles écrits à la main (assets/js/app-designs.js).
+/* LCNDA — 🎨 Designs au choix (A1 à A8) : les styles écrits à la main (assets/js/app-designs.js).
+ * La forme seulement (traits, ombres, coins, densité, icônes, en-tête de fiche, cases d'arbre, boutons, listes, mouvements) :
+ * jamais la police, la taille du texte ni les couleurs de l'Apparence (Preset, Couleur principale, fonds) — elles passent toujours devant.
  * Chaque règle qui touche l'app commence par un attribut data-lc-* posé sur <html> : sans lui (« Comme avant », le départ),
  * rien ne s'applique. Les ombres, fonds, coins, marges et survols de toute l'app sont dans designs-gen.css (fabriqué).
  * Mode sombre : règles :root[data-theme="dark"] écrites ici même (ce fichier n'est pas passé dans build-dark-css.py).
@@ -6,37 +8,18 @@
  */
 
 /* ═════════════════════════ A1 · Style général ═════════════════════════ */
-/* palettes (clair, puis sombre) */
-:root[data-lc-style="doux"] { --lc-paper: #f4f6f9; --lc-card: #ffffff; --lc-head: #fbfcfd; --lc-txt: #1c2433; --lc-line: #c9d1dc; --lc-muted: #5f6878; --lc-soft: #e3e8ee; --lc-zebra: #f3f5f8; }
-:root[data-lc-style="papier"] { --lc-paper: #efe5cf; --lc-card: #fbf4e4; --lc-head: #f4ead3; --lc-txt: #3a2a18; --lc-line: #8c7457; --lc-muted: #6e5c45; --lc-soft: #e2d4b8; --lc-zebra: #f3e9d2; }
-:root[data-lc-style="sobre"] { --lc-paper: #f7f7f8; --lc-card: #ffffff; --lc-head: #fafafa; --lc-txt: #1f1f1f; --lc-line: #cfd2d6; --lc-muted: #666a70; --lc-soft: #e6e7ea; --lc-zebra: #f4f4f6; }
-:root[data-lc-style="doux"][data-theme="dark"] { --lc-paper: #14171c; --lc-card: #1e232b; --lc-head: #232932; --lc-txt: #e3e7ee; --lc-line: #3a4350; --lc-muted: #9aa3b2; --lc-soft: #2a313b; --lc-zebra: #232831; }
-:root[data-lc-style="papier"][data-theme="dark"] { --lc-paper: #1f1912; --lc-card: #2a2219; --lc-head: #30271c; --lc-txt: #ecdcc0; --lc-line: #6b5940; --lc-muted: #b3a185; --lc-soft: #3a3024; --lc-zebra: #30271d; }
-:root[data-lc-style="sobre"][data-theme="dark"] { --lc-paper: #141414; --lc-card: #1c1c1c; --lc-head: #202020; --lc-txt: #e6e6e6; --lc-line: #3a3a3a; --lc-muted: #9a9a9a; --lc-soft: #2a2a2a; --lc-zebra: #222222; }
-:root[data-lc-style]:not([data-lc-style="avant"]) {
-    --paper: var(--lc-paper) !important; --bg: var(--lc-paper) !important; --white: var(--lc-card) !important;
-    --card-bg: var(--lc-card) !important; --card-head-bg: var(--lc-head) !important; --ink: var(--lc-txt) !important;
-    --muted: var(--lc-muted) !important; --line-color: var(--lc-soft) !important; --panel: var(--lc-card); --surface: var(--lc-card); --line-soft: var(--lc-soft); --border: var(--lc-line);
-}
-:root[data-lc-style]:not([data-lc-style="avant"]) body { background: var(--lc-paper); }
-/* traits : couleur de la palette et épaisseur choisie (les traits de toute l'app : apparence-traits.css) */
-:root[data-lc-lines] { --lc-frame-color: var(--lc-line, var(--ink)) !important; --lc-frame-k: var(--lc-k, 1) !important; --line: calc(2px * var(--lc-k, 1)) solid var(--lc-line, var(--ink)) !important; }
-:root[data-lc-lines][data-lc-style="avant"][data-theme="dark"] { --lc-frame-color: #555 !important; --line: calc(2px * var(--lc-k, 1)) solid #555 !important; }
+/* traits : l'épaisseur choisie ; la couleur vient des couleurs de l'Apparence (texte mêlé au fond des cartes),
+   donc elle suit le Preset choisi. Un thème à soi qui a ses propres traits (classe lc-frame, « ✎ Mes thèmes ») garde les siens. */
+:root[data-lc-lines]:not(.lc-frame) { --lc-frame-color: var(--ink) !important; --lc-frame-k: var(--lc-k, 1) !important; --line: calc(2px * var(--lc-k, 1)) solid var(--lc-frame-color) !important; }
+:root[data-lc-lines][data-lc-style="doux"]:not(.lc-frame) { --lc-frame-color: color-mix(in srgb, var(--ink) 24%, var(--card-bg, #fff)) !important; }
+:root[data-lc-lines][data-lc-style="sobre"]:not(.lc-frame) { --lc-frame-color: color-mix(in srgb, var(--ink) 20%, var(--card-bg, #fff)) !important; }
+:root[data-lc-lines][data-lc-style="papier"]:not(.lc-frame) { --lc-frame-color: color-mix(in srgb, var(--ink) 55%, var(--card-bg, #fff)) !important; }
+:root[data-lc-lines][data-lc-style="avant"][data-theme="dark"]:not(.lc-frame) { --lc-frame-color: #555 !important; }
 /* ombres */
 :root[data-lc-sh="douces"] { --lc-sh-l: 0 6px 18px rgba(25,35,60,.10), 0 1px 3px rgba(25,35,60,.08); --lc-sh-m: 0 2px 8px rgba(25,35,60,.09); --lc-sh-s: 0 1px 3px rgba(25,35,60,.12);
     --shadow: var(--lc-sh-l) !important; --shadow-small: var(--lc-sh-m) !important; }
 :root[data-lc-sh="douces"][data-theme="dark"] { --lc-sh-l: 0 6px 18px rgba(0,0,0,.45); --lc-sh-m: 0 2px 8px rgba(0,0,0,.4); --lc-sh-s: 0 1px 3px rgba(0,0,0,.45); }
 :root[data-lc-sh="aucune"] { --shadow: none !important; --shadow-small: none !important; }
-:root[data-lc-sh="franches"][data-lc-acc] { --shadow: 6px 6px 0 color-mix(in srgb, var(--blue) 34%, transparent) !important; --shadow-small: 4px 4px 0 color-mix(in srgb, var(--blue) 28%, transparent) !important; }
-/* couleur d'accent (passe devant la couleur principale de l'Apparence) */
-:root[data-lc-acc] { --blue: var(--lc-acc-l) !important; --blue-bright: var(--lc-acc-l) !important; --blue-soft: var(--lc-acc-soft-l) !important; --ui-blue: var(--lc-acc-l); }
-:root[data-lc-acc][data-theme="dark"] { --blue: var(--lc-acc-d) !important; --blue-bright: var(--lc-acc-d) !important; --blue-soft: var(--lc-acc-soft-d) !important; --ui-blue: var(--lc-acc-d); }
-:root[data-lc-acc] { --lc-on-acc: var(--lc-on-acc-l, #fff); }
-:root[data-lc-acc][data-theme="dark"] { --lc-on-acc: var(--lc-on-acc-d, #fff); }
-/* le texte posé sur la couleur d'accent : blanc ou presque noir, celui qui se lit le mieux (calculé par app-designs.js) */
-:root[data-lc-acc] .ui-badge.is-sosa { background: var(--blue); border-color: var(--blue); color: var(--lc-on-acc); }
-:root[data-lc-acc] :is(.button:not(.secondary):not(.danger), .nav-item.is-active, .nav-item.is-active span, .segmented button.is-active, .data-table th, .data-table th > button, .card-index) { color: var(--lc-on-acc); }
-:root[data-lc-acc]:not([data-lc-lsel="pale"]) :is(.person-list-item, .side-menu-item, .saved-item).is-active, :root[data-lc-acc]:not([data-lc-lsel="pale"]) .side-menu-item.is-active .side-number { color: var(--lc-on-acc); }
 /* fond quadrillé */
 :root[data-lc-grid="off"] .workspace { background-image: none; }
 /* coins arrondis : ce que la feuille fabriquée ne peut pas deviner (cadres déjà « carrés » exprès) */
@@ -49,18 +32,16 @@
 :root[data-lc-r] .segmented button:first-child { border-radius: min(var(--lc-r), 8px) 0 0 min(var(--lc-r), 8px); }
 :root[data-lc-r] .segmented button:last-child { border-radius: 0 min(var(--lc-r), 8px) min(var(--lc-r), 8px) 0; }
 :root[data-lc-r] .segmented button:only-child { border-radius: min(var(--lc-r), 8px); }
-/* papier ancien : les polices à empattements (sauf si A7 ou Accessibilité choisissent la police) */
-:root[data-lc-style="papier"]:not([data-lc-font]):not(.a11y-font) { --font-family: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif !important; }
-:root[data-lc-style="papier"]:not([data-lc-titles]) :is(.page-header h2, .person-hero h2, .card-head h3, .sidebar-top h1, .modal-head h2) { font-family: "EB Garamond", Garamond, "Palatino Linotype", Palatino, Georgia, serif; letter-spacing: -.01em; }
-:root[data-lc-style="papier"] .workspace { background-image: radial-gradient(rgba(120, 90, 50, .05) 1px, transparent 1.2px); background-size: 6px 6px; }
+/* papier ancien : le grain du papier (les couleurs crème : Apparence → Preset « Archive papier ») */
+:root[data-lc-style="papier"] .workspace { background-image: radial-gradient(color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1.2px); background-size: 6px 6px; }
 :root[data-lc-style="papier"][data-lc-grid="off"] .workspace { background-image: none; }
 :root[data-lc-style="papier"][data-theme="dark"] .workspace { background-image: none; }
 /* doux et sobre : les en-têtes de tableau restent lisibles avec les traits fins */
 :root[data-lc-style="doux"] .data-table th, :root[data-lc-style="sobre"] .data-table th { border-bottom-width: 1px; }
 /* les traits de l'arbre (dessinés avec ::before / ::after) suivent aussi la couleur et l'épaisseur des traits */
-:root[data-lc-lines] .tree :is(li, ul)::before, :root[data-lc-lines] .tree li::after { border-color: var(--lc-frame-color); border-top-width: calc(2px * var(--lc-k, 1)); }
-:root[data-lc-lines] .tree li::after, :root[data-lc-lines] .tree ul ul::before { border-left-width: calc(2px * var(--lc-k, 1)); }
-:root[data-lc-lines] .tree li:last-child::before { border-right-width: calc(2px * var(--lc-k, 1)); }
+:root[data-lc-lines] .tree :is(li, ul)::before, :root[data-lc-lines] .tree li::after { border-color: var(--lc-frame-color); border-top-width: calc(2px * var(--lc-frame-k, 1)); }
+:root[data-lc-lines] .tree li::after, :root[data-lc-lines] .tree ul ul::before { border-left-width: calc(2px * var(--lc-frame-k, 1)); }
+:root[data-lc-lines] .tree li:last-child::before { border-right-width: calc(2px * var(--lc-frame-k, 1)); }
 :root[data-lc-lines] .tree ul ul::before { border-top-width: 0; }
 
 /* ═════════════════════════ A2 · Densité ═════════════════════════ */
@@ -120,18 +101,18 @@
 .lc-hero-acte > .lc-acte-orn { grid-area: orn; text-align: center; color: #8c7457; letter-spacing: .3em; font-size: 14px; }
 .lc-hero-acte > .lc-h-nm { grid-area: nm; text-align: center; }
 .lc-hero-acte > .lc-h-nm .eyebrow { display: none; }
-.lc-hero-acte .lc-acte-k { font: 600 10.5px/1.2 Georgia, serif; letter-spacing: .22em; text-transform: uppercase; color: #6e5536; margin-bottom: 6px; }
-.lc-hero-acte > .lc-h-nm h2 { font-family: "EB Garamond", Garamond, "Palatino Linotype", Georgia, serif; font-style: italic; font-weight: 600; letter-spacing: 0; color: #3a2a18; }
+.lc-hero-acte .lc-acte-k { font-weight: 600; font-size: 10.5px; line-height: 1.2; letter-spacing: .22em; text-transform: uppercase; color: #6e5536; margin-bottom: 6px; }
+.lc-hero-acte > .lc-h-nm h2 { font-style: italic; font-weight: 600; letter-spacing: 0; color: #3a2a18; }
 .lc-hero-acte > .lc-h-nm .person-meta { display: none; }
 .lc-hero-acte > .lc-h-pt { grid-area: pt; width: 92px; height: 112px; border-radius: 50% !important; border: 3px solid #8c7457 !important; filter: sepia(.75) contrast(.95); object-fit: cover; overflow: hidden; align-self: center; background: #ead9b6; color: #6b4a26; }
 .lc-hero-acte > .portrait-lc.lc-h-pt .lc-av { width: 100%; height: 100%; border-radius: 50%; }
-.lc-hero-acte > .lc-acte-txt { grid-area: txt; margin: 0; align-self: center; font: 15px/1.6 "Source Serif 4", Georgia, "Times New Roman", serif; color: #3a2a18; }
+.lc-hero-acte > .lc-acte-txt { grid-area: txt; margin: 0; align-self: center; font-size: 15px; line-height: 1.6; color: #3a2a18; }
 .lc-hero-acte .person-hero-tools { display: contents; }
 .lc-hero-acte .person-hero-status { grid-area: st; flex-direction: row; justify-content: center; align-items: center; gap: 10px; }
 .lc-hero-acte .person-hero-actions { grid-area: tl; flex-direction: row; justify-content: center; border-left: 0 !important; padding: 6px 0 0; border-top: 1px solid rgba(140,116,87,.45); gap: 14px; min-height: 0; }
 .lc-hero-acte .person-hero-actions .icon-action { background: transparent; border-color: #8c7457; color: #5a4128; box-shadow: none; }
 .lc-hero-acte .person-hero-labels { grid-column: 1 / -1; }
-.lc-acte-stamp { display: inline-grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; border: 2px solid #9b2f22; color: #9b2f22; transform: rotate(-8deg); box-shadow: inset 0 0 0 3px rgba(255,255,255,.5), inset 0 0 0 4px rgba(155,47,34,.55); font: 700 8px/1 Georgia, serif; letter-spacing: .12em; text-align: center; }
+.lc-acte-stamp { display: inline-grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; border: 2px solid #9b2f22; color: #9b2f22; transform: rotate(-8deg); box-shadow: inset 0 0 0 3px rgba(255,255,255,.5), inset 0 0 0 4px rgba(155,47,34,.55); font-weight: 700; font-size: 8px; line-height: 1; letter-spacing: .12em; text-align: center; }
 .lc-acte-stamp b { display: block; font-size: 17px; letter-spacing: 0; margin-top: 2px; }
 :root[data-theme="dark"] .person-hero.lc-hero-acte { background: #2a2219; color: #ecdcc0; border-color: #8c7457; box-shadow: inset 0 0 0 6px #2a2219, inset 0 0 0 7px rgba(176,150,112,.5), var(--shadow-small); }
 :root[data-theme="dark"] .lc-hero-acte > .lc-h-nm h2, :root[data-theme="dark"] .lc-hero-acte > .lc-acte-txt { color: #ecdcc0; }
@@ -140,7 +121,7 @@
 :root[data-theme="dark"] .lc-acte-stamp { color: #ff8f80; border-color: #ff8f80; }
 /* — style « carte d'identité » — */
 .person-hero.lc-hero-carte { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "top top top" "pt f tl" "mrz mrz mrz"; gap: 12px 16px; padding: 0 0 0; overflow: hidden; background: linear-gradient(160deg, #eef4fb, #f7f2fb); color: #13233a; }
-.lc-hero-carte > .lc-carte-top { grid-area: top; display: flex; justify-content: space-between; padding: 7px 16px; background: #1d3f73; color: #fff; font: 800 10.5px/1.2 system-ui, sans-serif; letter-spacing: .2em; }
+.lc-hero-carte > .lc-carte-top { grid-area: top; display: flex; justify-content: space-between; padding: 7px 16px; background: #1d3f73; color: #fff; font-weight: 800; font-size: 10.5px; line-height: 1.2; letter-spacing: .2em; }
 .lc-hero-carte > .lc-h-pt { grid-area: pt; margin-left: 16px; width: 92px; height: 116px; object-fit: cover; border: 1.5px solid #6c7f9a !important; overflow: hidden; }
 .lc-hero-carte > .portrait-lc.lc-h-pt .lc-av { width: 100%; height: 100%; border-radius: 0; }
 .lc-hero-carte > .lc-h-nm { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
@@ -200,7 +181,6 @@
 :root[data-lc-tlinks="arrondis"] .tree li::before, :root[data-lc-tlinks="arrondis"] .tree li::after { border-color: var(--muted); }
 :root[data-lc-tsosa] .tree-card { position: relative; }
 .lc-tree-sosa { position: absolute; top: -9px; right: -9px; min-width: 22px; height: 20px; padding: 0 5px; display: grid; place-items: center; background: var(--person-badge-sosa-bg, #055dff); color: var(--person-badge-sosa-text, #fff); border: 1.5px solid var(--ink); font-size: 10.5px; font-weight: 800; line-height: 1; }
-:root[data-lc-acc] .lc-tree-sosa { background: var(--blue); }
 
 /* ═════════════════════════ A6 · Boutons ═════════════════════════ */
 :root[data-lc-btn="contour"] .button.secondary { background: transparent; border-width: 1.5px; border-color: color-mix(in srgb, var(--blue) 70%, var(--ink)); color: var(--blue); box-shadow: none; }
@@ -212,28 +192,16 @@
 :root[data-lc-btn="texte"] .button.secondary.danger { color: #b0152a; }
 :root[data-lc-btn="texte"][data-theme="dark"] .button.secondary.danger { color: #ff8090; }
 :root[data-lc-btn][data-theme="dark"] .button.secondary:not(.danger) { color: color-mix(in srgb, var(--blue) 80%, #fff); }
-:root[data-lc-bsize="petite"] .button:not(.small) { min-height: 34px; padding: 7px 12px; font-size: 12px; }
+:root[data-lc-bsize="petite"] .button:not(.small) { min-height: 34px; padding: 7px 12px; }
 :root[data-lc-bsize="petite"] .button.small { min-height: 28px; padding: 4px 8px; }
-:root[data-lc-bsize="petite"] .icon-button { width: 32px; height: 32px; font-size: 16px; }
-:root[data-lc-bsize="grande"] .button:not(.small) { min-height: 50px; padding: 14px 20px; font-size: 15px; }
-:root[data-lc-bsize="grande"] .button.small { min-height: 38px; padding: 8px 13px; font-size: 12.5px; }
+:root[data-lc-bsize="petite"] .icon-button { width: 32px; height: 32px; }
+:root[data-lc-bsize="grande"] .button:not(.small) { min-height: 50px; padding: 14px 20px; }
+:root[data-lc-bsize="grande"] .button.small { min-height: 38px; padding: 8px 13px; }
 :root[data-lc-bsize="grande"] .icon-button { width: 44px; height: 44px; }
 :root[data-lc-bshadow="off"] :is(.button, .icon-button, .button:hover, .icon-button:hover, .button.small) { box-shadow: none !important; }
 :root[data-lc-bshape="pilule"] :is(.button, .icon-button, .ui-toast-btn) { border-radius: 999px; }
 
-/* ═════════════════════════ A7 · Police de l'interface ═════════════════════════ */
-:root[data-lc-font="lisible"]:not(.a11y-font) { --font-family: "Atkinson Hyperlegible", Verdana, Tahoma, "DejaVu Sans", sans-serif !important; }
-:root[data-lc-font="serif"]:not(.a11y-font) { --font-family: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif !important; }
-/* la taille : même façon d'agrandir qu'Accessibilité, et les deux se multiplient */
-:root[data-lc-fz] :is(#workspace, .sidebar-content, .sidebar-top, .sidebar-footer, .toast-region > .toast), :root[data-lc-fz] dialog.modal[open]:not(.is-full) > * { zoom: calc(var(--a11y-zoom, 1) * var(--lc-fz, 1)); }
-:root[data-lc-fz]:not(.a11y-zoom) { --sidebar: min(calc(320px * var(--lc-fz, 1)), 42vw); }
-@media (max-width: 700px) { :root[data-lc-fz] :is(#workspace, .sidebar-content, .sidebar-top, .sidebar-footer, .toast-region > .toast) { zoom: calc(var(--a11y-zoom, 1) * min(var(--lc-fz, 1), 1.08)); } } /* sur un téléphone, l'écran est déjà étroit : on agrandit moins */
-:root[data-lc-fz] .lcd-pv-root { zoom: var(--lc-fz, 1); }
-:root[data-lc-lh] :is(.app-shell, dialog.modal:not(.is-full), .toast-region, .lcd-pv-root) :is(p, li, dd, dt, td, label, small, .muted, .card-body, .person-meta) { line-height: var(--lc-lh); }
-:root[data-lc-titles="serif"] :is(.page-header h2, .person-hero h2, .card-head h3, .sidebar-top h1, .modal-head h2, .dash-group-head h3) { font-family: "EB Garamond", Garamond, "Palatino Linotype", Palatino, Georgia, serif; letter-spacing: -.01em; }
-:root[data-lc-titles="gras"] :is(.page-header h2, .person-hero h2, .card-head h3, .sidebar-top h1, .modal-head h2, .dash-group-head h3) { font-weight: 900; }
-
-/* ═════════════════════════ A8 · Mouvements ═════════════════════════ */
+/* ═════════════════════════ A7 · Mouvements ═════════════════════════ */
 @keyframes lc-pop { from { opacity: 0; transform: translateY(12px) scale(.97); } }
 @keyframes lc-pop-s { from { opacity: 0; transform: translateY(-4px); } }
 @keyframes lc-fade { from { opacity: 0; } }
@@ -251,9 +219,9 @@
 :root[data-lc-mbar="off"] .ui-toast-bar { display: none; }
 .lc-toast-s { margin-left: auto; padding-left: 10px; font-size: 11px; font-weight: 700; opacity: .7; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-/* ═════════════════════════ A9 · Listes ═════════════════════════ */
-:root[data-lc-list] { --lc-zebra-c: var(--lc-zebra, #f4f5f7); }
-:root[data-lc-list][data-theme="dark"] { --lc-zebra-c: var(--lc-zebra, #2b2b2b); }
+/* ═════════════════════════ A8 · Listes ═════════════════════════ */
+/* le gris d'une ligne sur deux : tiré des couleurs de l'Apparence (il suit le Preset) */
+:root[data-lc-list] { --lc-zebra-c: color-mix(in srgb, var(--ink) 5%, var(--card-bg, #fff)); }
 /* traits entre les lignes : un seul cadre */
 :root[data-lc-list="traits"] :is(.person-list, .side-menu:not(.mt-groups)) { gap: 0; border: var(--line); background: var(--card-bg); }
 :root[data-lc-list="traits"] .side-menu.mt-groups .mt-gitems { display: grid; gap: 0; border: var(--line); }
@@ -296,25 +264,6 @@
 :root[data-lc-lav] .person-list-item.has-lc-av { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; }
 /* en-têtes qui restent en haut */
 :root[data-lc-lsticky="off"] .data-table th { position: static; }
-
-/* ═════════════════════════ A10 · Tableau de bord ═════════════════════════ */
-:root[data-lc-wgap] .dashboard-grid { gap: var(--lc-wgap); }
-:root[data-lc-dash="colonnes"] .dashboard-grid { display: block; columns: var(--lc-cols, 3); column-gap: var(--lc-wgap, 20px); }
-:root[data-lc-dash="colonnes"] .dashboard-grid > * { break-inside: avoid; margin: 0 0 var(--lc-wgap, 20px); width: 100%; display: block; }
-:root[data-lc-dash="colonnes"] .dashboard-grid > :is(.dash-group, .empty-box) { column-span: all; }
-@media (max-width: 1100px) { :root[data-lc-dash="colonnes"] .dashboard-grid { columns: min(var(--lc-cols, 3), 2); } }
-@media (max-width: 720px) { :root[data-lc-dash="colonnes"] .dashboard-grid { columns: 1; } }
-:root[data-lc-dash="journal"] .dashboard-page { max-width: calc(var(--lc-jw, 720px) + 2 * clamp(24px, 4vw, 64px)); margin-inline: auto; }
-:root[data-lc-dash="journal"] .dashboard-grid { grid-template-columns: minmax(0, 1fr); max-width: var(--lc-jw, 720px); margin-inline: auto; }
-:root[data-lc-dash="journal"] .dashboard-grid > * { grid-column: 1 / -1 !important; }
-.lc-journal { max-width: var(--lc-jw, 720px); margin: 0 auto 6px; padding: 0 0 12px; border-bottom: var(--line); display: grid; gap: 4px; }
-.lc-journal b { font-size: clamp(26px, 3.4vw, 40px); line-height: 1; letter-spacing: -.03em; }
-.lc-journal > span:last-child { color: var(--muted); font-size: 13px; }
-:root[data-lc-titles="serif"] .lc-journal b, :root[data-lc-style="papier"] .lc-journal b { font-family: "EB Garamond", Garamond, Georgia, serif; }
-:root[data-lc-dnum="off"] .dashboard-widget .card-index { display: none; }
-:root[data-lc-dash] .dashboard-widget .card-head h3 small { color: var(--muted); }
-:root[data-lc-dash][data-theme="dark"]:not([data-lc-acc]) .dashboard-widget .card-index { color: #0d1118; }
-:root[data-lc-dempty="off"] .dashboard-widget:has(> .card-body > :is(.empty-line, .empty-box):only-child) { display: none; }
 
 /* ═════════════════════════ La page Maintenance → 🎨 Designs au choix ═════════════════════════ */
 .lcd-page { --lcd-acc: var(--blue-bright, #055dff); }
@@ -360,15 +309,13 @@
 .lcd-choices { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 .lcd-choices.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .lcd-choices.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.lcd-choices.five { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 1500px) { .lcd-choices.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 1100px) { .lcd-choices.three, .lcd-choices.five { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 700px) { .lcd-choices.four, .lcd-choices.three, .lcd-choices.five { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1100px) { .lcd-choices.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .lcd-choices.four, .lcd-choices.three { grid-template-columns: minmax(0, 1fr); } }
 .lcd-choice { display: grid; gap: 9px; align-content: start; border: 2px solid var(--ink); background: var(--card-bg, #fff); padding: 12px; cursor: pointer; text-align: left; min-width: 0; color: var(--ink); }
 .lcd-choice:hover { border-color: var(--blue); }
 .lcd-choice:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 .lcd-choice.is-active { border: 3px solid var(--blue); background: color-mix(in srgb, var(--blue-soft, #eaf2ff) 70%, var(--card-bg, #fff)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 25%, transparent); padding: 11px; }
-.lcd-choice.is-mix { cursor: default; }
 .lcd-choice-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .lcd-choice-top h3 { margin: 0; font-size: 16px; }
 .lcd-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--ink); flex: none; position: relative; background: var(--card-bg, #fff); }
@@ -378,9 +325,6 @@
 .lcd-choice-why { margin: 0; font-size: 13px; line-height: 1.45; }
 .lcd-why-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: 13px; line-height: 1.45; }
 .lcd-why-list li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 4px; }
-.lcd-preset-names { display: flex; flex-wrap: wrap; gap: 4px; }
-.lcd-preset-names span { font-size: 11px; padding: 1px 5px; border: 1px solid var(--line-color, #d6d6d6); color: var(--muted); }
-.lcd-preset-names span.is-chg { color: var(--blue); border-color: color-mix(in srgb, var(--blue) 40%, transparent); font-weight: 700; }
 /* aperçus */
 .lcd-stage { position: relative; overflow: hidden; border: 1px solid var(--line-color, #d6d6d6); background: var(--paper); min-height: 60px; pointer-events: none; }
 .lcd-stage.is-preview { border: 0; background: transparent; }
@@ -408,20 +352,15 @@
 .lcd-why { margin: 7px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
 .lcd-why b { color: var(--ink); }
 .lcd-preview { border: 2px solid var(--ink); background: var(--card-head-bg, #fafafa); position: sticky; top: 8px; max-height: calc(100vh - 140px); overflow: auto; overscroll-behavior: contain; }
-.lcd-preview.is-wide { position: static; max-height: none; margin-top: 18px; }
 @media (max-width: 1100px) { .lcd-preview { position: static; max-height: none; } }
 .lcd-preview-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 12px; border-bottom: 1px solid var(--line-color, #d6d6d6); flex-wrap: wrap; position: sticky; top: 0; z-index: 2; background: var(--card-head-bg, #fafafa); }
 .lcd-mode button { min-height: 30px; padding: 3px 10px; font-size: 12px; }
-.lcd-preview .segmented.lcd-ens-tabs { margin: 10px 12px 0; display: flex; flex-wrap: wrap; }
 .lcd-sec, .lcd-body, .lcd-body > *, .lcd-preview, .lcd-settings > * { min-width: 0; max-width: 100%; }
 .lcd-mode { display: flex; flex-wrap: wrap; }
-.lcd-ens-tabs button { min-height: 32px; padding: 4px 10px; font-size: 12px; }
 .lcd-preview-body { padding: 12px; display: grid; gap: 14px; }
 .lcd-foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-color, #d6d6d6); }
 .lcd-foot p { margin: 0; font-size: 12.5px; flex: 1 1 280px; }
 .lcd-link { margin: 0 0 16px; }
-.lcd-hint { display: block; font-size: 11px; font-weight: 600; color: var(--blue); margin-top: 3px; }
-.lcd-page .ui-presets { margin-top: 18px; }
 @media (max-width: 700px) {
     .lcd-head { flex-direction: column; }
     .lcd-sum { padding: 11px 12px; gap: 8px; }
@@ -449,7 +388,7 @@
 .lcd-pv-nav .main-nav { display: flex; gap: 6px; flex-wrap: wrap; padding: 6px 0; }
 .lcd-pv-tree { display: flex; justify-content: safe center; padding: 6px 0 10px; }
 .lcd-pv-tree .tree { min-width: 0; }
-/* A8 : la boucle de démonstration (mouvements de l'app, rejoués) */
+/* A7 : la boucle de démonstration (mouvements de l'app, rejoués) */
 .lcd-mv { position: relative; height: 270px; overflow: hidden; border: 1px solid var(--line-color, #d6d6d6); background: var(--paper); }
 .lcd-mv-page { padding: 16px; display: grid; gap: 14px; justify-items: start; }
 .lcd-mv-tabs { position: relative; display: flex; }

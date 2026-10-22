@@ -390,7 +390,7 @@
             ${sub.length ? `<div class="h-at-subs">${sub.map(f => `<button type="button" class="h-at-sub" data-at-go="${f.id}" data-at-folder-drop="${f.id}">${esc(f.icon || CFG.folders.closed)} ${esc(f.name)}</button>`).join('')}</div>` : ''}
             <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>＋ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>`).join('')}<button type="button" data-at-library title="Des numéros de revue, des articles, des livres, des chapitres, des documentaires et leurs moments">📚 Revues, livres, documentaires…</button><button type="button" class="h-at-menu-cfg" data-at-settings>⚙️ Réglages des sortes…</button></div></div>
                 <button type="button" class="button small secondary" data-at-import title="Zotero (.rdf), CSL JSON, EndNote (.xml), BibTeX (.bib), RIS (.ris)">⤒ Importer…</button>`}
-                ${folder && kids(node).length ? `<label class="checkbox-line h-at-deep"><input type="checkbox" data-at-deep ${v.deep ? 'checked' : ''}> avec les sous-dossiers</label>` : ''}
+                ${folder && kids(node).length ? `<label class="ui-toggle h-at-deep"><input type="checkbox" data-at-deep ${v.deep ? 'checked' : ''}><i></i>avec les sous-dossiers</label>` : ''}
                 <select data-at-type><option value="">Toutes les sortes</option>${CFG.types.filter(t => !t.hidden || t.key === v.type).map(t => `<option value="${esc(t.key)}" ${v.type === t.key ? 'selected' : ''}>${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</select>
                 <input type="search" data-at-q value="${esc(v.q)}" placeholder="Chercher (titre, auteur, texte, étiquette…)"></div>
             ${v.sel.length > 1 ? `<div class="h-at-bulk"><strong>${plural(v.sel.length, 'élément choisi', 'éléments choisis')}</strong>
@@ -415,7 +415,7 @@
         if (node === 'widgets') {
             const p = P.project;
             return `<h3 class="h-at-ftitle">🧩 Widgets</h3><p class="muted">Chronomètre, minuteur, objectif de mots, tâches, rappels, agenda du projet, bloc-notes… « ＋ Widget » pour en ajouter.</p>
-                <label class="checkbox-line"><input type="checkbox" data-at-wov ${widgetsInOverview(p.id) ? 'checked' : ''}> Les montrer aussi dans la vue d’ensemble</label>${widgetsBox(p)}`;
+                <label class="ui-toggle"><input type="checkbox" data-at-wov ${widgetsInOverview(p.id) ? 'checked' : ''}><i></i>Les montrer aussi dans la vue d’ensemble</label>${widgetsBox(p)}`;
         }
         const items = live(), people = P.people || {};
         if (node === 'overview') {
@@ -868,20 +868,9 @@
         if (refs.length) { B.push({k: 'h', lvl: 1, t: 'Bibliographie'}); refs.forEach(r => B.push({k: 'bib', t: cite(r, false)})); }
         return B;
     }
-    const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
-    const crc32 = u8 => { let c = 0xffffffff; for (let i = 0; i < u8.length; i++) c = CRC_T[(c ^ u8[i]) & 255] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
     /** Petit fichier zip sans compression (suffit pour un .docx). */
-    function zip(files) {
-        const enc = new TextEncoder(), parts = [], central = []; let off = 0;
-        files.forEach(([name, text]) => { const n = enc.encode(name), d = enc.encode(text), c = crc32(d);
-            const h = new DataView(new ArrayBuffer(30)); h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(8, 0, true); h.setUint32(14, c, true); h.setUint32(18, d.length, true); h.setUint32(22, d.length, true); h.setUint16(26, n.length, true);
-            parts.push(new Uint8Array(h.buffer), n, d);
-            const ch = new DataView(new ArrayBuffer(46)); ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint32(16, c, true); ch.setUint32(20, d.length, true); ch.setUint32(24, d.length, true); ch.setUint16(28, n.length, true); ch.setUint32(42, off, true);
-            central.push(new Uint8Array(ch.buffer), n); off += 30 + n.length + d.length; });
-        const size = central.reduce((s, x) => s + x.length, 0), end = new DataView(new ArrayBuffer(22));
-        end.setUint32(0, 0x06054b50, true); end.setUint16(8, files.length, true); end.setUint16(10, files.length, true); end.setUint32(12, size, true); end.setUint32(16, off, true);
-        return new Blob([...parts, ...central, new Uint8Array(end.buffer)], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
-    }
+    /** Petit fichier zip sans compression (suffit pour un .docx) : le fabricant commun (LCNDA_SHEET.zipStore) */
+    const zip = files => window.LCNDA_SHEET.zipStore(files.map(([name, data]) => ({name, data})), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     function toDocx() {
         const x = t => String(t ?? '').replace(/[&<>]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
         const run = (t, rpr = '') => String(t).split('\n').map((line, k) => `${k ? '<w:r><w:br/></w:r>' : ''}<w:r>${rpr}<w:t xml:space="preserve">${x(line)}</w:t></w:r>`).join('');

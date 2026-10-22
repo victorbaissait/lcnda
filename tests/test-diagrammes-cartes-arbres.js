@@ -200,7 +200,8 @@ echo "ok cartes2 $n\n";`;
         const APP = {
             dotmap: [() => p.selectOption('.h-dg-dlg [data-c2="ev"]', 'all'), async () => { const h = await preview(p); assert.match(h, /Rennes/); assert.match(h, /data-c2-pids="\d/); }],
             hexmap: [null, async () => assert.match(await preview(p), /class="c2-hex" data-c2-pids="\d/)],
-            cartogram: [() => p.check('.h-dg-dlg [data-dgm-anc]'), async () => assert.match(await preview(p), /Ille-et-Vilaine/)],
+            cartogram: [() => p.selectOption('.h-dg-dlg [data-dgo="pop"]', 'anc'), // « Seulement mes ancêtres » est devenu le groupe de personnes commun (heritage-diagram-options.js)
+                 async () => assert.match(await preview(p), /Ille-et-Vilaine/)],
             storymap: [() => p.evaluate(id => window.LCNDA_PICKER.pickerSet(document.querySelector('.h-dg-dlg [name=c2_person]').closest('.pk'), id), root), async () => assert.match(await preview(p), /data-c2-step="0"/)],
             icicle: [async () => { await p.selectOption('.h-dg-dlg [data-c2="gens"]', '4'); await p.evaluate(id => window.LCNDA_PICKER.pickerSet(document.querySelector('.h-dg-dlg [name=c2_root]').closest('.pk'), id), elder); }, async () => assert.ok((await p.$$('.h-dg-dlg [data-dg-preview] [data-c2-pid]')).length > 5)],
             godnames: [null, async () => assert.match(await preview(p), /data-c2-pid="\d/)],

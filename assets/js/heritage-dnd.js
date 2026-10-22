@@ -123,4 +123,60 @@
         };
         document.addEventListener('pointermove', onMove); document.addEventListener('pointerup', onUp);
     });
+
+    /* K20 — ⠿ partout : une poignée grise de 16 px, qu'on peut aussi prendre au clavier (Tab), et Alt + ↑ / ↓ pour
+     * déplacer la ligne où l'on est (plus besoin des flèches ↑ ↓ sur chaque ligne, cachées à la souris par editeurs.css). */
+    const GRIPS = '.dnd-grip, .order-grip, .saved-grip, .tile-cat-grip, .h-rt-grip, .ar-grip, .h-sc-grip, .qp-grip, .investigation-item-grip, [data-event-order-grip], .ui-grip';
+    const GRIP_LABEL = 'Déplacer : glisse la poignée, ou Alt + ↑ / ↓';
+    function gripsReady() {
+        document.querySelectorAll(`#workspace :is(${GRIPS}), dialog[open] :is(${GRIPS})`).forEach(g => {
+            if (g.dataset.gripDone) return; g.dataset.gripDone = '1';
+            if (/^[☰≡↕⋮]+$/.test(g.textContent.trim())) g.textContent = '⠿'; // une seule poignée : ⠿
+            if (!g.matches('button, a, input') && !g.hasAttribute('tabindex')) g.tabIndex = 0;
+            g.removeAttribute('aria-hidden'); if (!g.getAttribute('role') && !g.matches('button')) g.setAttribute('role', 'button');
+            g.setAttribute('aria-label', GRIP_LABEL); if (!g.title || /^(Déplacer|Glisser pour (déplacer|ranger))$/.test(g.title)) g.title = GRIP_LABEL;
+        });
+    }
+    let gripT = 0;
+    new MutationObserver(() => { clearTimeout(gripT); gripT = setTimeout(gripsReady, 90); }).observe(document.documentElement, {childList: true, subtree: true});
+    const sameKind = (a, b) => a && b && a.tagName === b.tagName && (a.className.split(' ')[0] || '') === (b.className.split(' ')[0] || '');
+    /** une liste à poignée sans flèches (glisser-déposer du navigateur) : on joue le même glisser, d'une ligne */
+    function dragOneStep(row, grip, dir) {
+        let sib = dir < 0 ? row.previousElementSibling : row.nextElementSibling;
+        while (sib && !sameKind(sib, row)) sib = dir < 0 ? sib.previousElementSibling : sib.nextElementSibling;
+        if (!sib) return false;
+        const src = grip.closest('[draggable="true"]') || row, r = sib.getBoundingClientRect(), x = r.left + Math.min(20, r.width / 2), y = dir < 0 ? r.top + 2 : r.bottom - 2;
+        let dt = null; try { dt = new DataTransfer(); } catch (_) {}
+        const fire = (el, type) => el.dispatchEvent(new DragEvent(type, {bubbles: true, cancelable: true, composed: true, dataTransfer: dt, clientX: x, clientY: y}));
+        const before = [...row.parentElement.children].indexOf(row);
+        fire(src, 'dragstart'); fire(sib, 'dragenter'); fire(sib, 'dragover'); fire(sib, 'drop'); fire(src, 'dragend');
+        return !row.isConnected || [...row.parentElement.children].indexOf(row) !== before;
+    }
+    document.addEventListener('keydown', async e => {
+        if (!e.altKey || e.metaKey || e.ctrlKey || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
+        const t = e.target; if (!(t instanceof Element) || t.closest('textarea, [contenteditable="true"], select, input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=button])')) return;
+        const dir = e.key === 'ArrowUp' ? -1 : 1;
+        // 1. une ligne à flèches ↑ ↓ (rangée par cet outil ou par l'écran) : on presse sa flèche
+        const row = t.closest('[data-ord-row], [data-dnd-row]');
+        if (row) {
+            const up = upOf(row); if (!up) return;
+            e.preventDefault(); e.stopPropagation();
+            const sig = signature(up), group = row.parentElement, rows = sameList(sig, group), from = rows.indexOf(row); if (from < 0) return;
+            const b = dir < 0 ? upOf(row) : downOf(row); if (!b || b.disabled) return;
+            const focusSel = t.matches(GRIPS) ? GRIPS : t.matches('input[type=checkbox]') ? 'input[type=checkbox]' : GRIPS;
+            await press(b, sig, from);
+            const moved = sameList(sig, group.isConnected ? group : null)[from + dir];
+            if (moved) { const f = moved.querySelector(focusSel) || moved.querySelector(GRIPS); f?.focus({preventScroll: false}); moved.classList.add('is-alt-moved'); setTimeout(() => moved.classList.remove('is-alt-moved'), 700); }
+            return;
+        }
+        // 2. une ligne qui n'a que sa poignée ⠿ (glisser-déposer)
+        const grip = t.matches(GRIPS) ? t : null; if (!grip) return;
+        const r2 = grip.closest('li, tr, .order-row, [data-i], [data-okey], [data-order-key], [draggable="true"]:not(.order-grip)') || grip.parentElement; if (!r2?.parentElement) return;
+        e.preventDefault(); e.stopPropagation();
+        const parent = r2.parentElement, idx = [...parent.children].indexOf(r2);
+        if (dragOneStep(r2, grip, dir)) {
+            const now = r2.isConnected ? r2 : (parent.isConnected ? parent.children[idx + dir] : null);
+            now?.querySelector(GRIPS)?.focus();
+        }
+    }, true);
 })();

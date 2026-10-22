@@ -168,7 +168,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
                         const f = await foot(page);
                         if (f) { seen.push(...(await screenWords(page)).map(x => `${id} (fenêtre) : ${x}`));
                             if (/Nouve/.test(click)) assert.ok(f.some(x => /^Créer (le |la |l’|les )/.test(x)), `${id} : ${f.join(' · ')}`);
-                            if (/Réglages/.test(click)) assert.ok(f.includes('Enregistrer') && !f.includes('Appliquer'), `${id} : ${f.join(' · ')}`);
+                            if (/Réglages/.test(click)) assert.ok(f.includes('Fermer') && !f.includes('Enregistrer') && !f.includes('Appliquer'), `${id} : ${f.join(' · ')}`); // K2 : enregistré tout seul, « Fermer » seul
                             if (shots) await page.screenshot({path: path.join(shots, `k3-${id}.png`)}); }
                         await page.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
                     }

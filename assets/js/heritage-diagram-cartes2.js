@@ -48,7 +48,7 @@
     let seq = 0;
 
     /* ═════════ Le fond des cartes (celui de heritage-diagram-cartes.js) ═════════ */
-    const H_OPT = C('height', 'Hauteur au plus (px)', 'number', {min: 120, max: 3000});
+    const H_OPT = C('height', 'Hauteur au plus', 'number', {unit: 'px', min: 120, max: 3000});
     /** les fonds qui servent à placer les lieux (département, pays : leur centre), puis le cadrage, le fond et la projection */
     function placeBases(spec, W) {
         const o = spec.o || {}, M = GC.MAPS[GC.mapOf(o)];
@@ -517,7 +517,7 @@
         rows: [['Phtisie', 12], ['Choléra', 7], ['Variole', 4], ['Fièvre typhoïde', 5], ['Croup', 3], ['Vieillesse', 15], ['Apoplexie', 6], ['Maladie de cœur', 4], ['Cancer', 5], ['Fluxion de poitrine', 6], ['Bronchite', 3], ['Mort pour la France', 4], ['Noyade', 2], ['Chute de cheval', 1], ['Suites de couches', 3], ['Convulsions', 5], ['Cirrhose', 2], ['Entérite', 4], ['Inconnue', 6]].map(([label, s0]) => ({label, s0}))});
 
     /* ═════════ « Depuis l'app » ═════════ */
-    const get = q => A().api('diagram_cartes2', q);
+    const get = q => A().api('diagram_cartes2', {...q, ...(window.LCNDA_EXT?.diagramAppOpts?.extra() || {})}); // + le groupe de personnes commun (heritage-diagram-options.js)
     const fname = p => p ? `${p[0] || ''} ${String(p[1] || '').toUpperCase()}`.trim() || 'Sans nom' : '';
     const typeOptions = () => (A()?.state?.bootstrap?.eventTypes || []).filter(t => t && Number(t.id) > 0 && Number(t.is_active ?? 1) !== 0).sort((a, b) => String(a.label).localeCompare(String(b.label), 'fr')).map(t => `<option value="${Number(t.id)}">${esc(t.label)}</option>`).join('');
     /** les lieux de la base sans coordonnées : retrouvés dans les communes (France) par leur code ou leur nom et leur département */
@@ -738,21 +738,21 @@
         dotmap: {icon: '📍', label: 'Carte en points (un point par événement)', group: 'Cartes', render: GC.remember(dotmap), legend: 'bottom', grids: [POINT_GRID],
             options: [...mapOpts, C('fit', 'Cadrer tout seul sur les points', 'check', {def: true, when: s => !s.o?.frame}), ...PERIOD,
                 C('colorBy', 'Couleur des points', 'select', {choices: [['kind', 'Selon la sorte d’événement'], ['century', 'Selon le siècle'], ['one', 'Une seule couleur']], def: 'kind'}), C('dotColor', 'Couleur des points', 'color', {def: '#e15759', when: s => s.o?.colorBy === 'one'}),
-                C('dotSize', 'Taille des points', 'range', {min: .8, max: 14, step: .2, def: 3.2}), C('opacity', 'Opacité des points (%)', 'range', {min: 10, max: 100, def: 80}), C('spread', 'Écarter les points d’un même lieu', 'check', {def: true}),
+                C('dotSize', 'Taille des points', 'range', {min: .8, max: 14, step: .2, def: 3.2}), C('opacity', 'Opacité des points', 'range', {unit: '%', min: 10, max: 100, def: 80}), C('spread', 'Écarter les points d’un même lieu', 'check', {def: true}),
                 C('placeLabels', 'Noms des lieux', 'select', {choices: [['', 'Les 10 plus remplis'], ['all', 'Tous (sans se chevaucher)'], ['none', 'Aucun']]}), C('labelSize', 'Taille des noms', 'range', {min: .5, max: 2.5, step: .1, def: 1}), C('unit', 'Mot pour un point (ex. : naissance)'), ...COMMON_MAP],
             sample: DOT_SAMPLE, resolve: resolvePts, afterDraw: mapAfterDraw, fromApp: pointsApp,
             describe: spec => `Carte en points : ${rows(spec).length} événements.`},
         hexmap: {icon: '⬢', label: 'Carte en hexagones (densité en alvéoles)', group: 'Cartes', render: GC.remember(hexmap), noLegend: true, grids: [POINT_GRID],
             options: [...mapOpts, C('fit', 'Cadrer tout seul sur les points', 'check', {def: true, when: s => !s.o?.frame}), ...PERIOD,
                 C('hexSize', 'Taille des alvéoles (% de la largeur)', 'range', {min: 1, max: 15, step: .5, def: 4}), RAMP, C('lowColor', 'Couleur de « peu »', 'color', {def: '#fff3e6', when: s => s.o?.ramp === 'perso'}), C('highColor', 'Couleur de « beaucoup »', 'color', {def: '#7f2704', when: s => s.o?.ramp === 'perso'}),
-                C('logScale', 'Échelle douce (très grands écarts)', 'check', {def: true}), C('opacity', 'Opacité des alvéoles (%)', 'range', {min: 10, max: 100, def: 85}), C('values', 'Écrire le nombre dans les alvéoles', 'check', {def: true}), C('outline', 'Traits blancs entre les alvéoles', 'check', {def: true}),
+                C('logScale', 'Échelle douce (très grands écarts)', 'check', {def: true}), C('opacity', 'Opacité des alvéoles', 'range', {unit: '%', min: 10, max: 100, def: 85}), C('values', 'Écrire le nombre dans les alvéoles', 'check', {def: true}), C('outline', 'Traits blancs entre les alvéoles', 'check', {def: true}),
                 C('legend', 'Légende', 'select', {choices: [['', 'En dessous'], ['none', 'Aucune']]}), C('unit', 'Mot pour un point (ex. : naissance)'), ...COMMON_MAP],
             sample: HEX_SAMPLE, resolve: resolvePts, afterDraw: mapAfterDraw, fromApp: pointsApp,
             describe: spec => `Carte en hexagones : ${rows(spec).length} événements.`},
         cartogram: {icon: '🫧', label: 'Carte déformée (zones grossies selon leur chiffre)', group: 'Cartes', render: GC.remember(cartogram), noLegend: true,
             grids: [{key: 'rows', label: 'Les zones et leurs chiffres', series: 1, cols: [C('label', 'Zone (nom ou code : 35, Gers, FR, Vaud…)'), C('note', 'Note (dans la bulle)')]}],
             options: [...mapOpts.map(x => x.k === 'level' ? {...x, choices: x.choices.filter(([l]) => l !== 'com')} : x), C('shape', 'Forme', 'select', {choices: [['', 'Des ronds (Dorling)'], ['square', 'Des carrés (Demers)']]}),
-                C('fill', 'Taille des formes (% de la carte)', 'range', {min: 5, max: 80, def: 20}), C('gap', 'Écart entre les formes (px)', 'range', {min: 0, max: 10, step: .5, def: 1.5}),
+                C('fill', 'Taille des formes (% de la carte)', 'range', {min: 5, max: 80, def: 20}), C('gap', 'Écart entre les formes', 'range', {unit: 'px', min: 0, max: 10, step: .5, def: 1.5}),
                 C('colorBy', 'Couleur', 'select', {choices: [['', 'Selon le chiffre (dégradé)'], ['one', 'Une seule couleur']]}), C('shapeColor', 'Couleur des formes', 'color', {def: '#e15759', when: s => s.o?.colorBy === 'one'}),
                 {...RAMP, choices: [['', 'Oranges'], ...RAMP.choices.filter(([k]) => k && k !== 'oranges' && k !== 'perso'), ['jaunerouge', 'Du jaune au rouge'], ['perso', 'Mes deux couleurs…']], when: s => s.o?.colorBy !== 'one'}, C('lowColor', 'Couleur des petits chiffres', 'color', {def: '#fff3e6', when: s => s.o?.ramp === 'perso'}), C('highColor', 'Couleur des grands chiffres', 'color', {def: '#7f2704', when: s => s.o?.ramp === 'perso'}),
                 C('ghost', 'La vraie carte en fond (pâle)', 'check', {def: true}), C('ghostColor', 'Couleur de la carte en fond', 'color', {def: '#ecebe6', when: s => s.o?.ghost !== false}), C('links', 'Un trait vers la vraie place quand une forme a bougé', 'check', {def: true}),
@@ -771,18 +771,18 @@
             grids: [{key: 'rows', label: 'Les personnes (parent → enfant)', cols: [C('name', 'Nom (unique)'), C('parent', 'Parent (vide = l’ancêtre)'), C('year', 'Année'), C('value', 'Chiffre (facultatif)', 'number'), C('gender', 'Sexe', 'select', {choices: [['', '—'], ['male', 'Homme'], ['female', 'Femme']]}), C('color', 'Couleur', 'color')]}],
             options: [C('dir', 'Sens', 'select', {choices: [['', 'De haut en bas (générations en lignes)'], ['right', 'De gauche à droite (générations en colonnes)']]}), C('sizeBy', 'Largeur des cases', 'select', {choices: [['desc', 'Le nombre de descendants'], ['leaves', 'Le nombre de bouts de branche'], ['value', 'Le chiffre (ou la somme)']], def: 'desc'}),
                 C('colorBy', 'Couleurs', 'select', {choices: [['', 'Une par branche (plus clair en descendant)'], ['gen', 'Une par génération'], ['gender', 'Selon le sexe']]}), C('depth', 'Générations au plus', 'range', {min: 1, max: 20, def: 8}),
-                C('band', 'Hauteur d’une génération (px)', 'range', {min: 14, max: 120, def: 31, when: s => s.o?.dir !== 'right'}), C('height', 'Hauteur du dessin (px)', 'number', {min: 160, max: 3000, when: s => s.o?.dir === 'right'}),
+                C('band', 'Hauteur d’une génération', 'range', {unit: 'px', min: 14, max: 120, def: 31, when: s => s.o?.dir !== 'right'}), C('height', 'Hauteur du dessin', 'number', {unit: 'px', min: 160, max: 3000, when: s => s.o?.dir === 'right'}),
                 C('labels', 'Dans les cases', 'select', {choices: [['', 'Le nom et l’année'], ['size', 'Le nom et le nombre'], ['none', 'Rien']]}), C('sort', 'Ordre des enfants', 'select', {choices: [['', 'Comme dans le tableau'], ['size', 'Les plus grandes familles d’abord']]}), C('border', 'Traits blancs entre les cases', 'check', {def: true})],
             sample: () => ({o: {title: 'Descendance de Jean Martin', sizeBy: 'desc'}, rows: sampleIcicle()})},
         godnames: {icon: '🎀', label: 'Prénoms transmis (parrain, marraine → filleul)', group: 'Généalogie', render: godnames, legend: 'bottom', fromApp: godApp, afterDraw: keepApi,
             grids: [{key: 'rows', label: 'Les parrains, marraines et filleuls', cols: [C('godparent', 'Parrain ou marraine (Prénom NOM)'), C('godchild', 'Filleul ou filleule (Prénom NOM)'), C('role', 'Rôle', 'select', {choices: [['parrain', 'Parrain'], ['marraine', 'Marraine']]}), C('rel', 'Lien (grand-père, oncle…)'), C('gpYear', 'Né(e) en (parrain)', 'number'), C('gcYear', 'Né(e) en (filleul)', 'number')]}],
             options: [C('show', 'Montrer', 'select', {choices: [['', 'Seulement les prénoms transmis'], ['all', 'Aussi les filleuls au prénom différent']]}), C('maxRows', 'Prénoms au plus (lignes)', 'range', {min: 1, max: 80, def: 15}),
-                C('rowHeight', 'Hauteur d’une ligne (px)', 'range', {min: 24, max: 120, def: 50}), C('dotSize', 'Taille des ronds', 'range', {min: .5, max: 2.5, step: .1, def: 1}), C('names', 'Noms sous les ronds', 'select', {choices: [['', 'Quand il y a la place'], ['all', 'Toujours (sans se chevaucher)'], ['off', 'Jamais']]})],
+                C('rowHeight', 'Hauteur d’une ligne', 'range', {unit: 'px', min: 24, max: 120, def: 50}), C('dotSize', 'Taille des ronds', 'range', {min: .5, max: 2.5, step: .1, def: 1}), C('names', 'Noms sous les ronds', 'select', {choices: [['', 'Quand il y a la place'], ['all', 'Toujours (sans se chevaucher)'], ['off', 'Jamais']]})],
             sample: GOD_SAMPLE},
         causesun: {icon: '🎗️', label: 'Causes de décès en anneaux (familles puis détail)', group: 'Généalogie', render: causesun, legend: 'bottom', fromApp: causeApp, afterDraw: keepApi,
             grids: [{key: 'rows', label: 'Les causes de décès', series: 1, cols: [C('label', 'Cause du décès'), C('family', 'Grande famille (vide = devinée)'), C('color', 'Couleur', 'color')]}],
-            options: [C('guess', 'Deviner les grandes familles d’après les mots', 'check', {def: true}), C('angle', 'Forme', 'select', {choices: [['', 'Cercle complet'], ['half', 'Demi-cercle']]}), C('hole', 'Trou au centre (%)', 'range', {min: 0, max: 60, def: 26}),
-                C('inner', 'Épaisseur des grandes familles (%)', 'range', {min: 20, max: 70, def: 42}), C('labels', 'Textes', 'select', {choices: [['', 'Les noms'], ['value', 'Les noms et les nombres'], ['pct', 'Les noms et les pourcentages'], ['none', 'Aucun']]}),
+            options: [C('guess', 'Deviner les grandes familles d’après les mots', 'check', {def: true}), C('angle', 'Forme', 'select', {choices: [['', 'Cercle complet'], ['half', 'Demi-cercle']]}), C('hole', 'Trou au centre', 'range', {unit: '%', min: 0, max: 60, def: 26}),
+                C('inner', 'Épaisseur des grandes familles', 'range', {unit: '%', min: 20, max: 70, def: 42}), C('labels', 'Textes', 'select', {choices: [['', 'Les noms'], ['value', 'Les noms et les nombres'], ['pct', 'Les noms et les pourcentages'], ['none', 'Aucun']]}),
                 C('sort', 'Ranger les causes de la plus fréquente à la plus rare', 'check', {def: true}), C('border', 'Traits blancs entre les parts', 'check', {def: true}), H_OPT],
             sample: CAUSE_SAMPLE},
     };

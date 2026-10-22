@@ -249,7 +249,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
             await p.waitForFunction(() => /Baptêmes/.test(document.querySelector('.h-dg-dlg [data-dg-preview] svg')?.textContent || ''));
         });
         await t('🌀 spirale « Depuis l’app » : vies des ancêtres, puis événements', async () => {
-            assert.ok(await fromApp('spiral', () => p.selectOption('.h-dg-dlg [data-gn="scope"]', 'ancestors')) > 20);
+            assert.ok(await fromApp('spiral', () => p.selectOption('.h-dg-dlg [data-dgo="pop"]', 'anc')) > 20); // « Qui » est devenu le groupe de personnes commun (heritage-diagram-options.js)
             assert.ok(await fromApp('spiral', () => p.selectOption('.h-dg-dlg [data-gn="what"]', 'events')) > 20);
             assert.match(await previewText(p), /Naissance de/);
         });

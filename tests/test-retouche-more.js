@@ -206,7 +206,7 @@ async function launch(pw) {
         await page.waitForTimeout(300);
         out.skyLayers = await layerNames();
         out.skyHistory = await page.$$eval('dialog.h-retouch .h-rt-history li span', l => l.map(s => s.textContent));
-        await page.click('dialog.h-retouch .modal-actions [data-rt-save="keep"]');
+        await page.click(`dialog.h-retouch .ed-save-more`); await page.click('.ui-actmenu-i:has-text("Enregistrer sans l’afficher")'); // K19 : les actions de fin dans « 💾 Enregistrer ▾ »
         await page.waitForFunction(() => !document.querySelector('dialog.h-retouch'), null, { timeout: 20000 });
         out.versions = await page.evaluate(async () => (await window.LCNDA_APP.api('media_versions', {id: 1})).versions.length);
 

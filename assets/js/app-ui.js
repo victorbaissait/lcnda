@@ -402,7 +402,7 @@
         if (!shown(r)) return false;
         r.dataset.uiDone = '1';
         const sib = [r.previousElementSibling, r.nextElementSibling, r.nextElementSibling?.nextElementSibling];
-        if (sib.some(s => s?.matches?.('input[type=number], .ui-num, input[type=text][inputmode=decimal]'))) { r.dataset.uiDone = 'has-number'; return true; } // l'outil a déjà sa case
+        if (sib.some(s => s?.matches?.('input[type=number], .ui-num, .ui-unit, .ui-hm, input[type=text][inputmode=decimal]'))) { r.dataset.uiDone = 'has-number'; return true; } // l'outil a déjà sa case
         const old = findOldOut(r);
         let unit = guessUnit(r, old), factor = unit === '%' && Number(r.max || 100) <= 1 ? 100 : 1;
         const val = Number(rawGet(r));
@@ -863,7 +863,7 @@
     const FORMATS = {pdf: ['📄 PDF', 'imprimer, envoyer', 'pdf'], png: ['🖼 PNG', 'transparent', 'png'], jpg: ['📷 JPG', 'léger', 'jpg'], svg: ['✒ SVG', 'dessin', 'svg'], print: ['🖨 Imprimer', 'tout de suite', ''], file: ['💾 Fichier', 'de l’outil', 'json']};
     /** E3 — openExportDialog({title, formats:[{id, label, hint, ext, run}], defaultName, preview, info, bleed, quality, saveCopy, copyChecked}) → Promise<{format,…}|null>
      *  saveCopy : montre la case « Ranger aussi une copie dans les médias » ; décochée sauf copyChecked (l'export est lié à une fiche ou un média) */
-    UI.openExportDialog = ({title = 'Exporter', formats = [], defaultName = '', preview = null, info = '', bleed = false, quality = true, saveCopy = false, copyChecked = false, value = ''} = {}) => new Promise(resolve => {
+    UI.openExportDialog = ({title = 'Exporter', formats = [], defaultName = '', preview = null, info = '', bleed = false, quality = true, saveCopy = false, copyChecked = false, value = '', fields = [], checks = [], onPick = null} = {}) => new Promise(resolve => {
         const fm = formats.map(f => { const d = FORMATS[f.id] || [f.label || f.id, '', f.ext || '']; return {...f, label: f.label || d[0], hint: f.hint ?? d[1], ext: f.ext ?? d[2]}; });
         if (!fm.length) { resolve(null); return; }
         const safe = n => (A().safeExportFilename ? A().safeExportFilename(n, 'export') : String(n || 'export').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'export');
@@ -872,9 +872,11 @@
         dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">EXPORTER</span><h2>⤓ ${esc(title)}</h2></div><button type="button" class="icon-button" data-ui-x aria-label="Fermer">×</button></div>
             <div class="ui-export-body"><div class="ui-export-main"><div class="ui-export-formats" role="radiogroup" aria-label="Format">${fm.map(f => `<button type="button" role="radio" class="ui-export-fmt" data-fmt="${esc(f.id)}">${esc(f.label)}<small>${esc(f.hint)}</small></button>`).join('')}</div>
             <div data-ui-q></div>
+            ${fields.length ? `<div class="ui-export-fields">${fields.map(f => `<label class="ui-export-field" data-ui-field="${esc(f.id)}"><span class="ui-export-lab">${esc(f.label)}</span><select data-ui-fsel="${esc(f.id)}">${(f.options || []).map(([v, l]) => `<option value="${esc(v)}"${String(v) === String(f.value ?? '') ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`).join('')}</div>` : ''}
             ${bleed ? '<label class="checkbox-line ui-export-check" data-ui-bleedrow><input type="checkbox" data-ui-bleed> <span data-help="La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord." data-help-faq="fond perdu">Fond perdu et traits de coupe (imprimeur)</span></label>' : ''}
             <div data-ui-namerow><span class="ui-export-lab">Nom du fichier</span><span class="ui-export-name"><input type="text" class="ui-export-name-input" data-ui-name spellcheck="false" aria-label="Nom du fichier"><span data-ui-ext></span></span></div>
-            ${saveCopy ? `<label class="checkbox-line ui-export-check"><input type="checkbox" data-ui-copy${copyChecked ? ' checked' : ''}> Ranger aussi une copie dans les médias</label>` : ''}
+            ${saveCopy ? `<label class="checkbox-line ui-export-check" data-ui-copyrow><input type="checkbox" data-ui-copy${copyChecked ? ' checked' : ''}> Ranger aussi une copie dans les médias</label>` : ''}
+            ${checks.map(c => `<label class="checkbox-line ui-export-check" data-ui-checkrow="${esc(c.id)}"><input type="checkbox" data-ui-check="${esc(c.id)}"${c.checked ? ' checked' : ''}> ${esc(c.label)}</label>`).join('')}
             <div data-ui-err></div></div>
             <div class="ui-export-side">${preview ? `<div class="ui-export-prev" data-ui-prev>${UI.spinner('Aperçu…')}</div>` : ''}${info ? `<small class="ui-export-info">${esc(info)}</small>` : ''}</div></div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-ui-x>Annuler</button><button type="submit" class="button" data-ui-go></button></div></form>`;
@@ -890,7 +892,12 @@
             $('[data-ui-namerow]').hidden = !cur.ext;
             if (q) q.hidden = ['svg', 'file'].includes(cur.id) || cur.quality === false;
             const br = $('[data-ui-bleedrow]'); if (br) br.hidden = ['svg', 'file'].includes(cur.id);
-            $('[data-ui-go]').textContent = cur.id === 'print' ? '🖨 Imprimer' : `⤓ Exporter en ${cur.label.replace(/^\S+\s/, '')}`;
+            $('[data-ui-go]').textContent = cur.goLabel || (cur.id === 'print' ? '🖨 Imprimer' : `⤓ Exporter en ${cur.label.replace(/^\S+\s/, '')}`);
+            // champs en plus (son : qualité, quoi, canaux…) : montrés seulement pour les formats qui s'en servent
+            fields.forEach(f => { const el = dlg.querySelector(`[data-ui-field="${CSS.escape(f.id)}"]`); if (el) el.hidden = !!f.show && !f.show(cur.id); });
+            checks.forEach(c => { const el = dlg.querySelector(`[data-ui-checkrow="${CSS.escape(c.id)}"]`); if (el) el.hidden = !!c.show && !c.show(cur.id); });
+            const cr = dlg.querySelector('[data-ui-copyrow]'); if (cr) cr.hidden = cur.copy === false;
+            onPick?.(cur.id, dlg);
         };
         pick(cur.id);
         dlg.addEventListener('click', e => { const f = e.target.closest('.ui-export-fmt'); if (f) pick(f.dataset.fmt); if (e.target.closest('[data-ui-x]')) dlg.close(); });
@@ -898,7 +905,8 @@
         $('form').addEventListener('submit', async e => {
             e.preventDefault();
             const go = $('[data-ui-go]'), err = $('[data-ui-err]'), label = go.textContent;
-            const opts = {format: cur.id, quality: q ? Number(q.input.value) : null, bleed: !!$('[data-ui-bleed]')?.checked, saveCopy: !!$('[data-ui-copy]')?.checked, filename: cur.ext ? `${safe(nameIn.value || base)}.${cur.ext}` : ''};
+            const opts = {format: cur.id, quality: q ? Number(q.input.value) : null, bleed: !!$('[data-ui-bleed]')?.checked, saveCopy: cur.copy !== false && !!$('[data-ui-copy]')?.checked, filename: cur.ext ? `${safe(nameIn.value || base)}.${cur.ext}` : '',
+                fields: Object.fromEntries(fields.map(f => [f.id, dlg.querySelector(`[data-ui-fsel="${CSS.escape(f.id)}"]`)?.value ?? ''])), checks: Object.fromEntries(checks.map(c => [c.id, !!dlg.querySelector(`[data-ui-check="${CSS.escape(c.id)}"]`)?.checked])), base: safe(nameIn.value || base)};
             go.disabled = true; go.innerHTML = `<span class="ui-spin" aria-hidden="true"></span>${esc(label)}`; err.innerHTML = '';
             try { await cur.run?.(opts); result = opts; dlg.close(); }
             catch (x) { err.innerHTML = UI.notice('error', `Impossible d’exporter : ${x?.message || x}`); go.disabled = false; go.textContent = label; }

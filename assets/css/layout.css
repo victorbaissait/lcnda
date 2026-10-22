@@ -14,7 +14,7 @@
 .ly-menu-list{position:absolute;z-index:50;top:calc(100% + 4px);left:0;min-width:260px;background:var(--ly-panel);border:1px solid var(--ly-line);border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:5px}
 .ly-menu-list button{display:flex;width:100%;justify-content:space-between;gap:20px;padding:6px 10px;border:0;background:none;color:inherit;text-align:left;border-radius:5px;cursor:pointer;font-size:13px}.ly-menu-list button:hover{background:var(--ly-acc);color:#fff}
 .ly-menu-list button.is-checked span::before{content:'✓ '}.ly-menu-list kbd{font:inherit;opacity:.6}.ly-menu-list hr{border:0;border-top:1px solid var(--ly-line);margin:4px 2px}
-.ly-main{display:grid;grid-template-columns:46px minmax(0,1fr) 320px;min-height:0}
+.ly-main{display:grid;grid-template-columns:36px minmax(0,1fr) 320px;min-height:0}
 .ly-tools{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;background:var(--ly-panel);border-right:1px solid var(--ly-line)}
 .ly-tools>button{width:34px;height:32px;border:1px solid transparent;border-radius:6px;background:none;color:inherit;font-size:16px;cursor:pointer}.ly-tools>button:hover{background:var(--ly-bg)}.ly-tools>button.is-on{background:var(--ly-acc);color:#fff}
 .ly-fs{position:relative;width:34px;height:34px;margin-top:8px}.ly-fs button{position:absolute;width:20px;height:20px;border:1px solid #888;cursor:pointer;padding:0}.ly-fs-fill{left:0;top:0;z-index:2}.ly-fs-stroke{right:0;bottom:0;background:transparent!important;border:5px solid #111!important;box-sizing:border-box}.ly-fs button.is-on{outline:2px solid var(--ly-acc);outline-offset:1px;z-index:3}
@@ -178,7 +178,7 @@ dialog.h-modal.ly-lib{width:var(--modal-xl);max-width:none}.ly-libbody{padding:4
 .ly-cmfilters{margin:4px 0}
 [data-theme="dark"] .ly-cm blockquote{background:rgba(255,214,0,.16)}[data-theme="dark"] .ly-cmsug{color:#7fb2ff}[data-theme="dark"] .ly-citeprev{background:rgba(47,107,255,.18)}
 /* ── petit écran : le panneau de droite rétrécit, la barre du haut passe sur deux lignes ── */
-@media(max-width:640px){.ly-editor[open]{grid-template-columns:minmax(0,1fr)}.ly-main{grid-template-columns:40px minmax(0,1fr) min(290px,64vw)!important;min-width:0}.ly-editor .ly-top{flex-wrap:wrap!important;row-gap:4px;height:auto}.ly-editor .ly-menus{flex-wrap:wrap}.ly-name{width:130px}.ly-tools>button{width:30px}.ly-panels,.ly-pbody{min-width:0;overflow-x:hidden}.ly-pbody input,.ly-pbody select{min-width:0;max-width:100%}.ly-grid2{grid-template-columns:1fr!important}}
+@media(max-width:640px){.ly-editor[open]{grid-template-columns:minmax(0,1fr)}.ly-main{grid-template-columns:36px minmax(0,1fr) min(290px,64vw)!important;min-width:0}.ly-editor .ly-top{flex-wrap:wrap!important;row-gap:4px;height:auto}.ly-editor .ly-menus{flex-wrap:wrap}.ly-name{width:130px}.ly-tools>button{width:30px}.ly-panels,.ly-pbody{min-width:0;overflow-x:hidden}.ly-pbody input,.ly-pbody select{min-width:0;max-width:100%}.ly-grid2{grid-template-columns:1fr!important}}
 
 /* 📚 Livres prêts à l'emploi, ▦ QR codes, 📨 publipostage */
 .ly-tplrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .5rem; margin-bottom: 1rem; }

@@ -17,6 +17,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/diagram_chiffres.php'; // dchf_date, dchf_age, dchf_century, dchf_marriages
 require_once __DIR__ . '/diagram_genea.php';    // dgn_links, dgn_root, dgn_sosa, dgn_name
 require_once __DIR__ . '/diagram_more.php';     // dmo_lives, dmo_iso
+require_once __DIR__ . '/diagram_options.php';  // dgo_request, dgo_restrict, dgo_year_ok : options communes de « Depuis l'app »
 
 const DFA_MAX_PEOPLE = 600;
 
@@ -66,9 +67,10 @@ function dfa_descendants(PDO $pdo, int $root, int $gens, int $max = 20000): arra
 /** les personnes de la portée choisie (null = toute la base) */
 function dfa_scope(PDO $pdo, string $scope, int $root): ?array
 {
-    if ($scope === 'anc') { $r = dgn_root($pdo, $root); return $r ? [$r => true] + array_map(static fn() => true, dfa_ancestors($pdo, $r, 40)) : []; }
-    if ($scope === 'desc') { $r = dgn_root($pdo, $root); return $r ? [$r => true] + array_map(static fn() => true, dfa_descendants($pdo, $r, 30)) : []; }
-    return null;
+    $keep = null;
+    if ($scope === 'anc') { $r = dgn_root($pdo, $root); $keep = $r ? [$r => true] + array_map(static fn() => true, dfa_ancestors($pdo, $r, 40)) : []; }
+    if ($scope === 'desc') { $r = dgn_root($pdo, $root); $keep = $r ? [$r => true] + array_map(static fn() => true, dfa_descendants($pdo, $r, 30)) : []; }
+    return dgo_restrict($pdo, $keep); // le groupe de personnes choisi dans « Depuis l'app » (lib/diagram_options.php)
 }
 
 /* ═════════ D1 🤝 Qui a connu qui ═════════ */
@@ -98,12 +100,13 @@ function dfa_survival(PDO $pdo, string $by, string $scope, int $root): array
     $lives = dmo_lives($pdo); $L = dgn_links($pdo);
     $sosa = [];
     if ($by === 'branch' || $by === 'gen') { $scope = 'anc'; $r = dgn_root($pdo, $root); foreach (dgn_sosa($pdo, $r, 30, 120000) as $s => $id) { if (!isset($sosa[$id])) { $sosa[$id] = $s; } } }
-    $keep = $scope === 'anc' && $sosa ? array_map(static fn() => true, $sosa) : dfa_scope($pdo, $scope, $root);
+    $keep = $scope === 'anc' && $sosa ? dgo_restrict($pdo, array_map(static fn() => true, $sosa)) : dfa_scope($pdo, $scope, $root);
     $now = [(int) date('Y'), (int) date('n'), (int) date('j'), true];
     $rows = []; $unknown = 0;
     foreach ($lives as $id => $p) {
         if ($keep !== null && !isset($keep[$id])) { continue; }
         if (!$p['b']) { continue; }
+        if (!dgo_year_ok($p['b'][0])) { continue; } // la période : les personnes nées entre … et …
         if ($p['d']) { $age = dchf_age($p['b'], $p['d']); $dead = 1; }
         elseif ($p['living']) { $age = dchf_age($p['b'], $now); $dead = 0; }
         else { $unknown++; continue; }
@@ -367,6 +370,7 @@ function diagram_famille_data(PDO $pdo, array $q): array
     $q = array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $q);
     $root = (int) ($q['root'] ?? 0);
     $year = static fn(string $k) => preg_match('/^-?\d{1,4}$/', $q[$k] ?? '') ? (int) $q[$k] : null;
+    dgo_request($q); // groupe de personnes et période communs (onglet « Depuis l'app ») : refusés s'ils sont de mauvaise forme
     return match ($q['what'] ?? '') {
         'overlap' => dfa_overlap($pdo, $root, (int) ($q['up'] ?? 3), (int) ($q['down'] ?? 3)),
         'survival' => dfa_survival($pdo, $q['by'] ?? 'century', $q['scope'] ?? '', $root),

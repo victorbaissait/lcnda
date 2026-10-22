@@ -398,12 +398,12 @@
     }
 
     /* ═════════ Données prises dans l'arbre ═════════ */
-    const api = (action, q) => A().api(action, q);
+    const api = (action, q, spec = null) => A().api(action, {...q, ...(spec ? window.LCNDA_EXT?.diagramAppOpts?.extra(spec) || {} : {})}); // spec : le groupe et la période de « Depuis l'app » (heritage-diagram-options.js)
     const plural = (n, w) => (A()?.plural ? A().plural(n, w) : `${fmt(n, 0)} ${w}${n > 1 ? 's' : ''}`);
     const cents = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII'];
     const romanN = s => { const m = String(s).toUpperCase().match(/^([IVXLC]+)E?\b/); if (!m) return 999; const V = {I: 1, V: 5, X: 10, L: 50, C: 100}; let t = 0; [...m[1]].forEach((c, i, a) => { const v = V[c], nx = V[a[i + 1]] || 0; t += v < nx ? -v : v; }); return t; };
     async function fillWaves(spec, key) {
-        const [what, by] = key.split(':'), r = await api('diagram_numbers', {what}), items = r.items || [];
+        const [what, by] = key.split(':'), r = await api('diagram_numbers', {what}, spec), items = r.items || [];
         if (!items.length) throw new Error('Aucune donnée dans l’arbre pour ce choix (dates manquantes ?).');
         let rows = items.map(x => ({label: x.name, value: x.value, group: by === 'sex' ? x.group : x.century, pid: x.id}));
         if (by !== 'sex') rows.sort((a, b) => romanN(a.group) - romanN(b.group));
@@ -412,7 +412,7 @@
         return spec;
     }
     async function fillTableN(spec, key) {
-        const [what, step] = key.split(':'), r = await api('diagram_numbers', {what, step});
+        const [what, step] = key.split(':'), r = await api('diagram_numbers', {what, step}, spec);
         if (!r.rows?.length) throw new Error('Aucune donnée dans l’arbre pour ce choix.');
         const st = Number(r.step) || 100, cen = y => { const c = Math.floor((Number(y) - 1) / 100) + 2; return st === 100 && Number(y) % 100 === 0 ? `${cents[c] || c}e s.` : `${y}–${Number(y) + st - 1}`; };
         spec.series = r.series.map(name => ({name})); spec.rows = r.rows.map(x => ({...x, label: cen(x.label)}));
@@ -420,7 +420,7 @@
         return spec;
     }
     async function fillMeans(spec, by) {
-        const r = await api('diagram_adn_numbers', {what: 'means', by});
+        const r = await api('diagram_adn_numbers', {what: 'means', by}, spec);
         if (!r.rows?.length) throw new Error('Pas assez de dates de naissance et de décès (ou de mariage) pour ce choix.');
         spec.series = [{name: 'Femmes', color: spec.series?.[0]?.color || '#e15759'}, {name: 'Hommes', color: spec.series?.[1]?.color || '#4e79a7'}];
         spec.rows = r.rows.map(x => ({label: `${x.label}`, s0: x.s0, s1: x.s1}));
@@ -428,14 +428,14 @@
         return spec;
     }
     async function fillMonths(spec, key) {
-        const [by, type] = key.split(':'), r = await api('diagram_adn_numbers', {what: 'months', by, type});
+        const [by, type] = key.split(':'), r = await api('diagram_adn_numbers', {what: 'months', by, type}, spec);
         if (!r.rows?.length) throw new Error('Aucune date au mois près dans l’arbre pour ce choix.');
         spec.series = r.series.map((name, j) => ({name, color: by === 'type' ? ['#59a14f', '#f28e2b', '#5f6b7a'][j] : spec.series?.[j]?.color})); spec.rows = r.rows;
         spec.o = {...(spec.o || {}), title: by === 'type' ? 'Naissances, mariages et décès, mois par mois' : {births: 'Les naissances, mois par mois', marriages: 'Les mariages, mois par mois', deaths: 'Les décès, mois par mois', conceptions: 'Les conceptions (naissance − 9 mois), mois par mois'}[type] + ', par siècle', source: `D’après ${plural(r.total, 'date')} au mois près`};
         return spec;
     }
     async function fillMobility(spec, who) {
-        const r = await api('diagram_adn_numbers', {what: 'mobility', who});
+        const r = await api('diagram_adn_numbers', {what: 'mobility', who}, spec);
         if (!r.rows?.length) throw new Error('Aucun couple père / enfant dont les deux métiers sont connus.');
         spec.rows = r.rows.map(x => ({from: x.from, to: x.to, count: x.count, pids: (x.pids || []).slice(0, 60)}));
         const w = {sons: 'le fils', daughters: 'la fille', children: 'l’enfant'}[who] || 'l’enfant';
@@ -529,7 +529,7 @@
 
     /* ═════════ Les sortes : tableaux, réglages ═════════ */
     const TABLE = (label, first = 'Catégorie', n = true) => ({key: 'rows', label, series: n, cols: [C('label', first), C('color', 'Couleur', 'color')]});
-    const H_OPT = C('height', 'Hauteur du dessin (px)', 'range', {min: 120, max: 1600, step: 10, def: 420});
+    const H_OPT = C('height', 'Hauteur du dessin', 'range', {unit: 'px', min: 120, max: 1600, step: 10, def: 420});
     const KINDS = {
         chromo: {icon: '🧬', label: 'Peinture des chromosomes (segments ADN par branche)', group: 'ADN', render: chromo, legend: 'bottom', fromApp: chromoApp,
             grids: [{key: 'rows', label: 'Les segments partagés (un par ligne)', cols: [C('chr', 'Chromosome (1 à 22, X)'), C('start', 'Début (Mb ou paires de bases)', 'number'), C('end', 'Fin', 'number'), C('cm', 'cM', 'number'), C('match', 'Correspondance (cousin)'),
@@ -538,42 +538,42 @@
             options: [C('layout', 'Dessin', 'select', {choices: [['', 'Deux copies par chromosome (père en haut, mère en bas)'], ['one', 'Une seule barre par chromosome']]}),
                 C('colorBy', 'Couleur des segments', 'select', {choices: [['branch', 'Par branche'], ['match', 'Par correspondance'], ['side', 'Par côté (père, mère)']], def: 'branch'}),
                 C('patColor', 'Couleur du côté père', 'color', {def: '#4e79a7', when: s => s.o?.colorBy === 'side'}), C('matColor', 'Couleur du côté mère', 'color', {def: '#e15759', when: s => s.o?.colorBy === 'side'}),
-                C('minCm', 'Cacher les segments de moins de (cM)', 'range', {min: 0, max: 50, def: 0}), C('barHeight', 'Épaisseur des chromosomes (px)', 'range', {min: 5, max: 40, def: 13}),
+                C('minCm', 'Cacher les segments de moins de', 'range', {unit: 'cM', min: 0, max: 50, def: 0}), C('barHeight', 'Épaisseur des chromosomes', 'range', {unit: 'px', min: 5, max: 40, def: 13}),
                 C('cols', 'Colonnes (0 = selon la largeur)', 'range', {min: 0, max: 2, def: 0}), C('showX', 'Montrer le chromosome X', 'check', {def: true}), C('labels', 'Noms dans les segments (s’ils tiennent)', 'check', {def: true})],
             sample: sampleChromo},
         cmruler: {icon: '📏', label: 'Règle des cM (parentés possibles)', group: 'ADN', render: cmRuler, legend: 'bottom', fromApp: cmApp,
             grids: [{key: 'rows', label: 'Les correspondances', cols: [C('name', 'Nom'), C('cm', 'cM partagés', 'number'), C('side', 'Côté', 'select', {choices: [['', 'Inconnu'], ['Paternel', 'Côté père'], ['Maternel', 'Côté mère'], ['Les deux', 'Les deux']]}), C('known', 'Parenté connue (facultatif)')]}],
             options: [C('highlight', 'Montrer les parentés possibles de… (un nom)'), C('scale', 'Échelle', 'select', {choices: [['', 'Logarithmique (petits cM lisibles)'], ['lin', 'Régulière']]}),
                 C('set', 'Parentés', 'select', {choices: [['', 'Les principales'], ['all', 'Toutes (demi-parentés, générations d’écart…)']]}), C('labels', 'Noms écrits (les plus proches d’abord)', 'range', {min: 0, max: 40, def: 8}),
-                C('dot', 'Taille des points (px)', 'range', {min: 2, max: 12, def: 5}), C('showAvg', 'Trait à la moyenne de chaque parenté', 'check', {def: true}),
+                C('dot', 'Taille des points', 'range', {unit: 'px', min: 2, max: 12, def: 5}), C('showAvg', 'Trait à la moyenne de chaque parenté', 'check', {def: true}),
                 C('colorBy', 'Couleur des points', 'select', {choices: [['', 'Par côté (père, mère)'], ['one', 'Une seule']]}), C('patColor', 'Couleur du côté père', 'color', {def: '#4e79a7', when: s => s.o?.colorBy !== 'one'}), C('matColor', 'Couleur du côté mère', 'color', {def: '#e15759', when: s => s.o?.colorBy !== 'one'}),
-                C('dotColor', 'Couleur des autres points', 'color', {def: '#2e7d6b'}), C('bandColor', 'Couleur des fourchettes', 'color', {def: '#8a94a6'}), C('maxCm', 'Fin de l’échelle (cM)', 'range', {min: 100, max: 3720, step: 10, def: 3720})],
+                C('dotColor', 'Couleur des autres points', 'color', {def: '#2e7d6b'}), C('bandColor', 'Couleur des fourchettes', 'color', {def: '#8a94a6'}), C('maxCm', 'Fin de l’échelle', 'range', {unit: 'cM', min: 100, max: 3720, step: 10, def: 3720})],
             sample: sampleCm},
         ridgeline: {icon: '🏔️', label: 'Vagues (une répartition par siècle…)', group: 'Chiffres', render: ridgeline, noLegend: true,
             grids: [{key: 'rows', label: 'Les valeurs et leur groupe (une vague par groupe)', cols: [C('label', 'Nom (personne…)'), C('value', 'Valeur', 'number'), C('group', 'Groupe (siècle, sexe…)'), C('color', 'Couleur du groupe', 'color')]}],
-            options: [C('overlap', 'Chevauchement des vagues (%)', 'range', {min: 0, max: 300, def: 120}), C('rowHeight', 'Écart entre les vagues (px)', 'range', {min: 16, max: 160, def: 38}),
+            options: [C('overlap', 'Chevauchement des vagues', 'range', {unit: '%', min: 0, max: 300, def: 120}), C('rowHeight', 'Écart entre les vagues', 'range', {unit: 'px', min: 16, max: 160, def: 38}),
                 C('bw', 'Lissage (0 = automatique)', 'range', {min: 0, max: 30, step: .5, def: 0}), C('scaleBy', 'Hauteur des vagues', 'select', {choices: [['', 'Chaque vague à sa hauteur'], ['same', 'Même échelle pour toutes'], ['count', 'Selon le nombre de valeurs']]}),
                 C('order', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['reverse', 'À l’envers'], ['median', 'Par médiane'], ['count', 'Par nombre de valeurs']]}),
                 C('colors', 'Couleurs', 'select', {choices: [['', 'Une par groupe'], ['gradient', 'Un dégradé'], ['one', 'Une seule']]}), C('lowColor', 'Dégradé : première couleur', 'color', {def: '#9ecae1', when: s => s.o?.colors === 'gradient'}), C('highColor', 'Dégradé : dernière couleur', 'color', {def: '#08519c', when: s => s.o?.colors === 'gradient'}),
-                C('oneColor', 'Couleur', 'color', {def: '#4e79a7', when: s => s.o?.colors === 'one'}), C('opacity', 'Opacité (%)', 'range', {min: 10, max: 100, def: 75}), C('median', 'Montrer la médiane', 'check', {def: true}), C('counts', 'Écrire le nombre de valeurs', 'check', {def: true}),
+                C('oneColor', 'Couleur', 'color', {def: '#4e79a7', when: s => s.o?.colors === 'one'}), C('opacity', 'Opacité', 'range', {unit: '%', min: 10, max: 100, def: 75}), C('median', 'Montrer la médiane', 'check', {def: true}), C('counts', 'Écrire le nombre de valeurs', 'check', {def: true}),
                 C('min', 'Début de l’axe (vide = automatique)', 'number'), C('max', 'Fin de l’axe (vide = automatique)', 'number'), C('unit', 'Unité (ex. : ans)'), C('xLabel', 'Nom de l’axe')],
             sample: sampleRidge},
         marimekko: {icon: '🧱', label: 'Mosaïque à largeur variable (Marimekko)', group: 'Parts', render: marimekko, legend: 'bottom', table: true,
             grids: [TABLE('Les colonnes (lignes) et leurs parts (séries)', 'Colonne')],
             options: [C('values', 'Dans les cases', 'select', {choices: [['', 'La part en %'], ['num', 'Le chiffre'], ['false', 'Rien']]}), C('widths', 'Part de chaque colonne sous l’axe', 'check', {def: true}),
-                C('sort', 'Ordre des colonnes', 'select', {choices: [['', 'Comme dans le tableau'], ['size', 'Les plus larges d’abord']]}), C('gap', 'Écart entre les colonnes (px)', 'range', {min: 0, max: 20, def: 2}), C('border', 'Traits entre les cases', 'check', {def: true}), C('borderColor', 'Couleur des traits', 'color', {def: '#ffffff', when: s => s.o?.border !== false}), C('unit', 'Unité (ex. : personnes)'), H_OPT],
+                C('sort', 'Ordre des colonnes', 'select', {choices: [['', 'Comme dans le tableau'], ['size', 'Les plus larges d’abord']]}), C('gap', 'Écart entre les colonnes', 'range', {unit: 'px', min: 0, max: 20, def: 2}), C('border', 'Traits entre les cases', 'check', {def: true}), C('borderColor', 'Couleur des traits', 'color', {def: '#ffffff', when: s => s.o?.border !== false}), C('unit', 'Unité (ex. : personnes)'), H_OPT],
             sample: sampleMari},
         dotplot: {icon: '⚫', label: 'Échelle de points (Cleveland)', group: 'Chiffres', render: dotplot, legend: 'bottom', table: true, pairs: true,
             grids: [TABLE('Les lignes et leurs valeurs (une colonne par série)', 'Nom')],
             options: [C('sort', 'Ordre des lignes', 'select', {choices: [['', 'Comme dans le tableau'], ['desc', 'Du plus grand au plus petit'], ['asc', 'Du plus petit au plus grand'], ['az', 'A → Z'], ['gap', 'Par écart entre les deux séries']]}),
-                C('guide', 'Trait de chaque ligne', 'select', {choices: [['', 'Pointillé sur toute la largeur'], ['range', 'Entre les points (écart)'], ['none', 'Aucun']]}), C('dot', 'Taille des points (px)', 'range', {min: 2, max: 16, def: 5}), C('dotColor', 'Couleur des points (une seule série)', 'color', {def: '#4e79a7', when: sp => !(sp.series?.length > 1)}), C('rowHeight', 'Hauteur d’une ligne (px)', 'range', {min: 12, max: 60, def: 24}),
+                C('guide', 'Trait de chaque ligne', 'select', {choices: [['', 'Pointillé sur toute la largeur'], ['range', 'Entre les points (écart)'], ['none', 'Aucun']]}), C('dot', 'Taille des points', 'range', {unit: 'px', min: 2, max: 16, def: 5}), C('dotColor', 'Couleur des points (une seule série)', 'color', {def: '#4e79a7', when: sp => !(sp.series?.length > 1)}), C('rowHeight', 'Hauteur d’une ligne', 'range', {unit: 'px', min: 12, max: 60, def: 24}),
                 C('values', 'Écrire la valeur', 'check', {def: true}), C('showGap', 'Écrire l’écart (deux séries)', 'check', {def: true}), C('stripes', 'Une ligne sur deux grisée', 'check', {def: true}), C('fromZero', 'Axe à partir de zéro', 'check'),
                 C('highlight', 'Mettre en avant (un nom ; les autres pâlissent)'), C('unit', 'Unité (ex. : ans)'), C('xLabel', 'Nom de l’axe')],
             sample: sampleDot},
         nightingale: {icon: '🌹', label: 'Rose de Nightingale (aires polaires)', group: 'Parts', render: nightingale, legend: 'bottom', table: true, pairs: true,
             grids: [TABLE('Les parts (mois, saisons…) et leurs chiffres', 'Part')],
             options: [C('mode', 'Plusieurs séries', 'select', {choices: [['', 'Empilées'], ['overlap', 'Superposées (comme Florence Nightingale)']]}), C('area', 'L’aire suit le chiffre (sinon : la longueur)', 'check', {def: true}),
-                C('start', 'Départ (degrés, 0 = en haut)', 'range', {min: 0, max: 359, def: 0}), C('hole', 'Trou au centre (%)', 'range', {min: 0, max: 60, def: 8}), C('labels', 'Noms des parts', 'check', {def: true}), C('values', 'Écrire les chiffres', 'check'),
+                C('start', 'Départ (degrés, 0 = en haut)', 'range', {min: 0, max: 359, def: 0}), C('hole', 'Trou au centre', 'range', {unit: '%', min: 0, max: 60, def: 8}), C('labels', 'Noms des parts', 'check', {def: true}), C('values', 'Écrire les chiffres', 'check'),
                 C('rings', 'Cercles de l’échelle', 'check', {def: true}), C('lineColor', 'Couleur des traits entre les parts', 'color', {def: '#ffffff'}), C('unit', 'Unité'), H_OPT],
             sample: sampleRose},
         mobility: {icon: '🔁', label: 'Tableau de mobilité (métier du père × métier de l’enfant)', group: 'Chiffres', render: mobility, noLegend: true,

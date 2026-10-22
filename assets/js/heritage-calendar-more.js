@@ -349,7 +349,7 @@
 
     function agePanel() {
         return panel('h-cm-age', 'Âge ↔ date de naissance', 'Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date.',
-            `<form class="form-grid" style="padding:0" id="h-cm-age-form"><label>Âge (en années)<input name="age" type="number" min="0" max="130" step="1" placeholder="32"></label>
+            `<form class="form-grid" style="padding:0" id="h-cm-age-form"><label>Âge<input data-unit="ans" name="age" type="number" min="0" max="130" step="1" placeholder="32"></label>
             <label>Précision<select name="margin"><option value="0">exact (ans révolus)</option><option value="2">« environ » (± 2 ans)</option><option value="5">arrondi (± 5 ans)</option><option value="10">très vague (± 10 ans)</option></select></label>
             <label class="span-2">À la date de<input name="date" placeholder="12/03/1790, mars 1790 ou 1790" autocomplete="off"></label></form>${out('h-cm-age-out', 'Entre un âge et la date de l’acte.')}
             <form class="form-grid h-cm-sub" style="padding:0" id="h-cm-ageat-form"><label>Né(e) le<input name="birth" placeholder="13/03/1757" autocomplete="off"></label><label>Âge le<input name="date" placeholder="12/03/1790" autocomplete="off"></label></form>${out('h-cm-ageat-out', 'Entre une date de naissance et une autre date.')}`,

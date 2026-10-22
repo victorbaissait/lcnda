@@ -36,10 +36,11 @@ function diagram_adn_numbers(PDO $pdo, array $q): array
 {
     $what = (string) ($q['what'] ?? '');
     if (!in_array($what, DIAGRAM_ADN_NUMBERS_WHAT, true)) { throw new LcndaBadInput('Donnée inconnue.'); }
+    require_once __DIR__ . '/diagram_options.php'; dgo_request($q); // groupe de personnes et période (onglet « Depuis l'app ») : les enfants, les personnes comptées
 
     if ($what === 'mobility') { // 🔁 métier du père → métier de l'enfant
         $who = in_array($q['who'] ?? '', ['sons', 'daughters', 'children'], true) ? (string) $q['who'] : 'sons';
-        $people = dchf_people($pdo); $jobs = dadn_jobs($pdo, $people);
+        $people = dchf_people($pdo, true); $jobs = dadn_jobs($pdo, $people); $kept = dchf_filtered() ? dchf_people($pdo) : null; // les pères peuvent être hors du groupe : seuls les enfants sont choisis
         $fam = [];
         foreach ($pdo->query('SELECT id, partner1_id, partner2_id FROM families') as $f) {
             $a = (int) $f['partner1_id']; $b = (int) $f['partner2_id'];
@@ -48,7 +49,7 @@ function diagram_adn_numbers(PDO $pdo, array $q): array
         }
         $cells = []; $kids = 0; $withFather = 0; $seen = [];
         foreach ($pdo->query("SELECT family_id, child_id FROM family_children WHERE COALESCE(relation_to_partner1,'biological') NOT IN ('adopted','foster','step') ORDER BY id") as $r) {
-            $c = (int) $r['child_id']; if (!isset($people[$c]) || isset($seen[$c])) { continue; }
+            $c = (int) $r['child_id']; if (!isset($people[$c]) || isset($seen[$c]) || ($kept !== null && !isset($kept[$c]))) { continue; }
             $g = $people[$c]['gender'];
             if (($who === 'sons' && $g !== 'male') || ($who === 'daughters' && $g !== 'female')) { continue; }
             $seen[$c] = 1; $kids++;
@@ -70,7 +71,7 @@ function diagram_adn_numbers(PDO $pdo, array $q): array
         $add = static function (string $s, int $m) use (&$grid, &$total) { if ($m < 1 || $m > 12) { return; } $grid[$s][$m] = ($grid[$s][$m] ?? 0) + 1; $total++; };
         $births = static function () use ($people) { foreach ($people as $p) { if ($p['birth'] && $p['birth'][1] > 0) { yield $p['birth']; } } };
         $deaths = static function () use ($people) { foreach ($people as $p) { if ($p['death'] && $p['death'][1] > 0) { yield $p['death']; } } };
-        $marrs = static function () use ($pdo) { foreach (dchf_marriages($pdo) as $m) { if ($m['date'][1] > 0) { yield $m['date']; } } };
+        $marrs = static function () use ($pdo, $people) { $f = dchf_filtered(); foreach (dchf_marriages($pdo) as $m) { if ($f && !isset($people[$m['p1']]) && !isset($people[$m['p2']])) { continue; } if ($m['date'][1] > 0) { yield $m['date']; } } };
         $concep = static function () use ($births) { foreach ($births() as $d) { $m = $d[1] - 9; $y = $d[0]; if ($m < 1) { $m += 12; $y--; } yield [$y, $m, 0, false]; } };
         if ($by === 'type') {
             foreach ($births() as $d) { $add('Naissances', $d[1]); }

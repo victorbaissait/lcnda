@@ -116,6 +116,13 @@
         if(right&&!right.people_links)right=await fetchMediaCompareInfo(right);
         if(token!==state.workspaceToken||state.module!=='comparaison'||state.comparisonMode!=='images')return;
         state.imageCompare.left=left;state.imageCompare.right=right;
+        // 🔍 deux photos : l'outil « Comparer deux photos » dans la page (fondu, rideau, yeux alignés, ressemblance) ; un PDF garde les deux cases
+        if(left&&right&&normalizedMediaType(left)==='image'&&normalizedMediaType(right)==='image'&&window.LCNDA_EXT?.mountPhotoCompare){
+            state._photoCompareTool?.destroy?.();
+            $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">MODE COMPARAISON</span><h2>🔍 Comparer deux photos</h2><p>Côte à côte, en fondu ou en rideau, avec le même zoom ; aligne les yeux pour juger une ressemblance. Change les photos ici ou dans la colonne de gauche.</p></div></header><div class="h-pc-inline" id="comparison-photo-tool"></div></section>`;
+            state._photoCompareTool=window.LCNDA_EXT.mountPhotoCompare($('#comparison-photo-tool'),{inline:true,a:left,b:right});
+            return;
+        }
         $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">MODE COMPARAISON</span><h2>Comparer deux documents</h2><p>Choisis deux médias dans la colonne de gauche (« L’image A », « L’image B » : recherche par titre, cote, personne, lieu ou année) pour les comparer côte à côte, avec zoom indépendant sur chaque image.</p></div></header>
         <div class="media-compare-grid" id="comparison-image-grid">${comparisonImagePane('Document A',left,'left')}${comparisonImagePane('Document B',right,'right')}</div>${comparisonOverlayHtml(left,right)}</section>`;
         const grid=$('#comparison-image-grid');

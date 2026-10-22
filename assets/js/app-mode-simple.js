@@ -1116,8 +1116,13 @@
 
     /** ↺ Remettre comme au départ (onglet 🧓) : les réglages du mode simple, sans question (« ↶ Annuler » dans le message, K2) */
     function reset() { setDev({viewer: undefined}); lsSet(LOCAL, null); write({...DEF(), ready: true}); const box = document.querySelector('.a11y-page [data-ms-box]'); if (box) renderSettings(box); refreshEntry(); }
+    /* ce qui ne quitte jamais cette généalogie : le code de sortie (même haché), qui regarde, les photos cachées (numéros de cette base)
+       — portable(r) : les réglages sans eux (💾 toute l'app, défauts du site, fichier) ; keepPrivate(r, ici) : r avec ceux d'ici */
+    const PRIVATE = ['codeHash', 'useCode', 'viewer', 'notInTree', 'ready', 'hiddenPhotos'];
+    const portable = raw => { const o = clean(raw); PRIVATE.forEach(k => delete o[k]); return o; };
+    const keepPrivate = (raw, here) => { const h = clean(here), o = {...(raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {})}; PRIVATE.forEach(k => { o[k] = h[k]; }); return clean(o); };
     ext.modeSimple = {
-        open, close, enter, reset, isOpen: () => !!FULL, current: () => FULL, settings: read, write, clean, defaults: DEF, eff, ratio, fixColor, contrastRows,
+        open, close, enter, reset, portable, keepPrivate, PRIVATE, isOpen: () => !!FULL, current: () => FULL, settings: read, write, clean, defaults: DEF, eff, ratio, fixColor, contrastRows,
         renderSettings, mountTab, tabsHtml, tabNow, data: () => D, loadData, makeMode, sha256, checkCode, makeCodeHash,
         kin: (v, t) => (D ? relFor(v, t) : ''), kinNoun, refreshEntry,
         debug: () => ({guard: {on: guard.on, blocked: guard.blocked.slice(), deferred: guard.deferred.length}, screen: FULL?.V.screen || '', V: FULL?.V}),

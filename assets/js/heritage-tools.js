@@ -416,22 +416,7 @@
 
     /* ═══════════════════════ 🔎 VOYAGES IMPOSSIBLES ═══════════════════════ */
 
-    const journeyEvent = e => `${esc(e.type_label)}${e.role ? ` <em>(${esc(e.role)})</em>` : ''}${e.owner_name && e.role ? ` de ${esc(e.owner_name)}` : ''} — <strong>${esc(e.date_text)}</strong> à ${esc(e.place_name || '?')}`;
-    function journeysTable(alerts) {
-        return `<table class="data-table h-journeys"><thead><tr><th>Fiche</th><th>D’abord</th><th>Puis</th><th>Écart</th></tr></thead><tbody>${alerts.map(a => `<tr><td>${a.person ? personLink(a.person.id, A().personName(a.person), A().years(a.person)) : '?'}</td><td>${journeyEvent(a.a)}</td><td>${journeyEvent(a.b)}</td><td><strong>${fmt(a.km)} km</strong> en ${a.days ? plural(a.days, 'jour', 'jours') : 'moins d’un jour'}<br><small class="muted">au plus ≈ ${fmt(a.speed_limit)} km par jour à cette époque</small></td></tr>`).join('')}</tbody></table>`;
-    }
-    ext.maintenance.journeys = async token => {
-        const data = await api('impossible_journeys');
-        if (!isCurrent(token)) return;
-        const alerts = data.alerts || [];
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Voyages impossibles', 'Une même fiche se trouve à deux endroits trop éloignés en trop peu de temps (« parrain à Lille le 3 mars, témoin à Marseille le 4 mars 1790 ») : c’est le signe classique de deux homonymes confondus dans une seule fiche. Seuls les événements avec une date exacte et un lieu placé sur la carte sont comparés (y compris comme témoin).')}
-            ${alerts.length ? `<p class="muted">${plural(alerts.length, 'alerte', 'alertes')}, les plus nettes d’abord.</p>${journeysTable(alerts)}` : empty('Aucun voyage impossible repéré.', {icon: '✅'})}</section>`;
-        A().bindTableLinks();
-    };
-    ext.dashboard.journeys_widget = {load: () => api('impossible_journeys'), render: (index, widget, span, data) => {
-        const alerts = (data?.alerts || []).slice(0, 5);
-        return card(index, 'Voyages impossibles', (data?.alerts || []).length || '', alerts.length ? `${journeysTable(alerts)}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="journeys">Tout voir</button></div>` : empty('Aucun voyage impossible repéré.', {icon: '✅'}), span);
-    }};
+    /* écran et widget fondus dans « ✅ Contrôle de la base » (heritage-controle.js) : #maintenance/journeys y mène (📍 Lieux → Voyages impossibles) */
 
     /* ═══════════════════════ 🤝 TRAVAIL À DEUX ═══════════════════════ */
 

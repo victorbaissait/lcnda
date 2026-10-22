@@ -116,7 +116,7 @@
         return `<b class="pf-sub">Profils (ordre, couleur, visibles)</b><div class="order-list block-order-list" data-pfm-list="prof">${profRows || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun profil dans la base pour l’instant.</span></p>'}</div>
             <b class="pf-sub">Sections de la page « Tout mélangé »</b><div class="order-list block-order-list" data-pfm-list="sec">${secRows}</div>
             ${models ? `<b class="pf-sub">Modèles de départ</b><div class="pfm-models">${models}</div>` : ''}
-            <label class="checkbox-line"><input type="checkbox" data-pfm-empty ${pp.hideEmpty ? 'checked' : ''}> Masquer les sections vides</label>`;
+            <label class="ui-toggle"><input type="checkbox" data-pfm-empty ${pp.hideEmpty ? 'checked' : ''}><i></i>Masquer les sections vides</label>`;
     }
     /** les pastilles C2 de l'éditeur (profils et sections) */
     function mountColors(box, ed) {

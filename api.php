@@ -211,6 +211,22 @@ try {
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['postcards', 'postcard_write'], true)) { // 🏞 cartes postales anciennes (lib/postcards.php)
+        require_once __DIR__ . '/lib/postcards.php';
+        postcards_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (!$isWrite && $action === 'dates_feter') { // 🎂 dates à fêter du tableau de bord (lib/dates_feter.php)
+        require_once __DIR__ . '/lib/dates_feter.php';
+        json_response(dates_feter_data($pdo, $_GET));
+    }
+    if (!$isWrite && in_array($action, ['family_share_preview', 'family_share_export'], true)) { // 📤 partager avec la famille (lib/family_share.php)
+        require_once __DIR__ . '/lib/family_share.php';
+        family_share_dispatch($pdo, (string) $action, $_GET);
+    }
+    if (in_array($action, ['photo_comparisons', 'photo_comparison', 'photo_compare_faces', 'photo_comparison_write'], true)) { // 🔍 comparer deux photos (lib/photo_compare.php)
+        require_once __DIR__ . '/lib/photo_compare.php';
+        photo_cmp_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     // Imports qui interrogent un site (Discogs, MusicBrainz…, DOI, ORCID, HAL) : rien n'est écrit dans la base, donc pas de
     // transaction d'écriture ouverte pendant l'attente du site (jusqu'à 25 s par demande) — sinon tout enregistrement fait
     // en même temps attendait, puis échouait en « base verrouillée ».
@@ -369,6 +385,8 @@ try {
         'dna_lines' => json_response(dna_lines($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['depth'] ?? 10))),
         'dna_tree' => json_response(dna_tree_data($pdo, safe_int($_GET['kit'] ?? 0), safe_int($_GET['gen'] ?? 8))),
         'vector_doc' => json_response(vector_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'workbooks' => json_response(['items' => workbooks_list($pdo, (string) ($_GET['kind'] ?? 'book'))]), // 🧮 Tableur (lib/workbooks.php)
+        'workbook' => json_response(workbook_get($pdo, safe_int($_GET['id'] ?? 0))),
         'houses' => json_response(['items' => houses_list($pdo)]),
         'house' => json_response(house_get($pdo, safe_int($_GET['id'] ?? 0))),
         'house_links' => json_response(['items' => house_links_lookup($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['census_id'] ?? 0))]),
@@ -388,18 +406,28 @@ try {
         'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
         'diagram_famille' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_famille.php'; json_response(diagram_famille_data($pdo, $_GET)); })(), // 📊 D1–D8 : qui a connu qui, survie, métiers, rayon des mariages, implexe, mois, naissances, lieux de vie (lib/diagram_famille.php)
         'diagram_adn_numbers' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_adn_chiffres.php'; json_response(diagram_adn_numbers($pdo, $_GET)); })(), // 📊 diagrammes ADN et Chiffres (mobilité, mois, âges moyens) : lib/diagram_adn_chiffres.php
+        'diagram_app_count' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_appcount.php'; json_response(diagram_app_count($pdo, $_GET)); })(), // 📊 « Depuis l'app → Graphique » : compter dans ma base, avec les options communes (lib/diagram_appcount.php, lib/diagram_options.php)
         'person_names' => json_response(person_names($pdo)),
         'picker_search' => json_response(picker_search($pdo, $_GET)),
         'shortcut_info' => json_response(widget_links_info($pdo, $_GET)), // 🔗 tuiles du widget « Raccourcis » : introuvable ?, titre, vignette, nombre (lib/widget_links.php)
         'periodical_link_search' => json_response(periodical_link_search($pdo, (string) ($_GET['q'] ?? ''))),
         'press_ads' => json_response(press_ads_all($pdo)),
         'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),
+        'biography' => json_response(bio_get($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 📖 lib/biographie.php
+        'world_around' => json_response(world_around($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 🌍 lib/monde_autour.php
+        'world_events' => json_response(world_events_list($pdo, $_GET)),
+        'old_trade' => json_response(trade_sheet($pdo, $_GET)), // 🛠️ lib/metiers_anciens.php
+        'old_trades' => json_response(trades_list($pdo, $_GET)),
         'layout_docs' => json_response(['docs' => layout_docs_list($pdo)]),
         'layout_doc' => json_response(layout_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
         'montage_projects' => json_response(['projects' => montage_projects_list($pdo)]),
         'retouch_projects' => json_response(['projects' => retouch_projects_list($pdo)]),
         'audio_projects' => json_response(['projects' => audio_projects_list($pdo)]),
         'audio_project' => json_response(audio_project_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'audio_regions' => json_response(audio_regions_get($pdo, safe_int($_GET['media_id'] ?? 0), (string) ($_GET['filename'] ?? ''))), // 🎚️ Studio son (lib/audio_studio.php)
+        'person_audio_regions' => json_response(['regions' => audio_regions_for_person($pdo, safe_int($_GET['person_id'] ?? 0))]),
+        'audio_transcript' => json_response(audio_transcript_get($pdo, safe_int($_GET['media_id'] ?? 0), (string) ($_GET['filename'] ?? ''))),
+        'audio_transcript_search' => json_response(['results' => audio_transcript_search($pdo, (string) ($_GET['q'] ?? ''))]),
         'retouch_project' => json_response(retouch_project_get($pdo, safe_int($_GET['id'] ?? 0))),
         'montage_project' => json_response(montage_project_get($pdo, safe_int($_GET['id'] ?? 0))),
         'layout_family_data' => json_response(layout_family_data($pdo, $_GET)),
@@ -432,6 +460,17 @@ try {
         'research_gaps' => json_response(research_gaps_data($pdo, $_GET)),
         'research_journal' => json_response(research_journal_data($pdo, $_GET)), // 🗓 Journal des recherches (lib/research_journal.php) ; &person_id= : bloc « 🔍 Déjà cherché »
         'research_already' => json_response(research_already_data($pdo, $_GET)), // ⚠️ « Déjà dans ton suivi » pendant la saisie
+        'archive_services' => json_response(archive_services_data($pdo)), // 🏛 Services d'archives (lib/archive_services.php)
+        'archive_service' => json_response(archive_service_data($pdo, safe_int($_GET['id'] ?? 0))),
+        'media_archive' => json_response(media_archive_data($pdo, safe_int($_GET['id'] ?? 0))),
+        'source_citations' => json_response(source_citations_data($pdo, $_GET)), // ❝ citations toutes prêtes (lib/citation_styles.php)
+        'hypothesis_compare' => json_response(hypothesis_compare_data($pdo, safe_int($_GET['id'] ?? 0))), // ⚖️ hypothèses à comparer (lib/hypothesis_compare.php)
+        'controle' => json_response(controle_page_data($pdo, $_GET)), // ✅ Contrôle de la base (lib/controle.php) : alertes, exceptions, fiches citées
+        'controle_summary' => json_response(controle_summary($pdo)), // ✅ widget : nombres par sorte, % des fiches sans alerte
+        'controle_person' => json_response(controle_person($pdo, safe_int($_GET['id'] ?? 0))), // ✅ bandeau « ⚠️ N choses à vérifier » de la fiche
+        'controle_scope' => json_response(['ids' => controle_scope_ids($pdo, mb_substr(safe_text($_GET['scope'] ?? ''), 0, 40))]), // ✅ filtre branche / Sosa / descendants
+        'controle_seuils' => json_response(['values' => controle_seuils($pdo), 'bounds' => CONTROLE_SEUILS]),
+        'controle_family_stats' => json_response(controle_family_stats($pdo)), // 📊 Moyennes de la famille (Graphiques)
         'faces_index' => json_response(faces_index($pdo)),
         'artist_items' => json_response(['items' => artist_items_for($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'scene' => json_response(scene_api_get($pdo, $_GET)), // 🎤 scène : coordonnées des lieux (lib/scene.php)
@@ -659,6 +698,8 @@ function site_defaults_allowed_keys(): array
         'genealogie-graph-stats-order',
         'genealogie-graph-stats-hidden',
         'genealogie-side-folders', // 📁 dossiers de Mes diagrammes / Mes graphiques (app-side-folders.js)
+        'genealogie-research-kind-order', // 🔎 Recherche → ordre de « Type de recherche » (app-recherche.js)
+        'genealogie-research-kind-hidden', // 🔎 Recherche → types de recherche cachés
         'genealogie-tile-cat-order',
         'genealogie-tile-hidden-cats',
         'genealogie-tile-hidden',
@@ -680,11 +721,29 @@ function site_defaults_allowed_keys(): array
         'genealogie-board-prefs-sets',
         'genealogie-portraits', // K7 : un seul portrait (app-portraits.js)
         'genealogie-left-column', // K15 : la colonne de gauche (app-colonne.js)
-        'genealogie-designs', // 🎨 Designs au choix A1–A10 (app-designs.js)
-        'genealogie-designs-presets', // 🎨 Designs au choix : réglages enregistrés
+        'genealogie-designs', // 🎨 Designs au choix A1–A8 (app-designs.js)
         'genealogie-mode-simple', // 🧓 Mode simple : ses réglages (app-mode-simple.js)
         'genealogie-mode-simple-presets', // 🧓 Mode simple : réglages enregistrés
+        'genealogie-accessibilite', // ♿ Accessibilité (app-access.js)
+        'genealogie-design-custom-presets', // ✎ Mes thèmes (un design peut en choisir un)
+        'genealogie-avatar-shapes', // formes des avatars (app-apparence.js)
+        'genealogie-person-header', // en-tête des fiches (app-apparence.js)
+        'genealogie-audio-quick-design', // 🎧 ⚡ Son rapide : « Comme avant » ou le nouveau design (heritage-audio-quick.js)
+        'genealogie-audio-fx-presets', // 🎧 réglages du son enregistrés (Son rapide et Studio son)
     ];
+}
+
+/** Le défaut du site est envoyé à tout le monde : le mode simple n'y garde ni son code de sortie (même haché), ni qui regarde,
+ *  ni les photos cachées (comme ext.modeSimple.portable, assets/js/app-mode-simple.js). */
+function site_default_value_clean(string $key, string $value): ?string
+{
+    if ($key !== 'genealogie-mode-simple' && $key !== 'genealogie-mode-simple-presets') return $value;
+    $data = json_decode($value, true);
+    if (!is_array($data)) return null;
+    $strip = static function (array $o): array { foreach (['codeHash', 'useCode', 'viewer', 'notInTree', 'ready', 'hiddenPhotos'] as $k) unset($o[$k]); return $o; };
+    if ($key === 'genealogie-mode-simple') $data = $strip($data);
+    else $data = array_values(array_map(static fn($p) => is_array($p) && is_array($p['data'] ?? null) ? ['data' => $strip($p['data'])] + $p : $p, array_filter($data, 'is_array')));
+    return json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: null;
 }
 
 function site_defaults_read(): array
@@ -697,7 +756,7 @@ function site_defaults_read(): array
     $settings=[];
     $allowed=site_defaults_allowed_keys();
     foreach(($json['settings']??[]) as $key=>$value){
-        if((in_array($key,$allowed,true)||str_starts_with((string)$key,'genealogie-tile-items-'))&&is_string($value))$settings[$key]=$value;
+        if((in_array($key,$allowed,true)||str_starts_with((string)$key,'genealogie-tile-items-'))&&is_string($value)&&($value=site_default_value_clean((string)$key,$value))!==null)$settings[$key]=$value;
     }
     return ['settings'=>$settings,'updated_at'=>(string)($json['updated_at']??'')];
 }
@@ -712,7 +771,8 @@ function save_site_defaults(PDO $pdo,array $data): array
         $key=(string)$key;
         if(!in_array($key,$allowed,true)&&!str_starts_with($key,'genealogie-tile-items-'))continue;
         if(!is_string($value))$value=json_encode($value,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-        $value=(string)$value;
+        $value=site_default_value_clean($key,(string)$value);
+        if($value===null)continue;
         // les réglages des tableaux peuvent contenir des formes faites d'une image : plus de place pour eux
         if(strlen($value)>((str_starts_with($key,'genealogie-board-prefs')||in_array($key,['genealogie-house-lib','lcnda-decor-tree','genealogie-keynote-prefs'],true))?4000000:200000))throw new RuntimeException('Un réglage est trop volumineux.');
         $settings[$key]=$value;
@@ -1491,10 +1551,11 @@ function dashboard_data(PDO $pdo): never
     $coverageRow = fn(int $value): array => ['count'=>$value, 'percent'=>round($value * 100 / $total, 1)];
     $workReminders = (int)$pdo->query("SELECT count(*) FROM investigation_items WHERE reminder_mode<>'none' AND reminder_due_at<>'' AND reminder_done=0 AND reminder_due_at<=date('now','+30 days')")->fetchColumn()
         + (int)$pdo->query("SELECT count(*) FROM standalone_reminders WHERE reminder_due_at<>'' AND reminder_done=0 AND reminder_due_at<=date('now','+30 days')")->fetchColumn();
-    $issues = compute_issues($pdo); // une seule fois : sert au compteur et à la liste des incohérences
+    // ✅ Contrôle de la base (lib/controle.php) : le même nombre que la page et le widget (toutes sortes, sans les exceptions ; gardé en cache)
+    try { $controleTotal = controle_summary($pdo)['total']; } catch (Throwable $_) { $controleTotal = 0; }
     $work = [
         'reminders_due' => $workReminders,
-        'issues' => count($issues),
+        'issues' => $controleTotal,
         'open_investigations' => (int)$pdo->query("SELECT count(*) FROM investigations WHERE status<>'closed'")->fetchColumn(),
         'open_battues' => (int)$pdo->query("SELECT count(*) FROM battues WHERE status<>'closed'")->fetchColumn(),
         'restorable_deletions' => count(recent_restore_candidate_ids($pdo, 15)),
@@ -1541,7 +1602,7 @@ function dashboard_data(PDO $pdo): never
         'branches_less_documented' => dashboard_branches_less_documented($pdo),
         'couples_without_marriage' => dashboard_couples_without_marriage($pdo),
         'children_missing_parents' => dashboard_children_missing_parents($pdo),
-        'consistency_issues' => dashboard_consistency_issues($pdo, $issues),
+        'consistency_issues' => [], // ✅ le widget lit controle_summary (heritage-controle.js)
         'baptisms_without_sponsors' => dashboard_baptisms_without_sponsors($pdo),
         'sosa_missing_near' => dashboard_sosa_missing_near($pdo, $sosaRootId),
         'battue_towns' => dashboard_battue_towns($pdo),
@@ -2367,6 +2428,8 @@ function is_full_date(string $date): bool
 
 function automatic_biography(array $person,array $events,array $parents,array $partners,array $children): string
 {
+    // 📖 le générateur commun (lib/biographie.php) : ta version gardée, sinon le texte de l'app avec tes réglages
+    if(!empty($person['id'])&&function_exists('bio_text_for')){try{return bio_text_for(db(),(int)$person['id']);}catch(Throwable $_){}}
     $name=full_name($person) ?: 'Cette personne';
     $parts=[];
     $birth=null;$death=null;$occupations=[];
@@ -4729,11 +4792,11 @@ function transcription_search_data(PDO $pdo): never
         LEFT JOIN events ev ON ml.entity_type='event' AND ev.id=ml.entity_id
         LEFT JOIN event_types et ON et.id=ev.event_type_id
         LEFT JOIN census_records cr ON ml.entity_type='census' AND cr.id=ml.entity_id
-        WHERE m.transcription LIKE ? COLLATE NOCASE
+        WHERE m.transcription LIKE ? COLLATE NOCASE" . (function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? " OR m.id IN (SELECT media_id FROM audio_transcripts WHERE text LIKE ? COLLATE NOCASE)" : '') . " -- 🎚️ aussi la transcription des sons (Studio son)
         GROUP BY m.id
         ORDER BY COALESCE(m.date_text,''), m.id DESC
         LIMIT 500");
-    $stmt->execute([$like]);
+    $stmt->execute(function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? [$like, $like] : [$like]);
     $rows = $stmt->fetchAll();
     if (!$rows) json_response(['query' => $q, 'media' => []]);
 
@@ -6112,8 +6175,8 @@ function restore_last_delete(PDO $pdo,array $data): array
     // (et ses lignes liées gardées dans « _children » : étiquettes posées, membres d'une branche)
     $simple=['standalone_reminder'=>'standalone_reminders','research_budget'=>'research_budget','courrier'=>'courriers',
         'hypothesis'=>'hypotheses','evidence'=>'evidence_records','person_online_sheet'=>'person_online_sheets','living_contact'=>'living_contacts',
-        'branch'=>'branches','view'=>'saved_views','label'=>'labels'];
-    $childTables=['label_links','branch_people'];
+        'branch'=>'branches','view'=>'saved_views','label'=>'labels','photo_comparison'=>'photo_comparisons'];
+    $childTables=['label_links','branch_people','hypothesis_options','hypothesis_proofs']; // ⚖️ réponses et preuves d'une hypothèse (lib/hypothesis_compare.php)
     if($id&&isset($simple[$type])){
         $table=$simple[$type];
         $stmt=$pdo->prepare("SELECT * FROM change_log WHERE action='delete' AND entity_type=? AND entity_id=? ORDER BY id DESC LIMIT 1");
@@ -6610,6 +6673,14 @@ function export_research_report(PDO $pdo): never
         echo '<article class="card"><span class="tag">'.$esc($row['quality'] ?: 'preuve').'</span><h3>'.$esc($row['claim'] ?: 'Élément sans titre').'</h3><p class="muted">'.$esc($row['person_name'] ?: 'Personne non liée').(($row['event_label'] ?? '') ? ' · '.$esc($row['event_label'].' '.$row['event_date']) : '').(($row['source_title'] ?? '') ? ' · Source : '.$esc($row['source_title']) : '').'</p>';
         if (($row['analysis'] ?? '') !== '') echo '<pre>'.$esc($row['analysis']).'</pre>';
         echo '</article>';
+    }
+    // ❝ F4 : la bibliographie des sources, écrite dans le style choisi (lib/citation_styles.php ; &cite_style=fr|ee|chicago|forum)
+    if (function_exists('cite_bibliography')) {
+        $citeStyle = safe_text($_GET['cite_style'] ?? 'fr');
+        $biblio = cite_bibliography($pdo, $citeStyle);
+        echo '<h2>Sources (bibliographie · '.$esc(CITE_STYLES[$citeStyle] ?? CITE_STYLES['fr']).')</h2>';
+        if (!$biblio) echo '<p class="muted">Aucune source.</p>';
+        else { echo '<div class="card">'; foreach ($biblio as $line) echo '<p style="padding-left:1.5em;text-indent:-1.5em;margin:.35em 0">'.$esc($line).'</p>'; echo '</div>'; }
     }
     echo '</body></html>';
     exit;
@@ -8396,13 +8467,15 @@ function hypotheses_data(PDO $pdo): never
     $status=safe_text($_GET['status']??'all');$q=safe_text($_GET['q']??'');$where=[];$params=[];
     if(in_array($status,['open','confirmed','rejected'],true)){$where[]='h.status=?';$params[]=$status;}
     if($q!==''){$where[]="(h.title LIKE ? COLLATE NOCASE OR h.statement LIKE ? COLLATE NOCASE OR p.first_name LIKE ? COLLATE NOCASE OR p.last_name LIKE ? COLLATE NOCASE)";$params=array_merge($params,array_fill(0,4,'%'.$q.'%'));}
+    if(($pid=safe_int($_GET['person_id']??0))>0){$where[]='h.person_id=?';$params[]=$pid;} // ⚖️ bloc de fiche « Hypothèses »
     $sql="SELECT h.*,trim(p.first_name||' '||p.last_name) AS person_name,trim(r.first_name||' '||r.last_name) AS related_name,et.label AS event_label,e.date_text AS event_date
         FROM hypotheses h
         JOIN persons p ON p.id=h.person_id
         LEFT JOIN persons r ON r.id=h.related_person_id
         LEFT JOIN events e ON e.id=h.event_id
         LEFT JOIN event_types et ON et.id=e.event_type_id".($where?' WHERE '.implode(' AND ',$where):'')." ORDER BY CASE h.status WHEN 'open' THEN 0 WHEN 'confirmed' THEN 1 ELSE 2 END,h.updated_at DESC,h.id DESC LIMIT 300";
-    $stmt=$pdo->prepare($sql);$stmt->execute($params);json_response(['hypotheses'=>$stmt->fetchAll()]);
+    $stmt=$pdo->prepare($sql);$stmt->execute($params);$rows=$stmt->fetchAll();
+    json_response(['hypotheses'=>$rows,'compare'=>(object)(function_exists('hypotheses_compare_summaries')?hypotheses_compare_summaries($pdo,array_column($rows,'id')):[])]); // ⚖️ réponses comparées (lib/hypothesis_compare.php)
 }
 
 function branches_data(PDO $pdo): never
@@ -8463,6 +8536,7 @@ function duplicate_candidates(PDO $pdo): never
          CASE WHEN p1.death_year IS NOT NULL AND p2.death_year IS NOT NULL AND abs(p1.death_year-p2.death_year)<=2 THEN 15 ELSE 0 END) score
     FROM person_years p1 JOIN person_years p2 ON p2.last_key=p1.last_key AND p2.first_key=p1.first_key AND p1.id<p2.id
     WHERE (p1.birth_year IS NULL OR p2.birth_year IS NULL OR abs(p1.birth_year-p2.birth_year)<=5)
+    AND NOT EXISTS (SELECT 1 FROM dismissed_issues d WHERE d.issue_key='dup:'||p1.id||':'||p2.id) -- ✅ « Ce sont deux personnes différentes »
     {$where}
     ORDER BY score DESC,lower(p1.last_name),lower(p1.first_name) LIMIT 120";
     $stmt=$pdo->prepare($sql);$stmt->execute($params);json_response(['candidates'=>$stmt->fetchAll()]);
@@ -9412,6 +9486,10 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_battue_search_item' => delete_battue_search_item($pdo,$data),
             'save_battue_commune_status' => save_battue_commune_status($pdo,$data),
             'dismiss_issue' => dismiss_issue($pdo,$data),
+            'controle_dismiss' => controle_dismiss($pdo,$data), // ✅ « Ce n'est pas une erreur » (lib/controle.php)
+            'controle_undismiss' => controle_undismiss($pdo,$data), // ✅ « ↺ Signaler de nouveau »
+            'controle_fix_date' => controle_fix_date($pdo,$data), // ✅ « Une à une » : date corrigée sur place
+            'controle_seuils_save' => controle_seuils_save($pdo,$data), // ✅ ⚙️ Seuils du contrôle
             'bulk_group' => bulk_group($pdo,$data),
             'save_branch' => save_branch($pdo,$data),
             'delete_branch' => delete_branch($pdo,$data),
@@ -9492,9 +9570,17 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_booklet_design' => save_booklet_design($pdo,$data),
             'save_board' => save_board($pdo,$data),
             'save_topic_sheet' => save_topic_sheet($pdo,$data),
+            'save_biography' => bio_save($pdo,$data),
+            'save_history_event' => world_save_event($pdo,$data),
+            'delete_history_event' => world_delete_event($pdo,$data),
+            'save_old_trade' => trade_save($pdo,$data),
             'save_periodical' => save_periodical($pdo,$data),
             'save_diagram' => save_diagram($pdo,$data),
             'save_vector_doc' => save_vector_doc($pdo,$data),
+            'save_workbook' => save_workbook($pdo,$data), // 🧮 Tableur
+            'rename_workbook' => rename_workbook($pdo,$data),
+            'delete_workbook' => delete_workbook($pdo,$data),
+            'duplicate_workbook' => duplicate_workbook($pdo,$data),
             'save_dna_kit' => save_dna_kit($pdo,$data),
             'delete_dna_kit' => delete_dna_kit($pdo,$data),
             'save_dna_match' => save_dna_match($pdo,$data),
@@ -9539,6 +9625,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'rename_retouch_project' => rename_retouch_project($pdo,$data),
             'delete_retouch_project' => delete_retouch_project($pdo,$data),
             'rename_audio_project' => rename_audio_project($pdo,$data),
+            'save_audio_regions' => audio_regions_save($pdo,$data), // 🎚️ Studio son : zones, marqueurs, passages reliés
+            'save_audio_transcript' => audio_transcript_save($pdo,$data),
             'delete_audio_project' => delete_audio_project($pdo,$data),
             'delete_topic_sheet' => delete_topic_sheet($pdo,$data),
             'save_board_snapshot' => save_board_snapshot($pdo,$data),
@@ -9647,6 +9735,17 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_archive_visit_plan' => delete_archive_visit_plan($pdo,$data),
             'save_archive_visit_item' => save_archive_visit_item($pdo,$data),
             'save_archive_visit_done' => save_archive_visit_done($pdo,$data), // 🗓 « ✓ Fait le … » (lib/research_journal.php)
+            'save_archive_service' => save_archive_service($pdo,$data), // 🏛 lib/archive_services.php
+            'delete_archive_service' => delete_archive_service($pdo,$data),
+            'restore_archive_service' => restore_archive_service($pdo,$data),
+            'save_media_archive' => save_media_archive($pdo,$data),
+            'hypothesis_option_save' => hypothesis_option_save($pdo,$data), // ⚖️ lib/hypothesis_compare.php
+            'hypothesis_option_delete' => hypothesis_option_delete($pdo,$data),
+            'hypothesis_proof_save' => hypothesis_proof_save($pdo,$data),
+            'hypothesis_proof_delete' => hypothesis_proof_delete($pdo,$data),
+            'hypothesis_compare_restore' => hypothesis_compare_restore($pdo,$data),
+            'hypothesis_conclude' => hypothesis_conclude($pdo,$data),
+            'hypothesis_conclusion_undo' => hypothesis_conclusion_undo($pdo,$data),
             'archive_visit_item_make_digest' => archive_visit_item_make_digest($pdo,$data),
             'delete_archive_visit_item' => delete_archive_visit_item($pdo,$data),
             'save_archive_visit_links' => save_archive_visit_links($pdo,$data),
@@ -10190,7 +10289,7 @@ function save_hypothesis(PDO $pdo,array $data): array
 
 function delete_hypothesis(PDO $pdo,array $data): array
 {
-    $id=safe_int($data['id']??0);$stmt=$pdo->prepare('SELECT * FROM hypotheses WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Hypothèse introuvable');$pdo->prepare('DELETE FROM hypotheses WHERE id=?')->execute([$id]);log_change($pdo,'hypothesis',$id,'delete','Suppression de l’hypothèse « '.$before['title'].' »',$before,null);return ['id'=>$id];
+    $id=safe_int($data['id']??0);$stmt=$pdo->prepare('SELECT * FROM hypotheses WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Hypothèse introuvable');if(function_exists('hcomp_ready')&&hcomp_ready($pdo)){$kids=[];foreach(['hypothesis_options','hypothesis_proofs'] as $kt){$ks=$pdo->prepare("SELECT * FROM {$kt} WHERE hypothesis_id=?");$ks->execute([$id]);$kids[$kt]=$ks->fetchAll();}if(array_filter($kids))$before['_children']=$kids;} /* ⚖️ réponses et preuves (F2) : remises par « ↶ Annuler » */$pdo->prepare('DELETE FROM hypotheses WHERE id=?')->execute([$id]);log_change($pdo,'hypothesis',$id,'delete','Suppression de l’hypothèse « '.$before['title'].' »',$before,null);return ['id'=>$id];
 }
 
 function save_evidence(PDO $pdo,array $data): array
@@ -12484,6 +12583,7 @@ function add_web_source(PDO $pdo,array $data): array
     $sourceId=(int)$pdo->lastInsertId();
     $pdo->prepare('INSERT INTO source_links(entity_type,entity_id,source_record_id,page,note) VALUES(?,?,?,?,?)')->execute([$entityType,$entityId,$sourceId,safe_text($data['page']??''),safe_text($data['note']??'')]);
     store_citation($pdo,(int)$pdo->lastInsertId(),$data); // référence détaillée (service d'archives, cote, vue, acte…)
+    archive_service_store_source($pdo,$sourceId,$data); // 🏛 service d'archives, série et cote (lib/archive_services.php)
     log_change($pdo,'source',$sourceId,'create','Ajout de la source « '.$title.' » à '.($entityType==='event'?'l’événement #'.$entityId:'la fiche #'.$personId));
     return ['id'=>$sourceId];
 }
@@ -12501,6 +12601,7 @@ function save_source(PDO $pdo,array $data): array
         ->execute([$type,$title,safe_text($data['author']??''),safe_text($data['website']??''),safe_text($data['accessed_at']??''),$url,safe_text($data['text']??''),$sourceId]);
     if($linkId){[$entityType,$entityId]=source_target($data,$personId);$pdo->prepare('UPDATE source_links SET entity_type=?,entity_id=?,page=?,note=? WHERE id=?')->execute([$entityType,$entityId,safe_text($data['page']??''),safe_text($data['note']??''),$linkId]);}
     if($linkId)store_citation($pdo,$linkId,$data);
+    archive_service_store_source($pdo,$sourceId,$data); // 🏛 service d'archives, série et cote (lib/archive_services.php)
     $stmt->execute([$sourceId]);$sourceAfter=$stmt->fetch();
     log_change($pdo,'source',$sourceId,'update','Modification de la source « '.$title.' »',['source'=>$sourceBefore,'link'=>$linkBefore],$sourceAfter);
     return $sourceAfter;

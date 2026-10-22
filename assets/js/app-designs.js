@@ -1,21 +1,25 @@
-/* LCNDA — 🎨 Designs au choix (A1 à A10) et « Ensembles prêts » (Maintenance → 🎨 Designs au choix).
+/* LCNDA — 🎨 Designs au choix (A1 à A8) (Maintenance → 🎨 Designs au choix).
  *
  * Maquette validée : designs-A (« Designs au choix ») ; mode d'emploi : docs/UI.md « Designs au choix ».
- * Réglage : localStorage['genealogie-designs'] = {a1: {v: 'avant'|'doux'|'papier'|'sobre', r, bw, sh, acc, grid}, a2: {…}, … a10: {…}}
+ * Un design change seulement la FORME : traits, ombres, coins, densité, icônes, en-tête de fiche, cases d'arbre, boutons,
+ *   mouvements, listes. Jamais la police, la taille du texte ni les couleurs : le premier cadre de Maintenance → Apparence
+ *   (Preset, Couleur principale, Police de caractères, Taille typographique, Menu des onglets…) passe toujours devant.
+ * Réglage : localStorage['genealogie-designs'] = {ver: 2, a1: {v: 'avant'|'doux'|'papier'|'sobre', r, bw, sh, grid}, a2: {…}, … a8: {…}}
  *   (v = la grande carte choisie, le reste = les « Réglages en plus » ; une valeur différente de celle de la carte = « retouché »).
- *   Réglages enregistrés : localStorage['genealogie-designs-presets'] = [{name, date, data}] (le cadre commun UI.presetsFrame).
+ *   Un ancien réglage (sans ver : A1 à A10, A7 police, A10 tableau de bord) est relu tel quel sans erreur : A7 et A10 sont
+ *   ignorés, A8 Mouvements devient A7, A9 Listes devient A8, la couleur d'accent d'A1 est oubliée (migrate). Au chargement,
+ *   la copie gardée dans le navigateur est réécrite à neuf, et les anciennes clés (ensembles enregistrés…) sont effacées.
  * « Comme avant » partout (le départ) : rien n'est posé, l'app ne change pas d'un pixel.
  * Sinon : des attributs data-lc-* et des variables --lc-* sur <html> (styles : assets/css/designs.css et designs-gen.css, toutes
  *   leurs règles commencent par un de ces attributs), et quelques petits passages sur l'écran (icônes au trait, en-tête de la fiche,
- *   noms en minuscules, petit portrait des lignes, date du journal, Sosa des cases d'arbre, secondes des messages).
- *   index.php pose les attributs au plus tôt (copie gardée dans 'lcnda-designs-ui-v1'), pour qu'il n'y ait pas de clignotement.
+ *   petit portrait des lignes, Sosa des cases d'arbre, secondes des messages).
+ *   index.php pose les attributs au plus tôt (copie gardée dans 'lcnda-designs-ui-v2'), pour qu'il n'y ait pas de clignotement.
  * Recoupements (une seule source chaque fois) :
+ *   A1 traits : leur couleur vient des couleurs de l'Apparence ; un thème à soi avec ses propres traits (« ✎ Mes thèmes ») garde les siens ;
  *   A5 couleurs homme / femme = celles des portraits (K7, app-portraits.js : 'genealogie-portraits'.m / .f) ;
- *   A7 « Actuelle » = la police et la taille choisies dans Apparence ; une autre carte A7 passe devant (sauf Accessibilité → police) ;
- *   A7 taille du texte se multiplie avec Accessibilité → taille du texte (même façon d'agrandir) ;
- *   A8 : Accessibilité → « Réduire les animations » garde toujours la priorité (rien ne bouge) ;
+ *   A7 : Accessibilité → « Réduire les animations » garde toujours la priorité (rien ne bouge) ;
  *   A2 : la colonne de gauche compacte (K15) et la « Taille typographique » d'Apparence restent à part, et s'ajoutent.
- * API : window.LCNDA_DESIGNS = {KEY, DEFS, PRESETS, read, write, clean, apply, attrsOf, applyTo, decorate, presetState, isOn, isModified, …}
+ * API : window.LCNDA_DESIGNS = {KEY, DEFS, IDS, read, write, clean, migrate, portable, apply, attrsOf, applyTo, decorate, isOn, isModified, …}
  */
 (() => {
     'use strict';
@@ -28,30 +32,31 @@
     const clone = o => JSON.parse(JSON.stringify(o));
     const HEX = /^#[0-9a-f]{6}$/i;
     const KEY = 'genealogie-designs';
-    const SETS_KEY = 'genealogie-designs-presets';
-    const CACHE_KEY = 'lcnda-designs-ui-v1'; // la copie des attributs lue par index.php avant tout le reste (pas un réglage)
-    const OPEN_KEY = 'lcnda-designs-open'; // sections ouvertes de la page
-    const PREV_KEY = 'lcnda-designs-prev-tab'; // clair / sombre / les deux, onglet du grand aperçu
+    const VER = 2; // A1 à A8 (avant : A1 à A10, sans numéro de version)
+    const CACHE_KEY = 'lcnda-designs-ui-v2'; // la copie des attributs lue par index.php avant tout le reste (pas un réglage)
+    const OPEN_KEY = 'lcnda-designs-open-v2'; // sections ouvertes de la page
+    const PREV_KEY = 'lcnda-designs-prev-v2'; // clair / sombre / les deux, pour chaque aperçu
+    // ce que les anciennes versions gardaient, effacé au chargement : les ensembles enregistrés (retirés), les copies d’avant
+    const OLD_KEYS = ['genealogie-designs-presets', 'lcnda-designs-ui-v1', 'lcnda-designs-open', 'lcnda-designs-prev-tab'];
     const K7_DEF = {m: '#3c78d8', f: '#d9488f'};
 
-    /* ═════════════════════════ Les 10 réglages (textes de la maquette validée) ═════════════════════════ */
+    /* ═════════════════════════ Les 8 réglages (textes de la maquette validée) : la forme, jamais la police ni les couleurs ═════════════════════════ */
     const DEFS = {
-        a1: {n: 'A1', icon: '🎨', title: 'Style général', q: 'Quel style général veux-tu ?', help: 'Les traits, les ombres, les coins et la couleur d’accent de toute l’app : blocs, boutons, fenêtres, listes.', cols: 'four', screens: ['fiche', 'liste', 'dash'],
+        a1: {n: 'A1', icon: '🎨', title: 'Style général', q: 'Quel style général veux-tu ?', help: 'Les traits, les ombres et les coins de toute l’app : blocs, boutons, fenêtres, listes. Les couleurs et la police restent celles de l’Apparence.', cols: 'four', screens: ['fiche', 'liste', 'dash'],
             variants: [
-                {k: 'avant', t: 'Comme avant', sub: 'traits noirs, ombres franches', d: {r: 0, bw: 2, sh: 'franches', acc: '', grid: true},
-                    why: [['👍', '<b>Rien ne bouge</b> : le style « néo-brutal » que tu connais, net et très lisible.'], ['👎', 'Beaucoup de traits noirs épais et d’ombres bleues : ça peut paraître chargé sur un grand écran plein de blocs.']]},
-                {k: 'doux', t: 'Doux', sub: 'coins arrondis, ombres légères', d: {r: 10, bw: 1, sh: 'douces', acc: '#2f5fd0', grid: false},
-                    why: [['👍', '<b>Plus calme pour les yeux</b> : traits gris fins, coins ronds, ombres floues comme sur un téléphone.'], ['👎', 'Les blocs se détachent un peu moins du fond.']]},
-                {k: 'papier', t: 'Papier ancien', sub: 'sépia, polices à empattements', d: {r: 3, bw: 1.5, sh: 'douces', acc: '#8a4b1f', grid: false},
-                    why: [['👍', '<b>L’ambiance des archives</b> : fond crème, encre brune, titres comme dans un vieux registre.'], ['👎', 'Moins de contraste : à éviter si tu as du mal à lire les gris.']]},
-                {k: 'sobre', t: 'Sobre', sub: 'sans ombres, gris clair', d: {r: 4, bw: 1, sh: 'aucune', acc: '#2457b8', grid: false},
+                {k: 'avant', t: 'Comme avant', sub: 'traits épais, ombres franches', d: {r: 0, bw: 2, sh: 'franches', grid: true},
+                    why: [['👍', '<b>Rien ne bouge</b> : le style « néo-brutal » que tu connais, net et très lisible.'], ['👎', 'Beaucoup de traits épais et d’ombres décalées : ça peut paraître chargé sur un grand écran plein de blocs.']]},
+                {k: 'doux', t: 'Doux', sub: 'coins arrondis, ombres légères', d: {r: 10, bw: 1, sh: 'douces', grid: false},
+                    why: [['👍', '<b>Plus calme pour les yeux</b> : traits fins et pâles, coins ronds, ombres floues comme sur un téléphone.'], ['👎', 'Les blocs se détachent un peu moins du fond.']]},
+                {k: 'papier', t: 'Papier ancien', sub: 'traits fins, grain du papier', d: {r: 3, bw: 1.5, sh: 'douces', grid: false},
+                    why: [['👍', '<b>L’ambiance des archives</b> : coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence.'], ['👎', 'Plus discret que « Comme avant » : les blocs se détachent un peu moins.']]},
+                {k: 'sobre', t: 'Sobre', sub: 'sans ombres, traits clairs', d: {r: 4, bw: 1, sh: 'aucune', grid: false},
                     why: [['👍', '<b>Le plus discret</b> : rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures.'], ['👎', 'Un peu « bureau » : moins de caractère que les autres.']]},
             ],
             settings: [
                 {k: 'r', type: 'range', label: 'Arrondi des coins', min: 0, max: 16, step: 1, unit: 'px', why: 'Des coins droits font « dossier d’archives » ; arrondis, l’app paraît plus douce et plus moderne. Le même arrondi va partout (blocs, boutons, champs, fenêtres).'},
-                {k: 'bw', type: 'range', label: 'Épaisseur des traits', min: .5, max: 3, step: .5, unit: 'px', why: 'Des traits épais séparent nettement les blocs (utile si tu vois mal) ; des traits fins allègent les pages pleines de cadres.'},
+                {k: 'bw', type: 'range', label: 'Épaisseur des traits', min: .5, max: 3, step: .5, unit: 'px', why: 'Des traits épais séparent nettement les blocs (utile si tu vois mal) ; des traits fins allègent les pages pleines de cadres. Leur couleur suit les couleurs de l’Apparence ; un thème à toi qui a ses propres traits (Apparence → ✎ Mes thèmes) garde les siens.'},
                 {k: 'sh', type: 'select', label: 'Ombres', options: [['franches', 'Franches, décalées en bleu (comme avant)'], ['douces', 'Douces et floues'], ['aucune', 'Aucune ombre']], why: 'L’ombre dit « ceci est un bloc qu’on peut toucher ». Franches, elles donnent du relief ; douces, elles sont presque invisibles ; sans ombre, c’est le plus sobre (et le plus net à l’impression).'},
-                {k: 'acc', type: 'color', label: 'Couleur d’accent', why: 'C’est la couleur des boutons principaux, de l’onglet choisi, des numéros et du Sosa. Choisis-en une assez foncée pour que le texte blanc reste lisible dessus. Avec « Comme avant », c’est la couleur principale de l’Apparence.'},
                 {k: 'grid', type: 'toggle', label: 'Fond quadrillé', text: 'Petits carreaux derrière les pages', why: 'Le quadrillage rappelle le papier millimétré et aide à aligner à l’œil ; sans lui, le fond est plus calme.'},
             ]},
         a2: {n: 'A2', icon: '↕', title: 'Densité', q: 'Combien d’espace autour des choses ?', help: 'L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons.', cols: 'three', screens: ['liste', 'fiche', 'dash'],
@@ -88,14 +93,14 @@
                 {k: 'avant', t: 'En-tête actuel', sub: 'carré photo, grand nom', d: {photo: true, under: 'dates', badges: 'droite', bh: 150},
                     why: [['👍', '<b>Rien ne bouge</b> : grand nom très lisible, outils toujours à droite.'], ['👎', 'Beaucoup de blanc sous le nom ; la photo est petite et en gris.']]},
                 {k: 'bandeau', t: 'Bandeau photo large', sub: 'une photo de famille en haut', d: {photo: true, under: 'lieux', badges: 'sous', bh: 150},
-                    why: [['👍', '<b>Chaleureux</b> : une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil.'], ['👎', 'Prend de la hauteur ; sans photo, le bandeau prend la couleur d’accent.']]},
+                    why: [['👍', '<b>Chaleureux</b> : une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil.'], ['👎', 'Prend de la hauteur ; sans photo, le bandeau prend la couleur principale (Apparence).']]},
                 {k: 'acte', t: 'Style « acte ancien »', sub: 'papier, phrase d’état civil', d: {photo: true, under: 'tout', badges: 'sous', bh: 150},
                     why: [['👍', '<b>Se lit comme un acte</b> : « Née le … à …, décédée le … », portrait ovale sépia, tampon Sosa.'], ['👎', 'Moins de place pour les boutons ; plus décoratif que pratique.']]},
                 {k: 'carte', t: 'Style « carte d’identité »', sub: 'champs rangés, photo d’identité', d: {photo: true, under: 'tout', badges: 'droite', bh: 150},
                     why: [['👍', '<b>Tout d’un coup d’œil</b> : nom, prénoms, naissance, décès rangés dans des cases fixes.'], ['👎', 'Le nom est moins grand ; un style plus « administratif ».']]},
             ],
             settings: [
-                {k: 'photo', type: 'toggle', label: 'Photo', text: 'Montrer la photo de la fiche quand elle existe', why: 'Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur d’accent).'},
+                {k: 'photo', type: 'toggle', label: 'Photo', text: 'Montrer la photo de la fiche quand elle existe', why: 'Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur principale de l’Apparence).'},
                 {k: 'under', type: 'select', label: 'Sous le nom', options: [['dates', 'Les dates seules (comme avant)'], ['lieux', 'Les dates et les lieux'], ['tout', 'Dates, lieux et métier']], why: 'Les lieux évitent d’ouvrir les blocs pour savoir d’où vient la personne ; le métier aide à distinguer les homonymes.'},
                 {k: 'badges', type: 'select', label: 'Pastilles', options: [['droite', 'À droite, les unes sous les autres (comme avant)'], ['sous', 'Sous le nom, sur une ligne']], why: 'À droite, elles ne gênent pas le nom ; sous le nom, elles se lisent avec lui et l’en-tête est moins haut.'},
                 {k: 'bh', type: 'range', label: 'Hauteur du bandeau', min: 90, max: 240, step: 10, unit: 'px', only: ['bandeau'], why: 'Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo.'},
@@ -118,7 +123,7 @@
                 {k: 'dates', type: 'toggle', label: 'Dates', text: 'Écrire les dates dans les cases', why: 'Les dates évitent de confondre deux Louise BORIE ; sans elles, l’arbre est plus léger (elles restent au survol).'},
                 {k: 'sosa', type: 'toggle', label: 'Sosa', text: 'Petit badge Sosa sur la case', why: 'Tu vois tout de suite le numéro de chaque ancêtre direct, utile pour parler d’un ancêtre (« le 6 »).'},
             ]},
-        a6: {n: 'A6', icon: '🔘', title: 'Boutons', q: 'Quels boutons veux-tu ?', help: 'Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur d’accent.', cols: 'three', screens: ['fenetre', 'boutons', 'fiche'],
+        a6: {n: 'A6', icon: '🔘', title: 'Boutons', q: 'Quels boutons veux-tu ?', help: 'Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence.', cols: 'three', screens: ['fenetre', 'boutons', 'fiche'],
             variants: [
                 {k: 'avant', t: 'Pleins', sub: 'comme avant', d: {size: 'normale', shadow: true, shape: 'blocs'},
                     why: [['👍', '<b>Rien ne bouge</b> : chaque bouton est une vraie « touche » encadrée, avec son ombre.'], ['👎', 'Quand il y a beaucoup de boutons, on ne voit plus lequel est important.']]},
@@ -128,28 +133,11 @@
                     why: [['👍', '<b>Le plus épuré</b> : « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol.'], ['👎', 'Peut se confondre avec un lien ; demande un peu d’habitude.']]},
             ],
             settings: [
-                {k: 'size', type: 'select', label: 'Taille', options: [['petite', 'Petite (34 px)'], ['normale', 'Normale, 42 px (comme avant)'], ['grande', 'Grande (50 px)']], why: 'Les grands boutons sont plus faciles à viser, surtout sur une tablette ; les petits laissent plus de place au contenu.'},
+                {k: 'size', type: 'select', label: 'Taille', options: [['petite', 'Petite (34 px)'], ['normale', 'Normale, 42 px (comme avant)'], ['grande', 'Grande (50 px)']], why: 'La hauteur et la marge des boutons : les grands sont plus faciles à viser, surtout sur une tablette ; les petits laissent plus de place au contenu. La taille des lettres reste celle de l’Apparence.'},
                 {k: 'shadow', type: 'toggle', label: 'Ombre', text: 'Une ombre sous les boutons', why: 'L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune).'},
                 {k: 'shape', type: 'select', label: 'Coins', options: [['blocs', 'Comme les blocs (réglage A1)'], ['pilule', 'Bien ronds (pilule)']], why: 'Des boutons bien ronds se distinguent des cadres et des champs ; comme les blocs, tout reste cohérent.'},
             ]},
-        a7: {n: 'A7', icon: '🔤', title: 'Police de l’interface', q: 'Quelle police pour lire ?', help: 'La police de tous les textes de l’app (pas celle de tes documents ni de tes mises en page).', cols: 'four', screens: ['fiche', 'liste', 'menu'],
-            variants: [
-                {k: 'avant', t: 'Actuelle', sub: 'celle de l’Apparence', d: {size: 100, lh: 1.45, caps: true, titles: 'texte'},
-                    why: [['👍', '<b>Rien ne bouge</b> : la police choisie dans Apparence (« Police de caractères »), nette sur tous les écrans.'], ['👎', 'Certaines lettres se ressemblent (I, l, 1 ; rn et m) : gênant pour les noms anciens.']]},
-                {k: 'lisible', t: 'Plus lisible', sub: 'type Atkinson Hyperlegible', d: {size: 106, lh: 1.55, caps: true, titles: 'texte'},
-                    why: [['👍', '<b>Faite pour les malvoyants</b> : chaque lettre a une forme bien à elle (Il1, O0, rn/m).'], ['👎', 'Un peu plus large : les longues lignes se coupent plus tôt.']]},
-                {k: 'serif', t: 'À empattements', sub: 'comme un livre', d: {size: 104, lh: 1.5, caps: true, titles: 'serif'},
-                    why: [['👍', '<b>Ambiance livre et registre</b> : agréable pour lire de longues notes et des transcriptions.'], ['👎', 'Moins nette en tout petit (badges, menus serrés).']]},
-                {k: 'grande', t: 'Grande taille partout', sub: 'la même police, en plus grand', d: {size: 122, lh: 1.55, caps: true, titles: 'texte'},
-                    why: [['👍', '<b>Sans lunettes</b> : tout est plus grand d’un coup, menus et listes compris.'], ['👎', 'Moins de choses à l’écran ; à combiner avec la densité « Compacte » si besoin.']]},
-            ],
-            settings: [
-                {k: 'size', type: 'range', label: 'Taille du texte', min: 85, max: 140, step: 1, unit: '%', why: 'Agrandit tout le texte de l’app d’un coup, sans toucher au zoom du navigateur. 100 % = comme avant. Elle s’ajoute à la taille du texte de Maintenance → Accessibilité.'},
-                {k: 'lh', type: 'range', label: 'Interligne', min: 1.2, max: 1.9, step: .05, unit: '×', why: 'Plus d’espace entre les lignes rend les longs textes (notes, transcriptions) plus faciles à suivre.'},
-                {k: 'caps', type: 'toggle', label: 'Noms de famille', text: 'Écrire les noms de famille en CAPITALES', why: 'L’habitude des généalogistes : on distingue tout de suite le nom du prénom (« Louise BORIE »). Sans, c’est plus doux à lire (« Louise Borie »).'},
-                {k: 'titles', type: 'select', label: 'Titres', options: [['texte', 'Même police que le texte'], ['serif', 'À empattements'], ['gras', 'Extra-gras']], why: 'Des titres différents du texte aident à se repérer dans une page longue.'},
-            ]},
-        a8: {n: 'A8', icon: '🎞', title: 'Mouvements', q: 'Comment les choses apparaissent-elles ?', help: 'Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle.', cols: 'three', screens: ['motion', 'boutons'],
+        a7: {n: 'A7', icon: '🎞', title: 'Mouvements', q: 'Comment les choses apparaissent-elles ?', help: 'Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle.', cols: 'three', screens: ['motion', 'boutons'],
             variants: [
                 {k: 'avant', t: 'Instantané', sub: 'comme avant', d: {dur: 150, hover: true, bar: true, reduce: true},
                     why: [['👍', '<b>Rien ne bouge</b> : fenêtres et menus apparaissent d’un coup ; les boutons s’enfoncent au survol, le message glisse un peu.'], ['👎', 'L’apparition brusque peut surprendre : on ne voit pas d’où vient la fenêtre.']]},
@@ -164,7 +152,7 @@
                 {k: 'bar', type: 'toggle', label: 'Messages', text: 'Barre bleue du temps qui reste (messages H7)', why: 'La barre qui se vide montre combien de temps il reste pour cliquer « ↶ Annuler ». Sans elle, le temps s’écrit en secondes.'},
                 {k: 'reduce', type: 'toggle', label: 'Ordinateur', text: 'Suivre le réglage « réduire les animations » de l’ordinateur', why: 'Si tu as demandé moins d’animations à ton Mac ou à Windows, l’app passe toute seule en « Aucune animation ». Et si « Réduire les animations » est coché dans Maintenance → Accessibilité, rien ne bouge, quel que soit ce choix.'},
             ]},
-        a9: {n: 'A9', icon: '☰', title: 'Listes', q: 'Comment séparer les lignes des listes ?', help: 'Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux.', cols: 'four', screens: ['liste', 'side'],
+        a8: {n: 'A8', icon: '☰', title: 'Listes', q: 'Comment séparer les lignes des listes ?', help: 'Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux.', cols: 'four', screens: ['liste', 'side'],
             variants: [
                 {k: 'avant', t: 'Comme avant', sub: 'chaque liste garde le sien', d: {hover: 'pale', sel: 'plein', av: false, sticky: true},
                     why: [['👍', '<b>Rien ne bouge</b> : traits dans les Listes, cartes encadrées dans la colonne Personnes.'], ['👎', 'Deux façons de faire selon l’endroit.']]},
@@ -181,50 +169,34 @@
                 {k: 'av', type: 'toggle', label: 'Portrait', text: 'Un petit portrait au début de chaque ligne', why: 'Les visages et les couleurs du genre aident à retrouver une personne sans lire.'},
                 {k: 'sticky', type: 'toggle', label: 'En-têtes', text: 'Les titres des colonnes restent en haut quand on fait défiler', why: 'Dans une longue liste, tu sais toujours quelle colonne est la naissance et laquelle est le décès.'},
             ]},
-        a10: {n: 'A10', icon: '▦', title: 'Tableau de bord', q: 'Comment ranger le tableau de bord ?', help: 'La page d’accueil avec tes widgets (chiffres clés, bilan, cette semaine, rappels…).', cols: 'three', screens: ['dash'],
-            variants: [
-                {k: 'avant', t: 'Grille libre', sub: 'comme avant', d: {cols: 3, jw: 760, wgap: 20, num: true, empty: true},
-                    why: [['👍', '<b>Rien ne bouge</b> : chaque widget a sa largeur (1, ½, ⅓…) et tu les places où tu veux.'], ['👎', 'Des trous apparaissent quand les widgets n’ont pas la même hauteur.']]},
-                {k: 'colonnes', t: 'Colonnes fixes', sub: '2 à 4 colonnes égales', d: {cols: 3, jw: 760, wgap: 16, num: true, empty: true},
-                    why: [['👍', '<b>Pas de trous</b> : les widgets s’empilent dans des colonnes, comme un tableau d’affichage.'], ['👎', 'Les largeurs choisies (½, ⅓…) ne comptent plus.']]},
-                {k: 'journal', t: 'Une seule colonne', sub: 'façon « journal »', d: {cols: 3, jw: 720, wgap: 12, num: false, empty: false},
-                    why: [['👍', '<b>Se lit de haut en bas</b> comme le journal du matin, avec la date du jour en titre.'], ['👎', 'Il faut faire défiler pour tout voir.']]},
-            ],
-            settings: [
-                {k: 'cols', type: 'range', label: 'Nombre de colonnes', min: 2, max: 4, step: 1, unit: 'col.', only: ['colonnes'], why: '3 colonnes sur un écran normal ; 2 sur un portable ; 4 sur un très grand écran.'},
-                {k: 'jw', type: 'range', label: 'Largeur du journal', min: 520, max: 980, step: 20, unit: 'px', only: ['journal'], why: 'Une colonne pas trop large se lit mieux : l’œil n’a pas à aller loin pour revenir à la ligne.'},
-                {k: 'wgap', type: 'range', label: 'Espace entre widgets', min: 6, max: 30, step: 1, unit: 'px', why: 'Plus d’espace sépare les sujets ; moins d’espace montre plus de widgets à la fois.'},
-                {k: 'num', type: 'toggle', label: 'Numéros', text: 'Les losanges numérotés (01, 02…) devant les titres', why: 'Les numéros aident à se parler (« regarde le widget 04 ») ; sans eux, c’est plus calme.'},
-                {k: 'empty', type: 'toggle', label: 'Widgets vides', text: 'Montrer les widgets qui n’ont rien à dire aujourd’hui', why: 'Cachés, la page ne montre que ce qui compte ce jour-là ; visibles, chaque widget garde sa place.'},
-            ]},
     };
     const IDS = Object.keys(DEFS);
     const V = (id, k) => DEFS[id].variants.find(v => v.k === k) || DEFS[id].variants[0];
     const defOf = (id, k) => ({v: V(id, k).k, ...clone(V(id, k).d)});
     const SHARED = new Set(['m', 'f']); // A5 : les couleurs des portraits (K7), pas « retouché »
 
-    /* ═════════════════════════ Ensembles prêts ═════════════════════════ */
-    const PRESETS = [
-        {k: 'avant', t: 'Comme avant', set: {}, why: 'L’app telle que tu la connais : rien ne change.'},
-        {k: 'doux', t: 'Doux et clair', set: {a1: 'doux', a2: 'aeree', a3: 'trait', a4: 'bandeau', a5: 'genre', a6: 'contour', a8: 'petit', a9: 'traits', a10: 'colonnes'}, why: 'Coins ronds, ombres légères, beaucoup d’air et de petites animations : reposant au quotidien.'},
-        {k: 'archives', t: 'Archives anciennes', set: {a1: 'papier', a3: 'trait', a4: 'acte', a5: 'photo', a6: 'texte', a7: 'serif', a8: 'petit', a9: 'zebre', a10: 'journal'}, why: 'Papier crème, encre brune, polices à empattements, fiche comme un acte : l’ambiance des registres.'},
-        {k: 'lisible', t: 'Très lisible', set: {a1: 'sobre', a2: 'aeree', a3: 'deux', a4: 'carte', a5: 'genre', a7: 'lisible', a8: 'aucun', a9: 'zebre', a10: 'journal'}, tweak: {a1: {bw: 2, acc: '#0047b3'}, a7: {size: 116}, a3: {ic: 19, lbl: true}, a6: {size: 'grande'}}, why: 'Grand texte bien dessiné, traits nets, une ligne sur deux grisée, aucune animation, noms à côté des icônes.'},
-        {k: 'compact', t: 'Compact pour petit écran', set: {a1: 'sobre', a2: 'compacte', a3: 'trait', a5: 'mini', a6: 'texte', a9: 'traits', a10: 'journal'}, tweak: {a2: {auto: true}, a6: {size: 'petite'}}, why: 'Serré, sans ombres, cases d’arbre mini et tableau de bord en une colonne : tout tient sur un portable.'},
-    ];
-    function presetState(p, keepColors = null) {
-        const G = {};
-        IDS.forEach(id => { G[id] = {...defOf(id, p.set[id] || 'avant'), ...clone((p.tweak || {})[id] || {})}; });
-        if (keepColors) { G.a5.m = keepColors.m; G.a5.f = keepColors.f; }
-        return G;
-    }
+    /** tout « Comme avant » (le départ) */
+    const defaults = (colors = null) => clean({}, colors);
 
     /* ═════════════════════════ Le réglage : lu, vérifié, gardé ═════════════════════════ */
     const k7Colors = () => { try { const S = P()?.read?.(); return {m: HEX.test(S?.m || '') ? S.m : K7_DEF.m, f: HEX.test(S?.f || '') ? S.f : K7_DEF.f}; } catch (_) { return {...K7_DEF}; } };
     const snap = (v, s) => { const n = Math.round((v - s.min) / s.step) * s.step + s.min; return Math.round(Math.max(s.min, Math.min(s.max, n)) * 1000) / 1000; };
+    const isObj = o => !!o && typeof o === 'object' && !Array.isArray(o);
+    /** un ancien réglage (A1 à A10, sans « ver ») → A1 à A8 : A7 police et A10 tableau de bord sont oubliés,
+     *  A8 Mouvements devient A7, A9 Listes devient A8 (la couleur d'accent d'A1 est oubliée par clean) */
+    function migrate(raw) {
+        if (!isObj(raw)) return {};
+        if (raw.ver === VER) return raw;
+        const o = {};
+        ['a1', 'a2', 'a3', 'a4', 'a5', 'a6'].forEach(id => { if (isObj(raw[id])) o[id] = raw[id]; });
+        if (isObj(raw.a8)) o.a7 = raw.a8;
+        if (isObj(raw.a9)) o.a8 = raw.a9;
+        return o;
+    }
     /** seulement des valeurs connues (elles sont écrites telles quelles dans les styles) */
     function clean(raw, colors = null) {
-        const r = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
-        const G = {};
+        const r = migrate(raw);
+        const G = {ver: VER}; // (un réglage déjà relu ne repasse pas par migrate)
         IDS.forEach(id => {
             const x = r[id] && typeof r[id] === 'object' ? r[id] : {};
             const v = DEFS[id].variants.some(o => o.k === x.v) ? x.v : 'avant';
@@ -235,7 +207,7 @@
                     if (s.type === 'range') { const n = Number(val); if (val !== null && val !== '' && Number.isFinite(n) && n !== o[k]) o[k] = snap(n, s); } // la valeur de la carte reste telle quelle
                     else if (s.type === 'select') { if (s.options.some(([ov]) => ov === val)) o[k] = val; }
                     else if (s.type === 'toggle') { if (typeof val === 'boolean') o[k] = val; }
-                    else if (s.type === 'color' || s.type === 'colors') { if (HEX.test(String(val || ''))) o[k] = String(val).toLowerCase(); else if (val === '' && id === 'a1' && v === 'avant') o[k] = ''; }
+                    else if (s.type === 'colors') { if (HEX.test(String(val || ''))) o[k] = String(val).toLowerCase(); }
                 });
             });
             G[id] = o;
@@ -244,8 +216,12 @@
         G.a5.m = c.m; G.a5.f = c.f;
         return G;
     }
-    const stored = G => { const o = clone(G); delete o.a5.m; delete o.a5.f; return o; };
-    function read() { let raw = null; try { raw = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (_) { raw = null; } return clean(raw); }
+    /** ce qui est gardé (et emporté par les réglages enregistrés, le défaut du site…) : avec son numéro de version, sans les couleurs des portraits */
+    const stored = G => { const o = {...clone(G), ver: VER}; delete o.a5.m; delete o.a5.f; return o; };
+    const readRaw = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (_) { return null; } };
+    function read() { return clean(readRaw()); }
+    /** une valeur de 'genealogie-designs' venue d'ailleurs (fichier, autre version) → la même, à neuf ('' si tout est « Comme avant ») */
+    function portable(raw) { const g = clean(typeof raw === 'string' ? (() => { try { return JSON.parse(raw); } catch (_) { return null; } })() : raw); return IDS.some(id => isOn(g, id)) ? JSON.stringify(stored(g)) : ''; }
     function write(G, {silent = false} = {}) {
         const g = clean(G, {m: HEX.test(G?.a5?.m || '') ? G.a5.m.toLowerCase() : k7Colors().m, f: HEX.test(G?.a5?.f || '') ? G.a5.f.toLowerCase() : k7Colors().f});
         try {
@@ -259,39 +235,30 @@
     }
     const isModified = (G, id) => { const d = defOf(id, G[id].v); return Object.keys(d).some(k => !SHARED.has(k) && k !== 'v' && G[id][k] !== d[k]); };
     const isOn = (G, id) => G[id].v !== 'avant' || isModified(G, id);
-    const same = (a, b) => IDS.every(id => { const x = a[id], y = b[id]; return Object.keys({...x, ...y}).every(k => SHARED.has(k) || x[k] === y[k]); });
-    const presetOf = G => PRESETS.find(p => same(G, presetState(p)));
 
     /* ── couleurs ── */
     const hx = h => [0, 2, 4].map(i => parseInt(h.slice(1 + i, 3 + i), 16));
     const toHex = a => '#' + a.map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0')).join('');
     const mix = (a, b, t) => { const x = hx(a), y = hx(b); return toHex(x.map((v, i) => v * (1 - t) + y[i] * t)); };
-    const lum = h => { const c = hx(h).map(v => v / 255).map(v => (v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4)); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; };
-    const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
-    /** le texte qui se lit le mieux sur une couleur : blanc, ou presque noir */
-    const onColor = bg => (contrast(bg, '#ffffff') >= contrast(bg, '#0d1118') ? '#ffffff' : '#0d1118');
 
     /* ═════════════════════════ Attributs et variables posés sur <html> ═════════════════════════ */
-    const ATTRS = ['style', 'lines', 'sh', 'r', 'grid', 'acc', 'cards', 'density', 'dauto', 'icons', 'icred', 'iclbl', 'fiche', 'fphoto', 'funder', 'fbadges', 'tree', 'tw', 'tlinks', 'tdates', 'tsosa',
-        'btn', 'bsize', 'bshadow', 'bshape', 'font', 'fz', 'lh', 'caps', 'titles', 'motion', 'mhover', 'mbar', 'mreduce', 'list', 'lhover', 'lsel', 'lav', 'lsticky', 'dash', 'wgap', 'dnum', 'dempty'].map(a => 'data-lc-' + a);
-    const VARS = ['--lc-k', '--lc-r', '--lc-acc-l', '--lc-acc-d', '--lc-acc-soft-l', '--lc-acc-soft-d', '--lc-on-acc-l', '--lc-on-acc-d', '--lc-sp', '--lc-rowh', '--lc-ic', '--lc-icw', '--lc-bh', '--lc-tw', '--lc-tm', '--lc-tf',
-        '--lc-tm-bg', '--lc-tf-bg', '--lc-tm-tx', '--lc-tf-tx', '--lc-tm-bgd', '--lc-tf-bgd', '--lc-tm-txd', '--lc-tf-txd', '--lc-fz', '--lc-lh', '--lc-dur', '--lc-cols', '--lc-jw', '--lc-wgap'];
+    const ATTRS = ['style', 'lines', 'sh', 'r', 'grid', 'density', 'dauto', 'icons', 'icred', 'iclbl', 'fiche', 'fphoto', 'funder', 'fbadges', 'tree', 'tw', 'tlinks', 'tdates', 'tsosa',
+        'btn', 'bsize', 'bshadow', 'bshape', 'motion', 'mhover', 'mbar', 'mreduce', 'list', 'lhover', 'lsel', 'lav', 'lsticky'].map(a => 'data-lc-' + a);
+    const VARS = ['--lc-k', '--lc-r', '--lc-sp', '--lc-rowh', '--lc-ic', '--lc-icw', '--lc-bh', '--lc-tw', '--lc-tm', '--lc-tf',
+        '--lc-tm-bg', '--lc-tf-bg', '--lc-tm-tx', '--lc-tf-tx', '--lc-tm-bgd', '--lc-tf-bgd', '--lc-tm-txd', '--lc-tf-txd', '--lc-dur'];
+    // posés par les anciennes versions (couleur d'accent, palette, A7 police, A10 tableau de bord) : toujours retirés
+    const OLD_ATTRS = ['acc', 'cards', 'font', 'fz', 'lh', 'caps', 'titles', 'dash', 'wgap', 'dnum', 'dempty'].map(a => 'data-lc-' + a);
+    const OLD_VARS = ['--lc-acc-l', '--lc-acc-d', '--lc-acc-soft-l', '--lc-acc-soft-d', '--lc-on-acc-l', '--lc-on-acc-d', '--lc-fz', '--lc-lh', '--lc-cols', '--lc-jw', '--lc-wgap'];
     /** {attrs, vars} d'un réglage : rien du tout pour « Comme avant » */
     function attrsOf(G) {
         const a = {}, v = {}, B = id => defOf(id, 'avant');
         if (isOn(G, 'a1')) {
             const d = G.a1, b = B('a1');
-            a['data-lc-style'] = d.v;
-            if (d.v !== 'avant') a['data-lc-cards'] = '1';
+            a['data-lc-style'] = d.v; // (jamais de couleur : celles de l'Apparence restent)
             if (d.v !== 'avant' || d.bw !== b.bw) { a['data-lc-lines'] = '1'; v['--lc-k'] = String(d.bw / 2); }
-            if (d.sh !== b.sh || d.acc) a['data-lc-sh'] = d.sh;
+            if (d.sh !== b.sh) a['data-lc-sh'] = d.sh;
             if (d.r !== b.r) { a['data-lc-r'] = '1'; v['--lc-r'] = `${d.r}px`; }
             if (!d.grid) a['data-lc-grid'] = 'off';
-            if (HEX.test(d.acc || '')) {
-                a['data-lc-acc'] = '1'; let t = .25, dk = mix(d.acc, '#ffffff', t); while (t < .8 && contrast(dk, '#2a2a2a') < 4.6) { t += .05; dk = mix(d.acc, '#ffffff', t); } // en sombre : assez clair pour se lire sur les fonds sombres
-                v['--lc-acc-l'] = d.acc; v['--lc-acc-d'] = dk; v['--lc-acc-soft-l'] = mix(d.acc, '#ffffff', .88); v['--lc-acc-soft-d'] = mix(d.acc, '#1e1e1e', .78);
-                v['--lc-on-acc-l'] = onColor(d.acc); v['--lc-on-acc-d'] = onColor(dk);
-            }
         }
         if (isOn(G, 'a2')) {
             const d = G.a2; a['data-lc-density'] = d.v; v['--lc-sp'] = String(d.sp / 100); v['--lc-rowh'] = `${d.rowh}px`;
@@ -324,38 +291,25 @@
             if (d.shape !== 'blocs') a['data-lc-bshape'] = d.shape;
         }
         if (isOn(G, 'a7')) {
-            const d = G.a7, b = B('a7'); a['data-lc-font'] = d.v;
-            if (d.size !== b.size) { a['data-lc-fz'] = '1'; v['--lc-fz'] = String(d.size / 100); }
-            if (d.lh !== b.lh) { a['data-lc-lh'] = '1'; v['--lc-lh'] = String(d.lh); }
-            if (!d.caps) a['data-lc-caps'] = 'off';
-            if (d.titles !== 'texte') a['data-lc-titles'] = d.titles;
-        }
-        if (isOn(G, 'a8')) {
-            const d = G.a8; a['data-lc-motion'] = d.v; v['--lc-dur'] = `${d.v === 'petit' ? d.dur : d.v === 'aucun' ? 0 : 150}ms`;
+            const d = G.a7; a['data-lc-motion'] = d.v; v['--lc-dur'] = `${d.v === 'petit' ? d.dur : d.v === 'aucun' ? 0 : 150}ms`;
             if (!d.hover) a['data-lc-mhover'] = 'off';
             if (!d.bar) a['data-lc-mbar'] = 'off';
             if (d.reduce) a['data-lc-mreduce'] = '1';
         }
-        if (isOn(G, 'a9')) {
-            const d = G.a9, b = B('a9'); a['data-lc-list'] = d.v;
+        if (isOn(G, 'a8')) {
+            const d = G.a8, b = B('a8'); a['data-lc-list'] = d.v;
             if (d.hover !== b.hover) a['data-lc-lhover'] = d.hover;
             if (d.sel !== b.sel) a['data-lc-lsel'] = d.sel;
             if (d.av) a['data-lc-lav'] = '1';
             if (!d.sticky) a['data-lc-lsticky'] = 'off';
-        }
-        if (isOn(G, 'a10')) {
-            const d = G.a10, b = B('a10'); a['data-lc-dash'] = d.v; v['--lc-cols'] = String(d.cols); v['--lc-jw'] = `${d.jw}px`;
-            if (d.wgap !== b.wgap) { a['data-lc-wgap'] = '1'; v['--lc-wgap'] = `${d.wgap}px`; }
-            if (!d.num) a['data-lc-dnum'] = 'off';
-            if (!d.empty) a['data-lc-dempty'] = 'off';
         }
         return {attrs: a, vars: v};
     }
     /** pose un réglage sur un élément <html> (la page, ou un aperçu) */
     function applyTo(el, G) {
         const {attrs, vars} = attrsOf(G);
-        ATTRS.forEach(n => { if (!(n in attrs) && el.hasAttribute(n)) el.removeAttribute(n); });
-        VARS.forEach(n => { if (!(n in vars)) el.style.removeProperty(n); });
+        [...ATTRS, ...OLD_ATTRS].forEach(n => { if (!(n in attrs) && el.hasAttribute(n)) el.removeAttribute(n); });
+        [...VARS, ...OLD_VARS].forEach(n => { if (!(n in vars)) el.style.removeProperty(n); });
         Object.entries(attrs).forEach(([n, x]) => { if (el.getAttribute(n) !== x) el.setAttribute(n, x); });
         Object.entries(vars).forEach(([n, x]) => el.style.setProperty(n, x));
         const doc = el.ownerDocument || document;
@@ -496,21 +450,19 @@
         const other = list.find(m => m.filename !== p.portrait) || list[0];
         return other ? mediaUrl(other.filename || other.thumbnail) : '';
     };
-    const caps = (G, s) => (G.a7.v !== undefined && isOn(G, 'a7') && !G.a7.caps ? titleCase(s) : s);
-    function titleCase(s) { return String(s || '').replace(/(^|[\s'’(-])(\p{Lu}{2,})(?=$|[\s'’),.-])/gu, (all, pre, w) => pre + w.charAt(0) + w.slice(1).toLocaleLowerCase('fr-FR')); }
     /** la phrase d'état civil (« Née le … à …, fille de … et de …, épouse de …, décédée le … ») */
-    function acteText(detail, under, G) {
+    function acteText(detail, under) {
         const p = detail.person || {}, f = fem(p), b = evOf(detail, ['BIRT', 'BAPT', 'CHR']), d = evOf(detail, ['DEAT', 'BURI']);
         const parts = [];
         const at = e => (under !== 'dates' && e?.place_name ? ` à <b>${esc(placeLong(e))}</b>` : '');
         if (b) parts.push(`${b.gedcom_tag === 'BIRT' ? (f ? 'Née' : 'Né') : (f ? 'Baptisée' : 'Baptisé')}${b.date_text ? ` le <b>${esc(b.date_text)}</b>` : ''}${at(b)}`);
         const occ = occOf(detail); if (under === 'tout' && occ) parts.push(`<b>${esc(occ.toLocaleLowerCase('fr-FR'))}</b>`);
         const par = (detail.parents || []).slice(0, 2);
-        if (par.length) parts.push(`${f ? 'fille' : 'fils'} de ${par.map(x => esc(caps(G, nameOf(x)))).join(' et de ')}`);
+        if (par.length) parts.push(`${f ? 'fille' : 'fils'} de ${par.map(x => esc(nameOf(x))).join(' et de ')}`);
         const sp = (detail.partners || [])[0];
-        if (sp && under !== 'dates') parts.push(`${f ? 'épouse' : 'époux'} de ${esc(caps(G, nameOf(sp)))}`);
+        if (sp && under !== 'dates') parts.push(`${f ? 'épouse' : 'époux'} de ${esc(nameOf(sp))}`);
         if (d) parts.push(`${d.gedcom_tag === 'DEAT' ? (f ? 'décédée' : 'décédé') : (f ? 'inhumée' : 'inhumé')}${d.date_text ? ` le <b>${esc(d.date_text)}</b>` : ''}${at(d)}`);
-        if (!parts.length) return `${esc(caps(G, nameOf(p)))} : rien n’est encore noté sur sa naissance ni sur son décès.`;
+        if (!parts.length) return `${esc(nameOf(p))} : rien n’est encore noté sur sa naissance ni sur son décès.`;
         const s = parts.join(', ') + '.';
         return s.charAt(0).toLocaleUpperCase('fr-FR') + s.slice(1);
     }
@@ -562,7 +514,7 @@
             add('<div class="lc-acte-orn lc-dz" aria-hidden="true">— ❦ —</div>', 'afterbegin');
             const grp = p.surname_group ? ` · Groupe ${esc(p.surname_group)}` : '';
             nm?.querySelector('h2, h1')?.insertAdjacentHTML('beforebegin', `<div class="lc-acte-k lc-dz">Extrait de la fiche n° ${esc(p.id)}${grp}</div>`);
-            add(`<p class="lc-acte-txt lc-dz">${acteText(detail, d.under, G)}</p>`);
+            add(`<p class="lc-acte-txt lc-dz">${acteText(detail, d.under)}</p>`);
             const sosa = hero.querySelector('.ui-badge.is-sosa');
             if (sosa) { const n = (sosa.textContent.match(/[\d&\s]+$/) || [''])[0].trim(); sosa.classList.add('lc-dz-hide'); sosa.insertAdjacentHTML('beforebegin', `<span class="lc-acte-stamp lc-dz" title="${esc(sosa.title || 'Numéro Sosa')}"><span>SOSA<b>${esc(n)}</b></span></span>`); }
         }
@@ -571,7 +523,7 @@
             const prenoms = [p.first_name, p.middle_name].filter(Boolean).join(' ') || '—';
             const cell = (k, v, wide) => `<div class="${wide ? 'is-wide' : ''}"><small>${k}</small><b>${v ? esc(v) : '—'}</b></div>`;
             const gender = p.gender === 'female' ? 'F' : p.gender === 'male' ? 'M' : '?';
-            const rows = [cell('Nom', caps(G, p.last_name || ''), true), cell('Prénom(s)', prenoms, true),
+            const rows = [cell('Nom', p.last_name || '', true), cell('Prénom(s)', prenoms, true),
                 cell(b && b.gedcom_tag !== 'BIRT' ? (f ? 'Baptisée le' : 'Baptisé le') : (f ? 'Née le' : 'Né le'), b?.date_text), d.under === 'dates' ? cell('Sexe', gender) : cell('à', placeLong(b)),
                 cell(dd && dd.gedcom_tag !== 'DEAT' ? (f ? 'Inhumée le' : 'Inhumé le') : (f ? 'Décédée le' : 'Décédé le'), dd?.date_text), d.under === 'dates' ? cell('Groupe', p.surname_group) : cell('à', placeLong(dd))];
             if (d.under === 'tout') rows.push(cell('Métier', occ, true));
@@ -587,16 +539,8 @@
     ext.afterPerson = ext.afterPerson || [];
     ext.afterPerson.push(detail => { lastDetail = detail; const run = () => decorateHero(document.querySelector('#workspace .person-hero'), detail, cur()); run(); setTimeout(run, 0); });
 
-    /* ═════════════════════════ Les petits passages sur l'écran (A3, A5, A7, A9, A10, A8) ═════════════════════════ */
-    /** A7 : noms de famille en minuscules (« Louise Borie ») dans les endroits qui montrent un nom */
-    const NAME_SEL = '.person-hero h2, .person-list-item strong, .tree-card strong, .data-table .table-link[data-open-person], .pk-name, .lineage-person, .relation-chip strong, .relations-strip strong, .lc-carte-f b, .pk-chip b';
-    function capsNames(root, on) {
-        root.querySelectorAll(NAME_SEL).forEach(el => {
-            if (on) { if (el.dataset.lcCaps !== undefined) return; const w = el.ownerDocument.createTreeWalker(el, 4); let t; let changed = false; const orig = []; while ((t = w.nextNode())) { const nv = titleCase(t.nodeValue); orig.push(t.nodeValue); if (nv !== t.nodeValue) { t.nodeValue = nv; changed = true; } } if (changed) el.dataset.lcCaps = JSON.stringify(orig); }
-            else if (el.dataset.lcCaps !== undefined) { try { const orig = JSON.parse(el.dataset.lcCaps); const w = el.ownerDocument.createTreeWalker(el, 4); let t, i = 0; while ((t = w.nextNode())) { if (orig[i] != null) t.nodeValue = orig[i]; i++; } } catch (_) {} delete el.dataset.lcCaps; }
-        });
-    }
-    /** A9 : un petit portrait au début des lignes des tableaux de personnes */
+    /* ═════════════════════════ Les petits passages sur l'écran (A3, A5, A7, A8) ═════════════════════════ */
+    /** A8 : un petit portrait au début des lignes des tableaux de personnes */
     const peopleCache = new Map(); let peopleAsked = false;
     function rowAvatars(root, on, people) {
         root.querySelectorAll('.lc-row-av').forEach(x => { if (!on) x.remove(); });
@@ -625,21 +569,7 @@
             if (on && G.a5.sosa) { const id = Number(c.dataset.treePerson) || 0; let s = 0; try { s = Number(A().sosaNumberFor?.(id)) || 0; } catch (_) {} if (!s && c.dataset.lcSosa) s = Number(c.dataset.lcSosa); if (s) c.insertAdjacentHTML('beforeend', `<span class="lc-tree-sosa lc-dz" title="Sosa ${s}">${s}</span>`); }
         });
     }
-    /** A10 : la date du jour en titre du journal */
-    const DAYS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'], MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-    function journalHead(root, G, stats) {
-        const page = root.querySelector('.dashboard-page');
-        page?.querySelectorAll(':scope > .lc-journal').forEach(x => x.remove());
-        if (!page || !isOn(G, 'a10') || G.a10.v !== 'journal') return;
-        const d = new Date(), day = `${DAYS[d.getDay()]} ${d.getDate() === 1 ? '1er' : d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
-        const s = stats || A().state?.bootstrap?.stats || {};
-        const plural = (n, w) => (A().plural ? A().plural(n, w) : `${n} ${w}${n > 1 ? 's' : ''}`);
-        const bits = [Number(s.personnes) ? plural(Number(s.personnes), 'personne') : '', Number(s['événements']) ? plural(Number(s['événements']), 'événement') : '', Number(s['médias']) ? plural(Number(s['médias']), 'média') : ''].filter(Boolean);
-        const head = page.querySelector(':scope > .page-header');
-        const html = `<div class="lc-journal lc-dz"><span class="eyebrow">Ton journal</span><b>${day.charAt(0).toUpperCase() + day.slice(1)}</b>${bits.length ? `<span>${esc(bits.join(' · '))}</span>` : ''}</div>`;
-        if (head) head.insertAdjacentHTML('afterend', html); else page.insertAdjacentHTML('afterbegin', html);
-    }
-    /** A8 : sans la barre bleue, le temps qui reste s'écrit en secondes */
+    /** A7 : sans la barre bleue, le temps qui reste s'écrit en secondes */
     function toastSeconds(root, on) {
         root.querySelectorAll('.toast.ui-toast').forEach(t => {
             const bar = t.querySelector('.ui-toast-bar'); let sec = t.querySelector('.lc-toast-s');
@@ -658,17 +588,15 @@
         const doc = root.ownerDocument || document;
         if ((icMode.get(doc) || '') !== want) { unwrapIcons(root); icMode.set(doc, want); }
         if (want) wrapIcons(root, want, doc);
-        capsNames(root, isOn(G, 'a7') && !G.a7.caps);
-        rowAvatars(root, isOn(G, 'a9') && G.a9.av, ctx.people || A().state?.people);
+        rowAvatars(root, isOn(G, 'a8') && G.a8.av, ctx.people || A().state?.people);
         treeCards(root, G);
-        journalHead(root, G, ctx.stats);
-        toastSeconds(root, isOn(G, 'a8') && !G.a8.bar);
+        toastSeconds(root, isOn(G, 'a7') && !G.a7.bar);
         if (ctx.detail) decorateHero(root.querySelector('.person-hero'), ctx.detail, G);
     }
     // sur la page : un seul passage par image, seulement quand un réglage le demande
     let queued = false, mo = null, busy = false;
-    const needsWork = G => isOn(G, 'a3') || (isOn(G, 'a7') && !G.a7.caps) || (isOn(G, 'a9') && G.a9.av) || isOn(G, 'a5') || (isOn(G, 'a10') && G.a10.v === 'journal') || (isOn(G, 'a8') && !G.a8.bar)
-        || document.querySelector('.lc-ic, [data-lc-caps], .lc-row-av, .lc-tree-sosa, .lc-journal, .lc-toast-s, [data-lc-title]');
+    const needsWork = G => isOn(G, 'a3') || (isOn(G, 'a8') && G.a8.av) || isOn(G, 'a5') || (isOn(G, 'a7') && !G.a7.bar)
+        || document.querySelector('.lc-ic, .lc-row-av, .lc-tree-sosa, .lc-toast-s, [data-lc-title]');
     function scheduleDecorate() {
         if (queued || typeof requestAnimationFrame !== 'function') return; queued = true;
         requestAnimationFrame(() => {
@@ -684,7 +612,7 @@
         mo = new MutationObserver(recs => { if (busy) return; if (recs.some(r => r.addedNodes.length)) scheduleDecorate(); });
         mo.observe(document.body, {childList: true, subtree: true});
         // les secondes des messages : une fois par seconde, seulement s'il y en a
-        setInterval(() => { const G = cur(); if (isOn(G, 'a8') && !G.a8.bar && document.querySelector('.toast.ui-toast')) toastSeconds(document.body, true); }, 500);
+        setInterval(() => { const G = cur(); if (isOn(G, 'a7') && !G.a7.bar && document.querySelector('.toast.ui-toast')) toastSeconds(document.body, true); }, 500);
         return true;
     }
     if (typeof document !== 'undefined' && document.addEventListener) { if (!watch()) document.addEventListener('DOMContentLoaded', () => { watch(); scheduleDecorate(); }, {once: true}); }
@@ -696,7 +624,7 @@
     const SNAP = {}; // dernières vues de l'app (en mémoire seulement) : dash, fiche
     function cleanClone(el) {
         const c = el.cloneNode(true);
-        unwrapIcons(c); capsNames(c, false);
+        unwrapIcons(c);
         c.querySelectorAll('.person-hero').forEach(undecorateHero);
         c.querySelectorAll('.lc-dz, .lc-journal, .lc-row-av, .lc-tree-sosa, script').forEach(x => x.remove());
         c.querySelectorAll('[id]').forEach(x => x.removeAttribute('id'));
@@ -763,7 +691,7 @@
     }
     function sideHtml(people, curId) {
         const rows = (people || []).slice(0, 5);
-        const PG = PREVIEW_G || cur(), lcAv = UI().avatarOn?.() || (isOn(PG, 'a9') && PG.a9.av);
+        const PG = PREVIEW_G || cur(), lcAv = UI().avatarOn?.() || (isOn(PG, 'a8') && PG.a8.av);
         return `<div class="lcd-pv-side"><div class="person-list">${rows.map((p, i) => `<button class="person-list-item ${lcAv ? 'has-lc-av' : ''} ${(curId ? Number(p.id) === Number(curId) : i === 2) ? 'is-active' : ''}"><span class="life-dot ${esc(p.living_status || '')}"></span>${lcAv && UI().avatar ? UI().avatar({...p, name: nameOf(p), photo: p.portrait ? mediaUrl(p.portrait) : ''}, 34) : ''}<span class="person-list-copy"><strong>${pName(p)}</strong><small>${esc(yearsTxt(p) || '—')}</small></span></button>`).join('')}</div></div>`;
     }
     function menuHtml(people) {
@@ -877,31 +805,26 @@
     }
 
     /* ═════════════════════════ Maintenance → 🎨 Designs au choix ═════════════════════════ */
-    const PCARD = {a1: ['nav', 'ficheHead', 'liste'], a2: ['liste', 'ficheHead'], a3: ['ficheHead', 'boutons'], a4: ['ficheHead'], a5: ['arbre'], a6: ['fenetre', 'boutons'], a7: ['ficheHead', 'liste'], a8: ['motion'], a9: ['liste', 'side'], a10: ['dash']};
-    const PPREV = {a1: ['nav', 'fiche', 'liste', 'fenetre', 'dash'], a2: ['liste', 'fiche', 'side', 'menu'], a3: ['fiche', 'dash', 'boutons'], a4: ['fiche'], a5: ['arbre'], a6: ['fenetre', 'boutons', 'ficheHead'], a7: ['nav', 'fiche', 'liste', 'menu'], a8: ['motion', 'boutons'], a9: ['liste', 'side', 'menu'], a10: ['dash']};
-    const ENS_TABS = [['fiche', '👤 Fiche'], ['liste', '☰ Liste'], ['menu', '🔍 Menu de choix'], ['fenetre', '🗔 Fenêtre'], ['arbre', '🌳 Arbre'], ['dash', '▦ Tableau de bord'], ['motion', '🎞 Mouvements']];
+    const PCARD = {a1: ['nav', 'ficheHead', 'liste'], a2: ['liste', 'ficheHead'], a3: ['ficheHead', 'boutons'], a4: ['ficheHead'], a5: ['arbre'], a6: ['fenetre', 'boutons'], a7: ['motion'], a8: ['liste', 'side']};
+    const PPREV = {a1: ['nav', 'fiche', 'liste', 'fenetre', 'dash'], a2: ['liste', 'fiche', 'side', 'menu'], a3: ['fiche', 'dash', 'boutons'], a4: ['fiche'], a5: ['arbre'], a6: ['fenetre', 'boutons', 'ficheHead'], a7: ['motion', 'boutons'], a8: ['liste', 'side', 'menu']};
     const lsGet = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
-    const openSet = () => { const o = lsGet(OPEN_KEY, []); return new Set(Array.isArray(o) ? o.filter(x => x === 'ens' || IDS.includes(x)) : []); };
+    const openSet = () => { const o = lsGet(OPEN_KEY, []); return new Set(Array.isArray(o) ? o.filter(x => IDS.includes(x)) : []); };
     const prevPrefs = () => { const o = lsGet(PREV_KEY, {}); return o && typeof o === 'object' ? o : {}; };
     const modeOf = id => { const m = prevPrefs()[id]; return ['clair', 'sombre', 'deux'].includes(m) ? m : (A().state && document.documentElement.dataset.theme === 'dark' ? 'sombre' : 'clair'); };
-    const savedSets = () => { const l = lsGet(SETS_KEY, []); return Array.isArray(l) ? l.filter(x => x && typeof x.name === 'string' && x.data && typeof x.data === 'object') : []; };
-    const saveSets = l => lsSet(SETS_KEY, l);
     const choiceName = (G, id) => { const v = V(id, G[id].v); return v.t + (G[id].v === 'avant' && !/comme avant/i.test(v.t) ? ' (comme avant)' : ''); };
     const tagHtml = (v, mod) => `${v.k === 'avant' ? '<span class="lcd-tag">Par défaut</span>' : '<span class="lcd-tag is-new">Nouveau</span>'}${mod ? '<span class="lcd-tag is-mod">retouché</span>' : ''}`;
     const whyList = why => `<ul class="lcd-why-list">${why.map(([i, t]) => `<li><span aria-hidden="true">${i}</span><span>${t}</span></li>`).join('')}</ul>`;
     let PAGE = null; // {box, data, G}
 
     function summaryHtml(id, G) {
-        if (id === 'ens') { const p = presetOf(G); return `<span class="lcd-step">★</span><b class="lcd-sec-t">Ensembles prêts</b><span class="lcd-sep">—</span><span class="lcd-cur${p && p.k === 'avant' ? '' : ' is-chg'}">${esc(p ? p.t : 'Mélange perso')}</span>`; }
         const D = DEFS[id], mod = isModified(G, id);
         return `<span class="lcd-step">${D.n}</span><span class="lcd-sec-ic" aria-hidden="true">${D.icon}</span><b class="lcd-sec-t">${esc(D.title)}</b><span class="lcd-sep">—</span><span class="lcd-cur${isOn(G, id) ? ' is-chg' : ''}">${esc(V(id, G[id].v).t)}</span>${mod ? '<span class="lcd-tag is-mod">retouché</span>' : ''}`;
     }
     function tocHtml(G) {
-        return `<nav class="lcd-toc" aria-label="Aller à un réglage"><ol>${[['ens', '★', 'Ensembles prêts'], ...IDS.map(id => [id, DEFS[id].n, DEFS[id].title])].map(([id, n, t]) => {
-            const p = id === 'ens' ? presetOf(G) : null;
-            const curT = id === 'ens' ? (p ? p.t : 'Mélange perso') : choiceName(G, id) + (isModified(G, id) ? ' · retouché' : '');
-            const chg = id === 'ens' ? !(p && p.k === 'avant') : isOn(G, id);
+        return `<nav class="lcd-toc" aria-label="Aller à un réglage"><ol>${IDS.map(id => [id, DEFS[id].n, DEFS[id].title]).map(([id, n, t]) => {
+            const curT = choiceName(G, id) + (isModified(G, id) ? ' · retouché' : '');
+            const chg = isOn(G, id);
             return `<li><button type="button" class="lcd-toc-i" data-lcd-go="${id}"><span class="lcd-step">${n}</span><span class="lcd-toc-tx"><b>${esc(t)}</b><small class="${chg ? 'is-chg' : ''}">${esc(curT)}</small></span></button></li>`;
         }).join('')}</ol></nav>`;
     }
@@ -910,12 +833,6 @@
         return `<details class="lcd-sec" id="lcd-${id}" data-lcd-sec="${id}"${open ? ' open' : ''}><summary class="lcd-sum"><span class="lcd-sum-t" data-lcd-sum></span><span class="lcd-saved" data-lcd-saved role="status"></span><span class="lcd-chev" aria-hidden="true"></span></summary><div class="lcd-body" data-lcd-body>${open ? '' : ''}</div></details>`;
     }
     function bodyHtml(id, G) {
-        if (id === 'ens') {
-            return `<div class="lcd-head"><p class="muted">Un clic règle A1 à A10 d’un coup. Tu peux ensuite retoucher chaque réglage plus bas, puis garder ton mélange dans « 💾 Réglages enregistrés ».</p><button type="button" class="button small secondary" data-lcd-reset="all">↺ Remettre comme au départ</button></div>
-                <div class="lcd-choices five" role="radiogroup" aria-label="Ensembles prêts" data-lcd-choices="ens"></div>
-                <div data-lcd-sets></div>
-                <aside class="lcd-preview is-wide" data-lcd-preview="ens"><div class="lcd-preview-head"><b>👁 Tout ensemble, sur les vrais écrans</b>${modeSeg('ens')}</div><div class="segmented lcd-ens-tabs" role="tablist">${ENS_TABS.map(([k, t]) => `<button type="button" role="tab" data-lcd-etab="${k}">${t}</button>`).join('')}</div><div class="lcd-preview-body" data-lcd-prevbody></div></aside>`;
-        }
         const D = DEFS[id];
         return `<div class="lcd-head"><p class="muted">${esc(D.q)} ${esc(D.help)}</p><button type="button" class="button small secondary" data-lcd-reset="${id}">↺ Remettre comme au départ</button></div>
             <div class="lcd-choices ${D.cols}" role="radiogroup" aria-label="${esc(D.title)}" data-lcd-choices="${id}"></div>
@@ -926,18 +843,10 @@
     function modeSeg(id) { const m = modeOf(id); return `<div class="segmented lcd-mode" role="group" aria-label="Clair ou sombre" data-lcd-mode="${id}">${[['clair', '☀︎ Clair'], ['sombre', '☾ Sombre'], ['deux', 'Les deux']].map(([k, t]) => `<button type="button" data-m="${k}" class="${m === k ? 'is-active' : ''}" aria-pressed="${m === k}">${t}</button>`).join('')}</div>`; }
     function choicesFill(box, id, G, data) {
         const host = box.querySelector(`[data-lcd-choices="${id}"]`); if (!host) return;
-        if (id === 'ens') {
-            const curP = presetOf(G);
-            host.innerHTML = PRESETS.map(p => { const on = curP?.k === p.k; const S = presetState(p, G.a5);
-                return `<div class="lcd-choice${on ? ' is-active' : ''}" role="radio" tabindex="0" aria-checked="${on}" data-lcd-preset="${p.k}"><div class="lcd-choice-top"><span class="lcd-radio"></span><h3>${esc(p.t)}</h3>${p.k === 'avant' ? '<span class="lcd-tag">Par défaut</span>' : '<span class="lcd-tag is-new">Nouveau</span>'}</div><div class="lcd-stage" data-lcd-stage></div><p class="lcd-choice-why">${esc(p.why)}</p><div class="lcd-preset-names">${IDS.map(i => `<span class="${S[i].v !== 'avant' ? 'is-chg' : ''}">${DEFS[i].n} ${esc(V(i, S[i].v).t)}</span>`).join('')}</div></div>`; }).join('')
-                + (curP ? '' : '<div class="lcd-choice is-active is-mix" role="radio" aria-checked="true"><div class="lcd-choice-top"><span class="lcd-radio"></span><h3>Mélange perso</h3><span class="lcd-tag is-mod">retouché</span></div><p class="muted">Tes réglages ne correspondent à aucun ensemble prêt. Enregistre-les ci-dessous (« 💾 Réglages enregistrés ») pour les retrouver.</p></div>');
-            host.querySelectorAll('[data-lcd-preset]').forEach(c => { const p = PRESETS.find(x => x.k === c.dataset.lcdPreset); mountFrame(c.querySelector('[data-lcd-stage]'), {G: presetState(p, G.a5), dark: false, screens: ['ficheHead', 'liste'], data: {...data, people: (data.people || []).slice(0, 3)}, W: 880}); });
-            return;
-        }
         const D = DEFS[id], curV = G[id].v;
         host.innerHTML = D.variants.map(v => { const on = curV === v.k, mod = on && isModified(G, id);
-            return `<div class="lcd-choice${on ? ' is-active' : ''}" role="radio" tabindex="0" aria-checked="${on}" data-lcd-v="${v.k}"><div class="lcd-choice-top"><span class="lcd-radio"></span><h3>${esc(v.t)}</h3>${tagHtml(v, mod)}</div><div class="lcd-choice-sub muted">${esc(v.sub || '')}</div><div class="lcd-stage${id === 'a8' ? ' is-tall' : ''}" data-lcd-stage></div>${whyList(v.why)}</div>`; }).join('');
-        host.querySelectorAll('[data-lcd-v]').forEach(c => { const S = clone(G); S[id] = c.dataset.lcdV === curV ? clone(G[id]) : {...defOf(id, c.dataset.lcdV), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; mountFrame(c.querySelector('[data-lcd-stage]'), {G: S, dark: false, screens: PCARD[id], data, W: ({a5: 880, a10: 1200, a8: 560})[id] || 880}); });
+            return `<div class="lcd-choice${on ? ' is-active' : ''}" role="radio" tabindex="0" aria-checked="${on}" data-lcd-v="${v.k}"><div class="lcd-choice-top"><span class="lcd-radio"></span><h3>${esc(v.t)}</h3>${tagHtml(v, mod)}</div><div class="lcd-choice-sub muted">${esc(v.sub || '')}</div><div class="lcd-stage${id === 'a7' ? ' is-tall' : ''}" data-lcd-stage></div>${whyList(v.why)}</div>`; }).join('');
+        host.querySelectorAll('[data-lcd-v]').forEach(c => { const S = clone(G); S[id] = c.dataset.lcdV === curV ? clone(G[id]) : {...defOf(id, c.dataset.lcdV), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; mountFrame(c.querySelector('[data-lcd-stage]'), {G: S, dark: false, screens: PCARD[id], data, W: ({a5: 880, a7: 560})[id] || 880}); });
     }
     function settingsFill(box, id, G) {
         const host = box.querySelector(`[data-lcd-set="${id}"]`); if (!host) return;
@@ -949,7 +858,7 @@
             const key = Array.isArray(s.k) ? s.k.join('-') : s.k;
             if (s.type === 'select') ctl = `<select data-lcd-k="${s.k}" aria-label="${esc(s.label)}"${off ? ' disabled' : ''}>${s.options.map(([v, t]) => `<option value="${v}"${o[s.k] === v ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select>`;
             if (s.type === 'toggle') ctl = `<label class="ui-toggle"><input type="checkbox" data-lcd-k="${s.k}"${o[s.k] ? ' checked' : ''}${off ? ' disabled' : ''}><i></i><span>${esc(s.text)}</span></label>`;
-            if (s.type === 'range' || s.type === 'color' || s.type === 'colors') ctl = `<span class="lcd-slot" data-lcd-slot="${key}"></span>`;
+            if (s.type === 'range' || s.type === 'colors') ctl = `<span class="lcd-slot" data-lcd-slot="${key}"></span>`;
             return `<div class="lcd-set${off ? ' is-off' : ''}" data-lcd-row="${key}"><div class="lcd-set-row"><span class="lcd-lab">${esc(s.label)}</span><div class="lcd-ctl">${ctl}</div></div>${off ? `<span class="lcd-offnote">Seulement avec ${esc(onlyNames)}.</span>` : ''}<p class="lcd-why"><b>Pourquoi ?</b> ${esc(s.why)}</p></div>`;
         }).join('');
         DEFS[id].settings.forEach(s => {
@@ -963,12 +872,12 @@
                 else { slot.innerHTML = `<input type="range" min="${s.min}" max="${s.max}" step="${s.step}" value="${o[s.k]}">`; inp = slot.querySelector('input'); }
                 inp.dataset.lcdK = s.k; inp.setAttribute('aria-label', s.label); if (off) { inp.disabled = true; field?.classList.add('is-disabled'); }
             }
-            if (s.type === 'color' || s.type === 'colors') {
-                const keys = Array.isArray(s.k) ? s.k : [s.k], slot = host.querySelector(`[data-lcd-slot="${keys.join('-')}"]`); if (!slot) return;
+            if (s.type === 'colors') {
+                const keys = s.k, slot = host.querySelector(`[data-lcd-slot="${keys.join('-')}"]`); if (!slot) return;
                 keys.forEach((k, i) => {
-                    const val = o[k] || (id === 'a1' ? (getComputedStyle(document.documentElement).getPropertyValue('--blue').trim() || '#0066cc') : '#3c78d8');
+                    const val = o[k] || '#3c78d8';
                     const wrap = document.createElement('label'); wrap.className = 'lcd-color';
-                    wrap.innerHTML = `<span>${esc(s.labels ? s.labels[i] : (o[k] ? 'Couleur' : 'Celle de l’Apparence'))}</span>`;
+                    wrap.innerHTML = `<span>${esc(s.labels[i])}</span>`;
                     if (UI().colorField) { const f = UI().colorField({value: /^#[0-9a-f]{6}$/i.test(val) ? val : '#0066cc', compact: false}); f.input.dataset.lcdK = k; wrap.appendChild(f); }
                     else { wrap.insertAdjacentHTML('beforeend', `<input type="color" value="${esc(val)}" data-lcd-k="${k}">`); }
                     slot.appendChild(wrap);
@@ -983,29 +892,9 @@
         pv.querySelectorAll(`[data-lcd-mode="${id}"] button`).forEach(b => { b.classList.toggle('is-active', b.dataset.m === m); b.setAttribute('aria-pressed', String(b.dataset.m === m)); });
         const body = pv.querySelector('[data-lcd-prevbody]');
         const modes = m === 'deux' ? [false, true] : [m === 'sombre'];
-        let screens = PPREV[id], W;
-        if (id === 'ens') { const t = ENS_TABS.some(([k]) => k === prevPrefs().ensTab) ? prevPrefs().ensTab : 'fiche'; pv.querySelectorAll('[data-lcd-etab]').forEach(b => { const on = b.dataset.lcdEtab === t; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); }); screens = t === 'fiche' ? ['nav', 'fiche'] : [t]; W = t === 'dash' ? 1200 : t === 'fiche' ? 1000 : undefined; }
+        const screens = PPREV[id], W = undefined;
         if (body.children.length !== modes.length) body.innerHTML = modes.map(() => '<div class="lcd-stage is-preview"></div>').join('');
         [...body.children].forEach((slot, i) => mountFrame(slot, {G, dark: modes[i], screens, data, labels: true, W, labelSuffix: modes.length > 1 ? (modes[i] ? ' · sombre' : ' · clair') : ''}));
-    }
-    function setsFill(box) {
-        const slot = box.querySelector('[data-lcd-sets]'); if (!slot || slot.lcdFrame || !UI().presetsFrame) return;
-        const today = () => new Date().toISOString();
-        const frame = UI().presetsFrame({id: 'designs', what: 'tes designs au choix (A1 à A10)', list: savedSets, quietApply: true,
-            apply: i => { const x = savedSets()[i]; if (!x) return false; commit(clean(x.data, HEX.test(x.data?.a5?.m || '') ? {m: x.data.a5.m, f: x.data.a5.f} : null), `Réglages « ${x.name} » appliqués`, 'ens'); return false; },
-            save: name => { const l = savedSets(), it = {name, date: today(), data: clone(cur())}, i = l.findIndex(x => x.name === name); if (i >= 0) l[i] = it; else l.push(it); saveSets(l); },
-            replace: i => { const l = savedSets(); if (!l[i]) return false; l[i] = {...l[i], date: today(), data: clone(cur())}; saveSets(l); },
-            rename: (i, name) => { const l = savedSets(); if (!l[i]) return false; l[i].name = name; saveSets(l); },
-            duplicate: i => { const l = savedSets(), x = l[i]; if (!x) return false; const nm = UI().freeName ? UI().freeName(x.name, l.map(y => y.name)) : x.name + ' (copie)'; l.splice(i + 1, 0, {name: nm, date: today(), data: clone(x.data)}); saveSets(l); },
-            exportOne: i => { const x = savedSets()[i]; if (x) A().exportSettingFile?.('designs', x.name, {data: clean(x.data)}); return false; },
-            remove: i => { const l = savedSets(), x = l[i]; if (!x) return false; if (A().undoLocalChange) A().undoLocalChange(`Réglage « ${x.name} » supprimé`, [SETS_KEY], () => { l.splice(i, 1); saveSets(l); }, () => { if (frame.isConnected) frame.refresh(); }); else { l.splice(i, 1); saveSets(l); } },
-            importOne: async () => {
-                const got = await A().importSettingFile?.('designs', {names: savedSets().map(x => x.name), check: d => d && typeof d.data === 'object' && d.data && !Array.isArray(d.data)});
-                if (!got) return false;
-                const l = savedSets(); l.push({name: got.nom, date: today(), data: clean(got.donnees.data)}); saveSets(l);
-                toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`);
-            }});
-        slot.replaceWith(frame); frame.dataset.lcdSets = '1'; box.lcdSetsFrame = frame;
     }
     function fillSection(id) {
         if (!PAGE) return;
@@ -1015,15 +904,14 @@
         if (!sec.open) { sec.querySelector('[data-lcd-body]').innerHTML = ''; return; }
         const body = sec.querySelector('[data-lcd-body]');
         if (!body.firstElementChild) body.innerHTML = bodyHtml(id, G);
-        if (id === 'ens') setsFill(body);
         choicesFill(body, id, G, PAGE.data);
-        if (id !== 'ens') settingsFill(body, id, G);
+        settingsFill(body, id, G);
         previewFill(body, id, G, PAGE.data);
     }
     function refreshAll(only) {
         if (!PAGE || !PAGE.box.isConnected) { PAGE = null; return; }
         PAGE.box.querySelector('.lcd-toc').outerHTML = tocHtml(cur());
-        ['ens', ...IDS].forEach(id => { if (!only || only.includes(id)) fillSection(id); else { const sec = PAGE.box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, cur()); } });
+        IDS.forEach(id => { if (!only || only.includes(id)) fillSection(id); else { const sec = PAGE.box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, cur()); } });
     }
     function flash(id) {
         const s = PAGE?.box.querySelector(`[data-lcd-sec="${id}"] [data-lcd-saved]`); if (s) { s.textContent = '✓ Enregistré'; s.classList.remove('is-fresh'); void s.offsetWidth; s.classList.add('is-fresh'); }
@@ -1036,8 +924,8 @@
         const change = () => { write(next); };
         if (A().undoLocalChange) A().undoLocalChange(label, keys, change, after); else change();
         refreshScreens();
-        refreshAll(id === 'ens' || !id ? null : ['ens', id]);
-        flash(id || 'ens');
+        refreshAll(!id ? null : [id]);
+        if (id) flash(id); else UI().pageSaved?.('saved');
     }
     /** ce qui se dessine à part dans l'app (colonne des personnes, fiche ouverte) */
     function refreshScreens() { scheduleDecorate(); }
@@ -1062,17 +950,17 @@
         const st = A().state; if (st && token !== st.workspaceToken) return;
         const ws = document.getElementById('workspace'); if (!ws) return;
         const G = cur(), opened = openSet();
-        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>🎨 Designs au choix</h2><p>Dix réglages pour changer le style de toute l’app. Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
-            <div class="lcd-intro ui-notice ui-notice-info"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Ouvre le réglage que tu veux (un clic sur son titre). Les couleurs, la police et les portraits de base se règlent toujours dans <button type="button" class="link-button" data-lcd-apparence>Maintenance → Apparence</button> ; ici, c’est le style.</span></div>
+        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>🎨 Designs au choix</h2><p>Huit réglages pour changer la forme des éléments de l’app : traits, densité, icônes, en-tête des fiches, cases des arbres, boutons, mouvements, listes. Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
+            <div class="lcd-intro ui-notice ui-notice-info"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Ici, seulement la forme. La police, la taille du texte et les couleurs (Preset, Couleur principale) se règlent dans <button type="button" class="link-button" data-lcd-apparence>Maintenance → Apparence</button> : elles passent toujours devant, quel que soit le design.</span></div>
             ${tocHtml(G)}
-            <div class="lcd-secs">${['ens', ...IDS].map(id => id === 'ens' ? `<details class="lcd-sec is-ens" id="lcd-ens" data-lcd-sec="ens"${opened.has('ens') ? ' open' : ''}><summary class="lcd-sum"><span class="lcd-sum-t" data-lcd-sum></span><span class="lcd-saved" data-lcd-saved role="status"></span><span class="lcd-chev" aria-hidden="true"></span></summary><div class="lcd-body" data-lcd-body></div></details>` : sectionShell(id, opened.has(id))).join('')}</div></section>`;
+            <div class="lcd-secs">${IDS.map(id => sectionShell(id, opened.has(id))).join('')}</div></section>`;
         const box = ws.querySelector('.lcd-page');
         PAGE = {box, data: {stats: st?.bootstrap?.stats || {}, people: st?.people || []}, G};
-        ['ens', ...IDS].forEach(id => { const sec = box.querySelector(`[data-lcd-sec="${id}"]`); sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, G); });
+        IDS.forEach(id => { const sec = box.querySelector(`[data-lcd-sec="${id}"]`); sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, G); });
         bindPage(box);
         PAGE.data = await loadData();
         if (st && token !== st.workspaceToken) return;
-        ['ens', ...IDS].forEach(id => fillSection(id));
+        IDS.forEach(id => fillSection(id));
         UI().autoSave?.(box, {redraw: () => { apply(); refreshAll(); }});
     }
     function bindPage(box) {
@@ -1086,32 +974,29 @@
             if (go) { const sec = box.querySelector(`[data-lcd-sec="${go.dataset.lcdGo}"]`); if (sec) { if (!sec.open) sec.open = true; sec.scrollIntoView({behavior: document.documentElement.classList.contains('a11y-calm') ? 'auto' : 'smooth', block: 'start'}); sec.querySelector('summary')?.focus({preventScroll: true}); } return; }
             if (e.target.closest('[data-lcd-apparence]')) { const st = A().state; if (st) { st.maintenanceTab = 'design'; } A().setModule?.('maintenance'); return; }
             const rs = e.target.closest('[data-lcd-reset]');
-            if (rs) { const id = rs.dataset.lcdReset, G = cur(); if (id === 'all') { if (IDS.every(i => !isOn(G, i))) return; commit(presetState(PRESETS[0], G.a5), 'Designs remis comme au départ', 'ens'); return; } if (!isOn(G, id)) return; const N = clone(G); N[id] = {...defOf(id, 'avant'), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; commit(N, `${DEFS[id].n} ${DEFS[id].title} remis comme au départ`, id); return; }
+            if (rs) { const id = rs.dataset.lcdReset, G = cur(); if (id === 'all') { if (IDS.every(i => !isOn(G, i))) return; commit(defaults(G.a5), 'Designs remis comme au départ', null); return; } if (!isOn(G, id)) return; const N = clone(G); N[id] = {...defOf(id, 'avant'), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; commit(N, `${DEFS[id].n} ${DEFS[id].title} remis comme au départ`, id); return; }
             const ch = e.target.closest('[data-lcd-v]'); if (ch) { pickVariant(ch); return; }
-            const pr = e.target.closest('[data-lcd-preset]'); if (pr) { pickPreset(pr); return; }
             const md = e.target.closest('[data-lcd-mode] button');
-            if (md) { const id = md.closest('[data-lcd-mode]').dataset.lcdMode, p = prevPrefs(); p[id] = md.dataset.m; lsSet(PREV_KEY, p); const sec = box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) previewFill(sec, id, cur(), PAGE.data); return; }
-            const et = e.target.closest('[data-lcd-etab]');
-            if (et) { const p = prevPrefs(); p.ensTab = et.dataset.lcdEtab; lsSet(PREV_KEY, p); const sec = box.querySelector('[data-lcd-sec="ens"]'); if (sec) previewFill(sec, 'ens', cur(), PAGE.data); }
+            if (md) { const id = md.closest('[data-lcd-mode]').dataset.lcdMode, p = prevPrefs(); p[id] = md.dataset.m; lsSet(PREV_KEY, p); const sec = box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) previewFill(sec, id, cur(), PAGE.data); }
         });
         box.addEventListener('keydown', e => {
-            const c = e.target.closest?.('[data-lcd-v], [data-lcd-preset]'); if (!c) return;
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (c.dataset.lcdV) pickVariant(c); else pickPreset(c); return; }
+            const c = e.target.closest?.('[data-lcd-v]'); if (!c) return;
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pickVariant(c); return; }
             if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) { e.preventDefault(); const all = [...c.parentElement.querySelectorAll('[role=radio][tabindex]')], i = all.indexOf(c); all[(i + (/Right|Down/.test(e.key) ? 1 : all.length - 1)) % all.length]?.focus(); }
         });
         const secOf = el => el.closest('[data-lcd-sec]')?.dataset.lcdSec;
         box.addEventListener('input', e => {
-            const t = e.target, id = secOf(t), k = t.dataset?.lcdK; if (!id || !k || id === 'ens') return;
+            const t = e.target, id = secOf(t), k = t.dataset?.lcdK; if (!id || !k || !DEFS[id]) return;
             const s = DEFS[id].settings.find(x => x.k === k || (Array.isArray(x.k) && x.k.includes(k))); if (!s) return;
             if (s.type === 'range') live(id, k, Number(t.value));
-            if (s.type === 'color' || s.type === 'colors') { if (HEX.test(t.value)) live(id, k, t.value.toLowerCase()); }
+            if (s.type === 'colors') { if (HEX.test(t.value)) live(id, k, t.value.toLowerCase()); }
         });
         box.addEventListener('change', e => {
-            const t = e.target, id = secOf(t), k = t.dataset?.lcdK; if (!id || !k || id === 'ens') return;
+            const t = e.target, id = secOf(t), k = t.dataset?.lcdK; if (!id || !k || !DEFS[id]) return;
             const s = DEFS[id].settings.find(x => x.k === k || (Array.isArray(x.k) && x.k.includes(k))); if (!s) return;
             const G = cur(), N = clone(G);
-            let val = s.type === 'toggle' ? !!t.checked : s.type === 'range' ? snap(Number(t.value), s) : s.type === 'select' ? t.value : String(t.value || '').toLowerCase();
-            if ((s.type === 'color' || s.type === 'colors') && !HEX.test(val)) return;
+            const val = s.type === 'toggle' ? !!t.checked : s.type === 'range' ? snap(Number(t.value), s) : s.type === 'select' ? t.value : String(t.value || '').toLowerCase();
+            if (s.type === 'colors' && !HEX.test(val)) return;
             if (N[id][k] === val) return;
             N[id][k] = val;
             const shown = s.type === 'toggle' ? (val ? 'activé' : 'désactivé') : s.type === 'select' ? (s.options.find(o => o[0] === val) || [0, val])[1] : s.type === 'range' ? `${String(val).replace('.', ',')} ${s.unit}` : val;
@@ -1126,39 +1011,47 @@
         commit(N, `${DEFS[id].n} ${DEFS[id].title} : ${V(id, k).t}`, id);
         requestAnimationFrame(() => PAGE?.box.querySelector(`[data-lcd-sec="${id}"] [data-lcd-v="${k}"]`)?.focus({preventScroll: true}));
     }
-    function pickPreset(c) {
-        const p = PRESETS.find(x => x.k === c.dataset.lcdPreset), G = cur(); if (!p) return;
-        if (same(G, presetState(p))) return;
-        commit(presetState(p, G.a5), `Ensemble « ${p.t} » appliqué`, 'ens');
-    }
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.designs = token => renderPage(token);
 
-    /* ═════════════════════════ Apparence ↔ Designs au choix ═════════════════════════ */
+    /* ═════════════════════════ Apparence ↔ Designs au choix ═════════════════════════
+     * Apparence garde la priorité : un design ne touche ni au Preset, ni à la couleur principale, ni à la police, ni à la taille.
+     * Le petit cadre en haut d'Apparence le dit, avec le lien et les designs changés. */
     const goDesigns = () => { const st = A().state; if (st) st.maintenanceTab = 'designs'; A().setModule?.('maintenance'); };
+    function apparenceNoteHtml(G) {
+        const on = IDS.filter(id => isOn(G, id));
+        const list = on.length ? `<small class="lcd-link-on">${esc(`${A().plural ? A().plural(on.length, 'design changé', 'designs changés') : on.length} : ${on.map(id => `${DEFS[id].n} ${V(id, G[id].v).t}${isModified(G, id) ? ' (retouché)' : ''}`).join(', ')}.`)}</small>` : '<small class="muted lcd-link-on">Tout est encore « comme avant ».</small>';
+        return `<div class="ui-notice ui-notice-info lcd-link" id="lcd-apparence-link"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span><button type="button" class="link-button" data-lcd-go-designs>🎨 Designs au choix</button> : la forme des éléments (traits, densité, icônes, en-tête des fiches, cases des arbres, boutons, listes, mouvements). La police, la taille et les couleurs se règlent ici, dans Apparence. ${list}</span></div>`;
+    }
     ext.afterDesign = ext.afterDesign || [];
     ext.afterDesign.push(() => {
         const st = A().state; if (st?.maintenanceTab !== 'design') return;
         const form = document.getElementById('design-form'); if (!form || document.getElementById('lcd-apparence-link')) return;
-        const G = cur(), on = IDS.filter(id => isOn(G, id));
-        form.insertAdjacentHTML('beforebegin', `<div class="ui-notice ui-notice-info lcd-link" id="lcd-apparence-link"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span><button type="button" class="link-button" data-lcd-go-designs>🎨 Changer le style de l’app → Designs au choix</button> <small class="muted">${on.length ? esc(`${A().plural ? A().plural(on.length, 'réglage changé', 'réglages changés') : on.length} : ${on.map(id => `${DEFS[id].n} ${V(id, G[id].v).t}`).join(', ')}`) : 'Style général, densité, icônes, fiche, arbres, boutons, police, mouvements, listes, tableau de bord : tout est encore « comme avant ».'}</small></span></div>`);
+        form.insertAdjacentHTML('beforebegin', apparenceNoteHtml(cur()));
         document.getElementById('lcd-apparence-link').addEventListener('click', e => { if (e.target.closest('[data-lcd-go-designs]')) goDesigns(); });
-        // A7 passe devant la police et la taille de l'Apparence : on le dit sous ces deux menus
-        if (isOn(G, 'a7') && G.a7.v !== 'avant') ['fontFamily', 'fontScale'].forEach(n => { const l = form.querySelector(`[name="${n}"]`)?.closest('label'); if (l && !l.querySelector('.lcd-hint')) l.insertAdjacentHTML('beforeend', `<small class="lcd-hint">${n === 'fontFamily' ? `Designs au choix → A7 « ${esc(V('a7', G.a7.v).t)} » choisit la police de l’interface.` : `Designs au choix → A7 agrandit aussi le texte (${G.a7.size} %).`}</small>`); });
-        if (G.a1.acc && isOn(G, 'a1')) { const l = form.querySelector('[name="blue"]')?.closest('label'); if (l && !l.querySelector('.lcd-hint')) l.insertAdjacentHTML('beforeend', '<small class="lcd-hint">Designs au choix → A1 choisit la couleur d’accent.</small>'); }
     });
-    /** les « 💾 Réglages enregistrés » de l'Apparence (designs) emportent aussi les designs au choix (champ a_designs) */
+    /** les « 💾 Réglages enregistrés » de l'Apparence (designs) emportent aussi les designs au choix (champ a_designs) ;
+     *  un ancien réglage (A1 à A10, ensembles…) revient sans erreur : A7 police et A10 sont ignorés */
     const prevFlat = ext.lookFlat, prevFromFlat = ext.lookFromFlat;
-    ext.lookFlat = () => ({...(prevFlat?.() || {}), a_designs: (() => { try { return localStorage.getItem(KEY) || ''; } catch (_) { return ''; } })()});
+    ext.lookFlat = () => ({...(prevFlat?.() || {}), a_designs: portable(readRaw())});
     ext.lookFromFlat = d => {
         prevFromFlat?.(d);
         if (!d || typeof d.a_designs !== 'string') return;
-        if (!d.a_designs) { try { localStorage.removeItem(KEY); } catch (_) {} apply(); return; }
-        try { const raw = JSON.parse(d.a_designs); localStorage.setItem(KEY, JSON.stringify(stored(clean(raw)))); } catch (_) {}
+        const v = d.a_designs ? portable(d.a_designs) : '';
+        try { if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); } catch (_) {}
         apply();
     };
 
     /* ═════════════════════════ Démarrage ═════════════════════════ */
+    /** les anciens choix gardés sur l'ordinateur (A7 police, A10 tableau de bord, ensembles enregistrés, couleur d'accent) :
+     *  nettoyés une fois, l'écran revient comme avant pour ces parties */
+    function tidyStorage() {
+        try {
+            OLD_KEYS.forEach(k => { if (localStorage.getItem(k) !== null) localStorage.removeItem(k); });
+            const raw = readRaw();
+            if (raw !== null && !(isObj(raw) && raw.ver === VER)) { const v = portable(raw); if (v) localStorage.setItem(KEY, v); else localStorage.removeItem(KEY); }
+        } catch (_) {}
+    }
     let snapTimer = 0;
     if (typeof document !== 'undefined' && typeof MutationObserver !== 'undefined') {
         const watchWs = () => { const ws = document.getElementById('workspace'); if (!ws) return false; new MutationObserver(() => { clearTimeout(snapTimer); snapTimer = setTimeout(snapshot, 900); }).observe(ws, {childList: true, subtree: true}); return true; };
@@ -1166,9 +1059,10 @@
     }
     // si le réglage change dans un autre onglet du navigateur
     if (typeof window !== 'undefined') window.addEventListener?.('storage', e => { if (e.key === KEY || e.key === (P()?.KEY || 'genealogie-portraits')) { apply(); refreshAll(); } });
-    window.LCNDA_DESIGNS = {KEY, SETS_KEY, CACHE_KEY, OPEN_KEY, DEFS, IDS, PRESETS, ATTRS, VARS, SV, GLYPHS, read, write, clean, apply, applyTo, attrsOf, decorate, decorateHero, wrapIcons, unwrapIcons, presetState, presetOf, isOn, isModified, defOf, titleCase, acteText,
+    window.LCNDA_DESIGNS = {KEY, VER, CACHE_KEY, OPEN_KEY, OLD_KEYS, DEFS, IDS, ATTRS, VARS, OLD_ATTRS, SV, GLYPHS, read, write, clean, migrate, portable, defaults, tidyStorage, apply, applyTo, attrsOf, decorate, decorateHero, wrapIcons, unwrapIcons, isOn, isModified, defOf, acteText, apparenceNoteHtml,
         treePhoto: () => { const G = PREVIEW_G || cur(); return isOn(G, 'a5') && G.a5.v === 'photo'; },
-        listAv: () => { const G = PREVIEW_G || cur(); return isOn(G, 'a9') && G.a9.av; },
+        listAv: () => { const G = PREVIEW_G || cur(); return isOn(G, 'a8') && G.a8.av; },
         snapshots: SNAP, render: renderPage};
+    tidyStorage();
     apply();
 })();

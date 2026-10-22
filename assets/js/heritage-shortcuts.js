@@ -104,6 +104,11 @@
     const toolOf = key => TOOLS.find(t => t.key === key);
     const actionOf = key => actions().find(a => a.key === key);
     const editTools = () => { try { return ext.editToolsList?.() || []; } catch (_) { return []; } };
+    /* ＋ Créer… : une nouvelle chose dans un « 🛠️ Outil de modification » (mêmes icônes et mots que Listes → Outils de modification) */
+    const CREATE_NAMES = {slideshow: 'Nouvelle présentation ou diaporama', seals: 'Nouvelle signature ou sceau'}; // leur bouton dit seulement « ＋ Nouveau » / « ＋ Signature ou sceau »
+    const createName = t => CREATE_NAMES[t.key] || String(t.createLabel || '').replace(/^[＋+]\s*/, '').trim() || `Nouveau projet (${t.label})`;
+    const creators = () => editTools().filter(t => typeof t.create === 'function').map(t => ({key: t.key, icon: t.icon || '🛠️', label: createName(t), tool: t}));
+    const creatorOf = key => creators().find(c => c.key === key);
 
     /* ─── Cibles : forme, nom, icône ─── */
     const RE = {
@@ -115,6 +120,7 @@
         tool: /^tool:[a-z0-9_]{1,40}$/,
         action: /^action:[a-z0-9_]{1,40}$/,
         proj: /^proj:[a-z0-9_]{1,30}:\d{1,10}$/,
+        create: /^create:[a-z0-9_]{1,30}$/,
         head: /^head:$/,
         url: /^url:https?:\/\/[^\s"'<>`\\]{1,500}$/i,
     };
@@ -139,6 +145,7 @@
         if (RE.tool.test(t)) { const x = toolOf(v); return {label: x?.label || v, icon: x?.icon || '🛠️', what: 'Outil'}; }
         if (RE.action.test(t)) { const x = actionOf(v); return {label: x?.label || v, icon: x?.icon || '⚡', what: 'Action'}; }
         if (RE.proj.test(t)) { const [k] = v.split(':'); const x = editTools().find(e => e.key === k); return {label: x ? `Projet (${x.label})` : 'Projet', icon: x?.icon || '🛠️', what: x ? `Projet · ${x.label}` : 'Projet d’un outil'}; }
+        if (RE.create.test(t)) { const x = creatorOf(v); return {label: x?.label || 'Nouvelle chose', icon: x?.icon || '🛠️', what: x ? `Créer · ${x.tool.label}` : 'Créer dans un outil'}; }
         if (RE.ent.test(t)) return {label: ENT[ty].label, icon: ENT[ty].icon, what: ENT[ty].label};
         if (RE.head.test(t)) return {label: 'Intertitre', icon: '', what: 'Intertitre'};
         return {label: t || 'Raccourci', icon: '🔗', what: ''};
@@ -151,6 +158,7 @@
         if (RE.mygraph.test(t)) return myGraphs().some(x => x.id === v);
         if (RE.tool.test(t)) return !!toolOf(v);
         if (RE.action.test(t)) return !!actionOf(v);
+        if (RE.create.test(t)) return editTools().length ? !!creatorOf(v) : null;
         return null;
     }
     const canThumb = t => RE.ent.test(t) && !!ENT[typeOf(t)]?.thumb || RE.proj.test(t);
@@ -261,6 +269,8 @@
         if (RE.tool.test(t)) { const x = toolOf(v); return x ? go(x.run) : toast('Cet outil n’existe plus.', 'error'); }
         if (RE.action.test(t)) { const x = actionOf(v); return x ? go(x.run) : toast('Cette action n’existe plus.', 'error'); }
         if (RE.proj.test(t)) { const [k, id] = v.split(':'); const tool = editTools().find(x => x.key === k); return tool?.open ? go(() => tool.open(Number(id), () => {})) : toast('Cet outil n’est pas disponible ici.', 'error'); }
+        // ＋ Créer… : l'outil s'ouvre directement sur une nouvelle chose (document vide ou son assistant de création)
+        if (RE.create.test(t)) { const x = creatorOf(v); return x ? go(() => x.tool.create(() => {})) : toast('Cet outil n’est pas disponible ici.', 'error'); }
         if (RE.ent.test(t)) {
             const id = Number(v); let info = link._info;
             if (!info && ['place', 'source', 'periodical', 'employer', 'label'].includes(ty)) { try { info = (await api('shortcut_info', {targets: t})).items?.[t]; } catch (_) {} }
@@ -318,7 +328,10 @@
         customTabs().forEach(t => push('Onglets à toi', 'tab:' + t.id, t.name || 'Mon onglet', t.icon || '🗂️', 'Onglet à toi'));
         TOOLS.forEach(t => push('Outils', 'tool:' + t.key, t.label, t.icon, 'Outil'));
         actions().forEach(a => push('Actions', 'action:' + a.key, a.label, a.icon, 'Action'));
-        return rows;
+        // ＋ Créer… en tête : une petite rubrique, à trouver sans chercher
+        const create = [];
+        creators().forEach(c => { const tg = 'create:' + c.key; if (validTarget(tg)) create.push({group: '＋ Créer…', target: tg, label: c.label, icon: c.icon, hint: `Créer · ${c.tool.label}`}); });
+        return [...create, ...rows];
     }
     const markText = (text, q) => { const P = PK(); return P?.markText ? P.markText(text, q) : esc(text); };
     function chooseTargets({title = 'Ajouter des raccourcis', eyebrow = 'RACCOURCIS'} = {}) {
