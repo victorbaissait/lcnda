@@ -289,3 +289,36 @@ dialog.modal.sw-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 .sw-reopen-r { grid-column: 4; border-left: 1px solid var(--sw-line); }
 .sw-reopen-l { grid-column: 2; border-right: 1px solid var(--sw-line); transform: rotate(180deg); }
 @media (max-width: 760px) { .sw-reopen-r { grid-column: 1 / -1; grid-row: 2; writing-mode: horizontal-tb; width: auto; padding: 6px; } }
+/* ◫ deux fichiers ; 🎨 édition rapide du CSS */
+.sw-codepanes { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+.sw-codepanes.is-two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.sw-codepanes.is-two.is-col { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
+.sw-codepanes > .sw-codehost { min-height: 0; }
+.sw-code2 { display: flex; flex-direction: column; min-width: 0; min-height: 0; border-left: 2px solid var(--sw-ink, #111); }
+.sw-codepanes.is-col .sw-code2 { border-left: 0; border-top: 2px solid var(--sw-ink, #111); }
+.sw-code2[hidden] { display: none; }
+.sw-code2bar { display: flex; align-items: stretch; border-bottom: 1px solid var(--sw-line); background: var(--sw-head); }
+.sw-code2bar select { flex: 1; min-width: 0; border: 0; background: transparent; font: 600 12.5px system-ui, sans-serif; padding: 4px 8px; }
+.sw-code2 .sw-codehost { flex: 1; min-height: 0; position: relative; }
+.sw-code { position: relative; }
+.sw-quick { position: absolute; left: 8px; right: 8px; top: 84px; z-index: 6; max-height: 70%; display: flex; flex-direction: column; background: var(--sw-bg); border: 2px solid var(--sw-ink, #111); box-shadow: 6px 6px 0 rgba(26, 92, 255, .25); }
+.sw-quick[hidden] { display: none; }
+.sw-quickhead { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 6px 8px; border-bottom: 1px solid var(--sw-line); background: var(--sw-head); }
+.sw-quickhead code { color: var(--sw-blue); }
+.sw-quickhead .spacer { flex: 1; }
+.sw-quicklist { overflow: auto; }
+.sw-quickrule { border-bottom: 1px solid var(--sw-line); }
+.sw-quickwhere { display: flex; gap: 8px; align-items: center; padding: 4px 10px; font-size: 12px; color: var(--sw-muted); }
+.sw-linkbtn { border: 0; background: none; color: var(--sw-blue); cursor: pointer; font: 600 12px system-ui, sans-serif; margin-left: auto; }
+.sw-quickhost { position: relative; }
+.sw-quickbtn[hidden] { display: none; }
+.sw-fbtn.is-active { background: var(--sw-ink, #111); color: #fff; }
+/* ⚠️ une règle de ta feuille et un curseur disent la même chose ; une édition rapide en train de se relire */
+.sw-clash { margin: 8px 0 2px; padding: 5px 8px; border-left: 3px solid #c9781c; background: #fff7ea; font-size: 12px; line-height: 1.35; }
+.sw-clash .sw-linkbtn { margin: 0; padding: 0; font-family: ui-monospace, Menlo, monospace; }
+.swc.is-stale { opacity: .55; }
+/* 🎨 Styles : les cases de valeur assez larges, les écrans sur deux lignes si besoin */
+.sw-left .ui-num { min-width: 96px; }
+.sw-left .ui-num > input.ui-num-input.ui-num-input { min-width: 3.4em; text-align: right; }
+.sw-spscreens { display: flex; flex-wrap: wrap; }
+.sw-spscreens button { flex: 1 1 auto; white-space: nowrap; }

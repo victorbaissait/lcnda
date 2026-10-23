@@ -206,9 +206,11 @@
                             <div class="sw-stage" data-sw-stage data-ctx-off><div class="sw-sizer" data-sw-sizer><div class="sw-device" data-sw-devbox><iframe class="sw-frame" data-sw-frame title="Aperçu du site" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></div><span class="sw-wgrip" data-sw-wgrip title="Glisser pour essayer une autre largeur (double-clic : celle de l’écran)" aria-hidden="true"></span><span class="sw-wtag" data-sw-wtag hidden></span></div></div>
                             <div class="sw-split" data-sw-split role="separator" tabindex="0" aria-label="Partager l’aperçu et le code" title="Glisser pour partager l’aperçu et le code (double-clic : moitié-moitié)"></div>
                             <div class="sw-code" data-sw-code>
-                                <div class="sw-ftabbar"><div class="sw-ftabs" data-sw-ftabs role="tablist" aria-label="Fichiers ouverts"></div><button type="button" class="sw-fbtn" data-sw-fnew title="Nouveau fichier : page HTML ou PHP, CSS, JS, morceau PHP (en-tête…)" aria-label="Nouveau fichier">＋</button><button type="button" class="sw-fbtn" data-sw-fall title="Tous les fichiers du site" aria-label="Tous les fichiers">☰</button><button type="button" class="sw-fbtn" data-sw-ftstyle title="Onglets de fichiers, ou les trois boutons HTML / CSS / JS" aria-label="Changer l’affichage des fichiers">⇆</button></div>
-                                <div class="sw-codebar"><span class="sw-mqnav" data-sw-mqnav hidden><button type="button" class="button small secondary" data-sw-mqgo title="Aller à un bloc @media du CSS">@media ▾</button></span><span class="sw-codehelp" data-sw-codehelp></span></div>
-                                <div class="sw-codehost" data-sw-codehost></div>
+                                <div class="sw-ftabbar"><div class="sw-ftabs" data-sw-ftabs role="tablist" aria-label="Fichiers ouverts"></div><button type="button" class="sw-fbtn" data-sw-fnew title="Nouveau fichier : page HTML ou PHP, CSS, JS, morceau PHP (en-tête…)" aria-label="Nouveau fichier">＋</button><button type="button" class="sw-fbtn" data-sw-fall title="Tous les fichiers du site" aria-label="Tous les fichiers">☰</button><button type="button" class="sw-fbtn" data-sw-code2 title="Deux fichiers : côte à côte ou l’un au-dessus de l’autre" aria-label="Deux fichiers">◫</button><button type="button" class="sw-fbtn" data-sw-ftstyle title="Onglets de fichiers, ou les trois boutons HTML / CSS / JS" aria-label="Changer l’affichage des fichiers">⇆</button></div>
+                                <div class="sw-codebar"><button type="button" class="button small secondary sw-quickbtn" data-sw-quickbtn hidden title="Voir et modifier le CSS de cette classe ou de cet id (⌘E / Ctrl+E), comme l’édition rapide de Phoenix Code"></button><span class="sw-mqnav" data-sw-mqnav hidden><button type="button" class="button small secondary" data-sw-mqgo title="Aller à un bloc @media du CSS">@media ▾</button></span><span class="sw-codehelp" data-sw-codehelp></span></div>
+                                <div class="sw-codepanes" data-sw-codepanes><div class="sw-codehost" data-sw-codehost></div>
+                                    <div class="sw-code2" data-sw-code2box hidden><div class="sw-code2bar"><select data-sw-code2sel aria-label="Fichier du deuxième éditeur"></select><button type="button" class="sw-fbtn" data-sw-code2or title="Côte à côte, ou l’un au-dessus de l’autre" aria-label="Changer le sens">⬓</button><button type="button" class="sw-fbtn" data-sw-code2x title="Fermer le deuxième fichier" aria-label="Fermer le deuxième fichier">×</button></div><div class="sw-codehost" data-sw-code2host></div></div></div>
+                                <div class="sw-quick" data-sw-quick hidden></div>
                             </div>
                         </div>
                     </section>
@@ -263,6 +265,7 @@
                     ...this.bps().map(b => ({icon: b.icon, label: `${b.name} (${b.width} px)`, checked: this.device === b.id && !this.freeW, run: () => this.setDevice(b.id)})), {icon: '⚙', label: 'Gérer les écrans (@media)…', run: () => this.bpDialog()}, '-',
                     ...(ext.siteCompat ? [{icon: '🧭', label: 'Navigateurs : vérifier le site…', run: () => this.compatDialog()}, ...[{id: '', name: 'Aucun (l’aperçu seul)', icon: '▭'}, ...ext.siteCompat.BROWSERS].map(b => ({icon: b.icon, label: b.id ? `Imiter ${b.name}` : b.name, checked: (this.imitate || '') === b.id, run: () => this.setImitate(b.id)})), '-'] : []),
                     {icon: '◧', label: 'Panneau de gauche (Blocs, Pages, Styles)', checked: !this.$('[data-sw-leftpane]')?.hidden, run: () => this.togglePane('left')}, {icon: '◨', label: 'Panneau « Ceci est… »', checked: !this.$('[data-sw-panel]')?.hidden, run: () => this.togglePane('panel')}, '-',
+                    {icon: '◫', label: 'Deux fichiers (côte à côte ou l’un au-dessus de l’autre)', checked: !this.$('[data-sw-code2box]')?.hidden, run: () => this.toggleCode2()}, {icon: '🎨', label: 'CSS de la classe ou de l’id (édition rapide)', shortcut: '⌘E', run: () => this.openQuick(this.sel ? this.selSels() : this.quickAt)}, '-',
                     {label: 'Fichiers en onglets (comme Phoenix Code)', checked: this.ftStyle === 'tabs', run: () => this.setFtStyle('tabs')}, {label: 'Fichiers en trois boutons (HTML / CSS / JS)', checked: this.ftStyle !== 'tabs', run: () => this.setFtStyle('simple')}, '-',
                     {icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => { this.zoomMode = 'fit'; this.fit(); }}, {label: '100 % (taille réelle)', shortcut: '⌘1', run: () => { this.zoomMode = 'manual'; this.setZoom(1); }}, '-',
                     {icon: '⟳', label: 'Relire les blocs de la généalogie', run: () => { this.blockCache.clear(); this.reload(); }}],
@@ -296,6 +299,13 @@
                 if (c.swTab) return c.swTab === 'html' ? this.setCodeTab('html') : this.openTab(c.swTab);
                 if (c.swFclose) { e.stopPropagation(); return this.closeTab(c.swFclose); }
                 if (b.matches('[data-sw-fnew]')) return this.newFileMenu(b);
+                if (b.matches('button[data-sw-code2]')) return this.toggleCode2();
+                if (b.matches('[data-sw-code2x]')) return this.toggleCode2(false);
+                if (b.matches('[data-sw-code2or]')) { setPref('code2Orient', pref('code2Orient', 'row') === 'row' ? 'col' : 'row'); return this.layoutCode2(); }
+                if (b.matches('[data-sw-quickbtn]')) return this.openQuick(this.quickAt || []);
+                if (b.matches('[data-sw-quickx]')) return this.closeQuick();
+                if (c.swQuickgo !== undefined) { const [k, at] = c.swQuickgo.split('|'); this.closeQuick(); this.openTab(k === 'html' ? `p:${this.page().id}` : k); return setTimeout(() => this.code.reveal(Number(at), Number(at)), 40); }
+                if (c.swQuicknew !== undefined) { const sel = c.swQuicknew, v = `${this.site.css.replace(/\s*$/, '')}\n\n${sel} {\n  \n}\n`; this.applyChange('css', v, 0); return this.openQuick(this.quickSels || []); }
                 if (b.matches('[data-sw-fall]')) return this.allFilesMenu(b);
                 if (c.swFopen) { this.openTab(c.swFopen); return this.left === 'pages' && this.paintLeft(); }
                 if (c.swFrename) return this.renameAsk(c.swFrename);
@@ -317,6 +327,7 @@
                 if (c.swRole) return this.setRole(Number(c.swRole));
                 if (c.swFont) return this.pickFont(c.swFont);
             });
+            d.querySelector('[data-sw-code2sel]').addEventListener('change', e => this.openCode2(e.target.value));
             const strip = d.querySelector('[data-sw-ftabs]');
             strip.addEventListener('dblclick', e => { const t = e.target.closest('[data-sw-ftab]'); if (t) this.renameTab(t.dataset.swFtab); });
             strip.addEventListener('contextmenu', e => { const t = e.target.closest('[data-sw-ftab], [data-sw-tab]'); if (!t) return; e.preventDefault(); const k = t.dataset.swFtab || t.dataset.swTab; this.tabMenu(k === 'html' ? `p:${this.page().id}` : k, {x: e.clientX, y: e.clientY}); });
@@ -337,6 +348,8 @@
                 if (e.altKey && e.target.matches?.('.sw-box-n') && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) { e.preventDefault(); e.target.value = String((Number(e.target.value) || 0) + (e.key === 'ArrowUp' ? 10 : -10)); e.target.dispatchEvent(new Event('change', {bubbles: true})); return; }
                 const mod = e.metaKey || e.ctrlKey, typing = e.target.closest?.('input, textarea, select, [contenteditable]');
                 if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); return this.save(); }
+                if (mod && e.key.toLowerCase() === 'e') { e.preventDefault(); return this.openQuick(this.sel && !e.target.closest?.('.swc') ? this.selSels() : (this.quickAt || [])); }
+                if (e.key === 'Escape' && !this.$('[data-sw-quick]').hidden) { e.preventDefault(); e.stopPropagation(); return this.closeQuick(); }
                 if (mod && e.key.toLowerCase() === 'z' && !typing) { e.preventDefault(); return e.shiftKey ? this.redo() : this.undo(); }
                 if (e.altKey && !typing && this.sel && (e.key === 'ArrowUp' || e.key === 'ArrowDown') && !e.target.closest?.('.ui-grip, .dnd-grip, [draggable]')) { e.preventDefault(); return this.move(e.key === 'ArrowUp' ? -1 : 1); }
                 if (typing || mod || e.altKey) return;
@@ -474,6 +487,7 @@
                     if (this.isPhp()) { this.phpOnlyCode(); return this.pushHtml(); }
                     const base = this.mediaBase, html = m.html.split(base).join('media/').split(base.replace(/&/g, '&amp;')).join('media/'); // l'aperçu montre les images par leur adresse complète : le code garde « media/… » (relatif)
                     this.page().html = html; this.changed(); if (this.codeTab === 'html') this.code.value = html;
+                    if (this.code2 && !this.$('[data-sw-code2box]').hidden && this.code2Key === `p:${this.page().id}`) this.code2.value = html;
                     if (Array.isArray(m.sel)) this.post({type: 'info'});
                     return;
                 }
@@ -716,12 +730,26 @@
             }
             UI()?.scan?.(pane);
         }
+        /** une règle de ta feuille qui dit la même chose qu'un curseur d'Espacements : plus bas (elle gagne) ou plus haut (le curseur gagne) */
+        spacingClash(sel, prop, media) {
+            const C = CODE(), css = this.site.css, want = sel.split(',').map(x => x.trim()), wm = media ? normMq(media) : null;
+            const fam = {'padding-block': ['padding', 'padding-top', 'padding-bottom'], 'padding-inline': ['padding', 'padding-left', 'padding-right'], 'margin-bottom': ['margin', 'margin-block', 'margin-block-end'], gap: ['row-gap', 'column-gap'], padding: ['padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'padding-block', 'padding-inline']}[prop] || [];
+            const rules = C.cssScan(css).rules, ours = rules.filter(r => r.sel === want.join(',') && r.media === wm).pop();
+            for (const r of rules) {
+                if (r === ours || (r.media !== wm && r.media !== null) || !r.sel.split(',').some(x => want.includes(x.trim()))) continue;
+                const d = C.cssGetDecls(css, {sel: r.sel, media: r.media}); if (![prop, ...fam].some(k => d.has(k))) continue;
+                const after = !ours || r.start > ours.start; if (!ours && r.media === null && wm) continue; // une règle « partout » ne gêne pas un réglage d'écran
+                if (!after) continue; // plus haut : le curseur passe devant, c'est voulu
+                return {sel: `${r.sel}${r.media ? ` (@media ${r.media})` : ''}`, start: r.start, line: css.slice(0, r.start).split('\n').length, after};
+            }
+            return null;
+        }
         /** 🎨 Styles → Espacements : de vraies règles du CSS du site (par écran), lues et écrites dans style.css */
         spacingHtml() {
             const sc = this.spScreen && this.bps().some(b => b.id === this.spScreen) ? this.spScreen : 'all', media = sc === 'all' ? null : this.bp(sc).query;
             const read = (sel, prop) => { const v = CODE().cssGetDecls(this.site.css, {sel, media}).get(prop); return v === undefined ? null : px(v); };
-            const row = ([sel, prop, label, def, max]) => { const v = read(sel, prop), set = v !== null;
-                return `<label class="sw-range sw-sp${set ? ' is-set' : ''}"><span>${esc(label)} <code>${esc(sel)} { ${esc(prop)} }</code>${set ? ` <button type="button" class="sw-sp-reset" data-sw-spreset="${esc(sel)}|${esc(prop)}" title="↺ Remettre comme au départ (retire cette règle)" aria-label="Remettre comme au départ">↺</button>` : ''}</span><input type="range" min="0" max="${max}" step="1" value="${set ? v : def}" data-sw-sp="${esc(sel)}|${esc(prop)}"><output>${set ? v : def} px</output></label>`; };
+            const row = ([sel, prop, label, def, max]) => { const v = read(sel, prop), set = v !== null, clash = this.spacingClash(sel, prop, media);
+                return `${clash ? `<p class="sw-clash">⚠️ Ta règle <button type="button" class="sw-linkbtn" data-sw-quickgo="css|${clash.start}">${esc(clash.sel)} (ligne ${clash.line})</button> passe devant ce curseur : change-la, ou retire sa ligne.</p>` : ''}<label class="sw-range sw-sp${set ? ' is-set' : ''}"><span>${esc(label)} <code>${esc(sel)} { ${esc(prop)} }</code>${set ? ` <button type="button" class="sw-sp-reset" data-sw-spreset="${esc(sel)}|${esc(prop)}" title="↺ Remettre comme au départ (retire cette règle)" aria-label="Remettre comme au départ">↺</button>` : ''}</span><input type="range" min="0" max="${max}" step="1" value="${set ? v : def}" data-sw-sp="${esc(sel)}|${esc(prop)}"><output>${set ? v : def} px</output></label>`; };
             return `<h4>Espacements <small class="sw-hint">(margin, padding, gap)</small></h4>
                 <div class="segmented sw-seg sw-spscreens" role="tablist" aria-label="Écran">${[['all', '🖥 Partout'], ...this.bps().slice(1).map(b => [b.id, `${b.icon} ${b.name}`])].map(([v, l]) => `<button type="button" data-sw-spscreen="${esc(v)}" class="${sc === v ? 'is-active' : ''}">${esc(l)}</button>`).join('')}</div>
                 ${SPACING.map(row).join('')}
@@ -751,7 +779,7 @@
             };
             walk('', 0);
             return `<h4>Fichiers du site <small class="sw-hint">(${items.length})</small></h4><div class="sw-pages sw-files" data-sw-fdrop="">${out.join('')}</div>
-                <div class="sw-row"><button type="button" class="button small secondary" data-sw-fnew>＋ Nouveau fichier</button><button type="button" class="button small secondary" data-sw-dirnew="">📁 Nouveau dossier</button></div>`;
+                <div class="sw-row"><button type="button" class="button small secondary" data-sw-fnew>＋ Nouveau fichier</button><button type="button" class="button small secondary" data-sw-dirnew="">＋ Nouveau dossier</button></div>`;
         }
         /** un fichier rangé dans un autre dossier ('' : la racine) ; les liens et les include vers lui suivent */
         moveFile(key, dir) {
@@ -768,7 +796,7 @@
             toast(`📁 ${d}/ : glisses-y des fichiers, ou ＋ pour en créer un dedans (un dossier vide n’est pas gardé à l’enregistrement).`);
         }
         async folderMenu(anchor, d) {
-            UI().menuAt(anchor, [{icon: '＋', label: 'Nouveau fichier ici', run: () => this.newFileMenu(anchor, d)}, {icon: '📁', label: 'Nouveau sous-dossier…', run: () => this.newFolder(d)}, {icon: '✎', label: 'Renommer le dossier…', run: () => this.renameFolder(d)},
+            UI().menuAt(anchor, [{icon: '＋', label: 'Nouveau fichier ici', run: () => this.newFileMenu(anchor, d)}, {icon: '＋', label: 'Nouveau sous-dossier…', run: () => this.newFolder(d)}, {icon: '✎', label: 'Renommer le dossier…', run: () => this.renameFolder(d)},
                 {icon: '🗑', label: 'Supprimer le dossier et ses fichiers', danger: true, run: () => this.deleteFolder(d)}], {title: `📁 ${d}/`});
         }
         async renameFolder(d) {
@@ -884,6 +912,7 @@
         /** une règle du CSS du site, hors élément choisi (🎨 Styles → Espacements) */
         setSiteDecl(sel, prop, value, media, final) {
             const css = CODE().cssSetDecl(this.site.css, {sel, media, prop, value}); if (css === this.site.css) return;
+            this.quickStale('css');
             this.site.css = css; if (this.codeTab === 'css') this.code.value = css; this.pushCss(); this.changed(final);
         }
         /** une propriété posée (valeur vide : retirée) là où il faut ; le code CSS et l'aperçu suivent */
@@ -892,6 +921,7 @@
             if (!t.inline) {
                 const css = CODE().cssSetDecl(this.site.css, {sel: t.sel, media: t.media, prop, value: val});
                 if (css === this.site.css) return;
+                this.quickStale('css');
                 this.site.css = css; if (this.codeTab === 'css') this.code.value = css;
                 this.pushCss(); this.changed(final);
                 if (final) setTimeout(() => this.post({type: 'info'}), 60);
@@ -1133,7 +1163,7 @@
             const content = s.tag === 'img' ? U.panelSection({title: 'Image', key: 'sw-img', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="image">🖼 Changer l’image…</button><label>Texte de remplacement (pour qui ne voit pas l’image)<input type="text" data-sw-at="alt" value="${esc(s.alt)}" maxlength="200"></label></div>`})
                 : s.tag === 'a' ? U.panelSection({title: 'Lien', key: 'sw-link', open: true, body: `<div class="form-grid one-column sw-form"><label>Adresse<input type="text" data-sw-at="href" value="${esc(s.href)}" placeholder="page.html, https://…, mailto:…" maxlength="300"></label><div class="sw-chips">${this.site.pages.map(p => `<button type="button" class="sw-chip" data-sw-act="link" data-v="${esc(pageFile(p))}">📄 ${esc(p.name)}</button>`).join('')}</div></div>`}) : '';
             pane.innerHTML = `<div class="sw-this"><button type="button" class="sw-pane-x sw-pane-x-r" data-sw-toggle="panel" title="Cacher ce panneau (la languette sur le bord, ou ◨, le remet)" aria-label="Cacher le panneau Ceci est">⇥</button><small>Ceci est</small><b>${esc(s.name || (s.block ? KIND_LABEL[s.block] : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt">« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}${this.htmlRefLine(s.tag)}</div>
-                <div class="sw-acts"><button type="button" class="icon-button small" data-sw-act="up" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-sw-act="down" title="Descendre" aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-sw-act="dup" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-sw-act="code" title="Voir dans le code" aria-label="Voir dans le code">&lt;/&gt;</button><button type="button" class="icon-button small" data-sw-act="parent" title="Choisir l’élément qui le contient" aria-label="Choisir le parent">⤴</button><span class="spacer"></span><button type="button" class="icon-button small danger" data-sw-act="del" title="Supprimer l’élément" aria-label="Supprimer l’élément">🗑</button></div>
+                <div class="sw-acts"><button type="button" class="icon-button small" data-sw-act="up" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-sw-act="down" title="Descendre" aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-sw-act="dup" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-sw-act="code" title="Voir dans le code" aria-label="Voir dans le code">&lt;/&gt;</button><button type="button" class="icon-button small" data-sw-act="quickcss" title="🎨 Son CSS : les règles de ses classes et de son id, modifiables (⌘E)" aria-label="Son CSS">🎨</button><button type="button" class="icon-button small" data-sw-act="parent" title="Choisir l’élément qui le contient" aria-label="Choisir le parent">⤴</button><span class="spacer"></span><button type="button" class="icon-button small danger" data-sw-act="del" title="Supprimer l’élément" aria-label="Supprimer l’élément">🗑</button></div>
                 ${U.panelSection({title: 'Ceci est… (nom, balise, classe, id)', key: 'sw-what', open: true, body: `<p class="sw-hint">Dis ce que c’est : « c’est mon en-tête, mon menu… »</p><div class="sw-chips">${ROLES.map(([tag, name], i) => `<button type="button" class="sw-chip${s.tag === tag && s.name === name ? ' is-active' : ''}" data-sw-role="${i}" title="&lt;${tag}&gt;, nommé « ${esc(name)} »">${esc(name)}</button>`).join('')}</div>
                     <div class="form-grid one-column sw-form"><label>Nom (pour toi)<input type="text" list="sw-names" data-sw-at="data-lc-name" value="${esc(s.name)}" maxlength="60" placeholder="En-tête, carte de la famille…"></label><datalist id="sw-names">${NAMES.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
                     <label>Balise<select data-sw-tag>${[...new Set([s.tag, ...TAG_CHOICES])].filter(Boolean).map(t => `<option value="${esc(t)}"${t === s.tag ? ' selected' : ''}>&lt;${esc(t)}&gt;</option>`).join('')}</select></label>
@@ -1173,6 +1203,7 @@
             const s = this.sel; if (!s) return;
             if (act === 'up') return this.move(-1); if (act === 'down') return this.move(1); if (act === 'dup') return this.duplicate(); if (act === 'del') return this.remove();
             if (act === 'code') return this.revealInCode(true);
+            if (act === 'quickcss') return this.openQuick(this.selSels());
             if (act === 'parent') { if (s.path.length > 1) this.post({type: 'select', path: s.path.slice(0, -1), report: true}); return; }
             if (act === 'center') { this.applyDecl('margin-left', 'auto', false); this.applyDecl('margin-right', 'auto'); return this.hist.commit(); }
             if (act === 'nospace') { ['margin', 'padding'].forEach(k2 => ['', '-top', '-right', '-bottom', '-left'].forEach(sd => this.applyDecl(k2 + sd, '', false))); this.hist.commit(); return setTimeout(() => this.post({type: 'info'}), 80); }
@@ -1407,7 +1438,78 @@
                 ...missing.map(b => ({icon: '＋', label: `Ajouter @media pour ${b.icon} ${b.name}`, run: () => { const v = `${this.site.css.replace(/\s*$/, '')}\n\n@media ${b.query} {\n  \n}\n`; this.site.css = v; this.code.value = v; this.pushCss(); this.changed(true); const at = v.lastIndexOf('{\n  \n}') + 4; this.code.reveal(at, at); }})),
                 {icon: '⚙', label: 'Gérer les écrans…', run: () => this.bpDialog()}], {title: 'Blocs @media du CSS'});
         }
-        codeChanged(v) {
+        /** 'html' (la page ouverte) → 'p:<id>' ; les autres clés telles quelles */
+        normKey(k) { return k === 'html' ? `p:${this.page().id}` : k; }
+        valueOf(k) { k = this.normKey(k); if (k.startsWith('p:')) return this.site.pages.find(x => x.id === k.slice(2))?.html ?? ''; const f = this.fileOf(k); return f ? f.content : k === 'css' ? this.site.css : k === 'js' ? this.site.js : ''; }
+        /** une modification venue d'un éditeur (1 : le premier, 2 : le deuxième, 0 : l'édition rapide) ; l'aperçu suit, les autres éditeurs aussi */
+        applyChange(k, v, from = 1) {
+            k = this.normKey(k);
+            if (from !== 0) this.quickStale(k);
+            if (k.startsWith('p:') && k !== `p:${this.page().id}`) { const pg = this.site.pages.find(x => x.id === k.slice(2)); if (!pg || v.length > MAX_HTML) return; pg.html = v; this.changed(); }
+            else { const was = this.codeTab; this.codeTab = k.startsWith('p:') ? 'html' : k; try { this.codeChangedOne(v); } finally { this.codeTab = was; } }
+            if (from !== 1 && this.normKey(this.codeTab) === k && this.code.value !== v) this.code.value = v;
+            if (from !== 2 && this.code2 && !this.$('[data-sw-code2box]').hidden && this.normKey(this.code2Key) === k && this.code2.value !== v) this.code2.value = v;
+        }
+        codeChanged(v) { this.applyChange(this.codeTab, v, 1); }
+        /** ◫ un deuxième fichier à côté (ou en dessous) */
+        toggleCode2(show) {
+            const box = this.$('[data-sw-code2box]'); show = show === undefined ? box.hidden : show;
+            if (!show) { box.hidden = true; this.layoutCode2(); return; }
+            if (this.view === 'visual') this.setView('split');
+            this.openCode2(this.code2Key && this.valueOfOk(this.code2Key) ? this.code2Key : (this.normKey(this.codeTab).startsWith('p:') ? 'css' : `p:${this.page().id}`));
+        }
+        valueOfOk(k) { k = this.normKey(k); return k === 'css' || k === 'js' || (k.startsWith('p:') ? this.site.pages.some(x => x.id === k.slice(2)) : !!this.fileOf(k)); }
+        openCode2(k) {
+            const box = this.$('[data-sw-code2box]'); k = this.normKey(k); if (!this.valueOfOk(k)) return;
+            this.code2Key = k; box.hidden = false;
+            const t = this.tabInfo(k), lang = codeLang(t.kind);
+            if (!this.code2) this.code2 = CODE().create(this.$('[data-sw-code2host]'), {lang, value: this.valueOf(k), label: 'Deuxième fichier', onChange: v => this.applyChange(this.code2Key, v, 2)});
+            else { this.code2.setLang(lang); this.code2.value = this.valueOf(k); }
+            const keys = [...this.site.pages.map(p => `p:${p.id}`), 'css', 'js', ...this.site.files.filter(f => f.kind !== 'image').sort((a, b) => a.path.localeCompare(b.path)).map(f => `f:${f.id}`)];
+            this.$('[data-sw-code2sel]').innerHTML = keys.map(x => { const i = this.tabInfo(x); return `<option value="${esc(x)}"${x === k ? ' selected' : ''}>${esc(i.file ? i.file.path : x === 'css' ? 'css/style.css' : x === 'js' ? 'js/script.js' : i.name)}</option>`; }).join('');
+            this.layoutCode2();
+        }
+        layoutCode2() { const panes = this.$('[data-sw-codepanes]'), two = !this.$('[data-sw-code2box]').hidden; panes.classList.toggle('is-two', two); panes.classList.toggle('is-col', two && pref('code2Orient', 'row') === 'col'); this.$('button[data-sw-code2]')?.classList.toggle('is-active', two); }
+        /** 🎨 édition rapide (comme Phoenix Code) : les règles CSS d'une classe ou d'un id, modifiables sur place */
+        selSels() { const s = this.sel; if (!s) return []; return [...(s.id ? [`#${s.id}`] : []), ...s.cls.split(/\s+/).filter(c => /^[A-Za-z_-][\w-]*$/.test(c)).map(c => `.${c}`)]; }
+        quickHere(pos) {
+            if (this.normKey(this.codeTab) !== `p:${this.page().id}` && !this.fileOf(this.codeTab)?.kind?.match(/^(html|php)$/)) return [];
+            const t = this.code.value, a = t.lastIndexOf('<', pos), b = t.indexOf('>', pos); if (a < 0 || (b >= 0 && t.lastIndexOf('>', pos - 1) > a)) return [];
+            const tag = t.slice(a, b < 0 ? t.length : b + 1), off = pos - a, out = [];
+            for (const m of tag.matchAll(/\s(class|id)\s*=\s*(["'])([^"']*)\2/gi)) { const vs = m.index + m[0].indexOf(m[2]) + 1, ve = vs + m[3].length; if (off < vs || off > ve) continue;
+                if (m[1].toLowerCase() === 'id') out.push(`#${m[3].trim()}`); else { let w = 0; for (const c of m[3].split(/(\s+)/)) { if (!/\s/.test(c) && off >= vs + w && off <= vs + w + c.length) out.push(`.${c}`); w += c.length; } } }
+            return out.filter(x => x.length > 1);
+        }
+        cssSources() { return [{key: 'css', name: 'css/style.css', text: this.site.css}, ...this.site.files.filter(f => f.kind === 'css').map(f => ({key: `f:${f.id}`, name: f.path, text: f.content}))]; }
+        openQuick(sels) {
+            sels = (sels || []).filter(Boolean); if (!sels.length) return toast('Mets le curseur sur une classe ou un id dans le HTML (class="…", id="…"), ou choisis un élément dans l’aperçu.');
+            if (this.view === 'visual') this.setView('split');
+            this.quickSels = sels; const box = this.$('[data-sw-quick]'); this.quickEds = [];
+            const re = sels.map(x => new RegExp(`(^|[^\\w-])${x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`));
+            const found = []; this.cssSources().forEach(src => CODE().cssScan(src.text).rules.forEach(r => { if (re.some(x => x.test(r.sel))) found.push({...src, start: r.start, end: r.close + 1, media: r.media, line: src.text.slice(0, r.start).split('\n').length}); }));
+            box.innerHTML = `<div class="sw-quickhead"><b>🎨 CSS de ${sels.map(x => `<code>${esc(x)}</code>`).join(' ')}</b><small class="sw-hint">${found.length ? plural(found.length, 'règle') : 'aucune règle'} · modifie ici, le fichier suit</small><span class="spacer"></span>${sels.map(x => `<button type="button" class="button small secondary" data-sw-quicknew="${esc(x)}">＋ Règle ${esc(x)}</button>`).join('')}<button type="button" class="sw-fbtn" data-sw-quickx title="Fermer (Échap)" aria-label="Fermer">×</button></div>
+                <div class="sw-quicklist">${found.map((f, i) => `<div class="sw-quickrule"><div class="sw-quickwhere">${esc(f.name)} · ligne ${f.line}${f.media ? ` · <code>@media ${esc(f.media)}</code>` : ''}<button type="button" class="sw-linkbtn" data-sw-quickgo="${esc(f.key)}|${f.start}">↗ Ouvrir là</button></div><div class="sw-quickhost" data-sw-quickhost="${i}"></div></div>`).join('') || '<p class="sw-hint" style="padding:8px 10px">Pas encore de règle pour ça : « ＋ Règle » en crée une à la fin de style.css.</p>'}</div>`;
+            box.hidden = false;
+            found.forEach((f, i) => {
+                const host = box.querySelector(`[data-sw-quickhost="${i}"]`), text = f.text.slice(f.start, f.end);
+                host.style.height = `${Math.min(240, (text.split('\n').length + 1) * 20 + 24)}px`;
+                const ed = {f, code: null}; this.quickEds.push(ed);
+                ed.code = CODE().create(host, {lang: 'css', value: text, label: `Règle ${i + 1}`, onChange: v => {
+                    const src = this.valueOf(f.key), delta = v.length - (f.end - f.start), next = src.slice(0, f.start) + v + src.slice(f.end);
+                    this.quickEds.forEach(o => { if (o !== ed && o.f.key === f.key && o.f.start > f.start) { o.f.start += delta; o.f.end += delta; } });
+                    f.end += delta; this.applyChange(f.key, next, 0);
+                }});
+            });
+        }
+        /** le CSS a changé hors de l'édition rapide : elle se relit (une fois la frappe finie) */
+        quickStale(k) {
+            if (!this.quickEds?.length || this.$('[data-sw-quick]').hidden) return;
+            if (k && !this.quickEds.some(e => e.f.key === k)) return;
+            this.quickEds.forEach(e => e.code.el.classList.add('is-stale'));
+            clearTimeout(this.quickT); this.quickT = setTimeout(() => { if (!this.$('[data-sw-quick]').hidden) this.openQuick(this.quickSels); }, 500);
+        }
+        closeQuick() { const box = this.$('[data-sw-quick]'); box.hidden = true; box.innerHTML = ''; this.quickEds = []; }
+        codeChangedOne(v) {
             const f = this.fileOf(this.codeTab);
             if (f) { if (v.length > 1000000) return; f.content = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => { if (f.kind === 'css') this.pushCss(); else if (f.kind === 'js') { if (this.mode === 'play') this.reload(); } else if (this.isPhp()) this.pushHtml(); }, f.kind === 'js' ? 900 : 200); return this.changed(); }
             if (this.codeTab === 'html') { if (v.length > MAX_HTML) return; this.page().html = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => { this.checkSel(); this.pushHtml(); }, 220); }
@@ -1424,6 +1526,7 @@
         /** un clic dans le HTML : l'élément qui est là devient l'élément choisi de l'aperçu */
         codeCursor(pos) {
             this.caretAt = {...(this.caretAt || {}), [this.codeTab]: pos}; // pour l'aide-mémoire : écrire là où était le curseur
+            this.quickAt = this.quickHere(pos); const qb = this.$('[data-sw-quickbtn]'); if (qb) { qb.hidden = !this.quickAt.length; qb.textContent = `🎨 CSS de ${this.quickAt.join(' ')}`; }
             if (this.codeTab !== 'html') return;
             const text = this.code.value; let at = pos;
             const before = text.slice(0, pos), lt = before.lastIndexOf('<'), gt = before.lastIndexOf('>');

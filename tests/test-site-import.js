@@ -108,10 +108,10 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(r, 'Cours=cours.php');
         });
         await t('◧ ◨ les panneaux se cachent, et s’en souviennent', async () => {
-            await page.click('[data-sw-toggle="left"]'); await page.click('[data-sw-toggle="panel"]');
+            await page.click('.sw-panes [data-sw-toggle="left"]'); await page.click('.sw-panes [data-sw-toggle="panel"]');
             assert.ok(await page.locator('[data-sw-leftpane]').isHidden()); assert.ok(await page.locator('[data-sw-panel]').isHidden());
             const pr = await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-site-web'))); assert.equal(pr.leftHidden, true); assert.equal(pr.panelHidden, true);
-            await page.click('[data-sw-toggle="left"]'); await page.click('[data-sw-toggle="panel"]');
+            await page.click('.sw-panes [data-sw-toggle="left"]'); await page.click('.sw-panes [data-sw-toggle="panel"]');
         });
         await t('▾ Mes sites : les autres sites, nouveau site, ouvrir un dossier', async () => {
             await page.click('[data-sw-sites]'); await page.waitForSelector('.ui-actmenu');

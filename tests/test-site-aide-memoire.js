@@ -96,6 +96,31 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await E(() => document.querySelector('.sw-attr [data-sw-act="attr-del"][data-v="target"]').click()); await page.waitForTimeout(400);
             assert.doesNotMatch(await E(() => window.LCNDA_EXT.siteWeb.current.page().html), /target=/);
         });
+        await t('◫ deux fichiers : le deuxième éditeur modifie le site, les deux restent d’accord', async () => {
+            await page.click('button[data-sw-code2]'); await page.waitForTimeout(200);
+            assert.ok(await page.locator('[data-sw-code2box]').isVisible());
+            await E(() => { const e = window.LCNDA_EXT.siteWeb.current; e.openCode2('css'); e.setCodeTab('css'); });
+            await page.locator('[data-sw-code2host] textarea').focus(); await page.keyboard.press('Control+End'); await page.keyboard.type('\n.zz { color: red; }'); await page.waitForTimeout(200);
+            assert.match(await E(() => window.LCNDA_EXT.siteWeb.current.site.css), /\.zz \{ color: red; \}/);
+            assert.match(await E(() => window.LCNDA_EXT.siteWeb.current.code.value), /\.zz \{ color: red; \}/);
+            await page.click('[data-sw-code2x]'); assert.ok(await page.locator('[data-sw-code2box]').isHidden());
+        });
+        await t('🎨 édition rapide : le CSS d’une classe, modifié sur place, relu si le fichier change ailleurs', async () => {
+            await E(() => { const e = window.LCNDA_EXT.siteWeb.current; e.setCodeTab('html'); const ta = document.querySelector('[data-sw-codehost] textarea'), at = ta.value.indexOf('site-nom') + 3; ta.focus(); ta.setSelectionRange(at, at); e.codeCursor(at); });
+            assert.match(await page.locator('[data-sw-quickbtn]').textContent(), /\.site-nom/);
+            await page.keyboard.press('Control+e'); await page.waitForTimeout(300);
+            assert.equal(await page.locator('.sw-quickrule').count(), 1);
+            await page.locator('.sw-quickhost textarea').first().focus(); await page.keyboard.press('Control+End'); await page.keyboard.press('ArrowLeft'); await page.keyboard.type(' letter-spacing: 2px; '); await page.waitForTimeout(200);
+            assert.match(await E(() => window.LCNDA_EXT.siteWeb.current.site.css), /\.site-nom \{[^}]*letter-spacing: 2px;/);
+            await E(() => { const e = window.LCNDA_EXT.siteWeb.current; e.applyChange('css', '/* en haut */\n' + e.site.css, 2); }); await page.waitForTimeout(800);
+            await page.locator('.sw-quickhost textarea').first().focus(); await page.keyboard.press('Control+End'); await page.keyboard.press('ArrowLeft'); await page.keyboard.type(' x: 1; '); await page.waitForTimeout(200);
+            const c = await E(() => window.LCNDA_EXT.siteWeb.current.site.css); assert.match(c, /^\/\* en haut \*\//); assert.match(c, /letter-spacing: 2px;  x: 1; /);
+            await page.keyboard.press('Escape'); assert.ok(await page.locator('[data-sw-quick]').isHidden());
+        });
+        await t('Espacements : une règle plus bas qui annule un curseur est signalée', async () => {
+            await E(() => { const e = window.LCNDA_EXT.siteWeb.current; e.left = 'styles'; e.setSiteDecl('.section', 'padding-block', '30px', null, true); e.applyChange('css', e.site.css + '\n.section { padding: 5px 0; }\n', 2); e.paintLeft(); });
+            assert.match(await page.locator('.sw-clash').first().textContent(), /passe devant ce curseur/);
+        });
         await t('aucune erreur JavaScript', async () => assert.deepEqual(errs, []));
     } finally { await browser.close(); proc.kill(); }
     finish();
