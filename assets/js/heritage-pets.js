@@ -76,32 +76,7 @@
     const photoHtml = (m, cls = '') => m ? `<span class="h-pet-photo ${cls}">${A().mediaThumbHtml(m)}</span>` : '';
     const iconOf = sp => SPECIES_ICON[sp] || '🐾';
     const baseMode = () => { try { return ['family', 'breeding', 'both'].includes(localStorage.getItem('genealogie-base-mode')) ? localStorage.getItem('genealogie-base-mode') : 'family'; } catch (_) { return 'family'; } };
-    /* La fiche d'un animal (la liste) se range : ordre des parties, parties cachées */
-    const LAYOUT_KEY = 'genealogie-pet-sections';
-    const SECTIONS = [['identity', '🪪 Identité'], ['ident', '🔖 Identification et origines'], ['parents', '🌳 Parents et pedigree'], ['offspring', '🐾 Descendance'], ['siblings', '👥 Frères et sœurs'], ['owners', '🏠 Ses maîtres'], ['titles', '🏆 Titres'], ['health', '🩺 Santé'], ['measures', '📏 Poids et taille'], ['life', '📅 Sa vie'], ['story', '📖 Histoire et souvenirs'], ['notes', '🗒️ Notes et sources'], ['boards', '🧩 Tableaux'], ['photos', '📷 Photos et documents']];
-    const secList = () => [...SECTIONS, ...petPrefs().customSecs.map(c => [c.k, `${c.icon} ${c.label}`])]; // + les catégories à soi
-    const layout = () => { let v = {}; try { v = JSON.parse(localStorage.getItem(LAYOUT_KEY) || '{}') || {}; } catch (_) {} const keys = secList().map(s => s[0]); const order = [...(Array.isArray(v.order) ? v.order.filter(k => keys.includes(k)) : []), ...keys.filter(k => !(v.order || []).includes(k))]; return {order, hidden: (Array.isArray(v.hidden) ? v.hidden : []).filter(k => keys.includes(k))}; };
-    function applyLayout(body) {
-        if (!body) return; const L = layout();
-        L.order.forEach(k => { const s = body.querySelector(`:scope > [data-pet-sec="${k}"]`); if (s) { body.appendChild(s); s.hidden = L.hidden.includes(k); } });
-    }
-    function layoutDialog(done) {
-        const L = layout();
-        const rows = o => o.map(k => `<li class="h-pet-lrow" data-k="${k}"><input type="checkbox" ${L.hidden.includes(k) ? '' : 'checked'} title="Montrer"><span>${esc(secList().find(s => s[0] === k)[1])}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('');
-        ext.openDialog({eyebrow: 'ANIMAL', title: '⚙️ Organiser la fiche d’un animal', submitLabel: 'Enregistrer',
-            body: `<p class="muted">L’ordre des parties et celles qu’on montre, pour toutes les fiches d’animaux. Une partie vide ne s’affiche pas.</p><ol class="h-pet-layout" data-lay>${rows(L.order)}</ol><button type="button" class="button small secondary" data-reset>↺ Remettre comme au départ</button>`,
-            onOpen: d => d.addEventListener('click', e => {
-                const li = e.target.closest('li'), box = d.querySelector('[data-lay]');
-                if (e.target.closest('[data-up]') && li.previousElementSibling) box.insertBefore(li, li.previousElementSibling);
-                if (e.target.closest('[data-down]') && li.nextElementSibling) box.insertBefore(li.nextElementSibling, li);
-                if (e.target.closest('[data-reset]')) box.innerHTML = rows(secList().map(s => s[0]));
-            }),
-            onSubmit: form => {
-                const lis = [...form.querySelectorAll('[data-lay] li')];
-                try { localStorage.setItem(LAYOUT_KEY, JSON.stringify({order: lis.map(l => l.dataset.k), hidden: lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k)})); } catch (_) {}
-                toast('Fiche des animaux rangée.'); done?.();
-            }});
-    }
+    /* L'ancien rangement de la page simple ('genealogie-pet-sections') est repris par les sections des fiches d'animaux (app-sections.js, migratePetLayout) */
     const lifespan = p => [p.birth_date && '° ' + p.birth_date, (p.death_date || p.deceased) && '† ' + (p.death_date || '?')].filter(Boolean).join(' · ');
 
     /** L'âge (ou l'âge à la mort) d'après des dates jj/mm/aaaa, aaaa-mm-jj ou aaaa */
@@ -141,7 +116,7 @@
     ext.lists.pets = async token => {
         const st = S();
         if (st.hPet && st.hPetView === 'pedigree') return showPedigree(token, st.hPet);
-        if (st.hPet) return showPet(token, st.hPet);
+        if (st.hPet) { const id = st.hPet; st.hPet = 0; return openPet(id); } // 🐾 une seule fiche par animal : la fiche complète
         // H10 : la barre commune (🔍 Chercher · Filtrer ▾ Espèce, État · Liste | Fiches · Trier), retenue pour cette liste
         const lbSaved = window.LCNDA_UI?.listBarState?.('listes:pets'); if (lbSaved) { st.hPetQ = lbSaved.q || ''; st.hPetSpecies = lbSaved.f?.species || ''; }
         if (st.hPetSpecies && !SPECIES[st.hPetSpecies]) st.hPetSpecies = '';
@@ -155,12 +130,12 @@
         const alive = rows.filter(r => !r.deceased).length;
         const kind = r => [iconOf(r.species) + ' ' + (r.breed || String(speciesLabel(r.species) || r.species_label || '').split(/[ ,(]/)[0]), r.color].filter(Boolean).join(' · ');
         A().$('#workspace').innerHTML = `<section class="page h-pets"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Animaux de compagnie</h2>
-            <p>Les animaux de la famille, d’hier et d’aujourd’hui : une fiche pour chacun (photos, race, puce, éleveur, santé, souvenirs…), reliée à leurs maîtres. Avec leurs parents, on fait le pedigree d’un animal de race, sa descendance et son taux de consanguinité.<br>Deux façons de faire, au choix pour chaque animal : <strong>la fiche d’ici seulement</strong>, plus discrète, qui reste dans cette liste sans se mêler à tes fiches de personnes ; ou <strong>en plus une fiche complète</strong>, comme une personne (arbre, événements, sources…), avec la case en le créant ou « ＋ Fiche complète » plus tard.</p></div>
+            <p>Les animaux de la famille, d’hier et d’aujourd’hui : une fiche pour chacun (photos, race, puce, éleveur, santé, souvenirs, suivi…), reliée à leurs maîtres. Avec leurs parents, on fait le pedigree d’un animal de race, sa descendance et son taux de consanguinité. Un clic ouvre sa fiche, la même que dans Personnes → Animaux.</p></div>
             <div class="page-actions"><label class="h-pet-mode" title="Famille : les animaux à côté des personnes. Élevage : une base d’animaux (la liste de gauche, le compteur et les statistiques partent des animaux). Les deux : tout mêlé.">Type de base <select data-pet-mode>${[['family', '👪 Famille'], ['breeding', '🐾 Élevage'], ['both', '👪🐾 Les deux']].map(([k, l]) => `<option value="${k}" ${baseMode() === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><button type="button" class="button secondary" data-pet-prefs title="Espèces, parties et champs du formulaire">⚙️ Réglages</button><button type="button" class="button" data-pet-new>＋ Nouvel animal</button></div></header>
-            <div data-pet-bar></div>
+            ${mergedNotice()}<div data-pet-bar></div>
             ${rows.length ? `${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="ui-card-ico">${iconOf(r.species)}</span>`, name: `${r.title}${r.sex ? (r.sex === 'M' ? ' ♂' : ' ♀') : ''}`, open: `data-pet-open="${r.id}"`, cls: r.deceased ? 'is-gone' : '', lines: [r.registered_name && r.registered_name !== r.title ? r.registered_name : '', kind(r), r.owners.length ? r.owners.slice(0, 2).join(', ') : ''], date: lifespan(r) || ''}))) : UI.cardsHtml(rows.map(r => ({thumb: r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="ui-card-ico">${iconOf(r.species)}</span>`, name: `${r.title}${r.sex ? (r.sex === 'M' ? ' ♂' : ' ♀') : ''}`, open: `data-pet-open="${r.id}"`, cls: r.deceased ? 'is-gone' : '',
                 lines: [[kind(r), r.registered_name && r.registered_name !== r.title ? r.registered_name : ''].filter(Boolean).join(' · '), [lifespan(r) || 'Dates à compléter', r.owners.length ? r.owners.slice(0, 2).join(', ') : ''].filter(Boolean).join(' · ')],
-                badges: [r.deceased ? {text: '† Disparu', kind: 'black'} : null, r.person_id ? {text: '👤 Fiche complète', kind: 'blue'} : null, r.offspring ? {text: `${fmt(r.offspring)} petit${r.offspring > 1 ? 's' : ''}`, kind: 'grey'} : null, r.titles ? {text: `🏆 ${fmt(r.titles)}`, kind: 'yellow'} : null].filter(Boolean)})))}`
+                badges: [r.deceased ? {text: '† Disparu', kind: 'black'} : null, r.offspring ? {text: `${fmt(r.offspring)} petit${r.offspring > 1 ? 's' : ''}`, kind: 'grey'} : null, r.titles ? {text: `🏆 ${fmt(r.titles)}`, kind: 'yellow'} : null].filter(Boolean)})))}`
                 : (st.hPetQ || st.hPetSpecies || lifeF.length ? A().emptyState({icon: '🔍', text: 'Aucun animal ne correspond.'}) : A().emptyState({icon: '🐾', text: 'Aucun animal pour l’instant', hint: 'Son nom, sa photo, ses maîtres… et pour un animal de race, ses parents, pour faire son pedigree.', action: {label: '＋ Nouvel animal', attrs: 'data-pet-new'}}))}</section>`;
         const ws = A().$('#workspace');
         const slot = ws.querySelector('[data-pet-bar]');
@@ -174,10 +149,40 @@
         ws.querySelector('[data-pet-prefs]').addEventListener('click', () => { st.maintenanceTab = 'pet_prefs'; A().setModule('maintenance'); });
         ws.querySelector('[data-pet-mode]').addEventListener('change', e => { try { localStorage.setItem('genealogie-base-mode', e.target.value); } catch (_) {} toast({family: 'Base de famille.', breeding: 'Base d’élevage : la liste de gauche, le compteur et les statistiques partent des animaux.', both: 'Personnes et animaux mêlés.'}[e.target.value]); A().refreshBaseMode?.(); });
         ws.querySelectorAll('[data-pet-open]').forEach(b => b.addEventListener('click', () => openPet(Number(b.dataset.petOpen))));
+        ws.querySelector('[data-pets-merged-x]')?.addEventListener('click', e => { e.currentTarget.closest('.ui-notice')?.remove(); });
         ext.suivi?.hintInto?.(ws.querySelector('.page')); // 🐾 « l'onglet Suivi est caché » (une fois)
     };
-    function openPet(id, view = '') { const st = S(); st.hPet = id; st.hPetView = view; st.listType = 'pets'; if (st.module === 'listes') ext.lists.pets(++st.workspaceToken); else A().setModule('listes'); }
+    /** « N animaux ont reçu leur fiche complète » : une seule fois, après la mise à jour (migration 67, réglage genealogie-pets-merged) */
+    function mergedNotice() {
+        let n = 0; try { n = Number((JSON.parse(localStorage.getItem('genealogie-pets-merged') || 'null') || {}).n) || 0; if (n) localStorage.removeItem('genealogie-pets-merged'); } catch (_) {}
+        return n ? `<div class="ui-notice ui-notice-info h-pets-merged" role="status"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>${esc(n > 1 ? `${fmt(n)} animaux ont reçu leur fiche complète.` : '1 animal a reçu sa fiche complète.')} Un animal n’a plus qu’une seule fiche : tout ce que montrait l’ancienne « fiche d’animal » y est, rangé en sections. Rien n’est perdu.</span><button type="button" class="icon-button small" data-pets-merged-x aria-label="Fermer">×</button></div>` : '';
+    }
+    /** les anciens onglets de la page simple → les blocs de la fiche complète (« ↗ Santé » ouvre 🩺 Santé) */
+    const TAB_BLOCK = {marks: 'animal_marks', obs: 'animal_obs', health: 'animal_health', group: 'animal_group', map: 'animal_map', pedigree: 'animal_parents'};
+    /** 🐾 Fiche animal unique : tous les chemins (liste, #pet/…, menu de choix, tableaux, maisons, recherche, suivi) mènent à la fiche complète.
+     *  view = 'pedigree' : la page du pedigree en grand (comme avant) ; tab = un ancien onglet du suivi (marks, obs, health, group, map). */
+    async function openPet(id, view = '', tab = '') {
+        const st = S(); id = Number(id) || 0; if (!id) return;
+        if (view === 'pedigree') { st.hPet = id; st.hPetView = view; st.listType = 'pets'; if (st.module === 'listes') ext.lists.pets(++st.workspaceToken); else A().setModule('listes'); return; }
+        let pid = 0;
+        try { pid = Number((await api('pet', {id})).person_id) || 0; if (!pid && !document.body.classList.contains('is-kiosk')) pid = Number((await api('pet_make_person', {}, {method: 'POST', body: {id}})).result?.person_id) || 0; } catch (error) { toast(error.message, 'error'); return; }
+        if (!pid) { toast('Cette fiche ne peut pas s’ouvrir en mode consultation.'); return; }
+        st.hPet = 0; st.hPetView = ''; st.sheetFocus = TAB_BLOCK[tab] || '';
+        if (A().openPersonById) A().openPersonById(pid); else { st.currentPersonId = pid; A().setModule('personnes'); }
+    }
     ext.openPet = openPet;
+    // les anciens liens « #pet/612 » (et « #pet/612/sante ») : la fiche complète, sur le bon bloc
+    const PET_HASH = /^#!?\/?pet\/(\d+)(?:\/([a-z]+))?/i, TAB_FR = {sante: 'health', marques: 'marks', bagues: 'marks', observations: 'obs', groupe: 'group', carte: 'map', trajets: 'map', pedigree: 'pedigree'};
+    function fromHash(e) {
+        const h = e?.newURL ? (new URL(e.newURL).hash || '') : (location.hash || ''); const m = PET_HASH.exec(h); if (!m) return;
+        const go = (n = 0) => { const st = A()?.state; if (!st?.hasRendered) { if (n < 100) setTimeout(() => go(n + 1), 150); return; } try { history.replaceState(null, '', location.pathname + location.search + '#personnes'); } catch (_) {} const t = String(m[2] || '').toLowerCase(); const tab = TAB_FR[t] || t; tab === 'pedigree' ? openPet(Number(m[1]), 'pedigree') : openPet(Number(m[1]), '', tab); };
+        go();
+    }
+    window.addEventListener('hashchange', fromHash, true); // avant la route de l'app (qui remet « #personnes »)
+    if (document.readyState === 'complete') setTimeout(fromHash, 0); else window.addEventListener('load', fromHash);
+    // ouvrir la fiche sur le bon bloc (sa section dépliée, ou son onglet)
+    ext.afterPerson = ext.afterPerson || [];
+    ext.afterPerson.push(() => { const st = S(), k = st.sheetFocus; if (!k) return; st.sheetFocus = ''; setTimeout(() => window.LCNDA_SECTIONS?.revealBlock?.(k), 60); });
     document.addEventListener('click', e => { const g = e.target.closest?.('[data-pet-goto]'); if (!g) return; e.preventDefault(); openPet(Number(g.dataset.petGoto)); });
 
     /* ═════════ La fiche d'un animal ═════════ */
@@ -212,7 +217,7 @@
                 ['Éleveur', d.breeder], ['Affixe', d.affix], ['Adresse de l’élevage', d.breeder_address], ['Portée', d.litter]]))}
             ${sec('parents', `🌳 Parents et pedigree <small class="muted">consanguinité : <strong title="Coefficient de Wright, d’après les ancêtres connus">${coiText(f)}</strong></small>`, `<div class="h-pet-parents"><div>${parentBox(d.sire_id, d.sire_name, d.sire_registration, 'Père')}${gp(d.sire_id, 'son père')}</div><div>${parentBox(d.dam_id, d.dam_name, d.dam_registration, 'Mère')}${gp(d.dam_id, 'sa mère')}</div></div>
                 ${Object.keys(contrib).length ? `<p class="muted">Ancêtres communs au père et à la mère : ${Object.entries(contrib).sort((a, b) => b[1] - a[1]).map(([aid, c]) => `<button type="button" class="table-link" data-pet-goto="${aid}">${esc(anc[aid]?.title || '#' + aid)}</button> (${coiText(c)})`).join(', ')}.</p>` : ''}
-                <button type="button" class="button small secondary" data-pet-ped2>🌳 Voir le pedigree complet</button>`)}
+                <button type="button" class="button small secondary" data-pet-pedfor="${id}">⛶ Voir le pedigree en grand</button>`)}
             ${sec('offspring', `🐾 Descendance <small class="muted">${fmt((p.offspring || []).length)} petit${(p.offspring || []).length > 1 ? 's' : ''}</small>`, Object.keys(litters).length ? Object.values(litters).map(L => `<div class="h-pet-litter"><h4>Portée ${L.date ? 'du ' + esc(L.date) : '(date inconnue)'} ${L.other ? `avec ${mates[L.other] ? `<button type="button" class="table-link" data-pet-goto="${L.other}">${esc(mates[L.other].title)}</button>` : '?'}` : ''} <small class="muted">${L.kids.length} petit${L.kids.length > 1 ? 's' : ''}</small></h4><div class="h-pet-minis">${L.kids.map(k => miniPet(k)).join('')}</div></div>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👶</span><span class="empty-line-text">Aucun petit dans la base <small>Sa fiche se crée avec ce parent déjà rempli.</small></span><button type="button" class="button small secondary" data-empty-click="[data-pet-kid]">＋ Un petit</button></p>')}
             ${full.length || half.length ? sec('siblings', '👥 Frères et sœurs', `${full.length ? `<h4>Mêmes parents</h4><div class="h-pet-minis">${full.map(k => miniPet(k)).join('')}</div>` : ''}${half.length ? `<h4>Demi-frères et demi-sœurs</h4><div class="h-pet-minis">${half.map(k => miniPet(k, k.sire_id === d.sire_id ? 'même père' : 'même mère')).join('')}</div>` : ''}`) : ''}
             ${sec('owners', '🏠 Ses maîtres', owners ? `<ul class="h-pet-owners">${owners}</ul>` : '<p class="muted">Relie l’animal aux fiches de ses maîtres : il apparaîtra sur leur fiche.</p>')}
@@ -228,43 +233,7 @@
         pr.customSecs.forEach(cs => { const body = customDl(cs.k); if (body) out.push({k: cs.k, title: esc(`${cs.icon} ${cs.label}`), body, cls: ''}); });
         return {out, d, age};
     }
-    const secHtml = s0 => `<section class="h-pet-sec ${s0.cls}" data-pet-sec="${s0.k}"><h3>${s0.title}</h3>${s0.body}</section>`;
-    async function showPet(token, id) {
-        const st = S();
-        let p; try { p = await api('pet', {id}); } catch (error) { st.hPet = 0; toast(error.message, 'error'); return ext.lists.pets(++st.workspaceToken); }
-        if (!isCurrent(token)) return;
-        const {out: secs, d, age} = petSections(p);
-        A().$('#workspace').innerHTML = `<section class="page h-pet">
-            <header class="page-header h-pet-head"><div class="h-pet-hero">${p.media?.[0] ? photoHtml(p.media[0], 'is-hero') : `<span class="h-pet-hero-ic">${iconOf(d.species)}</span>`}
-                <div><span class="eyebrow">${iconOf(d.species)} ${esc(speciesLabel(d.species) || 'Animal')}${d.breed ? ' · ' + esc(d.breed) : ''}</span><h2>${esc(p.title)}${d.sex ? ` <span class="h-pet-sex is-${d.sex}">${d.sex === 'M' ? '♂' : '♀'}</span>` : ''}${d.deceased ? ' <span class="h-pet-gone">†</span>' : ''}</h2>
-                ${d.registered_name && d.registered_name !== p.title ? `<p class="h-pet-reg">${esc(d.registered_name)}</p>` : ''}<p>${esc([lifespan(d), age && (d.deceased ? 'mort à ' : '') + age, d.color].filter(Boolean).join(' · '))}</p></div></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-pet-back>← Tous les animaux</button><button type="button" class="button" data-pet-edit>✎ Modifier</button><button type="button" class="button secondary" data-pet-ped>🌳 Pedigree</button><button type="button" class="button secondary" data-pet-kid>＋ Un petit</button>${p.person_id ? `<button type="button" class="button secondary" data-h-person="${p.person_id}" title="Sa fiche comme une personne : arbre, événements, sources…">👤 Fiche complète</button>` : '<button type="button" class="button secondary" data-pet-mkperson title="Lui faire aussi une fiche comme une personne : arbre, événements, photos, sources…">＋ Fiche complète</button>'}<button type="button" class="button secondary" data-pet-layout title="Ranger, montrer ou cacher les parties de la fiche">⚙️ Organiser</button><button type="button" class="button secondary" data-pet-print>🖨 Imprimer</button><button type="button" class="button secondary danger" data-pet-del>Supprimer</button></div></header>
-            ${ext.labelChips ? ext.labelChips(p.labels) : ''}
-            <div class="h-pet-body">
-            ${secs.map(secHtml).join('')}
-            </div>
-            <div data-rc-host data-rc-type="pet" data-rc-key="${id}"></div>
-        </section>`;
-        A().bindTableLinks?.();
-        const ws = A().$('#workspace'), again = () => showPet(++st.workspaceToken, id);
-        ws.querySelector('[data-pet-back]').addEventListener('click', () => { st.hPet = 0; ext.lists.pets(++st.workspaceToken); });
-        ws.querySelector('[data-pet-edit]').addEventListener('click', () => openEditor(p, again));
-        ws.querySelectorAll('[data-pet-ped], [data-pet-ped2]').forEach(b => b.addEventListener('click', () => openPet(id, 'pedigree')));
-        ws.querySelector('[data-pet-kid]').addEventListener('click', () => openEditor(null, null, {species: d.species, breed: d.breed, registry: d.registry, ...(d.sex === 'F' ? {dam_id: id} : {sire_id: id}), owners: d.owners.filter(o => o.role === 'éleveur' || o.role === 'propriétaire').map(o => ({...o, role: 'éleveur'})), breeder: d.breeder, affix: d.affix}));
-        ws.querySelector('[data-pet-print]').addEventListener('click', () => (window.LCNDA_UI?.printPage ? window.LCNDA_UI.printPage('') : window.print())); // K13
-        applyLayout(ws.querySelector('.h-pet-body'));
-        ext.suivi?.decoratePet?.(ws, p, again); // 🐾 Suivi des animaux : onglets Marques, Observations, Santé, Groupe, Trajets (heritage-suivi-fiche.js)
-        ws.querySelector('[data-pet-layout]').addEventListener('click', () => layoutDialog(again));
-        ws.querySelector('[data-pet-mkperson]')?.addEventListener('click', async () => {
-            if (!await A().confirmBox(`Faire aussi une fiche complète pour « ${p.title} » ? Elle apparaîtra avec les fiches (arbre, événements, photos, sources), reliée à ses parents et petits qui en ont une. Sa fiche d’animal reste comme elle est.`, {title: 'Fiche complète', okLabel: 'Faire la fiche complète'})) return;
-            try { const r = await api('pet_make_person', {}, {method: 'POST', body: {id}}); toast('Fiche complète créée.'); S().currentPersonId = Number(r.result?.person_id || r.person_id); A().setModule('personnes'); } catch (error) { toast(error.message, 'error'); }
-        });
-        ws.querySelector('[data-pet-del]').addEventListener('click', async () => {
-            if (!await A().confirmBox(`Supprimer la fiche de « ${p.title} » ? Ses photos restent dans les médias ; ses petits gardent leur fiche (son nom reste écrit comme parent).`, {title: 'Supprimer la fiche de l’animal', okLabel: 'Supprimer la fiche'})) return;
-            const withPerson = p.person_id ? await A().confirmBox('Supprimer aussi sa fiche complète (arbre, événements…) ?', {title: 'Fiche complète', okLabel: 'Supprimer aussi la fiche complète', cancelLabel: 'Garder la fiche complète', danger: true}) : false;
-            try { await api('delete_pet', {}, {method: 'POST', body: {id, with_person: withPerson}}); toast('Fiche supprimée.'); st.hPet = 0; ext.lists.pets(++st.workspaceToken); } catch (error) { toast(error.message, 'error'); }
-        });
-    }
+    /* La page simple « fiche d’animal » (showPet) n’existe plus : tout est dans la fiche complète (fiche-sections.html, F7). */
     /** Une petite courbe du poids (si au moins deux mesures chiffrées) */
     function weightChart(rows) {
         const pts = rows.map(r => ({d: parseDate(r.date), w: parseFloat(String(r.weight || '').replace(',', '.'))})).filter(x => x.d && Number.isFinite(x.w)).sort((a, b) => a.d - b.d);
@@ -280,7 +249,7 @@
         let r; try { r = await api('pet_pedigree', {id, gens: Math.max(gens, 8)}); } catch (error) { toast(error.message, 'error'); return; }
         if (!isCurrent(token)) return;
         const anc = r.ancestors || {}, me = anc[id];
-        if (!me) { st.hPetView = ''; return showPet(token, id); }
+        if (!me) { st.hPetView = ''; st.hPet = 0; return openPet(id); }
         const f = coi(id, anc), contrib = coi.last || {};
         // les cases : génération g (1 = parents), position i ; un ancêtre présent plusieurs fois a sa couleur
         const slots = []; const walk = (x, g, i, name, reg) => { if (g > gens) return; slots.push({g, i, p: x && anc[x], name, reg}); const a = x && anc[x]; walk(a?.sire_id || 0, g + 1, i * 2, a?.sire_name || '', ''); walk(a?.dam_id || 0, g + 1, i * 2 + 1, a?.dam_name || '', ''); };
@@ -361,12 +330,12 @@
         const f = (name, label, ph = '', type = 'text') => `<label data-pf="${PF_OF[name] || name}">${esc(label)}<input type="${type}" name="${name}" value="${esc(d[name] || '')}" placeholder="${esc(ph)}"></label>`;
         const area = (name, label, rows, ph = '') => `<label class="span-2" data-pf="${PF_OF[name] || name}">${esc(label)}<textarea name="${name}" rows="${rows}" placeholder="${esc(ph)}">${esc(d[name] || '')}</textarea></label>`;
         const pr = petPrefs(), mine = sk => pr.customFields.filter(cf => cf.sec === sk).map(cf => customFieldHtml(cf, d)).join('');
-        const onFiche = !!(p?.person_id || opts.fromFiche); // a une fiche complète : photos → « Médias », notes → « Notes » de la fiche
+        const onFiche = true; // 🐾 une seule fiche : photos → « Médias », notes → « Notes » de la fiche // a une fiche complète : photos → « Médias », notes → « Notes » de la fiche
         const listBox = list => `<div data-pet-list="${list}">${(d[list] || []).map(r => rowHtml(list, r)).join('')}</div><button type="button" class="button small secondary" data-pet-add="${list}">+ ${esc(LISTS[list].label)}</button>`;
         ext.openDialog({eyebrow: 'ANIMAL', title: p ? p.title : 'Nouvel animal', wide: true, labels: ['pet', p?.labels || []],
             body: `<div class="h-pet-editor">
                 <nav class="h-bk-nav">${allSecs(pr).map(([k, l]) => `<a href="#${esc(k)}" data-pet-jump="${esc(k)}">${esc(l)}</a>`).join('')}</nav>
-                <section id="pe1"><h3>🪪 Identité</h3>${p?.person_id ? '<p class="muted">Il a une fiche complète : le nom, le sexe, la naissance, le décès et les parents écrits ici y sont repris (et ce qui est corrigé sur la fiche complète revient ici).</p>' : opts.fromFiche ? '<input type="hidden" name="make_person" value="1"><p class="muted">Une fiche complète (comme une personne) est faite en même temps : elle s’ouvre après l’enregistrement.</p>' : `<label class="checkbox-line h-pet-mkp"><input type="checkbox" name="make_person" ${baseMode() !== 'family' && !p ? 'checked' : ''}> <span>👤 Lui faire aussi une fiche complète, comme une personne (arbre, événements, photos, sources…)</span></label>`}<div class="form-grid">${f('name', 'Nom', 'Médor')}${f('registered_name', 'Nom d’affixe / nom officiel (LOF, LOOF…)', 'Médor du Val de Loire')}${f('call_name', 'Appelé', 'Mémé')}
+                <section id="pe1"><h3>🪪 Identité</h3>${p ? '' : '<p class="muted">Sa fiche s’ouvre après l’enregistrement, comme celle d’une personne (arbre, événements, photos, sources, suivi…).</p>'}<div class="form-grid">${f('name', 'Nom', 'Médor')}${f('registered_name', 'Nom d’affixe / nom officiel (LOF, LOOF…)', 'Médor du Val de Loire')}${f('call_name', 'Appelé', 'Mémé')}
                     <label data-pf="species">Espèce <select name="species">${visibleSpecies(d.species).map(([k, l]) => `<option value="${k}" ${(SPECIES[d.species] ? d.species : 'autre') === k ? 'selected' : ''}>${iconOf(k)} ${esc(l)}</option>`).join('')}</select></label>${f('breed', 'Race', 'Berger allemand')}${f('variety', 'Variété', 'poil long')}
                     <label data-pf="sex">Sexe <select name="sex"><option value="">?</option><option value="M" ${d.sex === 'M' ? 'selected' : ''}>♂ mâle</option><option value="F" ${d.sex === 'F' ? 'selected' : ''}>♀ femelle</option></select></label>
                     <label class="checkbox-line" data-pf="neutered"><input type="checkbox" name="neutered" ${d.neutered ? 'checked' : ''}> <span>stérilisé(e)</span></label>${f('neutered_date', 'Stérilisé(e) le')}
@@ -412,14 +381,13 @@
                 data.sire_id = Number(form.elements.sire_id.value) || 0; data.dam_id = Number(form.elements.dam_id.value) || 0;
                 for (const list of Object.keys(LISTS)) data[list] = readRows(form, list);
                 if (!data.name && !data.registered_name && !data.call_name) return window.LCNDA_UI.fail(form.elements.name, 'Donne au moins un nom à l’animal.');
-                const saved = await api('save_pet', {}, {method: 'POST', body: {id: p?.id || 0, data, pending_labels: val.pending_labels, make_person: !!(form.elements.make_person?.type === 'hidden' || form.elements.make_person?.checked)}});
+                const saved = await api('save_pet', {}, {method: 'POST', body: {id: p?.id || 0, data, pending_labels: val.pending_labels, make_person: true}});
                 const id = Number(saved.result?.id || saved.id);
                 if (ext.uploadMediaEditor && !onFiche) await ext.uploadMediaEditor(form, 'pet', id);
                 // fiche complète faite à l'instant (case cochée) : ses photos et notes y passent
-                const newPid = Number(saved.result?.person_id || saved.person_id); if (newPid && !p?.person_id && !opts.fromFiche) { try { await api('pet_for_person', {}, {method: 'POST', body: {person_id: newPid}}); } catch (_) {} }
                 toast('Fiche de l’animal enregistrée.');
-                if (opts.fromFiche && Number(saved.result?.person_id || saved.person_id)) { S().currentPersonId = Number(saved.result?.person_id || saved.person_id); A().setModule('personnes'); return; }
-                if (done) done(); else openPet(id);
+                const newPid = Number(saved.result?.person_id || saved.person_id);
+                if (done) done(); else if (newPid) { if (A().openPersonById) A().openPersonById(newPid); else { S().currentPersonId = newPid; A().setModule('personnes'); } } else openPet(id);
             },
         });
     }
@@ -525,15 +493,19 @@
     /* ═════════ Les blocs propres aux animaux, sur leur fiche complète ═════════ */
     const secCache = new WeakMap();
     const secsOf = a => { if (!secCache.has(a)) secCache.set(a, petSections(a).out); return secCache.get(a); };
-    const BLOCKS = {animal_ident: ['ident', 'pe2', '🔖 Identification et origines'], animal_parents: ['parents', 'pe3', '🌳 Parents et pedigree'], animal_offspring: ['offspring', 'pe3', '🐾 Descendance'], animal_siblings: ['siblings', 'pe3', '👥 Frères et sœurs'],
-        animal_owners: ['owners', 'pe4', '🏠 Ses maîtres'], animal_titles: ['titles', 'pe5', '🏆 Titres, expositions, concours'], animal_health: ['health', 'pe6', '🩺 Santé'], animal_measures: ['measures', 'pe7', '📏 Poids et taille'],
+    const BLOCKS = {animal_parents: ['parents', 'pe3', '🌳 Pedigree'], animal_offspring: ['offspring', 'pe3', '🐾 Descendance'], animal_siblings: ['siblings', 'pe3', '👥 Frères et sœurs'],
+        animal_owners: ['owners', 'pe4', '🏠 Ses maîtres'], animal_titles: ['titles', 'pe5', '🏆 Titres et concours'],
         animal_life: ['life', 'pe8', '📅 Sa vie'], animal_story: ['story', 'pe9', '📖 Son histoire et nos souvenirs']};
     Object.entries(BLOCKS).forEach(([key, [sk, pe, title]]) => {
         ext.personBlocks[key] = (index, detail) => {
             const a = detail.heritage?.animal; if (detail.person?.kind !== 'animal' || !a) return '';
             const s0 = secsOf(a).find(x => x.k === sk);
+            // « Titres et concours », « Descendance », « Frères et sœurs », « Ses maîtres » vides : pas montrés (comme sur l'ancienne page)
+            if (!s0 && ['animal_titles', 'animal_siblings'].includes(key)) return '';
+            const head = key === 'animal_parents' ? `🌳 Pedigree <small class="muted">consanguinité : <strong title="Coefficient de Wright, d’après les ancêtres connus">${coiText(coi(a.id, a.ancestors || {}))}</strong></small>` : esc(title);
+            const big = key === 'animal_parents' ? `<button type="button" class="button small secondary" data-pet-pedfor="${a.id}" title="Le pedigree en grand, sur plusieurs générations">⛶ Grand</button>` : '';
             // le titre peut contenir du HTML déjà échappé (« consanguinité : 0 % ») ; span-12 : largeur réglable comme tout bloc
-            return A().card(index, '\u0001', '', s0?.body || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Rien pour l’instant.</span></p>', 'span-12', `<button type="button" class="button small secondary" data-pet-editfor="${a.id}" data-pet-jump="${pe}" title="Modifier">✎</button>`).replace('\u0001', s0?.title || esc(title));
+            return A().card(index, '\u0001', '', s0?.body || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Rien pour l’instant.</span></p>', 'span-12', `${big}<button type="button" class="button small secondary" data-pet-editfor="${a.id}" data-pet-jump="${pe}" title="Modifier">✎</button>`).replace('\u0001', head);
         };
     });
     // les catégories à soi (Réglages des animaux), réunies dans un bloc
@@ -557,18 +529,31 @@
     // « ＋ Nouvel animal » depuis Personnes / Animaux : le formulaire d'un animal, avec sa fiche complète
     ext.newAnimalFiche = () => openEditor(null, null, {}, {fromFiche: true});
 
-    /* ═════════ Bloc « Caractéristiques de l'animal » de sa fiche complète ═════════ */
+    /* ═════════ Bloc « 🐾 Caractéristiques » de la fiche : le résumé et « identification et origines » réunis (fiche-sections.html, F4–F7) ═════════ */
     ext.personBlocks.animal = (index, detail) => {
         const a = detail.heritage?.animal; if (detail.person?.kind !== 'animal') return '';
-        if (!a) return A().card(index, '🐾 Caractéristiques de l’animal', '', '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🐾</span><span class="empty-line-text">Pas encore de fiche d’animal (race, puce, éleveur, pedigree…).</span></p>', 'span-12', `<button type="button" class="button small" data-pet-createfor="${Number(detail.person.id)}">＋ Ses caractéristiques</button>`);
+        if (!a) return A().card(index, '🐾 Caractéristiques', '', '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🐾</span><span class="empty-line-text">Pas encore de caractéristiques (race, puce, éleveur, pedigree…).</span></p>', 'span-12', `<button type="button" class="button small" data-pet-createfor="${Number(detail.person.id)}">＋ Ses caractéristiques</button>`);
         const d = a.data || {}, anc = a.ancestors || {}, f = coi(a.id, anc), sire = d.sire_id && anc[d.sire_id], dam = d.dam_id && anc[d.dam_id];
+        const pr = petPrefs(), cus = d.custom || {};
         const dlA = rows => rows.filter(([, v]) => v).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
+        // ce qui est vide ne s'affiche pas (un oiseau sauvage n'a ni race, ni puce, ni éleveur)
+        const rows = dlA([['Espèce', speciesLabel(d.species)], ['Race', [d.breed, d.variety].filter(Boolean).join(', ')], ['Nom officiel', d.registered_name !== a.title ? d.registered_name : ''], ['Robe', d.color], ['Marques particulières', d.markings], ['Poil', d.coat], ['Yeux', d.eyes],
+            ['Stérilisé(e)', d.neutered ? 'oui' + (d.neutered_date ? ` (${d.neutered_date})` : '') : ''], ['Puce', d.microchip], ['Tatouage', d.tattoo], ['Passeport', d.passport], ['Livre des origines', [d.registry, d.registration].filter(Boolean).join(' · ')], ['N° de pedigree', d.pedigree_number], ['UELN', d.ueln], ['ADN', d.dna],
+            ['Éleveur', [d.breeder, d.affix && `affixe « ${d.affix} »`].filter(Boolean).join(' · ')], ['Adresse de l’élevage', d.breeder_address], ['Portée', d.litter], ['Père', sire ? sire.title : d.sire_name], ['Mère', dam ? dam.title : d.dam_name],
+            ['Consanguinité', Object.keys(anc).length > 1 ? coiText(f) : ''], ['Petits', (a.offspring || []).length ? fmt(a.offspring.length) : ''], ['Titres', (d.titles || []).length ? d.titles.map(t => t.title).filter(Boolean).join(', ') : ''],
+            ...pr.customFields.filter(cf => cf.sec === 'pe1' || cf.sec === 'pe2').map(cf => [cf.label, cus[cf.k] || ''])]);
         const body = `<div class="h-pet-animalblock">${a.media?.[0] ? photoHtml(a.media[0], 'is-mini') : `<span class="h-pet-hero-ic">${iconOf(d.species)}</span>`}
-            <dl class="h-pet-dl">${dlA([['Espèce', speciesLabel(d.species)], ['Race', [d.breed, d.variety].filter(Boolean).join(', ')], ['Nom officiel', d.registered_name !== a.title ? d.registered_name : ''], ['Robe', d.color], ['Marques', d.markings], ['Puce', d.microchip], ['Tatouage', d.tattoo],
-                ['Livre des origines', [d.registry, d.registration].filter(Boolean).join(' · ')], ['Éleveur', [d.breeder, d.affix].filter(Boolean).join(' · ')], ['Père', sire ? sire.title : d.sire_name], ['Mère', dam ? dam.title : d.dam_name],
-                ['Consanguinité', Object.keys(anc).length > 1 ? coiText(f) : ''], ['Petits', (a.offspring || []).length ? fmt(a.offspring.length) : ''], ['Titres', (d.titles || []).length ? d.titles.map(t => t.title).filter(Boolean).join(', ') : '']]) || '<div><dd class="muted">Ses caractéristiques (race, puce, éleveur, santé…) : « ✎ Caractéristiques ».</dd></div>'}</dl></div>`;
-        return A().card(index, `${iconOf(d.species)} Caractéristiques de l’animal`, '', body, 'span-12',
-            `<button type="button" class="button small" data-pet-editfor="${a.id}">✎ Caractéristiques</button><button type="button" class="button small secondary" data-pet-pedfor="${a.id}">🌳 Pedigree</button><button type="button" class="button small secondary" data-pet-goto="${a.id}">🐾 Fiche d’animal</button>`);
+            <dl class="h-pet-dl">${rows || '<div><dd class="muted">Ses caractéristiques (race, puce, éleveur, santé…) : « ✎ Modifier ».</dd></div>'}</dl></div>`;
+        return A().card(index, `${iconOf(d.species)} Caractéristiques`, '', body, 'span-12',
+            `<button type="button" class="button small secondary" data-pet-editfor="${a.id}" title="Modifier les caractéristiques">✎</button>`);
+    };
+    /* ═════════ Bloc « 🩺 Santé » : la santé écrite (vétérinaire, vaccins, tests), le poids et la taille, et le suivi (frise des états, courbe, soins) ═════════ */
+    ext.personBlocks.animal_health = (index, detail) => {
+        const a = detail.heritage?.animal; if (detail.person?.kind !== 'animal' || !a) return '';
+        const secs = secsOf(a), h = secs.find(x => x.k === 'health'), m = secs.find(x => x.k === 'measures');
+        const parts = `${h?.body || ''}${m ? `<h4>📏 Poids et taille</h4>${m.body}` : ''}`;
+        const sv = ext.suivi?.healthHolder ? ext.suivi.healthHolder(a.id) : '';
+        return A().card(index, '🩺 Santé', a.suivi?.health || '', `${parts ? `<div class="h-pet-health-notes">${parts}</div>` : ''}${sv}`, 'span-12', `<button type="button" class="button small secondary" data-pet-editfor="${a.id}" data-pet-jump="pe6" title="Modifier la santé">✎</button>`);
     };
     document.addEventListener('click', async e => {
         const cf = e.target.closest?.('[data-pet-createfor]');

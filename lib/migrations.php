@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 66;
+const SCHEMA_VERSION = 67;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -87,6 +87,7 @@ function migration_steps(): array
         64 => 'schema_v64',
         65 => 'schema_v65',
         66 => 'schema_v66',
+        67 => 'schema_v67',
     ];
 }
 
@@ -2322,4 +2323,17 @@ function schema_v66(PDO $pdo): void
 {
     if (!function_exists('suivi_obs_media_column')) { require_once __DIR__ . '/suivi.php'; }
     suivi_obs_media_column($pdo);
+}
+
+/** 🐾 Fiche animal unique (docs/design/fiche-sections.html, F7) : la page simple « fiche d'animal » disparaît ; chaque animal
+ *  qui n'avait qu'elle reçoit sa fiche complète (lib/pets.php, pets_give_full_fiche : nom, sexe, naissance, décès, parents,
+ *  photos et notes y passent ; rien n'est effacé). Le nombre est gardé pour le message unique de la liste des animaux
+ *  (réglage « genealogie-pets-merged », relu par heritage-pets.js puis effacé). */
+function schema_v67(PDO $pdo): void
+{
+    if (!function_exists('pets_give_full_fiche')) { require_once __DIR__ . '/pets.php'; }
+    $n = pets_give_full_fiche($pdo);
+    if ($n > 0) {
+        try { $pdo->prepare('INSERT OR REPLACE INTO app_settings(key, value, updated_at) VALUES(?, ?, CURRENT_TIMESTAMP)')->execute(['genealogie-pets-merged', json_encode(['n' => $n], JSON_UNESCAPED_UNICODE)]); } catch (Throwable) { /* pas de table des réglages : pas de message */ }
+    }
 }

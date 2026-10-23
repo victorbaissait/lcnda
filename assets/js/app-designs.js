@@ -814,7 +814,10 @@
     const whyList = why => `<ul class="lcd-why-list">${why.map(([i, t]) => `<li><span aria-hidden="true">${i}</span><span>${t}</span></li>`).join('')}</ul>`;
     let PAGE = null; // {box, data, G}
     /** la page n'a plus A5 : les cases des arbres se règlent dans Graphiques → 🎨 Couleurs (fenêtre « Statistiques et arbres », ext.treeCards plus bas) */
-    const PAGE_IDS = IDS.filter(id => id !== 'a5');
+    const PAGE_IDS = IDS.filter(id => id !== 'a5' && id !== 'a4');
+    /** A4 « Fiche d'une personne » est dans Réglages → Apparence → Fiches personnes et animaux (cadre « Forme de l'en-tête ») : même moteur, même stockage */
+    let EMB = null; // {box, data} : le cadre A4 posé dans la page des fiches
+    const ctxOf = box => (EMB && EMB.box === box ? EMB : PAGE);
 
     function summaryHtml(id, G) {
         const D = DEFS[id], mod = isModified(G, id);
@@ -895,7 +898,15 @@
         if (body.children.length !== modes.length) body.innerHTML = modes.map(() => '<div class="lcd-stage is-preview"></div>').join('');
         [...body.children].forEach((slot, i) => mountFrame(slot, {G, dark: modes[i], screens, data, labels: true, W, labelSuffix: modes.length > 1 ? (modes[i] ? ' · sombre' : ' · clair') : ''}));
     }
+    function fillEmbedded() {
+        if (!EMB || !EMB.box.isConnected) { EMB = null; return; }
+        const G = cur(), body = EMB.box.querySelector('[data-lcd-body]');
+        EMB.box.querySelector('[data-lcd-sum]').innerHTML = `— ${esc(V('a4', G.a4.v).t)}${isModified(G, 'a4') ? ' <span class="lcd-tag is-mod">retouché</span>' : ''}`;
+        if (!body.firstElementChild) body.innerHTML = bodyHtml('a4', G);
+        choicesFill(body, 'a4', G, EMB.data); settingsFill(body, 'a4', G); previewFill(body, 'a4', G, EMB.data);
+    }
     function fillSection(id) {
+        if (EMB && id === 'a4') return fillEmbedded();
         if (!PAGE) return;
         const sec = PAGE.box.querySelector(`[data-lcd-sec="${id}"]`); if (!sec) return;
         const G = cur();
@@ -908,12 +919,13 @@
         previewFill(body, id, G, PAGE.data);
     }
     function refreshAll(only) {
+        if (EMB && (!only || only.includes('a4'))) fillEmbedded();
         if (!PAGE || !PAGE.box.isConnected) { PAGE = null; return; }
         PAGE.box.querySelector('.lcd-toc').outerHTML = tocHtml(cur());
         PAGE_IDS.forEach(id => { if (!only || only.includes(id)) fillSection(id); else { const sec = PAGE.box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) sec.querySelector('[data-lcd-sum]').innerHTML = summaryHtml(id, cur()); } });
     }
     function flash(id) {
-        const s = PAGE?.box.querySelector(`[data-lcd-sec="${id}"] [data-lcd-saved]`); if (s) { s.textContent = '✓ Enregistré'; s.classList.remove('is-fresh'); void s.offsetWidth; s.classList.add('is-fresh'); }
+        const s = (id === 'a4' && EMB?.box.isConnected ? EMB.box : PAGE?.box)?.querySelector(`[data-lcd-sec="${id}"] [data-lcd-saved]`); if (s) { s.textContent = '✓ Enregistré'; s.classList.remove('is-fresh'); void s.offsetWidth; s.classList.add('is-fresh'); }
         UI().pageSaved?.('saved');
     }
     /** un changement : gardé tout de suite, « ✓ Enregistré », et « ↶ Annuler » en bas à gauche (H7) */
@@ -930,8 +942,8 @@
     function refreshScreens() { scheduleDecorate(); }
     let liveTimer = 0;
     function live(id, k, val) { // un curseur qu'on fait glisser : l'aperçu suit, rien n'est encore gardé
-        if (!PAGE) return; const G = clone(cur()); G[id][k] = val;
-        clearTimeout(liveTimer); liveTimer = setTimeout(() => { const sec = PAGE?.box.querySelector(`[data-lcd-sec="${id}"]`); if (sec?.open) previewFill(sec, id, G, PAGE.data); }, 140);
+        const P0 = id === 'a4' && EMB?.box.isConnected ? EMB : PAGE; if (!P0) return; const G = clone(cur()); G[id][k] = val;
+        clearTimeout(liveTimer); liveTimer = setTimeout(() => { const sec = P0.box.querySelector(`[data-lcd-sec="${id}"]`) || (P0 === EMB ? P0.box : null); if (sec && (sec.open || P0 === EMB)) previewFill(sec, id, G, P0.data); }, 140);
     }
     async function loadData() {
         const st = A().state || {}, api = A().api;
@@ -949,8 +961,9 @@
         const st = A().state; if (st && token !== st.workspaceToken) return;
         const ws = document.getElementById('workspace'); if (!ws) return;
         const G = cur(), opened = openSet();
-        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Sept réglages pour changer la forme des éléments de l’app : traits, densité, icônes, en-tête des fiches, boutons, mouvements, listes. Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
+        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Six réglages pour changer la forme des éléments de l’app : traits, densité, icônes, boutons, mouvements, listes (la forme de l’en-tête des fiches se règle dans Fiches personnes et animaux). Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
             <div class="lcd-intro ui-notice ui-notice-info"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Ici, seulement la forme. La police, la taille du texte et les couleurs (Preset, Couleur principale) se règlent dans <button type="button" class="link-button" data-lcd-apparence>Réglages → Apparence</button> : elles passent toujours devant, quel que soit le design.</span></div>
+            <div class="ui-notice ui-notice-info lcd-trees-moved lcd-a4-moved"><span class="ui-notice-ic" aria-hidden="true">👤</span><span>A4 Fiche d’une personne → se règle maintenant dans <button type="button" class="link-button" data-lcd-fiches>Fiches personnes et animaux ↗</button> (cadre « Forme de l’en-tête », avec les sections, l’ordre et les éléments de l’en-tête).</span></div>
             <div class="ui-notice ui-notice-info lcd-trees-moved"><span class="ui-notice-ic" aria-hidden="true">🌳</span><span>Les cases des arbres (A5) se règlent maintenant avec leurs couleurs, dans <button type="button" class="link-button" data-lcd-trees>Graphiques → 🎨 Couleurs des statistiques et des arbres →</button></span></div>
             ${tocHtml(G)}
             <div class="lcd-secs">${PAGE_IDS.map(id => sectionShell(id, opened.has(id))).join('')}</div></section>`;
@@ -972,13 +985,14 @@
         box.addEventListener('click', e => {
             const go = e.target.closest('[data-lcd-go]');
             if (go) { const sec = box.querySelector(`[data-lcd-sec="${go.dataset.lcdGo}"]`); if (sec) { if (!sec.open) sec.open = true; sec.scrollIntoView({behavior: document.documentElement.classList.contains('a11y-calm') ? 'auto' : 'smooth', block: 'start'}); sec.querySelector('summary')?.focus({preventScroll: true}); } return; }
+            if (e.target.closest('[data-lcd-fiches]')) { if (window.LCNDA_SECTIONS?.openSheetsPage) window.LCNDA_SECTIONS.openSheetsPage('lc-person-header'); else { const st = A().state; if (st) st.maintenanceTab = 'design_sheets'; A().setModule?.('maintenance'); } return; }
             if (e.target.closest('[data-lcd-trees]')) { const st = A().state; A().openStatsColorsDialog?.(); return; }
             if (e.target.closest('[data-lcd-apparence]')) { const st = A().state; if (st) { st.maintenanceTab = 'design'; } A().setModule?.('maintenance'); return; }
             const rs = e.target.closest('[data-lcd-reset]');
-            if (rs) { const id = rs.dataset.lcdReset, G = cur(); if (id === 'all') { if (PAGE_IDS.every(i => !isOn(G, i))) return; const N = defaults(G.a5); N.a5 = clone(G.a5); commit(N, 'Designs remis comme au départ', null); return; } /* A5 (cases des arbres) a sa place ailleurs : il ne bouge pas */ if (!isOn(G, id)) return; const N = clone(G); N[id] = {...defOf(id, 'avant'), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; commit(N, `${DEFS[id].n} ${DEFS[id].title} remis comme au départ`, id); return; }
+            if (rs) { const id = rs.dataset.lcdReset, G = cur(); if (id === 'all') { if (PAGE_IDS.every(i => !isOn(G, i))) return; const N = defaults(G.a5); N.a5 = clone(G.a5); N.a4 = clone(G.a4); commit(N, 'Designs remis comme au départ', null); return; } /* A5 (cases des arbres) a sa place ailleurs : il ne bouge pas */ if (!isOn(G, id)) return; const N = clone(G); N[id] = {...defOf(id, 'avant'), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; commit(N, `${DEFS[id].n} ${DEFS[id].title} remis comme au départ`, id); return; }
             const ch = e.target.closest('[data-lcd-v]'); if (ch) { pickVariant(ch); return; }
             const md = e.target.closest('[data-lcd-mode] button');
-            if (md) { const id = md.closest('[data-lcd-mode]').dataset.lcdMode, p = prevPrefs(); p[id] = md.dataset.m; lsSet(PREV_KEY, p); const sec = box.querySelector(`[data-lcd-sec="${id}"]`); if (sec) previewFill(sec, id, cur(), PAGE.data); }
+            if (md) { const id = md.closest('[data-lcd-mode]').dataset.lcdMode, p = prevPrefs(); p[id] = md.dataset.m; lsSet(PREV_KEY, p); const sec = box.querySelector(`[data-lcd-sec="${id}"]`) || box; if (sec) previewFill(sec, id, cur(), ctxOf(box)?.data || {}); }
         });
         box.addEventListener('keydown', e => {
             const c = e.target.closest?.('[data-lcd-v]'); if (!c) return;
@@ -1010,7 +1024,7 @@
         if (G[id].v === k && !isModified(G, id)) return;
         const N = clone(G); N[id] = {...defOf(id, k), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})};
         commit(N, `${DEFS[id].n} ${DEFS[id].title} : ${V(id, k).t}`, id);
-        requestAnimationFrame(() => PAGE?.box.querySelector(`[data-lcd-sec="${id}"] [data-lcd-v="${k}"]`)?.focus({preventScroll: true}));
+        requestAnimationFrame(() => (id === 'a4' && EMB?.box.isConnected ? EMB.box : PAGE?.box)?.querySelector(`[data-lcd-sec="${id}"] [data-lcd-v="${k}"]`)?.focus({preventScroll: true}));
     }
     /* ═════════════════════════ 🌳 Cases des arbres (A5) : dans la fenêtre « Couleurs des statistiques et des arbres » ═════════════════════════
      * Graphiques → 🎨 Couleurs (index.php #stats-colors-dialog, app.js openStatsColorsDialog) : les 4 choix et leurs réglages,
@@ -1080,6 +1094,18 @@
 
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.designs = token => renderPage(token);
+    /** le cadre « Forme de l'en-tête » (A4) dans Réglages → Apparence → Fiches personnes et animaux : 4 cartes 👍 / 👎, Réglages en plus, aperçu réel */
+    ext.designsA4Frame = async host => {
+        if (!host) return;
+        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="a4" id="lcd-a4-emb"><div class="lcd-embed-head"><h4><span class="lcd-step">A4</span> Forme de l’en-tête <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">La forme générale (traits, coins, boutons) suit <button type="button" class="link-button" data-lcd-go-designs2>Designs au choix →</button></p><div class="lcd-body" data-lcd-body></div></div>`;
+        const box = host.querySelector('.lcd-embed');
+        const st = A().state;
+        EMB = {box, data: {stats: st?.bootstrap?.stats || {}, people: st?.people || []}};
+        box.addEventListener('click', e => { if (e.target.closest('[data-lcd-go-designs2]')) goDesigns(); });
+        bindPage(box);
+        fillEmbedded();
+        const data = await loadData(); if (EMB && EMB.box === box) { EMB.data = data; fillEmbedded(); }
+    };
 
     /* ═════════════════════════ Apparence ↔ Designs au choix ═════════════════════════
      * Apparence garde la priorité : un design ne touche ni au Preset, ni à la couleur principale, ni à la police, ni à la taille.

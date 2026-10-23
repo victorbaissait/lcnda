@@ -2932,6 +2932,54 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) .jfx-cell{border:1px solid #000}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .jfm-card{border-color:var(--lc-frame-color)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .jf-dot{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+/* sections.css */
+:root:is(.lc-frame,[data-lc-lines]) .fsec-toggle{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-chev{border:1.5px solid var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-wrap.is-line .fsec-head,:root:is(.lc-frame,[data-lc-lines]) .fsec-wrap.is-tabs.is-all .fsec-head{border-bottom:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-wrap.is-box > .fsec:not(.is-loose){border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-wrap.is-box .fsec-toggle{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-wrap.is-band .fsec-chev{border-color:rgba(255,255,255,.6)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-wrap.is-band .fsec-more{border-color:rgba(255,255,255,.6)}
+:root:is(.lc-frame,[data-lc-lines])[data-lc-btn="texte"] .segmented button:not(.is-active){border-color:transparent}
+:root:is(.lc-frame,[data-lc-lines]) .fsed-empty{border:1.5px dashed var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsed .fsed-secrow.is-loose{border:2px dashed var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsed-renamer{border:2px solid var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .fsed.is-avant .fsed-secrow:not(.is-loose){border-width:calc(2px * var(--lc-frame-k))}
+:root:is(.lc-frame,[data-lc-lines]) .fsed.is-new .fsed-list{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .fsed.is-new .order-row{border:0;border-bottom:1px solid var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsed.is-new .fsed-secrow:not(.is-loose){border-top:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsed.is-new .fsed-sec:first-child .fsed-secrow{border-top:0}
+:root:is(.lc-frame,[data-lc-lines]) .fsed.is-new .fsed-secrow.is-loose{border:0;border-top:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-row{border-bottom:1px solid var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-style{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-style.is-active{border-color:var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-thumb{border:1px solid var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-thumb .g b,:root:is(.lc-frame,[data-lc-lines]) .fsec-thumb .t b{border:calc(1px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-thumb .t b:first-child{border-color:var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-thumb.is-line .h span{border-bottom:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-thumb.is-box .h{border:calc(1px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-offnote{border:1.5px dashed var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-pv{border:1px solid var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-pv.is-line .fsec-pv-h{border-bottom:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-pv.is-box .fsec-pv-sec{border:calc(1px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-pv-grid i{border:calc(1px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-pv-tabs span{border:calc(1px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .fsec-pv-tabs span.is-on{border-color:var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .icon-action.lc-obs-btn{border-color:var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-obs-pill{border:1.5px solid var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-obs-strip{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-obs-fab{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .lc-seen.is-bottom{border-top:1px solid var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-sh-seen{border:2px solid var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-sh-pv-head{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-hh-btn.is-obs{border-color:var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-op{border:var(--line)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-op.is-active{border-color:var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-op-mini{border:1px solid var(--line-color)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-op-mini .g b{border:calc(1px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-op-mini .g b.o,:root:is(.lc-frame,[data-lc-lines]) .lc-op-mini .g b.w{border-color:var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .lc-op-mini .s{border:1px solid var(--blue)}
+:root:is(.lc-frame,[data-lc-lines]) .lcd-embed{border:var(--line)}
 /* transcribe.css */
 :root:is(.lc-frame,[data-lc-lines]) .h-tx-ctl+.h-tx-ctl{border-left:1px solid #e6e6ea}
 :root:is(.lc-frame,[data-lc-lines]) .h-tx-ctl[data-tx-item=tools]+.h-tx-ctl,:root:is(.lc-frame,[data-lc-lines]) .h-tx-ctl[data-tx-item=zoom]+.h-tx-ctl[data-tx-item=rot]{border-left:0}
@@ -3068,6 +3116,8 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) .sv-trip.is-on{border:2px solid var(--blue-bright)}
 :root:is(.lc-frame,[data-lc-lines]) .sv-share fieldset{border:1.5px solid var(--sv-line)}
 :root:is(.lc-frame,[data-lc-lines]) .sv-merge-animal{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-mthumb{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-mthumb:hover,:root:is(.lc-frame,[data-lc-lines]) .sv-mthumb:focus-visible{border-color:var(--blue-bright)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .sv-metal{border-color:var(--lc-frame-color)}
 /* indicateurs.css */
 :root:is(.lc-frame,[data-lc-lines]) .ui-badge,:root:is(.lc-frame,[data-lc-lines]) .status-badge,:root:is(.lc-frame,[data-lc-lines]) .sosa-star,:root:is(.lc-frame,[data-lc-lines]) .daboville-tag,:root:is(.lc-frame,[data-lc-lines]) .outside-genealogy-badge,:root:is(.lc-frame,[data-lc-lines]) .artist-badge,:root:is(.lc-frame,[data-lc-lines]) .investigation-status,:root:is(.lc-frame,[data-lc-lines]) .entity-date-badge,:root:is(.lc-frame,[data-lc-lines]) .h-badge,:root:is(.lc-frame,[data-lc-lines]) .h-new-badge,:root:is(.lc-frame,[data-lc-lines]) .tag-conf-badge,:root:is(.lc-frame,[data-lc-lines]) .grave-status-badge,:root:is(.lc-frame,[data-lc-lines]) .grave-condition-badge,:root:is(.lc-frame,[data-lc-lines]) .branch-closed-badge,:root:is(.lc-frame,[data-lc-lines]) .ar-badge,:root:is(.lc-frame,[data-lc-lines]) .investigation-item-status-badge{border:1.5px solid;border-color:#8a8f99}

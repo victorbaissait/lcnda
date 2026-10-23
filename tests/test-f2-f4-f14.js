@@ -231,6 +231,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
         try {
             for (const [name, vp, dark] of [['1440', { width: 1440, height: 900 }, false], ['390', { width: 390, height: 844 }, false], ['sombre', { width: 1440, height: 900 }, true]]) {
                 const ctx = await browser.newContext({ viewport: vp, colorScheme: dark ? 'dark' : 'light', acceptDownloads: true });
+await ctx.addInitScript(() => { try { localStorage.setItem('lcnda-sheet-sections-open', JSON.stringify({human: {s_ident: false, s_family: false, s_life: false, s_docs: false}})); } catch (_) {} }); // 🗂 sur téléphone les sections de la fiche sont repliées sauf la première (validé) : ici, toutes ouvertes
                 await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: base });
                 const p = await ctx.newPage(); watch(p, name);
                 await p.goto(base); await p.waitForFunction(() => window.LCNDA_APP?.state && window.LCNDA_EXT?.archiveServices && window.LCNDA_EXT?.hypotheses && window.LCNDA_EXT?.citations && window.LCNDA_EXT?.openDialog, null, { timeout: 20000 });

@@ -177,6 +177,7 @@ const check = async (name, fn) => { try { await fn(); results.push([name, true])
         browser = await pw.chromium.launch();
         for (const [w, h, dark] of [[1440, 1000, false], [390, 860, false], [1440, 1000, true]]) {
             const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: dark ? 'dark' : 'light' });
+await ctx.addInitScript(() => { try { localStorage.setItem('lcnda-sheet-sections-open', JSON.stringify({human: {s_ident: false, s_family: false, s_life: false, s_docs: false}})); } catch (_) {} }); // 🗂 sur téléphone les sections de la fiche sont repliées sauf la première (validé) : ici, toutes ouvertes
             await ctx.route(/cdn\.jsdelivr\.net|unpkg\.com|tile|openstreetmap/, r => r.abort());
             const page = await ctx.newPage();
             const errors = []; page.on('pageerror', e => errors.push('pageerror: ' + e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errors.push('console: ' + m.text()); });

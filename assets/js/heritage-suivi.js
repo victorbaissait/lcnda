@@ -66,8 +66,8 @@
         invalidate(); const st = A().state;
         if (st.module === 'dashboard' || st.module === 'suivi') return A().renderDashboard();
         if (st.module === 'listes' && st.listType === 'recensement') return ext.lists.recensement(++st.workspaceToken);
-        if (st.module === 'listes' && st.listType === 'pets' && st.hPet) return ext.lists.pets(++st.workspaceToken);
         if (st.module === 'listes') return A().renderList?.();
+        if (st.module === 'personnes' && st.currentPersonId && st.currentPerson?.person?.kind === 'animal') { if (ext.suivi.ficheCtx?.reload) return ext.suivi.ficheCtx.reload(); return A().selectPerson(st.currentPersonId, false); } // 🐾 la fiche complète d'un animal
     }
     const animalById = (D, id) => (D?.animals || []).find(a => a.id === Number(id)) || null;
     const speciesIcon = sp => (ext.speciesIcon ? ext.speciesIcon(sp) : '🐾');
@@ -336,7 +336,7 @@
     }};
     ext.dashboard.sv_missing = {load, render: (index, widget, span, D) => {
         if (!D) return card(index, widget, 'Animaux à retrouver', '', noData(), span);
-        const days = Math.max(1, Number(widget.config?.days) || 30), s = pick(D, widget), lim = Math.max(1, Number(widget.limit) || 6);
+        const days = Math.max(1, Number(ext.sheetHead?.().red) || Number(widget.config?.days) || 30), s = pick(D, widget) /* un seul seuil : « Pas revu au bout de… » (Fiches personnes et animaux → Éléments de l’en-tête) */, lim = Math.max(1, Number(widget.limit) || 6);
         const rows = s.animals.filter(a => !a.deceased).map(a => ({a, l: lastSeen(a)})).filter(x => !x.l || (daysSince(x.l.iso) ?? 9999) >= days).sort((x, y) => (x.l?.iso || '').localeCompare(y.l?.iso || ''));
         const html = rows.slice(0, lim).map(({a, l}) => `<div class="sv-row" data-sv-pet="${a.id}" role="button" tabindex="0"><span class="sv-what"><b>${esc(a.title)}</b>${l?.place ? ` · ${esc(l.place)}` : ''}</span>${badge(l ? ago(l.iso) : 'jamais vu', (daysSince(l?.iso) ?? 999) > 90 ? 'grey' : 'yellow')}${RO() ? '' : `<button type="button" class="icon-button small" data-sv-new-obs="${a.id}" title="Je viens de le revoir : ＋ Nouvelle observation" aria-label="＋ Nouvelle observation">＋</button>`}</div>`).join('');
         return card(index, widget, 'Animaux à retrouver', `<span class="sv-per">pas revus depuis ${esc(plural(days, 'jour'))}</span>`, rows.length ? `<div class="sv-rows">${html}</div>` : A().empty('Tous ont été revus récemment.', {icon: '✓'}), span);
@@ -425,7 +425,7 @@
         if (['sv_map', 'sv_recent', 'sv_stats', 'sv_counts', 'sv_animals', 'sv_health'].includes(t)) h += f('Site', `<span data-sv-cfg-site>${P().pickerField({name: '', hiddenName: false, kind: 'tsite', value: Number(c.site) || null})}</span>`);
         if (['sv_map', 'sv_recent', 'sv_stats'].includes(t)) h += f('Période', periodSeg(c.period || (t === 'sv_map' ? '30' : 'all')).replace(/name="svper"/g, `name="${uid}"`));
         if (t === 'sv_map') h += f('Options', `${UI().toggleHtml('Relier les points dans l’ordre', {checked: c.link !== false, attrs: 'data-sv-cfg="link"'})}${UI().toggleHtml('Montrer les trajets GPS', {checked: c.gps !== false, attrs: 'data-sv-cfg="gps"'})}`);
-        if (t === 'sv_missing') h += f('Pas revus depuis', `<input type="number" min="1" max="3650" data-unit="jours" data-sv-cfg="days" value="${Number(c.days) || 30}">`);
+        if (t === 'sv_missing') h += f('Pas revus depuis', `<input type="number" min="2" max="3660" data-unit="jours" data-sv-cfg="days" value="${Number(ext.sheetHead?.().red) || Number(c.days) || 30}"><small class="muted">Le même seuil que « 👁 Vu la dernière fois » des fiches d’animaux.</small>`);
         if (t === 'sv_health') h += f('Options', UI().toggleHtml('Seulement ceux qui ne vont pas bien', {checked: !!c.onlyBad, attrs: 'data-sv-cfg="onlyBad"'}));
         return `<div class="sv-cfg" data-sv-cfg-box>${h}<button type="button" class="button small secondary" data-sv-cfg-reset>↺ Remettre comme au départ</button></div>`;
     }
@@ -437,7 +437,7 @@
         pks.forEach(pk => { const val = P().pickerValue(pk), kind = pk.dataset.picker || ''; if (/pet/.test(kind) && Array.isArray(val)) out.pets = val.map(Number).filter(Boolean); else if (/pet/.test(kind)) out.pet = Number(val) || 0; else if (/tsite/.test(kind)) out.site = Number(val) || 0; });
         const per = box.querySelector('[data-sv-cfg="period"]:checked'); if (per) out.period = per.value;
         ['link', 'gps', 'onlyBad'].forEach(k => { if (v(k)) out[k] = v(k).checked; });
-        if (v('days')) out.days = Math.max(1, Math.min(3650, Number(v('days').value) || 30));
+        if (v('days')) { out.days = Math.max(2, Math.min(3660, Number(v('days').value) || 30)); try { const k = 'genealogie-sheet-head', h = JSON.parse(localStorage.getItem(k) || '{}') || {}; if (h.red !== out.days) localStorage.setItem(k, JSON.stringify({...h, red: out.days, green: Math.min(Number(h.green) || 7, out.days - 1)})); } catch (_) {} } // un seul seuil
         return out;
     }
     WIDGETS.forEach(([k]) => { ext.dashboardConfig[k] = {html: cfgHtml, read: cfgRead}; });
@@ -1097,10 +1097,12 @@
     };
 
     /* ═════════ Ouvrir une fiche (animal, site, groupe) et les clics communs ═════════ */
-    function openPet(id, tab = '') { const st = A().state; if (tab) st.svPetTab = tab; st.svSite = 0; st.svGroup = 0; if (ext.openPet) ext.openPet(Number(id)); }
-    function openSite(id) { const st = A().state; st.svSite = Number(id); st.svGroup = 0; st.listType = 'recensement'; st.hPet = 0; if (st.module === 'listes') ext.lists.recensement(++st.workspaceToken); else A().setModule('listes'); }
-    function openGroup(id) { const st = A().state; st.svGroup = Number(id); st.svSite = 0; st.listType = 'recensement'; st.hPet = 0; if (st.module === 'listes') ext.lists.recensement(++st.workspaceToken); else A().setModule('listes'); }
-    function openCensus(tab = '') { const st = A().state; st.svSite = 0; st.svGroup = 0; if (tab) st.svTab = tab; st.listType = 'recensement'; st.hPet = 0; if (st.module === 'listes') ext.lists.recensement(++st.workspaceToken); else A().setModule('listes'); }
+    function openPet(id, tab = '') { const st = A().state; st.svSite = 0; st.svGroup = 0; if (ext.openPet) ext.openPet(Number(id), '', tab); } // 🐾 la fiche complète, sur le bon bloc (« ↗ Santé » → 🩺 Santé)
+    /** la liste 🐾 Recensement, depuis n'importe quel écran (aussi depuis la fiche complète d'un animal) */
+    const toCensus = () => { const st = A().state; if (st.module === 'listes') return ext.lists.recensement(++st.workspaceToken); return Promise.resolve(A().setModule('listes')).then(() => { if (st.module === 'listes' && st.listType === 'recensement' && !document.querySelector('#workspace .sv-census')) ext.lists.recensement(++st.workspaceToken); }); };
+    function openSite(id) { const st = A().state; st.svSite = Number(id); st.svGroup = 0; st.listType = 'recensement'; st.hPet = 0; toCensus(); }
+    function openGroup(id) { const st = A().state; st.svGroup = Number(id); st.svSite = 0; st.listType = 'recensement'; st.hPet = 0; toCensus(); }
+    function openCensus(tab = '') { const st = A().state; st.svSite = 0; st.svGroup = 0; if (tab) st.svTab = tab; st.listType = 'recensement'; st.hPet = 0; toCensus(); }
     ext.suivi.openItem = (kind, id) => (kind === 'pet' ? openPet(id, 'marks') : kind === 'tsite' ? openSite(id) : openGroup(id));
     async function obsById(id) { const D = await overview(); return (D.observations || []).find(o => o.id === Number(id)) || null; }
     document.addEventListener('click', async e => {

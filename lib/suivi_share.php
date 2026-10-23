@@ -390,6 +390,7 @@ function suivi_share_apply(PDO $pdo, array $pkg, array $an, array $dec, array $m
                     $pd = json_decode((string) $prow['data_json'], true) ?: [];
                     foreach (array_keys($petFields) as $f) { $pd[$f] = $f === 'deceased' ? $a['deceased'] : $a[$f]; }
                     $pdo->prepare('UPDATE pets SET data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($pd, JSON_UNESCAPED_UNICODE), $tid]);
+                    pet_sync_person($pdo, $tid, ['sire_id' => (int) $prow['sire_id'], 'dam_id' => (int) $prow['dam_id']] + $pd); // 🐾 fiche animal unique : sa fiche complète suit (nom, sexe…)
                 }
             }
         }
@@ -472,8 +473,9 @@ function suivi_share_undo(PDO $pdo, int $rid): array
         $has = $pdo->prepare("SELECT 1 FROM $t WHERE $col=?"); $has->execute([(int) $id]);
         if ($has->fetchColumn()) { $pdo->prepare("UPDATE $t SET " . implode(',', array_map(static fn($c) => "$c=?", $cols)) . " WHERE $col=?")->execute([...array_map(static fn($c) => $row[$c], $cols), (int) $id]); }
         else { $pdo->prepare("INSERT INTO $t(" . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols), '?')) . ')')->execute(array_map(static fn($c) => $row[$c], $cols)); }
+        if ($t === 'pets') { pet_sync_person($pdo, (int) $id, ['sire_id' => (int) ($row['sire_id'] ?? 0), 'dam_id' => (int) ($row['dam_id'] ?? 0)] + (json_decode((string) ($row['data_json'] ?? ''), true) ?: [])); } // sa fiche complète reprend le nom d’avant
     }
-    foreach ($u['pets'] ?? [] as $pid) { delete_pet($pdo, ['id' => (int) $pid]); }
+    foreach ($u['pets'] ?? [] as $pid) { delete_pet($pdo, ['id' => (int) $pid, 'with_person' => true]); } // un animal arrivé avec la réception repart avec sa fiche complète
     $pdo->prepare('UPDATE suivi_receipts SET undone=1 WHERE id=?')->execute([$rid]);
     log_change($pdo, 'suivi_share', $rid, 'update', 'Réception du suivi annulée : ' . $r['summary']);
     return ['ok' => true];

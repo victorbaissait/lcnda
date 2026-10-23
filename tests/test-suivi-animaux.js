@@ -155,7 +155,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
     const ids = {};
     try {
         await t('migrations 65 et 66 : les tables du suivi existent', async () => {
-            const st = await get('schema_status'); assert.equal(st.version, 66);
+            const st = await get('schema_status'); assert.ok(st.version >= 66, String(st.version)); // 66 ou plus récent (67 : fiche animal unique)
             const o = await get('suivi', { op: 'overview' }); assert.deepEqual(o.observations, []); assert.ok(Array.isArray(o.animals));
         });
         await t('animaux et marques selon l’espèce (oiseau, chat, chimpanzé, dauphin)', async () => {
@@ -226,7 +226,7 @@ $pdo->exec('PRAGMA user_version = 65'); echo 'ok';`);
             const b = run(String.raw`require 'lib/paths.php'; require 'lib/bootstrap.php'; $pdo = db();
 echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn(), 'rows' => $pdo->query('SELECT media_id, media_ids FROM animal_observations ORDER BY id')->fetchAll(PDO::FETCH_ASSOC), 'out' => array_map(fn($o) => suivi_obs_out($o), $pdo->query('SELECT * FROM animal_observations ORDER BY id')->fetchAll(PDO::FETCH_ASSOC))]);`);
             const r = JSON.parse(b.stdout.trim().split('\n').pop());
-            assert.equal(r.v, 66); assert.equal(r.rows[0].media_ids, '77'); assert.equal(r.rows[1].media_ids, '');
+            assert.ok(r.v >= 66, String(r.v)); assert.equal(r.rows[0].media_ids, '77'); assert.equal(r.rows[1].media_ids, '');
             assert.deepEqual(r.out[0].media_ids, [77]); assert.equal(r.out[0].media_id, 77); assert.deepEqual(r.out[1].media_ids, []);
         });
         await t('santé : état, cause, poids, soigné par, suite', async () => {
@@ -474,9 +474,9 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
                         await shot(p, 'tableau-de-bord-suivi.png');
                     });
                     await t('S5 : fiche d’un oiseau (« 🔖 Bagues et marques »), d’un chat, d’un dauphin (« 🔖 Marques ») ; couleurs de base + C2', async () => {
-                        const marksOf = async id => { await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'marks'), id); await p.waitForSelector('.sv-pet-tabs', { timeout: 8000 }); await p.waitForSelector('.sv-pet-panel .card'); return p.textContent('.sv-pet-tabs'); };
+                        const marksOf = async id => { await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'marks'), id); await p.waitForFunction(i => window.LCNDA_EXT.suivi.ficheCtx?.id === i && document.querySelector('[data-pblock="animal_marks"] .sv-pet-panel .card'), id, { timeout: 8000 }); return p.textContent('[data-pblock="animal_marks"] h3'); }; // 🐾 fiche animal unique : le bloc « Bagues et marques » de la fiche complète
                         assert.match(await marksOf(ids.gaston), /Bagues et marques/);
-                        assert.match(await p.textContent('.sv-pet-panel'), /G V\/M · D R\/B « 7K »/);
+                        assert.match(await p.textContent('[data-pblock="animal_marks"] .sv-pet-panel'), /G V\/M · D R\/B « 7K »/);
                         await shot(p, 'fiche-gaston-marques.png', true);
                         await p.click('[data-sv-rings-edit]'); await p.waitForSelector('dialog[open] .sv-palette');
                         assert.equal(await p.$$eval('dialog[open] .sv-palette [data-col]:not([data-col="none"])', x => x.length), 14);
@@ -598,7 +598,7 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
                     await t('👥 groupe : la frise de l’histoire sociale (exclu ✖, passé dans un autre groupe →)', async () => {
                         await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'group'), ids.akela);
                         await p.waitForSelector('.sv-social .sv-social-seg');
-                        assert.match(await p.textContent('.sv-pet-panel'), /exclu/); assert.ok((await p.textContent('.sv-social')).includes('✖'));
+                        assert.match(await p.textContent('[data-pblock="animal_group"] .sv-pet-panel'), /exclu/); assert.ok((await p.textContent('.sv-social')).includes('✖'));
                         await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'group'), ids.kanzi);
                         await p.waitForSelector('.sv-social .sv-social-seg'); assert.ok((await p.textContent('.sv-social')).includes('→'));
                         await p.evaluate(i => window.LCNDA_EXT.suivi.openGroup(i), ids.g1); await p.waitForSelector('.sv-group .sv-social');
@@ -651,14 +651,14 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
                     });
                 }
                 if (name === '390') await t('[390] fiche d’un animal et fenêtre d’observation sans défilement de côté', async () => {
-                    await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'marks'), ids.gaston); await p.waitForSelector('.sv-pet-panel .card'); await noScroll(p);
+                    await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'marks'), ids.gaston); await p.waitForSelector('[data-pblock="animal_marks"] .sv-pet-panel .card'); await noScroll(p);
                     await shot(p, 'fiche-390.png', true);
                     await p.evaluate(() => { window.LCNDA_EXT.suivi.openObservation({}); }); await p.waitForSelector('dialog[open] [data-reading]'); await noScroll(p);
                     await shot(p, 'observation-390.png');
                 });
                 if (name === 'sombre') await t('[sombre] la fiche et la carte en sombre, texte lisible', async () => {
-                    await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'marks'), ids.gaston); await p.waitForSelector('.sv-pet-panel .card');
-                    const c = await p.$eval('.sv-pet-panel .card', e => getComputedStyle(e).color); assert.notEqual(c, 'rgb(8, 8, 8)');
+                    await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'marks'), ids.gaston); await p.waitForSelector('[data-pblock="animal_marks"] .sv-pet-panel .card');
+                    const c = await p.$eval('[data-pblock="animal_marks"] .sv-pet-panel .card', e => getComputedStyle(e).color); assert.notEqual(c, 'rgb(8, 8, 8)');
                     await shot(p, 'fiche-sombre.png', true);
                 });
                 await ctx.close();
@@ -671,8 +671,8 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
                 await p.waitForFunction(() => document.body.classList.contains('is-kiosk'), null, { timeout: 8000 });
                 await goSuivi(p);
                 assert.equal(await p.$('.sv-page [data-sv-new-obs]:visible'), null);
-                await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'marks'), ids.gaston); await p.waitForSelector('.sv-pet-panel .card');
-                assert.equal(await p.$('.sv-pet-panel [data-sv-rings-edit]'), null);
+                await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'marks'), ids.gaston); await p.waitForSelector('[data-pblock="animal_marks"] .sv-pet-panel .card');
+                assert.equal(await p.$('[data-pblock="animal_marks"] .sv-pet-panel [data-sv-rings-edit]'), null);
                 await p.evaluate(() => window.LCNDA_EXT.suivi.openCensus('animals')); await p.waitForSelector('.sv-census');
                 assert.deepEqual(posts, []);
                 const w2 = await post('suivi_write', { op: 'save_site', name: 'x' }); assert.equal(w2.status, 423);

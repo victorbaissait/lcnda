@@ -740,6 +740,9 @@ function site_defaults_allowed_keys(): array
         'genealogie-keynote-prefs',
         'genealogie-vector-map-palette',
         'genealogie-dashboard-blocks',
+        'genealogie-animal-blocks', // 🗂 blocs et sections des fiches des animaux
+        'genealogie-sheet-sections', // 🗂 sections des fiches (app-sections.js)
+        'genealogie-sheet-head', // éléments de l’en-tête, ＋ Nouvelle observation (app-apparence.js)
         'genealogie-design',
         'genealogie-design-presets',
         'genealogie-menu-order',

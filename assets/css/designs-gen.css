@@ -4622,6 +4622,94 @@
 :root[data-lc-sh="aucune"] .lc-hh-prev{box-shadow:none}
 :root[data-lc-sh="douces"] .lc-tb-prev{box-shadow:var(--lc-sh-m)}
 :root[data-lc-sh="aucune"] .lc-tb-prev{box-shadow:none}
+/* sections.css */
+:root[data-lc-density] .fsec-wrap{gap:calc(40px * var(--lc-sp))}
+:root[data-lc-density] .fsec-head{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsec-head{margin-bottom:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .fsec-toggle{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .fsec-toggle{padding:calc(4px * var(--lc-sp)) 0}
+:root[data-lc-density] .fsec-tools{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-r] .fsec-chev{border-radius:var(--lc-r)}
+:root[data-lc-density] .fsec-wrap.is-line .fsec-head,:root[data-lc-density] .fsec-wrap.is-tabs.is-all .fsec-head{padding-bottom:calc(6px * var(--lc-sp))}
+:root[data-lc-r] .fsec-wrap.is-box > .fsec:not(.is-loose){border-radius:var(--lc-r)}
+:root[data-lc-density] .fsec-wrap.is-box > .fsec:not(.is-loose){padding:calc(22px * var(--lc-sp)) calc(18px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .fsec-wrap.is-box .fsec-toggle{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsec-wrap.is-box .fsec.is-folded{padding-bottom:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .fsec-wrap.is-band .fsec-head{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .fsec-wrap.is-band .fsec-num{padding:1px calc(6px * var(--lc-sp))}
+:root[data-lc-density] .fsec-tabs-wrap{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .fsec-tabs.segmented button{padding:0 calc(14px * var(--lc-sp))}
+:root[data-lc-density] .fsec-own{gap:calc(8px * var(--lc-sp))}
+@media (max-width: 700px){
+  :root[data-lc-density] .fsec-wrap{gap:calc(28px * var(--lc-sp))}
+}
+:root[data-lc-density] .fsed{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .fsed-list.order-list{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsed-list.order-list{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .fsed-sec{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .fsed-blocks{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .fsed-blocks{padding-left:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .fsed-empty{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-r] .fsed-empty{border-radius:var(--lc-r)}
+:root[data-lc-density] .fsed .fsed-secrow{gap:calc(7px * var(--lc-sp))}
+:root[data-lc-density] .fsed .fsed-secrow{padding:calc(8px * var(--lc-sp))}
+:root[data-lc-r] .fsed .fsed-secrow.is-loose{border-radius:var(--lc-r)}
+:root[data-lc-density] .fsed .fsed-secrow.is-loose{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsed .order-row.fsed-brow{gap:calc(7px * var(--lc-sp))}
+:root[data-lc-density] .fsed .order-row.fsed-brow{padding:calc(7px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .fsed .block-widths{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .fsed .block-widths button{padding:0 calc(3px * var(--lc-sp))}
+:root[data-lc-density] .fsed-renamer{padding:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-r] .fsed-renamer{border-radius:var(--lc-r)}
+:root[data-lc-density] .fsed-add{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .fsed-addform{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-r] .fsed.is-avant .fsed-secrow:not(.is-loose){border-radius:var(--lc-r)}
+:root[data-lc-r] .fsed.is-new .fsed-list{border-radius:var(--lc-r)}
+:root[data-lc-density] .fsed.is-new .fsed-blocks{padding-left:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .fsed.is-new .fsed-add{padding:calc(4px * var(--lc-sp)) 0}
+@media (max-width: 520px){
+  :root[data-lc-density] .fsed-blocks{padding-left:calc(8px * var(--lc-sp))}
+}
+:root[data-lc-density] .fsec-toc{margin-top:calc(22px * var(--lc-sp))}
+:root[data-lc-density] .fsec-toc{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsec-toc{padding:calc(16px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .fsec-toc > div{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .fsec-panel{padding:calc(8px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .fsec-panel{margin-top:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .fsec-row{gap:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .fsec-row{padding:calc(12px * var(--lc-sp)) 0}
+:root[data-lc-density] .fsec-seg.segmented button{padding:0 calc(12px * var(--lc-sp))}
+:root[data-lc-density] .fsec-styles{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsec-style{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .fsec-style{padding:calc(8px * var(--lc-sp))}
+:root[data-lc-r] .fsec-style{border-radius:var(--lc-r)}
+:root[data-lc-density] .fsec-thumb{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .fsec-thumb{padding:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .fsec-thumb .h{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .fsec-thumb .g{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .fsec-thumb.is-box .h{padding:0 calc(3px * var(--lc-sp))}
+:root[data-lc-density] .fsec-thumb.is-band .h{padding:0 calc(3px * var(--lc-sp))}
+:root[data-lc-density] .fsec-opts{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsec-sub{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .fsec-designs-link{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pres-row{gap:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pres-row{padding:calc(16px * var(--lc-sp)) calc(22px * var(--lc-sp))}
+:root[data-lc-density] .fsec-offnote{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-r] .fsec-offnote{border-radius:var(--lc-r)}
+:root[data-lc-density] .fsec-dlg-top{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsec-dlg-top{margin-bottom:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pv{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pv{padding:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pv-h{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pv.is-band .fsec-pv-h{padding:calc(2px * var(--lc-sp)) calc(5px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pv.is-box .fsec-pv-sec{padding:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pv-grid{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .fsec-pv-tabs span{padding:1px calc(5px * var(--lc-sp))}
+@media (max-width: 700px){
+  :root[data-lc-density] .fsec-panel{padding:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+}
+:root[data-lc-density] .h-pets-merged{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-pet-health-notes{margin-bottom:calc(14px * var(--lc-sp))}
 /* transcribe.css */
 :root[data-lc-density] .h-tx-barwrap .h-tx-tools{row-gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-barwrap .h-tx-tools{column-gap:calc(6px * var(--lc-sp))}
@@ -4927,6 +5015,7 @@
 :root[data-lc-r] .sv-merge-animal{border-radius:var(--lc-r)}
 :root[data-lc-density] .sv-merge-animal{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 :root[data-lc-density] .sv-merge-animal{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .sv-mstrip{gap:calc(3px * var(--lc-sp))}
 :root[data-lc-sh="douces"][data-theme="dark"] .sv-map-pop{box-shadow:var(--lc-sh-m)}
 :root[data-lc-sh="aucune"][data-theme="dark"] .sv-map-pop{box-shadow:none}
 /* indicateurs.css */

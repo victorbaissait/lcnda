@@ -14,44 +14,89 @@
     const U = () => ext.suivi.U;
     const esc = v => U().esc(v);
 
-    /* ═════════ Les onglets de la fiche ═════════ */
-    ext.suivi.decoratePet = async (ws, p, again) => {
-        const page = ws?.querySelector('.page.h-pet'); if (!page || page.querySelector('.sv-pet-tabs')) return;
-        const st = A().state, id = Number(p.id);
-        let det, D;
-        try { [det, D] = await Promise.all([U().api('suivi', {op: 'animal', id}), U().overview(true)]); } catch (e) { console.error(e); return; }
-        if (!page.isConnected) return;
-        const me = U().animalById(D, id) || {id, title: p.title, species: det.species, marks: det.marks};
-        const prof = det.profile?.profile || det.guess || 'autre', PR = C().PROFILES[prof] || C().PROFILES.autre;
-        const rings = C().ringsOf({marks: det.marks}), last = U().lastSeen(me), lo = det.observations[0];
-        // la ligne du haut : statut, lecture, code court (S5)
-        const hero = page.querySelector('.h-pet-hero > div:last-child');
-        if (hero && (det.profile || det.marks.length || det.observations.length || det.gps.n)) {
-            const status = det.profile?.status === 'fini' ? U().badge('Suivi terminé', 'grey') : det.profile?.status === 'perdu' ? U().badge('Perdu de vue', 'yellow') : det.gps.n || det.marks.some(m => /gps|satellite|vhf/.test(m.kind) && !m.end_date) ? U().badge('Émet', 'blue') : U().badge('Suivi en cours', 'blue');
-            hero.insertAdjacentHTML('beforeend', `<p class="sv-pet-line">${[det.profile?.taxon ? esc(det.profile.taxon) : '', det.profile?.ringed_date ? `${prof === 'oiseau' ? 'Bagué' : 'Marqué'} le ${esc(det.profile.ringed_date)}` : '', last ? `vu pour la dernière fois ${esc(U().whenShort(last.iso).replace(/^auj\./, 'aujourd’hui'))}` : ''].filter(Boolean).join(' · ')}</p><p class="sv-pet-badges">${status}${det.health.length ? ' ' + U().healthBadge(det.health[det.health.length - 1].state) : ''}${lo ? ' ' + U().relBadge(lo) : ''}${rings ? ` <span class="sv-code">${U().ringsMini(rings)} ${esc(C().comboText(rings))}</span>` : ''}</p>`);
-        }
-        const acts = page.querySelector('.page-actions');
-        if (acts && !U().RO()) { const b = document.createElement('button'); b.type = 'button'; b.className = 'button'; b.dataset.svNewObs = String(id); b.textContent = '＋ Nouvelle observation'; acts.querySelector('[data-pet-back]') ? acts.querySelector('[data-pet-back]').after(b) : acts.prepend(b); const sh = document.createElement('button'); sh.type = 'button'; sh.className = 'button secondary'; sh.dataset.svShare = String(id); sh.textContent = '📤 Partager'; acts.appendChild(sh); }
-        const nights = det.gps.n ? '…' : 0;
-        const tabs = [['fiche', '🪪 Fiche'], ['marks', PR.tab + (det.marks.length ? ` (${det.marks.filter(m => !m.end_date).length})` : '')], ['obs', `👁 Observations (${det.observations.length})`], ['health', `🩺 Santé (${det.health.length})`], ['group', `👥 Groupe${det.members.length ? ` (${new Set(det.members.map(m => m.group_id)).size})` : ''}`], ['map', `🗺 ${det.gps.n ? 'Trajets' : 'Carte'}${det.gps.n ? ` (${nights})` : ''}`]];
-        const bar = document.createElement('div'); bar.className = 'segmented sv-pet-tabs'; bar.setAttribute('role', 'tablist');
-        bar.innerHTML = tabs.map(([k, l]) => `<button type="button" role="tab" data-sv-ptab="${k}">${esc(l)}</button>`).join('');
-        const panel = document.createElement('div'); panel.className = 'sv-pet-panel';
-        const anchor = page.querySelector('.h-pet-body'); anchor.before(bar); anchor.before(panel);
-        const ctx = {id, det, D, me, prof, PR, page, panel, again, reload: async () => { U().invalidate(); const [d2, D2] = await Promise.all([U().api('suivi', {op: 'animal', id}), U().overview(true)]); ctx.det = d2; ctx.D = D2; show(st.svPetTab || 'fiche'); }};
-        const show = k => {
-            st.svPetTab = k === 'fiche' ? '' : k;
-            bar.querySelectorAll('[data-sv-ptab]').forEach(b => { const on = b.dataset.svPtab === k; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', on); });
-            const fiche = k === 'fiche';
-            page.querySelectorAll(':scope > .h-pet-body, :scope > [data-rc-host], :scope > .label-chips, :scope > .h-labels').forEach(x => { x.hidden = !fiche; });
-            panel.hidden = fiche; if (fiche) { panel.innerHTML = ''; return; }
-            ({marks: marksTab, obs: obsTab, health: healthTab, group: groupTab, map: mapTab}[k] || marksTab)(ctx);
+    /* ═════════ Fiche animal unique (fiche-sections.html, F4–F7) : les onglets du suivi deviennent des BLOCS de la fiche complète ═════════
+     * « 🔖 Bagues et marques » (Marques pour un animal qui n'est pas un oiseau), « 👁 Observations », « 🩺 Santé » (avec heritage-pets.js),
+     * « 👥 Groupe », « 🗺 Carte / trajets » : rangés dans leurs sections (app-sections.js). Les mêmes fonctions qu'avant (marksTab, obsTab…)
+     * dessinent chacune dans son bloc (ctx.panel) ; une écriture relit le suivi et redessine tous les blocs. */
+    const SV_BLOCKS = {animal_marks: 'marks', animal_obs: 'obs', animal_group: 'group', animal_map: 'map'};
+    const isBird = a => (a?.data?.species || '') === 'oiseau' || /oiseau/.test(String(a?.data?.species || ''));
+    const holder = (kind, petId) => `<div class="sv-pet-panel" data-sv-block="${kind}" data-sv-pet-id="${Number(petId)}">${UI().spinner ? UI().spinner('Le suivi…') : '<p class="muted">Chargement…</p>'}</div>`;
+    ext.personBlocks = ext.personBlocks || {};
+    const svTitle = {marks: a => (isBird(a) ? '🔖 Bagues et marques' : '🔖 Marques'), obs: () => '👁 Observations', group: () => '👥 Groupe', map: a => (a?.suivi?.gps ? '🗺 Trajets' : '🗺 Carte')};
+    const svCount = {marks: a => a?.suivi?.marks || '', obs: a => a?.suivi?.obs ?? 0, group: a => a?.suivi?.groups || '', map: () => ''};
+    Object.entries(SV_BLOCKS).forEach(([key, kind]) => {
+        ext.personBlocks[key] = (index, detail) => {
+            const a = detail.heritage?.animal; if (detail.person?.kind !== 'animal' || !a) return '';
+            const ro = U()?.RO?.(), acts = kind === 'obs' && !ro ? `<button type="button" class="button small" data-sv-new-obs="${Number(a.id)}">＋ Nouvelle observation</button>` : kind === 'map' && !ro ? `<button type="button" class="button small secondary" data-sv-import="${Number(a.id)}">⤒ Importer un trajet…</button>` : '';
+            return A().card(index, svTitle[kind](a), svCount[kind](a), holder(kind, a.id), 'span-12', acts);
         };
-        ctx.show = show;
-        bar.addEventListener('click', e => { const b = e.target.closest('[data-sv-ptab]'); if (b) show(b.dataset.svPtab); });
-        if (det.gps.n) U().api('suivi', {op: 'gps', pet_id: id, max: 20000}).then(r => { ctx.gpsAll = r.points || []; const n = C().splitTrips(ctx.gpsAll, 120).length; const b = bar.querySelector('[data-sv-ptab="map"]'); if (b) b.textContent = `🗺 Trajets (${U().plural(n, 'sortie')})`; }).catch(() => {});
-        show(['marks', 'obs', 'health', 'group', 'map'].includes(st.svPetTab) ? st.svPetTab : 'fiche');
-    };
+    });
+    /** 🩺 la partie « suivi » du bloc Santé (frise des états, courbe du poids, événements de santé) : posée par heritage-pets.js */
+    ext.suivi.healthHolder = petId => holder('health', petId);
+    const TABS = () => ({marks: marksTab, obs: obsTab, health: healthTab, group: groupTab, map: mapTab});
+    let fillSeq = 0;
+    /** remplit les blocs du suivi de la fiche ouverte (après son dessin) */
+    async function fillBlocks(detail) {
+        const a = detail?.heritage?.animal, ws = document.getElementById('workspace');
+        if (detail?.person?.kind !== 'animal' || !a || !ws) return;
+        const seq = ++fillSeq, id = Number(a.id);
+        let det, D;
+        try { [det, D] = await Promise.all([U().api('suivi', {op: 'animal', id}), U().overview(true)]); } catch (e) { console.error(e); ws.querySelectorAll('[data-sv-block]').forEach(h => { h.innerHTML = A().empty('Le suivi n’a pas pu être lu.', {icon: '⚠️'}); }); return; }
+        if (seq !== fillSeq) return;
+        const me = U().animalById(D, id) || {id, title: a.title, species: det.species, marks: det.marks};
+        const prof = det.profile?.profile || det.guess || 'autre', PR = C().PROFILES[prof] || C().PROFILES.autre;
+        const st = A().state, again = () => { if (st.module === 'personnes' && st.currentPersonId) A().selectPerson(st.currentPersonId, false); };
+        const ctx = {id, det, D, me, prof, PR, again, gpsAll: null};
+        const draw = () => {
+            document.querySelectorAll('#workspace [data-sv-block]').forEach(h => {
+                if (Number(h.dataset.svPetId) !== id) return;
+                const panel = document.createElement('div'); panel.className = 'sv-pet-panel'; panel.dataset.svBlock = h.dataset.svBlock; panel.dataset.svPetId = String(id);
+                h.replaceWith(panel);
+                try { TABS()[h.dataset.svBlock]?.({...ctx, panel, reload: ctx.reload}); } catch (e) { console.error(e); panel.innerHTML = A().empty(`Ce bloc n’a pas pu être dessiné : ${e.message || 'erreur'}`, {icon: '⚠️'}); }
+            });
+            const seen = document.querySelector('#workspace [data-lc-seen]'); if (seen) paintSeen(seen, ctx);
+        };
+        ctx.reload = async () => { U().invalidate(); try { const [d2, D2] = await Promise.all([U().api('suivi', {op: 'animal', id}), U().overview(true)]); ctx.det = d2; ctx.D = D2; ctx.me = U().animalById(D2, id) || ctx.me; } catch (e) { console.error(e); } draw(); };
+        ext.suivi.ficheCtx = ctx;
+        draw();
+    }
+    ext.afterPerson = ext.afterPerson || [];
+    ext.afterPerson.push(detail => { fillBlocks(detail); });
+
+    /* ═════════ 👁 Vu la dernière fois (élément de l'en-tête, F9) ═════════ */
+    const dayDiff = iso => { if (!/^\d{4}-\d{2}-\d{2}/.test(iso || '')) return null; const t = new Date(); t.setHours(0, 0, 0, 0); return Math.round((t - new Date(`${String(iso).slice(0, 10)}T00:00:00`)) / 864e5); };
+    /** la pastille K8 : vert (< seuil vert), jaune (jusqu'au seuil « pas revu »), rouge au-delà, gris : jamais vu */
+    function seenBadge(iso, hc) {
+        const d = dayDiff(iso);
+        if (d == null) return {kind: 'grey', text: 'Jamais vu depuis le baguage'};
+        const when = d <= 0 ? 'Vu aujourd’hui' : d === 1 ? 'Vu hier' : `Vu il y a ${U().plural(d, 'jour')}`;
+        if (d < hc.green) return {kind: 'green', text: when};
+        if (d < hc.red) return {kind: 'yellow', text: when};
+        return {kind: 'red', text: `Pas revu depuis ${U().plural(d, 'jour')}`};
+    }
+    ext.suivi.seenBadge = seenBadge;
+    function paintSeen(el, ctx) {
+        const hc = ext.sheetHead ? ext.sheetHead() : {green: 7, red: 30, seenDetail: true};
+        const {det, D, me} = ctx;
+        const followed = det.profile || det.marks.length || det.observations.length || det.gps?.n;
+        if (!followed) { el.hidden = true; el.innerHTML = ''; return; }
+        const last = U().lastSeen(me), o = det.observations.find(x => x.pet_id === ctx.id && x.iso === last?.iso) || det.observations[0] || null;
+        const b = seenBadge(last?.iso, hc), stamp = last?.iso ? `${last.iso}${last.time ? ` ${last.time}` : ''}` : '';
+        const place = o ? U().placeOfObs(o, D) : (last?.place || ''), who = o?.observer || '';
+        const badge = UI().badge(b.text, b.kind, {title: stamp ? (UI().whenFull?.(stamp) || '') : '', cls: 'lc-seen-badge'});
+        el.hidden = false;
+        if (!hc.seenDetail || el.classList.contains('is-compact')) { el.innerHTML = `<span class="lc-seen-line"${o ? ` data-sv-obs="${o.id}" role="button" tabindex="0"` : ''} title="${esc([place && `📍 ${place}`, who && `par ${who}`].filter(Boolean).join(' · '))}">${badge.replace(/>([^<]*)</, '>👁 $1<')}</span>`; }
+        else el.innerHTML = `${badge}${stamp ? `<span class="lc-seen-line"${o ? ` data-sv-obs="${o.id}" role="button" tabindex="0" title="Ouvrir cette observation"` : ''}>👁 Vu la dernière fois : ${UI().when ? UI().when(stamp) : esc(stamp)}${place ? ` · 📍 ${o?.place_id ? `<button type="button" class="link-button" data-open-place-id="${Number(o.place_id)}">${esc(place)} ↗</button>` : esc(place)}` : ''}${who ? ` · par ${o?.observer_id ? `<button type="button" class="link-button" data-open-person="${Number(o.observer_id)}">${esc(who)}</button>` : esc(who)}` : ''}</span>` : ''}`;
+        const pill = document.querySelector('#workspace [data-lc-obs-ago]'); if (pill) { const d = dayDiff(last?.iso); pill.textContent = d == null ? '' : d <= 0 ? ' · vu aujourd’hui' : d === 1 ? ' · vu hier' : ` · vu il y a ${d} j`; }
+    }
+    /** appelé par l'en-tête (app-apparence.js) : la place est prête, le suivi la remplit quand il est lu */
+    ext.suivi.fillSeen = el => { const c = ext.suivi.ficheCtx; if (c && Number(el.dataset.lcSeen) === c.id) paintSeen(el, c); else el.hidden = true; };
+    // la bande d'actions rapides : 🩺＋ Santé, 🔖 Marque
+    document.addEventListener('click', e => {
+        const pl = e.target.closest?.('[data-open-place-id]'); if (pl) { e.preventDefault(); e.stopPropagation(); const sc = ext.shortcuts; if (sc?.openTarget && sc.canOpen?.('place')) sc.openTarget(`place:${Number(pl.dataset.openPlaceId)}`, {title: pl.textContent}); return; }
+        const h = e.target.closest?.('[data-sv-health-new]'); if (h) { e.preventDefault(); openHealth({petId: Number(h.dataset.svHealthNew), ctx: ext.suivi.ficheCtx}); return; }
+        const mk = e.target.closest?.('[data-lc-mark-new]'); if (mk) { e.preventDefault(); window.LCNDA_SECTIONS?.revealBlock?.('animal_marks'); setTimeout(() => document.querySelector('#workspace [data-pblock="animal_marks"] [data-sv-mark-add], #workspace [data-pblock="animal_marks"] [data-sv-mark-new]')?.click(), 120); }
+    });
 
     /* ═════════ S5 : 🔖 Bagues et marques ═════════ */
     const LEG = {L: 'Patte gauche', R: 'Patte droite'};
@@ -119,7 +164,7 @@
                 <div><span class="pk-lab">La maison (pour « plus loin » et « temps dehors »)</span>${P().pickerField({name: 'home_place_id', kind: 'place', value: pf.home_place_id || null})}</div>
                 <label>Le suivi<select name="status">${[['suivi', 'En cours'], ['pause', 'En pause'], ['fini', 'Terminé'], ['perdu', 'Perdu de vue']].map(([k, l]) => `<option value="${k}" ${(pf.status || 'suivi') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="sv-span2">Note<textarea name="note" rows="2">${esc(pf.note || '')}</textarea></label></div>`,
-            onSubmit: async form => { const v = new FormData(form); await U().write('save_profile', {pet_id: id, taxon: v.get('taxon'), sci_name: v.get('sci_name'), profile: v.get('profile'), age_class: v.get('age_class'), ringed_date: v.get('ringed_date'), ringed_place_id: Number(v.get('ringed_place_id')) || 0, ringer: String(v.get('ringer') || ''), program: v.get('program'), home_place_id: Number(v.get('home_place_id')) || 0, status: v.get('status'), note: v.get('note')}); U().toast('Suivi enregistré.', 'success'); ctx.again ? ctx.again() : ctx.reload(); }});
+            onSubmit: async form => { const v = new FormData(form); await U().write('save_profile', {pet_id: id, taxon: v.get('taxon'), sci_name: v.get('sci_name'), profile: v.get('profile'), age_class: v.get('age_class'), ringed_date: v.get('ringed_date'), ringed_place_id: Number(v.get('ringed_place_id')) || 0, ringer: String(v.get('ringer') || ''), program: v.get('program'), home_place_id: Number(v.get('home_place_id')) || 0, status: v.get('status'), note: v.get('note')}); U().toast('Suivi enregistré.', 'success'); ctx.reload(); }});
     }
     /** Les bagues de couleur : 4 places, chacune avec sa couleur (couleurs de base d'office, ou n'importe laquelle par C2), son code gravé et la couleur du code */
     function ringsDialog(ctx, mark = null) {
@@ -138,7 +183,7 @@
                 const v = new FormData(form), date = String(v.get('date') || '').trim(), change = mark && v.get('change');
                 if (change) { if (!date) return UI().fail(form.elements.date, 'Donne la date du changement.'); await U().write('save_mark', {...mark, colors: mark.colors, end_date: date, end_reason: String(v.get('reason') || 'bagues changées')}); await U().write('save_mark', {pet_id: ctx.id, kind: 'color_rings', colors: cur, start_date: date}); }
                 else await U().write('save_mark', {...(mark || {}), id: mark?.id || 0, pet_id: ctx.id, kind: 'color_rings', colors: cur, start_date: mark?.start_date || date});
-                U().toast('Bagues enregistrées.', 'success'); ctx.again ? ctx.again() : ctx.reload();
+                U().toast('Bagues enregistrées.', 'success'); ctx.reload();
             }});
         const box = dlg.querySelector('[data-rings]'), ed = dlg.querySelector('[data-edit]');
         const redraw = () => { box.innerHTML = slotHtml(); ed.innerHTML = editHtml(); };
@@ -233,7 +278,7 @@
     /** S18 : la fenêtre « Nouvel événement de santé » */
     async function openHealth({petId = 0, h = null, ctx = null} = {}) {
         if (U().RO()) return U().toast('Mode consultation : rien à modifier.');
-        const D = await U().overview().catch(() => ({animals: []})), a = U().animalById(D, petId);
+        const D = (ctx?.D && U().animalById(ctx.D, petId) ? ctx.D : null) || await U().overview().catch(() => ({animals: []})), a = U().animalById(D, petId); // la fiche ouverte a déjà le suivi à jour
         const prof = a ? U().profileOf(a) : 'autre';
         // Pourquoi : d'abord les causes de l'espèce, puis « Plus de causes ▾ » (toutes) et mes causes (« ＋ Autre cause… », gardées sur cet appareil)
         const MINE = 'genealogie-suivi-causes', mine = () => { try { return (JSON.parse(localStorage.getItem(MINE) || '[]') || []).filter(x => typeof x === 'string' && x.trim()).slice(0, 40); } catch (_) { return []; } };

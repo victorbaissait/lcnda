@@ -435,6 +435,7 @@
     /* ═════════════════════════ 2. En-tête de la fiche ═════════════════════════ */
     const HEADER_KEY = 'genealogie-person-header';
     const HEAD_BUTTONS = [
+        ['obs', '👁＋', '＋ Nouvelle observation (fiches d’animaux)', '[data-sv-new-obs].lc-obs-btn'], // 🐾 seulement sur les fiches d'animaux (fiche-sections.html, F9)
         ['story', '✨', 'Récit d’une vie (diaporama tout fait)', '[data-ss-story-person]'],
         ['bookmark', '🔖', 'Signet (favori)', '[data-toggle-bookmark]'],
         ['delete', '🗑', 'Supprimer la fiche', '[data-delete-person]'],
@@ -451,6 +452,24 @@
         return {frame: v.frame === 'hide' ? 'hide' : 'show', order, hidden: Array.isArray(v.hidden) ? v.hidden.filter(k => HEAD_KEYS.includes(k)) : ['profils'], // 🧩 en option : caché tant qu'on ne l'a pas coché
             cols: Number(v.cols) === 2 ? 2 : 1, pf: v.pf === 'badges' ? 'badges' : 'button'};
     }
+    /* Éléments de l'en-tête (statut, 👁 Vu la dernière fois, étiquettes, boutons) et place de « ＋ Nouvelle observation » :
+     * localStorage['genealogie-sheet-head'] = {order, hidden, seenPlace: name|badges|bottom, green, red, seenDetail, obsPlace, obsKey} */
+    const SHEAD_KEY = 'genealogie-sheet-head';
+    const HEAD_ELEMS = [['status', '🏷', 'Pastilles de statut (Sosa, vivant, suivi…)'], ['seen', '👁', 'Vu la dernière fois (fiches d’animaux)'], ['labels', '🏷', 'Étiquettes'], ['buttons', '◻', 'Boutons carrés']];
+    const SEEN_PLACES = [['name', 'Sous le nom'], ['badges', 'Avec les pastilles'], ['bottom', 'En bas de l’en-tête']];
+    const OBS_PLACES = [['square', 'Carré 👁＋ en premier dans la grille des boutons', 'par défaut'], ['blue', 'Bouton bleu « ＋ Observation » au-dessus de la grille', ''], ['pill', 'Pastille sous le nom', '« ＋ Nouvelle observation · vu il y a 2 j »'], ['strip', 'Bande d’actions rapides', '👁＋ Observation · 🩺＋ Santé · 📍 Trajet GPS · 🔖 Marque'], ['fab', 'Bouton rond flottant', 'en bas à droite de la fiche'], ['hidden', 'Caché', 'on passe par le bloc « 👁 Observations »']];
+    function sheadCfg() {
+        const v = lsGet(SHEAD_KEY, {}) || {}, keys = HEAD_ELEMS.map(x => x[0]);
+        const order = Array.isArray(v.order) ? v.order.filter((k, i, l) => keys.includes(k) && l.indexOf(k) === i) : [];
+        keys.forEach((k, i) => { if (!order.includes(k)) order.splice(Math.min(i, order.length), 0, k); });
+        const num = (x, d, lo, hi) => { const n = Math.round(Number(x)); return Number.isFinite(n) && n >= lo && n <= hi ? n : d; };
+        const green = num(v.green, 7, 1, 3650), red = Math.max(green + 1, num(v.red, 30, 2, 3660));
+        return {order, hidden: Array.isArray(v.hidden) ? v.hidden.filter(k => keys.includes(k)) : ['labels'], // les étiquettes sont déjà dans le bloc Identité : cachées au départ
+            seenPlace: SEEN_PLACES.some(x => x[0] === v.seenPlace) ? v.seenPlace : 'name', green, red, seenDetail: v.seenDetail !== false,
+            obsPlace: OBS_PLACES.some(x => x[0] === v.obsPlace) ? v.obsPlace : 'square', obsKey: v.obsKey !== false};
+    }
+    ext.sheetHead = sheadCfg; // 🐾 heritage-suivi-fiche.js (Vu la dernière fois), heritage-suivi.js (Animaux à retrouver : le même seuil)
+    const isRO = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly');
     const profilsOn = () => !!window.LCNDA_ART?.PF;
     /** le lien « 🧩 Cette personne était… » d'une fiche : sa page de profils, ou le choix des profils s'il n'y en a pas */
     function pfAttrs(detail) {
@@ -459,15 +478,53 @@
         const editable = !Number(p.is_locked) && !p.kiosk && !document.documentElement.classList.contains('base-readonly');
         return has || !editable ? `data-pf-page-pid="${Number(p.id)}" data-pf-view="all"` : `data-pf-choose-pid="${Number(p.id)}"`;
     }
+    /** 🐾 « ＋ Nouvelle observation » à la place choisie, et la place de « 👁 Vu la dernière fois » (rempli par heritage-suivi-fiche.js) */
+    function applyAnimalHead(page, hero, detail, hc) {
+        page.querySelectorAll('.lc-obs-btn, .lc-obs-blue, .lc-obs-pill, .lc-obs-strip, .lc-obs-fab').forEach(el => el.remove());
+        const p = detail?.person || {}, petId = Number(detail?.heritage?.animal?.id) || 0;
+        const seenOld = hero.querySelector('[data-lc-seen]');
+        if (p.kind !== 'animal' || !petId) { seenOld?.remove(); return; }
+        const actions = hero.querySelector('.person-hero-actions'), tools = hero.querySelector('.person-hero-tools'), info = hero.querySelector('h2')?.parentElement;
+        if (!isRO()) {
+            const key = hc.obsKey && A().keys?.html ? '' : '';
+            const at = `data-sv-new-obs="${petId}"${hc.obsKey ? ' data-shortcut="O"' : ''}`;
+            if (hc.obsPlace === 'square' && actions) actions.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action lc-obs-btn" ${at} title="＋ Nouvelle observation" aria-label="＋ Nouvelle observation">👁＋</button>${key}`);
+            if (hc.obsPlace === 'blue' && tools) (actions || tools).insertAdjacentHTML('beforebegin', `<button type="button" class="button small lc-obs-blue" ${at}>＋ Observation</button>`);
+            if (hc.obsPlace === 'pill' && info) info.insertAdjacentHTML('beforeend', `<button type="button" class="lc-obs-pill" ${at}>＋ Nouvelle observation<span data-lc-obs-ago></span></button>`);
+            if (hc.obsPlace === 'strip') hero.insertAdjacentHTML('afterend', `<div class="lc-obs-strip" role="group" aria-label="Ajouter au suivi"><span class="section-label">Ajouter</span><button type="button" class="button small secondary" ${at}>👁＋ Observation</button><button type="button" class="button small secondary" data-sv-health-new="${petId}">🩺＋ Santé</button><button type="button" class="button small secondary" data-sv-import="${petId}">📍 Trajet GPS</button><button type="button" class="button small secondary" data-lc-mark-new="${petId}">🔖 Marque</button></div>`);
+            if (hc.obsPlace === 'fab') page.insertAdjacentHTML('beforeend', `<button type="button" class="lc-obs-fab" ${at} title="＋ Nouvelle observation" aria-label="＋ Nouvelle observation">👁＋</button>`);
+        }
+        // 👁 Vu la dernière fois : la place est posée ici, heritage-suivi-fiche.js la remplit
+        const seenOn = !hc.hidden.includes('seen');
+        if (!seenOn) { seenOld?.remove(); return; }
+        const seen = seenOld || document.createElement('div');
+        seen.className = `lc-seen is-${hc.seenPlace}${hc.seenDetail ? '' : ' is-compact'}`; seen.setAttribute('data-lc-seen', String(petId));
+        const status = hero.querySelector('.person-hero-status');
+        if (hc.seenPlace === 'badges' && status) status.appendChild(seen);
+        else if (hc.seenPlace === 'bottom') hero.appendChild(seen);
+        else if (info) { const meta = info.querySelector('.person-meta'); if (meta) meta.after(seen); else info.appendChild(seen); }
+        ext.suivi?.fillSeen?.(seen, detail);
+    }
     function applyHeader(detail) {
         const page = document.querySelector('#workspace .person-page'); if (!page) return;
         const hero = page.querySelector('.person-hero'); if (!hero) return;
-        const cfg = headerCfg(), p = detail?.person || {};
+        const cfg = headerCfg(), p = detail?.person || {}, hc = sheadCfg();
         page.classList.toggle('lc-hero-off', cfg.frame === 'hide');
-        const actions = hero.querySelector('.person-hero-actions'), status = hero.querySelector('.person-hero-status');
+        const actions = hero.querySelector('.person-hero-actions'), status = hero.querySelector('.person-hero-status'), tools = hero.querySelector('.person-hero-tools');
         hero.querySelectorAll('[data-lc-pf]').forEach(el => el.remove());
         const pfShown = profilsOn() && p.kind !== 'animal' && p.id && !cfg.hidden.includes('profils');
         if (pfShown && cfg.pf === 'badges' && status) status.insertAdjacentHTML('beforeend', `<button type="button" class="lc-pf-link" data-lc-pf ${pfAttrs(detail)} title="Ouvrir la page « Cette personne était… » (ses profils)">🧩 Cette personne était…</button>`);
+        try { applyAnimalHead(page, hero, detail, hc); } catch (e) { console.warn(e); }
+        // éléments de l'en-tête : étiquettes (en option), ordre et visibilité dans la colonne de droite
+        hero.querySelector('.lc-hero-labels')?.remove();
+        if (tools && !hc.hidden.includes('labels') && (detail?.labels || []).length && A().labelChip) tools.insertAdjacentHTML('beforeend', `<div class="lc-hero-labels">${detail.labels.map(l => A().labelChip(l)).join('')}</div>`);
+        if (tools) {
+            const el = {status, labels: tools.querySelector('.lc-hero-labels'), buttons: actions};
+            const blue = tools.querySelector('.lc-obs-blue');
+            hc.order.forEach(k => { const x = el[k]; if (!x || x.parentElement !== tools) return; if (k === 'buttons' && blue) tools.appendChild(blue); tools.appendChild(x); });
+            if (status) status.classList.toggle('lc-hide', hc.hidden.includes('status'));
+            if (actions) actions.classList.toggle('lc-hide-all', hc.hidden.includes('buttons'));
+        }
         if (!actions) return;
         if (pfShown && cfg.pf === 'button') actions.insertAdjacentHTML('beforeend', `<button type="button" class="icon-action lc-pf-btn" data-lc-pf ${pfAttrs(detail)} title="🧩 Cette personne était… : ouvrir sa page de profils" aria-label="Cette personne était… : ses profils">🧩</button>`);
         const known = new Set();
@@ -488,24 +545,25 @@
         if (cfg.frame === 'hide') return `<div class="lc-hh-prev is-off"><span>Cadre du haut masqué : la fiche commence par les parents, conjoints et enfants, puis les blocs.</span></div>`;
         return `<div class="lc-hh-prev" aria-hidden="true"><div class="lc-hh-id"><span class="lc-hh-av">LB</span><span><small>FICHE INDIVIDUELLE · #3851</small><b>Louise Borie</b></span></div>
             <div class="lc-hh-badges"><span class="lc-hh-b sosa">★ SOSA : 64</span><span class="lc-hh-b">À VÉRIFIER</span><span class="lc-hh-b out">HORS GÉNÉALOGIE</span><span class="lc-hh-b art">🎨 ARTISTE</span>${pfBadge ? '<span class="lc-hh-b pf">🧩 Cette personne était…</span>' : ''}</div>
-            <div class="lc-hh-btns${cfg.cols === 2 ? ' lc-cols-2' : ''}">${shown.map(k => `<span class="lc-hh-btn">${HEAD_BUTTONS.find(b => b[0] === k)[1]}</span>`).join('')}</div></div>`;
+            <div class="lc-hh-btns${cfg.cols === 2 ? ' lc-cols-2' : ''}">${shown.map(k => `<span class="lc-hh-btn${k === 'obs' ? ' is-obs' : ''}">${HEAD_BUTTONS.find(b => b[0] === k)[1]}</span>`).join('')}</div></div>`;
     }
     function headerPanelHtml() {
         const cfg = headerCfg();
         const row = (k, i) => { const b = HEAD_BUTTONS.find(x => x[0] === k); return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher ce bouton"><input type="checkbox" data-hh-show aria-label="Afficher « ${esc(b[2])} »" ${cfg.hidden.includes(k) ? '' : 'checked'}></label><span class="lc-hh-ico" aria-hidden="true">${b[1]}</span><b>${esc(b[2])}${k === 'profils' && !profilsOn() ? ' <small class="muted">(outil des profils pas chargé)</small>' : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-hh-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-hh-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
         const radio = (name, value, cur, label, help = '') => `<label class="lc-hh-radio"><input type="radio" name="${name}" value="${value}" ${String(cur) === String(value) ? 'checked' : ''}><span>${label}${help ? `<small>${help}</small>` : ''}</span></label>`;
         return `<section class="person-block-config" id="lc-person-header"><header><span class="eyebrow">FICHES PERSONNES ET ANIMAUX</span><h3 data-help="Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes." data-help-faq="en-tête de la fiche">En-tête de la fiche</h3><p>Le cadre du haut (nom, badges, boutons carrés) de toutes les fiches de personnes et d’animaux. Glisse les boutons pour changer leur ordre ; décoche un bouton pour le masquer.</p></header>
+            <div data-lcd-a4-host></div>
             <div class="design-order-grid block-grid">
             <section class="maintenance-panel order-editor block-order-editor lc-hh-panel"><div class="item-title-row"><h3>Le cadre du haut</h3></div>
                 <fieldset class="lc-hh-set"><legend>Cadre</legend>${radio('lc-hh-frame', 'show', cfg.frame, 'Afficher le cadre (défaut)')}${radio('lc-hh-frame', 'hide', cfg.frame, 'Masquer tout le cadre', 'Fiche épurée, pour un diaporama : ni nom, ni badges, ni boutons en haut.')}</fieldset>
                 <fieldset class="lc-hh-set"><legend>Boutons carrés</legend>${radio('lc-hh-cols', 1, cfg.cols, 'Sur 1 colonne (défaut)')}${radio('lc-hh-cols', 2, cfg.cols, 'Sur 2 colonnes')}</fieldset>
                 <fieldset class="lc-hh-set"><legend>Lien « 🧩 Cette personne était… »</legend>${radio('lc-hh-pf', 'button', cfg.pf, 'Un bouton carré 🧩, dans la colonne des boutons')}${radio('lc-hh-pf', 'badges', cfg.pf, 'En bas de la colonne des badges', 'Sous À vérifier, Hors généalogie, Artiste.')}<small class="muted">Il est caché au départ : coche « 🧩 » dans la liste des boutons pour le montrer (décoche-le pour le cacher à nouveau). Pas sur les fiches d’animaux.</small></fieldset>
                 <span class="section-label">Aperçu</span><div data-hh-preview>${headerPreviewHtml(cfg)}</div>
-                <div class="page-actions action-zone"><button class="button small" type="button" data-hh-save>Enregistrer l’en-tête</button><button class="button small secondary" type="button" data-hh-reset>↺ Remettre comme au départ</button></div>
+                <div class="page-actions action-zone"><button class="button small secondary" type="button" data-hh-reset>↺ Remettre comme au départ</button></div>
             </section>
             <section class="maintenance-panel order-editor block-order-editor"><div class="item-title-row"><h3>Ordre et visibilité des boutons</h3></div>
                 <div class="order-list block-order-list" id="lc-hh-order">${cfg.order.map(row).join('')}</div>
-                <div class="page-actions action-zone"><button class="button small" type="button" data-hh-save>Enregistrer l’en-tête</button><button class="button small secondary" type="button" data-hh-reset>↺ Remettre comme au départ</button></div>
+                <p class="muted lc-hh-k2">Gardé tout seul. Alt + ↑ / ↓ au clavier. « 👁＋ » n’apparaît que sur les fiches d’animaux.</p>
             </section></div></section>`;
     }
     function readHeaderPanel(box) {
@@ -514,20 +572,64 @@
         return {frame: val('lc-hh-frame') === 'hide' ? 'hide' : 'show', cols: val('lc-hh-cols') === '2' ? 2 : 1, pf: val('lc-hh-pf') === 'badges' ? 'badges' : 'button',
             order: rows.map(r => r.dataset.orderKey), hidden: rows.filter(r => !r.querySelector('[data-hh-show]').checked).map(r => r.dataset.orderKey)};
     }
+    const refreshPerson = () => { const det = A().state?.currentPerson; if (det && document.querySelector('#workspace .person-page')) applyHeader(det); };
     function bindHeaderPanel(box) {
-        if (!box) return;
+        if (!box || box.dataset.hhBound) return; box.dataset.hhBound = '1';
         const list = box.querySelector('#lc-hh-order');
         if (list && A().setupDragOrder) A().setupDragOrder(list);
-        const preview = () => { box.querySelector('[data-hh-preview]').innerHTML = headerPreviewHtml(readHeaderPanel(box)); };
-        box.addEventListener('change', preview);
-        list?.addEventListener('dragend', preview);
-        const redraw = () => { const nb = document.getElementById('lc-person-header'); if (!nb) return; nb.outerHTML = headerPanelHtml(); const fresh = document.getElementById('lc-person-header'); bindHeaderPanel(fresh); UI().scan?.(fresh); };
-        const refreshPerson = () => { const det = A().state?.currentPerson; if (det && document.querySelector('#workspace .person-page')) applyHeader(det); };
+        // K2 : chaque changement est gardé tout de suite (plus de bouton « Enregistrer l’en-tête »)
+        const save = () => { const v = readHeaderPanel(box); box.querySelector('[data-hh-preview]').innerHTML = headerPreviewHtml(v); if (JSON.stringify(v) !== JSON.stringify(headerCfg())) { lsSet(HEADER_KEY, v); refreshPerson(); } };
+        box.addEventListener('change', e => { if (e.target.closest('[data-lcd-sec]')) return; save(); });
+        list?.addEventListener('dragend', () => setTimeout(save, 0));
+        const redraw = () => { const nb = document.getElementById('lc-person-header'); if (!nb) return; nb.outerHTML = headerPanelHtml(); const fresh = document.getElementById('lc-person-header'); bindHeaderPanel(fresh); ext.designsA4Frame?.(fresh.querySelector('[data-lcd-a4-host]')); UI().scan?.(fresh); };
         box.addEventListener('click', e => {
-            const b = e.target.closest('button'); if (!b) return;
-            if (b.matches('[data-hh-move]')) { const row = b.closest('.order-row'); if (b.dataset.hhMove === '-1' && row.previousElementSibling) row.after(row.previousElementSibling); else if (b.dataset.hhMove === '1' && row.nextElementSibling) row.before(row.nextElementSibling); renumber(list); preview(); b.focus(); return; }
-            if (b.matches('[data-hh-save]')) { if (lsSet(HEADER_KEY, readHeaderPanel(box))) { toast('En-tête des fiches enregistré.', 'success'); refreshPerson(); } return; }
-            if (b.matches('[data-hh-reset]')) { A().undoLocalChange?.('En-tête des fiches remis comme au départ', [HEADER_KEY], () => { try { localStorage.removeItem(HEADER_KEY); } catch (_) {} redraw(); refreshPerson(); }, () => { redraw(); refreshPerson(); }); }
+            const b = e.target.closest('button'); if (!b || b.closest('[data-lcd-sec]')) return;
+            if (b.matches('[data-hh-move]')) { const row = b.closest('.order-row'); if (b.dataset.hhMove === '-1' && row.previousElementSibling) row.after(row.previousElementSibling); else if (b.dataset.hhMove === '1' && row.nextElementSibling) row.before(row.nextElementSibling); renumber(list); save(); b.focus(); return; }
+            if (b.matches('[data-hh-reset]')) { try { localStorage.removeItem(HEADER_KEY); } catch (_) {} redraw(); refreshPerson(); }
+        });
+    }
+    /* ── Ordre et visibilité des éléments de l'en-tête, place de « ＋ Nouvelle observation » (K2) ── */
+    const seenBadge = (kind, txt) => (UI().badge ? UI().badge(txt, kind) : `<span class="ui-badge is-${kind}">${esc(txt)}</span>`);
+    function headElemsPanelHtml() {
+        const hc = sheadCfg(), seg = (name, list, cur) => `<div class="segmented lc-sh-seg" role="radiogroup">${list.map(([v, l]) => `<button type="button" role="radio" data-sh-set="${name}" data-v="${v}" class="${cur === v ? 'is-active' : ''}" aria-checked="${cur === v}">${esc(l)}</button>`).join('')}</div>`;
+        const row = (k, i) => { const d = HEAD_ELEMS.find(x => x[0] === k); return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher"><input type="checkbox" data-sh-show aria-label="Afficher « ${esc(d[2])} »" ${hc.hidden.includes(k) ? '' : 'checked'}></label><span class="lc-hh-ico" aria-hidden="true">${d[1]}</span><b>${esc(d[2])}</b><span class="page-actions"><button type="button" class="icon-button small" data-sh-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-sh-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>${k === 'seen' ? `<div class="lc-sh-seen${hc.hidden.includes('seen') ? ' is-dim' : ''}"><div class="lc-sh-line"><span>Place</span>${seg('seenPlace', SEEN_PLACES, hc.seenPlace)}</div><div class="lc-sh-line"><label>Vert jusqu’à <input type="number" min="1" max="3650" data-unit="jours" data-sh-num="green" value="${hc.green}"></label><label>· Pas revu au bout de <input type="number" min="2" max="3660" data-unit="jours" data-sh-num="red" value="${hc.red}"></label></div>${UI().toggleHtml ? UI().toggleHtml('Montrer le lieu et la personne', {checked: hc.seenDetail, attrs: 'data-sh-check="seenDetail"', sub: 'Éteint : seulement la pastille « Vu hier ».'}) : ''}<small class="muted">« Pas revu au bout de… » sert aussi au bloc « Animaux à retrouver » du Suivi : un seul seuil.</small></div>` : ''}`; };
+        const pv = `<div class="lc-sh-pv" aria-hidden="true"><div class="lc-sh-pv-head"><span class="lc-hh-av">🐦</span><span><small>🐾 FICHE ANIMAL · CORNEILLE NOIRE</small><b>Gaston</b>${hc.hidden.includes('seen') ? '' : `<span class="lc-sh-pv-seen">${seenBadge('green', 'Vu hier')}${hc.seenDetail ? ' 17 h 40 · 📍 Buttes-Chaumont ↗ · par Antoine LEROY' : ''}</span>`}</span><span class="lc-hh-btns">${['👁＋', '🔖', '🗑', '🔓', '🕘', '☆'].map((x, i) => `<span class="lc-hh-btn${i ? '' : ' is-obs'}">${x}</span>`).join('')}</span></div>
+            <div class="lc-sh-pv-badges">${seenBadge('green', 'Vu hier')}${seenBadge('yellow', 'Vu il y a 12 jours')}${seenBadge('red', `Pas revu depuis ${hc.red + 15} jours`)}${seenBadge('grey', 'Jamais vu depuis le baguage')}</div></div>`;
+        return `<section class="person-block-config" id="lc-head-elems"><header><span class="eyebrow">FICHES PERSONNES ET ANIMAUX</span><h3>Ordre et visibilité des éléments de l’en-tête</h3><p>Ce qui s’affiche sous le nom et à côté du statut. Glisse pour changer l’ordre ; décoche pour masquer. Gardé tout de suite.</p></header>
+            <div class="ui-notice ui-notice-info lc-sh-a4"><span class="ui-notice-ic" aria-hidden="true">👤</span><span>La forme de l’en-tête et la place des pastilles (à droite ou sous le nom) : « Forme de l’en-tête » (A4), plus haut sur cette page.</span></div>
+            <div class="design-order-grid block-grid"><section class="maintenance-panel order-editor block-order-editor"><div class="order-list block-order-list" id="lc-sh-order">${hc.order.map(row).join('')}</div></section>
+            <section class="maintenance-panel order-editor block-order-editor"><div class="item-title-row"><h3>Aperçu</h3></div>${pv}</section></div></section>`;
+    }
+    function obsPlacePanelHtml() {
+        const hc = sheadCfg();
+        const mini = k => `<span class="lc-op-mini is-${k}" aria-hidden="true"><i class="n"></i>${k === 'pill' ? '<i class="p"></i>' : ''}<i class="g">${k === 'blue' ? '<b class="w"></b>' : ''}${[0, 1, 2, 3].map(i => `<b class="${i === 0 && k === 'square' ? 'o' : ''}"></b>`).join('')}</i>${k === 'strip' ? '<i class="s"></i>' : ''}${k === 'fab' ? '<i class="f"></i>' : ''}</span>`;
+        return `<section class="person-block-config" id="lc-obs-place"><header><span class="eyebrow">FICHES ANIMAUX</span><h3>Place de « ＋ Nouvelle observation »</h3><p>Le bouton pour noter qu’on a vu l’animal. Seulement sur les fiches d’animaux.</p></header>
+            <div class="maintenance-panel lc-op-panel"><div class="lc-op-list" role="radiogroup" aria-label="Place de ＋ Nouvelle observation">${OBS_PLACES.map(([k, t, sub]) => `<label class="lc-op${hc.obsPlace === k ? ' is-active' : ''}"><input type="radio" name="lc-obs-place" value="${k}" ${hc.obsPlace === k ? 'checked' : ''}>${mini(k)}<span><b>${esc(t)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</span></label>`).join('')}</div>
+            ${UI().toggleHtml ? UI().toggleHtml('Touche O pour une nouvelle observation', {checked: hc.obsKey, attrs: 'data-sh-check="obsKey"', sub: 'Ignorée dans une case de texte ; réglable dans Raccourcis clavier.'}) : ''}
+            <p class="muted">Le carré suit aussi « Ordre et visibilité des boutons » plus haut (ligne 01).</p></div></section>`;
+    }
+    function readSheadPanels() {
+        const hc = sheadCfg(), rows = [...document.querySelectorAll('#lc-sh-order .order-row')];
+        if (rows.length) { hc.order = rows.map(r => r.dataset.orderKey); hc.hidden = rows.filter(r => !r.querySelector('[data-sh-show]').checked).map(r => r.dataset.orderKey); }
+        document.querySelectorAll('[data-sh-num]').forEach(i => { hc[i.dataset.shNum] = Number(i.value) || hc[i.dataset.shNum]; });
+        document.querySelectorAll('[data-sh-check]').forEach(i => { hc[i.dataset.shCheck] = i.checked; });
+        const op = document.querySelector('input[name="lc-obs-place"]:checked'); if (op) hc.obsPlace = op.value;
+        return hc;
+    }
+    function bindSheadPanels() {
+        const boxes = ['lc-head-elems', 'lc-obs-place'].map(id => document.getElementById(id)).filter(Boolean);
+        const redraw = () => { const a = document.getElementById('lc-head-elems'), b = document.getElementById('lc-obs-place'); if (a) a.outerHTML = headElemsPanelHtml(); if (b) b.outerHTML = obsPlacePanelHtml(); bindSheadPanels(); UI().scan?.(document.getElementById('lc-head-elems')); UI().scan?.(document.getElementById('lc-obs-place')); };
+        const save = (again = true) => { const v = readSheadPanels(); if (v.red <= v.green) v.red = v.green + 1; lsSet(SHEAD_KEY, v); refreshPerson(); if (again) redraw(); };
+        boxes.forEach(box => {
+            if (box.dataset.shBound) return; box.dataset.shBound = '1';
+            const list = box.querySelector('#lc-sh-order'); if (list && A().setupDragOrder) A().setupDragOrder(list);
+            box.addEventListener('change', e => { if (e.target.matches('[data-sh-num]') && document.activeElement === e.target) { save(false); return; } save(); });
+            list?.addEventListener('dragend', () => setTimeout(save, 0));
+            box.addEventListener('click', e => {
+                const b = e.target.closest('button'); if (!b) return;
+                if (b.matches('[data-sh-move]')) { const row = b.closest('.order-row'), rows = [...list.querySelectorAll('.order-row')], i = rows.indexOf(row), j = i + Number(b.dataset.shMove); if (j < 0 || j >= rows.length) return; const v = readSheadPanels(); v.order.splice(j, 0, v.order.splice(i, 1)[0]); lsSet(SHEAD_KEY, v); refreshPerson(); redraw(); document.querySelector(`#lc-sh-order [data-order-key="${row.dataset.orderKey}"] [data-sh-move="${b.dataset.shMove}"]`)?.focus(); return; }
+                if (b.matches('[data-sh-set]')) { const v = readSheadPanels(); v[b.dataset.shSet] = b.dataset.v; lsSet(SHEAD_KEY, v); refreshPerson(); redraw(); }
+            });
         });
     }
 
@@ -638,6 +740,8 @@
     /* ═════════════════════════ Branchements ═════════════════════════ */
     ext.designPanels = ext.designPanels || [];
     ext.designPanels.push(() => headerPanelHtml());
+    ext.designPanels.push(() => headElemsPanelHtml());
+    ext.designPanels.push(() => obsPlacePanelHtml());
     ext.designPanels.push(() => topbarPanelHtml());
     ext.afterDesign = ext.afterDesign || [];
     ext.afterDesign.push(() => {
@@ -662,12 +766,15 @@
             pre.addEventListener('change', () => { const p = window.LCNDA_ALL_DESIGN_PRESETS?.()[pre.value]; const blue = document.querySelector('#design-form [name="blue"]'); if (p && blue && /^#[0-9a-f]{6}$/i.test(p.blue || '')) { blue.value = p.blue; blue.dispatchEvent(new Event('input', {bubbles: true})); } });
         }
         bindHeaderPanel(document.getElementById('lc-person-header'));
+        bindSheadPanels();
+        // A4 « Fiche d'une personne » (la forme de l'en-tête) : ici, juste avant « Ordre et visibilité des boutons » (même stockage : genealogie-designs.a4)
+        { const host = document.querySelector('#lc-person-header [data-lcd-a4-host]'); if (host && !host.firstElementChild && A().state?.maintenanceTab === 'design_sheets') ext.designsA4Frame?.(host); } // seulement sur sa page (les aperçus sont lourds)
         // boutons en haut à droite : juste après l'ordre du menu principal
         const tb = document.getElementById('lc-topbar-buttons'), grid = document.querySelector('#workspace .design-order-grid-four');
         if (tb && grid && grid.nextElementSibling !== tb) grid.after(tb);
         bindTopbarPanel(tb); ext.calculator?.refreshButton?.(); ext.modeSimple?.refreshEntry?.(); applyTopbar(); // aussi après ↶ Annuler (la page est redessinée)
     });
     injectShapeCss();
-    window.LCNDA_APPARENCE = {cleanShape, svgToShape, shapeStore, orderedShapes, addShape, headerCfg, applyHeader, openShapeEditor,
+    window.LCNDA_APPARENCE = {cleanShape, svgToShape, shapeStore, orderedShapes, addShape, headerCfg, applyHeader, openShapeEditor, sheadCfg, HEAD_BUTTONS, SHEAD_KEY,
         TOPBAR_ITEMS: TB_ITEMS, topbarCfg, topbarShown, topbarSetShown, topbarSave, topbarReset, applyTopbar};
 })();
