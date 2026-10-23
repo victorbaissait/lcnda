@@ -432,7 +432,7 @@ print(json.dumps(out))`, zipPath], { encoding: 'utf8' });
         await page.evaluate(() => { void window.LCNDA_APP.setModule('dashboard'); }); await page.waitForFunction(() => window.LCNDA_APP.state.module === 'dashboard'); await wait(1000);
         for (const k of ['today', 'ancestor', 'photo', 'calc', 'countdown']) await cmd(`Navigateur : ⤓ fichier .html « ${k} »`, async () => {
             await page.evaluate(() => { void window.LCNDA_EXT.deskWidgets.open(); }); await page.waitForSelector('dialog[open] .dw-kinds');
-            const dg = page.locator('dialog[open]').last(); if (k === 'countdown') { await dg.locator('[data-dw-cd="date"]').fill('14/07/2027'); await wait(400); }
+            const dg = page.locator('dialog[open]').last(); if (k === 'countdown') { await dg.locator('[data-dw-cd="date"]').fill('14/07/2027'); await dg.locator('[data-dw-cd="date"]').press('Tab'); await wait(700); } // la date se met en forme en quittant la case : attendre avant de cliquer
             const [dl] = await Promise.all([page.waitForEvent('download', { timeout: 15000 }), dg.locator(`[data-dw-file="${k}"]`).click()]); must(dl.suggestedFilename() === `widget-${k}.html`);
             const p2 = path.join(dir, `w-${k}.html`); await dl.saveAs(p2); const t = fs.readFileSync(p2, 'utf8'); must(/Content-Security-Policy/.test(t) && !/Lucie|Secret/.test(t));
             await page.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); await wait(250);
