@@ -54,7 +54,17 @@
     const NAMES = ['En-tête', 'Menu', 'Bandeau', 'Contenu principal', 'Section', 'Texte', 'Carte', 'Galerie', 'Image', 'Colonne', 'Citation', 'Contact', 'Pied de page'];
     const HELP = {select: 'Clic : choisir un élément (« Ceci est… ») · double-clic sur un texte : l’écrire · glisse un bloc depuis ＋ Blocs', text: 'Clic dans un texte pour l’écrire · Échap : fini · le code suit tout seul', play: '▶ Ton site comme un visiteur : tes scripts tournent, les liens entre pages marchent'};
     const KIND_LABEL = {menu: 'Menu (tenu à jour)', person: 'Fiche', tree: 'Arbre', timeline: 'Frise', map: 'Carte', chart: 'Chiffres', photos: 'Photos d’une personne', place: 'Gens d’un lieu', diagram: 'Diagramme'};
+    /* 🎨 Styles → Espacements : [sélecteur, propriété, nom, valeur de départ (px), maximum] */
+    const SPACING = [['.section', 'padding-block', 'Espace en haut et en bas des sections', 40, 160], ['.conteneur', 'padding-inline', 'Marge des côtés du contenu', 20, 120], ['.colonnes, .galerie', 'gap', 'Espace entre colonnes et photos', 24, 80], ['p', 'margin-bottom', 'Espace sous les paragraphes', 17, 60], ['h1, h2, h3', 'margin-bottom', 'Espace sous les titres', 12, 60], ['.carte', 'padding', 'Espace intérieur des cartes', 20, 80]];
     const MAX_HTML = 2000000;
+    /* 🗂 les fichiers du site en plus de style.css et script.js (site.files) : chemin, sorte, contenu, pages où ils sont liés */
+    const FILE_KINDS = {html: {ico: '‹›', label: 'HTML'}, php: {ico: 'php', label: 'PHP'}, css: {ico: '#', label: 'CSS'}, js: {ico: 'JS', label: 'JavaScript'}, json: {ico: '{}', label: 'JSON'}, txt: {ico: '¶', label: 'Texte'}};
+    const extOf = path => (/\.([a-z0-9]+)$/i.exec(String(path || '')) || [])[1]?.toLowerCase() || '';
+    const kindOfExt = e => ({htm: 'html', html: 'html', php: 'php', css: 'css', js: 'js', mjs: 'js', json: 'json'})[e] || 'txt';
+    const cleanPath = p => String(p || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/\\/g, '/').replace(/[^a-z0-9\-_./]+/g, '-').split('/').filter(x => x && x !== '.' && x !== '..').join('/').replace(/^[.\-]+/, '').slice(0, 120);
+    const pageFile = p => `${p.slug}.${p.ext === 'php' ? 'php' : 'html'}`;
+    const codeLang = kind => (kind === 'css' ? 'css' : kind === 'js' || kind === 'json' ? 'js' : 'html');
+
 
     const themeCss = t => { const f = x => `'${String(x || 'Georgia').replace(/'/g, '')}', Georgia, serif`; return `:root{--lc-principale:${t.primary};--lc-accent:${t.accent};--lc-fond:${t.bg};--lc-texte:${t.text};--lc-police:${f(t.font)};--lc-police-titres:${f(t.headFont)};--lc-largeur:${t.width}px;--lc-arrondi:${t.radius}px;--lc-taille:${t.size}px}`; };
     const styleMap = s => { const m = new Map(); String(s || '').split(';').forEach(d => { const i = d.indexOf(':'); if (i > 0) { const k = d.slice(0, i).trim().toLowerCase(), v = d.slice(i + 1).trim(); if (k && v) m.set(k, v); } }); return m; };
@@ -68,14 +78,17 @@
     function blankSite() {
         const k = K(); const ctx = {title: 'Mon site'};
         return {v: 1, settings: {lang: 'fr', title: 'Mon site', desc: '', tpl: 'blank', credit: true}, theme: {primary: '#7a2a2a', accent: '#c8a45c', bg: '#fbf8f3', text: '#2b2420', font: 'Georgia', headFont: 'Georgia', width: 1100, radius: 8, size: 17}, css: k.BASE_CSS, js: '',
-            pages: [{id: newId(), name: 'Accueil', slug: 'index', title: '', desc: '', html: ['header', 'text', 'footer'].map(b => k.BLOCKS.find(x => x.key === b).html(ctx)).join('\n\n') + '\n'}]};
+            pages: [{id: newId(), name: 'Accueil', slug: 'index', ext: 'html', title: '', desc: '', html: ['header', 'text', 'footer'].map(b => k.BLOCKS.find(x => x.key === b).html(ctx)).join('\n\n') + '\n'}]};
     }
     function normalizeSite(d) {
         const b = blankSite(); d = d && typeof d === 'object' ? d : {};
-        const pages = Array.isArray(d.pages) && d.pages.length ? d.pages.map((p, i) => ({id: String(p.id || newId()), name: String(p.name || (i ? `Page ${i + 1}` : 'Accueil')), slug: i ? String(p.slug || slugOf(p.name)) : 'index', title: String(p.title || ''), desc: String(p.desc || ''), html: String(p.html || '')})) : b.pages;
+        const pages = Array.isArray(d.pages) && d.pages.length ? d.pages.map((p, i) => ({id: String(p.id || newId()), name: String(p.name || (i ? `Page ${i + 1}` : 'Accueil')), slug: i ? String(p.slug || slugOf(p.name)) : 'index', title: String(p.title || ''), desc: String(p.desc || ''), html: String(p.html || ''), ext: p.ext === 'php' ? 'php' : 'html'})) : b.pages;
         const frozen = d.frozen && typeof d.frozen === 'object' && !Array.isArray(d.frozen) ? {...d.frozen} : {};
         const bps = Array.isArray(d.breakpoints) && d.breakpoints.length ? d.breakpoints.slice(0, 12).map(cleanBp) : BP0();
-        return {v: 1, settings: {...b.settings, ...(d.settings || {})}, theme: {...b.theme, ...(d.theme || {})}, css: typeof d.css === 'string' ? d.css : b.css, js: typeof d.js === 'string' ? d.js : '', pages, frozen, breakpoints: bps};
+        const seen = new Set(['style.css', 'script.js', ...pages.map(pageFile)]);
+        const files = (Array.isArray(d.files) ? d.files : []).map(f => { const path = cleanPath(f?.path); return {id: String(f?.id || '').replace(/[^\w-]/g, '').slice(0, 24) || `f${newId().slice(1)}`, path, kind: kindOfExt(extOf(path)), content: String(f?.content ?? ''), pages: Array.isArray(f?.pages) ? f.pages.map(String).slice(0, 200) : []}; })
+            .filter(f => f.path && !seen.has(f.path) && seen.add(f.path)).slice(0, 300);
+        return {v: 1, settings: {...b.settings, ...(d.settings || {})}, theme: {...b.theme, ...(d.theme || {})}, css: typeof d.css === 'string' ? d.css : b.css, js: typeof d.js === 'string' ? d.js : '', pages, files, frozen, breakpoints: bps};
     }
 
     /* ═════ 🗺 Les cartes sur leur fond ═════ */
@@ -184,7 +197,8 @@
                             <div class="sw-stage" data-sw-stage data-ctx-off><div class="sw-sizer" data-sw-sizer><div class="sw-device" data-sw-devbox><iframe class="sw-frame" data-sw-frame title="Aperçu du site" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></div><span class="sw-wgrip" data-sw-wgrip title="Glisser pour essayer une autre largeur (double-clic : celle de l’écran)" aria-hidden="true"></span><span class="sw-wtag" data-sw-wtag hidden></span></div></div>
                             <div class="sw-split" data-sw-split role="separator" tabindex="0" aria-label="Partager l’aperçu et le code" title="Glisser pour partager l’aperçu et le code (double-clic : moitié-moitié)"></div>
                             <div class="sw-code" data-sw-code>
-                                <div class="sw-codebar"><div class="segmented sw-codetabs" role="tablist" aria-label="Fichier">${[['html', 'HTML de la page'], ['css', 'CSS du site'], ['js', 'JS du site']].map(([k, l]) => `<button type="button" data-sw-tab="${k}">${esc(l)}</button>`).join('')}</div><span class="sw-mqnav" data-sw-mqnav hidden><button type="button" class="button small secondary" data-sw-mqgo title="Aller à un bloc @media du CSS">@media ▾</button></span><span class="sw-codehelp" data-sw-codehelp></span></div>
+                                <div class="sw-ftabbar"><div class="sw-ftabs" data-sw-ftabs role="tablist" aria-label="Fichiers ouverts"></div><button type="button" class="sw-fbtn" data-sw-fnew title="Nouveau fichier : page HTML ou PHP, CSS, JS, morceau PHP (en-tête…)" aria-label="Nouveau fichier">＋</button><button type="button" class="sw-fbtn" data-sw-fall title="Tous les fichiers du site" aria-label="Tous les fichiers">☰</button><button type="button" class="sw-fbtn" data-sw-ftstyle title="Onglets de fichiers, ou les trois boutons HTML / CSS / JS" aria-label="Changer l’affichage des fichiers">⇆</button></div>
+                                <div class="sw-codebar"><span class="sw-mqnav" data-sw-mqnav hidden><button type="button" class="button small secondary" data-sw-mqgo title="Aller à un bloc @media du CSS">@media ▾</button></span><span class="sw-codehelp" data-sw-codehelp></span></div>
                                 <div class="sw-codehost" data-sw-codehost></div>
                             </div>
                         </div>
@@ -232,6 +246,7 @@
                 Affichage: () => [...[['visual', '✨ Visuel'], ['split', '◫ Visuel et code'], ['code', '</> Code']].map(([v, l]) => ({label: l, checked: this.view === v, run: () => this.setView(v)})), '-',
                     {icon: '⇄', label: 'Inverser l’aperçu et le code', run: () => this.setLayout({swap: !this.swap})}, {icon: '⬓', label: this.orientNow() === 'row' ? 'L’un au-dessus de l’autre' : 'Côte à côte', run: () => this.setLayout({orient: this.orientNow() === 'row' ? 'col' : 'row'})}, '-',
                     ...this.bps().map(b => ({icon: b.icon, label: `${b.name} (${b.width} px)`, checked: this.device === b.id && !this.freeW, run: () => this.setDevice(b.id)})), {icon: '⚙', label: 'Gérer les écrans (@media)…', run: () => this.bpDialog()}, '-',
+                    {label: 'Fichiers en onglets (comme Phoenix Code)', checked: this.ftStyle === 'tabs', run: () => this.setFtStyle('tabs')}, {label: 'Fichiers en trois boutons (HTML / CSS / JS)', checked: this.ftStyle !== 'tabs', run: () => this.setFtStyle('simple')}, '-',
                     {icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => { this.zoomMode = 'fit'; this.fit(); }}, {label: '100 % (taille réelle)', shortcut: '⌘1', run: () => { this.zoomMode = 'manual'; this.setZoom(1); }}, '-',
                     {icon: '⟳', label: 'Relire les blocs de la généalogie', run: () => { this.blockCache.clear(); this.reload(); }}],
             };
@@ -241,6 +256,7 @@
             const d = this.dlg;
             d.addEventListener('cancel', e => { e.preventDefault(); this.close(); });
             d.addEventListener('click', e => {
+                const ft = e.target.closest('[data-sw-ftab]'); if (ft && !e.target.closest('button, input')) return this.openTab(ft.dataset.swFtab);
                 const b = e.target.closest('button, [data-sw-open-page]'); if (!b || !d.contains(b)) return;
                 const c = b.dataset;
                 if (c.uiCmd === 'undo') return this.undo();
@@ -259,16 +275,26 @@
                 if (b.matches('[data-sw-mqgo]')) return this.mqMenu(b);
                 if (b.matches('[data-sw-swap]')) return this.setLayout({swap: !this.swap});
                 if (b.matches('[data-sw-orient]')) return this.setLayout({orient: this.orientNow() === 'row' ? 'col' : 'row'});
-                if (c.swTab) return this.setCodeTab(c.swTab);
+                if (c.swTab) return c.swTab === 'html' ? this.setCodeTab('html') : this.openTab(c.swTab);
+                if (c.swFclose) { e.stopPropagation(); return this.closeTab(c.swFclose); }
+                if (b.matches('[data-sw-fnew]')) return this.newFileMenu(b);
+                if (b.matches('[data-sw-fall]')) return this.allFilesMenu(b);
+                if (b.matches('[data-sw-ftstyle]')) return this.setFtStyle(this.ftStyle === 'tabs' ? 'simple' : 'tabs');
                 if (c.swBlock) return this.insertBlock(c.swBlock);
                 if (c.swOpenPage) return this.goPage(Number(c.swOpenPage));
                 if (c.swPage) return this.pageAction(c.swPage, Number(c.swPi));
                 if (c.swState !== undefined) { this.styleState = c.swState; return this.paintPanel(); }
                 if (c.swScreen) { this.styleScreen = c.swScreen; if (c.swScreen !== 'all' && this.device !== c.swScreen) this.setDevice(c.swScreen); return this.paintPanel(); }
                 if (c.swAct) return this.panelAction(c.swAct, b);
+                if (c.swSpscreen) { this.spScreen = c.swSpscreen; return this.paintLeft(); }
+                if (c.swSpreset) { const [sel, prop] = c.swSpreset.split('|'), sc = this.spScreen || 'all'; this.setSiteDecl(sel, prop, '', sc === 'all' ? null : this.bp(sc).query, true); return this.paintLeft(); }
                 if (c.swRole) return this.setRole(Number(c.swRole));
                 if (c.swFont) return this.pickFont(c.swFont);
             });
+            const strip = d.querySelector('[data-sw-ftabs]');
+            strip.addEventListener('dblclick', e => { const t = e.target.closest('[data-sw-ftab]'); if (t) this.renameTab(t.dataset.swFtab); });
+            strip.addEventListener('contextmenu', e => { const t = e.target.closest('[data-sw-ftab], [data-sw-tab]'); if (!t) return; e.preventDefault(); const k = t.dataset.swFtab || t.dataset.swTab; this.tabMenu(k === 'html' ? `p:${this.page().id}` : k, {x: e.clientX, y: e.clientY}); });
+            strip.addEventListener('auxclick', e => { const t = e.target.closest('[data-sw-ftab]'); if (t && e.button === 1) this.closeTab(t.dataset.swFtab); });
             d.querySelector('[data-sw-name]').addEventListener('input', e => { this.name = e.target.value.trim() || 'Mon site'; this.changed(); });
             d.querySelector('select[data-sw-page]').addEventListener('change', e => this.goPage(Number(e.target.value)));
             // ⌘S, ⌘Z, V / T / P / B (hors des cases de saisie)
@@ -280,6 +306,7 @@
             };
             document.addEventListener('keydown', this.onDocKey, true);
             d.addEventListener('keydown', e => {
+                if (e.altKey && e.target.matches?.('.sw-box-n') && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) { e.preventDefault(); e.target.value = String((Number(e.target.value) || 0) + (e.key === 'ArrowUp' ? 10 : -10)); e.target.dispatchEvent(new Event('change', {bubbles: true})); return; }
                 const mod = e.metaKey || e.ctrlKey, typing = e.target.closest?.('input, textarea, select, [contenteditable]');
                 if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); return this.save(); }
                 if (mod && e.key.toLowerCase() === 'z' && !typing) { e.preventDefault(); return e.shiftKey ? this.redo() : this.undo(); }
@@ -304,7 +331,7 @@
             const k = K(), doc = k.parse(html), missing = [];
             doc.querySelectorAll('[data-lc-block]').forEach(el => {
                 const a = k.blockAttrs(el);
-                if (a.kind === 'menu') { el.innerHTML = `<ul class="lc-menu-list">${this.site.pages.map(p => `<li><a href="${esc(p.slug)}.html"${p === this.page() ? ' aria-current="page"' : ''}>${esc(p.name)}</a></li>`).join('')}</ul>`; return; }
+                if (a.kind === 'menu') { el.innerHTML = `<ul class="lc-menu-list">${this.site.pages.map(p => `<li><a href="${esc(pageFile(p))}"${p === this.page() ? ' aria-current="page"' : ''}>${esc(p.name)}</a></li>`).join('')}</ul>`; return; }
                 if (a.kind === 'diagram') { const fz = this.site.frozen[`diagram:${Number(a.diagram) || 0}`]; if (typeof fz === 'string' && fz) el.innerHTML = `<figure class="lc-diagramme">${fz}</figure>`; else { el.innerHTML = '<p class="lc-note">⏳ Je dessine le diagramme…</p>'; this.freezeDiagram(Number(a.diagram) || 0); } return; }
                 if (a.kind === 'map' && a.fond && a.fond !== 'svg') { const mk = mapKey(a), fz = this.site.frozen[mk], pts = this.mapPts.get(ptsKey(a));
                     if (fz?.img && pts) { const live = String(a.vive) === '1' && fz.view ? (this.liveFonds[a.fond] || this.liveFonds.osm) : null;
@@ -385,6 +412,7 @@
         cssFor() {
             const base = this.mediaBase; let css = this.site.css; const q = this.freeW ? '' : this.bp().query;
             if (q && mqSimulated(q)) { const want = normMq(q); CODE().cssScan(css).medias.filter(m => m.query === want).sort((x, y) => y.start - x.start).forEach(m => { css = `${css.slice(0, m.start)}@media all /* aperçu : ${want.replace(/\*\//g, '')} */ ${css.slice(m.open)}`; }); }
+            css = [css, ...this.filesFor('css').map(f => `/* ${f.path} */\n${f.content}`)].join('\n');
             return css.replace(/url\(\s*(["']?)media\//gi, `url($1${base}`);
         }
         themeFull() { return `${themeCss(this.site.theme)}\n${this.blocksCss}`; }
@@ -393,8 +421,8 @@
             const csp = `default-src 'none'; img-src data: blob: https: ${origin}; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src data: https://fonts.gstatic.com; script-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'`;
             const safe = s => String(s).replace(/<\/(style|script)/gi, '<\\/$1');
             return `<!doctype html><html lang="${esc(this.site.settings.lang || 'fr')}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${esc(csp)}">`
-                + `<style id="lcb-theme">${safe(this.themeFull())}</style><style id="lcb-user">${safe(this.cssFor())}</style><style id="lcb-bridge">${k.BRIDGE_CSS}</style></head><body>${this.fillBlocks(this.page().html)}`
-                + `<script data-lcb>${k.BRIDGE}<\/script>${this.carteJs ? `<script data-lcb>${safe(this.carteJs)}<\/script>` : ''}${play && this.site.js.trim() ? `<script data-lcb>${safe(this.site.js)}<\/script>` : ''}</body></html>`;
+                + `<style id="lcb-theme">${safe(this.themeFull())}</style><style id="lcb-user">${safe(this.cssFor())}</style><style id="lcb-bridge">${k.BRIDGE_CSS}</style></head><body>${this.fillBlocks(this.pageSrc())}`
+                + `<script data-lcb>${k.BRIDGE}<\/script>${this.carteJs ? `<script data-lcb>${safe(this.carteJs)}<\/script>` : ''}${play ? [this.site.js, ...this.filesFor('js').map(f => f.content)].filter(x => x.trim()).map(x => `<script data-lcb>${safe(x)}<\/script>`).join('') : ''}</body></html>`;
         }
         /** recharge l'aperçu ; pendant un chargement, les demandes se regroupent (une seule recharge, à la fin) ;
          *  toujours un texte nouveau (<!--n-->) : sinon le navigateur ne recharge pas un srcdoc identique et « prêt » n'arrive jamais */
@@ -404,7 +432,7 @@
             this.frame.srcdoc = `${this.srcdoc()}<!--${this.loads = (this.loads || 0) + 1}-->`;
         }
         post(m) { try { this.frame.contentWindow?.postMessage(m, '*'); } catch (_) {} }
-        pushHtml() { if (!this.ready || this.mode === 'play') return this.reload(); this.post({type: 'set', html: this.fillBlocks(this.page().html), sel: this.sel?.path || null, mode: this.mode}); }
+        pushHtml() { if (!this.ready || this.mode === 'play') return this.reload(); this.post({type: 'set', html: this.fillBlocks(this.pageSrc()), sel: this.sel?.path || null, mode: this.mode}); }
         pushCss() { if (!this.ready) return; this.post({type: 'css', css: this.cssFor(), theme: this.themeFull()}); }
         message(e) {
             if (!this.frame || e.source !== this.frame.contentWindow) return; // seulement l'aperçu de cet éditeur
@@ -414,6 +442,7 @@
                 case 'select': return this.selected(m.info, 'frame');
                 case 'html': {
                     if (typeof m.html !== 'string' || m.html.length > MAX_HTML) return;
+                    if (this.isPhp()) { this.phpOnlyCode(); return this.pushHtml(); }
                     const base = this.mediaBase, html = m.html.split(base).join('media/').split(base.replace(/&/g, '&amp;')).join('media/'); // l'aperçu montre les images par leur adresse complète : le code garde « media/… » (relatif)
                     this.page().html = html; this.changed(); if (this.codeTab === 'html') this.code.value = html;
                     if (Array.isArray(m.sel)) this.post({type: 'info'});
@@ -579,7 +608,7 @@
                     + '<p class="sw-hint">Les blocs « Ma généalogie » sont remplis par l’app et figés à l’export : jamais de personne vivante ni de fiche confidentielle.</p>';
             } else if (this.left === 'pages') {
                 const p = this.page();
-                pane.innerHTML = tabs + `<div class="sw-pages">${this.site.pages.map((x, i) => `<div class="sw-pagerow${i === this.pageIdx ? ' is-active' : ''}"><button type="button" class="sw-pagename" data-sw-open-page="${i}"><b>${esc(x.name)}</b><small>${esc(i ? `${x.slug}.html` : 'index.html')}</small></button>
+                pane.innerHTML = tabs + `<div class="sw-pages">${this.site.pages.map((x, i) => `<div class="sw-pagerow${i === this.pageIdx ? ' is-active' : ''}"><button type="button" class="sw-pagename" data-sw-open-page="${i}"><b>${esc(x.name)}</b><small>${esc(pageFile(x))}</small></button>
                     <span class="sw-pageacts"><button type="button" class="icon-button small" data-sw-page="up" data-sw-pi="${i}" title="Monter" aria-label="Monter" ${i <= 1 ? 'disabled' : ''}>↑</button><button type="button" class="icon-button small" data-sw-page="down" data-sw-pi="${i}" title="Descendre" aria-label="Descendre" ${!i || i === this.site.pages.length - 1 ? 'disabled' : ''}>↓</button><button type="button" class="icon-button small" data-sw-page="rename" data-sw-pi="${i}" title="Renommer" aria-label="Renommer">✎</button><button type="button" class="icon-button small" data-sw-page="dup" data-sw-pi="${i}" title="Dupliquer" aria-label="Dupliquer">⧉</button>${i ? `<button type="button" class="icon-button small" data-sw-page="del" data-sw-pi="${i}" title="Supprimer la page" aria-label="Supprimer la page">🗑</button>` : ''}</span></div>`).join('')}</div>
                     <button type="button" class="button small" data-sw-page="add" data-sw-pi="0">＋ Nouvelle page</button>
                     <h4>Cette page : « ${esc(p.name)} »</h4><div class="form-grid one-column sw-form">
@@ -593,28 +622,40 @@
                     <h4>Couleurs</h4><div class="sw-colors">${col('primary', 'Principale')}${col('accent', 'Accent')}${col('bg', 'Fond')}${col('text', 'Texte')}</div>
                     <h4>Polices</h4><div class="sw-fonts"><button type="button" class="button small secondary" data-sw-font="font" style="font-family:'${esc(t.font)}'">Aa · ${esc(t.font)}</button><small>texte</small><button type="button" class="button small secondary" data-sw-font="headFont" style="font-family:'${esc(t.headFont)}'">Aa · ${esc(t.headFont)}</button><small>titres</small></div>
                     <h4>Mesures</h4>${range('size', 'Taille du texte', 11, 28, 'px', 17)}${range('width', 'Largeur du contenu', 480, 2000, 'px', 1100)}${range('radius', 'Arrondi des coins', 0, 40, 'px', 8)}
+                    ${this.spacingHtml()}
                     <h4>Le site</h4><div class="form-grid one-column sw-form"><label>Nom du site<input type="text" data-sw-sf="title" maxlength="120" value="${esc(s.title)}"></label>
                     <label>Description<textarea data-sw-sf="desc" rows="2" maxlength="300">${esc(s.desc)}</textarea></label>
                     <label>Langue<select data-sw-sf="lang">${[['fr', 'Français'], ['en', 'Anglais'], ['de', 'Allemand'], ['es', 'Espagnol'], ['it', 'Italien'], ['oc', 'Occitan'], ['br', 'Breton']].map(([v, l]) => `<option value="${v}"${s.lang === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label></div>`;
             }
             UI()?.scan?.(pane);
         }
+        /** 🎨 Styles → Espacements : de vraies règles du CSS du site (par écran), lues et écrites dans style.css */
+        spacingHtml() {
+            const sc = this.spScreen && this.bps().some(b => b.id === this.spScreen) ? this.spScreen : 'all', media = sc === 'all' ? null : this.bp(sc).query;
+            const read = (sel, prop) => { const v = CODE().cssGetDecls(this.site.css, {sel, media}).get(prop); return v === undefined ? null : px(v); };
+            const row = ([sel, prop, label, def, max]) => { const v = read(sel, prop), set = v !== null;
+                return `<label class="sw-range sw-sp${set ? ' is-set' : ''}"><span>${esc(label)} <code>${esc(sel)} { ${esc(prop)} }</code>${set ? ` <button type="button" class="sw-sp-reset" data-sw-spreset="${esc(sel)}|${esc(prop)}" title="Retirer cette règle (revenir au départ)" aria-label="Revenir au départ">↺</button>` : ''}</span><input type="range" min="0" max="${max}" step="1" value="${set ? v : def}" data-sw-sp="${esc(sel)}|${esc(prop)}"><output>${set ? v : def} px</output></label>`; };
+            return `<h4>Espacements <small class="sw-hint">(margin, padding, gap)</small></h4>
+                <div class="segmented sw-seg sw-spscreens" role="tablist" aria-label="Écran">${[['all', '🖥 Partout'], ...this.bps().slice(1).map(b => [b.id, `${b.icon} ${b.name}`])].map(([v, l]) => `<button type="button" data-sw-spscreen="${esc(v)}" class="${sc === v ? 'is-active' : ''}">${esc(l)}</button>`).join('')}</div>
+                ${SPACING.map(row).join('')}
+                <p class="sw-hint">${media ? `Écrit dans <code>@media ${esc(media)}</code> : seulement sur cet écran.` : 'Écrit dans le CSS du site, pour tous les écrans.'} Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ».</p>`;
+        }
         paintPages() {
             const sel = this.$('select[data-sw-page]'); sel.innerHTML = this.site.pages.map((p, i) => `<option value="${i}"${i === this.pageIdx ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
             if (this.left === 'pages') this.paintLeft();
         }
-        goPage(i) { if (i < 0 || i >= this.site.pages.length) return; this.pageIdx = i; this.sel = null; this.paintPages(); this.paintPanel(); if (this.codeTab === 'html') this.code.value = this.page().html; this.reload(); this.whereText(); }
+        goPage(i) { if (i < 0 || i >= this.site.pages.length) return; this.pageIdx = i; this.sel = null; this.paintPages(); this.paintPanel(); if (this.codeTab === 'html') this.setCodeTab('html', true); else this.paintTabs(); this.reload(); this.whereText(); }
         /** une page change d'adresse : les liens des autres pages vers elle suivent (href="ancienne.html" → "nouvelle.html") */
-        relink(from, to) {
-            if (!from || !to || from === to) return;
-            const re = new RegExp(`(\\shref\\s*=\\s*["'])${from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\.html(?=[#"'])`, 'gi');
-            this.site.pages.forEach(pg => { pg.html = pg.html.replace(re, `$1${to}.html`); });
+        relink(from, to, fromExt = 'html', toExt = fromExt) {
+            if (!from || !to || (from === to && fromExt === toExt)) return;
+            const re = new RegExp(`(\\shref\\s*=\\s*["'])${from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\.${fromExt}(?=[#"'?])`, 'gi');
+            this.site.pages.forEach(pg => { pg.html = pg.html.replace(re, `$1${to}.${toExt}`); }); this.site.files.forEach(f => { if (f.kind === 'php' || f.kind === 'html') f.content = f.content.replace(re, `$1${to}.${toExt}`); });
             if (this.codeTab === 'html') this.code.value = this.page().html;
         }
         async pageAction(act, i) {
             const pages = this.site.pages, p = pages[i];
             if (act === 'add') return this.addPage();
-            if (act === 'rename') { const n = await A().askText({title: '✎ Renommer la page', message: 'Le nom de la page (il apparaît dans le menu) :', value: p.name, okLabel: 'Enregistrer'}); if (!n?.trim()) return; p.name = n.trim().slice(0, 80); if (i) { const old = p.slug; p.slug = this.uniqueSlug(slugOf(p.name), i); this.relink(old, p.slug); } this.changed(true); this.paintPages(); return this.pushHtml(); }
+            if (act === 'rename') { const n = await A().askText({title: '✎ Renommer la page', message: 'Le nom de la page (il apparaît dans le menu) :', value: p.name, okLabel: 'Enregistrer'}); if (!n?.trim()) return; p.name = n.trim().slice(0, 80); if (i) { const old = p.slug; p.slug = this.uniqueSlug(slugOf(p.name), i); this.relink(old, p.slug, p.ext); } this.changed(true); this.paintPages(); return this.pushHtml(); }
             if (act === 'up' || act === 'down') { const j = act === 'up' ? i - 1 : i + 1; if (j < 1 || j >= pages.length || i < 1) return; [pages[i], pages[j]] = [pages[j], pages[i]]; if (this.pageIdx === i) this.pageIdx = j; else if (this.pageIdx === j) this.pageIdx = i; this.changed(true); this.paintPages(); return this.pushHtml(); }
             if (act === 'dup') { const c = {...p, id: newId(), name: `${p.name} (copie)`}; c.slug = this.uniqueSlug(slugOf(c.name), -1); pages.splice(i + 1, 0, c); this.changed(true); return this.goPage(i + 1); }
             if (act === 'del' && i > 0) {
@@ -624,14 +665,16 @@
             }
         }
         uniqueSlug(s, self) { let out = s === 'index' ? 'page' : s, k = 2; while (this.site.pages.some((p, j) => j !== self && p.slug === out)) out = `${s}-${k++}`; return out; }
-        async addPage() {
-            const n = await A().askText({title: '📄 Nouvelle page', message: 'Le nom de la page (il apparaît dans le menu) :', value: '', okLabel: 'Créer la page'}); if (!n?.trim()) return;
+        async addPage({ext = 'html', quick = false} = {}) {
+            const n = quick ? `Page ${this.site.pages.length + 1}` : await A().askText({title: '📄 Nouvelle page', message: 'Le nom de la page (il apparaît dans le menu) :', value: '', okLabel: 'Créer la page'}); if (!n?.trim()) return;
             const name = n.trim().slice(0, 80), k = K(), doc = k.parse(this.page().html);
             const head = doc.body.querySelector(':scope > header')?.outerHTML || k.BLOCKS.find(b => b.key === 'header').html({title: this.site.settings.title});
             const foot = [...doc.body.querySelectorAll(':scope > footer')].pop()?.outerHTML || k.BLOCKS.find(b => b.key === 'footer').html({title: this.site.settings.title});
             const text = k.BLOCKS.find(b => b.key === 'text').html({}).replace('Un titre', esc(name));
-            this.site.pages.push({id: newId(), name, slug: this.uniqueSlug(slugOf(name), -1), title: '', desc: '', html: `${head}\n\n${text}\n\n${foot}\n`});
-            this.changed(true); this.goPage(this.site.pages.length - 1);
+            const np = {id: newId(), name, slug: this.uniqueSlug(slugOf(name), -1), title: '', desc: '', html: ext === 'php' ? `<?php include 'includes/entete.php'; ?>\n\n${text}\n\n${foot}\n` : `${head}\n\n${text}\n\n${foot}\n`, ext};
+            if (ext === 'php' && !this.site.files.some(f => f.path === 'includes/entete.php')) this.site.files.push({id: `f${newId().slice(1)}`, path: 'includes/entete.php', kind: 'php', content: `${head}\n`, pages: []});
+            this.site.pages.push(np); this.changed(true); this.goPage(this.site.pages.length - 1);
+            if (quick) { this.openTab(`p:${np.id}`); setTimeout(() => this.renameTab(`p:${np.id}`), 40); return; }
             toast(`Page « ${name} » créée : elle est dans le menu de toutes les pages.`);
         }
         async pickFont(key) {
@@ -643,8 +686,9 @@
         fieldInput(e, final) {
             const t = e.target; if (!this.dlg.contains(t)) return;
             if (t.dataset.swTh) { const k2 = t.dataset.swTh; this.site.theme[k2] = t.type === 'range' ? Number(t.value) : t.value; this.changed(final); this.pushCss(); return; }
+            if (t.dataset.swSp) { const [sel, prop] = t.dataset.swSp.split('|'), sc = this.spScreen || 'all'; this.setSiteDecl(sel, prop, `${t.value}px`, sc === 'all' ? null : this.bp(sc).query, final); const o = t.nextElementSibling; if (o) o.textContent = `${t.value} px`; if (final) this.paintLeft(); return; }
             if (t.dataset.swSf) { this.site.settings[t.dataset.swSf] = t.value; this.changed(final); if (t.dataset.swSf === 'lang' && final) this.reload(); return; }
-            if (t.dataset.swPf) { const p = this.page(); if (t.dataset.swPf === 'slug') { if (!final) return; const old = p.slug; p.slug = this.uniqueSlug(slugOf(t.value), this.pageIdx); t.value = p.slug; this.relink(old, p.slug); this.pushHtml(); } else p[t.dataset.swPf] = t.value; this.changed(final); return; }
+            if (t.dataset.swPf) { const p = this.page(); if (t.dataset.swPf === 'slug') { if (!final) return; const old = p.slug; p.slug = this.uniqueSlug(slugOf(t.value), this.pageIdx); t.value = p.slug; this.relink(old, p.slug, p.ext); this.pushHtml(); } else p[t.dataset.swPf] = t.value; this.changed(final); return; }
             if (t.matches('[data-sw-to]') && this.sel) { this.styleTo = t.value; return this.paintPanel(); }
             if (t.dataset.swSt && this.sel) return this.setStyle(t.dataset.swSt, t, final);
             if (t.dataset.swAt && this.sel && final) return this.setAttr(t.dataset.swAt, t.value);
@@ -653,6 +697,7 @@
 
         /* ── la page comme DOM (DOMParser : rien ne s'exécute) ── */
         mutate(fn, {push = true} = {}) {
+            if (this.isPhp()) { this.phpOnlyCode(); return false; }
             const k = K(), p = this.page(), doc = k.parse(p.html), el = this.sel?.path ? k.elByPath(doc, this.sel.path) : null;
             const r = fn(doc, el); if (r === false) return false;
             p.html = doc.body.innerHTML; this.changed(true);
@@ -674,6 +719,11 @@
             if (!state && !media) return {inline: true};
             if (!s.id) { const id = `el-${Math.random().toString(36).slice(2, 7)}`; this.setAttr('id', id); }
             return {sel: `#${this.sel.id}${state}`, media};
+        }
+        /** une règle du CSS du site, hors élément choisi (🎨 Styles → Espacements) */
+        setSiteDecl(sel, prop, value, media, final) {
+            const css = CODE().cssSetDecl(this.site.css, {sel, media, prop, value}); if (css === this.site.css) return;
+            this.site.css = css; if (this.codeTab === 'css') this.code.value = css; this.pushCss(); this.changed(final);
         }
         /** une propriété posée (valeur vide : retirée) là où il faut ; le code CSS et l'aperçu suivent */
         applyDecl(prop, val, final = true) {
@@ -812,7 +862,7 @@
                 return U.panelSection({title: `🌳 Bloc de la généalogie : ${KIND_LABEL[s.block] || s.block}`, key: 'sw-block', open: true, body: `<div class="form-grid one-column sw-form">${opts.join('')}</div><p class="sw-hint">Rempli avec ta base, figé à l’export, sans personne vivante ni fiche confidentielle.</p>`});
             };
             const content = s.tag === 'img' ? U.panelSection({title: 'Image', key: 'sw-img', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="image">🖼 Changer l’image…</button><label>Texte de remplacement (pour qui ne voit pas l’image)<input type="text" data-sw-at="alt" value="${esc(s.alt)}" maxlength="200"></label></div>`})
-                : s.tag === 'a' ? U.panelSection({title: 'Lien', key: 'sw-link', open: true, body: `<div class="form-grid one-column sw-form"><label>Adresse<input type="text" data-sw-at="href" value="${esc(s.href)}" placeholder="page.html, https://…, mailto:…" maxlength="300"></label><div class="sw-chips">${this.site.pages.map(p => `<button type="button" class="sw-chip" data-sw-act="link" data-v="${esc(p.slug)}.html">📄 ${esc(p.name)}</button>`).join('')}</div></div>`}) : '';
+                : s.tag === 'a' ? U.panelSection({title: 'Lien', key: 'sw-link', open: true, body: `<div class="form-grid one-column sw-form"><label>Adresse<input type="text" data-sw-at="href" value="${esc(s.href)}" placeholder="page.html, https://…, mailto:…" maxlength="300"></label><div class="sw-chips">${this.site.pages.map(p => `<button type="button" class="sw-chip" data-sw-act="link" data-v="${esc(pageFile(p))}">📄 ${esc(p.name)}</button>`).join('')}</div></div>`}) : '';
             pane.innerHTML = `<div class="sw-this"><small>Ceci est</small><b>${esc(s.name || (s.block ? KIND_LABEL[s.block] : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt">« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}</div>
                 <div class="sw-acts"><button type="button" class="icon-button small" data-sw-act="up" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-sw-act="down" title="Descendre" aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-sw-act="dup" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-sw-act="code" title="Voir dans le code" aria-label="Voir dans le code">&lt;/&gt;</button><button type="button" class="icon-button small" data-sw-act="parent" title="Choisir l’élément qui le contient" aria-label="Choisir le parent">⤴</button><span class="spacer"></span><button type="button" class="icon-button small danger" data-sw-act="del" title="Supprimer l’élément" aria-label="Supprimer l’élément">🗑</button></div>
                 ${U.panelSection({title: 'Ceci est… (nom, balise, classe, id)', key: 'sw-what', open: true, body: `<p class="sw-hint">Dis ce que c’est : « c’est mon en-tête, mon menu… »</p><div class="sw-chips">${ROLES.map(([tag, name], i) => `<button type="button" class="sw-chip${s.tag === tag && s.name === name ? ' is-active' : ''}" data-sw-role="${i}" title="&lt;${tag}&gt;, nommé « ${esc(name)} »">${esc(name)}</button>`).join('')}</div>
@@ -822,7 +872,7 @@
                     <label>id<input type="text" data-sw-at="id" value="${esc(s.id)}" maxlength="60" placeholder="haut-de-page" spellcheck="false"></label></div>`})}
                 ${blockOpts()}${content}
                 ${this.targetHtml()}
-                ${U.panelSection({title: 'Position et taille', key: 'sw-pos', open: false, body: range('margin-top', 'Marge en haut', 0, 160, px(cs.mt)) + range('margin-bottom', 'Marge en bas', 0, 160, px(cs.mb)) + range('padding', 'Espace intérieur', 0, 120, px(cs.pt)) + range('max-width', 'Largeur au plus (0 = toute)', 0, 1600, px(st.get('max-width') || 0)) + range('border-radius', 'Arrondi', 0, 60, px(cs.radius))})}
+                ${U.panelSection({title: 'Marges, espace intérieur et taille', key: 'sw-pos', open: false, body: this.boxHtml(cs) + range('padding', 'Espace intérieur, les 4 côtés d’un coup', 0, 120, px(cs.pt)) + range('max-width', 'Largeur au plus (0 = toute)', 0, 1600, px(st.get('max-width') || 0)) + range('border-radius', 'Arrondi', 0, 60, px(cs.radius))})}
                 ${U.panelSection({title: 'Couleur', key: 'sw-color', open: false, body: `<div class="sw-colors">${color('color', 'Texte', cs.color)}${color('background-color', 'Fond', cs.bg)}</div><button type="button" class="button small secondary" data-sw-act="nobg">Sans fond</button>`})}
                 ${U.panelSection({title: 'Texte', key: 'sw-text', open: false, body: `<div class="sw-fonts"><button type="button" class="button small secondary" data-sw-act="font">Aa · ${esc((st.get('font-family') || cs.font || '').split(',')[0].replace(/["']/g, '') || 'Police')}</button></div>${range('font-size', 'Taille', 10, 96, px(cs.size), 17)}
                     <div class="segmented sw-align">${[['left', '⟸ Gauche'], ['center', '≡ Centré'], ['right', 'Droite ⟹']].map(([v, l]) => `<button type="button" data-sw-act="align" data-v="${v}" class="${(st.get('text-align') || cs.align) === v ? 'is-active' : ''}">${l}</button>`).join('')}</div>
@@ -830,6 +880,15 @@
             pane.querySelector('[data-sw-tag]')?.addEventListener('change', e => this.setTag(e.target.value));
             pane.querySelectorAll('input[type=range][data-sw-st="max-width"]').forEach(r => { r.dataset.zeroOff = '1'; });
             U.scan?.(pane);
+        }
+        /** le schéma margin / padding (comme les outils du navigateur) : 4 côtés chacun */
+        boxHtml(cs) {
+            const side = (prop, v, l) => `<input type="number" class="sw-box-n" min="${prop.startsWith('margin') ? -200 : 0}" max="400" step="1" value="${px(v)}" data-sw-st="${prop}" data-unit="px" title="${esc(l)} (px)" aria-label="${esc(l)} en px">`;
+            return `<div class="sw-box" aria-label="Marges et espace intérieur"><span class="sw-box-l">margin · marge</span>
+                <div class="sw-box-t">${side('margin-top', cs.mt, 'Marge en haut')}</div><div class="sw-box-r">${side('margin-right', cs.mr, 'Marge à droite')}</div><div class="sw-box-b">${side('margin-bottom', cs.mb, 'Marge en bas')}</div><div class="sw-box-lf">${side('margin-left', cs.ml, 'Marge à gauche')}</div>
+                <div class="sw-box-in"><span class="sw-box-l">padding · espace intérieur</span><div class="sw-box-t">${side('padding-top', cs.pt, 'Espace intérieur en haut')}</div><div class="sw-box-r">${side('padding-right', cs.pr, 'Espace intérieur à droite')}</div><div class="sw-box-b">${side('padding-bottom', cs.pb, 'Espace intérieur en bas')}</div><div class="sw-box-lf">${side('padding-left', cs.pl, 'Espace intérieur à gauche')}</div><div class="sw-box-c">élément</div></div></div>
+                <div class="sw-row"><button type="button" class="button small secondary" data-sw-act="center" title="margin-left et margin-right : auto">↔ Centrer (marges auto)</button><button type="button" class="button small secondary" data-sw-act="nospace" title="Retirer margin et padding posés ici">↺ Marges de départ</button></div>
+                <p class="sw-hint">Alt + flèches dans une case : ±10 px. Les valeurs vont là où dit « Appliquer à » (élément, classe, écran).</p>`;
         }
         /** « Appliquer à » : cet élément ou tous ceux de sa classe ; normal ou survol ; tous les écrans, tablette ou téléphone */
         targetHtml() {
@@ -846,6 +905,8 @@
             if (act === 'up') return this.move(-1); if (act === 'down') return this.move(1); if (act === 'dup') return this.duplicate(); if (act === 'del') return this.remove();
             if (act === 'code') return this.revealInCode(true);
             if (act === 'parent') { if (s.path.length > 1) this.post({type: 'select', path: s.path.slice(0, -1), report: true}); return; }
+            if (act === 'center') { this.applyDecl('margin-left', 'auto', false); this.applyDecl('margin-right', 'auto'); return this.hist.commit(); }
+            if (act === 'nospace') { ['margin', 'padding'].forEach(k2 => ['', '-top', '-right', '-bottom', '-left'].forEach(sd => this.applyDecl(k2 + sd, '', false))); this.hist.commit(); return setTimeout(() => this.post({type: 'info'}), 80); }
             if (act === 'nobg') { this.applyDecl('background-color', '', false); this.applyDecl('background', ''); return this.hist.commit(); }
             if (act === 'align') { this.applyDecl('text-align', b.dataset.v); return this.paintPanel(); }
             if (act === 'link') return this.setAttr('href', b.dataset.v);
@@ -867,14 +928,150 @@
         }
 
         /* ── le code ── */
-        codeValue() { return this.codeTab === 'css' ? this.site.css : this.codeTab === 'js' ? this.site.js : this.page().html; }
+        codeValue() { const f = this.fileOf(this.codeTab); return f ? f.content : this.codeTab === 'css' ? this.site.css : this.codeTab === 'js' ? this.site.js : this.page().html; }
+        fileOf(key) { return String(key || '').startsWith('f:') ? this.site.files.find(f => f.id === key.slice(2)) || null : null; }
+        /* ── 🗂 les fichiers : en onglets (comme Phoenix Code) ou en trois boutons HTML / CSS / JS (au choix : ⇆, ou menu Affichage) ── */
+        get ftStyle() { return pref('ftStyle', 'tabs') === 'simple' ? 'simple' : 'tabs'; }
+        setFtStyle(v) { setPref('ftStyle', v); this.paintTabs(); }
+        tabKey() { return this.codeTab === 'html' ? `p:${this.page().id}` : this.codeTab; }
+        tabInfo(key) {
+            if (key === 'css') return {name: 'style.css', kind: 'css', title: 'style.css · la feuille de styles de tout le site'};
+            if (key === 'js') return {name: 'script.js', kind: 'js', title: 'script.js · le script de tout le site'};
+            if (String(key).startsWith('p:')) { const p = this.site.pages.find(x => x.id === key.slice(2)); return p ? {name: pageFile(p), kind: p.ext === 'php' ? 'php' : 'html', title: `${pageFile(p)} · page « ${p.name} »`, page: p} : null; }
+            const f = this.fileOf(key); return f ? {name: f.path.split('/').pop(), kind: f.kind, title: `${f.path}${(f.kind === 'css' || f.kind === 'js') ? ` · ${f.pages.length ? `sur ${plural(f.pages.length, 'page')}` : 'sur toutes les pages'}` : ''}`, file: f} : null;
+        }
+        paintTabs() {
+            const box = this.$('[data-sw-ftabs]'); if (!box) return;
+            if (!this.tabs) this.tabs = [`p:${this.page().id}`, 'css', 'js'];
+            const cur = this.tabKey(); this.tabs = this.tabs.filter(k => this.tabInfo(k)); if (!this.tabs.includes(cur)) this.tabs.splice(this.tabs.indexOf(this.lastTab) + 1, 0, cur); this.lastTab = cur;
+            const ico = t => `<span class="sw-fico k-${t.kind}" aria-hidden="true">${esc(FILE_KINDS[t.kind].ico)}</span>`;
+            const st = this.$('[data-sw-ftstyle]'); if (st) st.title = this.ftStyle === 'tabs' ? 'Passer aux trois boutons HTML / CSS / JS' : 'Passer aux onglets de fichiers (comme Phoenix Code)';
+            box.classList.toggle('is-simple', this.ftStyle !== 'tabs');
+            if (this.ftStyle !== 'tabs') { // les trois boutons d'avant ; un fichier en plus ouvert : un quatrième bouton, le sien
+                const f = this.fileOf(cur), pt = this.tabInfo(`p:${this.page().id}`);
+                box.innerHTML = `<div class="segmented sw-codetabs">${[['html', this.isPhp() ? 'PHP de la page' : 'HTML de la page', pt.title], ['css', 'CSS du site', 'style.css'], ['js', 'JS du site', 'script.js']].map(([k, l, ti]) => `<button type="button" data-sw-tab="${k}" class="${this.codeTab === k ? 'is-active' : ''}" title="${esc(ti)}">${esc(l)}</button>`).join('')}${f ? `<button type="button" data-sw-tab="${esc(cur)}" class="is-active" title="${esc(f.path)}">${ico(this.tabInfo(cur))} ${esc(this.tabInfo(cur).name)}</button>` : ''}</div>`;
+                return;
+            }
+            box.innerHTML = this.tabs.map(k => { const t = this.tabInfo(k), on = k === cur;
+                return `<div class="sw-ftab${on ? ' is-active' : ''}" data-sw-ftab="${esc(k)}" data-sw-tab="${esc(k === `p:${this.page().id}` ? 'html' : k)}" role="tab" aria-selected="${on}" title="${esc(t.title)} — double-clic : renommer · clic droit : plus">${ico(t)}<span class="sw-fname">${esc(t.name)}</span>${this.tabs.length > 1 ? `<button type="button" class="sw-fx" data-sw-fclose="${esc(k)}" title="Fermer l’onglet (le fichier reste dans le site)" aria-label="Fermer ${esc(t.name)}">×</button>` : ''}</div>`; }).join('');
+            box.querySelector('.is-active')?.scrollIntoView?.({block: 'nearest', inline: 'nearest'});
+        }
+        openTab(key) {
+            if (!this.tabInfo(key)) return;
+            if (!this.tabs.includes(key)) { const i = this.tabs.indexOf(this.tabKey()); this.tabs.splice(i + 1, 0, key); }
+            if (this.view === 'visual') this.setView('split');
+            if (key.startsWith('p:')) { const i = this.site.pages.findIndex(p => p.id === key.slice(2)); if (i !== this.pageIdx) this.goPage(i); return this.setCodeTab('html'); }
+            this.setCodeTab(key);
+        }
+        closeTab(key) {
+            if (this.tabs.length < 2) return; const i = this.tabs.indexOf(key); if (i < 0) return;
+            const wasCur = key === this.tabKey(); this.tabs.splice(i, 1);
+            if (wasCur) return this.openTab(this.tabs[Math.max(0, i - 1)]);
+            this.paintTabs();
+        }
+        /** ＋ : un nouveau fichier ; il s'ouvre, son nom prêt à être changé */
+        newFileMenu(btn) {
+            const mk = (path, content) => { path = this.freePath(path); const f = {id: `f${newId().slice(1)}`, path, kind: kindOfExt(extOf(path)), content, pages: []}; this.site.files.push(f); this.changed(true); this.openTab(`f:${f.id}`); this.paintLeft(); setTimeout(() => this.renameTab(`f:${f.id}`), 30); };
+            UI().menuAt(btn, [
+                {icon: '‹›', label: 'Page HTML', help: 'une page de plus, dans le menu', run: () => this.addPage({ext: 'html', quick: true})},
+                {icon: 'php', label: 'Page PHP', help: 'une page .php : elle inclut un en-tête commun', run: () => this.addPage({ext: 'php', quick: true})},
+                '-',
+                {icon: '#', label: 'Feuille de styles (.css)', help: 'liée après style.css', run: () => mk('css/nouveau.css', '/* styles en plus */\n')},
+                {icon: 'JS', label: 'Script (.js)', help: 'lié après script.js', run: () => mk('js/nouveau.js', '// script en plus\n')},
+                {icon: 'php', label: 'Morceau PHP à inclure (en-tête, pied…)', help: 'pour l’appeler dans une page PHP : include', run: () => mk('includes/entete.php', this.headerSnippet())},
+                {icon: '{}', label: 'Données (.json)', run: () => mk('data/donnees.json', '{\n  \n}\n')},
+                {icon: '¶', label: 'Texte (.txt, robots.txt…)', run: () => mk('notes.txt', '')},
+            ], {title: 'Nouveau fichier'});
+        }
+        headerSnippet() { const h = K().parse(this.page().html).body.querySelector(':scope > header'); return `${h ? h.outerHTML : '<header class="site-entete">\n  <div class="conteneur"><a class="site-nom" href="index.php">Mon site</a></div>\n</header>'}\n`; }
+        freePath(path, selfId = '') {
+            path = cleanPath(path) || 'fichier.txt'; const taken = q => q === 'style.css' || q === 'script.js' || this.site.pages.some(p => pageFile(p) === q) || this.site.files.some(f => f.id !== selfId && f.path === q);
+            if (!taken(path)) return path; const e = extOf(path), base = e ? path.slice(0, -e.length - 1) : path; let k = 2; while (taken(`${base}-${k}${e ? '.' + e : ''}`)) k++; return `${base}-${k}${e ? '.' + e : ''}`;
+        }
+        allFilesMenu(btn) {
+            const keys = [...this.site.pages.map(p => `p:${p.id}`), 'css', 'js', ...this.site.files.slice().sort((a, b) => a.path.localeCompare(b.path)).map(f => `f:${f.id}`)];
+            UI().menuAt(btn, [...keys.map(k => { const t = this.tabInfo(k); return {icon: FILE_KINDS[t.kind].ico, label: t.file ? t.file.path : t.name, help: t.page ? `page « ${t.page.name} »` : '', run: () => this.openTab(k)}; }), '-', {icon: '＋', label: 'Nouveau fichier…', run: () => this.newFileMenu(btn)}], {title: `Fichiers du site (${keys.length})`});
+        }
+        /** double-clic sur un onglet : son nom devient un champ ; l'extension change le format (cours.html → cours.php) */
+        renameTab(key) {
+            const t = this.tabInfo(key); if (!t) return;
+            if (key === 'css' || key === 'js') return toast(`${t.name} garde son nom : c’est le fichier principal du site.`);
+            if (this.ftStyle !== 'tabs') return this.renameAsk(key);
+            const el = this.$(`[data-sw-ftab="${CSS.escape(key)}"] .sw-fname`); if (!el) return this.renameAsk(key);
+            const inp = document.createElement('input'); inp.className = 'sw-fren'; inp.value = t.file ? t.file.path : t.name; inp.spellcheck = false; inp.setAttribute('aria-label', 'Nom du fichier');
+            el.replaceWith(inp); inp.focus(); const dot = inp.value.lastIndexOf('.'), sl = inp.value.lastIndexOf('/') + 1; inp.setSelectionRange(sl, dot > sl ? dot : inp.value.length);
+            let done = false; const end = ok => { if (done) return; done = true; if (ok) this.renameFile(key, inp.value); else this.paintTabs(); };
+            inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); end(true); } else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); end(false); } });
+            inp.addEventListener('blur', () => end(true));
+        }
+        async renameAsk(key) { const t = this.tabInfo(key); const v = await A().askText({title: '✎ Renommer le fichier', message: 'Son nom, avec son extension (.html, .php, .css…) :', value: t.file ? t.file.path : t.name, okLabel: 'Renommer'}); if (v?.trim()) this.renameFile(key, v); }
+        renameFile(key, raw) {
+            const t = this.tabInfo(key); if (!t) return;
+            if (t.page) {
+                const p = t.page, i = this.site.pages.indexOf(p), name = cleanPath(raw).split('/').pop(), e = extOf(name) || p.ext, base = name.replace(/\.[a-z0-9]+$/, '');
+                if (!['html', 'htm', 'php'].includes(e)) { toast('Une page finit par .html ou .php. Pour un autre fichier : ＋ Nouveau fichier.', 'error'); return this.paintTabs(); }
+                if (!i && slugOf(base) !== 'index') toast('La page d’accueil s’appelle toujours index : seul son format change.');
+                if (i && /^Page \d+$/.test(p.name) && base) { const nm = base.replace(/[-_]+/g, ' ').trim(); p.name = nm.charAt(0).toUpperCase() + nm.slice(1); this.pushHtml(); } // une page toute neuve prend le nom de son fichier
+                return this.setPageFile(p, i ? this.uniqueSlug(slugOf(base), i) : 'index', e === 'php' ? 'php' : 'html');
+            }
+            const f = t.file, path = this.freePath(raw, f.id); if (path === f.path) return this.paintTabs();
+            const old = f.path; f.path = path; f.kind = kindOfExt(extOf(path)); this.relinkPath(old, path);
+            this.changed(true); this.setCodeTab(this.codeTab, true); this.paintLeft(); this.pushCss(); this.pushHtml();
+        }
+        /** une page change de nom de fichier ou de format (HTML ↔ PHP) : les liens des autres pages suivent */
+        setPageFile(p, slug, ext) {
+            const before = pageFile(p), oldSlug = p.slug, oldExt = p.ext; if (slug === oldSlug && ext === oldExt) return this.paintTabs();
+            if (oldExt === 'php' && ext === 'html' && /<\?(php|=)/i.test(p.html)) toast('Attention : cette page contient du PHP (<?php … ?>). En .html, il ne sera pas exécuté.', 'error');
+            p.slug = slug; p.ext = ext; this.relink(oldSlug, slug, oldExt, ext);
+            this.changed(true); this.paintPages(); if (p === this.page()) this.setCodeTab('html', true); else this.paintTabs(); this.reload();
+            toast(`${before} → ${pageFile(p)}${ext === 'php' && oldExt !== 'php' ? ' · tu peux y écrire du PHP, par exemple <?php include \'includes/entete.php\'; ?>' : ''}`, 'success');
+        }
+        relinkPath(from, to) {
+            if (!from || from === to) return; const q = from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const re = new RegExp(`((?:href|src)\\s*=\\s*["']|(?:include|require)(?:_once)?\\s*\\(?\\s*["'])${q}(?=["'?#])`, 'gi');
+            this.site.pages.forEach(pg => { pg.html = pg.html.replace(re, `$1${to}`); }); this.site.files.forEach(f => { if (f.kind === 'php' || f.kind === 'html') f.content = f.content.replace(re, `$1${to}`); });
+            if (this.code) this.code.value = this.codeValue();
+        }
+        tabMenu(key, at) {
+            const t = this.tabInfo(key); if (!t) return; const items = [];
+            if (key !== 'css' && key !== 'js') items.push({icon: '✎', label: 'Renommer', help: 'double-clic sur l’onglet', run: () => { this.openTab(key); setTimeout(() => this.renameTab(key), 30); }});
+            if (t.page) items.push(t.page.ext === 'php' ? {icon: '‹›', label: 'Passer en HTML (.html)', run: () => this.setPageFile(t.page, t.page.slug, 'html')} : {icon: 'php', label: 'Passer en PHP (.php)', help: 'pour inclure un en-tête commun…', run: () => this.setPageFile(t.page, t.page.slug, 'php')});
+            if (t.file) {
+                Object.keys(FILE_KINDS).filter(k2 => k2 !== t.file.kind).forEach(k2 => items.push({icon: FILE_KINDS[k2].ico, label: `Changer en .${k2}`, run: () => this.renameFile(key, t.file.path.replace(/(\.[a-z0-9]+)?$/, `.${k2}`))}));
+                if (t.file.kind === 'css' || t.file.kind === 'js') items.push('-', {icon: '📄', label: 'Pages où il est lié…', help: t.file.pages.length ? plural(t.file.pages.length, 'page') : 'toutes les pages', run: () => this.filePagesDialog(t.file)});
+                items.push({icon: '⧉', label: 'Dupliquer', run: () => { const c = {...t.file, id: `f${newId().slice(1)}`, path: this.freePath(t.file.path), pages: [...t.file.pages]}; this.site.files.push(c); this.changed(true); this.openTab(`f:${c.id}`); this.paintLeft(); }});
+            }
+            if (t.page) items.push({icon: '⧉', label: 'Dupliquer la page', run: () => this.pageAction('dup', this.site.pages.indexOf(t.page))});
+            items.push('-', {icon: '×', label: 'Fermer l’onglet', disabled: this.tabs.length < 2 || this.ftStyle !== 'tabs', run: () => this.closeTab(key)});
+            if (t.file) items.push({icon: '🗑', label: 'Supprimer le fichier', danger: true, run: () => { if (this.tabs.includes(key)) this.closeTab(key); if (this.codeTab === key) this.setCodeTab('html', true); this.site.files = this.site.files.filter(f => f !== t.file); this.changed(true); this.paintTabs(); this.paintLeft(); this.pushCss(); A().undoToast?.(`${t.file.path} supprimé`, {undo: () => this.undo()}); }});
+            if (t.page && this.site.pages.indexOf(t.page) > 0) items.push({icon: '🗑', label: 'Supprimer la page', danger: true, run: () => this.pageAction('del', this.site.pages.indexOf(t.page))});
+            UI().menuAt(at, items, {title: t.file ? t.file.path : t.name});
+        }
+        filePagesDialog(f) {
+            ext.openDialog({eyebrow: 'MON SITE WEB', title: `📄 ${f.path} : sur quelles pages ?`, submitLabel: 'Enregistrer',
+                body: `<p class="sw-hint">Rien de coché : sur toutes les pages. Il est lié après ${f.kind === 'css' ? 'style.css' : 'script.js'}.</p><div class="sw-checks">${this.site.pages.map(p => `<label class="ui-toggle"><input type="checkbox" value="${esc(p.slug)}"${f.pages.includes(p.slug) ? ' checked' : ''}><i></i>${esc(p.name)} <small>${esc(pageFile(p))}</small></label>`).join('')}</div>`,
+                onSubmit: form => { f.pages = [...form.querySelectorAll('input:checked')].map(x => x.value); this.changed(true); this.paintTabs(); this.pushCss(); if (this.mode === 'play') this.reload(); }});
+        }
+        /** les fichiers css / js liés à cette page (après style.css / script.js) */
+        filesFor(kind, p = this.page()) { return this.site.files.filter(f => f.kind === kind && (!f.pages.length || f.pages.includes(p.slug))); }
+        /** une page PHP dans l'aperçu : les include de fichiers du site sont remplacés par leur contenu, le reste du PHP est retiré
+         *  (le vrai PHP tourne dans le site exporté, chez l'hébergeur) */
+        pageSrc(p = this.page()) {
+            if (p.ext !== 'php') return p.html;
+            const inc = (text, depth) => text.replace(/<\?php\s+(?:include|require)(?:_once)?\s*\(?\s*["']([^"']+)["']\s*\)?\s*;?\s*\?>/gi, (m, path) => { const f = this.site.files.find(x => x.path === cleanPath(path)); return f && depth < 6 ? inc(f.content, depth + 1) : `<!-- ${esc(path)} : fichier introuvable -->`; });
+            return inc(p.html, 0).replace(/<\?(?:php|=)[\s\S]*?(?:\?>|$)/gi, '');
+        }
+        isPhp() { return this.page().ext === 'php'; }
+        phpOnlyCode() { if (Date.now() - (this.phpToast || 0) > 6000) { this.phpToast = Date.now(); toast('Page PHP : elle se change dans le code (</>), l’aperçu montre le résultat. Les styles (CSS) se règlent toujours ici.'); } }
         setCodeTab(tab, quiet = false) {
-            if (!['html', 'css', 'js'].includes(tab)) tab = 'html';
-            this.codeTab = tab; setPref('codeTab', tab);
-            this.$$('[data-sw-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.swTab === tab));
+            if (!['html', 'css', 'js'].includes(tab) && !this.fileOf(tab)) tab = 'html';
+            this.codeTab = tab; if (!tab.startsWith('f:')) setPref('codeTab', tab);
+            this.paintTabs();
             if (!this.code) return;
-            this.code.setLang(tab); this.code.value = this.codeValue();
-            const help = {html: `HTML de « ${this.page().name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls`, css: 'CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)…', js: 'JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté'};
+            const f = this.fileOf(tab), kind = f ? f.kind : tab === 'html' ? (this.isPhp() ? 'php' : 'html') : tab;
+            this.code.setLang(codeLang(kind)); this.code.value = this.codeValue();
+            if (f) { this.$('[data-sw-codehelp]').textContent = {css: `${f.path} · lié après style.css${f.pages.length ? ` sur ${plural(f.pages.length, 'page')}` : ''} · clic droit sur l’onglet : ses pages`, js: `${f.path} · lié après script.js, tourne en ▶ Tester`, php: `${f.path} · à inclure dans une page PHP : <?php include '${f.path}'; ?>`, html: f.path, json: `${f.path} · données`, txt: f.path}[f.kind]; this.$('[data-sw-mqnav]').hidden = f.kind !== 'css'; if (!quiet) this.code.focus(); return; }
+            const help = {html: `${this.isPhp() ? `PHP de « ${this.page().name} » · <?php include 'includes/entete.php'; ?> pour un en-tête commun · ` : ''}HTML de « ${this.page().name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls`, css: 'CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)…', js: 'JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté'};
             this.$('[data-sw-codehelp]').textContent = help[tab]; this.$('[data-sw-mqnav]').hidden = tab !== 'css';
             if (!quiet) this.code.focus();
         }
@@ -890,6 +1087,8 @@
                 {icon: '⚙', label: 'Gérer les écrans…', run: () => this.bpDialog()}], {title: 'Blocs @media du CSS'});
         }
         codeChanged(v) {
+            const f = this.fileOf(this.codeTab);
+            if (f) { if (v.length > 1000000) return; f.content = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => { if (f.kind === 'css') this.pushCss(); else if (f.kind === 'js') { if (this.mode === 'play') this.reload(); } else if (this.isPhp()) this.pushHtml(); }, f.kind === 'js' ? 900 : 200); return this.changed(); }
             if (this.codeTab === 'html') { if (v.length > MAX_HTML) return; this.page().html = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => { this.checkSel(); this.pushHtml(); }, 220); }
             else if (this.codeTab === 'css') { this.site.css = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => { this.pushCss(); if (this.sel) setTimeout(() => this.post({type: 'info'}), 80); }, 120); } // le panneau relit les valeurs
             else { this.site.js = v; if (this.mode === 'play') { clearTimeout(this.codeT); this.codeT = setTimeout(() => this.reload(), 900); } }

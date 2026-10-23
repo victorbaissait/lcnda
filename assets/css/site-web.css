@@ -180,3 +180,39 @@ dialog.modal.sw-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 .sw-bp-q select { max-width: 260px; }
 .sw-bp-custom { flex: 1 1 260px; font-family: ui-monospace, Menlo, monospace; }
 .sw-bp .sw-hint code { font-size: 11.5px; }
+/* marges et espace intérieur d'un élément (schéma) */
+.sw-box { position: relative; display: grid; grid-template: 30px 1fr 30px / 52px 1fr 52px; border: 1.5px dashed #c48a2c; background: rgba(246, 178, 107, .14); padding: 0; margin: 4px 0 8px; font-size: 11px; }
+.sw-box-in { grid-area: 2 / 2; position: relative; display: grid; grid-template: 30px 1fr 30px / 52px 1fr 52px; border: 1.5px solid #6a9b3a; background: rgba(147, 196, 125, .18); }
+.sw-box-l { position: absolute; left: 4px; top: 2px; font: 600 9.5px/1 system-ui, sans-serif; color: var(--sw-muted); text-transform: uppercase; letter-spacing: .04em; pointer-events: none; }
+.sw-box-t { grid-area: 1 / 2; } .sw-box-b { grid-area: 3 / 2; } .sw-box-lf { grid-area: 2 / 1; } .sw-box-r { grid-area: 2 / 3; }
+.sw-box-t, .sw-box-b, .sw-box-lf, .sw-box-r { display: grid; place-items: center; }
+.sw-box-c { grid-area: 2 / 2; display: grid; place-items: center; min-height: 34px; background: rgba(111, 168, 220, .25); border: 1px solid #6fa8dc; color: var(--sw-muted); }
+.sw-box-n { width: 46px; height: 22px; padding: 0 2px; text-align: center; font: 600 11.5px/1 ui-monospace, Menlo, monospace; border: 1px solid transparent; background: transparent; }
+.sw-box-n:hover, .sw-box-n:focus { border-color: var(--sw-blue); background: var(--sw-bg); outline: 0; }
+/* 🎨 Styles → Espacements */
+.sw-spscreens { display: flex; flex-wrap: wrap; margin-bottom: 6px; }
+.sw-sp { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; }
+.sw-sp > span { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px; align-items: baseline; }
+.sw-sp code { font-size: 10.5px; color: var(--sw-muted); }
+.sw-sp output { font: 600 11.5px ui-monospace, Menlo, monospace; min-width: 48px; text-align: right; }
+.sw-sp.is-set > span::before { content: "●"; color: var(--sw-blue); font-size: 9px; }
+.sw-sp-reset { border: 0; background: none; cursor: pointer; color: var(--sw-blue); font-weight: 700; padding: 0 2px; }
+/* 🗂 les fichiers : onglets (comme Phoenix Code) ou trois boutons */
+.sw-ftabbar { display: flex; align-items: stretch; border-bottom: 1.5px solid var(--sw-ink, #111); background: var(--sw-head); min-height: 34px; }
+.sw-ftabs { flex: 1; min-width: 0; display: flex; overflow-x: auto; scrollbar-width: thin; }
+.sw-ftabs.is-simple { align-items: center; padding: 4px 8px; }
+.sw-ftabs.is-simple .segmented { display: flex; margin: 0; }
+.sw-ftabs.is-simple .segmented button { padding: 0 12px; min-height: 30px; white-space: nowrap; }
+.sw-ftab { display: inline-flex; align-items: center; gap: 7px; padding: 0 6px 0 12px; border-right: 1px solid var(--sw-line); cursor: pointer; white-space: nowrap; font-size: 13px; color: var(--sw-muted); position: relative; user-select: none; }
+.sw-ftab:hover { background: var(--sw-bg); color: inherit; }
+.sw-ftab.is-active { background: var(--sw-bg); color: var(--sw-ink, inherit); font-weight: 600; }
+.sw-ftab.is-active::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--sw-blue); }
+.sw-fico { display: inline-grid; place-items: center; min-width: 22px; height: 16px; padding: 0 3px; border-radius: 3px; font: 700 9.5px/1 ui-monospace, Menlo, monospace; color: #fff; background: #6b7280; }
+.sw-fico.k-html { background: #d4572a; } .sw-fico.k-php { background: #6d5fb5; } .sw-fico.k-css { background: #1d6fd6; } .sw-fico.k-js { background: #c9a400; color: #111; } .sw-fico.k-json { background: #3a8a5c; }
+.sw-fx { border: 0; background: none; width: 20px; height: 20px; border-radius: 3px; cursor: pointer; color: var(--sw-muted); font-size: 15px; line-height: 1; visibility: hidden; }
+.sw-ftab:hover .sw-fx, .sw-ftab.is-active .sw-fx { visibility: visible; }
+.sw-fx:hover { background: var(--sw-line); color: inherit; }
+.sw-fren { font: 600 13px/1 inherit; width: 170px; padding: 3px 5px; border: 1.5px solid var(--sw-blue); outline: 0; }
+.sw-fbtn { border: 0; border-left: 1px solid var(--sw-line); background: none; min-width: 34px; cursor: pointer; font-size: 15px; font-weight: 700; }
+.sw-fbtn:hover, .sw-fbtn.is-open { background: var(--sw-bg); color: var(--sw-blue); }
+.sw-checks { display: grid; gap: 4px; }

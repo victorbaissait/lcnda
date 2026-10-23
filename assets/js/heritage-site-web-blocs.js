@@ -198,7 +198,7 @@ function label(el){var s=el.tagName.toLowerCase();if(el.id)s+='#'+el.id;var c=(e
 function box(b,el){if(!el){b.style.display='none';return;}var r=el.getBoundingClientRect();b.style.display='block';b.style.left=(r.left+scrollX)+'px';b.style.top=(r.top+scrollY)+'px';b.style.width=r.width+'px';b.style.height=r.height+'px';b.firstChild.textContent=label(el);b.classList.toggle('is-low',r.top<22);}
 function info(el){var cs=getComputedStyle(el);return{path:path(el),tag:el.tagName.toLowerCase(),id:el.id||'',cls:(el.getAttribute('class')||'').trim(),name:el.getAttribute('data-lc-name')||'',block:el.getAttribute('data-lc-block')||'',text:(el.textContent||'').replace(/\s+/g,' ').trim().slice(0,90),
  src:el.getAttribute('src')||'',href:el.getAttribute('href')||'',alt:el.getAttribute('alt')||'',style:el.getAttribute('style')||'',kids:el.children.length,
- cs:{color:cs.color,bg:cs.backgroundColor,font:cs.fontFamily,size:cs.fontSize,weight:cs.fontWeight,align:cs.textAlign,mt:cs.marginTop,mb:cs.marginBottom,pt:cs.paddingTop,pl:cs.paddingLeft,radius:cs.borderTopLeftRadius,maxw:cs.maxWidth}};}
+ cs:{color:cs.color,bg:cs.backgroundColor,font:cs.fontFamily,size:cs.fontSize,weight:cs.fontWeight,align:cs.textAlign,mt:cs.marginTop,mr:cs.marginRight,mb:cs.marginBottom,ml:cs.marginLeft,pt:cs.paddingTop,pr:cs.paddingRight,pb:cs.paddingBottom,pl:cs.paddingLeft,radius:cs.borderTopLeftRadius,maxw:cs.maxWidth}};}
 function select(el,scroll){sel=el;box(bs,el);if(el&&scroll){var r=el.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)el.scrollIntoView({block:'center'});setTimeout(function(){box(bs,el);},60);}}
 var TEXTY='p,h1,h2,h3,h4,h5,h6,li,a,span,blockquote,figcaption,td,th,cite,small,strong,em,b,i,label,dt,dd,button,q,time,address';
 function serialize(){var c=B.cloneNode(true);c.querySelectorAll('script[data-lcb]').forEach(function(e){e.remove();});c.querySelectorAll('[contenteditable]').forEach(function(e){e.removeAttribute('contenteditable');});c.querySelectorAll('[data-lc-block]').forEach(function(e){e.innerHTML='';});c.querySelectorAll('[spellcheck]').forEach(function(e){e.removeAttribute('spellcheck');});return c.innerHTML;}
@@ -209,7 +209,7 @@ document.addEventListener('click',function(e){
  if(skipClick){skipClick=false;e.preventDefault();e.stopPropagation();return;}
  if(e.target.closest&&e.target.closest('.lc-carte-vive button'))return; // ＋ − de la carte interactive : ils marchent aussi ici
  var a=e.target.closest&&e.target.closest('a[href]');
- if(mode==='play'){if(!a)return;var h=a.getAttribute('href')||'';var m=/^([a-z0-9-]+)\.html(#.*)?$/i.exec(h);if(m){e.preventDefault();send({type:'goto',slug:m[1]});return;}if(h.charAt(0)==='#')return;e.preventDefault();send({type:'external',href:h.slice(0,300)});return;}
+ if(mode==='play'){if(!a)return;var h=a.getAttribute('href')||'';var m=/^([a-z0-9-]+)\.(?:html|php)(#.*)?$/i.exec(h);if(m){e.preventDefault();send({type:'goto',slug:m[1]});return;}if(h.charAt(0)==='#')return;e.preventDefault();send({type:'external',href:h.slice(0,300)});return;}
  if(edit&&edit.contains(e.target))return;
  e.preventDefault();e.stopPropagation();var el=root(e.target);if(!el)return;
  if(mode==='text'&&el.matches(TEXTY)&&!el.closest('[data-lc-block]')){stopEdit();edit=el;el.setAttribute('contenteditable','true');el.setAttribute('spellcheck','true');el.focus();}
