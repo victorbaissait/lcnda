@@ -38,6 +38,22 @@ function suivi_fill_uuids(PDO $pdo): void
     }
 }
 
+/** Les médias d'une observation dans le paquet : « medias » = tous (liste de clés « m12 ») ; « media » = le premier,
+ *  pour qu'une app d'avant (un seul média par observation) en reçoive au moins un. */
+function suivi_share_obs_media(array $ids, callable $mediaKey): array
+{
+    $keys = array_values(array_filter(array_map(static fn($id) => $mediaKey((int) $id), array_slice($ids, 0, 40))));
+    return ['media' => $keys[0] ?? null, 'medias' => $keys];
+}
+
+/** À la réception : « medias » (liste) si elle est là, sinon l'ancien « media » (une clé, ou une liste) → clés « m12 » propres, 40 au plus */
+function suivi_share_media_keys(array $o): array
+{
+    $v = is_array($o['medias'] ?? null) ? $o['medias'] : ($o['media'] ?? null);
+    $list = is_array($v) ? array_slice($v, 0, 200) : [$v];
+    return array_slice(array_values(array_unique(array_filter($list, static fn($k) => is_string($k) && preg_match('/^m\d{1,10}$/', $k)))), 0, 40);
+}
+
 /** Un lieu en texte (il voyage tel quel, et se retrouve ou se crée chez l'autre) */
 function suivi_place_out(?array $p): ?array
 {
@@ -92,7 +108,7 @@ function suivi_share_build(PDO $pdo, array $q): array
             $obs[] = ['uuid' => (string) $orow['uuid'], 'date' => $o['date'], 'time' => $o['time'], 'lat' => $o['lat'], 'lon' => $o['lon'], 'place' => $o['place_id'] ? suivi_place_out(suivi_places($pdo, [$o['place_id']])[$o['place_id']] ?? null) : null,
                 'place_text' => $o['place_text'], 'site' => $o['site_id'] ? ($siteUuid[$o['site_id']] ?? '') : '', 'behaviors' => $o['behaviors'], 'count' => $o['count'],
                 'with' => array_values(array_filter(array_map(static fn($w) => $petUuid[$w] ?? '', $o['with']))), 'reading' => $o['reading'], 'reading_detail' => $o['reading_detail'], 'reliability' => $o['reliability'],
-                'observer' => $people($o['observer_id'], (string) $orow['observer_txt'], $pp), 'note' => $o['note'], 'source' => $o['source'], 'sea' => $o['sea'], 'media' => $mediaKey($o['media_id'])];
+                'observer' => $people($o['observer_id'], (string) $orow['observer_txt'], $pp), 'note' => $o['note'], 'source' => $o['source'], 'sea' => $o['sea']] + suivi_share_obs_media($o['media_ids'], $mediaKey);
         }
         $marks = array_map(static function ($m) use ($pdo, $mediaKey) { $r = suivi_row($pdo, 'animal_marks', $m['id']); return ['uuid' => (string) $r['uuid'], 'kind' => $m['kind'], 'code' => $m['code'], 'colors' => $m['colors'], 'position' => $m['position'], 'scheme' => $m['scheme'], 'model' => $m['model'], 'interval_min' => $m['interval_min'], 'start_date' => $m['start_date'], 'end_date' => $m['end_date'], 'end_reason' => $m['end_reason'], 'note' => $m['note'], 'media' => $mediaKey($m['media_id'])]; }, $d['marks']);
         $health = array_map(static function ($h) use ($pdo, $mediaKey, $people, $pp) { $r = suivi_row($pdo, 'animal_health', $h['id']); return ['uuid' => (string) $r['uuid'], 'date' => $h['date'], 'state' => $h['state'], 'what_kind' => $h['what_kind'], 'what_text' => $h['what_text'], 'cause' => $h['cause'], 'cause_text' => $h['cause_text'], 'place' => $h['place_id'] ? suivi_place_out(suivi_places($pdo, [$h['place_id']])[$h['place_id']] ?? null) : null, 'place_text' => $h['place_id'] ? '' : (string) $r['place_text'], 'carer' => $people($h['carer_id'], (string) $r['carer_txt'], $pp), 'care' => $h['care'], 'meds' => $h['meds'], 'weight_g' => $h['weight_g'], 'media' => array_values(array_filter(array_map($mediaKey, $h['media_ids']))), 'outcome' => $h['outcome'], 'outcome_date' => $h['outcome_date'], 'note' => $h['note']]; }, $d['health']);
@@ -123,7 +139,7 @@ function suivi_share_build(PDO $pdo, array $q): array
         $siteId = safe_int($q['site'] ?? 0);
         foreach ($pdo->query('SELECT * FROM animal_observations WHERE pet_id IS NULL ORDER BY obs_iso') as $o) {
             if ($scope === 'site' && (int) $o['site_id'] !== $siteId) { continue; }
-            $free[] = ['uuid' => (string) $o['uuid'], 'date' => (string) $o['obs_date'], 'time' => (string) $o['obs_time'], 'lat' => $o['lat'] !== null ? (float) $o['lat'] : null, 'lon' => $o['lon'] !== null ? (float) $o['lon'] : null, 'place' => $o['place_id'] ? suivi_place_out(suivi_places($pdo, [$o['place_id']])[(int) $o['place_id']] ?? null) : null, 'place_text' => (string) $o['place_text'], 'site' => $o['site_id'] ? ($siteUuid[(int) $o['site_id']] ?? '') : '', 'behaviors' => array_values(array_filter(explode(',', (string) $o['behaviors']))), 'count' => $o['count'] !== null ? (int) $o['count'] : null, 'reading' => (string) $o['reading_raw'], 'reliability' => (string) $o['reliability'], 'note' => (string) $o['note'], 'source' => (string) $o['source']];
+            $free[] = ['uuid' => (string) $o['uuid'], 'date' => (string) $o['obs_date'], 'time' => (string) $o['obs_time'], 'lat' => $o['lat'] !== null ? (float) $o['lat'] : null, 'lon' => $o['lon'] !== null ? (float) $o['lon'] : null, 'place' => $o['place_id'] ? suivi_place_out(suivi_places($pdo, [$o['place_id']])[(int) $o['place_id']] ?? null) : null, 'place_text' => (string) $o['place_text'], 'site' => $o['site_id'] ? ($siteUuid[(int) $o['site_id']] ?? '') : '', 'behaviors' => array_values(array_filter(explode(',', (string) $o['behaviors']))), 'count' => $o['count'] !== null ? (int) $o['count'] : null, 'reading' => (string) $o['reading_raw'], 'reliability' => (string) $o['reliability'], 'note' => (string) $o['note'], 'source' => (string) $o['source']] + suivi_share_obs_media(suivi_media_list($o['media_ids'] ?? '') ?: ($o['media_id'] ? [(int) $o['media_id']] : []), $mediaKey);
         }
     }
     $mrows = [];
@@ -155,7 +171,7 @@ function suivi_share_clean(array $p): array
         'place' => $place($o['place'] ?? null), 'place_text' => suivi_txt($o['place_text'] ?? '', 200), 'site' => $uu($o['site'] ?? ''), 'behaviors' => array_slice(array_values(array_filter(array_map(static fn($b) => suivi_txt($b, 40), is_array($o['behaviors'] ?? null) ? $o['behaviors'] : []))), 0, 12),
         'count' => isset($o['count']) && is_numeric($o['count']) ? max(0, min(10000000, (int) $o['count'])) : null, 'with' => array_values(array_filter(array_map($uu, is_array($o['with'] ?? null) ? array_slice($o['with'], 0, 50) : []))),
         'reading' => suivi_txt($o['reading'] ?? '', 80), 'reading_detail' => is_array($o['reading_detail'] ?? null) ? $o['reading_detail'] : null, 'reliability' => in_array($o['reliability'] ?? '', SUIVI_RELIABILITY, true) ? (string) ($o['reliability'] ?? '') : '',
-        'observer' => suivi_txt($o['observer'] ?? '', 200), 'note' => suivi_txt($o['note'] ?? '', 4000), 'source' => in_array($o['source'] ?? '', SUIVI_SOURCES, true) ? $o['source'] : 'manuel', 'sea' => suivi_clean_sea($o['sea'] ?? null) ?: null, 'media' => is_string($o['media'] ?? null) && preg_match('/^m\d{1,10}$/', $o['media']) ? $o['media'] : null];
+        'observer' => suivi_txt($o['observer'] ?? '', 200), 'note' => suivi_txt($o['note'] ?? '', 4000), 'source' => in_array($o['source'] ?? '', SUIVI_SOURCES, true) ? $o['source'] : 'manuel', 'sea' => suivi_clean_sea($o['sea'] ?? null) ?: null, 'media' => suivi_share_media_keys($o)];
     $animals = []; $nObs = 0; $nGps = 0; $nLines = 0;
     foreach ($arr($p['animals'] ?? null, SUIVI_SHARE_MAX['animals'], 'animaux') as $a) {
         $obs = array_map($obsClean, $arr($a['observations'] ?? null, SUIVI_SHARE_MAX['observations'], 'observations'));
@@ -429,7 +445,7 @@ function suivi_share_row(PDO $pdo, string $k, array $it, int $petId, array $site
 {
     return match ($k) {
         'mark' => ['pet_id' => $petId, 'kind' => $it['kind'], 'code' => $it['code'], 'code_norm' => suivi_norm($it['code']), 'colors_json' => $it['colors'] ? suivi_clean_colors($it['colors']) : '', 'position' => $it['position'], 'scheme' => $it['scheme'], 'model' => $it['model'], 'interval_min' => $it['interval_min'], 'start_date' => $it['start_date'], 'start_iso' => suivi_iso($it['start_date']), 'end_date' => $it['end_date'], 'end_iso' => suivi_iso($it['end_date']), 'end_reason' => $it['end_reason'], 'note' => $it['note'], 'media_id' => $media($it['media']), 'uuid' => $it['uuid']],
-        'obs' => ['pet_id' => $petId ?: null, 'obs_date' => $it['date'], 'obs_iso' => suivi_iso($it['date']), 'obs_time' => $it['time'], 'lat' => $it['lat'], 'lon' => $it['lon'], 'place_id' => suivi_share_place($pdo, $it['place'], $undo), 'place_text' => $it['place_text'], 'site_id' => $siteMap[$it['site']] ?? null, 'behaviors' => implode(',', $it['behaviors']), 'count' => $it['count'], 'with_json' => '', 'reading_raw' => $it['reading'], 'reading_json' => suivi_clean_reading($it['reading_detail'] ?? null), 'reliability' => $it['reliability'], 'observer_txt' => $it['observer'] ?? '', 'note' => $it['note'], 'source' => $it['source'], 'media_id' => $media($it['media'] ?? null), 'sea_json' => !empty($it['sea']) ? json_encode($it['sea'], JSON_UNESCAPED_UNICODE) : '', 'uuid' => $it['uuid']],
+        'obs' => ['pet_id' => $petId ?: null, 'obs_date' => $it['date'], 'obs_iso' => suivi_iso($it['date']), 'obs_time' => $it['time'], 'lat' => $it['lat'], 'lon' => $it['lon'], 'place_id' => suivi_share_place($pdo, $it['place'], $undo), 'place_text' => $it['place_text'], 'site_id' => $siteMap[$it['site']] ?? null, 'behaviors' => implode(',', $it['behaviors']), 'count' => $it['count'], 'with_json' => '', 'reading_raw' => $it['reading'], 'reading_json' => suivi_clean_reading($it['reading_detail'] ?? null), 'reliability' => $it['reliability'], 'observer_txt' => $it['observer'] ?? '', 'note' => $it['note'], 'source' => $it['source'], 'media_id' => ($mids = array_values(array_unique(array_filter(array_map($media, $it['media'] ?? [])))))[0] ?? null, 'media_ids' => implode(',', $mids), 'sea_json' => !empty($it['sea']) ? json_encode($it['sea'], JSON_UNESCAPED_UNICODE) : '', 'uuid' => $it['uuid']],
         'health' => ['pet_id' => $petId, 'ev_date' => $it['date'], 'ev_iso' => suivi_iso($it['date']), 'state' => $it['state'], 'what_kind' => $it['what_kind'], 'what_text' => $it['what_text'], 'cause' => $it['cause'], 'cause_text' => $it['cause_text'], 'place_id' => suivi_share_place($pdo, $it['place'], $undo), 'place_text' => $it['place_text'], 'carer_txt' => $it['carer'], 'care' => $it['care'], 'meds' => $it['meds'], 'weight_g' => $it['weight_g'], 'media_ids' => implode(',', array_filter(array_map($media, $it['media']))), 'outcome' => $it['outcome'], 'outcome_date' => $it['outcome_date'], 'note' => $it['note'], 'uuid' => $it['uuid']],
         'member' => ['pet_id' => $petId, 'group_id' => $groupMap[$it['group']] ?? 0, 'role' => $it['role'], 'start_date' => $it['start_date'], 'start_iso' => suivi_iso($it['start_date']), 'start_reason' => $it['start_reason'], 'end_date' => $it['end_date'], 'end_iso' => suivi_iso($it['end_date']), 'end_reason' => $it['end_reason'], 'note' => $it['note'], 'uuid' => $it['uuid']],
     };

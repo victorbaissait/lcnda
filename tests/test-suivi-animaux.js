@@ -6,7 +6,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  0. le moteur seul (Node) : lecture douteuse « 7? » et « 7[K|X] » → bons candidats et scores, n° de puce en partie,
  *     couleurs (pattes inversées), code court, fiabilité ; lecteurs GPX, CSV Movebank, CSV d'un collier (Tractive),
  *     DOCTYPE / ENTITY refusés, taille bornée ; zone fréquentée, un point toutes les N min, couper en nuits ; exports ;
- *  1. le serveur (base neuve, migration 65) : animaux, marques selon l'espèce (oiseau, chat, chimpanzé, dauphin),
+ *  1. le serveur (base neuve, migrations 65 et 66) : plusieurs médias par observation (et l'ancienne à un seul, migrée), animaux, marques selon l'espèce (oiseau, chat, chimpanzé, dauphin),
  *     observations (lecture brute + possibilités), santé (cause, poids), sites et comptages, groupes (entrée, rôle,
  *     exclusion, passage dans un autre groupe), supprimer puis « ↶ Annuler » (journal), import GPS + ↶ Annuler,
  *     menu de choix (🐾 🏞 👥), CSRF, mode consultation ;
@@ -128,6 +128,12 @@ $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents
 require 'lib/bootstrap.php'; $pdo = db();
 $pdo->exec("INSERT INTO places(id,name,county,country,latitude,longitude) VALUES(1,'Parc des Buttes-Chaumont','Paris','France',48.8809,2.3828),(2,'Montreuil','Seine-Saint-Denis','France',48.861,2.44)");
 $pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status,is_start) VALUES(1,'Antoine','LEROY','male','living',1),(2,'Claire','MARTIN','female','living',0)");
+// plusieurs médias par observation : 4 photos et un son (la photo 5 montre une personne vivante : elle ne part jamais dans un partage)
+$png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==');
+foreach ([1, 2, 3, 5] as $i) { file_put_contents(MEDIA_DIR . "/sv-photo-$i.png", $png); }
+file_put_contents(MEDIA_DIR . '/sv-cri-4.mp3', str_repeat("\0", 64));
+$pdo->exec("INSERT INTO media(id,title,media_type,filename,source_type) VALUES(901,'Gaston de face','image','sv-photo-1.png','local'),(902,'Gaston de dos','image','sv-photo-2.png','local'),(903,'Les pattes','image','sv-photo-3.png','local'),(904,'Son cri','audio','sv-cri-4.mp3','local'),(905,'Antoine et Gaston','image','sv-photo-5.png','local')");
+$pdo->exec("INSERT INTO media_links(media_id,entity_type,entity_id) VALUES(905,'person',1)");
 echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
     if (seed.status !== 0 || !String(seed.stdout).includes('ok')) { console.error(seed.stderr || seed.stdout); process.exit(1); }
     const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
@@ -148,8 +154,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
     const { proc, base, get, post, w } = S1;
     const ids = {};
     try {
-        await t('migration 65 : les tables du suivi existent', async () => {
-            const st = await get('schema_status'); assert.equal(st.version, 65);
+        await t('migrations 65 et 66 : les tables du suivi existent', async () => {
+            const st = await get('schema_status'); assert.equal(st.version, 66);
             const o = await get('suivi', { op: 'overview' }); assert.deepEqual(o.observations, []); assert.ok(Array.isArray(o.animals));
         });
         await t('animaux et marques selon l’espèce (oiseau, chat, chimpanzé, dauphin)', async () => {
@@ -190,6 +196,38 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
             const big = await w('save_obs', { pet_id: ids.gaston, date: 'hier', lat: 999, lon: 2, count: 1e12, behaviors: Array(50).fill('x') });
             const b = (await get('suivi', { op: 'overview' })).observations.find(x => x.id === big.id); assert.equal(b.lat, null); assert.equal(b.count, 10000000); assert.equal(b.behaviors.length, 1);
             await w('delete', { type: 'animal_obs', id: big.id });
+        });
+        await t('plusieurs médias par observation : 3 médias enregistrés et relus (ordre gardé), media_id = le premier, bornes, ancien envoi à un seul média', async () => {
+            ids.obsM = (await w('save_obs', { pet_id: ids.gaston, date: '20 octobre 2026', time: '17:05', lat: 48.881, lon: 2.383, media_ids: [902, 901, 904], note: 'trois médias' })).id;
+            const a = (await get('suivi', { op: 'animal', id: ids.gaston })).observations.find(x => x.id === ids.obsM);
+            assert.deepEqual(a.media_ids, [902, 901, 904]); assert.equal(a.media_id, 902);
+            const o = (await get('suivi', { op: 'overview' })).observations.find(x => x.id === ids.obsM); assert.deepEqual(o.media_ids, [902, 901, 904]);
+            // texte « 1,2,3 », doublons, nombres faux et 40 au plus
+            const many = await w('save_obs', { pet_id: ids.gaston, date: 'hier', lat: 48.8, lon: 2.3, media_ids: '903,903,-4,abc,' + Array.from({ length: 60 }, (_, i) => 1000 + i).join(',') });
+            const m = (await get('suivi', { op: 'overview' })).observations.find(x => x.id === many.id); assert.equal(m.media_ids[0], 903); assert.equal(m.media_ids.length, 40); assert.ok(m.media_ids.every(x => x > 0));
+            await w('delete', { type: 'animal_obs', id: many.id });
+            // une app d'avant envoie encore media_id seul
+            const old = await w('save_obs', { pet_id: ids.prune, date: '19 octobre 2026', lat: 48.88, lon: 2.38, media_id: 903 });
+            const ob = (await get('suivi', { op: 'overview' })).observations.find(x => x.id === old.id); assert.deepEqual(ob.media_ids, [903]); assert.equal(ob.media_id, 903);
+            // modifier : retirer tous les médias
+            await w('save_obs', { id: old.id, pet_id: ids.prune, date: '19 octobre 2026', lat: 48.88, lon: 2.38, media_ids: [] });
+            const ob2 = (await get('suivi', { op: 'overview' })).observations.find(x => x.id === old.id); assert.deepEqual(ob2.media_ids, []); assert.equal(ob2.media_id, null);
+            await w('delete', { type: 'animal_obs', id: old.id });
+        });
+        await t('migration 66 : une ancienne observation à un seul média (media_id) reçoit sa liste media_ids', async () => {
+            const d3 = path.join(tmp, 'data-m66'); fs.mkdirSync(path.join(d3, 'media'), { recursive: true });
+            const run = code => spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: appRoot, encoding: 'utf8', env: envFor(d3) });
+            const a = run(String.raw`require 'lib/paths.php'; $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p = null;
+require 'lib/bootstrap.php'; $pdo = db();
+$pdo->exec('ALTER TABLE animal_observations DROP COLUMN media_ids');
+$pdo->exec("INSERT INTO animal_observations(obs_date, obs_iso, media_id) VALUES('1 mai 2024','2024-05-01',77),('2 mai 2024','2024-05-02',NULL)");
+$pdo->exec('PRAGMA user_version = 65'); echo 'ok';`);
+            assert.match(a.stdout, /ok/, a.stderr);
+            const b = run(String.raw`require 'lib/paths.php'; require 'lib/bootstrap.php'; $pdo = db();
+echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn(), 'rows' => $pdo->query('SELECT media_id, media_ids FROM animal_observations ORDER BY id')->fetchAll(PDO::FETCH_ASSOC), 'out' => array_map(fn($o) => suivi_obs_out($o), $pdo->query('SELECT * FROM animal_observations ORDER BY id')->fetchAll(PDO::FETCH_ASSOC))]);`);
+            const r = JSON.parse(b.stdout.trim().split('\n').pop());
+            assert.equal(r.v, 66); assert.equal(r.rows[0].media_ids, '77'); assert.equal(r.rows[1].media_ids, '');
+            assert.deepEqual(r.out[0].media_ids, [77]); assert.equal(r.out[0].media_id, 77); assert.deepEqual(r.out[1].media_ids, []);
         });
         await t('santé : état, cause, poids, soigné par, suite', async () => {
             await w('save_health', { pet_id: ids.minette, date: '10/10/2026', state: 'malade', what_kind: 'maladie', what_text: 'toux', cause: 'maladie', weight_g: 4200, carer: 'txt:Dr S. BERNARD', care: 'antibiotique 7 j' });
@@ -310,6 +348,28 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
                 const d3 = await S2.get('suivi', { op: 'animal', id: g2.id });
                 assert.equal(d3.profile.program, ''); assert.ok(!d3.observations.some(x => x.note === 'nouvelle')); assert.ok(!d3.observations.some(x => /corrigé/.test(x.note)));
                 assert.deepEqual((await S2.get('suivi', { op: 'animal', id: ak2.id })).members.map(m => m.role).sort(), ['alpha', 'jeune']);
+            });
+            await t('📤 partage avec plusieurs médias : tous partent (sauf une personne vivante) ; ⤒ réception d’une liste et de l’ancien format à un seul média ; ↶ Annuler juste', async () => {
+                const om = await w('save_obs', { pet_id: ids.flipper, date: '5 août 2026', lat: 43.21, lon: 5.21, media_ids: [901, 905, 903], note: 'deux médias partagés' });
+                const pkg = await get('suivi', { op: 'share', scope: 'pets', ids: String(ids.flipper) });
+                const po = pkg.animals[0].observations.find(x => x.note === 'deux médias partagés');
+                assert.deepEqual(po.medias, ['m901', 'm903'], 'la photo d’une personne vivante reste chez moi'); assert.equal(po.media, 'm901', 'le premier, pour une app d’avant');
+                assert.deepEqual(pkg.media.map(m => m.key).sort(), ['m901', 'm903']);
+                const noPhotos = await get('suivi', { op: 'share', scope: 'pets', ids: String(ids.flipper), photos: 0 });
+                const np = noPhotos.animals[0].observations.find(x => x.note === 'deux médias partagés'); assert.deepEqual(np.medias, []); assert.equal(np.media, null);
+                // de l'autre côté : les médias reçus ont d'autres numéros
+                const ids2 = JSON.parse(spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', `require 'lib/paths.php'; require 'lib/bootstrap.php'; $pdo = db(); $pdo->exec("INSERT INTO media(title,media_type,filename,source_type) VALUES('a','image','a.png','local'),('b','image','b.png','local'),('c','image','c.png','local')"); echo json_encode(array_map('intval', $pdo->query('SELECT id FROM media ORDER BY id DESC LIMIT 3')->fetchAll(PDO::FETCH_COLUMN)));`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir2) }).stdout.trim().split('\n').pop()).reverse();
+                // l'ancien format (un seul média, sans « medias ») dans une observation sans animal
+                pkg.free_observations = [{ uuid: 'abcdef12-0000-4000-8000-000000000001', date: '6 août 2026', lat: 43.3, lon: 5.3, note: 'ancien format', media: 'm903' }];
+                const before = (await S2.get('suivi', { op: 'overview' })).observations.length;
+                const r = await S2.w('share_apply', { package: pkg, decisions: { all: 'theirs' }, media_map: { m901: ids2[0], m903: ids2[1] }, source: 'Antoine' });
+                const o2 = await S2.get('suivi', { op: 'overview' });
+                const got = o2.observations.find(x => x.note === 'deux médias partagés'); assert.ok(got, 'observation reçue'); assert.deepEqual(got.media_ids, [ids2[0], ids2[1]]); assert.equal(got.media_id, ids2[0]);
+                const oldf = o2.observations.find(x => x.note === 'ancien format'); assert.deepEqual(oldf.media_ids, [ids2[1]]);
+                const an = (await S2.post('suivi_write', { op: 'share_analyze', package: pkg })).body.result; assert.equal(an.summary.lines_new, 0, 'déjà là');
+                await S2.w('share_undo', { receipt: r.receipt });
+                const o3 = await S2.get('suivi', { op: 'overview' }); assert.equal(o3.observations.length, before); assert.ok(!o3.observations.some(x => /deux médias partagés|ancien format/.test(x.note)));
+                await w('delete', { type: 'animal_obs', id: om.id });
             });
             await t('fichier abîmé, autre format ou trop gros : refusé', async () => {
                 assert.equal((await S2.post('suivi_write', { op: 'share_analyze', package: { format: 'autre' } })).status, 422);
@@ -454,6 +514,39 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
                         assert.ok(o, 'observation créée'); assert.equal(o.pet_id, ids.gaston); assert.equal(o.reliability, 'partial'); assert.deepEqual(o.reading_detail.chars, [['7'], ['K', 'X']]); assert.equal(o.reading_detail.colors.L[0], 'bleu_clair');
                         await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'obs'), ids.gaston); await p.waitForSelector('.sv-obs-table');
                         const txt = await p.textContent('.sv-obs-table'); assert.match(txt, /lecture : 7\[K\|X\] \(doute\)/); assert.match(txt, /Lecture partielle/i);
+                    });
+                    await t('plusieurs médias : la fenêtre (« Photos, sons ou vidéos », 3 relus), vignettes 3 au plus + « +N » dans la fiche, le bloc et la bulle de la carte ; clic = la visionneuse sur la série', async () => {
+                        const big = await w('save_obs', { pet_id: ids.gaston, date: '22 octobre 2026', time: '18:00', lat: 48.8812, lon: 2.3832, media_ids: [901, 902, 903, 904], note: 'quatre médias' });
+                        await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'obs'), ids.gaston); await p.waitForSelector('.sv-obs-table');
+                        const row = p.locator(`.sv-obs-table tr[data-sv-obs="${big.id}"]`);
+                        await p.waitForFunction(id => document.querySelectorAll(`.sv-obs-table tr[data-sv-obs="${id}"] .sv-mthumb img`).length === 3, big.id, { timeout: 8000 });
+                        assert.equal(await row.locator('.sv-mthumb').count(), 4); assert.equal((await row.locator('.sv-mthumb.is-more').textContent()).trim(), '+1');
+                        const three = p.locator(`.sv-obs-table tr[data-sv-obs="${ids.obsM}"]`); await p.waitForFunction(id => document.querySelectorAll(`.sv-obs-table tr[data-sv-obs="${id}"] .sv-mthumb[data-h]`).length === 3, ids.obsM);
+                        assert.equal(await three.locator('.sv-mthumb').count(), 3); assert.equal(await three.locator('.sv-mthumb.is-more').count(), 0);
+                        assert.match(await three.locator('.sv-mthumb').nth(2).innerHTML(), /🎧/, 'le son a son icône');
+                        await shot(p, `obs-medias-${name}.png`);
+                        await row.locator('.sv-mthumb.is-more').click();
+                        await p.waitForFunction(() => { const lb = document.querySelector('#lightbox'); return lb && !lb.hidden && getComputedStyle(lb).display !== 'none'; }, null, { timeout: 5000 });
+                        const lbN = await p.evaluate(() => [window.LCNDA_APP.state.lightboxMedia.length, window.LCNDA_APP.state.lightboxIndex, window.LCNDA_APP.state.lightboxMedia.map(m => m.id)]).catch(() => null);
+                        if (lbN) { assert.equal(lbN[0], 4); assert.equal(lbN[1], 3); assert.deepEqual(lbN[2], [901, 902, 903, 904]); }
+                        await shot(p, `obs-medias-visionneuse-${name}.png`);
+                        await p.keyboard.press('Escape'); await p.waitForTimeout(300);
+                        // la bulle d'un point de la carte et le bloc « Dernières observations »
+                        const pop = await p.evaluate(o => { const U = window.LCNDA_EXT.suivi.U; const d = document.createElement('div'); d.innerHTML = U.obsPopup(o, { title: 'Gaston', species: 'oiseau' }, { sites: [] }); return [d.querySelectorAll('.sv-mthumb').length, d.querySelector('.sv-mthumb.is-more')?.textContent]; }, { id: big.id, iso: '2026-10-22', time: '18:00', lat: 1, lon: 1, media_ids: [901, 902, 903, 904, 905] });
+                        assert.deepEqual(pop, [4, '+2']);
+                        if (name === '1440') {
+                            await goSuivi(p);
+                            const n = await p.evaluate(id => document.querySelectorAll(`.sv-page [data-sv-obs="${id}"] .sv-mthumb`).length, big.id);
+                            if (n) assert.equal(n, 4);
+                            // la fenêtre de modification relit les 4 médias
+                            await p.evaluate(async id => { const D = await window.LCNDA_EXT.suivi.overview(true); window.LCNDA_EXT.suivi.openObservation({ obs: D.observations.find(o => o.id === id) }); }, big.id);
+                            await p.waitForSelector('dialog[open] .pk-lab:has-text("Photos, sons ou vidéos")');
+                            const v = await p.evaluate(() => document.querySelector('dialog[open] [name="media_ids"]')?.value || ''); assert.equal(v, '901,902,903,904');
+                            await shot(p, 'obs-medias-fenetre.png');
+                            await p.click('dialog[open] button[type="submit"]'); await p.waitForTimeout(1000);
+                            const again = (await get('suivi', { op: 'overview' })).observations.find(x => x.id === big.id); assert.deepEqual(again.media_ids, [901, 902, 903, 904], 'gardés après « Enregistrer »');
+                        }
+                        await w('delete', { type: 'animal_obs', id: big.id });
                     });
                     await t('S8 : la carte en grand, points reliés dans l’ordre (interrupteur), ▶ Rejouer', async () => {
                         await p.evaluate(() => { window.LCNDA_EXT.suivi.openBigMap({ config: {} }); });

@@ -99,6 +99,24 @@ function suivi_schema(PDO $pdo): void
     $pdo->exec("CREATE TABLE IF NOT EXISTS suivi_receipts (
         id INTEGER PRIMARY KEY AUTOINCREMENT, source TEXT NOT NULL DEFAULT '', summary TEXT NOT NULL DEFAULT '', undo_json TEXT NOT NULL DEFAULT '',
         undone INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+    suivi_obs_media_column($pdo);
+}
+
+/** Plusieurs médias par observation (migration 66) : colonne media_ids, remplie depuis l'ancien media_id */
+function suivi_obs_media_column(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(animal_observations)')->fetchAll(), 'name');
+    if (!$cols) { if (function_exists('suivi_schema')) { suivi_schema($pdo); } return; }
+    if (in_array('media_ids', $cols, true)) { return; }
+    $pdo->exec("ALTER TABLE animal_observations ADD COLUMN media_ids TEXT NOT NULL DEFAULT ''");
+    $pdo->exec("UPDATE animal_observations SET media_ids = CAST(media_id AS TEXT) WHERE media_id IS NOT NULL AND media_id > 0");
+}
+
+/** « 12,40,7 » ou [12, 40, 7] → [12, 40, 7] (entiers positifs, sans doublon, 40 au plus) */
+function suivi_media_list(mixed $v): array
+{
+    $list = is_array($v) ? $v : explode(',', (string) (is_scalar($v) ? $v : ''));
+    return array_slice(array_values(array_unique(array_filter(array_map('intval', $list), static fn($x) => $x > 0))), 0, 40);
 }
 const SUIVI_UUID_TABLES = ['animal_profiles', 'animal_marks', 'animal_observations', 'animal_health', 'track_sites', 'track_counts', 'animal_groups', 'animal_memberships'];
 
@@ -259,7 +277,7 @@ function suivi_obs_out(array $o, array $places = [], array $people = []): array
         'behaviors' => array_values(array_filter(explode(',', (string) $o['behaviors']))), 'count' => $o['count'] !== null ? (int) $o['count'] : null, 'with' => json_decode((string) $o['with_json'], true) ?: [],
         'reading' => (string) $o['reading_raw'], 'reading_detail' => json_decode((string) $o['reading_json'], true) ?: null, 'reliability' => (string) $o['reliability'],
         'observer_id' => $o['observer_id'] ? (int) $o['observer_id'] : null, 'observer' => $o['observer_id'] ? ($people[(int) $o['observer_id']]['name'] ?? '') : (string) $o['observer_txt'],
-        'note' => (string) $o['note'], 'source' => (string) $o['source'], 'media_id' => $o['media_id'] ? (int) $o['media_id'] : null, 'sea' => suivi_clean_sea(json_decode((string) $o['sea_json'], true)) ?: null, 'updated_at' => (string) $o['updated_at']];
+        'note' => (string) $o['note'], 'source' => (string) $o['source'], 'media_ids' => $mids = (suivi_media_list($o['media_ids'] ?? '') ?: ($o['media_id'] ? [(int) $o['media_id']] : [])), 'media_id' => $mids[0] ?? null, 'sea' => suivi_clean_sea(json_decode((string) $o['sea_json'], true)) ?: null, 'updated_at' => (string) $o['updated_at']];
 }
 
 function suivi_health_out(array $h, array $places = [], array $people = []): array
@@ -535,16 +553,18 @@ function suivi_save_obs(PDO $pdo, array $d): array
     $site = safe_int($d['site_id'] ?? 0); if ($site) { $s = $pdo->prepare('SELECT 1 FROM track_sites WHERE id=?'); $s->execute([$site]); if (!$s->fetchColumn()) { $site = 0; } }
     $count = $d['count'] ?? null; $count = $count === null || $count === '' ? null : max(0, min(10000000, (int) $count));
     $sea = suivi_clean_sea($d['sea'] ?? null);
+    // plusieurs photos, sons ou vidéos (media_ids) ; l'ancien envoi à un seul média (media_id) est encore compris
+    $mids = array_key_exists('media_ids', $d) ? suivi_media_list($d['media_ids']) : suivi_media_list($d['media_id'] ?? '');
     $vals = [$pet ?: null, $date, suivi_iso($date), suivi_time($d['time'] ?? ''), suivi_float($d['lat'] ?? null, -90, 90), suivi_float($d['lon'] ?? null, -180, 180), suivi_place_ok($pdo, $d['place_id'] ?? 0),
         suivi_txt($d['place_text'] ?? '', 200), $site ?: null, $beh, $count, $with ? json_encode($with) : '', suivi_txt($d['reading'] ?? '', 80), suivi_clean_reading($d['reading_detail'] ?? null),
         in_array($d['reliability'] ?? '', SUIVI_RELIABILITY, true) ? (string) ($d['reliability'] ?? '') : '', $obsId, $obsTxt, suivi_txt($d['note'] ?? '', 4000),
-        in_array($d['source'] ?? 'manuel', SUIVI_SOURCES, true) ? ($d['source'] ?? 'manuel') : 'manuel', safe_int($d['media_id'] ?? 0) ?: null, $sea ? json_encode($sea, JSON_UNESCAPED_UNICODE) : ''];
+        in_array($d['source'] ?? 'manuel', SUIVI_SOURCES, true) ? ($d['source'] ?? 'manuel') : 'manuel', $mids[0] ?? null, implode(',', $mids), $sea ? json_encode($sea, JSON_UNESCAPED_UNICODE) : ''];
     if ($id) {
         $before = suivi_row($pdo, 'animal_observations', $id); if (!$before) { throw new RuntimeException('Observation introuvable.'); }
-        $pdo->prepare('UPDATE animal_observations SET pet_id=?, obs_date=?, obs_iso=?, obs_time=?, lat=?, lon=?, place_id=?, place_text=?, site_id=?, behaviors=?, count=?, with_json=?, reading_raw=?, reading_json=?, reliability=?, observer_id=?, observer_txt=?, note=?, source=?, media_id=?, sea_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$vals, $id]);
+        $pdo->prepare('UPDATE animal_observations SET pet_id=?, obs_date=?, obs_iso=?, obs_time=?, lat=?, lon=?, place_id=?, place_text=?, site_id=?, behaviors=?, count=?, with_json=?, reading_raw=?, reading_json=?, reliability=?, observer_id=?, observer_txt=?, note=?, source=?, media_id=?, media_ids=?, sea_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$vals, $id]);
         log_change($pdo, 'animal_obs', $id, 'update', 'Observation modifiée (' . $date . ')', $before);
     } else {
-        $pdo->prepare('INSERT INTO animal_observations(pet_id, obs_date, obs_iso, obs_time, lat, lon, place_id, place_text, site_id, behaviors, count, with_json, reading_raw, reading_json, reliability, observer_id, observer_txt, note, source, media_id, sea_json) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')->execute($vals);
+        $pdo->prepare('INSERT INTO animal_observations(pet_id, obs_date, obs_iso, obs_time, lat, lon, place_id, place_text, site_id, behaviors, count, with_json, reading_raw, reading_json, reliability, observer_id, observer_txt, note, source, media_id, media_ids, sea_json) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')->execute($vals);
         $id = (int) $pdo->lastInsertId();
         log_change($pdo, 'animal_obs', $id, 'create', 'Observation ajoutée (' . $date . ')');
     }

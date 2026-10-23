@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 65;
+const SCHEMA_VERSION = 66;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -86,6 +86,7 @@ function migration_steps(): array
         63 => 'schema_v63',
         64 => 'schema_v64',
         65 => 'schema_v65',
+        66 => 'schema_v66',
     ];
 }
 
@@ -2313,4 +2314,12 @@ function schema_v65(PDO $pdo): void
 {
     if (!function_exists('suivi_schema')) { require_once __DIR__ . '/suivi.php'; }
     suivi_schema($pdo);
+}
+
+/** 🐾 Suivi des animaux : une observation peut avoir plusieurs photos, sons ou vidéos (liste « 12,40,7 », 40 au plus).
+ *  L'ancien media_id reste (= le premier de la liste) pour ce qui le lit encore ; la liste est remplie depuis lui. */
+function schema_v66(PDO $pdo): void
+{
+    if (!function_exists('suivi_obs_media_column')) { require_once __DIR__ . '/suivi.php'; }
+    suivi_obs_media_column($pdo);
 }

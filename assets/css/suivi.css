@@ -244,6 +244,14 @@
     .sv-cfg-row { grid-template-columns: minmax(0, 1fr); }
     .sv-cfg-lab { padding-top: 0; }
 }
+/* ── plusieurs photos, sons ou vidéos d'une observation : petites vignettes, 3 au plus + « +N » ── */
+.sv-mstrip { display: inline-flex; align-items: center; gap: 3px; flex: none; vertical-align: middle; }
+.sv-mthumb { position: relative; width: 30px; height: 30px; padding: 0; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; border: 1.5px solid var(--sv-line); border-radius: 4px; background: var(--sv-soft); color: var(--ink); font: inherit; font-size: 14px; cursor: pointer; }
+.sv-mthumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sv-mthumb i { position: absolute; right: 1px; bottom: 0; font-style: normal; font-size: 10px; line-height: 1; }
+.sv-mthumb.is-more { font-size: 12px; font-weight: 700; }
+.sv-mthumb:hover, .sv-mthumb:focus-visible { border-color: var(--blue-bright); outline: none; }
+@media (max-width: 640px) { .sv-mthumb { width: 26px; height: 26px; } }
 /* ── sombre écrit à la main : une bague métal reste une bague métal ── */
 :root[data-theme="dark"] .sv-rings i.is-metal { background: linear-gradient(135deg, #e3e6ea, #9aa1a8) !important; }
 :root[data-theme="dark"] .sv-metal { background: linear-gradient(180deg, #eef0f2, #b9bec4); color: #222; border-color: #9aa1a8; }

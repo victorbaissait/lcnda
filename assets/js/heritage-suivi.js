@@ -93,6 +93,32 @@
         const r = C().parseReading(o.reading);
         return `lecture : ${r.text}${r.doubtful ? ' (doute)' : r.unknown || r.partial ? ' (pas tout lu)' : ''}`;
     }
+    /** Les photos, sons et vidéos d'une observation (plusieurs) : petites vignettes, 3 au plus + « +N » ; clic = la visionneuse sur toute la série */
+    const obsMediaIds = o => [...new Set((Array.isArray(o?.media_ids) && o.media_ids.length ? o.media_ids : (o?.media_id ? [o.media_id] : [])).map(Number).filter(x => x > 0))];
+    function obsMediaHtml(o, {max = 3} = {}) {
+        const ids = obsMediaIds(o); if (!ids.length) return '';
+        const all = ids.join(','), shown = ids.slice(0, max), more = ids.length - shown.length;
+        return `<span class="sv-mstrip">${shown.map((id, i) => `<button type="button" class="sv-mthumb" data-sv-media="${all}" data-sv-media-i="${i}" data-sv-mid="${id}" aria-label="Voir le média ${i + 1} sur ${ids.length}"><span aria-hidden="true">📷</span></button>`).join('')}${more > 0 ? `<button type="button" class="sv-mthumb is-more" data-sv-media="${all}" data-sv-media-i="${max}" aria-label="Voir les ${more} autres médias">+${more}</button>` : ''}</span>`;
+    }
+    const mediaCache = new Map();
+    async function mediaItems(ids) {
+        const miss = ids.filter(id => !mediaCache.has(id));
+        for (let i = 0; i < miss.length; i += 100) {
+            const part = miss.slice(i, i + 100);
+            try { const r = await api('picker_search', {kind: 'media', ids: part.join(',')}); (r.groups || []).forEach(g => (g.items || []).forEach(it => mediaCache.set(Number(it.id), it))); } catch (_) { /* hors ligne : l'icône reste */ }
+            part.forEach(id => { if (!mediaCache.has(id)) mediaCache.set(id, null); });
+        }
+        return ids.map(id => mediaCache.get(id)).filter(Boolean);
+    }
+    let hydrateTimer = 0;
+    async function hydrateMedia() {
+        const els = [...document.querySelectorAll('.sv-mthumb[data-sv-mid]:not([data-h])')]; if (!els.length) return;
+        els.forEach(el => { el.dataset.h = '1'; });
+        await mediaItems([...new Set(els.map(el => Number(el.dataset.svMid)))]);
+        els.forEach(el => { const it = mediaCache.get(Number(el.dataset.svMid)); if (!it) return; const ico = it.media_type === 'audio' ? '🎧' : it.media_type === 'video' ? '🎬' : it.media_type === 'image' ? '📷' : '📄';
+            el.title = it.title || ''; el.innerHTML = it.thumb ? `<img src="${esc(it.thumb)}" alt="" loading="lazy">${it.media_type === 'video' || it.media_type === 'audio' ? `<i aria-hidden="true">${ico}</i>` : ''}` : `<span aria-hidden="true">${ico}</span>`; });
+    }
+    if (typeof MutationObserver === 'function') new MutationObserver(() => { clearTimeout(hydrateTimer); hydrateTimer = setTimeout(hydrateMedia, 60); }).observe(document.documentElement, {childList: true, subtree: true});
     const HS = () => Object.fromEntries(C().HEALTH_STATES.map(([k, l, c]) => [k, [l, c]]));
     const healthBadge = s => { const h = HS()[s]; return h ? badge(h[0], h[1]) : ''; };
     /** Les bagues de couleur en petit : deux colonnes (patte gauche, patte droite), haut et bas */
@@ -204,7 +230,7 @@
     }
     const tOf = o => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(o.iso || ''); if (!m) return null; const t = /^(\d{2}):(\d{2})$/.exec(o.time || '') || [0, 12, 0]; return Math.round(new Date(+m[1], +m[2] - 1, +m[3], +t[1], +t[2]).getTime() / 1000); };
     function obsPopup(o, a, D) {
-        return `<b>${esc(speciesIcon(a?.species))} ${esc(a?.title || 'Animal sans fiche')}</b><br>${esc(o.iso ? dateFr(o.iso, true) : o.date)}${o.time ? `, ${esc(timeFr(o.time))}` : ''}<br>📍 ${esc(placeOfObs(o, D))}${o.behaviors?.length ? ` · ${esc(o.behaviors.map(b => (C().BEHAVIORS[b] || b).replace(/^\S+\s/, '')).join(', '))}` : ''}${o.count ? ` (${o.count})` : ''}<br>${relBadge(o)} ${o.reading ? `<small class="muted">${esc(readingText(o))}</small>` : ''}<br><button type="button" class="link-button" data-sv-obs="${o.id}">↗ Ouvrir l’observation</button>`;
+        return `<b>${esc(speciesIcon(a?.species))} ${esc(a?.title || 'Animal sans fiche')}</b><br>${esc(o.iso ? dateFr(o.iso, true) : o.date)}${o.time ? `, ${esc(timeFr(o.time))}` : ''}<br>📍 ${esc(placeOfObs(o, D))}${o.behaviors?.length ? ` · ${esc(o.behaviors.map(b => (C().BEHAVIORS[b] || b).replace(/^\S+\s/, '')).join(', '))}` : ''}${o.count ? ` (${o.count})` : ''}<br>${relBadge(o)} ${o.reading ? `<small class="muted">${esc(readingText(o))}</small>` : ''}${obsMediaIds(o).length ? `<br>${obsMediaHtml(o)}` : ''}<br><button type="button" class="link-button" data-sv-obs="${o.id}">↗ Ouvrir l’observation</button>`;
     }
     /** Les séries de la carte : une par animal (observations datées, numérotées dans l'ordre) + trajets GPS */
     async function mapSeries(D, animals, obs, {link = true, gps = true, by = 'animal', from = 0} = {}) {
@@ -304,7 +330,7 @@
         const s = pick(D, widget), lim = Math.max(1, Number(widget.limit) || 6);
         const gpsRows = s.animals.filter(a => a.gps?.t1 && (!s.from || tIso(a.gps.t1) >= s.from)).map(a => ({gps: true, iso: tIso(a.gps.t1), time: tTime(a.gps.t1), pet_id: a.id, source: 'gps', place: 'dernière position GPS', id: 0}));
         const rows = [...s.obs, ...gpsRows].sort((x, y) => `${y.iso} ${y.time}`.localeCompare(`${x.iso} ${x.time}`));
-        const html = rows.slice(0, lim).map(o => { const a = animalById(D, o.pet_id); return `<div class="sv-row"${o.id ? ` data-sv-obs="${o.id}" role="button" tabindex="0"` : a ? ` data-sv-pet="${a.id}" role="button" tabindex="0"` : ''}><b class="sv-when">${esc(whenShort(o.iso, o.time))}</b><span class="sv-what">${o.gps ? '📡' : esc(speciesIcon(a?.species))} ${esc(a?.title || (o.count ? `${o.count} sans bague` : 'Animal sans fiche'))} · ${esc(placeOfObs(o, D))}</span>${relBadge(o)}</div>`; }).join('');
+        const html = rows.slice(0, lim).map(o => { const a = animalById(D, o.pet_id); return `<div class="sv-row"${o.id ? ` data-sv-obs="${o.id}" role="button" tabindex="0"` : a ? ` data-sv-pet="${a.id}" role="button" tabindex="0"` : ''}><b class="sv-when">${esc(whenShort(o.iso, o.time))}</b><span class="sv-what">${o.gps ? '📡' : esc(speciesIcon(a?.species))} ${esc(a?.title || (o.count ? `${o.count} sans bague` : 'Animal sans fiche'))} · ${esc(placeOfObs(o, D))}</span>${o.gps ? '' : obsMediaHtml(o)}${relBadge(o)}</div>`; }).join('');
         const more = rows.length > lim ? `<button type="button" class="link-button sv-more" data-sv-more="${esc(widget.id)}">Voir les ${Math.min(20, rows.length - lim)} suivantes ↓</button>` : '';
         return card(index, widget, 'Dernières observations', '', rows.length ? `<div class="sv-rows">${html}</div>${more}` : A().empty('Aucune observation pour l’instant.', {icon: '👁', action: RO() ? null : {label: '＋ Nouvelle observation', attrs: 'data-sv-new-obs'}}), span);
     }};
@@ -750,7 +776,7 @@
                 <span class="pk-lab">Avec qui</span>${P().pickerField({name: 'with', kind: 'pet', multiple: true, value: obs?.with || []})}</div></div>
                 <div data-sea></div>
                 <div class="sv-obs-2"><div><span class="pk-lab">Vu par</span>${P().pickerField({name: 'observer', kind: 'person', allowFree: true, value: obs?.observer_id || (obs?.observer ? 'txt:' + obs.observer : null)})}</div>
-                <div><span class="pk-lab">Photo ou son</span>${P().mediaField({name: 'media_id', types: ['image', 'audio', 'video'], value: obs?.media_id || null})}</div></div>
+                <div><span class="pk-lab">Photos, sons ou vidéos</span>${P().mediaField({name: 'media_ids', multiple: true, types: ['image', 'audio', 'video'], value: obsMediaIds(obs)})}</div></div>
                 <div class="sv-obs-2"><div><span class="pk-lab">Lecture de la bague</span><div data-rel></div></div><label>Note<textarea name="note" rows="2" maxlength="4000">${esc(obs?.note || '')}</textarea></label></div>
                 <input type="hidden" name="source" value="${esc(obs?.source || 'manuel')}"></div>`,
             onSubmit: async form => {
@@ -760,7 +786,7 @@
                 const rel = currentRel();
                 const body = {id: obs?.id || 0, pet_id: petVal, date: v.get('date'), time: v.get('time'), place_id: Number(v.get('place_id')) || 0, site_id: Number(v.get('site_id')) || 0,
                     lat: v.get('lat'), lon: v.get('lon'), behaviors: [...beh], count: v.get('count'), with: String(v.get('with') || '').split(',').map(Number).filter(Boolean),
-                    observer: String(v.get('observer') || ''), media_id: Number(v.get('media_id')) || 0, note: v.get('note'), source: v.get('source') || 'manuel',
+                    observer: String(v.get('observer') || ''), media_ids: String(v.get('media_ids') || '').split(',').map(Number).filter(Boolean).slice(0, 40), note: v.get('note'), source: v.get('source') || 'manuel',
                     reading: prof === 'oiseau' ? C().parseReading(reading).text : number, reading_detail: {chars: C().parseReading(prof === 'oiseau' ? reading : number).chars, colors: seen, number}, reliability: rel,
                     sea: {depth_m: v.get('depth_m'), group_size: v.get('group_size'), surface: v.get('surface'), camera: v.get('camera')}};
                 if (!body.place_id && body.lat === '' && !body.site_id) return UI().fail(form.elements.place_id, 'Dis où tu l’as vu (un lieu, un site, ou 📍 Ma position).');
@@ -897,9 +923,9 @@
     const OBS_SORTS = [['recent', 'Plus récentes'], ['old', 'Plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']];
     /** S6 : le tableau des observations (aussi dans l'onglet 👁 Observations de la fiche) */
     function obsTableHtml(D, obs, {showAnimal = true} = {}) {
-        return `<div class="data-table-wrap"><table class="data-table sv-obs-table"><thead><tr><th>Quand</th><th>Où</th>${showAnimal ? '<th>Animal</th>' : ''}<th>Ce qu’il faisait</th><th>Avec qui</th><th>Vu par</th><th>Photo, son</th><th>Bague</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>${obs.map(o => { const a = animalById(D, o.pet_id), withA = (o.with || []).map(id => animalById(D, id)).filter(Boolean);
+        return `<div class="data-table-wrap"><table class="data-table sv-obs-table"><thead><tr><th>Quand</th><th>Où</th>${showAnimal ? '<th>Animal</th>' : ''}<th>Ce qu’il faisait</th><th>Avec qui</th><th>Vu par</th><th>Photos, sons</th><th>Bague</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>${obs.map(o => { const a = animalById(D, o.pet_id), withA = (o.with || []).map(id => animalById(D, id)).filter(Boolean);
             return `<tr data-sv-obs="${o.id}" data-ctx-menu><td><b>${esc(o.iso ? dateFr(o.iso) : o.date)}</b>${o.time ? `<br><small class="muted">${esc(timeFr(o.time))}</small>` : ''}</td><td>📍 ${esc(placeOfObs(o, D))}${o.place_text && o.place ? `<br><small class="muted">${esc(o.place_text)}</small>` : ''}</td>${showAnimal ? `<td>${a ? `${esc(speciesIcon(a.species))} ${animalLink(a)}` : `<span class="muted">${o.count ? esc(`${o.count} sans bague`) : 'sans fiche'}</span>`}</td>` : ''}
-                <td>${(o.behaviors || []).map(b => `<span class="sv-tag is-mini">${esc(C().BEHAVIORS[b] || b)}</span>`).join('')}${o.count ? ` <span class="sv-tag is-mini">👥 ${o.count}</span>` : ''}${o.sea?.depth_m != null ? ` <span class="sv-tag is-mini">⤵ ${o.sea.depth_m} m</span>` : ''}</td><td>${withA.map(x => animalLink(x)).join(', ') || '<span class="muted">seul</span>'}</td><td>${esc(o.observer || '—')}</td><td>${o.media_id ? `<button type="button" class="link-button" data-sv-media="${o.media_id}">📷 voir</button>` : '—'}</td><td>${relBadge(o)}${o.reading ? `<br><small class="muted">${esc(readingText(o))}</small>` : ''}</td>
+                <td>${(o.behaviors || []).map(b => `<span class="sv-tag is-mini">${esc(C().BEHAVIORS[b] || b)}</span>`).join('')}${o.count ? ` <span class="sv-tag is-mini">👥 ${o.count}</span>` : ''}${o.sea?.depth_m != null ? ` <span class="sv-tag is-mini">⤵ ${o.sea.depth_m} m</span>` : ''}</td><td>${withA.map(x => animalLink(x)).join(', ') || '<span class="muted">seul</span>'}</td><td>${esc(o.observer || '—')}</td><td>${obsMediaHtml(o) || '—'}</td><td>${relBadge(o)}${o.reading ? `<br><small class="muted">${esc(readingText(o))}</small>` : ''}</td>
                 <td class="sv-row-act"><details class="ui-more"><summary class="icon-button small" aria-label="Plus d’actions">⋯</summary><div class="ui-ph-menu"><button type="button" data-sv-obs-edit="${o.id}">✎ Modifier</button><button type="button" data-sv-obs-dup="${o.id}">⧉ Dupliquer</button><button type="button" class="danger" data-sv-obs-del="${o.id}">🗑 Supprimer</button></div></details></td></tr>`; }).join('')}</tbody></table></div>`;
     }
     ext.suivi.obsTableHtml = obsTableHtml;
@@ -1084,7 +1110,7 @@
         if (d.svObsEdit !== undefined) { e.preventDefault(); e.stopPropagation(); t.closest('details')?.removeAttribute('open'); const o = await obsById(d.svObsEdit); if (o) openObservation({obs: o}); return; }
         if (d.svObsDup !== undefined) { e.preventDefault(); e.stopPropagation(); t.closest('details')?.removeAttribute('open'); const o = await obsById(d.svObsDup); if (o) { const r = await write('save_obs', {...o, id: 0, place_id: o.place_id || 0, site_id: o.site_id || 0, observer: o.observer_id || (o.observer ? 'txt:' + o.observer : ''), reading_detail: o.reading_detail}); A().undoToast?.('Observation dupliquée.', {undo: async () => { await write('delete', {type: 'animal_obs', id: r.id}); refreshView(); }}); refreshView(); } return; }
         if (d.svObsDel !== undefined) { e.preventDefault(); e.stopPropagation(); t.closest('details')?.removeAttribute('open'); await A().deleteWithUndo({action: 'suivi_write', body: {op: 'delete', type: 'animal_obs', id: Number(d.svObsDel)}, type: 'animal_obs', id: Number(d.svObsDel), message: 'Observation supprimée.', after: () => refreshView()}); return; }
-        if (d.svMedia !== undefined) { e.stopPropagation(); let it = null; try { const r = await api('picker_search', {kind: 'media', ids: d.svMedia}); it = r.groups?.[0]?.items?.[0] || null; } catch (_) {} if (it && A().openLightbox) A().openLightbox([{...it, filename: it.filename, media_type: it.media_type || 'image'}], 0, true); return; }
+        if (d.svMedia !== undefined) { e.preventDefault(); e.stopPropagation(); const ids = String(d.svMedia).split(',').map(Number).filter(Boolean); const items = (await mediaItems(ids)).filter(it => it.filename); const want = ids[Math.min(ids.length - 1, Number(d.svMediaI) || 0)]; if (items.length && A().openLightbox) A().openLightbox(items.map(it => ({...it, media_type: it.media_type || 'image'})), Math.max(0, items.findIndex(it => Number(it.id) === want)), true); return; }
         if (d.svObs !== undefined) { if (e.target.closest('button:not([data-sv-obs]), a, details, .sv-pet-link')) return; const o = await obsById(d.svObs); if (o) RO() ? openPet(o.pet_id || 0, 'obs') : openObservation({obs: o}); return; }
         if (d.svPet !== undefined && !t.matches('[data-sv-new-obs]')) { if (t.tagName === 'TR' && e.target.closest('button:not([data-sv-pet]), a')) return; e.preventDefault(); document.querySelectorAll('dialog[open]').forEach(x => { if (x.contains(t)) x.close(); }); openPet(Number(d.svPet), d.svTab || ''); return; }
         if (d.svNewObs !== undefined) { e.preventDefault(); openObservation({petId: Number(d.svNewObs) || 0, siteId: Number(A().state.svSite) || 0}); return; }
@@ -1115,5 +1141,5 @@
 
     Object.assign(ext.suivi, {U: {esc, api, toast, plural, fmtN, badge, RO, pad, clone, dateFr, whenShort, timeFr, ago, daysSince, tIso, tTime, kmText, weightText, todayIso, MONTHS, MONTHS_L, DAYS, COLORS,
         overview, invalidate, write, refreshView, animalById, speciesIcon, profileOf, lastSeen, relBadge, readingText, healthBadge, HS, ringsMini, animalThumb, animalLink, codeOf, placeOfObs, REL,
-        mapView, replayBar, mapSeries, tOf, obsPopup, causesBars, groupDialog, siteDialog}, openObservation, importGps, openStats, openBigMap, openSite, openGroup, openCensus, openPet, refreshView, overview, invalidate, scope, pinToDashboard, proposedWidgets, showTab});
+        mapView, replayBar, mapSeries, tOf, obsPopup, obsMediaHtml, obsMediaIds, causesBars, groupDialog, siteDialog}, openObservation, importGps, openStats, openBigMap, openSite, openGroup, openCensus, openPet, refreshView, overview, invalidate, scope, pinToDashboard, proposedWidgets, showTab});
 })();
