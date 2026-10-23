@@ -596,6 +596,26 @@
     const evalOptsSafe = () => { const s = settings(); return {angle: s.angle, digits: s.digits, dec: s.dec, frac: s.frac, region: s.region}; };
     ext.openCalculator = open;
 
+    /* ─── 🧮 Widget du tableau de bord (et du Suivi) : une ligne de calcul, le résultat, les derniers calculs, « ⛶ Ouvrir la calculette » ─── */
+    try { const a0 = A(); if (a0?.defaultDashboardBlocks && !a0.defaultDashboardBlocks.some(x => x[0] === 'calc_widget')) { a0.defaultDashboardBlocks.push(['calc_widget', '🧮 Calculette']); if (a0.defaultDashboardBlockSpans) a0.defaultDashboardBlockSpans.calc_widget = '6'; } } catch (_) {}
+    ext.dashboard = ext.dashboard || {};
+    const WTAPE = 'lcnda-calculette-widget';
+    const wHist = () => (ls.get(WTAPE, []) || []).filter(h => Array.isArray(h) && h.length === 2).slice(0, 5);
+    const wHistHtml = () => wHist().map((h, i) => `<li><button type="button" class="link-button" data-cw-reuse="${i}">${esc(h[0])} = <b>${esc(h[1])}</b></button></li>`).join('');
+    ext.dashboard.calc_widget = {load: () => Promise.resolve(null), render: (index, widget, span) => A().card(index, '🧮 Calculette', '',
+        `<form class="cw-form" data-cw autocomplete="off"><input name="q" class="cw-q" aria-label="Calcul" placeholder="2 × (3 + 4), 15 % × 80, 2/3 + 1/6…" spellcheck="false">
+            <output class="cw-out" aria-live="polite"></output><ul class="cw-hist">${wHistHtml()}</ul>
+            <div class="cw-ft"><span class="muted">Entrée : calculer · ↑ : reprendre le dernier</span><button type="button" class="button small secondary" data-calculette-open>⛶ Ouvrir la calculette</button></div></form>`, span)};
+    document.addEventListener('submit', e => {
+        const f = e.target.closest?.('form[data-cw]'); if (!f) return; e.preventDefault();
+        const q = f.querySelector('.cw-q'), out = f.querySelector('.cw-out'), s0 = q.value.trim(); if (!s0) return;
+        let r; try { r = ext.calculator.compute(s0); } catch (x) { r = {ok: false, error: String(x?.message || x)}; }
+        if (r?.ok) { out.className = 'cw-out'; out.textContent = '= ' + r.text; ls.set(WTAPE, [[s0, r.text], ...wHist().filter(h => h[0] !== s0)].slice(0, 5)); document.querySelectorAll('form[data-cw] .cw-hist').forEach(u => { u.innerHTML = wHistHtml(); }); }
+        else { out.className = 'cw-out is-err'; out.textContent = '⚠️ ' + (r?.error || 'Je ne comprends pas ce calcul.'); }
+    });
+    document.addEventListener('click', e => { const b = e.target.closest?.('[data-cw-reuse]'); if (!b) return; const h = wHist()[Number(b.dataset.cwReuse)], q = b.closest('form[data-cw]')?.querySelector('.cw-q'); if (h && q) { q.value = h[0]; q.focus(); } });
+    document.addEventListener('keydown', e => { if (e.key !== 'ArrowUp' || !e.target.matches?.('form[data-cw] .cw-q') || e.target.value) return; const h = wHist()[0]; if (h) { e.preventDefault(); e.target.value = h[0]; } });
+
     document.addEventListener('click', e => { if (e.target.closest?.('#calculette-open, [data-calculette-open]')) { e.preventDefault(); toggle(); } });
     const boot = () => { topButton(); if (ls.get(OPEN, 0) && !isPhone()) setTimeout(() => { if (!document.documentElement.classList.contains('ms-open')) open(); }, 400); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else setTimeout(boot, 0);

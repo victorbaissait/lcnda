@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=246">
+    <link rel="stylesheet" href="assets/css/app.css?v=247">
     <link rel="stylesheet" href="assets/css/picker.css?v=6">
     <link rel="stylesheet" href="assets/css/heritage.css?v=247">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -1185,7 +1185,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=3" defer></script>
 <script src="assets/js/heritage-links.js?v=18" defer></script>
-<script src="assets/js/heritage-more.js?v=222" defer></script>
+<script src="assets/js/heritage-more.js?v=223" defer></script>
 <script src="assets/js/heritage-controle.js?v=3" defer></script>
 <script src="assets/js/heritage-records.js?v=10" defer></script>
 <script src="assets/js/heritage-research.js?v=34" defer></script>
@@ -1304,7 +1304,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tableur.js?v=6" defer></script>
 <script src="assets/js/heritage-tableur-cibles.js?v=1" defer></script>
 <script src="assets/js/heritage-tableur-base.js?v=1" defer></script>
-<script src="assets/js/heritage-calculette.js?v=1" defer></script>
+<script src="assets/js/heritage-calculette.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=3" defer></script>
 <script src="assets/js/heritage-traitement-texte-outils.js?v=2" defer></script>

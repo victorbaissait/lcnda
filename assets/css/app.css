@@ -4497,6 +4497,15 @@ body.k-print-doc :is(.page-actions,.card-head-actions,.person-hero-tools,.person
 /* « ＋ Ajouter à mon calendrier » sur les événements : caché tant que Mon agenda → Réglages ne le montre pas */
 html:not(.show-event-ics) .event-ics-btn { display: none; }
 
+/* 🧮 Widget Calculette du tableau de bord */
+.cw-form { display: grid; gap: 8px; }
+.cw-q { width: 100%; font: 16px/1.3 ui-monospace, Menlo, Consolas, monospace; padding: 8px 10px; }
+.cw-out { display: block; min-height: 1.3em; font: 700 22px/1.3 ui-monospace, Menlo, Consolas, monospace; word-break: break-all; }
+.cw-out.is-err { font-family: inherit; font-size: 13px; font-weight: 400; line-height: 1.4; color: var(--danger, #b3261e); }
+.cw-hist { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: 13px; }
+.cw-hist .link-button { text-align: left; font-family: ui-monospace, Menlo, Consolas, monospace; }
+.cw-ft { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; }
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}
