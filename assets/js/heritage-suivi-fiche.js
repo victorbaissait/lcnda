@@ -234,19 +234,23 @@
     async function openHealth({petId = 0, h = null, ctx = null} = {}) {
         if (U().RO()) return U().toast('Mode consultation : rien à modifier.');
         const D = await U().overview().catch(() => ({animals: []})), a = U().animalById(D, petId);
-        const prof = a ? U().profileOf(a) : 'autre', causes = [...new Set([...(C().PROFILES[prof]?.causes || []), 'inconnue'])];
+        const prof = a ? U().profileOf(a) : 'autre';
+        // Pourquoi : d'abord les causes de l'espèce, puis « Plus de causes ▾ » (toutes) et mes causes (« ＋ Autre cause… », gardées sur cet appareil)
+        const MINE = 'genealogie-suivi-causes', mine = () => { try { return (JSON.parse(localStorage.getItem(MINE) || '[]') || []).filter(x => typeof x === 'string' && x.trim()).slice(0, 40); } catch (_) { return []; } };
+        const first = [...new Set([...(C().PROFILES[prof]?.causes || []), ...mine(), ...(h?.cause ? [h.cause] : []), 'inconnue'])];
+        const more = Object.keys(C().CAUSES).filter(k => !first.includes(k));
         let what = h?.what_kind || '', cause = h?.cause || '', state = h?.state || '';
         const seg = (name, list, cur) => `<div class="sv-tags" data-seg="${name}">${list.map(([k, l]) => `<button type="button" class="sv-tag${k === cur ? ' is-on' : ''}" data-v="${esc(k)}" aria-pressed="${k === cur}">${esc(l)}</button>`).join('')}</div>`;
         const dlg = ext.openDialog({eyebrow: `🩺 SANTÉ${a ? ' · ' + a.title.toUpperCase() : ''}`, title: h ? 'Modifier l’événement de santé' : 'Nouvel événement de santé',
             body: `<div class="sv-form sv-health-form">${petId ? '' : `<div><span class="pk-lab">L’animal</span>${P().pickerField({name: 'pet_id', kind: 'pet'})}</div>`}
                 <div class="sv-obs-2"><label>Date<input name="date" data-ui-date required value="${esc(h?.date || '')}" placeholder="18/10/2026"></label><div><span class="pk-lab">État après</span>${seg('state', C().HEALTH_STATES.map(([k, l]) => [k, l]), state)}</div></div>
                 <div><span class="pk-lab">Ce qu’il a</span>${seg('what', C().HEALTH_WHAT, what)}<input name="what_text" maxlength="600" value="${esc(h?.what_text || '')}" placeholder="Patte arrière gauche entaillée"></div>
-                <div><span class="pk-lab">Pourquoi</span>${seg('cause', causes.map(k => [k, C().CAUSES[k] || k]), cause)}<input name="cause_text" maxlength="600" value="${esc(h?.cause_text || '')}" placeholder="Précise si tu veux… (« débroussailleuse du voisin, sous la haie »)"></div>
+                <div><span class="pk-lab">Pourquoi</span>${seg('cause', first.map(k => [k, C().CAUSES[k] || k]), cause)}<div class="sv-cause-more" data-cause-more hidden>${seg('cause', more.map(k => [k, C().CAUSES[k]]), cause)}</div><div class="sv-tags"><button type="button" class="sv-tag" data-cause-toggle aria-expanded="false">Plus de causes ▾</button><button type="button" class="sv-tag" data-cause-add>＋ Autre cause…</button></div><input name="cause_text" maxlength="600" value="${esc(h?.cause_text || '')}" placeholder="Précise si tu veux… (« débroussailleuse du voisin, sous la haie »)"></div>
                 <div class="sv-obs-2"><div><span class="pk-lab">Où</span>${P().pickerField({name: 'place_id', kind: 'place', value: h?.place_id || null})}</div><div><span class="pk-lab">Soigné par</span>${P().pickerField({name: 'carer', kind: 'person', allowFree: true, value: h?.carer_id || (h?.carer ? 'txt:' + h.carer : null)})}</div></div>
                 <div class="sv-obs-2"><label>Soins<input name="care" maxlength="2000" value="${esc(h?.care || '')}" placeholder="Plaie nettoyée, bandage"></label><label>Médicaments<input name="meds" maxlength="2000" value="${esc(h?.meds || '')}" placeholder="Antibiotique 5 jours, anti-douleur"></label></div>
                 <div class="sv-obs-2"><label>Poids<input type="number" name="weight_g" min="0" step="1" data-unit="g" value="${esc(h?.weight_g ?? '')}"></label><div><span class="pk-lab">Photos</span>${P().mediaField({name: 'media_ids', multiple: true, types: ['image'], value: h?.media_ids || []})}</div></div>
                 <div><span class="pk-lab">Suite</span><div class="sv-tags">${[['', 'Pas encore'], ['relache', 'Relâché le …'], ['mort', 'Mort le …']].map(([k, l]) => `<label class="sv-tag${(h?.outcome || '') === k ? ' is-on' : ''}"><input type="radio" name="outcome" value="${k}" ${(h?.outcome || '') === k ? 'checked' : ''}> ${l}</label>`).join('')}</div><input name="outcome_date" data-ui-date value="${esc(h?.outcome_date || '')}" placeholder="date de la suite" aria-label="Date de la suite"></div>
-                <label>Note<textarea name="note" rows="2">${esc(h?.note || '')}</textarea></label></div>`,
+                <label class="sv-note">Note<textarea name="note" rows="3">${esc(h?.note || '')}</textarea></label></div>`,
             onSubmit: async form => {
                 const v = new FormData(form), pid = petId || Number(v.get('pet_id')) || 0;
                 const errs = []; if (!pid) errs.push([form.elements.pet_id, 'Choisis l’animal.']); if (!String(v.get('date') || '').trim()) errs.push([form.elements.date, 'Donne la date de l’événement.']);
@@ -256,8 +260,16 @@
                 U().toast(h ? 'Événement de santé enregistré.' : 'Événement de santé créé.', 'success');
                 if (ctx) ctx.reload(); else U().refreshView();
             }});
-        dlg.addEventListener('click', e => {
-            const b = e.target.closest('[data-seg] [data-v]'); if (b) { const g = b.closest('[data-seg]').dataset.seg, val = b.dataset.v; const was = {state, what, cause}[g]; const nv = was === val ? '' : val; if (g === 'state') state = nv; if (g === 'what') what = nv; if (g === 'cause') cause = nv; b.parentElement.querySelectorAll('[data-v]').forEach(x => { x.classList.toggle('is-on', x.dataset.v === nv); x.setAttribute('aria-pressed', x.dataset.v === nv); }); return; }
+        dlg.addEventListener('click', async e => {
+            const tg = e.target.closest('[data-cause-toggle]'); if (tg) { const box = dlg.querySelector('[data-cause-more]'); box.hidden = !box.hidden; tg.setAttribute('aria-expanded', String(!box.hidden)); tg.textContent = box.hidden ? 'Plus de causes ▾' : 'Moins de causes ▴'; return; }
+            if (e.target.closest('[data-cause-add]')) {
+                const t = String(await A().askText?.({title: 'Une autre cause', message: 'La cause (elle sera proposée les prochaines fois) :', okLabel: 'Ajouter'}) || '').trim().slice(0, 40); if (!t) return;
+                try { localStorage.setItem(MINE, JSON.stringify([...new Set([t, ...mine()])].slice(0, 40))); } catch (_) {}
+                const row = dlg.querySelector('[data-seg="cause"]'); let btn = [...dlg.querySelectorAll('[data-seg="cause"] [data-v]')].find(x => x.dataset.v === t);
+                if (!btn) { row.insertAdjacentHTML('beforeend', `<button type="button" class="sv-tag" data-v="${esc(t)}" aria-pressed="false">${esc(t)}</button>`); btn = row.lastElementChild; }
+                cause = ''; btn.click(); return;
+            }
+            const b = e.target.closest('[data-seg] [data-v]'); if (b) { const g = b.closest('[data-seg]').dataset.seg, val = b.dataset.v; const was = {state, what, cause}[g]; const nv = was === val ? '' : val; if (g === 'state') state = nv; if (g === 'what') what = nv; if (g === 'cause') cause = nv; dlg.querySelectorAll(`[data-seg="${g}"] [data-v]`).forEach(x => { x.classList.toggle('is-on', x.dataset.v === nv); x.setAttribute('aria-pressed', x.dataset.v === nv); }); return; }
             const r = e.target.closest('label.sv-tag'); if (r) setTimeout(() => r.parentElement.querySelectorAll('label.sv-tag').forEach(x => x.classList.toggle('is-on', x.querySelector('input').checked)));
         });
         return dlg;
@@ -308,7 +320,7 @@
                 <fieldset ${mode === 'role' ? 'hidden' : ''}><legend>Sortie${mode ? '' : ' (facultatif)'}</legend><label>Pourquoi<select name="end_reason"><option value="">— encore dans le groupe —</option>${C().END_REASONS.filter(([k]) => k !== 'role').map(([k, l]) => `<option value="${k}" ${m?.end_reason === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Le<input name="end_date" data-ui-date value="${esc(m?.end_date === '?' ? '' : m?.end_date || '')}"></label>
                     <div data-transfer hidden><span class="pk-lab">Le nouveau groupe</span>${P().pickerField({name: 'transfer_to', kind: 'agroup', allowCreate: true})}<label>Son rôle là-bas<input name="new_role_t" maxlength="60"></label></div></fieldset>
                 ${mode === 'role' ? `<div class="sv-obs-2"><label>Nouveau rôle<input name="new_role" maxlength="60" required placeholder="alpha, satellite…"></label><label>Depuis le<input name="role_date" data-ui-date></label></div>${roleChips}` : ''}
-                <label>Note<textarea name="note" rows="2">${esc(m?.note || '')}</textarea></label></div>`,
+                <label class="sv-note">Note<textarea name="note" rows="3">${esc(m?.note || '')}</textarea></label></div>`,
             onSubmit: async form => {
                 const v = new FormData(form), pid = petId || Number(v.get('pet_id')) || 0, gid = Number(v.get('group_id')) || 0;
                 const errs = []; if (!pid) errs.push([form.elements.pet_id, 'Choisis l’animal.']); if (!gid) errs.push([form.elements.group_id, 'Choisis le groupe (ou crée-le).']);

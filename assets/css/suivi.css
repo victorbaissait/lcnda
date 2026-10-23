@@ -150,6 +150,10 @@
 .sv-imp fieldset { border: 0; padding: 0; margin: 0; }
 .sv-imp input[type=number] { width: 80px; }
 .sv-form { display: flex; flex-direction: column; gap: 10px; }
+.sv-form > label:not(.sv-tag):not(.checkbox-line), .sv-form .sv-obs-2 > label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.sv-form input[type="text"], .sv-form input:not([type]), .sv-form input[type="number"], .sv-form textarea { width: 100%; box-sizing: border-box; font-weight: 400; }
+.sv-form .sv-note textarea { min-height: 72px; resize: vertical; padding: 8px 10px; font: inherit; }
+.sv-cause-more { margin-top: -2px; }
 .sv-form.form-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
 
 /* ── en grand : carte et chiffres ── */

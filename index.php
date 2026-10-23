@@ -61,7 +61,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=2">
-    <link rel="stylesheet" href="assets/css/suivi.css?v=1">
+    <link rel="stylesheet" href="assets/css/suivi.css?v=2">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=1">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=5">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
@@ -1333,7 +1333,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-meteo.js?v=3" defer></script>
 <script src="assets/js/app-suivi-core.js?v=1" defer></script>
 <script src="assets/js/heritage-suivi.js?v=1" defer></script>
-<script src="assets/js/heritage-suivi-fiche.js?v=1" defer></script>
+<script src="assets/js/heritage-suivi-fiche.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=1" defer></script>
 <script src="assets/js/app-apparence.js?v=9" defer></script>
