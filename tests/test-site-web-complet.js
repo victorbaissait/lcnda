@@ -428,7 +428,8 @@ print(json.dumps(out))`, zipPath], { encoding: 'utf8' });
 
         /* ═════ Widgets de bureau ═════ */
         group = 'Widgets de bureau';
-        await page.evaluate(() => window.LCNDA_APP.setModule('dashboard')); await wait(1000);
+        // sans attendre la promesse de setModule : le changement d'adresse (pushState) pendant l'attente faisait parfois perdre la main à Playwright
+        await page.evaluate(() => { void window.LCNDA_APP.setModule('dashboard'); }); await page.waitForFunction(() => window.LCNDA_APP.state.module === 'dashboard'); await wait(1000);
         for (const k of ['today', 'ancestor', 'photo', 'calc', 'countdown']) await cmd(`Navigateur : ⤓ fichier .html « ${k} »`, async () => {
             await page.evaluate(() => { void window.LCNDA_EXT.deskWidgets.open(); }); await page.waitForSelector('dialog[open] .dw-kinds');
             const dg = page.locator('dialog[open]').last(); if (k === 'countdown') { await dg.locator('[data-dw-cd="date"]').fill('14/07/2027'); await wait(400); }

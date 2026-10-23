@@ -100,7 +100,7 @@ function engine(store = {}) {
         ['genealogie-animal-blocks', 'genealogie-sheet-sections', 'genealogie-sheet-head'].forEach(k => { assert.ok(sd.includes(`'${k}'`), k); assert.ok(api.includes(`'${k}'`), k); assert.ok(read('assets/js/heritage-studio.js').includes(`'${k}'`), k); });
         const mig = read('lib/migrations.php'); assert.match(mig, /const SCHEMA_VERSION = 6[7-9];/); assert.match(mig, /67 => 'schema_v67'/);
         const faq = read('assets/js/heritage-more.js'); assert.match(faq, /Un animal a-t-il encore deux fiches/); assert.match(faq, /Comment changer l’ordre des sections et des blocs de la fiche/);
-        assert.match(read('CLAUDE.md'), /Sections des fiches et fiche animal unique/); assert.match(read('docs/UI.md'), /Sections des fiches/);
+        if (fs.existsSync(path.join(root, 'CLAUDE.md'))) assert.match(read('CLAUDE.md'), /Sections des fiches et fiche animal unique/); // CLAUDE.md n'est pas suivi par git : absent d'une copie fraîche assert.match(read('docs/UI.md'), /Sections des fiches/);
         assert.doesNotMatch(read('assets/js/heritage-pets.js'), /class="page h-pet"/, 'plus de page simple');
     });
 

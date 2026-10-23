@@ -230,3 +230,16 @@ dialog.modal.sw-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 .sw-cp-targets { margin: 8px 0; }
 .sw-cp-t { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; }
 .sw-cp-t input { width: 64px; }
+/* ◧ ◨ panneaux masquables : chaque colonne garde sa place dans la grille */
+.sw-left { grid-column: 2; } .sw-center { grid-column: 3; } .sw-panel { grid-column: 4; }
+.sw-panel[hidden] { display: none; }
+.sw-panes { display: inline-flex; gap: 4px; }
+.sw-panes .button.is-active { background: var(--sw-ink, #111); color: #fff; }
+/* 📄 Pages : les fichiers du site */
+.sw-files .sw-pagename b { display: flex; align-items: center; gap: 6px; }
+.sw-files { margin-bottom: 6px; }
+@media (max-width: 760px) { .sw-center { grid-column: 2; } .sw-panel { grid-column: 1 / -1; } }
+/* 🖼 une image du site ; ▾ mes sites */
+.sw-imgview { display: grid; place-items: center; background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 0 / 16px 16px; border: 1px solid var(--line, #d9dce2); min-height: 120px; max-height: 50vh; overflow: auto; padding: 10px; }
+.sw-imgview img { max-width: 100%; max-height: 46vh; }
+.sw-sites-btn { margin-left: 2px; }

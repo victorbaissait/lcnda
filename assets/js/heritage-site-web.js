@@ -58,10 +58,17 @@
     const SPACING = [['.section', 'padding-block', 'Espace en haut et en bas des sections', 40, 160], ['.conteneur', 'padding-inline', 'Marge des côtés du contenu', 20, 120], ['.colonnes, .galerie', 'gap', 'Espace entre colonnes et photos', 24, 80], ['p', 'margin-bottom', 'Espace sous les paragraphes', 17, 60], ['h1, h2, h3', 'margin-bottom', 'Espace sous les titres', 12, 60], ['.carte', 'padding', 'Espace intérieur des cartes', 20, 80]];
     const MAX_HTML = 2000000;
     /* 🗂 les fichiers du site en plus de style.css et script.js (site.files) : chemin, sorte, contenu, pages où ils sont liés */
-    const FILE_KINDS = {html: {ico: '‹›', label: 'HTML'}, php: {ico: 'php', label: 'PHP'}, css: {ico: '#', label: 'CSS'}, js: {ico: 'JS', label: 'JavaScript'}, json: {ico: '{}', label: 'JSON'}, txt: {ico: '¶', label: 'Texte'}};
+    const FILE_KINDS = {html: {ico: '‹›', label: 'HTML'}, php: {ico: 'php', label: 'PHP'}, css: {ico: '#', label: 'CSS'}, js: {ico: 'JS', label: 'JavaScript'}, json: {ico: '{}', label: 'JSON'}, txt: {ico: '¶', label: 'Texte'}, image: {ico: '🖼', label: 'Image'}};
     const extOf = path => (/\.([a-z0-9]+)$/i.exec(String(path || '')) || [])[1]?.toLowerCase() || '';
-    const kindOfExt = e => ({htm: 'html', html: 'html', php: 'php', css: 'css', js: 'js', mjs: 'js', json: 'json'})[e] || 'txt';
+    const IMG_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'ico', 'avif'];
+    const kindOfExt = e => (IMG_EXT.includes(e) ? 'image' : ({htm: 'html', html: 'html', php: 'php', css: 'css', js: 'js', mjs: 'js', json: 'json'})[e] || 'txt');
+    const TEXT_EXT = ['html', 'htm', 'php', 'css', 'js', 'mjs', 'json', 'txt', 'md', 'csv', 'xml'];
+    /** les images du site (dossier importé) : src="img/a.png", url(../img/a.png) → leur « data: », pour l'aperçu */
+    const inlineImages = (text, files) => { const imgs = new Map(files.filter(f => f.kind === 'image').map(f => [f.path, f.content])); if (!imgs.size || !text) return text;
+        return text.replace(/((?:src|href|poster)\s*=\s*["']|url\(\s*["']?)((?:\.\/|\.\.\/)*)([a-z0-9\-_./]+\.(?:png|jpe?g|gif|webp|svg|ico|avif))(?=["')?#\s])/gi, (m, a, up, p) => (imgs.has(p.toLowerCase()) ? a + imgs.get(p.toLowerCase()) : m)); };
     const cleanPath = p => String(p || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/\\/g, '/').replace(/[^a-z0-9\-_./]+/g, '-').split('/').filter(x => x && x !== '.' && x !== '..').join('/').replace(/^[.\-]+/, '').slice(0, 120);
+    /** « Cours.php » → ['Cours', 'php'] ; sans .html / .php : [nom, ''] */
+    const splitExt = n => { const m = /^(.*?)\.(php|html?)\s*$/i.exec(String(n || '').trim()); return m && m[1].trim() ? [m[1].trim(), m[2].toLowerCase() === 'php' ? 'php' : 'html'] : [String(n || '').trim(), '']; };
     const pageFile = p => `${p.slug}.${p.ext === 'php' ? 'php' : 'html'}`;
     const codeLang = kind => (kind === 'css' ? 'css' : kind === 'js' || kind === 'json' ? 'js' : 'html');
 
@@ -187,6 +194,7 @@
                         <div class="sw-bar">
                             <label class="sw-pagepick">📄 <select data-sw-page aria-label="Page"></select></label>
                             <div class="segmented sw-views" role="tablist" aria-label="Affichage">${[['visual', '✨ Visuel'], ['split', '◫ Les deux'], ['code', '</> Code']].map(([k, l]) => `<button type="button" data-sw-view="${k}">${esc(l)}</button>`).join('')}</div>
+                            <span class="sw-panes"><button type="button" class="button small secondary" data-sw-toggle="left" title="Montrer ou cacher le panneau de gauche (Blocs, Pages, Styles)" aria-label="Panneau de gauche">◧</button><button type="button" class="button small secondary" data-sw-toggle="panel" title="Montrer ou cacher le panneau « Ceci est… »" aria-label="Panneau Ceci est">◨</button></span>
                             <span class="sw-layout" data-sw-layout><button type="button" class="button small secondary" data-sw-swap title="Inverser l’aperçu et le code" aria-label="Inverser l’aperçu et le code">⇄</button><button type="button" class="button small secondary" data-sw-orient title="Côte à côte, ou l’un au-dessus de l’autre" aria-label="Côte à côte ou l’un au-dessus de l’autre">⬓</button></span>
                             <div class="segmented sw-devices" role="tablist" aria-label="Taille de l’écran" data-sw-devices></div>
                             <span class="spacer"></span>
@@ -221,6 +229,9 @@
             // l'aperçu s'ajuste quand la place change, une fois par image et seulement si la taille a vraiment changé (pas de va-et-vient avec une barre de défilement)
             this.ro = new ResizeObserver(() => { const w = this.$('[data-sw-work]'); if (w && w.dataset.view === 'split' && w.dataset.orient !== this.orientNow()) return this.applyView(); if (this.zoomMode !== 'fit') return; cancelAnimationFrame(this.fitRaf); this.fitRaf = requestAnimationFrame(() => { const k = `${this.stage.clientWidth}x${this.stage.clientHeight}`; if (k === this.fitKey) return; this.fitKey = k; this.fit(); }); }); this.ro.observe(this.stage);
             if (matchMedia('(max-width: 760px)').matches) this.$('[data-sw-leftpane]').hidden = true; // téléphone : le panneau s'ouvre par la colonne d'outils
+            else if (pref('leftHidden', false)) this.$('[data-sw-leftpane]').hidden = true;
+            if (pref('panelHidden', false)) this.$('[data-sw-panel]').hidden = true;
+            this.$$('[data-sw-toggle]').forEach(b => b.classList.toggle('is-active', !this.$(b.dataset.swToggle === 'left' ? '[data-sw-leftpane]' : '[data-sw-panel]').hidden));
             this.bind();
             this.paintLeft(); this.paintPages(); this.paintPanel(); this.applyView(); this.applyDevice(); this.setMode('select', true);
             this.imitate = ext.siteCompat?.BROWSERS.some(b => b.id === pref('imitate', '')) ? pref('imitate', '') : ''; if (this.imitate) this.setImitate(this.imitate);
@@ -238,7 +249,7 @@
         menus() {
             const k = K();
             return {
-                Fichier: () => [{icon: '＋', label: 'Nouveau site…', run: () => chooseTemplate(this.ctx)}, {icon: '💾', label: 'Enregistrer', shortcut: '⌘S', run: () => this.save()}, {icon: '⧉', label: 'Enregistrer une copie…', run: () => this.saveAs()},
+                Fichier: () => [{icon: '＋', label: 'Nouveau site…', run: () => chooseTemplate(this.ctx)}, {icon: '📂', label: 'Ouvrir un dossier…', run: () => importFolder(this.ctx)}, {icon: '🗂', label: 'Mes sites…', run: () => this.sitesMenu(this.$('[data-sw-sites]') || this.$('.ui-topbar'))}, {icon: '💾', label: 'Enregistrer', shortcut: '⌘S', run: () => this.save()}, {icon: '⧉', label: 'Enregistrer une copie…', run: () => this.saveAs()},
                     {icon: '🕘', label: 'Enregistrer comme nouvelle version', run: () => this.saveVersion()}, {icon: '🕘', label: 'Versions du site…', run: () => this.versions()}, '-',
                     {icon: '⤓', label: 'Exporter…', run: () => this.exportDialog()}, {icon: '📤', label: 'Publier en ligne…', run: () => this.publishDialog()}, {icon: '↗', label: 'Ouvrir l’aperçu dans le navigateur', run: () => this.openBrowser()}, '-', {icon: '×', label: 'Fermer', run: () => this.close()}],
                 Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !this.hist.canUndo(), run: () => this.undo()}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !this.hist.canRedo(), run: () => this.redo()}, '-',
@@ -249,6 +260,7 @@
                     {icon: '⇄', label: 'Inverser l’aperçu et le code', run: () => this.setLayout({swap: !this.swap})}, {icon: '⬓', label: this.orientNow() === 'row' ? 'L’un au-dessus de l’autre' : 'Côte à côte', run: () => this.setLayout({orient: this.orientNow() === 'row' ? 'col' : 'row'})}, '-',
                     ...this.bps().map(b => ({icon: b.icon, label: `${b.name} (${b.width} px)`, checked: this.device === b.id && !this.freeW, run: () => this.setDevice(b.id)})), {icon: '⚙', label: 'Gérer les écrans (@media)…', run: () => this.bpDialog()}, '-',
                     ...(ext.siteCompat ? [{icon: '🧭', label: 'Navigateurs : vérifier le site…', run: () => this.compatDialog()}, ...[{id: '', name: 'Aucun (l’aperçu seul)', icon: '▭'}, ...ext.siteCompat.BROWSERS].map(b => ({icon: b.icon, label: b.id ? `Imiter ${b.name}` : b.name, checked: (this.imitate || '') === b.id, run: () => this.setImitate(b.id)})), '-'] : []),
+                    {icon: '◧', label: 'Panneau de gauche (Blocs, Pages, Styles)', checked: !this.$('[data-sw-leftpane]')?.hidden, run: () => this.togglePane('left')}, {icon: '◨', label: 'Panneau « Ceci est… »', checked: !this.$('[data-sw-panel]')?.hidden, run: () => this.togglePane('panel')}, '-',
                     {label: 'Fichiers en onglets (comme Phoenix Code)', checked: this.ftStyle === 'tabs', run: () => this.setFtStyle('tabs')}, {label: 'Fichiers en trois boutons (HTML / CSS / JS)', checked: this.ftStyle !== 'tabs', run: () => this.setFtStyle('simple')}, '-',
                     {icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => { this.zoomMode = 'fit'; this.fit(); }}, {label: '100 % (taille réelle)', shortcut: '⌘1', run: () => { this.zoomMode = 'manual'; this.setZoom(1); }}, '-',
                     {icon: '⟳', label: 'Relire les blocs de la généalogie', run: () => { this.blockCache.clear(); this.reload(); }}],
@@ -271,7 +283,7 @@
                 if (c.swCmd === 'publish') return this.publishDialog();
                 if (c.swCmd === 'compat') return this.compatDialog();
                 if (c.swMode) return this.setMode(c.swMode);
-                if (c.swLeft) { const pane = this.$('[data-sw-leftpane]'); if (b.closest('.sw-rail') && this.left === c.swLeft && !pane.hidden) { pane.hidden = true; return; } this.left = c.swLeft; setPref('left', this.left); this.paintLeft(); pane.hidden = false; return; }
+                if (c.swLeft) { const pane = this.$('[data-sw-leftpane]'); if (b.closest('.sw-rail') && this.left === c.swLeft && !pane.hidden) return this.togglePane('left', false); this.left = c.swLeft; setPref('left', this.left); this.paintLeft(); return this.togglePane('left', true); }
                 if (b.matches('[data-sw-view-toggle]')) return this.setView(this.view === 'visual' ? 'split' : 'visual');
                 if (c.swView) return this.setView(c.swView);
                 if (c.swDevice) return this.setDevice(c.swDevice);
@@ -283,6 +295,10 @@
                 if (c.swFclose) { e.stopPropagation(); return this.closeTab(c.swFclose); }
                 if (b.matches('[data-sw-fnew]')) return this.newFileMenu(b);
                 if (b.matches('[data-sw-fall]')) return this.allFilesMenu(b);
+                if (c.swFopen) { this.openTab(c.swFopen); return this.left === 'pages' && this.paintLeft(); }
+                if (c.swFrename) return this.renameAsk(c.swFrename);
+                if (c.swFmenu) return this.tabMenu(c.swFmenu, b);
+                if (c.swToggle) return this.togglePane(c.swToggle);
                 if (b.matches('[data-sw-ftstyle]')) return this.setFtStyle(this.ftStyle === 'tabs' ? 'simple' : 'tabs');
                 if (c.swBlock) return this.insertBlock(c.swBlock);
                 if (c.swOpenPage) return this.goPage(Number(c.swOpenPage));
@@ -299,6 +315,8 @@
             strip.addEventListener('dblclick', e => { const t = e.target.closest('[data-sw-ftab]'); if (t) this.renameTab(t.dataset.swFtab); });
             strip.addEventListener('contextmenu', e => { const t = e.target.closest('[data-sw-ftab], [data-sw-tab]'); if (!t) return; e.preventDefault(); const k = t.dataset.swFtab || t.dataset.swTab; this.tabMenu(k === 'html' ? `p:${this.page().id}` : k, {x: e.clientX, y: e.clientY}); });
             strip.addEventListener('auxclick', e => { const t = e.target.closest('[data-sw-ftab]'); if (t && e.button === 1) this.closeTab(t.dataset.swFtab); });
+            d.querySelector('[data-sw-name]')?.insertAdjacentHTML('afterend', '<button type="button" class="icon-button small sw-sites-btn" data-sw-sites title="Mes sites : en ouvrir un autre, en créer un, ouvrir un dossier" aria-label="Mes sites">▾</button>');
+            d.querySelector('[data-sw-sites]')?.addEventListener('click', e => this.sitesMenu(e.currentTarget));
             d.querySelector('[data-sw-name]').addEventListener('input', e => { this.name = e.target.value.trim() || 'Mon site'; this.changed(); });
             d.querySelector('select[data-sw-page]').addEventListener('change', e => this.goPage(Number(e.target.value)));
             // ⌘S, ⌘Z, V / T / P / B (hors des cases de saisie)
@@ -348,7 +366,7 @@
             });
             if (missing.length) this.fetchBlocks(missing);
             const base = this.mediaBase;
-            return doc.body.innerHTML.replace(/(\s(?:src|href|poster)\s*=\s*["'])media\//gi, `$1${base}`).replace(/url\(\s*(["']?)media\//gi, `url($1${base}`);
+            return inlineImages(doc.body.innerHTML, this.site.files).replace(/(\s(?:src|href|poster)\s*=\s*["'])media\//gi, `$1${base}`).replace(/url\(\s*(["']?)media\//gi, `url($1${base}`);
         }
         /** 🏛️ un diagramme de l'app, dessiné en SVG (Graphiques → Mes diagrammes, avec ses données à jour), gardé dans le site */
         async freezeDiagram(id, force = false) {
@@ -416,7 +434,7 @@
         cssFor() {
             const base = this.mediaBase; let css = this.site.css; const q = this.freeW ? '' : this.bp().query;
             if (q && mqSimulated(q)) { const want = normMq(q); CODE().cssScan(css).medias.filter(m => m.query === want).sort((x, y) => y.start - x.start).forEach(m => { css = `${css.slice(0, m.start)}@media all /* aperçu : ${want.replace(/\*\//g, '')} */ ${css.slice(m.open)}`; }); }
-            css = [css, ...this.filesFor('css').map(f => `/* ${f.path} */\n${f.content}`)].join('\n');
+            css = inlineImages([css, ...this.filesFor('css').map(f => `/* ${f.path} */\n${f.content}`)].join('\n'), this.site.files);
             return css.replace(/url\(\s*(["']?)media\//gi, `url($1${base}`);
         }
         themeFull() { return `${themeCss(this.site.theme)}\n${this.blocksCss}`; }
@@ -581,6 +599,14 @@
             this.openTab(key);
             setTimeout(() => { const t = this.code.value, lines = t.split('\n'), i = Math.max(0, Math.min(lines.length - 1, line - 1)); const a = lines.slice(0, i).join('\n').length + (i ? 1 : 0); this.code.reveal(a, a + lines[i].length); }, 40);
         }
+        /** ◧ ◨ montrer ou cacher un panneau ; le choix est gardé */
+        togglePane(which, show) {
+            const el = this.$(which === 'left' ? '[data-sw-leftpane]' : '[data-sw-panel]'); if (!el) return;
+            el.hidden = show === undefined ? !el.hidden : !show;
+            if (!(which === 'left' && matchMedia('(max-width: 760px)').matches)) setPref(which === 'left' ? 'leftHidden' : 'panelHidden', el.hidden);
+            this.$(`[data-sw-toggle="${which}"]`)?.classList.toggle('is-active', !el.hidden);
+            this.fitKey = ''; if (this.zoomMode === 'fit') setTimeout(() => this.fit(), 30);
+        }
         /** ⚙ Gérer les écrans : les points de rupture du site et leurs requêtes @media */
         bpDialog() {
             const scan = () => CODE().cssScan(this.site.css).medias;
@@ -663,7 +689,9 @@
                 pane.innerHTML = tabs + `<div class="sw-pages">${this.site.pages.map((x, i) => `<div class="sw-pagerow${i === this.pageIdx ? ' is-active' : ''}"><button type="button" class="sw-pagename" data-sw-open-page="${i}"><b>${esc(x.name)}</b><small>${esc(pageFile(x))}</small></button>
                     <span class="sw-pageacts"><button type="button" class="icon-button small" data-sw-page="up" data-sw-pi="${i}" title="Monter" aria-label="Monter" ${i <= 1 ? 'disabled' : ''}>↑</button><button type="button" class="icon-button small" data-sw-page="down" data-sw-pi="${i}" title="Descendre" aria-label="Descendre" ${!i || i === this.site.pages.length - 1 ? 'disabled' : ''}>↓</button><button type="button" class="icon-button small" data-sw-page="rename" data-sw-pi="${i}" title="Renommer" aria-label="Renommer">✎</button><button type="button" class="icon-button small" data-sw-page="dup" data-sw-pi="${i}" title="Dupliquer" aria-label="Dupliquer">⧉</button>${i ? `<button type="button" class="icon-button small" data-sw-page="del" data-sw-pi="${i}" title="Supprimer la page" aria-label="Supprimer la page">🗑</button>` : ''}</span></div>`).join('')}</div>
                     <button type="button" class="button small" data-sw-page="add" data-sw-pi="0">＋ Nouvelle page</button>
+                    ${this.filesListHtml()}
                     <h4>Cette page : « ${esc(p.name)} »</h4><div class="form-grid one-column sw-form">
+                    <label>Format<select data-sw-pext><option value="html"${p.ext !== 'php' ? ' selected' : ''}>HTML (${esc(p.slug)}.html)</option><option value="php"${p.ext === 'php' ? ' selected' : ''}>PHP (${esc(p.slug)}.php)</option></select></label>
                     <label>Titre dans l’onglet du navigateur<input type="text" data-sw-pf="title" maxlength="160" value="${esc(p.title)}" placeholder="${esc(p.name)}"></label>
                     <label>Description (pour les moteurs de recherche)<textarea data-sw-pf="desc" rows="2" maxlength="300">${esc(p.desc)}</textarea></label>
                     ${this.pageIdx ? `<label>Adresse<input type="text" data-sw-pf="slug" maxlength="60" value="${esc(p.slug)}" pattern="[a-z0-9-]+"></label>` : ''}</div>`;
@@ -692,6 +720,14 @@
                 ${SPACING.map(row).join('')}
                 <p class="sw-hint">${media ? `Écrit dans <code>@media ${esc(media)}</code> : seulement sur cet écran.` : 'Écrit dans le CSS du site, pour tous les écrans.'} Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ».</p>`;
         }
+        /** 📄 Pages : la liste des fichiers du site, sous les pages (un clic l'ouvre dans le code ; ✎ renommer, ⋯ le reste) */
+        filesListHtml() {
+            const cur = this.tabKey(), keys = ['css', 'js', ...this.site.files.slice().sort((a, b) => a.path.localeCompare(b.path)).map(f => `f:${f.id}`)];
+            const row = k => { const t = this.tabInfo(k), f = t.file, where = f ? (f.kind === 'css' || f.kind === 'js' ? (f.pages.length ? `sur ${plural(f.pages.length, 'page')}` : 'sur toutes les pages') : f.kind === 'php' ? 'à inclure' : FILE_KINDS[f.kind].label) : 'tout le site';
+                return `<div class="sw-pagerow${k === cur ? ' is-active' : ''}"><button type="button" class="sw-pagename" data-sw-fopen="${esc(k)}" title="${esc(t.title)}"><b><span class="sw-fico k-${t.kind}" aria-hidden="true">${esc(FILE_KINDS[t.kind].ico)}</span> ${esc(t.name)}</b><small>${esc(f ? f.path : t.name)} · ${esc(where)}</small></button>
+                    <span class="sw-pageacts">${f ? `<button type="button" class="icon-button small" data-sw-frename="${esc(k)}" title="Renommer (l’extension change le format)" aria-label="Renommer">✎</button>` : ''}<button type="button" class="icon-button small" data-sw-fmenu="${esc(k)}" title="Plus : format, pages où il est lié, dupliquer, supprimer" aria-label="Plus">⋯</button></span></div>`; };
+            return `<h4>Fichiers du site <small class="sw-hint">(${keys.length})</small></h4><div class="sw-pages sw-files">${keys.map(row).join('')}</div><button type="button" class="button small secondary" data-sw-fnew>＋ Nouveau fichier</button>`;
+        }
         paintPages() {
             const sel = this.$('select[data-sw-page]'); sel.innerHTML = this.site.pages.map((p, i) => `<option value="${i}"${i === this.pageIdx ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
             if (this.left === 'pages') this.paintLeft();
@@ -707,7 +743,7 @@
         async pageAction(act, i) {
             const pages = this.site.pages, p = pages[i];
             if (act === 'add') return this.addPage();
-            if (act === 'rename') { const n = await A().askText({title: '✎ Renommer la page', message: 'Le nom de la page (il apparaît dans le menu) :', value: p.name, okLabel: 'Enregistrer'}); if (!n?.trim()) return; p.name = n.trim().slice(0, 80); if (i) { const old = p.slug; p.slug = this.uniqueSlug(slugOf(p.name), i); this.relink(old, p.slug, p.ext); } this.changed(true); this.paintPages(); return this.pushHtml(); }
+            if (act === 'rename') { const n = await A().askText({title: '✎ Renommer la page', message: 'Le nom de la page (il apparaît dans le menu) :', value: p.name, okLabel: 'Enregistrer'}); if (!n?.trim()) return; const [nm, ex] = splitExt(n); p.name = nm.slice(0, 80); if (i) { const old = p.slug; p.slug = this.uniqueSlug(slugOf(p.name), i); this.relink(old, p.slug, p.ext); } if (ex && ex !== p.ext) this.setPageFile(p, p.slug, ex); this.changed(true); this.paintPages(); return this.pushHtml(); }
             if (act === 'up' || act === 'down') { const j = act === 'up' ? i - 1 : i + 1; if (j < 1 || j >= pages.length || i < 1) return; [pages[i], pages[j]] = [pages[j], pages[i]]; if (this.pageIdx === i) this.pageIdx = j; else if (this.pageIdx === j) this.pageIdx = i; this.changed(true); this.paintPages(); return this.pushHtml(); }
             if (act === 'dup') { const c = {...p, id: newId(), name: `${p.name} (copie)`}; c.slug = this.uniqueSlug(slugOf(c.name), -1); pages.splice(i + 1, 0, c); this.changed(true); return this.goPage(i + 1); }
             if (act === 'del' && i > 0) {
@@ -719,7 +755,8 @@
         uniqueSlug(s, self) { let out = s === 'index' ? 'page' : s, k = 2; while (this.site.pages.some((p, j) => j !== self && p.slug === out)) out = `${s}-${k++}`; return out; }
         async addPage({ext = 'html', quick = false} = {}) {
             const n = quick ? `Page ${this.site.pages.length + 1}` : await A().askText({title: '📄 Nouvelle page', message: 'Le nom de la page (il apparaît dans le menu) :', value: '', okLabel: 'Créer la page'}); if (!n?.trim()) return;
-            const name = n.trim().slice(0, 80), k = K(), doc = k.parse(this.page().html);
+            const [nm, ex] = splitExt(n); if (ex) ext = ex;
+            const name = nm.slice(0, 80), k = K(), doc = k.parse(this.page().html);
             const head = doc.body.querySelector(':scope > header')?.outerHTML || k.BLOCKS.find(b => b.key === 'header').html({title: this.site.settings.title});
             const foot = [...doc.body.querySelectorAll(':scope > footer')].pop()?.outerHTML || k.BLOCKS.find(b => b.key === 'footer').html({title: this.site.settings.title});
             const text = k.BLOCKS.find(b => b.key === 'text').html({}).replace('Un titre', esc(name));
@@ -739,6 +776,7 @@
             const t = e.target; if (!this.dlg.contains(t)) return;
             if (t.dataset.swTh) { const k2 = t.dataset.swTh; this.site.theme[k2] = t.type === 'range' ? Number(t.value) : t.value; this.changed(final); this.pushCss(); return; }
             if (t.dataset.swSp) { const [sel, prop] = t.dataset.swSp.split('|'), sc = this.spScreen || 'all'; this.setSiteDecl(sel, prop, `${t.value}px`, sc === 'all' ? null : this.bp(sc).query, final); const o = t.nextElementSibling; if (o) o.textContent = `${t.value} px`; if (final) this.paintLeft(); return; }
+            if (t.matches('[data-sw-pext]') && final) return this.setPageFile(this.page(), this.page().slug, t.value === 'php' ? 'php' : 'html');
             if (t.dataset.swSf) { this.site.settings[t.dataset.swSf] = t.value; this.changed(final); if (t.dataset.swSf === 'lang' && final) this.reload(); return; }
             if (t.dataset.swPf) { const p = this.page(); if (t.dataset.swPf === 'slug') { if (!final) return; const old = p.slug; p.slug = this.uniqueSlug(slugOf(t.value), this.pageIdx); t.value = p.slug; this.relink(old, p.slug, p.ext); this.pushHtml(); } else p[t.dataset.swPf] = t.value; this.changed(final); return; }
             if (t.matches('[data-sw-to]') && this.sel) { this.styleTo = t.value; return this.paintPanel(); }
@@ -1010,6 +1048,7 @@
         }
         openTab(key) {
             if (!this.tabInfo(key)) return;
+            if (this.fileOf(key)?.kind === 'image') return this.imageDialog(this.fileOf(key));
             if (!this.tabs.includes(key)) { const i = this.tabs.indexOf(this.tabKey()); this.tabs.splice(i + 1, 0, key); }
             if (this.view === 'visual') this.setView('split');
             if (key.startsWith('p:')) { const i = this.site.pages.findIndex(p => p.id === key.slice(2)); if (i !== this.pageIdx) this.goPage(i); return this.setCodeTab('html'); }
@@ -1020,6 +1059,24 @@
             const wasCur = key === this.tabKey(); this.tabs.splice(i, 1);
             if (wasCur) return this.openTab(this.tabs[Math.max(0, i - 1)]);
             this.paintTabs();
+        }
+        /** 🗂 Mes sites : passer à un autre site (on demande avant de perdre des changements), en créer un, ouvrir un dossier */
+        async sitesMenu(anchor) {
+            let list = []; try { list = (await api('websites')).items || []; } catch (e) { return toast(e.message, 'error'); }
+            const swap = async run => { if (this.dirty) { const ok = await A().confirmBox('Enregistrer ce site avant d’en ouvrir un autre ?', {title: 'Changer de site', okLabel: '💾 Enregistrer et changer', cancelLabel: 'Annuler'}); if (!ok) return; await this.save(); if (this.dirty) return; } this.dirty = false; await this.close(); if (this.closed) run(); };
+            UI().menuAt(anchor, [...list.slice(0, 30).map(x => ({icon: '🌐', label: x.name || 'Mon site', help: [x.info?.pages ? plural(x.info.pages, 'page') : '', x.updated_at ? `modifié le ${String(x.updated_at).slice(0, 10).split('-').reverse().join('/')}` : ''].filter(Boolean).join(' · '), checked: Number(x.id) === this.id, disabled: Number(x.id) === this.id, run: () => swap(() => openSite({...this.ctx, id: x.id}))})),
+                ...(list.length ? ['-'] : []), {icon: '＋', label: 'Nouveau site…', run: () => swap(() => chooseTemplate(this.ctx))}, {icon: '📂', label: 'Ouvrir un dossier…', help: 'un site déjà fait : pages, CSS, JS, PHP, images', run: () => swap(() => importFolder(this.ctx))}], {title: `Mes sites (${list.length})`});
+        }
+        /** 🖼 une image du site : on la voit, son chemin à copier, la remplacer */
+        imageDialog(f) {
+            const kb = Math.round(f.content.length * 0.75 / 1024);
+            ext.openDialog({eyebrow: 'MON SITE WEB', title: `🖼 ${f.path}`, submitLabel: 'Fermer',
+                body: `<div class="sw-imgview"><img src="${esc(f.content)}" alt=""></div><p class="sw-hint">${kb} Ko · dans une page : <code>&lt;img src="${esc(f.path)}" alt=""&gt;</code> · dans le CSS : <code>url(../${esc(f.path)}) depuis css/</code></p>
+                    <div class="sw-row"><button type="button" class="button small secondary" data-img-copy>⧉ Copier le chemin</button><button type="button" class="button small secondary" data-img-swap>↻ Remplacer l’image…</button></div>`,
+                onOpen: d => d.addEventListener('click', async e => {
+                    if (e.target.closest('[data-img-copy]')) { try { await navigator.clipboard.writeText(f.path); toast('Chemin copié.'); } catch (_) { toast(f.path); } }
+                    if (e.target.closest('[data-img-swap]')) { const [file] = await pickFiles('image/*'); if (!file) return; const url = await readData(file).catch(err => { toast(err.message, 'error'); return ''; }); if (!url) return; f.content = url; this.changed(true); this.pushCss(); this.pushHtml(); d.querySelector('.sw-imgview img').src = url; }
+                }), onSubmit: () => {}});
         }
         /** ＋ : un nouveau fichier ; il s'ouvre, son nom prêt à être changé */
         newFileMenu(btn) {
@@ -1033,6 +1090,8 @@
                 {icon: 'php', label: 'Morceau PHP à inclure (en-tête, pied…)', help: 'pour l’appeler dans une page PHP : include', run: () => mk('includes/entete.php', this.headerSnippet())},
                 {icon: '{}', label: 'Données (.json)', run: () => mk('data/donnees.json', '{\n  \n}\n')},
                 {icon: '¶', label: 'Texte (.txt, robots.txt…)', run: () => mk('notes.txt', '')},
+                {icon: '🖼', label: 'Image (png, jpg, svg…)', help: 'gardée dans le site, à mettre dans une page : <img src="img/…">', run: async () => { const list = await pickFiles('image/*', true); for (const file of list) { const url = await readData(file).catch(err => { toast(err.message, 'error'); return ''; }); if (!url) continue; const path = this.freePath(`img/${cleanPath(file.name) || 'image.png'}`); this.site.files.push({id: `f${newId().slice(1)}`, path, kind: 'image', content: url, pages: []}); } if (list.length) { this.changed(true); this.paintLeft(); this.paintTabs(); toast(`${plural(list.length, 'image')} dans le site (dossier img/).`, 'success'); } }},
+                '-', {icon: '📂', label: 'Ouvrir un dossier (un site déjà fait)…', run: () => importFolder()},
             ], {title: 'Nouveau fichier'});
         }
         headerSnippet() { const h = K().parse(this.page().html).body.querySelector(':scope > header'); return `${h ? h.outerHTML : '<header class="site-entete">\n  <div class="conteneur"><a class="site-nom" href="index.php">Mon site</a></div>\n</header>'}\n`; }
@@ -1376,6 +1435,68 @@
         if (ctx.id) { try { const r = await api('website', {id: ctx.id}); id = r.id; name = r.name; data = r.data; rev = r.rev; } catch (e) { return toast(e.message, 'error'); } }
         return new Editor({...ctx, id, name, data, rev, dirty: !!ctx.data && !ctx.id}).open();
     }
+    /** choisir un ou des fichiers (ou un dossier entier) */
+    const pickFiles = (accept = '', multiple = false, folder = false) => new Promise(res => {
+        const i = document.createElement('input'); i.type = 'file'; if (accept) i.accept = accept; i.multiple = multiple || folder; if (folder) { i.webkitdirectory = true; i.setAttribute('webkitdirectory', ''); }
+        i.addEventListener('change', () => res([...(i.files || [])])); i.addEventListener('cancel', () => res([])); i.click();
+    });
+    const readData = file => new Promise((res, no) => { if (file.size > 750000) return no(new Error(`« ${file.name} » est trop lourde (750 Ko au plus pour une image du site ; les photos de ta généalogie passent par ＋ Blocs → Image).`)); const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = () => no(new Error(`« ${file.name} » illisible.`)); r.readAsDataURL(file); });
+    const readText = file => new Promise((res, no) => { const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = () => no(new Error(`« ${file.name} » illisible.`)); r.readAsText(file); });
+    /** 📂 Ouvrir un dossier : un site déjà fait (pages .html / .php, CSS, JS, morceaux PHP, images) devient un site de l'app.
+     *  Les pages à la racine deviennent des pages ; le reste devient des fichiers du site, à leur chemin. Rien n'est envoyé ailleurs. */
+    async function importFolder(ctx = {}, given = null) {
+        const all = given || await pickFiles('', true, true); if (!all.length) return;
+        const rel = f => String(f.webkitRelativePath || f.relPath || f.name).replace(/\\/g, '/');
+        const first = rel(all[0]).split('/')[0], strip = all.every(f => rel(f).split('/').length > 1 && rel(f).split('/')[0] === first);
+        const folderName = strip ? first : 'Mon site';
+        const skipped = [], pages = [], files = [], seen = new Set(); let css = null, js = null, total = 0;
+        const INC = /^(includes?|inc|partials?|templates?|parts?|components?)\//;
+        const list = all.map(f => ({f, path: (strip ? rel(f).split('/').slice(1).join('/') : rel(f))})).filter(x => x.path && !x.path.split('/').some(s => s.startsWith('.') || s === 'node_modules' || s === 'vendor' || s === '__MACOSX'));
+        const mainCss = list.find(x => /^(css\/)?(style|styles|main)\.css$/i.test(x.path)) || (list.filter(x => /\.css$/i.test(x.path)).length === 1 ? list.find(x => /\.css$/i.test(x.path)) : null);
+        const mainJs = list.find(x => /^(js\/)?(script|scripts|main|app)\.js$/i.test(x.path)) || (list.filter(x => /\.js$/i.test(x.path)).length === 1 ? list.find(x => /\.js$/i.test(x.path)) : null);
+        const refs = new Map(); // fichier css/js → pages qui le lient
+        for (const {f, path} of list) {
+            const e = extOf(path); let p = cleanPath(path); if (p.startsWith('images/')) p = 'img/' + p.slice(7); // « images/ » : réservé aux images de ta généalogie à l'export
+            if (!TEXT_EXT.includes(e) && !IMG_EXT.includes(e)) { skipped.push(`${path} (format)`); continue; }
+            if (f.size > 1000000) { skipped.push(`${path} (plus de 1 Mo)`); continue; }
+            if (IMG_EXT.includes(e)) { try { const url = await readData(f); total += url.length; if (total > 8000000) { skipped.push(`${path} (8 Mo en tout au plus)`); continue; } files.push({path: p, kind: 'image', content: url, pages: []}); } catch (err) { skipped.push(`${path} (${err.message.replace(/^« [^»]+ » /, '')})`); } continue; }
+            const text = await readText(f).catch(() => null); if (text === null) { skipped.push(`${path} (illisible)`); continue; }
+            if (mainCss && path === mainCss.path) { css = text; continue; }
+            if (mainJs && path === mainJs.path) { js = text; continue; }
+            if ((e === 'html' || e === 'htm' || e === 'php') && !p.includes('/') && !INC.test(p)) {
+                const base = p.replace(/\.[a-z]+$/, ''), isPhp = e === 'php';
+                let body = text, title = '', desc = '';
+                const t = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(text); if (t) title = t[1].replace(/<[^>]*>/g, '').trim();
+                const dm = /<meta[^>]+name=["']description["'][^>]*content=["']([^"']*)["']/i.exec(text); if (dm) desc = dm[1];
+                const head = (/<head[^>]*>([\s\S]*?)<\/head>/i.exec(text) || [])[1] || '';
+                for (const m of (head + text).matchAll(/<(?:link[^>]+href|script[^>]+src)=["']([^"'#?]+)/gi)) { const r = cleanPath(m[1].replace(/^\.\//, '')); if (!refs.has(r)) refs.set(r, new Set()); refs.get(r).add(base === 'index' ? 'index' : slugOf(base)); }
+                const b = /<body[^>]*>([\s\S]*)<\/body>/i.exec(text); if (b) body = b[1];
+                else if (/<html[\s>]/i.test(text)) body = text.replace(/[\s\S]*?<\/head>/i, '').replace(/<\/?html[^>]*>/gi, '');
+                if (isPhp && b) { const pre = text.slice(0, text.search(/<!doctype|<html/i)); if (/<\?php/i.test(pre)) body = pre.trim() + '\n' + body; } // le PHP d'avant le <!doctype> (sessions, include…) reste
+                body = body.replace(/<script[^>]+src=["']([^"']+)["'][^>]*><\/script>\s*/gi, (m, src) => (list.some(x => cleanPath(x.path) === cleanPath(src.replace(/^\.\//, ''))) ? '' : m)); // les scripts du site sont liés tout seuls
+                pages.push({name: title || base.replace(/[-_]+/g, ' ').replace(/^./, c => c.toUpperCase()), base, slug: base === 'index' ? 'index' : slugOf(base), ext: isPhp ? 'php' : 'html', title, desc, html: body.trim() + '\n', home: base === 'index'});
+                continue;
+            }
+            if (seen.has(p)) continue; seen.add(p);
+            files.push({path: p, kind: kindOfExt(e), content: text, pages: []});
+        }
+        if (!pages.length) return toast('Aucune page (.html ou .php) à la racine de ce dossier : est-ce bien le dossier du site ?', 'error');
+        pages.sort((a, b) => (b.home ? 1 : 0) - (a.home ? 1 : 0)); // index d'abord : la page d'accueil
+        // une page dont le nom de fichier change (Mon_Page.html → mon-page.html) : les liens vers elle suivent
+        pages.filter(x => x.slug !== x.base).forEach(x => { const re = new RegExp(`(href\\s*=\\s*["'](?:\\./)?)${x.base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\.(html?|php)(?=[#"'?])`, 'gi');
+            pages.forEach(y => { y.html = y.html.replace(re, `$1${x.slug}.${x.ext}`); }); files.forEach(f => { if (f.kind === 'html' || f.kind === 'php') f.content = f.content.replace(re, `$1${x.slug}.${x.ext}`); }); });
+        const slugs = pages.map(x => x.slug);
+        files.forEach(f => { if (f.kind !== 'css' && f.kind !== 'js') return; const on = [...(refs.get(f.path) || [])].filter(s => slugs.includes(s)); f.pages = on.length && on.length < pages.length ? on : []; });
+        // les images rangées de « images/ » vers « img/ » : les adresses suivent (pages, feuilles, morceaux)
+        const moved = p => files.some(f => f.kind === 'image' && f.path === p);
+        const fixImg = t => (typeof t === 'string' ? t.replace(/(^|[\s"'(=/])images\/([a-z0-9\-_./]+)/gi, (m, a, r) => (moved('img/' + r.toLowerCase()) ? `${a}img/${r.toLowerCase()}` : m)) : t);
+        pages.forEach(x => { x.html = fixImg(x.html); }); files.forEach(f => { if (f.kind !== 'image') f.content = fixImg(f.content); }); css = fixImg(css);
+        const b = blankSite();
+        const data = {...b, settings: {...b.settings, title: pages[0].title || folderName, tpl: 'import'}, css: css ?? '', js: js ?? '', pages: pages.map(({home, base, ...x}) => ({...x, id: newId()})), files: files.map(f => ({...f, id: `f${newId().slice(1)}`}))};
+        const ed = await openSite({...ctx, data, name: folderName});
+        toast(`📂 « ${folderName} » : ${plural(pages.length, 'page')}, ${plural(files.length + (css !== null) + (js !== null), 'fichier')}${skipped.length ? ` ; laissé de côté : ${skipped.slice(0, 4).join(', ')}${skipped.length > 4 ? '…' : ''}` : ''}. Enregistre (💾) pour le garder.`, skipped.length ? 'info' : 'success');
+        return ed;
+    }
     async function chooseTemplate(ctx = {}) {
         const k = K();
         ext.openDialog({eyebrow: 'MON SITE WEB', title: '＋ Nouveau site : par où commencer ?', wide: true, submitLabel: 'Fermer',
@@ -1385,7 +1506,7 @@
                 try { const t = k.TEMPLATES.find(x => x.key === b.dataset.tpl); const data = await t.make(); if (!data) return; return openSite({...ctx, data, name: data.settings?.title || t.name}); } catch (err) { toast(err.message, 'error'); }
             }), onSubmit: () => {}});
     }
-    ext.siteWeb = {Editor, open: openSite, chooseTemplate, normalizeSite, blankSite, themeCss, current: null};
+    ext.siteWeb = {Editor, open: openSite, chooseTemplate, importFolder, normalizeSite, blankSite, themeCss, current: null};
     ext.openWebsite = openSite;
 
     /* ═════ Dans 🛠️ Outils de modification ═════ */

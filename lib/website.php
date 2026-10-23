@@ -32,7 +32,10 @@ const SITE_VERSIONS_MAX = 100;
 const SITE_FILES_MAX = 300;
 const SITE_FILE_MAX = 1000000;       // un fichier
 const SITE_FILES_TOTAL = 8000000;    // tous les fichiers
-const SITE_FILE_KINDS = ['css' => 'css', 'js' => 'js', 'php' => 'php', 'html' => 'html', 'htm' => 'html', 'json' => 'json', 'txt' => 'txt', 'md' => 'txt', 'csv' => 'txt', 'xml' => 'txt'];
+const SITE_FILE_KINDS = ['css' => 'css', 'js' => 'js', 'php' => 'php', 'html' => 'html', 'htm' => 'html', 'json' => 'json', 'txt' => 'txt', 'md' => 'txt', 'csv' => 'txt', 'xml' => 'txt',
+    'png' => 'image', 'jpg' => 'image', 'jpeg' => 'image', 'gif' => 'image', 'webp' => 'image', 'svg' => 'image', 'ico' => 'image', 'avif' => 'image'];
+/** 🖼 une image du site (dossier importé…) : gardée en « data: » dans le JSON, écrite en vrai fichier à l'export */
+const SITE_IMAGE_DATA = '#^data:image/(png|jpeg|gif|webp|svg\+xml|x-icon|vnd\.microsoft\.icon|avif);base64,[A-Za-z0-9+/=\s]+$#';
 const SITE_IMG_MAX = 1600;
 const SITE_REDACTED = '[nom retiré]';
 const SITE_BLOCK_KINDS = ['menu', 'person', 'tree', 'timeline', 'map', 'chart', 'photos', 'place', 'diagram'];
@@ -289,7 +292,8 @@ function website_check(mixed $data): array
         $total += strlen($content);
         if ($total > SITE_FILES_TOTAL) { throw new LcndaBadInput('Les fichiers en plus sont trop lourds (8 Mo en tout au plus).'); }
         $kind = SITE_FILE_KINDS[pathinfo($path, PATHINFO_EXTENSION)];
-        $clean = match ($kind) { 'css' => website_css_clean($content), 'js' => website_js_clean($content), 'html' => website_defuse($content, $removed), 'php' => website_defuse_php($content, $removed), default => str_replace("\0", '', $content) };
+        if ($kind === 'image' && !preg_match(SITE_IMAGE_DATA, $content)) { $removed++; continue; } // une image : seulement « data:image/…;base64, »
+        $clean = match ($kind) { 'css' => website_css_clean($content), 'js' => website_js_clean($content), 'html' => website_defuse($content, $removed), 'php' => website_defuse_php($content, $removed), 'image' => preg_replace('#\s+#', '', $content), default => str_replace("\0", '', $content) };
         if ($kind === 'css' && $clean !== $content) { $removed++; }
         $paths[$path] = true;
         $id = is_string($f['id'] ?? null) && preg_match('/^[a-z0-9\-_]{1,40}$/i', $f['id']) ? $f['id'] : 'f' . bin2hex(random_bytes(4));
@@ -1118,9 +1122,10 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
     [$cssRed, $n2] = website_redact($pdo, $css); $sum['names'] += $n2;
     [$js, $n3] = website_redact($pdo, $site['js']); $sum['names'] += $n3;
     // 📁 les fichiers en plus, vérifiés comme le reste : images de la base (sans personne cachée), noms cachés retirés
-    $extra = [];
+    $extra = []; $imgs = [];
     foreach (is_array($site['files'] ?? null) ? $site['files'] : [] as $f) {
         $c = (string) $f['content'];
+        if ($f['kind'] === 'image') { $imgs[$f['path']] = $c; $extra[$f['path']] = $c; continue; } // ni texte ni noms : l'image telle quelle
         if ($f['kind'] === 'html' || $f['kind'] === 'php') { [$c, $n4] = website_html_body($pdo, $site, $c, '', $img, $mode, $asset); $sum['names'] += $n4; } // inclus depuis une page : adresses depuis la racine
         else {
             if ($f['kind'] === 'css') { $c = website_css_with_media($pdo, $c, $img, $refusedCss, str_repeat('../', substr_count($f['path'], '/'))); }
@@ -1128,11 +1133,17 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
         }
         $extra[$f['path']] = $c;
     }
+    // 🖼 aperçu (tout dans un fichier) : les adresses des images du site deviennent leurs « data: »
+    if ($mode === 'inline' && $imgs) {
+        $cssRed = website_inline_images($cssRed, $imgs);
+        foreach ($extra as $p => $c) { if (!isset($imgs[$p])) { $extra[$p] = website_inline_images($c, $imgs); } }
+    }
     $sum['files'] = count($extra);
     foreach ($pages as $i => $body) {
         $slug = $site['pages'][$i]['slug'];
         $x = [];
         foreach (['css', 'js'] as $kind) { foreach (website_page_assets($site, $slug, $kind) as $f) { $x[$kind][$f['path']] = $extra[$f['path']]; } }
+        if ($mode === 'inline' && $imgs) { $body = website_inline_images($body, $imgs); }
         $files[website_page_file($site['pages'][$i], $i)] = $mode === 'inline' ? website_document($site, $i, $body, $cssRed, $js, 'preview', isset($livePages[$i]), $x) : website_document($site, $i, $body, null, null, 'export', isset($livePages[$i]), $x);
     }
     // les liens vers une page qui n'existe plus (supprimée) : comptés pour le dire avant l'export
@@ -1142,12 +1153,22 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
     if ($mode !== 'inline') {
         $files['css/style.css'] = $cssRed;
         if (trim($js) !== '') { $files['js/script.js'] = $js; }
-        foreach ($extra as $p => $c) { $files[$p] = $c; } // les chemins ont été vérifiés par website_check (ni réservés, ni en double)
+        foreach ($extra as $p => $c) { $files[$p] = isset($imgs[$p]) ? (string) base64_decode(substr($c, (int) strpos($c, ',') + 1), true) : $c; } // les chemins ont été vérifiés par website_check (ni réservés, ni en double) ; une image : ses octets
         [$txt, $htm] = website_readme($site, $files, (bool) $livePages);
         $files['LISEZ-MOI.txt'] = $txt;
         $files['LISEZ-MOI.html'] = $htm;
     }
     return ['files' => $files, 'summary' => $sum, 'extra' => $extra];
+}
+
+/** src="img/a.png", url(../img/a.png)… → l'image en « data: » (aperçu dans un seul fichier) */
+function website_inline_images(string $text, array $imgs): string
+{
+    if ($text === '' || !$imgs) { return $text; }
+    return (string) preg_replace_callback('#((?:src|href|poster)\s*=\s*["\']|url\(\s*["\']?)((?:\./|\.\./)*)([a-z0-9\-_./]+\.(?:png|jpe?g|gif|webp|svg|ico|avif))(?=["\')?\#\s])#i', static function ($m) use ($imgs) {
+        $p = strtolower($m[3]);
+        return isset($imgs[$p]) ? $m[1] . $imgs[$p] : $m[0];
+    }, $text);
 }
 
 /** Petit bout de HTML des blocs pour l'aperçu de l'app (images en media/…, rien de caché) */
