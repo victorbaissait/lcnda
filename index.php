@@ -64,7 +64,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/meteo.css?v=2">
     <link rel="stylesheet" href="assets/css/suivi.css?v=4">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
-    <link rel="stylesheet" href="assets/css/mode-simple.css?v=6">
+    <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
     <link rel="stylesheet" href="assets/css/tableur.css?v=3">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
@@ -1172,7 +1172,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-formats.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=5" defer></script>
 <script src="assets/js/app-access.js?v=9" defer></script>
-<script src="assets/js/app-mode-simple.js?v=8" defer></script>
+<script src="assets/js/app-mode-simple.js?v=9" defer></script>
 <script src="assets/js/app-sidegroups.js?v=11" defer></script>
 <script src="assets/js/app-listes.js?v=35" defer></script>
 <script src="assets/js/app-maintenance.js?v=28" defer></script>

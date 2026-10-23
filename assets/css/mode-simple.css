@@ -479,3 +479,28 @@ html.ms-open.ms-own-cb { filter: none !important; } /* un daltonisme « propre a
 :root[data-theme="dark"] .ms-host{background:#232323}
 :root[data-theme="dark"] .ms-tablet-in{background:#232323}
 /* ═════ fin du mode sombre automatique ═════ */
+
+/* gros boutons ajoutés : à compléter (aperçu), groupes du bouton « ＋ Ajouter un cadre », nouveaux écrans */
+.ms .ms-tile.is-todo { opacity: .6; border-style: dashed; }
+.ms-tadd-g { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; width: 100%; }
+.ms-tadd-h { min-width: 140px; font-weight: 600; opacity: .75; }
+.ms-tmedia { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ms-tthumb { width: 34px; height: 34px; object-fit: cover; border-radius: 4px; vertical-align: middle; }
+.ms-quiz { text-align: center; }
+.ms-quiz-ph { display: flex; justify-content: center; margin: 10px 0 18px; }
+.ms-quiz-opts { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--gap); }
+.ms-quiz-opts .ms-btn { min-width: 220px; font-size: 1.25em; justify-content: center; }
+.ms-quiz-opts .ms-btn.is-wrong { opacity: .4; text-decoration: line-through; }
+.ms-clock { text-align: center; padding-top: 4vh; }
+.ms-clock-t { font-size: clamp(90px, 20vw, 220px); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.ms-clock-t span { opacity: .6; }
+.ms-clock-d { font-size: clamp(28px, 4.5vw, 52px); font-weight: 700; margin-top: 18px; }
+.ms-clock-p { font-size: 1.3em; color: var(--muted); margin: 8px 0 26px; }
+.ms-call { text-align: center; }
+.ms-call-n { font-size: clamp(44px, 9vw, 96px); font-weight: 800; letter-spacing: .04em; margin: 16px 0; font-variant-numeric: tabular-nums; }
+.ms-call .ms-row, .ms-clock .ms-row, .ms-av .ms-row { justify-content: center; }
+.ms-av { text-align: center; }
+.ms-av-v { width: 100%; max-height: 62vh; background: #000; border: var(--bw) solid var(--bd); }
+.ms-av-a { font-size: 120px; line-height: 1.2; }
+.ms-av audio { width: min(640px, 100%); margin: 10px auto; display: block; }
+.ms-prow.is-today { outline: 3px solid var(--blue); }

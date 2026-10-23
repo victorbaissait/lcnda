@@ -135,7 +135,19 @@ function mode_simple_data(PDO $pdo): array
         $pid = (int) $r['id']; $mid = (int) $r['portrait_media_id'];
         if ($mid && isset($media[$mid], $persons[$pid]) && !in_array($pid, $media[$mid]['people'], true)) { $media[$mid]['people'][] = $pid; }
     }
+    // films et sons (les gros boutons « 🎬 Un film » et « 🎵 Un son ») : seulement leur titre, leur fichier et les personnes rattachées
+    $av = [];
+    foreach ($pdo->query("SELECT id, title, filename, media_type, date_text FROM media WHERE lower(COALESCE(media_type,'')) IN ('video','audio') AND trim(COALESCE(filename,''))<>'' ORDER BY id") as $r) {
+        $src = ms_media_src($r['filename'], null);
+        $av[(int) $r['id']] = ['id' => (int) $r['id'], 'title' => trim((string) $r['title']), 'type' => strtolower((string) $r['media_type']), 'src' => $src['src'], 'date' => ms_date($r['date_text']), 'people' => []];
+    }
+    if ($av) {
+        foreach ($pdo->query("SELECT media_id, entity_id FROM media_links WHERE entity_type='person' ORDER BY media_id, id") as $l) {
+            $mid = (int) $l['media_id']; $pid = (int) $l['entity_id'];
+            if (isset($av[$mid], $persons[$pid]) && !in_array($pid, $av[$mid]['people'], true)) { $av[$mid]['people'][] = $pid; }
+        }
+    }
     $start = 0;
     foreach ($persons as $p) { if ($p['start']) { $start = $p['id']; break; } }
-    return ['persons' => array_values($persons), 'families' => $families, 'media' => array_values($media), 'start' => $start, 'today' => date('Y-m-d')];
+    return ['persons' => array_values($persons), 'families' => $families, 'media' => array_values($media), 'av' => array_values($av), 'start' => $start, 'today' => date('Y-m-d')];
 }

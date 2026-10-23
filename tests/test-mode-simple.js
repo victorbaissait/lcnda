@@ -330,6 +330,30 @@ const ok = (msg) => console.log('  ✓ ' + msg);
         assert.deepEqual(posts.filter(p => !/save_settings/.test(p)), [], 'aucune écriture pendant le mode');
         await page.evaluate(() => window.LCNDA_EXT.modeSimple.close());
         ok('gros boutons : ordre, nom, icône, couleur, 3 par ligne, « Une personne », « Un mot », ensemble prêt et réglages enregistrés');
+        /* d'autres sortes de gros boutons : lieu, famille proche, anniversaires, l'heure, appeler, des photos choisies ; un cadre à compléter se voit dans l'aperçu, pas sur la tablette */
+        {
+            const media = (await (await fetch(base + 'api.php?action=mode_simple_data')).json()).media, acte = media.find(m => m.title.startsWith('Acte')).id;
+            await page.evaluate(({acte}) => { const M = window.LCNDA_EXT.modeSimple, s = M.settings(); s.viewer = 0; s.notInTree = false;
+                const add = (id, x) => { s.tiles.push([id, true]); s.tx[id] = x; };
+                add('c20', {kind: 'place', place: 'Tulle'}); add('c21', {kind: 'family'}); add('c22', {kind: 'bdays'}); add('c23', {kind: 'clock'}); add('c24', {kind: 'call', tel: '06 12 34 56 78', label: 'Appeler Julie'});
+                add('c25', {kind: 'pick', mids: [acte]}); add('c26', {kind: 'video'}); add('c27', {kind: 'quiz'}); M.write(s); }, {acte});
+            await page.click('[data-ms-set="perRow"][data-v="3"]'); await page.waitForTimeout(600); // redessine l'aperçu
+            const pv = await page.evaluate(() => [...document.querySelectorAll('[data-ms-pv-host] .ms-tile')].map(t => t.dataset.to + (t.classList.contains('is-todo') ? '?' : '')));
+            assert.ok(pv.includes('c26?'), 'le film à choisir se voit en pointillés dans l’aperçu : ' + pv);
+            await page.click('[data-ms-open="now"]'); await page.waitForSelector('#ms-root .ms-home');
+            const tiles = await page.evaluate(() => [...document.querySelectorAll('#ms-root .ms-tile')].map(t => t.dataset.to));
+            assert.ok(['c20', 'c21', 'c22', 'c23', 'c24', 'c25'].every(k => tiles.includes(k)), 'les nouveaux cadres : ' + tiles);
+            assert.ok(!tiles.includes('c26') && !tiles.includes('c27'), 'film non choisi, jeu sans 3 portraits : cachés');
+            const open = async (k, sel, re) => { await page.click(`#ms-root [data-to="${k}"]`); await page.waitForSelector('#ms-root ' + sel); if (re) assert.match(await page.textContent('#ms-root .ms-main'), re); await page.click('#ms-root [data-act=home]'); await page.waitForSelector('#ms-root .ms-home'); };
+            await open('c20', '.ms-grp', /Tulle[\s\S]*Mariés ici/);
+            await open('c21', '.ms-grp', /Tes enfants/);
+            await open('c22', '.ms-soon', /ans/);
+            await open('c23', '.ms-clock-t', /C’est (le matin|l’après-midi|le soir)/);
+            await open('c24', '.ms-call-n', /06 12 34 56 78/);
+            await open('c25', '.ms-slides', /Acte de naissance/);
+            await page.evaluate(() => window.LCNDA_EXT.modeSimple.close());
+            ok('d’autres gros boutons : un lieu, la famille proche, les anniversaires, l’heure, appeler, des photos choisies (même un document) ; à compléter = visible dans l’aperçu seulement');
+        }
         /* widget et « Ouvrir l'app en mode simple sur cet appareil » */
         await page.evaluate(() => localStorage.setItem('lcnda-mode-simple-device', JSON.stringify({start: true})));
         await page.goto(base); await page.waitForSelector('#ms-root .ms-home', { timeout: 15000 });

@@ -42,10 +42,17 @@
     /* ═════════════════════════ Réglages ═════════════════════════ */
     const TILE_KEYS = ['tree', 'photo', 'people', 'day'];
     /** les cadres qu'on ajoute (« ＋ Ajouter un cadre ») : [icône, nom, petite phrase, couleur de départ (celle d'un cadre de base)] */
-    const CUSTOM_KINDS = {person: ['⭐', 'Une personne', 'Sa fiche, en phrases', 'people'], album: ['📸', 'Un album', 'Ses photos, en diaporama', 'photo'], note: ['💌', 'Un mot de la famille', 'À lire et à écouter', 'day'], house: ['🏠', 'La maison', 'La regarder en 3D, étage par étage', 'tree']};
-    const TILE_ICONS = ['🌳', '📷', '👥', '🎂', '⭐', '📸', '💌', '❤️', '🏠', '👵', '👴', '👶', '🐶', '🌻', '🎵', '📖', '✉️', '🎉', '⛪', '🌍', '⚓', '🚜', '🍰', '☀️'];
+    const CUSTOM_KINDS = {person: ['⭐', 'Une personne', 'Sa fiche, en phrases', 'people'], album: ['📸', 'Un album', 'Ses photos, en diaporama', 'photo'], note: ['💌', 'Un mot de la famille', 'À lire et à écouter', 'day'], house: ['🏠', 'La maison', 'La regarder en 3D, étage par étage', 'tree'],
+        photo1: ['🖼', 'Une photo', 'En grand, avec sa légende', 'photo'], pick: ['🗂', 'Des photos choisies', 'En diaporama', 'photo'], random: ['🎲', 'Des photos au hasard', 'Une surprise à chaque fois', 'photo'],
+        video: ['🎬', 'Un film de famille', 'À regarder en grand', 'day'], audio: ['🎵', 'Un son, une chanson', 'À écouter', 'day'],
+        family: ['🏡', 'Ma famille proche', 'Parents, enfants, petits-enfants', 'people'], bdays: ['🎈', 'Les anniversaires', 'Ceux qui arrivent', 'day'], place: ['📍', 'Un lieu de famille', 'Ses photos, ceux qui y sont nés', 'tree'],
+        quiz: ['❓', 'Qui est-ce ?', 'Un petit jeu avec les portraits', 'people'], clock: ['🕰', 'L’heure et la date', 'En très grand', 'tree'], call: ['📞', 'Appeler quelqu’un', 'Son numéro en grand', 'people']};
+    /** les sortes de cadres, rangées pour le bouton « ＋ Ajouter un cadre » */
+    const KIND_GROUPS = [['Famille', ['person', 'family', 'bdays', 'quiz', 'call']], ['Photos, films, sons', ['album', 'photo1', 'pick', 'random', 'video', 'audio']], ['Lieux et souvenirs', ['house', 'place', 'note', 'clock']]];
+    const TILE_ICONS = ['🌳', '📷', '👥', '🎂', '⭐', '📸', '💌', '❤️', '🏠', '👵', '👴', '👶', '🐶', '🌻', '🎵', '📖', '✉️', '🎉', '⛪', '🌍', '⚓', '🚜', '🍰', '☀️',
+        '🖼', '🗂', '🎲', '🎬', '📺', '📻', '🎶', '🏡', '🎈', '📍', '🗺', '❓', '🕰', '⏰', '📞', '☎️', '👨‍👩‍👧', '💍', '🎄', '🌷', '🐱', '🐦', '⛵', '🚂', '✈️', '🏖', '⛰', '🍎', '🧶', '⚽', '🎨', '🙏', '🕊', '💐'];
     const isCustom = k => typeof k === 'string' && /^c\d{1,9}$/.test(k);
-    const MAX_CUSTOM = 12;
+    const MAX_CUSTOM = 24;
     const DEF = () => ({
         v: 1, ready: false,
         viewer: 0, notInTree: false, askViewer: false,
@@ -89,9 +96,13 @@
             if (lb) y.label = lb; if (sb) y.sub = sb; if (TILE_ICONS.includes(x.icon)) y.icon = x.icon;
             if (isCustom(k)) {
                 y.kind = x.kind; const c = HEX(x.color); if (c) y.color = c;
-                if (x.kind === 'note') { const tt = typeof x.text === 'string' ? x.text.replace(/[<>\u0000-\u0009\u000b-\u001f\u007f]/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 800) : ''; if (tt) y.text = tt; }
-                else if (x.kind === 'house') { const hid = Math.round(num(x.hid, 0, 1e9, 0)); if (hid) y.hid = hid; }
-                else { const pid = Math.round(num(x.pid, 0, 1e9, 0)); if (pid) y.pid = pid; }
+                if (x.kind === 'note' || x.kind === 'call') { const tt = typeof x.text === 'string' ? x.text.replace(/[<>\u0000-\u0009\u000b-\u001f\u007f]/g, '').replace(/\n{3,}/g, '\n\n').trim().slice(0, 800) : ''; if (tt) y.text = tt; }
+                if (x.kind === 'house') { const hid = Math.round(num(x.hid, 0, 1e9, 0)); if (hid) y.hid = hid; }
+                else if (x.kind === 'person' || x.kind === 'album') { const pid = Math.round(num(x.pid, 0, 1e9, 0)); if (pid) y.pid = pid; }
+                else if (['photo1', 'video', 'audio'].includes(x.kind)) { const mid = Math.round(num(x.mid, 0, 1e9, 0)); if (mid) y.mid = mid; }
+                else if (x.kind === 'pick') { const l = [...new Set((Array.isArray(x.mids) ? x.mids : []).map(Number).filter(n => Number.isInteger(n) && n > 0))].slice(0, 300); if (l.length) y.mids = l; }
+                else if (x.kind === 'place') { const pl = txt(x.place, 80); if (pl) y.place = pl; }
+                else if (x.kind === 'call') { const tel = typeof x.tel === 'string' ? x.tel.replace(/[^\d+ ().-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 30) : ''; if (/\d{2}/.test(tel)) y.tel = tel; }
             }
             if (Object.keys(y).length) tx[k] = y;
         });
@@ -169,7 +180,20 @@
         const p = x.pid && D ? D.P.get(Number(x.pid)) : null;
         if (x.kind === 'person' && p) return `${p.first || ''} ${titleCase(p.last || '')}`.trim();
         if (x.kind === 'album' && p) return `Les photos de ${p.first || titleCase(p.last || '')}`;
+        if (x.kind === 'place' && x.place) return x.place;
         return CUSTOM_KINDS[x.kind]?.[1] || 'Un cadre';
+    }
+    /** ce qui manque à un cadre ajouté pour apparaître (vide : il est prêt à être montré) */
+    function tileNeed(x) {
+        return {note: x.text ? '' : 'Écris le mot', house: x.hid ? '' : 'Choisis la maison', person: x.pid ? '' : 'Choisis la personne', album: x.pid ? '' : 'Choisis la personne',
+            photo1: x.mid ? '' : 'Choisis la photo', pick: x.mids?.length ? '' : 'Choisis les photos', video: x.mid ? '' : 'Choisis le film', audio: x.mid ? '' : 'Choisis le son',
+            place: x.place ? '' : 'Choisis le lieu', call: x.tel ? '' : 'Écris le numéro'}[x.kind] || '';
+    }
+    /** les lieux connus (naissances, mariages, décès, photos), les plus fréquents d'abord */
+    function knownPlaces() {
+        if (!D) return []; const n = new Map(), add = pl => { pl = String(pl || '').trim(); if (pl) n.set(pl, (n.get(pl) || 0) + 1); };
+        D.P.forEach(p => { add(p.birth?.place); add(p.bapt?.place); add(p.death?.place); }); D.F.forEach(f => add(f.marr?.place)); D.media.forEach(m => add(m.place));
+        return [...n].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr')).map(x => x[0]);
     }
     const FONTS = {
         '': {label: 'Inter (celle du prototype)', stack: "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif"},
@@ -212,7 +236,8 @@
             f.c.forEach(c => { if (!parentFam.has(c)) parentFam.set(c, f); const ps = parentsOf.get(c) || []; [f.a, f.b].filter(Boolean).forEach(x => ps.includes(x) || ps.push(x)); parentsOf.set(c, ps); });
         });
         (r.media || []).forEach(m => M.set(m.id, m));
-        return {P, F: r.families || [], M, media: r.media || [], parentsOf, famsOf, parentFam, start: r.start || 0, anc: new Map(), rel: new Map()};
+        const AV = new Map(); (r.av || []).forEach(m => AV.set(m.id, m));
+        return {P, F: r.families || [], M, AV, media: r.media || [], parentsOf, famsOf, parentFam, start: r.start || 0, anc: new Map(), rel: new Map()};
     }
     function loadData(force = false) {
         if (D && !force) return Promise.resolve(D);
@@ -327,13 +352,13 @@
 
     /* ═════════════════════════ Le mode : un « moteur » dessiné dans un cadre ═════════════════════════
      * Le même moteur sert au plein écran, à « 👁 Essayer ici » (dans la page des réglages) et à l'aperçu vivant (non cliquable). */
-    const TITLES = {who: ['👋', 'Qui regarde ?'], tree: ['🌳', 'L’arbre'], photos: ['📷', 'Les photos'], slides: ['📷', 'Les photos'], person: ['👤', 'Sa fiche'], note: ['💌', 'Un mot'], house: ['🏠', 'La maison'], people: ['👥', 'Les personnes'], day: ['🎂', 'Ce jour-là'], code: ['🔒', 'Quitter'], loading: ['', 'Un instant…'], error: ['', 'Mode simple']};
+    const TITLES = {who: ['👋', 'Qui regarde ?'], tree: ['🌳', 'L’arbre'], photos: ['📷', 'Les photos'], slides: ['📷', 'Les photos'], person: ['👤', 'Sa fiche'], note: ['💌', 'Un mot'], house: ['🏠', 'La maison'], family: ['🏡', 'Ma famille proche'], bdays: ['🎈', 'Les anniversaires'], quiz: ['❓', 'Qui est-ce ?'], clock: ['🕰', 'L’heure et la date'], call: ['📞', 'Appeler'], media: ['🎬', 'Un film'], place: ['📍', 'Un lieu'], people: ['👥', 'Les personnes'], day: ['🎂', 'Ce jour-là'], code: ['🔒', 'Quitter'], loading: ['', 'Un instant…'], error: ['', 'Mode simple']};
     const TILE = {tree: ['🌳', 'L’arbre', 'Toute la famille, de case en case'], photo: ['📷', 'Les photos', ''], people: ['👥', 'Les personnes', 'Chercher quelqu’un par son nom'], day: ['🎂', 'Ce jour-là', '']};
 
     function makeMode(host, opts = {}) {
         const live = !opts.preview, full = !!opts.full;
         let S = opts.settings ? clean(opts.settings) : read();
-        const V = {screen: 'home', note: '', stack: [], center: 0, zoom: 3, slide: 0, slideList: null, slideTags: false, slideTimer: 0, peopleTab: 'family', letter: null, query: '', choosing: false, code: '', photoFilter: 'all', person: 0, viewer: null, auto: false};
+        const V = {screen: 'home', note: '', slideAny: false, quiz: null, quizN: 0, stack: [], center: 0, zoom: 3, slide: 0, slideList: null, slideTags: false, slideTimer: 0, peopleTab: 'family', letter: null, query: '', choosing: false, code: '', photoFilter: 'all', person: 0, viewer: null, auto: false};
         host.innerHTML = `<div class="ms" role="region" aria-label="Mode simple"><header class="ms-bar"></header><main class="ms-main"></main><div class="ms-msg" role="status" aria-live="polite" hidden></div></div>`;
         const GP = host.firstElementChild, BAR = $('.ms-bar', GP), MAIN = $('.ms-main', GP), MSG = $('.ms-msg', GP);
         if (!live) GP.setAttribute('inert', '');
@@ -399,7 +424,7 @@
             if (full) document.documentElement.classList.toggle('ms-own-cb', !S.link.cb);
         }
         /* ── navigation ── */
-        const snapshot = () => ({screen: V.screen, house: V.house, houseTitle: V.houseTitle, note: V.note, center: V.center, slide: V.slide, slideList: V.slideList, person: V.person, peopleTab: V.peopleTab, letter: V.letter, choosing: V.choosing, slideTags: V.slideTags});
+        const snapshot = () => ({screen: V.screen, house: V.house, houseTitle: V.houseTitle, note: V.note, slideAny: V.slideAny, center: V.center, slide: V.slide, slideList: V.slideList, person: V.person, peopleTab: V.peopleTab, letter: V.letter, choosing: V.choosing, slideTags: V.slideTags});
         function go(screen, o = {}) { stopSlide(); stopSpeak(); if ((o.push !== false && V.screen !== screen) || o.forcePush) V.stack.push(snapshot()); Object.assign(V, o.state || {}); V.screen = screen; render(true); }
         function back() { stopSlide(); stopSpeak(); const s = V.stack.pop(); if (!s) { goHome(); return; } Object.assign(V, s); render(true); }
         function goHome() { stopSlide(); stopSpeak(); V.stack = []; V.screen = 'home'; V.choosing = false; render(true); }
@@ -410,14 +435,14 @@
                 BAR.innerHTML = `<span class="ms-date">📅 ${esc(d.charAt(0).toUpperCase() + d.slice(1))}</span><span></span>${speakBtn(homeSpeech(), 'Écouter') || '<span></span>'}`; return;
             }
             if (V.screen === 'loading' || V.screen === 'error') { BAR.innerHTML = `<span></span><h1 class="ms-title" tabindex="-1">${esc(TITLES[V.screen][1])}</h1><span></span>`; return; }
-            const [ic, t] = V.screen === 'note' && V.note ? (() => { const x = tileOf(V.note); return [x.icon, x.label]; })() : (TITLES[V.screen] || ['', '']);
+            const [ic, t] = ['note', 'call', 'media', 'place'].includes(V.screen) && V.note ? (() => { const x = tileOf(V.note); return [x.icon, x.label]; })() : (TITLES[V.screen] || ['', '']);
             const noHome = V.screen === 'who' && !V.stack.length;
             BAR.innerHTML = `<button type="button" class="ms-btn" data-act="back" aria-label="Retour à l’écran d’avant"><span class="ms-ico" aria-hidden="true">←</span><span class="ms-lbl">Retour</span></button><h1 class="ms-title" tabindex="-1">${ic ? `<span aria-hidden="true">${ic}</span> ` : ''}${esc(t)}</h1>${noHome ? '<span></span>' : '<button type="button" class="ms-btn" data-act="home" aria-label="Accueil"><span class="ms-ico" aria-hidden="true">🏠</span><span class="ms-lbl">Accueil</span></button>'}`;
         }
         function render(focus) {
             applyLook(); bar(); MAIN.className = 'ms-main'; MAIN.scrollTop = 0;
             if (houseView && V.screen !== 'house') { try { houseView.destroy(); } catch (_) {} houseView = null; }
-            const r = {home: rHome, house: rHouse, note: rNote, who: rWho, tree: rTree, photos: rPhotos, slides: rSlides, person: rPerson, people: rPeople, day: rDay, code: rCode, loading: rLoading, error: rError}[V.screen] || rHome;
+            const r = {home: rHome, house: rHouse, note: rNote, family: rFamily, bdays: rBdays, quiz: rQuiz, clock: rClock, call: rCall, media: rMedia, place: rPlace, who: rWho, tree: rTree, photos: rPhotos, slides: rSlides, person: rPerson, people: rPeople, day: rDay, code: rCode, loading: rLoading, error: rError}[V.screen] || rHome;
             r();
             MAIN.firstElementChild?.classList.add('ms-fade');
             if (focus && live) { const t = $('h1', MAIN) || $('.ms-title', BAR); if (t && V.screen !== 'code' && V.screen !== 'people') { t.setAttribute('tabindex', '-1'); try { t.focus({preventScroll: true}); } catch (_) {} } }
@@ -467,17 +492,27 @@
             const ph2 = okP ? visPhotos().filter(m => !m.doc && m.people.includes(p.id)) : [];
             const label = x.label || (x.kind === 'person' && okP ? nameT(p) : x.kind === 'album' && okP ? `Les photos de ${p.first || nameT(p)}` : K[1]);
             const sub = x.sub || (x.kind === 'person' && okP ? (rel(p.id) ? (rel(p.id) === 'toi' ? 'C’est toi' : rel(p.id).charAt(0).toUpperCase() + rel(p.id).slice(1)) : years(p) || K[2]) : x.kind === 'album' ? plural(ph2.length, 'photo') : x.kind === 'note' && x.text ? x.text.slice(0, 70) + (x.text.length > 70 ? '…' : '') : K[2]);
-            if (x.kind === 'house') return {k, kind: 'house', base: K[3], icon: x.icon || K[0], label: x.label || K[1], sub: x.sub || K[2], color: E.contrast ? null : (x.color || null), hid: Number(x.hid) || 0, ready: !!x.hid};
+            const base = {k, kind: x.kind, base: K[3], icon: x.icon || K[0], label: x.label || tileName(S, k), color: E.contrast ? null : (x.color || null)};
+            if (x.kind === 'house') return {...base, sub: x.sub || K[2], hid: Number(x.hid) || 0, ready: !!x.hid};
+            if (x.kind === 'photo1' || x.kind === 'pick') { const ids = (x.kind === 'pick' ? x.mids || [] : [x.mid]).filter(id => D?.M.get(id) && !S.hiddenPhotos.includes(id)); return {...base, sub: x.sub || (x.kind === 'pick' ? plural(ids.length, 'photo') : D?.M.get(ids[0])?.title || K[2]), ids, ready: ids.length > 0}; }
+            if (x.kind === 'random') { const n = visPhotos().filter(m => !m.doc).length; return {...base, sub: x.sub || K[2], ready: n > 0}; }
+            if (x.kind === 'video' || x.kind === 'audio') { const m = D?.AV?.get(Number(x.mid)); return {...base, sub: x.sub || m?.title || K[2], mid: m ? m.id : 0, ready: !!m && m.type === x.kind}; }
+            if (x.kind === 'family') return {...base, sub: x.sub || K[2], ready: !!(viewerId() && P(viewerId()))};
+            if (x.kind === 'bdays') { const n = bdayList().length; return {...base, sub: x.sub || (n ? K[2] : 'Aucun pour l’instant'), ready: n > 0}; }
+            if (x.kind === 'place') { const d = x.place ? placeData(x.place) : null; return {...base, sub: x.sub || (d ? [d.photos.length ? plural(d.photos.length, 'photo') : '', d.people.length ? plural(d.people.length, 'personne') : ''].filter(Boolean).join(' · ') || K[2] : K[2]), ready: !!d && (d.photos.length + d.people.length) > 0}; }
+            if (x.kind === 'quiz') return {...base, sub: x.sub || K[2], ready: quizPool().length >= 3};
+            if (x.kind === 'clock') return {...base, sub: x.sub || K[2], ready: true};
+            if (x.kind === 'call') return {...base, sub: x.sub || x.tel || K[2], tel: x.tel || '', text: x.text || '', ready: !!x.tel};
             const ready = x.kind === 'note' ? !!x.text : x.kind === 'album' ? okP && ph2.length > 0 : !!okP;
             return {k, kind: x.kind, base: K[3], icon: x.icon || K[0], label, sub, color: E.contrast ? null : (x.color || null), pid: okP ? p.id : 0, text: x.text || '', photos: ph2, ready};
         }
-        const homeTiles = () => S.tiles.filter(t => t[1]).map(t => tileOf(t[0])).filter(t => t && (!isCustom(t.k) || t.ready));
+        const homeTiles = () => S.tiles.filter(t => t[1]).map(t => tileOf(t[0])).filter(t => t && (!isCustom(t.k) || t.ready || !live)); // l'aperçu montre aussi un cadre à compléter (en pointillés)
         const homeSpeech = () => { const n = viewerFirst(), t = homeTiles().map(x => x.label.replace(/^(L’|Les |Ce |Un |Une )/, m => m.toLowerCase())); return `Bonjour${n ? ' ' + n : ''}. Touche un gros bouton : ${joinFr(t)}.`; };
         function rHome() {
             const n = viewerFirst(), cnt = dayData().today.length, tiles = homeTiles();
             const sub = t => (isCustom(t.k) || t.sub ? t.sub : t.k === 'photo' ? `${plural(visPhotos().length, 'photo')} de famille` : t.k === 'day' ? (cnt ? 'Il se passe quelque chose aujourd’hui !' : 'Anniversaires et souvenirs') : TILE[t.k][2]);
             MAIN.innerHTML = `<div class="ms-home"><div class="ms-hello"><div><h1 tabindex="-1">Bonjour${n ? ' ' + esc(n) : ''} !</h1><p>Touche un gros bouton pour commencer.</p></div></div>
-                <div class="ms-tiles" data-n="${tiles.length}">${tiles.map(t => `<button type="button" class="ms-tile k-${t.base}${isCustom(t.k) ? ' is-added' : ''}" data-act="tile" data-to="${t.k}"${t.color ? ` style="background:${t.color}"` : ''}><span class="ms-big" aria-hidden="true">${esc(t.icon)}</span><span><b>${esc(t.label)}</b><small>${esc(sub(t))}</small>${t.k === 'day' && cnt ? `<span class="ms-badge">${plural(cnt, 'souvenir')} aujourd’hui</span>` : ''}</span></button>`).join('')}</div>
+                <div class="ms-tiles" data-n="${tiles.length}">${tiles.map(t => `<button type="button" class="ms-tile k-${t.base}${isCustom(t.k) ? ' is-added' : ''}${isCustom(t.k) && !t.ready ? ' is-todo' : ''}" data-act="tile" data-to="${t.k}"${t.color ? ` style="background:${t.color}"` : ''}><span class="ms-big" aria-hidden="true">${esc(t.icon)}</span><span><b>${esc(t.label)}</b><small>${esc(isCustom(t.k) && !t.ready ? '⚠️ ' + (tileNeed(S.tx[t.k] || {}) || 'Rien à montrer pour l’instant') + ' (caché sur la tablette)' : sub(t))}</small>${t.k === 'day' && cnt ? `<span class="ms-badge">${plural(cnt, 'souvenir')} aujourd’hui</span>` : ''}</span></button>`).join('')}</div>
                 <div class="ms-foot"><button type="button" class="ms-btn" data-act="who"><span class="ms-ico" aria-hidden="true">👋</span><span>${n ? 'Ce n’est pas ' + esc(n) + ' ?' : 'Qui regarde ?'}</span></button>
                 <button type="button" class="ms-btn ms-hold" data-act="hold" aria-label="Quitter le mode simple : garde le doigt appuyé ${String(S.holdSec).replace('.', ',')} secondes, ou garde la touche Entrée enfoncée"><span class="ms-fill" aria-hidden="true"></span><span class="ms-ico" aria-hidden="true">🔒</span><span class="ms-hold-t">Quitter le mode simple<br><span class="ms-hint">garde le doigt appuyé ${String(S.holdSec).replace('.', ',')} s</span></span></button></div></div>`;
             if (live) bindHold();
@@ -574,7 +609,7 @@
                 ${v && mine ? `<div class="ms-seg" role="group" aria-label="Quelles photos"><button type="button" class="${V.photoFilter === 'all' ? 'is-active' : ''}" data-act="pfilter" data-v="all" aria-pressed="${V.photoFilter === 'all'}">Toutes (${all.length})</button><button type="button" class="${V.photoFilter === 'me' ? 'is-active' : ''}" data-act="pfilter" data-v="me" aria-pressed="${V.photoFilter === 'me'}">Avec toi (${mine})</button></div>` : ''}
                 </div><div class="ms-ph-grid">${l.map((m, i) => `<button type="button" class="ms-ph-tile" data-act="openslide" data-i="${i}"><span class="ms-thumb">${img(m)}</span><span class="ms-cap"><b>${esc(m.title || 'Photo')}</b><span>${esc(photoCap(m))}</span></span></button>`).join('')}</div></div>`;
         }
-        const slides = () => (V.slideList || photoList().map(m => m.id)).filter(id => D.M.get(id) && photoOk(D.M.get(id)));
+        const slides = () => (V.slideList || photoList().map(m => m.id)).filter(id => D.M.get(id) && (V.slideAny ? !S.hiddenPhotos.includes(id) : photoOk(D.M.get(id)))); // une photo choisie pour un gros bouton se montre même si c'est un document
         function slideSpeech(m) {
             const ppl = m.people.filter(vis).map(id => { const r = rel(id); return nameT(P(id)) + (r ? ', ' + (r === 'toi' ? 'toi' : r) : ''); });
             const w = photoWhen(m); return `${m.title || 'Photo'}.${w ? ' ' + w.charAt(0).toUpperCase() + w.slice(1) + (m.place ? ', à ' + m.place : '') + '.' : m.place ? ' À ' + m.place + '.' : ''}${ppl.length ? ' Sur la photo : ' + joinFr(ppl) + '.' : ''}`;
@@ -725,6 +760,84 @@
                 ${soon.length ? `<h2 class="ms-h2 ms-mt">🎈 Bientôt</h2><div class="ms-soon">${soon.slice(0, 8).map(soonRow).join('')}</div>` : ''}</div>`;
         }
 
+        /* ── 🏡 Ma famille proche : par groupes, pour la personne qui regarde ── */
+        function rFamily() {
+            const v = viewerId(); if (!v || !P(v)) { MAIN.innerHTML = `<div class="ms-center"><p class="ms-lead">Dis d’abord qui regarde : l’app montrera ta famille.</p><button type="button" class="ms-btn primary" data-act="who"><span class="ms-ico" aria-hidden="true">👋</span><span>Qui regarde ?</span></button></div>`; return; }
+            const ch = visA(childrenOf(v)), gch = [...new Set(ch.flatMap(c => visA(childrenOf(c))))], ggch = [...new Set(gch.flatMap(c => visA(childrenOf(c))))];
+            const gp = [...new Set(visA(parentsOf(v)).flatMap(x => visA(parentsOf(x))))], sib = visA(siblingsOf(v)).filter(x => x !== v), sp = visA(spousesOf(v));
+            const grp = (t, l) => (l.length ? `<section class="ms-grp"><h2>${t} · ${l.length}</h2>${l.map(id => pRow(P(id))).join('')}</section>` : '');
+            const f = id => P(id)?.g === 'f';
+            MAIN.innerHTML = `<div><h1 class="ms-h2" tabindex="-1">La famille de ${esc(P(v).first)}</h1>
+                ${grp(sp.length > 1 ? 'Tes conjoints' : f(sp[0]) ? 'Ta femme' : 'Ton mari', sp)}${grp('Tes parents', visA(parentsOf(v)))}${grp('Tes grands-parents', gp)}${grp('Tes frères et sœurs', sib)}
+                ${grp('Tes enfants', ch)}${grp('Tes petits-enfants', gch)}${grp('Tes arrière-petits-enfants', ggch)}
+                ${!sp.length && !ch.length && !sib.length && !parentsOf(v).length ? '<p class="ms-lead">Personne n’est encore relié dans l’arbre.</p>' : ''}</div>`;
+        }
+        /* ── 🎈 Les anniversaires qui arrivent (les vivants), aujourd'hui d'abord ── */
+        function bdayList() {
+            if (!D) return []; const t0 = new Date(TY, TM - 1, TD, 12), out = [];
+            D.P.forEach(p => { const b = p.birth?.date; if (!p.living || !vis(p.id) || !b || !b.m || !b.d || b.about) return; let n = new Date(TY, b.m - 1, b.d, 12); if (n < t0) n = new Date(TY + 1, b.m - 1, b.d, 12); const days = Math.round((n - t0) / 864e5); out.push({p, days, age: firstOnly(p) ? null : n.getFullYear() - b.y, b}); });
+            return out.sort((a, b) => a.days - b.days);
+        }
+        function rBdays() {
+            const l = bdayList().slice(0, 40), when = d => (d === 0 ? 'Aujourd’hui !' : d === 1 ? 'Demain' : `Dans ${d} jours`);
+            const row = e => { const r = rel(e.p.id), me = r === 'toi', fm = e.p.g === 'f'; return `<button type="button" class="ms-prow${e.days === 0 ? ' is-today' : ''}" data-act="person" data-id="${e.p.id}">${ph(e.p.id, 76)}<span class="ms-tx"><span class="ms-nm">${e.days === 0 ? '🎂 ' : ''}${me ? 'Ton anniversaire' : nameH(e.p)}</span><span class="ms-yr">${esc(e.days < 60 ? when(e.days) : `Le ${day1(e.b.d)} ${MOIS[e.b.m - 1]}`)}${e.age ? ` · ${me ? 'tu auras' : fm ? 'elle aura' : 'il aura'} ${e.age} ans` : ''}${r && !me ? ' · ' + esc(r) : ''}</span></span><span class="ms-go" aria-hidden="true">›</span></button>`; };
+            const say = l.slice(0, 5).map(e => `${e.days === 0 ? 'aujourd’hui' : e.days === 1 ? 'demain' : 'dans ' + e.days + ' jours'}, ${nameT(e.p)}${e.age ? ', ' + e.age + ' ans' : ''}`).join('. ');
+            MAIN.innerHTML = `<div><h1 class="ms-h2" tabindex="-1">Les anniversaires qui arrivent</h1>${l.length ? `<div class="ms-row">${speakBtn('Les prochains anniversaires : ' + say + '.', 'Écouter')}</div><div class="ms-soon">${l.map(row).join('')}</div>` : '<p class="ms-lead">Pas de date de naissance connue pour l’instant.</p>'}</div>`;
+        }
+        /* ── 📍 Un lieu de famille : ses photos, ceux qui y sont nés, s'y sont mariés, y sont morts ── */
+        function placeData(pl) {
+            const k = norm(pl).trim(), same = x => !!x && norm(x).trim() === k; if (!D || !k) return {photos: [], people: [], born: [], wed: [], died: []};
+            const photos = visPhotos().filter(m => same(m.place)), vs = [...D.P.values()].filter(p => vis(p.id));
+            const born = vs.filter(p => same(p.birth?.place) || same(p.bapt?.place)), died = vs.filter(p => same(p.death?.place));
+            const wed = D.F.filter(f => same(f.marr?.place) && f.a && f.b && vis(f.a) && vis(f.b));
+            return {photos, born, died, wed, people: [...new Set([...born, ...died].map(p => p.id).concat(wed.flatMap(f => [f.a, f.b])))]};
+        }
+        function rPlace() {
+            const t = tileOf(V.note), x = S.tx[V.note] || {}; if (!t || !x.place) { goHome(); return; } const d = placeData(x.place);
+            const grp = (h, l) => (l.length ? `<section class="ms-grp"><h2>${h} · ${l.length}</h2>${l.sort((a, b) => byBirth(a.id, b.id)).map(pRow).join('')}</section>` : '');
+            MAIN.innerHTML = `<div><h1 class="ms-h2" tabindex="-1">📍 ${esc(x.place)}</h1>
+                ${d.photos.length ? `<div class="ms-row"><button type="button" class="ms-btn primary" data-act="personslide" data-ph="${d.photos[0].id}" data-id="0"><span class="ms-ico" aria-hidden="true">▶</span><span>Voir les photos</span></button></div><div class="ms-mini">${d.photos.slice(0, 24).map(m => `<button type="button" class="ms-ph-tile" data-act="personslide" data-ph="${m.id}" data-id="0"><span class="ms-thumb">${img(m)}</span><span class="ms-cap"><b>${esc(m.title || 'Photo')}</b><span>${esc(photoWhen(m))}</span></span></button>`).join('')}</div>` : ''}
+                ${grp('Né·es ici', d.born)}${d.wed.length ? `<section class="ms-grp"><h2>Mariés ici · ${d.wed.length}</h2>${d.wed.map(f => `<button type="button" class="ms-prow" data-act="person" data-id="${f.a}">${ph(f.a, 76)}<span class="ms-tx"><span class="ms-nm">${esc(P(f.a).first)} et ${esc(P(f.b).first)}</span><span class="ms-yr">${esc(f.marr.date ? leD(f.marr.date) : '')}</span></span><span class="ms-go" aria-hidden="true">›</span></button>`).join('')}</section>` : ''}${grp('Mort·es ici', d.died)}</div>`;
+        }
+        /* ── ❓ Qui est-ce ? Un portrait, trois prénoms ── */
+        const quizPool = () => (D ? [...D.P.values()].filter(p => p.photo && vis(p.id) && p.first && p.id !== viewerId()) : []);
+        function rQuiz() {
+            const pool = quizPool(); if (pool.length < 3) { MAIN.innerHTML = '<div class="ms-center"><p class="ms-lead">Il faut au moins trois portraits pour jouer.</p></div>'; return; }
+            if (!V.quiz) { const tg = pool[Math.floor(Math.random() * pool.length)], others = pool.filter(p => p.id !== tg.id && p.first !== tg.first).sort(() => Math.random() - .5).slice(0, 2); V.quiz = {t: tg.id, opts: [tg.id, ...others.map(p => p.id)].sort(() => Math.random() - .5), wrong: [], done: false}; }
+            const q = V.quiz, p = P(q.t), r = rel(q.t);
+            MAIN.innerHTML = `<div class="ms-quiz"><h1 class="ms-h2" tabindex="-1">Qui est-ce ?</h1><div class="ms-quiz-ph">${ph(q.t, 260, 'big')}</div>
+                ${q.done ? `<p class="ms-lead ms-strong">Bravo ! C’est ${nameH(p)}${r ? ` (${r === 'toi' ? 'toi' : esc(r)})` : ''}.</p><div class="ms-row">${speakBtn(`C’est ${nameT(p)}${r ? ', ' + r : ''}.`, 'Écouter')}<button type="button" class="ms-btn" data-act="person" data-id="${q.t}"><span class="ms-ico" aria-hidden="true">📖</span><span>Sa fiche</span></button><button type="button" class="ms-btn primary" data-act="qnext"><span class="ms-ico" aria-hidden="true">➡</span><span>Un autre portrait</span></button></div>`
+                : `<div class="ms-quiz-opts">${q.opts.map(id => `<button type="button" class="ms-btn${q.wrong.includes(id) ? ' is-wrong' : ''}" data-act="qans" data-id="${id}" ${q.wrong.includes(id) ? 'disabled' : ''}><span>${esc(P(id).first)}</span></button>`).join('')}</div>`}
+                ${V.quizN ? `<p class="ms-hint">${plural(V.quizN, 'bonne réponse')} depuis le début</p>` : ''}</div>`;
+        }
+        function quizAnswer(id) { const q = V.quiz; if (!q || q.done) return; if (id === q.t) { q.done = true; V.quizN++; } else { q.wrong.push(id); msg(`Ce n’est pas ${P(id)?.first || 'ça'}. Essaie encore !`); } rQuiz(); }
+        /* ── 🕰 L'heure et la date, en très grand ── */
+        let clockT = 0;
+        function rClock() {
+            clearInterval(clockT); const paint = () => { const el = $('[data-ms-clock]', MAIN); if (!el || V.screen !== 'clock') { clearInterval(clockT); return; } const n = new Date(), h = n.getHours(), mi = String(n.getMinutes()).padStart(2, '0'), dd = `${JOURS[n.getDay()]} ${day1(n.getDate())} ${MOIS[n.getMonth()]} ${n.getFullYear()}`, part = h < 12 ? 'le matin' : h < 18 ? 'l’après-midi' : 'le soir';
+                el.innerHTML = `<div class="ms-clock-t">${h}<span>:</span>${mi}</div><div class="ms-clock-d">${esc(dd.charAt(0).toUpperCase() + dd.slice(1))}</div><div class="ms-clock-p">C’est ${part}</div>`;
+                const sb = $('[data-act=speak]', MAIN); if (sb && !sb.classList.contains('is-on')) sb.dataset.text = `Nous sommes ${dd}. Il est ${h} heure${h > 1 ? 's' : ''} ${Number(mi) ? Number(mi) : ''}, ${part}.`; };
+            MAIN.innerHTML = `<div class="ms-clock"><h1 class="ms-sr" tabindex="-1">L’heure et la date</h1><div data-ms-clock></div><div class="ms-row">${speakBtn('', 'Écouter l’heure')}</div></div>`;
+            paint(); if (live) clockT = setInterval(paint, 15000);
+        }
+        /* ── 📞 Appeler quelqu'un : le numéro en grand ── */
+        function rCall() {
+            const t = tileOf(V.note); if (!t || !t.tel) { goHome(); return; }
+            const digits = t.tel.replace(/[^\d+]/g, ''), spoken = t.tel.replace(/[^\d]/g, '').replace(/(\d{2})(?=\d)/g, '$1 ');
+            MAIN.innerHTML = `<div class="ms-call"><h1 class="ms-h2" tabindex="-1"><span aria-hidden="true">${esc(t.icon)}</span> ${esc(t.label)}</h1><div class="ms-call-n">${esc(t.tel)}</div>
+                ${t.text ? `<div class="ms-note-t">${esc(t.text).replace(/\n/g, '<br>')}</div>` : ''}
+                <div class="ms-row"><a class="ms-btn primary" href="tel:${esc(digits)}"><span class="ms-ico" aria-hidden="true">📞</span><span>Appeler</span></a>${speakBtn(`${t.label}. Le numéro : ${spoken}.`, 'Écouter le numéro')}</div></div>`;
+        }
+        /* ── 🎬 🎵 Un film, un son ── */
+        function rMedia() {
+            const t = tileOf(V.note), m = t?.mid ? D.AV.get(t.mid) : null; if (!m) { goHome(); return; }
+            const who = m.people.filter(vis).map(id => P(id).first).filter(Boolean);
+            MAIN.innerHTML = `<div class="ms-av"><h1 class="ms-h2" tabindex="-1"><span aria-hidden="true">${esc(t.icon)}</span> ${esc(t.label)}</h1>
+                ${m.type === 'video' ? `<video class="ms-av-v" src="${esc(m.src)}" controls playsinline preload="metadata"></video>` : `<div class="ms-av-a" aria-hidden="true">🎵</div><audio src="${esc(m.src)}" controls preload="metadata"></audio>`}
+                <div class="ms-row"><button type="button" class="ms-btn primary" data-act="avplay"><span class="ms-ico" aria-hidden="true">⏯</span><span>Lire / Pause</span></button></div>
+                ${m.title || who.length ? `<p class="ms-lead">${esc(m.title || '')}${who.length ? `${m.title ? ' · ' : ''}avec ${esc(joinFr(who))}` : ''}</p>` : ''}</div>`;
+        }
+
         /* ── Code de sortie ── */
         function rCode() {
             MAIN.innerHTML = `<div class="ms-code"><h1 tabindex="-1">Tape le code pour quitter</h1><p>C’est la personne qui a préparé l’app qui le connaît. Ce n’est pas une protection : il évite seulement de sortir par erreur.</p>
@@ -764,7 +877,13 @@
             case 'home': goHome(); break;
             case 'retry': start(); break;
             case 'tile': {
+                V.slideAny = false;
                 if (isCustom(b.dataset.to)) { const t = tileOf(b.dataset.to); if (!t?.ready) break;
+                    if (t.kind === 'photo1' || t.kind === 'pick') { V.slideList = t.ids; V.slide = 0; V.slideAny = true; V.auto = t.kind === 'pick' && S.slideAuto; go('slides', {forcePush: true}); break; }
+                    if (t.kind === 'random') { const l = visPhotos().filter(m => !m.doc).map(m => m.id); for (let i = l.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [l[i], l[j]] = [l[j], l[i]]; } V.slideList = l; V.slide = 0; V.auto = S.slideAuto; go('slides', {forcePush: true}); break; }
+                    if (['video', 'audio', 'call', 'place'].includes(t.kind)) { V.note = t.k; go(t.kind === 'video' || t.kind === 'audio' ? 'media' : t.kind, {forcePush: true}); break; }
+                    if (['family', 'bdays', 'clock'].includes(t.kind)) { go(t.kind, {forcePush: true}); break; }
+                    if (t.kind === 'quiz') { V.quiz = null; go('quiz', {forcePush: true}); break; }
                     if (t.kind === 'person') { V.person = t.pid; go('person', {forcePush: true}); }
                     else if (t.kind === 'house') { V.house = t.hid; V.houseTitle = t.label; go('house', {forcePush: true}); }
                     else if (t.kind === 'album') { V.slideList = t.photos.map(m => m.id); V.slide = 0; V.auto = S.slideAuto; go('slides'); }
@@ -791,9 +910,12 @@
             case 'person': V.person = id; go('person', {forcePush: true}); break;
             case 'totree': V.center = id; go('tree'); break;
             case 'speak': speak(b.dataset.text, b); break;
-            case 'slideshow': V.slideList = null; V.slide = 0; V.auto = S.slideAuto; go('slides'); break;
-            case 'openslide': V.slideList = photoList().map(m => m.id); V.slide = Number(b.dataset.i) || 0; V.auto = S.slideAuto; go('slides'); break;
-            case 'personslide': { const pid = id, l = pid ? visPhotos().filter(m => !m.doc && m.people.includes(pid)).map(m => m.id) : [Number(b.dataset.ph)]; V.slideList = l; V.slide = Math.max(0, l.indexOf(Number(b.dataset.ph))); V.auto = false; go('slides', {forcePush: true}); break; }
+            case 'qans': quizAnswer(id, b); break;
+            case 'qnext': V.quiz = null; rQuiz(); focusMain(); break;
+            case 'avplay': { const m = $('video, audio', MAIN); if (m) { if (m.paused) m.play().catch(() => msg('Le fichier ne se lit pas sur cet appareil.')); else m.pause(); } break; }
+            case 'slideshow': V.slideAny = false; V.slideList = null; V.slide = 0; V.auto = S.slideAuto; go('slides'); break;
+            case 'openslide': V.slideAny = false; V.slideList = photoList().map(m => m.id); V.slide = Number(b.dataset.i) || 0; V.auto = S.slideAuto; go('slides'); break;
+            case 'personslide': { V.slideAny = false; const pid = id, l = pid ? visPhotos().filter(m => !m.doc && m.people.includes(pid)).map(m => m.id) : [Number(b.dataset.ph)]; V.slideList = l; V.slide = Math.max(0, l.indexOf(Number(b.dataset.ph))); V.auto = false; go('slides', {forcePush: true}); break; }
             case 'pfilter': V.photoFilter = b.dataset.v; rPhotos(); break;
             case 'prev': stopSpeak(); V.slide--; rSlides(); break;
             case 'next': stopSpeak(); V.slide++; rSlides(); break;
@@ -981,12 +1103,13 @@
             const x = s.tx[k] || {}, cu = isCustom(k), K = cu ? CUSTOM_KINDS[x.kind] : null, icon = x.icon || (cu ? K[0] : TILE[k][0]), name = tileName(s, k), open = openTile === k;
             const pickLbl = x.kind === 'album' ? 'Les photos de' : x.kind === 'house' ? 'La maison' : 'La personne';
             const noPh = cu && x.kind === 'album' && x.pid && D && !D.media.some(m => !m.doc && m.people.includes(Number(x.pid)));
-            const warn = cu && (x.kind === 'note' ? !x.text : x.kind === 'house' ? !x.hid : !x.pid) ? `<small class="ms-tr-warn">${x.kind === 'note' ? '⚠️ Écris le mot pour qu’il apparaisse' : x.kind === 'house' ? '⚠️ Choisis la maison pour qu’il apparaisse' : '⚠️ Choisis la personne pour qu’il apparaisse'}</small>` : noPh ? '<small class="ms-tr-warn">⚠️ Pas encore de photo de cette personne : le cadre est caché</small>' : '';
+            const need = cu ? tileNeed(x) : '', warn = need ? `<small class="ms-tr-warn">⚠️ ${esc(need)} pour qu’il apparaisse</small>` : noPh ? '<small class="ms-tr-warn">⚠️ Pas encore de photo de cette personne : le cadre est caché</small>' : '';
             const edit = open ? `<div class="ms-tile-edit">
                 <label class="ms-tf"><span>Nom</span><input type="text" maxlength="40" data-ms-tlabel="${k}" value="${esc(x.label || '')}" placeholder="${esc(cu ? (x.label ? K[1] : name) : TILE[k][1])}"></label>
                 <label class="ms-tf"><span>Petite phrase</span><input type="text" maxlength="90" data-ms-tsub="${k}" value="${esc(x.sub || '')}" placeholder="${esc(cu ? K[2] : TILE[k][2] || 'Écrite toute seule (nombre de photos, souvenirs du jour)')}"></label>
-                ${cu && x.kind !== 'note' ? `<div class="ms-tf"><span>${pickLbl}</span><div data-ms-tile-pick="${k}">${A().pickerField ? A().pickerField({name: '', hiddenName: false, kind: x.kind === 'house' ? 'house' : 'person', value: (x.kind === 'house' ? x.hid : x.pid) || null, allowCreate: x.kind === 'house' ? false : undefined}) : ''}</div></div>` : ''}
-                ${cu && x.kind === 'note' ? `<label class="ms-tf"><span>Le mot</span><textarea rows="4" maxlength="800" data-ms-ttext="${k}" placeholder="Un petit mot de la famille, lu à voix haute avec 🔊">${esc(x.text || '')}</textarea></label>` : ''}
+                ${cu ? kindFields(k, x) : ''}
+                ${cu && ['person', 'album', 'house'].includes(x.kind) ? `<div class="ms-tf"><span>${pickLbl}</span><div data-ms-tile-pick="${k}">${A().pickerField ? A().pickerField({name: '', hiddenName: false, kind: x.kind === 'house' ? 'house' : 'person', value: (x.kind === 'house' ? x.hid : x.pid) || null, allowCreate: x.kind === 'house' ? false : undefined}) : ''}</div></div>` : ''}
+                ${cu && (x.kind === 'note' || x.kind === 'call') ? `<label class="ms-tf"><span>${x.kind === 'call' ? 'Un mot en plus' : 'Le mot'}</span><textarea rows="4" maxlength="800" data-ms-ttext="${k}" placeholder="Un petit mot de la famille, lu à voix haute avec 🔊">${esc(x.text || '')}</textarea></label>` : ''}
                 <div class="ms-tf"><span>Icône</span><div class="ms-icons" role="radiogroup" aria-label="Icône du cadre">${TILE_ICONS.map(ic => `<button type="button" class="ms-ic ${ic === icon ? 'is-active' : ''}" data-ms-ticon="${k}" data-v="${ic}" aria-pressed="${ic === icon}" aria-label="Icône ${ic}">${ic}</button>`).join('')}</div></div>
                 <div class="ms-tf"><span>Couleur</span>${cu ? `<span data-ms-tcolor-slot="${k}" data-v="${esc(x.color || pal[K[3]])}"></span><small class="ms-cv">${x.color ? 'Ta couleur · ' + esc(x.color.toUpperCase()) : 'Celle du thème'}</small>` : `<span data-ms-color-slot="${k}" data-v="${esc(s.colors[k] || pal[k])}"></span><small class="ms-cv">${s.colors[k] ? 'Ta couleur · ' + esc(s.colors[k].toUpperCase()) : 'Celle du thème'}</small>`}</div>
                 <p><button type="button" class="button small secondary" data-ms-treset="${k}">↺ Remettre ce cadre comme au départ</button></p></div>` : '';
@@ -996,8 +1119,19 @@
                 <button type="button" class="icon-button small" data-ms-tile-up="${k}" ${i === 0 ? 'disabled' : ''} aria-label="Monter « ${esc(name)} »" title="Monter">↑</button><button type="button" class="icon-button small" data-ms-tile-down="${k}" ${i === s.tiles.length - 1 ? 'disabled' : ''} aria-label="Descendre « ${esc(name)} »" title="Descendre">↓</button>
                 <label class="ui-toggle ms-tg"><input type="checkbox" data-ms-tile="${k}" ${on ? 'checked' : ''} aria-label="Montrer « ${esc(name)} »"><i></i></label>${edit}</div>`;
         }).join('');
-        const add = `<div class="ms-tadd"><span class="ms-sl">＋ Ajouter un cadre</span>${Object.entries(CUSTOM_KINDS).map(([kd, [ic, lb]]) => `<button type="button" class="button small secondary" data-ms-tadd="${kd}" ${nCustom >= MAX_CUSTOM ? 'disabled' : ''}><span aria-hidden="true">${ic}</span> ${lb}</button>`).join('')}${nCustom >= MAX_CUSTOM ? `<small class="ms-help">${MAX_CUSTOM} cadres ajoutés au plus.</small>` : ''}</div>`;
+        const add = `<div class="ms-tadd"><span class="ms-sl">＋ Ajouter un cadre</span>${KIND_GROUPS.map(([g, kinds]) => `<div class="ms-tadd-g"><small class="ms-tadd-h">${esc(g)}</small>${kinds.map(kd => { const [ic, lb, sb] = CUSTOM_KINDS[kd]; return `<button type="button" class="button small secondary" data-ms-tadd="${kd}" title="${esc(sb)}" ${nCustom >= MAX_CUSTOM ? 'disabled' : ''}><span aria-hidden="true">${ic}</span> ${lb}</button>`; }).join('')}</div>`).join('')}${nCustom >= MAX_CUSTOM ? `<small class="ms-help">${MAX_CUSTOM} cadres ajoutés au plus.</small>` : ''}</div>`;
         return `<div class="ms-tiles-set" data-ms-tiles>${rows}</div>${add}`;
+    }
+    /** les champs propres à une sorte de cadre ajouté : la photo, le film, le lieu, le numéro… */
+    function kindFields(k, x) {
+        const mediaBtn = (lbl, cur) => `<div class="ms-tf"><span>${lbl}</span><div class="ms-tmedia"><button type="button" class="button small secondary" data-ms-tmedia="${k}">${cur ? '↺ Changer…' : '＋ Choisir…'}</button>${cur ? `<small class="ms-cv">${cur}</small>` : ''}</div></div>`;
+        if (x.kind === 'photo1') { const m = D?.M.get(Number(x.mid)); return mediaBtn('La photo', x.mid ? `${m?.thumb ? `<img class="ms-tthumb" src="${esc(m.thumb)}" alt="">` : ''} ${esc(m?.title || 'Photo n° ' + x.mid)}` : ''); }
+        if (x.kind === 'pick') return mediaBtn('Les photos', x.mids?.length ? `${plural(x.mids.length, 'photo choisie', 'photos choisies')} ${x.mids.slice(0, 6).map(id => D?.M.get(id)?.thumb ? `<img class="ms-tthumb" src="${esc(D.M.get(id).thumb)}" alt="">` : '').join('')}` : '');
+        if (x.kind === 'video' || x.kind === 'audio') { const m = D?.AV?.get(Number(x.mid)); return mediaBtn(x.kind === 'video' ? 'Le film' : 'Le son', x.mid ? esc(m?.title || (x.kind === 'video' ? 'Film' : 'Son') + ' n° ' + x.mid) : ''); }
+        if (x.kind === 'place') { const l = knownPlaces(); if (x.place && !l.includes(x.place)) l.unshift(x.place); return `<label class="ms-tf"><span>Le lieu</span><select data-ms-tplace="${k}"><option value="">Choisis un lieu…</option>${l.map(pl => `<option value="${esc(pl)}" ${pl === x.place ? 'selected' : ''}>${esc(pl)}</option>`).join('')}</select></label>${l.length ? '' : '<small class="ms-help">Aucun lieu dans l’arbre pour l’instant (naissances, mariages, photos).</small>'}`; }
+        if (x.kind === 'call') return `<label class="ms-tf"><span>Le numéro</span><input type="tel" maxlength="30" data-ms-ttel="${k}" value="${esc(x.tel || '')}" placeholder="06 12 34 56 78"></label><small class="ms-help">Donne aussi au cadre le nom de la personne à appeler (« Appeler Julie »).</small>`;
+        const info = {family: 'Montre la famille de la personne qui regarde (ses parents, ses enfants, ses petits-enfants…).', bdays: 'Les anniversaires des vivants, du plus proche au plus lointain.', quiz: 'Un portrait, trois prénoms : il faut trouver le bon. Il faut au moins trois portraits.', clock: 'L’heure, le jour et la date en très grand, lus à voix haute.', random: 'Toutes les photos, dans le désordre.'}[x.kind];
+        return info ? `<p class="ms-help">${info}</p>` : '';
     }
     function settingsHtml(s) {
         const ap = appA11y(), e = eff(s), pal = e.pal, rows = contrastRows(pal, s), bad = rows.filter(r => r.r < 7);
@@ -1205,9 +1339,17 @@
             if (b.dataset.msReady) { const p = PRESETS_READY.find(x => x.k === b.dataset.msReady); if (p) change(st => Object.assign(st, applyPreset(st, p.set)), true); return; }
             if (b.dataset.msFix) { const k = b.dataset.msFix; change(st => { const pal = eff(st).pal; st.colors[k] = fixColor(pal[k], b.dataset.against); }, true); return; }
             if (b.dataset.msTedit) { openTile = openTile === b.dataset.msTedit ? null : b.dataset.msTedit; renderSettings(box); if (openTile) setTimeout(() => $(`[data-ms-tlabel="${CSS.escape(openTile)}"]`, box)?.focus({preventScroll: false}), 0); return; }
-            if (b.dataset.msTadd) { const kd = b.dataset.msTadd; let id = ''; change(st => { if (st.tiles.filter(t => isCustom(t[0])).length >= MAX_CUSTOM) return; let n = 1; while (st.tx['c' + n] || st.tiles.some(t => t[0] === 'c' + n)) n++; id = 'c' + n; st.tiles.push([id, true]); st.tx[id] = {kind: kd}; }); openTile = id || openTile; renderSettings(box); return; }
+            if (b.dataset.msTadd) { const kd = b.dataset.msTadd; let id = ''; change(st => { if (st.tiles.filter(t => isCustom(t[0])).length >= MAX_CUSTOM) return; let n = 1; while (st.tx['c' + n] || st.tiles.some(t => t[0] === 'c' + n)) n++; id = 'c' + n; st.tiles.push([id, true]); st.tx[id] = {kind: kd}; }); openTile = id || openTile; renderSettings(box);
+                if (kd === 'house' && id) apiGet('houses').then(r => { const l = r?.items || []; if (l.length === 1 && !read().tx[id]?.hid) { change(st => { if (st.tx[id]) st.tx[id].hid = Number(l[0].id); }, true); toast(`Maison choisie : « ${l[0].name || 'Maison'} ».`); } }).catch(() => {});
+                return; }
             if (b.dataset.msTdup) { const k = b.dataset.msTdup; let id = ''; change(st => { if (st.tiles.filter(t => isCustom(t[0])).length >= MAX_CUSTOM) return; let n = 1; while (st.tx['c' + n] || st.tiles.some(t => t[0] === 'c' + n)) n++; id = 'c' + n; const i = st.tiles.findIndex(t => t[0] === k); st.tiles.splice(i + 1, 0, [id, true]); st.tx[id] = clone(st.tx[k] || {}); }); openTile = id || openTile; renderSettings(box); return; }
             if (b.dataset.msTdel) { const k = b.dataset.msTdel; if (openTile === k) openTile = null; change(st => { st.tiles = st.tiles.filter(t => t[0] !== k); delete st.tx[k]; }, true); return; } // H7 : « ↶ Annuler » en bas à gauche (K2)
+            if (b.dataset.msTmedia) {
+                const k = b.dataset.msTmedia, x = read().tx[k] || {}, kd = x.kind, many = kd === 'pick';
+                const got = await A().openMediaPicker?.({multiple: many, types: [kd === 'video' ? 'video' : kd === 'audio' ? 'audio' : 'image'], value: many ? x.mids || [] : x.mid ? [x.mid] : [], title: {photo1: 'La photo du gros bouton', pick: 'Les photos du gros bouton', video: 'Le film du gros bouton', audio: 'Le son du gros bouton'}[kd], allowImport: false});
+                if (got) { await loadData(true).catch(() => {}); change(st => { st.tx[k] = {...(st.tx[k] || {})}; if (many) st.tx[k].mids = (Array.isArray(got) ? got : [got]).map(m => Number(m.id)).filter(Boolean); else st.tx[k].mid = Number((Array.isArray(got) ? got[0] : got)?.id) || 0; }, true); kick(box); }
+                return;
+            }
             if (b.dataset.msTicon) { const k = b.dataset.msTicon, v = b.dataset.v; change(st => { st.tx[k] = {...(st.tx[k] || {}), icon: v}; }, true); return; }
             if (b.dataset.msTreset) { const k = b.dataset.msTreset; change(st => { const x = st.tx[k] || {}; if (isCustom(k)) { st.tx[k] = {kind: x.kind}; if (x.pid) st.tx[k].pid = x.pid; if (x.hid) st.tx[k].hid = x.hid; if (x.text) st.tx[k].text = x.text; } else { delete st.tx[k]; st.colors[k] = null; } }, true); return; }
             if (b.dataset.msTfix) { const k = b.dataset.msTfix; change(st => { const c = st.tx[k]?.color; if (c) st.tx[k].color = fixColor(c, b.dataset.against); }, true); return; }
@@ -1236,6 +1378,8 @@
             if (t.dataset.msLink) { change(st => { st.link[t.dataset.msLink] = t.checked; }, true); return; }
             if (t.dataset.msSel) { change(st => { st[t.dataset.msSel] = t.value; }, true); return; }
             if (t.dataset.msTile) { const k = t.dataset.msTile; if (!t.checked && read().tiles.filter(x => x[1]).length <= 1) { t.checked = true; toast('Il faut garder au moins un gros bouton.'); return; } change(st => { st.tiles = st.tiles.map(x => (x[0] === k ? [k, t.checked] : x)); }, true); return; }
+            if (t.dataset.msTplace) { const k = t.dataset.msTplace; change(st => { st.tx[k] = {...(st.tx[k] || {}), place: t.value}; }, true); return; }
+            if (t.dataset.msTtel) { const k = t.dataset.msTtel; change(st => { st.tx[k] = {...(st.tx[k] || {}), tel: t.value}; }, true); return; }
             if (t.dataset.msTlabel || t.dataset.msTsub || t.dataset.msTtext) { const k = t.dataset.msTlabel || t.dataset.msTsub || t.dataset.msTtext, f = t.dataset.msTlabel ? 'label' : t.dataset.msTsub ? 'sub' : 'text'; change(st => { st.tx[k] = {...(st.tx[k] || {}), [f]: t.value}; }, true); return; }
             if (t.dataset.msBranch) { const k = t.dataset.msBranch; change(st => { st.branchesOff = t.checked ? st.branchesOff.filter(x => x !== k) : [...new Set([...st.branchesOff, k])]; }, true); return; }
             if (t.dataset.msDev) { setDev({[t.dataset.msDev]: t.checked || undefined}); if (t.checked) markReady(); return; }
