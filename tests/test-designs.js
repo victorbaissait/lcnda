@@ -229,8 +229,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         await t('la page : sommaire, sections repliables fermées par défaut, ouvertes retenues', async () => {
             await page.evaluate(() => localStorage.removeItem('lcnda-designs-open-v2'));
             await toDesigns(page); await page.waitForSelector('.lcd-page .lcd-toc');
-            assert.equal(await page.locator('.lcd-toc-i').count(), 6, 'A1 à A8 sans A4 ni A5');
-            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5, #lcd-a4').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs), ni A4 (Fiches personnes et animaux)');
+            assert.equal(await page.locator('.lcd-toc-i').count(), 5, 'A1 à A8 sans A4, A5 ni A6');
+            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5, #lcd-a4, #lcd-a6').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs), ni A4 (Fiches personnes et animaux), ni A6 (Notifications et boutons)');
+            assert.equal(await page.locator('[data-lcd-notifs]').count(), 1, 'la petite ligne vers Notifications et boutons (A6)');
             assert.equal(await page.locator('[data-lcd-fiches]').count(), 1, 'la petite ligne vers Fiches personnes et animaux (A4)');
             assert.equal(await page.locator('[data-lcd-trees]').count(), 1, 'le lien vers les cases des arbres');
             assert.equal(await page.locator('details.lcd-sec[open]').count(), 0, 'tout fermé');
@@ -240,6 +241,15 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-designs-open-v2'))), ['a1']);
             await toDesigns(page); await page.waitForSelector('#lcd-a1[open]');
             assert.equal(await page.locator('#lcd-a1 .lcd-stage .lcd-frame').count() >= 4, true, 'quatre aperçus');
+        });
+        await t('A6 Boutons : à la fin de « Notifications et boutons », après les messages ; choisir « Contour » est gardé', async () => {
+            await page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'look_msgs'; await A.setModule('maintenance'); });
+            await page.waitForSelector('#lc-a6-host #lcd-a6-emb [data-lcd-v="contour"]', {timeout: 15000});
+            assert.ok(await page.evaluate(() => { const a = document.querySelector('.toast-prefs'), b = document.getElementById('lc-a6-host'); return !!(a && b && a.offsetHeight && b.offsetHeight && (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING)); }), 'visible, après les messages');
+            await page.click('#lcd-a6-emb [data-lcd-v="contour"]');
+            await page.waitForFunction(() => JSON.parse(localStorage.getItem('genealogie-designs') || '{}').a6?.v === 'contour');
+            await page.evaluate(() => { localStorage.removeItem('genealogie-designs'); window.LCNDA_DESIGNS?.apply?.(); });
+            await toDesigns(page); await page.waitForSelector('.lcd-page .lcd-toc');
         });
         await t('choisir « Doux » : gardé tout de suite, titre « — Doux », ↶ Annuler', async () => {
             await page.click('#lcd-a1 [data-lcd-v="doux"]');

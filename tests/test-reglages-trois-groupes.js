@@ -79,6 +79,11 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(await page.locator('#design-form select[name="avatarShape"]').inputValue(), 'shp_nuage');
             assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-design') || '{}').avatarShape), 'shp_nuage');
         });
+        await t('Notifications et boutons : les messages, puis la forme des boutons (A6, venue de Designs au choix)', async () => {
+            assert.match(await page.locator('[data-side-value="look_msgs"]').first().innerText(), /Notifications et boutons/);
+            await go('look_msgs'); await page.waitForSelector('#lc-a6-host #lcd-a6-emb [data-lcd-v]', {timeout: 15000});
+            const s = await seen(); assert.ok(has(s, /Messages après une action/)); assert.ok(has(s, /Forme des boutons/)); assert.ok(!has(s, /Mes thèmes/));
+        });
         await t('Langue, dates et lecteur : un réglage changé ici est enregistré', async () => {
             await go('look_lang'); const s = await seen();
             assert.deepEqual(s.filter(x => x.startsWith('f:')).sort(), ['f:avSkipSeconds', 'f:defaultCalendar', 'f:interfaceLanguage']);

@@ -168,13 +168,13 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(g.ver, 2); assert.equal(g.a7.v, 'petit'); assert.equal(g.a8.v, 'zebre'); assert.ok(!('a10' in g));
             await setDesigns(page, null);
         });
-        await t('la page Designs au choix : 6 sections (A5 dans la fenêtre des couleurs, A4 dans Fiches personnes et animaux), pas d’ensembles, le cadre ℹ️ dit que la police et les couleurs sont dans Apparence', async () => {
+        await t('la page Designs au choix : 5 sections (A5 dans la fenêtre des couleurs, A4 dans Fiches personnes et animaux, A6 dans Notifications et boutons), pas d’ensembles, le cadre ℹ️ dit que la police et les couleurs sont dans Apparence', async () => {
             await page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); });
             await page.waitForSelector('.lcd-page .lcd-toc');
-            assert.equal(await page.locator('details.lcd-sec').count(), 6);
+            assert.equal(await page.locator('details.lcd-sec').count(), 5);
             assert.equal(await page.locator('#lcd-ens').count(), 0);
             assert.match(await page.locator('.lcd-intro').innerText(), /police, la taille du texte et les couleurs .* se règlent dans/);
-            assert.match(await page.locator('.lcd-page .page-header p').first().innerText(), /Six réglages/);
+            assert.match(await page.locator('.lcd-page .page-header p').first().innerText(), /Cinq réglages/);
         });
         await t('aucune erreur JavaScript', async () => { assert.deepEqual(errs, []); });
     } finally {
