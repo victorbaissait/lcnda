@@ -21,7 +21,8 @@ const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'ba
     'event', // 📅 événements (personnes et couples) : un passage d'un son relié à un événement (Studio son, lib/audio_studio.php)
     'workbook', 'textdoc', // 🧮 classeurs du Tableur, 📝 documents du Traitement de texte (lib/textdocs.php)
     'parcel', // ▦ parcelles du cadastre (lib/cadastre.php)
-    'mylist']; // 📋 Mes listes (custom_lists) : le groupe de personnes d'un diagramme (« Depuis l'app », lib/diagram_options.php)
+    'mylist', // 📋 Mes listes (custom_lists) : le groupe de personnes d'un diagramme (« Depuis l'app », lib/diagram_options.php)
+    'pet', 'tsite', 'agroup']; // 🐾 animaux (fiches « pets »), 🏞 sites de suivi, 👥 groupes d'animaux (lib/suivi.php)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
@@ -36,6 +37,7 @@ const PICKER_LABELS = [
     'event' => '📅 Événements',
     'workbook' => '🧮 Classeurs', 'textdoc' => '📝 Documents',
     'parcel' => '▦ Parcelles',
+    'pet' => '🐾 Animaux', 'tsite' => '🏞 Sites de suivi', 'agroup' => '👥 Groupes d’animaux',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -197,6 +199,9 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             'workbook' => function_exists('picker_workbooks') ? picker_workbooks($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🧮 lib/textdocs.php
             'textdoc' => function_exists('picker_textdocs') ? picker_textdocs($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 📝 lib/textdocs.php
+            'pet' => function_exists('picker_pets') ? picker_pets($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🐾 lib/suivi.php
+            'tsite' => function_exists('picker_tsites') ? picker_tsites($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
+            'agroup' => function_exists('picker_agroups') ? picker_agroups($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
             'parcel' => function_exists('picker_parcels') ? picker_parcels($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // ▦ lib/cadastre.php
             'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             // 🔗 sortes du widget « Raccourcis » (lib/widget_links.php) : fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions

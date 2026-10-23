@@ -14,7 +14,8 @@ declare(strict_types=1);
  */
 
 const PET_SPECIES = ['chien' => 'Chien', 'chat' => 'Chat', 'cheval' => 'Cheval, poney, âne', 'lapin' => 'Lapin', 'rongeur' => 'Rongeur (cochon d’Inde, hamster…)', 'oiseau' => 'Oiseau',
-    'poisson' => 'Poisson', 'reptile' => 'Reptile, tortue', 'ferme' => 'Animal de la ferme (vache, chèvre, mouton…)', 'autre' => 'Autre'];
+    'poisson' => 'Poisson', 'reptile' => 'Reptile, tortue', 'ferme' => 'Animal de la ferme (vache, chèvre, mouton…)',
+    'sauvage' => 'Mammifère sauvage (loup, cerf, singe…)', 'marin' => 'Animal marin (dauphin, baleine, phoque…)', 'autre' => 'Autre']; // sauvage, marin : 🐾 Suivi des animaux
 const PET_TEXT_FIELDS = ['name' => 120, 'registered_name' => 200, 'call_name' => 80, 'species' => 20, 'breed' => 120, 'variety' => 120, 'sex' => 1, 'neutered_date' => 40,
     'color' => 120, 'markings' => 300, 'coat' => 120, 'eyes' => 80, 'height' => 40, 'weight' => 40, 'birth_date' => 40, 'birth_place' => 200, 'death_date' => 40, 'death_place' => 200,
     'death_cause' => 300, 'burial' => 300, 'microchip' => 40, 'tattoo' => 40, 'passport' => 60, 'registry' => 120, 'registration' => 80, 'pedigree_number' => 80, 'ueln' => 40,
@@ -390,6 +391,7 @@ function delete_pet(PDO $pdo, array $data): array
         }
     }
     heritage_delete_media_links($pdo, 'pet', $id);
+    if (function_exists('suivi_forget_pet')) { suivi_forget_pet($pdo, $id); } // 🐾 Suivi des animaux : marques, santé, GPS (les observations restent, sans animal)
     $pdo->prepare('DELETE FROM pet_people WHERE pet_id=?')->execute([$id]);
     // sa fiche complète aussi, si on le demande (sinon elle reste, comme une fiche sans fiche d'animal)
     $pid = (int) ($r['person_id'] ?? 0);

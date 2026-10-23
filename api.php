@@ -6,6 +6,7 @@ require __DIR__ . '/lib/gedcom.php';   // import / export GEDCOM
 require __DIR__ . '/lib/heredis.php';  // fichier Hérédis natif (.hmw / .heredis)
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
+require_once __DIR__ . '/lib/suivi.php'; // 🐾 Suivi des animaux : marques, observations, GPS, santé, sites, groupes (sortes « pet », « tsite », « agroup » du menu de choix)
 require_once __DIR__ . '/lib/graphs.php'; // 📈 mes graphiques (table custom_widgets, sorte « graph » du menu de choix)
 require_once __DIR__ . '/lib/widget_links.php'; // 🔗 widget « Raccourcis » : sortes en plus du menu de choix, état des tuiles (shortcut_info)
 require_once __DIR__ . '/lib/scene.php'; // 🎤 scène : coordonnées des lieux des concerts (assets/js/heritage-scene*.js)
@@ -530,6 +531,7 @@ try {
         'sciences' => json_response(sciences_api_get($pdo, $_GET)), // 🔬 coordonnées des lieux (lib/sciences.php)
         'blocs' => json_response(blocs_api_get($pdo, $_GET)), // 📰 🏆 🎓 blocs communs (lib/blocs.php)
         'creations' => (static function () use ($pdo) { require_once __DIR__ . '/lib/creations.php'; json_response(creations_api_get($pdo, $_GET)); })(), // 🎨 Listes « Créations et carrières » (lecture seule)
+        'suivi' => json_response(suivi_get($pdo, $_GET)), // 🐾 Suivi des animaux (lib/suivi.php)
         'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
         'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today', 'meteo_place', 'meteo_altitude' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
@@ -6229,8 +6231,10 @@ function restore_last_delete(PDO $pdo,array $data): array
     // (et ses lignes liées gardées dans « _children » : étiquettes posées, membres d'une branche)
     $simple=['standalone_reminder'=>'standalone_reminders','research_budget'=>'research_budget','courrier'=>'courriers',
         'hypothesis'=>'hypotheses','evidence'=>'evidence_records','person_online_sheet'=>'person_online_sheets','living_contact'=>'living_contacts',
-        'branch'=>'branches','view'=>'saved_views','label'=>'labels','photo_comparison'=>'photo_comparisons'];
-    $childTables=['label_links','branch_people','hypothesis_options','hypothesis_proofs']; // ⚖️ réponses et preuves d'une hypothèse (lib/hypothesis_compare.php)
+        'branch'=>'branches','view'=>'saved_views','label'=>'labels','photo_comparison'=>'photo_comparisons',
+        // 🐾 Suivi des animaux (lib/suivi.php)
+        'animal_mark'=>'animal_marks','animal_obs'=>'animal_observations','animal_health'=>'animal_health','track_site'=>'track_sites','track_count'=>'track_counts','animal_group'=>'animal_groups','animal_member'=>'animal_memberships'];
+    $childTables=['label_links','branch_people','hypothesis_options','hypothesis_proofs','track_counts','animal_memberships']; // ⚖️ réponses et preuves d'une hypothèse (lib/hypothesis_compare.php)
     if($id&&isset($simple[$type])){
         $table=$simple[$type];
         $stmt=$pdo->prepare("SELECT * FROM change_log WHERE action='delete' AND entity_type=? AND entity_id=? ORDER BY id DESC LIMIT 1");
@@ -9639,6 +9643,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_workbook' => delete_workbook($pdo,$data),
             'duplicate_workbook' => duplicate_workbook($pdo,$data),
             'save_textdoc' => save_textdoc($pdo,$data), // 📝 Traitement de texte
+            'suivi_write' => suivi_write($pdo,$data), // 🐾 Suivi des animaux (lib/suivi.php)
             'rename_textdoc' => rename_textdoc($pdo,$data),
             'delete_textdoc' => delete_textdoc($pdo,$data),
             'restore_textdoc' => restore_textdoc($pdo,$data),

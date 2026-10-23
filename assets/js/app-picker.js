@@ -40,6 +40,9 @@
         workbook: {sym: '🧮', add: '＋ Ajouter un classeur…', one: 'classeur', none: 'Aucun classeur', label: '🧮 Classeurs'}, // lib/textdocs.php
         textdoc: {sym: '📝', add: '＋ Ajouter un document…', one: 'document', none: 'Aucun document', label: '📝 Documents'}, // 📝 Traitement de texte
         parcel: {sym: '▦', add: '＋ Ajouter une parcelle…', one: 'parcelle', fem: true, none: 'Aucune parcelle', label: '▦ Parcelles'}, // 🗺 Cadastre (heritage-cadastre.js)
+        pet: {sym: '🐾', ph: 'Nom, espèce, code de bague, puce… (2 lettres suffisent)', add: '＋ Ajouter un animal…', one: 'animal', many: 'animaux', none: 'Aucun animal', label: '🐾 Animaux'}, // 🐾 Suivi des animaux (lib/suivi.php)
+        tsite: {sym: '🏞', ph: 'Nom du site… (2 lettres suffisent)', add: '＋ Ajouter un site…', one: 'site', none: 'Aucun site', label: '🏞 Sites de suivi'},
+        agroup: {sym: '👥', ph: 'Nom du groupe, de la meute… (2 lettres suffisent)', add: '＋ Ajouter un groupe…', one: 'groupe', none: 'Aucun groupe', label: '👥 Groupes d’animaux'},
         digest: {sym: '📜', ph: 'Commune, cote, année… (2 lettres suffisent)', add: '🔗 Relier un dépouillement…', one: 'dépouillement', none: 'Aucun dépouillement', label: '📜 Dépouillements'}, // journal des recherches (lib/picker.php)
         contact: {sym: '📇', ph: 'Nom, prénom d’un contact… (2 lettres suffisent)', add: '＋ Ajouter un contact…', one: 'contact', none: 'Aucun contact', label: '📇 Contacts'}, // Répertoire des vivants (Questions aux proches)
         mylist: {sym: '📋', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📋 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme
@@ -615,6 +618,7 @@
         if (it.kind === 'archive_service' && window.LCNDA_EXT?.archiveServices?.open) { close(); window.LCNDA_EXT.archiveServices.open(it.id); return; } // 🏛 Listes › Services d'archives
         if (it.kind === 'digest' && window.LCNDA_EXT?.openDepouillement) { close(); window.LCNDA_EXT.openDepouillement(it.id); return; } // 📜 Listes › Dépouillements
         if (it.kind === 'house' && window.LCNDA_EXT?.openHouse) { window.LCNDA_EXT.openHouse({id: it.id}); return; }
+        if (['pet', 'tsite', 'agroup'].includes(it.kind) && window.LCNDA_EXT?.suivi?.openItem) { close(); window.LCNDA_EXT.suivi.openItem(it.kind, it.id); return; } // 🐾 la fiche de l'animal, du site, du groupe
         if (it.kind === 'parcel' && window.LCNDA_EXT?.cadastre?.open) { window.LCNDA_EXT.cadastre.open(it.id, {dialog: true}); return; } // 🗺 la fiche de la parcelle, par-dessus
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
         if (it.kind === 'graph' && window.LCNDA_EXT?.openMyGraph) { close(); window.LCNDA_EXT.openMyGraph(it.uid); return; }

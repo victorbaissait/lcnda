@@ -16,8 +16,8 @@
     const fmt = n => Number(n || 0).toLocaleString('fr-FR');
     const isCurrent = token => token === S().workspaceToken && S().module === 'listes' && S().listType === 'pets';
     const personLink = (id, name) => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>` : esc(name || '');
-    const SPECIES_ICON0 = {chien: '🐕', chat: '🐈', cheval: '🐎', lapin: '🐇', rongeur: '🐹', oiseau: '🐦', poisson: '🐟', reptile: '🐢', ferme: '🐄', autre: '🐾'};
-    const SPECIES0 = {chien: 'Chien', chat: 'Chat', cheval: 'Cheval, poney, âne', lapin: 'Lapin', rongeur: 'Rongeur (cochon d’Inde, hamster…)', oiseau: 'Oiseau', poisson: 'Poisson', reptile: 'Reptile, tortue', ferme: 'Animal de la ferme (vache, chèvre, mouton…)', autre: 'Autre'};
+    const SPECIES_ICON0 = {chien: '🐕', chat: '🐈', cheval: '🐎', lapin: '🐇', rongeur: '🐹', oiseau: '🐦', poisson: '🐟', reptile: '🐢', ferme: '🐄', sauvage: '🦊', marin: '🐬', autre: '🐾'};
+    const SPECIES0 = {chien: 'Chien', chat: 'Chat', cheval: 'Cheval, poney, âne', lapin: 'Lapin', rongeur: 'Rongeur (cochon d’Inde, hamster…)', oiseau: 'Oiseau', poisson: 'Poisson', reptile: 'Reptile, tortue', ferme: 'Animal de la ferme (vache, chèvre, mouton…)', sauvage: 'Mammifère sauvage (loup, cerf, singe…)', marin: 'Animal marin (dauphin, baleine, phoque…)', autre: 'Autre'};
     /* Réglages des animaux (Maintenance → Réglages des animaux) : espèces (les siennes, ordre, cachées), parties et champs du formulaire, pour tous ou par espèce */
     const PREFS_KEY = 'genealogie-pet-prefs';
     const EDITOR_SECS = [['pe1', '🪪 Identité'], ['pe2', '🔖 Identification'], ['pe3', '🌳 Parents'], ['pe4', '🏠 Maîtres'], ['pe5', '🏆 Titres'], ['pe6', '🩺 Santé'], ['pe7', '📏 Mesures'], ['pe8', '📅 Vie'], ['pe9', '📖 Histoire'], ['pe10', '📷 Photos']];
@@ -174,6 +174,7 @@
         ws.querySelector('[data-pet-prefs]').addEventListener('click', () => { st.maintenanceTab = 'pet_prefs'; A().setModule('maintenance'); });
         ws.querySelector('[data-pet-mode]').addEventListener('change', e => { try { localStorage.setItem('genealogie-base-mode', e.target.value); } catch (_) {} toast({family: 'Base de famille.', breeding: 'Base d’élevage : la liste de gauche, le compteur et les statistiques partent des animaux.', both: 'Personnes et animaux mêlés.'}[e.target.value]); A().refreshBaseMode?.(); });
         ws.querySelectorAll('[data-pet-open]').forEach(b => b.addEventListener('click', () => openPet(Number(b.dataset.petOpen))));
+        ext.suivi?.hintInto?.(ws.querySelector('.page')); // 🐾 « l'onglet Suivi est caché » (une fois)
     };
     function openPet(id, view = '') { const st = S(); st.hPet = id; st.hPetView = view; st.listType = 'pets'; if (st.module === 'listes') ext.lists.pets(++st.workspaceToken); else A().setModule('listes'); }
     ext.openPet = openPet;
@@ -252,6 +253,7 @@
         ws.querySelector('[data-pet-kid]').addEventListener('click', () => openEditor(null, null, {species: d.species, breed: d.breed, registry: d.registry, ...(d.sex === 'F' ? {dam_id: id} : {sire_id: id}), owners: d.owners.filter(o => o.role === 'éleveur' || o.role === 'propriétaire').map(o => ({...o, role: 'éleveur'})), breeder: d.breeder, affix: d.affix}));
         ws.querySelector('[data-pet-print]').addEventListener('click', () => (window.LCNDA_UI?.printPage ? window.LCNDA_UI.printPage('') : window.print())); // K13
         applyLayout(ws.querySelector('.h-pet-body'));
+        ext.suivi?.decoratePet?.(ws, p, again); // 🐾 Suivi des animaux : onglets Marques, Observations, Santé, Groupe, Trajets (heritage-suivi-fiche.js)
         ws.querySelector('[data-pet-layout]').addEventListener('click', () => layoutDialog(again));
         ws.querySelector('[data-pet-mkperson]')?.addEventListener('click', async () => {
             if (!await A().confirmBox(`Faire aussi une fiche complète pour « ${p.title} » ? Elle apparaîtra avec les fiches (arbre, événements, photos, sources), reliée à ses parents et petits qui en ont une. Sa fiche d’animal reste comme elle est.`, {title: 'Fiche complète', okLabel: 'Faire la fiche complète'})) return;

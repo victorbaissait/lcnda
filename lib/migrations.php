@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 64;
+const SCHEMA_VERSION = 65;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -85,6 +85,7 @@ function migration_steps(): array
         62 => 'schema_v62',
         63 => 'schema_v63',
         64 => 'schema_v64',
+        65 => 'schema_v65',
     ];
 }
 
@@ -2304,4 +2305,12 @@ function schema_v64(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(places)')->fetchAll(), 'name');
     if ($cols && !in_array('altitude', $cols, true)) { $pdo->exec('ALTER TABLE places ADD COLUMN altitude REAL'); }
+}
+
+/** 🐾 Suivi des animaux (lib/suivi.php, assets/js/heritage-suivi*.js) : marques (bagues, puces, balises…), observations,
+ *  points GPS en masse, santé, sites et comptages, groupes sociaux et appartenances. L'animal est une fiche de « pets ». */
+function schema_v65(PDO $pdo): void
+{
+    if (!function_exists('suivi_schema')) { require_once __DIR__ . '/suivi.php'; }
+    suivi_schema($pdo);
 }

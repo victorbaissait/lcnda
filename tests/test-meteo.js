@@ -322,7 +322,7 @@ async function importPack(S, file = pack) {
                     }
                     await shot(p, `meteo-jour-${name}.png`);
                     await p.click('dialog.wx-dialog .modal-actions button');
-                    assert.equal(await p.$('dialog.wx-dialog'), null);
+                    await p.waitForSelector('dialog.wx-dialog', {state: 'detached', timeout: 5000});
                 });
                 if (name === '1440') {
                     await t('variante : le panneau qui se déplie sous l’événement', async () => {

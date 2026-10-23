@@ -6,9 +6,16 @@
     const {$, $$, api, confirmBox, emptyState, plural, bindWebSearchPanels, bindWebSearchSitesEditors, card, censusStatusText, currentCustomTab, currentDashboardPage, dabovilleNumberFor, dashboardBaseType, dashboardBlockSettings, dashboardGroupItem, dashboardLineageCard, dashboardNewWidget, dashboardNormalizeWidget, dashboardPages, dashboardRecentPeople, dashboardSaintCard, dashboardWidgetInfo, dashboardWidgetLabel, dataRow, debounce, defaultDashboardBlockLimits, defaultDashboardBlocks, defaultDashboardBlockSpans, defaultPersonBlocks, empty, escapeHtml, familyMemoryCardHtml, familyObjectCardHtml, fillLineageWidgets, genderText, generationLabel, isUsableMapCoord, latToY, lifeText, lngToX, mapBackgroundValue, mapTileUrl, mediaPreviewHtml, mediaTypeShortLabelWithIcon, normalizedMediaType, openLightbox, orderedDashboardWidgetTypes, personBlockWidthChoices, personEventMap, personName, placeDisplay, readDesignSettings, readWebSearchSitesEditor, renderSidebar, restoreDoneText, saveDashboardBlockSettings, saveDashboardPages, setModule, sidebarSignal, sosaMap, sosaNumberFor, sosaNumbersText, sosaRootId, state, toast, webSearchPanelHtml, webSearchSettings, webSearchSitesEditor, years} = window.LCNDA_APP;
     // tableau de bord vide : « ＋ Ajouter un widget » montre la liste des widgets de la colonne de gauche (rouverte si besoin)
     document.addEventListener('click',event=>{if(!event.target.closest?.('[data-dash-empty-add]'))return;document.getElementById('app')?.classList.remove('sidebar-collapsed');const first=document.querySelector('[data-add-dashboard-widget]');if(first){first.scrollIntoView({behavior:'smooth',block:'center'});first.focus({preventScroll:true});}});
+    // 🐾 Le Suivi des animaux (onglet « suivi ») utilise ce même moteur, avec ses pages à lui (app.js : dashboardSpace)
+    const isDashModule=()=>state.module==='dashboard'||state.module==='suivi';
+    const isSuiviWidget=type=>String(type).startsWith('sv_');
     function renderDashboardSidebar(content, footer) {
-        const catalog=orderedDashboardWidgetTypes(false);
-        content.innerHTML = `<div class="dashboard-widget-catalog"><div class="dashboard-widget-catalog-item dashboard-widget-overview is-active"><div><span>01</span><strong>Vue générale</strong></div></div>${catalog.map(([type,number,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${escapeHtml(number)}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button><button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="Ajouter ${escapeHtml(label)}">+</button></div></div>`).join('')}</div>`;
+        const all=orderedDashboardWidgetTypes(false),suivi=state.module==='suivi';
+        // le Suivi montre d'abord ses blocs, puis « Autres widgets de l'app » ; le tableau de bord met les blocs du Suivi dans leur rubrique, à la fin
+        const mine=all.filter(([type])=>isSuiviWidget(type)),others=all.filter(([type])=>!isSuiviWidget(type));
+        const groups=suivi?[[null,mine],['Autres widgets de l’app',others]]:[[null,others],['🐾 Suivi des animaux',mine]];
+        let n=1;const item=([type,,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${String(++n).padStart(2,'0')}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button><button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="Ajouter ${escapeHtml(label)}">+</button></div></div>`;
+        content.innerHTML = `<div class="dashboard-widget-catalog"><div class="dashboard-widget-catalog-item dashboard-widget-overview is-active"><div><span>01</span><strong>Vue générale</strong></div></div>${groups.filter(([,items])=>items.length).map(([title,items])=>`${title?`<div class="section-label dashboard-widget-catalog-group">${escapeHtml(title)}</div>`:''}${items.map(item).join('')}`).join('')}</div>`;
         footer.innerHTML = `<div class="dashboard-footer-actions"><button class="button small secondary" id="dashboard-open-design">Apparence</button><button class="button small secondary" id="dashboard-reorder" title="Changer l’ordre des widgets de la vue générale">Réordonner les widgets</button><button class="button small secondary" id="dashboard-create-widget" title="Créer ton propre widget, de zéro ou à partir d’un widget existant">＋ Créer un widget</button></div><span style="display:block;margin-top:9px">Widgets duplicables et configurables.</span>`;
         $$('[data-info-dashboard-widget]',content).forEach(button=>button.addEventListener('click',()=>toast(dashboardWidgetInfo[button.dataset.infoDashboardWidget]||dashboardWidgetLabel(button.dataset.infoDashboardWidget)),{signal:sidebarSignal()}));
         $$('[data-add-dashboard-widget]',content).forEach(button=>button.addEventListener('click',async()=>{
@@ -37,7 +44,7 @@
         const cacheKey=JSON.stringify([dashParams,settings.widgets.filter(w=>w.type==='person_quiz').map(w=>[w.id,w.config,w.limit])]);
         const cached=reuse&&dashboardCache?.key===cacheKey?dashboardCache:null;
         const data=cached?cached.data:await api('dashboard',{seed:state.dashboardRandomSeed||Date.now(),...dashParams});
-        if(token!==state.workspaceToken||state.module!=='dashboard')return;
+        if(token!==state.workspaceToken||!isDashModule())return;
         const quizData=cached?cached.quizData:{};
         const sosaIds=Object.keys(sosaMap()).filter(id=>Number(id)>0&&Number(sosaNumberFor(id))>0).join(',');
         if(!cached)await Promise.all(settings.widgets.filter(widget=>widget.type==='person_quiz').map(async widget=>{
@@ -56,7 +63,7 @@
                 quizData[widget.id]=result.quiz||null;
             }catch(_){quizData[widget.id]=null;}
         }));
-        if(token!==state.workspaceToken||state.module!=='dashboard')return;
+        if(token!==state.workspaceToken||!isDashModule())return;
         dashboardCache={key:cacheKey,data,quizData};
         const personBlockIds=[...new Set(settings.widgets.filter(widget=>['person_block','person_timeline'].includes(widget.type)).map(widget=>widget.config?.personMode==='specific'?Number(widget.config.personId):Number(data.widget_people?.[widget.id]?.id||data.random_person?.id)).filter(Boolean))];
         const personBlockDetails={};
@@ -66,7 +73,7 @@
         const saintData=settings.widgets.some(widget=>widget.type==='saint_day')?await api('saint_of_day').catch(()=>null):null;
         const progressData=settings.widgets.some(widget=>widget.type==='research_progress')?await api('research_progress').catch(()=>null):null;
         await Promise.all(personBlockIds.map(async id=>{try{personBlockDetails[id]=await api('person',{id});}catch(_){personBlockDetails[id]=null;}}));
-        if(token!==state.workspaceToken||state.module!=='dashboard')return;
+        if(token!==state.workspaceToken||!isDashModule())return;
         let index=1;
         const limit=widget=>Math.max(1,Number(widget.limit||defaultDashboardBlockLimits[widget.type]||6));
         const span=widget=>`span-${widget.width||defaultDashboardBlockSpans[widget.type]||'6'}`;
@@ -135,7 +142,7 @@
         // Widgets ajoutés par assets/js/heritage.js : chacun charge ses données une fois
         const extDashboard=window.LCNDA_EXT?.dashboard||{};const extData={};
         await Promise.all([...new Set(settings.widgets.map(widget=>widget.type).filter(type=>extDashboard[type]))].map(async type=>{try{extData[type]=extDashboard[type].load?await extDashboard[type].load():null;}catch(_){extData[type]=null;}}));
-        if(token!==state.workspaceToken||state.module!=='dashboard')return;
+        if(token!==state.workspaceToken||!isDashModule())return;
         Object.keys(extDashboard).forEach(type=>{blockRenderers[type]=widget=>extDashboard[type].render(String(index++).padStart(2,'0'),widget,span(widget),extData[type]);});
         const dress=(widget,html)=>widget.cwDef&&window.LCNDA_EXT?.dressWidget?window.LCNDA_EXT.dressWidget(customDefs[widget.cwDef],html):html;
         // Ensembles : un cadre fin, son titre (qui reste quand on le replie) et ses widgets ; les sous-ensembles dedans
@@ -156,9 +163,10 @@
         const ownTab=currentCustomTab();
         const {pages:dashPagesList}=dashboardPages(),dashPage=currentDashboardPage();
         const dashPagesBar=dashPagesList.length>1?`<div class="segmented dash-pages" role="tablist">${dashPagesList.map(p=>`<button type="button" role="tab" data-dash-page="${escapeHtml(p.id)}" class="${p.id===dashPage.id?'is-active':''}" aria-selected="${p.id===dashPage.id}">${escapeHtml(p.name||'Page')}</button>`).join('')}</div>`:'';
-        $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}"><header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">✎ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>${escapeHtml(dashPage.name||'Vue d’ensemble')}</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p>${dashPagesBar}</div>`}</header>
+        const suiviHead=state.module==='suivi'?window.LCNDA_EXT?.suivi?.headerHtml?.(dashPage,dashPagesList):''; // 🐾 en-tête du Suivi (titre de la page, ses pages, ses boutons)
+        $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}${suiviHead?' sv-page':''}">${suiviHead||`<header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">✎ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>${escapeHtml(dashPage.name||'Vue d’ensemble')}</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p>${dashPagesBar}</div>`}</header>`}
         <div class="card-grid dashboard-grid">${blocks||emptyState({text: ownTab?'Onglet vide':'Aucun widget affiché', icon:'🧩',hint:ownTab?'Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche.':'Ajoute-en depuis la colonne de gauche, ou crée le tien.',action:{label:'＋ Ajouter un widget',attrs:document.querySelector('[data-add-dashboard-widget]')?'data-dash-empty-add':'data-empty-click="#dashboard-create-widget"'}})}</div></section>`;
-        $$('[data-dash-page]').forEach(b=>b.addEventListener('click',()=>{state.dashboardPage=b.dataset.dashPage;renderDashboard();renderSidebar();}));
+        $$('[data-dash-page]').forEach(b=>b.addEventListener('click',()=>{if(state.module==='suivi')state.suiviPage=b.dataset.dashPage;else state.dashboardPage=b.dataset.dashPage;renderDashboard();renderSidebar();}));
         $$('[data-dash-group-toggle]').forEach(b=>b.addEventListener('click',()=>{const current=dashboardBlockSettings();const g=current.widgets.find(w=>w.id===b.dataset.dashGroupToggle);if(!g)return;g.config={...g.config,collapsed:!g.config?.collapsed};saveDashboardBlockSettings(current);renderDashboard(undefined,{reuse:true});}));
         $('[data-edit-custom-tab]')?.addEventListener('click',()=>{state.tabsEditorOpen=ownTab.id;state.maintenanceTab='tabs_editor';setModule('maintenance');});
         $$('[data-reroll-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const current=dashboardBlockSettings();const widget=current.widgets.find(item=>item.id===button.dataset.rerollDashboardWidget);if(widget){widget.config={...(widget.config||{}),randomSeed:Date.now()};saveDashboardBlockSettings(current);}await renderDashboard();}));
@@ -181,6 +189,7 @@
         bindWebSearchPanels($('#workspace'));
         bindWebSearchSitesEditors($('#workspace'));
         fillLineageWidgets();
+        window.LCNDA_EXT?.suivi?.afterRender?.($('#workspace'),{space:state.module==='suivi'?'suivi':'',page:dashPage}); // 🐾 cartes, ⋯ des blocs, réglages gardés tout de suite
         $$('[data-open-dashboard-person]').forEach(button=>button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.openDashboardPerson);setModule('personnes');}));
         const dashboardMediaPool=[data.random_media,...Object.values(data.widget_media||{}),...settings.widgets.filter(widget=>widget.type==='favorite_image'&&Number(widget.config?.mediaId)).map(widget=>({id:widget.config.mediaId,title:widget.config.mediaTitle,filename:widget.config.mediaFilename,thumbnail:widget.config.mediaThumbnail,media_type:'image'}))].filter(Boolean);
         $$('[data-open-dashboard-media]').forEach(button=>button.addEventListener('click',()=>{const item=dashboardMediaPool.find(media=>Number(media.id)===Number(button.dataset.openDashboardMedia));if(item)openLightbox([item],0,true);}));
@@ -206,7 +215,7 @@
     }
     function dashboardWidgetChrome(widget,html){
         const editing=state.dashboardEditingWidget===widget.id;
-        const tools=`<div class="dashboard-widget-tools"><button type="button" class="icon-action" data-edit-dashboard-widget="${escapeHtml(widget.id)}" title="${editing?'Revenir au widget':'Modifier le widget'}">${editing?'↩':'✎'}</button><button type="button" class="icon-action danger" data-delete-dashboard-widget="${escapeHtml(widget.id)}" title="Supprimer ce widget">×</button></div>`;
+        const tools=`<div class="dashboard-widget-tools">${state.module==='suivi'?`<button type="button" class="icon-action" data-dash-widget-more="${escapeHtml(widget.id)}" title="Plus d’actions" aria-label="Plus d’actions">⋯</button>`:''}<button type="button" class="icon-action" data-edit-dashboard-widget="${escapeHtml(widget.id)}" title="${editing?'Revenir au widget':'Modifier le widget'}">${editing?'↩':'✎'}</button><button type="button" class="icon-action danger" data-delete-dashboard-widget="${escapeHtml(widget.id)}" title="Supprimer ce widget">×</button></div>`;
         const wrapper=document.createElement('div');
         wrapper.innerHTML=html.trim();
         const section=wrapper.querySelector('.card');
@@ -318,7 +327,7 @@
     }
     /** Tableau de bord → « Réordonner les widgets » : glisser une ligne, ou ses flèches ↑ ↓, puis Enregistrer. */
     function openDashboardReorderDialog(){
-        const ownTab=currentCustomTab();
+        const ownTab=currentCustomTab(),suivi=state.module==='suivi';
         const current=dashboardBlockSettings();
         // Copie de travail des pages (le tableau de bord principal) ; un onglet à soi n'a qu'une page
         const meta=dashboardPages();
@@ -331,7 +340,7 @@
         const newPageId=()=>'pg_'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
         const draw=()=>{
             const widgets=page().widgets;let depth=-1;
-            $('.dash-pages-editor',dialog).innerHTML=ownTab?'':`<h3>Pages du tableau de bord</h3><p class="muted">Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture.</p>
+            $('.dash-pages-editor',dialog).innerHTML=ownTab?'':`<h3>${suivi?'Pages du suivi':'Pages du tableau de bord'}</h3><p class="muted">Chaque page a ses widgets ; les boutons des pages sont en haut ${suivi?'du Suivi des animaux':'du tableau de bord'}. La page cochée s’affiche à l’ouverture.</p>
                 <div class="dash-pages-rows">${pagesWork.map(p=>`<div class="dash-page-row${p.id===editing?' is-editing':''}" data-page-row="${escapeHtml(p.id)}"><label class="checkbox-line" title="Page affichée à l’ouverture"><input type="radio" name="dash-default" value="${escapeHtml(p.id)}" ${p.id===defaultWork?'checked':''}> par défaut</label><input data-page-name value="${escapeHtml(p.name||'')}" maxlength="40" placeholder="Nom de la page"><button type="button" class="button small ${p.id===editing?'':'secondary'}" data-page-edit>${p.id===editing?'✎ en cours':'Ranger ses widgets'}</button>${pagesWork.length>1?'<button type="button" class="icon-button danger" data-page-del title="Supprimer cette page">🗑</button>':''}</div>`).join('')}</div>
                 <button type="button" class="button small secondary" data-page-add>＋ Nouvelle page</button>`;
             $('.dashboard-reorder-list',dialog).innerHTML=widgets.length?widgets.map((w,i)=>{
@@ -339,7 +348,7 @@
                 return `<li class="dashboard-reorder-row" draggable="true" data-index="${i}" style="margin-left:${Math.min(depth+1,9)*22}px"><span class="order-grip" aria-hidden="true">⠿</span><span class="order-number">${String(i+1).padStart(2,'0')}</span><b>${escapeHtml(dashboardWidgetLabel(w.type))}${subtitle(w)?` <small>${escapeHtml(subtitle(w))}</small>`:''}</b><small class="cell-muted">${escapeHtml(widthText(w))}</small><span class="dashboard-reorder-moves"><button type="button" class="icon-button" data-move="-1" ${i===0?'disabled':''} aria-label="Monter">↑</button><button type="button" class="icon-button" data-move="1" ${i===widgets.length-1?'disabled':''} aria-label="Descendre">↓</button></span></li>`;
             }).join(''):`<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun widget sur cette page : ajoute-en depuis la colonne de gauche du tableau de bord.</span></li>`;
         };
-        dialog.innerHTML=`<div class="modal-head"><div><span class="eyebrow">${ownTab?'MON ONGLET':'TABLEAU DE BORD'}</span><h2>Réordonner les widgets</h2><p>Glisse une ligne, ou utilise ses flèches. Un ensemble regroupe les widgets qui le suivent, dans un cadre avec son titre ; ▶ en fait un sous-ensemble.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
+        dialog.innerHTML=`<div class="modal-head"><div><span class="eyebrow">${ownTab?'MON ONGLET':suivi?'SUIVI DES ANIMAUX':'TABLEAU DE BORD'}</span><h2>Réordonner les widgets</h2><p>Glisse une ligne, ou utilise ses flèches. Un ensemble regroupe les widgets qui le suivent, dans un cadre avec son titre ; ▶ en fait un sous-ensemble.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
             <section class="dash-pages-editor"></section>
             <div class="dash-reorder-tools"><button type="button" class="button small secondary" data-group-add>＋ Ensemble</button><span class="muted">Le nouvel ensemble arrive en haut : glisse-le au-dessus de ses widgets.</span></div>
             <ol class="dashboard-reorder-list" data-dnd-off></ol><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="button" data-save>Enregistrer</button></div>`;
@@ -372,11 +381,12 @@
         $('[data-save]',dialog).addEventListener('click',async()=>{
             if(ownTab)saveDashboardBlockSettings({widgets:page().widgets});
             else{
-                const clean=pagesWork.map(p=>({id:p.id,name:String(p.name||'').trim().slice(0,40)||'Page',widgets:p.widgets.map(w=>w.type==='__group'?dashboardGroupItem(w):dashboardNewWidget(w.type,w))}));
+                const clean=pagesWork.map(p=>({...p,id:p.id,name:String(p.name||'').trim().slice(0,40)||'Page',widgets:p.widgets.map(w=>w.type==='__group'?dashboardGroupItem(w):dashboardNewWidget(w.type,w))})); // les réglages propres d'une page (icône, filtre du Suivi) restent
+                if(suivi&&!clean.some(p=>p.id===state.suiviPage))state.suiviPage=defaultWork;
                 saveDashboardPages(clean,defaultWork);
                 if(!clean.some(p=>p.id===state.dashboardPage))state.dashboardPage=defaultWork;
             }
-            close();toast('Tableau de bord enregistré.');if(state.module==='dashboard')await renderDashboard();
+            close();toast(suivi?'Pages du suivi enregistrées.':'Tableau de bord enregistré.');if(isDashModule())await renderDashboard();
         });
         dialog.addEventListener('close',()=>dialog.remove());
         dialog.showModal();
