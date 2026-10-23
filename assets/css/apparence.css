@@ -4,6 +4,7 @@
 .lc-hide { display: none !important; }
 .person-page.lc-hero-off > .person-hero { display: none; }
 .person-hero-actions.lc-cols-2 { display: grid; grid-template-columns: repeat(2, 29px); gap: 14px 12px; align-content: center; justify-content: center; }
+.person-hero-actions.lc-rows-2 { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); gap: 12px 12px; align-content: center; justify-content: center; }
 .lc-pf-btn { font-size: 15px; line-height: 1; }
 .lc-pf-link { border: var(--line); padding: 5px 10px; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; background: var(--white, #fff); color: var(--ink); cursor: pointer; font-family: inherit; }
 .lc-pf-link:hover, .lc-pf-link:focus-visible { background: var(--blue); color: #fff; }
@@ -32,6 +33,7 @@
 .lc-hh-b.pf { background: var(--blue-soft, #eaf2ff); }
 .lc-hh-btns { display: flex; flex-direction: column; gap: 6px; border-left: 2px solid var(--ink); padding-left: 10px; }
 .lc-hh-btns.lc-cols-2 { display: grid; grid-template-columns: repeat(2, 22px); }
+.lc-hh-btns.lc-rows-2 { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, 22px); }
 .lc-hh-btn { width: 22px; height: 22px; display: grid; place-items: center; border: 1.5px solid var(--ink); font-size: 11px; background: var(--white, #fff); }
 
 /* ── Formes des avatars ── */

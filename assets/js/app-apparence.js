@@ -443,6 +443,8 @@
         ['history', '🕘', 'Historique de la fiche', '[data-person-history]'],
         ['write', '📝', 'Écrire sur cette personne (traitement de texte)', '[data-wp-write]'],
         ['profils', '🧩', 'Cette personne était… (ses profils)', '[data-lc-pf]'],
+        ['star', '☆', 'Ajouter aux raccourcis (étoile)', '[data-sc-star]'],
+        ['more', '⋯', 'Plus d’actions (menu ⋯)', '[data-fsec-hero-more]'],
     ];
     const HEAD_KEYS = HEAD_BUTTONS.map(b => b[0]);
     function headerCfg() {
@@ -450,7 +452,7 @@
         const order = Array.isArray(v.order) ? v.order.filter((k, i, l) => HEAD_KEYS.includes(k) && l.indexOf(k) === i) : [];
         HEAD_KEYS.forEach((k, i) => { if (!order.includes(k)) order.splice(Math.min(i, order.length), 0, k); });
         return {frame: v.frame === 'hide' ? 'hide' : 'show', order, hidden: Array.isArray(v.hidden) ? v.hidden.filter(k => HEAD_KEYS.includes(k)) : ['profils'], // 🧩 en option : caché tant qu'on ne l'a pas coché
-            cols: Number(v.cols) === 2 ? 2 : 1, pf: v.pf === 'badges' ? 'badges' : 'button'};
+            lay: ['c1', 'c2', 'r2'].includes(v.lay) ? v.lay : Number(v.cols) === 2 ? 'c2' : 'r2', pf: v.pf === 'badges' ? 'badges' : 'button'}; // r2 : sur 2 lignes (défaut) · c1 : 1 colonne · c2 : 2 colonnes
     }
     /* Éléments de l'en-tête (statut, 👁 Vu la dernière fois, étiquettes, boutons) et place de « ＋ Nouvelle observation » :
      * localStorage['genealogie-sheet-head'] = {order, hidden, seenPlace: name|badges|bottom, green, red, seenDetail, obsPlace, obsKey} */
@@ -533,7 +535,7 @@
             known.add(el); el.classList.toggle('lc-hide', cfg.hidden.includes(k)); actions.appendChild(el);
         });
         [...actions.children].forEach(el => { if (!known.has(el)) actions.appendChild(el); }); // les boutons d'autres outils restent, à la fin
-        actions.classList.toggle('lc-cols-2', cfg.cols === 2);
+        actions.classList.toggle('lc-cols-2', cfg.lay === 'c2'); actions.classList.toggle('lc-rows-2', cfg.lay === 'r2');
     }
     ext.afterPerson = ext.afterPerson || [];
     // après les autres outils qui ajoutent leur bouton (✨ du diaporama…) : au tour suivant
@@ -545,18 +547,17 @@
         if (cfg.frame === 'hide') return `<div class="lc-hh-prev is-off"><span>Cadre du haut masqué : la fiche commence par les parents, conjoints et enfants, puis les blocs.</span></div>`;
         return `<div class="lc-hh-prev" aria-hidden="true"><div class="lc-hh-id"><span class="lc-hh-av">LB</span><span><small>FICHE INDIVIDUELLE · #3851</small><b>Louise Borie</b></span></div>
             <div class="lc-hh-badges"><span class="lc-hh-b sosa">★ SOSA : 64</span><span class="lc-hh-b">À VÉRIFIER</span><span class="lc-hh-b out">HORS GÉNÉALOGIE</span><span class="lc-hh-b art">🎨 ARTISTE</span>${pfBadge ? '<span class="lc-hh-b pf">🧩 Cette personne était…</span>' : ''}</div>
-            <div class="lc-hh-btns${cfg.cols === 2 ? ' lc-cols-2' : ''}">${shown.map(k => `<span class="lc-hh-btn${k === 'obs' ? ' is-obs' : ''}">${HEAD_BUTTONS.find(b => b[0] === k)[1]}</span>`).join('')}</div></div>`;
+            <div class="lc-hh-btns${cfg.lay === 'c2' ? ' lc-cols-2' : cfg.lay === 'r2' ? ' lc-rows-2' : ''}">${shown.map(k => `<span class="lc-hh-btn${k === 'obs' ? ' is-obs' : ''}">${HEAD_BUTTONS.find(b => b[0] === k)[1]}</span>`).join('')}</div></div>`;
     }
     function headerPanelHtml() {
         const cfg = headerCfg();
         const row = (k, i) => { const b = HEAD_BUTTONS.find(x => x[0] === k); return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher ce bouton"><input type="checkbox" data-hh-show aria-label="Afficher « ${esc(b[2])} »" ${cfg.hidden.includes(k) ? '' : 'checked'}></label><span class="lc-hh-ico" aria-hidden="true">${b[1]}</span><b>${esc(b[2])}${k === 'profils' && !profilsOn() ? ' <small class="muted">(outil des profils pas chargé)</small>' : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-hh-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-hh-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
         const radio = (name, value, cur, label, help = '') => `<label class="lc-hh-radio"><input type="radio" name="${name}" value="${value}" ${String(cur) === String(value) ? 'checked' : ''}><span>${label}${help ? `<small>${help}</small>` : ''}</span></label>`;
         return `<section class="person-block-config" id="lc-person-header"><header><span class="eyebrow">FICHES PERSONNES ET ANIMAUX</span><h3 data-help="Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes." data-help-faq="en-tête de la fiche">En-tête de la fiche</h3><p>Le cadre du haut (nom, badges, boutons carrés) de toutes les fiches de personnes et d’animaux. Glisse les boutons pour changer leur ordre ; décoche un bouton pour le masquer.</p></header>
-            <div data-lcd-a4-host></div>
             <div class="design-order-grid block-grid">
             <section class="maintenance-panel order-editor block-order-editor lc-hh-panel"><div class="item-title-row"><h3>Le cadre du haut</h3></div>
                 <fieldset class="lc-hh-set"><legend>Cadre</legend>${radio('lc-hh-frame', 'show', cfg.frame, 'Afficher le cadre (défaut)')}${radio('lc-hh-frame', 'hide', cfg.frame, 'Masquer tout le cadre', 'Fiche épurée, pour un diaporama : ni nom, ni badges, ni boutons en haut.')}</fieldset>
-                <fieldset class="lc-hh-set"><legend>Boutons carrés</legend>${radio('lc-hh-cols', 1, cfg.cols, 'Sur 1 colonne (défaut)')}${radio('lc-hh-cols', 2, cfg.cols, 'Sur 2 colonnes')}</fieldset>
+                <fieldset class="lc-hh-set"><legend>Boutons carrés</legend>${radio('lc-hh-lay', 'r2', cfg.lay, 'Sur 2 lignes (défaut)', 'Les boutons côte à côte, en deux rangées.')}${radio('lc-hh-lay', 'c1', cfg.lay, 'Sur 1 colonne')}${radio('lc-hh-lay', 'c2', cfg.lay, 'Sur 2 colonnes')}</fieldset>
                 <fieldset class="lc-hh-set"><legend>Lien « 🧩 Cette personne était… »</legend>${radio('lc-hh-pf', 'button', cfg.pf, 'Un bouton carré 🧩, dans la colonne des boutons')}${radio('lc-hh-pf', 'badges', cfg.pf, 'En bas de la colonne des badges', 'Sous À vérifier, Hors généalogie, Artiste.')}<small class="muted">Il est caché au départ : coche « 🧩 » dans la liste des boutons pour le montrer (décoche-le pour le cacher à nouveau). Pas sur les fiches d’animaux.</small></fieldset>
                 <span class="section-label">Aperçu</span><div data-hh-preview>${headerPreviewHtml(cfg)}</div>
                 <div class="page-actions action-zone"><button class="button small secondary" type="button" data-hh-reset>↺ Remettre comme au départ</button></div>
@@ -564,12 +565,13 @@
             <section class="maintenance-panel order-editor block-order-editor"><div class="item-title-row"><h3>Ordre et visibilité des boutons</h3></div>
                 <div class="order-list block-order-list" id="lc-hh-order">${cfg.order.map(row).join('')}</div>
                 <p class="muted lc-hh-k2">Gardé tout seul. Alt + ↑ / ↓ au clavier. « 👁＋ » n’apparaît que sur les fiches d’animaux.</p>
-            </section></div></section>`;
+            </section></div>
+            <div data-lcd-a4-host></div></section>`; // la forme de l'en-tête (A4, grands aperçus) après les boutons : sinon on ne les trouve plus
     }
     function readHeaderPanel(box) {
         const val = n => box.querySelector(`input[name="${n}"]:checked`)?.value;
         const rows = [...box.querySelectorAll('#lc-hh-order .order-row')];
-        return {frame: val('lc-hh-frame') === 'hide' ? 'hide' : 'show', cols: val('lc-hh-cols') === '2' ? 2 : 1, pf: val('lc-hh-pf') === 'badges' ? 'badges' : 'button',
+        return {frame: val('lc-hh-frame') === 'hide' ? 'hide' : 'show', lay: ['c1', 'c2', 'r2'].includes(val('lc-hh-lay')) ? val('lc-hh-lay') : 'r2', pf: val('lc-hh-pf') === 'badges' ? 'badges' : 'button',
             order: rows.map(r => r.dataset.orderKey), hidden: rows.filter(r => !r.querySelector('[data-hh-show]').checked).map(r => r.dataset.orderKey)};
     }
     const refreshPerson = () => { const det = A().state?.currentPerson; if (det && document.querySelector('#workspace .person-page')) applyHeader(det); };
@@ -767,7 +769,7 @@
         }
         bindHeaderPanel(document.getElementById('lc-person-header'));
         bindSheadPanels();
-        // A4 « Fiche d'une personne » (la forme de l'en-tête) : ici, juste avant « Ordre et visibilité des boutons » (même stockage : genealogie-designs.a4)
+        // A4 « Fiche d'une personne » (la forme de l'en-tête) : ici, juste après « Ordre et visibilité des boutons » (même stockage : genealogie-designs.a4)
         { const host = document.querySelector('#lc-person-header [data-lcd-a4-host]'); if (host && !host.firstElementChild && A().state?.maintenanceTab === 'design_sheets') ext.designsA4Frame?.(host); } // seulement sur sa page (les aperçus sont lourds)
         // boutons en haut à droite : juste après l'ordre du menu principal
         const tb = document.getElementById('lc-topbar-buttons'), grid = document.querySelector('#workspace .design-order-grid-four');

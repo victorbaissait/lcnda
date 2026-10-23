@@ -56,7 +56,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/labyrinthe.css?v=1">
     <link rel="stylesheet" href="assets/css/jeux-famille.css?v=2">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
-    <link rel="stylesheet" href="assets/css/apparence.css?v=3">
+    <link rel="stylesheet" href="assets/css/apparence.css?v=4">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=5">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
@@ -1341,7 +1341,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-fiche.js?v=5" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=11" defer></script>
+<script src="assets/js/app-apparence.js?v=12" defer></script>
 <script src="assets/js/app-designs.js?v=7" defer></script>
 <script src="assets/js/app-sections.js?v=3" defer></script>
 <script>
