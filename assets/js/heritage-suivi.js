@@ -154,6 +154,7 @@
         const app = A();
         host.innerHTML = `<div class="sv-map" style="height:${Number(o.height) || 300}px" data-ctx-off><div class="sv-map-tiles"></div><svg class="sv-map-svg" xmlns="http://www.w3.org/2000/svg"></svg>
             <div class="sv-map-zoom"><button type="button" class="icon-button small" data-z="1" aria-label="Rapprocher">＋</button><button type="button" class="icon-button small" data-z="-1" aria-label="Éloigner">−</button><button type="button" class="icon-button small" data-z="0" aria-label="Tout voir">⤢</button></div>
+            ${o.bgPicker !== false && app.mapBackgroundSelectHtml ? `<label class="sv-map-bgsel" title="Fond de la carte">🗺 <select data-sv-mapbg aria-label="Fond de la carte">${app.mapBackgroundSelectHtml(o.bg || defaultBg())}</select></label>` : ''}
             <div class="sv-map-pop" hidden></div></div>`;
         const root = host.firstElementChild, tilesEl = root.querySelector('.sv-map-tiles'), svg = root.querySelector('svg'), pop = root.querySelector('.sv-map-pop');
         let series = o.series || [], polygons = o.polygons || [], bg = o.bg || defaultBg(), z = 12, cx = 0, cy = 0, T = null;
@@ -192,7 +193,9 @@
             if (o.home && Number.isFinite(o.home.lat)) { const [x, y] = px(o.home.lat, o.home.lon); out += `<text x="${x.toFixed(1)}" y="${(y + 7).toFixed(1)}" text-anchor="middle" font-size="20">🏠</text>`; }
             svg.innerHTML = out;
         }
+        root.querySelector('[data-sv-mapbg]')?.addEventListener('change', e => { bg = e.target.value; saveMapPrefs({bg}); draw(); }); // le fond choisi sert ensuite à toutes les cartes du suivi
         root.addEventListener('click', e => {
+            if (e.target.closest('.sv-map-bgsel')) return;
             const zb = e.target.closest('[data-z]');
             if (zb) { const d = Number(zb.dataset.z); if (!d) fit(); else zoomBy(d, W() / 2, H() / 2); draw(); return; }
             const g = e.target.closest('.sv-map-pt');
@@ -204,13 +207,13 @@
         });
         function zoomBy(d, ax, ay) { const nz = Math.max(2, Math.min(19, z + d)); if (nz === z) return; const k = 2 ** (nz - z); const wx = cx - W() / 2 + ax, wy = cy - H() / 2 + ay; cx = wx * k - ax + W() / 2; cy = wy * k - ay + H() / 2; z = nz; }
         let drag = null, moved = false;
-        root.addEventListener('pointerdown', e => { if (e.target.closest('button, .sv-map-pt, .sv-map-pop')) return; drag = {x: e.clientX, y: e.clientY, cx, cy}; moved = false; });
+        root.addEventListener('pointerdown', e => { if (e.target.closest('button, select, label, .sv-map-pt, .sv-map-pop')) return; drag = {x: e.clientX, y: e.clientY, cx, cy}; moved = false; });
         window.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) moved = true; cx = drag.cx - dx; cy = drag.cy - dy; requestAnimationFrame(draw); });
         window.addEventListener('pointerup', () => { drag = null; setTimeout(() => { moved = false; }, 0); });
         root.addEventListener('dblclick', e => { const r = root.getBoundingClientRect(); zoomBy(1, e.clientX - r.left, e.clientY - r.top); draw(); });
         if (o.wheel) root.addEventListener('wheel', e => { e.preventDefault(); const r = root.getBoundingClientRect(); zoomBy(e.deltaY < 0 ? 1 : -1, e.clientX - r.left, e.clientY - r.top); draw(); }, {passive: false});
         fit(); draw();
-        return {draw, fit: () => { fit(); draw(); }, setTime: t => { T = t; draw(); }, setSeries: (s, p) => { series = s; if (p) polygons = p; draw(); }, setBg: b => { bg = b; draw(); }, root};
+        return {draw, fit: () => { fit(); draw(); }, setTime: t => { T = t; draw(); }, setSeries: (s, p) => { series = s; if (p) polygons = p; draw(); }, setBg: b => { bg = b; const sl = root.querySelector('[data-sv-mapbg]'); if (sl) sl.value = b; draw(); }, root};
     }
     /** ▶ Rejouer : les points apparaissent dans l'ordre (curseur du temps, vitesse) */
     function replayBar(host, t0, t1, onTime) {
@@ -657,7 +660,7 @@
             dlg.querySelector('[data-chips]').innerHTML = animals.map((a, i) => `<span class="sv-chip" style="--c:${COLORS[i % COLORS.length]}"><i></i>${esc(a.title)} (${fmtN(a.obs_count + (a.gps?.n || 0))})<button type="button" class="icon-button small" data-rm="${a.id}" aria-label="Retirer ${esc(a.title)}">×</button></span>`).join('');
             const series = await mapSeries(D, animals, D.observations || [], {link, by});
             const host = dlg.querySelector('[data-big]');
-            if (!view) view = mapView(host, {series, polygons: sitePolygons(D), height: Math.max(320, Math.min(620, innerHeight - 300)), wheel: true}); else view.setSeries(series);
+            if (!view) view = mapView(host, {series, polygons: sitePolygons(D), height: Math.max(320, Math.min(620, innerHeight - 300)), wheel: true, bgPicker: false}); else view.setSeries(series);
             const ts = series.flatMap(x => x.points.map(p => p.t)).filter(Number.isFinite);
             rep?.stop(); rep = replayBar(dlg.querySelector('[data-replay]'), Math.min(...ts), Math.max(...ts), t => view.setTime(t));
             dlg.querySelector('[data-legend]').innerHTML = `<b>Légende</b> ${series.map(x => `<span class="sv-leg"><i style="background:${x.color}"></i>${esc(x.name)}${x.gps ? '' : ' · observations (n° = ordre)'}</span>`).join('')}${link ? ' · - - - relié dans l’ordre' : ''}`;
@@ -899,7 +902,8 @@
                 const hint = parsed.format.split(' ')[0];
                 return {count: pts.length, noun: 'point', parsed, data: parsed,
                     summaryHtml: `<b>${esc(plural(pts.length, 'point'))}</b> du ${esc(dateFr(tIso(pts[0][0])))} au ${esc(dateFr(tIso(pts[pts.length - 1][0])))}, <b>${esc(kmText(km))}</b> · ${esc(parsed.format)}`,
-                    notices: parsed.ignored ? [{kind: 'warn', text: `${plural(parsed.ignored, 'ligne')} sans date ou sans position ${parsed.ignored > 1 ? 'seront sautées' : 'sera sautée'}.`}] : [],
+                    notices: [...(parsed.ignored ? [{kind: 'warn', text: `${plural(parsed.ignored, 'ligne')} sans date ou sans position ${parsed.ignored > 1 ? 'seront sautées' : 'sera sautée'}.`}] : []),
+                        ...(animalById(D, pet)?.gps?.n ? [{kind: 'info', text: `${animalById(D, pet).title} a déjà ${plural(animalById(D, pet).gps.n, 'point')} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois).`}] : [])],
                     extra: `<div class="sv-imp"><fieldset><legend>Points à garder</legend><label class="checkbox-line"><input type="radio" name="svkeep" value="all" ${interval ? '' : 'checked'}> Tous les points (${fmtN(pts.length)})</label><label class="checkbox-line"><input type="radio" name="svkeep" value="thin" ${interval ? 'checked' : ''}> Un toutes les <input type="number" min="1" max="1440" value="${interval || 15}" data-unit="min" data-every aria-label="Minutes"> → <b data-thin-n></b></label></fieldset>
                         ${UI().checkHtml ? UI().checkHtml('Couper en nuits (une sortie = un trajet)', {attrs: 'data-nights', checked: /tractive|weenect|invoxia|kippy/i.test(hint)}) : '<label class="checkbox-line"><input type="checkbox" data-nights> Couper en nuits (une sortie = un trajet)</label>'}
                         <div><span class="pk-lab">Pour l’animal</span>${P().pickerField({name: '', hiddenName: false, kind: 'pet', value: pet || null})}</div><div data-skip></div></div>`,
@@ -911,10 +915,10 @@
             run: async (an, fs, body) => {
                 const pid = Number(P().pickerValue(body.querySelector('.pk'))) || 0; if (!pid) throw new Error('Choisis l’animal.');
                 const pts = keep(body), nights = body.querySelector('[data-nights]')?.checked ? C().splitTrips(pts, 120).length : 0, km = C().pathKm(pts);
-                let imp = 0, added = 0;
-                for (let i = 0; i < pts.length; i += 5000) { const r = await write('gps_import', {pet_id: pid, import_id: imp, filename: fs[0].name, format: parsed.format, points: pts.slice(i, i + 5000), km, nights}); imp = r.import_id; added += r.added; }
-                const a = animalById(D, pid); refreshView();
-                return {message: `${plural(added, 'point importé', 'points importés')} pour ${a?.title || 'l’animal'}`, undo: async () => { await write('gps_undo', {import_id: imp}); refreshView(); }};
+                let imp = 0, added = 0, skipped = 0, total = 0;
+                for (let i = 0; i < pts.length; i += 5000) { const r = await write('gps_import', {pet_id: pid, import_id: imp, filename: fs[0].name, format: parsed.format, points: pts.slice(i, i + 5000), km, nights}); imp = r.import_id; added += r.added; skipped += r.skipped || 0; }
+                const a = animalById(D, pid); total = (a?.gps?.n || 0) + added; refreshView();
+                return {message: `${plural(added, 'point importé', 'points importés')} pour ${a?.title || 'l’animal'}${skipped ? ` (${plural(skipped, 'déjà là', 'déjà là')}, ${skipped > 1 ? 'sautés' : 'sauté'})` : ''}${a?.gps?.n ? ` · ${plural(total, 'point')} en tout` : ''}`, undo: async () => { await write('gps_undo', {import_id: imp}); refreshView(); }};
             }});
         function keep(body) { const all = parsed?.points || []; return body.querySelector('[name="svkeep"]:checked')?.value === 'thin' ? C().thin(all, Number(body.querySelector('[data-every]')?.value) || 15) : all; }
     }

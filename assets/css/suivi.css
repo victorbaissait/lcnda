@@ -20,6 +20,8 @@
 .sv-map-pt:focus circle { stroke-width: 4; }
 .sv-map-zoom { position: absolute; top: 8px; right: 8px; display: flex; flex-direction: column; gap: 4px; z-index: 2; }
 .sv-map-zoom .icon-button { background: var(--card-bg, #fff); }
+.sv-map-bgsel { position: absolute; top: 8px; left: 8px; z-index: 2; display: flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 8px; background: var(--card-bg, #fff); box-shadow: 0 1px 4px rgba(0,0,0,.18); font-size: .8rem; }
+.sv-map-bgsel select { font-size: .8rem; padding: 2px 4px; max-width: 150px; }
 .sv-map-pop { position: absolute; z-index: 3; width: 260px; background: var(--card-bg, #fff); color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 rgba(5, 93, 255, .3); padding: 9px 11px; font-size: 12.5px; line-height: 1.45; cursor: default; }
 .sv-map-pop-x { position: absolute; top: 4px; right: 4px; }
 .sv-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; font-size: 12px; color: var(--muted); margin-top: 6px; }

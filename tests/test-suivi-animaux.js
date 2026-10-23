@@ -273,6 +273,16 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
             await w('gps_undo', { import_id: r1.import_id });
             assert.equal((await get('suivi', { op: 'gps', pet_id: ids.gaston })).total, 0);
         });
+        await t('un 2e fichier (complément) s’ajoute au premier sans l’effacer ; ↶ Annuler ne retire que lui', async () => {
+            const pts = S.parseTrack(gpx, 'margot-mars.gpx').points;
+            const a = await w('gps_import', { pet_id: ids.gaston, filename: 'debut.gpx', format: 'GPX', points: pts.slice(0, 80) });
+            const b = await w('gps_import', { pet_id: ids.gaston, filename: 'suite.gpx', format: 'GPX', points: pts.slice(60) });
+            assert.notEqual(a.import_id, b.import_id); assert.equal(b.added, 120); assert.equal(b.skipped, 20);
+            assert.equal((await get('suivi', { op: 'gps', pet_id: ids.gaston })).total, 200);
+            await w('gps_undo', { import_id: b.import_id });
+            assert.equal((await get('suivi', { op: 'gps', pet_id: ids.gaston })).total, 80);
+            await w('gps_undo', { import_id: a.import_id });
+        });
         await t('menu de choix : 🐾 animaux (par code de bague ou n° de puce), 🏞 sites, 👥 groupes', async () => {
             const pk = async (kind, q) => (await get('picker_search', { kind, q })).groups[0].items.map(i => i.title);
             assert.deepEqual(await pk('pet', '7K'), ['Gaston']);
