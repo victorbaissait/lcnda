@@ -70,7 +70,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
     <link rel="stylesheet" href="assets/css/cadastre.css?v=1">
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=2">
-    <link rel="stylesheet" href="assets/css/site-web.css?v=11">
+    <link rel="stylesheet" href="assets/css/site-web.css?v=13">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=7" id="lc-frame-css" media="not all">
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=7" id="lc-designs-gen" media="not all">
@@ -1316,7 +1316,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-site-web-cssjs-ref.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-html-attrs.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-blocs.js?v=6" defer></script>
-<script src="assets/js/heritage-site-web.js?v=13" defer></script>
+<script src="assets/js/heritage-site-web.js?v=15" defer></script>
 <script src="assets/js/heritage-desk-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-lot.js?v=1" defer></script>
 <script src="assets/js/heritage-house-vides.js?v=1" defer></script>

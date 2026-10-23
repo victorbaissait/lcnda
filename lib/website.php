@@ -1219,6 +1219,13 @@ function website_dispatch(PDO $pdo, string $action, array $q): never
                 // les liens vers les autres pages restent dans l'aperçu
                 $id = (int) $row['id'];
                 $html = website_php_links($site, $html, static fn(string $s, array $p = []) => 'api.php?' . http_build_query(['action' => 'website_preview', 'id' => $id, 'page' => $s] + $p));
+                // ✕ pour revenir à l'éditeur (Échap aussi) : seulement dans l'aperçu, jamais dans le site exporté
+                $bar = '<div id="lcnda-apercu" style="position:fixed;z-index:2147483647;right:12px;bottom:12px;display:flex;gap:8px;align-items:center;font:600 13px/1.2 system-ui,sans-serif">'
+                    . '<span id="lcnda-apercu-msg" style="display:none;background:#fff;color:#111;border:2px solid #111;padding:6px 10px">Ferme cet onglet pour revenir à l’éditeur.</span>'
+                    . '<button type="button" id="lcnda-apercu-x" title="Fermer l’aperçu et revenir à l’éditeur (Échap)" style="cursor:pointer;background:#111;color:#fff;border:2px solid #111;padding:7px 12px;font:inherit;box-shadow:3px 3px 0 rgba(0,0,0,.25)">✕ Fermer l’aperçu</button></div>'
+                    . '<script>(function(){function x(){window.close();setTimeout(function(){var m=document.getElementById("lcnda-apercu-msg");if(m)m.style.display="inline-block";},250);}'
+                    . 'document.getElementById("lcnda-apercu-x").addEventListener("click",x);document.addEventListener("keydown",function(e){if(e.key==="Escape")x();});})();</script>';
+                $html = stripos($html, '</body>') !== false ? (string) preg_replace('#</body>#i', $bar . '</body>', $html, 1) : $html . $bar;
                 header('Content-Security-Policy: sandbox allow-scripts allow-forms; ' . website_csp('preview'));
                 header('Content-Type: text/html; charset=utf-8');
                 header('X-Content-Type-Options: nosniff');

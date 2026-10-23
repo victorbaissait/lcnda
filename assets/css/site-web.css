@@ -270,3 +270,22 @@ dialog.modal.sw-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 .sw-attr input[type=text] { width: 100%; min-width: 0; }
 .sw-attr small { grid-column: 1 / -1; margin: 0; }
 .sw-attr-add select { width: 100%; }
+/* 📁 l'arbre des fichiers */
+.sw-files .sw-frow, .sw-files .sw-folder { padding-left: calc(var(--d, 0) * 14px + 2px); }
+.sw-folder .sw-pagename b { font-weight: 700; }
+.sw-ftw { display: inline-block; width: 12px; color: var(--sw-muted); }
+.sw-files .is-drop, .sw-files.is-drop { outline: 2px dashed var(--sw-blue); outline-offset: -2px; background: var(--sw-soft, #f3f6ff); }
+.sw-frow[draggable="true"] { cursor: grab; }
+/* ⇤ ⇥ cacher un panneau, languettes pour le rouvrir */
+.sw-lefthead { display: flex; gap: 4px; align-items: stretch; }
+.sw-lefthead > .segmented { flex: 1; min-width: 0; }
+.sw-pane-x { border: 1.5px solid var(--sw-line); background: var(--sw-bg); color: var(--sw-muted); width: 28px; min-height: 28px; cursor: pointer; font-size: 15px; line-height: 1; flex: none; }
+.sw-pane-x:hover, .sw-pane-x:focus-visible { color: var(--sw-ink, #111); border-color: var(--sw-ink, #111); outline: 0; }
+.sw-this { position: relative; }
+.sw-pane-x-r { position: absolute; top: 8px; right: 8px; }
+.sw-reopen { grid-row: 1; align-self: stretch; writing-mode: vertical-rl; border: 0; background: var(--sw-head); color: var(--sw-muted); font: 600 11.5px system-ui, sans-serif; letter-spacing: .04em; cursor: pointer; padding: 10px 0; width: 22px; }
+.sw-reopen:hover { background: var(--sw-blue); color: #fff; }
+.sw-reopen[hidden] { display: none; }
+.sw-reopen-r { grid-column: 4; border-left: 1px solid var(--sw-line); }
+.sw-reopen-l { grid-column: 2; border-right: 1px solid var(--sw-line); transform: rotate(180deg); }
+@media (max-width: 760px) { .sw-reopen-r { grid-column: 1 / -1; grid-row: 2; writing-mode: horizontal-tb; width: auto; padding: 6px; } }

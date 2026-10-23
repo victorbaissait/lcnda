@@ -213,6 +213,8 @@
                         </div>
                     </section>
                     <aside class="sw-panel" data-sw-panel aria-label="Ceci est…"></aside>
+                    <button type="button" class="sw-reopen sw-reopen-r" data-sw-toggle="panel" data-sw-reopen="panel" hidden title="Remontrer le panneau « Ceci est… »">◂ Ceci est…</button>
+                    <button type="button" class="sw-reopen sw-reopen-l" data-sw-toggle="left" data-sw-reopen="left" hidden title="Remontrer le panneau Blocs, Pages, Styles">Blocs · Pages · Styles ▸</button>
                 </div></div>`;
             document.body.appendChild(dlg);
             ext.fullInit?.(dlg, 'website', true);
@@ -231,7 +233,7 @@
             if (matchMedia('(max-width: 760px)').matches) this.$('[data-sw-leftpane]').hidden = true; // téléphone : le panneau s'ouvre par la colonne d'outils
             else if (pref('leftHidden', false)) this.$('[data-sw-leftpane]').hidden = true;
             if (pref('panelHidden', false)) this.$('[data-sw-panel]').hidden = true;
-            this.$$('[data-sw-toggle]').forEach(b => b.classList.toggle('is-active', !this.$(b.dataset.swToggle === 'left' ? '[data-sw-leftpane]' : '[data-sw-panel]').hidden));
+            ['left', 'panel'].forEach(w => { const h = this.$(w === 'left' ? '[data-sw-leftpane]' : '[data-sw-panel]').hidden; this.$$(`.sw-panes [data-sw-toggle="${w}"]`).forEach(b => b.classList.toggle('is-active', !h)); const tb = this.$(`[data-sw-reopen="${w}"]`); if (tb) tb.hidden = !h || (w === 'left' && matchMedia('(max-width: 760px)').matches); });
             this.bind();
             this.paintLeft(); this.paintPages(); this.paintPanel(); this.applyView(); this.applyDevice(); this.setMode('select', true);
             this.imitate = ext.siteCompat?.BROWSERS.some(b => b.id === pref('imitate', '')) ? pref('imitate', '') : ''; if (this.imitate) this.setImitate(this.imitate);
@@ -297,6 +299,10 @@
                 if (b.matches('[data-sw-fall]')) return this.allFilesMenu(b);
                 if (c.swFopen) { this.openTab(c.swFopen); return this.left === 'pages' && this.paintLeft(); }
                 if (c.swFrename) return this.renameAsk(c.swFrename);
+                if (c.swFtoggle !== undefined) { const cl = this.closedFolders || (this.closedFolders = new Set()); if (cl.has(c.swFtoggle)) cl.delete(c.swFtoggle); else cl.add(c.swFtoggle); return this.paintLeft(); }
+                if (c.swFnewin !== undefined) return this.newFileMenu(b, c.swFnewin);
+                if (c.swDirnew !== undefined) return this.newFolder(c.swDirnew);
+                if (c.swDirmenu !== undefined) return this.folderMenu(b, c.swDirmenu);
                 if (c.swFmenu) return this.tabMenu(c.swFmenu, b);
                 if (c.swToggle) return this.togglePane(c.swToggle);
                 if (b.matches('[data-sw-ftstyle]')) return this.setFtStyle(this.ftStyle === 'tabs' ? 'simple' : 'tabs');
@@ -344,7 +350,7 @@
             // glisser un bloc depuis ＋ Blocs vers l'aperçu (le bloc est retenu ici : le cadre isolé ne reçoit que la position)
             d.addEventListener('dragstart', e => { const b = e.target.closest?.('[data-sw-block]'); if (!b) return; this.dragKey = b.dataset.swBlock; e.dataTransfer.setData('text/plain', `bloc:${this.dragKey}`); e.dataTransfer.effectAllowed = 'copy'; this.stage.classList.add('is-drop'); });
             d.addEventListener('dragend', () => { this.stage.classList.remove('is-drop'); setTimeout(() => { this.dragKey = ''; }, 200); });
-            this.bindDrags();
+            this.bindDrags(); this.bindFileDrag(this.$('[data-sw-leftpane]'));
             // (pas de « load → pas prêt » : l'évènement load arrive APRÈS le message « prêt » du pont et l'effaçait ; seul reload() change la page)
         }
 
@@ -604,7 +610,8 @@
             const el = this.$(which === 'left' ? '[data-sw-leftpane]' : '[data-sw-panel]'); if (!el) return;
             el.hidden = show === undefined ? !el.hidden : !show;
             if (!(which === 'left' && matchMedia('(max-width: 760px)').matches)) setPref(which === 'left' ? 'leftHidden' : 'panelHidden', el.hidden);
-            this.$(`[data-sw-toggle="${which}"]`)?.classList.toggle('is-active', !el.hidden);
+            this.$$(`.sw-panes [data-sw-toggle="${which}"]`).forEach(b => b.classList.toggle('is-active', !el.hidden));
+            const tab = this.$(`[data-sw-reopen="${which}"]`); if (tab) tab.hidden = !el.hidden || (which === 'left' && matchMedia('(max-width: 760px)').matches);
             this.fitKey = ''; if (this.zoomMode === 'fit') setTimeout(() => this.fit(), 30);
         }
         /** ⚙ Gérer les écrans : les points de rupture du site et leurs requêtes @media */
@@ -682,11 +689,11 @@
             this.$$('[data-sw-left]').forEach(b => b.classList.toggle('is-active', b.dataset.swLeft === this.left));
             const tabs = `<div class="segmented sw-lefttabs" role="tablist">${[['blocks', '＋ Blocs'], ['pages', '📄 Pages'], ['styles', '🎨 Styles']].map(([v, l]) => `<button type="button" data-sw-left="${v}" class="${v === this.left ? 'is-active' : ''}">${esc(l)}</button>`).join('')}</div>`;
             if (this.left === 'blocks') {
-                pane.innerHTML = tabs + `<p class="sw-hint">Glisse un bloc dans l’aperçu, ou clique pour l’ajouter après l’élément choisi.</p>` + k.GROUPS.map(([g, gl]) => `<h4>${esc(gl)}</h4><div class="sw-blocks">${k.BLOCKS.filter(b => b.group === g).map(b => `<button type="button" class="sw-block" draggable="true" data-sw-block="${b.key}" title="${esc(b.hint)}"><span aria-hidden="true">${b.icon}</span>${esc(b.label)}</button>`).join('')}</div>`).join('')
+                pane.innerHTML = `<div class="sw-lefthead">${tabs}<button type="button" class="sw-pane-x" data-sw-toggle="left" title="Cacher ce panneau (la languette sur le bord, ou ◧, le remet)" aria-label="Cacher le panneau de gauche">⇤</button></div>` + `<p class="sw-hint">Glisse un bloc dans l’aperçu, ou clique pour l’ajouter après l’élément choisi.</p>` + k.GROUPS.map(([g, gl]) => `<h4>${esc(gl)}</h4><div class="sw-blocks">${k.BLOCKS.filter(b => b.group === g).map(b => `<button type="button" class="sw-block" draggable="true" data-sw-block="${b.key}" title="${esc(b.hint)}"><span aria-hidden="true">${b.icon}</span>${esc(b.label)}</button>`).join('')}</div>`).join('')
                     + '<p class="sw-hint">Les blocs « Ma généalogie » sont remplis par l’app et figés à l’export : jamais de personne vivante ni de fiche confidentielle.</p>';
             } else if (this.left === 'pages') {
                 const p = this.page();
-                pane.innerHTML = tabs + `<div class="sw-pages">${this.site.pages.map((x, i) => `<div class="sw-pagerow${i === this.pageIdx ? ' is-active' : ''}"><button type="button" class="sw-pagename" data-sw-open-page="${i}"><b>${esc(x.name)}</b><small>${esc(pageFile(x))}</small></button>
+                pane.innerHTML = `<div class="sw-lefthead">${tabs}<button type="button" class="sw-pane-x" data-sw-toggle="left" title="Cacher ce panneau (la languette sur le bord, ou ◧, le remet)" aria-label="Cacher le panneau de gauche">⇤</button></div>` + `<div class="sw-pages">${this.site.pages.map((x, i) => `<div class="sw-pagerow${i === this.pageIdx ? ' is-active' : ''}"><button type="button" class="sw-pagename" data-sw-open-page="${i}"><b>${esc(x.name)}</b><small>${esc(pageFile(x))}</small></button>
                     <span class="sw-pageacts"><button type="button" class="icon-button small" data-sw-page="up" data-sw-pi="${i}" title="Monter" aria-label="Monter" ${i <= 1 ? 'disabled' : ''}>↑</button><button type="button" class="icon-button small" data-sw-page="down" data-sw-pi="${i}" title="Descendre" aria-label="Descendre" ${!i || i === this.site.pages.length - 1 ? 'disabled' : ''}>↓</button><button type="button" class="icon-button small" data-sw-page="rename" data-sw-pi="${i}" title="Renommer" aria-label="Renommer">✎</button><button type="button" class="icon-button small" data-sw-page="dup" data-sw-pi="${i}" title="Dupliquer" aria-label="Dupliquer">⧉</button>${i ? `<button type="button" class="icon-button small" data-sw-page="del" data-sw-pi="${i}" title="Supprimer la page" aria-label="Supprimer la page">🗑</button>` : ''}</span></div>`).join('')}</div>
                     <button type="button" class="button small" data-sw-page="add" data-sw-pi="0">＋ Nouvelle page</button>
                     ${this.filesListHtml()}
@@ -698,7 +705,7 @@
             } else {
                 const col = (k2, l) => `<label class="sw-color">${esc(l)}<input type="color" data-sw-th="${k2}" value="${esc(t[k2])}"></label>`;
                 const range = (k2, l, a, b, unit, def) => `<label class="sw-range">${esc(l)}<input type="range" min="${a}" max="${b}" step="1" value="${Number(t[k2])}" data-sw-th="${k2}" data-unit="${unit}" data-default="${def}"></label>`;
-                pane.innerHTML = tabs + `<p class="sw-hint">Ces réglages remplissent les variables <code>--lc-…</code> de ta feuille de styles (onglet CSS).</p>
+                pane.innerHTML = `<div class="sw-lefthead">${tabs}<button type="button" class="sw-pane-x" data-sw-toggle="left" title="Cacher ce panneau (la languette sur le bord, ou ◧, le remet)" aria-label="Cacher le panneau de gauche">⇤</button></div>` + `<p class="sw-hint">Ces réglages remplissent les variables <code>--lc-…</code> de ta feuille de styles (onglet CSS).</p>
                     <h4>Couleurs</h4><div class="sw-colors">${col('primary', 'Principale')}${col('accent', 'Accent')}${col('bg', 'Fond')}${col('text', 'Texte')}</div>
                     <h4>Polices</h4><div class="sw-fonts"><button type="button" class="button small secondary" data-sw-font="font" style="font-family:'${esc(t.font)}'">Aa · ${esc(t.font)}</button><small>texte</small><button type="button" class="button small secondary" data-sw-font="headFont" style="font-family:'${esc(t.headFont)}'">Aa · ${esc(t.headFont)}</button><small>titres</small></div>
                     <h4>Mesures</h4>${range('size', 'Taille du texte', 11, 28, 'px', 17)}${range('width', 'Largeur du contenu', 480, 2000, 'px', 1100)}${range('radius', 'Arrondi des coins', 0, 40, 'px', 8)}
@@ -721,12 +728,73 @@
                 <p class="sw-hint">${media ? `Écrit dans <code>@media ${esc(media)}</code> : seulement sur cet écran.` : 'Écrit dans le CSS du site, pour tous les écrans.'} Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ».</p>`;
         }
         /** 📄 Pages : la liste des fichiers du site, sous les pages (un clic l'ouvre dans le code ; ✎ renommer, ⋯ le reste) */
+        /** 📁 les dossiers du site : ceux des fichiers, ceux créés vides (gardés tant qu'on édite), css/ et js/ (les fichiers principaux) */
+        folders() {
+            const set = new Set(['css', 'js', ...(this.emptyFolders || [])]);
+            this.site.files.forEach(f => { const parts = f.path.split('/'); for (let i = 1; i < parts.length; i++) set.add(parts.slice(0, i).join('/')); });
+            [...set].forEach(d => { const parts = d.split('/'); for (let i = 1; i < parts.length; i++) set.add(parts.slice(0, i).join('/')); });
+            return [...set].sort();
+        }
+        /** 📄 Pages : les fichiers du site en arbre de dossiers (comme Phoenix Code) ; glisser un fichier sur un dossier l'y range */
         filesListHtml() {
-            const cur = this.tabKey(), keys = ['css', 'js', ...this.site.files.slice().sort((a, b) => a.path.localeCompare(b.path)).map(f => `f:${f.id}`)];
-            const row = k => { const t = this.tabInfo(k), f = t.file, where = f ? (f.kind === 'css' || f.kind === 'js' ? (f.pages.length ? `sur ${plural(f.pages.length, 'page')}` : 'sur toutes les pages') : f.kind === 'php' ? 'à inclure' : FILE_KINDS[f.kind].label) : 'tout le site';
-                return `<div class="sw-pagerow${k === cur ? ' is-active' : ''}"><button type="button" class="sw-pagename" data-sw-fopen="${esc(k)}" title="${esc(t.title)}"><b><span class="sw-fico k-${t.kind}" aria-hidden="true">${esc(FILE_KINDS[t.kind].ico)}</span> ${esc(t.name)}</b><small>${esc(f ? f.path : t.name)} · ${esc(where)}</small></button>
-                    <span class="sw-pageacts">${f ? `<button type="button" class="icon-button small" data-sw-frename="${esc(k)}" title="Renommer (l’extension change le format)" aria-label="Renommer">✎</button>` : ''}<button type="button" class="icon-button small" data-sw-fmenu="${esc(k)}" title="Plus : format, pages où il est lié, dupliquer, supprimer" aria-label="Plus">⋯</button></span></div>`; };
-            return `<h4>Fichiers du site <small class="sw-hint">(${keys.length})</small></h4><div class="sw-pages sw-files">${keys.map(row).join('')}</div><button type="button" class="button small secondary" data-sw-fnew>＋ Nouveau fichier</button>`;
+            const cur = this.tabKey(), closed = this.closedFolders || (this.closedFolders = new Set());
+            const items = [{key: 'css', path: 'css/style.css', main: true}, {key: 'js', path: 'js/script.js', main: true}, ...this.site.files.map(f => ({key: `f:${f.id}`, path: f.path}))];
+            const fileRow = (it, depth) => { const t = this.tabInfo(it.key), f = t.file, where = it.main ? 'principal · tout le site' : f.kind === 'css' || f.kind === 'js' ? (f.pages.length ? `sur ${plural(f.pages.length, 'page')}` : 'sur toutes les pages') : f.kind === 'php' ? 'à inclure' : FILE_KINDS[f.kind].label;
+                return `<div class="sw-pagerow sw-frow${it.key === cur ? ' is-active' : ''}" style="--d:${depth}"${it.main ? '' : ` draggable="true" data-sw-fdrag="${esc(it.key)}"`}><button type="button" class="sw-pagename" data-sw-fopen="${esc(it.key)}" title="${esc(t.title)}${it.main ? '' : ' — glisser sur un dossier pour l’y ranger'}"><b><span class="sw-fico k-${t.kind}" aria-hidden="true">${esc(FILE_KINDS[t.kind].ico)}</span> ${esc(it.path.split('/').pop())}</b><small>${esc(where)}</small></button>
+                    <span class="sw-pageacts">${f ? `<button type="button" class="icon-button small" data-sw-frename="${esc(it.key)}" title="Renommer (l’extension change le format)" aria-label="Renommer">✎</button>` : ''}<button type="button" class="icon-button small" data-sw-fmenu="${esc(it.key)}" title="Plus : déplacer, format, pages où il est lié, dupliquer, supprimer" aria-label="Plus">⋯</button></span></div>`; };
+            const folderRow = (d, depth, n) => `<div class="sw-pagerow sw-folder" style="--d:${depth}" data-sw-fdrop="${esc(d)}"><button type="button" class="sw-pagename" data-sw-ftoggle="${esc(d)}" title="Dossier ${esc(d)}/ — déposer un fichier ici pour l’y ranger" aria-expanded="${!closed.has(d)}"><b><span class="sw-ftw" aria-hidden="true">${closed.has(d) ? '▸' : '▾'}</span> 📁 ${esc(d.split('/').pop())}</b><small>${plural(n, 'fichier')}</small></button>
+                <span class="sw-pageacts"><button type="button" class="icon-button small" data-sw-fnewin="${esc(d)}" title="Nouveau fichier dans ${esc(d)}/" aria-label="Nouveau fichier ici">＋</button>${['css', 'js'].includes(d) ? '' : `<button type="button" class="icon-button small" data-sw-dirmenu="${esc(d)}" title="Dossier : renommer, nouveau sous-dossier, supprimer" aria-label="Plus">⋯</button>`}</span></div>`;
+            const dirs = this.folders(), out = [];
+            const walk = (dir, depth) => {
+                dirs.filter(d => d.includes('/') ? d.slice(0, d.lastIndexOf('/')) === dir : dir === '').forEach(d => { const n = items.filter(it => it.path.startsWith(d + '/')).length; out.push(folderRow(d, depth, n)); if (!closed.has(d)) walk(d, depth + 1); });
+                items.filter(it => (it.path.includes('/') ? it.path.slice(0, it.path.lastIndexOf('/')) : '') === dir).sort((a, b) => a.path.localeCompare(b.path)).forEach(it => out.push(fileRow(it, depth)));
+            };
+            walk('', 0);
+            return `<h4>Fichiers du site <small class="sw-hint">(${items.length})</small></h4><div class="sw-pages sw-files" data-sw-fdrop="">${out.join('')}</div>
+                <div class="sw-row"><button type="button" class="button small secondary" data-sw-fnew>＋ Nouveau fichier</button><button type="button" class="button small secondary" data-sw-dirnew="">📁 Nouveau dossier</button></div>`;
+        }
+        /** un fichier rangé dans un autre dossier ('' : la racine) ; les liens et les include vers lui suivent */
+        moveFile(key, dir) {
+            const f = this.fileOf(key); if (!f) return toast('style.css et script.js restent les fichiers principaux : ils ne se déplacent pas.');
+            const base = f.path.split('/').pop(), to = dir ? `${dir}/${base}` : base; if (to === f.path) return;
+            if (f.kind === 'image' && /^images\//.test(to)) return toast('Le dossier images/ est gardé pour les images de ta généalogie à l’export : prends img/ par exemple.', 'error');
+            this.renameFile(key, to); this.paintLeft(); toast(`${base} → ${dir ? `${dir}/` : 'la racine du site'}`);
+        }
+        async newFolder(parent = '') {
+            const n = await A().askText({title: '📁 Nouveau dossier', message: parent ? `Dans ${parent}/ :` : 'Son nom (css, js, img, includes…) :', value: '', okLabel: 'Créer'}); if (!n?.trim()) return;
+            const d = cleanPath(`${parent ? parent + '/' : ''}${n.trim()}`).replace(/\.+$/, ''); if (!d) return;
+            if (d === 'images' || d.startsWith('images/')) return toast('Le dossier images/ est gardé pour les images de ta généalogie à l’export : prends img/ par exemple.', 'error');
+            (this.emptyFolders || (this.emptyFolders = new Set())).add(d); this.closedFolders?.delete(d); this.paintLeft();
+            toast(`📁 ${d}/ : glisses-y des fichiers, ou ＋ pour en créer un dedans (un dossier vide n’est pas gardé à l’enregistrement).`);
+        }
+        async folderMenu(anchor, d) {
+            UI().menuAt(anchor, [{icon: '＋', label: 'Nouveau fichier ici', run: () => this.newFileMenu(anchor, d)}, {icon: '📁', label: 'Nouveau sous-dossier…', run: () => this.newFolder(d)}, {icon: '✎', label: 'Renommer le dossier…', run: () => this.renameFolder(d)},
+                {icon: '🗑', label: 'Supprimer le dossier et ses fichiers', danger: true, run: () => this.deleteFolder(d)}], {title: `📁 ${d}/`});
+        }
+        async renameFolder(d) {
+            const n = await A().askText({title: '✎ Renommer le dossier', message: 'Son nouveau chemin :', value: d, okLabel: 'Renommer'}); if (!n?.trim()) return;
+            const to = cleanPath(n.trim()); if (!to || to === d) return;
+            if (to === 'images' || to.startsWith('images/')) return toast('Le dossier images/ est gardé pour les images de ta généalogie à l’export : prends img/ par exemple.', 'error');
+            this.site.files.filter(f => f.path.startsWith(d + '/')).forEach(f => { const old = f.path; f.path = this.freePath(to + f.path.slice(d.length), f.id); this.relinkPath(old, f.path); });
+            if (this.emptyFolders?.has(d)) { this.emptyFolders.delete(d); this.emptyFolders.add(to); }
+            this.changed(true); this.paintLeft(); this.paintTabs(); this.pushCss(); this.pushHtml(); toast(`📁 ${d}/ → ${to}/`);
+        }
+        deleteFolder(d) {
+            const gone = this.site.files.filter(f => f.path.startsWith(d + '/'));
+            this.site.files = this.site.files.filter(f => !gone.includes(f)); this.emptyFolders?.delete(d);
+            gone.forEach(f => { if (this.tabs?.includes(`f:${f.id}`)) this.tabs = this.tabs.filter(k => k !== `f:${f.id}`); });
+            if (gone.some(f => this.codeTab === `f:${f.id}`)) this.setCodeTab('html', true);
+            this.changed(true); this.paintLeft(); this.paintTabs(); this.pushCss(); this.pushHtml();
+            A().undoToast?.(`📁 ${d}/ supprimé (${plural(gone.length, 'fichier')})`, {undo: () => this.undo()});
+        }
+        /** glisser un fichier sur un dossier de la liste */
+        bindFileDrag(pane) {
+            let key = '';
+            pane.addEventListener('dragstart', e => { const r = e.target.closest?.('[data-sw-fdrag]'); if (!r) return; key = r.dataset.swFdrag; e.dataTransfer.setData('text/plain', key); e.dataTransfer.effectAllowed = 'move'; });
+            pane.addEventListener('dragover', e => { const z = key && e.target.closest?.('[data-sw-fdrop]'); if (!z) return; e.preventDefault(); pane.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); z.classList.add('is-drop'); });
+            pane.addEventListener('dragleave', e => { e.target.closest?.('[data-sw-fdrop]')?.classList.remove('is-drop'); });
+            pane.addEventListener('drop', e => { const z = key && e.target.closest?.('[data-sw-fdrop]'); if (!z) return; e.preventDefault(); const k = key; key = ''; z.classList.remove('is-drop'); this.moveFile(k, z.dataset.swFdrop); });
+            pane.addEventListener('dragend', () => { key = ''; pane.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); });
         }
         paintPages() {
             const sel = this.$('select[data-sw-page]'); sel.innerHTML = this.site.pages.map((p, i) => `<option value="${i}"${i === this.pageIdx ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
@@ -1036,7 +1104,7 @@
         paintPanel() {
             const pane = this.$('[data-sw-panel]'), U = UI(), s = this.sel;
             if (!s) {
-                pane.innerHTML = `<div class="sw-this is-none"><b>Ceci est…</b></div>${A().empty('Clique sur un élément de l’aperçu (ou dans le code) : il dira ce qu’il est, par exemple « header.site-entete ». Tu pourras lui donner un nom, une classe, un id, des couleurs.', {icon: '↖'})}
+                pane.innerHTML = `<div class="sw-this is-none"><button type="button" class="sw-pane-x sw-pane-x-r" data-sw-toggle="panel" title="Cacher ce panneau (la languette sur le bord, ou ◨, le remet)" aria-label="Cacher le panneau Ceci est">⇥</button><b>Ceci est…</b></div>${A().empty('Clique sur un élément de l’aperçu (ou dans le code) : il dira ce qu’il est, par exemple « header.site-entete ». Tu pourras lui donner un nom, une classe, un id, des couleurs.', {icon: '↖'})}
                     <div class="sw-tips"><h4>Astuces</h4><ul><li><b>T Écrire</b> : clique dans un texte pour le changer, le code suit tout seul.</li><li>Dans le code, <kbd>Tab</kbd> déplie une abréviation : <code>ul&gt;li*3</code>, <code>div.carte&gt;h2+p</code>, <code>m10</code>.</li><li><b>▶ Tester</b> fait tourner tes scripts (JS) dans l’aperçu isolé.</li></ul></div>${this.htmlRefHtml()}`;
                 this.bindHtmlRef(pane);
                 return;
@@ -1064,7 +1132,7 @@
             };
             const content = s.tag === 'img' ? U.panelSection({title: 'Image', key: 'sw-img', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="image">🖼 Changer l’image…</button><label>Texte de remplacement (pour qui ne voit pas l’image)<input type="text" data-sw-at="alt" value="${esc(s.alt)}" maxlength="200"></label></div>`})
                 : s.tag === 'a' ? U.panelSection({title: 'Lien', key: 'sw-link', open: true, body: `<div class="form-grid one-column sw-form"><label>Adresse<input type="text" data-sw-at="href" value="${esc(s.href)}" placeholder="page.html, https://…, mailto:…" maxlength="300"></label><div class="sw-chips">${this.site.pages.map(p => `<button type="button" class="sw-chip" data-sw-act="link" data-v="${esc(pageFile(p))}">📄 ${esc(p.name)}</button>`).join('')}</div></div>`}) : '';
-            pane.innerHTML = `<div class="sw-this"><small>Ceci est</small><b>${esc(s.name || (s.block ? KIND_LABEL[s.block] : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt">« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}${this.htmlRefLine(s.tag)}</div>
+            pane.innerHTML = `<div class="sw-this"><button type="button" class="sw-pane-x sw-pane-x-r" data-sw-toggle="panel" title="Cacher ce panneau (la languette sur le bord, ou ◨, le remet)" aria-label="Cacher le panneau Ceci est">⇥</button><small>Ceci est</small><b>${esc(s.name || (s.block ? KIND_LABEL[s.block] : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt">« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}${this.htmlRefLine(s.tag)}</div>
                 <div class="sw-acts"><button type="button" class="icon-button small" data-sw-act="up" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-sw-act="down" title="Descendre" aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-sw-act="dup" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-sw-act="code" title="Voir dans le code" aria-label="Voir dans le code">&lt;/&gt;</button><button type="button" class="icon-button small" data-sw-act="parent" title="Choisir l’élément qui le contient" aria-label="Choisir le parent">⤴</button><span class="spacer"></span><button type="button" class="icon-button small danger" data-sw-act="del" title="Supprimer l’élément" aria-label="Supprimer l’élément">🗑</button></div>
                 ${U.panelSection({title: 'Ceci est… (nom, balise, classe, id)', key: 'sw-what', open: true, body: `<p class="sw-hint">Dis ce que c’est : « c’est mon en-tête, mon menu… »</p><div class="sw-chips">${ROLES.map(([tag, name], i) => `<button type="button" class="sw-chip${s.tag === tag && s.name === name ? ' is-active' : ''}" data-sw-role="${i}" title="&lt;${tag}&gt;, nommé « ${esc(name)} »">${esc(name)}</button>`).join('')}</div>
                     <div class="form-grid one-column sw-form"><label>Nom (pour toi)<input type="text" list="sw-names" data-sw-at="data-lc-name" value="${esc(s.name)}" maxlength="60" placeholder="En-tête, carte de la famille…"></label><datalist id="sw-names">${NAMES.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
@@ -1191,8 +1259,8 @@
                 }), onSubmit: () => {}});
         }
         /** ＋ : un nouveau fichier ; il s'ouvre, son nom prêt à être changé */
-        newFileMenu(btn) {
-            const mk = (path, content) => { path = this.freePath(path); const f = {id: `f${newId().slice(1)}`, path, kind: kindOfExt(extOf(path)), content, pages: []}; this.site.files.push(f); this.changed(true); this.openTab(`f:${f.id}`); this.paintLeft(); setTimeout(() => this.renameTab(`f:${f.id}`), 30); };
+        newFileMenu(btn, dir = null) {
+            const mk = (path, content) => { if (dir !== null) path = `${dir ? dir + '/' : ''}${path.split('/').pop()}`; path = this.freePath(path); this.emptyFolders?.delete(dir); const f = {id: `f${newId().slice(1)}`, path, kind: kindOfExt(extOf(path)), content, pages: []}; this.site.files.push(f); this.changed(true); this.openTab(`f:${f.id}`); this.paintLeft(); setTimeout(() => this.renameTab(`f:${f.id}`), 30); };
             UI().menuAt(btn, [
                 {icon: '‹›', label: 'Page HTML', help: 'une page de plus, dans le menu', run: () => this.addPage({ext: 'html', quick: true})},
                 {icon: 'php', label: 'Page PHP', help: 'une page .php : elle inclut un en-tête commun', run: () => this.addPage({ext: 'php', quick: true})},
@@ -1202,7 +1270,7 @@
                 {icon: 'php', label: 'Morceau PHP à inclure (en-tête, pied…)', help: 'pour l’appeler dans une page PHP : include', run: () => mk('includes/entete.php', this.headerSnippet())},
                 {icon: '{}', label: 'Données (.json)', run: () => mk('data/donnees.json', '{\n  \n}\n')},
                 {icon: '¶', label: 'Texte (.txt, robots.txt…)', run: () => mk('notes.txt', '')},
-                {icon: '🖼', label: 'Image (png, jpg, svg…)', help: 'gardée dans le site, à mettre dans une page : <img src="img/…">', run: async () => { const list = await pickFiles('image/*', true); for (const file of list) { const url = await readData(file).catch(err => { toast(err.message, 'error'); return ''; }); if (!url) continue; const path = this.freePath(`img/${cleanPath(file.name) || 'image.png'}`); this.site.files.push({id: `f${newId().slice(1)}`, path, kind: 'image', content: url, pages: []}); } if (list.length) { this.changed(true); this.paintLeft(); this.paintTabs(); toast(`${plural(list.length, 'image')} dans le site (dossier img/).`, 'success'); } }},
+                {icon: '🖼', label: 'Image (png, jpg, svg…)', help: 'gardée dans le site, à mettre dans une page : <img src="img/…">', run: async () => { const list = await pickFiles('image/*', true); for (const file of list) { const url = await readData(file).catch(err => { toast(err.message, 'error'); return ''; }); if (!url) continue; const path = this.freePath(`${dir !== null ? (dir ? dir + '/' : '') : 'img/'}${(cleanPath(file.name) || 'image.png').split('/').pop()}`); this.site.files.push({id: `f${newId().slice(1)}`, path, kind: 'image', content: url, pages: []}); } if (list.length) { this.changed(true); this.paintLeft(); this.paintTabs(); toast(`${plural(list.length, 'image')} dans le site (dossier img/).`, 'success'); } }},
                 '-', {icon: '📂', label: 'Ouvrir un dossier (un site déjà fait)…', run: () => importFolder()},
             ], {title: 'Nouveau fichier'});
         }
@@ -1260,6 +1328,7 @@
             if (key !== 'css' && key !== 'js') items.push({icon: '✎', label: 'Renommer', help: 'double-clic sur l’onglet', run: () => { this.openTab(key); setTimeout(() => this.renameTab(key), 30); }});
             if (t.page) items.push(t.page.ext === 'php' ? {icon: '‹›', label: 'Passer en HTML (.html)', run: () => this.setPageFile(t.page, t.page.slug, 'html')} : {icon: 'php', label: 'Passer en PHP (.php)', help: 'pour inclure un en-tête commun…', run: () => this.setPageFile(t.page, t.page.slug, 'php')});
             if (t.file) {
+                items.push({icon: '📁', label: 'Déplacer vers…', help: `aujourd’hui : ${t.file.path.includes('/') ? t.file.path.slice(0, t.file.path.lastIndexOf('/')) + '/' : 'la racine'}`, run: () => UI().menuAt(at, [{icon: '⌂', label: 'La racine du site', run: () => this.moveFile(key, '')}, ...this.folders().map(d => ({icon: '📁', label: `${d}/`, disabled: t.file.path.startsWith(d + '/') && !t.file.path.slice(d.length + 1).includes('/'), run: () => this.moveFile(key, d)})), '-', {icon: '＋', label: 'Nouveau dossier…', run: async () => { await this.newFolder(); const d = [...(this.emptyFolders || [])].pop(); if (d) this.moveFile(key, d); }}], {title: `Déplacer ${t.name}`})}, '-');
                 Object.keys(FILE_KINDS).filter(k2 => k2 !== t.file.kind).forEach(k2 => items.push({icon: FILE_KINDS[k2].ico, label: `Changer en .${k2}`, run: () => this.renameFile(key, t.file.path.replace(/(\.[a-z0-9]+)?$/, `.${k2}`))}));
                 if (t.file.kind === 'css' || t.file.kind === 'js') items.push('-', {icon: '📄', label: 'Pages où il est lié…', help: t.file.pages.length ? plural(t.file.pages.length, 'page') : 'toutes les pages', run: () => this.filePagesDialog(t.file)});
                 items.push({icon: '⧉', label: 'Dupliquer', run: () => { const c = {...t.file, id: `f${newId().slice(1)}`, path: this.freePath(t.file.path), pages: [...t.file.pages]}; this.site.files.push(c); this.changed(true); this.openTab(`f:${c.id}`); this.paintLeft(); }});

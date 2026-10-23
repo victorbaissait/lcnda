@@ -480,7 +480,7 @@ function lockNavigation(webContents, origin) {
     // Deuxième écran détaché (« Fenêtre ↗ » du panneau À côté) : vraie fenêtre de l'application, même pont et même sécurité
     // 🌐 « ↗ Aperçu » de Mon site web : une page isolée (CSP sandbox, origine opaque), SANS le pont de l'application
     if (desk.isSitePreviewUrl(url, origin)) {
-      return { action: 'allow', overrideBrowserWindowOptions: { width: 1280, height: 860, autoHideMenuBar: true, title: 'Aperçu du site',
+      return { action: 'allow', overrideBrowserWindowOptions: { width: 1280, height: 860, autoHideMenuBar: true, title: 'Aperçu du site — Échap pour fermer', fullscreenable: false,
         webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false, preload: undefined } } };
     }
     if (desk.isWidgetUrl(url, origin)) return { action: 'deny' }; // un widget s'ouvre seulement par le menu de l'application
@@ -500,11 +500,25 @@ function lockNavigation(webContents, origin) {
   const sideGuard = (event, url) => { if (sideWindows.has(webContents) && !sideSafe(url)) event.preventDefault(); };
   webContents.on('will-redirect', sideGuard);
   webContents.on('will-frame-navigate', (event) => { if (sideWindows.has(webContents) && !sideSafe(event.url)) event.preventDefault(); });
+  watchSitePreview(webContents, origin);
   webContents.on('will-navigate', (event, url) => {
     if (sideWindows.has(webContents)) { if (!sideSafe(url)) event.preventDefault(); return; } // le site consulté navigue librement, sans jamais charger l'application
     if (sameOrigin(url, origin) || url.split('#')[0] === LOADING_URL) return;
     event.preventDefault();
     external(url);
+  });
+}
+
+/** 🌐 la fenêtre « ↗ Aperçu » de Mon site web : rattachée à la fenêtre de l'app, jamais en plein écran, et Échap / ⌘W / Ctrl+W la ferme */
+function watchSitePreview(webContents, origin) {
+  webContents.on('did-create-window', (child, { url }) => {
+    if (!desk.isSitePreviewUrl(url, origin)) return;
+    try { child.setFullScreenable(false); } catch (_) { /* pas sur tous les systèmes */ }
+    child.webContents.on('before-input-event', (event, input) => {
+      if (input.type !== 'keyDown') return;
+      const k = String(input.key || '').toLowerCase();
+      if (k === 'escape' || ((input.control || input.meta) && k === 'w')) { event.preventDefault(); child.close(); }
+    });
   });
 }
 
