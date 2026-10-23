@@ -42,7 +42,8 @@
     "test:artist": "node tests/test-artist.js",
     "test:scene": "node tests/test-scene.js",
     "test:oeuvres": "node tests/test-oeuvres.js",
-    "test:blocs": "node tests/test-blocs.js"
+    "test:blocs": "node tests/test-blocs.js",
+    "test:site-compat": "node tests/test-site-compat.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",
