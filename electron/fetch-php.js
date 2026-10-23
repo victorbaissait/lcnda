@@ -46,7 +46,15 @@ async function install(key, rt) {
     console.log('Archive déjà présente : ' + path.basename(archive));
   } else {
     console.log('Téléchargement de PHP ' + rt.version + ' (' + key + ')…');
-    await download(rt.url, archive);
+    try {
+      await download(rt.url, archive);
+    } catch (err) {
+      // windows.php.net range les anciennes versions dans « archives/ » dès qu'une nouvelle sort : même fichier, même empreinte (vérifiée plus bas).
+      const alt = rt.url.replace('/downloads/releases/', '/downloads/releases/archives/');
+      if (alt === rt.url || !/\(404\)/.test(err.message)) throw err;
+      console.log('  → déplacé dans les archives de php.net, nouvel essai : ' + alt);
+      await download(alt, archive);
+    }
   }
   const got = sha256(archive);
   if (got !== rt.sha256) {
