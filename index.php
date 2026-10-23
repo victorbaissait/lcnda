@@ -1197,7 +1197,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-decennales.js?v=3" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=12" defer></script>
 <script src="assets/js/heritage-audio-engine.js?v=2" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=65" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=66" defer></script>
 <script src="assets/js/heritage-audio-quick.js?v=3" defer></script>
 <script src="assets/js/heritage-audio-studio.js?v=3" defer></script>
 <script src="assets/js/heritage-audio-multi.js?v=2" defer></script>
@@ -1225,7 +1225,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=43" defer></script>
 <script src="assets/js/heritage-dnd.js?v=11" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=1" defer></script>
-<script src="assets/js/heritage-studio.js?v=96" defer></script>
+<script src="assets/js/heritage-studio.js?v=97" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=12" defer></script>
 <script src="assets/js/heritage-fiches.js?v=21" defer></script>
@@ -1302,11 +1302,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-list.js?v=3" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=16" defer></script>
 <script src="assets/js/heritage-keynote.js?v=20" defer></script>
-<script src="assets/js/heritage-tableur.js?v=6" defer></script>
+<script src="assets/js/heritage-tableur.js?v=7" defer></script>
 <script src="assets/js/heritage-tableur-cibles.js?v=1" defer></script>
 <script src="assets/js/heritage-tableur-base.js?v=1" defer></script>
 <script src="assets/js/heritage-calculette.js?v=3" defer></script>
-<script src="assets/js/heritage-traitement-texte.js?v=2" defer></script>
+<script src="assets/js/heritage-traitement-texte.js?v=3" defer></script>
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=3" defer></script>
 <script src="assets/js/heritage-traitement-texte-outils.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-fichiers.js?v=1" defer></script>
