@@ -397,6 +397,71 @@ kbd{border:1px solid #c9ccd3;border-bottom-width:2px;background:#f4f5f7;padding:
 @media (max-width:900px){.states{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.states{grid-template-columns:minmax(0,1fr)}.hsub{padding-left:12px}.ltip{left:0;white-space:normal;width:220px}}
 
+/* ───── style actuel « Ordre et visibilité des blocs » ───── */
+.ov-cfg>header .eyebrow{color:#055dff;font-size:11px}
+.ov-cfg>header h3{font-size:24px;margin:4px 0 6px;letter-spacing:-.02em}
+.ov-cfg>header p{margin:0 0 4px;color:#666;font-size:13px;line-height:1.45}
+.ov-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:14px;align-items:start}
+.ov-panel{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.18);padding:18px;min-width:0}
+.ov-panel .itr{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px}
+.ov-panel h4{font-size:19px;margin:0;letter-spacing:-.01em}
+.ov-list{display:grid;gap:7px}
+.ov-row{display:grid;grid-template-columns:18px 28px minmax(90px,1fr) auto 24px;gap:7px;align-items:center;padding:8px;border:2px solid #111;background:#fff;min-width:0}
+.ov-row .og{color:#9aa0aa;font-size:16px;cursor:grab}
+.ov-row .onum{color:#055dff;font:800 12px system-ui}
+.ov-row b{font-size:13px;line-height:1.15;min-width:0;overflow-wrap:anywhere}
+.ov-w{display:flex;gap:4px;justify-content:flex-end;flex-wrap:wrap}
+.ov-w span{display:grid;place-items:center;min-width:31px;height:25px;border:1.5px solid #111;background:#fff;font:900 10px system-ui;padding:0 5px}
+.ov-w span.on{background:#055dff;color:#fff}
+.ov-ck{width:18px;height:18px;border:2px solid #055dff;background:#055dff;border-radius:3px;position:relative;justify-self:center}
+.ov-ck:after{content:"";position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.ov-ck.off{background:#fff;border-color:#767676}.ov-ck.off:after{display:none}
+.ov-row.hid{background:#f3f4f6;color:#888}.ov-row.hid b{color:#888}.ov-row.hid .ov-w{opacity:.5}
+.ov-sec{grid-template-columns:18px minmax(0,1fr) auto auto 24px 28px;background:#e9edf4;border-color:#111;padding:9px 8px;margin-top:8px}
+.ov-sec:first-child{margin-top:0}
+.ov-sec b{font:800 12px system-ui;letter-spacing:.12em;text-transform:uppercase}
+.ov-sec small{font:600 12px system-ui;color:#555;letter-spacing:0;text-transform:none}
+.ov-sec .fd2{font-size:12px;color:#333}
+.ov-sec .dots{width:26px;height:26px;border:1.5px solid #111;display:grid;place-items:center;background:#fff;font-size:13px}
+.ov-in{margin-left:16px}
+.ov-row.drag{border-color:#055dff;box-shadow:5px 5px 0 rgba(5,93,255,.35);transform:rotate(-1deg)}
+.ov-drop{height:0;border-top:3px solid #055dff;margin:0 0 0 16px;position:relative}
+.ov-drop:before{content:"";position:absolute;left:-6px;top:-6px;width:9px;height:9px;border-radius:50%;background:#055dff}
+.ov-loose{background:repeating-linear-gradient(-45deg,#f6f7f9 0 8px,#eef0f3 8px 9px)}
+.ov-btn{display:inline-block;background:#055dff;color:#fff;border:2px solid #111;font:800 13px system-ui;padding:8px 13px;box-shadow:3px 3px 0 rgba(5,93,255,.3);margin-top:12px}
+.ov-btn.sec{background:#fff;color:#111;font-size:12px;padding:5px 10px;box-shadow:none;border-width:1.5px;margin:0}
+.ov-off{opacity:.55;filter:grayscale(1)}
+.ov-offnote{border:1.5px dashed #8a8f99;padding:8px 10px;font-size:12.5px;color:#444;background:#f8f8f8;margin:0 0 10px;line-height:1.45}
+.ov-set{display:grid;grid-template-columns:170px minmax(0,1fr);gap:10px 14px;align-items:center;font-size:13px}
+.ov-set>span:nth-child(odd){font-weight:700}
+.ov-chs{display:flex;gap:4px;flex-wrap:wrap}
+.ov-chs span{border:1.5px solid #111;padding:4px 8px;font:800 11px system-ui;background:#fff;white-space:nowrap}
+.ov-chs span.on{background:#055dff;color:#fff}
+.ov-kb{font-size:12px;color:#555;margin-top:10px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+/* F12 */
+.swbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;border:2px solid #111;background:#fff;padding:10px 12px;box-shadow:4px 4px 0 rgba(5,93,255,.2)}
+.swbar b{font-size:13.5px}
+.cmp{display:grid;grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr);gap:10px;align-items:center;margin-top:16px}
+.cmp>div{min-width:0}
+.cmp .arr{font-size:28px}
+.vg{border:2px solid #c9ccd3;padding:10px;background:#f6f7f9}
+.vg.on{border-color:#055dff;box-shadow:0 0 0 3px rgba(5,93,255,.18)}
+.vg>.cap{display:flex;justify-content:space-between;gap:8px;font:800 12.5px system-ui;margin-bottom:8px;flex-wrap:wrap}
+.vg .ov-row{padding:5px 6px;grid-template-columns:14px 22px minmax(0,1fr) auto 18px;gap:5px}
+.vg .ov-row b{font-size:12px}.vg .ov-w span{min-width:22px;height:20px;font-size:9px;padding:0 3px}
+.vg .ov-sec{grid-template-columns:14px minmax(0,1fr) auto 18px 22px}.vg .ov-sec>span:nth-child(4){display:none}.vg .ov-sec .dots{width:22px;height:22px}
+.vg .ov-ck{width:15px;height:15px}.vg .ov-ck:after{left:3px;top:0;width:4px;height:8px}
+.vg .ov-list{gap:5px}
+@media (max-width:900px){.ov-grid{grid-template-columns:minmax(0,1fr)}.cmp{grid-template-columns:minmax(0,1fr)}.cmp .arr{transform:rotate(90deg)}}
+@media (max-width:520px){
+ .ov-row{grid-template-columns:18px 26px minmax(0,1fr) 24px}.ov-row .ov-w{grid-column:2/-1;grid-row:2;justify-content:flex-start}
+ .ov-sec{grid-template-columns:18px minmax(0,1fr) auto 24px 28px}.ov-sec .fd2{display:none}
+ .ov-set{grid-template-columns:minmax(0,1fr)}.ov-in{margin-left:8px}
+ .vg .ov-row{grid-template-columns:14px 22px minmax(0,1fr) 18px}
+ .vg .ov-sec{grid-template-columns:14px minmax(0,1fr) 18px 22px}
+ .ov-panel{padding:12px}
+}
+
 /* ───── sombre ───── */
 .dk{background:#121418;color:#e8e8e8;border-color:#444;box-shadow:6px 6px 0 rgba(77,159,255,.25)}
 .dk>.tag{color:#7fb0ff}
@@ -707,7 +772,7 @@ kbd{border:1px solid #c9ccd3;border-bottom-width:2px;background:#f4f5f7;padding:
    </div>
   </div>
  </div>
- <p class="note">Ce cadre remplace « Ordre et visibilité des blocs » : c'est la même liste ⠿ avec 👁 et les largeurs, mais les blocs sont rangés sous leurs sections. L'exception pour une fiche reste (lien « Exception pour Minette… »). Les sections et le style vont aussi dans les « 💾 Réglages enregistrés ». ↺ remet les sections de départ (personnes : Identité, Famille, Vie, Documents ; animaux : les six de l'ancienne page), sans question, avec ↶ Annuler.</p>
+ <p class="note">C'est la présentation « Nouveau » ; le style actuel reste au choix (F11, et le choix en F12). Ce cadre remplace « Ordre et visibilité des blocs » : c'est la même liste ⠿ avec 👁 et les largeurs, mais les blocs sont rangés sous leurs sections. L'exception pour une fiche reste (lien « Exception pour Minette… »). Les sections et le style vont aussi dans les « 💾 Réglages enregistrés ». ↺ remet les sections de départ (personnes : Identité, Famille, Vie, Documents ; animaux : les six de l'ancienne page), sans question, avec ↶ Annuler.</p>
 </div>
 
 <!-- ═══════════ F7 ═══════════ -->
@@ -866,7 +931,46 @@ kbd{border:1px solid #c9ccd3;border-bottom-width:2px;background:#f4f5f7;padding:
  <div><div class="tabs" style="margin-bottom:6px"><span class="is-active">🪪 Identité</span><span>👪 Famille (9)</span><span class="all">⚙️</span></div><p class="note" style="margin:0"><span class="mk">2</span> En onglets : un petit ⚙️ au bout de la barre fait la même chose.</p></div></div>
    <div class="bubs"><div class="bub"><span class="mk">1</span><span>⋯ de la fiche → <b>⚙️ Ranger les sections…</b> ouvre directement l'écran de l'étape ①, sur les fiches de cette sorte (personne ou animal), avec l'aperçu sur cette fiche.</span></div><div class="bub"><span class="mk">2</span><span>En style onglets, le petit ⚙️ au bout de la barre fait pareil.</span></div></div></div>
  </div>
- <p class="note">Les pastilles orange ① ② … ne sont là que pour le tuto. Les numéros de section et de bloc se recalculent tout seuls après chaque déplacement. La même liste sert aux animaux (bouton « 🐾 Animaux » en haut). La FAQ gagne une réponse : « Comment changer l'ordre des sections et des blocs de la fiche ? ». Les éléments de l'en-tête (statut, « 👁 Vu la dernière fois », étiquettes, boutons) se rangent de la même façon, juste au-dessus, dans « Ordre et visibilité des éléments de l'en-tête » (F9).</p>
+ <p class="note">Les pastilles orange ① ② … ne sont là que pour le tuto. Le même tuto vaut pour le style actuel de l'écran (F11) : ⠿, cases et ⋯ sont aux mêmes places ; le choix se fait en F12. Les numéros de section et de bloc se recalculent tout seuls après chaque déplacement. La même liste sert aux animaux (bouton « 🐾 Animaux » en haut). La FAQ gagne une réponse : « Comment changer l'ordre des sections et des blocs de la fiche ? ». Les éléments de l'en-tête (statut, « 👁 Vu la dernière fois », étiquettes, boutons) se rangent de la même façon, juste au-dessus, dans « Ordre et visibilité des éléments de l'en-tête » (F9).</p>
+</div>
+
+<!-- ═══════════ F11 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F11</span>L'éditeur des sections dans le STYLE ACTUEL</span><h3>Le même rangement, avec les cadres, les lignes et les cases de « Ordre et visibilité des blocs » d'aujourd'hui</h3>
+ <section class="ov-cfg"><header><span class="eyebrow">FICHES ANIMAUX</span><h3>Sections des fiches</h3><p>Le style des titres de section et leurs options. Chaque changement est gardé tout de suite.</p></header>
+  <div class="ov-panel" style="margin-top:12px"><div class="ov-set">
+   <span>Style des sections</span><div class="ov-chs"><span>Trait et titre</span><span>Encadrée</span><span>Grand titre</span><span>Bandeau</span><span>Centré</span><span class="on">Onglets en haut</span></div>
+   <span>Place des onglets</span><div class="ov-chs"><span>Gauche</span><span>Centre</span><span>Droite</span><span>Toute la largeur</span><span class="on">Comme avant</span></div>
+   <span>« ▦ Tout voir »</span><div class="ov-chs"><span>À gauche</span><span class="on">À droite</span><span>Caché</span></div>
+   <span>Options</span><div style="display:grid;gap:4px"><label class="ui-toggle" style="margin:0"><i></i>Sections repliables (▾)</label><label class="ui-toggle" style="margin:0"><i></i>Numéros des sections</label><label class="ui-toggle off" style="margin:0"><i></i>Cacher les sections vides</label></div>
+   <span>Espace entre sections</span><span class="unit" style="justify-self:start"><b>24</b><i>px</i></span>
+  </div></div>
+ </section>
+ <section class="ov-cfg" style="margin-top:22px"><header><span class="eyebrow">FICHES ANIMAUX</span><h3>Ordre et visibilité des blocs</h3><p>Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer.</p><p>Aucune fiche n'a d'exception : toutes suivent ce réglage.</p></header>
+  <div class="ov-grid">
+   <div class="ov-panel"><div class="itr"><h4>Toutes les fiches d’animaux</h4></div><div class="ov-list"><div class="ov-row ov-sec"><span class="og">⠿</span><b>🪪 Fiche <small>· 4 blocs</small></b><span class="fd2">▾</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">01</span><b>🐾 Caractéristiques</b><div class="ov-w"><span>1</span><span>1/2</span><span>1/3</span><span>1/4</span><span class="on">2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">02</span><b>Événements</b><div class="ov-w"><span>1</span><span>1/2</span><span class="on">1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">03</span><b>🌳 Pedigree</b><div class="ov-w"><span>1</span><span class="on">1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-drop"></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">04</span><b>🏆 Titres et concours</b><div class="ov-w"><span>1</span><span class="on">1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-sec"><span class="og">⠿</span><b>🔖 Bagues et marques <small>· 1 bloc</small></b><span class="fd2">▾</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">05</span><b>🔖 Bagues et marques</b><div class="ov-w"><span class="on">1</span><span>1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-sec hid"><span class="og">⠿</span><b>👁 Observations <small>· 1 bloc</small></b><span class="fd2">▾</span><span></span><span class="ov-ck off"></span><span class="dots">⋯</span></div><div class="ov-row hid ov-in"><span class="og">⠿</span><span class="onum">—</span><b>👁 Observations</b><div class="ov-w"><span class="on">1</span><span>1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck off"></span></div><div class="ov-row ov-sec"><span class="og">⠿</span><b>📁 Documents <small>· 2 blocs</small></b><span class="fd2">▾</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-in drag"><span class="og">⠿</span><span class="onum">06</span><b>Médias — glissé vers « Fiche »</b><div class="ov-w"><span>1</span><span class="on">1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">07</span><b>Sources &amp; citations</b><div class="ov-w"><span>1</span><span>1/2</span><span class="on">1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-sec"><span class="og">⠿</span><b>🩺 Santé · 👥 Groupe · 🗺 Carte <small>· repliées</small></b><span class="fd2">▸</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-sec ov-loose"><span></span><b>Sans section <small>· s'affichent à la fin</small></b><span></span><span></span><span></span><span></span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">12</span><b>🌦 Météo de sa vie</b><div class="ov-w"><span>1</span><span class="on">1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div></div>
+    <span class="ov-btn">＋ Nouvelle section</span>
+    <div class="ov-kb">Au clavier : <kbd>Tab</kbd> jusqu’à ⠿ puis <kbd>Alt</kbd> + <kbd>↑</kbd> / <kbd>↓</kbd> · ⋯ d’une section : Renommer, Changer l’icône, Monter, Descendre, Supprimer (↶ Annuler)</div>
+    <label class="ui-toggle" style="margin-top:10px"><i></i>Masquer les lignes vides (pas remplies) du bloc Identité</label></div>
+   <div class="ov-panel"><div class="itr"><h4>Exception pour Corneille 1</h4><span class="ov-btn sec">Annuler l’exception</span></div>
+    <p class="ov-offnote">La fiche ouverte (Corneille 1) est un animal : son exception se règle ici, dans « Fiches animaux ». Côté « Fiches personnes », ce cadre est grisé avec la même phrase.</p>
+    <div class="ov-off"><div class="ov-list"><div class="ov-row ov-sec"><span class="og">⠿</span><b>🪪 Fiche <small>· 4 blocs</small></b><span class="fd2">▾</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">01</span><b>🐾 Caractéristiques</b><div class="ov-w"><span>1</span><span>1/2</span><span>1/3</span><span>1/4</span><span class="on">2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">02</span><b>Événements</b><div class="ov-w"><span>1</span><span>1/2</span><span class="on">1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-sec"><span class="og">⠿</span><b>🔖 Bagues et marques <small>· 1 bloc</small></b><span class="fd2">▾</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">03</span><b>🔖 Bagues et marques</b><div class="ov-w"><span class="on">1</span><span>1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div></div></div></div>
+  </div>
+ </section>
+ <p class="note">Tout est repris de l'écran actuel : sur-titre bleu, grand titre, phrase d'aide, ligne des exceptions, un cadre « Toutes les fiches » et un cadre « Exception pour… », une ligne encadrée par bloc (⠿, numéro bleu, nom en gras, carrés de largeur 1 · 1/2 · 1/3 · 1/4 · 2/3 · 3/4, case bleue). Ce qui s'ajoute : les <b>lignes de section</b> pleine largeur, plus foncées (⠿, nom en capitales, nombre de blocs, ▾, case, ⋯), les blocs un peu en retrait dessous, le trait bleu quand on glisse, la zone « Sans section » et le bouton « ＋ Nouvelle section ». Le bouton « Enregistrer ces blocs » reste caché : tout est gardé tout seul (K2). On passe d'un style à l'autre en F12.</p>
+</div>
+
+<!-- ═══════════ F12 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F12</span>Passer d'un style à l'autre</span><h3>« Présentation de l'éditeur : Comme avant · Nouveau » — en haut de Réglages → Apparence → Fiches personnes et animaux</h3>
+ <div class="ph" style="margin-bottom:12px"><div class="t"><small>Réglages · Apparence</small><h2>Fiches personnes et animaux</h2><p>L'en-tête, les sections et les blocs des fiches.</p></div><div class="r"><span class="saved">✓ Enregistré</span><span class="btn s">↺ Remettre comme au départ</span></div></div>
+ <div class="swbar"><b>Présentation de l'éditeur</b><span class="seg sm"><span>Comme avant</span><span class="is-active">Nouveau</span></span><span class="muted" style="font-size:12.5px">Ne change que cet écran de réglage : <b>ni les fiches, ni les données</b>.</span></div>
+ <div class="toast2">✓ Présentation de l'éditeur : Nouveau<span class="u">↶ Annuler</span><span class="bar" style="width:70%"></span></div>
+ <div class="cmp">
+  <div class="vg"><div class="cap"><span>Comme avant</span><span class="b bl">Par défaut</span></div><div class="ov-list"><div class="ov-row ov-sec"><span class="og">⠿</span><b>🪪 Fiche <small>· 3 blocs</small></b><span class="fd2">▾</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">01</span><b>🐾 Caractéristiques</b><div class="ov-w"><span>1</span><span>1/2</span><span>1/3</span><span>1/4</span><span class="on">2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">02</span><b>Événements</b><div class="ov-w"><span>1</span><span>1/2</span><span class="on">1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">03</span><b>🌳 Pedigree</b><div class="ov-w"><span>1</span><span class="on">1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-sec"><span class="og">⠿</span><b>🔖 Bagues et marques <small>· 1 bloc</small></b><span class="fd2">▾</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">04</span><b>🔖 Bagues et marques</b><div class="ov-w"><span class="on">1</span><span>1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div><div class="ov-row ov-sec"><span class="og">⠿</span><b>🩺 Santé <small>· 1 bloc</small></b><span class="fd2">▾</span><span></span><span class="ov-ck"></span><span class="dots">⋯</span></div><div class="ov-row ov-in"><span class="og">⠿</span><span class="onum">05</span><b>🩺 Santé</b><div class="ov-w"><span class="on">1</span><span>1/2</span><span>1/3</span><span>1/4</span><span>2/3</span><span>3/4</span></div><span class="ov-ck"></span></div></div></div>
+  <div class="arr">⇄</div>
+  <div class="vg on"><div class="cap"><span>Nouveau</span><span class="b g">Choisi</span></div><div class="edl"><div class="sgrp"><div class="srow"><span class="grip">⠿</span><span class="sno">01</span><span class="nm"><span>🪪 Fiche</span><small>3 blocs</small></span><span class="on2"><span class="eye">👁</span><span class="ia">⋯</span></span></div><div class="brow"><span class="grip">⠿</span><span class="no">01</span><span class="nm">🐾 Caractéristiques</span><span class="wd"><span>1</span><span>½</span><span>⅓</span><span>¼</span><span class="on">⅔</span><span>¾</span></span><span class="eye">👁</span></div><div class="brow"><span class="grip">⠿</span><span class="no">02</span><span class="nm">Événements</span><span class="wd"><span>1</span><span>½</span><span class="on">⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div><div class="brow"><span class="grip">⠿</span><span class="no">03</span><span class="nm">🌳 Pedigree</span><span class="wd"><span>1</span><span class="on">½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div></div><div class="sgrp"><div class="srow"><span class="grip">⠿</span><span class="sno">02</span><span class="nm"><span>🔖 Bagues et marques</span><small>1 bloc</small></span><span class="on2"><span class="eye">👁</span><span class="ia">⋯</span></span></div><div class="brow"><span class="grip">⠿</span><span class="no">04</span><span class="nm">🔖 Bagues et marques</span><span class="wd"><span class="on">1</span><span>½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div></div><div class="sgrp"><div class="srow"><span class="grip">⠿</span><span class="sno">03</span><span class="nm"><span>🩺 Santé</span><small>1 bloc</small></span><span class="on2"><span class="eye">👁</span><span class="ia">⋯</span></span></div><div class="brow"><span class="grip">⠿</span><span class="no">05</span><span class="nm">🩺 Santé</span><span class="wd"><span class="on">1</span><span>½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div></div><div class="addsec">＋ Nouvelle section</div></div></div>
+ </div>
+ <div class="notice ok">✓ <span><b>Le même rangement</b>, montré de deux façons : mêmes sections (Fiche, Bagues et marques, Santé), mêmes blocs, même ordre (01 → 05), mêmes largeurs, même visibilité. Ce qu'on change dans l'un se voit dans l'autre.</span></div>
+ <p class="note">« Comme avant » est le choix de départ (F11) ; « Nouveau » est l'éditeur de F6 et F10. Le choix est retenu (K2 : « ✓ Enregistré », message H7 avec « ↶ Annuler ») et va dans les « 💾 Réglages enregistrés ». Il vaut aussi pour la fenêtre « ✎ Ranger les sections » ouverte depuis une fiche (F10 ⑦).</p>
 </div>
 
 </div>
