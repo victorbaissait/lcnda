@@ -4494,6 +4494,9 @@ body.k-print-doc :is(.page-actions,.card-head-actions,.person-hero-tools,.person
 /* Couleurs · Statistiques et arbres (#stats-colors-dialog) : le contenu ne colle plus aux bords (K6) */
 #stats-colors-form > :not(.modal-head):not(.modal-actions) { margin-left: 20px; margin-right: 20px; }
 #stats-colors-form > .eyebrow { display: block; margin-top: 18px; }
+/* « ＋ Ajouter à mon calendrier » sur les événements : caché tant que Mon agenda → Réglages ne le montre pas */
+html:not(.show-event-ics) .event-ics-btn { display: none; }
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

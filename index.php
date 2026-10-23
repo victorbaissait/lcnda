@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=245">
+    <link rel="stylesheet" href="assets/css/app.css?v=246">
     <link rel="stylesheet" href="assets/css/picker.css?v=6">
     <link rel="stylesheet" href="assets/css/heritage.css?v=247">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -1185,7 +1185,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=2" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=3" defer></script>
 <script src="assets/js/heritage-links.js?v=18" defer></script>
-<script src="assets/js/heritage-more.js?v=221" defer></script>
+<script src="assets/js/heritage-more.js?v=222" defer></script>
 <script src="assets/js/heritage-controle.js?v=3" defer></script>
 <script src="assets/js/heritage-records.js?v=10" defer></script>
 <script src="assets/js/heritage-research.js?v=34" defer></script>
@@ -1200,7 +1200,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-audio-quick.js?v=2" defer></script>
 <script src="assets/js/heritage-audio-studio.js?v=2" defer></script>
 <script src="assets/js/heritage-audio-multi.js?v=2" defer></script>
-<script src="assets/js/heritage-calendars.js?v=15" defer></script>
+<script src="assets/js/heritage-calendars.js?v=16" defer></script>
 <script src="assets/js/heritage-assemble.js?v=10" defer></script>
 <script src="assets/js/heritage-columns.js?v=4" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=5" defer></script>

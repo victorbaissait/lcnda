@@ -30,12 +30,13 @@
 
     /* ─── Réglages (gardés par calendrier, et copiés dans la base comme les autres réglages) ─── */
     const DEFAULTS = {
-        agenda: {view: 'month', weekStart: 1, style: 'classique', size: 'normal', alt: [], weekNumbers: true, weekend: true, max: 4, showDone: true, colors: {}},
+        agenda: {view: 'month', weekStart: 1, style: 'classique', size: 'normal', alt: [], weekNumbers: true, weekend: true, max: 4, showDone: true, showIcs: false, colors: {}},
         genea: {view: 'year', weekStart: 1, style: 'papier', size: 'normal', alt: ['julian', 'republican'], weekNumbers: false, weekend: false, max: 3, anniv: false, approx: true, hidden: [], colors: {}},
     };
     const prefsKey = k => `genealogie-cal-${k}`;
     const prefs = k => { let p = {}; try { p = JSON.parse(localStorage.getItem(prefsKey(k)) || '{}') || {}; } catch (_) {} return {...DEFAULTS[k], ...p, colors: {...(p.colors || {})}}; };
     const savePrefs = (k, p) => { try { const {cursor, ...keep} = p; localStorage.setItem(prefsKey(k), JSON.stringify(keep)); } catch (_) {} };
+    document.documentElement.classList.toggle('show-event-ics', !!prefs('agenda').showIcs); // bouton 📅 des événements, caché par défaut
     const GROUPS = {
         genea: [['birth', '👶 Naissances, baptêmes', '#1f9d55'], ['union', '💍 Mariages, unions', '#d6336c'], ['death', '✝️ Décès, sépultures', '#495057'], ['other', '📌 Autres événements', '#1c7ed6']],
         agenda: [['fair', '🎪 Salons et événements', '#e67700'], ['archive_visit', '🏛️ Visites d’archives', '#5f3dc4'], ['reminder', '🔔 Rappels', '#c92a2a'], ['courrier', '✉️ Courriers envoyés', '#868e96'],
@@ -194,7 +195,8 @@
                     <label class="checkbox-line"><input type="checkbox" name="weekend" ${p.weekend ? 'checked' : ''}> Week-ends grisés</label>
                     ${key === 'genea' ? `<label class="checkbox-line"><input type="checkbox" name="anniv" ${p.anniv ? 'checked' : ''}> <b>Anniversaires</b> : chaque événement revient tous les ans, au même jour (avec « il y a … ans »)</label>
                     <label class="checkbox-line"><input type="checkbox" name="approx" ${p.approx !== false ? 'checked' : ''}> Montrer les dates approximatives (« vers 1850 »)</label>
-                    <label class="checkbox-line"><input type="checkbox" name="groupOthers" ${p.groupOthers ? 'checked' : ''}> Regrouper les autres sortes d’événements (métier, résidence…) sous « 📌 Autres événements »</label>` : `<label class="checkbox-line"><input type="checkbox" name="showDone" ${p.showDone !== false ? 'checked' : ''}> Montrer ce qui est fait ou passé</label>`}</fieldset>
+                    <label class="checkbox-line"><input type="checkbox" name="groupOthers" ${p.groupOthers ? 'checked' : ''}> Regrouper les autres sortes d’événements (métier, résidence…) sous « 📌 Autres événements »</label>` : `<label class="checkbox-line"><input type="checkbox" name="showDone" ${p.showDone !== false ? 'checked' : ''}> Montrer ce qui est fait ou passé</label>
+                    <label class="checkbox-line"><input type="checkbox" name="showIcs" ${p.showIcs ? 'checked' : ''}> Montrer le bouton « 📅 ＋ Ajouter à mon calendrier » sur les événements des fiches</label>`}</fieldset>
                 <fieldset class="h-rc-modes"><legend>Sous chaque jour, la date dans ces calendriers</legend><div class="h-cal-altpick">${alts.map(([t, n]) => `<label class="checkbox-line"><input type="checkbox" name="alt" value="${t}" ${p.alt.includes(t) ? 'checked' : ''}> ${esc(n)}</label>`).join('')}</div></fieldset>
                 <fieldset class="h-rc-modes"><legend>Couleurs</legend><div class="h-cal-colors">${groupsOf(key).map(([g, l]) => `<label><input type="color" name="color_${g}" value="${colorOf(key, p, g)}"> ${esc(l)}</label>`).join('')}</div></fieldset>
                 <button type="button" class="button small secondary" data-ui-reset data-cal-reset>↺ Remettre comme au départ</button>`,
@@ -202,7 +204,7 @@
                 const form = d.querySelector('form') || d;
                 const fill = () => { const q = prefs(key), c0 = p.cursor; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, q); if (c0 !== undefined) p.cursor = c0;
                     ['weekStart', 'style', 'size', 'view', 'max'].forEach(n => { const el = form.querySelector(`[name="${n}"]`); if (el) el.value = String(p[n]); });
-                    ['weekNumbers', 'weekend', 'anniv', 'groupOthers', 'showDone'].forEach(n => { const el = form.querySelector(`[name="${n}"]`); if (el) el.checked = !!p[n]; });
+                    ['weekNumbers', 'weekend', 'anniv', 'groupOthers', 'showDone', 'showIcs'].forEach(n => { const el = form.querySelector(`[name="${n}"]`); if (el) el.checked = !!p[n]; });
                     const ap = form.querySelector('[name="approx"]'); if (ap) ap.checked = p.approx !== false;
                     form.querySelectorAll('[name="alt"]').forEach(el => { el.checked = (p.alt || []).includes(el.value); });
                     groupsOf(key).forEach(([g]) => { const el = form.querySelector(`[name="color_${g}"]`); if (el) { el.value = colorOf(key, p, g); el.dispatchEvent(new Event('ui-sync')); } }); };
@@ -210,7 +212,7 @@
                     save: () => { const fd = new FormData(form);
                         Object.assign(p, {weekStart: Number(fd.get('weekStart')), style: fd.get('style'), size: fd.get('size'), view: fd.get('view'), max: Math.max(1, Math.min(20, Number(fd.get('max')) || 3)),
                             weekNumbers: fd.has('weekNumbers'), weekend: fd.has('weekend'), alt: fd.getAll('alt')});
-                        if (key === 'genea') Object.assign(p, {anniv: fd.has('anniv'), approx: fd.has('approx'), groupOthers: fd.has('groupOthers')}); else p.showDone = fd.has('showDone');
+                        if (key === 'genea') Object.assign(p, {anniv: fd.has('anniv'), approx: fd.has('approx'), groupOthers: fd.has('groupOthers')}); else { p.showDone = fd.has('showDone'); p.showIcs = fd.has('showIcs'); document.documentElement.classList.toggle('show-event-ics', p.showIcs); }
                         groupsOf(key).forEach(([g, , def]) => { const v = fd.get('color_' + g); if (v && v !== def) p.colors[g] = v; else delete p.colors[g]; });
                         const st = S().hCal?.[key]; if (st) st.view = p.view; savePrefs(key, p); },
                     reload: fill, reset: () => { const c0 = p.cursor; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, JSON.parse(JSON.stringify(DEFAULTS[key]))); if (c0 !== undefined) p.cursor = c0; savePrefs(key, p); }});
