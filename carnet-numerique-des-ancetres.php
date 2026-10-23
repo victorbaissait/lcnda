@@ -168,7 +168,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.7.1</span>
+                <span class="eyebrow">VERSION BÊTA · 0.8.0</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source, gratuit et modulable pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -198,8 +198,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.7.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.7.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 551 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.8.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.8.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 551 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -208,7 +208,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.7.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 561 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.8.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 561 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -219,16 +219,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.7.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 540 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.7.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 514 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.8.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 540 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.8.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 514 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.7.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.7.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 510 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.8.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.8.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 510 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.7.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.8.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -236,128 +236,162 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.7.1, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.8.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.7.1.zip"><span>Archive .zip<small>Windows, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.7.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.8.0.zip"><span>Archive .zip<small>Windows, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.8.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 265 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.7.1<small>Retouche comme Photoshop (dégradés, Teinte/Saturation, paragraphes, glyphes, motifs, formes de pinceau), une seule fenêtre de couleur, montage, réglages enregistrés repensés, diagrammes, recherche par date précise, messages réglables</small></span></summary>
+                <summary><span>Nouveautés de la version 0.8.0<small>Suivi des animaux, fiches rangées en sections, météo d'autrefois, traitement de texte et tableur, studio son, maison plus poussée, contrôle de la base, journal des recherches, cadastre, site web, jeux, mode simple et designs au choix</small></span></summary>
                 <div class="presentation-changes-body">
-                    <h4>🎚️ Retouche des photos, comme Photoshop</h4>
-                    <p>Un vrai outil <b>▦ Dégradé</b> (linéaire, radial, angle, réfléchi, losange ; arrêts de couleur et de transparence, 16 préréglages, poignées sur l'image, dans un masque pour fondre une photo) ; l'onglet <b>ⓘ Propriétés</b> avec <b>Teinte/Saturation</b> (gammes de couleurs, Coloriser, pipettes, réglage ciblé), la densité et le contour progressif des masques ; <b>🔤 Caractère, ¶ Paragraphe et Ω Glyphes</b> (police et sa graisse, blocs de texte justifiés avec césure, retraits, signes de la typographie française et de la généalogie) ; <b>▩ Motifs</b> à poser sur un calque ou à créer soi-même (raccord sans couture) ; <b>🖌 Formes de pinceau</b> (étoiles, feuilles, herbe, craie, plume calligraphique… et sa propre forme d'après une sélection) ; images placées en <b>objet dynamique 🧩</b> (agrandir, tourner sans perte) ; <b>Fond</b> et effets de calque <b>fx</b> (ombre, lueur, contour) ; restaurer sans rien détruire (tout va sur des calques) ; remplacer le ciel, détourer une personne, agrandir ×2 / ×4, panorama ; canevas vide ; les deux carrés de couleur avec X et D.</p>
-                    <h4>🎨 Une seule fenêtre de couleur partout</h4>
-                    <p>Couleurs de l'app, récentes, puis nuances, TLS, RVB ou CMJN, pipette et code ; elle remplace la fenêtre du système dans toute l'app.</p>
-                    <h4>🎞️ Montage</h4>
-                    <p>Transitions, vieux film, stabilisation, pistes verrouillables, aimantation, temps de la musique repérés ; pistes superposées dans l'ordre de la frise, vidéo en plein écran, textes avec 17 entrées, 16 sorties et leurs durées, export du son seul (MP3, WAV).</p>
-                    <h4>📐 Mise en page et ✏️ dessin</h4>
-                    <p>Gabarits de livre de famille, QR codes vers les fiches, publipostage ; les onglets des panneaux (retouche, mise en page, dessin, maison 3D) se rangent et se cachent dans « ⚙️ Personnaliser » ; dans le dessin, les carrés Remplissage / Contour ouvrent la fenêtre de couleur.</p>
-                    <h4>💾 Réglages enregistrés, nouveau cadre</h4>
-                    <p>Repliable, une ligne par réglage avec « Appliquer » et un menu ⋯ (remplacer, renommer, dupliquer, exporter, supprimer avec « Annuler ») ; le nom ne se tape qu'au moment de créer un réglage.</p>
-                    <h4>📊 Diagrammes et cartes</h4>
-                    <p>12 nouveaux diagrammes (frises, liens de famille, accord, violon, carte à ronds) ; cartes colorées avec un champ « Zone » qui propose zones et villes, et de nouvelles sources « Les lieux de ton arbre ».</p>
-                    <h4>🔎 Recherche et questions</h4>
-                    <p>La date précise marche enfin dans Proximité et Dates (dates d'actes lues au jour près, autres calendriers convertis), « Entre deux dates précises » ; « Poser une question » comprend le lieu (« à Pernay ») et demande laquelle quand plusieurs villes portent le même nom.</p>
-                    <h4>📏 Calendrier / Mesures</h4>
-                    <p>Huit cadres de plus (mesures par région, âge ↔ naissance, écart entre deux dates, jour de la semaine, saint du jour et fêtes mobiles, heures canoniques, monnaies étrangères, générations).</p>
-                    <h4>⚙️ Réglages</h4>
-                    <p>Une page « Cartes et fonds de carte » à part ; les messages après une action se règlent (coin de l'écran, durée, couleurs de chaque sorte de message) ; recherche des questions fréquentes avec un seul cadre.</p>
-                </div>
-            </details>
-
-            <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.7.0<small>Créations, artistes et carrières, maison de famille en 3D, dessin et blasons, transcription d'actes et alphabets anciens, présentations et récit d'une vie, graphiques et cartes, cartes de photos, ADN et visages, plusieurs généalogies, une app plus cohérente et plus accessible</small></span></summary>
-                <div class="presentation-changes-body">
-                    <h4>🎨 Créations, artistes et carrières</h4>
-                    <ul>
-                        <li><b>« Cette personne était… »</b> : des profils à cocher sur une fiche (artiste, artisan d'art, acteur, sportif, politique, scientifique, inventeur, explorateur, militaire, agriculteur… et les vôtres). Chaque profil ajoute ses parties ; une personne peut en avoir plusieurs, réunis sur une page avec une <b>frise colorée par profil</b>.</li>
-                        <li><b>131 types d'œuvres</b> en 12 familles : peinture, sculpture et ses fontes, affiche, disque, morceau → enregistrements → parutions, livre, pièce → mises en scène → représentations → tournées, film, série → saisons → épisodes, métiers d'art, jeux, saveurs… et <b>son propre type</b>, créé en 5 étapes.</li>
-                        <li><b>Catalogue raisonné</b> et <b>discographie</b> (album par album, titre par titre, crédits, pressages), inventaire des œuvres (où, à qui, état, valeur), provenance et expositions ; disques et livres en plusieurs exemplaires ; fiches reprises des grandes bases en ligne de disques, de livres et de films.</li>
-                        <li><b>Concerts et spectacles</b> avec la liste des morceaux joués (rappels, reprises, invités), tournées, carte et statistiques ; <b>inventions</b> (brevets par pays, prototypes), <b>découvertes</b> et <b>expéditions</b> ; mandats et élections ; <b>137 sports</b> avec leurs chiffres par saison ; la <b>liste officielle des métiers d'art</b>.</li>
-                        <li>Pour toute personne : <b>« 📰 Dans les médias »</b> (et la Revue de presse), <b>« 🏆 Concours et récompenses »</b> (et le Palmarès), <b>« 🎓 Diplômes et formation »</b> ; tout se retrouve dans le groupe de listes <b>« 🎨 Créations et carrières »</b>.</li>
-                    </ul>
-                    <h4>🏠 La maison de famille, en plan et en 3D</h4>
-                    <ul>
-                        <li>Dessiner la maison <b>pièce par pièce, au centimètre près</b> : longueurs tapées au clavier, aimants, cotes, portes et fenêtres, étages (et l'étage d'en dessous en transparence pour caler), <b>toit à son goût</b>, plan ancien ou cadastre à calquer.</li>
-                        <li><b>Près de 700 meubles et objets</b> d'autrefois, de métiers et d'ateliers, objets à soi ou importés ; <b>photos et tableaux de la base dans les cadres</b>, les toiles et les miroirs.</li>
-                        <li><b>Visite en 3D</b> à la première personne, lumière du jour, <b>« 🕰 Époques »</b> qui font évoluer la maison au fil des années ; habitants, souvenirs et recensements reliés à chaque maison, bloc 🏠 Maisons sur la fiche.</li>
-                    </ul>
-                    <h4>✏️ Dessin, blasons, plans et faire-part</h4>
-                    <ul>
-                        <li>Un <b>outil de dessin</b> complet : plume, formes, calques et groupes, masques, texte sur une courbe, dégradés et motifs, aligner et répartir, vectoriser une image ; export SVG, PNG, JPG, PDF.</li>
-                        <li><b>Blasons</b> (écus, partitions, émaux, hachures, 44 ornements anciens), <b>plans de ville ou de village</b> (routes, rivières, bâtiments, rose des vents, styles d'époque) et <b>cartes à l'échelle</b>.</li>
-                        <li><b>Faire-part et affiches</b> remplis depuis l'arbre (naissance, mariage, décès, cousinade…), dans bien plus de formats, recto-verso ou pliés avec leur enveloppe ; <b>signatures</b> détourées d'un acte, cachets de cire, monogrammes, ex-libris.</li>
-                        <li><b>Arbre décoratif à imprimer en grand</b> : éventail, roue, arbre dessiné, arbre en cases, jusqu'à 12 générations, 13 styles et les vôtres, formats A4 à A0.</li>
-                    </ul>
-                    <h4>📜 Lire les actes anciens</h4>
-                    <ul>
-                        <li>Un <b>atelier de transcription</b> : l'image et le texte côte à côte, des zones reliées à chaque passage, la lecture automatique, le repérage des noms, des rôles, des dates (en toutes lettres et républicaines), des lieux et des métiers, des modèles d'actes ; « 🎚️ Mieux voir » (netteté, contraste, fond effacé, loupe) ; une liste des transcriptions.</li>
-                        <li>Dans Calendrier / Mesures, le cadre <b>« Alphabets et langues des actes »</b> : choisir une langue parmi <b>une quarantaine</b> (latin, occitan, breton, polonais, russe, grec…), voir tout son alphabet, ses lettres à accents et des indices pour la reconnaître ; <b>taper des caractères pour savoir de quelle langue ils viennent</b> ; un <b>clavier cyrillique et grec</b>, avec la transcription en lettres latines.</li>
-                        <li>L'assistant <b>« Que manque-t-il ? »</b> liste les actes encore à chercher et les archives à consulter ; la lecture des textes imprimés est fournie avec l'application.</li>
-                    </ul>
-                    <h4>🎞️ Présentations, diaporamas et montage</h4>
-                    <ul>
-                        <li>De <b>vraies présentations</b> : thèmes, textes, images, tableaux, graphiques, objets de généalogie, transitions et animations, fenêtre du présentateur ; import et export de présentations, PDF et vidéo.</li>
-                        <li><b>« ✨ Récit d'une vie »</b> fabrique tout seul, depuis la fiche, le diaporama d'une personne : carte de naissance, événements, photos, époque, lieux de vie, descendance.</li>
-                        <li>Montage : <b>voix off</b> au micro, <b>sous-titres</b>, mouvement lent sur les photos, modèles « La vie de… » et « Une famille », musique qui baisse sous la voix, formats pour téléphone ou carré, chapitres, <b>vitesse de 0,1 × à 10 ×</b>, rushes rangés en dossiers.</li>
-                    </ul>
-                    <h4>🎚️ Retouche et mise en page</h4>
-                    <ul>
-                        <li><b>Restauration guidée d'une vieille photo</b> : redresser, enlever le jaunissement, les taches, les rayures et les plis, coloriser avec des couleurs d'époque, comparer avant / après.</li>
-                        <li><b>41 filtres</b> qui ne touchent jamais la photo d'origine, enlever les <b>reflets d'une vitre</b>, sélectionner le sujet d'un clic, placer une image sur un calque, gomme à part, modes de fusion, actions pour plusieurs photos à la fois.</li>
-                        <li>Livres : <b>texte qui continue d'un bloc à l'autre</b>, sommaire et index des noms remplis tout seuls, <b>notes de bas de page</b> et sources citées, index des lieux et des métiers, arbre qui se met à jour, contrôle avant impression, <b>vérification du texte avec les fiches</b>, mode relecture avec commentaires, ePub.</li>
-                    </ul>
-                    <h4>📊 Graphiques, diagrammes et cartes</h4>
-                    <ul>
-                        <li><b>Des graphiques à poser partout</b> et tenus à jour, avec ses propres chiffres (tableau, collage, fichier, page Wikipédia, et même une image de graphique), rangés dans une liste et <b>dans des dossiers</b>.</li>
-                        <li><b>22 nouvelles formes</b> : éventail d'ascendance, soleil des lignées, réseau de relations, spirale du temps, classement qui évolue… ; hémicycles et frises des membres.</li>
-                        <li><b>Cartes colorées par zones</b> (départements, régions, pays d'Europe, continents) avec un <b>encart zoomé sur l'Île-de-France</b> et un niveau de détail <b>« Communes »</b> pour la France, la Belgique, la Suisse et le Luxembourg ; carte des migrations.</li>
-                    </ul>
-                    <h4>📸 Cartes de photos et vidéos</h4>
-                    <ul>
-                        <li>L'<b>endroit et l'heure</b> d'une photo ou d'une vidéo sont lus tout seuls, à corriger en glissant ; les photos sans position attendent dans « À placer » ; <b>une frise pour remonter le temps</b>, jusqu'à la seconde ; toutes les cartes en pastilles en haut de l'outil.</li>
-                    </ul>
-                    <h4>🔬 Chercher autrement</h4>
-                    <ul>
-                        <li>Onglet <b>ADN</b> (caché au départ, avec une mise en garde sur la loi française) : correspondances, groupes automatiques, chromosomes, lignées, <b>placement probable d'un cousin</b> dans l'arbre.</li>
-                        <li><b>« 👤 Visages »</b> reconnaît les personnes sur les photos, sur l'ordinateur seulement ; <b>« Poser une question »</b> en français comprend les liens de parenté, les records, les âges, les dates républicaines ; les <b>dates impossibles</b> sont signalées pendant la saisie.</li>
-                        <li><b>Revues, livres, documentaires et podcasts</b> (numéros à acheter, articles, moments minutés, captures annotées) ; <b>petites annonces</b> et courriers aux journaux avec le calcul du prix.</li>
-                    </ul>
-                    <h4>🌳 Plusieurs généalogies, et un puzzle</h4>
-                    <ul>
-                        <li><b>Plusieurs généalogies complètement séparées</b>, chacune avec sa base, ses médias, ses sauvegardes et ses réglages.</li>
-                        <li><b>🧩 Puzzle</b> de 12 à 1000 pièces avec une image de la base, chrono et records ; pièce d'archives et musée à aménager.</li>
-                    </ul>
-                    <h4>🧭 Une app plus simple et plus cohérente</h4>
-                    <ul>
-                        <li>Partout <b>le même menu pour choisir une personne, un lieu ou autre chose</b> (communes de France et villes du monde, sans être bloqué par les homonymes) et <b>une seule fenêtre</b> pour choisir une image, un son ou une vidéo.</li>
-                        <li><b>La même barre au-dessus de toutes les listes</b> (Chercher · Filtrer · Liste | Fiches · Trier) ; plus de « Es-tu sûr ? » pour ce qui se défait : on supprime, et un message propose <b>« ↶ Annuler »</b>.</li>
-                        <li>Mêmes champs de date, de couleur et de curseur, même fenêtre d'export, mêmes « 💾 Réglages enregistrés » partout ; mode sombre partout ; petits écrans mieux pris en charge.</li>
-                    </ul>
-                    <h4>♿ Accessibilité et apparence</h4>
-                    <ul>
-                        <li>Réglages pour le <b>daltonisme</b> (avec « Voir comme… »), taille et espacement du texte, <b>polices pour mieux lire et pour la dyslexie</b> (intégrées), contraste élevé, grandes cibles, moins d'animations, <b>lecture à voix haute</b>, dictée.</li>
-                        <li>Renommer les onglets du menu et choisir leur émoji ; formes d'avatar et thèmes à soi ; en-tête de fiche réglable ; Listes et Réglages rangés en groupes repliables.</li>
-                        <li>Le widget <b>« Mes raccourcis »</b> mène à n'importe quoi (une fiche, une liste filtrée, un outil, un site), et <b>son crayon permet d'ajouter et de ranger ses raccourcis directement</b>.</li>
-                    </ul>
+                    <h4>🐾 Suivi des animaux</h4>
+                    <p>Un nouvel onglet (caché au départ, à montrer dans Réglages → Apparence → onglets) pour suivre des animaux sur le terrain ou à la maison. Il se compose de blocs, comme le tableau de bord, avec des pages par espèce ou par site, et ses blocs vont aussi dans le tableau de bord. Bagues et marques selon l'espèce (oiseau, chat ou chien, cheval, ferme, poisson, mammifère marin, animal sauvage, primate), avec les couleurs de base et la fenêtre de couleur. Une lecture douteuse (« 7? », « 7[K|X] ») est gardée telle quelle, avec les animaux possibles. Observations avec plusieurs photos, sons ou vidéos ; trajets GPS (GPX, Movebank, collier) ; santé et poids avec la courbe ; groupes, rôles et histoire sociale ; recensement ; partage et fusion avec un autre suivi.</p>
+                    <h4>🗂️ Fiches rangées en sections</h4>
+                    <p>Les blocs d'une fiche se rangent en sections (Identité, Famille, Vie, Documents ; pour un animal : Fiche, Bagues et marques, Observations, Santé, Groupe, Carte). Six présentations au choix, dont des onglets en haut. Un éditeur sans bouton « Enregistrer » permet de ranger les sections et les blocs, pour toutes les fiches ou pour une seule. L'adresse retient la section ouverte, et l'aperçu des réglages montre la vraie fiche. <b>Une seule fiche pour un animal</b> : la fiche complète, avec « 👁＋ Nouvelle observation » et « 👁 Vu la dernière fois » dans l'en-tête. Supprimer un animal emporte tout son suivi ; tout se restaure depuis le journal.</p>
+                    <h4>🌦️ Météo d'autrefois</h4>
+                    <p>Le temps qu'il faisait le jour (et à l'heure) d'un événement, sans internet. Chaque fois, l'app dit d'où vient l'information : mesuré, station à N km, estimé ou reconstitution. L'altitude des lieux est prise en compte, sur 14 pays. Un pack Europe est en option. Vous pouvez masquer la météo partout, par sorte d'événement, par personne ou par événement.</p>
+                    <h4>📝 Traitement de texte</h4>
+                    <p>Un vrai traitement de texte dans l'app, avec de vraies pages, des styles, des notes, un sommaire, un index et une bibliographie. Les personnes et les lieux s'insèrent avec le menu de choix et restent à jour. Il a aussi les tableaux, le suivi des modifications, les commentaires, les versions et la lecture à voix haute. Il ouvre et enregistre les fichiers Word (.docx), LibreOffice (.odt), .rtf, Markdown et texte. Pour aller plus vite : « 📝 Écrire sur cette personne » depuis une fiche, et un compte rendu depuis le Journal des recherches.</p>
+                    <h4>🧮 Tableur</h4>
+                    <p>Formules en français, fichiers Excel, LibreOffice et CSV, fonctions de généalogie (âge, année d'un acte, génération Sosa). « 🧮 Modifier les données » des diagrammes, présentations et tableaux. Il remplit un tableau depuis l'app et peut renvoyer les changements vers la base, avec « ↶ Annuler ».</p>
+                    <h4>🎧 Son</h4>
+                    <p>Un 🎚️ Studio son complet, avec effets qui ne touchent jamais l'original, spectre et pinceau de réparation, marqueurs reliés aux personnes, transcription, multipiste et la musique qui baisse sous la voix. Un ⚡ Son rapide à gros interrupteurs (« ✨ Tout nettoyer », Avant / Après). L'éditeur d'avant reste le choix de départ.</p>
+                    <h4>🏠 Maison</h4>
+                    <p>Vides, mezzanines, garde-corps et trémies d'escalier ; lucarnes, chiens-assis, fenêtres de toit et combles avec la loi Carrez ; murs courbes. Vous avez aussi la coupe, les surfaces, la vérification du plan, les personnes de chaque pièce, la visite guidée lue à voix haute et sa vidéo, le hameau, et une autre époque en fantôme pour comparer.</p>
+                    <h4>✅ Contrôle de la base</h4>
+                    <p>Une seule page réunit les dates impossibles, les âges curieux, les parents, les doublons et les lieux mal placés, avec les mêmes chiffres partout (page, widget, bandeau de la fiche). Ses seuils sont réglables. « Ce n'est pas une erreur » écarte un cas, et il revient tout seul si une date change.</p>
+                    <h4>🔎 Recherche et travail</h4>
+                    <p>📔 Journal des recherches (visites aux archives, résultats par cote, « 🔍 Déjà cherché » sur la fiche) et 💬 questions aux proches, avec un questionnaire à envoyer. Vous pouvez aussi comparer des hypothèses, citer vos sources, consulter la liste des services d'archives, écrire une biographie, voir le monde autour d'une vie, chercher les métiers anciens, ranger les cartes postales et les tables décennales, fêter les dates, partager avec la famille et comparer deux photos.</p>
+                    <h4>🗺️ Cadastre et images</h4>
+                    <p>Parcelles et plans napoléoniens reliés aux maisons, aux lieux et aux personnes. Les traitements par lot renomment, redimensionnent, convertissent, ajoutent un filigrane ou fabriquent un PDF. L'app trouve les images semblables et les doublons. La retouche sait tourner l'image entière, redresser l'horizon ou relever une photo couchée.</p>
+                    <h4>🌐 Mon site web</h4>
+                    <p>Un éditeur visuel où tout se glisse à la souris, avec de vrais diagrammes et une carte. La publication se fait sur Netlify, GitHub Pages ou un FTP sécurisé, ou dans un .zip pour MAMP ou WAMP. Les personnes vivantes ne sont jamais publiées.</p>
+                    <h4>📊 Diagrammes et 🎲 jeux</h4>
+                    <p>38 nouveaux diagrammes et un menu « Graphique » avec des critères combinables. Une calculette simple et scientifique, aussi en widget. Pour jouer : Qui est-ce ? des ancêtres, Memory des portraits, La bonne date, Morpion jusqu'à 30 × 30 et 🌀 Labyrinthe.</p>
+                    <h4>🧓 Mode simple et 🎨 designs au choix</h4>
+                    <p>Un mode à gros boutons pour montrer l'arbre et les photos à la famille, en lecture seule, avec les liens dits en clair (« ta grand-mère »). Les designs au choix changent la forme de l'app (traits, coins, densité, icônes, boutons, listes, mouvements) et laissent toujours vos couleurs et votre police.</p>
+                    <h4>🧭 Une app encore plus cohérente</h4>
+                    <p>Les mêmes mots et les mêmes symboles pour les mêmes boutons. Partout les mêmes erreurs de formulaire, les mêmes fenêtres (Imprimer, Importer), les mêmes bulles et raccourcis écrits pour votre ordinateur, et le même menu « ⋯ » et clic droit. Les réglages s'enregistrent tout seuls, avec « ↶ Annuler ». « Maintenance » s'appelle maintenant <b>« Réglages »</b>. Les boutons en haut à droite s'affichent, se cachent et se rangent dans l'Apparence. Changer de page dans le tableau de bord et le suivi va bien plus vite.</p>
                     <h4>🐞 Bugs corrigés</h4>
-                    <ul>
-                        <li><b>Saisie</b> : un double-clic créait parfois deux fiches ; Entrée pouvait effacer ce qu'on venait de taper ; deux onglets ouverts sur la même fiche s'écrasaient sans prévenir ; Échap fermait parfois une fenêtre de trop.</li>
-                        <li><b>Famille</b> : retirer un parent ne le retirait pas toujours ; des demi-frères pouvaient se retrouver avec trois parents ; des fusions impossibles (entre conjoints, entre un ancêtre et son descendant) étaient acceptées.</li>
-                        <li><b>GEDCOM</b> : dates républicaines et juliennes, étiquettes, animaux et titres de notes perdus ; la recherche tenait compte des accents et des tirets ; « né un 29 février » n'était compris qu'à moitié.</li>
-                        <li><b>Cartes et affichage</b> : la Russie n'apparaissait qu'en morceaux sur la carte du monde ; des textes débordaient et des éléments se collaient dans toute l'app ; des cadres côte à côte n'avaient pas la même hauteur.</li>
-                        <li><b>Réglages</b> : 17 réglages du « Défaut du site » n'étaient pas gardés ; un graphique en ¾ revenait à ½ ; une forme d'avatar à soi s'affichait sous le mauvais nom.</li>
-                        <li><b>Sécurité</b> : sauvegardes et bases reçues d'ailleurs vérifiées avant l'ouverture, liens vérifiés, exports CSV protégés, et de nombreuses autres protections.</li>
-                    </ul>
+                    <p>« ＋ Nouvel animal » depuis Personnes ouvre bien la fiche d'un animal. Une trentaine de bugs sont corrigés dans les fichiers Word et Excel, des dizaines dans la retouche, le montage, la mise en page et le dessin, et 9 dans le site web. Côté sécurité, les packs météo et les suivis reçus d'ailleurs sont vérifiés, et les photos confidentielles sont exclues du partage. Le mode simple et le mode consultation n'écrivent jamais dans la base.</p>
                 </div>
             </details>
 
             <details class="presentation-changes presentation-changes-old">
                 <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
                 <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.7.1 <small>Retouche comme Photoshop (dégradés, Teinte/Saturation, paragraphes, glyphes, motifs, formes de pinceau), une seule fenêtre de couleur, montage, réglages enregistrés repensés, diagrammes, recherche par date précise, messages réglables</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🎚️ Retouche des photos, comme Photoshop</h4>
+                            <p>Un vrai outil <b>▦ Dégradé</b> (linéaire, radial, angle, réfléchi, losange ; arrêts de couleur et de transparence, 16 préréglages, poignées sur l'image, dans un masque pour fondre une photo) ; l'onglet <b>ⓘ Propriétés</b> avec <b>Teinte/Saturation</b> (gammes de couleurs, Coloriser, pipettes, réglage ciblé), la densité et le contour progressif des masques ; <b>🔤 Caractère, ¶ Paragraphe et Ω Glyphes</b> (police et sa graisse, blocs de texte justifiés avec césure, retraits, signes de la typographie française et de la généalogie) ; <b>▩ Motifs</b> à poser sur un calque ou à créer soi-même (raccord sans couture) ; <b>🖌 Formes de pinceau</b> (étoiles, feuilles, herbe, craie, plume calligraphique… et sa propre forme d'après une sélection) ; images placées en <b>objet dynamique 🧩</b> (agrandir, tourner sans perte) ; <b>Fond</b> et effets de calque <b>fx</b> (ombre, lueur, contour) ; restaurer sans rien détruire (tout va sur des calques) ; remplacer le ciel, détourer une personne, agrandir ×2 / ×4, panorama ; canevas vide ; les deux carrés de couleur avec X et D.</p>
+                            <h4>🎨 Une seule fenêtre de couleur partout</h4>
+                            <p>Couleurs de l'app, récentes, puis nuances, TLS, RVB ou CMJN, pipette et code ; elle remplace la fenêtre du système dans toute l'app.</p>
+                            <h4>🎞️ Montage</h4>
+                            <p>Transitions, vieux film, stabilisation, pistes verrouillables, aimantation, temps de la musique repérés ; pistes superposées dans l'ordre de la frise, vidéo en plein écran, textes avec 17 entrées, 16 sorties et leurs durées, export du son seul (MP3, WAV).</p>
+                            <h4>📐 Mise en page et ✏️ dessin</h4>
+                            <p>Gabarits de livre de famille, QR codes vers les fiches, publipostage ; les onglets des panneaux (retouche, mise en page, dessin, maison 3D) se rangent et se cachent dans « ⚙️ Personnaliser » ; dans le dessin, les carrés Remplissage / Contour ouvrent la fenêtre de couleur.</p>
+                            <h4>💾 Réglages enregistrés, nouveau cadre</h4>
+                            <p>Repliable, une ligne par réglage avec « Appliquer » et un menu ⋯ (remplacer, renommer, dupliquer, exporter, supprimer avec « Annuler ») ; le nom ne se tape qu'au moment de créer un réglage.</p>
+                            <h4>📊 Diagrammes et cartes</h4>
+                            <p>12 nouveaux diagrammes (frises, liens de famille, accord, violon, carte à ronds) ; cartes colorées avec un champ « Zone » qui propose zones et villes, et de nouvelles sources « Les lieux de ton arbre ».</p>
+                            <h4>🔎 Recherche et questions</h4>
+                            <p>La date précise marche enfin dans Proximité et Dates (dates d'actes lues au jour près, autres calendriers convertis), « Entre deux dates précises » ; « Poser une question » comprend le lieu (« à Pernay ») et demande laquelle quand plusieurs villes portent le même nom.</p>
+                            <h4>📏 Calendrier / Mesures</h4>
+                            <p>Huit cadres de plus (mesures par région, âge ↔ naissance, écart entre deux dates, jour de la semaine, saint du jour et fêtes mobiles, heures canoniques, monnaies étrangères, générations).</p>
+                            <h4>⚙️ Réglages</h4>
+                            <p>Une page « Cartes et fonds de carte » à part ; les messages après une action se règlent (coin de l'écran, durée, couleurs de chaque sorte de message) ; recherche des questions fréquentes avec un seul cadre.</p>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.7.0 <small>Créations, artistes et carrières, maison de famille en 3D, dessin et blasons, transcription d'actes et alphabets anciens, présentations et récit d'une vie, graphiques et cartes, cartes de photos, ADN et visages, plusieurs généalogies, une app plus cohérente et plus accessible</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🎨 Créations, artistes et carrières</h4>
+                            <ul>
+                                <li><b>« Cette personne était… »</b> : des profils à cocher sur une fiche (artiste, artisan d'art, acteur, sportif, politique, scientifique, inventeur, explorateur, militaire, agriculteur… et les vôtres). Chaque profil ajoute ses parties ; une personne peut en avoir plusieurs, réunis sur une page avec une <b>frise colorée par profil</b>.</li>
+                                <li><b>131 types d'œuvres</b> en 12 familles : peinture, sculpture et ses fontes, affiche, disque, morceau → enregistrements → parutions, livre, pièce → mises en scène → représentations → tournées, film, série → saisons → épisodes, métiers d'art, jeux, saveurs… et <b>son propre type</b>, créé en 5 étapes.</li>
+                                <li><b>Catalogue raisonné</b> et <b>discographie</b> (album par album, titre par titre, crédits, pressages), inventaire des œuvres (où, à qui, état, valeur), provenance et expositions ; disques et livres en plusieurs exemplaires ; fiches reprises des grandes bases en ligne de disques, de livres et de films.</li>
+                                <li><b>Concerts et spectacles</b> avec la liste des morceaux joués (rappels, reprises, invités), tournées, carte et statistiques ; <b>inventions</b> (brevets par pays, prototypes), <b>découvertes</b> et <b>expéditions</b> ; mandats et élections ; <b>137 sports</b> avec leurs chiffres par saison ; la <b>liste officielle des métiers d'art</b>.</li>
+                                <li>Pour toute personne : <b>« 📰 Dans les médias »</b> (et la Revue de presse), <b>« 🏆 Concours et récompenses »</b> (et le Palmarès), <b>« 🎓 Diplômes et formation »</b> ; tout se retrouve dans le groupe de listes <b>« 🎨 Créations et carrières »</b>.</li>
+                            </ul>
+                            <h4>🏠 La maison de famille, en plan et en 3D</h4>
+                            <ul>
+                                <li>Dessiner la maison <b>pièce par pièce, au centimètre près</b> : longueurs tapées au clavier, aimants, cotes, portes et fenêtres, étages (et l'étage d'en dessous en transparence pour caler), <b>toit à son goût</b>, plan ancien ou cadastre à calquer.</li>
+                                <li><b>Près de 700 meubles et objets</b> d'autrefois, de métiers et d'ateliers, objets à soi ou importés ; <b>photos et tableaux de la base dans les cadres</b>, les toiles et les miroirs.</li>
+                                <li><b>Visite en 3D</b> à la première personne, lumière du jour, <b>« 🕰 Époques »</b> qui font évoluer la maison au fil des années ; habitants, souvenirs et recensements reliés à chaque maison, bloc 🏠 Maisons sur la fiche.</li>
+                            </ul>
+                            <h4>✏️ Dessin, blasons, plans et faire-part</h4>
+                            <ul>
+                                <li>Un <b>outil de dessin</b> complet : plume, formes, calques et groupes, masques, texte sur une courbe, dégradés et motifs, aligner et répartir, vectoriser une image ; export SVG, PNG, JPG, PDF.</li>
+                                <li><b>Blasons</b> (écus, partitions, émaux, hachures, 44 ornements anciens), <b>plans de ville ou de village</b> (routes, rivières, bâtiments, rose des vents, styles d'époque) et <b>cartes à l'échelle</b>.</li>
+                                <li><b>Faire-part et affiches</b> remplis depuis l'arbre (naissance, mariage, décès, cousinade…), dans bien plus de formats, recto-verso ou pliés avec leur enveloppe ; <b>signatures</b> détourées d'un acte, cachets de cire, monogrammes, ex-libris.</li>
+                                <li><b>Arbre décoratif à imprimer en grand</b> : éventail, roue, arbre dessiné, arbre en cases, jusqu'à 12 générations, 13 styles et les vôtres, formats A4 à A0.</li>
+                            </ul>
+                            <h4>📜 Lire les actes anciens</h4>
+                            <ul>
+                                <li>Un <b>atelier de transcription</b> : l'image et le texte côte à côte, des zones reliées à chaque passage, la lecture automatique, le repérage des noms, des rôles, des dates (en toutes lettres et républicaines), des lieux et des métiers, des modèles d'actes ; « 🎚️ Mieux voir » (netteté, contraste, fond effacé, loupe) ; une liste des transcriptions.</li>
+                                <li>Dans Calendrier / Mesures, le cadre <b>« Alphabets et langues des actes »</b> : choisir une langue parmi <b>une quarantaine</b> (latin, occitan, breton, polonais, russe, grec…), voir tout son alphabet, ses lettres à accents et des indices pour la reconnaître ; <b>taper des caractères pour savoir de quelle langue ils viennent</b> ; un <b>clavier cyrillique et grec</b>, avec la transcription en lettres latines.</li>
+                                <li>L'assistant <b>« Que manque-t-il ? »</b> liste les actes encore à chercher et les archives à consulter ; la lecture des textes imprimés est fournie avec l'application.</li>
+                            </ul>
+                            <h4>🎞️ Présentations, diaporamas et montage</h4>
+                            <ul>
+                                <li>De <b>vraies présentations</b> : thèmes, textes, images, tableaux, graphiques, objets de généalogie, transitions et animations, fenêtre du présentateur ; import et export de présentations, PDF et vidéo.</li>
+                                <li><b>« ✨ Récit d'une vie »</b> fabrique tout seul, depuis la fiche, le diaporama d'une personne : carte de naissance, événements, photos, époque, lieux de vie, descendance.</li>
+                                <li>Montage : <b>voix off</b> au micro, <b>sous-titres</b>, mouvement lent sur les photos, modèles « La vie de… » et « Une famille », musique qui baisse sous la voix, formats pour téléphone ou carré, chapitres, <b>vitesse de 0,1 × à 10 ×</b>, rushes rangés en dossiers.</li>
+                            </ul>
+                            <h4>🎚️ Retouche et mise en page</h4>
+                            <ul>
+                                <li><b>Restauration guidée d'une vieille photo</b> : redresser, enlever le jaunissement, les taches, les rayures et les plis, coloriser avec des couleurs d'époque, comparer avant / après.</li>
+                                <li><b>41 filtres</b> qui ne touchent jamais la photo d'origine, enlever les <b>reflets d'une vitre</b>, sélectionner le sujet d'un clic, placer une image sur un calque, gomme à part, modes de fusion, actions pour plusieurs photos à la fois.</li>
+                                <li>Livres : <b>texte qui continue d'un bloc à l'autre</b>, sommaire et index des noms remplis tout seuls, <b>notes de bas de page</b> et sources citées, index des lieux et des métiers, arbre qui se met à jour, contrôle avant impression, <b>vérification du texte avec les fiches</b>, mode relecture avec commentaires, ePub.</li>
+                            </ul>
+                            <h4>📊 Graphiques, diagrammes et cartes</h4>
+                            <ul>
+                                <li><b>Des graphiques à poser partout</b> et tenus à jour, avec ses propres chiffres (tableau, collage, fichier, page Wikipédia, et même une image de graphique), rangés dans une liste et <b>dans des dossiers</b>.</li>
+                                <li><b>22 nouvelles formes</b> : éventail d'ascendance, soleil des lignées, réseau de relations, spirale du temps, classement qui évolue… ; hémicycles et frises des membres.</li>
+                                <li><b>Cartes colorées par zones</b> (départements, régions, pays d'Europe, continents) avec un <b>encart zoomé sur l'Île-de-France</b> et un niveau de détail <b>« Communes »</b> pour la France, la Belgique, la Suisse et le Luxembourg ; carte des migrations.</li>
+                            </ul>
+                            <h4>📸 Cartes de photos et vidéos</h4>
+                            <ul>
+                                <li>L'<b>endroit et l'heure</b> d'une photo ou d'une vidéo sont lus tout seuls, à corriger en glissant ; les photos sans position attendent dans « À placer » ; <b>une frise pour remonter le temps</b>, jusqu'à la seconde ; toutes les cartes en pastilles en haut de l'outil.</li>
+                            </ul>
+                            <h4>🔬 Chercher autrement</h4>
+                            <ul>
+                                <li>Onglet <b>ADN</b> (caché au départ, avec une mise en garde sur la loi française) : correspondances, groupes automatiques, chromosomes, lignées, <b>placement probable d'un cousin</b> dans l'arbre.</li>
+                                <li><b>« 👤 Visages »</b> reconnaît les personnes sur les photos, sur l'ordinateur seulement ; <b>« Poser une question »</b> en français comprend les liens de parenté, les records, les âges, les dates républicaines ; les <b>dates impossibles</b> sont signalées pendant la saisie.</li>
+                                <li><b>Revues, livres, documentaires et podcasts</b> (numéros à acheter, articles, moments minutés, captures annotées) ; <b>petites annonces</b> et courriers aux journaux avec le calcul du prix.</li>
+                            </ul>
+                            <h4>🌳 Plusieurs généalogies, et un puzzle</h4>
+                            <ul>
+                                <li><b>Plusieurs généalogies complètement séparées</b>, chacune avec sa base, ses médias, ses sauvegardes et ses réglages.</li>
+                                <li><b>🧩 Puzzle</b> de 12 à 1000 pièces avec une image de la base, chrono et records ; pièce d'archives et musée à aménager.</li>
+                            </ul>
+                            <h4>🧭 Une app plus simple et plus cohérente</h4>
+                            <ul>
+                                <li>Partout <b>le même menu pour choisir une personne, un lieu ou autre chose</b> (communes de France et villes du monde, sans être bloqué par les homonymes) et <b>une seule fenêtre</b> pour choisir une image, un son ou une vidéo.</li>
+                                <li><b>La même barre au-dessus de toutes les listes</b> (Chercher · Filtrer · Liste | Fiches · Trier) ; plus de « Es-tu sûr ? » pour ce qui se défait : on supprime, et un message propose <b>« ↶ Annuler »</b>.</li>
+                                <li>Mêmes champs de date, de couleur et de curseur, même fenêtre d'export, mêmes « 💾 Réglages enregistrés » partout ; mode sombre partout ; petits écrans mieux pris en charge.</li>
+                            </ul>
+                            <h4>♿ Accessibilité et apparence</h4>
+                            <ul>
+                                <li>Réglages pour le <b>daltonisme</b> (avec « Voir comme… »), taille et espacement du texte, <b>polices pour mieux lire et pour la dyslexie</b> (intégrées), contraste élevé, grandes cibles, moins d'animations, <b>lecture à voix haute</b>, dictée.</li>
+                                <li>Renommer les onglets du menu et choisir leur émoji ; formes d'avatar et thèmes à soi ; en-tête de fiche réglable ; Listes et Réglages rangés en groupes repliables.</li>
+                                <li>Le widget <b>« Mes raccourcis »</b> mène à n'importe quoi (une fiche, une liste filtrée, un outil, un site), et <b>son crayon permet d'ajouter et de ranger ses raccourcis directement</b>.</li>
+                            </ul>
+                            <h4>🐞 Bugs corrigés</h4>
+                            <ul>
+                                <li><b>Saisie</b> : un double-clic créait parfois deux fiches ; Entrée pouvait effacer ce qu'on venait de taper ; deux onglets ouverts sur la même fiche s'écrasaient sans prévenir ; Échap fermait parfois une fenêtre de trop.</li>
+                                <li><b>Famille</b> : retirer un parent ne le retirait pas toujours ; des demi-frères pouvaient se retrouver avec trois parents ; des fusions impossibles (entre conjoints, entre un ancêtre et son descendant) étaient acceptées.</li>
+                                <li><b>GEDCOM</b> : dates républicaines et juliennes, étiquettes, animaux et titres de notes perdus ; la recherche tenait compte des accents et des tirets ; « né un 29 février » n'était compris qu'à moitié.</li>
+                                <li><b>Cartes et affichage</b> : la Russie n'apparaissait qu'en morceaux sur la carte du monde ; des textes débordaient et des éléments se collaient dans toute l'app ; des cadres côte à côte n'avaient pas la même hauteur.</li>
+                                <li><b>Réglages</b> : 17 réglages du « Défaut du site » n'étaient pas gardés ; un graphique en ¾ revenait à ½ ; une forme d'avatar à soi s'affichait sous le mauvais nom.</li>
+                                <li><b>Sécurité</b> : sauvegardes et bases reçues d'ailleurs vérifiées avant l'ouverture, liens vérifiés, exports CSV protégés, et de nombreuses autres protections.</li>
+                            </ul>
+                        </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.6.0 <small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux libres, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></summary>
                         <div class="presentation-version-body">
@@ -971,7 +1005,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.7.1 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.8.0 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script src="faq-data.js"></script>
