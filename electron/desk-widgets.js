@@ -38,11 +38,11 @@ function isWidgetUrl(url, origin) {
     } catch { return false; }
 }
 
-/** La page « ↗ Aperçu » d'un site web (Mon site web) : isolée, sans pont vers l'application. */
+/** La page « ↗ Aperçu » d'un site web (Mon site web), ou son aperçu en direct : isolée, sans pont vers l'application. */
 function isSitePreviewUrl(url, origin) {
     try {
         const u = new URL(String(url));
-        return u.origin === new URL(origin).origin && u.pathname === '/api.php' && u.searchParams.get('action') === 'website_preview';
+        return u.origin === new URL(origin).origin && u.pathname === '/api.php' && ['website_preview', 'website_live'].includes(u.searchParams.get('action')); // l'aperçu en direct aussi
     } catch { return false; }
 }
 

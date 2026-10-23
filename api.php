@@ -68,6 +68,10 @@ try {
         kiosk_exit($payload);
     }
     kiosk_guard((string) $action, $isWrite);
+    if (!$isWrite && $action === 'website_live_rev') { // 🌐 aperçu en direct : sa révision, demandée chaque seconde (sans ouvrir la base ; lib/website_php.php)
+        require_once __DIR__ . '/lib/website_php.php';
+        website_live_rev((string) ($_GET['token'] ?? ''));
+    }
     // Plusieurs généalogies complètement séparées (lib/paths.php) : liste, création, changement, nom, mise de côté
     if (!$isWrite && $action === 'genealogies') {
         json_response(genealogies_list_data());
@@ -226,6 +230,10 @@ try {
     }
     if (!$isWrite && in_array($action, ['website_preview', 'website_export', 'website_export_check'], true)) { // 🌐 Mon site web : aperçu isolé, .zip, résumé (lib/website.php)
         website_dispatch($pdo, (string) $action, $_GET);
+    }
+    if (in_array($action, ['website_php_run', 'website_live_put', 'website_live'], true)) { // 🐘 pages PHP exécutées à part, aperçu en direct dans un autre navigateur (lib/website_php.php)
+        require_once __DIR__ . '/lib/website_php.php';
+        website_php_dispatch($pdo, (string) $action, $isWrite, $isWrite ? $payload : $_GET);
     }
     if (!$isWrite && in_array($action, ['desk_widget_page', 'desk_widget_file'], true)) { // 🪟 widgets sur le bureau (lib/desk_widgets.php)
         require_once __DIR__ . '/lib/desk_widgets.php';

@@ -13,6 +13,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { PhpServer, findPhp, checkPhp, devBundledPhp, SECRET_HEADER } = require('./php-server');
 const desk = require('./desk-widgets'); // 🪟 widgets sur le bureau
+const browsers = require('./browsers'); // 🌐 ouvrir l'aperçu d'un site dans un navigateur précis
 
 const APP_TITLE = 'Carnet numérique des ancêtres';
 app.setName(APP_TITLE);
@@ -327,6 +328,12 @@ function setAutostart(on) {
     return true;
   } catch { return false; }
 }
+/** 🌐 Mon site web : les navigateurs installés ; ouvrir une page DE L'APPLICATION (aperçu en direct) dans l'un d'eux. */
+ipcMain.handle('lcnda:browsers', (event) => (fromApp(event) ? browsers.listBrowsers() : []));
+ipcMain.handle('lcnda:open-in-browser', (event, id, url) => {
+  if (!fromApp(event)) return { ok: false, error: 'Refusé' };
+  return browsers.openInBrowser(String(id || ''), String(url || ''), server.origin, (u) => shell.openExternal(u));
+});
 ipcMain.handle('lcnda:desk-widgets', (event, cmd, kind, opts) => {
   if (!fromApp(event)) return { ok: false, error: 'Refusé' };
   cmd = String(cmd || ''); kind = String(kind || '');

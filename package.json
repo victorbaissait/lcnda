@@ -42,7 +42,8 @@
     "test:artist": "node tests/test-artist.js",
     "test:scene": "node tests/test-scene.js",
     "test:oeuvres": "node tests/test-oeuvres.js",
-    "test:blocs": "node tests/test-blocs.js"
+    "test:blocs": "node tests/test-blocs.js",
+    "test:website-php": "node tests/test-website-php.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",
@@ -67,6 +68,7 @@
       "electron/php-server.js",
       "electron/preload.js",
       "electron/desk-widgets.js",
+      "electron/browsers.js",
       "electron/loading.html"
     ],
     "extraResources": [

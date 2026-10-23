@@ -240,7 +240,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             ok(/src="images\/m1\.jpg"/.test(ix) && !/lucie\.jpg|media\//.test(ix), 'images : renommées, la photo de la vivante n’est pas partie');
             ok(/Fils de Pierre MARTIN/.test(ix) && /lc-tree-box/.test(ix), 'les blocs de la généalogie sont figés dans la page');
             ok(/href="nous-ecrire\.html"/.test(ix) && /aria-current="page"/.test(z['nous-ecrire.html']), 'le menu relie les pages');
-            ok(/--lc-principale:#7a2a2a/.test(z['css/style.css']) && /\.lc-tree\{/.test(z['css/style.css']) && /url\("images\/m1\.jpg"\)/.test(z['css/style.css']), 'style.css : couleurs, blocs, image de fond');
+            ok(/--lc-principale:#7a2a2a/.test(z['css/style.css']) && /\.lc-tree\{/.test(z['css/style.css']) && /url\("\.\.\/images\/m1\.jpg"\)/.test(z['css/style.css']), 'style.css : couleurs, blocs, image de fond');
             ok(z['images/m1.jpg'] < 400000, `image réduite (${z['images/m1.jpg']} octets)`);
         }
         const one = await (await fetch(`${base}api.php?action=website_export&id=${id}&format=html&page=index`)).text();
