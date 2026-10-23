@@ -532,3 +532,8 @@ html[data-toast-pos="tl"] .toast.ui-toast,html[data-toast-pos="tr"] .toast.ui-to
 .toast-color-demo{padding:9px 12px;font-weight:600;font-size:13.5px;box-shadow:4px 4px 0 rgba(5,93,255,.35)}
 .toast-dur select{min-width:200px}
 .toast-prefs h4+.toast-corner-pick{margin-top:0}.toast-prefs .maintenance-panel h4:not(:first-child){margin-top:18px}
+/* Réglages en trois groupes : ce qui n’est pas de cette page */
+.reg-a-off { display: none !important; }
+.reg-a-tabs { display: flex; flex-wrap: wrap; width: max-content; max-width: 100%; margin: 0 0 18px; }
+.reg-a-tabs button { padding: 0 16px; white-space: nowrap; }
+.reg-a-switch { margin-top: 10px; }

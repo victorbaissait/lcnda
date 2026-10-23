@@ -15,20 +15,35 @@
         design_maps: 'préférences fonds de carte fonds de cartes ordre des fonds boutons plan des adresses village carte par défaut ordre des cartes',
         design_board: 'préférences widgets bibliothèque', design_sheets: 'préférences blocs de la fiche en-tête boutons profils', raccourcis: 'touches clavier préférences',
         diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations', board_prefs: 'réglages des tableaux formes pointes couleurs', pet_prefs: 'réglages des animaux espèces formulaire', meteo: 'météo temps pluie température neige climat ciel normale stations pack'};
-    const MO_KEY = 'genealogie-maintenance-order', mKeys = () => defaultMaintenanceTabs.map(t => t[0]);
-    const MG = window.LCNDA_SIDEGROUPS({name: 'maintenance', panelTitle: 'Ordre des pages des Réglages', key: MG_KEY, defaults: MG_DEFAULT, allKeys: mKeys, label: k => defaultMaintenanceTabs.find(t => t[0] === k)?.[2] || k, defaultEnabled: true,
+    const MO_KEY = 'genealogie-maintenance-order', A_ONLY = ['look_theme', 'look_portraits', 'look_msgs', 'look_lang', 'look_layouts', 'nav_menus'];
+    const mKeys = () => defaultMaintenanceTabs.map(t => t[0]).filter(k => (window.LCNDA_APP.reglagesA?.() ? k !== 'design' : !A_ONLY.includes(k)));
+    /* présentation A : « Apparence et affichage » en trois groupes ; l'autre façon garde son propre rangement */
+    const MG_DEFAULT_A = [['g_look', '🎨', 'Look', ['look_theme', 'designs', 'look_portraits', 'look_msgs', 'look_lang', 'accessibilite', 'look_layouts']], ['g_nav', '🧭', 'Navigation', ['nav_menus', 'raccourcis']],
+        ['g_screens', '🖼', 'Écrans', ['design_board', 'design_sheets', 'design_maps', 'viewer_prefs', 'diagram_kinds', 'dna_prefs']], ...MG_DEFAULT.filter(g => g[0] !== 'g_look')];
+    Object.assign(MAINT_KEYWORDS, {look_theme: 'preset couleur principale police taille typographique fond des blocs thèmes réglages enregistrés remettre', look_portraits: 'avatars forme portraits colonne de gauche personnalisé',
+        look_msgs: 'messages toast coin durée couleurs notifications après une action', look_lang: 'langue calendrier dates lecteur audio vidéo avancer reculer', look_layouts: 'réglages enregistrés mises en page sauvegarder tout',
+        nav_menus: 'ordre noms menu principal onglets listes pages des réglages boutons en haut à droite logo prénom nom colonne latérale types de recherche lignes cachées graphiques diagrammes statistiques',
+        design_sheets: 'préférences blocs de la fiche en-tête boutons profils événements recensements variantes enquêtes mort pour la france badges sosa aboville verrouillage internet exceptions'});
+    const sgCfg = (name, key, defaults) => ({name, panelTitle: 'Ordre des pages des Réglages', key, defaults, allKeys: mKeys, label: k => defaultMaintenanceTabs.find(t => t[0] === k)?.[2] || k, defaultEnabled: true,
         flatOrder: () => { let o = []; try { o = JSON.parse(localStorage.getItem(MO_KEY) || '[]'); } catch (_) {} const d = mKeys(); o = Array.isArray(o) ? o.filter(k => d.includes(k)) : []; return [...o, ...d.filter(k => !o.includes(k))]; },
         setFlatOrder: keys => { try { localStorage.setItem(MO_KEY, JSON.stringify(keys)); } catch (_) {} }, flatDefaults: mKeys,
         current: () => state.maintenanceTab, eyebrow: 'RÉGLAGES', what: 'pages', searchPh: 'Chercher un réglage…', keywords: MAINT_KEYWORDS});
+    const MG_A = window.LCNDA_SIDEGROUPS(sgCfg('maintenance_a', MG_KEY + '-a', MG_DEFAULT_A));
+    const MG_OLD = window.LCNDA_SIDEGROUPS({name: 'maintenance', panelTitle: 'Ordre des pages des Réglages', key: MG_KEY, defaults: MG_DEFAULT, allKeys: mKeys, label: k => defaultMaintenanceTabs.find(t => t[0] === k)?.[2] || k, defaultEnabled: true,
+        flatOrder: () => { let o = []; try { o = JSON.parse(localStorage.getItem(MO_KEY) || '[]'); } catch (_) {} const d = mKeys(); o = Array.isArray(o) ? o.filter(k => d.includes(k)) : []; return [...o, ...d.filter(k => !o.includes(k))]; },
+        setFlatOrder: keys => { try { localStorage.setItem(MO_KEY, JSON.stringify(keys)); } catch (_) {} }, flatDefaults: mKeys,
+        current: () => state.maintenanceTab, eyebrow: 'RÉGLAGES', what: 'pages', searchPh: 'Chercher un réglage…', keywords: MAINT_KEYWORDS});
+    const MGnow = () => (window.LCNDA_APP.reglagesA?.() ? MG_A : MG_OLD);
     function renderMaintenanceSidebar(content,footer){
-        MG.render(content, sidebarSignal());
+        MGnow().render(content, sidebarSignal());
         content.addEventListener('click',async event=>{const item=event.target.closest('[data-side-value]');if(item){state.maintenanceTab=item.dataset.sideValue;persistUiState();const hash=moduleHash('maintenance');saveLastRoute(hash);updateBrowserRoute(hash,true,'maintenance');renderSidebar();await renderMaintenance();}},{signal:sidebarSignal()});
-        footer.innerHTML=`<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="open-archive-room">Pièce d’archives</button><button class="button small secondary" type="button" id="maintenance-reorder" title="En groupes ou en une seule liste, l’ordre des pages, l’ouverture des groupes">Réordonner</button></div><span style="display:block;margin-top:9px">Les exceptions restent mémorisées.</span>`;
+        footer.innerHTML=`<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="open-archive-room">Pièce d’archives</button><button class="button small secondary" type="button" id="maintenance-reorder" title="En groupes ou en une seule liste, l’ordre des pages, l’ouverture des groupes">Réordonner</button></div><span style="display:block;margin-top:9px">Les exceptions restent mémorisées.</span><button class="button small secondary reg-a-switch" type="button" id="reglages-presentation" title="Apparence et affichage : en trois groupes (Look, Navigation, Écrans) ou les 10 pages d’avant ; tes réglages ne changent pas">${window.LCNDA_APP.reglagesA?.()?'↩ Apparence : présentation d’avant':'✨ Apparence : en trois groupes'}</button>`;
+        $('#reglages-presentation')?.addEventListener('click',async()=>{const a=!window.LCNDA_APP.reglagesA();window.LCNDA_APP.setReglagesA(a);persistUiState();renderSidebar();await renderMaintenance();window.LCNDA_APP.toast(a?'Apparence et affichage : rangé en trois groupes (Look, Navigation, Écrans).':'Apparence et affichage : la présentation d’avant. Tes réglages n’ont pas changé.');},{signal:sidebarSignal()});
         $('#open-archive-room')?.addEventListener('click',openArchiveRoom,{signal:sidebarSignal()});
         $('#maintenance-reorder')?.addEventListener('click',openMaintenanceReorderDialog,{signal:sidebarSignal()});
     }
     /** Réglages → « Réordonner » : groupes ou une seule liste (case à cocher), les groupes (ranger, renommer, créer, effacer), l'ordre, l'ouverture. */
-    function openMaintenanceReorderDialog(){ MG.openDialog(); }
+    function openMaintenanceReorderDialog(){ MGnow().openDialog(); }
     function hebrewMonthOrder(year){return [7,8,9,10,11,12,...(year&&!hebrewLeap(year)?[]:[13]),1,2,3,4,5,6];}
     const shortMonthsFr=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
     function republicanMonthRange(year,month){

@@ -73,6 +73,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
     const open = async (srv, ctx = null) => {
         const context = ctx || await browser.newContext({viewport: {width: 1440, height: 900}, acceptDownloads: true});
         const page = await context.newPage();
+        await page.addInitScript(() => { try { if (!localStorage.getItem('genealogie-reglages-presentation')) localStorage.setItem('genealogie-reglages-presentation', 'old'); } catch (_) {} }); // ce test vise la page « Apparence » d'avant, en un seul morceau
         page.on('pageerror', e => errs.push(`${srv.base} : ${e.message}`)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errs.push(`${srv.base} console : ${m.text()}`); });
         await page.route(u => !u.toString().startsWith(srv.base), rt => rt.abort());
         await page.goto(srv.base, {waitUntil: 'load'}); await page.waitForTimeout(1200);

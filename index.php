@@ -41,7 +41,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/layout.css?v=16">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
-    <link rel="stylesheet" href="assets/css/ui.css?v=13">
+    <link rel="stylesheet" href="assets/css/ui.css?v=14">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
@@ -1134,7 +1134,7 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=464" defer></script>
+<script src="assets/js/app.js?v=468" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=21" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1170,12 +1170,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-actions.js?v=4" defer></script>
 <script src="assets/js/app-editeurs.js?v=3" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=4" defer></script>
+<script src="assets/js/app-pages.js?v=5" defer></script>
 <script src="assets/js/app-access.js?v=9" defer></script>
 <script src="assets/js/app-mode-simple.js?v=8" defer></script>
 <script src="assets/js/app-sidegroups.js?v=11" defer></script>
 <script src="assets/js/app-listes.js?v=35" defer></script>
-<script src="assets/js/app-maintenance.js?v=27" defer></script>
+<script src="assets/js/app-maintenance.js?v=28" defer></script>
 <script src="assets/js/app-recherche.js?v=24" defer></script>
 <script src="assets/js/app-graphiques.js?v=18" defer></script>
 <script src="assets/js/app-side-folders.js?v=2" defer></script>
@@ -1313,7 +1313,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-site-web-code.js?v=3" defer></script>
 <script src="assets/js/heritage-site-web-compat.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-blocs.js?v=5" defer></script>
-<script src="assets/js/heritage-site-web.js?v=6" defer></script>
+<script src="assets/js/heritage-site-web.js?v=7" defer></script>
 <script src="assets/js/heritage-desk-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-lot.js?v=1" defer></script>
 <script src="assets/js/heritage-house-vides.js?v=1" defer></script>

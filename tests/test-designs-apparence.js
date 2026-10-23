@@ -74,6 +74,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
     const errs = [];
     const open = async (w = 1440) => {
         const page = await browser.newPage({viewport: {width: w, height: 900}});
+        await page.addInitScript(() => { try { if (!localStorage.getItem('genealogie-reglages-presentation')) localStorage.setItem('genealogie-reglages-presentation', 'old'); } catch (_) {} }); // ce test vise la page « Apparence » d'avant, en un seul morceau
         page.on('pageerror', e => errs.push(`${w}px : ${e.message}`)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errs.push(`${w}px console : ${m.text()}`); });
         await page.route(u => !u.toString().startsWith(base), rt => rt.abort());
         await page.goto(base, {waitUntil: 'load'}); await page.waitForTimeout(1200);

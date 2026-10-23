@@ -60,6 +60,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         const evil = []; ctx.on('request', r => { if (/evil\.example/.test(r.url())) evil.push(r.url()); });
         await ctx.route(/evil\.example/, r => r.fulfill({ status: 200, body: '' }));
         const page = await ctx.newPage();
+        await page.addInitScript(() => { try { if (!localStorage.getItem('genealogie-reglages-presentation')) localStorage.setItem('genealogie-reglages-presentation', 'old'); } catch (_) {} }); // ce test vise la page « Apparence » d'avant, en un seul morceau
         const errors = []; page.on('pageerror', e => errors.push(String(e.message)));
         await page.goto(base); await page.waitForFunction(() => window.LCNDA_APP?.api && window.LCNDA_PUZZLE && window.LCNDA_UI?.openFontPicker);
         const csrf = await page.evaluate(() => window.LCNDA_APP.state.csrf || window.INSTALL_CSRF);

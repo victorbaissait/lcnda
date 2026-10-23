@@ -129,6 +129,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
     const errs = [];
     const open = async (w, dark = false) => {
         const page = await browser.newPage({viewport: {width: w, height: w < 600 ? 844 : 900}, colorScheme: dark ? 'dark' : 'light'});
+        await page.addInitScript(() => { try { if (!localStorage.getItem('genealogie-reglages-presentation')) localStorage.setItem('genealogie-reglages-presentation', 'old'); } catch (_) {} }); // ce test vise la page « Apparence » d'avant, en un seul morceau
         page.on('pageerror', e => errs.push(`${w}px : ${e.message}`)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errs.push(`${w}px console : ${m.text()}`); });
         page.on('dialog', d => d.dismiss());
         await page.addInitScript(() => { window.__rej = []; addEventListener('unhandledrejection', e => window.__rej.push(String(e.reason?.message || e.reason))); });

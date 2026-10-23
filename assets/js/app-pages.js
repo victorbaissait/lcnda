@@ -26,7 +26,7 @@
     }
     function groupOf(name, key) {
         try {
-            const inst = window.LCNDA_SIDEGROUPS?.instances?.[name]; const p = inst?.prefs?.();
+            const inst = window.LCNDA_SIDEGROUPS?.instances?.[name === 'maintenance' && A().reglagesA?.() ? 'maintenance_a' : name]; const p = inst?.prefs?.();
             const g = p?.groups?.find(x => x.items.includes(key));
             if (g) return {icon: g.icon, label: g.label};
         } catch (_) {}

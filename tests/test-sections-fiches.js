@@ -223,6 +223,7 @@ echo 'ok';`);
         const errs = [];
         const open = async (w = 1440, extra = {}) => {
             const page = await browser.newPage({viewport: {width: w, height: 1000}, ...extra});
+            await page.addInitScript(() => { try { if (!localStorage.getItem('genealogie-reglages-presentation')) localStorage.setItem('genealogie-reglages-presentation', 'old'); } catch (_) {} }); // ce test vise la page « Fiches » d'avant (un seul tenant, avec son sommaire)
             page.on('pageerror', e => errs.push(`${w}px : ${e.message}`)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errs.push(`${w}px console : ${m.text()}`); });
             page.on('dialog', d => d.dismiss().catch(() => {}));
             await page.route(u => !u.toString().startsWith(base), rt => rt.abort());
@@ -509,6 +510,7 @@ echo 'ok';`);
                 await page.reload({waitUntil: 'load'}); await page.waitForSelector('#workspace .fsec-tab.is-active');
                 assert.equal(await activeTab(page), 's_family'); assert.equal(await page.evaluate(() => window.LCNDA_APP.state.currentPersonId), 1);
                 const p2 = await browser.newPage({viewport: {width: 1280, height: 900}}); p2.on('pageerror', e => errs.push(`fenêtre : ${e.message}`));
+                await p2.addInitScript(() => { try { if (!localStorage.getItem('genealogie-reglages-presentation')) localStorage.setItem('genealogie-reglages-presentation', 'old'); } catch (_) {} }); // ce test vise la page « Fiches » d'avant (un seul tenant, avec son sommaire)
                 await p2.route(u => !u.toString().startsWith(base), rt => rt.abort());
                 await p2.goto(base + '#personnes/2/documents', {waitUntil: 'load'}); await p2.waitForSelector('#workspace .fsec-tab.is-active');
                 assert.equal(await p2.evaluate(() => window.LCNDA_APP.state.currentPersonId), 2); assert.equal(await activeTab(p2), 's_docs');
