@@ -555,14 +555,17 @@
             const targets = () => ({...C.DEFAULT_TARGETS, ...this.compatTargets()});
             const body = () => `<div class="sw-row"><span>Imiter dans l’aperçu :</span>${[{id: '', name: 'Aucun', icon: '▭'}, ...C.BROWSERS].map(b => `<button type="button" class="sw-chip${(this.imitate || '') === b.id ? ' is-active' : ''}" data-cp-imit="${b.id}">${esc(b.icon)} ${esc(b.name)}</button>`).join('')}</div>
                 <details class="sw-cp-targets"><summary>Navigateurs visés (versions les plus anciennes à prendre en charge)</summary><div class="sw-row">${C.BROWSERS.map(b => { const v = targets()[b.id]; return `<label class="sw-cp-t">${esc(b.icon)} ${esc(b.name)}<input type="number" min="0" step="1" value="${v === false || v == null ? '' : v}" data-cp-target="${b.id}" placeholder="—" title="Vide : ne pas vérifier ce navigateur"></label>`; }).join('')}<button type="button" class="button small secondary" data-cp-reset>↺ Les 2 dernières années</button></div></details>
+                <div class="sw-row" data-cp-open hidden><span>↗ Ouvrir le site dans :</span></div>
                 <div data-cp-list>${C.panelHtml(this.compatScan(), {targets: this.compatTargets()})}</div>
                 <p class="sw-hint">Les versions viennent d’une liste intégrée à l’app (comme caniuse.com, sans internet). Pour voir le site en vrai : ↗ Aperçu, puis ouvre l’adresse dans le navigateur voulu.</p>`;
             ext.openDialog({eyebrow: 'MON SITE WEB', title: '🧭 Le site dans les navigateurs', wide: true, submitLabel: 'Fermer', body: body(),
                 onOpen: d => {
+                    window.lcnda?.listBrowsers?.().then(list => { const box = d.querySelector('[data-cp-open]'), ok = (list || []).filter(b => b.installed); if (!box || !ok.length) return; box.insertAdjacentHTML('beforeend', [{id: 'default', name: 'Navigateur par défaut'}, ...ok].map(b => `<button type="button" class="button small secondary" data-cp-openin="${esc(b.id)}">${esc(b.name)}</button>`).join('')); box.hidden = false; }).catch(() => {});
                     const repaint = () => { d.querySelector('[data-cp-list]').innerHTML = C.panelHtml(this.compatScan(), {targets: this.compatTargets()}); };
                     const go = el => { const [file, line] = [el.dataset.compatGoto.replace(/:\d+$/, ''), Number(/:(\d+)$/.exec(el.dataset.compatGoto)?.[1] || 1)]; d.close(); this.gotoFile(file, line); };
                     d.addEventListener('click', e => {
                         const g = e.target.closest('[data-compat-goto]'); if (g) return go(g);
+                        const oi = e.target.closest('[data-cp-openin]'); if (oi) return this.openIn(oi.dataset.cpOpenin);
                         const im = e.target.closest('[data-cp-imit]'); if (im) { this.setImitate(im.dataset.cpImit); d.querySelectorAll('[data-cp-imit]').forEach(x => x.classList.toggle('is-active', x === im)); return; }
                         if (e.target.closest('[data-cp-reset]')) { setPref('compatTargets', null); d.querySelectorAll('[data-cp-target]').forEach(x => { x.value = C.DEFAULT_TARGETS[x.dataset.cpTarget] ?? ''; }); repaint(); }
                     });
@@ -1107,9 +1110,37 @@
          *  (le vrai PHP tourne dans le site exporté, chez l'hébergeur) */
         pageSrc(p = this.page()) {
             if (p.ext !== 'php') return p.html;
+            if (p === this.page()) { this.phpFetch(); const o = this.phpOut; if (o && o.slug === p.slug && typeof o.html === 'string') return o.html; }
             const inc = (text, depth) => text.replace(/<\?php\s+(?:include|require)(?:_once)?\s*\(?\s*["']([^"']+)["']\s*\)?\s*;?\s*\?>/gi, (m, path) => { const f = this.site.files.find(x => x.path === cleanPath(path)); return f && depth < 6 ? inc(f.content, depth + 1) : `<!-- ${esc(path)} : fichier introuvable -->`; });
             return inc(p.html, 0).replace(/<\?(?:php|=)[\s\S]*?(?:\?>|$)/gi, '');
         }
+        /** 🐘 le vrai PHP de la page, exécuté à part sur l'ordinateur (lib/website_php.php) ; une demande à la fois, après une pause */
+        phpKey() { const p = this.page(); return `${p.slug}|${this.site.pages.length}|${JSON.stringify([this.site.pages.map(x => [x.slug, x.ext, x.html]), this.site.files, this.site.css.length, this.site.theme])}`; }
+        phpFetch() {
+            if (!this.isPhp() || this.phpOff) return; const key = this.phpKey(); if (key === this.phpWant) return; this.phpWant = key;
+            clearTimeout(this.phpT); this.phpT = setTimeout(async () => {
+                const slug = this.page().slug;
+                try {
+                    const r = await post('website_php_run', {site: JSON.stringify(this.site), page: slug});
+                    if (this.phpWant !== key) return;
+                    const body = new DOMParser().parseFromString(String(r.html || ''), 'text/html').body;
+                    this.phpOut = {slug, html: body ? body.innerHTML : '', errors: Array.isArray(r.errors) ? r.errors : []};
+                    this.phpNote(this.phpOut.errors.length ? `⚠️ PHP : ${this.phpOut.errors.slice(0, 2).join(' · ')}` : `🐘 PHP exécuté (${Math.round(Number(r.ms) || 0)} ms)`);
+                    this.reload();
+                } catch (e) { this.phpOff = /ordinateur|localhost/i.test(e.message); this.phpOut = null; this.phpNote(`🐘 ${e.message}${this.phpOff ? ' L’aperçu remplace seulement les include.' : ''}`); }
+            }, 450);
+        }
+        phpNote(t) { this.phpMsg = t; const h = this.$('[data-sw-codehelp]'); if (h && this.codeTab === 'html' && this.isPhp()) h.textContent = t; }
+        /** 🧭 ↗ ouvrir le site dans un navigateur précis (application de bureau) : un aperçu en direct, qui suit les changements */
+        async openIn(id) {
+            try {
+                const r = await post('website_live_put', {site: JSON.stringify(this.site), page: this.page().slug, token: this.liveToken || ''});
+                this.liveToken = r.token;
+                const ok = await window.lcnda?.openInBrowser?.(id, r.url); if (ok === false) throw new Error('Ce navigateur n’a pas pu s’ouvrir.');
+                toast('Ouvert dans le navigateur : la page suit tes changements toute seule.', 'success');
+            } catch (e) { toast(e.message, 'error'); }
+        }
+        livePush() { if (!this.liveToken) return; clearTimeout(this.liveT); this.liveT = setTimeout(() => post('website_live_put', {site: JSON.stringify(this.site), page: this.page().slug, token: this.liveToken}).catch(() => {}), 800); }
         isPhp() { return this.page().ext === 'php'; }
         phpOnlyCode() { if (Date.now() - (this.phpToast || 0) > 6000) { this.phpToast = Date.now(); toast('Page PHP : elle se change dans le code (</>), l’aperçu montre le résultat. Les styles (CSS) se règlent toujours ici.'); } }
         setCodeTab(tab, quiet = false) {
@@ -1120,7 +1151,7 @@
             const f = this.fileOf(tab), kind = f ? f.kind : tab === 'html' ? (this.isPhp() ? 'php' : 'html') : tab;
             this.code.setLang(codeLang(kind)); this.code.value = this.codeValue();
             if (f) { this.$('[data-sw-codehelp]').textContent = {css: `${f.path} · lié après style.css${f.pages.length ? ` sur ${plural(f.pages.length, 'page')}` : ''} · clic droit sur l’onglet : ses pages`, js: `${f.path} · lié après script.js, tourne en ▶ Tester`, php: `${f.path} · à inclure dans une page PHP : <?php include '${f.path}'; ?>`, html: f.path, json: `${f.path} · données`, txt: f.path}[f.kind]; this.$('[data-sw-mqnav]').hidden = f.kind !== 'css'; if (!quiet) this.code.focus(); return; }
-            const help = {html: `${this.isPhp() ? `PHP de « ${this.page().name} » · <?php include 'includes/entete.php'; ?> pour un en-tête commun · ` : ''}HTML de « ${this.page().name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls`, css: 'CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)…', js: 'JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté'};
+            const help = {html: `${this.isPhp() ? `${this.phpMsg ? `${this.phpMsg} · ` : ''}PHP de « ${this.page().name} » · <?php include 'includes/entete.php'; ?> pour un en-tête commun · ` : ''}HTML de « ${this.page().name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls`, css: 'CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)…', js: 'JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté'};
             this.$('[data-sw-codehelp]').textContent = help[tab]; this.$('[data-sw-mqnav]').hidden = tab !== 'css';
             if (!quiet) this.code.focus();
         }
@@ -1188,6 +1219,7 @@
 
         /* ── historique, état ── */
         changed(commit = false) {
+            this.livePush();
             this.dirty = true; UI()?.savedStatus?.(this.dlg, 'dirty');
             clearTimeout(this.histT); if (commit) this.hist?.commit(); else this.histT = setTimeout(() => this.hist?.commit(), 600);
         }
