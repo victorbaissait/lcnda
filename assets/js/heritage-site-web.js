@@ -782,6 +782,9 @@
             if (t.matches('[data-sw-to]') && this.sel) { this.styleTo = t.value; return this.paintPanel(); }
             if (t.dataset.swSt && this.sel) return this.setStyle(t.dataset.swSt, t, final);
             if (t.dataset.swAt && this.sel && final) return this.setAttr(t.dataset.swAt, t.value);
+            if (t.dataset.swAttrv !== undefined && this.sel && final) return this.setAttr(t.dataset.swAttrv, t.value);
+            if (t.dataset.swAttrbool !== undefined && this.sel && final) return this.setAttr(t.dataset.swAttrbool, t.checked, true);
+            if (t.matches('[data-sw-attrnew]') && this.sel && final && t.value) { const a = t.value; t.value = ''; return this.addAttrAsk(a); }
             if (t.dataset.swBa && this.sel && final) { this.setBlockAttr(t.dataset.swBa, t.type === 'checkbox' ? (t.checked ? '1' : '0') : t.value); if (t.dataset.swBa === 'fond' || t.dataset.swBa === 'vive') { this.sel.battrs = {...(this.sel.battrs || {}), [t.dataset.swBa]: t.type === 'checkbox' ? (t.checked ? '1' : '0') : t.value}; this.paintPanel(); } return; }
         }
 
@@ -832,9 +835,17 @@
             this.post({type: 'attr', path: this.sel.path, name: 'style', value: style || null});
             if (final) { this.hist.commit(); this.post({type: 'info'}); }
         }
-        setAttr(name, value) {
-            if (!/^(id|class|data-lc-name|alt|href|src|title)$/.test(name)) return;
-            value = String(value || '').trim();
+        setAttr(name, value, bool = false) {
+            name = String(name || '').trim().toLowerCase();
+            if (!/^[a-z][a-z0-9_.:-]{0,60}$/.test(name) || /^on/.test(name) || name === 'style' || (/^data-lc/.test(name) && name !== 'data-lc-name')) { if (/^on/.test(name)) toast('Les attributs on… (onclick…) ne sont pas permis ici : écris le script dans le JS du site (addEventListener).', 'error'); return; }
+            value = bool ? (value ? name : '') : String(value || '').trim();
+            if (/^\s*(javascript|vbscript):/i.test(value)) return toast('Cette adresse n’est pas permise (javascript:…).', 'error');
+            if (bool) { this.mutate((doc, el) => { if (!el) return false; if (value) el.setAttribute(name, ''); else el.removeAttribute(name); }); this.post({type: 'info'}); return this.hist.commit(); }
+            if (!['id', 'class', 'data-lc-name', 'alt', 'href', 'src', 'title'].includes(name)) { // un autre attribut : écrit tel quel (vide : retiré)
+                if (/^(action|formaction|poster|cite|data|ping|background|srcset|imagesrcset)$/.test(name) && /(^|[\s,])data:(?!image\/(png|jpe?g|gif|webp);)/i.test(value)) return toast('Cette adresse n’est pas permise (data:…).', 'error');
+                this.mutate((doc, el) => { if (!el) return false; if (value) el.setAttribute(name, value); else el.removeAttribute(name); });
+                this.post({type: 'info'}); this.hist.commit(); return setTimeout(() => this.revealInCode(false), 30);
+            }
             if (name === 'id') value = value.replace(/[^\w-]/g, '-').replace(/^-+/, '');
             if (name === 'class') value = value.split(/\s+/).map(c => c.replace(/[^\w-]/g, '')).filter(Boolean).join(' ');
             if ((name === 'href' || name === 'src') && /^\s*(javascript|vbscript|data):/i.test(value) && !/^data:image\/(png|jpe?g|gif|webp);/i.test(value)) return toast('Cette adresse n’est pas permise (javascript:, data:…).', 'error');
@@ -916,18 +927,118 @@
             if (!info || typeof info !== 'object' || !Array.isArray(info.path)) return;
             const s = v => String(v ?? '').slice(0, 400);
             const samePath = this.sel && JSON.stringify(this.sel.path) === JSON.stringify(info.path);
-            this.sel = {path: info.path.map(Number).filter(n => Number.isInteger(n) && n >= 0).slice(0, 60), tag: s(info.tag).toLowerCase().replace(/[^a-z0-9-]/g, ''), id: s(info.id), cls: s(info.cls), name: s(info.name), block: s(info.block), text: s(info.text), src: s(info.src), href: s(info.href), alt: s(info.alt), style: s(info.style), cs: info.cs && typeof info.cs === 'object' ? Object.fromEntries(Object.entries(info.cs).map(([k2, v]) => [k2, s(v)])) : {}};
+            this.sel = {path: info.path.map(Number).filter(n => Number.isInteger(n) && n >= 0).slice(0, 60), tag: s(info.tag).toLowerCase().replace(/[^a-z0-9-]/g, ''), id: s(info.id), cls: s(info.cls), name: s(info.name), block: s(info.block), text: s(info.text), src: s(info.src), href: s(info.href), alt: s(info.alt), style: s(info.style), attrs: (Array.isArray(info.attrs) ? info.attrs : []).filter(a => Array.isArray(a) && /^[a-z][a-z0-9_.:-]{0,60}$/i.test(String(a[0]))).slice(0, 40).map(a => [String(a[0]).toLowerCase(), s(a[1])]), cs: info.cs && typeof info.cs === 'object' ? Object.fromEntries(Object.entries(info.cs).map(([k2, v]) => [k2, s(v)])) : {}};
             if (this.sel.block) { const doc = K().parse(this.page().html), el = K().elByPath(doc, this.sel.path); this.sel.battrs = el ? K().blockAttrs(el) : {}; }
             const classes = this.sel.cls.split(/\s+/).filter(c => /^[A-Za-z_-][\w-]*$/.test(c));
             if (!samePath || !(this.styleTo === 'el' || classes.includes(String(this.styleTo).slice(6)))) this.styleTo = classes.length ? `class:${classes[0]}` : 'el'; // par défaut : sa classe
             this.paintPanel(); this.whereText();
             if (from === 'frame') this.revealInCode(false);
         }
+        /** 📖 les éléments HTML (d'après la norme HTML du WHATWG, CC BY 4.0, traduit) : chercher, lire, mettre dans le code */
+        async addAttrAsk(a) {
+            const X = ext.siteHtmlAttrs, i = a === '*' ? null : X?.get(a, this.sel.tag);
+            if (a === '*') { const n = await A().askText({title: '🏷 Ajouter un attribut', message: 'Son nom (data-annee, aria-label…) :', value: 'data-', okLabel: 'Suivant'}); if (!n?.trim()) return; a = n.trim().toLowerCase(); }
+            if ((i?.[2] || '') === 'présent ou absent') return this.setAttr(a, true, true);
+            const v = await A().askText({title: `🏷 ${a}`, message: `${i ? `${i[1]}. Valeur : ${i[2]}.` : 'Sa valeur :'}`, value: '', okLabel: 'Ajouter'}); if (v === null) return;
+            this.setAttr(a, v || (i ? '' : ''));
+            if (!v) toast('Attribut vide : rien n’est ajouté.');
+        }
+        /** 🏷 tous les attributs de l'élément choisi : les modifier, les retirer, en ajouter un (avec ce que la norme permet pour cette balise) */
+        attrsSectionHtml(s, U) {
+            const X = ext.siteHtmlAttrs, have = Array.isArray(s.attrs) ? s.attrs : [], names = new Set(have.map(a => a[0]));
+            const info = a => X?.get(a, s.tag), isBool = a => (info(a)?.[2] || '') === 'présent ou absent';
+            const row = ([a, v]) => { const i = info(a); return `<div class="sw-attr"><label title="${esc(i ? `${i[1]} · valeur : ${i[2]}` : 'Attribut sans description dans la norme (data-…, aria-…, ou propre à ton site)')}"><code>${esc(a)}</code>${isBool(a) ? `<input type="checkbox" checked data-sw-attrbool="${esc(a)}">` : `<input type="text" value="${esc(v)}" data-sw-attrv="${esc(a)}" spellcheck="false">`}</label><button type="button" class="icon-button small" data-sw-act="attr-del" data-v="${esc(a)}" title="Retirer l’attribut" aria-label="Retirer ${esc(a)}">✕</button>${i ? `<small class="sw-hint">${esc(i[1])}</small>` : ''}</div>`; };
+            const offer = X ? X.forTag(s.tag).filter(x => !names.has(x[0]) && !['class', 'id', 'style'].includes(x[0])) : [];
+            const own = offer.filter(x => !x[3]), glob = offer.filter(x => x[3]);
+            const opts = l => l.map(x => `<option value="${esc(x[0])}">${esc(x[0])} — ${esc(x[1])}</option>`).join('');
+            return U.panelSection({title: `🏷 Attributs HTML${have.length ? ` (${have.length})` : ''}`, key: 'sw-attrs', open: false, body: `${have.length ? have.map(row).join('') : '<p class="sw-hint">Pas d’autre attribut que la classe et l’id.</p>'}
+                <div class="sw-attr-add"><select data-sw-attrnew aria-label="Attribut à ajouter"><option value="">＋ Ajouter un attribut…</option>${own.length ? `<optgroup label="Propres à &lt;${esc(s.tag)}&gt;">${opts(own)}</optgroup>` : ''}<optgroup label="Pour tous les éléments">${opts(glob)}</optgroup><option value="*">Autre (data-…, aria-…)…</option></select></div>
+                <p class="sw-hint">D’après la norme HTML du WHATWG (CC BY 4.0), traduit. Les on… (onclick) vont dans le JS du site.</p>`});
+        }
+        /** l'aide-mémoire : HTML (norme du WHATWG), CSS (normes du W3C), JS ; par défaut celui du fichier ouvert dans le code */
+        refKind() { if (this.refKindSet) return this.refKindSet; const f = this.fileOf(this.codeTab), k = f ? f.kind : this.codeTab; return k === 'css' ? 'css' : k === 'js' ? 'js' : 'html'; }
+        htmlRefHtml() {
+            const R = ext.siteHtmlRef, C = ext.siteCssJsRef; if (!R) return '';
+            const k = C ? this.refKind() : 'html', n = {html: R.ELEMENTS.length, attr: ext.siteHtmlAttrs?.ATTRS.length || 0, css: C?.CSS.length || 0, js: C?.JS.length || 0};
+            const ph = {html: 'Chercher : titre, lien, tableau, h2…', attr: 'Chercher : alt, lien, nouvel onglet, obligatoire…', css: 'Chercher : couleur, marge, flex, grid…', js: 'Chercher : clic, cacher, charger, liste…'}[k];
+            const src = k === 'html' || k === 'attr' ? `Source : <a href="${esc(R.SOURCE.url)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.title)}</a>, © ${esc(R.SOURCE.by)}, licence <a href="${esc(R.SOURCE.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.license)}</a> ; ${esc(R.SOURCE.changes)}.`
+                : k === 'css' ? `Syntaxe, valeur de départ, héritage : <a href="https://www.w3.org/Style/CSS/" target="_blank" rel="noopener noreferrer">normes CSS du W3C</a> (relevées dans w3c/webref), © World Wide Web Consortium, <a href="https://www.w3.org/copyright/software-license-2023/" target="_blank" rel="noopener noreferrer">W3C Software and Document License</a> ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA. <details class="sw-ref-notice"><summary>Notice de la licence W3C</summary><small>${esc(C.W3C_NOTICE)}</small></details>`
+                : 'Descriptions et exemples : écrits pour LCNDA. Chaque entrée renvoie à sa norme (WHATWG, W3C, ECMAScript) pour aller plus loin.';
+            return `<section class="sw-ref" data-sw-ref><h4>📖 Aide-mémoire</h4>
+                ${C ? `<div class="segmented sw-seg sw-ref-kinds" role="tablist">${[['html', 'HTML'], ['attr', 'Attributs'], ['css', 'CSS'], ['js', 'JS']].filter(([v]) => v !== 'attr' || ext.siteHtmlAttrs).map(([v, l]) => `<button type="button" data-sw-refkind="${v}" class="${k === v ? 'is-active' : ''}">${l} <small>${n[v]}</small></button>`).join('')}</div>` : ''}
+                <input type="search" class="sw-ref-q" data-sw-refq placeholder="${esc(ph)}" aria-label="Chercher dans l’aide-mémoire" value="${esc(this.refQ || '')}">
+                <div class="sw-ref-list" data-sw-reflist>${this.htmlRefList()}</div>
+                <div class="sw-ref-src">${src}</div></section>`;
+        }
+        htmlRefList() {
+            const k = ext.siteCssJsRef ? this.refKind() : 'html';
+            if (k === 'css') return this.cssRefList();
+            if (k === 'attr') return this.attrRefList();
+            if (k === 'js') return this.jsRefList();
+            const R = ext.siteHtmlRef, fold = t => String(t || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase(), q = fold(this.refQ).replace(/^<|>$/g, '').trim();
+            const list = R.ELEMENTS.filter(e => !q || e[0] === q || fold(`${e[0]} ${e[1]} ${e[5].join(' ')}`).includes(q)).sort((a, b) => (b[0] === q) - (a[0] === q));
+            if (!list.length) return '<p class="sw-hint">Aucun élément ne correspond.</p>';
+            return list.slice(0, 120).map(e => `<details class="sw-ref-el"${e[0] === q ? ' open' : ''}><summary><code>&lt;${esc(e[0])}&gt;</code> ${esc(e[1])}</summary>${this.htmlRefDetails(e)}</details>`).join('');
+        }
+        attrRefList() {
+            const X = ext.siteHtmlAttrs, fold = t => String(t || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase(), q = fold(this.refQ).replace(/[="'\s]+$/, '').trim();
+            const els = e => (e === 'HTML elements' ? 'tous les éléments' : e.replace(/form-associated custom elements/g, 'éléments personnalisés de formulaire'));
+            const list = X.ATTRS.filter(([a, rows]) => !q || a === q || fold(`${a} ${rows.map(r => r[1] + ' ' + r[0]).join(' ')}`).includes(q)).sort((x, y) => (y[0] === q) - (x[0] === q));
+            if (!list.length) return '<p class="sw-hint">Aucun attribut ne correspond.</p>';
+            return list.map(([a, rows]) => `<details class="sw-ref-el"${a === q ? ' open' : ''}><summary><code>${esc(a)}</code> ${esc(rows[0][1])}</summary>${rows.map(r => `<dl class="sw-ref-dl"><dt>Sur</dt><dd>${esc(els(r[0]))}</dd><dt>Rôle</dt><dd>${esc(r[1])}</dd><dt>Valeur</dt><dd>${esc(r[2])}</dd></dl>`).join('')}
+                <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${esc(a)}" data-sw-refk="attr" title="L’écrire dans le HTML, là où est le curseur (dans une balise)">&lt;/&gt; Écrire dans le code</button><button type="button" class="button small secondary" data-sw-refcopy="${esc(a)}" data-sw-refk="attr">⧉ Copier</button></div></details>`).join('');
+        }
+        cssRefList() {
+            const C = ext.siteCssJsRef, fold = t => String(t || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase(), q = fold(this.refQ).replace(/[:;\s]+$/, '').trim();
+            const list = C.CSS.filter(p => (q ? p[0] === q || fold(`${p[0]} ${p[1]}`).includes(q) : !!p[1])).sort((a, b) => (b[0] === q) - (a[0] === q));
+            if (!list.length) return '<p class="sw-hint">Aucune propriété ne correspond.</p>';
+            return (q ? '' : '<p class="sw-hint">Les plus utiles ; cherche pour voir les ' + C.CSS.length + '.</p>') + list.slice(0, 150).map(p => `<details class="sw-ref-el"${p[0] === q ? ' open' : ''}><summary><code>${esc(p[0])}</code> ${esc(p[1] || '')}</summary>
+                <dl class="sw-ref-dl"><dt>Syntaxe</dt><dd><code>${esc(p[2])}</code></dd><dt>Au départ</dt><dd><code>${esc(p[3])}</code></dd><dt>Héritée</dt><dd>${esc(p[4])}</dd><dt>S’applique à</dt><dd>${esc(p[5])}</dd><dt>Norme</dt><dd><a href="${esc(p[7])}" target="_blank" rel="noopener noreferrer">${esc(p[6])}</a></dd></dl>
+                <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${esc(p[0])}" data-sw-refk="css" title="L’écrire dans le CSS, là où est le curseur">&lt;/&gt; Écrire dans le CSS</button><button type="button" class="button small secondary" data-sw-refcopy="${esc(p[0])}" data-sw-refk="css">⧉ Copier</button></div></details>`).join('');
+        }
+        jsRefList() {
+            const C = ext.siteCssJsRef, fold = t => String(t || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase(), q = fold(this.refQ).trim();
+            const list = C.JS.filter(j => !q || fold(`${j[0]} ${j[1]} ${j[2]}`).includes(q));
+            if (!list.length) return '<p class="sw-hint">Rien ne correspond.</p>';
+            return list.map((j, i) => `<details class="sw-ref-el"><summary><code>${esc(j[0])}</code> ${esc(j[1])}</summary><pre class="sw-ref-ex"><code>${esc(j[2])}</code></pre>
+                <dl class="sw-ref-dl"><dt>Norme</dt><dd><a href="${esc(j[4])}" target="_blank" rel="noopener noreferrer">${esc(j[3])}</a></dd></dl>
+                <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${C.JS.indexOf(j)}" data-sw-refk="js" title="Écrire l’exemple dans le JS du site, là où est le curseur">&lt;/&gt; Écrire dans le JS</button><button type="button" class="button small secondary" data-sw-refcopy="${C.JS.indexOf(j)}" data-sw-refk="js">⧉ Copier l’exemple</button></div></details>`).join('');
+        }
+        htmlRefDetails(e) {
+            return `<dl class="sw-ref-dl"><dt>Catégories</dt><dd>${esc(e[2])}</dd><dt>Peut se mettre dans</dt><dd>${esc(e[3])}</dd><dt>Peut contenir</dt><dd>${esc(e[4])}</dd><dt>Attributs</dt><dd>${e[5].length ? e[5].map(a => `<code>${esc(a)}</code>`).join(' ') + ' + ' : ''}attributs globaux (id, class, style, title, lang…)</dd></dl>
+                <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${esc(e[0])}" title="L’écrire dans le HTML de la page, là où est le curseur">&lt;/&gt; Écrire dans le code</button><button type="button" class="button small secondary" data-sw-refcopy="${esc(e[0])}">⧉ Copier</button></div>
+                <small class="sw-hint">* : avec des conditions, voir la norme.</small>`;
+        }
+        /** la ligne sous « Ceci est… » : ce qu'est cet élément, et un clic pour le détail */
+        htmlRefLine(tag) {
+            const e = ext.siteHtmlRef?.get(tag); if (!e) return '';
+            return `<details class="sw-ref-el sw-ref-this"><summary>📖 &lt;${esc(e[0])}&gt; : ${esc(e[1])}</summary>${this.htmlRefDetails(e).replace(/<div class="sw-row">[\s\S]*?<\/div>/, '')}<small class="sw-hint">D’après la norme HTML du WHATWG (CC BY 4.0), traduit.</small></details>`;
+        }
+        bindHtmlRef(pane) {
+            const q = pane.querySelector('[data-sw-refq]'); if (!q) return;
+            q.addEventListener('input', () => { this.refQ = q.value; pane.querySelector('[data-sw-reflist]').innerHTML = this.htmlRefList(); });
+            pane.querySelector('[data-sw-ref]').addEventListener('click', async e => {
+                const kb = e.target.closest('[data-sw-refkind]'); if (kb) { this.refKindSet = kb.dataset.swRefkind; this.refQ = ''; return this.paintPanel(); }
+                const ins = e.target.closest('[data-sw-refins]'), cp = e.target.closest('[data-sw-refcopy]'); if (!ins && !cp) return;
+                const b = ins || cp, kind = b.dataset.swRefk || 'html', key = b.dataset.swRefins ?? b.dataset.swRefcopy, VOID = CODE().VOID;
+                // ce qu'on écrit, et où se met le curseur ensuite
+                const boolAttr = kind === 'attr' && ext.siteHtmlAttrs.ATTRS.find(x => x[0] === key)?.[1].every(r => r[2] === 'présent ou absent');
+                const [snip, back] = kind === 'attr' ? (boolAttr ? [` ${key}`, 0] : [` ${key}=""`, 1]) : kind === 'css' ? [`${key}: ;`, 1] : kind === 'js' ? [`${ext.siteCssJsRef.JS[Number(key)][2]}\n`, 0] : (VOID.has(key) ? [`<${key}>`, 0] : [`<${key}></${key}>`, key.length + 3]);
+                if (cp) { const t = kind === 'js' ? snip.trim() : snip; try { await navigator.clipboard.writeText(t); toast(`${t.length > 40 ? t.slice(0, 40) + '…' : t} copié.`); } catch (_) { toast(t); } return; }
+                if (this.view === 'visual') this.setView('split');
+                const f = this.fileOf(this.codeTab), cur = f ? f.kind : this.codeTab, tab = kind === 'html' || kind === 'attr' ? 'html' : (cur === kind ? this.codeTab : kind);
+                if (this.codeTab !== tab) this.setCodeTab(tab, true);
+                const ta = this.$('[data-sw-codehost] textarea'), v = this.code.value, at = ta && document.activeElement === ta ? ta.selectionStart : (this.caretAt?.[tab] ?? v.length);
+                const nv = v.slice(0, at) + snip + v.slice(at); this.code.value = nv; this.codeChanged(nv);
+                const c = at + snip.length - back; this.code.reveal(c, c); this.caretAt = {...(this.caretAt || {}), [tab]: c};
+            });
+        }
         paintPanel() {
             const pane = this.$('[data-sw-panel]'), U = UI(), s = this.sel;
             if (!s) {
                 pane.innerHTML = `<div class="sw-this is-none"><b>Ceci est…</b></div>${A().empty('Clique sur un élément de l’aperçu (ou dans le code) : il dira ce qu’il est, par exemple « header.site-entete ». Tu pourras lui donner un nom, une classe, un id, des couleurs.', {icon: '↖'})}
-                    <div class="sw-tips"><h4>Astuces</h4><ul><li><b>T Écrire</b> : clique dans un texte pour le changer, le code suit tout seul.</li><li>Dans le code, <kbd>Tab</kbd> déplie une abréviation : <code>ul&gt;li*3</code>, <code>div.carte&gt;h2+p</code>, <code>m10</code>.</li><li><b>▶ Tester</b> fait tourner tes scripts (JS) dans l’aperçu isolé.</li></ul></div>`;
+                    <div class="sw-tips"><h4>Astuces</h4><ul><li><b>T Écrire</b> : clique dans un texte pour le changer, le code suit tout seul.</li><li>Dans le code, <kbd>Tab</kbd> déplie une abréviation : <code>ul&gt;li*3</code>, <code>div.carte&gt;h2+p</code>, <code>m10</code>.</li><li><b>▶ Tester</b> fait tourner tes scripts (JS) dans l’aperçu isolé.</li></ul></div>${this.htmlRefHtml()}`;
+                this.bindHtmlRef(pane);
                 return;
             }
             const st = styleMap(s.style), cs = s.cs || {};
@@ -953,14 +1064,14 @@
             };
             const content = s.tag === 'img' ? U.panelSection({title: 'Image', key: 'sw-img', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="image">🖼 Changer l’image…</button><label>Texte de remplacement (pour qui ne voit pas l’image)<input type="text" data-sw-at="alt" value="${esc(s.alt)}" maxlength="200"></label></div>`})
                 : s.tag === 'a' ? U.panelSection({title: 'Lien', key: 'sw-link', open: true, body: `<div class="form-grid one-column sw-form"><label>Adresse<input type="text" data-sw-at="href" value="${esc(s.href)}" placeholder="page.html, https://…, mailto:…" maxlength="300"></label><div class="sw-chips">${this.site.pages.map(p => `<button type="button" class="sw-chip" data-sw-act="link" data-v="${esc(pageFile(p))}">📄 ${esc(p.name)}</button>`).join('')}</div></div>`}) : '';
-            pane.innerHTML = `<div class="sw-this"><small>Ceci est</small><b>${esc(s.name || (s.block ? KIND_LABEL[s.block] : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt">« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}</div>
+            pane.innerHTML = `<div class="sw-this"><small>Ceci est</small><b>${esc(s.name || (s.block ? KIND_LABEL[s.block] : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt">« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}${this.htmlRefLine(s.tag)}</div>
                 <div class="sw-acts"><button type="button" class="icon-button small" data-sw-act="up" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-sw-act="down" title="Descendre" aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-sw-act="dup" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-sw-act="code" title="Voir dans le code" aria-label="Voir dans le code">&lt;/&gt;</button><button type="button" class="icon-button small" data-sw-act="parent" title="Choisir l’élément qui le contient" aria-label="Choisir le parent">⤴</button><span class="spacer"></span><button type="button" class="icon-button small danger" data-sw-act="del" title="Supprimer l’élément" aria-label="Supprimer l’élément">🗑</button></div>
                 ${U.panelSection({title: 'Ceci est… (nom, balise, classe, id)', key: 'sw-what', open: true, body: `<p class="sw-hint">Dis ce que c’est : « c’est mon en-tête, mon menu… »</p><div class="sw-chips">${ROLES.map(([tag, name], i) => `<button type="button" class="sw-chip${s.tag === tag && s.name === name ? ' is-active' : ''}" data-sw-role="${i}" title="&lt;${tag}&gt;, nommé « ${esc(name)} »">${esc(name)}</button>`).join('')}</div>
                     <div class="form-grid one-column sw-form"><label>Nom (pour toi)<input type="text" list="sw-names" data-sw-at="data-lc-name" value="${esc(s.name)}" maxlength="60" placeholder="En-tête, carte de la famille…"></label><datalist id="sw-names">${NAMES.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
                     <label>Balise<select data-sw-tag>${[...new Set([s.tag, ...TAG_CHOICES])].filter(Boolean).map(t => `<option value="${esc(t)}"${t === s.tag ? ' selected' : ''}>&lt;${esc(t)}&gt;</option>`).join('')}</select></label>
                     <label>Classe(s)<input type="text" data-sw-at="class" value="${esc(s.cls)}" maxlength="200" placeholder="carte-famille" spellcheck="false"></label>
                     <label>id<input type="text" data-sw-at="id" value="${esc(s.id)}" maxlength="60" placeholder="haut-de-page" spellcheck="false"></label></div>`})}
-                ${blockOpts()}${content}
+                ${blockOpts()}${content}${this.attrsSectionHtml(s, U)}
                 ${this.targetHtml()}
                 ${U.panelSection({title: 'Marges, espace intérieur et taille', key: 'sw-pos', open: false, body: this.boxHtml(cs) + range('padding', 'Espace intérieur, les 4 côtés d’un coup', 0, 120, px(cs.pt)) + range('max-width', 'Largeur au plus (0 = toute)', 0, 1600, px(st.get('max-width') || 0)) + range('border-radius', 'Arrondi', 0, 60, px(cs.radius))})}
                 ${U.panelSection({title: 'Couleur', key: 'sw-color', open: false, body: `<div class="sw-colors">${color('color', 'Texte', cs.color)}${color('background-color', 'Fond', cs.bg)}</div><button type="button" class="button small secondary" data-sw-act="nobg">Sans fond</button>`})}
@@ -997,6 +1108,7 @@
             if (act === 'parent') { if (s.path.length > 1) this.post({type: 'select', path: s.path.slice(0, -1), report: true}); return; }
             if (act === 'center') { this.applyDecl('margin-left', 'auto', false); this.applyDecl('margin-right', 'auto'); return this.hist.commit(); }
             if (act === 'nospace') { ['margin', 'padding'].forEach(k2 => ['', '-top', '-right', '-bottom', '-left'].forEach(sd => this.applyDecl(k2 + sd, '', false))); this.hist.commit(); return setTimeout(() => this.post({type: 'info'}), 80); }
+            if (act === 'attr-del') { const a = b.dataset.v; this.mutate((doc, el) => { if (!el) return false; el.removeAttribute(a); }); this.post({type: 'info'}); return this.hist.commit(); }
             if (act === 'nobg') { this.applyDecl('background-color', '', false); this.applyDecl('background', ''); return this.hist.commit(); }
             if (act === 'align') { this.applyDecl('text-align', b.dataset.v); return this.paintPanel(); }
             if (act === 'link') return this.setAttr('href', b.dataset.v);
@@ -1206,6 +1318,7 @@
             if (!['html', 'css', 'js'].includes(tab) && !this.fileOf(tab)) tab = 'html';
             this.codeTab = tab; if (!tab.startsWith('f:')) setPref('codeTab', tab);
             this.paintTabs();
+            if (!this.sel && !this.refKindSet && this.$('[data-sw-ref]') && this.$('[data-sw-refkind].is-active')?.dataset.swRefkind !== this.refKind()) this.paintPanel(); // l'aide-mémoire suit le fichier ouvert
             if (!this.code) return;
             const f = this.fileOf(tab), kind = f ? f.kind : tab === 'html' ? (this.isPhp() ? 'php' : 'html') : tab;
             this.code.setLang(codeLang(kind)); this.code.value = this.codeValue();
@@ -1241,6 +1354,7 @@
         }
         /** un clic dans le HTML : l'élément qui est là devient l'élément choisi de l'aperçu */
         codeCursor(pos) {
+            this.caretAt = {...(this.caretAt || {}), [this.codeTab]: pos}; // pour l'aide-mémoire : écrire là où était le curseur
             if (this.codeTab !== 'html') return;
             const text = this.code.value; let at = pos;
             const before = text.slice(0, pos), lt = before.lastIndexOf('<'), gt = before.lastIndexOf('>');

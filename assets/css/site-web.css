@@ -243,3 +243,30 @@ dialog.modal.sw-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 .sw-imgview { display: grid; place-items: center; background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 0 / 16px 16px; border: 1px solid var(--line, #d9dce2); min-height: 120px; max-height: 50vh; overflow: auto; padding: 10px; }
 .sw-imgview img { max-width: 100%; max-height: 46vh; }
 .sw-sites-btn { margin-left: 2px; }
+/* 📖 les éléments HTML (panneau « Ceci est… ») */
+.sw-ref { padding: 0 12px 12px; }
+.sw-ref-q { width: 100%; margin: 4px 0 8px; }
+.sw-ref-list { display: grid; gap: 2px; max-height: 46vh; overflow: auto; border: 1px solid var(--sw-line); padding: 4px; }
+.sw-ref-el summary { cursor: pointer; padding: 3px 4px; font-size: 12.5px; line-height: 1.35; list-style-position: inside; }
+.sw-ref-el summary:hover { background: var(--sw-soft, #f3f6ff); }
+.sw-ref-el summary code { color: var(--sw-blue); font-weight: 700; }
+.sw-ref-el[open] { background: var(--sw-soft, #f3f6ff); padding-bottom: 6px; }
+.sw-ref-dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; margin: 4px 6px; font-size: 12px; }
+.sw-ref-dl dt { color: var(--sw-muted); }
+.sw-ref-dl dd { margin: 0; }
+.sw-ref-el .sw-row, .sw-ref-el .sw-hint { margin: 4px 6px 0; }
+.sw-ref-src { font-size: 11px; color: var(--sw-muted); margin: 8px 0 0; line-height: 1.4; }
+.sw-ref-this { margin-top: 6px; }
+.sw-ref-kinds { display: flex; margin: 0 0 6px; }
+.sw-ref-kinds button { flex: 1; }
+.sw-ref-kinds small { opacity: .6; font-weight: 400; }
+.sw-ref-ex { margin: 4px 6px; padding: 6px 8px; background: var(--sw-code-bg, #f6f8fa); border: 1px solid var(--sw-line); font: 11.5px/1.4 ui-monospace, Menlo, monospace; white-space: pre-wrap; word-break: break-word; }
+.sw-ref-notice summary { cursor: pointer; }
+.sw-ref-notice small { display: block; margin-top: 4px; font-size: 10px; line-height: 1.35; }
+/* 🏷 attributs de l'élément */
+.sw-attr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 4px; align-items: center; margin-bottom: 6px; }
+.sw-attr label { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px; align-items: center; margin: 0; }
+.sw-attr label code { font-size: 11.5px; color: var(--sw-blue); }
+.sw-attr input[type=text] { width: 100%; min-width: 0; }
+.sw-attr small { grid-column: 1 / -1; margin: 0; }
+.sw-attr-add select { width: 100%; }
