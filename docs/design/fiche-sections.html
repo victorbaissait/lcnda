@@ -1,0 +1,697 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sections des fiches</title>
+<link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+*{box-sizing:border-box}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px;max-width:1180px;line-height:1.5}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px 30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;min-width:0}
+.case.full{grid-column:1/-1}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.note{font-size:12.5px;color:#555;margin-top:14px;line-height:1.5}
+.muted{color:#666}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.two.w{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
+.two>div{min-width:0}
+/* K8 */
+.b{display:inline-flex;align-items:center;gap:4px;font:800 11px/1 system-ui;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid;padding:4px 7px;white-space:nowrap;vertical-align:middle;color:#444;background:#f0f1f3;border-color:#8a8f99}
+.b.g{color:#14532d;background:#ecfaf0;border-color:#1aa34a}
+.b.y{color:#6b4e00;background:#fff8e1;border-color:#e1a500}
+.b.bl{color:#0a3fae;background:#eaf1ff;border-color:#055dff}
+.b.blk{color:#fff;background:#111;border-color:#111}
+.b.sosa{color:#fff;background:#055dff;border-color:#055dff}
+.b.dt{text-transform:none;letter-spacing:0;font-weight:700}
+.btn{display:inline-block;border:2px solid #111;padding:8px 13px;font:700 13px system-ui;background:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3);white-space:nowrap;cursor:pointer;color:#111}
+.btn.p{background:#055dff;color:#fff}
+.btn.s{padding:4px 9px;font-size:12px;box-shadow:none;border-width:1.5px}
+.lab{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin:16px 0 7px}
+.lab:first-child{margin-top:0}
+kbd{border:1px solid #c9ccd3;border-bottom-width:2px;background:#f4f5f7;padding:0 5px;font:700 11px system-ui;color:#555}
+.pill{display:inline-flex;align-items:center;gap:4px 7px;border:1.5px solid #c9ccd3;background:#fff;padding:3px 7px 3px 3px;font-size:12px;font-weight:700;max-width:100%;vertical-align:middle;white-space:nowrap}
+.pill .ini{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 10px system-ui;background:#3c78d8;flex:none}
+.pill .ini.f{background:#d9488f}.pill .ini.a{background:#e8590c}.pill .ini.u{background:#9aa0aa}
+.pill small{color:#777;font-weight:500}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid #c9ccd3;padding:4px 9px;font:700 12px system-ui;background:#fff;white-space:nowrap}
+.chip.on{border-color:#055dff;background:#eaf1ff;color:#0a3fae}
+.code{font:800 12px ui-monospace,Menlo,monospace;background:#f0f1f3;border:1.5px solid #c9ccd3;padding:2px 6px;display:inline-block}
+.notice{border:2px solid;padding:9px 12px;font-size:13px;display:flex;gap:8px;margin:10px 0;line-height:1.45}
+.notice.i{border-color:#055dff;background:#eef4ff}.notice.ok{border-color:#1aa34a;background:#ecfaf0}.notice.w{border-color:#e1a500;background:#fff8e1}
+.empty-line{display:flex;gap:8px;align-items:center;padding:8px 10px;background:#f6f7f9;border:1.5px dashed #c9ccd3;font-size:12.5px;color:#555;line-height:1.4;flex-wrap:wrap;margin:0}
+.empty-line .btn{margin-left:auto}
+.toast2{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:11px 14px;font-size:13px;box-shadow:5px 5px 0 rgba(5,93,255,.45);max-width:470px;position:relative;margin:14px 0 0;flex-wrap:wrap}
+.toast2 .u{border:1.5px solid #fff;padding:4px 9px;font:700 12.5px system-ui;margin-left:auto;white-space:nowrap}
+.toast2 .bar{position:absolute;left:0;bottom:0;height:3px;background:#5b9bff}
+.saved{color:#1aa34a;font:700 12.5px system-ui;white-space:nowrap}
+.ui-toggle{display:flex;align-items:center;gap:9px;font:600 13px system-ui;margin:7px 0;line-height:1.3}
+.ui-toggle i{width:36px;height:20px;border-radius:10px;background:#055dff;position:relative;flex:none}
+.ui-toggle i:after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.ui-toggle.off i{background:#c2c7cf}.ui-toggle.off i:after{right:auto;left:2px}
+.ui-toggle small{display:block;color:#777;font-weight:500;font-size:11.5px}
+.sel{border:2px solid #111;padding:5px 9px;font:600 12.5px system-ui;background:#fff;white-space:nowrap;display:inline-block}
+.seg{display:inline-flex;border:2px solid #111;flex-wrap:wrap;max-width:100%}.seg span{padding:7px 12px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff;white-space:nowrap}.seg span:last-child{border-right:0}.seg span.is-active{background:#055dff;color:#fff}
+.seg.sm span{padding:4px 9px;font-size:12px}
+.menu{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:6px 0;font-size:13px}
+.menu .it{padding:5px 12px;display:flex;gap:8px;align-items:center}
+.menu .it.on{background:#eaf1ff;font-weight:700}
+.menu .it kbd{margin-left:auto}
+.menu hr{border:0;border-top:1px solid #e3e5ea;margin:6px 0}
+.ia{width:26px;height:26px;border:2px solid #111;display:inline-grid;place-items:center;font-size:12px;background:#fff;flex:none;line-height:1}
+.ia.g{border-color:transparent;color:#666}
+
+/* ───── fiche (comme person-hero / relations-strip / card-grid) ───── */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.3);padding:14px 16px;background:#fff;margin-bottom:14px}
+.por{width:88px;height:88px;border:2px solid #111;display:grid;place-items:center;font:800 26px system-ui;color:#fff;background:#d9488f;position:relative;overflow:hidden}
+.por.photo{background:linear-gradient(160deg,#c9b79c,#7d6a52 70%,#4b3d2d)}
+.por.photo:after{content:"";position:absolute;left:24px;top:14px;width:40px;height:46px;border-radius:50% 50% 45% 45%;background:#e7d7bf;box-shadow:0 40px 0 14px #3a2f25}
+.por.bird{background:#eef0e8;font-size:44px}.por.cat{background:#efe8f3;font-size:44px}
+.eyebrow{font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.hero h2{font-size:34px;margin:3px 0 5px;line-height:.95;letter-spacing:-.04em}
+.meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#555}.meta b{color:#111}
+.htools{display:flex;gap:12px;align-items:center}
+.hst{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.hact{display:flex;flex-direction:column;gap:6px;border-left:2px solid #111;padding-left:12px}
+.rel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.rel>div{min-width:0}
+.rel .eyebrow{display:block;margin-bottom:5px;font-size:10px}
+.rc{display:inline-block;border:1.5px solid #111;background:#fff;padding:5px 8px;font:700 11px system-ui;margin:0 4px 4px 0;white-space:nowrap}
+.rc small{display:block;color:#777;font-weight:400;font-size:9px;margin-top:2px}
+.rc.q{border-style:dashed;color:#888}
+.cg{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;align-items:start}
+.s12{grid-column:1/-1}.s9{grid-column:span 9}.s8{grid-column:span 8}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.card{background:#fff;border:2px solid #111;box-shadow:3px 3px 0 rgba(5,93,255,.22);min-width:0}
+.ch{display:flex;align-items:center;gap:9px;padding:9px 12px;border-bottom:2px solid #111;background:#fafafa;min-height:46px}
+.ch h4{margin:0;font-size:14px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ch h4 small{color:#888;font-weight:500}
+.idx{display:grid;place-items:center;width:25px;height:25px;background:#055dff;color:#fff;font:800 10.5px system-ui;border:1.5px solid #111;transform:rotate(-3deg);flex:none}
+.cb{padding:10px 12px;font-size:12.5px;line-height:1.45}
+.kv{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 10px;font-size:12.5px;margin:0}
+.kv dt{color:#666}.kv dd{margin:0;font-weight:600;min-width:0;overflow-wrap:anywhere}
+.ev{display:grid;grid-template-columns:22px 92px minmax(0,1fr);gap:6px;padding:5px 0;border-top:1px solid #eee;align-items:baseline}
+.ev:first-child{border-top:0}.ev small{color:#777}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap}
+.th{width:58px;height:46px;border:1.5px solid #999;background:linear-gradient(150deg,#d8cdb8,#9c8a6c);position:relative}
+.th.d{background:repeating-linear-gradient(0deg,#f4efe4 0 5px,#e2d9c6 5px 6px)}
+.th.g{background:linear-gradient(150deg,#cfd8c3,#6f8a5a)}
+.th.k{background:linear-gradient(150deg,#555,#222)}
+.th b{position:absolute;left:2px;bottom:2px;background:#111;color:#fff;font:800 8px system-ui;padding:1px 3px;letter-spacing:.05em}
+.ftree{display:flex;gap:8px;flex-wrap:wrap}
+.fmini{border:1.5px solid #111;padding:5px 8px;font-size:12px;background:#fff;min-width:0}
+.fmini small{display:block;color:#777;font-size:10.5px}
+.fmini.q{border-style:dashed;color:#888}
+.frz{display:flex;height:16px;border:2px solid #111}.frz i{display:block;border-right:2px solid #fff}
+.legs{width:100%;max-width:200px;display:block;margin:0 auto}
+.map{border:1.5px solid #111;background:#eef0e8;display:block;width:100%;height:auto}
+
+/* ───── en-têtes de section : 5 styles + onglets ───── */
+.sec{margin-top:24px}
+.sec:first-of-type{margin-top:0}
+.sec>.cg{margin-top:12px}
+.sh{display:flex;align-items:center;gap:8px;min-width:0}
+.sh .t{font:800 11.5px/1.2 system-ui;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.sh .n{font:800 11.5px system-ui;color:#055dff;letter-spacing:.06em}
+.sh small{color:#888;font-size:11.5px;white-space:nowrap}
+.sh .sp{flex:1}
+.sh .fd{font-size:12px;color:#555;border:1.5px solid #c9ccd3;width:22px;height:22px;display:grid;place-items:center;flex:none;background:#fff}
+/* 1 — trait et titre (par défaut) */
+.st-line>.sh{border-bottom:2px solid #111;padding-bottom:6px}
+/* 2 — encadrée */
+.st-box{border:2px solid #111;padding:16px 14px 14px;position:relative;margin-top:30px;background:#fbfcfd}
+.st-box>.sh{position:absolute;top:-12px;left:10px;right:10px;pointer-events:none}
+.st-box>.sh>*{pointer-events:auto}
+.st-box>.sh .t,.st-box>.sh .n{background:#fff;padding:3px 7px;border:2px solid #111}
+.st-box>.sh .n{border-right:0;margin-right:-8px;background:#055dff;color:#fff}
+.st-box>.sh small{background:#fbfcfd;padding:0 4px}
+.st-box>.sh .fd{border-color:#111}
+.st-box>.cg{margin-top:2px}
+/* 3 — grand titre sans cadre */
+.st-big>.sh .t{font:800 23px/1.1 system-ui;letter-spacing:-.025em;text-transform:none}
+.st-big>.sh .n{font:800 23px system-ui;color:#c2c7cf;letter-spacing:-.02em}
+/* 4 — bandeau de couleur */
+.st-band>.sh{background:#055dff;color:#fff;padding:7px 10px;border:2px solid #111}
+.st-band>.sh .n{color:#fff;background:rgba(255,255,255,.22);padding:2px 6px}
+.st-band>.sh small{color:#dce8ff}
+.st-band>.sh .fd{border-color:#fff;background:transparent;color:#fff}
+/* 5 — centré, trait de chaque côté */
+.st-center>.sh{gap:10px}
+.st-center>.sh:before,.st-center>.sh:after{content:"";flex:1;border-top:2px solid #111;min-width:16px}
+.st-center>.sh .sp{display:none}
+.st-center>.sh .fd{order:9}
+/* onglets en haut de fiche */
+.tabs{display:flex;border:2px solid #111;overflow-x:auto;max-width:100%;background:#fff;margin-bottom:16px;scrollbar-width:thin}
+.tabs span{padding:8px 13px;font:700 12.5px system-ui;border-right:2px solid #111;white-space:nowrap;flex:none}
+.tabs span:last-child{border-right:0}
+.tabs span.is-active{background:#055dff;color:#fff}
+.tabs span.e{color:#999}
+.tabs span.all{margin-left:auto;border-left:2px solid #111;color:#555}
+
+/* ───── F1 vignettes ───── */
+.styles{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.sty{border:2px solid #c9ccd3;background:#fff;min-width:0;display:flex;flex-direction:column}
+.sty.on{border-color:#055dff;box-shadow:0 0 0 3px rgba(5,93,255,.18)}
+.sty .pv{padding:12px 10px 10px;background:#f6f7f9;border-bottom:1.5px solid #e3e5ea;flex:1;min-height:150px}
+.sty .bd{padding:8px 10px 10px;font-size:12px;line-height:1.4}
+.sty .bd b{display:block;font-size:13px;margin-bottom:2px}
+.sty .bd small{color:#666;display:block}
+.sty .def{display:inline-block;margin-top:6px}
+.pv .sec{margin-top:16px}.pv .sec:first-child{margin-top:0}
+.pv .sh .t{font-size:9px;letter-spacing:.12em}.pv .sh .n{font-size:9px}
+.pv .st-big>.sh .t,.pv .st-big>.sh .n{font-size:15px}
+.pv .st-box{padding:10px 7px 7px;margin-top:20px}.pv .st-box:first-child{margin-top:8px}
+.pv .st-box>.sh{top:-9px;left:6px}.pv .st-box>.sh .t,.pv .st-box>.sh .n{padding:1px 5px;border-width:1.5px}
+.pv .st-band>.sh{padding:4px 6px;border-width:1.5px}
+.pv .st-line>.sh{padding-bottom:4px}
+.blk{display:grid;grid-template-columns:2fr 1fr;gap:5px;margin-top:7px}
+.blk i{display:block;height:22px;border:1.5px solid #111;background:#fff}
+.blk i:before{content:"";display:block;height:6px;background:#e9ecf1;border-bottom:1.5px solid #111}
+.pv .tabs{margin-bottom:8px;border-width:1.5px}.pv .tabs span{padding:4px 5px;font-size:9px;border-right-width:1.5px}
+
+/* ───── F6 éditeur des sections ───── */
+.ph{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:14px}
+.ph .t{flex:1;min-width:220px}
+.ph small{display:block;font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.ph h2{margin:3px 0 4px;font-size:22px}
+.ph p{margin:0;color:#666;font-size:13px}
+.ph .r{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ms{border:2px solid #c9ccd3;padding:7px;font-size:11.5px;font-weight:700;background:#fff;min-width:0}
+.ms.on{border-color:#055dff;background:#f5f8ff}
+.ms .pv{padding:0;background:none;border:0;min-height:0;margin-bottom:5px}
+.ms .pv .blk{margin-top:4px}.ms .pv .blk i{height:12px}.ms .pv .blk i:before{height:3px}
+.rng{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px;font-weight:600;margin:8px 0}
+.rng .tr{height:5px;background:#dfe3e8;position:relative}.rng .tr i{position:absolute;left:0;top:0;bottom:0;width:40%;background:#055dff}.rng .tr b{position:absolute;left:40%;top:50%;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;background:#fff;border:2px solid #055dff}
+.unit{display:inline-flex;border:2px solid #111;font:700 12.5px system-ui;background:#fff}.unit b{padding:4px 8px;min-width:34px;text-align:right}.unit i{font-style:normal;padding:4px 7px;background:#f0f1f3;border-left:1.5px solid #c9ccd3;color:#555}
+.setrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:600;margin:8px 0}
+.edl{border:2px solid #111;background:#fff}
+.sgrp{border-bottom:2px solid #111}
+.sgrp:last-child{border-bottom:0}
+.srow{display:grid;grid-template-columns:16px 26px minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;background:#f4f6fa}
+.grip{color:#9aa0aa;font-size:16px;line-height:1;cursor:grab}
+.srow .nm{display:flex;align-items:center;gap:6px;min-width:0;font-weight:800;font-size:13.5px}
+.srow .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srow .nm small{color:#888;font-weight:500;font-size:11.5px;white-space:nowrap}
+.srow .on2{display:flex;gap:5px;align-items:center}
+.brow{display:grid;grid-template-columns:16px 24px minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:6px 10px 6px 30px;border-top:1px solid #eef0f3;font-size:12.5px;background:#fff}
+.brow .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.brow .no{color:#777;font:800 10.5px system-ui}
+.brow.off .nm{color:#999;text-decoration:line-through}
+.brow.drag{box-shadow:5px 5px 0 rgba(5,93,255,.35);border:2px solid #055dff;transform:rotate(-1deg);margin:0 8px;position:relative;z-index:2}
+.drop{height:0;border-top:3px solid #055dff;margin:0 10px 0 30px;position:relative}
+.drop:before{content:"";position:absolute;left:-6px;top:-6px;width:9px;height:9px;border-radius:50%;background:#055dff}
+.wd{display:inline-flex;border:1.5px solid #111}.wd span{padding:2px 6px;font:700 11px system-ui;border-right:1.5px solid #111;background:#fff}.wd span:last-child{border-right:0}.wd span.on{background:#055dff;color:#fff}
+.eye{font-size:13px;width:24px;height:24px;display:grid;place-items:center;border:1.5px solid #c9ccd3;background:#fff}
+.eye.off{opacity:.5}
+.sgrp.loose .srow{background:repeating-linear-gradient(-45deg,#f6f7f9 0 8px,#eef0f3 8px 9px)}
+.addsec{padding:9px 10px;font:700 13px system-ui;color:#055dff;border-top:2px dashed #c9ccd3}
+
+/* ───── F7 ───── */
+.flow{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:10px;align-items:center}
+.fbox{border:2px solid #111;padding:10px 12px;background:#fff;font-size:12.5px;line-height:1.45;min-width:0}
+.fbox b{font-size:13.5px}
+.fbox.old{border-style:dashed;color:#666;background:#f6f7f9}
+.fbox.old b{text-decoration:line-through}
+.arr{font:800 24px system-ui;color:#055dff;text-align:center}
+.mtbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.mtbl th{text-align:left;font:700 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#777;border-bottom:2px solid #111;padding:6px 7px}
+.mtbl td{padding:7px;border-bottom:1px solid #eef0f3;vertical-align:top}
+.ways{list-style:none;margin:0;padding:0;font-size:13px}
+.ways li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:6px;padding:7px 0;border-top:1px solid #eee;line-height:1.45}
+
+/* ───── F8 téléphone ───── */
+.phones{display:grid;grid-template-columns:390px 390px;gap:26px;justify-content:start;margin-top:18px}
+.phone{width:390px;max-width:100%;border:2px solid #111;background:#f4f5f7;padding:12px 12px 16px;min-width:0;overflow:hidden}
+.phone .hero{grid-template-columns:auto minmax(0,1fr);gap:12px;padding:10px;box-shadow:4px 4px 0 rgba(5,93,255,.3)}
+.phone .hero h2{font-size:26px}
+.phone .por{width:64px;height:64px;font-size:32px}
+.phone .htools{grid-column:1/-1;justify-content:space-between}
+.phone .hst{flex-direction:row;flex-wrap:wrap}
+.phone .hact{flex-direction:row;border-left:0;padding-left:0}
+.phone .cg{grid-template-columns:minmax(0,1fr)}
+.phone .cg>*{grid-column:1/-1}
+.phone .kv{grid-template-columns:96px minmax(0,1fr)}
+.phone .sec.fold>.cg{display:none}
+.ptop{display:flex;justify-content:space-between;font:700 11px system-ui;color:#777;margin-bottom:8px}
+
+@media (max-width:1100px){.styles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){
+ body{padding:16px}
+ .grid,.two,.two.w{grid-template-columns:minmax(0,1fr)}
+ .case{padding:14px 14px 18px}
+ .s3,.s4{grid-column:span 6}.s8,.s9{grid-column:1/-1}
+ .rel{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .phones{grid-template-columns:minmax(0,390px)}
+}
+@media (max-width:520px){
+ .hero{grid-template-columns:auto minmax(0,1fr);gap:12px}.hero .htools{grid-column:1/-1;justify-content:space-between}
+ .hst{flex-direction:row;flex-wrap:wrap}.hact{flex-direction:row;border-left:0;padding-left:0}
+ .hero h2{font-size:26px}.por{width:64px;height:64px;font-size:30px}.por.photo:after{left:16px;top:10px;width:30px;height:34px}
+ .cg{grid-template-columns:minmax(0,1fr)}.cg>*{grid-column:1/-1}
+ .two,.two.w{grid-template-columns:minmax(0,1fr)!important}
+ .pill{white-space:normal}.toast2{max-width:100%}
+ .rel{grid-template-columns:minmax(0,1fr)}
+ .styles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .minis{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .kv{grid-template-columns:92px minmax(0,1fr)}
+ .rng{grid-template-columns:minmax(0,1fr) auto}.rng .tr{grid-column:1/-1;grid-row:2}
+ .brow{grid-template-columns:16px minmax(0,1fr) auto;padding-left:14px}.brow .no{display:none}.brow .wd{grid-column:2/-1;grid-row:2}
+ .flow{grid-template-columns:minmax(0,1fr)}.arr{transform:rotate(90deg)}
+ .ev{grid-template-columns:22px minmax(0,1fr)}.ev>span:nth-child(3){grid-column:2}
+ .mtbl thead{display:none}.mtbl tr{display:block;border-bottom:1px solid #e3e5ea;padding:6px 0}.mtbl td{display:block;border:0;padding:2px 0}
+ .st-box{padding:16px 10px 10px}
+}
+
+/* ───── F9 en-tête réel + Nouvelle observation ───── */
+.props{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 22px}
+.prop{min-width:0}
+.prop>h5{margin:0 0 8px;font-size:14px;display:flex;gap:8px;align-items:center}
+.prop>h5 .pn{display:grid;place-items:center;width:24px;height:24px;background:#111;color:#fff;font:800 12px system-ui;flex:none}
+.prop.rec>h5 .pn{background:#055dff}
+.pros{font-size:12.5px;line-height:1.45;margin-top:8px;display:grid;gap:3px}
+.pros span:before{font-weight:800;margin-right:5px}
+.pros .p:before{content:"＋";color:#1aa34a}.pros .m:before{content:"−";color:#d62828}
+.rh{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:start;border:2px solid #111;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:12px 14px;background:#fff;position:relative}
+.rh .por{width:72px;height:72px;font-size:38px}
+.rh h2{font-size:30px;margin:2px 0 4px;line-height:.95;letter-spacing:-.04em}
+.rtools{align-self:stretch;display:flex;gap:10px;align-items:center}
+.rstat{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.racts{border-left:2px solid #111;padding-left:10px;align-self:stretch;display:grid;grid-template-columns:repeat(2,40px);gap:6px;align-content:center}
+.sq{width:40px;height:40px;border:2px solid #111;display:grid;place-items:center;font-size:16px;background:#fff;position:relative;line-height:1}
+.sq.d{color:#d62828}
+.sq.new{background:#055dff;color:#fff;font-size:14px;letter-spacing:-.04em;box-shadow:0 0 0 3px rgba(5,93,255,.25)}
+.sq.new.wide{grid-column:1/-1;width:auto}
+.tip{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);background:#111;color:#fff;font:600 12px system-ui;padding:6px 9px;white-space:nowrap;z-index:3}
+.tip:after{content:"";position:absolute;left:100%;top:50%;margin-top:-6px;border:6px solid transparent;border-left-color:#111}
+.tip kbd{background:#333;color:#eee;border-color:#555;margin-left:6px}
+.bigbtn{display:block;text-align:center;background:#055dff;color:#fff;border:2px solid #111;font:800 12.5px system-ui;padding:7px 8px;white-space:nowrap;box-shadow:3px 3px 0 rgba(5,93,255,.3)}
+.vcol{display:flex;flex-direction:column;gap:7px;align-items:stretch;align-self:center}
+.chipbtn{display:inline-flex;align-items:center;gap:6px;border:2px solid #055dff;background:#eaf1ff;color:#0a3fae;font:800 12px system-ui;padding:4px 9px;white-space:nowrap}
+.chipbtn small{color:#555;font-weight:600}
+.qband{display:flex;gap:0;border:2px solid #111;border-top:0;background:#fafbfc;overflow-x:auto}
+.qband span{padding:7px 11px;font:700 12.5px system-ui;border-right:1.5px solid #c9ccd3;white-space:nowrap;flex:none}
+.qband span:first-child{background:#055dff;color:#fff}
+.qband .lb{background:none!important;color:#777!important;font:800 10px system-ui;letter-spacing:.1em;text-transform:uppercase;padding-top:9px}
+.fabwrap{position:relative;border:2px dashed #c9ccd3;padding:10px 10px 64px;background:#f6f7f9}
+.fabwrap .ghost{height:34px;border:2px solid #c9ccd3;background:#fff;margin-top:10px}
+.fab{position:absolute;right:16px;bottom:12px;width:52px;height:52px;border-radius:50%;background:#055dff;color:#fff;display:grid;place-items:center;font:800 16px system-ui;border:2px solid #111;box-shadow:4px 4px 0 rgba(5,93,255,.35)}
+.fab small{position:absolute;right:62px;white-space:nowrap;background:#111;color:#fff;font:600 12px system-ui;padding:5px 8px}
+.rec-box{border:2px solid #055dff;background:#f5f8ff;padding:12px 14px;margin-top:20px;font-size:13px;line-height:1.5}
+.rec-box b.t{display:block;font-size:14px;margin-bottom:4px;color:#0a3fae}
+@media (max-width:900px){.props{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){
+ .rh{grid-template-columns:auto minmax(0,1fr)}.rh .rtools{grid-column:1/-1;justify-content:space-between}
+ .racts{display:flex;flex-wrap:wrap;border-left:0;padding-left:0}.sq.new.wide{grid-column:auto;width:40px}
+ .rh h2{font-size:24px}.rh .por{width:56px;height:56px;font-size:28px}
+ .vcol{flex-direction:row;flex-wrap:wrap}
+ .tip{right:auto;left:0;top:auto;bottom:calc(100% + 8px);transform:none;white-space:normal;width:200px}.tip:after{left:14px;top:100%;margin-top:0;border-left-color:transparent;border-top-color:#111}
+}
+
+/* ───── sombre ───── */
+.dk{background:#121418;color:#e8e8e8;border-color:#444;box-shadow:6px 6px 0 rgba(77,159,255,.25)}
+.dk>.tag{color:#7fb0ff}
+.dk .hero,.dk .card,.dk .rc,.dk .fmini,.dk .tabs,.dk .phone{background:#1b1e24;border-color:#555;box-shadow:none;color:#e8e8e8}
+.dk .phone{background:#121418}
+.dk .ch{background:#20242b;border-color:#555}
+.dk .idx{border-color:#9aa0aa;background:#2f7bff}
+.dk .eyebrow,.dk .meta,.dk .muted,.dk .note,.dk .kv dt,.dk .ev small,.dk .sh small,.dk .rc small,.dk .fmini small,.dk .ch h4 small,.dk .ptop{color:#a5abb6}
+.dk .meta b{color:#e8e8e8}
+.dk .ev,.dk .brow{border-color:#2d3139}
+.dk .hact{border-color:#555}
+.dk .ia{background:#1b1e24;border-color:#666;color:#ddd}
+.dk .st-line>.sh{border-color:#8a8f99}
+.dk .sh .n{color:#7fb0ff}
+.dk .sh .fd{background:#1b1e24;border-color:#555;color:#ccc}
+.dk .tabs span{border-color:#555}.dk .tabs span.is-active{background:#2f7bff}
+.dk .b.g{background:#13301f;color:#8fe0ad;border-color:#3ccf73}.dk .b.bl{background:#1a2a3d;color:#9cc2ff;border-color:#5599ff}.dk .b.y{background:#33290b;color:#ffd666;border-color:#e1a500}.dk .b{background:#262a31;color:#ccc;border-color:#777}.dk .b.sosa{background:#2f7bff;color:#fff;border-color:#2f7bff}
+.dk .pill,.dk .chip{background:#1b1e24;border-color:#555;color:#e8e8e8}
+.dk .code{background:#262a31;border-color:#555;color:#eee}
+.dk .empty-line{background:#1b1e24;border-color:#555;color:#bbb}
+.dk .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}.dk .btn.p{background:#2f7bff;border-color:#2f7bff}
+.dk .map{border-color:#555}
+.dk .styles .sty{background:#1b1e24;border-color:#444}.dk .sty.on{border-color:#5599ff}.dk .sty .pv{background:#121418;border-color:#333}.dk .sty .bd small{color:#a5abb6}
+.dk .blk i{background:#1b1e24;border-color:#777}.dk .blk i:before{background:#2a2e36;border-color:#777}
+.dk .st-box{background:#16191e;border-color:#777}.dk .st-box>.sh .t{background:#1b1e24;border-color:#777}.dk .st-box>.sh small{background:#16191e}
+.dk .st-center>.sh:before,.dk .st-center>.sh:after{border-color:#8a8f99}
+.dk .st-band>.sh{background:#2f7bff;border-color:#2f7bff}
+.dk .st-big>.sh .n{color:#555}
+.dk .frz{border-color:#777}
+</style></head><body>
+
+<h1>🗂 Sections dans les fiches — et une seule fiche pour un animal</h1>
+<p class="sub">Deux demandes. <b>A.</b> Ranger les blocs d'une fiche (personne ou animal) dans des <b>sections nommées</b> — « Identité », « Famille », « Vie », « Documents », « Suivi »… — avec un style d'en-tête au choix (par défaut : un trait et un petit titre en capitales), ou bien en <b>onglets</b> en haut de la fiche. <b>B.</b> Un animal n'a plus qu'<b>une seule fiche</b> : la fiche complète. Tout ce que montrait la page « fiche d'animal » simple et ses onglets de suivi devient des blocs de cette fiche, rangés en sections. Les réglages sont dans Maintenance → Apparence → « Fiches personnes et animaux », gardés tout seuls (K2).</p>
+
+<div class="grid">
+
+<!-- ═══════════ F1 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F1</span>Les styles d'en-tête de section</span><h3>Cinq façons de dessiner le titre d'une section, plus les onglets — on choisit une fois pour toutes les fiches</h3>
+ <div class="styles">
+  <div class="sty on"><div class="pv">
+    <div class="sec st-line"><div class="sh"><span class="n">1</span><span class="t">Identité</span><span class="sp"></span><span class="fd">▾</span></div><div class="blk"><i></i><i></i></div></div>
+    <div class="sec st-line"><div class="sh"><span class="n">2</span><span class="t">Famille</span><span class="sp"></span><span class="fd">▾</span></div><div class="blk"><i></i><i></i></div></div>
+   </div><div class="bd"><b>Trait et titre</b><small>Un petit titre en capitales posé sur un trait. Sobre, prend peu de place.</small><span class="b bl def">Par défaut</span></div></div>
+
+  <div class="sty"><div class="pv">
+    <div class="sec st-box"><div class="sh"><span class="n">1</span><span class="t">Identité</span></div><div class="blk"><i></i><i></i></div></div>
+    <div class="sec st-box"><div class="sh"><span class="n">2</span><span class="t">Famille</span></div><div class="blk"><i></i><i></i></div></div>
+   </div><div class="bd"><b>Encadrée</b><small>Un cadre autour de la section, le titre dans une étiquette sur le bord.</small></div></div>
+
+  <div class="sty"><div class="pv">
+    <div class="sec st-big"><div class="sh"><span class="n">1</span><span class="t">Identité</span></div><div class="blk"><i></i><i></i></div></div>
+    <div class="sec st-big"><div class="sh"><span class="n">2</span><span class="t">Famille</span></div><div class="blk"><i></i><i></i></div></div>
+   </div><div class="bd"><b>Grand titre</b><small>Sans trait ni cadre : juste le nom, en grand, comme un chapitre.</small></div></div>
+
+  <div class="sty"><div class="pv">
+    <div class="sec st-band"><div class="sh"><span class="n">1</span><span class="t">Identité</span><span class="sp"></span><span class="fd">▾</span></div><div class="blk"><i></i><i></i></div></div>
+    <div class="sec st-band"><div class="sh"><span class="n">2</span><span class="t">Famille</span><span class="sp"></span><span class="fd">▾</span></div><div class="blk"><i></i><i></i></div></div>
+   </div><div class="bd"><b>Bandeau</b><small>Une bande de la couleur principale (celle de l'Apparence), titre en blanc.</small></div></div>
+
+  <div class="sty"><div class="pv">
+    <div class="sec st-center"><div class="sh"><span class="n">1</span><span class="t">Identité</span></div><div class="blk"><i></i><i></i></div></div>
+    <div class="sec st-center"><div class="sh"><span class="n">2</span><span class="t">Famille</span></div><div class="blk"><i></i><i></i></div></div>
+   </div><div class="bd"><b>Centré</b><small>Le titre au milieu, un trait de chaque côté. Élégant, façon livre.</small></div></div>
+
+  <div class="sty"><div class="pv">
+    <div class="tabs"><span class="is-active">🪪 Identité</span><span>👪 Famille</span><span>📅 Vie</span></div><div class="blk"><i></i><i></i></div><div class="blk"><i></i><i></i></div>
+   </div><div class="bd"><b>Onglets en haut</b><small>Une section = un onglet (bleu = ouvert), avec le nombre entre parenthèses.</small><span class="b def">En option</span></div></div>
+ </div>
+ <p class="note">Le style ne change que la <b>forme</b> : le bleu et la police viennent de l'Apparence (qui passe toujours devant, comme pour les Designs au choix). Les numéros (1, 2…) sont facultatifs. ▾ replie la section (si « Sections repliables » est allumé) ; au survol d'un titre apparaît ⋯ (Renommer, Monter, Descendre, Replier, Supprimer la section). Les blocs gardent leur numéro 01, 02… et leur largeur 1, ½, ⅓, ¼, ⅔, ¾ à l'intérieur de leur section.</p>
+</div>
+
+<!-- ═══════════ F2 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F2</span>Fiche d'une personne · sections, style par défaut</span><h3>Jeanne MARTIN : quatre sections, chacune avec ses blocs, sa grille et son ▾</h3>
+ <div class="hero">
+  <span class="por photo" aria-label="Photo de Jeanne"></span>
+  <div><span class="eyebrow">Fiche individuelle · #412</span><h2>Jeanne MARTIN</h2><div class="meta"><span>1884 – 1962</span><span>Genre : <b>Femme</b></span><span>Groupe : <b>MARTIN (Gers)</b></span></div></div>
+  <div class="htools"><div class="hst"><span class="b sosa">Sosa 13</span><span class="b blk">† Décédée</span></div><div class="hact"><span class="ia g">☆</span><span class="ia g">🔓</span><span class="ia g">🕘</span></div></div>
+ </div>
+ <div class="rel">
+  <div><span class="eyebrow">Parents</span><span class="rc">Henri MARTIN<small>1851 – 1920</small></span><span class="rc">Marie LAFFONT<small>1856 – 1931</small></span></div>
+  <div><span class="eyebrow">Conjoints</span><span class="rc">Jean DUPOUY<small>× 1906 · Mirande</small></span></div>
+  <div><span class="eyebrow">Enfants</span><span class="rc">Lucie<small>1907</small></span><span class="rc">Pierre<small>1910</small></span><span class="rc">Marcel<small>1914</small></span></div>
+  <div><span class="eyebrow">Frères &amp; sœurs</span><span class="rc">Louis<small>1881</small></span></div>
+ </div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">1</span><span class="t">🪪 Identité</span><small>· 2 blocs</small><span class="sp"></span><span class="fd" title="Replier">▾</span></div>
+  <div class="cg">
+   <section class="card s4"><header class="ch"><span class="idx">01</span><h4>Identité</h4><span class="ia">✎</span></header><div class="cb"><dl class="kv"><dt>Prénoms</dt><dd>Jeanne Marie Rose</dd><dt>Nom</dt><dd>MARTIN</dd><dt>Nom d'épouse</dt><dd>DUPOUY</dd><dt>Métier</dt><dd>Couturière</dd></dl></div></section>
+   <section class="card s8"><header class="ch"><span class="idx">02</span><h4>Événements <small>(5)</small></h4><span class="ia">✎</span></header><div class="cb">
+    <div class="ev"><span>°</span><b>7 mai 1884</b><span>Naissance · Auch (32) <small>· acte n° 212</small></span></div>
+    <div class="ev"><span>⛪</span><b>11 mai 1884</b><span>Baptême · Auch, cathédrale Sainte-Marie</span></div>
+    <div class="ev"><span>×</span><b>14 avr. 1906</b><span>Mariage avec Jean DUPOUY · Mirande (32)</span></div>
+    <div class="ev"><span>†</span><b>3 févr. 1962</b><span>Décès · Auch (32) <small>· 77 ans</small></span></div>
+   </div></section>
+  </div></div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">2</span><span class="t">👪 Famille</span><small>· 2 blocs</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s6"><header class="ch"><span class="idx">03</span><h4>Ascendants</h4><span class="ia">✎</span></header><div class="cb"><div class="ftree"><span class="fmini">Henri MARTIN<small>Sosa 26 · 1851</small></span><span class="fmini">Marie LAFFONT<small>Sosa 27 · 1856</small></span><span class="fmini">Jean MARTIN<small>Sosa 52 · 1820</small></span><span class="fmini q">?<small>Sosa 53</small></span></div></div></section>
+   <section class="card s6"><header class="ch"><span class="idx">04</span><h4>Descendants <small>(9)</small></h4><span class="ia">✎</span></header><div class="cb"><div class="ftree"><span class="fmini">Lucie DUPOUY<small>1907 · 4 enfants</small></span><span class="fmini">Pierre DUPOUY<small>1910 · 2 enfants</small></span><span class="fmini">Marcel DUPOUY<small>1914 – 1915</small></span></div></div></section>
+  </div></div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">3</span><span class="t">📅 Vie</span><small>· 2 blocs</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s8"><header class="ch"><span class="idx">05</span><h4>Biographie automatique</h4><span class="ia">✎</span></header><div class="cb">Jeanne Marie Rose MARTIN est née le 7 mai 1884 à Auch, fille d'Henri, cordonnier, et de Marie LAFFONT. Couturière, elle épouse Jean DUPOUY à Mirande le 14 avril 1906 ; ils ont trois enfants. Elle meurt à Auch le 3 février 1962, à 77 ans.</div></section>
+   <section class="card s4"><header class="ch"><span class="idx">06</span><h4>Carte des événements</h4><span class="ia">✎</span></header><div class="cb" style="padding:8px">
+    <svg class="map" viewBox="0 0 240 110" role="img" aria-label="Auch et Mirande"><path d="M10 80C40 40 90 20 150 30S230 70 230 100H10Z" fill="#dfe8d2"/><path d="M60 20C90 50 120 60 200 90" stroke="#9cc2e8" stroke-width="3" fill="none"/><g font-family="system-ui" font-size="9" font-weight="700"><rect x="86" y="36" width="12" height="12" transform="rotate(45 92 42)" fill="#055dff" stroke="#111"/><text x="104" y="45">Auch (3)</text><rect x="150" y="68" width="10" height="10" transform="rotate(45 155 73)" fill="#d9488f" stroke="#111"/><text x="165" y="76">Mirande</text></g></svg></div></section>
+  </div></div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">4</span><span class="t">📁 Documents</span><small>· 3 blocs</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s6"><header class="ch"><span class="idx">07</span><h4>Médias <small>(11)</small></h4><span class="ia">✎</span></header><div class="cb"><div class="thumbs"><span class="th"><b>PHOTO</b></span><span class="th d"><b>ACTE</b></span><span class="th d"><b>ACTE</b></span><span class="th g"><b>PHOTO</b></span><span class="th k"><b>PHOTO</b></span></div></div></section>
+   <section class="card s3"><header class="ch"><span class="idx">08</span><h4>Sources <small>(7)</small></h4><span class="ia">✎</span></header><div class="cb">📚 État civil d'Auch, N 1884<br>📚 Mariages Mirande 1906<br><span class="muted">+ 5 autres</span></div></section>
+   <section class="card s3"><header class="ch"><span class="idx">09</span><h4>Notes</h4><span class="ia">✎</span></header><div class="cb">Tenait un atelier rue Dessoles avec sa sœur.</div></section>
+  </div></div>
+ <p class="note">Les blocs gardent leurs numéros à la suite (01 → 09) ; un réglage les fait recommencer dans chaque section (1.1, 1.2…). Une section repliée garde son titre et dit combien de blocs elle cache (« ▸ Documents · 3 blocs ») ; elle est retenue d'une fiche à l'autre si on le veut. Les blocs pas encore rangés (un nouveau bloc, un bloc d'un module allumé plus tard) se mettent à la fin, sans section, pour que rien ne disparaisse.</p>
+</div>
+
+<!-- ═══════════ F3 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F3</span>La même fiche · style « Onglets en haut »</span><h3>Chaque section devient un onglet ; l'en-tête et la bande des parents restent toujours visibles</h3>
+ <div class="hero">
+  <span class="por photo" aria-label="Photo de Jeanne"></span>
+  <div><span class="eyebrow">Fiche individuelle · #412</span><h2>Jeanne MARTIN</h2><div class="meta"><span>1884 – 1962</span><span>Genre : <b>Femme</b></span></div></div>
+  <div class="htools"><div class="hst"><span class="b sosa">Sosa 13</span><span class="b blk">† Décédée</span></div><div class="hact"><span class="ia g">☆</span><span class="ia g">🔓</span><span class="ia g">🕘</span></div></div>
+ </div>
+ <div class="tabs" role="tablist"><span>🪪 Identité</span><span class="is-active">👪 Famille (9)</span><span>📅 Vie (5)</span><span>📁 Documents (18)</span><span class="all">▦ Tout voir</span></div>
+ <div class="cg">
+  <section class="card s6"><header class="ch"><span class="idx">03</span><h4>Ascendants</h4><span class="ia">✎</span></header><div class="cb"><div class="ftree"><span class="fmini">Henri MARTIN<small>Sosa 26 · 1851</small></span><span class="fmini">Marie LAFFONT<small>Sosa 27 · 1856</small></span><span class="fmini">Jean MARTIN<small>Sosa 52 · 1820</small></span><span class="fmini q">?<small>Sosa 53</small></span></div></div></section>
+  <section class="card s6"><header class="ch"><span class="idx">04</span><h4>Descendants <small>(9)</small></h4><span class="ia">✎</span></header><div class="cb"><div class="ftree"><span class="fmini">Lucie DUPOUY<small>1907 · 4 enfants</small></span><span class="fmini">Pierre DUPOUY<small>1910 · 2 enfants</small></span><span class="fmini">Marcel DUPOUY<small>1914 – 1915</small></span></div></div></section>
+ </div>
+ <p class="note">Onglets de page C5 (segmenté, bleu = ouvert, classe <code>is-active</code>) ; ← → passent d'un onglet à l'autre, l'onglet ouvert est retenu et peut s'écrire dans l'adresse (<code>#personne/412/famille</code>). Le nombre entre parenthèses n'apparaît que quand il a un sens : personnes de la famille, événements, médias + sources ; « Identité » n'en a pas. « ▦ Tout voir » montre toutes les sections à la suite (style par défaut), pratique pour imprimer. Un onglet vide s'écrit en gris, ou se cache (réglage).</p>
+</div>
+
+<!-- ═══════════ F4 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F4</span>Fiche animal unique · Gaston · sections, style par défaut</span><h3>Gaston, corneille baguée : la fiche complète porte maintenant tout le suivi, rangé en six sections</h3>
+ <div class="hero">
+  <span class="por bird" aria-label="Corneille">🐦</span>
+  <div><span class="eyebrow">🐾 Fiche animal · Oiseau · Corneille noire · #845</span><h2>Gaston</h2><div class="meta"><span>né en 2025 · 1 an et 5 mois</span><span>Sexe : <b>♂ mâle</b></span><span>Groupe : <b>Bande des Buttes-Chaumont</b></span></div>
+   <div class="chips" style="margin-top:8px"><span class="code">G V/M · D R/B « 7K »</span></div></div>
+  <div class="htools"><div class="hst"><span class="b bl">Suivi en cours</span><span class="b g">Vivant</span></div><div class="hact"><span class="ia" style="background:#055dff;color:#fff;border-color:#111;font-size:9.5px;letter-spacing:-.08em;white-space:nowrap" title="＋ Nouvelle observation (O)">👁＋</span><span class="ia g">☆</span><span class="ia g">🔓</span><span class="ia g">🕘</span></div></div>
+ </div>
+ <div class="rel">
+  <div><span class="eyebrow">Parents</span><span class="rc q">Père inconnu</span><span class="rc q">Mère inconnue</span></div>
+  <div><span class="eyebrow">Soigneurs, bagueurs</span><span class="rc">Antoine LEROY<small>bagueur</small></span></div>
+  <div><span class="eyebrow">Petits</span><span class="rc q">Aucun connu</span></div>
+  <div><span class="eyebrow">Frères &amp; sœurs</span><span class="rc">Basile<small>même nid · 2025</small></span></div>
+ </div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">1</span><span class="t">🪪 Fiche</span><small>· 4 blocs</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s8"><header class="ch"><span class="idx">01</span><h4>🐾 Caractéristiques</h4><span class="ia">✎</span></header><div class="cb"><dl class="kv"><dt>Espèce</dt><dd>🐦 Corneille noire <small class="muted">Corvus corone</small></dd><dt>Robe</dt><dd>Noire, reflets violets</dd><dt>Sexe</dt><dd>♂ d'après les mesures (aile 330 mm)</dd><dt>Âge au baguage</dt><dd>Poussin · 12 mai 2025</dd></dl><p class="muted" style="margin:8px 0 0;font-size:11.5px">Race, puce, tatouage, livre des origines et éleveur : vides pour un oiseau sauvage, donc pas montrés.</p></div></section>
+   <section class="card s4"><header class="ch"><span class="idx">02</span><h4>Événements <small>(3)</small></h4><span class="ia">✎</span></header><div class="cb">
+    <div class="ev"><span>🐣</span><b>vers mai 2025</b><span>Naissance · Paris 19ᵉ</span></div>
+    <div class="ev"><span>🔖</span><b>12 mai 2025</b><span>Baguage · Buttes-Chaumont</span></div>
+    <div class="ev"><span>👁</span><b>22 oct. 2026</b><span>Dernière observation</span></div></div></section>
+   <section class="card s6"><header class="ch"><span class="idx">03</span><h4>🌳 Pedigree</h4><span class="ia">✎</span></header><div class="cb"><div class="ftree"><span class="fmini q">Père inconnu<small>＋ Relier</small></span><span class="fmini q">Mère inconnue<small>＋ Relier</small></span></div></div></section>
+   <section class="card s6"><header class="ch"><span class="idx">04</span><h4>Médias <small>(9)</small></h4><span class="ia">✎</span></header><div class="cb"><div class="thumbs"><span class="th g"><b>PHOTO</b></span><span class="th k"><b>PHOTO</b></span><span class="th g"><b>PHOTO</b></span><span class="th"><b>VIDÉO</b></span></div></div></section>
+  </div></div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">2</span><span class="t">🔖 Bagues et marques</span><small>· 1 bloc</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s12"><header class="ch"><span class="idx">05</span><h4>🔖 Bagues et marques <small>(3)</small></h4><span class="ia">✎</span></header><div class="cb">
+    <div class="two" style="grid-template-columns:200px minmax(0,1fr);gap:14px">
+     <svg class="legs" viewBox="0 0 200 110" role="img" aria-label="Pattes : gauche vert sur métal, droite rouge sur blanc 7K"><g stroke="#111" stroke-width="3" fill="none"><path d="M60 0V100M60 100l-14 8M60 100l14 8"/><path d="M140 0V100M140 100l-14 8M140 100l14 8"/></g><rect x="50" y="22" width="20" height="16" fill="#1aa34a" stroke="#111" stroke-width="2"/><rect x="50" y="56" width="20" height="18" fill="#c9ced6" stroke="#111" stroke-width="2"/><rect x="130" y="22" width="20" height="16" fill="#d62828" stroke="#111" stroke-width="2"/><rect x="130" y="56" width="20" height="18" fill="#fff" stroke="#111" stroke-width="2"/><text x="140" y="69" font-size="9" font-weight="800" text-anchor="middle" font-family="system-ui">7K</text><g font-size="9" font-family="system-ui" fill="#777" font-weight="700"><text x="16" y="12">GAUCHE</text><text x="150" y="12">DROITE</text></g></svg>
+     <dl class="kv"><dt>Bague métal</dt><dd><span class="code">EA123456</span> · CRBPO Paris · gauche, en bas</dd><dt>Couleurs</dt><dd>Vert / métal · Rouge / blanc « 7K »</dd><dt>Bagueur</dt><dd><span class="pill"><span class="ini">AL</span>Antoine LEROY</span></dd><dt>Programme</dt><dd>📚 Corneilles de Paris</dd></dl>
+    </div></div></section>
+  </div></div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">3</span><span class="t">👁 Observations</span><small>· 23</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s12"><header class="ch"><span class="idx">06</span><h4>👁 Observations <small>(23)</small></h4><span class="btn s">＋ Nouvelle observation</span></header><div class="cb">
+    <div class="ev"><span>👁</span><b>22 oct. 2026</b><span>Pelouse du lac · se nourrit avec 3 autres <span class="b g">Bague lue</span></span></div>
+    <div class="ev"><span>👁</span><b>15 oct. 2026</b><span>Rue de Crimée · sur une poubelle <span class="b y">À vérifier</span></span></div>
+    <div class="ev"><span>👁</span><b>2 oct. 2026</b><span>Dortoir du Belvédère · le soir</span></div></div></section>
+  </div></div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">4</span><span class="t">🩺 Santé</span><small>· 1 bloc</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s12"><header class="ch"><span class="idx">07</span><h4>🩺 Santé <small>(2)</small></h4><span class="ia">✎</span></header><div class="cb">
+    <div class="frz"><i style="flex:5;background:#1aa34a"></i><i style="flex:1;background:#055dff"></i><i style="flex:4;background:#1aa34a"></i></div>
+    <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:11.5px"><span><span class="b g">Bonne santé</span> mai 2025</span><span><span class="b bl">En soins</span> mars 2026 · aile</span><span>Poids : <b>540 g</b> → <b>575 g</b></span></div></div></section>
+  </div></div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">5</span><span class="t">👥 Groupe</span><small>· 1 bloc</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s12"><header class="ch"><span class="idx">08</span><h4>👥 Groupe</h4><span class="ia">✎</span></header><div class="cb">Membre de la <b>Bande des Buttes-Chaumont</b> (14 corneilles) depuis mai 2025 · souvent vu avec <span class="pill">🐦 Basile</span> <span class="pill">🐦 Plume</span></div></section>
+  </div></div>
+
+ <div class="sec st-line"><div class="sh"><span class="n">6</span><span class="t">🗺 Carte</span><small>· 1 bloc</small><span class="sp"></span><span class="fd">▾</span></div>
+  <div class="cg">
+   <section class="card s12"><header class="ch"><span class="idx">09</span><h4>🗺 Carte des passages</h4><span class="ia">✎</span></header><div class="cb" style="padding:8px">
+    <svg class="map" viewBox="0 0 600 130" role="img" aria-label="Passages de Gaston dans le parc"><rect width="600" height="130" fill="#f1efe9"/><path d="M60 70C90 15 260 5 380 25S560 70 540 105C500 128 120 128 60 70Z" fill="#cfe5bf" stroke="#3d6b2a" stroke-width="2" stroke-dasharray="7 4"/><ellipse cx="300" cy="72" rx="60" ry="22" fill="#a9d1ef"/><polyline points="120,60 190,40 270,48 330,100 420,90 480,55" fill="none" stroke="#055dff" stroke-width="2.5"/><g fill="#055dff" stroke="#fff" stroke-width="1.5"><circle cx="120" cy="60" r="5"/><circle cx="190" cy="40" r="5"/><circle cx="270" cy="48" r="5"/><circle cx="330" cy="100" r="5"/><circle cx="420" cy="90" r="5"/><circle cx="480" cy="55" r="7" fill="#d62828"/></g><text x="490" y="50" font-size="11" font-weight="700" font-family="system-ui">22 oct.</text></svg></div></section>
+  </div></div>
+ <p class="note">Les six sections par défaut d'un animal reprennent les onglets de l'ancienne page (🪪 Fiche, 🔖 Bagues et marques, 👁 Observations, 🩺 Santé, 👥 Groupe, 🗺 Carte). « 🏆 Titres et concours », « 🏠 Ses maîtres », « 🐾 Descendance » sont dans 🪪 Fiche et ne s'affichent pas quand ils sont vides (comme sur l'ancienne page) — réglable.</p>
+</div>
+
+<!-- ═══════════ F5 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F5</span>Fiche animal unique · Minette · style « Onglets en haut »</span><h3>Minette, chartreux à collier GPS : la même fiche, en onglets comme sur ta capture</h3>
+ <div class="hero">
+  <span class="por cat" aria-label="Chatte">🐈</span>
+  <div><span class="eyebrow">🐾 Fiche animal · Chat · Chartreux · #612</span><h2>Minette</h2><div class="meta"><span>née le 3 avr. 2019 · 7 ans</span><span>Sexe : <b>♀ femelle</b></span><span>Nom officiel : <b>Minette du Clos des Tilleuls</b></span></div></div>
+  <div class="htools"><div class="hst"><span class="b g">Vivante</span></div><div class="hact"><span class="ia" style="background:#055dff;color:#fff;border-color:#111;font-size:9.5px;letter-spacing:-.08em;white-space:nowrap" title="＋ Nouvelle observation (O)">👁＋</span><span class="ia g">★</span><span class="ia g">🔓</span><span class="ia g">🕘</span></div></div>
+ </div>
+ <div class="rel">
+  <div><span class="eyebrow">Parents</span><span class="rc">Pacha des Tilleuls<small>père · LOOF</small></span><span class="rc">Iris du Clos<small>mère · LOOF</small></span></div>
+  <div><span class="eyebrow">Ses maîtres</span><span class="rc">Lucie DUPOUY<small>depuis 2019</small></span></div>
+  <div><span class="eyebrow">Petits</span><span class="rc">Portée 2022<small>3 petits</small></span></div>
+  <div><span class="eyebrow">Frères &amp; sœurs</span><span class="rc">Moka<small>même portée</small></span></div>
+ </div>
+ <div class="tabs" role="tablist"><span class="is-active">🪪 Fiche</span><span>🔖 Bagues et marques (2)</span><span class="e">👁 Observations (0)</span><span>🩺 Santé (3)</span><span>👥 Groupe</span><span>🗺 Trajets (5)</span></div>
+ <div class="cg">
+  <section class="card s8"><header class="ch"><span class="idx">01</span><h4>🐾 Caractéristiques</h4><span class="ia">✎</span></header><div class="cb"><dl class="kv">
+   <dt>Espèce</dt><dd>🐈 Chat</dd><dt>Race</dt><dd>Chartreux</dd><dt>Robe</dt><dd>Bleu gris uni, yeux cuivre</dd><dt>Puce</dt><dd><span class="code">250 26 9 812 345 678</span></dd><dt>Tatouage</dt><dd><span class="code">2KLM45</span> · oreille droite</dd><dt>Livre des origines</dt><dd>LOOF · n° 2019-CHA-04871</dd><dt>Éleveur</dt><dd>Chatterie du Clos des Tilleuls · affixe « du Clos des Tilleuls »</dd></dl></div></section>
+  <section class="card s4"><header class="ch"><span class="idx">02</span><h4>Événements <small>(4)</small></h4><span class="ia">✎</span></header><div class="cb">
+   <div class="ev"><span>°</span><b>3 avr. 2019</b><span>Naissance · Lectoure (32)</span></div>
+   <div class="ev"><span>🏠</span><b>juin 2019</b><span>Arrive chez Lucie</span></div>
+   <div class="ev"><span>🏆</span><b>12 mars 2021</b><span>Expo féline · Toulouse</span></div>
+   <div class="ev"><span>🐾</span><b>avr. 2022</b><span>Portée de 3</span></div></div></section>
+  <section class="card s6"><header class="ch"><span class="idx">03</span><h4>🌳 Pedigree</h4><span class="btn s">⛶ Grand</span></header><div class="cb"><div class="ftree"><span class="fmini">Pacha des Tilleuls<small>père · LOOF</small></span><span class="fmini">Iris du Clos<small>mère · LOOF</small></span><span class="fmini">Ulysse<small>grand-père</small></span><span class="fmini">Opale<small>grand-mère</small></span></div><p class="muted" style="margin:6px 0 0;font-size:11.5px">Consanguinité : <b>1,6 %</b></p></div></section>
+  <section class="card s6"><header class="ch"><span class="idx">04</span><h4>🏆 Titres et concours <small>(2)</small></h4><span class="ia">✎</span></header><div class="cb">
+   <div class="ev"><span>🏆</span><b>2021</b><span>Championne LOOF · Toulouse <span class="b g">1ʳᵉ</span></span></div>
+   <div class="ev"><span>🏅</span><b>2022</b><span>Meilleure femelle · Agen</span></div></div></section>
+ </div>
+ <p class="note">Les noms et l'ordre des onglets sont exactement ceux de l'ancienne page (barre segmentée, bleu = ouvert) : rien à réapprendre. « 👁 Observations (0) » reste en gris tant qu'il est vide ; un clic montre la petite ligne K10 avec « ＋ Nouvelle observation ». Pour un animal de la famille sans bague ni GPS, on peut cacher ces onglets dans l'éditeur des sections (F6) — réglage propre aux animaux.</p>
+</div>
+
+<!-- ═══════════ F6 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F6</span>Maintenance → Apparence → Fiches personnes et animaux · réglages et éditeur des sections (K2)</span><h3>Le style, les options, et les sections qu'on crée, renomme, range et remplit en glissant les blocs</h3>
+ <div class="ph"><div class="t"><small>Maintenance · Apparence</small><h2>🗂 Sections des fiches</h2><p>Range les blocs des fiches en sections. Chaque changement est gardé tout de suite.</p></div><div class="r"><span class="saved">✓ Enregistré</span><span class="btn s">↺ Remettre comme au départ</span></div></div>
+ <div class="two w">
+  <div>
+   <span class="lab">Pour quelles fiches</span>
+   <span class="seg sm"><span>👤 Personnes</span><span class="is-active">🐾 Animaux</span></span>
+   <label class="ui-toggle" style="margin-top:10px"><i></i><span>Sections propres aux animaux<small>Éteint : les animaux prennent les sections des personnes.</small></span></label>
+
+   <span class="lab">Style des sections</span>
+   <div class="minis">
+    <div class="ms"><div class="pv"><div class="sec st-line"><div class="sh"><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div>Trait et titre</div>
+    <div class="ms"><div class="pv"><div class="sec st-box" style="margin-top:9px"><div class="sh"><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div>Encadrée</div>
+    <div class="ms"><div class="pv"><div class="sec st-big"><div class="sh"><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div>Grand titre</div>
+    <div class="ms"><div class="pv"><div class="sec st-band"><div class="sh"><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div>Bandeau</div>
+    <div class="ms"><div class="pv"><div class="sec st-center"><div class="sh"><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div>Centré</div>
+    <div class="ms on"><div class="pv"><div class="tabs"><span class="is-active">🪪</span><span>🔖</span><span>👁</span><span>🩺</span></div><div class="blk"><i></i><i></i></div></div>Onglets en haut ✓</div>
+   </div>
+
+   <span class="lab">Options</span>
+   <label class="ui-toggle"><i></i><span>Sections repliables (▾)<small>Retenu d'une fiche à l'autre.</small></span></label>
+   <label class="ui-toggle off"><i></i><span>Ouvrir les sections repliées au départ</span></label>
+   <label class="ui-toggle"><i></i><span>Numéros des sections</span></label>
+   <div class="setrow" style="padding-left:45px">Écriture <span class="sel">1, 2, 3 ▾</span> <small class="muted">(I, II, III · A, B, C)</small></div>
+   <div class="setrow">Numéros des blocs <span class="seg sm"><span class="is-active">À la suite (01, 02…)</span><span>Par section (1.1, 1.2…)</span></span></div>
+   <label class="ui-toggle"><i></i><span>Onglets : montrer le nombre entre parenthèses</span></label>
+   <div class="setrow">Sections vides <span class="seg sm"><span class="is-active">En gris</span><span>Cachées</span></span></div>
+   <div class="rng"><span>Espace entre sections</span><span class="tr"><i></i><b></b></span><span class="unit"><b>24</b><i>px</i></span></div>
+   <p class="note" style="margin-top:6px">Double-clic sur le curseur : retour à 24 px. L'Apparence (couleur principale, police, taille) passe toujours devant.</p>
+  </div>
+
+  <div>
+   <span class="lab">Sections et blocs · Toutes les fiches d'animaux <span style="text-transform:none;letter-spacing:0;font-weight:600"> · <span style="color:#055dff">Exception pour Minette…</span></span></span>
+   <div class="edl">
+    <div class="sgrp">
+     <div class="srow"><span class="grip">⠿</span><span class="ia g">🪪</span><span class="nm"><span>Fiche</span><small>4 blocs</small></span><span class="on2"><span class="eye">👁</span><span class="ia">⋯</span></span></div>
+     <div class="brow"><span class="grip">⠿</span><span class="no">01</span><span class="nm">🐾 Caractéristiques</span><span class="wd"><span>1</span><span>½</span><span>⅓</span><span>¼</span><span class="on">⅔</span><span>¾</span></span><span class="eye">👁</span></div>
+     <div class="brow"><span class="grip">⠿</span><span class="no">02</span><span class="nm">Événements</span><span class="wd"><span>1</span><span>½</span><span class="on">⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div>
+     <div class="brow"><span class="grip">⠿</span><span class="no">03</span><span class="nm">🌳 Pedigree</span><span class="wd"><span>1</span><span class="on">½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div>
+     <div class="brow"><span class="grip">⠿</span><span class="no">04</span><span class="nm">🏆 Titres et concours</span><span class="wd"><span>1</span><span class="on">½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div>
+     <div class="drop" title="Le bloc se pose ici"></div>
+    </div>
+    <div class="sgrp">
+     <div class="srow"><span class="grip">⠿</span><span class="ia g">🔖</span><span class="nm"><span>Bagues et marques</span><small>1 bloc</small></span><span class="on2"><span class="eye">👁</span><span class="ia">⋯</span></span></div>
+     <div class="brow"><span class="grip">⠿</span><span class="no">05</span><span class="nm">🔖 Bagues et marques</span><span class="wd"><span class="on">1</span><span>½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div>
+    </div>
+    <div class="sgrp">
+     <div class="srow"><span class="grip">⠿</span><span class="ia g">👁</span><span class="nm"><span>Observations</span><small>1 bloc</small></span><span class="on2"><span class="eye off" title="Section cachée">🙈</span><span class="ia">⋯</span></span></div>
+     <div class="brow off"><span class="grip">⠿</span><span class="no">—</span><span class="nm">👁 Observations</span><span class="wd"><span class="on">1</span><span>½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye off">🙈</span></div>
+    </div>
+    <div class="sgrp">
+     <div class="srow"><span class="grip">⠿</span><span class="ia g">📁</span><span class="nm"><span>Documents</span><small>2 blocs · nouvelle</small></span><span class="on2"><span class="eye">👁</span><span class="ia">⋯</span></span></div>
+     <div class="brow drag"><span class="grip">⠿</span><span class="no">06</span><span class="nm">Médias — glissé vers « Fiche »</span><span class="wd"><span>1</span><span class="on">½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div>
+     <div class="brow"><span class="grip">⠿</span><span class="no">07</span><span class="nm">Sources &amp; citations</span><span class="wd"><span>1</span><span>½</span><span class="on">⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div>
+    </div>
+    <div class="sgrp"><div class="srow" style="grid-template-columns:16px minmax(0,1fr)"><span></span><span class="nm"><span>🩺 Santé · 👥 Groupe · 🗺 Carte</span><small>repliées ici</small></span></div></div>
+    <div class="sgrp loose">
+     <div class="srow" style="grid-template-columns:26px minmax(0,1fr)"><span class="ia g">▢</span><span class="nm"><span>Sans section</span><small>s'affichent à la fin de la fiche</small></span></div>
+     <div class="brow"><span class="grip">⠿</span><span class="no">12</span><span class="nm">🌦 Météo de sa vie</span><span class="wd"><span>1</span><span class="on">½</span><span>⅓</span><span>¼</span><span>⅔</span><span>¾</span></span><span class="eye">👁</span></div>
+    </div>
+    <div class="addsec">＋ Nouvelle section</div>
+   </div>
+   <div class="two" style="margin-top:12px;grid-template-columns:minmax(0,230px) minmax(0,1fr)">
+    <div class="menu"><div class="it">✎ Renommer</div><div class="it">🙂 Changer l'icône</div><div class="it">⧉ Dupliquer</div><div class="it">▸ Repliée au départ</div><div class="it">↑ Monter <kbd>Alt ↑</kbd></div><div class="it">↓ Descendre <kbd>Alt ↓</kbd></div><hr><div class="it" style="color:#d62828">🗑 Supprimer la section</div></div>
+    <div><div class="toast2">✓ Section « Observations » supprimée · son bloc va dans « Sans section »<span class="u">↶ Annuler</span><span class="bar" style="width:60%"></span></div>
+     <p class="note">Glisser un bloc d'une section à l'autre (trait bleu = où il se pose), ou Tab puis Alt + ↑ / ↓ (K20). Glisser une section la range avec tous ses blocs. ＋ Nouvelle section demande un nom (« Suivi », « Vie »…) et une icône. 👁 cache un bloc ou toute une section. Supprimer une section ne supprime aucun bloc (H7 : pas de question, « ↶ Annuler »).</p></div>
+   </div>
+  </div>
+ </div>
+ <p class="note">Ce cadre remplace « Ordre et visibilité des blocs » : c'est la même liste ⠿ avec 👁 et les largeurs, mais les blocs sont rangés sous leurs sections. L'exception pour une fiche reste (lien « Exception pour Minette… »). Les sections et le style vont aussi dans les « 💾 Réglages enregistrés ». ↺ remet les sections de départ (personnes : Identité, Famille, Vie, Documents ; animaux : les six de l'ancienne page), sans question, avec ↶ Annuler.</p>
+</div>
+
+<!-- ═══════════ F7 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F7</span>Ce que devient l'ancienne « fiche d'animal »</span><h3>Une seule fiche par animal : la page simple disparaît, rien n'est perdu, tous les chemins mènent à la fiche complète</h3>
+ <div class="two">
+  <div>
+   <span class="lab">Avant · deux fiches pour un animal</span>
+   <div class="fbox old"><b>🐾 Fiche d'animal (page simple)</b><br>Listes → Animaux de compagnie → clic sur Minette · ses parties (identité, pedigree, santé, sa vie…) et les onglets du suivi</div>
+   <div class="arr" style="margin:4px 0">＋</div>
+   <div class="fbox"><b>👤 Fiche complète</b><br>Personnes → Animaux · comme une personne, avec un bloc « 🐾 Caractéristiques de l'animal » et un bouton « 🐾 Fiche d'animal »</div>
+  </div>
+  <div>
+   <span class="lab">Après · une seule</span>
+   <div class="fbox" style="border-color:#055dff;box-shadow:4px 4px 0 rgba(5,93,255,.3)"><b>🐾 La fiche de l'animal</b> (la fiche complète)<br>En-tête, bande des parents, puis ses sections : 🪪 Fiche · 🔖 Bagues et marques · 👁 Observations · 🩺 Santé · 👥 Groupe · 🗺 Carte — en traits et titres, ou en onglets.</div>
+   <div class="notice ok">✓ <span><b>Rien n'est perdu.</b> Toutes les données restent à leur place dans la base ; seule la façon de les montrer change.</span></div>
+   <div class="notice i">ℹ️ <span>Un animal qui n'avait que la page simple reçoit sa fiche complète tout seul à la mise à jour (nom, sexe, naissance, décès, parents déjà repris). Message unique en haut de la liste : « 12 animaux ont reçu leur fiche complète. »</span></div>
+  </div>
+ </div>
+ <span class="lab">Où va chaque partie de la page simple</span>
+ <table class="mtbl"><thead><tr><th>Sur la page simple</th><th>Dans la fiche complète</th><th>Section par défaut</th></tr></thead><tbody>
+  <tr><td>Identité et origines (espèce, race, robe, puce, tatouage, livre des origines, éleveur)</td><td>Bloc « 🐾 Caractéristiques » (les blocs « résumé » et « identification et origines » n'en font plus qu'un)</td><td>🪪 Fiche</td></tr>
+  <tr><td>Parents et pedigree, consanguinité · page 🌳 Pedigree</td><td>Bloc « 🌳 Pedigree » ; ⛶ ouvre le pedigree en grand (même page qu'avant)</td><td>🪪 Fiche</td></tr>
+  <tr><td>Titres, concours</td><td>Bloc « 🏆 Titres et concours »</td><td>🪪 Fiche</td></tr>
+  <tr><td>Descendance, frères et sœurs, ses maîtres</td><td>Blocs habituels « 🐾 Descendance », « 👥 Frères et sœurs », « 🏠 Ses maîtres » + bande des parents</td><td>🪪 Fiche</td></tr>
+  <tr><td>Sa vie, histoire et souvenirs</td><td>Blocs « Événements » et « 📖 Histoire et souvenirs »</td><td>🪪 Fiche</td></tr>
+  <tr><td>Onglet 🔖 Bagues et marques</td><td>Bloc « 🔖 Bagues et marques »</td><td>🔖 Bagues et marques</td></tr>
+  <tr><td>Onglet 👁 Observations</td><td>Bloc « 👁 Observations »</td><td>👁 Observations</td></tr>
+  <tr><td>Santé, poids et taille · onglet 🩺 Santé</td><td>Bloc « 🩺 Santé » (frise des états + courbe du poids + soins)</td><td>🩺 Santé</td></tr>
+  <tr><td>Onglet 👥 Groupe · onglet 🗺 Carte / Trajets</td><td>Blocs « 👥 Groupe » et « 🗺 Carte / trajets »</td><td>👥 Groupe · 🗺 Carte</td></tr>
+  <tr><td>Photos, tableaux, mes catégories</td><td>Blocs « Médias », « Tableaux », « 🗂️ Mes catégories »</td><td>🪪 Fiche</td></tr>
+ </tbody></table>
+ <span class="lab">Les chemins</span>
+ <ul class="ways">
+  <li><span>📋</span><span><b>Listes → Animaux de compagnie</b> reste (barre H10, vignettes) : un clic sur un animal ouvre sa fiche complète.</span></li>
+  <li><span>👤</span><span><b>Personnes → Animaux</b> : inchangé, ouvre la même fiche.</span></li>
+  <li><span>＋</span><span><b>« ＋ Nouvel animal »</b> (des deux endroits) crée directement la fiche complète ; la case « faire aussi une fiche complète » disparaît.</span></li>
+  <li><span>↗</span><span><b>Les anciens liens</b> (<code>#pet/612</code>, menu de choix, tableaux, maisons, mode simple, recherche) mènent à la fiche complète, sur la bonne section : « ↗ Santé » ouvre la section 🩺 Santé.</span></li>
+  <li><span>🐾</span><span><b>Le bouton « 🐾 Fiche d'animal »</b> du bloc Caractéristiques s'en va (on y est déjà) ; « 👤 Fiche complète » et « ＋ Fiche complète » de l'ancienne page aussi.</span></li>
+  <li><span>⚙️</span><span><b>Réglages des animaux</b> (espèces, champs du formulaire) ne changent pas ; l'ancien choix « ordre des parties » de la page simple devient l'ordre des blocs dans les sections (F6), repris tel quel.</span></li>
+ </ul>
+ <p class="note">FAQ, nouvelle réponse : « Un animal a-t-il encore deux fiches ? — Non. Sa fiche est maintenant une seule, comme une personne, avec tout ce que montrait l'ancienne fiche d'animal : caractéristiques, pedigree, titres, bagues, observations, santé, groupe et carte, rangés en sections (ou en onglets). Rien n'est perdu. »</p>
+</div>
+
+<!-- ═══════════ F8 ═══════════ -->
+<div class="case full dk"><span class="tag"><span class="num">F8</span>Mode sombre · et sur téléphone (390 px)</span><h3>Les traits et titres restent lisibles en sombre ; sur téléphone les sections se replient et les onglets défilent</h3>
+ <div class="styles">
+  <div class="sty on"><div class="pv"><div class="sec st-line"><div class="sh"><span class="n">1</span><span class="t">Fiche</span><span class="sp"></span><span class="fd">▾</span></div><div class="blk"><i></i><i></i></div></div></div><div class="bd"><b>Trait et titre</b><small>trait gris clair</small></div></div>
+  <div class="sty"><div class="pv"><div class="sec st-box"><div class="sh"><span class="n">1</span><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div><div class="bd"><b>Encadrée</b><small>cadre gris</small></div></div>
+  <div class="sty"><div class="pv"><div class="sec st-big"><div class="sh"><span class="n">1</span><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div><div class="bd"><b>Grand titre</b><small>numéro estompé</small></div></div>
+  <div class="sty"><div class="pv"><div class="sec st-band"><div class="sh"><span class="n">1</span><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div><div class="bd"><b>Bandeau</b><small>bleu plus clair</small></div></div>
+  <div class="sty"><div class="pv"><div class="sec st-center"><div class="sh"><span class="n">1</span><span class="t">Fiche</span></div><div class="blk"><i></i><i></i></div></div></div><div class="bd"><b>Centré</b><small>traits gris clair</small></div></div>
+  <div class="sty"><div class="pv"><div class="tabs"><span class="is-active">🪪 Fiche</span><span>🔖</span><span>🩺</span></div><div class="blk"><i></i><i></i></div></div><div class="bd"><b>Onglets</b><small>bleu = ouvert</small></div></div>
+ </div>
+
+ <div class="phones">
+  <div class="phone">
+   <div class="ptop"><span>Gaston · sections</span><span>390 px · sombre</span></div>
+   <div class="hero"><span class="por bird">🐦</span><div><span class="eyebrow">🐾 Corneille noire · #845</span><h2>Gaston</h2><div class="meta"><span>2025 · ♂ mâle</span></div></div>
+    <div class="htools"><div class="hst"><span class="b bl">Suivi en cours</span><span class="b g">Vivant</span></div><div class="hact"><span class="ia g">☆</span><span class="ia g">🕘</span></div></div></div>
+   <div class="sec st-line"><div class="sh"><span class="n">1</span><span class="t">🪪 Fiche</span><small>· 4 blocs</small><span class="sp"></span><span class="fd">▾</span></div>
+    <div class="cg"><section class="card"><header class="ch"><span class="idx">01</span><h4>🐾 Caractéristiques</h4><span class="ia">✎</span></header><div class="cb"><dl class="kv"><dt>Espèce</dt><dd>Corneille noire</dd><dt>Robe</dt><dd>Noire</dd><dt>Sexe</dt><dd>♂ d'après les mesures</dd></dl></div></section></div></div>
+   <div class="sec st-line fold"><div class="sh"><span class="n">2</span><span class="t">🔖 Bagues et marques</span><small>· 1 bloc</small><span class="sp"></span><span class="fd">▸</span></div><div class="cg"></div></div>
+   <div class="sec st-line fold"><div class="sh"><span class="n">3</span><span class="t">👁 Observations</span><small>· 23</small><span class="sp"></span><span class="fd">▸</span></div><div class="cg"></div></div>
+   <div class="sec st-line fold"><div class="sh"><span class="n">4</span><span class="t">🩺 Santé</span><small>· 1 bloc</small><span class="sp"></span><span class="fd">▸</span></div><div class="cg"></div></div>
+   <div class="sec st-line fold"><div class="sh"><span class="n">5</span><span class="t">👥 Groupe · 🗺 Carte</span><small>· 2</small><span class="sp"></span><span class="fd">▸</span></div><div class="cg"></div></div>
+  </div>
+
+  <div class="phone" style="background:#f4f5f7;color:#111;border-color:#111">
+   <div class="ptop" style="color:#777"><span>Minette · onglets</span><span>390 px · clair</span></div>
+   <div class="hero" style="background:#fff;border-color:#111;color:#111"><span class="por cat">🐈</span><div><span class="eyebrow" style="color:#777">🐾 Chat · Chartreux · #612</span><h2>Minette</h2><div class="meta" style="color:#555"><span>2019 · ♀ femelle</span></div></div>
+    <div class="htools"><div class="hst"><span class="b g" style="color:#14532d;background:#ecfaf0;border-color:#1aa34a">Vivante</span></div><div class="hact"><span class="ia g" style="background:#fff;color:#666">★</span><span class="ia g" style="background:#fff;color:#666">🕘</span></div></div></div>
+   <div class="tabs" style="background:#fff;border-color:#111;color:#111"><span style="border-color:#111">🪪 Fiche</span><span style="border-color:#111">🔖 Bagues (2)</span><span style="border-color:#111;color:#999">👁 Observations (0)</span><span class="is-active" style="border-color:#111;background:#055dff">🩺 Santé (3)</span><span style="border-color:#111">👥 Groupe</span><span>🗺 Trajets (5)</span></div>
+   <div class="cg"><section class="card" style="background:#fff;border-color:#111;color:#111"><header class="ch" style="background:#fafafa;border-color:#111"><span class="idx" style="border-color:#111;background:#055dff">07</span><h4>🩺 Santé <small style="color:#888">(3)</small></h4><span class="ia" style="background:#fff;border-color:#111;color:#111">✎</span></header><div class="cb">
+    <div class="frz" style="border-color:#111"><i style="flex:6;background:#1aa34a"></i><i style="flex:1;background:#e1a500"></i><i style="flex:3;background:#1aa34a"></i></div>
+    <div class="ev" style="border-color:#eee"><span>💉</span><b>12 mars 2026</b><span>Rappel typhus, coryza</span></div>
+    <div class="ev" style="border-color:#eee"><span>🩺</span><b>2 févr. 2025</b><span>Gingivite · soignée</span></div>
+    <div class="ev" style="border-color:#eee"><span>⚖️</span><b>oct. 2026</b><span>Poids : <b>4,1 kg</b></span></div></div></section></div>
+  </div>
+ </div>
+ <p class="note">Sur téléphone, les blocs passent tous en pleine largeur dans leur section ; seule la première section est ouverte au départ (réglable), un toucher sur le titre l'ouvre. La barre d'onglets défile de côté à l'intérieur d'elle-même (la page, elle, ne défile jamais de côté) et l'onglet ouvert vient se placer au milieu.</p>
+</div>
+
+<!-- ═══════════ F9 ═══════════ -->
+<div class="case full"><span class="tag"><span class="num">F9</span>En-tête de la fiche animal</span><h3>＋ Nouvelle observation : où la mettre ? Six propositions sur l’en-tête de Gaston</h3>
+ <p class="note" style="margin:0 0 14px">Même rendu que l’en-tête réel : la pastille de statut à gauche du trait, puis la grille de petits boutons carrés (🔖 signet, 🗑 supprimer en rouge, 🔓 verrou, 🕘 historique, ☆ favori).</p>
+ <div class="props"><div class="prop"><h5><span class="pn">1</span>Un petit carré 👁＋ en premier dans la grille</h5><div class="rh"><span class="por bird">🐦</span><div><span class="eyebrow">🐾 Fiche animal · Corneille noire · #845</span><h2>Gaston</h2><div class="meta"><span>2025</span><span>Sexe : <b>♂ mâle</b></span></div></div><div class="rtools"><div class="rstat"><span class="b y">À vérifier</span></div><div class="racts"><span class="sq new">👁＋<span class="tip">＋ Nouvelle observation</span></span><span class="sq">🔖</span><span class="sq d">🗑</span><span class="sq">🔓</span><span class="sq">🕘</span><span class="sq">☆</span></div></div></div><div class="pros"><span class="p">Rien de nouveau à apprendre : un bouton de plus, au même endroit que les autres, réglable comme eux.</span><span class="m">Une icône seule se devine moins bien ; la bulle (K12) aide au survol, pas au doigt.</span></div></div><div class="prop"><h5><span class="pn">2</span>Un bouton bleu « ＋ Observation » au-dessus de la grille</h5><div class="rh"><span class="por bird">🐦</span><div><span class="eyebrow">🐾 Fiche animal · Corneille noire · #845</span><h2>Gaston</h2><div class="meta"><span>2025</span><span>Sexe : <b>♂ mâle</b></span></div></div><div class="rtools"><div class="rstat"><span class="b y">À vérifier</span></div><div class="vcol"><span class="bigbtn">＋ Observation</span><div class="racts" style="border-left:0;padding-left:0"><span class="sq">🔖</span><span class="sq d">🗑</span><span class="sq">🔓</span><span class="sq">🕘</span><span class="sq">☆</span></div></div></div></div><div class="pros"><span class="p">Très visible, le mot est écrit : on ne peut pas le rater.</span><span class="m">Prend de la largeur dans l’en-tête et casse la grille carrée ; un seul outil mis en avant, les autres non.</span></div></div><div class="prop"><h5><span class="pn">3</span>Une pastille-bouton sous le nom, à côté du statut</h5><div class="rh"><span class="por bird">🐦</span><div><span class="eyebrow">🐾 Fiche animal · Corneille noire · #845</span><h2>Gaston</h2><div class="meta"><span>2025</span><span>Sexe : <b>♂ mâle</b></span></div><div style="margin-top:8px"><span class="chipbtn">＋ Nouvelle observation <small>· vu il y a 2 j</small></span></div></div><div class="rtools"><div class="rstat"><span class="b y">À vérifier</span></div><div class="racts"><span class="sq">🔖</span><span class="sq d">🗑</span><span class="sq">🔓</span><span class="sq">🕘</span><span class="sq">☆</span></div></div></div><div class="pros"><span class="p">Utile en plus : dit quand il a été vu pour la dernière fois.</span><span class="m">Ressemble à une pastille de statut (K8) : on hésite à cliquer ; tient mal à côté de longs noms.</span></div></div><div class="prop"><h5><span class="pn">4</span>Une bande d’actions rapides sous l’en-tête</h5><div class="rh"><span class="por bird">🐦</span><div><span class="eyebrow">🐾 Fiche animal · Corneille noire · #845</span><h2>Gaston</h2><div class="meta"><span>2025</span><span>Sexe : <b>♂ mâle</b></span></div></div><div class="rtools"><div class="rstat"><span class="b y">À vérifier</span></div><div class="racts"><span class="sq">🔖</span><span class="sq d">🗑</span><span class="sq">🔓</span><span class="sq">🕘</span><span class="sq">☆</span></div></div></div><div class="qband"><span class="lb">Ajouter</span><span>👁＋ Observation</span><span>🩺＋ Santé</span><span>📍 Trajet GPS</span><span>🔖 Marque</span></div><div class="pros"><span class="p">Les quatre ajouts du suivi d’un coup, avec leur nom ; parfait pour un bagueur ou un centre de soins.</span><span class="m">Une barre de plus sur toutes les fiches d’animaux, même le chat de la famille qui n’en a pas besoin.</span></div></div><div class="prop"><h5><span class="pn">5</span>Un bouton rond flottant en bas à droite (fiches d’animaux)</h5><div class="fabwrap"><div class="rh"><span class="por bird">🐦</span><div><span class="eyebrow">🐾 Fiche animal · Corneille noire · #845</span><h2>Gaston</h2><div class="meta"><span>2025</span><span>Sexe : <b>♂ mâle</b></span></div></div><div class="rtools"><div class="rstat"><span class="b y">À vérifier</span></div><div class="racts"><span class="sq">🔖</span><span class="sq d">🗑</span><span class="sq">🔓</span><span class="sq">🕘</span><span class="sq">☆</span></div></div></div><div class="ghost"></div><div class="ghost"></div><span class="fab">👁＋<small>＋ Nouvelle observation</small></span></div><div class="pros"><span class="p">Toujours sous la main, même en bas de la fiche ; pratique au doigt, sur le terrain.</span><span class="m">Façon téléphone, pas façon LCNDA ; cache un bout de bloc et peut gêner le message H7 en bas.</span></div></div><div class="prop rec"><h5><span class="pn">6</span>Le carré 👁＋ et la touche O <span class="b bl">Recommandé</span></h5><div class="rh"><span class="por bird">🐦</span><div><span class="eyebrow">🐾 Fiche animal · Corneille noire · #845</span><h2>Gaston</h2><div class="meta"><span>2025</span><span>Sexe : <b>♂ mâle</b></span></div></div><div class="rtools"><div class="rstat"><span class="b y">À vérifier</span></div><div class="racts"><span class="sq new">👁＋<span class="tip">＋ Nouvelle observation <kbd>O</kbd></span></span><span class="sq">🔖</span><span class="sq d">🗑</span><span class="sq">🔓</span><span class="sq">🕘</span><span class="sq">☆</span></div></div></div><div class="pros"><span class="p">Comme (1), plus une touche : O ouvre la fenêtre « Nouvelle observation » depuis n’importe où dans la fiche.</span><span class="m">La touche ne se voit que dans la bulle et la page Raccourcis ; à éviter dans une case de texte (ignorée là).</span></div></div></div>
+ <div class="rec-box"><b class="t">Ma recommandation : (6), le carré 👁＋ en premier + la touche O</b>Il ne crée aucun nouveau modèle : c’est un bouton de la grille comme les autres, mais bleu et en premier parce que c’est l’action la plus fréquente sur un animal suivi. Il n’apparaît que sur les fiches d’animaux. Pour qui fait beaucoup de suivi, on peut ajouter <b>en plus</b> la bande (4), éteinte au départ (interrupteur « Bande d’actions rapides du suivi » dans le réglage des animaux).</div>
+ <p class="note">L’ordre et la visibilité de ces boutons suivent le réglage qui existe déjà, « Ordre et visibilité des boutons » (Maintenance → Apparence → Fiches personnes et animaux, liste <code>HEAD_BUTTONS</code> de <code>assets/js/app-apparence.js</code>) : le nouveau bouton y devient une ligne de plus (⠿, 👁, « 👁＋ Nouvelle observation (animaux) »), placée en premier au départ ; on peut le descendre ou le cacher. La disposition en une ou deux colonnes reste celle du réglage. La touche O va dans la page Raccourcis (réglable) et s’écrit dans la bulle K12.</p>
+</div>
+
+</div>
+</body></html>
