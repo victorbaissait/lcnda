@@ -12,7 +12,12 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *     changement visible ; éditeur « Comme avant » et « Nouveau » (largeur, 👁, Déplacer vers, nouvelle section, supprimer +
  *     ↶ Annuler, glisser, Alt + ↑ / ↓) ; exception par fiche ; A4 déplacé et toujours appliqué ; fiche animal unique (anciens liens,
  *     blocs du suivi) ; ＋ Nouvelle observation dans chaque place + touche O ; Vu la dernière fois (4 pastilles, seuils) ;
- *     390 px ; sombre ; mode consultation en lecture seule ; aucune erreur JavaScript.
+ *     390 px ; sombre ; mode consultation en lecture seule ; aucune erreur JavaScript ;
+ *  5. l'adresse retient la section (« #personnes/12/famille ») : onglet → adresse → rechargement → même onglet, ← → du navigateur,
+ *     anciennes adresses, section inconnue, autres styles (dépliée et à l'écran), nouvelle fenêtre ;
+ *  6. l'aperçu des Réglages = la vraie fiche en petit, qui suit le style et l'ordre sans rien envoyer (aucun POST) ; repli base vide ;
+ *  7. supprimer la fiche d'un animal emporte l'animal et son suivi (rien ne reste dans les tables), « Restaurer » rend tout ;
+ *     liste Animaux → 🗑 ; animal resté seul : « ↺ La rétablir » / « 🗑 Supprimer l'animal » au lieu d'une fiche refaite en silence.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -72,6 +77,13 @@ function engine(store = {}) {
         const v = JSON.parse(store['genealogie-person-blocks']);
         assert.deepEqual(v.hidden, ['events']); assert.equal(v.widths.notes, '6'); assert.equal(v.assign.notes, 's_new'); assert.ok(v.sections.some(s => s.name === 'Métier'));
         assert.ok(v.order.includes('animal_marks'), 'les blocs des animaux restent dans l’ordre gardé');
+    });
+    await t('adresse : le nom de la section sans accents (ou son identifiant), « tout », inconnue = rien', () => {
+        const {S} = engine();
+        assert.equal(S.slugOf('Bagues et marques'), 'bagues-et-marques'); assert.equal(S.slugOf('Identité'), 'identite'); assert.equal(S.slugOf('Santé'), 'sante');
+        const secs = S.model('animal', 0).sections;
+        assert.equal(S.secFromSlug(secs, 'sante'), 's_health'); assert.equal(S.secFromSlug(secs, 's_marks'), 's_marks'); assert.equal(S.secFromSlug(secs, 'marks'), 's_marks');
+        assert.equal(S.secFromSlug(secs, 'tout'), '__all'); assert.equal(S.secFromSlug(secs, 'nimporte-quoi'), null); assert.equal(S.secFromSlug(secs, ''), null);
     });
     await t('l’ancien « ordre des parties » de la page simple est repris dans les blocs des animaux', () => {
         const {S, store} = engine({'genealogie-pet-sections': JSON.stringify({order: ['photos', 'identity', 'notes'], hidden: ['notes']})});
@@ -156,6 +168,55 @@ echo 'ok';`);
         await post('suivi_write', {op: 'save_mark', pet_id: 502, kind: 'color_rings', colors: {L: [{color: '#1a8a3a', name: 'vert'}, null], R: [{color: '#d7262e', name: 'rouge', code: '7K'}, null]}, start_date: '12/05/2025'});
         const obs = await post('suivi_write', {op: 'save_obs', pet_id: 502, date: yFr, time: '17:40', place_text: 'Buttes-Chaumont', observer_txt: 'Antoine LEROY', reliability: 'full'});
         ids.obs = obs.result?.id;
+
+        /* ── 7. 🗑 l'animal part avec sa fiche (et revient avec elle) ── */
+        const animalWithSuivi = async name => {
+            const sv = await post('save_pet', {id: 0, data: {name, species: 'oiseau', sex: 'M', owners: [{person_id: 2, name: 'Antoine LEROY', role: 'propriétaire'}], titles: [], vaccines: [], tests: [], measures: [], events: []}});
+            const petId = Number(sv.result.id), pid = Number(sv.result.person_id);
+            await post('suivi_write', {op: 'save_profile', pet_id: petId, taxon: 'Pie bavarde', profile: 'oiseau', status: 'suivi'});
+            await post('suivi_write', {op: 'save_mark', pet_id: petId, kind: 'metal_ring', code: 'FRP 1234', start_date: '01/02/2025'});
+            await post('suivi_write', {op: 'save_obs', pet_id: petId, date: '02/02/2025', place_text: 'Jardin', reliability: 'full'});
+            await post('suivi_write', {op: 'save_health', pet_id: petId, date: '03/02/2025', what_text: 'aile'});
+            const g = await post('suivi_write', {op: 'save_group', name: `Bande de ${name}`});
+            await post('suivi_write', {op: 'save_member', pet_id: petId, group_id: g.result.id, start_date: '2025'});
+            await post('suivi_write', {op: 'gps_import', pet_id: petId, filename: 'vol.gpx', format: 'gpx', points: [[1735725600, 48.85, 2.35], [1735729200, 48.86, 2.36]]});
+            return {petId, pid};
+        };
+        const TABLES = {pets: 'id', pet_people: 'pet_id', animal_profiles: 'pet_id', animal_marks: 'pet_id', animal_observations: 'pet_id', animal_health: 'pet_id', animal_memberships: 'pet_id', animal_gps: 'pet_id', animal_gps_imports: 'pet_id'};
+        const counts = (petId, pid) => JSON.parse(php(String.raw`require 'lib/bootstrap.php'; $p = db(); $o = []; foreach (json_decode('${JSON.stringify(TABLES)}', true) as $t => $c) { $o[$t] = (int) $p->query("SELECT count(*) FROM $t WHERE $c=${petId}")->fetchColumn(); } $o['person'] = (int) $p->query('SELECT count(*) FROM persons WHERE id=${pid || 0}')->fetchColumn(); echo json_encode($o);`).stdout);
+        await t('🗑 supprimer la fiche d’un animal : l’animal et tout son suivi partent (rien ne reste dans les tables) ; « Restaurer » rend tout', async () => {
+            const {petId, pid} = await animalWithSuivi('Gaspard'); ids.gaspard = {petId, pid};
+            const before = counts(petId, pid);
+            Object.entries(before).forEach(([k, n]) => assert.ok(n >= 1, `${k} avant : ${n}`));
+            const del = await post('delete_person', {id: pid}); assert.ok(del.ok, JSON.stringify(del));
+            const after = counts(petId, pid);
+            Object.entries(after).forEach(([k, n]) => assert.equal(n, 0, `${k} après : ${n}`));
+            assert.ok(!(await get('pets')).pets.some(x => x.id === petId), 'plus dans la liste des animaux');
+            const ch = (await get('changes')).changes.find(c => c.entity_type === 'person' && Number(c.entity_id) === pid && c.action === 'delete');
+            assert.ok(ch?.restore_available, 'restaurable depuis le journal');
+            const rs = await post('restore_change', {id: ch.id}); assert.ok(rs.ok, JSON.stringify(rs));
+            assert.deepEqual(counts(petId, pid), before, 'fiche + animal + suivi rendus');
+            assert.equal(Number((await get('pet', {id: petId})).person_id), pid, 'l’animal retrouve sa fiche');
+            assert.equal((await get('person', {id: pid})).person.kind, 'animal');
+        });
+        await t('🗑 liste Animaux (pet_trash) : même chose ; un animal resté seul se supprime aussi, et revient par « Restaurer »', async () => {
+            const {petId, pid} = ids.gaspard, before = counts(petId, pid);
+            const r = await post('pet_trash', {id: petId}); assert.ok(r.ok, JSON.stringify(r)); assert.equal(r.result.entity_type, 'person');
+            Object.entries(counts(petId, pid)).forEach(([k, n]) => assert.equal(n, 0, k));
+            const ch = (await get('changes')).changes.find(c => c.entity_type === 'person' && Number(c.entity_id) === pid && c.action === 'delete');
+            assert.ok((await post('restore_change', {id: ch.id})).ok); assert.deepEqual(counts(petId, pid), before);
+            // un animal resté seul (fiche supprimée avant le correctif) : simulé comme l'ancien code (pet_detach_person)
+            const o = await animalWithSuivi('Zéphyr'); ids.zephyr = o;
+            php(String.raw`require 'lib/bootstrap.php'; $p = db(); $p->exec('DELETE FROM persons WHERE id=${o.pid}'); $p->exec('UPDATE pets SET person_id=NULL WHERE id=${o.petId}'); echo 'ok';`);
+            assert.equal(Number((await get('pet', {id: o.petId})).person_id), 0);
+            const b2 = counts(o.petId, 0);
+            const r2 = await post('pet_trash', {id: o.petId}); assert.ok(r2.ok, JSON.stringify(r2)); assert.equal(r2.result.entity_type, 'pet');
+            Object.entries(counts(o.petId, 0)).forEach(([k, n]) => assert.equal(n, 0, k));
+            const ch2 = (await get('changes')).changes.find(c => c.entity_type === 'pet' && Number(c.entity_id) === o.petId && c.action === 'delete');
+            assert.ok(ch2?.restore_available); assert.match(ch2.entity_label, /Zéphyr/);
+            assert.ok((await post('restore_change', {id: ch2.id})).ok); assert.deepEqual(counts(o.petId, 0), b2);
+            assert.equal(Number((await get('pet', {id: o.petId})).person_id), 0, 'toujours sans fiche : le navigateur demandera');
+        });
 
         if (!chromium) { console.log('— navigateur : Playwright absent, partie sautée'); return; }
         const browser = await chromium.launch();
@@ -433,6 +494,124 @@ echo 'ok';`);
                 await p.click('.fsec [data-fsec-fold]'); await p.keyboard.press('o'); await p.waitForTimeout(400);
                 assert.deepEqual(posts, []);
                 await p.close();
+            });
+            /* ── 5. l'adresse retient la section ── */
+            const hashNow = p => p.evaluate(() => location.hash);
+            const activeTab = p => p.$eval('#workspace .fsec-tab.is-active', e => e.dataset.fsecTab);
+            await t('adresse (onglets) : ouvrir un onglet → « #personnes/1/famille » ; rechargement et nouvelle fenêtre → même onglet ; pas d’entrée en double', async () => {
+                await setLS(page, 'genealogie-sheet-sections', {style: 'tabs'}); await toPerson(page, 1); await page.waitForSelector('.fsec-tab');
+                const len0 = await page.evaluate(() => history.length);
+                await page.click('.fsec-tab[data-fsec-tab="s_family"]'); assert.equal(await hashNow(page), '#personnes/1/famille');
+                await page.click('.fsec-tab[data-fsec-tab="s_docs"]'); assert.equal(await hashNow(page), '#personnes/1/documents');
+                assert.equal(await page.evaluate(() => history.length), len0, 'un clic d’onglet remplace l’adresse');
+                await page.click('.fsec-tab[data-fsec-tab="s_family"]');
+                await setLS(page, 'lcnda-sheet-tab', {human: 's_ident'}); // l'onglet retenu dit autre chose : c'est l'adresse qui gagne
+                await page.reload({waitUntil: 'load'}); await page.waitForSelector('#workspace .fsec-tab.is-active');
+                assert.equal(await activeTab(page), 's_family'); assert.equal(await page.evaluate(() => window.LCNDA_APP.state.currentPersonId), 1);
+                const p2 = await browser.newPage({viewport: {width: 1280, height: 900}}); p2.on('pageerror', e => errs.push(`fenêtre : ${e.message}`));
+                await p2.route(u => !u.toString().startsWith(base), rt => rt.abort());
+                await p2.goto(base + '#personnes/2/documents', {waitUntil: 'load'}); await p2.waitForSelector('#workspace .fsec-tab.is-active');
+                assert.equal(await p2.evaluate(() => window.LCNDA_APP.state.currentPersonId), 2); assert.equal(await activeTab(p2), 's_docs');
+                await shot(p2, 'adresse-onglet'); await p2.close();
+            });
+            await t('adresse : ← → du navigateur entre deux fiches (une entrée par fiche), et entre deux onglets d’une même fiche par un lien', async () => {
+                await toPerson(page, 1); await page.waitForSelector('.fsec-tab'); await page.click('.fsec-tab[data-fsec-tab="s_family"]');
+                const len0 = await page.evaluate(() => history.length);
+                await page.click('.person-list-item[data-person-id="2"]'); await page.waitForFunction(() => /^#personnes\/2(\/|$)/.test(location.hash) && document.querySelector('.person-page h2'));
+                assert.equal(await page.evaluate(() => history.length), len0 + 1, 'une autre fiche = une entrée');
+                await page.goBack(); await page.waitForFunction(() => window.LCNDA_APP.state.currentPersonId === 1 && document.querySelector('#workspace .fsec-tab.is-active'));
+                assert.equal(await hashNow(page), '#personnes/1/famille'); assert.equal(await activeTab(page), 's_family');
+                await page.goForward(); await page.waitForFunction(() => window.LCNDA_APP.state.currentPerson?.person?.id === 2 && document.querySelector('#workspace .fsec-wrap[data-fsec-person="2"] .fsec-tab.is-active'));
+                await page.evaluate(() => { location.hash = '#personnes/2/vie'; }); await page.waitForFunction(() => document.querySelector('#workspace .fsec-tab.is-active')?.dataset.fsecTab === 's_life');
+                await page.goBack(); await page.waitForFunction(() => document.querySelector('#workspace .fsec-tab.is-active')?.dataset.fsecTab !== 's_life');
+                assert.equal(await page.evaluate(() => window.LCNDA_APP.state.currentPersonId), 2, 'même fiche, pas redemandée');
+            });
+            await t('adresse : anciennes adresses (?person=, #personnes, #pet/…/vue), section inconnue = onglet par défaut sans erreur', async () => {
+                await page.goto(base + '?person=2#personnes', {waitUntil: 'load'}); await page.waitForFunction(() => window.LCNDA_APP?.state?.currentPersonId === 2 && document.querySelector('.person-page'));
+                assert.match(await hashNow(page), /^#personnes\/2/); assert.equal(await page.evaluate(() => location.search), '', '« ?person= » remplacé par l’adresse nouvelle');
+                await page.goto(base + '#personnes', {waitUntil: 'load'}); await page.waitForFunction(() => /^#personnes\/2/.test(location.hash) && document.querySelector('#workspace .fsec-wrap[data-fsec-person="2"]'));
+                await setLS(page, 'lcnda-sheet-tab', {human: 's_ident'});
+                await page.goto(base + '#personnes/1/nimporte-quoi', {waitUntil: 'load'}); await page.waitForFunction(() => document.querySelector('#workspace .fsec-wrap[data-fsec-person="1"] .fsec-tab.is-active') && !/nimporte/.test(location.hash));
+                assert.equal(await activeTab(page), 's_ident', 'section inconnue : l’onglet par défaut'); assert.equal(await hashNow(page), '#personnes/1/identite');
+                await page.evaluate(() => { location.hash = '#pet/502/sante'; });
+                await page.waitForFunction(i => window.LCNDA_APP.state.currentPersonId === i && document.querySelector('#workspace .fsec-tab.is-active')?.dataset.fsecTab === 's_health', ids.gaston);
+                assert.equal(await hashNow(page), `#personnes/${ids.gaston}/sante`);
+            });
+            await t('adresse (autres styles) : la section demandée est dépliée et à l’écran', async () => {
+                await setLS(page, 'genealogie-sheet-sections', {style: 'line'}); await setLS(page, 'lcnda-sheet-sections-open', {human: {s_docs: true}});
+                await page.goto(base + '#personnes/1/documents', {waitUntil: 'load'}); await page.waitForSelector('.fsec[data-fsec="s_docs"]');
+                await page.waitForFunction(() => { const s = document.querySelector('.fsec[data-fsec="s_docs"]'); const r = s.getBoundingClientRect(); return !s.classList.contains('is-folded') && r.top < innerHeight && r.bottom > 0; });
+                assert.equal(await hashNow(page), '#personnes/1/documents');
+                await setLS(page, 'lcnda-sheet-sections-open', null); await setLS(page, 'genealogie-sheet-sections', null); await setLS(page, 'lcnda-sheet-tab', null);
+            });
+
+            /* ── 6. l'aperçu des Réglages : la vraie fiche ── */
+            const inLive = (p, fn, arg) => p.evaluate(([f, a]) => { const d = document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument; return d ? new Function('d', 'a', `return (${f})(d, a)`)(d, a) : null; }, [fn.toString(), arg]);
+            await t('aperçu : la vraie fiche (ses blocs), qui suit le style et l’ordre tout de suite, sans aucun POST ; « ↗ Ouvrir cette fiche »', async () => {
+                await toPerson(page, 2); await toSheets(page);
+                const posts = []; const onReq = q => { if (q.method() !== 'GET') posts.push(q.url()); }; page.on('request', onReq);
+                await page.waitForFunction(() => document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument?.querySelector('.person-page [data-pblock]'));
+                assert.match(await inLive(page, d => d.querySelector('.person-page h2').textContent), /Antoine/, 'la fiche ouverte en dernier');
+                assert.ok(await inLive(page, d => d.querySelectorAll('.fsec-wrap .fsec').length) >= 3, 'ses sections');
+                assert.equal(await page.$eval('[data-fsec-live] iframe.lcd-frame', f => getComputedStyle(f).pointerEvents), 'none', 'lecture seule');
+                assert.match(await page.$eval('[data-fsec-live] iframe.lcd-frame', f => f.style.transform), /scale\(/);
+                await page.click('#fsec-cfg [data-fsec-opt="style"][data-v="tabs"]');
+                await page.waitForFunction(() => document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument?.querySelector('.fsec-wrap.is-tabs .fsec-tab'));
+                const order0 = await inLive(page, d => [...d.querySelectorAll('.fsec-wrap > .fsec:not([hidden]) [data-pblock]')].map(x => x.dataset.pblock));
+                await page.click('#fsec-cfg [data-fsec-opt="style"][data-v="line"]');
+                await page.waitForFunction(() => document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument?.querySelector('.fsec-wrap.is-line'));
+                const ed = '#fsec-blocks [data-fsec-editor="0"]', first = order0[0];
+                await page.focus(`${ed} [data-fsed-block="${first}"] [data-fsed-grip]`); await page.keyboard.press('Alt+ArrowDown');
+                await page.waitForFunction(f => { const d = document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument; const l = d ? [...d.querySelectorAll('.fsec-wrap [data-pblock]')].map(x => x.dataset.pblock) : []; return l.length && l[0] !== f; }, first);
+                await page.click(`${ed} [data-fsed-block="notes"] [data-fsed-width="6"]`);
+                await page.waitForFunction(() => document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument?.querySelector('[data-pblock="notes"].span-6'));
+                await shot(page, 'apercu-reel');
+                page.off('request', onReq);
+                assert.deepEqual(posts.filter(u => !/save_settings/.test(u)), [], 'aucun POST');
+                await page.click('[data-fsec-live-open]'); await page.waitForFunction(() => window.LCNDA_APP.state.module === 'personnes' && window.LCNDA_APP.state.currentPersonId === 2);
+                await setLS(page, 'genealogie-person-blocks', null); await setLS(page, 'genealogie-sheet-sections', null);
+            });
+            await t('aperçu : « Aperçu avec » (menu de choix), « 🐾 Animaux » = un animal ; base vide → le petit dessin et la petite ligne', async () => {
+                await toSheets(page); await page.waitForSelector('[data-fsec-live] .pk');
+                await page.waitForSelector('[data-fsec-live] .pk [data-pk="remove"]'); await page.click('[data-fsec-live] .pk [data-pk="remove"]');
+                await page.fill('[data-fsec-live] .pk-input', 'Jeanne'); await page.waitForSelector('[data-fsec-live] .pk-item.pk-row'); await page.click('[data-fsec-live] .pk-item.pk-row');
+                await page.waitForFunction(() => /Jeanne/.test(document.querySelector('[data-fsec-live] iframe.lcd-frame:not(.is-loading)')?.contentDocument?.querySelector('.person-page h2')?.textContent || ''));
+                await page.click('#fsec-cfg [data-fsec-opt="kind"][data-v="animal"]');
+                await page.waitForFunction(() => document.querySelector('[data-fsec-live="animal"] iframe.lcd-frame:not(.is-loading)')?.contentDocument?.querySelector('.person-page [data-pblock="animal"]'));
+                assert.deepEqual(await page.evaluate(() => { const o = JSON.parse(document.querySelector('[data-fsec-live] .pk').dataset.pkOpts); return [o.animals]; }), [2], 'seulement les animaux');
+                await shot(page, 'apercu-animal');
+                await page.click('#fsec-cfg [data-fsec-opt="kind"][data-v="human"]');
+                // base vide (simulée) : le dessin d'avant et la petite ligne K10
+                await page.evaluate(() => { const A = window.LCNDA_APP; window.__api = A.api; A.api = async (a, q, o) => { if (a === 'person' || a === 'people') return a === 'people' ? {people: []} : Promise.reject(new Error('introuvable')); return window.__api(a, q, o); }; window.LCNDA_SECTIONS._liveReset(); A.state.lastHumanId = 0; A.state.currentPersonId = 0; window.LCNDA_SECTIONS.refreshLive(0); });
+                await page.waitForSelector('[data-fsec-live] [data-fsec-live-none]:not([hidden]) .empty-line'); assert.ok(await page.locator('[data-fsec-live] [data-fsec-live-none] .fsec-pv').count());
+                await page.evaluate(() => { window.LCNDA_APP.api = window.__api; window.LCNDA_SECTIONS._liveReset(); });
+            });
+
+            /* ── 7 (navigateur). supprimer un animal ── */
+            await t('🗑 fiche d’un animal : la même question (avec « marques, observations… »), l’animal part ; animal resté seul : la question au lieu d’une fiche refaite', async () => {
+                const g = ids.gaspard;
+                await toPerson(page, g.pid); await page.waitForSelector('.person-page [data-delete-person]');
+                await page.click('.person-page [data-delete-person]');
+                await page.waitForSelector('dialog[open]'); const txt = await page.textContent('dialog[open]');
+                assert.match(txt, /Supprimer Gaspard et tout ce qui s’y rattache \(marques, observations, santé, groupe, trajets\)/);
+                await page.fill('dialog[open] input', 'SUPPRIMER'); await page.click('dialog[open] [data-ask-ok]');
+                await page.waitForFunction(i => !document.querySelector(`.person-list-item[data-person-id="${i}"]`) && window.LCNDA_APP.state.currentPersonId !== i, g.pid);
+                Object.entries(counts(g.petId, g.pid)).forEach(([k, n]) => assert.equal(n, 0, k));
+                // l'animal resté seul (Zéphyr) : on demande
+                await page.evaluate(i => window.LCNDA_EXT.openPet(i), ids.zephyr.petId);
+                await page.waitForSelector('dialog[open] [data-pet-orphan]'); assert.match(await page.textContent('dialog[open] h2'), /Cette fiche a été supprimée/);
+                assert.ok(await page.locator('dialog[open] button:has-text("↺ La rétablir")').count()); assert.ok(await page.locator('dialog[open] button:has-text("🗑 Supprimer l’animal")').count());
+                assert.equal(Number((await get('pet', {id: ids.zephyr.petId})).person_id), 0, 'pas de fiche refaite en silence');
+                await shot(page, 'animal-orphelin');
+                await page.click('dialog[open] button:has-text("↺ La rétablir")');
+                await page.waitForFunction(() => window.LCNDA_APP.state.currentPerson?.person?.kind === 'animal' && /Zéphyr/.test(document.querySelector('.person-page h2')?.textContent || ''));
+                // liste Animaux → ⋯ → 🗑 Supprimer
+                await page.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'pets'; A.state.hPet = 0; return A.setModule('listes'); });
+                await page.waitForSelector(`[data-pet-del="${ids.zephyr.petId}"]`, {state: 'attached'});
+                await page.$eval(`[data-pet-del="${ids.zephyr.petId}"]`, b => b.click());
+                await page.waitForSelector('dialog[open]'); await page.fill('dialog[open] input', 'SUPPRIMER'); await page.click('dialog[open] [data-ask-ok]');
+                await page.waitForFunction(i => !document.querySelector(`[data-pet-open="${i}"]`), ids.zephyr.petId);
+                assert.equal(counts(ids.zephyr.petId, 0).pets, 0);
             });
             await t('aucune erreur JavaScript ; nom piégé échappé', async () => { assert.equal(await page.evaluate(() => window.__xss), undefined); assert.deepEqual(errs, []); });
         } finally { await browser.close(); }

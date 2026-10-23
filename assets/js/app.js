@@ -827,7 +827,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const ANIMAL_BLOCKS=['animal','animal_parents','animal_offspring','animal_siblings','animal_owners','animal_titles','animal_marks','animal_obs','animal_health','animal_group','animal_map','animal_life','animal_story','animal_custom']; // 🐾 fiche animal unique : « identification » est dans les caractéristiques, « poids et taille » dans la santé
     // la disposition de départ des fiches d'animaux (avant tout réglage) : ordre, blocs cachés, largeurs
     const ANIMAL_BLOCKS0={'order':['identity','animal','animal_parents','animal_offspring','animal_siblings','animal_owners','animal_titles','animal_marks','animal_obs','animal_health','animal_group','animal_map','animal_life','animal_story','animal_custom','web_search','family_objects','family_memories','events','ascendants','descendants','media','correspondance','memories','notes','census','sources','refs','maternity','investigations','signatures','event_map','completion','bio','military','cemetery','artistic_works','voyages','placements','heraldry','poilu','probate','family_papers_block','languages','resistance','voter','booklets','boards','pets','custom_blocks','mentions','recueils','person_exports'],'hidden':['web_search','family_objects','family_memories','correspondance','census','maternity','signatures','military','voter','booklets','pets'],'widths':{'identity':'4','animal':'4','animal_parents':'4','animal_offspring':'4','animal_siblings':'4','animal_owners':'4','animal_titles':'4','animal_marks':'12','animal_obs':'12','animal_health':'12','animal_group':'12','animal_map':'12','animal_life':'4','animal_story':'4','animal_custom':'4','web_search':'12','family_objects':'12','family_memories':'12','events':'4','ascendants':'4','descendants':'4','media':'12','correspondance':'12','memories':'12','notes':'4','census':'12','sources':'4','refs':'4','maternity':'12','investigations':'4','signatures':'12','event_map':'6','completion':'6','bio':'12','military':'12','cemetery':'12','artistic_works':'12','voyages':'12','placements':'12','heraldry':'6','poilu':'12','probate':'12','family_papers_block':'6','languages':'6','resistance':'6','voter':'12','booklets':'12','boards':'6','pets':'6','custom_blocks':'6','mentions':'6','recueils':'6','person_exports':'6'}};
-    const blockKindOf=personId=>personId&&Number(personId)===Number(state.currentPersonId)&&state.currentPersonKind==='animal'?'animal':'human';
+    let blockKindPreview=null; // 🗂 l'aperçu d'une autre fiche (Réglages → Fiches) : sa sorte à elle, le temps de la dessiner
+    const blockKindOf=personId=>blockKindPreview&&Number(personId)===blockKindPreview.id?blockKindPreview.kind:personId&&Number(personId)===Number(state.currentPersonId)&&state.currentPersonKind==='animal'?'animal':'human';
     const blockBaseKey=kind=>kind==='animal'?'genealogie-animal-blocks':'genealogie-person-blocks';
     function personBlockSettings(personId=0,kind=blockKindOf(personId)){const baseKey=blockBaseKey(kind);const defaults=defaultPersonBlocks.map(item=>item[0]);let settings={order:defaults,hidden:[],hideEmptyIdentity:false,widths:{}};if(kind==='animal')settings={...settings,order:[...ANIMAL_BLOCKS0.order],hidden:[...ANIMAL_BLOCKS0.hidden],widths:{...ANIMAL_BLOCKS0.widths}};try{settings={...settings,...JSON.parse(localStorage.getItem(baseKey)||'{}')};}catch(_){}if(personId){try{settings={...settings,...JSON.parse(localStorage.getItem(`genealogie-person-blocks-${personId}`)||'{}')};}catch(_){}}settings.order=[...(settings.order||[]).filter(key=>defaults.includes(key)),...defaults.filter(key=>!(settings.order||[]).includes(key))];settings.hidden=(settings.hidden||[]).filter(key=>defaults.includes(key));
         // Blocs ajoutés le 2026-10-08 : masqués tant qu'ils n'ont jamais été réglés dans Apparence
@@ -1833,7 +1834,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             applySiteDefaults(state.bootstrap.siteDefaults,false);
             applyMenuOrder();
             if(!IS_SECONDARY)setupAutoBackupTimer();
-            const urlPersonId = Number(new URLSearchParams(location.search).get('person')) || 0;
+            // « #personnes/12/famille » (et l'ancienne « ?person=12#personnes ») : la fiche demandée, sur sa section
+            const bootRoute = routeFromHash(location.hash);
+            const urlPersonId = (bootRoute?.module === 'personnes' && bootRoute.personId) || Number(new URLSearchParams(location.search).get('person')) || 0;
+            if (bootRoute?.personId && bootRoute.section) state.sheetHash = {id: bootRoute.personId, slug: bootRoute.section, pending: true};
             state.currentPersonId = urlPersonId || Number(state.currentPersonId) || state.bootstrap.startPersonId;
             $('#app').classList.toggle('sidebar-collapsed',Boolean(persisted.sidebarCollapsed));
             if(IS_SECONDARY){applyViewSnapshot(SECONDARY_VIEW);document.documentElement.classList.toggle('is-embedded',IS_EMBEDDED);
@@ -2168,12 +2172,29 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         });
         $('#sidebar-toggle').addEventListener('click', () => { $('#app').classList.add('sidebar-collapsed'); persistUiState(); });
         $('#sidebar-reopen').addEventListener('click', () => { $('#app').classList.remove('sidebar-collapsed'); persistUiState(); });
-        window.addEventListener('hashchange', () => {
+        // l'adresse change (lien, ← → du navigateur) : popstate et hashchange arrivent souvent tous les deux, une seule fois suffit
+        const onRouteEvent=()=>{
+            const href=location.href,now=Date.now();
+            if(onRouteEvent.href===href&&now-onRouteEvent.at<250)return;
+            onRouteEvent.href=href;onRouteEvent.at=now;
             const route=routeFromHash(location.hash);
             if(route?.maintenanceTab)state.maintenanceTab=route.maintenanceTab;
         if(route?.module==='dashboard')state.dashboardBoard=route.board||'';
+            // 🗂 « #personnes/12/famille » : la fiche n° 12, sur sa section (sans tout redessiner si c'est la fiche ouverte)
+            if(route?.module==='personnes'&&route.personId){
+                state.sheetHash={id:route.personId,slug:route.section||'',pending:true};
+                if(state.module==='personnes'&&state.hasRendered){
+                    if(route.personId===Number(state.currentPersonId)&&Number(state.currentPerson?.person?.id)===route.personId&&window.LCNDA_SECTIONS?.applyRoute){window.LCNDA_SECTIONS.applyRoute();return;}
+                    personRouteNav=true;
+                    try{selectPerson(route.personId,true).catch(error=>toast(error.message,'error'));}finally{personRouteNav=false;}
+                    return;
+                }
+                state.currentPersonId=route.personId;
+            }
             setModule(route?.module || state.module || 'dashboard', false);
-        });
+        };
+        window.addEventListener('hashchange',onRouteEvent);
+        window.addEventListener('popstate',onRouteEvent);
         $('#workspace').addEventListener('scroll',debounce(saveScrollPosition,120));
         $('#sidebar-content').addEventListener('scroll',debounce(saveScrollPosition,120));
         window.addEventListener('beforeunload',()=>{saveCurrentRoute();saveScrollPosition();});
@@ -2210,6 +2231,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const hash=moduleHash(module);
         saveLastRoute(hash);
         updateBrowserRoute(hash,pushHash,module);
+        state.personRouteFresh=module==='personnes'; // la fiche choisie juste après remplace cette adresse (pas deux entrées)
         markNavActive();
         const ownTab = module === 'dashboard' ? currentCustomTab() : null;
         $('#sidebar-index').textContent = ownTab ? 'MON ONGLET' : modules[module][0];
@@ -2259,7 +2281,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const parts=raw.split('/').map(part=>part.trim()).filter(Boolean);
         const module=parts[0]||'';
         if(!modules[module])return null;
-        return {module,maintenanceTab:module==='maintenance'&&parts[1]?parts[1]:'',board:module==='dashboard'&&CUSTOM_TAB_ID.test(parts[1]||'')?parts[1]:''};
+        // 🗂 « #personnes/12 » et « #personnes/12/famille » : la fiche et sa section (nom sans accents, ou identifiant stable)
+        const sheet=module==='personnes'&&/^\d{1,10}$/.test(parts[1]||'')?{personId:Number(parts[1]),section:String(parts[2]||'').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,60)}:{personId:0,section:''};
+        return {module,maintenanceTab:module==='maintenance'&&parts[1]?parts[1]:'',board:module==='dashboard'&&CUSTOM_TAB_ID.test(parts[1]||'')?parts[1]:'',...sheet};
     }
 
     function markNavActive(){const module=state.module,shown=module==='personnes'&&state.peopleScope==='animals'?'animaux':module;$$('.nav-item').forEach(button => button.classList.toggle('is-active', button.dataset.module === shown && (module !== 'dashboard' || (button.dataset.board || '') === (state.dashboardBoard || ''))));}
@@ -2274,6 +2298,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function moduleHash(module=state.module){
         if(module==='maintenance')return `#maintenance/${encodeURIComponent(state.maintenanceTab||'issues')}`;
         if(module==='dashboard'&&state.dashboardBoard)return `#dashboard/${encodeURIComponent(state.dashboardBoard)}`;
+        if(module==='personnes'&&Number(state.currentPersonId)){const id=Number(state.currentPersonId),sh=state.sheetHash;return `#personnes/${id}${sh&&Number(sh.id)===id&&sh.slug?`/${encodeURIComponent(sh.slug)}`:''}`;}
         return `#${module}`;
     }
 
@@ -2462,15 +2487,29 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     function getDesignEventDisplayMode(){try{const d=readDesignSettings();return d.eventDisplayMode||'all_mixed';}catch(_){return 'all_mixed';}}
 
-    let personSeq=0;
+    let personSeq=0,personRouteNav=false;
+    /** 🗂 la section ouverte dans l'adresse (app-sections.js) : on remplace l'adresse, sans entrée en plus dans l'historique */
+    function setSheetRoute(id,slug){
+        id=Number(id);if(state.module!=='personnes'||!id||id!==Number(state.currentPersonId))return;
+        state.sheetHash={id,slug:String(slug||''),pending:false};
+        const url=new URL(location.href);url.searchParams.delete('person');url.hash=moduleHash('personnes').slice(1);
+        if(url.href!==location.href)history.replaceState(null,'',url);
+        saveLastRoute(moduleHash('personnes'));
+    }
     async function selectPerson(id, refreshList = true) {
         const changed=Number(id)!==Number(state.currentPersonId);
         state.currentPersonId = Number(id);
         if(state.module==='personnes'&&state.currentPersonId){
-            const url=new URL(location.href);
-            url.searchParams.set('person',String(state.currentPersonId));
-            url.hash='personnes';
-            history.replaceState(null,'',url);
+            // 🗂 l'adresse dit la fiche (et sa section) : « #personnes/12/famille ». Une autre fiche = une entrée de l'historique
+            // (← → du navigateur) ; la même fiche, ou l'adresse qu'on vient de suivre = on la remplace.
+            if(changed&&Number(state.sheetHash?.id)!==state.currentPersonId)state.sheetHash=null;
+            const url=new URL(location.href),cur=routeFromHash(location.hash);
+            url.searchParams.delete('person');
+            url.hash=moduleHash('personnes').slice(1);
+            const push=!personRouteNav&&!state.personRouteFresh&&cur?.module==='personnes'&&cur.personId&&cur.personId!==state.currentPersonId;
+            state.personRouteFresh=false;
+            if(url.href!==location.href)history[push?'pushState':'replaceState'](null,'',url);
+            saveLastRoute(moduleHash('personnes'));
         }
         if(changed)state.eventDisplayMode=getDesignEventDisplayMode();
         if(changed||refreshList)state.scrollPositions.personnes = {workspace:0,sidebar:$('#sidebar-content')?.scrollTop || 0};
@@ -2715,15 +2754,23 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         }).join('');
     }
     /** 🗂 le corps de la fiche : les blocs rangés en sections (app-sections.js) ; sinon la grille d'avant */
-    function renderPersonBody(personId,renderers){const S=window.LCNDA_SECTIONS;if(S?.renderSheet){try{return S.renderSheet(personId,blockKindOf(personId),renderers);}catch(error){console.error(error);}}return `<div class="card-grid">${renderPersonBlocks(personId,renderers)}</div>`;}
+    function renderPersonBody(personId,renderers,preview=false){const S=window.LCNDA_SECTIONS;if(S?.renderSheet){try{return S.renderSheet(personId,blockKindOf(personId),renderers,{preview});}catch(error){console.error(error);}}return `<div class="card-grid">${renderPersonBlocks(personId,renderers)}</div>`;}
+    /** 🗂 la vraie fiche en HTML, sans rien changer ni rien brancher (aperçu de Réglages → Apparence → Fiches personnes et animaux) */
+    function personPageHtml(detail){
+        if(!detail?.person)return '';
+        blockKindPreview={id:Number(detail.person.id),kind:detail.person.kind==='animal'?'animal':'human'};
+        try{return renderPerson({militaryData:{},grave:null,...detail},{htmlOnly:true});}finally{blockKindPreview=null;}
+    }
     /** la fiche ouverte redessinée sur place (sans relire la base), à la même hauteur */
     function rerenderPerson(){if(state.module!=='personnes'||!state.currentPerson)return;const ws=$('#workspace'),top=ws?.scrollTop||0;renderPerson(state.currentPerson);if(ws)ws.scrollTop=top;}
     function applyBlockWidth(html,width){return width?html.replace(/\bspan-(3|4|5|6|7|8|9|12)\b/,`span-${width}`):html;}
 
-    function renderPerson(detail) {
+    function renderPerson(detail,{htmlOnly=false}={}) {
+        if(!htmlOnly){
         state.currentPersonKind = detail?.person?.kind === 'animal' ? 'animal' : 'human';
         if (detail?.person?.id) { if (state.currentPersonKind === 'animal') state.lastAnimalId = Number(detail.person.id); else state.lastHumanId = Number(detail.person.id); }
         syncPeopleScope(detail?.person);
+        }
         const {person, estimates={}, saint=null, family_objects:personObjects=[], family_memories:personMemories=[], events, parents, partners, families=[], children, siblings=[], variants, labels=[], notes, media, signatures=[], sources, investigations=[], battues=[], hypotheses=[], evidence=[], census={}, completion={score:0,items:[]}, biography='', onlineSheets=[]} = detail;
         const birthEvent=events.find(event=>event.gedcom_tag==='BIRT');
         const isLocked=Number(person.is_locked)===1;
@@ -2911,14 +2958,16 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         Object.entries(window.LCNDA_EXT?.personBlocks||{}).forEach(([key,render])=>{personBlockRenderers[key]=index=>render(index,detail,{isLocked,editOnly});});
         const sosaNumber=sosaNumbersText(person.id);
         const dabovilleNumber=dabovilleNumberFor(person.id);
-        $('#workspace').innerHTML = `<article class="page person-page">
+        const pageHtml = `<article class="page person-page">
             <div class="person-hero">
                 ${portrait}<div><span class="eyebrow">${person.kind==='animal'?`🐾 FICHE ANIMAL${detail.heritage?.animal?.data?.species?' · '+escapeHtml(window.LCNDA_EXT?.speciesLabel?.(detail.heritage.animal.data.species)||(detail.heritage.animal.species||{})[detail.heritage.animal.data.species]||''):''}${detail.heritage?.animal?.data?.breed?' · '+escapeHtml(detail.heritage.animal.data.breed):''}`:'FICHE INDIVIDUELLE'} · #${person.id}</span><h2>${escapeHtml(personName(person))}</h2><div class="person-meta"><span>${escapeHtml(years(person))}</span><span>${person.kind==='animal'?`Sexe : <strong>${person.gender==='male'?'♂ mâle':person.gender==='female'?'♀ femelle':'?'}</strong>`:`Genre : <strong>${genderText(person.gender)}</strong>`}</span>${person.surname_group ? `<span>Groupe : <strong>${escapeHtml(person.surname_group)}</strong></span>`:''}</div></div>
                 <div class="person-hero-tools"><div class="person-hero-status">${sosaNumber?`<span class="ui-badge is-sosa" title="${sosaNumber.includes('&')?'Numéros Sosa (ancêtre présent plusieurs fois dans l’arbre)':'Numéro Sosa'} ${escapeHtml(sosaNumber)}">Sosa ${escapeHtml(String(sosaNumber))}</span>`:''}${dabovilleNumber?`<span class="ui-badge is-blue" title="Numéro d'Aboville ${escapeHtml(dabovilleNumber)}">d’Aboville ${escapeHtml(dabovilleNumber)}</span>`:''}<span class="ui-badge is-${({living:'green',deceased:'black'})[person.living_status]||'yellow'} status-badge ${person.living_status}">${person.living_status==='deceased'?'† ':''}${lifeText(person.living_status)}</span>${person.outside_genealogy?'<span class="ui-badge is-grey">Hors généalogie</span>':''}${Number(person.is_artist)?`<span class="ui-badge artist-badge" title="${escapeHtml({'photographe':'Photographe','peintre':'Peintre','ecrivain':'Écrivain','cineaste':'Cinéaste','sculpteur':'Sculpteur','dramaturge':'Dramaturge','poete':'Poète','videaste':'Vidéaste','plasticien':'Plasticien','danseur':'Danseur','acteur':'Acteur'}[person.artist_discipline||'']||'Artiste')}">🎨 Artiste</span>`:''}</div><div class="person-hero-actions">${actionButton(Number(person.is_bookmarked)?'bookmark-on':'bookmark',bookmarkButtonLabel(person),`data-toggle-bookmark="${person.id}"`)}${editOnly(actionButton('delete','Supprimer cette fiche',`data-delete-person="${person.id}"`))}${actionButton(isLocked?'lock':'unlock',isLocked?'Déverrouiller la fiche':'Verrouiller la fiche',`data-toggle-person-lock="${person.id}" data-lock-value="${isLocked?0:1}"`)}${actionButton('history','Historique de la fiche',`data-person-history="${person.id}"`)}</div></div>
             </div>
             <div class="relations-strip">${relationChips('Parents','parent',parents,'unknown',isLocked)}${relationChips('Conjoints','spouse',partners,person.spouse_status,isLocked)}${relationChips('Enfants','child',children,person.children_status,isLocked)}${siblingChips('Frères & sœurs',siblings)}</div>
-            ${renderPersonBody(person.id,personBlockRenderers)}
+            ${renderPersonBody(person.id,personBlockRenderers,htmlOnly)}
         </article>`;
+        if(htmlOnly)return pageHtml;
+        $('#workspace').innerHTML = pageHtml;
         bindPersonPage({...detail,media:orderedMedia});
         (window.LCNDA_EXT?.afterPerson||[]).forEach(fn=>{try{fn(detail);}catch(error){console.error(error);}});
     }
@@ -3597,14 +3646,20 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         bindEntityLabelsFields();
     }
 
+    /** la question avant de supprimer une fiche entière (personne ou animal) : rien ne se défait d'un clic (H7), on tape SUPPRIMER */
+    async function askDeleteSheet(person){
+        const name = personName(person);
+        const message = person?.kind==='animal'
+            ? `Supprimer ${name} et tout ce qui s’y rattache (marques, observations, santé, groupe, trajets) ?\n\nSa fiche, sa fiche d’animal et son suivi partent ensemble. Les fichiers médias restent sur le disque. Tu pourras tout rétablir depuis Réglages → Journal des modifications (« Restaurer »).`
+            : `Supprimer définitivement la fiche « ${name} » ?\n\nLes relations, événements, notes, variantes, enquêtes et liens directs seront retirés. Les fichiers médias restent sur le disque, mais leurs liens à cette fiche seront supprimés.`;
+        return (await askText({title:person?.kind==='animal'?`Supprimer ${name}`:'Supprimer cette fiche',message,okLabel:'Supprimer définitivement',danger:true,confirmWord:'SUPPRIMER'})) !== null;
+    }
     async function deletePerson(detail) {
         const person = detail.person;
-        const name = personName(person);
-        const message = `Supprimer définitivement la fiche « ${name} » ?\n\nLes relations, événements, notes, variantes, enquêtes et liens directs seront retirés. Les fichiers médias restent sur le disque, mais leurs liens à cette fiche seront supprimés.\n\nTape SUPPRIMER pour confirmer.`;
-        if ((await askText({title:'Supprimer cette fiche',message:message.replace(/\n\nTape SUPPRIMER pour confirmer\.$/,''),okLabel:'Supprimer définitivement',danger:true,confirmWord:'SUPPRIMER'})) === null) return;
+        if (!(await askDeleteSheet(person))) return;
         try {
             await api('delete_person', {}, {method:'POST', body:{id:person.id}});
-            toast('Fiche supprimée.');
+            toast(person.kind==='animal'?`Fiche de ${personName(person)} supprimée, avec son suivi.`:'Fiche supprimée.');
             await loadPeople();
             const nextId = state.people[0]?.id || 0;
             if (nextId) await selectPerson(nextId, false);
@@ -8539,7 +8594,7 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     // type de base changé (Listes → Animaux) : compteur, liste de gauche
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';setCountStatus($('#database-status'),personCountLabel(state.bootstrap.stats.personnes));if(state.module==='personnes'){renderSidebar();loadPeople();}}
-    window.LCNDA_APP={ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,defaultPersonBlockSpans,personBlockSettings,savePersonBlockSettings,blockBaseKey,ANIMAL_BLOCKS,applyBlockWidth,rerenderPerson,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={askDeleteSheet,personPageHtml,setSheetRoute,ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,defaultPersonBlockSpans,personBlockSettings,savePersonBlockSettings,blockBaseKey,ANIMAL_BLOCKS,applyBlockWidth,rerenderPerson,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,showFaceSuggestionsOnLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,dashboardSpace,dashboardSpaceDo,applyMenuOrder,menuHiddenKeys,/* l'ordre et les fonds cachés de Réglages → Cartes et fonds de carte, relus à chaque fois */get tileLayerCategories(){return orderedTileCategories(false);},orderedTileCategories,sortTileKeys};
 

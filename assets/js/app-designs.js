@@ -775,7 +775,7 @@
         const W = o.W || Math.max(...o.screens.map(k => SCREENS[k][2]));
         PREVIEW_G = o.G; // les écrans dessinés pour cet aperçu suivent son réglage (portrait des cases d'arbre, des lignes)
         let inner;
-        try { inner = o.screens.map(k => `${o.labels ? `<div class="lcd-pv-label">${esc(SCREENS[k][0])}${o.labelSuffix || ''}</div>` : ''}<div class="lcd-pv-screen" data-s="${k}">${SCREENS[k][1](o.data || {})}</div>`).join(''); } finally { PREVIEW_G = null; }
+        try { inner = o.html != null ? `<div class="lcd-pv-screen" data-s="html">${o.html}</div>` : o.screens.map(k => `${o.labels ? `<div class="lcd-pv-label">${esc(SCREENS[k][0])}${o.labelSuffix || ''}</div>` : ''}<div class="lcd-pv-screen" data-s="${k}">${SCREENS[k][1](o.data || {})}</div>`).join(''); } finally { PREVIEW_G = null; }
         const f = document.createElement('iframe');
         f.className = 'lcd-frame is-loading'; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1; f.title = 'Aperçu';
         f.style.width = `${W}px`;
@@ -1155,7 +1155,9 @@
     window.LCNDA_DESIGNS = {KEY, VER, CACHE_KEY, OPEN_KEY, OLD_KEYS, DEFS, IDS, ATTRS, VARS, OLD_ATTRS, SV, GLYPHS, read, write, clean, migrate, portable, defaults, tidyStorage, apply, applyTo, attrsOf, decorate, decorateHero, wrapIcons, unwrapIcons, isOn, isModified, defOf, acteText, apparenceNoteHtml,
         treePhoto: () => { const G = PREVIEW_G || cur(); return isOn(G, 'a5') && G.a5.v === 'photo'; },
         listAv: () => { const G = PREVIEW_G || cur(); return isOn(G, 'a8') && G.a8.av; },
-        snapshots: SNAP, render: renderPage};
+        snapshots: SNAP, render: renderPage,
+        /** un aperçu vivant fait d'un HTML de l'app (ex. la vraie fiche, Réglages → Fiches) : même cadre réduit (scale), mêmes designs */
+        frame: (slot, {html = '', W = 1000, dark, detail = null} = {}) => mountFrame(slot, {G: cur(), dark: dark ?? document.documentElement.dataset.theme === 'dark', screens: [], html, W, data: {detail}})};
     tidyStorage();
     apply();
 })();

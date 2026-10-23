@@ -163,8 +163,18 @@
     const tabStore = () => { const v = lsGet(TAB_KEY, {}); return isObj(v) ? v : {}; };
     const countOf = html => { let n = 0; String(html).replace(/<h3[^>]*>[\s\S]*?<small>\((\d+)\)<\/small>/g, (_, c) => { n += Number(c) || 0; return ''; }); return n; };
     const kindLabel = kind => (kind === 'animal' ? 'animaux' : 'personnes');
-    /** le corps de la fiche : sections, onglets, « Sans section » (appelé par renderPerson, app.js) */
-    function renderSheet(personId, kind, renderers) {
+    /* ── 🔗 l'adresse de la fiche : « #personnes/12/famille » (nom de la section sans accents, ou son identifiant stable) ── */
+    const slugOf = v => String(v ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+    const secSlug = sec => (sec.id === '__all' ? 'tout' : slugOf(sec.name) || sec.id);
+    /** la section que dit l'adresse, parmi celles montrées ; '__all' pour « tout » ; null si inconnue (= onglet par défaut, sans erreur) */
+    function secFromSlug(secs, slug) {
+        slug = String(slug || '').toLowerCase(); if (!slug) return null;
+        if (slug === 'tout' || slug === '__all') return '__all';
+        const hit = secs.find(s => slugOf(s.name) === slug) || secs.find(s => s.id === slug || s.id.replace(/^s_/, '') === slug);
+        return hit ? hit.id : null;
+    }
+    /** le corps de la fiche : sections, onglets, « Sans section » (appelé par renderPerson, app.js ; preview = l'aperçu des Réglages) */
+    function renderSheet(personId, kind, renderers, {preview = false} = {}) {
         const m = model(kind, personId), o = opts(), g = groups(m), ro = RO();
         const tabs = o.style === 'tabs';
         const defaults = A().defaultPersonBlocks || [];
@@ -189,7 +199,9 @@
             secNo = no; shown.push({sec, no, items, count: items.reduce((n, h) => n + countOf(h), 0)});
         });
         const looseItems = blocksOf(g.loose, '');
-        const store = tabStore(), want = store[kind];
+        const store = tabStore(), sh = !preview ? A().state?.sheetHash : null;
+        const asked = sh && sh.pending && Number(sh.id) === m.personId ? secFromSlug(shown.map(x => x.sec), sh.slug) : null; // l'adresse passe devant l'onglet retenu
+        const want = asked && (asked !== '__all' || o.all !== 'none') ? asked : store[kind];
         const active = tabs ? (want === '__all' && o.all !== 'none' ? '__all' : shown.some(x => x.sec.id === want) ? want : shown[0]?.sec.id || '__all') : '';
         const allBtn = `<button type="button" role="tab" class="fsec-tab is-all${active === '__all' ? ' is-active' : ''}" data-fsec-tab="__all" aria-selected="${active === '__all'}">▦ Tout voir</button>`;
         const tabsBar = tabs ? `<div class="fsec-tabs-wrap is-place-${o.place}"><div class="segmented fsec-tabs" role="tablist" aria-label="Sections de la fiche">${o.all === 'left' ? allBtn : ''}${shown.map(x => `<button type="button" role="tab" class="fsec-tab${x.sec.id === active ? ' is-active' : ''}${x.items.length ? '' : ' is-empty'}" data-fsec-tab="${esc(x.sec.id)}" aria-selected="${x.sec.id === active}">${x.sec.icon ? `<span aria-hidden="true">${esc(x.sec.icon)}</span> ` : ''}${esc(x.sec.name)}${o.count && x.count ? ` <small>(${x.count})</small>` : ''}</button>`).join('')}${o.all === 'right' ? allBtn : ''}</div>${ro ? '' : '<button type="button" class="icon-button small fsec-gear" data-fsec-arrange title="⚙️ Ranger les sections…" aria-label="Ranger les sections">⚙️</button>'}</div>` : '';
@@ -213,6 +225,32 @@
         wrap.classList.toggle('is-all', all);
         wrap.querySelectorAll('[data-fsec-tab]').forEach(b => { const on = b.dataset.fsecTab === id; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); if (on) { if (focus) b.focus(); try { b.scrollIntoView({block: 'nearest', inline: 'center'}); } catch (_) {} } });
         wrap.querySelectorAll(':scope > .fsec:not(.is-loose)').forEach(s => { s.hidden = !all && s.dataset.fsec !== id; });
+        routeTo(wrap);
+    }
+    /** l'onglet ouvert va dans l'adresse (remplacée : pas une entrée d'historique par clic) */
+    function routeTo(wrap) {
+        if (!wrap?.isConnected || !wrap.closest('#workspace') || !wrap.classList.contains('is-tabs')) return;
+        const pid = Number(wrap.dataset.fsecPerson) || 0, id = wrap.querySelector('[data-fsec-tab].is-active')?.dataset.fsecTab; if (!pid || !id) return;
+        const sec = id === '__all' ? {id} : model(wrap.dataset.fsecKind, pid).sections.find(s => s.id === id);
+        if (sec) A().setSheetRoute?.(pid, secSlug(sec));
+    }
+    /** l'adresse demande une section (lien copié, rechargement, ← →) : son onglet ; sinon on la déplie et on y descend */
+    function applyRoute() {
+        const st = A().state || {}, wrap = document.querySelector('#workspace .person-page .fsec-wrap'); if (!wrap) return false;
+        const pid = Number(wrap.dataset.fsecPerson) || 0, sh = st.sheetHash, tabs = wrap.classList.contains('is-tabs');
+        if (sh && sh.pending && Number(sh.id) === pid) {
+            sh.pending = false;
+            const here = [...wrap.querySelectorAll(':scope > .fsec[data-fsec]:not(.is-loose)')].map(x => x.dataset.fsec), m = model(wrap.dataset.fsecKind, pid);
+            const id = secFromSlug(m.sections.filter(x => here.includes(x.id)), sh.slug);
+            if (tabs) { if (id && wrap.querySelector(`[data-fsec-tab="${CSS.escape(id)}"]`)) showTab(wrap, id); }
+            else if (id && id !== '__all') {
+                const sec = wrap.querySelector(`:scope > .fsec[data-fsec="${CSS.escape(id)}"]`);
+                if (sec) { if (sec.classList.contains('is-folded')) fold(sec, false); setTimeout(() => { try { sec.scrollIntoView({block: 'start'}); } catch (_) {} }, 80); }
+            }
+            if (!id) A().setSheetRoute?.(pid, ''); // section inconnue : l'onglet par défaut, l'adresse sans section
+        }
+        if (tabs) routeTo(wrap);
+        return true;
     }
     /** ouvre la fiche sur un bloc : sa section dépliée (ou son onglet), puis le bloc à l'écran (anciens liens : « ↗ Santé ») */
     function revealBlock(key, {scroll = true} = {}) {
@@ -329,7 +367,7 @@
     }
     const notify = host => { host.dispatchEvent(new Event('change', {bubbles: true})); };
     const HOSTS = new Set();
-    function redrawAll() { HOSTS.forEach(h => { if (!h.isConnected) { HOSTS.delete(h); return; } drawEditor(h); }); document.querySelectorAll('[data-fsec-pv]').forEach(x => { x.innerHTML = previewHtml(x.dataset.fsecPv); }); }
+    function redrawAll() { HOSTS.forEach(h => { if (!h.isConnected) { HOSTS.delete(h); return; } drawEditor(h); }); document.querySelectorAll('[data-fsec-pv]').forEach(x => { x.innerHTML = previewHtml(x.dataset.fsecPv); }); refreshLive(); }
     function drawEditor(host) {
         const ctx = host._fsed; if (!ctx) return;
         const focus = document.activeElement && host.contains(document.activeElement) ? sigOf(document.activeElement) : null;
@@ -515,7 +553,7 @@
                     <div class="fsec-sub"><span>Numéros des blocs</span>${seg('blockNums', [['seq', 'À la suite (01, 02…)'], ['sec', 'Par section (1.1, 1.2…)']], o.blockNums)}</div>
                     ${opt('count', 'Onglets : montrer le nombre entre parenthèses')}
                     <div class="fsec-sub"><span>Sections vides</span>${seg('empty', [['grey', 'En gris'], ['hide', 'Cachées']], o.empty)}</div></div></div>
-                <div class="fsec-row is-top"><span class="fsec-lab">Aperçu</span><div class="fsec-pv-box" data-fsec-pv="${kind}">${previewHtml(kind)}</div></div>
+                <div class="fsec-row is-top"><span class="fsec-lab">Aperçu</span>${liveHtml(kind)}</div>
                 <p class="muted fsec-note">L’espace entre deux sections vaut deux fois l’écart entre deux blocs : il suit A2 Densité. Le bandeau prend la couleur principale de l’Apparence, qui passe toujours devant.</p>
             </div></section>`;
     }
@@ -531,6 +569,55 @@
             ${pid ? `<section class="maintenance-panel order-editor block-order-editor fsec-ed-panel"><div class="item-title-row"><h3>Exception pour ${esc(name || `la fiche n°${pid}`)}</h3>${hasException(pid) ? `<button class="button small secondary" type="button" data-fsec-reset-ex="${pid}">Annuler l’exception</button>` : ''}</div>${curKind !== kind ? `<p class="block-editor-offnote">La fiche ouverte (${esc(name)}) est ${curKind === 'animal' ? 'un animal : son exception se règle avec « 🐾 Animaux »' : 'une personne : son exception se règle avec « 👤 Personnes »'}, en haut des Sections.</p>` : `<div data-fsec-editor="${pid}"></div>`}</section>`
                 : `<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre ${kind === 'animal' ? 'un animal' : 'une personne'} pour créer une exception propre à sa fiche.</p></section>`}</div></section>`;
     }
+    /* ── 👁 l'aperçu : la VRAIE fiche, en petit et en direct (lecture seule, rien n'est envoyé ni changé) ──
+     * « Aperçu avec : [fiche] » (le menu de choix unique) : par défaut la fiche ouverte en dernier, sinon la racine Sosa, sinon la
+     * première fiche ; elle est dessinée par app.js (personPageHtml : ses vrais blocs, rangés comme réglé ici) et posée dans le
+     * cadre réduit des aperçus vivants de Designs au choix (LCNDA_DESIGNS.frame : iframe sans script, transform: scale).
+     * Base vide : le petit dessin d'avant (previewHtml) et la petite ligne K10. */
+    const LIVE = {pick: {}, cache: new Map(), timer: 0};
+    function liveHtml(kind) {
+        const P = window.LCNDA_PICKER || A();
+        return `<div class="fsec-live" data-fsec-live="${kind}"><div class="fsec-live-top"><span class="pk-lab">Aperçu avec :</span>${P.pickerField ? P.pickerField({name: 'fsec_pv_person', hiddenName: false, kind: 'person', animals: kind === 'animal' ? 'only' : false, allowCreate: false, value: LIVE.pick[kind] || null}) : ''}<button type="button" class="button small secondary" data-fsec-live-open disabled>↗ Ouvrir cette fiche</button></div>
+            <div class="fsec-live-view" aria-label="Aperçu de la fiche (lecture seule)"><div class="lcd-stage is-preview fsec-live-stage" data-fsec-live-stage></div></div>
+            <div class="fsec-live-none" data-fsec-live-none hidden>${A().empty ? A().empty(kind === 'animal' ? 'Aucun animal pour l’instant : l’aperçu montre un dessin.' : 'Aucune fiche pour l’instant : l’aperçu montre un dessin.', {icon: kind === 'animal' ? '🐾' : '👤'}) : ''}<div class="fsec-pv-box" data-fsec-pv="${kind}">${previewHtml(kind)}</div></div></div>`;
+    }
+    /** la fiche d'une sorte : celle qu'on a choisie, sinon la dernière ouverte, la racine Sosa, la première de la liste */
+    async function liveDetail(kind, id) {
+        if (LIVE.cache.has(id)) return LIVE.cache.get(id);
+        const api = A().api; if (!api || !id) return null;
+        let d = null; try { d = await api('person', {id}); } catch (_) { return null; }
+        if (!d?.person || (d.person.kind === 'animal') !== (kind === 'animal')) return null;
+        const [mil, grave] = await Promise.all([api('military', {id}).catch(() => null), api('cemetery', {id}).catch(() => null)]);
+        d.militaryData = mil?.data || {}; d.grave = grave?.grave || null;
+        LIVE.cache.set(id, d); if (LIVE.cache.size > 12) LIVE.cache.delete(LIVE.cache.keys().next().value);
+        return d;
+    }
+    async function liveDefault(kind) {
+        const st = A().state || {}, cur = st.currentPerson?.person;
+        const tries = kind === 'animal' ? [st.lastAnimalId, cur?.kind === 'animal' && cur.id, st.currentPersonKind === 'animal' && st.currentPersonId]
+            : [st.lastHumanId, cur && cur.kind !== 'animal' && cur.id, st.currentPersonKind !== 'animal' && st.currentPersonId, A().sosaRootId?.(), st.bootstrap?.startPersonId];
+        for (const id of [...new Set(tries.map(Number).filter(Boolean))]) { if (await liveDetail(kind, id)) return id; }
+        try { const first = ((await A().api('people', {limit: 1, kind: kind === 'animal' ? 'animal' : 'human'})).people || [])[0]; if (first && await liveDetail(kind, Number(first.id))) return Number(first.id); } catch (_) {}
+        return 0;
+    }
+    async function fillLive(box) {
+        if (!box?.isConnected) return;
+        const kind = box.dataset.fsecLive, seq = (box._seq = (box._seq || 0) + 1);
+        let id = Number(LIVE.pick[kind]) || 0;
+        if (!id || !(await liveDetail(kind, id))) id = await liveDefault(kind);
+        if (seq !== box._seq || !box.isConnected) return;
+        const view = box.querySelector('.fsec-live-view'), none = box.querySelector('[data-fsec-live-none]'), top = box.querySelector('.fsec-live-top'), open = box.querySelector('[data-fsec-live-open]');
+        const det = id ? LIVE.cache.get(id) : null, html = det && A().personPageHtml ? A().personPageHtml(det) : '';
+        const D = window.LCNDA_DESIGNS;
+        if (!html || !D?.frame) { view.hidden = true; top.hidden = !id; none.hidden = false; const pv = none.querySelector('[data-fsec-pv]'); if (pv) pv.innerHTML = previewHtml(kind); box.dataset.fsecLivePerson = ''; return; }
+        view.hidden = false; none.hidden = true; top.hidden = false; open.disabled = false; box.dataset.fsecLivePerson = String(id);
+        const field = box.querySelector('.pk');
+        // la fiche prise par défaut s'affiche dans le champ (une fois : si on vide le champ pour chercher, on ne le remplit pas de nouveau)
+        if (field && !Number(LIVE.pick[kind]) && (window.LCNDA_PICKER || A()).pickerSet && !('fsecLiveSet' in box.dataset)) { box.dataset.fsecLiveSet = String(id); try { (window.LCNDA_PICKER || A()).pickerSet(field, {id, title: A().personName ? A().personName(det.person) : '', kind: 'person', gender: det.person.gender}); } catch (_) {} }
+        D.frame(box.querySelector('[data-fsec-live-stage]'), {html, W: 1000, detail: det});
+    }
+    /** un réglage a changé : la fiche de l'aperçu se redessine (sans relire la base) */
+    function refreshLive(delay = 60) { clearTimeout(LIVE.timer); LIVE.timer = setTimeout(() => document.querySelectorAll('[data-fsec-live]').forEach(fillLive), delay); }
     /** l'aperçu en petit : les titres des sections dans le style choisi et les blocs en barres grises */
     function previewHtml(kind) {
         const o = opts(), m = model(kind, 0), g = groups(m), st = A().state || {};
@@ -544,15 +631,26 @@
         const look = () => opts().editor;
         const mountAll = () => page.querySelectorAll('[data-fsec-editor]').forEach(h => mountEditor(h, {kind: editKind(), personId: Number(h.dataset.fsecEditor) || 0, look: look()}));
         mountAll();
-        const redrawCfg = () => { const box = page.querySelector('#fsec-cfg'); if (box) { box.outerHTML = sectionsPanelHtml(); UI().scan?.(page.querySelector('#fsec-cfg')); } };
+        const redrawCfg = () => {
+            const box = page.querySelector('#fsec-cfg'); if (!box) return;
+            const live = box.querySelector('[data-fsec-live]'); // l'aperçu reste en place (pas de clignotement) s'il montre la même sorte de fiche
+            box.outerHTML = sectionsPanelHtml(); const nb = page.querySelector('#fsec-cfg'); UI().scan?.(nb);
+            const slot = nb?.querySelector('[data-fsec-live]'); if (live && slot && live.dataset.fsecLive === slot.dataset.fsecLive) slot.replaceWith(live);
+            refreshLive(0);
+        };
         const redrawBlocks = () => { const box = page.querySelector('#fsec-blocks'); if (box) { box.outerHTML = blocksPanelHtml(); mountAll(); } };
         const redrawPres = () => { const box = page.querySelector('#fsec-pres'); if (box) box.outerHTML = presPanelHtml(); };
+        refreshLive(0);
+        page.addEventListener('picker-change', e => { const box = e.target.closest?.('[data-fsec-live]'); if (!box) return; const v = Number(e.detail?.value) || 0; LIVE.pick[box.dataset.fsecLive] = v; box.dataset.fsecLiveSet = String(v); fillLive(box); });
+        // tout autre réglage de la page (en-tête, boutons, blocs…) : l'aperçu suit
+        ['click', 'change', 'input'].forEach(ev => page.addEventListener(ev, e => { if (!e.target.closest?.('.fsec-live-top')) refreshLive(250); }));
         page.addEventListener('click', e => {
             const t = e.target;
+            const op = t.closest('[data-fsec-live-open]'); if (op) { const id = Number(op.closest('[data-fsec-live]')?.dataset.fsecLivePerson) || 0; if (id) A().openPersonById?.(id); return; }
             const b = t.closest('[data-fsec-opt]');
             if (b && page.contains(b)) {
                 const k = b.dataset.fsecOpt, v = b.dataset.v;
-                if (k === 'kind') { lsSet(EDK_KEY, v); redrawCfg(); redrawBlocks(); return; }
+                if (k === 'kind') { lsSet(EDK_KEY, v); redrawCfg(); redrawBlocks(); refreshLive(0); return; }
                 const o = opts(); if (String(o[k]) === v) return; o[k] = v; saveOpts(o);
                 if (k === 'editor') { redrawPres(); redrawBlocks(); return; }
                 redrawCfg(); return;
@@ -623,6 +721,7 @@
 
     /* ═════════════════════════ La fiche : « ⋯ » de l'en-tête (⚙️ Ranger les sections…) ═════════════════════════ */
     ext.afterPerson = ext.afterPerson || [];
+    ext.afterPerson.push(() => applyRoute()); // 🔗 la section de l'adresse
     ext.afterPerson.push(detail => {
         const bar = document.querySelector('#workspace .person-page .person-hero-actions'); if (!bar || RO() || bar.querySelector('[data-fsec-hero-more]')) return;
         bar.insertAdjacentHTML('beforeend', '<button type="button" class="icon-action fsec-hero-more" data-fsec-hero-more title="Plus d’actions sur la fiche" aria-label="Plus d’actions sur la fiche">⋯</button>');
@@ -639,6 +738,6 @@
         });
     });
 
-    window.LCNDA_SECTIONS = {OPT_KEY, FOLD_KEY, TAB_KEY, OPT0, SEC0, STYLES, PLACES, opts, saveOpts, cleanOpts, cleanSections, derive, model, groups, save, renderSheet, revealBlock, showTab, editorHtml, mountEditor, presPanelHtml, sectionsPanelHtml, blocksPanelHtml, previewHtml, arrangeSheetsPage, openArrangeDialog, openSheetsPage, migratePetLayout, numText, hasException,
-        _resetPetLayout: () => { petLayoutDone = false; }};
+    window.LCNDA_SECTIONS = {OPT_KEY, FOLD_KEY, TAB_KEY, OPT0, SEC0, STYLES, PLACES, opts, saveOpts, cleanOpts, cleanSections, derive, model, groups, save, renderSheet, revealBlock, showTab, editorHtml, mountEditor, presPanelHtml, sectionsPanelHtml, blocksPanelHtml, previewHtml, refreshLive, slugOf, secFromSlug, applyRoute, arrangeSheetsPage, openArrangeDialog, openSheetsPage, migratePetLayout, numText, hasException,
+        _resetPetLayout: () => { petLayoutDone = false; }, _liveReset: () => { LIVE.pick = {}; LIVE.cache.clear(); }};
 })();

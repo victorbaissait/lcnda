@@ -158,7 +158,7 @@
         const f = o.filter && typeof o.filter === 'object' ? o.filter : {};
         const opts = {name: o.name == null ? 'picker' : String(o.name), kind: String(o.kind || 'person'), multiple: !!o.multiple, placeholder: o.placeholder || '', allowFree: !!o.allowFree,
             allowCreate: o.allowCreate === undefined ? 'auto' : !!o.allowCreate, roles: o.roles ? {main: o.roles.main !== false, roleList: roleListOf(o.roles), zones: o.roles.zones && typeof o.roles.zones === 'object' ? o.roles.zones : null} : null,
-            animals: o.animals === false ? 0 : 1, label: o.label || '',
+            animals: o.animals === false ? 0 : o.animals === 'only' ? 2 : 1, label: o.label || '', // 'only' : seulement les animaux
             noName: o.hiddenName === false || o.name === '', inline: !!o.inline,
             filter: {person_id: Number(f.person_id) || 0, media_type: ['image', 'audio', 'video', 'document'].includes(f.media_type) ? f.media_type : '', art_kind: String(f.art_kind || '').replace(/[^a-z0-9_,]/g, ''), art_person: Number(f.art_person) || 0}};
         const c = makeCtrl(opts, o.value);
@@ -301,7 +301,7 @@
         if (f.art_kind) extra.art_kind = f.art_kind;
         if (f.art_person) extra.art_person = f.art_person;
         if (f.graph_kinds) extra.graph_kinds = f.graph_kinds;
-        return {kind, q, animals: c.opts.animals === 0 ? 0 : 1, ...extra};
+        return {kind, q, animals: c.opts.animals === 0 || c.opts.animals === 2 ? c.opts.animals : 1, ...extra};
     }
     async function run(c, s, more = false) {
         const st = S(s), q = s.querySelector('.pk-input').value.trim();

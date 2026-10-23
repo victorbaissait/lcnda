@@ -115,7 +115,7 @@ function picker_search(PDO $pdo, array $get): array
     $q = trim((string) preg_replace('/\s+/u', ' ', mb_substr(scalar_text($get['q'] ?? '', 'q'), 0, 120)));
     $offset = max(0, (int) ($get['offset'] ?? 0));
     $limit = max(1, min(100, (int) ($get['limit'] ?? 30)));
-    $opts = ['animals' => (string) ($get['animals'] ?? '1') !== '0', 'mixed' => count($kinds) > 1,
+    $opts = ['animals' => (string) ($get['animals'] ?? '1') !== '0', 'only_animals' => (string) ($get['animals'] ?? '') === '2', 'mixed' => count($kinds) > 1, // animals=2 : seulement les animaux
         'person_id' => max(0, (int) ($get['person_id'] ?? 0)), 'media_type' => in_array($get['media_type'] ?? '', ['image', 'audio', 'video', 'document'], true) ? $get['media_type'] : '',
         // fenêtre « Choisir une image » (openMediaPicker) : sortes permises, une sorte, portraits, récentes, transcription / signature
         'media_types' => array_values(array_intersect(explode(',', strtolower((string) ($get['media_types'] ?? ''))), ['image', 'audio', 'video', 'document'])),
@@ -274,6 +274,7 @@ function picker_persons(PDO $pdo, string $q, int $offset, int $limit, array $opt
     $params = [];
     $where = [];
     if (!$opts['animals']) { $where[] = "COALESCE(p.kind,'human')<>'animal'"; }
+    if (!empty($opts['only_animals'])) { $where[] = "p.kind='animal'"; }
     $birth = "(SELECT e.id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1)";
     $death = "(SELECT e.id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1)";
     // « #45 » : la fiche n° 45

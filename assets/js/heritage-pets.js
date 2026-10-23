@@ -128,12 +128,15 @@
         const lifeF = lbSaved?.f?.life || [], all = data.pets || [];
         const rows = UI?.sortItems ? UI.sortItems(all.filter(r => !lifeF.length || lifeF.includes(r.deceased ? 'gone' : 'alive')), sort, {name: r => r.title, date: r => r.updated_at || r.created_at || ''}) : (data.pets || []);
         const alive = rows.filter(r => !r.deceased).length;
+        const ro = document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly');
+        const delBtn = r => (ro ? '' : `<button type="button" class="icon-button small danger" data-pet-del="${r.id}" data-pet-name="${esc(r.title)}" title="Supprimer ${esc(r.title)}" aria-label="Supprimer ${esc(r.title)}">🗑</button>`);
+        const delItem = r => (ro ? '' : `<button type="button" role="menuitem" class="is-danger" data-pet-del="${r.id}" data-pet-name="${esc(r.title)}">🗑 Supprimer</button>`);
         const kind = r => [iconOf(r.species) + ' ' + (r.breed || String(speciesLabel(r.species) || r.species_label || '').split(/[ ,(]/)[0]), r.color].filter(Boolean).join(' · ');
         A().$('#workspace').innerHTML = `<section class="page h-pets"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Animaux de compagnie</h2>
             <p>Les animaux de la famille, d’hier et d’aujourd’hui : une fiche pour chacun (photos, race, puce, éleveur, santé, souvenirs, suivi…), reliée à leurs maîtres. Avec leurs parents, on fait le pedigree d’un animal de race, sa descendance et son taux de consanguinité. Un clic ouvre sa fiche, la même que dans Personnes → Animaux.</p></div>
             <div class="page-actions"><label class="h-pet-mode" title="Famille : les animaux à côté des personnes. Élevage : une base d’animaux (la liste de gauche, le compteur et les statistiques partent des animaux). Les deux : tout mêlé.">Type de base <select data-pet-mode>${[['family', '👪 Famille'], ['breeding', '🐾 Élevage'], ['both', '👪🐾 Les deux']].map(([k, l]) => `<option value="${k}" ${baseMode() === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><button type="button" class="button secondary" data-pet-prefs title="Espèces, parties et champs du formulaire">⚙️ Réglages</button><button type="button" class="button" data-pet-new>＋ Nouvel animal</button></div></header>
             ${mergedNotice()}<div data-pet-bar></div>
-            ${rows.length ? `${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="ui-card-ico">${iconOf(r.species)}</span>`, name: `${r.title}${r.sex ? (r.sex === 'M' ? ' ♂' : ' ♀') : ''}`, open: `data-pet-open="${r.id}"`, cls: r.deceased ? 'is-gone' : '', lines: [r.registered_name && r.registered_name !== r.title ? r.registered_name : '', kind(r), r.owners.length ? r.owners.slice(0, 2).join(', ') : ''], date: lifespan(r) || ''}))) : UI.cardsHtml(rows.map(r => ({thumb: r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="ui-card-ico">${iconOf(r.species)}</span>`, name: `${r.title}${r.sex ? (r.sex === 'M' ? ' ♂' : ' ♀') : ''}`, open: `data-pet-open="${r.id}"`, cls: r.deceased ? 'is-gone' : '',
+            ${rows.length ? `${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="ui-card-ico">${iconOf(r.species)}</span>`, name: `${r.title}${r.sex ? (r.sex === 'M' ? ' ♂' : ' ♀') : ''}`, open: `data-pet-open="${r.id}"`, cls: r.deceased ? 'is-gone' : '', lines: [r.registered_name && r.registered_name !== r.title ? r.registered_name : '', kind(r), r.owners.length ? r.owners.slice(0, 2).join(', ') : ''], date: lifespan(r) || '', actions: delBtn(r)}))) : UI.cardsHtml(rows.map(r => ({thumb: r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="ui-card-ico">${iconOf(r.species)}</span>`, name: `${r.title}${r.sex ? (r.sex === 'M' ? ' ♂' : ' ♀') : ''}`, open: `data-pet-open="${r.id}"`, cls: r.deceased ? 'is-gone' : '', menu: [delItem(r)],
                 lines: [[kind(r), r.registered_name && r.registered_name !== r.title ? r.registered_name : ''].filter(Boolean).join(' · '), [lifespan(r) || 'Dates à compléter', r.owners.length ? r.owners.slice(0, 2).join(', ') : ''].filter(Boolean).join(' · ')],
                 badges: [r.deceased ? {text: '† Disparu', kind: 'black'} : null, r.offspring ? {text: `${fmt(r.offspring)} petit${r.offspring > 1 ? 's' : ''}`, kind: 'grey'} : null, r.titles ? {text: `🏆 ${fmt(r.titles)}`, kind: 'yellow'} : null].filter(Boolean)})))}`
                 : (st.hPetQ || st.hPetSpecies || lifeF.length ? A().emptyState({icon: '🔍', text: 'Aucun animal ne correspond.'}) : A().emptyState({icon: '🐾', text: 'Aucun animal pour l’instant', hint: 'Son nom, sa photo, ses maîtres… et pour un animal de race, ses parents, pour faire son pedigree.', action: {label: '＋ Nouvel animal', attrs: 'data-pet-new'}}))}</section>`;
@@ -149,6 +152,7 @@
         ws.querySelector('[data-pet-prefs]').addEventListener('click', () => { st.maintenanceTab = 'pet_prefs'; A().setModule('maintenance'); });
         ws.querySelector('[data-pet-mode]').addEventListener('change', e => { try { localStorage.setItem('genealogie-base-mode', e.target.value); } catch (_) {} toast({family: 'Base de famille.', breeding: 'Base d’élevage : la liste de gauche, le compteur et les statistiques partent des animaux.', both: 'Personnes et animaux mêlés.'}[e.target.value]); A().refreshBaseMode?.(); });
         ws.querySelectorAll('[data-pet-open]').forEach(b => b.addEventListener('click', () => openPet(Number(b.dataset.petOpen))));
+        ws.querySelectorAll('[data-pet-del]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); b.closest('details')?.removeAttribute('open'); const r = rows.find(x => Number(x.id) === Number(b.dataset.petDel)); trashPet(Number(b.dataset.petDel), b.dataset.petName || 'Cet animal', {person: r ? {id: r.person_id, kind: 'animal', first_name: r.title} : null}); }));
         ws.querySelector('[data-pets-merged-x]')?.addEventListener('click', e => { e.currentTarget.closest('.ui-notice')?.remove(); });
         ext.suivi?.hintInto?.(ws.querySelector('.page')); // 🐾 « l'onglet Suivi est caché » (une fois)
     };
@@ -164,13 +168,38 @@
     async function openPet(id, view = '', tab = '') {
         const st = S(); id = Number(id) || 0; if (!id) return;
         if (view === 'pedigree') { st.hPet = id; st.hPetView = view; st.listType = 'pets'; if (st.module === 'listes') ext.lists.pets(++st.workspaceToken); else A().setModule('listes'); return; }
-        let pid = 0;
-        try { pid = Number((await api('pet', {id})).person_id) || 0; if (!pid && !document.body.classList.contains('is-kiosk')) pid = Number((await api('pet_make_person', {}, {method: 'POST', body: {id}})).result?.person_id) || 0; } catch (error) { toast(error.message, 'error'); return; }
-        if (!pid) { toast('Cette fiche ne peut pas s’ouvrir en mode consultation.'); return; }
+        let pid = 0, pet = null;
+        try { pet = await api('pet', {id}); pid = Number(pet.person_id) || 0; } catch (error) { toast(error.message, 'error'); return; }
+        // sa fiche complète a été supprimée (avant que l'animal parte avec elle) : on demande, on ne la refait plus en silence
+        if (!pid) { if (document.body.classList.contains('is-kiosk')) { toast('Cette fiche ne peut pas s’ouvrir en mode consultation.'); return; } orphanPet(id, pet?.title || ''); return; }
         st.hPet = 0; st.hPetView = ''; st.sheetFocus = TAB_BLOCK[tab] || '';
         if (A().openPersonById) A().openPersonById(pid); else { st.currentPersonId = pid; A().setModule('personnes'); }
     }
     ext.openPet = openPet;
+    /** un animal resté seul (sa fiche complète a été supprimée avant ce correctif) : « ↺ La rétablir » ou « 🗑 Supprimer l'animal » */
+    function orphanPet(id, title) {
+        const name = title || 'Cet animal';
+        const dlg = ext.openDialog?.({eyebrow: '🐾 FICHE ANIMAL', title: 'Cette fiche a été supprimée', submitLabel: '↺ La rétablir',
+            body: `<p data-pet-orphan="${id}">La fiche de <b>${esc(name)}</b> a été supprimée, mais l’animal était resté dans la liste des animaux, avec son suivi.</p><p class="muted">« ↺ La rétablir » refait sa fiche avec ce qu’il a gardé (nom, sexe, dates, parents, suivi). « 🗑 Supprimer l’animal » l’enlève aussi, avec tout son suivi (tu pourras le rétablir depuis le Journal des modifications).</p>`,
+            onSubmit: async () => { const r = await api('pet_make_person', {}, {method: 'POST', body: {id}}); const pid = Number(r.result?.person_id) || 0; if (pid) { toast(`La fiche de ${name} est rétablie.`); if (A().openPersonById) A().openPersonById(pid); else { S().currentPersonId = pid; A().setModule('personnes'); } } },
+            onDelete: async () => { await trashPet(id, name, {ask: false}); },
+            onOpen: d => { const b = d.querySelector('[data-h-delete]'); if (b) b.textContent = '🗑 Supprimer l’animal'; }});
+        return dlg;
+    }
+    /** 🗑 Supprimer un animal (liste Animaux, animal resté seul) : avec sa fiche et tout son suivi, comme une fiche de personne ; rétablissable */
+    async function trashPet(id, name, {ask = true, person = null} = {}) {
+        if (ask) {
+            const p = person || {id: 0, kind: 'animal', first_name: name};
+            if (A().askDeleteSheet ? !(await A().askDeleteSheet(p)) : !(await A().confirmBox(`Supprimer ${name} et tout ce qui s’y rattache (marques, observations, santé, groupe, trajets) ?`, {title: `Supprimer ${name}`, okLabel: 'Supprimer définitivement', danger: true}))) return false;
+        }
+        try { await api('pet_trash', {}, {method: 'POST', body: {id}}); }
+        catch (error) { toast(error.message, 'error'); return false; }
+        toast(`« ${name} » supprimé, avec son suivi. Pour le rétablir : Réglages → Journal des modifications → « Restaurer ».`);
+        const st = S(); if (st.module === 'listes' && st.listType === 'pets') ext.lists.pets(++st.workspaceToken);
+        A().loadPeople?.();
+        return true;
+    }
+    ext.trashPet = trashPet;
     // les anciens liens « #pet/612 » (et « #pet/612/sante ») : la fiche complète, sur le bon bloc
     const PET_HASH = /^#!?\/?pet\/(\d+)(?:\/([a-z]+))?/i, TAB_FR = {sante: 'health', marques: 'marks', bagues: 'marks', observations: 'obs', groupe: 'group', carte: 'map', trajets: 'map', pedigree: 'pedigree'};
     function fromHash(e) {

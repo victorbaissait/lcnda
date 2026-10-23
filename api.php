@@ -6103,6 +6103,7 @@ function change_entity_label(PDO $pdo,array $row,array $before=[],array $after=[
     if($type==='branch')return (string)($data['name']??'Branche');
     if($type==='view')return (string)($data['name']??'Vue enregistrée');
     if($type==='settings')return 'Réglages du site';
+    if($type==='pet')return (string)($data['title']??'Animal');
     return $type ? $type.' #'.($id?:'—') : 'Élément';
 }
 
@@ -6114,6 +6115,10 @@ function restore_change_state(PDO $pdo,array $row,array $before=[]): array
     if($type==='person'&&$kind==='person_delete'){
         $id=safe_int($before['id']??$row['entity_id']??0);
         return $id&&!record_exists($pdo,'persons',$id)?['state'=>'available','reason'=>'']:['state'=>'none','reason'=>''];
+    }
+    if($type==='pet'&&$kind==='pet_delete'){ // 🐾 un animal sans fiche complète (lib/pets.php, pet_trash)
+        $id=safe_int($before['_pet']['pet']['id']??$row['entity_id']??0);
+        return $id&&!record_exists($pdo,'pets',$id)?['state'=>'available','reason'=>'']:['state'=>'none','reason'=>''];
     }
     if($type==='event'&&$kind==='event_delete'){
         $event=$before['event']??[];$id=safe_int($event['id']??$row['entity_id']??0);
@@ -6215,6 +6220,7 @@ function restore_change(PDO $pdo,array $data): array
     if(!can_restore_change($pdo,$change,$before))throw new RuntimeException('Cette suppression ne peut pas être restaurée proprement.');
     if(($change['entity_type']??'')==='person')return restore_deleted_person($pdo,$change,$before);
     if(($change['entity_type']??'')==='event')return restore_deleted_event($pdo,$change,$before);
+    if(($change['entity_type']??'')==='pet'&&function_exists('restore_deleted_pet'))return restore_deleted_pet($pdo,$change,$before);
     if(($change['entity_type']??'')==='media')return restore_deleted_media($pdo,$change,$before);
     if(($change['entity_type']??'')==='note')return restore_deleted_note($pdo,$change,$before);
     if(($change['entity_type']??'')==='source')return restore_deleted_source($pdo,$change,$before);
@@ -6257,7 +6263,7 @@ function restore_last_delete(PDO $pdo,array $data): array
         log_change($pdo,$type,$id,'restore','Suppression annulée #'.$id,null,['restored_from_change_id'=>(int)$change['id']]);
         return ['entity_type'=>$type,'entity_id'=>$id];
     }
-    $allowed=['event','note','source','media','battue','battue_item','battue_alias','investigation','investigation_item','investigation_media'];
+    $allowed=['event','note','source','media','battue','battue_item','battue_alias','investigation','investigation_item','investigation_media','pet'];
     if(!$id||!in_array($type,$allowed,true))throw new RuntimeException('Rien à remettre.');
     $stmt=$pdo->prepare("SELECT id FROM change_log WHERE action='delete' AND entity_type=? AND entity_id=? ORDER BY id DESC LIMIT 1");
     $stmt->execute([$type,$id]);
@@ -6268,7 +6274,7 @@ function restore_last_delete(PDO $pdo,array $data): array
 
 function record_exists(PDO $pdo,string $table,int $id): bool
 {
-    $allowed=['persons','families','events','event_types','places','media','notes','sources','census_records','battues','battue_search_items','battue_commune_aliases','saved_views','investigations','investigation_items','investigation_media','graves'];
+    $allowed=['persons','families','events','event_types','places','media','notes','sources','census_records','battues','battue_search_items','battue_commune_aliases','saved_views','investigations','investigation_items','investigation_media','graves','pets'];
     if(!in_array($table,$allowed,true))return false;
     $stmt=$pdo->prepare("SELECT 1 FROM {$table} WHERE id=?");
     $stmt->execute([$id]);
@@ -9631,6 +9637,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_pet' => save_pet($pdo,$data),
             'delete_pet' => delete_pet($pdo,$data),
             'pet_make_person' => pet_make_person($pdo,$data),
+            'pet_trash' => pet_trash($pdo,$data), // 🗑 l'animal et sa fiche, restaurables (lib/pets.php)
             'pet_for_person' => (function() use ($pdo,$data){$pid=safe_int($data['person_id']??0);if(!person_exists($pdo,$pid))throw new RuntimeException('Fiche introuvable.');$pdo->prepare("UPDATE persons SET kind='animal' WHERE id=?")->execute([$pid]);$petId=pet_of_person($pdo,$pid,true);pet_move_to_person($pdo,$petId);return ['id'=>$petId];})(),
             'save_booklet_design' => save_booklet_design($pdo,$data),
             'save_board' => save_board($pdo,$data),
@@ -9856,7 +9863,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
         };
         apply_pending_labels($pdo, $action, $data, $result);
         // les parents changés sur une fiche d'animal passent dans son pedigree (dans la même écriture, jamais à la lecture)
-        if (in_array($action, ['add_relation', 'remove_relation', 'merge_people', 'delete_person', 'restore_person'], true) && function_exists('pets_sync_parents')) { pets_sync_parents($pdo); }
+        if (in_array($action, ['add_relation', 'remove_relation', 'merge_people', 'delete_person', 'restore_person', 'restore_change', 'restore_last_delete', 'pet_trash'], true) && function_exists('pets_sync_parents')) { pets_sync_parents($pdo); }
         $pdo->commit();
         json_response(['ok'=>true,'result'=>$result]);
     } catch(Throwable $e){
@@ -12209,7 +12216,11 @@ function delete_person(PDO $pdo,array $data): array
     foreach(['media_links','source_links','notes','label_links'] as $table){
         $pdo->prepare("DELETE FROM {$table} WHERE entity_type='person' AND entity_id=?")->execute([$id]);
     }
-    if(function_exists('pet_detach_person'))pet_detach_person($pdo,$id); // la fiche d'animal (la liste) reste, avec son nom, ses dates
+    // 🐾 la fiche d'un animal : son animal (fiche d'animal, maîtres, suivi) part avec elle, gardé dans l'instantané pour « Restaurer »
+    if(($person['kind']??'')==='animal'&&function_exists('pet_trash_snapshot')){
+        $petIds=$pdo->prepare('SELECT id FROM pets WHERE person_id=? ORDER BY id');$petIds->execute([$id]);
+        foreach(array_map('intval',$petIds->fetchAll(PDO::FETCH_COLUMN)) as $petId){$petSnap=pet_trash_snapshot($pdo,$petId);if($petSnap){$snapshot['pets'][]=$petSnap;pet_trash_apply($pdo,$petId);}}
+    }elseif(function_exists('pet_detach_person'))pet_detach_person($pdo,$id); // (une fiche de personne reliée à une fiche d'animal : celle-ci reste)
     if(function_exists('diagram_links_person'))diagram_links_person($pdo,$id,0);
     if(function_exists('dna_links_person'))dna_links_person($pdo,$id,0);
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$id,0); // revues, livres, documentaires, annonces : le lien s'en va
@@ -12310,6 +12321,8 @@ function restore_deleted_person(PDO $pdo,array $change,array $before): array
             if($table==='event_witnesses'&&(!record_exists($pdo,'persons',(int)($row['person_id']??0))||!record_exists($pdo,'events',(int)($row['event_id']??0)))){$skipped++;continue;}
             $insert((string)$table,$row);
         }}
+        // 🐾 l'animal de la fiche (fiche d'animal, maîtres, suivi), parti avec elle
+        foreach($snapshot['pets']??[] as $petSnap){if(is_array($petSnap)&&function_exists('pet_restore_snapshot'))$skipped+=pet_restore_snapshot($pdo,$petSnap);}
     }
     rebuild_search($pdo,$personId);
     log_change($pdo,'person',$personId,'restore','Restauration de la fiche supprimée '.full_name($person),null,['restored_from_change_id'=>(int)$change['id'],'person_id'=>$personId,'skipped'=>$skipped]);

@@ -438,8 +438,87 @@ function delete_pet(PDO $pdo, array $data): array
     $pid = (int) ($r['person_id'] ?? 0);
     $pdo->prepare('DELETE FROM pets WHERE id=?')->execute([$id]);
     if ($pid && !empty($data['with_person']) && person_exists($pdo, $pid)) { delete_person($pdo, ['id' => $pid]); }
-    log_change($pdo, 'meta', 0, 'delete', 'Animal supprimé (n°' . $id . ')');
+    if (empty($data['_quiet'])) { log_change($pdo, 'meta', 0, 'delete', 'Animal supprimé (n°' . $id . ')'); }
     return ['ok' => true];
+}
+
+/* ═════════ 🗑 Supprimer un animal pour de bon (avec sa fiche), le rétablir depuis le journal ═════════
+ * Supprimer la fiche complète d'un animal (delete_person) emporte aussi sa fiche d'animal et tout son suivi : avant, la
+ * fiche d'animal restait seule et la fiche complète revenait à l'ouverture. Tout est gardé dans la ligne du journal
+ * (« _snapshot.pets » d'une fiche, « _pet » d'un animal sans fiche) : « Restaurer » (Journal des modifications, tableau
+ * de bord) ou « ↶ Annuler » rend tout, la fiche, l'animal et son suivi. Les tables, dans l'ordre où on les remet. */
+const PET_TRASH_TABLES = ['pet_people', 'animal_profiles', 'animal_marks', 'animal_health', 'animal_memberships', 'animal_gps_imports', 'animal_gps', 'animal_observations'];
+
+/** ce que la suppression d'un animal efface ou change (pour le rendre tel quel) */
+function pet_trash_snapshot(PDO $pdo, int $id): array
+{
+    $s = $pdo->prepare('SELECT * FROM pets WHERE id=?'); $s->execute([$id]); $pet = $s->fetch(PDO::FETCH_ASSOC);
+    if (!$pet) { return []; }
+    $snap = ['pet' => $pet, 'rows' => [], 'kids' => [], 'links' => []];
+    foreach (PET_TRASH_TABLES as $t) {
+        try { $q = $pdo->prepare("SELECT * FROM {$t} WHERE pet_id=?"); $q->execute([$id]); $rows = $q->fetchAll(PDO::FETCH_ASSOC); } catch (Throwable) { continue; } // table du suivi pas encore créée
+        if ($rows) { $snap['rows'][$t] = $rows; }
+    }
+    $k = $pdo->prepare('SELECT id, sire_id, dam_id, data_json FROM pets WHERE (sire_id=? OR dam_id=?) AND id<>?'); $k->execute([$id, $id, $id]);
+    $snap['kids'] = $k->fetchAll(PDO::FETCH_ASSOC); // ses petits perdent ce parent (son nom reste écrit) : on le leur rend
+    foreach ([['family_collection_media', 'collection_type', 'collection_id'], ['label_links', 'entity_type', 'entity_id']] as [$t, $ct, $ci]) {
+        try { $q = $pdo->prepare("SELECT * FROM {$t} WHERE {$ct}='pet' AND {$ci}=?"); $q->execute([$id]); $rows = $q->fetchAll(PDO::FETCH_ASSOC); } catch (Throwable) { continue; }
+        if ($rows) { $snap['links'][$t] = $rows; }
+    }
+    return $snap;
+}
+
+/** efface l'animal et tout son suivi (ses observations comprises) ; la copie est déjà prise par pet_trash_snapshot */
+function pet_trash_apply(PDO $pdo, int $id): void
+{
+    try { $pdo->prepare('DELETE FROM animal_observations WHERE pet_id=?')->execute([$id]); } catch (Throwable) {}
+    delete_pet($pdo, ['id' => $id, '_quiet' => 1]);
+}
+
+/** remet un animal gardé par pet_trash_snapshot ; rend le nombre de lignes qui n'ont pas pu revenir */
+function pet_restore_snapshot(PDO $pdo, array $snap): int
+{
+    $pet = is_array($snap['pet'] ?? null) ? $snap['pet'] : []; $id = (int) ($pet['id'] ?? 0);
+    if (!$id) { return 0; }
+    $e = $pdo->prepare('SELECT 1 FROM pets WHERE id=?'); $e->execute([$id]);
+    if ($e->fetchColumn()) { throw new RuntimeException('Cet animal existe déjà.'); }
+    insert_snapshot_row($pdo, 'pets', $pet);
+    $skipped = 0;
+    foreach (PET_TRASH_TABLES as $t) {
+        foreach ($snap['rows'][$t] ?? [] as $row) { if (!is_array($row) || (int) ($row['pet_id'] ?? 0) !== $id) { continue; } try { insert_snapshot_row($pdo, $t, $row, true); } catch (Throwable) { $skipped++; } }
+    }
+    foreach ($snap['kids'] ?? [] as $kid) {
+        if (!is_array($kid)) { continue; }
+        $pdo->prepare('UPDATE pets SET sire_id=?, dam_id=?, data_json=? WHERE id=?')->execute([(int) $kid['sire_id'] ?: null, (int) $kid['dam_id'] ?: null, (string) $kid['data_json'], (int) $kid['id']]);
+    }
+    foreach (['family_collection_media', 'label_links'] as $t) {
+        foreach ($snap['links'][$t] ?? [] as $row) { if (is_array($row)) { try { insert_snapshot_row($pdo, $t, $row, true); } catch (Throwable) { $skipped++; } } }
+    }
+    return $skipped;
+}
+
+/** 🗑 Supprimer un animal (liste Animaux, animal dont la fiche a déjà été supprimée) : avec sa fiche s'il en a une (comme une personne) */
+function pet_trash(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $r = pet_row($pdo, $id); if (!$r) { throw new RuntimeException('Animal introuvable.'); }
+    $pid = (int) $r['person_id']; // 0 : pas (ou plus) de fiche complète
+    if ($pid) { delete_person($pdo, ['id' => $pid]); return ['id' => $id, 'person_id' => $pid, 'entity_type' => 'person', 'entity_id' => $pid]; }
+    $snap = pet_trash_snapshot($pdo, $id); $name = pet_title($r['d']);
+    pet_trash_apply($pdo, $id);
+    log_change($pdo, 'pet', $id, 'delete', 'Suppression de l’animal ' . $name, ['_restore_kind' => 'pet_delete', '_pet' => $snap, 'title' => $name], null);
+    return ['id' => $id, 'person_id' => 0, 'entity_type' => 'pet', 'entity_id' => $id];
+}
+
+/** « Restaurer » une ligne du journal « Suppression de l'animal … » (un animal qui n'avait plus de fiche complète) */
+function restore_deleted_pet(PDO $pdo, array $change, array $before): array
+{
+    $snap = $before['_pet'] ?? null;
+    if (!is_array($snap) || empty($snap['pet']['id'])) { throw new RuntimeException('Cette suppression est trop ancienne : elle ne contient pas de quoi rendre l’animal.'); }
+    $id = (int) $snap['pet']['id'];
+    $skipped = pet_restore_snapshot($pdo, $snap);
+    log_change($pdo, 'pet', $id, 'restore', 'Animal rétabli : ' . (string) ($before['title'] ?? ''), null, ['restored_from_change_id' => (int) $change['id'], 'skipped' => $skipped]);
+    return ['entity_type' => 'pet', 'entity_id' => $id, 'skipped' => $skipped];
 }
 
 /** Pour l'arbre (en option) : les animaux de chaque maître */

@@ -139,7 +139,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         ['puzzle : état forgé (NaN, 1e308, ordre abîmé) → partie lisible, pièces en anneau', () => { assert.ok(out.forged.cam); assert.ok(out.forged.finite); assert.equal(out.forged.placed, 0); assert.ok(out.forged.rot); }],
         ['puzzle : nombre de pièces forgé → message, rien de découpé', () => { assert.equal(out.cols.err, true); assert.equal(out.cols.debug, false); }],
         ['puzzle : noms piégés → rien exécuté', () => assert.equal(out.xss, 0)],
-        ['puzzle : une partie encore en lecture ne recouvre pas l’écran suivant', () => { assert.equal(out.away.hash, '#personnes'); assert.equal(out.away.puzzle, false); }],
+        ['puzzle : une partie encore en lecture ne recouvre pas l’écran suivant', () => { assert.match(out.away.hash, /^#personnes(\/|$)/, 'la fiche dans l’adresse : « #personnes/12 »'); assert.equal(out.away.puzzle, false); }],
         ['polices : récentes forgées → liste affichée, noms nettoyés', () => { assert.equal(out.fonts.err, ''); assert.ok(out.fonts.rows > 3); assert.ok(out.fonts.styles.every(s => { const m = s.match(/^font-family:'([^']*)', (serif|cursive)$/); return m && !/[\n;\\"]/.test(m[1]); }), out.fonts.styles.join(' | ')); }],
         ['visages : « ■ Arrêter » pendant le chargement → relançable tout de suite, fil arrêté', () => { assert.equal(out.faceStop.goEnabled, true); assert.equal(out.faceStop.workers, 0); }],
         ['visages : fermer pendant le chargement → fil arrêté', () => { assert.equal(out.faceClose.workers, 0); assert.equal(out.faceClose.dlg, false); }],

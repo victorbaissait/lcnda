@@ -262,3 +262,12 @@
     .lc-obs-fab { right: 16px; bottom: 76px; }
     .lc-sh-seen { margin-left: 0; }
 }
+
+/* 👁 Aperçu : la vraie fiche en petit (Réglages → Apparence → Fiches personnes et animaux) */
+.fsec-live { display: grid; gap: 8px; min-width: 0; flex: 1 1 420px; }
+.fsec-live-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.fsec-live-top .pk { flex: 1 1 240px; min-width: 0; max-width: 420px; }
+.fsec-live-view { max-height: 560px; overflow: auto; border: 1px solid var(--line-color); background: var(--paper); overscroll-behavior: contain; }
+.fsec-live-view[hidden], .fsec-live-none[hidden], .fsec-live-top[hidden] { display: none; }
+.fsec-live-stage .lcd-frame { pointer-events: none; }
+.fsec-live-none { display: grid; gap: 8px; }

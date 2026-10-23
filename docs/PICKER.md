@@ -105,7 +105,7 @@ P.pickerSet(fieldEl, 45);         // ne déclenche pas picker-change
 Options de `pickerField` : `name` (obligatoire), `kind` (`'person'` par défaut, ou plusieurs séparées par des virgules),
 `value`, `multiple`, `placeholder` (le texte d'aide est déjà le bon, à ne changer que si besoin), `allowFree` (nom
 libre), `allowCreate` (par défaut : « ＋ Créer » pour les personnes et les lieux seulement ; `true` l'ajoute aux autres
-sortes — l'outil doit alors écouter `picker-create`), `roles`, `animals: false` (sans les animaux), et :
+sortes — l'outil doit alors écouter `picker-create`), `roles`, `animals: false` (sans les animaux) ou `animals: 'only'` (seulement eux, GET `animals=2`), et :
 
 - `hiddenName: false` (ou `name: ''`) : le champ caché n'a pas d'attribut `name` — rien n'est ajouté au formulaire
   autour ; on lit la valeur avec `pickerValue()` ou dans `picker-change`.
