@@ -28,7 +28,27 @@
     const prefs = () => { try { const p = JSON.parse(localStorage.getItem(PREF_KEY) || '{}'); return p && typeof p === 'object' && !Array.isArray(p) ? p : {}; } catch (_) { return {}; } };
     const pref = (k, d) => { const v = prefs()[k]; return v === undefined ? d : v; };
     const setPref = (k, v) => { try { localStorage.setItem(PREF_KEY, JSON.stringify({...prefs(), [k]: v})); } catch (_) {} };
-    const DEVICES = {desktop: [1280, '🖥', 'Ordinateur'], tablet: [820, '💻', 'Tablette'], phone: [390, '📱', 'Téléphone']};
+    /* 📐 Les écrans du site (points de rupture) : chacun a un nom, une icône, la largeur de l'aperçu et sa requête @media
+       (vide pour le premier, l'écran de base). Gardés dans le site : site.breakpoints. */
+    const BP0 = () => [{id: 'desktop', name: 'Ordinateur', icon: '🖥', width: 1280, query: ''}, {id: 'tablet', name: 'Tablette', icon: '💻', width: 820, query: '(max-width: 820px)'}, {id: 'phone', name: 'Téléphone', icon: '📱', width: 390, query: '(max-width: 480px)'}];
+    const normMq = x => String(x || '').replace(/\s+/g, ' ').replace(/\(\s+/g, '(').replace(/\s+\)/g, ')').replace(/\s*:\s*/g, ': ').trim().toLowerCase();
+    const cleanBp = (b, i) => ({id: String(b?.id || '').replace(/[^\w-]/g, '').slice(0, 24) || `bp${i}`, name: String(b?.name || 'Écran').slice(0, 40), icon: String(b?.icon || '▭').slice(0, 4), width: Math.round(clamp(b?.width || 800, 200, 3840)), query: i ? String(b?.query || '').replace(/[{};<>]/g, '').slice(0, 200).trim() : ''});
+    /* une requête @media ↔ des choix simples (la fenêtre « Gérer les écrans ») */
+    const MQ_KINDS = [['max', 'Jusqu’à … px de large'], ['min', 'À partir de … px de large'], ['range', 'Entre … et … px'], ['portrait', 'En portrait (plus haut que large)'], ['landscape', 'En paysage (plus large que haut)'], ['dark', 'Mode sombre de l’appareil'], ['light', 'Mode clair de l’appareil'], ['print', 'À l’impression'], ['touch', 'Écran tactile (sans souris)'], ['motion', 'Animations réduites'], ['custom', 'Requête écrite à la main']];
+    const MQ_FIXED = {portrait: '(orientation: portrait)', landscape: '(orientation: landscape)', dark: '(prefers-color-scheme: dark)', light: '(prefers-color-scheme: light)', print: 'print', touch: '(hover: none)', motion: '(prefers-reduced-motion: reduce)'};
+    const parseMq = q => {
+        const n = normMq(q); let m;
+        for (const [k, v] of Object.entries(MQ_FIXED)) if (n === v) return {kind: k, a: 0, b: 0, custom: n};
+        if ((m = /^\(max-width: (\d+)px\)$/.exec(n))) return {kind: 'max', a: +m[1], b: 0, custom: n};
+        if ((m = /^\(min-width: (\d+)px\)$/.exec(n))) return {kind: 'min', a: +m[1], b: 0, custom: n};
+        if ((m = /^\(min-width: (\d+)px\) and \(max-width: (\d+)px\)$/.exec(n))) return {kind: 'range', a: +m[1], b: +m[2], custom: n};
+        return {kind: 'custom', a: 0, b: 0, custom: String(q || '')};
+    };
+    const buildMq = ({kind, a, b, custom}) => MQ_FIXED[kind] || (kind === 'max' ? `(max-width: ${a}px)` : kind === 'min' ? `(min-width: ${a}px)` : kind === 'range' ? `(min-width: ${a}px) and (max-width: ${b}px)` : String(custom || '').replace(/[{};<>]/g, '').trim());
+    /** la largeur w répond-elle aux conditions de largeur de la requête ? (null : la requête ne parle pas de largeur) */
+    const mqWidth = (q, w) => { const n = normMq(q); let ok = null, m; const re = /\((max|min)-width: (\d+(?:\.\d+)?)px\)/g; while ((m = re.exec(n))) ok = (ok ?? true) && (m[1] === 'max' ? w <= +m[2] : w >= +m[2]); return ok; };
+    /** une requête que la largeur de l'aperçu ne suffit pas à montrer (sombre, impression, paysage…) : l'aperçu la fait « vraie » */
+    const mqSimulated = q => /prefers-color-scheme|print|orientation|hover|pointer|prefers-reduced-motion|prefers-contrast/.test(normMq(q));
     const TAG_CHOICES = ['div', 'header', 'nav', 'main', 'section', 'article', 'aside', 'footer', 'figure', 'p', 'h1', 'h2', 'h3', 'h4', 'blockquote', 'ul', 'ol', 'li', 'span', 'a'];
     const ROLES = [['header', 'En-tête', 'site-entete'], ['nav', 'Menu', 'site-menu'], ['main', 'Contenu principal', 'contenu'], ['section', 'Section', 'section'], ['footer', 'Pied de page', 'site-pied'], ['div', 'Carte', 'carte']];
     const NAMES = ['En-tête', 'Menu', 'Bandeau', 'Contenu principal', 'Section', 'Texte', 'Carte', 'Galerie', 'Image', 'Colonne', 'Citation', 'Contact', 'Pied de page'];
@@ -54,7 +74,8 @@
         const b = blankSite(); d = d && typeof d === 'object' ? d : {};
         const pages = Array.isArray(d.pages) && d.pages.length ? d.pages.map((p, i) => ({id: String(p.id || newId()), name: String(p.name || (i ? `Page ${i + 1}` : 'Accueil')), slug: i ? String(p.slug || slugOf(p.name)) : 'index', title: String(p.title || ''), desc: String(p.desc || ''), html: String(p.html || '')})) : b.pages;
         const frozen = d.frozen && typeof d.frozen === 'object' && !Array.isArray(d.frozen) ? {...d.frozen} : {};
-        return {v: 1, settings: {...b.settings, ...(d.settings || {})}, theme: {...b.theme, ...(d.theme || {})}, css: typeof d.css === 'string' ? d.css : b.css, js: typeof d.js === 'string' ? d.js : '', pages, frozen};
+        const bps = Array.isArray(d.breakpoints) && d.breakpoints.length ? d.breakpoints.slice(0, 12).map(cleanBp) : BP0();
+        return {v: 1, settings: {...b.settings, ...(d.settings || {})}, theme: {...b.theme, ...(d.theme || {})}, css: typeof d.css === 'string' ? d.css : b.css, js: typeof d.js === 'string' ? d.js : '', pages, frozen, breakpoints: bps};
     }
 
     /* ═════ 🗺 Les cartes sur leur fond ═════ */
@@ -120,11 +141,15 @@
             this.ctx = o; this.id = Number(o.id || 0); this.name = o.name || 'Mon site'; this.rev = o.rev || '';
             this.site = normalizeSite(o.data); this.pageIdx = 0; this.sel = null; this.mode = 'select'; this.dirty = !!o.dirty;
             this.blockCache = new Map(); this.mapPts = new Map(); this.blocksCss = ''; this.ready = false; this.codeTab = pref('codeTab', 'html');
-            this.view = innerWidth < 760 ? 'visual' : pref('view', innerWidth < 900 ? 'visual' : 'split'); this.device = innerWidth < 760 ? 'phone' : pref('device', 'desktop'); this.zoom = 1; this.zoomMode = 'fit'; this.left = pref('left', 'blocks');
+            this.view = innerWidth < 760 ? 'visual' : pref('view', innerWidth < 900 ? 'visual' : 'split'); this.device = innerWidth < 760 ? 'phone' : pref('device', 'desktop'); this.freeW = 0; this.zoom = 1; this.zoomMode = 'fit'; this.left = pref('left', 'blocks');
         }
         $(s) { return this.dlg?.querySelector(s); }
         $$(s) { return [...(this.dlg?.querySelectorAll(s) || [])]; }
         page() { return this.site.pages[this.pageIdx] || this.site.pages[0]; }
+        bps() { return this.site.breakpoints; }
+        bp(id = this.device) { return this.bps().find(b => b.id === id) || this.bps()[0]; }
+        /** la largeur de l'aperçu : celle de l'écran choisi, ou une largeur libre (poignée au bord de l'aperçu) */
+        devW() { return this.freeW || this.bp().width; }
         get mediaBase() { return new URL('media/', location.href).href; }
 
         open() {
@@ -133,7 +158,6 @@
             dlg.className = 'modal sw-dlg'; dlg.dataset.ownClose = '1'; dlg.setAttribute('data-no-foot', '');
             const top = U.editorTopbar({icon: '🌐', name: this.name, nameAttrs: 'data-sw-name', menus: [{html: '<nav data-sw-menus></nav>'}], undo: true, status: this.id && !this.dirty ? 'saved' : '',
                 buttons: {export: {attrs: 'data-sw-cmd="export"', title: 'Le site entier (.zip, à mettre en ligne) ou une page seule (.html)'}, save: {attrs: 'data-sw-cmd="save"'}, full: ext.fullButton ? {attrs: 'data-full-toggle="website"', title: 'Plein écran (⛶)'} : null, close: {attrs: 'data-sw-cmd="close"'}}});
-            const dev = Object.entries(DEVICES).map(([k, [w, ic, lab]]) => `<button type="button" data-sw-device="${k}" title="${esc(lab)} (${w} px)" aria-label="${esc(lab)}">${ic}</button>`).join('');
             dlg.innerHTML = `<div class="sw">${top}
                 <div class="sw-main">
                     <nav class="sw-rail" data-sw-rail aria-label="Outils">
@@ -150,15 +174,17 @@
                         <div class="sw-bar">
                             <label class="sw-pagepick">📄 <select data-sw-page aria-label="Page"></select></label>
                             <div class="segmented sw-views" role="tablist" aria-label="Affichage">${[['visual', '✨ Visuel'], ['split', '◫ Les deux'], ['code', '</> Code']].map(([k, l]) => `<button type="button" data-sw-view="${k}">${esc(l)}</button>`).join('')}</div>
-                            <div class="segmented sw-devices" role="tablist" aria-label="Taille de l’écran">${dev}</div>
+                            <span class="sw-layout" data-sw-layout><button type="button" class="button small secondary" data-sw-swap title="Inverser l’aperçu et le code" aria-label="Inverser l’aperçu et le code">⇄</button><button type="button" class="button small secondary" data-sw-orient title="Côte à côte, ou l’un au-dessus de l’autre" aria-label="Côte à côte ou l’un au-dessus de l’autre">⬓</button></span>
+                            <div class="segmented sw-devices" role="tablist" aria-label="Taille de l’écran" data-sw-devices></div>
                             <span class="spacer"></span>
                             <button type="button" class="button small secondary" data-sw-cmd="publish" title="Mettre le site en ligne : Netlify, GitHub Pages ou ton hébergement (FTP sécurisé)">📤 Publier</button>
                             <button type="button" class="button small secondary" data-sw-cmd="browser" title="Ouvrir cette page dans un onglet du navigateur, comme un visiteur (isolée de l’app)">↗ Aperçu</button>
                         </div>
                         <div class="sw-work" data-sw-work>
-                            <div class="sw-stage" data-sw-stage data-ctx-off><div class="sw-sizer" data-sw-sizer><div class="sw-device" data-sw-devbox><iframe class="sw-frame" data-sw-frame title="Aperçu du site" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></div></div></div>
+                            <div class="sw-stage" data-sw-stage data-ctx-off><div class="sw-sizer" data-sw-sizer><div class="sw-device" data-sw-devbox><iframe class="sw-frame" data-sw-frame title="Aperçu du site" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></div><span class="sw-wgrip" data-sw-wgrip title="Glisser pour essayer une autre largeur (double-clic : celle de l’écran)" aria-hidden="true"></span><span class="sw-wtag" data-sw-wtag hidden></span></div></div>
+                            <div class="sw-split" data-sw-split role="separator" tabindex="0" aria-label="Partager l’aperçu et le code" title="Glisser pour partager l’aperçu et le code (double-clic : moitié-moitié)"></div>
                             <div class="sw-code" data-sw-code>
-                                <div class="sw-codebar"><div class="segmented sw-codetabs" role="tablist" aria-label="Fichier">${[['html', 'HTML de la page'], ['css', 'CSS du site'], ['js', 'JS du site']].map(([k, l]) => `<button type="button" data-sw-tab="${k}">${esc(l)}</button>`).join('')}</div><span class="sw-codehelp" data-sw-codehelp></span></div>
+                                <div class="sw-codebar"><div class="segmented sw-codetabs" role="tablist" aria-label="Fichier">${[['html', 'HTML de la page'], ['css', 'CSS du site'], ['js', 'JS du site']].map(([k, l]) => `<button type="button" data-sw-tab="${k}">${esc(l)}</button>`).join('')}</div><span class="sw-mqnav" data-sw-mqnav hidden><button type="button" class="button small secondary" data-sw-mqgo title="Aller à un bloc @media du CSS">@media ▾</button></span><span class="sw-codehelp" data-sw-codehelp></span></div>
                                 <div class="sw-codehost" data-sw-codehost></div>
                             </div>
                         </div>
@@ -177,7 +203,8 @@
             this.code = CODE().create(this.$('[data-sw-codehost]'), {lang: this.codeTab, value: this.codeValue(), label: 'Code du site', onChange: v => this.codeChanged(v), onCursor: p => this.codeCursor(p)});
             this.hist = U.editorHistory({get: () => JSON.stringify({site: {...this.site, frozen: undefined}, page: this.pageIdx}), set: s => { const fz = this.site.frozen; this.site = normalizeSite(s.site); this.site.frozen = fz; this.pageIdx = clamp(s.page, 0, this.site.pages.length - 1); this.sel = null; this.afterRestore(); }, onChange: h => this.histButtons(h)});
             this.onMsg = e => this.message(e); window.addEventListener('message', this.onMsg);
-            this.ro = new ResizeObserver(() => { if (this.zoomMode === 'fit') this.fit(); }); this.ro.observe(this.stage);
+            // l'aperçu s'ajuste quand la place change, une fois par image et seulement si la taille a vraiment changé (pas de va-et-vient avec une barre de défilement)
+            this.ro = new ResizeObserver(() => { const w = this.$('[data-sw-work]'); if (w && w.dataset.view === 'split' && w.dataset.orient !== this.orientNow()) return this.applyView(); if (this.zoomMode !== 'fit') return; cancelAnimationFrame(this.fitRaf); this.fitRaf = requestAnimationFrame(() => { const k = `${this.stage.clientWidth}x${this.stage.clientHeight}`; if (k === this.fitKey) return; this.fitKey = k; this.fit(); }); }); this.ro.observe(this.stage);
             if (matchMedia('(max-width: 760px)').matches) this.$('[data-sw-leftpane]').hidden = true; // téléphone : le panneau s'ouvre par la colonne d'outils
             this.bind();
             this.paintLeft(); this.paintPages(); this.paintPanel(); this.applyView(); this.applyDevice(); this.setMode('select', true);
@@ -203,7 +230,8 @@
                     {icon: '</>', label: 'Voir l’élément dans le code', disabled: !this.sel, run: () => this.revealInCode(true)}, '-', {icon: '🗑', label: 'Supprimer l’élément', danger: true, disabled: !this.sel, run: () => this.remove()}],
                 Insertion: () => [...k.GROUPS.flatMap(([g, gl], gi) => [...(gi ? ['-'] : []), ...k.BLOCKS.filter(b => b.group === g).map(b => ({icon: b.icon, label: b.label, run: () => this.insertBlock(b.key)}))]), '-', {icon: '📄', label: 'Nouvelle page…', run: () => this.addPage()}],
                 Affichage: () => [...[['visual', '✨ Visuel'], ['split', '◫ Visuel et code'], ['code', '</> Code']].map(([v, l]) => ({label: l, checked: this.view === v, run: () => this.setView(v)})), '-',
-                    ...Object.entries(DEVICES).map(([d, [w, ic, l]]) => ({icon: ic, label: `${l} (${w} px)`, checked: this.device === d, run: () => this.setDevice(d)})), '-',
+                    {icon: '⇄', label: 'Inverser l’aperçu et le code', run: () => this.setLayout({swap: !this.swap})}, {icon: '⬓', label: this.orientNow() === 'row' ? 'L’un au-dessus de l’autre' : 'Côte à côte', run: () => this.setLayout({orient: this.orientNow() === 'row' ? 'col' : 'row'})}, '-',
+                    ...this.bps().map(b => ({icon: b.icon, label: `${b.name} (${b.width} px)`, checked: this.device === b.id && !this.freeW, run: () => this.setDevice(b.id)})), {icon: '⚙', label: 'Gérer les écrans (@media)…', run: () => this.bpDialog()}, '-',
                     {icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => { this.zoomMode = 'fit'; this.fit(); }}, {label: '100 % (taille réelle)', shortcut: '⌘1', run: () => { this.zoomMode = 'manual'; this.setZoom(1); }}, '-',
                     {icon: '⟳', label: 'Relire les blocs de la généalogie', run: () => { this.blockCache.clear(); this.reload(); }}],
             };
@@ -227,12 +255,16 @@
                 if (b.matches('[data-sw-view-toggle]')) return this.setView(this.view === 'visual' ? 'split' : 'visual');
                 if (c.swView) return this.setView(c.swView);
                 if (c.swDevice) return this.setDevice(c.swDevice);
+                if (b.matches('[data-sw-bpmanage]')) return this.bpDialog();
+                if (b.matches('[data-sw-mqgo]')) return this.mqMenu(b);
+                if (b.matches('[data-sw-swap]')) return this.setLayout({swap: !this.swap});
+                if (b.matches('[data-sw-orient]')) return this.setLayout({orient: this.orientNow() === 'row' ? 'col' : 'row'});
                 if (c.swTab) return this.setCodeTab(c.swTab);
                 if (c.swBlock) return this.insertBlock(c.swBlock);
                 if (c.swOpenPage) return this.goPage(Number(c.swOpenPage));
                 if (c.swPage) return this.pageAction(c.swPage, Number(c.swPi));
                 if (c.swState !== undefined) { this.styleState = c.swState; return this.paintPanel(); }
-                if (c.swScreen) { this.styleScreen = c.swScreen; if (c.swScreen !== 'all' && this.device !== {tablet: 'tablet', phone: 'phone'}[c.swScreen]) this.setDevice(c.swScreen); return this.paintPanel(); }
+                if (c.swScreen) { this.styleScreen = c.swScreen; if (c.swScreen !== 'all' && this.device !== c.swScreen) this.setDevice(c.swScreen); return this.paintPanel(); }
                 if (c.swAct) return this.panelAction(c.swAct, b);
                 if (c.swRole) return this.setRole(Number(c.swRole));
                 if (c.swFont) return this.pickFont(c.swFont);
@@ -263,6 +295,7 @@
             // glisser un bloc depuis ＋ Blocs vers l'aperçu (le bloc est retenu ici : le cadre isolé ne reçoit que la position)
             d.addEventListener('dragstart', e => { const b = e.target.closest?.('[data-sw-block]'); if (!b) return; this.dragKey = b.dataset.swBlock; e.dataTransfer.setData('text/plain', `bloc:${this.dragKey}`); e.dataTransfer.effectAllowed = 'copy'; this.stage.classList.add('is-drop'); });
             d.addEventListener('dragend', () => { this.stage.classList.remove('is-drop'); setTimeout(() => { this.dragKey = ''; }, 200); });
+            this.bindDrags();
             // (pas de « load → pas prêt » : l'évènement load arrive APRÈS le message « prêt » du pont et l'effaçait ; seul reload() change la page)
         }
 
@@ -348,7 +381,12 @@
             this.pushHtml(); this.pushCss();
         }
         get liveFonds() { return this._live || {}; }
-        cssFor() { const base = this.mediaBase; return this.site.css.replace(/url\(\s*(["']?)media\//gi, `url($1${base}`); }
+        /** le CSS de l'aperçu ; l'écran choisi dont la requête ne dépend pas que de la largeur (sombre, impression…) : son @media devient « all » ici */
+        cssFor() {
+            const base = this.mediaBase; let css = this.site.css; const q = this.freeW ? '' : this.bp().query;
+            if (q && mqSimulated(q)) { const want = normMq(q); CODE().cssScan(css).medias.filter(m => m.query === want).sort((x, y) => y.start - x.start).forEach(m => { css = `${css.slice(0, m.start)}@media all /* aperçu : ${want.replace(/\*\//g, '')} */ ${css.slice(m.open)}`; }); }
+            return css.replace(/url\(\s*(["']?)media\//gi, `url($1${base}`);
+        }
         themeFull() { return `${themeCss(this.site.theme)}\n${this.blocksCss}`; }
         srcdoc() {
             const k = K(), origin = location.origin, play = this.mode === 'play';
@@ -400,28 +438,135 @@
 
         /* ── la mise en page de l'éditeur ── */
         setView(v) { this.view = v; setPref('view', v); this.applyView(); }
+        get swap() { return !!pref('swap', false); }
+        /** côte à côte (row) ou l'un au-dessus de l'autre (col) ; « auto » : l'un au-dessus de l'autre quand la place manque */
+        orientNow() { const o = pref('orient', 'auto'); return o === 'row' || o === 'col' ? o : ((this.$('.sw-center')?.clientWidth || innerWidth) < 700 ? 'col' : 'row'); }
+        setLayout({swap, orient, split} = {}) { if (swap !== undefined) setPref('swap', !!swap); if (orient) setPref('orient', orient); if (split !== undefined) setPref('split', split); this.applyView(); }
         applyView() {
-            this.$('[data-sw-work]').dataset.view = this.view;
+            const work = this.$('[data-sw-work]'), a = clamp(pref('split', 0.55), 0.15, 0.85);
+            work.dataset.view = this.view; work.dataset.orient = this.orientNow(); work.dataset.swap = this.swap ? '1' : '';
+            work.style.setProperty('--sw-a', `${a}fr`); work.style.setProperty('--sw-b', `${1 - a}fr`);
+            this.$('[data-sw-layout]').hidden = this.view !== 'split';
+            const ob = this.$('[data-sw-orient]'); if (ob) { ob.textContent = this.orientNow() === 'row' ? '⬓' : '◫'; ob.title = this.orientNow() === 'row' ? 'Mettre l’un au-dessus de l’autre' : 'Mettre côte à côte'; }
             this.$$('[data-sw-view]').forEach(b => b.classList.toggle('is-active', b.dataset.swView === this.view));
             this.$('[data-sw-view-toggle]')?.classList.toggle('is-active', this.view !== 'visual');
             this.setCodeTab(this.codeTab, true);
             setTimeout(() => { if (this.zoomMode === 'fit') this.fit(); }, 30);
         }
-        setDevice(d) { if (!DEVICES[d]) return; this.device = d; setPref('device', d); this.applyDevice(); }
-        applyDevice() {
-            this.$$('[data-sw-device]').forEach(b => b.classList.toggle('is-active', b.dataset.swDevice === this.device));
-            this.devbox.dataset.device = this.device; this.devbox.style.width = `${DEVICES[this.device][0]}px`;
-            this.zoomMode = 'fit'; this.fit(); this.whereText();
+        setDevice(d) { if (!this.bps().some(b => b.id === d)) return; this.device = d; this.freeW = 0; setPref('device', d); this.applyDevice(); }
+        paintDevices() {
+            const box = this.$('[data-sw-devices]'); if (!box) return; const cur = this.bp();
+            box.innerHTML = this.bps().map(b => `<button type="button" data-sw-device="${esc(b.id)}" class="${b.id === cur.id && !this.freeW ? 'is-active' : ''}" title="${esc(b.name)} (${b.width} px)${b.query ? ` · @media ${esc(b.query)}` : ''}" aria-label="${esc(b.name)}">${esc(b.icon)}</button>`).join('')
+                + '<button type="button" data-sw-bpmanage title="Gérer les écrans : points de rupture et @media (largeurs, orientation, mode sombre, impression…)" aria-label="Gérer les écrans">⚙</button>';
         }
-        fit() { const w = DEVICES[this.device][0], avail = Math.max(200, (this.stage?.clientWidth || w) - 32); this.setZoom(Math.min(1, avail / w)); }
+        applyDevice() {
+            if (!this.bps().some(b => b.id === this.device)) this.device = this.bps()[0].id;
+            this.paintDevices(); const w = this.devW(), tag = this.$('[data-sw-wtag]'); if (tag && !this.freeW) tag.hidden = true;
+            this.devbox.dataset.device = w <= 1100 ? (w <= 600 ? 'phone' : 'tablet') : 'desktop'; this.devbox.style.width = `${w}px`;
+            this.zoomMode = 'fit'; this.fitKey = ''; this.fit(); this.whereText(); this.pushCss();
+        }
+        fit() { const w = this.devW(), avail = Math.max(200, (this.stage?.clientWidth || w) - 32); this.setZoom(Math.min(1, avail / w)); }
         setZoom(k) {
-            this.zoom = clamp(k, 0.25, 2);
-            const w = DEVICES[this.device][0], h = Math.max(300, ((this.stage?.clientHeight || 600) - 32) / this.zoom);
+            this.zoom = clamp(k, this.zoomMode === 'fit' ? 0.1 : 0.25, 2); // ajusté : jamais plus large que la place (sinon l'aperçu serait coupé)
+            const fit = this.zoomMode === 'fit', w = this.devW(), h = Math.max(fit ? 120 : 300, ((this.stage?.clientHeight || 600) - 32) / this.zoom);
+            this.stage?.classList.toggle('is-fit', fit); // ajusté : pas de barre de défilement qui ferait bouger la largeur (et clignoter l'aperçu)
             this.devbox.style.height = `${h}px`; this.devbox.style.transform = `scale(${this.zoom})`;
             this.sizer.style.width = `${w * this.zoom}px`; this.sizer.style.height = `${h * this.zoom}px`;
             this.status?.sync?.();
         }
-        whereText() { const s = this.sel; this.status?.setWhere?.(`${this.page().name} · ${DEVICES[this.device][2]}${s ? ` · ${this.label(s)}` : ''}`); }
+        whereText() { const s = this.sel, b = this.bp(); this.status?.setWhere?.(`${this.page().name} · ${this.freeW ? `${this.freeW} px` : `${b.name} (${b.width} px)`}${s ? ` · ${this.label(s)}` : ''}`); }
+        /** ↔ le trait entre l'aperçu et le code, et ⟷ la poignée de largeur de l'aperçu */
+        bindDrags() {
+            const work = this.$('[data-sw-work]'), split = this.$('[data-sw-split]'), grip = this.$('[data-sw-wgrip]');
+            const drag = (el, move, end) => el.addEventListener('pointerdown', e => {
+                if (e.button) return; e.preventDefault(); el.setPointerCapture(e.pointerId); el.classList.add('is-drag'); work.classList.add('is-dragging');
+                const mv = ev => move(ev, e), up = ev => { el.removeEventListener('pointermove', mv); el.removeEventListener('pointerup', up); el.removeEventListener('pointercancel', up); el.classList.remove('is-drag'); work.classList.remove('is-dragging'); end?.(ev); };
+                el.addEventListener('pointermove', mv); el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+            });
+            const ratio = ev => { const r = work.getBoundingClientRect(), col = work.dataset.orient === 'col'; return clamp(col ? (ev.clientY - r.top) / r.height : (ev.clientX - r.left) / r.width, 0.15, 0.85); };
+            const setA = a => { work.style.setProperty('--sw-a', `${a}fr`); work.style.setProperty('--sw-b', `${1 - a}fr`); };
+            drag(split, ev => setA(ratio(ev)), ev => { setPref('split', Math.round(ratio(ev) * 100) / 100); this.fitKey = ''; if (this.zoomMode === 'fit') this.fit(); });
+            split.addEventListener('dblclick', () => this.setLayout({split: 0.5}));
+            split.addEventListener('keydown', e => { const d = {ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1}[e.key]; if (!d) return; e.preventDefault(); this.setLayout({split: clamp(pref('split', 0.55) + d * 0.05, 0.15, 0.85)}); });
+            let w0 = 0;
+            drag(grip, (ev, e0) => { if (!w0) { w0 = this.devW(); this.zoomMode = 'manual'; } this.setFreeW(Math.round(w0 + 2 * (ev.clientX - e0.clientX) / this.zoom)); }, () => { w0 = 0; this.zoomMode = 'fit'; this.fitKey = ''; this.fit(); this.pushCss(); });
+            grip.addEventListener('dblclick', () => { this.freeW = 0; this.applyDevice(); });
+        }
+        /** une largeur libre pour l'aperçu (la poignée) : l'étiquette dit quels écrans du site s'appliquent à cette largeur */
+        setFreeW(w) {
+            this.freeW = Math.round(clamp(w, 200, 3840)); const tag = this.$('[data-sw-wtag]');
+            this.devbox.style.width = `${this.freeW}px`; this.devbox.dataset.device = this.freeW <= 1100 ? (this.freeW <= 600 ? 'phone' : 'tablet') : 'desktop';
+            const on = this.bps().slice(1).filter(b => mqWidth(b.query, this.freeW)).map(b => b.icon).join(' ');
+            tag.hidden = false; tag.textContent = `${this.freeW} px${on ? ` · ${on}` : ''}`;
+            this.setZoom(this.zoom); this.paintDevices(); this.whereText();
+        }
+        /** ⚙ Gérer les écrans : les points de rupture du site et leurs requêtes @media */
+        bpDialog() {
+            const scan = () => CODE().cssScan(this.site.css).medias;
+            let list = this.bps().map(b => ({...b, was: b.query, mq: parseMq(b.query)}));
+            const PRESETS = [
+                ['Simple : tablette et téléphone', () => BP0()],
+                ['Comme Bootstrap (576, 768, 992, 1200)', () => [{id: 'desktop', name: 'Grand écran', icon: '🖥', width: 1400, query: ''}, {id: 'lg', name: 'Ordinateur', icon: '💻', width: 1100, query: '(max-width: 1199px)'}, {id: 'md', name: 'Tablette paysage', icon: '▭', width: 960, query: '(max-width: 991px)'}, {id: 'sm', name: 'Tablette', icon: '▯', width: 720, query: '(max-width: 767px)'}, {id: 'xs', name: 'Téléphone', icon: '📱', width: 390, query: '(max-width: 575px)'}]],
+                ['Comme Tailwind, en montant (640, 768, 1024, 1280)', () => [{id: 'base', name: 'Téléphone', icon: '📱', width: 390, query: ''}, {id: 'sm', name: 'Grand téléphone', icon: '▯', width: 640, query: '(min-width: 640px)'}, {id: 'md', name: 'Tablette', icon: '💻', width: 768, query: '(min-width: 768px)'}, {id: 'lg', name: 'Ordinateur', icon: '🖥', width: 1024, query: '(min-width: 1024px)'}, {id: 'xl', name: 'Grand écran', icon: '🖥', width: 1280, query: '(min-width: 1280px)'}]],
+            ];
+            const EXTRAS = [['🌙 Mode sombre', {name: 'Mode sombre', icon: '🌙', query: '(prefers-color-scheme: dark)'}], ['🖨 Impression', {name: 'Impression', icon: '🖨', query: 'print', width: 794}], ['📱 Téléphone couché', {name: 'Téléphone couché', icon: '📲', width: 740, query: '(max-width: 900px) and (orientation: landscape)'}], ['👆 Écran tactile', {name: 'Tactile', icon: '👆', query: '(hover: none)'}]];
+            const count = q => { const n = normMq(q); return n ? scan().filter(m => m.query === n).length : 0; };
+            const row = (b, i) => {
+                const fixed = !i, k = b.mq.kind, n = count(b.was), num = (f, v) => `<input type="number" min="100" max="4000" step="1" value="${v || ''}" data-bp-${f}="${i}" aria-label="Largeur en px" style="width:78px"> px`;
+                return `<div class="sw-bp${fixed ? ' is-base' : ''}" data-bp-row="${i}">
+                    <div class="sw-bp-head"><input value="${esc(b.icon)}" data-bp-icon="${i}" maxlength="4" aria-label="Icône" class="sw-bp-ico"><input value="${esc(b.name)}" data-bp-name="${i}" maxlength="40" aria-label="Nom de l’écran" class="sw-bp-name">
+                    <label class="sw-bp-w" title="La largeur de l’aperçu quand on choisit cet écran">aperçu ${num('width', b.width)}</label>
+                    <span class="spacer"></span>${fixed ? '' : `<button type="button" class="icon-button small" data-bp-up="${i}" title="Monter" aria-label="Monter"${i < 2 ? ' disabled' : ''}>↑</button><button type="button" class="icon-button small" data-bp-down="${i}" title="Descendre" aria-label="Descendre"${i === list.length - 1 ? ' disabled' : ''}>↓</button><button type="button" class="icon-button small" data-bp-del="${i}" title="Retirer cet écran (le CSS reste)" aria-label="Retirer">🗑</button>`}</div>
+                    ${fixed ? '<small class="sw-hint">L’écran de base : son CSS s’applique partout, sans @media. Les autres écrans le complètent.</small>' : `<div class="sw-bp-q"><select data-bp-kind="${i}" aria-label="Condition">${MQ_KINDS.map(([v, l]) => `<option value="${v}"${v === k ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>
+                        ${k === 'max' || k === 'min' ? num('a', b.mq.a) : k === 'range' ? `${num('a', b.mq.a)} et ${num('b', b.mq.b)}` : k === 'custom' ? `<input value="${esc(b.mq.custom)}" data-bp-custom="${i}" placeholder="(min-width: 600px) and (hover: hover)" aria-label="Requête @media" class="sw-bp-custom">` : ''}</div>
+                    <small class="sw-hint"><code>@media ${esc(b.query || '…')}</code> · ${n ? plural(n, 'bloc') + ' dans le CSS' : 'pas encore de CSS'}${b.was && normMq(b.was) !== normMq(b.query) && n ? ' · ces blocs suivront la nouvelle requête' : ''}${mqSimulated(b.query) ? ' · l’aperçu le montre même si ton appareil ne l’est pas' : ''}</small>`}</div>`;
+            };
+            const orphans = () => { const known = new Set(list.map(b => normMq(b.was)).concat(list.map(b => normMq(b.query)))); return [...new Set(scan().map(m => m.query))].filter(q => q && !known.has(q)); };
+            ext.openDialog({eyebrow: 'MON SITE WEB', title: '⚙ Les écrans du site (@media)', wide: true, submitLabel: 'Appliquer',
+                body: `<p class="sw-hint" style="margin-top:0">Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc <code>@media</code> du CSS du site.</p>
+                    <div class="sw-row"><span>Partir de :</span>${PRESETS.map(([l], j) => `<button type="button" class="button small secondary" data-bp-preset="${j}">${esc(l)}</button>`).join('')}</div>
+                    <div data-bp-list class="sw-bps"></div>
+                    <div class="sw-row"><button type="button" class="button small" data-bp-add>＋ Un écran</button>${EXTRAS.map(([l], j) => `<button type="button" class="button small secondary" data-bp-extra="${j}">＋ ${esc(l)}</button>`).join('')}</div><div data-bp-orph></div>`,
+                onOpen: d => {
+                    const paint = () => {
+                        d.querySelector('[data-bp-list]').innerHTML = list.map(row).join('');
+                        const o = orphans(); d.querySelector('[data-bp-orph]').innerHTML = o.length ? `<p class="sw-hint">Dans le CSS, sans écran : ${o.map(q => `<button type="button" class="sw-chip" data-bp-adopt="${esc(q)}" title="En faire un écran">＋ @media ${esc(q)}</button>`).join(' ')}</p>` : '';
+                    };
+                    const sync = i => { const b = list[i]; if (i) b.query = buildMq(b.mq); };
+                    paint();
+                    d.addEventListener('input', e => {
+                        const t = e.target, c = t.dataset, i = Number(c.bpIcon ?? c.bpName ?? c.bpWidth ?? c.bpA ?? c.bpB ?? c.bpCustom ?? -1); if (!list[i]) return;
+                        const b = list[i];
+                        if (c.bpIcon !== undefined) b.icon = t.value; else if (c.bpName !== undefined) b.name = t.value; else if (c.bpWidth !== undefined) b.width = Number(t.value) || b.width;
+                        else { if (c.bpA !== undefined) b.mq.a = Number(t.value) || 0; if (c.bpB !== undefined) b.mq.b = Number(t.value) || 0; if (c.bpCustom !== undefined) b.mq.custom = t.value; sync(i); const h = t.closest('[data-bp-row]').querySelector('.sw-hint code'); if (h) h.textContent = `@media ${b.query || '…'}`; }
+                    });
+                    d.addEventListener('change', e => { const i = Number(e.target.dataset.bpKind ?? -1); if (!list[i]) return; const b = list[i], kind = e.target.value; b.mq = {...b.mq, kind, a: b.mq.a || b.width, b: b.mq.b || b.width + 200, custom: b.mq.custom || b.query}; sync(i); paint(); });
+                    d.addEventListener('click', e => {
+                        const t = e.target.closest('button'); if (!t) return; const c = t.dataset;
+                        if (c.bpPreset !== undefined) { const keep = list.filter((b, i) => i && count(b.was)); list = PRESETS[Number(c.bpPreset)][1]().map(b => ({...b, was: '', mq: parseMq(b.query)})); keep.forEach(b => { if (!list.some(x => normMq(x.query) === normMq(b.was))) list.push({...b, query: b.was, mq: parseMq(b.was)}); }); return paint(); }
+                        const add = o => { list.push({id: `bp${Date.now().toString(36)}${list.length}`, name: o.name || 'Écran', icon: o.icon || '▭', width: o.width || 600, query: o.query, was: '', mq: parseMq(o.query)}); paint(); };
+                        if (c.bpAdd !== undefined) return add({name: 'Nouvel écran', width: 600, query: '(max-width: 600px)'});
+                        if (c.bpExtra !== undefined) { const o = EXTRAS[Number(c.bpExtra)][1]; return add({...o, width: o.width || this.bps()[0].width}); }
+                        if (c.bpAdopt !== undefined) { const w = /max-width: (\d+)/.exec(c.bpAdopt)?.[1]; return add({name: 'Écran', query: c.bpAdopt, width: Number(w) || 800}); }
+                        const i = Number(c.bpUp ?? c.bpDown ?? c.bpDel ?? -1); if (!list[i]) return;
+                        if (c.bpDel !== undefined) list.splice(i, 1);
+                        else { const j = c.bpUp !== undefined ? i - 1 : i + 1; if (j < 1 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; }
+                        paint();
+                    });
+                },
+                onSubmit: () => {
+                    const bad = list.find((b, i) => i && !b.query); if (bad) throw new Error(`« ${bad.name} » : il manque sa condition (@media).`);
+                    // les blocs @media dont la requête a changé suivent (du dernier au premier : les positions restent bonnes)
+                    let css = this.site.css; const ren = new Map(list.filter(b => b.was && normMq(b.was) !== normMq(b.query)).map(b => [normMq(b.was), b.query]));
+                    const moved = ren.size ? CODE().cssScan(css).medias.filter(m => ren.has(m.query)) : []; moved.sort((x, y) => y.start - x.start).forEach(m => { css = `${css.slice(0, m.start)}@media ${ren.get(m.query)} ${css.slice(m.open)}`; });
+                    const ids = new Set(); const next = list.map((b, i) => { const c = cleanBp(b, i); while (ids.has(c.id)) c.id += 'x'; ids.add(c.id); return c; });
+                    this.site.breakpoints = next; if (css !== this.site.css) { this.site.css = css; if (this.codeTab === 'css') this.code.value = css; }
+                    if (!next.some(b => b.id === this.device)) this.device = next[0].id;
+                    if (this.styleScreen && !next.some(b => b.id === this.styleScreen)) this.styleScreen = 'all';
+                    this.freeW = 0; this.applyDevice(); this.paintPanel(); this.changed(); this.hist.commit();
+                    toast(moved.length ? `Écrans enregistrés ; ${plural(moved.length, 'bloc @media')} du CSS ${moved.length > 1 ? 'ont' : 'a'} suivi.` : 'Écrans enregistrés.', 'success');
+                }});
+        }
         label(s) { return `${s.tag}${s.id ? '#' + s.id : ''}${s.cls ? '.' + s.cls.split(/\s+/).slice(0, 3).join('.') : ''}`; }
 
         /* ── le panneau de gauche : blocs, pages, styles ── */
@@ -524,7 +669,7 @@
         styleTarget() {
             const s = this.sel; if (!s) return null;
             const to = this.styleTo || 'el', state = this.styleState || '', screen = this.styleScreen || 'all';
-            const media = {tablet: '(max-width: 820px)', phone: '(max-width: 480px)'}[screen] || null;
+            const media = screen === 'all' ? null : (this.bps().find(b => b.id === screen)?.query || null);
             if (to.startsWith('class:')) return {sel: `.${to.slice(6)}${state}`, media};
             if (!state && !media) return {inline: true};
             if (!s.id) { const id = `el-${Math.random().toString(36).slice(2, 7)}`; this.setAttr('id', id); }
@@ -690,10 +835,10 @@
         targetHtml() {
             const s = this.sel, classes = s.cls.split(/\s+/).filter(c => /^[A-Za-z_-][\w-]*$/.test(c)), to = this.styleTo || 'el', st = this.styleState || '', sc = this.styleScreen || 'all';
             const t = to.startsWith('class:') ? `.${to.slice(6)}${st}` : (st || sc !== 'all' ? `#${s.id || '…'}${st}` : 'style="…" de l’élément');
-            const media = {tablet: ' dans @media (max-width: 820px)', phone: ' dans @media (max-width: 480px)'}[sc] || '';
+            const q = sc === 'all' ? '' : this.bps().find(b => b.id === sc)?.query || '', media = q ? ` dans @media ${q}` : '';
             return `<div class="sw-target"><label>Appliquer à<select data-sw-to>${classes.map(c => `<option value="class:${esc(c)}"${to === `class:${c}` ? ' selected' : ''}>Tous les éléments .${esc(c)}</option>`).join('')}<option value="el"${to === 'el' ? ' selected' : ''}>Cet élément seulement</option></select></label>
                 <div class="segmented sw-seg" role="tablist" aria-label="État">${[['', 'Normal'], [':hover', 'Au survol']].map(([v, l]) => `<button type="button" data-sw-state="${v}" class="${st === v ? 'is-active' : ''}">${l}</button>`).join('')}</div>
-                <div class="segmented sw-seg" role="tablist" aria-label="Écran">${[['all', '🖥 Partout'], ['tablet', '💻 Tablette'], ['phone', '📱 Téléphone']].map(([v, l]) => `<button type="button" data-sw-screen="${v}" class="${sc === v ? 'is-active' : ''}" title="${v === 'all' ? 'Partout' : v === 'tablet' ? 'Écrans de 820 px ou moins' : 'Écrans de 480 px ou moins'}">${l}</button>`).join('')}</div>
+                <div class="segmented sw-seg" role="tablist" aria-label="Écran">${[['all', '🖥 Partout', 'Tous les écrans'], ...this.bps().slice(1).map(b => [b.id, `${b.icon} ${b.name}`, `@media ${b.query || '…'}`])].map(([v, l, ti]) => `<button type="button" data-sw-screen="${esc(v)}" class="${sc === v ? 'is-active' : ''}" title="${esc(ti)}">${esc(l)}</button>`).join('')}</div>
                 <small class="sw-hint">Écrit dans : <code>${esc(t)}</code>${esc(media)}${t.startsWith('style') ? '' : ' — CSS du site'}</small></div>`;
         }
         async panelAction(act, b) {
@@ -730,8 +875,19 @@
             if (!this.code) return;
             this.code.setLang(tab); this.code.value = this.codeValue();
             const help = {html: `HTML de « ${this.page().name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls`, css: 'CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)…', js: 'JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté'};
-            this.$('[data-sw-codehelp]').textContent = help[tab];
+            this.$('[data-sw-codehelp]').textContent = help[tab]; this.$('[data-sw-mqnav]').hidden = tab !== 'css';
             if (!quiet) this.code.focus();
+        }
+        /** CSS : les blocs @media du site, pour y aller ; un écran sans bloc : on le crée à la fin */
+        mqMenu(btn) {
+            const css = this.site.css, medias = CODE().cssScan(css).medias, bps = this.bps().slice(1);
+            const go = (a, b) => { this.code.reveal(a, b); };
+            const items = medias.map(m => { const b = bps.find(x => normMq(x.query) === m.query); const n = CODE().cssScan(css).rules.filter(r => r.start > m.open && r.close < m.close).length;
+                return {icon: b ? b.icon : '@', label: `${b ? b.name + ' · ' : ''}@media ${m.query}`, help: plural(n, 'règle'), run: () => go(m.start, m.open)}; });
+            const missing = bps.filter(b => !medias.some(m => m.query === normMq(b.query)));
+            UI().menuAt(btn, [...(items.length ? items : [{label: 'Pas encore de bloc @media', disabled: true}]), '-',
+                ...missing.map(b => ({icon: '＋', label: `Ajouter @media pour ${b.icon} ${b.name}`, run: () => { const v = `${this.site.css.replace(/\s*$/, '')}\n\n@media ${b.query} {\n  \n}\n`; this.site.css = v; this.code.value = v; this.pushCss(); this.changed(true); const at = v.lastIndexOf('{\n  \n}') + 4; this.code.reveal(at, at); }})),
+                {icon: '⚙', label: 'Gérer les écrans…', run: () => this.bpDialog()}], {title: 'Blocs @media du CSS'});
         }
         codeChanged(v) {
             if (this.codeTab === 'html') { if (v.length > MAX_HTML) return; this.page().html = v; clearTimeout(this.codeT); this.codeT = setTimeout(() => { this.checkSel(); this.pushHtml(); }, 220); }
