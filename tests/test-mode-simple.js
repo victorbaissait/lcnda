@@ -12,7 +12,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  6. cibles de 64 px et texte de 22 px au moins, sur chaque écran ; contraste AAA des 3 thèmes ; 1024×768, 1440×900, 390×844
  *     sans défilement de côté ;
  *  7. clavier : Tab, flèches, Entrée, ↑ dans l'arbre, + −, Échap = Retour, ← → du diaporama ;
- *  8. Maintenance → Accessibilité → 🧓 Mode simple : réglage → aperçu vivant → mode, « ✓ Enregistré » et « ↶ Annuler » (K2).
+ *  8. Réglages → Accessibilité → 🧓 Mode simple : réglage → aperçu vivant → mode, « ✓ Enregistré » et « ↶ Annuler » (K2).
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -152,7 +152,7 @@ const ok = (msg) => console.log('  ✓ ' + msg);
         assert.ok(await page.$('.a11y-page [data-ms-box] .ms-intro .ms-topbtn [data-ms-bool="forAll"]'), 'le réglage du bouton 🧓 est tout en haut de l’onglet');
         ok('bouton 🧓 caché au départ ; son réglage tout en haut de l’onglet');
         assert.equal(await MS(() => !!window.LCNDA_EXT.modeSimple.isOpen()), false);
-        ok('1re fois : le bouton 🧓 ouvre « Préparer » (Maintenance → Accessibilité → 🧓 Mode simple)');
+        ok('1re fois : le bouton 🧓 ouvre « Préparer » (Réglages → Accessibilité → 🧓 Mode simple)');
         posts.length = 0;
         await page.click('[data-ms-open="now"]');
         await page.waitForSelector('#ms-root .ms-home');

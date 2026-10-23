@@ -1,4 +1,4 @@
-/* LCNDA — 🖼️ La visionneuse d'images réglable (Maintenance → « Visionneuse d'images ») :
+/* LCNDA — 🖼️ La visionneuse d'images réglable (Réglages → « Visionneuse d'images ») :
  *  - la colonne de droite est rangée en rubriques (rattaché à, intitulé, date, calendrier, correspondance, cote, note,
  *    transcription, étiquettes, personnes identifiées…) : on choisit leur ordre et celles qu'on montre ;
  *  - « Calendrier de cette date » (visionneuse, événements, médias) : on choisit les calendriers proposés et leur ordre.
@@ -58,7 +58,7 @@
     const boot = () => { applySections(); applyCalendars(); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(boot, 0)); else setTimeout(boot, 0);
 
-    /* ── Maintenance → Visionneuse d'images ── */
+    /* ── Réglages → Visionneuse d'images ── */
     const rows = (items, pref, fixed = []) => { const hidden = pref?.hidden || []; return ordered(items.map(i => i[0]), pref).map(k => { const it = items.find(i => i[0] === k); return `<div class="lb-row" data-k="${esc(k)}"><span class="lb-move"><button type="button" class="icon-button" data-up title="Monter">↑</button><button type="button" class="icon-button" data-down title="Descendre">↓</button></span><b>${esc(it[1])}</b><label class="lb-vis" title="Afficher"><input type="checkbox" ${hidden.includes(k) ? '' : 'checked'} ${fixed.includes(k) ? 'disabled' : ''}></label></div>`; }).join(''); };
     const collect = list => { const r = [...list.querySelectorAll('.lb-row')]; return {order: r.map(x => x.dataset.k), hidden: r.filter(x => !x.querySelector('input').checked).map(x => x.dataset.k)}; };
     ext.maintenance = ext.maintenance || {};
@@ -66,7 +66,7 @@
         const S = A().state; if (token !== S.workspaceToken) return;
         const cals = [...(document.querySelector('#lightbox-date-calendar')?.options || [])].map(o => [o.value, o.textContent]);
         const ws = document.getElementById('workspace');
-        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>🖼️ Visionneuse d’images</h2><p>Ce qu’on voit à droite quand on ouvre une image, dans quel ordre, et les calendriers proposés pour une date.</p></div>
+        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🖼️ Visionneuse d’images</h2><p>Ce qu’on voit à droite quand on ouvre une image, dans quel ordre, et les calendriers proposés pour une date.</p></div>
             <div class="page-actions"><button type="button" class="button small secondary" data-lb-export title="Un fichier .json, à garder ou à passer à un autre ordinateur">⤓ Exporter ce réglage</button><button type="button" class="button small secondary" data-lb-import title="Remettre un réglage exporté (fichier .json)">⤒ Importer un réglage</button></div></header>
             <div class="lb-prefs"><section class="maintenance-panel"><h3>Colonne de droite</h3><p class="muted"><span data-help="L’ordre des rubriques à droite de l’image ouverte. Une rubrique cachée garde ce qui y est écrit : elle n’est simplement plus montrée.">↑ ↓ pour ranger ; décoche pour cacher la rubrique.</span></p><div class="order-list" data-lb-list="sec">${rows(SECTIONS, read(SKEY, {}))}</div>
                 <div class="page-actions action-zone"><button type="button" class="button small" data-lb-save="sec">Enregistrer</button><button type="button" class="button small secondary" data-lb-reset="sec">↺ Remettre comme au départ</button></div></section>

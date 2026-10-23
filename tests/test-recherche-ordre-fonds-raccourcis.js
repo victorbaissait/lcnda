@@ -4,11 +4,11 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  * Trois demandes :
  *   node tests/test-recherche-ordre-fonds-raccourcis.js
  *   (ROF_PORT=… ROF_DIR=… ROF_SHOTS=dossier pour choisir le port, la base et garder des captures)
- * 1. 🔎 Recherche → « Type de recherche » : ordre et types cachés (« Réordonner » en bas de la colonne, et Maintenance →
+ * 1. 🔎 Recherche → « Type de recherche » : ordre et types cachés (« Réordonner » en bas de la colonne, et Réglages →
  *    Apparence « 🔎 Types de recherche »), gardés tout de suite (K2 : « ↶ Annuler », « ↺ Remettre comme au départ ») ;
  *    un type caché qui est celui en cours reste dans le menu (« (caché) ») et l'écran marche ; clés du défaut du site
  *    (SITE_DEFAULT_KEYS ↔ site_defaults_allowed_keys, serveur) et des « 💾 Réglages enregistrés ».
- * 2. 🗺️ BUG : l'ordre de « Fonds de cartes » (Maintenance → Cartes et fonds de carte) suivi partout : Carte, réglages
+ * 2. 🗺️ BUG : l'ordre de « Fonds de cartes » (Réglages → Cartes et fonds de carte) suivi partout : Carte, réglages
  *    « Fonds de carte en boutons » et « Fonds de carte du plan des adresses », boutons de la fiche d'un village, menus du plan
  *    des adresses ; un fond décoché n'y est plus ; sans ordre choisi, chaque outil garde son ordre de départ.
  * 3. 🔗 « Mes raccourcis » : rubrique « ＋ Créer… » (un raccourci par outil de modification, mêmes icônes et mots),
@@ -137,7 +137,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     await p.waitForFunction(() => window.LCNDA_APP.state.researchKind === 'question');
                     await p.evaluate(() => localStorage.removeItem('genealogie-research-kind-hidden'));
                 });
-                await t(`[${tag}] Maintenance → Apparence « 🔎 Types de recherche » : K2 (↶ Annuler, ↺ Remettre comme au départ)`, async () => {
+                await t(`[${tag}] Réglages → Apparence « 🔎 Types de recherche » : K2 (↶ Annuler, ↺ Remettre comme au départ)`, async () => {
                     await p.evaluate(async () => { const s = window.LCNDA_APP.state; s.maintenanceTab = 'design'; await window.LCNDA_APP.setModule('maintenance'); });
                     await p.waitForSelector('.design-order-grid-four #research-kinds-config [data-rk-list] li', { timeout: 20000 });
                     await p.click('#research-kinds-config [data-rk="web"] [data-eye]');

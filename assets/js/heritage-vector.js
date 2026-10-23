@@ -595,7 +595,7 @@
             <input type="file" data-vx-file hidden accept="image/*,.svg,image/svg+xml,.bmp,.tif,.tiff,.ico,.avif,.json,application/json">
         </div>`;
         injectCss(); document.body.appendChild(dlg); ext.fullInit?.(dlg, 'vector', true); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
-        try { ext.tbApply?.(dlg, 'vector'); } catch (_) {} // boutons rangés ou cachés (⚙️ Personnaliser, ou Maintenance → Montage, retouche, mise en page et son)
+        try { ext.tbApply?.(dlg, 'vector'); } catch (_) {} // boutons rangés ou cachés (⚙️ Personnaliser, ou Réglages → Montage, retouche, mise en page et son)
         try { UI()?.harmonizeTopbar?.(dlg.querySelector('.vx-top')); } catch (_) {} // E1 : ✓ Enregistré · ⚙️ · ⤓ Exporter · 💾 · ⛶ · × dans l'ordre validé
         UI()?.editorRail?.(dlg.querySelector('.vx-tools'), {breaks: ['[data-vx-tool=pen]', '[data-vx-tool=text]', '[data-vx-tool=eyedrop]', '[data-vx-tool=hand]', '.vx-fs']}); // K19 : colonne de 36 px, groupes séparés
         ext.editorKeysAttach?.(dlg, 'vector'); // ⌨️ raccourcis à soi

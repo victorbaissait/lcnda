@@ -276,7 +276,7 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */
 const store = {};
 const storage = { getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: k => { delete store[k]; } };
-const appModules = { dashboard: ['01', 'Tableau de bord'], personnes: ['02', 'Personnes'], listes: ['05', 'Listes'], maintenance: ['10', 'Maintenance'], jeu: ['JEU', 'Jeu'] };
+const appModules = { dashboard: ['01', 'Tableau de bord'], personnes: ['02', 'Personnes'], listes: ['05', 'Listes'], maintenance: ['10', 'Réglages'], jeu: ['JEU', 'Jeu'] };
 const appTypes = [['stats', '01', 'Chiffres clés'], ['reminders', '02', 'Rappels'], ['app_screen', '03', 'Écran de l’app']];
 const sandbox = { window: {}, localStorage: storage, document: { addEventListener() {}, createElement: () => ({}) }, console, setTimeout, clearTimeout };
 sandbox.window.LCNDA_APP = {

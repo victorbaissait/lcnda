@@ -23,7 +23,7 @@
     const personLink = (id, name) => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>` : esc(name || '');
     const pname = p => p ? A().personName(p) : '';
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
-    const header = (eyebrow, title, intro) => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow)});
+    const header = (eyebrow, title, intro) => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow)});
     const tools = (...args) => ext.tools ? ext.tools(...args) : '';
     const refresh = () => ext.refreshView ? ext.refreshView() : null;
     const ls = (key, fallback = '') => { try { return localStorage.getItem(key) ?? fallback; } catch (_) { return fallback; } };

@@ -1,6 +1,6 @@
 /* LCNDA — 👤 K7 : un seul portrait (rond ou carré d'initiales, ou la photo de la fiche), partout.
  *
- * Réglage : Maintenance → Apparence → onglet « 👤 Portraits » (le cadre est dessiné par app-colonne.js).
+ * Réglage : Réglages → Apparence → onglet « 👤 Portraits » (le cadre est dessiné par app-colonne.js).
  *   localStorage['genealogie-portraits'] = {mode: 'avant'|'rond'|'carre', shape: 'rond'|'arrondi'|'carre'|'penche',
  *     radius (%), init (% de la taille), bw (px), bc, cmode: 'plein'|'pale'|'unique', m, f, u, a, one (couleurs),
  *     photo, bwphoto, letters: 'deux'|'une', sosa}

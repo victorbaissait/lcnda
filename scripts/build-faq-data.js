@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Fabrique faq-data.js (la FAQ de la page de présentation) à partir de la FAQ de l'app.
 //   node scripts/build-faq-data.js
-// Source : la liste « const FAQ = [ … ]; » de assets/js/heritage-more.js (Maintenance → FAQ / tuto),
+// Source : la liste « const FAQ = [ … ]; » de assets/js/heritage-more.js (Réglages → FAQ / tuto),
 // mêmes thèmes, mêmes questions, mêmes réponses, en texte simple.
 'use strict';
 const fs = require('fs');

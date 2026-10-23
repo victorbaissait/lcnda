@@ -1,14 +1,14 @@
 /* LCNDA — ▤ K15 : la colonne de gauche réglable, et le cadre « Portraits et colonne de gauche » de l'Apparence.
  *
  * 1. Colonne de gauche (toutes les colonnes : Personnes, Graphiques, Carte, Listes, Recherche, Enquêtes, Comparaison,
- *    Chronologie, Fiches, ADN, Maintenance, Tableau de bord…)
+ *    Chronologie, Fiches, ADN, Réglages, Tableau de bord…)
  *    localStorage['genealogie-left-column'] = {mode: 'avant'|'nouveau', style: 'boutons'|'continue'|'aeree', nums,
  *      numstyle: 'origine'|'suite', tabs: 'avant'|'ligne'|'dessus'|'texte', size: 'normale'|'compacte', width (240–420), lf: 'bas'|'barre'}
  *    « Comme avant » (par défaut) : rien ne change. Sinon des attributs sur :root (data-lc-col-*) pour les styles (app.css),
  *    et un petit passage sur #sidebar-content après chaque dessin de la colonne : numéros qui se suivent, onglets
  *    « icône + nom », « Liste | Fiches » posé dans la barre au-dessus de la liste (le bouton d'origine reste caché dans
  *    la colonne et reçoit le clic : l'outil ne voit aucune différence).
- * 2. Maintenance → Apparence : onglets « 👤 Portraits » (K7, app-portraits.js) et « ▤ Colonne de gauche » (K15),
+ * 2. Réglages → Apparence : onglets « 👤 Portraits » (K7, app-portraits.js) et « ▤ Colonne de gauche » (K15),
  *    d'après la maquette validée (grandes cartes à choisir, « Réglages en plus » avec leur « Pourquoi ? », aperçu, ↺).
  */
 (() => {
@@ -134,7 +134,7 @@
     window.LCNDA_COLUMN = {KEY, PRESETS, read, write, clean, apply, decorate};
     apply();
 
-    /* ═════════════════ 2. Maintenance → Apparence : « 👤 Portraits » et « ▤ Colonne de gauche » ═════════════════ */
+    /* ═════════════════ 2. Réglages → Apparence : « 👤 Portraits » et « ▤ Colonne de gauche » ═════════════════ */
     const TAB_KEY = 'lcnda-apparence-k-tab';
     const tabNow = () => { try { return localStorage.getItem(TAB_KEY) === 'colonne' ? 'colonne' : 'portraits'; } catch (_) { return 'portraits'; } };
     const PHOTO = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9b48a"/><stop offset="1" stop-color="#7d6440"/></linearGradient></defs><rect width="100" height="100" fill="url(#g)"/><circle cx="50" cy="40" r="19" fill="#5b4428"/><path d="M14 100c4-24 18-34 36-34s32 10 36 34z" fill="#3e2d1a"/><path d="M31 37c2-16 36-16 38 0c-6-8-32-8-38 0z" fill="#2c1f12"/></svg>').replace(/\(/g, '%28').replace(/\)/g, '%29');

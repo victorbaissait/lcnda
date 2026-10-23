@@ -35,7 +35,7 @@
     function tidy(row, up) {
         if (row.dataset.ordRow || row.tagName === 'TR' || row.closest('[data-ord-off]')) return;
         const down = downOf(row); if (!down) return;
-        // un panneau dont les flèches sont dans le titre (Maintenance → Montage, retouche…) reste un panneau, pas une ligne
+        // un panneau dont les flèches sont dans le titre (Réglages → Montage, retouche…) reste un panneau, pas une ligne
         if (childOf(row, up)?.matches('h1, h2, h3, h4, h5, h6, header')) return;
         if (row.querySelector('textarea') || row.querySelectorAll('input:not([type=checkbox]):not([type=radio]):not([type=color]), select').length > 2 || row.querySelectorAll('[data-dnd-row], li, tr').length) return;
         row.dataset.ordRow = '1'; row.classList.add('ord-row');

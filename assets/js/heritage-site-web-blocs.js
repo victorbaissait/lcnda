@@ -18,7 +18,7 @@
     const year = new Date().getFullYear();
     const pickPerson = async (title = 'Quelle personne ?') => { const it = await PK().openPicker?.({kind: 'person', title}); return it ? {id: Number(it.id), name: String(it.title || it.label || it.name || '').trim()} : null; };
     const pickPlace = async (title = 'Quel lieu ?') => { const it = await PK().openPicker?.({kind: 'place', title}); return it && Number(it.id) > 0 ? {id: Number(it.id), name: String(it.title || it.label || it.name || '').trim()} : null; };
-    /** le fond de carte de l'app (Maintenance → Cartes et fonds de carte), sinon Voyager */
+    /** le fond de carte de l'app (Réglages → Cartes et fonds de carte), sinon Voyager */
     const defaultFond = () => { try { const v = A()?.mapBackgroundValue?.(A()?.readDesignSettings?.()?.mapBackground); return /^[a-z0-9_]{1,30}$/.test(v || '') && v !== 'offline' ? v : 'voyager'; } catch (_) { return 'voyager'; } };
     /** un diagramme : un des miens (menu de choix, sorte « diagramme »), ou un nouveau (l'éditeur de diagrammes) → {id, name} */
     const pickDiagram = () => new Promise(resolve => {

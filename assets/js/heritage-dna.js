@@ -1,4 +1,4 @@
-/* LCNDA — 🧬 Onglet « ADN » (masqué au départ : Maintenance → Apparence → ordre du menu).
+/* LCNDA — 🧬 Onglet « ADN » (masqué au départ : Réglages → Apparence → ordre du menu).
  * Mes tests (kits, haplogroupes, origines estimées), correspondances (cM, segments, côté, suivi, arbre, ancêtre commun),
  * import des fichiers des sociétés de test (CSV), groupes et méthode de Leeds, navigateur de chromosomes et triangulation,
  * calculateur de cM (Shared cM Project), lignées Y / mt / X tirées de l'arbre, origines, explications, réglages
@@ -20,7 +20,7 @@
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const isCurrent = token => token === S().workspaceToken && S().module === 'adn';
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
-    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
 
     /* ═════════ La loi ═════════ */
     const LAW_LINKS = [
@@ -648,15 +648,15 @@
         root.querySelector('[data-dna-json]').addEventListener('click', () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda_dna: 1, exported: new Date().toISOString(), ...data}, null, 1)], {type: 'application/json'})); a.download = 'adn.json'; document.body.appendChild(a); a.click(); a.remove(); });
     }};
 
-    /** les réglages s'ouvrent dans l'onglet ADN ou dans Maintenance : on reste là où on était */
+    /** les réglages s'ouvrent dans l'onglet ADN ou dans les Réglages : on reste là où on était */
     const reopenSettings = () => { if (S().module === 'maintenance') A().setModule('maintenance'); else go('settings'); };
-    /* Maintenance → « ADN : affichage et réglages » : exactement le même réglage que l'onglet ADN → ⚙️ Réglages (les deux restent pareils) */
+    /* Réglages → « ADN : affichage » : exactement le même réglage que l'onglet ADN → ⚙️ Réglages (les deux restent pareils) */
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.dna_prefs = async token => {
         const ws = A().$('#workspace');
         try { await load(); } catch (_) { data = data || {kits: [], matches: [], groups: [], segments: []}; }
         if (token !== S().workspaceToken || S().module !== 'maintenance') return;
-        ws.innerHTML = `<section class="page h-dna-page" data-dna-sec="settings">${RENDER.settings.html()}<p class="muted">C’est le même réglage que dans l’onglet ADN → ⚙️ Réglages : le changer ici le change là-bas.${S().bootstrap && !document.querySelector('.nav-item[data-module="adn"]') ? ' L’onglet ADN est caché : Maintenance → Apparence → onglets du haut pour l’afficher.' : ''}</p></section>`;
+        ws.innerHTML = `<section class="page h-dna-page" data-dna-sec="settings">${RENDER.settings.html()}<p class="muted">C’est le même réglage que dans l’onglet ADN → ⚙️ Réglages : le changer ici le change là-bas.${S().bootstrap && !document.querySelector('.nav-item[data-module="adn"]') ? ' L’onglet ADN est caché : Réglages → Apparence → onglets du haut pour l’afficher.' : ''}</p></section>`;
         const h2 = ws.querySelector('.h-dna-page h2'); if (h2) h2.textContent = '🧬 ADN : affichage et réglages';
         RENDER.settings.bind(ws.querySelector('.h-dna-page'));
     };

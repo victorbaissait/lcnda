@@ -11,7 +11,7 @@
         return o.local?html.replace(` name="${name}"`,''):html;
     }
     /* ═════ Recherche → « Type de recherche » : l'ordre et les types cachés (K2 : gardés tout de suite, « ↶ Annuler », « ↺ Remettre comme au départ »)
-     * Réglé avec « Réordonner » en bas de la colonne Recherche, ou dans Maintenance → Apparence (« 🔎 Types de recherche »). */
+     * Réglé avec « Réordonner » en bas de la colonne Recherche, ou dans Réglages → Apparence (« 🔎 Types de recherche »). */
     const RK_ORDER='genealogie-research-kind-order',RK_HIDDEN='genealogie-research-kind-hidden';
     const RESEARCH_KINDS=[['question','Poser une question en français'],['gaps','🔍 Que manque-t-il ?'],['text','Texte, personne ou lieu'],['place_name','Nom de lieu avec joker'],['dates','Période ou date précise'],['proximity','Proximité géographique et temporelle'],['transcriptions','Plein texte dans les transcriptions'],['archive_digest','Dépouillement d’archive'],['journal','🗓 Journal des recherches'],['insee','Décès (fichier INSEE)'],['web','Chercher sur internet'],['saved','Recherche multicritère / recherches enregistrées']];
     const rkAll=()=>RESEARCH_KINDS.filter(([k])=>k!=='journal'||window.LCNDA_EXT?.researchJournal);
@@ -32,7 +32,7 @@
         researchKindRows().forEach(r=>{const o=[...select.options].find(x=>x.value===r.key);if(!o)return;if(r.hidden&&r.key!==cur){o.remove();return;}if(r.hidden&&!/\(caché\)$/.test(o.textContent))o.textContent+=' (caché)';select.append(o);});
         if([...select.options].some(o=>o.value===cur))select.value=cur;
     }
-    /** La liste à ranger (la même dans la fenêtre « Réordonner » et dans Maintenance → Apparence) */
+    /** La liste à ranger (la même dans la fenêtre « Réordonner » et dans Réglages → Apparence) */
     function researchKindListHtml(rows){return rows.map((r,i)=>`<li class="dashboard-reorder-row${r.hidden?' is-hidden-row':''}" draggable="true" data-index="${i}" data-rk="${escapeHtml(r.key)}"><span class="order-grip" aria-hidden="true">⠿</span><span class="order-number">${String(i+1).padStart(2,'0')}</span><b style="flex:1">${escapeHtml(r.label)}</b><span class="order-actions"><button type="button" class="button small secondary reorder-eye" data-eye aria-pressed="${r.hidden?'false':'true'}" aria-label="${r.hidden?'Montrer':'Cacher'} « ${escapeHtml(r.label)} »" title="${r.hidden?'Caché : clique pour le montrer':'Affiché : clique pour le cacher'}">${r.hidden?'🙈 Caché':'👁 Affiché'}</button><button type="button" class="button small secondary" data-move="-1" aria-label="Monter « ${escapeHtml(r.label)} »" ${i?'':'disabled'}>↑</button><button type="button" class="button small secondary" data-move="1" aria-label="Descendre « ${escapeHtml(r.label)} »" ${i<rows.length-1?'':'disabled'}>↓</button></span></li>`).join('');}
     /** Branche la liste : chaque geste est gardé tout de suite (onSaved après) ; il reste toujours au moins un type affiché */
     function bindResearchKindList(list,onSaved,onBefore){
@@ -67,7 +67,7 @@
         dialog.addEventListener('cancel',e=>{if(e.target!==dialog)return;e.preventDefault();close();});
         dialog.showModal();
     }
-    /* Maintenance → Apparence : « 🔎 Types de recherche », à côté de l'ordre des listes (K2 voit chaque geste : « ✓ Enregistré », « ↶ Annuler ») */
+    /* Réglages → Apparence : « 🔎 Types de recherche », à côté de l'ordre des listes (K2 voit chaque geste : « ✓ Enregistré », « ↶ Annuler ») */
     const EXT=window.LCNDA_EXT=window.LCNDA_EXT||{};
     EXT.afterDesign=EXT.afterDesign||[];
     EXT.afterDesign.push(()=>{
@@ -183,7 +183,7 @@
         const visible=settings.order.filter(key=>!settings.hidden.includes(key)).map(key=>sites.find(site=>site[0]===key)).filter(Boolean);
         const groups=webSearchGroups.map(group=>[group,visible.filter(site=>site[2]===group)]).filter(([,list])=>list.length);
         const v=key=>escapeHtml(f[key]??'');
-        $('#workspace').innerHTML=`<section class="page web-search-tool"><header class="page-header"><div><span class="eyebrow">RECHERCHE</span><h2>Chercher sur internet</h2><p>Pour une personne qui n’est pas encore dans la base, ou pour partir d’une fiche et changer un détail. Les sites s’ouvrent dans ton navigateur ; leur choix et leur ordre se règlent dans Maintenance → Apparence.</p></div></header>
+        $('#workspace').innerHTML=`<section class="page web-search-tool"><header class="page-header"><div><span class="eyebrow">RECHERCHE</span><h2>Chercher sur internet</h2><p>Pour une personne qui n’est pas encore dans la base, ou pour partir d’une fiche et changer un détail. Les sites s’ouvrent dans ton navigateur ; leur choix et leur ordre se règlent dans Réglages → Apparence.</p></div></header>
             <section class="maintenance-panel"><div class="web-search-tool-from"><div class="pk-host" style="flex:1;min-width:240px"><span>Partir d’une fiche</span><div id="wst-person">${window.LCNDA_PICKER?.pickerField({name: 'wst_person', kind: 'person', allowCreate: false}) || ''}</div></div><button class="button small secondary" type="button" id="wst-clear">Vider</button></div>
             <form id="wst-form" class="form-grid web-search-tool-form" style="padding:0">
                 <label>Prénom<input name="first" value="${v('first')}" placeholder="Jean"></label>
@@ -197,7 +197,7 @@
                 <label>Nom du conjoint<input name="spouseLast" value="${v('spouseLast')}"></label>
                 <div class="checkbox-group"><label class="checkbox-line"><input type="checkbox" name="useMiddle" ${f.useMiddle?'checked':''}> Deuxièmes prénoms</label><label class="checkbox-line"><input type="checkbox" name="married" ${f.married?'checked':''}> Aussi sous le nom d’épouse</label></div>
             </form></section>
-            <section class="maintenance-panel"><div class="web-search-panel" id="wst-sites"><p class="muted" id="wst-query"></p>${visible.length>1?`<div class="web-search-multi"><button class="button small secondary" type="button" data-ws-pick-all>Tout cocher</button><button class="button small secondary" type="button" data-ws-pick-none>Tout décocher</button><button class="button small" type="button" data-ws-open-picked disabled>Ouvrir les sites cochés</button></div>`:''}${groups.map(([group,list])=>`<div class="web-search-group"><span>${escapeHtml(group)}</span><div class="web-search-links">${list.map(site=>`<span class="web-search-site"><input type="checkbox" data-ws-pick="${escapeHtml(site[0])}" aria-label="Cocher ${escapeHtml(site[1])}"><a class="button small secondary" data-ws-site="${escapeHtml(site[0])}" href="#" target="_blank" rel="noopener noreferrer">${escapeHtml(site[1])}</a></span>`).join('')}</div></div>`).join('')||empty('Aucun site choisi',{icon:'🌐',hint:'Règle-les dans Maintenance → Apparence.'})}</div></section></section>`;
+            <section class="maintenance-panel"><div class="web-search-panel" id="wst-sites"><p class="muted" id="wst-query"></p>${visible.length>1?`<div class="web-search-multi"><button class="button small secondary" type="button" data-ws-pick-all>Tout cocher</button><button class="button small secondary" type="button" data-ws-pick-none>Tout décocher</button><button class="button small" type="button" data-ws-open-picked disabled>Ouvrir les sites cochés</button></div>`:''}${groups.map(([group,list])=>`<div class="web-search-group"><span>${escapeHtml(group)}</span><div class="web-search-links">${list.map(site=>`<span class="web-search-site"><input type="checkbox" data-ws-pick="${escapeHtml(site[0])}" aria-label="Cocher ${escapeHtml(site[1])}"><a class="button small secondary" data-ws-site="${escapeHtml(site[0])}" href="#" target="_blank" rel="noopener noreferrer">${escapeHtml(site[1])}</a></span>`).join('')}</div></div>`).join('')||empty('Aucun site choisi',{icon:'🌐',hint:'Règle-les dans Réglages → Apparence.'})}</div></section></section>`;
         const form=$('#wst-form'),panel=$('#wst-sites');
         const update=()=>{
             const x=formObject(form);x.useMiddle=form.elements.useMiddle.checked;x.married=form.elements.married.checked;Object.assign(f,x);

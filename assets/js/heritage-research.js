@@ -51,7 +51,7 @@
         vide: ['Vide', []],
     };
 
-    /* ─────────── Réglages (Maintenance → Atelier de recherche) : menu, sortes d'éléments, dossiers, plans ─────────── */
+    /* ─────────── Réglages (Réglages → Atelier de recherche) : menu, sortes d'éléments, dossiers, plans ─────────── */
     const CFG_KEY = 'genealogie-atelier-config'; // copié tout seul dans la base (lib/settings.php)
     const NAV_BUILTIN = [['overview', '📊', 'Vue d’ensemble'], ['all', '🗂️', 'Tout le projet'], ['starred', '⭐', 'Favoris'], ['unfiled', '📥', 'Non classés'], ['tasks', '✅', 'Tâches'], ['timeline', '🕰️', 'Chronologie'], ['people', '👥', 'Personnes'], ['map', '🗺️', 'Carte'], ['biblio', '📚', 'Bibliographie'], ['widgets', '🧩', 'Widgets'], ['trash', '🗑️', 'Corbeille']];
     const readCfg = () => { try { const c = JSON.parse(localStorage.getItem(CFG_KEY) || '{}'); return c && typeof c === 'object' ? c : {}; } catch (_) { return {}; } };
@@ -213,7 +213,7 @@
                 <p class="h-at-project-stats">${plural(Number(p.item_count), 'élément', 'éléments')} · ${plural(Number(p.folder_count), 'dossier', 'dossiers')}${Number(p.open_tasks) ? ` · ${plural(Number(p.open_tasks), 'tâche', 'tâches')} à faire` : ''}</p>
                 ${target ? `<div class="h-at-words"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} mots sur ${fmt(target)}</small></div>` : words ? `<small>${fmt(words)} mots écrits</small>` : ''}
                 ${days !== null ? `<small class="${days < 0 ? 'h-at-late' : ''}">${days < 0 ? `échéance dépassée de ${plural(-days, 'jour', 'jours')}` : `rendu dans ${plural(days, 'jour', 'jours')}`}</small>` : ''}</div></article>`; };
-        ws.innerHTML = `<section class="page collection-page h-at">${`<header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>📚 Atelier de recherche</h2><p>Pour écrire une thèse, un livre, un article ou préparer une exposition : un projet, ses dossiers et sous-dossiers sans limite (parties, chapitres, sources…), et tout ce que tu y ranges — références, archives, gravures, citations, notes, personnes de ta base, lieux, dates, tâches, brouillons. Bibliographie toute prête, chronologie, carte.</p></div><div class="page-actions"><button type="button" class="button" data-at-new>＋ Projet</button><button type="button" class="button secondary" data-at-importproject>⤒ Importer un projet (Zotero…)</button><button type="button" class="button secondary" data-at-settings title="Maintenance → Atelier de recherche">⚙️ Réglages</button></div></header>`}
+        ws.innerHTML = `<section class="page collection-page h-at">${`<header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>📚 Atelier de recherche</h2><p>Pour écrire une thèse, un livre, un article ou préparer une exposition : un projet, ses dossiers et sous-dossiers sans limite (parties, chapitres, sources…), et tout ce que tu y ranges — références, archives, gravures, citations, notes, personnes de ta base, lieux, dates, tâches, brouillons. Bibliographie toute prête, chronologie, carte.</p></div><div class="page-actions"><button type="button" class="button" data-at-new>＋ Projet</button><button type="button" class="button secondary" data-at-importproject>⤒ Importer un projet (Zotero…)</button><button type="button" class="button secondary" data-at-settings title="Réglages → Atelier de recherche">⚙️ Réglages</button></div></header>`}
             ${projects.length ? `<div class="h-at-projects">${projects.map(card).join('')}</div>` : A().emptyState({icon: '🔬', text: 'Aucun projet pour l’instant', hint: 'Par exemple « Les montreurs de vues d’optique, XVIIIe-XIXe siècles ».', action: {label: '＋ Projet', attrs: 'data-at-new'}})}</section>`;
         ws.querySelectorAll('[data-at-new]').forEach(b => b.addEventListener('click', () => projectDialog(null, data.kinds)));
         ws.querySelector('[data-at-importproject]').addEventListener('click', () => importProjectDialog(data.kinds));
@@ -266,7 +266,7 @@
     const setWidgetsInOverview = (pid, on) => { try { const o = JSON.parse(localStorage.getItem(OV_KEY) || '{}') || {}; o[pid] = !!on; localStorage.setItem(OV_KEY, JSON.stringify(o)); } catch (_) {} };
     const widgetsBox = p => `<div class="h-atw-box" data-atw-project="${p.id}"></div>${(setTimeout(() => ext.atelierWidgets?.(document.querySelector(`[data-atw-project="${p.id}"]`), {project: P.project, items: live(), openItem: id => { st().sel = [id]; renderProject(S().workspaceToken); }}), 0), '')}`;
     const reload = async (keepScroll = true) => { const v = st(), pid = v.project; await load(pid); if (S().module !== 'enquetes' || S().enquetesTab !== 'atelier' || st().project !== pid) return; renderProject(S().workspaceToken, keepScroll); };
-    /* Vue à soi (Maintenance → Atelier) : des critères ajoutés un par un, dans l'ordre voulu, chacun inversable (« pas »), ET / OU */
+    /* Vue à soi (Réglages → Atelier) : des critères ajoutés un par un, dans l'ordre voulu, chacun inversable (« pas »), ET / OU */
     const VIEW_RULES = {
         type: ['🧩', 'Sorte d’élément'], kind: ['📚', 'Sorte de référence'], tags: ['🏷️', 'Étiquettes'], starred: ['⭐', 'En favori'], read: ['📖', 'Lecture'],
         todo: ['✅', 'Tâche pas encore faite'], late: ['⏰', 'Tâche en retard'], priority: ['🔴', 'Priorité de tâche'], stage: ['✍️', 'Avancement du brouillon'],
@@ -351,7 +351,7 @@
             <header class="h-at-head"><button type="button" class="button secondary small" data-at-home>← Projets</button><span class="h-at-head-icon">${esc(p.icon || KIND_ICONS[p.kind] || '📚')}</span>
                 <div class="h-at-head-title"><h2>${esc(p.title)}</h2>${p.subtitle ? `<p class="muted">${esc(p.subtitle)}</p>` : ''}</div>
                 ${target ? `<div class="h-at-words" title="Mots des brouillons"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} / ${fmt(target)} mots</small></div>` : ''}
-                <span class="h-at-head-actions"><button type="button" class="button small secondary" data-at-export>Exporter…</button><button type="button" class="button small secondary" data-at-pedit>Projet…</button><button type="button" class="button small secondary" data-at-settings title="Réglages de l’Atelier (Maintenance)">⚙</button></span></header>
+                <span class="h-at-head-actions"><button type="button" class="button small secondary" data-at-export>Exporter…</button><button type="button" class="button small secondary" data-at-pedit>Projet…</button><button type="button" class="button small secondary" data-at-settings title="Réglages de l’Atelier (Réglages)">⚙</button></span></header>
             <div class="h-at-grid ${v.node === 'widgets' && !v.sel.length ? 'is-wide' : ''}">
                 <aside class="h-at-tree" data-at-scroll>
                     <ul class="h-at-special">${CFG.nav.filter(x => !x.hidden || x.key === v.node).map(({key: k, icon, label}) => { const c = k === 'all' ? live().length : k === 'trash' ? P.items.length - live().length : k === 'starred' ? live().filter(i => Number(i.starred)).length : k === 'unfiled' ? live().filter(i => !i.folders.length).length : k === 'tasks' ? live().filter(i => i.type === 'task' && !Number(i.data.done)).length : k.startsWith('v_') ? nodeItemsCount(k) : 0;
@@ -537,7 +537,7 @@
 
     /* ─────────── Formulaires ─────────── */
     const CUSTOM_FIELD_TYPES = [['text', '📝 Texte court'], ['longtext', '📄 Texte long'], ['date', '📅 Date'], ['number', '🔢 Nombre'], ['select', '📋 Liste de choix'], ['checkbox', '☑️ Case à cocher'], ['url', '🔗 Lien internet'], ['person', '👤 Personne de la base'], ['place', '📍 Lieu']];
-    /** Élément d'une sorte créée dans Maintenance → Atelier : titre + ses champs, puis notes, étiquettes, dossiers et fichiers comme les autres. */
+    /** Élément d'une sorte créée dans Réglages → Atelier : titre + ses champs, puis notes, étiquettes, dossiers et fichiers comme les autres. */
     function customDialog(key, item = null) {
         const v = st(), def = CFG.types.find(t => t.key === key) || {key, icon: '🧩', label: 'Élément', fields: []}, d = item?.data || {}, vals = d.values || {}, isNew = !item, people = P.people || {};
         const fieldHtml = f => { const n = 'cv_' + f.key, val = vals[f.key] ?? '', cls = f.width === 'half' ? '' : ' class="span-2"', help = f.help ? `<small class="muted">${esc(f.help)}</small>` : '', ph = f.placeholder ? ` placeholder="${esc(f.placeholder)}"` : '', req = f.required ? ' required' : '';
@@ -1052,7 +1052,7 @@
         catch (error) { toast(error.message, 'error'); }
     }
 
-    /* ═══════════ ⚙ Maintenance → Atelier de recherche : tout se règle ici ═══════════ */
+    /* ═══════════ ⚙️ Réglages → Atelier de recherche : tout se règle ici ═══════════ */
     const openSettings = () => { S().maintenanceTab = 'atelier'; A().setModule('maintenance'); };
     ext.maintenance = ext.maintenance || {};
     // Plan écrit en texte : un dossier par ligne, décalé (espaces, tabulation ou tirets) pour les sous-dossiers, émoji au début facultatif
@@ -1107,7 +1107,7 @@
         const tree = walk(0);
         if (!tree.length) return toast('Ce projet n’a pas de dossiers.', 'error');
         CFG.plans.push({key: uid('p_'), label: 'Plan de « ' + P.project.title.slice(0, 50) + ' »', tree, custom: true}); saveCfg();
-        toast('Plan enregistré : il est proposé à la création d’un projet (Maintenance → Atelier pour le renommer).');
+        toast('Plan enregistré : il est proposé à la création d’un projet (Réglages → Atelier pour le renommer).');
     };
     /** « Copier pour le modifier » une entrée de l'app : la vue équivalente en critères… */
     const NAV_AS_FILTER = {
@@ -1147,7 +1147,7 @@
         const navExtra = x => `<span class="h-cfg-actions">${x.key === 'trash' ? '' : copyBtn('data-cfg-view-copy', 'une vue')}${x.custom ? `<button type="button" class="button small secondary" data-cfg-view-edit>Filtre…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : ''}</span>`;
         const typeExtra = x => `<span class="h-cfg-actions">${copyBtn('data-cfg-type-copy', 'une sorte d’élément')}${x.custom ? `<button type="button" class="button small secondary" data-cfg-type-edit>Champs (${(x.fields || []).length})…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : ''}</span>`;
         const planExtra = x => `<small class="muted">${plural(countTree(x.tree), 'dossier', 'dossiers')}</small><span class="h-cfg-actions">${x.custom ? `<button type="button" class="button small secondary" data-cfg-plan-edit>Modifier…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : copyBtn('data-cfg-plan-copy', 'un plan')}</span>`;
-        ws.innerHTML = `<section class="page collection-page h-cfg">${`<header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>📚 Atelier de recherche</h2><p>Les réglages de l’Atelier (Enquêtes → Atelier) : l’ordre et les émojis du menu d’un projet, tes propres vues, les sortes d’éléments (et les tiennes, avec leurs champs), les émojis des dossiers et tes plans de départ. Tout est enregistré tout de suite.</p></div><div class="page-actions"><button type="button" class="button secondary" data-cfg-open>Ouvrir l’Atelier</button></div></header>`}
+        ws.innerHTML = `<section class="page collection-page h-cfg">${`<header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>📚 Atelier de recherche</h2><p>Les réglages de l’Atelier (Enquêtes → Atelier) : l’ordre et les émojis du menu d’un projet, tes propres vues, les sortes d’éléments (et les tiennes, avec leurs champs), les émojis des dossiers et tes plans de départ. Tout est enregistré tout de suite.</p></div><div class="page-actions"><button type="button" class="button secondary" data-cfg-open>Ouvrir l’Atelier</button></div></header>`}
             <section class="maintenance-panel"><div class="h-cfg-head"><h3>1. Le menu de gauche d’un projet <small class="muted">et mes vues (filtres)</small></h3><button type="button" class="button small secondary" data-cfg-reset-sec="nav" title="Remettre cette partie comme au départ">↺ Remettre comme au départ</button></div><p class="muted">Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »).</p>
                 <div class="h-cfg-list">${CFG.nav.map((x, i, l) => row('nav', x, i, l, navExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-view-add>＋ Ma propre vue (un filtre)</button></section>
             <section class="maintenance-panel"><div class="h-cfg-head"><h3>2. Les sortes d’éléments <small class="muted">ce qu’on ajoute avec « ＋ Ajouter », avec ses champs</small></h3><button type="button" class="button small secondary" data-cfg-reset-sec="types" title="Remettre cette partie comme au départ">↺ Remettre comme au départ</button></div><p class="muted">L’ordre du menu « ＋ Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…).</p>

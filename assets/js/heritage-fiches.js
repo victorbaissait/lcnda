@@ -1,4 +1,4 @@
-/* LCNDA — 📒 Fiches (onglet « Fiches », masqué au départ : Maintenance → Apparence → ordre du menu).
+/* LCNDA — 📒 Fiches (onglet « Fiches », masqué au départ : Réglages → Apparence → ordre du menu).
  * Une fiche = une page sur un sujet (« La Pologne avant les guerres napoléoniennes », un métier, un lieu…), faite de
  * blocs rangés sur une grille : texte (mise en forme simple), images et documents, personnes, frise de dates, citation,
  * liens, intertitre, et ce que l'app sait montrer : un écran (carte, arbre, liste, Mes listes, fiche d'une personne,
@@ -285,7 +285,7 @@
             // 📈 le menu de choix commun (sorte « graph », tous mes widgets) ; le champ caché garde l'identifiant cw_…
             const defs = Object.values(ext.customWidgetDefs?.() || {}), cur = b.widget ? ext.customWidgetDefs?.()?.[b.widget] : null, info = cur ? ext.myGraphInfo?.(cur.id) : null;
             const value = cur && info?.rid ? {kind: 'graph', id: info.rid, uid: cur.id, title: cur.name || 'Mon widget', icon: cur.icon || '🧱'} : null;
-            body = defs.length ? `<div data-fi-widgetpk><span class="pk-lab">Widget ou graphique</span>${window.LCNDA_PICKER.pickerField({name: 'fi_widget', hiddenName: false, kind: 'graph', value, allowCreate: false, placeholder: 'Chercher un widget ou un graphique…', filter: {graph_kinds: 'numbers,list,chart,appstat,screen,diagram,text,links,journey'}})}<input type="hidden" name="widget" value="${esc(b.widget || '')}"></div><div data-sc-panelslot>${ext.shortcuts?.panelHtml?.(b.widget) || ''}</div><p class="muted">Pour en créer un : Maintenance → Éditeur de widgets ou Éditeur de graphiques.</p>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun widget ni graphique à toi pour l’instant : Maintenance → Éditeur de widgets ou Éditeur de graphiques.</span></p>';
+            body = defs.length ? `<div data-fi-widgetpk><span class="pk-lab">Widget ou graphique</span>${window.LCNDA_PICKER.pickerField({name: 'fi_widget', hiddenName: false, kind: 'graph', value, allowCreate: false, placeholder: 'Chercher un widget ou un graphique…', filter: {graph_kinds: 'numbers,list,chart,appstat,screen,diagram,text,links,journey'}})}<input type="hidden" name="widget" value="${esc(b.widget || '')}"></div><div data-sc-panelslot>${ext.shortcuts?.panelHtml?.(b.widget) || ''}</div><p class="muted">Pour en créer un : Réglages → Éditeur de widgets ou Éditeur de graphiques.</p>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun widget ni graphique à toi pour l’instant : Réglages → Éditeur de widgets ou Éditeur de graphiques.</span></p>';
         }
         const onOpen = dlg => {
                 const root = dlg.querySelector('.h-dialog-body') || dlg;

@@ -90,7 +90,7 @@ function undo_candidate(PDO $pdo): array
         if ($attached) { return $base + ['available' => false, 'reason' => 'Des éléments ont été ajoutés à cette fiche depuis sa création (événements, liens, notes, médias…) : pour la retirer, ouvre-la et choisis « Supprimer la fiche ».']; }
         return $base + ['available' => true, 'mode' => 'uncreate'];
     }
-    return $base + ['available' => false, 'reason' => 'Celle-ci ne s’annule pas d’un coup de ⌘Z : défais-la à la main (Maintenance → Journal des modifications montre ce qui a changé).'];
+    return $base + ['available' => false, 'reason' => 'Celle-ci ne s’annule pas d’un coup de ⌘Z : défais-la à la main (Réglages → Journal des modifications montre ce qui a changé).'];
 }
 
 function undo_change(PDO $pdo, array $data): array

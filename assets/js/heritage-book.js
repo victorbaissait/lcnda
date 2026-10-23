@@ -1,5 +1,5 @@
 /**
- * 📖 Livre de famille (Maintenance → Export propre) : une branche, les parties du livre dans l'ordre voulu, ce que
+ * 📖 Livre de famille (Réglages → Export propre) : une branche, les parties du livre dans l'ordre voulu, ce que
  * montre chaque fiche, les textes (titre, préface, mot de la fin), l'allure (style, police, page, couleur) et le format
  * du fichier (PDF par l'impression, HTML, Word, OpenDocument, ePub, Markdown, texte, CSV). Les réglages restent
  * d'une fois sur l'autre (genealogie-family-book). Serveur : lib/family_book.php.

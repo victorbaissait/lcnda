@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 /**
  * Installation de la reconnaissance d'écriture (HTR), lancée en arrière-plan par l'application
- * (Maintenance → Reconnaissance d'écriture → Installer) :
+ * (Réglages → Reconnaissance d'écriture → Installer) :
  *   php scripts/htr_install.php <dossier htr> <dossier de l'application> [models]
  *
  * 1. trouve Python 3 (3.10 ou 3.11 de préférence), crée l'environnement <dossier htr>/venv et y installe Kraken ;

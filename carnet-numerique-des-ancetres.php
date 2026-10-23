@@ -263,7 +263,7 @@
                     <p>La date précise marche enfin dans Proximité et Dates (dates d'actes lues au jour près, autres calendriers convertis), « Entre deux dates précises » ; « Poser une question » comprend le lieu (« à Pernay ») et demande laquelle quand plusieurs villes portent le même nom.</p>
                     <h4>📏 Calendrier / Mesures</h4>
                     <p>Huit cadres de plus (mesures par région, âge ↔ naissance, écart entre deux dates, jour de la semaine, saint du jour et fêtes mobiles, heures canoniques, monnaies étrangères, générations).</p>
-                    <h4>⚙️ Maintenance</h4>
+                    <h4>⚙️ Réglages</h4>
                     <p>Une page « Cartes et fonds de carte » à part ; les messages après une action se règlent (coin de l'écran, durée, couleurs de chaque sorte de message) ; recherche des questions fréquentes avec un seul cadre.</p>
                 </div>
             </details>
@@ -340,7 +340,7 @@
                     <h4>♿ Accessibilité et apparence</h4>
                     <ul>
                         <li>Réglages pour le <b>daltonisme</b> (avec « Voir comme… »), taille et espacement du texte, <b>polices pour mieux lire et pour la dyslexie</b> (intégrées), contraste élevé, grandes cibles, moins d'animations, <b>lecture à voix haute</b>, dictée.</li>
-                        <li>Renommer les onglets du menu et choisir leur émoji ; formes d'avatar et thèmes à soi ; en-tête de fiche réglable ; Listes et Maintenance rangées en groupes repliables.</li>
+                        <li>Renommer les onglets du menu et choisir leur émoji ; formes d'avatar et thèmes à soi ; en-tête de fiche réglable ; Listes et Réglages rangés en groupes repliables.</li>
                         <li>Le widget <b>« Mes raccourcis »</b> mène à n'importe quoi (une fiche, une liste filtrée, un outil, un site), et <b>son crayon permet d'ajouter et de ranger ses raccourcis directement</b>.</li>
                     </ul>
                     <h4>🐞 Bugs corrigés</h4>
@@ -433,7 +433,7 @@
                         <li><b>Application Mac</b> : ⌘Z et ⇧⌘Z n'arrivaient pas au montage, à la retouche ni à la mise en page ; Échap demandait deux fois de confirmer ; « Annuler » dans le choix d'un fichier fermait la fenêtre ouverte.</li>
                         <li><b>Retouche</b> : le panneau des calques débordait ; la photo de départ ne se glissait ni ne se supprimait comme un calque ; des boutons censés être cachés restaient visibles ; « Versions de la photo » apparaissait sur un canevas vide.</li>
                         <li><b>Mise en page</b> : des boutons des gabarits ne faisaient rien ; la couleur du texte perdait la sélection ; « Dupliquer » pouvait planter ; renommer un calque d'un double-clic ne tenait pas.</li>
-                        <li><b>Glisser-déposer</b> : une ligne pouvait passer dans une autre liste, et le repère de dépôt était caché derrière les fenêtres ; dans Maintenance, les boutons rangés ou cachés n'étaient jamais enregistrés.</li>
+                        <li><b>Glisser-déposer</b> : une ligne pouvait passer dans une autre liste, et le repère de dépôt était caché derrière les fenêtres ; dans les Réglages, les boutons rangés ou cachés n'étaient jamais enregistrés.</li>
                     </ul>
                         </div>
                     </details>
@@ -531,7 +531,7 @@
                     <details class="presentation-version">
                         <summary>Version 0.4.1 <small>Mes listes, fiche d'un village enrichie, reconnaissance d'écriture à installer en un clic, corrections</small></summary>
                         <div class="presentation-version-body">
-                    <h4>Mes listes (Maintenance)</h4>
+                    <h4>Mes listes (Réglages)</h4>
                     <ul>
                         <li><b>Créez vos propres listes</b> en combinant des critères : par exemple les divorces entre 1850 et 1920, les mariages sans source, les ancêtres nés dans un département…</li>
                         <li>Ajoutez vos colonnes : texte libre, menu déroulant, case à cocher, date, nombre, lien internet ou personne de la base.</li>
@@ -567,7 +567,7 @@
                         <li><b>Départs et émigration</b> : port, navire, escales, liste de passagers, personnes parties ensemble, naturalisation de chacun, papiers d'émigration, et le trajet du navire sur la carte.</li>
                         <li><b>Enfant placé</b> (nourrice, hospice, Assistance publique, avec la durée), <b>Blason et noblesse</b>, <b>Poilu 14-18</b> (régiments, blessures, liens vers les journaux de marche), <b>Résistant</b> (réseau, nom de guerre, arrestation, caches, parcours jour par jour sur la carte, compagnons) et <b>Langues</b> parlées, transmises à la descendance.</li>
                         <li>Ces blocs se cochent dans la fiche (« Blocs à afficher sur la fiche ») ou s'affichent sur toutes les fiches (Apparence), dans l'ordre que vous choisissez.</li>
-                        <li><b>Éditeur de blocs</b> (Maintenance) : créez vos propres blocs sans programmer (texte, date, liste de choix, personne liée, lieu, photos, vidéos et sons, info reprise d'une fiche, carte), partagez-les avec un proche et importez les siens.</li>
+                        <li><b>Éditeur de blocs</b> (Réglages) : créez vos propres blocs sans programmer (texte, date, liste de choix, personne liée, lieu, photos, vidéos et sons, info reprise d'une fiche, carte), partagez-les avec un proche et importez les siens.</li>
                         <li><b>Étiquettes</b> sur tous ces blocs, dès leur création.</li>
                     </ul>
                     <h4>De nouvelles listes</h4>
@@ -613,7 +613,7 @@
                     <ul>
                         <li>Blocs <b>« Ascendants »</b> et <b>« Descendants »</b> sur chaque fiche, en liste : vous choisissez le nombre de générations (pour toutes les fiches ou pour une seule), et un trait « ┄ suite » signale qu'il y en a d'autres au-delà. Aussi en widget du tableau de bord et dans Graphiques.</li>
                         <li><b>Branches fermées</b> : déclarez qu'une descendance est éteinte, avec un degré de certitude (sûr, très probable, probable, peut-être, gros doute) et la raison ; la mention « lignée éteinte » apparaît dans les arbres, et la liste des branches fermées est dans Listes.</li>
-                        <li><b>Fusionner l'arbre d'un cousin</b> (Maintenance) : son fichier GEDCOM est comparé à votre base avant tout import, puis vous décidez fiche par fiche : « c'est la même personne, compléter la mienne », « nouvelle personne, l'ajouter » ou « ignorer ». Rien de votre fiche n'est effacé ni remplacé, et une copie de sécurité est faite juste avant.</li>
+                        <li><b>Fusionner l'arbre d'un cousin</b> (Réglages) : son fichier GEDCOM est comparé à votre base avant tout import, puis vous décidez fiche par fiche : « c'est la même personne, compléter la mienne », « nouvelle personne, l'ajouter » ou « ignorer ». Rien de votre fiche n'est effacé ni remplacé, et une copie de sécurité est faite juste avant.</li>
                         <li><b>Signets</b> : un ruban en haut de chaque fiche pour la garder sous la main ; les signets ont leur onglet dans la liste des personnes.</li>
                     </ul>
                     <h4>Raccourcis clavier</h4>
@@ -622,7 +622,7 @@
                         <li>⌘-clic sur une personne, une battue ou une enquête : l'ouvrir dans l'autre moitié de l'écran.</li>
                         <li><b>⌘Z</b> en dehors d'une case de texte : annuler la dernière modification d'une fiche, toujours après confirmation.</li>
                         <li>Dans un champ de date, taper « v », « av », « ap » ou « en » propose « vers », « avant », « après », « entre … et ».</li>
-                        <li>Maintenance → <b>Raccourcis clavier</b> : changez n'importe quel raccourci ; le logiciel vous prévient s'il est déjà pris par macOS, Windows ou Linux, et vous pouvez enregistrer vos réglages sous un nom.</li>
+                        <li>Réglages → <b>Raccourcis clavier</b> : changez n'importe quel raccourci ; le logiciel vous prévient s'il est déjà pris par macOS, Windows ou Linux, et vous pouvez enregistrer vos réglages sous un nom.</li>
                         <li>(Sur Windows et Linux, ⌘ se remplace par Ctrl, et ⌥ par Alt.)</li>
                     </ul>
                     <h4>Confort et corrections</h4>
@@ -676,7 +676,7 @@
                         <li><b>Sauvegarde complète protégée par un mot de passe</b> (chiffrement AES-256), pour la ranger sur iCloud, Dropbox ou une clé USB sans risque.</li>
                         <li>Export GEDCOM <b>« pour partager »</b> : les personnes vivantes et les fiches confidentielles y deviennent anonymes.</li>
                         <li>Une personne supprimée par erreur se <b>restaure</b> avec tout ce qui lui était attaché.</li>
-                        <li>Maintenance → Entretien : vérification des liens web enregistrés, avec la nouvelle adresse ou une copie archivée quand une page a disparu.</li>
+                        <li>Réglages → Entretien : vérification des liens web enregistrés, avec la nouvelle adresse ou une copie archivée quand une page a disparu.</li>
                     </ul>
                 </div>
                     </details>

@@ -23,7 +23,7 @@
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const isCurrent = token => token === S().workspaceToken && ['listes', 'maintenance'].includes(S().module);
-    /** Redessine l'écran ouvert (une liste, ou un onglet de Maintenance). */
+    /** Redessine l'écran ouvert (une liste, ou un onglet des Réglages). */
     const rerender = () => S().module === 'maintenance' ? A().renderMaintenance() : A().renderList(); // (corrigé : s'appelait elle-même à l'infini)
     ext.maintenance = ext.maintenance || {};
     document.addEventListener('click', event => {
@@ -35,7 +35,7 @@
     });
     const personLink = (id, name, extra = '') => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>${extra ? ` <small>${esc(extra)}</small>` : ''}` : esc(name || '');
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
-    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
     const fold = text => String(text || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, "'");
 
     /* ═══════════════════════ 🔒 MODE CONSULTATION ═══════════════════════ */
@@ -244,7 +244,7 @@
         const s = await api('scan_inbox_status');
         if (!isCurrent(token)) return;
         scanState = s;
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Dossier « Scans » surveillé', 'Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une.')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('RÉGLAGES', 'Dossier « Scans » surveillé', 'Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une.')}
             <form class="maintenance-panel" id="h-scan-form"><div class="form-grid"><label class="span-2">Dossier surveillé<input name="dir" value="${esc(s.dir)}" placeholder="~/Documents/Scans généalogie" list="h-scan-suggest"><datalist id="h-scan-suggest"><option value="~/Documents/Scans généalogie"><option value="~/Desktop/Scans"><option value="~/Downloads"><option value="~/Library/Mobile Documents/com~apple~CloudDocs/Scans"></datalist></label>
                 <label class="checkbox-line"><input type="checkbox" name="enabled" ${s.enabled ? 'checked' : ''}> Surveiller ce dossier (toutes les 20 secondes, tant que l’app est ouverte)</label>
                 <label class="checkbox-line"><input type="checkbox" name="move_imported" ${s.move_imported ? 'checked' : ''}> Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA »</label></div>
@@ -428,7 +428,7 @@
         const intro = 'Toi et un cousin, chacun sur son ordinateur, sur la même généalogie. L’app échange des « paquets de modifications » : tu reçois les siens, tu acceptes ou refuses chaque changement. On ne partage jamais la base elle-même par iCloud ou Dropbox (risque de fichier abîmé).';
         let body;
         if (!s.active) {
-            body = `<div class="maintenance-panel"><h3>Comment ça marche</h3><ol class="h-steps"><li><b>Commencer</b> ici : chaque fiche reçoit un identifiant commun.</li><li>Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Maintenance → Import → ouvrir une base .db).</li><li>Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple).</li><li>À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant.</li></ol>
+            body = `<div class="maintenance-panel"><h3>Comment ça marche</h3><ol class="h-steps"><li><b>Commencer</b> ici : chaque fiche reçoit un identifiant commun.</li><li>Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Réglages → Import → ouvrir une base .db).</li><li>Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple).</li><li>À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant.</li></ol>
                 <form id="h-sync-start" class="page-actions"><input name="author" placeholder="Ton prénom (ex. Victor)" required><button class="button" type="submit">Commencer le travail à deux</button></form>
                 <p class="muted">Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes. Les médias (photos, scans) ne sont pas échangés.</p></div>`;
         } else {
@@ -440,7 +440,7 @@
                 ${preview ? syncPreviewHtml(preview) : ''}
                 ${s.log?.length ? `<h3>Paquets échangés</h3><table class="data-table"><thead><tr><th>Date</th><th>Sens</th><th>De</th><th>Contenu</th></tr></thead><tbody>${s.log.map(l => `<tr><td>${window.LCNDA_UI?.when?.(l.created_at) || esc(l.created_at)}</td><td>${l.direction === 'sent' ? '📤 envoyé' : '📥 reçu'}</td><td>${esc(l.author)}</td><td>${esc(l.summary)}${l.direction === 'received' ? ` <small>(${l.accepted_count}/${l.change_count} acceptés)</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}`;
         }
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Travail à deux', intro)}${body}</section>`;
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('RÉGLAGES', 'Travail à deux', intro)}${body}</section>`;
         const ws = A().$('#workspace');
         ws.querySelector('#h-sync-start')?.addEventListener('submit', async ev => { ev.preventDefault(); try { await api('sync_start', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin.'); rerender(); } catch (error) { toast(error.message, 'error'); } });
         ws.querySelector('#h-sync-author')?.addEventListener('submit', async ev => { ev.preventDefault(); await api('sync_set_author', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Enregistré.'); });

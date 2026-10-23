@@ -8,7 +8,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *    « ⌘V / Ctrl+V ») ; plus aucune variante dans le code : window.print() direct, nouvelle fenêtre « Imprimer », 📥 Importer,
  *    « ⋯ Plus », ⋯ qui ouvre autre chose qu'un menu, clic droit qui fait autre chose que le menu de l'app, « (⌘S) » ajouté aux bulles.
  * 2. Navigateur (si Playwright et PHP sont là), 1440 px, 390 px et sombre : la bulle de l'app (et le title remis), les touches
- *    de la page Raccourcis, « 🖨 Imprimer » d'une fiche (aperçu, A4/A5, Paysage), l'import en 3 étapes (GEDCOM de Maintenance,
+ *    de la page Raccourcis, « 🖨 Imprimer » d'une fiche (aperçu, A4/A5, Paysage), l'import en 3 étapes (GEDCOM des Réglages,
  *    réglage avec « ↶ Annuler »), le clic droit sur une ligne et sur un objet du dessin vectoriel ; aucune erreur JavaScript.
  */
 const assert = require('node:assert/strict');
@@ -156,7 +156,7 @@ require 'lib/bootstrap.php'; $pdo = db(); echo 'ok';`], { cwd: appRoot, encoding
                 await p.click('dialog.k-print [data-k-x]'); await p.waitForTimeout(200);
                 assert.equal(await p.$('dialog.k-print[open]'), null);
             });
-            await t(`${tag} K13 : importer en 3 étapes (GEDCOM de Maintenance, réglage avec ↶ Annuler)`, async () => {
+            await t(`${tag} K13 : importer en 3 étapes (GEDCOM des Réglages, réglage avec ↶ Annuler)`, async () => {
                 await go('maint', 'import');
                 await p.click('#import-gedcom-form .file-pick button'); await p.waitForTimeout(300);
                 assert.match(await p.textContent('dialog.k-import [data-k-step]'), /ÉTAPE 1 SUR 3/);

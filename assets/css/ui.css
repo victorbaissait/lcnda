@@ -505,7 +505,7 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
 :root[data-theme="dark"] .ui-presets-head{background:#1f2226}
 :root[data-theme="dark"] .ui-presets-list li,:root[data-theme="dark"] .ui-presets-foot,:root[data-theme="dark"] .ui-presets-empty{border-color:#3a3f46}
 :root[data-theme="dark"] .ui-presets-list li.is-menu,:root[data-theme="dark"] .ui-presets-head:hover{background:#30343a}
-/* 💬 réglages des messages (Maintenance → Apparence) : couleurs par sorte, coin de l'écran */
+/* 💬 réglages des messages (Réglages → Apparence) : couleurs par sorte, coin de l'écran */
 .toast.ui-toast{background:var(--toast-info-bg,#111);color:var(--toast-info-fg,#fff)}
 .toast.ui-toast.success{background:var(--toast-success-bg,#14532d);color:var(--toast-success-fg,#fff)}
 .toast.ui-toast.error{background:var(--toast-error-bg,#7f1020);color:var(--toast-error-fg,#fff)}

@@ -5,8 +5,8 @@
  * 2. Plus de variante dans le code : ni bouton « Enregistrer » sur les pages de réglages, ni en-tête fait à la main par les petites
  *    fonctions header(), ni nombre en titre, ni carte faite à la main en mode « Fiches » (.list-card, .h-pet-card, .h-hs-card,
  *    .h-rc-card, .investigation-card, .external-link-card, .ar-card…).
- * 3. Navigateur (Playwright, si présent) : toutes les listes et toutes les pages de Maintenance (1440 px) : en-tête rangé
- *    (sur-titre « Listes · … » / « Maintenance · … », titre 38 px qui n’est pas un nombre, 1 bouton bleu + 2 au plus avant ⋯, ⭐ en dernier) ;
+ * 3. Navigateur (Playwright, si présent) : toutes les listes et toutes les pages des Réglages (1440 px) : en-tête rangé
+ *    (sur-titre « Listes · … » / « Réglages · … », titre 38 px qui n’est pas un nombre, 1 bouton bleu + 2 au plus avant ⋯, ⭐ en dernier) ;
  *    K2 : un réglage changé → « ✓ Enregistré » + « ↶ Annuler » qui le remet ; K9 : Personnes, Animaux, Liens utiles en « Fiches » = UI.cardsHtml ;
  *    390 px en mode sombre : pas de défilement de côté ; aucune erreur JavaScript.
  */
@@ -146,14 +146,14 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
         const page = await open(1440);
         const lists = await page.evaluate(() => window.LCNDA_APP.orderedListTypes(true).map(x => x[0]));
         const maint = await page.evaluate(() => window.LCNDA_APP.orderedMaintenanceTabs().map(x => x[0]));
-        await t(`K5 ${lists.length} listes et ${maint.length} pages de Maintenance : un seul en-tête`, async () => {
+        await t(`K5 ${lists.length} listes et ${maint.length} pages des Réglages : un seul en-tête`, async () => {
             const bad = [];
             for (const [kind, ids] of [['list', lists], ['maint', maint]]) for (const id of ids) {
                 await go(page, kind, id); await page.waitForTimeout(500);
                 const h = await headOf(page); const w = `${kind}:${id}`;
                 if (!h) { if (!(kind === 'list' && id === 'places')) bad.push(`${w} sans en-tête`); continue; }
                 if (!h.ui) bad.push(`${w} pas rangé`);
-                if (!new RegExp(`^${kind === 'list' ? 'Listes' : 'Maintenance'}( · |$)`).test(h.eyebrow)) bad.push(`${w} sur-titre « ${h.eyebrow} »`);
+                if (!new RegExp(`^${kind === 'list' ? 'Listes' : 'Réglages'}( · |$)`).test(h.eyebrow)) bad.push(`${w} sur-titre « ${h.eyebrow} »`);
                 if (h.fs !== '38px') bad.push(`${w} titre ${h.fs}`);
                 if (/^\d/.test(h.title) || !h.title) bad.push(`${w} titre « ${h.title} »`);
                 const k = h.kinds.filter(x => x !== 'saved'), more = k.indexOf('more'), star = k.indexOf('star');

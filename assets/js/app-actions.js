@@ -309,7 +309,7 @@
     /* ── K13 : tous les boutons « Importer… » de l'app passent par la même fenêtre (sans toucher à leur logique) ──
      * Un bouton dont le nom dit « Importer » (ou ⤒, 📥) qui ouvre le choix de fichier de l'ordinateur ouvre à la place
      * UI.openImportDialog ; le fichier choisi est ensuite remis à l'outil (comme s'il venait du choix de fichier) : son import,
-     * ses vérifications et ses messages restent les mêmes. Les formulaires d'import de Maintenance (form[id^="import-"]) aussi.
+     * ses vérifications et ses messages restent les mêmes. Les formulaires d'import des Réglages (form[id^="import-"]) aussi.
      * data-k-direct sur un champ fichier : le choix de fichier de l'ordinateur, sans la fenêtre. */
     const IMPORT_RX = /(^|[\s(«“"'])(importer|réimporter)\b|^\s*(⤒|📥)/i;
     let lastAct = {el: null, t: 0};

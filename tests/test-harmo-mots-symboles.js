@@ -156,7 +156,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             const r2 = await page.evaluate(() => { const d = document.getElementById('event-type-dialog'); d.showModal(); const b = d.querySelector('.modal-actions button[type=submit]').textContent.trim(); d.close(); return b; });
             assert.equal(r2, 'Créer le type');
         });
-        await t('Des écrans à 1440 px : plus de variante à l’écran (listes, Maintenance, fenêtres « Nouveau… »)', async () => {
+        await t('Des écrans à 1440 px : plus de variante à l’écran (listes, Réglages, fenêtres « Nouveau… »)', async () => {
             const seen = [];
             for (const [kind, id, click] of [['list', 'pets', '＋ Nouvel animal'], ['list', 'family_booklets', '＋ Nouveau livret'], ['list', 'employers', '＋ Nouvel employeur'], ['list', 'recueils', '＋ Nouveau recueil'], ['list', 'layout_books', null], ['list', 'my_calendar', '⚙️ Réglages'], ['list', 'audios', null], ['maint', 'design', null], ['maint', 'atelier', null], ['module', 'fiches', '＋ Nouvelle fiche']]) {
                 await go(page, kind, id); await page.waitForTimeout(700);

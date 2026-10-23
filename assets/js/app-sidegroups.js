@@ -1,4 +1,4 @@
-/* LCNDA — 🗂 Colonne de gauche rangée en groupes (Maintenance, Listes) : le même rangement partout.
+/* LCNDA — 🗂 Colonne de gauche rangée en groupes (Réglages, Listes) : le même rangement partout.
  * Activable ou non : rangé en groupes (familles repliables) ou en une seule liste ; chaque façon garde ses propres réglages.
  * « Mes listes » (les listes créées) restent toujours en bas, à part : on les range seulement entre elles.
  */
@@ -109,7 +109,7 @@
             dialog.addEventListener('cancel', e => { if (e.target !== dialog) return; e.preventDefault(); close(); });
             dialog.showModal();
         }
-        /** Maintenance → Apparence : le même rangement, en résumé (case « Ranger en groupes » + « Réordonner… ») */
+        /** Réglages → Apparence : le même rangement, en résumé (case « Ranger en groupes » + « Réordonner… ») */
         function panel(title) {
             const p = prefs(), hid = hiddenSet(), mine = mineOrdered(), word = cfg.what === 'listes' ? 'liste' : 'page';
             const plural = (n, w) => `${n} ${w}${n > 1 ? 's' : ''}`;

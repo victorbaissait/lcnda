@@ -1,7 +1,7 @@
 /* LCNDA — 🌦 Météo d'autrefois (maquette validée docs/design/meteo.html, M1 à M11 ; serveur : lib/meteo.php).
  * Le temps qu'il faisait le jour de chaque événement (et à l'heure de l'acte quand on la connaît), sans Internet.
  *  M1 pastille sous le lieu de chaque événement de la fiche (bulle au survol, détail au clic) · M2 fenêtre du jour (540) ou panneau
- *  qui se déplie · M4 bloc « 🌦 Météo de sa vie » · M5 réglages (Maintenance → 🌦 Météo d'autrefois, K2) · M6 import d'un pack (K13)
+ *  qui se déplie · M4 bloc « 🌦 Météo de sa vie » · M5 réglages (Réglages → 🌦 Météo d'autrefois, K2) · M6 import d'un pack (K13)
  *  · M7 widget du tableau de bord + pastilles dans « 🎂 Dates à fêter » · M8 frise (Chronologie → « 🌦 Météo ») · M9 l'heure de l'acte
  *  · M10 « À propos des données » · M11 mode sombre (meteo.css).
  * Masquer : réglage général (Toujours / Au survol / Jamais), sortes d'événements, et par personne ou par événement (clic droit sur la
@@ -206,7 +206,7 @@
     }
     function undoToast(msg, before) {
         const after = settings();
-        A().undoToast ? A().undoToast(`${msg} (la retrouver : Maintenance → 🌦 Météo d’autrefois)`, {undo: async () => { save(before); refreshAfterHide(); }, redo: async () => { save(after); refreshAfterHide(); }}) : A().toast?.(msg);
+        A().undoToast ? A().undoToast(`${msg} (la retrouver : Réglages → 🌦 Météo d’autrefois)`, {undo: async () => { save(before); refreshAfterHide(); }, redo: async () => { save(after); refreshAfterHide(); }}) : A().toast?.(msg);
     }
 
     /* ═════════════════ M2 : le détail d'un jour ═════════════════ */
@@ -426,7 +426,7 @@
         } catch (_) { hint.hidden = true; }
     }
 
-    /* ═════════════════ M5 : les réglages (Maintenance → 🌦 Météo d'autrefois) ═════════════════ */
+    /* ═════════════════ M5 : les réglages (Réglages → 🌦 Météo d'autrefois) ═════════════════ */
     const SEG = (key, val, opts) => `<span class="segmented wx-seg" role="group">${opts.map(([v, l]) => `<button type="button" class="${val === v ? 'is-active' : ''}" aria-pressed="${val === v}" data-wx-set="${key}" data-wx-val="${esc(v)}">${esc(l)}</button>`).join('')}</span>`;
     const fmtSize = b => (b >= 1e9 ? `${String(Math.round(b / 1e8) / 10).replace('.', ',')} Go` : b >= 1e6 ? `${Math.round(b / 1e6)} Mo` : `${Math.max(1, Math.round(b / 1e3))} Ko`);
     const PACKS = [['socle', 'Socle inclus', '1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo'],
@@ -451,7 +451,7 @@
                     : `<button type="button" class="button small secondary" data-wx-howto="${k}">⤓ ${k === 'socle' ? 'Comment l’obtenir' : `Télécharger le ${k === 'complet' ? 'pack complet (≈ 3 Go)' : 'pack Europe (≈ 2 Go)'}`}</button><button type="button" class="button small secondary" data-wx-import="${k}">⤒ Importer le fichier…</button>`;
                 return `<div class="wx-data-row"><span><b>${esc(name)}</b><small>${esc(desc)}</small></span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
             }).join('');
-            ws.innerHTML = `<section class="page wx-settings">${UI().pageHeader({title: 'Météo d’autrefois', icon: '🌦', attrs: 'data-ph-title', where: 'Maintenance · Données', saved: true, help: 'Le temps qu’il faisait le jour de chaque événement, sans Internet.',
+            ws.innerHTML = `<section class="page wx-settings">${UI().pageHeader({title: 'Météo d’autrefois', icon: '🌦', attrs: 'data-ph-title', where: 'Réglages · Données', saved: true, help: 'Le temps qu’il faisait le jour de chaque événement, sans Internet.',
                 actions: ['<button type="button" class="button secondary" data-wx-reset data-ui-reset>↺ Remettre comme au départ</button>']})}
                 <div class="wx-set">
                 <section class="card wx-card"><h3>Ce qu’on montre</h3>
@@ -581,7 +581,7 @@
     ext.dashboard.meteo_widget = {load: () => (settings().today ? api('meteo_today').catch(() => null) : Promise.resolve({off: true})), render: (index, widget, span, d) => {
         const today = new Date(), md = `${today.getDate() === 1 ? '1er' : today.getDate()} ${MONTHS[today.getMonth()]}`;
         let body;
-        if (d?.off) body = A().empty('La météo est masquée ici (Maintenance → 🌦 Météo d’autrefois).', {icon: '🌦'});
+        if (d?.off) body = A().empty('La météo est masquée ici (Réglages → 🌦 Météo d’autrefois).', {icon: '🌦'});
         else if (!d || !d.installed) body = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: 'Comment les obtenir', attrs: 'data-wx-howto="socle"'}});
         else if (!d.pick) body = A().empty('Aucun anniversaire rond avec une météo connue aujourd’hui.', {icon: '🌦', hint: 'Il en faut un de 10, 25, 50, 100 ans… d’une naissance, d’un mariage ou d’un décès.'});
         else {

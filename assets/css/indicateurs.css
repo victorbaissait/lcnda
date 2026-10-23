@@ -46,7 +46,7 @@
 .ui-badge.is-date, .entity-date-badge { text-transform: none; letter-spacing: 0; font-weight: 700; color: #555; background: #fff; border-color: #c9ccd3; margin-left: 0; }
 /* profils (artiste…) : gardent leur couleur, même forme */
 .artist-badge { background: var(--person-badge-artist-bg, #e8d5f5); color: var(--person-badge-artist-text, #5c1a99); border-color: currentColor; }
-/* fiche : les couleurs réglées dans « Couleurs des badges » (Maintenance → Apparence) restent possibles en clair */
+/* fiche : les couleurs réglées dans « Couleurs des badges » (Réglages → Apparence) restent possibles en clair */
 :root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-sosa { background: var(--person-badge-sosa-bg, #055dff); color: var(--person-badge-sosa-text, #fff); border-color: var(--person-badge-sosa-bg, #055dff); }
 :root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-green { background: var(--person-badge-living-bg, #ecfaf0); color: var(--person-badge-living-text, #14532d); }
 :root:not([data-theme="dark"]) :is(.person-hero-status, .person-badge-preview) .ui-badge.is-black { background: var(--person-badge-deceased-bg, #111); color: var(--person-badge-deceased-text, #fff); border-color: var(--person-badge-deceased-bg, #111); }

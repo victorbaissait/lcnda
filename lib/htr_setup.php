@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * ✍️ Reconnaissance d'écriture manuscrite (HTR) : installation en un clic (Maintenance → Reconnaissance d'écriture).
+ * ✍️ Reconnaissance d'écriture manuscrite (HTR) : installation en un clic (Réglages → Reconnaissance d'écriture).
  *
  * Kraken (Python) et ses modèles pèsent plus d'1 Go : ils ne sont pas livrés avec l'application mais installés une
  * fois dans le dossier des données (DATA_DIR/htr), qui est accessible en écriture (le dossier de l'application ne

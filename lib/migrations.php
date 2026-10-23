@@ -1417,7 +1417,7 @@ function migration_v9_recover(PDO $pdo): void
     else { $pdo->exec('ALTER TABLE family_collection_media_v9 RENAME TO family_collection_media'); }
 }
 
-/** n°15 : « Mes listes » (Maintenance) — listes faites sur mesure : critères, colonnes, colonnes à remplir soi-même. */
+/** n°15 : « Mes listes » (Réglages) — listes faites sur mesure : critères, colonnes, colonnes à remplir soi-même. */
 function schema_v15(PDO $pdo): void
 {
     $pdo->exec("CREATE TABLE IF NOT EXISTS custom_lists (

@@ -1,5 +1,5 @@
 /* LCNDA — ✅ Contrôle de la base (F3, design A validé le 21/10/2026 ; maquette « controle-coherence-designs »).
- * Une seule page dans Maintenance → Qualité des données : la liste qui réunit les anciens écrans « Incohérences avancées »,
+ * Une seule page dans Réglages → Qualité des données : la liste qui réunit les anciens écrans « Incohérences avancées »,
  * « Âges et écarts », la liste des doublons, « Lieux mal placés » et « Voyages impossibles » (leurs adresses mènent ici,
  * filtrées). Filtres en pastilles (sortes, gravités, 🙈 Exceptions), barre H10 (Chercher, Filtrer ▾ branche / Sosa /
  * descendants, Liste | Fiches, Trier), ⤓ CSV, « ▶ Une à une », « Ce n'est pas une erreur » (raison + note), « ↺ Signaler

@@ -4,7 +4,7 @@
  * Chaque règle qui touche l'app commence par un attribut data-lc-* posé sur <html> : sans lui (« Comme avant », le départ),
  * rien ne s'applique. Les ombres, fonds, coins, marges et survols de toute l'app sont dans designs-gen.css (fabriqué).
  * Mode sombre : règles :root[data-theme="dark"] écrites ici même (ce fichier n'est pas passé dans build-dark-css.py).
- * En bas : la page Maintenance → 🎨 Designs au choix (.lcd-*).
+ * En bas : la page Réglages → 🎨 Designs au choix (.lcd-*).
  */
 
 /* ═════════════════════════ A1 · Style général ═════════════════════════ */
@@ -265,7 +265,7 @@
 /* en-têtes qui restent en haut */
 :root[data-lc-lsticky="off"] .data-table th { position: static; }
 
-/* ═════════════════════════ La page Maintenance → 🎨 Designs au choix ═════════════════════════ */
+/* ═════════════════════════ La page Réglages → 🎨 Designs au choix ═════════════════════════ */
 .lcd-page { --lcd-acc: var(--blue-bright, #055dff); }
 .lcd-intro { margin: -10px 0 18px; max-width: 980px; }
 .lcd-intro .link-button, .lcd-link .link-button { font-weight: 800; color: var(--blue); text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }

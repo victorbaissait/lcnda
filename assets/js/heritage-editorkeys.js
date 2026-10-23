@@ -3,7 +3,7 @@
  * Chaque outil a des commandes (ses menus, ses outils, ses boutons) : on peut donner une touche à n'importe laquelle.
  * Les touches sont lues comme dans l'onglet Raccourcis clavier (même forme « Mod+Shift+K »), et refusées si le système
  * (macOS, Windows, Linux) ou le menu de l'application les prend déjà. Une touche à soi passe avant celle de l'outil.
- * Réglages : Maintenance → Montage, retouche, mise en page et son, et Maintenance → Raccourcis clavier.
+ * Réglages : Réglages → Montage, retouche, mise en page et son, et Réglages → Raccourcis clavier.
  * Chargé après app.js et les éditeurs (heritage-studio.js, heritage-studio-av.js, heritage-layout.js).
  */
 (() => {
@@ -213,7 +213,7 @@
         dlg.showModal();
     }
 
-    /* ── La liste des raccourcis d'un outil (Maintenance → Montage, retouche, mise en page et son ; Raccourcis clavier) ── */
+    /* ── La liste des raccourcis d'un outil (Réglages → Montage, retouche, mise en page et son ; Raccourcis clavier) ── */
     /** Dessine le réglage dans box (un élément vide) ; garde l'onglet et la recherche */
     ext.editorKeysPanel = box => {
         if (!box) return;

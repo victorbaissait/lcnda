@@ -712,7 +712,7 @@ function art_api_get(PDO $pdo, array $g): array
         'cited' => ['items' => art_person_cited($pdo, safe_int($g['person_id'] ?? 0))],
         'types' => ['types' => art_types_all($pdo)],
         'profiles' => profils_get($pdo, safe_int($g['person_id'] ?? 0)), // 🧩 lib/profils.php
-        'profile_people' => profils_people($pdo), 'page_settings' => profils_page_settings($pdo), // 🧩 liste « Cette personne était… », Maintenance
+        'profile_people' => profils_people($pdo), 'page_settings' => profils_page_settings($pdo), // 🧩 liste « Cette personne était… », Réglages
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }

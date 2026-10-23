@@ -1382,7 +1382,7 @@
         return A().card(index, '🏠 Maisons', list.length, `<div class="h-hs-pblock">${list.map(h => `<article class="h-hs-pcard"><button type="button" class="h-hs-pthumb" data-hsp-open="${h.id}" data-hsp-ver="${esc(h.ver || '')}" title="Ouvrir la maison">${h.thumb ? `<img src="${esc(h.thumb)}" alt="">` : '<span>🏠</span>'}</button><div><b>${esc(h.name)}</b><small class="muted">${esc([h.place, h.period].filter(Boolean).join(' · '))}</small><small>${esc((h.why || []).join(' · '))}</small>${h.ver_label ? `<small>🕰 ${esc(h.ver_label)}</small>` : ''}<button type="button" class="button small" data-hsp-open="${h.id}" data-hsp-ver="${esc(h.ver || '')}">↗ Ouvrir</button></div></article>`).join('')}</div>`, 'span-12');
     };
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-hsp-open]'); if (!b || b.closest('dialog')) return; e.preventDefault(); open({id: Number(b.dataset.hspOpen), ver: b.dataset.hspVer || '', onClose: () => ext.refreshView?.()}); });
-    // le bloc se range avec les autres (Maintenance → Apparence → blocs des fiches) : juste après « Recensements »
+    // le bloc se range avec les autres (Réglages → Apparence → blocs des fiches) : juste après « Recensements »
     const addBlock = () => { const L = A()?.defaultPersonBlocks; if (!Array.isArray(L) || L.some(b => b[0] === 'houses')) return; const i = L.findIndex(b => b[0] === 'census'); L.splice(i < 0 ? L.length : i + 1, 0, ['houses', '🏠 Maisons de famille']); };
     addBlock(); document.addEventListener('DOMContentLoaded', addBlock, {once: true});
 

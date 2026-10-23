@@ -298,7 +298,7 @@
         // calques, étapes de présentation, grille aimantée
         let layers = Array.isArray(b.data?.layers) ? b.data.layers.map(l => ({...l})) : [], steps = Array.isArray(b.data?.steps) ? b.data.steps.map(x => ({...x})) : [], snapOn = !!b.data?.snap, activeLayer = '';
         const boardExtra = () => ({bgColor, bgPattern, layers, steps, snap: snapOn});
-        // barre d'outils et en-tête : dans l'ordre choisi (Maintenance → Réglages des tableaux → Menus et options)
+        // barre d'outils et en-tête : dans l'ordre choisi (Réglages → Tableaux → Menus et options)
         const TOOL_DEFS = {select: ['↖', 'Choisir, déplacer', 'V'], hand: ['✋', 'Se déplacer', 'H ou Espace'], text: ['T', 'Texte', 'T'], note: ['🗒', 'Note', 'N'], shape: ['⬠', 'Formes', 'S'], line: ['╱', 'Trait', 'L'], arrow: ['➝', 'Flèche', 'A'], pen: ['✍︎', 'Dessin à main levée', 'P'], eraser: ['⌫', 'Gomme', 'E'], table: ['▦', 'Tableur', 'G']};
         const ordered = (order, hidden, all) => [...(order || []).filter(k => all.includes(k)), ...all.filter(k => !(order || []).includes(k))].filter(k => !(hidden || []).includes(k));
         const toolButtons = () => { const p = P(); return ordered(p.toolsOrder, (p.toolsHidden || []).filter(k => k !== 'select'), Object.keys(TOOL_DEFS)).map(k => `<button type="button" class="h-bt" data-bd-tool="${k}" title="${esc(TOOL_DEFS[k][1])}" data-shortcut="${esc(TOOL_DEFS[k][2])}"><span>${TOOL_DEFS[k][0]}</span></button>`).join(''); };
@@ -1032,7 +1032,7 @@
         });
         stage.addEventListener('click', e => { const o = e.target.closest('[data-bd-openlink]'); if (o) { const it = byId(o.closest('[data-bi]').dataset.bi); openItem(it); } });
         // ── tableur : écrire dans une cellule (Tab, Entrée pour passer à la suivante ; coller un bout de tableur) ──
-        function newTable() { // comme réglé dans Maintenance → Réglages des tableaux → Tableur
+        function newTable() { // comme réglé dans Réglages → Tableaux → Tableur
             const t0 = {rows: 4, cols: 3, header: true, hcol: false, stripes: true, hfill: '#e8eef7', fs: 14, headers: 'Nom;Année;Lieu', ...(P().table || {})};
             const heads = String(t0.headers || '').split(';').map(x => x.trim()), cols = Math.max(1, Math.min(30, t0.cols)), rows = Math.max(1, Math.min(100, t0.rows));
             const cells = Array.from({length: rows}, (_, r) => Array.from({length: cols}, (_, c) => r === 0 && t0.header ? heads[c] || '' : ''));
@@ -1237,7 +1237,7 @@
         const onKeyUp = e => { if (e.key === ' ') { spaceDown = false; stage.dataset.tool = tool; } };
         window.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp);
         // ── propriétés de la sélection ──
-        // les réglages d'une légende, dans l'ordre choisi (Maintenance → Réglages des tableaux → Menus et options)
+        // les réglages d'une légende, dans l'ordre choisi (Réglages → Tableaux → Menus et options)
         function legendParts(one) {
             const p = P(), tMin = p.textMin ?? 6, tMax = p.textMax ?? 200;
             const numField = (k, label, min, max, step, val, unit = 'px', boxMin = min, boxMax = max) => `<label>${label}<span class="h-bd-num"><input type="range" min="${min}" max="${max}" step="${step}" value="${Math.max(min, Math.min(max, val))}" data-bd-num="${k}"><input type="number" class="h-bd-numbox" min="${boxMin}" max="${boxMax}" step="${step}" value="${+Number(val).toFixed(2)}" data-bd-num="${k}"><small>${unit}</small></span></label>`;
@@ -1265,7 +1265,7 @@
                 inspector.innerHTML = `<h4>Tableau</h4><p class="muted">${fmt(items.length)} élément${items.length > 1 ? 's' : ''}. Choisis un élément pour le régler.</p>
                     <label>Fond du tableau</label><div class="h-bd-sws">${pal('bg').map(c => `<button type="button" class="h-sw" style="background:${c}" data-bd-bgset="${c}" title="${c}"></button>`).join('')}<input type="color" data-bd-bgset2 value="${esc(bgColor)}" title="Autre couleur"></div>
                     <p class="muted h-bd-keys">⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web.</p>
-                    <p class="muted"><small>Couleurs, formes, polices, tailles, ordre des menus : Maintenance → Réglages des tableaux.</small></p>`;
+                    <p class="muted"><small>Couleurs, formes, polices, tailles, ordre des menus : Réglages → Tableaux.</small></p>`;
                 return;
             }
             const one = l.length === 1 ? l[0] : null, t = one?.type, types = new Set(l.map(i => i.type)), any = (...ts) => ts.some(x => types.has(x));
@@ -1480,7 +1480,7 @@
         const styleWeight = s => { const t = String(s).toLowerCase().replace(/[\s_-]/g, ''); return /hairline|thin/.test(t) ? 100 : /extralight|ultralight/.test(t) ? 200 : /light/.test(t) ? 300 : /semibold|demibold|demi/.test(t) ? 600 : /extrabold|ultrabold/.test(t) ? 800 : /black|heavy/.test(t) ? 900 : /bold/.test(t) ? 700 : /medium/.test(t) ? 500 : 400; };
         const fontWeights = fam => { const st = fam && fontStyles?.get(fam); if (!st) return null; const m = new Map(); [...st].forEach(s => { const w = styleWeight(s); if (!m.has(w) || !/italic|oblique/i.test(s)) m.set(w, s.replace(/\b(italic|oblique)\b/ig, '').trim() || s); }); return [...m.entries()].sort((x, y) => x[0] - y[0]); };
         async function loadLocalFonts() {
-            if (!window.queryLocalFonts) { toast('Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Maintenance → Réglages des tableaux).', 'error'); return; }
+            if (!window.queryLocalFonts) { toast('Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux).', 'error'); return; }
             try { const all = await window.queryLocalFonts(); localFonts = [...new Set(all.map(f => f.family))].sort((a, b2) => a.localeCompare(b2, 'fr')); fontStyles = new Map(); all.forEach(f => { if (!fontStyles.has(f.family)) fontStyles.set(f.family, new Set()); fontStyles.get(f.family).add(f.style); }); renderInspector(); toast(`${localFonts.length} polices de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes).`); }
             catch (error) { toast('Lecture des polices refusée : ' + error.message, 'error'); }
         }
@@ -1559,7 +1559,7 @@
                     <section data-k="web"><h4>🌐 D’ailleurs</h4><label>Adresse d’une image ou d’un site<input data-bd-url placeholder="https://…"></label><button type="button" class="button small" data-bd-addurl>Poser</button></section>
                     <section data-k="person"><h4>👤 Une fiche</h4>${PKF({name: 'bd_person', kind: 'person'})}<button type="button" class="button small" data-bd-addperson>Poser la fiche</button></section>
                     <section data-k="screen"><h4>📺 Un écran de l’app</h4><p class="muted">Une liste, un diagramme, une statistique, la carte, un village, une de tes listes…</p>${sc ? sc.select('list:villages', 'data-bd-screen') : ''}<label class="checkbox-line"><input type="checkbox" data-bd-screenprev checked> <span>avec l’aperçu vivant</span></label><button type="button" class="button small" data-bd-addscreen>Poser l’écran</button></section>
-                    <section data-k="widget"><h4>✨ Un de mes widgets</h4>${own.length ? `<select data-bd-widgetsel>${own.map(([k, d]) => `<option value="${esc(k)}">${esc((d.icon || '🧱') + ' ' + (d.name || 'Mon widget'))}</option>`).join('')}</select><button type="button" class="button small" data-bd-addwidget>Poser le widget</button>` : '<p class="muted">Crée d’abord un widget (Maintenance → Éditeur de widgets).</p>'}</section>
+                    <section data-k="widget"><h4>✨ Un de mes widgets</h4>${own.length ? `<select data-bd-widgetsel>${own.map(([k, d]) => `<option value="${esc(k)}">${esc((d.icon || '🧱') + ' ' + (d.name || 'Mon widget'))}</option>`).join('')}</select><button type="button" class="button small" data-bd-addwidget>Poser le widget</button>` : '<p class="muted">Crée d’abord un widget (Réglages → Éditeur de widgets).</p>'}</section>
                     <section data-k="recueil"><h4>📚 Un recueil</h4><input type="search" placeholder="Titre du recueil" data-bd-rsearch><div class="h-bd-results" data-bd-rres></div></section>
                     <section data-k="tag"><h4>🏷 Une étiquette</h4>${PKF({name: 'bd_label', kind: 'label'})}<input placeholder="ou un mot à toi" data-bd-tsearch><button type="button" class="button small" data-bd-addtag>Poser ce mot</button></section>
                     <section data-k="table"><h4>▦ Un tableur</h4><p class="muted">Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers.</p><button type="button" class="button small" data-bd-addtable>Poser un tableur</button></section>
@@ -1575,7 +1575,7 @@
                 </div>`,
                 onOpen: dlg => {
                     const close = () => dlg.close();
-                    // dans l'ordre choisi (Maintenance → Réglages des tableaux → Menus et options)
+                    // dans l'ordre choisi (Réglages → Tableaux → Menus et options)
                     { const p = P(), box = dlg.querySelector('.h-bd-add'), secs = [...box.querySelectorAll(':scope > section[data-k]')]; ordered(p.addOrder, [], secs.map(x => x.dataset.k)).forEach(k => box.appendChild(secs.find(x => x.dataset.k === k))); secs.forEach(x => { x.hidden = (p.addHidden || []).includes(x.dataset.k); }); }
                     dlg.querySelector('[data-bd-import]').addEventListener('change', async e => { const f = e.target.files[0]; if (!f) return; close(); importBoard(f); });
                     dlg.querySelector('[data-bd-files]').addEventListener('change', e => { uploadAndPlace(e.target.files); close(); });

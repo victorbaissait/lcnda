@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 /**
  * 📈 Mes graphiques (et mes widgets) rangés dans la base : table custom_widgets, une ligne par définition faite dans
- * Maintenance → Éditeur de graphiques ou → Éditeur de widgets (interface : assets/js/heritage-widgets.js).
+ * Réglages → Éditeur de graphiques ou → Éditeur de widgets (interface : assets/js/heritage-widgets.js).
  * Avant, ils vivaient dans le réglage « genealogie-custom-widgets » (une seule valeur JSON) : le navigateur les envoie
  * une seule fois ici au premier chargement (op « import », jamais par-dessus une définition déjà connue ou supprimée).
  * Rangés en lignes, ils se cherchent dans le menu de choix commun (picker_search, sorte « graph », lib/picker.php)

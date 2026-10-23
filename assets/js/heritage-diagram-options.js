@@ -51,7 +51,7 @@
         root: 'La personne d’où l’on part pour ses ancêtres, ses descendants ou ses branches (elle est comptée avec ses ancêtres et ses descendants).',
         gens: 'Jusqu’à combien de générations on remonte (ou on descend). 0 = toutes.',
         label: 'Seulement les fiches qui portent cette étiquette.',
-        list: 'Seulement les personnes d’une de tes listes (Maintenance → Mes listes).',
+        list: 'Seulement les personnes d’une de tes listes (Réglages → Mes listes).',
         search: 'Seulement les personnes dont le nom ou le prénom contient ces lettres.',
         people: 'Seulement les personnes que tu choisis ici, une par une.',
         period: 'Seulement ce qui s’est passé entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit.',

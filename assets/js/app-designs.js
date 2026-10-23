@@ -1,8 +1,8 @@
-/* LCNDA — 🎨 Designs au choix (A1 à A8) (Maintenance → 🎨 Designs au choix).
+/* LCNDA — 🎨 Designs au choix (A1 à A8) (Réglages → 🎨 Designs au choix).
  *
  * Maquette validée : designs-A (« Designs au choix ») ; mode d'emploi : docs/UI.md « Designs au choix ».
  * Un design change seulement la FORME : traits, ombres, coins, densité, icônes, en-tête de fiche, cases d'arbre, boutons,
- *   mouvements, listes. Jamais la police, la taille du texte ni les couleurs : le premier cadre de Maintenance → Apparence
+ *   mouvements, listes. Jamais la police, la taille du texte ni les couleurs : le premier cadre de Réglages → Apparence
  *   (Preset, Couleur principale, Police de caractères, Taille typographique, Menu des onglets…) passe toujours devant.
  * Réglage : localStorage['genealogie-designs'] = {ver: 2, a1: {v: 'avant'|'doux'|'papier'|'sobre', r, bw, sh, grid}, a2: {…}, … a8: {…}}
  *   (v = la grande carte choisie, le reste = les « Réglages en plus » ; une valeur différente de celle de la carte = « retouché »).
@@ -150,7 +150,7 @@
                 {k: 'dur', type: 'range', label: 'Vitesse', min: 100, max: 400, step: 10, unit: 'ms', only: ['petit'], why: 'Plus court = plus vif ; plus long = plus visible. Au-delà de 0,3 s, l’app paraît lente. Seulement pour « Petit mouvement ».'},
                 {k: 'hover', type: 'toggle', label: 'Survol', text: 'Les boutons s’enfoncent sous la souris', why: 'Montre que le bouton réagit avant même de cliquer.'},
                 {k: 'bar', type: 'toggle', label: 'Messages', text: 'Barre bleue du temps qui reste (messages H7)', why: 'La barre qui se vide montre combien de temps il reste pour cliquer « ↶ Annuler ». Sans elle, le temps s’écrit en secondes.'},
-                {k: 'reduce', type: 'toggle', label: 'Ordinateur', text: 'Suivre le réglage « réduire les animations » de l’ordinateur', why: 'Si tu as demandé moins d’animations à ton Mac ou à Windows, l’app passe toute seule en « Aucune animation ». Et si « Réduire les animations » est coché dans Maintenance → Accessibilité, rien ne bouge, quel que soit ce choix.'},
+                {k: 'reduce', type: 'toggle', label: 'Ordinateur', text: 'Suivre le réglage « réduire les animations » de l’ordinateur', why: 'Si tu as demandé moins d’animations à ton Mac ou à Windows, l’app passe toute seule en « Aucune animation ». Et si « Réduire les animations » est coché dans Réglages → Accessibilité, rien ne bouge, quel que soit ce choix.'},
             ]},
         a8: {n: 'A8', icon: '☰', title: 'Listes', q: 'Comment séparer les lignes des listes ?', help: 'Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux.', cols: 'four', screens: ['liste', 'side'],
             variants: [
@@ -801,7 +801,7 @@
         if (ro && !slot.lcdObs) { slot.lcdObs = true; ro.observe(slot); }
     }
 
-    /* ═════════════════════════ Maintenance → 🎨 Designs au choix ═════════════════════════ */
+    /* ═════════════════════════ Réglages → 🎨 Designs au choix ═════════════════════════ */
     const PCARD = {a1: ['nav', 'ficheHead', 'liste'], a2: ['liste', 'ficheHead'], a3: ['ficheHead', 'boutons'], a4: ['ficheHead'], a5: ['arbre'], a6: ['fenetre', 'boutons'], a7: ['motion'], a8: ['liste', 'side']};
     const PPREV = {a1: ['nav', 'fiche', 'liste', 'fenetre', 'dash'], a2: ['liste', 'fiche', 'side', 'menu'], a3: ['fiche', 'dash', 'boutons'], a4: ['fiche'], a5: ['arbre'], a6: ['fenetre', 'boutons', 'ficheHead'], a7: ['motion', 'boutons'], a8: ['liste', 'side', 'menu']};
     const lsGet = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
@@ -949,8 +949,8 @@
         const st = A().state; if (st && token !== st.workspaceToken) return;
         const ws = document.getElementById('workspace'); if (!ws) return;
         const G = cur(), opened = openSet();
-        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>🎨 Designs au choix</h2><p>Sept réglages pour changer la forme des éléments de l’app : traits, densité, icônes, en-tête des fiches, boutons, mouvements, listes. Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
-            <div class="lcd-intro ui-notice ui-notice-info"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Ici, seulement la forme. La police, la taille du texte et les couleurs (Preset, Couleur principale) se règlent dans <button type="button" class="link-button" data-lcd-apparence>Maintenance → Apparence</button> : elles passent toujours devant, quel que soit le design.</span></div>
+        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Sept réglages pour changer la forme des éléments de l’app : traits, densité, icônes, en-tête des fiches, boutons, mouvements, listes. Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
+            <div class="lcd-intro ui-notice ui-notice-info"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Ici, seulement la forme. La police, la taille du texte et les couleurs (Preset, Couleur principale) se règlent dans <button type="button" class="link-button" data-lcd-apparence>Réglages → Apparence</button> : elles passent toujours devant, quel que soit le design.</span></div>
             <div class="ui-notice ui-notice-info lcd-trees-moved"><span class="ui-notice-ic" aria-hidden="true">🌳</span><span>Les cases des arbres (A5) se règlent maintenant avec leurs couleurs, dans <button type="button" class="link-button" data-lcd-trees>Graphiques → 🎨 Couleurs des statistiques et des arbres →</button></span></div>
             ${tocHtml(G)}
             <div class="lcd-secs">${PAGE_IDS.map(id => sectionShell(id, opened.has(id))).join('')}</div></section>`;

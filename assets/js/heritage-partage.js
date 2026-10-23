@@ -1,5 +1,5 @@
 /* LCNDA — 📤 Partager avec la famille (F11 ; serveur : lib/family_share.php).
- * Maintenance → Exporter → « 📤 Partager avec la famille » : une copie de l'arbre en lecture seule (.zip : index.html +
+ * Réglages → Exporter → « 📤 Partager avec la famille » : une copie de l'arbre en lecture seule (.zip : index.html +
  * photos) à envoyer à la famille ; elle s'ouvre d'un double-clic, sans l'app ni internet. On choisit les branches (vide =
  * toute la base), ce que deviennent les vivants (cachés, ou prénom seulement) et ce qu'on montre (photos, actes, notes) ;
  * le résumé « Voilà ce qui part » se met à jour à chaque changement, avant de fabriquer le fichier.

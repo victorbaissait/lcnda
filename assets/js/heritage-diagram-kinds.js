@@ -1,5 +1,5 @@
 /* LCNDA — 📊 Les types de diagrammes, communs aux diagrammes et aux graphiques :
- *  - un seul catalogue (ordre, types cachés, groupes à soi) : Maintenance → « Types de diagrammes », ou ⚙️ dans la galerie ;
+ *  - un seul catalogue (ordre, types cachés, groupes à soi) : Réglages → « Types de diagrammes », ou ⚙️ dans la galerie ;
  *  - un graphique (Éditeur de graphiques) peut se dessiner avec n'importe quel type : parts, chiffres, assemblées,
  *    nuage de mots… et, à partir des personnes, frise de vies, frise chronologique, flux de migrations ;
  *  - partout où l'on pose un diagramme (fiche, fiche d'une personne, enquête, Atelier, tableau de bord) : « D'un
@@ -32,7 +32,7 @@
     }
     ext.diagramCatalog = (templates, opts) => catalog(templates, opts);
 
-    /* ── l'éditeur du catalogue (Maintenance ou ⚙️ de la galerie) ── */
+    /* ── l'éditeur du catalogue (Réglages ou ⚙️ de la galerie) ── */
     function kindsEditorHtml() {
         const T = DI().TEMPLATES(), P = prefs(), groups = catalog(T, {all: true}), names = groups.map(([g]) => g);
         const opts = cur => names.map(n => `<option value="${esc(n)}" ${n === cur ? 'selected' : ''}>${esc(n)}</option>`).join('') + '<option value="__new">＋ Nouveau groupe…</option>';
@@ -80,7 +80,7 @@
     ext.maintenance.diagram_kinds = async token => {
         if (token !== A().state.workspaceToken) return;
         const ws = document.getElementById('workspace');
-        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>📊 Types de diagrammes</h2><p>Ordre, types montrés ou cachés, et groupes à toi.</p></div></header><div class="maintenance-panel">${kindsHelp}${kindsEditorHtml()}<div class="page-actions action-zone"><button type="button" class="button" data-dk-save>Enregistrer</button><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button></div></div>
+        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>📊 Types de diagrammes</h2><p>Ordre, types montrés ou cachés, et groupes à toi.</p></div></header><div class="maintenance-panel">${kindsHelp}${kindsEditorHtml()}<div class="page-actions action-zone"><button type="button" class="button" data-dk-save>Enregistrer</button><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button></div></div>
             <section class="maintenance-panel h-dk-howto"><h3>⤒ Mon propre graphique à partir de données d’ailleurs</h3>${HOWTO}</section></section>`;
         bindKindsEditor(ws.querySelector('.page'));
     };
@@ -157,7 +157,7 @@
         if (!src.length) { toast('Aucun graphique disponible.', 'error'); return res(null); }
         const g = {}; src.forEach(([k, l, grp]) => { (g[grp] = g[grp] || []).push([k, l]); });
         const groups = catalog(DI().TEMPLATES()).map(([gn, items]) => [gn, items.filter(t => PAIR_KINDS.has(t.kind) && !t.preset)]).filter(([, l]) => l.length);
-        ext.openDialog({eyebrow: 'DIAGRAMME', title: '📊 D’un graphique', submitLabel: 'Créer le diagramme', body: `<div class="h-dk-form"><p class="muted">Un de tes graphiques (Maintenance → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix.</p>
+        ext.openDialog({eyebrow: 'DIAGRAMME', title: '📊 D’un graphique', submitLabel: 'Créer le diagramme', body: `<div class="h-dk-form"><p class="muted">Un de tes graphiques (Réglages → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix.</p>
             <label>Graphique<select name="src">${Object.entries(g).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
             <label>Dessin<select name="tpl">${groups.map(([gn, items]) => `<optgroup label="${esc(gn)}">${items.map(t => `<option value="${esc(tplId(t))}">${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</optgroup>`).join('')}</select></label>
             <label class="checkbox-line"><input type="checkbox" name="live" checked> Chiffres tenus à jour (relus dans l’arbre à chaque affichage)</label>

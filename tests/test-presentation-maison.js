@@ -168,7 +168,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         ['maison : la porte se pose sur le mur cliqué juste après avoir dessiné la pièce', () => assert.deepEqual(out.door, ['door'])],
         ['maison : date des réglages enregistrés au format commun (K4)', () => assert.match(out.presetDate, /aujourd’hui|hier|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|\d{1,2} \S+ \d{4}/)],
         ['maison : le toit se voit même si l’étage du dessus est encore vide', () => { assert.ok(out.roof.with > .02, JSON.stringify(out.roof)); assert.ok(out.roof.with > out.roof.without * 5 + .01, JSON.stringify(out.roof)); }],
-        ['transcription : « Maintenance → … » une seule fois dans le message du lecteur d’écriture', () => { assert.ok(out.htrToast, 'pas de message'); assert.equal((out.htrToast.match(/Maintenance/g) || []).length, 1, out.htrToast); }],
+        ['transcription : « Réglages → … » une seule fois dans le message du lecteur d’écriture', () => { assert.ok(out.htrToast, 'pas de message'); assert.equal((out.htrToast.match(/Réglages/g) || []).length, 1, out.htrToast); }],
         ['aucune erreur JS', () => assert.deepEqual(errs, [])],
     ];
     let failed = 0;

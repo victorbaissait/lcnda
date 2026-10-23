@@ -287,7 +287,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                 assert.equal(await p.evaluate(() => window.LCNDA_EXT.customWidgetList().length), n0);
                 await p.evaluate(() => document.body.classList.remove('is-kiosk'));
             });
-            // ✎ d'un widget « Raccourcis » sur le tableau de bord : tout se fait sur place, sans passer par Maintenance
+            // ✎ d'un widget « Raccourcis » sur le tableau de bord : tout se fait sur place, sans passer par les Réglages
             let NEW = '';
             const order = id => p.evaluate(x => window.LCNDA_EXT.customWidgetList().find(d => d.id === x).links.map(l => l.target), id);
             await t('✎ du tableau de bord : « Modifier les raccourcis », ajouter 2 raccourcis, en déplacer un, enregistrer', async () => {

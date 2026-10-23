@@ -32,7 +32,7 @@
     ext.downloadText = downloadText;
     ext.pickFile = pickFile;
 
-    /* ═══════════════════════ 🎨 MISES EN PAGE ENREGISTRÉES (Maintenance → Apparence) ═══════════════════════ */
+    /* ═══════════════════════ 🎨 MISES EN PAGE ENREGISTRÉES (Réglages → Apparence) ═══════════════════════ */
 
     // Tout ce que règle l'écran Apparence : design, menus (ordre, masqués), listes, cartes, graphiques, blocs des
     // fiches et du tableau de bord, couleurs, fonds de carte… (pas les données, ni les raccourcis, ni les sauvegardes).
@@ -46,7 +46,7 @@
         'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display',
         'genealogie-battue-level-colors', 'genealogie-person-badge-colors', 'genealogie-archive-digest-category-order', 'genealogie-heritage-flags',
         'genealogie-village-maps', 'genealogie-transcription-layout',
-        'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
+        'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', 'genealogie-topbar-buttons', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
         'genealogie-portraits', 'genealogie-left-column', // K7 portraits, K15 colonne de gauche (app-portraits.js, app-colonne.js)
         'genealogie-designs' // 🎨 Designs au choix A1–A8 (app-designs.js)
     ];
@@ -160,7 +160,7 @@
             },
             exportOne: p => {
                 downloadText(`mise-en-page-${slug(p.name)}.lcnda-apparence.json`, JSON.stringify({type: 'lcnda-mise-en-page', version: 1, name: p.name, saved: p.saved, settings: p.settings}, null, 1));
-                toast('Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Maintenance → Apparence.');
+                toast('Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Réglages → Apparence.');
             },
             importOne: async () => {
                 const text = await pickFile('.json,application/json');
@@ -177,7 +177,7 @@
                 toast(`Mise en page « ${name} » importée : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored > 1 ? `${ignored} réglages illisibles laissés` : '1 réglage illisible laissé'} de côté)` : ''}`);
             }}));
     });
-    /* ═══════════════ 🗃️ TOUS MES RÉGLAGES (Maintenance → Apparence, après les mises en page) ═══════════════ */
+    /* ═══════════════ 🗃️ TOUS MES RÉGLAGES (Réglages → Apparence, après les mises en page) ═══════════════ */
     // Tous les réglages de l'app (« genealogie-… ») : apparence, mais aussi listes, statistiques, onglets, widgets,
     // tableaux, animaux, raccourcis… Pas ce qui est propre à cet ordinateur ni ce qui vise une fiche précise de la base.
     const ALL_PROFILES_KEY = 'genealogie-settings-profiles';
@@ -265,7 +265,7 @@
                 if (!await A().confirmBox('Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.', {title: `Appliquer l’ensemble « ${p.name} » ?`, okLabel: 'Appliquer'})) return false;
                 toast(`Ensemble « ${p.name} » appliqué.`); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []}); return false;
             },
-            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings))); toast('Fichier prêt : il s’importe dans Maintenance → Apparence → « Mes ensembles de réglages ».'); },
+            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings))); toast('Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ».'); },
             importOne: async () => {
                 const text = await pickFile('.json,application/json');
                 if (text === null) return false;
@@ -296,8 +296,8 @@
     }
     const tbLabel = el => { if (el.dataset.tbLabel) return el.dataset.tbLabel; const tx = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60), ti = el.title || el.getAttribute('aria-label') || el.querySelector('[title]')?.title || ''; return tx.length <= 3 && ti ? `${tx} ${ti}`.trim() : tx || ti || '(sans nom)'; };
     const tbKids = g => [...g.children].filter(c => !tbSkip(c));
-    const TB_DEFS = 'genealogie-toolbar-defs'; // les boutons de chaque éditeur, notés à son ouverture (pour Maintenance → Montage, retouche, mise en page et son)
-    // les boutons de départ de chaque éditeur : Maintenance → Montage, retouche, mise en page et son les montre avant même la première ouverture
+    const TB_DEFS = 'genealogie-toolbar-defs'; // les boutons de chaque éditeur, notés à son ouverture (pour Réglages → Montage, retouche, mise en page et son)
+    // les boutons de départ de chaque éditeur : Réglages → Montage, retouche, mise en page et son les montre avant même la première ouverture
     const TB_DEFAULT_DEFS = {"vector": {"groups": [{"key": "vx-menus", "label": "Menus du haut", "items": [["menu-Fichier", "Menu Fichier"], ["menu-Édition", "Menu Édition"], ["menu-Objet", "Menu Objet"], ["menu-Aligner", "Menu Aligner"], ["menu-Pathfinder", "Menu Pathfinder"], ["menu-Blason", "Menu Blason"], ["menu-Affichage", "Menu Affichage"]]}, {"key": "vx-hist", "label": "Annuler / rétablir (en haut)", "items": [["vx-cmd=undo", "↶ Annuler (⌘Z)"], ["vx-cmd=redo", "↷ Rétablir (⇧⌘Z)"]]}, {"key": "vx-tools", "label": "Outils (colonne de gauche)", "items": [["vx-tool=select", "➤ Sélection (V)"], ["vx-tool=direct", "⌖ Sélection directe (points et poignées) (A)"], ["vx-tool=pen", "✒️ Plume (clic : point, glisser : courbe) (P)"], ["vx-tool=pencil", "✏️ Crayon (à main levée) (N)"], ["vx-tool=rect", "▭ Rectangle (M)"], ["vx-tool=ellipse", "◯ Ellipse (L)"], ["vx-tool=polygon", "⬡ Polygone (Y)"], ["vx-tool=star", "☆ Étoile (S)"], ["vx-tool=spiral", "🌀 Spirale (glisser depuis le centre) (O)"], ["vx-tool=line", "╱ Ligne (\\)"], ["vx-tool=text", "T Texte (T)"], ["vx-tool=eyedrop", "💧 Pipette (prend la couleur d’un objet) (I)"], ["vx-tool=hand", "✋ Main (déplacer la vue) (H)"], ["vx-tool=zoom", "🔍 Loupe (⌥ : dézoomer) (Z)"], ["vx-fsfill=", "Remplissage et contour de la sélection"]]}, {"key": "vx-tabs", "label": "Onglets du panneau de droite", "items": [["vx-tab=props", "Propriétés"], ["vx-tab=layers", "Calques"], ["vx-tab=blason", "Blason"], ["vx-tab=doc", "Document"]]}]}, "retouch": {"groups": [{"key": "rt-bar", "label": "Barre du haut (groupes)", "items": [["modes", "Les outils"], ["rt-undo=", "↶↷ Annuler (⌘Z)"], ["rt-zoom=-1", "−100 %+Ajuster1:1"]]}, {"key": "rt-modes", "label": "Outils", "items": [["rt-mode=adjust", "🎚 Réglages"], ["rt-mode=heal", "🩹 Correcteur de taches"], ["rt-mode=clone", "🧬 Tampon"], ["rt-mode=brush", "🖌 Pinceau"], ["rt-mode=eraser", "🧽 Gomme"], ["rt-mode=text", "🔤 Texte"], ["rt-mode=hand", "✋ Déplacer la vue"]]}, {"key": "rt-opts", "label": "Options des outils (pinceau, texte…)", "items": [["o=size", "Taille 18 [ ]"], ["o=hard", "Dureté 55 %"], ["o=opacity", "Opacité 100 %"], ["o=brush", "Sorte de pinceau"], ["o=color", "Couleur"], ["o=swatches", "Couleurs rapides"], ["o=font", "Police"], ["o=font", "Contour blanc du texte"], ["o=clone", "Tampon : endroit à recopier, aligné"], ["o=textstyle", "Texte gras"], ["o=textstyle", "Texte italique"], ["o=textstyle", "Polices de l’ordi"], ["o=shape", "Forme (rectangle, ellipse, flèche…)"], ["o=shape", "Forme remplie"], ["o=shape", "Couleur de fond des formes"], ["o=wand", "Baguette : tolérance"], ["o=wand", "Baguette : contiguë"], ["o=sel", "Actions de la sélection"], ["o=crop", "Recadrage : proportions, redresser"], ["o=maskmode", "Masque : cacher / montrer"], ["rt-paint-help=", "Aide de l’outil"]]}, {"key": "rt-vtools", "label": "Colonne d’outils", "items": [["rt-mode=move", "Déplacer un élément d’un calque (V)"], ["rt-mode=marquee", "Sélection rectangle (M)"], ["rt-mode=ellipsesel", "Sélection ellipse (⇧M)"], ["rt-mode=lasso", "Lasso : entourer à main levée (L)"], ["rt-mode=polysel", "Plume : sélection point par point (P) — double-clic ou Entrée pour fermer"], ["rt-mode=wand", "Sélection automatique (baguette magique) (W)"], ["rt-mode=crop", "Recadrer et redresser (C)"], ["rt-mode=heal", "Correcteur de taches (J)"], ["rt-mode=clone", "Tampon : un endroit, ou une zone sélectionnée (S)"], ["rt-mode=brush", "Pinceau (B)"], ["rt-mode=eraser", "Gomme (E)"], ["rt-mode=shape", "Formes : rectangle, ellipse, ligne, flèche (U)"], ["rt-mode=text", "Texte (T)"], ["rt-mode=hand", "Main, ou barre d’espace (H)"], ["rt-mode=zoom", "Zoom (Z) — ⌥ pour reculer"], ["rt-color2=", "Couleur"]]}, {"key": "rt-adjust", "label": "Panneau Réglages", "items": [["rt-target=", "(sans nom)"], ["rt-preset=0", "Préréglages"], ["rt-out=exposure", "Exposition 0"], ["rt-out=brightness", "Luminosité 0"], ["rt-out=contrast", "Contraste 0"], ["rt-out=shadows", "Ombres 0"], ["rt-out=highlights", "Hautes lumières 0"], ["rt-out=saturation", "Saturation 0"], ["rt-out=warmth", "Chaleur 0"], ["rt-t=bw", "Noir et blanc Sépia Négatif"], ["rt-ch=rgb", "CourbeRVBRougeVertBleu"], ["rt-curve=", "(sans nom)"], ["rt-ptdel=", "Enlever le point"], ["p:Clic sur la courbe : ajo", "Clic sur la courbe : ajouter un point · glisser : le déplace"], ["rt-reset=", "Remettre comme au départ"]]}]}, "video": {"groups": [{"key": "mt-tabs", "label": "Onglets de droite", "items": [["mt-tab=rush", "🎞️ Rush"], ["mt-tab=item", "🎯 Élément"], ["mt-tab=color", "🎨 Couleurs"], ["mt-tab=sound", "🔊 Son"], ["mt-tab=film", "🎞️ Film"]]}, {"key": "mt-transport", "label": "Lecture", "items": [["mt-play=", "▶ Lire"], ["mt-home=", "⏮ Au début"], ["mt-cur=", "Temps (où on en est / durée)"], ["mt-zoom=", "Zoom de la frise"]]}, {"key": "mt-ops", "label": "Outils du montage", "items": [["mt-op=undo", "↶ Annuler (⌘Z)"], ["mt-op=redo", "↷ Rétablir (⇧⌘Z)"], ["mt-op=split", "✂️ Couper ici"], ["mt-op=start", "⟦ Commence ici"], ["mt-op=end", "⟧ Finit ici"], ["mt-op=left", "← Avancer"], ["mt-op=right", "Reculer →"], ["mt-op=detach", "🔊 Détacher le son"], ["mt-op=del", "🗑 Enlever"], ["mt-op=addv1", "＋ Vidéo / photo à la suite"], ["mt-op=addv2", "＋ Incrustation"], ["mt-op=kfprev", "◀ ◆ Aller à l'image clé précédente de l'élément choisi"], ["mt-op=kfnext", "◆ ▶ Aller à l'image clé suivante de l'élément choisi"], ["mt-op=addtext", "＋ Titre / texte"], ["mt-op=adda", "＋ Son / musique"]]}]}, "layout": {"groups": [{"key": "ly-menus", "label": "Menus du haut", "items": [["menu-Fichier", "Menu Fichier"], ["menu-Édition", "Menu Édition"], ["menu-Objet", "Menu Objet"], ["menu-Page", "Menu Page"], ["menu-Affichage", "Menu Affichage"]]}, {"key": "ly-hist", "label": "Annuler / rétablir (en haut)", "items": [["ly-cmd=undo", "↶ Annuler (⌘Z)"], ["ly-cmd=redo", "↷ Rétablir (⇧⌘Z)"]]}, {"key": "ly-tools", "label": "Outils (colonne de gauche)", "items": [["ly-tool=select", "➤ Sélection (V)"], ["ly-tool=text", "T Texte (T)"], ["ly-tool=frame", "⊠ Cadre d’image (F)"], ["ly-tool=rect", "▭ Rectangle (M)"], ["ly-tool=ellipse", "◯ Ellipse (L)"], ["ly-tool=polygon", "⬡ Polygone (Y)"], ["ly-tool=star", "☆ Étoile (E)"], ["ly-tool=line", "╲ Ligne (\\)"], ["ly-tool=pen", "✒︎ Plume (P) : clic = point, double-clic ou Entrée = fini"], ["ly-tool=hand", "✋ Main (H)"], ["ly-tool=zoom", "🔍 Zoom (Z) — Alt pour reculer"], ["ly-target=fill", "⇄⧄ Fond et contour de l’objet choisi : clic = choisir la couleur"]]}, {"key": "ly-tabs", "label": "Onglets du panneau de droite", "items": [["ly-panel=pages", "📄Pages"], ["ly-panel=layers", "🗂Calques"], ["ly-panel=obj", "🔧Objet"], ["ly-panel=text", "🅰Texte"], ["ly-panel=color", "🎨Couleur"], ["ly-panel=links", "🔗Liens"], ["ly-panel=history", "🕘Historique"], ["ly-panel=doc", "⚙️Document"]]}, {"key": "ly-status", "label": "Barre du bas", "items": [["ly-cmd=first", "⏮ Première page"], ["ly-cmd=prev", "‹ Page précédente"], ["page", "Numéro de la page"], ["ly-cmd=next", "› Page suivante"], ["ly-cmd=last", "⏭ Dernière page"], ["ly-zoom=", "Zoom"], ["ly-pos=", "Position du pointeur (mm)"], ["ly-msg=", "Messages"]]}]}};
     const tbDefs = () => { let v = {}; try { v = JSON.parse(localStorage.getItem(TB_DEFS) || '{}'); if (!v || typeof v !== 'object') v = {}; } catch (_) { v = {}; } return {...TB_DEFAULT_DEFS, ...v}; };
     ext.tbDefs = tbDefs;
@@ -356,7 +356,7 @@
         const dir = ['+', '='].includes(e.key) ? 1 : e.key === '-' ? -1 : e.key === '0' ? 0 : null; if (dir === null) return;
         if (ext.editorZoom(dir)) e.preventDefault();
     }, true);
-    // espaces de travail : les mêmes « ensembles » que Maintenance → Montage, retouche… (genealogie-toolbar-sets = {éditeur: [{name, date, v}]})
+    // espaces de travail : les mêmes « ensembles » que Réglages → Montage, retouche… (genealogie-toolbar-sets = {éditeur: [{name, date, v}]})
     const WS_KEY = 'genealogie-toolbar-sets';
     const wsList = id => { try { const v = JSON.parse(localStorage.getItem(WS_KEY) || '{}')?.[id]; return Array.isArray(v) ? v.filter(x => x && x.name && x.v) : []; } catch (_) { return []; } };
     const wsSave = (id, list) => { try { const all = JSON.parse(localStorage.getItem(WS_KEY) || '{}') || {}; all[id] = list; localStorage.setItem(WS_KEY, JSON.stringify(all)); return true; } catch (_) { toast('Plus de place pour enregistrer : supprime un espace de travail.', 'error'); return false; } };
@@ -375,7 +375,7 @@
         const cur = () => { const c = {order: {}, hidden: {}}; dlg.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; c.order[ol.dataset.g] = lis.map(l => l.dataset.k); c.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); }); return c; };
         const useCfg = v => { const all = tbAll(); all[id] = v; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} ext.tbApply(root, id); };
         const today = () => new Date().toLocaleDateString('fr-FR'), UI = window.LCNDA_UI;
-        // espaces de travail : comme ceux de Photoshop, une disposition gardée sous un nom (aussi dans Maintenance → Montage, retouche, mise en page et son)
+        // espaces de travail : comme ceux de Photoshop, une disposition gardée sous un nom (aussi dans Réglages → Montage, retouche, mise en page et son)
         const frame = UI.presetsFrame({id: `boutons-${id}`, what: 'les boutons montrés, cachés et rangés', list: () => wsList(id), quietApply: true,
             apply: i => { const x = wsList(id)[i]; if (!x) return false; useCfg(x.v); toast(`Espace de travail « ${x.name} » appliqué.`); dlg.close(); return false; },
             save: name => { const list = wsList(id), k = list.findIndex(y => y.name === name), it = {name, date: today(), v: cur()}; if (k >= 0) list[k] = it; else list.push(it); if (!wsSave(id, list.slice(-60))) return false; useCfg(it.v); },
@@ -1983,7 +1983,7 @@
             const ms = dlg.querySelector('[data-rt-cmd="save:show"] span'); if (ms) ms.textContent = '🖼 Enregistrer l’image dans les Médias';
             dlg.querySelector('.h-rt-note')?.remove();
         }
-        try { const rl = JSON.parse(localStorage.getItem('genealogie-retouch-layout') || '{}') || {}; if (rl.tools !== 'side') dlg.classList.add('rt-tools-' + (rl.tools === 'right' ? 'right' : 'left')); /* K19 : la colonne d'outils à gauche, sauf si on l'a mise à droite */ if (rl.side === 'left') dlg.classList.add('rt-side-left'); } catch (_) {} // Maintenance → Montage, retouche, mise en page et son
+        try { const rl = JSON.parse(localStorage.getItem('genealogie-retouch-layout') || '{}') || {}; if (rl.tools !== 'side') dlg.classList.add('rt-tools-' + (rl.tools === 'right' ? 'right' : 'left')); /* K19 : la colonne d'outils à gauche, sauf si on l'a mise à droite */ if (rl.side === 'left') dlg.classList.add('rt-side-left'); } catch (_) {} // Réglages → Montage, retouche, mise en page et son
         ext.fullInit(dlg, 'retouch');
         { // K19 : la colonne d'outils de 36 px, et les actions de fin seulement en haut (« 💾 Enregistrer ▾ ») ; les boutons d'en bas restent pour leurs écouteurs, cachés
             const UIr = window.LCNDA_UI;

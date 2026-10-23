@@ -1,5 +1,5 @@
 /* LCNDA — 🧓 Mode simple (assets/js/app-mode-simple.js) : le mode lui-même (.ms, ses propres thèmes clair, sépia et
- * sombre, contraste mesuré AAA) et son onglet de réglages (Maintenance → Accessibilité → 🧓 Mode simple, style de l'app).
+ * sombre, contraste mesuré AAA) et son onglet de réglages (Réglages → Accessibilité → 🧓 Mode simple, style de l'app).
  * Règles du mode : cibles de 64 px au moins, texte de 22 px au moins, traits de 3 px, focus jaune de 5 px. */
 
 /* ═══════════ Jetons (posés aussi en direct par le script : --bg, --ink, --blue, --fs, --btn-h, --case, --gap, --font) ═══════════ */
@@ -303,7 +303,7 @@ html.ms-open.ms-own-cb { filter: none !important; } /* un daltonisme « propre a
 .ms-widget p { margin: 0 0 12px; }
 .ms-widget .page-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-start; }
 
-/* ═══════════ L'onglet de réglages (Maintenance → Accessibilité → 🧓 Mode simple), style de l'app ═══════════ */
+/* ═══════════ L'onglet de réglages (Réglages → Accessibilité → 🧓 Mode simple), style de l'app ═══════════ */
 .ms-pagetabs { margin: 0 0 18px; width: fit-content; max-width: 100%; }
 .ms-pagetabs button { font-weight: 800; }
 .ms-new { display: inline-block; font: 800 10px/1 system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; border: 1.5px solid currentColor; padding: 2px 4px; margin-left: 4px; vertical-align: 2px; }

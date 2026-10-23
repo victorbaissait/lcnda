@@ -934,7 +934,7 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-emoji-pop { position:fixed; z-index:10000; width:min(370px, calc(100vw - 16px)); background:var(--panel, #fff); border:2px solid #111; box-shadow:6px 6px 0 rgba(0,0,0,.18); padding:6px; }
 .h-emoji-pop .h-emoji-panel { max-height:320px; overflow:auto; }
 .h-emoji-pop-close { position:absolute; top:2px; right:2px; }
-/* Maintenance → Atelier de recherche */
+/* Réglages → Atelier de recherche */
 .h-cfg-list { display:grid; gap:4px; margin:8px 0; }
 .h-cfg-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:5px 8px; border:1px solid #ddd; background:var(--panel, #fff); }
 .h-cfg-row.is-hidden { opacity:.55; background:#f4f4f4; }
@@ -2226,7 +2226,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-bd-tracer{width:100%;max-width:340px;aspect-ratio:1;border:1px solid #d6dbe1;border-radius:8px;cursor:crosshair;display:block}
 .h-bd-makerprev{display:grid;gap:8px;justify-items:center;color:#2a7de1}
 @media (max-width:700px){.h-bd-makerbody{grid-template-columns:1fr}}
-/* Maintenance → Réglages des tableaux */
+/* Réglages → Tableaux */
 .h-bp-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 14px}
 .h-bp-tabs button{border:1px solid #d6dbe1;background:#fff;border-radius:999px;padding:6px 14px;font:inherit;cursor:pointer;color:inherit}
 .h-bp-tabs button.is-active{background:#0a84ff;border-color:#0a84ff;color:#fff}
@@ -2641,7 +2641,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-rt-pick > :not(.modal-head) { margin-left: 20px; margin-right: 20px; }
 .h-rt-pick > .h-rt-pick-grid { margin-bottom: 20px; }
 
-/* Maintenance → Montage, retouche et son : mêmes champs qu'Apparence (titre au-dessus, grande liste) */
+/* Réglages → Montage, retouche et son : mêmes champs qu'Apparence (titre au-dessus, grande liste) */
 .h-mtp-stack { display:grid; gap:16px; }
 .h-mtp .maintenance-panel > h3:first-child { margin-top:0; }
 .h-mtp .h-mtp-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:18px 20px; padding:6px 0 12px; }
@@ -2724,7 +2724,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 /* Retouche : la courbe garde sa hauteur dans la colonne (le texte passait par-dessus) */
 .h-rt-tools { grid-auto-rows:max-content; }
 .h-rt-curve { flex:none; min-height:200px; height:auto; }
-/* Tableaux : disposition réglable (Maintenance → Réglages des tableaux → Menus et options) */
+/* Tableaux : disposition réglable (Réglages → Tableaux → Menus et options) */
 .h-board.tb-left,.h-board.tb-right{display:grid;grid-template-rows:auto minmax(0,1fr)}
 .h-board.tb-left{grid-template-columns:auto minmax(0,1fr)}.h-board.tb-right{grid-template-columns:minmax(0,1fr) auto}
 .h-board.tb-left>.h-board-head,.h-board.tb-right>.h-board-head{grid-column:1/-1}
@@ -2881,7 +2881,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-rt-tree li>.h-rt-lmore,.h-rt-tree li>.h-rt-adjrow,.h-rt-tree li>small,.h-rt-tree li>.h-rt-mops,.h-rt-tree li>.link-button{flex-basis:100%}
 .h-rt-tree li.is-photo>strong{flex:1}
 .h-rt2 [data-rt-pane="layers"]{overflow-x:hidden}
-/* Retouche : où va la colonne d'outils et le panneau (Maintenance → Montage, retouche et son) */
+/* Retouche : où va la colonne d'outils et le panneau (Réglages → Montage, retouche et son) */
 .h-rt2.rt-tools-left .h-rt-vtools{order:-1}
 .h-rt2.rt-tools-left .h-rt-main{grid-template-columns:44px minmax(0,1fr) var(--rt-side,330px)}
 .h-rt2.rt-tools-right .h-rt-vtools{order:3}
@@ -3313,7 +3313,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .vx-penprev{fill:none;stroke:#1473e6;stroke-dasharray:4 3}.vx-penclose{fill:none;stroke:#1473e6;stroke-width:2px}
 .vx-guide{stroke:#e0219b}
 
-/* Maintenance → Montage, retouche, mise en page et son : blocs rangeables, raccourcis de l'éditeur choisi */
+/* Réglages → Montage, retouche, mise en page et son : blocs rangeables, raccourcis de l'éditeur choisi */
 .h-mtp-blkmove{float:right;display:inline-flex;gap:2px;margin-left:8px}.h-mtp-blkmove .h-bt{font-size:12px;padding:1px 6px}
 .h-mtp-stack[data-col]{min-height:40px}.h-mtp-keys{margin-top:14px;border-top:1px solid var(--line,#ddd);padding-top:10px}
 /* Outils de modification (et leurs raccourcis) : tous sur une seule ligne, quel que soit leur nombre */
@@ -3937,7 +3937,7 @@ dialog.kn-play-dlg::backdrop{background:#000}
 }
 
 /* ═════ 📐 Rien ne sort du cadre (repéré par le détecteur de débordements, à 1440, 1024 et 390 px) ═════ */
-/* Listes → Outils de modification, Maintenance → Montage… : quand les onglets ne tiennent pas sur une ligne, ils passent sur plusieurs lignes
+/* Listes → Outils de modification, Réglages → Montage… : quand les onglets ne tiennent pas sur une ligne, ils passent sur plusieurs lignes
    (au moins 100 px chacun) au lieu d'écraser leur nom */
 @media (min-width:701px){.segmented.enquetes-tab-toggle.h-et-tabs,.segmented.enquetes-tab-toggle.h-ek-tabs{grid-auto-flow:row;grid-template-columns:repeat(auto-fill,minmax(100px,1fr))!important}}
 /* fiche d'animal → Caractéristiques : les valeurs longues (race…) restent dans la carte */
@@ -3966,7 +3966,7 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-pet-layout{grid-template-columns:minmax(0,1fr)}
 .h-pet-lrow{min-width:0}
 .h-pet-lrow span{min-width:0;overflow-wrap:break-word}
-/* Maintenance → Montage, retouche… : une seule colonne de panneaux quand la page est étroite (sinon les listes s'écrasent) */
+/* Réglages → Montage, retouche… : une seule colonne de panneaux quand la page est étroite (sinon les listes s'écrasent) */
 @media (max-width:1200px){.h-mtp-cols{grid-template-columns:minmax(0,1fr)}}
 /* une ligne à ranger avec un menu (Montage… → Boutons et options) : le menu et les flèches passent dessous si la colonne est étroite */
 .h-pet-lrow.ord-row:has(> select){flex-wrap:wrap}
@@ -3977,7 +3977,7 @@ dialog.kn-play-dlg::backdrop{background:#000}
 @media (max-width:900px){.h-museum-editor.is-full .h-me-grid{grid-template-columns:minmax(0,1fr)}}
 .h-sl-work > *{min-width:0}
 @media (max-width:760px){.h-sl-work{grid-template-columns:minmax(0,1fr)}}
-/* Maintenance → Montage… : les boutons de réglages enregistrés côte à côte, avec un écart */
+/* Réglages → Montage… : les boutons de réglages enregistrés côte à côte, avec un écart */
 .h-mtp-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .h-mtp .h-mtp-grid{width:100%}
 /* Réglages des animaux : les lignes de champs (↑ ↓) un peu plus aérées */
@@ -4331,7 +4331,7 @@ canvas.is-picking{cursor:crosshair}
 .h-faq-search:has(.ui-search),:root.lc-frame .h-faq-search:has(.ui-search){border:0;padding:0;background:none;box-shadow:none}
 .h-faq-search:has(.ui-search)>span[aria-hidden]{display:none}
 .h-faq-search>.ui-search{flex:1;width:100%}
-/* outils (Maintenance → Montage, retouche… et raccourcis) : toute la largeur ; une seule rangée quand il y a la place */
+/* outils (Réglages → Montage, retouche… et raccourcis) : toute la largeur ; une seule rangée quand il y a la place */
 @media (min-width:701px){.segmented.enquetes-tab-toggle.h-et-tabs,.segmented.enquetes-tab-toggle.h-ek-tabs{max-width:none;grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(104px,1fr))!important}}
 /* 🗓 Journal des recherches (heritage-journal.js) : « Déjà dans ton suivi », résultat des cotes d'une visite, bloc « Déjà cherché » */
 .h-rj-already{margin:10px 0}

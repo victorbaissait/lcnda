@@ -7,11 +7,13 @@
  *                                                          {name, kind: 'path', paths: [{d, eo, m}], vb: [x, y, w, h], src}},
  *                                                 order: [clés], hidden: [clés]}
  *    Une forme à soi = une règle :root[data-avatar-shape="shp_x"] (clip-path pour un polygone, masque SVG pour des chemins).
- * 2. En-tête de la fiche (Maintenance → Fiches personnes et animaux → « En-tête de la fiche »)
+ * 2. En-tête de la fiche (Réglages → Fiches personnes et animaux → « En-tête de la fiche »)
  *    Cadre du haut montré ou masqué (fiche épurée), les boutons carrés rangés, montrés ou cachés, sur 1 ou 2 colonnes,
  *    le lien « 🧩 Cette personne était… » en bouton carré ou en bas des badges.
  *    localStorage['genealogie-person-header'] = {frame: 'show'|'hide', order: [...], hidden: [...], cols: 1|2, pf: 'button'|'badges'}
- * Les deux clés suivent la base et les « 💾 Réglages enregistrés » (comme tous les réglages « genealogie-* »).
+ * 3. Boutons en haut à droite (Réglages → Apparence → « Boutons en haut à droite ») : ordre et boutons montrés.
+ *    localStorage['genealogie-topbar-buttons'] = {order: [...], hidden: [...]} (🧮 et 🧓 : leur propre réglage)
+ * Les clés suivent la base et les « 💾 Réglages enregistrés » (comme tous les réglages « genealogie-* »).
  * La bibliothèque de formes des tableaux est seulement lue (window.LCNDA_EXT.boardKit / boardShapesExtra).
  */
 (() => {
@@ -529,9 +531,114 @@
         });
     }
 
+    /* ═════════════════════════ 3. Boutons en haut à droite ═════════════════════════
+     * Réglages → Apparence → « Boutons en haut à droite » : la même liste que les boutons de la fiche (⠿, numéro, case, glisser,
+     * Alt + ↑ / ↓), gardée toute seule (K2 : « ✓ Enregistré », « ↶ Annuler »), ↺ Remettre comme au départ, aperçu.
+     * localStorage['genealogie-topbar-buttons'] = {order: [clés], hidden: [clés]}.
+     * 🧮 et 🧓 gardent leur réglage à eux (une seule valeur, que la liste et leurs interrupteurs changent tous les deux) :
+     * 🧮 = genealogie-calculette.topButton, 🧓 = « Montrer le bouton » du mode simple (forAll). */
+    const TB_KEY = 'genealogie-topbar-buttons';
+    const TB_ITEMS = [ // [clé, sélecteur, icône, nom]
+        ['split', '#side-panel-open', '◫', 'Diviser l’écran en deux'],
+        ['window', '#new-window-open', '↗', 'Ouvrir cet écran dans une nouvelle fenêtre'],
+        ['kiosk', '#kiosk-toggle', '🔒', 'Mode consultation (la famille regarde sans rien modifier)'],
+        ['simple', '#mode-simple-open', '🧓', 'Mode simple'],
+        ['calc', '#calculette-open', '🧮', 'Calculette'],
+        ['genealogies', '#genealogy-switch', '🌳', 'Mes généalogies (changer, en créer une autre)'],
+    ];
+    const TB_KEYS = TB_ITEMS.map(b => b[0]), TB_OWN = ['simple', 'calc']; // ces deux-là : leur réglage à eux
+    function topbarCfg() {
+        const v = lsGet(TB_KEY, {}) || {};
+        const order = Array.isArray(v.order) ? v.order.filter((k, i, l) => TB_KEYS.includes(k) && l.indexOf(k) === i) : [];
+        TB_KEYS.forEach((k, i) => { if (!order.includes(k)) order.splice(Math.min(i, order.length), 0, k); });
+        return {order, hidden: Array.isArray(v.hidden) ? v.hidden.filter((k, i, l) => TB_KEYS.includes(k) && !TB_OWN.includes(k) && l.indexOf(k) === i) : []};
+    }
+    const calcShown = () => (lsGet('genealogie-calculette', {}) || {}).topButton !== false;
+    const simpleShown = () => { const ms = ext.modeSimple; if (ms?.settings) return !!ms.settings().forAll; const loc = lsGet('lcnda-mode-simple-local', null); const s = loc && loc.baseAll === false ? loc : (lsGet('genealogie-mode-simple', {}) || {}); return s.forAll === true; };
+    function topbarShown(k, cfg = topbarCfg()) { return k === 'calc' ? calcShown() : k === 'simple' ? simpleShown() : !cfg.hidden.includes(k); }
+    /** montrer / cacher un bouton (🧮 et 🧓 : dans leur propre réglage, le même que leur interrupteur) */
+    function topbarSetShown(k, on) {
+        if (!TB_KEYS.includes(k)) return;
+        if (k === 'calc') { const s = lsGet('genealogie-calculette', {}) || {}; lsSet('genealogie-calculette', {...(typeof s === 'object' && !Array.isArray(s) ? s : {}), topButton: !!on}); ext.calculator?.refreshButton?.(); }
+        else if (k === 'simple') { const ms = ext.modeSimple; if (ms?.write && ms.settings) { ms.write({...ms.settings(), forAll: !!on}); ms.refreshEntry?.(); } }
+        else { const c = topbarCfg(); c.hidden = on ? c.hidden.filter(x => x !== k) : [...new Set([...c.hidden, k])]; lsSet(TB_KEY, c); }
+        applyTopbar();
+    }
+    function topbarSave(order, shown) {
+        const hidden = TB_KEYS.filter(k => !TB_OWN.includes(k) && shown[k] === false);
+        lsSet(TB_KEY, {order: order.filter(k => TB_KEYS.includes(k)), hidden});
+        TB_OWN.forEach(k => { if (k in shown && shown[k] !== topbarShown(k)) topbarSetShown(k, shown[k]); });
+        applyTopbar();
+    }
+    function topbarReset() {
+        try { localStorage.removeItem(TB_KEY); } catch (_) {}
+        if (!calcShown()) topbarSetShown('calc', true);
+        if (simpleShown()) topbarSetShown('simple', false); // 🧓 caché au départ
+        applyTopbar();
+    }
+    /** range les boutons de la barre du haut (avant le compteur) et cache ceux qu'on a décochés */
+    let tbBusy = false;
+    function applyTopbar() {
+        const meta = document.querySelector('.topbar-meta'); if (!meta || tbBusy) return;
+        tbBusy = true;
+        try {
+            const cfg = topbarCfg();
+            const els = cfg.order.map(k => { const d = TB_ITEMS.find(b => b[0] === k); const el = meta.querySelector(`:scope > ${d[1]}`); if (el && !TB_OWN.includes(k)) el.toggleAttribute('data-tb-off', cfg.hidden.includes(k)); return el; }).filter(Boolean);
+            const cur = [...meta.children].filter(el => els.includes(el));
+            if (cur.some((el, i) => el !== els[i])) { const anchor = meta.querySelector(':scope > .status-dot'); els.forEach(el => meta.insertBefore(el, anchor)); }
+        } finally { tbBusy = false; }
+    }
+    function watchTopbar() {
+        const meta = document.querySelector('.topbar-meta'); if (!meta) return;
+        let t = 0; new MutationObserver(() => { if (tbBusy) return; clearTimeout(t); t = setTimeout(applyTopbar, 0); }).observe(meta, {childList: true});
+        applyTopbar();
+    }
+    const tbIcon = d => { const el = document.querySelector(`.topbar-meta > ${d[1]}`); if (!el) return `<span aria-hidden="true">${d[2]}</span>`; const c = el.cloneNode(true); return c.querySelector('svg') ? c.querySelector('svg').outerHTML : `<span aria-hidden="true">${d[2]}</span>`; };
+    function topbarPreviewHtml(order, shown) {
+        const vis = order.filter(k => shown[k]);
+        const st = document.getElementById('database-status'), lines = st ? [...st.querySelectorAll('.db-count-line')].map(x => x.textContent.trim()).filter(Boolean) : [];
+        const count = (lines.length ? lines.join(' · ') : st?.textContent?.trim()) || 'Base locale';
+        return `<div class="lc-tb-prev" aria-hidden="true">${vis.map(k => { const d = TB_ITEMS.find(b => b[0] === k); return `<span class="lc-tb-btn${k === 'simple' ? ' is-wide' : ''}" title="${esc(d[3])}">${tbIcon(d)}${k === 'simple' ? '<b>Mode simple</b>' : ''}</span>`; }).join('')}<span class="lc-tb-dot"></span><span class="lc-tb-count">${esc(count)}</span></div>${vis.length ? '' : (A().empty ? A().empty('Pas de bouton : seul le compteur reste en haut à droite.', {icon: '👁'}) : '')}`;
+    }
+    function topbarPanelHtml() {
+        const cfg = topbarCfg(), shown = Object.fromEntries(TB_KEYS.map(k => [k, topbarShown(k, cfg)]));
+        const note = {simple: 'Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ.', calc: 'Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »).', split: 'Aussi : ⇧ + Entrée dans la recherche rapide.'};
+        const row = (k, i) => { const d = TB_ITEMS.find(x => x[0] === k); return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher ce bouton"><input type="checkbox" data-tb-show aria-label="Afficher « ${esc(d[3])} »" ${shown[k] ? 'checked' : ''}></label><span class="lc-hh-ico" aria-hidden="true">${d[2]}</span><b>${esc(d[3])}${note[k] ? `<small class="muted">${esc(note[k])}</small>` : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-tb-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-tb-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
+        return `<section class="person-block-config" id="lc-topbar-buttons"><header><span class="eyebrow">APPARENCE</span><h3 data-help="Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre." data-help-faq="boutons en haut à droite">Boutons en haut à droite</h3><p>Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. C’est gardé tout de suite.</p></header>
+            <div class="design-order-grid block-grid">
+            <section class="maintenance-panel order-editor block-order-editor"><div class="item-title-row"><h3>Ordre et visibilité des boutons</h3></div>
+                <div class="order-list block-order-list" id="lc-tb-order">${cfg.order.map(row).join('')}</div>
+                <div class="page-actions action-zone"><button class="button small secondary" type="button" data-tb-reset title="L’ordre de l’app, tous les boutons montrés sauf 🧓 (caché au départ)">↺ Remettre comme au départ</button></div>
+            </section>
+            <section class="maintenance-panel order-editor block-order-editor lc-tb-panel"><div class="item-title-row"><h3>Aperçu</h3></div>
+                <div data-tb-preview>${topbarPreviewHtml(cfg.order, shown)}</div>
+                <p class="muted">Sur un téléphone, la barre du haut est repliée : ces boutons n’y sont pas montrés.</p>
+            </section></div></section>`;
+    }
+    function readTopbarPanel(box) {
+        const rows = [...box.querySelectorAll('#lc-tb-order .order-row')];
+        return {order: rows.map(r => r.dataset.orderKey), shown: Object.fromEntries(rows.map(r => [r.dataset.orderKey, !!r.querySelector('[data-tb-show]')?.checked]))};
+    }
+    function bindTopbarPanel(box) {
+        if (!box || box.dataset.tbBound) return; box.dataset.tbBound = '1';
+        const list = box.querySelector('#lc-tb-order');
+        if (list && A().setupDragOrder) A().setupDragOrder(list);
+        const save = () => { const r = readTopbarPanel(box); topbarSave(r.order, r.shown); box.querySelector('[data-tb-preview]').innerHTML = topbarPreviewHtml(r.order, r.shown); };
+        box.addEventListener('change', e => { if (e.target.matches('[data-tb-show]')) save(); });
+        list?.addEventListener('dragend', () => setTimeout(save, 0));
+        list?.addEventListener('drop', e => e.preventDefault());
+        box.addEventListener('click', e => {
+            const b = e.target.closest('button'); if (!b) return;
+            if (b.matches('[data-tb-move]')) { const row = b.closest('.order-row'); if (b.dataset.tbMove === '-1' && row.previousElementSibling) row.after(row.previousElementSibling); else if (b.dataset.tbMove === '1' && row.nextElementSibling) row.before(row.nextElementSibling); renumber(list); save(); b.focus(); return; }
+            if (b.matches('[data-tb-reset]')) { topbarReset(); const nb = document.getElementById('lc-topbar-buttons'); if (!nb) return; nb.outerHTML = topbarPanelHtml(); const fresh = document.getElementById('lc-topbar-buttons'); bindTopbarPanel(fresh); UI().scan?.(fresh); }
+        });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watchTopbar); else watchTopbar();
+
     /* ═════════════════════════ Branchements ═════════════════════════ */
     ext.designPanels = ext.designPanels || [];
     ext.designPanels.push(() => headerPanelHtml());
+    ext.designPanels.push(() => topbarPanelHtml());
     ext.afterDesign = ext.afterDesign || [];
     ext.afterDesign.push(() => {
         injectShapeCss();
@@ -555,7 +662,12 @@
             pre.addEventListener('change', () => { const p = window.LCNDA_ALL_DESIGN_PRESETS?.()[pre.value]; const blue = document.querySelector('#design-form [name="blue"]'); if (p && blue && /^#[0-9a-f]{6}$/i.test(p.blue || '')) { blue.value = p.blue; blue.dispatchEvent(new Event('input', {bubbles: true})); } });
         }
         bindHeaderPanel(document.getElementById('lc-person-header'));
+        // boutons en haut à droite : juste après l'ordre du menu principal
+        const tb = document.getElementById('lc-topbar-buttons'), grid = document.querySelector('#workspace .design-order-grid-four');
+        if (tb && grid && grid.nextElementSibling !== tb) grid.after(tb);
+        bindTopbarPanel(tb); ext.calculator?.refreshButton?.(); ext.modeSimple?.refreshEntry?.(); applyTopbar(); // aussi après ↶ Annuler (la page est redessinée)
     });
     injectShapeCss();
-    window.LCNDA_APPARENCE = {cleanShape, svgToShape, shapeStore, orderedShapes, addShape, headerCfg, applyHeader, openShapeEditor};
+    window.LCNDA_APPARENCE = {cleanShape, svgToShape, shapeStore, orderedShapes, addShape, headerCfg, applyHeader, openShapeEditor,
+        TOPBAR_ITEMS: TB_ITEMS, topbarCfg, topbarShown, topbarSetShown, topbarSave, topbarReset, applyTopbar};
 })();

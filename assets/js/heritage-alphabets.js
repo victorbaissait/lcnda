@@ -1,5 +1,5 @@
 /**
- * 🔤 Alphabets et langues des actes — cadre de Maintenance → Calendrier / mesures (à droite de « Fêtes religieuses »).
+ * 🔤 Alphabets et langues des actes — cadre de Réglages → Calendrier / mesures (à droite de « Fêtes religieuses »).
  * Trois onglets : « Une langue » (alphabet, lettres spéciales, lettres anciennes, indices), « Quelle langue ? »
  * (on tape des lettres ou un mot : les langues possibles, des plus probables aux moins probables) et
  * « Cyrillique et grec » (petit clavier, copie, translittération en lettres latines).

@@ -257,7 +257,7 @@
                 const who = form.querySelector('[name=who]:checked').value, groups = ['birth', 'union', 'death'].filter(g => form.elements['g_' + g].checked);
                 if (!groups.length) return window.LCNDA_UI.fail(form.elements.g_birth, 'Coche au moins une sorte d’anniversaire.');
                 let ids = null;
-                if (who === 'sosa') { ids = new Set(Object.keys(A().sosaMap?.() || {}).map(Number)); if (!ids.size) { toast('Aucune personne numérotée Sosa : choisis le n°1 dans Maintenance → Apparence.', 'error'); return false; } }
+                if (who === 'sosa') { ids = new Set(Object.keys(A().sosaMap?.() || {}).map(Number)); if (!ids.size) { toast('Aucune personne numérotée Sosa : choisis le n°1 dans Réglages → Apparence.', 'error'); return false; } }
                 if (who === 'branch') { const root = Number(PK.pickerValue?.(form.querySelector('[data-ics-branch] .pk')) || form.querySelector('[name=ics_root]')?.value || 0); if (!root) return window.LCNDA_UI.fail(form.querySelector('[data-ics-branch] .pk'), 'Choisis la personne en haut de la branche.');
                     const m = await A().api('daboville_map', {root_id: root}); ids = new Set([root, ...Object.keys(m.map || {}).map(Number)]); }
                 const data = await A().api('genea_calendar');

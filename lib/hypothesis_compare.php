@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * ⚖️ Hypothèses à comparer (F2), sur les hypothèses qui existaient déjà (table hypotheses : Maintenance → Hypothèses,
+ * ⚖️ Hypothèses à comparer (F2), sur les hypothèses qui existaient déjà (table hypotheses : Réglages → Hypothèses,
  * fenêtre « Nouvelle hypothèse » de la fiche) : « Jean né à Naves ou à Tulle ? ».
  *  - plusieurs réponses possibles (hypothesis_options : un lieu de la base, une date écrite comme dans un acte, ou un texte) ;
  *  - pour chacune, des preuves pour et contre (hypothesis_proofs) : une source, un média, un dépouillement, une preuve
@@ -14,7 +14,7 @@ declare(strict_types=1);
  *  POST hypothesis_option_save / hypothesis_option_delete, hypothesis_proof_save / hypothesis_proof_delete,
  *       hypothesis_compare_restore {kind: option|proof, id} (« ↶ Annuler » d'une suppression),
  *       hypothesis_conclude {id, option_id}, hypothesis_conclusion_undo {id}.
- * Écran : assets/js/heritage-hypotheses.js (bloc de fiche « ⚖️ Hypothèses », Maintenance → Hypothèses, fenêtre « Comparer »).
+ * Écran : assets/js/heritage-hypotheses.js (bloc de fiche « ⚖️ Hypothèses », Réglages → Hypothèses, fenêtre « Comparer »).
  */
 
 const HCOMP_REF_KINDS = ['source' => 'sources', 'media' => 'media', 'digest' => 'archive_digest_entries', 'evidence' => 'evidence_records'];
@@ -377,7 +377,7 @@ function hypothesis_conclusion_undo(PDO $pdo, array $data): array
     return ['id' => (int) $h['id'], 'person_id' => (int) $h['person_id']];
 }
 
-/** Résumé pour une liste (Maintenance → Hypothèses, bloc de fiche) : réponses, nombre de preuves, celle qui mène. */
+/** Résumé pour une liste (Réglages → Hypothèses, bloc de fiche) : réponses, nombre de preuves, celle qui mène. */
 function hypotheses_compare_summaries(PDO $pdo, array $ids): array
 {
     if (!$ids || !hcomp_ready($pdo)) { return []; }

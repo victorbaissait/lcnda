@@ -1884,6 +1884,9 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) .h-hs-vers select{border:1px solid var(--line-color,#d6d6db)}
 :root:is(.lc-frame,[data-lc-lines]) .h-hs-vstep{border:1px solid var(--line-color,#d6d6db)}
 :root:is(.lc-frame,[data-lc-lines]) .h-hs-vstep.is-on{border-color:#2a7de1}
+:root:is(.lc-frame,[data-lc-lines]) .h-hs-eplegend{border:1px solid #d9c3a3}
+:root:is(.lc-frame,[data-lc-lines]) .h-hs-eplegend .h-hs-epsw{border-top:3px dashed #a8743a}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-hs-eplegend{border-color:#6b5434}
 :root:is(.lc-frame,[data-lc-lines]) .h-hs-chip{border:1px solid var(--line-color,#d6d6db)}
 :root:is(.lc-frame,[data-lc-lines]) .h-hs-chip:hover{border-color:#2a7de1}
 :root:is(.lc-frame,[data-lc-lines]) .h-hs-chip.is-census{border-style:dashed}
@@ -2983,6 +2986,89 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) .h-sc-catck{border:1.5px solid var(--line-color, #d6d6d6)}
 :root:is(.lc-frame,[data-lc-lines]) .h-sc-panelrow{border:1.5px solid var(--blue, #0066cc)}
 :root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .h-sc-panelrow{border-color:#4d8fe0}
+/* meteo.css */
+:root:is(.lc-frame,[data-lc-lines]) .wx-pill{border:1.5px solid #c9ccd3}
+:root:is(.lc-frame,[data-lc-lines]) .wx-pill:hover,:root:is(.lc-frame,[data-lc-lines]) .wx-pill:focus-visible,:root:is(.lc-frame,[data-lc-lines]) .wx-pill.is-open{border-color:var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-pop{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-cols{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-cols > div{border-right:1px solid #e3e5ea}
+:root:is(.lc-frame,[data-lc-lines]) .wx-cols > div:last-child{border-right:0}
+:root:is(.lc-frame,[data-lc-lines]) .wx-norm{border-left:4px solid var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-strip > div{border:1.5px solid #d6d9df}
+:root:is(.lc-frame,[data-lc-lines]) .wx-strip > div.is-on{border:2px solid var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-fold{border-top:1.5px dashed #c9ccd3}
+:root:is(.lc-frame,[data-lc-lines]) .wx-map-legend i{border:2px solid #fff}
+:root:is(.lc-frame,[data-lc-lines]) .wx-map-legend i.sq{border:2px dashed #c98a00}
+:root:is(.lc-frame,[data-lc-lines]) .wx-row{border:0;border-bottom:1px solid #eee}
+:root:is(.lc-frame,[data-lc-lines]) .wx-cur div{border-left:4px solid #e1a500}
+:root:is(.lc-frame,[data-lc-lines]) .wx-card h4{border-bottom:1px solid #e3e5ea}
+:root:is(.lc-frame,[data-lc-lines]) .wx-hidden li{border:1.5px solid #e3e5ea}
+:root:is(.lc-frame,[data-lc-lines]) .wx-data{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-data-row{border-bottom:1px solid #e3e5ea}
+:root:is(.lc-frame,[data-lc-lines]) .wx-data-row:last-child{border-bottom:0}
+:root:is(.lc-frame,[data-lc-lines]) .wx-what div{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-prog-box{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-prog{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .wx-wid-ft{border-top:1px solid #e3e5ea}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-cur div{border-color:#e1a500}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-pill{border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-cols > div{border-right:1px solid #474a52}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-strip > div{border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-fold{border-top:calc(1.5px * var(--lc-frame-k)) dashed var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-row{border-bottom:1px solid #4c4c4c}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-card h4{border-bottom:1px solid #474a52}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-hidden li{border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-data-row{border-bottom:1px solid #474a52}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .wx-wid-ft{border-top:1px solid #474a52}
+/* suivi.css */
+:root:is(.lc-frame,[data-lc-lines]) .sv-map{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-map-pop{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-row{border-bottom:1px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-row:last-child{border-bottom:0}
+:root:is(.lc-frame,[data-lc-lines]) .sv-tile{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-tile:hover,:root:is(.lc-frame,[data-lc-lines]) .sv-tile:focus-visible{border-color:var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-rings i{border:1.2px solid var(--sv-ring-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-rings i.is-none{border-style:dashed}
+:root:is(.lc-frame,[data-lc-lines]) .sv-kpis > div{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-find-row{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-find-row:hover,:root:is(.lc-frame,[data-lc-lines]) .sv-find-row:focus-visible{border-color:var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-off{border:1.5px dashed var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-pet-link{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .sv-pagefilter{border-left:4px solid var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-find-box{border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-sw{border:1.5px solid var(--sv-ring-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-char{border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-char.is-unknown{border-style:dashed}
+:root:is(.lc-frame,[data-lc-lines]) .sv-char.is-doubt{border-color:#c99a00}
+:root:is(.lc-frame,[data-lc-lines]) .sv-cand{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-cand.is-on{border:2px solid var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-tag{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-tag.is-on,:root:is(.lc-frame,[data-lc-lines]) .sv-tag[aria-pressed=true]{border-color:var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-sea{border:1.5px dashed var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-imp fieldset{border:0}
+:root:is(.lc-frame,[data-lc-lines]) .sv-chip{border:1.5px solid var(--c)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-chip.is-free{border-color:var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-stats-grid section{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-hist{border-top:1px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-hist li{border-bottom:1px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-metal{border:2px solid #5b6168}
+:root:is(.lc-frame,[data-lc-lines]) .sv-mark{border-bottom:1px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-dot{border:1px solid var(--sv-ring-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-ring-slot{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-ring-slot.is-on{border:2px solid var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-ring-edit{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-frise{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-frise-seg{border-right:2px solid var(--card-bg, #fff)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-events li{border-bottom:1px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-member{border-bottom:1px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-social-bar{border:1px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-social-seg{border-right:2px solid var(--card-bg, #fff)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-social-end{border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-trip{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-trip.is-on{border:2px solid var(--blue-bright)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-share fieldset{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sv-merge-animal{border:1.5px solid var(--sv-line)}
+:root:is(.lc-frame,[data-lc-lines])[data-theme="dark"] .sv-metal{border-color:var(--lc-frame-color)}
 /* indicateurs.css */
 :root:is(.lc-frame,[data-lc-lines]) .ui-badge,:root:is(.lc-frame,[data-lc-lines]) .status-badge,:root:is(.lc-frame,[data-lc-lines]) .sosa-star,:root:is(.lc-frame,[data-lc-lines]) .daboville-tag,:root:is(.lc-frame,[data-lc-lines]) .outside-genealogy-badge,:root:is(.lc-frame,[data-lc-lines]) .artist-badge,:root:is(.lc-frame,[data-lc-lines]) .investigation-status,:root:is(.lc-frame,[data-lc-lines]) .entity-date-badge,:root:is(.lc-frame,[data-lc-lines]) .h-badge,:root:is(.lc-frame,[data-lc-lines]) .h-new-badge,:root:is(.lc-frame,[data-lc-lines]) .tag-conf-badge,:root:is(.lc-frame,[data-lc-lines]) .grave-status-badge,:root:is(.lc-frame,[data-lc-lines]) .grave-condition-badge,:root:is(.lc-frame,[data-lc-lines]) .branch-closed-badge,:root:is(.lc-frame,[data-lc-lines]) .ar-badge,:root:is(.lc-frame,[data-lc-lines]) .investigation-item-status-badge{border:1.5px solid;border-color:#8a8f99}
 :root:is(.lc-frame,[data-lc-lines]) .label-chip{border-width:calc(1.5px * var(--lc-frame-k))}
@@ -3280,6 +3366,7 @@ html:is(.lc-frame,[data-lc-lines]).side-right:not(.is-screen-embed) .sidebar-reo
 :root:is(.lc-frame,[data-lc-lines]) .dw-kind.is-open{border-color:var(--blue-bright, #055dff)}
 :root:is(.lc-frame,[data-lc-lines]) .sw-work[data-view="split"] .sw-code{border-left:0;border-top:1px solid var(--sw-line)}
 :root:is(.lc-frame,[data-lc-lines]) .sw-panel{border-left:0;border-top:1px solid var(--sw-line)}
+:root:is(.lc-frame,[data-lc-lines]) .sw-target{border-bottom:1px solid var(--sw-line)}
 /* editeurs.css */
 :root:is(.lc-frame,[data-lc-lines]) .ed-status{border-top:1px solid var(--ui-line)}
 :root:is(.lc-frame,[data-lc-lines]) .ed-status .ed-tog,:root:is(.lc-frame,[data-lc-lines]) .ed-zoom-b,:root:is(.lc-frame,[data-lc-lines]) .ed-zoom-v{border:1px solid transparent !important}

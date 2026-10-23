@@ -171,7 +171,7 @@ html.side-right .a11y-dock, .app-shell.sidebar-collapsed ~ .a11y-dock { left: 16
 :root[data-theme="dark"] .a11y-say, :root[data-theme="dark"] .a11y-dock button { background: #242424; color: #e8e8e8; border-color: #888; }
 :root[data-theme="dark"] .a11y-dock .a11y-dock-stop { background: #e8e8e8; color: #111; }
 
-/* ═════ La page Maintenance → Accessibilité ═════ */
+/* ═════ La page Réglages → Accessibilité ═════ */
 .a11y-page { max-width: 1060px; }
 .a11y-page .a11y-sec { margin-bottom: 18px; }
 .a11y-page h3 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }

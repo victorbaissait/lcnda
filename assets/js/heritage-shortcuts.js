@@ -139,7 +139,7 @@
         if (RE.url.test(t)) { const u = webUrl(t); return {label: host(u) || 'Site web', icon: '🌐', what: 'Site web'}; }
         if (RE.screen.test(t) || RE.mylist.test(t)) {
             const lab = ext.appScreen?.label ? ext.appScreen.label(t) : t;
-            return {label: lab && lab !== t ? lab : t, icon: SCREEN_ICONS[ty] || '🧭', what: {module: 'Écran', list: 'Liste', maint: 'Maintenance', graph: 'Diagramme (Graphiques)', stat: 'Statistique', mylist: 'Une de mes listes'}[ty] || 'Écran'};
+            return {label: lab && lab !== t ? lab : t, icon: SCREEN_ICONS[ty] || '🧭', what: {module: 'Écran', list: 'Liste', maint: 'Réglages', graph: 'Diagramme (Graphiques)', stat: 'Statistique', mylist: 'Une de mes listes'}[ty] || 'Écran'};
         }
         if (RE.tab.test(t)) { const tab = customTabs().find(x => x.id === v); return {label: tab?.name || 'Mon onglet', icon: tab?.icon || '🗂️', what: 'Onglet à toi'}; }
         if (RE.mygraph.test(t)) { const g = myGraphs().find(x => x.id === v); return {label: g?.name || 'Mon graphique', icon: g?.icon || '📈', what: 'Mon graphique'}; }
@@ -323,7 +323,7 @@
     function catalog() {
         const rows = [], push = (group, target, label, icon, hint = '') => { if (validTarget(target)) rows.push({group, target, label, icon, hint}); };
         const groups = (() => { try { return ext.appScreen?.targets?.() || []; } catch (_) { return []; } })();
-        const iconOf = {Écrans: '🧭', Listes: '📋', Maintenance: '🛠️'};
+        const iconOf = {Écrans: '🧭', Listes: '📋', Réglages: '🛠️'};
         groups.forEach(([g, items]) => items.forEach(([t, l]) => { if (t === 'module:jeu') return; push(g, t, l, iconOf[g] || (t.startsWith('graph:') ? '🌳' : t.startsWith('stat:') ? '📊' : '🧭'), g); }));
         if (!groups.length && A()?.appModules) Object.entries(A().appModules).filter(([k]) => k !== 'jeu').forEach(([k, v]) => push('Écrans', 'module:' + k, v[1], '🧭', 'Écran'));
         customTabs().forEach(t => push('Onglets à toi', 'tab:' + t.id, t.name || 'Mon onglet', t.icon || '🗂️', 'Onglet à toi'));
@@ -520,7 +520,7 @@
     }
 
     /* ─── ✎ d'un widget « Raccourcis » posé sur le tableau de bord, dans un onglet à soi ou dans une Fiche :
-     *     l'éditeur ci-dessus (editorHtml + bindEditor), dans une fenêtre, sans passer par Maintenance ─── */
+     *     l'éditeur ci-dessus (editorHtml + bindEditor), dans une fenêtre, sans passer par les Réglages ─── */
     const kiosk = () => !!document.body?.classList?.contains('is-kiosk');
     /** la ligne « 🔗 Raccourcis · N raccourcis · ✎ Modifier les raccourcis » du panneau ✎ ('' si ce widget n'a pas de raccourcis) */
     function panelHtml(id) {

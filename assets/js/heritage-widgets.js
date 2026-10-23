@@ -1,5 +1,5 @@
 /**
- * 🧱 Éditeur de widgets (Maintenance → Éditeur de widgets) : ses propres widgets pour le tableau de bord, sans programmer.
+ * 🧱 Éditeur de widgets (Réglages → Éditeur de widgets) : ses propres widgets pour le tableau de bord, sans programmer.
  *  - partir de rien (chiffres, liste, graphique, texte, raccourcis), d'un widget de l'app (copie modifiable, ou le même
  *    widget « habillé » : titre, icône, couleur, texte à soi), d'un de ses widgets, ou d'un exemple ;
  *  - les données viennent des mêmes sources que « Mes listes » (personnes, événements, listes de l'app, Mes listes),
@@ -21,7 +21,7 @@
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const isCurrent = token => token === S().workspaceToken && S().module === 'maintenance';
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
-    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
     const pname = p => p ? A().personName(p) : '';
 
     const KEY = 'genealogie-custom-widgets';
@@ -65,7 +65,7 @@
         const src = m.events ? {source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tagIds(meta || {}, ...[].concat(m.events))}, ...rules]}} : {source: 'persons', definition: {match: 'all', rules}};
         return {...d, kind: 'chart', src, group: m.group, groupBy: m.groupBy, groupStep: m.groupStep || 25, style: d.style && d.style !== 'bars' ? d.style : (m.style || 'bars'), limit: m.limit || d.limit || 10, valueColors: {}};
     }
-    // Éditeur ouvert depuis Maintenance → Éditeur de widgets (mode « widgets ») ou → Éditeur de graphiques (mode « stats »)
+    // Éditeur ouvert depuis Réglages → Éditeur de widgets (mode « widgets ») ou → Éditeur de graphiques (mode « stats »)
     let mode = 'widgets';
     const backToList = () => ext.maintenance[mode === 'stats' ? 'stats_editor' : 'widget_editor'](++S().workspaceToken);
 
@@ -543,7 +543,7 @@
                 res = {people, truncated: !!rows.truncated};
             }
         } catch (error) { toast(error.message, 'error'); return; }
-        whoDialog({eyebrow: title || 'DISTRIBUTION', label, n, total, color, res, csvName: `${title || 'statistique'} - ${label}`, unavailable: 'Le détail de cette valeur n’est pas disponible pour cette statistique. Les noms, prénoms, lieux, pays, sexes, années et âges au décès l’ont ; pour les autres, fais-en un graphique à toi (Maintenance → Éditeur de graphiques).'});
+        whoDialog({eyebrow: title || 'DISTRIBUTION', label, n, total, color, res, csvName: `${title || 'statistique'} - ${label}`, unavailable: 'Le détail de cette valeur n’est pas disponible pour cette statistique. Les noms, prénoms, lieux, pays, sexes, années et âges au décès l’ont ; pour les autres, fais-en un graphique à toi (Réglages → Éditeur de graphiques).'});
     };
     document.addEventListener('click', event => { const el = event.target.closest?.('[data-cw-detail]'); if (el) { event.preventDefault(); openDetail(el); } });
     document.addEventListener('keydown', event => { if ((event.key === 'Enter' || event.key === ' ') && event.target.matches?.('[data-cw-detail]')) { event.preventDefault(); openDetail(event.target); } });
@@ -713,7 +713,7 @@
     const newPart = kind => ({kind, title: '', counters: kind === 'numbers' ? [{label: 'Personnes', src: P()}] : [], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: kind === 'links' ? [{label: 'Carte', target: 'module:carte'}] : [], lLayout: 'grid', steps: [], jSource: 'manual', jLayout: 'vertical', jMap: true, jDays: true, jText: true, jOrder: 'date'});
     async function loadMeta() { meta = await api('my_lists'); return meta; }
     ext.maintenance.widget_editor = token => { mode = 'widgets'; return defsPage(token); };
-    /** Maintenance → Éditeur de graphiques : les mêmes widgets, montrés en grand dans Graphiques → Statistiques */
+    /** Réglages → Éditeur de graphiques : les mêmes widgets, montrés en grand dans Graphiques → Statistiques */
     ext.maintenance.stats_editor = token => { mode = 'stats'; return defsPage(token); };
     async function defsPage(token) {
         try { await loadMeta(); } catch (error) { toast(error.message, 'error'); return; }
@@ -722,8 +722,8 @@
         editing = null; // revenir sur l'onglet : la liste (un brouillon abandonné ne revient pas)
         const all = defs(), list = mode === 'stats' ? all.filter(d => d.inStats) : all, onBoard = new Set(A().dashboardBlockSettings().widgets.map(w => w.type));
         A().$('#workspace').innerHTML = `<section class="page collection-page">${mode === 'stats'
-            ? header('MAINTENANCE', 'Éditeur de graphiques', 'Crée tes propres graphiques, sans rien programmer : avec <b>tes propres chiffres</b> (un tableau à remplir, collé d’un tableur ou importé en CSV), ou avec les données de l’app (personnes, événements, une de tes listes, une statistique de l’app redessinée à ta façon). Chacun a un nom et se pose partout : Graphiques → « Mes graphiques », le tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page (« ＋ Diagramme » → « 📈 Un de mes graphiques »). Modifié ici, il change partout.', '<button type="button" class="button" data-cw-new>＋ Nouveau graphique</button><button type="button" class="button secondary" data-cw-dgnewpage>＋ Nouveau diagramme</button><button type="button" class="button secondary" data-cw-golist title="Listes → Graphiques et diagrammes">📋 Tous mes graphiques et diagrammes</button>')
-            : header('MAINTENANCE', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord. Pour un graphique en grand dans l’onglet Graphiques : Éditeur de graphiques.', '<button type="button" class="button" data-cw-new>＋ Nouveau widget</button>')}
+            ? header('RÉGLAGES', 'Éditeur de graphiques', 'Crée tes propres graphiques, sans rien programmer : avec <b>tes propres chiffres</b> (un tableau à remplir, collé d’un tableur ou importé en CSV), ou avec les données de l’app (personnes, événements, une de tes listes, une statistique de l’app redessinée à ta façon). Chacun a un nom et se pose partout : Graphiques → « Mes graphiques », le tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page (« ＋ Diagramme » → « 📈 Un de mes graphiques »). Modifié ici, il change partout.', '<button type="button" class="button" data-cw-new>＋ Nouveau graphique</button><button type="button" class="button secondary" data-cw-dgnewpage>＋ Nouveau diagramme</button><button type="button" class="button secondary" data-cw-golist title="Listes → Graphiques et diagrammes">📋 Tous mes graphiques et diagrammes</button>')
+            : header('RÉGLAGES', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord. Pour un graphique en grand dans l’onglet Graphiques : Éditeur de graphiques.', '<button type="button" class="button" data-cw-new>＋ Nouveau widget</button>')}
             ${mode === 'stats' ? diagramsPanelHtml() : ''}
             <section class="maintenance-panel"><h3>Importer un widget reçu</h3><p class="muted">Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données.</p><input type="file" accept=".json,application/json" data-cw-import></section>
             ${list.length ? `<div class="h-records">${list.map(d => `<article class="h-record h-cw-record${color(d.color) ? ' has-accent' : ''}"${color(d.color) ? ` style="--cw-accent:${color(d.color)}"` : ''}><header><div><strong>${esc(d.icon || '🧱')} ${esc(d.name || 'Mon widget')}</strong> <small>${esc(KINDS[d.kind]?.[1] || '')}${d.kind === 'app' ? ' : ' + esc(appCatalog().find(x => x[0] === d.base)?.[1] || d.base) : ''}</small>${onBoard.has(d.id) ? ' <span class="collection-kind">sur le tableau de bord</span>' : ''}${d.inStats ? ' <span class="collection-kind">dans Graphiques</span>' : ''}</div>
@@ -820,7 +820,7 @@
         ext.openDialog({
             eyebrow: 'NOUVEAU WIDGET', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
             body: `<h4>Partir de rien</h4><div class="h-templates">${Object.entries(KINDS).map(([k, [i, n, sub]]) => tile(i, n, sub, `data-cw-kind="${k}"`)).join('')}</div>
-                ${ext.appScreen ? `<h4>Partir d’un élément de l’app</h4><p class="muted">N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil de Maintenance.</p>
+                ${ext.appScreen ? `<h4>Partir d’un élément de l’app</h4><p class="muted">N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil des Réglages.</p>
                 <div class="h-cw-fromscreen">${ext.appScreen.select('list:villages', 'data-cw-fromscreen-sel')}<button type="button" class="button small" data-cw-fromscreen>Créer ce widget</button></div>` : ''}
                 <h4>Partir d’un widget de l’app</h4><p class="muted">« Copie modifiable » : un widget à toi qui fait la même chose, avec tes critères. « Habiller » : le widget de l’app tel quel, avec ton titre, ton icône, ta couleur et ton texte.</p>
                 <div class="h-cw-applist">${appCatalog().map(([k, l]) => `<div class="h-cw-approw"><span>${esc(l)}</span><span>${FROM_APP[k] ? `<button type="button" class="button small secondary" data-cw-copy="${esc(k)}">Copie modifiable</button>` : ''}<button type="button" class="button small secondary" data-cw-dress="${esc(k)}">Habiller</button></span></div>`).join('')}</div>
@@ -1044,7 +1044,7 @@
     function kindHtml() { return kindHtmlInner() + captionField(target()); }
     /** Dessin, couleurs et nombre de valeurs : communs au graphique et à la statistique de l'app */
     function drawHtml(d) {
-        // les dessins simples, puis tous les types de « Mes diagrammes » (même catalogue, même ordre, mêmes groupes : Maintenance → Types de diagrammes)
+        // les dessins simples, puis tous les types de « Mes diagrammes » (même catalogue, même ordre, mêmes groupes : Réglages → Types de diagrammes)
         const dgGroups = ext.diagramStatStyles ? ext.diagramStatStyles() : [];
         const hiddenDg = String(d.style || '').startsWith('dg:') && !dgGroups.some(([, items]) => items.some(([k]) => k === d.style)); // masqué dans les types : on le garde choisi, sinon le prochain enregistrement écrirait « Barres »
         return `<label>Dessin <select data-cw-style>${hiddenDg ? `<option value="${esc(d.style)}" selected>${esc(d.style.slice(3))} (type masqué)</option>` : ''}<optgroup label="Dessins simples">${CHART_STYLES.map(([k, l]) => `<option value="${k}" ${(d.style || 'bars') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>${dgGroups.map(([g, items]) => `<optgroup label="📊 ${esc(g)}">${items.map(([k, l]) => `<option value="${esc(k)}" ${d.style === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
@@ -1108,7 +1108,7 @@
         if (d.kind === 'links' && ext.shortcuts) return ext.shortcuts.editorHtml(d); // 🔗 heritage-shortcuts.js
         if (d.kind === 'links') {
             const app = A(), opt = (v, l, cur) => `<option value="${esc(v)}" ${cur === v ? 'selected' : ''}>${esc(l)}</option>`;
-            const targets = cur => `<optgroup label="Écrans">${Object.entries(app.appModules).filter(([k]) => k !== 'jeu').map(([k, v]) => opt('module:' + k, v[1], cur)).join('')}</optgroup><optgroup label="Listes">${app.defaultListTypes.map(([k, , l]) => opt('list:' + k, l, cur)).join('')}</optgroup><optgroup label="Maintenance">${app.defaultMaintenanceTabs.map(([k, , l]) => opt('maint:' + k, l, cur)).join('')}</optgroup>${opt('url:', 'Un site internet…', String(cur).startsWith('url:') ? 'url:' : '')}`;
+            const targets = cur => `<optgroup label="Écrans">${Object.entries(app.appModules).filter(([k]) => k !== 'jeu').map(([k, v]) => opt('module:' + k, v[1], cur)).join('')}</optgroup><optgroup label="Listes">${app.defaultListTypes.map(([k, , l]) => opt('list:' + k, l, cur)).join('')}</optgroup><optgroup label="Réglages">${app.defaultMaintenanceTabs.map(([k, , l]) => opt('maint:' + k, l, cur)).join('')}</optgroup>${opt('url:', 'Un site internet…', String(cur).startsWith('url:') ? 'url:' : '')}`;
             return `<div data-cw-links>${(d.links || []).map((l, i) => `<div class="h-cw-linkrow" data-cw-link="${i}"><input data-cw-linklabel value="${esc(l.label || '')}" placeholder="Texte du bouton"><select data-cw-linktarget>${targets(l.target || '')}</select>${String(l.target || '').startsWith('url:') ? `<input type="url" data-cw-linkurl value="${esc(String(l.target).slice(4))}" placeholder="https://…">` : ''}<button type="button" class="icon-button danger" data-cw-linkdel title="Retirer">×</button></div>`).join('')}</div>
                 <button type="button" class="button small secondary" data-cw-linkadd>＋ Raccourci</button>`;
         }
@@ -1135,7 +1135,7 @@
                 <fieldset class="span-2 h-be-display"><legend>Où l’afficher</legend>
                     ${root.kind === 'app' ? '' : `<label class="checkbox-line"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> <span>📊 en grand dans Graphiques → « Mes graphiques » (graphique, chiffres ou liste)</span></label>`}
                     <label class="checkbox-line"><input type="checkbox" data-cw-ondash ${root._onDash ?? onDashboard(root.id) ? 'checked' : ''}> <span>🧱 en widget sur le tableau de bord</span></label>
-                    <small class="muted">Et dans un de tes onglets : Maintenance → Éditeur d’onglets, ou la colonne de gauche de l’onglet.</small>
+                    <small class="muted">Et dans un de tes onglets : Réglages → Éditeur d’onglets, ou la colonne de gauche de l’onglet.</small>
                     ${['chart', 'appstat'].includes(root.kind) && ext.myGraphDiagram ? poseHtml(root) : ''}</fieldset></div></section>
             <section class="maintenance-panel"><h3>2. ${partIndex >= 0 ? `Partie ${partIndex + 2} : ` : ''}${esc(KINDS[d.kind]?.[1] || '')}</h3>${partTabs}${partHead}<p class="muted">${esc(KINDS[d.kind]?.[2] || '')}${root.kind !== 'app' && partIndex < 0 && !(root.parts || []).length ? ' Pour mettre plusieurs choses dans le même widget (plusieurs textes, des chiffres et des raccourcis…), « ＋ Ajouter une partie ».' : ''}</p><div data-cw-kind-box>${kindHtml()}</div></section>
             <div class="page-actions"><button type="button" class="button" data-cw-save>Enregistrer</button>${root.inStats ? '<button type="button" class="button secondary" data-cw-savegraph>Enregistrer et ouvrir dans Graphiques</button>' : ''}${root._existing ? '' : '<button type="button" class="button secondary" data-cw-saveadd>Enregistrer et ajouter au tableau de bord</button>'}<button type="button" class="button secondary" data-cw-cancel>Annuler</button></div>

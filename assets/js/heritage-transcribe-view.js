@@ -5,7 +5,7 @@
  *    l'écran ne fige jamais ; pendant qu'on bouge un curseur, un aperçu rapide (image réduite), puis l'image fine.
  * 2. La barre d'outils : disposition A (tout dans la barre) ou B (barre courte + panneau « 🎚️ Mieux voir »),
  *    boutons rangés, cachés, et (en B) placés dans la barre ou dans le panneau. Réglage :
- *    Maintenance → Montage, retouche, mise en page et son → « 📜 Transcription d'actes : barre d'outils »,
+ *    Réglages → Montage, retouche, mise en page et son → « 📜 Transcription d'actes : barre d'outils »,
  *    ou « ⚙️ » dans l'outil. Gardé sur cet ordinateur (genealogie-transcribe-bar), avec ses « 💾 Réglages enregistrés ».
  * Utilisé par heritage-transcribe.js (ext.txView).
  */
@@ -188,7 +188,7 @@
     const RUBRICS = [['ink', 'Faire ressortir l’encre'], ['bw', 'Noir et blanc'], ['pos', 'Position'], ['nav', 'Autres outils'], ['act', '']];
     const rg = (key, label, min, max, step, val, unit, def, extra = '') => `<label class="h-tx-rg" title="${esc(label)} — double-clic : valeur de départ"><span class="h-tx-rgl">${label}</span><input type="range" data-tx-view="${key}" min="${min}" max="${max}" step="${step}" value="${val}" data-unit="${unit}" data-default="${def}" aria-label="${esc(label)}"${extra}></label>`;
     const ck = (key, label, v, title = '') => `<label class="ui-toggle h-tx-ck"${title ? ` title="${esc(title)}"` : ''}><input type="checkbox" data-tx-view="${key}" ${v[key] ? 'checked' : ''}><i></i>${label}</label>`;
-    /** [clé, nom (Maintenance), rubrique, html(v, dansLePanneau)] — l'ordre est celui de départ */
+    /** [clé, nom (Réglages), rubrique, html(v, dansLePanneau)] — l'ordre est celui de départ */
     // K18 / K19 : ✋ Déplacer, ▭ Zone et 🔍 Loupe sont dans la colonne d'outils de gauche, le zoom dans la barre du bas (heritage-transcribe.js)
     const ITEMS = [
         ['image', '🖼️ Image de l’acte', 'nav', () => `<button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)">🖼️ Image…</button>`],
@@ -233,11 +233,11 @@
         const firstPanelIdx = shown.findIndex(k => cfg.panel.includes(k)), before = inBar.filter(k => shown.indexOf(k) < firstPanelIdx || firstPanelIdx < 0), after = inBar.filter(k => !before.includes(k));
         return `<div class="h-tx-tools h-tx-tools-b" data-tx-bar data-layout="B"${cfg.auto ? ' data-auto="1" title="Écran étroit : les réglages sont rangés dans « 🎚️ Mieux voir »"' : ''}>${before.map(k => piece(k)).join('')}${better}${after.map(k => piece(k)).join('')}<span class="h-tx-ctl h-tx-cfg">${cfgButton()}</span></div>`;
     }
-    const cfgButton = () => `<button type="button" class="h-tx-cfgbtn" data-tx-cmd="barcfg" title="Ranger, montrer ou cacher les boutons de cette barre ; disposition A ou B (aussi dans Maintenance → Montage, retouche, mise en page et son)" aria-label="Personnaliser la barre">⚙️</button>`;
+    const cfgButton = () => `<button type="button" class="h-tx-cfgbtn" data-tx-cmd="barcfg" title="Ranger, montrer ou cacher les boutons de cette barre ; disposition A ou B (aussi dans Réglages → Montage, retouche, mise en page et son)" aria-label="Personnaliser la barre">⚙️</button>`;
     const panelKeys = (cfg = barCfg(), narrow = false) => (cfg.layout === 'B' || narrow ? cfg.order.filter(k => !cfg.hidden.includes(k) && cfg.panel.includes(k)) : []);
     const badgeKeys = (cfg = barCfg()) => panelKeys(cfg).flatMap(k => (k === 'sharp' ? ['sharp'] : [k]));
 
-    /* ─── le réglage de la barre : Maintenance, et « ⚙️ » dans l'outil ─── */
+    /* ─── le réglage de la barre : Réglages, et « ⚙️ » dans l'outil ─── */
     const setsList = () => { const v = readJson(SETS_KEY, {})[SETS_ID]; return Array.isArray(v) ? v.filter(x => x && x.name && x.v).map(x => ({...x, v: cleanBar(x.v)})) : []; };
     const setsSave = list => { const all = readJson(SETS_KEY, {}); all[SETS_ID] = list.slice(-60); return writeJson(SETS_KEY, all); };
     function prefsHtml(cfg = barCfg()) {
@@ -294,6 +294,6 @@
     }
 
     ext.txView = {DEFAULT_VIEW, viewOf, needsPixels, cssFilter, changedCount, CHANGED, enhancer, toolbarHtml, barCfg, saveBar, cleanBar, panelKeys, badgeKeys, openBarDialog, ITEMS, DEFAULT_PANEL};
-    // Maintenance → Montage, retouche, mise en page et son → « 📜 Transcription d'actes : barre d'outils »
+    // Réglages → Montage, retouche, mise en page et son → « 📜 Transcription d'actes : barre d'outils »
     ext.transcribePrefs = {html: () => prefsHtml(), bind: (box, redraw) => prefsBind(box, redraw)};
 })();

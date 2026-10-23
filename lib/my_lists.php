@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * 📋 Mes listes (Maintenance → Mes listes, structure n°15) : des listes faites sur mesure.
+ * 📋 Mes listes (Réglages → Mes listes, structure n°15) : des listes faites sur mesure.
  *  - ce qu'on liste : des événements (ex. les divorces) ou des personnes ;
  *  - des critères qu'on combine (période, type d'événement, lieu, nom, métier, étiquette, sexe, ancêtres Sosa,
  *    parents inconnus…), tous ensemble (ET) ou l'un ou l'autre (OU) ;
@@ -628,7 +628,7 @@ function my_list_free_rows(PDO $pdo, array $list, array $def): array
 
 
 /**
- * Partage d'une liste : un fichier que n'importe quel utilisateur de LCNDA importe (Maintenance → Mes listes).
+ * Partage d'une liste : un fichier que n'importe quel utilisateur de LCNDA importe (Réglages → Mes listes).
  * Les types d'événements et les étiquettes y sont désignés par leur nom (leurs numéros changent d'une base à l'autre) ;
  * pour une liste écrite à la main, les lignes partent avec, sans les liens vers les fiches (propres à chaque base).
  */
@@ -691,7 +691,7 @@ function import_my_list(PDO $pdo, array $data): array
         }
         // Un critère dont aucun choix n'existe ici serait ignoré et la liste montrerait tout : on refuse plutôt
         if (!$ids && ($r['field'] ?? '') === 'event_type' && !empty($r['values'])) {
-            throw new RuntimeException('Cette liste utilise ' . implode(', ', array_unique($missing)) . ', absent de ta base. Crée-le d’abord (Maintenance → Types d’événements), puis importe la liste de nouveau.');
+            throw new RuntimeException('Cette liste utilise ' . implode(', ', array_unique($missing)) . ', absent de ta base. Crée-le d’abord (Réglages → Types d’événements), puis importe la liste de nouveau.');
         }
         $def['rules'][$i]['values'] = $ids;
     }

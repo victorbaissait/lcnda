@@ -152,7 +152,7 @@
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
-                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Reconnaissance d’écriture manuscrite, si un modèle est installé (Maintenance)" data-help="La lecture d’une écriture à la main (HTR) : elle demande un modèle installé dans Maintenance. Relis toujours : elle se trompe sur les noms." data-help-faq="transcription">✍️ Lire (manuscrit)</button>
+                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Reconnaissance d’écriture manuscrite, si un modèle est installé (Réglages)" data-help="La lecture d’une écriture à la main (HTR) : elle demande un modèle installé dans les Réglages. Relis toujours : elle se trompe sur les noms." data-help-faq="transcription">✍️ Lire (manuscrit)</button>
                         <select data-tx-lang title="Langue du texte"><option value="fra">Français</option><option value="lat">Latin</option><option value="fra+lat">Français + latin</option><option value="eng">Anglais</option><option value="deu">Allemand</option><option value="ita">Italien</option><option value="spa">Espagnol</option></select>
                         <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
                         <details class="h-tx-more"><summary>Plus ▾</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="ui-toggle h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>Lire et exporter l’image améliorée</label></div></details></div>
@@ -498,7 +498,7 @@
                 if (useEnh() && viewChanged()) { status('Préparation de l’image améliorée…'); const c = await filteredCanvas(); const b = await new Promise(r2 => c.toBlob(r2, 'image/jpeg', .92)); body.image_b64 = await new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); }); status('Reconnaissance de l’écriture…'); }
                 const r = await post('htr_recognize', body); const txt = String(r.result?.text || r.text || '').trim(); if (!txt) { status(''); return toast('Aucun texte reconnu.', 'error'); }
                 area.value += (area.value.trim() ? '\n\n— Lu automatiquement (à relire) —\n' : '') + txt; before = area.value; t.body = area.value; touch(); paintMirror(); status('Texte manuscrit ajouté (à relire)'); }
-            catch (e) { status(''); const m = e.message || 'Reconnaissance impossible.'; toast(/Maintenance/.test(m) ? m : `${m} (Maintenance → Reconnaissance d’écriture (HTR) pour installer un modèle)`, 'error'); } // le serveur dit déjà où l'installer : pas deux fois
+            catch (e) { status(''); const m = e.message || 'Reconnaissance impossible.'; toast(/Réglages/.test(m) ? m : `${m} (Réglages → Reconnaissance d’écriture (HTR) pour installer un modèle)`, 'error'); } // le serveur dit déjà où l'installer : pas deux fois
         }
         /* ─── image : de la base ou de l'ordinateur ─── */
         async function pickImage() {
@@ -575,7 +575,7 @@
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
         const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };
         dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false); });
-        /* ─── la barre se redessine quand on la règle (⚙️, ou Maintenance) ─── */
+        /* ─── la barre se redessine quand on la règle (⚙️, ou Réglages) ─── */
         let narrow = false; const isNarrow = () => ($('.h-tx-left')?.getBoundingClientRect().width || 1000) < 620;
         function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
         const roBar = new ResizeObserver(() => { if (dlg.isConnected && isNarrow() !== narrow) renderBar(); }); roBar.observe($('.h-tx-left'));

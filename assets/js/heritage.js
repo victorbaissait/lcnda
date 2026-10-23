@@ -785,7 +785,7 @@
     /* ═══════════════════════ LISTES ═══════════════════════ */
 
     function pageHeader(eyebrow, title, intro, actions = '') {
-        return window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []}); // K5 : l’en-tête unique (app-pages.js)
+        return window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []}); // K5 : l’en-tête unique (app-pages.js)
     }
     const isCurrent = token => token === S().workspaceToken && S().module === 'listes';
     function personPickerAdd(label, attr) {
@@ -1592,7 +1592,7 @@
         rows.filter(r => r.gen && r.days).forEach(r => { (gens[r.gen] ||= []).push(r); });
         const genRows = Object.entries(gens).sort((a, b) => b[0] - a[0]).map(([g, list]) => ({g: Number(g), avg: list.reduce((s, r) => s + r.days, 0) / list.length, list}));
         const maxG = Math.max(1, ...genRows.map(g => g.avg));
-        A().$('#workspace').innerHTML = `<section class="page">${pageHeader('STATISTIQUES', 'Richesse d’après les inventaires après décès', 'Le total net de chaque inventaire, converti en journées de travail d’un journalier de province (même convertisseur que Maintenance → Calendrier / mesures). Ordre de grandeur pour comparer les générations entre elles, pas un montant exact.', '<button type="button" class="button secondary" data-h-open-list="probate">Saisir un inventaire</button>')}
+        A().$('#workspace').innerHTML = `<section class="page">${pageHeader('STATISTIQUES', 'Richesse d’après les inventaires après décès', 'Le total net de chaque inventaire, converti en journées de travail d’un journalier de province (même convertisseur que Réglages → Calendrier / mesures). Ordre de grandeur pour comparer les générations entre elles, pas un montant exact.', '<button type="button" class="button secondary" data-h-open-list="probate">Saisir un inventaire</button>')}
             ${genRows.length ? `<section class="maintenance-panel"><h3>Par génération (numéros Sosa)</h3><table class="data-table"><thead><tr><th>Génération</th><th>Inventaires</th><th>Moyenne</th><th></th></tr></thead><tbody>${genRows.map(g => `<tr><td>${g.g}<sup>e</sup> génération</td><td>${g.list.map(r => personLink(r.person_id, r.person_name, r.year || '')).join('<br>')}</td><td>${fmt(g.avg)} journées<br><small>${fmt(g.avg / 250, 1)} années de travail</small></td><td class="h-bar-cell"><span class="h-bar" style="width:${Math.round(100 * g.avg / maxG)}%"></span></td></tr>`).join('')}</tbody></table></section>` : ''}
             ${rows.length ? `<section class="maintenance-panel"><h3>Chaque inventaire</h3><table class="data-table"><thead><tr><th>Année</th><th>Personne</th><th>Total net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r.year || '?')}</td><td>${personLink(r.person_id, r.person_name)}${r.gen ? ` <small>(gén. ${r.gen})</small>` : ''}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${r.days ? `${fmt(r.days)}<br><small>${fmt(r.days / 250, 1)} années</small>` : '<small>année inconnue</small>'}</td><td class="h-bar-cell">${r.days ? `<span class="h-bar" style="width:${Math.round(100 * r.days / max)}%"></span>` : ''}</td></tr>`).join('')}</tbody></table></section>` : empty('Aucun inventaire après décès. Saisis-en un dans Listes → Inventaires après décès.')}</section>`;
     };
@@ -1692,8 +1692,8 @@
         let last = '';
         try { last = localStorage.getItem(key) || ''; } catch (_) {}
         if (last === day) return;
-        if (s.warn === 'old') toast(s.days === null ? '🛟 Aucune copie hors de cet ordinateur pour l’instant (Maintenance → Export propre).' : `🛟 Ta dernière copie hors de cet ordinateur date de ${plural(s.days, 'jour', 'jours')}.`);
-        else if (s.warn === 'none' && (!last || Date.now() - new Date(last).getTime() > 7 * 86400000)) toast('🛟 Pense à une copie hors de cet ordinateur (disque externe, clé, iCloud, Dropbox) : Maintenance → Export propre.');
+        if (s.warn === 'old') toast(s.days === null ? '🛟 Aucune copie hors de cet ordinateur pour l’instant (Réglages → Export propre).' : `🛟 Ta dernière copie hors de cet ordinateur date de ${plural(s.days, 'jour', 'jours')}.`);
+        else if (s.warn === 'none' && (!last || Date.now() - new Date(last).getTime() > 7 * 86400000)) toast('🛟 Pense à une copie hors de cet ordinateur (disque externe, clé, iCloud, Dropbox) : Réglages → Export propre.');
         else return;
         try { localStorage.setItem(key, day); } catch (_) {}
         checkSavedSearches();

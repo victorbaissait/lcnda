@@ -944,7 +944,7 @@ function picker_labels(PDO $pdo, string $q, int $offset, int $limit): array
     ], $rows)];
 }
 
-/** 📋 Mes listes (Maintenance → Mes listes) : nom, sorte de liste */
+/** 📋 Mes listes (Réglages → Mes listes) : nom, sorte de liste */
 function picker_mylists(PDO $pdo, string $q, int $offset, int $limit): array
 {
     if (!picker_table_exists($pdo, 'custom_lists')) { return ['total' => 0, 'items' => []]; }

@@ -3884,7 +3884,7 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .order-row .order-icon{flex:0 0 3.2em;width:3.2em;min-width:0;text-align:center;font-size:.95rem;padding:2px 4px}
 #database-status{display:inline-flex;flex-direction:column;line-height:1.15;text-align:left}#database-status .db-count-line{display:block;white-space:nowrap}
 .collection-person-list button.is-cp-active{background:var(--blue-soft)}.collection-person-list button small{color:var(--muted,#777);margin-left:.3rem}
-/* Maintenance : pages rangées en groupes (le dessin des boutons reste le même) */
+/* Réglages : pages rangées en groupes (le dessin des boutons reste le même) */
 .mt-groups .mt-search{width:100%;margin:0 0 10px;padding:7px 10px;border:var(--line);background:var(--white);color:var(--ink);font:inherit;font-size:13px}
 .mt-group{margin:0 0 6px}.mt-group>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 4px;font-weight:800;font-size:13px;border-bottom:1px solid var(--line-color)}
 .mt-group>summary::-webkit-details-marker{display:none}.mt-group>summary::after{content:'›';margin-left:auto;font-size:16px;transition:transform .15s}.mt-group[open]>summary::after{transform:rotate(90deg)}
@@ -3915,7 +3915,7 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 }
 /* 📐 le tiroir fermé (poussé hors de l'écran) ne fait plus défiler la fenêtre de côté */
 @media (max-width:900px){.vx-main,.h-hs-main,.kn-main{overflow:hidden}}
-/* colonne de gauche (Maintenance, Listes…) en écran étroit : en-tête et pied compacts, plus de place pour la liste ; repliable */
+/* colonne de gauche (Réglages, Listes…) en écran étroit : en-tête et pied compacts, plus de place pour la liste ; repliable */
 @media (max-width:850px){
 .sidebar{max-height:62vh}
 .sidebar-top{padding:8px 14px!important;min-height:0!important}.sidebar-top h1{font-size:18px!important;margin:0!important}.sidebar-top .eyebrow{font-size:9px}
@@ -4037,14 +4037,14 @@ select { max-width: 100%; }
 .sr-only { left: 0; top: 0; }
 /* tableau de bord → réglages des widgets : une seule colonne sous 1100 px (sinon la 2e colonne écrase la 1re) */
 @media (max-width: 1100px) { .dashboard-widget-settings-grid { grid-template-columns: minmax(0, 1fr); } }
-/* tableaux larges dans un panneau de Maintenance (HTR…) : ils défilent dans le panneau au lieu d'en sortir */
+/* tableaux larges dans un panneau des Réglages (HTR…) : ils défilent dans le panneau au lieu d'en sortir */
 @media (max-width: 760px) { .maintenance-panel > table.data-table, .maintenance-panel > .data-table-wrap { display: block; max-width: 100%; overflow-x: auto; } }
 
 /* 🧩 bouton icône taille « outil » (C8) : la poubelle / le crayon d'une petite barre (vignette, piste, ligne serrée) — app-harmony.js */
 .icon-action.ia-auto.ia-tool{width:22px!important;height:22px!important;min-width:22px!important;min-height:22px!important;flex:0 0 22px;border-width:1px!important;box-shadow:none}
 .icon-action.ia-auto.ia-tool svg{width:13px;height:13px}
 
-/* ═════ 📐 Rien ne se colle : le même écart entre les blocs qui se suivent (comme deux panneaux de Maintenance) ═════ */
+/* ═════ 📐 Rien ne se colle : le même écart entre les blocs qui se suivent (comme deux panneaux des Réglages) ═════ */
 /* deux grands blocs l'un sous l'autre (panneau, « rien ici », grille de champs, colonnes…) : 1,5 rem, partout */
 :is(.maintenance-panel, .empty-box, .form-grid, .help-glossary, .h-search-layout, .h-columns) + :is(.maintenance-panel, .empty-box, .help-glossary, .h-search-layout, .h-columns) { margin-top: 1.5rem; }
 /* une rangée de boutons et le bloc d'à côté (barre des listes H10, compteurs, tableau, « rien ici ») : 1 rem */
@@ -4263,7 +4263,7 @@ dialog .modal-actions > :is(.danger:not([type=submit]), [data-h-delete]) { margi
 .segmented.lc-lf-moved { display: inline-grid; grid-template-columns: auto auto; margin: 0; align-self: flex-end; }
 .segmented.lc-lf-moved > button { min-height: 32px; padding: 4px 14px; }
 
-/* ═════ Maintenance → Apparence : « 👤 Portraits » et « ▤ Colonne de gauche » (maquette validée) ═════ */
+/* ═════ Réglages → Apparence : « 👤 Portraits » et « ▤ Colonne de gauche » (maquette validée) ═════ */
 .lck-k .lck-pagetabs { display: inline-grid; grid-template-columns: auto auto; margin: 4px 0 18px; }
 .lck-k .lck-pagetabs > button { padding: 8px 16px; font-size: 14px; }
 .lck-panel { background: var(--white); border: var(--line); box-shadow: var(--shadow); padding: 20px 22px 24px; min-width: 0; }
@@ -4486,7 +4486,7 @@ body.k-print-doc :is(.page-actions,.card-head-actions,.person-hero-tools,.person
 :root[data-theme="dark"] .k-import-prev th{background:#2a2d33}
 :root[data-theme="dark"] .k-import-prev th,:root[data-theme="dark"] .k-import-prev td{border-color:#3a3f46}
 :root[data-theme="dark"] .k-import .modal-actions{border-top-color:#e8e8e8}
-/* 🔎 Recherche → types de recherche à ranger (fenêtre « Réordonner » et Maintenance → Apparence) : sur un téléphone, les boutons passent sous le nom */
+/* 🔎 Recherche → types de recherche à ranger (fenêtre « Réordonner » et Réglages → Apparence) : sur un téléphone, les boutons passent sous le nom */
 @media (max-width:560px){.research-kind-dialog .dashboard-reorder-row,#research-kinds-config .dashboard-reorder-row{grid-template-columns:18px 26px minmax(0,1fr)}.research-kind-dialog .dashboard-reorder-row b,#research-kinds-config .dashboard-reorder-row b{overflow-wrap:normal}.research-kind-dialog .dashboard-reorder-row .order-actions,#research-kinds-config .dashboard-reorder-row .order-actions{grid-column:2/-1;justify-self:end;margin-left:auto}.research-kind-dialog .dashboard-reorder-row.ord-row,#research-kinds-config .dashboard-reorder-row.ord-row{flex-wrap:wrap}.research-kind-dialog .dashboard-reorder-row.ord-row>b,#research-kinds-config .dashboard-reorder-row.ord-row>b{flex:1 1 150px!important}}
 /* Personnes : « Recherche phonétique » détachée de la case de recherche */
 .search-box > label.ui-toggle.ui-toggle { margin: 12px 0 2px; font-weight: 600; }

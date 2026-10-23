@@ -296,7 +296,7 @@
             if (hand) {
                 let ready = false; try { ready = !!(await api('htr_setup_status')).ready; } catch (_) {}
                 if (td.step !== 3) return;
-                if (!ready) { say('info', 'Le lecteur d’écriture manuscrite (HTR) n’est pas installé sur cet ordinateur : la saisie se fait à la main, dans une grille rapide, la bande de chaque ligne sous les yeux. (Pour l’installer : Maintenance → Reconnaissance d’écriture.)', manualBtn); return; }
+                if (!ready) { say('info', 'Le lecteur d’écriture manuscrite (HTR) n’est pas installé sur cet ordinateur : la saisie se fait à la main, dans une grille rapide, la bande de chaque ligne sous les yeux. (Pour l’installer : Réglages → Reconnaissance d’écriture.)', manualBtn); return; }
                 say('info', `${plural(td.rows.length, 'ligne', 'lignes')} à lire avec le lecteur d’écriture manuscrite (HTR) : chaque case est envoyée au lecteur installé sur cet ordinateur. C’est plus lent, et à relire attentivement.`, `<button type="button" class="button" data-td-run>▶ Lire les lignes</button>${manualBtn}`); return;
             }
             say('info', `${plural(td.rows.length, 'ligne', 'lignes')} à lire, ${plural(roleCols().length, 'colonne', 'colonnes')}. La lecture se fait sur cet ordinateur (le moteur est téléchargé une fois, et vérifié).`, `<button type="button" class="button" data-td-run>▶ Lire les lignes</button>${manualBtn}`);

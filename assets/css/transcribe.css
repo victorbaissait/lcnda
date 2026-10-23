@@ -57,7 +57,7 @@
 /* 🔍 la loupe */
 .h-tx-loupe{position:absolute;z-index:4;border-radius:50%;border:3px solid #fff;box-shadow:0 6px 22px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.35);pointer-events:none}
 .h-tx-useenh{padding:6px 8px;font-size:12px;white-space:normal;max-width:260px}
-/* ⚙️ réglage de la barre (Maintenance et dans l'outil) */
+/* ⚙️ réglage de la barre (Réglages et dans l'outil) */
 .h-txb-layout{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px}
 .h-txb-lab{font-weight:600}
 .h-txb-seg{display:inline-flex;flex-wrap:wrap}

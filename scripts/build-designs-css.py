@@ -3,7 +3,7 @@
 
 Les feuilles de l'app écrivent leurs ombres, leurs fonds blancs, leurs marges et leurs « boutons qui s'enfoncent » en dur
 (« box-shadow: 4px 4px 0 rgba(5,93,255,.28) », « background: white », « padding: 12px »…). Pour qu'un design choisi
-dans Maintenance → 🎨 Designs au choix change toute l'app d'un coup, ce script recopie chacune de ces règles, précédée
+dans Réglages → 🎨 Designs au choix change toute l'app d'un coup, ce script recopie chacune de ces règles, précédée
 de l'attribut qui la commande sur <html> :
 
   :root[data-lc-sh="douces"|"aucune"]   ombres douces ou sans ombre (A1)

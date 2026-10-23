@@ -388,7 +388,7 @@
     }
     ext.openDecorTree = openMaker;
     ext.decorTreeInternals = {build, bySosa, THEMES, FORMATS, SHAPES, formats, themes};
-    /* Maintenance → Montage, retouche, mise en page et son : les réglages de l'arbre décoratif */
+    /* Réglages → Montage, retouche, mise en page et son : les réglages de l'arbre décoratif */
     ext.decorTreePrefs = {
         html: () => { const sv = readJ(PREF, {}), o = (list, cur2) => list.map(([k, l]) => `<option value="${esc(k)}" ${String(cur2) === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('');
             return `<div class="form-grid h-mtp-grid"><label>Forme au départ<select data-dtp="shape">${o(SHAPES.map(x => [x[0], x[1]]), sv.shape || 'fan180')}</select></label><label>Générations<select data-dtp="gens">${o(Array.from({length: 11}, (_, i) => [i + 2, `${i + 2} générations`]), sv.gens || 5)}</select></label>

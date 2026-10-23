@@ -14,7 +14,7 @@
  *   Le code de sortie est gardé haché (SHA-256 + sel), jamais en clair.
  * - Lien de parenté en clair : même calcul et mêmes mots que lib/question_more.php (qm_kin_label_g : ancêtre commun le
  *   plus proche), puis les alliances (« ton beau-père », « le mari de ta petite-fille Émilie »).
- * - Réglages : Maintenance → Accessibilité → onglet « 🧓 Mode simple » (dessiné ici, appelé par app-access.js).
+ * - Réglages : Réglages → Accessibilité → onglet « 🧓 Mode simple » (dessiné ici, appelé par app-access.js).
  * API : window.LCNDA_EXT.modeSimple = {open, close, isOpen, settings, renderSettings, kin, bio, data, debug…}.
  */
 (() => {
@@ -115,7 +115,7 @@
     /** les réglages : ceux de cet appareil s'il les garde pour lui (« Réglages de base » coupé), sinon ceux de la généalogie */
     function read() { const loc = lsGet(LOCAL); return clean(loc && loc.baseAll === false ? loc : lsGet(KEY)); }
     function write(s) { const c = clean(s); if (c.baseAll === false) lsSet(LOCAL, c); else { lsSet(LOCAL, null); lsSet(KEY, c); } return c; }
-    /** le « mode confidentialité » de l'app (Maintenance → Export) : les vivants sont montrés par leur prénom seulement */
+    /** le « mode confidentialité » de l'app (Réglages → Export) : les vivants sont montrés par leur prénom seulement */
     const privacyOn = () => { try { return !!JSON.parse(localStorage.getItem('genealogie-export-privacy') || '{}').enabled; } catch (_) { return false; } };
     const dev = () => { const d = lsGet(DEV); return d && typeof d === 'object' ? d : {}; };
     const setDev = patch => { const d = {...dev(), ...patch}; Object.keys(d).forEach(k => d[k] === undefined && delete d[k]); lsSet(DEV, d); };
@@ -945,7 +945,7 @@
         return A().card ? A().card(index, 'Mode simple', '', body, span) : `<section class="card ${span}">${body}</section>`;
     }};
 
-    /* ═════════════════════════ Réglages : Maintenance → Accessibilité → 🧓 Mode simple ═════════════════════════ */
+    /* ═════════════════════════ Réglages : Réglages → Accessibilité → 🧓 Mode simple ═════════════════════════ */
     const PRESETS_READY = [
         {k: 'legible', name: 'Très lisible', hint: 'Atkinson Hyperlegible, texte 30 px, très gros boutons', set: {font: 'Atkinson Hyperlegible', fs: 30, btnH: 84, caseS: 96, theme: 'light', contrast: false}},
         {k: 'sepia', name: 'Sépia doux', hint: 'Fond crème, police de livre, doux pour les yeux', set: {theme: 'sepia', font: 'Georgia', fs: 26, contrast: false}},
@@ -1014,7 +1014,7 @@
         <section class="maintenance-panel ms-intro"><span class="ms-intro-ico" aria-hidden="true">🧓</span><div><h3>Le mode simple ${UI().badge ? UI().badge('Nouveau', 'blue') : ''}</h3>
             <p>De très gros boutons pour regarder l’arbre, les photos et les fiches, sans rien pouvoir modifier ni supprimer par erreur — pour une personne âgée, un enfant, ou n’importe qui qui veut juste regarder.</p>
             <div class="ms-intro-acts"><button type="button" class="button" data-ms-open="now">▶ Ouvrir le mode simple</button><button type="button" class="button secondary" data-ms-try>${TRY ? '✕ Fermer l’essai' : '👁 Essayer ici'}</button></div>
-            <div class="ms-topbtn">${tg('data-ms-bool="forAll"', s.forAll, 'Montrer le bouton « 🧓 Mode simple » en haut de l’app', s.forAll ? 'Il est en haut à droite, à côté du 🔒, pour toute personne qui ouvre cette généalogie.' : 'Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord.')}</div>
+            <div class="ms-topbtn">${tg('data-ms-bool="forAll"', s.forAll, 'Montrer le bouton « 🧓 Mode simple » en haut de l’app', s.forAll ? 'Il est en haut à droite, pour toute personne qui ouvre cette généalogie (sa place : Réglages → Apparence → « Boutons en haut à droite »).' : 'Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord.')}</div>
             <div class="ms-try" data-ms-try-box ${TRY ? '' : 'hidden'}></div></div></section>
 
         <section class="maintenance-panel"><h3><span aria-hidden="true">🔗</span> Tes réglages d’accessibilité valent aussi ici</h3>

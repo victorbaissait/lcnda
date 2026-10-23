@@ -3,7 +3,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
 /**
  * Cinq demandes revérifiées comme l'utilisateur le ferait :   node tests/test-verif-demandes.js
  *   (VD_SHOTS=dossier pour garder des captures)
- * 1. 🔎 Types de recherche : rangés et cachés dans Maintenance → Apparence (trouvés par « Chercher un réglage… » :
+ * 1. 🔎 Types de recherche : rangés et cachés dans Réglages → Apparence (trouvés par « Chercher un réglage… » :
  *    « types de recherche », « préférences »), l'ordre suivi par le menu de Recherche après rechargement, clés dans
  *    les 💾 Réglages enregistrés et le défaut du site.
  * 2. 🗺️ Fonds de cartes : l'ordre changé à la souris (catégorie et fond) suit dans « Fonds de carte en boutons »,

@@ -311,7 +311,7 @@
         const syncTo = () => { const kind = from.selectedOptions[0]?.dataset.kind; const keep = to.value; to.innerHTML = (kinds[kind] || []).map(opt).join(''); if ([...to.options].some(o => o.value === keep)) to.value = keep; else { const m = [...to.options].find(o => /^b:(m|ha|l|g|denier|s)$/.test(o.value) || o.value === 't:c'); if (m) to.value = m.value; } };
         from.onchange = syncTo; syncTo();
         const cm = window.LCNDA_EXT?.calendarMore, reg = cm?.REGIONS?.find(r => r.id === st.region);
-        win.querySelector('[data-cm-region]').textContent = reg ? `Mesures anciennes : ${reg.label} (à changer dans ⚙️). Pour les mesures et monnaies d’autres régions : Maintenance → Calendrier / mesures.` : '';
+        win.querySelector('[data-cm-region]').textContent = reg ? `Mesures anciennes : ${reg.label} (à changer dans ⚙️). Pour les mesures et monnaies d’autres régions : Réglages → Calendrier / mesures.` : '';
     }
     const datesHelper = () => `<div class="cm-dates"><form class="cm-dform" data-cm-age><span class="cm-dt">🎂 Âge ou écart entre deux dates</span><label>De<input name="a" data-ui-date="nocal" placeholder="7 mai 1925" autocomplete="off"></label><label>À<input name="b" data-ui-date="nocal" placeholder="8 décembre 1960" autocomplete="off"></label><button type="submit" class="button small">Calculer l’écart</button></form>
         <form class="cm-dform" data-cm-rep><span class="cm-dt">🗓 Calendrier républicain ↔ grégorien</span><label>Date<input name="d" data-ui-date="nocal" placeholder="3 frimaire an XII ou 14/07/1794" autocomplete="off"></label><button type="submit" class="button small">Convertir</button></form></div>`;
@@ -526,7 +526,7 @@
             <label>Séparateur décimal${sel('dec', [[',', 'Virgule : 2,5 (et « ; » entre les nombres)'], ['.', 'Point : 2.5 (et « , » ou « ; » entre les nombres)']], s.dec)}</label>
             <label class="span-2">Mesures anciennes${sel('region', (cm?.REGIONS || [{id: 'paris', label: 'Paris, Île-de-France (mesures du roi)'}]).map(r => [r.id, r.label]), s.region)}</label>
             <div class="span-2">${T ? T('Fractions exactes quand c’est possible (1/3 au lieu de 0,333…)', {checked: s.frac, attrs: 'name="frac"'}) : `<label class="ui-toggle"><input type="checkbox" name="frac"${s.frac ? ' checked' : ''}><i></i>Fractions exactes</label>`}</div>
-            <div class="span-2">${T ? T('Bouton 🧮 dans la barre du haut', {checked: s.topButton, attrs: 'name="topButton"', sub: `La calculette s’ouvre aussi avec ${kbd('⇧⌘Y')} (à changer dans Maintenance → Raccourcis).`, html: true}) : ''}</div>
+            <div class="span-2">${T ? T('Bouton 🧮 dans la barre du haut', {checked: s.topButton, attrs: 'name="topButton"', sub: `La calculette s’ouvre aussi avec ${kbd('⇧⌘Y')} (à changer dans Réglages → Raccourcis). Sa place parmi les boutons du haut : Réglages → Apparence → « Boutons en haut à droite ».`, html: true}) : ''}</div>
             </div>
             <div class="cm-set-foot"><button type="button" class="button small secondary" data-ui-reset>↺ Remettre comme au départ</button></div>
             <div data-cm-presets></div>`;
@@ -567,7 +567,7 @@
             const anchor = document.getElementById('genealogy-switch'); if (!anchor) return;
             b = document.createElement('button'); b.type = 'button'; b.id = 'calculette-open'; b.className = 'screen-tool cm-entry'; b.setAttribute('aria-label', 'Calculette');
             b.title = 'Calculette : simple, scientifique, courbes, mesures anciennes, dates'; b.dataset.shortcut = shortcutLabel();
-            b.innerHTML = '<span aria-hidden="true">🧮</span>'; anchor.before(b);
+            b.innerHTML = '<span aria-hidden="true">🧮</span>'; anchor.before(b); // Réglages → Apparence → « Boutons en haut à droite » le remet à sa place
         }
         b.classList.toggle('is-on', !!(win && !win.hidden));
         b.setAttribute('aria-pressed', String(!!(win && !win.hidden)));
@@ -592,7 +592,7 @@
         document.getElementById('calculette-open')?.focus({preventScroll: true});
     }
     const toggle = () => (win && !win.hidden ? close() : open());
-    ext.calculator = {open, close, toggle, isOpen: () => !!(win && !win.hidden), compute: (expr, o) => C()?.evaluate(expr, {...evalOptsSafe(), ...o})};
+    ext.calculator = {open, close, toggle, refreshButton: () => topButton(), isOpen: () => !!(win && !win.hidden), compute: (expr, o) => C()?.evaluate(expr, {...evalOptsSafe(), ...o})};
     const evalOptsSafe = () => { const s = settings(); return {angle: s.angle, digits: s.digits, dec: s.dec, frac: s.frac, region: s.region}; };
     ext.openCalculator = open;
 

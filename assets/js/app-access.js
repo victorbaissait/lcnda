@@ -1,4 +1,4 @@
-/* LCNDA — ♿ Accessibilité (Maintenance → Accessibilité).
+/* LCNDA — ♿ Accessibilité (Réglages → Accessibilité).
  * Réglages gardés dans localStorage « genealogie-accessibilite » (copié dans la base par app.js, comme les autres « genealogie-* ») et appliqués à toute l'app dès le
  * chargement : classes « a11y-… » et variables « --a11y-… » sur <html> (styles : assets/css/access.css).
  * Couleurs : filtre SVG de correction (daltonisation, matrices de Machado 2009) + palette sûre Okabe-Ito pour les
@@ -153,7 +153,7 @@
         if (document.body) { applySubs(); applyAlt(); updateSimpleBar(); trackModule(); if (!P.dictate || dictationWhy()) { dictStop(true); hideMic(); } }
     }
 
-    /* couleurs homme / femme : celles de l'app (Maintenance → couleurs des fiches) remplacées par une paire sûre, si elles sont différentes */
+    /* couleurs homme / femme : celles de l'app (Réglages → couleurs des fiches) remplacées par une paire sûre, si elles sont différentes */
     const lum = hex => { const m = String(hex).trim().match(/^#?([0-9a-f]{6}|[0-9a-f]{3})$/i); if (!m) return 1; let h = m[1]; if (h.length === 3) h = h.replace(/./g, c => c + c); const [r, g, b] = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255).map(c => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
     function applyGender() {
         let st = document.getElementById('a11y-gender-style');
@@ -553,7 +553,7 @@
     }
     function simpleOff() {
         P.simple = false; save(); apply(); refreshPage();
-        toast('Tout est réaffiché. Pour revenir à « une chose à la fois » : Maintenance → Accessibilité.');
+        toast('Tout est réaffiché. Pour revenir à « une chose à la fois » : Réglages → Accessibilité.');
     }
 
     /* ═════ Dictée vocale ═════ */
@@ -685,7 +685,7 @@
         if (rec) dictStop(); else { showMic(t); dictStart(t); }
     }, true);
 
-    /* ═════ La page Maintenance → Accessibilité ═════ */
+    /* ═════ La page Réglages → Accessibilité ═════ */
     let pageToken = 0;
     const isOn = k => !!P[k];
     /* C8 : interrupteur ; avec une aide, la bulle « ? » se met juste à côté (hors du libellé, pour ne pas basculer en cliquant dessus) */
@@ -724,7 +724,7 @@
         if (!pal.length) pal = ['#e74c3c', '#3498db', '#2ecc71', '#f1c40f'];
         const voices = TTS ? frVoices() : [];
         const reduceOs = matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-        return `<section class="page a11y-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>♿ Accessibilité</h2>
+        return `<section class="page a11y-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>♿ Accessibilité</h2>
             <p>Pour voir, lire et utiliser l’app plus facilement (couleurs, texte, contraste, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée), et pour préparer le mode simple. Chaque réglage s’applique tout de suite et reste gardé avec ta généalogie.</p></div>
             <div class="page-actions"><button type="button" class="button secondary" data-a11y-reset>↺ Remettre comme au départ</button></div></header>
 

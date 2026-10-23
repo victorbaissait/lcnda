@@ -82,7 +82,7 @@ def rewrite(prop, value, dark):
     return '%s:%s%s' % (prop, ' '.join(out), imp)
 
 
-# un thème à soi (classe lc-frame) ou un design de Maintenance → 🎨 Designs au choix (A1, attribut data-lc-lines)
+# un thème à soi (classe lc-frame) ou un design de Réglages → 🎨 Designs au choix (A1, attribut data-lc-lines)
 ON = ':is(.lc-frame,[data-lc-lines])'
 
 

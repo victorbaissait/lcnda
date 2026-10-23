@@ -1,5 +1,5 @@
 /**
- * 📅 Maintenance → Calendrier / mesures : huit cadres de plus, ajoutés après « Alphabets et langues des actes »
+ * 📅 Réglages → Calendrier / mesures : huit cadres de plus, ajoutés après « Alphabets et langues des actes »
  *  📏 Mesures anciennes par région · 🎂 Âge ↔ date de naissance · ↔ Écart entre deux dates · 📆 Jour de la semaine
  *  ✝ Saint du jour et fêtes mobiles · 🔔 Heures canoniques · 🪙 Monnaies étrangères anciennes · 🌳 Calculateur de générations
  * (« le lundi après la Saint-Martin », « 3 jours avant Pâques » : dans « Fêtes religieuses → date exacte », heritage-tools.js.)

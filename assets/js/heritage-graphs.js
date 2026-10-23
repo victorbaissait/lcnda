@@ -140,7 +140,7 @@
         if (!cur() || S().module !== 'listes') return;
         let items = collect(diagrams), shown = [], limit = 40;
         ws.innerHTML = `<section class="page gr-page"><header class="page-header"><div><span class="eyebrow">LISTES · GRAPHIQUES</span><h2>📈 Graphiques et diagrammes</h2>
-            <p>Tous tes graphiques (faits dans <b>Maintenance → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ».</p></div>
+            <p>Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ».</p></div>
             ${kiosk() ? '' : '<div class="page-actions"><button type="button" class="button" data-gr-newgraph>＋ Nouveau graphique</button><button type="button" class="button secondary" data-gr-newdg>＋ Nouveau diagramme</button></div>'}</header>
             <div data-gr-bar></div><div data-gr-body></div><div data-gr-more></div></section>`;
         const page = ws.querySelector('.gr-page'), body = page.querySelector('[data-gr-body]');

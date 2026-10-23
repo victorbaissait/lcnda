@@ -1,7 +1,7 @@
 /* LCNDA — Tableaux : la bibliothèque de formes (façon Freeform) et les préférences des tableaux.
  * ext.boardKit.shapes : catégories et formes (chemins SVG dans une boîte 100 × 100).
  * ext.boardKit.prefs() : les réglages (couleurs par catégorie et palettes, pointes, formes, polices, plages d'épaisseur
- * et de taille du texte, arrondi, tableur par défaut, pinceaux à soi, ordre des menus) — Maintenance → Réglages des tableaux.
+ * et de taille du texte, arrondi, tableur par défaut, pinceaux à soi, ordre des menus) — Réglages → Tableaux.
  */
 (() => {
     'use strict';
@@ -475,7 +475,7 @@
     }
     Object.assign(ext.boardKit, {parsePath, absPath, pathStr, shapeSegs, fitSegs, openComposer, penEditor, headMaker});
 
-    /* ═════════ Maintenance → Réglages des tableaux ═════════ */
+    /* ═════════ Réglages → Tableaux ═════════ */
     let tab = 'colors';
     const orderList = (id, items, order, hidden, extra = () => '') => `<div class="h-bp-order" data-bp-order="${id}">${sortBy(items.map(i => i[0]), order).map(k => { const it = items.find(i => i[0] === k); return `<div class="h-bp-row" draggable="true" data-k="${esc(k)}"><label class="checkbox-line"><input type="checkbox" data-bp-show ${hidden.includes(k) ? '' : 'checked'}> <span>${it[2] || ''}${esc(it[1])}</span></label>${extra(k)}<span class="h-bp-mv"><button type="button" class="h-bt" data-bp-up title="Monter">↑</button><button type="button" class="h-bt" data-bp-down title="Descendre">↓</button></span></div>`; }).join('')}</div>`;
     const readOrder = (box) => { const rows = [...box.querySelectorAll(':scope > .h-bp-row')]; return {order: rows.map(r => r.dataset.k), hidden: rows.filter(r => !r.querySelector('[data-bp-show]').checked).map(r => r.dataset.k)}; };
@@ -551,7 +551,7 @@
                     <section class="h-bp-sec"><h4>Menu « ＋ Ajouter »</h4>${orderList('add', ADD, p.addOrder, p.addHidden)}</section>
                     <section class="h-bp-sec"><h4>Réglages d’une légende de trait</h4><p class="muted">Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs.</p>${orderList('legend', LEGEND, p.legendOrder, p.legendHidden)}</section></div>`,
             }[tab]();
-            ws.innerHTML = `<section class="page h-bp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Réglages des tableaux</h2><p>Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus.</p></div>
+            ws.innerHTML = `<section class="page h-bp"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>Tableaux</h2><p>Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus.</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-bp-reset>↺ Remettre comme au départ</button></div></header>
                 <div data-presets-slot="tableaux"></div>
                 <nav class="h-bp-tabs">${TABS.map(([k, l]) => `<button type="button" class="${tab === k ? 'is-active' : ''}" data-bp-tab="${k}">${l}</button>`).join('')}</nav><div class="h-bp-body">${body}</div></section>`;

@@ -414,12 +414,12 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         await page.click('dialog[open] [data-dg-way="pick"]');
         await fr.locator('.lc-diagramme svg').waitFor({ timeout: 8000 });
         ok(await page.evaluate(id => /^<svg/.test(window.LCNDA_EXT.siteWeb.current.site.frozen[`diagram:${id}`] || ''), dgB), 'diagramme de l’app : dessiné par Graphiques, gardé (figé) dans le site');
-        // 🗺 une carte sur un fond de l'app (même liste que Maintenance → fonds de carte)
+        // 🗺 une carte sur un fond de l'app (même liste que Réglages → fonds de carte)
         await page.click('[data-sw-block="map"]'); await fr.locator('[data-lc-block="map"] .lc-map-img').waitFor({ timeout: 20000 });
         ok(await page.evaluate(() => Object.keys(window.LCNDA_EXT.siteWeb.current.site.frozen).some(k => /^map:1:ancestors:6:[a-z0-9_]+$/.test(k))), 'carte : assemblée en image sur son fond');
         await fr.locator('[data-lc-block="map"]').click(); await page.waitForTimeout(300);
         const fondSel = page.locator('[data-sw-panel] select[data-sw-ba="fond"]');
-        ok(await fondSel.count() === 1 && await fondSel.locator('optgroup').count() >= 2, 'le choix du fond : la liste des fonds de l’app, rangée comme dans Maintenance');
+        ok(await fondSel.count() === 1 && await fondSel.locator('optgroup').count() >= 2, 'le choix du fond : la liste des fonds de l’app, rangée comme dans les Réglages');
         await page.check('[data-sw-panel] input[data-sw-ba="vive"]'); await page.waitForTimeout(400);
         ok(/data-vive="1"/.test(await page.evaluate(() => window.LCNDA_EXT.siteWeb.current.page().html)), '« Carte interactive » cochée');
         if (SHOTS) await page.screenshot({ path: path.join(SHOTS, 'site-carte-fond.png') });

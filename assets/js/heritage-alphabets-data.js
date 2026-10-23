@@ -1,5 +1,5 @@
 /**
- * Données de l'outil « Alphabets et langues des actes » (Maintenance → Calendrier / mesures).
+ * Données de l'outil « Alphabets et langues des actes » (Réglages → Calendrier / mesures).
  * Utilisé par assets/js/heritage-alphabets.js ; vérifié par tests/test-alphabets.js.
  *
  * Chaque langue :

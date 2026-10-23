@@ -1,7 +1,7 @@
 /**
  * ⚡ Son rapide (maquette « Studio son » § 1 et § 2, validée) et l'aiguillage des sons.
  *  - Par défaut, « ✂️ Modifier » un son ouvre l'éditeur d'avant (« 🎧 Modifier le son », heritage-studio-av.js) : réglage
- *    Maintenance → Montage, retouche, mise en page et son → « 🎧 Son » → « ⚡ Son rapide : Comme avant / Nouveau ⚡ Son rapide »
+ *    Réglages → Montage, retouche, mise en page et son → « 🎧 Son » → « ⚡ Son rapide : Comme avant / Nouveau ⚡ Son rapide »
  *    (localStorage « genealogie-audio-quick-design » = 'new' ; gardé tout seul, K2 ; dans les 💾 Réglages enregistrés).
  *  - Le nouveau design : gros interrupteurs (souffle, clics, bourdonnement trouvé tout seul, voix plus claire, volume égal,
  *    couper le début et la fin avec poignées, raccourcir les blancs), force Doux / Moyen / Fort, « ✨ Tout nettoyer »,

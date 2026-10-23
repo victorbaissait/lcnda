@@ -212,7 +212,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         await page.keyboard.press('Escape'); ok(await page.isHidden('.cm-win'), 'Échap encore : la calculette se ferme');
         await page.keyboard.press('Control+Shift+Y'); await page.waitForSelector('.cm-win:not([hidden])');
         ok(true, 'Ctrl+Maj+Y rouvre la calculette');
-        ok(await page.evaluate(() => /calcul/i.test(JSON.stringify(window.LCNDA_APP.shortcutKit.commands().find(c => c.id === 'calculator')))), 'le raccourci est dans la liste des raccourcis (Maintenance → Raccourcis)');
+        ok(await page.evaluate(() => /calcul/i.test(JSON.stringify(window.LCNDA_APP.shortcutKit.commands().find(c => c.id === 'calculator')))), 'le raccourci est dans la liste des raccourcis (Réglages → Raccourcis)');
         // 🧪 scientifique : rubriques, exemples, unités, dates
         await page.click('[data-cm-tab="sci"]'); await page.waitForSelector('[data-cm-sci]:not([hidden])');
         await page.click('[data-cm-group="eq"]'); await page.click('[data-cm-ex="x^2 − 3x + 2 = 0"]');

@@ -48,7 +48,7 @@
             if (full && full.parentElement === bar) full.classList.add('stick-r2'); if (close?.matches?.('button') && close.parentElement === bar) close.classList.add('stick-r');
         });
     }
-    /* 👁 lignes cachées dans les listes à ranger : laissées telles quelles, ou grisées (niveau au choix) — Maintenance → Apparence */
+    /* 👁 lignes cachées dans les listes à ranger : laissées telles quelles, ou grisées (niveau au choix) — Réglages → Apparence */
     const HR_KEY = 'genealogie-hidden-rows';
     const hrPrefs = () => { try { const v = JSON.parse(localStorage.getItem(HR_KEY) || '{}') || {}; return {mode: v.mode === 'keep' ? 'keep' : 'dim', level: Math.min(85, Math.max(5, Number(v.level) || 45))}; } catch (_) { return {mode: 'dim', level: 45}; } };
     const hrApply = () => { const p = hrPrefs(); document.documentElement.style.setProperty('--hidden-row-opacity', p.mode === 'keep' ? '1' : String(1 - p.level / 100)); document.documentElement.dataset.hiddenRows = p.mode; };

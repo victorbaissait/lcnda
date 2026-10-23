@@ -41,7 +41,7 @@
     const GUESS = {artist: 'creation', craft: 'creation', crafts: 'creation', artisan: 'creation', artisan_art: 'creation', actor: 'creation', performer: 'creation', scientist: 'savoir', science: 'savoir', inventor: 'savoir', explorer: 'aventure'};
     const FIXED = {artist: '#7b2ff7', politic: '#055dff', elu_local: '#055dff', sport: '#1aa34a', inventor: '#e1a500', scientist: '#e1a500', military: '#6b7280', craft: '#c2410c', actor: '#d0182f', explorer: '#0e9aa7'};
     const PALETTE = ['#7b2ff7', '#055dff', '#1aa34a', '#e1a500', '#d0182f', '#0e9aa7', '#c2410c', '#be185d', '#4d7c0f', '#6b7280'];
-    PF.profColors = {}; // la couleur choisie pour un profil (réglage standard, « Organiser la page » ou Maintenance)
+    PF.profColors = {}; // la couleur choisie pour un profil (réglage standard, « Organiser la page » ou Réglages)
     PF.color = key => { const c = PF.profColors?.[key]; if (/^#[0-9a-f]{6}$/i.test(c || '')) return c; const p = ART.profiles[key]; if (/^#[0-9a-f]{6}$/i.test(p?.color || '')) return p.color; if (FIXED[key]) return FIXED[key]; let h = 0; for (const c of String(key)) h = (h * 31 + c.charCodeAt(0)) >>> 0; return PALETTE[h % PALETTE.length]; };
     /** l'encre lisible sur la couleur d'un profil (jaune clair → texte foncé) ; les deux variables CSS d'une pastille ou d'une barre */
     PF.ink = c => { const m = /^#([0-9a-f]{6})$/i.exec(String(c || '')); if (!m) return '#fff'; const n = parseInt(m[1], 16), f = v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; const L = .2126 * f(n >> 16) + .7152 * f((n >> 8) & 255) + .0722 * f(n & 255); return L > .3 ? '#111' : '#fff'; };

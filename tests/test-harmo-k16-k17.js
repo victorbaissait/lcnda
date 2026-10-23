@@ -6,7 +6,7 @@
  *    (« Taille (px) », F('Durée (s)', …), C('k', 'Hauteur (px)', 'number'), label: 'Durée (min)'), unité écrite après
  *    la case ; interrupteurs bien construits ; réglages immédiats en interrupteur, options d'export en cases.
  * 3. Navigateur (Playwright, si présent) : heure, durée, nombre avec unité dans une fenêtre (valeurs enregistrées
- *    inchangées), erreur K1 pour une heure impossible, interrupteur dans Maintenance → Export, unités des diagrammes,
+ *    inchangées), erreur K1 pour une heure impossible, interrupteur dans Réglages → Export, unités des diagrammes,
  *    1440 px, 390 px en mode sombre, aucune erreur JavaScript.
  */
 process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
@@ -186,7 +186,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             const sub = await page.evaluate(() => window.__sub);
             assert.ok(sub, 'enregistré'); assert.equal(sub.t, '12:00'); assert.equal(sub.d, '5'); assert.equal(sub.n, '12');
         });
-        await t('K16 Maintenance → Export : réglage immédiat en interrupteur, options d’export en cases', async () => {
+        await t('K16 Réglages → Export : réglage immédiat en interrupteur, options d’export en cases', async () => {
             await go(page, 'export'); await page.waitForTimeout(900);
             const st = await page.evaluate(() => { const lab = t => [...document.querySelectorAll('#workspace label')].find(l => l.textContent.includes(t));
                 const a = lab('Masquer les personnes vivantes dans GEDCOM'), b = lab('Inclure les médias');

@@ -35,7 +35,7 @@
         render: (index, widget, span, data) => {
             const items = data?.items || [], limit = Math.max(1, Number(widget.limit) || 8);
             const body = !data ? A().empty('Suggestions indisponibles.')
-                : !data.root_id ? A().empty('Choisis d’abord ton de cujus (Sosa n°1) : Maintenance → Apparence → Numérotation Sosa.')
+                : !data.root_id ? A().empty('Choisis d’abord ton de cujus (Sosa n°1) : Réglages → Apparence → Numérotation Sosa.')
                 : !items.length ? A().empty('Aucun trou dans ta lignée sur 12 générations : bravo !')
                 : rowsHtml(items.slice(0, limit)) + (items.length > limit ? `<p class="h-cw-more"><button type="button" class="link-button" data-sugg-all>Tout voir (${fmt(data.total)})</button></p>` : '');
             return A().card(index, '💡 Suggestions de recherche', data?.total ? fmt(data.total) : '', body, span, '<button type="button" class="button small secondary" data-dashboard-list="sosa">SOSA</button>');

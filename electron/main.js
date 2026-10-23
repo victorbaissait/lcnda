@@ -66,7 +66,7 @@ async function fatal(title, message) {
 }
 
 /**
- * Raccourcis clavier choisis dans l'application (Maintenance → Raccourcis) : la page les envoie au démarrage et après
+ * Raccourcis clavier choisis dans l'application (Réglages → Raccourcis) : la page les envoie au démarrage et après
  * chaque changement ; le menu est refait pour les afficher. Un clic sur l'élément du menu (ou sa touche) renvoie la
  * commande « shortcut:<id> » à la fenêtre active, qui applique les mêmes règles que la touche lue dans la page.
  */
@@ -647,7 +647,7 @@ async function selfTest(outFile) {
     report.imageLoad = await win.webContents.executeJavaScript(
       `new Promise((res) => { const i = new Image(); i.onload = () => res('ok ' + i.naturalWidth + 'x' + i.naturalHeight); i.onerror = () => res('ERREUR'); i.src = 'media/${firstMedia}'; })`);
   }
-  // Menu avec les raccourcis envoyés par la page (Maintenance → Raccourcis)
+  // Menu avec les raccourcis envoyés par la page (Réglages → Raccourcis)
   report.menu = (Menu.getApplicationMenu()?.items || []).map((m) => ({ label: m.label, items: (m.submenu?.items || []).filter((i) => i.type !== 'separator').map((i) => i.label + (i.accelerator ? ' [' + i.accelerator + (i.registerAccelerator === false ? ' affiché' : '') + ']' : '')) }));
   const image = await win.webContents.capturePage();
   fs.writeFileSync(outFile, image.toPNG());

@@ -1,7 +1,7 @@
 /**
  * ⚖️ Hypothèses à comparer (F2) — sur les hypothèses qui existaient déjà (table hypotheses, fenêtre « Nouvelle hypothèse »
- * d'index.php, Maintenance → Hypothèses) : « Jean né à Naves ou à Tulle ? ».
- *  - bloc de fiche « ⚖️ Hypothèses » (réglable comme les autres : Maintenance → Apparence → blocs des fiches) : les hypothèses de
+ * d'index.php, Réglages → Hypothèses) : « Jean né à Naves ou à Tulle ? ».
+ *  - bloc de fiche « ⚖️ Hypothèses » (réglable comme les autres : Réglages → Apparence → blocs des fiches) : les hypothèses de
  *    la personne, leur état, la réponse en tête, « ⚖️ Comparer », ✎, 🗑 (↶ Annuler) et « ＋ Nouvelle hypothèse » ;
  *  - la fenêtre « Comparer » : une colonne par réponse (un lieu, une date ou un texte), les preuves pour et contre (une source,
  *    un média, un dépouillement avec le menu de choix, ou un texte libre) et leur poids, le total de chaque colonne,

@@ -1852,7 +1852,7 @@ def main(argv=None):
         say('\n⏸ Arrêté. Relance la même commande : le programme reprendra où il en était.')
         return 130
     m = int(time.time() - t0)
-    say(f'\n✓ Fini en {m // 3600} h {m % 3600 // 60:02d} min. Les fichiers sont dans {out}.\n  Le socle : copie meteo-socle.sqlite dans le dossier data-meteo de l’app ; un pack (.lcmeteo) : Maintenance → 🌦 Météo d’autrefois → « ⤒ Importer le fichier… ».')
+    say(f'\n✓ Fini en {m // 3600} h {m % 3600 // 60:02d} min. Les fichiers sont dans {out}.\n  Le socle : copie meteo-socle.sqlite dans le dossier data-meteo de l’app ; un pack (.lcmeteo) : Réglages → 🌦 Météo d’autrefois → « ⤒ Importer le fichier… ».')
     return 0
 
 

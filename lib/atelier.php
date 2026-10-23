@@ -244,7 +244,7 @@ function atelier_clean_data(PDO $pdo, string $type, array $in, int $projectId): 
         case 'link': $out += ['url' => $url('url'), 'site' => $t('site'), 'accessed' => $date('accessed')]; break;
         case 'task': $out += ['due' => preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($in['due'] ?? '')) ? (string) $in['due'] : '', 'done' => !empty($in['done']) ? 1 : 0, 'priority' => in_array($in['priority'] ?? '', ['haute', 'normale', 'basse'], true) ? $in['priority'] : 'normale']; break;
         case 'draft': $out += ['text' => $long('text', 2000000), 'target' => max(0, min(1000000, safe_int($in['target'] ?? 0))), 'stage' => in_array($in['stage'] ?? '', ['idee', 'plan', 'premier_jet', 'relu', 'fini'], true) ? $in['stage'] : 'idee']; break;
-        case 'custom': // sorte d'élément créée dans Maintenance → Atelier : ses champs sont décrits là, les valeurs arrivent ici
+        case 'custom': // sorte d'élément créée dans Réglages → Atelier : ses champs sont décrits là, les valeurs arrivent ici
             $vals = [];
             $pkeys = array_values(array_filter(array_map(static fn($k) => preg_replace('/[^a-z0-9_]/', '', strtolower((string) $k)), array_slice(is_array($in['pkeys'] ?? null) ? $in['pkeys'] : [], 0, 40))));
             foreach (array_slice(is_array($in['values'] ?? null) ? $in['values'] : [], 0, 80, true) as $k => $v) {

@@ -7,7 +7,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *     posent les leurs (et « retouché ») ; valeurs vérifiées et bornées ; plus d'ensembles, de police (ancienne A7), de tableau de
  *     bord (ancienne A10) ni de couleur d'accent ; ancien réglage relu ; A5 = couleurs des portraits (K7) ;
  *     designs enregistrés de l'Apparence (a_designs) ; phrase de l'acte ;
- *  2. les fichiers : clés du défaut du site (app.js, api.php), « 💾 Réglages enregistrés : l'Apparence », page de Maintenance
+ *  2. les fichiers : clés du défaut du site (app.js, api.php), « 💾 Réglages enregistrés : l'Apparence », page des Réglages
  *     juste après « Apparence », feuilles dont chaque règle commence par un attribut data-lc-*, feuille fabriquée éteinte par défaut ;
  *  3. le navigateur (Playwright ; sinon sauté) : rien de posé par défaut ; la page (sommaire de 8, sections repliables fermées,
  *     ouvertes retenues, titre « A1 Style général — Doux ») ; choisir une carte, « retouché », « ↶ Annuler » ; recoupements
@@ -168,7 +168,7 @@ function sandbox(store = {}) {
         const strip = css => css.replace(/\/\*[\s\S]*?\*\//g, '');
         const splitTop = sel => { const out = []; let d = 0, cur = ''; for (const ch of sel) { if (ch === '(') d++; if (ch === ')') d--; if (ch === ',' && !d) { out.push(cur.trim()); cur = ''; } else cur += ch; } out.push(cur.trim()); return out.filter(Boolean); };
         const selectors = css => { css = strip(css); const out = []; let i = 0; const walk = () => { while (i < css.length) { const j = css.indexOf('{', i), e = css.indexOf('}', i); if (e >= 0 && (j < 0 || e < j)) { i = e + 1; return; } if (j < 0) { i = css.length; return; } const pre = css.slice(i, j).trim(); i = j + 1; if (pre.startsWith('@')) { if (/^@(media|supports)/.test(pre)) walk(); else { let d = 1; while (i < css.length && d) { if (css[i] === '{') d++; else if (css[i] === '}') d--; i++; } } continue; } if (!/^(from|to|\d+%)/.test(pre)) out.push(...splitTop(pre)); const k = css.indexOf('}', i); i = k + 1; } }; walk(); return out; };
-        // à part : la page de Maintenance (.lcd-*), et les éléments que seul app-designs.js pose (.lc-ic, .lc-dz…)
+        // à part : la page des Réglages (.lcd-*), et les éléments que seul app-designs.js pose (.lc-ic, .lc-dz…)
         const OWN = /^(:root\[data-lc-|:root:not\(\[data-lc-motion\]\) \.lcd-|:root\[data-theme="dark"\] \.(lcd-|lc-|person-hero\.lc-hero)|html\.a11y-calm \.lcd-|\.lcd-|\.lc-(ic|hero|acte|carte|row-av|tree-sosa|journal|toast-s|dz-hide)|\.person-hero\.lc-hero|:root \.person-hero\.lc-hero)/;
         const bad = selectors(read('assets/css/designs.css')).filter(s => !OWN.test(s));
         assert.deepEqual(bad, [], 'règles sans attribut : ' + bad.slice(0, 5).join(' | '));

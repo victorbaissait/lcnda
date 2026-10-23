@@ -10,7 +10,7 @@ Il y a trois fichiers possibles :
 |---|---|---|---|
 | **Le socle** `meteo-socle.sqlite` | ≈ 300 meilleures stations de France, Belgique, Suisse, Luxembourg (chaque jour) + ERA5 (1940 →, 4 heures par jour) + 20CR (1836–1939) + normales | ≈ 550 Mo | dans le dossier `data-meteo` de l'app (il est alors livré avec l'app) |
 | **La grille des altitudes** (dans le socle) | l'altitude du sol tous les ≈ 1 km (30″), tirée du Copernicus DEM GLO-90, pour 14 pays : France, Belgique, Suisse, Luxembourg, Italie, Pays-Bas, Espagne, Allemagne, Portugal, Royaume-Uni, Pologne, Danemark, Tchéquie, Slovaquie (îles comprises : Corse, Sardaigne, Sicile, Baléares, Canaries, Madère, Açores…). Sert à choisir la station la plus semblable en montagne ; hors de France, Belgique, Suisse et Luxembourg, seulement l'altitude (pas de météo dans le socle) | ≈ 5 Mo (≈ 500 carrés de 1°) | dans le socle (étape « altitudes ») |
-| **Le pack complet** `meteo-pack-complet.lcmeteo` | toutes les stations (≈ 14 700), et heure par heure pour Météo-France depuis 1950 | ≈ 3 Go | à importer dans l'app (Maintenance → 🌦 Météo d'autrefois → « ⤒ Importer le fichier… ») |
+| **Le pack complet** `meteo-pack-complet.lcmeteo` | toutes les stations (≈ 14 700), et heure par heure pour Météo-France depuis 1950 | ≈ 3 Go | à importer dans l'app (Réglages → 🌦 Météo d'autrefois → « ⤒ Importer le fichier… ») |
 | **Le pack Europe** `meteo-pack-europe.lcmeteo` | les stations des pays qui publient leurs relevés librement (Allemagne, Pays-Bas, Danemark, Royaume-Uni, Espagne, Pologne, Tchéquie ; quelques longues séries d'Italie, du Portugal et de Slovaquie) + la reconstitution 20CR (1836–1939) et ERA5 (toutes les heures) sur toute l'Europe | ≈ 1,5 à 3,5 Go | à importer de la même façon |
 
 Les durées ci-dessous sont des ordres de grandeur : elles dépendent surtout de la file d'attente de Copernicus (ERA5).
@@ -86,7 +86,7 @@ python3 scripts/meteo/build-meteo.py altitudes   # ≈ 1 à 2 heures : seulement
 ## 7. Mettre les fichiers dans l'app
 
 - **Le socle** : copie `meteo-sortie/meteo-socle.sqlite` dans le dossier `data-meteo` de l'app (crée-le à côté de `api.php` s'il n'existe pas). Il sera livré avec l'app à la prochaine fabrication (`npm run dist:mac`). Autre possibilité : l'importer comme un pack (`meteo-socle.lcmeteo`).
-- **Un pack** (`meteo-pack-complet.lcmeteo`, `meteo-pack-europe.lcmeteo`) : dans l'app, Maintenance → Données → « 🌦 Météo d'autrefois » → « ⤒ Importer le fichier… ». La fenêtre vérifie le fichier, montre ce qui va entrer, puis l'importe (avec « ↶ Annuler »). Le fichier peut ensuite être effacé du dossier `meteo-sortie`.
+- **Un pack** (`meteo-pack-complet.lcmeteo`, `meteo-pack-europe.lcmeteo`) : dans l'app, Réglages → Données → « 🌦 Météo d'autrefois » → « ⤒ Importer le fichier… ». La fenêtre vérifie le fichier, montre ce qui va entrer, puis l'importe (avec « ↶ Annuler »). Le fichier peut ensuite être effacé du dossier `meteo-sortie`.
 
 Ensuite, tu peux effacer le dossier `meteo-sortie` (il est gros).
 

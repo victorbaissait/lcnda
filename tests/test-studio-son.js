@@ -2,7 +2,7 @@
 process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
  * 🎚️ Studio son et ⚡ Son rapide (maquette « Studio son » validée) :   node tests/test-studio-son.js
- *  - réglage par défaut « Comme avant » (l'ancien « 🎧 Modifier le son »), nouveau design derrière le réglage de Maintenance ;
+ *  - réglage par défaut « Comme avant » (l'ancien « 🎧 Modifier le son »), nouveau design derrière son réglage (Réglages) ;
  *  - chaque effet du moteur commun mesuré sur un son fabriqué (énergie dans une bande de fréquences, crête, sonie, durée,
  *    fréquence la plus forte) : il change vraiment le son ;
  *  - rack non destructif, ↶ ↷ et historique, marqueurs et zones (enregistrés, reliés à une fiche, bloc « 🎧 On l'entend »),
@@ -146,7 +146,7 @@ const t = async (name, fn) => { try { await fn(); passed++; console.log('✓', n
             assert.equal(await p.$('dialog.h-aq[open]'), null); assert.ok(await p.$('dialog.h-avx[open] [data-au-studio]'));
             await closeAll();
         });
-        await t('Maintenance → Montage, retouche, mise en page et son → 🎧 Son : « Comme avant » choisi, et le nouveau design se choisit (gardé tout seul)', async () => {
+        await t('Réglages → Montage, retouche, mise en page et son → 🎧 Son : « Comme avant » choisi, et le nouveau design se choisit (gardé tout seul)', async () => {
             await p.evaluate(() => { window.LCNDA_APP.state.maintenanceTab = 'montage_prefs'; window.LCNDA_APP.setModule('maintenance'); });
             await p.waitForSelector('[data-mtp-audiodesign]', { timeout: 15000 });
             assert.equal(await p.inputValue('[data-mtp-audiodesign]'), 'classic');

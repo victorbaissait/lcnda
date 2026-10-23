@@ -1,5 +1,5 @@
 /* LCNDA — 🧩 « Cette personne était… » : la LISTE des personnes qui ont des profils (onglet Listes) et la rubrique de
- * Maintenance qui règle leurs pages (ordre, visibilité, largeur et couleur des sections ; ordre, visibilité et couleur des
+ * Réglages qui règle leurs pages (ordre, visibilité, largeur et couleur des sections ; ordre, visibilité et couleur des
  * profils ; modèles ; exception pour une personne ; pages personnalisées).
  *
  *  - Liste « profiles_list » : barre H10 (🔍, Filtrer ▾ par profil, groupe, nombre de profils, métier, réglage propre ;
@@ -7,7 +7,7 @@
  *    ouvre sa page (PF.openPage). Serveur : GET art&op=profile_people (lib/profils.php, profils_people).
  *    Pourquoi pas fusionnée avec « Métiers » : cette liste-là range des MÉTIERS (un texte) avec les fiches qui l'ont ;
  *    celle-ci range des PERSONNES avec leurs profils. Le métier est donc une rubrique de son menu Filtrer.
- *  - Maintenance → Apparence → Fiches personnes et animaux : section « FICHES PERSONNES · Cette personne était… (profils) »,
+ *  - Réglages → Apparence → Fiches personnes et animaux : section « FICHES PERSONNES · Cette personne était… (profils) »,
  *    même présentation que « Ordre et visibilité des blocs » (ext.designPanels). Les réglages sont ceux de la page
  *    (layout_prefs « global » et « person:<id> » : ppage, pfpages, page), donc repris dans « 💾 Réglages enregistrés ».
  *    Serveur : GET art&op=page_settings (profils_page_settings) ; écriture : art_write save_settings.
@@ -100,7 +100,7 @@
         paint();
     };
 
-    /* ═════════ 2. Maintenance : « Cette personne était… (profils) » ═════════ */
+    /* ═════════ 2. Réglages : « Cette personne était… (profils) » ═════════ */
     const WIDTHS = [['ligne', '1'], ['½', '1/2'], ['⅓', '1/3'], ['¼', '1/4'], ['⅔', '2/3'], ['¾', '3/4']];
     /** une « personne » qui a tous les profils de la base : pour montrer toutes les sections dans le réglage standard */
     const fakeStore = (data, keys, own = false) => ({pid: 0, name: 'toutes les pages', person: {profiles: keys.map(k => ({profile_key: k})), is_artist: keys.includes('artist') ? 1 : 0}, global: own ? {} : data, personSet: own ? data : null, items: [], of: () => [], get: () => null, people: []});

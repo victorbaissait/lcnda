@@ -1,5 +1,5 @@
 /**
- * 🗂️ Éditeur d'onglets (Maintenance → Éditeur d'onglets) : ses propres onglets dans la barre du haut, sans programmer.
+ * 🗂️ Éditeur d'onglets (Réglages → Éditeur d'onglets) : ses propres onglets dans la barre du haut, sans programmer.
  *  - une page de widgets, comme le tableau de bord : widgets de l'app, ses widgets, ses listes et ses graphiques
  *    (ajoutés depuis la colonne de gauche de l'onglet, ou ici) ;
  *  - ou un raccourci vers un écran de l'app (une liste, un diagramme, une statistique, un outil de maintenance…) ;
@@ -19,7 +19,7 @@
     const S = () => A().state;
     const isCurrent = token => token === S().workspaceToken && S().module === 'maintenance';
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
-    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|MAINTENANCE|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
     const newId = () => 'ct_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     const str = (v, n) => String(v ?? '').slice(0, n);
     const FILE_KIND = 'lcnda-tab';
@@ -39,7 +39,7 @@
             ['Diagrammes (Graphiques)', app.orderedGraphDiagramItems(true).map(([k, , l]) => ['graph:' + k, l])],
             ['Statistiques (Graphiques)', app.orderedGraphStatsItems(true).map(([k, , l]) => ['stat:' + k, l])],
             ...((ext.customStatItems?.() || []).length ? [['Mes graphiques (Graphiques)', ext.customStatItems().map(([k, l]) => ['stat:' + k, l])]] : []),
-            ['Maintenance', app.defaultMaintenanceTabs.map(([k, , l]) => ['maint:' + k, l])],
+            ['Réglages', app.defaultMaintenanceTabs.map(([k, , l]) => ['maint:' + k, l])],
         ];
     }
     /* ─── Une commune choisie : sa fiche de village ou sa monographie, avec une organisation propre à cet endroit ─── */
@@ -173,7 +173,7 @@
         if (open) { const t = tabs().find(x => x.id === open); if (t) return editTab({...t}, true); }
         const list = tabs();
         const kindText = t => t.kind === 'screen' ? `raccourci vers « ${esc(targetLabel(t.target))} »` : `${(t.widgets || []).length} widget${(t.widgets || []).length > 1 ? 's' : ''}`;
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Éditeur d’onglets', 'Crée tes propres onglets dans la barre du haut, sans rien programmer : une page de widgets comme le tableau de bord (widgets de l’app, tes widgets, tes listes, tes graphiques), ou un raccourci vers un écran de l’app. Pars de rien, d’un onglet existant ou d’un modèle.', '<button type="button" class="button" data-ct-new>＋ Nouvel onglet</button>')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('RÉGLAGES', 'Éditeur d’onglets', 'Crée tes propres onglets dans la barre du haut, sans rien programmer : une page de widgets comme le tableau de bord (widgets de l’app, tes widgets, tes listes, tes graphiques), ou un raccourci vers un écran de l’app. Pars de rien, d’un onglet existant ou d’un modèle.', '<button type="button" class="button" data-ct-new>＋ Nouvel onglet</button>')}
             <section class="maintenance-panel"><h3>Importer un onglet reçu</h3><p class="muted">Un fichier « .lcnda-onglet.json » envoyé par un proche : seule la mise en page est partagée, jamais les données.</p><input type="file" accept=".json,application/json" data-ct-import></section>
             ${list.length ? `<div class="h-records">${list.map((t, i) => `<article class="h-record"><header><div><strong>${esc(t.icon || '🗂️')} ${esc(t.name || 'Mon onglet')}</strong> <small>${kindText(t)}</small>${t.hidden ? ' <span class="collection-kind">masqué</span>' : ''}</div>
                     <span class="h-saved-tools"><button type="button" class="link-button" data-ct-edit="${esc(t.id)}">modifier</button><button type="button" class="link-button" data-ct-dup="${esc(t.id)}">dupliquer</button><button type="button" class="link-button" data-ct-hide="${esc(t.id)}">${t.hidden ? 'afficher' : 'masquer'}</button><button type="button" class="link-button" data-ct-del="${esc(t.id)}">supprimer</button></span></header>
@@ -199,7 +199,7 @@
             catch (error) { toast('Fichier d’onglet illisible : ' + error.message, 'error'); }
         });
     };
-    // Même réglage que la case de Maintenance → Apparence → « Ordre du menu principal »
+    // Même réglage que la case de Réglages → Apparence → « Ordre du menu principal »
     function menuHidden(id, hide) {
         let hidden = []; try { hidden = JSON.parse(localStorage.getItem('genealogie-menu-hidden') || '[]'); } catch (_) {}
         hidden = (Array.isArray(hidden) ? hidden : []).filter(k => k !== id); if (hide) hidden.push(id);
@@ -267,10 +267,10 @@
         await Promise.all([loadMyLists(), loadVillages()]); if (token !== S().workspaceToken) return;
         t.widgets = Array.isArray(t.widgets) ? t.widgets : [];
         const app = A();
-        const afterOptions = [['', 'à la fin (avant Maintenance)'], ...Object.entries(app.appModules).filter(([k]) => !['jeu', 'maintenance'].includes(k)).map(([k, v]) => [k, 'après « ' + v[1] + ' »'])];
+        const afterOptions = [['', 'à la fin (avant Réglages)'], ...Object.entries(app.appModules).filter(([k]) => !['jeu', 'maintenance'].includes(k)).map(([k, v]) => [k, 'après « ' + v[1] + ' »'])];
         const paint = () => {
             const known = new Map(catalog());
-            app.$('#workspace').innerHTML = `<section class="page collection-page h-ct-editor">${header('ÉDITEUR D’ONGLETS', existing ? `Modifier « ${t.name || 'Mon onglet'} »` : 'Nouvel onglet', 'Le nom et l’icône apparaissent dans la barre du haut. Pour le ranger ou le masquer parmi les autres onglets : Maintenance → Apparence → « Ordre du menu principal ».', '<button type="button" class="button secondary" data-ct-back>← Retour</button>')}
+            app.$('#workspace').innerHTML = `<section class="page collection-page h-ct-editor">${header('ÉDITEUR D’ONGLETS', existing ? `Modifier « ${t.name || 'Mon onglet'} »` : 'Nouvel onglet', 'Le nom et l’icône apparaissent dans la barre du haut. Pour le ranger ou le masquer parmi les autres onglets : Réglages → Apparence → « Ordre du menu principal ».', '<button type="button" class="button secondary" data-ct-back>← Retour</button>')}
                 <section class="maintenance-panel"><h3>1. L’onglet</h3><div class="form-grid">
                     <label>Nom<input data-ct="name" value="${esc(t.name || '')}" maxlength="40" placeholder="Ma Bretagne"></label>
                     <label>Icône<input data-ct="icon" value="${esc(t.icon || '')}" maxlength="16" class="h-be-icon" placeholder="🗂️"></label>
@@ -302,7 +302,7 @@
                 paint();
                 setTimeout(() => { const last = [...ws.querySelectorAll('.h-ct-widgets > li')].pop(); last?.scrollIntoView({block: 'center'}); last?.querySelector('input:not([type=hidden]),textarea')?.focus(); }, 0);
             });
-            ws.querySelectorAll('[data-ct-go]').forEach(b => b.addEventListener('click', () => { if (String(t.name || '').trim() || t.widgets.length) { const clean = cleanTab({...t, name: t.name || 'Mon onglet'}), list = tabs(), i = list.findIndex(x => x.id === clean.id); if (i >= 0) list[i] = clean; else list.push(clean); save(list); toast('Onglet gardé : reviens-y dans Maintenance → Éditeur d’onglets.'); } S().maintenanceTab = b.dataset.ctGo; A().setModule('maintenance'); }));
+            ws.querySelectorAll('[data-ct-go]').forEach(b => b.addEventListener('click', () => { if (String(t.name || '').trim() || t.widgets.length) { const clean = cleanTab({...t, name: t.name || 'Mon onglet'}), list = tabs(), i = list.findIndex(x => x.id === clean.id); if (i >= 0) list[i] = clean; else list.push(clean); save(list); toast('Onglet gardé : reviens-y dans Réglages → Éditeur d’onglets.'); } S().maintenanceTab = b.dataset.ctGo; A().setModule('maintenance'); }));
             ws.querySelectorAll('[data-ct-width]').forEach(el => el.addEventListener('change', () => { t.widgets[Number(el.dataset.ctWidth)].width = el.value; }));
             // réglages d'une pièce : écran, personne, hauteur, colonne de gauche ; titre et texte d'une note
             const cfgOf = i => (t.widgets[i].config ||= {});

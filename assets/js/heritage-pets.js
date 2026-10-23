@@ -18,7 +18,7 @@
     const personLink = (id, name) => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>` : esc(name || '');
     const SPECIES_ICON0 = {chien: '🐕', chat: '🐈', cheval: '🐎', lapin: '🐇', rongeur: '🐹', oiseau: '🐦', poisson: '🐟', reptile: '🐢', ferme: '🐄', sauvage: '🦊', marin: '🐬', autre: '🐾'};
     const SPECIES0 = {chien: 'Chien', chat: 'Chat', cheval: 'Cheval, poney, âne', lapin: 'Lapin', rongeur: 'Rongeur (cochon d’Inde, hamster…)', oiseau: 'Oiseau', poisson: 'Poisson', reptile: 'Reptile, tortue', ferme: 'Animal de la ferme (vache, chèvre, mouton…)', sauvage: 'Mammifère sauvage (loup, cerf, singe…)', marin: 'Animal marin (dauphin, baleine, phoque…)', autre: 'Autre'};
-    /* Réglages des animaux (Maintenance → Réglages des animaux) : espèces (les siennes, ordre, cachées), parties et champs du formulaire, pour tous ou par espèce */
+    /* Réglages des animaux (Réglages → Animaux) : espèces (les siennes, ordre, cachées), parties et champs du formulaire, pour tous ou par espèce */
     const PREFS_KEY = 'genealogie-pet-prefs';
     const EDITOR_SECS = [['pe1', '🪪 Identité'], ['pe2', '🔖 Identification'], ['pe3', '🌳 Parents'], ['pe4', '🏠 Maîtres'], ['pe5', '🏆 Titres'], ['pe6', '🩺 Santé'], ['pe7', '📏 Mesures'], ['pe8', '📅 Vie'], ['pe9', '📖 Histoire'], ['pe10', '📷 Photos']];
     // tous les champs du formulaire, partie par partie, dans l'ordre de l'app (nom et espèce : toujours montrés)
@@ -55,7 +55,7 @@
         return {...pr, speciesOrder: [...(Array.isArray(v.speciesOrder) ? v.speciesOrder : []).filter(k => keys.includes(k)), ...keys.filter(k => !(v.speciesOrder || []).includes(k))], speciesHidden: (Array.isArray(v.speciesHidden) ? v.speciesHidden : []).filter(k => keys.includes(k)), cfg};
     }
     const savePetPrefs = pr => { try { localStorage.setItem(PREFS_KEY, JSON.stringify(pr)); } catch (_) { toast('Réglages trop lourds pour être gardés.', 'error'); } refreshSpecies(); };
-    // ensembles de réglages enregistrés (Maintenance → Réglages des animaux → 💾)
+    // ensembles de réglages enregistrés (Réglages → Animaux → 💾)
     const PRESETS_KEY = 'genealogie-pet-presets';
     const presets = () => { try { const v = JSON.parse(localStorage.getItem(PRESETS_KEY) || '[]'); return Array.isArray(v) ? v.filter(x => x && typeof x.name === 'string' && x.prefs && typeof x.prefs === 'object').slice(0, 50) : []; } catch (_) { return []; } };
     const savePresets = list => { try { localStorage.setItem(PRESETS_KEY, JSON.stringify(list.slice(0, 50))); } catch (_) { toast('Ensembles trop lourds pour être gardés.', 'error'); } };
@@ -386,7 +386,7 @@
                 <section id="pe8"><h3>📅 Sa vie</h3><div class="form-grid"><div class="span-2" data-pf="events">${listBox('events')}</div>${area('character', 'Caractère', 3, 'joueur, peureux de l’orage…')}${area('habits', 'Habitudes, jeux, tours appris', 3)}${mine('pe8')}</div></section>
                 <section id="pe9"><h3>📖 Son histoire et nos souvenirs</h3><div class="form-grid">${area('story', 'Son histoire', 6, 'Comment il est arrivé dans la famille…')}${area('memories', 'Souvenirs, anecdotes', 6)}${onFiche ? '<p class="muted span-2" data-pf="notes">🗒️ Ses notes et ses sources : dans le bloc « Notes » de sa fiche complète.</p>' : area('notes', 'Notes', 3) + area('sources', 'Sources (certificat, pedigree, carnet de santé…)', 2)}${mine('pe9')}</div></section>
                 <section id="pe10"><h3>📷 Photos et documents</h3><div class="form-grid"><div class="span-2" data-pf="media">${onFiche ? '<p class="muted">📷 Ses photos et documents (pedigree papier, carnet de santé…) : dans le bloc « Médias » de sa fiche complète.</p>' : (ext.mediaEditorHtml ? ext.mediaEditorHtml('pet', p?.id || 0, p?.media || [], [['', 'Photos', 'image/*,video/*'], ['document', 'Documents (pedigree, carnet, certificat)', 'image/*,application/pdf']]) : '') + (p?.id ? '' : '<p class="muted">Les recueils se relient à l’animal une fois enregistré (en bas de sa fiche).</p>')}</div>${mine('pe10')}</div></section>
-                ${pr.customSecs.map(cs => `<section id="${cs.k}"><h3>${esc(cs.icon + ' ' + cs.label)}</h3><div class="form-grid">${mine(cs.k) || '<p class="empty-line span-2"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Pas encore de champ : Maintenance → Réglages des animaux → « ＋ Champ ».</span></p>'}</div></section>`).join('')}
+                ${pr.customSecs.map(cs => `<section id="${cs.k}"><h3>${esc(cs.icon + ' ' + cs.label)}</h3><div class="form-grid">${mine(cs.k) || '<p class="empty-line span-2"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Pas encore de champ : Réglages → Animaux → « ＋ Champ ».</span></p>'}</div></section>`).join('')}
             </div>`,
             onOpen: dlg => {
                 const body = dlg.querySelector('.h-dialog-body') || dlg;
@@ -425,7 +425,7 @@
     }
     ext.openPetEditor = openEditor;
 
-    /* ═════════ Maintenance → Réglages des animaux : espèces, parties et champs du formulaire (pour tous ou par espèce) ═════════ */
+    /* ═════════ Réglages → Animaux : espèces, parties et champs du formulaire (pour tous ou par espèce) ═════════ */
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.pet_prefs = async token => {
         const st = S(); let pr = petPrefs(), scope = '*';
@@ -436,7 +436,7 @@
             if (token !== st.workspaceToken) return;
             const own = scope !== '*' && !!cfgOf(scope), c = cleanCfg(cfgOf(scope) || pr.cfg['*'], pr);
             const spRow = k => { const mine = pr.species.find(x => x.k === k); return `<div class="h-pet-lrow" data-sp="${esc(k)}"><input type="checkbox" data-sp-show ${pr.speciesHidden.includes(k) ? '' : 'checked'} title="Proposer cette espèce">${mine ? `<input class="h-pp-icon" data-sp-icon value="${esc(mine.icon)}" readonly title="Choisir une icône" aria-label="Icône"><input data-sp-label value="${esc(mine.label)}" maxlength="60">` : `<span>${esc((SPECIES_ICON0[k] || '🐾') + ' ' + SPECIES0[k])}</span>`}<button type="button" class="h-bt" data-sp-up title="Monter">↑</button><button type="button" class="h-bt" data-sp-down title="Descendre">↓</button>${mine ? '<button type="button" class="h-bt" data-sp-del title="Supprimer cette espèce">🗑</button>' : ''}</div>`; };
-            ws.innerHTML = `<section class="page h-pp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Réglages des animaux</h2><p>Les espèces proposées (et les tiennes), l’ordre des parties du formulaire d’un animal, et les champs montrés : pour tous les animaux, ou à part pour une espèce (ex. l’UELN seulement pour les chevaux). Un champ caché garde ce qui y était écrit.</p></div>
+            ws.innerHTML = `<section class="page h-pp"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>Animaux</h2><p>Les espèces proposées (et les tiennes), l’ordre des parties du formulaire d’un animal, et les champs montrés : pour tous les animaux, ou à part pour une espèce (ex. l’UELN seulement pour les chevaux). Un champ caché garde ce qui y était écrit.</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-pp-allexport title="Un fichier .json avec les réglages (espèces, catégories, champs, formulaire) et tous les réglages enregistrés">⤓ Tout exporter</button><label class="button secondary" title="Reprendre un fichier « Tout exporter »">⤒ Tout importer<input type="file" accept=".json,application/json" data-pp-allimport hidden></label></div></header>
                 <div data-presets-slot="animaux"></div>
                 <div class="h-pp-cols"><section class="maintenance-panel"><h3>🐾 Espèces</h3><p class="muted">Coche celles qu’on propose ; range-les avec ↑ ↓.</p><div data-pp-species>${pr.speciesOrder.map(spRow).join('')}</div>

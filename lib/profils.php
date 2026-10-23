@@ -198,7 +198,7 @@ function profils_people(PDO $pdo): array
     return ['people' => $people, 'defs' => profils_defs($pdo)];
 }
 
-/** les réglages des pages (Maintenance) : le standard, les réglages enregistrés, les personnes qui ont un réglage propre */
+/** les réglages des pages (Réglages) : le standard, les réglages enregistrés, les personnes qui ont un réglage propre */
 function profils_page_settings(PDO $pdo): array
 {
     art_ensure($pdo);

@@ -259,7 +259,7 @@
         return new Promise(resolve => {
             const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-gallery';
             const paint = () => {
-                // l'ordre, les types cachés et les groupes à soi : Maintenance → Types de diagrammes (heritage-diagram-kinds.js)
+                // l'ordre, les types cachés et les groupes à soi : Réglages → Types de diagrammes (heritage-diagram-kinds.js)
                 const all = TEMPLATES(), groups = {};
                 if (ext.diagramCatalog) ext.diagramCatalog(all).forEach(([g, items]) => { groups[g] = items.map(t => [t, all.indexOf(t)]); });
                 else all.forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });
@@ -343,7 +343,7 @@
             const k = spec.kind, people = k === 'timeline' || k === 'chrono', stats = TABLE_KINDS.includes(k) || STAT_KINDS.includes(k) || !!kindOf().pairs, kApp = kindOf().app;
             const tf = DGO()?.treeFields(k) || [], tq = DGO() ? DGO().norm({...(spec.live?.tq || {}), live: !!spec.live?.tree}) : null;
             // une sorte peut apporter ses propres données de l'arbre : kind.app = {sources: [[clé, nom]], fill: async (spec, clé) => spec}
-            return `<div class="h-dg-app">${kApp?.sources?.length ? `<h4>🌳 Des données de mon arbre</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main).</p><label>${stats ? 'Données' : 'Graphique'}<select data-dg-kapp>${kApp.sources.map(([key, label]) => `<option value="${esc(key)}" ${spec.live?.tree === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label>${tf.length ? `<div data-dgo-tree>${DGO().html(tq, {fields: tf, kind: k, period: 'birth'})}</div>` : ''}<button type="button" class="button small" data-dg-kappgo>Prendre ces données</button>` : ''}${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Maintenance → Éditeur de graphiques).</p>
+            return `<div class="h-dg-app">${kApp?.sources?.length ? `<h4>🌳 Des données de mon arbre</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main).</p><label>${stats ? 'Données' : 'Graphique'}<select data-dg-kapp>${kApp.sources.map(([key, label]) => `<option value="${esc(key)}" ${spec.live?.tree === key ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select></label>${tf.length ? `<div data-dgo-tree>${DGO().html(tq, {fields: tf, kind: k, period: 'birth'})}</div>` : ''}<button type="button" class="button small" data-dg-kappgo>Prendre ces données</button>` : ''}${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Réglages → Éditeur de graphiques).</p>
                 <label>Graphique<select data-dg-src><option value="">Chargement…</option></select></label><div data-dgo-stats></div><button type="button" class="button small" data-dg-srcgo>Prendre ces chiffres</button>` : ''}
                 ${people ? `<h4>👥 Des personnes de la base</h4><p class="muted">${k === 'timeline' ? 'Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté).' : 'Leurs naissances, mariages et décès deviennent des dates de la frise.'}</p>
                 <div class="h-pr-addlink" data-dg-pq>${window.LCNDA_PICKER.pickerField({name: 'dg_addp', kind: 'person'})}</div>` : ''}
@@ -461,7 +461,7 @@
         }
         /* rattacher à des personnes, enquêtes, parties d'enquête, projets de l'Atelier */
         const lchip = l => `<span class="h-pr-lchip" data-type="${esc(l.type)}" data-id="${Number(l.id)}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)} <button type="button" data-dg-unlink aria-label="Retirer">×</button></span>`;
-        const linksHtml = () => `<div class="h-pr-links"><p class="muted">Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Maintenance → Éditeur de widgets), un bloc de fiche, la mise en page.</p><span class="h-pr-linkchips">${rec.links.map(lchip).join('') || '<small class="muted">Rattaché à rien pour l’instant.</small>'}</span>
+        const linksHtml = () => `<div class="h-pr-links"><p class="muted">Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Réglages → Éditeur de widgets), un bloc de fiche, la mise en page.</p><span class="h-pr-linkchips">${rec.links.map(lchip).join('') || '<small class="muted">Rattaché à rien pour l’instant.</small>'}</span>
             <div class="h-pr-addlink" data-dg-lpk style="flex:1 1 320px;min-width:min(100%,320px)">${window.LCNDA_PICKER.pickerField({name: 'dg_link', kind: 'person,investigation', placeholder: 'Une personne, une enquête…'})}</div>
             <span class="h-pr-addlink"><input type="search" data-dg-lq placeholder="ou une partie d’enquête, un projet de l’Atelier…" autocomplete="off"><span class="h-pr-lsugg" hidden></span></span></div>`;
         let invCache = null, projCache = null;
@@ -672,7 +672,7 @@
             <div class="h-dg-pagetools"><button type="button" class="button small secondary" data-dg-pexpdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter</button></div>
             <div class="card h-dg-big"><div class="h-dg-svg">${await svgOf(d)}</div></div>
             ${d.links?.length ? `<div class="h-dg-linked"><span class="section-label">Rattaché à</span>${d.links.map(l => `<button type="button" class="h-pr-lchip" data-dg-golink="${esc(l.type)}:${l.id}:${l.inv || 0}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)}</button>`).join('')}</div>` : ''}
-            <p class="muted h-dg-where">Pour le poser ailleurs : <b>Maintenance → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>.</p></section>`;
+            <p class="muted h-dg-where">Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>.</p></section>`;
         bindPage(ws, d);
     };
     function bindPage(ws, d) {
@@ -694,7 +694,7 @@
     }
     /** un widget « diagramme » tout fait, posé sur le tableau de bord */
     function addToDashboard(d) {
-        if (!ext.addDiagramWidget) return toast('Passe par Maintenance → Éditeur de widgets.', 'error');
+        if (!ext.addDiagramWidget) return toast('Passe par les Réglages → Éditeur de widgets.', 'error');
         ext.addDiagramWidget(d);
     }
     async function importFile(file) {

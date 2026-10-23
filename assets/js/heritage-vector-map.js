@@ -107,7 +107,7 @@
     // calques préparés (du bas vers le haut)
     const LAYERS = [['relief', 'Relief'], ['eau', 'Eau'], ['vegetation', 'Végétation'], ['parcelles', 'Parcelles'], ['routes', 'Routes et chemins'], ['bati', 'Bâti'], ['limites', 'Limites'], ['noms', 'Noms'], ['genealogie', 'Généalogie'], ['habillage', 'Habillage (échelle, légende…)']];
     const lineOf = k => LINES.find(l => l[0] === k), zoneOf = k => ZONES.find(z => z[0] === k), labelOf = k => LABELS.find(l => l[0] === k), decoOf = k => DECOS.find(d => d[0] === k);
-    /* ═════════ La palette réglable (Maintenance → Montage, retouche, mise en page et son) : groupes et éléments rangés, montrés, cachés ; éléments à soi ═════════ */
+    /* ═════════ La palette réglable (Réglages → Montage, retouche, mise en page et son) : groupes et éléments rangés, montrés, cachés ; éléments à soi ═════════ */
     const PKEY = 'genealogie-vector-map-palette', HEXRX = /^#[0-9a-f]{6}$/i, DRX = /^[MmLlHhVvCcSsQqTtAaZz0-9eE.,\s+-]{1,60000}$/;
     const readP = () => { try { const v = JSON.parse(localStorage.getItem(PKEY) || '{}'); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch (_) { return {}; } };
     const writeP = v => { try { localStorage.setItem(PKEY, JSON.stringify(v)); } catch (_) { toast('Plus de place pour enregistrer ce réglage.', 'error'); } };
@@ -167,7 +167,7 @@
         box.addEventListener('change', e => { if (e.target.matches('input[type=checkbox]')) { savePaletteFrom(box); onChange?.(); } });
     }
     function openPaletteEditor(onChange) {
-        ext.openDialog({eyebrow: 'MODE PLAN', title: '⚙️ Les éléments du plan', wide: true, submitLabel: 'Fermer', body: '<p class="muted">Range les groupes et les éléments avec ↑ ↓, décoche ce que tu ne veux pas voir, crée tes éléments. C’est gardé tout de suite (et aussi dans Maintenance → Montage, retouche, mise en page et son).</p><div data-vme-box></div>',
+        ext.openDialog({eyebrow: 'MODE PLAN', title: '⚙️ Les éléments du plan', wide: true, submitLabel: 'Fermer', body: '<p class="muted">Range les groupes et les éléments avec ↑ ↓, décoche ce que tu ne veux pas voir, crée tes éléments. C’est gardé tout de suite (et aussi dans Réglages → Montage, retouche, mise en page et son).</p><div data-vme-box></div>',
             onOpen: dg => { const box = dg.querySelector('[data-vme-box]'), redraw = () => { box.innerHTML = paletteEditorHtml(); }; redraw(); bindPaletteEditor(box, redraw, onChange);
                 // 💾 réglages enregistrés : l'ordre, ce qui est montré, et les éléments à soi (passent d'un ordinateur à l'autre)
                 const pbox = ext.vectorPresets?.({tool: 'plan', label: 'cette palette du plan', toolName: 'la palette du plan', get: () => JSON.parse(JSON.stringify(readP())),
@@ -482,7 +482,7 @@
                 <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="layers" title="Relief, Eau, Végétation, Parcelles, Routes, Bâti, Limites, Noms, Généalogie, Habillage">🗂 Créer les calques d’un plan</button><label class="ui-toggle" title="Chaque objet va tout seul dans son calque (Routes, Eau, Bâti…)"><input type="checkbox" data-vm="auto" ${m.auto !== false ? 'checked' : ''}><i></i>Ranger tout seul</label></div>
                 <p class="muted vx-mhelp">Choisis ce que tu dessines, puis : <b>traits et zones</b> — un clic par point, double-clic ou Entrée pour finir (les courbes se lissent toutes seules) ; <b>bâtiment</b> — glisse un rectangle ; <b>symbole, nom</b> — un clic.</p>
                 ${paletteGroups().map(g => paletteHtml(g)).join('')}
-                <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="paletteCfg" title="Ranger, montrer ou cacher les groupes et les éléments ; créer les tiens (aussi dans Maintenance → Montage, retouche, mise en page et son)">⚙️ Ranger les éléments</button><button type="button" class="button small secondary" data-vm-cmd="newItem">＋ Créer un élément</button></div>
+                <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="paletteCfg" title="Ranger, montrer ou cacher les groupes et les éléments ; créer les tiens (aussi dans Réglages → Montage, retouche, mise en page et son)">⚙️ Ranger les éléments</button><button type="button" class="button small secondary" data-vm-cmd="newItem">＋ Créer un élément</button></div>
                 <h4>⏳ Curseur du temps</h4><p class="muted vx-mhelp">Donne à un objet ses années (onglet Propriétés) : en choisissant une année, ne reste que ce qui existait alors.</p>
                 <div class="vx-row"><label class="ui-toggle"><input type="checkbox" data-vm="yon" ${m.year ? 'checked' : ''}><i></i>Montrer l’année</label><b data-vm-yshow>${m.year || ''}</b></div>
                 <input type="range" data-vm="year" min="${y0}" max="${y1}" value="${m.year || y1}" ${m.year ? '' : 'disabled'} style="width:100%">

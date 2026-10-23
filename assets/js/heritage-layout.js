@@ -1,5 +1,5 @@
 /**
- * 📐 Atelier de mise en page (Maintenance → Export propre → Livre de famille → « 📐 Mise en page ») : un petit InDesign
+ * 📐 Atelier de mise en page (Réglages → Export propre → Livre de famille → « 📐 Mise en page ») : un petit InDesign
  * pour faire le livre de sa généalogie. Des documents faits de pages (simples ou en vis-à-vis), de gabarits (folios,
  * en-têtes), de calques ; des blocs de texte (caractère, paragraphe, styles, colonnes, habillage), des formes
  * (rectangle, ellipse, polygone, étoile, ligne, plume), des cadres d'images, un nuancier et des dégradés, des contours,
@@ -116,7 +116,7 @@
     }
     const textToHtml = (t, ps) => String(t || '').split(/\n{2,}|\r?\n/).filter(x => x.trim() !== '').map(x => `<p${ps ? ` data-ps="${ps}"` : ''}>${esc(x)}</p>`).join('') || `<p${ps ? ` data-ps="${ps}"` : ''}><br></p>`;
 
-    /* ═════════════ Réglages par défaut (Maintenance : « Réglages par défaut » de l'atelier) ═════════════ */
+    /* ═════════════ Réglages par défaut (Réglages : « Réglages par défaut » de l'atelier) ═════════════ */
     const DEFAULTS0 = {size: 'A4', w: 210, h: 297, facing: true, mt: 20, mb: 24, mi: 22, mo: 17, columns: 1, gutter: 5, bleed: 3, slug: 0, titleFont: 'Didot', bodyFont: 'Georgia', bodySize: 11, lead: 15, accent: '#7a2e2e', paper: '#ffffff', startPage: 1, folio: true};
     function defaults() {
         let v = {}; try { v = JSON.parse(localStorage.getItem(DEF_KEY) || '{}') || {}; } catch (_) {}
@@ -782,7 +782,7 @@
         ext.tbApply?.(dl, 'layout');
         window.LCNDA_UI?.harmonizeTopbar?.(dl.querySelector('.ly-top')); // E1 : ✓ Enregistré · ⚙️ · ⤓ Exporter · 💾 · ⛶ · ×
         window.LCNDA_UI?.editorRail?.(dl.querySelector('.ly-tools'), {breaks: ['[data-ly-tool=text]', '[data-ly-tool=rect]', '[data-ly-tool=hand]', '.ly-fs']}); // K19
-        ext.editorKeysAttach?.(dl, 'layout'); // ⌨️ raccourcis à soi // menus, outils, onglets et barre du bas rangés ou cachés à sa façon (⚙️ Personnaliser, ou Maintenance)
+        ext.editorKeysAttach?.(dl, 'layout'); // ⌨️ raccourcis à soi // menus, outils, onglets et barre du bas rangés ou cachés à sa façon (⚙️ Personnaliser, ou Réglages)
         const $ = q => dl.querySelector(q), board = $('[data-ly-board]'), canvas = $('[data-ly-canvas]'), pbody = $('[data-ly-pbody]');
         bindFontPick(pbody);
         // le panneau de droite s'élargit ou se rétrécit en tirant sa bordure (gardé pour la prochaine fois)

@@ -5,7 +5,7 @@
  * dépouillements, les cotes des visites faites, les pistes d'enquête, les battues et les demandes.
  *  - barre H10 (UI.listBar « listes:research_journal ») : chercher, filtrer (sorte, résultat, personne, service, commune), Liste | Fiches, trier ;
  *  - ⤓ Exporter en CSV (cellules passées par csvCell) ;
- *  - bloc de fiche « 🔍 Déjà cherché » (réglable et masquable comme les autres : Maintenance → Apparence → blocs des fiches) ;
+ *  - bloc de fiche « 🔍 Déjà cherché » (réglable et masquable comme les autres : Réglages → Apparence → blocs des fiches) ;
  *  - ext.journal.bindAlready(form, critères) : le message ⚠️ « Déjà dans ton suivi : … » pendant la saisie (dépouillement, demande, cote de visite) ;
  *  - ext.journal.resultSelect / badge : le résultat simple (Trouvé, Rien trouvé, En partie, Pas consulté) et sa pastille K8.
  */
@@ -192,7 +192,7 @@
     });
     const scan = () => document.querySelectorAll('[data-rj-person]:not([data-rj-done])').forEach(fillPersonBlock);
     new MutationObserver(() => scan()).observe(document.documentElement, {childList: true, subtree: true});
-    // le bloc se range avec les autres (Maintenance → Apparence → blocs des fiches) : juste après « Enquêtes »
+    // le bloc se range avec les autres (Réglages → Apparence → blocs des fiches) : juste après « Enquêtes »
     const addBlock = () => { const L = A()?.defaultPersonBlocks; if (!Array.isArray(L) || L.some(b => b[0] === 'already_searched')) return; const i = L.findIndex(b => b[0] === 'investigations'); L.splice(i < 0 ? L.length : i + 1, 0, ['already_searched', '🔍 Déjà cherché (journal des recherches)']); };
     const boot = () => { if (!A()) return; addBlock(); addList(); };
     boot(); document.addEventListener('DOMContentLoaded', boot, {once: true});

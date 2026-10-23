@@ -151,7 +151,7 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && e.target.matches?.('.h-bio-edit')) { const host = e.target.closest('[data-bio-host]'); const d = cache.get(Number(host.dataset.bioHost)); if (d) { e.stopPropagation(); paint(host, d); } } }, true);
     const scan = () => document.querySelectorAll('[data-bio-host]:not([data-bio-done])').forEach(h => { h.dataset.bioDone = '1'; load(h); });
     new MutationObserver(scan).observe(document.documentElement, {childList: true, subtree: true});
-    // le nom du bloc dans « Maintenance → blocs des fiches » et le menu des widgets
+    // le nom du bloc dans « Réglages → blocs des fiches » et le menu des widgets
     const rename = () => { const L = A()?.defaultPersonBlocks; const b = Array.isArray(L) && L.find(x => x[0] === 'bio'); if (b) b[1] = '📖 Biographie'; };
     const boot = () => { if (A()) rename(); };
     boot(); document.addEventListener('DOMContentLoaded', boot, {once: true});

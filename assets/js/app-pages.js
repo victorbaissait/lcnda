@@ -4,7 +4,7 @@
  *   à droite : bouton principal bleu, 2 boutons au plus, « ⋯ » pour le reste, puis ⭐.
  * - Tout en-tête de page (.page-header) de #workspace est rangé pareil, même s’il n’a pas été fait par UI.pageHeader
  *   (UI.harmonizePageHeader : mêmes éléments, mêmes écouteurs ; les boutons sont déplacés, jamais recréés).
- * - UI.autoSave(...) : en Maintenance, chaque changement est gardé tout de suite ; « ✓ Enregistré » à droite du titre
+ * - UI.autoSave(...) : dans les Réglages, chaque changement est gardé tout de suite ; « ✓ Enregistré » à droite du titre
  *   et un message H7 avec « ↶ Annuler » pour le dernier changement.
  */
 (() => {
@@ -17,7 +17,7 @@
     const fold = t => String(t || '').toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     /* ═════ K5 — où suis-je ? (sur-titre et icône) ═════ */
-    const MODULE_NAMES = {dashboard: 'Tableau de bord', personnes: 'Personnes', animaux: 'Animaux', graphiques: 'Graphiques', carte: 'Carte', listes: 'Listes', chronologie: 'Chronologie', recherche: 'Recherche', enquetes: 'Enquêtes', fiches: 'Fiches', adn: 'ADN', comparaison: 'Comparaison', maintenance: 'Maintenance'};
+    const MODULE_NAMES = {dashboard: 'Tableau de bord', personnes: 'Personnes', animaux: 'Animaux', graphiques: 'Graphiques', carte: 'Carte', listes: 'Listes', chronologie: 'Chronologie', recherche: 'Recherche', enquetes: 'Enquêtes', fiches: 'Fiches', adn: 'ADN', comparaison: 'Comparaison', maintenance: 'Réglages'};
     function navOf(module) {
         const b = document.querySelector('.main-nav .nav-item.is-active') || document.querySelector(`.main-nav .nav-item[data-module="${module}"]:not([data-board])`);
         const t = b ? [...b.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent).join('').trim() : '';
@@ -112,7 +112,7 @@
             let eb = head.querySelector('.eyebrow');
             const mod = st.module || '', had = (eb?.textContent || '').trim(), nav = place.where;
             let want = head.hasAttribute('data-ph-where') ? (head.getAttribute('data-ph-where') || nav) : nav;
-            // hors Listes et Maintenance : un sur-titre qui dit déjà l’endroit reste ; en Recherche, la sorte de recherche suit « Recherche · »
+            // hors Listes et Réglages : un sur-titre qui dit déjà l’endroit reste ; en Recherche, la sorte de recherche suit « Recherche · »
             if (!head.hasAttribute('data-ph-where') && mod !== 'listes' && mod !== 'maintenance' && had) {
                 if (fold(had).startsWith(fold(nav))) want = had;
                 else if (mod === 'recherche') want = `${nav} · ${had}`;
@@ -127,7 +127,7 @@
                 else if (place.icon && (!first || first.nodeType === 3 || first.nodeType === 1) && !(h2.textContent || '').trim().match(EMOJI_RE)) { ico.textContent = place.icon; h2.prepend(ico); }
             }
         }
-        // Maintenance : le titre est le nom de la page dans le menu (« Étiquettes », pas « Catégoriser sans modifier les actes »)
+        // Réglages : le titre est le nom de la page dans le menu (« Étiquettes », pas « Catégoriser sans modifier les actes »)
         if (h2 && st.module === 'maintenance' && !detail && !head.hasAttribute('data-ph-title')) {
             const name = itemOf('maintenance', st.maintenanceTab), ico = h2.querySelector(':scope > .ui-ph-ico');
             const rest = [...h2.childNodes].filter(n => n !== ico);
@@ -180,15 +180,15 @@
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watchWs); else watchWs();
 
-    /* ═════ K2 — Réglages enregistrés tout seuls (Maintenance) ═════
-     * Une seule écoute sur #workspace en Maintenance : après chaque changement fait dans la page (case, menu, curseur, glisser, bouton),
+    /* ═════ K2 — Réglages enregistrés tout seuls (Réglages) ═════
+     * Une seule écoute sur #workspace dans les Réglages : après chaque changement fait dans la page (case, menu, curseur, glisser, bouton),
      * on lit les réglages gardés sur cet ordinateur ; s’ils ont changé : « ✓ Enregistré » à droite du titre + « ↶ Annuler » (H7).
      * Une page qui garde un brouillon (Réglages des tableaux, des animaux, Montage…, ADN) donne sa fonction save() avec UI.autoSave. */
     const VOLATILE = /^(lcnda-listbar:|lcnda-sort:|lcnda-view:)|ui-sections|reglages-ouverts|last-route|-ui-v\d|ui-state|recent|-tab$|-open$|warned|dashboard-recent|-groups$|toolbar-sets/;
     const snap = () => { const o = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && !VOLATILE.test(k)) o[k] = localStorage.getItem(k); } } catch (_) {} return o; };
     const write = v => Object.entries(v).forEach(([k, x]) => { try { if (x == null) localStorage.removeItem(k); else localStorage.setItem(k, x); } catch (_) {} });
     let page = {token: -1, base: null, save: null, redraw: null, label: '', timer: 0};
-    // en Maintenance : une page = un onglet ; ailleurs (ex. ADN → ⚙️ Réglages) : la page qui a appelé UI.autoSave, tant qu’elle est affichée
+    // dans les Réglages : une page = un onglet ; ailleurs (ex. ADN → ⚙️ Réglages) : la page qui a appelé UI.autoSave, tant qu’elle est affichée
     const pageKey = () => { const st = A().state || {}; if (st.module === 'maintenance') return `${st.maintenanceTab}`; return page.root && page.root.isConnected && page.mod === st.module ? page.key : ''; };
     function fresh() { const k = pageKey(); if (page.key !== k) page = {key: k, base: snap(), save: null, redraw: null, label: '', timer: 0}; return page; }
     /** UI.autoSave(élément, {save, redraw}) : la page de réglages garde tout de suite (save() lit l’écran et enregistre ; redraw() relit et redessine après ↶ Annuler) */

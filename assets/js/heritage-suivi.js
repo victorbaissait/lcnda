@@ -563,7 +563,7 @@
         ws.querySelectorAll('[data-sv-dropzone]').forEach(z => { if (z.dataset.svBound || !UI().dropZone) return; z.dataset.svBound = '1'; z.appendChild(UI().dropZone({accept: '.gpx,.kml,.csv,.tsv,.txt,.json,.geojson', multiple: false, text: '📁 Glisse ici un trajet (GPX, KML, CSV), colle-le (⌘V) ou choisis-le', hint: 'Balises de la faune sauvage (Movebank…) ou colliers (Tractive, Weenect, Invoxia, Kippy…).', onFiles: f => importGps({files: f})})); });
         ws.querySelectorAll('[data-sv-meteo]').forEach(async el => {
             try { const r = await api('meteo_point', {lat: el.dataset.lat, lon: el.dataset.lon, date: el.dataset.date, time: el.dataset.time || '', detail: '0'});
-                if (!r.installed) { el.innerHTML = '<div class="sv-off is-disabled" title="Aucun fichier de météo installé.">🌦 Pas encore de fichiers de météo : Maintenance → Météo d’autrefois.</div>'; return; }
+                if (!r.installed) { el.innerHTML = '<div class="sv-off is-disabled" title="Aucun fichier de météo installé.">🌦 Pas encore de fichiers de météo : Réglages → Météo d’autrefois.</div>'; return; }
                 const res = r.result || {};
                 if (!res.ok) { el.innerHTML = A().empty(res.why === 'out' ? 'Pas de météo pour ce lieu (hors des données installées).' : 'Pas de relevé connu pour ce jour-là près d’ici.', {icon: '🌦'}); return; }
                 const lk = ext.meteo.look ? ext.meteo.look(res) : {icon: '🌦', title: 'Météo trouvée', desc: ''};
@@ -1064,7 +1064,7 @@
         if (!host || !tabHidden() || host.querySelector('.sv-hint')) return;
         try { if (localStorage.getItem(HINT_KEY)) return; } catch (_) { return; }
         const box = document.createElement('div'); box.className = 'sv-hint ui-notice ui-notice-info'; box.setAttribute('role', 'status');
-        box.innerHTML = `<span class="ui-notice-ico" aria-hidden="true">ℹ️</span><span><b>Tu suis des animaux sauvages ou un chat avec un collier GPS ?</b> L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Maintenance → Apparence → Onglets du haut. <button type="button" class="link-button" data-sv-show-tab>↗ Afficher l’onglet</button></span><button type="button" class="icon-button small" data-sv-hint-x aria-label="Fermer">×</button>`;
+        box.innerHTML = `<span class="ui-notice-ico" aria-hidden="true">ℹ️</span><span><b>Tu suis des animaux sauvages ou un chat avec un collier GPS ?</b> L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Réglages → Apparence → Onglets du haut. <button type="button" class="link-button" data-sv-show-tab>↗ Afficher l’onglet</button></span><button type="button" class="icon-button small" data-sv-hint-x aria-label="Fermer">×</button>`;
         const head = host.querySelector('.page-header'); head ? head.after(box) : host.prepend(box);
         box.querySelector('[data-sv-hint-x]').addEventListener('click', () => { try { localStorage.setItem(HINT_KEY, '1'); } catch (_) {} box.remove(); });
         box.querySelector('[data-sv-show-tab]').addEventListener('click', () => { showTab(); try { localStorage.setItem(HINT_KEY, '1'); } catch (_) {} box.remove(); });

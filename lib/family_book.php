@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * 📖 Livre de famille (Maintenance → Export propre) : on choisit les parties du livre et leur ordre (couverture, préface,
+ * 📖 Livre de famille (Réglages → Export propre) : on choisit les parties du livre et leur ordre (couverture, préface,
  * chiffres, arbre, fiches, chronologie, lieux, index, mot de la fin), ce que montre chaque fiche et dans quel ordre
  * (biographie, famille, repères, photos, notes), l'allure (style, police, format de page, couleur) et le format du
  * fichier : page à imprimer ou PDF, HTML, Word, OpenDocument, ePub (liseuse), Markdown, texte, tableau CSV des personnes.

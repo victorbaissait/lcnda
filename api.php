@@ -784,6 +784,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-design-custom-presets', // ✎ Mes thèmes (un design peut en choisir un)
         'genealogie-avatar-shapes', // formes des avatars (app-apparence.js)
         'genealogie-person-header', // en-tête des fiches (app-apparence.js)
+        'genealogie-topbar-buttons', // boutons en haut à droite : ordre et boutons cachés (app-apparence.js)
         'genealogie-audio-quick-design', // 🎧 ⚡ Son rapide : « Comme avant » ou le nouveau design (heritage-audio-quick.js)
         'genealogie-audio-fx-presets', // 🎧 réglages du son enregistrés (Son rapide et Studio son)
     ];
@@ -12991,17 +12992,17 @@ function htr_recognize_media(PDO $pdo,array $data): array
         $modelId = safe_text($data['model'] ?? 'fr-actes') ?: 'fr-actes';
         $language = safe_text($data['language'] ?? '');
         $model = htr_model_by_id($modelId);
-        // Modèle et Kraken : installés dans le dossier des données (Maintenance → Reconnaissance d'écriture), sinon dans l'application
+        // Modèle et Kraken : installés dans le dossier des données (Réglages → Reconnaissance d'écriture), sinon dans l'application
         $modelPath = htr_model_file($model);
         if (!$modelPath) {
-            throw new RuntimeException('Le modèle « ' . (string)($model['label'] ?? $modelId) . ' » n’est pas encore installé : Maintenance → Reconnaissance d’écriture (HTR) → « Installer », ou ajoute le fichier ' . basename((string)$model['model']) . ' à la main.');
+            throw new RuntimeException('Le modèle « ' . (string)($model['label'] ?? $modelId) . ' » n’est pas encore installé : Réglages → Reconnaissance d’écriture (HTR) → « Installer », ou ajoute le fichier ' . basename((string)$model['model']) . ' à la main.');
         }
 
         $script = __DIR__ . '/scripts/htr_recognize.py';
         if (!is_file($script)) throw new RuntimeException('Script HTR local introuvable.');
         $venvPython = htr_venv_python() ?? '';
         if ($venvPython === '' && !trim((string) @shell_exec('command -v kraken 2>/dev/null'))) {
-            throw new RuntimeException('La reconnaissance d’écriture n’est pas encore installée : Maintenance → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois).');
+            throw new RuntimeException('La reconnaissance d’écriture n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois).');
         }
         $scriptArgs = ['--image',$imagePath,'--model',$modelPath,'--language',$language ?: (string)($model['language'] ?? ''),'--engine',(string)($model['engine'] ?? 'kraken')];
         if (!empty($model['segment_direction'])) {

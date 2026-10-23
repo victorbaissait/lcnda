@@ -8,7 +8,7 @@
 .lc-pf-link { border: var(--line); padding: 5px 10px; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; background: var(--white, #fff); color: var(--ink); cursor: pointer; font-family: inherit; }
 .lc-pf-link:hover, .lc-pf-link:focus-visible { background: var(--blue); color: #fff; }
 
-/* le réglage (Maintenance → Fiches personnes et animaux) */
+/* le réglage (Réglages → Fiches personnes et animaux) */
 .lc-hh-set { border: 0; padding: 0; margin: 0 0 14px; display: grid; gap: 6px; min-width: 0; }
 .lc-hh-set legend { font-weight: 800; font-size: 13px; margin-bottom: 6px; padding: 0; }
 .lc-hh-radio { display: flex !important; align-items: flex-start; gap: 8px; font-size: 14px; cursor: pointer; }
@@ -69,6 +69,20 @@
 .lc-shp-demo .lc-shp-xl { width: 96px; height: 96px; font-size: 26px; }
 .lc-shp-preview p { font-size: 12px; margin: 10px 0 0; }
 
+/* ── Boutons en haut à droite (Réglages → Apparence) ── */
+.topbar-meta > [data-tb-off] { display: none !important; }
+#lc-tb-order .order-row.has-visibility { display: flex !important; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 8px; }
+#lc-tb-order .order-row > b { flex: 1 1 160px; min-width: 0; text-align: left; overflow-wrap: anywhere; }
+#lc-tb-order .order-row > b small { display: block; font-weight: 400; font-size: 12px; margin-top: 2px; }
+#lc-tb-order .order-row > .page-actions { margin-left: auto; flex-wrap: wrap; gap: 4px; }
+.lc-tb-prev { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; border: 2px solid var(--ink); background: var(--white, #fff); padding: 10px 12px; box-shadow: 4px 4px 0 rgba(5, 93, 255, .25); font-size: 11px; color: var(--muted, #666); }
+.lc-tb-btn { display: inline-flex; align-items: center; justify-content: center; gap: 5px; width: 32px; height: 30px; border: 1px solid var(--ink); background: var(--paper, #fff); color: var(--ink); font-size: 15px; flex: none; }
+.lc-tb-btn svg { width: 18px; height: 18px; }
+.lc-tb-btn.is-wide { width: auto; padding: 0 8px; }
+.lc-tb-btn b { font-size: 12px; }
+.lc-tb-dot { width: 8px; height: 8px; border-radius: 50%; background: #2fb36d; margin-left: 4px; flex: none; }
+.lc-tb-count { white-space: nowrap; }
+
 @media (max-width: 760px) {
     .lc-shp-grid { grid-template-columns: 1fr; }
     .lc-shp-drawrow { grid-template-columns: 1fr; }
@@ -91,3 +105,4 @@
 :root[data-theme="dark"] .lc-shp-canvas .g2 { stroke: #4a4a4a; }
 :root[data-theme="dark"] .lc-shp-canvas .pt:not(.last) { fill: #1e1e1e; }
 :root[data-theme="dark"] .lc-shp-preview { background: #1a1a1a; }
+:root[data-theme="dark"] .lc-tb-prev, :root[data-theme="dark"] .lc-tb-btn { background: #242424; color: var(--ink); }

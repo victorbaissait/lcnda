@@ -186,7 +186,7 @@
                 <div class="modal-actions"><button type="button" class="button small secondary" data-au-projects title="Rouvrir un son en cours de travail">📂 Projets…</button><span class="h-mt-projname" data-au-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé">💾 Garder dans les médias…</button></div>`});
         ext.tbApply?.(dl, 'audio');
         const $ = s => dl.querySelector(s), cv = $('[data-avx-canvas]'), g = cv.getContext('2d');
-        // ⚡ Son rapide, trois choix (Maintenance → … → 🎧 Son) : « Comme avant » (par défaut) garde la présentation d'origine — boutons des outils
+        // ⚡ Son rapide, trois choix (Réglages → … → 🎧 Son) : « Comme avant » (par défaut) garde la présentation d'origine — boutons des outils
         // avec leur nom, zoom ⤢ Tout · 🔍 Sélection · − · + en haut, « Garder dans les médias… » en bas ; « Comme avant, rangé » (« harmo ») :
         // le même éditeur avec la colonne d'outils de 36 px (K19), la barre du bas commune et son zoom (K18), « 💾 Enregistrer ▾ » ; « Nouveau » : heritage-audio-quick.js.
         let harmo = false; try { harmo = localStorage.getItem('genealogie-audio-quick-design') === 'harmo'; } catch (_) {}
@@ -525,7 +525,7 @@
     const dimsOf = el => ({vw: el?.videoWidth || el?.naturalWidth || 0, vh: el?.videoHeight || el?.naturalHeight || 0});
     const FONTS_V = [['Georgia, serif', 'Georgia'], ['Helvetica, Arial, sans-serif', 'Helvetica'], ['"Times New Roman", serif', 'Times'], ['"Courier New", monospace', 'Courier'], ['"Brush Script MT", cursive', 'Manuscrite'], ['Impact, sans-serif', 'Impact']];
     let uid = 0; const nid = p => p + (++uid) + Date.now().toString(36).slice(-3);
-    /* Réglages du montage (Maintenance → Montage, retouche, mise en page et son) : disposition et enregistrement par défaut */
+    /* Réglages du montage (Réglages → Montage, retouche, mise en page et son) : disposition et enregistrement par défaut */
     const MT_KEY = 'genealogie-montage-prefs';
     const MT_SIZES = [[0, 'Comme la vidéo'], [2160, '4K (2160 p)'], [1080, 'Full HD (1080 p)'], [720, 'HD (720 p)'], [480, '480 p'], [360, '360 p (léger)']];
     const MT_QUALITY = [[2, 'Légère (petit fichier)'], [5, 'Normale'], [8, 'Haute'], [14, 'Très haute (gros fichier)']];
@@ -1157,7 +1157,7 @@
         const chk = (k, label, on) => `<label class="ui-toggle"><input type="checkbox" data-mt-k="${k}" ${on ? 'checked' : ''}><i></i>${label}</label>`;
         // les réglages du son : pour un morceau (afx) ou pour tout le film (fx)
         const soundFx = (pre, f) => `${chk(pre + '.clarity', '🗣️ Voix plus nette', f.clarity)}${chk(pre + '.noise', '🧹 Moins de souffle et de grondement', f.noise)}${rng(pre + '.bass', 'Graves', -12, 12, 1, f.bass || 0, ' dB')}${rng(pre + '.treble', 'Aigus', -12, 12, 1, f.treble || 0, ' dB')}${chk(pre + '.mono', '🎧 Mono (le même son des deux côtés)', f.mono)}`;
-        const speedHtml = c => `${rng('speed', 'Vitesse', 0.1, 10, 0.05, spd(c), ' ×')}<label class="h-avx-row">Vitesse exacte <input data-unit="×" type="number" class="h-mt-num" min="0.1" max="10" step="0.05" value="${spd(c)}" data-mt-k="speedn"></label><div class="h-mt-quick">${montagePrefs().speeds.map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}<button type="button" data-mt-speededit title="Choisir les vitesses de ces boutons (aussi dans Maintenance → Montage)">✎</button></div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
+        const speedHtml = c => `${rng('speed', 'Vitesse', 0.1, 10, 0.05, spd(c), ' ×')}<label class="h-avx-row">Vitesse exacte <input data-unit="×" type="number" class="h-mt-num" min="0.1" max="10" step="0.05" value="${spd(c)}" data-mt-k="speedn"></label><div class="h-mt-quick">${montagePrefs().speeds.map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}<button type="button" data-mt-speededit title="Choisir les vitesses de ces boutons (aussi dans Réglages → Montage)">✎</button></div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
         const clipSound = c => `<details class="h-mt-isec h-mt-sfx" ${c.afx && Object.values(c.afx).some(Boolean) ? 'open' : ''}><summary><b>🔊 Son de ce morceau</b></summary>${soundFx('afx', c.afx || {})}<div class="h-mt-quick"><button type="button" data-mt-afxall title="Mettre ces réglages du son sur tous les morceaux et sons du projet">Appliquer à tous les sons du projet</button><button type="button" data-mt-afxreset>↺ Remettre comme au départ</button></div>${P.sources[c.s]?.kind === 'audio' && ext.openAudioStudio ? '<p><button type="button" class="button small secondary" data-mt-studio title="Nettoyer ce son dans le Studio son (rack d’effets, spectre…) : il revient propre ici">🎚️ Ouvrir dans le Studio son</button></p>' : ''}<p class="muted">Pour tout le film d’un coup : onglet 🔊 Son.</p></details>`;
         const kbHtml = c => `<label class="h-avx-row">Effet Ken Burns <select data-mt-k="kb">${KB.map(([k, l]) => `<option value="${k}" ${(c.kb ?? (P.kbAuto ? 'auto' : '')) === k ? 'selected' : ''}>${l}</option>`).join('')}</select><span data-help="Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran."></span></label>`;
         const imgDur = c => `<label class="h-avx-row">Durée à l’écran <input data-ui-duration="s" type="number" class="h-mt-num" min="0.1" max="3600" step="0.1" value="${Math.round(clen(c) * 10) / 10}" data-mt-k="imgdur"></label><div class="h-mt-quick">${[2, 3, 5, 8, 10, 15].map(v => `<button type="button" data-mt-imgdur="${v}">${v} s</button>`).join('')}</div>`;
@@ -1859,7 +1859,7 @@
         }
         $('[data-mt-saveproj]').addEventListener('click', () => saveProject());
         $('[data-avx-name]')?.addEventListener('input', () => { dirty = true; showProjName(); });
-        // ⤓ Exporter (E3, la fenêtre commune) : un fichier MP4 / WebM avec les réglages de départ (Maintenance), une copie dans les médias si on veut ;
+        // ⤓ Exporter (E3, la fenêtre commune) : un fichier MP4 / WebM avec les réglages de départ (Réglages), une copie dans les médias si on veut ;
         // « 💾 Dans les médias… » garde la fenêtre complète (plusieurs formats d'image, nouvelle version…)
         $('[data-mt-export]').addEventListener('click', async () => {
             eng?.pause();
@@ -1885,7 +1885,7 @@
             };
             formats.push({id: 'mp3', label: '🎵 Son seul (MP3)', hint: 'musiques, voix et son des vidéos', ext: 'mp3', run: aud('mp3')}, {id: 'wav', label: '🎚 Son seul (WAV)', hint: 'sans perte', ext: 'wav', run: aud('wav')});
             formats.push({id: 'srt', label: '💬 Sous-titres', hint: 'fichier .srt', ext: '', run: async () => exportSubs()}, {id: 'base', label: '💾 Dans les médias…', hint: 'plusieurs formats, nouvelle version', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
-            await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, value: MP2.fmt, info: `${fmt(T, false)} · rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité et images par seconde : Maintenance → Montage`, formats});
+            await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, value: MP2.fmt, info: `${fmt(T, false)} · rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité et images par seconde : Réglages → Montage`, formats});
         });
         $('[data-mt-projects]').addEventListener('click', () => projectsDialog({current: projId, onOpen: async pr => { if (dirty && !await A().confirmBox('Les modifications du montage seront perdues.', {title: 'Ouvrir un autre projet sans enregistrer celui-ci ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; dirty = false; dl.close(); await openProject(pr.id, onDone); }}));
         document.addEventListener('keydown', e => { if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } }, {signal: keyAc.signal});
@@ -1937,7 +1937,7 @@
                 <label>Qualité ${sel2('quality', MT_QUALITY, MP2.quality)}</label><label>Images par seconde ${sel2('fps', MT_FPS.map(f => [f, f + ' images/s']), MP2.fps)}</label>
                 <label>Son ${sel2('abr', [[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], MP2.abr)}</label></div>
                 <div class="h-mt-fmts"><span>Formats (un fichier par format coché, l’un après l’autre) :</span>${ASPECTS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="fmt_${k || 'src'}" ${(P.aspect || '') === k ? 'checked' : ''}> ${l}</label>`).join('')}<label class="checkbox-line"><input type="checkbox" name="blurbars" ${P.blurBars ? 'checked' : ''}> bandes floues plutôt que noires</label></div>
-                <p class="muted">Réglages de départ : Maintenance → Montage, retouche, mise en page et son.</p></fieldset>`;
+                <p class="muted">Réglages de départ : Réglages → Montage, retouche, mise en page et son.</p></fieldset>`;
             ext.openDialog({eyebrow: 'EXPORTER LA VIDÉO', title: projName || media.title || 'Montage', wide: true, submitLabel: '⤓ Exporter',
                 body: `<p class="h-cfg-explain">Le montage est rejoué pour être enregistré : cela prend <b>${fmt(T, false)}</b> (sa durée). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))).replace('<fieldset class="h-rc-modes"><legend>Comment', exportHtml + '<fieldset class="h-rc-modes"><legend>Comment').replace('<input type="hidden" name="mode" value="new">', exportHtml + '<input type="hidden" name="mode" value="new">'),
                 onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { const ct = d.querySelector('[data-avx-copytitle]'); if (ct) ct.hidden = d.querySelector('[name=mode]:checked')?.value !== 'copy'; })),
@@ -1981,7 +1981,7 @@
     }
 
     /** Point d'entrée : un média {id, filename, title, media_type}. */
-    /* ═════════ Maintenance → Montage, retouche, mise en page et son : disposition, enregistrement, boutons, plein écran ═════════ */
+    /* ═════════ Réglages → Montage, retouche, mise en page et son : disposition, enregistrement, boutons, plein écran ═════════ */
     ext.maintenance = ext.maintenance || {};
     const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son'], ['audio-quick', '⚡ Son rapide'], ['audio-studio', '🎚️ Studio son'], ['layout', '📐 Mise en page (livres de famille)'], ['vector', '✒️ Dessin vectoriel'], ['house', '🏠 Maison (plan et 3D)'], ['decortree', '🌳 Arbre décoratif'], ['keynote', '🎤 Présentation (Keynote)']];
     const FULL_EDITORS = [...EDITORS.filter(e => !['house', 'decortree'].includes(e[0])), ['museum', '🏛️ Musée de famille (Aménager)']], FULL_DEFAULT = {layout: true, museum: true, keynote: true}; // l'atelier de mise en page s'ouvre en plein écran si on n'a rien choisi
@@ -2018,7 +2018,7 @@
             const groups = (defs?.groups || []).map(g => { const order = cfg.order?.[g.key] || [], hidden = cfg.hidden?.[g.key] || []; const items = [...order.map(k => g.items.find(i => i[0] === k)).filter(Boolean), ...g.items.filter(i => !order.includes(i[0]))];
                 return `<section><h4>${esc(g.label)}</h4><ol class="h-pet-layout" data-g="${esc(g.key)}">${items.map(([k, l]) => `<li class="h-pet-lrow" data-k="${esc(k)}"><input type="checkbox" ${hidden.includes(k) ? '' : 'checked'} title="Montrer"><span>${esc(l)}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('')}</ol></section>`; }).join('');
             const edName = (EDITORS.find(e => e[0] === which) || EDITORS[0])[1];
-            ws.innerHTML = `<section class="page h-mtp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Montage, retouche, mise en page et son</h2><p>La disposition du montage vidéo, l’enregistrement des vidéos par défaut, les boutons et options de chaque éditeur (montrés, cachés, rangés), tes raccourcis clavier dans chaque outil et le plein écran.</p></div>
+            ws.innerHTML = `<section class="page h-mtp"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>Montage, retouche, mise en page et son</h2><p>La disposition du montage vidéo, l’enregistrement des vidéos par défaut, les boutons et options de chaque éditeur (montrés, cachés, rangés), tes raccourcis clavier dans chaque outil et le plein écran.</p></div>
                 </header>
                 <div class="h-mtp-cols">
                 <div class="h-mtp-stack">
@@ -2067,9 +2067,9 @@
                     <div data-presets-slot="toolbar"></div>
                     <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ». Les ensembles ci-dessus sont ceux de « ${esc(edName)} ».</p>
                     ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>↺ Remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : which === 'vector' ? 'le dessin vectoriel (Listes → Outils de modification → ✒️ Dessin vectoriel)' : which === 'house' ? 'le plan d’une maison (Listes → 🏠 Maisons de famille)' : which === 'decortree' ? 'l’arbre décoratif (Listes → Outils de modification → 🌳 Arbre décoratif → ＋)' : which === 'keynote' ? 'une présentation (Listes → Outils de modification → 🎞️ Présentation et diaporama → ＋ Nouveau → Présentation)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
-                <div class="h-ek-panel h-mtp-keys"><h4>⌨️ Raccourcis de « ${esc(edName)} »</h4><div data-ek-box></div><p class="muted"><button type="button" class="button small secondary" data-mtp-allkeys>⌨️ Tous les raccourcis de l’app (Maintenance → Raccourcis clavier)</button></p></div>
+                <div class="h-ek-panel h-mtp-keys"><h4>⌨️ Raccourcis de « ${esc(edName)} »</h4><div data-ek-box></div><p class="muted"><button type="button" class="button small secondary" data-mtp-allkeys>⌨️ Tous les raccourcis de l’app (Réglages → Raccourcis clavier)</button></p></div>
                 </section></div></section>`;
-            // les raccourcis suivent l'éditeur choisi (même liste que Maintenance → Raccourcis clavier)
+            // les raccourcis suivent l'éditeur choisi (même liste que Réglages → Raccourcis clavier)
             try { localStorage.setItem('genealogie-editor-shortcuts-tab', which === 'video' ? 'montage' : which); } catch (_) {}
             ext.editorKeysPanel?.(ws.querySelector('[data-ek-box]'));
             { const box = ws.querySelector('[data-dtp-box]'); if (box) ext.decorTreePrefs.bind(box, () => { box.innerHTML = ext.decorTreePrefs.html(); }); } // 🌳 arbre décoratif
@@ -2132,7 +2132,7 @@
                 replace: i => { const list = op.list(); return put(list, i, {...list[i], date: today(), v: op.now()}); },
                 rename: (i, name) => { const list = op.list(); return put(list, i, {...list[i], name: cleanName(name) || list[i].name}); },
                 duplicate: i => { const list = op.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, date: today()}); if (!op.save(list.slice(-60))) return false; toast(`Copie « ${name} » créée.`); },
-                exportOne: i => { const x = op.list()[i]; if (x) { downloadJson(`lcnda-reglage-${op.outil()}-${slugOf(x.name)}.json`, {lcnda: 'reglage', outil: op.outil(), nom: x.name, version: 1, donnees: x.v}); toast('Fichier prêt : il s’importe dans Maintenance → Montage, retouche, mise en page et son (« ⤒ Importer »).'); } return false; },
+                exportOne: i => { const x = op.list()[i]; if (x) { downloadJson(`lcnda-reglage-${op.outil()}-${slugOf(x.name)}.json`, {lcnda: 'reglage', outil: op.outil(), nom: x.name, version: 1, donnees: x.v}); toast('Fichier prêt : il s’importe dans Réglages → Montage, retouche, mise en page et son (« ⤒ Importer »).'); } return false; },
                 remove: i => { const list = op.list(), x = list[i]; A().undoLocalChange(`Ensemble « ${x.name} » supprimé`, [key === 'layout' ? LAYOUT_SETS : TB_SETS], () => { list.splice(i, 1); op.save(list); }, () => { if (fr.isConnected) fr.refresh(); }); },
                 importOne: async () => { await importSet(op); return false; }});
             slot.replaceWith(fr);
