@@ -216,3 +216,17 @@ dialog.modal.sw-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 .sw-fbtn { border: 0; border-left: 1px solid var(--sw-line); background: none; min-width: 34px; cursor: pointer; font-size: 15px; font-weight: 700; }
 .sw-fbtn:hover, .sw-fbtn.is-open { background: var(--sw-bg); color: var(--sw-blue); }
 .sw-checks { display: grid; gap: 4px; }
+/* 🧭 navigateurs : la barre du navigateur imité, la liste */
+.sw-device.has-chrome { display: flex; flex-direction: column; }
+.sw-device.has-chrome .sw-frame { flex: 1; height: auto; min-height: 0; }
+.sw-device .swc-chrome { flex: none; background: #f1f3f4 !important; color: #222; }
+.swc-panel .swc-list { list-style: none; padding: 0; margin: 8px 0; display: grid; gap: 6px; }
+.swc-item { border: 1.5px solid var(--line, #d9dce2); padding: 7px 10px; cursor: pointer; line-height: 1.4; }
+.swc-item:hover, .swc-item:focus-visible { border-color: var(--blue-bright, #055dff); outline: 0; background: #f3f6ff; }
+.swc-where { color: var(--muted, #6b7280); font-size: 12px; }
+.swc-advice { font-size: 12.5px; }
+.swc-good summary { cursor: pointer; color: var(--muted, #6b7280); margin: 6px 0; }
+.swc-empty { font-weight: 600; }
+.sw-cp-targets { margin: 8px 0; }
+.sw-cp-t { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; }
+.sw-cp-t input { width: 64px; }

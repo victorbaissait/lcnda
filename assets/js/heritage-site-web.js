@@ -190,6 +190,7 @@
                             <span class="sw-layout" data-sw-layout><button type="button" class="button small secondary" data-sw-swap title="Inverser l’aperçu et le code" aria-label="Inverser l’aperçu et le code">⇄</button><button type="button" class="button small secondary" data-sw-orient title="Côte à côte, ou l’un au-dessus de l’autre" aria-label="Côte à côte ou l’un au-dessus de l’autre">⬓</button></span>
                             <div class="segmented sw-devices" role="tablist" aria-label="Taille de l’écran" data-sw-devices></div>
                             <span class="spacer"></span>
+                            <button type="button" class="button small secondary" data-sw-cmd="compat" title="🧭 Navigateurs : ce qui pourrait ne pas marcher sur Safari, Firefox, un vieux téléphone… et imiter un navigateur" aria-label="Navigateurs">🧭</button>
                             <button type="button" class="button small secondary" data-sw-cmd="publish" title="Mettre le site en ligne : Netlify, GitHub Pages ou ton hébergement (FTP sécurisé)">📤 Publier</button>
                             <button type="button" class="button small secondary" data-sw-cmd="browser" title="Ouvrir cette page dans un onglet du navigateur, comme un visiteur (isolée de l’app)">↗ Aperçu</button>
                         </div>
@@ -222,6 +223,7 @@
             if (matchMedia('(max-width: 760px)').matches) this.$('[data-sw-leftpane]').hidden = true; // téléphone : le panneau s'ouvre par la colonne d'outils
             this.bind();
             this.paintLeft(); this.paintPages(); this.paintPanel(); this.applyView(); this.applyDevice(); this.setMode('select', true);
+            this.imitate = ext.siteCompat?.BROWSERS.some(b => b.id === pref('imitate', '')) ? pref('imitate', '') : ''; if (this.imitate) this.setImitate(this.imitate);
             this.reload();
             api('website_render', {blocks: '[]'}).then(r => { if (r?.live && typeof r.live === 'object' && !Array.isArray(r.live)) { this._live = r.live; this.pushHtml(); } if (r?.css && !this.blocksCss) { this.blocksCss = r.css; this.pushCss(); } }).catch(() => {}); // styles des blocs, fonds des cartes interactives
             fetch(document.querySelector('script[src*="site-carte-vive"]')?.src || 'assets/js/site-carte-vive.js?v=2').then(r => (r.ok ? r.text() : '')).then(t => { if (t && !this.carteJs) { this.carteJs = t; if (this.frame) this.reload(); } }).catch(() => {}); // la carte interactive bouge aussi ici // les styles des blocs (menu…), même sans bloc de la généalogie
@@ -246,6 +248,7 @@
                 Affichage: () => [...[['visual', '✨ Visuel'], ['split', '◫ Visuel et code'], ['code', '</> Code']].map(([v, l]) => ({label: l, checked: this.view === v, run: () => this.setView(v)})), '-',
                     {icon: '⇄', label: 'Inverser l’aperçu et le code', run: () => this.setLayout({swap: !this.swap})}, {icon: '⬓', label: this.orientNow() === 'row' ? 'L’un au-dessus de l’autre' : 'Côte à côte', run: () => this.setLayout({orient: this.orientNow() === 'row' ? 'col' : 'row'})}, '-',
                     ...this.bps().map(b => ({icon: b.icon, label: `${b.name} (${b.width} px)`, checked: this.device === b.id && !this.freeW, run: () => this.setDevice(b.id)})), {icon: '⚙', label: 'Gérer les écrans (@media)…', run: () => this.bpDialog()}, '-',
+                    ...(ext.siteCompat ? [{icon: '🧭', label: 'Navigateurs : vérifier le site…', run: () => this.compatDialog()}, ...[{id: '', name: 'Aucun (l’aperçu seul)', icon: '▭'}, ...ext.siteCompat.BROWSERS].map(b => ({icon: b.icon, label: b.id ? `Imiter ${b.name}` : b.name, checked: (this.imitate || '') === b.id, run: () => this.setImitate(b.id)})), '-'] : []),
                     {label: 'Fichiers en onglets (comme Phoenix Code)', checked: this.ftStyle === 'tabs', run: () => this.setFtStyle('tabs')}, {label: 'Fichiers en trois boutons (HTML / CSS / JS)', checked: this.ftStyle !== 'tabs', run: () => this.setFtStyle('simple')}, '-',
                     {icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => { this.zoomMode = 'fit'; this.fit(); }}, {label: '100 % (taille réelle)', shortcut: '⌘1', run: () => { this.zoomMode = 'manual'; this.setZoom(1); }}, '-',
                     {icon: '⟳', label: 'Relire les blocs de la généalogie', run: () => { this.blockCache.clear(); this.reload(); }}],
@@ -266,6 +269,7 @@
                 if (c.swCmd === 'export') return this.exportDialog();
                 if (c.swCmd === 'browser') return this.openBrowser();
                 if (c.swCmd === 'publish') return this.publishDialog();
+                if (c.swCmd === 'compat') return this.compatDialog();
                 if (c.swMode) return this.setMode(c.swMode);
                 if (c.swLeft) { const pane = this.$('[data-sw-leftpane]'); if (b.closest('.sw-rail') && this.left === c.swLeft && !pane.hidden) { pane.hidden = true; return; } this.left = c.swLeft; setPref('left', this.left); this.paintLeft(); pane.hidden = false; return; }
                 if (b.matches('[data-sw-view-toggle]')) return this.setView(this.view === 'visual' ? 'split' : 'visual');
@@ -421,6 +425,7 @@
             const csp = `default-src 'none'; img-src data: blob: https: ${origin}; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src data: https://fonts.gstatic.com; script-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'; object-src 'none'`;
             const safe = s => String(s).replace(/<\/(style|script)/gi, '<\\/$1');
             return `<!doctype html><html lang="${esc(this.site.settings.lang || 'fr')}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="${esc(csp)}">`
+                + (this.imitate && ext.siteCompat ? `<script data-lcb>try{Object.defineProperty(navigator,'userAgent',{get:function(){return ${JSON.stringify(ext.siteCompat.ua(this.imitate)).replace(/</g, '\\u003c')};}});}catch(e){}<\/script>` : '')
                 + `<style id="lcb-theme">${safe(this.themeFull())}</style><style id="lcb-user">${safe(this.cssFor())}</style><style id="lcb-bridge">${k.BRIDGE_CSS}</style></head><body>${this.fillBlocks(this.pageSrc())}`
                 + `<script data-lcb>${k.BRIDGE}<\/script>${this.carteJs ? `<script data-lcb>${safe(this.carteJs)}<\/script>` : ''}${play ? [this.site.js, ...this.filesFor('js').map(f => f.content)].filter(x => x.trim()).map(x => `<script data-lcb>${safe(x)}<\/script>`).join('') : ''}</body></html>`;
         }
@@ -528,6 +533,50 @@
             const on = this.bps().slice(1).filter(b => mqWidth(b.query, this.freeW)).map(b => b.icon).join(' ');
             tag.hidden = false; tag.textContent = `${this.freeW} px${on ? ` · ${on}` : ''}`;
             this.setZoom(this.zoom); this.paintDevices(); this.whereText();
+        }
+        /** 🧭 imiter un navigateur : sa barre de fenêtre au-dessus de l'aperçu, et son User-Agent pour tes scripts (▶ Tester) */
+        setImitate(id) {
+            this.imitate = id || ''; setPref('imitate', this.imitate);
+            this.devbox.querySelector('.swc-chrome')?.remove();
+            if (this.imitate && ext.siteCompat) this.devbox.insertAdjacentHTML('afterbegin', ext.siteCompat.chrome(this.imitate, {url: `mon-site.fr/${pageFile(this.page())}`, title: this.page().title || this.page().name}));
+            this.devbox.classList.toggle('has-chrome', !!this.imitate); this.reload();
+            if (this.imitate) { const b = ext.siteCompat.BROWSERS.find(x => x.id === this.imitate), n = this.compatScan().filter(r => r.browsers.some(x => x.id === this.imitate)).length; toast(`${b.icon} Comme dans ${b.name}${n ? ` : ${plural(n, 'point')} à vérifier (🧭 Navigateurs)` : ' : rien à signaler'}. L’aperçu reste celui de l’app : pour voir le vrai, ↗ Aperçu dans ce navigateur.`); }
+        }
+        compatFiles() {
+            return {html: this.site.pages.map(p => ({name: pageFile(p), text: p.html})).concat(this.site.files.filter(f => f.kind === 'html' || f.kind === 'php').map(f => ({name: f.path, text: f.content}))),
+                css: [{name: 'style.css', text: this.site.css}, ...this.site.files.filter(f => f.kind === 'css').map(f => ({name: f.path, text: f.content}))],
+                js: [{name: 'script.js', text: this.site.js}, ...this.site.files.filter(f => f.kind === 'js').map(f => ({name: f.path, text: f.content}))]};
+        }
+        compatTargets() { const t = pref('compatTargets', null); return t && typeof t === 'object' ? t : {}; }
+        compatScan() { return ext.siteCompat ? ext.siteCompat.scan(this.compatFiles(), {targets: this.compatTargets()}) : []; }
+        /** 🧭 Navigateurs : la liste des fonctions qui risquent de ne pas marcher ; un clic va à la ligne */
+        compatDialog() {
+            const C = ext.siteCompat; if (!C) return toast('La vérification des navigateurs n’est pas chargée.', 'error');
+            const targets = () => ({...C.DEFAULT_TARGETS, ...this.compatTargets()});
+            const body = () => `<div class="sw-row"><span>Imiter dans l’aperçu :</span>${[{id: '', name: 'Aucun', icon: '▭'}, ...C.BROWSERS].map(b => `<button type="button" class="sw-chip${(this.imitate || '') === b.id ? ' is-active' : ''}" data-cp-imit="${b.id}">${esc(b.icon)} ${esc(b.name)}</button>`).join('')}</div>
+                <details class="sw-cp-targets"><summary>Navigateurs visés (versions les plus anciennes à prendre en charge)</summary><div class="sw-row">${C.BROWSERS.map(b => { const v = targets()[b.id]; return `<label class="sw-cp-t">${esc(b.icon)} ${esc(b.name)}<input type="number" min="0" step="1" value="${v === false || v == null ? '' : v}" data-cp-target="${b.id}" placeholder="—" title="Vide : ne pas vérifier ce navigateur"></label>`; }).join('')}<button type="button" class="button small secondary" data-cp-reset>↺ Les 2 dernières années</button></div></details>
+                <div data-cp-list>${C.panelHtml(this.compatScan(), {targets: this.compatTargets()})}</div>
+                <p class="sw-hint">Les versions viennent d’une liste intégrée à l’app (comme caniuse.com, sans internet). Pour voir le site en vrai : ↗ Aperçu, puis ouvre l’adresse dans le navigateur voulu.</p>`;
+            ext.openDialog({eyebrow: 'MON SITE WEB', title: '🧭 Le site dans les navigateurs', wide: true, submitLabel: 'Fermer', body: body(),
+                onOpen: d => {
+                    const repaint = () => { d.querySelector('[data-cp-list]').innerHTML = C.panelHtml(this.compatScan(), {targets: this.compatTargets()}); };
+                    const go = el => { const [file, line] = [el.dataset.compatGoto.replace(/:\d+$/, ''), Number(/:(\d+)$/.exec(el.dataset.compatGoto)?.[1] || 1)]; d.close(); this.gotoFile(file, line); };
+                    d.addEventListener('click', e => {
+                        const g = e.target.closest('[data-compat-goto]'); if (g) return go(g);
+                        const im = e.target.closest('[data-cp-imit]'); if (im) { this.setImitate(im.dataset.cpImit); d.querySelectorAll('[data-cp-imit]').forEach(x => x.classList.toggle('is-active', x === im)); return; }
+                        if (e.target.closest('[data-cp-reset]')) { setPref('compatTargets', null); d.querySelectorAll('[data-cp-target]').forEach(x => { x.value = C.DEFAULT_TARGETS[x.dataset.cpTarget] ?? ''; }); repaint(); }
+                    });
+                    d.addEventListener('keydown', e => { const g = e.target.closest?.('[data-compat-goto]'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); go(g); } });
+                    d.addEventListener('change', e => { const t = e.target.closest('[data-cp-target]'); if (!t) return; const cur = this.compatTargets(); cur[t.dataset.cpTarget] = t.value === '' ? false : Number(t.value); setPref('compatTargets', cur); repaint(); });
+                }, onSubmit: () => {}});
+        }
+        /** ouvre un fichier du site à une ligne (depuis 🧭 Navigateurs) */
+        gotoFile(name, line) {
+            const p = this.site.pages.find(x => pageFile(x) === name), f = this.site.files.find(x => x.path === name);
+            const key = p ? `p:${p.id}` : name === 'style.css' ? 'css' : name === 'script.js' ? 'js' : f ? `f:${f.id}` : ''; if (!key) return;
+            if (this.view === 'visual') this.setView('split');
+            this.openTab(key);
+            setTimeout(() => { const t = this.code.value, lines = t.split('\n'), i = Math.max(0, Math.min(lines.length - 1, line - 1)); const a = lines.slice(0, i).join('\n').length + (i ? 1 : 0); this.code.reveal(a, a + lines[i].length); }, 40);
         }
         /** ⚙ Gérer les écrans : les points de rupture du site et leurs requêtes @media */
         bpDialog() {
