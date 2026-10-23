@@ -71,6 +71,14 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.ok(s.includes('f:avatarShape')); assert.ok(has(s, /Formes des avatars/)); assert.ok(has(s, /Portraits et colonne de gauche/));
             assert.ok(!has(s, /Mes thèmes/)); assert.ok(!s.includes('f:preset'));
         });
+        await t('une forme à soi choisie reste choisie en revenant sur la page', async () => {
+            await page.evaluate(() => localStorage.setItem('genealogie-avatar-shapes', JSON.stringify({custom: {shp_nuage: {name: 'Nuage', kind: 'poly', pts: [[0, 0], [1, 0], [1, 1], [0, 1], [.5, .5]]}}, order: [], hidden: []})));
+            await go('look_theme'); await go('look_portraits');
+            await page.locator('#design-form select[name="avatarShape"]').selectOption('shp_nuage'); await page.waitForTimeout(600);
+            await go('look_theme'); await go('look_portraits');
+            assert.equal(await page.locator('#design-form select[name="avatarShape"]').inputValue(), 'shp_nuage');
+            assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-design') || '{}').avatarShape), 'shp_nuage');
+        });
         await t('Langue, dates et lecteur : un réglage changé ici est enregistré', async () => {
             await go('look_lang'); const s = await seen();
             assert.deepEqual(s.filter(x => x.startsWith('f:')).sort(), ['f:avSkipSeconds', 'f:defaultCalendar', 'f:interfaceLanguage']);
