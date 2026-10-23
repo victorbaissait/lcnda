@@ -30,6 +30,10 @@
         $('#dashboard-create-widget')?.addEventListener('click',()=>{state.maintenanceTab='widget_editor';setModule('maintenance');},{signal:sidebarSignal()});
     }
     let dashboardCache=null;
+    // Changer de page (tableau de bord ou Suivi) : on garde les données déjà lues de chaque page 2 min, tant que rien n'a été écrit
+    const pageCache=new Map(),PAGE_TTL=120000;
+    const pageCacheGet=key=>{const e=pageCache.get(key);return e&&e.w===(state.writeCount||0)&&Date.now()-e.t<PAGE_TTL?e:null;};
+    const pageCachePut=(key,v)=>{pageCache.set(key,{...v,w:state.writeCount||0,t:Date.now()});if(pageCache.size>8)pageCache.delete(pageCache.keys().next().value);};
     async function renderDashboard(token=++state.workspaceToken,{reuse=false}={}){
         const settings=dashboardBlockSettings();
         // Widget à soi qui « habille » un widget de l'app : il en reprend les données et l'affichage (titre, icône, couleur, texte à soi)
@@ -42,7 +46,7 @@
         const branchName=(settings.widgets.find(widget=>widget.type==='branch_map'&&widget.config?.branchName)?.config?.branchName||'').trim();
         const dashParams={people:selectedPeople.join(','),branch:branchName||undefined,sosa_root_id:sosaRootId()||undefined,person_seeds:seedPairs(['random_person','person_block','person_timeline'])||undefined,media_seeds:mediaSeedPairs||undefined,person_map_seeds:seedPairs(['random_person_map'])||undefined};
         const cacheKey=JSON.stringify([dashParams,settings.widgets.filter(w=>w.type==='person_quiz').map(w=>[w.id,w.config,w.limit])]);
-        const cached=reuse&&dashboardCache?.key===cacheKey?dashboardCache:null;
+        const cached=reuse==='page'?pageCacheGet(cacheKey):reuse&&dashboardCache?.key===cacheKey?dashboardCache:null;
         const data=cached?cached.data:await api('dashboard',{seed:state.dashboardRandomSeed||Date.now(),...dashParams});
         if(token!==state.workspaceToken||!isDashModule())return;
         const quizData=cached?cached.quizData:{};
@@ -70,9 +74,10 @@
         // « Chercher sur internet » : la personne choisie, ou la dernière fiche consultée
         const webSearchPersonId=widget=>widget.config?.personMode==='specific'?Number(widget.config.personId)||0:Number(dashboardRecentPeople()[0]?.id)||0;
         settings.widgets.filter(widget=>['web_search','family_objects_widget','family_memories_widget','lineage_widget'].includes(widget.type)).forEach(widget=>{const id=webSearchPersonId(widget);if(id&&!personBlockIds.includes(id))personBlockIds.push(id);});
-        const saintData=settings.widgets.some(widget=>widget.type==='saint_day')?await api('saint_of_day').catch(()=>null):null;
-        const progressData=settings.widgets.some(widget=>widget.type==='research_progress')?await api('research_progress').catch(()=>null):null;
-        await Promise.all(personBlockIds.map(async id=>{try{personBlockDetails[id]=await api('person',{id});}catch(_){personBlockDetails[id]=null;}}));
+        const [saintData,progressData]=cached&&cached.extra?cached.extra:await Promise.all([settings.widgets.some(widget=>widget.type==='saint_day')?api('saint_of_day').catch(()=>null):null,settings.widgets.some(widget=>widget.type==='research_progress')?api('research_progress').catch(()=>null):null]);
+        if(cached&&cached.people)Object.assign(personBlockDetails,cached.people);
+        await Promise.all(personBlockIds.filter(id=>!(id in personBlockDetails)).map(async id=>{try{personBlockDetails[id]=await api('person',{id});}catch(_){personBlockDetails[id]=null;}}));
+        pageCachePut(cacheKey,{data,quizData,extra:[saintData,progressData],people:{...personBlockDetails}});
         if(token!==state.workspaceToken||!isDashModule())return;
         let index=1;
         const limit=widget=>Math.max(1,Number(widget.limit||defaultDashboardBlockLimits[widget.type]||6));
@@ -166,7 +171,7 @@
         const suiviHead=state.module==='suivi'?window.LCNDA_EXT?.suivi?.headerHtml?.(dashPage,dashPagesList):''; // 🐾 en-tête du Suivi (titre de la page, ses pages, ses boutons)
         $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}${suiviHead?' sv-page':''}">${suiviHead||`<header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">✎ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>${escapeHtml(dashPage.name||'Vue d’ensemble')}</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p>${dashPagesBar}</div>`}</header>`}
         <div class="card-grid dashboard-grid">${blocks||emptyState({text: ownTab?'Onglet vide':'Aucun widget affiché', icon:'🧩',hint:ownTab?'Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche.':'Ajoute-en depuis la colonne de gauche, ou crée le tien.',action:{label:'＋ Ajouter un widget',attrs:document.querySelector('[data-add-dashboard-widget]')?'data-dash-empty-add':'data-empty-click="#dashboard-create-widget"'}})}</div></section>`;
-        $$('[data-dash-page]').forEach(b=>b.addEventListener('click',()=>{if(state.module==='suivi')state.suiviPage=b.dataset.dashPage;else state.dashboardPage=b.dataset.dashPage;renderDashboard();renderSidebar();}));
+        $$('[data-dash-page]').forEach(b=>b.addEventListener('click',()=>{if(state.module==='suivi')state.suiviPage=b.dataset.dashPage;else state.dashboardPage=b.dataset.dashPage;renderDashboard(++state.workspaceToken,{reuse:'page'});renderSidebar();}));
         $$('[data-dash-group-toggle]').forEach(b=>b.addEventListener('click',()=>{const current=dashboardBlockSettings();const g=current.widgets.find(w=>w.id===b.dataset.dashGroupToggle);if(!g)return;g.config={...g.config,collapsed:!g.config?.collapsed};saveDashboardBlockSettings(current);renderDashboard(undefined,{reuse:true});}));
         $('[data-edit-custom-tab]')?.addEventListener('click',()=>{state.tabsEditorOpen=ownTab.id;state.maintenanceTab='tabs_editor';setModule('maintenance');});
         $$('[data-reroll-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const current=dashboardBlockSettings();const widget=current.widgets.find(item=>item.id===button.dataset.rerollDashboardWidget);if(widget){widget.config={...(widget.config||{}),randomSeed:Date.now()};saveDashboardBlockSettings(current);}await renderDashboard();}));

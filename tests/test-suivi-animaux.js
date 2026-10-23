@@ -480,7 +480,7 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
                         await shot(p, 'fiche-gaston-marques.png', true);
                         await p.click('[data-sv-rings-edit]'); await p.waitForSelector('dialog[open] .sv-palette');
                         assert.equal(await p.$$eval('dialog[open] .sv-palette [data-col]:not([data-col="none"])', x => x.length), 14);
-                        assert.ok(await p.$eval('dialog[open] input[type=color][data-ring-color]', e => !!e.dataset.uiDone || !!e.closest('[class*="ui-color"]') || e.hidden || getComputedStyle(e).display === 'none'), 'la couleur passe par C2');
+                        assert.ok(await p.waitForFunction(() => { const e = document.querySelector('dialog[open] input[type=color][data-ring-color]'); return e && (!!e.dataset.uiDone || !!e.closest('[class*="ui-color"]') || e.hidden || getComputedStyle(e).display === 'none'); }, null, { timeout: 5000 }).then(() => true, () => false), 'la couleur passe par C2');
                         await p.click('dialog[open] [data-slot="L0"]'); await p.click('dialog[open] .sv-palette [data-col="bleu_clair"]');
                         await p.fill('dialog[open] input[name="date"]', '3 février 2026'); await p.fill('dialog[open] input[name="reason"]', 'usée');
                         await p.click('dialog[open] button[type="submit"]'); await p.waitForTimeout(1200);

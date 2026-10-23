@@ -1134,7 +1134,7 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=463" defer></script>
+<script src="assets/js/app.js?v=464" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=21" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1153,7 +1153,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-comparaison.js?v=8" defer></script>
 <script src="assets/js/app-carte.js?v=11" defer></script>
 <script src="assets/js/app-enquetes.js?v=10" defer></script>
-<script src="assets/js/app-tableau-de-bord.js?v=16" defer></script>
+<script src="assets/js/app-tableau-de-bord.js?v=17" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=22" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=4" defer></script>

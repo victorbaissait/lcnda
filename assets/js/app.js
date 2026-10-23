@@ -1240,6 +1240,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         Object.entries(params).forEach(([key, value]) => value !== undefined && url.searchParams.set(key, value));
         const init = {headers: {'Accept':'application/json'}, ...options};
         if (options.method && options.method !== 'GET') {
+            state.writeCount = (state.writeCount || 0) + 1; // une écriture : les données gardées en mémoire (pages du tableau de bord) sont à relire
             init.headers = {...init.headers, 'Content-Type':'application/json', 'X-CSRF-Token':state.csrf};
             init.body = JSON.stringify({...options.body, csrf:state.csrf});
         }
