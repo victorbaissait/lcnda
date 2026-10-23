@@ -30,6 +30,7 @@
         o.kinds = {...DEF.kinds, ...(s.kinds || {})};
         if (!['always', 'hover', 'never'].includes(o.show)) o.show = 'always';
         if (!['window', 'fold'].includes(o.open)) o.open = 'window';
+        o.offTypes = (Array.isArray(o.offTypes) ? o.offTypes : []).map(Number).filter(Boolean).slice(0, 2000);
         o.hidePersons = (Array.isArray(o.hidePersons) ? o.hidePersons : []).filter(x => x && Number(x.id)).slice(0, 500);
         o.hideEvents = (Array.isArray(o.hideEvents) ? o.hideEvents : []).filter(x => x && Number(x.id)).slice(0, 2000);
         return o;
@@ -37,7 +38,9 @@
     function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} }
     const kiosk = () => document.body.classList.contains('is-kiosk') || document.body.classList.contains('ms-on');
     const kindOf = tag => (KINDS.find(k => k[2].includes(String(tag || '').toUpperCase())) || ['OTHER'])[0];
-    const kindOn = (tag, s = settings()) => !!s.kinds[kindOf(tag)];
+    // Type par type (les types d'événements qui ont au moins un événement) : s.offTypes = identifiants éteints ; la sorte (s.kinds) reste pour les anciens réglages
+    const typeIdOf = (typeId, label) => Number(typeId) || Number((A()?.state?.bootstrap?.eventTypes || []).find(t => t.label === label)?.id) || 0;
+    const kindOn = (tag, s = settings(), typeId = 0, label = '') => { const id = typeIdOf(typeId, label); return !!s.kinds[kindOf(tag)] && !(id && (s.offTypes || []).includes(id)); };
     const personHidden = (pid, s = settings()) => s.hidePersons.some(x => Number(x.id) === Number(pid));
     const eventHidden = (eid, s = settings()) => s.hideEvents.some(x => Number(x.id) === Number(eid));
 
@@ -121,7 +124,7 @@
         root.classList?.toggle('wx-hover-only', s.show === 'hover');
         const rows = [...root.querySelectorAll(rowSel)].filter(row => !row.querySelector('.wx-pill, .wx-fold'));
         if (!rows.length || s.show === 'never' || (personId && personHidden(personId, s))) return;
-        const want = rows.filter(row => { const id = Number(row.dataset.eventId); return id && !eventHidden(id, s) && (!row.dataset.eventTag || kindOn(row.dataset.eventTag, s)); });
+        const want = rows.filter(row => { const id = Number(row.dataset.eventId); return id && !eventHidden(id, s) && (!row.dataset.eventTag || kindOn(row.dataset.eventTag, s, row.dataset.eventTypeId)); });
         const missing = [...new Set(want.map(r => Number(r.dataset.eventId)).filter(id => !cache.has(id)))];
         for (let i = 0; i < missing.length; i += 120) {
             try { const res = await api('meteo_events', {ids: missing.slice(i, i + 120).join(',')}); if (!res.installed) { ext.meteo.installed = false; return; } ext.meteo.installed = true; Object.entries(res.events || {}).forEach(([id, r]) => cache.set(Number(id), r)); }
@@ -129,7 +132,7 @@
         }
         want.forEach(row => {
             const r = cache.get(Number(row.dataset.eventId));
-            if (!r || row.querySelector('.wx-pill') || !shown(r, s) || (r.tag && !kindOn(r.tag, s))) return;
+            if (!r || row.querySelector('.wx-pill') || !shown(r, s) || (r.tag && !kindOn(r.tag, s, r.type_id, r.type))) return;
             const html = `<div class="wx-line">${pillHtml(r, s)}</div>`;
             if (after) { after(row, html); return; }
             const content = row.querySelector('.event-content') || row;
@@ -373,7 +376,7 @@
         try { d = await api('meteo_person', {id: pid}); } catch (e) { host.innerHTML = A().empty ? A().empty(e.message, {icon: '⛔'}) : ''; return; }
         if (!host.isConnected) return;
         if (!d.installed) { host.innerHTML = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: 'Comment les obtenir', attrs: 'data-wx-howto="socle"'}}); return; }
-        const evs = (d.events || []).filter(r => !eventHidden(r.event_id, s) && kindOn(r.tag, s));
+        const evs = (d.events || []).filter(r => !eventHidden(r.event_id, s) && kindOn(r.tag, s, r.type_id, r.type));
         const ok = evs.filter(r => shown(r, s));
         const card = host.closest('.card'); const small = card?.querySelector('.card-title h3'); if (small && !small.querySelector('small')) small.insertAdjacentHTML('beforeend', ` <small>(${ok.length})</small>`);
         if (!evs.length) { host.innerHTML = A().empty('Aucun événement daté au jour près, avec un lieu placé sur la carte.', {icon: '🌦'}); return; }
@@ -464,7 +467,11 @@
                     ${tg('today', 'Dans « Ce jour-là » et le tableau de bord')}
                     ${tg('coarse', 'Montrer aussi les reconstitutions grossières (avant 1940)')}
                     <h4>Pour quels événements</h4>
-                    <div class="wx-chks">${KINDS.map(([k, l]) => C(l, {checked: !!s.kinds[k], attrs: `data-wx-kind="${k}"`})).join('')}</div>
+                    ${(() => { const used = (A()?.state?.bootstrap?.eventTypes || []).filter(t => Number(t.usage_count) > 0).sort((a, b) => String(a.label).localeCompare(String(b.label), 'fr', {sensitivity: 'base'}));
+                        if (!used.length) return `<div class="wx-chks">${KINDS.map(([k, l]) => C(l, {checked: !!s.kinds[k], attrs: `data-wx-kind="${k}"`})).join('')}</div>`;
+                        const off = s.offTypes || [];
+                        return `<p class="muted wx-types-help">Tous les types d’événements de ta base (avec leur nombre). Décoche ceux qui n’ont pas besoin de la météo.</p><div class="wx-types-act"><button type="button" class="link-button" data-wx-types="all">Tout cocher</button> · <button type="button" class="link-button" data-wx-types="none">Tout décocher</button></div>
+                            <div class="wx-chks wx-types">${used.map(t => C(`${t.label} (${Number(t.usage_count).toLocaleString('fr-FR')})`, {checked: !!s.kinds[kindOf(t.gedcom_tag)] && !off.includes(Number(t.id)), attrs: `data-wx-type="${Number(t.id)}" data-wx-type-tag="${esc(t.gedcom_tag || '')}"`})).join('')}</div>`; })()}
                     <h4>Météo masquée</h4>
                     ${hidden.length ? `<ul class="wx-hidden">${hidden.map(([t, x]) => `<li><span>${t === 'p' ? '👤' : '📅'} ${esc(x.label || (t === 'p' ? 'Fiche' : 'Événement') + ' n° ' + x.id)}</span><button type="button" class="icon-button small" data-wx-unhide="${t}:${Number(x.id)}" title="Remontrer la météo" aria-label="Remontrer la météo">×</button></li>`).join('')}</ul>`
                         : A().empty('Rien n’est masqué.', {icon: '🙈', hint: 'Sur une fiche : clic droit sur la pastille météo (ou ⋯ du détail) → « Masquer la météo ».'})}
@@ -500,7 +507,15 @@
                 if (!ws.querySelector('.wx-settings')) return;
                 const t = e.target.closest('[data-wx-tg]'); if (t) { const s = settings(); s[t.dataset.wxTg] = t.checked; save(s); cache.clear(); return; }
                 const k = e.target.closest('[data-wx-kind]'); if (k) { const s = settings(); s.kinds[k.dataset.wxKind] = k.checked; save(s); }
+                const ty = e.target.closest('[data-wx-type]'); if (ty) { const s = settings(), id = Number(ty.dataset.wxType), cat = kindOf(ty.dataset.wxTypeTag);
+                    let off = (s.offTypes || []).filter(x => x !== id);
+                    if (!ty.checked) off.push(id);
+                    else if (!s.kinds[cat]) { s.kinds[cat] = true; ws.querySelectorAll('[data-wx-type]').forEach(o => { if (o !== ty && kindOf(o.dataset.wxTypeTag) === cat && !o.checked) off.push(Number(o.dataset.wxType)); }); }
+                    s.offTypes = [...new Set(off)]; save(s); cache.clear(); }
             });
+            ws.addEventListener('click', e => { const b = e.target.closest('[data-wx-types]'); if (!b || !ws.querySelector('.wx-settings')) return; const s = settings(), all = b.dataset.wxTypes === 'all';
+                if (all) { Object.keys(s.kinds).forEach(k => { s.kinds[k] = true; }); s.offTypes = []; } else s.offTypes = [...ws.querySelectorAll('[data-wx-type]')].map(o => Number(o.dataset.wxType));
+                save(s); cache.clear(); draw(); });
         }
         UI().autoSave?.(ws, {redraw: () => draw()});
     };
