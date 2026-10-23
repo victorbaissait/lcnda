@@ -100,6 +100,14 @@ function phpRuntimeArgs(phpPath) {
   return args;
 }
 
+/** GET /api.php?action=website_live(_rev)&token=<32 hex> : l'aperçu en direct d'un site, ouvert dans un autre navigateur (sans le secret). */
+function isLiveSiteRequest(req) {
+  if (req.method !== 'GET') return false;
+  let u;
+  try { u = new URL(String(req.url || ''), 'http://127.0.0.1'); } catch { return false; }
+  return u.pathname === '/api.php' && ['website_live', 'website_live_rev'].includes(u.searchParams.get('action')) && /^[a-f0-9]{32}$/.test(u.searchParams.get('token') || '');
+}
+
 /** Message compréhensible quand PHP ne démarre même pas (résultat de spawnSync). */
 function explainPhpFailure(r) {
   // Windows : 0xC0000135 = une DLL manque (le plus souvent vcruntime140.dll, fourni par Microsoft).
@@ -341,7 +349,8 @@ class PhpServer extends EventEmitter {
     // Même règle que router.php, appliquée dès l'entrée : sans le secret, rien ne passe.
     const given = Buffer.from(String(req.headers[SECRET_HEADER] || ''));
     const expected = Buffer.from(this.secret);
-    if (given.length !== expected.length || !crypto.timingSafeEqual(given, expected)) {
+    // seule exception, comme router.php (qui vérifie aussi que le jeton existe) : l'aperçu en direct d'un site, avec son jeton
+    if ((given.length !== expected.length || !crypto.timingSafeEqual(given, expected)) && !isLiveSiteRequest(req)) {
       res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
       res.end('Accès refusé');
       return;
@@ -454,4 +463,4 @@ class PhpServer extends EventEmitter {
   }
 }
 
-module.exports = { PhpServer, findPhp, checkPhp, phpRuntimeArgs, runtimeKey, phpRuntimeKey, devBundledPhp, SECRET_HEADER };
+module.exports = { PhpServer, findPhp, checkPhp, phpRuntimeArgs, runtimeKey, phpRuntimeKey, devBundledPhp, SECRET_HEADER, isLiveSiteRequest };

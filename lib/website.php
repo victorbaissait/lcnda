@@ -16,6 +16,10 @@ declare(strict_types=1);
  *    cachée écrit à la main dans un texte est remplacé par « [nom retiré] » à l'export ;
  *  - les images sont réenregistrées (sans EXIF), réduites à 1600 px, avec des noms fabriqués (images/m1.jpg) ;
  *  - le site exporté a une politique de sécurité (CSP) : scripts seulement depuis ses propres fichiers, rien d'autre.
+ * 📁 Fichiers en plus (site.files : css/…, js/…, includes/….php, data/….json ; chemins vérifiés par website_file_path) : écrits à
+ * leur chemin dans le .zip, vérifiés comme le reste (noms cachés, images) ; css et js liés après style.css / script.js sur les
+ * pages voulues. 🐘 Pages PHP (page.ext = 'php' → slug.php, index.php) : écrites telles quelles à l'export (le PHP n'y est pas
+ * exécuté), exécutées pour l'aperçu dans un PHP à part et isolé (lib/website_php.php). site.breakpoints : gardé pour l'éditeur.
  */
 
 const SITE_MAX = 20000000;      // octets de JSON
@@ -24,6 +28,11 @@ const SITE_HTML_MAX = 2000000;  // une page
 const SITE_CSS_MAX = 600000;
 const SITE_JS_MAX = 600000;
 const SITE_VERSIONS_MAX = 100;
+/** 📁 Fichiers en plus (site.files) : css/carte.css, js/menu.js, includes/entete.php, data/x.json… */
+const SITE_FILES_MAX = 300;
+const SITE_FILE_MAX = 1000000;       // un fichier
+const SITE_FILES_TOTAL = 8000000;    // tous les fichiers
+const SITE_FILE_KINDS = ['css' => 'css', 'js' => 'js', 'php' => 'php', 'html' => 'html', 'htm' => 'html', 'json' => 'json', 'txt' => 'txt', 'md' => 'txt', 'csv' => 'txt', 'xml' => 'txt'];
 const SITE_IMG_MAX = 1600;
 const SITE_REDACTED = '[nom retiré]';
 const SITE_BLOCK_KINDS = ['menu', 'person', 'tree', 'timeline', 'map', 'chart', 'photos', 'place', 'diagram'];
@@ -111,6 +120,40 @@ function website_defuse(string $html, int &$removed = 0): string
     }, $html);
     $html = (string) preg_replace('#(java|vb|live)script\s*:#i', '', $html);
     return $html;
+}
+
+/** Une page ou un fichier .php : le HTML autour du code est désamorcé comme une page ; le code (<?php … ?>, <?= … ?>) est
+ *  gardé tel quel (il ne s'exécute que dans le site exporté, ou dans un PHP à part, isolé : lib/website_php.php). */
+function website_defuse_php(string $src, int &$removed = 0): string
+{
+    $parts = preg_split('#(<\?(?:php\b|=).*?(?:\?>|\z))#is', str_replace("\0", '', $src), -1, PREG_SPLIT_DELIM_CAPTURE);
+    if ($parts === false) { return website_defuse($src, $removed); }
+    foreach ($parts as $i => $p) { if ($i % 2 === 0 && $p !== '') { $parts[$i] = website_defuse($p, $removed); } }
+    return implode('', $parts);
+}
+
+/** Le chemin d'un fichier en plus : minuscules, chiffres, - _ . / ; ni « .. », ni / au début ; 120 caractères ; null si inutilisable */
+function website_file_path(mixed $raw): ?string
+{
+    if (!is_string($raw)) { return null; }
+    $p = strtolower(str_replace('\\', '/', trim($raw)));
+    if ($p === '' || strlen($p) > 120 || !preg_match('#^[a-z0-9\-_./]+$#', $p) || str_starts_with($p, '/')) { return null; }
+    $seg = explode('/', $p);
+    foreach ($seg as $s) { if ($s === '' || $s === '.' || $s === '..' || str_starts_with($s, '.')) { return null; } }
+    if (!isset(SITE_FILE_KINDS[pathinfo($p, PATHINFO_EXTENSION)])) { return null; }
+    return $p;
+}
+
+/** Le nom du fichier d'une page : index.html / index.php pour l'accueil, slug.html ou slug.php */
+function website_page_file(array $page, int $i): string
+{
+    return ($i === 0 ? 'index' : $page['slug']) . '.' . (($page['ext'] ?? 'html') === 'php' ? 'php' : 'html');
+}
+
+/** Les fichiers css ou js en plus d'une page, dans l'ordre (pages vide = toutes les pages) */
+function website_page_assets(array $site, string $slug, string $kind): array
+{
+    return array_values(array_filter(is_array($site['files'] ?? null) ? $site['files'] : [], static fn($f) => $f['kind'] === $kind && (empty($f['pages']) || in_array($slug, $f['pages'], true))));
 }
 
 /** Un SVG dessiné par l'app (diagramme) : seulement la balise <svg>, désamorcé comme une page (pas de script, d'événement, de lien) */
@@ -228,8 +271,37 @@ function website_check(mixed $data): array
         $base = $slug; $k = 2;
         while (isset($slugs[$slug])) { $slug = $base . '-' . $k++; }
         $slugs[$slug] = true;
-        $pages[] = ['id' => $id, 'name' => $name, 'slug' => $slug, 'html' => website_defuse($html, $removed),
+        $ext = ($p['ext'] ?? '') === 'php' ? 'php' : 'html';
+        $pages[] = ['id' => $id, 'name' => $name, 'slug' => $slug, 'ext' => $ext, 'html' => $ext === 'php' ? website_defuse_php($html, $removed) : website_defuse($html, $removed),
             'title' => mb_substr(safe_text($p['title'] ?? ''), 0, 160), 'desc' => mb_substr(safe_text($p['desc'] ?? ''), 0, 300)];
+    }
+    // 📁 les fichiers en plus : chemin sûr, sorte d'après l'extension, contenu nettoyé comme la feuille, le script ou une page
+    $files = []; $paths = []; $total = 0;
+    $taken = ['css/style.css' => 1, 'js/script.js' => 1, 'js/carte-lcnda.js' => 1, 'lisez-moi.txt' => 1, 'lisez-moi.html' => 1];
+    foreach ($pages as $i => $p) { $taken[website_page_file($p, $i)] = 1; $taken[($i === 0 ? 'index' : $p['slug']) . '.' . ($p['ext'] === 'php' ? 'html' : 'php')] = 1; }
+    $rawFiles = is_array($data['files'] ?? null) ? array_values($data['files']) : [];
+    if (count($rawFiles) > SITE_FILES_MAX) { throw new LcndaBadInput('Un site a au plus ' . SITE_FILES_MAX . ' fichiers en plus.'); }
+    foreach ($rawFiles as $f) {
+        $path = is_array($f) ? website_file_path($f['path'] ?? null) : null;
+        if ($path === null || isset($taken[$path]) || isset($paths[$path]) || str_starts_with($path, 'images/')) { $removed++; continue; } // chemin dangereux, réservé ou en double
+        $content = is_string($f['content'] ?? null) ? $f['content'] : '';
+        if (strlen($content) > SITE_FILE_MAX) { throw new LcndaBadInput('Le fichier « ' . $path . ' » est trop lourd (1 Mo au plus).'); }
+        $total += strlen($content);
+        if ($total > SITE_FILES_TOTAL) { throw new LcndaBadInput('Les fichiers en plus sont trop lourds (8 Mo en tout au plus).'); }
+        $kind = SITE_FILE_KINDS[pathinfo($path, PATHINFO_EXTENSION)];
+        $clean = match ($kind) { 'css' => website_css_clean($content), 'js' => website_js_clean($content), 'html' => website_defuse($content, $removed), 'php' => website_defuse_php($content, $removed), default => str_replace("\0", '', $content) };
+        if ($kind === 'css' && $clean !== $content) { $removed++; }
+        $paths[$path] = true;
+        $id = is_string($f['id'] ?? null) && preg_match('/^[a-z0-9\-_]{1,40}$/i', $f['id']) ? $f['id'] : 'f' . bin2hex(random_bytes(4));
+        $on = [];
+        if (in_array($kind, ['css', 'js'], true) && is_array($f['pages'] ?? null)) { foreach (array_slice($f['pages'], 0, SITE_PAGES_MAX) as $s) { if (is_string($s) && isset($slugs[$s])) { $on[] = $s; } } }
+        $files[] = ['id' => $id, 'path' => $path, 'kind' => $kind, 'content' => $clean, 'pages' => array_values(array_unique($on))];
+    }
+    // les tailles d'écran de l'éditeur (📱 💻) : gardées telles quelles, seulement des valeurs simples
+    $bps = [];
+    foreach (is_array($data['breakpoints'] ?? null) ? array_slice(array_values($data['breakpoints']), 0, 40) : [] as $b) {
+        if (!is_array($b)) { continue; }
+        $bps[] = array_map(static fn($v) => is_string($v) ? mb_substr(str_replace("\0", '', $v), 0, 200) : $v, array_filter(array_slice($b, 0, 20, true), static fn($v, $k) => is_string($k) && (is_string($v) || is_int($v) || is_float($v) || is_bool($v) || $v === null), ARRAY_FILTER_USE_BOTH));
     }
     $css = is_string($data['css'] ?? null) ? $data['css'] : '';
     $js = is_string($data['js'] ?? null) ? $data['js'] : '';
@@ -259,13 +331,14 @@ function website_check(mixed $data): array
                 'view' => is_array($v['view'] ?? null) ? ['lat' => max(-85, min(85, (float) ($v['view']['lat'] ?? 0))), 'lng' => max(-180, min(180, (float) ($v['view']['lng'] ?? 0))), 'z' => max(1, min(18, (int) ($v['view']['z'] ?? 6)))] : null];
         }
     }
-    $clean = ['v' => 1, 'pages' => $pages, 'css' => $cssClean, 'js' => website_js_clean($js), 'theme' => $theme, 'settings' => $settings, 'frozen' => $frozen ?: new stdClass()];
+    $clean = ['v' => 1, 'pages' => $pages, 'css' => $cssClean, 'js' => website_js_clean($js), 'theme' => $theme, 'settings' => $settings, 'frozen' => $frozen ?: new stdClass(), 'files' => $files, 'breakpoints' => $bps];
     $first = ''; $blocks = 0;
     foreach ($pages as $p) {
         if ($first === '' && preg_match('#<h[1-2]\b[^>]*>(.*?)</h[1-2]>#is', $p['html'], $m)) { $first = mb_substr(trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8')), 0, 120); }
         $blocks += preg_match_all('#data-lc-block\s*=#i', $p['html']);
     }
-    $info = ['pages' => count($pages), 'head' => $first, 'blocks' => $blocks, 'tpl' => $settings['tpl'], 'colors' => [$theme['primary'], $theme['bg'], $theme['accent']], 'js' => trim($js) !== ''];
+    $info = ['pages' => count($pages), 'head' => $first, 'blocks' => $blocks, 'tpl' => $settings['tpl'], 'colors' => [$theme['primary'], $theme['bg'], $theme['accent']], 'js' => trim($js) !== '',
+        'files' => count($files), 'php' => (bool) array_filter($pages, static fn($p) => $p['ext'] === 'php')];
     return [$clean, $info, $removed];
 }
 
@@ -578,7 +651,7 @@ function website_block_html(PDO $pdo, array $a, callable $img, array $ctx = []):
     switch ($kind) {
         case 'menu':
             $pages = is_array($ctx['pages'] ?? null) ? $ctx['pages'] : [];
-            $li = array_map(static fn($p) => '<li><a href="' . website_e(($p['slug'] ?? 'index') . '.html') . '"' . (($p['slug'] ?? '') === ($ctx['current'] ?? '') ? ' aria-current="page"' : '') . '>' . website_e($p['name'] ?? '') . '</a></li>', $pages);
+            $li = array_map(static fn($p) => '<li><a href="' . website_e(($p['slug'] ?? 'index') . (($p['ext'] ?? '') === 'php' ? '.php' : '.html')) . '"' . (($p['slug'] ?? '') === ($ctx['current'] ?? '') ? ' aria-current="page"' : '') . '>' . website_e($p['name'] ?? '') . '</a></li>', $pages);
             return '<ul class="lc-menu-list">' . implode('', $li) . '</ul>';
         case 'person':
             if (!website_open($pdo, $pid)) { return website_hidden_note(); }
@@ -807,10 +880,24 @@ function website_fill_blocks(string $html, callable $fill): string
  */
 function website_page_body(PDO $pdo, array $site, int $idx, callable $img, string $mode, ?callable $asset = null, ?callable $live = null): array
 {
-    $page = $site['pages'][$idx];
-    $ctx = ['pages' => array_map(static fn($p) => ['slug' => $p['slug'], 'name' => $p['name']], $site['pages']), 'current' => $page['slug'],
+    return website_html_body($pdo, $site, $site['pages'][$idx]['html'], $site['pages'][$idx]['slug'], $img, $mode, $asset, $live);
+}
+
+/** Les liens vers une page du site prennent la bonne extension (contact.html → contact.php si la page est en PHP, et inversement) */
+function website_page_links(array $site, string $html): string
+{
+    $ext = [];
+    foreach ($site['pages'] as $i => $p) { $ext[$i === 0 ? 'index' : $p['slug']] = ($p['ext'] ?? 'html') === 'php' ? 'php' : 'html'; }
+    return (string) preg_replace_callback('#(\s(?:href|action)\s*=\s*["\'])([a-z0-9\-]+)\.(html|php)(?=[?\#"\'])#i', static fn($m) => isset($ext[strtolower($m[2])]) ? $m[1] . $m[2] . '.' . $ext[strtolower($m[2])] : $m[0], $html);
+}
+
+/** Le HTML d'une page ou d'un fichier en plus (.html, .php) : comme website_page_body ($current : la page, pour le menu) */
+function website_html_body(PDO $pdo, array $site, string $html, string $current, callable $img, string $mode, ?callable $asset = null, ?callable $live = null): array
+{
+    $ctx = ['pages' => array_map(static fn($p) => ['slug' => $p['slug'], 'name' => $p['name'], 'ext' => $p['ext'] ?? 'html'], $site['pages']), 'current' => $current,
         'frozen' => is_array($site['frozen'] ?? null) ? $site['frozen'] : [], 'asset' => $asset, 'live' => $live];
-    $html = website_fill_blocks(website_local_media($page['html']), static fn($a) => website_block_html($pdo, $a, $img, $ctx));
+    $html = website_fill_blocks(website_local_media($html), static fn($a) => website_block_html($pdo, $a, $img, $ctx));
+    $html = website_page_links($site, $html);
     // les images de la page et des styles écrits dans la page : media/… → l'adresse de l'export (ou rien si refusée)
     $refused = 0;
     // une image refusée (une personne cachée dessus) part en entier : la balise et son texte de remplacement
@@ -838,10 +925,11 @@ function website_local_media(string $s): string
     return (string) preg_replace('#(["\'(]\\s*)https?://(?:' . implode('|', $hosts) . ')(?::\\d+)?/(?:[^"\'()\\s<>]*/)?media/#i', '$1media/', $s);
 }
 
-function website_css_with_media(PDO $pdo, string $css, callable $img, int &$refused): string
+/** $up : « ../ » pour une feuille rangée dans un dossier (css/style.css → ../images/m1.jpg) */
+function website_css_with_media(PDO $pdo, string $css, callable $img, int &$refused, string $up = ''): string
 {
     $css = website_local_media($css);
-    return (string) preg_replace_callback('#url\(\s*(["\']?)media/([^"\')]+)\1\s*\)#i', static function ($m) use ($img, &$refused) { $u = $img(rawurldecode($m[2])); if ($u === '') { $refused++; return 'none'; } return 'url("' . $u . '")'; }, $css);
+    return (string) preg_replace_callback('#url\(\s*(["\']?)media/([^"\')]+)\1\s*\)#i', static function ($m) use ($img, &$refused, $up) { $u = $img(rawurldecode($m[2])); if ($u === '') { $refused++; return 'none'; } return 'url("' . (str_starts_with($u, 'images/') ? $up : '') . $u . '")'; }, $css);
 }
 
 /** Une image de la base pour le site : réduite (1600 px), réenregistrée sans EXIF ; [octets, extension] ou null */
@@ -888,18 +976,30 @@ function website_live_map_js(): string
     return (string) @file_get_contents(APP_ROOT . '/assets/js/site-carte-vive.js');
 }
 
-function website_document(array $site, int $idx, string $body, ?string $css, ?string $js, string $mode, bool $live = false): string
+/** $extra : les fichiers css et js en plus de cette page (['css' => [chemin => texte], 'js' => […]]), liés après style.css et
+ *  script.js (ou écrits dedans, comme eux, quand $css / $js sont donnés). Une page PHP qui commence par un bloc <?php … ?> :
+ *  ce bloc passe avant <!doctype> (header(), session_start() y marchent encore). */
+function website_document(array $site, int $idx, string $body, ?string $css, ?string $js, string $mode, bool $live = false, array $extra = []): string
 {
     $page = $site['pages'][$idx];
+    $first = '';
+    if (($page['ext'] ?? '') === 'php') {
+        if (preg_match('#^\s*(<\?php\b.*?\?>)\s*#s', $body, $m)) { $first = $m[1]; $body = substr($body, strlen($m[0])); }
+        /* un code PHP laissé ouvert à la fin (sans balise de fin, l'habitude des fichiers .php) : fermé, sinon la fin de la page serait lue comme du PHP */
+        if (preg_match_all('#<\?(?:php\b|=).*?(?:\?>|\z)#is', $body, $mm) && !str_ends_with(end($mm[0]), '?>')) { $body .= "\n?>"; }
+    }
+    $xc = ''; $xj = '';
+    foreach ($extra['css'] ?? [] as $p => $c) { $xc .= $css === null ? '<link rel="stylesheet" href="' . website_e($p) . "\">\n" : '<style>/* ' . str_replace('*/', '', $p) . ' */' . str_ireplace('</style', '<\/style', $c) . "</style>\n"; }
+    foreach ($extra['js'] ?? [] as $p => $c) { $xj .= $js === null ? '<script src="' . website_e($p) . "\" defer></script>\n" : (trim($c) !== '' ? '<script>' . website_js_clean($c) . "</script>\n" : ''); }
     $title = $page['title'] !== '' ? $page['title'] : trim($page['name'] . ($site['settings']['title'] !== '' && $idx > 0 ? ' — ' . $site['settings']['title'] : ($idx === 0 && $site['settings']['title'] !== '' ? ' — ' . $site['settings']['title'] : '')));
     $desc = $page['desc'] !== '' ? $page['desc'] : $site['settings']['desc'];
-    $h = "<!doctype html>\n<html lang=\"" . website_e($site['settings']['lang']) . "\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+    $h = $first . "<!doctype html>\n<html lang=\"" . website_e($site['settings']['lang']) . "\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
         . '<meta http-equiv="Content-Security-Policy" content="' . htmlspecialchars(website_csp($mode), ENT_COMPAT) . "\">\n<meta name=\"referrer\" content=\"strict-origin-when-cross-origin\">\n"
         . '<title>' . website_e($title) . "</title>\n" . ($desc !== '' ? '<meta name="description" content="' . website_e($desc) . "\">\n" : '') . '<meta name="generator" content="LCNDA — Mon site web">' . "\n"
-        . ($css === null ? "<link rel=\"stylesheet\" href=\"css/style.css\">\n" : '<style>' . str_ireplace('</style', '<\/style', $css) . "</style>\n") . "</head>\n<body>\n" . $body . "\n";
+        . ($css === null ? "<link rel=\"stylesheet\" href=\"css/style.css\">\n" : '<style>' . str_ireplace('</style', '<\/style', $css) . "</style>\n") . $xc . "</head>\n<body>\n" . $body . "\n";
     if ($js === null) { $h .= ($live ? "<script src=\"js/carte-lcnda.js\" defer></script>\n" : '') . (trim($site['js']) !== '' ? "<script src=\"js/script.js\" defer></script>\n" : ''); }
     else { if ($live) { $h .= '<script>' . website_js_clean(website_live_map_js()) . "</script>\n"; } if (trim($js) !== '') { $h .= '<script>' . website_js_clean($js) . "</script>\n"; } }
-    return $h . "</body>\n</html>\n";
+    return $h . $xj . "</body>\n</html>\n";
 }
 
 /** La feuille complète : couleurs et polices, blocs de la généalogie, puis celle de la personne */
@@ -920,17 +1020,24 @@ function website_load(PDO $pdo, int $id): array
 function website_readme(array $site, array $files, bool $live): array
 {
     $title = trim((string) ($site['settings']['title'] ?? '')) ?: 'Mon site';
-    $pages = array_values(array_filter(array_keys($files), static fn($f) => str_ends_with($f, '.html')));
+    $pageFiles = array_map(static fn($p, $i) => website_page_file($p, $i), $site['pages'], array_keys($site['pages']));
+    $pages = array_values(array_filter($pageFiles, static fn($f) => isset($files[$f])));
+    $php = array_values(array_filter($pages, static fn($f) => str_ends_with($f, '.php')));
+    $home = $pages[0] ?? 'index.html';
+    $extra = array_values(array_filter(array_map(static fn($f) => $f['path'], is_array($site['files'] ?? null) ? $site['files'] : []), static fn($f) => isset($files[$f])));
     $fonts = (bool) array_filter([$site['theme']['font'] ?? '', $site['theme']['headFont'] ?? ''], static fn($f) => $f !== '' && !preg_match('/^(Georgia|Verdana|Arial|Helvetica|Times|Trebuchet|Tahoma|Courier|system-ui|serif|sans-serif)/i', (string) $f));
     $parts = [
         ['Ce qu’il y a dans ce dossier', [
-            count($pages) . ' page' . (count($pages) > 1 ? 's' : '') . ' (index.html est l’accueil), le dossier css/ (les styles), js/ (les scripts), images/ (les photos, réduites et sans données GPS).',
+            count($pages) . ' page' . (count($pages) > 1 ? 's' : '') . ' (' . $home . ' est l’accueil), le dossier css/ (les styles), js/ (les scripts), images/ (les photos, réduites et sans données GPS).',
+            $extra ? count($extra) . ' fichier' . (count($extra) > 1 ? 's' : '') . ' en plus, rangé' . (count($extra) > 1 ? 's' : '') . ' à leur place : ' . implode(', ', array_slice($extra, 0, 12)) . (count($extra) > 12 ? '…' : '') . '.' : '',
             'Tout est rangé avec des adresses relatives : le dossier marche tel quel, où que tu le poses, même dans un sous-dossier (par exemple http://localhost/mon-site/).',
-            'Il n’y a besoin ni de PHP ni de base de données : ce sont des pages simples, lisibles par n’importe quel navigateur et n’importe quel hébergeur.',
+            $php ? 'Attention : ' . count($php) . ' page' . (count($php) > 1 ? 's sont' : ' est') . ' en PHP (' . implode(', ', array_slice($php, 0, 8)) . (count($php) > 8 ? '…' : '') . '). Une page .php a besoin d’un serveur PHP pour s’afficher : MAMP (Mac), WAMP ou XAMPP (Windows), « php -S », ou un hébergeur qui accepte le PHP (presque tous). En double-cliquant dessus, le navigateur montrerait le code au lieu de la page.'
+                : 'Il n’y a besoin ni de PHP ni de base de données : ce sont des pages simples, lisibles par n’importe quel navigateur et n’importe quel hébergeur.',
             'Les personnes vivantes et les fiches confidentielles n’y figurent pas.',
         ]],
         ['1. Sans rien installer (double-clic)', [
-            'Décompresse le .zip, puis ouvre index.html d’un double-clic : le site s’ouvre dans ton navigateur, avec ses pages, ses photos et ses scripts.',
+            $php ? ($home === 'index.html' ? 'Les pages .html s’ouvrent d’un double-clic ; les pages .php non (il leur faut un serveur PHP : voir 2, 3 ou 4 ci-dessous).' : 'L’accueil est une page PHP (index.php) : le double-clic ne suffit pas, il faut un serveur PHP (voir 2, 3 ou 4 ci-dessous).')
+                : 'Décompresse le .zip, puis ouvre index.html d’un double-clic : le site s’ouvre dans ton navigateur, avec ses pages, ses photos et ses scripts.',
             $live ? 'La carte interactive se déplace et zoome ; son fond (les tuiles) vient d’Internet : sans connexion, c’est l’image de la carte rangée dans images/ qui s’affiche.' : '',
             $fonts ? 'Les polices choisies viennent de Google Fonts : sans connexion, le navigateur prend une police proche.' : '',
         ]],
@@ -944,10 +1051,12 @@ function website_readme(array $site, array $files, bool $live): array
             'XAMPP : démarre « Apache » dans le panneau XAMPP, copie le dossier dans C:\\xampp\\htdocs\\mon-site\\, puis ouvre http://localhost/mon-site/.',
         ]],
         ['4. Avec un autre petit serveur', [
-            'Dans le dossier du site : « php -S localhost:8000 » ou « python3 -m http.server 8000 », puis ouvre http://localhost:8000/.',
+            $php ? 'Dans le dossier du site : « php -S localhost:8000 » (PHP installé sur l’ordinateur), puis ouvre http://localhost:8000/. Un simple serveur de fichiers (python3 -m http.server) n’exécute pas le PHP.'
+                : 'Dans le dossier du site : « php -S localhost:8000 » ou « python3 -m http.server 8000 », puis ouvre http://localhost:8000/.',
         ]],
         ['5. Le mettre en ligne', [
-            'Envoie TOUT le contenu du dossier (index.html, les autres pages .html, css/, js/, images/) chez ton hébergeur (OVH, o2switch, Infomaniak…) avec son outil d’envoi ou un logiciel FTP comme FileZilla, dans le dossier « www » ou « public_html ».',
+            $php ? 'Les pages .php ne marchent que chez un hébergeur qui accepte le PHP (OVH, o2switch, Infomaniak… le font) ; Netlify et GitHub Pages ne l’exécutent pas.' : '',
+            'Envoie TOUT le contenu du dossier (' . $home . ', les autres pages, css/, js/, images/' . ($extra ? ' et les fichiers en plus' : '') . ') chez ton hébergeur (OVH, o2switch, Infomaniak…) avec son outil d’envoi ou un logiciel FTP comme FileZilla, dans le dossier « www » ou « public_html ».',
             'Tu peux aussi le publier depuis LCNDA : Mon site web → 📤 Publier (Netlify, GitHub Pages ou FTP sécurisé).',
         ]],
     ];
@@ -962,7 +1071,7 @@ function website_readme(array $site, array $files, bool $live): array
     $htm = "<!doctype html>\n<html lang=\"fr\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
         . "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'\">\n<title>Lisez-moi — " . htmlspecialchars($title) . "</title>\n"
         . "<style>body{font:17px/1.6 system-ui,sans-serif;max-width:760px;margin:32px auto;padding:0 16px;color:#222;background:#fff}h1{font-size:1.6em}h2{font-size:1.15em;margin-top:1.6em}li{margin:.3em 0}code{background:#f2f2f2;padding:0 .3em}@media (prefers-color-scheme:dark){body{background:#1b1b1b;color:#eee}code{background:#333}}</style>\n</head>\n<body>\n"
-        . '<h1>« ' . htmlspecialchars($title) . " » — comment l’ouvrir</h1>\n<p>Site fait avec LCNDA le {$date}. <a href=\"index.html\">→ Ouvrir le site</a></p>\n" . $htm . "</body>\n</html>\n";
+        . '<h1>« ' . htmlspecialchars($title) . " » — comment l’ouvrir</h1>\n<p>Site fait avec LCNDA le {$date}. <a href=\"" . htmlspecialchars($home) . "\">→ Ouvrir le site</a>" . ($php ? ' (avec un serveur PHP)' : '') . "</p>\n" . $htm . "</body>\n</html>\n";
     return [$txt, $htm];
 }
 
@@ -1005,25 +1114,40 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
         $sum['pages']++;
     }
     $refusedCss = 0;
-    $css = website_css_with_media($pdo, website_full_css($site), $img, $refusedCss);
+    $css = website_css_with_media($pdo, website_full_css($site), $img, $refusedCss, '../');
     [$cssRed, $n2] = website_redact($pdo, $css); $sum['names'] += $n2;
     [$js, $n3] = website_redact($pdo, $site['js']); $sum['names'] += $n3;
+    // 📁 les fichiers en plus, vérifiés comme le reste : images de la base (sans personne cachée), noms cachés retirés
+    $extra = [];
+    foreach (is_array($site['files'] ?? null) ? $site['files'] : [] as $f) {
+        $c = (string) $f['content'];
+        if ($f['kind'] === 'html' || $f['kind'] === 'php') { [$c, $n4] = website_html_body($pdo, $site, $c, '', $img, $mode, $asset); $sum['names'] += $n4; } // inclus depuis une page : adresses depuis la racine
+        else {
+            if ($f['kind'] === 'css') { $c = website_css_with_media($pdo, $c, $img, $refusedCss, str_repeat('../', substr_count($f['path'], '/'))); }
+            [$c, $n4] = website_redact($pdo, $c); $sum['names'] += $n4;
+        }
+        $extra[$f['path']] = $c;
+    }
+    $sum['files'] = count($extra);
     foreach ($pages as $i => $body) {
-        $name = $i === 0 ? 'index.html' : $site['pages'][$i]['slug'] . '.html';
-        $files[$name] = $mode === 'inline' ? website_document($site, $i, $body, $cssRed, $js, 'preview', isset($livePages[$i])) : website_document($site, $i, $body, null, null, 'export', isset($livePages[$i]));
+        $slug = $site['pages'][$i]['slug'];
+        $x = [];
+        foreach (['css', 'js'] as $kind) { foreach (website_page_assets($site, $slug, $kind) as $f) { $x[$kind][$f['path']] = $extra[$f['path']]; } }
+        $files[website_page_file($site['pages'][$i], $i)] = $mode === 'inline' ? website_document($site, $i, $body, $cssRed, $js, 'preview', isset($livePages[$i]), $x) : website_document($site, $i, $body, null, null, 'export', isset($livePages[$i]), $x);
     }
     // les liens vers une page qui n'existe plus (supprimée) : comptés pour le dire avant l'export
     $sum['broken'] = 0;
-    foreach ($site['pages'] as $p) { if (preg_match_all('#\shref\s*=\s*["\']([a-z0-9\-]+\.html)(?:\#[^"\']*)?["\']#i', (string) $p['html'], $mm)) { foreach ($mm[1] as $f) { if (!isset($files[strtolower($f)])) { $sum['broken']++; } } } }
+    foreach ($site['pages'] as $p) { if (preg_match_all('#\shref\s*=\s*["\']([a-z0-9\-]+\.(?:html|php))(?:[?\#][^"\']*)?["\']#i', website_page_links($site, (string) $p['html']), $mm)) { foreach ($mm[1] as $f) { if (!isset($files[strtolower($f)]) && !isset($extra[strtolower($f)])) { $sum['broken']++; } } } }
     if ($livePages && $mode !== 'inline') { $files['js/carte-lcnda.js'] = website_live_map_js(); } // la carte interactive : notre petit script, pas de bibliothèque
     if ($mode !== 'inline') {
         $files['css/style.css'] = $cssRed;
         if (trim($js) !== '') { $files['js/script.js'] = $js; }
+        foreach ($extra as $p => $c) { $files[$p] = $c; } // les chemins ont été vérifiés par website_check (ni réservés, ni en double)
         [$txt, $htm] = website_readme($site, $files, (bool) $livePages);
         $files['LISEZ-MOI.txt'] = $txt;
         $files['LISEZ-MOI.html'] = $htm;
     }
-    return ['files' => $files, 'summary' => $sum];
+    return ['files' => $files, 'summary' => $sum, 'extra' => $extra];
 }
 
 /** Petit bout de HTML des blocs pour l'aperçu de l'app (images en media/…, rien de caché) */
@@ -1061,13 +1185,19 @@ function website_dispatch(PDO $pdo, string $action, array $q): never
         foreach ($site['pages'] as $i => $p) { if ($p['slug'] === $slug) { $idx = $i; } }
         if ($action === 'website_preview' || ($action === 'website_export' && ($q['format'] ?? '') === 'html')) {
             // une page seule, tout dedans (styles, script, images en data:) ; dans le navigateur, isolée (origine opaque)
-            $b = website_build($pdo, $site, 'inline');
-            $name = $idx === 0 ? 'index.html' : $site['pages'][$idx]['slug'] . '.html';
-            $html = $b['files'][$name];
+            // une page PHP y est exécutée (dans un PHP à part, isolé : lib/website_php.php), avec les paramètres de l'adresse
+            require_once __DIR__ . '/website_php.php';
+            $query = website_php_query(array_diff_key($q, ['action' => 1, 'id' => 1, 'page' => 1, 'format' => 1]));
+            try { $r = website_php_page($pdo, $site, $site['pages'][$idx]['slug'], $query); }
+            catch (LcndaBadInput $e) {
+                if ($action !== 'website_preview') { throw $e; }
+                $r = ['html' => '<!doctype html><meta charset="utf-8"><p style="font:16px system-ui;padding:20px">' . htmlspecialchars($e->getMessage()) . '</p>', 'errors' => []];
+            }
+            $html = $r['html'];
             if ($action === 'website_preview') {
                 // les liens vers les autres pages restent dans l'aperçu
                 $id = (int) $row['id'];
-                $html = (string) preg_replace_callback('#href="([a-z0-9\-]+)\.html(\#[^"]*)?"#', static fn($m) => 'href="api.php?action=website_preview&amp;id=' . $id . '&amp;page=' . $m[1] . ($m[2] ?? '') . '"', $html);
+                $html = website_php_links($site, $html, static fn(string $s, array $p = []) => 'api.php?' . http_build_query(['action' => 'website_preview', 'id' => $id, 'page' => $s] + $p));
                 header('Content-Security-Policy: sandbox allow-scripts allow-forms; ' . website_csp('preview'));
                 header('Content-Type: text/html; charset=utf-8');
                 header('X-Content-Type-Options: nosniff');

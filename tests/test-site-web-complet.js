@@ -390,7 +390,7 @@ print(json.dumps(out))`, zipPath], { encoding: 'utf8' });
                 await cmd(`${n} : liens entre pages et images présents`, async () => { const bad = p.refs.filter(r => !/^(https?:|mailto:|tel:|#|data:)/.test(r)).map(r => r.split('#')[0]).filter(r => r && !Z.files.includes(r)); must(!bad.length, `introuvables : ${bad.join(', ')}`); must(!p.refs.some(r => /^media\//.test(r)), 'adresse media/ de l’app'); });
                 await cmd(`${n} : aucune personne vivante ni confidentielle`, async () => { must(!/Lucie|SECRET|Secret/.test(p.text), 'nom caché présent'); must(!/nfp_|github_pat|Bearer/.test(p.text), 'jeton'); must(!/contenteditable|data-lcb|lcb-ov/.test(p.text), 'restes de l’éditeur'); });
             }
-            await cmd('css/style.css : images présentes, couleurs du site', async () => { const bad = Z.cssurls.filter(u => !/^(data:|https?:|#)/.test(u) && !Z.files.includes(u)); must(!bad.length, bad.join(', ')); must(/--lc-principale:#204060/.test(Z.css)); });
+            await cmd('css/style.css : images présentes, couleurs du site', async () => { const bad = Z.cssurls.filter(u => !/^(data:|https?:|#)/.test(u) && !(u.startsWith('../') && Z.files.includes(u.slice(3)))); must(!bad.length, bad.join(', ')); must(/--lc-principale:#204060/.test(Z.css)); });
             // le site ouvert dans un vrai navigateur, depuis le disque
             const out = path.join(dir, 'site'); fs.mkdirSync(out, { recursive: true }); spawnSync('python3', ['-I', '-c', 'import zipfile,sys; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])', zipPath, out]);
             await cmd('Le site s’ouvre d’un double-clic (sans erreur, images chargées)', async () => {

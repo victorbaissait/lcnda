@@ -2,7 +2,8 @@
 /**
  * Pont minimal entre la page et l'application de bureau (fenêtre isolée, sandbox). La page peut seulement :
  * ouvrir la fenêtre système de choix d'un fichier à importer, puis lancer l'import du fichier choisi ; télécharger les
- * communes d'un pays des battues (code pays seulement) ; poser, retirer ou régler un widget sur le bureau (sorte connue seulement).
+ * communes d’un pays des battues (code pays seulement) ; poser, retirer ou régler un widget sur le bureau (sorte connue seulement) ;
+ * lister les navigateurs installés et y ouvrir une page de l’application (aperçu en direct d’un site ; adresse vérifiée).
  * Elle ne voit jamais de chemin et ne peut pas en désigner un elle-même.
  */
 const { contextBridge, ipcRenderer } = require('electron');
@@ -29,4 +30,9 @@ contextBridge.exposeInMainWorld('lcnda', {
     close: (kind) => ipcRenderer.invoke('lcnda:desk-widgets', 'close', String(kind || ''), {}),
     autostart: (on) => ipcRenderer.invoke('lcnda:desk-widgets', 'autostart', '', { on: on === true }),
   },
+  /** 🌐 Navigateurs installés : [{id: 'safari'|'chrome'|'firefox'|'edge'|'brave'|'opera'|'chromium', name, installed}] */
+  listBrowsers: () => ipcRenderer.invoke('lcnda:browsers'),
+  /** Ouvre une page de l'application (http://127.0.0.1:port/… : l'aperçu en direct) dans ce navigateur ('default' : celui du système).
+   *  @returns {Promise<{ok: boolean, error?: string}>} */
+  openInBrowser: (id, url) => ipcRenderer.invoke('lcnda:open-in-browser', String(id || ''), String(url || '')),
 });

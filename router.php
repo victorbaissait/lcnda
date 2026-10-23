@@ -122,8 +122,13 @@ if (!lcnda_host_guard()) {
 // Application de bureau : Electron fournit un secret (variable d'environnement) et l'ajoute à chaque requête
 // de sa fenêtre. Sans lui, aucune page, aucune API, aucun média n'est servi : un autre programme ou une
 // page web ouverte dans un navigateur ne peut pas interroger la base locale.
+// Seule exception : l'aperçu en direct d'un site (Mon site web → « Ouvrir dans… » Safari, Firefox…), avec un jeton qui existe
+// (lib/website_php.php) ; il ne montre que cette page du site, comme website_preview, dans une origine isolée.
 $appSecret = getenv('GENEALOGY_APP_SECRET');
-if (is_string($appSecret) && $appSecret !== '') {
+$liveToken = is_string($_GET['token'] ?? null) ? $_GET['token'] : '';
+$liveOk = $path === '/api.php' && ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET' && in_array($_GET['action'] ?? '', ['website_live', 'website_live_rev'], true)
+    && preg_match('/^[a-f0-9]{32}$/', $liveToken) && is_file(DATA_DIR . '/cache/site-live/' . $liveToken . '.json');
+if (is_string($appSecret) && $appSecret !== '' && !$liveOk) {
     $givenSecret = (string) ($_SERVER['HTTP_X_CARNET_SECRET'] ?? '');
     if (!hash_equals($appSecret, $givenSecret)) {
         return router_deny(403);
