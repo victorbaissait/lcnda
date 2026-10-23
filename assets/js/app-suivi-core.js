@@ -323,14 +323,27 @@
         if (!out.length) throw new Error('Aucun point lisible : il faut une date, une heure, une latitude et une longitude.');
         return {format, points: out, ignored: points.length - out.length, ...extra};
     }
+    /** Les blocs <nom …>…</nom> d'un fichier, en un seul passage (un bloc jamais fermé s'arrête au début du suivant :
+     *  sans ça, un fichier plein de balises ouvertes demandait des heures, le navigateur restait figé) */
+    function blocks(t, nameRe) {
+        const re = new RegExp(`<(\\/?)(${nameRe})\\b([^>]*?)(\\/?)>`, 'gi'), out = [];
+        let cur = null, m;
+        while ((m = re.exec(t))) {
+            if (!m[1]) {
+                if (cur) out.push({attrs: cur.attrs, body: ''});
+                if (m[4]) { out.push({attrs: m[3], body: ''}); cur = null; } else cur = {name: m[2].toLowerCase(), attrs: m[3], start: re.lastIndex};
+            } else if (cur && m[2].toLowerCase() === cur.name) { out.push({attrs: cur.attrs, body: t.slice(cur.start, m.index)}); cur = null; }
+            if (out.length > MAX_POINTS) break;
+        }
+        if (cur) out.push({attrs: cur.attrs, body: ''});
+        return out;
+    }
     function parseGPX(text) {
         const t = checkXml(text), pts = [];
-        const re = /<(?:[a-z]+:)?(trkpt|wpt|rtept)\b([^>]*?)(?:\/>|>([\s\S]*?)<\/(?:[a-z]+:)?\1>)/gi;
-        let m;
-        while ((m = re.exec(t))) {
-            const body = m[3] || '', time = readStamp(tag(body, 'time'));
+        for (const b of blocks(t, '(?:[a-z]+:)?(?:trkpt|wpt|rtept)')) {
+            const body = b.body, time = readStamp(tag(body, 'time'));
             const ele = parseFloat(tag(body, 'ele'));
-            pts.push([time, parseFloat(attr(m[2], 'lat')), parseFloat(attr(m[2], 'lon')), Number.isFinite(ele) ? ele : null]);
+            pts.push([time, parseFloat(attr(b.attrs, 'lat')), parseFloat(attr(b.attrs, 'lon')), Number.isFinite(ele) ? ele : null]);
             if (pts.length > MAX_POINTS) break;
         }
         const name = tag(t.slice(0, 20000), 'name'), creator = attr(t.slice(0, 2000), 'creator');
@@ -339,14 +352,14 @@
     function parseKML(text) {
         const t = checkXml(text), pts = [];
         // gx:Track : <when> puis <gx:coord>lon lat alt</gx:coord>, dans le même ordre
-        const tracks = t.match(/<gx:Track\b[\s\S]*?<\/gx:Track>/gi) || [];
+        const tracks = blocks(t, 'gx:Track').map(b => b.body);
         for (const tr of tracks) {
-            const whens = [...tr.matchAll(/<when>([\s\S]*?)<\/when>/gi)].map(x => readStamp(xmlUnesc(x[1])));
-            const coords = [...tr.matchAll(/<gx:coord>([\s\S]*?)<\/gx:coord>/gi)].map(x => xmlUnesc(x[1]).trim().split(/\s+/).map(Number));
+            const whens = [...tr.matchAll(/<when>([^<]*)<\/when>/gi)].map(x => readStamp(xmlUnesc(x[1])));
+            const coords = [...tr.matchAll(/<gx:coord>([^<]*)<\/gx:coord>/gi)].map(x => xmlUnesc(x[1]).trim().split(/\s+/).map(Number));
             coords.forEach((c, i) => pts.push([whens[i], c[1], c[0], Number.isFinite(c[2]) ? c[2] : null]));
         }
         // Placemark daté (TimeStamp/when) avec un Point
-        for (const pm of t.match(/<Placemark\b[\s\S]*?<\/Placemark>/gi) || []) {
+        for (const pm of blocks(t, 'Placemark').map(b => b.body)) {
             if (/<gx:Track/i.test(pm)) continue;
             const when = readStamp(tag(pm, 'when')), c = tag(pm, 'coordinates').split(/\s+/)[0]?.split(',').map(Number);
             if (c && c.length >= 2) pts.push([when, c[1], c[0], Number.isFinite(c[2]) ? c[2] : null]);

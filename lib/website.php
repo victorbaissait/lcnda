@@ -224,7 +224,7 @@ function website_check(mixed $data): array
         $ids[$id] = true;
         $name = mb_substr(safe_text($p['name'] ?? ''), 0, 80) ?: ($i === 0 ? 'Accueil' : 'Page ' . ($i + 1));
         $slug = $i === 0 ? 'index' : website_slug(is_string($p['slug'] ?? null) && $p['slug'] !== '' ? $p['slug'] : $name);
-        if ($slug === 'index' && $i > 0) { $slug = 'page-' . ($i + 1); }
+        if (($slug === 'index' || $slug === 'lisez-moi') && $i > 0) { $slug = 'page-' . ($i + 1); } // « lisez-moi.html » écraserait LISEZ-MOI.html du .zip (Mac, Windows : majuscules = minuscules)
         $base = $slug; $k = 2;
         while (isset($slugs[$slug])) { $slug = $base . '-' . $k++; }
         $slugs[$slug] = true;

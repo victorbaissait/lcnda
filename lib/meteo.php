@@ -26,6 +26,7 @@ const METEO_STATION_KM = 40.0;
 const METEO_MAX_ALT = 150.0;
 const METEO_CACHE_VERSION = 4; // à monter quand le calcul change
 const METEO_HEADER_SIZE = 4096;
+const METEO_PACK_MAX = 16 * 1024 * 1024 * 1024; // un pack fait ≈ 3,5 Go au plus : au-delà, ce n'en est pas un
 /** les pays dont la grille des altitudes est dans le socle (meta.relief_countries) ; la météo, elle, reste FR, BE, CH, LU */
 const METEO_COUNTRY_NAMES = ['FR' => 'France', 'BE' => 'Belgique', 'CH' => 'Suisse', 'LU' => 'Luxembourg', 'IT' => 'Italie', 'NL' => 'Pays-Bas', 'ES' => 'Espagne',
     'DE' => 'Allemagne', 'PT' => 'Portugal', 'GB' => 'Royaume-Uni', 'PL' => 'Pologne', 'DK' => 'Danemark', 'CZ' => 'Tchéquie', 'SK' => 'Slovaquie'];
@@ -950,10 +951,16 @@ function meteo_pack_begin(array $data): array
 {
     $size = (int) ($data['size'] ?? 0);
     if ($size <= METEO_HEADER_SIZE) { throw new RuntimeException('Ce fichier est trop petit pour être un pack météo.'); }
+    if ($size > METEO_PACK_MAX) { throw new RuntimeException('Ce fichier est trop gros pour être un pack météo (16 Go au plus).'); }
     $id = bin2hex(random_bytes(12));
     // les envois abandonnés depuis plus d'un jour sont effacés
-    foreach (glob(meteo_pack_dir() . '/.envois/*.part') ?: [] as $old) { if (filemtime($old) < time() - 86400) { @unlink($old); } }
-    file_put_contents(meteo_upload_path($id), '');
+    foreach (array_merge(glob(meteo_pack_dir() . '/.envois/*.part') ?: [], glob(meteo_pack_dir() . '/.envois/*.size') ?: []) as $old) { if (filemtime($old) < time() - 86400) { @unlink($old); } }
+    $path = meteo_upload_path($id);
+    // il faut la place du fichier envoyé et de la base tirée de lui (le temps de la vérifier)
+    $free = @disk_free_space(dirname($path));
+    if ($free !== false && $free < 2 * $size + 50 * 1024 * 1024) { throw new RuntimeException('Pas assez de place sur le disque pour ce pack (il faut environ ' . round(2 * $size / 1e9, 1) . ' Go de libres).'); }
+    file_put_contents($path, '');
+    file_put_contents(substr($path, 0, -5) . '.size', (string) $size); // la taille annoncée : un morceau ne peut pas la dépasser
     return ['id' => $id];
 }
 
@@ -965,8 +972,10 @@ function meteo_pack_chunk(array $q): array
     clearstatcache(true, $path);
     $offset = (int) ($q['offset'] ?? -1);
     if ($offset !== filesize($path)) { throw new RuntimeException('Morceau du fichier hors de place : recommence l’import.'); }
+    $size = (int) @file_get_contents(substr($path, 0, -5) . '.size');
+    if ($size <= 0 || $offset >= $size) { throw new RuntimeException('Le fichier envoyé dépasse la taille annoncée : recommence l’import.'); }
     $in = fopen('php://input', 'rb'); $out = fopen($path, 'ab');
-    $n = stream_copy_to_stream($in, $out, 64 * 1024 * 1024);
+    $n = stream_copy_to_stream($in, $out, min(64 * 1024 * 1024, $size - $offset));
     fclose($in); fclose($out);
     return ['received' => $offset + (int) $n];
 }
@@ -999,9 +1008,16 @@ function meteo_pack_finish(array $data): array
         fclose($in); fclose($out);
         if (!hash_equals((string) $h['sha256'], hash_final($ctx))) { @unlink($tmp); throw new RuntimeException('Le fichier est abîmé (empreinte différente) : rien n’a été installé.'); }
         try {
-            $t = new PDO('sqlite:' . $tmp, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+            // ouvert en lecture seule, et seulement si c'est bien une base SQLite (« SQLite format 3 ») du bon schéma
+            $f = fopen($tmp, 'rb'); $magic = (string) fread($f, 16); fclose($f);
+            if ($magic !== "SQLite format 3\0") { throw new RuntimeException('pas une base'); }
+            $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+            if (defined('PDO::SQLITE_ATTR_OPEN_FLAGS')) { $opts[PDO::SQLITE_ATTR_OPEN_FLAGS] = PDO::SQLITE_OPEN_READONLY; }
+            $t = new PDO('sqlite:' . $tmp, null, null, $opts);
             $meta = $t->query('SELECT key, value FROM meta')->fetchAll(PDO::FETCH_KEY_PAIR);
             if (($meta['kind'] ?? '') !== $kind || (int) ($meta['format'] ?? 0) !== 1) { throw new RuntimeException('sorte'); }
+            $tables = $t->query("SELECT name FROM sqlite_master WHERE type='table'")->fetchAll(PDO::FETCH_COLUMN);
+            if (array_diff(['meta', 'sources', 'stations', 'grid', 'daily'], $tables)) { throw new RuntimeException('schéma'); }
             $t = null;
         } catch (Throwable) { @unlink($tmp); throw new RuntimeException('Le pack ne peut pas être lu : rien n’a été installé.'); }
         $hadPrev = false;
@@ -1009,7 +1025,7 @@ function meteo_pack_finish(array $data): array
         if (!@rename($tmp, $target)) { @unlink($tmp); if ($hadPrev) { @rename($target . '.prev', $target); } throw new RuntimeException('Pack impossible à ranger.'); }
         @unlink($target . '.removed');
         return ['kind' => $kind, 'stations' => (int) ($h['stations'] ?? 0), 'had_prev' => $hadPrev, 'size' => (int) filesize($target)];
-    } finally { @unlink($path); }
+    } finally { @unlink($path); @unlink(substr($path, 0, -5) . '.size'); }
 }
 
 /** POST meteo_pack_undo {kind} → défait le dernier import (remet le pack d'avant, ou retire le nouveau) */

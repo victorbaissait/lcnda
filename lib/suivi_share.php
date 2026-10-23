@@ -70,7 +70,8 @@ function suivi_share_build(PDO $pdo, array $q): array
     foreach ($petIds as $id) { $ins->execute([$id]); }
     suivi_fill_uuids($pdo);
     $uuidOf = static function (string $table, int $id) use ($pdo): string { $s = $pdo->prepare("SELECT uuid FROM $table WHERE " . ($table === 'animal_profiles' ? 'pet_id' : 'id') . '=?'); $s->execute([$id]); return (string) $s->fetchColumn(); };
-    $media = []; $mediaKey = static function (?int $id) use (&$media, $photos): ?string { if (!$photos || !$id) { return null; } $k = 'm' . $id; $media[$k] = $id; return $k; };
+    // une photo où paraît une personne vivante ou une fiche confidentielle ne part pas (même règle que Mon site web)
+    $media = []; $mediaKey = static function (?int $id) use (&$media, $photos, $pdo): ?string { if (!$photos || !$id || (function_exists('website_media_ok') && !website_media_ok($pdo, $id))) { return null; } $k = 'm' . $id; $media[$k] = $id; return $k; };
     $people = static fn(?int $id, string $txt, array $pp) => $names ? ($id ? ($pp[$id]['name'] ?? '') : $txt) : '';
     $siteUuid = []; $groupUuid = [];
     foreach ($pdo->query('SELECT id, uuid FROM track_sites') as $r) { $siteUuid[(int) $r['id']] = (string) $r['uuid']; }
@@ -153,30 +154,30 @@ function suivi_share_clean(array $p): array
     $obsClean = static fn(array $o) => ['uuid' => $uu($o['uuid'] ?? ''), 'date' => suivi_txt($o['date'] ?? '', 60), 'time' => suivi_time($o['time'] ?? ''), 'lat' => suivi_float($o['lat'] ?? null, -90, 90), 'lon' => suivi_float($o['lon'] ?? null, -180, 180),
         'place' => $place($o['place'] ?? null), 'place_text' => suivi_txt($o['place_text'] ?? '', 200), 'site' => $uu($o['site'] ?? ''), 'behaviors' => array_slice(array_values(array_filter(array_map(static fn($b) => suivi_txt($b, 40), is_array($o['behaviors'] ?? null) ? $o['behaviors'] : []))), 0, 12),
         'count' => isset($o['count']) && is_numeric($o['count']) ? max(0, min(10000000, (int) $o['count'])) : null, 'with' => array_values(array_filter(array_map($uu, is_array($o['with'] ?? null) ? array_slice($o['with'], 0, 50) : []))),
-        'reading' => suivi_txt($o['reading'] ?? '', 80), 'reading_detail' => is_array($o['reading_detail'] ?? null) ? $o['reading_detail'] : null, 'reliability' => in_array($o['reliability'] ?? '', SUIVI_RELIABILITY, true) ? $o['reliability'] : '',
-        'observer' => suivi_txt($o['observer'] ?? '', 200), 'note' => suivi_txt($o['note'] ?? '', 4000), 'source' => in_array($o['source'] ?? '', SUIVI_SOURCES, true) ? $o['source'] : 'manuel', 'sea' => is_array($o['sea'] ?? null) ? $o['sea'] : null, 'media' => is_string($o['media'] ?? null) && preg_match('/^m\d{1,10}$/', $o['media']) ? $o['media'] : null];
+        'reading' => suivi_txt($o['reading'] ?? '', 80), 'reading_detail' => is_array($o['reading_detail'] ?? null) ? $o['reading_detail'] : null, 'reliability' => in_array($o['reliability'] ?? '', SUIVI_RELIABILITY, true) ? (string) ($o['reliability'] ?? '') : '',
+        'observer' => suivi_txt($o['observer'] ?? '', 200), 'note' => suivi_txt($o['note'] ?? '', 4000), 'source' => in_array($o['source'] ?? '', SUIVI_SOURCES, true) ? $o['source'] : 'manuel', 'sea' => suivi_clean_sea($o['sea'] ?? null) ?: null, 'media' => is_string($o['media'] ?? null) && preg_match('/^m\d{1,10}$/', $o['media']) ? $o['media'] : null];
     $animals = []; $nObs = 0; $nGps = 0; $nLines = 0;
     foreach ($arr($p['animals'] ?? null, SUIVI_SHARE_MAX['animals'], 'animaux') as $a) {
         $obs = array_map($obsClean, $arr($a['observations'] ?? null, SUIVI_SHARE_MAX['observations'], 'observations'));
         $nObs += count($obs);
         $gps = [];
-        foreach (is_array($a['gps'] ?? null) ? $a['gps'] : [] as $g) { if (!is_array($g)) { continue; } $t = safe_int($g[0] ?? 0); $la = suivi_float($g[1] ?? null, -90, 90); $lo = suivi_float($g[2] ?? null, -180, 180); if ($t && $la !== null && $lo !== null) { $gps[] = [$t, $la, $lo, suivi_float($g[3] ?? null, -500, 10000)]; } }
+        foreach (is_array($a['gps'] ?? null) ? $a['gps'] : [] as $g) { if (!is_array($g)) { continue; } $t = safe_int($g[0] ?? 0); $la = suivi_float($g[1] ?? null, -90, 90); $lo = suivi_float($g[2] ?? null, -180, 180); if ($t && $t >= -2208988800 && $t <= 4102444800 && $la !== null && $lo !== null) { $gps[] = [$t, $la, $lo, suivi_float($g[3] ?? null, -500, 10000)]; } }
         $nGps += count($gps);
         $marks = array_map(static fn($m) => ['uuid' => $uu($m['uuid'] ?? ''), 'kind' => in_array($m['kind'] ?? '', SUIVI_MARK_KINDS, true) ? $m['kind'] : 'other', 'code' => suivi_txt($m['code'] ?? '', 80), 'colors' => is_array($m['colors'] ?? null) ? $m['colors'] : null, 'position' => suivi_txt($m['position'] ?? '', 120), 'scheme' => suivi_txt($m['scheme'] ?? '', 120), 'model' => suivi_txt($m['model'] ?? '', 120), 'interval_min' => isset($m['interval_min']) && is_numeric($m['interval_min']) ? (int) $m['interval_min'] : null, 'start_date' => suivi_txt($m['start_date'] ?? '', 60), 'end_date' => suivi_txt($m['end_date'] ?? '', 60), 'end_reason' => suivi_txt($m['end_reason'] ?? '', 200), 'note' => suivi_txt($m['note'] ?? '', 2000), 'media' => is_string($m['media'] ?? null) && preg_match('/^m\d{1,10}$/', $m['media']) ? $m['media'] : null], $arr($a['marks'] ?? null, 500, 'marques'));
-        $health = array_map(static fn($h) => ['uuid' => $uu($h['uuid'] ?? ''), 'date' => suivi_txt($h['date'] ?? '', 60), 'state' => in_array($h['state'] ?? '', SUIVI_HEALTH_STATES, true) ? $h['state'] : '', 'what_kind' => suivi_txt($h['what_kind'] ?? '', 40), 'what_text' => suivi_txt($h['what_text'] ?? '', 600), 'cause' => suivi_txt($h['cause'] ?? '', 40), 'cause_text' => suivi_txt($h['cause_text'] ?? '', 600), 'place' => $place($h['place'] ?? null), 'place_text' => suivi_txt($h['place_text'] ?? '', 200), 'carer' => suivi_txt($h['carer'] ?? '', 200), 'care' => suivi_txt($h['care'] ?? '', 2000), 'meds' => suivi_txt($h['meds'] ?? '', 2000), 'weight_g' => suivi_float($h['weight_g'] ?? null, 0, 20000000), 'media' => array_values(array_filter(is_array($h['media'] ?? null) ? $h['media'] : [], static fn($k) => is_string($k) && preg_match('/^m\d{1,10}$/', $k))), 'outcome' => in_array($h['outcome'] ?? '', ['', 'relache', 'mort'], true) ? $h['outcome'] : '', 'outcome_date' => suivi_txt($h['outcome_date'] ?? '', 60), 'note' => suivi_txt($h['note'] ?? '', 4000)], $arr($a['health'] ?? null, 5000, 'événements de santé'));
-        $members = array_map(static fn($m) => ['uuid' => $uu($m['uuid'] ?? ''), 'group' => $uu($m['group'] ?? ''), 'role' => suivi_txt($m['role'] ?? '', 60), 'start_date' => suivi_txt($m['start_date'] ?? '', 60), 'start_reason' => in_array($m['start_reason'] ?? '', SUIVI_START_REASONS, true) ? $m['start_reason'] : 'entree', 'end_date' => suivi_txt($m['end_date'] ?? '', 60), 'end_reason' => in_array($m['end_reason'] ?? '', SUIVI_END_REASONS, true) ? $m['end_reason'] : '', 'note' => suivi_txt($m['note'] ?? '', 2000)], $arr($a['members'] ?? null, 500, 'groupes'));
+        $health = array_map(static fn($h) => ['uuid' => $uu($h['uuid'] ?? ''), 'date' => suivi_txt($h['date'] ?? '', 60), 'state' => in_array($h['state'] ?? '', SUIVI_HEALTH_STATES, true) ? $h['state'] : '', 'what_kind' => suivi_txt($h['what_kind'] ?? '', 40), 'what_text' => suivi_txt($h['what_text'] ?? '', 600), 'cause' => suivi_txt($h['cause'] ?? '', 40), 'cause_text' => suivi_txt($h['cause_text'] ?? '', 600), 'place' => $place($h['place'] ?? null), 'place_text' => suivi_txt($h['place_text'] ?? '', 200), 'carer' => suivi_txt($h['carer'] ?? '', 200), 'care' => suivi_txt($h['care'] ?? '', 2000), 'meds' => suivi_txt($h['meds'] ?? '', 2000), 'weight_g' => suivi_float($h['weight_g'] ?? null, 0, 20000000), 'media' => array_values(array_filter(is_array($h['media'] ?? null) ? $h['media'] : [], static fn($k) => is_string($k) && preg_match('/^m\d{1,10}$/', $k))), 'outcome' => in_array($h['outcome'] ?? '', ['', 'relache', 'mort'], true) ? (string) ($h['outcome'] ?? '') : '', 'outcome_date' => suivi_txt($h['outcome_date'] ?? '', 60), 'note' => suivi_txt($h['note'] ?? '', 4000)], $arr($a['health'] ?? null, 5000, 'événements de santé'));
+        $members = array_map(static fn($m) => ['uuid' => $uu($m['uuid'] ?? ''), 'group' => $uu($m['group'] ?? ''), 'role' => suivi_txt($m['role'] ?? '', 60), 'start_date' => suivi_txt($m['start_date'] ?? '', 60), 'start_reason' => in_array($m['start_reason'] ?? '', SUIVI_START_REASONS, true) ? $m['start_reason'] : 'entree', 'end_date' => suivi_txt($m['end_date'] ?? '', 60), 'end_reason' => in_array($m['end_reason'] ?? '', SUIVI_END_REASONS, true) ? (string) ($m['end_reason'] ?? '') : '', 'note' => suivi_txt($m['note'] ?? '', 2000)], $arr($a['members'] ?? null, 500, 'groupes'));
         $nLines += count($marks) + count($health) + count($members);
         $animals[] = ['uuid' => $uu($a['uuid'] ?? ''), 'name' => suivi_txt($a['name'] ?? '', 120) ?: 'Animal sans nom', 'species' => array_key_exists((string) ($a['species'] ?? ''), PET_SPECIES) ? (string) $a['species'] : 'autre', 'sex' => in_array($a['sex'] ?? '', ['M', 'F'], true) ? $a['sex'] : '',
             'breed' => suivi_txt($a['breed'] ?? '', 120), 'birth_date' => suivi_txt($a['birth_date'] ?? '', 40), 'deceased' => !empty($a['deceased']), 'microchip' => suivi_txt($a['microchip'] ?? '', 40), 'tattoo' => suivi_txt($a['tattoo'] ?? '', 40),
             'taxon' => suivi_txt($a['taxon'] ?? '', 120), 'sci_name' => suivi_txt($a['sci_name'] ?? '', 120), 'profile' => in_array($a['profile'] ?? '', SUIVI_PROFILES, true) ? $a['profile'] : '', 'status' => in_array($a['status'] ?? '', ['suivi', 'pause', 'fini', 'perdu'], true) ? $a['status'] : 'suivi',
-            'ringed_date' => suivi_txt($a['ringed_date'] ?? '', 60), 'ringed_place' => $place($a['ringed_place'] ?? null), 'ringer' => suivi_txt($a['ringer'] ?? '', 200), 'age_class' => in_array($a['age_class'] ?? '', ['', 'poussin', 'jeune', 'adulte', 'inconnu'], true) ? $a['age_class'] : '',
+            'ringed_date' => suivi_txt($a['ringed_date'] ?? '', 60), 'ringed_place' => $place($a['ringed_place'] ?? null), 'ringer' => suivi_txt($a['ringer'] ?? '', 200), 'age_class' => in_array($a['age_class'] ?? '', ['', 'poussin', 'jeune', 'adulte', 'inconnu'], true) ? (string) ($a['age_class'] ?? '') : '',
             'program' => suivi_txt($a['program'] ?? '', 200), 'note' => suivi_txt($a['note'] ?? '', 4000), 'photos' => array_values(array_filter(is_array($a['photos'] ?? null) ? array_slice($a['photos'], 0, 20) : [], static fn($k) => is_string($k) && preg_match('/^m\d{1,10}$/', $k))),
             'marks' => $marks, 'observations' => $obs, 'health' => $health, 'members' => $members, 'gps' => $gps];
     }
     if ($nObs > SUIVI_SHARE_MAX['observations']) { throw new RuntimeException('Fichier trop gros : trop d’observations.'); }
     if ($nGps > SUIVI_SHARE_MAX['gps']) { throw new RuntimeException('Fichier trop gros : trop de points GPS (500 000 au plus).'); }
     if ($nLines > SUIVI_SHARE_MAX['lines']) { throw new RuntimeException('Fichier trop gros : trop de lignes.'); }
-    $sites = array_map(static fn($s) => ['uuid' => $uu($s['uuid'] ?? ''), 'name' => suivi_txt($s['name'] ?? '', 160) ?: 'Site', 'kind' => suivi_txt($s['kind'] ?? '', 60), 'place' => $place($s['place'] ?? null), 'lat' => suivi_float($s['lat'] ?? null, -90, 90), 'lon' => suivi_float($s['lon'] ?? null, -180, 180), 'area_ha' => suivi_float($s['area_ha'] ?? null, 0, 1e9), 'since' => suivi_txt($s['since'] ?? '', 60), 'outline' => is_array($s['outline'] ?? null) ? array_slice($s['outline'], 0, 400) : [], 'note' => suivi_txt($s['note'] ?? '', 4000),
+    $sites = array_map(static fn($s) => ['uuid' => $uu($s['uuid'] ?? ''), 'name' => suivi_txt($s['name'] ?? '', 160) ?: 'Site', 'kind' => suivi_txt($s['kind'] ?? '', 60), 'place' => $place($s['place'] ?? null), 'lat' => suivi_float($s['lat'] ?? null, -90, 90), 'lon' => suivi_float($s['lon'] ?? null, -180, 180), 'area_ha' => suivi_float($s['area_ha'] ?? null, 0, 1e9), 'since' => suivi_txt($s['since'] ?? '', 60), 'outline' => suivi_clean_outline($s['outline'] ?? null), 'note' => suivi_txt($s['note'] ?? '', 4000),
         'counts' => array_map(static fn($c) => ['uuid' => $uu($c['uuid'] ?? ''), 'date' => suivi_txt($c['date'] ?? '', 60), 'time' => suivi_time($c['time'] ?? ''), 'what' => suivi_txt($c['what'] ?? '', 40), 'what_text' => suivi_txt($c['what_text'] ?? '', 200), 'number' => isset($c['number']) && is_numeric($c['number']) ? max(0, min(100000000, (int) $c['number'])) : null, 'unit' => suivi_txt($c['unit'] ?? '', 40), 'observer' => suivi_txt($c['observer'] ?? '', 200), 'note' => suivi_txt($c['note'] ?? '', 2000)], array_slice(array_values(array_filter(is_array($s['counts'] ?? null) ? $s['counts'] : [], 'is_array')), 0, 5000))], $arr($p['sites'] ?? null, 2000, 'sites'));
     $groups = array_map(static fn($g) => ['uuid' => $uu($g['uuid'] ?? ''), 'name' => suivi_txt($g['name'] ?? '', 160) ?: 'Groupe', 'kind' => suivi_txt($g['kind'] ?? 'groupe', 40) ?: 'groupe', 'species' => suivi_txt($g['species'] ?? '', 120), 'territory' => suivi_txt($g['territory'] ?? '', 300), 'site' => $uu($g['site'] ?? ''), 'place' => $place($g['place'] ?? null), 'note' => suivi_txt($g['note'] ?? '', 4000)], $arr($p['groups'] ?? null, 2000, 'groupes'));
     $free = array_map($obsClean, $arr($p['free_observations'] ?? null, SUIVI_SHARE_MAX['observations'], 'observations'));
@@ -239,7 +240,9 @@ function suivi_share_match(PDO $pdo, array $a): array
     }
     foreach (['microchip', 'tattoo'] as $k) {
         if (strlen(suivi_norm($a[$k])) < 6) { continue; }
-        foreach ($pdo->query('SELECT id, data_json FROM pets') as $r) { $d = json_decode((string) $r['data_json'], true) ?: []; if (suivi_norm((string) ($d[$k] ?? '')) === suivi_norm($a[$k])) { return [(int) $r['id'], $k === 'microchip' ? 'puce' : 'tatouage']; } }
+        static $chips = null; // les puces et tatouages des fiches, lus une fois (sinon chaque animal reçu relisait toutes les fiches)
+        if ($chips === null) { $chips = []; foreach ($pdo->query('SELECT id, data_json FROM pets ORDER BY id') as $r) { $d = json_decode((string) $r['data_json'], true) ?: []; foreach (['microchip', 'tattoo'] as $kk) { $n = suivi_norm((string) ($d[$kk] ?? '')); if ($n !== '') { $chips[$kk][$n] ??= (int) $r['id']; } } } }
+        if (isset($chips[$k][suivi_norm($a[$k])])) { return [$chips[$k][suivi_norm($a[$k])], $k === 'microchip' ? 'puce' : 'tatouage']; }
         $s = $pdo->prepare("SELECT pet_id FROM animal_marks WHERE kind=? AND code_norm=? LIMIT 1"); $s->execute([$k === 'microchip' ? 'chip' : 'tattoo', suivi_norm($a[$k])]);
         if ($id = (int) $s->fetchColumn()) { return [$id, $k === 'microchip' ? 'puce' : 'tatouage']; }
     }
@@ -362,7 +365,8 @@ function suivi_share_apply(PDO $pdo, array $pkg, array $an, array $dec, array $m
             foreach ($info['filled'] as $f) { $take[$f['field']] = true; }
             if ($take) {
                 $snap('animal_profiles', $tid);
-                $pdo->prepare("INSERT OR IGNORE INTO animal_profiles(pet_id, status, uuid) VALUES(?, 'suivi', ?)")->execute([$tid, suivi_new_uuid()]);
+                $np = $pdo->prepare("INSERT OR IGNORE INTO animal_profiles(pet_id, status, uuid) VALUES(?, 'suivi', ?)"); $np->execute([$tid, suivi_new_uuid()]);
+                if ($np->rowCount()) { $undo['ins'][] = ['animal_profiles', $tid]; } // pas de profil avant : « ↶ Annuler » le retire
                 foreach (['taxon', 'sci_name', 'profile', 'status', 'ringed_date', 'age_class', 'program'] as $f) { if (isset($take[$f])) { $pdo->prepare("UPDATE animal_profiles SET $f=?, updated_at=CURRENT_TIMESTAMP WHERE pet_id=?")->execute([$a[$f], $tid]); if ($f === 'ringed_date') { $pdo->prepare('UPDATE animal_profiles SET ringed_iso=? WHERE pet_id=?')->execute([suivi_iso($a[$f]), $tid]); } } }
                 $petFields = array_intersect_key($take, ['name' => 1, 'species' => 1, 'sex' => 1, 'birth_date' => 1, 'deceased' => 1]);
                 if ($petFields) {
@@ -412,7 +416,8 @@ function suivi_share_apply(PDO $pdo, array $pkg, array $an, array $dec, array $m
     }
     $freeHave = []; foreach ($pdo->query('SELECT uuid, obs_date, obs_time, lat, lon, reading_raw, note, count FROM animal_observations WHERE pet_id IS NULL') as $o) { $freeHave[(string) $o['uuid']] = true; $freeHave[suivi_sig('obs', ['date' => $o['obs_date'], 'time' => $o['obs_time'], 'lat' => $o['lat'], 'lon' => $o['lon'], 'reading' => $o['reading_raw'], 'note' => $o['note'], 'count' => $o['count']])] = true; }
     foreach ($pkg['free_observations'] as $o) { if (isset($freeHave[$o['uuid']]) || isset($freeHave[suivi_sig('obs', $o)])) { continue; } $row = suivi_share_row($pdo, 'obs', $o, 0, $siteMap, $groupMap, $media, $undo); $row['pet_id'] = null; $ins('animal_observations', $row); $n['lines']++; }
-    $summary = sprintf('%d animal(aux) ajouté(s), %d complété(s), %d ligne(s) ajoutée(s), %d remplacée(s), %d point(s) GPS', $n['animals_new'], $n['animals_merged'], $n['lines'], $n['replaced'], $n['gps']);
+    $pl = static fn(int $k, string $one, string $many) => $k . ' ' . ($k > 1 ? $many : $one); // jamais « (s) »
+    $summary = implode(', ', [$pl($n['animals_new'], 'animal ajouté', 'animaux ajoutés'), $pl($n['animals_merged'], 'complété', 'complétés'), $pl($n['lines'], 'ligne ajoutée', 'lignes ajoutées'), $pl($n['replaced'], 'remplacée', 'remplacées'), $pl($n['gps'], 'point GPS', 'points GPS')]);
     $pdo->prepare('INSERT INTO suivi_receipts(source, summary, undo_json) VALUES(?,?,?)')->execute([$source, $summary, json_encode($undo, JSON_UNESCAPED_UNICODE)]);
     $rid = (int) $pdo->lastInsertId();
     log_change($pdo, 'suivi_share', $rid, 'create', 'Suivi des animaux reçu' . ($source !== '' ? ' de ' . $source : '') . ' le ' . date('d/m/Y') . ' : ' . $summary);
@@ -438,18 +443,33 @@ function suivi_share_undo(PDO $pdo, int $rid): array
     $u = json_decode((string) $r['undo_json'], true) ?: [];
     foreach ($u['imports'] ?? [] as $imp) { $pdo->prepare('DELETE FROM animal_gps WHERE import_id=?')->execute([(int) $imp]); $pdo->prepare('DELETE FROM animal_gps_imports WHERE id=?')->execute([(int) $imp]); }
     $allowed = array_merge(SUIVI_UUID_TABLES, ['places', 'pets']);
-    foreach (array_reverse($u['ins'] ?? []) as [$t, $id]) { if (in_array($t, $allowed, true)) { $pdo->prepare("DELETE FROM $t WHERE " . ($t === 'animal_profiles' ? 'pet_id' : 'id') . '=?')->execute([(int) $id]); } }
+    foreach (array_reverse($u['ins'] ?? []) as [$t, $id]) {
+        if (!in_array($t, $allowed, true)) { continue; }
+        if ($t === 'places' && suivi_place_used($pdo, (int) $id)) { continue; } // un lieu servi depuis (un événement, une observation ajoutée ensuite) reste
+        $pdo->prepare("DELETE FROM $t WHERE " . ($t === 'animal_profiles' ? 'pet_id' : 'id') . '=?')->execute([(int) $id]);
+    }
     foreach (array_reverse($u['upd'] ?? []) as [$t, $id, $row]) {
         if (!in_array($t, $allowed, true) || !is_array($row)) { continue; }
         $col = $t === 'animal_profiles' ? 'pet_id' : 'id';
         $cols = array_values(array_intersect(table_columns_suivi($pdo, $t), array_keys($row)));
-        $pdo->prepare("DELETE FROM $t WHERE $col=?")->execute([(int) $id]);
-        $pdo->prepare("INSERT INTO $t(" . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols), '?')) . ')')->execute(array_map(static fn($c) => $row[$c], $cols));
+        // remise en place sur la ligne elle-même (UPDATE) : un DELETE effacerait aussi ce qui s'y rattache (propriétaires d'un animal : ON DELETE CASCADE)
+        $has = $pdo->prepare("SELECT 1 FROM $t WHERE $col=?"); $has->execute([(int) $id]);
+        if ($has->fetchColumn()) { $pdo->prepare("UPDATE $t SET " . implode(',', array_map(static fn($c) => "$c=?", $cols)) . " WHERE $col=?")->execute([...array_map(static fn($c) => $row[$c], $cols), (int) $id]); }
+        else { $pdo->prepare("INSERT INTO $t(" . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols), '?')) . ')')->execute(array_map(static fn($c) => $row[$c], $cols)); }
     }
     foreach ($u['pets'] ?? [] as $pid) { delete_pet($pdo, ['id' => (int) $pid]); }
     $pdo->prepare('UPDATE suivi_receipts SET undone=1 WHERE id=?')->execute([$rid]);
     log_change($pdo, 'suivi_share', $rid, 'update', 'Réception du suivi annulée : ' . $r['summary']);
     return ['ok' => true];
+}
+
+/** Un lieu encore utilisé par la généalogie ou par le suivi */
+function suivi_place_used(PDO $pdo, int $id): bool
+{
+    foreach ([['events', 'place_id'], ['animal_observations', 'place_id'], ['animal_health', 'place_id'], ['track_sites', 'place_id'], ['animal_groups', 'place_id'], ['animal_profiles', 'ringed_place_id'], ['animal_profiles', 'home_place_id']] as [$t, $c]) {
+        try { $s = $pdo->prepare("SELECT 1 FROM $t WHERE $c=? LIMIT 1"); $s->execute([$id]); if ($s->fetchColumn()) { return true; } } catch (Throwable) {}
+    }
+    return false;
 }
 
 function table_columns_suivi(PDO $pdo, string $t): array

@@ -259,7 +259,7 @@ function suivi_obs_out(array $o, array $places = [], array $people = []): array
         'behaviors' => array_values(array_filter(explode(',', (string) $o['behaviors']))), 'count' => $o['count'] !== null ? (int) $o['count'] : null, 'with' => json_decode((string) $o['with_json'], true) ?: [],
         'reading' => (string) $o['reading_raw'], 'reading_detail' => json_decode((string) $o['reading_json'], true) ?: null, 'reliability' => (string) $o['reliability'],
         'observer_id' => $o['observer_id'] ? (int) $o['observer_id'] : null, 'observer' => $o['observer_id'] ? ($people[(int) $o['observer_id']]['name'] ?? '') : (string) $o['observer_txt'],
-        'note' => (string) $o['note'], 'source' => (string) $o['source'], 'media_id' => $o['media_id'] ? (int) $o['media_id'] : null, 'sea' => json_decode((string) $o['sea_json'], true) ?: null, 'updated_at' => (string) $o['updated_at']];
+        'note' => (string) $o['note'], 'source' => (string) $o['source'], 'media_id' => $o['media_id'] ? (int) $o['media_id'] : null, 'sea' => suivi_clean_sea(json_decode((string) $o['sea_json'], true)) ?: null, 'updated_at' => (string) $o['updated_at']];
 }
 
 function suivi_health_out(array $h, array $places = [], array $people = []): array
@@ -331,7 +331,7 @@ function suivi_site_out(array $s, array $places = []): array
     $pl = $s['place_id'] ? ($places[(int) $s['place_id']] ?? null) : null;
     return ['id' => (int) $s['id'], 'name' => (string) $s['name'], 'kind' => (string) $s['kind'], 'place_id' => $s['place_id'] ? (int) $s['place_id'] : null, 'place' => $pl,
         'lat' => $s['lat'] !== null ? (float) $s['lat'] : ($pl['lat'] ?? null), 'lon' => $s['lon'] !== null ? (float) $s['lon'] : ($pl['lon'] ?? null), 'area_ha' => $s['area_ha'] !== null ? (float) $s['area_ha'] : null,
-        'since' => (string) $s['since'], 'outline' => json_decode((string) $s['outline_json'], true) ?: [], 'note' => (string) $s['note'], 'updated_at' => (string) $s['updated_at']];
+        'since' => (string) $s['since'], 'outline' => suivi_clean_outline(json_decode((string) $s['outline_json'], true)), 'note' => (string) $s['note'], 'updated_at' => (string) $s['updated_at']];
 }
 
 function suivi_group_out(array $g, array $places = []): array
@@ -354,7 +354,7 @@ function suivi_animal(PDO $pdo, int $id): array
     $pet = function_exists('pet_row') ? pet_row($pdo, $id) : null;
     $s = $pdo->prepare('SELECT * FROM animal_profiles WHERE pet_id=?'); $s->execute([$id]); $pr = $s->fetch(PDO::FETCH_ASSOC) ?: null;
     $s = $pdo->prepare('SELECT * FROM animal_marks WHERE pet_id=? ORDER BY start_iso, id'); $s->execute([$id]); $marks = array_map('suivi_mark_out', $s->fetchAll(PDO::FETCH_ASSOC));
-    $s = $pdo->prepare('SELECT * FROM animal_observations WHERE pet_id=? OR with_json LIKE ? ORDER BY obs_iso DESC, obs_time DESC, id DESC'); $s->execute([$id, '%"' . $id . '"%']); $obsRows = $s->fetchAll(PDO::FETCH_ASSOC);
+    $s = $pdo->prepare('SELECT * FROM animal_observations WHERE pet_id=? OR with_json LIKE ? ORDER BY obs_iso DESC, obs_time DESC, id DESC'); $s->execute([$id, '%' . $id . '%']); $obsRows = $s->fetchAll(PDO::FETCH_ASSOC); // with_json = « [3,5] » (sans guillemets) : le tri exact est juste dessous
     $obsRows = array_values(array_filter($obsRows, static fn($o) => (int) $o['pet_id'] === $id || in_array($id, array_map('intval', json_decode((string) $o['with_json'], true) ?: []), true)));
     $s = $pdo->prepare('SELECT * FROM animal_health WHERE pet_id=? ORDER BY ev_iso, id'); $s->execute([$id]); $hRows = $s->fetchAll(PDO::FETCH_ASSOC);
     $s = $pdo->prepare('SELECT m.*, g.name AS group_name, g.kind AS group_kind FROM animal_memberships m LEFT JOIN animal_groups g ON g.id=m.group_id WHERE m.pet_id=? ORDER BY m.start_iso, m.id'); $s->execute([$id]);
@@ -534,10 +534,7 @@ function suivi_save_obs(PDO $pdo, array $d): array
     [$obsId, $obsTxt] = suivi_who($d['observer'] ?? ($d['observer_id'] ?? ''), $d['observer_txt'] ?? '');
     $site = safe_int($d['site_id'] ?? 0); if ($site) { $s = $pdo->prepare('SELECT 1 FROM track_sites WHERE id=?'); $s->execute([$site]); if (!$s->fetchColumn()) { $site = 0; } }
     $count = $d['count'] ?? null; $count = $count === null || $count === '' ? null : max(0, min(10000000, (int) $count));
-    $sea = [];
-    foreach (['depth_m' => [0, 12000], 'group_size' => [0, 100000]] as $k => [$a, $b]) { $f = suivi_float($d['sea'][$k] ?? null, $a, $b); if ($f !== null) { $sea[$k] = $f; } }
-    if (($t = suivi_txt($d['sea']['surface'] ?? '', 120)) !== '') { $sea['surface'] = $t; }
-    if (($t = suivi_txt($d['sea']['camera'] ?? '', 120)) !== '') { $sea['camera'] = $t; }
+    $sea = suivi_clean_sea($d['sea'] ?? null);
     $vals = [$pet ?: null, $date, suivi_iso($date), suivi_time($d['time'] ?? ''), suivi_float($d['lat'] ?? null, -90, 90), suivi_float($d['lon'] ?? null, -180, 180), suivi_place_ok($pdo, $d['place_id'] ?? 0),
         suivi_txt($d['place_text'] ?? '', 200), $site ?: null, $beh, $count, $with ? json_encode($with) : '', suivi_txt($d['reading'] ?? '', 80), suivi_clean_reading($d['reading_detail'] ?? null),
         in_array($d['reliability'] ?? '', SUIVI_RELIABILITY, true) ? (string) ($d['reliability'] ?? '') : '', $obsId, $obsTxt, suivi_txt($d['note'] ?? '', 4000),
@@ -580,16 +577,34 @@ function suivi_save_health(PDO $pdo, array $d): array
     return ['id' => $id];
 }
 
+/** Le contour d'un site : au plus 400 points [lat, lon] lisibles (le reste est jeté : une carte ne doit jamais tomber sur un point abîmé) */
+function suivi_clean_outline(mixed $v): array
+{
+    $outline = [];
+    foreach (array_slice(is_array($v) ? $v : [], 0, 400) as $p) {
+        if (!is_array($p)) { continue; }
+        $la = suivi_float($p[0] ?? null, -90, 90); $lo = suivi_float($p[1] ?? null, -180, 180);
+        if ($la !== null && $lo !== null) { $outline[] = [round($la, 6), round($lo, 6)]; }
+    }
+    return $outline;
+}
+
+/** Les mesures en mer d'une observation : seulement profondeur, taille du groupe, surface, caméra */
+function suivi_clean_sea(mixed $v): array
+{
+    $sea = [];
+    if (!is_array($v)) { return $sea; }
+    foreach (['depth_m' => [0, 12000], 'group_size' => [0, 100000]] as $k => [$a, $b]) { $f = suivi_float(is_scalar($v[$k] ?? null) ? $v[$k] : null, $a, $b); if ($f !== null) { $sea[$k] = $f; } }
+    foreach (['surface', 'camera'] as $k) { if (($t = suivi_txt($v[$k] ?? '', 120)) !== '') { $sea[$k] = $t; } }
+    return $sea;
+}
+
 function suivi_save_site(PDO $pdo, array $d): array
 {
     $id = safe_int($d['id'] ?? 0);
     $name = suivi_txt($d['name'] ?? '', 160);
     if ($name === '') { throw new RuntimeException('Donne un nom au site.'); }
-    $outline = [];
-    foreach (array_slice(is_array($d['outline'] ?? null) ? $d['outline'] : [], 0, 400) as $p) {
-        $la = suivi_float($p[0] ?? null, -90, 90); $lo = suivi_float($p[1] ?? null, -180, 180);
-        if ($la !== null && $lo !== null) { $outline[] = [round($la, 6), round($lo, 6)]; }
-    }
+    $outline = suivi_clean_outline($d['outline'] ?? null);
     $vals = [$name, suivi_txt($d['kind'] ?? '', 60), suivi_place_ok($pdo, $d['place_id'] ?? 0), suivi_float($d['lat'] ?? null, -90, 90), suivi_float($d['lon'] ?? null, -180, 180),
         suivi_float($d['area_ha'] ?? null, 0, 1e9), suivi_txt($d['since'] ?? '', 60), $outline ? json_encode($outline) : '', suivi_txt($d['note'] ?? '', 4000)];
     if ($id) {
