@@ -59,9 +59,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(await page.locator('[data-side-value="design"]').count(), 0);
             assert.ok(await page.locator('[data-side-value="look_theme"]').count());
         });
-        await t('Thème et couleurs : les champs du look, Mes thèmes, et pas les menus ni les fiches', async () => {
+        await t('Thème et couleurs : les champs du look (dont prénom et nom du logo), Mes thèmes, et pas les menus ni les fiches', async () => {
             await go('look_theme'); const s = await seen();
-            for (const f of ['f:preset', 'f:blue', 'f:fontFamily', 'f:fontScale', 'f:cardBackground']) assert.ok(s.includes(f), f);
+            for (const f of ['f:preset', 'f:blue', 'f:fontFamily', 'f:fontScale', 'f:cardBackground', 'f:ownerFirst', 'f:ownerLast']) assert.ok(s.includes(f), f);
             assert.ok(has(s, /Mes thèmes/));
             for (const f of ['f:navPosition', 'f:avatarShape', 'f:eventDisplayMode', 'f:interfaceLanguage']) assert.ok(!s.includes(f), f);
             assert.ok(!has(s, /Ordre et noms du menu principal|Formes des avatars|Messages après une action/));
@@ -95,7 +95,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await go('nav_menus');
             const tabs = await page.locator('[data-reg-a-tab]').allTextContents();
             assert.deepEqual(tabs, ['Menu principal', 'Listes', 'Pages des Réglages', 'Boutons en haut à droite', 'Types de recherche', 'Graphiques']);
-            let s = await seen(); assert.ok(has(s, /Ordre et noms du menu principal/)); assert.ok(s.includes('f:navPosition')); assert.ok(!has(s, /Ordre des listes/));
+            let s = await seen(); assert.ok(has(s, /Ordre et noms du menu principal/)); assert.ok(s.includes('f:navPosition')); assert.ok(!s.includes('f:ownerFirst')); assert.ok(!has(s, /Ordre des listes/));
             await page.click('[data-reg-a-tab="1"]'); s = await seen(); assert.ok(has(s, /Ordre des listes/)); assert.ok(!has(s, /menu principal/));
             await page.click('[data-reg-a-tab="5"]'); s = await seen(); assert.ok(has(s, /Graphiques — Diagrammes/)); assert.ok(has(s, /Graphiques — Statistiques/));
         });

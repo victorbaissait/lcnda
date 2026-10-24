@@ -6071,7 +6071,7 @@ ${backupSectionHtml()}
     /* Présentation A : chaque page montre ses morceaux de la grande page Apparence (rien n'est recopié : les réglages restent branchés).
        Un morceau : ['f', noms des champs du formulaire] · ['t', /titre du cadre/] · ['q', 'sélecteur'] · ['p', partie d'avant (design_sheets…)].
        Ce qui n'a pas de page va dans « Thème et couleurs » : rien ne se perd. */
-    const REGLAGES_A_HEAD={look_theme:['Thème et couleurs','Le preset, la couleur principale, la police, la taille du texte ; tes thèmes ; remettre comme au départ.'],
+    const REGLAGES_A_HEAD={look_theme:['Thème et couleurs','Le preset, la couleur principale, la police, la taille du texte, le prénom et le nom du logo ; tes thèmes ; remettre comme au départ.'],
         look_portraits:['Portraits et avatars','La forme des avatars (et les tiennes, personnalisées), les portraits et la colonne de gauche.'],
         look_msgs:['Notifications et boutons','Les messages après une action (coin de l’écran, durée, couleurs de chaque sorte de message), puis la forme des boutons.'],
         look_lang:['Langue, dates et lecteur','La langue de l’interface, le calendrier par défaut, le lecteur audio et vidéo.'],
@@ -6079,12 +6079,12 @@ ${backupSectionHtml()}
         nav_menus:['Menus, onglets et listes','L’ordre, les noms et ce qui est caché : un onglet par menu.'],
         design_sheets:['Fiches personnes et animaux','L’en-tête, les sections et les blocs, ce qu’on y voit, la numérotation, la recherche sur internet et les exceptions.']};
     const REGLAGES_A_PIECES={
-        look_theme:[[null,[['f','preset','blue','fontFamily','fontScale','cardBackground'],['q','#design-form .my-presets:not(.lc-shapes)'],['q','#design-form .design-actions'],['q','#design-form > .ui-presets']]]],
+        look_theme:[[null,[['f','preset','blue','fontFamily','fontScale','cardBackground','ownerFirst','ownerLast'],['q','#design-form .my-presets:not(.lc-shapes)'],['q','#design-form .design-actions'],['q','#design-form > .ui-presets']]]],
         look_portraits:[[null,[['f','avatarShape'],['q','#design-form .lc-shapes'],['t',/^Portraits et colonne de gauche/]]]],
         look_msgs:[[null,[['q','.toast-prefs'],['q','#lc-a6-host']]]],
         look_lang:[[null,[['f','interfaceLanguage','defaultCalendar','avSkipSeconds']]]],
         look_layouts:[[null,[['t',/Réglages enregistrés : l’Apparence/],['t',/Réglages enregistrés : toute l’app/]]]],
-        nav_menus:[['Menu principal',[['t',/^Ordre et noms du menu principal/],['f','navPosition','sidebarPosition','brandDisplay','ownerFirst','ownerLast']]],['Listes',[['t',/^Ordre des listes/],['t',/Lignes cachées/]]],['Pages des Réglages',[['t',/^Ordre des pages des Réglages/]]],
+        nav_menus:[['Menu principal',[['t',/^Ordre et noms du menu principal/],['f','navPosition','sidebarPosition','brandDisplay']]],['Listes',[['t',/^Ordre des listes/],['t',/Lignes cachées/]]],['Pages des Réglages',[['t',/^Ordre des pages des Réglages/]]],
             ['Boutons en haut à droite',[['t',/^Boutons en haut à droite/]]],['Types de recherche',[['t',/Types de recherche/]]],['Graphiques',[['t',/^Graphiques — Diagrammes/],['t',/^Graphiques — Statistiques/]]]],
         design_sheets:[['En-tête',[['t',/^Présentation de l’éditeur|^En-tête de la fiche|éléments de l’en-tête|Nouvelle observation/]]],['Sections et blocs',[['t',/^Sections des fiches|^Ordre et visibilité des blocs|^Blocs à afficher sur demande|profils/]]],
             ['Ce qu’on y voit',[['f','eventDisplayMode','censusDetailsDefault','censusSpecialOrder','identity_name_variants_display','showInvestigationsAsSecondary','defaultMortPourLaFrance'],['t',/^Filtres du bloc Événements|^Ascendants et descendants/],['t',/^Couleurs des badges/]]],
