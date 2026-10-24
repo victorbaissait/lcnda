@@ -528,7 +528,7 @@
 
     /* ═════════ L'éditeur ═════════ */
     const TOOLS = [['select', '➤', 'Sélection', 'V'], ['direct', '⌖', 'Sélection directe (points et poignées)', 'A'], ['pen', '✒️', 'Plume (clic : point, glisser : courbe)', 'P'], ['pencil', '✏️', 'Crayon (à main levée)', 'N'],
-        ['rect', '▭', 'Rectangle', 'M'], ['ellipse', '◯', 'Ellipse', 'L'], ['polygon', '⬡', 'Polygone', 'Y'], ['star', '☆', 'Étoile', 'S'], ['spiral', '🌀', 'Spirale (glisser depuis le centre)', 'O'], ['line', '╱', 'Ligne', '\\'], ['text', 'T', 'Texte', 'T'],
+        ['rect', '▭', 'Rectangle', 'M'], ['ellipse', '◯', 'Ellipse', 'L'], ['polygon', '⬡', 'Polygone', 'Y'], ['star', '☆', 'Étoile', 'S'], ['spiral', '🌀', 'Spirale (glisser depuis le centre)', 'O'], ['line', '╱', 'Ligne', '\\'], ['dim', '📏', 'Cote (mesure entre deux points)', 'D'], ['text', 'T', 'Texte', 'T'],
         ['eyedrop', '💧', 'Pipette (prend la couleur d’un objet)', 'I'], ['hand', '✋', 'Main (déplacer la vue)', 'H'], ['zoom', '🔍', 'Loupe (⌥ : dézoomer)', 'Z']];
     const SWATCHES = ['#000000', '#ffffff', '#7f7f7f', '#d81e1e', '#e6862a', '#f4c430', '#1a8a3a', '#1f4fa3', '#7b3f8c', '#8b5a2b', '#f2c9a8', 'none'];
     const newDoc = () => ({w: 800, h: 600, bg: '#ffffff', grid: 0, snap: false, objs: []});
@@ -536,7 +536,7 @@
     const INFO_KEYS = [['title', 200], ['author', 200], ['subject', 300], ['desc', 2000], ['keywords', 400], ['rights', 300], ['lang', 12], ['date', 40]];
     const cleanInfo = v => { const out = {}; if (v && typeof v === 'object') INFO_KEYS.forEach(([k, n]) => { const t = typeof v[k] === 'string' ? v[k].replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').trim().slice(0, n) : ''; if (t) out[k] = t; }); return out; };
     const cleanFmt = o => { const out = {}; if (['mm', 'cm', 'px', 'in'].includes(o.unit)) out.unit = o.unit; if (Number(o.dpi) >= 36 && Number(o.dpi) <= 1200) out.dpi = Math.round(Number(o.dpi)); if (/^[A-Za-z0-9_:-]{1,40}$/.test(String(o.fmt || ''))) out.fmt = String(o.fmt); if (o.bleed !== undefined && o.bleed !== null && o.bleed !== '' && Number.isFinite(Number(o.bleed))) out.bleed = Math.round(clamp(Number(o.bleed), 0, 20) * 10) / 10; const info = cleanInfo(o.info); if (Object.keys(info).length) out.info = info; return out; };
-    const cleanDoc = d => { const o = d && typeof d === 'object' ? d : {}; return {w: clamp(num(o.w, 800), 10, 20000), h: clamp(num(o.h, 600), 10, 20000), bg: o.bg === 'transparent' ? 'transparent' : col(o.bg, '#ffffff'), grid: clamp(num(o.grid), 0, 500), snap: !!o.snap, objs: Array.isArray(o.objs) ? o.objs.filter(x => x && typeof x === 'object').slice(0, 20000) : [], ...cleanMap(o), ...cleanPages(o), ...(/^[a-z]{2,20}$/.test(o.kind || '') ? {kind: o.kind} : {}), ...(typeof o.blasonOn === 'boolean' ? {blasonOn: o.blasonOn} : {}), ...cleanFmt(o)}; }; // kind : « tree » pour un arbre décoratif, etc.
+    const cleanDoc = d => { const o = d && typeof d === 'object' ? d : {}; return {w: clamp(num(o.w, 800), 10, 20000), h: clamp(num(o.h, 600), 10, 20000), bg: o.bg === 'transparent' ? 'transparent' : col(o.bg, '#ffffff'), grid: clamp(num(o.grid), 0, 500), snap: !!o.snap, objs: Array.isArray(o.objs) ? o.objs.filter(x => x && typeof x === 'object').slice(0, 20000) : [], ...cleanMap(o), ...cleanPages(o), ...(/^[a-z]{2,20}$/.test(o.kind || '') ? {kind: o.kind} : {}), ...(typeof o.blasonOn === 'boolean' ? {blasonOn: o.blasonOn} : {}), ...(o.persp && typeof o.persp === 'object' && ext.vectorPlus ? {persp: ext.vectorPlus.cleanPersp(o.persp)} : {}), ...cleanFmt(o)}; }; // kind : « tree » pour un arbre décoratif, etc.
     /** 📄 les pages d'un document à plusieurs faces (faire-part recto-verso, carte pliée, enveloppe) : des rectangles du plan de travail,
      *  chacun imprimé sur sa propre feuille ; panels = les volets (plis entre eux) ; back = le dos de la page d'avant (impression recto-verso) */
     function cleanPages(o) {
@@ -580,7 +580,7 @@
                     ${menu('Pathfinder', [['pf_union', '⬤ Réunir'], ['pf_subtract', '◐ Soustraire (le dessous moins le reste)'], ['pf_intersect', '◑ Intersection'], ['pf_exclude', '◎ Exclure (là où ils se croisent)']])}
                     ${menu('Blason', [['blason', '🛡️ Créer un blason…'], ['charge', '⚜️ Ajouter un meuble (fleur de lys, lion, étoile…)…'], ['-'], ['hatch', '🖨 Hachures héraldiques (noir et blanc)'], ['unhatch', '🎨 Remettre les émaux en couleur'], ['-'], ['vectorize', '🪄 Vectoriser une image (refaire un blason scanné)…']])}
                     ${menu('Plan', [['map_on', '🗺️ Mode Plan (cartes) : oui / non'], ['map_tab', 'Palette du plan (routes, rivières, bâtiments…)'], ['-'], ['map_base', '🗺️ Fond de carte d’un lieu…'], ['map_ref', '🖼️ Image de référence (en transparence)…'], ['-'], ['map_layers', '🗂 Créer les calques d’un plan'], ['map_places', '📍 Lieux de la base sur le plan…'], ['map_links', '🔗 Objets reliés à la famille…']])}
-                    ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', '⤢ Ajuster à la fenêtre', '⌘0'], ['z100', '100 % (taille réelle)', '⌘1'], ['-'], ['grid', '▦ Grille…'], ['smart', '🧲 Aimanter (bords et centres des objets) : oui / non'], ['folds', 'Repères de pli et noms des pages : oui / non']])}</nav>
+                    ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', '⤢ Ajuster à la fenêtre', '⌘0'], ['z100', '100 % (taille réelle)', '⌘1'], ['-'], ['grid', '▦ Grille…'], ['persp', '📐 Grille de perspective…'], ['smart', '🧲 Aimanter (bords et centres des objets) : oui / non'], ['folds', 'Repères de pli et noms des pages : oui / non']])}</nav>
                 <div class="vx-hist" data-tbg="vx-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" data-vx-cmd="undo" title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" data-vx-cmd="redo" title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></div>
                 <span class="vx-modes" data-tbg="vx-modes" data-tbg-label="Modes (en haut)"><label class="vx-mode" data-tb="vx-mode-blason" title="Montre l’onglet et le menu Blason"><input type="checkbox" data-vx-mode="blason"> 🛡️ Blason</label><label class="vx-mode" data-tb="vx-mode-map" title="Montre l’onglet Plan et ses outils (routes, rivières…)"><input type="checkbox" data-vx-mode="map"> 🗺️ Carte</label></span>${ctx.coat ? '<button type="button" class="button small secondary" data-vx-cmd="tocoat">🛡️ Dans ces armoiries</button>' : ''}${ctx.shape || ctx.onShape ? '<button type="button" class="button small secondary" data-vx-cmd="toshape">🔷 Enregistrer la forme</button>' : ''}
                 <span class="vx-spacer"></span><span class="vx-status" data-vx-status data-ui-status></span>${ext.tbButton ? ext.tbButton('vector') : ''}
@@ -665,9 +665,11 @@
         const toDoc = e => { const r = svgEl.getBoundingClientRect(); return [(e.clientX - r.left - panX) / zoom, (e.clientY - r.top - panY) / zoom]; };
         const snap = v => doc.snap && doc.grid > 0 ? Math.round(v / doc.grid) * doc.grid : v;
         function drawGrid() {
-            const g = $('[data-vx-grid]'); if (!doc.grid || doc.grid * zoom < 4) { g.innerHTML = ''; return; }
+            const g = $('[data-vx-grid]'), pp = doc.persp?.on && ext.vectorPlus ? ext.vectorPlus.perspPath(doc, doc.persp) : ''; // 📐 la grille de perspective (heritage-vector-plus.js)
+            const persp = pp ? `<path d="${pp}" stroke="#e0662a" stroke-opacity=".45" stroke-width="${n2(1 / zoom)}" fill="none" data-vx-persp/>` : '';
+            if (!doc.grid || doc.grid * zoom < 4) { g.innerHTML = persp; return; }
             let h = ''; for (let x = doc.grid; x < doc.w; x += doc.grid) h += `M${x} 0V${doc.h}`; for (let y = doc.grid; y < doc.h; y += doc.grid) h += `M0 ${y}H${doc.w}`;
-            g.innerHTML = `<path d="${h}" stroke="#4a90e2" stroke-opacity=".18" stroke-width="${n2(1 / zoom)}" fill="none"/>`;
+            g.innerHTML = `<path d="${h}" stroke="#4a90e2" stroke-opacity=".18" stroke-width="${n2(1 / zoom)}" fill="none"/>${persp}`;
         }
         /* dessin */
         function drawRef() {
@@ -886,9 +888,10 @@
             if (drag.pen) { const p = penPath?.pts.at(-1); if (!p) return; if (Math.hypot(x - p.x, y - p.y) > 2 / zoom) { p.o = [x, y]; if (!e.altKey) p.i = [2 * p.x - x, 2 * p.y - y]; render(); } return; }
             if (drag.pencil) { drag.pencil.push([x, y]); const d = 'M' + drag.pencil.map(p => n2(p[0]) + ' ' + n2(p[1])).join('L'); ui.innerHTML = `<path d="${d}" fill="none" stroke="${col(defaults.stroke, '#222')}" stroke-width="${n2(defaults.sw || 2)}"/>`; return; }
             if (drag.create) { let x1 = snap(x), y1 = snap(y); const t = drag.create;
-                if (e.shiftKey) { if (t === 'line') { const a = Math.round(Math.atan2(y1 - drag.y0, x1 - drag.x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x1 - drag.x0, y1 - drag.y0); x1 = drag.x0 + Math.cos(a) * L; y1 = drag.y0 + Math.sin(a) * L; } else { const s = Math.max(Math.abs(x1 - drag.x0), Math.abs(y1 - drag.y0)); x1 = drag.x0 + Math.sign(x1 - drag.x0 || 1) * s; y1 = drag.y0 + Math.sign(y1 - drag.y0 || 1) * s; } }
+                if (e.shiftKey) { if (t === 'line' || t === 'dim') { const a = Math.round(Math.atan2(y1 - drag.y0, x1 - drag.x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x1 - drag.x0, y1 - drag.y0); x1 = drag.x0 + Math.cos(a) * L; y1 = drag.y0 + Math.sin(a) * L; } else { const s = Math.max(Math.abs(x1 - drag.x0), Math.abs(y1 - drag.y0)); x1 = drag.x0 + Math.sign(x1 - drag.x0 || 1) * s; y1 = drag.y0 + Math.sign(y1 - drag.y0 || 1) * s; } }
                 drag.guides = null;
-                if (snapOn(e) && !['line', 'spiral', 'mbuild'].includes(t)) { const tg = snapTargets([]), gs = []; let g;
+                if ((t === 'line' || t === 'dim') && !e.shiftKey && !(e.metaKey || e.ctrlKey) && doc.persp?.on && ext.vectorPlus) [x1, y1] = ext.vectorPlus.perspSnap(doc, doc.persp, drag.x0, drag.y0, x1, y1); // 📐 sur la ligne de fuite la plus proche
+                if (snapOn(e) && !['line', 'dim', 'spiral', 'mbuild'].includes(t)) { const tg = snapTargets([]), gs = []; let g;
                     [x1, g] = snapEdge(x1, 'x', tg, [Math.min(drag.y0, y1), Math.max(drag.y0, y1)]); if (g) gs.push(g); [y1, g] = snapEdge(y1, 'y', tg, [Math.min(drag.x0, x1), Math.max(drag.x0, x1)]); if (g) gs.push(g); drag.guides = gs.length ? gs : null; }
                 drag.x1 = x1; drag.y1 = y1; const o = makeShape(t, drag.x0, drag.y0, x1, y1); const defs = []; ui.innerHTML = (o ? objSvg(o, defs, 'p') : '') + guidesSvg(drag.guides); }
         });
@@ -902,6 +905,7 @@
                 const pt = k => { const t = k * dt, r = R * k / steps, a = a0 - turns * 2 * Math.PI + t; return [x0 + r * Math.cos(a), y0 + r * Math.sin(a)]; };
                 const pts = []; for (let k = 1; k <= steps; k++) { const [px, py] = pt(k), [ax, ay] = pt(k - .01), [bx, by] = pt(Math.min(steps, k + .01)), len = Math.hypot(bx - ax, by - ay) || 1, tl = (R * k / steps) * dt / 3 * Math.max(1, steps / k / 4), tx = (bx - ax) / len * tl, ty = (by - ay) / len * tl; pts.push(P(px, py, [px - tx, py - ty], [px + tx, py + ty])); }
                 return {id: uid(), type: 'path', name: 'Spirale', pts, closed: false, fill: 'none', stroke: defaults.stroke === 'none' ? '#222222' : defaults.stroke, sw: defaults.sw || 2}; }
+            if (t === 'dim') return ext.vectorPlus?.dimObj(x0, y0, x1, y1, {unit: doc.unit || 'cm', uid, color: defaults.stroke && defaults.stroke !== 'none' && defaults.stroke !== '#000000' ? defaults.stroke : '#c4161c'}) || null; // 📏 cote (heritage-vector-plus.js)
             if (t === 'line') return {id: uid(), type: 'path', name: 'Ligne', pts: [P(x0, y0), P(x1, y1)], closed: false, fill: 'none', stroke: defaults.stroke === 'none' ? '#222222' : defaults.stroke, sw: defaults.sw || 2};
             if (w < 1 || h < 1) return null;
             return {id: uid(), type: t, name: {rect: 'Rectangle', ellipse: 'Ellipse', polygon: 'Polygone', star: 'Étoile'}[t], x, y, w, h, ...styleNew(), ...(t === 'polygon' ? {n: 6} : t === 'star' ? {n: 5, inner: 45} : t === 'rect' ? {r: 0} : {})};
@@ -1415,6 +1419,7 @@
             lock: () => { const l = selObjs(); const v = !l.every(o => o.locked); l.forEach(o => { o.locked = v; }); commit(v ? 'Verrouillé' : 'Déverrouillé'); }, hide: () => { selObjs().forEach(o => { o.hidden = true; }); sel = []; commit('Masqué'); }, showall: () => { cur().forEach(o => { o.hidden = false; }); commit('Tout affiché'); },
             zin: () => { const r = stage.getBoundingClientRect(); zoomAt(1.25, r.width / 2, r.height / 2); }, zout: () => { const r = stage.getBoundingClientRect(); zoomAt(0.8, r.width / 2, r.height / 2); }, zfit: () => fit(), z100: () => { const r = stage.getBoundingClientRect(); zoomAt(1 / zoom, r.width / 2, r.height / 2); },
             grid: () => { tab = 'doc'; paintPanel(); },
+            persp: () => ext.vectorPlus?.perspDialog(doc, {redraw: drawGrid, commit}),
             blason: () => { tab = 'blason'; paintPanel(); }, charge: () => { tab = 'blason'; paintPanel(); setTimeout(() => pane.querySelector('[data-vx-chq]')?.focus(), 30); },
             vectorize: () => vectorizeDialog(),
             map_on: () => { doc.map = {...(doc.map || {}), on: !doc.map?.on}; tab = 'map'; commit(doc.map.on ? 'Mode Plan' : 'Mode Plan désactivé'); },
