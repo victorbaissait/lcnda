@@ -33,7 +33,7 @@ async function cmd(name, fn) {
     if (process.env.SITE_LOG) console.log('…', name);
     let t; const limit = new Promise((_, no) => { t = setTimeout(() => no(new Error('trop long (45 s)')), 45000); });
     try { await Promise.race([fn(), limit]); results.push([group, name, 'OK']); }
-    catch (e) { results.push([group, name, `ÉCHEC : ${String(e.message || e).split('\n')[0].slice(0, 200)}`]); if (process.env.SITE_LOG) console.log('   ✗', results.at(-1)[2]); }
+    catch (e) { results.push([group, name, `ÉCHEC : ${String(e.message || e).split('\n')[0].slice(0, 200)}`]); if (process.env.SITE_LOG) console.log('   ✗', results.at(-1)[2], String(e.message || e).split('\n').slice(1, 12).join(' | ')); }
     finally { clearTimeout(t); }
 }
 const must = (c, m) => { if (!c) throw new Error(m || 'résultat inattendu'); };

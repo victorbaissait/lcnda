@@ -3,6 +3,10 @@
  * attributs, propriétés et valeurs CSS, mots de JavaScript), Emmet de base (Tab : « ul>li.item*3 », « div#haut.carte{Bonjour} »,
  * « m10 » → margin: 10px;), fermeture automatique des balises, retrait automatique.
  * Un <textarea> (le vrai texte : copier, coller, ↶ du navigateur, lecteurs d'écran) posé sur un <pre> coloré.
+ * Comme un vrai éditeur : 🔍 chercher et remplacer (⌘F, ⌥⌘F ; expressions régulières, majuscules, mot entier), aller à la ligne (⌃G),
+ * commenter (⌘/), dupliquer (⇧⌥↓), déplacer (⌥↑ ↓) et supprimer (⇧⌘K) des lignes, retrait de plusieurs lignes (Tab, ⇧Tab),
+ * sélectionner le mot suivant pareil (⌘D), parenthèses et guillemets fermés tout seuls, accolade jumelle repérée, ↹ remettre en forme (⇧⌥F),
+ * 🩺 vérification (balises non fermées, accolades), barre du bas (ligne, colonne, sélection) et ⌨ la liste des raccourcis.
  * Sans écran : expandAbbr, expandCss, highlight, completions (aussi require() dans Node, pour les essais).
  * L'éditeur : assets/js/heritage-site-web.js (window.LCNDA_EXT.siteCode).
  */
@@ -298,17 +302,107 @@
         return `${text.replace(/\s*$/, '')}\n\n${rule}`;
     }
 
+    /* ═════ Outils du texte (sans écran : aussi pour les essais) ═════ */
+    const COMMENT = {html: ['<!-- ', ' -->'], css: ['/* ', ' */'], js: ['// ', ''], php: ['// ', '']};
+    const lineRange = (v, s, e) => { const a = v.lastIndexOf('\n', s - 1) + 1; let b = v.indexOf('\n', e > s && v[e - 1] === '\n' ? e - 1 : e); if (b < 0) b = v.length; return [a, b]; };
+    /** commente ou décommente les lignes choisies → {text, s, e} */
+    function toggleComment(v, s, e, lang) {
+        const [a, b] = lineRange(v, s, e), block = v.slice(a, b), [o, c] = COMMENT[lang] || COMMENT.js;
+        if (c) { // un seul bloc pour HTML et CSS
+            const t = block.trim(), lead = /^\s*/.exec(block)[0];
+            if (t.startsWith(o.trim()) && t.endsWith(c.trim())) { const inner = t.slice(o.trim().length, t.length - c.trim().length).replace(/^ /, '').replace(/ $/, ''); const out = lead + inner; return {text: v.slice(0, a) + out + v.slice(b), s: a, e: a + out.length}; }
+            const out = lead + o + block.slice(lead.length) + c; return {text: v.slice(0, a) + out + v.slice(b), s: a, e: a + out.length};
+        }
+        const lines = block.split('\n'), all = lines.filter(l => l.trim()).every(l => /^\s*\/\//.test(l));
+        const ind = Math.min(...lines.filter(l => l.trim()).map(l => /^\s*/.exec(l)[0].length).concat([1e9])) % 1e9;
+        const out = lines.map(l => (!l.trim() ? l : all ? l.replace(/^(\s*)\/\/ ?/, '$1') : l.slice(0, ind) + o + l.slice(ind))).join('\n');
+        return {text: v.slice(0, a) + out + v.slice(b), s: a, e: a + out.length};
+    }
+    /** les endroits où l'on trouve q → [[de, à]] (bornés) ; null si l'expression régulière est fausse */
+    function findAll(v, q, {regex = false, cs = false, word = false} = {}, max = 5000) {
+        if (!q) return [];
+        let re; try { re = new RegExp(regex ? q : q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), cs ? 'g' : 'gi'); } catch (_) { return null; }
+        if (word) re = new RegExp(`(?<![\\w$])(?:${re.source})(?![\\w$])`, re.flags);
+        const out = []; let m; while ((m = re.exec(v)) && out.length < max) { if (!m[0].length) { re.lastIndex++; continue; } out.push([m.index, m.index + m[0].length]); }
+        return out;
+    }
+    const PAIRS = {'(': ')', '[': ']', '{': '}'}, BACK = {')': '(', ']': '[', '}': '{'};
+    /** la parenthèse ou l'accolade jumelle de celle qui touche pos → sa position, ou -1 */
+    function matchBracket(v, pos) {
+        let i = PAIRS[v[pos]] || BACK[v[pos]] ? pos : PAIRS[v[pos - 1]] || BACK[v[pos - 1]] ? pos - 1 : -1; if (i < 0) return -1;
+        const ch = v[i], fwd = !!PAIRS[ch], want = fwd ? PAIRS[ch] : BACK[ch]; let depth = 0;
+        for (let j = i; fwd ? j < v.length : j >= 0; j += fwd ? 1 : -1) { if (v[j] === ch) depth++; else if (v[j] === want && --depth === 0) return j; if (Math.abs(j - i) > 200000) break; }
+        return -1;
+    }
+    /** ↹ remettre en forme : un retrait propre (2 espaces) selon les balises (HTML) ou les accolades (CSS, JS) */
+    function formatCode(v, lang) {
+        const lines = String(v).replace(/\r\n?/g, '\n').split('\n'); let depth = 0, inPre = false, inCom = false; const out = [];
+        for (const raw of lines) {
+            const t = raw.trim(); if (!t) { out.push(''); continue; }
+            if (lang === 'html') {
+                if (inPre || inCom) { out.push(raw); if (/<\/(pre|textarea|script|style)>/i.test(t)) inPre = false; if (t.includes('-->')) inCom = false; continue; }
+                const opens = (t.match(/<([a-zA-Z][\w-]*)\b[^>]*?(?<!\/)>/g) || []).filter(x => !VOID.has(/<([a-zA-Z][\w-]*)/.exec(x)[1].toLowerCase())).length, closes = (t.match(/<\/[a-zA-Z][\w-]*\s*>/g) || []).length;
+                const lead = /^<\//.test(t) ? 1 : 0; depth = Math.max(0, depth - lead); out.push('  '.repeat(depth) + t); depth = Math.max(0, depth + opens - (closes - lead));
+                if (/<(pre|textarea|script|style)\b[^>]*>(?![\s\S]*<\/\1>)/i.test(t)) inPre = true; if (t.includes('<!--') && !t.includes('-->')) inCom = true;
+            } else {
+                const clean = t.replace(/(["'`])(?:\\.|(?!\1).)*\1/g, '""').replace(/\/\*.*?\*\//g, '').replace(/\/\/.*$/, '');
+                if (inCom) { out.push('  '.repeat(depth) + ' ' + t); if (t.includes('*/')) inCom = false; continue; }
+                const lead = /^[}\])]/.test(clean) ? 1 : 0; depth = Math.max(0, depth - lead); out.push('  '.repeat(depth) + t);
+                const o = (clean.match(/[{[(]/g) || []).length, c = (clean.match(/[}\])]/g) || []).length; depth = Math.max(0, depth + o - (c - lead));
+                if (clean.includes('/*') && !clean.includes('*/')) inCom = true;
+            }
+        }
+        return out.join('\n');
+    }
+    /** 🩺 ce qui cloche (balises non fermées ou mal fermées, accolades et parenthèses) → [{line, msg}] */
+    function lintCode(v, lang) {
+        v = String(v); const out = [], lineOf = i => v.slice(0, i).split('\n').length;
+        if (lang === 'html') {
+            const stack = [], re = /<!--[\s\S]*?-->|<(\/?)([a-zA-Z][\w-]*)\b((?:[^>"']|"[^"]*"|'[^']*')*)>/g; let m;
+            const RAW = /^(script|style|textarea|pre)$/i;
+            while ((m = re.exec(v)) && out.length < 50) {
+                if (!m[2]) continue; const tag = m[2].toLowerCase();
+                if (!m[1]) { if (VOID.has(tag) || /\/\s*$/.test(m[3] || '')) continue; stack.push([tag, m.index]); if (RAW.test(tag) && tag !== 'pre') { const end = v.toLowerCase().indexOf(`</${tag}`, re.lastIndex); if (end >= 0) re.lastIndex = end; } continue; }
+                if (/^(p|li|td|th|tr|option|dt|dd)$/.test(tag) || !stack.some(x => x[0] === tag)) { if (!stack.some(x => x[0] === tag)) out.push({line: lineOf(m.index), msg: `</${tag}> ferme une balise qui n’est pas ouverte.`}); else while (stack.length && stack[stack.length - 1][0] !== tag) stack.pop(); if (stack.length && stack[stack.length - 1][0] === tag) stack.pop(); continue; }
+                while (stack.length && stack[stack.length - 1][0] !== tag) { const [t2, at] = stack.pop(); if (!/^(p|li|td|th|tr|option|dt|dd|html|head|body)$/.test(t2)) out.push({line: lineOf(at), msg: `<${t2}> n’est pas fermée (</${t2}>).`}); }
+                stack.pop();
+            }
+            stack.filter(([t2]) => !/^(p|li|td|th|tr|option|dt|dd|html|head|body)$/.test(t2)).forEach(([t2, at]) => out.push({line: lineOf(at), msg: `<${t2}> n’est pas fermée (</${t2}>).`}));
+            (v.match(/\sid="([^"]+)"/g) || []).map(x => x.slice(5, -1)).filter((x, i, a) => a.indexOf(x) !== i).slice(0, 5).forEach(id => out.push({line: lineOf(v.indexOf(`id="${id}"`, v.indexOf(`id="${id}"`) + 1)), msg: `L’id « ${id} » est donné deux fois.`}));
+            (v.match(/<img\b(?![^>]*\balt=)[^>]*>/gi) || []).slice(0, 5).forEach(x => out.push({line: lineOf(v.indexOf(x)), msg: 'Une image sans alt (texte pour ceux qui ne la voient pas).'}));
+        } else {
+            const stack = []; let q = '', com = 0;
+            for (let i = 0; i < v.length && out.length < 50; i++) {
+                const ch = v[i];
+                if (com === 1) { if (ch === '\n') com = 0; continue; } if (com === 2) { if (ch === '*' && v[i + 1] === '/') { com = 0; i++; } continue; }
+                if (q) { if (ch === '\\') { i++; continue; } if (ch === q) q = ''; else if (ch === '\n' && q !== '`') { out.push({line: lineOf(i), msg: 'Des guillemets ne sont pas fermés.'}); q = ''; } continue; }
+                if (ch === '/' && v[i + 1] === '*') { com = 2; i++; continue; } if (lang !== 'css' && ch === '/' && v[i + 1] === '/') { com = 1; continue; }
+                if (ch === '"' || ch === "'" || (ch === '`' && lang !== 'css')) { q = ch; continue; }
+                if (PAIRS[ch]) stack.push([ch, i]); else if (BACK[ch]) { const top = stack.pop(); if (!top) out.push({line: lineOf(i), msg: `« ${ch} » en trop.`}); else if (top[0] !== BACK[ch]) out.push({line: lineOf(i), msg: `« ${ch} » ferme « ${top[0]} » (ligne ${lineOf(top[1])}).`}); }
+            }
+            if (com === 2) out.push({line: lineOf(v.length), msg: 'Un commentaire /* … */ n’est pas fermé.'});
+            stack.slice(-5).forEach(([ch, at]) => out.push({line: lineOf(at), msg: `« ${ch} » n’est pas fermé.`}));
+            if (lang === 'css') (v.match(/^[ \t]*[a-z-]+\s*:[^;{}\n]+$/gm) || []).filter(l => !/[{,]\s*$/.test(l) && !/^\s*(a|li|p|div|span|h\d)?:(hover|focus|active|visited|root|first-child|last-child|not|is|where)/.test(l)).slice(0, 5).forEach(l => { const i = v.indexOf(l); const nx = v.slice(i + l.length).match(/^\s*(\S)/); if (nx && nx[1] !== '}') out.push({line: lineOf(i), msg: 'Il manque sans doute un « ; » au bout de la ligne.'}); });
+        }
+        return out.sort((a, b) => a.line - b.line);
+    }
+    const KEYS_HELP = [['⌘F', 'Chercher'], ['⌥⌘F', 'Chercher et remplacer'], ['⌘G / ⇧⌘G', 'Suivant / précédent'], ['⌃G', 'Aller à la ligne'], ['⌘/', 'Commenter, décommenter'], ['⌘D', 'Choisir le mot suivant pareil'],
+        ['⇧⌥↓', 'Dupliquer la ligne'], ['⌥↑ / ⌥↓', 'Déplacer la ligne'], ['⇧⌘K', 'Supprimer la ligne'], ['Tab / ⇧Tab', 'Retrait (aussi plusieurs lignes) ; Emmet en HTML et CSS'], ['⇧⌥F', 'Remettre en forme'], ['⌘]  /  ⌘[', 'Retrait de la ligne'], ['Échap', 'Fermer la recherche']];
+
     /* ═════ L'éditeur ═════ */
     function create(host, {lang = 'html', value = '', onChange = () => {}, onCursor = () => {}, label = 'Code'} = {}) {
-        const el = document.createElement('div'); el.className = 'swc'; el.dataset.lang = lang;
-        el.innerHTML = `<div class="swc-gutter" aria-hidden="true"><div></div></div><div class="swc-wrap"><div class="swc-mark" hidden></div><pre class="swc-hl" aria-hidden="true"><code></code></pre><textarea class="swc-ta" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" data-ui-off aria-label="${esc(label)}" data-ctx-off></textarea></div><div class="swc-pop" role="listbox" hidden></div>`;
+        const el = document.createElement('div'); el.className = 'swc'; el.dataset.lang = lang; el.dataset.dndOff = '1'; el.dataset.ordOff = '1'; // ↑ ↓ de la recherche : pas des flèches pour ranger
+        el.innerHTML = `<div class="swc-find" hidden role="search" aria-label="Chercher dans le code"><input type="search" class="swc-q" placeholder="Chercher…" aria-label="Chercher" spellcheck="false" data-ui-off><span class="swc-fopts"><button type="button" class="swc-fb" data-swc-opt="cs" title="Majuscules et minuscules" aria-pressed="false">Aa</button><button type="button" class="swc-fb" data-swc-opt="word" title="Mot entier" aria-pressed="false">ab|</button><button type="button" class="swc-fb" data-swc-opt="regex" title="Expression régulière" aria-pressed="false">.*</button></span><span class="swc-count" aria-live="polite"></span><button type="button" class="swc-fb" data-find data-swc-f="prev" title="Précédent (⇧⌘G)" aria-label="Précédent">↑</button><button type="button" class="swc-fb" data-find data-swc-f="next" title="Suivant (⌘G, Entrée)" aria-label="Suivant">↓</button><button type="button" class="swc-fb" data-swc-f="toggle" title="Remplacer (⌥⌘F)" aria-label="Remplacer">⇄</button><button type="button" class="swc-fb" data-swc-f="close" title="Fermer (Échap)" aria-label="Fermer">✕</button>
+            <span class="swc-rep" hidden><input type="text" class="swc-r" placeholder="Remplacer par…" aria-label="Remplacer par" spellcheck="false" data-ui-off><button type="button" class="swc-fb" data-swc-f="one" title="Remplacer celui-ci">Remplacer</button><button type="button" class="swc-fb" data-swc-f="all" title="Tout remplacer">Tout</button></span></div>
+            <div class="swc-gutter" aria-hidden="true"><div></div></div><div class="swc-wrap"><div class="swc-mark" hidden></div><div class="swc-hits" aria-hidden="true"></div><pre class="swc-hl" aria-hidden="true"><code></code></pre><textarea class="swc-ta" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" data-ui-off aria-label="${esc(label)}" data-ctx-off></textarea></div><div class="swc-pop" role="listbox" hidden></div>
+            <div class="swc-status"><span class="swc-pos">Ligne 1, colonne 1</span><span class="swc-lint" role="button" tabindex="0" title="Vérifier le code"></span><span class="swc-sp"></span><button type="button" class="swc-sb" data-swc-act="find" title="Chercher (⌘F)">🔍</button><button type="button" class="swc-sb" data-swc-act="goto" title="Aller à la ligne (⌃G)">↧</button><button type="button" class="swc-sb" data-swc-act="comment" title="Commenter (⌘/)">//</button><button type="button" class="swc-sb" data-swc-act="format" title="Remettre en forme (⇧⌥F)">↹</button><button type="button" class="swc-sb" data-swc-act="keys" title="Les raccourcis">⌨</button></div>`;
         host.appendChild(el);
-        const ta = el.querySelector('textarea'), markEl = el.querySelector('.swc-mark'), code = el.querySelector('code'), pre = el.querySelector('pre'), gut = el.querySelector('.swc-gutter > div'), pop = el.querySelector('.swc-pop');
+        const ta = el.querySelector('textarea'), markEl = el.querySelector('.swc-mark'), hitsEl = el.querySelector('.swc-hits'), findEl = el.querySelector('.swc-find'), qEl = el.querySelector('.swc-q'), rEl = el.querySelector('.swc-r'), countEl = el.querySelector('.swc-count'), posEl = el.querySelector('.swc-pos'), lintEl = el.querySelector('.swc-lint'), wrapEl = el.querySelector('.swc-wrap'), code = el.querySelector('code'), pre = el.querySelector('pre'), gut = el.querySelector('.swc-gutter > div'), pop = el.querySelector('.swc-pop');
         ta.value = value;
         let raf = 0, popState = null, lastLines = -1, mark = null;
         const paint = () => { raf = 0; code.innerHTML = highlight(ta.value, lang) + '\n '; const lines = ta.value.split('\n').length; if (lines !== lastLines) { lastLines = lines; gut.innerHTML = Array.from({length: lines}, (_, k) => `<span>${k + 1}</span>`).join(''); } sync(); };
         const later = () => { if (!raf) raf = requestAnimationFrame(paint); };
-        const sync = () => { pre.style.transform = `translate(${-ta.scrollLeft}px, ${-ta.scrollTop}px)`; gut.style.transform = `translateY(${-ta.scrollTop}px)`; if (mark) { const m = metrics(); markEl.style.top = `${m.pt + mark[0] * m.lh - ta.scrollTop}px`; markEl.style.height = `${(mark[1] - mark[0] + 1) * m.lh}px`; } };
+        const sync = () => { pre.style.transform = `translate(${-ta.scrollLeft}px, ${-ta.scrollTop}px)`; gut.style.transform = `translateY(${-ta.scrollTop}px)`; hitsEl.style.transform = pre.style.transform; if (mark) { const m = metrics(); markEl.style.top = `${m.pt + mark[0] * m.lh - ta.scrollTop}px`; markEl.style.height = `${(mark[1] - mark[0] + 1) * m.lh}px`; } };
         ta.addEventListener('scroll', () => { sync(); closePop(); });
         const metrics = () => { const cs = getComputedStyle(ta); const c = document.createElement('canvas').getContext('2d'); c.font = `${cs.fontSize} ${cs.fontFamily}`; return {cw: c.measureText('M'.repeat(20)).width / 20, lh: parseFloat(cs.lineHeight) || 18, pt: parseFloat(cs.paddingTop) || 0, pl: parseFloat(cs.paddingLeft) || 0}; };
         const change = () => { later(); onChange(ta.value); };
@@ -319,7 +413,7 @@
             popState = {...res, k: 0};
             pop.innerHTML = res.items.map((it, k) => `<div class="swc-opt${k ? '' : ' is-active'}" role="option" data-k="${k}">${esc(it.label)}</div>`).join('');
             const m = metrics(), before = ta.value.slice(0, res.from), line = before.split('\n').length - 1, col = before.length - before.lastIndexOf('\n') - 1;
-            pop.style.left = `${Math.max(0, m.pl + col * m.cw - ta.scrollLeft + 40)}px`; pop.style.top = `${m.pt + (line + 1) * m.lh - ta.scrollTop + 4}px`;
+            pop.style.left = `${Math.max(0, m.pl + col * m.cw - ta.scrollLeft + 40)}px`; pop.style.top = `${wrapEl.offsetTop + m.pt + (line + 1) * m.lh - ta.scrollTop + 4}px`;
             pop.hidden = false;
         }
         const accept = k => {
@@ -327,7 +421,74 @@
             replace(st.from, pos, it.insert, it.insert.length - (it.back || 0));
         };
         pop.addEventListener('mousedown', e => { const o = e.target.closest('.swc-opt'); if (!o || !popState) return; e.preventDefault(); accept(Number(o.dataset.k)); });
+        /* ── 🔍 chercher, remplacer ── */
+        const F = {cs: false, word: false, regex: false, hits: [], k: -1};
+        const hitBoxes = () => { if (findEl.hidden || !F.hits.length) { hitsEl.innerHTML = ''; return; } const m = metrics(), v = ta.value; let lastLine = 0, lastPos = 0;
+            hitsEl.innerHTML = F.hits.slice(0, 1500).map(([a, b], i) => { lastLine += v.slice(lastPos, a).split('\n').length - 1; lastPos = a; const col = a - v.lastIndexOf('\n', a - 1) - 1; return `<i class="${i === F.k ? 'is-on' : ''}" style="top:${m.pt + lastLine * m.lh}px;left:${m.pl + col * m.cw}px;width:${Math.max(2, (b - a) * m.cw)}px;height:${m.lh}px"></i>`; }).join(''); };
+        const runFind = (keep = true) => { const r = findAll(ta.value, qEl.value, F); qEl.classList.toggle('is-bad', r === null); F.hits = r || []; if (!keep || F.k >= F.hits.length) F.k = F.hits.findIndex(([a]) => a >= ta.selectionStart); if (F.k < 0 && F.hits.length) F.k = 0;
+            countEl.textContent = r === null ? 'Expression fausse' : qEl.value ? (F.hits.length ? `${F.k + 1} sur ${F.hits.length}${F.hits.length >= 5000 ? '+' : ''}` : 'Aucun') : ''; hitBoxes(); };
+        const goHit = d => { if (!F.hits.length) return runFind(false); F.k = (F.k + d + F.hits.length) % F.hits.length; const [a, b] = F.hits[F.k]; api.reveal(a, b); qEl.focus(); countEl.textContent = `${F.k + 1} sur ${F.hits.length}`; hitBoxes(); };
+        const openFind = (rep = false) => { findEl.hidden = false; findEl.querySelector('.swc-rep').hidden = !rep && findEl.querySelector('.swc-rep').hidden; if (rep) findEl.querySelector('.swc-rep').hidden = false; const sel = ta.value.slice(ta.selectionStart, ta.selectionEnd); if (sel && !sel.includes('\n') && sel.length < 200) qEl.value = sel; qEl.focus(); qEl.select(); runFind(false); };
+        const closeFind = () => { findEl.hidden = true; hitsEl.innerHTML = ''; ta.focus(); };
+        const replaceOne = () => { if (!F.hits.length) return; const [a, b] = F.hits[F.k], src = ta.value.slice(a, b); let to = rEl.value; if (F.regex) { try { to = src.replace(new RegExp(qEl.value, F.cs ? '' : 'i'), rEl.value); } catch (_) {} } replace(a, b, to); ta.blur(); runFind(false); if (F.hits.length) { F.k = F.hits.findIndex(([x]) => x >= a + to.length); if (F.k < 0) F.k = 0; } hitBoxes(); qEl.focus(); };
+        const replaceAll = () => { if (!F.hits.length) return; let re; try { re = new RegExp(F.regex ? qEl.value : qEl.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), F.cs ? 'g' : 'gi'); if (F.word) re = new RegExp(`(?<![\\w$])(?:${re.source})(?![\\w$])`, re.flags); } catch (_) { return; }
+            const n = F.hits.length, text = ta.value.replace(re, F.regex ? rEl.value : () => rEl.value); replace(0, ta.value.length, text, 0); runFind(false); countEl.textContent = `${n} remplacé${n > 1 ? 's' : ''}`; qEl.focus(); };
+        qEl.addEventListener('input', () => runFind(false));
+        qEl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); goHit(e.shiftKey ? -1 : 1); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeFind(); } });
+        rEl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); (e.metaKey || e.ctrlKey ? replaceAll : replaceOne)(); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeFind(); } });
+        findEl.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+            if (b.dataset.swcOpt) { const k = b.dataset.swcOpt; F[k] = !F[k]; b.setAttribute('aria-pressed', String(F[k])); b.classList.toggle('is-on', F[k]); runFind(false); qEl.focus(); return; }
+            ({prev: () => goHit(-1), next: () => goHit(1), close: closeFind, one: replaceOne, all: replaceAll, toggle: () => { const r = findEl.querySelector('.swc-rep'); r.hidden = !r.hidden; if (!r.hidden) rEl.focus(); }})[b.dataset.swcF]?.(); });
+        /* ── les lignes : aller à, dupliquer, déplacer, supprimer, retrait de plusieurs lignes, commenter ── */
+        const lineAt = n => { const v = ta.value; let i = 0; for (let k = 1; k < n && i >= 0; k++) i = v.indexOf('\n', i) + 1 || -1; return Math.max(0, i); };
+        const gotoLine = async () => { const total = ta.value.split('\n').length; const ask = window.LCNDA_APP?.askText; const a = ask ? await ask({title: '↧ Aller à la ligne', message: `Le numéro de la ligne (1 à ${total}), ou ligne:colonne :`, value: '', okLabel: 'Aller'}) : window.prompt(`Aller à la ligne (1 à ${total})`);
+            const m = /^\s*(\d+)(?:\s*[:,]\s*(\d+))?/.exec(a || ''); if (!m) { ta.focus(); return; } const n = Math.min(total, Math.max(1, +m[1])), st = lineAt(n), end = ta.value.indexOf('\n', st), col = Math.min((end < 0 ? ta.value.length : end) - st, Math.max(0, (+m[2] || 1) - 1)); api.reveal(st + col); status(); };
+        const editLines = fn => { const v = ta.value, s = ta.selectionStart, e2 = ta.selectionEnd, [a, b] = lineRange(v, s, e2), r = fn(v, a, b, s, e2); if (!r) return; replace(r.from ?? a, r.to ?? b, r.text, 0); ta.setSelectionRange(r.s, r.e); status(); };
+        const indentLines = out => editLines((v, a, b, s, e2) => { const lines = v.slice(a, b).split('\n'); let ds = 0, de = 0; const res = lines.map((l, i) => { if (out) { const k = l.startsWith('  ') ? 2 : l.startsWith('\t') || l.startsWith(' ') ? 1 : 0; if (i === 0) ds = -Math.min(k, s - a); de -= k; return l.slice(k); } if (i === 0) ds = 2; de += 2; return '  ' + l; }).join('\n'); return {text: res, s: Math.max(a, s + ds), e: e2 + de}; });
+        const doComment = () => { const r = toggleComment(ta.value, ta.selectionStart, ta.selectionEnd, lang); replace(0, ta.value.length, r.text, 0); ta.setSelectionRange(r.s, r.e); status(); };
+        const doFormat = () => { const st = ta.scrollTop, line = ta.value.slice(0, ta.selectionStart).split('\n').length, f = formatCode(ta.value, lang); if (f === ta.value) return say('Déjà en forme.'); replace(0, ta.value.length, f, 0); const p = lineAt(line); ta.setSelectionRange(p, p); ta.scrollTop = st; sync(); say('Code remis en forme.'); };
+        const nextSame = () => { const v = ta.value; let s = ta.selectionStart, e2 = ta.selectionEnd; if (s === e2) { while (s > 0 && /[\w$-]/.test(v[s - 1])) s--; while (e2 < v.length && /[\w$-]/.test(v[e2])) e2++; if (s === e2) return; api.reveal(s, e2); return; }
+            const w = v.slice(s, e2); let i = v.indexOf(w, e2); if (i < 0) i = v.indexOf(w); if (i >= 0) { api.reveal(i, i + w.length); say(i <= s ? 'Retour au début.' : ''); } };
+        const say = t => { if (!t) return; posEl.dataset.msg = t; status(); clearTimeout(say.t); say.t = setTimeout(() => { delete posEl.dataset.msg; status(); }, 1800); };
+        const showKeys = () => { const h = `<div class="swc-keys" role="dialog" aria-label="Raccourcis du code"><b>⌨ Raccourcis</b><dl>${KEYS_HELP.map(([k, l]) => `<dt>${esc(k)}</dt><dd>${esc(l)}</dd>`).join('')}</dl><small>Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥.</small></div>`; const old = el.querySelector('.swc-keys'); if (old) { old.remove(); return; } el.insertAdjacentHTML('beforeend', h); setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!ev.target.closest('.swc-keys')) { el.querySelector('.swc-keys')?.remove(); document.removeEventListener('pointerdown', off, true); } }, true), 0); };
+        /* ── barre du bas : position, sélection, jumelle, vérification ── */
+        let lintT = 0, lintList = [];
+        const status = () => { const v = ta.value, s = ta.selectionStart, e2 = ta.selectionEnd, line = v.slice(0, s).split('\n').length, col = s - v.lastIndexOf('\n', s - 1);
+            const mb = s === e2 ? matchBracket(v, s) : -1, sel = e2 - s;
+            posEl.textContent = posEl.dataset.msg || `Ligne ${line}, colonne ${col}${sel ? ` · ${sel} caractère${sel > 1 ? 's' : ''} choisi${sel > 1 ? 's' : ''}` : ''}${mb >= 0 ? ` · jumelle ligne ${v.slice(0, mb).split('\n').length}` : ''}`; };
+        const relint = () => { clearTimeout(lintT); lintT = setTimeout(() => { lintList = ta.value.length < 400000 ? lintCode(ta.value, lang === 'php' ? 'html' : lang) : []; lintEl.textContent = lintList.length ? `⚠️ ${lintList.length} à vérifier` : '✓ Rien à signaler'; lintEl.classList.toggle('is-warn', !!lintList.length); lintEl.title = lintList.slice(0, 12).map(x => `Ligne ${x.line} : ${x.msg}`).join('\n') || 'Le code a l’air bien formé.';
+            gut.querySelectorAll('span.is-warn').forEach(x => x.classList.remove('is-warn')); lintList.forEach(x => { const sp = gut.children[x.line - 1]; if (sp) { sp.classList.add('is-warn'); sp.title = x.msg; } }); }, 450); };
+        const lintNext = () => { if (!lintList.length) return say('Rien à signaler.'); const cur = ta.value.slice(0, ta.selectionStart).split('\n').length, it = lintList.find(x => x.line > cur) || lintList[0]; api.reveal(lineAt(it.line)); say(`Ligne ${it.line} : ${it.msg}`); };
+        lintEl.addEventListener('click', lintNext); lintEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); lintNext(); } });
+        el.querySelector('.swc-status').addEventListener('click', e => { const b = e.target.closest('[data-swc-act]'); if (!b) return; ({find: () => openFind(), goto: gotoLine, comment: doComment, format: doFormat, keys: showKeys})[b.dataset.swcAct]?.(); });
+        const CLOSE = {'(': ')', '[': ']', '{': '}', '"': '"', "'": "'", '`': '`'};
         ta.addEventListener('keydown', e => {
+            const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
+            if (mod && !e.altKey && k === 'f' && !e.shiftKey) { e.preventDefault(); return openFind(false); }
+            if ((mod && e.altKey && (k === 'f' || e.code === 'KeyF')) || (e.ctrlKey && k === 'h')) { e.preventDefault(); return openFind(true); }
+            if (e.metaKey && !e.ctrlKey && k === 'g') { e.preventDefault(); if (findEl.hidden) openFind(); else goHit(e.shiftKey ? -1 : 1); return; }
+            if (e.ctrlKey && !e.metaKey && k === 'g') { e.preventDefault(); return gotoLine(); }
+            if (mod && (k === '/' || e.code === 'Slash')) { e.preventDefault(); return doComment(); }
+            if (mod && !e.shiftKey && k === 'd') { e.preventDefault(); return nextSame(); }
+            if (mod && e.shiftKey && k === 'k') { e.preventDefault(); return editLines((v, a, b) => { const to = b < v.length ? b + 1 : b, from = b >= v.length && a > 0 ? a - 1 : a; return {from, to, text: '', s: from, e: from}; }); }
+            if (e.altKey && e.shiftKey && !mod && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) { e.preventDefault(); return editLines((v, a, b, s, e2) => { const blk = v.slice(a, b); return e.key === 'ArrowDown' ? {text: blk + '\n' + blk, s: s + blk.length + 1, e: e2 + blk.length + 1} : {text: blk + '\n' + blk, s, e: e2}; }); }
+            if (e.altKey && !e.shiftKey && !mod && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) { e.preventDefault(); return editLines((v, a, b, s, e2) => { const blk = v.slice(a, b);
+                if (e.key === 'ArrowUp') { if (a === 0) return null; const pa = v.lastIndexOf('\n', a - 2) + 1, prev = v.slice(pa, a - 1); return {from: pa, to: b, text: blk + '\n' + prev, s: s - prev.length - 1, e: e2 - prev.length - 1}; }
+                if (b >= v.length) return null; let nb = v.indexOf('\n', b + 1); if (nb < 0) nb = v.length; const next = v.slice(b + 1, nb); return {from: a, to: nb, text: next + '\n' + blk, s: s + next.length + 1, e: e2 + next.length + 1}; }); }
+            if (e.altKey && e.shiftKey && (k === 'f' || e.code === 'KeyF') && !mod) { e.preventDefault(); return doFormat(); }
+            if (mod && (e.key === ']' || e.key === '[')) { e.preventDefault(); return indentLines(e.key === '['); }
+            if (e.key === 'Escape' && !findEl.hidden) { e.preventDefault(); e.stopPropagation(); return closeFind(); }
+            if (e.key === 'Home' && !mod && !e.altKey) { const v = ta.value, s = ta.selectionStart, a = v.lastIndexOf('\n', s - 1) + 1, first = a + /^[ \t]*/.exec(v.slice(a))[0].length, to = s === first ? a : first; e.preventDefault(); if (e.shiftKey) ta.setSelectionRange(Math.min(to, ta.selectionEnd), Math.max(to, ta.selectionEnd)); else ta.setSelectionRange(to, to); status(); return; }
+            // multi-lignes : Tab et ⇧Tab décalent toutes les lignes choisies
+            if (e.key === 'Tab' && !mod && !e.altKey && ta.value.slice(ta.selectionStart, ta.selectionEnd).includes('\n')) { e.preventDefault(); return indentLines(e.shiftKey); }
+            // fermer tout seul ( [ { " ' ` ; entourer la sélection ; passer par-dessus la fermeture tapée
+            if (!mod && !e.altKey && CLOSE[e.key] && (!popState || pop.hidden)) { const s = ta.selectionStart, e2 = ta.selectionEnd, v = ta.value, q = /["'`]/.test(e.key);
+                if (q && s === e2 && v[s] === e.key) { e.preventDefault(); ta.setSelectionRange(s + 1, s + 1); return; }
+                if (s !== e2) { e.preventDefault(); return replace(s, e2, e.key + v.slice(s, e2) + CLOSE[e.key], e2 - s + 1); }
+                const after = v[s] || '', before = v[s - 1] || ''; if (!/^[\s)\]};,:>]?$/.test(after) || (q && /[\w\\]/.test(before)) || (e.key === "'" && lang === 'html' && !/[=(\[{,\s]/.test(before))) return;
+                if (e.key === '`' && lang === 'css') return; e.preventDefault(); return replace(s, s, e.key + CLOSE[e.key], 1); }
+            if (!mod && /^[)\]}]$/.test(e.key) && ta.selectionStart === ta.selectionEnd && ta.value[ta.selectionStart] === e.key) { e.preventDefault(); const p = ta.selectionStart + 1; ta.setSelectionRange(p, p); return; }
+            if (e.key === 'Backspace' && !mod && ta.selectionStart === ta.selectionEnd) { const s = ta.selectionStart, v = ta.value; if (CLOSE[v[s - 1]] && v[s] === CLOSE[v[s - 1]]) { e.preventDefault(); return replace(s - 1, s + 1, '', 0); } }
             if (popState && !pop.hidden) {
                 if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); popState.k = (popState.k + (e.key === 'ArrowDown' ? 1 : -1) + popState.items.length) % popState.items.length; pop.querySelectorAll('.swc-opt').forEach((o, k) => o.classList.toggle('is-active', k === popState.k)); return; }
                 if (e.key === 'Enter' || e.key === 'Tab') { e.preventDefault(); accept(popState.k); return; }
@@ -352,7 +513,7 @@
             }
         });
         ta.addEventListener('input', e => {
-            change(); if (mark) { mark = null; markEl.hidden = true; }
+            change(); relint(); if (!findEl.hidden) runFind(); if (mark) { mark = null; markEl.hidden = true; }
             const s = ta.selectionStart;
             if (e.inputType === 'insertText' && e.data === '>' && lang === 'html') {
                 const m = /<([a-zA-Z][\w-]*)(\s[^<>]*)?>$/.exec(ta.value.slice(0, s));
@@ -363,14 +524,16 @@
             if (e.inputType === 'insertText' && /[\w<-]/.test(e.data || '')) showPop(completions(ta.value, ta.selectionStart, lang)); else closePop();
         });
         ta.addEventListener('blur', () => setTimeout(closePop, 120));
-        const cursorEv = () => onCursor(ta.selectionStart);
-        ta.addEventListener('click', cursorEv); ta.addEventListener('keyup', e => { if (/^(Arrow|Home|End|Page)/.test(e.key)) cursorEv(); });
-        paint();
-        return {
+        const cursorEv = () => { onCursor(ta.selectionStart); status(); };
+        ta.addEventListener('click', cursorEv); ta.addEventListener('keyup', e => { if (/^(Arrow|Home|End|Page)/.test(e.key) || e.shiftKey) cursorEv(); else status(); });
+        ta.addEventListener('select', status);
+        paint(); status(); relint();
+        const api = {
             el, ta,
             get value() { return ta.value; },
-            set value(v) { if (v === ta.value) return; const st = ta.scrollTop, sl = ta.scrollLeft, p = ta.selectionStart; ta.value = v; ta.scrollTop = st; ta.scrollLeft = sl; try { ta.setSelectionRange(Math.min(p, v.length), Math.min(p, v.length)); } catch (_) {} paint(); },
-            setLang(l) { lang = l; el.dataset.lang = l; closePop(); paint(); },
+            set value(v) { if (v === ta.value) return; const st = ta.scrollTop, sl = ta.scrollLeft, p = ta.selectionStart; ta.value = v; ta.scrollTop = st; ta.scrollLeft = sl; try { ta.setSelectionRange(Math.min(p, v.length), Math.min(p, v.length)); } catch (_) {} paint(); relint(); if (!findEl.hidden) runFind(); },
+            setLang(l) { lang = l; el.dataset.lang = l; closePop(); paint(); relint(); },
+            openFind, gotoLine, format: doFormat, comment: doComment,
             get lang() { return lang; },
             focus() { ta.focus(); },
             /** montre et choisit [de, à] (une balise trouvée depuis l'aperçu) */
@@ -385,9 +548,10 @@
                 sync();
             },
         };
+        return api;
     }
 
-    const API = {expandAbbr, expandCss, highlight, completions, abbrBefore, create, cssScan, cssGetDecls, cssSetDecl, TAGS, VOID, CSS_PROPS, ATTRS};
+    const API = {expandAbbr, expandCss, highlight, completions, abbrBefore, create, cssScan, cssGetDecls, cssSetDecl, toggleComment, findAll, matchBracket, formatCode, lintCode, KEYS_HELP, TAGS, VOID, CSS_PROPS, ATTRS};
     if (typeof module === 'object' && module.exports) module.exports = API;
     else { root.LCNDA_EXT = root.LCNDA_EXT || {}; root.LCNDA_EXT.siteCode = API; }
 })(typeof window !== 'undefined' ? window : globalThis);
