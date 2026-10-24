@@ -624,7 +624,8 @@
      * out : 'preview' (haut-parleurs) ou 'record' (flux pour l'enregistrement).
      */
     /** La case d'une incrustation sur l'image : tout l'écran (c.full : adaptée ou remplie) ou sa case (largeur et position en %) */
-    function v2Box(c, vw, vh, W, H) {
+    function v2Box(c, vw, vh, W, H, tl = null) {
+        if (!c.full && tl !== null && c.track?.length && ext.montageTrack) { const p = ext.montageTrack.trackAt(c.track, tl), w = (c.w || 35) / 100 * W, h = w * vh / vw; return {x: p.x / 100 * W - w / 2, y: p.y / 100 * H - h / 2, w, h}; } // 🎯 centré sur le point suivi
         if (c.full) { const k = c.fit === 'fill' ? Math.max(W / vw, H / vh) : Math.min(W / vw, H / vh), w = vw * k, h = vh * k; return {x: (W - w) / 2, y: (H - h) / 2, w, h}; }
         const w = (c.w || 35) / 100 * W; return {x: (c.x ?? 62) / 100 * W, y: (c.y ?? 6) / 100 * H, w, h: w * vh / vw};
     }
@@ -708,7 +709,7 @@
                     g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180); g.drawImage(el, -vw * kc / 2 * 1.08, -vh * kc / 2 * 1.08, vw * kc * 1.08, vh * kc * 1.08); g.restore(); }
                 w = vw * k; h = vh * k; g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180);
             } else {
-                const b = v2Box(c, vw, vh, W, H); w = b.w; h = b.h; g.translate(b.x + w / 2, b.y + h / 2);
+                const b = v2Box(c, vw, vh, W, H, (local - (c.from || 0)) / spd(c)); w = b.w; h = b.h; g.translate(b.x + w / 2, b.y + h / 2);
             }
             const ax = v('ax') / 100 * W, ay = v('ay') / 100 * H, sc = v('scale') / 100;
             g.translate(v('px') / 100 * W + ax, v('py') / 100 * H + ay); g.rotate(v('rot') * Math.PI / 180); g.scale(sc * v('sx') / 100, sc * v('sy') / 100);
@@ -821,7 +822,8 @@
             g.globalAlpha = clamp01(st.alpha);
             if (st.blur > 0.3) g.filter = `blur(${Math.round(st.blur)}px)`;
             if (st.spacing > 0.3 && 'letterSpacing' in g) g.letterSpacing = `${Math.round(st.spacing)}px`;
-            const cx = (x.x ?? 50) / 100 * W + st.dx, cy = (x.y ?? 80) / 100 * H + st.dy;
+            const tk = x.track?.length && ext.montageTrack ? ext.montageTrack.trackAt(x.track, local) : null; // 🎯 suit un point de la vidéo
+            const cx = (tk ? tk.x : x.x ?? 50) / 100 * W + st.dx, cy = (tk ? tk.y : x.y ?? 80) / 100 * H + st.dy;
             g.translate(cx, cy); if (st.rot) g.rotate(st.rot); g.scale(st.scale, st.scale);
             const sl = shown.split('\n'), top = -(lines.length - 1) * lh / 2;
             const bw = tw + size, x0 = x.align === 'left' ? -size / 2 : x.align === 'right' ? -bw + size / 2 : -bw / 2;
@@ -1104,7 +1106,7 @@
         dl.style.setProperty('--mt-stage', MP.stage + 'vh'); dl.style.setProperty('--mt-lane', MP.lane + 'px'); dl.style.setProperty('--mt-side', MP.sideW + 'px');
         [['colV1', 'v1'], ['colV2', 'v2'], ['colT', 't'], ['colA', 'a']].forEach(([k, v]) => { dl.style.setProperty(`--mt-c-${v}`, MP[k]); dl.style.setProperty(`--mt-i-${v}`, inkOn(MP[k])); });
         const $ = s => dl.querySelector(s), cv = $('[data-mt-canvas]');
-        dl.__montage = {P, get eng() { return eng; }, get sel() { return sel; }}; // pour les tests (tests/test-montage-more.js)
+        dl.__montage = {P, get eng() { return eng; }, get sel() { return sel; }, select: (track, id) => { sel = {track, id}; drawTl(true); }}; // pour les tests (tests/test-montage-more.js)
         // panneau de droite (Élément, Couleurs, Son, Film, Rush) : sa largeur se règle en glissant la poignée, et reste pour la prochaine fois
         const saveSideW = w => { let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} v.sideW = w; try { localStorage.setItem(MT_KEY, JSON.stringify(v)); } catch (_) {} };
         $('[data-mt-split]').addEventListener('pointerdown', e => {
@@ -1248,9 +1250,9 @@
                 ${c.full ? `<label class="h-avx-row">Cadrage <select data-mt-k="fit">${FITS.slice(0, 2).map(([k, l]) => `<option value="${k}" ${(c.fit || 'fit') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}
                 ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}${c.full ? '' : rng('w', 'Largeur', 10, 300, 1, c.w ?? 35, ' %')}${c.full ? '' : rng('x', 'Position horizontale', -100, 100, 1, c.x ?? 62, ' %') + rng('y', 'Position verticale', -100, 100, 1, c.y ?? 6, ' %')}
                 ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + (c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep>🔊 Séparer le son de l’image</button>') + clipSound(c)}${trackSel('v2', c)}<label class="ui-toggle"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}><i></i>cadre blanc</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}><i></i>apparaît et disparaît en fondu</label>
-                ${stabHtml(c)}${ext.montageKey?.html(c, rng, chk) || ''}${oldHtml(c.old, 'old', 'Vieux film (cette vidéo)')}
+                ${stabHtml(c)}${ext.montageKey?.html(c, rng, chk) || ''}${c.full ? '' : ext.montageTrack?.html(c) || ''}${oldHtml(c.old, 'old', 'Vieux film (cette vidéo)')}
                 ${inspectorHtml(c, false)}`;
-            else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
+            else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}${ext.montageTrack?.html(c) || ''}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
                 <details class="h-mt-isec" open><summary><b>✨ Mouvement</b></summary>
                 <label class="h-avx-row">Entrée <select data-mt-k="anim">${ANIMS.map(([k, l]) => `<option value="${k}" ${(c.anim === 'scroll' ? 'none' : c.anim || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 ${rng('animDur', 'Durée de l’entrée (0 = auto)', 0, 10, 0.1, c.animDur || 0, ' s')}
@@ -1350,6 +1352,23 @@
             if (e.target.closest('[data-mt-beatsdel]')) { const c = selected(); if (c) { delete c.beats; delete c.bpm; touch(0); } return; }
             if (e.target.closest('[data-mt-beatcut]')) { const c = selected(); if (c && sel?.track === 'audio') beatCut(c); return; }
             const ap = e.target.closest('[data-mt-animprev]'); if (ap) { const c = selected(); if (c && sel?.track === 'texts') { eng.pause(); eng.seek(c.at).then(() => eng.play()); } return; }
+            const tkb = e.target.closest('[data-mt-trk]'); if (tkb) { const c = selected(); if (!c || !ext.montageTrack) return; // 🎯 suivre un point de la vidéo (heritage-montage-plus.js)
+                if (tkb.dataset.mtTrk === 'off') { delete c.track; touch(1); return; }
+                eng?.pause(); toast('🎯 Clique sur le point à suivre, dans l’image (un visage, un objet). Échap : rien.');
+                const stop = () => { window.removeEventListener('pointerdown', pick, true); window.removeEventListener('keydown', esc2, true); }, esc2 = ev => { if (ev.key === 'Escape') { ev.stopPropagation(); stop(); } };
+                const pick = async ev => { if (ev.target !== cv) return; ev.preventDefault(); ev.stopImmediatePropagation(); stop();
+                    const r = cv.getBoundingClientRect(), nx = (ev.clientX - r.left) / r.width, ny = (ev.clientY - r.top) / r.height, tt = eng?.t || 0;
+                    const start = c.at, end = c.at + (sel.track === 'texts' ? c.dur : clen(c)), it = layoutV1(P).find(x => tt >= x.at && tt < x.end), so = it && P.sources[it.c.s];
+                    if (!it || !so || so.kind !== 'video') return toast('Il faut une vidéo sur la piste 1 à cet instant : place la tête de lecture dessus.', 'error');
+                    if (tt < start || tt >= end) return toast('Place la tête de lecture pendant l’élément (là où il est à l’écran).', 'error');
+                    const W = cv.width, H = cv.height, vw = so.w || 1280, vh = so.h || 720, k = Math.min(W / vw, H / vh), ox = (W - vw * k) / 2, oy = (H - vh * k) / 2;
+                    const fx = (nx * W - ox) / (vw * k), fy = (ny * H - oy) / (vh * k); if (fx < 0 || fx > 1 || fy < 0 || fy > 1) return toast('Clique dans l’image de la vidéo.', 'error');
+                    const sp = spd(it.c), from = it.c.from + (tt - it.at) * sp, to = it.c.from + (Math.min(end, it.end) - it.at) * sp;
+                    try { tkb.disabled = true; const pts = await ext.montageTrack.trackVideo(so.src, from, to, fx, fy, {dt: 0.1 * sp, onStep: p => { tkb.textContent = `🎯 Suivi… ${Math.round(p * 100)} %`; }});
+                        c.track = pts.map(q => ({t: Math.round((it.at + (q.t - it.c.from) / sp - start) * 1000) / 1000, x: Math.round((ox + q.fx * vw * k) / W * 1000) / 10, y: Math.round((oy + q.fy * vh * k) / H * 1000) / 10}));
+                        touch(1); toast(`🎯 L’élément suit le point (${pts.length} positions). ✕ pour arrêter.`, 'success');
+                    } catch (err) { toast(`Suivi impossible : ${err.message}`, 'error'); } finally { tkb.disabled = false; } };
+                window.addEventListener('pointerdown', pick, true); window.addEventListener('keydown', esc2, true); return; }
             const kc = e.target.closest('[data-mt-keycol]'); if (kc) { const c = selected(); if (c) { c.key = {...(c.key || {}), on: true, color: kc.dataset.mtKeycol}; touch(0); } return; } // 🟩 fond vert ou bleu
             const sp = e.target.closest('[data-mt-speed]'); if (sp) { const c = selected(); if (c) { c.speed = Number(sp.dataset.mtSpeed); touch(1); } return; }
             const idur = e.target.closest('[data-mt-imgdur]'); if (idur) { const c = selected(); if (c) { c.to = c.from + Number(idur.dataset.mtImgdur); touch(1); } return; }

@@ -18,6 +18,10 @@ let failed = 0, count = 0, proc = null, browser = null;
 const t = async (name, fn) => { try { await fn(); count++; console.log('✓', name); } catch (e) { failed++; console.error('✗', name, '\n ', e && e.stack || e); } };
 
 (async () => {
+    await t('suivi (Node) : un carré qui avance est suivi image par image ; entre deux positions, la place se calcule', () => {
+        const W = 80, H = 60, fr = []; for (let i = 0; i < 10; i++) { const d = new Float32Array(W * H).fill(30), cx = 20 + i * 4, cy = 20 + i * 2; for (let y = -3; y <= 3; y++) for (let x = -3; x <= 3; x++) d[(cy + y) * W + cx + x] = 220 + x * 3; fr.push({ d, W, H }); }
+        assert.deepEqual(MP.trackPoints(fr, 20, 20).at(-1), [56, 38]); assert.deepEqual(MP.trackAt([{ t: 0, x: 10, y: 10 }, { t: 2, x: 30, y: 50 }], 1), { t: 1, x: 20, y: 30 });
+    });
     await t('fond vert (Node) : le vert pur part, la peau et le gris restent', () => {
         const d = new Uint8ClampedArray([0, 255, 0, 255, 20, 200, 30, 255, 200, 150, 120, 255, 128, 128, 128, 255]); MP.keyPixels(d, {});
         assert.equal(d[3], 0); assert.equal(d[7], 0); assert.deepEqual([...d.slice(8, 16)], [200, 150, 120, 255, 128, 128, 128, 255]);
@@ -41,7 +45,8 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
     try {
         ff(['-f', 'lavfi', '-i', 'color=c=gray:s=320x180:r=25:d=3', '-f', 'lavfi', '-i', 'sine=frequency=1000:sample_rate=48000:d=3', '-af', 'volume=0.2', '-c:v', 'libvpx', '-b:v', '400k', '-c:a', 'libopus', '-b:a', '128k', '-shortest', path.join(mediaDir, 'gris.webm')]);
         ff(['-f', 'lavfi', '-i', 'color=c=0x00ff00:s=320x180:r=25:d=3', '-vf', 'drawbox=x=130:y=60:w=60:h=60:color=red:t=fill', '-c:v', 'libvpx', '-b:v', '800k', '-an', path.join(mediaDir, 'vert.webm')]);
-        const project = { sources: [{ src: 'media/gris.webm', title: 'Gris', kind: 'video', dur: 3, w: 320, h: 180 }, { src: 'media/vert.webm', title: 'Fond vert', kind: 'video', dur: 3, w: 320, h: 180 }],
+        ff(['-f', 'lavfi', '-i', 'color=c=gray:s=320x180:r=25:d=3', '-f', 'lavfi', '-i', 'color=c=red:s=24x24:r=25:d=3', '-filter_complex', "[0][1]overlay=x='20+t*60':y=70", '-c:v', 'libvpx', '-b:v', '800k', '-an', path.join(mediaDir, 'mobile.webm')]);
+        const project = { sources: [{ src: 'media/gris.webm', title: 'Gris', kind: 'video', dur: 3, w: 320, h: 180 }, { src: 'media/vert.webm', title: 'Fond vert', kind: 'video', dur: 3, w: 320, h: 180 }, { src: 'media/mobile.webm', title: 'Mobile', kind: 'video', dur: 3, w: 320, h: 180 }],
             v1: [{ id: 'va', s: 0, from: 0, to: 3, tr: { type: 'none', d: 1 }, look: {}, vol: 1 }], v2: [], texts: [], audio: [],
             tracks: [{ id: 'V1', kind: 'main', name: 'Vidéo 1' }, { id: 'T1', kind: 't', name: 'Textes 1' }, { id: 'A1', kind: 'a', name: 'Son 1' }] };
         const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', `require "lib/paths.php"; (new PDO("sqlite:".DATA_DIR."/genealogy.sqlite"))->exec(file_get_contents(APP_ROOT."/data/schema.sql")); require "lib/bootstrap.php"; $p = db(); $p->exec("INSERT INTO persons(first_name,last_name,gender) VALUES('Jean','Martin','male')"); $p->prepare("INSERT INTO montage_projects(name, data_json) VALUES(?, ?)")->execute(["Essai", $argv[1]]); echo $p->lastInsertId();`, JSON.stringify(project)], { cwd: appRoot, encoding: 'utf8', env });
@@ -90,6 +95,19 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
             await p.evaluate(m => { const M = eval(m); M.P.v2[0].key = { on: true, color: '#00ff00' }; M.eng.redraw(); }, M); await p.waitForTimeout(200);
             const g1 = await at(0.1, 0.1), red = await at(0.5, 0.5); assert.ok(Math.abs(g1[0] - g1[1]) < 25 && g1[1] < 180, `le gris dessous : ${g1}`); assert.ok(red[0] > 150 && red[1] < 90, `le rouge reste : ${red}`);
             await p.evaluate(m => { const M = eval(m); M.P.v2 = []; M.eng.redraw(); }, M);
+        });
+        await t('🎯 suivre ce qui bouge : un titre posé sur le carré rouge le suit pendant qu’il avance', async () => {
+            await p.evaluate(async m => { const M = eval(m); M.P.v1[0].s = 2; M.P.texts.push({ id: 'tx', at: 0, dur: 3, text: 'ICI', size: 5, x: 50, y: 20, track: 'T1' }); await M.eng.refresh(); await M.eng.seek(0.2); }, M);
+            await p.evaluate(m => { eval(m).select('texts', 'tx'); }, M); await p.click('[data-mt-tab="item"]'); await p.waitForSelector('[data-mt-pane="item"] [data-mt-trk="pick"]');
+            await p.evaluate(async m => { await eval(m).eng.seek(0.2); }, M);
+            await p.evaluate(() => document.querySelector('[data-mt-pane="item"] [data-mt-trk="pick"]').click());
+            const b = await p.$eval('[data-mt-canvas]', c => { const r = c.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; });
+            await p.mouse.click(b.x + b.w * (32 + 12) / 320, b.y + b.h * 82 / 180);
+            await p.waitForFunction(m => eval(m).P.texts.find(x => x.id === 'tx').track?.length > 10, M, { timeout: 60000 });
+            const tr = await p.evaluate(m => eval(m).P.texts.find(x => x.id === 'tx').track, M), a = tr[0], z = tr.at(-1);
+            assert.ok(Math.abs(a.x - 44 / 320 * 100) < 4, `départ ${a.x}`); assert.ok(z.x - a.x > 40, `il avance : ${a.x} → ${z.x}`); assert.ok(Math.abs(z.y - a.y) < 4, 'à la même hauteur');
+            const want = 20 + 2.9 * 60 + 12; assert.ok(Math.abs(z.x - want / 320 * 100) < 6, `arrivée ${z.x} (≈ ${(want / 320 * 100).toFixed(1)})`);
+            await p.evaluate(m => { const M = eval(m); M.P.texts = M.P.texts.filter(x => x.id !== 'tx'); M.P.v1[0].s = 0; }, M);
         });
         await t('🎯 vectorscope : Affichage → le panneau s’ouvre et dessine ; une 2e fois le ferme', async () => {
             await p.evaluate(() => document.querySelector('dialog[open] [data-mt-cmd="scope"]').click());

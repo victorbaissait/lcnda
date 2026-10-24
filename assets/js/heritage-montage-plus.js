@@ -5,6 +5,7 @@
  *  - 🎯 Vectorscope et histogramme : les couleurs de l'image (teinte autour, saturation vers le bord) avec les repères
  *    R, Mg, B, Cy, V, J et la ligne des tons chair ; la lumière de sombre à clair ; suit la lecture ;
  *  - 🟩 Fond vert : la couleur du fond (vert, bleu, au choix) devient transparente, avec bord adouci et reflet retiré ;
+ *  - 🎯 Suivre ce qui bouge : un titre ou une incrustation suit un point de la vidéo (suivi par corrélation, image par image) ;
  *  - 📢 Volume standard à l'export (LUFS, norme UIT-R BS.1770) : le montage est d'abord mélangé hors ligne et mesuré, puis
  *    enregistré au bon niveau (−14 internet, −16 balado, −23 télévision), sans dépasser −1 dB de crête.
  * Sans écran (Node, essais) : ext.montageLoud = {lufs, kWeights, gainFor} et ext.montageWheels = {parse, color, scopeXY}.
@@ -189,7 +190,50 @@
         <p class="muted">Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1.</p></details>`; };
     ext.montageKey = {keyPixels, frame: keyFrame, html: keyHtml};
 
-    if (typeof module === 'object' && module.exports) module.exports = {lufs, kWeights, parse, color, scopeXY, keyPixels};
+    /* ═════════ 🎯 Suivi d'un point : un titre ou une incrustation qui suit ce qui bouge dans la vidéo ═════════ */
+    /** la place (en % de l'écran) au temps t (secondes depuis le début de l'élément) ; track : [{t, x, y}] trié */
+    function trackAt(track, t) {
+        if (!track?.length) return null; if (t <= track[0].t) return track[0]; const L = track.at(-1); if (t >= L.t) return L;
+        let i = 1; while (track[i].t < t) i++; const a = track[i - 1], b = track[i], f = (t - a.t) / ((b.t - a.t) || 1);
+        return {t, x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f};
+    }
+    /** frames : [{d (gris, W × H), W, H}] ; (x0, y0) en pixels de la 1re image → [[x, y], …] ; un carré de 2R+1 cherché à S près,
+     *  par la plus petite somme des écarts (le modèle se renouvelle doucement : il suit un visage qui tourne un peu) */
+    const OFFS = S => { const l = []; for (let sy = -S; sy <= S; sy++) for (let sx = -S; sx <= S; sx++) l.push([sx, sy]); return l.sort((a, b) => Math.hypot(...a) - Math.hypot(...b)); };
+    function trackPoints(frames, x0, y0, {R = 8, S = 16} = {}) {
+        const out = [[x0, y0]]; if (!frames.length) return out;
+        const {W, H} = frames[0], tpl = new Float32Array((2 * R + 1) ** 2);
+        const grab = (f, cx, cy, into) => { let k = 0; for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) { const x = Math.max(0, Math.min(W - 1, Math.round(cx + dx))), y = Math.max(0, Math.min(H - 1, Math.round(cy + dy))); into[k++] = f.d[y * W + x]; } return into; };
+        grab(frames[0], x0, y0, tpl); let x = x0, y = y0; const cur = new Float32Array(tpl.length);
+        for (let i = 1; i < frames.length; i++) {
+            let best = Infinity, bx = x, by = y; // à égalité, on reste sur place (pas de glissement sur une image unie)
+            for (const [sx, sy] of OFFS(S)) { grab(frames[i], x + sx, y + sy, cur); let e = 0; for (let k = 0; k < tpl.length && e < best; k++) e += Math.abs(cur[k] - tpl[k]); if (e < best) { best = e; bx = x + sx; by = y + sy; } }
+            x = Math.max(0, Math.min(W - 1, bx)); y = Math.max(0, Math.min(H - 1, by)); out.push([x, y]);
+            grab(frames[i], x, y, cur); for (let k = 0; k < tpl.length; k++) tpl[k] = tpl[k] * 0.8 + cur[k] * 0.2;
+        }
+        return out;
+    }
+    /** dans le navigateur : la vidéo src lue de « from » à « to » (temps de la source), tous les dt ; (fx, fy) : le point (0…1 de l'image) */
+    async function trackVideo(src, from, to, fx, fy, {dt = 0.1, onStep, cancelled} = {}) {
+        const v = document.createElement('video'); v.muted = true; v.preload = 'auto'; v.playsInline = true; v.crossOrigin = 'anonymous'; v.src = src;
+        await new Promise((res, rej) => { v.onloadeddata = res; v.onerror = () => rej(new Error('vidéo illisible')); setTimeout(() => rej(new Error('vidéo trop longue à charger')), 20000); });
+        const W = 320, H = Math.max(16, Math.round(W * (v.videoHeight || 9) / (v.videoWidth || 16))), cv = document.createElement('canvas'); cv.width = W; cv.height = H; const g = cv.getContext('2d', {willReadFrequently: true});
+        const frames = [], times = [], n = Math.max(1, Math.min(3000, Math.ceil((to - from) / dt)));
+        for (let i = 0; i <= n; i++) {
+            if (cancelled?.()) throw new Error('arrêté'); const t = Math.min(to, from + i * dt);
+            await new Promise(res => { const done = () => { v.removeEventListener('seeked', done); res(); }; v.addEventListener('seeked', done); v.currentTime = t; setTimeout(done, 3000); });
+            await new Promise(res => (v.requestVideoFrameCallback && i ? (v.requestVideoFrameCallback(() => res()), setTimeout(res, 120)) : setTimeout(res, 20))); // l'image décodée, pas la précédente
+            g.drawImage(v, 0, 0, W, H); const d = g.getImageData(0, 0, W, H).data, gray = new Float32Array(W * H); for (let k = 0; k < W * H; k++) gray[k] = 0.299 * d[k * 4] + 0.587 * d[k * 4 + 1] + 0.114 * d[k * 4 + 2];
+            frames.push({d: gray, W, H}); times.push(t); onStep?.(i / n * 0.8);
+        }
+        const pts = trackPoints(frames, fx * W, fy * H); onStep?.(1); v.removeAttribute('src');
+        return pts.map(([x, y], i) => ({t: times[i], fx: x / W, fy: y / H}));
+    }
+    const trackHtml = c => `<details class="h-mt-isec h-mt-trk" ${c.track?.length ? 'open' : ''}><summary><b>🎯 Suivre ce qui bouge</b></summary><p class="muted">L’élément suit un point de la vidéo de la piste 1 (un visage, une voiture, un bateau) : clique « Choisir le point », puis sur ce point dans l’image.</p>
+        <div class="h-mt-quick"><button type="button" data-mt-trk="pick">🎯 Choisir le point à suivre</button>${c.track?.length ? '<button type="button" data-mt-trk="off">✕ Ne plus suivre</button>' : ''}</div>${c.track?.length ? `<p class="muted">Suivi sur ${c.track.length} positions.</p>` : ''}</details>`;
+    ext.montageTrack = {trackAt, trackPoints, trackVideo, html: trackHtml};
+
+    if (typeof module === 'object' && module.exports) module.exports = {lufs, kWeights, parse, color, scopeXY, keyPixels, trackAt, trackPoints};
     if (typeof document === 'undefined' || document.getElementById('h-mt-plus-css')) return;
     const st = document.createElement('style'); st.id = 'h-mt-plus-css'; st.textContent = `
 .h-mt-wheels{margin:10px 0 4px}.h-mt-wheelrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
