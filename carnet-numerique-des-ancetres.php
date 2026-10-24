@@ -199,7 +199,7 @@
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
                         <a class="button" href="download/LCNDA-0.8.2-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 547 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.8.2-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.8.2-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 554 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -219,7 +219,7 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.8.2-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.8.2-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 543 Mo</small></span><span aria-hidden="true">↓</span></a>
                             <a class="button secondary" href="download/LCNDA-0.8.2-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 516 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
@@ -239,8 +239,8 @@
                     <p class="presentation-os-help">Le code complet de la version 0.8.2, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.8.2.zip"><span>Archive .zip<small>Windows, macOS · 268 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.8.2.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 267 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.8.2.zip"><span>Archive .zip<small>Windows, macOS · 269 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.8.2.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 269 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
