@@ -72,12 +72,14 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
         const page = await browser.newPage({viewport: {width: w, height: 900}, colorScheme: dark ? 'dark' : 'light'});
         page.on('pageerror', e => errs.push(`${w}px : ${e.message}`)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errs.push(`${w}px console : ${m.text()}`); });
         page.on('dialog', d => d.dismiss());
+        await page.addInitScript(() => { try { localStorage.setItem('genealogie-reglages-presentation', 'old'); } catch (_) {} }); // la page « Apparence » entière (les trois groupes : test-reglages-trois-groupes.js)
         if (dark) await page.addInitScript(() => { try { if (!sessionStorage.getItem('t-dark')) { sessionStorage.setItem('t-dark', '1'); localStorage.setItem('genealogie-design', JSON.stringify({preset: 'dark'})); } } catch (_) {} });
         await page.goto(base + hash, {waitUntil: 'load'}); await page.waitForTimeout(2200);
         return page;
     };
     const bar = page => page.$$eval('.topbar-meta > button', els => els.filter(e => !e.hidden && !e.hasAttribute('data-tb-off')).map(e => e.id));
-    const rows = page => page.$$eval('#lc-tb-order .order-row', els => els.map(e => e.dataset.orderKey));
+    const allRows = page => page.$$eval('#lc-tb-order .order-row', els => els.map(e => e.dataset.orderKey));
+    const rows = async page => (await allRows(page)).filter(k => !/^(et|enq)_/.test(k)); // sans les raccourcis vers les outils
     const shot = async (page, name) => { if (shots) { fs.mkdirSync(shots, {recursive: true}); await page.screenshot({path: path.join(shots, name)}); } };
     try {
         const page = await open(1440);
@@ -122,7 +124,7 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             assert.equal(await page.$eval('#lc-tb-order .order-row', e => e.querySelector('.order-number').textContent), '01', 'numéros refaits');
             await page.click('#lc-tb-order [data-order-key="kiosk"] [data-tb-show]'); await page.waitForTimeout(600);
             assert.deepEqual(await bar(page), ['genealogy-switch', 'side-panel-open', 'new-window-open']);
-            assert.deepEqual(JSON.parse(await page.evaluate(k => localStorage.getItem(k), KEY)), {order: ['genealogies', 'split', 'window', 'kiosk', 'simple', 'calc'], hidden: ['kiosk']});
+            { const v = JSON.parse(await page.evaluate(k => localStorage.getItem(k), KEY)); assert.deepEqual(v.order.slice(0, 6), ['genealogies', 'split', 'window', 'kiosk', 'simple', 'calc']); assert.deepEqual(v.hidden, ['kiosk']); assert.deepEqual(v.on, []); }
         });
         await t('🧓 coché dans la liste = « Montrer le bouton » du mode simple', async () => {
             await page.click('#lc-tb-order [data-order-key="simple"] [data-tb-show]'); await page.waitForTimeout(600);
@@ -139,6 +141,31 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             assert.equal(await page.evaluate(k => localStorage.getItem(k), KEY), null);
             assert.deepEqual(await bar(page), ['side-panel-open', 'new-window-open', 'kiosk-toggle', 'calculette-open', 'genealogy-switch']);
             assert.deepEqual(await rows(page), ['split', 'window', 'kiosk', 'simple', 'calc', 'genealogies']);
+        });
+        await t('raccourcis vers les outils : cachés au départ, un par outil de modification (Tableaux compris) et par partie d’Enquêtes', async () => {
+            const all = await allRows(page);
+            for (const k of ['et_montage', 'et_audio', 'et_retouch', 'et_sheet', 'et_textdoc', 'et_website', 'et_house', 'et_boards', 'enq_enquetes', 'enq_battue', 'enq_atelier', 'enq_tableaux']) assert.ok(all.includes(k), k);
+            assert.equal(await page.$$eval('#lc-tb-order .order-row [data-tb-show]', els => els.filter(e => /^(et|enq)_/.test(e.closest('.order-row').dataset.orderKey) && e.checked).length), 0, 'tous décochés');
+            assert.equal(await page.$$eval('.topbar-meta > .lc-tb-go', els => els.filter(e => !e.hasAttribute('data-tb-off')).length), 0, 'aucun dans la barre');
+        });
+        await t('cocher 🧮 Tableur et 🧩 Tableaux : boutons en haut, qui ouvrent l’outil et l’onglet', async () => {
+            await page.click('#lc-tb-order [data-order-key="et_sheet"] [data-tb-show]'); await page.waitForTimeout(500);
+            await page.click('#lc-tb-order [data-order-key="enq_tableaux"] [data-tb-show]'); await page.waitForTimeout(500);
+            assert.deepEqual(JSON.parse(await page.evaluate(k => localStorage.getItem(k), KEY)).on.sort(), ['enq_tableaux', 'et_sheet']);
+            assert.deepEqual((await bar(page)).filter(x => /^tb-go-/.test(x)), ['tb-go-et_sheet', 'tb-go-enq_tableaux']);
+            assert.equal(await page.$$eval('[data-tb-preview] .lc-tb-btn', e => e.length), 7, 'aperçu : 5 + 2');
+            await page.click('#tb-go-et_sheet'); await page.waitForTimeout(1800);
+            assert.equal(await page.evaluate(() => window.LCNDA_APP.state.module + '/' + window.LCNDA_APP.state.listType), 'listes/edit_tools');
+            assert.ok(await page.$('.h-et-page'), 'page des outils');
+            assert.match(await page.textContent('.h-et-page'), /Tableaux/, '🧩 Tableaux dans les outils de modification');
+            assert.equal(await page.evaluate(() => localStorage.getItem('genealogie-edittools-tab')), 'sheet');
+            await page.click('#tb-go-enq_tableaux'); await page.waitForTimeout(1800);
+            assert.equal(await page.evaluate(() => window.LCNDA_APP.state.module + '/' + window.LCNDA_APP.state.enquetesTab), 'enquetes/tableaux');
+            await page.reload(); await page.waitForTimeout(2500);
+            assert.deepEqual((await bar(page)).filter(x => /^tb-go-/.test(x)), ['tb-go-et_sheet', 'tb-go-enq_tableaux'], 'après rechargement');
+            await page.goto(base + '#maintenance/design'); await page.waitForTimeout(2200);
+            await page.click('[data-tb-reset]'); await page.waitForTimeout(900);
+            assert.equal(await page.$$eval('.topbar-meta > .lc-tb-go', els => els.filter(e => !e.hasAttribute('data-tb-off')).length), 0, '↺ : de nouveau cachés');
         });
         await t('l’interrupteur de la calculette change aussi la liste (une seule valeur)', async () => {
             await page.evaluate(() => { const s = JSON.parse(localStorage.getItem('genealogie-calculette') || '{}'); localStorage.setItem('genealogie-calculette', JSON.stringify({...s, topButton: false})); window.LCNDA_EXT.calculator.refreshButton(); });

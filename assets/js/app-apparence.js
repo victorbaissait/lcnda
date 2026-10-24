@@ -650,27 +650,41 @@
         ['calc', '#calculette-open', '🧮', 'Calculette'],
         ['genealogies', '#genealogy-switch', '🌳', 'Mes généalogies (changer, en créer une autre)'],
     ];
-    const TB_KEYS = TB_ITEMS.map(b => b[0]), TB_OWN = ['simple', 'calc']; // ces deux-là : leur réglage à eux
+    const TB_OWN = ['simple', 'calc']; // ces deux-là : leur réglage à eux
+    /* Les raccourcis vers les outils, cachés au départ (cochés un par un) : chaque outil de 🛠️ Outils de modification
+     * (Listes → Outils de modification, sur son onglet) et chaque partie d'Enquêtes (🔍 Enquêtes, 🧭 Battue, 📚 Atelier, 🧩 Tableaux).
+     * Montrés : localStorage['genealogie-topbar-buttons'].on = [clés]. */
+    const TB_ENQ = [['enquetes', '🔍', 'Enquêtes'], ['battue', '🧭', 'Battue'], ['atelier', '📚', 'Atelier'], ['tableaux', '🧩', 'Tableaux']];
+    const tbTools = () => [
+        ...(ext.editToolsList?.() || []).map(t => ({key: 'et_' + t.key, icon: t.icon || '🛠️', label: t.label, group: 'Outil de modification', go: () => ext.openEditToolTab?.(t.key)})),
+        ...TB_ENQ.map(([k, icon, label]) => ({key: 'enq_' + k, icon, label, group: 'Enquêtes', go: () => { const st = A().state; st.enquetesTab = k; st.currentInvestigationId = 0; st.currentBattueId = 0; st.currentBoardId = 0; A().setModule('enquetes'); }})),
+    ];
+    const isTool = k => /^(et|enq)_/.test(k);
+    const tbItems = () => [...TB_ITEMS, ...tbTools().map(t => [t.key, '#tb-go-' + t.key, t.icon, t.label, t.group])];
+    const tbKeys = () => tbItems().map(b => b[0]);
     function topbarCfg() {
-        const v = lsGet(TB_KEY, {}) || {};
-        const order = Array.isArray(v.order) ? v.order.filter((k, i, l) => TB_KEYS.includes(k) && l.indexOf(k) === i) : [];
-        TB_KEYS.forEach((k, i) => { if (!order.includes(k)) order.splice(Math.min(i, order.length), 0, k); });
-        return {order, hidden: Array.isArray(v.hidden) ? v.hidden.filter((k, i, l) => TB_KEYS.includes(k) && !TB_OWN.includes(k) && l.indexOf(k) === i) : []};
+        const v = lsGet(TB_KEY, {}) || {}, keys = tbKeys();
+        const order = Array.isArray(v.order) ? v.order.filter((k, i, l) => keys.includes(k) && l.indexOf(k) === i) : [];
+        keys.forEach((k, i) => { if (!order.includes(k)) order.splice(Math.min(i, order.length), 0, k); });
+        return {order, hidden: Array.isArray(v.hidden) ? v.hidden.filter((k, i, l) => keys.includes(k) && !TB_OWN.includes(k) && !isTool(k) && l.indexOf(k) === i) : [],
+            on: Array.isArray(v.on) ? v.on.filter((k, i, l) => isTool(k) && l.indexOf(k) === i) : []};
     }
     const calcShown = () => (lsGet('genealogie-calculette', {}) || {}).topButton !== false;
     const simpleShown = () => { const ms = ext.modeSimple; if (ms?.settings) return !!ms.settings().forAll; const loc = lsGet('lcnda-mode-simple-local', null); const s = loc && loc.baseAll === false ? loc : (lsGet('genealogie-mode-simple', {}) || {}); return s.forAll === true; };
-    function topbarShown(k, cfg = topbarCfg()) { return k === 'calc' ? calcShown() : k === 'simple' ? simpleShown() : !cfg.hidden.includes(k); }
+    function topbarShown(k, cfg = topbarCfg()) { return k === 'calc' ? calcShown() : k === 'simple' ? simpleShown() : isTool(k) ? cfg.on.includes(k) : !cfg.hidden.includes(k); }
     /** montrer / cacher un bouton (🧮 et 🧓 : dans leur propre réglage, le même que leur interrupteur) */
     function topbarSetShown(k, on) {
-        if (!TB_KEYS.includes(k)) return;
+        if (!tbKeys().includes(k)) return;
         if (k === 'calc') { const s = lsGet('genealogie-calculette', {}) || {}; lsSet('genealogie-calculette', {...(typeof s === 'object' && !Array.isArray(s) ? s : {}), topButton: !!on}); ext.calculator?.refreshButton?.(); }
         else if (k === 'simple') { const ms = ext.modeSimple; if (ms?.write && ms.settings) { ms.write({...ms.settings(), forAll: !!on}); ms.refreshEntry?.(); } }
+        else if (isTool(k)) { const c = topbarCfg(); c.on = on ? [...new Set([...c.on, k])] : c.on.filter(x => x !== k); lsSet(TB_KEY, c); }
         else { const c = topbarCfg(); c.hidden = on ? c.hidden.filter(x => x !== k) : [...new Set([...c.hidden, k])]; lsSet(TB_KEY, c); }
         applyTopbar();
     }
     function topbarSave(order, shown) {
-        const hidden = TB_KEYS.filter(k => !TB_OWN.includes(k) && shown[k] === false);
-        lsSet(TB_KEY, {order: order.filter(k => TB_KEYS.includes(k)), hidden});
+        const keys = tbKeys(), hidden = keys.filter(k => !TB_OWN.includes(k) && !isTool(k) && shown[k] === false);
+        const on = [...topbarCfg().on.filter(k => !(k in shown)), ...keys.filter(k => isTool(k) && shown[k] === true)];
+        lsSet(TB_KEY, {order: order.filter(k => keys.includes(k)), hidden, on});
         TB_OWN.forEach(k => { if (k in shown && shown[k] !== topbarShown(k)) topbarSetShown(k, shown[k]); });
         applyTopbar();
     }
@@ -686,8 +700,13 @@
         const meta = document.querySelector('.topbar-meta'); if (!meta || tbBusy) return;
         tbBusy = true;
         try {
-            const cfg = topbarCfg();
-            const els = cfg.order.map(k => { const d = TB_ITEMS.find(b => b[0] === k); const el = meta.querySelector(`:scope > ${d[1]}`); if (el && !TB_OWN.includes(k)) el.toggleAttribute('data-tb-off', cfg.hidden.includes(k)); return el; }).filter(Boolean);
+            const cfg = topbarCfg(), tools = tbTools();
+            // les raccourcis vers les outils : un bouton chacun, posé une fois, caché tant qu'il n'est pas coché
+            tools.forEach(t => { let el = meta.querySelector(`:scope > #tb-go-${t.key}`);
+                if (!el) { el = document.createElement('button'); el.type = 'button'; el.id = 'tb-go-' + t.key; el.className = 'icon-button lc-tb-go'; el.title = `${t.label} (${t.group})`; el.setAttribute('aria-label', t.label); el.textContent = t.icon; el.addEventListener('click', () => tbTools().find(x => x.key === t.key)?.go()); meta.insertBefore(el, meta.querySelector(':scope > .status-dot')); }
+                el.toggleAttribute('data-tb-off', !cfg.on.includes(t.key)); });
+            const items = tbItems();
+            const els = cfg.order.map(k => { const d = items.find(b => b[0] === k); const el = meta.querySelector(`:scope > ${d[1]}`); if (el && !TB_OWN.includes(k)) el.toggleAttribute('data-tb-off', !topbarShown(k, cfg)); return el; }).filter(Boolean);
             const cur = [...meta.children].filter(el => els.includes(el));
             if (cur.some((el, i) => el !== els[i])) { const anchor = meta.querySelector(':scope > .status-dot'); els.forEach(el => meta.insertBefore(el, anchor)); }
         } finally { tbBusy = false; }
@@ -697,22 +716,23 @@
         let t = 0; new MutationObserver(() => { if (tbBusy) return; clearTimeout(t); t = setTimeout(applyTopbar, 0); }).observe(meta, {childList: true});
         applyTopbar();
     }
+    if (document.readyState !== 'complete') window.addEventListener('load', applyTopbar, {once: true}); // les outils ajoutés par les fichiers chargés après celui-ci
     const tbIcon = d => { const el = document.querySelector(`.topbar-meta > ${d[1]}`); if (!el) return `<span aria-hidden="true">${d[2]}</span>`; const c = el.cloneNode(true); return c.querySelector('svg') ? c.querySelector('svg').outerHTML : `<span aria-hidden="true">${d[2]}</span>`; };
     function topbarPreviewHtml(order, shown) {
         const vis = order.filter(k => shown[k]);
         const st = document.getElementById('database-status'), lines = st ? [...st.querySelectorAll('.db-count-line')].map(x => x.textContent.trim()).filter(Boolean) : [];
         const count = (lines.length ? lines.join(' · ') : st?.textContent?.trim()) || 'Base locale';
-        return `<div class="lc-tb-prev" aria-hidden="true">${vis.map(k => { const d = TB_ITEMS.find(b => b[0] === k); return `<span class="lc-tb-btn${k === 'simple' ? ' is-wide' : ''}" title="${esc(d[3])}">${tbIcon(d)}${k === 'simple' ? '<b>Mode simple</b>' : ''}</span>`; }).join('')}<span class="lc-tb-dot"></span><span class="lc-tb-count">${esc(count)}</span></div>${vis.length ? '' : (A().empty ? A().empty('Pas de bouton : seul le compteur reste en haut à droite.', {icon: '👁'}) : '')}`;
+        return `<div class="lc-tb-prev" aria-hidden="true">${vis.map(k => { const d = tbItems().find(b => b[0] === k); return `<span class="lc-tb-btn${k === 'simple' ? ' is-wide' : ''}" title="${esc(d[3])}">${tbIcon(d)}${k === 'simple' ? '<b>Mode simple</b>' : ''}</span>`; }).join('')}<span class="lc-tb-dot"></span><span class="lc-tb-count">${esc(count)}</span></div>${vis.length ? '' : (A().empty ? A().empty('Pas de bouton : seul le compteur reste en haut à droite.', {icon: '👁'}) : '')}`;
     }
     function topbarPanelHtml() {
-        const cfg = topbarCfg(), shown = Object.fromEntries(TB_KEYS.map(k => [k, topbarShown(k, cfg)]));
+        const cfg = topbarCfg(), items = tbItems(), shown = Object.fromEntries(items.map(b => [b[0], topbarShown(b[0], cfg)]));
         const note = {simple: 'Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ.', calc: 'Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »).', split: 'Aussi : ⇧ + Entrée dans la recherche rapide.'};
-        const row = (k, i) => { const d = TB_ITEMS.find(x => x[0] === k); return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher ce bouton"><input type="checkbox" data-tb-show aria-label="Afficher « ${esc(d[3])} »" ${shown[k] ? 'checked' : ''}></label><span class="lc-hh-ico" aria-hidden="true">${d[2]}</span><b>${esc(d[3])}${note[k] ? `<small class="muted">${esc(note[k])}</small>` : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-tb-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-tb-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
-        return `<section class="person-block-config" id="lc-topbar-buttons"><header><span class="eyebrow">APPARENCE</span><h3 data-help="Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre." data-help-faq="boutons en haut à droite">Boutons en haut à droite</h3><p>Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. C’est gardé tout de suite.</p></header>
+        const row = (k, i) => { const d = items.find(x => x[0] === k); if (!d) return ''; return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher ce bouton"><input type="checkbox" data-tb-show aria-label="Afficher « ${esc(d[3])} »" ${shown[k] ? 'checked' : ''}></label><span class="lc-hh-ico" aria-hidden="true">${d[2]}</span><b>${esc(d[3])}${note[k] || d[4] ? `<small class="muted">${esc(note[k] || `Raccourci : ${d[4] === 'Enquêtes' ? 'Enquêtes, sur cet onglet' : 'Listes → 🛠️ Outils de modification, sur cet outil'}. Caché au départ.`)}</small>` : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-tb-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-tb-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
+        return `<section class="person-block-config" id="lc-topbar-buttons"><header><span class="eyebrow">APPARENCE</span><h3 data-help="Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre." data-help-faq="boutons en haut à droite">Boutons en haut à droite</h3><p>Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut. C’est gardé tout de suite.</p></header>
             <div class="design-order-grid block-grid">
             <section class="maintenance-panel order-editor block-order-editor"><div class="item-title-row"><h3>Ordre et visibilité des boutons</h3></div>
                 <div class="order-list block-order-list" id="lc-tb-order">${cfg.order.map(row).join('')}</div>
-                <div class="page-actions action-zone"><button class="button small secondary" type="button" data-tb-reset title="L’ordre de l’app, tous les boutons montrés sauf 🧓 (caché au départ)">↺ Remettre comme au départ</button></div>
+                <div class="page-actions action-zone"><button class="button small secondary" type="button" data-tb-reset title="L’ordre de l’app, tous les boutons montrés sauf 🧓 et les raccourcis vers les outils (cachés au départ)">↺ Remettre comme au départ</button></div>
             </section>
             <section class="maintenance-panel order-editor block-order-editor lc-tb-panel"><div class="item-title-row"><h3>Aperçu</h3></div>
                 <div data-tb-preview>${topbarPreviewHtml(cfg.order, shown)}</div>

@@ -2347,6 +2347,17 @@
         ext.boards(++st.workspaceToken);
     }
     ext.openBoardById = go;
+    // 🛠️ Listes → Outils de modification : les tableaux aussi (les dossiers d'un tableau restent dedans)
+    ext.editToolsExtra = ext.editToolsExtra || [];
+    ext.editToolsExtra.push({key: 'boards', icon: '🧩', label: 'Tableaux', what: 'tableau',
+        load: async () => ((await api('boards', {owner_type: 'all'})).boards || []).map(r => ({id: r.id, name: r.title, date: r.updated_at, row: r,
+            thumb: r.thumb ? `<img src="${r.thumb}" alt="">` : `<span class="h-et-ico">${esc(r.icon || '🧩')}</span>`,
+            info: [`${OWNER_ICONS[r.owner_type] || '🧩'} ${r.owner_type ? (r.owner_label || OWNERS[r.owner_type]) : 'Libre'}`, r.part, r.status && r.status !== 'open' ? STATES[r.status] : '', `${fmt(r.item_count)} élément${r.item_count > 1 ? 's' : ''}`].filter(Boolean).join(' · ')})),
+        open: id => go(id),
+        create: () => newBoard(),
+        rename: async (id, name) => { const r = ((await api('boards', {owner_type: 'all'})).boards || []).find(x => Number(x.id) === Number(id)); if (!r) throw new Error('Tableau introuvable.');
+            await api('save_board', {}, {method: 'POST', body: {id, title: name, icon: r.icon, color: r.color, owner_type: r.owner_type || '', owner_id: r.owner_id || 0, part: r.part || '', status: r.status}}); },
+        remove: id => api('delete_board', {}, {method: 'POST', body: {id}}), createLabel: '＋ Nouveau tableau'});
     const STATES = {open: 'En cours', paused: 'En pause', closed: 'Terminé'};
     const cardHtml = r => `<div class="h-bd-cardwrap"><button type="button" class="h-bd-del" data-bd-del="${r.id}" data-title="${esc(r.title)}" title="Supprimer ce tableau">🗑</button><button type="button" class="h-bd-card ${r.status && r.status !== 'open' ? 'is-' + r.status : ''}" data-bd-go="${r.id}"><span class="h-bd-thumb">${r.thumb ? `<img src="${r.thumb}" alt="">` : `<span>${esc(r.icon || '🧩')}</span>`}</span>
         <span class="h-bd-cardinfo"><strong>${esc(r.title)}</strong><small>${OWNER_ICONS[r.owner_type] || '🧩'} ${esc(r.owner_type ? (r.owner_label || OWNERS[r.owner_type]) : 'Libre')}${r.part ? ` · ${esc(r.part)}` : ''}</small><small class="muted">${r.status && r.status !== 'open' ? `<span class="h-bd-state is-${r.status}">${STATES[r.status]}</span> · ` : ''}${fmt(r.item_count)} élément${r.item_count > 1 ? 's' : ''}${Number(r.sub_count) ? ` · ${fmt(r.sub_count)} dossier${r.sub_count > 1 ? 's' : ''}` : ''}</small></span></button></div>`;

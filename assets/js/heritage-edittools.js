@@ -78,6 +78,8 @@
                 try { localStorage.setItem(ORDER_KEY, JSON.stringify({order: li.map(x => x.dataset.k), hidden})); } catch (_) {} onDone?.(); }});
     }
     ext.arrangeEditTools = arrangeTools;
+    /** ouvrir Listes → 🛠️ Outils de modification sur un outil (les raccourcis de la barre du haut) */
+    ext.openEditToolTab = key => { try { localStorage.setItem(TAB_KEY, key); } catch (_) {} const S = A().state; S.listType = 'edit_tools'; A().setModule('listes'); };
     // les cartes des projets (C6) : grande vignette, nom, détails, date, boutons
     const ensureCss = () => { if (document.getElementById('h-et-css')) return; const st = document.createElement('style'); st.id = 'h-et-css'; st.textContent = `
 .h-et-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
