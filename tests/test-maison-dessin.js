@@ -3,7 +3,8 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
 /**
  * 🏠 Plan de maison, « Affichage » de l'étage, comme sur un plan d'architecte :
  *   node tests/test-maison-dessin.js
- *  cotes d'ensemble, tableau des pièces (surfaces et total) et cartouche posés sur le plan ; affichage sombre (dessin technique), écran seulement.
+ *  cotes d'ensemble, tableau des pièces (surfaces et total) et cartouche posés sur le plan ; affichage sombre (dessin technique), écran seulement ;
+ *  📐 export DXF puis import (calques, unité, pièces nommées) ; 🔁 répéter un objet (en cercle autour d'une table, en ligne) et une fenêtre le long du mur.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -72,6 +73,41 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(await p.evaluate(() => window.__ed.house.cad), true);
             await tick('[data-hs-cad]'); await p.waitForTimeout(300);
             assert.equal(await p.evaluate(() => document.querySelector('.h-hs-dlg [data-hs-stage]').classList.contains('is-cad')), false);
+        });
+        await t('📐 DXF : l’étage exporté en calques, puis réimporté dans un nouvel étage (murs, pièces nommées)', async () => {
+            await p.waitForTimeout(700); // le dernier réglage coché s'enregistre une demi-seconde après (un seul pas d'annulation)
+            const dxf = await p.evaluate(() => window.LCNDA_EXT.houseDxf.toDxf(window.__ed.house.floors[0], {name: 'Maison'}));
+            assert.match(dxf, /AC1009/); for (const l of ['MURS', 'MURS_AXES', 'PIECES']) assert.ok(dxf.includes(`\r\n${l}\r\n`), l);
+            const file = path.join(dir, 'plan.dxf'); fs.writeFileSync(file, dxf);
+            const fc = p.waitForEvent('filechooser'); await p.evaluate(() => { window.__ed.cmd('importdxf'); }); await (await fc).setFiles(file); await p.waitForSelector('dialog[open] [name="lay"]');
+            const lay = await p.$$eval('dialog[open] [name="lay"]', l => l.map(x => x.value + ':' + x.checked)); assert.ok(lay.includes('MURS_AXES:true') && lay.includes('MURS:false'), lay.join());
+            await p.click('dialog[open] button[type="submit"], dialog[open] .modal-actions .button:not(.secondary)'); await p.waitForTimeout(600);
+            const H2 = await p.evaluate(() => window.__ed.house); const nf = H2.floors[H2.floors.length - 1];
+            assert.equal(H2.floors.length, 2, 'un nouvel étage'); assert.equal(nf.walls.length, 5); assert.deepEqual(nf.rooms.map(r => r.name).sort(), ['Grande cuisine', 'Salle commune']);
+            await p.evaluate(() => { window.__ed.cmd('undo'); }); await p.waitForTimeout(300); assert.equal(await p.evaluate(() => window.__ed.house.floors.length), 1, '↶ annule l’import');
+        });
+        await t('🔁 répéter : 6 chaises autour de la table (tournées vers elle), puis 3 en ligne', async () => {
+            await p.evaluate(() => { const ed = window.__ed, f = ed.house.floors[0]; f.items = [{id: 'tb', kind: 'table', name: 'Table', x: 300, y: 400, w: 120, d: 120, rot: 0}, {id: 'ch', kind: 'chair', name: 'Chaise', x: 300, y: 300, w: 45, d: 45, rot: 0}]; ed.commit('t'); ed.select('item', 'ch'); });
+            await p.waitForTimeout(300); await p.evaluate(() => { window.__ed.cmd('repeat'); }); await p.waitForSelector('dialog[open] [name="mode"]');
+            assert.equal(await p.$eval('dialog[open] [name="mode"]', e => e.value), 'circle', 'en cercle, proposé près d’une table');
+            await p.click('dialog[open] button[type="submit"], dialog[open] .modal-actions .button:not(.secondary)'); await p.waitForTimeout(400);
+            let its = await p.evaluate(() => window.__ed.house.floors[0].items.filter(q => q.name === 'Chaise'));
+            assert.equal(its.length, 6); its.forEach(c => assert.ok(Math.abs(Math.hypot(c.x - 300, c.y - 400) - 100) < 1, 'à 1 m du centre de la table'));
+            assert.deepEqual(its.map(c => c.rot).sort((a, b) => a - b), [0, 60, 120, 180, 240, 300]);
+            await p.evaluate(() => window.__ed.cmd('undo')); await p.waitForTimeout(200);
+            await p.evaluate(() => { window.__ed.select('item', 'ch'); window.__ed.cmd('repeat'); }); await p.waitForSelector('dialog[open] [name="mode"]');
+            await p.selectOption('dialog[open] [name="mode"]', 'line'); await p.fill('dialog[open] [name="n"]', '3'); await p.fill('dialog[open] [name="gap"]', '15');
+            await p.click('dialog[open] button[type="submit"], dialog[open] .modal-actions .button:not(.secondary)'); await p.waitForTimeout(400);
+            its = await p.evaluate(() => window.__ed.house.floors[0].items.filter(q => q.name === 'Chaise').map(c => c.x));
+            assert.deepEqual(its, [300, 360, 420]);
+        });
+        await t('🔁 répéter une fenêtre : une rangée le long du mur', async () => {
+            await p.evaluate(() => { const ed = window.__ed, f = ed.house.floors[0]; f.openings = [{id: 'o1', wall: 'w0', type: 'window', pos: .2, w: 100, h: 120, sill: 90}]; ed.commit('t'); ed.select('opening', 'o1'); });
+            await p.waitForTimeout(300); await p.evaluate(() => { window.__ed.cmd('repeat'); }); await p.waitForSelector('dialog[open] [name="gap"]');
+            await p.fill('dialog[open] [name="n"]', '4'); await p.fill('dialog[open] [name="gap"]', '140');
+            await p.click('dialog[open] button[type="submit"], dialog[open] .modal-actions .button:not(.secondary)'); await p.waitForTimeout(400);
+            const pos = await p.evaluate(() => window.__ed.house.floors[0].openings.map(o => Math.round(o.pos * 1200)));
+            assert.deepEqual(pos, [240, 480, 720, 960]);
         });
         await t('aucune erreur JavaScript', () => assert.deepEqual(errs, []));
     } finally { await browser.close(); proc.kill(); fs.rmSync(dir, {recursive: true, force: true}); }
