@@ -22,6 +22,12 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         const W = 80, H = 60, fr = []; for (let i = 0; i < 10; i++) { const d = new Float32Array(W * H).fill(30), cx = 20 + i * 4, cy = 20 + i * 2; for (let y = -3; y <= 3; y++) for (let x = -3; x <= 3; x++) d[(cy + y) * W + cx + x] = 220 + x * 3; fr.push({ d, W, H }); }
         assert.deepEqual(MP.trackPoints(fr, 20, 20).at(-1), [56, 38]); assert.deepEqual(MP.trackAt([{ t: 0, x: 10, y: 10 }, { t: 2, x: 30, y: 50 }], 1), { t: 1, x: 20, y: 30 });
     });
+    await t('caméras (Node) : le décalage retrouvé par le son ; à tour de rôle, sur le temps commun', () => {
+        const sr = 8000, N = sr * 10, a = new Float32Array(N); let seed = 1; const rnd = () => ((seed = seed * 16807 % 2147483647) / 2147483647 - 0.5);
+        for (let i = 0; i < N; i++) a[i] = rnd() * (Math.sin(i / sr * 3) > 0.3 ? 1 : 0.05);
+        const ea = MP.envelope(a, sr), eb = MP.envelope(a.slice(1.5 * sr), sr); assert.equal(MP.bestLag(ea, eb, 200).lag * 0.02, 1.5);
+        assert.deepEqual(MP.plan([{ off: 0, dur: 10, env: ea }, { off: 1.5, dur: 8.5, env: eb }], { mode: 'turn', every: 3 }).map(x => [x.cam, x.a, x.b]), [[0, 1.5, 4.5], [1, 4.5, 7.5], [0, 7.5, 10]]);
+    });
     await t('fond vert (Node) : le vert pur part, la peau et le gris restent', () => {
         const d = new Uint8ClampedArray([0, 255, 0, 255, 20, 200, 30, 255, 200, 150, 120, 255, 128, 128, 128, 255]); MP.keyPixels(d, {});
         assert.equal(d[3], 0); assert.equal(d[7], 0); assert.deepEqual([...d.slice(8, 16)], [200, 150, 120, 255, 128, 128, 128, 255]);
@@ -46,7 +52,11 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         ff(['-f', 'lavfi', '-i', 'color=c=gray:s=320x180:r=25:d=3', '-f', 'lavfi', '-i', 'sine=frequency=1000:sample_rate=48000:d=3', '-af', 'volume=0.2', '-c:v', 'libvpx', '-b:v', '400k', '-c:a', 'libopus', '-b:a', '128k', '-shortest', path.join(mediaDir, 'gris.webm')]);
         ff(['-f', 'lavfi', '-i', 'color=c=0x00ff00:s=320x180:r=25:d=3', '-vf', 'drawbox=x=130:y=60:w=60:h=60:color=red:t=fill', '-c:v', 'libvpx', '-b:v', '800k', '-an', path.join(mediaDir, 'vert.webm')]);
         ff(['-f', 'lavfi', '-i', 'color=c=gray:s=320x180:r=25:d=3', '-f', 'lavfi', '-i', 'color=c=red:s=24x24:r=25:d=3', '-filter_complex', "[0][1]overlay=x='20+t*60':y=70", '-c:v', 'libvpx', '-b:v', '800k', '-an', path.join(mediaDir, 'mobile.webm')]);
-        const project = { sources: [{ src: 'media/gris.webm', title: 'Gris', kind: 'video', dur: 3, w: 320, h: 180 }, { src: 'media/vert.webm', title: 'Fond vert', kind: 'video', dur: 3, w: 320, h: 180 }, { src: 'media/mobile.webm', title: 'Mobile', kind: 'video', dur: 3, w: 320, h: 180 }],
+        // deux « caméras » de la même scène : le même son (des salves irrégulières), la 2e a commencé 1,5 s plus tard
+        ff(['-f', 'lavfi', '-i', "aevalsrc='(0.6*random(0)-0.3)*gt(sin(3*t)+sin(7.3*t),0.4)':s=44100:d=9", path.join(tmp, 'scene.wav')]);
+        ff(['-f', 'lavfi', '-i', 'color=c=red:s=160x90:r=25:d=9', '-i', path.join(tmp, 'scene.wav'), '-c:v', 'libvpx', '-b:v', '200k', '-c:a', 'libopus', '-shortest', path.join(mediaDir, 'camA.webm')]);
+        ff(['-f', 'lavfi', '-i', 'color=c=blue:s=160x90:r=25:d=7.5', '-ss', '1.5', '-i', path.join(tmp, 'scene.wav'), '-c:v', 'libvpx', '-b:v', '200k', '-c:a', 'libopus', '-shortest', path.join(mediaDir, 'camB.webm')]);
+        const project = { sources: [{ src: 'media/gris.webm', title: 'Gris', kind: 'video', dur: 3, w: 320, h: 180 }, { src: 'media/vert.webm', title: 'Fond vert', kind: 'video', dur: 3, w: 320, h: 180 }, { src: 'media/mobile.webm', title: 'Mobile', kind: 'video', dur: 3, w: 320, h: 180 }, { src: 'media/camA.webm', title: 'Caméra A', kind: 'video', dur: 9, w: 160, h: 90 }, { src: 'media/camB.webm', title: 'Caméra B', kind: 'video', dur: 7.5, w: 160, h: 90 }],
             v1: [{ id: 'va', s: 0, from: 0, to: 3, tr: { type: 'none', d: 1 }, look: {}, vol: 1 }], v2: [], texts: [], audio: [],
             tracks: [{ id: 'V1', kind: 'main', name: 'Vidéo 1' }, { id: 'T1', kind: 't', name: 'Textes 1' }, { id: 'A1', kind: 'a', name: 'Son 1' }] };
         const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', `require "lib/paths.php"; (new PDO("sqlite:".DATA_DIR."/genealogy.sqlite"))->exec(file_get_contents(APP_ROOT."/data/schema.sql")); require "lib/bootstrap.php"; $p = db(); $p->exec("INSERT INTO persons(first_name,last_name,gender) VALUES('Jean','Martin','male')"); $p->prepare("INSERT INTO montage_projects(name, data_json) VALUES(?, ?)")->execute(["Essai", $argv[1]]); echo $p->lastInsertId();`, JSON.stringify(project)], { cwd: appRoot, encoding: 'utf8', env });
@@ -108,6 +118,18 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
             assert.ok(Math.abs(a.x - 44 / 320 * 100) < 4, `départ ${a.x}`); assert.ok(z.x - a.x > 40, `il avance : ${a.x} → ${z.x}`); assert.ok(Math.abs(z.y - a.y) < 4, 'à la même hauteur');
             const want = 20 + 2.9 * 60 + 12; assert.ok(Math.abs(z.x - want / 320 * 100) < 6, `arrivée ${z.x} (≈ ${(want / 320 * 100).toFixed(1)})`);
             await p.evaluate(m => { const M = eval(m); M.P.texts = M.P.texts.filter(x => x.id !== 'tx'); M.P.v1[0].s = 0; }, M);
+        });
+        await t('🎥 plusieurs caméras : calées par le son (1,5 s), montées à tour de rôle, le son d’une seule caméra', async () => {
+            const n0 = await p.evaluate(m => eval(m).P.v1.length, M);
+            await p.evaluate(() => document.querySelector('dialog[open] [data-mt-cmd="multicam"]').click()); await p.waitForSelector('dialog[open] [name="cam"]');
+            await p.$$eval('dialog[open] [name="cam"]', l => l.forEach(i => { i.checked = ['3', '4'].includes(i.value); }));
+            await p.selectOption('dialog[open] [name="mode"]', 'turn'); await p.fill('dialog[open] [name="every"]', '2');
+            await p.click('dialog[open] button[type="submit"]'); await p.waitForFunction(([m, n0]) => eval(m).P.v1.length > n0, [M, n0], { timeout: 60000 });
+            const r = await p.evaluate(([m, n0]) => { const P = eval(m).P; return { v: P.v1.slice(n0).map(c => [c.s, c.from, c.to, c.mute]), a: P.audio.at(-1) }; }, [M, n0]);
+            assert.deepEqual(r.v.map(x => x[0]).slice(0, 3), [3, 4, 3], 'à tour de rôle'); assert.ok(r.v.every(x => x[3]), 'les images sans leur son');
+            const b = r.v[1]; assert.ok(Math.abs(b[1] - (r.v[0][2] - 1.5)) < 0.08, `caméra B calée : ${b[1]} (A finit à ${r.v[0][2]})`);
+            assert.equal(r.a.s, 3); assert.ok(Math.abs(r.a.from - 1.5) < 0.08, `son de A à partir de 1,5 s : ${r.a.from}`);
+            await p.evaluate(([m, n0]) => { const P = eval(m).P; P.v1.splice(n0); P.audio.pop(); }, [M, n0]);
         });
         await t('🎯 vectorscope : Affichage → le panneau s’ouvre et dessine ; une 2e fois le ferme', async () => {
             await p.evaluate(() => document.querySelector('dialog[open] [data-mt-cmd="scope"]').click());

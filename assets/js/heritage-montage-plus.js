@@ -6,6 +6,7 @@
  *    R, Mg, B, Cy, V, J et la ligne des tons chair ; la lumière de sombre à clair ; suit la lecture ;
  *  - 🟩 Fond vert : la couleur du fond (vert, bleu, au choix) devient transparente, avec bord adouci et reflet retiré ;
  *  - 🎯 Suivre ce qui bouge : un titre ou une incrustation suit un point de la vidéo (suivi par corrélation, image par image) ;
+ *  - 🎥 Plusieurs caméras : calées entre elles par le son, montées en passant de l'une à l'autre (qui parle, ou à tour de rôle) ;
  *  - 📢 Volume standard à l'export (LUFS, norme UIT-R BS.1770) : le montage est d'abord mélangé hors ligne et mesuré, puis
  *    enregistré au bon niveau (−14 internet, −16 balado, −23 télévision), sans dépasser −1 dB de crête.
  * Sans écran (Node, essais) : ext.montageLoud = {lufs, kWeights, gainFor} et ext.montageWheels = {parse, color, scopeXY}.
@@ -233,7 +234,74 @@
         <div class="h-mt-quick"><button type="button" data-mt-trk="pick">🎯 Choisir le point à suivre</button>${c.track?.length ? '<button type="button" data-mt-trk="off">✕ Ne plus suivre</button>' : ''}</div>${c.track?.length ? `<p class="muted">Suivi sur ${c.track.length} positions.</p>` : ''}</details>`;
     ext.montageTrack = {trackAt, trackPoints, trackVideo, html: trackHtml};
 
-    if (typeof module === 'object' && module.exports) module.exports = {lufs, kWeights, parse, color, scopeXY, keyPixels, trackAt, trackPoints};
+    /* ═════════ 🎥 Plusieurs caméras : synchronisées par le son, puis montées en passant de l'une à l'autre ═════════ */
+    const HOP = 0.02; // une valeur d'enveloppe toutes les 20 ms
+    /** l'enveloppe du son (moyenne des carrés par tranche de 20 ms), sans la moyenne : ce qui se corrèle d'une caméra à l'autre */
+    function envelope(x, sr) {
+        const h = Math.max(1, Math.round(sr * HOP)), n = Math.floor(x.length / h), e = new Float32Array(n);
+        for (let i = 0; i < n; i++) { let s = 0; for (let k = i * h; k < (i + 1) * h; k++) s += x[k] * x[k]; e[i] = Math.sqrt(s / h); }
+        return e;
+    }
+    /** le décalage (en tranches) tel que b[t] ressemble à a[t + lag] ; corrélation normalisée, de −maxLag à +maxLag */
+    function bestLag(a, b, maxLag) {
+        const ma = a.reduce((s, v) => s + v, 0) / (a.length || 1), mb = b.reduce((s, v) => s + v, 0) / (b.length || 1);
+        let best = -Infinity, lag = 0;
+        for (let L = -maxLag; L <= maxLag; L++) {
+            let s = 0, sa = 0, sb = 0, n = 0;
+            for (let t = Math.max(0, -L); t < b.length && t + L < a.length; t++) { const x = a[t + L] - ma, y = b[t] - mb; s += x * y; sa += x * x; sb += y * y; n++; }
+            if (n < 50) continue; const r = s / Math.sqrt((sa || 1) * (sb || 1)); if (r > best) { best = r; lag = L; }
+        }
+        return {lag, score: best};
+    }
+    /** le plan de montage : cams [{off (s : temps de la 1re = temps de celle-ci + off), dur, env}] ; mode 'loud' (la caméra où le son
+     *  est le plus fort, à niveau égalisé) ou 'turn' (à tour de rôle, toutes les « every » secondes) → [{cam, a, b}] en temps de la 1re */
+    function plan(cams, {mode = 'loud', every = 5, minShot = 2} = {}) {
+        const start = Math.max(...cams.map(c => c.off)), end = Math.min(...cams.map(c => c.off + c.dur)); if (!(end - start > 0.5)) return [];
+        if (mode === 'turn') { const out = []; for (let t = start, i = 0; t < end - 0.05; t += every, i++) out.push({cam: i % cams.length, a: t, b: Math.min(end, t + every)}); return out; }
+        const med = cams.map(c => { const v = Array.from(c.env).filter(x => x > 0).sort((x, y) => x - y); return v[Math.floor(v.length / 2)] || 1e-6; });
+        const W = 0.5, picks = [];
+        for (let t = start; t < end - 1e-6; t += W) picks.push(cams.map((c, i) => { const k0 = Math.floor((t - c.off) / HOP), k1 = Math.floor((Math.min(end, t + W) - c.off) / HOP); let s = 0, n = 0; for (let k = Math.max(0, k0); k < Math.min(c.env.length, k1); k++) { s += c.env[k]; n++; } return n ? s / n / med[i] : 0; }).reduce((bi, v, i, arr) => (v > arr[bi] * 1.15 ? i : bi), 0));
+        const out = [];
+        picks.forEach((cam, i) => { const a = start + i * W, b = Math.min(end, a + W), last = out.at(-1); if (last && (last.cam === cam || b - last.a <= minShot && last.b - last.a < minShot)) last.b = b; else out.push({cam, a, b}); });
+        for (let i = out.length - 1; i > 0; i--) if (out[i].b - out[i].a < minShot) { out[i - 1].b = out[i].b; out.splice(i, 1); } // pas de plan trop court
+        return out.reduce((acc, x) => { const l = acc.at(-1); if (l && l.cam === x.cam) l.b = x.b; else acc.push({...x}); return acc; }, []);
+    }
+    async function decodeMono(src, sr = 8000) {
+        const OAC = root.OfflineAudioContext || root.webkitOfflineAudioContext, ab = await (await fetch(src)).arrayBuffer(), b = await new OAC(1, 1, sr).decodeAudioData(ab);
+        const x = new Float32Array(b.length); for (let c = 0; c < b.numberOfChannels; c++) { const d = b.getChannelData(c); for (let i = 0; i < x.length; i++) x[i] += d[i] / b.numberOfChannels; } return {x, sr: b.sampleRate};
+    }
+    /** la fenêtre : choisir 2 à 4 vidéos des rushes, synchroniser, monter (ajouté à la fin de la piste 1, le son d'une caméra à part) */
+    function multiDialog({P, nid, done}) {
+        const vids = P.sources.map((so, i) => ({so, i})).filter(x => x.so.kind === 'video');
+        if (vids.length < 2) return root.LCNDA_APP.toast('Importe d’abord au moins deux vidéos de la même scène (onglet 🎞️ Rushes).', 'error');
+        const e2 = v => String(v ?? '').replace(/[&<>"']/g, ch => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]));
+        ext.openDialog({eyebrow: 'MONTAGE', title: '🎥 Plusieurs caméras', submitLabel: 'Synchroniser et monter', wide: true,
+            body: `<p class="muted">Deux téléphones (ou plus) ont filmé la même scène — un entretien, un repas de famille. L’app les cale entre elles grâce au son, puis monte en passant de l’une à l’autre. Le résultat va à la fin de la piste 1 ; le son vient d’une seule caméra (sur une piste son).</p>
+                <fieldset><legend>Les caméras (2 à 4)</legend>${vids.map((v, k) => `<label class="checkbox-line"><input type="checkbox" name="cam" value="${v.i}" ${k < 2 ? 'checked' : ''}> ${e2(v.so.title || 'Vidéo')} <small class="muted">${Math.round(v.so.dur || 0)} s</small></label>`).join('')}</fieldset>
+                <div class="form-grid"><label>Passer d’une caméra à l’autre<select name="mode"><option value="loud">quand quelqu’un parle plus près d’une autre caméra</option><option value="turn">à tour de rôle</option></select></label>
+                <label>Toutes les (à tour de rôle)<input name="every" type="number" min="1" max="120" value="5"> s</label><label>Plan le plus court<input name="min" type="number" min="0.5" max="30" step="0.5" value="2"> s</label></div>
+                <p class="muted" data-mc-msg></p>`,
+            onSubmit: async f => {
+                const ids = [...f.querySelectorAll('[name=cam]:checked')].map(i => Number(i.value)); const msg = f.querySelector('[data-mc-msg]');
+                if (ids.length < 2 || ids.length > 4) { root.LCNDA_APP.toast('Coche 2 à 4 caméras.', 'error'); return false; }
+                try {
+                    msg.textContent = 'Lecture des sons…'; const snd = []; for (const i of ids) snd.push(await decodeMono(P.sources[i].src));
+                    const envs = snd.map(s => envelope(s.x, s.sr)), cams = [{i: ids[0], off: 0, dur: snd[0].x.length / snd[0].sr, env: envs[0]}];
+                    for (let k = 1; k < ids.length; k++) { msg.textContent = `Synchronisation ${k}/${ids.length - 1}…`; await new Promise(r => setTimeout(r, 0)); const {lag, score} = bestLag(envs[0], envs[k], Math.round(Math.min(120, Math.max(cams[0].dur, snd[k].x.length / snd[k].sr)) / HOP));
+                        if (score < 0.3) { root.LCNDA_APP.toast(`« ${P.sources[ids[k]].title} » ne se cale pas sur le son de la 1re : ce n’est peut-être pas la même scène.`, 'error'); return false; }
+                        cams.push({i: ids[k], off: lag * HOP, dur: snd[k].x.length / snd[k].sr, env: envs[k]}); }
+                    const pl = plan(cams, {mode: f.elements.mode.value, every: Number(f.elements.every.value) || 5, minShot: Number(f.elements.min.value) || 2});
+                    if (!pl.length) { root.LCNDA_APP.toast('Les vidéos ne se recouvrent pas dans le temps.', 'error'); return false; }
+                    const at0 = (P.v1 || []).reduce((s, c) => s + (c.to - c.from) / Math.max(0.1, Math.min(10, Number(c.speed) || 1)), 0);
+                    pl.forEach(x => { const c = cams[x.cam]; P.v1.push({id: nid('v'), s: c.i, from: Math.round((x.a - c.off) * 1000) / 1000, to: Math.round((x.b - c.off) * 1000) / 1000, tr: {type: 'none', d: 1}, look: {}, vol: 1, mute: true, multicam: true}); });
+                    const a = pl[0].a, b = pl.at(-1).b; P.audio.push({id: nid('a'), s: cams[0].i, from: Math.round(a * 1000) / 1000, to: Math.round(b * 1000) / 1000, at: Math.round(at0 * 1000) / 1000, vol: 1, voice: true, track: (P.tracks.find(t => t.kind === 'a') || {}).id});
+                    done?.(pl.length, cams.map(c => c.off));
+                } catch (err) { root.LCNDA_APP.toast(`Impossible : ${err.message}`, 'error'); return false; }
+            }});
+    }
+    ext.montageMulti = {envelope, bestLag, plan, dialog: multiDialog, HOP};
+
+    if (typeof module === 'object' && module.exports) module.exports = {lufs, kWeights, parse, color, scopeXY, keyPixels, trackAt, trackPoints, envelope, bestLag, plan};
     if (typeof document === 'undefined' || document.getElementById('h-mt-plus-css')) return;
     const st = document.createElement('style'); st.id = 'h-mt-plus-css'; st.textContent = `
 .h-mt-wheels{margin:10px 0 4px}.h-mt-wheelrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}

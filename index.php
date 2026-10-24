@@ -1197,8 +1197,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-decennales.js?v=3" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=12" defer></script>
 <script src="assets/js/heritage-audio-engine.js?v=2" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=70" defer></script>
-<script src="assets/js/heritage-montage-plus.js?v=3" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=71" defer></script>
+<script src="assets/js/heritage-montage-plus.js?v=4" defer></script>
 <script src="assets/js/heritage-audio-quick.js?v=3" defer></script>
 <script src="assets/js/heritage-audio-studio.js?v=3" defer></script>
 <script src="assets/js/heritage-audio-multi.js?v=2" defer></script>
