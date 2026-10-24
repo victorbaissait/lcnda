@@ -148,7 +148,7 @@ function kn_plain(mixed $v, int $depth = 0): mixed
     }
     return $out;
 }
-const KN_OBJ_TYPES = ['text', 'image', 'shape', 'table', 'chart', 'person', 'video', 'audio'];
+const KN_OBJ_TYPES = ['text', 'image', 'shape', 'table', 'chart', 'person', 'video', 'audio', 'link'];
 function keynote_clean_obj(array $o): ?array
 {
     $t = $o['t'] ?? ''; if (!in_array($t, KN_OBJ_TYPES, true)) { return null; }
@@ -157,6 +157,12 @@ function keynote_clean_obj(array $o): ?array
         'rot' => kn_num($o['rot'] ?? 0, -360, 360, 0), 'op' => kn_num($o['op'] ?? 1, 0, 1, 1)];
     foreach (['lock', 'hide', 'shadow', 'flipH', 'flipV', 'autoplay', 'loop', 'muted', 'controls', 'head', 'italic', 'acc', 'nofill'] as $k) { if (!empty($o[$k])) { $r[$k] = true; } }
     if ($g = kn_id($o['g'] ?? null)) { $r['g'] = $g; }
+    if ($t === 'link') { $a = kn_id($o['from'] ?? null); $b = kn_id($o['to'] ?? null); if (!$a || !$b) { return null; } $r['from'] = $a; $r['to'] = $b; } // ↔ un trait accroché à deux objets
+    if ($t === 'shape' && ($o['kind'] ?? '') === 'combo' && is_array($o['parts'] ?? null)) { // ⊕ deux formes fusionnées
+        $r['mop'] = in_array($o['mop'] ?? '', ['union', 'subtract', 'intersect'], true) ? $o['mop'] : 'union'; $r['parts'] = [];
+        foreach (array_slice(array_values($o['parts']), 0, 2) as $q) { if (!is_array($q)) { continue; } $p = ['kind' => preg_match('/^[a-z]{1,20}$/', (string) ($q['kind'] ?? '')) ? (string) $q['kind'] : 'rect'];
+            foreach (['x' => [-20000, 20000], 'y' => [-20000, 20000], 'w' => [1, 20000], 'h' => [1, 20000], 'points' => [3, 40], 'inner' => [5, 95], 'radius' => [0, 2000]] as $k => [$lo, $hi]) { if (isset($q[$k]) && is_numeric($q[$k])) { $p[$k] = kn_num($q[$k], $lo, $hi, $lo); } }
+            $r['parts'][] = $p; } }
     foreach (['name' => 80, 'role' => 20, 'caption' => 300, 'text' => 4000, 'kind' => 20, 'fit' => 12, 'mask' => 12, 'align' => 10, 'valign' => 10, 'dash' => 10, 'view' => 12, 'arrow' => 10] as $k => $max) { if (isset($o[$k]) && is_scalar($o[$k]) && $o[$k] !== '') { $r[$k] = kn_text($o[$k], $max); } }
     foreach (['fill', 'stroke', 'color', 'headFill', 'headColor', 'border', 'shColor'] as $k) { if (($c = kn_color($o[$k] ?? null)) !== null) { $r[$k] = $c; } }
     foreach (['font'] as $k) { if (isset($o[$k]) && ($f = kn_font($o[$k])) !== '') { $r[$k] = $f; } }
@@ -180,12 +186,12 @@ function keynote_clean_obj(array $o): ?array
     return $r;
 }
 const KN_TRANS = ['none', 'fade', 'dissolve', 'push', 'movein', 'reveal', 'wipe', 'zoom', 'flip', 'cube', 'swap', 'magic', 'blinds', 'black'];
-const KN_FX = ['appear', 'fade', 'fly', 'scale', 'type', 'blur', 'spin', 'drop', 'wipe', 'pop'];
+const KN_FX = ['appear', 'fade', 'fly', 'scale', 'type', 'blur', 'spin', 'drop', 'wipe', 'pop', 'path'];
 function keynote_clean_slide(array $s): ?array
 {
     $id = kn_id($s['id'] ?? null); if (!$id) { return null; }
     $r = ['id' => $id, 'type' => 'kn', 'layout' => preg_match('/^[a-z0-9_-]{1,20}$/', (string) ($s['layout'] ?? '')) ? (string) $s['layout'] : 'blank', 'dur' => kn_num($s['dur'] ?? 5, 1, 600, 5)];
-    foreach (['skip', 'auto', 'collapsed'] as $k) { if (!empty($s[$k])) { $r[$k] = true; } }
+    foreach (['skip', 'auto', 'collapsed', 'noMaster'] as $k) { if (!empty($s[$k])) { $r[$k] = true; } }
     $r['section'] = kn_text($s['section'] ?? '', 80); $r['notes'] = kn_text($s['notes'] ?? '', 20000);
     $bg = is_array($s['bg'] ?? null) ? $s['bg'] : [];
     $b = ['type' => in_array($bg['type'] ?? '', ['theme', 'color', 'gradient', 'radial', 'image'], true) ? $bg['type'] : 'theme', 'angle' => kn_num($bg['angle'] ?? 135, 0, 360, 135), 'fit' => in_array($bg['fit'] ?? '', ['cover', 'contain'], true) ? $bg['fit'] : 'cover', 'dim' => kn_num($bg['dim'] ?? 0, 0, 90, 0)];
@@ -202,7 +208,8 @@ function keynote_clean_slide(array $s): ?array
     foreach (array_slice(is_array($s['builds'] ?? null) ? $s['builds'] : [], 0, 300) as $bd) {
         if (!is_array($bd) || !($oid = kn_id($bd['obj'] ?? null)) || !isset($ids[$oid])) { continue; }
         $builds[] = ['id' => kn_id($bd['id'] ?? null) ?? ('b' . count($builds)), 'obj' => $oid, 'kind' => ($bd['kind'] ?? '') === 'out' ? 'out' : 'in', 'fx' => in_array($bd['fx'] ?? '', KN_FX, true) ? $bd['fx'] : 'fade',
-            'dir' => in_array($bd['dir'] ?? '', ['l', 'r', 't', 'b'], true) ? $bd['dir'] : 'l', 'dur' => kn_num($bd['dur'] ?? .6, 0.05, 20, .6), 'delay' => kn_num($bd['delay'] ?? 0, 0, 60, 0), 'start' => in_array($bd['start'] ?? '', ['click', 'with', 'after'], true) ? $bd['start'] : 'click'];
+            'dir' => in_array($bd['dir'] ?? '', ['l', 'r', 't', 'b'], true) ? $bd['dir'] : 'l', 'dur' => kn_num($bd['dur'] ?? .6, 0.05, 20, .6), 'delay' => kn_num($bd['delay'] ?? 0, 0, 60, 0), 'start' => in_array($bd['start'] ?? '', ['click', 'with', 'after'], true) ? $bd['start'] : 'click']
+            + (($bd['fx'] ?? '') === 'path' ? ['pk' => in_array($bd['pk'] ?? '', ['line', 'arc', 'wave', 'zigzag', 'loop'], true) ? $bd['pk'] : 'line', 'dx' => kn_num($bd['dx'] ?? 400, -4000, 4000, 400), 'dy' => kn_num($bd['dy'] ?? 0, -4000, 4000, 0)] : []);
     }
     $r['builds'] = $builds;
     return $r;
@@ -219,5 +226,8 @@ function keynote_clean_show(array $show): array
     $slides = []; $ids = [];
     foreach (array_slice(is_array($show['slides'] ?? null) ? $show['slides'] : [], 0, 500) as $s) { if (is_array($s) && ($c = keynote_clean_slide($s)) && !isset($ids[$c['id']])) { $ids[$c['id']] = 1; $slides[] = $c; } }
     $out['slides'] = $slides;
+    $mo = []; $mids = []; // 🗂 le masque : des objets montrés sous toutes les diapositives
+    foreach (array_slice(is_array($show['master']['objs'] ?? null) ? $show['master']['objs'] : [], 0, 60) as $o) { if (is_array($o) && ($o['t'] ?? '') !== 'link' && ($c = keynote_clean_obj($o)) && !isset($mids[$c['id']])) { $mids[$c['id']] = 1; $mo[] = $c; } }
+    if ($mo) { $out['master'] = ['objs' => $mo]; }
     return $out;
 }
