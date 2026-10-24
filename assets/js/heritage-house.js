@@ -68,7 +68,7 @@
     }
     /* les styles des nouveautés (barre du haut, ✦ souvenirs, ☀️ lumière, 🚶 visite, 📐 cadastre), clair et sombre */
     // la barre du haut ne change pas de hauteur quand « • modifié », « Enregistrement… » ou le petit message apparaissent (sinon le plan saute de 40 px sous la souris)
-    const HS_CSS = `@media (min-width:1001px){.h-hs-dlg .h-hs-top{justify-content:flex-end;row-gap:6px}.h-hs-top>.h-hs-msg{flex:1 1 0;min-width:0}.h-hs-top>[data-ui-status]{flex:0 0 88px;width:88px;justify-content:flex-end;overflow:visible}}.h-hs-hist{display:inline-flex;gap:3px}.h-hs-msg{font-size:12px;color:#667;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    const HS_CSS = `.h-hs-stage.is-cad svg[data-hs-svg]{background:#fff;filter:invert(.9) hue-rotate(180deg)}.h-hs-dim.is-total path{stroke-width:1.4}@media (min-width:1001px){.h-hs-dlg .h-hs-top{justify-content:flex-end;row-gap:6px}.h-hs-top>.h-hs-msg{flex:1 1 0;min-width:0}.h-hs-top>[data-ui-status]{flex:0 0 88px;width:88px;justify-content:flex-end;overflow:visible}}.h-hs-hist{display:inline-flex;gap:3px}.h-hs-msg{font-size:12px;color:#667;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .h-hs-memk{cursor:pointer}.h-hs-memk circle{fill:#c9962a;stroke:#fff}.h-hs-memk text{fill:#fff;font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none}.h-hs-memk:hover circle{fill:#a8781a}
 .h-hs-compass{position:absolute;right:12px;bottom:34px;width:46px;height:46px;border-radius:50%;background:#ffffffe0;border:1px solid #d6dbe2;display:grid;place-items:center;cursor:pointer;z-index:2;padding:0}.h-hs-compass svg{width:40px;height:40px}
 .h-hs-stage.is-tracing .h-hs-room path{fill-opacity:.18}.h-hs-stage.is-tracing .h-hs-wall{opacity:.8}
@@ -350,6 +350,26 @@
             else { const sg = o.flip ? -1 : 1, hx = o.swing === 'right' ? half : -half, ex = o.swing === 'right' ? -half : half; s += `<path d="M${hx} ${sg * th / 2}L${hx} ${sg * (th / 2 + o.w)}" stroke="#3a3530" stroke-width="1.6" vector-effect="non-scaling-stroke"/><path d="M${hx} ${sg * (th / 2 + o.w)}A${o.w} ${o.w} 0 0 ${(o.swing === 'right') === (sg > 0) ? 0 : 1} ${ex} ${sg * th / 2}" fill="none" stroke="#3a3530" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>`; }
             return s + `<rect x="${-half}" y="${-th / 2 - 6}" width="${o.w}" height="${th + 12}" fill="transparent"/></g>`;
         }
+        /** 📐 comme sur un plan d'architecte : cotes d'ensemble, tableau des pièces et cartouche (cochés dans « Affichage » de l'étage) */
+        function planExtras(f, dim) {
+            if (!(f.showTotal || f.showTable || f.showTitle) || !f.walls.length) return '';
+            const t = Math.max(...f.walls.map(w => (w.t || f.wallT) / 2)), xs = f.walls.flatMap(w => [w.a[0], w.b[0]]), ys = f.walls.flatMap(w => [w.a[1], w.b[1]]); // jusqu'au nu extérieur des murs
+            const x0 = Math.min(...xs) - t, x1 = Math.max(...xs) + t, y0 = Math.min(...ys) - t, y1 = Math.max(...ys) + t, W = x1 - x0, D = y1 - y0;
+            const fs = clamp(Math.max(W, D) / 45, 14, 40), m2s = cm2 => `${String(r1(cm2 / 10000)).replace('.', ',')} m²`, gap = fs * 3;
+            let o = '';
+            if (f.showTotal) o += dim([x0, y1], [x1, y1], (f.showDims !== false ? 60 : 30) / zoom + t, 'is-total') + dim([x0, y0], [x0, y1], (f.showDims !== false ? 60 : 30) / zoom + t, 'is-total');
+            const box = (x, y, w, rows, title) => { const lh = fs * 1.5; let g = `<rect x="${x}" y="${y}" width="${w}" height="${lh * (rows.length + (title ? 1 : 0)) + fs * .4}" fill="#fff" stroke="#2f2b27" stroke-width="${fs / 10}"/>`;
+                let yy = y; if (title) { g += `<text x="${x + w / 2}" y="${yy + lh * .95}" font-size="${fs * 1.05}" font-weight="700" text-anchor="middle" fill="#2f2b27">${esc(title)}</text>`; yy += lh; g += `<path d="M${x} ${yy + fs * .2}H${x + w}" stroke="#2f2b27" stroke-width="${fs / 14}"/>`; }
+                rows.forEach(([a, b, bold]) => { yy += lh; g += `<text x="${x + fs * .5}" y="${yy}" font-size="${fs}" fill="#2f2b27"${bold ? ' font-weight="700"' : ''}>${esc(a)}</text>`; if (b !== undefined) g += `<text x="${x + w - fs * .5}" y="${yy}" font-size="${fs}" text-anchor="end" fill="#2f2b27"${bold ? ' font-weight="700"' : ''}>${esc(b)}</text>`; });
+                return g; };
+            let ty = y0;
+            if (f.showTable) { const rooms = f.rooms.filter(rm => !rm.void), ar = rm => area(ext.housePlus?.roomOutline?.(f, rm) || rm.pts), tot = rooms.reduce((s, rm) => s + ar(rm), 0);
+                const rows = [...rooms.map(rm => [String(rm.name || 'Pièce').slice(0, 26), m2s(ar(rm))]), ['Total', m2s(tot), true]];
+                o += `<g style="pointer-events:none" class="h-hs-ptable">${box(x1 + gap, ty, fs * 15, rooms.length ? rows : [['Aucune pièce tracée']], 'Pièces et surfaces')}</g>`; ty += fs * 1.5 * (rows.length + 1) + fs * 2; }
+            if (f.showTitle) { const d0 = new Date(), rows = [[name || 'Maison', undefined, true], ...(placeText ? [[String(placeText).slice(0, 40)]] : []), ...(period ? [['Époque', String(period).slice(0, 24)]] : []), ['Étage', String(f.name || '').slice(0, 24)], ['Plan du', d0.toLocaleDateString('fr-FR')]];
+                o += `<g style="pointer-events:none" class="h-hs-cartouche">${box(x1 + gap, Math.max(ty, y1 - fs * 1.5 * rows.length - fs * .4), fs * 17, rows)}</g>`; }
+            return o;
+        }
         function render() {
             sbar?.setWhere(`${F()?.name || 'Étage'} · ${view3d ? 'Vue 3D' : 'Plan 2D'}`); sbar?.sync();
             if (view3d && !exporting) { view3d.update?.(H, fi); paintSide(); paintFloors(); syncSt(); return; }
@@ -451,6 +471,8 @@
             if (draft?.kind === 'room' && draft.b) { const [a, b] = [draft.a, draft.b], x = Math.min(a[0], b[0]), y = Math.min(a[1], b[1]), w = Math.abs(b[0] - a[0]), hh = Math.abs(b[1] - a[1]);
                 h += `<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="#2a7de11a" stroke="#2a7de1" stroke-width="${f.wallT}" stroke-opacity=".5"/>` + dim([x, y], [x + w, y], -f.wallT / 2 - 20 / zoom, 'is-live') + dim([x + w, y], [x + w, y + hh], -f.wallT / 2 - 20 / zoom, 'is-live') + `<text x="${x + w / 2}" y="${y + hh / 2}" font-size="${14 / zoom}" class="h-hs-rarea">${String(r1(w * hh / 10000)).replace('.', ',')} m²</text>`; }
             if (hover && ['wall', 'zone', 'dim', 'room'].includes(tool)) { h += guides.map(q => q.pt && q.close ? `<circle cx="${q.pt[0]}" cy="${q.pt[1]}" r="${11 / zoom}" class="h-hs-snapclose"/>` : q.pt ? `<rect x="${q.pt[0] - 6 / zoom}" y="${q.pt[1] - 6 / zoom}" width="${12 / zoom}" height="${12 / zoom}" class="h-hs-snapmk${q.mid ? ' is-mid' : ''}" transform="${q.mid ? `rotate(45 ${q.pt[0]} ${q.pt[1]})` : ''}"/>` : `<path d="M${q.a[0]} ${q.a[1]}L${q.b[0]} ${q.b[1]}" class="h-hs-guide${q.ang ? ' is-ang' : ''}"/>`).join(''); h += `<circle cx="${hover[0]}" cy="${hover[1]}" r="${4 / zoom}" fill="#2a7de1"/>`; }
+            h += planExtras(f, dim);
+            stage.classList.toggle('is-cad', !!H.cad && !exporting);
             world.innerHTML = h; applyView(); paintSide(); paintFloors(); if (lastXY) readout(...lastXY); syncSt(); paintCompass();
         }
         /* ─── étages ─── */
@@ -486,6 +508,10 @@
                     <label>Pas de la grille<select data-hs-h="grid">${[1, 2, 5, 10, 25, 50, 100].map(v => `<option value="${v}" ${H.grid === v ? 'selected' : ''}>${v} cm</option>`).join('')}</select></label>
                     <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="dupfloor">⧉ Dupliquer cet étage (murs)</button><button type="button" class="button small danger" data-hs-cmd="delfloor">Supprimer l’étage</button></div>`)}
                     ${sec('Affichage', 'fl-view', `<label class="ui-toggle"><input type="checkbox" data-hs-f="showDims" ${f.showDims !== false ? 'checked' : ''}><i></i>Cotes des murs</label>
+                        <label class="ui-toggle"><input type="checkbox" data-hs-f="showTotal" ${f.showTotal ? 'checked' : ''}><i></i><span data-help="La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur).">Cotes d’ensemble</span></label>
+                        <label class="ui-toggle"><input type="checkbox" data-hs-f="showTable" ${f.showTable ? 'checked' : ''}><i></i><span data-help="Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression).">Tableau des pièces sur le plan</span></label>
+                        <label class="ui-toggle"><input type="checkbox" data-hs-f="showTitle" ${f.showTitle ? 'checked' : ''}><i></i><span data-help="Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour.">Cartouche (nom, lieu, époque, étage)</span></label>
+                        <label class="ui-toggle"><input type="checkbox" data-hs-cad ${H.cad ? 'checked' : ''}><i></i><span data-help="Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc.">Affichage sombre (dessin technique)</span></label>
                         <div class="h-hs-g2c"><label>Plafond (visite 3D)<select data-hs-f="ceil">${opt([['none', 'Aucun (ouvert)'], ['plafond', 'Plafond uni'], ['poutres', 'Poutres apparentes']], f.ceil || 'none')}</select></label><label>Couleur du plafond<input type="color" data-hs-f="ceilColor" value="${esc(/^#[0-9a-f]{6}$/i.test(f.ceilColor || '') ? f.ceilColor : '#f1ece2')}"></label></div>${hasGhost() ? `<label><span data-help="L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia." data-help-faq="plan de maison étages">Calque d’un autre étage ou d’une époque</span>${ghostSel(f)}</label>${H.verGhost ? `<label class="ui-toggle"><input type="checkbox" data-hs-eplegend-on ${H.verLegend ? 'checked' : ''}><i></i>Légende : ― ajouté · ┄ disparu</label>` : ''}<label>Transparence du calque<input type="range" min="5" max="90" step="5" data-hs-ghostop data-unit="%" value="${Math.round(clamp(Number(H.ghostOp ?? .3), .05, .9) * 100)}"></label>` : ''}`)}
                     ${sec('📐 Plan ancien, cadastre', 'fl-ref', !R?.src ? `<p class="muted">Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus.</p><div class="h-hs-refbar"><button type="button" class="button small secondary" data-hs-cmd="importplan">🖼 Choisir l’image…</button></div>`
                         : `${refFloor ? `<p class="muted">Posé sous l’étage « ${esc(refFloor.name)} ». <button type="button" class="link-button" data-hs-cmd="refhere">Le mettre sous cet étage</button></p>` : ''}
@@ -1107,7 +1133,8 @@
         async function loadMine() { try { mine = ((await api('house_models')).items || []).filter(m => m.ext !== 'mtl'); } catch (_) { mine = []; } }
         function planSvg(f = F()) {
             const pts = [...f.walls.flatMap(w => [w.a, w.b]), ...f.rooms.flatMap(r => r.pts), ...f.items.flatMap(i => [[i.x - i.w / 2, i.y - i.d / 2], [i.x + i.w / 2, i.y + i.d / 2]])]; if (!pts.length) return null;
-            const m = 80, x0 = Math.min(...pts.map(p => p[0])) - m, y0 = Math.min(...pts.map(p => p[1])) - m, x1 = Math.max(...pts.map(p => p[0])) + m, y1 = Math.max(...pts.map(p => p[1])) + m;
+            const m = f.showTotal ? 140 : 80, x0 = Math.min(...pts.map(p => p[0])) - m, y0 = Math.min(...pts.map(p => p[1])) - m; let x1 = Math.max(...pts.map(p => p[0])) + m, y1 = Math.max(...pts.map(p => p[1])) + m;
+            if ((f.showTable || f.showTitle) && f.walls.length) { const fs = clamp(Math.max(x1 - x0, y1 - y0) / 45, 14, 40), lines = (f.showTable ? f.rooms.filter(r => !r.void).length + 3 : 0) + (f.showTitle ? 6 : 0); x1 += fs * 21; y1 = Math.max(y1, y0 + m + fs * 1.5 * lines + fs * 4); } // 📐 le tableau des pièces et le cartouche, à droite
             // l'étage demandé, sans la grille ni la sélection, même depuis la vue 3D ; puis on remet tout
             const z0 = zoom, px = panX, py = panY, s0 = sel, f0 = fi, want = H.floors.indexOf(f); zoom = 1; panX = -x0; panY = -y0; sel = null; if (want >= 0) fi = want; exporting = true;
             let body = '', dfs = ''; try { render(); body = world.innerHTML; dfs = $('[data-hs-defs]').innerHTML; } finally { exporting = false; zoom = z0; panX = px; panY = py; sel = s0; fi = f0; render(); }
@@ -1244,6 +1271,7 @@
             const el = e.target, f = F(), v = el.type === 'checkbox' ? el.checked : el.value;
             if (el.matches('[data-hs-libq]')) { libQ = el.value; clearTimeout(tmr); tmr = setTimeout(() => { const p0 = el.selectionStart; el.blur(); paintSide(); /* le champ quitté le temps de redessiner (sinon le panneau ne bouge pas pendant la frappe) */ const i = pane.querySelector('[data-hs-libq]'); i.focus(); i.setSelectionRange(p0, p0); }, 200); return; }
             if (el.dataset.hsF) { const k = el.dataset.hsF; f[k] = ['level', 'height', 'wallT', 'knee'].includes(k) ? Number(v) : v; if (k === 'knee') f.knee = clamp(f.knee || 0, 0, 300); later(k === 'attic' ? 'Combles' : 'Étage'); if (k === 'attic') setTimeout(paintSide, 0); return; }
+            if (el.matches('[data-hs-cad]')) { H.cad = !!v; later('Affichage'); return; }
             if (el.dataset.hsH) { H[el.dataset.hsH] = Number(v); later('Grille'); return; }
             if (el.dataset.hsRoof) { const k = el.dataset.hsRoof; H.roof = H.roof || {}; H.roof[k] = ['pitch', 'over', 'chimneyPos'].includes(k) ? Number(v) : v; if (k === 'kind') delete H.roof.color; later('Toit'); if (k === 'on' || k === 'kind') setTimeout(paintSide, 0); return; } // la couverture choisie reprend sa couleur
             if (el.dataset.hsPlus === 'epghost') { if (el.checked) H.verGhost = 'prev'; else delete H.verGhost; later('Calque'); render(); return; }
