@@ -6,6 +6,8 @@
  *  - 📐 Grille de perspective (menu Affichage) : à 1 ou 2 points de fuite, sur une ligne d'horizon ; des lignes de fuite par-dessus
  *    le dessin (pas imprimées) ; la ligne et la cote s'alignent toutes seules sur une ligne de fuite, une verticale ou
  *    l'horizontale quand on en est près (⌘ ou Ctrl : sans).
+ *  - 〰 Largeur variable (Propriétés d'un trait) : effilé, plume, s'affinant, s'épaississant, pinceau ; dessiné comme une forme.
+ *  - ⧉ Mélange de deux formes (menu Objet) : des étapes entre elles (forme, couleurs, épaisseur, opacité), en groupe.
  * Purs (Node, essais) : ext.vectorPlus = {lenLabel, dimObj, cleanPersp, perspPath, perspSnap}.
  */
 (function (root) {
@@ -80,8 +82,62 @@
             },
             onSubmit: () => { ok = true; commit(doc.persp.on ? 'Grille de perspective' : 'Grille de perspective cachée'); }});
     }
-    ext.vectorPlus = {lenLabel, dimObj, cleanPersp, perspPath, perspSnap, perspDialog};
-    if (typeof module === 'object' && module.exports) module.exports = {lenLabel, dimObj, cleanPersp, perspPath, perspSnap};
+    /* ═════════ 〰 Largeur variable : un trait (chemin ouvert) devient une forme remplie, plus épaisse ici, plus fine là ═════════ */
+    const PROFILES = [['', 'Uniforme'], ['taper', 'Effilé aux deux bouts'], ['swell', 'Plume (épais au milieu)'], ['thin', 'S’affinant (fin au bout)'], ['thick', 'S’épaississant'], ['brush', 'Pinceau (irrégulier)']];
+    /** la largeur relative au point t (0…1) du trait */
+    function widthAt(p, t) {
+        if (p === 'taper') return Math.min(1, Math.sin(Math.PI * t) * 1.6) ** 0.8;
+        if (p === 'swell') return 0.15 + 0.85 * Math.sin(Math.PI * t);
+        if (p === 'thin') return 1 - 0.92 * t;
+        if (p === 'thick') return 0.08 + 0.92 * t;
+        if (p === 'brush') return Math.max(0.15, (0.75 + 0.25 * Math.sin(t * 23.7) * Math.cos(t * 9.1)) * Math.min(1, Math.sin(Math.PI * t) * 3));
+        return 1;
+    }
+    /** {...o} d'un chemin ouvert avec o.wp → un chemin fermé rempli de la couleur du trait ; null si rien à faire */
+    function vary(o) {
+        if (!o || o.type !== 'path' || o.closed || !o.wp || !(Number(o.sw) > 0) || !Array.isArray(o.pts) || o.pts.length < 2 || !o.stroke || o.stroke === 'none') return null;
+        const pts = []; // échantillonnage des courbes de Bézier (12 points par morceau)
+        for (let i = 0; i < o.pts.length - 1; i++) {
+            const a = o.pts[i], b = o.pts[i + 1], c1 = a.o || [a.x, a.y], c2 = b.i || [b.x, b.y];
+            for (let k = i ? 1 : 0; k <= 12; k++) { const t = k / 12, u = 1 - t; pts.push([u * u * u * a.x + 3 * u * u * t * c1[0] + 3 * u * t * t * c2[0] + t * t * t * b.x, u * u * u * a.y + 3 * u * u * t * c1[1] + 3 * u * t * t * c2[1] + t * t * t * b.y]); }
+        }
+        const L = [0]; for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+        const tot = L.at(-1) || 1, left = [], right = [];
+        pts.forEach((q, i) => {
+            const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)], dx = b[0] - a[0], dy = b[1] - a[1], n = Math.hypot(dx, dy) || 1, w = Number(o.sw) * widthAt(o.wp, L[i] / tot) / 2;
+            left.push({x: n2(q[0] - dy / n * w), y: n2(q[1] + dx / n * w)}); right.push({x: n2(q[0] + dy / n * w), y: n2(q[1] - dx / n * w)});
+        });
+        const v = {...o, pts: [...left, ...right.reverse()], closed: true, fill: o.stroke, stroke: 'none', sw: 0}; delete v.wp; delete v.grad; delete v.pat; delete v.dash; return v;
+    }
+    /* ═════════ ⧉ Mélange de deux formes : des étapes entre elles (forme, couleurs, épaisseur, opacité) ═════════ */
+    /** les points d'un chemin (avec ses courbes), régulièrement espacés : M points */
+    function resample(o, M) {
+        const raw = [], P = o.pts || [], segs = o.closed ? P.length : P.length - 1;
+        for (let i = 0; i < segs; i++) { const a = P[i], b = P[(i + 1) % P.length], c1 = a.o || [a.x, a.y], c2 = b.i || [b.x, b.y];
+            for (let k = i ? 1 : 0; k <= 16; k++) { const t = k / 16, u = 1 - t; raw.push([u * u * u * a.x + 3 * u * u * t * c1[0] + 3 * u * t * t * c2[0] + t * t * t * b.x, u * u * u * a.y + 3 * u * u * t * c1[1] + 3 * u * t * t * c2[1] + t * t * t * b.y]); } }
+        if (raw.length < 2) return raw.length ? Array(M).fill(raw[0]) : null;
+        const L = [0]; for (let i = 1; i < raw.length; i++) L.push(L[i - 1] + Math.hypot(raw[i][0] - raw[i - 1][0], raw[i][1] - raw[i - 1][1]));
+        const tot = L.at(-1) || 1, out = []; let j = 0;
+        for (let k = 0; k < M; k++) { const want = tot * k / (o.closed ? M : M - 1); while (j < L.length - 2 && L[j + 1] < want) j++; const f = (want - L[j]) / ((L[j + 1] - L[j]) || 1); out.push([raw[j][0] + (raw[j + 1][0] - raw[j][0]) * f, raw[j][1] + (raw[j + 1][1] - raw[j][1]) * f]); }
+        return out;
+    }
+    const hexOf = c => (/^#[0-9a-f]{6}$/i.test(c || '') ? [1, 3, 5].map(k => parseInt(c.slice(k, k + 2), 16)) : null);
+    const mixC = (a, b, t) => { const x = hexOf(a), y = hexOf(b); if (!x || !y) return t < 0.5 ? a : b; return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join(''); };
+    /** a, b : deux chemins (toPath) ; n étapes entre les deux → n chemins */
+    function blend(a, b, n, uid = uid0) {
+        const M = 96, closed = !!(a.closed && b.closed), pa = resample({...a, closed}, M), pb0 = resample({...b, closed}, M); if (!pa || !pb0) return [];
+        // le départ et le sens de la 2e forme qui collent le mieux à la 1re (sinon le mélange se tord)
+        const ca = pa.reduce((s, p) => [s[0] + p[0] / M, s[1] + p[1] / M], [0, 0]), cb = pb0.reduce((s, p) => [s[0] + p[0] / M, s[1] + p[1] / M], [0, 0]);
+        let best = pb0, bd = Infinity;
+        for (const cand of [pb0, [...pb0].reverse()]) for (let r = 0; r < (closed ? M : 1); r += closed ? 2 : 1) { let d = 0; for (let k = 0; k < M; k++) { const q = cand[(k + r) % M]; d += (pa[k][0] - ca[0] - q[0] + cb[0]) ** 2 + (pa[k][1] - ca[1] - q[1] + cb[1]) ** 2; } if (d < bd) { bd = d; best = cand.map((_, k) => cand[(k + r) % M]); } }
+        const out = [];
+        for (let s = 1; s <= n; s++) { const t = s / (n + 1);
+            out.push({id: uid(), type: 'path', name: `Étape ${s}`, closed, pts: pa.map((p, k) => ({x: n2(p[0] + (best[k][0] - p[0]) * t), y: n2(p[1] + (best[k][1] - p[1]) * t)})),
+                fill: mixC(a.fill || 'none', b.fill || 'none', t), stroke: mixC(a.stroke || 'none', b.stroke || 'none', t), sw: n2(num(a.sw) + (num(b.sw) - num(a.sw)) * t), ...(a.op !== undefined || b.op !== undefined ? {op: n2(num(a.op, 1) + (num(b.op, 1) - num(a.op, 1)) * t)} : {})}); }
+        return out;
+    }
+    ext.vectorPlus = {lenLabel, dimObj, cleanPersp, perspPath, perspSnap, perspDialog, vary, widthAt, PROFILES, blend};
+    if (typeof module === 'object' && module.exports) module.exports = {lenLabel, dimObj, cleanPersp, perspPath, perspSnap, vary, widthAt, blend};
     if (typeof document === 'undefined' || document.getElementById('vx-plus-css')) return;
     const st = document.createElement('style'); st.id = 'vx-plus-css';
     st.textContent = '.vx-pp{display:grid;gap:2px;margin:8px 0}.vx-pp span{display:flex;justify-content:space-between}.vx-pp-row{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin:6px 0}';
