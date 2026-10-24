@@ -235,7 +235,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(await page.locator('[data-lcd-fiches]').count(), 1, 'la petite ligne vers Fiches personnes et animaux (A4)');
             assert.equal(await page.locator('[data-lcd-trees]').count(), 1, 'le lien vers les cases des arbres');
             assert.equal(await page.locator('details.lcd-sec[open]').count(), 0, 'tout fermé');
-            assert.match(await page.locator('#lcd-a1 > summary').innerText(), /A1\s+🎨\s*Style général\s*—\s*Comme avant/);
+            assert.match(await page.locator('#lcd-a1 > summary').innerText(), /^🎨\s*Style général\s*—\s*Comme avant/);
             await page.click('[data-lcd-go="a1"]');
             await page.waitForSelector('#lcd-a1[open] [data-lcd-v="doux"]');
             assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-designs-open-v2'))), ['a1']);
@@ -257,7 +257,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(JSON.parse(await page.evaluate(() => localStorage.getItem('genealogie-designs'))).a1.v, 'doux');
             assert.match(await page.locator('#lcd-a1 > summary').innerText(), /Style général\s*—\s*Doux/);
             assert.match(await page.locator('#lcd-a1 [data-lcd-saved]').innerText(), /✓ Enregistré/);
-            const t1 = page.locator('.toast', {hasText: 'A1 Style général : Doux'}).last(); await t1.waitFor();
+            const t1 = page.locator('.toast', {hasText: 'Style général : Doux'}).last(); await t1.waitFor();
             await t1.locator('button', {hasText: 'Annuler'}).click();
             await page.waitForFunction(() => !document.documentElement.hasAttribute('data-lc-style'));
             assert.equal(await page.evaluate(() => localStorage.getItem('genealogie-designs')), null);

@@ -142,7 +142,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await toApparence(p); await p.waitForSelector('#design-form');
             const note = await p.locator('#lcd-apparence-link').innerText();
             assert.match(note, /Designs au choix : la forme des éléments \(traits, densité, icônes, en-tête des fiches, cases des arbres, boutons, listes, mouvements\)\. La police, la taille et les couleurs se règlent ici, dans Apparence\./);
-            assert.match(note, /A1 Papier ancien/); assert.doesNotMatch(note, /police, mouvements, listes, tableau de bord|A9|A10/);
+            assert.match(note, /Style général : Papier ancien/); assert.doesNotMatch(note, /police, mouvements, listes, tableau de bord|A9|A10/);
             assert.equal(await p.locator('#design-form .lcd-hint').count(), 0, 'plus de « Designs au choix → A7 choisit la police »');
             const set = async (name, value) => { await p.evaluate(([n, v]) => { const f = document.querySelector(`#design-form [name="${n}"]`); f.value = v; f.dispatchEvent(new Event('input', {bubbles: true})); f.dispatchEvent(new Event('change', {bubbles: true})); }, [name, value]); await p.waitForTimeout(700); };
             const before = await look(p);

@@ -822,13 +822,13 @@
 
     function summaryHtml(id, G) {
         const D = DEFS[id], mod = isModified(G, id);
-        return `<span class="lcd-step">${D.n}</span><span class="lcd-sec-ic" aria-hidden="true">${D.icon}</span><b class="lcd-sec-t">${esc(D.title)}</b><span class="lcd-sep">—</span><span class="lcd-cur${isOn(G, id) ? ' is-chg' : ''}">${esc(V(id, G[id].v).t)}</span>${mod ? '<span class="lcd-tag is-mod">retouché</span>' : ''}`;
+        return `<span class="lcd-sec-ic" aria-hidden="true">${D.icon}</span><b class="lcd-sec-t">${esc(D.title)}</b><span class="lcd-sep">—</span><span class="lcd-cur${isOn(G, id) ? ' is-chg' : ''}">${esc(V(id, G[id].v).t)}</span>${mod ? '<span class="lcd-tag is-mod">retouché</span>' : ''}`;
     }
     function tocHtml(G) {
-        return `<nav class="lcd-toc" aria-label="Aller à un réglage"><ol>${PAGE_IDS.map(id => [id, DEFS[id].n, DEFS[id].title]).map(([id, n, t]) => {
+        return `<nav class="lcd-toc" aria-label="Aller à un réglage"><ol>${PAGE_IDS.map(id => [id, DEFS[id].icon, DEFS[id].title]).map(([id, n, t]) => {
             const curT = choiceName(G, id) + (isModified(G, id) ? ' · retouché' : '');
             const chg = isOn(G, id);
-            return `<li><button type="button" class="lcd-toc-i" data-lcd-go="${id}"><span class="lcd-step">${n}</span><span class="lcd-toc-tx"><b>${esc(t)}</b><small class="${chg ? 'is-chg' : ''}">${esc(curT)}</small></span></button></li>`;
+            return `<li><button type="button" class="lcd-toc-i" data-lcd-go="${id}"><span class="lcd-toc-ic" aria-hidden="true">${n}</span><span class="lcd-toc-tx"><b>${esc(t)}</b><small class="${chg ? 'is-chg' : ''}">${esc(curT)}</small></span></button></li>`;
         }).join('')}</ol></nav>`;
     }
     function sectionShell(id, open) {
@@ -964,9 +964,9 @@
         const G = cur(), opened = openSet();
         ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Cinq réglages pour changer la forme des éléments de l’app : traits, densité, icônes, mouvements, listes (la forme de l’en-tête des fiches se règle dans Fiches personnes et animaux, les boutons dans Notifications et boutons). Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
             <div class="lcd-intro ui-notice ui-notice-info"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Ici, seulement la forme. La police, la taille du texte et les couleurs (Preset, Couleur principale) se règlent dans <button type="button" class="link-button" data-lcd-apparence>Réglages → Apparence</button> : elles passent toujours devant, quel que soit le design.</span></div>
-            <div class="ui-notice ui-notice-info lcd-trees-moved lcd-a4-moved"><span class="ui-notice-ic" aria-hidden="true">👤</span><span>A4 Fiche d’une personne → se règle maintenant dans <button type="button" class="link-button" data-lcd-fiches>Fiches personnes et animaux ↗</button> (cadre « Forme de l’en-tête », avec les sections, l’ordre et les éléments de l’en-tête).</span></div>
-            <div class="ui-notice ui-notice-info lcd-trees-moved lcd-a6-moved"><span class="ui-notice-ic" aria-hidden="true">🔘</span><span>A6 Boutons → se règle maintenant à la fin de <button type="button" class="link-button" data-lcd-notifs>Notifications et boutons ↗</button>.</span></div>
-            <div class="ui-notice ui-notice-info lcd-trees-moved"><span class="ui-notice-ic" aria-hidden="true">🌳</span><span>Les cases des arbres (A5) se règlent maintenant avec leurs couleurs, dans <button type="button" class="link-button" data-lcd-trees>Graphiques → 🎨 Couleurs des statistiques et des arbres →</button></span></div>
+            <div class="ui-notice ui-notice-info lcd-trees-moved lcd-a4-moved"><span class="ui-notice-ic" aria-hidden="true">👤</span><span>La forme de l’en-tête des fiches → se règle maintenant dans <button type="button" class="link-button" data-lcd-fiches>Fiches personnes et animaux ↗</button> (cadre « Forme de l’en-tête », avec les sections, l’ordre et les éléments de l’en-tête).</span></div>
+            <div class="ui-notice ui-notice-info lcd-trees-moved lcd-a6-moved"><span class="ui-notice-ic" aria-hidden="true">🔘</span><span>La forme des boutons → se règle maintenant à la fin de <button type="button" class="link-button" data-lcd-notifs>Notifications et boutons ↗</button>.</span></div>
+            <div class="ui-notice ui-notice-info lcd-trees-moved"><span class="ui-notice-ic" aria-hidden="true">🌳</span><span>Les cases des arbres se règlent maintenant avec leurs couleurs, dans <button type="button" class="link-button" data-lcd-trees>Graphiques → 🎨 Couleurs des statistiques et des arbres →</button></span></div>
             ${tocHtml(G)}
             <div class="lcd-secs">${PAGE_IDS.map(id => sectionShell(id, opened.has(id))).join('')}</div></section>`;
         const box = ws.querySelector('.lcd-page');
@@ -1019,14 +1019,14 @@
             N[id][k] = val;
             const shown = s.type === 'toggle' ? (val ? 'activé' : 'désactivé') : s.type === 'select' ? (s.options.find(o => o[0] === val) || [0, val])[1] : s.type === 'range' ? `${String(val).replace('.', ',')} ${s.unit}` : val;
             const lab = s.labels ? s.labels[s.k.indexOf(k)] : s.label;
-            commit(N, `${DEFS[id].n} ${DEFS[id].title} : ${lab} — ${shown}`, id);
+            commit(N, `${DEFS[id].title} : ${lab} — ${shown}`, id);
         });
     }
     function pickVariant(c) {
         const id = c.closest('[data-lcd-sec]').dataset.lcdSec, k = c.dataset.lcdV, G = cur();
         if (G[id].v === k && !isModified(G, id)) return;
         const N = clone(G); N[id] = {...defOf(id, k), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})};
-        commit(N, `${DEFS[id].n} ${DEFS[id].title} : ${V(id, k).t}`, id);
+        commit(N, `${DEFS[id].title} : ${V(id, k).t}`, id);
         requestAnimationFrame(() => (embOf(id)?.box || PAGE?.box)?.querySelector(`[data-lcd-sec="${id}"] [data-lcd-v="${k}"]`)?.focus({preventScroll: true}));
     }
     /* ═════════════════════════ 🌳 Cases des arbres (A5) : dans la fenêtre « Couleurs des statistiques et des arbres » ═════════════════════════
@@ -1100,7 +1100,7 @@
     /** le cadre « Forme de l'en-tête » (A4) dans Réglages → Apparence → Fiches personnes et animaux : 4 cartes 👍 / 👎, Réglages en plus, aperçu réel */
     async function embedFrame(host, id, title, note) {
         if (!host) return;
-        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="${id}" id="lcd-${id}-emb"><div class="lcd-embed-head"><h4><span class="lcd-step">${DEFS[id].n}</span> ${title} <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">${note} <button type="button" class="link-button" data-lcd-go-designs2>Designs au choix →</button></p><div class="lcd-body" data-lcd-body></div></div>`;
+        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="${id}" id="lcd-${id}-emb"><div class="lcd-embed-head"><h4><span aria-hidden="true">${DEFS[id].icon}</span> ${title} <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">${note} <button type="button" class="link-button" data-lcd-go-designs2>Designs au choix →</button></p><div class="lcd-body" data-lcd-body></div></div>`;
         const box = host.querySelector('.lcd-embed');
         const st = A().state;
         EMBS[id] = {box, data: {stats: st?.bootstrap?.stats || {}, people: st?.people || []}};
@@ -1119,7 +1119,7 @@
     const goDesigns = () => { const st = A().state; if (st) st.maintenanceTab = 'designs'; A().setModule?.('maintenance'); };
     function apparenceNoteHtml(G) {
         const on = PAGE_IDS.filter(id => isOn(G, id));
-        const list = on.length ? `<small class="lcd-link-on">${esc(`${A().plural ? A().plural(on.length, 'design changé', 'designs changés') : on.length} : ${on.map(id => `${DEFS[id].n} ${V(id, G[id].v).t}${isModified(G, id) ? ' (retouché)' : ''}`).join(', ')}.`)}</small>` : '<small class="muted lcd-link-on">Tout est encore « comme avant ».</small>';
+        const list = on.length ? `<small class="lcd-link-on">${esc(`${A().plural ? A().plural(on.length, 'design changé', 'designs changés') : on.length} : ${on.map(id => `${DEFS[id].title} : ${V(id, G[id].v).t}${isModified(G, id) ? ' (retouché)' : ''}`).join(', ')}.`)}</small>` : '<small class="muted lcd-link-on">Tout est encore « comme avant ».</small>';
         return `<div class="ui-notice ui-notice-info lcd-link" id="lcd-apparence-link"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span><button type="button" class="link-button" data-lcd-go-designs>🎨 Designs au choix</button> : la forme des éléments (traits, densité, icônes, en-tête des fiches, cases des arbres, boutons, listes, mouvements). La police, la taille et les couleurs se règlent ici, dans Apparence. ${list}</span></div>`;
     }
     ext.afterDesign = ext.afterDesign || [];

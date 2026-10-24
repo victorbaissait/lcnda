@@ -434,3 +434,4 @@
 :root[data-lc-mbar="off"] .lcd-mv .lcd-mv-sec::after { content: "6 s"; animation: lcd-sec 6s infinite steps(1, end); }
 html.a11y-calm .lcd-mv * { animation: none !important; }
 html.a11y-calm .lcd-mv .lcd-mv-toast { opacity: 1; visibility: visible; }
+.lcd-toc-ic { font-size: 22px; line-height: 1; flex: none; width: 30px; text-align: center; }

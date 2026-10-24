@@ -74,7 +74,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=7" id="lc-frame-css" media="not all">
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=7" id="lc-designs-gen" media="not all">
-    <link rel="stylesheet" href="assets/css/designs.css?v=5">
+    <link rel="stylesheet" href="assets/css/designs.css?v=6">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
     for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
@@ -1186,7 +1186,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=4" defer></script>
 <script src="assets/js/heritage-links.js?v=19" defer></script>
-<script src="assets/js/heritage-more.js?v=227" defer></script>
+<script src="assets/js/heritage-more.js?v=228" defer></script>
 <script src="assets/js/heritage-controle.js?v=4" defer></script>
 <script src="assets/js/heritage-records.js?v=11" defer></script>
 <script src="assets/js/heritage-research.js?v=35" defer></script>
@@ -1345,8 +1345,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-fiche.js?v=5" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=12" defer></script>
-<script src="assets/js/app-designs.js?v=8" defer></script>
+<script src="assets/js/app-apparence.js?v=13" defer></script>
+<script src="assets/js/app-designs.js?v=9" defer></script>
 <script src="assets/js/app-sections.js?v=3" defer></script>
 <script>
 (function () {
