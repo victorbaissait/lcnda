@@ -79,7 +79,7 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
     };
     const bar = page => page.$$eval('.topbar-meta > button', els => els.filter(e => !e.hidden && !e.hasAttribute('data-tb-off')).map(e => e.id));
     const allRows = page => page.$$eval('#lc-tb-order .order-row', els => els.map(e => e.dataset.orderKey));
-    const rows = async page => (await allRows(page)).filter(k => !/^(et|enq)_/.test(k)); // sans les raccourcis vers les outils
+    const rows = async page => (await allRows(page)).filter(k => !/^(et|enq|act)_/.test(k)); // sans les raccourcis vers les outils
     const shot = async (page, name) => { if (shots) { fs.mkdirSync(shots, {recursive: true}); await page.screenshot({path: path.join(shots, name)}); } };
     try {
         const page = await open(1440);
@@ -166,6 +166,18 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             await page.goto(base + '#maintenance/design'); await page.waitForTimeout(2200);
             await page.click('[data-tb-reset]'); await page.waitForTimeout(900);
             assert.equal(await page.$$eval('.topbar-meta > .lc-tb-go', els => els.filter(e => !e.hasAttribute('data-tb-off')).length), 0, '↺ : de nouveau cachés');
+        });
+        await t('👤 Nouvelle personne : cachée au départ, cochée elle ouvre la fenêtre de nouvelle personne', async () => {
+            assert.ok((await allRows(page)).includes('act_newperson'));
+            assert.equal(await page.$eval('#lc-tb-order [data-order-key="act_newperson"] [data-tb-show]', e => e.checked), false);
+            assert.equal(await page.$('#lc-tb-order [data-order-key="act_newperson"] [data-tb-mode]'), null, 'pas de choix liste / nouveau');
+            await page.click('#lc-tb-order [data-order-key="act_newperson"] [data-tb-show]'); await page.waitForTimeout(400);
+            assert.ok((await bar(page)).includes('tb-go-act_newperson'));
+            await page.click('#tb-go-act_newperson'); await page.waitForTimeout(800);
+            assert.ok(await page.evaluate(() => document.querySelector('#person-form')?.closest('dialog')?.open), 'fenêtre « Nouvelle personne » ouverte');
+            await page.keyboard.press('Escape'); await page.waitForTimeout(400);
+            await page.click('#lc-tb-order [data-order-key="act_newperson"] [data-tb-show]'); await page.waitForTimeout(400);
+            assert.ok(!(await bar(page)).includes('tb-go-act_newperson'));
         });
         await t('chaque raccourci : le clic ouvre la liste des projets (au départ) ou un nouveau projet, au choix', async () => {
             const opts = await page.$$eval('#lc-tb-order [data-order-key="et_sheet"] [data-tb-mode] option', o => o.map(x => x.value + ':' + x.textContent));
