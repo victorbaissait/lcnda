@@ -1,7 +1,7 @@
 'use strict';
 process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
- * 🧮 Tableur — lien avec la base (lib/sheet_link.php, assets/js/heritage-tableur-base.js) :   node tests/test-tableur-base.js
+ * 🧾 Tableur — lien avec la base (lib/sheet_link.php, assets/js/heritage-tableur-base.js) :   node tests/test-tableur-base.js
  *  1. API (un vrai « php -S » sur une base neuve) :
  *     sheet_sources ; sheet_fill (personnes et filtres, colonnes tirées des données, événements, recensements, relevé de
  *     dépouillement, statistique, une de mes listes) ; demandes de mauvaise forme refusées (422) ; vivants et fiches
@@ -12,7 +12,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  2. navigateur (Playwright ; sinon sauté) : Données → « ⤒ Remplir depuis l'app » ; cellules « personne » reliées ;
  *     ↻ Relire (une fiche en plus, un nom changé : la note à soi reste sur la ligne de sa personne) ; modèle « Relevé de
  *     recensement » (colonnes de l'année) → « 📤 Envoyer vers la base » (3 étapes, badges K8, « choisis ▾ ») → ↶ Annuler du
- *     message H7 : base comme avant ; « 🧮 Dans le tableur » des Dépouillements ; Atelier (élément 🧮 Classeur) ;
+ *     message H7 : base comme avant ; « 🧾 Dans le tableur » des Dépouillements ; Atelier (élément 🧾 Classeur) ;
  *     390 px et mode sombre ; aucune erreur dans la console.
  *  Captures (si TABLEUR_SHOTS=dossier).
  */
@@ -285,7 +285,7 @@ let n = 0; const ok = (c, m) => { assert.ok(c, m); n++; }; const eq = (a, b, m) 
         await page.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
         await page.setViewportSize({ width: 1440, height: 900 });
         await page.evaluate(e => { const x = eval(e); x.dirty = false; x.dlg.close(); }, ed());
-        // 📜 Dépouillements : « 🧮 Dans le tableur » (personnes et foyers de la page)
+        // 📜 Dépouillements : « 🧾 Dans le tableur » (personnes et foyers de la page)
         await page.evaluate(() => { const s = window.LCNDA_APP.state; s.hDigest = { id: 1, page: '3', tab: 'pages', q: '', type: '', status: '', image: 0 }; s.listType = 'depouillements'; window.LCNDA_APP.setModule('listes'); });
         await page.waitForSelector('[data-dp-sheet]', { timeout: 10000 });
         await page.click('[data-dp-sheet]');
@@ -293,13 +293,13 @@ let n = 0; const ok = (c, m) => { assert.ok(c, m); n++; }; const eq = (a, b, m) 
         eq(await page.evaluate(e => { const x = eval(e), S = window.LCNDA_SHEET, sh = x.S(); return [0, 1, 2, 3, 4, 5, 6, 7].map(c => sh.cells[S.addr(0, c)]?.v).concat([sh.cells.D2?.v, sh.link.n]); }, ed()), ['Rue', 'N°', 'Foyer', 'Nom', 'Prénom', 'Âge', 'Métier', 'Lien avec le chef', 'MARTIN', 2], 'Dépouillements : la page dans le tableur, tenue à jour');
         await shot('depouillement');
         await page.evaluate(e => { const x = eval(e); x.dirty = false; x.dlg.close(); }, ed());
-        // 📚 Atelier : un élément « 🧮 Classeur » dans un dossier du projet
+        // 📚 Atelier : un élément « 🧾 Classeur » dans un dossier du projet
         const at = await page.evaluate(async () => { const A = window.LCNDA_APP, post = (a, b) => A.api(a, {}, { method: 'POST', body: b });
             const pr = await post('save_atelier_project', { title: 'Projet essai' }); const pid = pr.result.id;
             const wb = await post('save_workbook', { name: 'Budget', kind: 'book', data: window.LCNDA_SHEET.compact(window.LCNDA_SHEET.newWorkbook()) });
             await post('save_atelier_item', { project_id: pid, type: 'app', title: 'Budget', data: { kind: 'workbook', key: String(wb.result.id), label: 'Budget' } });
             const p = await A.api('atelier_project', { id: pid }); return (p.items || []).map(i => i.data?.kind); });
-        eq(at, ['workbook'], 'Atelier : l’élément « 🧮 Classeur » est gardé');
+        eq(at, ['workbook'], 'Atelier : l’élément « 🧾 Classeur » est gardé');
         eq(errors, [], 'aucune erreur dans la console');
         await ctx.close();
         console.log(`✓ test-tableur-base : ${n} vérifications`);

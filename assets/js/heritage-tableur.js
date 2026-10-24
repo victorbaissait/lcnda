@@ -1,11 +1,11 @@
 /**
- * 🧮 Tableur : Listes → 🛠️ Outils de modification → « 🧮 Tableur » (maquette validée « 🧮 Tableur », écrans A, B, C, D, F, H, J).
+ * 🧾 Tableur : Listes → 🛠️ Outils de modification → « 🧾 Tableur » (maquette validée « 🧾 Tableur », écrans A, B, C, D, F, H, J).
  * Un classeur à plusieurs feuilles : barre E1 avec menus, barre d'outils réglable (⚙️ Personnaliser), barre de formule avec
  * la liste des fonctions et l'aide pendant la frappe, grille « virtuelle » (seules les cases visibles sont dessinées : 10 000
  * lignes défilent sans gel), panneau E2, onglets des feuilles en bas, barre d'état (somme, moyenne, nombre), ↶ ↷.
  * Le calcul, les fichiers (CSV, TSV, XLSX, ODS, JSON) et le ZIP sont dans le moteur commun : app-tableur-engine.js (LCNDA_SHEET).
  * Classeurs gardés en base : lib/workbooks.php (table workbooks). Styles : assets/css/tableur.css.
- * Vague 2 : « 🧮 Modifier les données » des autres outils, « 🎯 Préparer pour… », « 📊 Graphique ▾ » lié à une plage :
+ * Vague 2 : « 🧾 Modifier les données » des autres outils, « 🎯 Préparer pour… », « 📊 Graphique ▾ » lié à une plage :
  * heritage-tableur-cibles.js (ext.sheetTargets, ext.openSheetEditor, ext.sheetLink) ; ici seulement ctx.back, ctx.select, les crochets
  * ext.sheetMenuExtra / ext.sheetCommands / ext.sheetChartMenu et l'évènement « lcnda:workbook-saved ».
  */
@@ -197,9 +197,9 @@
         open() {
             const U = UI(), dlg = this.dlg = document.createElement('dialog');
             dlg.className = 'modal xl-dlg'; dlg.dataset.ownClose = '1'; dlg.dataset.noFoot = '1'; dlg.setAttribute('data-no-foot', '');
-            const top = U.editorTopbar({icon: '🧮', name: this.name, nameAttrs: 'data-xl-name', menus: [{html: `<nav class="xl-menus">${menusHtml()}</nav>`}], undo: true, status: this.id && !this.dirty ? 'saved' : '',
+            const top = U.editorTopbar({icon: '🧾', name: this.name, nameAttrs: 'data-xl-name', menus: [{html: `<nav class="xl-menus">${menusHtml()}</nav>`}], undo: true, status: this.id && !this.dirty ? 'saved' : '',
                 buttons: {customize: ext.tbButton ? {html: '⚙️ Personnaliser', attrs: 'data-tb-config="sheet"'} : null, export: {attrs: 'data-xl-cmd="export"', title: 'XLSX, ODS, CSV, TSV, JSON, PDF, impression'}, save: this.ctx.back ? {attrs: 'data-xl-cmd="save" data-xl-back-save', html: '✓ Enregistrer et revenir', title: this.ctx.back.title || 'Renvoyer les données là d’où elles viennent'} : {attrs: 'data-xl-cmd="save"'}, full: ext.fullButton ? {attrs: 'data-full-toggle="sheet"', title: 'Plein écran (⛶)'} : null, close: {attrs: 'data-xl-cmd="close"'}}});
-            // « 🧮 Modifier les données » d'un autre outil (vague 2) : le bandeau dit d'où viennent les données et ce qu'on y attend
+            // « 🧾 Modifier les données » d'un autre outil (vague 2) : le bandeau dit d'où viennent les données et ce qu'on y attend
             const back = this.ctx.back ? `<div class="xl-back" data-xl-backbar role="note"><span class="xl-back-txt">${this.ctx.back.html || esc(this.ctx.back.label || 'Données d’un autre outil')}</span><span class="xl-back-btns"><button type="button" class="button small secondary" data-xl-cmd="close">Annuler</button><button type="button" class="button small" data-xl-cmd="save">✓ Enregistrer et revenir</button></span></div>` : '';
             dlg.innerHTML = `<div class="xl">${top}${back}${toolsHtml()}
                 <div class="xl-fbar"><input class="xl-nbox" data-xl-nbox aria-label="Adresse (tape D12 ou un nom pour y aller)" title="Tape une adresse (D12, B2:C9) ou un nom pour y aller" spellcheck="false"><span class="xl-fxlab" aria-hidden="true">fx</span><textarea class="xl-fx" data-xl-fx rows="1" aria-label="Contenu ou formule de la cellule" spellcheck="false"></textarea></div>
@@ -1390,7 +1390,7 @@
             try {
                 const own = !asNew && this.id;
                 const r = await post('save_workbook', {id: asNew ? 0 : this.id, name, kind, data: S.compact(this.wb), ...(own && this.rev ? {base_rev: this.rev} : {}), ...(force ? {force: 1} : {})}), id = Number(r.result?.id || 0);
-                if (!asNew) { const first = !this.id; this.id = id; this.rev = r.result?.rev || ''; this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved'); if (first) toast('Rangé dans Listes → Outils de modification → 🧮 Tableur.'); }
+                if (!asNew) { const first = !this.id; this.id = id; this.rev = r.result?.rev || ''; this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved'); if (first) toast('Rangé dans Listes → Outils de modification → 🧾 Tableur.'); }
                 else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(kind === 'template' ? `Modèle « ${name} » enregistré (Partir d’un modèle → Mes modèles).` : `Copie « ${name} » enregistrée.`); }
                 this.ctx.onSaved?.(this.id);
                 document.dispatchEvent(new CustomEvent('lcnda:workbook-saved', {detail: {id: this.id || id}})); // les diagrammes liés à une plage se redessinent
@@ -1421,7 +1421,7 @@
         let mine = []; try { mine = (await api('workbooks', {kind: 'template'})).items || []; } catch (_) {}
         ext.openDialog({eyebrow: 'TABLEUR', title: '📋 Partir d’un modèle', wide: true,
             body: `<div class="xl-tpls">${TEMPLATES.map(t => `<button type="button" class="xl-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(t.name)}</b><small>${esc(t.hint)}</small></button>`).join('')}</div>
-                <h4>Mes modèles</h4>${mine.length ? `<div class="xl-tpls">${mine.map(t => `<button type="button" class="xl-tpl" data-mine="${t.id}"><b>🧮 ${esc(t.name)}</b><small>${esc(plural(t.info?.sheets || 1, 'feuille'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: 'Modifié'})) : ''}</small></button>`).join('')}</div>` : A().empty('Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ».', {icon: '📋'})}`,
+                <h4>Mes modèles</h4>${mine.length ? `<div class="xl-tpls">${mine.map(t => `<button type="button" class="xl-tpl" data-mine="${t.id}"><b>🧾 ${esc(t.name)}</b><small>${esc(plural(t.info?.sheets || 1, 'feuille'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: 'Modifié'})) : ''}</small></button>`).join('')}</div>` : A().empty('Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ».', {icon: '📋'})}`,
             onOpen: d => d.addEventListener('click', async e => {
                 const b = e.target.closest('[data-tpl], [data-mine]'); if (!b) return; d.close();
                 if (b.dataset.tpl) { const t = TEMPLATES.find(x => x.key === b.dataset.tpl); return openWorkbook({...ctx, id: 0, data: t.make(), name: t.name}); }
@@ -1438,9 +1438,9 @@
     }
 
     /* ═════════ Dans 🛠️ Outils de modification (écran J) ═════════ */
-    const mini = p => (Array.isArray(p) && p.some(r => r.some(v => v !== '' && v != null)) ? `<span class="xl-mini"><table>${p.map(r => `<tr>${r.map(v => `<td>${esc(typeof v === 'number' ? v.toLocaleString('fr-FR') : v)}</td>`).join('')}</tr>`).join('')}</table></span>` : '<span class="h-et-ico">🧮</span>');
+    const mini = p => (Array.isArray(p) && p.some(r => r.some(v => v !== '' && v != null)) ? `<span class="xl-mini"><table>${p.map(r => `<tr>${r.map(v => `<td>${esc(typeof v === 'number' ? v.toLocaleString('fr-FR') : v)}</td>`).join('')}</tr>`).join('')}</table></span>` : '<span class="h-et-ico">🧾</span>');
     ext.editToolsExtra = ext.editToolsExtra || [];
-    ext.editToolsExtra.push({key: 'sheet', icon: '🧮', label: 'Tableur', what: 'classeur',
+    ext.editToolsExtra.push({key: 'sheet', icon: '🧾', label: 'Tableur', what: 'classeur',
         load: async () => ((await api('workbooks')).items || []).map(w => ({id: w.id, name: w.name, date: w.updated_at, thumb: mini(w.info?.preview), info: [plural(w.info?.sheets || 1, 'feuille'), plural(w.info?.rows || 0, 'ligne'), (w.info?.names || []).slice(0, 3).join(', ')].filter(Boolean).join(' · ')})),
         open: (id, again) => openWorkbook({id, onSaved: again, onClose: again}),
         create: again => openWorkbook({onSaved: again, onClose: again}),

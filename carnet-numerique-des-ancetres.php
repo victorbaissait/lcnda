@@ -255,8 +255,8 @@
                     <p>Le temps qu'il faisait le jour (et à l'heure) d'un événement, sans internet. Chaque fois, l'app dit d'où vient l'information : mesuré, station à N km, estimé ou reconstitution. L'altitude des lieux est prise en compte, sur 14 pays. Un pack Europe est en option. Vous pouvez masquer la météo partout, par sorte d'événement, par personne ou par événement.</p>
                     <h4>📝 Traitement de texte</h4>
                     <p>Un vrai traitement de texte dans l'app, avec de vraies pages, des styles, des notes, un sommaire, un index et une bibliographie. Les personnes et les lieux s'insèrent avec le menu de choix et restent à jour. Il a aussi les tableaux, le suivi des modifications, les commentaires, les versions et la lecture à voix haute. Il ouvre et enregistre les fichiers Word (.docx), LibreOffice (.odt), .rtf, Markdown et texte. Pour aller plus vite : « 📝 Écrire sur cette personne » depuis une fiche, et un compte rendu depuis le Journal des recherches.</p>
-                    <h4>🧮 Tableur</h4>
-                    <p>Formules en français, fichiers Excel, LibreOffice et CSV, fonctions de généalogie (âge, année d'un acte, génération Sosa). « 🧮 Modifier les données » des diagrammes, présentations et tableaux. Il remplit un tableau depuis l'app et peut renvoyer les changements vers la base, avec « ↶ Annuler ».</p>
+                    <h4>🧾 Tableur</h4>
+                    <p>Formules en français, fichiers Excel, LibreOffice et CSV, fonctions de généalogie (âge, année d'un acte, génération Sosa). « 🧾 Modifier les données » des diagrammes, présentations et tableaux. Il remplit un tableau depuis l'app et peut renvoyer les changements vers la base, avec « ↶ Annuler ».</p>
                     <h4>🎧 Son</h4>
                     <p>Un 🎚️ Studio son complet, avec effets qui ne touchent jamais l'original, spectre et pinceau de réparation, marqueurs reliés aux personnes, transcription, multipiste et la musique qui baisse sous la voix. Un ⚡ Son rapide à gros interrupteurs (« ✨ Tout nettoyer », Avant / Après). L'éditeur d'avant reste le choix de départ.</p>
                     <h4>🏠 Maison</h4>

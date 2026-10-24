@@ -715,7 +715,7 @@
         draw();
     }
 
-    /* ═════════ ⤓ Exporter ▾ : CSV, Movebank (CSV), GPX / KML (trajets), 🧮 Ouvrir dans le tableur ═════════ */
+    /* ═════════ ⤓ Exporter ▾ : CSV, Movebank (CSV), GPX / KML (trajets), 🧾 Ouvrir dans le tableur ═════════ */
     function download(name, text, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = A().safeExportFilename ? A().safeExportFilename(name) : name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); }
     function obsRows(D, obs) {
         const head = ['Date', 'Heure', 'Animal', 'Espèce', 'Lieu', 'Latitude', 'Longitude', 'Ce qu’il faisait', 'Nombre', 'Lecture', 'Fiabilité', 'Vu par', 'Source', 'Note'];
@@ -736,7 +736,7 @@
             {icon: '📍', label: 'GPX (trajets)', run: async () => { const s = getScope(), t = await tracksOf(D, s.animals); if (!t.length) return toast('Aucun trajet à exporter.'); download(`${name}.gpx`, C().toGPX(t), 'application/gpx+xml'); }},
             {icon: '📍', label: 'KML (trajets)', run: async () => { const s = getScope(), t = await tracksOf(D, s.animals); if (!t.length) return toast('Aucun trajet à exporter.'); download(`${name}.kml`, C().toKML(t), 'application/vnd.google-earth.kml+xml'); }},
             '-',
-            {icon: '🧮', label: 'Ouvrir dans le tableur', run: () => { const s = getScope(); if (!ext.openRowsInSheet) return toast('Le tableur n’est pas chargé.', 'error'); ext.openRowsInSheet({name: `${name} — observations`, rows: obsRows(D, s.obs)}); }},
+            {icon: '🧾', label: 'Ouvrir dans le tableur', run: () => { const s = getScope(); if (!ext.openRowsInSheet) return toast('Le tableur n’est pas chargé.', 'error'); ext.openRowsInSheet({name: `${name} — observations`, rows: obsRows(D, s.obs)}); }},
         ], {title: '⤓ Exporter'});
     }
     ext.suivi.exportMenu = exportMenu;

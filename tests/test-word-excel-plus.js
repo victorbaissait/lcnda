@@ -1,7 +1,7 @@
 'use strict';
 process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
- * 🧮 Tableur et 📝 traitement de texte — en plus :   node tests/test-word-excel-plus.js
+ * 🧾 Tableur et 📝 traitement de texte — en plus :   node tests/test-word-excel-plus.js
  *  1. sans écran : le tableau croisé (somme, nombre, %, totaux, vides, ordre), les champs de fusion (valeurs, accords, échappement) ;
  *  2. navigateur : 🔀 tableau croisé (aperçu, nouvelle feuille, ↻ actualiser après un ajout, ↶), 📊 graphique vivant qui suit la sélection,
  *     📨 champ de fusion, 👤 remplir avec une fiche, 📨 publipostage (une copie par personne), modèles remplis (demande d'acte).

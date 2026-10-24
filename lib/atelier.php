@@ -11,7 +11,7 @@ declare(strict_types=1);
 const ATELIER_KINDS = ['these' => 'Thèse', 'livre' => 'Livre', 'article' => 'Article', 'memoire' => 'Mémoire', 'exposition' => 'Exposition', 'enquete' => 'Enquête', 'autre' => 'Autre'];
 const ATELIER_TYPES = ['reference', 'note', 'quote', 'media', 'person', 'place', 'event', 'link', 'task', 'draft', 'custom', 'app'];
 /** « Venant du logiciel » : ce que l'élément montre (une fiche, un bloc d'une fiche, la fiche d'un village, une liste, un recueil…). */
-const ATELIER_APP_KINDS = ['person', 'person_block', 'village', 'list', 'recueil', 'investigation', 'battue', 'media', 'atelier_project', 'workbook']; // workbook : 🧮 un classeur du tableur
+const ATELIER_APP_KINDS = ['person', 'person_block', 'village', 'list', 'recueil', 'investigation', 'battue', 'media', 'atelier_project', 'workbook']; // workbook : 🧾 un classeur du tableur
 const ATELIER_REF_KINDS = ['livre', 'article', 'chapitre', 'these', 'archive', 'image', 'presse', 'web', 'objet', 'autre'];
 const ATELIER_READ = ['', 'a_lire', 'en_cours', 'lu', 'exploite'];
 

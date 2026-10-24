@@ -120,7 +120,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: root, encoding: 'utf8', 
             const page = await open();
             const api = (p, action, body, get = false) => p.evaluate(async ({ action, body, get }) => { try { const r = get ? await window.LCNDA_APP.api(action, body || {}) : await window.LCNDA_APP.api(action, {}, { method: 'POST', body }); return { ok: true, r }; } catch (e) { return { ok: false, e: e.message, status: e.status, conflict: e.conflict }; } }, { action, body, get });
 
-            await t('🧮 Tableur, deux onglets : l’enregistrement d’un autre onglet n’est plus écrasé sans le dire', async () => {
+            await t('🧾 Tableur, deux onglets : l’enregistrement d’un autre onglet n’est plus écrasé sans le dire', async () => {
                 const sheets = v => ({ sheets: [{ name: 'F1', cells: { A1: { v } } }] });
                 const id = (await api(page, 'save_workbook', { name: 'Deux onglets', data: sheets(1) })).r.result.id;
                 const a = (await api(page, 'workbook', { id }, true)).r, b = (await api(page, 'workbook', { id }, true)).r;

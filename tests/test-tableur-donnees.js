@@ -1,18 +1,18 @@
 'use strict';
 process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
- * 🧮 Tableur, vague 2 : « 🧮 Modifier les données » partout, « 🎯 Préparer pour… », « 📊 Graphique ▾ » lié à une plage.
+ * 🧾 Tableur, vague 2 : « 🧾 Modifier les données » partout, « 🎯 Préparer pour… », « 📊 Graphique ▾ » lié à une plage.
  *   node tests/test-tableur-donnees.js        (captures si TABLEUR_SHOTS=dossier)
  *  1. lecteurs CSV communs (Node) : parseTable des diagrammes, parseCells de l'Éditeur de graphiques, tableValues des Tableaux
  *     (mêmes résultats qu'avant pour les formules déjà faites) ;
  *  2. navigateur, base neuve :
- *     - Diagrammes → Données → « 🧮 Modifier les données » : le tableur préparé (bandeau, colonnes), une formule, « ✓ Enregistrer et revenir » ;
+ *     - Diagrammes → Données → « 🧾 Modifier les données » : le tableur préparé (bandeau, colonnes), une formule, « ✓ Enregistrer et revenir » ;
  *     - grille de 500 lignes (carte en hexagones) : « Voir les 100 suivantes ↓ », la couleur de la ligne 451 changée reste après Enregistrer ;
  *     - « 📊 Graphique ▾ » : types conseillés, diagramme lié à la plage (bandeau 🔗), relu après un changement du classeur (la plage grandit) ;
- *     - « 🧮 Prendre un classeur du Tableur » (menu de choix, feuille, plage, « Garder le lien ») ;
+ *     - « 🧾 Prendre un classeur du Tableur » (menu de choix, feuille, plage, « Garder le lien ») ;
  *     - « 🎯 Préparer pour… » : ✓ / ⚠️ « C3 contient « env. 9 » : compté comme 9 », aperçu, puis un graphique (Mes graphiques) et une présentation ;
  *     - Éditeur de graphiques (cible « Nom + séries »), Tableaux (objet ▦ Tableur), Recueils (lignes reliées gardées), Présentation (tableau) ;
- *     - Listes → « ⤓ Exporter ▾ → 🧮 Ouvrir dans le tableur » (mêmes colonnes) ; statistiques (« 🧮 Tableur » dans la fenêtre d'export) ;
+ *     - Listes → « ⤓ Exporter ▾ → 🧾 Ouvrir dans le tableur » (mêmes colonnes) ; statistiques (« 🧾 Tableur » dans la fenêtre d'export) ;
  *     - 390 px et mode sombre ; aucune erreur dans la console.
  */
 const assert = require('node:assert/strict');
@@ -74,7 +74,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         eq(await ed(() => JSON.stringify(window.LCNDA_EXT.diagramsInternals.parseTable('Ville;Nombre\n"Saint-Malo; port";"1 200"\nRennes;42'))), JSON.stringify([['Ville', 'Nombre'], ['Saint-Malo; port', '1 200'], ['Rennes', '42']]), 'parseTable des diagrammes : le lecteur commun');
         eq(await ed(() => Object.keys(window.LCNDA_EXT.sheetTargets).sort().join(',')), 'board,diagram,graph,keynote,recueil', 'les endroits déclarés (ext.sheetTargets)');
 
-        /* A. Diagrammes → Données → 🧮 Modifier les données → ✓ Enregistrer et revenir */
+        /* A. Diagrammes → Données → 🧾 Modifier les données → ✓ Enregistrer et revenir */
         await ed(() => window.LCNDA_EXT.openDiagramEditor(null, {spec: {kind: 'columns', o: {title: 'Essai'}, series: [{name: 'Hommes'}], rows: [{label: 'A', s0: 1, color: '#ff0000'}, {label: 'B', s0: 2}]}, name: 'Essai'}));
         await page.waitForSelector('.h-dg-dlg [data-dg-sheet]'); await page.click('.h-dg-dlg [data-dg-sheet]');
         await page.waitForSelector('dialog.xl-dlg[open] .xl-back');
@@ -131,7 +131,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         ok(true, '🎤 une présentation neuve avec le graphique');
         await closeAll();
 
-        /* E. 🧮 Prendre un classeur du Tableur (Diagrammes → Données) */
+        /* E. 🧾 Prendre un classeur du Tableur (Diagrammes → Données) */
         await ed(() => window.LCNDA_EXT.openDiagramEditor(null, {spec: {kind: 'columns', o: {title: 'Pris'}, series: [{name: 'S'}], rows: []}, name: 'Pris'}));
         await page.waitForSelector('.h-dg-dlg [data-dg-paste="0"]'); await page.click('.h-dg-dlg [data-dg-paste="0"]');
         await page.waitForSelector('dialog[open] [data-dg-pastebook]'); await page.click('dialog[open] [data-dg-pastebook]');
@@ -170,7 +170,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         eq(await ed(() => window.__rt.rows.map(r => `${r.c.c1}:${r.person ? r.person.id : ''}:${/^r\d$/.test(r.id) ? r.id : 'neuve'}`).join(' / ')), 'MARTIN Jean:1:r1 / DURAND Pierre::r2 / BERNARD Paul::neuve', '📚 trié Z → A, une ligne ajoutée : la ligne reliée à la fiche le reste');
         await ed(() => document.getElementById('rt-essai').remove());
 
-        /* Présentation : objet Tableau → 🧮 Modifier les données */
+        /* Présentation : objet Tableau → 🧾 Modifier les données */
         await ed(() => window.LCNDA_EXT.keynoteWithObject({t: 'table', rows: [['Année', 'Lieu'], ['1850', 'Tulle']]}, 'Essai présentation'));
         await page.waitForSelector('[data-kn-rail]'); await page.waitForTimeout(600);
         const kb = await ed(() => { const t = [...document.querySelectorAll('dialog[open] table')].filter(x => x.textContent.includes('Tulle')).sort((a, b) => b.getBoundingClientRect().width - a.getBoundingClientRect().width)[0].getBoundingClientRect(); return {x: t.x + t.width / 2, y: t.y + t.height / 2}; });
@@ -180,7 +180,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         ok(/1875\s+Brive/.test(await ed(() => [...document.querySelectorAll('dialog[open] table')].filter(x => x.textContent.includes('Tulle')).pop().innerText)), '🎤 Présentation : le tableau revient du tableur (formule calculée)');
         await closeAll();
 
-        /* G. Listes → ⤓ Exporter ▾ → 🧮 Ouvrir dans le tableur ; statistiques */
+        /* G. Listes → ⤓ Exporter ▾ → 🧾 Ouvrir dans le tableur ; statistiques */
         await ed(() => { window.LCNDA_APP.state.listType = 'persons'; window.LCNDA_APP.setModule('listes'); }); await page.waitForSelector('[data-cols-export]', { timeout: 15000 });
         await page.click('[data-cols-export]'); await page.click('.ui-actmenu-i:has-text("Ouvrir dans le tableur")'); await page.waitForSelector('dialog.xl-dlg[open] .xl-c');
         const lst = await ed(() => { const E = window.LCNDA_EXT.tableurInternals.current; return window.LCNDA_SHEET.matrix(E.wb, E.calc, 0); });

@@ -1,5 +1,5 @@
 /**
- * 🧮 Tableur, vague 2 : l'éditeur commun des données de l'app (maquette validée « 🧮 Tableur », écrans G et I).
+ * 🧾 Tableur, vague 2 : l'éditeur commun des données de l'app (maquette validée « 🧾 Tableur », écrans G et I).
  *  - ext.sheetTargets : ce que chaque endroit attend ({icon, label, columns(opts), build(objets, opts), fromData, back, preview, create}).
  *    Le tableur ne connaît ni les diagrammes ni les tableaux : il lit ces déclarations. Un autre fichier peut en ajouter
  *    (ext.sheetTargets.census = {...}) : elles apparaissent toutes seules dans « 🎯 Préparer pour… ».
@@ -9,8 +9,8 @@
  *    comme 12 »), montre un aperçu, puis crée la chose (diagramme, graphique, présentation…).
  *  - « 📊 Graphique ▾ » : les types conseillés selon la forme de la plage, puis l'éditeur de diagrammes existant, lié à la plage
  *    (spec.live.sheet = {wb, sh, name, sheet, range, grow, head}) : ext.sheetLink.resolve(spec) relit le classeur à l'affichage.
- *  - ext.openRowsInSheet({name, rows}) : « ⤓ Exporter ▾ → 🧮 Ouvrir dans le tableur » des listes et des statistiques.
- * Le moteur : app-tableur-engine.js (LCNDA_SHEET) ; l'écran : heritage-tableur.js. Mode d'emploi : docs/UI.md (« 🧮 Tableur »).
+ *  - ext.openRowsInSheet({name, rows}) : « ⤓ Exporter ▾ → 🧾 Ouvrir dans le tableur » des listes et des statistiques.
+ * Le moteur : app-tableur-engine.js (LCNDA_SHEET) ; l'écran : heritage-tableur.js. Mode d'emploi : docs/UI.md (« 🧾 Tableur »).
  */
 (() => {
     'use strict';
@@ -296,7 +296,7 @@
     };
     const miniTable = rows => `<div class="xl-prev"><table><tbody>${(rows || []).slice(0, 8).map((r, i) => `<tr>${(r || []).slice(0, 8).map(v => `<${i ? 'td' : 'th'}>${esc(str(v))}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table>${(rows || []).length > 8 ? `<small class="muted">… et ${plural(rows.length - 8, 'autre ligne', 'autres lignes')}</small>` : ''}</div>`;
 
-    /* ═════════ « 🧮 Modifier les données » : ouvrir le tableur déjà préparé, puis revenir ═════════ */
+    /* ═════════ « 🧾 Modifier les données » : ouvrir le tableur déjà préparé, puis revenir ═════════ */
     /**
      * openSheetEditor({target, data, opts, name, title, onSave, onClose}) — target : une clé de ext.sheetTargets ou une déclaration ;
      * sans target : data est un classeur (ou des lignes) et onSave reçoit le classeur.
@@ -310,14 +310,14 @@
         const wb = t ? bookOf(t.fromData(data).sheets) : Array.isArray(data) ? bookOf([{name: 'Données', rows: data}]) : X().normalize(data || X().newWorkbook());
         const cols = t?.columns ? t.columns(typeof o === 'object' && o?.kind ? {kind: o.kind, spec: o} : {}) : [];
         const expect = cols.length ? `Colonnes attendues : ${cols.map(c => `${c.label}${c.many ? ' (une ou plusieurs)' : ''}${c.optional ? ' (facultatif)' : ''}`).join(', ')}` : '';
-        const label = title || `${t?.icon || '🧮'} Les données de « ${name || t?.label || 'l’outil'} »`;
+        const label = title || `${t?.icon || '🧾'} Les données de « ${name || t?.label || 'l’outil'} »`;
         return ext.openWorkbook({data: wb, name: `${name || 'Données'} (données)`, onClose,
             back: {label, title: 'Renvoyer les données là d’où elles viennent', html: `<b>${esc(label)}</b><small>${esc(expect ? expect + ' · ' : '')}Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur.</small>`,
                 save: async ed => { const out = t ? (t.back ? t.back(ed, o) : null) : X().compact(ed.wb); return onSave ? onSave(out, ed) : true; }}});
     }
     ext.openSheetEditor = openSheetEditor;
 
-    /* ═════════ « ⤓ Exporter ▾ → 🧮 Ouvrir dans le tableur » (listes, statistiques) ═════════ */
+    /* ═════════ « ⤓ Exporter ▾ → 🧾 Ouvrir dans le tableur » (listes, statistiques) ═════════ */
     /** rows : [[…]] (la première ligne = les titres) ou le texte d'un CSV ; un nouveau classeur, pas encore rangé */
     function openRowsInSheet({name = 'Tableau', rows = [], csv = '', header = true, sheet = ''} = {}) {
         if (!X() || !ext.openWorkbook) return toast('Le tableur n’est pas chargé.', 'error');
@@ -329,8 +329,8 @@
         return ext.openWorkbook({data: wb, name: String(name).slice(0, 180)});
     }
     ext.openRowsInSheet = openRowsInSheet;
-    /** le format « 🧮 Tableur » d'une fenêtre d'export E3 */
-    ext.sheetExportFormat = (getRows, name) => ({id: 'sheet', label: '🧮 Tableur', hint: 'ouvrir dans le tableur', ext: '', quality: false, copy: false, goLabel: '🧮 Ouvrir dans le tableur', run: async () => { const r = await getRows(); setTimeout(() => (typeof r === 'string' ? openRowsInSheet({name: typeof name === 'function' ? name() : name, csv: r}) : openRowsInSheet({name: typeof name === 'function' ? name() : name, rows: r})), 30); }});
+    /** le format « 🧾 Tableur » d'une fenêtre d'export E3 */
+    ext.sheetExportFormat = (getRows, name) => ({id: 'sheet', label: '🧾 Tableur', hint: 'ouvrir dans le tableur', ext: '', quality: false, copy: false, goLabel: '🧾 Ouvrir dans le tableur', run: async () => { const r = await getRows(); setTimeout(() => (typeof r === 'string' ? openRowsInSheet({name: typeof name === 'function' ? name() : name, csv: r}) : openRowsInSheet({name: typeof name === 'function' ? name() : name, rows: r})), 30); }});
 
     /* ═════════ 🎯 Préparer pour… ═════════ */
     function prepare(ed, key = '') {
@@ -464,18 +464,18 @@
             out.live = {...spec.live, sheet: {...L, name: r.name || L.name, sheet: wb.sheets[si].name}, label: `« ${r.name || L.name} » ! ${S.rangeStr(g)}`};
             return out;
         },
-        /** le bandeau : « 🔗 Données : « Classeur » ! A1:C4 · tenu à jour · 🧮 Modifier les données » */
-        bannerHtml(spec) { const L = spec.live.sheet; return `<p class="h-dg-live xl-linkbar">🔗 Données : « ${esc(L.name || 'Classeur')} » ! ${esc(L.range)}${L.sheet ? ` <small>(feuille « ${esc(L.sheet)} »)</small>` : ''} · tenu à jour · <button type="button" class="link-button" data-dg-sheet>🧮 Modifier les données</button> · <button type="button" class="link-button" data-dg-unlive>Les figer</button>${spec._sheetMissing ? '<br>⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus.' : ''}</p>`; },
+        /** le bandeau : « 🔗 Données : « Classeur » ! A1:C4 · tenu à jour · 🧾 Modifier les données » */
+        bannerHtml(spec) { const L = spec.live.sheet; return `<p class="h-dg-live xl-linkbar">🔗 Données : « ${esc(L.name || 'Classeur')} » ! ${esc(L.range)}${L.sheet ? ` <small>(feuille « ${esc(L.sheet)} »)</small>` : ''} · tenu à jour · <button type="button" class="link-button" data-dg-sheet>🧾 Modifier les données</button> · <button type="button" class="link-button" data-dg-unlive>Les figer</button>${spec._sheetMissing ? '<br>⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus.' : ''}</p>`; },
         open(spec, onSaved) { const L = spec.live.sheet; return ext.openWorkbook?.({id: Number(L.wb), select: {sheet: L.sh || L.sheet, range: L.range}, onSaved}); },
     };
 
-    /* ═════════ 🧮 Prendre un classeur du Tableur (Diagrammes → Données) : le classeur (menu de choix), la feuille, la plage ═════════ */
+    /* ═════════ 🧾 Prendre un classeur du Tableur (Diagrammes → Données) : le classeur (menu de choix), la feuille, la plage ═════════ */
     /** → Promise<{mode: 'copy'|'link', cells: [[texte]], link: {wb, sh, name, sheet, range, grow, head}} | null> */
     ext.chooseSheetRange = ({title = 'Prendre un classeur du Tableur', link = true} = {}) => new Promise(resolve => {
         const P = window.LCNDA_PICKER || A(); let done = false, book = null;
         const S = X(); if (!S) { toast('Le tableur n’est pas chargé.', 'error'); return resolve(null); }
         const cur = dlg => { const si = Number(dlg.querySelector('[name=xl_sheet]')?.value || 0), g = S.parseRange(dlg.querySelector('[name=xl_range]')?.value || ''); return {si, g}; };
-        ext.openDialog({eyebrow: 'TABLEUR', title: `🧮 ${title}`, wide: true, submitLabel: 'Prendre ces données',
+        ext.openDialog({eyebrow: 'TABLEUR', title: `🧾 ${title}`, wide: true, submitLabel: 'Prendre ces données',
             body: `<div class="xl-take"><label>Classeur</label>${P.pickerField({name: 'xl_book', kind: 'workbook', placeholder: 'Nom du classeur…'})}<div data-xl-take></div></div>`,
             onOpen: dlg => {
                 dlg.addEventListener('close', () => { if (!done) resolve(null); }, {once: true});

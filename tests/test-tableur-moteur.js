@@ -1,6 +1,6 @@
 'use strict';
 /**
- * 🧮 Le moteur commun des tableaux (assets/js/app-tableur-engine.js), sans navigateur :   node tests/test-tableur-moteur.js
+ * 🧾 Le moteur commun des tableaux (assets/js/app-tableur-engine.js), sans navigateur :   node tests/test-tableur-moteur.js
  *  1. formules : français et anglais, $A$1, plages, autres feuilles, noms, recalcul par dépendances, boucles, erreurs expliquées ;
  *  2. dates des actes : « vers 1784 », « an II », « 3 frimaire an XII », dates impossibles, ≈ ;
  *  3. fonctions : la liste demandée, tableaux qui débordent (UNIQUE, TRIER, FILTRE) ;

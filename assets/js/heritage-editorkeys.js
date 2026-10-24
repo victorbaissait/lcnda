@@ -14,7 +14,7 @@
     const toast = (...a) => A().toast(...a);
     const kit = () => A()?.shortcutKit;
     const KEY = 'genealogie-editor-shortcuts', CMDS = 'genealogie-editor-cmds', TAB = 'genealogie-editor-shortcuts-tab';
-    const EDITORS = [['montage', '🎬', 'Montage vidéo'], ['audio', '🎧', 'Son'], ['audio-quick', '⚡', 'Son rapide'], ['audio-studio', '🎚️', 'Studio son'], ['retouch', '🎚️', 'Retouche des photos'], ['layout', '📐', 'Mise en page'], ['vector', '✒️', 'Dessin vectoriel'], ['house', '🏠', 'Maison (plan et 3D)'], ['decortree', '🌳', 'Arbre décoratif'], ['keynote', '🎤', 'Présentation (Keynote)'], ['sheet', '🧮', 'Tableur'], ['textdoc', '📝', 'Traitement de texte']];
+    const EDITORS = [['montage', '🎬', 'Montage vidéo'], ['audio', '🎧', 'Son'], ['audio-quick', '⚡', 'Son rapide'], ['audio-studio', '🎚️', 'Studio son'], ['retouch', '🎚️', 'Retouche des photos'], ['layout', '📐', 'Mise en page'], ['vector', '✒️', 'Dessin vectoriel'], ['house', '🏠', 'Maison (plan et 3D)'], ['decortree', '🌳', 'Arbre décoratif'], ['keynote', '🎤', 'Présentation (Keynote)'], ['sheet', '🧾', 'Tableur'], ['textdoc', '📝', 'Traitement de texte']];
     // les attributs qui disent « quelle commande » sur les boutons de chaque outil
     const ATTR = {
         montage: /^data-mt-cmd$/, // ses menus disent tout (lecture, outils, onglets, pistes)

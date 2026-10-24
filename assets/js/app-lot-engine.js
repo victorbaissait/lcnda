@@ -25,7 +25,7 @@
         pdf: 'pdf', mp3: 'audio', wav: 'audio', ogg: 'audio', flac: 'audio', m4a: 'audio', aiff: 'audio', aif: 'audio',
         mp4: 'video', mov: 'video', webm: 'video'};
     const KIND_LABEL = {image: 'image', doc: 'document', sheet: 'classeur', pdf: 'PDF', audio: 'son', video: 'vidéo', other: 'fichier'};
-    const KIND_ICON = {image: '🖼', doc: '📝', sheet: '🧮', pdf: '📄', audio: '🎧', video: '🎬', other: '📁'};
+    const KIND_ICON = {image: '🖼', doc: '📝', sheet: '🧾', pdf: '📄', audio: '🎧', video: '🎬', other: '📁'};
     const extOf = name => { const m = /\.([a-z0-9]{1,8})$/i.exec(String(name || '')); return m ? m[1].toLowerCase() : ''; };
     const baseOf = name => String(name || '').replace(/\.[a-z0-9]{1,8}$/i, '');
     const normExt = e => ({jpeg: 'jpg', htm: 'html', markdown: 'md', aif: 'aiff'}[e] || e);
@@ -105,7 +105,7 @@
         {name: '⬛ Vignettes carrées', summary: 'carré 1:1, 400 px, JPG', recipe: {out: 'zip', cards: [{type: 'crop', p: {ratio: '1:1'}}, {type: 'resize', p: {by: 'long', long: 400}}, {type: 'format', p: {image: 'jpg'}}, {type: 'quality', p: {q: 80}}]}},
         {name: '🛰 Partager sans la position GPS', summary: 'métadonnées effacées', recipe: {out: 'zip', cards: [{type: 'strip'}]}},
         {name: '📝 Documents en Word', summary: 'tous en .docx', recipe: {out: 'zip', cards: [{type: 'format', p: {doc: 'docx'}}]}},
-        {name: '🧮 Classeurs en CSV', summary: 'la 1re feuille en CSV', recipe: {out: 'zip', cards: [{type: 'format', p: {sheet: 'csv'}}]}},
+        {name: '🧾 Classeurs en CSV', summary: 'la 1re feuille en CSV', recipe: {out: 'zip', cards: [{type: 'format', p: {sheet: 'csv'}}]}},
     ].map(b => ({...b, recipe: cleanRecipe(b.recipe)}));
 
     /* ═════ Renommer ═════ */

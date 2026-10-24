@@ -1,11 +1,11 @@
 /**
- * 🧮 Le moteur commun des tableaux (window.LCNDA_SHEET ; aussi require() dans Node pour les essais).
+ * 🧾 Le moteur commun des tableaux (window.LCNDA_SHEET ; aussi require() dans Node pour les essais).
  * Sans bibliothèque, sans écran : formules en français (et en anglais), dates des actes (« vers 1784 », « an II »,
  * comprises comme les dates C4 : UI.readDate), recalcul par dépendances, erreurs expliquées, CSV / TSV / collage,
  * XLSX et ODS (lire et écrire), JSON, et le seul fabricant de fichiers ZIP de l'app.
  * Calcul sûr : jamais eval ni Function ; tailles, profondeur et nombre de cellules bornés.
- * Maquette validée : « 🧮 Tableur » (écrans A à J) ; mode d'emploi : docs/UI.md, « 🧮 Tableur ».
- * L'écran (Outils de modification → 🧮 Tableur) est dans heritage-tableur.js.
+ * Maquette validée : « 🧾 Tableur » (écrans A à J) ; mode d'emploi : docs/UI.md, « 🧾 Tableur ».
+ * L'écran (Outils de modification → 🧾 Tableur) est dans heritage-tableur.js.
  */
 (function (root, factory) {
     const S = factory(root);

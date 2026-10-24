@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * 🧮 Tableur — lien avec la base (maquette validée « 🧮 Tableur », écran E « Lien avec la base — remplir, tenir à jour, envoyer »).
+ * 🧾 Tableur — lien avec la base (maquette validée « 🧾 Tableur », écran E « Lien avec la base — remplir, tenir à jour, envoyer »).
  * Interface : assets/js/heritage-tableur-base.js (branché sur l'éditeur heritage-tableur.js, menu Données).
  *
  *  GET  sheet_sources                 → ce qu'on peut prendre (sortes, colonnes, mes listes, dépouillements, communes recensées…)

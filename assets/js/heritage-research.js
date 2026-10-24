@@ -577,7 +577,7 @@
     }
     /* ─── 🔗 Venant du logiciel : une fiche, un bloc, un village, une liste, un recueil… ─── */
     const APP_KINDS = {person: ['👤', 'Une fiche (personne)'], person_block: ['🧩', 'Un bloc d’une fiche'], village: ['🏘️', 'La fiche d’un village'], list: ['📋', 'Une liste'],
-        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier'], workbook: ['🧮', 'Un classeur (budget, planning, tableau des sources…)']};
+        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier'], workbook: ['🧾', 'Un classeur (budget, planning, tableau des sources…)']};
     // ces sortes se choisissent avec le menu de choix unique (docs/PICKER.md) ; villages, listes, recueils et projets gardent leur recherche
     const APP_PK = {person: 'person', person_block: 'person', investigation: 'investigation', battue: 'battue', media: 'media', workbook: 'workbook'};
     async function appSearch(kind, q) {
@@ -612,7 +612,7 @@
                     else more.innerHTML = ''; };
                 let timer = 0;
                 const pk = dl.querySelector('[data-app-pk]');
-                pk.addEventListener('picker-create', e => { // 🧮 « ＋ Créer le classeur « … » » : un classeur vide, rangé dans le Tableur
+                pk.addEventListener('picker-create', e => { // 🧾 « ＋ Créer le classeur « … » » : un classeur vide, rangé dans le Tableur
                     if (e.detail?.kind !== 'workbook') return; e.preventDefault();
                     post('save_workbook', {name: e.detail.text || 'Mon classeur', kind: 'book', data: window.LCNDA_SHEET.compact(window.LCNDA_SHEET.newWorkbook())}).then(r => e.detail.pick({id: Number(r.result.id), title: e.detail.text || 'Mon classeur'})).catch(err => toast(err.message, 'error'));
                 });
@@ -635,9 +635,9 @@
                 const tplKey = form.wb_tpl?.value || '';
                 if (!chosen && !(form.kind.value === 'workbook' && tplKey)) return window.LCNDA_UI.fail(form.querySelector('.pk') || form.querySelector('[data-app-q]'), 'Choisis dans la liste.');
                 const f = Object.fromEntries(new FormData(form)), kind = f.kind;
-                if (kind === 'workbook' && tplKey) { // 🧮 un nouveau classeur d'après un modèle : rangé dans le Tableur, puis ajouté au projet
+                if (kind === 'workbook' && tplKey) { // 🧾 un nouveau classeur d'après un modèle : rangé dans le Tableur, puis ajouté au projet
                     const t = (ext.sheetTemplates || []).find(x => x.key === tplKey), name = (f.title || '').trim() || t.name;
-                    const r = await post('save_workbook', {name, kind: 'book', data: window.LCNDA_SHEET.compact(t.make())}); chosen = {key: String(r.result.id), label: name, extra: '🧮 classeur'};
+                    const r = await post('save_workbook', {name, kind: 'book', data: window.LCNDA_SHEET.compact(t.make())}); chosen = {key: String(r.result.id), label: name, extra: '🧾 classeur'};
                 }
                 const blockLabel = kind === 'person_block' ? (blocks.find(b => b[0] === f.sub) || [, f.sub])[1] : '';
                 const some = kind === 'recueil' && f.scope === 'some', pf = pages.find(p => p.id === Number(f.page_from)), pt = pages.find(p => p.id === Number(f.page_to));
@@ -680,7 +680,7 @@
             else if (d.kind === 'media') { const r = await api('list', {type: 'media', q: d.label, limit: 40}); const m = (r.rows || []).find(x => String(x.id) === String(d.key));
                 html = m ? ((m.media_type || 'image') === 'image' ? `<img class="h-at-appimg" src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="">` : `<p>${esc(m.media_type)} · ${esc(m.filename)}</p>`) + (m.transcription ? `<p class="h-at-notetext">${esc(m.transcription.slice(0, 400))}</p>` : '') : '<p class="muted">Média introuvable (supprimé ?).</p>'; }
             else if (d.kind === 'workbook') { const r = await api('workbook', {id: d.key}); const sh0 = r.data?.sheets?.[0], S = window.LCNDA_SHEET, wb = S ? S.normalize(r.data) : null, m = wb ? S.matrix(wb, new S.Calc(wb), 0, null, {display: true}).slice(0, 8).map(row => row.slice(0, 6)) : [];
-                html = `<p><b>🧮 ${esc(r.name)}</b> · ${plural((r.data?.sheets || []).length, 'feuille', 'feuilles')}${sh0 ? ` (${esc((r.data.sheets || []).map(x => x.name).slice(0, 5).join(', '))})` : ''}</p>${m.length ? `<div class="xl-prev"><table><tbody>${m.map((row, i) => `<tr>${row.map(v => `<${i ? 'td' : 'th'}>${esc(v)}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table></div>` : ''}`; }
+                html = `<p><b>🧾 ${esc(r.name)}</b> · ${plural((r.data?.sheets || []).length, 'feuille', 'feuilles')}${sh0 ? ` (${esc((r.data.sheets || []).map(x => x.name).slice(0, 5).join(', '))})` : ''}</p>${m.length ? `<div class="xl-prev"><table><tbody>${m.map((row, i) => `<tr>${row.map(v => `<${i ? 'td' : 'th'}>${esc(v)}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table></div>` : ''}`; }
             else html = `<p class="muted">${esc(d.extra || '')}</p>`;
         } catch (e) { html = `<p class="muted">Aperçu impossible : ${esc(e.message)}</p>`; }
         if (box.isConnected) box.innerHTML = html;
@@ -816,7 +816,7 @@
             <button type="button" class="button secondary" data-x="print">🖨 Imprimer ou enregistrer en PDF<small>Le plan et les textes, mis en page, avec la bibliographie à la fin</small></button>
             <button type="button" class="button secondary" data-x="csl">📚 Références (CSL JSON)<small>Pour Zotero, Zettlr, Pandoc : garde les auteurs, dates et pages au mieux</small></button>
             <button type="button" class="button secondary" data-x="csv">📊 Tableau de tous les éléments (.csv)<small>Pour un tableur</small></button>
-            ${ext.openWorkbook ? '<button type="button" class="button secondary" data-x="sheet">🧮 Tableau de tous les éléments, dans le tableur<small>Ouvert tout de suite dans le 🧮 Tableur de l’app (trier, filtrer, compter, enregistrer)</small></button>' : ''}
+            ${ext.openWorkbook ? '<button type="button" class="button secondary" data-x="sheet">🧾 Tableau de tous les éléments, dans le tableur<small>Ouvert tout de suite dans le 🧾 Tableur de l’app (trier, filtrer, compter, enregistrer)</small></button>' : ''}
             <button type="button" class="button secondary" data-x="full">💾 Projet complet (.json)<small>Sauvegarde ou partage : dossiers, éléments, liens, étiquettes ; se réimporte tel quel avec « Importer… » (sans les fichiers joints)</small></button>
             <button type="button" class="button secondary" data-x="plan">🗂️ Enregistrer ce plan comme plan de départ<small>Les dossiers de ce projet seront proposés à la création d’un nouveau projet</small></button></div>`,
             onOpen: dl => dl.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => {

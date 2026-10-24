@@ -1,7 +1,7 @@
 'use strict';
 process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
- * 🧮 Tableur (Listes → Outils de modification), API et navigateur :   node tests/test-tableur.js
+ * 🧾 Tableur (Listes → Outils de modification), API et navigateur :   node tests/test-tableur.js
  *  1. API : enregistrer, relire, renommer, dupliquer, supprimer un classeur ; données forgées refusées ou nettoyées ; CSRF ;
  *  2. navigateur (Playwright ; sinon sauté), base neuve :
  *     liste vide → « ＋ Nouveau classeur » ; saisie au clavier (Tab, Entrée) ; formule avec la liste des fonctions ;

@@ -112,7 +112,7 @@
             {id: 'pdf', hint: 'les notices illustrées (« Enregistrer en PDF »)', ext: '', run: async () => print()},
             {id: 'print', hint: 'les notices illustrées', run: async () => print()},
             {id: 'csv', label: '📊 Tableur', hint: 'CSV (Excel, Numbers, LibreOffice)', ext: 'csv', run: async o => csv(o.filename)},
-            ...(window.LCNDA_EXT?.sheetExportFormat ? [window.LCNDA_EXT.sheetExportFormat(tableRows, title)] : []), // 🧮 les mêmes colonnes, ouvertes dans le tableur
+            ...(window.LCNDA_EXT?.sheetExportFormat ? [window.LCNDA_EXT.sheetExportFormat(tableRows, title)] : []), // 🧾 les mêmes colonnes, ouvertes dans le tableur
             {id: 'file', label: '💾 Fichier', hint: 'pour une autre base : « ⤒ Importer » → « Un fichier exporté d’ici »', ext: 'json', run: async o => file(o.filename)}]});
     };
     /* ═════════ Exporter (E3) : une fiche ═════════ */

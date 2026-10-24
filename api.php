@@ -247,7 +247,7 @@ try {
         require_once __DIR__ . '/lib/image_prints.php';
         image_prints_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
-    if (in_array($action, ['sheet_sources', 'sheet_fill', 'sheet_refs', 'sheet_push', 'sheet_push_undo'], true)) { // 🧮 Tableur : remplir depuis l'app, envoyer vers la base, ↶ Annuler (lib/sheet_link.php)
+    if (in_array($action, ['sheet_sources', 'sheet_fill', 'sheet_refs', 'sheet_push', 'sheet_push_undo'], true)) { // 🧾 Tableur : remplir depuis l'app, envoyer vers la base, ↶ Annuler (lib/sheet_link.php)
         require_once __DIR__ . '/lib/sheet_link.php';
         sheet_link_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
@@ -427,7 +427,7 @@ try {
         'dna_lines' => json_response(dna_lines($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['depth'] ?? 10))),
         'dna_tree' => json_response(dna_tree_data($pdo, safe_int($_GET['kit'] ?? 0), safe_int($_GET['gen'] ?? 8))),
         'vector_doc' => json_response(vector_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
-        'workbooks' => json_response(['items' => workbooks_list($pdo, (string) ($_GET['kind'] ?? 'book'))]), // 🧮 Tableur (lib/workbooks.php)
+        'workbooks' => json_response(['items' => workbooks_list($pdo, (string) ($_GET['kind'] ?? 'book'))]), // 🧾 Tableur (lib/workbooks.php)
         'workbook' => json_response(workbook_get($pdo, safe_int($_GET['id'] ?? 0))),
         'textdocs' => json_response(['items' => textdocs_list($pdo, (string) ($_GET['kind'] ?? 'doc'))]), // 📝 Traitement de texte (lib/textdocs.php)
         'textdoc' => json_response(textdoc_get($pdo, safe_int($_GET['id'] ?? 0))),
@@ -9658,7 +9658,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_periodical' => save_periodical($pdo,$data),
             'save_diagram' => save_diagram($pdo,$data),
             'save_vector_doc' => save_vector_doc($pdo,$data),
-            'save_workbook' => save_workbook($pdo,$data), // 🧮 Tableur
+            'save_workbook' => save_workbook($pdo,$data), // 🧾 Tableur
             'rename_workbook' => rename_workbook($pdo,$data),
             'delete_workbook' => delete_workbook($pdo,$data),
             'duplicate_workbook' => duplicate_workbook($pdo,$data),

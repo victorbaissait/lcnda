@@ -37,7 +37,7 @@
         oldmap: {sym: '🗺️', add: '＋ Ajouter une carte…', one: 'carte', fem: true, none: 'Aucune carte', label: '🗺️ Cartes'},
         act: {sym: '📜', add: '＋ Ajouter une transcription…', one: 'transcription', fem: true, none: 'Aucune transcription', label: '📜 Transcriptions'},
         photomap: {sym: '📸', add: '＋ Ajouter une carte de photos…', one: 'carte', fem: true, none: 'Aucune carte de photos', label: '📸 Cartes de photos'}, // lib/photomaps.php
-        workbook: {sym: '🧮', add: '＋ Ajouter un classeur…', one: 'classeur', none: 'Aucun classeur', label: '🧮 Classeurs'}, // lib/textdocs.php
+        workbook: {sym: '🧾', add: '＋ Ajouter un classeur…', one: 'classeur', none: 'Aucun classeur', label: '🧾 Classeurs'}, // lib/textdocs.php
         textdoc: {sym: '📝', add: '＋ Ajouter un document…', one: 'document', none: 'Aucun document', label: '📝 Documents'}, // 📝 Traitement de texte
         parcel: {sym: '▦', add: '＋ Ajouter une parcelle…', one: 'parcelle', fem: true, none: 'Aucune parcelle', label: '▦ Parcelles'}, // 🗺 Cadastre (heritage-cadastre.js)
         pet: {sym: '🐾', ph: 'Nom, espèce, code de bague, puce… (2 lettres suffisent)', add: '＋ Ajouter un animal…', one: 'animal', many: 'animaux', none: 'Aucun animal', label: '🐾 Animaux'}, // 🐾 Suivi des animaux (lib/suivi.php)

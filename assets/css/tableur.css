@@ -1,4 +1,4 @@
-/* 🧮 Tableur (heritage-tableur.js) — maquette validée « 🧮 Tableur », écrans A à J.
+/* 🧾 Tableur (heritage-tableur.js) — maquette validée « 🧾 Tableur », écrans A à J.
    Grille HTML (pas de canvas) : seules les cases visibles sont dans la page ; volets figés par des calques « collants ». */
 .xl-dlg { --xl-bg: var(--card-bg, #fff); --xl-ink: var(--ink, #080808); --xl-grid: #e1e3e8; --xl-head: #f1f3f6; --xl-head-ink: #5d6370; --xl-blue: var(--blue-bright, #055dff); --xl-sel: rgba(5, 93, 255, .12); --xl-soft: var(--blue-soft, #eaf2ff); --xl-muted: var(--muted, #6d6d6d); --xl-err: #d0182f; --xl-ok: #1a7f3c; --xl-zebra: #f8f9fb; --xl-frz: #e8eef7; --xl-line: var(--ink, #080808); --xl-gridc: #eef0f3; }
 :root[data-theme="dark"] .xl-dlg { --xl-bg: #1f2023; --xl-ink: #e8e8e8; --xl-soft: #1a2a3d; --xl-blue: #5b8cff; --xl-muted: #a3a9b5; --xl-grid: #3a3d44; --xl-head: #2a2c31; --xl-head-ink: #a3a9b5; --xl-sel: rgba(91, 140, 255, .22); --xl-err: #ff6b7c; --xl-ok: #47c977; --xl-zebra: #26282d; --xl-frz: #26324a; --xl-line: #8b8f97; --xl-gridc: #2c2f35; }
@@ -179,7 +179,7 @@ dialog.modal.xl-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
     .xl-status { font-size: 11px; }
     .xl-menu-list { position: fixed; left: 8px; right: 8px; top: auto; min-width: 0; }
 }
-/* ═════ Vague 2 : « 🧮 Modifier les données », « 🎯 Préparer pour… », plage liée (heritage-tableur-cibles.js) ═════ */
+/* ═════ Vague 2 : « 🧾 Modifier les données », « 🎯 Préparer pour… », plage liée (heritage-tableur-cibles.js) ═════ */
 .xl-back { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 7px 12px; background: #eaf2ff; border-bottom: 1.5px solid #b9d0f5; color: #12305e; }
 .xl-back-txt { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 1px; font-size: 13px; }
 .xl-back-txt small { color: #3d5a86; font-size: 12px; }

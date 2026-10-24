@@ -19,7 +19,7 @@ const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'ba
     'contact', // 📇 Répertoire des vivants (destinataires des « Questions aux proches »)
     'archive_service', // 🏛 services d'archives (lib/archive_services.php)
     'event', // 📅 événements (personnes et couples) : un passage d'un son relié à un événement (Studio son, lib/audio_studio.php)
-    'workbook', 'textdoc', // 🧮 classeurs du Tableur, 📝 documents du Traitement de texte (lib/textdocs.php)
+    'workbook', 'textdoc', // 🧾 classeurs du Tableur, 📝 documents du Traitement de texte (lib/textdocs.php)
     'parcel', // ▦ parcelles du cadastre (lib/cadastre.php)
     'mylist', // 📋 Mes listes (custom_lists) : le groupe de personnes d'un diagramme (« Depuis l'app », lib/diagram_options.php)
     'pet', 'tsite', 'agroup']; // 🐾 animaux (fiches « pets »), 🏞 sites de suivi, 👥 groupes d'animaux (lib/suivi.php)
@@ -35,7 +35,7 @@ const PICKER_LABELS = [
     'mylist' => '📋 Mes listes',
     'archive_service' => '🏛 Services d’archives',
     'event' => '📅 Événements',
-    'workbook' => '🧮 Classeurs', 'textdoc' => '📝 Documents',
+    'workbook' => '🧾 Classeurs', 'textdoc' => '📝 Documents',
     'parcel' => '▦ Parcelles',
     'pet' => '🐾 Animaux', 'tsite' => '🏞 Sites de suivi', 'agroup' => '👥 Groupes d’animaux',
 ];
@@ -197,7 +197,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'event' => picker_events($pdo, $q, $offset, $limit),
             'archive_service' => function_exists('picker_archive_services') ? picker_archive_services($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🏛 lib/archive_services.php
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
-            'workbook' => function_exists('picker_workbooks') ? picker_workbooks($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🧮 lib/textdocs.php
+            'workbook' => function_exists('picker_workbooks') ? picker_workbooks($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🧾 lib/textdocs.php
             'textdoc' => function_exists('picker_textdocs') ? picker_textdocs($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 📝 lib/textdocs.php
             'pet' => function_exists('picker_pets') ? picker_pets($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🐾 lib/suivi.php
             'tsite' => function_exists('picker_tsites') ? picker_tsites($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],

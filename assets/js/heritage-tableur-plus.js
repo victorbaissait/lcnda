@@ -1,5 +1,5 @@
 /**
- * 🧮 Tableur — en plus (branché sur heritage-tableur.js par ses crochets ext.sheetMenuExtra / ext.sheetCommands) :
+ * 🧾 Tableur — en plus (branché sur heritage-tableur.js par ses crochets ext.sheetMenuExtra / ext.sheetCommands) :
  *  - 🔀 Tableau croisé dynamique : une plage avec des titres → une nouvelle feuille « lignes × colonnes » (nombre, somme,
  *    moyenne, plus petit, plus grand, nombre de valeurs différentes ; en % de la ligne, de la colonne ou du tout ; totaux).
  *    La feuille garde d'où elle vient (sheet.pivot) : « ↻ Actualiser le tableau croisé » la refait d'après les données du moment.

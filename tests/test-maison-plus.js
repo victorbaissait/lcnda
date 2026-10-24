@@ -158,7 +158,7 @@ const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJA
             assert.equal(await p.evaluate(() => window.__ed2.house.floors[0].rooms[0].people[0].role), 'née ici, sa chambre', 'relu par l’éditeur');
             await p.evaluate(() => { window.__ed2.cmd('close'); }); await p.waitForTimeout(300);
         });
-        await t('navigateur : 🧰 surfaces (et 🧮 Tableur), ⚠️ vérifier (clic = aller à l’objet), ✂ ligne de coupe tracée sur le plan', async () => {
+        await t('navigateur : 🧰 surfaces (et 🧾 Tableur), ⚠️ vérifier (clic = aller à l’objet), ✂ ligne de coupe tracée sur le plan', async () => {
             await blur();
             await p.evaluate(() => window.__ed.setTab('house')); await p.waitForTimeout(200); await openAll();
             assert.ok(await p.$('.h-hs-dlg [data-hs-cmd="plus:surfaces"]'), await p.$eval('.h-hs-dlg [data-hs-pane]', el => el.textContent.slice(0, 400)));

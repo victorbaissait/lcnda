@@ -424,7 +424,7 @@
                 {icon: '📍', label: 'GPX (ce trajet)', disabled: !pts.length, run: () => dl(`${me.title}.gpx`, C().toGPX([{name: me.title, points: pts}]), 'application/gpx+xml')},
                 {icon: '📍', label: 'KML (ce trajet)', disabled: !pts.length, run: () => dl(`${me.title}.kml`, C().toKML([{name: me.title, points: pts}]), 'application/vnd.google-earth.kml+xml')},
                 {icon: '📡', label: 'Movebank (CSV)', disabled: !pts.length, run: () => dl(`${me.title} — movebank.csv`, C().toMovebank([{name: me.title, taxon: det.profile?.sci_name || det.profile?.taxon || '', tag: det.marks.find(m => /gps|satellite|vhf/.test(m.kind))?.code || '', points: pts}]), 'text/csv;charset=utf-8')},
-                {icon: '🧮', label: 'Ouvrir dans le tableur', disabled: !pts.length, run: () => ext.openRowsInSheet?.({name: `${me.title} — trajet`, rows: [['Date', 'Heure', 'Latitude', 'Longitude'], ...pts.map(p => [U().tIso(p[0]), U().tTime(p[0]), p[1], p[2]])]})}], {title: '⤓ Exporter'}); }
+                {icon: '🧾', label: 'Ouvrir dans le tableur', disabled: !pts.length, run: () => ext.openRowsInSheet?.({name: `${me.title} — trajet`, rows: [['Date', 'Heure', 'Latitude', 'Longitude'], ...pts.map(p => [U().tIso(p[0]), U().tTime(p[0]), p[1], p[2]])]})}], {title: '⤓ Exporter'}); }
         });
         panel.querySelector('[data-link]')?.addEventListener('change', e => { link = e.target.checked; draw(); });
         draw();

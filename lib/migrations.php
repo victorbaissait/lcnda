@@ -2131,7 +2131,7 @@ function schema_v49(PDO $pdo): void
     )");
 }
 
-/** 🧮 Tableur (lib/workbooks.php, assets/js/heritage-tableur.js) : les classeurs (plusieurs feuilles, formules, mise en forme)
+/** 🧾 Tableur (lib/workbooks.php, assets/js/heritage-tableur.js) : les classeurs (plusieurs feuilles, formules, mise en forme)
  *  gardés en JSON ; kind = 'book' (un classeur) ou 'template' (« Mes modèles ») ; info = petit résumé pour la liste. */
 function schema_v50(PDO $pdo): void
 {
@@ -2245,7 +2245,7 @@ function schema_v57(PDO $pdo): void
     textdocs_schema($pdo);
 }
 
-/** 🧮 Tableur, lien avec la base (lib/sheet_link.php) : les envois « 📤 Envoyer vers la base » (sheet_pushes : jeton
+/** 🧾 Tableur, lien avec la base (lib/sheet_link.php) : les envois « 📤 Envoyer vers la base » (sheet_pushes : jeton
  *  d'annulation, ce que l'envoi a créé et les liens qu'il a posés), pour que « ↶ Annuler » remette la base comme avant. */
 function schema_v58(PDO $pdo): void
 {

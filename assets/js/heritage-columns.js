@@ -128,7 +128,7 @@
             });
         });
     }
-    /* ⤓ Exporter ▾ : la liste telle qu'elle est affichée (colonnes montrées, lignes filtrées) → 🧮 le tableur, ou un CSV */
+    /* ⤓ Exporter ▾ : la liste telle qu'elle est affichée (colonnes montrées, lignes filtrées) → 🧾 le tableur, ou un CSV */
     const cellText = c => (c.innerText || c.textContent || '').replace(/[↑↓]/g, '').replace(/\s+/g, ' ').trim();
     function shownRows(table) {
         const vis = c => !c.hidden && c.offsetParent !== null || (!c.hidden && !c.closest('[hidden]'));
@@ -141,7 +141,7 @@
     function exportMenu(btn, table) {
         const UI = window.LCNDA_UI, rows = () => shownRows(table);
         UI.menuAt(btn, [
-            {icon: '🧮', label: 'Ouvrir dans le tableur', help: 'mêmes colonnes, mêmes filtres', run: () => ext.openRowsInSheet({name: listName(), rows: rows()})},
+            {icon: '🧾', label: 'Ouvrir dans le tableur', help: 'mêmes colonnes, mêmes filtres', run: () => ext.openRowsInSheet({name: listName(), rows: rows()})},
             {icon: '🧾', label: 'En CSV (Excel, LibreOffice…)', run: () => { const SH = window.LCNDA_SHEET, m = rows(); if (!SH || m.length < 2) return A().toast('Rien à exporter : la liste est vide.'); const name = (A().safeExportFilename ? A().safeExportFilename(listName(), 'liste') : 'liste') + '.csv';
                 const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([SH.toCSV(m, {sep: ';'})], {type: 'text/csv;charset=utf-8'})); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
         ], {title: `${Math.max(0, rows().length - 1)} lignes affichées`});

@@ -64,7 +64,7 @@
                     <button type="button" class="button small secondary" data-rt-delrow ${g ? '' : 'disabled'}>🗑 ${g && g.r1 > g.r0 ? 'Lignes' : 'Ligne'}</button>
                     <button type="button" class="button small secondary" data-rt-delcol ${g ? '' : 'disabled'}>🗑 ${g && g.c1 > g.c0 ? 'Colonnes' : 'Colonne'}</button>
                     <span class="h-rt-sep"></span>
-                    ${ext.openSheetEditor ? '<button type="button" class="button small secondary" data-rt-sheet title="Le tableur en grand : formules, tri, filtres, coller depuis Excel… puis « ✓ Enregistrer et revenir » (les lignes reliées à une fiche le restent)">🧮 Ouvrir dans le tableur</button>' : ''}
+                    ${ext.openSheetEditor ? '<button type="button" class="button small secondary" data-rt-sheet title="Le tableur en grand : formules, tri, filtres, coller depuis Excel… puis « ✓ Enregistrer et revenir » (les lignes reliées à une fiche le restent)">🧾 Ouvrir dans le tableur</button>' : ''}
                     <button type="button" class="button small secondary" data-rt-csv title="Télécharger le tableau (s’ouvre dans Excel, Numbers, LibreOffice)">⤓ Exporter en CSV</button>
                     <span class="muted h-rt-hint">Coller depuis un tableur (ou glisser un fichier .csv) remplit les cellules · Entrée : cellule du dessous · Maj + Entrée : à la ligne</span></div>
                 <div class="h-rt-wrap"><table class="h-rt ${free ? 'is-free' : ''}"><thead><tr><th class="h-rt-corner">#</th>${t.cols.map((c, ci) => `<th data-rt-col="${ci}">${free ? '<span class="h-rt-grip" draggable="true" title="Glisser pour déplacer la colonne">⠿</span>' : ''}<input data-rt-colname="${ci}" value="${esc(c.name)}" placeholder="Colonne ${ci + 1}"></th>`).join('')}</tr></thead>

@@ -395,7 +395,7 @@ function textdoc_to_media(PDO $pdo, array $data): array
     return ['media_id' => $id, 'filename' => $name];
 }
 
-/* ═════════ Le menu de choix unique (lib/picker.php) : 🧮 classeurs et 📝 documents ═════════ */
+/* ═════════ Le menu de choix unique (lib/picker.php) : 🧾 classeurs et 📝 documents ═════════ */
 function picker_workbooks(PDO $pdo, string $q, int $offset, int $limit): array
 {
     if (!picker_table_exists($pdo, 'workbooks')) { return ['total' => 0, 'items' => []]; }
@@ -405,7 +405,7 @@ function picker_workbooks(PDO $pdo, string $q, int $offset, int $limit): array
     return ['total' => $total, 'items' => array_map(static function ($r) {
         $i = json_decode((string) $r['info_json'], true) ?: [];
         return ['kind' => 'workbook', 'id' => (int) $r['id'], 'title' => trim((string) $r['name']) ?: 'Sans titre', 'meta' => implode(' · ', array_filter([picker_plural((int) ($i['sheets'] ?? 1), 'feuille'), picker_plural((int) ($i['rows'] ?? 0), 'ligne')])),
-            'badge' => '', 'badge_style' => '', 'group' => 'workbook', 'icon' => '🧮', 'short' => picker_plural((int) ($i['sheets'] ?? 1), 'feuille')];
+            'badge' => '', 'badge_style' => '', 'group' => 'workbook', 'icon' => '🧾', 'short' => picker_plural((int) ($i['sheets'] ?? 1), 'feuille')];
     }, $rows)];
 }
 

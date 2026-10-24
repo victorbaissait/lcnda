@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * 🧮 Tableur (interface : assets/js/heritage-tableur.js ; moteur commun : assets/js/app-tableur-engine.js) :
+ * 🧾 Tableur (interface : assets/js/heritage-tableur.js ; moteur commun : assets/js/app-tableur-engine.js) :
  * les classeurs (plusieurs feuilles, formules, mise en forme, validation…) gardés en JSON dans la table workbooks
  * (migration schema_v50). kind = 'book' (un classeur) ou 'template' (« Mes modèles »).
  * Le serveur ne calcule rien : il vérifie la forme et la taille, et tient un petit résumé (info) pour la liste.

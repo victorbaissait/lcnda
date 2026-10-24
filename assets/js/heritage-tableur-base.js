@@ -1,5 +1,5 @@
 /**
- * 🧮 Tableur — lien avec la base (maquette validée « 🧮 Tableur », écran E « Lien avec la base — remplir, tenir à jour, envoyer »).
+ * 🧾 Tableur — lien avec la base (maquette validée « 🧾 Tableur », écran E « Lien avec la base — remplir, tenir à jour, envoyer »).
  * Branché sur l'éditeur (heritage-tableur.js) par ses crochets : menu Données (ext.sheetMenuExtra, ext.sheetCommands),
  * et ext.tableurInternals.Editor (bandeau 🔗 et relecture à l'ouverture). Serveur : lib/sheet_link.php.
  *  - « ⤒ Remplir depuis l'app » : 1. ce qu'on prend (Personnes et Événements avec la barre H10, Recensements, Relevés de
@@ -533,7 +533,7 @@
 
     /* ═════════ Branchement sur l'éditeur ═════════ */
     function onOpen(ed) {
-        if (ed.ctx?.back) return; // « 🧮 Modifier les données » d'un autre outil : pas de lien avec la base ici
+        if (ed.ctx?.back) return; // « 🧾 Modifier les données » d'un autre outil : pas de lien avec la base ici
         paintBar(ed);
         relabel(ed).then(() => Promise.all(ed.wb.sheets.filter(s => s.link?.src).map(s => refresh(ed, s, {quiet: true})))).then(() => paintBar(ed)).catch(() => {});
     }

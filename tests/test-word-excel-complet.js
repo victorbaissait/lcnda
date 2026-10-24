@@ -1,7 +1,7 @@
 'use strict';
 process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
- * 📝 + 🧮 Le « Word » et l'« Excel » de l'app, commande par commande :   node tests/test-word-excel-complet.js
+ * 📝 + 🧾 Le « Word » et l'« Excel » de l'app, commande par commande :   node tests/test-word-excel-complet.js
  *  A. Tableur (moteur, Node) : TOUTES les fonctions de la liste, en français et en anglais, avec la valeur attendue ;
  *     si LibreOffice est là, le même classeur exporté en .xlsx et en .ods est recalculé par LibreOffice et comparé ;
  *     XLSX et ODS : notes, validation, filtre, mise en forme conditionnelle, volets, noms, VRAI() / FAUX() (LibreOffice) ;

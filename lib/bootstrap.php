@@ -33,7 +33,7 @@ require_once __DIR__ . '/boards.php'; // tableaux (façon Freeform) // livrets d
 require_once __DIR__ . '/topic_sheets.php'; // 📒 Fiches sur un sujet
 require_once __DIR__ . '/diagrams.php';
 require_once __DIR__ . '/vector.php';
-require_once __DIR__ . '/workbooks.php'; // 🧮 Tableur : les classeurs (Outils de modification)
+require_once __DIR__ . '/workbooks.php'; // 🧾 Tableur : les classeurs (Outils de modification)
 require_once __DIR__ . '/textdocs.php'; // 📝 Traitement de texte : les documents et leurs versions (Outils de modification)
 require_once __DIR__ . '/website.php'; // 🌐 Mon site web : les sites, leurs versions, les blocs de la généalogie, l'export (Outils de modification)
 require_once __DIR__ . '/cadastre.php'; // 🗺 Cadastre : les parcelles et leurs liens (Listes → Lieux et maisons)
