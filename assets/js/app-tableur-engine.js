@@ -505,6 +505,40 @@
     def('SOSA.MERE', 'Généalogie', 'SOSA.MERE(numéro)', 'Le numéro Sosa de la mère (2 × n + 1).', '', a => 2 * sosaN(a[0]) + 1);
     def('SOSA.COTE', 'Généalogie', 'SOSA.COTE(numéro)', '« paternel » ou « maternel » (le côté du Sosa 1).', '', a => { const n = sosaN(a[0]); if (n < 2) return 'toi'; const g = Math.floor(Math.log2(n)); return n < 3 * 2 ** (g - 1) ? 'paternel' : 'maternel'; });
     // les noms : français, anglais, et les écritures sans accent (« SIERREUR », « ANNÉE »)
+    /* ── LET et LAMBDA : des noms dans la formule, et des petites fonctions à soi ──
+       =LET(âge; 2024-B2; SI(âge>100; "?"; âge)) · =LET(double; LAMBDA(x; x*2); double(C3))
+       MAP, PAR.LIGNE, PAR.COL, REDUCE, SCAN appliquent une LAMBDA à chaque case (ou ligne, colonne). Leurs morceaux arrivent tels quels (raw). */
+    /* ── 📈 MINIGRAPHIQUE(plage; [type]; [couleur]) : un petit graphique dessiné dans la case (courbe, barres, gagné/perdu) ── */
+    class SSpark { constructor(vals, kind, color) { this.vals = vals; this.kind = kind; this.color = color; } toString() { return ''; } }
+    def('MINIGRAPHIQUE', 'Statistiques', 'MINIGRAPHIQUE(plage; [type]; [couleur])', 'Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro).', 'SPARKLINE', a => {
+        const m = mat(a[0]), vals = []; for (let i = 0; i < m.h; i++) for (let j = 0; j < m.w; j++) { const v = m.get(i, j); vals.push(typeof v === 'number' ? v : v instanceof SDate ? +v : null); }
+        if (!vals.some(v => v != null)) return err('#VALEUR!', {why: 'il faut des nombres dans la plage'});
+        const k = String(a[1] ?? 'courbe').toLowerCase(), kind = /bar|colon|histo/.test(k) ? 'bar' : /gagn|win|perd/.test(k) ? 'win' : 'line';
+        const col = /^#[0-9a-f]{6}$/i.test(String(a[2] ?? '')) ? String(a[2]) : ''; return new SSpark(vals.slice(0, 500), kind, col); }, {alias: ['SPARKLINE']});
+    class SLam { constructor(params, body, ctx) { this.params = params; this.body = body; this.ctx = ctx; } }
+    const varName = nd => (nd && nd.k === 'name' ? String(nd.v).toUpperCase() : nd && nd.k === 'ref' && !nd.sheet ? String(nd.raw || '').toUpperCase() : '');
+    const lamApply = (eng, lam, vals) => { if (!(lam instanceof SLam)) return err('#VALEUR!', {why: 'il faut une LAMBDA(…)'}); if (vals.length !== lam.params.length) return err('#VALEUR!', {why: `cette LAMBDA attend ${lam.params.length} valeur(s)`});
+        const vars = new Map(lam.ctx.vars || []); lam.params.forEach((p, i) => vars.set(p, vals[i])); const v = eng.ev(lam.body, {...lam.ctx, vars, depth: (lam.ctx.depth || 0) + 1});
+        return (lam.ctx.depth || 0) > 200 ? err('#CALC!', {why: 'trop de LAMBDA imbriquées'}) : v; };
+    def('LET', 'Logique', 'LET(nom1; valeur1; [nom2; valeur2]; …; calcul)', 'Donne un nom à une valeur pour l’utiliser dans le calcul.', 'LET', (args, ctx, eng) => {
+        if (args.length < 3 || args.length % 2 === 0) return err('#VALEUR!', {why: 'des paires « nom; valeur » puis le calcul'});
+        const vars = new Map(ctx.vars || []), c2 = {...ctx, vars};
+        for (let i = 0; i + 1 < args.length; i += 2) { const nm = varName(args[i]); if (!nm) return err('#VALEUR!', {why: 'un nom (lettres) avant chaque valeur'}); vars.set(nm, eng.ev(args[i + 1], c2)); }
+        return eng.ev(args[args.length - 1], c2); }, {raw: true});
+    def('LAMBDA', 'Logique', 'LAMBDA([paramètre1; …]; calcul)', 'Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE…', 'LAMBDA', (args, ctx) => {
+        if (!args.length) return err('#VALEUR!', {why: 'il faut au moins le calcul'}); const ps = args.slice(0, -1).map(varName); if (ps.some(x => !x)) return err('#VALEUR!', {why: 'les paramètres sont des noms'});
+        return new SLam(ps, args[args.length - 1], ctx); }, {raw: true});
+    const eachArgs = (args, ctx, eng) => { const c2 = {...ctx, vars: new Map(ctx.vars || [])}; return args.map(a => (a.k === 'empty' ? null : eng.ev(a, c2))); }; // la LAMBDA en morceau reste une fonction
+    def('MAP', 'Logique', 'MAP(plage; LAMBDA(x; calcul))', 'Applique la LAMBDA à chaque case de la plage.', 'MAP', (args, ctx, eng) => { const [m, lam] = eachArgs(args, ctx, eng); if (isErr(m)) return m; const M = mat(m);
+        return new SArr(Array.from({length: M.h}, (_, i) => Array.from({length: M.w}, (_, j) => eng.scalar(lamApply(eng, lam, [M.get(i, j)]))))); }, {raw: true});
+    def('PAR.LIGNE', 'Logique', 'PAR.LIGNE(plage; LAMBDA(ligne; calcul))', 'Un résultat par ligne de la plage.', 'BYROW', (args, ctx, eng) => { const [m, lam] = eachArgs(args, ctx, eng); if (isErr(m)) return m; const M = mat(m);
+        return new SArr(Array.from({length: M.h}, (_, i) => [eng.scalar(lamApply(eng, lam, [new SArr([Array.from({length: M.w}, (_, j) => M.get(i, j))])]))])); }, {raw: true});
+    def('PAR.COL', 'Logique', 'PAR.COL(plage; LAMBDA(colonne; calcul))', 'Un résultat par colonne de la plage.', 'BYCOL', (args, ctx, eng) => { const [m, lam] = eachArgs(args, ctx, eng); if (isErr(m)) return m; const M = mat(m);
+        return new SArr([Array.from({length: M.w}, (_, j) => eng.scalar(lamApply(eng, lam, [new SArr(Array.from({length: M.h}, (_, i) => [M.get(i, j)]))])))]); }, {raw: true});
+    def('REDUCE', 'Logique', 'REDUCE(départ; plage; LAMBDA(total; x; calcul))', 'Cumule les cases une à une (un total qui avance).', 'REDUCE', (args, ctx, eng) => { const [v0, m, lam] = eachArgs(args, ctx, eng); if (isErr(m)) return m; const M = mat(m); let acc = v0;
+        for (let i = 0; i < M.h; i++) for (let j = 0; j < M.w; j++) { acc = eng.scalar(lamApply(eng, lam, [acc, M.get(i, j)])); if (isErr(acc)) return acc; } return acc; }, {raw: true});
+    def('SCAN', 'Logique', 'SCAN(départ; plage; LAMBDA(total; x; calcul))', 'Comme REDUCE, avec chaque étape du total.', 'SCAN', (args, ctx, eng) => { const [v0, m, lam] = eachArgs(args, ctx, eng); if (isErr(m)) return m; const M = mat(m); let acc = v0;
+        return new SArr(Array.from({length: M.h}, (_, i) => Array.from({length: M.w}, (_, j) => (acc = eng.scalar(lamApply(eng, lam, [acc, M.get(i, j)])))))); }, {raw: true});
     const ALIAS = {};
     Object.values(FN).forEach(f => { ALIAS[f.name] = f.name; ALIAS[fold(f.name).toUpperCase()] = f.name; if (f.en) ALIAS[f.en] = ALIAS[f.en] || f.name; (f.alias || []).forEach(x => { ALIAS[x] = f.name; }); });
     Object.assign(ALIAS, {AVG: 'MOYENNE', MOY: 'MOYENNE', 'ANNÉE': 'ANNEE', AUJOURD: 'AUJOURDHUI', 'CONCATENATE': 'CONCATENER', 'STDEV.S': 'ECARTYPE', 'ECARTYPE.STANDARD': 'ECARTYPE', 'RANK.EQ': 'RANG', 'EQUIVX': 'EQUIV'});
@@ -721,9 +755,9 @@
                 case 'e': return err(n.v === '#NAME?' ? '#NOM?' : n.v === '#VALUE!' ? '#VALEUR!' : n.v === '#NUM!' ? '#NOMBRE!' : n.v === '#NA' ? '#N/A' : n.v);
                 case 'empty': return null;
                 case 'perr': return n.err;
-                case 'ref': { const s = this.sheetIdx(n.sheet, ctx.si); if (s < 0) return err('#REF!', {what: `la feuille « ${n.sheet} »`}); const v = this.val(s, n.r, n.c); return v; }
+                case 'ref': { if (ctx.vars && !n.sheet) { const lv = ctx.vars.get(String(n.raw || '').toUpperCase()); if (lv !== undefined) return lv; } const s = this.sheetIdx(n.sheet, ctx.si); if (s < 0) return err('#REF!', {what: `la feuille « ${n.sheet} »`}); const v = this.val(s, n.r, n.c); return v; }
                 case 'rng': { const s = this.sheetIdx(n.sheet, ctx.si); if (s < 0) return err('#REF!', {what: `la feuille « ${n.sheet} »`}); const u = this.used(s); const r1 = n.whole === 'col' ? Math.max(n.r0, Math.min(n.r1, u.r - 1)) : n.r1, c1 = n.whole === 'row' ? Math.max(n.c0, Math.min(n.c1, u.c - 1)) : n.c1; if ((r1 - n.r0 + 1) * (c1 - n.c0 + 1) > 5e6) return err('#TROP!', 'la plage est trop grande'); return new RangeVal(this, s, n.r0, n.c0, r1, c1); }
-                case 'name': { const t = this.nameTarget(n.v, ctx.si); if (!t) return err('#NOM?', {name: n.v, sugg: suggest(n.v)}); return t.k === 'ref' ? this.val(t.si, t.r, t.c) : new RangeVal(this, t.si, t.r0, t.c0, t.r1, t.c1); }
+                case 'name': { const lv = ctx.vars?.get(String(n.v).toUpperCase()); if (lv !== undefined) return lv; const t = this.nameTarget(n.v, ctx.si); if (!t) return err('#NOM?', {name: n.v, sugg: suggest(n.v)}); return t.k === 'ref' ? this.val(t.si, t.r, t.c) : new RangeVal(this, t.si, t.r0, t.c0, t.r1, t.c1); }
                 case 'neg': { const v = this.scalar(this.ev(n.a, ctx)), x = toN(v); return isErr(x) ? x : -x; }
                 case 'pct': { const v = this.scalar(this.ev(n.a, ctx)), x = toN(v); return isErr(x) ? x : x / 100; }
                 case 'op': return this.binop(n, ctx);
@@ -763,9 +797,12 @@
             return keepDate ? new SDate(v) : v;
         }
         call(n, ctx) {
+            const own = ctx.vars?.get(String(n.name).toUpperCase()); // une LAMBDA nommée dans LET
+            if (own instanceof SLam) return lamApply(this, own, n.args.map(a => (a.k === 'empty' ? null : this.ev(a, ctx))));
             const key = fnKey(n.name);
             if (!key) return err('#NOM?', {name: n.name.toUpperCase(), sugg: suggest(n.name)});
             const F = FN[key];
+            if (F.raw) { try { const v = F.f(n.args, ctx, this); return v instanceof SLam && !ctx.vars ? err('#CALC!', {why: 'une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP…'}) : v; } catch (e) { if (isErr(e)) return e; throw e; } }
             const args = F.lazy ? n.args.map(a => (a.k === 'empty' ? null : () => this.scalar(this.ev(a, ctx)))) : n.args.map(a => (a.k === 'empty' ? null : this.ev(a, ctx)));
             if (!F.lazy) for (const a of args) if (isErr(a) && !['ET', 'OU', 'CONCAT', 'NB', 'NBVAL', 'NB.VIDE'].includes(key)) return a;
             try { return F.f(args, ctx); } catch (e) { if (isErr(e)) return e; throw e; }
@@ -821,7 +858,7 @@
     const DEC_DEFAULT = {num: 2, eur: 2, pct: 0};
     /** une valeur prête à afficher, selon le format de la cellule */
     function formatValue(v, st = {}, {approx = false} = {}) {
-        if (v == null) return '';
+        if (v == null || v instanceof SSpark) return '';
         if (isErr(v)) return v.code;
         if (typeof v === 'boolean') return v ? 'VRAI' : 'FAUX';
         const f = st.fmt || '', dec = Number.isInteger(st.dec) ? Math.max(0, Math.min(10, st.dec)) : null, pre = approx ? '≈ ' : '';
@@ -1753,7 +1790,7 @@
     return {
         LIMITS, FN, ALIAS, fnKey, explain, errHint, suggest,
         colName, colNum, addr, parseAddr, parseRange, rangeStr, inRange, safeCol, fold, esc, quoteSheet,
-        SErr, SDate, SArr, isErr, isFormula, toNum, toStr, toN, truthy, cellRaw, constVal,
+        SErr, SDate, SArr, SSpark, isErr, isFormula, toNum, toStr, toN, truthy, cellRaw, constVal,
         readActDate, republicanToGregorian, gregorianToRepublican, ymdSerial, serialYmd,
         tokenize, parseFormula, formulaMode, serialize, shiftFormula, adjustFormula, renameInFormula, refsOf, cycleAbs, toEnglish, toFrench,
         Calc, parseInput, formatValue, kindOf, sortKey, compareKeys, fillSeries,

@@ -285,3 +285,6 @@ dialog.modal.xl-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 .xl-live-h select { max-width: 150px; font-size: 12px; }
 .xl-live-b { min-height: 80px; }
 .xl-live-b svg { width: 100%; height: auto; display: block; }
+/* 📈 MINIGRAPHIQUE : le petit graphique d'une case */
+.xl-c.has-spark { padding: 0; }
+.xl-c .xl-spark { position: absolute; left: 4px; top: 4px; pointer-events: none; overflow: visible; }

@@ -15,6 +15,18 @@
     const UI = () => window.LCNDA_UI;
     const X = () => window.LCNDA_SHEET;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
+    /** 📈 le petit graphique d'une case (MINIGRAPHIQUE) : courbe, barres ou gagné/perdu, à la taille de la case */
+    function sparkSvg(sp, w, h) {
+        const vals = sp.vals, n = vals.length, W = Math.max(10, w - 8), H = Math.max(8, h - 8), nums = vals.filter(v => v != null); if (!nums.length) return '';
+        const col = sp.color || 'var(--blue, #0066cc)', mn = Math.min(0, ...nums), mx = Math.max(...nums), span = mx - mn || 1, Y = v => H - (v - mn) / span * H;
+        let g = '';
+        if (sp.kind === 'line') { const pts = vals.map((v, i) => (v == null ? null : [n < 2 ? W / 2 : i / (n - 1) * W, Y(v)])).filter(Boolean);
+            g = `<polyline points="${pts.map(p => p.map(x => Math.round(x * 10) / 10).join(',')).join(' ')}" fill="none" stroke="${col}" stroke-width="1.5" stroke-linejoin="round"/>` + (pts.length ? `<circle cx="${pts[pts.length - 1][0]}" cy="${pts[pts.length - 1][1]}" r="2" fill="${col}"/>` : ''); }
+        else { const bw = W / n, z = sp.kind === 'win' ? H / 2 : Y(Math.max(0, mn));
+            g = vals.map((v, i) => { if (v == null) return ''; const top = sp.kind === 'win' ? (v >= 0 ? 1 : H / 2) : Math.min(Y(v), z), hh = sp.kind === 'win' ? H / 2 - 1 : Math.max(1, Math.abs(z - Y(v)));
+                return `<rect x="${Math.round(i * bw * 10 + bw) / 10}" y="${Math.round(top * 10) / 10}" width="${Math.max(1, Math.round(bw * 7) / 10)}" height="${Math.round(hh * 10) / 10}" fill="${v < 0 ? '#c0392b' : col}"/>`; }).join(''); }
+        return `<svg class="xl-spark" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true">${g}</svg>`;
+    }
     const esc = v => (A()?.escapeHtml ? A().escapeHtml(v ?? '') : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const toast = (...a) => A().toast(...a);
     const api = (...a) => A().api(...a);
@@ -307,6 +319,7 @@
                 if (typeof v === 'number' || v instanceof S.SDate) cls.push('is-num'); else if (typeof v === 'boolean') cls.push('is-bool');
                 if (S.isErr(v)) cls.push('is-err');
                 if (raw == null && v != null) cls.push('is-spill');
+                if (S.SSpark && v instanceof S.SSpark) { inner += sparkSvg(v, w, h); txt = ''; cls.push('has-spark'); } // 📈 MINIGRAPHIQUE
                 let fill = st.fill, color = st.color, bold = st.b;
                 for (const rule of ctx.cf) if (r >= rule.g.r0 && r <= rule.g.r1 && c >= rule.g.c0 && c <= rule.g.c1) {
                     if (rule.op === 'scale') { if (typeof v === 'number' && rule.mx > rule.mn) inner += `<span class="xl-bar" style="width:${Math.round(((v - rule.mn) / (rule.mx - rule.mn)) * 100)}%"></span>`; continue; }

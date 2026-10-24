@@ -66,7 +66,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
-    <link rel="stylesheet" href="assets/css/tableur.css?v=5">
+    <link rel="stylesheet" href="assets/css/tableur.css?v=6">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
     <link rel="stylesheet" href="assets/css/cadastre.css?v=1">
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=3">
@@ -1156,7 +1156,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=17" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=22" defer></script>
-<script src="assets/js/app-tableur-engine.js?v=6" defer></script>
+<script src="assets/js/app-tableur-engine.js?v=7" defer></script>
 <script src="assets/js/app-calculette-engine.js?v=1" defer></script>
 <script src="assets/js/app-texte-engine.js?v=1" defer></script>
 <script src="assets/js/app-texte-formats.js?v=2" defer></script>
@@ -1303,10 +1303,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-list.js?v=3" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=16" defer></script>
 <script src="assets/js/heritage-keynote.js?v=21" defer></script>
-<script src="assets/js/heritage-tableur.js?v=9" defer></script>
+<script src="assets/js/heritage-tableur.js?v=10" defer></script>
 <script src="assets/js/heritage-tableur-cibles.js?v=3" defer></script>
 <script src="assets/js/heritage-tableur-base.js?v=2" defer></script>
 <script src="assets/js/heritage-tableur-plus.js?v=2" defer></script>
+<script src="assets/js/heritage-tableur-outils.js?v=1" defer></script>
 <script src="assets/js/heritage-calculette.js?v=3" defer></script>
 <script src="assets/js/heritage-traitement-texte.js?v=5" defer></script>
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=3" defer></script>
