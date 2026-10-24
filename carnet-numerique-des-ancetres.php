@@ -168,7 +168,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.8.0</span>
+                <span class="eyebrow">VERSION BÊTA · 0.8.1</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source, gratuit et modulable pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -198,8 +198,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.8.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 547 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.8.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.8.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 547 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.8.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -208,7 +208,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.8.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 563 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.8.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 563 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -219,16 +219,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.8.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.8.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 516 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.8.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.8.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 516 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.8.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.8.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 512 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.8.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.8.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 512 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.8.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.8.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -236,53 +236,78 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.8.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.8.1, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.8.0.zip"><span>Archive .zip<small>Windows, macOS · 268 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.8.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 267 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.8.1.zip"><span>Archive .zip<small>Windows, macOS · 268 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.8.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 267 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.8.0<small>Suivi des animaux, fiches rangées en sections, météo d'autrefois, traitement de texte et tableur, studio son, maison plus poussée, contrôle de la base, journal des recherches, cadastre, site web, jeux, mode simple et designs au choix</small></span></summary>
+                <summary><span>Nouveautés de la version 0.8.1<small>Maison comme un plan d'architecte (DXF, répéter, étiquettes à flèche, cartouche), 145 meubles et appareils de plus, site web avec un vrai éditeur de code, tableau croisé et publipostage, réglages plus clairs, raccourcis en haut à droite</small></span></summary>
                 <div class="presentation-changes-body">
-                    <h4>🐾 Suivi des animaux</h4>
-                    <p>Un nouvel onglet (caché au départ, à montrer dans Réglages → Apparence → onglets) pour suivre des animaux sur le terrain ou à la maison. Il se compose de blocs, comme le tableau de bord, avec des pages par espèce ou par site, et ses blocs vont aussi dans le tableau de bord. Bagues et marques selon l'espèce (oiseau, chat ou chien, cheval, ferme, poisson, mammifère marin, animal sauvage, primate), avec les couleurs de base et la fenêtre de couleur. Une lecture douteuse (« 7? », « 7[K|X] ») est gardée telle quelle, avec les animaux possibles. Observations avec plusieurs photos, sons ou vidéos ; trajets GPS (GPX, Movebank, collier) ; santé et poids avec la courbe ; groupes, rôles et histoire sociale ; recensement ; partage et fusion avec un autre suivi.</p>
-                    <h4>🗂️ Fiches rangées en sections</h4>
-                    <p>Les blocs d'une fiche se rangent en sections (Identité, Famille, Vie, Documents ; pour un animal : Fiche, Bagues et marques, Observations, Santé, Groupe, Carte). Six présentations au choix, dont des onglets en haut. Un éditeur sans bouton « Enregistrer » permet de ranger les sections et les blocs, pour toutes les fiches ou pour une seule. L'adresse retient la section ouverte, et l'aperçu des réglages montre la vraie fiche. <b>Une seule fiche pour un animal</b> : la fiche complète, avec « 👁＋ Nouvelle observation » et « 👁 Vu la dernière fois » dans l'en-tête. Supprimer un animal emporte tout son suivi ; tout se restaure depuis le journal.</p>
-                    <h4>🌦️ Météo d'autrefois</h4>
-                    <p>Le temps qu'il faisait le jour (et à l'heure) d'un événement, sans internet. Chaque fois, l'app dit d'où vient l'information : mesuré, station à N km, estimé ou reconstitution. L'altitude des lieux est prise en compte, sur 14 pays. Un pack Europe est en option. Vous pouvez masquer la météo partout, par sorte d'événement, par personne ou par événement.</p>
-                    <h4>📝 Traitement de texte</h4>
-                    <p>Un vrai traitement de texte dans l'app, avec de vraies pages, des styles, des notes, un sommaire, un index et une bibliographie. Les personnes et les lieux s'insèrent avec le menu de choix et restent à jour. Il a aussi les tableaux, le suivi des modifications, les commentaires, les versions et la lecture à voix haute. Il ouvre et enregistre les fichiers Word (.docx), LibreOffice (.odt), .rtf, Markdown et texte. Pour aller plus vite : « 📝 Écrire sur cette personne » depuis une fiche, et un compte rendu depuis le Journal des recherches.</p>
-                    <h4>🧾 Tableur</h4>
-                    <p>Formules en français, fichiers Excel, LibreOffice et CSV, fonctions de généalogie (âge, année d'un acte, génération Sosa). « 🧾 Modifier les données » des diagrammes, présentations et tableaux. Il remplit un tableau depuis l'app et peut renvoyer les changements vers la base, avec « ↶ Annuler ».</p>
-                    <h4>🎧 Son</h4>
-                    <p>Un 🎚️ Studio son complet, avec effets qui ne touchent jamais l'original, spectre et pinceau de réparation, marqueurs reliés aux personnes, transcription, multipiste et la musique qui baisse sous la voix. Un ⚡ Son rapide à gros interrupteurs (« ✨ Tout nettoyer », Avant / Après). L'éditeur d'avant reste le choix de départ.</p>
-                    <h4>🏠 Maison</h4>
-                    <p>Vides, mezzanines, garde-corps et trémies d'escalier ; lucarnes, chiens-assis, fenêtres de toit et combles avec la loi Carrez ; murs courbes. Vous avez aussi la coupe, les surfaces, la vérification du plan, les personnes de chaque pièce, la visite guidée lue à voix haute et sa vidéo, le hameau, et une autre époque en fantôme pour comparer.</p>
-                    <h4>✅ Contrôle de la base</h4>
-                    <p>Une seule page réunit les dates impossibles, les âges curieux, les parents, les doublons et les lieux mal placés, avec les mêmes chiffres partout (page, widget, bandeau de la fiche). Ses seuils sont réglables. « Ce n'est pas une erreur » écarte un cas, et il revient tout seul si une date change.</p>
-                    <h4>🔎 Recherche et travail</h4>
-                    <p>📔 Journal des recherches (visites aux archives, résultats par cote, « 🔍 Déjà cherché » sur la fiche) et 💬 questions aux proches, avec un questionnaire à envoyer. Vous pouvez aussi comparer des hypothèses, citer vos sources, consulter la liste des services d'archives, écrire une biographie, voir le monde autour d'une vie, chercher les métiers anciens, ranger les cartes postales et les tables décennales, fêter les dates, partager avec la famille et comparer deux photos.</p>
-                    <h4>🗺️ Cadastre et images</h4>
-                    <p>Parcelles et plans napoléoniens reliés aux maisons, aux lieux et aux personnes. Les traitements par lot renomment, redimensionnent, convertissent, ajoutent un filigrane ou fabriquent un PDF. L'app trouve les images semblables et les doublons. La retouche sait tourner l'image entière, redresser l'horizon ou relever une photo couchée.</p>
+                    <h4>🏠 Maison, comme un plan d'architecte</h4>
+                    <p>⤒ importe un plan <b>DXF</b> (AutoCAD, LibreCAD, plan d'architecte ou de notaire) et ⤓ exporte le tien en DXF, rangé par calques (murs, pièces, ouvertures, mobilier, textes, cotes). <b>🔁 Répéter</b> pose plusieurs copies d'un coup : 6 chaises autour d'une table (tournées vers elle), une rangée, une grille, ou une rangée de fenêtres le long d'un mur. <b>🏷 Étiquettes à flèche</b> : une note reliée à un point du plan, comme « Ici était le puits » ou « Double vitrage posé en 1978 ». Dans « Affichage » de l'étage : cotes d'ensemble, tableau des pièces et de leurs surfaces posé sur le plan, cartouche (nom, lieu, époque, étage, date) et affichage sombre façon dessin technique.</p>
+                    <h4>🛋️ Mobilier</h4>
+                    <p>145 objets de plus en Électroménager, Bureau, Garage et Luminaires (lave-linge, plaques, hottes, télé au mur, poste TSF, fauteuil de bureau, globe, coffre-fort, machine à écrire, voitures d'hier et d'aujourd'hui, vélos, panneau à outils, lustres, plafonniers, lampes à pétrole…). 71 objets de prière et de mémoire de toutes les traditions (juive, musulmane, bouddhiste, hindoue, sikhe, shinto, culte des ancêtres, orthodoxe, protestante…).</p>
                     <h4>🌐 Mon site web</h4>
-                    <p>Un éditeur visuel où tout se glisse à la souris, avec de vrais diagrammes et une carte. La publication se fait sur Netlify, GitHub Pages ou un FTP sécurisé, ou dans un .zip pour MAMP ou WAMP. Les personnes vivantes ne sont jamais publiées.</p>
-                    <h4>📊 Diagrammes et 🎲 jeux</h4>
-                    <p>38 nouveaux diagrammes et un menu « Graphique » avec des critères combinables. Une calculette simple et scientifique, aussi en widget. Pour jouer : Qui est-ce ? des ancêtres, Memory des portraits, La bonne date, Morpion jusqu'à 30 × 30 et 🌀 Labyrinthe.</p>
-                    <h4>🧓 Mode simple et 🎨 designs au choix</h4>
-                    <p>Un mode à gros boutons pour montrer l'arbre et les photos à la famille, en lecture seule, avec les liens dits en clair (« ta grand-mère »). Les designs au choix changent la forme de l'app (traits, coins, densité, icônes, boutons, listes, mouvements) et laissent toujours vos couleurs et votre police.</p>
-                    <h4>🧭 Une app encore plus cohérente</h4>
-                    <p>Les mêmes mots et les mêmes symboles pour les mêmes boutons. Partout les mêmes erreurs de formulaire, les mêmes fenêtres (Imprimer, Importer), les mêmes bulles et raccourcis écrits pour votre ordinateur, et le même menu « ⋯ » et clic droit. Les réglages s'enregistrent tout seuls, avec « ↶ Annuler ». « Maintenance » s'appelle maintenant <b>« Réglages »</b>. Les boutons en haut à droite s'affichent, se cachent et se rangent dans l'Apparence. Changer de page dans le tableau de bord et le suivi va bien plus vite.</p>
+                    <p>Un éditeur de code complet (chercher et remplacer, aller à la ligne, commenter, mise en forme, vérification, raccourcis). Des fichiers CSS, JS et PHP en plus, rangés en dossiers ; deux fichiers côte à côte ; les vraies pages PHP dans l'aperçu ; ouvrir un dossier entier ; un aide-mémoire HTML, CSS et JS. « 🧭 Navigateurs » vérifie le site et imite Safari, Firefox ou Edge, avec une base de compatibilité qui marche sans internet. Les écrans @media se règlent.</p>
+                    <h4>🧾 Tableur et 📝 traitement de texte</h4>
+                    <p>Tableau croisé dynamique (↻ actualiser) et graphique vivant qui suit la sélection. Champs de fusion, « remplir avec une fiche », publipostage et modèles déjà remplis (demande d'acte, fiche d'identité d'un ancêtre, avis de recherche aux cousins). Le tableur a maintenant son propre symbole, 🧾 ; la calculette garde 🧮.</p>
+                    <h4>📊 Diagrammes</h4>
+                    <p>Sablier, Gantt, carte mentale, barres en cercle, bulles groupées et anneaux d'avancement.</p>
+                    <h4>🎨 Réglages plus clairs</h4>
+                    <p>L'apparence se range en trois groupes (Look, Navigation, Écrans), avec un bouton pour revenir à la page d'avant. Plus de codes A1, A2… : chaque réglage a son icône et son nom. Le prénom et le nom du logo passent dans « Thème et couleurs ». La forme des boutons rejoint « Notifications et boutons ». Les boutons de l'en-tête des fiches tiennent sur deux lignes et se rangent un par un. Ceux du traitement de texte et du tableur se rangent dans « Boutons et options ».</p>
+                    <h4>↗ Boutons en haut à droite</h4>
+                    <p>Un raccourci (caché au départ) vers chaque outil de modification et chaque partie d'Enquêtes, avec le choix d'ouvrir la liste des projets ou un nouveau projet. Il y a aussi « 👤 Nouvelle personne ». Les 🧩 Tableaux rejoignent les Outils de modification.</p>
+                    <h4>🧓 Mode simple et 🐾 suivi</h4>
+                    <p>11 nouvelles sortes de gros boutons (famille, anniversaires, un lieu, quiz, horloge, appel, vidéo, son…), et le cadre à compléter se voit dans l'aperçu. Dans le suivi, un 2e trajet s'ajoute au premier, avec un message clair. Le fond de carte se choisit sur chaque carte.</p>
                     <h4>🐞 Bugs corrigés</h4>
-                    <p>« ＋ Nouvel animal » depuis Personnes ouvre bien la fiche d'un animal. Une trentaine de bugs sont corrigés dans les fichiers Word et Excel, des dizaines dans la retouche, le montage, la mise en page et le dessin, et 9 dans le site web. Côté sécurité, les packs météo et les suivis reçus d'ailleurs sont vérifiés, et les photos confidentielles sont exclues du partage. Le mode simple et le mode consultation n'écrivent jamais dans la base.</p>
+                    <p>Une forme d'avatar à toi reste choisie en revenant sur la page. Le PHP embarqué de Windows se télécharge même quand windows.php.net l'a rangé dans « archives/ », et son empreinte est toujours vérifiée.</p>
+                    <p>La structure de la base ne change pas : aucune mise à jour de la base à la première ouverture.</p>
                 </div>
             </details>
 
             <details class="presentation-changes presentation-changes-old">
                 <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
                 <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.8.0 <small>Suivi des animaux, fiches rangées en sections, météo d'autrefois, traitement de texte et tableur, studio son, maison plus poussée, contrôle de la base, journal des recherches, cadastre, site web, jeux, mode simple et designs au choix</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🐾 Suivi des animaux</h4>
+                            <p>Un nouvel onglet (caché au départ, à montrer dans Réglages → Apparence → onglets) pour suivre des animaux sur le terrain ou à la maison. Il se compose de blocs, comme le tableau de bord, avec des pages par espèce ou par site, et ses blocs vont aussi dans le tableau de bord. Bagues et marques selon l'espèce (oiseau, chat ou chien, cheval, ferme, poisson, mammifère marin, animal sauvage, primate), avec les couleurs de base et la fenêtre de couleur. Une lecture douteuse (« 7? », « 7[K|X] ») est gardée telle quelle, avec les animaux possibles. Observations avec plusieurs photos, sons ou vidéos ; trajets GPS (GPX, Movebank, collier) ; santé et poids avec la courbe ; groupes, rôles et histoire sociale ; recensement ; partage et fusion avec un autre suivi.</p>
+                            <h4>🗂️ Fiches rangées en sections</h4>
+                            <p>Les blocs d'une fiche se rangent en sections (Identité, Famille, Vie, Documents ; pour un animal : Fiche, Bagues et marques, Observations, Santé, Groupe, Carte). Six présentations au choix, dont des onglets en haut. Un éditeur sans bouton « Enregistrer » permet de ranger les sections et les blocs, pour toutes les fiches ou pour une seule. L'adresse retient la section ouverte, et l'aperçu des réglages montre la vraie fiche. <b>Une seule fiche pour un animal</b> : la fiche complète, avec « 👁＋ Nouvelle observation » et « 👁 Vu la dernière fois » dans l'en-tête. Supprimer un animal emporte tout son suivi ; tout se restaure depuis le journal.</p>
+                            <h4>🌦️ Météo d'autrefois</h4>
+                            <p>Le temps qu'il faisait le jour (et à l'heure) d'un événement, sans internet. Chaque fois, l'app dit d'où vient l'information : mesuré, station à N km, estimé ou reconstitution. L'altitude des lieux est prise en compte, sur 14 pays. Un pack Europe est en option. Vous pouvez masquer la météo partout, par sorte d'événement, par personne ou par événement.</p>
+                            <h4>📝 Traitement de texte</h4>
+                            <p>Un vrai traitement de texte dans l'app, avec de vraies pages, des styles, des notes, un sommaire, un index et une bibliographie. Les personnes et les lieux s'insèrent avec le menu de choix et restent à jour. Il a aussi les tableaux, le suivi des modifications, les commentaires, les versions et la lecture à voix haute. Il ouvre et enregistre les fichiers Word (.docx), LibreOffice (.odt), .rtf, Markdown et texte. Pour aller plus vite : « 📝 Écrire sur cette personne » depuis une fiche, et un compte rendu depuis le Journal des recherches.</p>
+                            <h4>🧾 Tableur</h4>
+                            <p>Formules en français, fichiers Excel, LibreOffice et CSV, fonctions de généalogie (âge, année d'un acte, génération Sosa). « 🧾 Modifier les données » des diagrammes, présentations et tableaux. Il remplit un tableau depuis l'app et peut renvoyer les changements vers la base, avec « ↶ Annuler ».</p>
+                            <h4>🎧 Son</h4>
+                            <p>Un 🎚️ Studio son complet, avec effets qui ne touchent jamais l'original, spectre et pinceau de réparation, marqueurs reliés aux personnes, transcription, multipiste et la musique qui baisse sous la voix. Un ⚡ Son rapide à gros interrupteurs (« ✨ Tout nettoyer », Avant / Après). L'éditeur d'avant reste le choix de départ.</p>
+                            <h4>🏠 Maison</h4>
+                            <p>Vides, mezzanines, garde-corps et trémies d'escalier ; lucarnes, chiens-assis, fenêtres de toit et combles avec la loi Carrez ; murs courbes. Vous avez aussi la coupe, les surfaces, la vérification du plan, les personnes de chaque pièce, la visite guidée lue à voix haute et sa vidéo, le hameau, et une autre époque en fantôme pour comparer.</p>
+                            <h4>✅ Contrôle de la base</h4>
+                            <p>Une seule page réunit les dates impossibles, les âges curieux, les parents, les doublons et les lieux mal placés, avec les mêmes chiffres partout (page, widget, bandeau de la fiche). Ses seuils sont réglables. « Ce n'est pas une erreur » écarte un cas, et il revient tout seul si une date change.</p>
+                            <h4>🔎 Recherche et travail</h4>
+                            <p>📔 Journal des recherches (visites aux archives, résultats par cote, « 🔍 Déjà cherché » sur la fiche) et 💬 questions aux proches, avec un questionnaire à envoyer. Vous pouvez aussi comparer des hypothèses, citer vos sources, consulter la liste des services d'archives, écrire une biographie, voir le monde autour d'une vie, chercher les métiers anciens, ranger les cartes postales et les tables décennales, fêter les dates, partager avec la famille et comparer deux photos.</p>
+                            <h4>🗺️ Cadastre et images</h4>
+                            <p>Parcelles et plans napoléoniens reliés aux maisons, aux lieux et aux personnes. Les traitements par lot renomment, redimensionnent, convertissent, ajoutent un filigrane ou fabriquent un PDF. L'app trouve les images semblables et les doublons. La retouche sait tourner l'image entière, redresser l'horizon ou relever une photo couchée.</p>
+                            <h4>🌐 Mon site web</h4>
+                            <p>Un éditeur visuel où tout se glisse à la souris, avec de vrais diagrammes et une carte. La publication se fait sur Netlify, GitHub Pages ou un FTP sécurisé, ou dans un .zip pour MAMP ou WAMP. Les personnes vivantes ne sont jamais publiées.</p>
+                            <h4>📊 Diagrammes et 🎲 jeux</h4>
+                            <p>38 nouveaux diagrammes et un menu « Graphique » avec des critères combinables. Une calculette simple et scientifique, aussi en widget. Pour jouer : Qui est-ce ? des ancêtres, Memory des portraits, La bonne date, Morpion jusqu'à 30 × 30 et 🌀 Labyrinthe.</p>
+                            <h4>🧓 Mode simple et 🎨 designs au choix</h4>
+                            <p>Un mode à gros boutons pour montrer l'arbre et les photos à la famille, en lecture seule, avec les liens dits en clair (« ta grand-mère »). Les designs au choix changent la forme de l'app (traits, coins, densité, icônes, boutons, listes, mouvements) et laissent toujours vos couleurs et votre police.</p>
+                            <h4>🧭 Une app encore plus cohérente</h4>
+                            <p>Les mêmes mots et les mêmes symboles pour les mêmes boutons. Partout les mêmes erreurs de formulaire, les mêmes fenêtres (Imprimer, Importer), les mêmes bulles et raccourcis écrits pour votre ordinateur, et le même menu « ⋯ » et clic droit. Les réglages s'enregistrent tout seuls, avec « ↶ Annuler ». « Maintenance » s'appelle maintenant <b>« Réglages »</b>. Les boutons en haut à droite s'affichent, se cachent et se rangent dans l'Apparence. Changer de page dans le tableau de bord et le suivi va bien plus vite.</p>
+                            <h4>🐞 Bugs corrigés</h4>
+                            <p>« ＋ Nouvel animal » depuis Personnes ouvre bien la fiche d'un animal. Une trentaine de bugs sont corrigés dans les fichiers Word et Excel, des dizaines dans la retouche, le montage, la mise en page et le dessin, et 9 dans le site web. Côté sécurité, les packs météo et les suivis reçus d'ailleurs sont vérifiés, et les photos confidentielles sont exclues du partage. Le mode simple et le mode consultation n'écrivent jamais dans la base.</p>
+                
+                        </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.7.1 <small>Retouche comme Photoshop (dégradés, Teinte/Saturation, paragraphes, glyphes, motifs, formes de pinceau), une seule fenêtre de couleur, montage, réglages enregistrés repensés, diagrammes, recherche par date précise, messages réglables</small></summary>
                         <div class="presentation-version-body">
@@ -1005,7 +1030,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.8.0 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.8.1 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script src="faq-data.js"></script>
