@@ -1328,6 +1328,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-house-more.js?v=2" defer></script>
 <script src="assets/js/heritage-house-pics.js?v=1" defer></script>
 <script src="assets/js/heritage-house-metiers.js?v=1" defer></script>
+<script src="assets/js/heritage-house-cultes.js?v=1" defer></script>
 <script src="assets/js/heritage-dna.js?v=15" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=9" defer></script>
 <script src="assets/js/museum-viewer.js?v=10" defer></script>
