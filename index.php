@@ -56,7 +56,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/labyrinthe.css?v=1">
     <link rel="stylesheet" href="assets/css/jeux-famille.css?v=2">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
-    <link rel="stylesheet" href="assets/css/apparence.css?v=4">
+    <link rel="stylesheet" href="assets/css/apparence.css?v=5">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=5">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
@@ -1215,14 +1215,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-layout-facts.js?v=3" defer></script>
 <script src="assets/js/heritage-qr.js?v=1" defer></script>
 <script src="assets/js/heritage-layout.js?v=56" defer></script>
-<script src="assets/js/heritage-edittools.js?v=23" defer></script>
+<script src="assets/js/heritage-edittools.js?v=24" defer></script>
 <script src="assets/js/heritage-editorkeys.js?v=19" defer></script>
 <script src="assets/js/heritage-livrets.js?v=15" defer></script>
 <script src="assets/js/heritage-pets.js?v=32" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=28" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=1" defer></script>
-<script src="assets/js/heritage-boards.js?v=44" defer></script>
+<script src="assets/js/heritage-boards.js?v=45" defer></script>
 <script src="assets/js/heritage-dnd.js?v=11" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=1" defer></script>
 <script src="assets/js/heritage-studio.js?v=97" defer></script>
@@ -1345,7 +1345,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-fiche.js?v=5" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=14" defer></script>
+<script src="assets/js/app-apparence.js?v=15" defer></script>
 <script src="assets/js/app-designs.js?v=9" defer></script>
 <script src="assets/js/app-sections.js?v=3" defer></script>
 <script>

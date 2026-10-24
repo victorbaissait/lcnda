@@ -108,3 +108,6 @@
 :root[data-theme="dark"] .lc-shp-canvas .pt:not(.last) { fill: #1e1e1e; }
 :root[data-theme="dark"] .lc-shp-preview { background: #1a1a1a; }
 :root[data-theme="dark"] .lc-tb-prev, :root[data-theme="dark"] .lc-tb-btn { background: #242424; color: var(--ink); }
+/* Boutons en haut à droite : ce que le clic d'un raccourci ouvre (la liste des projets ou un nouveau projet) */
+.lc-tb-mode { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 6px; font-size: 12px; font-weight: 400; color: var(--muted, #666); }
+.lc-tb-mode select { min-height: 30px; padding: 2px 28px 2px 8px; font-size: 12px; width: auto; max-width: 100%; }

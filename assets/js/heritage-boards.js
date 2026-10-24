@@ -2347,6 +2347,7 @@
         ext.boards(++st.workspaceToken);
     }
     ext.openBoardById = go;
+    ext.newBoard = owner => newBoard(owner); // « ＋ Nouveau tableau » d'ailleurs (raccourci de la barre du haut)
     // 🛠️ Listes → Outils de modification : les tableaux aussi (les dossiers d'un tableau restent dedans)
     ext.editToolsExtra = ext.editToolsExtra || [];
     ext.editToolsExtra.push({key: 'boards', icon: '🧩', label: 'Tableaux', what: 'tableau',

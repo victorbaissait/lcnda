@@ -167,6 +167,23 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             await page.click('[data-tb-reset]'); await page.waitForTimeout(900);
             assert.equal(await page.$$eval('.topbar-meta > .lc-tb-go', els => els.filter(e => !e.hasAttribute('data-tb-off')).length), 0, '↺ : de nouveau cachés');
         });
+        await t('chaque raccourci : le clic ouvre la liste des projets (au départ) ou un nouveau projet, au choix', async () => {
+            const opts = await page.$$eval('#lc-tb-order [data-order-key="et_sheet"] [data-tb-mode] option', o => o.map(x => x.value + ':' + x.textContent));
+            assert.deepEqual(opts, ['list:la liste des projets', 'new:nouveau classeur']);
+            assert.equal(await page.$eval('#lc-tb-order [data-order-key="enq_tableaux"] [data-tb-mode]', e => e.value), 'list');
+            await page.click('#lc-tb-order [data-order-key="et_sheet"] [data-tb-show]'); await page.waitForTimeout(400);
+            await page.selectOption('#lc-tb-order [data-order-key="et_sheet"] [data-tb-mode]', 'new'); await page.waitForTimeout(400);
+            assert.deepEqual(JSON.parse(await page.evaluate(k => localStorage.getItem(k), KEY)).mode, {et_sheet: 'new'});
+            assert.match(await page.getAttribute('#tb-go-et_sheet', 'title'), /Tableur : nouveau classeur/i);
+            await page.click('#tb-go-et_sheet'); await page.waitForTimeout(2500);
+            assert.equal(await page.evaluate(() => window.LCNDA_APP.state.listType), 'edit_tools');
+            assert.ok(await page.evaluate(() => [...document.querySelectorAll('dialog[open], .xl-editor, [class*="xl-"]')].some(e => e.offsetWidth)), 'le tableur s’ouvre sur un classeur neuf');
+            await page.goto(base + '#maintenance/design'); await page.reload(); await page.waitForTimeout(2500); // referme le tableur (classeur vide, rien à garder)
+            assert.equal(await page.$eval('#lc-tb-order [data-order-key="et_sheet"] [data-tb-mode]', e => e.value), 'new', 'gardé');
+            await page.selectOption('#lc-tb-order [data-order-key="et_sheet"] [data-tb-mode]', 'list'); await page.waitForTimeout(300);
+            assert.deepEqual(JSON.parse(await page.evaluate(k => localStorage.getItem(k), KEY)).mode, {});
+            await page.click('[data-tb-reset]'); await page.waitForTimeout(900);
+        });
         await t('l’interrupteur de la calculette change aussi la liste (une seule valeur)', async () => {
             await page.evaluate(() => { const s = JSON.parse(localStorage.getItem('genealogie-calculette') || '{}'); localStorage.setItem('genealogie-calculette', JSON.stringify({...s, topButton: false})); window.LCNDA_EXT.calculator.refreshButton(); });
             await page.evaluate(() => window.LCNDA_APP.refreshScreen?.()); await page.waitForTimeout(1500);

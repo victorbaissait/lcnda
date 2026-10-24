@@ -653,12 +653,21 @@
     const TB_OWN = ['simple', 'calc']; // ces deux-là : leur réglage à eux
     /* Les raccourcis vers les outils, cachés au départ (cochés un par un) : chaque outil de 🛠️ Outils de modification
      * (Listes → Outils de modification, sur son onglet) et chaque partie d'Enquêtes (🔍 Enquêtes, 🧭 Battue, 📚 Atelier, 🧩 Tableaux).
-     * Montrés : localStorage['genealogie-topbar-buttons'].on = [clés]. */
+     * Montrés : localStorage['genealogie-topbar-buttons'].on = [clés] ; ce que fait le clic : .mode = {clé: 'new'} (un nouveau projet ;
+     * sinon la liste des projets de l'outil). */
     const TB_ENQ = [['enquetes', '🔍', 'Enquêtes'], ['battue', '🧭', 'Battue'], ['atelier', '📚', 'Atelier'], ['tableaux', '🧩', 'Tableaux']];
+    const enqGo = k => { const st = A().state; st.enquetesTab = k; st.currentInvestigationId = 0; st.currentBattueId = 0; st.currentBoardId = 0; return A().setModule('enquetes'); };
+    const ENQ_NEW = {enquetes: ['＋ Nouvelle enquête', () => A().openInvestigationDialog?.(A().state.currentPersonId)], battue: ['＋ Nouvelle battue', () => A().openBattueDialog?.()],
+        atelier: ['＋ Nouveau projet', () => ext.atelierNewProject?.()], tableaux: ['＋ Nouveau tableau', () => ext.newBoard?.()]};
     const tbTools = () => [
-        ...(ext.editToolsList?.() || []).map(t => ({key: 'et_' + t.key, icon: t.icon || '🛠️', label: t.label, group: 'Outil de modification', go: () => ext.openEditToolTab?.(t.key)})),
-        ...TB_ENQ.map(([k, icon, label]) => ({key: 'enq_' + k, icon, label, group: 'Enquêtes', go: () => { const st = A().state; st.enquetesTab = k; st.currentInvestigationId = 0; st.currentBattueId = 0; st.currentBoardId = 0; A().setModule('enquetes'); }})),
+        ...(ext.editToolsList?.() || []).map(t => ({key: 'et_' + t.key, icon: t.icon || '🛠️', label: t.label, group: 'Outil de modification', newLabel: String(t.createLabel || '＋ Nouveau projet'),
+            go: () => ext.openEditToolTab?.(t.key),
+            create: t.create ? async () => { await ext.openEditToolTab?.(t.key); const st = A().state; t.create(() => { if (st.module === 'listes' && st.listType === 'edit_tools') ext.openEditToolTab?.(t.key); }); } : null})),
+        ...TB_ENQ.map(([k, icon, label]) => ({key: 'enq_' + k, icon, label, group: 'Enquêtes', newLabel: ENQ_NEW[k][0], go: () => enqGo(k), create: async () => { await enqGo(k); ENQ_NEW[k][1](); }})),
     ];
+    /** le clic sur un raccourci : la liste des projets, ou un nouveau projet (au choix, dans « Boutons en haut à droite ») */
+    const tbRun = key => { const t = tbTools().find(x => x.key === key); if (!t) return; if (topbarCfg().mode[key] === 'new' && t.create) return t.create(); return t.go(); };
+    function topbarSetMode(k, m) { if (!isTool(k)) return; const c = topbarCfg(); if (m === 'new') c.mode[k] = 'new'; else delete c.mode[k]; lsSet(TB_KEY, c); applyTopbar(); }
     const isTool = k => /^(et|enq)_/.test(k);
     const tbItems = () => [...TB_ITEMS, ...tbTools().map(t => [t.key, '#tb-go-' + t.key, t.icon, t.label, t.group])];
     const tbKeys = () => tbItems().map(b => b[0]);
@@ -667,7 +676,8 @@
         const order = Array.isArray(v.order) ? v.order.filter((k, i, l) => keys.includes(k) && l.indexOf(k) === i) : [];
         keys.forEach((k, i) => { if (!order.includes(k)) order.splice(Math.min(i, order.length), 0, k); });
         return {order, hidden: Array.isArray(v.hidden) ? v.hidden.filter((k, i, l) => keys.includes(k) && !TB_OWN.includes(k) && !isTool(k) && l.indexOf(k) === i) : [],
-            on: Array.isArray(v.on) ? v.on.filter((k, i, l) => isTool(k) && l.indexOf(k) === i) : []};
+            on: Array.isArray(v.on) ? v.on.filter((k, i, l) => isTool(k) && l.indexOf(k) === i) : [],
+            mode: Object.fromEntries(Object.entries(v.mode && typeof v.mode === 'object' && !Array.isArray(v.mode) ? v.mode : {}).filter(([k, m]) => isTool(k) && m === 'new'))};
     }
     const calcShown = () => (lsGet('genealogie-calculette', {}) || {}).topButton !== false;
     const simpleShown = () => { const ms = ext.modeSimple; if (ms?.settings) return !!ms.settings().forAll; const loc = lsGet('lcnda-mode-simple-local', null); const s = loc && loc.baseAll === false ? loc : (lsGet('genealogie-mode-simple', {}) || {}); return s.forAll === true; };
@@ -684,7 +694,7 @@
     function topbarSave(order, shown) {
         const keys = tbKeys(), hidden = keys.filter(k => !TB_OWN.includes(k) && !isTool(k) && shown[k] === false);
         const on = [...topbarCfg().on.filter(k => !(k in shown)), ...keys.filter(k => isTool(k) && shown[k] === true)];
-        lsSet(TB_KEY, {order: order.filter(k => keys.includes(k)), hidden, on});
+        lsSet(TB_KEY, {order: order.filter(k => keys.includes(k)), hidden, on, mode: topbarCfg().mode});
         TB_OWN.forEach(k => { if (k in shown && shown[k] !== topbarShown(k)) topbarSetShown(k, shown[k]); });
         applyTopbar();
     }
@@ -703,7 +713,9 @@
             const cfg = topbarCfg(), tools = tbTools();
             // les raccourcis vers les outils : un bouton chacun, posé une fois, caché tant qu'il n'est pas coché
             tools.forEach(t => { let el = meta.querySelector(`:scope > #tb-go-${t.key}`);
-                if (!el) { el = document.createElement('button'); el.type = 'button'; el.id = 'tb-go-' + t.key; el.className = 'icon-button lc-tb-go'; el.title = `${t.label} (${t.group})`; el.setAttribute('aria-label', t.label); el.textContent = t.icon; el.addEventListener('click', () => tbTools().find(x => x.key === t.key)?.go()); meta.insertBefore(el, meta.querySelector(':scope > .status-dot')); }
+                if (!el) { el = document.createElement('button'); el.type = 'button'; el.id = 'tb-go-' + t.key; el.className = 'icon-button lc-tb-go'; el.textContent = t.icon; el.addEventListener('click', () => tbRun(t.key)); meta.insertBefore(el, meta.querySelector(':scope > .status-dot')); }
+                const lab = cfg.mode[t.key] === 'new' && t.create ? `${t.label} : ${t.newLabel.replace(/^[＋+]\s*/, '')}` : `${t.label} (${t.group})`;
+                if (el.title !== lab) { el.title = lab; el.setAttribute('aria-label', lab); }
                 el.toggleAttribute('data-tb-off', !cfg.on.includes(t.key)); });
             const items = tbItems();
             const els = cfg.order.map(k => { const d = items.find(b => b[0] === k); const el = meta.querySelector(`:scope > ${d[1]}`); if (el && !TB_OWN.includes(k)) el.toggleAttribute('data-tb-off', !topbarShown(k, cfg)); return el; }).filter(Boolean);
@@ -725,10 +737,11 @@
         return `<div class="lc-tb-prev" aria-hidden="true">${vis.map(k => { const d = tbItems().find(b => b[0] === k); return `<span class="lc-tb-btn${k === 'simple' ? ' is-wide' : ''}" title="${esc(d[3])}">${tbIcon(d)}${k === 'simple' ? '<b>Mode simple</b>' : ''}</span>`; }).join('')}<span class="lc-tb-dot"></span><span class="lc-tb-count">${esc(count)}</span></div>${vis.length ? '' : (A().empty ? A().empty('Pas de bouton : seul le compteur reste en haut à droite.', {icon: '👁'}) : '')}`;
     }
     function topbarPanelHtml() {
-        const cfg = topbarCfg(), items = tbItems(), shown = Object.fromEntries(items.map(b => [b[0], topbarShown(b[0], cfg)]));
+        const cfg = topbarCfg(), items = tbItems(), tools = tbTools(), shown = Object.fromEntries(items.map(b => [b[0], topbarShown(b[0], cfg)]));
+        const modeSel = k => { const t = tools.find(x => x.key === k); if (!t?.create) return ''; return `<label class="lc-tb-mode">Le clic ouvre <select data-tb-mode aria-label="Ce qu’ouvre « ${esc(t.label)} »"><option value="list">la liste des projets</option><option value="new" ${cfg.mode[k] === 'new' ? 'selected' : ''}>${esc(t.newLabel.replace(/^[＋+]\s*/, '').replace(/^./, c => c.toLowerCase()))}</option></select></label>`; };
         const note = {simple: 'Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ.', calc: 'Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »).', split: 'Aussi : ⇧ + Entrée dans la recherche rapide.'};
-        const row = (k, i) => { const d = items.find(x => x[0] === k); if (!d) return ''; return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher ce bouton"><input type="checkbox" data-tb-show aria-label="Afficher « ${esc(d[3])} »" ${shown[k] ? 'checked' : ''}></label><span class="lc-hh-ico" aria-hidden="true">${d[2]}</span><b>${esc(d[3])}${note[k] || d[4] ? `<small class="muted">${esc(note[k] || `Raccourci : ${d[4] === 'Enquêtes' ? 'Enquêtes, sur cet onglet' : 'Listes → 🛠️ Outils de modification, sur cet outil'}. Caché au départ.`)}</small>` : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-tb-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-tb-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
-        return `<section class="person-block-config" id="lc-topbar-buttons"><header><span class="eyebrow">APPARENCE</span><h3 data-help="Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre." data-help-faq="boutons en haut à droite">Boutons en haut à droite</h3><p>Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut. C’est gardé tout de suite.</p></header>
+        const row = (k, i) => { const d = items.find(x => x[0] === k); if (!d) return ''; return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher ce bouton"><input type="checkbox" data-tb-show aria-label="Afficher « ${esc(d[3])} »" ${shown[k] ? 'checked' : ''}></label><span class="lc-hh-ico" aria-hidden="true">${d[2]}</span><b>${esc(d[3])}${note[k] || d[4] ? `<small class="muted">${esc(note[k] || `Raccourci : ${d[4] === 'Enquêtes' ? 'Enquêtes, sur cet onglet' : 'Listes → 🛠️ Outils de modification, sur cet outil'}. Caché au départ.`)}</small>` : ''}${d[4] ? modeSel(k) : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-tb-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-tb-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
+        return `<section class="person-block-config" id="lc-topbar-buttons"><header><span class="eyebrow">APPARENCE</span><h3 data-help="Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre." data-help-faq="boutons en haut à droite">Boutons en haut à droite</h3><p>Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite.</p></header>
             <div class="design-order-grid block-grid">
             <section class="maintenance-panel order-editor block-order-editor"><div class="item-title-row"><h3>Ordre et visibilité des boutons</h3></div>
                 <div class="order-list block-order-list" id="lc-tb-order">${cfg.order.map(row).join('')}</div>
@@ -748,7 +761,7 @@
         const list = box.querySelector('#lc-tb-order');
         if (list && A().setupDragOrder) A().setupDragOrder(list);
         const save = () => { const r = readTopbarPanel(box); topbarSave(r.order, r.shown); box.querySelector('[data-tb-preview]').innerHTML = topbarPreviewHtml(r.order, r.shown); };
-        box.addEventListener('change', e => { if (e.target.matches('[data-tb-show]')) save(); });
+        box.addEventListener('change', e => { if (e.target.matches('[data-tb-show]')) save(); if (e.target.matches('[data-tb-mode]')) topbarSetMode(e.target.closest('.order-row').dataset.orderKey, e.target.value); });
         list?.addEventListener('dragend', () => setTimeout(save, 0));
         list?.addEventListener('drop', e => e.preventDefault());
         box.addEventListener('click', e => {
@@ -798,5 +811,5 @@
     });
     injectShapeCss();
     window.LCNDA_APPARENCE = {cleanShape, svgToShape, shapeStore, orderedShapes, addShape, headerCfg, applyHeader, openShapeEditor, sheadCfg, HEAD_BUTTONS, SHEAD_KEY,
-        TOPBAR_ITEMS: TB_ITEMS, topbarCfg, topbarShown, topbarSetShown, topbarSave, topbarReset, applyTopbar};
+        TOPBAR_ITEMS: TB_ITEMS, topbarCfg, topbarShown, topbarSetShown, topbarSetMode, topbarSave, topbarReset, applyTopbar};
 })();
