@@ -109,6 +109,19 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             const pos = await p.evaluate(() => window.__ed.house.floors[0].openings.map(o => Math.round(o.pos * 1200)));
             assert.deepEqual(pos, [240, 480, 720, 960]);
         });
+        await t('🏷 étiquette à flèche : un clic sur le point, un clic où écrire ; la pointe se déplace ; s’enlève', async () => {
+            await p.evaluate(() => { window.__ed.setTool('note'); }); await p.waitForTimeout(200);
+            const at = async (x, y) => { const b = await p.evaluate(([x, y]) => { const s = document.querySelector('.h-hs-dlg [data-hs-svg]'), g = document.querySelector('.h-hs-dlg [data-hs-world]').getScreenCTM(), pt = s.createSVGPoint(); pt.x = x; pt.y = y; const q = pt.matrixTransform(g); return [q.x, q.y]; }, [x, y]); await p.mouse.click(b[0], b[1]); await p.waitForTimeout(250); };
+            await at(350, 400); await at(350, 700);
+            await p.waitForSelector('dialog.ask-text-dialog[open] input'); await p.fill('dialog.ask-text-dialog[open] input', 'Ici était le puits'); await p.keyboard.press('Enter'); await p.waitForTimeout(500);
+            const lb = await p.evaluate(() => window.__ed.house.floors[0].labels.find(q => q.text === 'Ici était le puits'));
+            assert.ok(lb && Array.isArray(lb.tip), 'étiquette avec sa pointe'); assert.ok(Math.abs(lb.tip[0] - 350) < 15 && Math.abs(lb.tip[1] - 400) < 15, JSON.stringify(lb.tip));
+            assert.equal(await p.$$eval('.h-hs-dlg .h-hs-notearr', l => l.length), 1, 'la flèche est dessinée');
+            assert.ok(await p.$('.h-hs-dlg [data-hs-tip]'), 'la poignée de la pointe');
+            assert.match(await p.evaluate(() => window.LCNDA_EXT.houseDxf.toDxf(window.__ed.house.floors[0])), /Ici \\U\+00E9tait le puits/, 'dans le DXF');
+            await p.evaluate(() => { const i = document.querySelector('.h-hs-dlg [data-hs-tipon]'); i.checked = false; i.dispatchEvent(new Event('input', {bubbles: true})); }); await p.waitForTimeout(300);
+            assert.equal(await p.$$eval('.h-hs-dlg .h-hs-notearr', l => l.length), 0, 'flèche retirée');
+        });
         await t('aucune erreur JavaScript', () => assert.deepEqual(errs, []));
     } finally { await browser.close(); proc.kill(); fs.rmSync(dir, {recursive: true, force: true}); }
     finish();

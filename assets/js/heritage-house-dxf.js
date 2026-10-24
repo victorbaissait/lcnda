@@ -44,7 +44,7 @@
         (f.items || []).forEach(it => { const a = (Number(it.rot) || 0) * Math.PI / 180, cs = Math.cos(a), sn = Math.sin(a), hw = (Number(it.w) || 50) / 2, hd = (Number(it.d) || 50) / 2;
             poly('MOBILIER', [[-hw, -hd], [hw, -hd], [hw, hd], [-hw, hd]].map(([x, y]) => [it.x + x * cs - y * sn, it.y + x * sn + y * cs]), true);
             if (it.name) text('MOBILIER', [it.x, it.y], it.name, 8, true); });
-        (f.labels || []).forEach(lb => text('TEXTES', [lb.x, lb.y], lb.text, Number(lb.size) || 24));
+        (f.labels || []).forEach(lb => { text('TEXTES', [lb.x, lb.y], lb.text, Number(lb.size) || 24); if (Array.isArray(lb.tip)) line('TEXTES', [lb.x, lb.y - (Number(lb.size) || 24) * .35], lb.tip); }); // 🏷 la flèche d'une étiquette
         (f.dims || []).forEach(dm => { line('COTES', dm.a, dm.b); const m = [(dm.a[0] + dm.b[0]) / 2, (dm.a[1] + dm.b[1]) / 2]; text('COTES', [m[0], m[1] - 6], `${String(Math.round(Math.hypot(dm.b[0] - dm.a[0], dm.b[1] - dm.a[1])) / 100).replace('.', ',')} m`, 10, true); });
         text('TEXTES', [0, -60], `${name} - ${f.name || ''} (cm)`, 20);
         P(0, 'ENDSEC', 0, 'EOF');
