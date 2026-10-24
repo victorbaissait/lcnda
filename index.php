@@ -1228,10 +1228,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=46" defer></script>
 <script src="assets/js/heritage-dnd.js?v=11" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=1" defer></script>
-<script src="assets/js/heritage-studio.js?v=100" defer></script>
+<script src="assets/js/heritage-studio.js?v=101" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-fluidite.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-gomme.js?v=1" defer></script>
+<script src="assets/js/heritage-retouch-bord.js?v=1" defer></script>
 <script src="assets/js/heritage-psd.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=12" defer></script>
 <script src="assets/js/heritage-fiches.js?v=21" defer></script>

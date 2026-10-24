@@ -1,7 +1,7 @@
 'use strict';
 process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
- * 🎚️ Retouche — 🪄 Gomme magique (heritage-retouch-gomme.js) :   node tests/test-retouche-gomme.js
+ * 🎚️ Retouche — 🪄 Gomme magique (heritage-retouch-gomme.js) et ✨ affiner le bord (heritage-retouch-bord.js) :   node tests/test-retouche-gomme.js
  *   le calcul (Node) : zone voisine ou couleur partout, bord adouci ; dans la retouche : un clic sur le papier blanc le rend
  *   transparent (le texte noir reste), ↶ annule, « Appliquer » pose le masque de la photo, une étape d'historique ; aucune erreur.
  */
@@ -12,7 +12,7 @@ const net = require('node:net');
 const path = require('node:path');
 const { spawn, spawnSync } = require('node:child_process');
 const { findPhp, devBundledPhp, phpRuntimeArgs } = require('../electron/php-server');
-const G = require('../assets/js/heritage-retouch-gomme.js');
+const G = require('../assets/js/heritage-retouch-gomme.js'), R = require('../assets/js/heritage-retouch-bord.js');
 const appRoot = path.resolve(__dirname, '..');
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-gomme-')); fs.mkdirSync(path.join(tmp, 'media'));
 const env = { ...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1' };
@@ -24,6 +24,14 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         const W = 6, d = new Uint8ClampedArray([255, 255, 255, 255, 250, 250, 250, 255, 0, 0, 0, 255, 255, 255, 255, 255, 235, 235, 235, 255, 255, 255, 255, 255]);
         assert.deepEqual([...G.erase(d, W, 1, 0, 0, { tol: 5 })], [255, 255, 0, 0, 0, 0]);
         assert.deepEqual([...G.erase(d, W, 1, 0, 0, { tol: 5, contiguous: false })].map(v => v > 0 ? (v === 255 ? 1 : 0.5) : 0), [1, 1, 0, 1, 0.5, 1]);
+    });
+    await t('✨ affiner (Node) : décaler le bord rentre ou sort, lisser adoucit l’escalier, contraste durcit ; le rayon intelligent suit la photo', () => {
+        const W = 40, H = 40, m = new Float32Array(W * H), g = new Float32Array(W * H);
+        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { m[y * W + x] = x >= 10 && x < 30 && y >= 10 && y < 30 ? 1 : 0; g[y * W + x] = x >= 14 && x < 30 && y >= 10 && y < 30 ? 1 : 0; }
+        const inn = R.refine(m, g, W, H, { shift: -4 }), out = R.refine(m, g, W, H, { shift: 4 });
+        assert.ok(inn[20 * W + 11] < 0.5 && inn[20 * W + 20] > 0.99, 'rentre'); assert.ok(out[20 * W + 8] > 0.5, 'sort');
+        const sm = R.refine(m, g, W, H, { smooth: 4 }); assert.ok(sm[20 * W + 10] > 0.2 && sm[20 * W + 10] < 0.9, 'adouci');
+        const sg = R.refine(m, g, W, H, { smart: 4 }); assert.ok(sg[20 * W + 11] < 0.8, `le bord va sur le contour de la photo (${sg[20 * W + 11]})`);
     });
     let pw = null; for (const m of ['playwright', '/opt/node-tools/node_modules/playwright']) { try { pw = require(m); break; } catch (_) {} }
     const phpPath = findPhp([devBundledPhp()]);
@@ -61,6 +69,14 @@ $pdo->exec("INSERT INTO media(id,title,media_type,filename,thumbnail) VALUES(1,'
             assert.equal(await page.$('dialog.h-retouch .h-rt-magic'), null);
             assert.ok(await alpha(MAIN, 0.9, 0.9) < 20, 'papier transparent'); assert.equal(await alpha(MAIN, 0.5, 0.5), 255);
             assert.ok((await page.$$eval('dialog.h-retouch .h-rt-history li span', l => l.map(s => s.textContent))).some(s => /Gomme magique/.test(s)));
+        });
+        await t('✨ affiner le bord du masque de la photo : « Décaler le bord » de −10 px rentre le bord du carré', async () => {
+            assert.equal(await alpha(MAIN, 0.385, 0.5), 255, 'avant : le bord du carré est gardé');
+            await page.evaluate(() => document.querySelector('dialog.h-retouch [data-rt-cmd="plus:refineEdge"]').click()); await page.waitForSelector('dialog.h-retouch .h-rt-refine');
+            for (const [k, v] of [['smart', '0'], ['smooth', '0'], ['contrast', '0'], ['shift', '-10']]) await page.$eval(`dialog.h-retouch .h-rt-refine [data-rf="${k}"]`, (i, v) => { i.value = v; i.dispatchEvent(new Event('input', { bubbles: true })); }, v);
+            await page.click('dialog.h-retouch .h-rt-refine [data-rf-ok]'); await page.waitForTimeout(400);
+            assert.ok(await alpha(MAIN, 0.385, 0.5) < 60, 'le liseré est parti'); assert.equal(await alpha(MAIN, 0.5, 0.5), 255);
+            assert.ok((await page.$$eval('dialog.h-retouch .h-rt-history li span', l => l.map(s => s.textContent))).some(s => /Bord du masque affiné/.test(s)));
         });
         await t('aucune erreur dans la page', () => assert.deepEqual(errors, []));
     } finally { await browser.close(); srv.kill(); }
