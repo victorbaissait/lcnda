@@ -247,3 +247,13 @@ dialog.modal.wp-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 .wp-mm-chips { display: flex; flex-wrap: wrap; gap: 6px; max-height: 120px; overflow: auto; }
 .wp-mm-prev { margin-top: 10px; }
 .wp-mm-sheet { border: 1px solid var(--line, #d9dce2); padding: 14px 18px; max-height: 240px; overflow: auto; background: #fff; color: #111; font-family: Georgia, serif; font-size: 13px; }
+
+/* 🔁 synonymes, 🔎 relecture, ♿ accessibilité (heritage-traitement-texte-relecture.js) */
+.wp-syn { display: flex; flex-wrap: wrap; gap: 6px; }
+.wp-proof { margin: 8px 0; padding-left: 22px; max-height: 50vh; overflow: auto; }
+.wp-proof li { margin: 4px 0; line-height: 1.5; }
+.wp-proof li.is-done { opacity: .55; }
+.wp-proof li.is-done .wp-pf-ctx { text-decoration: line-through; }
+.wp-pf-ctx { font-family: Georgia, serif; }
+.wp-pf-ctx mark { background: #ffe08a; color: #3a2a00; border-radius: 3px; padding: 0 2px; }
+.wp-body .wp-ax-flash { outline: 3px solid #e0a100; outline-offset: 2px; transition: outline-color .3s; }
