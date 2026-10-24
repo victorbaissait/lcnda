@@ -720,7 +720,8 @@
             const fw = 1 - cl - cr, fh = 1 - ct - cb;
             if (fw > 0.01 && fh > 0.01) {
                 const dx = -w / 2 + w * cl, dy = -h / 2 + h * ct;
-                g.drawImage(el, vw * cl, vh * ct, vw * fw, vh * fh, dx, dy, w * fw, h * fh);
+                const kf = c.key?.on && ext.montageKey ? ext.montageKey.frame(el, vw, vh, c.key) : null; // 🟩 fond vert (heritage-montage-plus.js)
+                if (kf) g.drawImage(kf.canvas, kf.w * cl, kf.h * ct, kf.w * fw, kf.h * fh, dx, dy, w * fw, h * fh); else g.drawImage(el, vw * cl, vh * ct, vw * fw, vh * fh, dx, dy, w * fw, h * fh);
                 if (!main && c.border !== false) { g.filter = 'none'; g.globalCompositeOperation = 'source-over'; g.strokeStyle = '#fff'; g.lineWidth = Math.max(2, W / 400) / Math.max(0.1, Math.abs(sc)); g.strokeRect(dx, dy, w * fw, h * fh); }
             }
             g.restore();
@@ -1238,7 +1239,7 @@
             else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? '🖼️ Photo' : '🎬 Morceau'} de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? `${fmt(c.to - c.from)} à l’écran` : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
                 ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}
                 <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${c.tr?.type === 'color' ? `<label class="h-avx-row">Couleur du fondu <input type="color" value="${esc(/^#[0-9a-f]{6}$/i.test(c.tr.color || '') ? c.tr.color : '#7a4b22')}" data-mt-k="tr.color"></label>` : ''}${rng('tr.d', 'Durée de la transition', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}${P.v1[0] === c && c.tr?.type && c.tr.type !== 'none' ? '<p class="muted">C’est le premier morceau : sa transition ne joue pas (il n’y a rien avant lui).</p>' : ''}
-                ${stabHtml(c)}
+                ${stabHtml(c)}${ext.montageKey?.html(c, rng, chk) || ''}
                 ${isImg(c) ? '' : `${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="ui-toggle"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}><i></i>🔇 Sans son</label>${c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep title="Le son passe sur une piste son : on le déplace, le coupe ou le règle à part de l’image">🔊 Séparer le son de l’image</button>'}${clipSound(c)}`}
                 ${inspectorHtml(c, true)}
                 <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}${oldHtml(c.old, 'old', 'Vieux film (ce morceau)')}`;
@@ -1247,7 +1248,7 @@
                 ${c.full ? `<label class="h-avx-row">Cadrage <select data-mt-k="fit">${FITS.slice(0, 2).map(([k, l]) => `<option value="${k}" ${(c.fit || 'fit') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}
                 ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}${c.full ? '' : rng('w', 'Largeur', 10, 300, 1, c.w ?? 35, ' %')}${c.full ? '' : rng('x', 'Position horizontale', -100, 100, 1, c.x ?? 62, ' %') + rng('y', 'Position verticale', -100, 100, 1, c.y ?? 6, ' %')}
                 ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + (c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep>🔊 Séparer le son de l’image</button>') + clipSound(c)}${trackSel('v2', c)}<label class="ui-toggle"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}><i></i>cadre blanc</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}><i></i>apparaît et disparaît en fondu</label>
-                ${stabHtml(c)}${oldHtml(c.old, 'old', 'Vieux film (cette vidéo)')}
+                ${stabHtml(c)}${ext.montageKey?.html(c, rng, chk) || ''}${oldHtml(c.old, 'old', 'Vieux film (cette vidéo)')}
                 ${inspectorHtml(c, false)}`;
             else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
                 <details class="h-mt-isec" open><summary><b>✨ Mouvement</b></summary>
@@ -1349,6 +1350,7 @@
             if (e.target.closest('[data-mt-beatsdel]')) { const c = selected(); if (c) { delete c.beats; delete c.bpm; touch(0); } return; }
             if (e.target.closest('[data-mt-beatcut]')) { const c = selected(); if (c && sel?.track === 'audio') beatCut(c); return; }
             const ap = e.target.closest('[data-mt-animprev]'); if (ap) { const c = selected(); if (c && sel?.track === 'texts') { eng.pause(); eng.seek(c.at).then(() => eng.play()); } return; }
+            const kc = e.target.closest('[data-mt-keycol]'); if (kc) { const c = selected(); if (c) { c.key = {...(c.key || {}), on: true, color: kc.dataset.mtKeycol}; touch(0); } return; } // 🟩 fond vert ou bleu
             const sp = e.target.closest('[data-mt-speed]'); if (sp) { const c = selected(); if (c) { c.speed = Number(sp.dataset.mtSpeed); touch(1); } return; }
             const idur = e.target.closest('[data-mt-imgdur]'); if (idur) { const c = selected(); if (c) { c.to = c.from + Number(idur.dataset.mtImgdur); touch(1); } return; }
             if (e.target.closest('[data-mt-afxall]')) { const c = selected(); if (!c) return; const f = {...(c.afx || {})}; [...P.v1, ...P.v2, ...P.audio].forEach(x => { if (!isImg(x)) x.afx = {...f}; }); toast('Réglages du son mis sur tous les sons du projet.'); touch(2); return; }

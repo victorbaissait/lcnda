@@ -4,6 +4,7 @@
  *    double-clic pour revenir au centre. Dessinées sur l'image par le moteur (aperçu et export identiques) ;
  *  - 🎯 Vectorscope et histogramme : les couleurs de l'image (teinte autour, saturation vers le bord) avec les repères
  *    R, Mg, B, Cy, V, J et la ligne des tons chair ; la lumière de sombre à clair ; suit la lecture ;
+ *  - 🟩 Fond vert : la couleur du fond (vert, bleu, au choix) devient transparente, avec bord adouci et reflet retiré ;
  *  - 📢 Volume standard à l'export (LUFS, norme UIT-R BS.1770) : le montage est d'abord mélangé hors ligne et mesuré, puis
  *    enregistré au bon niveau (−14 internet, −16 balado, −23 télévision), sans dépasser −1 dB de crête.
  * Sans écran (Node, essais) : ext.montageLoud = {lufs, kWeights, gainFor} et ext.montageWheels = {parse, color, scopeXY}.
@@ -155,7 +156,40 @@
     }
     ext.montageScope = scope;
 
-    if (typeof module === 'object' && module.exports) module.exports = {lufs, kWeights, parse, color, scopeXY};
+    /* ═════════ 🟩 Fond vert (incrustation par couleur) : ce qui a la couleur choisie devient transparent ═════════ */
+    const hexRgb = h => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ''); const n = m ? parseInt(m[1], 16) : 0x00ff00; return [n >> 16, n >> 8 & 255, n & 255]; };
+    const cbcr = (r, g, b) => [(-0.168736 * r - 0.331264 * g + 0.5 * b) / 255, (0.5 * r - 0.418688 * g - 0.081312 * b) / 255];
+    /** RGBA en place : k = {color, tol (0…1), soft (0…1), spill (bool)} ; la distance se mesure dans les couleurs (pas la lumière) :
+     *  une ombre sur le fond vert part aussi ; la couleur du fond qui « bave » sur le sujet (cheveux, bords) est retirée */
+    function keyPixels(d, k = {}) {
+        const kc = hexRgb(k.color), [kb, kr] = cbcr(...kc), tol = Math.max(0, Math.min(1, k.tol ?? 0.3)) * 0.6, soft = Math.max(0.005, Math.min(1, k.soft ?? 0.15) * 0.4);
+        const dom = kc.indexOf(Math.max(...kc)), o1 = (dom + 1) % 3, o2 = (dom + 2) % 3, spill = k.spill !== false;
+        for (let i = 0; i < d.length; i += 4) {
+            const [b, r] = cbcr(d[i], d[i + 1], d[i + 2]), dist = Math.hypot(b - kb, r - kr);
+            if (dist < tol + soft) { const t = Math.max(0, (dist - tol) / soft), a = t * t * (3 - 2 * t); d[i + 3] = Math.round(d[i + 3] * a); }
+            if (spill && dist < tol + soft * 4) { const lim = Math.max(d[i + o1], d[i + o2]); if (d[i + dom] > lim) d[i + dom] = lim; }
+        }
+        return d;
+    }
+    const keyCache = new WeakMap();
+    /** l'image du moment détourée (au plus 960 px de côté, pour rester fluide) : {canvas, w, h} */
+    function keyFrame(el, vw, vh, k) {
+        const s = Math.min(1, 960 / Math.max(vw, vh)), w = Math.max(1, Math.round(vw * s)), h = Math.max(1, Math.round(vh * s));
+        let cv = keyCache.get(el); if (!cv) { cv = document.createElement('canvas'); keyCache.set(el, cv); }
+        if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+        const g = cv.getContext('2d', {willReadFrequently: true}); g.clearRect(0, 0, w, h); g.drawImage(el, 0, 0, w, h);
+        const id = g.getImageData(0, 0, w, h); keyPixels(id.data, k); g.putImageData(id, 0, 0); return {canvas: cv, w, h};
+    }
+    /** le réglage dans l'inspecteur d'un morceau (rng, chk : les aides de l'inspecteur du montage) */
+    const keyHtml = (c, rng, chk) => { const k = c.key || {}; return `<details class="h-mt-isec h-mt-key" ${k.on ? 'open' : ''}><summary><b>🟩 Fond vert (incrustation)</b></summary>
+        ${chk('key.on', 'Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit', k.on)}
+        <label class="h-avx-row">Couleur du fond <input type="color" data-mt-k="key.color" value="${/^#[0-9a-f]{6}$/i.test(k.color || '') ? k.color : '#00ff00'}"></label>
+        <div class="h-mt-quick"><button type="button" data-mt-keycol="#00ff00">Vert</button><button type="button" data-mt-keycol="#0047bb">Bleu</button></div>
+        ${rng('key.tol', 'Tolérance', 0, 1, 0.01, k.tol ?? 0.3, '%')}${rng('key.soft', 'Bord adouci', 0, 1, 0.01, k.soft ?? 0.15, '%')}${chk('key.spill', 'Enlever le reflet vert sur le sujet (cheveux, bords)', k.spill !== false)}
+        <p class="muted">Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1.</p></details>`; };
+    ext.montageKey = {keyPixels, frame: keyFrame, html: keyHtml};
+
+    if (typeof module === 'object' && module.exports) module.exports = {lufs, kWeights, parse, color, scopeXY, keyPixels};
     if (typeof document === 'undefined' || document.getElementById('h-mt-plus-css')) return;
     const st = document.createElement('style'); st.id = 'h-mt-plus-css'; st.textContent = `
 .h-mt-wheels{margin:10px 0 4px}.h-mt-wheelrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
