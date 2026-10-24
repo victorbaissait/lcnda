@@ -1863,6 +1863,8 @@
         async function exportHtml(file) { msg('Préparation du fichier HTML (les images sont intégrées)…'); const html = await inlineImages(printHtml(docForExport(), docName, false)); download(file || `${slug(docName)}.html`, new Blob([html], {type: 'text/html'})); msg(''); }
         function exportJson(file) { download(file || `${slug(docName)}.json`, new Blob([JSON.stringify({type: 'lcnda-mise-en-page-livre', version: 1, name: docName, is_design: design ? 1 : 0, doc: docForExport()}, null, 1)], {type: 'application/json'})); }
         async function exportEpub(file) { msg('Préparation du livre numérique (ePub)…'); try { const blob = await buildEpub(docForExport(), docName); download(file || `${slug(docName)}.epub`, blob); msg(`📱 ePub prêt (${Math.max(1, Math.round(blob.size / 1024))} Ko) : il s’ouvre dans Livres, Kobo, Calibre…`); } catch (err) { msg(''); throw err; } }
+        /** 🗄️ PDF/A : chaque page dessinée en image (300 points par pouce), profil sRGB et métadonnées intégrés (heritage-layout-pdfa.js) */
+        async function exportPdfA(file) { msg('🗄️ PDF/A : dessin des pages…'); try { const blob = await ext.layoutPdfA.fromDoc(docForExport(), docName, {dpi: 300, onStep: p => msg(`🗄️ PDF/A : dessin des pages… ${Math.round(p * 100)} %`)}); download(file || `${slug(docName)}.pdf`, blob); msg(`🗄️ PDF/A prêt (${(blob.size / 1048576).toFixed(1).replace('.', ',')} Mo) : fait pour être gardé longtemps (archives, notaire, dépôt).`); } catch (err) { msg(''); throw err; } }
         /** E3 : une seule fenêtre pour tous les exports */
         function exportDialog(value = 'pdf') {
             if (editingId) stopEditing();
@@ -1874,6 +1876,7 @@
                 formats: [
                     {id: 'pdf', ext: '', hint: 'par l’impression', run: o => exportPrint(o.bleed)},
                     {id: 'print', run: o => exportPrint(o.bleed, {autoPrint: true})},
+                    ...(ext.layoutPdfA ? [{id: 'pdfa', label: '🗄️ PDF/A', hint: 'archivage (ISO 19005), pages en image', ext: 'pdf', quality: false, run: o => exportPdfA(o.filename)}] : []),
                     {id: 'epub', label: '📱 ePub', hint: 'liseuse, téléphone, tablette', ext: 'epub', quality: false, run: o => exportEpub(o.filename)},
                     {id: 'html', label: '🌐 HTML', hint: 'une page, photos comprises', ext: 'html', quality: false, run: o => exportHtml(o.filename)},
                     {id: 'annot', label: '📝 PDF annoté', hint: open ? `avec ${A().plural(open, 'commentaire')}` : 'avec les commentaires', ext: '', run: o => exportPrint(o.bleed, {annot: true})},
@@ -2771,7 +2774,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     ext.openLayoutDoc = async (id, onSaved) => { const r = await api('layout_doc', {id}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved, rev: r.rev}); };
     ext.newLayoutDoc = (mode, onSaved) => newDocWizard(mode, onSaved);
     // 🎨 pour heritage-artist-catalogue.js : fabriquer un livre (catalogue raisonné, discographie) avec les mêmes briques que le livre de famille
-    ext.layoutKit = {SIZES, THEMES, themeDoc, baseStyles, baseSwatches, folioMaster, defaults, cleanDoc, nid, box, flow, textItem, shapeItem, coverItems, openEditor, printHtml, buildEpub, resolveDoc};
+    ext.layoutKit = {SIZES, THEMES, themeDoc, baseStyles, baseSwatches, folioMaster, defaults, cleanDoc, nid, box, flow, textItem, shapeItem, coverItems, openEditor, printHtml, buildEpub, resolveDoc, pageHtml, pageSize, docCss, BASE_CSS, px}; // les cinq derniers : ⤓ PDF/A (heritage-layout-pdfa.js)
     ext.layoutCoverHtml = (cover, w) => coverHtml(cover, w);
     ext.lists.layout_books = async token => {
         const S = A().state, ws = A().$('#workspace'), UI = window.LCNDA_UI;
