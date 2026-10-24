@@ -168,7 +168,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.8.1</span>
+                <span class="eyebrow">VERSION BÊTA · 0.8.2</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source, gratuit et modulable pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -198,8 +198,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.8.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 547 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.8.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.8.2-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 547 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.8.2-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -208,7 +208,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.8.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 563 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.8.2-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 563 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -219,16 +219,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.8.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.8.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 516 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.8.2-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 542 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.8.2-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 516 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.8.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.8.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 512 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.8.2-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.8.2-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 512 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.8.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.8.2-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -236,35 +236,31 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.8.1, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.8.2, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.8.1.zip"><span>Archive .zip<small>Windows, macOS · 268 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.8.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 267 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.8.2.zip"><span>Archive .zip<small>Windows, macOS · 268 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.8.2.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 267 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.8.1<small>Maison comme un plan d'architecte (DXF, répéter, étiquettes à flèche, cartouche), 145 meubles et appareils de plus, site web avec un vrai éditeur de code, tableau croisé et publipostage, réglages plus clairs, raccourcis en haut à droite</small></span></summary>
+                <summary><span>Nouveautés de la version 0.8.2<small>Tableur (solveur, scénarios, actions enregistrées), montage (roues de couleur, fond vert, suivi, plusieurs caméras, volume standard), PDF/A et livret à plier, retouche (Fluidité, gomme magique, PSD), dessin (cote, perspective)</small></span></summary>
                 <div class="presentation-changes-body">
-                    <h4>🏠 Maison, comme un plan d'architecte</h4>
-                    <p>⤒ importe un plan <b>DXF</b> (AutoCAD, LibreCAD, plan d'architecte ou de notaire) et ⤓ exporte le tien en DXF, rangé par calques (murs, pièces, ouvertures, mobilier, textes, cotes). <b>🔁 Répéter</b> pose plusieurs copies d'un coup : 6 chaises autour d'une table (tournées vers elle), une rangée, une grille, ou une rangée de fenêtres le long d'un mur. <b>🏷 Étiquettes à flèche</b> : une note reliée à un point du plan, comme « Ici était le puits » ou « Double vitrage posé en 1978 ». Dans « Affichage » de l'étage : cotes d'ensemble, tableau des pièces et de leurs surfaces posé sur le plan, cartouche (nom, lieu, époque, étage, date) et affichage sombre façon dessin technique.</p>
-                    <h4>🛋️ Mobilier</h4>
-                    <p>145 objets de plus en Électroménager, Bureau, Garage et Luminaires (lave-linge, plaques, hottes, télé au mur, poste TSF, fauteuil de bureau, globe, coffre-fort, machine à écrire, voitures d'hier et d'aujourd'hui, vélos, panneau à outils, lustres, plafonniers, lampes à pétrole…). 71 objets de prière et de mémoire de toutes les traditions (juive, musulmane, bouddhiste, hindoue, sikhe, shinto, culte des ancêtres, orthodoxe, protestante…).</p>
-                    <h4>🌐 Mon site web</h4>
-                    <p>Un éditeur de code complet (chercher et remplacer, aller à la ligne, commenter, mise en forme, vérification, raccourcis). Des fichiers CSS, JS et PHP en plus, rangés en dossiers ; deux fichiers côte à côte ; les vraies pages PHP dans l'aperçu ; ouvrir un dossier entier ; un aide-mémoire HTML, CSS et JS. « 🧭 Navigateurs » vérifie le site et imite Safari, Firefox ou Edge, avec une base de compatibilité qui marche sans internet. Les écrans @media se règlent.</p>
-                    <h4>🧾 Tableur et 📝 traitement de texte</h4>
-                    <p>Tableau croisé dynamique (↻ actualiser) et graphique vivant qui suit la sélection. Champs de fusion, « remplir avec une fiche », publipostage et modèles déjà remplis (demande d'acte, fiche d'identité d'un ancêtre, avis de recherche aux cousins). Le tableur a maintenant son propre symbole, 🧾 ; la calculette garde 🧮.</p>
-                    <h4>📊 Diagrammes</h4>
-                    <p>Sablier, Gantt, carte mentale, barres en cercle, bulles groupées et anneaux d'avancement.</p>
-                    <h4>🎨 Réglages plus clairs</h4>
-                    <p>L'apparence se range en trois groupes (Look, Navigation, Écrans), avec un bouton pour revenir à la page d'avant. Plus de codes A1, A2… : chaque réglage a son icône et son nom. Le prénom et le nom du logo passent dans « Thème et couleurs ». La forme des boutons rejoint « Notifications et boutons ». Les boutons de l'en-tête des fiches tiennent sur deux lignes et se rangent un par un. Ceux du traitement de texte et du tableur se rangent dans « Boutons et options ».</p>
-                    <h4>↗ Boutons en haut à droite</h4>
-                    <p>Un raccourci (caché au départ) vers chaque outil de modification et chaque partie d'Enquêtes, avec le choix d'ouvrir la liste des projets ou un nouveau projet. Il y a aussi « 👤 Nouvelle personne ». Les 🧩 Tableaux rejoignent les Outils de modification.</p>
-                    <h4>🧓 Mode simple et 🐾 suivi</h4>
-                    <p>11 nouvelles sortes de gros boutons (famille, anniversaires, un lieu, quiz, horloge, appel, vidéo, son…), et le cadre à compléter se voit dans l'aperçu. Dans le suivi, un 2e trajet s'ajoute au premier, avec un message clair. Le fond de carte se choisit sur chaque carte.</p>
-                    <h4>🐞 Bugs corrigés</h4>
-                    <p>Une forme d'avatar à toi reste choisie en revenant sur la page. Le PHP embarqué de Windows se télécharge même quand windows.php.net l'a rangé dans « archives/ », et son empreinte est toujours vérifiée.</p>
+                    <h4>🧾 Tableur</h4>
+                    <p>✨ Remplissage instantané (un exemple suffit), Σ sous-totaux avec ⊟ plan qui replie le détail, 📈 mini-graphiques dans les cases, 🎯 valeur cible, 🧮 solveur (plusieurs cases, conditions, nombres entiers), 📋 tableau de scénarios (« et si… »), ⏺ actions enregistrées à refaire en un clic, et les formules LET et LAMBDA.</p>
+                    <h4>🎞️ Présentation</h4>
+                    <p>↔ Liaisons accrochées à deux objets, ⊕ fusion de formes (union, soustraction, intersection), 🗂 masque des diapositives avec le numéro de page, 〰 trajectoires d'animation.</p>
+                    <h4>📝 Traitement de texte</h4>
+                    <p>🔁 Synonymes sans internet, 🔎 relecture (espaces avant « ; : ! ? », guillemets « », points de suspension, apostrophe, mots répétés, majuscules) et ♿ vérification de l'accessibilité (images sans description, titres, tableaux, liens).</p>
+                    <h4>🎬 Montage</h4>
+                    <p>🎨 Roues de couleur, 🎯 vectorscope et histogramme, 📢 volume standard à l'export (LUFS), 🟩 fond vert, 🎯 un titre ou une incrustation qui suit ce qui bouge, 🎥 plusieurs caméras calées par le son et montées en passant de l'une à l'autre.</p>
+                    <h4>📐 Mise en page</h4>
+                    <p>🗄️ Export PDF/A pour l'archivage et 📖 livret à plier (pages remises dans l'ordre d'impression, à agrafer au milieu).</p>
+                    <h4>🎚️ Retouche</h4>
+                    <p>💧 Fluidité (pousser, gonfler, dégonfler, tourbillon), 🪄 gomme magique (le fond d'un document scanné rendu transparent), ✨ affiner le bord d'un masque (cheveux, contours), 🗂 PSD avec ses calques à importer et exporter.</p>
+                    <h4>✏️ Dessin vectoriel</h4>
+                    <p>📏 Outil Cote (la longueur écrite en cm, mm ou pouces), 📐 grille de perspective à 1 ou 2 points de fuite, 〰 largeur variable du trait (effilé, plume, pinceau) et ⧉ mélange de deux formes.</p>
                     <p>La structure de la base ne change pas : aucune mise à jour de la base à la première ouverture.</p>
                 </div>
             </details>
@@ -272,6 +268,31 @@
             <details class="presentation-changes presentation-changes-old">
                 <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
                 <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.8.1 <small>Maison comme un plan d'architecte (DXF, répéter, étiquettes à flèche, cartouche), 145 meubles et appareils de plus, site web avec un vrai éditeur de code, tableau croisé et publipostage, réglages plus clairs, raccourcis en haut à droite</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🏠 Maison, comme un plan d'architecte</h4>
+                            <p>⤒ importe un plan <b>DXF</b> (AutoCAD, LibreCAD, plan d'architecte ou de notaire) et ⤓ exporte le tien en DXF, rangé par calques (murs, pièces, ouvertures, mobilier, textes, cotes). <b>🔁 Répéter</b> pose plusieurs copies d'un coup : 6 chaises autour d'une table (tournées vers elle), une rangée, une grille, ou une rangée de fenêtres le long d'un mur. <b>🏷 Étiquettes à flèche</b> : une note reliée à un point du plan, comme « Ici était le puits » ou « Double vitrage posé en 1978 ». Dans « Affichage » de l'étage : cotes d'ensemble, tableau des pièces et de leurs surfaces posé sur le plan, cartouche (nom, lieu, époque, étage, date) et affichage sombre façon dessin technique.</p>
+                            <h4>🛋️ Mobilier</h4>
+                            <p>145 objets de plus en Électroménager, Bureau, Garage et Luminaires (lave-linge, plaques, hottes, télé au mur, poste TSF, fauteuil de bureau, globe, coffre-fort, machine à écrire, voitures d'hier et d'aujourd'hui, vélos, panneau à outils, lustres, plafonniers, lampes à pétrole…). 71 objets de prière et de mémoire de toutes les traditions (juive, musulmane, bouddhiste, hindoue, sikhe, shinto, culte des ancêtres, orthodoxe, protestante…).</p>
+                            <h4>🌐 Mon site web</h4>
+                            <p>Un éditeur de code complet (chercher et remplacer, aller à la ligne, commenter, mise en forme, vérification, raccourcis). Des fichiers CSS, JS et PHP en plus, rangés en dossiers ; deux fichiers côte à côte ; les vraies pages PHP dans l'aperçu ; ouvrir un dossier entier ; un aide-mémoire HTML, CSS et JS. « 🧭 Navigateurs » vérifie le site et imite Safari, Firefox ou Edge, avec une base de compatibilité qui marche sans internet. Les écrans @media se règlent.</p>
+                            <h4>🧾 Tableur et 📝 traitement de texte</h4>
+                            <p>Tableau croisé dynamique (↻ actualiser) et graphique vivant qui suit la sélection. Champs de fusion, « remplir avec une fiche », publipostage et modèles déjà remplis (demande d'acte, fiche d'identité d'un ancêtre, avis de recherche aux cousins). Le tableur a maintenant son propre symbole, 🧾 ; la calculette garde 🧮.</p>
+                            <h4>📊 Diagrammes</h4>
+                            <p>Sablier, Gantt, carte mentale, barres en cercle, bulles groupées et anneaux d'avancement.</p>
+                            <h4>🎨 Réglages plus clairs</h4>
+                            <p>L'apparence se range en trois groupes (Look, Navigation, Écrans), avec un bouton pour revenir à la page d'avant. Plus de codes A1, A2… : chaque réglage a son icône et son nom. Le prénom et le nom du logo passent dans « Thème et couleurs ». La forme des boutons rejoint « Notifications et boutons ». Les boutons de l'en-tête des fiches tiennent sur deux lignes et se rangent un par un. Ceux du traitement de texte et du tableur se rangent dans « Boutons et options ».</p>
+                            <h4>↗ Boutons en haut à droite</h4>
+                            <p>Un raccourci (caché au départ) vers chaque outil de modification et chaque partie d'Enquêtes, avec le choix d'ouvrir la liste des projets ou un nouveau projet. Il y a aussi « 👤 Nouvelle personne ». Les 🧩 Tableaux rejoignent les Outils de modification.</p>
+                            <h4>🧓 Mode simple et 🐾 suivi</h4>
+                            <p>11 nouvelles sortes de gros boutons (famille, anniversaires, un lieu, quiz, horloge, appel, vidéo, son…), et le cadre à compléter se voit dans l'aperçu. Dans le suivi, un 2e trajet s'ajoute au premier, avec un message clair. Le fond de carte se choisit sur chaque carte.</p>
+                            <h4>🐞 Bugs corrigés</h4>
+                            <p>Une forme d'avatar à toi reste choisie en revenant sur la page. Le PHP embarqué de Windows se télécharge même quand windows.php.net l'a rangé dans « archives/ », et son empreinte est toujours vérifiée.</p>
+                            <p>La structure de la base ne change pas : aucune mise à jour de la base à la première ouverture.</p>
+                    
+                        </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.8.0 <small>Suivi des animaux, fiches rangées en sections, météo d'autrefois, traitement de texte et tableur, studio son, maison plus poussée, contrôle de la base, journal des recherches, cadastre, site web, jeux, mode simple et designs au choix</small></summary>
                         <div class="presentation-version-body">
@@ -1030,7 +1051,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.8.1 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.8.2 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script src="faq-data.js"></script>
