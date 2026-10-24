@@ -1263,6 +1263,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-adn-chiffres.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-cartes2.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-graphique.js?v=1" defer></script>
+<script src="assets/js/heritage-diagram-nouveaux.js?v=1" defer></script>
 <script src="assets/js/heritage-artist.js?v=18" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=11" defer></script>
 <script src="assets/js/heritage-artist-panel.js?v=12" defer></script>
