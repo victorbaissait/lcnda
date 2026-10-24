@@ -1876,6 +1876,7 @@
                 formats: [
                     {id: 'pdf', ext: '', hint: 'par l’impression', run: o => exportPrint(o.bleed)},
                     {id: 'print', run: o => exportPrint(o.bleed, {autoPrint: true})},
+                    ...(ext.layoutBooklet ? [{id: 'booklet', label: '📖 Livret à plier', hint: 'pages remises dans l’ordre, 2 par face', ext: '', quality: false, run: () => { ext.layoutBooklet.open(docForExport(), docName || 'Mon livre'); toast('Le livret s’ouvre : imprime en recto verso (retournement sur le petit côté), plie, agrafe.'); }}] : []),
                     ...(ext.layoutPdfA ? [{id: 'pdfa', label: '🗄️ PDF/A', hint: 'archivage (ISO 19005), pages en image', ext: 'pdf', quality: false, run: o => exportPdfA(o.filename)}] : []),
                     {id: 'epub', label: '📱 ePub', hint: 'liseuse, téléphone, tablette', ext: 'epub', quality: false, run: o => exportEpub(o.filename)},
                     {id: 'html', label: '🌐 HTML', hint: 'une page, photos comprises', ext: 'html', quality: false, run: o => exportHtml(o.filename)},

@@ -1215,8 +1215,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-book.js?v=8" defer></script>
 <script src="assets/js/heritage-layout-facts.js?v=3" defer></script>
 <script src="assets/js/heritage-qr.js?v=1" defer></script>
-<script src="assets/js/heritage-layout.js?v=57" defer></script>
+<script src="assets/js/heritage-layout.js?v=58" defer></script>
 <script src="assets/js/heritage-layout-pdfa.js?v=1" defer></script>
+<script src="assets/js/heritage-layout-livret.js?v=1" defer></script>
 <script src="assets/js/heritage-edittools.js?v=24" defer></script>
 <script src="assets/js/heritage-editorkeys.js?v=20" defer></script>
 <script src="assets/js/heritage-livrets.js?v=15" defer></script>
