@@ -1314,7 +1314,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tableur-cibles.js?v=3" defer></script>
 <script src="assets/js/heritage-tableur-base.js?v=2" defer></script>
 <script src="assets/js/heritage-tableur-plus.js?v=2" defer></script>
-<script src="assets/js/heritage-tableur-outils.js?v=1" defer></script>
+<script src="assets/js/heritage-tableur-outils.js?v=2" defer></script>
 <script src="assets/js/heritage-calculette.js?v=3" defer></script>
 <script src="assets/js/heritage-traitement-texte.js?v=5" defer></script>
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=3" defer></script>

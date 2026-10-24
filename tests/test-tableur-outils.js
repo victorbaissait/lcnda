@@ -99,6 +99,25 @@ $db->prepare('INSERT INTO events(person_id,event_type_id,date_text,year,place_id
             const e = await ED(); assert.match(e.cells.E2, /^=MINIGRAPHIQUE\(A2:D2;"barres";/); assert.equal(await val('E1'), 'spark:bar');
             assert.ok(await page.$$eval('dialog.xl-dlg .xl-c .xl-spark', l => l.length) >= 2, 'dessiné dans les cases');
         });
+        await t('🧮 solveur : trois parts d’un héritage de 5 000 €, au moins 1 000 chacune, le moins d’écart possible (entiers)', async () => {
+            await page.evaluate(() => { const ed = window.LCNDA_EXT.tableurInternals.current; ed.showSheet(0); });
+            await fill([[0, 0, 0, '=ABS(A1-B1)+ABS(B1-C1)', '=A1+B1+C1']]); await sel(0, 3); await cmd('solver'); await page.waitForSelector('dialog[open] [name="x"]');
+            await page.selectOption('dialog[open] [name="goal"]', 'min'); await page.fill('dialog[open] [name="x"]', 'A1:C1');
+            await page.fill('dialog[open] [name="c"]', 'A1 >= 1000\nB1 >= 1000\nC1 >= 1000\nE1 = 5000'); await page.check('dialog[open] [name="int"]'); await submit(); await page.waitForTimeout(800);
+            const e = await ED(); assert.equal(await val('E1'), 5000); assert.ok(await val('D1') <= 1, `écart ${await val('D1')}`); assert.ok([e.cells.A1, e.cells.B1, e.cells.C1].every(v => v >= 1000));
+        });
+        await t('📋 tableau de scénarios : l’âge au mariage selon l’année de naissance', async () => {
+            await fill([[1850, 1875, '=B1-A1']]); await sel(2, 0); await cmd('scenarios'); await page.waitForSelector('dialog[open] [name="x"]');
+            await page.fill('dialog[open] [name="x"]', 'A1'); await page.fill('dialog[open] [name="v"]', '1840;1850;1855'); await page.fill('dialog[open] [name="f"]', 'C1'); await submit(); await page.waitForTimeout(300);
+            const e = await ED(); assert.equal(e.cells.B3, 'C1'); assert.deepEqual([e.cells.A4, e.cells.B4, e.cells.A6, e.cells.B6], [1840, 35, 1855, 20]); assert.equal(e.cells.A1, 1850, 'la case de départ ne change pas');
+        });
+        await t('⏺ action enregistrée : gras + centré gardés sous un nom, refaits sur une autre case', async () => {
+            await fill([['un', 'deux']]); await sel(0, 0); await cmd('actrec'); await cmd('bold'); await cmd('al:center'); await cmd('actrec');
+            await page.waitForSelector('.ask-text-dialog input'); await page.fill('.ask-text-dialog input', 'Titre'); await page.click('.ask-text-dialog button[type="submit"]'); await page.waitForTimeout(200);
+            await sel(0, 1); await page.evaluate(() => { window.LCNDA_EXT.tableurInternals.current.act = [0, 1]; }); await cmd('actlist'); await page.waitForSelector('dialog[open] [data-act-run="0"]'); await page.click('dialog[open] [data-act-run="0"]'); await page.waitForTimeout(400);
+            const st = await page.evaluate(() => { const ed = window.LCNDA_EXT.tableurInternals.current, c = ed.S().cells.B1 || {}; return JSON.stringify(ed.wb.styles[c.s] || {}); });
+            assert.match(st, /"b":1/, `gras : ${st}`); assert.match(st, /center/, `centré : ${st}`);
+        });
         await t('aucune erreur JavaScript', () => assert.deepEqual(errs, []));
     } finally { await browser.close(); proc.kill(); try { fs.rmSync(dir, {recursive: true, force: true}); } catch (_) {} }
     finish();

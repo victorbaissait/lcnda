@@ -5,7 +5,10 @@
  *  - Σ Sous-totaux : une nouvelle feuille rangée par groupe (commune, métier, décennie…), une ligne de total sous chaque groupe
  *    (formules, donc à jour) et le total général ; « ⊟ Plan » replie ou déplie le détail ;
  *  - 🎯 Valeur cible : quelle valeur mettre dans une case pour qu'une formule donne le résultat voulu ;
- *  - 📈 Mini-graphique : la formule MINIGRAPHIQUE(plage; type; couleur) posée dans les cases choisies (une par ligne).
+ *  - 📈 Mini-graphique : la formule MINIGRAPHIQUE(plage; type; couleur) posée dans les cases choisies (une par ligne) ;
+ *  - 🧮 Solveur : plusieurs cases à changer, une formule à rendre la plus grande, la plus petite ou égale à…, des conditions ;
+ *  - 📋 Tableau de scénarios : ce que donnent des formules pour une liste de valeurs d'une case (« et si ») ;
+ *  - ⏺ Actions enregistrées : une suite de commandes gardée sous un nom, refaite en un clic sur une autre sélection.
  * Sans écran : ext.sheetTools.learnFill / applyFill (aussi require() dans Node, pour les essais).
  */
 (function (root) {
@@ -45,7 +48,25 @@
     }
     const applyFill = (prog, src) => (prog ? run(prog, src) : null);
     ext.sheetTools = {learnFill, applyFill};
-    if (typeof module === 'object' && module.exports) { module.exports = {learnFill, applyFill}; return; }
+    /* ═════════ 🧮 Solveur (sans écran) : recherche par motifs (Hooke-Jeeves), pénalité pour les contraintes ═════════
+       phi(x) : la valeur à rendre la plus petite possible ; x0 : le départ ; integer : des nombres entiers seulement */
+    function hookeJeeves(phi, x0, {integer = false, maxEval = 4000} = {}) {
+        let n = 0; const f = x => { n++; return phi(integer ? x.map(Math.round) : x); };
+        let x = x0.map(v => (integer ? Math.round(v) : v)), fx = f(x), step = Math.max(integer ? 1 : 0.01, ...x.map(v => Math.abs(v) * 0.25), 1);
+        const explore = (b, fb, h) => { const y = b.slice(); let fy = fb; for (let i = 0; i < y.length; i++) for (const d of [h, -h]) { const z = y.slice(); z[i] += d; const fz = f(z); if (fz < fy) { y[i] = z[i]; fy = fz; break; } } return [y, fy]; };
+        while (n < maxEval) {
+            let [y, fy] = explore(x, fx, step);
+            if (fy < fx) { // une pente : on suit le motif tant qu'il paie
+                while (n < maxEval) { const p = y.map((v, i) => v + (v - x[i])); x = y; fx = fy; const [z, fz] = explore(p, f(p), step); if (fz < fx) { y = z; fy = fz; } else break; }
+            } else { if (integer && step <= 1) break; step /= 2; if (!integer && step < 1e-9) break; if (integer) step = Math.max(1, Math.round(step)); }
+        }
+        return {x: integer ? x.map(Math.round) : x, value: fx, evals: n};
+    }
+    const CMP = {'<=': (a, b) => Math.max(0, a - b), '>=': (a, b) => Math.max(0, b - a), '=': (a, b) => Math.abs(a - b), '<': (a, b) => Math.max(0, a - b), '>': (a, b) => Math.max(0, b - a)};
+    /** « B1 >= 0 ; B2 <= C1 » → [{a: 'B1', op, b: nombre ou adresse}] */
+    const parseCons = t => String(t || '').split(/[;\n]+/).map(x => x.trim().replace(/≤/g, '<=').replace(/≥/g, '>=')).filter(Boolean).map(x => { const m = /^([A-Za-z]{1,3}\d{1,7})\s*(<=|>=|=|<|>)\s*(.+)$/.exec(x); return m ? {a: m[1].toUpperCase(), op: m[2], b: m[3].trim()} : {bad: x}; });
+
+    if (typeof module === 'object' && module.exports) { module.exports = {learnFill, applyFill, hookeJeeves, parseCons}; return; }
 
     /* ═════════ L'écran ═════════ */
     const rowVals = (ed, r, c0, c1, skip) => { const out = []; for (let c = c0; c <= c1; c++) out.push(c === skip ? null : (() => { const v = ed.calc.val(ed.si, r, c); return v == null || X().isErr(v) ? '' : X().formatValue(v, ed.wb.styles[ed.S().cells[X().addr(r, c)]?.s] || {}); })()); return out; };
@@ -139,9 +160,88 @@
                 ed.commit(); ed.render(); }});
     }
 
+    /* ── 🧮 Solveur ── */
+    function solverDialog(ed) {
+        const S = X(), sh = ed.S(), here = S.addr(ed.sel.r0, ed.sel.c0);
+        ext.openDialog({eyebrow: 'DONNÉES', title: '🧮 Solveur', submitLabel: 'Résoudre', wide: true,
+            body: `<p class="muted">Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible.</p>
+                <div class="form-grid"><label>La formule (case objectif)<input name="f" value="${esc(S.isFormula(sh.cells[here]?.v) ? here : '')}" placeholder="D5"></label>
+                <label>Doit être<select name="goal"><option value="max">la plus grande possible</option><option value="min">la plus petite possible</option><option value="val">égale à…</option></select></label>
+                <label>Valeur (si « égale à »)<input name="t" type="number" step="any"></label>
+                <label>En changeant les cases<input name="x" placeholder="B2:B4 ou B2;C3"></label></div>
+                <label>Conditions (une par ligne : <code>B2 >= 0</code>, <code>B3 <= 10</code>, <code>D5 = 100</code>, <code>B2 >= C2</code>)<textarea name="c" rows="4"></textarea></label>
+                <label class="checkbox-line"><input type="checkbox" name="int"> Nombres entiers seulement</label>`,
+            onSubmit: f => {
+                const pf = S.parseAddr(f.elements.f.value); if (!pf || !S.isFormula(sh.cells[S.addr(...pf)]?.v)) { toast('La case objectif doit contenir une formule (ex. D5).', 'error'); return false; }
+                const vars = []; String(f.elements.x.value).split(/[;,\s]+/).filter(Boolean).forEach(t => { const g = S.parseRange(t) || (S.parseAddr(t) && {r0: S.parseAddr(t)[0], c0: S.parseAddr(t)[1], r1: S.parseAddr(t)[0], c1: S.parseAddr(t)[1]}); if (g) for (let r = g.r0; r <= g.r1; r++) for (let c = g.c0; c <= g.c1; c++) vars.push(S.addr(r, c)); });
+                if (!vars.length || vars.length > 30) { toast(vars.length ? 'Trente cases à changer au plus.' : 'Écris les cases à changer (ex. B2:B4).', 'error'); return false; }
+                const cons = parseCons(f.elements.c.value), bad = cons.find(c => c.bad); if (bad) { toast(`Condition illisible : « ${bad.bad} » (ex. B2 >= 0).`, 'error'); return false; }
+                const goal = f.elements.goal.value, target = Number(String(f.elements.t.value).replace(',', '.')); if (goal === 'val' && !Number.isFinite(target)) { toast('Écris la valeur voulue.', 'error'); return false; }
+                const wb2 = JSON.parse(JSON.stringify(ed.wb)), cells = wb2.sheets[ed.si].cells, numAt = (calc, a) => { const p = S.parseAddr(a), v = calc.val(ed.si, p[0], p[1]); return typeof v === 'number' ? v : NaN; };
+                const side = (calc, b) => { const n = Number(String(b).replace(',', '.')); return Number.isFinite(n) ? n : S.parseAddr(b) ? numAt(calc, b.toUpperCase()) : NaN; };
+                let viol = 0;
+                const phi = x => { vars.forEach((a, i) => { cells[a] = {...(cells[a] || {}), v: x[i]}; }); const calc = new S.Calc(wb2), y = numAt(calc, S.addr(...pf)); if (!Number.isFinite(y)) return 1e30;
+                    viol = cons.reduce((s, c) => { const l = numAt(calc, c.a), r = side(calc, c.b); return s + (Number.isFinite(l) && Number.isFinite(r) ? CMP[c.op](l, r) : 1e6); }, 0);
+                    const o = goal === 'max' ? -y : goal === 'min' ? y : (y - target) ** 2; return o + 1e6 * viol * viol + 1e3 * viol; };
+                const x0 = vars.map(a => { const p = S.parseAddr(a), v = ed.calc.val(ed.si, p[0], p[1]); return typeof v === 'number' ? v : 0; });
+                const r = hookeJeeves(phi, x0, {integer: f.elements.int.checked}); phi(r.x);
+                if (viol > 1e-6) { toast('Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ).', 'error'); return false; }
+                ed.begin('Solveur'); vars.forEach((a, i) => ed.put(sh, a, {...(sh.cells[a] || {}), v: Math.round(r.x[i] * 1e9) / 1e9})); ed.commit(); ed.render();
+                const y = ed.calc.val(ed.si, pf[0], pf[1]); toast(`🧮 Trouvé : ${S.addr(...pf)} = ${String(typeof y === 'number' ? Math.round(y * 1e6) / 1e6 : y).replace('.', ',')} (${vars.length} case${vars.length > 1 ? 's' : ''} changée${vars.length > 1 ? 's' : ''}). ↶ pour annuler.`, 'success');
+            }});
+    }
+    /* ── 📋 Tableau de scénarios (« et si ») ── */
+    function scenarioDialog(ed) {
+        const S = X(), sh = ed.S();
+        ext.openDialog({eyebrow: 'DONNÉES', title: '📋 Tableau de scénarios', submitLabel: 'Calculer',
+            body: `<p class="muted">Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie (${esc(S.addr(ed.sel.r0, ed.sel.c0))}) ; rien d’autre ne change.</p>
+                <div class="form-grid"><label>La case qui change<input name="x" placeholder="B2"></label><label>Ses valeurs (séparées par « ; », ou une plage)<input name="v" placeholder="20;25;30 ou A10:A15"></label>
+                <label>Les formules à suivre<input name="f" placeholder="C5;D5"></label></div>`,
+            onSubmit: f => {
+                const px = S.parseAddr(f.elements.x.value); if (!px) { toast('Écris la case qui change (ex. B2).', 'error'); return false; }
+                let vals = []; const rg = S.parseRange(f.elements.v.value);
+                if (rg) { for (let r = rg.r0; r <= rg.r1; r++) for (let c = rg.c0; c <= rg.c1; c++) { const v = ed.calc.val(ed.si, r, c); if (v !== null && v !== '') vals.push(v); } }
+                else vals = String(f.elements.v.value).split(';').map(x => x.trim()).filter(Boolean).map(x => (Number.isFinite(Number(x.replace(',', '.'))) ? Number(x.replace(',', '.')) : x));
+                const fs = String(f.elements.f.value).split(/[;,\s]+/).filter(Boolean).map(t => S.parseAddr(t)).filter(Boolean);
+                if (!vals.length || !fs.length || vals.length > 500) { toast('Écris des valeurs (500 au plus) et au moins une formule.', 'error'); return false; }
+                const wb2 = JSON.parse(JSON.stringify(ed.wb)), kx = S.addr(...px), r0 = ed.sel.r0, c0 = ed.sel.c0;
+                ed.begin('Tableau de scénarios');
+                ed.put(sh, S.addr(r0, c0), {v: `${kx} =`, b: 1}); fs.forEach((p, j) => ed.put(sh, S.addr(r0, c0 + 1 + j), {v: S.addr(...p), b: 1}));
+                vals.forEach((v, i) => { wb2.sheets[ed.si].cells[kx] = {...(wb2.sheets[ed.si].cells[kx] || {}), v}; const calc = new S.Calc(wb2); ed.put(sh, S.addr(r0 + 1 + i, c0), {v});
+                    fs.forEach((p, j) => { const y = calc.val(ed.si, p[0], p[1]); ed.put(sh, S.addr(r0 + 1 + i, c0 + 1 + j), {v: y && y.code ? y.code : y ?? ''}); }); });
+                ed.commit(); ed.render(); toast(`📋 ${vals.length} scénario${vals.length > 1 ? 's' : ''} calculé${vals.length > 1 ? 's' : ''} (valeurs fixes : refais-le si les données changent).`, 'success');
+            }});
+    }
+    /* ── ⏺ Actions enregistrées : refaire une suite de commandes (menus, boutons, formats) sur une autre sélection ── */
+    const ACT_KEY = 'genealogie-tableur-actions', SKIP = /^(act|undo|redo|save|saveas|close|print|export|open|new|find|help|full|zoom)/;
+    const loadActs = () => { try { const v = JSON.parse(localStorage.getItem(ACT_KEY) || '[]'); return Array.isArray(v) ? v.filter(a => a && a.name && Array.isArray(a.cmds)).slice(0, 60) : []; } catch (_) { return []; } };
+    const saveActs = l => { try { localStorage.setItem(ACT_KEY, JSON.stringify(l.slice(0, 60))); } catch (_) {} };
+    let rec = null;
+    function recordToggle(ed) {
+        if (rec) { // fin de l'enregistrement
+            const r = rec; rec = null; if (r.ed.run === r.wrap) r.ed.run = r.orig;
+            if (!r.cmds.length) return toast('Rien n’a été enregistré.');
+            A().askText({title: '⏺ Nommer l’action', message: `${r.cmds.length} commande${r.cmds.length > 1 ? 's' : ''} : ${r.cmds.slice(0, 8).join(', ')}${r.cmds.length > 8 ? '…' : ''}`, value: 'Mon action', okLabel: 'Garder'}).then(n => { if (!n?.trim()) return; const l = loadActs().filter(a => a.name !== n.trim()); l.unshift({name: n.trim().slice(0, 60), cmds: r.cmds}); saveActs(l); toast(`⏺ Action « ${n.trim()} » gardée : Données → ▶ Actions enregistrées.`, 'success'); });
+            return;
+        }
+        const orig = ed.run, cmds = [], wrap = function (cmd, b) { if (typeof cmd === 'string' && !SKIP.test(cmd) && cmds.length < 200) cmds.push(cmd); return orig.call(this, cmd, b); };
+        ed.run = wrap; rec = {ed, orig, wrap, cmds}; toast('⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement.');
+    }
+    async function playActs(ed, cmds) { for (const c of cmds) { await ed.run(c); await new Promise(r => setTimeout(r, 30)); } ed.render?.(); }
+    function actionsDialog(ed) {
+        const l = loadActs(); if (!l.length) return toast('Aucune action enregistrée : Données → ⏺ Enregistrer une action.');
+        ext.openDialog({eyebrow: 'DONNÉES', title: '▶ Actions enregistrées', submitLabel: 'Fermer',
+            body: `<p class="muted">Elles se refont sur la sélection du moment.</p><ul class="xl-acts">${l.map((a, i) => `<li><b>${esc(a.name)}</b> <small class="muted">${a.cmds.length} commande${a.cmds.length > 1 ? 's' : ''}</small> <button type="button" class="button small" data-act-run="${i}">▶ Refaire</button> <button type="button" class="button small secondary" data-act-del="${i}">🗑</button></li>`).join('')}</ul>`,
+            onOpen: d => d.addEventListener('click', e => { const r = e.target.closest('[data-act-run]'), x = e.target.closest('[data-act-del]');
+                if (r) { d.close?.(); d.remove?.(); playActs(ed, l[Number(r.dataset.actRun)].cmds).then(() => toast(`▶ « ${l[Number(r.dataset.actRun)].name} » refaite.`, 'success')); }
+                if (x) { const k = Number(x.dataset.actDel); saveActs(loadActs().filter(a => a.name !== l[k].name)); x.closest('li').remove(); } }),
+            onSubmit: () => {}});
+    }
+
     ext.sheetMenuExtra = ext.sheetMenuExtra || [];
     ext.sheetMenuExtra.push({menu: 'Données', cmd: 'flashfill', label: '✨ Remplissage instantané'}, {menu: 'Données', cmd: 'subtotals', label: 'Σ Sous-totaux…'}, {menu: 'Données', cmd: 'outline', label: '⊟ Plan : replier / déplier le détail'},
-        {menu: 'Données', cmd: 'goalseek', label: '🎯 Valeur cible…'}, {menu: 'Insertion', cmd: 'sparkline', label: '📈 Mini-graphique…'});
+        {menu: 'Données', cmd: 'goalseek', label: '🎯 Valeur cible…'}, {menu: 'Données', cmd: 'solver', label: '🧮 Solveur…'}, {menu: 'Données', cmd: 'scenarios', label: '📋 Tableau de scénarios (et si…)…'},
+        {menu: 'Données', cmd: 'actrec', label: '⏺ Enregistrer une action / ⏹ arrêter'}, {menu: 'Données', cmd: 'actlist', label: '▶ Actions enregistrées…'}, {menu: 'Insertion', cmd: 'sparkline', label: '📈 Mini-graphique…'});
     ext.sheetCommands = ext.sheetCommands || {};
-    Object.assign(ext.sheetCommands, {flashfill: ed => flashFill(ed), subtotals: ed => subtotalDialog(ed), outline: ed => outlineToggle(ed), goalseek: ed => goalSeek(ed), sparkline: ed => sparkDialog(ed)});
+    Object.assign(ext.sheetCommands, {flashfill: ed => flashFill(ed), subtotals: ed => subtotalDialog(ed), outline: ed => outlineToggle(ed), goalseek: ed => goalSeek(ed), sparkline: ed => sparkDialog(ed), solver: ed => solverDialog(ed), scenarios: ed => scenarioDialog(ed), actrec: ed => recordToggle(ed), actlist: ed => actionsDialog(ed)});
 })(typeof window !== 'undefined' ? window : globalThis);
