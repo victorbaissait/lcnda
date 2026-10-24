@@ -271,3 +271,17 @@ dialog.modal.xl-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 :root[data-theme="dark"] .xl-steps li.is-done{color:#a9e5bd;border-color:#3e5b46}
 :root[data-theme="dark"] .xl-push-res tr[data-ps="problem"] td:nth-child(2){color:#e7aaa7}
 /* ═════ fin du mode sombre automatique ═════ */
+
+/* 🔀 tableau croisé dynamique (aperçu) et 📊 graphique vivant (heritage-tableur-plus.js) */
+.xl-pv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px 14px; align-items: end; }
+.xl-pv-prev { margin-top: 12px; overflow: auto; max-height: 260px; }
+.xl-pv-table { border-collapse: collapse; font-size: 12.5px; }
+.xl-pv-table th, .xl-pv-table td { border: 1px solid var(--line, #d9dce2); padding: 3px 8px; text-align: right; white-space: nowrap; }
+.xl-pv-table th { background: #e8eefc; text-align: left; }
+.xl-vpwrap { position: relative; }
+.xl-live { position: absolute; right: 18px; top: 14px; z-index: 6; width: 380px; max-width: calc(100% - 30px); background: var(--card-bg, #fff); color: var(--ink, #111); border: 1.5px solid var(--ink, #111); box-shadow: 4px 4px 0 rgba(0, 0, 0, .15); padding: 6px 8px 8px; }
+.xl-live-h { display: flex; align-items: center; gap: 6px; cursor: move; user-select: none; }
+.xl-live-h b { flex: 1; font-size: 13px; }
+.xl-live-h select { max-width: 150px; font-size: 12px; }
+.xl-live-b { min-height: 80px; }
+.xl-live-b svg { width: 100%; height: auto; display: block; }

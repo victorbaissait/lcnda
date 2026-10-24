@@ -66,10 +66,10 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
-    <link rel="stylesheet" href="assets/css/tableur.css?v=3">
+    <link rel="stylesheet" href="assets/css/tableur.css?v=4">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
     <link rel="stylesheet" href="assets/css/cadastre.css?v=1">
-    <link rel="stylesheet" href="assets/css/traitement-texte.css?v=2">
+    <link rel="stylesheet" href="assets/css/traitement-texte.css?v=3">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=7" id="lc-frame-css" media="not all">
@@ -1156,7 +1156,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=17" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=22" defer></script>
-<script src="assets/js/app-tableur-engine.js?v=4" defer></script>
+<script src="assets/js/app-tableur-engine.js?v=5" defer></script>
 <script src="assets/js/app-calculette-engine.js?v=1" defer></script>
 <script src="assets/js/app-texte-engine.js?v=1" defer></script>
 <script src="assets/js/app-texte-formats.js?v=2" defer></script>
@@ -1303,14 +1303,16 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-list.js?v=3" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=16" defer></script>
 <script src="assets/js/heritage-keynote.js?v=20" defer></script>
-<script src="assets/js/heritage-tableur.js?v=7" defer></script>
-<script src="assets/js/heritage-tableur-cibles.js?v=1" defer></script>
+<script src="assets/js/heritage-tableur.js?v=8" defer></script>
+<script src="assets/js/heritage-tableur-cibles.js?v=2" defer></script>
 <script src="assets/js/heritage-tableur-base.js?v=1" defer></script>
+<script src="assets/js/heritage-tableur-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-calculette.js?v=3" defer></script>
-<script src="assets/js/heritage-traitement-texte.js?v=3" defer></script>
+<script src="assets/js/heritage-traitement-texte.js?v=4" defer></script>
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=3" defer></script>
-<script src="assets/js/heritage-traitement-texte-outils.js?v=2" defer></script>
-<script src="assets/js/heritage-traitement-texte-fichiers.js?v=1" defer></script>
+<script src="assets/js/heritage-traitement-texte-outils.js?v=3" defer></script>
+<script src="assets/js/heritage-traitement-texte-fichiers.js?v=2" defer></script>
+<script src="assets/js/heritage-traitement-texte-fusion.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-code.js?v=4" defer></script>
 <script src="assets/js/heritage-site-web-compat.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-html-ref.js?v=1" defer></script>

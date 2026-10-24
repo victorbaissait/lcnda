@@ -305,6 +305,43 @@ function textdoc_people(PDO $pdo, array $ids): array
     return $out;
 }
 
+/** 📨 publipostage : pour chaque personne, tout ce qu'un champ de fusion peut écrire (nom, naissance, décès, métier, parents, conjoint, mariage) */
+function textdoc_merge_people(PDO $pdo, array $ids): array
+{
+    $base = textdoc_people($pdo, $ids); if (!$base) { return []; }
+    $all = array_map('intval', array_keys($base));
+    $parentIds = []; foreach ($base as $p) { foreach ($p['parents'] as $x) { $parentIds[] = (int) $x; } }
+    $in = implode(',', array_fill(0, count($all), '?'));
+    $occ = [];
+    $cols = array_flip(array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(PDO::FETCH_ASSOC), 'name'));
+    if (isset($cols['occupation'])) { $s = $pdo->prepare("SELECT id, occupation FROM persons WHERE id IN ($in)"); $s->execute($all); foreach ($s as $r) { $occ[(int) $r['id']] = trim((string) $r['occupation']); } }
+    $s = $pdo->prepare("SELECT e.person_id, COALESCE(NULLIF(e.title,''), e.description) AS t FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='OCCU' AND e.person_id IN ($in) ORDER BY COALESCE(e.year, 9999), e.id");
+    $s->execute($all); foreach ($s as $r) { $k = (int) $r['person_id']; if (($occ[$k] ?? '') === '') { $occ[$k] = trim((string) $r['t']); } }
+    // conjoint et mariage : la première union de la personne
+    $sp = [];
+    $s = $pdo->prepare("SELECT f.id, f.partner1_id, f.partner2_id FROM families f WHERE f.partner1_id IN ($in) OR f.partner2_id IN ($in) ORDER BY f.id");
+    $s->execute(array_merge($all, $all));
+    foreach ($s as $f) { foreach ([['partner1_id', 'partner2_id'], ['partner2_id', 'partner1_id']] as [$a, $b]) { $me = (int) $f[$a]; if (in_array($me, $all, true) && !isset($sp[$me])) { $sp[$me] = ['fid' => (int) $f['id'], 'other' => (int) $f[$b]]; } } }
+    $others = array_values(array_filter(array_map(static fn($x) => $x['other'], $sp)));
+    $names = textdoc_people($pdo, array_merge($parentIds, $others));
+    $marr = [];
+    if ($sp) {
+        $fids = array_values(array_unique(array_map(static fn($x) => $x['fid'], $sp)));
+        $s = $pdo->prepare('SELECT e.family_id, e.date_text, pl.name AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE t.gedcom_tag=\'MARR\' AND e.family_id IN (' . implode(',', array_fill(0, count($fids), '?')) . ') ORDER BY e.id');
+        $s->execute($fids); foreach ($s as $r) { $k = (int) $r['family_id']; if (!isset($marr[$k])) { $marr[$k] = ['date' => trim((string) $r['date_text']), 'place' => trim((string) $r['place'])]; } }
+    }
+    $out = [];
+    foreach ($base as $k => $p) {
+        $father = ''; $mother = '';
+        foreach ($p['parents'] as $x) { $q = $names[(string) $x] ?? null; if (!$q) { continue; } if ($q['gender'] === 'female' && $mother === '') { $mother = $q['name']; } elseif ($father === '') { $father = $q['name']; } else { $mother = $q['name']; } }
+        $u = $sp[(int) $k] ?? null; $m = $u ? ($marr[$u['fid']] ?? null) : null;
+        $age = ($p['by'] && $p['dy']) ? max(0, (int) $p['dy'] - (int) $p['by']) : null;
+        $out[$k] = $p + ['occupation' => $occ[(int) $k] ?? '', 'father' => $father, 'mother' => $mother, 'spouse' => $u && $u['other'] ? ($names[(string) $u['other']]['name'] ?? '') : '',
+            'marriage' => $m['date'] ?? '', 'marriage_place' => $m['place'] ?? '', 'age' => $age];
+    }
+    return $out;
+}
+
 /** un petit arbre : la personne et ses ancêtres sur N générations (2 à 4) */
 function textdoc_tree(PDO $pdo, int $root, int $gens): array
 {

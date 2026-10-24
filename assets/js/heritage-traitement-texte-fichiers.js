@@ -238,7 +238,7 @@
                 try {
                     if (b.dataset.mine) { const r = await api('textdoc', {id: Number(b.dataset.mine)}); return openDoc({...ctx, data: r.data, name: r.name}); }
                     const t = tools.TEMPLATES.find(x => x.key === b.dataset.tpl); let pid = ctx.personId || 0;
-                    if (t.person && !pid) { const it = await (window.LCNDA_PICKER || A()).openPicker({kind: 'person', title: 'Le récit de qui ?'}); if (!it) return; pid = it.id; }
+                    if (t.person && !pid) { const it = await (window.LCNDA_PICKER || A()).openPicker({kind: 'person', title: t.ask || 'Le récit de qui ?'}); if (!it) return; pid = it.id; }
                     const html = await t.html(pid); return openDoc({...ctx, data: dataOf(html, {tpl: t.key}), name: t.key === 'blank' ? 'Mon document' : t.name});
                 } catch (err) { toast(err.message, 'error'); }
             }), onSubmit: () => {}});

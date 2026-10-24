@@ -239,3 +239,11 @@ dialog.modal.wp-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 :root[data-theme="dark"] .wp-diff ins{background:#203a23;color:#b5edc8}
 :root[data-theme="dark"] .wp-diff del{background:#421313;color:#eaa3ad}
 /* ═════ fin du mode sombre automatique ═════ */
+
+/* 📨 publipostage (heritage-traitement-texte-fusion.js) : les champs « » se voient, la fenêtre */
+.wp-field[data-field^="merge-"] { background: #fff4c2; border-radius: 3px; padding: 0 2px; color: #6a4a00; }
+@media print { .wp-field[data-field^="merge-"] { background: none; color: inherit; } }
+.wp-mm-add { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0; }
+.wp-mm-chips { display: flex; flex-wrap: wrap; gap: 6px; max-height: 120px; overflow: auto; }
+.wp-mm-prev { margin-top: 10px; }
+.wp-mm-sheet { border: 1px solid var(--line, #d9dce2); padding: 14px 18px; max-height: 240px; overflow: auto; background: #fff; color: #111; font-family: Georgia, serif; font-size: 13px; }

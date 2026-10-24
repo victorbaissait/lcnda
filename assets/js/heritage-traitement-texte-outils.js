@@ -330,7 +330,7 @@
                 case 'settings': return settingsDialog(ed);
                 case 'keys': return keysDialog();
                 case 'fieldsupdate': return tools.updateFields(ed, true);
-                default: return tools.filesRun?.(ed, cmd, arg);
+                default: { const fn = ext.textDocCommands?.[c]; if (typeof fn === 'function') return fn(ed, v, arg); return tools.filesRun?.(ed, cmd, arg); } // commandes ajoutées par d'autres fichiers (publipostage…)
             }
         } catch (e) { toast(e.message || String(e), 'error'); }
     };

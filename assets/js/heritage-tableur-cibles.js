@@ -426,6 +426,12 @@
         const S = X(), sh = ed.S(), range = S.rangeStr(g);
         return {...spec, live: {sheet: {wb: ed.id, sh: sh.id, name: ed.name, sheet: sh.name, range, grow: true, head: !!head}, label: `« ${ed.name} » ! ${range}`}};
     }
+    /** 📊 graphique vivant (heritage-tableur-plus.js) : la spec du diagramme pour la sélection, sans rien enregistrer → {spec, kinds} ou null */
+    ext.sheetChartLive = (ed, kind = '') => {
+        const g = rangeOf(ed), table = tableOf(ed.wb, ed.calc, ed.si, g), shape = shapeOf(table); if (!shape.n || !shape.rows) return null;
+        const kinds = suggest(shape), k = kind && kinds.some(x => x.kind === kind) ? kind : kinds[0]?.kind || 'columns', res = mapColumns(table, T.diagram.columns({kind: k}));
+        return {spec: T.diagram.build(res.objs, {kind: k, title: ''}, table, res.status), kinds, kind: k, range: X().rangeStr(g)};
+    };
     ext.sheetChartMenu = (ed, btn) => {
         const S = X(), g = rangeOf(ed), table = tableOf(ed.wb, ed.calc, ed.si, g), shape = shapeOf(table);
         if (!shape.n || !shape.rows) return toast('Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes).');

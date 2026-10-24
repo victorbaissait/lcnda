@@ -133,7 +133,7 @@
             const changed = new Map();
             t.swaps.forEach((x, sh) => { sh.cells = x[dir]; });
             t.cells.forEach(x => { if (x[dir]) x.sh.cells[x.k] = {...x[dir]}; else delete x.sh.cells[x.k]; const p = X().parseAddr(x.k); let l = changed.get(x.sh); if (!l) changed.set(x.sh, l = []); l.push(p); });
-            t.metas.forEach((x, sh) => { Object.assign(sh, JSON.parse(x[dir])); if (!JSON.parse(x[dir]).filter) delete sh.filter; if (!JSON.parse(x[dir]).color) delete sh.color; if (!JSON.parse(x[dir]).link) delete sh.link; });
+            t.metas.forEach((x, sh) => { Object.assign(sh, JSON.parse(x[dir])); if (!JSON.parse(x[dir]).filter) delete sh.filter; if (!JSON.parse(x[dir]).color) delete sh.color; if (!JSON.parse(x[dir]).link) delete sh.link; if (!JSON.parse(x[dir]).pivot) delete sh.pivot; });
             this.wb.sheets = (dir === 'before' ? t.sheets : t.sheetsAfter).slice();
             this.wb.names = JSON.parse(dir === 'before' ? t.names : t.namesAfter);
             this.si = Math.min(this.wb.sheets.length - 1, dir === 'before' ? t.si : t.siAfter);
@@ -168,7 +168,7 @@
         colAt(x) { const a = this.geometry().colX; let lo = 0, hi = a.length - 2; if (x <= 0) return 0; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (a[m] <= x) lo = m; else hi = m - 1; } return lo; }
         mergeOf(r, c) { const g = this.geometry(); for (const m of g.merges) if (r >= m.r0 && r <= m.r1 && c >= m.c0 && c <= m.c1) return m; return null; }
     }
-    const metaOf = sh => JSON.stringify({name: sh.name, color: sh.color || '', cols: sh.cols, rows: sh.rows, merges: sh.merges, freeze: sh.freeze, cf: sh.cf, dv: sh.dv, filter: sh.filter || null, hidden: !!sh.hidden, zebra: !!sh.zebra, link: sh.link || null}); // link : plage tenue à jour (heritage-tableur-base.js)
+    const metaOf = sh => JSON.stringify({name: sh.name, color: sh.color || '', cols: sh.cols, rows: sh.rows, merges: sh.merges, freeze: sh.freeze, cf: sh.cf, dv: sh.dv, filter: sh.filter || null, hidden: !!sh.hidden, zebra: !!sh.zebra, link: sh.link || null, pivot: sh.pivot || null}); // link : plage tenue à jour (heritage-tableur-base.js)
 
     /* ═════════ Les menus du haut (E1) : chaque ligne a sa commande (data-xl-cmd), réglable dans les raccourcis ═════════ */
     const M = (cmd, label, key = '') => ({cmd, label, key});

@@ -434,6 +434,7 @@ try {
         'textdoc_versions' => json_response(['items' => textdoc_versions($pdo, safe_int($_GET['doc_id'] ?? 0))]),
         'textdoc_version' => json_response(textdoc_version($pdo, safe_int($_GET['id'] ?? 0))),
         'textdoc_people' => json_response(['people' => (object) textdoc_people($pdo, explode(',', (string) ($_GET['ids'] ?? '')))]),
+        'textdoc_merge_people' => json_response(['people' => (object) textdoc_merge_people($pdo, explode(',', (string) ($_GET['ids'] ?? '')))]),
         'textdoc_tree' => json_response(textdoc_tree($pdo, safe_int($_GET['id'] ?? 0), safe_int($_GET['gens'] ?? 3))),
         'websites' => json_response(['items' => websites_list($pdo)]), // 🌐 Mon site web (lib/website.php)
         'website' => json_response(website_get($pdo, safe_int($_GET['id'] ?? 0))),
