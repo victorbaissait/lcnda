@@ -216,6 +216,10 @@ try {
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['tresors', 'tresor_write', 'tresor_tree', 'tresor_media'], true)) { // ✨ trésors de famille (lib/tresors.php)
+        require_once __DIR__ . '/lib/tresors.php';
+        tresors_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['postcards', 'postcard_write'], true)) { // 🏞 cartes postales anciennes (lib/postcards.php)
         require_once __DIR__ . '/lib/postcards.php';
         postcards_dispatch($pdo, (string) $action, $isWrite, $payload);

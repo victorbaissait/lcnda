@@ -1,0 +1,28 @@
+/* ✨ Trésors de famille (assets/js/heritage-tresors*.js) */
+.h-tr .h-tr-group { margin: 26px 0 10px; font-size: 15px; letter-spacing: .02em; }
+.h-tr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.h-tr-card { display: grid; gap: 4px; text-align: left; padding: 14px 16px; border: 1px solid var(--line, #d9dce2); border-radius: 12px; background: var(--card-bg, #fff); color: inherit; cursor: pointer; font: inherit; transition: transform .12s, box-shadow .12s, border-color .12s; }
+.h-tr-card:hover, .h-tr-card:focus-visible { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0, 0, 0, .08); border-color: var(--blue, #2a7de1); outline: none; }
+.h-tr-card .h-tr-ic { font-size: 26px; line-height: 1; }
+.h-tr-card small { color: var(--muted, #667); line-height: 1.35; }
+.h-tr-top { margin-bottom: 6px; }
+.h-tr-body { display: grid; gap: 14px; }
+.h-tr-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: end; }
+.h-tr-row > label { display: grid; gap: 3px; font-size: 13px; }
+.h-tr-panel { padding: 14px 16px; border: 1px solid var(--line, #d9dce2); border-radius: 12px; background: var(--card-bg, #fff); }
+.h-tr-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.h-tr-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--line, #d9dce2); border-radius: 10px; background: var(--card-bg, #fff); }
+.h-tr-item .h-tr-ic { font-size: 22px; flex: none; }
+.h-tr-item .h-tr-grow { flex: 1; min-width: 0; }
+.h-tr-item small, .h-tr-muted { color: var(--muted, #667); }
+.h-tr-pill { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--blue-soft, #e8f0fd); font-size: 12px; }
+.h-tr-link { background: none; border: 0; padding: 0; color: var(--blue, #2a7de1); cursor: pointer; font: inherit; text-decoration: underline; }
+.h-tr-canvas { max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line, #d9dce2); background: #fff; }
+.h-tr-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.h-tr-sealed { display: grid; place-items: center; gap: 6px; padding: 18px; border: 2px dashed #b9852f; border-radius: 12px; background: #fff8ea; color: #6a4a00; text-align: center; }
+.h-tr-letter { white-space: pre-wrap; font-family: Georgia, serif; line-height: 1.6; padding: 16px 20px; border-radius: 10px; background: #fffdf6; color: #2b2116; border: 1px solid #eadfc8; }
+.h-tr-big { font-size: 22px; font-weight: 800; }
+@media print { .h-tr-top, .h-tr .page-header, .h-tr-noprint { display: none !important; } .h-tr-print { break-inside: avoid; } }
+:root[data-theme="dark"] .h-tr-sealed { background: #2c2416; color: #f3dca6; border-color: #8b6a2a; }
+:root[data-theme="dark"] .h-tr-letter { background: #24211b; color: #efe6d3; border-color: #4a4232; }
+:root[data-theme="dark"] .h-tr-canvas { background: #111; }

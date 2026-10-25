@@ -40,6 +40,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/heritage-diagram-options.css?v=7">
     <link rel="stylesheet" href="assets/css/layout.css?v=16">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
+    <link rel="stylesheet" href="assets/css/tresors.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
     <link rel="stylesheet" href="assets/css/ui.css?v=14">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
@@ -101,6 +102,7 @@ header('X-Content-Type-Options: nosniff');
             <button class="nav-item" data-module="fiches"><span>08</span>📒 Fiches</button>
             <button class="nav-item" data-module="adn"><span>08</span>🧬 ADN</button>
             <button class="nav-item" data-module="comparaison"><span>09</span>Comparaison</button>
+            <button class="nav-item" data-module="tresors"><span>09</span>✨ Trésors</button>
             <button class="nav-item" data-module="maintenance"><span>10</span>Réglages</button>
         </nav>
         <div class="topbar-meta">
@@ -1134,7 +1136,7 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=471" defer></script>
+<script src="assets/js/app.js?v=472" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=22" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1234,6 +1236,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-retouch-gomme.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-bord.js?v=1" defer></script>
 <script src="assets/js/heritage-psd.js?v=1" defer></script>
+<script src="assets/js/heritage-tresors.js?v=1" defer></script>
+<script src="assets/js/heritage-tresors-memoire.js?v=1" defer></script>
+<script src="assets/js/heritage-tresors-decouvrir.js?v=1" defer></script>
+<script src="assets/js/heritage-tresors-jeux.js?v=1" defer></script>
+<script src="assets/js/heritage-tresors-creer.js?v=1" defer></script>
+<script src="assets/js/heritage-tresors-lieux.js?v=1" defer></script>
+<script src="assets/js/heritage-tresors-outils.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=12" defer></script>
 <script src="assets/js/heritage-fiches.js?v=21" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=4" defer></script>
