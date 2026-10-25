@@ -88,3 +88,11 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-tr-mixer { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px 18px; } .h-tr-mixer label { display: grid; gap: 2px; font-size: 13px; }
 .h-tr-grow-box { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line, #d9dce2); } .h-tr-grow-box svg { display: block; } .h-tr-grow-box g { transition: opacity .3s; }
 .h-tr-skyblock canvas { width: 100%; max-width: 320px; height: auto; display: block; margin: auto; border-radius: 8px; }
+/* lot 4 — mystère, héros, Et si */
+.h-tr-clues { font-size: 17px; line-height: 1.5; } .h-tr-clues li { animation: h-tr-fade .6s ease; }
+.h-tr-book { max-width: 46em; padding: 24px 28px; border-radius: 6px; background: #fffaf0; color: #2b2116; font-family: Georgia, serif; font-size: 17px; line-height: 1.6; box-shadow: 0 2px 14px rgba(0, 0, 0, .12); border-left: 8px solid #8a6b3a; }
+.h-tr-book h2 { margin: 4px 0 10px; } .h-tr-he-ch { display: grid; gap: 8px; margin: 14px 0; } .h-tr-he-ch .button { text-align: left; justify-content: flex-start; } .h-tr-he-ch .is-real { outline: 3px solid #2e9d5b; }
+.h-tr-he-res { padding: 10px 14px; border-radius: 8px; background: #f1e6d0; } .h-tr-he-res.ok { background: #dff3e5; }
+.h-tr-fade .h-tr-pill { display: inline-block; margin: 3px; animation: h-tr-vanish 2.4s ease forwards; }
+@keyframes h-tr-vanish { 0% { opacity: 1; } 100% { opacity: .25; filter: blur(.6px); text-decoration: line-through; } }
+:root[data-theme="dark"] .h-tr-book { background: #26211a; color: #eee3cc; } :root[data-theme="dark"] .h-tr-he-res { background: #3a3126; } :root[data-theme="dark"] .h-tr-he-res.ok { background: #1e3a2a; }
