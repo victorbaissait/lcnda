@@ -11,6 +11,7 @@ declare(strict_types=1);
  *   GET  api.php?action=tresor_media&ids=1,2 → {media: [{id, title, media_type, filename, thumbnail}]}
  *   POST api.php?action=tresor_write {op: link_media, media_id, person_id} → le média (un entretien enregistré) rangé sur la fiche
  *   GET  api.php?action=tresor_signatures → {signatures: [{media_id, filename, person_id, x, y, w, h, year}]} (les zones « signature » des médias)
+ *   GET  api.php?action=tresor_faces → {faces: [{media_id, filename, person_id, x, y, w, h}]} (les visages identifiés sur les photos)
  *   GET  api.php?action=tresor_tree   → {people: [{id, name, first, last, gender, living, by, bd (AAAA-MM-JJ), bplace, dy, dd,
  *        dplace, occ, portrait, father, mother, start, touched (dernière modification de la fiche)}], families: [{id, a, b, my, md, mplace}], places: {id: {name, lat, lng}},
  *        events: [{p, f, tag, label, y, d, place}]}  (les fiches d'animaux sont laissées de côté)
@@ -150,6 +151,14 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
                     'filename' => (string) $r['filename'], 'title' => (string) $r['title'], 'year' => preg_match('/\b(1[0-9]{3}|20[0-9]{2})\b/', (string) $r['date_text'] . ' ' . $r['title'], $m) ? (int) $m[1] : null];
             }
             json_response(['signatures' => $out]);
+        }
+        if (!$isWrite && $action === 'tresor_faces') { // le visage de la lignée, la mosaïque : les visages encadrés dans la visionneuse
+            $hasType = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('media_tags') WHERE name='tag_type'")->fetchColumn();
+            $out = [];
+            foreach ($pdo->query('SELECT t.media_id, t.person_id, t.x, t.y, t.w, t.h, m.filename FROM media_tags t JOIN media m ON m.id=t.media_id WHERE m.media_type=\'image\' AND t.w>0 AND t.h>0' . ($hasType ? " AND COALESCE(t.tag_type,'person')<>'signature'" : '') . ' ORDER BY t.id LIMIT 5000') as $r) {
+                $out[] = ['media_id' => (int) $r['media_id'], 'person_id' => (int) $r['person_id'], 'x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h'], 'filename' => (string) $r['filename']];
+            }
+            json_response(['faces' => $out]);
         }
         if ($isWrite && $action === 'tresor_write') {
             $op = (string) ($payload['op'] ?? '');

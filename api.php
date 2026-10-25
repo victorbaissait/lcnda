@@ -216,7 +216,7 @@ try {
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
-    if (in_array($action, ['tresors', 'tresor_write', 'tresor_tree', 'tresor_media', 'tresor_signatures'], true)) { // ✨ trésors de famille (lib/tresors.php)
+    if (in_array($action, ['tresors', 'tresor_write', 'tresor_tree', 'tresor_media', 'tresor_signatures', 'tresor_faces'], true)) { // ✨ trésors de famille (lib/tresors.php)
         require_once __DIR__ . '/lib/tresors.php';
         tresors_dispatch($pdo, (string) $action, $isWrite, $payload);
     }

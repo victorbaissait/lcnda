@@ -96,3 +96,7 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-tr-fade .h-tr-pill { display: inline-block; margin: 3px; animation: h-tr-vanish 2.4s ease forwards; }
 @keyframes h-tr-vanish { 0% { opacity: 1; } 100% { opacity: .25; filter: blur(.6px); text-decoration: line-through; } }
 :root[data-theme="dark"] .h-tr-book { background: #26211a; color: #eee3cc; } :root[data-theme="dark"] .h-tr-he-res { background: #3a3126; } :root[data-theme="dark"] .h-tr-he-res.ok { background: #1e3a2a; }
+/* lot 5 — ateliers */
+.h-tr-xs-out svg, .h-tr-lz-out svg { width: 100%; height: auto; max-height: 75vh; display: block; background: #fff; border-radius: 8px; border: 1px solid var(--line, #d9dce2); }
+.h-tr-faces { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; } .h-tr-faces figure, .h-tr-avg { margin: 0; display: grid; gap: 4px; justify-items: center; text-align: center; }
+.h-tr-faces canvas, .h-tr-avg canvas { width: 140px; height: auto; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, .2); } .h-tr-avg canvas { width: 200px; } .h-tr-faces small { color: var(--muted, #667); } .h-tr-arrow { font-size: 22px; color: var(--muted, #667); }
