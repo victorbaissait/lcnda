@@ -1728,6 +1728,7 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
     html.nav-bottom:not(.is-screen-embed) .sidebar-reopen { top: 18px; }
     html.side-right:not(.is-screen-embed) .app-shell { grid-template-columns: 1fr var(--sidebar); }
     html.side-right:not(.is-screen-embed) .app-shell.sidebar-collapsed { grid-template-columns: 1fr 0; }
+    html.side-right:not(.is-screen-embed) .app-shell.no-side { grid-template-columns: 1fr 0; }
     html.side-right:not(.is-screen-embed) .sidebar { grid-column: 2; border-right: 0; border-left: var(--line); }
     html.side-right:not(.is-screen-embed) .workspace { grid-column: 1; }
     html.side-right:not(.is-screen-embed) .topbar { grid-template-columns: 1fr auto var(--sidebar); }

@@ -40,7 +40,18 @@ const t = async (name, fn) => { if (only && !name.includes(only)) return; try { 
         const ctxT = { page, open, body, base, tmp };
 
         await t('l’onglet ✨ Trésors : la page d’accueil et ses cartes, rangées par groupe', async () => {
+            // caché au départ : on l'affiche comme le ferait « Menus, onglets et listes »
+            assert.equal(await page.$eval('.nav-item[data-module="tresors"]', b => b.offsetParent !== null), false, 'l’onglet est caché au départ');
+            await page.evaluate(() => { localStorage.setItem('genealogie-menu-tresors', '1'); window.LCNDA_APP.applyMenuOrder(); });
             await page.click('.nav-item[data-module="tresors"]'); await page.waitForSelector('.h-tr .h-tr-card');
+            // pas de colonne de gauche : rien à gauche (pas celle de l'onglet d'avant)
+            assert.equal(await page.$eval('#app', a => a.classList.contains('no-side')), true, 'colonne de gauche vide');
+            // ⚙️ Réglages : cacher un trésor, il disparaît ; on le remontre
+            const n0 = await page.$$eval('.h-tr .h-tr-card', l => l.length);
+            await page.click('[data-tr-settings]'); await page.click('.dashboard-reorder-row:nth-child(1) [data-eye]'); await page.click('dialog [data-save]');
+            assert.equal(await page.$$eval('.h-tr .h-tr-card', l => l.length), n0 - 1, 'un trésor caché');
+            await page.click('[data-tr-settings]'); await page.click('dialog [data-reset]'); await page.click('dialog [data-save]');
+            assert.equal(await page.$$eval('.h-tr .h-tr-card', l => l.length), n0, 'tous remontrés');
             const n = await page.$$eval('.h-tr .h-tr-card', l => l.length); assert.ok(n >= 5, `${n} cartes`);
             await page.click('.h-tr-card[data-tr-open="aton-age"]'); await page.waitForSelector('[data-tr-page="aton-age"]');
             await page.click('[data-tr-home]'); await page.waitForSelector('.h-tr-card');

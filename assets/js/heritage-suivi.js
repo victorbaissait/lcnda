@@ -1084,9 +1084,9 @@
     const HINT_KEY = 'genealogie-suivi-hint-closed';
     const tabHidden = () => { try { return (A().menuHiddenKeys ? A().menuHiddenKeys() : []).includes('suivi'); } catch (_) { return false; } };
     function showTab() {
-        A().undoLocalChange('✓ Onglet « 🐾 Suivi des animaux » affiché', ['genealogie-menu-hidden', 'genealogie-menu-suivi', 'genealogie-menu-animaux', 'genealogie-menu-fiches', 'genealogie-menu-adn'], () => {
+        A().undoLocalChange('✓ Onglet « 🐾 Suivi des animaux » affiché', ['genealogie-menu-hidden', 'genealogie-menu-suivi', 'genealogie-menu-animaux', 'genealogie-menu-fiches', 'genealogie-menu-adn', 'genealogie-menu-tresors'], () => {
             const hidden = A().menuHiddenKeys().filter(k => k !== 'suivi');
-            localStorage.setItem('genealogie-menu-hidden', JSON.stringify(hidden)); ['suivi', 'animaux', 'fiches', 'adn'].forEach(k => localStorage.setItem(`genealogie-menu-${k}`, '1'));
+            localStorage.setItem('genealogie-menu-hidden', JSON.stringify(hidden)); ['suivi', 'animaux', 'fiches', 'adn', 'tresors'].forEach(k => localStorage.setItem(`genealogie-menu-${k}`, '1'));
         }, () => A().applyMenuOrder?.());
         A().applyMenuOrder?.();
     }

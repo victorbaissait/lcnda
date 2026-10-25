@@ -72,6 +72,10 @@ Maquette : `docs/design/messages-et-listes.html`.
 - **H7 Défaire au lieu de demander avant** : tous les messages après une action s'affichent au même endroit (en bas à gauche), pendant la même durée (6 s, avec une barre bleue du temps qui reste, en pause quand la souris est dessus). Quatre sortes : action faite avec « ↶ Annuler » (noir), « ✓ Enregistré » (vert), « ↶ Annulé : … » avec « ↷ Rétablir » (noir), erreur avec « Réessayer » (rouge). Pour ce qu'on peut défaire (une note, un objet, une ligne…), plus de question avant : on supprime et on propose « ↶ Annuler ». La fenêtre « Es-tu sûr ? » (`confirmBox`) reste seulement pour ce qui ne se défait pas (une fiche entière avec tout ce qui s'y rattache, vider la corbeille, écraser une base).
 - **H10 Même barre au-dessus de toutes les listes**, toujours dans cet ordre : 🔍 Chercher (C1) · Filtrer ▾ (avec le nombre de filtres actifs en pastille bleue) · [Liste | Fiches] · Trier : … ▾ (C6). Le menu Filtrer est rangé par rubriques (Genre, Lieu de naissance avec le menu de choix de lieu, Étiquette…). Les filtres actifs s'affichent sous la barre en pastilles bleues « Femmes × » qu'on retire d'un clic, plus « Tout effacer ». Chaque liste retient ses réglages (recherche, filtres, tri, affichage).
 
+## Colonne de gauche (validé)
+
+- **Pas de colonne de gauche → rien à gauche.** Un écran qui n'a pas sa propre colonne de gauche (✨ Trésors, par exemple) n'en affiche aucune : la page prend toute la largeur, sans bouton « Liste → ». Jamais la colonne de l'écran d'avant (avant, les Réglages restaient affichés dans Trésors). Ça vaut pour tout écran, présent ou à venir : `renderSidebar` (app.js) ne garde la colonne que pour les onglets de `SIDEBAR_MODULES` ; un nouvel onglet qui a une colonne s'y ajoute, sinon il n'a rien à gauche (classe `no-side` sur `#app`).
+
 ## Artistes, œuvres et catalogue raisonné (validé)
 
 Maquette : `docs/design/artistes.html` (fiches A à H). Un seul moteur de « types » configurables : chaque sorte (disque, album, morceau, enregistrement, exemplaire, livre, œuvre d'art, exposition, film…) est une définition (groupes, champs typés, champs affichés par défaut, liens possibles).

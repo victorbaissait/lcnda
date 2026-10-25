@@ -102,10 +102,31 @@
 
     /* ═════════ L'onglet ═════════ */
     let pending = null; // une nouveauté demandée depuis un autre onglet (ext.tresors.open)
+    /* Réordonner les trésors : l'ordre et les trésors cachés, retenus sur cet ordinateur */
+    const PREF_KEY = 'lcnda-tresors-order';
+    const prefs = () => { try { const o = JSON.parse(localStorage.getItem(PREF_KEY) || '{}'); return {order: Array.isArray(o.order) ? o.order : [], hidden: Array.isArray(o.hidden) ? o.hidden : []}; } catch (_) { return {order: [], hidden: []}; } };
+    /** tous les trésors, rangés : par partie (dans l'ordre des parties), puis dans l'ordre choisi (les nouveaux à la fin de leur partie) */
+    function ordered() {
+        const {order} = prefs(), rank = k => { const i = order.indexOf(k); return i < 0 ? 1e6 : i; };
+        const gi = g => { const i = GROUPS.findIndex(x => x[0] === g); return i < 0 ? GROUPS.length : i; };
+        return ext.tresorFeatures.map((f, i) => ({f, i})).sort((a, b) => gi(a.f.group) - gi(b.f.group) || rank(a.f.key) - rank(b.f.key) || a.i - b.i).map(x => x.f);
+    }
+    function openSettings() {
+        const hidden = prefs().hidden, glabel = g => (GROUPS.find(x => x[0] === g)?.[1] || '').replace(/^\S+\s/, '');
+        const row = f => ({key: f.key, label: `${f.icon} ${f.title} — ${glabel(f.group)}`, hidden: hidden.includes(f.key)});
+        A().openSideReorderDialog({eyebrow: 'TRÉSORS', title: 'Réordonner les trésors', canHide: true, rows: ordered().map(row),
+            defaults: ext.tresorFeatures.map(f => ({...row(f), hidden: false})),
+            save: rows => {
+                if (rows.every(r => r.hidden)) { A().toast('Garde au moins un trésor affiché.', 'error'); return false; }
+                try { localStorage.setItem(PREF_KEY, JSON.stringify({order: rows.map(r => r.key), hidden: rows.filter(r => r.hidden).map(r => r.key)})); } catch (_) {}
+                if (A().state.module === 'tresors' && A().$('#workspace .h-tr:not(.h-tr-page)')) A().$('#workspace').innerHTML = hub();
+                A().toast('Ordre et trésors affichés enregistrés.');
+            }});
+    }
     function hub() {
-        const list = ext.tresorFeatures;
+        const {hidden} = prefs(), list = ordered().filter(f => !hidden.includes(f.key)), nHid = ext.tresorFeatures.filter(f => hidden.includes(f.key)).length;
         return `<section class="page h-tr">
-            <div class="page-header"><div><span class="eyebrow">✨ TRÉSORS DE FAMILLE</span><h1>Trésors de famille</h1><p class="muted">Pour s'émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.</p></div></div>
+            <div class="page-header"><div><span class="eyebrow">✨ TRÉSORS DE FAMILLE</span><h1>Trésors de famille</h1><p class="muted">Pour s'émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.</p></div><div class="page-actions"><button type="button" class="button secondary" data-tr-settings title="L’ordre des trésors, ceux qui s’affichent et ceux qui sont cachés${nHid ? ` (en ce moment : ${A().plural(nHid, 'trésor caché')})` : ''}">⚙️ Réglages</button></div></div>
             ${GROUPS.map(([g, label]) => { const fs = list.filter(f => f.group === g); return fs.length ? `<h2 class="h-tr-group">${esc(label)}</h2><div class="h-tr-grid">${fs.map(f => `<button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(f.title)}</b><small>${esc(f.desc)}</small></button>`).join('')}</div>` : ''; }).join('')}
         </section>`;
     }
@@ -127,6 +148,7 @@
     }
     document.addEventListener('click', e => {
         const o = e.target.closest('[data-tr-open]'); if (o && o.closest('.h-tr')) { e.preventDefault(); openFeature(o.dataset.trOpen); return; }
+        if (e.target.closest('[data-tr-settings]')) { e.preventDefault(); openSettings(); return; }
         const h = e.target.closest('[data-tr-home]'); if (h) { e.preventDefault(); history.pushState(null, '', '#tresors'); A().$('#workspace').innerHTML = hub(); }
     });
     /* ═════════ Le bloc de la fiche : ✨ Trésors de cette personne ═════════ */

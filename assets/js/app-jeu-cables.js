@@ -93,7 +93,9 @@
             const bind = () => {
                 const grid = host.querySelector('.jfc-grid');
                 grid.addEventListener('click', e => { const b = e.target.closest('[data-r]'); if (!b) return; const r = Number(b.dataset.r), cc = Number(b.dataset.c); if (e.altKey || lockMode) return lock(r, cc); turn(r, cc, e.shiftKey); }, {signal: api.signal});
-                grid.addEventListener('contextmenu', e => { const b = e.target.closest('[data-r]'); if (!b) return; e.preventDefault(); turn(Number(b.dataset.r), Number(b.dataset.c), true); }, {signal: api.signal});
+                // clic droit : tourner dans l'autre sens (comme Netwalk) ; le menu du navigateur est seulement bloqué sur la grille
+                grid.addEventListener('pointerdown', e => { if (e.button !== 2) return; const b = e.target.closest('[data-r]'); if (!b) return; e.preventDefault(); turn(Number(b.dataset.r), Number(b.dataset.c), true); }, {signal: api.signal});
+                grid.addEventListener('contextmenu', e => e.preventDefault()); // la grille part avec son écouteur
                 grid.addEventListener('keydown', e => { const b = e.target.closest('[data-r]'); if (!b) return; const r = Number(b.dataset.r), cc = Number(b.dataset.c), d = {ArrowRight: [0, 1], ArrowLeft: [0, -1], ArrowDown: [1, 0], ArrowUp: [-1, 0]}[e.key];
                     if (d) { e.preventDefault(); host.querySelector(`[data-r="${(r + d[0] + rows) % rows}"][data-c="${(cc + d[1] + cols) % cols}"]`)?.focus(); } else if (e.key === ' ') { e.preventDefault(); lock(r, cc); } else if (e.key === 'Enter') { e.preventDefault(); turn(r, cc, e.shiftKey); } }, {signal: api.signal});
                 host.querySelector('[data-jfc-lockmode]')?.addEventListener('click', () => { lockMode = !lockMode; draw(); }, {signal: api.signal});

@@ -21,6 +21,7 @@
 .ly-canvas{overflow:auto;position:relative;outline:none}
 .ly-canvas[data-tool="hand"]{cursor:grab}.ly-canvas[data-tool="zoom"]{cursor:zoom-in}.ly-canvas:not([data-tool="select"]):not([data-tool="hand"]):not([data-tool="zoom"]) .ly-page{cursor:crosshair}
 .ly-board{display:flex;flex-direction:column;align-items:center;gap:36px;padding:60px;width:max-content;min-width:100%;box-sizing:border-box}
+.ly-board{overflow:hidden;overflow:clip;overflow-clip-margin:240px} /* le plan de travail s'arrête : un objet tiré loin de la page ou les lignes magnétiques n'agrandissent plus la zone à faire défiler */
 .ly-spread{display:flex;gap:0;box-shadow:0 3px 18px rgba(0,0,0,.18)}.ly-spread.is-cur{box-shadow:0 0 0 2px var(--ly-acc),0 3px 18px rgba(0,0,0,.18)}
 .ly-spread .ly-page{border-right:1px solid rgba(0,0,0,.08)}
 .ly-board .ly-page{overflow:visible}
