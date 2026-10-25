@@ -8,9 +8,9 @@
     const GOOSE_PLAYER_COLORS=['#d93636','#f2c230','#198754','#2878c8','#7c3aed','#e87818','#db2777','#0f766e','#7c4a24','#4b5563'];
     let gooseSetupSelectedIds=new Set(),gooseSetupSpecials=[],gooseSetupVariant='goose';
     const GOOSE_TITLE='Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe';
-    const GOOSE_VARIANTS=[['goose','Jeu de l’oie'],['snakes','Serpents et échelles'],['horses','Petits chevaux'],['puzzle','🧩 Puzzle'],['laby','🌀 Labyrinthe'],['quiz','🕵️ Qui est-ce ? des ancêtres'],['memory','🃏 Memory des portraits'],['timeline','📅 La bonne date'],['morpion','❌ Morpion à règles libres']];
+    const GOOSE_VARIANTS=[['goose','Jeu de l’oie'],['snakes','Serpents et échelles'],['horses','Petits chevaux'],['puzzle','🧩 Puzzle'],['laby','🌀 Labyrinthe'],['quiz','🕵️ Qui est-ce ? des ancêtres'],['memory','🃏 Memory des portraits'],['timeline','📅 La bonne date'],['morpion','❌ Morpion à règles libres'],['naval','⚓ Bataille navale'],['cables','🔌 Les câbles (Netwalk)']];
     const fam=()=>window.LCNDA_JEUX_FAMILLE||null; // 🎲 Qui est-ce ?, Memory, La bonne date, Morpion (app-jeu-famille.js + app-jeu-*.js) : même colonne, mêmes parties en cours
-    const FAM_KEYS=['quiz','memory','timeline','morpion'];
+    const FAM_KEYS=['quiz','memory','timeline','morpion','naval','cables'];
     const variantOn=value=>(value!=='puzzle'||puzzle())&&(value!=='laby'||laby())&&(!FAM_KEYS.includes(value)||fam()?.KEYS.includes(value));
     const famCtx=()=>({variants:GOOSE_VARIANTS.filter(([value])=>variantOn(value)),onVariant:variant=>{gooseSetupVariant=variant;renderGooseGame();},open:id=>{gooseSetActive(id);renderSidebar();renderGooseGame();},newGame:key=>{gooseSetActive('');gooseSetupVariant=FAM_KEYS.includes(key)?key:'quiz';renderSidebar();renderGooseGame();},renderSidebar});
     const puzzle=()=>window.LCNDA_PUZZLE||null;

@@ -173,3 +173,19 @@ html.a11y-calm .jfm-card.is-up .jfm-in { animation: none; }
 :root[data-theme="dark"] .jfx-cell:hover:not([aria-disabled]){background:#272727}
 :root[data-theme="dark"] .jfx-cell.is-win{background:#203a23}
 /* ═════ fin du mode sombre automatique ═════ */
+/* ⚓ Bataille navale (app-jeu-naval.js) */
+.jfn-seas { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; } .jfn-seas h3 { margin: 0 0 8px; font-size: 15px; }
+.jfn-sea { display: grid; grid-template-columns: repeat(calc(var(--n) + 1), var(--cell)); grid-auto-rows: var(--cell); gap: 2px; padding: 6px; border-radius: 10px; background: #0f3d63; }
+.jfn-sea > b, .jfn-sea > span { display: grid; place-items: center; color: #cfe3f5; font: 700 11px system-ui; }
+.jfn-cell { border: 0; border-radius: 3px; background: #2a6ea4; color: #fff; font: 800 calc(var(--cell) * .5) system-ui; padding: 0; cursor: default; }
+.jfn-sea.is-target .jfn-cell:not([aria-disabled]) { cursor: crosshair; } .jfn-sea.is-target .jfn-cell:not([aria-disabled]):hover { background: #4b90c6; outline: 2px solid #ffd54a; }
+.jfn-cell.is-ship { background: #6b7684; } .jfn-cell.is-miss { background: #1f557f; color: #bcd6ec; } .jfn-cell.is-hit { background: #e0662f; } .jfn-cell.is-sunk { background: #8b1e1e; }
+.jfn-fleet { list-style: none; padding: 0; margin: 8px 0 0; font-size: 13px; display: grid; gap: 2px; } .jfn-fleet li { color: #2a6ea4; letter-spacing: 1px; } .jfn-fleet li span { color: inherit; letter-spacing: 0; margin-left: 6px; color: var(--text, #222); }
+.jfn-fleet li.is-sunk { color: #8b1e1e; text-decoration: line-through; }
+.jfn-log { font-size: 13px; padding-left: 18px; margin: 8px 0; } .jfn-veil { display: grid; place-items: center; gap: 16px; padding: 60px 20px; text-align: center; border-radius: 14px; background: #0f3d63; color: #fff; }
+/* 🔌 Les câbles (app-jeu-cables.js) */
+.jfc-grid { display: grid; grid-template-columns: repeat(var(--cols), var(--cell)); grid-auto-rows: var(--cell); gap: 1px; padding: 6px; background: #1d2330; border-radius: 10px; width: max-content; }
+.jfc-grid.is-wrap { box-shadow: 0 0 0 4px #1d2330, 0 0 0 7px #f2c230; } .jfc-grid.is-won { background: #14532d; }
+.jfc-cell { position: relative; border: 0; padding: 0; background: #f4f5f8; border-radius: 3px; cursor: pointer; } .jfc-cell svg { width: 100%; height: 100%; display: block; transition: transform .12s; }
+.jfc-cell:hover { background: #fff7d6; } .jfc-cell:focus-visible { outline: 3px solid #f2c230; z-index: 1; } .jfc-cell.is-locked { background: #d7dbe4; box-shadow: inset 0 0 0 2px #8a8f99; }
+.jfc-cell small { position: absolute; left: 0; right: 0; bottom: 1px; text-align: center; font: 700 9px system-ui; color: #1d2330; pointer-events: none; }

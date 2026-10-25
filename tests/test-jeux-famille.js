@@ -173,7 +173,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             posts.push(q.method() + ' ' + q.url() + ' ' + keys.join(','));
         });
         await page.goto(base);
-        await page.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_JEUX_FAMILLE?.KEYS?.length === 4, null, {timeout: 30000});
+        await page.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_JEUX_FAMILLE?.KEYS?.length === 6, null, {timeout: 30000});
         await page.evaluate(async () => { await window.LCNDA_APP.setModule('jeu'); });
         await page.waitForSelector('select[name="variant"]');
         const J = (fn, arg) => page.evaluate(fn, arg);
@@ -253,7 +253,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
         });
         await t('aucun POST pendant les parties', () => assert.deepEqual(posts, []));
         await t('la partie se retrouve après rechargement (colonne de gauche)', async () => {
-            await page.reload(); await page.waitForFunction(() => window.LCNDA_JEUX_FAMILLE?.KEYS?.length === 4 && window.LCNDA_APP?.state);
+            await page.reload(); await page.waitForFunction(() => window.LCNDA_JEUX_FAMILLE?.KEYS?.length === 6 && window.LCNDA_APP?.state);
             await page.evaluate(async () => { await window.LCNDA_APP.setModule('jeu'); });
             await page.waitForSelector('[data-jf-open]'); assert.ok(await page.$$eval('[data-jf-open]', l => l.length) >= 5);
             await page.click('[data-jf-open]'); await page.waitForSelector('[data-jf-play]');
