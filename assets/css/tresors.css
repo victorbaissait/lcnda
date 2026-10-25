@@ -75,3 +75,16 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 [data-tr-era] .person-hero :is(h1, h2, .muted, small, .eyebrow) { color: inherit !important; }
 .h-tr-era-demo { display: grid; gap: 6px; } .h-tr-era-demo .person-hero { display: grid; gap: 2px; padding: 16px; border-radius: 10px; min-height: 64px; }
 @media print { .h-tr-veillee { display: none; } }
+/* lot 3 — bougie, ambiance, arbre qui pousse, musique, ciel */
+.h-tr-candles { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.h-tr-cd { margin: 0; display: grid; justify-items: center; gap: 8px; padding: 18px 12px; border-radius: 14px; background: radial-gradient(circle at 50% 30%, #3a2a14, #120c05); color: #f5e6c8; text-align: center; }
+.h-tr-cd figcaption { display: grid; gap: 3px; } .h-tr-cd q { font-family: Georgia, serif; font-style: italic; } .h-tr-cd small { opacity: .75; }
+.h-tr-candle { position: relative; display: inline-block; width: 18px; height: 46px; flex: none; } .h-tr-candle.is-big { width: 30px; height: 90px; }
+.h-tr-candle .wax { position: absolute; bottom: 0; left: 0; right: 0; height: 70%; border-radius: 4px 4px 2px 2px; background: linear-gradient(90deg, #e8dcc2, #fffaf0 45%, #d8caa8); }
+.h-tr-candle .fl { position: absolute; left: 50%; bottom: 70%; width: 40%; height: 28%; margin-left: -20%; border-radius: 50% 50% 35% 35%; background: radial-gradient(circle at 50% 75%, #fff7c2, #ffb52e 55%, rgba(255, 120, 0, 0) 75%); opacity: 0; }
+.h-tr-candle.is-lit .fl { opacity: 1; animation: h-tr-flicker 1.6s infinite alternate ease-in-out; transform-origin: 50% 100%; box-shadow: 0 0 22px 8px rgba(255, 170, 40, .35); }
+@keyframes h-tr-flicker { 0% { transform: scale(1, 1) rotate(-2deg); } 40% { transform: scale(.92, 1.08) rotate(2deg); } 70% { transform: scale(1.05, .95) rotate(-1deg); } 100% { transform: scale(.97, 1.04) rotate(1deg); } }
+@media (prefers-reduced-motion: reduce) { .h-tr-candle.is-lit .fl { animation: none; } }
+.h-tr-mixer { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px 18px; } .h-tr-mixer label { display: grid; gap: 2px; font-size: 13px; }
+.h-tr-grow-box { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line, #d9dce2); } .h-tr-grow-box svg { display: block; } .h-tr-grow-box g { transition: opacity .3s; }
+.h-tr-skyblock canvas { width: 100%; max-width: 320px; height: auto; display: block; margin: auto; border-radius: 8px; }
