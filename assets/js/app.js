@@ -1209,6 +1209,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function cleanMenuIcon(v){const t=String(v||'').replace(/[<>&"'`\s\p{Cc}\u061C\u200B\u200E\u200F\u202A-\u202E\u2060-\u2064\u2066-\u206F\uFEFF]/gu,'');const parts=typeof Intl!=='undefined'&&Intl.Segmenter?[...new Intl.Segmenter('fr',{granularity:'grapheme'}).segment(t)].map(s=>s.segment):[...t];let out='';for(const g of parts.slice(0,4)){if(out.length+g.length>48)break;out+=g;}return out.replace(/\u200D+$/u,'');}
     function menuDefaultLabel(key){const btn=document.querySelector(`.nav-item[data-module="${CSS.escape(key)}"]:not([data-board])`);if(!btn)return '';if(btn.dataset.defaultLabel!==undefined)return btn.dataset.defaultLabel.trim();const t=[...btn.childNodes].find(n=>n.nodeType===3);return t?t.textContent.trim():'';}
     function menuFullLabel(key,fallback){const d=splitMenuIcon(fallback),own=splitMenuIcon(menuNames()[key]||''),icons=menuIcons();const icon=Object.prototype.hasOwnProperty.call(icons,key)?cleanMenuIcon(icons[key]):(own.icon||d.icon);return `${icon?icon+' ':''}${own.base||d.base}`;}
+    /** le petit titre du panneau de gauche (« 13 — S’ÉMERVEILLER ») : le même numéro que l'onglet dans la barre du haut */
+    function moduleIndexLabel(module){const base=modules[module]?.[0]||'';const key=module==='personnes'&&state.peopleScope==='animals'?'animaux':module;const num=document.querySelector(`.main-nav [data-module="${key}"]:not(.nav-custom-tab) span`)?.textContent?.trim();return num&&/^\d+/.test(base)?base.replace(/^\d+/,num):base;}
     function applyMenuOrder(){const nav=$('.main-nav');if(!nav)return;let visibleIndex=0;const hidden=menuHiddenKeys();
         $$('.nav-custom-tab',nav).forEach(button=>button.remove());
         // Onglets à soi : un bouton chacun, à sa place dans « Ordre du menu principal » (Apparence)
@@ -1221,6 +1223,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if(!tab){const label=[...button.childNodes].find(n=>n.nodeType===3);if(label){if(button.dataset.defaultLabel===undefined)button.dataset.defaultLabel=label.textContent;label.textContent=menuFullLabel(key,button.dataset.defaultLabel);}}
             button.style.display=isHidden?'none':'';if(!isHidden){button.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');}nav.append(button);
         });
+        const idx=$('#sidebar-index');if(idx&&state.module&&modules[state.module]&&idx.textContent!=='MON ONGLET')idx.textContent=moduleIndexLabel(state.module);
     }
     /** Onglet raccourci : ouvre un écran de l'app (mêmes cibles que les raccourcis des widgets : module:, list:, maint:, graph:, stat:) */
     async function openCustomScreen(target){
@@ -2241,7 +2244,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         state.personRouteFresh=module==='personnes'; // la fiche choisie juste après remplace cette adresse (pas deux entrées)
         markNavActive();
         const ownTab = module === 'dashboard' ? currentCustomTab() : null;
-        $('#sidebar-index').textContent = ownTab ? 'MON ONGLET' : modules[module][0];
+        $('#sidebar-index').textContent = ownTab ? 'MON ONGLET' : moduleIndexLabel(module);
         $('#sidebar-title').textContent = ownTab ? menuLabel(ownTab.id, `${ownTab.icon ? ownTab.icon + ' ' : ''}${ownTab.name || 'Mon onglet'}`) : module === 'personnes' && state.peopleScope === 'animals' ? menuLabel('animaux', 'Animaux') : menuLabel(module, modules[module][1]);
         $('#workspace').innerHTML = '<section class="loading-screen"><div class="loading-mark">VB</div><p>Préparation de la vue…</p></section>';
         renderSidebar();

@@ -70,7 +70,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/tableur.css?v=6">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
     <link rel="stylesheet" href="assets/css/cadastre.css?v=1">
-    <link rel="stylesheet" href="assets/css/traitement-texte.css?v=4">
+    <link rel="stylesheet" href="assets/css/traitement-texte.css?v=5">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=7" id="lc-frame-css" media="not all">
@@ -1136,7 +1136,7 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=475" defer></script>
+<script src="assets/js/app.js?v=476" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=22" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1230,7 +1230,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=46" defer></script>
 <script src="assets/js/heritage-dnd.js?v=11" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=1" defer></script>
-<script src="assets/js/heritage-studio.js?v=101" defer></script>
+<script src="assets/js/heritage-studio.js?v=102" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-fluidite.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-gomme.js?v=1" defer></script>
@@ -1338,6 +1338,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-traitement-texte-fichiers.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-fusion.js?v=1" defer></script>
 <script src="assets/js/heritage-traitement-texte-relecture.js?v=1" defer></script>
+<script src="assets/js/heritage-traitement-texte-onglets.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-code.js?v=4" defer></script>
 <script src="assets/js/heritage-site-web-compat.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-html-ref.js?v=1" defer></script>
@@ -1351,7 +1352,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-house-plus.js?v=4" defer></script>
 <script src="assets/js/heritage-cadastre.js?v=1" defer></script>
 <script src="assets/js/heritage-house-dxf.js?v=2" defer></script>
-<script src="assets/js/heritage-house.js?v=39" defer></script>
+<script src="assets/js/heritage-house.js?v=40" defer></script>
 <script src="assets/js/heritage-house3d.js?v=18" defer></script>
 <script src="assets/js/heritage-house-lib.js?v=11" defer></script>
 <script src="assets/js/heritage-house-more.js?v=2" defer></script>
@@ -1372,7 +1373,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-fiche.js?v=6" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=16" defer></script>
+<script src="assets/js/app-apparence.js?v=17" defer></script>
 <script src="assets/js/app-designs.js?v=9" defer></script>
 <script src="assets/js/app-sections.js?v=3" defer></script>
 <script>

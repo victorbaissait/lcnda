@@ -436,7 +436,7 @@
             // ordre de dessin = ordre « vu du dessus » : ce qui est posé plus haut (la radio sur la table, la lampe sur la commode) passe par-dessus,
             // à hauteur égale le plus petit dessus, et l'objet choisi tout en haut — il reste visible et se clique
             const topOf = it => Number(it.elev || 0) + Number(it.h ?? libOf(it.kind)?.[5] ?? 80);
-            const drawOrder = f.items.map((it, i) => ({it, i})).sort((a, b) => (sel?.type === 'item' && sel.id === a.it.id) - (sel?.type === 'item' && sel.id === b.it.id) || Number(a.it.elev || 0) - Number(b.it.elev || 0) || topOf(a.it) - topOf(b.it) || (b.it.w * b.it.d) - (a.it.w * a.it.d) || a.i - b.i).map(x => x.it);
+            const drawOrder = f.items.map((it, i) => ({it, i})).sort((a, b) => (a.it.on || b.it.on ? Number(a.it.elev || 0) - Number(b.it.elev || 0) : 0) || (sel?.type === 'item' && sel.id === a.it.id) - (sel?.type === 'item' && sel.id === b.it.id) || Number(a.it.elev || 0) - Number(b.it.elev || 0) || topOf(a.it) - topOf(b.it) || (b.it.w * b.it.d) - (a.it.w * a.it.d) || a.i - b.i).map(x => x.it);
             drawOrder.forEach(it => { const isSel = sel?.type === 'item' && sel.id === it.id;
                 h += `<g data-hs="item:${it.id}" class="h-hs-item${isSel ? ' is-sel' : ''}" transform="translate(${it.x} ${it.y}) rotate(${it.rot || 0})">${sym2d(it)}${isSel ? `<rect x="${-it.w / 2 - 4}" y="${-it.d / 2 - 4}" width="${it.w + 8}" height="${it.d + 8}" fill="none" stroke="#2a7de1" stroke-width="1.5" stroke-dasharray="5 3" vector-effect="non-scaling-stroke"/><circle cy="${-it.d / 2 - 26 / zoom}" r="${7 / zoom}" fill="#2a7de1" data-hs-rot="1"/><path d="M0 ${-it.d / 2 - 4}V${-it.d / 2 - 20 / zoom}" stroke="#2a7de1" vector-effect="non-scaling-stroke"/>` : ''}</g>`;
                 if (zoom > .35 && it.name) h += `<text x="${it.x}" y="${it.y + it.d / 2 + 16 / zoom}" font-size="${11 / zoom}" class="h-hs-iname">${esc(it.name)}</text>`;
@@ -621,6 +621,8 @@
                     <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="openall" title="Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus">Ouvrir les trémies de tous les escaliers</button></div>`);
                 h += `<h4>${esc(o.name || L?.[1] || 'Objet')}</h4>${sec('Position et taille', 'p-pos', `<div class="h-hs-g3c"><label>Largeur<input type="number" data-hs-p="w" value="${Math.round(o.w)}" min="5"></label><label>Profondeur<input type="number" data-hs-p="d" value="${Math.round(o.d)}" min="1"></label><label>Hauteur<input type="number" data-hs-p="hgt" value="${Math.round(isSt ? stH : (o.h ?? L?.[5] ?? 80))}" min="1"></label></div>
                     <div class="h-hs-g3c"><label>X<input data-unit="cm" type="number" data-hs-p="x" value="${r1(o.x)}" step="1"></label><label>Y<input data-unit="cm" type="number" data-hs-p="y" value="${r1(o.y)}" step="1"></label><label><span data-help="La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur." data-help-faq="plan de maison">Du sol</span><input data-unit="cm" type="number" data-hs-p="elev" value="${o.elev || 0}" min="0" max="400"></label></div>
+                    <div class="h-hs-row h-hs-scale"><span class="small muted" data-help="Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand.">Taille</span>${[['0.1', '÷10'], ['0.5', '÷2'], ['0.9', '−10 %'], ['1.1', '+10 %'], ['2', '×2'], ['10', '×10']].map(([k2, l]) => `<button type="button" class="button small secondary" data-hs-cmd="scale:${k2}">${l}</button>`).join('')}${o.model?.id ? '<button type="button" class="button small secondary" data-hs-cmd="modelsize" title="Les prochains objets de ce modèle seront posés à cette taille">💾 Garder pour ce modèle</button>' : ''}</div>
+                    <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="ontop" title="Le poser sur le meuble qui est dessous (table, commode, cheminée…)">⬆ Sur l’objet dessous</button><button type="button" class="button small secondary" data-hs-cmd="toground">⬇ Au sol</button>${o.on ? `<small class="muted">posé sur « ${esc((f.items.find(q => q.id === o.on) || {}).name || libOf((f.items.find(q => q.id === o.on) || {}).kind)?.[1] || 'un objet')} » : il le suit</small>` : ''}</div>
                     <label>Rotation<input data-unit="°" type="number" data-hs-p="rot" value="${Math.round(o.rot || 0)}" step="15"></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="rot90" data-shortcut="R">⟳ 90°</button><button type="button" class="button small secondary" data-hs-cmd="dup">⧉ Dupliquer</button><button type="button" class="button small secondary" data-hs-cmd="repeat" title="Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table)">🔁 Répéter…</button></div>`)}
                     ${stairSec}
                     ${sec('Couleur', 'p-color', `<div class="h-hs-g2c"><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || L?.[6] || '#9a8a7a')}"></label><label>Matière<select data-hs-p="matl">${opt(OBJ_MATS.map(m => [m[0], m[1]]), o.matl || '')}</select></label></div>
@@ -734,7 +736,7 @@
                 if (rot && sel?.type === 'item') { drag = {rot: true, it: f.items.find(q => q.id === sel.id)}; return; }
                 if (e.target.closest('[data-hs-ref]')) return;
                 const hit = hitOf(e); sel = hit;
-                if (hit?.type === 'item') { const it = f.items.find(q => q.id === hit.id); drag = {move: 'item', it, x, y, ox: it.x, oy: it.y}; }
+                if (hit?.type === 'item') { const it = f.items.find(q => q.id === hit.id); drag = {move: 'item', it, x, y, ox: it.x, oy: it.y, carried: carriedBy(f, it).map(q => [q, q.x, q.y])}; }
                 else if (hit?.type === 'opening') { drag = {move: 'opening', o: f.openings.find(q => q.id === hit.id)}; }
                 else if (hit?.type === 'wall') { const w = f.walls.find(q => q.id === hit.id); drag = {move: 'wall', w, x, y, a: [...w.a], b: [...w.b], linked: f.walls.flatMap(q => q === w ? [] : [[q, 'a'], [q, 'b']]).flatMap(([q, k]) => [[w.a, 'a'], [w.b, 'b']].filter(([p]) => q[k][0] === p[0] && q[k][1] === p[1]).map(([, which]) => [q, k, which])), ops: f.openings.filter(o => o.wall === w.id)}; }
                 else if (hit?.type === 'room') { const rm = f.rooms.find(q => q.id === hit.id); drag = {move: 'room', rm, x, y, orig: rm.pts.map(p => [...p]), grp: roomGroup(f, rm)}; }
@@ -772,7 +774,7 @@
             if (drag.tip) { if (drag.lb) drag.lb.tip = snapPt(x, y, e); drag.moved = true; render(); return; }
             if (drag.rot) { const it = drag.it, a = Math.atan2(y - it.y, x - it.x) * 180 / Math.PI + 90; it.rot = e.shiftKey ? a : Math.round(a / 15) * 15; drag.moved = true; render(); return; }
             if (drag.refMove) { H.ref.x = drag.ox + x - drag.x; H.ref.y = drag.oy + y - drag.y; drag.moved = true; render(); return; }
-            if (drag.move === 'item') { const g = e.altKey ? 1 : (H.grid || 10); drag.it.x = Math.round((drag.ox + x - drag.x) / g) * g; drag.it.y = Math.round((drag.oy + y - drag.y) / g) * g; drag.moved = true; render(); return; }
+            if (drag.move === 'item') { const g = e.altKey ? 1 : (H.grid || 10); drag.it.x = Math.round((drag.ox + x - drag.x) / g) * g; drag.it.y = Math.round((drag.oy + y - drag.y) / g) * g; (drag.carried || []).forEach(([q, qx, qy]) => { q.x = qx + drag.it.x - drag.ox; q.y = qy + drag.it.y - drag.oy; }); drag.moved = true; render(); return; }
             if (drag.move === 'label') { drag.lb.x = drag.ox + x - drag.x; drag.lb.y = drag.oy + y - drag.y; drag.moved = true; render(); return; }
             if (drag.move === 'opening') { const o = drag.o, w = f.walls.find(q => q.id === o.wall); if (!w) return; const L = wallLen(w), dx = w.b[0] - w.a[0], dy = w.b[1] - w.a[1], t = ((x - w.a[0]) * dx + (y - w.a[1]) * dy) / (L * L || 1); o.pos = clamp(t, (o.w / 2 + 2) / L, 1 - (o.w / 2 + 2) / L); drag.moved = true; render(); return; }
             if (drag.move === 'wall') { const g = e.altKey ? 1 : (H.grid || 10), dx = Math.round((x - drag.x) / g) * g, dy = Math.round((y - drag.y) / g) * g; drag.w.a = [drag.a[0] + dx, drag.a[1] + dy]; drag.w.b = [drag.b[0] + dx, drag.b[1] + dy]; drag.linked.forEach(([q, k, which]) => { q[k] = [...drag.w[which]]; }); drag.moved = true; render(); return; }
@@ -782,6 +784,7 @@
             const d = drag; drag = null;
             if (draft?.kind === 'room' && (tool === 'room' || tool === 'void')) { const a = draft.a, b = draft.b || snapPt(...toW(e), e); draft = null; if (tool === 'void') makeVoidRect(a, b); else makeRoomRect(a, b); return; }
             if (!d || d.pan) return;
+            if (d.moved && d.move === 'item' && autoStack(F(), d.it)) { const s = d.it.on && F().items.find(q => q.id === d.it.on); return commit(s ? `Posé sur « ${s.name || libOf(s.kind)?.[1] || 'l’objet'} »` : 'Posé au sol'); }
             if (d.moved) commit({wallEnd: 'Mur modifié', roomPt: 'Pièce modifiée', tip: 'Flèche déplacée', rot: 'Objet tourné', refMove: 'Plan ancien déplacé'}[Object.keys(d).find(k => ['wallEnd', 'roomPt', 'tip', 'rot', 'refMove'].includes(k))] || 'Déplacé');
         });
         svg.addEventListener('dblclick', e => { if (draft) finishDraft(); else { const hit = hitOf(e); if (hit?.type === 'room') { tab = 'props'; sel = hit; render(); pane.querySelector('[data-hs-p="name"]')?.focus(); } } });
@@ -907,8 +910,28 @@
             else if (sel.type === 'opening') { const o = f.openings.find(q => q.id === sel.id), w = o && f.walls.find(q => q.id === o.wall); if (!w) return; const L = wallLen(w) || 1, ux = (w.b[0] - w.a[0]) / L, uy = (w.b[1] - w.a[1]) / L, d = (dx * ux + dy * uy) || dx || dy; o.pos = clamp(o.pos + d / L, (o.w / 2 + 2) / L, 1 - (o.w / 2 + 2) / L); }
             later('Décalé');
         }
+        /* ─── poser un objet sur un autre (une statue sur une table, un vase sur la commode) ou au sol ─── */
+        const hOf = it => Number(it.h ?? libOf(it.kind)?.[5] ?? 80), topOf = it => Number(it.elev || 0) + hOf(it);
+        /** les objets posés sur « it », et ceux posés sur eux */
+        const carriedBy = (f, it, seen = new Set([it.id])) => f.items.filter(q => q.on === it.id && !seen.has(q.id)).flatMap(q => { seen.add(q.id); return [q, ...carriedBy(f, q, seen)]; });
+        /** l'objet (le plus haut) sous le centre de « it » : un meuble d'au moins 10 cm (pas un tapis), pas un escalier, pas ce qui est posé sur lui */
+        function supportOf(f, it) {
+            const skip = new Set([it.id, ...carriedBy(f, it).map(q => q.id)]); let best = null;
+            f.items.forEach(s => { if (skip.has(s.id) || hOf(s) < 10 || VD()?.isStair(s)) return;
+                const r = (s.rot || 0) * Math.PI / 180, dx = it.x - s.x, dy = it.y - s.y, lx = dx * Math.cos(r) + dy * Math.sin(r), ly = -dx * Math.sin(r) + dy * Math.cos(r);
+                if (Math.abs(lx) > s.w / 2 || Math.abs(ly) > s.d / 2) return; if (!best || topOf(s) > topOf(best)) best = s; });
+            return best;
+        }
+        /** après un déplacement : posé au sol, il monte sur le meuble en dessous ; posé sur un meuble, il retombe au sol s'il n'y a plus rien dessous (une horloge accrochée au mur ne bouge pas) */
+        function autoStack(f, it) {
+            if (Number(it.elev || 0) > 0 && !it.on) return false;
+            const s = supportOf(f, it); if (s) { it.on = s.id; it.elev = topOf(s); } else if (it.on) { delete it.on; it.elev = 0; } else return false;
+            restack(f); return true;
+        }
+        /** ce qui est posé suit la hauteur de son support (support agrandi, monté, supprimé) */
+        function restack(f) { for (let pass = 0; pass < 4; pass++) f.items.forEach(q => { if (!q.on) return; const s = f.items.find(x => x.id === q.on); if (!s) { delete q.on; q.elev = 0; } else q.elev = topOf(s); }); }
         /* ─── les commandes ─── */
-        const placeItem = (base) => { const f = F(), r = stage.getBoundingClientRect(), x = (r.width / 2 - panX) / zoom, y = (r.height / 2 - panY) / zoom, g = H.grid || 10; const it = {id: uid('i'), x: Math.round(x / g) * g, y: Math.round(y / g) * g, rot: 0, ...base}; if (VD()?.isStair(it) && it.open == null) it.open = true; f.items.push(it); sel = {type: 'item', id: it.id}; setTool('select'); tab = 'props'; commit(`${it.name || libOf(it.kind)?.[1] || 'Objet'} posé`); };
+        const placeItem = (base) => { const f = F(), r = stage.getBoundingClientRect(), x = (r.width / 2 - panX) / zoom, y = (r.height / 2 - panY) / zoom, g = H.grid || 10; const it = {id: uid('i'), x: Math.round(x / g) * g, y: Math.round(y / g) * g, rot: 0, ...base}; if (VD()?.isStair(it) && it.open == null) it.open = true; f.items.push(it); autoStack(f, it); sel = {type: 'item', id: it.id}; setTool('select'); tab = 'props'; commit(`${it.name || libOf(it.kind)?.[1] || 'Objet'} posé`); };
         const pickPerson = title => new Promise(res => { let done = false;
             ext.openDialog({eyebrow: 'MAISON', title, submitLabel: 'Ajouter', body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${PK().pickerField({name: 'hs_pick', kind: 'person'})}</div>`,
                 onOpen: dg => { setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
@@ -1246,6 +1269,14 @@
             mezz: () => mezzanine(),
             roofit: type => { H.roof = H.roof || {}; const ty = ['velux', 'dormer', 'shed'].includes(type) ? type : 'velux', flat = H.roof.shape === 'flat'; H.roof.items = [...(H.roof.items || []), {id: uid('r'), type: ty, side: 'a', pos: [50, 25, 75][(H.roof.items || []).length % 3], ...(flat ? {at: 50, w: ty === 'velux' ? 120 : ty === 'shed' ? 100 : 160, h: ty === 'dormer' ? 160 : 120} : {})}]; commit((flat ? {velux: 'Verrière ajoutée', dormer: 'Édicule ajouté', shed: 'Lanterneau ajouté'} : {velux: 'Fenêtre de toit ajoutée', dormer: 'Lucarne ajoutée', shed: 'Chien-assis ajouté'})[ty]); if (H.roof.on && !view3d) status('✓ Elle se voit dans la vue 3D, avec le toit.'); },
             roofitdel: i => { if (!H.roof?.items?.[Number(i)]) return; H.roof.items.splice(Number(i), 1); commit('Retiré du toit'); undoable('Fenêtre de toit ou lucarne retirée'); },
+            toground: () => { const f = F(), it = f.items.find(q => q.id === sel?.id); if (!it) return; delete it.on; it.elev = 0; restack(f); commit('Posé au sol'); },
+            ontop: () => { const f = F(), it = f.items.find(q => q.id === sel?.id); if (!it) return; const s = supportOf(f, it); if (!s) return toast('Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…).', 'error'); it.on = s.id; it.elev = topOf(s); restack(f); commit(`Posé sur « ${s.name || libOf(s.kind)?.[1] || 'l’objet'} »`); },
+            /** agrandir ou réduire en gardant les proportions (un modèle importé trop petit ou trop grand) */
+            scale: k => { const f = F(), it = f.items.find(q => q.id === sel?.id), m = Number(k); if (!it || !(m > 0)) return; const h = hOf(it);
+                if (Math.min(it.w * m, it.d * m, h * m) < 1 || Math.max(it.w * m, it.d * m, h * m) > 5000) return toast('Taille hors limites (de 1 cm à 50 m).', 'error');
+                it.w = Math.round(it.w * m * 10) / 10; it.d = Math.round(it.d * m * 10) / 10; it.h = Math.round(h * m * 10) / 10; restack(f); commit(m > 1 ? 'Agrandi' : 'Réduit'); },
+            /** la taille de cet objet devient celle du modèle dans « Mes objets » (les prochains seront posés à la bonne taille) */
+            modelsize: async () => { const it = F().items.find(q => q.id === sel?.id); if (!it?.model?.id) return; try { await post('house_model_meta', {id: it.model.id, dims: {w: it.w, d: it.d, h: hOf(it)}}); const m = mine.find(q => q.id === Number(it.model.id)); if (m) m.dims = {w: it.w, d: it.d, h: hOf(it)}; toast('Taille gardée pour ce modèle : les prochains seront posés comme celui-ci.', 'success'); } catch (e) { toast(e.message, 'error'); } },
             rot90: () => { const it = F().items.find(q => q.id === sel?.id); if (!it) return; it.rot = ((it.rot || 0) + 90) % 360; commit('Tourné'); },
             swing: () => { const o = F().openings.find(q => q.id === sel?.id); if (!o) return; o.swing = o.swing === 'right' ? 'left' : 'right'; commit('Sens d’ouverture'); }, flip: () => { const o = F().openings.find(q => q.id === sel?.id); if (!o) return; o.flip = !o.flip; commit('Côté d’ouverture'); },
             split: () => { const f = F(), w = f.walls.find(q => q.id === sel?.id); if (!w) return; const m = [(w.a[0] + w.b[0]) / 2, (w.a[1] + w.b[1]) / 2], w2 = {...JSON.parse(JSON.stringify(w)), id: uid('w'), a: [...m]}; w.b = [...m]; f.walls.push(w2); f.openings.filter(o => o.wall === w.id).forEach(o => { if (o.pos > .5) { o.wall = w2.id; o.pos = (o.pos - .5) * 2; } else o.pos *= 2; }); commit('Mur coupé'); },
@@ -1376,6 +1407,7 @@
                 else if (k === 'feet' && !v) delete o.feet;
                 else if ((k === 'x' || k === 'y') && v !== '' && Number.isFinite(Number(v))) o[k] = Number(v);
                 else o[k] = v;
+                if (sel.type === 'item' && ['hgt', 'elev', 'w', 'd'].includes(k)) { if (k === 'elev') delete o.on; restack(f); }
                 later('Réglage'); return;
             }
         });

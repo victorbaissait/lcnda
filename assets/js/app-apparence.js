@@ -313,7 +313,7 @@
                     <div class="form-grid one-column"><label>ou colle le code SVG ici<textarea data-svg-text rows="5" spellcheck="false" placeholder="&lt;svg …&gt;…&lt;/svg&gt;"></textarea></label></div>
                     <div class="page-actions"><button type="button" class="button small secondary" data-svg-read>Lire ce SVG</button></div><div data-svg-msg></div></div>
             </div>
-            <aside class="lc-shp-aside"><span class="section-label">Aperçu</span><div class="lc-shp-preview" data-preview></div><div data-msg></div></aside></div>
+            <aside class="lc-shp-aside"><div class="page-actions lc-shp-hist"><button type="button" class="button small secondary" data-h-undo disabled title="Revenir en arrière (Ctrl+Z)">↶ Annuler</button><button type="button" class="button small secondary" data-h-redo disabled title="Revenir en avant (Ctrl+Maj+Z ou Ctrl+Y)">↷ Rétablir</button></div><span class="section-label">Aperçu</span><div class="lc-shp-preview" data-preview></div><div data-msg></div></aside></div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">${own ? 'Enregistrer' : 'Créer la forme'}</button></div></form>`;
         document.body.appendChild(dlg);
         const q = s => dlg.querySelector(s);
@@ -330,6 +330,19 @@
             q('[data-preview]').innerHTML = s ? `<div class="lc-shp-demo lc-shp-demo-big" data-shp="__preview"><span class="lc-shp-av card-index">01</span><span class="lc-shp-av person-card-initial">LB</span><span class="lc-shp-av person-card-initial lc-shp-xl">LB</span></div><p class="muted">Comme dans les blocs (01) et sur les fiches (initiales).</p>`
                 : `<p class="muted">${tab === 'draw' ? 'Pose au moins 3 points.' : tab === 'svg' ? 'Choisis ou colle un dessin SVG.' : 'Choisis une forme dans la bibliothèque.'}</p>`;
         };
+        /* ↶ ↷ revenir en arrière ou en avant sur la forme (les points, le modèle, la forme choisie ou importée) */
+        const hist = [], fut = [], snap = () => JSON.stringify({tab, pts, shape, libPick});
+        let lastSnap = '';
+        const paintHist = () => { q('[data-h-undo]').disabled = !hist.length; q('[data-h-redo]').disabled = !fut.length; };
+        const commit = () => { const now = snap(); if (now === lastSnap) return; hist.push(lastSnap); if (hist.length > 200) hist.shift(); fut.length = 0; lastSnap = now; paintHist(); };
+        const restore = st => { const o = JSON.parse(st); pts = o.pts; shape = o.shape; libPick = o.libPick; lastSnap = st; showTab(o.tab); paintHist(); };
+        const undo = () => { if (!hist.length) return; fut.push(lastSnap); restore(hist.pop()); };
+        const redo = () => { if (!fut.length) return; hist.push(lastSnap); restore(fut.pop()); };
+        dlg.addEventListener('click', e => { if (e.target.closest('[data-h-undo]')) undo(); else if (e.target.closest('[data-h-redo]')) redo(); });
+        dlg.addEventListener('keydown', e => {
+            if (!(e.ctrlKey || e.metaKey) || e.target.matches('input:not([type=checkbox]),textarea')) return; // dans un champ : l'annulation du texte
+            const k = e.key.toLowerCase(); if (k === 'z' && !e.shiftKey) { e.preventDefault(); undo(); } else if ((k === 'z' && e.shiftKey) || k === 'y') { e.preventDefault(); redo(); }
+        });
         /* onglets (C5) */
         const showTab = t => { tab = t; if (!nameInput.dataset.typed && suggested[t]) nameInput.value = suggested[t]; dlg.querySelectorAll('[data-tab]').forEach(b => { b.classList.toggle('is-active', b.dataset.tab === t); b.setAttribute('aria-selected', String(b.dataset.tab === t)); }); dlg.querySelectorAll('[data-pane]').forEach(p => { p.hidden = p.dataset.pane !== t; });
             if (t === 'lib') paintLib(); if (t === 'draw') paintCanvas(); paintPreview(); };
@@ -358,7 +371,7 @@
             shape = {kind: 'path', paths: [{d: s.d, eo: s.eo ? 1 : 0}], vb: [0, 0, box, box], src: `Tableaux · ${s.n}`};
             setName(s.n);
             dlg.querySelectorAll('[data-lib-k]').forEach(b => { const on = b === t; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); });
-            paintPreview();
+            paintPreview(); commit();
         });
         q('[data-lib]').addEventListener('keydown', e => {
             const tiles = [...dlg.querySelectorAll('[data-lib-k]')], i = tiles.indexOf(document.activeElement); if (i < 0) return;
@@ -380,28 +393,28 @@
             const c = e.target.closest('[data-pt]');
             if (c) { drag = Number(c.dataset.pt); canvas.setPointerCapture?.(e.pointerId); e.preventDefault(); return; }
             if (pts.length >= LIMITS.pts) { toast(`${LIMITS.pts} points au plus.`, 'error'); return; }
-            pts.push(at(e)); paintCanvas(); paintPreview();
+            pts.push(at(e)); paintCanvas(); paintPreview(); commit();
         });
         canvas.addEventListener('pointermove', e => { if (drag < 0) return; pts[drag] = at(e); paintCanvas(); paintPreview(); });
-        const end = () => { drag = -1; };
+        const end = () => { if (drag >= 0) commit(); drag = -1; };
         canvas.addEventListener('pointerup', end); canvas.addEventListener('pointercancel', end);
-        canvas.addEventListener('dblclick', e => { const c = e.target.closest('[data-pt]'); if (!c) return; pts.splice(Number(c.dataset.pt), 1); paintCanvas(); paintPreview(); });
+        canvas.addEventListener('dblclick', e => { const c = e.target.closest('[data-pt]'); if (!c) return; pts.splice(Number(c.dataset.pt), 1); paintCanvas(); paintPreview(); commit(); });
         q('[data-pane="draw"]').addEventListener('click', e => {
-            const m = e.target.closest('[data-model]'); if (m) { pts = POLY_MODELS[Number(m.dataset.model)][1]().map(p => [Math.round(p[0] * 10) / 10, Math.round(p[1] * 10) / 10]); setName(POLY_MODELS[Number(m.dataset.model)][0]); paintCanvas(); paintPreview(); return; }
-            if (e.target.closest('[data-undo-pt]')) { pts.pop(); paintCanvas(); paintPreview(); return; }
-            if (e.target.closest('[data-clear-pts]')) { const old = pts; pts = []; paintCanvas(); paintPreview(); if (old.length) A().undoToast?.('Points effacés', {undo: () => { pts = old; paintCanvas(); paintPreview(); }, redo: () => { pts = []; paintCanvas(); paintPreview(); }}); }
+            const m = e.target.closest('[data-model]'); if (m) { pts = POLY_MODELS[Number(m.dataset.model)][1]().map(p => [Math.round(p[0] * 10) / 10, Math.round(p[1] * 10) / 10]); setName(POLY_MODELS[Number(m.dataset.model)][0]); paintCanvas(); paintPreview(); commit(); return; }
+            if (e.target.closest('[data-undo-pt]')) { pts.pop(); paintCanvas(); paintPreview(); commit(); return; }
+            if (e.target.closest('[data-clear-pts]')) { pts = []; paintCanvas(); paintPreview(); commit(); }
         });
         q('[data-pts]').addEventListener('input', e => {
             pts = e.target.value.split('\n').map(l => l.trim().split(/[\s,;]+/).map(Number)).filter(p => p.length >= 2 && Number.isFinite(p[0]) && Number.isFinite(p[1])).slice(0, LIMITS.pts)
                 .map(([x, y]) => [Math.round(Math.max(0, Math.min(100, x)) * 10) / 10, Math.round(Math.max(0, Math.min(100, y)) * 10) / 10]);
-            paintCanvas(); paintPreview(); });
+            paintCanvas(); paintPreview(); clearTimeout(q('[data-pts]')._h); q('[data-pts]')._h = setTimeout(commit, 500); });
         /* SVG */
         const svgRead = text => {
             const r = svgToShape(text); const box = q('[data-svg-msg]');
             const note = (k, m) => UI().notice ? UI().notice(k, m) : `<p>${esc(m)}</p>`;
             if (!r.ok) { box.innerHTML = note('error', r.msg); return; }
             shape = {...r.shape, src: 'SVG importé'}; box.innerHTML = note('ok', `${plural(r.kept, 'chemin gardé', 'chemins gardés')}${r.dropped ? ` · ${plural(r.dropped, 'élément retiré', 'éléments retirés')} (scripts, textes, images, styles…)` : ''}.`);
-            paintPreview();
+            paintPreview(); commit();
         };
         q('[data-svg-read]').addEventListener('click', () => svgRead(q('[data-svg-text]').value));
         const svgFile = async f => {
@@ -428,7 +441,7 @@
         });
         dlg.addEventListener('close', () => dlg.remove());
         dlg.showModal();
-        showTab(tab);
+        showTab(tab); lastSnap = snap(); paintHist();
         UI().scan?.(dlg);
     }
 

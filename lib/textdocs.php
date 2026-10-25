@@ -122,6 +122,21 @@ function textdoc_check(mixed $data): array
     $info = ['words' => $words, 'sections' => count($sections), 'preview' => $first, 'heads' => $heads, 'pages' => max(1, (int) ($data['pages'] ?? 1) > 0 ? min(9999, (int) ($data['pages'] ?? 1)) : 1),
         'comments' => count(array_filter($comments, static fn($c) => !$c['done'])), 'tracked' => (bool) preg_match('#<(ins|del)\b[^>]*data-tc=#i', implode('', array_column($sections, 'html'))),
         'page' => ['w' => $clean['page']['w'], 'h' => $clean['page']['h'], 'orient' => $clean['page']['orient']]];
+    // les onglets de documents (heritage-traitement-texte-onglets.js) : chacun son texte, nettoyé comme le reste ; l'onglet ouvert est aussi dans « sections »
+    if (isset($data['parts']) && is_array($data['parts']) && array_is_list($data['parts']) && $data['parts']) {
+        $parts = []; $total = 0;
+        foreach (array_slice($data['parts'], 0, 60) as $k => $part) {
+            if (!is_array($part) || !is_array($part['sections'] ?? null) || !array_is_list($part['sections'])) { continue; }
+            $ps = [];
+            foreach (array_slice($part['sections'], 0, TEXTDOC_SECTIONS_MAX) as $sec) {
+                $h = is_array($sec) && is_string($sec['html'] ?? null) ? $sec['html'] : ''; $total += strlen($h);
+                if (strlen($h) > TEXTDOC_MAX || $total > TEXTDOC_MAX * 3) { throw new LcndaBadInput('Document trop lourd : partage ses onglets en plusieurs documents.'); }
+                $o = ['html' => textdoc_defuse($h)]; if (isset($sec['page']) && is_array($sec['page'])) { $o['page'] = $cleanPage($sec['page']); } $ps[] = $o;
+            }
+            $parts[] = ['name' => mb_substr(safe_text($part['name'] ?? '') ?: 'Onglet ' . ($k + 1), 0, 60), 'sections' => $ps ?: [['html' => '']]];
+        }
+        if ($parts) { $clean['parts'] = $parts; $clean['part'] = max(0, min(count($parts) - 1, (int) ($data['part'] ?? 0))); $clean['parts'][$clean['part']]['sections'] = $sections; $info['tabs'] = count($parts); }
+    }
     if (isset($data['thumb']) && is_string($data['thumb']) && strlen($data['thumb']) < 400000 && preg_match('#^data:image/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$#', $data['thumb'])) { $info['thumb'] = $data['thumb']; }
     return [$clean, $info];
 }

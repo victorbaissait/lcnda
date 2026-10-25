@@ -413,8 +413,34 @@
     /** Niveaux (comme Photoshop) : point noir et point blanc d'entrée, gamma (tons moyens, ×100), sortie */
     const RT_LEVELS = [['lvl_in_b', 'Noir d’entrée', 0, 250, 0], ['lvl_gamma', 'Tons moyens (gamma ×100)', 10, 300, 100], ['lvl_in_w', 'Blanc d’entrée', 5, 255, 255], ['lvl_out_b', 'Noir de sortie', 0, 250, 0], ['lvl_out_w', 'Blanc de sortie', 5, 255, 255]];
     /** Colorisation douce d'une photo ancienne (dégradé selon la luminosité, ou selon la hauteur : ciel en haut, terre en bas) */
-    const RT_GMAPS = {'': ['Aucune'], sepia: ['Sépia chaud', ['#2a1a10', '#9c6b43', '#f4e2c4']], autochrome: ['Autochrome (couleurs d’autrefois)', ['#1f2a33', '#a8805f', '#efe2c0']],
+    const RT_GMAPS = {'': ['Aucune'], naturel: ['Naturelle : ciel, verdure, peau, habits (conseillé)', ['#000000', '#808080', '#ffffff']], sepia: ['Sépia chaud', ['#2a1a10', '#9c6b43', '#f4e2c4']], autochrome: ['Autochrome (couleurs d’autrefois)', ['#1f2a33', '#a8805f', '#efe2c0']],
         portrait: ['Portrait (peau rosée)', ['#2b1a17', '#c98f78', '#fbe9dc']], cyan: ['Cyanotype', ['#0d2240', '#3f78a8', '#e6f0f7']], sky: ['Paysage : ciel en haut, terre en bas', ['#5d8bbf', '#7d8f55', '#6b5338']]};
+    /** Colorisation « naturelle » : chaque endroit de la photo reçoit la couleur de ce qu'il est sans doute — le ciel (clair, lisse,
+     *  en haut) en bleu, la verdure (texturée, moyenne ou sombre, dehors) en vert, la peau (tons moyens lisses, vers le centre) en rosé,
+     *  le reste (habits, murs) presque neutre, un peu froid dans les ombres — au lieu d'un seul dégradé qui teinte tout en orangé.
+     *  Analyse sur une grille réduite, adoucie, puis lue point par point ; la luminosité de chaque point est gardée. */
+    const RT_NAT = {sky: [118, 158, 208], veg: [96, 128, 72], skin: [214, 160, 134], dark: [62, 66, 80], light: [232, 228, 220], mid: [150, 146, 140]};
+    function rtNaturalZones(a, W, H) {
+        const cs = Math.max(4, Math.round(Math.max(W, H) / 120)), gw = Math.ceil(W / cs), gh = Math.ceil(H / cs), mean = new Float32Array(gw * gh), sd = new Float32Array(gw * gh);
+        for (let gy = 0; gy < gh; gy++) for (let gx = 0; gx < gw; gx++) { let s1 = 0, s2 = 0, n = 0;
+            for (let y = gy * cs; y < Math.min(H, gy * cs + cs); y += 2) for (let x = gx * cs; x < Math.min(W, gx * cs + cs); x += 2) { const i = (y * W + x) * 4, v = (0.299 * a[i] + 0.587 * a[i + 1] + 0.114 * a[i + 2]) / 255; s1 += v; s2 += v * v; n++; }
+            const m = n ? s1 / n : 0; mean[gy * gw + gx] = m; sd[gy * gw + gx] = n ? Math.sqrt(Math.max(0, s2 / n - m * m)) : 0; }
+        const cl = v => v < 0 ? 0 : v > 1 ? 1 : v, Z = new Float32Array(gw * gh * 3); let skyAll = 0;
+        for (let k = 0; k < gw * gh; k++) { const gx = k % gw, gy = Math.floor(k / gw), yr = gy / gh, xr = Math.abs(gx / gw - 0.5) * 2, m = mean[k], d = sd[k];
+            const sky = cl((m - 0.52) / 0.25) * cl(1 - d / 0.07) * cl(1.25 - yr * 1.8), veg = cl((0.62 - m) / 0.3) * cl(d / 0.07 - 0.2) * cl(yr * 1.6 - 0.1), skin = cl(1 - Math.abs(m - 0.6) / 0.2) * cl(1 - d / 0.08) * cl(1.1 - xr) * cl(1.3 - yr);
+            Z[k * 3] = sky; Z[k * 3 + 1] = veg; Z[k * 3 + 2] = skin; skyAll += sky; }
+        const outdoor = cl(skyAll / (gw * gh) * 8); // pas de ciel : sans doute un intérieur, pas de verdure
+        for (let k = 0; k < gw * gh; k++) { Z[k * 3 + 1] *= outdoor; Z[k * 3 + 2] = Math.min(1, Z[k * 3 + 2] * 1.8) * (1 - 0.6 * Z[k * 3]); }
+        // adoucir (deux passes de moyenne 3 × 3) pour que les couleurs ne fassent pas de carreaux
+        for (let pass = 0; pass < 2; pass++) { const T = Z.slice(); for (let gy = 0; gy < gh; gy++) for (let gx = 0; gx < gw; gx++) for (let c = 0; c < 3; c++) { let s = 0, n = 0; for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const x = gx + dx, y = gy + dy; if (x >= 0 && y >= 0 && x < gw && y < gh) { s += T[(y * gw + x) * 3 + c]; n++; } } Z[(gy * gw + gx) * 3 + c] = s / n; } }
+        return {Z, gw, cs};
+    }
+    function rtNaturalColor(zn, x, y, lum) {
+        const k = (Math.min(Math.floor(y / zn.cs), Math.floor(zn.Z.length / 3 / zn.gw) - 1) * zn.gw + Math.min(Math.floor(x / zn.cs), zn.gw - 1)) * 3, sky = zn.Z[k], veg = zn.Z[k + 1], skin = zn.Z[k + 2], t = lum / 255;
+        const base = t < 0.5 ? RT_NAT.dark.map((v, j) => v + (RT_NAT.mid[j] - v) * t * 2) : RT_NAT.mid.map((v, j) => v + (RT_NAT.light[j] - v) * (t - 0.5) * 2), rest = Math.max(0, 1 - sky - veg - skin), sum = sky + veg + skin + rest || 1;
+        return [0, 1, 2].map(j => (RT_NAT.sky[j] * sky + RT_NAT.veg[j] * veg + RT_NAT.skin[j] * skin + base[j] * rest) / sum);
+    }
+    (window.LCNDA_EXT = window.LCNDA_EXT || {}).rtColor = {apply: (src, dst, st) => rtApply(src, dst, {...rtDefault(), ...st})}; // pour les essais
     const RT_CHANNELS = [['rgb', 'RVB'], ['r', 'Rouge'], ['g', 'Vert'], ['b', 'Bleu']];
     const rtDefault = () => ({exposure: 0, brightness: 0, contrast: 0, shadows: 0, highlights: 0, saturation: 0, vibrance: 0, warmth: 0, hue: 0, lvl_in_b: 0, lvl_gamma: 100, lvl_in_w: 255, lvl_out_b: 0, lvl_out_w: 255,
         gmap: '', gmap_amt: 70, bw: false, sepia: false, invert: false, filters: {}, crop: null, persp: null,
@@ -497,7 +523,7 @@
         else if (st.filters?.dust > 0) { src = new ImageData(new Uint8ClampedArray(src.data), src.width, src.height); rtDust(src, st.filters.dust); }
         const [lr, lg, lb] = rtLuts(st), sat = 1 + st.saturation / 100, warm = st.warmth * 0.35, vib = (st.vibrance || 0) / 100, hue = (st.hue || 0) * Math.PI / 180;
         const hc = Math.cos(hue), hs = Math.sin(hue), gm = st.gmap && RT_GMAPS[st.gmap]?.[1] ? RT_GMAPS[st.gmap][1].map(hex3) : null, gk = (st.gmap_amt ?? 70) / 100, W = src.width, H = src.height;
-        const hsP = rtHsActive(st.hsat) ? rtHsPrep(st.hsat) : null, a = src.data, o = dst.data, plain = sat === 1 && !warm && !st.bw && !st.sepia && !vib && !hue && !gm && !hsP;
+        const hsP = rtHsActive(st.hsat) ? rtHsPrep(st.hsat) : null, a = src.data, o = dst.data, zn = st.gmap === 'naturel' ? rtNaturalZones(a, W, H) : null, plain = sat === 1 && !warm && !st.bw && !st.sepia && !vib && !hue && !gm && !hsP;
         for (let i = 0; i < a.length; i += 4) {
             let r = lr[a[i]], g = lg[a[i + 1]], b = lb[a[i + 2]];
             if (!plain) {
@@ -511,7 +537,8 @@
                 if (st.bw || st.sepia) { const y = 0.299 * r + 0.587 * g + 0.114 * b; if (st.sepia) { r = y * 1.07 + 18; g = y * 0.92 + 8; b = y * 0.72; } else { r = g = b = y; } }
                 if (gm) { // colorisation : une couleur prise dans le dégradé, qui garde la luminosité du point
                     const y = 0.299 * r + 0.587 * g + 0.114 * b; let t, c0, c1;
-                    if (st.gmap === 'sky') { const row = Math.floor(i / 4 / W) / H; t = Math.min(1, Math.max(0, (row - 0.25) / 0.5)); if (t < 0.5) { c0 = gm[0]; c1 = gm[1]; t *= 2; } else { c0 = gm[1]; c1 = gm[2]; t = t * 2 - 1; } }
+                    if (zn) { const px = (i / 4) % W, c = rtNaturalColor(zn, px, (i / 4 - px) / W, y); c0 = c; c1 = c; t = 0; }
+                    else if (st.gmap === 'sky') { const row = Math.floor(i / 4 / W) / H; t = Math.min(1, Math.max(0, (row - 0.25) / 0.5)); if (t < 0.5) { c0 = gm[0]; c1 = gm[1]; t *= 2; } else { c0 = gm[1]; c1 = gm[2]; t = t * 2 - 1; } }
                     else { t = y / 255; if (t < 0.5) { c0 = gm[0]; c1 = gm[1]; t *= 2; } else { c0 = gm[1]; c1 = gm[2]; t = t * 2 - 1; } }
                     let cr = c0[0] + (c1[0] - c0[0]) * t, cg = c0[1] + (c1[1] - c0[1]) * t, cb = c0[2] + (c1[2] - c0[2]) * t;
                     const cy = 0.299 * cr + 0.587 * cg + 0.114 * cb || 1, f = y / cy; cr *= f; cg *= f; cb *= f; // même luminosité
@@ -3546,7 +3573,7 @@
                 dust: {filters: {dust: Math.round(15 + 60 * k)}},
                 levels: (() => { const q = 0.35 + 0.65 * k; return {lvl_in_b: Math.round(LV.lo * q), lvl_in_w: Math.round(255 - (255 - LV.hi) * q), lvl_gamma: Math.round(100 + (LV.g - 100) * q), contrast: Math.round(10 * k)}; })(),
                 sharpen: {filters: {chain: [{t: 'unsharp', ...fxDefaults('unsharp'), amount: Math.round(40 + 90 * k), r: 1.2, thr: 3}]}},
-                colorize: {gmap: 'autochrome', gmap_amt: Math.round(35 + 45 * k)},
+                colorize: {gmap: 'naturel', gmap_amt: Math.round(40 + 45 * k)},
             })[key];
             const put = (cv, idata) => { cv.width = idata.width; cv.height = idata.height; cv.getContext('2d').putImageData(idata, 0, 0); };
             let creases = null;
@@ -3828,7 +3855,7 @@
             if (k === 'persp:clear') { if (!st.persp) return; st.persp = null; applyBase(); return commit('Perspective enlevée'); }
             if (k === 'deglare') { toast(`Reflets retirés sur un calque à part${selId ? ' (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter)' : ''} : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée.`); return fxDialog('deglare'); }
             if (k === 'colorize:auto') {
-                const n = newAdjust('Colorisation'); n.st.gmap = 'autochrome'; n.st.gmap_amt = 70;
+                const n = newAdjust('Colorisation'); n.st.gmap = 'naturel'; n.st.gmap_amt = 75;
                 if (selId) { n.mask = [{type: 'sel', mask: selId}]; }
                 refreshLayers(); syncControls(); draw(); showTab('adjust'); $('[data-ui-section="rt-gmap"]')?.setAttribute('open', '');
                 toast(`Colorisation dans un calque de réglage${selId ? ' (limitée à la sélection)' : ''} : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée.`);
