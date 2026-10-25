@@ -100,3 +100,15 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-tr-xs-out svg, .h-tr-lz-out svg { width: 100%; height: auto; max-height: 75vh; display: block; background: #fff; border-radius: 8px; border: 1px solid var(--line, #d9dce2); }
 .h-tr-faces { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; } .h-tr-faces figure, .h-tr-avg { margin: 0; display: grid; gap: 4px; justify-items: center; text-align: center; }
 .h-tr-faces canvas, .h-tr-avg canvas { width: 140px; height: auto; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, .2); } .h-tr-avg canvas { width: 200px; } .h-tr-faces small { color: var(--muted, #667); } .h-tr-arrow { font-size: 22px; color: var(--muted, #667); }
+/* lot 6 — passeports, récits, lieux */
+.h-tr-pp { display: grid; grid-template-columns: 150px 1fr; gap: 14px; align-items: start; } .h-tr-pp + .h-tr-pp { margin-top: 12px; }
+.h-tr-pp-robot { display: grid; justify-items: center; gap: 2px; } .h-tr-robot { width: 150px; height: auto; border-radius: 10px; border: 1px solid #d8c9a6; }
+.h-tr-pp-txt { display: grid; gap: 4px; } .h-tr-pp-txt dl { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 4px 0; font-size: 14px; } .h-tr-pp-txt dt { color: var(--muted, #667); } .h-tr-pp-txt dd { margin: 0; }
+.h-tr-pp-edit { display: grid; grid-template-columns: 1fr 200px; gap: 16px; align-items: start; } .h-tr-pp-edit [data-pp-robot] { position: sticky; top: 0; } @media (max-width: 700px) { .h-tr-pp-edit, .h-tr-pp { grid-template-columns: 1fr; } }
+.h-tr-pp-table { max-height: 480px; overflow: auto; } .h-tr-pp-table table { width: 100%; border-collapse: collapse; font-size: 13px; } .h-tr-pp-table th, .h-tr-pp-table td { padding: 5px 8px; border-bottom: 1px solid var(--line, #e2e4ea); text-align: left; vertical-align: top; } .h-tr-pp-table th { position: sticky; top: 0; background: var(--card-bg, #fff); }
+.h-tr-rc-diff { border-color: #e0a43a; } .h-tr-rc-new { border-color: var(--blue, #2a7de1); }
+.h-tr-stamps { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; } .h-tr-stampbtn { display: grid; justify-items: center; gap: 4px; padding: 8px; border: 0; background: none; cursor: pointer; font: inherit; color: inherit; } .h-tr-stampbtn small { color: var(--muted, #667); }
+.h-tr-stamp { width: 110px; height: 110px; transition: transform .2s; } .h-tr-stamp.is-visited { filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .15)); } .h-tr-stampbtn:hover .h-tr-stamp { transform: scale(1.06) !important; }
+.h-tr-bar { flex: 1; min-width: 160px; height: 10px; border-radius: 99px; background: var(--line, #e2e4ea); overflow: hidden; } .h-tr-bar i { display: block; height: 100%; background: var(--blue, #2a7de1); }
+.h-tr-world li { margin: 4px 0; } .h-tr-bars { display: grid; gap: 6px; } .h-tr-bars div { display: grid; grid-template-columns: 60px 1fr auto auto; gap: 8px; align-items: center; } .h-tr-bars i { display: block; height: 14px; border-radius: 7px; background: linear-gradient(90deg, #6cb6ff, #2a7de1); }
+.h-tr-houses { max-width: 100%; color: inherit; }
