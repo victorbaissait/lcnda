@@ -100,7 +100,7 @@
                 <fieldset><legend>Sur les colonnes</legend>${head.map((h, j) => `<label class="ui-check"><input type="checkbox" name="col" value="${j}" ${numCols[j] ? 'checked' : ''}> ${esc(h)}</label>`).join('')}</fieldset>`,
             onSubmit: f => {
                 const by = Number(f.elements.by.value), fn = f.elements.fn.value, cols = [...f.querySelectorAll('[name=col]:checked')].map(x => Number(x.value)).filter(j => j !== by);
-                if (!cols.length) { toast('Coche au moins une colonne à calculer.', 'error'); return false; }
+                if (!cols.length) { window.LCNDA_UI?.fail?.(f.querySelector('[name=col]'), 'Coche au moins une colonne à calculer.'); return false; }
                 const groups = new Map(); rows.forEach(r => { const k = String(r[by] ?? '').trim() || '(vide)'; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r); });
                 const keys = [...groups.keys()].sort((a, b) => (a === '(vide)') - (b === '(vide)') || a.localeCompare(b, 'fr', {numeric: true, sensitivity: 'base'}));
                 ed.begin('Sous-totaux'); const names = ed.wb.sheets.map(s => s.name), sh = S.newSheet(S.cleanSheetName(`Sous-totaux ${head[by]}`.slice(0, 28), names)); ed.wb.sheets.splice(ed.si + 1, 0, sh); ed.meta(sh);
@@ -132,7 +132,7 @@
                 <label>En changeant la case<input name="x" value="${esc(isF ? '' : here)}" placeholder="B2"></label></div>`,
             onSubmit: f => {
                 const pf = S.parseAddr(f.elements.f.value), px = S.parseAddr(f.elements.x.value), target = Number(String(f.elements.t.value).replace(',', '.'));
-                if (!pf || !px || !Number.isFinite(target)) { toast('Écris deux adresses (ex. C5 et B2) et le résultat voulu.', 'error'); return false; }
+                if (!pf || !px || !Number.isFinite(target)) { window.LCNDA_UI?.fail?.(!pf ? f.elements.f : !px ? f.elements.x : f.elements.t, !pf || !px ? 'Écris une adresse de case (ex. C5, B2).' : 'Écris le résultat voulu.'); return false; }
                 if (!S.isFormula(sh.cells[S.addr(...pf)]?.v)) { toast('La première case doit contenir une formule.', 'error'); return false; }
                 const wb2 = JSON.parse(JSON.stringify(ed.wb)), kx = S.addr(...px), F = x => { wb2.sheets[ed.si].cells[kx] = {...(wb2.sheets[ed.si].cells[kx] || {}), v: x}; const v = new S.Calc(wb2).val(ed.si, pf[0], pf[1]); return typeof v === 'number' ? v - target : NaN; };
                 const x0 = Number(ed.calc.val(ed.si, px[0], px[1])) || 0; let a = x0, b = x0 + (Math.abs(x0) > 1 ? x0 * .1 : 1), fa = F(a), fb = F(b), best = null;
@@ -155,7 +155,7 @@
                 <div class="form-grid"><label>Les nombres (plage de la 1re ligne)<input name="rg" value="${esc(guess)}" placeholder="B2:F2"></label>
                 <label>Dessin<select name="k"><option value="courbe">〰 Courbe</option><option value="barres">▮ Barres</option><option value="gagné">± Gagné / perdu</option></select></label>
                 <label>Couleur<input type="color" name="col" value="#0066cc"></label></div>`,
-            onSubmit: f => { const g = S.parseRange(f.elements.rg.value); if (!g) { toast('Écris une plage, par exemple B2:F2.', 'error'); return false; }
+            onSubmit: f => { const g = S.parseRange(f.elements.rg.value); if (!g) { window.LCNDA_UI?.fail?.(f.elements.rg, 'Écris une plage, par exemple B2:F2.'); return false; }
                 ed.begin('Mini-graphique'); for (let r = s.r0; r <= Math.min(s.r1, s.r0 + 2000); r++) { const d = r - s.r0, k = S.addr(r, s.c0); ed.put(sh, k, {...(sh.cells[k] || {}), v: `=MINIGRAPHIQUE(${S.rangeStr({r0: g.r0 + d, c0: g.c0, r1: g.r1 + d, c1: g.c1})};"${f.elements.k.value}";"${f.elements.col.value}")`}); }
                 ed.commit(); ed.render(); }});
     }
@@ -176,7 +176,7 @@
                 const vars = []; String(f.elements.x.value).split(/[;,\s]+/).filter(Boolean).forEach(t => { const g = S.parseRange(t) || (S.parseAddr(t) && {r0: S.parseAddr(t)[0], c0: S.parseAddr(t)[1], r1: S.parseAddr(t)[0], c1: S.parseAddr(t)[1]}); if (g) for (let r = g.r0; r <= g.r1; r++) for (let c = g.c0; c <= g.c1; c++) vars.push(S.addr(r, c)); });
                 if (!vars.length || vars.length > 30) { toast(vars.length ? 'Trente cases à changer au plus.' : 'Écris les cases à changer (ex. B2:B4).', 'error'); return false; }
                 const cons = parseCons(f.elements.c.value), bad = cons.find(c => c.bad); if (bad) { toast(`Condition illisible : « ${bad.bad} » (ex. B2 >= 0).`, 'error'); return false; }
-                const goal = f.elements.goal.value, target = Number(String(f.elements.t.value).replace(',', '.')); if (goal === 'val' && !Number.isFinite(target)) { toast('Écris la valeur voulue.', 'error'); return false; }
+                const goal = f.elements.goal.value, target = Number(String(f.elements.t.value).replace(',', '.')); if (goal === 'val' && !Number.isFinite(target)) { window.LCNDA_UI?.fail?.(f.elements.t, 'Écris la valeur voulue.'); return false; }
                 const wb2 = JSON.parse(JSON.stringify(ed.wb)), cells = wb2.sheets[ed.si].cells, numAt = (calc, a) => { const p = S.parseAddr(a), v = calc.val(ed.si, p[0], p[1]); return typeof v === 'number' ? v : NaN; };
                 const side = (calc, b) => { const n = Number(String(b).replace(',', '.')); return Number.isFinite(n) ? n : S.parseAddr(b) ? numAt(calc, b.toUpperCase()) : NaN; };
                 let viol = 0;
@@ -198,12 +198,12 @@
                 <div class="form-grid"><label>La case qui change<input name="x" placeholder="B2"></label><label>Ses valeurs (séparées par « ; », ou une plage)<input name="v" placeholder="20;25;30 ou A10:A15"></label>
                 <label>Les formules à suivre<input name="f" placeholder="C5;D5"></label></div>`,
             onSubmit: f => {
-                const px = S.parseAddr(f.elements.x.value); if (!px) { toast('Écris la case qui change (ex. B2).', 'error'); return false; }
+                const px = S.parseAddr(f.elements.x.value); if (!px) { window.LCNDA_UI?.fail?.(f.elements.x, 'Écris la case qui change (ex. B2).'); return false; }
                 let vals = []; const rg = S.parseRange(f.elements.v.value);
                 if (rg) { for (let r = rg.r0; r <= rg.r1; r++) for (let c = rg.c0; c <= rg.c1; c++) { const v = ed.calc.val(ed.si, r, c); if (v !== null && v !== '') vals.push(v); } }
                 else vals = String(f.elements.v.value).split(';').map(x => x.trim()).filter(Boolean).map(x => (Number.isFinite(Number(x.replace(',', '.'))) ? Number(x.replace(',', '.')) : x));
                 const fs = String(f.elements.f.value).split(/[;,\s]+/).filter(Boolean).map(t => S.parseAddr(t)).filter(Boolean);
-                if (!vals.length || !fs.length || vals.length > 500) { toast('Écris des valeurs (500 au plus) et au moins une formule.', 'error'); return false; }
+                if (!vals.length || !fs.length || vals.length > 500) { window.LCNDA_UI?.fail?.(!fs.length ? f.elements.f : f.elements.v, !fs.length ? 'Écris au moins une formule (ex. C5).' : 'Écris des valeurs (500 au plus).'); return false; }
                 const wb2 = JSON.parse(JSON.stringify(ed.wb)), kx = S.addr(...px), r0 = ed.sel.r0, c0 = ed.sel.c0;
                 ed.begin('Tableau de scénarios');
                 ed.put(sh, S.addr(r0, c0), {v: `${kx} =`, b: 1}); fs.forEach((p, j) => ed.put(sh, S.addr(r0, c0 + 1 + j), {v: S.addr(...p), b: 1}));

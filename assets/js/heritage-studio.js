@@ -420,7 +420,12 @@
      *  le reste (habits, murs) presque neutre, un peu froid dans les ombres — au lieu d'un seul dégradé qui teinte tout en orangé.
      *  Analyse sur une grille réduite, adoucie, puis lue point par point ; la luminosité de chaque point est gardée. */
     const RT_NAT = {sky: [118, 158, 208], veg: [96, 128, 72], skin: [214, 160, 134], dark: [62, 66, 80], light: [232, 228, 220], mid: [150, 146, 140]};
+    const rtZoneCache = new WeakMap(); // l'analyse d'une photo, gardée : pas refaite à chaque mouvement de curseur
     function rtNaturalZones(a, W, H) {
+        const hit = rtZoneCache.get(a); if (hit && hit.W === W && hit.H === H) return hit.zn;
+        const zn = rtNaturalZones0(a, W, H); rtZoneCache.set(a, {W, H, zn}); return zn;
+    }
+    function rtNaturalZones0(a, W, H) {
         const cs = Math.max(4, Math.round(Math.max(W, H) / 120)), gw = Math.ceil(W / cs), gh = Math.ceil(H / cs), mean = new Float32Array(gw * gh), sd = new Float32Array(gw * gh);
         for (let gy = 0; gy < gh; gy++) for (let gx = 0; gx < gw; gx++) { let s1 = 0, s2 = 0, n = 0;
             for (let y = gy * cs; y < Math.min(H, gy * cs + cs); y += 2) for (let x = gx * cs; x < Math.min(W, gx * cs + cs); x += 2) { const i = (y * W + x) * 4, v = (0.299 * a[i] + 0.587 * a[i + 1] + 0.114 * a[i + 2]) / 255; s1 += v; s2 += v * v; n++; }

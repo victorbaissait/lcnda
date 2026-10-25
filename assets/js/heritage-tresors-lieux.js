@@ -89,7 +89,7 @@
         const bg = async () => { const k = host.querySelector('[data-fm-bg]').value; if (k !== bgKey) { bgKey = k; stEl.textContent = 'Le fond de carte se charge…'; bgc = k === 'grid' ? await filmBackground({...sc, z: 0, ox: 1e9, oy: 1e9}, k) : await filmBackground(sc, k); stEl.textContent = `${sc.ts.length} parcours, de ${sc.y0 + 1} à ${sc.y1}`; } return bgc; };
         const frame = y => drawFrame(ctx, sc, bgc, y, title);
         const play = (secs, onEnd) => { cancelAnimationFrame(raf); const t0 = performance.now(), span = sc.y1 - sc.y0;
-            const step = now => { const f = Math.min(1, (now - t0) / (secs * 1000)), y = sc.y0 + span * f; range.value = y; frame(y); if (f < 1) raf = requestAnimationFrame(step); else onEnd?.(); }; raf = requestAnimationFrame(step); };
+            const step = now => { const f = Math.min(1, (now - t0) / (secs * 1000)), y = sc.y0 + span * f; range.value = y; frame(y); if (f < 1 && (host.isConnected || onEnd)) raf = requestAnimationFrame(step); else onEnd?.(); }; raf = requestAnimationFrame(step); };
         await bg(); frame(sc.y0);
         range.addEventListener('input', () => { cancelAnimationFrame(raf); frame(Number(range.value)); });
         host.querySelector('[data-fm-bg]').addEventListener('change', async () => { await bg(); frame(Number(range.value)); });
@@ -180,7 +180,8 @@
                 if (!navigator.geolocation) return T.toast('La position n’est pas disponible sur cet appareil.', 'error');
                 if (watch != null) navigator.geolocation.clearWatch(watch);
                 gpsSt.textContent = '📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m)';
-                watch = navigator.geolocation.watchPosition(pos => { const me = {lat: pos.coords.latitude, lng: pos.coords.longitude}; let best = -1, bd = 1e9; stops.forEach((s, k) => { const d = km(me, s); if (d < bd) { bd = d; best = k; } });
+                watch = navigator.geolocation.watchPosition(pos => { if (!host.isConnected) { navigator.geolocation.clearWatch(watch); watch = null; T.hush(); return; } // page quittée : on ne suit plus
+                    const me = {lat: pos.coords.latitude, lng: pos.coords.longitude}; let best = -1, bd = 1e9; stops.forEach((s, k) => { const d = km(me, s); if (d < bd) { bd = d; best = k; } });
                     gpsSt.textContent = best >= 0 ? `📍 Étape la plus proche : ${stops[best].name}, à ${bd < 1 ? Math.round(bd * 1000) + ' m' : bd.toFixed(1) + ' km'}` : '';
                     if (best >= 0 && bd < 0.3 && !done.has(best)) { done.add(best); T.hush(); sayStop(best); } }, err => { gpsSt.textContent = 'Position refusée ou indisponible : ' + err.message; }, {enableHighAccuracy: true, maximumAge: 10000});
             }

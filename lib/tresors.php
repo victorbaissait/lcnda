@@ -13,7 +13,8 @@ declare(strict_types=1);
  *   GET  api.php?action=tresor_signatures → {signatures: [{media_id, filename, person_id, x, y, w, h, year}]} (les zones « signature » des médias)
  *   GET  api.php?action=tresor_faces → {faces: [{media_id, filename, person_id, x, y, w, h}]} (les visages identifiés sur les photos)
  *   GET  api.php?action=tresor_tree   → {people: [{id, name, first, last, gender, living, by, bd (AAAA-MM-JJ), bplace, dy, dd,
- *        dplace, occ, portrait, father, mother, start, touched (dernière modification de la fiche)}], families: [{id, a, b, my, md, mplace}], places: {id: {name, lat, lng}},
+ *        dplace, occ, portrait, father, mother, start, touched (dernière modification de la fiche), priv (fiche confidentielle)}]
+ *        — en mode consultation, sans les vivants ni les fiches confidentielles, families: [{id, a, b, my, md, mplace}], places: {id: {name, lat, lng}},
  *        events: [{p, f, tag, label, y, d, place}]}  (les fiches d'animaux sont laissées de côté)
  *
  * Une seule table, créée à la demande (rien à mettre à jour dans la base) ; tout ce qui arrive est relu et borné ; requêtes préparées.
@@ -77,10 +78,18 @@ function tresor_save(PDO $pdo, array $item): array
     $open = (string) ($item['open_at'] ?? ''); if ($open !== '' && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $open)) { $open = ''; }
     $data = json_encode(tresor_clean_data(is_array($item['data'] ?? null) ? $item['data'] : []), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '{}';
     if ($id > 0) {
-        $old = $pdo->prepare('SELECT kind, open_at, body FROM tresor_items WHERE id=?'); $old->execute([$id]); $o = $old->fetch(PDO::FETCH_ASSOC);
+        $old = $pdo->prepare('SELECT kind, open_at, body, data_json FROM tresor_items WHERE id=?'); $old->execute([$id]); $o = $old->fetch(PDO::FETCH_ASSOC);
         if (!$o) { throw new LcndaBadInput('Élément introuvable.'); }
-        // une lettre scellée ne se relit pas en douce : son texte n'est pas renvoyé, donc on ne l'écrase pas avec du vide
-        if ($o['kind'] === 'letter' && $o['open_at'] > date('Y-m-d') && $body === '') { $body = (string) $o['body']; }
+        if ($o['kind'] === 'letter' && $o['open_at'] > date('Y-m-d')) {
+            // une lettre scellée ne se relit pas en douce : ni texte renvoyé (donc pas écrasé par du vide), ni changement de sorte,
+            // ni date avancée (on peut la repousser, ou la supprimer) ; ses pièces jointes et ses réglages cachés restent
+            $kind = 'letter';
+            if ($body === '') { $body = (string) $o['body']; }
+            if ($open === '' || $open < $o['open_at']) { $open = (string) $o['open_at']; }
+            $oldData = json_decode((string) $o['data_json'], true) ?: []; $newData = json_decode($data, true) ?: [];
+            foreach (['media', 'for_person', 'age', 'when'] as $k) { if (empty($newData[$k]) && isset($oldData[$k])) { $newData[$k] = $oldData[$k]; } }
+            $data = json_encode(array_replace($oldData, $newData), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: $data;
+        }
         $pdo->prepare('UPDATE tresor_items SET kind=?, person_id=?, place_id=?, title=?, body=?, data_json=?, open_at=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')
             ->execute([$kind, $pid ?: null, $plid ?: null, $title, $body, $data, $open, $id]);
     } else {
@@ -95,12 +104,17 @@ function tresor_tree(PDO $pdo): array
 {
     $hasKind = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='kind'")->fetchColumn();
     $hasOcc = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='occupation'")->fetchColumn();
-    $people = []; $where = $hasKind ? "WHERE COALESCE(p.kind,'human')<>'animal'" : '';
-    foreach ($pdo->query('SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, p.living_status, p.is_start, p.updated_at, ' . ($hasOcc ? 'p.occupation' : "'' AS occupation") . ",
+    $hasPriv = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='is_private'")->fetchColumn();
+    // mode consultation (la famille regarde) : ni les vivants ni les fiches confidentielles, comme ailleurs dans l'application
+    $kiosk = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
+    $cond = []; if ($hasKind) { $cond[] = "COALESCE(p.kind,'human')<>'animal'"; }
+    if ($kiosk) { $cond[] = "COALESCE(p.living_status,'')<>'living'"; if ($hasPriv) { $cond[] = 'COALESCE(p.is_private,0)=0'; } }
+    $people = []; $where = $cond ? 'WHERE ' . implode(' AND ', $cond) : '';
+    foreach ($pdo->query('SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, p.living_status, p.is_start, p.updated_at, ' . ($hasPriv ? 'COALESCE(p.is_private,0) AS priv, ' : '0 AS priv, ') . ($hasOcc ? 'p.occupation' : "'' AS occupation") . ",
             (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p $where") as $r) {
         $id = (int) $r['id'];
         $people[$id] = ['id' => $id, 'first' => trim((string) $r['first_name']), 'last' => trim((string) $r['last_name']), 'name' => trim(preg_replace('/\s+/', ' ', $r['first_name'] . ' ' . $r['middle_name'] . ' ' . $r['last_name'])),
-            'gender' => $r['gender'], 'living' => $r['living_status'] === 'living', 'start' => (int) $r['is_start'] === 1, 'occ' => trim((string) $r['occupation']), 'portrait' => $r['portrait'] ?: null, 'touched' => substr((string) $r['updated_at'], 0, 10),
+            'gender' => $r['gender'], 'living' => $r['living_status'] === 'living', 'start' => (int) $r['is_start'] === 1, 'occ' => trim((string) $r['occupation']), 'portrait' => $r['portrait'] ?: null, 'touched' => substr((string) $r['updated_at'], 0, 10), 'priv' => (int) $r['priv'] === 1,
             'by' => null, 'bd' => null, 'bplace' => null, 'dy' => null, 'dd' => null, 'dplace' => null, 'father' => null, 'mother' => null];
     }
     $places = [];

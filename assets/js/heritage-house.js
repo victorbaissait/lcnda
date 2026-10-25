@@ -1159,7 +1159,7 @@
                     <label>Où le mettre<select name="to"><option value="new">Un nouvel étage</option><option value="here" ${F().walls.length || F().rooms.length ? '' : 'selected'}>Cet étage (${esc(F().name)}), en plus de ce qui y est</option></select></label>
                     <fieldset class="h-hs-dxflay"><legend>Calques à prendre</legend>${d.layers.map(l => `<label class="ui-check"><input type="checkbox" name="lay" value="${esc(l)}" ${off.has(l) ? '' : 'checked'}> ${esc(l)} <small class="muted">(${cnt(l)})</small></label>`).join('')}</fieldset>
                     ${hasAx ? '<p class="muted small">Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES).</p>' : '<p class="muted small">Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures.</p>'}`,
-                onSubmit: fm => { const layers = [...fm.querySelectorAll('[name="lay"]:checked')].map(x => x.value); if (!layers.length) { toast('Coche au moins un calque.', 'error'); return false; }
+                onSubmit: fm => { const layers = [...fm.querySelectorAll('[name="lay"]:checked')].map(x => x.value); if (!layers.length) { window.LCNDA_UI?.fail?.(fm.querySelector('[name="lay"]'), 'Coche au moins un calque.'); return false; }
                     const r = X.toFloor(d, {scale: Number(fm.elements.sc.value) || 1, layers, wallT: clamp(Number(fm.elements.t.value) || 10, 1, 120), uid});
                     if (!r.walls.length && !r.rooms.length) { toast('Rien à reprendre dans ces calques.', 'error'); return false; }
                     if (view3d) toggle3d(false);
@@ -1262,7 +1262,7 @@
         }
         const CMD = {
             close, save, undo: () => restore(hpos - 1), redo: () => restore(hpos + 1),
-            del: () => { const f = F(); if (!sel) return; if (sel.type === 'wall') { f.openings = f.openings.filter(o => o.wall !== sel.id); f.walls = f.walls.filter(w => w.id !== sel.id); } else { const k = {room: 'rooms', item: 'items', opening: 'openings', label: 'labels', dim: 'dims'}[sel.type]; f[k] = f[k].filter(q => q.id !== sel.id); } sel = null; commit('Supprimé'); },
+            del: () => { const f = F(); if (!sel) return; if (sel.type === 'wall') { f.openings = f.openings.filter(o => o.wall !== sel.id); f.walls = f.walls.filter(w => w.id !== sel.id); } else { const k = {room: 'rooms', item: 'items', opening: 'openings', label: 'labels', dim: 'dims'}[sel.type]; f[k] = f[k].filter(q => q.id !== sel.id); } sel = null; restack(f); commit('Supprimé'); },
             dup: () => { const it = F().items.find(q => q.id === sel?.id); if (!it) return; const c = {...JSON.parse(JSON.stringify(it)), id: uid('i'), x: it.x + 30, y: it.y + 30}; F().items.push(c); sel = {type: 'item', id: c.id}; commit('Dupliqué'); },
             stairflip: () => { const it = F().items.find(q => q.id === sel?.id); if (!it) return; it.rot = ((it.rot || 0) + 180) % 360; commit('Sens de l’escalier'); },
             openall: () => { let n = 0; H.floors.forEach(fl => (fl.items || []).forEach(it => { if (VD()?.isStair(it) && it.open !== true) { it.open = true; n++; } })); if (!n) return status('Tous les escaliers ouvrent déjà le plancher.'); commit(`${plural(n, 'trémie')} ouverte${n > 1 ? 's' : ''}`); },

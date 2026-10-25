@@ -115,7 +115,7 @@
     const avg = cv => { const d = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height).data; let r = 0, g = 0, b = 0, n = 0; for (let i = 0; i < d.length; i += 16) { r += d[i]; g += d[i + 1]; b += d[i + 2]; n++; } return [r / n, g / n, b / n]; };
     async function renderMosaic(host, T) {
         const tr = await T.tree(); host.innerHTML = '<p class="h-tr-muted">Je rassemble les visages…</p>';
-        const tiles = []; for (const p of tr.people) { const c = await faceOf(T, tr, p.id, 120); if (c) tiles.push({p, c, col: avg(c)}); }
+        const tiles = []; for (const p of tr.people) { if (tiles.length >= 400) break; const c = await faceOf(T, tr, p.id, 120); if (c) tiles.push({p, c, col: avg(c)}); } // 400 visages au plus (un très grand arbre)
         if (!tiles.length) { host.innerHTML = '<p class="h-tr-muted">Aucun portrait dans l’arbre : ajoute une photo de portrait sur les fiches, ou encadre les visages dans la visionneuse.</p>'; return; }
         host.innerHTML = `<div class="h-tr-panel h-tr-row h-tr-noprint"><label>La mosaïque<select name="mode"><option value="grid">tous les visages, en grille</option><option value="photo">un portrait refait avec tous les autres</option></select></label>
             <label data-mo-t>Le portrait à refaire<select name="target">${tiles.map(t => `<option value="${t.p.id}">${T.esc(T.name(t.p))}</option>`).join('')}</select></label><label data-mo-t>Finesse<select name="n"><option value="24">24 × 24</option><option value="40" selected>40 × 40</option><option value="60">60 × 60</option></select></label>

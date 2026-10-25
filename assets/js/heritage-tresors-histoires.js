@@ -143,7 +143,7 @@
         // mort le jour de son anniversaire
         ppl.filter(p => p.bd && p.dd && md(p.bd) === md(p.dd)).forEach(p => out.push({ic: '🕯️', score: 5, text: e(`${name(p)} est mort·e le jour de son anniversaire, à ${p.dy - p.by} ans (${T.dateFr(p.dd)}).`, p)}));
         // né le jour de la mort d'un parent ou grand-parent
-        ppl.filter(p => p.bd).forEach(p => T.ancestors(tr, p.id, 3).forEach(({id, gen}) => { const a = tr.byId.get(id); if (a?.dd && md(a.dd) === md(p.bd)) out.push({ic: '🔁', score: 4, text: `${name(p)} est né${fem(p) ? 'e' : ''} un ${T.dateFr(p.bd).replace(/ \d{4}$/, '')}, jour anniversaire de la mort de ${ext.tresorKin ? ext.tresorKin.kinWord(gen, a.gender, false) : 'son ancêtre'} ${name(a)} (${a.dy}).`}); }));
+        ppl.filter(p => p.bd).forEach(p => T.ancestors(tr, p.id, 3).forEach(({id, gen}) => { const a = tr.byId.get(id); if (a?.dd && a.dd < p.bd && md(a.dd) === md(p.bd)) out.push({ic: '🔁', score: 4, text: `${name(p)} est né${fem(p) ? 'e' : ''} un ${T.dateFr(p.bd).replace(/ \d{4}$/, '')}, jour anniversaire de la mort de ${ext.tresorKin ? ext.tresorKin.kinWord(gen, a.gender, false) : 'son ancêtre'} ${name(a)} (${a.dy}).`}); }));
         // des mariages le même jour de l'année
         const wed = new Map(); tr.families.filter(f => f.md).forEach(f => { const k = md(f.md); if (!wed.has(k)) wed.set(k, []); wed.get(k).push(f); });
         [...wed].filter(([, l]) => l.length > 1).forEach(([, l]) => out.push({ic: '💍', score: 3, text: `${l.length} mariages le même jour de l’année : ${l.map(f => `${[f.a, f.b].map(x => tr.byId.get(x)?.first).filter(Boolean).join(' et ')} (${f.my})`).join(', ')}.`}));

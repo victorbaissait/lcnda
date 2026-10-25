@@ -32,9 +32,9 @@
             const d = this.doc; bar.innerHTML = d.parts.map((x, i) => `<button type="button" role="tab" class="wp-tab${i === d.part ? ' is-active' : ''}" aria-selected="${i === d.part}" draggable="true" data-wp-part="${i}" title="Double-clic : renommer · clic droit : plus">${esc(x.name)}</button>`).join('') + '<button type="button" class="wp-tab-add" data-wp-part="add" title="Nouvel onglet" aria-label="Nouvel onglet">＋</button>';
         };
         /** aller à un onglet : le texte de l'onglet ouvert est gardé, l'autre est posé ; ↶ ↷ repartent de là */
-        P.partGo = function (i) {
-            const d = this.doc; if (i === d.part || !d.parts[i]) return;
-            if (this.typeT) this.commit(); this.partsSync();
+        P.partGo = function (i, {sync = true} = {}) {
+            const d = this.doc; if ((sync && i === d.part) || !d.parts[i]) return;
+            if (sync) { if (this.typeT) this.commit(); this.partsSync(); } // l'onglet quitté garde son texte (sauf s'il vient d'être supprimé)
             d.part = i; d.sections = d.parts[i].sections; this.build(); this.hist = []; this.hpos = -1; this.commit(true); this.layout?.(); this.partsBar(); this.focusEnd?.(false); this.paintPanel?.();
         };
         P.partsChanged = function (msg) { this.touch(); this.partsBar(); if (msg) this.status?.flash?.(msg); };
@@ -49,7 +49,7 @@
             const d = this.doc; if (d.parts.length < 2) return A().toast('Un document garde au moins un onglet.', 'error');
             if (!await A().confirmBox(`L’onglet « ${d.parts[i].name} » et son texte seront supprimés.`, {title: 'Supprimer l’onglet ?', okLabel: 'Supprimer', danger: true})) return;
             this.partsSync(); const was = d.part; d.parts.splice(i, 1);
-            if (i === was) { d.part = -1; this.partGo(Math.max(0, i - 1)); } else { if (i < was) d.part = was - 1; this.partsBar(); }
+            if (i === was) { clearTimeout(this.typeT); this.typeT = 0; this.partGo(Math.max(0, i - 1), {sync: false}); } else { if (i < was) d.part = was - 1; this.partsBar(); }
             this.partsChanged('Onglet supprimé');
         };
         P.partMove = function (from, to) {

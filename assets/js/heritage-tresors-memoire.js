@@ -221,7 +221,8 @@
                 catch (err) { T.toast('Le micro n’est pas disponible : l’entretien continue sans enregistrement (note les réponses).', 'error'); rec = null; }
             }
             form.hidden = true; t0 = Date.now();
-            const tick = setInterval(() => { const el = live.querySelector('[data-iv-time]'); if (el) el.textContent = mmss(now()); }, 500);
+            const tick = setInterval(() => { if (!host.isConnected) { clearInterval(tick); T.hush(); try { if (rec && rec.state !== 'inactive') rec.stop(); } catch (_) {} stream?.getTracks().forEach(t => t.stop()); return; } // page quittée : micro coupé
+                const el = live.querySelector('[data-iv-time]'); if (el) el.textContent = mmss(now()); }, 500);
             const show = () => { marks[i] ??= now(); live.innerHTML = `<div class="h-tr-panel h-tr-iv"><div class="h-tr-row" style="justify-content:space-between"><span class="h-tr-pill">${THEME_LABEL[qs[i].th]} · question ${i + 1} sur ${qs.length}</span><span>${rec ? '🔴 ' : ''}<b data-iv-time>${mmss(now())}</b></span></div>
                 <p class="h-tr-ivq">${T.esc(qs[i].q)}</p><label style="display:grid">Notes rapides (facultatif)<textarea data-iv-note rows="2">${T.esc(notes[i])}</textarea></label>
                 <p class="h-tr-row"><button type="button" class="button secondary" data-iv-prev ${i ? '' : 'disabled'}>← Précédente</button><button type="button" class="button" data-iv-next>${i < qs.length - 1 ? 'Question suivante →' : 'Dernière question : terminer'}</button><button type="button" class="button secondary" data-iv-skip>Passer</button><button type="button" class="button secondary" data-iv-again>🔊 Relire</button>${rec ? `<button type="button" class="button secondary" data-iv-pause>${pauseAt ? '▶ Reprendre' : '⏸ Pause'}</button>` : ''}<button type="button" class="button danger" data-iv-stop>⏹ Terminer</button></p></div>`;
@@ -292,7 +293,7 @@
             const sec = Math.max(4, Number(form.elements.sec.value) || 12), voice = form.elements.voice.checked, stopMusic = form.elements.music.checked ? softMusic() : () => {};
             const ov = document.createElement('div'); ov.className = 'h-tr-veillee'; ov.tabIndex = 0; document.body.appendChild(ov);
             let i = 0, timer = null, pausedV = false, alive = true, turn = 0;
-            const close = () => { if (!alive) return; alive = false; clearTimeout(timer); T.hush(); stopMusic(); document.removeEventListener('keydown', key, true); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); ov.remove(); };
+            const close = () => { if (!alive) return; alive = false; clearTimeout(timer); T.hush(); stopMusic(); document.removeEventListener('keydown', key, true); document.removeEventListener('fullscreenchange', fsc); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); ov.remove(); };
             const go = n => { i = Math.max(0, Math.min(s.length - 1, n)); draw(); };
             const draw = async () => {
                 clearTimeout(timer); T.hush(); const x = s[i], my = ++turn, url = x.p ? T.portraitUrl(x.p) : '';
@@ -307,7 +308,7 @@
             const key = e => { if (!alive) return; if (e.key === 'Escape') { e.preventDefault(); close(); } else if (e.key === 'ArrowRight') go(i + 1); else if (e.key === 'ArrowLeft') go(i - 1); else if (e.key === ' ') { e.preventDefault(); pausedV = !pausedV; draw(); } };
             document.addEventListener('keydown', key, true);
             ov.addEventListener('click', ev => { const b = ev.target.closest('[data-vl]'); if (!b) return; const a = b.dataset.vl; if (a === 'close') close(); else if (a === 'prev') go(i - 1); else if (a === 'next') go(i + 1); else { pausedV = !pausedV; draw(); } });
-            document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && alive && ov.dataset.fs) close(); });
+            const fsc = () => { if (!document.fullscreenElement && alive && ov.dataset.fs) close(); }; document.addEventListener('fullscreenchange', fsc);
             ov.requestFullscreen?.().then(() => { ov.dataset.fs = '1'; }).catch(() => {});
             draw();
         });

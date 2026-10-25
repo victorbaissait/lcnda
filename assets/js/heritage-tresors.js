@@ -15,7 +15,7 @@
     const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 
     /* ═════════ Les aides communes ═════════ */
-    let treeP = null;
+    let treeP = null, treeAt = 0;
     const T = {
         esc, MONTHS,
         toast: (...a) => A().toast(...a),
@@ -23,12 +23,12 @@
         post: (action, body) => A().api(action, {}, {method: 'POST', body}),
         /** l'arbre, gardé en mémoire (force : relire) ; index : byId, kids (personne → enfants), fams (personne → couples) */
         async tree(force = false) {
-            if (!treeP || force) treeP = A().api('tresor_tree').then(d => {
+            if (!treeP || force || Date.now() - treeAt > 20000) { treeAt = Date.now(); treeP = A().api('tresor_tree').then(d => {
                 const byId = new Map(d.people.map(p => [p.id, p])), kids = new Map(), fams = new Map();
                 d.families.forEach(f => { [f.a, f.b].filter(Boolean).forEach(x => { if (!fams.has(x)) fams.set(x, []); fams.get(x).push(f); if (!kids.has(x)) kids.set(x, []); kids.get(x).push(...f.children); }); });
                 const evBy = new Map(); d.events.forEach(e => { const k = e.p ? 'p' + e.p : 'f' + e.f; if (!evBy.has(k)) evBy.set(k, []); evBy.get(k).push(e); });
                 return {...d, byId, kids, fams, evBy};
-            }).catch(err => { treeP = null; throw err; });
+            }).catch(err => { treeP = null; throw err; }); }
             return treeP;
         },
         name: p => (p ? p.name || [p.first, p.last].filter(Boolean).join(' ') || 'Sans nom' : '?'),
@@ -122,7 +122,8 @@
         ws.innerHTML = `<section class="page h-tr h-tr-page" data-tr-page="${esc(key)}"><div class="h-tr-top"><button type="button" class="button small secondary" data-tr-home>← Tous les trésors</button></div>
             <div class="page-header"><div><span class="eyebrow">✨ TRÉSORS · ${esc(GROUPS.find(g => g[0] === f.group)?.[1].replace(/^\S+\s/, '').toUpperCase() || '')}</span><h1>${esc(f.icon)} ${esc(f.title)}</h1><p class="muted">${esc(f.desc)}</p></div></div><div class="h-tr-body" data-tr-body></div></section>`;
         const host = ws.querySelector('[data-tr-body]');
-        try { await f.render(host, T); } catch (err) { host.innerHTML = `<p class="ui-notice is-error">Impossible d'ouvrir : ${esc(err.message || err)}</p>`; console.error(err); }
+        // l'arbre relu à chaque ouverture : les fiches changées ailleurs y sont
+        try { await T.tree(true); await f.render(host, T); } catch (err) { host.innerHTML = `<p class="ui-notice is-error">Impossible d'ouvrir : ${esc(err.message || err)}</p>`; console.error(err); }
     }
     document.addEventListener('click', e => {
         const o = e.target.closest('[data-tr-open]'); if (o && o.closest('.h-tr')) { e.preventDefault(); openFeature(o.dataset.trOpen); return; }
@@ -131,9 +132,10 @@
     /* ═════════ Le bloc de la fiche : ✨ Trésors de cette personne ═════════ */
     const KIND_INFO = {letter: ['✉️', 'Lettres', 'lettres'], sense: ['👃', 'Souvenirs des sens', 'sens'], recipe: ['🥘', 'Recettes', 'recettes'], song: ['🎶', 'Chansons', 'chansons'], interview: ['🎙️', 'Entretiens', 'entretien'], candle: ['🕯️', 'Bougies', 'bougie'], passport: ['🛂', 'Passeports', 'passeports'], story: ['📖', 'Récits', ''], stamp: ['📍', 'Tampons', ''], hunt: ['🗝️', 'Chasses au trésor', ''], gazette: ['📰', 'Gazettes', ''], share: ['🔗', 'Partages', ''], reminder: ['⏰', 'Rappels', '']};
     ext.personBlocks = ext.personBlocks || {};
-    ext.personBlocks.tresors = (index, detail) => {
+    const readOnly = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly'); // consultation, base en lecture seule
+    ext.personBlocks.tresors = (index, detail, opts = {}) => {
         const pid = Number(detail?.person?.id); if (!pid || detail.person.kind === 'animal') return '';
-        return A().card(index, '✨ Trésors', '', `<div class="h-tr-block" data-tr-block="${pid}"><p class="muted">…</p></div>`, 'span-12', `<button type="button" class="button small secondary" data-tr-open-k="sens">＋ Souvenir</button> <button type="button" class="button small secondary" data-tr-open-k="lettres">＋ Lettre</button>`);
+        return A().card(index, '✨ Trésors', '', `<div class="h-tr-block" data-tr-block="${pid}"><p class="muted">…</p></div>`, 'span-12', readOnly() ? '' : `<button type="button" class="button small secondary" data-tr-open-k="sens">＋ Souvenir</button> <button type="button" class="button small secondary" data-tr-open-k="lettres">＋ Lettre</button>`);
     };
     async function fillBlock(detail) {
         const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-tr-block="${pid}"]`); if (!el) return;
