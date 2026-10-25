@@ -3,6 +3,9 @@
  *  - 📷 Dater une vieille photo : quelques questions (le support, le carton du photographe, les vêtements, les coiffures, le décor)
  *    donnent une fourchette d'années ; avec l'âge apparent et le sexe de la personne, l'app propose qui de l'arbre ça peut être.
  *    Repères tirés de l'histoire de la photographie et du costume (fourchettes larges, volontairement prudentes).
+ *  - ⏰ Les rappels de recherche : les branches endormies (dernière modification), ce qui y manque, un rappel de l'application en un clic.
+ *  - 🏛️ Les actes manquants : un raccourci vers l'assistant « Que manque-t-il ? » de l'onglet Recherche.
+ *  - 🎩 Le thème d'époque : la fiche d'un ancêtre aux couleurs de son temps (réglage gardé sur l'ordinateur).
  */
 (() => {
     'use strict';
@@ -61,4 +64,86 @@
     }
     F.push({key: 'dater-photo', group: 'outils', icon: '📷', title: 'Dater une vieille photo', desc: 'Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être.', render: renderPhoto});
     ext.tresorPhotoDate = {CLUES, dateRange};
+
+    /* ── ⏰ Les rappels de recherche : les branches endormies ── */
+    const A = () => window.LCNDA_APP;
+    const monthsSince = d => { if (!d) return null; const a = new Date(d + 'T00:00:00'), b = new Date(); return (b.getFullYear() - a.getFullYear()) * 12 + b.getMonth() - a.getMonth(); };
+    /** les branches de la personne de départ (par grand-parent, puis par nom), la dernière fois qu'on y a touché, ce qui y manque */
+    function sleepingBranches(T, tr, rootId) {
+        const anc = T.ancestors(tr, rootId, 14), heads = anc.filter(a => a.gen === 2).map(a => tr.byId.get(a.id)).filter(Boolean), out = [];
+        const gaps = p => [!p.by && 'la naissance', !p.living && !p.dy && 'le décès', !(tr.fams.get(p.id) || []).some(f => f.my) && (tr.kids.get(p.id) || []).length && 'le mariage'].filter(Boolean);
+        (heads.length ? heads : anc.filter(a => a.gen === 1).map(a => tr.byId.get(a.id)).filter(Boolean)).forEach(h => {
+            const ids = [h.id, ...T.ancestors(tr, h.id, 12).map(a => a.id)], ppl = ids.map(i => tr.byId.get(i)).filter(Boolean);
+            const touched = ppl.map(p => p.touched).filter(Boolean).sort().at(-1) || '', todo = ppl.map(p => ({p, g: gaps(p)})).filter(x => x.g.length);
+            const names = [...new Set(ppl.map(p => p.last).filter(Boolean))].slice(0, 4);
+            out.push({head: h, label: `Branche ${h.last || T.name(h)} (${h.first || ''})`.replace(' ()', ''), names, count: ppl.length, touched, months: monthsSince(touched), todo});
+        });
+        return out.sort((a, b) => (b.months ?? 0) - (a.months ?? 0));
+    }
+    const isoIn = m => { const d = new Date(); d.setMonth(d.getMonth() + m); return d.toISOString().slice(0, 10); };
+    function remindDialog(T, title, notes) {
+        ext.openDialog({eyebrow: 'RAPPEL DE RECHERCHE', title: '⏰ Me le rappeler', submitLabel: 'Créer le rappel', body: `<div class="form-grid"><label class="span-2">Le rappel<input name="title" maxlength="200" value="${T.esc(title)}"></label>
+            <label>Le<input type="date" name="due" value="${isoIn(1)}"></label><label>Dans<select name="in"><option value="">—</option><option value="1">1 mois</option><option value="3">3 mois</option><option value="6">6 mois</option><option value="12">1 an</option></select></label>
+            <label class="span-2">Notes<textarea name="notes" rows="4">${T.esc(notes)}</textarea></label></div>`,
+            onOpen: d => d.querySelector('[name=in]').addEventListener('change', e => { if (e.target.value) d.querySelector('[name=due]').value = isoIn(Number(e.target.value)); }),
+            onSubmit: async form => { const v = k => form.elements[k].value.trim(); if (!v('title') || !v('due')) { T.toast('Il faut un texte et une date.', 'error'); return false; }
+                await T.post('save_standalone_reminder', {title: v('title'), notes: v('notes'), reminder_mode: 'on', reminder_due_at: v('due'), reminder_category: 'chercher_acte'});
+                T.toast(`⏰ Rappel créé pour le ${T.dateFr(v('due'))} (Listes → Rappels).`, 'success'); }});
+    }
+    async function renderReminders(host, T) {
+        const tr = await T.tree(), st = T.start(tr);
+        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:260px"><span class="pk-lab">Les branches de</span>${T.personField('root', st?.id)}</div><label>Endormie depuis au moins<select data-rm-min><option value="0">peu importe</option><option value="3" selected>3 mois</option><option value="6">6 mois</option><option value="12">1 an</option></select></label></div>
+            <p class="h-tr-muted">La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ».</p><div data-rm-out></div>`;
+        const out = host.querySelector('[data-rm-out]'), rootEl = host.querySelector('[name=root]'), minEl = host.querySelector('[data-rm-min]');
+        let rows = [];
+        const draw = () => { rows = sleepingBranches(T, tr, Number(rootEl.value) || st?.id); const min = Number(minEl.value), vis = rows.filter(r => (r.months ?? 999) >= min);
+            out.innerHTML = vis.length ? `<ul class="h-tr-list">${vis.map(r => `<li class="h-tr-item" data-rm-i="${rows.indexOf(r)}"><span class="h-tr-ic">${(r.months ?? 99) >= 12 ? '😴' : (r.months ?? 0) >= 3 ? '💤' : '🌱'}</span><div class="h-tr-grow"><b>${T.esc(r.label)}</b> <small>${r.count} personne${r.count > 1 ? 's' : ''}${r.names.length ? ' · ' + T.esc(r.names.join(', ')) : ''}</small><br>
+                ${r.touched ? `Pas touchée depuis <b>${r.months >= 12 ? `${Math.floor(r.months / 12)} an${r.months >= 24 ? 's' : ''}${r.months % 12 ? ` et ${r.months % 12} mois` : ''}` : `${r.months} mois`}</b> (${T.esc(T.dateFr(r.touched))})` : 'Jamais modifiée'}${r.todo.length ? ` · <b>${r.todo.length}</b> fiche${r.todo.length > 1 ? 's' : ''} à compléter : ${r.todo.slice(0, 4).map(x => `<button type="button" class="h-tr-link" data-rm-open="${x.p.id}">${T.esc(T.name(x.p))}</button> <small>(${T.esc(x.g.join(', '))})</small>`).join(', ')}${r.todo.length > 4 ? '…' : ''}` : ' · rien d’évident ne manque'}</div>
+                <button type="button" class="button small secondary" data-rm-add>⏰ Me le rappeler</button></li>`).join('')}</ul>` : '<p class="h-tr-muted">Aucune branche endormie depuis aussi longtemps : bravo !</p>'; };
+        rootEl.addEventListener('change', draw); minEl.addEventListener('change', draw);
+        out.addEventListener('click', e => { const o = e.target.closest('[data-rm-open]'); if (o) return T.openPerson(Number(o.dataset.rmOpen));
+            const b = e.target.closest('[data-rm-add]'); if (!b) return; const r = rows[Number(b.closest('[data-rm-i]').dataset.rmI)];
+            remindDialog(T, `Reprendre la ${r.label.replace(/^Branche/, 'branche')}`, r.todo.slice(0, 12).map(x => `• ${T.name(x.p)} : ${x.g.join(', ')}`).join('\n')); });
+        draw();
+    }
+    F.push({key: 'rappels', group: 'outils', icon: '⏰', title: 'Les rappels de recherche', desc: '« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic.', render: renderReminders});
+
+    /* ── 🏛️ Les actes manquants (raccourci) : l'assistant existe déjà dans Recherche ── */
+    async function renderGaps(host, T) {
+        host.innerHTML = '<p class="h-tr-muted">Je regarde ce qui manque…</p>';
+        const d = await T.api('research_gaps', {gen: 6}).catch(() => null), items = d?.items || [];
+        const by = new Map(); items.forEach(it => { const k = it.archive?.label || 'Archives à trouver'; by.set(k, (by.get(k) || 0) + 1); });
+        host.innerHTML = `<div class="h-tr-panel"><p>L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives.</p>
+            ${items.length ? `<p class="h-tr-big">${items.length} recherche${items.length > 1 ? 's' : ''} à faire sur 6 générations</p><ul>${[...by].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k, n]) => `<li>🏛️ ${T.esc(k)} : <b>${n}</b></li>`).join('')}</ul>` : '<p class="h-tr-muted">Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu.</p>'}
+            <button type="button" class="button" data-gp-go>🔍 Ouvrir l’assistant « Que manque-t-il ? »</button></div>`;
+        host.querySelector('[data-gp-go]').addEventListener('click', () => { A().state.researchKind = 'gaps'; A().setModule('recherche'); });
+    }
+    F.push({key: 'actes-manquants', group: 'outils', icon: '🏛️', title: 'Les actes manquants', desc: 'Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche).', render: renderGaps});
+
+    /* ── 🎩 Le thème d'époque des fiches ── */
+    const ERAS = [[0, 1788, 'ancien', '📜 Ancien Régime'], [1789, 1851, 'empire', '🎖️ Révolution et Empire'], [1852, 1899, 'sepia', '🎩 Le XIXe siècle'], [1900, 1918, 'belle', '🌿 La Belle Époque'], [1919, 1945, 'deco', '🍸 Les années folles et la guerre'], [1946, 1969, 'trente', '🚗 Les Trente Glorieuses'], [1970, 9999, 'pop', '📻 Les années 70 et après']];
+    const ERA_KEY = 'lcnda-tr-era';
+    const eraOn = () => { try { return localStorage.getItem(ERA_KEY) === '1'; } catch (_) { return false; } };
+    /** l'époque d'une vie : celle de ses 25 ans (ou vingt ans avant sa mort) */
+    const eraOf = p => { const y = p?.by ? p.by + 25 : p?.dy ? p.dy - 20 : null; return y == null ? null : ERAS.find(([a, b]) => y >= a && y <= b); };
+    async function applyEra(detail) {
+        const page = document.querySelector('#workspace .person-page'); if (!page) return;
+        page.removeAttribute('data-tr-era'); page.querySelector('.h-tr-era-badge')?.remove();
+        if (!eraOn() || !detail?.person?.id) return;
+        const tr = await ext.tresors.T.tree().catch(() => null), p = tr?.byId.get(Number(detail.person.id)), e = eraOf(p); if (!e) return;
+        const pg = document.querySelector('#workspace .person-page'); if (!pg) return;
+        pg.dataset.trEra = e[2]; pg.querySelector('.person-hero')?.insertAdjacentHTML('beforeend', `<span class="h-tr-era-badge" title="Thème d’époque (Trésors → Thème d’époque)">${e[3]}</span>`);
+    }
+    ext.afterPerson = ext.afterPerson || [];
+    ext.afterPerson.push(detail => { applyEra(detail); });
+    async function renderEra(host, T) {
+        const tr = await T.tree();
+        const sample = e => tr.people.filter(p => eraOf(p)?.[2] === e[2]).slice(0, 3);
+        host.innerHTML = `<div class="h-tr-panel"><label class="ui-toggle"><input type="checkbox" data-era-on ${eraOn() ? 'checked' : ''}><i></i><b>Habiller chaque fiche aux couleurs de son époque</b></label>
+            <p class="h-tr-muted">La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur.</p></div>
+            <div class="h-tr-cards">${ERAS.map(e => `<div class="h-tr-era-demo" data-tr-era="${e[2]}"><div class="person-hero"><b>${e[3]}</b><small>${e[0] ? e[0] : 'avant'} – ${e[1] < 9999 ? e[1] : 'aujourd’hui'}</small></div><small>${sample(e).map(p => T.esc(T.name(p))).join(', ') || '<span class="h-tr-muted">personne</span>'}</small></div>`).join('')}</div>`;
+        host.querySelector('[data-era-on]').addEventListener('change', e => { try { localStorage.setItem(ERA_KEY, e.target.checked ? '1' : '0'); } catch (_) {} T.toast(e.target.checked ? 'Les fiches prennent maintenant les couleurs de leur époque.' : 'Thème d’époque arrêté.', 'success'); });
+    }
+    F.push({key: 'theme-epoque', group: 'outils', icon: '🎩', title: 'Le thème d’époque', desc: 'Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses.', render: renderEra});
+    ext.tresorEra = {ERAS, eraOf, applyEra};
 })();

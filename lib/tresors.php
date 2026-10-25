@@ -9,14 +9,16 @@ declare(strict_types=1);
  *        → {items: [...]} ; une lettre encore scellée (open_at dans le futur) n'envoie pas son texte, seulement sa date
  *   POST api.php?action=tresor_write {op: save | delete, item: {id?, kind, person_id?, place_id?, title, body, data, open_at}, csrf}
  *   GET  api.php?action=tresor_media&ids=1,2 → {media: [{id, title, media_type, filename, thumbnail}]}
+ *   POST api.php?action=tresor_write {op: link_media, media_id, person_id} → le média (un entretien enregistré) rangé sur la fiche
+ *   GET  api.php?action=tresor_signatures → {signatures: [{media_id, filename, person_id, x, y, w, h, year}]} (les zones « signature » des médias)
  *   GET  api.php?action=tresor_tree   → {people: [{id, name, first, last, gender, living, by, bd (AAAA-MM-JJ), bplace, dy, dd,
- *        dplace, occ, portrait, father, mother, start}], families: [{id, a, b, my, md, mplace}], places: {id: {name, lat, lng}},
+ *        dplace, occ, portrait, father, mother, start, touched (dernière modification de la fiche)}], families: [{id, a, b, my, md, mplace}], places: {id: {name, lat, lng}},
  *        events: [{p, f, tag, label, y, d, place}]}  (les fiches d'animaux sont laissées de côté)
  *
  * Une seule table, créée à la demande (rien à mettre à jour dans la base) ; tout ce qui arrive est relu et borné ; requêtes préparées.
  */
 
-const TRESOR_KINDS = ['letter', 'candle', 'passport', 'stamp', 'sense', 'hunt', 'gazette', 'share', 'story', 'reminder'];
+const TRESOR_KINDS = ['letter', 'candle', 'passport', 'stamp', 'sense', 'hunt', 'gazette', 'share', 'story', 'reminder', 'recipe', 'song', 'interview'];
 
 function tresors_ensure(PDO $pdo): void
 {
@@ -93,11 +95,11 @@ function tresor_tree(PDO $pdo): array
     $hasKind = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='kind'")->fetchColumn();
     $hasOcc = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='occupation'")->fetchColumn();
     $people = []; $where = $hasKind ? "WHERE COALESCE(p.kind,'human')<>'animal'" : '';
-    foreach ($pdo->query('SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, p.living_status, p.is_start, ' . ($hasOcc ? 'p.occupation' : "'' AS occupation") . ",
+    foreach ($pdo->query('SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, p.living_status, p.is_start, p.updated_at, ' . ($hasOcc ? 'p.occupation' : "'' AS occupation") . ",
             (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p $where") as $r) {
         $id = (int) $r['id'];
         $people[$id] = ['id' => $id, 'first' => trim((string) $r['first_name']), 'last' => trim((string) $r['last_name']), 'name' => trim(preg_replace('/\s+/', ' ', $r['first_name'] . ' ' . $r['middle_name'] . ' ' . $r['last_name'])),
-            'gender' => $r['gender'], 'living' => $r['living_status'] === 'living', 'start' => (int) $r['is_start'] === 1, 'occ' => trim((string) $r['occupation']), 'portrait' => $r['portrait'] ?: null,
+            'gender' => $r['gender'], 'living' => $r['living_status'] === 'living', 'start' => (int) $r['is_start'] === 1, 'occ' => trim((string) $r['occupation']), 'portrait' => $r['portrait'] ?: null, 'touched' => substr((string) $r['updated_at'], 0, 10),
             'by' => null, 'bd' => null, 'bplace' => null, 'dy' => null, 'dd' => null, 'dplace' => null, 'father' => null, 'mother' => null];
     }
     $places = [];
@@ -139,9 +141,27 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
             $st = $pdo->prepare('SELECT id, title, media_type, filename, thumbnail FROM media WHERE id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')'); $st->execute($ids);
             json_response(['media' => $st->fetchAll(PDO::FETCH_ASSOC)]);
         }
+        if (!$isWrite && $action === 'tresor_signatures') { // le mur des signatures : chaque zone marquée « signature » sur un document
+            $hasType = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('media_tags') WHERE name='tag_type'")->fetchColumn();
+            if (!$hasType) { json_response(['signatures' => []]); }
+            $out = [];
+            foreach ($pdo->query("SELECT t.media_id, t.person_id, t.x, t.y, t.w, t.h, m.filename, m.date_text, m.title FROM media_tags t JOIN media m ON m.id=t.media_id WHERE t.tag_type='signature' AND m.media_type='image' ORDER BY t.id LIMIT 3000") as $r) {
+                $out[] = ['media_id' => (int) $r['media_id'], 'person_id' => (int) $r['person_id'], 'x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h'],
+                    'filename' => (string) $r['filename'], 'title' => (string) $r['title'], 'year' => preg_match('/\b(1[0-9]{3}|20[0-9]{2})\b/', (string) $r['date_text'] . ' ' . $r['title'], $m) ? (int) $m[1] : null];
+            }
+            json_response(['signatures' => $out]);
+        }
         if ($isWrite && $action === 'tresor_write') {
             $op = (string) ($payload['op'] ?? '');
             if ($op === 'save') { json_response(tresor_save($pdo, is_array($payload['item'] ?? null) ? $payload['item'] : [])); }
+            if ($op === 'link_media') { // un média tout juste enregistré (entretien, veillée) rangé dans les médias de la fiche
+                $mid = (int) ($payload['media_id'] ?? 0); $pid = (int) ($payload['person_id'] ?? 0);
+                $ok = $pdo->prepare('SELECT (SELECT 1 FROM media WHERE id=?) AND (SELECT 1 FROM persons WHERE id=?)'); $ok->execute([$mid, $pid]);
+                if (!$ok->fetchColumn()) { throw new LcndaBadInput('Média ou fiche introuvable.'); }
+                $has = $pdo->prepare("SELECT 1 FROM media_links WHERE media_id=? AND entity_type='person' AND entity_id=?"); $has->execute([$mid, $pid]);
+                if (!$has->fetchColumn()) { $pdo->prepare("INSERT INTO media_links(media_id, entity_type, entity_id, position) VALUES(?, 'person', ?, (SELECT COALESCE(MAX(position),0)+1 FROM media_links WHERE entity_type='person' AND entity_id=?))")->execute([$mid, $pid, $pid]); }
+                json_response(['ok' => true]);
+            }
             if ($op === 'delete') { tresors_ensure($pdo); $pdo->prepare('DELETE FROM tresor_items WHERE id=?')->execute([(int) ($payload['id'] ?? 0)]); json_response(['ok' => true]); }
             throw new LcndaBadInput('Opération inconnue.');
         }

@@ -69,9 +69,34 @@
         download(name, blob) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000); },
         /** un nombre au hasard qui dépend d'une graine (le même tirage à chaque fois) */
         rng(seed) { let s = (Number(seed) || 1) % 2147483647; if (s <= 0) s += 2147483646; return () => (s = s * 16807 % 2147483647) / 2147483647; },
+        /** quelques phrases sur une vie, tirées de l'arbre (naissance, métier, mariages, enfants, décès) */
+        story(tr, p) {
+            if (!p) return [];
+            const f = p.gender === 'female', il = f ? 'Elle' : 'Il', x = s => s.replace(/·e/g, f ? 'e' : ''), out = [];
+            if (p.by) out.push(x(`${il} est né·e ${p.bd ? 'le ' : 'en '}${T.dateFr(p.bd, p.by)}${p.bplace ? ` à ${T.place(tr, p.bplace)}` : ''}.`));
+            if (p.occ) out.push(`${il} était ${p.occ}.`);
+            (tr.fams.get(p.id) || []).forEach(fa => { const o = tr.byId.get(fa.a === p.id ? fa.b : fa.a); if (o) out.push(`${il} a épousé ${T.name(o)}${fa.my ? ` ${fa.md ? 'le' : 'en'} ${T.dateFr(fa.md, fa.my)}` : ''}${fa.mplace ? ` à ${T.place(tr, fa.mplace)}` : ''}.`); });
+            const kids = [...new Set(tr.kids.get(p.id) || [])].map(k => tr.byId.get(k)).filter(Boolean);
+            if (kids.length) out.push(`${il} a eu ${kids.length === 1 ? 'un enfant' : `${kids.length} enfants`} : ${kids.map(k => k.first || T.name(k)).join(', ')}.`);
+            if (p.dy) { const a = T.ageAt(p, p.dd, p.dy); out.push(x(`${il} est mort·e ${p.dd ? 'le ' : 'en '}${T.dateFr(p.dd, p.dy)}${a != null ? `, à ${a} ans` : ''}${p.dplace ? `, à ${T.place(tr, p.dplace)}` : ''}.`)); }
+            return out;
+        },
+        /** lire à voix haute (la voix française du système) → une promesse tenue à la fin de la lecture */
+        say(text, {rate = 0.95} = {}) {
+            return new Promise(res => { const s = window.speechSynthesis; if (!s || !text) return res(false);
+                const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; u.rate = rate; const v = s.getVoices().find(x => /^fr/i.test(x.lang)); if (v) u.voice = v;
+                u.onend = () => res(true); u.onerror = () => res(false); s.speak(u); });
+        },
+        hush: () => { try { window.speechSynthesis?.cancel(); } catch (_) {} },
+        /** envoyer un enregistrement (son, vidéo, image) dans les médias → {media_id, filename} */
+        async upload(blob, kind, title, name = 'enregistrement.webm') {
+            const fd = new FormData(); fd.append('file', blob, name); fd.append('media_id', '0'); fd.append('mode', 'new'); fd.append('kind', kind); fd.append('title', title);
+            const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf || ''}, credentials: 'same-origin'}).then(x => x.json());
+            if (!r?.result?.media_id) throw new Error(r?.error || 'envoi impossible'); return r.result;
+        },
         open: key => openFeature(key),
         portraitUrl: p => (p?.portrait ? `media/${encodeURIComponent(p.portrait)}` : ''),
-        openPerson: id => A().selectPerson ? A().selectPerson(id) : (location.hash = `#personnes/${id}`),
+        openPerson: id => (A().openPersonById ? A().openPersonById(id) : A().selectPerson ? A().selectPerson(id) : (location.hash = `#personnes/${id}`)),
     };
     ext.tresors = {T, render, open: k => openFeature(k)};
 
@@ -103,4 +128,22 @@
         const o = e.target.closest('[data-tr-open]'); if (o && o.closest('.h-tr')) { e.preventDefault(); openFeature(o.dataset.trOpen); return; }
         const h = e.target.closest('[data-tr-home]'); if (h) { e.preventDefault(); history.pushState(null, '', '#tresors'); A().$('#workspace').innerHTML = hub(); }
     });
+    /* ═════════ Le bloc de la fiche : ✨ Trésors de cette personne ═════════ */
+    const KIND_INFO = {letter: ['✉️', 'Lettres', 'lettres'], sense: ['👃', 'Souvenirs des sens', 'sens'], recipe: ['🥘', 'Recettes', 'recettes'], song: ['🎶', 'Chansons', 'chansons'], interview: ['🎙️', 'Entretiens', 'entretien'], candle: ['🕯️', 'Bougies', 'bougie'], passport: ['🛂', 'Passeports', 'passeports'], story: ['📖', 'Récits', ''], stamp: ['📍', 'Tampons', ''], hunt: ['🗝️', 'Chasses au trésor', ''], gazette: ['📰', 'Gazettes', ''], share: ['🔗', 'Partages', ''], reminder: ['⏰', 'Rappels', '']};
+    ext.personBlocks = ext.personBlocks || {};
+    ext.personBlocks.tresors = (index, detail) => {
+        const pid = Number(detail?.person?.id); if (!pid || detail.person.kind === 'animal') return '';
+        return A().card(index, '✨ Trésors', '', `<div class="h-tr-block" data-tr-block="${pid}"><p class="muted">…</p></div>`, 'span-12', `<button type="button" class="button small secondary" data-tr-open-k="sens">＋ Souvenir</button> <button type="button" class="button small secondary" data-tr-open-k="lettres">＋ Lettre</button>`);
+    };
+    async function fillBlock(detail) {
+        const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-tr-block="${pid}"]`); if (!el) return;
+        let items = []; try { items = await T.items('', pid); } catch (_) { el.innerHTML = '<p class="muted">Les trésors n’ont pas pu être lus.</p>'; return; }
+        if (!items.length) { el.innerHTML = '<p class="muted">Rien encore : un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors.</p>'; return; }
+        const by = new Map(); items.forEach(x => { if (!by.has(x.kind)) by.set(x.kind, []); by.get(x.kind).push(x); });
+        el.innerHTML = [...by].map(([k, l]) => { const [ic, label, key] = KIND_INFO[k] || ['✨', k, ''];
+            return `<div class="h-tr-bk"><b>${ic} ${esc(label)}</b> ${l.map(x => `<span class="h-tr-pill">${x.sealed ? `🔒 ${esc(x.title)} — s’ouvre le ${esc(T.dateFr(x.open_at))}` : esc(x.title)}</span>`).join(' ')}${key ? ` <button type="button" class="h-tr-link" data-tr-open-k="${key}">Voir</button>` : ''}</div>`; }).join('');
+    }
+    ext.afterPerson = ext.afterPerson || [];
+    ext.afterPerson.push(detail => { fillBlock(detail); });
+    document.addEventListener('click', e => { const b = e.target.closest('[data-tr-open-k]'); if (b && !b.closest('.h-tr-page')) { e.preventDefault(); openFeature(b.dataset.trOpenK); } });
 })();

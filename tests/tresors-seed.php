@@ -44,5 +44,13 @@ $e1 = $person('Claude', 'MARTIN', 'male', '1935-12-24', 'Lyon', null, null, 'ing
 $couple($d1, $d2, '1932-10-10', 'Lyon', [$e1]);
 $e2 = $person('Anne', 'MOREL', 'female', '1938-02-02', 'Tulle', null, null, 'pharmacienne');
 $me = $person('Léa', 'MARTIN', 'female', '1990-03-12', 'Lyon', null, null, '', true, 'living');
-$couple($e1, $e2, '1960-04-04', 'Tulle', [$me]);
+$h2 = $person('Henri', 'MARTIN', 'male', '1994-05-05', 'Lyon', null, null, '', false, 'living'); // comme son grand-père Henri (le prénom saute une génération)
+$couple($e1, $e2, '1960-04-04', 'Tulle', [$me, $h2]);
+// une somme d'autrefois (le pouvoir d'achat) : la dot du mariage d'Antoine et Marie
+$db->exec("UPDATE events SET description='contrat chez Me Brousse, dot de 1200 francs' WHERE family_id=1");
+// une signature repérée sur un acte (le mur des signatures) : Jean MARTIN, 1903
+file_put_contents(MEDIA_DIR . '/acte-1903.png', base64_decode('iVBORw0KGgoAAAANSUhEUgAAAHgAAAA8CAIAAAAiz+n/AAABG0lEQVR42u3asRHCQAxE0S3FpVE9DZAQ0gARllar489sjMTDls3d6f16EkMEAdBAE6CBBhoFoIEmQAMNNApAA02ABhpoAjTQ93Jdj68JBKpqTznKada1vSmHOMq6vDFF3YMh1h2/utJaH7duakCBrQ9a95X2QYd84amiClQese4up0xlv3V3IYVfIx5rQwnld9+t4LlptGLe9V3XtumkLa13fKzzGfC/0Oa3Gu2ad7Vz3/mernVPlS1vMl3Qtu7vFxr5f6+N8+5OualVFG2cdz8XHVwX1EbldYuCZdDha8cJ2zcF0CG7IcnKhxw3WLEVeci5jvzd3nMO0ISfX+CkEtBAE6CBBhoCoIEmQAMNNApAA02ABhpoFIA+KB9LCzNHbiPVGAAAAABJRU5ErkJggg=='));
+$db->prepare("INSERT INTO media(title, media_type, filename, thumbnail, date_text) VALUES('Acte de mariage', 'image', 'acte-1903.png', 'acte-1903.png', '15 juin 1903')")->execute(); $mid = (int) $db->lastInsertId();
+try { $db->exec("ALTER TABLE media_tags ADD COLUMN tag_type TEXT NOT NULL DEFAULT 'person'"); } catch (Throwable $_) {}
+$db->prepare("INSERT INTO media_tags(media_id, person_id, x, y, w, h, tag_type) VALUES(?,?,10,20,80,60,'signature')")->execute([$mid, $c1]);
 echo 'ok';

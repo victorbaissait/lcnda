@@ -3,6 +3,7 @@
  *  - 🃏 Jeu des 7 familles : sept familles de l'arbre (par nom de famille ou par branche), six cartes chacune avec photo, dates,
  *    métier et lieu, et au bas de chaque carte les cinq autres membres à demander ; planches à imprimer et découper.
  *  - 🖍️ Arbre à colorier : les ancêtres de quelqu'un sur un grand arbre en traits noirs, feuilles et oiseaux à colorier.
+ *  - 📺 Le quiz du repas : sur la télé, en équipes, des questions tirées de l'arbre, compte à rebours, points au clavier.
  */
 (() => {
     'use strict';
@@ -104,4 +105,67 @@
         draw();
     }
     F.push({key: 'coloriage', group: 'jouer', icon: '🖍️', title: 'Arbre à colorier', desc: 'Un grand arbre en traits noirs avec les vrais ancêtres d’un enfant, des feuilles, un soleil et des oiseaux à colorier.', render: renderColoring});
+
+    /* ── 📺 Le quiz du repas (mode télé) ── */
+    /** des questions tirées de l'arbre : {q, options[], answer (indice), why} ; le même tirage pour la même graine */
+    function quizQuestions(T, tr, n = 15, seed = Date.now()) {
+        const R = T.rng(seed), pick = a => a[Math.floor(R() * a.length)], shuffle = a => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+        const ppl = tr.people.filter(p => p.first), fem = p => p.gender === 'female', e = (s, p) => s.replace(/·e/g, fem(p) ? 'e' : '');
+        const places = [...new Set(ppl.map(p => T.place(tr, p.bplace)).filter(Boolean))], jobs = [...new Set(ppl.map(p => p.occ).filter(Boolean))];
+        const opts = (good, pool, k = 4) => { const others = shuffle(pool.filter(x => x !== good)).slice(0, k - 1); if (!others.length) return null; const all = shuffle([good, ...others]); return {options: all, answer: all.indexOf(good)}; };
+        const makers = [
+            () => { const p = pick(ppl.filter(x => x.by)); if (!p) return null; const ys = new Set([p.by]); while (ys.size < 4) ys.add(p.by + (Math.floor(R() * 25) + 3) * (R() < 0.5 ? -1 : 1)); const o = opts(p.by, [...ys]); return o && {q: e(`En quelle année est né·e ${T.name(p)} ?`, p), ...o, why: T.story(tr, p)[0]}; },
+            () => { const p = pick(ppl.filter(x => x.bplace)); if (!p || places.length < 2) return null; const o = opts(T.place(tr, p.bplace), places); return o && {q: e(`Où est né·e ${T.name(p)} ?`, p), ...o, why: T.story(tr, p)[0]}; },
+            () => { const p = pick(ppl.filter(x => x.occ)); if (!p || jobs.length < 2) return null; const o = opts(p.occ, jobs); return o && {q: `Quel était le métier de ${T.name(p)} ?`, ...o, why: `${T.name(p)} était ${p.occ}.`}; },
+            () => { const f = pick(tr.families.filter(x => x.a && x.b)); if (!f) return null; const a = tr.byId.get(f.a), b = tr.byId.get(f.b); if (!a || !b) return null;
+                const pool = ppl.filter(x => x.gender === b.gender && x.id !== a.id).map(x => T.name(x)); const o = opts(T.name(b), pool); return o && {q: `Qui a épousé ${T.name(a)} ?`, ...o, why: `${T.name(a)} et ${T.name(b)} se sont mariés${f.my ? ` en ${f.my}` : ''}${f.mplace ? ` à ${T.place(tr, f.mplace)}` : ''}.`}; },
+            () => { const p = pick(ppl.filter(x => x.father || x.mother)); if (!p) return null; const par = tr.byId.get(p.mother && R() < 0.5 ? p.mother : p.father || p.mother); if (!par) return null;
+                const pool = ppl.filter(x => x.gender === par.gender && x.id !== p.id).map(x => T.name(x)); const o = opts(T.name(par), pool); return o && {q: `Qui est ${fem(par) ? 'la mère' : 'le père'} de ${T.name(p)} ?`, ...o, why: `${T.name(p)} est ${fem(p) ? 'la fille' : 'le fils'} de ${T.name(par)}.`}; },
+            () => { const p = pick(ppl.filter(x => (tr.kids.get(x.id) || []).length)); if (!p) return null; const k = new Set(tr.kids.get(p.id)).size, nums = new Set([k]); while (nums.size < 4) nums.add(Math.max(0, k + Math.floor(R() * 7) - 3));
+                const o = opts(k, [...nums]); return o && {q: `Combien d’enfants a eus ${T.name(p)} ?`, ...o, why: T.story(tr, p).find(s => /enfant/.test(s)) || ''}; },
+            () => { const p = pick(ppl.filter(x => x.by && x.dy && x.dy - x.by > 3)); if (!p) return null; const a = T.ageAt(p, p.dd, p.dy), ages = new Set([a]); while (ages.size < 4) ages.add(Math.max(1, a + (Math.floor(R() * 15) + 2) * (R() < 0.5 ? -1 : 1)));
+                const o = opts(a, [...ages]); return o && {q: `À quel âge est ${e('mort·e', p)} ${T.name(p)} ?`, ...o, why: T.story(tr, p).at(-1)}; },
+            () => { const two = shuffle(ppl.filter(x => x.by)).slice(0, 2); if (two.length < 2 || two[0].by === two[1].by) return null; const old = two[0].by < two[1].by ? two[0] : two[1];
+                return {q: 'Qui est né le premier ?', options: two.map(x => T.name(x)), answer: two.indexOf(old), why: `${T.name(two[0])} : ${two[0].by} ; ${T.name(two[1])} : ${two[1].by}.`}; }];
+        const out = [], seen = new Set();
+        for (let tries = 0; out.length < n && tries < n * 30; tries++) { const q = makers[Math.floor(R() * makers.length)](); if (q && q.options?.length >= 2 && !seen.has(q.q)) { seen.add(q.q); out.push(q); } }
+        return out;
+    }
+    async function renderQuizTv(host, T) {
+        const tr = await T.tree(), st = T.start(tr);
+        host.innerHTML = `<form class="h-tr-panel" data-qz-form><div class="h-tr-row"><label style="flex:1;min-width:280px">Les équipes (séparées par des virgules)<input name="teams" value="Les ${T.esc(st?.last || 'Martin')}, Les cousins"></label>
+            <label>Questions<input type="number" name="n" min="3" max="60" value="12" style="width:5em"></label><label>Secondes pour répondre<input type="number" name="sec" min="0" max="120" value="20" style="width:5em"></label>
+            <button class="button" type="submit">📺 Lancer le quiz</button></div>
+            <p class="h-tr-muted">Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran.</p></form>
+            <div data-qz-prev></div>`;
+        const form = host.querySelector('[data-qz-form]');
+        host.querySelector('[data-qz-prev]').innerHTML = `<h3>Un avant-goût</h3><ol>${quizQuestions(T, tr, 3, 7).map(q => `<li>${T.esc(q.q)}</li>`).join('')}</ol>`;
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const teams = form.elements.teams.value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 9), qs = quizQuestions(T, tr, Number(form.elements.n.value) || 12), sec = Math.max(0, Number(form.elements.sec.value) || 0);
+            if (!teams.length) return T.toast('Donne au moins une équipe.', 'error'); if (!qs.length) return T.toast('L’arbre est trop petit pour faire des questions.', 'error');
+            const score = teams.map(() => 0), ov = document.createElement('div'); ov.className = 'h-tr-veillee h-tr-quiz'; document.body.appendChild(ov);
+            let i = 0, shown = false, left = sec, timer = null, alive = true, given = false;
+            const L = 'ABCDEFGH', close = () => { alive = false; clearInterval(timer); document.removeEventListener('keydown', key, true); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); ov.remove(); };
+            const board = () => `<div class="h-tr-qz-score">${teams.map((t, k) => `<button type="button" data-qz-pt="${k}" ${shown && !given ? '' : 'disabled'}><small>${k + 1}</small> ${T.esc(t)} <b>${score[k]}</b></button>`).join('')}</div>`;
+            const draw = () => {
+                if (i >= qs.length) { const best = Math.max(...score), win = teams.filter((t, k) => score[k] === best);
+                    ov.innerHTML = `<div class="h-tr-vl-slide"><div class="h-tr-vl-ini">🏆</div><h2>${win.length > 1 ? 'Égalité !' : `${T.esc(win[0])} gagne !`}</h2><ol class="h-tr-qz-final">${teams.map((t, k) => [t, score[k]]).sort((a, b) => b[1] - a[1]).map(([t, s]) => `<li>${T.esc(t)} — ${s} point${s > 1 ? 's' : ''}</li>`).join('')}</ol></div><div class="h-tr-vl-bar"><button type="button" data-qz="close">✕ Fermer</button></div>`; return; }
+                const q = qs[i];
+                ov.innerHTML = `<div class="h-tr-qz"><div class="h-tr-qz-top"><span>Question ${i + 1} / ${qs.length}</span>${sec && !shown ? `<b class="h-tr-qz-time">${left}</b>` : ''}</div><h2>${T.esc(q.q)}</h2>
+                    <div class="h-tr-qz-opts">${q.options.map((o, k) => `<div class="h-tr-qz-opt ${shown ? (k === q.answer ? 'is-good' : 'is-bad') : ''}"><b>${L[k]}</b> ${T.esc(o)}</div>`).join('')}</div>
+                    ${shown && q.why ? `<p class="h-tr-qz-why">${T.esc(q.why)}</p>` : ''}${board()}
+                    <div class="h-tr-vl-bar">${shown ? `<button type="button" data-qz="next">Question suivante ▶</button>` : `<button type="button" data-qz="show">Voir la réponse (Entrée)</button>`}<button type="button" data-qz="close">✕ Fin</button></div></div>`;
+            };
+            const reveal = () => { clearInterval(timer); shown = true; given = false; draw(); };
+            const next = () => { i++; shown = false; given = false; left = sec; draw(); clearInterval(timer); if (sec && i < qs.length) timer = setInterval(() => { left--; if (left <= 0) reveal(); else { const t = ov.querySelector('.h-tr-qz-time'); if (t) t.textContent = left; } }, 1000); };
+            const point = k => { if (!shown || given || k < 0 || k >= teams.length) return; score[k]++; given = true; draw(); };
+            const key = ev => { if (!alive) return; if (ev.key === 'Escape') { ev.preventDefault(); close(); } else if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); if (i >= qs.length) close(); else if (shown) next(); else reveal(); } else if (/^[1-9]$/.test(ev.key)) point(Number(ev.key) - 1); };
+            document.addEventListener('keydown', key, true);
+            ov.addEventListener('click', ev => { const b = ev.target.closest('[data-qz],[data-qz-pt]'); if (!b) return; if (b.dataset.qzPt != null) return point(Number(b.dataset.qzPt)); ({close, show: reveal, next})[b.dataset.qz]?.(); });
+            ov.requestFullscreen?.().catch(() => {}); i = -1; next();
+        });
+    }
+    F.push({key: 'quiz-tv', group: 'jouer', icon: '📺', title: 'Le quiz du repas', desc: 'Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores.', render: renderQuizTv});
+    ext.tresorQuiz = {quizQuestions};
 })();
