@@ -24,7 +24,10 @@
     const RES = [['eau', '💧', 'Eau potable', 'L'], ['eausale', '🪣', 'Eau de pluie (à filtrer)', 'L'], ['plantes', '🌿', 'Plantes', ''], ['nourriture', '🥫', 'Nourriture', 'rations'], ['essence', '⛽', 'Essence', 'L'], ['bois', '🪵', 'Bois', ''], ['metal', '🔩', 'Métal', ''], ['pieces', '⚙️', 'Pièces', ''], ['tissu', '🧵', 'Tissu', ''], ['medic', '💊', 'Médicaments', ''],
         // les composants (le plus souvent tirés du bric-à-brac qu'on démonte)
         ['clous', '📌', 'Clous et vis', ''], ['corde', '🪢', 'Corde', ''], ['colle', '🧪', 'Colle', ''], ['verre', '🪟', 'Verre', ''], ['plastique', '🧴', 'Plastique', ''], ['caoutchouc', '🛞', 'Caoutchouc', ''],
-        ['cuivre', '🧶', 'Fil de cuivre', ''], ['electro', '🔌', 'Composants électroniques', ''], ['piles', '🔋', 'Piles et batteries', ''], ['charbon', '⚫', 'Charbon', '']];
+        ['cuivre', '🧶', 'Fil de cuivre', ''], ['electro', '🔌', 'Composants électroniques', ''], ['piles', '🔋', 'Piles et batteries', ''], ['charbon', '⚫', 'Charbon', ''],
+        // les chaînes de fabrication (option des réglages) : plantes → fil → tissu → vêtements ; blé → farine → pain
+        ['fil', '🧵', 'Fil à tisser', ''], ['ble', '🌾', 'Blé', ''], ['farine', '🥣', 'Farine', ''], ['vetements', '🧥', 'Vêtements chauds', '']];
+    const CHAIN_RES = ['fil', 'ble', 'farine', 'vetements'];
     /** le bric-à-brac : des objets qui ne servent à rien tels quels, mais qu'on démonte à l'établi pour en tirer des composants → [icône, nom, {ressource: n}, heures] */
     const JUNK = {
         grillepain: ['🍞', 'Grille-pain cassé', {cuivre: 2, metal: 2, electro: 1}, 1], radiocassee: ['📻', 'Vieille radio en panne', {electro: 2, cuivre: 1, plastique: 1, piles: 1}, 1.5],
@@ -112,6 +115,13 @@
         remorque: {ico: '🚛', name: 'Remorque de vélo', cost: {metal: 4, caoutchouc: 2, corde: 2, pieces: 1}, h: 4, carry: 15, with: 'velo', desc: 'Accrochée au vélo réparé : on rapporte 15 de plus (sans vélo, elle ne sert à rien).'},
         refrigerateur: {ico: '🧊', name: 'Garde-manger frais', cost: {metal: 4, plastique: 3, cuivre: 2, electro: 1}, h: 4, cap: {nourriture: 50, plantes: 15}, desc: '+50 rations et +15 plantes de place.'},
         bidons: {ico: '🛢️', name: 'Bidons d’essence', cost: {plastique: 4, metal: 1}, h: 2, cap: {essence: 40}, desc: '+40 L d’essence de place.'},
+        /* ── les chaînes de fabrication (option des réglages « chaînes ») ── */
+        rouet: {ico: '🧶', name: 'Rouet', cost: {bois: 4, corde: 1, clous: 2}, h: 2, base: true, chain: true, prod: {every: 8, in: {plantes: 1}, out: {fil: 2}}, desc: 'Des fibres de plantes, on file : 2 fils toutes les 8 h (1 plante).'},
+        metier: {ico: '🪢', name: 'Métier à tisser', cost: {bois: 6, corde: 2, clous: 3}, h: 4, chain: true, prod: {every: 12, in: {fil: 3}, out: {tissu: 2}}, desc: 'Du fil, on tisse : 2 tissus toutes les 12 h (3 fils).'},
+        tailleur: {ico: '🧥', name: 'Coin du tailleur', cost: {bois: 3, metal: 1, tissu: 2}, h: 3, chain: true, prod: {every: 24, in: {tissu: 2, fil: 1}, out: {vetements: 1}}, desc: 'Des vêtements chauds (2 tissus et 1 fil par jour) : l’hiver, le froid fait bien moins de mal.'},
+        champ: {ico: '🌾', name: 'Champ sous verrière', cost: {bois: 4, plastique: 2, verre: 1}, h: 3, base: true, chain: true, prod: {every: 12, in: {eausale: 1}, out: {ble: 2}, day: true, skill: 'cultiver'}, desc: 'Du blé sous le puits de lumière : 2 toutes les 12 h, le jour (1 L d’eau de pluie).'},
+        moulin: {ico: '⚙️', name: 'Moulin à bras', cost: {metal: 3, pieces: 2, bois: 2}, h: 3, chain: true, prod: {every: 6, in: {ble: 2}, out: {farine: 2}}, desc: 'Le blé devient farine : 2 toutes les 6 h.'},
+        four: {ico: '🍞', name: 'Four à pain', cost: {metal: 3, verre: 1, bois: 4}, h: 4, chain: true, prod: {every: 12, in: {farine: 2, bois: 0.5}, out: {nourriture: 4}, skill: 'cuisiner'}, desc: 'Du pain : 4 rations toutes les 12 h (2 farines et un peu de bois).'},
         armoirepharma: {ico: '🗃️', name: 'Armoire à pharmacie', cost: {bois: 3, verre: 1, clous: 2}, h: 2, cap: {medic: 15, plantes: 15}, desc: '+15 médicaments et +15 plantes de place.'},
     };
     const BASE_PLANS = Object.keys(ITEMS).filter(k => ITEMS[k].base);
@@ -119,26 +129,26 @@
     const TOOLS = {pelle: ['⛏️', 'Pelle', 'creuser deux fois plus vite'], scie: ['🪚', 'Scie', 'construire plus vite'], cle: ['🔧', 'Clé à molette', 'obligatoire pour certains plans'], sac: ['🎒', 'Grand sac', 'rapporter deux fois plus'], lampe: ['🔦', 'Lampe torche', 'marcher de nuit aussi vite que de jour']};
     /** les sortes de lieux : [icône, nom, ressources {clé: [min, max]}, outils qu'on peut y trouver, plans souvent] */
     const PLACE_KINDS = {
-        supermarche: ['🛒', 'Supermarché', {nourriture: [8, 20], eau: [6, 16], plastique: [1, 4], piles: [0, 3]}, [], false, ['bouteilles', 'seau', 'jouets', 'conserves', 'reveil']],
+        supermarche: ['🛒', 'Supermarché', {nourriture: [8, 20], eau: [6, 16], plastique: [1, 4], piles: [0, 3], farine: [0, 4], vetements: [0, 2]}, [], false, ['bouteilles', 'seau', 'jouets', 'conserves', 'reveil']],
         station: ['⛽', 'Station-service', {essence: [8, 24], nourriture: [1, 4], caoutchouc: [0, 3], charbon: [0, 4]}, [], false, ['pneu', 'batterieauto', 'tuyau', 'panneau', 'barbecue']],
         quincaillerie: ['🔩', 'Quincaillerie', {metal: [4, 12], pieces: [1, 5], clous: [4, 12], colle: [1, 4], corde: [1, 4]}, ['cle', 'scie', 'pelle'], false, ['vis', 'cables', 'pots', 'seau', 'tuyau']],
         menuiserie: ['🪵', 'Menuiserie', {bois: [8, 20], clous: [2, 6], colle: [1, 3]}, ['scie'], false, ['palette', 'chaise', 'fenetre']],
         pharmacie: ['💊', 'Pharmacie', {medic: [3, 8], tissu: [1, 4], plantes: [0, 3], verre: [0, 2]}, [], false, ['bocaux', 'bouteilles']],
-        maison: ['🏚️', 'Maison abandonnée', {nourriture: [1, 6], tissu: [2, 6], bois: [1, 5], eau: [1, 5]}, ['sac', 'lampe'], true, ['grillepain', 'tele', 'matelas', 'rideaux', 'lampe', 'parapluie', 'chaise', 'reveil', 'telephone', 'casserole', 'jouets', 'sechecheveux', 'frigo', 'aspirateur', 'montre']],
+        maison: ['🏚️', 'Maison abandonnée', {nourriture: [1, 6], tissu: [2, 6], bois: [1, 5], eau: [1, 5], vetements: [0, 2], fil: [0, 2]}, ['sac', 'lampe'], true, ['grillepain', 'tele', 'matelas', 'rideaux', 'lampe', 'parapluie', 'chaise', 'reveil', 'telephone', 'casserole', 'jouets', 'sechecheveux', 'frigo', 'aspirateur', 'montre']],
         garage: ['🚗', 'Garage', {essence: [4, 12], pieces: [2, 6], metal: [2, 6], caoutchouc: [1, 4], piles: [0, 3]}, ['cle', 'lampe'], false, ['batterieauto', 'pneu', 'velorouille', 'cables', 'tuyau']],
         bibliotheque: ['📚', 'Bibliothèque', {tissu: [0, 2], bois: [0, 3], colle: [0, 2]}, [], true, ['ordinateur', 'lampe', 'chaise', 'sacsable']],
         maisonfam: ['🏡', 'Maison de famille', {nourriture: [2, 6], tissu: [2, 6], bois: [2, 6], medic: [0, 2], plantes: [1, 3]}, ['lampe', 'sac'], true, ['machinecoudre', 'montre', 'radiocassee', 'matelas', 'casserole', 'bocaux', 'guitarecassee']],
         // les lieux en plus (surtout sur les grandes cartes)
         decharge: ['🗑️', 'Décharge', {metal: [2, 6], plastique: [2, 6], bois: [1, 4]}, ['pelle'], false, ['tele', 'frigo', 'ordinateur', 'velorouille', 'pneu', 'matelas', 'grillepain', 'aspirateur', 'palette', 'tuiles', 'fenetre', 'panneau']],
         electromenager: ['🔌', 'Magasin d’électroménager', {electro: [2, 6], cuivre: [2, 6], piles: [1, 4], plastique: [1, 3]}, [], true, ['tele', 'ordinateur', 'telephone', 'radiocassee', 'sechecheveux', 'aspirateur', 'cables']],
-        droguerie: ['🧴', 'Droguerie', {colle: [2, 6], corde: [2, 6], clous: [2, 6], verre: [1, 3], plastique: [1, 3]}, [], false, ['pots', 'vis', 'seau', 'bocaux']],
+        droguerie: ['🧴', 'Droguerie', {colle: [2, 6], corde: [2, 6], clous: [2, 6], verre: [1, 3], plastique: [1, 3], fil: [1, 4]}, [], false, ['pots', 'vis', 'seau', 'bocaux']],
         usine: ['🏭', 'Usine abandonnée', {metal: [6, 14], caoutchouc: [2, 5], cuivre: [1, 4], charbon: [2, 8]}, ['cle'], true, ['cables', 'panneau', 'palette', 'tuyau', 'machinecoudre']],
-        ferme: ['🐄', 'Ferme', {nourriture: [3, 8], plantes: [2, 5], bois: [2, 6], corde: [1, 4], eau: [2, 6]}, ['pelle', 'sac'], true, ['filet', 'seau', 'palette', 'velorouille', 'tuyau']],
+        ferme: ['🐄', 'Ferme', {nourriture: [3, 8], plantes: [2, 5], bois: [2, 6], corde: [1, 4], eau: [2, 6], ble: [2, 8], farine: [0, 3]}, ['pelle', 'sac'], true, ['filet', 'seau', 'palette', 'velorouille', 'tuyau']],
         ecole: ['🏫', 'École', {tissu: [1, 3], colle: [1, 4], plastique: [1, 3], bois: [1, 3]}, [], true, ['sacsable', 'jouets', 'ordinateur', 'chaise', 'lampe']],
         gare: ['🚉', 'Gare', {metal: [3, 8], charbon: [3, 10], nourriture: [0, 3]}, ['lampe'], false, ['panneau', 'cables', 'reveil', 'parapluie']],
         port: ['⚓', 'Port de pêche', {corde: [3, 8], nourriture: [2, 6], caoutchouc: [1, 3], essence: [2, 8]}, [], false, ['filet', 'pneu', 'bouteilles', 'tuyau']],
         hopital: ['🏥', 'Hôpital', {medic: [4, 12], tissu: [2, 6], verre: [1, 3], electro: [0, 3]}, [], true, ['bocaux', 'lampe', 'telephone', 'matelas']],
-        eglise: ['⛪', 'Église', {bois: [2, 5], tissu: [1, 3], verre: [1, 4]}, [], true, ['fenetre', 'chaise', 'rideaux']],
+        eglise: ['⛪', 'Église', {bois: [2, 5], tissu: [1, 3], verre: [1, 4], vetements: [0, 3]}, [], true, ['fenetre', 'chaise', 'rideaux']],
     };
     /* les compétences : [clé, icône, nom, métiers (une partie du mot)] ; 1 = comme tout le monde, 1,5 = le métier, +0,25 l'époque */
     const SKILLS = [
@@ -172,6 +182,43 @@
         ['vaisselle', /vaisselle|plat|soupière|soupiere|marmite|cocotte|cafetière|cafetiere|assiette|bol|moulin/, 'les repas nourrissent davantage'],
         ['souvenir', /./, 'le moral de départ est meilleur']];
     const TALES = ['l’histoire du loup qui avait peur du noir', 'la légende de la dame blanche du moulin', 'le jour où l’oncle a vendu la vache deux fois', 'la grande crue, quand l’eau est montée jusqu’à l’église', 'le bal du 14 juillet où tout le monde s’est rencontré', 'la recette perdue du gâteau de la grand-mère'];
+    /** 🎭 les caractères : [icône, nom, ce que ça change] */
+    const TRAITS = {
+        courageux: ['🦁', 'Courageux·se', 'se défend mieux, se blesse moins dehors'], peureux: ['🐭', 'Peureux·se', 'se défend moins bien, le moral chute quand on frappe à la trappe'],
+        gourmand: ['🍰', 'Gourmand·e', 'a faim plus vite, mais un repas lui remonte le moral'], bricoleur: ['🔧', 'Bricoleur·se', 'construit et répare plus vite'],
+        optimiste: ['🌞', 'Optimiste', 'le moral baisse deux fois moins vite'], ronchon: ['😤', 'Ronchon·ne', 'le moral baisse plus vite, se fâche facilement'],
+        dormeur: ['😴', 'Gros·se dormeur·se', 'a besoin de plus de sommeil'], sociable: ['🤝', 'Sociable', 'se fait vite des amis'],
+        solitaire: ['🌲', 'Solitaire', 'la foule lui pèse ; dehors, se débrouille mieux'], propre: ['🧽', 'Maniaque', 'être sale lui mine le moral']};
+    const TRAIT_KEYS = Object.keys(TRAITS);
+    const TRAIT_OPP = {courageux: ['peureux'], peureux: ['courageux'], optimiste: ['ronchon'], ronchon: ['optimiste'], sociable: ['solitaire'], solitaire: ['sociable']};
+    /** 🎚️ les niveaux de difficulté : usure des besoins, réserves de départ, force des pillards, pannes, ce qui revient en ville */
+    const DIFFS = {facile: {l: '🙂 Facile', decay: 0.8, start: 1.5, raid: 0.7, wear: 0.5, regen: 1.3}, normal: {l: '😐 Normal', decay: 1, start: 1, raid: 1, wear: 1, regen: 1},
+        difficile: {l: '😬 Difficile', decay: 1.15, start: 0.7, raid: 1.25, wear: 1.5, regen: 0.8}, extreme: {l: '💀 Extrême', decay: 1.3, start: 0.5, raid: 1.5, wear: 2, regen: 0.6}};
+    /** 🎬 les scénarios de départ */
+    const SCENARIOS = {classique: ['☢', 'Classique', 'L’abri, la ville, et tenir le plus longtemps possible.'],
+        hiver: ['❄️', 'Hiver nucléaire', 'L’hiver ne finit jamais : du bois ou du charbon pour chauffer, et presque pas de soleil pour les panneaux.'],
+        epidemie: ['🦠', 'Épidémie', 'La fièvre court la ville : on peut l’attraper dehors, et même au bunker. Des médicaments au départ.'],
+        inondation: ['🌊', 'Inondation', 'Il pleut sans arrêt : beaucoup d’eau à filtrer, mais les étages du bas prennent l’eau.'],
+        penurie: ['🥫', 'Pénurie', 'La ville a déjà été pillée : peu de choses dans les lieux, et elles reviennent lentement.'],
+        invasion: ['⚔️', 'Pillards', 'Des bandes rôdent dès le premier jour : portes, pièges et tours de garde.']};
+    /** 🌪️ les catastrophes (option des réglages « météo ») : [icône, nom, ce qui se passe] */
+    const EVENTS = {canicule: ['🥵', 'Canicule', 'on a soif bien plus vite'], tempete: ['🌪️', 'Tempête de poussière', 'l’air s’encrasse, dehors on se blesse, les panneaux solaires ne donnent rien'],
+        inondation: ['🌊', 'Inondation', 'l’eau entre par le bas : une installation de l’étage le plus profond est abîmée'], seisme: ['🫨', 'Tremblement de terre', 'des installations sont abîmées, on peut se blesser'],
+        orage: ['⛈️', 'Orage électrique', 'la foudre grille un appareil électrique'], froid: ['🥶', 'Vague de froid', 'il fait froid même hors de l’hiver : chauffage et vêtements']};
+    /** 📘 le tutoriel (option des réglages) : [ce qu'il faut faire, quand c'est fait] */
+    const TUTO = [
+        ['🚽 Construis des toilettes : clique sur une place libre ＋ du bunker, puis « Toilettes ».', g => has(g, 'toilettes') || g.builds.some(b => b.k === 'toilettes')],
+        ['🔨 Mets quelqu’un sur « Construire » (onglet 👥 Habitants) : la construction avance à l’atelier.', g => has(g, 'toilettes') || g.people.some(p => p.job === 'construire')],
+        ['🛏️ Construis un lit : on dort deux fois mieux.', g => has(g, 'lit') || g.builds.some(b => b.k === 'lit')],
+        ['⛏️ Mets quelqu’un à « Creuser » : un nouvel étage, c’est six places de plus.', g => g.dig.on || g.floors.length > 1],
+        ['🗺️ Envoie quelqu’un en ville : onglet 🗺️ Ville, clique sur un lieu, choisis ce qu’il rapporte, puis « Partir ».', g => g.people.some(p => p.where === 'dehors') || g.city.places.some(pl => pl.visits)],
+        ['♻️ Démonte un objet du bric-à-brac (onglet ♻️ Bric-à-brac) : on en tire des composants.', g => (g.stats.recycled || 0) > 0 || g.recy.length > 0],
+        ['⚗️ Construis un filtre à eau : l’eau de pluie devient potable.', g => has(g, 'filtre') || g.builds.some(b => b.k === 'filtre')],
+        ['🛠️ Regarde l’onglet 🛠️ Atelier : chaque plan dit ce qu’il manque et où le trouver.', g => dayOf(g.t) >= 2 || has(g, 'jeux') || g.builds.length > 1],
+        ['🌙 Tiens jusqu’au jour 3 : surveille les barres de chacun, et le moral.', g => dayOf(g.t) >= 3]];
+    /** 📻 le commerce par radio : la valeur de chaque chose (le marché la fait varier chaque jour) */
+    const VALUE = {eau: 1, nourriture: 1.5, essence: 2, medic: 4, metal: 1.5, pieces: 3, bois: 1, tissu: 1.5, plantes: 1, clous: 0.5, corde: 1, colle: 1, verre: 1.5, plastique: 0.8, caoutchouc: 1.2, cuivre: 2, electro: 3, piles: 2, charbon: 1};
+    const TRADERS = ['le bunker des Combes', 'la ferme fortifiée du Moulin', 'les cheminots de la gare', 'le refuge de l’hôpital', 'les sœurs du couvent', 'la cave du notaire', 'les pêcheurs du port', 'le garage des frères Roux', 'l’abri de l’école', 'la tour de la radio'];
     /** les tailles de carte : [côté, nombre de lieux, nom] (les deux dernières : plus loin, plus de lieux, toutes les sortes) */
     const SIZES = {petite: [9, 6, 'Petite'], moyenne: [13, 10, 'Moyenne'], grande: [17, 16, 'Grande'], tresgrande: [23, 26, 'Très grande'], immense: [31, 40, 'Immense (une région)']};
     const SLOTS = 6, MAX_FLOORS = 6, DIG_HOURS = 30, STEP = 10;
@@ -187,26 +234,32 @@
     const dayOf = t => Math.floor(t / 1440) + 1;
     const isNight = t => { const h = hourOf(t); return h >= 21 || h < 6; };
     const clock = t => `${String(hourOf(t)).padStart(2, '0')}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
-    const items = g => g.floors.flatMap((f, fi) => f.slots.map((k, si) => ({k, fi, si})).filter(x => x.k));
+    /** les installations qui marchent (une installation en panne ne compte plus), avec leur niveau (1 à 3) */
+    const items = g => g.floors.flatMap((f, fi) => f.slots.map((k, si) => ({k, fi, si, lvl: g.lvl?.[`${fi},${si}`] || 1})).filter(x => x.k && !g.broken?.[`${x.fi},${x.si}`]));
+    /** ce qu'apporte le niveau : ×1, ×1,5, ×2 */
+    const lvK = L => 1 + 0.5 * ((L || 1) - 1);
+    const bestLvl = (g, k) => Math.max(1, ...items(g).filter(x => x.k === k).map(x => x.lvl));
+    const opt = (g, k) => !!g.opt?.[k];
+    const DF = g => DIFFS[g.diff] || DIFFS.normal;
     const count = (g, k) => items(g).filter(x => x.k === k).length;
     const has = (g, k) => count(g, k) > 0;
     const alive = g => g.people.filter(p => p.hp > 0);
     function cap(g, r) {
         let c = r === 'eau' || r === 'eausale' ? BASE_CAP + 20 : BASE_CAP;
-        items(g).forEach(({k}) => { const x = ITEMS[k]?.cap; if (!x) return; c += (x.all || 0) + (x[r] || 0); });
+        items(g).forEach(({k, lvl}) => { const x = ITEMS[k]?.cap; if (!x) return; c += ((x.all || 0) + (x[r] || 0)) * lvK(lvl); });
         return c;
     }
     /** les effets des objets posés (un seul objet de chaque sorte compte pour un multiplicateur) */
     const kinds = g => [...new Set(items(g).map(x => x.k))];
-    const mult = (g, prop) => kinds(g).reduce((m, k) => m * (ITEMS[k]?.[prop] || 1), 1);
-    const sumOf = (g, prop) => items(g).reduce((n, {k}) => n + (ITEMS[k]?.[prop] || 0), 0);
+    const mult = (g, prop) => kinds(g).reduce((m, k) => { const v = ITEMS[k]?.[prop]; if (!v) return m; const K = lvK(bestLvl(g, k)); return m * (v >= 1 ? 1 + (v - 1) * K : Math.pow(v, K)); }, 1);
+    const sumOf = (g, prop) => items(g).reduce((n, {k, lvl}) => n + (ITEMS[k]?.[prop] || 0) * lvK(lvl), 0);
     const working = (g, k) => !ITEMS[k]?.power || g.power; // un objet électrique sans courant ne fait rien
     const junkCap = g => JUNK_CAP + sumOf(g, 'junkCap');
     const junkCount = g => Object.values(g.junk || {}).reduce((a, b) => a + b, 0);
     /** les seuils de l'autonomie : quand un habitant va de lui-même boire, manger, aux toilettes… */
     const AUTO = {prudent: {soif: 60, faim: 55, vessie: 50, hygiene: 45, sommeil: 40, nuit: 80}, normal: {soif: 35, faim: 35, vessie: 30, hygiene: 25, sommeil: 25, nuit: 70}, manuel: {soif: 10, faim: 10, vessie: 10, hygiene: 5, sommeil: 8, nuit: 20}};
     const rainPerHour = g => (1 + items(g).reduce((n, {k}) => n + (ITEMS[k]?.rain || 0), 0)) * (has(g, 'recuperateur') ? 3 : 1);
-    const seasonOf = g => SEASONS[((Number(g.season0) || 0) + Math.floor((dayOf(g.t) - 1) / SEASON_DAYS)) % 4][0];
+    const seasonOf = g => g.scen === 'hiver' ? 'hiver' : SEASONS[((Number(g.season0) || 0) + Math.floor((dayOf(g.t) - 1) / SEASON_DAYS)) % 4][0];
     const heir = (g, k) => (g.coffre || []).some(x => x.bonus === k);
     const atBase = g => alive(g).filter(p => p.where === 'base');
     /** la meilleure compétence parmi ceux qui sont au bunker (les bébés ne comptent pas) */
@@ -230,8 +283,19 @@
             junk: {radiocassee: 1, chaise: 1, palette: 1}, recy: [], autoRecy: false, auto: 'normal', batt: 0,
             floors: [{slots: ['radio', 'generateur', 'atelier', null, null, null]}], dig: {on: false, done: 0}, builds: [], people: [], city: null, nextId: 1,
             air: 100, filterUse: 0, filterClog: false, said: {}, cold: false, season0: clamp(Number(opts.season0) || 0, 0, 3), visit: null, preg: null, births: [], feud: null,
-            coffre: [], extras: cleanExtras(opts.extras), lore: cleanLore(opts.lore), letters: cleanLetters(opts.letters), names: cleanNames(opts.names),
-            stats: {deaths: [], visits: {marchand: 0, voyageur: 0, pillards: 0}, raidsWon: 0, raidsLost: 0, stories: 0, found: [], trades: 0}};
+            coffre: [], extras: cleanExtras(opts.extras), lore: cleanLore(opts.lore), letters: cleanLetters(opts.letters), names: cleanNames(opts.names), ruins: cleanRuins(opts.ruins),
+            opt: cleanOpt(opts.opt), diff: DIFFS[opts.diff] ? opts.diff : 'normal', scen: SCENARIOS[opts.scen] ? opts.scen : 'classique',
+            broken: {}, lvl: {}, rel: {}, event: null, market: {d: 0, offers: [], deals: []},
+            stats: {deaths: [], visits: {marchand: 0, voyageur: 0, pillards: 0}, raidsWon: 0, raidsLost: 0, stories: 0, found: [], trades: 0, repairs: 0, events: 0}};
+        g.tuto = g.opt.tuto ? 0 : -1;
+        if (!g.opt.chaines) g.plans = g.plans.filter(k => !ITEMS[k].chain);
+        // les réserves de départ selon la difficulté et le scénario
+        const sk = DF(g).start * (g.scen === 'penurie' ? 0.8 : 1);
+        RES.slice(0, 10).forEach(([r]) => { g.res[r] = Math.round(g.res[r] * sk * 10) / 10; });
+        if (g.scen === 'hiver') { g.res.bois += 10; g.res.charbon += 4; if (g.opt.chaines) g.res.vetements += 2; }
+        if (g.scen === 'epidemie') g.res.medic += 3;
+        if (g.scen === 'inondation') g.res.eausale += 15;
+        if (g.scen === 'invasion') { g.res.metal += 4; g.res.clous += 4; }
         g.people.push(mkPerson(g, opts.me || {name: 'Moi'}, true));
         (opts.team || []).slice(0, 6).forEach(p => g.people.push(mkPerson(g, p, false)));
         // les liens de famille (parents, conjoints, frères et sœurs) entre ceux qui descendent : par numéro de fiche
@@ -249,20 +313,28 @@
         log(g, `Jour 1. La trappe se referme au-dessus de vous : ${g.people.length > 1 ? `${g.people.length} dans le bunker` : 'seul·e dans le bunker'}, à ${g.city.name}.`, 'alerte');
         if (g.coffre.length) log(g, `🧳 Dans le coffre de famille : ${g.coffre.map(c => `« ${c.title} » (${HEIRLOOMS.find(h => h[0] === c.bonus)[2]})`).join(', ')}.`);
         if (g.feud) { const [a, b] = g.feud.map(id => g.people.find(p => p.id === id)); log(g, `⚡ ${a.name} et ${b.name} ne se parlent plus depuis longtemps… Il faudra faire avec.`); }
+        if (g.scen !== 'classique') log(g, `${SCENARIOS[g.scen][0]} ${SCENARIOS[g.scen][1]} : ${SCENARIOS[g.scen][2]}`, 'alerte');
+        marketDay(g);
+        if (g.tuto === 0) log(g, `📘 Tutoriel — ${TUTO[0][0]}`, 'alerte');
         log(g, 'Pour commencer : construire des toilettes et un lit à l’atelier, creuser un étage, et envoyer quelqu’un chercher de quoi tenir. Le bric-à-brac (une vieille radio, une chaise…) se démonte pour en tirer des composants : onglet ♻️ Bric-à-brac.', 'info');
         return g;
     }
-    /** un habitant : ses besoins, son moral, ses compétences (métier et époque) */
+    /** un habitant : ses besoins, son moral, ses compétences (métier et époque), son caractère */
     function mkPerson(g, p, me, more = {}) {
-        const {sk, era, from} = skillsOf(p.occ, p.by);
+        const {sk, era, from} = skillsOf(p.occ, p.by), t1 = pickOne(g, TRAIT_KEYS), t2 = rnd(g) < 0.3 ? pickOne(g, TRAIT_KEYS.filter(k => k !== t1 && !TRAIT_OPP[t1]?.includes(k))) : null;
         return {id: 'h' + g.nextId++, pid: Number(p.pid) || 0, name: String(p.name || 'Sans nom').slice(0, 80), gender: p.gender || '', me: !!me, hp: 100,
             needs: {soif: 85, faim: 80, sommeil: 90, hygiene: 85, vessie: 90}, where: 'base', act: null, job: 'libre', exp: null,
-            mood: 70, sk, era, from, occ: String(p.occ || '').slice(0, 60), by: Number(p.by) || 0, ill: null, kin: [], spouses: [], baby: false, parents: [], ...more};
+            mood: 70, sk, era, from, occ: String(p.occ || '').slice(0, 60), by: Number(p.by) || 0, ill: null, kin: [], spouses: [], baby: false, parents: [],
+            traits: [t1, t2].filter(Boolean), xp: {}, diary: [], ...more};
     }
     const str = (v, n) => String(v ?? '').replace(/\s+/g, ' ').trim().slice(0, n);
     const cleanExtras = l => (Array.isArray(l) ? l : []).slice(0, 20).map(p => ({pid: Number(p?.pid) || 0, name: str(p?.name, 80) || 'Un voyageur', gender: str(p?.gender, 10), occ: str(p?.occ, 60), by: Number(p?.by) || 0}));
     const cleanLore = l => (Array.isArray(l) ? l : []).slice(0, 40).map(x => ({kind: str(x?.kind, 12), title: str(x?.title, 80), text: str(x?.text, 200)})).filter(x => x.title);
     const cleanLetters = l => (Array.isArray(l) ? l : []).slice(0, 20).map(x => ({title: str(x?.title, 80), from: str(x?.from, 60), to: str(x?.to, 60)})).filter(x => x.title);
+    /** les objets de famille qu'on peut retrouver dans les ruines (ceux de la base qui ne sont pas dans le coffre) */
+    const cleanRuins = l => (Array.isArray(l) ? l : []).slice(0, 20).map(o => ({title: str(o?.title, 80), kind: str(o?.kind, 40), description: str(o?.description, 120)})).filter(o => o.title);
+    /** les options des réglages : catastrophes, chaînes de fabrication, tutoriel (absentes = éteintes) */
+    const cleanOpt = o => ({meteo: !!o?.meteo, chaines: !!o?.chaines, tuto: !!o?.tuto});
     const cleanNames = o => ({f: (Array.isArray(o?.f) ? o.f : []).slice(0, 60).map(x => str(x, 30)).filter(Boolean), m: (Array.isArray(o?.m) ? o.m : []).slice(0, 60).map(x => str(x, 30)).filter(Boolean)});
     function makeCity(g, name, size, homes = []) {
         const [n, nb] = SIZES[size], c = Math.floor(n / 2), places = [], used = new Set([`${c},${c}`]);
@@ -288,22 +360,24 @@
     }
     /** ce qu'il y a dans un lieu : une partie seulement de ce qu'on peut y trouver (tiré au hasard, au moins une chose), en quantité au hasard */
     function stockFor(g, res) {
-        const stock = {}, max = {}, keys = Object.keys(res);
-        keys.forEach(r => { const [a, b] = res[r]; max[r] = b; stock[r] = b > 0 && rnd(g) < 0.6 ? rint(g, Math.max(1, a), b) : 0; });
+        const stock = {}, max = {};
+        const keys = Object.keys(res).filter(r => opt(g, 'chaines') || !CHAIN_RES.includes(r)), poor = g.scen === 'penurie' ? 0.5 : 1;
+        keys.forEach(r => { const [a, b] = res[r]; max[r] = b; stock[r] = b > 0 && rnd(g) < 0.6 ? Math.max(1, Math.round(rint(g, Math.max(1, a), b) * poor)) : 0; });
         if (keys.length && !keys.some(r => stock[r] > 0)) { const r = pickOne(g, keys.filter(x => max[x] > 0).length ? keys.filter(x => max[x] > 0) : keys); stock[r] = rint(g, Math.max(1, res[r][0]), Math.max(1, res[r][1])); }
         return {stock, max};
     }
     /** chaque matin, au hasard : ce qui revient (déposé, livré, trouvé par d'autres…) et ce que d'autres survivants ont emporté */
     function regen(g, pl) {
+        const back = 0.4 * DF(g).regen * (g.scen === 'penurie' ? 0.5 : 1);
         Object.keys(pl.max).forEach(r => { const m = pl.max[r]; if (!m) return; const x = rnd(g);
-            if (x < 0.4) pl.stock[r] = Math.min(m, (pl.stock[r] || 0) + rint(g, 1, Math.max(1, Math.ceil(m / 2))));
+            if (x < back) pl.stock[r] = Math.min(m, (pl.stock[r] || 0) + rint(g, 1, Math.max(1, Math.ceil(m / 2))));
             else if (x > 0.93 && pl.stock[r] > 0) pl.stock[r] = Math.floor(pl.stock[r] / 2); });
         if ((pl.junk || []).length < 4 && rnd(g) < 0.35) pl.junk = [...(pl.junk || []), ...junkFor(g, pl.kind, rint(g, 1, 2))];
     }
     /** du bric-à-brac tiré au hasard parmi ce qu'on trouve dans ce genre de lieu */
     function junkFor(g, kind, n) { const l = PLACE_KINDS[kind]?.[5] || []; return l.length ? Array.from({length: n}, () => pickOne(g, l)) : []; }
     /** minutes de marche d'un trajet (aller), 30 min par case ; la nuit ×1,5 sans lampe torche */
-    function travel(g, place, t = g.t, from = null) { const [bx, by] = from ? [from.x, from.y] : g.city.base, d = Math.abs(place.x - bx) + Math.abs(place.y - by); return Math.max(10, Math.round(d * 30 * (isNight(t) && !g.tools.includes('lampe') ? 1.5 : 1) * mult(g, 'travelK'))); }
+    function travel(g, place, t = g.t, from = null) { const [bx, by] = from ? [from.x, from.y] : g.city.base, d = Math.abs(place.x - bx) + Math.abs(place.y - by); return Math.max(10, Math.round(d * 30 * (isNight(t) && !g.tools.includes('lampe') ? 1.5 : 1) * (g.event?.k === 'tempete' ? 1.4 : 1) * mult(g, 'travelK'))); }
 
     /* ═════════ Les ordres du joueur ═════════ */
     /** construire : l'objet est commandé (ressources prises), un habitant « Construire » y travaille à l'atelier → {ok, err} */
@@ -311,24 +385,73 @@
         const it = ITEMS[k]; if (!it || it.fixed) return {ok: false, err: 'Objet inconnu.'};
         if (!g.plans.includes(k)) return {ok: false, err: `Il faut d’abord trouver le plan « ${it.name} ».`};
         if (it.tool && !g.tools.includes(it.tool)) return {ok: false, err: `Il faut l’outil « ${TOOLS[it.tool][1]} ».`};
+        if (it.chain && !opt(g, 'chaines')) return {ok: false, err: 'Les chaînes de fabrication sont désactivées (réglages).'};
         const f = g.floors[fi]; if (!f || si < 0 || si >= SLOTS || f.slots[si] || g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: 'Cette place est prise.'};
         const miss = Object.entries(it.cost || {}).filter(([r, n]) => (g.res[r] || 0) < n);
         if (miss.length) return {ok: false, err: `Il manque : ${miss.map(([r, n]) => `${n - (g.res[r] || 0)} ${RES.find(x => x[0] === r)[2].toLowerCase()}`).join(', ')}.`};
         Object.entries(it.cost || {}).forEach(([r, n]) => { g.res[r] -= n; });
-        g.builds.push({k, fi, si, left: it.h});
-        if (!g.people.some(p => p.hp > 0 && p.where === 'base' && p.job === 'construire')) { const free = alive(g).find(p => p.where === 'base' && p.job === 'libre'); if (free) free.job = 'construire'; }
+        g.builds.push({k, fi, si, left: it.h, tot: it.h});
+        needBuilder(g);
         log(g, `🛠️ ${it.name} commandé à l’atelier (étage ${fi === 0 ? '−1' : '−' + (fi + 1)}).`);
         return {ok: true};
     }
-    function cancelBuild(g, i) { const b = g.builds[i]; if (!b) return; Object.entries(ITEMS[b.k].cost || {}).forEach(([r, n]) => add(g, r, n)); g.builds.splice(i, 1); }
+    function needBuilder(g) { if (!g.people.some(p => p.hp > 0 && p.where === 'base' && p.job === 'construire')) { const free = alive(g).find(p => p.where === 'base' && !p.baby && p.job === 'libre'); if (free) free.job = 'construire'; } }
+    function cancelBuild(g, i) { const b = g.builds[i]; if (!b) return; Object.entries(b.cost || ITEMS[b.k].cost || {}).forEach(([r, n]) => add(g, r, n)); g.builds.splice(i, 1); }
+    /* ═════════ 🔧 Pannes, réparations et améliorations ═════════ */
+    /** une installation peut tomber en panne (pas la radio ni l'atelier ; le groupe électrogène, oui) */
+    const breakable = k => !!ITEMS[k] && (!ITEMS[k].fixed || k === 'generateur');
+    const slotKey = (fi, si) => `${fi},${si}`;
+    /** ce que coûte une réparation : le quart de ce qu'a coûté l'objet (au moins 1 de chaque) */
+    const repairCost = k => Object.fromEntries(Object.entries(ITEMS[k].cost || {metal: 4, pieces: 2}).map(([r, n]) => [r, Math.max(1, Math.ceil(n / 4))]));
+    /** ce qu'apporte une amélioration (sinon, pas d'amélioration possible) */
+    const UPGRADE_PROPS = ['cap', 'carry', 'fun', 'defense', 'prod', 'store', 'recyK', 'burnK', 'travelK', 'healK', 'airK', 'aura', 'junkCap', 'rain'];
+    const upgradable = k => !!ITEMS[k] && !ITEMS[k].fixed && (['lit', 'filtre', 'potager'].includes(k) || UPGRADE_PROPS.some(x => ITEMS[k][x] != null));
+    const upgradeCost = (k, L) => Object.fromEntries(Object.entries(ITEMS[k].cost || {}).map(([r, n]) => [r, Math.max(1, Math.ceil(n * (L === 2 ? 0.75 : 1.25)))]));
+    function payOrErr(g, cost) {
+        const miss = Object.entries(cost).filter(([r, n]) => (g.res[r] || 0) < n);
+        if (miss.length) return `Il manque : ${miss.map(([r, n]) => `${Math.ceil(n - (g.res[r] || 0))} ${resLabel(r)}`).join(', ')}.`;
+        Object.entries(cost).forEach(([r, n]) => { g.res[r] -= n; }); return '';
+    }
+    function breakItem(g, fi, si, why) {
+        const k = g.floors[fi]?.slots[si]; if (!k || !breakable(k) || g.broken[slotKey(fi, si)]) return false;
+        g.broken[slotKey(fi, si)] = true; g.people.forEach(p => { if (p.act?.at && p.act.at[0] === fi && p.act.at[1] === si) p.act = null; });
+        log(g, `🔧 ${ITEMS[k].ico} ${ITEMS[k].name} ${why || 'tombe en panne'} : il faut le réparer (clique dessus) — ${Object.entries(repairCost(k)).map(([r, n]) => `${n} ${resLabel(r)}`).join(', ')}.`, 'alerte');
+        return true;
+    }
+    /** réparer une installation en panne : les pièces tout de suite, puis un habitant « Construire » y passe la moitié du temps de construction → {ok, err} */
+    function orderRepair(g, fi, si) {
+        const k = g.floors[fi]?.slots[si]; if (!k || !g.broken[slotKey(fi, si)]) return {ok: false, err: 'Rien à réparer ici.'};
+        if (g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: 'C’est déjà commandé.'};
+        const cost = repairCost(k), err = payOrErr(g, cost); if (err) return {ok: false, err};
+        const h = Math.max(1, Math.round((ITEMS[k].h || 4) / 2)); g.builds.push({k, fi, si, left: h, tot: h, rep: true, cost}); needBuilder(g);
+        log(g, `🔧 Réparation de ${ITEMS[k].name} commandée.`); return {ok: true};
+    }
+    /** améliorer une installation (niveau 2 puis 3) : ses effets comptent ×1,5 puis ×2 → {ok, err} */
+    function orderUpgrade(g, fi, si) {
+        const k = g.floors[fi]?.slots[si], key = slotKey(fi, si), L = (g.lvl[key] || 1) + 1; if (!k || !upgradable(k)) return {ok: false, err: 'Cette installation ne s’améliore pas.'};
+        if (L > 3) return {ok: false, err: 'Déjà au niveau le plus haut.'}; if (g.broken[key]) return {ok: false, err: 'Il faut d’abord la réparer.'};
+        if (g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: 'C’est déjà commandé.'};
+        const cost = upgradeCost(k, L), err = payOrErr(g, cost); if (err) return {ok: false, err};
+        const h = Math.round((ITEMS[k].h || 3) * (L === 2 ? 1 : 1.5)); g.builds.push({k, fi, si, left: h, tot: h, up: L, cost}); needBuilder(g);
+        log(g, `⬆️ ${ITEMS[k].name} : amélioration au niveau ${L} commandée.`); return {ok: true};
+    }
     /** démonter un objet : on récupère la moitié de ce qu'il a coûté */
     function dismantle(g, fi, si) {
         const k = g.floors[fi]?.slots[si]; if (!k || ITEMS[k].fixed) return false;
-        g.floors[fi].slots[si] = null; Object.entries(ITEMS[k].cost || {}).forEach(([r, n]) => add(g, r, Math.floor(n / 2)));
+        g.floors[fi].slots[si] = null; Object.entries(ITEMS[k].cost || {}).forEach(([r, n]) => add(g, r, Math.floor(n / (g.broken[slotKey(fi, si)] ? 3 : 2))));
+        delete g.broken[slotKey(fi, si)]; delete g.lvl[slotKey(fi, si)]; g.builds = g.builds.filter(b => !(b.fi === fi && b.si === si && (b.rep || b.up)));
         g.people.forEach(p => { if (p.act?.at && p.act.at[0] === fi && p.act.at[1] === si) p.act = null; });
         log(g, `${ITEMS[k].name} démonté.`); return true;
     }
     const JOBS = ['libre', 'creuser', 'construire', 'recycler', 'pedaler', 'garde'];
+    /** ⚙️ les réglages de la partie : options (météo, chaînes, tutoriel) et difficulté */
+    function setOpt(g, k, on) {
+        if (!['meteo', 'chaines', 'tuto'].includes(k)) return; g.opt[k] = !!on;
+        if (k === 'meteo' && !on) g.event = null;
+        if (k === 'chaines' && on) { BASE_PLANS.filter(x => ITEMS[x].chain && !g.plans.includes(x)).forEach(x => g.plans.push(x)); g.city.places.forEach(pl => { const res = PLACE_KINDS[pl.kind][2]; CHAIN_RES.forEach(r => { if (res[r] && pl.max[r] == null) { pl.max[r] = res[r][1]; pl.stock[r] = 0; } }); }); }
+        if (k === 'tuto') { g.tuto = on ? 0 : -1; if (on) log(g, `📘 Tutoriel — ${TUTO[0][0]}`, 'alerte'); }
+    }
+    function setDiff(g, d) { if (DIFFS[d]) { g.diff = d; log(g, `🎚️ Difficulté : ${DIFFS[d].l}.`); } }
     /** ♻️ démonter un objet du bric-à-brac (il passe dans la file de l'établi) → {ok, err} */
     function recycle(g, k) {
         if (!JUNK[k] || !(g.junk[k] > 0)) return {ok: false, err: 'Rien à démonter.'};
@@ -382,7 +505,7 @@
     /** la place qu'un habitant a pour rapporter (le sac, son talent, la charrette) */
     const carryOf = (g, p) => Math.round((g.tools.includes('sac') ? 20 : 10) * (p.sk?.fouiller || 1)) + carryBonus(g);
     /** la place en plus grâce aux objets construits (la remorque ne sert qu'avec le vélo) */
-    const carryBonus = g => kinds(g).reduce((n, k) => n + (ITEMS[k]?.carry && (!ITEMS[k].with || kinds(g).includes(ITEMS[k].with)) ? ITEMS[k].carry * items(g).filter(x => x.k === k).length : 0), 0);
+    const carryBonus = g => { const ks = kinds(g); return items(g).reduce((n, {k, lvl}) => n + (ITEMS[k]?.carry && (!ITEMS[k].with || ks.includes(ITEMS[k].with)) ? Math.round(ITEMS[k].carry * lvK(lvl)) : 0), 0); };
     const loadOf = e => Object.values(e.loot).reduce((a, b) => a + b, 0) + 2 * (e.junk || []).length;
     /** rappeler par la radio (il faut de l'électricité) */
     function recall(g, id) {
@@ -399,20 +522,23 @@
     function newVisit(g) {
         const night = isNight(g.t), day = dayOf(g.t), opts = [['marchand', 0.4]];
         if (g.extras.length && g.people.length < 10) opts.push(['voyageur', 0.3]);
-        if (day >= 3) opts.push(['pillards', night ? 0.6 : 0.3]);
+        if (day >= 3 || g.scen === 'invasion') opts.push(['pillards', (night ? 0.6 : 0.3) * (g.scen === 'invasion' ? 2.5 : 1)]);
         let r = rnd(g) * opts.reduce((a, o) => a + o[1], 0), k = opts[0][0]; for (const [kk, w] of opts) { if ((r -= w) <= 0) { k = kk; break; } }
         const v = {k, until: g.t + 120};
         if (k === 'marchand') { const goods = ['nourriture', 'eau', 'essence', 'medic', 'metal', 'pieces', 'bois', 'tissu', 'plantes']; const give = pickOne(g, goods); const want = pickOne(g, goods.filter(x => x !== give));
             v.give = {r: give, n: rint(g, 4, 10)}; v.want = {r: want, n: rint(g, 3, 8)}; log(g, `🔔 On frappe à la trappe : un marchand propose ${v.give.n} ${resLabel(give)} contre ${v.want.n} ${resLabel(want)}.`, 'visite'); }
         if (k === 'voyageur') { v.person = g.extras.shift(); log(g, `🔔 On frappe à la trappe : ${v.person.name}${v.person.occ ? `, ${v.person.occ.toLowerCase()}` : ''}, demande à entrer.`, 'visite'); }
-        if (k === 'pillards') { v.demand = {}; ['nourriture', 'eau', 'essence'].forEach(r => { const n = Math.ceil((g.res[r] || 0) * 0.3); if (n) v.demand[r] = n; }); v.strength = rint(g, 4, 9) + Math.floor(day / 5);
+        if (k === 'pillards') { v.demand = {}; ['nourriture', 'eau', 'essence'].forEach(r => { const n = Math.ceil((g.res[r] || 0) * 0.3); if (n) v.demand[r] = n; }); v.strength = Math.round((rint(g, 4, 9) + Math.floor(day / 5)) * DF(g).raid);
+            atBase(g).filter(p => trait(p, 'peureux')).forEach(p => { p.mood = clamp((p.mood ?? 70) - 8, 0, 100); });
             log(g, `🔔 Des pillards tapent sur la trappe : ils veulent ${Object.entries(v.demand).map(([r, n]) => `${n} ${resLabel(r)}`).join(', ') || 'tout ce que vous avez'}.`, 'alerte'); }
         g.stats.visits[k]++; g.visit = v;
     }
     /** la force de défense du bunker : porte, pièges, et ceux qui sont là (le tour de garde compte double) */
-    const defense = g => items(g).reduce((a, {k}) => a + (ITEMS[k]?.defense || 0), 0) + atBase(g).filter(p => !p.baby).reduce((a, p) => a + (p.sk?.defendre || 1) * (p.job === 'garde' ? 2 : 1) * (p.ill ? 0.5 : 1), 0);
+    const defense = g => items(g).reduce((a, {k, lvl}) => a + (ITEMS[k]?.defense || 0) * lvK(lvl), 0) + atBase(g).filter(p => !p.baby).reduce((a, p) => a + (p.sk?.defendre || 1) * (p.job === 'garde' ? 2 : 1) * (p.ill ? 0.5 : 1) * (trait(p, 'courageux') ? 1.3 : trait(p, 'peureux') ? 0.7 : 1), 0);
+    const trait = (p, k) => (p.traits || []).includes(k);
     function fight(g) {
         const v = g.visit, win = defense(g) + rint(g, 0, 4) >= v.strength;
+        atBase(g).filter(p => !p.baby).forEach(p => gainXp(g, p, 'defendre', 2));
         if (win) { g.stats.raidsWon++; const drop = rint(g, 1, 3); add(g, 'metal', drop); log(g, `🛡️ Les pillards repartent bredouilles ! Ils ont laissé ${drop} métal en fuyant.`, 'alerte'); }
         else {
             g.stats.raidsLost++; const took = [];
@@ -450,16 +576,18 @@
         const newHour = hourOf(g.t) !== prevHour, hr = hourOf(g.t), season = seasonOf(g);
         // ⚡ l'électricité : d'abord ce qui ne coûte rien (soleil, vent, pédales), puis l'essence (un bon réparateur la fait durer)
         const wasPower = g.power;
-        const free = has(g, 'solaire') && hr >= 7 && hr < 19 && !g.weather.rain ? 'soleil' : has(g, 'eolienne') && g.wind ? 'vent' : has(g, 'dynamo') && atBase(g).some(p => p.doing === 'pedaler') ? 'pedales' : '';
+        const sun = g.scen === 'hiver' ? hr >= 11 && hr < 14 : hr >= 7 && hr < 19;
+        const free = has(g, 'solaire') && sun && !g.weather.rain && g.event?.k !== 'tempete' ? 'soleil' : has(g, 'eolienne') && g.wind ? 'vent' : has(g, 'dynamo') && atBase(g).some(p => p.doing === 'pedaler') ? 'pedales' : '';
         const burn = (has(g, 'econome') ? 0.125 : 0.25) * mult(g, 'burnK') * h / best(g, 'reparer'), store = sumOf(g, 'store');
         g.batt = clamp(Number(g.batt) || 0, 0, store);
         if (free) { g.power = true; g.powerSrc = free; g.batt = Math.min(store, g.batt + h); }
-        else if (g.powerOn && g.res.essence >= burn) { g.res.essence = Math.max(0, g.res.essence - burn); g.power = true; g.powerSrc = 'essence'; g.batt = Math.min(store, g.batt + h * 0.5); }
+        else if (g.powerOn && has(g, 'generateur') && g.res.essence >= burn) { g.res.essence = Math.max(0, g.res.essence - burn); g.power = true; g.powerSrc = 'essence'; g.batt = Math.min(store, g.batt + h * 0.5); }
         else if (g.powerOn && g.batt >= h) { g.batt -= h; g.power = true; g.powerSrc = 'batteries'; }
         else { g.power = false; g.powerSrc = ''; }
-        if (wasPower && !g.power) log(g, g.powerOn ? '⚡ Plus d’essence : le groupe électrogène s’arrête, le bunker est dans le noir.' : '⚡ Groupe électrogène éteint.', 'alerte');
+        if (wasPower && !g.power) log(g, g.powerOn && !has(g, 'generateur') ? '⚡ Le groupe électrogène est en panne : le bunker est dans le noir. Il faut le réparer.' : g.powerOn ? '⚡ Plus d’essence : le groupe électrogène s’arrête, le bunker est dans le noir.' : '⚡ Groupe électrogène éteint.', 'alerte');
         if (!wasPower && g.power) { log(g, '⚡ Le courant revient.'); g.radioQueue.splice(0).forEach(m => log(g, m + ' (message reçu en retard)', 'radio')); }
         if (newHour) hourly(g, hr, season);
+        if (g.tuto >= 0 && g.tuto < TUTO.length && TUTO[g.tuto][1](g)) { g.tuto++; log(g, g.tuto < TUTO.length ? `📘 Bien joué ! Étape ${g.tuto + 1} / ${TUTO.length} — ${TUTO[g.tuto][0]}` : '📘 Tutoriel terminé : tu sais tout ce qu’il faut. Bonne chance !', 'alerte'); if (g.tuto >= TUTO.length) g.tuto = -1; }
         alive(g).filter(p => p.where === 'base').forEach(p => person(g, p, h));
         alive(g).filter(p => p.where === 'dehors').forEach(p => outside(g, p, h));
         if (g.dig.on && g.dig.done >= DIG_HOURS) {
@@ -468,7 +596,11 @@
             log(g, `⛏️ Un nouvel étage est creusé : étage −${g.floors.length}.`, 'alerte');
         }
         const b = g.builds[0];
-        if (b && b.left <= 0) {
+        if (b && b.left <= 0 && (b.rep || b.up)) {
+            g.builds.shift(); const key = slotKey(b.fi, b.si);
+            if (g.floors[b.fi]?.slots[b.si] === b.k) { if (b.rep) { delete g.broken[key]; g.stats.repairs = (g.stats.repairs || 0) + 1; log(g, `✅ ${ITEMS[b.k].name} est réparé.`, 'alerte'); } else { g.lvl[key] = b.up; log(g, `⬆️ ${ITEMS[b.k].name} passe au niveau ${b.up}.`, 'alerte'); } }
+            if (!g.builds.length) g.people.forEach(p => { if (p.job === 'construire') p.job = 'libre'; });
+        } else if (b && b.left <= 0) {
             g.builds.shift(); g.floors[b.fi].slots[b.si] = b.k; log(g, `✅ ${ITEMS[b.k].name} est prêt.`, 'alerte');
             if (ITEMS[b.k].map) { g.city.places.forEach(pl => { pl.seen = true; }); log(g, '🗺️ Tous les lieux de la ville sont marqués sur la carte.'); }
             if (!g.builds.length) g.people.forEach(p => { if (p.job === 'construire') p.job = 'libre'; });
@@ -482,10 +614,10 @@
         // 🌧️ la pluie (plus au printemps, moins l'été) remplit l'eau à filtrer
         const rainK = season === 'printemps' ? 1.5 : season === 'ete' ? 0.5 : 1;
         if (g.weather.rain && g.t >= g.weather.until) { g.weather.rain = false; log(g, '🌤️ La pluie s’arrête.'); }
-        else if (!g.weather.rain && rnd(g) < 0.06 * rainK) { g.weather = {rain: true, until: g.t + rint(g, 2, 8) * 60}; log(g, `🌧️ Il pleut : ${has(g, 'cuve') ? 'les bidons du toit et les cuves' : 'les bidons du toit'} se remplissent (eau à filtrer).`); }
+        else if (!g.weather.rain && rnd(g) < 0.06 * rainK * (g.scen === 'inondation' ? 3 : 1)) { g.weather = {rain: true, until: g.t + rint(g, 2, g.scen === 'inondation' ? 14 : 8) * 60}; log(g, `🌧️ Il pleut : ${has(g, 'cuve') ? 'les bidons du toit et les cuves' : 'les bidons du toit'} se remplissent (eau à filtrer).`); }
         if (g.weather.rain) add(g, 'eausale', rainPerHour(g));
         // ⚗️ le filtre : 3 L par heure et par filtre ; 1 tissu tous les 30 L pour le nettoyer
-        const nf = count(g, 'filtre');
+        const nf = items(g).filter(x => x.k === 'filtre').reduce((n, x) => n + lvK(x.lvl), 0);
         if (nf) {
             if (g.filterClog && g.res.tissu >= 1) { g.res.tissu -= 1; g.filterClog = false; g.filterUse = 0; log(g, '⚗️ Le filtre est nettoyé (1 tissu) : il marche de nouveau.'); }
             if (!g.filterClog) {
@@ -498,14 +630,15 @@
         g.air = clamp(g.air - (0.6 + 0.25 * atBase(g).length) * kinds(g).filter(k => working(g, k)).reduce((m, k) => m * (ITEMS[k].airK || 1), 1), 0, 100);
         if (g.air < 30 && !g.said.air) { g.said.air = true; log(g, '🌀 L’air devient lourd : le conduit d’aération est encrassé. Quelqu’un de libre ira le nettoyer.', 'alerte'); }
         // 🌱 le potager : des rations toutes les 8 h, des plantes à midi (deux fois plus avec un bon jardinier)
-        const np = count(g, 'potager'), green = best(g, 'cultiver') >= 1.5 ? 2 : 1;
-        if (np && hr % 8 === 0 && g.power) for (let i = 0; i < np; i++) if (takeWater(g, 1)) add(g, 'nourriture', green);
+        const pots = items(g).filter(x => x.k === 'potager'), np = pots.reduce((n, x) => n + lvK(x.lvl), 0), green = best(g, 'cultiver') >= 1.5 ? 2 : 1;
+        if (pots.length && hr % 8 === 0 && g.power) pots.forEach(x => { if (takeWater(g, 1)) add(g, 'nourriture', green * lvK(x.lvl)); });
         if (np && hr === 12) add(g, 'plantes', np * green);
         // 🏭 ce que fabriquent les objets (serre, clapier, alambic, laboratoire…) : leurs besoins d'abord, leur production ensuite
         produce(g, hr);
         // ❄️ l'hiver : le poêle brûle du bois (ou la chaudière du charbon), sinon on a froid
-        g.cold = false;
-        if (season === 'hiver') {
+        g.cold = false; g.warm = opt(g, 'chaines') && g.res.vetements >= atBase(g).filter(p => !p.baby).length && atBase(g).length > 0;
+        if (season === 'hiver' || g.event?.k === 'froid') {
+            if (hr === 6 && opt(g, 'chaines') && g.res.vetements > 0) g.res.vetements = Math.max(0, g.res.vetements - 0.1 * atBase(g).length); // les vêtements s'usent
             if (has(g, 'poele') && g.res.bois >= 0.25) g.res.bois -= 0.25;
             else if (has(g, 'chaudiere') && g.res.charbon >= 0.25) g.res.charbon -= 0.25;
             else { g.cold = true; if (!g.said.cold) { g.said.cold = true; log(g, `❄️ Il fait froid dans le bunker${has(g, 'poele') ? ' : plus de bois pour le poêle' : ' : il faudrait un poêle à bois'}. On dort mal, le moral baisse.`, 'alerte'); } }
@@ -515,19 +648,106 @@
         if (hr === 20) evening(g);
         // 🔔 la trappe
         if (g.visit && g.t >= g.visit.until) { if (g.visit.k === 'pillards') fight(g); else { log(g, g.visit.k === 'marchand' ? '🚪 Personne n’a répondu : le marchand est reparti.' : `🚪 Personne n’a répondu : ${g.visit.person.name} est reparti·e.`); g.visit = null; } }
-        else if (!g.visit && dayOf(g.t) >= 2 && rnd(g) < 0.035) newVisit(g);
+        else if (!g.visit && (dayOf(g.t) >= 2 || g.scen === 'invasion') && rnd(g) < 0.035) newVisit(g);
         // 👶 une naissance
         if (g.preg && g.t >= g.preg.due) birth(g);
         else if (hr === 22) family(g);
         // les lieux de la ville changent un peu chaque jour, à 6 h, au hasard
         if (hr === 6) g.city.places.forEach(pl => regen(g, pl));
+        // 🌪️ les catastrophes (option), 🔧 l'usure, 📻 le commerce par radio, 🎭 l'entente et le journal, 🦠 l'épidémie
+        if (opt(g, 'meteo')) weatherEvents(g, season); else if (g.event) g.event = null;
+        wear(g);
+        trading(g, hr);
+        if (hr === 21) { relations(g); diaryDay(g); }
+        if (g.scen === 'epidemie' && hr === 9 && rnd(g) < 0.12) { const v = pickOne(g, atBase(g).filter(p => !p.ill && !p.baby)); if (v) { sicken(g, v, 'fievre'); log(g, `🦠 ${v.name} a attrapé la fièvre qui court.`, 'alerte'); diary(g, v, 'J’ai de la fièvre. Pourvu que ce ne soit rien.'); } }
     }
+    /* ═════════ 🌪️ Les catastrophes ═════════ */
+    function weatherEvents(g, season) {
+        if (g.event && g.t >= g.event.until) { log(g, `${EVENTS[g.event.k][0]} ${EVENTS[g.event.k][1]} : c’est fini.`); g.event = null; }
+        if (g.event) { if (g.event.k === 'tempete') { g.air = clamp(g.air - 3, 0, 100); alive(g).filter(p => p.where === 'dehors').forEach(p => hurt(g, p, 1.5)); } return; }
+        if (dayOf(g.t) < 2 || rnd(g) >= 0.01) return;
+        const w = [['canicule', season === 'ete' ? 4 : 0.3], ['tempete', 1], ['inondation', (season === 'printemps' ? 1.5 : 0.6) * (g.scen === 'inondation' ? 4 : 1)], ['seisme', 0.5], ['orage', g.weather.rain ? 2 : 0.6], ['froid', season === 'hiver' ? 0 : season === 'automne' ? 1.5 : 0.5]];
+        let r = rnd(g) * w.reduce((a, x) => a + x[1], 0), k = w[0][0]; for (const [kk, n] of w) { if ((r -= n) <= 0) { k = kk; break; } }
+        startEvent(g, k);
+    }
+    function startEvent(g, k) {
+        const E = EVENTS[k]; if (!E) return; g.stats.events = (g.stats.events || 0) + 1;
+        log(g, `${E[0]} ${E[1]} ! ${E[2][0].toUpperCase()}${E[2].slice(1)}.`, 'alerte');
+        const breakables = fl => items(g).filter(x => breakable(x.k) && (fl == null || x.fi === fl));
+        if (['canicule', 'tempete', 'froid'].includes(k)) g.event = {k, until: g.t + rint(g, 8, 36) * 60};
+        if (k === 'orage') { g.event = {k, until: g.t + rint(g, 3, 8) * 60}; const el = breakables().filter(x => ITEMS[x.k].power || ['generateur', 'solaire', 'eolienne', 'batteries', 'radio'].includes(x.k)); if (el.length) { const x = pickOne(g, el); breakItem(g, x.fi, x.si, 'est grillé par la foudre'); } }
+        if (k === 'inondation') { add(g, 'eausale', 15); const l = breakables(g.floors.length - 1); if (l.length) { const x = pickOne(g, l); breakItem(g, x.fi, x.si, 'est noyé'); } }
+        if (k === 'seisme') { for (let i = 0; i < rint(g, 1, 2); i++) { const l = breakables(); if (l.length) { const x = pickOne(g, l); breakItem(g, x.fi, x.si, 'est abîmé par la secousse'); } }
+            g.dig.done = Math.max(0, g.dig.done - 3); if (rnd(g) < 0.4) { const v = pickOne(g, atBase(g).filter(p => !p.baby)); if (v) { hurt(g, v, 10); if (v.hp > 0) sicken(g, v, 'blessure'); log(g, `🩹 ${v.name} est blessé·e par une chute de gravats.`, 'alerte'); } } }
+        atBase(g).forEach(p => diary(g, p, `${E[0]} ${E[1]} aujourd’hui. ${pickOne(g, ['J’ai eu peur.', 'On s’est serré les coudes.', 'Encore une épreuve.', 'Il faudra réparer.'])}`));
+    }
+    /** 🔧 l'usure : chaque installation peut tomber en panne (plus souvent les machines, et selon la difficulté) */
+    function wear(g) {
+        if (dayOf(g.t) < 2) return; const K = 0.0012 * DF(g).wear, low = g.floors.length - 1;
+        items(g).forEach(x => { if (!breakable(x.k)) return; const e = ITEMS[x.k]; if (rnd(g) < K * (e.power || e.prod || x.k === 'generateur' ? 1.6 : 1) * (g.scen === 'inondation' && low > 0 && x.fi === low ? 2 : 1)) breakItem(g, x.fi, x.si); });
+    }
+    /* ═════════ 📻 Le commerce par radio ═════════ */
+    function marketDay(g) {
+        const m = g.market, goods = Object.keys(VALUE); m.d = dayOf(g.t); m.price = Object.fromEntries(goods.map(r => [r, Math.round((0.7 + rnd(g) * 0.7) * 100) / 100]));
+        m.offers = Array.from({length: rint(g, 3, 5)}, (_, i) => { const give = pickOne(g, goods), want = pickOne(g, goods.filter(x => x !== give)), n = rint(g, 3, 10);
+            return {id: `o${m.d}_${i}`, who: pickOne(g, TRADERS), give: {r: give, n}, want: {r: want, n: Math.max(1, Math.round(n * VALUE[give] * m.price[give] / (VALUE[want] * m.price[want]) * 1.15))}}; });
+    }
+    function trading(g, hr) {
+        const m = g.market;
+        if (has(g, 'radio') && hr === 7 && m.d !== dayOf(g.t)) { marketDay(g); if (g.power) log(g, `📻 Le marché de la radio : ${m.offers.length} offres aujourd’hui (onglet Radio).`); }
+        m.deals.filter(d => g.t >= d.t).forEach(d => { if (d.ok) { const put = add(g, d.r, d.n); log(g, `🚚 Un messager de ${d.who} apporte ${put} ${resLabel(d.r)}.`, 'alerte'); } else log(g, `😠 Le messager de ${d.who} n’est jamais venu… On s’est fait avoir.`, 'alerte'); });
+        m.deals = m.deals.filter(d => g.t < d.t);
+    }
+    /** accepter une offre du marché : on paie tout de suite, un messager apporte la marchandise quelques heures plus tard → {ok, err} */
+    function trade(g, id) {
+        if (!has(g, 'radio') || !g.power) return {ok: false, err: 'Il faut la radio et de l’électricité.'};
+        const m = g.market, i = m.offers.findIndex(o => o.id === id); if (i < 0) return {ok: false, err: 'Cette offre n’existe plus.'};
+        const o = m.offers[i]; if ((g.res[o.want.r] || 0) < o.want.n) return {ok: false, err: `Il manque ${Math.ceil(o.want.n - (g.res[o.want.r] || 0))} ${resLabel(o.want.r)}.`};
+        g.res[o.want.r] -= o.want.n; m.offers.splice(i, 1); m.deals.push({t: g.t + rint(g, 3, 8) * 60, r: o.give.r, n: o.give.n, who: o.who, ok: rnd(g) > 0.05}); g.stats.trades++;
+        log(g, `📻 Marché conclu avec ${o.who} : ${o.want.n} ${resLabel(o.want.r)} envoyés ; ${o.give.n} ${resLabel(o.give.r)} arriveront par messager.`); return {ok: true};
+    }
+    /* ═════════ 🎭 L'entente, 📈 les progrès, 📔 le journal ═════════ */
+    const relKey = (a, b) => [a.id, b.id].sort().join('|');
+    const relOf = (g, a, b) => g.rel?.[relKey(a, b)] || 0;
+    function relations(g) {
+        const here = atBase(g).filter(p => !p.baby);
+        here.forEach((a, i) => here.slice(i + 1).forEach(b => {
+            const k = relKey(a, b), before = g.rel[k] || 0;
+            const d = rint(g, -2, 3) + 2 * (trait(a, 'sociable') + trait(b, 'sociable')) - (trait(a, 'ronchon') + trait(b, 'ronchon')) + (a.job === b.job && a.job !== 'libre' ? 1 : 0)
+                - (g.feud && g.feud.includes(a.id) && g.feud.includes(b.id) ? 3 : 0) - ((trait(a, 'solitaire') || trait(b, 'solitaire')) && here.length > 4 ? 1 : 0);
+            const now = clamp(before + d, -50, 50); g.rel[k] = now;
+            if (before < 25 && now >= 25) { log(g, `🤝 ${a.name} et ${b.name} sont devenu·e·s ami·e·s.`, 'histoire'); diary(g, a, `${b.name} est devenu·e un·e vrai·e ami·e.`); diary(g, b, `${a.name} est devenu·e un·e vrai·e ami·e.`); }
+            if (before > -25 && now <= -25) { log(g, `😠 ${a.name} et ${b.name} ne se supportent plus.`, 'alerte'); diary(g, a, `Je ne supporte plus ${b.name}.`); diary(g, b, `Je ne supporte plus ${a.name}.`); }
+        }));
+    }
+    /** progresser en pratiquant : 12 h de travail pour passer de ×1 à ×1,1, un peu plus ensuite (jusqu'à ×2,5) */
+    function gainXp(g, p, k, h) {
+        if (!p || p.baby || !SKILL_KEYS.includes(k) || !(h > 0)) return; p.xp = p.xp || {}; p.xp[k] = (p.xp[k] || 0) + h;
+        const cur = p.sk[k] || 1, need = 12 + 32 * (cur - 1);
+        if (p.xp[k] >= need && cur < 2.5) { p.xp[k] -= need; p.sk[k] = Math.round(Math.min(2.5, cur + 0.1) * 100) / 100; const S = SKILLS.find(x => x[0] === k);
+            log(g, `📈 ${p.name} progresse : ${S[1]} ${S[2].toLowerCase()} ×${p.sk[k].toFixed(1).replace('.', ',')}.`); diary(g, p, `J’ai fait des progrès pour ${S[2].toLowerCase()} : ça vient tout seul, maintenant.`); }
+    }
+    function diary(g, p, txt) { if (!p || p.baby) return; p.diary = Array.isArray(p.diary) ? p.diary : []; p.diary.unshift({d: dayOf(g.t), t: g.t, txt: String(txt).slice(0, 300)}); if (p.diary.length > 40) p.diary.length = 40; }
+    /** une ligne par jour et par habitant : comment il se sent, ce qu'il a fait */
+    function diaryDay(g) {
+        atBase(g).filter(p => !p.baby).forEach(p => {
+            const m = p.mood ?? 70;
+            const feel = pickOne(g, m >= 75 ? ['Bonne journée.', 'Je me sens bien, malgré tout.', 'On rit encore, ici.'] : m >= 45 ? ['Une journée comme les autres.', 'On tient.', 'Le temps est long sous terre.'] : m >= 20 ? ['Dure journée.', 'J’ai le cafard.', 'Je pense à ceux d’en haut.'] : ['Je n’en peux plus.', 'Tout me pèse.', 'Je voudrais revoir le ciel.']);
+            const did = {creuser: 'J’ai creusé toute la journée, j’ai mal au dos.', construire: 'J’ai travaillé à l’atelier.', recycler: 'J’ai démonté de vieux objets : on y trouve de tout.', garde: 'J’ai monté la garde près de la trappe.', pedaler: 'J’ai pédalé pour la lumière.'}[p.job] || '';
+            const low = NEEDS.filter(([k]) => p.needs[k] < 20).map(([, , l]) => l.toLowerCase());
+            const more = [g.cold ? (g.warm ? 'Il fait froid, heureusement il y a les vêtements chauds.' : 'Il fait si froid…') : '', p.ill ? 'Je suis malade.' : '', low.length ? `Ça ne va pas fort côté ${low.join(', ')}.` : ''];
+            diary(g, p, [feel, did, ...more].filter(Boolean).join(' '));
+        });
+    }
+
     function produce(g, hr) {
         kinds(g).forEach(k => { const P = ITEMS[k].prod; if (!P || !working(g, k) || (P.every > 1 && hr % P.every !== 0) || (P.day && isNight(g.t))) return;
-            const n = count(g, k), ins = Object.entries(P.in || {}), k2 = P.skill && best(g, P.skill) >= 1.5 ? 2 : 1;
-            for (let i = 0; i < n; i++) {
+            if (ITEMS[k].chain && !opt(g, 'chaines')) return;
+            const all = items(g).filter(x => x.k === k), ins = Object.entries(P.in || {}), k2 = P.skill && best(g, P.skill) >= 1.5 ? 2 : 1;
+            for (const x of all) {
                 if (!ins.every(([r, q]) => (g.res[r] || 0) >= q)) { if (!g.said['prod_' + k]) { g.said['prod_' + k] = true; log(g, `${ITEMS[k].ico} ${ITEMS[k].name} : il manque ${ins.filter(([r, q]) => (g.res[r] || 0) < q).map(([r]) => resLabel(r)).join(', ')} pour fonctionner.`); } return; }
-                ins.forEach(([r, q]) => { g.res[r] -= q; }); Object.entries(P.out).forEach(([r, q]) => add(g, r, q * k2)); g.said['prod_' + k] = false;
+                ins.forEach(([r, q]) => { g.res[r] -= q; }); Object.entries(P.out).forEach(([r, q]) => add(g, r, q * k2 * lvK(x.lvl))); g.said['prod_' + k] = false;
+                if (P.skill) { const w = atBase(g).filter(o => !o.baby).sort((a, b) => (b.sk?.[P.skill] || 1) - (a.sk?.[P.skill] || 1))[0]; if (w) gainXp(g, w, P.skill, Math.min(P.every, 4)); }
             }
         });
     }
@@ -541,7 +761,13 @@
         g.stats.stories++;
         const what = lore ? (lore.kind === 'recipe' ? `raconte la recette « ${lore.title} »` : lore.kind === 'song' ? `chante « ${lore.title} »` : `raconte le souvenir « ${lore.title} »`) : `raconte ${pickOne(g, TALES)}`;
         const quote = lore?.text ? ` : « ${lore.text.slice(0, 140)}${lore.text.length > 140 ? '…' : ''} »` : '';
-        log(g, `📖 Le soir, ${teller.name} ${what}${quote}. Le moral remonte.`, 'histoire');
+        log(g, `📖 Le soir, ${teller.name} ${what}${quote}. Le moral remonte.`, 'histoire'); gainXp(g, teller, 'raconter', 1.5);
+        // 👵 l'aîné·e apprend son métier aux autres
+        const adults = here.filter(p => !p.baby), elder = adults.slice().sort((a, b) => (a.by || 9999) - (b.by || 9999))[0];
+        const sk = elder && SKILL_KEYS.filter(k => (elder.sk?.[k] || 1) >= 1.5).sort((a, b) => elder.sk[b] - elder.sk[a])[0];
+        const learner = sk && adults.filter(o => o !== elder && (o.sk?.[sk] || 1) < elder.sk[sk] - 0.2).sort((a, b) => (a.sk[sk] || 1) - (b.sk[sk] || 1))[0];
+        if (learner) { gainXp(g, learner, sk, 2); log(g, `👵 ${elder.name} apprend à ${learner.name} à ${SKILLS.find(x => x[0] === sk)[2].toLowerCase()}.`); }
+        adults.forEach((a, i) => adults.slice(i + 1).forEach(b => { if (relOf(g, a, b) <= -25 && rnd(g) < 0.3) { a.mood = clamp(a.mood - 5, 0, 100); b.mood = clamp(b.mood - 5, 0, 100); log(g, `💢 ${a.name} et ${b.name} se disputent à table.`); } }));
         if (g.feud) {
             const [a, b] = g.feud.map(id => g.people.find(p => p.id === id));
             if (a && b && a.hp > 0 && b.hp > 0 && a.where === 'base' && b.where === 'base' && rnd(g) < 0.25) { a.mood = clamp(a.mood - 6, 0, 100); b.mood = clamp(b.mood - 6, 0, 100); log(g, `⚡ ${a.name} et ${b.name} se disputent encore (de vieilles histoires de famille).`); }
@@ -565,14 +791,14 @@
         const last = (f?.name || m.name).split(/\s+/).filter(w => w.length > 1 && w === w.toUpperCase()).join(' ') || (f?.name || m.name).split(/\s+/).slice(-1)[0];
         const baby = mkPerson(g, {name: `${first} ${last}`, gender}, false, {baby: true, parents: [m.id, f?.id].filter(Boolean), needs: {soif: 90, faim: 90, sommeil: 90, hygiene: 90, vessie: 90}, mood: 90});
         baby.kin = [m.id, f?.id].filter(Boolean); [m, f].forEach(x => { if (x && !x.kin.includes(baby.id)) x.kin.push(baby.id); });
-        g.people.push(baby); g.births.push({name: baby.name, m: m.name, f: f?.name || '', day: dayOf(g.t)});
+        g.people.push(baby); g.births.push({name: baby.name, m: m.name, f: f?.name || '', day: dayOf(g.t)}); [m, f].forEach(x => diary(g, x, `${baby.name} est né·e ! Le plus beau jour sous terre.`));
         atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) + 15, 0, 100); });
         log(g, `👶 ${baby.name} est né·e au bunker ! ${m.name}${f ? ` et ${f.name}` : ''} sont aux anges.`, 'alerte');
     }
     function hurt(g, p, n) {
         const was = p.hp; p.hp = clamp(p.hp - n, 0, 100);
         if (p.hp <= 0 && was > 0) {
-            p.act = null; p.ill = null; g.stats.deaths.push({name: p.name, day: dayOf(g.t)});
+            p.act = null; p.ill = null; g.stats.deaths.push({name: p.name, day: dayOf(g.t)}); alive(g).forEach(o => diary(g, o, `${p.name} nous a quitté·e·s. Je n’arrive pas à y croire.`));
             alive(g).forEach(o => { o.mood = clamp((o.mood ?? 70) - 20, 0, 100); });
             log(g, p.where === 'dehors' ? `📻 Plus de nouvelles de ${p.name}…` : `☠️ ${p.name} est mort·e.`, 'alerte');
         }
@@ -597,13 +823,16 @@
         if (g.res.plantes >= 1) {
             const healer = atBase(g).filter(o => !o.baby && o !== p).sort((a, b) => (b.sk?.soigner || 1) - (a.sk?.soigner || 1))[0] || p;
             const rec = g.lore.filter(x => x.kind === 'recipe');
-            g.res.plantes -= 1; p.ill.left -= 8 * (healer.sk?.soigner || 1); p.ill.treated = true;
+            g.res.plantes -= 1; p.ill.left -= 8 * (healer.sk?.soigner || 1); p.ill.treated = true; gainXp(g, healer, 'soigner', 3);
             log(g, `🌿 ${healer === p ? p.name : healer.name} prépare un remède de grand-mère${rec.length ? ` (d’après « ${pickOne(g, rec).title} »)` : ''} contre ${what}${healer === p ? '' : ` de ${p.name}`}.`);
         }
     }
     function decay(g, p, h, k = 1, sleeping = false) {
         const summer = seasonOf(g) === 'ete';
-        NEEDS.forEach(([n]) => { if (sleeping && n === 'sommeil') return; const x = n === 'soif' && summer ? 1.3 : n === 'sommeil' && g.air < 30 ? 1.3 : 1; p.needs[n] = clamp(p.needs[n] - DECAY[n] * h * k * x * (sleeping ? 0.5 : 1), 0, 100); });
+        const D = DF(g).decay, hot = g.event?.k === 'canicule' ? 1.6 : 1;
+        NEEDS.forEach(([n]) => { if (sleeping && n === 'sommeil') return; const x = n === 'soif' && summer ? 1.3 : n === 'sommeil' && g.air < 30 ? 1.3 : 1;
+            const t = n === 'soif' ? hot : n === 'faim' && trait(p, 'gourmand') ? 1.25 : n === 'sommeil' && trait(p, 'dormeur') ? 1.25 : 1;
+            p.needs[n] = clamp(p.needs[n] - DECAY[n] * h * k * x * t * D * (sleeping ? 0.5 : 1), 0, 100); });
     }
     /** où se trouve un objet libre (pour le dessin et les lits) */
     function freeItem(g, k, p) {
@@ -615,15 +844,20 @@
     function mood(g, p, h) {
         const near = [...p.kin, ...(p.spouses || [])].some(id => { const o = g.people.find(x => x.id === id); return o && o.hp > 0 && o.where === 'base'; });
         let dm = -0.3 * (heir(g, 'bijou') ? 0.8 : 1) * (near ? 0.75 : 1);
-        if (g.cold) dm -= 1.5; if (g.air < 30) dm -= 0.5; if (NEEDS.some(([k]) => p.needs[k] < 15)) dm -= 1; if (p.ill) dm -= 0.5;
+        if (g.cold) dm -= g.warm ? 0.5 : 1.5; if (g.air < 30) dm -= 0.5; if (NEEDS.some(([k]) => p.needs[k] < 15)) dm -= 1; if (p.ill) dm -= 0.5;
+        if (trait(p, 'propre') && p.needs.hygiene < 30) dm -= 0.5;
+        if (trait(p, 'solitaire') && atBase(g).length > 4) dm -= 0.1;
+        if (dm < 0) dm *= trait(p, 'optimiste') ? 0.5 : trait(p, 'ronchon') ? 1.4 : 1;
+        // les amis autour remontent le moral, ceux qu'on ne supporte plus le minent
+        if (p.where === 'base' && !p.baby) { const others = atBase(g).filter(o => o !== p && !o.baby); dm += 0.1 * Math.min(3, others.filter(o => relOf(g, p, o) >= 25).length) - 0.15 * others.filter(o => relOf(g, p, o) <= -25).length; }
         p.mood = clamp((p.mood ?? 70) + dm * h, 0, 100);
         if (p.mood <= 5 && !p.baby && g.res.nourriture >= 3 && rnd(g) < 0.04 * h) { g.res.nourriture -= 3; log(g, `😫 ${p.name} craque et renverse 3 rations. Il faudrait lui remonter le moral (jeux, musique, histoires).`, 'alerte'); }
     }
     function person(g, p, h) {
         const sleeping = p.act?.k === 'dormir';
         decay(g, p, h, p.baby ? 0.6 : 1, sleeping); mood(g, p, h);
-        kinds(g).forEach(k => { const a = ITEMS[k].aura; if (!a || !working(g, k)) return; Object.entries(a).forEach(([n, v]) => { if (n === 'mood') p.mood = clamp((p.mood ?? 70) + v * h, 0, 100); else if (p.needs[n] != null) p.needs[n] = clamp(p.needs[n] + v * h, 0, 100); }); });
-        if (sleeping) { p.needs.sommeil = clamp(p.needs.sommeil + (p.act.at ? 16 : 8) * h * (g.cold ? 0.6 : 1) * (heir(g, 'textile') ? 1.1 : 1), 0, 100); if (p.needs.sommeil >= 100 && !isNight(g.t) || p.needs.soif < 12 || p.needs.vessie < 8) { p.act = null; } }
+        kinds(g).forEach(k => { const a = ITEMS[k].aura; if (!a || !working(g, k)) return; const K = lvK(bestLvl(g, k)); Object.entries(a).forEach(([n, v0]) => { const v = v0 * K; if (n === 'mood') p.mood = clamp((p.mood ?? 70) + v * h, 0, 100); else if (p.needs[n] != null) p.needs[n] = clamp(p.needs[n] + v * h, 0, 100); }); });
+        if (sleeping) { p.needs.sommeil = clamp(p.needs.sommeil + (p.act.at ? 16 * lvK(g.lvl?.[p.act.at.join()]) : 8) * h * (g.cold && !g.warm ? 0.6 : 1) * (heir(g, 'textile') ? 1.1 : 1), 0, 100); if (p.needs.sommeil >= 100 && !isNight(g.t) || p.needs.soif < 12 || p.needs.vessie < 8) { p.act = null; } }
         health(g, p, h); if (p.hp <= 0) return;
         if (p.act && p.act.k !== 'dormir' && g.t >= p.act.until) { finish(g, p); p.act = null; }
         if (p.act) return;
@@ -638,17 +872,18 @@
         if (p.mood < 20 && p.job !== 'libre') { if (!p.sulk) { p.sulk = true; log(g, `😞 ${p.name} n’a plus le moral et refuse de travailler.`, 'alerte'); } p.doing = ''; return; }
         if (p.mood >= 30) p.sulk = false;
         const mm = moodMult(p);
-        if (p.job === 'creuser' && g.floors.length < MAX_FLOORS) { g.dig.on = true; g.dig.done += h * (g.tools.includes('pelle') ? 2 : 1) * (p.sk?.construire || 1) * mm; p.act = null; p.doing = 'creuser'; return; }
-        if (p.job === 'construire' && g.builds.length && g.power && has(g, 'atelier')) { g.builds[0].left -= h * (g.tools.includes('scie') ? 1.5 : 1) * (p.sk?.construire || 1) * (heir(g, 'outil') ? 1.2 : 1) * mm; p.doing = 'construire'; return; }
+        if (p.job === 'creuser' && g.floors.length < MAX_FLOORS) { g.dig.on = true; g.dig.done += h * (g.tools.includes('pelle') ? 2 : 1) * (p.sk?.construire || 1) * mm; gainXp(g, p, 'construire', h * 0.5); p.act = null; p.doing = 'creuser'; return; }
+        if (p.job === 'construire' && g.builds.length && g.power && has(g, 'atelier')) { const b0 = g.builds[0], sk0 = b0.rep ? 'reparer' : 'construire';
+            b0.left -= h * (g.tools.includes('scie') ? 1.5 : 1) * Math.max(p.sk?.construire || 1, b0.rep ? p.sk?.reparer || 1 : 0) * (heir(g, 'outil') ? 1.2 : 1) * (trait(p, 'bricoleur') ? 1.2 : 1) * mm; gainXp(g, p, sk0, h); p.doing = 'construire'; return; }
         if (p.job === 'recycler') {
             if (!g.recy.length && g.autoRecy) { const k = JUNK_KEYS.find(x => (g.junk[x] || 0) > 0); if (k) recycle(g, k); }
-            if (g.recy.length) { g.recy[0].left -= h * mult(g, 'recyK') * (p.sk?.reparer || 1) * mm; p.doing = 'recycler'; if (g.recy[0].left <= 0) recycled(g, g.recy.shift(), p); return; }
+            if (g.recy.length) { g.recy[0].left -= h * mult(g, 'recyK') * (p.sk?.reparer || 1) * (trait(p, 'bricoleur') ? 1.2 : 1) * mm; gainXp(g, p, 'reparer', h); p.doing = 'recycler'; if (g.recy[0].left <= 0) recycled(g, g.recy.shift(), p); return; }
         }
         if (p.job === 'pedaler' && has(g, 'dynamo')) { p.needs.sommeil = clamp(p.needs.sommeil - 2 * h, 0, 100); p.doing = 'pedaler'; return; }
-        if (p.job === 'garde') { p.doing = 'garde'; return; }
+        if (p.job === 'garde') { gainXp(g, p, 'defendre', h * 0.4); p.doing = 'garde'; return; }
         // 🎲 les loisirs, quand le moral n'est pas au mieux
         const fun = kinds(g).filter(k => ITEMS[k].fun && working(g, k)).sort((a, b) => ITEMS[b].fun - ITEMS[a].fun)[0];
-        if (p.mood < 75 && fun) { p.act = {k: 'jouer', until: g.t + 60, at: atOf(freeItem(g, fun, p)), fun: ITEMS[fun].fun, music: fun === 'phono'}; p.doing = ''; return; }
+        if (p.mood < 75 && fun) { p.act = {k: 'jouer', until: g.t + 60, at: atOf(freeItem(g, fun, p)), fun: ITEMS[fun].fun * lvK(bestLvl(g, fun)), music: fun === 'phono'}; p.doing = ''; return; }
         p.doing = '';
     }
     /** commencer à combler un besoin → vrai si c'est possible */
@@ -664,7 +899,7 @@
         const a = p.act; if (!a) return;
         if (a.k === 'boire') { if (g.res.eau >= 1) { g.res.eau -= 1; p.needs.soif = clamp(p.needs.soif + 55, 0, 100); } }
         if (a.k === 'boiresale') { if (g.res.eausale >= 1) { g.res.eausale -= 1; p.needs.soif = clamp(p.needs.soif + 55, 0, 100); if (!p.ill && rnd(g) < 0.2) { sicken(g, p, 'fievre'); log(g, `🤒 ${p.name} a bu de l’eau de pluie sans la filtrer : la fièvre monte. (Un filtre à eau éviterait ça.)`, 'alerte'); } } }
-        if (a.k === 'manger') { if (g.res.nourriture >= 1) { g.res.nourriture -= 1; p.needs.faim = clamp(p.needs.faim + 50 * best(g, 'cuisiner') * (heir(g, 'vaisselle') ? 1.2 : 1), 0, 100); } }
+        if (a.k === 'manger') { if (g.res.nourriture >= 1) { g.res.nourriture -= 1; if (trait(p, 'gourmand')) p.mood = clamp((p.mood ?? 70) + 3, 0, 100); p.needs.faim = clamp(p.needs.faim + 50 * best(g, 'cuisiner') * (heir(g, 'vaisselle') ? 1.2 : 1), 0, 100); } }
         if (a.k === 'toilettes') p.needs.vessie = 100;
         if (a.k === 'coin') { p.needs.vessie = 100; p.needs.hygiene = clamp(p.needs.hygiene - 15, 0, 100); p.mood = clamp((p.mood ?? 70) - 3, 0, 100); if (!g.said.coin) { g.said.coin = true; log(g, `🚽 Pas de toilettes : ${p.name} se soulage dans un coin… Il faudrait en construire.`); } }
         if (a.k === 'douche') { if (takeWater(g, 3)) p.needs.hygiene = 100; }
@@ -700,14 +935,19 @@
             pl.known = {d: dayOf(g.t), stock: Object.fromEntries(Object.entries(pl.stock).filter(([, n]) => n > 0)), junk: [...(pl.junk || [])]};
             const tool = pl.tools.find(x => !g.tools.includes(x));
             if (tool && rnd(g) < 0.5) { e.found.push('t:' + tool); pl.tools = pl.tools.filter(x => x !== tool); }
-            const missing = FOUND_PLANS.filter(k => !g.plans.includes(k) && !g.people.some(o => o.exp?.found.includes('p:' + k)));
+            const missing = FOUND_PLANS.filter(k => (opt(g, 'chaines') || !ITEMS[k].chain) && !g.plans.includes(k) && !g.people.some(o => o.exp?.found.includes('p:' + k)));
             if (pl.plans > 0 && missing.length && rnd(g) < 0.7) { e.found.push('p:' + pickOne(g, missing)); pl.plans--; }
             // ✉️ une lettre de la famille, retrouvée dans une maison ou une bibliothèque
             if (['maison', 'maisonfam', 'bibliotheque'].includes(pl.kind) && g.letters.length && rnd(g) < (pl.home ? 0.6 : 0.12)) e.letters = [...(e.letters || []), g.letters.shift()];
             // 🩹 une mauvaise chute, un chien errant… (moins souvent pour qui sait se défendre)
-            if (rnd(g) < 0.08 / (p.sk?.defendre || 1)) e.hurt = true;
+            if (rnd(g) < 0.08 / (p.sk?.defendre || 1) * (trait(p, 'courageux') ? 0.6 : trait(p, 'solitaire') ? 0.8 : 1) * (g.event?.k === 'tempete' ? 2 : 1)) e.hurt = true;
+            // 🦠 l'épidémie : on peut l'attraper dehors
+            if (g.scen === 'epidemie' && rnd(g) < 0.12) e.sick = true;
+            // 🧳 un objet de famille retrouvé dans les ruines
+            if (g.ruins.length && ['maison', 'maisonfam', 'eglise', 'bibliotheque', 'ecole', 'decharge', 'hopital'].includes(pl.kind) && rnd(g) < (pl.home ? 0.5 : 0.12)) e.heir = g.ruins.shift();
+            gainXp(g, p, 'fouiller', 2);
             const got = [...Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r)}`), ...(e.junk.length ? [`${e.junk.length} objet${e.junk.length > 1 ? 's' : ''} à démonter (${[...new Set(e.junk)].map(k => JUNK[k][1].toLowerCase()).join(', ')})`] : [])];
-            const extra = [...e.found.map(f => f[0] === 't' ? `l’outil « ${TOOLS[f.slice(2)][1]} »` : `le plan « ${ITEMS[f.slice(2)].name} »`), ...(e.letters || []).map(() => 'une lettre de la famille')];
+            const extra = [...e.found.map(f => f[0] === 't' ? `l’outil « ${TOOLS[f.slice(2)][1]} »` : `le plan « ${ITEMS[f.slice(2)].name} »`), ...(e.letters || []).map(() => 'une lettre de la famille'), ...(e.heir ? [`« ${e.heir.title} », un objet de la famille`] : [])];
             // l'étape suivante du parcours, s'il reste de la place (sinon on rentre)
             const next = e.route && e.i + 1 < e.route.length && carryOf(g, p) - loadOf(e) > 0 ? g.city.places.find(x => x.id === e.route[e.i + 1].id) : null;
             radio(g, `📻 ${p.name} : « ${got.length || extra.length ? `J’ai trouvé ${[...got, ...extra].join(', ')}` : 'Rien du tout, l’endroit est vide'}.${e.hurt ? ' Je me suis fait mal en route…' : ''} ${next ? `Je continue vers ${next.name}.` : e.route && e.i + 1 < e.route.length ? 'Mon sac est plein : je rentre.' : 'Je rentre.'} »`);
@@ -722,6 +962,12 @@
         log(g, `🏠 ${p.name} est rentré·e.${(e.junk || []).length ? ` ♻️ ${e.junk.length} objet${e.junk.length > 1 ? 's' : ''} à démonter.` : ''}${e.found.length ? ` Nouveau : ${e.found.map(f => f[0] === 't' ? TOOLS[f.slice(2)][1] : 'plan « ' + ITEMS[f.slice(2)].name + ' »').join(', ')}.` : ''}${lost.length ? ` Plus de place pour ${lost.join(', ')} : laissé dehors (construis des étagères ou du stockage).` : ''}`, 'alerte');
         (e.letters || []).forEach(L => { atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 8, 0, 100); }); g.stats.found.push(`lettre « ${L.title} »`); log(g, `✉️ ${p.name} rapporte une lettre retrouvée : « ${L.title} »${L.from ? `, de ${L.from}` : ''}${L.to ? ` à ${L.to}` : ''}. Tout le monde veut la voir.`, 'histoire'); });
         if (e.hurt) { sicken(g, p, 'blessure'); log(g, `🩹 ${p.name} est blessé·e : il faut la soigner (médicaments, ou plantes pour un remède).`, 'alerte'); }
+        if (e.sick && !p.ill) { sicken(g, p, 'fievre'); log(g, `🦠 ${p.name} rentre avec la fièvre qui court en ville.`, 'alerte'); }
+        if (e.heir) { const t = `${e.heir.title} ${e.heir.kind} ${e.heir.description}`.toLowerCase(), bonus = HEIRLOOMS.find(([, re]) => re.test(t))[0];
+            if (g.coffre.length < 10) g.coffre.push({title: e.heir.title, bonus}); atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 10, 0, 100); }); g.stats.found.push(`objet de famille « ${e.heir.title} »`);
+            log(g, `🧳 ${p.name} rapporte « ${e.heir.title} », un objet de la famille retrouvé dans les ruines ! Il rejoint le coffre (${HEIRLOOMS.find(h => h[0] === bonus)[2]}).`, 'histoire'); }
+        const names = (e.route || []).map(st => g.city.places.find(x => x.id === st.id)?.name).filter(Boolean);
+        diary(g, p, `Je suis allé·e ${names.length ? `à ${names.join(', puis à ')}` : 'en ville'}. ${Object.keys(e.loot).some(r => e.loot[r] > 0) ? `J’ai rapporté ${Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r)}`).join(', ')}.` : 'Rien de bien utile.'}${e.heir ? ` Et surtout : « ${e.heir.title} » !` : ''}${e.hurt ? ' Je me suis blessé·e.' : ''}`);
         p.where = 'base'; p.exp = null; p.act = null;
     }
     /** avancer de n minutes (par pas de 10) */
@@ -737,7 +983,8 @@
         g.tools = (g.tools || []).filter(k => TOOLS[k]); g.plans = [...new Set([...BASE_PLANS, ...(g.plans || []).filter(k => ITEMS[k] && !ITEMS[k].fixed)])];
         g.floors = g.floors.slice(0, MAX_FLOORS).map(f => ({slots: Array.from({length: SLOTS}, (_, i) => (ITEMS[f?.slots?.[i]] ? f.slots[i] : null))}));
         if (!g.floors.length) g.floors = [{slots: ['radio', 'generateur', 'atelier', null, null, null]}];
-        g.builds = (g.builds || []).filter(b => ITEMS[b.k] && g.floors[b.fi] && b.si >= 0 && b.si < SLOTS).map(b => ({k: b.k, fi: b.fi, si: b.si, left: Number(b.left) || 0}));
+        g.builds = (g.builds || []).filter(b => ITEMS[b.k] && g.floors[b.fi] && b.si >= 0 && b.si < SLOTS).map(b => ({k: b.k, fi: b.fi, si: b.si, left: Number(b.left) || 0, tot: Number(b.tot) || ITEMS[b.k].h,
+            ...(b.rep ? {rep: true} : {}), ...([2, 3].includes(b.up) ? {up: b.up} : {}), ...(b.cost && typeof b.cost === 'object' ? {cost: Object.fromEntries(Object.entries(b.cost).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, clamp(num(n), 0, 99)]))} : {})}));
         const ids = l => (Array.isArray(l) ? l : []).map(x => String(x).slice(0, 12)).slice(0, 12);
         g.people = g.people.slice(0, 10).map((p, i) => {
             const sk = Object.fromEntries(SKILL_KEYS.map(k => [k, clamp(num(p.sk?.[k], 1), 0.5, 2.5)]));
@@ -747,7 +994,9 @@
                 job: JOBS.includes(p.job) ? p.job : 'libre', ...(AUTO[p.auto] ? {auto: p.auto} : {}), exp: p.where === 'dehors' && p.exp ? {route: (Array.isArray(p.exp.route) ? p.exp.route : [{id: p.exp.place}]).slice(0, 6).map(stepOf), i: clamp(Math.round(num(p.exp.i)), 0, 5), junk: (Array.isArray(p.exp.junk) ? p.exp.junk : []).filter(k => JUNK[k]).slice(0, 40), place: String(p.exp.place), phase: ['aller', 'fouille', 'retour'].includes(p.exp.phase) ? p.exp.phase : 'retour', from: Number(p.exp.from) || 0, until: Number(p.exp.until) || 0, loot: Object.fromEntries(Object.entries(p.exp.loot || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])), found: (p.exp.found || []).map(String).filter(f => (f[0] === 't' && TOOLS[f.slice(2)]) || (f[0] === 'p' && ITEMS[f.slice(2)])), letters: cleanLetters(p.exp.letters), ...(p.exp.hurt ? {hurt: true} : {})} : null,
                 mood: clamp(num(p.mood, 70), 0, 100), sk, era: ['ancien', 'moderne'].includes(p.era) ? p.era : '', from: str(p.from, 80), occ: str(p.occ, 60), by: Number(p.by) || 0,
                 ill: p.ill && ['fievre', 'blessure'].includes(p.ill.k) ? {k: p.ill.k, left: clamp(num(p.ill.left, 12), 0, 72), treated: !!p.ill.treated} : null,
-                kin: ids(p.kin), spouses: ids(p.spouses), baby: !!p.baby, parents: ids(p.parents).slice(0, 2), sulk: !!p.sulk, doing: ['creuser', 'construire', 'recycler', 'pedaler', 'garde'].includes(p.doing) ? p.doing : ''};
+                kin: ids(p.kin), spouses: ids(p.spouses), baby: !!p.baby, parents: ids(p.parents).slice(0, 2), sulk: !!p.sulk,
+                traits: (Array.isArray(p.traits) ? p.traits : []).filter(k => TRAITS[k]).slice(0, 2), xp: Object.fromEntries(SKILL_KEYS.filter(k => num(p.xp?.[k]) > 0).map(k => [k, clamp(num(p.xp[k]), 0, 500)])),
+                diary: (Array.isArray(p.diary) ? p.diary : []).slice(0, 40).map(x => ({d: Math.max(1, Math.round(num(x?.d, 1))), t: num(x?.t), txt: str(x?.txt, 300)})).filter(x => x.txt), doing: ['creuser', 'construire', 'recycler', 'pedaler', 'garde'].includes(p.doing) ? p.doing : ''};
         });
         if (!g.people.length) throw new Error('Cette partie n’a aucun habitant.');
         const pids = new Set(g.people.map(p => p.id));
@@ -775,15 +1024,28 @@
         g.preg = g.preg && pids.has(String(g.preg.m)) ? {m: String(g.preg.m), f: String(g.preg.f || ''), due: num(g.preg.due)} : null;
         g.births = (Array.isArray(g.births) ? g.births : []).slice(0, 20).map(b => ({name: str(b?.name, 80), m: str(b?.m, 80), f: str(b?.f, 80), day: Number(b?.day) || 1}));
         g.feud = Array.isArray(g.feud) && g.feud.length === 2 && g.feud.every(id => pids.has(String(id))) ? g.feud.map(String) : null;
-        g.coffre = (Array.isArray(g.coffre) ? g.coffre : []).slice(0, 3).map(x => ({title: str(x?.title, 80), bonus: HEIRLOOMS.some(h => h[0] === x?.bonus) ? x.bonus : 'souvenir'}));
+        g.coffre = (Array.isArray(g.coffre) ? g.coffre : []).slice(0, 10).map(x => ({title: str(x?.title, 80), bonus: HEIRLOOMS.some(h => h[0] === x?.bonus) ? x.bonus : 'souvenir'}));
+        // les réglages et ce qui est venu avec : pannes, niveaux, entente, catastrophe en cours, marché, tutoriel, objets à retrouver
+        g.opt = cleanOpt(g.opt); g.diff = DIFFS[g.diff] ? g.diff : 'normal'; g.scen = SCENARIOS[g.scen] ? g.scen : 'classique'; g.ruins = cleanRuins(g.ruins);
+        const slotOk = key => { const m = /^(\d),(\d)$/.exec(key); return !!m && !!g.floors[+m[1]]?.slots[+m[2]]; };
+        g.broken = Object.fromEntries(Object.keys(g.broken && typeof g.broken === 'object' ? g.broken : {}).filter(k => slotOk(k) && breakable(g.floors[+k[0]].slots[+k[2]])).map(k => [k, true]));
+        g.lvl = Object.fromEntries(Object.entries(g.lvl && typeof g.lvl === 'object' ? g.lvl : {}).filter(([k]) => slotOk(k)).map(([k, v]) => [k, clamp(Math.round(num(v, 1)), 1, 3)]).filter(([, v]) => v > 1));
+        g.rel = Object.fromEntries(Object.entries(g.rel && typeof g.rel === 'object' ? g.rel : {}).filter(([k]) => k.split('|').length === 2 && k.split('|').every(id => pids.has(id))).map(([k, v]) => [k, clamp(Math.round(num(v)), -50, 50)]));
+        g.event = g.event && EVENTS[g.event.k] ? {k: g.event.k, until: num(g.event.until)} : null;
+        g.tuto = Number.isInteger(g.tuto) && g.tuto >= 0 && g.tuto < TUTO.length ? g.tuto : -1;
+        const M = g.market || {}, offer = o => o && RES_KEYS.includes(o.give?.r) && RES_KEYS.includes(o.want?.r);
+        g.market = {d: Math.max(0, Math.round(num(M.d))), price: Object.fromEntries(Object.keys(VALUE).map(r => [r, clamp(num(M.price?.[r], 1), 0.5, 2)])),
+            offers: (Array.isArray(M.offers) ? M.offers : []).filter(offer).slice(0, 6).map(o => ({id: str(o.id, 20), who: str(o.who, 60), give: {r: o.give.r, n: clamp(Math.round(num(o.give.n)), 1, 99)}, want: {r: o.want.r, n: clamp(Math.round(num(o.want.n)), 1, 99)}})),
+            deals: (Array.isArray(M.deals) ? M.deals : []).filter(d => RES_KEYS.includes(d?.r)).slice(0, 10).map(d => ({t: num(d.t), r: d.r, n: clamp(Math.round(num(d.n)), 0, 99), who: str(d.who, 60), ok: d.ok !== false}))};
         g.extras = cleanExtras(g.extras); g.lore = cleanLore(g.lore); g.letters = cleanLetters(g.letters); g.names = cleanNames(g.names);
         const S = g.stats || {};
         g.stats = {deaths: (Array.isArray(S.deaths) ? S.deaths : []).slice(0, 20).map(d => ({name: str(d?.name, 80), day: Number(d?.day) || 1})), visits: Object.fromEntries(['marchand', 'voyageur', 'pillards'].map(k => [k, Math.max(0, num(S.visits?.[k]))])),
-            recycled: Math.max(0, num(S.recycled)), raidsWon: Math.max(0, num(S.raidsWon)), raidsLost: Math.max(0, num(S.raidsLost)), stories: Math.max(0, num(S.stories)), trades: Math.max(0, num(S.trades)), found: (Array.isArray(S.found) ? S.found : []).slice(-40).map(x => str(x, 100))};
+            recycled: Math.max(0, num(S.recycled)), repairs: Math.max(0, num(S.repairs)), events: Math.max(0, num(S.events)), raidsWon: Math.max(0, num(S.raidsWon)), raidsLost: Math.max(0, num(S.raidsLost)), stories: Math.max(0, num(S.stories)), trades: Math.max(0, num(S.trades)), found: (Array.isArray(S.found) ? S.found : []).slice(-40).map(x => str(x, 100))};
         return g;
     }
 
     root.LCNDA_BUNKER = {rainPerHour, SKILLS, SKILL_KEYS, skillsOf, SEASONS, SEASON_DAYS, seasonOf, HEIRLOOMS, JOBS, answerVisit, defense, NEEDS, DECAY, RES, RES_KEYS, ITEMS, TOOLS, PLACE_KINDS, SIZES, SLOTS, MAX_FLOORS, DIG_HOURS, BASE_PLANS, FOUND_PLANS,
+        TRAITS, TRAIT_KEYS, DIFFS, SCENARIOS, EVENTS, TUTO, VALUE, CHAIN_RES, setOpt, setDiff, trade, marketDay, startEvent, breakItem, orderRepair, orderUpgrade, repairCost, upgradeCost, upgradable, breakable, gainXp, relOf, lvK, relations,
         JUNK, JUNK_KEYS, AUTO, stockFor, regen, stepOf, carryBonus, recycle, setAuto, orderNeed, routeTime, carryOf, junkCap, junkCount, mult, sumOf, working,
         newGame, step, run, orderBuild, cancelBuild, dismantle, setJob, send, recall, travel, check, cap, has, count, items, alive, hourOf, dayOf, isNight, clock};
 })();

@@ -236,4 +236,58 @@ t('✋ on choisit combien on prend (4 bois sur 5) ; la place pour rapporter est 
     B.send(k, kp.id, pk.id); guard = 0; while (kp.where !== 'base' && guard++ < 400) B.run(k, 30); assert.equal(pk.stock.bois, 50 - cap, `pas plus de ${cap}`);
     const c = B.check(JSON.parse(JSON.stringify(g))); assert.equal(c.city.places.find(x => x.id === a.id).known.stock.bois, 1);
 });
+t('🔧 pannes : une installation en panne ne sert plus ; on la répare (des pièces, un peu de travail) ; le groupe en panne = plus de courant', () => {
+    const g = game(); g.floors[0].slots[3] = 'toilettes'; assert.ok(B.has(g, 'toilettes'));
+    assert.ok(B.breakItem(g, 0, 3)); assert.equal(B.has(g, 'toilettes'), false); assert.ok(g.log[0].txt.includes('réparer'));
+    fill(g); const r = B.orderRepair(g, 0, 3); assert.ok(r.ok, r.err); assert.equal(B.orderRepair(g, 0, 3).ok, false, 'pas deux fois');
+    g.people.forEach(p => { p.job = 'construire'; }); B.run(g, 6 * 60); assert.ok(B.has(g, 'toilettes'), 'réparé'); assert.equal(g.stats.repairs, 1);
+    const h = game(); B.breakItem(h, 0, 1); B.run(h, 20); assert.equal(h.power, false, 'groupe en panne');
+    assert.equal(B.breakItem(h, 0, 0), false, 'la radio ne tombe pas en panne');
+    const w = game({diff: 'extreme'}); w.floors[0].slots[3] = 'potager'; w.floors[0].slots[4] = 'douche'; let broke = false; for (let i = 0; i < 40 && !broke; i++) { B.run(w, 24 * 60); broke = Object.keys(w.broken).length > 0; } assert.ok(broke, 'l’usure finit par casser quelque chose');
+});
+t('⬆️ améliorer une installation : niveau 2 puis 3, ses effets comptent ×1,5 puis ×2', () => {
+    const g = game(); fill(g, 60); g.floors[0].slots[3] = 'brouette'; const base = B.carryOf(g, g.people[1]);
+    assert.ok(B.upgradable('brouette') && !B.upgradable('radio')); const r = B.orderUpgrade(g, 0, 3); assert.ok(r.ok, r.err);
+    g.people.forEach(p => { p.job = 'construire'; }); B.run(g, 8 * 60); assert.equal(g.lvl['0,3'], 2); assert.equal(B.carryOf(g, g.people[1]), base + 4);
+    g.floors.push({slots: [null, null, null, null, null, null]}); const fl = g.floors.length - 1, c0 = B.cap(g, 'bois'); g.floors[fl].slots[0] = 'stockage'; const c1 = B.cap(g, 'bois'); g.lvl[fl + ',0'] = 3; assert.equal(B.cap(g, 'bois') - c0, (c1 - c0) * 2);
+});
+t('🎭 caractères et entente ; 📈 on progresse en pratiquant ; 📔 chacun tient son journal', () => {
+    const g = game(); g.people.forEach(p => { assert.ok(p.traits.length >= 1 && p.traits.every(k => B.TRAITS[k])); });
+    const p = g.people[0], s0 = p.sk.construire; B.gainXp(g, p, 'construire', 12); assert.equal(p.sk.construire, Math.round((s0 + 0.1) * 100) / 100); assert.ok(p.diary.length >= 1);
+    g.people.forEach(x => { x.traits = ['sociable']; }); fill(g); B.run(g, 6 * 24 * 60);
+    assert.ok(Object.values(g.rel).some(v => v >= 25), 'des amitiés ' + JSON.stringify(g.rel)); assert.ok(g.people.every(x => x.diary.length >= 3), 'un journal');
+    const c = B.check(JSON.parse(JSON.stringify(g))); assert.deepEqual(c.people[0].traits, ['sociable']); assert.equal(c.people[0].diary.length, g.people[0].diary.length); assert.deepEqual(c.rel, g.rel);
+});
+t('📻 commerce par radio : des offres chaque jour, on paie, un messager livre quelques heures plus tard', () => {
+    const g = game(); assert.ok(g.market.offers.length >= 3); fill(g, 50); const o = g.market.offers[0], before = g.res[o.give.r];
+    assert.ok(B.trade(g, o.id).ok); assert.equal(B.trade(g, o.id).ok, false); g.market.deals[0].ok = true; B.run(g, 9 * 60);
+    assert.ok(g.res[o.give.r] >= Math.min(B.cap(g, o.give.r), before + o.give.n) - 30, 'livré'); assert.ok(g.log.some(l => /messager/.test(l.txt)));
+    const h = game(); h.power = false; h.powerOn = false; B.run(h, 10); assert.equal(B.trade(h, h.market.offers[0].id).ok, false, 'sans courant');
+});
+t('🌪️ catastrophes (option) : séisme, orage, inondation, canicule ; sans l’option, rien', () => {
+    const g = game({opt: {meteo: true}}); g.floors[0].slots[3] = 'toilettes'; g.floors[0].slots[4] = 'lit'; B.startEvent(g, 'seisme'); assert.ok(Object.keys(g.broken).length >= 1);
+    const h = game({opt: {meteo: true}}); h.floors[0].slots[3] = 'douche'; B.startEvent(h, 'canicule'); assert.equal(h.event.k, 'canicule');
+    const a = game(), b = game({opt: {meteo: true}}); b.event = {k: 'canicule', until: 99999}; B.run(a, 120); B.run(b, 120); assert.ok(b.people[0].needs.soif < a.people[0].needs.soif || b.people[0].act?.k === 'boire');
+    const off = game(); for (let i = 0; i < 20; i++) B.run(off, 24 * 60); assert.equal(off.stats.events, 0, 'sans l’option, pas de catastrophe');
+    const on = game({opt: {meteo: true}}); fill(on); for (let i = 0; i < 25; i++) B.run(on, 24 * 60); assert.ok(on.stats.events >= 1, 'avec l’option, il en arrive');
+});
+t('🧵 chaînes de fabrication (option) : plantes → fil → tissu → vêtements, blé → farine → pain ; sans l’option, ni plans ni production', () => {
+    const off = game(); assert.ok(!off.plans.includes('rouet')); assert.equal(B.orderBuild(off, 'rouet', 0, 3).ok, false);
+    const g = game({opt: {chaines: true}}); assert.ok(g.plans.includes('rouet') && g.plans.includes('champ')); fill(g, 30);
+    g.floors[0].slots[3] = 'rouet'; g.floors[0].slots[4] = 'metier'; g.floors[0].slots[5] = 'four'; g.res.fil = 0; g.res.farine = 10; const f0 = g.res.nourriture;
+    g.people.forEach(p => { p.needs.faim = 100; }); B.run(g, 24 * 60); assert.ok(g.res.fil > 0 || g.res.tissu > 30 - 1, 'le rouet file'); assert.ok(g.res.farine < 10, 'le four cuit');
+    const w = game({opt: {chaines: true}, scen: 'hiver'}); assert.equal(B.seasonOf(w), 'hiver'); w.res.vetements = 10; w.res.bois = 0; w.res.charbon = 0; B.run(w, 120); assert.equal(w.cold, true); assert.equal(w.warm, true);
+    const on = game(); B.setOpt(on, 'chaines', true); assert.ok(on.plans.includes('rouet'));
+});
+t('🎚️ difficulté et 🎬 scénarios ; 🧳 objets de famille retrouvés dans les ruines ; 📘 le tutoriel', () => {
+    assert.ok(game({diff: 'facile'}).res.eau > game({diff: 'extreme'}).res.eau);
+    assert.equal(game({scen: 'epidemie'}).res.medic, game().res.medic + 3); assert.equal(game({scen: 'invasion'}).scen, 'invasion');
+    const g = game({ruins: [{title: 'La montre du grand-père', kind: 'montre'}]}); const pl = g.city.places.find(x => x.kind === 'maison') || g.city.places[0]; pl.kind = 'maisonfam'; pl.home = true;
+    let got = false; for (let i = 0; i < 6 && !got; i++) { const p = g.people[1]; p.hp = 100; B.send(g, p.id, pl.id); let k = 0; while (p.where !== 'base' && k++ < 300) B.run(g, 30); got = g.coffre.some(c => /montre/.test(c.title)); }
+    assert.ok(got, 'retrouvée'); assert.equal(g.coffre.find(c => /montre/.test(c.title)).bonus, 'bijou');
+    const t0 = game({opt: {tuto: true}}); assert.equal(t0.tuto, 0); fill(t0); assert.ok(B.orderBuild(t0, 'toilettes', 0, 3).ok); B.run(t0, 10); assert.ok(t0.tuto >= 1); assert.ok(t0.log.some(l => /Étape 2/.test(l.txt)));
+    B.setOpt(t0, 'tuto', false); assert.equal(t0.tuto, -1); assert.equal(game().tuto, -1);
+    const c = B.check(JSON.parse(JSON.stringify(game({diff: 'difficile', scen: 'hiver', opt: {meteo: true, chaines: true}}))));
+    assert.equal(c.diff, 'difficile'); assert.equal(c.scen, 'hiver'); assert.deepEqual(c.opt, {meteo: true, chaines: true, tuto: false});
+});
 console.log(`✓ bunker : ${n} vérifications`);

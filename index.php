@@ -1241,7 +1241,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-retouch-bord.js?v=1" defer></script>
 <script src="assets/js/heritage-psd.js?v=1" defer></script>
 <script src="assets/js/heritage-tresors.js?v=9" defer></script>
-<script src="assets/js/heritage-bunker-moteur.js?v=5" defer></script>
+<script src="assets/js/heritage-bunker-moteur.js?v=6" defer></script>
 <script src="assets/js/heritage-bunker.js?v=8" defer></script>
 <script src="assets/js/heritage-tresors-memoire.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-decouvrir.js?v=2" defer></script>
