@@ -20,6 +20,10 @@
 
     /* ── 🛂 Les passeports intérieurs ── */
     const SIG = [['age', 'Âge'], ['taille', 'Taille'], ['cheveux', 'Cheveux'], ['sourcils', 'Sourcils'], ['front', 'Front'], ['yeux', 'Yeux'], ['nez', 'Nez'], ['bouche', 'Bouche'], ['barbe', 'Barbe'], ['menton', 'Menton'], ['visage', 'Visage'], ['teint', 'Teint'], ['signes', 'Signes particuliers']];
+    /** la sorte : le passeport intérieur (voyager en France, avant 1860) ou le passeport pour l'étranger ; un passeport sans sorte est intérieur */
+    const SORTES = [['interieur', 'Passeport intérieur', 'pour voyager d’un département à l’autre'], ['etranger', 'Passeport', 'pour aller à l’étranger']];
+    const sorteOf = d => (d?.sorte === 'etranger' ? 'etranger' : 'interieur');
+    const sorteLabel = d => SORTES.find(x => x[0] === sorteOf(d))[1];
     const PAPER = [['date', 'Date de délivrance'], ['commune', 'Délivré à'], ['destination', 'Destination'], ['motif', 'Motif du voyage'], ['profession', 'Profession'], ['domicile', 'Domicile'], ['naissance', 'Lieu de naissance'], ['cote', 'Source, cote']];
     /** la taille en centimètres : « 1 m 65 », « 1,65 », « 1 mètre 650 millimètres », « 5 pieds 2 pouces » */
     function heightCm(s) {
@@ -56,18 +60,18 @@
             <path d="M${100 - mw} 142 Q100 ${148 + mw / 6} ${100 + mw} 142" fill="none" stroke="#9a4a3a" stroke-width="2.4" stroke-linecap="round"/>
             ${scar ? '<path d="M120 112 l14 14" stroke="#8a3a2a" stroke-width="2"/>' : ''}${mole ? '<circle cx="78" cy="128" r="2.6" fill="#4a2a1a"/>' : ''}${pox ? [[80, 116], [118, 124], [90, 132], [112, 108], [76, 106]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.4" fill="#b88870"/>`).join('') : ''}</svg>`;
     }
-    const passportFields = (T, d = {}) => `<div class="form-grid">${PAPER.map(([k, l]) => `<label${k === 'cote' ? ' class="span-2"' : ''}>${T.esc(l)}<input name="${k}" maxlength="200" value="${T.esc(d[k] || '')}"></label>`).join('')}
+    const passportFields = (T, d = {}) => `<div class="form-grid"><label class="span-2">Sorte<select name="sorte">${SORTES.map(([k, l, h]) => `<option value="${k}" ${sorteOf(d) === k ? 'selected' : ''}>${T.esc(l)} — ${T.esc(h)}</option>`).join('')}</select></label>${PAPER.map(([k, l]) => `<label${k === 'cote' ? ' class="span-2"' : ''}>${T.esc(l)}<input name="${k}" maxlength="200" value="${T.esc(d[k] || '')}"></label>`).join('')}
         <h4 class="span-2" style="margin:8px 0 0">Le signalement</h4>${SIG.map(([k, l]) => `<label${k === 'signes' ? ' class="span-2"' : ''}>${T.esc(l)}<input name="${k}" maxlength="200" value="${T.esc(d[k] || '')}" placeholder="${{taille: '1 m 65', cheveux: 'châtains', yeux: 'gris', nez: 'aquilin', menton: 'rond', visage: 'ovale', teint: 'coloré', barbe: 'brune', signes: 'cicatrice au front'}[k] || ''}"></label>`).join('')}</div>`;
     function editPassport(T, it, pid, after) {
-        ext.openDialog({eyebrow: 'PASSEPORT INTÉRIEUR', title: it ? '🛂 Le passeport' : '🛂 Nouveau passeport', wide: true, submitLabel: 'Enregistrer',
+        ext.openDialog({eyebrow: 'PASSEPORT', title: it ? '🛂 Le passeport' : '🛂 Nouveau passeport', wide: true, submitLabel: 'Enregistrer',
             body: `<div class="h-tr-pp-edit"><div><div><span class="pk-lab">Le voyageur</span>${T.personField('who', it?.person_id || pid || null)}</div>${passportFields(T, it?.data)}</div><div data-pp-robot>${robotSvg(it?.data)}</div></div>`,
             onOpen: d => d.addEventListener('input', () => { const f = d.querySelector('form') || d, data = Object.fromEntries([...SIG, ...PAPER].map(([k]) => [k, f.querySelector(`[name=${k}]`)?.value || ''])); d.querySelector('[data-pp-robot]').innerHTML = robotSvg(data); }),
             onSubmit: async form => { const pidv = Number(form.elements.who.value) || 0; if (!pidv) { T.toast('Choisis le voyageur.', 'error'); return false; }
-                const data = {...(it?.data || {}), ...Object.fromEntries([...SIG, ...PAPER].map(([k]) => [k, form.elements[k].value.trim()]))}, tr = await T.tree();
-                await T.save({id: it?.id, kind: 'passport', person_id: pidv, title: `Passeport de ${T.name(tr.byId.get(pidv))}${data.date ? ` (${data.date})` : ''}`, body: '', data}); T.toast('Passeport enregistré.', 'success'); after?.(); }});
+                const data = {...(it?.data || {}), ...Object.fromEntries([...SIG, ...PAPER].map(([k]) => [k, form.elements[k].value.trim()])), sorte: sorteOf({sorte: form.elements.sorte?.value})}, tr = await T.tree();
+                await T.save({id: it?.id, kind: 'passport', person_id: pidv, title: `${sorteLabel(data)} de ${T.name(tr.byId.get(pidv))}${data.date ? ` (${data.date})` : ''}`, body: '', data}); T.toast('Passeport enregistré.', 'success'); after?.(); }});
     }
     const passportCard = (T, tr, x) => { const d = x.data || {}, p = tr.byId.get(x.person_id), cm = heightCm(d.taille);
-        return `<article class="h-tr-pp"><div class="h-tr-pp-robot">${robotSvg(d)}${cm ? `<small>${cm} cm</small>` : ''}</div><div class="h-tr-pp-txt"><b>🛂 ${T.esc(p ? T.name(p) : x.title)}</b>${d.date || d.commune ? `<small>Délivré${d.commune ? ` à ${T.esc(d.commune)}` : ''}${d.date ? ` le ${T.esc(d.date)}` : ''}</small>` : ''}
+        return `<article class="h-tr-pp"><div class="h-tr-pp-robot">${robotSvg(d)}${cm ? `<small>${cm} cm</small>` : ''}</div><div class="h-tr-pp-txt"><span class="h-tr-pill">${T.esc(sorteLabel(d))}</span><b>🛂 ${T.esc(p ? T.name(p) : x.title)}</b>${d.date || d.commune ? `<small>Délivré${d.commune ? ` à ${T.esc(d.commune)}` : ''}${d.date ? ` le ${T.esc(d.date)}` : ''}</small>` : ''}
             ${d.destination || d.motif ? `<p>${d.destination ? `pour <b>${T.esc(d.destination)}</b>` : ''}${d.motif ? ` — ${T.esc(d.motif)}` : ''}</p>` : ''}<dl>${[...SIG, ['profession', 'Profession'], ['domicile', 'Domicile'], ['naissance', 'Né à']].filter(([k]) => d[k]).map(([k, l]) => `<dt>${T.esc(l)}</dt><dd>${T.esc(d[k])}</dd>`).join('')}</dl>${d.cote ? `<small class="h-tr-muted">${T.esc(d.cote)}</small>` : ''}</div></article>`; };
 
     /* l'import d'un relevé : XML (enregistrements répétés), tableur XML (Excel 2003) ou CSV */
@@ -115,7 +119,7 @@
             const ed = e.target.closest('[data-pp-edit]'); if (ed) { const it = (await T.items('passport')).find(x => x.id === Number(ed.dataset.ppEdit)); return editPassport(T, it, null, draw); }
             const del = e.target.closest('[data-pp-del]'); if (del && await A().confirmBox('Le passeport sera effacé.', {title: 'Supprimer ?', okLabel: 'Supprimer', danger: true})) { await T.remove(Number(del.dataset.ppDel)); return draw(); }
             const at = e.target.closest('[data-pp-attach]'); if (at) { const [ri, pid] = at.dataset.ppAttach.split(':').map(Number), r = imported.records[ri], p = tr.byId.get(pid), {nom, prenom, autres, ...rest} = r;
-                await T.save({kind: 'passport', person_id: pid, title: `Passeport de ${T.name(p)}${r.date ? ` (${r.date})` : ''}`, body: '', data: {...rest, cote: [r.cote, imported.source].filter(Boolean).join(' · '), releve: `${nom || ''} ${prenom || ''}`.trim(), autres}});
+                await T.save({kind: 'passport', person_id: pid, title: `Passeport intérieur de ${T.name(p)}${r.date ? ` (${r.date})` : ''}`, body: '', data: {...rest, sorte: 'interieur', cote: [r.cote, imported.source].filter(Boolean).join(' · '), releve: `${nom || ''} ${prenom || ''}`.trim(), autres}});
                 T.toast(`Rattaché à ${T.name(p)}.`, 'success'); return draw(); }
         });
         await draw();
@@ -126,14 +130,40 @@
             ${rows.map(({r, i, m}) => `<tr><td><b>${T.esc(r.nom || '')}</b> ${T.esc(r.prenom || '')}${r.date ? `<br><small>${T.esc(r.date)}</small>` : ''}</td><td>${T.esc(r.age || '')}</td><td>${T.esc(r.profession || '')}</td><td><small>${SIG.filter(([k]) => r[k] && k !== 'age').map(([k, l]) => `${l.toLowerCase()} ${T.esc(r[k])}`).join(', ')}</small></td><td>${T.esc(r.destination || '')}</td>
                 <td>${m.map(x => `<button type="button" class="button small ${x.ok ? '' : 'secondary'}" data-pp-attach="${i}:${x.p.id}" title="${x.ok ? 'Le nom et l’âge concordent' : 'Le nom concorde, l’âge moins'}">→ ${T.esc(T.name(x.p))}${x.p.by ? ` (${x.p.by})` : ''}</button>`).join(' ') || '<small class="h-tr-muted">—</small>'}</td></tr>`).join('')}</tbody></table></div></div>`;
     }
-    F.push({key: 'passeports', group: 'memoire', icon: '🛂', title: 'Les passeports intérieurs', desc: 'Le passeport et le signalement d’un ancêtre voyageur, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…).', render: renderPassports});
+    F.push({key: 'passeports', group: 'memoire', icon: '🛂', title: 'Les passeports', desc: 'Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…).', render: renderPassports});
     ext.tresorPassports = {heightCm, robotSvg, parseRecords, matches};
     ext.personBlocks = ext.personBlocks || {};
     const readOnly = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly');
-    ext.personBlocks.passports = (index, detail, opts = {}) => { const pid = Number(detail?.person?.id); if (!pid || detail.person.kind === 'animal') return ''; return A().card(index, '🛂 Passeports intérieurs', '', `<div data-pp-block="${pid}"></div>`, 'span-12', readOnly() || opts.isLocked ? '' : `<button type="button" class="button small secondary" data-pp-add="${pid}">＋ Passeport</button>`); };
+    ext.personBlocks.passports = (index, detail, opts = {}) => { const pid = Number(detail?.person?.id); if (!pid || detail.person.kind === 'animal') return ''; return A().card(index, '🛂 Passeports', '', `<div data-pp-block="${pid}"></div>`, 'span-12', readOnly() || opts.isLocked ? '' : `<button type="button" class="button small secondary" data-pp-add="${pid}">＋ Passeport</button>`); };
     const fillPP = async detail => { const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-pp-block="${pid}"]`); if (!el || !ext.tresors) return; const T = ext.tresors.T, [tr, list] = await Promise.all([T.tree(), T.items('passport', pid)]).catch(() => [null, []]);
         el.innerHTML = list.length ? list.map(x => passportCard(T, tr, x)).join('') : window.LCNDA_APP.emptyState({icon: '🛂', text: 'Aucun passeport pour l’instant.', hint: 'Avant 1860, pour voyager en France, il fallait un passeport intérieur avec son signalement : s’il en existe un, ajoute-le ici.'}); };
     ext.afterPerson = ext.afterPerson || []; ext.afterPerson.push(detail => { fillPP(detail); });
+    /* ── Listes › 🛂 Passeports : tous les passeports de la famille, intérieurs ou pour l'étranger ── */
+    ext.lists = ext.lists || {};
+    let ppFilter = 'tous';
+    ext.lists.passports = async token => {
+        const S = A().state, ok = () => token === S.workspaceToken && S.module === 'listes', ws = A().$('#workspace');
+        if (!ext.tresors) { ws.innerHTML = `<section class="page">${A().empty('Les Trésors n’ont pas pu se charger.')}</section>`; return; }
+        const T = ext.tresors.T; let tr, list;
+        try { [tr, list] = await Promise.all([T.tree(), T.items('passport')]); } catch (err) { if (ok()) ws.innerHTML = `<section class="page">${A().empty(err.message || 'Les passeports n’ont pas pu être lus.')}</section>`; return; }
+        if (!ok()) return;
+        const draw = () => {
+            const n = k => list.filter(x => k === 'tous' || sorteOf(x.data) === k).length, rows = list.filter(x => ppFilter === 'tous' || sorteOf(x.data) === ppFilter);
+            ws.innerHTML = `<section class="page collection-page h-pp-list">${window.LCNDA_UI.pageHeader({icon: '🛂', title: 'Passeports', help: 'Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors.'})}
+                <div class="segmented h-pp-filter" role="group" aria-label="Sorte de passeport">${[['tous', 'Tous'], ['interieur', 'Passeports intérieurs'], ['etranger', 'Passeports pour l’étranger']].map(([k, l]) => `<button type="button" data-pp-f="${k}" class="${ppFilter === k ? 'is-active' : ''}" aria-pressed="${ppFilter === k}">${T.esc(l)} <small>${n(k)}</small></button>`).join('')}</div>
+                ${rows.length ? `<div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="passeport"><thead><tr>${['Voyageur', 'Sorte', 'Délivré', 'Destination', 'Motif', 'Profession', 'Taille', 'Source'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}</tr></thead><tbody>
+                    ${rows.map(x => { const d = x.data || {}, p = tr.byId.get(x.person_id), cm = heightCm(d.taille); return `<tr><td data-sort-value="${T.esc((p ? T.name(p) : x.title).toLowerCase())}">${p ? `<button type="button" class="table-link" data-h-person="${p.id}">${T.esc(T.name(p))}</button>` : T.esc(x.title)}</td><td>${T.esc(sorteLabel(d))}</td><td>${T.esc([d.commune, d.date].filter(Boolean).join(', '))}</td><td>${T.esc(d.destination || '')}</td><td>${T.esc(d.motif || '')}</td><td>${T.esc(d.profession || '')}</td><td data-sort-value="${cm || 0}">${cm ? `${cm} cm` : T.esc(d.taille || '')}</td><td><small>${T.esc(d.cote || '')}</small></td></tr>`; }).join('')}</tbody></table></div>`
+                    : A().emptyState({icon: '🛂', text: ppFilter === 'tous' ? 'Aucun passeport pour l’instant' : `Aucun ${sorteLabel({sorte: ppFilter}).toLowerCase()} pour l’instant`, hint: 'Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé.'})}
+                <p><button type="button" class="button secondary" data-pp-go>🛂 Ouvrir les passeports dans ✨ Trésors</button></p></section>`;
+            A().bindTableLinks?.();
+        };
+        draw();
+        ws.onclick = e => {
+            if (!ws.querySelector('.h-pp-list')) { ws.onclick = null; return; } // on a quitté la liste
+            const f = e.target.closest('[data-pp-f]'); if (f && ws.querySelector('.h-pp-list')) { ppFilter = f.dataset.ppF; draw(); return; }
+            if (e.target.closest('[data-pp-go]')) ext.tresors.open('passeports');
+        };
+    };
     document.addEventListener('click', e => { const b = e.target.closest('[data-pp-add]'); if (b && ext.tresors) editPassport(ext.tresors.T, null, Number(b.dataset.ppAdd), () => { const d = {person: {id: Number(b.dataset.ppAdd)}}; fillPP(d); }); });
 
     /* ── 👵 Grand-parent raconte ── */
