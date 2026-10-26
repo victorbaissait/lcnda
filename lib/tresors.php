@@ -140,6 +140,13 @@ function tresor_tree(PDO $pdo): array
         if ($pid && $tag === 'OCCU' && $people[$pid]['occ'] === '' && $e['title'] . $e['description'] !== '') { $people[$pid]['occ'] = mb_substr(trim((string) ($e['title'] ?: $e['description'])), 0, 80); }
         if ($fid && isset($families[$fid]) && in_array($tag, ['MARR', 'MRCI', 'MRRE'], true) && $families[$fid]['my'] === null) { $families[$fid]['my'] = $y; $families[$fid]['md'] = $d; $families[$fid]['mplace'] = $pl; }
     }
+    // 🔗 partage : la règle de l'export « Pour partager » (vivants déclarés ou probables, fiches confidentielles), calculée ici
+    // pour que le navigateur n'ait pas à deviner (un enfant sans date d'une personne née en 1950 est aussi retiré)
+    if (function_exists('person_select')) {
+        require_once __DIR__ . '/gedcom.php';
+        try { foreach (gedcom_share_hidden($pdo, $pdo->query(person_select())->fetchAll(), $pdo->query('SELECT * FROM families')->fetchAll()) as $hid => $_) { if (isset($people[(int) $hid])) { $people[(int) $hid]['sh'] = true; } } }
+        catch (Throwable $e) { foreach ($people as $id => $_) { $people[$id]['sh'] = true; } } // dans le doute, rien ne part
+    }
     return ['people' => array_values($people), 'families' => array_values($families), 'places' => (object) $places, 'events' => $events];
 }
 

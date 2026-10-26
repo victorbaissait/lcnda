@@ -1253,7 +1253,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-merveilles.js?v=3" defer></script>
 <script src="assets/js/heritage-tresors-histoires.js?v=2" defer></script>
 <script src="assets/js/heritage-tresors-ateliers.js?v=5" defer></script>
-<script src="assets/js/heritage-tresors-papiers.js?v=6" defer></script>
+<script src="assets/js/heritage-tresors-papiers.js?v=7" defer></script>
 <script src="assets/js/heritage-tresors-voyages.js?v=1" defer></script>
 <script src="assets/js/heritage-tresors-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-tresors-listes.js?v=1" defer></script>
