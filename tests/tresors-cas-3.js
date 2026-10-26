@@ -21,6 +21,17 @@ module.exports = async (t, {page, open, body}, assert) => {
         await page.waitForSelector('.h-tr-cd .h-tr-candle.is-lit'); const b = await body(); assert.match(b, /Marie DURAND[\s\S]*On pense à toi[\s\S]*de Léa · encore 7 j/);
         const ann = await T('(T, tr) => window.LCNDA_EXT.tresorCandle.anniversaries(T, tr, 366).length'); assert.ok(ann > 10, `${ann} anniversaires`);
     });
+    await t('🌌 ciel : 8 styles, 3 formes, 3 formats, Voie lactée, repères, cadre, textes à soi, et 📐 dans la mise en page', async () => {
+        await open('ciel'); await page.waitForSelector('[data-sk-c]');
+        assert.ok(await page.$$eval('[data-sk] [name=th] option', l => l.length) >= 8);
+        await page.selectOption('[data-sk] [name=fmt]', 'carre'); assert.equal(await page.$eval('[data-sk-c]', c => c.height), 1200);
+        await page.selectOption('[data-sk] [name=shape]', 'arche'); await page.selectOption('[data-sk] [name=th]', 'encre'); await page.check('[data-sk] [name=milky]'); await page.check('[data-sk] [name=grid]'); await page.check('[data-sk] [name=frame]');
+        await page.click('[data-sk] details summary'); await page.fill('[data-sk] [name=tt]', 'Notre Léa');
+        const corner = await page.$eval('[data-sk-c]', c => Array.from(c.getContext('2d').getImageData(5, 5, 1, 1).data).join()); assert.equal(corner, '255,255,255,255', 'le papier blanc du style encre');
+        await page.click('[data-sk-layout]'); await page.waitForSelector('.ly-item.ly-frame', {timeout: 10000});
+        await page.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); await page.keyboard.press('Escape');
+        await page.selectOption('[data-sk] [name=fmt]', 'affiche');
+    });
     await t('🔊 ambiance : le métier choisit l’ambiance (forgeron → la forge), le son se joue et s’arrête', async () => {
         await open('ambiance'); const v = await page.evaluate(() => window.LCNDA_EXT.tresorAmbiance.sceneFor('forgeron')); assert.equal(v, 'forge');
         await page.selectOption('[data-am-p]', {label: 'Marcel FAURE (forgeron)'}); assert.equal(await page.inputValue('[data-am-s]'), 'forge'); assert.equal(await page.inputValue('[data-am-l="forge"]'), '80');

@@ -70,6 +70,13 @@ module.exports = async (t, {page, open, body}, assert) => {
         const txt = await page.inputValue('[data-fp] [name="txt"]'); assert.match(txt, /Antoine MARTIN et Marie DURAND/); assert.match(txt, /Pierre FAURE et Jeanne BORIE/); assert.match(txt, /\* Jean & Louise/); assert.match(txt, /célébré le 15 juin 1903 à Paris/);
         assert.match(await page.$eval('[data-fp-out] svg', s => s.outerHTML), /Jean &amp; Louise/);
         const dl = page.waitForEvent('download'); await page.click('[data-fp-png]'); const d = await dl; assert.match(d.suggestedFilename(), /faire-part-jean\.png/);
+        // plus d'options : format carré, écriture, couleurs, photo ; puis 📐 la mise en page
+        await page.selectOption('[data-fp] [name="st"]', 'royal'); await page.selectOption('[data-fp] [name="format"]', 'carre'); await page.selectOption('[data-fp] [name="font"]', 'script'); await page.selectOption('[data-fp] [name="align"]', 'gauche');
+        let svg = await page.$eval('[data-fp-out] svg', s => s.outerHTML); assert.match(svg, /viewBox="0 0 720 720"/); assert.match(svg, /Brush Script/); assert.match(svg, /fill="#14244a"/); assert.match(svg, /text-anchor="start"/);
+        await page.check('[data-fp] [name="colors"]'); await page.$eval('[data-fp] [name="bg"]', i => { i.value = '#ffeedd'; i.dispatchEvent(new Event('input', {bubbles: true})); }); assert.match(await page.$eval('[data-fp-out] svg', s => s.outerHTML), /fill="#ffeedd"/);
+        await page.uncheck('[data-fp] [name="colors"]'); await page.selectOption('[data-fp] [name="format"]', 'a6'); await page.selectOption('[data-fp] [name="align"]', 'centre'); await page.selectOption('[data-fp] [name="font"]', 'style');
+        await page.click('[data-fp-layout]'); await page.waitForSelector('.ly-item.ly-frame', {timeout: 10000}); assert.ok(await page.$('.ly-item.ly-frame image, .ly-item.ly-frame img'), 'le faire-part dans un cadre de la mise en page');
+        await page.keyboard.press('Escape'); await page.waitForTimeout(300); const left = await page.$('dialog[open] .ly-item'); if (left) await page.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
         // un décès : « dans sa 71e année », « De la part de »
         const dz = await page.evaluate(() => { const {T} = window.LCNDA_EXT.tresors; return T.tree().then(tr => window.LCNDA_EXT.tresorCard.announce(T, tr, tr.people.find(p => T.name(p) === 'Antoine MARTIN'), 'd')); });
         assert.equal(dz.style, 'deuil'); assert.match(dz.lines.map(l => l.t).join(' | '), /survenu le 2 mai 1920 à Naves, dans sa 71e année[\s\S]*Madame Marie DURAND, son épouse[\s\S]*Jean MARTIN, Paul MARTIN, ses enfants/);

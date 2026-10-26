@@ -80,13 +80,25 @@
     const hm = h => (h == null ? '' : `${Math.floor(h)} h ${String(Math.round((h % 1) * 60)).padStart(2, '0')}`.replace(/ 60$/, ' 59'));
     const THEMES = {nuit: {bg: ['#0b1a3a', '#020611'], star: '#ffffff', line: 'rgba(170,200,255,.35)', text: '#f2ead8', ring: 'rgba(255,255,255,.5)', paper: '#050b1c'},
         papier: {bg: ['#13213f', '#0a1328'], star: '#fffbe8', line: 'rgba(255,230,170,.3)', text: '#1f2a44', ring: '#c9a646', paper: '#f6f0e1'},
-        or: {bg: ['#0d0d0d', '#000000'], star: '#f2d27a', line: 'rgba(242,210,122,.35)', text: '#f2d27a', ring: '#c9a646', paper: '#000000'}};
+        or: {bg: ['#0d0d0d', '#000000'], star: '#f2d27a', line: 'rgba(242,210,122,.35)', text: '#f2d27a', ring: '#c9a646', paper: '#000000'},
+        encre: {bg: ['#ffffff', '#f4f4f4'], star: '#111111', line: 'rgba(0,0,0,.35)', text: '#111111', ring: '#111111', paper: '#ffffff'},
+        aube: {bg: ['#f7c9b8', '#5b6fa8'], star: '#ffffff', line: 'rgba(255,255,255,.45)', text: '#3b3a5a', ring: '#8c7aa8', paper: '#fbf3ee'},
+        aquarelle: {bg: ['#9fc3e6', '#36507e'], star: '#ffffff', line: 'rgba(255,255,255,.4)', text: '#36507e', ring: '#7da1c9', paper: '#f5f8fb'},
+        foret: {bg: ['#1f3a2c', '#0b1610'], star: '#f6efd6', line: 'rgba(246,239,214,.35)', text: '#f6efd6', ring: '#c9b77a', paper: '#132219'},
+        bordeaux: {bg: ['#3a0f1c', '#14050a'], star: '#ffe9d0', line: 'rgba(255,233,208,.35)', text: '#ffe9d0', ring: '#d8a25a', paper: '#22080f'}};
+    const SKY_FONTS = {georgia: 'Georgia', didot: '"Didot", "Bodoni MT", "Times New Roman"', script: '"Brush Script MT", "Segoe Script", "Apple Chancery", cursive', baton: '"Futura", "Century Gothic", "Trebuchet MS", sans-serif'};
+    const SKY_FORMATS = {affiche: [1200, 1340, 'Affiche'], carre: [1200, 1200, 'Carré'], a4: [1200, 1697, 'A4 (portrait)']};
     /** dessine le ciel (image d'affiche) : {canvas} ; opts : names, lines, title, sub */
-    function drawSky(cv, s, {theme = 'nuit', names = true, lines = true, title = '', sub = '', foot = ''} = {}) {
-        const th = THEMES[theme] || THEMES.nuit, W = cv.width, H = cv.height, x = cv.getContext('2d'), rad = W * 0.41, cx = W / 2, cy = W * 0.47, k = W / 1200;
+    function drawSky(cv, s, {theme = 'nuit', names = true, lines = true, title = '', sub = '', foot = '', shape = 'rond', font = 'georgia', grid = false, milky = false, frame = false} = {}) {
+        const th = THEMES[theme] || THEMES.nuit, W = cv.width, H = cv.height, x = cv.getContext('2d'), k = W / 1200, fm = frame ? 50 * k : 0, rad = Math.min(W * 0.41 - fm / 2, (H - 330 * k - 2 * fm) / 2), cx = W / 2, cy = (H - (2 * rad + 300 * k)) / 2 + 60 * k + rad, FF = SKY_FONTS[font] || 'Georgia';
         x.fillStyle = th.paper; x.fillRect(0, 0, W, H);
-        const day = s.sun.alt > -6, g = x.createRadialGradient(cx, cy, rad * 0.1, cx, cy, rad); g.addColorStop(0, day ? '#3f6aa8' : th.bg[0]); g.addColorStop(1, day ? '#1a3563' : th.bg[1]);
-        x.save(); x.beginPath(); x.arc(cx, cy, rad, 0, 7); x.fillStyle = g; x.fill(); x.clip();
+        if (frame) { x.strokeStyle = th.ring; x.lineWidth = 4 * k; x.strokeRect(24 * k, 24 * k, W - 48 * k, H - 48 * k); x.lineWidth = 1.2 * k; x.strokeRect(36 * k, 36 * k, W - 72 * k, H - 72 * k); }
+        /** la forme de la fenêtre sur le ciel : rond, carré aux coins doux, ou fenêtre en arc */
+        const outline = (r = rad) => { x.beginPath(); if (shape === 'carre') { const a = r, q = 24 * k; x.roundRect ? x.roundRect(cx - a, cy - a, 2 * a, 2 * a, q) : x.rect(cx - a, cy - a, 2 * a, 2 * a); } else if (shape === 'arche') { x.moveTo(cx - r * 0.85, cy + r); x.lineTo(cx - r * 0.85, cy - r * 0.15); x.arc(cx, cy - r * 0.15, r * 0.85, Math.PI, 0); x.lineTo(cx + r * 0.85, cy + r); x.closePath(); } else x.arc(cx, cy, r, 0, 7); };
+        const day = s.sun.alt > -6, g = x.createRadialGradient(cx, cy, rad * 0.1, cx, cy, rad * 1.4); g.addColorStop(0, day ? '#3f6aa8' : th.bg[0]); g.addColorStop(1, day ? '#1a3563' : th.bg[1]);
+        x.save(); outline(); x.fillStyle = g; x.fill(); x.clip();
+        if (milky) { x.save(); x.translate(cx, cy); x.rotate(((s.lst || 0) % 360) * R); const mg = x.createLinearGradient(0, -rad * 0.25, 0, rad * 0.25); mg.addColorStop(0, 'rgba(255,255,255,0)'); mg.addColorStop(0.5, 'rgba(255,255,255,.13)'); mg.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = mg; x.fillRect(-rad * 1.5, -rad * 0.25, rad * 3, rad * 0.5); x.restore(); }
+        if (grid) { x.strokeStyle = th.line; x.globalAlpha = 0.5; x.lineWidth = 0.8 * k; [30, 60].forEach(a => { const r = rad * Math.tan((90 - a) * R / 2); x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke(); }); for (let a = 0; a < 360; a += 30) { x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx - rad * sin(a), cy - rad * cos(a)); x.stroke(); } x.globalAlpha = 1; }
         const pos = (alt, az) => { const r = rad * Math.tan((90 - alt) * R / 2); return [cx - r * sin(az), cy - r * cos(az)]; };
         const byName = new Map(s.stars.map(st => [st.n, st]));
         if (lines) { x.strokeStyle = th.line; x.lineWidth = 1.6 * k; x.font = `${15 * k}px Georgia`; x.fillStyle = th.line;
@@ -99,10 +111,10 @@
             x.fillStyle = 'rgba(40,45,60,.9)'; x.beginPath(); x.arc(mx, my, mr, 0, 7); x.fill(); x.fillStyle = '#f4f1e6'; x.shadowColor = '#fff'; x.shadowBlur = 14 * k; x.beginPath();
             x.arc(mx, my, mr, -Math.PI / 2, Math.PI / 2, !waxing); x.ellipse(mx, my, Math.abs(mr * c), mr, 0, Math.PI / 2, -Math.PI / 2, waxing ? c > 0 : c <= 0); x.fill(); x.shadowBlur = 0; }
         x.restore();
-        x.strokeStyle = th.ring; x.lineWidth = 3 * k; x.beginPath(); x.arc(cx, cy, rad, 0, 7); x.stroke(); x.lineWidth = 1 * k; x.beginPath(); x.arc(cx, cy, rad + 10 * k, 0, 7); x.stroke();
-        x.fillStyle = th.ring; x.font = `bold ${22 * k}px Georgia`; x.textAlign = 'center'; [['N', 0], ['E', 90], ['S', 180], ['O', 270]].forEach(([l, az]) => { const r = rad + 34 * k; x.fillText(l, cx - r * sin(az), cy - r * cos(az) + 8 * k); });
-        x.fillStyle = th.text; x.font = `italic ${54 * k}px Georgia`; x.fillText(title, cx, cy + rad + 120 * k); x.font = `${26 * k}px Georgia`; x.fillText(sub, cx, cy + rad + 170 * k);
-        x.globalAlpha = 0.75; x.font = `${19 * k}px Georgia`; x.fillText(foot, cx, cy + rad + 215 * k); x.globalAlpha = 1; x.textAlign = 'left';
+        x.strokeStyle = th.ring; x.lineWidth = 3 * k; outline(); x.stroke(); x.lineWidth = 1 * k; outline(rad + 10 * k); x.stroke();
+        x.fillStyle = th.ring; x.font = `bold ${22 * k}px ${FF}`; x.textAlign = 'center'; [['N', 0], ['E', 90], ['S', 180], ['O', 270]].forEach(([l, az]) => { const r = rad + 34 * k; x.fillText(l, cx - r * sin(az), cy - r * cos(az) + 8 * k); });
+        x.fillStyle = th.text; x.font = `${font === 'baton' ? '' : 'italic '}${54 * k}px ${FF}`; x.fillText(title, cx, cy + rad + 120 * k); x.font = `${26 * k}px ${FF}`; x.fillText(sub, cx, cy + rad + 170 * k);
+        x.globalAlpha = 0.75; x.font = `${19 * k}px ${FF}`; x.fillText(foot, cx, cy + rad + 215 * k); x.globalAlpha = 1; x.textAlign = 'left';
         return cv;
     }
     /** la naissance de quelqu'un : la date, le lieu (placé sur la carte) et ce qui manque */
@@ -120,23 +132,30 @@
         const first = pend || (tr.byId.get(st?.id)?.by ? st.id : tr.people.find(p => p.by)?.id);
         host.innerHTML = `<div class="h-tr-split"><form class="h-tr-panel" data-sk><div><span class="pk-lab">La naissance de</span>${T.personField('who', first)}</div>
             <label>Vers quelle heure (heure solaire du lieu)<input name="h" value="22:00" data-ui-time></label>
-            <label>Le style<select name="th"><option value="nuit">Nuit bleue</option><option value="papier">Affiche (fond crème)</option><option value="or">Noir et or</option></select></label>
+            <label>Le style<select name="th"><option value="nuit">Nuit bleue</option><option value="papier">Affiche (fond crème)</option><option value="or">Noir et or</option><option value="encre">Encre sur papier (à imprimer)</option><option value="aube">Aube (rose et bleu)</option><option value="aquarelle">Aquarelle</option><option value="foret">Vert forêt</option><option value="bordeaux">Bordeaux et or</option></select></label>
+            <label>La forme<select name="shape"><option value="rond">Ronde</option><option value="carre">Carrée</option><option value="arche">Fenêtre en arc</option></select></label>
+            <label>Le format<select name="fmt">${Object.entries(SKY_FORMATS).map(([k, [, , l]]) => `<option value="${k}">${l}</option>`).join('')}</select></label>
+            <label>L’écriture<select name="font"><option value="georgia">Classique</option><option value="didot">Élégante</option><option value="script">À la plume</option><option value="baton">Bâton</option></select></label>
             <label class="checkbox-line"><input type="checkbox" name="lines" checked> Les constellations</label><label class="checkbox-line"><input type="checkbox" name="names" checked> Les noms</label>
-            <p class="h-tr-row"><button type="button" class="button" data-sk-png>⬇ Image PNG</button><button type="button" class="button secondary" data-sk-keep>💾 Garder dans les médias</button></p><div data-sk-info class="h-tr-muted"></div></form>
+            <label class="checkbox-line"><input type="checkbox" name="milky"> La Voie lactée (évocation)</label><label class="checkbox-line"><input type="checkbox" name="grid"> Les repères (hauteur, directions)</label><label class="checkbox-line"><input type="checkbox" name="frame"> Un cadre</label>
+            <details><summary>✏️ Les textes</summary><label>Titre<input name="tt" placeholder="(le nom)"></label><label>Sous-titre<input name="ts" placeholder="(le lieu et la date)"></label><label>Dernière ligne<input name="tf" placeholder="(la lune, les planètes)"></label></details>
+            <p class="h-tr-row"><button type="button" class="button" data-sk-png>⬇ Image PNG</button><button type="button" class="button secondary" data-sk-layout title="Ouvrir dans l’atelier de mise en page (façon InDesign) pour tout retravailler">📐 Mise en page</button><button type="button" class="button secondary" data-sk-keep>💾 Garder dans les médias</button></p><div data-sk-info class="h-tr-muted"></div></form>
             <canvas class="h-tr-canvas" data-sk-c width="1200" height="1340" style="max-width:520px"></canvas></div>`;
         const form = host.querySelector('[data-sk]'), cv = host.querySelector('[data-sk-c]'), info = host.querySelector('[data-sk-info]');
         let cur = null;
         const draw = () => {
             const p = tr.byId.get(Number(form.elements.who.value)), b = birthOf(T, tr, p);
             if (!b) { info.textContent = 'Il faut au moins l’année de naissance.'; cv.getContext('2d').clearRect(0, 0, cv.width, cv.height); cur = null; return; }
-            const [hh, mm] = (form.elements.h.value || '22:00').split(':').map(Number), hour = hh + (mm || 0) / 60, s = sky({date: b.date, hour, lat: b.lat, lng: b.lng}), c = caption(T, p, b, s, hour);
-            drawSky(cv, s, {theme: form.elements.th.value, names: form.elements.names.checked, lines: form.elements.lines.checked, ...c}); cur = {p, b, s};
+            const [hh, mm] = (form.elements.h.value || '22:00').split(':').map(Number), hour = hh + (mm || 0) / 60, s = sky({date: b.date, hour, lat: b.lat, lng: b.lng}), c = caption(T, p, b, s, hour), e = form.elements;
+            const [fw, fh] = SKY_FORMATS[e.fmt.value] || SKY_FORMATS.affiche; if (cv.width !== fw || cv.height !== fh) { cv.width = fw; cv.height = fh; }
+            drawSky(cv, s, {theme: e.th.value, names: e.names.checked, lines: e.lines.checked, shape: e.shape.value, font: e.font.value, milky: e.milky.checked, grid: e.grid.checked, frame: e.frame.checked, title: e.tt.value.trim() || c.title, sub: e.ts.value.trim() || c.sub, foot: e.tf.value.trim() || c.foot}); cur = {p, b, s};
             const up = s.stars.filter(x => x.alt > 0).length;
             info.innerHTML = `${b.exact ? '' : '⚠️ Date exacte inconnue : ciel du 1er juillet. '}${b.placed ? '' : '⚠️ Lieu non placé sur la carte. '}<br>🌙 ${T.esc(s.moon.phase)} (${Math.round(s.moon.lit * 100)} % éclairée)${s.moon.alt > 0 ? '' : ', sous l’horizon'}<br>🌇 coucher du soleil vers ${hm(s.set) || '—'} · 🌅 lever vers ${hm(s.rise) || '—'}<br>✨ ${up} étoiles brillantes au-dessus de l’horizon${s.planets.filter(x => x.alt > 0).length ? ` · 🪐 ${s.planets.filter(x => x.alt > 0).map(x => x.n).join(', ')}` : ''}`;
             cv.dataset.moon = s.moon.phase;
         };
-        form.addEventListener('change', draw); form.addEventListener('input', e => { if (e.target.name === 'h') draw(); });
+        form.addEventListener('change', draw); form.addEventListener('input', e => { if (['h', 'tt', 'ts', 'tf'].includes(e.target.name)) draw(); });
         const fname = () => `ciel-de-naissance-${(cur?.p?.first || 'x').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')}.png`;
+        host.querySelector('[data-sk-layout]').addEventListener('click', () => cur && T.toLayout(`Le ciel de naissance de ${T.name(cur.p)}`, cv.toDataURL('image/png'), {w: 210, h: Math.round(210 * cv.height / cv.width)}));
         host.querySelector('[data-sk-png]').addEventListener('click', () => cur && cv.toBlob(b => b && T.download(fname(), b), 'image/png'));
         host.querySelector('[data-sk-keep]').addEventListener('click', () => cur && cv.toBlob(async b => { try { const m = await T.upload(b, 'image', `Le ciel de naissance de ${T.name(cur.p)}`, fname()); await T.post('tresor_write', {op: 'link_media', media_id: m.media_id, person_id: cur.p.id}); T.toast('Image gardée dans les médias de la fiche.', 'success'); } catch (err) { T.toast(err.message, 'error'); } }, 'image/png'));
         draw();

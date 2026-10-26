@@ -95,6 +95,23 @@
             if (!r?.result?.media_id) throw new Error(r?.error || 'envoi impossible'); return r.result;
         },
         open: key => openFeature(key),
+        /** 📐 ouvrir une création (image PNG/SVG en data:) dans l'atelier de mise en page, façon InDesign : une page à son format,
+         *  l'image dans un cadre modifiable, et un titre en texte (facultatif) ; on y ajoute ensuite ce qu'on veut, et on enregistre */
+        async toLayout(name, src, {w = 210, h = 297, title = '', caption = ''} = {}) {
+            const K = ext.layoutKit; if (!K?.openEditor) { T.toast('L’atelier de mise en page n’est pas disponible ici.', 'error'); return false; }
+            if (src instanceof Blob) src = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(src); });
+            if (/^data:image\/svg\+xml;(charset=[^,;]+)?,/.test(src)) src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(decodeURIComponent(src.slice(src.indexOf(',') + 1)))));
+            const d = K.defaults(), th = {titleFont: d.titleFont, bodyFont: d.bodyFont, bodySize: d.bodySize, lead: d.lead, accent: d.accent, paper: d.paper}, m = 10;
+            const items = [K.shapeItem('frame', {x: 0, y: 0, w, h, src, fit: 'fit', fill: 'none', stroke: {c: 'none', w: 0}, name: 'Image'})];
+            if (title) items.push(K.textItem({x: m, y: m, w: w - 2 * m, h: 16, html: `<p data-ps="ps-title">${esc(title)}</p>`, name: 'Titre'}));
+            if (caption) items.push(K.textItem({x: m, y: h - m - 10, w: w - 2 * m, h: 10, html: `<p data-ps="ps-caption">${esc(caption)}</p>`, name: 'Légende'}));
+            const doc = {type: 'lcnda-mise-en-page', version: 1, title: name,
+                page: {w, h, facing: false, margin: {t: m, b: m, i: m, o: m}, columns: 1, gutter: 4, bleed: 3, slug: 0, paper: 'sw-paper', start: 1},
+                swatches: K.baseSwatches(th), paraStyles: K.baseStyles(th), charStyles: [{id: 'cs-em', name: 'Accent', color: 'sw-accent', italic: true}],
+                layers: [{id: 'L1', name: 'Calque 1', visible: true, locked: false, color: '#4a7dff'}],
+                masters: [{id: 'B', name: 'B-Sans folio', items: []}], pages: [{id: 'p1', master: 'B', items}], uid: 'd' + Date.now().toString(36), fn: {place: 'block', restart: 'none'}, notes: {}, review: {comments: []}};
+            await K.openEditor({id: 0, name: name.slice(0, 160), doc}); return true;
+        },
         portraitUrl: p => (p?.portrait ? `media/${encodeURIComponent(p.portrait)}` : ''),
         openPerson: id => (A().openPersonById ? A().openPersonById(id) : A().selectPerson ? A().selectPerson(id) : (location.hash = `#personnes/${id}`)),
     };
