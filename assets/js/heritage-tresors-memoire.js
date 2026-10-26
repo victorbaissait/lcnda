@@ -31,7 +31,7 @@
             <label>S’ouvre<select name="when"><option value="date" ${d.when !== 'age' ? 'selected' : ''}>à une date</option><option value="age" ${d.when === 'age' ? 'selected' : ''}>à un anniversaire</option></select></label>
             <label data-w="date">Le<input type="date" name="open_at" value="${T.esc(it?.open_at || '')}" min="${today()}"></label>
             <div class="span-2" data-w="age"><span class="pk-lab">L’anniversaire de</span>${P().pickerField({name: 'for_person', kind: 'person', value: d.for_person ?? null})}</div>
-            <label data-w="age">À ses<input type="number" name="age" min="1" max="120" value="${T.esc(d.age || 18)}"> ans</label>
+            <label data-w="age">À ses<input type="number" name="age" min="1" max="120" value="${T.esc(d.age || 18)}" data-unit="ans"></label>
             <label class="span-2">Titre<input name="title" maxlength="200" value="${T.esc(it?.title || '')}" placeholder="Pour tes 18 ans"></label>
             <label class="span-2">La lettre<textarea name="body" rows="10" placeholder="${it?.sealed ? 'Scellée : laisse vide pour garder le texte d’origine' : 'Écris ici…'}">${it?.sealed ? '' : T.esc(it?.body || '')}</textarea></label>
             <div class="span-2"><span class="pk-lab">Un son, une vidéo ou une photo (facultatif)</span>${P().mediaField({name: 'media_ids', multiple: true, value: d.media || []})}</div>

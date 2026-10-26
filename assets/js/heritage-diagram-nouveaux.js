@@ -184,7 +184,7 @@
             sample: sampleHour},
         gantt: {icon: '📅', label: 'Diagramme de Gantt (tâches, chantiers de recherche)', group: 'Frises', render: gantt, legend: 'bottom',
             help: 'Une ligne par tâche, de sa date de début à sa date de fin, avec ce qui est déjà fait.',
-            grids: [{key: 'rows', label: 'Les tâches', cols: [C('task', 'Tâche'), C('group', 'Groupe'), C('start', 'Début (date ou année)'), C('end', 'Fin'), C('done', 'Fait (%)', 'number')]}],
+            grids: [{key: 'rows', label: 'Les tâches', cols: [C('task', 'Tâche'), C('group', 'Groupe'), C('start', 'Début (date ou année)'), C('end', 'Fin'), C('done', 'Fait', 'number', {unit: '%', min: 0, max: 100})]}],
             options: [C('colorBy', 'Couleur', 'select', {choices: [['group', 'Une par groupe'], ['task', 'Une par tâche'], ['one', 'Une seule']], def: 'group'}), C('barColor', 'Couleur (une seule)', 'color', {def: '#4e79a7', when: s => s.o?.colorBy === 'one'}), PALETTE,
                 C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['start', 'Par date de début']]}), C('rowHeight', 'Hauteur d’une ligne', 'range', {unit: 'px', min: 16, max: 60, def: 28}),
                 C('progress', 'Montrer l’avancement', 'check', {def: true}), C('values', 'Écrire le %', 'check', {def: true}), C('today', 'Trait « aujourd’hui »', 'check', {def: true}), C('todayColor', 'Couleur du trait « aujourd’hui »', 'color', {def: '#e15759'}), C('stripes', 'Une ligne sur deux grisée', 'check', {def: true}), H_OPT],

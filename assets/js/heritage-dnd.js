@@ -66,8 +66,9 @@
             host.insertBefore(grip, host.firstChild);
         }
     }
-    let timer = 0;
-    new MutationObserver(() => { clearTimeout(timer); timer = setTimeout(enhance, 80); }).observe(document.documentElement, {childList: true, subtree: true});
+    /** attendre que la page se calme, mais pas plus de 600 ms : une page qui change sans arrêt (une barre de temps, une animation) ne doit pas tout bloquer */
+    const settle = (fn, wait) => { let t = 0, first = 0; return () => { const now = Date.now(); if (!t) first = now; clearTimeout(t); t = setTimeout(() => { t = 0; fn(); }, now - first > 600 ? 0 : wait); }; };
+    new MutationObserver(settle(() => enhance(), 80)).observe(document.documentElement, {childList: true, subtree: true});
 
     const wait = ms => new Promise(r => setTimeout(r, ms));
     /** Presse le bouton, puis attend que l'écran se soit redessiné (ou qu'il ait juste déplacé la ligne) */
@@ -137,8 +138,7 @@
             g.setAttribute('aria-label', GRIP_LABEL); if (!g.title || /^(Déplacer|Glisser pour (déplacer|ranger))$/.test(g.title)) g.title = GRIP_LABEL;
         });
     }
-    let gripT = 0;
-    new MutationObserver(() => { clearTimeout(gripT); gripT = setTimeout(gripsReady, 90); }).observe(document.documentElement, {childList: true, subtree: true});
+    new MutationObserver(settle(() => gripsReady(), 90)).observe(document.documentElement, {childList: true, subtree: true});
     const sameKind = (a, b) => a && b && a.tagName === b.tagName && (a.className.split(' ')[0] || '') === (b.className.split(' ')[0] || '');
     /** une liste à poignée sans flèches (glisser-déposer du navigateur) : on joue le même glisser, d'une ligne */
     function dragOneStep(row, grip, dir) {

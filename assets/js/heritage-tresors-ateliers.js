@@ -87,7 +87,7 @@
     async function renderLaser(host, T) {
         const tr = await T.tree(), st = T.start(tr);
         host.innerHTML = `<div class="h-tr-panel h-tr-row h-tr-noprint"><div style="min-width:240px"><span class="pk-lab">Les ancêtres de</span>${T.personField('root', st?.id)}</div><label>Générations<select name="g"><option>3</option><option>4</option><option selected>5</option><option>6</option></select></label>
-            <label>Largeur (mm)<input type="number" name="d" min="100" max="1000" value="300" style="width:6em"></label><button type="button" class="button" data-lz-svg>⬇ SVG pour la graveuse</button></div>
+            <label>Largeur<input type="number" name="d" min="100" max="1000" value="300" data-unit="mm" style="width:6em"></label><button type="button" class="button" data-lz-svg>⬇ SVG pour la graveuse</button></div>
             <p class="h-tr-muted">Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import.</p><div class="h-tr-lz-out" data-lz-out></div>`;
         const svg = () => fanSvg(T, tr, Number(host.querySelector('[name=root]').value) || st.id, Number(host.querySelector('[name=g]').value), Math.max(100, Math.min(1000, Number(host.querySelector('[name=d]').value) || 300)));
         const draw = () => { host.querySelector('[data-lz-out]').innerHTML = svg(); }; host.addEventListener('change', draw); host.addEventListener('input', e => { if (e.target.name === 'd') draw(); });

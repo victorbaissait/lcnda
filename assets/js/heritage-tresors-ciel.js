@@ -119,7 +119,7 @@
         const tr = await T.tree(), st = T.start(tr), pend = ext.tresorSky.pending; ext.tresorSky.pending = null;
         const first = pend || (tr.byId.get(st?.id)?.by ? st.id : tr.people.find(p => p.by)?.id);
         host.innerHTML = `<div class="h-tr-split"><form class="h-tr-panel" data-sk><div><span class="pk-lab">La naissance de</span>${T.personField('who', first)}</div>
-            <label>Vers quelle heure (heure solaire du lieu)<input type="time" name="h" value="22:00"></label>
+            <label>Vers quelle heure (heure solaire du lieu)<input name="h" value="22:00" data-ui-time></label>
             <label>Le style<select name="th"><option value="nuit">Nuit bleue</option><option value="papier">Affiche (fond crème)</option><option value="or">Noir et or</option></select></label>
             <label class="checkbox-line"><input type="checkbox" name="lines" checked> Les constellations</label><label class="checkbox-line"><input type="checkbox" name="names" checked> Les noms</label>
             <p class="h-tr-row"><button type="button" class="button" data-sk-png>⬇ Image PNG</button><button type="button" class="button secondary" data-sk-keep>💾 Garder dans les médias</button></p><div data-sk-info class="h-tr-muted"></div></form>

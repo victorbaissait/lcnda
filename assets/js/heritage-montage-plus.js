@@ -279,7 +279,7 @@
             body: `<p class="muted">Deux téléphones (ou plus) ont filmé la même scène — un entretien, un repas de famille. L’app les cale entre elles grâce au son, puis monte en passant de l’une à l’autre. Le résultat va à la fin de la piste 1 ; le son vient d’une seule caméra (sur une piste son).</p>
                 <fieldset><legend>Les caméras (2 à 4)</legend>${vids.map((v, k) => `<label class="checkbox-line"><input type="checkbox" name="cam" value="${v.i}" ${k < 2 ? 'checked' : ''}> ${e2(v.so.title || 'Vidéo')} <small class="muted">${Math.round(v.so.dur || 0)} s</small></label>`).join('')}</fieldset>
                 <div class="form-grid"><label>Passer d’une caméra à l’autre<select name="mode"><option value="loud">quand quelqu’un parle plus près d’une autre caméra</option><option value="turn">à tour de rôle</option></select></label>
-                <label>Toutes les (à tour de rôle)<input name="every" type="number" min="1" max="120" value="5"> s</label><label>Plan le plus court<input name="min" type="number" min="0.5" max="30" step="0.5" value="2"> s</label></div>
+                <label>Toutes les (à tour de rôle)<input name="every" type="number" min="1" max="120" value="5" data-unit="s"></label><label>Plan le plus court<input name="min" type="number" min="0.5" max="30" step="0.5" value="2" data-unit="s"></label></div>
                 <p class="muted" data-mc-msg></p>`,
             onSubmit: async f => {
                 const ids = [...f.querySelectorAll('[name=cam]:checked')].map(i => Number(i.value)); const msg = f.querySelector('[data-mc-msg]');
