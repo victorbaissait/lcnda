@@ -123,3 +123,23 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-trw-day { display: flex; gap: 12px; align-items: flex-start; } .h-trw-day img, .h-trw-noimg { width: 64px; height: 64px; object-fit: cover; border: 2px solid var(--ink, #111); flex: none; display: grid; place-items: center; font-size: 28px; } .h-trw-day p { margin: 6px 0 0; }
 .h-trw-grow { display: flex; align-items: flex-end; gap: 6px; height: 84px; padding-top: 6px; } .h-trw-grow div { display: grid; justify-items: center; gap: 2px; flex: 1; } .h-trw-grow i { display: block; width: 100%; max-width: 26px; background: #59a14f; border: 1px solid #2f6b2a; } .h-trw-grow small { font-size: 10px; color: var(--muted, #666); }
 .h-trw-amb { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; } .h-trw-amb select { flex: 1 1 160px; }
+/* 🎩 thème d'époque : le nom puis les années, l'un sous l'autre (les années ne débordent plus de la carte) */
+.h-tr-cards .h-tr-era-demo .person-hero { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; grid-template-columns: none; min-width: 0; overflow: hidden; }
+.h-tr-cards .h-tr-era-demo .person-hero > * { max-width: 100%; position: static; margin: 0; grid-column: auto; }
+.h-tr-cards .h-tr-era-demo .person-hero small { white-space: nowrap; font-size: 12px; opacity: .85; }
+/* 📺 le quiz du repas : le design du site (papier, traits noirs de 2 px, ombre bleue décalée) ; en mode sombre, les couleurs du thème sombre */
+.h-tr-veillee.h-tr-quiz { background: var(--paper, #f7f7f5); color: var(--ink, #080808); font-family: inherit; background-image: linear-gradient(var(--line-color, #e3e5ea) 1px, transparent 1px), linear-gradient(90deg, var(--line-color, #e3e5ea) 1px, transparent 1px); background-size: 32px 32px; }
+.h-tr-quiz .h-tr-qz { max-width: 1400px; margin: 0 auto; width: 100%; }
+.h-tr-quiz .h-tr-qz-top { opacity: 1; font-weight: 700; color: var(--muted, #555); }
+.h-tr-quiz .h-tr-qz-time { display: inline-grid; place-items: center; min-width: 2em; padding: 0 .3em; border: var(--line, 2px solid #080808); background: var(--white, #fff); color: var(--blue, #0066cc); box-shadow: var(--shadow-small, 3px 3px 0 rgba(5, 93, 255, .25)); }
+.h-tr-quiz .h-tr-qz h2 { letter-spacing: -.02em; color: var(--ink, #080808); }
+.h-tr-quiz .h-tr-qz-opt { border-radius: 0; border: var(--line, 2px solid #080808); background: var(--white, #fff); color: var(--ink, #080808); box-shadow: var(--shadow, 6px 6px 0 rgba(5, 93, 255, .25)); font-weight: 700; }
+.h-tr-quiz .h-tr-qz-opt b { border-radius: 0; background: var(--blue, #0066cc); color: #fff; transform: rotate(-3deg); border: 2px solid var(--ink, #080808); }
+.h-tr-quiz .h-tr-qz-opt.is-good { background: #1f9d55; color: #fff; box-shadow: 6px 6px 0 var(--ink, #080808); }
+.h-tr-quiz .h-tr-qz-opt.is-bad { opacity: .35; }
+.h-tr-quiz .h-tr-qz-why { color: var(--muted, #555); }
+.h-tr-quiz .h-tr-vl-bar { background: var(--card-head-bg, #f0f0ee); border-top: var(--line, 2px solid #080808); }
+.h-tr-quiz .h-tr-vl-bar button, .h-tr-quiz .h-tr-qz-score button { border-radius: 0; border: var(--line, 2px solid #080808); background: var(--white, #fff); color: var(--ink, #080808); font-weight: 700; box-shadow: var(--shadow-small, 3px 3px 0 rgba(5, 93, 255, .25)); }
+.h-tr-quiz .h-tr-qz-score button:not(:disabled):hover, .h-tr-quiz .h-tr-vl-bar button:hover { background: var(--blue, #0066cc); color: #fff; }
+.h-tr-quiz .h-tr-qz-score button small { color: var(--blue, #0066cc); }
+.h-tr-quiz .h-tr-vl-ini { background: var(--white, #fff); border: var(--line, 2px solid #080808); box-shadow: var(--shadow, 6px 6px 0 rgba(5, 93, 255, .25)); border-radius: 0; }

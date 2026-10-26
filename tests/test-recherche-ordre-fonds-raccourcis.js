@@ -87,7 +87,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                 // au doigt, elles restent. La poignée est posée juste après le dessin : on l'attend avant de choisir.
                 const moveUp = async row => { const arrow = `${row} [data-move="-1"]`;
                     await p.waitForSelector(`${row} .order-grip[data-grip-done]`, { timeout: 3000 }).catch(() => {}); await p.waitForTimeout(100);
-                    if (await p.isVisible(arrow)) return p.click(arrow);
+                    if (await p.isVisible(arrow)) return p.$eval(arrow, b => b.click()); // (la flèche peut se cacher pendant le clic : clic direct)
                     await p.focus(`${row} .order-grip`); await p.keyboard.press('Alt+ArrowUp'); await p.waitForTimeout(150); };
 
                 /* ── 1. Types de recherche ── */
@@ -138,9 +138,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     await p.evaluate(() => localStorage.removeItem('genealogie-research-kind-hidden'));
                 });
                 await t(`[${tag}] Réglages → Apparence « 🔎 Types de recherche » : K2 (↶ Annuler, ↺ Remettre comme au départ)`, async () => {
-                    /* présentation A : « Menus, colonne et listes » → onglet « Recherche » (Types de recherche) */
-                    await p.evaluate(async () => { const s = window.LCNDA_APP.state; s.maintenanceTab = 'nav_menus'; await window.LCNDA_APP.setModule('maintenance'); });
-                    await p.waitForSelector('[data-reg-a-tab]'); await p.click('[data-reg-a-tab][title="Types de recherche"]');
+                    /* le cadre n'est plus dans « Menus, colonne et listes » (on range dans Recherche → Réordonner) : il reste dans l'Apparence d'avant */
+                    await p.evaluate(async () => { window.LCNDA_APP.setReglagesA(false); const s = window.LCNDA_APP.state; s.maintenanceTab = 'design'; await window.LCNDA_APP.setModule('maintenance'); });
                     await p.waitForSelector('#research-kinds-config [data-rk-list] li', { timeout: 20000 });
                     await p.click('#research-kinds-config [data-rk="web"] [data-eye]');
                     assert.deepEqual(JSON.parse(await lsGet(RK[1])), ['web']);
@@ -154,6 +153,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     assert.ok(await lsGet(RK[0]));
                     await p.click('#research-kinds-config [data-rk-reset]');
                     assert.equal(await lsGet(RK[0]), null);
+                    await p.evaluate(() => window.LCNDA_APP.setReglagesA(true));
                 });
                 if (!dark) await t('serveur : le défaut du site garde les types de recherche (et jette une clé inconnue)', async () => {
                     const res = await p.evaluate(async () => { const A = window.LCNDA_APP; await A.api('save_site_defaults', {}, { method: 'POST', body: { settings: { 'genealogie-research-kind-order': '["text","question"]', 'genealogie-research-kind-hidden': '["insee"]', 'zzz-inconnue': '1' } } }); return (await A.api('bootstrap')).siteDefaults.settings; });

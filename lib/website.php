@@ -41,7 +41,7 @@ const SITE_REDACTED = '[nom retiré]';
 const SITE_BLOCK_KINDS = ['menu', 'person', 'tree', 'timeline', 'map', 'chart', 'photos', 'place', 'diagram'];
 const SITE_FROZEN_MAX = 3500000;  // une carte figée (image) ou un diagramme figé (SVG)
 /** 🗺 Fonds qu'on peut aussi montrer en « carte interactive » dans le site publié : leurs conditions permettent qu'un site
- *  les affiche avec leur mention (OpenStreetMap, CARTO, OpenTopoMap, OpenHistoricalMap). Les autres fonds (Esri, IGN,
+ *  les affiche avec leur mention (OpenStreetMap, OpenTopoMap, OpenHistoricalMap ; CARTO demande maintenant une clé). Les autres fonds (Esri, IGN,
  *  bibliothèques…) restent en image figée ; leur carte interactive passe au fond OpenStreetMap. */
 const SITE_MAP_LIVE = [
     'osm' => ['https://tile.openstreetmap.org/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap', 19],
@@ -49,11 +49,6 @@ const SITE_MAP_LIVE = [
     'osmde' => ['https://a.tile.openstreetmap.de/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap', 18],
     'cyclosm' => ['https://a.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', '© CyclOSM · © les contributeurs d’OpenStreetMap', 19],
     'relief' => ['https://a.tile.opentopomap.org/{z}/{x}/{y}.png', '© OpenTopoMap (CC-BY-SA) · © les contributeurs d’OpenStreetMap', 17],
-    'light' => ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
-    'dark' => ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
-    'minimal' => ['https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
-    'roads' => ['https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
-    'voyager' => ['https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', '© les contributeurs d’OpenStreetMap · © CARTO', 19],
     'ohm' => ['https://tile.openhistoricalmap.org/map/{z}/{x}/{y}.png', '© les contributeurs d’OpenHistoricalMap', 18],
 ];
 

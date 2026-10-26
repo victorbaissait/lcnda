@@ -16,6 +16,8 @@
     /* la projection des tuiles (Web Mercator) : longitude, latitude → pixels du monde au zoom z */
     const wx = (lng, z) => (lng + 180) / 360 * 256 * 2 ** z;
     const wy = (lat, z) => { const s = Math.sin(lat * Math.PI / 180); return (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * 256 * 2 ** z; };
+    /** tous les fonds de carte de l'app (Réglages › Cartes et fonds de carte), au choix */
+    const bgOptions = sel => A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml(sel) : `<option value="color">OpenStreetMap</option><option value="light">Clair</option>`;
     const tile = (bg, z, x, y) => A().mapTileUrl ? A().mapTileUrl(bg, z, x, y) : `https://tile.openstreetmap.org/${z}/${x}/${y}.png`;
     const km = (a, b) => { const R = 6371, r = Math.PI / 180, dl = (b.lat - a.lat) * r, dg = (b.lng - a.lng) * r, h = Math.sin(dl / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dg / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
     const geo = (tr, id) => { const p = id && tr.places[id]; return p && p.lat != null && p.lng != null ? {lat: p.lat, lng: p.lng, name: p.name, id} : null; };
@@ -74,14 +76,14 @@
         });
         ctx.fillStyle = 'rgba(255,255,255,.88)'; ctx.fillRect(18, 18, 300, 92); ctx.fillStyle = '#1d2330'; ctx.font = '800 54px system-ui'; ctx.fillText(String(Math.floor(y)), 32, 76); ctx.font = '14px system-ui'; ctx.fillText(`${alive} personne${alive > 1 ? 's' : ''} en vie · ${title}`.slice(0, 44), 34, 99);
         ctx.font = '13px system-ui'; sc.names.slice(0, 8).forEach((n, k) => { ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.fillRect(W - 170, 18 + k * 22, 152, 20); ctx.fillStyle = COLORS[k % COLORS.length]; ctx.beginPath(); ctx.arc(W - 158, 28 + k * 22, 5, 0, 7); ctx.fill(); ctx.fillStyle = '#1d2330'; ctx.fillText(n, W - 146, 32 + k * 22); });
-        ctx.font = '11px system-ui'; ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillText('Fond de carte © OpenStreetMap, CARTO', 20, H - 10);
+        ctx.font = '11px system-ui'; ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillText('Fond de carte © OpenStreetMap, Esri', 20, H - 10);
     }
     const T_name = p => [p.first, p.last].filter(Boolean).join(' ');
     async function renderFilm(host, T) {
         const tr = await T.tree(), sc = filmScene(T, tr);
         if (!sc) { host.innerHTML = '<p class="h-tr-muted">Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film.</p>'; return; }
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>Durée du film<select data-fm-d><option value="20">20 s</option><option value="40" selected>40 s</option><option value="60">1 min</option><option value="120">2 min</option></select></label>
-            <label>Fond<select data-fm-bg><option value="light">Clair</option><option value="voyager">Routes</option><option value="osmfr">OpenStreetMap</option><option value="grid">Sans carte</option></select></label>
+            <label>Fond<select data-fm-bg>${bgOptions('light')}<option value="grid">Sans carte</option></select></label>
             <button type="button" class="button" data-fm-play>▶ Jouer</button><button type="button" class="button secondary" data-fm-rec>⏺ Enregistrer la vidéo</button><span class="h-tr-muted" data-fm-st>${sc.ts.length} parcours, de ${sc.y0 + 1} à ${sc.y1}</span></div>
             <canvas class="h-tr-canvas" width="${sc.W}" height="${sc.H}" data-fm-c></canvas><input type="range" data-fm-y min="${sc.y0}" max="${sc.y1}" step="0.1" value="${sc.y0}" style="width:100%">`;
         const cv = host.querySelector('[data-fm-c]'), ctx = cv.getContext('2d'), range = host.querySelector('[data-fm-y]'), stEl = host.querySelector('[data-fm-st]'), title = `famille ${T.start(tr)?.last || ''}`.trim();
@@ -120,18 +122,18 @@
         const pls = [...uses].sort((a, b) => b[1] - a[1]).map(([id, n]) => ({...geo(tr, id), n}));
         if (!pls.length) { host.innerHTML = '<p class="h-tr-muted">Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude).</p>'; return; }
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>Le lieu<select data-cu-p>${pls.map(p => `<option value="${p.id}">${T.esc(p.name)} (${p.n})</option>`).join('')}</select></label>
-            <label>Hier<select data-cu-old>${OLD.map(([k, l]) => `<option value="${k}">${T.esc(l)}</option>`).join('')}</select></label><label>Zoom<input type="range" data-cu-z min="10" max="16" value="14"></label>
+            <label>Hier<select data-cu-old>${OLD.map(([k, l]) => `<option value="${k}">${T.esc(l)}</option>`).join('')}</select></label><label>Aujourd’hui<select data-cu-now>${bgOptions('color')}</select></label><label>Zoom<input type="range" data-cu-z min="10" max="16" value="14"></label>
             <span class="h-tr-muted">Fais glisser le rideau (ou les flèches du clavier).</span></div>
             <div class="h-tr-curtain" data-cu tabindex="0" aria-label="Rideau entre la carte d’hier et celle d’aujourd’hui"><div class="h-tr-cu-layer" data-cu-now></div><div class="h-tr-cu-layer h-tr-cu-old" data-cu-then></div><div class="h-tr-cu-bar" data-cu-bar><span>◀ ▶</span></div><b class="h-tr-cu-lab l">Hier</b><b class="h-tr-cu-lab r">Aujourd’hui</b><i class="h-tr-cu-pin"></i></div>
-            <p class="h-tr-muted">Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, CARTO. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité.</p>`;
+            <p class="h-tr-muted">Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité.</p>`;
         const box = host.querySelector('[data-cu]'), now = host.querySelector('[data-cu-now]'), then = host.querySelector('[data-cu-then]'), bar = host.querySelector('[data-cu-bar]');
         let cut = 50;
         const setCut = v => { cut = Math.max(0, Math.min(100, v)); then.style.clipPath = `inset(0 ${100 - cut}% 0 0)`; bar.style.left = cut + '%'; };
         const tiles = (bg, z, p) => { const W = box.clientWidth || 900, H = box.clientHeight || 480, cx = wx(p.lng, z), cy = wy(p.lat, z), ox = cx - W / 2, oy = cy - H / 2, n = 2 ** z; let h = '';
             for (let tx = Math.floor(ox / 256); tx <= Math.floor((ox + W) / 256); tx++) for (let ty = Math.floor(oy / 256); ty <= Math.floor((oy + H) / 256); ty++) if (ty >= 0 && ty < n) h += `<img draggable="false" referrerpolicy="no-referrer" alt="" src="${tile(bg, z, ((tx % n) + n) % n, ty)}" style="left:${Math.round(tx * 256 - ox)}px;top:${Math.round(ty * 256 - oy)}px">`;
             return h; };
-        const draw = () => { const p = pls.find(x => String(x.id) === host.querySelector('[data-cu-p]').value) || pls[0], z = Number(host.querySelector('[data-cu-z]').value); now.innerHTML = tiles('voyager', z, p); then.innerHTML = tiles(host.querySelector('[data-cu-old]').value, z, p); setCut(cut); };
-        host.querySelectorAll('[data-cu-p],[data-cu-old],[data-cu-z]').forEach(el => el.addEventListener('change', draw));
+        const draw = () => { const p = pls.find(x => String(x.id) === host.querySelector('[data-cu-p]').value) || pls[0], z = Number(host.querySelector('[data-cu-z]').value); now.innerHTML = tiles(host.querySelector('[data-cu-now]').value || 'color', z, p); then.innerHTML = tiles(host.querySelector('[data-cu-old]').value, z, p); setCut(cut); };
+        host.querySelectorAll('[data-cu-p],[data-cu-old],[data-cu-now],[data-cu-z]').forEach(el => el.addEventListener('change', draw));
         const fromEvent = e => { const r = box.getBoundingClientRect(); setCut((e.clientX - r.left) / r.width * 100); };
         box.addEventListener('pointerdown', e => { box.setPointerCapture(e.pointerId); fromEvent(e); const mv = ev => fromEvent(ev), up = () => { box.removeEventListener('pointermove', mv); box.removeEventListener('pointerup', up); }; box.addEventListener('pointermove', mv); box.addEventListener('pointerup', up); });
         box.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') { setCut(cut - 5); e.preventDefault(); } if (e.key === 'ArrowRight') { setCut(cut + 5); e.preventDefault(); } });

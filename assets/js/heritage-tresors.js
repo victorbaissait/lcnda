@@ -111,7 +111,35 @@
         const gi = g => { const i = GROUPS.findIndex(x => x[0] === g); return i < 0 ? GROUPS.length : i; };
         return ext.tresorFeatures.map((f, i) => ({f, i})).sort((a, b) => gi(a.f.group) - gi(b.f.group) || rank(a.f.key) - rank(b.f.key) || a.i - b.i).map(x => x.f);
     }
+    /* Les dossiers des trésors (« 🕯️ Garder la mémoire », « 🔭 Découvrir »…) : on les renomme, en crée, en efface, et on décide
+       ce qui va dedans, comme dans Listes et Réglages (app-sidegroups.js) ; ou bien une seule liste. Les trésors cachés restent cachés. */
+    let SG = null;
+    const sg = () => {
+        if (SG || !window.LCNDA_SIDEGROUPS || !ext.tresorFeatures?.length) return SG;
+        const fOf = k => ext.tresorFeatures.find(f => f.key === k);
+        SG = window.LCNDA_SIDEGROUPS({name: 'tresors', panelTitle: 'Les trésors et leurs dossiers', key: 'lcnda-tresors-groups', eyebrow: 'TRÉSORS', what: 'trésors', defaultEnabled: true,
+            defaults: GROUPS.map(([g, label]) => { const [icon, ...rest] = label.split(' '); return ['g_' + g, icon, rest.join(' '), ordered().filter(f => f.group === g).map(f => f.key)]; }),
+            allKeys: () => ext.tresorFeatures.map(f => f.key), label: k => { const f = fOf(k); return f ? `${f.icon} ${f.title}` : k; },
+            flatOrder: () => ordered().map(f => f.key), flatDefaults: () => ext.tresorFeatures.map(f => f.key),
+            setFlatOrder: keys => { try { localStorage.setItem(PREF_KEY, JSON.stringify({...prefs(), order: keys})); } catch (_) {} },
+            canHide: true, hidden: () => prefs().hidden, setHidden: keys => { try { localStorage.setItem(PREF_KEY, JSON.stringify({...prefs(), hidden: keys})); } catch (_) {} },
+            current: () => ''});
+        return SG;
+    };
+    /** les dossiers à montrer : [[nom avec icône, [trésors]]] */
+    function folders() {
+        const {hidden} = prefs(), vis = f => f && !hidden.includes(f.key), S = sg();
+        if (!S) return GROUPS.map(([g, label]) => [label, ordered().filter(f => f.group === g && vis(f))]);
+        const p = S.prefs(), fOf = k => ext.tresorFeatures.find(f => f.key === k);
+        if (!p.enabled) return [['', ordered().filter(vis)]];
+        return p.groups.map(g => [`${g.icon} ${g.label}`, g.items.map(fOf).filter(vis)]);
+    }
     function openSettings() {
+        const S = sg();
+        if (S) { S.openDialog(); const d = [...document.querySelectorAll('dialog.mt-reorder')].pop(); d?.addEventListener('close', () => { if (A().state.module === 'tresors' && A().$('#workspace .h-tr:not(.h-tr-page)')) A().$('#workspace').innerHTML = hub(); }); return; }
+        openSettingsFlat();
+    }
+    function openSettingsFlat() {
         const hidden = prefs().hidden, glabel = g => (GROUPS.find(x => x[0] === g)?.[1] || '').replace(/^\S+\s/, '');
         const row = f => ({key: f.key, label: `${f.icon} ${f.title} — ${glabel(f.group)}`, hidden: hidden.includes(f.key)});
         A().openSideReorderDialog({eyebrow: 'TRÉSORS', title: 'Réordonner les trésors', canHide: true, rows: ordered().map(row),
@@ -126,8 +154,8 @@
     function hub() {
         const {hidden} = prefs(), list = ordered().filter(f => !hidden.includes(f.key)), nHid = ext.tresorFeatures.filter(f => hidden.includes(f.key)).length;
         return `<section class="page h-tr">
-            <div class="page-header"><div><span class="eyebrow">✨ TRÉSORS DE FAMILLE</span><h1>Trésors de famille</h1><p class="muted">Pour s'émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.</p></div><div class="page-actions"><button type="button" class="button secondary" data-tr-settings title="L’ordre des trésors, ceux qui s’affichent et ceux qui sont cachés${nHid ? ` (en ce moment : ${A().plural(nHid, 'trésor caché')})` : ''}">⚙️ Réglages</button></div></div>
-            ${GROUPS.map(([g, label]) => { const fs = list.filter(f => f.group === g); return fs.length ? `<h2 class="h-tr-group">${esc(label)}</h2><div class="h-tr-grid">${fs.map(f => `<button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(f.title)}</b><small>${esc(f.desc)}</small></button>`).join('')}</div>` : ''; }).join('')}
+            <div class="page-header"><div><span class="eyebrow">✨ TRÉSORS DE FAMILLE</span><h1>Trésors de famille</h1><p class="muted">Pour s'émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.</p></div><div class="page-actions"><button type="button" class="button secondary" data-tr-settings title="Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche${nHid ? ` (en ce moment : ${A().plural(nHid, 'trésor caché')})` : ''}">⚙️ Réglages</button></div></div>
+            ${folders().map(([label, fs]) => { void list; return !fs.length ? (label ? `<h2 class="h-tr-group">${esc(label)}</h2><p class="muted h-tr-empty">Dossier vide : ⚙️ Réglages pour y ranger des trésors (ou l’effacer).</p>` : '') : `${label ? `<h2 class="h-tr-group">${esc(label)}</h2>` : ''}<div class="h-tr-grid">${fs.map(f => `<button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(f.title)}</b><small>${esc(f.desc)}</small></button>`).join('')}</div>`; }).join('')}
         </section>`;
     }
     async function render(token) {

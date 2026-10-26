@@ -104,7 +104,7 @@
     /** la mention à garder sous la carte (les conditions de chaque fond) */
     const creditOf = bg => {
         const b = String(bg || '');
-        if (/^(dark|light|minimal|roads|voyager)$/.test(b)) return '© les contributeurs d’OpenStreetMap · © CARTO';
+        if (/^(dark|light|minimal|roads)$/.test(b)) return '© Esri · © les contributeurs d’OpenStreetMap'; if (b === 'voyager') return '© OpenStreetMap France · © les contributeurs d’OpenStreetMap';
         if (b === 'relief') return '© OpenTopoMap (CC-BY-SA) · © les contributeurs d’OpenStreetMap';
         if (b === 'ohm') return '© les contributeurs d’OpenHistoricalMap';
         if (b === 'cyclosm') return '© CyclOSM · © les contributeurs d’OpenStreetMap';

@@ -48,9 +48,13 @@ const t = async (name, fn) => { if (only && !name.includes(only)) return; try { 
             assert.equal(await page.$eval('#app', a => a.classList.contains('no-side')), true, 'colonne de gauche vide');
             // ⚙️ Réglages : cacher un trésor, il disparaît ; on le remontre
             const n0 = await page.$$eval('.h-tr .h-tr-card', l => l.length);
-            await page.click('[data-tr-settings]'); await page.click('.dashboard-reorder-row:nth-child(1) [data-eye]'); await page.click('dialog [data-save]');
+            // ⚙️ Réglages : les dossiers (comme dans Listes) ; décocher un trésor le cache
+            await page.click('[data-tr-settings]'); await page.click('dialog.mt-reorder [data-gi="0"] [data-vis]'); await page.click('dialog.mt-reorder [data-save]'); await page.waitForTimeout(300);
             assert.equal(await page.$$eval('.h-tr .h-tr-card', l => l.length), n0 - 1, 'un trésor caché');
-            await page.click('[data-tr-settings]'); await page.click('dialog [data-reset]'); await page.click('dialog [data-save]');
+            // un nouveau dossier vide se montre (pour y ranger des trésors), puis tout remis comme au départ
+            await page.click('[data-tr-settings]'); await page.click('dialog.mt-reorder [data-gadd]'); await page.fill('dialog.mt-reorder [data-gi]:last-of-type [data-glabel]', 'Mes préférés'); await page.click('dialog.mt-reorder [data-save]'); await page.waitForTimeout(300);
+            assert.ok((await page.$$eval('.h-tr-group', l => l.map(h => h.textContent))).some(x => /Mes préférés/.test(x)), 'le nouveau dossier');
+            await page.click('[data-tr-settings]'); await page.click('dialog.mt-reorder [data-reset-all]'); await page.click('dialog.mt-reorder [data-save]'); await page.waitForTimeout(300);
             assert.equal(await page.$$eval('.h-tr .h-tr-card', l => l.length), n0, 'tous remontrés');
             const n = await page.$$eval('.h-tr .h-tr-card', l => l.length); assert.ok(n >= 5, `${n} cartes`);
             await page.click('.h-tr-card[data-tr-open="aton-age"]'); await page.waitForSelector('[data-tr-page="aton-age"]');

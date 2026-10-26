@@ -583,12 +583,13 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const src=el.getAttribute(attr)||el.getAttribute('xlink:href')||'';const alt=offlineTileFallback.get(src);
         if(alt&&src!==alt){el.setAttribute(attr,alt);if(el.hasAttribute('xlink:href'))el.setAttribute('xlink:href',alt);}},true);
     window.addEventListener('offline',()=>{toast('Pas d’Internet : les cartes passent au fond hors ligne.');if(['carte','enquetes','personnes','listes'].includes(state.module))setModule(state.module,false);});
+    // CARTO demande maintenant une clé (ses tuiles affichaient « API KEY REQUIRED ») : Claire, Sombre, Minimaliste, Routes passent aux fonds Esri sans clé, Voyager à OSM France
     function mapTileUrlOnline(bg,z,x,y){
-        if(bg==='dark')return `https://a.basemaps.cartocdn.com/dark_all/${z}/${x}/${y}.png`;
+        if(bg==='dark')return `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/${z}/${y}/${x}`;
         if(bg==='osmfr')return `https://a.tile.openstreetmap.fr/hot/${z}/${x}/${y}.png`;
-        if(bg==='light')return `https://a.basemaps.cartocdn.com/light_all/${z}/${x}/${y}.png`;
-        if(bg==='minimal')return `https://a.basemaps.cartocdn.com/light_nolabels/${z}/${x}/${y}.png`;
-        if(bg==='roads')return `https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/${z}/${x}/${y}.png`;
+        if(bg==='light')return `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/${z}/${y}/${x}`;
+        if(bg==='minimal')return `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/${z}/${y}/${x}`;
+        if(bg==='roads')return `https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/${z}/${y}/${x}`;
         if(bg==='relief'){
             // OpenTopoMap ne fournit pas de tuiles natives au-delà du zoom 17 : on réutilise (overzoom)
             // la tuile la plus proche disponible plutôt que de charger une tuile vide/cassée.
@@ -602,7 +603,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(bg==='ohm')return `https://tile.openhistoricalmap.org/map/${z}/${x}/${y}.png`;
         if(bg==='esri_topo')return `https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}`;
         if(bg==='esri_street')return `https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/${z}/${y}/${x}`;
-        if(bg==='voyager')return `https://a.basemaps.cartocdn.com/rastertiles/voyager/${z}/${x}/${y}.png`;
+        if(bg==='voyager')return `https://a.tile.openstreetmap.fr/osmfr/${z}/${x}/${y}.png`;
         if(bg==='osmde')return `https://a.tile.openstreetmap.de/${z}/${x}/${y}.png`;
         if(bg==='cassini'){
             // La carte de Cassini (Géoplateforme/IGN, numérisation BnF haute définition) est disponible du zoom 6 au zoom 14.
@@ -6095,7 +6096,9 @@ ${backupSectionHtml()}
         look_layouts:[[null,[['t',/Réglages enregistrés : l’Apparence/],['t',/Réglages enregistrés : toute l’app/]]]],
         // noms courts, sur une seule ligne (le nom complet est dans la bulle)
         nav_menus:[['Menu',[['t',/^Ordre et noms du menu principal/],['f','navPosition','sidebarPosition','brandDisplay']],'Ordre et noms du menu principal'],['Colonne',[['t',/^Colonne de gauche/]],'La colonne de gauche : où, et son dessin'],['Listes',[['t',/^Ordre des listes/],['t',/Lignes cachées/]],'Ordre des listes, lignes cachées'],['Pages',[['t',/^Ordre des pages des Réglages/]],'Ordre des pages des Réglages'],
-            ['Boutons du haut',[['t',/^Boutons en haut à droite/]],'Boutons en haut à droite'],['Recherche',[['t',/Types de recherche/]],'Types de recherche'],['Graphiques',[['t',/^Graphiques — Diagrammes/],['t',/^Graphiques — Statistiques/]],'Graphiques : diagrammes et statistiques']],
+            ['Boutons du haut',[['t',/^Boutons en haut à droite/]],'Boutons en haut à droite'],['Graphiques',[['t',/^Graphiques — Diagrammes/],['t',/^Graphiques — Statistiques/]],'Graphiques : diagrammes et statistiques']],
+        // les types de recherche se rangent dans Recherche → « Réordonner » : leur cadre n'a plus de page ici (pris, et jamais montré)
+        _ailleurs:[[null,[['t',/Types de recherche/]]]],
         design_sheets:[['En-tête',[['t',/^Présentation de l’éditeur|^En-tête de la fiche|éléments de l’en-tête|Nouvelle observation/]]],['Sections et blocs',[['t',/^Sections des fiches|^Ordre et visibilité des blocs|^Blocs à afficher sur demande|profils/]]],
             ['Ce qu’on y voit',[['f','eventDisplayMode','censusDetailsDefault','censusSpecialOrder','identity_name_variants_display','showInvestigationsAsSecondary','defaultMortPourLaFrance'],['t',/^Filtres du bloc Événements|^Ascendants et descendants/],['t',/^Couleurs des badges/]]],
             ['Numéros et verrou',[['q','#design-form > .local-lock-inline']],'Numérotation et verrou'],['Internet',[['t',/^Chercher sur internet|^Fiches avec un réglage particulier/]],'Chercher sur internet, fiches avec un réglage particulier'],['Le reste',[['p','design_sheets']]]]};
