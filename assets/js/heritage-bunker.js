@@ -596,6 +596,12 @@
         return `<div class="bk-route-head"><h4>📔 Le journal de ${esc(p.name)}</h4><button type="button" class="button small secondary" data-bk="diary" data-id="">← Tous les habitants</button></div>
             ${list ? `<ol class="bk-log bk-diary">${list}</ol>` : A().emptyState({size: 'small', icon: '📔', text: 'Rien d’écrit pour l’instant : il ou elle écrit chaque soir.'})}`;
     }
+    /** imprimer (la gazette, le livre) : la fenêtre « Imprimer » de l'app (format, sens, aperçu, PDF) */
+    function printBunker(title, doc) {
+        if (UI().openPrintDialog) { UI().openPrintDialog({title, html: doc, photos: false}); return; }
+        const w = window.open('', '_blank'); if (!w) { toast('La fenêtre d’impression a été bloquée.', 'error'); return; } // secours, sans LCNDA_UI
+        w.document.write(doc); w.document.close(); w.focus(); w.print(); // secours
+    }
     /* ═════════ Les clics ═════════ */
     function onClick(e) {
         const b = e.target.closest('[data-bk]'); if (!b || !dlg.contains(b)) return;
@@ -628,11 +634,11 @@
         if (k === 'visit') { const r = B().answerVisit(G, b.dataset.v); if (!r.ok) toast(r.err, 'error'); drawAll(); return; }
         if (k === 'gazette') { const gz = dlg.querySelector('[data-bk-gz]'); if (!gz) return; gz.innerHTML = gazetteHtml(); gz.hidden = false; if (G.speed) { gzPaused = G.speed; setSpeed(0); } gz.querySelector('[data-bk="gzclose"]')?.focus(); return; }
         if (k === 'gzclose') { const gz = dlg.querySelector('[data-bk-gz]'); if (gz) gz.hidden = true; if (gzPaused && !G.over) setSpeed(gzPaused); gzPaused = 0; return; }
-        if (k === 'gzprint') { const w = window.open('', '_blank'); if (!w) { toast('La fenêtre d’impression a été bloquée.', 'error'); return; } w.document.write(`<!doctype html><meta charset="utf-8"><title>La Gazette du Bunker</title><style>body{font:15px Georgia,serif;margin:24px;color:#111}h2{font:900 40px Georgia,serif;text-align:center;margin:4px 0;border-top:3px double #111;border-bottom:3px double #111}.bk-gz-mast{text-align:center}.bk-gz-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}h3{text-align:center;font-size:22px}h4{border-bottom:1px solid #111;margin:12px 0 6px}button{display:none}blockquote{font-style:italic;margin:6px 0 6px 10px}</style>${gazetteHtml()}`); w.document.close(); w.focus(); w.print(); return; }
+        if (k === 'gzprint') { printBunker('La Gazette du Bunker', `<!doctype html><meta charset="utf-8"><title>La Gazette du Bunker</title><style>body{font:15px Georgia,serif;margin:24px;color:#111}h2{font:900 40px Georgia,serif;text-align:center;margin:4px 0;border-top:3px double #111;border-bottom:3px double #111}.bk-gz-mast{text-align:center}.bk-gz-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}h3{text-align:center;font-size:22px}h4{border-bottom:1px solid #111;margin:12px 0 6px}button{display:none}blockquote{font-style:italic;margin:6px 0 6px 10px}</style>${gazetteHtml()}`); return; }
         if (k === 'recall') { if (!B().recall(G, b.dataset.id)) toast('La radio ne passe pas (pas d’électricité ?).', 'error'); drawAll(); return; }
         if (k === 'mute') { SND.unlock(); SND.set('on', !SND.pref.on); drawAll(); return; }
         if (k === 'book') { const gz = dlg.querySelector('[data-bk-gz]'); if (!gz) return; gz.innerHTML = bookHtml(); gz.hidden = false; if (G.speed) { gzPaused = G.speed; setSpeed(0); } gz.querySelector('[data-bk="gzclose"]')?.focus(); return; }
-        if (k === 'bookprint') { const w = window.open('', '_blank'); if (!w) { toast('La fenêtre d’impression a été bloquée.', 'error'); return; } w.document.write(bookDoc()); w.document.close(); w.focus(); w.print(); return; }
+        if (k === 'bookprint') { printBunker(bookParts().title, bookDoc()); return; }
         if (k === 'bookdl') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([bookDoc()], {type: 'text/html'})); a.download = `livre-du-bunker-${String(meOf(G).name).toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')}.html`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); return; }
         if (k === 'bookkeep') { const me = meOf(G); ext.tresors.T.save({kind: 'story', person_id: me.pid || null, title: `${bookParts().title} (${new Date().toLocaleDateString('fr-FR')})`, body: bookText(), data: {bunker: true}}).then(() => toast('✓ Rangé dans ✨ Trésors (sur la fiche de ' + me.name + ').')).catch(err => toast(err.message || 'Impossible de ranger le livre.', 'error')); return; }
         if (k === 'deco') { const sel = dlg.querySelector('[data-bk-portrait]'), r = B().addDeco(G, Math.min(decoFloor, G.floors.length - 1), b.dataset.v, 0, b.dataset.v === 'portrait' ? sel?.value || '' : ''); if (!r.ok) toast(r.err, 'error'); drawAll(); return; }
