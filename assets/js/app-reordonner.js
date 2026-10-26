@@ -1,6 +1,6 @@
 /* LCNDA — ⠿ « Réordonner » partout : en bas de chaque colonne de gauche qui montre une liste (Graphiques, Carte, Personnes,
  * Enquêtes, Fiches, Chronologie, ADN…), le même bouton que dans Listes et Réglages : ranger, cacher, montrer.
- * Les onglets qui ont déjà leur propre « Réordonner » (Listes, Réglages, Recherche, Tableau de bord, Trésors) le gardent.
+ * Les onglets qui ont déjà leur propre « Réordonner » (Listes, Réglages, Recherche, Tableau de bord, Trésors, Graphiques) le gardent.
  * Retenu sur cet ordinateur, par onglet : localStorage['lcnda-side-order'] = {module: {order: [clés], hidden: [clés]}}.
  * Seul l'affichage change (ordre des boutons, boutons cachés) : chaque outil garde ses propres réglages.
  */
@@ -15,7 +15,7 @@
     const labelOf = el => { const c = el.cloneNode(true); c.querySelectorAll('.side-number, .sr-only, .visually-hidden').forEach(x => x.remove()); return c.textContent.replace(/\s+/g, ' ').trim(); };
     const keyOf = el => String(el.dataset.sideValue || el.dataset.value || labelOf(el)).slice(0, 120);
     /** les onglets qui ont déjà leur « Réordonner » à eux */
-    const OWN = ['listes', 'maintenance', 'recherche', 'dashboard', 'tresors'];
+    const OWN = ['listes', 'maintenance', 'recherche', 'dashboard', 'tresors', 'graphiques'];
     const items = () => [...document.querySelectorAll(`#sidebar-content ${ITEM}`)].filter(el => !el.closest('[data-no-reorder]'));
 
     /** ranger et cacher selon le réglage de l'onglet (sans rien réécrire si c'est déjà en place : pas de boucle) */

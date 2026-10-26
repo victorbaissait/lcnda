@@ -542,3 +542,12 @@ html[data-toast-pos="tl"] .toast.ui-toast,html[data-toast-pos="tr"] .toast.ui-to
 .sg-panel { grid-column: 1 / -1; max-width: 860px; }
 .sg-inline .sg-inline-help { margin: 4px 0 10px; }
 .sg-inline .dash-reorder-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+/* Réglages découpés : un réordonnement seul sur sa page prend la place */
+.design-order-grid.reg-a-solo { grid-template-columns: minmax(0, 900px) !important; gap: 0; }
+.design-order-grid.reg-a-solo .order-editor.compact { padding: 26px 28px; }
+.design-order-grid.reg-a-solo .order-editor.compact h3 { font-size: 24px; }
+.design-order-grid.reg-a-solo .order-editor.compact > p { font-size: 14px !important; max-width: 70ch; }
+.design-order-grid.reg-a-solo .order-list { gap: 10px; margin-top: 18px; }
+.design-order-grid.reg-a-solo .order-row { grid-template-columns: 26px 44px minmax(0, 1fr) auto; gap: 12px; padding: 12px 14px; }
+.design-order-grid.reg-a-solo .order-row b { font-size: 17px; }
+.design-order-grid.reg-a-solo .order-row input[type=text], .design-order-grid.reg-a-solo .order-row [data-menu-name] { font-size: 15px; min-height: 38px; }

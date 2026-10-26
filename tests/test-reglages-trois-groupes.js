@@ -107,13 +107,13 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.match(await page.locator('[data-side-value="nav_menus"]').first().innerText(), /Menus, colonne et listes/);
             await go('nav_menus');
             const tabs = await page.locator('[data-reg-a-tab]').allTextContents();
-            assert.deepEqual(tabs, ['Menu', 'Colonne', 'Listes', 'Pages', 'Boutons du haut', 'Graphiques']); // les types de recherche : dans Recherche → Réordonner
+            assert.deepEqual(tabs, ['Menu', 'Colonne', 'Listes', 'Pages', 'Boutons du haut']); // les types de recherche : dans Recherche → Réordonner ; les graphiques : dans Graphiques → ⠿ Réordonner
             assert.equal(await page.locator('[data-reg-a-tab="1"]').getAttribute('title'), 'La colonne de gauche : où, et son dessin');
             assert.equal(await page.evaluate(() => new Set([...document.querySelectorAll('[data-reg-a-tab]')].map(b => Math.round(b.getBoundingClientRect().top))).size), 1, 'une seule ligne');
             let s = await seen(); assert.ok(has(s, /Ordre et noms du menu principal/)); assert.ok(s.includes('f:navPosition')); assert.ok(!s.includes('f:sidebarPosition')); assert.ok(!s.includes('f:ownerFirst')); assert.ok(!has(s, /Ordre des listes/));
             await page.click('[data-reg-a-tab="1"]'); s = await seen(); assert.ok(has(s, /^Colonne de gauche/)); assert.ok(!has(s, /menu principal/));
             await page.click('[data-reg-a-tab="2"]'); s = await seen(); assert.ok(has(s, /Ordre des listes/)); assert.ok(!has(s, /menu principal/));
-            await page.click('[data-reg-a-tab="5"]'); s = await seen(); assert.ok(!has(s, /Types de recherche/)); assert.ok(has(s, /Graphiques — Diagrammes/)); assert.ok(has(s, /Graphiques — Statistiques/));
+            for (let i = 0; i < 5; i++) { await page.click(`[data-reg-a-tab="${i}"]`); s = await seen(); assert.ok(!has(s, /Types de recherche|Graphiques — /), `onglet ${i}`); }
         });
         await t('Colonne : « Où ? », « Partir de », 9 styles d’entrées posés sur la vraie colonne, aperçu', async () => {
             await go('nav_menus'); await page.click('[data-reg-a-tab="1"]');
@@ -158,7 +158,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             }
             await page.click('#reglages-presentation'); await page.waitForTimeout(1300);
             await go('design'); const old = await seen();
-            const lost = old.filter(x => !all.has(x) && !/Types de recherche/.test(x)); // rangés dans Recherche → Réordonner
+            const lost = old.filter(x => !all.has(x) && !/Types de recherche|Graphiques — /.test(x)); // rangés dans Recherche → Réordonner et Graphiques → ⠿ Réordonner
             assert.deepEqual(lost, []);
         });
         await t('présentation d’avant : la page « Apparence » entière, puis retour aux trois groupes', async () => {
