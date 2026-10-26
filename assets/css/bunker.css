@@ -14,7 +14,7 @@
 .bk-size input:checked+span{background:var(--ink);color:var(--white)}.bk-size input:focus-visible+span{outline:3px solid var(--blue);outline-offset:1px}
 .bk-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.bk-import{cursor:pointer}
 /* la partie */
-.bk-game{height:100%;display:grid;grid-template-rows:auto auto 1fr;min-height:0}
+.bk-game{position:relative;height:100%;display:flex;flex-direction:column;min-height:0}.bk-game>.bk-main{flex:1}
 .bk-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 12px;border-bottom:var(--line);background:var(--card-head-bg)}
 .bk-title{font-size:15px}.bk-clock{font-variant-numeric:tabular-nums;font-weight:700;padding:3px 8px;border:var(--line);background:var(--white)}.bk-state .is-off{opacity:.55}
 .bk-speed{display:flex;margin:0}.bk-speed button{min-width:40px;min-height:30px}.bk-speed button.is-active,.bk-tabs button.is-active{background:var(--ink);color:var(--white)}
@@ -22,7 +22,7 @@
 .bk-t{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}
 .bk-main{display:grid;grid-template-columns:minmax(0,1fr) 380px;min-height:0}
 .bk-world{position:relative;overflow:auto;border-right:var(--line);background:var(--white)}
-.bk-side{display:grid;grid-template-rows:auto 1fr;min-height:0}.bk-side .segmented.bk-tabs{grid-template-columns:repeat(5,minmax(0,1fr));margin:0}.bk-tabs button{font-size:11px;min-height:34px;padding:2px}
+.bk-side{display:grid;grid-template-rows:auto 1fr;min-height:0}.bk-side .segmented.bk-tabs{grid-template-columns:repeat(3,minmax(0,1fr));margin:0}.bk-tabs button{font-size:11px;min-height:30px;padding:2px}
 .bk-sbody{overflow:auto;padding:12px 14px;display:grid;gap:10px;align-content:start}.bk-sbody h4{margin:6px 0 0;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
 /* le ciel, la ville au loin, la trappe */
 .bk-sky{position:relative;height:118px;background:linear-gradient(var(--s1),var(--s2));border-bottom:var(--line);overflow:hidden;transition:background 1s}
@@ -87,3 +87,42 @@
 .bk-radio-row{display:flex;gap:8px;align-items:center}.bk-radio-row>div{flex:1;display:grid}.bk-radio-row small{color:var(--muted)}
 .bk-log{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:12px}.bk-log li{padding:4px 6px;border-left:3px solid var(--line-color)}.bk-log .is-radio{border-color:var(--blue);background:var(--blue-soft)}.bk-log .is-alerte{border-color:var(--ink);font-weight:600}
 @media (max-width:900px){.bk-main{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) minmax(0,1fr)}.bk-world{border-right:0;border-bottom:var(--line)}.bk-slots{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* la trappe : quelqu'un frappe */
+.bk-visit{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 12px;border-bottom:var(--line);background:#fff7c4;color:#111;font-size:13px}
+.bk-visit>span{flex:1 1 280px}.bk-visit small{flex-basis:100%}
+.bk-visit.is-pillards{background:#ffe1e1}.bk-visit.is-voyageur{background:#e4f2ff}
+.bk-trap.is-knock{background:#ffd84d;color:#111;animation:bk-knock .6s ease-in-out infinite alternate}
+@keyframes bk-knock{to{transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.bk-trap.is-knock,.bk-pawn.is-weak,.bk-sky.is-rain::after{animation:none}}
+/* l'hiver : de la neige au lieu de la pluie */
+.bk-sky.is-winter .bk-ground{background:#e9eef3}
+.bk-sky.is-winter.is-rain::after{background:radial-gradient(#fff 1.4px,transparent 2px) 0 0/18px 18px;animation:bk-snow 2s linear infinite}
+@keyframes bk-snow{to{background-position:6px 36px}}
+/* habitants : bébé, moral, compétences, brouille */
+.bk-pawn.is-baby{width:20px;height:20px;font-size:8px}
+.bk-bar.is-mood i{background:#e9a23b}.bk-bar.is-mood.is-low i{background:#e0102f}
+.bk-chip.is-bad{border-color:#e0102f;color:#b00020}
+.bk-person .bk-chips .bk-chip{font-size:11px;padding:2px 6px;border-width:1.5px}
+/* le coffre (accueil et onglet Famille) */
+.bk-coffre-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 12px;max-height:150px;overflow:auto;padding:6px 8px;border:1px solid var(--line-color)}
+.bk-coffre-items{margin:0;padding:0;list-style:none;display:grid;gap:6px}.bk-coffre-items li{display:grid;padding:6px 8px;border:2px solid var(--ink);background:var(--card-bg)}.bk-coffre-items small{color:var(--muted)}
+/* l'arbre du bunker */
+.bk-tree{display:grid;gap:8px}.bk-tree-row{display:grid;justify-items:center;gap:2px;padding:8px;border:1px solid var(--line-color)}
+.bk-tree-par{font-weight:700;font-size:13px}.bk-tree-par i{font-style:normal;color:#d6457a}.bk-tree-line{width:2px;height:12px;background:var(--ink)}
+.bk-tree-kid{padding:3px 10px;border:2px solid var(--ink);background:var(--white);font-weight:700}.bk-tree-kid small{font-weight:400;color:var(--muted)}
+/* 📰 la gazette */
+.bk-gz{position:absolute;inset:0;z-index:5;background:rgba(8,8,8,.55);display:grid;place-items:center;padding:16px;overflow:auto}
+.bk-gz[hidden]{display:none}
+.bk-gz-paper{position:relative;width:min(920px,100%);max-height:100%;overflow:auto;background:#f6f1e4;color:#1a1a1a;border:var(--line);box-shadow:var(--shadow);padding:22px 26px;font-family:Georgia,'Times New Roman',serif}
+.bk-gz-close{position:absolute;right:10px;top:10px}
+.bk-gz-mast{text-align:center}.bk-gz-mast h2{font:900 clamp(26px,5vw,46px)/1.05 Georgia,serif;margin:6px 0;padding:6px 0;border-top:4px double #1a1a1a;border-bottom:4px double #1a1a1a;letter-spacing:-.01em}
+.bk-gz-mast small{font-style:italic;color:#555}
+.bk-gz-head{text-align:center;font-size:clamp(18px,3vw,24px);margin:14px 0}
+.bk-gz-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.bk-gz-cols section{min-width:0}
+.bk-gz-cols h4{font:700 13px Georgia,serif;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid #1a1a1a;margin:10px 0 6px}
+.bk-gz-cols ul{margin:0;padding-left:0;list-style:none;display:grid;gap:3px;font-size:14px}.bk-gz-cols p{margin:0 0 6px;font-size:14px}
+.bk-gz-cols blockquote{margin:6px 0;padding-left:10px;border-left:3px solid #1a1a1a;font-style:italic;font-size:13px}
+.bk-gz-foot{margin-top:14px;text-align:right}
+@media (max-width:700px){.bk-gz-cols{grid-template-columns:1fr}}
+.bk-log .is-histoire{border-color:#e9a23b;background:#fff7e6}.bk-log .is-visite{border-color:#2f6bd6}

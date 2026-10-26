@@ -12,7 +12,7 @@ const fill = (g, v = 200) => { B.RES_KEYS.forEach(r => { g.res[r] = v; }); g.flo
 t('une partie : un étage avec radio, groupe électrogène, atelier ; les plans de base ; une ville à la bonne taille', () => {
     const g = game();
     assert.deepEqual(g.floors[0].slots.slice(0, 3), ['radio', 'generateur', 'atelier']);
-    assert.deepEqual(g.plans.sort(), ['cuve', 'douche', 'etageres', 'gardemanger', 'lit', 'stockage', 'toilettes']);
+    assert.deepEqual(g.plans.sort(), ['berceau', 'cuve', 'douche', 'dynamo', 'etageres', 'filtre', 'gardemanger', 'jeux', 'lit', 'pieges', 'poele', 'porte', 'stockage', 'toilettes']);
     assert.equal(g.people.length, 3); assert.ok(g.people[0].me);
     for (const [size, [nn, nb]] of Object.entries(B.SIZES)) {
         const c = game({city: {name: 'X', size}}).city; assert.equal(c.n, nn); assert.equal(c.places.length, nb);
@@ -26,7 +26,7 @@ t('les besoins : sans rien faire, on finit par mourir ; avec de quoi vivre, on t
     assert.ok(g.log.some(l => /Plus personne en vie/.test(l.txt)));
     const h = game(); fill(h); h.floors[0].slots[3] = 'toilettes'; h.floors[0].slots[4] = 'lit'; h.floors[0].slots[5] = 'douche'; h.floors[1].slots[0] = 'lit'; h.floors[1].slots[1] = 'lit';
     for (let d = 0; d < 6; d++) { B.run(h, 1440); B.RES_KEYS.forEach(r => { h.res[r] = Math.max(h.res[r], 60); }); }
-    assert.equal(B.alive(h).length, 3); assert.ok(h.people.every(p => p.hp > 80), h.people.map(p => p.hp).join());
+    assert.equal(B.alive(h).length, 3); assert.ok(h.people.every(p => p.hp > 60), h.people.map(p => p.hp).join()); // (des pillards ont pu passer)
     assert.ok(h.people.every(p => Object.values(p.needs).every(v => v > 0)));
 });
 t('les toilettes manquent : on se soulage dans un coin (l’hygiène baisse, un message une fois)', () => {
@@ -68,22 +68,94 @@ t('sans électricité, la radio se tait ; les messages arrivent quand le courant
 });
 t('la pluie remplit l’eau (trois fois plus avec le récupérateur), jamais au-delà de la place', () => {
     const g = game(); g.people.forEach(p => { p.hp = 0; }); g.over = false; g.people[0].hp = 100; g.people[0].needs = {soif: 100, faim: 100, sommeil: 100, hygiene: 100, vessie: 100};
-    g.res.eau = 0; g.weather = {rain: true, until: g.t + 600}; B.run(g, 120); const a = g.res.eau;
-    const h = game(); h.res.eau = 0; h.floors[0].slots[3] = 'recuperateur'; h.weather = {rain: true, until: h.t + 600}; B.run(h, 120); assert.ok(h.res.eau >= a * 2, `${h.res.eau} contre ${a}`);
-    const c = game(); c.res.eau = B.cap(c, 'eau'); c.weather = {rain: true, until: c.t + 600}; B.run(c, 60); assert.ok(c.res.eau <= B.cap(c, 'eau'));
+    g.res.eausale = 0; g.weather = {rain: true, until: g.t + 600}; B.run(g, 120); const a = g.res.eausale;
+    const h = game(); h.res.eausale = 0; h.floors[0].slots[3] = 'recuperateur'; h.weather = {rain: true, until: h.t + 600}; B.run(h, 120); assert.ok(h.res.eausale >= a * 2, `${h.res.eausale} contre ${a}`);
+    const c = game(); c.res.eausale = B.cap(c, 'eausale'); c.weather = {rain: true, until: c.t + 600}; B.run(c, 60); assert.ok(c.res.eausale <= B.cap(c, 'eausale'));
 });
 t('la cuve d’eau de pluie (plan connu dès le départ) : +30 L de place, et elle se remplit quand il pleut', () => {
-    const g = game(); assert.ok(g.plans.includes('cuve')); const cap0 = B.cap(g, 'eau');
+    const g = game(); assert.ok(g.plans.includes('cuve')); const cap0 = B.cap(g, 'eausale');
     g.res = {...g.res, bois: 10, metal: 10}; assert.ok(!B.orderBuild(g, 'cuve', 0, 3).err, 'pas d’outil à trouver');
-    const h = game(); h.floors[0].slots[3] = 'cuve'; h.floors[0].slots[4] = 'cuve'; assert.equal(B.cap(h, 'eau'), cap0 + 60);
+    const h = game(); h.floors[0].slots[3] = 'cuve'; h.floors[0].slots[4] = 'cuve'; assert.equal(B.cap(h, 'eausale'), cap0 + 60);
     assert.equal(B.rainPerHour(game()), 1); assert.equal(B.rainPerHour(h), 5); h.floors[0].slots[5] = 'recuperateur'; assert.equal(B.rainPerHour(h), 15);
-    const r = game(); r.floors[0].slots[3] = 'cuve'; r.res.eau = 0; r.weather = {rain: true, until: r.t + 600}; B.run(r, 120); assert.ok(r.res.eau >= 4, `${r.res.eau}`);
+    const r = game(); r.floors[0].slots[3] = 'cuve'; r.res.eausale = 0; r.weather = {rain: true, until: r.t + 600}; B.run(r, 120); assert.ok(r.res.eausale >= 4, `${r.res.eausale}`);
     assert.ok(r.log.some(l => /cuves se remplissent/.test(l.txt)) || r.weather.rain, 'le message parle des cuves');
 });
 t('le centre de la ville (plan en fond) est gardé à la relecture, une valeur abîmée est enlevée', () => {
     const g = game(); g.city.lat = 46.72; g.city.lng = 2.5; let c = B.check(JSON.parse(JSON.stringify(g))).city; assert.equal(c.lat, 46.72); assert.equal(c.lng, 2.5);
     g.city.lat = 'x'; c = B.check(JSON.parse(JSON.stringify(g))).city; assert.ok(!('lat' in c) && !('lng' in c));
     g.city.geo = 'none'; delete g.city.lat; assert.equal(B.check(JSON.parse(JSON.stringify(g))).city.geo, 'none');
+});
+const solo = (o = {}) => { const g = game(o); g.people.forEach((p, i) => { if (i) p.hp = 0; }); return g; };
+t('compétences : le métier de la fiche et l’époque (menuisier construit plus vite, né avant 1900 cultive et soigne mieux)', () => {
+    const a = B.skillsOf('Menuisier', 1880); assert.equal(a.sk.construire, 1.5); assert.equal(a.sk.cultiver, 1.25); assert.equal(a.era, 'ancien'); assert.match(a.from, /Menuisier, né·e en 1880/);
+    assert.equal(B.skillsOf('infirmière', 1960).sk.soigner, 1.5); assert.equal(B.skillsOf('', 1975).sk.reparer, 1.25); assert.equal(B.skillsOf('', 1930).era, '');
+    const fast = game({me: {name: 'Pierre', pid: 1, occ: 'charpentier'}}), slow = game();
+    [fast, slow].forEach(g => { g.res = {...g.res, bois: 50, tissu: 50, essence: 50}; B.orderBuild(g, 'lit', 0, 3); g.people.forEach((p, i) => { p.job = i ? 'libre' : 'construire'; }); B.run(g, 60); });
+    assert.ok(fast.builds.length === 0 || fast.builds[0].left < slow.builds[0].left, 'le charpentier va plus vite');
+});
+t('eau de pluie à filtrer : le filtre la rend potable (1 tissu tous les 30 L) ; la boire sans filtre peut donner la fièvre', () => {
+    const g = game(); g.floors[0].slots[3] = 'filtre'; g.res.eau = 0; g.res.eausale = 40; g.res.tissu = 0; B.run(g, 600);
+    assert.ok(g.res.eau > 0 && g.filterClog, 'filtré, puis encrassé faute de tissu'); g.res.tissu = 2; B.run(g, 60); assert.ok(!g.filterClog);
+    const h = solo(); h.res.eau = 0; h.res.eausale = 60; let sick = false; for (let i = 0; i < 40 && !sick; i++) { h.people[0].needs.soif = 10; h.people[0].act = null; B.run(h, 20); sick = !!h.people[0].ill; }
+    assert.ok(sick, 'la fièvre finit par venir'); assert.ok(h.log.some(l => /sans la filtrer/.test(l.txt)));
+});
+t('maladies : médicaments d’abord, sinon remède de grand-mère (plantes, d’après une recette de la famille) ; on guérit', () => {
+    const g = game({lore: [{kind: 'recipe', title: 'La tisane de Mamie', text: 'Thym, miel…'}]}); g.res.medic = 0; g.res.plantes = 2;
+    g.people[0].ill = {k: 'fievre', left: 24, treated: false}; B.run(g, 30);
+    assert.ok(g.log.some(l => /remède de grand-mère \(d’après « La tisane de Mamie »\)/.test(l.txt))); assert.equal(g.res.plantes, 1);
+    B.run(g, 1440); assert.equal(g.people[0].ill, null); assert.ok(g.log.some(l => /guéri·e de sa fièvre/.test(l.txt)));
+});
+t('moral : les histoires du soir (Mémoire familiale) le remontent, les jeux aussi ; à plat, on refuse de travailler', () => {
+    const g = game({lore: [{kind: 'song', title: 'Le temps des cerises', text: ''}]}); B.run(g, 15 * 60);
+    assert.ok(g.log.some(l => l.kind === 'histoire' && /chante « Le temps des cerises »/.test(l.txt))); assert.equal(g.stats.stories, 1);
+    const h = game(); h.people.forEach(p => { p.mood = 10; p.job = 'creuser'; }); B.run(h, 30); assert.ok(h.log.some(l => /refuse de travailler/.test(l.txt)));
+    const j = game(); j.floors[0].slots[3] = 'jeux'; j.people.forEach(p => { p.mood = 40; }); B.run(j, 120); assert.ok(j.people.some(p => p.mood > 50), 'on a joué');
+});
+t('l’air : le conduit s’encrasse, quelqu’un de libre le nettoie', () => {
+    const g = game(); g.air = 50; B.run(g, 60); assert.equal(g.air > 90, true); assert.ok(g.log.some(l => /nettoie le conduit/.test(l.txt)));
+});
+t('la trappe : marchand (troc), voyageur (un ancêtre de l’arbre entre, avec ses compétences), pillards (donner ou résister)', () => {
+    const g = game({extras: [{pid: 9, name: 'Louis BORIE', gender: 'male', occ: 'soldat', by: 1890}]});
+    g.visit = {k: 'marchand', until: g.t + 120, give: {r: 'medic', n: 5}, want: {r: 'bois', n: 3}}; const m0 = g.res.medic, b0 = g.res.bois;
+    assert.ok(B.answerVisit(g, 'oui').ok); assert.equal(g.res.medic, m0 + 5); assert.equal(g.res.bois, b0 - 3); assert.equal(g.visit, null);
+    g.visit = {k: 'marchand', until: g.t + 120, give: {r: 'medic', n: 5}, want: {r: 'essence', n: 999}}; assert.match(B.answerVisit(g, 'oui').err, /Il manque/);
+    g.visit = {k: 'voyageur', until: g.t + 120, person: g.extras.shift()}; B.answerVisit(g, 'oui'); const louis = g.people.find(p => p.name === 'Louis BORIE');
+    assert.ok(louis); assert.equal(louis.sk.defendre, 1.5);
+    const d0 = B.defense(g); g.floors[0].slots[4] = 'porte'; g.floors[0].slots[5] = 'pieges'; assert.equal(B.defense(g), d0 + 5);
+    g.visit = {k: 'pillards', until: g.t + 120, strength: 0, demand: {nourriture: 5}}; B.answerVisit(g, 'resister'); assert.equal(g.stats.raidsWon, 1);
+    g.visit = {k: 'pillards', until: g.t + 120, strength: 99, demand: {}}; const n0 = g.res.nourriture; B.answerVisit(g, 'resister'); assert.equal(g.stats.raidsLost, 1); assert.ok(g.res.nourriture < n0);
+    g.visit = {k: 'pillards', until: g.t + 10, strength: 0, demand: {}}; B.run(g, 70); assert.equal(g.visit, null, 'sans réponse, ils attaquent');
+});
+t('coffre de famille, maison natale en ville, lettres retrouvées', () => {
+    const g = game({coffre: [{title: 'La montre du grand-père'}, {title: 'Couverture brodée'}, {title: 'Le cahier de recettes'}], homes: [{name: 'Joseph MARTIN', by: 1922}], letters: [{title: 'Pour tes 18 ans', from: 'Mamie', to: 'Léa'}]});
+    assert.deepEqual(g.coffre.map(c => c.bonus), ['bijou', 'textile', 'livre']); assert.equal(g.res.tissu, 6);
+    const home = g.city.places.find(p => p.home); assert.match(home.name, /Maison natale de Joseph MARTIN \(1922\)/);
+    const p = g.people[1]; B.send(g, p.id, home.id); B.run(g, B.travel(g, home) * 2 + 200);
+    assert.ok(g.log.some(l => /maison où est né·e Joseph MARTIN/.test(l.txt)));
+    assert.ok(g.letters.length === 0 ? g.log.some(l => /lettre retrouvée : « Pour tes 18 ans », de Mamie à Léa/.test(l.txt)) : true);
+});
+t('saisons : l’hiver sans poêle on a froid ; avec le poêle, il brûle du bois ; l’électricité sans essence (solaire, dynamo)', () => {
+    const g = game({season0: 3}); assert.equal(B.seasonOf(g), 'hiver'); B.run(g, 120); assert.ok(g.cold); assert.ok(g.log.some(l => /Il fait froid/.test(l.txt)));
+    const h = game({season0: 3}); h.floors[0].slots[3] = 'poele'; const b0 = h.res.bois; B.run(h, 240); assert.ok(!h.cold); assert.ok(h.res.bois < b0);
+    const s1 = game(); s1.res.essence = 0; s1.floors[0].slots[3] = 'solaire'; s1.t = 10 * 60; B.run(s1, 30); assert.ok(s1.power); assert.equal(s1.powerSrc, 'soleil');
+    const d = game(); d.res.essence = 0; d.floors[0].slots[3] = 'dynamo'; d.people[0].job = 'pedaler'; B.run(d, 30); assert.ok(d.power); assert.equal(d.powerSrc, 'pedales');
+    assert.equal(B.seasonOf({season0: 0, t: (B.SEASON_DAYS * 1440) + 400}), 'ete');
+});
+t('une naissance au bunker : berceau, couple au moral, pas de même sang ; le bébé rejoint l’arbre du bunker', () => {
+    const g = B.newGame({seed: 3, me: {name: 'Jeanne DURAND', pid: 1, gender: 'female'}, team: [{name: 'Paul MARTIN', pid: 2, gender: 'male'}], kin: [[1, 2, 'conjoint']], names: {f: ['Rose'], m: ['Jules']}, city: {name: 'X', size: 'petite'}});
+    g.floors[0].slots[3] = 'berceau'; g.t = 5 * 1440 + 21 * 60; g.people.forEach(p => { p.mood = 90; });
+    for (let d = 6; d < 300 && !g.preg; d++) { g.t = d * 1440 + 21 * 60 + 50; g.people.forEach(p => { p.mood = 90; p.hp = 100; p.act = null; Object.keys(p.needs).forEach(k => { p.needs[k] = 90; }); }); B.run(g, 10); }
+    assert.ok(g.preg, 'une grossesse'); g.t = g.preg.due - 10; g.people.forEach(p => { p.hp = 100; }); B.run(g, 70);
+    const baby = g.people.find(p => p.baby); assert.ok(baby); assert.match(baby.name, /^(Rose|Jules) MARTIN$/); assert.equal(g.births.length, 1);
+    assert.match(B.send(g, baby.id, g.city.places[0].id).err, /petit/);
+    const s = B.newGame({seed: 3, me: {name: 'A', pid: 1, gender: 'female'}, team: [{name: 'B', pid: 2, gender: 'male'}], kin: [[1, 2, 'fratrie']], city: {name: 'X', size: 'petite'}});
+    assert.ok(s.people[0].kin.includes(s.people[1].id), 'frère et sœur : pas de bébé entre eux');
+});
+t('la gazette : chiffres gardés (morts, visites, histoires, trouvailles) et relus', () => {
+    const g = game(); g.res.eau = 0; g.res.eausale = 0; g.res.medic = 0; g.people[2].hp = 1; g.people[2].needs.soif = 0; B.run(g, 180); assert.equal(g.stats.deaths.length, 1);
+    const c = B.check(JSON.parse(JSON.stringify(g))); assert.deepEqual(c.stats.deaths, g.stats.deaths);
+    const bad = JSON.parse(JSON.stringify(g)); bad.stats = {deaths: 'x', visits: {pillards: -3}}; bad.visit = {k: 'fusee'}; bad.coffre = [{title: '<b>', bonus: 'laser'}]; bad.people[0].sk = {construire: 99}; bad.people[0].ill = {k: 'peste'};
+    const b = B.check(bad); assert.deepEqual(b.stats.deaths, []); assert.equal(b.stats.visits.pillards, 0); assert.equal(b.visit, null); assert.equal(b.coffre[0].bonus, 'souvenir'); assert.equal(b.people[0].sk.construire, 2.5); assert.equal(b.people[0].ill, null);
 });
 t('enregistrer et reprendre : une partie relue continue exactement pareil ; un fichier abîmé est refusé ou nettoyé', () => {
     const g = game(); B.send(g, g.people[1].id, g.city.places[0].id); B.run(g, 900);
