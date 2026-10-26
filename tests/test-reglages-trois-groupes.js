@@ -107,13 +107,13 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.match(await page.locator('[data-side-value="nav_menus"]').first().innerText(), /Menus, colonne et listes/);
             await go('nav_menus');
             const tabs = await page.locator('[data-reg-a-tab]').allTextContents();
-            assert.deepEqual(tabs, ['Menu', 'Colonne', 'Listes', 'Boutons du haut']); // Listes = la forme des listes (A8) ; l'ordre des listes : dans Listes → Réordonner ; l'ordre des pages : Réglages → Réordonner ; // les types de recherche : dans Recherche → Réordonner ; les graphiques : dans Graphiques → ⠿ Réordonner
+            assert.deepEqual(tabs, ['Menu', 'Colonne', 'Listes', 'Icônes', 'Densité', 'Boutons du haut']); // Listes = la forme des listes (A8) ; l'ordre des listes : dans Listes → Réordonner ; l'ordre des pages : Réglages → Réordonner ; // les types de recherche : dans Recherche → Réordonner ; les graphiques : dans Graphiques → ⠿ Réordonner
             assert.equal(await page.locator('[data-reg-a-tab="1"]').getAttribute('title'), 'La colonne de gauche : où, son dessin, les lignes cachées');
             assert.equal(await page.evaluate(() => new Set([...document.querySelectorAll('[data-reg-a-tab]')].map(b => Math.round(b.getBoundingClientRect().top))).size), 1, 'une seule ligne');
             let s = await seen(); assert.ok(has(s, /Ordre et noms du menu principal/)); assert.ok(s.includes('f:navPosition')); assert.ok(!s.includes('f:sidebarPosition')); assert.ok(!s.includes('f:ownerFirst')); assert.ok(!has(s, /Ordre des listes/));
             await page.click('[data-reg-a-tab="1"]'); s = await seen(); assert.ok(has(s, /^Colonne de gauche/)); assert.ok(has(s, /Lignes cachées/)); assert.ok(!has(s, /menu principal/));
             await page.click('[data-reg-a-tab="2"]'); await page.waitForSelector('#lc-a8-host .lcd-embed'); s = await seen(); assert.ok(has(s, /Forme des listes/)); assert.ok(!has(s, /^Colonne de gauche|menu principal/));
-            for (let i = 0; i < 4; i++) { await page.click(`[data-reg-a-tab="${i}"]`); s = await seen(); assert.ok(!has(s, /Types de recherche|Graphiques — |Ordre des listes|Ordre des pages/), `onglet ${i}`); assert.equal(has(s, /Forme des listes/), i === 2, `forme des listes, onglet ${i}`); }
+            for (let i = 0; i < 6; i++) { await page.click(`[data-reg-a-tab="${i}"]`); s = await seen(); assert.ok(!has(s, /Types de recherche|Graphiques — |Ordre des listes|Ordre des pages/), `onglet ${i}`); assert.equal(has(s, /Forme des listes/), i === 2, `forme des listes, onglet ${i}`); }
         });
         await t('Colonne : « Où ? », « Partir de », 9 styles d’entrées posés sur la vraie colonne, aperçu', async () => {
             await go('nav_menus'); await page.click('[data-reg-a-tab="1"]');

@@ -780,7 +780,7 @@
         f.className = 'lcd-frame is-loading'; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1; f.title = 'Aperçu';
         f.style.width = `${W}px`;
         const token = (slot.lcdToken = (slot.lcdToken || 0) + 1);
-        slot.lcdFit = () => { const fr = slot.querySelector('.lcd-frame:not(.is-loading)'); if (!fr) return; const FW = Number(fr.dataset.w) || W, k = Math.min(1, (slot.clientWidth || FW) / FW); fr.style.transform = `scale(${k})`; slot.style.height = `${Math.ceil((Number(fr.dataset.h) || 200) * k)}px`; };
+        slot.lcdFit = () => { const fr = slot.querySelector('.lcd-frame:not(.is-loading)'); if (!fr) return; if (Number(fr.dataset.h || 0) < 20 && fr.lcdMeasure && slot.clientWidth) fr.lcdMeasure(); const FW = Number(fr.dataset.w) || W, k = Math.min(1, (slot.clientWidth || FW) / FW); fr.style.transform = `scale(${k})`; slot.style.height = `${Math.ceil((Number(fr.dataset.h) || 200) * k)}px`; };
         f.addEventListener('load', () => {
             if (slot.lcdToken !== token) { f.remove(); return; }
             const d = f.contentDocument; if (!d) return;
@@ -789,6 +789,7 @@
             d.documentElement.classList.add('lcd-pv-html');
             try { decorate(d.body, o.G, {detail: o.data?.detail, people: o.data?.people, stats: o.data?.stats}); } catch (e) { console.warn(e); }
             const measure = () => { const root = d.querySelector('.lcd-pv-root'); const h = Math.ceil(root ? root.getBoundingClientRect().height : 200); f.dataset.h = String(h); f.style.height = `${h}px`; const sw = Math.ceil(root ? root.scrollWidth + 60 : W); if (sw > W + 2) { f.dataset.w = String(sw); f.style.width = `${sw}px`; root.style.width = `${sw}px`; } }; // un arbre plus large que prévu : tout l'aperçu rapetisse
+            f.lcdMeasure = measure; // un aperçu dessiné caché (onglet pas encore ouvert) se remesure quand il apparaît
             requestAnimationFrame(() => {
                 measure();
                 slot.querySelectorAll('.lcd-frame').forEach(x => { if (x !== f) x.remove(); });
@@ -814,7 +815,7 @@
     const whyList = why => `<ul class="lcd-why-list">${why.map(([i, t]) => `<li><span aria-hidden="true">${i}</span><span>${t}</span></li>`).join('')}</ul>`;
     let PAGE = null; // {box, data, G}
     /** la page n'a plus A5 : les cases des arbres se règlent dans Graphiques → 🎨 Couleurs (fenêtre « Statistiques et arbres », ext.treeCards plus bas) */
-    const PAGE_IDS = IDS.filter(id => id !== 'a5' && id !== 'a4' && id !== 'a6' && id !== 'a8'); // A6 Boutons : dans Réglages → Notifications et boutons ; A8 Listes : dans Menus, colonne et listes → Listes (même moteur, même stockage)
+    const PAGE_IDS = IDS.filter(id => !['a2', 'a3', 'a4', 'a5', 'a6', 'a8'].includes(id)); // A6 Boutons : dans Réglages → Notifications et boutons ; A2 Densité, A3 Icônes, A8 Listes : dans Menus, colonne et listes (même moteur, même stockage)
     /** A4 « Fiche d'une personne » est dans Réglages → Apparence → Fiches personnes et animaux (cadre « Forme de l'en-tête ») : même moteur, même stockage */
     const EMBS = {}; // {a4: {box, data}, a6: …} : les cadres posés ailleurs (A4 dans la page des fiches, A6 dans Notifications et boutons)
     const embOf = id => (EMBS[id]?.box.isConnected ? EMBS[id] : null);
@@ -962,7 +963,7 @@
         const st = A().state; if (st && token !== st.workspaceToken) return;
         const ws = document.getElementById('workspace'); if (!ws) return;
         const G = cur(), opened = openSet();
-        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Quatre réglages pour changer la forme des éléments de l’app : traits, densité, icônes, mouvements (la forme de l’en-tête des fiches se règle dans Fiches personnes et animaux, les boutons dans Notifications et boutons, les listes dans Menus, colonne et listes). Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
+        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Deux réglages pour changer la forme des éléments de l’app : le style général (traits, coins, ombres) et les mouvements (la forme de l’en-tête des fiches se règle dans Fiches personnes et animaux, les boutons dans Notifications et boutons ; les listes, les icônes et la densité dans Menus, colonne et listes). Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
             ${tocHtml(G)}
             <div class="lcd-secs">${PAGE_IDS.map(id => sectionShell(id, opened.has(id))).join('')}</div></section>`;
         const box = ws.querySelector('.lcd-page');
@@ -1103,6 +1104,8 @@
     }
     ext.designsA4Frame = host => embedFrame(host, 'a4', 'Forme de l’en-tête', 'La forme générale (traits, coins, boutons) suit');
     /** le cadre « Boutons » (A6) à la fin de Réglages → Notifications et boutons */
+    ext.designsA2Frame = host => embedFrame(host, 'a2', 'Densité', 'L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Les traits et les ombres suivent');
+    ext.designsA3Frame = host => embedFrame(host, 'a3', 'Icônes', 'Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent');
     ext.designsA8Frame = host => embedFrame(host, 'a8', 'Forme des listes', 'Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent');
     ext.designsA6Frame = host => embedFrame(host, 'a6', 'Boutons', 'Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent');
 
@@ -1133,8 +1136,12 @@
     ext.afterDesign.push(() => {
         const st = A().state; if (!['design', 'nav_menus'].includes(st?.maintenanceTab) || document.getElementById('lc-a8-host')) return;
         const at = document.querySelector('#workspace .design-order-grid') || document.querySelector('#workspace > .page > :last-child'); if (!at) return;
-        at.insertAdjacentHTML('afterend', '<section class="person-block-config lc-a8-host" id="lc-a8-host"><header><span class="eyebrow">LISTES</span><h3>Forme des listes</h3><p>Comment se séparent les lignes des listes, de la colonne des personnes et des tableaux.</p></header><div data-a8-host></div></section>');
+        at.insertAdjacentHTML('afterend', '<section class="person-block-config lc-a8-host" id="lc-a8-host"><header><span class="eyebrow">LISTES</span><h3>Forme des listes</h3><p>Comment se séparent les lignes des listes, de la colonne des personnes et des tableaux.</p></header><div data-a8-host></div></section>'
+            + '<section class="person-block-config lc-a3-host" id="lc-a3-host"><header><span class="eyebrow">ICÔNES</span><h3>Icônes</h3><p>Émojis, traits, pictogrammes… les petits dessins des boutons, des barres d’outils et des rubriques.</p></header><div data-a3-host></div></section>'
+            + '<section class="person-block-config lc-a2-host" id="lc-a2-host"><header><span class="eyebrow">DENSITÉ</span><h3>Densité</h3><p>Combien d’espace autour des choses : dans et entre les blocs, entre les lignes, autour des boutons.</p></header><div data-a2-host></div></section>');
         ext.designsA8Frame(document.querySelector('#lc-a8-host [data-a8-host]'));
+        ext.designsA3Frame(document.querySelector('#lc-a3-host [data-a3-host]'));
+        ext.designsA2Frame(document.querySelector('#lc-a2-host [data-a2-host]'));
     });
     /** les « 💾 Réglages enregistrés » de l'Apparence (designs) emportent aussi les designs au choix (champ a_designs) ;
      *  un ancien réglage (A1 à A10, ensembles…) revient sans erreur : A7 police et A10 sont ignorés */

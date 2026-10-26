@@ -229,8 +229,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         await t('la page : sommaire, sections repliables fermées par défaut, ouvertes retenues', async () => {
             await page.evaluate(() => localStorage.removeItem('lcnda-designs-open-v2'));
             await toDesigns(page); await page.waitForSelector('.lcd-page .lcd-toc');
-            assert.equal(await page.locator('.lcd-toc-i').count(), 4, 'A1 à A8 sans A4, A5, A6 ni A8 (A8 Listes : Menus, colonne et listes)');
-            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5, #lcd-a4, #lcd-a6, #lcd-a8').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs), ni A4 (Fiches personnes et animaux), ni A6 (Notifications et boutons)');
+            assert.equal(await page.locator('.lcd-toc-i').count(), 2, 'A1 et A7 (A2, A3 et A8 : Menus, colonne et listes)');
+            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5, #lcd-a4, #lcd-a6, #lcd-a8, #lcd-a2, #lcd-a3').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs), ni A4 (Fiches personnes et animaux), ni A6 (Notifications et boutons)');
             assert.equal(await page.locator('[data-lcd-notifs], [data-lcd-fiches], [data-lcd-trees], .lcd-intro').count(), 0, 'plus de cadres bleus d’explication en haut');
             assert.equal(await page.locator('details.lcd-sec[open]').count(), 0, 'tout fermé');
             assert.match(await page.locator('#lcd-a1 > summary').innerText(), /^🎨\s*Style général\s*—\s*Comme avant/);
@@ -311,8 +311,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             for (const [w, dark] of [[390, false], [1440, true]]) {
                 const p = await open(w);
                 if (dark) await p.evaluate(() => { localStorage.setItem('genealogie-design', JSON.stringify({preset: 'dark'})); window.LCNDA_APP.applyDesign(); });
-                await p.evaluate(() => localStorage.setItem('lcnda-designs-open-v2', '["a1","a2"]'));
-                await toDesigns(p); await p.waitForSelector('#lcd-a2[open] .lcd-frame:not(.is-loading)', {timeout: 15000});
+                await p.evaluate(() => localStorage.setItem('lcnda-designs-open-v2', '["a1","a7"]'));
+                await toDesigns(p); await p.waitForSelector('#lcd-a7[open] .lcd-frame:not(.is-loading)', {timeout: 15000});
                 const over = await p.evaluate(() => { const pg = document.querySelector('.lcd-page'), W = document.documentElement.clientWidth; return Math.max(document.getElementById('workspace').scrollWidth - document.getElementById('workspace').clientWidth, ...[...pg.querySelectorAll('*')].filter(e => !e.closest('.lcd-stage')).map(e => Math.round(e.getBoundingClientRect().right - W))); }); // (la barre des onglets du haut défile toute seule)
                 const who = over > 1 ? await p.evaluate(() => { const W = document.documentElement.clientWidth; return [...document.querySelectorAll('body *')].filter(e => { const r = e.getBoundingClientRect(); return r.right > W + 1 && r.width > 0 && !e.closest('.lcd-stage') && e.closest('.lcd-page') && ![...e.children].some(c => c.getBoundingClientRect().right > W + 1); }).slice(0, 6).map(e => `${e.tagName}.${[...e.classList].join('.')} ${Math.round(e.getBoundingClientRect().right)}`).join(' | '); }) : '';
                 assert.ok(over <= 1, `${w}px : débordement de ${over}px (${who})`);

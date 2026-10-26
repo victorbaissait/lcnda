@@ -168,13 +168,13 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(g.ver, 2); assert.equal(g.a7.v, 'petit'); assert.equal(g.a8.v, 'zebre'); assert.ok(!('a10' in g));
             await setDesigns(page, null);
         });
-        await t('la page Designs au choix : 4 sections (A5 dans la fenêtre des couleurs, A4 dans Fiches personnes et animaux, A6 dans Notifications et boutons, A8 dans Menus, colonne et listes), pas d’ensembles', async () => {
+        await t('la page Designs au choix : 2 sections (A5 dans la fenêtre des couleurs, A4 dans Fiches personnes et animaux, A6 dans Notifications et boutons, A8 dans Menus, colonne et listes), pas d’ensembles', async () => {
             await page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); });
             await page.waitForSelector('.lcd-page .lcd-toc');
-            assert.equal(await page.locator('details.lcd-sec').count(), 4);
+            assert.equal(await page.locator('details.lcd-sec').count(), 2);
             assert.equal(await page.locator('#lcd-ens').count(), 0);
             assert.equal(await page.locator('.lcd-intro').count(), 0, 'plus de cadre bleu d’explication');
-            assert.match(await page.locator('.lcd-page .page-header p').first().innerText(), /Quatre réglages/);
+            assert.match(await page.locator('.lcd-page .page-header p').first().innerText(), /Deux réglages/);
         });
         await t('aucune erreur JavaScript', async () => { assert.deepEqual(errs, []); });
     } finally {
