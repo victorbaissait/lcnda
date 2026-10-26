@@ -161,3 +161,18 @@
 .bk-diary li{padding:4px 0;border-bottom:1px dotted rgba(0,0,0,.15)}
 .bk-setup{border:1px dashed var(--line-color,#999);padding:8px 10px}.bk-setup summary{cursor:pointer}.bk-setup select{max-width:100%}
 .bk-optl small{display:block}
+/* lot 3 : animaux, feu, déco, statistiques, livre */
+.bk-pet{font-size:18px;margin-left:2px}.bk-pets{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}
+.bk-floor.is-fire{box-shadow:inset 0 0 0 3px #e4572e;background:linear-gradient(0deg,rgba(228,87,46,.18),transparent 60%)}.bk-flabel i{display:block;font-style:normal;animation:bkPulse 1s infinite}
+.bk-deco{display:block;font-size:11px;line-height:1.1;margin-top:4px;writing-mode:horizontal-tb;max-width:28px;word-break:break-all}
+.bk-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}.bk-stat{margin:0;border:1px solid var(--line-color,#ccc);padding:6px 8px}
+.bk-stat figcaption{display:flex;justify-content:space-between;gap:6px;font-size:12px}.bk-stat figcaption span{font-variant-numeric:tabular-nums;color:var(--muted,#555)}
+.bk-spark-wrap{position:relative}.bk-spark{width:100%;height:auto;display:block;overflow:visible}
+.bk-spark .bk-line{fill:none;stroke:#2f6fde;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.bk-spark .bk-dot,.bk-spark .bk-hov{fill:#2f6fde;stroke:var(--white,#fff);stroke-width:2}
+.bk-spark .bk-axis{stroke:currentColor;opacity:.35}.bk-spark .bk-grid{stroke:currentColor;opacity:.12;stroke-dasharray:3 3}.bk-spark .bk-cross{stroke:currentColor;opacity:.35}
+.bk-spark .bk-tick{font-size:10px;fill:currentColor;opacity:.6}
+.bk-tip{position:absolute;top:-6px;background:var(--ink,#111);color:var(--white,#fff);font-size:11px;padding:2px 6px;white-space:nowrap;pointer-events:none}
+.bk-tablewrap{overflow:auto;max-height:260px}.bk-table{border-collapse:collapse;font-size:11px;width:100%}.bk-table th,.bk-table td{border-bottom:1px solid rgba(0,0,0,.1);padding:2px 4px;text-align:right}.bk-table th:first-child,.bk-table td:first-child{text-align:left}
+.bk-book h3{border-bottom:1px solid #1a1a1a;margin:18px 0 6px;font-size:18px}.bk-book blockquote{font-style:italic;margin:4px 0 4px 12px;color:#333}.bk-book-day h4{margin:10px 0 2px}
+.bk-sbody select{max-width:100%}.bk-sbody .bk-field{display:grid;gap:4px;min-width:0}
+.bk-sbody{overflow-x:hidden}.bk-sbody .bk-field select{width:100%}
