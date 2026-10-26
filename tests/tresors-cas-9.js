@@ -7,7 +7,7 @@ module.exports = async (t, {page}, assert) => {
             box.innerHTML = E.dashboard.tr_sky.render('01', {id: 'a', type: 'tr_sky', config: {person: paul.id, hour: 22}}, 'span-4', tr) + E.dashboard.tr_gazette.render('02', {id: 'b', type: 'tr_gazette', config: {mode: 'fixe', year: paul.by}}, 'span-6', tr);
             await new Promise(res => setTimeout(res, 300));
             const c = box.querySelector('canvas'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let lit = 0; for (let i = 0; i < d.length; i += 4) if (d[i] + d[i + 1] + d[i + 2] > 60) lit++;
-            return {inChooser: A.defaultDashboardBlocks.filter(x => /^tr_/.test(x[0])).length, title: box.querySelector('h3, .card-title, header')?.textContent || box.innerText, lit, year: box.querySelector('.h-trw-gz small')?.textContent, by: paul.by, cfg: !!E.dashboardConfig.tr_sky?.html && !!E.dashboardConfig.tr_gazette?.read}; });
+            return {inChooser: A.defaultDashboardBlocks.filter(x => ['tr_sky', 'tr_gazette'].includes(x[0])).length, title: box.querySelector('h3, .card-title, header')?.textContent || box.innerText, lit, year: box.querySelector('.h-trw-gz small')?.textContent, by: paul.by, cfg: !!E.dashboardConfig.tr_sky?.html && !!E.dashboardConfig.tr_gazette?.read}; });
         assert.equal(r.inChooser, 2); assert.ok(r.cfg); assert.match(r.title, /Paul/); assert.ok(r.lit > 500, 'le ciel est dessiné'); assert.equal(r.year, `Année ${r.by}`);
         await page.evaluate(() => document.querySelector('#trw-test [data-trw-gz]').click()); await page.waitForSelector('[data-tr-page="gazette"] .gz');
         assert.equal(Number(await page.inputValue('[data-tr-page="gazette"] [name=y]')), r.by); await page.evaluate(() => document.getElementById('trw-test')?.remove());

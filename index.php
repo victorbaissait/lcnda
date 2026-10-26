@@ -40,7 +40,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/heritage-diagram-options.css?v=7">
     <link rel="stylesheet" href="assets/css/layout.css?v=17">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
-    <link rel="stylesheet" href="assets/css/tresors.css?v=8">
+    <link rel="stylesheet" href="assets/css/tresors.css?v=9">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
     <link rel="stylesheet" href="assets/css/ui.css?v=14">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
@@ -1254,7 +1254,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-ateliers.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-papiers.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-voyages.js?v=1" defer></script>
-<script src="assets/js/heritage-tresors-widgets.js?v=1" defer></script>
+<script src="assets/js/heritage-tresors-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-tresors-listes.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=12" defer></script>
 <script src="assets/js/heritage-fiches.js?v=21" defer></script>

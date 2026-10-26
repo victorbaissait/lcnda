@@ -117,3 +117,9 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-trw-gz header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; border-bottom: 3px double #1d1a14; padding-bottom: 4px; }
 .h-trw-gz header b { font-size: 18px; } .h-trw-gz h4 { margin: 8px 0 6px; font-size: 16px; } .h-trw-gz ul { margin: 0; padding-left: 18px; } .h-trw-gz .muted { color: #6a614c; }
 .h-trw-cfg { display: grid; gap: 8px; border: 0; padding: 0; margin: 8px 0; }
+.h-trw-big { font-size: 20px; font-weight: 800; margin: 2px 0 6px; } .h-trw-serif { font-family: Georgia, "Times New Roman", serif; font-style: italic; }
+.h-trw-list { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 4px; }
+.h-trw-clues { margin: 0 0 6px; padding-left: 20px; display: grid; gap: 4px; }
+.h-trw-day { display: flex; gap: 12px; align-items: flex-start; } .h-trw-day img, .h-trw-noimg { width: 64px; height: 64px; object-fit: cover; border: 2px solid var(--ink, #111); flex: none; display: grid; place-items: center; font-size: 28px; } .h-trw-day p { margin: 6px 0 0; }
+.h-trw-grow { display: flex; align-items: flex-end; gap: 6px; height: 84px; padding-top: 6px; } .h-trw-grow div { display: grid; justify-items: center; gap: 2px; flex: 1; } .h-trw-grow i { display: block; width: 100%; max-width: 26px; background: #59a14f; border: 1px solid #2f6b2a; } .h-trw-grow small { font-size: 10px; color: var(--muted, #666); }
+.h-trw-amb { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; } .h-trw-amb select { flex: 1 1 160px; }
