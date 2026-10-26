@@ -372,6 +372,16 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-htr-steps li.is-done{opacity:.75}
 .h-htr-log{max-height:280px;overflow:auto;font-size:.78em;white-space:pre-wrap;background:rgba(128,128,128,.08);padding:.6rem}
 .h-htr-up{cursor:pointer}
+/* Modèles d’écriture : cadre plus large, boutons qui ne se chevauchent plus, texte lisible */
+.maintenance-panel.h-htr-models{max-width:none}
+.h-htr-scroll{overflow-x:auto}
+.h-htr-table{width:100%;table-layout:auto}
+.h-htr-table td{vertical-align:middle}
+.h-htr-table td:first-child code{overflow-wrap:anywhere}
+.h-htr-table td:nth-child(3){min-width:11em}
+.h-htr-act{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .7rem}
+.h-htr-act .h-htr-up{white-space:nowrap;margin:0}
+.h-htr-act a{white-space:nowrap}
 /* Mes listes */
 .h-lr-row{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .6rem;padding:.6rem .7rem;margin:.45rem 0;border:1px solid var(--line-color);background:var(--card-bg,#fff)}
 .h-lr-row>strong{flex:0 0 auto;font-size:.95em}

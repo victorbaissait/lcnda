@@ -1931,10 +1931,10 @@
                 <div class="page-actions"><button type="button" class="button" data-h-htr-install ${running ? 'disabled' : ''}>${s.kraken ? 'Réinstaller / compléter les modèles' : 'Installer la reconnaissance d’écriture'}</button>${s.kraken && missing.length ? '<button type="button" class="button secondary" data-h-htr-models>Télécharger seulement les modèles</button>' : ''}</div>
                 <p class="muted">Tout est rangé dans le dossier des données de LCNDA (<code>${esc(s.dir)}</code>), pas dans l’application : rien n’est perdu à la mise à jour de LCNDA.</p>
                 ${s.log ? `<details ${running ? 'open' : ''}><summary>Journal de l’installation</summary><pre class="h-htr-log">${esc(s.log)}</pre></details>` : ''}</section>
-            <section class="maintenance-panel"><h3>Modèles d’écriture</h3>
-                <table class="data-table"><thead><tr><th>Fichier</th><th>Pour</th><th>État</th><th>Ajouter à la main</th></tr></thead><tbody>${s.models.map(m => `<tr><td><code>${esc(m.file)}</code></td><td><small>${esc(m.labels.join(' · '))}</small></td>
+            <section class="maintenance-panel h-htr-models"><h3>Modèles d’écriture</h3>
+                <div class="h-htr-scroll"><table class="data-table h-htr-table"><thead><tr><th>Fichier</th><th>Pour</th><th>État</th><th>Ajouter à la main</th></tr></thead><tbody>${s.models.map(m => `<tr><td><code>${esc(m.file)}</code></td><td><small>${esc(m.labels.join(' · '))}</small></td>
                     <td>${m.present ? `✅ ${sizeText(m.size)}` : m.doi ? '⬇️ téléchargé à l’installation' : '— <small class="muted">à ajouter à la main</small>'}</td>
-                    <td><label class="button small secondary h-htr-up">Choisir le fichier…<input type="file" accept=".mlmodel" data-h-htr-up="${esc(m.file)}" hidden></label>${m.doi ? ` <a href="https://doi.org/${esc(m.doi)}" target="_blank" rel="noopener noreferrer"><small>source ↗</small></a>` : ''}</td></tr>`).join('')}</tbody></table>
+                    <td><div class="h-htr-act"><label class="button small secondary h-htr-up">Choisir le fichier…<input type="file" accept=".mlmodel" data-h-htr-up="${esc(m.file)}" hidden></label>${m.doi ? `<a href="https://doi.org/${esc(m.doi)}" target="_blank" rel="noopener noreferrer"><small>source ↗</small></a>` : ''}</div></td></tr>`).join('')}</tbody></table></div>
                 <p class="muted">Les modèles Kraken se trouvent sur Zenodo et HTR-United (<a href="https://htr-united.github.io/" target="_blank" rel="noopener noreferrer">htr-united.github.io ↗</a>). Un modèle ajouté à la main remplace celui du même nom.</p></section></section>`;
         const ws = A().$('#workspace');
         const start = async only => {
