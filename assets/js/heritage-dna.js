@@ -649,18 +649,10 @@
     }};
 
     /** les réglages s'ouvrent dans l'onglet ADN ou dans les Réglages : on reste là où on était */
-    const reopenSettings = () => { if (S().module === 'maintenance') A().setModule('maintenance'); else go('settings'); };
-    /* Réglages → « ADN : affichage » : exactement le même réglage que l'onglet ADN → ⚙️ Réglages (les deux restent pareils) */
+    const reopenSettings = () => go('settings');
+    /* (avant : Réglages → « ADN : affichage », le même réglage que l'onglet ADN → ⚙️ Réglages ; retiré des Réglages à la demande) */
+    ext.maintenance.dna_prefs = () => go('settings');
     ext.maintenance = ext.maintenance || {};
-    ext.maintenance.dna_prefs = async token => {
-        const ws = A().$('#workspace');
-        try { await load(); } catch (_) { data = data || {kits: [], matches: [], groups: [], segments: []}; }
-        if (token !== S().workspaceToken || S().module !== 'maintenance') return;
-        ws.innerHTML = `<section class="page h-dna-page" data-dna-sec="settings">${RENDER.settings.html()}<p class="muted">C’est le même réglage que dans l’onglet ADN → ⚙️ Réglages : le changer ici le change là-bas.${S().bootstrap && !document.querySelector('.nav-item[data-module="adn"]') ? ' L’onglet ADN est caché : Réglages → Apparence → onglets du haut pour l’afficher.' : ''}</p></section>`;
-        const h2 = ws.querySelector('.h-dna-page h2'); if (h2) h2.textContent = '🧬 ADN : affichage et réglages';
-        RENDER.settings.bind(ws.querySelector('.h-dna-page'));
-    };
-
     /* ═════════ Sur la fiche d'une personne ═════════ */
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks.dna = (index, detail) => A().card(index, '🧬 ADN', '', `<div data-dna-host="${Number(detail.person?.id || detail.id) || 0}"></div>`, 'span-12');
