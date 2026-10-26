@@ -106,6 +106,13 @@ select,input[type=text]{font:inherit;font-size:13.5px;border:2px solid var(--ink
 .pv-list.plat .pv-it{box-shadow:none}.pv-list.plat .pv-it.sel{box-shadow:none}
 .pv-list.barre{gap:4px}.pv-list.barre .pv-it{border:0;border-left:4px solid transparent;box-shadow:none;background:#f6f7f9}.pv-list.barre .pv-it.sel{background:var(--soft);color:var(--ink);border-left-color:#2b66c9;box-shadow:none}.pv-list.barre .pv-it.sel b{color:var(--blue)}
 .pv-list.pastilles{gap:6px}.pv-list.pastilles .pv-it{border-radius:99px;box-shadow:none;border-width:1.5px;padding:8px 14px}.pv-list.pastilles .pv-it.sel{box-shadow:none;border-color:#2b66c9}
+/* 3 styles de plus : onglets de classeur, cartes avec icône, fond doux */
+.ms.tabsx{gap:3px}.ms.tabsx i{width:82%;border-radius:0 6px 6px 0;box-shadow:none}.ms.tabsx .s{width:100%;background:#2b66c9;border-color:var(--ink)}
+.ms.ico i{position:relative;padding-left:0;box-shadow:none;background:linear-gradient(90deg,#d6e2f7 0 14px,#fff 14px)}.ms.ico .s{background:linear-gradient(90deg,#fff 0 14px,#2b66c9 14px);border-color:var(--ink)}
+.ms.soft{gap:4px}.ms.soft i{border:0;box-shadow:none;background:transparent;border-bottom:1px solid #eee}.ms.soft .s{background:#dce7fb;border-radius:6px;border:0}
+.pv-list.classeur{gap:5px;padding-right:0}.pv-list.classeur .pv-it{box-sizing:border-box}.pv-list.classeur .pv-it{box-shadow:none;width:86%;border-radius:0 10px 10px 0;border-left-width:6px;border-left-color:#c8d6f2}.pv-list.classeur .pv-it.sel{width:100%;box-shadow:none;border-left-color:#123a7a;border-right:0;border-radius:0}
+.pv-list.icones{gap:7px}.pv-list.icones .pv-it{box-shadow:none;padding:0;gap:0;overflow:hidden}.pv-list.icones .pv-it .ic{display:grid;place-items:center;width:38px;align-self:stretch;background:var(--soft);border-right:2px solid var(--ink);font-size:16px;margin-right:10px}.pv-list.icones .pv-it>span:last-child{padding:9px 10px 9px 0}.pv-list.icones .pv-it.sel .ic{background:#fff}.pv-list.icones .pv-it.sel{box-shadow:3px 3px 0 var(--ink)}
+.pv-list.doux{gap:2px}.pv-list.doux .pv-it{border:0;box-shadow:none;border-radius:8px;padding:9px 10px;font-weight:600}.pv-list.doux .pv-it.sel{background:#dce7fb;color:var(--ink);box-shadow:none}.pv-list.doux .pv-it.sel b{color:var(--blue)}
 footer{margin-top:30px;font-size:14px}
 footer b{font-size:16px}
 @media(max-width:820px){.ba,.cards2{grid-template-columns:1fr}.app{grid-template-columns:1fr}.side{border-right:0;border-bottom:2px solid var(--ink)}.where{grid-template-columns:1fr 1fr}.row>label:first-child,.row>span:first-child{min-width:0}}
@@ -199,7 +206,10 @@ footer b{font-size:16px}
           <button type="button" class="vc" data-c="style" data-v="aeree"><span class="ms air"><i></i><i class="s"></i><i></i></span>Liste aérée<small>plus d’espace</small></button>
           <button type="button" class="vc" data-c="style" data-v="plat"><span class="ms flat"><i></i><i class="s"></i><i></i></span>Boutons sans ombre<small>encadrés, à plat</small></button>
           <button type="button" class="vc" data-c="style" data-v="barre"><span class="ms bar"><i></i><i class="s"></i><i></i></span>Barre de côté<small>un trait bleu à gauche</small></button>
-          <button type="button" class="vc" data-c="style" data-v="pastilles"><span class="ms pill"><i></i><i class="s"></i><i></i></span>Pastilles arrondies<small>coins ronds</small></button></div>
+          <button type="button" class="vc" data-c="style" data-v="pastilles"><span class="ms pill"><i></i><i class="s"></i><i></i></span>Pastilles arrondies<small>coins ronds</small></button>
+          <button type="button" class="vc" data-c="style" data-v="classeur"><span class="ms tabsx"><i></i><i class="s"></i><i></i></span>Onglets de classeur<small>l’entrée choisie dépasse</small></button>
+          <button type="button" class="vc" data-c="style" data-v="icones"><span class="ms ico"><i></i><i class="s"></i><i></i></span>Cartes avec icône<small>un repère pour l’œil</small></button>
+          <button type="button" class="vc" data-c="style" data-v="doux"><span class="ms soft"><i></i><i class="s"></i><i></i></span>Fond doux<small>sans cadre, façon Mac</small></button></div>
         <div class="lab2">Onglets du haut</div>
         <div class="vis4">
           <button type="button" class="vc" data-c="tabs" data-v="avant"><span class="mt"><em>Carte</em><em>🔎</em><em>▦ Vues</em></span>Comme avant<small>chaque outil le sien</small></button>
@@ -247,14 +257,14 @@ document.querySelectorAll('.side [data-p]').forEach(b=>b.addEventListener('click
 document.querySelectorAll('.tabs [data-t]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tabs [data-t]').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('[data-pane]').forEach(p=>p.classList.toggle('on',p.dataset.pane===b.dataset.t));}));
 
 const C={side:'g',mode:'nouveau',style:'boutons',tabs:'ligne',nums:'suite',size:'normale',lf:'barre',w:320,tool:'carte'};
-const TOOLS={carte:{t:'Carte',tabs:[['🗺','Carte'],['📌','Lieux'],['▦','Vues']],it:['Toute la famille','Naissances','Mariages','Décès','Migrations']},graph:{t:'Graphiques',tabs:[['📊','Diagrammes'],['📈','Statistiques']],it:['Arbre des ascendants','Éventail','Sablier','Frise des vies','Pyramide des âges']},enq:{t:'Enquêtes',tabs:[['🔍','Enquêtes'],['🗂','Dossiers']],it:['La branche Borie','Le départ de 1902','Jeanne Roux','Les notaires de Tulle']}};
+const TOOLS={carte:{t:'Carte',tabs:[['🗺','Carte'],['📌','Lieux'],['▦','Vues']],it:['Toute la famille','Naissances','Mariages','Décès','Migrations'],ic:['👪','👶','💍','🕯️','🧭']},graph:{t:'Graphiques',tabs:[['📊','Diagrammes'],['📈','Statistiques']],it:['Arbre des ascendants','Éventail','Sablier','Frise des vies','Pyramide des âges'],ic:['🌳','🪭','⏳','📅','📊']},enq:{t:'Enquêtes',tabs:[['🔍','Enquêtes'],['🗂','Dossiers']],it:['La branche Borie','Le départ de 1902','Jeanne Roux','Les notaires de Tulle'],ic:['🔍','🚂','👤','📜']}};
 const ORIG=['A','H','F','S1','S2','S3'];
 function paintPrev(){const T=TOOLS[C.tool],box=document.querySelector('[data-prev]');if(!box)return;
  const tabs=C.tabs==='avant'?T.tabs.map(([i,l],k)=>k?`<em>${i}</em>`:`<em>${l}</em>`).join(''):T.tabs.map(([i,l])=>`<em>${C.tabs==='texte'?l:C.tabs==='dessus'?i+'<br>'+l:i+' '+l}</em>`).join('');
  const num=k=>C.nums==='aucun'?'':`<b>${C.nums==='origine'?ORIG[k]:String(k+1).padStart(2,'0')}</b>`;
  const style=C.style;
  const lf=`<div class="pv-lf"><span class="on">Liste</span><span>Fiches</span></div>`;
- box.innerHTML=`<div class="pv ${C.size}" style="width:${Math.round(C.w*0.78)}px;max-width:100%;margin-left:${C.side==='d'?'auto':'0'}"><div class="pv-head">${T.t}</div><div class="pv-tabs ${C.tabs}">${tabs}</div>${C.lf==='barre'?lf:''}<div class="pv-list ${style}">${T.it.map((l,k)=>`<div class="pv-it${k===1?' sel':''}">${num(k)}${l}</div>`).join('')}</div>${C.lf==='bas'?lf:''}</div>`;}
+ box.innerHTML=`<div class="pv ${C.size}" style="width:${Math.round(C.w*0.78)}px;max-width:100%;margin-left:${C.side==='d'?'auto':'0'}"><div class="pv-head">${T.t}</div><div class="pv-tabs ${C.tabs}">${tabs}</div>${C.lf==='barre'?lf:''}<div class="pv-list ${style}">${T.it.map((l,k)=>`<div class="pv-it${k===1?' sel':''}">${style==='icones'?`<span class="ic">${T.ic[k]}</span><span>${num(k)} ${l}</span>`:num(k)+l}</div>`).join('')}</div>${C.lf==='bas'?lf:''}</div>`;}
 const PRESETS={avant:{style:'boutons',tabs:'avant',nums:'origine',lf:'bas'},nouveau:{style:'boutons',tabs:'ligne',nums:'suite',lf:'barre'}};
 function paintChoices(){document.querySelectorAll('.vc[data-c]').forEach(x=>x.classList.toggle('on',C[x.dataset.c]===x.dataset.v));
  document.querySelectorAll('[data-preset]').forEach(b=>{const P=PRESETS[b.dataset.preset],on=b.dataset.preset===C.mode;b.classList.toggle('on',on);b.classList.toggle('mod',on&&Object.keys(P).some(k=>P[k]!==C[k]));});paintPrev();}
