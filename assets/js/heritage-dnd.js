@@ -66,9 +66,11 @@
             host.insertBefore(grip, host.firstChild);
         }
     }
-    /** attendre que la page se calme, mais pas plus de 600 ms : une page qui change sans arrêt (une barre de temps, une animation) ne doit pas tout bloquer */
+    /** attendre que la page se calme, mais pas plus de 600 ms : une page qui change sans arrêt (une barre de temps, une animation) ne doit pas laisser les poignées sans clavier.
+     *  Seulement pour les poignées (des attributs, rien n'est déplacé) : ranger les lignes, lui, attend vraiment le calme, pour ne pas relancer sans fin les autres outils. */
     const settle = (fn, wait) => { let t = 0, first = 0; return () => { const now = Date.now(); if (!t) first = now; clearTimeout(t); t = setTimeout(() => { t = 0; fn(); }, now - first > 600 ? 0 : wait); }; };
-    new MutationObserver(settle(() => enhance(), 80)).observe(document.documentElement, {childList: true, subtree: true});
+    let timer = 0;
+    new MutationObserver(() => { clearTimeout(timer); timer = setTimeout(enhance, 80); }).observe(document.documentElement, {childList: true, subtree: true});
 
     const wait = ms => new Promise(r => setTimeout(r, ms));
     /** Presse le bouton, puis attend que l'écran se soit redessiné (ou qu'il ait juste déplacé la ligne) */

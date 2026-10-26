@@ -112,3 +112,8 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-tr-bar { flex: 1; min-width: 160px; height: 10px; border-radius: 99px; background: var(--line, #e2e4ea); overflow: hidden; } .h-tr-bar i { display: block; height: 100%; background: var(--blue, #2a7de1); }
 .h-tr-world li { margin: 4px 0; } .h-tr-bars { display: grid; gap: 6px; } .h-tr-bars div { display: grid; grid-template-columns: 60px 1fr auto auto; gap: 8px; align-items: center; } .h-tr-bars i { display: block; height: 14px; border-radius: 7px; background: linear-gradient(90deg, #6cb6ff, #2a7de1); }
 .h-tr-houses { max-width: 100%; color: inherit; }
+/* widgets du tableau de bord (heritage-tresors-widgets.js) */
+.h-trw-gz { background: #f6f1e3; color: #1d1a14; font-family: Georgia, "Times New Roman", serif; padding: 10px 14px; border: 1px solid #c9bfa4; }
+.h-trw-gz header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; border-bottom: 3px double #1d1a14; padding-bottom: 4px; }
+.h-trw-gz header b { font-size: 18px; } .h-trw-gz h4 { margin: 8px 0 6px; font-size: 16px; } .h-trw-gz ul { margin: 0; padding-left: 18px; } .h-trw-gz .muted { color: #6a614c; }
+.h-trw-cfg { display: grid; gap: 8px; border: 0; padding: 0; margin: 8px 0; }

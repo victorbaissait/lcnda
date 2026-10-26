@@ -183,7 +183,7 @@
     }
     const GZ_CSS = `.gz{max-width:190mm;margin:8mm auto;padding:10mm 12mm;background:#f6f1e3;color:#1d1a14;font-family:Georgia,"Times New Roman",serif;box-shadow:0 2px 12px #0004}.gz header{border-bottom:3px double #1d1a14;text-align:center}.gz h1{font-family:"Old English Text MT","UnifrakturMaguntia",Georgia,serif;font-size:34pt;margin:2mm 0}.gz-top{display:flex;justify-content:space-between;font-size:9pt;text-transform:uppercase;letter-spacing:.08em;border-top:1px solid #1d1a14;border-bottom:1px solid #1d1a14;padding:1mm 0;margin:1mm 0}.gz h2{font-size:22pt;text-align:center;margin:5mm 0 2mm}.gz-lead{font-size:12pt;text-align:justify;column-count:2;column-gap:7mm}.gz-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;border-top:1px solid #1d1a14;padding-top:3mm}.gz-cols section{border-right:1px solid #bbb;padding-right:4mm}.gz-cols section:last-child{border:0}.gz h3{text-transform:uppercase;font-size:11pt;letter-spacing:.1em;border-bottom:1px solid #1d1a14}.gz h4{font-size:10pt;margin:3mm 0 1mm;font-style:italic}.gz p{margin:1mm 0;font-size:10pt;line-height:1.35;text-align:justify}.gz footer{margin-top:5mm;text-align:center;font-size:8pt;border-top:1px solid #1d1a14;padding-top:1mm}@media print{.gz{box-shadow:none;margin:0}}`;
     async function renderGazette(host, T) {
-        const tr = await T.tree(), years = [...new Set(tr.events.map(e => e.y).filter(Boolean))].sort((a, b) => a - b), Y0 = bestYear(tr);
+        const tr = await T.tree(), years = [...new Set(tr.events.map(e => e.y).filter(Boolean))].sort((a, b) => a - b), Y0 = Number(ext.tresorGazette.pending) || bestYear(tr); ext.tresorGazette.pending = null; // pending : l'année demandée par un widget ou la liste
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>L’année<input type="number" name="y" value="${Y0}" min="${years[0] || 1700}" max="${new Date().getFullYear()}" style="width:6em"></label><button type="button" class="button secondary" data-gz-prev>◀</button><button type="button" class="button secondary" data-gz-next>▶</button><button type="button" class="button" data-gz-print>🖨 Imprimer</button><span class="h-tr-muted">Les années les plus riches : ${(() => { const c = new Map(); tr.events.forEach(e => e.y && c.set(e.y, (c.get(e.y) || 0) + 1)); return [...c].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([y]) => y).sort().join(', '); })()}</span></div><style>${GZ_CSS}</style><div data-gz-out></div>`;
         const yEl = host.querySelector('[name=y]'), out = host.querySelector('[data-gz-out]');
         const draw = () => { out.innerHTML = gazetteHtml(T, tr, gazette(T, tr, Number(yEl.value) || Y0)); };
@@ -193,7 +193,7 @@
         draw();
     }
     F.push({key: 'gazette', group: 'creer', icon: '📰', title: 'La gazette de l’année', desc: 'La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain.', render: renderGazette});
-    ext.tresorGazette = {gazette, bestYear};
+    ext.tresorGazette = {gazette, gazetteHtml, bestYear, pending: null};
 
     /* ── 🖥️ Le fond d'écran du jour ── */
     function ancestorOfDay(T, tr, day) {
