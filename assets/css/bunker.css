@@ -71,6 +71,14 @@
 .bk-plans{display:grid;gap:6px}.bk-plan{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:6px 8px;border:1px solid var(--line-color)}.bk-plan>div{display:grid}.bk-plan small{color:var(--muted)}.bk-plan.is-off{opacity:.6;border-style:dashed}
 .bk-cost{font-size:12px;display:flex;gap:6px;flex-wrap:wrap}.bk-cost .is-miss{color:#e0102f;font-weight:700}
 .bk-map{display:grid;grid-template-columns:repeat(var(--n),1fr);border:var(--line);background:#eceae3;aspect-ratio:1}
+/* le plan de la ville en fond, en transparence sous la grille (tuiles OpenStreetMap) */
+.bk-map{position:relative;overflow:hidden;isolation:isolate}
+.bk-map-bg{position:absolute;inset:0;z-index:-1;opacity:.55;pointer-events:none}
+.bk-map-bg img{position:absolute;max-width:none;display:block;user-select:none}
+.bk-map.has-bg .bk-cell{border-color:rgba(60,55,40,.18)}
+.bk-map.has-bg .bk-cell.is-place{background:rgba(255,255,255,.82)}
+.bk-map.has-bg .bk-cell.is-busy{background:rgba(255,242,194,.92)}
+.bk-map-credit{position:absolute;right:2px;bottom:1px;z-index:2;font-size:9px;background:rgba(255,255,255,.75);padding:0 3px;color:#333;pointer-events:none}
 .bk-cell{display:grid;place-items:center;border:0;border-right:1px solid #d8d5ca;border-bottom:1px solid #d8d5ca;background:none;padding:0;font-size:clamp(9px,1.4vw,16px);min-width:0;min-height:0;color:var(--ink)}
 .bk-cell.is-base{background:var(--ink);color:#ffd84d;font-weight:800}
 .bk-cell.is-place{cursor:pointer;background:var(--white)}.bk-cell.is-place:hover{background:var(--blue-soft)}.bk-cell.is-sel{outline:3px solid var(--blue);outline-offset:-3px;z-index:1}.bk-cell.is-busy{background:#fff2c2}

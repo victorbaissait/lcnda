@@ -26,8 +26,9 @@
         lit: {ico: '🛏️', name: 'Lit', cost: {bois: 5, tissu: 3}, h: 3, base: true, desc: 'On dort deux fois mieux dans un lit (un dormeur par lit).'},
         etageres: {ico: '🗄️', name: 'Étagères', cost: {bois: 4}, h: 2, base: true, cap: {all: 10}, desc: '+10 de place pour chaque réserve.'},
         stockage: {ico: '📦', name: 'Stockage', cost: {bois: 4, metal: 4}, h: 4, base: true, cap: {all: 25}, desc: '+25 de place pour chaque réserve.'},
+        cuve: {ico: '💧', name: 'Cuve d’eau de pluie', cost: {bois: 2, metal: 3}, h: 3, base: true, cap: {eau: 30}, rain: 2, desc: '+30 L d’eau de place ; quand il pleut, elle se remplit toute seule (+2 L par heure de pluie).'},
         citerne: {ico: '🛢️', name: 'Citerne', cost: {metal: 6, pieces: 1}, h: 4, tool: 'cle', cap: {eau: 60}, desc: '+60 L d’eau de place.'},
-        recuperateur: {ico: '🌧️', name: 'Récupérateur de pluie', cost: {metal: 4, pieces: 2}, h: 4, tool: 'cle', desc: 'La pluie remplit l’eau trois fois plus vite.'},
+        recuperateur: {ico: '🌧️', name: 'Récupérateur de pluie', cost: {metal: 4, pieces: 2}, h: 4, tool: 'cle', desc: 'La pluie remplit l’eau trois fois plus vite (bidons du toit et cuves).'},
         potager: {ico: '🌱', name: 'Potager sous lampe', cost: {bois: 4, pieces: 2}, h: 5, desc: 'Une ration toutes les 8 h, avec 1 L d’eau et de l’électricité.'},
         infirmerie: {ico: '🩺', name: 'Infirmerie', cost: {bois: 3, tissu: 4, medic: 2}, h: 4, desc: 'La santé remonte deux fois plus vite.'},
         econome: {ico: '🔋', name: 'Groupe économe', cost: {metal: 6, pieces: 4}, h: 6, tool: 'cle', desc: 'L’électricité coûte moitié moins d’essence.'},
@@ -69,6 +70,7 @@
         items(g).forEach(({k}) => { const x = ITEMS[k]?.cap; if (!x) return; c += (x.all || 0) + (x[r] || 0); });
         return c;
     }
+    const rainPerHour = g => (1 + items(g).reduce((n, {k}) => n + (ITEMS[k]?.rain || 0), 0)) * (has(g, 'recuperateur') ? 3 : 1);
     function log(g, txt, kind = 'info') { g.log.unshift({t: g.t, txt, kind}); if (g.log.length > 250) g.log.length = 250; }
     /** un message de la radio : entendu tout de suite s'il y a de l'électricité, sinon gardé jusqu'au retour du courant */
     function radio(g, txt) { if (g.power) log(g, txt, 'radio'); else g.radioQueue.push(txt); }
@@ -168,8 +170,9 @@
         // 🌧️ la météo, chaque heure
         if (newHour) {
             if (g.weather.rain && g.t >= g.weather.until) { g.weather.rain = false; log(g, '🌤️ La pluie s’arrête.'); }
-            else if (!g.weather.rain && rnd(g) < 0.06) { g.weather = {rain: true, until: g.t + rint(g, 2, 8) * 60}; log(g, '🌧️ Il pleut : les bidons du toit se remplissent.'); }
-            if (g.weather.rain) add(g, 'eau', has(g, 'recuperateur') ? 3 : 1);
+            else if (!g.weather.rain && rnd(g) < 0.06) { g.weather = {rain: true, until: g.t + rint(g, 2, 8) * 60}; log(g, `🌧️ Il pleut : ${has(g, 'cuve') ? 'les bidons du toit et les cuves' : 'les bidons du toit'} se remplissent.`); }
+            // l'eau de pluie : 1 L par heure (bidons du toit) + 2 L par cuve, ×3 avec le récupérateur ; elle s'arrête quand la réserve est pleine
+            if (g.weather.rain) add(g, 'eau', rainPerHour(g));
             // 🌱 potager, toutes les 8 h
             if (hourOf(g.t) % 8 === 0 && g.power) for (let i = 0; i < count(g, 'potager'); i++) if (g.res.eau >= 1) { g.res.eau -= 1; add(g, 'nourriture', 1); }
             // les lieux de la ville se remplissent un peu chaque jour, à 6 h
@@ -294,7 +297,9 @@
             where: p.where === 'dehors' && p.exp ? 'dehors' : 'base', act: p.act && typeof p.act === 'object' ? {k: String(p.act.k), until: Number(p.act.until) || 0, at: Array.isArray(p.act.at) ? p.act.at.map(Number) : null} : null,
             job: ['libre', 'creuser', 'construire'].includes(p.job) ? p.job : 'libre', exp: p.where === 'dehors' && p.exp ? {place: String(p.exp.place), phase: ['aller', 'fouille', 'retour'].includes(p.exp.phase) ? p.exp.phase : 'retour', from: Number(p.exp.from) || 0, until: Number(p.exp.until) || 0, loot: Object.fromEntries(Object.entries(p.exp.loot || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])), found: (p.exp.found || []).map(String).filter(f => (f[0] === 't' && TOOLS[f.slice(2)]) || (f[0] === 'p' && ITEMS[f.slice(2)]))} : null}));
         if (!g.people.length) throw new Error('Cette partie n’a aucun habitant.');
-        const c = g.city; c.n = clamp(Number(c.n) || 13, 5, 25); c.name = String(c.name || 'la ville').slice(0, 80); c.size = SIZES[c.size] ? c.size : 'moyenne'; c.base = [Math.floor(c.n / 2), Math.floor(c.n / 2)];
+        const c = g.city; c.n = clamp(Number(c.n) || 13, 5, 25); // lat, lng : le centre de la ville (plan en fond), ou rien
+        { const la = Number(c.lat), lo = Number(c.lng); if (c.lat != null && c.lng != null && Number.isFinite(la) && Number.isFinite(lo) && Math.abs(la) <= 85 && Math.abs(lo) <= 180) { c.lat = la; c.lng = lo; } else { delete c.lat; delete c.lng; } c.geo = c.geo === 'none' ? 'none' : undefined; if (c.geo === undefined) delete c.geo; }
+        c.name = String(c.name || 'la ville').slice(0, 80); c.size = SIZES[c.size] ? c.size : 'moyenne'; c.base = [Math.floor(c.n / 2), Math.floor(c.n / 2)];
         c.places = c.places.slice(0, 30).filter(pl => PLACE_KINDS[pl.kind]).map((pl, i) => ({id: String(pl.id || 'l' + (i + 1)).slice(0, 12), kind: pl.kind, name: String(pl.name || PLACE_KINDS[pl.kind][1]).slice(0, 120), x: clamp(Number(pl.x) || 0, 0, c.n - 1), y: clamp(Number(pl.y) || 0, 0, c.n - 1),
             stock: Object.fromEntries(Object.entries(pl.stock || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])), max: Object.fromEntries(Object.entries(pl.max || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])),
             tools: (pl.tools || []).filter(k => TOOLS[k]), plans: Math.max(0, Number(pl.plans) || 0), visits: Number(pl.visits) || 0, seen: !!pl.seen}));
@@ -303,6 +308,6 @@
         return g;
     }
 
-    root.LCNDA_BUNKER = {NEEDS, DECAY, RES, RES_KEYS, ITEMS, TOOLS, PLACE_KINDS, SIZES, SLOTS, MAX_FLOORS, DIG_HOURS, BASE_PLANS, FOUND_PLANS,
+    root.LCNDA_BUNKER = {rainPerHour, NEEDS, DECAY, RES, RES_KEYS, ITEMS, TOOLS, PLACE_KINDS, SIZES, SLOTS, MAX_FLOORS, DIG_HOURS, BASE_PLANS, FOUND_PLANS,
         newGame, step, run, orderBuild, cancelBuild, dismantle, setJob, send, recall, travel, check, cap, has, count, items, alive, hourOf, dayOf, isNight, clock};
 })();

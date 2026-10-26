@@ -92,7 +92,34 @@
         const city = (form.elements.bk_city_txt.value.trim() || form.elements.bk_city.value || '').slice(0, 80);
         if (!city) { UI().fail?.(form.elements.bk_city_txt, 'Choisis ou tape une ville.'); return; }
         G = B().newGame({me: meId ? who(meId) : {name: form.elements.bk_me_txt?.value || 'Moi'}, team: teamIds.map(who), city: {name: city, size: form.elements.bk_size.value}});
+        await locateCity(G.city);
         gid = 'b' + Date.now().toString(36); saveGame(gid, G, true); tab = 'gens'; placeSel = null; play();
+    }
+
+    /* ═════════ Le plan de la ville, en fond de la carte ═════════ */
+    const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    /** le centre de la ville : d'abord un lieu de l'arbre qui a ses coordonnées, sinon la commune de la base de référence */
+    async function locateCity(c) {
+        if (!c || c.lat != null || c.geo === 'none') return;
+        const want = fold(c.name);
+        try { const tr = await tree(); const pl = Object.values(tr.places || {}).find(x => x && x.lat != null && x.lng != null && fold(String(x.name).split(',')[0]) === want); if (pl) { c.lat = pl.lat; c.lng = pl.lng; return; } } catch (_) {}
+        try {
+            const r = await A().api('commune_suggestions', {q: c.name}), list = (r?.communes || []).filter(x => x.centroid_lat != null && x.centroid_lon != null);
+            const best = list.find(x => fold(x.name) === want) || list[0];
+            if (best) { c.lat = Number(best.centroid_lat); c.lng = Number(best.centroid_lon); return; }
+        } catch (_) {}
+        c.geo = 'none';
+    }
+    /** les tuiles du plan (comme la Carte de l'app), un peu plus de 3 tuiles de côté : petite ville zoom 16, moyenne 15, grande 14 */
+    function mapBgHtml(c) {
+        if (c.lat == null || !A().mapTileUrl) return '';
+        const z = {petite: 16, moyenne: 15, grande: 14}[c.size] || 15, N = 2 ** z, W = 3.2;
+        const fx = (c.lng + 180) / 360 * N, la = c.lat * Math.PI / 180, fy = (1 - Math.log(Math.tan(la) + 1 / Math.cos(la)) / Math.PI) / 2 * N;
+        const x0 = fx - W / 2, y0 = fy - W / 2, out = [];
+        for (let ty = Math.floor(y0); ty < y0 + W; ty++) for (let tx = Math.floor(x0); tx < x0 + W; tx++) {
+            out.push(`<img src="${esc(A().mapTileUrl('color', z, ((tx % N) + N) % N, ty))}" alt="" loading="lazy" draggable="false" style="left:${(tx - x0) / W * 100}%;top:${(ty - y0) / W * 100}%;width:${100 / W}%;height:${100 / W}%">`);
+        }
+        return `<div class="bk-map-bg" aria-hidden="true">${out.join('')}</div><span class="bk-map-credit">© OpenStreetMap</span>`;
     }
 
     /* ═════════ La partie ═════════ */
@@ -203,7 +230,10 @@
             <h4>Plans</h4><div class="bk-plans">${Object.keys(IT).filter(k => !IT[k].fixed).map(k => { const it = IT[k], known = G.plans.includes(k);
                 return `<div class="bk-plan${known ? '' : ' is-off'}"><span class="bk-ico">${known ? it.ico : '❔'}</span><div><b>${known ? esc(it.name) : 'Plan à trouver en ville'}</b><small>${known ? `${esc(it.desc)} · ${it.h} h${it.tool ? ` · il faut ${B().TOOLS[it.tool][0]} ${B().TOOLS[it.tool][1]}` : ''}` : 'Fouille les maisons et la bibliothèque.'}</small>${known ? `<span class="bk-cost">${costTxt(it.cost)}</span>` : ''}</div>${known ? `<button type="button" class="button small secondary" data-bk="build" data-k="${k}">Construire</button>` : ''}</div>`; }).join('')}</div>`;
     }
+    let locating = null;
     function sideVille() {
+        // une partie d'avant le plan en fond : on cherche la ville une fois, puis on redessine
+        if (G.city.lat == null && G.city.geo !== 'none' && !locating) { const g = G; locating = locateCity(g.city).then(() => { locating = null; if (G === g && tab === 'ville') drawSide(); }); }
         const c = G.city, n = c.n, free = B().alive(G).filter(p => p.where === 'base');
         const cell = (x, y) => { const pl = c.places.find(q => q.x === x && q.y === y); if (x === c.base[0] && y === c.base[1]) return `<span class="bk-cell is-base" title="Le bunker">☢</span>`;
             if (!pl) return '<span class="bk-cell"></span>'; const k = B().PLACE_KINDS[pl.kind], there = G.people.some(p => p.hp > 0 && p.exp?.place === pl.id);
@@ -211,7 +241,7 @@
         const pl = c.places.find(x => x.id === placeSel);
         const stockTxt = p => { const tot = Object.values(p.stock).reduce((a, b) => a + b, 0), max = Object.values(p.max).reduce((a, b) => a + b, 0) || 1; return !p.visits ? 'pas encore fouillé' : tot / max > .6 ? 'beaucoup de choses' : tot / max > .25 ? 'un peu' : tot ? 'presque vide' : 'vide (ça revient chaque jour)'; };
         return `<p class="muted">${esc(c.name)} · ville ${B().SIZES[c.size][2].toLowerCase()} · 30 min par case (×1,5 la nuit sans lampe torche).</p>
-            <div class="bk-map" style="--n:${n}">${Array.from({length: n * n}, (_, i) => cell(i % n, Math.floor(i / n))).join('')}</div>
+            <div class="bk-map${c.lat != null ? ' has-bg' : ''}" style="--n:${n}">${mapBgHtml(c)}${Array.from({length: n * n}, (_, i) => cell(i % n, Math.floor(i / n))).join('')}</div>${c.geo === 'none' ? '<p class="lck-legend muted">Pas de plan en fond : cette ville n’a pas de coordonnées (ni dans ton arbre, ni dans les communes).</p>' : ''}
             ${pl ? `<div class="bk-placecard"><b>${B().PLACE_KINDS[pl.kind][0]} ${esc(pl.name)}</b><small>${Math.round(B().travel(G, pl) / 6) / 10} h de marche (aller) · ${stockTxt(pl)}${pl.visits ? ` · fouillé ${plural(pl.visits, 'fois', 'fois')}` : ''}</small>
                 <p class="muted">On y trouve : ${Object.keys(pl.max).map(r => resName(r)[1] + ' ' + resName(r)[2].toLowerCase()).join(', ')}${B().PLACE_KINDS[pl.kind][4] ? ', et souvent des plans' : ''}.</p>
                 ${free.length ? `<div class="bk-send"><select data-bk-sendwho>${free.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')}</select><button type="button" class="button small" data-bk="send">🚶 Envoyer</button></div>` : '<p class="muted">Personne de libre au bunker.</p>'}</div>` : '<p class="muted">Clique sur un lieu de la carte pour y envoyer quelqu’un.</p>'}`;

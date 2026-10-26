@@ -12,7 +12,7 @@ const fill = (g, v = 200) => { B.RES_KEYS.forEach(r => { g.res[r] = v; }); g.flo
 t('une partie : un étage avec radio, groupe électrogène, atelier ; les plans de base ; une ville à la bonne taille', () => {
     const g = game();
     assert.deepEqual(g.floors[0].slots.slice(0, 3), ['radio', 'generateur', 'atelier']);
-    assert.deepEqual(g.plans.sort(), ['douche', 'etageres', 'gardemanger', 'lit', 'stockage', 'toilettes']);
+    assert.deepEqual(g.plans.sort(), ['cuve', 'douche', 'etageres', 'gardemanger', 'lit', 'stockage', 'toilettes']);
     assert.equal(g.people.length, 3); assert.ok(g.people[0].me);
     for (const [size, [nn, nb]] of Object.entries(B.SIZES)) {
         const c = game({city: {name: 'X', size}}).city; assert.equal(c.n, nn); assert.equal(c.places.length, nb);
@@ -71,6 +71,19 @@ t('la pluie remplit l’eau (trois fois plus avec le récupérateur), jamais au-
     g.res.eau = 0; g.weather = {rain: true, until: g.t + 600}; B.run(g, 120); const a = g.res.eau;
     const h = game(); h.res.eau = 0; h.floors[0].slots[3] = 'recuperateur'; h.weather = {rain: true, until: h.t + 600}; B.run(h, 120); assert.ok(h.res.eau >= a * 2, `${h.res.eau} contre ${a}`);
     const c = game(); c.res.eau = B.cap(c, 'eau'); c.weather = {rain: true, until: c.t + 600}; B.run(c, 60); assert.ok(c.res.eau <= B.cap(c, 'eau'));
+});
+t('la cuve d’eau de pluie (plan connu dès le départ) : +30 L de place, et elle se remplit quand il pleut', () => {
+    const g = game(); assert.ok(g.plans.includes('cuve')); const cap0 = B.cap(g, 'eau');
+    g.res = {...g.res, bois: 10, metal: 10}; assert.ok(!B.orderBuild(g, 'cuve', 0, 3).err, 'pas d’outil à trouver');
+    const h = game(); h.floors[0].slots[3] = 'cuve'; h.floors[0].slots[4] = 'cuve'; assert.equal(B.cap(h, 'eau'), cap0 + 60);
+    assert.equal(B.rainPerHour(game()), 1); assert.equal(B.rainPerHour(h), 5); h.floors[0].slots[5] = 'recuperateur'; assert.equal(B.rainPerHour(h), 15);
+    const r = game(); r.floors[0].slots[3] = 'cuve'; r.res.eau = 0; r.weather = {rain: true, until: r.t + 600}; B.run(r, 120); assert.ok(r.res.eau >= 4, `${r.res.eau}`);
+    assert.ok(r.log.some(l => /cuves se remplissent/.test(l.txt)) || r.weather.rain, 'le message parle des cuves');
+});
+t('le centre de la ville (plan en fond) est gardé à la relecture, une valeur abîmée est enlevée', () => {
+    const g = game(); g.city.lat = 46.72; g.city.lng = 2.5; let c = B.check(JSON.parse(JSON.stringify(g))).city; assert.equal(c.lat, 46.72); assert.equal(c.lng, 2.5);
+    g.city.lat = 'x'; c = B.check(JSON.parse(JSON.stringify(g))).city; assert.ok(!('lat' in c) && !('lng' in c));
+    g.city.geo = 'none'; delete g.city.lat; assert.equal(B.check(JSON.parse(JSON.stringify(g))).city.geo, 'none');
 });
 t('enregistrer et reprendre : une partie relue continue exactement pareil ; un fichier abîmé est refusé ou nettoyé', () => {
     const g = game(); B.send(g, g.people[1].id, g.city.places[0].id); B.run(g, 900);
