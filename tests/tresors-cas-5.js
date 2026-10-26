@@ -33,11 +33,27 @@ module.exports = async (t, {page, open, body}, assert) => {
         await open('gazette'); await page.fill('[data-tr-body] [name="y"]', '1903'); await page.waitForTimeout(100); const b = await body();
         assert.match(b, /La Gazette des MARTIN/); assert.match(b, /Jean et Louise se sont dit oui/); assert.match(b, /PARIS\. — C’est le 15 juin 1903 que Jean MARTIN, cheminot, a épousé Louise FAURE, institutrice/); assert.match(b, /Le kilo de pain : environ \d+ centimes/);
         await page.fill('[data-tr-body] [name="y"]', '1905'); await page.waitForTimeout(100); assert.match(await body(), /Bienvenue à Henri/);
+        // le style : 8 styles, le nom du journal, 2 colonnes, sans le coin pratique, ma couleur ; 📐 dans la mise en page
+        assert.ok(await page.$$eval('[data-gz-opts] [name=style] option', l => l.length) >= 8);
+        await page.selectOption('[data-gz-opts] [name=style]', 'tabloid'); await page.fill('[data-gz-opts] [name=title]', 'Le Petit Martin'); await page.selectOption('[data-gz-opts] [name=cols]', '2'); await page.uncheck('[data-gz-opts] [name=show-pratique]');
+        await page.check('[data-gz-opts] [name=ownAccent]'); await page.$eval('[data-gz-opts] [name=accent]', i => { i.value = '#00aa00'; i.dispatchEvent(new Event('input', {bubbles: true})); });
+        const cls = await page.$eval('.gz', a => a.className + ' ' + a.getAttribute('style')); assert.match(cls, /gz-tabloid/); assert.match(cls, /gz-c2/); assert.match(cls, /gz-no-pratique/); assert.match(cls, /#00aa00/); assert.match(await body(), /Le Petit Martin/i);
+        assert.equal(await page.$eval('.gz-s-pratique', s => getComputedStyle(s).display), 'none');
+        await page.click('[data-gz-layout]'); await page.waitForSelector('.ly-item.ly-frame', {timeout: 10000}); await page.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); await page.keyboard.press('Escape');
+        await page.evaluate(() => localStorage.removeItem('lcnda-gazette-style'));
     });
     await t('🖥️ fond d’écran : l’ancêtre du jour (le même toute la journée), en 1920 × 1080 puis au format téléphone', async () => {
         const same = await T('(T, tr) => window.LCNDA_EXT.tresorWallpaper.ancestorOfDay(T, tr, "2026-03-12")'); assert.match(same.why, /il y a \d+ ans, jour pour jour/);
         await open('fond-ecran'); await page.waitForTimeout(300); assert.deepEqual(await page.$eval('[data-wp-c]', c => [c.width, c.height]), [1920, 1080]);
         await page.selectOption('[data-tr-body] [name="size"]', 'tel'); await page.waitForTimeout(300); assert.deepEqual(await page.$eval('[data-wp-c]', c => [c.width, c.height]), [1179, 2556]);
         const dl = page.waitForEvent('download'); await page.click('[data-wp-png]'); assert.match((await dl).suggestedFilename(), /fond-d-ecran-\d{4}-\d\d-\d\d\.png/);
+        // tout se règle : couleurs à soi, motif, forme, place, textes, calendrier, taille sur mesure ; retenu sur cet ordinateur
+        await page.selectOption('[data-wp-form] [name="size"]', 'perso'); await page.fill('[data-wp-form] [name="w"]', '1000'); await page.fill('[data-wp-form] [name="h"]', '600'); await page.waitForTimeout(300); assert.deepEqual(await page.$eval('[data-wp-c]', c => [c.width, c.height]), [1000, 600]);
+        await page.selectOption('[data-wp-form] [name="palette"]', 'perso'); await page.$eval('[data-wp-form] [name="c1"]', i => { i.value = '#ff0000'; i.dispatchEvent(new Event('input', {bubbles: true})); }); await page.selectOption('[data-wp-form] [name="grad"]', 'aucun'); await page.selectOption('[data-wp-form] [name="motif"]', 'aucun'); await page.waitForTimeout(300);
+        assert.equal(await page.$eval('[data-wp-c]', c => Array.from(c.getContext('2d').getImageData(2, 2, 1, 1).data).slice(0, 3).join()), '255,0,0', 'le fond de ma couleur');
+        for (const [n, v] of [['shape', 'arche'], ['photoPos', 'droite'], ['font', 'machine'], ['safe', 'icones']]) await page.selectOption(`[data-wp-form] [name="${n}"]`, v);
+        await page.check('[data-wp-form] [name="cal"]'); await page.fill('[data-wp-form] [name="quote"]', 'Souviens-toi'); await page.waitForTimeout(300);
+        const kept = await page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-fond-ecran'))); assert.equal(kept.shape, 'arche'); assert.equal(kept.quote, 'Souviens-toi'); assert.equal(kept.cal, true);
+        await page.click('[data-wp-reset]'); await page.waitForTimeout(300); assert.equal(await page.evaluate(() => localStorage.getItem('lcnda-fond-ecran') && JSON.parse(localStorage.getItem('lcnda-fond-ecran')).shape), 'rond');
     });
 };
