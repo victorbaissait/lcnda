@@ -12,7 +12,7 @@ const fill = (g, v = 200) => { B.RES_KEYS.forEach(r => { g.res[r] = v; }); g.flo
 t('une partie : un étage avec radio, groupe électrogène, atelier ; les plans de base ; une ville à la bonne taille', () => {
     const g = game();
     assert.deepEqual(g.floors[0].slots.slice(0, 3), ['radio', 'generateur', 'atelier']);
-    assert.deepEqual(g.plans.sort(), ['berceau', 'cuve', 'douche', 'dynamo', 'etageres', 'filtre', 'gardemanger', 'jeux', 'lit', 'pieges', 'poele', 'porte', 'stockage', 'toilettes']);
+    assert.deepEqual(g.plans.sort(), ['arbremur', 'barricade', 'berceau', 'bibliotheque', 'compost', 'cuve', 'debarras', 'douche', 'dynamo', 'etabli', 'etagerecomp', 'etageres', 'filtre', 'gardemanger', 'jeux', 'lavabo', 'lit', 'pieges', 'poele', 'porte', 'stockage', 'toilettes']);
     assert.equal(g.people.length, 3); assert.ok(g.people[0].me);
     for (const [size, [nn, nb]] of Object.entries(B.SIZES)) {
         const c = game({city: {name: 'X', size}}).city; assert.equal(c.n, nn); assert.equal(c.places.length, nb);
@@ -172,5 +172,49 @@ t('bien caché : la lampe rouge du labo photo (trois clics) fait apparaître la 
     const idx = fs.readFileSync(path.join(__dirname, '../index.php'), 'utf8');
     assert.ok(idx.indexOf('heritage-bunker-moteur.js') < idx.indexOf('heritage-bunker.js?'), 'le moteur avant l’écran');
     assert.doesNotMatch(fs.readFileSync(path.join(__dirname, '../assets/js/heritage-bunker.js'), 'utf8'), /\balert\(|\bconfirm\(|innerHTML\s*=\s*[^`'"]*\b(name|txt)\b(?!\))/);
+});
+t('♻️ bric-à-brac : on le démonte (travail « Démonter ») et on obtient ses composants ; l’établi va plus vite ; plus de place = laissé dehors', () => {
+    const g = game(); assert.ok(B.JUNK_KEYS.length >= 30, 'beaucoup d’objets à démonter'); assert.ok(B.RES_KEYS.includes('cuivre') && B.RES_KEYS.includes('electro') && B.RES_KEYS.length >= 20);
+    assert.deepEqual(g.junk, {radiocassee: 1, chaise: 1, palette: 1});
+    const before = {electro: g.res.electro, cuivre: g.res.cuivre}; assert.ok(B.recycle(g, 'radiocassee').ok); assert.equal(g.junk.radiocassee, undefined);
+    assert.ok(g.people.some(p => p.job === 'recycler'), 'quelqu’un s’y met'); assert.equal(B.recycle(g, 'radiocassee').ok, false);
+    B.run(g, 4 * 60); assert.ok(g.res.electro >= before.electro + 2 && g.res.cuivre >= before.cuivre + 1, JSON.stringify(g.res)); assert.ok(g.log.some(l => /a démonté/.test(l.txt)));
+    const tm = () => { const h = game(); h.people.slice(1).forEach(p => { p.job = 'creuser'; }); h.people[0].job = 'recycler'; h.people[0].sk.reparer = 1; B.recycle(h, 'palette'); let m = 0; while (h.recy.length && m < 600) { B.run(h, 10); m += 10; } return m; };
+    const slow = tm(); const t2 = (() => { const h = game(); h.floors[0].slots[3] = 'etabli'; h.people.slice(1).forEach(p => { p.job = 'creuser'; }); h.people[0].job = 'recycler'; h.people[0].sk.reparer = 1; B.recycle(h, 'palette'); let m = 0; while (h.recy.length && m < 600) { B.run(h, 10); m += 10; } return m; })();
+    assert.ok(t2 < slow, `établi : ${t2} min au lieu de ${slow}`);
+    const a = game(); a.autoRecy = true; a.people[0].job = 'recycler'; B.run(a, 10 * 60); assert.equal(B.junkCount(a), 0, 'démonter tout seul');
+});
+t('📐 plus de 50 plans, chacun avec ce qu’il fait ; il manque X : dit précisément ; les composants servent', () => {
+    const P = Object.keys(B.ITEMS).filter(k => !B.ITEMS[k].fixed); assert.ok(P.length >= 55, `${P.length} plans`);
+    P.forEach(k => { const it = B.ITEMS[k]; assert.ok(it.desc && it.h > 0 && Object.keys(it.cost).every(r => B.RES_KEYS.includes(r)), k); });
+    const used = new Set(P.flatMap(k => Object.keys(B.ITEMS[k].cost))); ['clous', 'corde', 'colle', 'verre', 'plastique', 'caoutchouc', 'cuivre', 'electro', 'piles', 'charbon'].forEach(r => assert.ok(used.has(r), r));
+    const g = game(); g.plans.push('television'); const r = B.orderBuild(g, 'television', 0, 3); assert.equal(r.ok, false); assert.match(r.err, /Il manque :.*composants électroniques/);
+});
+t('🏭 les objets travaillent : serre, clapier, alambic, labo ; batteries ; loisirs ; air ; chauffage au charbon', () => {
+    const g = game(); g.floors[0].slots[3] = 'alambic'; g.floors[0].slots[4] = 'labo'; g.floors[0].slots[5] = 'clapier'; g.res.eau = 0; g.res.eausale = 30; g.res.bois = 10; g.res.plantes = 6; g.res.medic = 0; const n0 = g.res.nourriture;
+    g.people.forEach(p => { p.needs.soif = 100; p.needs.faim = 100; }); B.run(g, 25 * 60);
+    assert.ok(g.res.eau > 0 || g.res.eausale < 30, 'l’alambic fait de l’eau potable'); assert.ok(g.res.medic >= 1, 'le labo fait des médicaments'); assert.ok(g.stats && g.res.nourriture >= n0 - 12, 'le clapier nourrit');
+    const k = game(); k.floors[0].slots[3] = 'ventilateur'; k.floors[0].slots[4] = 'batteries'; assert.equal(B.sumOf(k, 'store'), 8); assert.ok(B.mult(k, 'airK') < 1);
+    const h = game(); h.floors[0].slots[3] = 'batteries'; h.res.essence = 0; h.batt = 8; B.run(h, 60); assert.equal(h.power, true); assert.equal(h.powerSrc, 'batteries');
+    const w = game(); w.floors[0].slots[3] = 'chaudiere'; w.season0 = 3; w.res.charbon = 10; w.res.bois = 0; B.run(w, 120); assert.equal(w.cold, false); assert.ok(w.res.charbon < 10);
+    const f = game(); f.floors[0].slots[3] = 'guitare'; f.people.forEach(p => { p.mood = 30; }); B.run(f, 180); assert.ok(f.people.some(p => p.mood > 40), 'la guitare remonte le moral sans électricité');
+});
+t('🗺️ grandes cartes : très grande (26 lieux) et immense (40), toutes les sortes de lieux, du bric-à-brac partout', () => {
+    for (const [size, nb] of [['tresgrande', 26], ['immense', 40]]) { const c = game({city: {name: 'X', size}}).city; assert.equal(c.places.length, nb); ['decharge', 'electromenager', 'usine', 'hopital', 'gare'].forEach(k => assert.ok(c.places.some(p => p.kind === k), k)); assert.ok(c.places.filter(p => p.junk.length).length > nb / 2); }
+});
+t('🚶 un parcours de plusieurs lieux, et à chaque lieu ce qu’on rapporte (seulement le bric-à-brac, ou seulement l’eau…)', () => {
+    const g = game(); g.tools.push('sac'); const p = g.people[1], [a, b] = g.city.places.filter(x => x.kind === 'supermarche' || x.kind === 'quincaillerie');
+    a.stock.eau = 10; a.stock.nourriture = 10; b.junk = ['vis', 'cables'];
+    assert.ok(B.send(g, p.id, [{id: a.id, take: ['eau']}, {id: b.id, take: ['junk']}]).ok); assert.ok(B.routeTime(g, [a.id, b.id]) > B.travel(g, a) * 2 - 1);
+    let guard = 0; while (p.where !== 'base' && guard++ < 400) B.run(g, 30);
+    assert.equal(p.where, 'base'); assert.ok((g.junk.vis || 0) + (g.junk.cables || 0) >= 1, JSON.stringify(g.junk)); assert.ok(a.stock.nourriture === 10 || a.stock.nourriture > 9, 'pas de nourriture prise au supermarché');
+    assert.ok(g.log.some(l => /Je continue vers/.test(l.txt)) || g.radioQueue.some(m => /Je continue vers/.test(m)));
+});
+t('🧍 l’autonomie : prudent (ils y vont plus tôt), manuel (seulement à la dernière minute, et des ordres « boire », « manger »…)', () => {
+    const g = game(); fill(g); g.people.forEach(p => { p.needs.soif = 50; }); B.setAuto(g, 'prudent'); B.run(g, 30); assert.ok(g.people.every(p => p.needs.soif > 50 || p.act?.k === 'boire'), 'prudent : ils boivent à 50');
+    const m = game(); fill(m); B.setAuto(m, 'manuel'); m.people.forEach(p => { p.needs.soif = 30; }); B.run(m, 10); assert.ok(m.people.every(p => p.act?.k !== 'boire'), 'manuel : pas encore');
+    assert.ok(B.orderNeed(m, m.people[0].id, 'soif').ok); assert.equal(m.people[0].act.k, 'boire');
+    B.setAuto(m, 'prudent', m.people[1].id); assert.equal(m.people[1].auto, 'prudent'); B.setAuto(m, '', m.people[1].id); assert.equal(m.people[1].auto, undefined);
+    const c = B.check(JSON.parse(JSON.stringify(m))); assert.equal(c.auto, 'manuel'); assert.deepEqual(c.junk, m.junk);
 });
 console.log(`✓ bunker : ${n} vérifications`);

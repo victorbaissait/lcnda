@@ -109,7 +109,7 @@
         const month = new Date().getMonth(), season0 = month >= 2 && month <= 4 ? 0 : month >= 5 && month <= 7 ? 1 : month >= 8 && month <= 10 ? 2 : 3;
         G = B().newGame({me: meId ? who(meId) : {name: form.elements.bk_me_txt?.value || 'Moi'}, team: teamIds.map(who), city: {name: city, size: form.elements.bk_size.value}, coffre, season0, ...more});
         await locateCity(G.city);
-        gid = 'b' + Date.now().toString(36); saveGame(gid, G, true); tab = 'gens'; placeSel = null; play();
+        gid = 'b' + Date.now().toString(36); saveGame(gid, G, true); tab = 'gens'; placeSel = null; route = []; mapScroll = null; play();
     }
 
     /** ce que l'arbre et la base apportent à la partie : liens de famille, voyageurs, maisons natales, histoires, lettres, prénoms */
@@ -170,7 +170,7 @@
                 <div class="segmented bk-speed" role="group" aria-label="Vitesse">${[[0, '⏸', 'Pause (Espace)'], [1, '×1', '1 heure de jeu en 6 secondes'], [2, '×2', 'Deux fois plus vite'], [4, '×4', 'Quatre fois plus vite']].map(([v, l, t]) => `<button type="button" data-bk="speed" data-v="${v}" title="${t}">${l}</button>`).join('')}</div>
                 <button type="button" class="button small secondary" data-bk="gazette" title="Le journal de la partie">📰 Gazette</button><button type="button" class="button small" data-bk="save" data-shortcut="⌘S">💾 Enregistrer</button><button type="button" class="button small secondary" data-bk="export" title="Garder la partie dans un fichier">⤓ Exporter</button><button type="button" class="button small secondary" data-bk="menu">↩ Parties</button><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
             <p class="bk-news" data-bk-news aria-live="polite"></p><div class="bk-visit" data-bk-visit hidden></div>
-            <div class="bk-main"><section class="bk-world" data-bk-world></section><aside class="bk-side"><div class="segmented bk-tabs" role="tablist">${[['gens', '👥 Habitants'], ['res', '📦 Réserves'], ['atelier', '🛠️ Atelier'], ['ville', '🗺️ Ville'], ['famille', '🌳 Famille'], ['radio', '📻 Radio']].map(([k, l]) => `<button type="button" role="tab" data-bk="tab" data-v="${k}">${l}</button>`).join('')}</div><div class="bk-sbody" data-bk-side></div></aside></div><div class="bk-gz" data-bk-gz hidden></div></div>`;
+            <div class="bk-main"><section class="bk-world" data-bk-world></section><aside class="bk-side"><div class="segmented bk-tabs" role="tablist">${[['gens', '👥 Habitants'], ['res', '📦 Réserves'], ['atelier', '🛠️ Atelier'], ['bric', '♻️ Bric-à-brac'], ['ville', '🗺️ Ville'], ['famille', '🌳 Famille'], ['radio', '📻 Radio']].map(([k, l]) => `<button type="button" role="tab" data-bk="tab" data-v="${k}">${l}</button>`).join('')}</div><div class="bk-sbody" data-bk-side></div></aside></div><div class="bk-gz" data-bk-gz hidden></div></div>`;
         drawAll(); go();
     }
     function go() { stop(); lastTick = performance.now(); acc = 0; timer = setInterval(tick, 200); }
@@ -244,7 +244,7 @@
                 <span class="bk-ground"><span class="bk-trap${G.visit ? ' is-knock' : ''}" title="${G.visit ? 'Quelqu’un frappe à la trappe !' : 'La trappe'}">${G.visit ? '🔔' : '▦'}</span></span></div>
             <div class="bk-floors">${G.floors.map((f, fi) => `<div class="bk-floor"><span class="bk-flabel">−${fi + 1}</span><div class="bk-slots">${f.slots.map((k, si) => {
                 const it = k && B().ITEMS[k], bd = building.get(`${fi},${si}`), who = at.get(`${fi},${si}`) || [];
-                if (it) return `<button type="button" class="bk-slot is-item${!G.power && ['radio', 'atelier', 'douche', 'potager', 'phono'].includes(k) ? ' is-dark' : ''}" data-bk="slot" data-f="${fi}" data-s="${si}" title="${esc(it.name)} — ${esc(it.desc)}"><span class="bk-ico">${it.ico}</span><span class="bk-name">${esc(it.name)}</span><span class="bk-who">${who.map(pawn).join('')}</span></button>`;
+                if (it) return `<button type="button" class="bk-slot is-item${!G.power && (['radio', 'atelier', 'douche', 'potager'].includes(k) || it.power) ? ' is-dark' : ''}" data-bk="slot" data-f="${fi}" data-s="${si}" title="${esc(it.name)} — ${esc(it.desc)}"><span class="bk-ico">${it.ico}</span><span class="bk-name">${esc(it.name)}</span><span class="bk-who">${who.map(pawn).join('')}</span></button>`;
                 if (bd) return `<button type="button" class="bk-slot is-building" data-bk="slot" data-f="${fi}" data-s="${si}" title="En construction : ${esc(B().ITEMS[bd.b.k].name)}"><span class="bk-ico">${B().ITEMS[bd.b.k].ico}</span><span class="bk-name">${esc(B().ITEMS[bd.b.k].name)}</span><span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / B().ITEMS[bd.b.k].h))}%"></i></span></button>`;
                 return `<button type="button" class="bk-slot is-empty" data-bk="slot" data-f="${fi}" data-s="${si}" title="Place libre : construire ici">＋</button>`;
             }).join('')}</div>${fi === 0 ? `<div class="bk-hall" title="Ceux qui attendent">${(at.get('hall') || []).map(pawn).join('')}</div>` : ''}</div>`).join('')}
@@ -259,31 +259,40 @@
     const costTxt = cost => Object.entries(cost || {}).map(([r, n]) => `<span class="${(G.res[r] || 0) < n ? 'is-miss' : ''}">${resName(r)[1]} ${n}</span>`).join(' ');
     function drawSide() {
         const s = dlg.querySelector('[data-bk-side]'); if (!s) return;
-        const keep = s.scrollTop;
-        s.innerHTML = tab === 'gens' ? sideGens() : tab === 'res' ? sideRes() : tab === 'atelier' ? sideAtelier() : tab === 'ville' ? sideVille() : tab === 'famille' ? sideFamille() : sideRadio();
+        const keep = s.scrollTop, mw = s.querySelector('.bk-mapwrap.is-big'), mk = mw ? [mw.scrollLeft, mw.scrollTop] : mapScroll;
+        s.innerHTML = tab === 'gens' ? sideGens() : tab === 'res' ? sideRes() : tab === 'atelier' ? sideAtelier() : tab === 'bric' ? sideBric() : tab === 'ville' ? sideVille() : tab === 'famille' ? sideFamille() : sideRadio();
         s.scrollTop = keep;
+        // une grande carte garde où on en était ; la première fois, elle se centre sur le bunker
+        const w2 = s.querySelector('.bk-mapwrap.is-big');
+        if (w2) { if (mk) { w2.scrollLeft = mk[0]; w2.scrollTop = mk[1]; } else { const base = w2.querySelector('.is-base'); if (base) { w2.scrollLeft = base.offsetLeft - w2.clientWidth / 2 + 15; w2.scrollTop = base.offsetTop - w2.clientHeight / 2 + 15; } } mapScroll = [w2.scrollLeft, w2.scrollTop]; }
     }
+    const AUTO_L = [['prudent', '🟢 Prudente (dès que la barre baisse)'], ['normal', '🟡 Normale'], ['manuel', '🔴 Manuelle (à la dernière minute ; je donne les ordres)']];
     function sideGens() {
-        return G.people.map(p => {
+        return `<div class="bk-autobar"><label>🧍 Autonomie de tout le monde <select data-bk-auto="">${AUTO_L.map(([v, l]) => `<option value="${v}" ${G.auto === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+            <small class="muted">Chacun va de soi-même boire, manger, aux toilettes, se laver ou dormir quand sa barre descend : 🟢 prudente = dès qu’elle passe sous la moitié, 🟡 normale = vers un tiers, 🔴 manuelle = seulement à la toute dernière minute (c’est vous qui donnez les ordres). Les boutons 💧🍞🚽🧼💤 de chacun donnent un ordre tout de suite.</small></div>` + G.people.map(p => {
             const out = p.where === 'dehors', pl = out && G.city.places.find(x => x.id === p.exp?.place);
             const status = p.hp <= 0 ? '☠️ mort·e' : out ? `🚶 ${p.exp.phase === 'aller' ? 'en route vers' : p.exp.phase === 'fouille' ? 'fouille' : 'rentre de'} ${esc(pl?.name || '')}` : esc(pawn(p).match(/title="[^:]*: ([^"]*)"/)?.[1] || '');
             const skills = B().SKILLS.filter(([k]) => (p.sk?.[k] || 1) > 1).map(([k, ico, l]) => `<span class="bk-chip" title="${esc(l)} : ${Math.round(((p.sk[k] || 1) - 1) * 100)} % de mieux">${ico} ${esc(l)}</span>`).join('');
             const ties = [...(p.spouses || []).map(id => ['💞', id]), ...(p.kin || []).map(id => ['👪', id])].map(([ico, id]) => { const o = G.people.find(x => x.id === id); return o ? `<span class="bk-chip" title="${ico === '💞' ? 'En couple' : 'De la même famille'} : le moral tient mieux quand on est ensemble">${ico} ${esc(o.name.split(' ')[0])}</span>` : ''; }).join('');
             const feud = G.feud?.includes(p.id) ? (() => { const o = G.people.find(x => x.id === G.feud.find(i => i !== p.id)); return o ? `<span class="bk-chip is-bad" title="Une vieille brouille de famille">⚡ ${esc(o.name.split(' ')[0])}</span>` : ''; })() : '';
-            const jobs = [['libre', 'Rien de spécial'], ['creuser', '⛏️ Creuser'], ['construire', '🔨 Construire'], ['garde', '🛡️ Monter la garde'], ...(B().has(G, 'dynamo') ? [['pedaler', '🚲 Pédaler (électricité)']] : [])];
+            const jobs = [['libre', 'Rien de spécial'], ['creuser', '⛏️ Creuser'], ['construire', '🔨 Construire'], ['recycler', '♻️ Démonter le bric-à-brac'], ['garde', '🛡️ Monter la garde'], ...(B().has(G, 'dynamo') ? [['pedaler', '🚲 Pédaler (électricité)']] : [])];
             return `<div class="bk-person${p.hp <= 0 ? ' is-dead' : ''}"><div class="bk-p-head">${pawn(p)}<div><b>${esc(p.name)}${p.me ? ' <small>(toi)</small>' : ''}${p.baby ? ' <small>(bébé)</small>' : ''}</b><small>${status}${p.ill && p.hp > 0 ? ` · ${p.ill.k === 'fievre' ? '🤒 fièvre' : '🩹 blessure'}${p.ill.treated ? ' (soignée)' : ''}` : ''}</small>${p.from ? `<small class="muted">${esc(p.from)}</small>` : ''}</div></div>
                 ${skills || ties || feud ? `<div class="bk-chips">${skills}${ties}${feud}</div>` : ''}
                 <div class="bk-needs"><span>❤️ Vie</span>${bar(p.hp, 'is-hp')}<span>😊 Moral</span>${bar(p.mood ?? 70, 'is-mood')}${B().NEEDS.map(([k, ico, l]) => `<span>${ico} ${l}</span>${bar(p.needs[k])}`).join('')}</div>
-                ${p.hp > 0 && !out && !p.baby ? `<div class="bk-p-actions"><label>Travail <select data-bk-job="${esc(p.id)}">${jobs.map(([v, l]) => `<option value="${v}" ${p.job === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-bk="sendfrom" data-id="${esc(p.id)}">🚶 Envoyer en ville</button></div>` : ''}${p.sulk ? '<p class="ui-notice is-error">😞 Plus de moral : refuse de travailler (jeux, musique, histoires du soir…).</p>' : ''}</div>`;
+                ${p.hp > 0 && !out && !p.baby ? `<div class="bk-p-actions"><label>Travail <select data-bk-job="${esc(p.id)}">${jobs.map(([v, l]) => `<option value="${v}" ${p.job === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-bk="sendfrom" data-id="${esc(p.id)}">🚶 Envoyer en ville</button></div>
+                <div class="bk-p-actions bk-orders"><label title="Quand il ou elle va de soi-même boire, manger, aux toilettes…">Autonomie <select data-bk-auto="${esc(p.id)}"><option value="">comme tout le monde</option>${AUTO_L.map(([v, l]) => `<option value="${v}" ${p.auto === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                    <span class="bk-order-btns" role="group" aria-label="Lui dire de">${[['soif', '💧', 'Boire'], ['faim', '🍞', 'Manger'], ['vessie', '🚽', 'Toilettes'], ['hygiene', '🧼', 'Se laver'], ['sommeil', '💤', 'Dormir']].map(([k, ico, l]) => `<button type="button" class="icon-button small" data-bk="need" data-id="${esc(p.id)}" data-v="${k}" title="${l} maintenant" aria-label="${l} maintenant">${ico}</button>`).join('')}</span></div>` : ''}${p.sulk ? '<p class="ui-notice is-error">😞 Plus de moral : refuse de travailler (jeux, musique, histoires du soir…).</p>' : ''}</div>`;
         }).join('');
     }
     function sideRes() {
-        return `<h4>Réserves</h4><div class="bk-res">${B().RES.map(([r, ico, l, u]) => { const c = B().cap(G, r); return `<span>${ico} ${l}</span><b>${Math.floor(G.res[r])}${u ? ' ' + u : ''} <small>/ ${c}</small></b>${bar(100 * G.res[r] / c)}`; }).join('')}</div>
+        const row = ([r, ico, l, u]) => { const c = B().cap(G, r); return `<span>${ico} ${l}</span><b>${Math.floor(G.res[r])}${u ? ' ' + u : ''} <small>/ ${c}</small></b>${bar(100 * G.res[r] / c)}`; };
+        return `<h4>Réserves</h4><div class="bk-res">${B().RES.slice(0, 10).map(row).join('')}</div>
+            <h4>Composants</h4><div class="bk-res">${B().RES.slice(10).map(row).join('')}</div><p class="muted">Les composants viennent surtout du ♻️ bric-à-brac qu’on démonte (et de certains lieux : droguerie, électroménager, usine…).</p>
             <p class="muted">Plus de place : étagères, stockage, garde-manger, citerne, cuves. L’eau de pluie passe au ⚗️ filtre avant d’être bue (sinon : risque de fièvre).</p>
             ${B().has(G, 'filtre') ? `<p>${G.filterClog ? '⚗️ <b>Filtre encrassé</b> : il faut 1 tissu.' : `⚗️ Filtre : ${Math.round(G.filterUse)} / 30 L avant de le nettoyer (1 tissu).`}</p>` : ''}
             <h4>Air</h4><div class="bk-res"><span>🌀 Conduit d’aération</span><b>${Math.round(G.air)} %</b>${bar(G.air)}</div><p class="muted">Il s’encrasse, plus vite quand on est nombreux ; quelqu’un de libre le nettoie. Air lourd : on dort mal, le moral baisse.</p>
             <h4>Saison</h4><p>${(S => `${S[1]} ${S[2]}`)(B().SEASONS.find(x => x[0] === B().seasonOf(G)))} · une saison dure ${B().SEASON_DAYS} jours. ${B().seasonOf(G) === 'hiver' ? (G.cold ? '🥶 Il fait froid : il faut un poêle à bois (et du bois).' : '🔥 Le poêle chauffe le bunker.') : B().seasonOf(G) === 'ete' ? 'Il pleut moins, on a plus soif.' : B().seasonOf(G) === 'printemps' ? 'Il pleut plus souvent.' : ''}</p>
-            <h4>Électricité</h4><p>${G.power ? ({soleil: '☀️ Le panneau solaire', vent: '🌬️ L’éolienne', pedales: '🚲 La dynamo à pédales'}[G.powerSrc] || '⚡ Le groupe électrogène') + ' donne le courant' : G.powerOn ? '🔌 Plus d’essence : pas d’électricité' : '🔌 Groupe électrogène éteint'} — le groupe brûle ${B().has(G, 'econome') ? '⅛' : '¼'} L d’essence par heure, seulement quand rien d’autre ne donne de courant.</p>
+            <h4>Électricité</h4><p>${G.power ? ({soleil: '☀️ Le panneau solaire', vent: '🌬️ L’éolienne', pedales: '🚲 La dynamo à pédales', batteries: '🔋 Le banc de batteries'}[G.powerSrc] || '⚡ Le groupe électrogène') + ' donne le courant' : G.powerOn ? '🔌 Plus d’essence : pas d’électricité' : '🔌 Groupe électrogène éteint'} — le groupe brûle ${B().has(G, 'econome') ? '⅛' : '¼'} L d’essence par heure, seulement quand rien d’autre ne donne de courant.${B().sumOf(G, 'store') ? ` 🔋 Batteries : ${Math.floor(G.batt || 0)} h / ${B().sumOf(G, 'store')} h en réserve.` : ''}</p>
             <button type="button" class="button small secondary" data-bk="power">${G.powerOn ? 'Éteindre pour économiser l’essence' : 'Rallumer le groupe électrogène'}</button>
             <h4>Outils</h4><div class="bk-chips">${Object.entries(B().TOOLS).map(([k, [ico, l, d]]) => `<span class="bk-chip${G.tools.includes(k) ? '' : ' is-off'}" title="${esc(d)}">${ico} ${esc(l)}${G.tools.includes(k) ? '' : ' (à trouver)'}</span>`).join('')}</div>`;
     }
@@ -291,24 +300,64 @@
         const IT = B().ITEMS;
         return `<h4>En construction</h4>${G.builds.length ? `<ol class="bk-builds">${G.builds.map((b, i) => `<li>${IT[b.k].ico} ${esc(IT[b.k].name)} <small>étage −${b.fi + 1} · encore ${Math.max(0, Math.ceil(b.left * 10) / 10)} h</small><button type="button" class="icon-button small" data-bk="unbuild" data-i="${i}" title="Annuler (les matériaux reviennent)" aria-label="Annuler">×</button></li>`).join('')}</ol>
             ${!G.power ? '<p class="ui-notice is-error">Pas d’électricité : l’atelier est à l’arrêt.</p>' : ''}${!G.people.some(p => p.hp > 0 && p.where === 'base' && p.job === 'construire') ? '<p class="ui-notice">Personne n’est à l’atelier : mets quelqu’un sur « 🔨 Construire » (onglet Habitants).</p>' : ''}` : A().emptyState({icon: '🛠️', text: 'Rien en construction.', hint: 'Clique sur une place libre du bunker (＋), ou sur « Construire » ci-dessous.'})}
-            <h4>Plans</h4><div class="bk-plans">${Object.keys(IT).filter(k => !IT[k].fixed).map(k => { const it = IT[k], known = G.plans.includes(k);
-                return `<div class="bk-plan${known ? '' : ' is-off'}"><span class="bk-ico">${known ? it.ico : '❔'}</span><div><b>${known ? esc(it.name) : 'Plan à trouver en ville'}</b><small>${known ? `${esc(it.desc)} · ${it.h} h${it.tool ? ` · il faut ${B().TOOLS[it.tool][0]} ${B().TOOLS[it.tool][1]}` : ''}` : 'Fouille les maisons et la bibliothèque.'}</small>${known ? `<span class="bk-cost">${costTxt(it.cost)}</span>` : ''}</div>${known ? `<button type="button" class="button small secondary" data-bk="build" data-k="${k}">Construire</button>` : ''}</div>`; }).join('')}</div>`;
+            <h4>Plans</h4><div class="segmented bk-planf" role="group" aria-label="Montrer">${[['ok', '✅ Je peux construire'], ['near', '🟡 Il manque peu'], ['known', '📐 Mes plans'], ['all', 'Tous'], ['find', '❔ À trouver']].map(([v, l]) => `<button type="button" data-bk="planf" data-v="${v}" class="${planF === v ? 'is-active' : ''}">${l}</button>`).join('')}</div>
+            <div class="bk-plans">${plansHtml()}</div>`;
     }
-    let locating = null;
+    /** ce qui manque pour un plan : [[ressource, il en faut, on en a]], l'outil, le plan lui-même */
+    function needOf(k) { const it = B().ITEMS[k]; return {miss: Object.entries(it.cost || {}).filter(([r, n]) => (G.res[r] || 0) < n).map(([r, n]) => [r, n, Math.floor(G.res[r] || 0)]), tool: it.tool && !G.tools.includes(it.tool) ? it.tool : '', plan: !G.plans.includes(k)}; }
+    /** d'où vient une ressource : le bric-à-brac qui en donne, et les lieux où on la trouve */
+    function whereRes(r) { const J = B().JUNK, js = B().JUNK_KEYS.filter(k => J[k][2][r]).sort((a, b) => J[b][2][r] - J[a][2][r]).slice(0, 3).map(k => `${J[k][0]} ${J[k][1].toLowerCase()}`), ps = Object.entries(B().PLACE_KINDS).filter(([, v]) => v[2][r]).slice(0, 3).map(([, v]) => `${v[0]} ${v[1].toLowerCase()}`); return [...js.length ? [`à démonter : ${js.join(', ')}`] : [], ...ps.length ? [`en ville : ${ps.join(', ')}`] : []].join(' · '); }
+    let planF = 'known';
+    function plansHtml() {
+        const IT = B().ITEMS, keys = Object.keys(IT).filter(k => !IT[k].fixed), planPlaces = Object.values(B().PLACE_KINDS).filter(v => v[4]).map(v => `${v[0]} ${v[1].toLowerCase()}`).join(', ');
+        const list = keys.map(k => ({k, n: needOf(k)})).filter(({n}) => planF === 'all' ? true : planF === 'find' ? n.plan : planF === 'ok' ? !n.plan && !n.miss.length && !n.tool : planF === 'near' ? !n.plan && (n.miss.length || n.tool) && n.miss.reduce((a, [, x, h]) => a + x - h, 0) <= 4 : !n.plan)
+            .sort((a, b) => (a.n.plan - b.n.plan) || (a.n.miss.length - b.n.miss.length));
+        if (!list.length) return `<p class="muted">${planF === 'ok' ? 'Rien de constructible tout de suite : regarde « 🟡 Il manque peu ».' : planF === 'find' ? 'Tous les plans sont trouvés !' : 'Rien ici.'}</p>`;
+        return list.map(({k, n}) => { const it = IT[k], can = !n.plan && !n.miss.length && !n.tool;
+            const cost = Object.entries(it.cost || {}).map(([r, q]) => { const h = Math.floor(G.res[r] || 0); return `<span class="${h < q ? 'is-miss' : 'is-ok'}" title="${esc(resName(r)[2])} : il en faut ${q}, tu en as ${h}">${resName(r)[1]} ${Math.min(h, q)}/${q}</span>`; }).join(' ');
+            const missTxt = n.miss.length ? `<small class="bk-miss">Il manque : ${n.miss.map(([r, q, h]) => `${q - h} ${esc(resName(r)[2].toLowerCase())}`).join(', ')}.</small><small class="bk-where">${n.miss.map(([r]) => `${resName(r)[1]} ${esc(whereRes(r))}`).filter(x => x.length > 3).join('<br>')}</small>` : '';
+            const toolTxt = it.tool ? `<small class="${n.tool ? 'bk-miss' : ''}">${n.tool ? 'Il faut l’outil' : 'Outil'} ${B().TOOLS[it.tool][0]} ${esc(B().TOOLS[it.tool][1])}${n.tool ? ' (à trouver en ville)' : ' ✓'}</small>` : '';
+            return `<div class="bk-plan${n.plan ? ' is-off' : can ? ' is-can' : ''}"><span class="bk-ico">${it.ico}</span><div><b>${esc(it.name)}${n.plan ? ' <small class="bk-tag">plan à trouver</small>' : ''}</b><small>${esc(it.desc)} · ${it.h} h de travail${it.power ? ' · ⚡ électricité' : ''}</small><span class="bk-cost">${cost}</span>${missTxt}${toolTxt}${n.plan ? `<small class="bk-where">❔ Les plans se trouvent en fouillant : ${esc(planPlaces)}.</small>` : ''}</div>${n.plan ? '' : `<button type="button" class="button small ${can ? '' : 'secondary'}" data-bk="build" data-k="${k}" ${can ? '' : 'aria-disabled="true"'}>Construire</button>`}</div>`; }).join('');
+    }
+    /** ♻️ le bric-à-brac : ce qu'on a rapporté, ce que chaque objet donne une fois démonté, la file de l'établi */
+    function sideBric() {
+        const J = B().JUNK, mine = Object.entries(G.junk || {}).filter(([, n]) => n > 0), cnt = B().junkCount(G), cap = B().junkCap(G), who = G.people.filter(p => p.hp > 0 && p.where === 'base' && p.job === 'recycler');
+        const gives = k => Object.entries(J[k][2]).map(([r, n]) => `${resName(r)[1]} ${n}`).join(' ');
+        return `<p class="muted">Des objets qui ne servent à rien tels quels… mais qu’on démonte pour en tirer des composants. ${cnt} / ${cap} places (un 🧺 débarras en ajoute).</p>
+            ${who.length ? `<p>♻️ ${esc(who.map(p => p.name).join(', '))} ${who.length > 1 ? 'démontent' : 'démonte'}${B().has(G, 'etabli') ? ' à l’établi (2× plus vite, parfois une pièce de plus)' : ' (un 🪚 établi irait 2× plus vite)'}.</p>` : '<p class="ui-notice">Personne ne démonte : mets quelqu’un sur « ♻️ Démonter le bric-à-brac » (onglet Habitants) — ou clique « Démonter », quelqu’un de libre s’y mettra.</p>'}
+            <label class="checkbox-line"><input type="checkbox" data-bk-autorecy ${G.autoRecy ? 'checked' : ''}> Tout démonter au fur et à mesure (sans que je choisisse)</label>
+            ${G.recy.length ? `<h4>À l’établi</h4><ol class="bk-builds">${G.recy.map((r, i) => `<li>${J[r.k][0]} ${esc(J[r.k][1])} <small>${i ? 'en attente' : `encore ${Math.max(0, Math.ceil(r.left * 10) / 10)} h`} → ${gives(r.k)}</small></li>`).join('')}</ol>` : ''}
+            <h4>Rapporté</h4>${mine.length ? `<div class="bk-plans">${mine.map(([k, n]) => `<div class="bk-plan"><span class="bk-ico">${J[k][0]}</span><div><b>${esc(J[k][1])}${n > 1 ? ` <small>× ${n}</small>` : ''}</b><small>Une fois démonté (${J[k][3]} h) :</small><span class="bk-cost">${gives(k)}</span></div><span class="bk-btns"><button type="button" class="button small" data-bk="recy" data-k="${k}">♻️ Démonter</button>${n > 1 ? `<button type="button" class="button small secondary" data-bk="recyall" data-k="${k}">Les ${n}</button>` : ''}</span></div>`).join('')}</div>`
+                : A().emptyState({icon: '♻️', text: 'Rien à démonter.', hint: 'En ville, coche « ♻️ Bric-à-brac » dans ce qu’on rapporte : la décharge, les maisons, le magasin d’électroménager en regorgent.'})}
+            <details class="bk-junkall"><summary>Tous les objets qu’on peut trouver, et ce qu’ils donnent</summary><div class="bk-plans">${B().JUNK_KEYS.map(k => `<div class="bk-plan is-off"><span class="bk-ico">${J[k][0]}</span><div><b>${esc(J[k][1])}</b><span class="bk-cost">${gives(k)}</span><small>${esc(Object.values(B().PLACE_KINDS).filter(v => (v[5] || []).includes(k)).map(v => v[1]).join(', '))}</small></div></div>`).join('')}</div></details>`;
+    }
+    let locating = null, route = [], mapScroll = null;
+    /** 🚶 le parcours : les étapes dans l'ordre, et à chacune ce qu'on rapporte (vide = tout) */
+    function routeHtml(free) {
+        if (!route.length) return '';
+        const c = G.city, total = B().routeTime(G, route), pls = route.map(st => c.places.find(x => x.id === st.id));
+        const chips = (st, pl) => { const opts = [...Object.keys(pl.max), ...((B().PLACE_KINDS[pl.kind][5] || []).length ? ['junk'] : [])], on = st.take;
+            return `<span class="bk-take" role="group" aria-label="Ce qu’on rapporte de ${esc(pl.name)}"><button type="button" class="bk-chip${!on ? ' is-on' : ''}" data-bk="take" data-id="${pl.id}" data-v="">Tout</button>${opts.map(r => `<button type="button" class="bk-chip${on?.includes(r) ? ' is-on' : ''}" data-bk="take" data-id="${pl.id}" data-v="${r}" aria-pressed="${!!on?.includes(r)}">${r === 'junk' ? '♻️ bric-à-brac' : `${resName(r)[1]} ${esc(resName(r)[2].toLowerCase())}`}</button>`).join('')}</span>`; };
+        return `<div class="bk-route"><h4>🚶 Le parcours</h4><ol>${route.map((st, i) => { const pl = pls[i]; return `<li><div class="bk-route-head"><b>${B().PLACE_KINDS[pl.kind][0]} ${esc(pl.name)}</b><span><button type="button" class="icon-button small" data-bk="routeup" data-i="${i}" ${i ? '' : 'disabled'} aria-label="Plus tôt">↑</button><button type="button" class="icon-button small" data-bk="routedel" data-id="${pl.id}" aria-label="Retirer">×</button></span></div><small>Rapporter :</small>${chips(st, pl)}</li>`; }).join('')}</ol>
+            <p class="muted">${Math.round(total / 6) / 10} h de marche en tout (aller, de lieu en lieu, retour), plus 2 h de fouille par lieu. Place pour rapporter : ${free.length ? B().carryOf(G, free[0]) : '—'} (un bric-à-brac = 2). Sac plein : il rentre plus tôt.</p>
+            ${free.length ? `<div class="bk-send"><select data-bk-sendwho>${free.filter(p => !p.baby).map(p => `<option value="${esc(p.id)}" ${p.id === sendFor ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select><button type="button" class="button small" data-bk="send">🚶 Partir</button><button type="button" class="button small secondary" data-bk="routeclear">Effacer</button></div>` : '<p class="muted">Personne de libre au bunker.</p>'}</div>`;
+    }
     function sideVille() {
         // une partie d'avant le plan en fond : on cherche la ville une fois, puis on redessine
         if (G.city.lat == null && G.city.geo !== 'none' && !locating) { const g = G; locating = locateCity(g.city).then(() => { locating = null; if (G === g && tab === 'ville') drawSide(); }); }
         const c = G.city, n = c.n, free = B().alive(G).filter(p => p.where === 'base');
         const cell = (x, y) => { const pl = c.places.find(q => q.x === x && q.y === y); if (x === c.base[0] && y === c.base[1]) return `<span class="bk-cell is-base" title="Le bunker">☢</span>`;
             if (!pl) return '<span class="bk-cell"></span>'; const k = B().PLACE_KINDS[pl.kind], there = G.people.some(p => p.hp > 0 && p.exp?.place === pl.id);
-            return `<button type="button" class="bk-cell is-place${placeSel === pl.id ? ' is-sel' : ''}${there ? ' is-busy' : ''}" data-bk="place" data-id="${pl.id}" title="${esc(pl.name)}">${k[0]}</button>`; };
+            const ri = route.findIndex(st => st.id === pl.id);
+            return `<button type="button" class="bk-cell is-place${placeSel === pl.id ? ' is-sel' : ''}${there ? ' is-busy' : ''}${ri >= 0 ? ' is-route' : ''}" data-bk="place" data-id="${pl.id}" title="${esc(pl.name)}${ri >= 0 ? ` (étape ${ri + 1})` : ''}">${k[0]}${ri >= 0 ? `<i class="bk-step">${ri + 1}</i>` : ''}</button>`; };
         const pl = c.places.find(x => x.id === placeSel);
         const stockTxt = p => { const tot = Object.values(p.stock).reduce((a, b) => a + b, 0), max = Object.values(p.max).reduce((a, b) => a + b, 0) || 1; return !p.visits ? 'pas encore fouillé' : tot / max > .6 ? 'beaucoup de choses' : tot / max > .25 ? 'un peu' : tot ? 'presque vide' : 'vide (ça revient chaque jour)'; };
         return `<p class="muted">${esc(c.name)} · ville ${B().SIZES[c.size][2].toLowerCase()} · 30 min par case (×1,5 la nuit sans lampe torche).</p>
-            <div class="bk-map${c.lat != null ? ' has-bg' : ''}" style="--n:${n}">${mapBgHtml(c)}${Array.from({length: n * n}, (_, i) => cell(i % n, Math.floor(i / n))).join('')}</div>${c.geo === 'none' ? '<p class="lck-legend muted">Pas de plan en fond : cette ville n’a pas de coordonnées (ni dans ton arbre, ni dans les communes).</p>' : ''}
+            <div class="bk-mapwrap${n > 17 ? ' is-big' : ''}" style="--n:${n}"><div class="bk-map${c.lat != null ? ' has-bg' : ''}" style="--n:${n}">${mapBgHtml(c)}${Array.from({length: n * n}, (_, i) => cell(i % n, Math.floor(i / n))).join('')}</div></div>
+            ${routeHtml(free)}${c.geo === 'none' ? '<p class="lck-legend muted">Pas de plan en fond : cette ville n’a pas de coordonnées (ni dans ton arbre, ni dans les communes).</p>' : ''}
             ${pl ? `<div class="bk-placecard"><b>${B().PLACE_KINDS[pl.kind][0]} ${esc(pl.name)}</b><small>${Math.round(B().travel(G, pl) / 6) / 10} h de marche (aller) · ${stockTxt(pl)}${pl.visits ? ` · fouillé ${plural(pl.visits, 'fois', 'fois')}` : ''}</small>
-                <p class="muted">On y trouve : ${Object.keys(pl.max).map(r => resName(r)[1] + ' ' + resName(r)[2].toLowerCase()).join(', ')}${B().PLACE_KINDS[pl.kind][4] ? ', et souvent des plans' : ''}.</p>
-                ${free.length ? `<div class="bk-send"><select data-bk-sendwho>${free.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')}</select><button type="button" class="button small" data-bk="send">🚶 Envoyer</button></div>` : '<p class="muted">Personne de libre au bunker.</p>'}</div>` : '<p class="muted">Clique sur un lieu de la carte pour y envoyer quelqu’un.</p>'}`;
+                <p class="muted">On y trouve : ${Object.keys(pl.max).map(r => resName(r)[1] + ' ' + resName(r)[2].toLowerCase()).join(', ')}${B().PLACE_KINDS[pl.kind][4] ? ', et souvent des plans' : ''}.${(B().PLACE_KINDS[pl.kind][5] || []).length ? ` ♻️ Du bric-à-brac${pl.seen && (pl.junk || []).length ? ` : ${[...new Set(pl.junk)].map(k => B().JUNK[k][0] + ' ' + B().JUNK[k][1].toLowerCase()).join(', ')}` : pl.seen ? ' (plus rien pour l’instant)' : ''}.` : ''}</p>
+                <div class="bk-send">${route.some(st => st.id === pl.id) ? `<button type="button" class="button small secondary" data-bk="routedel" data-id="${pl.id}">− Retirer du parcours</button>` : `<button type="button" class="button small" data-bk="routeadd" data-id="${pl.id}" ${route.length >= 6 ? 'disabled' : ''}>＋ Ajouter au parcours</button>`}</div></div>` : '<p class="muted">Clique sur les lieux de la carte pour composer le parcours (jusqu’à 6 étapes).</p>'}`;
     }
     /** 🌳 la famille au bunker : le coffre, les liens, les naissances (l'arbre du bunker, à part de ta vraie base) */
     function sideFamille() {
@@ -347,7 +396,7 @@
     function sideRadio() {
         const out = G.people.filter(p => p.hp > 0 && p.where === 'dehors');
         return `${G.power ? '' : '<p class="ui-notice is-error">📻 Pas d’électricité : la radio est muette. Les messages arriveront quand le courant reviendra.</p>'}
-            <h4>Dehors</h4>${out.length ? out.map(p => { const pl = G.city.places.find(x => x.id === p.exp.place); return `<div class="bk-radio-row">${pawn(p)}<div><b>${esc(p.name)}</b><small>${p.exp.phase === 'aller' ? 'en route vers' : p.exp.phase === 'fouille' ? 'fouille' : 'rentre de'} ${esc(pl?.name || '')} · ${p.exp.phase === 'retour' ? 'arrive' : 'jusqu’à'} ${B().clock(p.exp.until)}</small></div>${p.exp.phase !== 'retour' ? `<button type="button" class="button small secondary" data-bk="recall" data-id="${esc(p.id)}" ${G.power ? '' : 'disabled'}>📻 Rentre !</button>` : ''}</div>`; }).join('') : '<p class="muted">Tout le monde est au bunker.</p>'}
+            <h4>Dehors</h4>${out.length ? out.map(p => { const pl = G.city.places.find(x => x.id === p.exp.place); return `<div class="bk-radio-row">${pawn(p)}<div><b>${esc(p.name)}</b><small>${p.exp.phase === 'aller' ? 'en route vers' : p.exp.phase === 'fouille' ? 'fouille' : 'rentre de'} ${esc(pl?.name || '')}${p.exp.route?.length > 1 ? ` (étape ${p.exp.i + 1} / ${p.exp.route.length})` : ''} · ${p.exp.phase === 'retour' ? 'arrive' : 'jusqu’à'} ${B().clock(p.exp.until)}</small></div>${p.exp.phase !== 'retour' ? `<button type="button" class="button small secondary" data-bk="recall" data-id="${esc(p.id)}" ${G.power ? '' : 'disabled'}>📻 Rentre !</button>` : ''}</div>`; }).join('') : '<p class="muted">Tout le monde est au bunker.</p>'}
             <h4>Journal</h4><ol class="bk-log">${G.log.slice(0, 120).map(l => `<li class="is-${l.kind}"><span class="bk-t">J${B().dayOf(l.t)} ${B().clock(l.t)}</span> ${esc(l.txt)}</li>`).join('')}</ol>`;
     }
 
@@ -356,7 +405,7 @@
         const b = e.target.closest('[data-bk]'); if (!b || !dlg.contains(b)) return;
         const k = b.dataset.bk;
         if (k === 'close') { dlg.close(); return; }
-        if (k === 'resume') { const x = store().games[b.dataset.id]; if (!x) return; try { G = B().check(x.g); } catch (err) { toast(err.message, 'error'); return; } gid = b.dataset.id; tab = 'gens'; placeSel = null; play(); return; }
+        if (k === 'resume') { const x = store().games[b.dataset.id]; if (!x) return; try { G = B().check(x.g); } catch (err) { toast(err.message, 'error'); return; } gid = b.dataset.id; tab = 'gens'; placeSel = null; route = []; mapScroll = null; play(); return; }
         if (k === 'delsave') { const id = b.dataset.id, name = store().games[id]?.name || ''; const del = () => { const s = store(); delete s.games[id]; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
             if (A()?.undoLocalChange) A().undoLocalChange(`Partie « Le bunker de ${name} » supprimée`, [KEY], del, () => { if (dlg && !G) startScreen(); }); else del(); startScreen(); return; }
         if (k === 'propose') { propose(b.closest('form')); return; }
@@ -365,12 +414,21 @@
         if (k === 'save') { saveGame(gid, G); return; }
         if (k === 'export') { const blob = new Blob([JSON.stringify({lcnda: 'bunker', v: 1, g: G})], {type: 'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `bunker-${(meOf(G).name || 'partie').replace(/[^\w\-]+/g, '-').slice(0, 40)}-jour-${B().dayOf(G.t)}.json`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 30000); return; }
         if (k === 'menu') { saveGame(gid, G, true); startScreen(); return; }
-        if (k === 'tab') { tab = b.dataset.v; drawTop(); drawSide(); return; }
+        if (k === 'tab') { tab = b.dataset.v; drawTop(); drawSide(); const sb = dlg.querySelector('[data-bk-side]'); if (sb) sb.scrollTop = 0; return; }
         if (k === 'power') { G.powerOn = !G.powerOn; if (!G.powerOn) G.power = false; drawAll(); return; }
         if (k === 'digpanel') { tab = 'gens'; drawTop(); drawSide(); toast('Choisis « ⛏️ Creuser » comme travail pour un ou plusieurs habitants.'); return; }
         if (k === 'sendfrom') { tab = 'ville'; drawTop(); drawSide(); const sel = () => dlg.querySelector('[data-bk-sendwho]'); if (sel()) sel().value = b.dataset.id; else toast('Choisis un lieu sur la carte.'); sendFor = b.dataset.id; return; }
-        if (k === 'place') { placeSel = b.dataset.id; drawSide(); const sel = dlg.querySelector('[data-bk-sendwho]'); if (sel && sendFor && [...sel.options].some(o => o.value === sendFor)) sel.value = sendFor; return; }
-        if (k === 'send') { const who = dlg.querySelector('[data-bk-sendwho]')?.value; const r = B().send(G, who, placeSel); if (!r.ok) { toast(r.err, 'error'); return; } sendFor = ''; drawAll(); return; }
+        if (k === 'place') { placeSel = b.dataset.id; if (!route.length) route = [{id: placeSel, take: null}]; drawSide(); const sel = dlg.querySelector('[data-bk-sendwho]'); if (sel && sendFor && [...sel.options].some(o => o.value === sendFor)) sel.value = sendFor; return; }
+        if (k === 'send') { const who = dlg.querySelector('[data-bk-sendwho]')?.value; const r = B().send(G, who, route.length ? route : [placeSel]); if (!r.ok) { toast(r.err, 'error'); return; } sendFor = ''; route = []; drawAll(); return; }
+        if (k === 'routeadd') { if (route.length < 6 && !route.some(st => st.id === b.dataset.id)) route.push({id: b.dataset.id, take: null}); drawSide(); return; }
+        if (k === 'routedel') { route = route.filter(st => st.id !== b.dataset.id); drawSide(); return; }
+        if (k === 'routeup') { const i = Number(b.dataset.i); if (i > 0) [route[i - 1], route[i]] = [route[i], route[i - 1]]; drawSide(); return; }
+        if (k === 'routeclear') { route = []; drawSide(); return; }
+        if (k === 'take') { const st = route.find(x => x.id === b.dataset.id); if (!st) return; const v = b.dataset.v; if (!v) st.take = null; else { const l = new Set(st.take || []); if (l.has(v)) l.delete(v); else l.add(v); st.take = l.size ? [...l] : null; } drawSide(); return; }
+        if (k === 'need') { const r = B().orderNeed(G, b.dataset.id, b.dataset.v); if (!r.ok) toast(r.err, 'error'); drawAll(); return; }
+        if (k === 'recy') { const r = B().recycle(G, b.dataset.k); if (!r.ok) toast(r.err, 'error'); drawAll(); return; }
+        if (k === 'recyall') { while (B().recycle(G, b.dataset.k).ok); drawAll(); return; }
+        if (k === 'planf') { planF = b.dataset.v; drawSide(); return; }
         if (k === 'visit') { const r = B().answerVisit(G, b.dataset.v); if (!r.ok) toast(r.err, 'error'); drawAll(); return; }
         if (k === 'gazette') { const gz = dlg.querySelector('[data-bk-gz]'); if (!gz) return; gz.innerHTML = gazetteHtml(); gz.hidden = false; if (G.speed) { gzPaused = G.speed; setSpeed(0); } gz.querySelector('[data-bk="gzclose"]')?.focus(); return; }
         if (k === 'gzclose') { const gz = dlg.querySelector('[data-bk-gz]'); if (gz) gz.hidden = true; if (gzPaused && !G.over) setSpeed(gzPaused); gzPaused = 0; return; }
@@ -383,6 +441,8 @@
     let sendFor = '', gzPaused = 0;
     function onChange(e) {
         const j = e.target.closest('[data-bk-job]'); if (j && G) { B().setJob(G, j.dataset.bkJob, j.value); drawAll(); return; }
+        const au = e.target.closest('[data-bk-auto]'); if (au && G) { B().setAuto(G, au.value, au.dataset.bkAuto || null); drawAll(); return; }
+        const ar = e.target.closest('[data-bk-autorecy]'); if (ar && G) { G.autoRecy = ar.checked; if (ar.checked && !G.people.some(p => p.hp > 0 && p.where === 'base' && p.job === 'recycler')) { const f = G.people.find(p => p.hp > 0 && p.where === 'base' && !p.baby && p.job === 'libre'); if (f) f.job = 'recycler'; } drawAll(); return; }
         const f = e.target.closest('[data-bk-import]'); if (f) importFile(f);
     }
     const firstFree = () => { for (let fi = 0; fi < G.floors.length; fi++) for (let si = 0; si < B().SLOTS; si++) if (!G.floors[fi].slots[si] && !G.builds.some(b => b.fi === fi && b.si === si)) return [fi, si]; return null; };
@@ -398,7 +458,7 @@
             items = [{icon: it.ico, label: it.name, help: it.desc, disabled: true}, '-', {icon: '🔧', label: 'Démonter', help: 'on récupère la moitié des matériaux', run: () => { B().dismantle(G, fi, si); drawAll(); }}];
         } else if (bi >= 0) items = [{icon: '×', label: `Annuler « ${IT[G.builds[bi].k].name} »`, help: 'les matériaux reviennent', run: () => { B().cancelBuild(G, bi); drawAll(); }}];
         else items = G.plans.map(p => { const it = IT[p], miss = Object.entries(it.cost || {}).some(([r, n]) => (G.res[r] || 0) < n) || (it.tool && !G.tools.includes(it.tool));
-            return {icon: it.ico, label: it.name, help: Object.entries(it.cost || {}).map(([r, n]) => `${n} ${resName(r)[2].toLowerCase()}`).join(', ') + (it.tool ? ` · ${B().TOOLS[it.tool][1]}` : ''), disabled: miss, run: () => order(p, fi, si)}; });
+            const n = needOf(p); return {icon: it.ico, label: it.name, help: miss ? `il manque : ${[...n.miss.map(([r, q, h]) => `${q - h} ${resName(r)[2].toLowerCase()}`), ...(n.tool ? [B().TOOLS[n.tool][1]] : [])].join(', ')}` : Object.entries(it.cost || {}).map(([r, q]) => `${q} ${resName(r)[2].toLowerCase()}`).join(', ') + (it.tool ? ` · ${B().TOOLS[it.tool][1]}` : ''), disabled: miss, run: () => order(p, fi, si)}; }).sort((x, y) => x.disabled - y.disabled);
         if (menu) menu(btn, items, {title: k ? '' : 'Construire ici'}); else if (!k && bi < 0) order(G.plans[0], fi, si);
     }
     function importFile(input) {
