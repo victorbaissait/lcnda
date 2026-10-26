@@ -87,6 +87,9 @@
         if (f.type === 'textarea') return `<label class="span-2">${T.esc(f.label)}<textarea name="${f.k}" rows="${f.rows || 5}" placeholder="${T.esc(f.ph || '')}">${T.esc(val || '')}</textarea></label>`;
         return `<label class="${cls}">${T.esc(f.label)}<input name="${f.k}" maxlength="300" value="${T.esc(val ?? '')}" placeholder="${T.esc(f.ph || '')}"></label>`;
     }
+    /** où sont rangés les éléments : la Mémoire familiale pour les recettes, chansons et souvenirs (cfg.mem), sinon les Trésors */
+    const store = (T, cfg) => cfg.mem ? {items: () => T.api('tresor_memories', {kind: cfg.kind}).then(r => r.items || []), save: item => T.post('tresor_memory_write', {op: 'save', item}), remove: id => T.post('tresor_memory_write', {op: 'delete', id})}
+        : {items: () => T.items(cfg.kind), save: item => T.save(item), remove: id => T.remove(id)};
     function editItem(T, cfg, it, after) {
         ext.openDialog({eyebrow: cfg.eyebrow, title: it ? `${cfg.icon} ${it.title}` : `${cfg.icon} ${cfg.newLabel}`, wide: true, submitLabel: 'Enregistrer',
             body: `<div class="form-grid">${cfg.fields.map(f => fieldHtml(T, f, it)).join('')}</div>`,
@@ -95,7 +98,7 @@
                 if (!v('title').trim()) { T.toast(cfg.needTitle || 'Donne-lui un titre.', 'error'); return false; }
                 cfg.fields.forEach(f => { if (f.k !== 'title' && f.k !== 'body') data[f.k] = f.type === 'media' ? (v(f.k) ? v(f.k).split(',').map(Number).filter(Boolean) : []) : v(f.k); });
                 const pv = String(data[cfg.personKey || 'from'] || '');
-                await T.save({id: it?.id, kind: cfg.kind, person_id: /^\d+$/.test(pv) ? Number(pv) : null, title: v('title').trim(), body: v('body'), data});
+                await store(T, cfg).save({id: it?.id, kind: cfg.kind, person_id: /^\d+$/.test(pv) ? Number(pv) : null, title: v('title').trim(), body: v('body'), data});
                 T.toast('Enregistré.', 'success'); after();
             }});
     }
@@ -104,7 +107,7 @@
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><button type="button" class="button" data-c-new>${cfg.icon} ${T.esc(cfg.newLabel)}</button>
             <label>Chercher<input type="search" data-c-q placeholder="un mot, un nom…"></label>
             ${cfg.filter ? `<label>${T.esc(cfg.filter.label)}<select data-c-f><option value="">Tous</option>${cfg.filter.options.map(([v, l]) => `<option value="${v}">${T.esc(l)}</option>`).join('')}</select></label>` : ''}
-            ${cfg.book ? `<button type="button" class="button secondary" data-c-book>📖 ${T.esc(cfg.book.label)}</button>` : ''}<span class="h-tr-muted" data-c-n></span></div>
+            ${cfg.book ? `<button type="button" class="button secondary" data-c-book>📖 ${T.esc(cfg.book.label)}</button>` : ''}${cfg.mem ? '<button type="button" class="button secondary" data-c-memlist title="Rangé avec les expressions, surnoms, traditions et témoignages">📋 Voir dans Listes › Mémoire familiale</button>' : ''}<span class="h-tr-muted" data-c-n></span></div>
             ${cfg.intro ? `<p class="h-tr-muted h-tr-noprint">${cfg.intro}</p>` : ''}<div class="h-tr-body" data-c-list></div>`;
         const list = host.querySelector('[data-c-list]');
         const paint = async () => {
@@ -112,14 +115,15 @@
             host.querySelector('[data-c-n]').textContent = `${vis.length} sur ${all.length}`;
             list.innerHTML = vis.length ? (await Promise.all(vis.map(async x => `<article class="h-tr-panel h-tr-print" data-c-id="${x.id}">${cfg.card(T, tr, x)}${await mediaHtml(T, x.data?.media)}<p class="h-tr-noprint" style="margin:8px 0 0"><button type="button" class="h-tr-link" data-c-edit="${x.id}">Modifier</button> · <button type="button" class="h-tr-link" data-c-del="${x.id}">Supprimer</button></p></article>`))).join('') : `<p class="h-tr-muted">${cfg.empty}</p>`;
         };
-        const load = async () => { all = await T.items(cfg.kind); await paint(); };
+        const load = async () => { all = await store(T, cfg).items(); await paint(); };
         host.querySelector('[data-c-q]').addEventListener('input', e => { q = e.target.value.trim().toLowerCase(); paint(); });
         host.querySelector('[data-c-f]')?.addEventListener('change', e => { filt = e.target.value; paint(); });
         host.addEventListener('click', async e => {
             if (e.target.closest('[data-c-new]')) return editItem(T, cfg, null, load);
+            if (e.target.closest('[data-c-memlist]')) { A().state.listType = 'family_memories'; return A().setModule('listes'); }
             if (e.target.closest('[data-c-book]')) { if (!all.length) return T.toast('Rien à mettre dans le livre pour l’instant.'); try { await cfg.book.print(T, tr, all); } catch (err) { T.toast(err.message, 'error'); } return; }
-            const ed = e.target.closest('[data-c-edit]'); if (ed) return editItem(T, cfg, all.find(x => x.id === Number(ed.dataset.cEdit)), load);
-            const del = e.target.closest('[data-c-del]'); if (del && await A().confirmBox('Cet élément sera effacé pour de bon.', {title: 'Supprimer ?', okLabel: 'Supprimer', danger: true})) { await T.remove(Number(del.dataset.cDel)); load(); }
+            const ed = e.target.closest('[data-c-edit]'); if (ed) return editItem(T, cfg, all.find(x => String(x.id) === ed.dataset.cEdit), load);
+            const del = e.target.closest('[data-c-del]'); if (del && await A().confirmBox('Cet élément sera effacé pour de bon.', {title: 'Supprimer ?', okLabel: 'Supprimer', danger: true})) { await store(T, cfg).remove(cfg.mem ? del.dataset.cDel : Number(del.dataset.cDel)); load(); }
         });
         await load();
     }
@@ -138,7 +142,7 @@
 
     /* ── 👃 Souvenirs des sens ── */
     const SENSES = [['odeur', '👃 Une odeur'], ['son', '👂 Un son'], ['gout', '👅 Un goût'], ['toucher', '✋ Au toucher'], ['image', '👁 Une image']];
-    const senseCfg = {kind: 'sense', icon: '👃', eyebrow: 'SOUVENIR DES SENS', newLabel: 'Noter un souvenir', personKey: 'from', empty: 'Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé…',
+    const senseCfg = {kind: 'sense', mem: true, icon: '👃', eyebrow: 'SOUVENIR DES SENS', newLabel: 'Noter un souvenir', personKey: 'from', empty: 'Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé…',
         intro: 'Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as.',
         filter: {key: 'sense', label: 'Le sens', options: SENSES},
         fields: [{k: 'sense', type: 'select', label: 'Le sens', options: SENSES}, {k: 'title', label: 'Le souvenir en quelques mots', ph: 'L’odeur de la cire dans l’escalier', wide: true},
@@ -153,7 +157,7 @@
     const lines = s => String(s || '').split(/\n+/).map(x => x.trim()).filter(Boolean);
     const recipePage = (T, tr, x) => `${who(T, tr, x.data?.from) ? `<p><b>La recette de ${T.esc(who(T, tr, x.data.from))}</b>${x.data?.serves ? ` · ${T.esc(x.data.serves)}` : ''}</p>` : x.data?.serves ? `<p>${T.esc(x.data.serves)}</p>` : ''}
         ${lines(x.data?.ingredients).length ? `<h3>Ingrédients</h3><ul class="ing">${lines(x.data.ingredients).map(i => `<li>${T.esc(i)}</li>`).join('')}</ul>` : ''}${x.body ? `<h3>Préparation</h3><div class="txt">${T.esc(x.body)}</div>` : ''}${x.data?.story ? `<h3>Son histoire</h3><p class="story">${T.esc(x.data.story)}</p>` : ''}`;
-    const recipeCfg = {kind: 'recipe', icon: '🥘', eyebrow: 'LIVRE DE RECETTES', newLabel: 'Ajouter une recette', personKey: 'from', empty: 'Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche…',
+    const recipeCfg = {kind: 'recipe', mem: true, icon: '🥘', eyebrow: 'LIVRE DE RECETTES', newLabel: 'Ajouter une recette', personKey: 'from', empty: 'Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche…',
         filter: {key: 'dish', label: 'Rubrique', options: DISHES},
         fields: [{k: 'title', label: 'Le nom de la recette', ph: 'Le clafoutis de Rose', wide: true}, {k: 'from', type: 'person', label: 'La recette de (une fiche, ou un nom)'}, {k: 'dish', type: 'select', label: 'Rubrique', options: DISHES},
             {k: 'serves', label: 'Pour combien', ph: 'pour 6'}, {k: 'ingredients', type: 'textarea', label: 'Les ingrédients (un par ligne)', rows: 6, ph: '500 g de cerises noires\n3 œufs'},
@@ -165,7 +169,7 @@
     /* ── 🎶 Les chansons de la famille ── */
     const SONG = [['berceuse', 'Berceuses'], ['fete', 'Chansons de fête et de repas'], ['mariage', 'Mariages'], ['travail', 'Chansons de travail'], ['conscrits', 'Conscrits et soldats'], ['noel', 'Noël'], ['patois', 'En patois'], ['autre', 'Autres']];
     const songPage = (T, tr, x) => `<p>${[who(T, tr, x.data?.from) && `Chantée par <b>${T.esc(who(T, tr, x.data.from))}</b>`, x.data?.tune && `sur l’air de « ${T.esc(x.data.tune)} »`].filter(Boolean).join(', ')}</p>${x.body ? `<div class="txt" style="font-size:13pt">${T.esc(x.body)}</div>` : ''}${x.data?.story ? `<p class="story">${T.esc(x.data.story)}</p>` : ''}`;
-    const songCfg = {kind: 'song', icon: '🎶', eyebrow: 'CHANSONS DE LA FAMILLE', newLabel: 'Ajouter une chanson', personKey: 'from', empty: 'Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet…',
+    const songCfg = {kind: 'song', mem: true, icon: '🎶', eyebrow: 'CHANSONS DE LA FAMILLE', newLabel: 'Ajouter une chanson', personKey: 'from', empty: 'Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet…',
         intro: 'Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias).', filter: {key: 'occasion', label: 'Sorte', options: SONG},
         fields: [{k: 'title', label: 'Le titre (ou le premier vers)', wide: true}, {k: 'from', type: 'person', label: 'Chantée par (une fiche, ou un nom)'}, {k: 'occasion', type: 'select', label: 'Sorte', options: SONG},
             {k: 'tune', label: 'Sur l’air de', ph: 'Cadet Rousselle'}, {k: 'body', type: 'textarea', label: 'Les paroles', rows: 10}, {k: 'story', type: 'textarea', label: 'Quand on la chantait', rows: 3}, {k: 'media', type: 'media', label: 'L’enregistrement (son ou vidéo)'}],

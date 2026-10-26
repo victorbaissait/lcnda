@@ -143,6 +143,104 @@ function tresor_tree(PDO $pdo): array
     return ['people' => array_values($people), 'families' => array_values($families), 'places' => (object) $places, 'events' => $events];
 }
 
+/* ─── 🥘 🎶 👃 Recettes, chansons et souvenirs des sens : rangés dans la Mémoire familiale (une seule liste, pas de doublon) ───
+ * Les pages des Trésors gardent leurs champs (ingrédients, air, sens…) : ils vont dans family_memories.data_json ; le texte lisible
+ * partout (content, origin_text, notes) est écrit aussi, pour la liste « Mémoire familiale ». Les anciens éléments des Trésors y sont
+ * déplacés une fois, sans rien perdre (médias, personne). Les identifiants sont « m12 » : jamais confondus avec ceux des Trésors. */
+const TRESOR_MEM_KINDS = ['recipe', 'song', 'sense'];
+
+function tresor_mem_ensure(PDO $pdo): void
+{
+    static $done = false; if ($done) { return; }
+    $has = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('family_memories') WHERE name='data_json'")->fetchColumn();
+    if (!$has) { $pdo->exec("ALTER TABLE family_memories ADD COLUMN data_json TEXT NOT NULL DEFAULT '{}'"); }
+    $done = true;
+}
+
+/** le texte lisible dans la Mémoire familiale, à partir des champs des Trésors */
+function tresor_mem_text(string $kind, string $body, array $d): array
+{
+    $from = is_string($d['from'] ?? null) && !ctype_digit((string) $d['from']) ? trim((string) $d['from']) : '';
+    if ($kind === 'recipe') {
+        $ing = trim((string) ($d['ingredients'] ?? ''));
+        $content = ($ing !== '' ? "Ingrédients :\n" . $ing . "\n\n" : '') . ($body !== '' ? ($ing !== '' ? "Préparation :\n" : '') . $body : '');
+        $origin = trim(($from !== '' ? 'La recette de ' . $from : '') . (($d['serves'] ?? '') !== '' ? ($from !== '' ? ', ' : '') . (string) $d['serves'] : ''));
+    } elseif ($kind === 'song') {
+        $content = $body; $origin = trim(($from !== '' ? 'Chantée par ' . $from : '') . (($d['tune'] ?? '') !== '' ? ($from !== '' ? ', ' : '') . 'sur l’air de « ' . $d['tune'] . ' »' : ''));
+    } else {
+        $content = $body; $origin = implode(' · ', array_filter([$from !== '' ? 'ça rappelle ' . $from : '', (string) ($d['place'] ?? ''), (string) ($d['when'] ?? '')], static fn($x) => $x !== ''));
+    }
+    return [$content, mb_substr($origin, 0, 300), mb_substr((string) ($d['story'] ?? ''), 0, 4000)];
+}
+
+/** une ligne de la Mémoire familiale → un élément comme ceux des Trésors */
+function tresor_mem_item(PDO $pdo, array $m): array
+{
+    $d = json_decode((string) ($m['data_json'] ?? '{}'), true); if (!is_array($d)) { $d = []; }
+    $content = (string) $m['content'];
+    $same = isset($d['_content']) && $d['_content'] === $content; // modifiée ailleurs (Mémoire familiale) : le texte complet devient le corps
+    $body = $same ? (string) ($d['_body'] ?? '') : $content;
+    if (!$same) { unset($d['ingredients']); }
+    unset($d['_content'], $d['_body']);
+    $pp = $pdo->prepare("SELECT person_id FROM family_memory_people WHERE memory_id=? ORDER BY CASE role WHEN 'transmitted' THEN 0 ELSE 1 END, id LIMIT 1"); $pp->execute([(int) $m['id']]); $pid = $pp->fetchColumn(); $pp->closeCursor();
+    if ($pid && !isset($d['from'])) { $d['from'] = (string) $pid; }
+    $md = $pdo->prepare("SELECT media_id FROM family_collection_media WHERE collection_type='family_memory' AND collection_id=? ORDER BY id"); $md->execute([(int) $m['id']]);
+    $d['media'] = array_map('intval', $md->fetchAll(PDO::FETCH_COLUMN));
+    if (!$same && $m['notes'] !== '' && !isset($d['story'])) { $d['story'] = (string) $m['notes']; }
+    return ['id' => 'm' . (int) $m['id'], 'mid' => (int) $m['id'], 'mem' => true, 'kind' => (string) $m['kind'], 'person_id' => $pid ? (int) $pid : null, 'place_id' => null, 'title' => (string) $m['title'], 'body' => $body,
+        'data' => $d ?: new stdClass(), 'open_at' => '', 'sealed' => false, 'created_at' => (string) $m['created_at'], 'updated_at' => (string) $m['updated_at']];
+}
+
+/** enregistrer (créer ou modifier) dans la Mémoire familiale ; item comme ceux des Trésors (id « m12 » pour modifier) */
+function tresor_mem_save(PDO $pdo, array $item): array
+{
+    tresor_mem_ensure($pdo);
+    $kind = (string) ($item['kind'] ?? ''); if (!in_array($kind, TRESOR_MEM_KINDS, true)) { throw new LcndaBadInput('Sorte inconnue.'); }
+    $mid = preg_match('/^m(\d+)$/', (string) ($item['id'] ?? ''), $mm) ? (int) $mm[1] : 0;
+    if ($mid) { $k = $pdo->prepare('SELECT kind FROM family_memories WHERE id=?'); $k->execute([$mid]); $old = $k->fetchColumn(); if ($old === false) { throw new LcndaBadInput('Élément introuvable.'); } }
+    $d = tresor_clean_data(is_array($item['data'] ?? null) ? $item['data'] : []); if (!is_array($d)) { $d = []; }
+    $body = mb_substr(trim((string) ($item['body'] ?? '')), 0, 20000);
+    [$content, $origin, $notes] = tresor_mem_text($kind, $body, $d);
+    $media = array_values(array_unique(array_filter(array_map('intval', is_array($d['media'] ?? null) ? $d['media'] : []))));
+    $from = (string) ($d['from'] ?? ''); $people = ctype_digit($from) && (int) $from > 0 ? [['person_id' => (int) $from, 'role' => 'transmitted']] : [];
+    unset($d['media']); $d['_content'] = $content; $d['_body'] = $body;
+    $pdo->beginTransaction();
+    try {
+        $r = save_family_memory($pdo, ['id' => $mid, 'kind' => $kind, 'title' => (string) ($item['title'] ?? ''), 'content' => $content, 'origin_text' => $origin, 'notes' => $notes, 'people' => $people]);
+        $id = (int) $r['id'];
+        $pdo->prepare('UPDATE family_memories SET data_json=? WHERE id=?')->execute([json_encode($d, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '{}', $id]);
+        $pdo->prepare("DELETE FROM family_collection_media WHERE collection_type='family_memory' AND collection_id=?")->execute([$id]);
+        $ok = $pdo->prepare('SELECT 1 FROM media WHERE id=?'); $ins = $pdo->prepare("INSERT INTO family_collection_media(collection_type, collection_id, media_id) VALUES('family_memory', ?, ?)");
+        foreach (array_slice($media, 0, 40) as $m) { $ok->execute([$m]); if ($ok->fetchColumn()) { $ins->execute([$id, $m]); } $ok->closeCursor(); }
+        $pdo->commit();
+    } catch (Throwable $e) { $pdo->rollBack(); throw $e instanceof RuntimeException ? new LcndaBadInput($e->getMessage()) : $e; }
+    return ['id' => 'm' . $id];
+}
+
+/** les anciens éléments des Trésors (recettes, chansons, souvenirs des sens) passent dans la Mémoire familiale, une fois */
+function tresor_mem_migrate(PDO $pdo): int
+{
+    tresors_ensure($pdo); tresor_mem_ensure($pdo);
+    $st = $pdo->query("SELECT * FROM tresor_items WHERE kind IN ('recipe','song','sense') ORDER BY id"); $rows = $st->fetchAll(PDO::FETCH_ASSOC); $st->closeCursor();
+    $n = 0;
+    foreach ($rows as $r) {
+        $d = json_decode((string) $r['data_json'], true); if (!is_array($d)) { $d = []; }
+        if (!isset($d['from']) && $r['person_id'] !== null) { $d['from'] = (string) $r['person_id']; }
+        tresor_mem_save($pdo, ['kind' => $r['kind'], 'title' => (string) $r['title'] !== '' ? (string) $r['title'] : 'Sans titre', 'body' => (string) $r['body'], 'data' => $d]);
+        $pdo->prepare('DELETE FROM tresor_items WHERE id=?')->execute([(int) $r['id']]); $n++;
+    }
+    return $n;
+}
+
+function tresor_mem_list(PDO $pdo, string $kind, int $personId = 0): array
+{
+    tresor_mem_migrate($pdo);
+    $sql = 'SELECT * FROM family_memories WHERE kind' . ($kind !== '' ? '=?' : " IN ('recipe','song','sense')"); $args = $kind !== '' ? [$kind] : [];
+    if ($personId > 0) { $sql .= ' AND id IN (SELECT memory_id FROM family_memory_people WHERE person_id=?)'; $args[] = $personId; }
+    $st = $pdo->prepare($sql . ' ORDER BY updated_at DESC, id DESC LIMIT 2000'); $st->execute($args);
+    return array_map(static fn(array $m) => tresor_mem_item($pdo, $m), $st->fetchAll(PDO::FETCH_ASSOC));
+}
+
 function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload): never
 {
     try {
@@ -173,6 +271,17 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
                 $out[] = ['media_id' => (int) $r['media_id'], 'person_id' => (int) $r['person_id'], 'x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h'], 'filename' => (string) $r['filename']];
             }
             json_response(['faces' => $out]);
+        }
+        if (!$isWrite && $action === 'tresor_memories') {
+            $kind = (string) ($_GET['kind'] ?? ''); if ($kind !== '' && !in_array($kind, TRESOR_MEM_KINDS, true)) { $kind = 'recipe'; }
+            json_response(['items' => tresor_mem_list($pdo, $kind, safe_int($_GET['person_id'] ?? 0))]);
+        }
+        if ($isWrite && $action === 'tresor_memory_write') {
+            $op = (string) ($payload['op'] ?? '');
+            if ($op === 'save') { json_response(tresor_mem_save($pdo, is_array($payload['item'] ?? null) ? $payload['item'] : [])); }
+            if ($op === 'delete') { $mid = preg_match('/^m(\d+)$/', (string) ($payload['id'] ?? ''), $mm) ? (int) $mm[1] : 0; $k = $pdo->prepare('SELECT kind FROM family_memories WHERE id=?'); $k->execute([$mid]);
+                if (!in_array($k->fetchColumn(), TRESOR_MEM_KINDS, true)) { throw new LcndaBadInput('Élément introuvable.'); } delete_family_memory($pdo, ['id' => $mid]); json_response(['ok' => true]); }
+            throw new LcndaBadInput('Opération inconnue.');
         }
         if ($isWrite && $action === 'tresor_write') {
             $op = (string) ($payload['op'] ?? '');

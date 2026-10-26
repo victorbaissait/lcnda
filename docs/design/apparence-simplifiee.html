@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apparence simplifiée</title>
+<style>
+:root{--ink:#111;--blue:#055dff;--soft:#eaf1ff;--muted:#666;--line:#e3e5ea}
+body{background:#f4f5f7;margin:0;padding:24px 16px 60px;font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--ink)}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:24px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 22px;font-size:14px;max-width:820px}
+h2{font-size:18px;margin:34px 0 10px}
+.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
+.card{background:#fff;border:2px solid var(--ink);box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px}
+/* avant / après */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ba .card h3{margin:6px 0 10px;font-size:16px}
+.ba ul{margin:0;padding-left:18px;font-size:14px;line-height:1.55}
+.ba li b{white-space:nowrap}
+.dup{background:#fff1a8;padding:0 3px}
+.ok{color:#127a3a;font-weight:700}
+/* la page des Réglages */
+.app{display:grid;grid-template-columns:250px 1fr;border:2px solid var(--ink);background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.25);min-height:520px}
+.side{border-right:2px solid var(--ink);padding:14px 12px;background:#fafafa}
+.side .grp{font-weight:800;font-size:13px;margin:10px 4px 6px}
+.side button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:2px solid var(--ink);background:#fff;padding:9px 10px;margin:0 0 6px;font:600 13.5px system-ui;cursor:pointer}
+.side button small{color:var(--blue);font-weight:800;font-size:11px;width:18px}
+.side button.on{background:var(--blue);color:#fff}.side button.on small{color:#fff}
+.side .new{font:700 10px system-ui;background:#fff1a8;color:#111;padding:2px 5px;margin-left:auto}
+.page{padding:20px 24px}
+.page h3{font-size:30px;margin:4px 0 6px;letter-spacing:-.02em}.page>p{color:var(--muted);margin:0 0 16px;font-size:14px}
+.tabs{display:flex;border:2px solid var(--ink);margin-bottom:16px;overflow-x:auto;scrollbar-width:thin}
+.tabs button{flex:1 0 auto;border:0;border-right:2px solid var(--ink);background:#fff;padding:9px 14px;font:700 12.5px system-ui;cursor:pointer;white-space:nowrap}
+.tabs button:last-child{border-right:0}.tabs button.on{background:var(--ink);color:#fff}
+.tabs button .new{font:700 9px system-ui;background:#fff1a8;color:#111;padding:1px 4px;margin-left:5px;vertical-align:2px}
+.pane{display:none}.pane.on{display:block}
+.sec{border:2px solid var(--ink);padding:14px 16px;margin-bottom:14px}
+.sec h4{margin:0 0 4px;font-size:15px}.sec>p{margin:0 0 12px;color:var(--muted);font-size:13px}
+.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0;font-size:14px}
+.row>label:first-child,.row>span:first-child{min-width:190px;font-weight:600}
+select,input[type=text]{font:inherit;font-size:13.5px;border:2px solid var(--ink);padding:6px 8px;background:#fff}
+.seg{display:inline-flex;border:2px solid var(--ink)}.seg span{padding:6px 12px;font:700 12.5px system-ui;border-right:2px solid var(--ink)}.seg span:last-child{border-right:0}.seg .on{background:var(--ink);color:#fff}
+/* les formes */
+.shapes{display:flex;flex-wrap:wrap;gap:10px}
+.shape{display:grid;justify-items:center;gap:6px;border:2px solid var(--ink);padding:10px 12px;min-width:86px;font-size:12px;font-weight:600;background:#fff}
+.shape.on{outline:3px solid var(--blue);outline-offset:1px;background:var(--soft)}
+.shape i{display:grid;place-items:center;width:40px;height:40px;background:#3c78d8;color:#fff;font:800 14px system-ui;font-style:normal}
+.shape.mine i{background:#e9a23b}.shape.add{border-style:dashed;color:var(--blue)}
+.shape.add i{background:none;color:var(--blue);font-size:22px}
+/* aperçu des endroits */
+.where{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.where div{border:1px solid var(--line);padding:10px;text-align:center;font-size:12px;color:var(--muted)}
+.where i{display:inline-grid;place-items:center;background:#d9488f;color:#fff;font:800 12px system-ui;font-style:normal;margin-bottom:6px;border-radius:22%}
+.where .big i{width:54px;height:54px;font-size:18px}.where .mid i{width:32px;height:32px}.where .sm i{width:22px;height:22px;font-size:9px}
+.where .num i{width:26px;height:26px;background:#111;font-size:11px}
+/* colonne */
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.choice{border:2px solid var(--ink);padding:12px;font-size:13px}.choice.on{outline:3px solid var(--blue);outline-offset:1px}
+.choice b{display:block;margin-bottom:6px}
+.mini{border:1px solid var(--line);padding:6px;font-size:11.5px;display:grid;gap:3px}
+.mini span{padding:3px 6px;border:1px solid #ccc}.mini .sel{background:var(--blue);color:#fff;border-color:var(--blue)}
+.mini.cont span{border:0;border-bottom:1px solid #eee}
+/* listes */
+.olist{border:2px solid var(--ink)}
+.orow{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:1px solid var(--line);font-size:13.5px}
+.orow:last-child{border-bottom:0}.orow .g{color:#999}.orow .n{color:var(--blue);font:800 11px system-ui;width:20px}
+.orow.hid{opacity:.45}.orow .eye{margin-left:auto;font-size:12px;border:1.5px solid var(--ink);padding:2px 7px}
+.note{border-left:4px solid var(--blue);background:var(--soft);padding:10px 12px;font-size:13.5px;margin:12px 0}
+.arrow{display:flex;align-items:center;gap:12px;font-size:13.5px;margin-top:12px}
+.btn{border:2px solid var(--ink);background:#fff;padding:6px 12px;font:700 12.5px system-ui;box-shadow:3px 3px 0 rgba(5,93,255,.28)}
+.move{font:700 11px system-ui;background:#fff1a8;padding:2px 6px;margin-left:6px}
+
+/* colonne : choix visuels et aperçu */
+.colgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.prev{position:sticky;top:12px;border:2px solid var(--ink);padding:12px;background:#fafbfc}
+.prev-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}.prev-head .seg span{cursor:pointer;padding:4px 8px;font-size:11.5px}
+.lab2{font-weight:700;font-size:13px;margin:14px 0 6px}
+.vis2,.vis3,.vis4{display:grid;gap:8px}.vis2{grid-template-columns:repeat(2,1fr)}.vis3{grid-template-columns:repeat(3,1fr)}.vis4{grid-template-columns:repeat(4,1fr)}
+.vc{display:grid;justify-items:center;gap:6px;border:2px solid var(--ink);background:#fff;padding:10px 8px;font:600 12.5px system-ui;cursor:pointer;color:var(--ink);text-align:center}
+.vc small{font-weight:400;color:var(--muted);font-size:11px}.vc.on{outline:3px solid var(--blue);outline-offset:1px;background:var(--soft)}
+.choice.vc{justify-items:stretch;text-align:left}.choice .why{margin:8px 0 0;padding-left:0;list-style:none;font-size:12px;font-weight:400;display:grid;gap:3px}
+.pill{font:700 10px system-ui;border:1.5px solid var(--ink);padding:1px 5px;margin-left:6px;vertical-align:1px}.pill.new{background:#fff1a8}
+.vside{display:grid;grid-template-columns:22px 1fr;width:70px;height:40px;border:1.5px solid var(--ink)}.vside.r{grid-template-columns:1fr 22px}.vside i{background:#fff}.vside .c{background:var(--blue)}
+.ms{display:grid;gap:3px;width:78px}.ms i{height:9px;border:1.5px solid var(--ink);background:#fff}.ms .s{background:var(--blue);border-color:var(--blue)}
+.ms.cont{gap:0;border:1.5px solid var(--ink);padding:0}.ms.cont i{border:0;border-bottom:1px solid #ddd;height:10px}.ms.air{gap:7px}.ms.air i{border:0;border-bottom:1px solid #bbb}.ms.air .s{border-bottom-color:var(--blue)}
+.mt{display:flex;gap:3px;font-size:10px;font-style:normal}.mt em{font-style:normal;border:1.5px solid var(--ink);padding:2px 4px;line-height:1.2}.mt.col em{text-align:center}
+.mn{font:700 12px ui-monospace,monospace;color:var(--blue)}
+.mz{display:grid;gap:2px;width:60px}.mz i{height:9px;border:1.5px solid var(--ink)}.mz.c i{height:5px}
+.ml{display:grid;gap:3px;width:90px;font-size:9px}.ml b{border:1.5px solid var(--ink);padding:1px}.ml i{height:7px;background:#e5e7eb}
+/* l'aperçu : une petite colonne de gauche */
+.pv{border:2px solid var(--ink);background:#fff;font-size:12.5px}
+.pv-head{padding:8px 10px;border-bottom:2px solid var(--ink);font-weight:800}
+.pv-tabs{display:flex;gap:4px;padding:6px 8px;border-bottom:1px solid var(--line);flex-wrap:wrap}.pv-tabs em{font-style:normal;font-size:11px;border:1.5px solid var(--ink);padding:2px 6px}.pv-tabs.dessus em{text-align:center;line-height:1.15}
+.pv-list{padding:8px;display:grid;gap:6px}.pv-list.continue{gap:0;margin:8px;padding:0;border:1.5px solid var(--ink)}.pv-list.aeree{gap:10px}
+.pv-it{display:flex;gap:8px;align-items:center;padding:7px 8px;border:2px solid var(--ink);font-weight:600}
+.pv-list.continue .pv-it{border:0;border-bottom:1px solid #eee}.pv-list.aeree .pv-it{border:0;border-bottom:1px solid #ddd;padding:9px 4px}
+.pv-it b{color:var(--blue);font:800 10.5px system-ui;min-width:18px}.pv-it.sel{background:var(--blue);color:#fff}.pv-it.sel b{color:#fff}
+.pv.compacte .pv-it{padding:3px 8px;font-size:11.5px}
+.pv-lf{display:flex;justify-content:center;padding:6px;border-top:1px solid var(--line);font:700 11px system-ui}.pv-lf span{border:1.5px solid var(--ink);padding:2px 8px}.pv-lf span.on{background:var(--ink);color:#fff}
+@media(max-width:980px){.colgrid{grid-template-columns:1fr}.prev{position:static}.vis4{grid-template-columns:repeat(2,1fr)}}
+footer{margin-top:30px;font-size:14px}
+footer b{font-size:16px}
+@media(max-width:820px){.ba,.cards2{grid-template-columns:1fr}.app{grid-template-columns:1fr}.side{border-right:0;border-bottom:2px solid var(--ink)}.where{grid-template-columns:1fr 1fr}.row>label:first-child,.row>span:first-child{min-width:0}}
+</style></head><body><div class="wrap">
+
+<span class="tag">Maquette à valider</span>
+<h1>Apparence : un seul endroit par réglage</h1>
+<p class="sub">Rien n’est encore changé dans l’app. Clique sur les pages à gauche et sur les onglets pour voir chaque écran. Les éléments marqués <span class="dup">en jaune</span> sont ceux qui bougent.</p>
+
+<h2>Ce qui change</h2>
+<div class="ba">
+  <div class="card"><span class="tag">Aujourd’hui</span><h3>Le même réglage à deux endroits</h3><ul>
+    <li><b>Forme</b> : le menu <span class="dup">« Forme des avatars »</span> (petits carrés numérotés, initiales) <i>et</i> la <span class="dup">« Forme » des Portraits</span> (rond, arrondi…).</li>
+    <li><b>Colonne de gauche</b> : son style dans <span class="dup">« Portraits et colonne de gauche »</span>, mais « à gauche / à droite » dans <span class="dup">« Menus, onglets et listes »</span>.</li>
+    <li><b>Ordre des listes</b> : dans « Menus, onglets et listes » <i>et</i> par <span class="dup">« Réordonner »</span> en bas de la colonne (une autre fenêtre).</li></ul></div>
+  <div class="card"><span class="tag">Après</span><h3>Un seul endroit, à sa place</h3><ul>
+    <li><span class="ok">✓</span> <b>Portraits et avatars</b> : une seule « Forme », qui vaut partout (fiche, listes, arbre, petits carrés numérotés).</li>
+    <li><span class="ok">✓</span> <b>Menus, colonne et listes</b> : un nouvel onglet « Colonne de gauche » avec tout, y compris gauche / droite.</li>
+    <li><span class="ok">✓</span> <b>Réordonner</b> (en bas de la colonne) ouvre l’onglet « Listes » : le même réglage, pas une copie.</li></ul></div>
+</div>
+
+<h2>Les écrans, après</h2>
+<div class="app">
+  <nav class="side" aria-label="Réglages">
+    <div class="grp">🎨 Look</div>
+    <button type="button"><small>01</small>Thème et couleurs</button>
+    <button type="button"><small>02</small>Designs au choix</button>
+    <button type="button" data-p="portraits" class="on"><small>03</small>Portraits et avatars</button>
+    <button type="button"><small>04</small>Notifications et boutons</button>
+    <div class="grp">🧭 Navigation</div>
+    <button type="button" data-p="menus"><small>08</small>Menus, colonne et listes<span class="new">nouveau nom</span></button>
+    <button type="button"><small>09</small>Raccourcis clavier</button>
+  </nav>
+
+  <!-- ═══ Portraits et avatars ═══ -->
+  <section class="page" data-page="portraits">
+    <span class="tag">Réglages · Look</span><h3>Portraits et avatars</h3>
+    <p>Le dessin des personnes partout dans l’app. La colonne de gauche n’est plus ici : elle est dans « Menus, colonne et listes ».</p>
+    <div class="sec"><h4>1 · La forme <span class="move">une seule, au lieu de deux</span></h4>
+      <p>Elle vaut partout : la fiche, les listes, l’arbre, le menu de choix, et les petits carrés numérotés des blocs.</p>
+      <div class="shapes">
+        <div class="shape"><i style="border-radius:50%">JM</i>Rond</div>
+        <div class="shape on"><i style="border-radius:22%">JM</i>Carré arrondi</div>
+        <div class="shape"><i>JM</i>Carré</div>
+        <div class="shape"><i style="transform:rotate(-6deg)">JM</i>Carré penché</div>
+        <div class="shape"><i style="clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)">JM</i>Losange</div>
+        <div class="shape mine"><i style="clip-path:polygon(50% 0,95% 30%,80% 100%,20% 100%,5% 30%)">JM</i>✎ Ma forme</div>
+        <div class="shape add"><i>＋</i>Créer une forme</div>
+      </div>
+      <div class="row" style="margin-top:12px"><span>⚙️ Gérer les formes</span><span style="color:var(--muted);font-size:13px">ranger, cacher, dupliquer, exporter (le cadre « Formes des avatars » d’aujourd’hui, replié ici)</span></div>
+      <div class="where">
+        <div class="big"><i>JM</i><br>Fiche</div><div class="mid"><i>JM</i><br>Listes et arbre</div><div class="sm"><i>JM</i><br>Pastilles</div><div class="num"><i style="border-radius:22%">04</i><br>Carrés numérotés</div>
+      </div></div>
+    <div class="sec"><h4>2 · Réglages en plus</h4><p>Comme aujourd’hui.</p>
+      <div class="row"><span>Arrondi</span><input type="text" value="22 %" size="5"></div>
+      <div class="row"><span>Couleurs</span><span class="seg"><span class="on">Selon le genre</span><span>Une seule</span></span></div>
+      <div class="row"><span>Photo de la fiche</span><span class="seg"><span class="on">Oui</span><span>Non</span></span> <span style="font-size:13px;color:var(--muted)">noir et blanc · une ou deux lettres · badge Sosa…</span></div></div>
+  </section>
+
+  <!-- ═══ Menus, colonne et listes ═══ -->
+  <section class="page" data-page="menus" hidden>
+    <span class="tag">Réglages · Navigation</span><h3>Menus, colonne et listes</h3>
+    <p>L’ordre, les noms et ce qui est caché ; et la colonne de gauche. Un onglet par sujet.</p>
+    <p style="margin:-6px 0 8px;font-size:12.5px;color:var(--muted)">Noms courts pour tenir sur <b>une seule ligne</b> (le nom complet est dans la bulle) ; sur un petit écran, la barre défile.</p><div class="tabs" role="tablist">
+      <button type="button" data-t="menu" title="Ordre et noms du menu principal">Menu</button>
+      <button type="button" data-t="col" class="on" title="Tout sur la colonne de gauche">Colonne<span class="new">nouveau</span></button>
+      <button type="button" data-t="listes" title="Ordre des listes, lignes cachées">Listes</button>
+      <button type="button" title="Ordre des pages des Réglages">Pages</button>
+      <button type="button" title="Boutons en haut à droite">Boutons du haut</button>
+      <button type="button" title="Types de recherche">Recherche</button>
+      <button type="button" title="Graphiques : diagrammes et statistiques">Graphiques</button>
+    </div>
+
+    <div class="pane" data-pane="menu">
+      <div class="sec"><h4>Ordre et noms du menu principal</h4><p>Comme aujourd’hui. Seul « Colonne à gauche / à droite » est parti dans l’onglet « Colonne de gauche ».</p>
+        <div class="row"><span>Menu des onglets</span><select><option>En haut</option><option>En bas</option></select></div>
+        <div class="row"><span>Logo, prénom et nom</span><select><option>Logo et nom</option></select></div></div>
+    </div>
+
+    <div class="pane on" data-pane="col">
+      <div class="colgrid"><div>
+      <div class="sec"><h4>Où ? <span class="move">venu de « Menu principal »</span></h4>
+        <div class="vis2"><button type="button" class="vc on" data-c="side" data-v="g"><span class="vside"><i class="c"></i><i></i></span>À gauche</button><button type="button" class="vc" data-c="side" data-v="d"><span class="vside r"><i></i><i class="c"></i></span>À droite</button></div></div>
+      <div class="sec"><h4>1 · Ton choix <span class="move">venu de « Portraits et colonne de gauche »</span></h4><p>Comme aujourd’hui : une grande carte, puis tu affines dessous. Tant que tu ne touches à rien, tout reste comme avant.</p>
+        <div class="cards2">
+          <button type="button" class="choice vc" data-c="mode" data-v="avant"><b>○ Comme avant <span class="pill">Par défaut</span></b><div class="mini"><span>A Personnes</span><span class="sel">H Carte</span><span>F Graphiques</span></div>
+            <ul class="why"><li>👍 Rien ne bouge : tes repères restent.</li><li>👎 Numéros dans le désordre, onglets dessinés de 3 façons.</li></ul></button>
+          <button type="button" class="choice vc on" data-c="mode" data-v="nouveau"><b>● Nouveau <span class="pill new">Nouveau</span></b><div class="mini cont"><span>01 Personnes</span><span class="sel">02 Carte</span><span>03 Graphiques</span></div>
+            <ul class="why"><li>👍 Une liste continue, comme un sommaire, numéros qui se suivent.</li><li>👍 Les mêmes onglets dans tous les outils.</li></ul></button>
+        </div></div>
+      <div class="sec"><h4>2 · Réglages en plus</h4><p>Chaque choix se voit : clique, l’aperçu à droite suit.</p>
+        <div class="lab2">Style des entrées</div>
+        <div class="vis3">
+          <button type="button" class="vc" data-c="style" data-v="boutons"><span class="ms btn"><i></i><i class="s"></i><i></i></span>Boutons encadrés<small>comme avant</small></button>
+          <button type="button" class="vc on" data-c="style" data-v="continue"><span class="ms cont"><i></i><i class="s"></i><i></i></span>Liste continue<small>nouveau</small></button>
+          <button type="button" class="vc" data-c="style" data-v="aeree"><span class="ms air"><i></i><i class="s"></i><i></i></span>Liste aérée<small>plus d’espace</small></button></div>
+        <div class="lab2">Onglets du haut</div>
+        <div class="vis4">
+          <button type="button" class="vc" data-c="tabs" data-v="avant"><span class="mt"><em>Carte</em><em>🔎</em><em>▦ Vues</em></span>Comme avant<small>chaque outil le sien</small></button>
+          <button type="button" class="vc on" data-c="tabs" data-v="ligne"><span class="mt"><em>🗺 Carte</em><em>📌 Lieux</em></span>Icône + nom<small>sur une ligne</small></button>
+          <button type="button" class="vc" data-c="tabs" data-v="dessus"><span class="mt col"><em>🗺<br>Carte</em><em>📌<br>Lieux</em></span>Icône au-dessus<small>du nom</small></button>
+          <button type="button" class="vc" data-c="tabs" data-v="texte"><span class="mt"><em>Carte</em><em>Lieux</em></span>Nom seul<small>sans icône</small></button></div>
+        <div class="lab2">Numéros</div>
+        <div class="vis3">
+          <button type="button" class="vc on" data-c="nums" data-v="suite"><span class="mn">01 · 02 · 03</span>Qui se suivent</button>
+          <button type="button" class="vc" data-c="nums" data-v="origine"><span class="mn">01 · A · S1</span>Lettres d’origine</button>
+          <button type="button" class="vc" data-c="nums" data-v="aucun"><span class="mn">—</span>Pas de numéros</button></div>
+        <div class="lab2">Taille des entrées</div>
+        <div class="vis2"><button type="button" class="vc on" data-c="size" data-v="normale"><span class="mz"><i></i><i></i><i></i></span>Normale</button><button type="button" class="vc" data-c="size" data-v="compacte"><span class="mz c"><i></i><i></i><i></i><i></i><i></i></span>Compacte</button></div>
+        <div class="lab2">« Liste | Fiches »</div>
+        <div class="vis2"><button type="button" class="vc on" data-c="lf" data-v="barre"><span class="ml"><b>Liste | Fiches</b><i></i><i></i></span>Dans la barre au-dessus</button><button type="button" class="vc" data-c="lf" data-v="bas"><span class="ml"><i></i><i></i><b>Liste | Fiches</b></span>En bas de la colonne</button></div>
+        <div class="lab2">Largeur de la colonne</div>
+        <div class="row" style="margin-top:0"><input type="range" min="240" max="420" step="10" value="320" data-w> <b data-wv>320 px</b> <span style="font-size:12.5px;color:var(--muted)">double-clic : 320 px</span></div>
+      </div></div>
+      <aside class="prev"><div class="prev-head"><b>👁 Aperçu</b><span class="seg" data-tool><span class="on" data-tv="carte">Carte</span><span data-tv="graph">Graphiques</span><span data-tv="enq">Enquêtes</span></span></div><div class="prev-body" data-prev></div>
+        <button type="button" class="btn" style="margin-top:12px">↺ Remettre comme au départ</button></aside></div>
+    </div>
+
+    <div class="pane" data-pane="listes">
+      <div class="sec"><h4>Ordre des listes</h4><p>Glisse ⠿ (ou Alt + ↑ ↓), coche ce qui s’affiche. Enregistré tout seul.</p>
+        <div class="olist">
+          <div class="orow"><span class="g">⠿</span><span class="n">01</span>👥 Personnes et familles<span class="eye">👁</span></div>
+          <div class="orow"><span class="g">⠿</span><span class="n">02</span>🖼️ Médias et documents<span class="eye">👁</span></div>
+          <div class="orow hid"><span class="g">⠿</span><span class="n">03</span>🐾 Animaux<span class="eye">🙈</span></div>
+          <div class="orow"><span class="g">⠿</span><span class="n">04</span>🗺️ Lieux<span class="eye">👁</span></div></div></div>
+      <div class="sec"><h4>👁 Lignes cachées</h4><div class="row"><span>Les lignes décochées</span><span class="seg"><span>Telles quelles</span><span class="on">Grisées</span></span></div></div>
+      <div class="note">Le bouton <b>Réordonner</b>, en bas de la colonne des Listes, n’ouvre plus sa propre fenêtre : il amène ici, sur cet onglet.</div>
+      <div class="arrow"><span class="btn">Réordonner</span> → <b>Réglages › Menus, colonne et listes › Listes</b></div>
+    </div>
+  </section>
+</div>
+
+<footer class="card" style="margin-top:28px"><b>À valider</b><ul>
+  <li><b>Une seule forme</b> pour tout ? Ou garder deux formes séparées (portraits d’un côté, petits carrés numérotés de l’autre) ?</li>
+  <li><b>« Menus, colonne et listes »</b> avec l’onglet « Colonne de gauche » : d’accord ?</li>
+  <li><b>Onglets aux noms courts</b> (Menu, Colonne, Listes, Pages, Boutons du haut, Recherche, Graphiques) sur une seule ligne : d’accord ? (le même changement serait fait pour toutes les pages des Réglages qui ont des onglets)</li>
+  <li><b>« Réordonner »</b> amène sur l’onglet « Listes » : d’accord, ou garder la petite fenêtre (qui modifierait alors le même réglage) ?</li></ul></footer>
+</div>
+<script>
+document.querySelectorAll('.side [data-p]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.side [data-p]').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('[data-page]').forEach(p=>p.hidden=p.dataset.page!==b.dataset.p);}));
+document.querySelectorAll('.tabs [data-t]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tabs [data-t]').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('[data-pane]').forEach(p=>p.classList.toggle('on',p.dataset.pane===b.dataset.t));}));
+
+const C={side:'g',mode:'nouveau',style:'continue',tabs:'ligne',nums:'suite',size:'normale',lf:'barre',w:320,tool:'carte'};
+const TOOLS={carte:{t:'Carte',tabs:[['🗺','Carte'],['📌','Lieux'],['▦','Vues']],it:['Toute la famille','Naissances','Mariages','Décès','Migrations']},graph:{t:'Graphiques',tabs:[['📊','Diagrammes'],['📈','Statistiques']],it:['Arbre des ascendants','Éventail','Sablier','Frise des vies','Pyramide des âges']},enq:{t:'Enquêtes',tabs:[['🔍','Enquêtes'],['🗂','Dossiers']],it:['La branche Borie','Le départ de 1902','Jeanne Roux','Les notaires de Tulle']}};
+const ORIG=['A','H','F','S1','S2','S3'];
+function paintPrev(){const T=TOOLS[C.tool],box=document.querySelector('[data-prev]');if(!box)return;
+ const tabs=C.tabs==='avant'?T.tabs.map(([i,l],k)=>k?`<em>${i}</em>`:`<em>${l}</em>`).join(''):T.tabs.map(([i,l])=>`<em>${C.tabs==='texte'?l:C.tabs==='dessus'?i+'<br>'+l:i+' '+l}</em>`).join('');
+ const num=k=>C.nums==='aucun'?'':`<b>${C.nums==='origine'?ORIG[k]:String(k+1).padStart(2,'0')}</b>`;
+ const style=C.mode==='avant'&&C.style==='continue'?'boutons':C.style;
+ const lf=`<div class="pv-lf"><span class="on">Liste</span><span>Fiches</span></div>`;
+ box.innerHTML=`<div class="pv ${C.size}" style="width:${Math.round(C.w*0.78)}px;max-width:100%;margin-left:${C.side==='d'?'auto':'0'}"><div class="pv-head">${T.t}</div><div class="pv-tabs ${C.tabs}">${tabs}</div>${C.lf==='barre'?lf:''}<div class="pv-list ${style}">${T.it.map((l,k)=>`<div class="pv-it${k===1?' sel':''}">${num(k)}${l}</div>`).join('')}</div>${C.lf==='bas'?lf:''}</div>`;}
+document.querySelectorAll('.vc[data-c]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.c;C[k]=b.dataset.v;
+ if(k==='mode'&&b.dataset.v==='avant')Object.assign(C,{style:'boutons',tabs:'avant',nums:'origine',lf:'bas'});
+ if(k==='mode'&&b.dataset.v==='nouveau')Object.assign(C,{style:'continue',tabs:'ligne',nums:'suite',lf:'barre'});
+ document.querySelectorAll('.vc[data-c]').forEach(x=>x.classList.toggle('on',C[x.dataset.c]===x.dataset.v));paintPrev();}));
+document.querySelectorAll('[data-tool] [data-tv]').forEach(b=>b.addEventListener('click',()=>{C.tool=b.dataset.tv;document.querySelectorAll('[data-tool] [data-tv]').forEach(x=>x.classList.toggle('on',x===b));paintPrev();}));
+const W=document.querySelector('[data-w]');if(W){W.addEventListener('input',()=>{C.w=+W.value;document.querySelector('[data-wv]').textContent=W.value+' px';paintPrev();});W.addEventListener('dblclick',()=>{W.value=320;W.dispatchEvent(new Event('input'));});}
+paintPrev();
+</script>
+</body></html>

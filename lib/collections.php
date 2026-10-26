@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Structure n°6 (lib/migrations.php).
  */
 
-const MEMORY_KINDS = ['recipe' => 'Recette', 'expression' => 'Expression', 'song' => 'Chanson', 'nickname' => 'Surnom', 'tradition' => 'Tradition', 'story' => 'Histoire', 'testimony' => 'Témoignage', 'other' => 'Autre']; // testimony : réponse d'un proche (Questions aux proches), montrée dans « Témoignages / souvenirs » de la fiche
+const MEMORY_KINDS = ['recipe' => 'Recette', 'expression' => 'Expression', 'song' => 'Chanson', 'nickname' => 'Surnom', 'tradition' => 'Tradition', 'story' => 'Histoire', 'testimony' => 'Témoignage', 'sense' => 'Souvenir des sens', 'other' => 'Autre']; // testimony : réponse d'un proche (Questions aux proches), montrée dans « Témoignages / souvenirs » de la fiche
 
 function collection_people(PDO $pdo, array $ids): array
 {

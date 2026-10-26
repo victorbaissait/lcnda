@@ -161,7 +161,7 @@
     };
     async function fillBlock(detail) {
         const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-tr-block="${pid}"]`); if (!el) return;
-        let items = []; try { items = await T.items('', pid); } catch (_) { el.innerHTML = '<p class="muted">Les trésors n’ont pas pu être lus.</p>'; return; }
+        let items = []; try { const [a, b] = await Promise.all([T.items('', pid), T.api('tresor_memories', {person_id: pid}).then(r => r.items || []).catch(() => [])]); items = [...a, ...b]; } catch (_) { el.innerHTML = '<p class="muted">Les trésors n’ont pas pu être lus.</p>'; return; }
         if (!items.length) { el.innerHTML = '<p class="muted">Rien encore : un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors.</p>'; return; }
         const by = new Map(); items.forEach(x => { if (!by.has(x.kind)) by.set(x.kind, []); by.get(x.kind).push(x); });
         el.innerHTML = [...by].map(([k, l]) => { const [ic, label, key] = KIND_INFO[k] || ['✨', k, ''];
