@@ -12,7 +12,7 @@ const fill = (g, v = 200) => { B.RES_KEYS.forEach(r => { g.res[r] = v; }); g.flo
 t('une partie : un étage avec radio, groupe électrogène, atelier ; les plans de base ; une ville à la bonne taille', () => {
     const g = game();
     assert.deepEqual(g.floors[0].slots.slice(0, 3), ['radio', 'generateur', 'atelier']);
-    assert.deepEqual(g.plans.sort(), ['arbremur', 'barricade', 'berceau', 'bibliotheque', 'compost', 'cuve', 'debarras', 'douche', 'dynamo', 'etabli', 'etagerecomp', 'etageres', 'filtre', 'gardemanger', 'jeux', 'lavabo', 'lit', 'pieges', 'poele', 'porte', 'stockage', 'toilettes']);
+    assert.deepEqual(g.plans.sort(), ['arbremur', 'barricade', 'berceau', 'bibliotheque', 'compost', 'cuve', 'debarras', 'douche', 'dynamo', 'etabli', 'etagerecomp', 'etageres', 'filtre', 'gardemanger', 'jeux', 'lavabo', 'lit', 'pieges', 'poele', 'porte', 'sacados', 'stockage', 'toilettes']);
     assert.equal(g.people.length, 3); assert.ok(g.people[0].me);
     for (const [size, [nn, nb]] of Object.entries(B.SIZES)) {
         const c = game({city: {name: 'X', size}}).city; assert.equal(c.n, nn); assert.equal(c.places.length, nb);
@@ -216,5 +216,24 @@ t('🧍 l’autonomie : prudent (ils y vont plus tôt), manuel (seulement à la 
     assert.ok(B.orderNeed(m, m.people[0].id, 'soif').ok); assert.equal(m.people[0].act.k, 'boire');
     B.setAuto(m, 'prudent', m.people[1].id); assert.equal(m.people[1].auto, 'prudent'); B.setAuto(m, '', m.people[1].id); assert.equal(m.people[1].auto, undefined);
     const c = B.check(JSON.parse(JSON.stringify(m))); assert.equal(c.auto, 'manuel'); assert.deepEqual(c.junk, m.junk);
+});
+t('🎲 chaque lieu n’a qu’une partie de ce qu’on peut y trouver, tiré au hasard ; ça revient (ou disparaît) au hasard chaque matin', () => {
+    const c = game({city: {name: 'X', size: 'immense'}}).city;
+    assert.ok(c.places.every(p => Object.values(p.stock).some(n => n > 0)), 'au moins une chose partout');
+    assert.ok(c.places.some(p => Object.keys(p.max).some(r => p.max[r] > 0 && !p.stock[r])), 'des choses absentes ici ou là');
+    const g = game(); const pl = g.city.places[0]; Object.keys(pl.stock).forEach(r => { pl.stock[r] = 0; });
+    for (let d = 0; d < 6; d++) B.regen(g, pl); assert.ok(Object.values(pl.stock).some(n => n > 0), 'ça revient'); assert.ok(Object.keys(pl.stock).every(r => pl.stock[r] <= pl.max[r]));
+});
+t('✋ on choisit combien on prend (4 bois sur 5) ; la place pour rapporter est limitée ; sacs, hotte, brouette, remorque (avec le vélo) en donnent plus', () => {
+    const g = game(); const p = g.people[1], a = g.city.places.find(x => x.kind === 'menuiserie') || g.city.places[0];
+    Object.keys(a.stock).forEach(r => { a.stock[r] = 0; }); a.stock.bois = 5; a.max.bois = Math.max(a.max.bois || 0, 5); a.junk = []; a.tools = []; a.plans = 0; const b0 = g.res.bois;
+    assert.deepEqual(B.stepOf({id: a.id, take: ['bois'], qty: {bois: '4', truc: 3, eau: -1}}), {id: a.id, take: ['bois'], qty: {bois: 4}});
+    assert.ok(B.send(g, p.id, [{id: a.id, take: ['bois'], qty: {bois: 4}}]).ok); let guard = 0; while (p.where !== 'base' && guard++ < 400) B.run(g, 30);
+    assert.equal(a.stock.bois, 1, 'il en laisse 1'); assert.ok(g.res.bois >= b0 + 4 - 1 && g.res.bois <= b0 + 4, `${b0} → ${g.res.bois}`); assert.equal(a.known.stock.bois, 1, 'on sait ce qui reste');
+    const h = game(), q = h.people[1], base = B.carryOf(h, q); h.floors[0].slots[3] = 'brouette'; assert.equal(B.carryOf(h, q), base + 8);
+    h.floors[0].slots[4] = 'remorque'; assert.equal(B.carryOf(h, q), base + 8, 'la remorque sans vélo ne sert à rien'); h.floors[0].slots[5] = 'velo'; assert.equal(B.carryOf(h, q), base + 23);
+    const k = game(); const pk = k.city.places[0]; Object.keys(pk.stock).forEach(r => { pk.stock[r] = 0; }); pk.stock.bois = 50; pk.max.bois = 50; pk.junk = []; const kp = k.people[1], cap = B.carryOf(k, kp);
+    B.send(k, kp.id, pk.id); guard = 0; while (kp.where !== 'base' && guard++ < 400) B.run(k, 30); assert.equal(pk.stock.bois, 50 - cap, `pas plus de ${cap}`);
+    const c = B.check(JSON.parse(JSON.stringify(g))); assert.equal(c.city.places.find(x => x.id === a.id).known.stock.bois, 1);
 });
 console.log(`✓ bunker : ${n} vérifications`);

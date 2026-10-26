@@ -106,6 +106,10 @@
         carte: {ico: '🗺️', name: 'Grande carte de la ville', cost: {tissu: 2, colle: 1, bois: 1}, h: 3, map: true, desc: 'Une fois finie : tous les lieux de la ville sont marqués, même ceux où personne n’est allé.'},
         velo: {ico: '🚲', name: 'Vélo réparé', cost: {metal: 3, caoutchouc: 2, pieces: 2, corde: 1}, h: 4, travelK: 0.65, desc: 'On va et on revient en ville bien plus vite.'},
         charrette: {ico: '🛒', name: 'Charrette', cost: {bois: 6, caoutchouc: 2, clous: 4, corde: 2}, h: 4, carry: 10, desc: 'On rapporte 10 de plus à chaque sortie.'},
+        sacados: {ico: '🎒', name: 'Sacs à dos cousus', cost: {tissu: 3, corde: 2}, h: 2, base: true, carry: 4, desc: 'Des sacs solides pour chacun : on rapporte 4 de plus à chaque sortie.'},
+        hotte: {ico: '🧺', name: 'Hotte en osier', cost: {bois: 3, corde: 3}, h: 2, carry: 6, desc: 'Sur le dos, comme les vendangeurs : on rapporte 6 de plus.'},
+        brouette: {ico: '🛞', name: 'Brouette', cost: {metal: 3, bois: 3, caoutchouc: 1, clous: 2}, h: 3, carry: 8, desc: 'On rapporte 8 de plus à chaque sortie.'},
+        remorque: {ico: '🚛', name: 'Remorque de vélo', cost: {metal: 4, caoutchouc: 2, corde: 2, pieces: 1}, h: 4, carry: 15, with: 'velo', desc: 'Accrochée au vélo réparé : on rapporte 15 de plus (sans vélo, elle ne sert à rien).'},
         refrigerateur: {ico: '🧊', name: 'Garde-manger frais', cost: {metal: 4, plastique: 3, cuivre: 2, electro: 1}, h: 4, cap: {nourriture: 50, plantes: 15}, desc: '+50 rations et +15 plantes de place.'},
         bidons: {ico: '🛢️', name: 'Bidons d’essence', cost: {plastique: 4, metal: 1}, h: 2, cap: {essence: 40}, desc: '+40 L d’essence de place.'},
         armoirepharma: {ico: '🗃️', name: 'Armoire à pharmacie', cost: {bois: 3, verre: 1, clous: 2}, h: 2, cap: {medic: 15, plantes: 15}, desc: '+15 médicaments et +15 plantes de place.'},
@@ -269,8 +273,7 @@
             const kind = i < order.length ? order[i] : pickOne(g, kinds);
             let x, y, tries = 0; do { x = rint(g, 0, n - 1); y = rint(g, 0, n - 1); tries++; } while ((used.has(`${x},${y}`) || Math.abs(x - c) + Math.abs(y - c) < 2) && tries < 200);
             used.add(`${x},${y}`);
-            const [, label, res, tools, plans] = PLACE_KINDS[kind], stock = {}, max = {};
-            Object.entries(res).forEach(([r, [a, b]]) => { max[r] = b; stock[r] = rint(g, a, b); });
+            const [, label, res, tools, plans] = PLACE_KINDS[kind], {stock, max} = stockFor(g, res);
             const street = streets.length ? streets.splice(Math.floor(rnd(g) * streets.length), 1)[0] : `rue n° ${i + 1}`;
             places.push({id: 'l' + (i + 1), kind, name: `${label}, ${street}`, x, y, stock, max, tools: tools.filter(() => rnd(g) < 0.7), plans: plans ? 2 : (rnd(g) < 0.3 ? 1 : 0), visits: 0, seen: false, junk: junkFor(g, kind, rint(g, 1, 4))});
         }
@@ -278,11 +281,24 @@
         (Array.isArray(homes) ? homes : []).slice(0, 2).forEach((h, j) => {
             let x, y, tries = 0; do { x = rint(g, 0, n - 1); y = rint(g, 0, n - 1); tries++; } while ((used.has(`${x},${y}`) || Math.abs(x - c) + Math.abs(y - c) < 2) && tries < 200);
             if (used.has(`${x},${y}`)) return; used.add(`${x},${y}`);
-            const res = PLACE_KINDS.maisonfam[2], stock = {}, max = {};
-            Object.entries(res).forEach(([r, [a, b]]) => { max[r] = b; stock[r] = rint(g, a, b); });
+            const {stock, max} = stockFor(g, PLACE_KINDS.maisonfam[2]);
             places.push({junk: junkFor(g, 'maisonfam', rint(g, 2, 4)), id: 'm' + (j + 1), kind: 'maisonfam', name: `Maison natale de ${str(h?.name, 60) || 'un ancêtre'}${Number(h?.by) ? ` (${Number(h.by)})` : ''}`, x, y, stock, max, tools: ['lampe'], plans: 1, visits: 0, seen: false, home: true});
         });
         return {name, size, n, base: [c, c], places};
+    }
+    /** ce qu'il y a dans un lieu : une partie seulement de ce qu'on peut y trouver (tiré au hasard, au moins une chose), en quantité au hasard */
+    function stockFor(g, res) {
+        const stock = {}, max = {}, keys = Object.keys(res);
+        keys.forEach(r => { const [a, b] = res[r]; max[r] = b; stock[r] = b > 0 && rnd(g) < 0.6 ? rint(g, Math.max(1, a), b) : 0; });
+        if (keys.length && !keys.some(r => stock[r] > 0)) { const r = pickOne(g, keys.filter(x => max[x] > 0).length ? keys.filter(x => max[x] > 0) : keys); stock[r] = rint(g, Math.max(1, res[r][0]), Math.max(1, res[r][1])); }
+        return {stock, max};
+    }
+    /** chaque matin, au hasard : ce qui revient (déposé, livré, trouvé par d'autres…) et ce que d'autres survivants ont emporté */
+    function regen(g, pl) {
+        Object.keys(pl.max).forEach(r => { const m = pl.max[r]; if (!m) return; const x = rnd(g);
+            if (x < 0.4) pl.stock[r] = Math.min(m, (pl.stock[r] || 0) + rint(g, 1, Math.max(1, Math.ceil(m / 2))));
+            else if (x > 0.93 && pl.stock[r] > 0) pl.stock[r] = Math.floor(pl.stock[r] / 2); });
+        if ((pl.junk || []).length < 4 && rnd(g) < 0.35) pl.junk = [...(pl.junk || []), ...junkFor(g, pl.kind, rint(g, 1, 2))];
     }
     /** du bric-à-brac tiré au hasard parmi ce qu'on trouve dans ce genre de lieu */
     function junkFor(g, kind, n) { const l = PLACE_KINDS[kind]?.[5] || []; return l.length ? Array.from({length: n}, () => pickOne(g, l)) : []; }
@@ -342,8 +358,8 @@
     /** envoyer un habitant en ville : un lieu, ou un parcours de plusieurs lieux (jusqu'à 6) ; à chaque étape, ce qu'on rapporte
      *  (take : clés de ressources et « junk » pour le bric-à-brac ; vide = tout) → {ok, err} */
     function send(g, id, route, take = null) {
-        const steps = (Array.isArray(route) ? route : [route]).slice(0, 6).map(st => (typeof st === 'string' ? {id: st, take} : {id: String(st?.id || ''), take: st?.take ?? take}))
-            .map(st => ({id: st.id, take: Array.isArray(st.take) && st.take.length ? st.take.filter(r => RES_KEYS.includes(r) || r === 'junk') : null})).filter(st => g.city.places.some(x => x.id === st.id));
+        const steps = (Array.isArray(route) ? route : [route]).slice(0, 6).map(st => (typeof st === 'string' ? {id: st, take} : {id: String(st?.id || ''), take: st?.take ?? take, qty: st?.qty}))
+            .map(stepOf).filter(st => g.city.places.some(x => x.id === st.id));
         const p = g.people.find(x => x.id === id), pl = steps.length ? g.city.places.find(x => x.id === steps[0].id) : null;
         if (!p || p.hp <= 0) return {ok: false, err: 'Personne à envoyer.'}; if (p.baby) return {ok: false, err: `${p.name} est bien trop petit·e.`}; if (p.where !== 'base') return {ok: false, err: `${p.name} n’est pas au bunker.`}; if (!pl) return {ok: false, err: 'Lieu inconnu.'};
         if (p.act?.k === 'dormir') p.act = null;
@@ -352,13 +368,21 @@
         log(g, `🚶 ${p.name} part vers ${steps.length > 1 ? `${steps.length} lieux : ${steps.map(st => g.city.places.find(x => x.id === st.id).name).join(' → ')}` : pl.name} (${Math.round(total / 60 * 10) / 10} h de marche en tout, sans compter les fouilles).`);
         return {ok: true};
     }
+    /** une étape propre : le lieu, ce qu'on rapporte (take : clés, vide = tout) et combien au plus de chaque (qty : {bois: 4}, absent = tout ce qu'il y a) */
+    function stepOf(st) {
+        const ok = r => RES_KEYS.includes(r) || r === 'junk', take = Array.isArray(st?.take) ? st.take.filter(ok) : [];
+        const qty = Object.fromEntries(Object.entries(st?.qty && typeof st.qty === 'object' ? st.qty : {}).filter(([r, n]) => ok(r) && Number(n) > 0).map(([r, n]) => [r, clamp(Math.round(Number(n)), 1, 999)]));
+        return {id: String(st?.id || '').slice(0, 12), take: take.length ? take : null, ...(Object.keys(qty).length ? {qty} : {})};
+    }
     /** le temps de marche d'un parcours : du bunker au premier lieu, de lieu en lieu, puis le retour */
     function routeTime(g, steps) {
         const pls = steps.map(st => g.city.places.find(x => x.id === (st.id || st))).filter(Boolean); if (!pls.length) return 0;
         let t = travel(g, pls[0]); for (let i = 1; i < pls.length; i++) t += travel(g, pls[i], g.t, pls[i - 1]); return t + travel(g, pls[pls.length - 1]);
     }
     /** la place qu'un habitant a pour rapporter (le sac, son talent, la charrette) */
-    const carryOf = (g, p) => Math.round((g.tools.includes('sac') ? 20 : 10) * (p.sk?.fouiller || 1)) + sumOf(g, 'carry');
+    const carryOf = (g, p) => Math.round((g.tools.includes('sac') ? 20 : 10) * (p.sk?.fouiller || 1)) + carryBonus(g);
+    /** la place en plus grâce aux objets construits (la remorque ne sert qu'avec le vélo) */
+    const carryBonus = g => kinds(g).reduce((n, k) => n + (ITEMS[k]?.carry && (!ITEMS[k].with || kinds(g).includes(ITEMS[k].with)) ? ITEMS[k].carry * items(g).filter(x => x.k === k).length : 0), 0);
     const loadOf = e => Object.values(e.loot).reduce((a, b) => a + b, 0) + 2 * (e.junk || []).length;
     /** rappeler par la radio (il faut de l'électricité) */
     function recall(g, id) {
@@ -495,9 +519,8 @@
         // 👶 une naissance
         if (g.preg && g.t >= g.preg.due) birth(g);
         else if (hr === 22) family(g);
-        // les lieux de la ville se remplissent un peu chaque jour, à 6 h
-        if (hr === 6) g.city.places.forEach(pl => { Object.keys(pl.max).forEach(r => { pl.stock[r] = Math.min(pl.max[r], (pl.stock[r] || 0) + Math.ceil(pl.max[r] * (0.15 + rnd(g) * 0.2))); });
-            if ((pl.junk || []).length < 3 && rnd(g) < 0.3) pl.junk = [...(pl.junk || []), ...junkFor(g, pl.kind, 1)]; });
+        // les lieux de la ville changent un peu chaque jour, à 6 h, au hasard
+        if (hr === 6) g.city.places.forEach(pl => regen(g, pl));
     }
     function produce(g, hr) {
         kinds(g).forEach(k => { const P = ITEMS[k].prod; if (!P || !working(g, k) || (P.every > 1 && hr % P.every !== 0) || (P.day && isNight(g.t))) return;
@@ -666,12 +689,15 @@
         }
         if (e.phase === 'fouille') {
             pl.visits++;
-            const stepTake = e.route?.[e.i]?.take || null, wants = r => !stepTake || stepTake.includes(r);
+            const st = e.route?.[e.i] || {}, stepTake = st.take || null, q = st.qty || {}, wants = r => !stepTake || stepTake.includes(r), got0 = {};
+            const room = r => (q[r] == null || (got0[r] || 0) < q[r]);
             let left = carryOf(g, p) - loadOf(e);
-            // le bric-à-brac d'abord s'il est demandé (2 places chacun), puis les ressources choisies
-            if (wants('junk')) while (left >= 2 && (pl.junk || []).length) { e.junk.push(pl.junk.shift()); left -= 2; }
-            const avail = Object.keys(pl.stock).filter(r => pl.stock[r] > 0 && wants(r));
-            while (left > 0 && avail.some(r => pl.stock[r] > 0)) { const r = pickOne(g, avail.filter(x => pl.stock[x] > 0)); pl.stock[r]--; e.loot[r] = (e.loot[r] || 0) + 1; left--; }
+            // le bric-à-brac d'abord s'il est demandé (2 places chacun), puis les ressources choisies, sans dépasser le nombre voulu
+            if (wants('junk')) while (left >= 2 && (pl.junk || []).length && room('junk')) { e.junk.push(pl.junk.shift()); got0.junk = (got0.junk || 0) + 1; left -= 2; }
+            const avail = Object.keys(pl.stock).filter(r => pl.stock[r] > 0 && wants(r)), can = () => avail.filter(x => pl.stock[x] > 0 && room(x));
+            while (left > 0 && can().length) { const r = pickOne(g, can()); pl.stock[r]--; got0[r] = (got0[r] || 0) + 1; e.loot[r] = (e.loot[r] || 0) + 1; left--; }
+            // ce qu'on a vu sur place (ce qui reste) : affiché sur la carte, jusqu'à ce que ça change
+            pl.known = {d: dayOf(g.t), stock: Object.fromEntries(Object.entries(pl.stock).filter(([, n]) => n > 0)), junk: [...(pl.junk || [])]};
             const tool = pl.tools.find(x => !g.tools.includes(x));
             if (tool && rnd(g) < 0.5) { e.found.push('t:' + tool); pl.tools = pl.tools.filter(x => x !== tool); }
             const missing = FOUND_PLANS.filter(k => !g.plans.includes(k) && !g.people.some(o => o.exp?.found.includes('p:' + k)));
@@ -718,7 +744,7 @@
             return {id: String(p.id || 'h' + (i + 1)).slice(0, 12), pid: Number(p.pid) || 0, name: String(p.name || 'Sans nom').slice(0, 80), gender: String(p.gender || '').slice(0, 10), me: !!p.me,
                 hp: clamp(Number(p.hp) || 0, 0, 100), needs: Object.fromEntries(NEEDS.map(([k]) => [k, clamp(Number(p.needs?.[k]) || 0, 0, 100)])),
                 where: p.where === 'dehors' && p.exp ? 'dehors' : 'base', act: p.act && typeof p.act === 'object' ? {k: String(p.act.k), until: Number(p.act.until) || 0, at: Array.isArray(p.act.at) ? p.act.at.map(Number) : null, ...(p.act.music ? {music: true} : {})} : null,
-                job: JOBS.includes(p.job) ? p.job : 'libre', ...(AUTO[p.auto] ? {auto: p.auto} : {}), exp: p.where === 'dehors' && p.exp ? {route: (Array.isArray(p.exp.route) ? p.exp.route : [{id: p.exp.place}]).slice(0, 6).map(st => ({id: String(st?.id || '').slice(0, 12), take: Array.isArray(st?.take) ? st.take.filter(r => RES_KEYS.includes(r) || r === 'junk') : null})), i: clamp(Math.round(num(p.exp.i)), 0, 5), junk: (Array.isArray(p.exp.junk) ? p.exp.junk : []).filter(k => JUNK[k]).slice(0, 40), place: String(p.exp.place), phase: ['aller', 'fouille', 'retour'].includes(p.exp.phase) ? p.exp.phase : 'retour', from: Number(p.exp.from) || 0, until: Number(p.exp.until) || 0, loot: Object.fromEntries(Object.entries(p.exp.loot || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])), found: (p.exp.found || []).map(String).filter(f => (f[0] === 't' && TOOLS[f.slice(2)]) || (f[0] === 'p' && ITEMS[f.slice(2)])), letters: cleanLetters(p.exp.letters), ...(p.exp.hurt ? {hurt: true} : {})} : null,
+                job: JOBS.includes(p.job) ? p.job : 'libre', ...(AUTO[p.auto] ? {auto: p.auto} : {}), exp: p.where === 'dehors' && p.exp ? {route: (Array.isArray(p.exp.route) ? p.exp.route : [{id: p.exp.place}]).slice(0, 6).map(stepOf), i: clamp(Math.round(num(p.exp.i)), 0, 5), junk: (Array.isArray(p.exp.junk) ? p.exp.junk : []).filter(k => JUNK[k]).slice(0, 40), place: String(p.exp.place), phase: ['aller', 'fouille', 'retour'].includes(p.exp.phase) ? p.exp.phase : 'retour', from: Number(p.exp.from) || 0, until: Number(p.exp.until) || 0, loot: Object.fromEntries(Object.entries(p.exp.loot || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])), found: (p.exp.found || []).map(String).filter(f => (f[0] === 't' && TOOLS[f.slice(2)]) || (f[0] === 'p' && ITEMS[f.slice(2)])), letters: cleanLetters(p.exp.letters), ...(p.exp.hurt ? {hurt: true} : {})} : null,
                 mood: clamp(num(p.mood, 70), 0, 100), sk, era: ['ancien', 'moderne'].includes(p.era) ? p.era : '', from: str(p.from, 80), occ: str(p.occ, 60), by: Number(p.by) || 0,
                 ill: p.ill && ['fievre', 'blessure'].includes(p.ill.k) ? {k: p.ill.k, left: clamp(num(p.ill.left, 12), 0, 72), treated: !!p.ill.treated} : null,
                 kin: ids(p.kin), spouses: ids(p.spouses), baby: !!p.baby, parents: ids(p.parents).slice(0, 2), sulk: !!p.sulk, doing: ['creuser', 'construire', 'recycler', 'pedaler', 'garde'].includes(p.doing) ? p.doing : ''};
@@ -731,7 +757,8 @@
         c.name = String(c.name || 'la ville').slice(0, 80); c.size = SIZES[c.size] ? c.size : 'moyenne'; c.base = [Math.floor(c.n / 2), Math.floor(c.n / 2)];
         c.places = c.places.slice(0, 60).filter(pl => PLACE_KINDS[pl.kind]).map((pl, i) => ({id: String(pl.id || 'l' + (i + 1)).slice(0, 12), kind: pl.kind, name: String(pl.name || PLACE_KINDS[pl.kind][1]).slice(0, 120), x: clamp(Number(pl.x) || 0, 0, c.n - 1), y: clamp(Number(pl.y) || 0, 0, c.n - 1),
             stock: Object.fromEntries(Object.entries(pl.stock || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])), max: Object.fromEntries(Object.entries(pl.max || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])),
-            tools: (pl.tools || []).filter(k => TOOLS[k]), plans: Math.max(0, Number(pl.plans) || 0), visits: Number(pl.visits) || 0, seen: !!pl.seen, junk: (Array.isArray(pl.junk) ? pl.junk : []).filter(k => JUNK[k]).slice(0, 10), ...(pl.home ? {home: true} : {})}));
+            tools: (pl.tools || []).filter(k => TOOLS[k]), plans: Math.max(0, Number(pl.plans) || 0), visits: Number(pl.visits) || 0, seen: !!pl.seen, junk: (Array.isArray(pl.junk) ? pl.junk : []).filter(k => JUNK[k]).slice(0, 10), ...(pl.home ? {home: true} : {}),
+            ...(pl.known && typeof pl.known === 'object' ? {known: {d: Math.max(1, Number(pl.known.d) || 1), stock: Object.fromEntries(Object.entries(pl.known.stock || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Math.round(Number(n) || 0))])), junk: (Array.isArray(pl.known.junk) ? pl.known.junk : []).filter(k => JUNK[k]).slice(0, 10)}} : {})}));
         g.dig = {on: !!g.dig?.on, done: Math.max(0, Number(g.dig?.done) || 0)}; g.weather = {rain: !!g.weather?.rain, until: Number(g.weather?.until) || 0};
         g.power = !!g.power; g.powerOn = g.powerOn !== false; g.powerSrc = ['essence', 'soleil', 'vent', 'pedales', 'batteries'].includes(g.powerSrc) ? g.powerSrc : (g.power ? 'essence' : ''); g.wind = !!g.wind;
         g.over = !!g.over; g.speed = [0, 1, 2, 4].includes(g.speed) ? g.speed : 1; g.nextId = Math.max(Number(g.nextId) || 0, g.people.length + 1); g.seed = Number(g.seed) | 0;
@@ -757,6 +784,6 @@
     }
 
     root.LCNDA_BUNKER = {rainPerHour, SKILLS, SKILL_KEYS, skillsOf, SEASONS, SEASON_DAYS, seasonOf, HEIRLOOMS, JOBS, answerVisit, defense, NEEDS, DECAY, RES, RES_KEYS, ITEMS, TOOLS, PLACE_KINDS, SIZES, SLOTS, MAX_FLOORS, DIG_HOURS, BASE_PLANS, FOUND_PLANS,
-        JUNK, JUNK_KEYS, AUTO, recycle, setAuto, orderNeed, routeTime, carryOf, junkCap, junkCount, mult, sumOf, working,
+        JUNK, JUNK_KEYS, AUTO, stockFor, regen, stepOf, carryBonus, recycle, setAuto, orderNeed, routeTime, carryOf, junkCap, junkCount, mult, sumOf, working,
         newGame, step, run, orderBuild, cancelBuild, dismantle, setJob, send, recall, travel, check, cap, has, count, items, alive, hourOf, dayOf, isNight, clock};
 })();
