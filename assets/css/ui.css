@@ -538,3 +538,7 @@ html[data-toast-pos="tl"] .toast.ui-toast,html[data-toast-pos="tr"] .toast.ui-to
 .reg-a-tabs button { flex: 0 0 auto; }
 .reg-a-tabs button { padding: 0 16px; white-space: nowrap; }
 .reg-a-switch { margin-top: 10px; }
+/* l'éditeur « Réordonner » posé dans une page des Réglages (onglet Listes, ordre des pages) : toute la largeur, enregistré tout seul */
+.sg-panel { grid-column: 1 / -1; max-width: 860px; }
+.sg-inline .sg-inline-help { margin: 4px 0 10px; }
+.sg-inline .dash-reorder-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }

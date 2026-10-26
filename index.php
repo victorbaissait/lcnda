@@ -42,7 +42,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/tresors.css?v=9">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
-    <link rel="stylesheet" href="assets/css/ui.css?v=15">
+    <link rel="stylesheet" href="assets/css/ui.css?v=16">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
@@ -1178,7 +1178,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-pages.js?v=5" defer></script>
 <script src="assets/js/app-access.js?v=9" defer></script>
 <script src="assets/js/app-mode-simple.js?v=9" defer></script>
-<script src="assets/js/app-sidegroups.js?v=11" defer></script>
+<script src="assets/js/app-sidegroups.js?v=12" defer></script>
 <script src="assets/js/app-listes.js?v=39" defer></script>
 <script src="assets/js/app-maintenance.js?v=30" defer></script>
 <script src="assets/js/app-recherche.js?v=24" defer></script>

@@ -64,9 +64,11 @@
                 const sep = content.querySelector('[data-mt-minesep]'); if (sep) sep.hidden = !!sep.nextElementSibling?.hidden; }, {signal});
         }
         /** « Réordonner » : activer ou non les groupes, puis ranger (groupes ou liste simple) ; « Mes listes » à part, en bas */
-        function openDialog() {
+        function openDialog() { return editor(null); }
+        /** l'éditeur de rangement : dans une fenêtre (« Réordonner »), ou posé dans une page (host) et enregistré à chaque changement */
+        function editor(host) {
             let p = prefs(); const hid = hiddenSet(); let flat = cfg.flatOrder(), mine = mineOrdered().map(m => ({v: m[0], label: m[2], icon: m[1]}));
-            const what = cfg.what || 'pages', dialog = document.createElement('dialog'); dialog.className = 'modal dashboard-reorder-dialog mt-reorder';
+            const inline = !!host, what = cfg.what || 'pages', dialog = inline ? host : document.createElement('dialog'); if (!inline) dialog.className = 'modal dashboard-reorder-dialog mt-reorder'; else dialog.classList.add('mt-reorder', 'sg-inline');
             const vis = k => cfg.canHide ? `<label class="mt-vis" title="Afficher dans la colonne"><input type="checkbox" data-vis="${esc(k)}" ${hid.has(k) ? '' : 'checked'}></label>` : '';
             const arrows = (i, len) => `<button type="button" class="button small secondary" data-move="-1" aria-label="Monter" ${i ? '' : 'disabled'}>↑</button><button type="button" class="button small secondary" data-move="1" aria-label="Descendre" ${i < len - 1 ? '' : 'disabled'}>↓</button>`;
             const row = (k, num, i, len, extra = '') => `<li class="dashboard-reorder-row${hid.has(k) ? ' is-hidden-row' : ''}" data-ii="${i}">${vis(k)}<span class="order-number">${String(num).padStart(2, '0')}</span><b style="flex:1">${esc(cfg.label(k))}</b><span class="order-actions">${extra}${arrows(i, len)}</span></li>`;
@@ -81,9 +83,16 @@
                         <ol class="dashboard-reorder-list">${g.items.map((k, ii) => row(k, ++n, ii, g.items.length, `<select data-imove aria-label="Changer de groupe">${p.groups.map((x, xi) => `<option value="${xi}" ${xi === gi ? 'selected' : ''}>${esc(x.icon)} ${esc(x.label)}</option>`).join('')}</select>`)).join('') || '<li class="muted mt-empty">Groupe vide</li>'}</ol></section>`).join('')}`
                     : `<section class="mt-rgroup" data-flat><ol class="dashboard-reorder-list">${flat.map((k, i) => row(k, i + 1, i, flat.length)).join('')}</ol></section>`}
                     ${mine.length ? `<section class="mt-rgroup mt-rmine" data-mine><div class="mt-rghead"><span class="mt-ricon">⭐</span><b class="mt-rlabel">Mes listes</b><small class="muted">toujours en bas, à part : range-les entre elles</small></div><ol class="dashboard-reorder-list">${mine.map((m, i) => `<li class="dashboard-reorder-row" data-ii="${i}"><span class="order-number">${esc(m.icon)}</span><b style="flex:1">${esc(m.label)}</b><span class="order-actions">${arrows(i, mine.length)}</span></li>`).join('')}</ol></section>` : ''}`; };
-            dialog.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(cfg.eyebrow)}</span><h2>Réordonner les ${esc(what)}</h2><p>Range avec ↑ ↓${cfg.canHide ? ', coche ce qui s’affiche' : ''}, en groupes ou en une seule liste. Puis Enregistrer.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
+            dialog.innerHTML = inline ? `<p class="muted sg-inline-help">Range avec ↑ ↓${cfg.canHide ? ', coche ce qui s’affiche dans la colonne' : ''}, en groupes ou en une seule liste. <b>Enregistré tout seul.</b></p>
+                <div class="dash-reorder-tools" data-mt-tools></div><div class="mt-rbody" data-mt-body></div>`
+                : `<div class="modal-head"><div><span class="eyebrow">${esc(cfg.eyebrow)}</span><h2>Réordonner les ${esc(what)}</h2><p>Range avec ↑ ↓${cfg.canHide ? ', coche ce qui s’affiche' : ''}, en groupes ou en une seule liste. Puis Enregistrer.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
                 <div class="dash-reorder-tools" data-mt-tools></div><div class="mt-rbody" data-mt-body></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="button" data-save>Enregistrer</button></div>`;
-            document.body.append(dialog); draw();
+            if (!inline) document.body.append(dialog); draw();
+            /** dans une page : chaque changement est gardé tout de suite (sans redessiner l'éditeur) */
+            let quiet = 0;
+            const keep = () => { if (!inline) return; const all = cfg.allKeys(); if (cfg.canHide && all.every(k => hid.has(k))) { A().toast(`Garde au moins une ${what === 'listes' ? 'liste' : 'page'} visible.`, 'error'); return; }
+                save(p); cfg.setFlatOrder(flat); if (cfg.canHide) cfg.setHidden([...hid]); if (cfg.mineKey) writeJ(cfg.mineKey, mine.map(m => m.v)); clearTimeout(quiet); quiet = setTimeout(() => A().renderSidebar(), 60); };
+            if (inline) { dialog.addEventListener('change', () => setTimeout(keep, 0)); dialog.addEventListener('click', e => { if (e.target.closest('button')) setTimeout(keep, 0); }); }
             const sync = () => dialog.querySelectorAll('[data-gi]').forEach(s => { const g = p.groups[Number(s.dataset.gi)]; g.icon = s.querySelector('[data-gicon]').value.trim() || '📁'; g.label = s.querySelector('[data-glabel]').value.trim() || 'Groupe'; });
             const close = () => { dialog.close(); dialog.remove(); };
             dialog.addEventListener('change', e => { const t = e.target;
@@ -106,25 +115,27 @@
                     // les deux façons gardent leurs réglages : on enregistre l'une et l'autre
                     save(p); cfg.setFlatOrder(flat); if (cfg.canHide) cfg.setHidden([...hid]); if (cfg.mineKey) writeJ(cfg.mineKey, mine.map(m => m.v));
                     close(); A().renderSidebar(); refreshPanels(); A().toast(p.enabled ? 'Rangement en groupes enregistré.' : 'Rangement en une liste enregistré.'); } });
+            if (inline) return dialog;
             dialog.addEventListener('cancel', e => { if (e.target !== dialog) return; e.preventDefault(); close(); });
             dialog.showModal();
         }
         /** Réglages → Apparence : le même rangement, en résumé (case « Ranger en groupes » + « Réordonner… ») */
+        /** Réglages : le même rangement, posé dans la page (l'onglet « Listes » de « Menus, colonne et listes » et la page Apparence) */
         function panel(title) {
-            const p = prefs(), hid = hiddenSet(), mine = mineOrdered(), word = cfg.what === 'listes' ? 'liste' : 'page';
-            const plural = (n, w) => `${n} ${w}${n > 1 ? 's' : ''}`;
-            const body = p.enabled ? `<ol class="sg-sum">${p.groups.map(g => `<li><span>${esc(g.icon)}</span> ${esc(g.label)} <small class="muted">${g.items.filter(k => !hid.has(k)).length}</small></li>`).join('')}${mine.length ? `<li><span>⭐</span> Mes listes <small class="muted">${mine.length}, toujours en bas</small></li>` : ''}</ol>`
-                : `<p class="muted sg-sum">Une seule liste : ${plural(cfg.allKeys().length - hid.size, word)}${hid.size ? `, ${hid.size} cachée${hid.size > 1 ? 's' : ''}` : ''}${mine.length ? ` ; puis Mes listes (${mine.length}), toujours en bas` : ''}.</p>`;
-            return `<section class="maintenance-panel order-editor compact sg-panel" data-sg-panel="${esc(cfg.name)}"><h3>${esc(title)}</h3><label class="ui-toggle"><input type="checkbox" data-sg-enable ${p.enabled ? 'checked' : ''}><i></i>Ranger en groupes</label><small class="muted">Chaque façon garde ses réglages.</small>${body}<div class="page-actions action-zone"><button class="button small" type="button" data-sg-open>Réordonner…</button></div></section>`;
+            return `<section class="maintenance-panel order-editor sg-panel" data-sg-panel="${esc(cfg.name)}"><h3>${esc(title)}</h3><div data-sg-inline="${esc(cfg.name)}"></div></section>`;
         }
         function setEnabled(on) { const p = prefs(); p.enabled = !!on; save(p); }
-        const api = {prefs, render, openDialog, panel, setEnabled, title: cfg.panelTitle || 'Ordre'};
+        const api = {prefs, render, openDialog, editor, panel, setEnabled, title: cfg.panelTitle || 'Ordre'};
         if (cfg.name) inst[cfg.name] = api;
         return api;
     }
     const inst = {};
     /** les résumés d'Apparence se mettent à jour d'eux-mêmes */
-    const refreshPanels = () => document.querySelectorAll('[data-sg-panel]').forEach(el => { const i = inst[el.dataset.sgPanel]; if (i) el.outerHTML = i.panel(el.querySelector('h3')?.textContent || i.title); });
+    const refreshPanels = () => { document.querySelectorAll('[data-sg-panel]').forEach(el => { const i = inst[el.dataset.sgPanel]; if (i) el.outerHTML = i.panel(el.querySelector('h3')?.textContent || i.title); }); mountPanels(); };
+    /** les éditeurs posés dans une page : montés dès que leur place apparaît */
+    const mountPanels = () => document.querySelectorAll('[data-sg-inline]:not([data-sg-on])').forEach(el => { const i = inst[el.dataset.sgInline]; if (!i) return; el.dataset.sgOn = '1'; i.editor(el); });
+    const watch = () => { const ws = document.getElementById('workspace'); if (!ws) return setTimeout(watch, 300); new MutationObserver(() => { if (ws.querySelector('[data-sg-inline]:not([data-sg-on])')) mountPanels(); }).observe(ws, {childList: true, subtree: true}); mountPanels(); };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch); else watch();
     document.addEventListener('change', e => { const t = e.target; if (!t.matches?.('[data-sg-enable]')) return; const i = inst[t.closest('[data-sg-panel]')?.dataset.sgPanel]; if (!i) return; i.setEnabled(t.checked); A().renderSidebar(); refreshPanels(); A().toast(t.checked ? 'Rangé en groupes.' : 'Rangé en une seule liste.'); });
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-sg-open]'); if (!b) return; inst[b.closest('[data-sg-panel]')?.dataset.sgPanel]?.openDialog(); });
     make.instances = inst; make.refreshPanels = refreshPanels;
