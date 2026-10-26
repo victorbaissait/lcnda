@@ -151,3 +151,13 @@
 .bk-takeq{display:inline-flex;align-items:center;gap:2px}.bk-takeq input{width:58px;min-height:26px;padding:1px 4px;font-size:12px}
 .bk-seen{font-style:normal;opacity:.7;font-size:11px}
 .bk-known{margin:4px 0;padding:6px 8px;border-left:3px solid var(--ink,#111);background:rgba(0,0,0,.03);font-size:13px}.bk-known small{display:block}
+/* pannes, niveaux, tutoriel, caractères, progrès, journal, réglages */
+.bk-slot{position:relative}.bk-slot.is-broken{background:repeating-linear-gradient(135deg,#fff 0 8px,#ffe1d6 8px 16px);border-color:#c0392b}.bk-slot.is-broken .bk-ico{filter:grayscale(1);opacity:.6}
+.bk-brk{position:absolute;top:2px;right:4px;font-size:15px}.bk-lvl{position:absolute;top:2px;left:4px;font-size:10px;color:#c58b00;letter-spacing:-1px}
+.bk-tuto{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0;padding:6px 12px;background:#e8f1ff;border-bottom:var(--line);font-size:13px}
+.bk-event{animation:bkPulse 1.6s ease-in-out infinite}@keyframes bkPulse{50%{opacity:.4}}@media (prefers-reduced-motion:reduce){.bk-event{animation:none}}
+.bk-chip.is-trait{background:#f3ecff}
+.bk-xps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin:2px 0 6px}.bk-xp{display:inline-flex;align-items:center;gap:3px;position:relative;padding-bottom:3px}.bk-xp i{position:absolute;left:0;bottom:0;height:3px;background:#2f6fde;border-radius:2px;min-width:2px}
+.bk-diary li{padding:4px 0;border-bottom:1px dotted rgba(0,0,0,.15)}
+.bk-setup{border:1px dashed var(--line-color,#999);padding:8px 10px}.bk-setup summary{cursor:pointer}.bk-setup select{max-width:100%}
+.bk-optl small{display:block}

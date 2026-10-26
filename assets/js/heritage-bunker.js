@@ -51,6 +51,13 @@
                 <div class="bk-field"><span class="pk-lab">Dans quelle ville ?</span><div class="bk-city"><select name="bk_city"><option value="">…</option></select><input name="bk_city_txt" placeholder="ou tape un nom de ville" maxlength="80"></div></div>
                 <div class="bk-field"><span class="pk-lab">🧳 Le coffre de famille <small class="muted">(3 objets de ta base au plus : chacun donne un petit avantage)</small></span><div class="bk-coffre" data-bk-coffre><p class="muted">Lecture des objets de famille…</p></div></div>
                 <div class="bk-field"><span class="pk-lab">Taille de la ville</span><div class="segmented bk-size" role="radiogroup">${Object.entries(B().SIZES).map(([k, [n, nb, l]]) => `<label><input type="radio" name="bk_size" value="${k}" ${k === 'moyenne' ? 'checked' : ''}><span>${l} <small>${nb} lieux</small></span></label>`).join('')}</div></div>
+                <details class="bk-field bk-setup" open><summary class="pk-lab">⚙️ Réglages de la partie</summary>
+                    <div class="bk-field"><span class="pk-lab">Difficulté</span><div class="segmented bk-size" role="radiogroup">${Object.entries(B().DIFFS).map(([k, d]) => `<label><input type="radio" name="bk_diff" value="${k}" ${k === 'normal' ? 'checked' : ''}><span>${esc(d.l)}</span></label>`).join('')}</div></div>
+                    <div class="bk-field"><span class="pk-lab">Scénario</span><select name="bk_scen">${Object.entries(B().SCENARIOS).map(([k, [ico, l, d]]) => `<option value="${k}" title="${esc(d)}">${ico} ${esc(l)} — ${esc(d)}</option>`).join('')}</select></div>
+                    <label class="checkbox-line"><input type="checkbox" name="bk_meteo" checked> 🌪️ Météo et catastrophes <small class="muted">(canicule, tempête, inondation, séisme, orage, vague de froid : des installations à réparer)</small></label>
+                    <label class="checkbox-line"><input type="checkbox" name="bk_chaines"> 🧵 Chaînes de fabrication <small class="muted">(plantes → fil → tissu → vêtements chauds ; blé → farine → pain)</small></label>
+                    <label class="checkbox-line"><input type="checkbox" name="bk_tuto" ${Object.keys(s.games).length ? '' : 'checked'}> 📘 Tutoriel guidé <small class="muted">(les premiers pas, étape par étape)</small></label>
+                    <small class="muted">Tout se change aussi pendant la partie : onglet ⚙️ Réglages (sauf le scénario).</small></details>
                 <div class="bk-actions"><label class="button secondary bk-import">⤒ Ouvrir une partie (fichier)<input type="file" accept=".json,application/json" data-bk-import hidden></label><span class="spacer"></span><button type="submit" class="button">☢ Descendre dans le bunker</button></div>
             </form></div>`;
         dlg.querySelector('[data-bk-new]').addEventListener('submit', e => { e.preventDefault(); begin(e.target); });
@@ -107,7 +114,11 @@
         const coffre = [...form.querySelectorAll('[name="bk_obj"]:checked')].slice(0, 3).map(i => objs[Number(i.value)]).filter(Boolean).map(o => ({title: o.title, kind: o.kind, description: o.description}));
         const more = await fromTree(tr, [meId, ...teamIds].filter(Boolean), city);
         const month = new Date().getMonth(), season0 = month >= 2 && month <= 4 ? 0 : month >= 5 && month <= 7 ? 1 : month >= 8 && month <= 10 ? 2 : 3;
-        G = B().newGame({me: meId ? who(meId) : {name: form.elements.bk_me_txt?.value || 'Moi'}, team: teamIds.map(who), city: {name: city, size: form.elements.bk_size.value}, coffre, season0, ...more});
+        // les objets de famille qui ne sont pas dans le coffre : on peut les retrouver dans les ruines
+        const chosen = new Set([...form.querySelectorAll('[name="bk_obj"]:checked')].map(i => Number(i.value)));
+        const ruins = objs.filter((o, i) => !chosen.has(i)).sort(() => Math.random() - 0.5).slice(0, 12).map(o => ({title: o.title, kind: o.kind, description: o.description}));
+        const setup = {diff: form.elements.bk_diff?.value || 'normal', scen: form.elements.bk_scen?.value || 'classique', opt: {meteo: !!form.elements.bk_meteo?.checked, chaines: !!form.elements.bk_chaines?.checked, tuto: !!form.elements.bk_tuto?.checked}};
+        G = B().newGame({me: meId ? who(meId) : {name: form.elements.bk_me_txt?.value || 'Moi'}, team: teamIds.map(who), city: {name: city, size: form.elements.bk_size.value}, coffre, season0, ruins, ...setup, ...more});
         await locateCity(G.city);
         gid = 'b' + Date.now().toString(36); saveGame(gid, G, true); tab = 'gens'; placeSel = null; route = []; mapScroll = null; play();
     }
@@ -169,8 +180,8 @@
             <header class="bk-top"><b class="bk-title">☢ Le bunker de ${esc(meOf(G).name)}</b><span class="bk-clock" data-bk-clock></span><span class="bk-state" data-bk-state></span><span class="spacer"></span>
                 <div class="segmented bk-speed" role="group" aria-label="Vitesse">${[[0, '⏸', 'Pause (Espace)'], [1, '×1', '1 heure de jeu en 6 secondes'], [2, '×2', 'Deux fois plus vite'], [4, '×4', 'Quatre fois plus vite']].map(([v, l, t]) => `<button type="button" data-bk="speed" data-v="${v}" title="${t}">${l}</button>`).join('')}</div>
                 <button type="button" class="button small secondary" data-bk="gazette" title="Le journal de la partie">📰 Gazette</button><button type="button" class="button small" data-bk="save" data-shortcut="⌘S">💾 Enregistrer</button><button type="button" class="button small secondary" data-bk="export" title="Garder la partie dans un fichier">⤓ Exporter</button><button type="button" class="button small secondary" data-bk="menu">↩ Parties</button><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
-            <p class="bk-news" data-bk-news aria-live="polite"></p><div class="bk-visit" data-bk-visit hidden></div>
-            <div class="bk-main"><section class="bk-world" data-bk-world></section><aside class="bk-side"><div class="segmented bk-tabs" role="tablist">${[['gens', '👥 Habitants'], ['res', '📦 Réserves'], ['atelier', '🛠️ Atelier'], ['bric', '♻️ Bric-à-brac'], ['ville', '🗺️ Ville'], ['famille', '🌳 Famille'], ['radio', '📻 Radio']].map(([k, l]) => `<button type="button" role="tab" data-bk="tab" data-v="${k}">${l}</button>`).join('')}</div><div class="bk-sbody" data-bk-side></div></aside></div><div class="bk-gz" data-bk-gz hidden></div></div>`;
+            <p class="bk-news" data-bk-news aria-live="polite"></p><div class="bk-tuto" data-bk-tuto hidden></div><div class="bk-visit" data-bk-visit hidden></div>
+            <div class="bk-main"><section class="bk-world" data-bk-world></section><aside class="bk-side"><div class="segmented bk-tabs" role="tablist">${[['gens', '👥 Habitants'], ['res', '📦 Réserves'], ['atelier', '🛠️ Atelier'], ['bric', '♻️ Bric-à-brac'], ['ville', '🗺️ Ville'], ['famille', '🌳 Famille'], ['radio', '📻 Radio'], ['regl', '⚙️ Réglages']].map(([k, l]) => `<button type="button" role="tab" data-bk="tab" data-v="${k}">${l}</button>`).join('')}</div><div class="bk-sbody" data-bk-side></div></aside></div><div class="bk-gz" data-bk-gz hidden></div></div>`;
         drawAll(); go();
     }
     function go() { stop(); lastTick = performance.now(); acc = 0; timer = setInterval(tick, 200); }
@@ -195,10 +206,12 @@
         const night = B().isNight(G.t);
         c.textContent = `Jour ${B().dayOf(G.t)} · ${B().clock(G.t)}`;
         const S = B().SEASONS.find(x => x[0] === B().seasonOf(G)), src = {essence: 'groupe électrogène', soleil: 'panneau solaire', vent: 'éolienne', pedales: 'dynamo à pédales'}[G.powerSrc];
-        dlg.querySelector('[data-bk-state]').innerHTML = `<span title="${S[2]}${G.cold ? ' : il fait froid dans le bunker' : ''}">${S[1]}${G.cold ? '🥶' : ''}</span> <span title="${night ? 'Nuit' : 'Jour'}">${G.weather.rain ? '🌧️' : night ? '🌙' : '☀️'}</span> <span class="${G.power ? 'is-on' : 'is-off'}" title="${G.power ? `Électricité (${src})` : 'Pas d’électricité'}">${G.power ? ({soleil: '☀️⚡', vent: '🌬️⚡', pedales: '🚲⚡'}[G.powerSrc] || '⚡') : '🔌'}</span>${G.air < 30 ? ' <span title="L’air est lourd">🌀</span>' : ''}`;
+        dlg.querySelector('[data-bk-state]').innerHTML = `<span title="${S[2]}${G.cold ? ' : il fait froid dans le bunker' : ''}">${S[1]}${G.cold ? '🥶' : ''}</span> <span title="${night ? 'Nuit' : 'Jour'}">${G.weather.rain ? '🌧️' : night ? '🌙' : '☀️'}</span>${G.event ? ` <span class="bk-event" title="${esc(B().EVENTS[G.event.k][1])} : ${esc(B().EVENTS[G.event.k][2])}">${B().EVENTS[G.event.k][0]}</span>` : ''}${Object.keys(G.broken || {}).length ? ` <span title="${Object.keys(G.broken).length} installation(s) en panne">🔧${Object.keys(G.broken).length}</span>` : ''} <span class="${G.power ? 'is-on' : 'is-off'}" title="${G.power ? `Électricité (${src})` : 'Pas d’électricité'}">${G.power ? ({soleil: '☀️⚡', vent: '🌬️⚡', pedales: '🚲⚡'}[G.powerSrc] || '⚡') : '🔌'}</span>${G.air < 30 ? ' <span title="L’air est lourd">🌀</span>' : ''}`;
         drawVisit();
         dlg.querySelectorAll('[data-bk="speed"]').forEach(b => { const on = Number(b.dataset.v) === G.speed; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on); });
         dlg.querySelectorAll('[data-bk="tab"]').forEach(b => { const on = b.dataset.v === tab; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', on); });
+        const tu = dlg.querySelector('[data-bk-tuto]'), T = B().TUTO;
+        if (tu) { const on = G.tuto >= 0 && G.tuto < T.length && !G.over; tu.hidden = !on; const sig = on ? String(G.tuto) : ''; if (tu.dataset.sig !== sig) { tu.dataset.sig = sig; tu.innerHTML = on ? `<span><b>📘 Tutoriel ${G.tuto + 1} / ${T.length}</b> ${esc(T[G.tuto][0])}</span><button type="button" class="button small secondary" data-bk="tutoskip">Passer le tutoriel</button>` : ''; } }
         const last = G.log[0]; dlg.querySelector('[data-bk-news]').innerHTML = last ? `<span class="bk-t">${B().clock(last.t)}</span> ${esc(last.txt)}` : '';
     }
 
@@ -244,8 +257,9 @@
                 <span class="bk-ground"><span class="bk-trap${G.visit ? ' is-knock' : ''}" title="${G.visit ? 'Quelqu’un frappe à la trappe !' : 'La trappe'}">${G.visit ? '🔔' : '▦'}</span></span></div>
             <div class="bk-floors">${G.floors.map((f, fi) => `<div class="bk-floor"><span class="bk-flabel">−${fi + 1}</span><div class="bk-slots">${f.slots.map((k, si) => {
                 const it = k && B().ITEMS[k], bd = building.get(`${fi},${si}`), who = at.get(`${fi},${si}`) || [];
-                if (it) return `<button type="button" class="bk-slot is-item${!G.power && (['radio', 'atelier', 'douche', 'potager'].includes(k) || it.power) ? ' is-dark' : ''}" data-bk="slot" data-f="${fi}" data-s="${si}" title="${esc(it.name)} — ${esc(it.desc)}"><span class="bk-ico">${it.ico}</span><span class="bk-name">${esc(it.name)}</span><span class="bk-who">${who.map(pawn).join('')}</span></button>`;
-                if (bd) return `<button type="button" class="bk-slot is-building" data-bk="slot" data-f="${fi}" data-s="${si}" title="En construction : ${esc(B().ITEMS[bd.b.k].name)}"><span class="bk-ico">${B().ITEMS[bd.b.k].ico}</span><span class="bk-name">${esc(B().ITEMS[bd.b.k].name)}</span><span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / B().ITEMS[bd.b.k].h))}%"></i></span></button>`;
+                const key = `${fi},${si}`, brk = !!G.broken?.[key], L = G.lvl?.[key] || 1, wk = bd && (bd.b.rep || bd.b.up);
+                if (it) return `<button type="button" class="bk-slot is-item${!G.power && (['radio', 'atelier', 'douche', 'potager'].includes(k) || it.power) ? ' is-dark' : ''}${brk ? ' is-broken' : ''}" data-bk="slot" data-f="${fi}" data-s="${si}" title="${esc(it.name)}${L > 1 ? ` (niveau ${L})` : ''}${brk ? ' — EN PANNE : clique pour réparer' : ''} — ${esc(it.desc)}"><span class="bk-ico">${it.ico}</span><span class="bk-name">${esc(it.name)}</span>${L > 1 ? `<span class="bk-lvl">${'★'.repeat(L)}</span>` : ''}${brk ? '<span class="bk-brk" aria-label="En panne">🔧</span>' : ''}${wk ? `<span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || 1)))}%"></i></span>` : ''}<span class="bk-who">${who.map(pawn).join('')}</span></button>`;
+                if (bd) return `<button type="button" class="bk-slot is-building" data-bk="slot" data-f="${fi}" data-s="${si}" title="En construction : ${esc(B().ITEMS[bd.b.k].name)}"><span class="bk-ico">${B().ITEMS[bd.b.k].ico}</span><span class="bk-name">${esc(B().ITEMS[bd.b.k].name)}</span><span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || B().ITEMS[bd.b.k].h)))}%"></i></span></button>`;
                 return `<button type="button" class="bk-slot is-empty" data-bk="slot" data-f="${fi}" data-s="${si}" title="Place libre : construire ici">＋</button>`;
             }).join('')}</div>${fi === 0 ? `<div class="bk-hall" title="Ceux qui attendent">${(at.get('hall') || []).map(pawn).join('')}</div>` : ''}</div>`).join('')}
             ${G.floors.length < B().MAX_FLOORS ? `<button type="button" class="bk-dig" data-bk="digpanel" title="Mettre des habitants à creuser (onglet Habitants)"><span>⛏️ ${G.dig.done > 0 ? 'Étage en cours de creusement' : 'Creuser un étage'}</span><span class="bk-bar"><i style="width:${Math.round(100 * G.dig.done / B().DIG_HOURS)}%"></i></span><span class="bk-who">${(at.get('dig') || []).map(pawn).join('')}</span></button>` : '<p class="muted bk-deep">Le bunker ne peut pas descendre plus bas.</p>'}</div>
@@ -260,7 +274,7 @@
     function drawSide() {
         const s = dlg.querySelector('[data-bk-side]'); if (!s) return;
         const keep = s.scrollTop, mw = s.querySelector('.bk-mapwrap.is-big'), mk = mw ? [mw.scrollLeft, mw.scrollTop] : mapScroll;
-        s.innerHTML = tab === 'gens' ? sideGens() : tab === 'res' ? sideRes() : tab === 'atelier' ? sideAtelier() : tab === 'bric' ? sideBric() : tab === 'ville' ? sideVille() : tab === 'famille' ? sideFamille() : sideRadio();
+        s.innerHTML = tab === 'gens' ? sideGens() : tab === 'res' ? sideRes() : tab === 'atelier' ? sideAtelier() : tab === 'bric' ? sideBric() : tab === 'ville' ? sideVille() : tab === 'famille' ? sideFamille() : tab === 'regl' ? sideRegl() : sideRadio();
         s.scrollTop = keep;
         // une grande carte garde où on en était ; la première fois, elle se centre sur le bunker
         const w2 = s.querySelector('.bk-mapwrap.is-big');
@@ -268,18 +282,23 @@
     }
     const AUTO_L = [['prudent', '🟢 Prudente (dès que la barre baisse)'], ['normal', '🟡 Normale'], ['manuel', '🔴 Manuelle (à la dernière minute ; je donne les ordres)']];
     function sideGens() {
+        const dp = diaryOf && G.people.find(x => x.id === diaryOf); if (dp) return diaryHtml(dp);
         return `<div class="bk-autobar"><label>🧍 Autonomie de tout le monde <select data-bk-auto="">${AUTO_L.map(([v, l]) => `<option value="${v}" ${G.auto === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
             <small class="muted">Chacun va de soi-même boire, manger, aux toilettes, se laver ou dormir quand sa barre descend : 🟢 prudente = dès qu’elle passe sous la moitié, 🟡 normale = vers un tiers, 🔴 manuelle = seulement à la toute dernière minute (c’est vous qui donnez les ordres). Les boutons 💧🍞🚽🧼💤 de chacun donnent un ordre tout de suite.</small></div>` + G.people.map(p => {
             const out = p.where === 'dehors', pl = out && G.city.places.find(x => x.id === p.exp?.place);
             const status = p.hp <= 0 ? '☠️ mort·e' : out ? `🚶 ${p.exp.phase === 'aller' ? 'en route vers' : p.exp.phase === 'fouille' ? 'fouille' : 'rentre de'} ${esc(pl?.name || '')}` : esc(pawn(p).match(/title="[^:]*: ([^"]*)"/)?.[1] || '');
             const skills = B().SKILLS.filter(([k]) => (p.sk?.[k] || 1) > 1).map(([k, ico, l]) => `<span class="bk-chip" title="${esc(l)} : ${Math.round(((p.sk[k] || 1) - 1) * 100)} % de mieux">${ico} ${esc(l)}</span>`).join('');
             const ties = [...(p.spouses || []).map(id => ['💞', id]), ...(p.kin || []).map(id => ['👪', id])].map(([ico, id]) => { const o = G.people.find(x => x.id === id); return o ? `<span class="bk-chip" title="${ico === '💞' ? 'En couple' : 'De la même famille'} : le moral tient mieux quand on est ensemble">${ico} ${esc(o.name.split(' ')[0])}</span>` : ''; }).join('');
+            const traits = (p.traits || []).map(k => B().TRAITS[k]).filter(Boolean).map(([ico, l, d]) => `<span class="bk-chip is-trait" title="${esc(d)}">${ico} ${esc(l)}</span>`).join('');
+            const rel = G.people.filter(o => o !== p && o.hp > 0).map(o => [o, B().relOf(G, p, o)]).filter(([, v]) => Math.abs(v) >= 25).map(([o, v]) => `<span class="bk-chip${v < 0 ? ' is-bad' : ''}" title="${v > 0 ? 'Ami·e : le moral tient mieux ensemble' : 'Ne se supportent plus : ça mine le moral'}">${v > 0 ? '🤝' : '😠'} ${esc(o.name.split(' ')[0])}</span>`).join('');
+            const xp = B().SKILLS.map(([k, ico, l]) => { const x = p.xp?.[k] || 0, cur = p.sk?.[k] || 1, need = 12 + 32 * (cur - 1); return x > 0.5 ? `<span class="bk-xp" title="${esc(l)} ×${cur.toFixed(1).replace('.', ',')} : ${Math.floor(x)} h / ${Math.round(need)} h de pratique avant le prochain progrès">${ico} ${Math.min(99, Math.round(100 * x / need))} %<i style="width:${Math.min(100, Math.round(100 * x / need))}%"></i></span>` : ''; }).join('');
             const feud = G.feud?.includes(p.id) ? (() => { const o = G.people.find(x => x.id === G.feud.find(i => i !== p.id)); return o ? `<span class="bk-chip is-bad" title="Une vieille brouille de famille">⚡ ${esc(o.name.split(' ')[0])}</span>` : ''; })() : '';
             const jobs = [['libre', 'Rien de spécial'], ['creuser', '⛏️ Creuser'], ['construire', '🔨 Construire'], ['recycler', '♻️ Démonter le bric-à-brac'], ['garde', '🛡️ Monter la garde'], ...(B().has(G, 'dynamo') ? [['pedaler', '🚲 Pédaler (électricité)']] : [])];
             return `<div class="bk-person${p.hp <= 0 ? ' is-dead' : ''}"><div class="bk-p-head">${pawn(p)}<div><b>${esc(p.name)}${p.me ? ' <small>(toi)</small>' : ''}${p.baby ? ' <small>(bébé)</small>' : ''}</b><small>${status}${p.ill && p.hp > 0 ? ` · ${p.ill.k === 'fievre' ? '🤒 fièvre' : '🩹 blessure'}${p.ill.treated ? ' (soignée)' : ''}` : ''}</small>${p.from ? `<small class="muted">${esc(p.from)}</small>` : ''}</div></div>
-                ${skills || ties || feud ? `<div class="bk-chips">${skills}${ties}${feud}</div>` : ''}
+                ${traits || skills || ties || feud || rel ? `<div class="bk-chips">${traits}${skills}${ties}${rel}${feud}</div>` : ''}
+                ${xp && !p.baby ? `<div class="bk-xps" title="Ce qu’il ou elle apprend en pratiquant">📈 <small class="muted">progrès :</small> ${xp}</div>` : ''}
                 <div class="bk-needs"><span>❤️ Vie</span>${bar(p.hp, 'is-hp')}<span>😊 Moral</span>${bar(p.mood ?? 70, 'is-mood')}${B().NEEDS.map(([k, ico, l]) => `<span>${ico} ${l}</span>${bar(p.needs[k])}`).join('')}</div>
-                ${p.hp > 0 && !out && !p.baby ? `<div class="bk-p-actions"><label>Travail <select data-bk-job="${esc(p.id)}">${jobs.map(([v, l]) => `<option value="${v}" ${p.job === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-bk="sendfrom" data-id="${esc(p.id)}">🚶 Envoyer en ville</button></div>
+                ${p.hp > 0 && !out && !p.baby ? `<div class="bk-p-actions"><label>Travail <select data-bk-job="${esc(p.id)}">${jobs.map(([v, l]) => `<option value="${v}" ${p.job === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-bk="sendfrom" data-id="${esc(p.id)}">🚶 Envoyer en ville</button><button type="button" class="button small secondary" data-bk="diary" data-id="${esc(p.id)}">📔 Journal${p.diary?.length ? ` (${p.diary.length})` : ''}</button></div>
                 <div class="bk-p-actions bk-orders"><label title="Quand il ou elle va de soi-même boire, manger, aux toilettes…">Autonomie <select data-bk-auto="${esc(p.id)}"><option value="">comme tout le monde</option>${AUTO_L.map(([v, l]) => `<option value="${v}" ${p.auto === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                     <span class="bk-order-btns" role="group" aria-label="Lui dire de">${[['soif', '💧', 'Boire'], ['faim', '🍞', 'Manger'], ['vessie', '🚽', 'Toilettes'], ['hygiene', '🧼', 'Se laver'], ['sommeil', '💤', 'Dormir']].map(([k, ico, l]) => `<button type="button" class="icon-button small" data-bk="need" data-id="${esc(p.id)}" data-v="${k}" title="${l} maintenant" aria-label="${l} maintenant">${ico}</button>`).join('')}</span></div>` : ''}${p.sulk ? '<p class="ui-notice is-error">😞 Plus de moral : refuse de travailler (jeux, musique, histoires du soir…).</p>' : ''}</div>`;
         }).join('');
@@ -287,7 +306,7 @@
     function sideRes() {
         const row = ([r, ico, l, u]) => { const c = B().cap(G, r); return `<span>${ico} ${l}</span><b>${Math.floor(G.res[r])}${u ? ' ' + u : ''} <small>/ ${c}</small></b>${bar(100 * G.res[r] / c)}`; };
         return `<h4>Réserves</h4><div class="bk-res">${B().RES.slice(0, 10).map(row).join('')}</div>
-            <h4>Composants</h4><div class="bk-res">${B().RES.slice(10).map(row).join('')}</div><p class="muted">Les composants viennent surtout du ♻️ bric-à-brac qu’on démonte (et de certains lieux : droguerie, électroménager, usine…).</p>
+            <h4>Composants</h4><div class="bk-res">${B().RES.slice(10, 20).map(row).join('')}</div>${G.opt?.chaines ? `<h4>Fabrication</h4><div class="bk-res">${B().RES.slice(20).map(row).join('')}</div><p class="muted">Plantes → 🧶 rouet → fil → 🪢 métier à tisser → tissu → 🧥 tailleur → vêtements chauds (l’hiver, le froid fait bien moins de mal). Blé → ⚙️ moulin → farine → 🍞 four à pain.</p>` : ''}<p class="muted">Les composants viennent surtout du ♻️ bric-à-brac qu’on démonte (et de certains lieux : droguerie, électroménager, usine…).</p>
             <p class="muted">Plus de place : étagères, stockage, garde-manger, citerne, cuves. L’eau de pluie passe au ⚗️ filtre avant d’être bue (sinon : risque de fièvre).</p>
             ${B().has(G, 'filtre') ? `<p>${G.filterClog ? '⚗️ <b>Filtre encrassé</b> : il faut 1 tissu.' : `⚗️ Filtre : ${Math.round(G.filterUse)} / 30 L avant de le nettoyer (1 tissu).`}</p>` : ''}
             <h4>Air</h4><div class="bk-res"><span>🌀 Conduit d’aération</span><b>${Math.round(G.air)} %</b>${bar(G.air)}</div><p class="muted">Il s’encrasse, plus vite quand on est nombreux ; quelqu’un de libre le nettoie. Air lourd : on dort mal, le moral baisse.</p>
@@ -298,7 +317,7 @@
     }
     function sideAtelier() {
         const IT = B().ITEMS;
-        return `<h4>En construction</h4>${G.builds.length ? `<ol class="bk-builds">${G.builds.map((b, i) => `<li>${IT[b.k].ico} ${esc(IT[b.k].name)} <small>étage −${b.fi + 1} · encore ${Math.max(0, Math.ceil(b.left * 10) / 10)} h</small><button type="button" class="icon-button small" data-bk="unbuild" data-i="${i}" title="Annuler (les matériaux reviennent)" aria-label="Annuler">×</button></li>`).join('')}</ol>
+        return `<h4>En construction</h4>${G.builds.length ? `<ol class="bk-builds">${G.builds.map((b, i) => `<li>${b.rep ? '🔧 Réparer : ' : b.up ? `⬆️ Niveau ${b.up} : ` : ''}${IT[b.k].ico} ${esc(IT[b.k].name)} <small>étage −${b.fi + 1} · encore ${Math.max(0, Math.ceil(b.left * 10) / 10)} h</small><button type="button" class="icon-button small" data-bk="unbuild" data-i="${i}" title="Annuler (les matériaux reviennent)" aria-label="Annuler">×</button></li>`).join('')}</ol>
             ${!G.power ? '<p class="ui-notice is-error">Pas d’électricité : l’atelier est à l’arrêt.</p>' : ''}${!G.people.some(p => p.hp > 0 && p.where === 'base' && p.job === 'construire') ? '<p class="ui-notice">Personne n’est à l’atelier : mets quelqu’un sur « 🔨 Construire » (onglet Habitants).</p>' : ''}` : A().emptyState({icon: '🛠️', text: 'Rien en construction.', hint: 'Clique sur une place libre du bunker (＋), ou sur « Construire » ci-dessous.'})}
             <h4>Plans</h4><div class="segmented bk-planf" role="group" aria-label="Montrer">${[['ok', '✅ Je peux construire'], ['near', '🟡 Il manque peu'], ['known', '📐 Mes plans'], ['all', 'Tous'], ['find', '❔ À trouver']].map(([v, l]) => `<button type="button" data-bk="planf" data-v="${v}" class="${planF === v ? 'is-active' : ''}">${l}</button>`).join('')}</div>
             <div class="bk-plans">${plansHtml()}</div>`;
@@ -309,7 +328,7 @@
     function whereRes(r) { const J = B().JUNK, js = B().JUNK_KEYS.filter(k => J[k][2][r]).sort((a, b) => J[b][2][r] - J[a][2][r]).slice(0, 3).map(k => `${J[k][0]} ${J[k][1].toLowerCase()}`), ps = Object.entries(B().PLACE_KINDS).filter(([, v]) => v[2][r]).slice(0, 3).map(([, v]) => `${v[0]} ${v[1].toLowerCase()}`); return [...js.length ? [`à démonter : ${js.join(', ')}`] : [], ...ps.length ? [`en ville : ${ps.join(', ')}`] : []].join(' · '); }
     let planF = 'known';
     function plansHtml() {
-        const IT = B().ITEMS, keys = Object.keys(IT).filter(k => !IT[k].fixed), planPlaces = Object.values(B().PLACE_KINDS).filter(v => v[4]).map(v => `${v[0]} ${v[1].toLowerCase()}`).join(', ');
+        const IT = B().ITEMS, keys = Object.keys(IT).filter(k => !IT[k].fixed && (G.opt?.chaines || !IT[k].chain)), planPlaces = Object.values(B().PLACE_KINDS).filter(v => v[4]).map(v => `${v[0]} ${v[1].toLowerCase()}`).join(', ');
         const list = keys.map(k => ({k, n: needOf(k)})).filter(({n}) => planF === 'all' ? true : planF === 'find' ? n.plan : planF === 'ok' ? !n.plan && !n.miss.length && !n.tool : planF === 'near' ? !n.plan && (n.miss.length || n.tool) && n.miss.reduce((a, [, x, h]) => a + x - h, 0) <= 4 : !n.plan)
             .sort((a, b) => (a.n.plan - b.n.plan) || (a.n.miss.length - b.n.miss.length));
         if (!list.length) return `<p class="muted">${planF === 'ok' ? 'Rien de constructible tout de suite : regarde « 🟡 Il manque peu ».' : planF === 'find' ? 'Tous les plans sont trouvés !' : 'Rien ici.'}</p>`;
@@ -400,19 +419,46 @@
             </div>
             <footer class="bk-gz-foot"><button type="button" class="button small secondary" data-bk="gzprint">🖨 Imprimer</button></footer></div>`;
     }
+    /** ⚙️ les réglages de la partie en cours */
+    function sideRegl() {
+        const S = B().SCENARIOS[G.scen] || B().SCENARIOS.classique, o = G.opt || {};
+        const opt = (k, l, d) => `<label class="checkbox-line bk-optl"><input type="checkbox" data-bk-opt="${k}" ${o[k] ? 'checked' : ''}><span>${l}<small class="muted">${d.replace(/^— /, '')}</small></span></label>`;
+        return `<h4>Difficulté</h4><div class="segmented bk-planf" role="group">${Object.entries(B().DIFFS).map(([k, d]) => `<button type="button" data-bk="diff" data-v="${k}" class="${G.diff === k ? 'is-active' : ''}">${esc(d.l)}</button>`).join('')}</div>
+            <p class="muted">Plus difficile : on a faim et soif plus vite, moins de réserves au départ, des pillards plus forts, plus de pannes, et la ville se remplit moins vite.</p>
+            <h4>Options</h4>${opt('meteo', '🌪️ Météo et catastrophes', '— canicule, tempête de poussière, inondation, séisme, orage, vague de froid')}${opt('chaines', '🧵 Chaînes de fabrication', '— rouet, métier à tisser, tailleur ; champ, moulin, four à pain')}${opt('tuto', '📘 Tutoriel guidé', G.tuto >= 0 ? `— étape ${G.tuto + 1} / ${B().TUTO.length}` : '— (le cocher le recommence)')}
+            <h4>Scénario</h4><p>${S[0]} <b>${esc(S[1])}</b> — ${esc(S[2])}</p>
+            ${G.event ? `<h4>En ce moment</h4><p>${B().EVENTS[G.event.k][0]} <b>${esc(B().EVENTS[G.event.k][1])}</b> : ${esc(B().EVENTS[G.event.k][2])} (encore ${Math.max(1, Math.round((G.event.until - G.t) / 60))} h).</p>` : ''}
+            <h4>Pannes</h4><p class="muted">Les installations s’usent et tombent parfois en panne (🔧 sur le dessin). Clique dessus : « Réparer » (un quart de ce qu’elles ont coûté, puis du travail à l’atelier). Le même menu propose « Améliorer » (niveau 2 puis 3 : leurs effets comptent ×1,5 puis ×2).</p>
+            <p>${Object.keys(G.broken || {}).length ? `🔧 En panne : ${Object.keys(G.broken).map(k => { const [f, s2] = k.split(',').map(Number); return esc(B().ITEMS[G.floors[f].slots[s2]].name); }).join(', ')}.` : '✓ Rien en panne.'}</p>`;
+    }
     function sideRadio() {
         const out = G.people.filter(p => p.hp > 0 && p.where === 'dehors');
         return `${G.power ? '' : '<p class="ui-notice is-error">📻 Pas d’électricité : la radio est muette. Les messages arriveront quand le courant reviendra.</p>'}
             <h4>Dehors</h4>${out.length ? out.map(p => { const pl = G.city.places.find(x => x.id === p.exp.place); return `<div class="bk-radio-row">${pawn(p)}<div><b>${esc(p.name)}</b><small>${p.exp.phase === 'aller' ? 'en route vers' : p.exp.phase === 'fouille' ? 'fouille' : 'rentre de'} ${esc(pl?.name || '')}${p.exp.route?.length > 1 ? ` (étape ${p.exp.i + 1} / ${p.exp.route.length})` : ''} · ${p.exp.phase === 'retour' ? 'arrive' : 'jusqu’à'} ${B().clock(p.exp.until)}</small></div>${p.exp.phase !== 'retour' ? `<button type="button" class="button small secondary" data-bk="recall" data-id="${esc(p.id)}" ${G.power ? '' : 'disabled'}>📻 Rentre !</button>` : ''}</div>`; }).join('') : '<p class="muted">Tout le monde est au bunker.</p>'}
+            <h4>📻 Le marché de la radio</h4>${marketHtml()}
             <h4>Journal</h4><ol class="bk-log">${G.log.slice(0, 120).map(l => `<li class="is-${l.kind}"><span class="bk-t">J${B().dayOf(l.t)} ${B().clock(l.t)}</span> ${esc(l.txt)}</li>`).join('')}</ol>`;
     }
 
+    function marketHtml() {
+        const m = G.market || {offers: [], deals: []}, r = k => resName(k);
+        if (!B().has(G, 'radio')) return '<p class="muted">Sans radio, pas de marché.</p>';
+        return `<p class="muted">D’autres survivants proposent des échanges : on envoie tout de suite, un messager apporte la marchandise quelques heures plus tard (le plus souvent…). Les prix changent chaque matin.</p>
+            ${m.offers.length ? `<div class="bk-plans">${m.offers.map(o => { const ok = (G.res[o.want.r] || 0) >= o.want.n; return `<div class="bk-plan${ok ? ' is-can' : ''}"><span class="bk-ico">${r(o.give.r)[1]}</span><div><b>${o.give.n} ${esc(r(o.give.r)[2].toLowerCase())}</b><small>contre ${r(o.want.r)[1]} ${o.want.n} ${esc(r(o.want.r)[2].toLowerCase())} · ${esc(o.who)}</small>${ok ? '' : `<small class="bk-miss">Il manque ${Math.ceil(o.want.n - (G.res[o.want.r] || 0))} ${esc(r(o.want.r)[2].toLowerCase())}.</small>`}</div><span class="bk-btns"><button type="button" class="button small" data-bk="trade" data-id="${esc(o.id)}" ${ok && G.power ? '' : 'disabled'}>🤝 Accepter</button></span></div>`; }).join('')}</div>` : '<p class="muted">Plus d’offre aujourd’hui : de nouvelles demain matin (7 h).</p>'}
+            ${m.deals.length ? `<p>🚚 En route : ${m.deals.map(d => `${r(d.r)[1]} ${d.n} de ${esc(d.who)} (vers ${B().clock(d.t)})`).join(', ')}.</p>` : ''}`;
+    }
+    /** 📔 le journal d'un habitant (à la place de la liste, dans l'onglet Habitants) */
+    let diaryOf = '';
+    function diaryHtml(p) {
+        const list = (p.diary || []).map(d => `<li><span class="bk-t">Jour ${d.d}</span> ${esc(d.txt)}</li>`).join('');
+        return `<div class="bk-route-head"><h4>📔 Le journal de ${esc(p.name)}</h4><button type="button" class="button small secondary" data-bk="diary" data-id="">← Tous les habitants</button></div>
+            <ol class="bk-log bk-diary">${list || '<li class="muted">Rien d’écrit pour l’instant : il ou elle écrit chaque soir.</li>'}</ol>`;
+    }
     /* ═════════ Les clics ═════════ */
     function onClick(e) {
         const b = e.target.closest('[data-bk]'); if (!b || !dlg.contains(b)) return;
         const k = b.dataset.bk;
         if (k === 'close') { dlg.close(); return; }
-        if (k === 'resume') { const x = store().games[b.dataset.id]; if (!x) return; try { G = B().check(x.g); } catch (err) { toast(err.message, 'error'); return; } gid = b.dataset.id; tab = 'gens'; placeSel = null; route = []; mapScroll = null; play(); return; }
+        if (k === 'resume') { const x = store().games[b.dataset.id]; if (!x) return; try { G = B().check(x.g); } catch (err) { toast(err.message, 'error'); return; } gid = b.dataset.id; tab = 'gens'; placeSel = null; route = []; mapScroll = null; diaryOf = ''; play(); return; }
         if (k === 'delsave') { const id = b.dataset.id, name = store().games[id]?.name || ''; const del = () => { const s = store(); delete s.games[id]; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
             if (A()?.undoLocalChange) A().undoLocalChange(`Partie « Le bunker de ${name} » supprimée`, [KEY], del, () => { if (dlg && !G) startScreen(); }); else del(); startScreen(); return; }
         if (k === 'propose') { propose(b.closest('form')); return; }
@@ -441,6 +487,10 @@
         if (k === 'gzclose') { const gz = dlg.querySelector('[data-bk-gz]'); if (gz) gz.hidden = true; if (gzPaused && !G.over) setSpeed(gzPaused); gzPaused = 0; return; }
         if (k === 'gzprint') { const w = window.open('', '_blank'); if (!w) { toast('La fenêtre d’impression a été bloquée.', 'error'); return; } w.document.write(`<!doctype html><meta charset="utf-8"><title>La Gazette du Bunker</title><style>body{font:15px Georgia,serif;margin:24px;color:#111}h2{font:900 40px Georgia,serif;text-align:center;margin:4px 0;border-top:3px double #111;border-bottom:3px double #111}.bk-gz-mast{text-align:center}.bk-gz-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}h3{text-align:center;font-size:22px}h4{border-bottom:1px solid #111;margin:12px 0 6px}button{display:none}blockquote{font-style:italic;margin:6px 0 6px 10px}</style>${gazetteHtml()}`); w.document.close(); w.focus(); w.print(); return; }
         if (k === 'recall') { if (!B().recall(G, b.dataset.id)) toast('La radio ne passe pas (pas d’électricité ?).', 'error'); drawAll(); return; }
+        if (k === 'diff') { B().setDiff(G, b.dataset.v); drawAll(); return; }
+        if (k === 'trade') { const r = B().trade(G, b.dataset.id); if (!r.ok) toast(r.err, 'error'); drawAll(); return; }
+        if (k === 'diary') { diaryOf = b.dataset.id || ''; tab = 'gens'; drawTop(); drawSide(); const sb = dlg.querySelector('[data-bk-side]'); if (sb) sb.scrollTop = 0; return; }
+        if (k === 'tutoskip') { B().setOpt(G, 'tuto', false); drawAll(); return; }
         if (k === 'unbuild') { B().cancelBuild(G, Number(b.dataset.i)); drawAll(); return; }
         if (k === 'build') { const spot = firstFree(); if (!spot) { toast('Plus de place libre : creuse un étage (⛏️).', 'error'); return; } order(b.dataset.k, ...spot); return; }
         if (k === 'slot') { slotMenu(b, Number(b.dataset.f), Number(b.dataset.s)); }
@@ -448,6 +498,7 @@
     let sendFor = '', gzPaused = 0;
     function onChange(e) {
         const j = e.target.closest('[data-bk-job]'); if (j && G) { B().setJob(G, j.dataset.bkJob, j.value); drawAll(); return; }
+        const op = e.target.closest('[data-bk-opt]'); if (op && G) { B().setOpt(G, op.dataset.bkOpt, op.checked); drawAll(); return; }
         const sw = e.target.closest('[data-bk-sendwho]'); if (sw && G) { sendFor = sw.value; drawSide(); return; }
         const qi = e.target.closest('[data-bk-qty]'); if (qi && G) { const st = route.find(x => x.id === qi.dataset.id); if (st) { const n = Math.round(Number(qi.value)); st.qty = {...(st.qty || {})}; if (n > 0) st.qty[qi.dataset.bkQty] = Math.min(999, n); else delete st.qty[qi.dataset.bkQty]; if (!Object.keys(st.qty).length) delete st.qty; } drawSide(); return; }
         const au = e.target.closest('[data-bk-auto]'); if (au && G) { B().setAuto(G, au.value, au.dataset.bkAuto || null); drawAll(); return; }
@@ -463,10 +514,16 @@
             const it = IT[k];
             if (k === 'radio') { tab = 'radio'; drawTop(); drawSide(); return; }
             if (k === 'atelier') { tab = 'atelier'; drawTop(); drawSide(); return; }
-            if (k === 'generateur') { tab = 'res'; drawTop(); drawSide(); return; }
-            items = [{icon: it.ico, label: it.name, help: it.desc, disabled: true}, '-', {icon: '🔧', label: 'Démonter', help: 'on récupère la moitié des matériaux', run: () => { B().dismantle(G, fi, si); drawAll(); }}];
+            if (k === 'generateur' && !G.broken?.[`${fi},${si}`]) { tab = 'res'; drawTop(); drawSide(); return; }
+            const key = `${fi},${si}`, L = G.lvl?.[key] || 1, brk = !!G.broken?.[key], busyB = bi >= 0, txt = c => Object.entries(c).map(([r, q]) => `${q} ${resName(r)[2].toLowerCase()}`).join(', ');
+            const run = f => () => { const r = f(G, fi, si); if (!r.ok) toast(r.err, 'error'); drawAll(); };
+            items = [{icon: it.ico, label: `${it.name}${L > 1 ? ` · niveau ${L}` : ''}${brk ? ' · EN PANNE' : ''}`, help: it.desc, disabled: true}, '-',
+                ...(brk ? [{icon: '🔧', label: busyB ? 'Réparation commandée' : 'Réparer', help: txt(B().repairCost(k)), disabled: busyB, run: run(B().orderRepair)}] : []),
+                ...(B().upgradable(k) && L < 3 && !brk ? [{icon: '⬆️', label: busyB ? 'Amélioration commandée' : `Améliorer (niveau ${L + 1})`, help: `effets ×${L === 1 ? '1,5' : '2'} · ${txt(B().upgradeCost(k, L + 1))}`, disabled: busyB, run: run(B().orderUpgrade)}] : []),
+                ...(busyB ? [{icon: '×', label: 'Annuler la commande', help: 'les matériaux reviennent', run: () => { B().cancelBuild(G, bi); drawAll(); }}] : []),
+                {icon: '🪓', label: 'Démonter', help: brk ? 'en panne : on récupère un tiers des matériaux' : 'on récupère la moitié des matériaux', run: () => { B().dismantle(G, fi, si); drawAll(); }}];
         } else if (bi >= 0) items = [{icon: '×', label: `Annuler « ${IT[G.builds[bi].k].name} »`, help: 'les matériaux reviennent', run: () => { B().cancelBuild(G, bi); drawAll(); }}];
-        else items = G.plans.map(p => { const it = IT[p], miss = Object.entries(it.cost || {}).some(([r, n]) => (G.res[r] || 0) < n) || (it.tool && !G.tools.includes(it.tool));
+        else items = G.plans.filter(p => G.opt?.chaines || !IT[p].chain).map(p => { const it = IT[p], miss = Object.entries(it.cost || {}).some(([r, n]) => (G.res[r] || 0) < n) || (it.tool && !G.tools.includes(it.tool));
             const n = needOf(p); return {icon: it.ico, label: it.name, help: miss ? `il manque : ${[...n.miss.map(([r, q, h]) => `${q - h} ${resName(r)[2].toLowerCase()}`), ...(n.tool ? [B().TOOLS[n.tool][1]] : [])].join(', ')}` : Object.entries(it.cost || {}).map(([r, q]) => `${q} ${resName(r)[2].toLowerCase()}`).join(', ') + (it.tool ? ` · ${B().TOOLS[it.tool][1]}` : ''), disabled: miss, run: () => order(p, fi, si)}; }).sort((x, y) => x.disabled - y.disabled);
         if (menu) menu(btn, items, {title: k ? '' : 'Construire ici'}); else if (!k && bi < 0) order(G.plans[0], fi, si);
     }

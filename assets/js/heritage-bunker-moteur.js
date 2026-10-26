@@ -206,14 +206,15 @@
         inondation: ['🌊', 'Inondation', 'l’eau entre par le bas : une installation de l’étage le plus profond est abîmée'], seisme: ['🫨', 'Tremblement de terre', 'des installations sont abîmées, on peut se blesser'],
         orage: ['⛈️', 'Orage électrique', 'la foudre grille un appareil électrique'], froid: ['🥶', 'Vague de froid', 'il fait froid même hors de l’hiver : chauffage et vêtements']};
     /** 📘 le tutoriel (option des réglages) : [ce qu'il faut faire, quand c'est fait] */
+    const built = (g, k) => g.floors.some(f => f.slots.includes(k)) || g.builds.some(b => b.k === k);
     const TUTO = [
-        ['🚽 Construis des toilettes : clique sur une place libre ＋ du bunker, puis « Toilettes ».', g => has(g, 'toilettes') || g.builds.some(b => b.k === 'toilettes')],
-        ['🔨 Mets quelqu’un sur « Construire » (onglet 👥 Habitants) : la construction avance à l’atelier.', g => has(g, 'toilettes') || g.people.some(p => p.job === 'construire')],
-        ['🛏️ Construis un lit : on dort deux fois mieux.', g => has(g, 'lit') || g.builds.some(b => b.k === 'lit')],
+        ['🚽 Construis des toilettes : clique sur une place libre ＋ du bunker, puis « Toilettes ».', g => built(g, 'toilettes') || g.builds.some(b => b.k === 'toilettes')],
+        ['🔨 Mets quelqu’un sur « Construire » (onglet 👥 Habitants) : la construction avance à l’atelier.', g => g.floors.some(f => f.slots.includes('toilettes')) || g.people.some(p => p.job === 'construire')],
+        ['🛏️ Construis un lit : on dort deux fois mieux.', g => built(g, 'lit')],
         ['⛏️ Mets quelqu’un à « Creuser » : un nouvel étage, c’est six places de plus.', g => g.dig.on || g.floors.length > 1],
         ['🗺️ Envoie quelqu’un en ville : onglet 🗺️ Ville, clique sur un lieu, choisis ce qu’il rapporte, puis « Partir ».', g => g.people.some(p => p.where === 'dehors') || g.city.places.some(pl => pl.visits)],
         ['♻️ Démonte un objet du bric-à-brac (onglet ♻️ Bric-à-brac) : on en tire des composants.', g => (g.stats.recycled || 0) > 0 || g.recy.length > 0],
-        ['⚗️ Construis un filtre à eau : l’eau de pluie devient potable.', g => has(g, 'filtre') || g.builds.some(b => b.k === 'filtre')],
+        ['⚗️ Construis un filtre à eau : l’eau de pluie devient potable.', g => built(g, 'filtre')],
         ['🛠️ Regarde l’onglet 🛠️ Atelier : chaque plan dit ce qu’il manque et où le trouver.', g => dayOf(g.t) >= 2 || has(g, 'jeux') || g.builds.length > 1],
         ['🌙 Tiens jusqu’au jour 3 : surveille les barres de chacun, et le moral.', g => dayOf(g.t) >= 3]];
     /** 📻 le commerce par radio : la valeur de chaque chose (le marché la fait varier chaque jour) */
