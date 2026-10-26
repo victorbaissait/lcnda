@@ -231,9 +231,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await toDesigns(page); await page.waitForSelector('.lcd-page .lcd-toc');
             assert.equal(await page.locator('.lcd-toc-i').count(), 4, 'A1 à A8 sans A4, A5, A6 ni A8 (A8 Listes : Menus, colonne et listes)');
             assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5, #lcd-a4, #lcd-a6, #lcd-a8').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs), ni A4 (Fiches personnes et animaux), ni A6 (Notifications et boutons)');
-            assert.equal(await page.locator('[data-lcd-notifs]').count(), 1, 'la petite ligne vers Notifications et boutons (A6)');
-            assert.equal(await page.locator('[data-lcd-fiches]').count(), 1, 'la petite ligne vers Fiches personnes et animaux (A4)');
-            assert.equal(await page.locator('[data-lcd-trees]').count(), 1, 'le lien vers les cases des arbres');
+            assert.equal(await page.locator('[data-lcd-notifs], [data-lcd-fiches], [data-lcd-trees], .lcd-intro').count(), 0, 'plus de cadres bleus d’explication en haut');
             assert.equal(await page.locator('details.lcd-sec[open]').count(), 0, 'tout fermé');
             assert.match(await page.locator('#lcd-a1 > summary').innerText(), /^🎨\s*Style général\s*—\s*Comme avant/);
             await page.click('[data-lcd-go="a1"]');
@@ -280,7 +278,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.match(await anim(), /^(0s|1e-0\d*s|0\.00\d*s)$/, 'Réduire les animations : rien ne bouge');
             await page.evaluate(() => document.documentElement.classList.remove('a11y-calm'));
             // A5 est dans Graphiques → 🎨 Couleurs des stats et des arbres : la couleur des hommes y est celle des portraits (K7)
-            await toDesigns(page); await page.click('[data-lcd-trees]');
+            await page.evaluate(() => window.LCNDA_APP.openStatsColorsDialog());
             await page.waitForSelector('#stats-colors-dialog[open] #tree-cards-panel [data-tc-v="genre"]');
             await page.click('#tree-cards-panel [data-tc-v="genre"]');
             await page.evaluate(() => { const i = document.querySelector('#stats-colors-dialog [name="gender_male_color"]'); i.value = '#123456'; i.dispatchEvent(new Event('input', {bubbles: true})); });

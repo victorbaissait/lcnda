@@ -362,11 +362,11 @@ echo 'ok';`);
                 await toPerson(page, 1); await page.click('[data-fsec-unown]');
                 await page.waitForFunction(() => localStorage.getItem('genealogie-person-blocks-1') === null);
             });
-            await t('A4 a déménagé : petite ligne dans Designs au choix, cadre « Forme de l’en-tête » dans Fiches, toujours appliqué', async () => {
+            await t('A4 a déménagé : plus dans Designs au choix, cadre « Forme de l’en-tête » dans Fiches, toujours appliqué', async () => {
                 await page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); });
                 await page.waitForSelector('.lcd-page .lcd-toc');
                 assert.equal(await page.locator('#lcd-a4').count(), 0); assert.equal(await page.locator('[data-lcd-go="a4"]').count(), 0);
-                await page.click('[data-lcd-fiches]');
+                await page.evaluate(() => window.LCNDA_SECTIONS?.openSheetsPage ? window.LCNDA_SECTIONS.openSheetsPage('lc-person-header') : null);
                 await page.waitForSelector('#lc-person-header #lcd-a4-emb [data-lcd-v="acte"]', {timeout: 15000});
                 assert.equal(await page.locator('#lcd-a4-emb [data-lcd-v]').count(), 4);
                 const pos = await page.evaluate(() => { const a = document.getElementById('lcd-a4-emb'), o = [...document.querySelectorAll('#lc-person-header h3')].find(h => /Ordre et visibilité des boutons/.test(h.textContent)); return !!(a.compareDocumentPosition(o) & Node.DOCUMENT_POSITION_PRECEDING); });

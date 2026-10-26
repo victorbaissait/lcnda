@@ -267,7 +267,6 @@
 
 /* ═════════════════════════ La page Réglages → 🎨 Designs au choix ═════════════════════════ */
 .lcd-page { --lcd-acc: var(--blue-bright, #055dff); }
-.lcd-intro { margin: -10px 0 18px; max-width: 980px; }
 .lcd-intro .link-button, .lcd-link .link-button { font-weight: 800; color: var(--blue); text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
 .lcd-toc ol { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
 .lcd-toc-i { width: 100%; display: flex; gap: 10px; align-items: center; text-align: left; border: 2px solid var(--ink); background: var(--card-bg, #fff); padding: 9px 11px; cursor: pointer; box-shadow: var(--shadow-small); color: var(--ink); }
