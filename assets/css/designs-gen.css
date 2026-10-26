@@ -1576,6 +1576,8 @@
 :root[data-lc-density] .ui-ph-menu > *{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ui-ph-menu > *{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp)) !important}
 :root[data-lc-density] dialog.modal.h-dg-gallery > .modal-actions:last-child{padding:calc(12px * var(--lc-sp)) calc(22px * var(--lc-sp))}
+:root[data-lc-sh="douces"][data-lc-col-look="icones"] #sidebar-content :is(.side-menu-item, .person-list-item, .saved-item, .dashboard-widget-catalog-item).is-active{box-shadow:var(--lc-sh-m)}
+:root[data-lc-sh="aucune"][data-lc-col-look="icones"] #sidebar-content :is(.side-menu-item, .person-list-item, .saved-item, .dashboard-widget-catalog-item).is-active{box-shadow:none}
 :root[data-lc-sh="douces"] .lck-choice:hover{box-shadow:var(--lc-sh-m)}
 :root[data-lc-sh="aucune"] .lck-choice:hover{box-shadow:none}
 :root[data-lc-sh="douces"] .lck-f-pick{box-shadow:var(--lc-sh-m)}
@@ -1588,6 +1590,12 @@
 :root[data-lc-sh="aucune"] .lck-c-item.is-active{box-shadow:none}
 :root[data-lc-sh="douces"] .lck-c-cards div{box-shadow:var(--lc-sh-s)}
 :root[data-lc-sh="aucune"] .lck-c-cards div{box-shadow:none}
+:root[data-lc-sh="douces"] .st-icones .lck-c-item.is-active{box-shadow:var(--lc-sh-m)}
+:root[data-lc-sh="aucune"] .st-icones .lck-c-item.is-active{box-shadow:none}
+:root[data-lc-sh="douces"] .lck-ms i{box-shadow:var(--lc-sh-s)}
+:root[data-lc-sh="aucune"] .lck-ms i{box-shadow:none}
+:root[data-lc-sh="douces"] .lck-ms .s{box-shadow:var(--lc-sh-s)}
+:root[data-lc-sh="aucune"] .lck-ms .s{box-shadow:none}
 @media (max-width: 560px){
   :root[data-lc-sh="douces"] .lck-panel{box-shadow:var(--lc-sh-m)}
   :root[data-lc-sh="aucune"] .lck-panel{box-shadow:none}
@@ -3818,6 +3826,7 @@
 :root[data-lc-density] .h-tr-card{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tr-card{padding:calc(14px * var(--lc-sp)) calc(16px * var(--lc-sp))}
 :root[data-lc-mhover="off"] .h-tr-card:hover{transform:none}
+:root[data-lc-density] .h-tr-top{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tr-body{gap:calc(14px * var(--lc-sp))}
 :root[data-lc-density] .h-tr-row{gap:calc(8px * var(--lc-sp)) calc(14px * var(--lc-sp))}
 :root[data-lc-density] .h-tr-row > label{gap:calc(3px * var(--lc-sp))}
@@ -3880,6 +3889,15 @@
 :root[data-lc-density] .h-trw-gz header{padding-bottom:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-trw-gz ul{padding-left:calc(18px * var(--lc-sp))}
 :root[data-lc-density] .h-trw-cfg{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-trw-list{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-trw-clues{padding-left:calc(20px * var(--lc-sp))}
+:root[data-lc-density] .h-trw-clues{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-trw-day{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-trw-grow{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-trw-grow{padding-top:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-trw-grow div{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-r] .h-trw-grow i{border-radius:var(--lc-r)}
+:root[data-lc-density] .h-trw-amb{gap:calc(6px * var(--lc-sp))}
 /* diagrams.css */
 :root[data-lc-r] .diagram-person{border-radius:var(--lc-r)}
 :root[data-lc-density] .diagram-person{padding:calc(9px * var(--lc-sp))}

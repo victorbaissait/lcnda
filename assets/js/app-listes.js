@@ -25,7 +25,9 @@
         current: () => state.listType, eyebrow: 'LISTES', what: 'listes', searchPh: 'Chercher une liste…'});
     function renderListSidebar(content,footer){
         LG.render(content, sidebarSignal());
-        footer.innerHTML='<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="list-reorder" title="En groupes ou en une seule liste, l’ordre, ce qui s’affiche, Mes listes">Réordonner</button></div><small class="muted">Recherche et export des données</small>';$('#list-reorder')?.addEventListener('click',()=>LG.openDialog(),{signal:sidebarSignal()});
+        footer.innerHTML='<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="list-reorder" title="Réglages › Menus, colonne et listes › Listes : en groupes ou en une seule liste, l’ordre, ce qui s’affiche">Réordonner</button></div><small class="muted">Recherche et export des données</small>';$('#list-reorder')?.addEventListener('click',()=>{const A=window.LCNDA_APP;
+            // un seul réglage : « Réordonner » amène sur Réglages › Menus, colonne et listes › Listes (la petite fenêtre reste pour l'ancienne présentation)
+            if(A.reglagesA?.()){state.regATab={...(state.regATab||{}),nav_menus:'Listes'};state.maintenanceTab='nav_menus';A.setModule('maintenance');}else LG.openDialog();},{signal:sidebarSignal()});
         content.addEventListener('click',async event=>{const item=event.target.closest('[data-side-value]');if(item){state.listType=item.dataset.sideValue;state.precisePlaceKey='';renderSidebar();await renderList();}},{signal:sidebarSignal()});
     }
     const LIST_CARD_TYPES=['persons','events','places','media','census','reminders','research_budget','signatures','sosa','daboville','archives','external_links','courriers','changes'];

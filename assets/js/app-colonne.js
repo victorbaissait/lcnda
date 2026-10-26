@@ -1,15 +1,16 @@
-/* LCNDA — ▤ K15 : la colonne de gauche réglable, et le cadre « Portraits et colonne de gauche » de l'Apparence.
+/* LCNDA — ▤ K15 : la colonne de gauche réglable, et les cadres « Portraits et avatars » et « Colonne de gauche » des Réglages.
  *
  * 1. Colonne de gauche (toutes les colonnes : Personnes, Graphiques, Carte, Listes, Recherche, Enquêtes, Comparaison,
  *    Chronologie, Fiches, ADN, Réglages, Tableau de bord…)
- *    localStorage['genealogie-left-column'] = {mode: 'avant'|'nouveau', style: 'boutons'|'continue'|'aeree', nums,
+ *    localStorage['genealogie-left-column'] = {mode: 'avant'|'nouveau', style: 'boutons'|'continue'|'aeree'|'plat'|'barre'|'pastilles'|'classeur'|'icones'|'doux', nums,
  *      numstyle: 'origine'|'suite', tabs: 'avant'|'ligne'|'dessus'|'texte', size: 'normale'|'compacte', width (240–420), lf: 'bas'|'barre'}
  *    « Comme avant » (par défaut) : rien ne change. Sinon des attributs sur :root (data-lc-col-*) pour les styles (app.css),
  *    et un petit passage sur #sidebar-content après chaque dessin de la colonne : numéros qui se suivent, onglets
  *    « icône + nom », « Liste | Fiches » posé dans la barre au-dessus de la liste (le bouton d'origine reste caché dans
  *    la colonne et reçoit le clic : l'outil ne voit aucune différence).
- * 2. Réglages → Apparence : onglets « 👤 Portraits » (K7, app-portraits.js) et « ▤ Colonne de gauche » (K15),
- *    d'après la maquette validée (grandes cartes à choisir, « Réglages en plus » avec leur « Pourquoi ? », aperçu, ↺).
+ * 2. Réglages : « Portraits et avatars » (une seule forme pour tout, puis le portrait K7, app-portraits.js) et, dans
+ *    « Menus, colonne et listes » › Colonne, « Où ? » et « Le dessin de la colonne » (maquette validée docs/design/apparence-simplifiee.html :
+ *    « Partir de » Comme avant / Nouveau, chaque choix en image, aperçu, ↺).
  */
 (() => {
     'use strict';
@@ -25,15 +26,17 @@
     const KEY = 'genealogie-left-column';
     const PRESETS = {
         avant: {style: 'boutons', nums: true, numstyle: 'origine', tabs: 'avant', size: 'normale', width: 320, lf: 'bas'},
-        nouveau: {style: 'continue', nums: true, numstyle: 'suite', tabs: 'ligne', size: 'normale', width: 320, lf: 'barre'},
+        nouveau: {style: 'boutons', nums: true, numstyle: 'suite', tabs: 'ligne', size: 'normale', width: 320, lf: 'barre'},
     };
     const CKEYS = Object.keys(PRESETS.avant);
+    const STYLES = ['boutons', 'continue', 'aeree', 'plat', 'barre', 'pastilles', 'classeur', 'icones', 'doux'];
+    const FRAMED = ['continue', 'aeree']; // tout dans un seul cadre (data-lc-col-style) ; les autres dessinent chaque entrée (data-lc-col-look)
     function clean(raw) {
         const r = raw && typeof raw === 'object' ? raw : {};
         const mode = r.mode === 'nouveau' ? 'nouveau' : 'avant', b = PRESETS[mode];
         const w = Number(r.width);
         return {mode,
-            style: ['boutons', 'continue', 'aeree'].includes(r.style) ? r.style : b.style,
+            style: STYLES.includes(r.style) ? r.style : b.style,
             nums: typeof r.nums === 'boolean' ? r.nums : b.nums,
             numstyle: ['origine', 'suite'].includes(r.numstyle) ? r.numstyle : b.numstyle,
             tabs: ['avant', 'ligne', 'dessus', 'texte'].includes(r.tabs) ? r.tabs : b.tabs,
@@ -53,7 +56,8 @@
     function apply() {
         const S = read(), root = document.documentElement, on = S.mode !== 'avant' || CKEYS.some(k => S[k] !== PRESETS.avant[k]);
         const set = (n, v) => (v ? root.setAttribute(n, v) : root.removeAttribute(n));
-        set('data-lc-col-style', on && S.style !== 'boutons' ? S.style : '');
+        set('data-lc-col-style', on && FRAMED.includes(S.style) ? S.style : '');
+        set('data-lc-col-look', on && S.style !== 'boutons' && !FRAMED.includes(S.style) ? S.style : '');
         set('data-lc-col-nums', on && !S.nums ? 'off' : '');
         set('data-lc-col-tabs', on && S.tabs !== 'avant' ? S.tabs : '');
         set('data-lc-col-size', on && S.size === 'compacte' ? 'compacte' : '');
@@ -131,12 +135,10 @@
     }
     if (!watch()) document.addEventListener('DOMContentLoaded', watch, {once: true});
 
-    window.LCNDA_COLUMN = {KEY, PRESETS, read, write, clean, apply, decorate};
+    window.LCNDA_COLUMN = {KEY, PRESETS, STYLES, read, write, clean, apply, decorate};
     apply();
 
-    /* ═════════════════ 2. Réglages → Apparence : « 👤 Portraits » et « ▤ Colonne de gauche » ═════════════════ */
-    const TAB_KEY = 'lcnda-apparence-k-tab';
-    const tabNow = () => { try { return localStorage.getItem(TAB_KEY) === 'colonne' ? 'colonne' : 'portraits'; } catch (_) { return 'portraits'; } };
+    /* ═════════════════ 2. Réglages : « Portraits et avatars » et « Colonne de gauche » ═════════════════ */
     const PHOTO = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9b48a"/><stop offset="1" stop-color="#7d6440"/></linearGradient></defs><rect width="100" height="100" fill="url(#g)"/><circle cx="50" cy="40" r="19" fill="#5b4428"/><path d="M14 100c4-24 18-34 36-34s32 10 36 34z" fill="#3e2d1a"/><path d="M31 37c2-16 36-16 38 0c-6-8-32-8-38 0z" fill="#2c1f12"/></svg>').replace(/\(/g, '%28').replace(/\)/g, '%29');
     const PEOPLE = {
         joseph: {first_name: 'Joseph', last_name: 'MARTIN', gender: 'male', y: '1952–2010', sosa: 1, meta: '° 25 mai 1952 Naves · † 24 avril 2010'},
@@ -172,7 +174,6 @@
         {k: 'rond', t: 'Rond unique', tag: 'Nouveau', tagc: 'new', why: [['👍', '<b>Un seul dessin partout</b>, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil.'], ['👍', 'Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu).']]},
         {k: 'carre', t: 'Le carré de la fiche, partout', tag: 'Nouveau', tagc: 'new', why: [['👍', '<b>Le style « archive »</b> de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée.'], ['👍', 'Va avec les blocs de l’app (traits noirs, coins droits). Plus sobre, moins coloré.']]},
     ];
-    const SHAPES = [['rond', 'Rond', 'border-radius:50%'], ['arrondi', 'Carré arrondi', 'border-radius:22%'], ['carre', 'Carré', ''], ['penche', 'Carré penché', 'transform:rotate(-6deg)']];
     const PKEYS = () => Object.keys(P().PRESETS.rond);
     const isModP = (S, D) => PKEYS().some(k => S[k] !== D[k]);
     const why = t => `<p class="lck-why"><b>Pourquoi ?</b> ${t}</p>`;
@@ -180,15 +181,18 @@
     const range = (id, min, max, step, unit, def) => `<div class="lck-c3"><input type="range" id="${id}" min="${min}" max="${max}" step="${step}" data-unit="${unit}" data-default="${def}" aria-label="${unit}"></div>`;
     const color = (key, label) => `<label class="lck-c2"><span>${label}</span><input type="color" data-lck-color="${key}" aria-label="${esc(label)}"></label>`;
 
+    /** « Portraits et avatars » : 1 · la forme (une seule, partout), 2 · le portrait (partir d'un modèle, puis affiner) */
     function portraitsPageHtml() {
-        return `<div class="lck-panel"><div class="lck-panel-head"><div><h3><span class="lck-step">1</span>Quel portrait veux-tu ?</h3><p class="muted">Le rond ou carré qui montre une personne : sur sa fiche, dans les listes, le menu de choix, l’arbre et les pastilles.</p></div><span class="lck-saved" data-lck-saved="p"></span></div>
-            <div class="lck-choices" id="lck-p-choices"></div>
+        return `<div class="lck-panel"><div class="lck-panel-head"><div><h3><span class="lck-step">1</span>La forme</h3><p class="muted">Une seule, qui vaut partout : la fiche, les listes, l’arbre, le menu de choix et les petits carrés numérotés des blocs.</p></div><span class="lck-saved" data-lck-saved="s"></span></div>
+            <div class="lck-shapes-row" id="lck-shapes" role="group" aria-label="La forme"></div>
+            <div class="lck-shape-slot" data-lck-shape-slot></div>
+            <div class="lck-where" id="lck-where"></div></div>
+            <div class="lck-panel"><div class="lck-panel-head"><div><h3><span class="lck-step">2</span>Le portrait</h3><p class="muted">Le rond ou carré qui montre une personne : ses couleurs, sa photo, ses initiales.</p></div><span class="lck-saved" data-lck-saved="p"></span></div>
+            <div class="lck-start" id="lck-p-start"></div>
             <div class="lck-settings" id="lck-p-settings"><div>
-                <h3 class="lck-h"><span class="lck-step">2</span>Réglages en plus</h3>
-                <div class="ui-notice ui-notice-info lck-off-note" id="lck-p-off" role="status"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Avec « Comme avant », chaque endroit garde son propre dessin : ces réglages ne s’appliquent pas. Choisis le rond unique ou le carré de la fiche pour les utiliser.</span></div>
+                <div class="ui-notice ui-notice-info lck-off-note" id="lck-p-off" role="status"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Avec « Comme avant », chaque endroit garde son propre dessin (la forme ci-dessus s’applique quand même aux petits carrés numérotés et aux initiales des fiches). Pars du rond unique ou du carré de la fiche pour utiliser ces réglages.</span></div>
                 <div class="lck-set-list" id="lck-p-list">
-                    <div class="lck-set"><div class="lck-row"><span class="lck-lab">Forme</span><div class="lck-shapes" id="lck-p-shape"></div></div>${why('Le rond est doux et se repère vite dans une liste serrée. Le carré rappelle une photo d’identité collée sur une fiche d’archive. Le carré penché reprend le style des numéros de l’app.')}</div>
-                    <div class="lck-set" id="lck-p-radius-set"><div class="lck-row"><label for="lck-p-radius">Arrondi des coins</label>${range('lck-p-radius', 0, 45, 1, '%', 20)}</div>${why('Un peu d’arrondi adoucit le carré sans le confondre avec un rond. Seulement pour « Carré arrondi ». Double-clic sur le curseur : valeur de départ.')}</div>
+                    <div class="lck-set" id="lck-p-radius-set"><div class="lck-row"><label for="lck-p-radius">Arrondi des coins</label>${range('lck-p-radius', 0, 45, 1, '%', 20)}</div>${why('Un peu d’arrondi adoucit le carré sans le confondre avec un rond. Seulement pour la forme « Carré arrondi ». Double-clic sur le curseur : valeur de départ.')}</div>
                     <div class="lck-set"><div class="lck-row"><label for="lck-p-init">Taille des initiales</label>${range('lck-p-init', 28, 60, 1, '%', 40)}</div>${why('Plus grandes, elles se lisent mieux de loin et sur les petits ronds ; plus petites, le portrait paraît plus calme. Le chiffre est une part de la taille du portrait, donc ça reste juste aux 4 tailles.')}</div>
                     <div class="lck-set"><div class="lck-row"><label for="lck-p-bw">Bord</label><div class="lck-stack">${range('lck-p-bw', 0, 4, .5, 'px', 0)}<div id="lck-p-bc-slot">${color('bc', 'Couleur du bord')}</div></div></div>${why('Un bord noir va avec les blocs de l’app (tous ont un trait noir de 2 px) ; sans bord, c’est plus léger. Sur les plus petits portraits, le bord s’affine tout seul.')}</div>
                     <div class="lck-set"><div class="lck-row"><label for="lck-p-cmode">Couleurs</label><select id="lck-p-cmode"><option value="plein">Couleur du genre, fond plein (lettres blanches)</option><option value="pale">Couleur du genre, fond pâle (lettres de couleur)</option><option value="unique">Une seule couleur pour tous (comme la fiche)</option></select></div>
@@ -219,7 +223,7 @@
         const tabs = `<div class="lck-c-tabs${tabsMode === 'dessus' ? ' over' : tabsMode === 'ligne' ? ' line' : ''}" style="grid-template-columns:repeat(${T.tabs.length},1fr)">${T.tabs.map(([i, nm], x) => `<span class="${x === 0 ? 'is-active' : ''}" title="${nm}">${tabsMode === 'texte' ? nm : tabsMode === 'dessus' ? `<em>${i}</em>${nm}` : `<em>${i}</em><b>${nm}</b>`}</span>`).join('')}</div>`;
         let n = 0, body = '';
         T.groups.forEach(([g, items]) => {
-            const gl = g || (st !== 'boutons' ? T.first : ''); if (gl) body += `<div class="lck-c-sec">${esc(gl)}</div>`;
+            const gl = g || (FRAMED.includes(st) ? T.first : ''); if (gl) body += `<div class="lck-c-sec">${esc(gl)}</div>`;
             items.forEach(([orig, label, act]) => { n++; const num = S.numstyle === 'suite' ? String(n).padStart(2, '0') : orig; body += `<div class="lck-c-item${act ? ' is-active' : ''}">${S.nums ? `<i>${num}</i>` : ''}<span>${esc(label)}</span></div>`; });
         });
         if (T.more) body += `<div class="lck-c-more">${S.numstyle === 'suite' ? T.moreNew : T.more}</div>`;
@@ -232,62 +236,78 @@
         return `<div class="lck-c-main"><div class="lck-h10"><span class="lck-s">🔍 Chercher…</span><span class="lck-b">Filtrer ▾</span>${S.lf === 'barre' ? '<span class="lck-lf"><span>Liste</span><span class="is-active">Fiches</span></span>' : ''}<span class="lck-b">Trier : récentes ▾</span></div><div class="lck-c-cards"><div></div><div></div><div></div><div></div><div></div><div></div></div></div>`;
     }
     const C_CARDS = [
-        {k: 'avant', t: 'Comme avant', tag: 'Par défaut', tagc: '', why: [['👍', '<b>Rien ne bouge</b> : tes repères restent (lettres A, B…, S1…, onglets de chaque outil).'], ['👎', 'Numéros dans le désordre sur la Carte (H avant F), onglets dessinés de 3 façons, « Liste | Fiches » loin de la liste.']]},
-        {k: 'nouveau', t: 'Nouveau', tag: 'Nouveau', tagc: 'new', why: [['👍', '<b>Une liste continue dans un seul cadre</b>, comme un sommaire : lignes collées, entrée choisie en bandeau bleu, numéros qui se suivent (01, 02, 03…).'], ['👍', 'Mêmes onglets dans tous les outils (icône + nom sur une ligne) ; « Liste | Fiches » dans la barre au-dessus de la liste, comme dans les Listes.']]},
+        {k: 'avant', t: 'Comme avant', why: 'Lettres d’origine (A, H, S1…), les onglets de chaque outil, « Liste | Fiches » en bas de la colonne'},
+        {k: 'nouveau', t: 'Nouveau', why: 'Numéros qui se suivent (01, 02, 03…), les mêmes onglets partout (icône + nom), « Liste | Fiches » dans la barre au-dessus de la liste'},
     ];
+    /* les choix en images (maquette validée « Apparence simplifiée ») : [valeur, nom, petite ligne, dessin] */
+    const MS = c => `<span class="lck-ms ${c}"><i></i><i class="s"></i><i></i></span>`;
+    const C_GROUPS = {
+        style: ['Style des entrées', 'lck-vis3', [['boutons', 'Boutons encadrés', 'par défaut', MS('btn')], ['continue', 'Liste continue', 'tout dans un cadre', MS('cont')], ['aeree', 'Liste aérée', 'plus d’espace', MS('air')],
+            ['plat', 'Boutons sans ombre', 'encadrés, à plat', MS('flat')], ['barre', 'Barre de côté', 'un trait bleu à gauche', MS('bar')], ['pastilles', 'Pastilles arrondies', 'coins ronds', MS('pill')],
+            ['classeur', 'Onglets de classeur', 'l’entrée choisie dépasse', MS('tabsx')], ['icones', 'Cartes avec repère', 'le numéro dans un carré', MS('ico')], ['doux', 'Fond doux', 'sans cadre, tout en douceur', MS('soft')]]],
+        tabs: ['Onglets du haut', 'lck-vis4', [['avant', 'Comme avant', 'chaque outil le sien', '<span class="lck-mt"><em>Carte</em><em>🔎</em><em>▦ Vues</em></span>'], ['ligne', 'Icône + nom', 'sur une ligne', '<span class="lck-mt"><em>🗺 Carte</em><em>📌 Lieux</em></span>'],
+            ['dessus', 'Icône au-dessus', 'du nom', '<span class="lck-mt col"><em>🗺<br>Carte</em><em>📌<br>Lieux</em></span>'], ['texte', 'Nom seul', 'sans icône', '<span class="lck-mt"><em>Carte</em><em>Lieux</em></span>']]],
+        nums: ['Numéros', 'lck-vis3', [['suite', 'Qui se suivent', '', '<span class="lck-mn">01 · 02 · 03</span>'], ['origine', 'Lettres d’origine', '', '<span class="lck-mn">01 · A · S1</span>'], ['aucun', 'Pas de numéros', '', '<span class="lck-mn">—</span>']]],
+        size: ['Taille des entrées', 'lck-vis2', [['normale', 'Normale', '', '<span class="lck-mz"><i></i><i></i><i></i></span>'], ['compacte', 'Compacte', '', '<span class="lck-mz c"><i></i><i></i><i></i><i></i><i></i></span>']]],
+        lf: ['« Liste | Fiches »', 'lck-vis2', [['barre', 'Dans la barre au-dessus', 'juste au-dessus de la liste', '<span class="lck-ml"><b>Liste | Fiches</b><i></i><i></i></span>'], ['bas', 'En bas de la colonne', 'là où il était', '<span class="lck-ml"><i></i><i></i><b>Liste | Fiches</b></span>']]],
+    };
+    const numsOf = S => (S.nums ? S.numstyle : 'aucun');
+    const vcHtml = (g, v, name, sub, pic, on) => `<button type="button" class="lck-vc${on ? ' is-active' : ''}" data-lck-c="${g}" data-v="${v}" aria-pressed="${on}" aria-label="${esc(C_GROUPS[g][0])} : ${esc(name)}">${pic}<span>${esc(name)}</span>${sub ? `<small>${esc(sub)}</small>` : ''}</button>`;
     function columnPageHtml() {
-        return `<div class="lck-panel"><div class="lck-panel-head"><div><h3><span class="lck-step">1</span>Quelle colonne de gauche veux-tu ?</h3><p class="muted">La colonne des outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Comparaison…</p></div><span class="lck-saved" data-lck-saved="c"></span></div>
-            <div class="lck-choices two" id="lck-c-choices"></div>
+        return `<div class="lck-panel"><div class="lck-panel-head"><div><h3>Où ?</h3><p class="muted">La colonne, à gauche ou à droite de l’écran.</p></div><span class="lck-saved" data-lck-saved="w"></span></div>
+            <div class="lck-vis lck-vis2 lck-vis-side" id="lck-c-side"></div></div>
+            <div class="lck-panel"><div class="lck-panel-head"><div><h3>Le dessin de la colonne</h3><p class="muted">Chaque choix se voit : clique, l’aperçu suit. Pour les outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Listes, Réglages…</p></div><span class="lck-saved" data-lck-saved="c"></span></div>
             <div class="lck-settings"><div>
-                <h3 class="lck-h"><span class="lck-step">2</span>Réglages en plus</h3>
-                <p class="muted lck-sub">Ils marchent avec les deux choix. Si tu en changes un, la carte choisie affiche « retouché ».</p>
-                <div class="lck-set-list">
-                    <div class="lck-set"><div class="lck-row"><label for="lck-c-style">Style des entrées</label><select id="lck-c-style"><option value="boutons">Boutons encadrés (comme avant)</option><option value="continue">Liste continue (nouveau)</option><option value="aeree">Liste aérée</option></select></div>${why('Les boutons encadrés se cliquent comme des touches, mais chaque entrée prend de la place et la colonne paraît chargée. La liste continue tient dans un seul cadre, comme un sommaire : plus d’entrées visibles d’un coup, et la ligne bleue de l’entrée choisie saute aux yeux. La liste aérée enlève aussi les traits et laisse plus d’espace : c’est la plus calme à lire, mais il faut un peu plus faire défiler.')}</div>
-                    <div class="lck-set"><div class="lck-row"><span class="lck-lab">Numéros</span>${tog('lck-c-nums', 'Afficher les numéros devant les entrées')}</div>${why('Les numéros aident à se parler (« prends le 04 ») et à retrouver une entrée dans une longue liste. Sans eux, la colonne est plus épurée.')}</div>
-                    <div class="lck-set" id="lck-c-numstyle-set"><div class="lck-row"><label for="lck-c-numstyle">Façon de numéroter</label><select id="lck-c-numstyle"><option value="origine">Lettres d’origine (01, A, B… S1, S2…)</option><option value="suite">Numéros qui se suivent (01, 02, 03…)</option></select></div>${why('Les numéros qui se suivent ne sautent jamais (plus de « H » avant « F »), même dans la partie Statistiques. Les lettres d’origine gardent tes repères si tu les connais par cœur.')}</div>
-                    <div class="lck-set"><div class="lck-row"><label for="lck-c-tabs">Onglets du haut</label><select id="lck-c-tabs"><option value="avant">Comme avant (chaque outil le sien)</option><option value="ligne">Icône + nom sur une ligne (rétrécit si la place manque)</option><option value="dessus">Icône au-dessus du nom</option><option value="texte">Nom seul, sans icône</option></select></div>${why('Le même dessin partout évite de chercher. Sur une ligne, c’est plus bas et ça laisse de la place à la liste ; si la colonne est trop étroite, le nom rétrécit puis seule l’icône reste (le nom s’affiche en bulle). L’icône au-dessus se lit mieux quand il y a 4 onglets dans une colonne étroite.')}</div>
-                    <div class="lck-set"><div class="lck-row"><label for="lck-c-size">Taille des entrées</label><select id="lck-c-size"><option value="normale">Normale</option><option value="compacte">Compacte</option></select></div>${why('Compacte : on voit toutes les entrées sans faire défiler (pratique pour les 36 graphiques ou sur un petit écran). Normale : plus facile à cliquer et à lire.')}</div>
-                    <div class="lck-set"><div class="lck-row"><label for="lck-c-width">Largeur de la colonne</label>${range('lck-c-width', 240, 420, 10, 'px', 320)}</div>${why('Plus étroite, l’arbre ou la carte ont plus de place ; plus large, les noms longs (« Ascendants et descendants (liste) ») tiennent sur une ligne. Double-clic : 320 px, la valeur de départ.')}</div>
-                    <div class="lck-set"><div class="lck-row"><label for="lck-c-lf">« Liste | Fiches »</label><select id="lck-c-lf"><option value="bas">En bas de la colonne</option><option value="barre">Dans la barre au-dessus de la liste</option></select></div>${why('Dans la barre du haut, il est juste au-dessus de ce qu’il change, au même endroit que dans les Listes (barre H10). En bas de la colonne, c’est là où tu as l’habitude de le trouver dans Recherche et Enquêtes.')}</div>
-                </div></div>
-                <aside class="lck-preview"><div class="lck-preview-head"><b>👁 Aperçu</b><div class="ui-tabs lck-mini-tabs" id="lck-c-tool" role="tablist"><button type="button" data-tool="carte" class="is-active">Carte</button><button type="button" data-tool="graph">Graphiques</button><button type="button" data-tool="enq">Enquêtes</button></div></div><div class="lck-preview-body"><div id="lck-c-prev"></div><p class="lck-legend" id="lck-c-prev-note"></p></div></aside>
+                <div class="lck-start" id="lck-c-start"></div>
+                ${Object.entries(C_GROUPS).map(([g, [label, cls]]) => `<div class="lck-lab2">${label}</div><div class="lck-vis ${cls}" data-lck-g="${g}"></div>`).join('')}
+                <div class="lck-lab2"><label for="lck-c-width">Largeur de la colonne</label></div><div class="lck-row lck-row-w">${range('lck-c-width', 240, 420, 10, 'px', 320)}<span class="lck-legend">Double-clic : 320 px, la valeur de départ.</span></div>
             </div>
-            <div class="lck-foot"><button type="button" class="button secondary" id="lck-c-reset">↺ Remettre comme au départ</button><span class="lck-legend">Au départ : « Comme avant ».</span></div></div>`;
+            <aside class="lck-preview"><div class="lck-preview-head"><b>👁 Aperçu</b><div class="ui-tabs lck-mini-tabs" id="lck-c-tool" role="tablist"><button type="button" data-tool="carte" class="is-active">Carte</button><button type="button" data-tool="graph">Graphiques</button><button type="button" data-tool="enq">Enquêtes</button></div></div><div class="lck-preview-body"><div id="lck-c-prev"></div><p class="lck-legend" id="lck-c-prev-note"></p></div>
+                <div class="lck-foot"><button type="button" class="button secondary" id="lck-c-reset">↺ Remettre comme au départ</button></div></aside>
+            </div></div>`;
     }
 
-    function panelHtml() {
-        const t = tabNow();
-        return `<section class="person-block-config lck-k" id="lc-portraits-colonne"><header><span class="eyebrow">APPARENCE</span><h3>Portraits et colonne de gauche</h3><p>Pour chacun, tu choisis ce que tu préfères en cliquant sur une grande carte, puis tu peux affiner en dessous. Tant que tu ne touches à rien, <b>tout reste comme avant</b>.</p></header>
-            <div class="segmented lck-pagetabs" role="tablist"><button type="button" role="tab" data-lck-page="portraits" class="${t === 'portraits' ? 'is-active' : ''}">👤 Portraits</button><button type="button" role="tab" data-lck-page="colonne" class="${t === 'colonne' ? 'is-active' : ''}">▤ Colonne de gauche</button></div>
-            <div data-lck-pane="portraits" ${t === 'portraits' ? '' : 'hidden'}>${portraitsPageHtml()}</div>
-            <div data-lck-pane="colonne" ${t === 'colonne' ? '' : 'hidden'}>${columnPageHtml()}</div></section>`;
-    }
+    /* deux cadres : « Portraits et avatars » (sa page des Réglages) et « Colonne de gauche » (onglet « Colonne » de « Menus, colonne et listes ») */
+    const portraitsPanelHtml = () => `<section class="person-block-config lck-k" id="lc-portraits"><header><span class="eyebrow">APPARENCE</span><h3>Portraits et avatars</h3><p>Le dessin des personnes partout dans l’app : d’abord la forme, puis le portrait. Tant que tu ne touches à rien, <b>tout reste comme avant</b>.</p></header>${portraitsPageHtml()}<div hidden data-lck-field="avatarShape"></div></section>`;
+    const columnPanelHtml = () => `<section class="person-block-config lck-k" id="lc-colonne"><header><span class="eyebrow">APPARENCE</span><h3>Colonne de gauche</h3><p>Où elle est, et son dessin. Tant que tu ne touches à rien, <b>tout reste comme avant</b>.</p></header>${columnPageHtml()}<div hidden data-lck-field="sidebarPosition"></div></section>`;
 
     /** ce qui a changé ailleurs que dans ce cadre se redessine (fiche ouverte, colonne) */
     const refreshApp = () => { try { A().renderSidebar?.(); } catch (_) {} };
-    function bindPanel(box) {
+    const AP = () => window.LCNDA_APPARENCE;
+    const designOf = () => { try { const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); return d && typeof d === 'object' && !Array.isArray(d) ? d : {}; } catch (_) { return {}; } };
+    /** un réglage du formulaire de l'Apparence, gardé tout de suite (et son menu caché suit, pour « Appliquer ») */
+    function patchDesign(name, value) {
+        const d = designOf(); d[name] = value;
+        try { localStorage.setItem('genealogie-design', JSON.stringify(d)); } catch (_) { toast('Enregistrement impossible : la place du navigateur est pleine ?', 'error'); return; }
+        const f = document.querySelector(`#design-form [name="${name}"], [form="design-form"][name="${name}"]`); if (f) f.value = value;
+        A().applyDesign?.();
+    }
+    const flashIn = (root, w) => { const s = root.querySelector(`[data-lck-saved="${w}"]`); if (!s) return; s.textContent = '✓ Enregistré'; s.animate?.([{opacity: .2}, {opacity: 1}], {duration: 500}); };
+    const syncRangeIn = (root, id, v) => { const r = root.querySelector('#' + id); if (r && String(r.value) !== String(v)) r.value = v; }; // la case chiffrée (C3) suit toute seule
+
+    function bindPortraits(box) {
         if (!box || box.dataset.lckBound) return; box.dataset.lckBound = '1';
-        const $ = s => box.querySelector(s);
-        const flash = w => { const s = box.querySelector(`[data-lck-saved="${w}"]`); if (!s) return; s.textContent = '✓ Enregistré'; s.animate?.([{opacity: .2}, {opacity: 1}], {duration: 500}); };
-        let tool = 'carte';
-        /* ── portraits ── */
-        const syncRange = (id, v) => { const r = $('#' + id); if (r && String(r.value) !== String(v)) r.value = v; }; // la case chiffrée (C3) suit toute seule
+        const $ = s => box.querySelector(s), flash = w => flashIn(box, w);
         const syncColor = (key, v) => { const i = box.querySelector(`[data-lck-color="${key}"]`); if (i && i.value !== v) i.value = v; }; // la pastille (C2) aussi
+        /* 1 · la forme */
+        function renderS() {
+            const cur = P().designShape() || 'tilted', ap = AP();
+            const list = ap ? ap.orderedShapes().filter(s => !s.hidden || s.id === cur) : [];
+            $('#lck-shapes').innerHTML = list.map(s => `<button type="button" class="lck-shape-t${s.id === cur ? ' is-active' : ''}" data-lck-shape="${esc(s.id)}" aria-pressed="${s.id === cur}"><span class="lck-shape-ic">${ap.shapeSvg(s.shape, 40)}</span><span>${s.own ? '✎ ' : ''}${esc(s.name.replace(/\s*\(défaut\)$/, ''))}</span>${s.id === 'tilted' ? '<small>de départ</small>' : ''}</button>`).join('')
+                + (ap?.openShapeEditor ? '<button type="button" class="lck-shape-t is-add" data-lck-shape-new><span class="lck-shape-ic">＋</span><span>Créer une forme</span></button>' : '');
+            const S = P().read(), on = S.mode !== 'avant';
+            const X = (k, size, place) => (on ? av(k, size, S) : avOld(k, place, 54));
+            $('#lck-where').innerHTML = [['Fiche', X('joseph', 88, 'fiche').replace('--av:88px', '--av:54px')], ['Listes et arbre', X('louise', 34, 'liste')], ['Pastilles', X('marie', 22, 'pastille')], ['Carrés numérotés', '<span class="card-index">04</span>']]
+                .map(([l, h]) => `<div><span class="lck-where-av">${h}</span><small>${l}</small></div>`).join('') + (on ? '' : '<p class="lck-legend">Avec le portrait « Comme avant », la forme s’applique aux carrés numérotés et aux initiales des fiches.</p>');
+        }
+        /* 2 · le portrait */
         function renderP() {
             const S = P().read(), off = S.mode === 'avant';
-            $('#lck-p-choices').innerHTML = P_CARDS.map(c => {
-                const on = S.mode === c.k, D = P().PRESETS[c.k], show = on && c.k !== 'avant' ? S : {...P().PRESETS.rond, ...D};
-                const mod = on && c.k !== 'avant' && isModP(S, D);
-                const stage = c.k === 'avant'
-                    ? `${avOld('joseph', 'fiche', 64)}${avOld('joseph', 'picker')}${avOld('louise', 'liste')}${avOld('marie', 'pastille')}`
-                    : `${av('joseph', 88, show).replace('--av:88px', '--av:64px')}${av('louise', 48, show)}${av('marie', 34, show)}${av('pompon', 34, show)}${av('camille', 22, show)}`;
-                return `<button type="button" class="lck-choice${on ? ' is-active' : ''}" data-lck-pmode="${c.k}" aria-pressed="${on}"><div class="lck-choice-top"><span class="lck-radio"></span><b>${esc(c.t)}</b><span class="lck-tag ${c.tagc}">${c.tag}</span>${mod ? '<span class="lck-tag mod">retouché</span>' : ''}</div><div class="lck-stage">${stage}</div><ul class="lck-why-list">${c.why.map(([i, t]) => `<li><span>${i}</span><span>${t}</span></li>`).join('')}</ul></button>`;
-            }).join('');
+            $('#lck-p-start').innerHTML = `<span>Partir de :</span>${P_CARDS.map(c => { const on = S.mode === c.k, mod = on && c.k !== 'avant' && isModP(S, {...P().PRESETS[c.k], shape: S.shape}); return `<button type="button" class="lck-vc lck-mini-preset${on ? ' is-active' : ''}${mod ? ' is-mod' : ''}" data-lck-pmode="${c.k}" aria-pressed="${on}" title="${esc(c.why.map(w => w[1].replace(/<[^>]+>/g, '')).join(' '))}">${esc(c.t)}</button>`; }).join('')}<small>règle tout d’un coup (le rond unique et le carré de la fiche choisissent aussi la forme) ; tu peux ensuite changer chaque ligne (« retouché » s’affiche).</small>`;
             $('#lck-p-settings').classList.toggle('is-off', off);
             $('#lck-p-off').hidden = !off;
-            $('#lck-p-shape').innerHTML = SHAPES.map(([k, l, st]) => `<button type="button" class="lck-shape${S.shape === k ? ' is-active' : ''}" data-lck-shape="${k}" aria-pressed="${S.shape === k}"><i style="${st}"></i>${l}</button>`).join('');
             $('#lck-p-radius-set').classList.toggle('is-dis', S.shape !== 'arrondi'); $('#lck-p-radius').disabled = S.shape !== 'arrondi';
-            syncRange('lck-p-radius', S.radius); syncRange('lck-p-init', S.init); syncRange('lck-p-bw', S.bw);
+            syncRangeIn(box, 'lck-p-radius', S.radius); syncRangeIn(box, 'lck-p-init', S.init); syncRangeIn(box, 'lck-p-bw', S.bw);
             $('#lck-p-cmode').value = S.cmode; $('#lck-p-letters').value = S.letters;
             ['m', 'f', 'u', 'a', 'one', 'bc'].forEach(k => syncColor(k, S[k]));
             box.querySelectorAll('#lck-p-colors .lck-c2').forEach(l => { const k = l.querySelector('[data-lck-color]').dataset.lckColor; l.hidden = S.cmode === 'unique' ? k !== 'one' : k === 'one'; });
@@ -295,19 +315,22 @@
             $('#lck-p-photo').checked = S.photo; $('#lck-p-bwphoto').checked = S.bwphoto; $('#lck-p-bwphoto-l').classList.toggle('is-dis', !S.photo); $('#lck-p-sosa').checked = S.sosa;
             $('#lck-p-prev').innerHTML = placesHtml(S, off);
         }
-        const setP = patch => { P().write({...P().read(), ...patch}); renderP(); flash('p'); };
-        const undoP = (msg, change) => { if (A().undoLocalChange) A().undoLocalChange(msg, [P().KEY], () => { change(); renderP(); flash('p'); }, () => { P().apply(); renderP(); }); else { change(); renderP(); flash('p'); } };
+        const all = () => { renderS(); renderP(); };
+        const setP = patch => { P().write({...P().read(), ...patch}); all(); flash('p'); };
+        const KEYS = () => ['genealogie-design', P().KEY];
+        const undoP = (msg, change, w = 'p') => {
+            const after = () => { A().applyDesign?.(); P().apply(); const sel = document.querySelector('#design-form select[name="avatarShape"], select[form="design-form"][name="avatarShape"]'), id = P().designShape(); if (sel && id) { if (![...sel.options].some(o => o.value === id)) sel.add(new Option('Ma forme', id)); sel.value = id; sel.dataset.lcCur = id; } all(); refreshApp(); };
+            if (A().undoLocalChange) A().undoLocalChange(msg, KEYS(), () => { change(); all(); flash(w); refreshApp(); }, after); else { change(); all(); flash(w); }
+        };
+        const shapeName = id => (AP()?.orderedShapes().find(s => s.id === id)?.name || id).replace(/\s*\(défaut\)$/, '');
         box.addEventListener('click', e => {
-            const pg = e.target.closest('[data-lck-page]');
-            if (pg) { const t = pg.dataset.lckPage; try { localStorage.setItem(TAB_KEY, t); } catch (_) {} box.querySelectorAll('[data-lck-page]').forEach(b => b.classList.toggle('is-active', b === pg)); box.querySelectorAll('[data-lck-pane]').forEach(p => { p.hidden = p.dataset.lckPane !== t; }); UI().scan?.(box); return; }
+            const sh = e.target.closest('[data-lck-shape]');
+            if (sh) { const id = sh.dataset.lckShape; if (id === (P().designShape() || 'tilted')) return; undoP(`Forme : « ${shapeName(id)} »`, () => P().setShape(id), 's'); return; }
+            if (e.target.closest('[data-lck-shape-new]')) { AP()?.openShapeEditor?.({onSaved: sid => undoP('Nouvelle forme choisie', () => P().setShape(sid), 's')}); return; }
             const pm = e.target.closest('[data-lck-pmode]');
-            if (pm) { const k = pm.dataset.lckPmode; if (k === P().read().mode) return; const c = P_CARDS.find(x => x.k === k); undoP(`Portraits : « ${c.t} »`, () => P().write(k === 'avant' ? {...P().read(), mode: 'avant'} : {mode: k, ...P().PRESETS[k]})); return; }
-            const sh = e.target.closest('[data-lck-shape]'); if (sh) { setP({shape: sh.dataset.lckShape}); return; }
-            if (e.target.closest('#lck-p-reset')) { undoP('Portraits remis comme au départ', () => P().write({mode: 'avant'})); return; }
-            const cm = e.target.closest('[data-lck-cmode]');
-            if (cm) { const k = cm.dataset.lckCmode; if (k === read().mode) return; undoC(`Colonne de gauche : « ${k === 'avant' ? 'Comme avant' : 'Nouveau'} »`, () => write({mode: k, ...PRESETS[k]})); return; }
-            const tl = e.target.closest('[data-tool]'); if (tl) { tool = tl.dataset.tool; renderC(); return; }
-            if (e.target.closest('#lck-c-reset')) { undoC('Colonne de gauche remise comme au départ', () => write({mode: 'avant', ...PRESETS.avant})); }
+            if (pm) { const k = pm.dataset.lckPmode; if (k === P().read().mode) return; const c = P_CARDS.find(x => x.k === k);
+                undoP(`Portraits : « ${c.t} »`, () => { if (k === 'avant') { P().write({...P().read(), mode: 'avant'}); return; } P().write({mode: k, ...P().PRESETS[k]}); P().setShape(P().TO_AV[P().PRESETS[k].shape]); }); return; }
+            if (e.target.closest('#lck-p-reset')) { undoP('Portraits remis comme au départ', () => P().write({mode: 'avant'})); }
         });
         const onRange = (id, fn) => $('#' + id).addEventListener('input', e => fn(Number(e.target.value)));
         onRange('lck-p-radius', v => setP({radius: v})); onRange('lck-p-init', v => setP({init: v})); onRange('lck-p-bw', v => setP({bw: v}));
@@ -316,41 +339,71 @@
         ['photo', 'bwphoto', 'sosa'].forEach(k => $(`#lck-p-${k}`).addEventListener('change', e => setP({[k]: e.target.checked})));
         $('#lck-p-dark').addEventListener('change', e => $('#lck-p-preview').classList.toggle('is-dark', e.target.checked));
         box.querySelectorAll('[data-lck-color]').forEach(i => i.addEventListener('change', e => { const v = e.target.value; if (/^#[0-9a-f]{6}$/i.test(v) && P().read()[i.dataset.lckColor] !== v.toLowerCase()) setP({[i.dataset.lckColor]: v}); }));
-        /* ── colonne ── */
+        // une forme ajoutée, rangée ou cachée dans « ⚙️ Gérer les formes » : la rangée suit
+        const onShapes = () => { if (!box.isConnected) { document.removeEventListener('lcnda:shapes', onShapes); return; } renderS(); };
+        document.addEventListener('lcnda:shapes', onShapes);
+        box.lckRender = all;
+        all();
+        UI().scan?.(box);
+    }
+
+    function bindColumn(box) {
+        if (!box || box.dataset.lckBound) return; box.dataset.lckBound = '1';
+        const $ = s => box.querySelector(s), flash = w => flashIn(box, w);
+        let tool = 'carte';
+        const right = () => designOf().sidebarPosition === 'right';
+        const prevHtml = S => `<div class="lck-colprev${right() ? ' is-right' : ''}">${sidebarHtml(S, tool, .72)}${mainHtml(S, tool)}</div>`;
         function renderC() {
             const S = read();
-            $('#lck-c-choices').innerHTML = C_CARDS.map(c => {
-                const on = S.mode === c.k, show = on ? S : PRESETS[c.k], mod = on && CKEYS.some(k => S[k] !== PRESETS[c.k][k]);
-                const mini = t => sidebarHtml({...show, size: 'compacte'}, t, 0).replace(/width:\d+px/, 'width:min(200px,100%)');
-                return `<button type="button" class="lck-choice${on ? ' is-active' : ''}" data-lck-cmode="${c.k}" aria-pressed="${on}"><div class="lck-choice-top"><span class="lck-radio"></span><b>${c.t}</b><span class="lck-tag ${c.tagc}">${c.tag}</span>${mod ? '<span class="lck-tag mod">retouché</span>' : ''}</div><div class="lck-stage is-top">${mini('carte')}${mini('enq')}</div><ul class="lck-why-list">${c.why.map(([i, t]) => `<li><span>${i}</span><span>${t}</span></li>`).join('')}</ul></button>`;
-            }).join('');
-            $('#lck-c-nums').checked = S.nums;
-            $('#lck-c-numstyle').value = S.numstyle; $('#lck-c-numstyle-set').classList.toggle('is-dis', !S.nums); $('#lck-c-numstyle').disabled = !S.nums;
-            $('#lck-c-style').value = S.style; $('#lck-c-tabs').value = S.tabs; $('#lck-c-size').value = S.size; $('#lck-c-lf').value = S.lf;
-            syncRange('lck-c-width', S.width);
-            $('#lck-c-prev').innerHTML = `<div class="lck-colprev">${sidebarHtml(S, tool, .72)}${mainHtml(S, tool)}</div>`;
+            $('#lck-c-side').innerHTML = [['left', 'À gauche', '<span class="lck-vside"><i class="c"></i><i></i></span>'], ['right', 'À droite', '<span class="lck-vside r"><i></i><i class="c"></i></span>']]
+                .map(([v, l, pic]) => { const on = (v === 'right') === right(); return `<button type="button" class="lck-vc${on ? ' is-active' : ''}" data-lck-side="${v}" aria-pressed="${on}" aria-label="Colonne ${l.toLowerCase()}">${pic}<span>${l}</span>${v === 'left' ? '<small>par défaut</small>' : ''}</button>`; }).join('');
+            $('#lck-c-start').innerHTML = `<span>Partir de :</span>${C_CARDS.map(c => { const on = S.mode === c.k, mod = on && CKEYS.some(k => S[k] !== PRESETS[c.k][k]); return `<button type="button" class="lck-vc lck-mini-preset${on ? ' is-active' : ''}${mod ? ' is-mod' : ''}" data-lck-cmode="${c.k}" aria-pressed="${on}" title="${esc(c.why)}">${esc(c.t)}</button>`; }).join('')}<small>règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche).</small>`;
+            const val = {style: S.style, tabs: S.tabs, nums: numsOf(S), size: S.size, lf: S.lf};
+            Object.entries(C_GROUPS).forEach(([g, [, , items]]) => { $(`[data-lck-g="${g}"]`).innerHTML = items.map(([v, n, sub, pic]) => vcHtml(g, v, n, sub, pic, val[g] === v)).join(''); });
+            syncRangeIn(box, 'lck-c-width', S.width);
+            $('#lck-c-prev').innerHTML = prevHtml(S);
             $('#lck-c-prev-note').textContent = TOOLS[tool].list ? (S.lf === 'barre' ? '« Liste | Fiches » est dans la barre au-dessus des enquêtes.' : '« Liste | Fiches » est en bas de la colonne.') : 'Ici pas de liste : « Liste | Fiches » ne concerne que Recherche, Enquêtes et les autres listes.';
             box.querySelectorAll('#lck-c-tool [data-tool]').forEach(b => b.classList.toggle('is-active', b.dataset.tool === tool));
         }
         const setC = patch => { write({...read(), ...patch}); renderC(); flash('c'); refreshApp(); };
         const undoC = (msg, change) => { if (A().undoLocalChange) A().undoLocalChange(msg, [KEY], () => { change(); renderC(); flash('c'); refreshApp(); }, () => { apply(); renderC(); refreshApp(); }); else { change(); renderC(); flash('c'); } };
-        ['style', 'numstyle', 'tabs', 'size', 'lf'].forEach(k => $(`#lck-c-${k}`).addEventListener('change', e => setC({[k]: e.target.value})));
-        $('#lck-c-nums').addEventListener('change', e => setC({nums: e.target.checked}));
+        box.addEventListener('click', e => {
+            const sd = e.target.closest('[data-lck-side]');
+            if (sd) { const v = sd.dataset.lckSide; if ((v === 'right') === right()) return;
+                const done = () => { renderC(); flash('w'); };
+                if (A().undoLocalChange) A().undoLocalChange(`Colonne ${v === 'right' ? 'à droite' : 'à gauche'}`, ['genealogie-design'], () => { patchDesign('sidebarPosition', v); done(); }, () => { const f = document.querySelector('[form="design-form"][name="sidebarPosition"], #design-form [name="sidebarPosition"]'); if (f) f.value = right() ? 'right' : 'left'; A().applyDesign?.(); renderC(); });
+                else { patchDesign('sidebarPosition', v); done(); }
+                return; }
+            const cm = e.target.closest('[data-lck-cmode]');
+            if (cm) { const k = cm.dataset.lckCmode, c = C_CARDS.find(x => x.k === k); undoC(`Colonne de gauche : partir de « ${c.t} »`, () => write({mode: k, ...PRESETS[k]})); return; }
+            const ch = e.target.closest('[data-lck-c]');
+            if (ch) { const g = ch.dataset.lckC, v = ch.dataset.v; setC(g === 'nums' ? (v === 'aucun' ? {nums: false} : {nums: true, numstyle: v}) : {[g]: v}); return; }
+            const tl = e.target.closest('[data-tool]'); if (tl) { tool = tl.dataset.tool; renderC(); return; }
+            if (e.target.closest('#lck-c-reset')) { undoC('Colonne de gauche remise comme au départ', () => write({mode: 'avant', ...PRESETS.avant})); }
+        });
         $('#lck-c-width').addEventListener('change', e => setC({width: Number(e.target.value)}));
-        $('#lck-c-width').addEventListener('input', e => { const S = {...read(), width: Number(e.target.value)}; $('#lck-c-prev').innerHTML = `<div class="lck-colprev">${sidebarHtml(S, tool, .72)}${mainHtml(S, tool)}</div>`; });
-        box.lckRender = () => { renderP(); renderC(); };
-        renderP(); renderC();
+        $('#lck-c-width').addEventListener('input', e => { $('#lck-c-prev').innerHTML = prevHtml({...read(), width: Number(e.target.value)}); });
+        box.lckRender = renderC;
+        renderC();
         UI().scan?.(box);
     }
 
     ext.designPanels = ext.designPanels || [];
-    ext.designPanels.push(() => (P() ? panelHtml() : ''));
+    ext.designPanels.push(() => (P() ? portraitsPanelHtml() + columnPanelHtml() : ''));
     ext.afterDesign = ext.afterDesign || [];
     ext.afterDesign.push(() => {
-        const box = document.getElementById('lc-portraits-colonne'); if (!box) return;
+        const pbox = document.getElementById('lc-portraits'), cbox = document.getElementById('lc-colonne'); if (!pbox || !cbox) return;
         const form = document.getElementById('design-form');
-        if (form && form.parentNode === box.parentNode) form.after(box); // juste sous le formulaire de l'Apparence
-        bindPanel(box);
+        if (form && form.parentNode === pbox.parentNode) { form.after(pbox); pbox.after(cbox); } // juste sous le formulaire de l'Apparence
+        // les deux menus du formulaire qui ont maintenant leurs boutons ici : rangés, cachés, toujours enregistrés avec le formulaire
+        for (const [name, b] of [['avatarShape', pbox], ['sidebarPosition', cbox]]) {
+            const f = form?.querySelector(`[name="${name}"]`), slot = b.querySelector(`[data-lck-field="${name}"]`);
+            if (!f || !slot) continue;
+            f.setAttribute('form', 'design-form'); slot.appendChild(f.closest('label') || f);
+        }
+        bindPortraits(pbox); bindColumn(cbox);
+        // le cadre « 🔷 Formes des avatars » (app-apparence.js, posé juste après) : dans « 1 · La forme », replié sous « ⚙️ Gérer les formes »
+        setTimeout(() => { const shp = document.getElementById('lc-avatar-shapes'), slot = pbox.querySelector('[data-lck-shape-slot]'); if (shp && slot && shp.parentNode !== slot) slot.appendChild(shp); }, 0);
     });
     /** pour les « 💾 Réglages enregistrés » de l'Apparence (designs) : les deux réglages en valeurs simples */
     ext.lookFlat = () => ({k7_portraits: localStorage.getItem(P()?.KEY || 'genealogie-portraits') || '', k15_colonne: localStorage.getItem(KEY) || ''});

@@ -54,7 +54,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
         p.on('console', m => { if (m.type() === 'error' && !/favicon|Failed to load resource/.test(m.text())) errors.push(m.text()); });
         p.on('dialog', d => { errors.push('dialogue : ' + d.message()); d.dismiss(); });
         const ready = async () => { await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.pickMyGraph, null, { timeout: 20000 }); await p.waitForTimeout(400); };
-        const design = async () => { await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'nav_menus'; /* l'éditeur du menu est dans « Menus, onglets et listes » (présentation A) */ await A.setModule('maintenance'); }); await p.waitForSelector('[data-menu-icon="fiches"]'); };
+        const design = async () => { await p.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'nav_menus'; /* l'éditeur du menu est dans « Menus, colonne et listes » (présentation A) */ await A.setModule('maintenance'); }); await p.waitForSelector('[data-menu-icon="fiches"]'); };
         const nav = key => p.evaluate(k => { const b = document.querySelector(`.main-nav .nav-item[data-module="${k}"]:not(.nav-custom-tab)`) || document.querySelector(`.main-nav .nav-custom-tab[data-board="${k}"]`); return b ? b.textContent.replace(/^\d+/, '') : null; }, key);
         const stored = () => p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-menu-icons') || '{}'));
         // K2 : la liste s'enregistre toute seule quand on quitte la case (le bouton « Enregistrer » est caché)

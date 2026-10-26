@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=249">
+    <link rel="stylesheet" href="assets/css/app.css?v=250">
     <link rel="stylesheet" href="assets/css/picker.css?v=6">
     <link rel="stylesheet" href="assets/css/heritage.css?v=249">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -42,7 +42,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/tresors.css?v=9">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
-    <link rel="stylesheet" href="assets/css/ui.css?v=14">
+    <link rel="stylesheet" href="assets/css/ui.css?v=15">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
@@ -74,8 +74,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=5">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=8" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=8" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=9" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=9" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=6">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
@@ -1137,7 +1137,7 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=478" defer></script>
+<script src="assets/js/app.js?v=479" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=22" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1169,8 +1169,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-saisies.js?v=1" defer></script>
 <script src="assets/js/app-forms.js?v=3" defer></script>
 <script src="assets/js/app-mots.js?v=1" defer></script>
-<script src="assets/js/app-portraits.js?v=2" defer></script>
-<script src="assets/js/app-colonne.js?v=2" defer></script>
+<script src="assets/js/app-portraits.js?v=3" defer></script>
+<script src="assets/js/app-colonne.js?v=3" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
 <script src="assets/js/app-actions.js?v=4" defer></script>
 <script src="assets/js/app-editeurs.js?v=3" defer></script>
@@ -1179,8 +1179,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-access.js?v=9" defer></script>
 <script src="assets/js/app-mode-simple.js?v=9" defer></script>
 <script src="assets/js/app-sidegroups.js?v=11" defer></script>
-<script src="assets/js/app-listes.js?v=38" defer></script>
-<script src="assets/js/app-maintenance.js?v=29" defer></script>
+<script src="assets/js/app-listes.js?v=39" defer></script>
+<script src="assets/js/app-maintenance.js?v=30" defer></script>
 <script src="assets/js/app-recherche.js?v=24" defer></script>
 <script src="assets/js/app-graphiques.js?v=18" defer></script>
 <script src="assets/js/app-side-folders.js?v=2" defer></script>
@@ -1191,7 +1191,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=4" defer></script>
 <script src="assets/js/heritage-links.js?v=19" defer></script>
-<script src="assets/js/heritage-more.js?v=229" defer></script>
+<script src="assets/js/heritage-more.js?v=230" defer></script>
 <script src="assets/js/heritage-controle.js?v=4" defer></script>
 <script src="assets/js/heritage-records.js?v=11" defer></script>
 <script src="assets/js/heritage-research.js?v=36" defer></script>
@@ -1380,7 +1380,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-fiche.js?v=6" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=17" defer></script>
+<script src="assets/js/app-apparence.js?v=18" defer></script>
 <script src="assets/js/app-designs.js?v=9" defer></script>
 <script src="assets/js/app-sections.js?v=3" defer></script>
 <script>

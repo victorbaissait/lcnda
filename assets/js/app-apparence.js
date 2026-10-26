@@ -36,9 +36,11 @@
     const sq = (a = 0, s = 1) => { const t = a * Math.PI / 180, c = Math.cos(t), si = Math.sin(t); return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([x, y]) => [50 + (x * c - y * si) * 50 * s, 50 + (x * si + y * c) * 50 * s]); };
     const ngon = (n, rot = -90) => Array.from({length: n}, (_, i) => { const t = (rot + i * 360 / n) * Math.PI / 180; return [50 + Math.cos(t) * 50, 50 + Math.sin(t) * 50]; });
     const starPts = (n, r2_ = .45) => Array.from({length: n * 2}, (_, i) => { const r = i % 2 ? 50 * r2_ : 50, t = (-90 + i * 180 / n) * Math.PI / 180; return [50 + Math.cos(t) * r, 50 + Math.sin(t) * r]; });
+    /** carré aux coins arrondis (r : rayon en %), en points */
+    const rrect = r => [[100 - r, r, -90], [100 - r, 100 - r, 0], [r, 100 - r, 90], [r, r, 180]].flatMap(([cx, cy, a]) => Array.from({length: 7}, (_, i) => { const t = (a + i * 15) * Math.PI / 180; return [cx + Math.cos(t) * r, cy + Math.sin(t) * r]; }));
     /** les formes de l'app : [clé, nom, points pour l'aperçu et pour « Dupliquer »] */
     const BUILTIN = [
-        ['tilted', 'Carré penché (défaut)', sq(-3, .95)], ['square', 'Carré droit', sq()], ['circle', 'Cercle', ngon(40)],
+        ['tilted', 'Carré penché (défaut)', sq(-3, .95)], ['square', 'Carré droit', sq()], ['rounded', 'Carré arrondi', rrect(22)], ['circle', 'Cercle', ngon(40)],
         ['pentagon', 'Pentagone', [[50, 0], [100, 38], [82, 100], [18, 100], [0, 38]]], ['hexagon', 'Hexagone', [[25, 0], [75, 0], [100, 50], [75, 100], [25, 100], [0, 50]]],
         ['diamond', 'Losange', [[50, 0], [100, 50], [50, 100], [0, 50]]],
     ];
@@ -105,7 +107,7 @@
     }
     /** la règle CSS d'une forme à soi */
     function shapeCss(id, s) {
-        const sel = `:root[data-avatar-shape="${id}"] .card-index,:root[data-avatar-shape="${id}"] .person-card-initial,.lc-shp-demo[data-shp="${id}"] .lc-shp-av`;
+        const sel = `:root[data-avatar-shape="${id}"] .card-index,:root[data-avatar-shape="${id}"] .person-card-initial,:root[data-avatar-shape="${id}"][data-lc-portraits] .lc-av,.lc-shp-demo[data-shp="${id}"] .lc-shp-av`;
         if (s.kind === 'poly') return `${sel}{transform:none;border-radius:0;clip-path:polygon(${s.pts.map(([x, y]) => `${r2(x)}% ${r2(y)}%`).join(',')});-webkit-mask:none;mask:none}`;
         const {vb, body} = shapeInner(s);
         const url = `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}" preserveAspectRatio="xMidYMid meet">${body}</svg>`)}")`;
@@ -139,7 +141,7 @@
             + '<option value="__new">＋ Créer une forme…</option>';
     }
     function refreshAvatarSelect() {
-        const sel = document.querySelector('#design-form select[name="avatarShape"]'); if (!sel) return;
+        const sel = document.querySelector('#design-form select[name="avatarShape"], select[form="design-form"][name="avatarShape"]'); if (!sel) return;
         // la forme enregistrée d'abord : le menu d'app.js ne connaît que les formes de l'app, donc sel.value y retombe sur « Carré penché » pour une forme à soi
         let saved = ''; try { saved = String(JSON.parse(localStorage.getItem('genealogie-design') || '{}')?.avatarShape || ''); } catch (_) {}
         const cur = sel.dataset.lcCur || saved || sel.value || 'tilted';
@@ -161,6 +163,7 @@
         const box = document.getElementById('lc-avatar-shapes');
         if (box) { const open = box.querySelector('details')?.open; box.outerHTML = shapesPanelHtml(); const nb = document.getElementById('lc-avatar-shapes'); if (open) nb.querySelector('details').open = true; bindShapesPanel(nb); UI().scan?.(nb); }
         refreshAvatarSelect();
+        document.dispatchEvent(new CustomEvent('lcnda:shapes')); // la rangée « La forme » des Portraits se redessine
     }
     function bindShapesPanel(box) {
         if (!box) return;
@@ -801,7 +804,7 @@
         const presets = document.getElementById('my-presets');
         if (presets && !document.getElementById('lc-avatar-shapes')) presets.insertAdjacentHTML('afterend', shapesPanelHtml());
         bindShapesPanel(document.getElementById('lc-avatar-shapes'));
-        const sel = document.querySelector('#design-form select[name="avatarShape"]');
+        const sel = document.querySelector('#design-form select[name="avatarShape"], select[form="design-form"][name="avatarShape"]');
         if (sel && !sel.dataset.lcDone) {
             sel.dataset.lcDone = '1'; refreshAvatarSelect();
             sel.addEventListener('change', () => {
@@ -826,6 +829,6 @@
         bindTopbarPanel(tb); ext.calculator?.refreshButton?.(); ext.modeSimple?.refreshEntry?.(); applyTopbar(); // aussi après ↶ Annuler (la page est redessinée)
     });
     injectShapeCss();
-    window.LCNDA_APPARENCE = {cleanShape, svgToShape, shapeStore, orderedShapes, addShape, headerCfg, applyHeader, openShapeEditor, sheadCfg, HEAD_BUTTONS, SHEAD_KEY,
+    window.LCNDA_APPARENCE = {cleanShape, svgToShape, shapeStore, orderedShapes, addShape, shapeSvg, headerCfg, applyHeader, openShapeEditor, sheadCfg, HEAD_BUTTONS, SHEAD_KEY,
         TOPBAR_ITEMS: TB_ITEMS, topbarCfg, topbarShown, topbarSetShown, topbarSetMode, topbarSave, topbarReset, applyTopbar};
 })();

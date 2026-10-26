@@ -1,6 +1,7 @@
 /* LCNDA — 👤 K7 : un seul portrait (rond ou carré d'initiales, ou la photo de la fiche), partout.
  *
- * Réglage : Réglages → Apparence → onglet « 👤 Portraits » (le cadre est dessiné par app-colonne.js).
+ * Réglage : Réglages → « Portraits et avatars » (le cadre est dessiné par app-colonne.js). La forme est LA forme des avatars
+ * (genealogie-design.avatarShape) : une seule pour les portraits et les petits carrés numérotés (setShape).
  *   localStorage['genealogie-portraits'] = {mode: 'avant'|'rond'|'carre', shape: 'rond'|'arrondi'|'carre'|'penche',
  *     radius (%), init (% de la taille), bw (px), bc, cmode: 'plein'|'pale'|'unique', m, f, u, a, one (couleurs),
  *     photo, bwphoto, letters: 'deux'|'une', sosa}
@@ -29,13 +30,18 @@
     const HEX = /^#[0-9a-f]{6}$/i;
     const clamp = (v, a, b, d) => { const n = Number(v); return Number.isFinite(n) ? Math.max(a, Math.min(b, n)) : d; };
 
+    /* Une seule forme pour tout : celle de « Forme des avatars » (genealogie-design.avatarShape), qui dessine aussi les petits
+       carrés numérotés. Les portraits la suivent : rond, arrondi, carré, penché ; « autre » = losange, pentagone, forme à soi… (app.css) */
+    const TO_AV = {rond: 'circle', arrondi: 'rounded', carre: 'square', penche: 'tilted'};
+    const FROM_AV = {circle: 'rond', rounded: 'arrondi', square: 'carre', tilted: 'penche'};
+    const designShape = () => { try { const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); return d && typeof d.avatarShape === 'string' ? d.avatarShape : ''; } catch (_) { return ''; } };
     /** le réglage lu et vérifié (seulement des valeurs connues : il est écrit tel quel dans les styles) */
     function clean(raw) {
         const r = raw && typeof raw === 'object' ? raw : {};
         const mode = ['avant', 'rond', 'carre'].includes(r.mode) ? r.mode : 'avant';
         const base = PRESETS[mode === 'avant' ? 'rond' : mode];
         const out = {mode};
-        out.shape = ['rond', 'arrondi', 'carre', 'penche'].includes(r.shape) ? r.shape : base.shape;
+        out.shape = ['rond', 'arrondi', 'carre', 'penche', 'autre'].includes(r.shape) ? r.shape : base.shape;
         out.radius = clamp(r.radius, 0, 45, base.radius);
         out.init = clamp(r.init, 28, 60, base.init);
         out.bw = Math.round(clamp(r.bw, 0, 4, base.bw) * 2) / 2;
@@ -46,8 +52,33 @@
         out.letters = r.letters === 'une' ? 'une' : 'deux';
         return out;
     }
-    function read() { try { return clean(JSON.parse(localStorage.getItem(KEY) || 'null')); } catch (_) { return clean(null); } }
+    function read() {
+        let S; try { S = clean(JSON.parse(localStorage.getItem(KEY) || 'null')); } catch (_) { S = clean(null); }
+        const av = designShape(); if (av) S.shape = FROM_AV[av] || 'autre';
+        return S;
+    }
     function write(s) { try { localStorage.setItem(KEY, JSON.stringify(clean(s))); } catch (_) { A().toast?.('Enregistrement impossible : la place du navigateur est pleine ?', 'error'); } apply(); }
+    /** choisir LA forme (portraits et petits carrés numérotés) : enregistrée tout de suite, sans « Appliquer » */
+    function setShape(id) {
+        id = String(id || ''); if (!id) return;
+        let d = {}; try { d = JSON.parse(localStorage.getItem('genealogie-design') || '{}') || {}; } catch (_) { d = {}; }
+        if (typeof d !== 'object' || Array.isArray(d)) d = {};
+        d.avatarShape = id;
+        try { localStorage.setItem('genealogie-design', JSON.stringify(d)); } catch (_) { A().toast?.('Enregistrement impossible : la place du navigateur est pleine ?', 'error'); return; }
+        // le menu caché du formulaire de l'Apparence suit (sinon « Appliquer » remettrait l'ancienne forme)
+        const sel = document.querySelector?.('#design-form select[name="avatarShape"], select[form="design-form"][name="avatarShape"]');
+        if (sel) { if (![...sel.options].some(o => o.value === id)) sel.add(new Option('Ma forme', id)); sel.value = id; sel.dataset.lcCur = id; }
+        if (A().applyDesign) A().applyDesign(); else document.documentElement.dataset.avatarShape = id;
+        write({...read(), shape: FROM_AV[id] || 'autre'});
+    }
+    // une fois : qui avait déjà des portraits communs garde leur forme, qui devient LA forme
+    try {
+        if (!localStorage.getItem('lcnda-shape-one')) {
+            const raw = JSON.parse(localStorage.getItem(KEY) || 'null');
+            if (raw && raw.mode && raw.mode !== 'avant') { const S = clean(raw); if (TO_AV[S.shape]) { let d = {}; try { d = JSON.parse(localStorage.getItem('genealogie-design') || '{}') || {}; } catch (_) {} d.avatarShape = TO_AV[S.shape]; localStorage.setItem('genealogie-design', JSON.stringify(d)); } }
+            localStorage.setItem('lcnda-shape-one', '1');
+        }
+    } catch (_) {}
 
     /* ── couleurs ── */
     const hx = h => [0, 2, 4].map(i => parseInt(h.slice(1 + i, 3 + i), 16));
@@ -64,7 +95,7 @@
     function varsOf(S) {
         const v = {};
         ['m', 'f', 'u', 'a'].forEach(g => { const [bg, fg] = colorsOf(S, g); v[`--lc-av-bg-${g}`] = bg; v[`--lc-av-fg-${g}`] = fg; });
-        v['--lc-av-radius'] = S.shape === 'rond' ? '50%' : S.shape === 'arrondi' ? `${S.radius}%` : '0';
+        v['--lc-av-radius'] = S.shape === 'rond' ? '50%' : S.shape === 'arrondi' ? `${S.radius}%` : '0'; // « autre » : la forme est posée par app.css
         v['--lc-av-rot'] = S.shape === 'penche' ? 'rotate(-3deg)' : 'none';
         v['--lc-av-init'] = String(S.init / 100);
         v['--lc-av-bw'] = `${S.bw}px`;
@@ -129,6 +160,6 @@
     UI.avatarOn = avatarOn;
     UI.avatarOr = (p, size, legacy) => (avatarOn() ? avatar(p, size) : legacy);
     UI.avatarInitials = initialsOf;
-    window.LCNDA_PORTRAITS = {KEY, PRESETS, DEF_COLORS, SIZES, read, write, clean, apply, avatar, varsOf, styleOf, colorsOf, initialsOf, on: avatarOn};
+    window.LCNDA_PORTRAITS = {KEY, PRESETS, TO_AV, FROM_AV, setShape, designShape, DEF_COLORS, SIZES, read, write, clean, apply, avatar, varsOf, styleOf, colorsOf, initialsOf, on: avatarOn};
     apply();
 })();

@@ -75,6 +75,13 @@ Maquette : `docs/design/messages-et-listes.html`.
 ## Colonne de gauche (validé)
 
 - **Pas de colonne de gauche → rien à gauche.** Un écran qui n'a pas sa propre colonne de gauche (✨ Trésors, par exemple) n'en affiche aucune : la page prend toute la largeur, sans bouton « Liste → ». Jamais la colonne de l'écran d'avant (avant, les Réglages restaient affichés dans Trésors). Ça vaut pour tout écran, présent ou à venir : `renderSidebar` (app.js) ne garde la colonne que pour les onglets de `SIDEBAR_MODULES` ; un nouvel onglet qui a une colonne s'y ajoute, sinon il n'a rien à gauche (classe `no-side` sur `#app`).
+- **Son dessin se règle à un seul endroit** : Réglages → « Menus, colonne et listes » → onglet « Colonne » (où, « Partir de » Comme avant / Nouveau, 9 styles d'entrées dont les **boutons encadrés par défaut**, onglets, numéros, taille, « Liste | Fiches », largeur ; app-colonne.js). Maquette validée : docs/design/apparence-simplifiee.html.
+
+## Réglages : un réglage, un seul endroit (validé)
+
+- **Une seule forme** pour les portraits et les petits carrés numérotés : Réglages → « Portraits et avatars » → « 1 · La forme » (`genealogie-design.avatarShape`, `LCNDA_PORTRAITS.setShape`). Jamais un second menu de forme ailleurs.
+- **Onglets des pages des Réglages : noms courts, sur une seule ligne** (Menu, Colonne, Listes, Pages, Boutons du haut, Recherche, Graphiques) ; le nom complet est dans la bulle (`title`, 3ᵉ élément de `REGLAGES_A_PIECES`). Sur un petit écran, la barre défile au lieu de passer à la ligne.
+- Un bouton « Réordonner » ou « Réglages » d'un écran **amène sur le réglage** (la bonne page et le bon onglet, `state.regATab[page] = 'Nom de l’onglet'`) plutôt que d'ouvrir une copie dans une fenêtre.
 
 ## Artistes, œuvres et catalogue raisonné (validé)
 

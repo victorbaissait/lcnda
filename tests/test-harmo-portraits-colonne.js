@@ -71,9 +71,32 @@ function sandbox(store = {}) {
 {
     const {window, attrs, props} = sandbox({'genealogie-left-column': JSON.stringify({mode: 'nouveau', width: 999, size: 'compacte', nums: false, style: '<x>'})});
     const C = window.LCNDA_COLUMN.read();
-    assert.strictEqual(C.width, 420); assert.strictEqual(C.style, 'continue'); assert.strictEqual(C.numstyle, 'suite'); assert.strictEqual(C.lf, 'barre');
-    assert.strictEqual(attrs['data-lc-col-style'], 'continue'); assert.strictEqual(attrs['data-lc-col-nums'], 'off'); assert.strictEqual(attrs['data-lc-col-size'], 'compacte'); assert.strictEqual(attrs['data-lc-col-tabs'], 'ligne');
+    assert.strictEqual(C.width, 420); assert.strictEqual(C.style, 'boutons', '« Nouveau » garde les boutons encadrés de l’app'); assert.strictEqual(C.numstyle, 'suite'); assert.strictEqual(C.lf, 'barre');
+    assert.ok(!('data-lc-col-style' in attrs) && !('data-lc-col-look' in attrs), 'boutons encadrés : rien à poser'); assert.strictEqual(attrs['data-lc-col-nums'], 'off'); assert.strictEqual(attrs['data-lc-col-size'], 'compacte'); assert.strictEqual(attrs['data-lc-col-tabs'], 'ligne');
     assert.strictEqual(props['--sidebar'], '420px');
+}
+/* 4b. les 9 styles d'entrées : liste continue et aérée dans un seul cadre (data-lc-col-style), les six autres entrée par entrée (data-lc-col-look) */
+{
+    for (const st of ['continue', 'aeree', 'plat', 'barre', 'pastilles', 'classeur', 'icones', 'doux']) {
+        const {attrs} = sandbox({'genealogie-left-column': JSON.stringify({mode: 'nouveau', style: st})});
+        const framed = st === 'continue' || st === 'aeree';
+        assert.strictEqual(attrs[framed ? 'data-lc-col-style' : 'data-lc-col-look'], st, st);
+        assert.ok(!((framed ? 'data-lc-col-look' : 'data-lc-col-style') in attrs), st);
+    }
+    const css = read('assets/css/app.css');
+    ['barre', 'pastilles', 'classeur', 'icones', 'doux'].forEach(st => assert.ok(css.includes(`:root[data-lc-col-look="${st}"]`), 'style manquant : ' + st));
+}
+
+/* 4c. une seule forme : celle de « Forme des avatars » vaut aussi pour les portraits */
+{
+    const {window} = sandbox({'genealogie-portraits': JSON.stringify({mode: 'rond'}), 'genealogie-design': JSON.stringify({avatarShape: 'rounded'}), 'lcnda-shape-one': '1'});
+    assert.strictEqual(window.LCNDA_PORTRAITS.read().shape, 'arrondi');
+    const {window: w2, props} = sandbox({'genealogie-portraits': JSON.stringify({mode: 'rond'}), 'genealogie-design': JSON.stringify({avatarShape: 'diamond'}), 'lcnda-shape-one': '1'});
+    assert.strictEqual(w2.LCNDA_PORTRAITS.read().shape, 'autre'); assert.strictEqual(props['--lc-av-radius'], '0', 'losange : la forme vient d’app.css');
+    // qui avait déjà des portraits communs garde leur forme, qui devient LA forme (une seule fois)
+    const {store} = sandbox({'genealogie-portraits': JSON.stringify({mode: 'carre', shape: 'arrondi'}), 'genealogie-design': JSON.stringify({avatarShape: 'tilted', blue: '#123456'})});
+    assert.deepStrictEqual(JSON.parse(store['genealogie-design']), {avatarShape: 'rounded', blue: '#123456'}); assert.strictEqual(store['lcnda-shape-one'], '1');
+    assert.ok(read('assets/css/app.css').includes(':root[data-avatar-shape="diamond"][data-lc-portraits] .lc-av'));
 }
 
 /* 5. plus aucun dessin de portrait à part : chaque ancien dessin passe par UI.avatar quand le réglage n'est pas « Comme avant » */

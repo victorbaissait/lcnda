@@ -4,7 +4,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  * 🎨 Réglages → Apparence et affichage en trois groupes (Look, Navigation, Écrans), et retour à la présentation d'avant.
  *   node tests/test-reglages-trois-groupes.js
  *  1. par défaut : les trois groupes, chaque page montre ses cadres et seulement eux (rien de la page Apparence ne se perd) ;
- *  2. les onglets de « Menus, onglets et listes » et de « Fiches personnes et animaux » ;
+ *  2. les onglets de « Menus, colonne et listes » (noms courts, une ligne) et de « Fiches personnes et animaux » ;
  *  3. un réglage changé sur une page découpée est bien enregistré ;
  *  4. le bouton du bas : la présentation d'avant (la page « Apparence » entière), puis retour.
  */
@@ -66,17 +66,29 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             for (const f of ['f:navPosition', 'f:avatarShape', 'f:eventDisplayMode', 'f:interfaceLanguage']) assert.ok(!s.includes(f), f);
             assert.ok(!has(s, /Ordre et noms du menu principal|Formes des avatars|Messages après une action/));
         });
-        await t('Portraits et avatars : la forme, les formes personnalisées, les portraits', async () => {
+        await t('Portraits et avatars : une seule forme (avec « Gérer les formes »), puis le portrait ; plus la colonne de gauche', async () => {
             await go('look_portraits'); const s = await seen();
-            assert.ok(s.includes('f:avatarShape')); assert.ok(has(s, /Formes des avatars/)); assert.ok(has(s, /Portraits et colonne de gauche/));
+            assert.ok(has(s, /^Portraits et avatars/)); assert.ok(!has(s, /Colonne de gauche/));
             assert.ok(!has(s, /Mes thèmes/)); assert.ok(!s.includes('f:preset'));
+            const r = await page.evaluate(() => ({tiles: [...document.querySelectorAll('#lc-portraits [data-lck-shape]')].map(b => b.dataset.lckShape), manage: !!document.querySelector('#lc-portraits [data-lck-shape-slot] #lc-avatar-shapes'), sel: !!document.querySelector('#lc-portraits select[form="design-form"][name="avatarShape"]')}));
+            for (const k of ['tilted', 'square', 'rounded', 'circle', 'diamond']) assert.ok(r.tiles.includes(k), k);
+            assert.ok(r.manage, '« ⚙️ Gérer les formes » rangé dans « 1 · La forme »'); assert.ok(r.sel, 'le menu d’avant reste dans le formulaire (caché)');
+        });
+        await t('une seule forme : un clic l’enregistre pour les carrés numérotés et pour les portraits', async () => {
+            await page.click('#lc-portraits [data-lck-shape="circle"]'); await page.waitForTimeout(300);
+            const r = await page.evaluate(() => ({av: JSON.parse(localStorage.getItem('genealogie-design') || '{}').avatarShape, root: document.documentElement.dataset.avatarShape, p: window.LCNDA_PORTRAITS.read().shape, on: !!document.querySelector('#lc-portraits [data-lck-shape="circle"].is-active')}));
+            assert.deepEqual(r, {av: 'circle', root: 'circle', p: 'rond', on: true});
+            await page.click('#lc-portraits [data-lck-pmode="carre"]'); await page.waitForTimeout(300);
+            assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-design') || '{}').avatarShape), 'square', 'le carré de la fiche choisit aussi la forme');
+            await page.click('#lc-portraits [data-lck-pmode="avant"]'); await page.click('#lc-portraits [data-lck-shape="tilted"]'); await page.waitForTimeout(300);
         });
         await t('une forme à soi choisie reste choisie en revenant sur la page', async () => {
             await page.evaluate(() => localStorage.setItem('genealogie-avatar-shapes', JSON.stringify({custom: {shp_nuage: {name: 'Nuage', kind: 'poly', pts: [[0, 0], [1, 0], [1, 1], [0, 1], [.5, .5]]}}, order: [], hidden: []})));
             await go('look_theme'); await go('look_portraits');
-            await page.locator('#design-form select[name="avatarShape"]').selectOption('shp_nuage'); await page.waitForTimeout(600);
+            await page.click('#lc-portraits [data-lck-shape="shp_nuage"]'); await page.waitForTimeout(600);
             await go('look_theme'); await go('look_portraits');
-            assert.equal(await page.locator('#design-form select[name="avatarShape"]').inputValue(), 'shp_nuage');
+            assert.equal(await page.locator('select[form="design-form"][name="avatarShape"]').inputValue(), 'shp_nuage');
+            assert.ok(await page.locator('#lc-portraits [data-lck-shape="shp_nuage"].is-active').count(), 'la tuile de sa forme est choisie');
             assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-design') || '{}').avatarShape), 'shp_nuage');
         });
         await t('Notifications et boutons : les messages, puis la forme des boutons (A6, venue de Designs au choix)', async () => {
@@ -91,13 +103,44 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await page.selectOption('select[name="defaultCalendar"]', v); await page.waitForTimeout(900);
             assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-design') || '{}').defaultCalendar), v);
         });
-        await t('Menus, onglets et listes : un onglet par menu, chacun ses cadres', async () => {
+        await t('Menus, colonne et listes : noms courts sur une ligne, un onglet par sujet, chacun ses cadres', async () => {
+            assert.match(await page.locator('[data-side-value="nav_menus"]').first().innerText(), /Menus, colonne et listes/);
             await go('nav_menus');
             const tabs = await page.locator('[data-reg-a-tab]').allTextContents();
-            assert.deepEqual(tabs, ['Menu principal', 'Listes', 'Pages des Réglages', 'Boutons en haut à droite', 'Types de recherche', 'Graphiques']);
-            let s = await seen(); assert.ok(has(s, /Ordre et noms du menu principal/)); assert.ok(s.includes('f:navPosition')); assert.ok(!s.includes('f:ownerFirst')); assert.ok(!has(s, /Ordre des listes/));
-            await page.click('[data-reg-a-tab="1"]'); s = await seen(); assert.ok(has(s, /Ordre des listes/)); assert.ok(!has(s, /menu principal/));
-            await page.click('[data-reg-a-tab="5"]'); s = await seen(); assert.ok(has(s, /Graphiques — Diagrammes/)); assert.ok(has(s, /Graphiques — Statistiques/));
+            assert.deepEqual(tabs, ['Menu', 'Colonne', 'Listes', 'Pages', 'Boutons du haut', 'Recherche', 'Graphiques']);
+            assert.equal(await page.locator('[data-reg-a-tab="1"]').getAttribute('title'), 'La colonne de gauche : où, et son dessin');
+            assert.equal(await page.evaluate(() => new Set([...document.querySelectorAll('[data-reg-a-tab]')].map(b => Math.round(b.getBoundingClientRect().top))).size), 1, 'une seule ligne');
+            let s = await seen(); assert.ok(has(s, /Ordre et noms du menu principal/)); assert.ok(s.includes('f:navPosition')); assert.ok(!s.includes('f:sidebarPosition')); assert.ok(!s.includes('f:ownerFirst')); assert.ok(!has(s, /Ordre des listes/));
+            await page.click('[data-reg-a-tab="1"]'); s = await seen(); assert.ok(has(s, /^Colonne de gauche/)); assert.ok(!has(s, /menu principal/));
+            await page.click('[data-reg-a-tab="2"]'); s = await seen(); assert.ok(has(s, /Ordre des listes/)); assert.ok(!has(s, /menu principal/));
+            await page.click('[data-reg-a-tab="6"]'); s = await seen(); assert.ok(has(s, /Graphiques — Diagrammes/)); assert.ok(has(s, /Graphiques — Statistiques/));
+        });
+        await t('Colonne : « Où ? », « Partir de », 9 styles d’entrées posés sur la vraie colonne, aperçu', async () => {
+            await go('nav_menus'); await page.click('[data-reg-a-tab="1"]');
+            const n = await page.locator('#lc-colonne [data-lck-c="style"]').count(); assert.equal(n, 9);
+            assert.ok(await page.locator('#lc-colonne [data-lck-c="style"][data-v="boutons"].is-active').count(), 'boutons encadrés par défaut');
+            await page.click('#lc-colonne [data-lck-cmode="nouveau"]'); await page.waitForTimeout(250);
+            let r = await page.evaluate(() => ({S: window.LCNDA_COLUMN.read(), style: document.documentElement.getAttribute('data-lc-col-style'), look: document.documentElement.getAttribute('data-lc-col-look')}));
+            assert.equal(r.S.style, 'boutons'); assert.equal(r.S.numstyle, 'suite'); assert.equal(r.style, null); assert.equal(r.look, null);
+            for (const [v, attr] of [['plat', 'look'], ['classeur', 'look'], ['doux', 'look'], ['continue', 'style']]) {
+                await page.click(`#lc-colonne [data-lck-c="style"][data-v="${v}"]`); await page.waitForTimeout(150);
+                r = await page.evaluate(() => ({style: document.documentElement.getAttribute('data-lc-col-style'), look: document.documentElement.getAttribute('data-lc-col-look'), prev: document.querySelector('#lck-c-prev .lck-c-side')?.className || '', mod: !!document.querySelector('#lc-colonne [data-lck-cmode="nouveau"].is-mod')}));
+                assert.equal(r[attr], v, v); assert.equal(r[attr === 'look' ? 'style' : 'look'], null, v); assert.match(r.prev, new RegExp('st-' + v)); assert.ok(r.mod, '« retouché »');
+            }
+            await page.click('#lc-colonne [data-lck-c="nums"][data-v="aucun"]'); await page.waitForTimeout(150);
+            assert.equal(await page.evaluate(() => window.LCNDA_COLUMN.read().nums), false);
+            await page.click('#lc-colonne [data-lck-side="right"]'); await page.waitForTimeout(250);
+            r = await page.evaluate(() => ({pos: JSON.parse(localStorage.getItem('genealogie-design') || '{}').sidebarPosition, cls: document.documentElement.classList.contains('side-right'), sel: document.querySelector('select[form="design-form"][name="sidebarPosition"]')?.value, prev: !!document.querySelector('#lck-c-prev .lck-colprev.is-right')}));
+            assert.deepEqual(r, {pos: 'right', cls: true, sel: 'right', prev: true});
+            await page.click('#lc-colonne [data-lck-side="left"]'); await page.click('#lck-c-reset'); await page.waitForTimeout(250);
+            assert.equal(await page.evaluate(() => window.LCNDA_COLUMN.read().mode), 'avant');
+        });
+        await t('Listes › « Réordonner » amène sur Réglages › Menus, colonne et listes › Listes', async () => {
+            await page.evaluate(() => { window.LCNDA_APP.state.listType = 'persons'; window.LCNDA_APP.setModule('listes'); }); await page.waitForSelector('#list-reorder');
+            await page.click('#list-reorder'); await page.waitForTimeout(1300);
+            const r = await page.evaluate(() => ({tab: window.LCNDA_APP.state.maintenanceTab, on: document.querySelector('[data-reg-a-tab].is-active')?.textContent}));
+            assert.deepEqual(r, {tab: 'nav_menus', on: 'Listes'});
+            assert.ok(has(await seen(), /Ordre des listes/));
         });
         await t('Fiches personnes et animaux : cinq onglets ; recensements, badges et Sosa y sont', async () => {
             await go('design_sheets');
