@@ -48,7 +48,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         const go = async k => { await page.locator(`[data-side-value="${k}"]`).first().click(); await page.waitForTimeout(1200); };
         // ce qui se voit sur la page : cadres (par leur titre) et champs du formulaire (par leur nom)
         const seen = () => page.evaluate(() => { const pg = document.querySelector('#workspace > .page'), v = el => !!(el.offsetWidth || el.offsetHeight), out = [];
-            const name = el => (el.querySelector(':scope > header h3, :scope > header h2, :scope > h3, h3, summary, legend')?.textContent || '').trim();
+            const name = el => (el.querySelector(':scope > header h3, :scope > header h2, :scope > h3, h3, summary, legend')?.textContent || '').trim().replace(/\s*\?$/, ''); // le « ? » d'aide arrive parfois un peu après
             const walk = el => { if (!v(el)) return; if (el.matches('.design-primary-grid > label')) { out.push('f:' + (el.querySelector('[name]')?.name || '')); return; } if (el.matches('section, .local-lock-inline, .ui-presets, .design-actions')) { out.push(name(el) || el.className); return; } [...el.children].forEach(walk); };
             [...pg.children].forEach(walk); return out; });
         const has = (list, re) => list.some(x => re.test(x));
