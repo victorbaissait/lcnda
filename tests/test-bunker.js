@@ -12,7 +12,7 @@ const fill = (g, v = 200) => { B.RES_KEYS.forEach(r => { g.res[r] = v; }); g.flo
 t('une partie : un étage avec radio, groupe électrogène, atelier ; les plans de base ; une ville à la bonne taille', () => {
     const g = game();
     assert.deepEqual(g.floors[0].slots.slice(0, 3), ['radio', 'generateur', 'atelier']);
-    assert.deepEqual(g.plans.sort(), ['arbremur', 'barricade', 'berceau', 'bibliotheque', 'compost', 'cuve', 'debarras', 'douche', 'dynamo', 'etabli', 'etagerecomp', 'etageres', 'filtre', 'gardemanger', 'jeux', 'lavabo', 'lit', 'pieges', 'poele', 'porte', 'sacados', 'stockage', 'toilettes']);
+    assert.deepEqual(g.plans.sort(), ['arbremur', 'barricade', 'berceau', 'bibliotheque', 'compost', 'cuve', 'debarras', 'douche', 'dynamo', 'etabli', 'etagerecomp', 'etageres', 'extincteur', 'filtre', 'gardemanger', 'jeux', 'lavabo', 'lit', 'niche', 'piegerats', 'pieges', 'poele', 'porte', 'sacados', 'stockage', 'toilettes']);
     assert.equal(g.people.length, 3); assert.ok(g.people[0].me);
     for (const [size, [nn, nb]] of Object.entries(B.SIZES)) {
         const c = game({city: {name: 'X', size}}).city; assert.equal(c.n, nn); assert.equal(c.places.length, nb);
@@ -288,6 +288,39 @@ t('🎚️ difficulté et 🎬 scénarios ; 🧳 objets de famille retrouvés da
     const t0 = game({opt: {tuto: true}}); assert.equal(t0.tuto, 0); fill(t0); assert.ok(B.orderBuild(t0, 'toilettes', 0, 3).ok); B.run(t0, 10); assert.ok(t0.tuto >= 1); assert.ok(t0.log.some(l => /Étape 2/.test(l.txt)));
     B.setOpt(t0, 'tuto', false); assert.equal(t0.tuto, -1); assert.equal(game().tuto, -1);
     const c = B.check(JSON.parse(JSON.stringify(game({diff: 'difficile', scen: 'hiver', opt: {meteo: true, chaines: true}}))));
-    assert.equal(c.diff, 'difficile'); assert.equal(c.scen, 'hiver'); assert.deepEqual(c.opt, {meteo: true, chaines: true, tuto: false});
+    assert.equal(c.diff, 'difficile'); assert.equal(c.scen, 'hiver'); assert.deepEqual(c.opt, {meteo: true, chaines: true, tuto: false, age: false, feu: false, nuit: false, missions: false});
+});
+t('🐕 animaux (adopter, nourrir, ils partent s’ils ont faim) ; 🐀 nuisibles (pièges, chat, bocaux)', () => {
+    const g = game(); fill(g, 30); assert.ok(B.adopt(g, 'chien')); assert.ok(B.adopt(g, 'poules')); const d0 = B.defense(g); g.pets = g.pets.filter(a => a.k !== 'chien'); assert.equal(Math.round((d0 - B.defense(g)) * 10) / 10, 2);
+    const n0 = g.res.nourriture; B.feedPets(g); assert.ok(g.res.nourriture >= n0 + 2 - 0.01, 'les œufs'); g.res.plantes = 0; B.feedPets(g); B.feedPets(g); B.feedPets(g); assert.equal(g.pets.length, 0, 'les poules affamées s’en vont');
+    const r = game(); r.res.nourriture = 40; r.pests = 60; const f0 = r.res.nourriture; B.pests(r); assert.ok(r.res.nourriture < f0, 'les rats mangent');
+    const c = game(); c.res.nourriture = 40; c.pests = 30; B.adopt(c, 'chat'); c.floors[0].slots[3] = 'piegerats'; B.pests(c); assert.ok(c.pests < 30, 'chat et pièges');
+});
+t('🍲 recettes : le plat du jour (soupe, ragoût, recette de famille), il faut de quoi cuire ; sinon une ration', () => {
+    const g = game({lore: [{kind: 'recipe', title: 'La potée de mémé', text: 'chou, lard'}]}); g.res.plantes = 10; g.res.nourriture = 10; g.res.eau = 10;
+    assert.equal(B.recipeOk(g, 'ragout'), false, 'pas de quoi cuire'); assert.equal(B.pickRecipe(g), 'compote');
+    g.floors[0].slots[3] = 'poele'; assert.equal(B.pickRecipe(g), 'famille'); assert.equal(B.recipeName(g, 'famille'), 'La potée de mémé');
+    g.menu = 'soupe'; assert.equal(B.pickRecipe(g), 'soupe'); const p = g.people[0]; p.needs.faim = 10; p.act = {k: 'manger', until: g.t}; const m0 = p.mood, pl0 = g.res.plantes; B.run(g, 10); assert.ok(g.res.plantes < pl0 && p.mood > m0 - 1);
+});
+t('🧓 vieillir (option) : un jour = un an ; le bébé devient enfant puis adulte ; 🔥 incendie (option) : l’extincteur l’éteint', () => {
+    const g = game({opt: {age: true}}); const b = g.people[1]; b.baby = true; b.age = 3; B.aging(g); assert.equal(b.baby, false); assert.equal(b.child, true); assert.equal(B.send(g, b.id, g.city.places[0].id).ok, false);
+    b.age = 13; B.aging(g); assert.ok(!b.child); const o = game(); o.people[1].age = 30; B.run(o, 3 * 1440); assert.equal(o.people[1].age, 30, 'sans l’option, on ne vieillit pas');
+    const f = game({opt: {feu: true}}); f.fire = {fi: 0, power: 40, h: 0}; f.floors[0].slots[3] = 'extincteur'; B.fire(f); assert.equal(f.fire, null);
+    const h = game({opt: {feu: true}}); h.fire = {fi: 0, power: 40, h: 0}; h.res.eau = 50; h.res.eausale = 50; for (let i = 0; i < 9 && h.fire; i++) B.fire(h); assert.equal(h.fire, null, 'éteint à l’eau ou de lui-même'); assert.ok(h.res.eau + h.res.eausale < 100);
+});
+t('🏚️ les pièces d’un lieu (seulement ce qu’on y trouve, plus vite, un trésor caché) ; 🌗 la nuit (option) ; 🎨 décorer ; 📊 une photo par jour', () => {
+    const g = game(); const pl = g.city.places.find(x => x.kind === 'maison') || g.city.places[0]; pl.kind = 'maison'; Object.keys(pl.stock).forEach(r => { pl.stock[r] = 0; }); pl.max.eau = 5; pl.max.tissu = 6; pl.stock.eau = 3; pl.stock.tissu = 4; pl.junk = []; pl.tools = []; pl.plans = 0;
+    assert.equal(B.stepOf({id: pl.id, room: 'cave'}).room, 'cave'); assert.equal(B.stepOf({id: pl.id, room: 'salon'}).room, undefined);
+    const p = g.people[1], e0 = g.res.eau, t0 = g.res.tissu; B.send(g, p.id, [{id: pl.id, room: 'cave'}]); let k = 0; while (p.where !== 'base' && k++ < 300) B.run(g, 30);
+    assert.ok(g.res.tissu <= t0 + 0.01, 'pas de tissu à la cave'); assert.ok(g.res.eau > e0 - 5, 'de l’eau'); assert.ok(pl.roomsDone.includes('cave'));
+    const d = game(); fill(d, 30); assert.ok(B.addDeco(d, 0, 'papier').ok); assert.ok(B.decoMood(d) > 0); for (let i = 0; i < 3; i++) B.addDeco(d, 0, 'tapis'); assert.equal(B.addDeco(d, 0, 'tapis').ok, false);
+    const s = game(); B.run(s, 3 * 1440); assert.ok(s.hist.length >= 3 && s.hist.every(h => h.pop >= 1)); const c = B.check(JSON.parse(JSON.stringify(d))); assert.equal(c.deco[0].length, 4);
+});
+t('📜 missions généalogiques (option) : retrouver l’acte d’un vrai ancêtre dans le bon lieu', () => {
+    const g = game({opt: {missions: true}, ancestors: [{pid: 9, name: 'Louis MARTIN', by: 1870, bplace: 'Tulle', occ: 'Forgeron', married: true, dy: 1930}]});
+    assert.equal(g.missions.length, 3); assert.ok(B.missionTxt(g.missions[0]).includes('Louis MARTIN'));
+    const m = g.missions[0], kind = B.DOCS[m.doc][2][0], pl = g.city.places[0]; pl.kind = kind; let ok = false;
+    for (let i = 0; i < 12 && !ok; i++) { const p = g.people[1]; p.hp = 100; B.send(g, p.id, pl.id); let k = 0; while (p.where !== 'base' && k++ < 300) B.run(g, 30); ok = m.done; }
+    assert.ok(ok, 'trouvé'); assert.ok(g.docs.some(d => d.pid === 9)); assert.equal(game().missions.length, 0, 'sans l’option, pas de mission');
 });
 console.log(`✓ bunker : ${n} vérifications`);
