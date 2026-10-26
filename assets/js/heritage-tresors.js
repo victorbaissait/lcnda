@@ -140,7 +140,7 @@
         const f = ext.tresorFeatures.find(x => x.key === key), ws = A().$('#workspace'); if (!f || !ws) return;
         if (A().state.module !== 'tresors') { pending = key; return A().setModule('tresors'); }
         if (push && location.hash !== `#tresors/${key}`) history.pushState(null, '', `#tresors/${key}`);
-        ws.innerHTML = `<section class="page h-tr h-tr-page" data-tr-page="${esc(key)}"><div class="h-tr-top"><button type="button" class="button small secondary" data-tr-home>← Tous les trésors</button></div>
+        ws.innerHTML = `<section class="page h-tr h-tr-page" data-tr-page="${esc(key)}"><div class="h-tr-top"><button type="button" class="button small secondary" data-tr-home>← Tous les trésors</button>${(ext.tresorRelated?.[key] || []).map(([l], i) => `<button type="button" class="button small secondary" data-tr-rel="${esc(key)}:${i}">${esc(l)}</button>`).join('')}</div>
             <div class="page-header"><div><span class="eyebrow">✨ TRÉSORS · ${esc(GROUPS.find(g => g[0] === f.group)?.[1].replace(/^\S+\s/, '').toUpperCase() || '')}</span><h1>${esc(f.icon)} ${esc(f.title)}</h1><p class="muted">${esc(f.desc)}</p></div></div><div class="h-tr-body" data-tr-body></div></section>`;
         const host = ws.querySelector('[data-tr-body]');
         // l'arbre relu à chaque ouverture : les fiches changées ailleurs y sont
@@ -149,6 +149,7 @@
     document.addEventListener('click', e => {
         const o = e.target.closest('[data-tr-open]'); if (o && o.closest('.h-tr')) { e.preventDefault(); openFeature(o.dataset.trOpen); return; }
         if (e.target.closest('[data-tr-settings]')) { e.preventDefault(); openSettings(); return; }
+        const rel = e.target.closest('[data-tr-rel]'); if (rel) { e.preventDefault(); const [k, i] = rel.dataset.trRel.split(':'); ext.tresorRelated?.[k]?.[Number(i)]?.[1](); return; }
         const h = e.target.closest('[data-tr-home]'); if (h) { e.preventDefault(); history.pushState(null, '', '#tresors'); A().$('#workspace').innerHTML = hub(); }
     });
     /* ═════════ Le bloc de la fiche : ✨ Trésors de cette personne ═════════ */

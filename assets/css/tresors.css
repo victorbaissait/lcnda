@@ -5,7 +5,7 @@
 .h-tr-card:hover, .h-tr-card:focus-visible { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0, 0, 0, .08); border-color: var(--blue, #2a7de1); outline: none; }
 .h-tr-card .h-tr-ic { font-size: 26px; line-height: 1; }
 .h-tr-card small { color: var(--muted, #667); line-height: 1.35; }
-.h-tr-top { margin-bottom: 6px; }
+.h-tr-top { margin-bottom: 6px; display: flex; gap: 8px; flex-wrap: wrap; }
 .h-tr-body { display: grid; gap: 14px; }
 .h-tr-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: end; }
 .h-tr-row > label { display: grid; gap: 3px; font-size: 13px; }
