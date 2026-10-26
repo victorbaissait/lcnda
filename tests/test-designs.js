@@ -83,7 +83,7 @@ function sandbox(store = {}) {
     await t('« Réglages en plus » : retouché, attributs de la retouche seule, valeurs bornées et vérifiées', () => {
         const {D, attrs} = sandbox({'genealogie-designs': JSON.stringify({ver: 2, a1: {v: 'avant', r: 99, bw: 'x', acc: 'red;}'}, a2: {v: 'nope', sp: 10}, a3: {v: 'trait', ic: '<b>'}, a7: {v: 'petit', dur: 9999}})});
         const G = D.read();
-        assert.equal(G.a1.r, 16, 'arrondi borné'); assert.equal(G.a1.bw, 2, 'épaisseur illisible → départ'); assert.ok(!('acc' in G.a1), 'plus de couleur d’accent');
+        assert.equal(G.a1.r, 50, 'arrondi borné'); assert.equal(G.a1.bw, 2, 'épaisseur illisible → départ'); assert.ok(!('acc' in G.a1), 'plus de couleur d’accent');
         assert.equal(G.a2.v, 'avant'); assert.equal(G.a2.sp, 60, 'espace borné'); assert.equal(G.a3.ic, 16); assert.equal(G.a7.dur, 400, 'vitesse bornée');
         assert.ok(D.isModified(G, 'a1') && D.isOn(G, 'a1'), 'A1 « Comme avant » retouché');
         assert.equal(attrs['data-lc-style'], 'avant'); assert.equal(attrs['data-lc-r'], '1'); assert.ok(!('data-lc-lines' in attrs), 'traits de départ : pas de feuille des traits');

@@ -94,7 +94,7 @@
 
     const isPrimary = el => el.matches('.button:not(.secondary):not(.danger):not(.ghost):not(.h-sc-star)') && !el.matches('label');
     const isReset = el => /^\s*(↺\s*)?(remettre|tout remettre|tout réinitialiser|réinitialiser)/i.test(el.textContent || '');
-    const SETTINGS_TABS = ['design', 'designs', 'design_sheets', 'design_maps', 'accessibilite', 'raccourcis', 'board_prefs', 'pet_prefs', 'montage_prefs', 'viewer_prefs', 'diagram_kinds', 'atelier', 'htr'];
+    const SETTINGS_TABS = ['design', 'designs', 'design_sheets', 'design_maps', 'accessibilite', 'raccourcis', 'board_prefs', 'pet_prefs', 'montage_prefs', 'viewer_prefs', 'atelier', 'htr'];
     UI.settingsTabs = SETTINGS_TABS;
 
     /** harmonizePageHeader(head) : range un en-tête existant comme UI.pageHeader (idempotent) */

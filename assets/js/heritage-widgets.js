@@ -1044,7 +1044,7 @@
     function kindHtml() { return kindHtmlInner() + captionField(target()); }
     /** Dessin, couleurs et nombre de valeurs : communs au graphique et à la statistique de l'app */
     function drawHtml(d) {
-        // les dessins simples, puis tous les types de « Mes diagrammes » (même catalogue, même ordre, mêmes groupes : Réglages → Types de diagrammes)
+        // les dessins simples, puis tous les types de « Mes diagrammes » (même catalogue, même ordre, mêmes groupes : le ⚙️ de la galerie des diagrammes)
         const dgGroups = ext.diagramStatStyles ? ext.diagramStatStyles() : [];
         const hiddenDg = String(d.style || '').startsWith('dg:') && !dgGroups.some(([, items]) => items.some(([k]) => k === d.style)); // masqué dans les types : on le garde choisi, sinon le prochain enregistrement écrirait « Barres »
         return `<label>Dessin <select data-cw-style>${hiddenDg ? `<option value="${esc(d.style)}" selected>${esc(d.style.slice(3))} (type masqué)</option>` : ''}<optgroup label="Dessins simples">${CHART_STYLES.map(([k, l]) => `<option value="${k}" ${(d.style || 'bars') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>${dgGroups.map(([g, items]) => `<optgroup label="📊 ${esc(g)}">${items.map(([k, l]) => `<option value="${esc(k)}" ${d.style === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>

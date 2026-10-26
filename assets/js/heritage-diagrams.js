@@ -259,7 +259,7 @@
         return new Promise(resolve => {
             const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-gallery';
             const paint = () => {
-                // l'ordre, les types cachés et les groupes à soi : Réglages → Types de diagrammes (heritage-diagram-kinds.js)
+                // l'ordre, les types cachés et les groupes à soi : le ⚙️ de cette galerie (heritage-diagram-kinds.js)
                 const all = TEMPLATES(), groups = {};
                 if (ext.diagramCatalog) ext.diagramCatalog(all).forEach(([g, items]) => { groups[g] = items.map(t => [t, all.indexOf(t)]); });
                 else all.forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });

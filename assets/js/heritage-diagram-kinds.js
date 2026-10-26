@@ -1,5 +1,5 @@
 /* LCNDA — 📊 Les types de diagrammes, communs aux diagrammes et aux graphiques :
- *  - un seul catalogue (ordre, types cachés, groupes à soi) : Réglages → « Types de diagrammes », ou ⚙️ dans la galerie ;
+ *  - un seul catalogue (ordre, types cachés, groupes à soi) : ⚙️ dans la galerie des diagrammes (Graphiques) ;
  *  - un graphique (Éditeur de graphiques) peut se dessiner avec n'importe quel type : parts, chiffres, assemblées,
  *    nuage de mots… et, à partir des personnes, frise de vies, frise chronologique, flux de migrations ;
  *  - partout où l'on pose un diagramme (fiche, fiche d'une personne, enquête, Atelier, tableau de bord) : « D'un
@@ -70,19 +70,17 @@
     const kindsHelp = '<p class="muted">Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes.</p>';
     ext.openDiagramKindsEditor = ({onSave} = {}) => {
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-dk-dlg';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">DIAGRAMMES</span><h2>⚙️ Ranger les types</h2></div><button type="button" class="icon-button" data-x>×</button></div><div class="h-dk-body">${kindsHelp}${kindsEditorHtml()}</div><div class="modal-actions"><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button><button type="button" class="button" data-dk-save>Enregistrer</button></div>`;
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">DIAGRAMMES</span><h2>⚙️ Ranger les types</h2></div><button type="button" class="icon-button" data-x>×</button></div><div class="h-dk-body">${kindsHelp}${kindsEditorHtml()}<details class="h-dk-howto"><summary>⤒ Mon propre graphique à partir de données d’ailleurs</summary>${HOWTO}</details></div><div class="modal-actions"><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button><button type="button" class="button" data-dk-save>Enregistrer</button></div>`;
         document.body.appendChild(dlg); // pas dans la galerie : son paint() remplace son contenu (« Tout remettre ») et ferait disparaître l'éditeur
         bindKindsEditor(dlg, () => { onSave?.(); });
         dlg.addEventListener('click', e => { if (e.target.closest('[data-x]') || e.target.closest('[data-dk-save]')) dlg.close(); });
         dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
     };
     ext.maintenance = ext.maintenance || {};
+    // la page « Types de diagrammes » a quitté les Réglages (doublon du ⚙️ de la galerie) : une ancienne adresse ouvre le même éditeur, dans Graphiques
     ext.maintenance.diagram_kinds = async token => {
         if (token !== A().state.workspaceToken) return;
-        const ws = document.getElementById('workspace');
-        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>📊 Types de diagrammes</h2><p>Ordre, types montrés ou cachés, et groupes à toi.</p></div></header><div class="maintenance-panel">${kindsHelp}${kindsEditorHtml()}<div class="page-actions action-zone"><button type="button" class="button" data-dk-save>Enregistrer</button><button type="button" class="button secondary" data-dk-reset>↺ Remettre comme au départ</button></div></div>
-            <section class="maintenance-panel h-dk-howto"><h3>⤒ Mon propre graphique à partir de données d’ailleurs</h3>${HOWTO}</section></section>`;
-        bindKindsEditor(ws.querySelector('.page'));
+        A().state.maintenanceTab = ''; await A().setModule('graphiques'); ext.openDiagramKindsEditor();
     };
     const HOWTO = `<ol><li><b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries.</li>
         <li><b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation).</li>
