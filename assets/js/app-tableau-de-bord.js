@@ -16,7 +16,7 @@
         const groups=suivi?[[null,mine],['Autres widgets de l’app',others]]:[[null,others],['🐾 Suivi des animaux',mine]];
         let n=1;const item=([type,,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${String(++n).padStart(2,'0')}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button><button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="Ajouter ${escapeHtml(label)}">+</button></div></div>`;
         content.innerHTML = `<div class="dashboard-widget-catalog"><div class="dashboard-widget-catalog-item dashboard-widget-overview is-active"><div><span>01</span><strong>Vue générale</strong></div></div>${groups.filter(([,items])=>items.length).map(([title,items])=>`${title?`<div class="section-label dashboard-widget-catalog-group">${escapeHtml(title)}</div>`:''}${items.map(item).join('')}`).join('')}</div>`;
-        footer.innerHTML = `<div class="dashboard-footer-actions"><button class="button small secondary" id="dashboard-open-design">Apparence</button><button class="button small secondary" id="dashboard-reorder" title="Changer l’ordre des widgets de la vue générale">Réordonner les widgets</button><button class="button small secondary" id="dashboard-create-widget" title="Créer ton propre widget, de zéro ou à partir d’un widget existant">＋ Créer un widget</button></div><span style="display:block;margin-top:9px">Widgets duplicables et configurables.</span>`;
+        footer.innerHTML = `<div class="dashboard-footer-actions"><button class="button small secondary" id="dashboard-library" title="L’ordre des sortes de widgets dans cette colonne, et celles qu’on cache">🧩 Bibliothèque des widgets</button><button class="button small secondary" id="dashboard-reorder" title="Changer l’ordre des widgets de la vue générale">Réordonner les widgets</button><button class="button small secondary" id="dashboard-create-widget" title="Créer ton propre widget, de zéro ou à partir d’un widget existant">＋ Créer un widget</button></div><span style="display:block;margin-top:9px">Widgets duplicables et configurables.</span>`;
         $$('[data-info-dashboard-widget]',content).forEach(button=>button.addEventListener('click',()=>toast(dashboardWidgetInfo[button.dataset.infoDashboardWidget]||dashboardWidgetLabel(button.dataset.infoDashboardWidget)),{signal:sidebarSignal()}));
         $$('[data-add-dashboard-widget]',content).forEach(button=>button.addEventListener('click',async()=>{
             const settings=dashboardBlockSettings();
@@ -25,7 +25,7 @@
             toast('Widget ajouté.');
             await renderDashboard();
         },{signal:sidebarSignal()}));
-        $('#dashboard-open-design')?.addEventListener('click',()=>{state.maintenanceTab='design';setModule('maintenance');},{signal:sidebarSignal()});
+        $('#dashboard-library')?.addEventListener('click',()=>window.LCNDA_APP.openWidgetLibraryDialog(),{signal:sidebarSignal()});
         $('#dashboard-reorder')?.addEventListener('click',()=>openDashboardReorderDialog(),{signal:sidebarSignal()});
         $('#dashboard-create-widget')?.addEventListener('click',()=>{state.maintenanceTab='widget_editor';setModule('maintenance');},{signal:sidebarSignal()});
     }

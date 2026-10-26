@@ -153,7 +153,7 @@ function sandbox(store = {}) {
     });
     await t('« 🎨 Designs au choix » juste après « Apparence » (colonne, groupe, réglages gardés tout seuls)', () => {
         assert.match(read('assets/js/app.js'), /\['design','01','Apparence'\],\['designs','01a','Designs au choix'\]/);
-        assert.match(read('assets/js/app-maintenance.js'), /\['design', 'designs', 'design_board'/);
+        assert.match(read('assets/js/app-maintenance.js'), /\['design', 'designs', 'design_sheets'/); // le Tableau de bord se règle dans le Tableau de bord
         assert.match(read('assets/js/app-pages.js'), /SETTINGS_TABS = \['design', 'designs',/);
     });
     await t('index.php : feuilles, pose au plus tôt, script après app-apparence.js', () => {

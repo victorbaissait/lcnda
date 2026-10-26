@@ -152,13 +152,13 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         });
         await t('aucun cadre de l’ancienne page « Apparence » ne se perd', async () => {
             const all = new Set();
-            for (const k of ['look_theme', 'look_portraits', 'look_msgs', 'look_lang', 'look_layouts', 'nav_menus', 'design_sheets', 'design_maps', 'design_board']) {
+            for (const k of ['look_theme', 'look_portraits', 'look_msgs', 'look_lang', 'look_layouts', 'nav_menus', 'design_sheets', 'design_maps']) {
                 await go(k); const n = await page.locator('[data-reg-a-tab]').count();
                 for (let i = 0; i < Math.max(1, n); i++) { if (n) { await page.click(`[data-reg-a-tab="${i}"]`); await page.waitForTimeout(150); } (await seen()).forEach(x => all.add(x)); }
             }
-            await page.click('#reglages-presentation'); await page.waitForTimeout(1300);
+            await page.evaluate(async () => { window.LCNDA_APP.setReglagesA(false); window.LCNDA_APP.renderSidebar(); await window.LCNDA_APP.renderMaintenance(); }); await page.waitForTimeout(1300); // plus de bouton : l'ancienne présentation par le code
             await go('design'); const old = await seen();
-            const lost = old.filter(x => !all.has(x) && !/Types de recherche|Graphiques — /.test(x)); // rangés dans Recherche → Réordonner et Graphiques → ⠿ Réordonner
+            const lost = old.filter(x => !all.has(x) && !/Types de recherche|Graphiques — |Bibliothèque des widgets|Widgets posés|TABLEAU DE BORD|dashboard/i.test(x)); // rangés dans Recherche → Réordonner, Graphiques → ⠿ Réordonner, Tableau de bord → 🧩 Bibliothèque et Réordonner les widgets
             assert.deepEqual(lost, []);
         });
         await t('présentation d’avant : la page « Apparence » entière, puis retour aux trois groupes', async () => {
@@ -166,7 +166,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.ok(await page.locator('[data-side-value="design"]').count());
             assert.equal(await page.locator('[data-side-value="look_theme"]').count(), 0);
             const s = await seen(); assert.ok(s.includes('f:preset') && s.includes('f:navPosition') && s.includes('f:eventDisplayMode'));
-            await page.click('#reglages-presentation'); await page.waitForTimeout(1300);
+            assert.equal(await page.locator('#reglages-presentation').count(), 0, 'plus de bouton « présentation d’avant »');
+            await page.evaluate(async () => { window.LCNDA_APP.setReglagesA(true); window.LCNDA_APP.renderSidebar(); await window.LCNDA_APP.renderMaintenance(); }); await page.waitForTimeout(1300);
             assert.equal(await page.evaluate(() => window.LCNDA_APP.state.maintenanceTab), 'look_theme');
             assert.ok(await page.locator('[data-side-value="look_theme"]').count());
         });
