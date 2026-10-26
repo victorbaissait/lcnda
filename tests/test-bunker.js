@@ -323,4 +323,12 @@ t('📜 missions généalogiques (option) : retrouver l’acte d’un vrai ancê
     for (let i = 0; i < 12 && !ok; i++) { const p = g.people[1]; p.hp = 100; B.send(g, p.id, pl.id); let k = 0; while (p.where !== 'base' && k++ < 300) B.run(g, 30); ok = m.done; }
     assert.ok(ok, 'trouvé'); assert.ok(g.docs.some(d => d.pid === 9)); assert.equal(game().missions.length, 0, 'sans l’option, pas de mission');
 });
+t('🛡️ un fichier de partie piégé (« __proto__ », « toString »…, nombres énormes) ne casse rien', () => {
+    const base = game({opt: {meteo: true, missions: true, age: true, feu: true, nuit: true, chaines: true}, ancestors: [{name: 'L', pid: 1}]});
+    for (const k of ['__proto__', 'constructor', 'toString']) {
+        const g = JSON.parse(JSON.stringify(base)); g.pets = [{k}, {k: 'chien', name: '<b>x</b>'}]; g.deco = {0: [{k}]}; g.floors[0].slots[4] = k; g.junk = {[k]: 2}; g.city.places[0].kind = k; g.people[0].job = k; g.menu = k; g.event = {k};
+        g.market = {offers: [{id: 'a', give: {r: 'eau', n: 1e9}, want: {r: 'eau', n: 1}}], deals: [{r: 'medic', n: 1e9, t: 0}]};
+        const c = B.check(g); B.run(c, 1440); assert.ok(c.pets.length === 1 && c.market.offers[0].give.n <= 99 && c.market.deals.length === 0 || c.res.medic <= B.cap(c, 'medic'));
+    }
+});
 console.log(`✓ bunker : ${n} vérifications`);

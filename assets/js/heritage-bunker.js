@@ -85,7 +85,7 @@
         if (!dlg?.contains(box)) return;
         const hint = o => { const t = `${o.title || ''} ${o.kind || ''} ${o.description || ''}`.toLowerCase(); return B().HEIRLOOMS.find(([, re]) => re.test(t))[2]; };
         box.innerHTML = objs.length ? `<div class="bk-coffre-list">${objs.map((o, i) => `<label class="checkbox-line"><input type="checkbox" name="bk_obj" value="${i}"><span>${esc(o.title || 'Objet')}<small class="muted"> · ${esc(hint(o))}</small></span></label>`).join('')}</div>`
-            : '<p class="muted">Aucun objet de famille dans ta base (Listes › Objets de famille) : le coffre partira vide.</p>';
+            : A().emptyState({size: 'small', icon: '🧳', text: 'Aucun objet de famille dans ta base (Listes › Objets de famille) : le coffre partira vide.'});
         box.addEventListener('change', e => { if (!e.target.matches('[name="bk_obj"]')) return; const on = box.querySelectorAll('[name="bk_obj"]:checked'); if (on.length > 3) { e.target.checked = false; toast('Le coffre ne contient que 3 objets.'); } });
     }
     let treeP = null;
@@ -206,7 +206,8 @@
         drawAll(true); SND.update(G); SND.events(G);
     }
     function setSpeed(v) { if (!G) return; G.speed = v; drawTop(); }
-    const busy = () => { const a = document.activeElement; return !!(a && dlg?.contains(a) && a.closest('[data-bk-side]') && a.matches('select, input, textarea')) || !!document.querySelector('.ui-menu, .lc-menu-pop'); };
+    let hoverChart = false; // la souris sur une courbe : on ne redessine pas le panneau sous elle
+    const busy = () => { const a = document.activeElement; return hoverChart || !!(a && dlg?.contains(a) && a.closest('[data-bk-side]') && a.matches('select, input, textarea')) || !!document.querySelector('.ui-menu, .lc-menu-pop'); };
     function drawAll(fromTick = false) { drawTop(); drawWorld(); if (!fromTick || !busy()) drawSide(); const mu = dlg?.querySelector('[data-bk-mute]'); if (mu) { mu.textContent = SND.pref.on ? '🔊' : '🔇'; mu.setAttribute('aria-pressed', String(!SND.pref.on)); } }
 
     function drawTop() {
@@ -416,7 +417,7 @@
             ${G.preg ? `<p>🤰 ${esc(G.people.find(p => p.id === G.preg.m)?.name || '')} attend un bébé : naissance le jour ${B().dayOf(G.preg.due)}.</p>` : ''}
             <h4>🌳 L’arbre du bunker</h4>
             ${G.births.length ? `<div class="bk-tree">${G.births.map(b => `<div class="bk-tree-row"><span class="bk-tree-par">${esc(b.m)}${b.f ? ` <i>♥</i> ${esc(b.f)}` : ''}</span><span class="bk-tree-line" aria-hidden="true"></span><span class="bk-tree-kid">👶 ${esc(b.name)} <small>né·e le jour ${b.day}</small></span></div>`).join('')}</div><p class="muted">Cet arbre reste dans la partie : il ne touche pas à ta vraie base.</p>`
-                : `<p class="muted">Pas encore de naissance. Il faut ${B().has(G, 'berceau') ? '' : 'un 👶 berceau, '}un couple qui a le moral, et un peu de temps (à partir du jour 5).</p>`}
+                : A().emptyState({size: 'small', icon: '👶', text: `Pas encore de naissance. Il faut ${B().has(G, 'berceau') ? '' : 'un berceau, '}un couple qui a le moral, et un peu de temps (à partir du jour 5).`})}
             <p><button type="button" class="button small" data-bk="gazette">📰 Lire la gazette du bunker</button></p>`;
     }
     /** 📰 la gazette : le récit de la partie, comme un journal */
@@ -486,12 +487,12 @@
     }
     /** survol d'une courbe : la ligne verticale, le point, et la valeur du jour le plus proche */
     function chartHover(e) {
-        const svg = e.target.closest?.('svg[data-bk-chart]'); if (!svg) return; const wrap = svg.parentElement, tip = wrap.querySelector('.bk-tip'), pts = JSON.parse(svg.dataset.pts || '[]'); if (!pts.length) return;
+        const svg = e.target.closest?.('svg[data-bk-chart]'); if (!svg) { hoverChart = false; return; } hoverChart = true; const wrap = svg.parentElement, tip = wrap.querySelector('.bk-tip'), pts = JSON.parse(svg.dataset.pts || '[]'); if (!pts.length) return;
         const box = svg.getBoundingClientRect(), vx = (e.clientX - box.left) / box.width * 300, p = pts.reduce((a, b) => (Math.abs(b[2] - vx) < Math.abs(a[2] - vx) ? b : a));
         const cr = svg.querySelector('.bk-cross'), hv = svg.querySelector('.bk-hov'); cr.setAttribute('x1', p[2]); cr.setAttribute('x2', p[2]); cr.setAttribute('visibility', 'visible'); hv.setAttribute('cx', p[2]); hv.setAttribute('cy', p[3]); hv.setAttribute('visibility', 'visible');
         tip.hidden = false; tip.textContent = `Jour ${p[0]} : ${p[1]}${svg.dataset.unit ? ' ' + svg.dataset.unit : ''}`; tip.style.left = `${Math.min(70, Math.max(0, p[2] / 3 - 10))}%`;
     }
-    function chartLeave(e) { const svg = e.target.closest?.('svg[data-bk-chart]'); if (!svg) return; svg.querySelectorAll('.bk-cross, .bk-hov').forEach(x => x.setAttribute('visibility', 'hidden')); const tip = svg.parentElement.querySelector('.bk-tip'); if (tip) tip.hidden = true; }
+    function chartLeave(e) { hoverChart = false; const svg = e.target.closest?.('svg[data-bk-chart]'); if (!svg) return; svg.querySelectorAll('.bk-cross, .bk-hov').forEach(x => x.setAttribute('visibility', 'hidden')); const tip = svg.parentElement.querySelector('.bk-tip'); if (tip) tip.hidden = true; }
     /* ── 📖 le livre du bunker : le récit de la partie ── */
     function bookParts() {
         const me = meOf(G), day = B().dayOf(G.t), S = B().SCENARIOS[G.scen] || B().SCENARIOS.classique;
@@ -593,7 +594,7 @@
     function diaryHtml(p) {
         const list = (p.diary || []).map(d => `<li><span class="bk-t">Jour ${d.d}</span> ${esc(d.txt)}</li>`).join('');
         return `<div class="bk-route-head"><h4>📔 Le journal de ${esc(p.name)}</h4><button type="button" class="button small secondary" data-bk="diary" data-id="">← Tous les habitants</button></div>
-            <ol class="bk-log bk-diary">${list || '<li class="muted">Rien d’écrit pour l’instant : il ou elle écrit chaque soir.</li>'}</ol>`;
+            ${list ? `<ol class="bk-log bk-diary">${list}</ol>` : A().emptyState({size: 'small', icon: '📔', text: 'Rien d’écrit pour l’instant : il ou elle écrit chaque soir.'})}`;
     }
     /* ═════════ Les clics ═════════ */
     function onClick(e) {

@@ -295,6 +295,8 @@
     const junkCount = g => Object.values(g.junk || {}).reduce((a, b) => a + b, 0);
     /** les seuils de l'autonomie : quand un habitant va de lui-même boire, manger, aux toilettes… */
     const AUTO = {prudent: {soif: 60, faim: 55, vessie: 50, hygiene: 45, sommeil: 40, nuit: 80}, normal: {soif: 35, faim: 35, vessie: 30, hygiene: 25, sommeil: 25, nuit: 70}, manuel: {soif: 10, faim: 10, vessie: 10, hygiene: 5, sommeil: 8, nuit: 20}};
+    // les tables du jeu sans prototype : un fichier de partie piégé (« __proto__ », « toString »…) ne trouve rien dedans
+    [DECAY, JUNK, ITEMS, TOOLS, PLACE_KINDS, TRAITS, TRAIT_OPP, DIFFS, SCENARIOS, EVENTS, VALUE, PETS, RECIPES, DECOS, ROOMS, KIND_ROOMS, DOCS, SIZES, AUTO].forEach(o => Object.setPrototypeOf(o, null));
     const rainPerHour = g => (1 + items(g).reduce((n, {k}) => n + (ITEMS[k]?.rain || 0), 0)) * (has(g, 'recuperateur') ? 3 : 1);
     const seasonOf = g => g.scen === 'hiver' ? 'hiver' : SEASONS[((Number(g.season0) || 0) + Math.floor((dayOf(g.t) - 1) / SEASON_DAYS)) % 4][0];
     const heir = (g, k) => (g.coffre || []).some(x => x.bonus === k);
@@ -756,7 +758,7 @@
             if (p.baby && p.age >= 4) { p.baby = false; p.child = true; log(g, `🧒 ${p.name} a ${p.age} ans : il ou elle aide déjà un peu (pas encore en ville).`, 'histoire'); }
             else if (p.child && p.age >= 14) { p.child = false; log(g, `🧑 ${p.name} a ${p.age} ans : un·e adulte, qui peut partir en ville.`, 'histoire'); diary(g, p, 'Je suis grand·e maintenant. Je veux aider dehors.'); }
             if (p.age === 65) log(g, `👴 ${p.name} a 65 ans : il ou elle travaille un peu moins vite, mais en sait long.`);
-            if (p.age >= 80 && rnd(g) < (p.age - 79) * 0.01) { log(g, `🕯️ ${p.name} s’éteint paisiblement, à ${p.age} ans.`, 'alerte'); hurt(g, p, 200); } });
+            if (p.age >= 80 && rnd(g) < (p.age - 79) * 0.01) { log(g, `🕯️ ${p.name} s’éteint paisiblement, à ${p.age} ans.`, 'alerte'); hurt(g, p, 200, true); } });
     }
     /** l'efficacité au travail selon l'âge (option) : les enfants aident à moitié, les aînés vont moins vite */
     const ageK = (g, p) => !opt(g, 'age') ? 1 : p.child ? 0.5 : (p.age || 0) >= 65 ? 0.85 : 1;
@@ -921,12 +923,12 @@
         atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) + 15, 0, 100); });
         log(g, `👶 ${baby.name} est né·e au bunker ! ${m.name}${f ? ` et ${f.name}` : ''} sont aux anges.`, 'alerte');
     }
-    function hurt(g, p, n) {
+    function hurt(g, p, n, quiet = false) {
         const was = p.hp; p.hp = clamp(p.hp - n, 0, 100);
         if (p.hp <= 0 && was > 0) {
             p.act = null; p.ill = null; g.stats.deaths.push({name: p.name, day: dayOf(g.t)}); alive(g).forEach(o => diary(g, o, `${p.name} nous a quitté·e·s. Je n’arrive pas à y croire.`));
             alive(g).forEach(o => { o.mood = clamp((o.mood ?? 70) - 20, 0, 100); });
-            log(g, p.where === 'dehors' ? `📻 Plus de nouvelles de ${p.name}…` : `☠️ ${p.name} est mort·e.`, 'alerte');
+            if (!quiet) log(g, p.where === 'dehors' ? `📻 Plus de nouvelles de ${p.name}…` : `☠️ ${p.name} est mort·e.`, 'alerte');
         }
     }
     /** la santé : chaque besoin à zéro fait mal ; tous les besoins au-dessus de 30 la font remonter ; une maladie la ronge jusqu'à la guérison */
