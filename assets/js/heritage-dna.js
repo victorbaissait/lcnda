@@ -651,7 +651,7 @@
     /** les réglages s'ouvrent dans l'onglet ADN ou dans les Réglages : on reste là où on était */
     const reopenSettings = () => go('settings');
     /* (avant : Réglages → « ADN : affichage », le même réglage que l'onglet ADN → ⚙️ Réglages ; retiré des Réglages à la demande) */
-    ext.maintenance.dna_prefs = () => go('settings');
+    ext.maintenance.dna_prefs = () => { S().maintenanceTab = ''; go('settings'); }; // et Réglages se rouvre sur sa première page, pas encore sur l'ADN
     ext.maintenance = ext.maintenance || {};
     /* ═════════ Sur la fiche d'une personne ═════════ */
     ext.personBlocks = ext.personBlocks || {};
