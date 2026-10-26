@@ -6112,10 +6112,10 @@ ${backupSectionHtml()}
         look_msgs:[[null,[['q','.toast-prefs'],['q','#lc-a6-host']]]],
         look_layouts:[[null,[['t',/Réglages enregistrés : l’Apparence/],['t',/Réglages enregistrés : toute l’app/]]]],
         // noms courts, sur une seule ligne (le nom complet est dans la bulle)
-        nav_menus:[['Menu',[['t',/^Ordre et noms du menu principal/],['f','navPosition','sidebarPosition','brandDisplay']],'Ordre et noms du menu principal'],['Colonne',[['t',/^Colonne de gauche/]],'La colonne de gauche : où, et son dessin'],['Listes',[['t',/^Ordre des listes/],['t',/Lignes cachées/]],'Ordre des listes, lignes cachées'],['Pages',[['t',/^Ordre des pages des Réglages/]],'Ordre des pages des Réglages'],
+        nav_menus:[['Menu',[['t',/^Ordre et noms du menu principal/],['f','navPosition','sidebarPosition','brandDisplay']],'Ordre et noms du menu principal'],['Colonne',[['t',/^Colonne de gauche/],['t',/Lignes cachées/]],'La colonne de gauche : où, son dessin, les lignes cachées'],['Listes',[['q','#lc-a8-host']],'La forme des listes (les lignes, la colonne des personnes, les tableaux)'],
             ['Boutons du haut',[['t',/^Boutons en haut à droite/]],'Boutons en haut à droite']],
         // les types de recherche se rangent dans Recherche → « Réordonner » : leur cadre n'a plus de page ici (pris, et jamais montré)
-        _ailleurs:[[null,[['t',/Types de recherche/],['t',/^Graphiques — Diagrammes/],['t',/^Graphiques — Statistiques/]]]],
+        _ailleurs:[[null,[['t',/^Ordre des listes/],['t',/^Ordre des pages des Réglages/],['t',/Types de recherche/],['t',/^Graphiques — Diagrammes/],['t',/^Graphiques — Statistiques/]]]],
         design_sheets:[['En-tête',[['t',/^Présentation de l’éditeur|^En-tête de la fiche|éléments de l’en-tête|Nouvelle observation/]]],['Sections et blocs',[['t',/^Sections des fiches|^Ordre et visibilité des blocs|^Blocs à afficher sur demande|profils/]]],
             ['Ce qu’on y voit',[['f','eventDisplayMode','censusDetailsDefault','censusSpecialOrder','identity_name_variants_display','showInvestigationsAsSecondary','defaultMortPourLaFrance'],['t',/^Filtres du bloc Événements|^Ascendants et descendants/],['t',/^Couleurs des badges/]]],
             ['Numéros et verrou',[['q','#design-form > .local-lock-inline']],'Numérotation et verrou'],['Internet',[['t',/^Chercher sur internet|^Fiches avec un réglage particulier/]],'Chercher sur internet, fiches avec un réglage particulier'],['Le reste',[['p','design_sheets']]]]};

@@ -229,8 +229,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         await t('la page : sommaire, sections repliables fermées par défaut, ouvertes retenues', async () => {
             await page.evaluate(() => localStorage.removeItem('lcnda-designs-open-v2'));
             await toDesigns(page); await page.waitForSelector('.lcd-page .lcd-toc');
-            assert.equal(await page.locator('.lcd-toc-i').count(), 5, 'A1 à A8 sans A4, A5 ni A6');
-            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5, #lcd-a4, #lcd-a6').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs), ni A4 (Fiches personnes et animaux), ni A6 (Notifications et boutons)');
+            assert.equal(await page.locator('.lcd-toc-i').count(), 4, 'A1 à A8 sans A4, A5, A6 ni A8 (A8 Listes : Menus, colonne et listes)');
+            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5, #lcd-a4, #lcd-a6, #lcd-a8').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs), ni A4 (Fiches personnes et animaux), ni A6 (Notifications et boutons)');
             assert.equal(await page.locator('[data-lcd-notifs]').count(), 1, 'la petite ligne vers Notifications et boutons (A6)');
             assert.equal(await page.locator('[data-lcd-fiches]').count(), 1, 'la petite ligne vers Fiches personnes et animaux (A4)');
             assert.equal(await page.locator('[data-lcd-trees]').count(), 1, 'le lien vers les cases des arbres');

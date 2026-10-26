@@ -814,7 +814,7 @@
     const whyList = why => `<ul class="lcd-why-list">${why.map(([i, t]) => `<li><span aria-hidden="true">${i}</span><span>${t}</span></li>`).join('')}</ul>`;
     let PAGE = null; // {box, data, G}
     /** la page n'a plus A5 : les cases des arbres se règlent dans Graphiques → 🎨 Couleurs (fenêtre « Statistiques et arbres », ext.treeCards plus bas) */
-    const PAGE_IDS = IDS.filter(id => id !== 'a5' && id !== 'a4' && id !== 'a6'); // A6 Boutons : dans Réglages → Notifications et boutons (même moteur, même stockage)
+    const PAGE_IDS = IDS.filter(id => id !== 'a5' && id !== 'a4' && id !== 'a6' && id !== 'a8'); // A6 Boutons : dans Réglages → Notifications et boutons ; A8 Listes : dans Menus, colonne et listes → Listes (même moteur, même stockage)
     /** A4 « Fiche d'une personne » est dans Réglages → Apparence → Fiches personnes et animaux (cadre « Forme de l'en-tête ») : même moteur, même stockage */
     const EMBS = {}; // {a4: {box, data}, a6: …} : les cadres posés ailleurs (A4 dans la page des fiches, A6 dans Notifications et boutons)
     const embOf = id => (EMBS[id]?.box.isConnected ? EMBS[id] : null);
@@ -962,7 +962,7 @@
         const st = A().state; if (st && token !== st.workspaceToken) return;
         const ws = document.getElementById('workspace'); if (!ws) return;
         const G = cur(), opened = openSet();
-        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Cinq réglages pour changer la forme des éléments de l’app : traits, densité, icônes, mouvements, listes (la forme de l’en-tête des fiches se règle dans Fiches personnes et animaux, les boutons dans Notifications et boutons). Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
+        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Quatre réglages pour changer la forme des éléments de l’app : traits, densité, icônes, mouvements (la forme de l’en-tête des fiches se règle dans Fiches personnes et animaux, les boutons dans Notifications et boutons, les listes dans Menus, colonne et listes). Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
             <div class="lcd-intro ui-notice ui-notice-info"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>Ici, seulement la forme. La police, la taille du texte et les couleurs (Preset, Couleur principale) se règlent dans <button type="button" class="link-button" data-lcd-apparence>Réglages → Apparence</button> : elles passent toujours devant, quel que soit le design.</span></div>
             <div class="ui-notice ui-notice-info lcd-trees-moved lcd-a4-moved"><span class="ui-notice-ic" aria-hidden="true">👤</span><span>La forme de l’en-tête des fiches → se règle maintenant dans <button type="button" class="link-button" data-lcd-fiches>Fiches personnes et animaux ↗</button> (cadre « Forme de l’en-tête », avec les sections, l’ordre et les éléments de l’en-tête).</span></div>
             <div class="ui-notice ui-notice-info lcd-trees-moved lcd-a6-moved"><span class="ui-notice-ic" aria-hidden="true">🔘</span><span>La forme des boutons → se règle maintenant à la fin de <button type="button" class="link-button" data-lcd-notifs>Notifications et boutons ↗</button>.</span></div>
@@ -1111,6 +1111,7 @@
     }
     ext.designsA4Frame = host => embedFrame(host, 'a4', 'Forme de l’en-tête', 'La forme générale (traits, coins, boutons) suit');
     /** le cadre « Boutons » (A6) à la fin de Réglages → Notifications et boutons */
+    ext.designsA8Frame = host => embedFrame(host, 'a8', 'Forme des listes', 'Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent');
     ext.designsA6Frame = host => embedFrame(host, 'a6', 'Boutons', 'Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent');
 
     /* ═════════════════════════ Apparence ↔ Designs au choix ═════════════════════════
@@ -1135,6 +1136,13 @@
         const tp = document.querySelector('#workspace .toast-prefs'); if (!tp || document.getElementById('lc-a6-host')) return;
         tp.insertAdjacentHTML('afterend', '<section class="person-block-config lc-a6-host" id="lc-a6-host"><header><span class="eyebrow">BOUTONS</span><h3>Forme des boutons</h3><p>Les boutons secondaires de toute l’app (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste plein, à la couleur principale.</p></header><div data-a6-host></div></section>');
         ext.designsA6Frame(document.querySelector('#lc-a6-host [data-a6-host]'));
+    });
+    // A8 Listes : dans « Menus, colonne et listes » (onglet Listes), dans les deux présentations des Réglages
+    ext.afterDesign.push(() => {
+        const st = A().state; if (!['design', 'nav_menus'].includes(st?.maintenanceTab) || document.getElementById('lc-a8-host')) return;
+        const at = document.querySelector('#workspace .design-order-grid') || document.querySelector('#workspace > .page > :last-child'); if (!at) return;
+        at.insertAdjacentHTML('afterend', '<section class="person-block-config lc-a8-host" id="lc-a8-host"><header><span class="eyebrow">LISTES</span><h3>Forme des listes</h3><p>Comment se séparent les lignes des listes, de la colonne des personnes et des tableaux.</p></header><div data-a8-host></div></section>');
+        ext.designsA8Frame(document.querySelector('#lc-a8-host [data-a8-host]'));
     });
     /** les « 💾 Réglages enregistrés » de l'Apparence (designs) emportent aussi les designs au choix (champ a_designs) ;
      *  un ancien réglage (A1 à A10, ensembles…) revient sans erreur : A7 police et A10 sont ignorés */

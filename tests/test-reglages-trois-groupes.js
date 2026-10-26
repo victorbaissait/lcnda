@@ -107,13 +107,13 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.match(await page.locator('[data-side-value="nav_menus"]').first().innerText(), /Menus, colonne et listes/);
             await go('nav_menus');
             const tabs = await page.locator('[data-reg-a-tab]').allTextContents();
-            assert.deepEqual(tabs, ['Menu', 'Colonne', 'Listes', 'Pages', 'Boutons du haut']); // les types de recherche : dans Recherche → Réordonner ; les graphiques : dans Graphiques → ⠿ Réordonner
-            assert.equal(await page.locator('[data-reg-a-tab="1"]').getAttribute('title'), 'La colonne de gauche : où, et son dessin');
+            assert.deepEqual(tabs, ['Menu', 'Colonne', 'Listes', 'Boutons du haut']); // Listes = la forme des listes (A8) ; l'ordre des listes : dans Listes → Réordonner ; l'ordre des pages : Réglages → Réordonner ; // les types de recherche : dans Recherche → Réordonner ; les graphiques : dans Graphiques → ⠿ Réordonner
+            assert.equal(await page.locator('[data-reg-a-tab="1"]').getAttribute('title'), 'La colonne de gauche : où, son dessin, les lignes cachées');
             assert.equal(await page.evaluate(() => new Set([...document.querySelectorAll('[data-reg-a-tab]')].map(b => Math.round(b.getBoundingClientRect().top))).size), 1, 'une seule ligne');
             let s = await seen(); assert.ok(has(s, /Ordre et noms du menu principal/)); assert.ok(s.includes('f:navPosition')); assert.ok(!s.includes('f:sidebarPosition')); assert.ok(!s.includes('f:ownerFirst')); assert.ok(!has(s, /Ordre des listes/));
-            await page.click('[data-reg-a-tab="1"]'); s = await seen(); assert.ok(has(s, /^Colonne de gauche/)); assert.ok(!has(s, /menu principal/));
-            await page.click('[data-reg-a-tab="2"]'); s = await seen(); assert.ok(has(s, /Ordre des listes/)); assert.ok(!has(s, /menu principal/));
-            for (let i = 0; i < 5; i++) { await page.click(`[data-reg-a-tab="${i}"]`); s = await seen(); assert.ok(!has(s, /Types de recherche|Graphiques — /), `onglet ${i}`); }
+            await page.click('[data-reg-a-tab="1"]'); s = await seen(); assert.ok(has(s, /^Colonne de gauche/)); assert.ok(has(s, /Lignes cachées/)); assert.ok(!has(s, /menu principal/));
+            await page.click('[data-reg-a-tab="2"]'); await page.waitForSelector('#lc-a8-host .lcd-embed'); s = await seen(); assert.ok(has(s, /Forme des listes/)); assert.ok(!has(s, /^Colonne de gauche|menu principal/));
+            for (let i = 0; i < 4; i++) { await page.click(`[data-reg-a-tab="${i}"]`); s = await seen(); assert.ok(!has(s, /Types de recherche|Graphiques — |Ordre des listes|Ordre des pages/), `onglet ${i}`); assert.equal(has(s, /Forme des listes/), i === 2, `forme des listes, onglet ${i}`); }
         });
         await t('Colonne : « Où ? », « Partir de », 9 styles d’entrées posés sur la vraie colonne, aperçu', async () => {
             await go('nav_menus'); await page.click('[data-reg-a-tab="1"]');
@@ -135,12 +135,12 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await page.click('#lc-colonne [data-lck-side="left"]'); await page.click('#lck-c-reset'); await page.waitForTimeout(250);
             assert.equal(await page.evaluate(() => window.LCNDA_COLUMN.read().mode), 'avant');
         });
-        await t('Listes › « Réordonner » amène sur Réglages › Menus, colonne et listes › Listes', async () => {
+        await t('Listes › « Réordonner » ouvre une fenêtre, sans quitter Listes', async () => {
             await page.evaluate(() => { window.LCNDA_APP.state.listType = 'persons'; window.LCNDA_APP.setModule('listes'); }); await page.waitForSelector('#list-reorder');
-            await page.click('#list-reorder'); await page.waitForTimeout(1300);
-            const r = await page.evaluate(() => ({tab: window.LCNDA_APP.state.maintenanceTab, on: document.querySelector('[data-reg-a-tab].is-active')?.textContent}));
-            assert.deepEqual(r, {tab: 'nav_menus', on: 'Listes'});
-            assert.ok(has(await seen(), /Ordre des listes/));
+            await page.click('#list-reorder'); await page.waitForSelector('dialog[open].mt-reorder');
+            assert.equal(await page.evaluate(() => window.LCNDA_APP.state.module), 'listes');
+            await page.click('dialog[open].mt-reorder [data-close]'); await page.waitForTimeout(200);
+            await page.evaluate(() => window.LCNDA_APP.setModule('maintenance')); await page.waitForTimeout(800);
         });
         await t('Fiches personnes et animaux : cinq onglets ; recensements, badges et Sosa y sont', async () => {
             await go('design_sheets');
@@ -158,7 +158,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             }
             await page.evaluate(async () => { window.LCNDA_APP.setReglagesA(false); window.LCNDA_APP.renderSidebar(); await window.LCNDA_APP.renderMaintenance(); }); await page.waitForTimeout(1300); // plus de bouton : l'ancienne présentation par le code
             await go('design'); const old = await seen();
-            const lost = old.filter(x => !all.has(x) && !/Types de recherche|Graphiques — |Bibliothèque des widgets|Widgets posés|TABLEAU DE BORD|dashboard/i.test(x)); // rangés dans Recherche → Réordonner, Graphiques → ⠿ Réordonner, Tableau de bord → 🧩 Bibliothèque et Réordonner les widgets
+            const lost = old.filter(x => !all.has(x) && !/Ordre des listes|Ordre des pages|Types de recherche|Graphiques — |Bibliothèque des widgets|Widgets posés|TABLEAU DE BORD|dashboard/i.test(x)); // rangés dans Recherche → Réordonner, Graphiques → ⠿ Réordonner, Tableau de bord → 🧩 Bibliothèque et Réordonner les widgets
             assert.deepEqual(lost, []);
         });
         await t('présentation d’avant : la page « Apparence » entière, puis retour aux trois groupes', async () => {
