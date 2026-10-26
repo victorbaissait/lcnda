@@ -15,13 +15,13 @@
         design_maps: 'préférences fonds de carte fonds de cartes ordre des fonds boutons plan des adresses village carte par défaut ordre des cartes',
         design_board: 'préférences widgets bibliothèque', design_sheets: 'préférences blocs de la fiche en-tête boutons profils', raccourcis: 'touches clavier préférences',
         diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations', board_prefs: 'réglages des tableaux formes pointes couleurs', pet_prefs: 'réglages des animaux espèces formulaire', meteo: 'météo temps pluie température neige climat ciel normale stations pack'};
-    const MO_KEY = 'genealogie-maintenance-order', A_ONLY = ['look_theme', 'look_portraits', 'look_msgs', 'look_lang', 'look_layouts', 'nav_menus'];
+    const MO_KEY = 'genealogie-maintenance-order', A_ONLY = ['look_theme', 'look_portraits', 'look_msgs', 'look_layouts', 'nav_menus'];
     const mKeys = () => defaultMaintenanceTabs.map(t => t[0]).filter(k => (window.LCNDA_APP.reglagesA?.() ? k !== 'design' : !A_ONLY.includes(k)));
     /* présentation A : « Apparence et affichage » en trois groupes ; l'autre façon garde son propre rangement */
-    const MG_DEFAULT_A = [['g_look', '🎨', 'Look', ['look_theme', 'designs', 'look_portraits', 'look_msgs', 'look_lang', 'accessibilite', 'look_layouts']], ['g_nav', '🧭', 'Navigation', ['nav_menus', 'raccourcis']],
+    const MG_DEFAULT_A = [['g_look', '🎨', 'Look', ['look_theme', 'designs', 'look_portraits', 'look_msgs', 'accessibilite', 'look_layouts']], ['g_nav', '🧭', 'Navigation', ['nav_menus', 'raccourcis']],
         ['g_screens', '🖼', 'Écrans', ['design_sheets', 'design_maps', 'viewer_prefs', 'diagram_kinds']], ...MG_DEFAULT.filter(g => g[0] !== 'g_look')];
-    Object.assign(MAINT_KEYWORDS, {look_theme: 'preset couleur principale police taille typographique fond des blocs thèmes réglages enregistrés remettre', look_portraits: 'avatars forme une seule forme carrés numérotés initiales portraits rond carré arrondi losange personnalisé créer une forme',
-        look_msgs: 'messages toast coin durée couleurs notifications après une action', look_lang: 'langue calendrier dates lecteur audio vidéo avancer reculer', look_layouts: 'réglages enregistrés mises en page sauvegarder tout',
+    Object.assign(MAINT_KEYWORDS, {look_theme: 'langue calendrier dates lecteur audio vidéo avancer reculer preset couleur principale police taille typographique fond des blocs thèmes réglages enregistrés remettre', look_portraits: 'avatars forme une seule forme carrés numérotés initiales portraits rond carré arrondi losange personnalisé créer une forme',
+        look_msgs: 'messages toast coin durée couleurs notifications après une action', look_layouts: 'réglages enregistrés mises en page sauvegarder tout',
         nav_menus: 'préférences de recherche ordre noms menu principal onglets listes pages des réglages boutons en haut à droite logo prénom nom colonne de gauche colonne latérale à droite style des entrées numéros largeur liste fiches réordonner lignes cachées graphiques diagrammes statistiques',
         design_sheets: 'préférences blocs de la fiche en-tête boutons profils événements recensements variantes enquêtes mort pour la france badges sosa aboville verrouillage internet exceptions'});
     const sgCfg = (name, key, defaults) => ({name, panelTitle: 'Ordre des pages des Réglages', key, defaults, allKeys: mKeys, label: k => defaultMaintenanceTabs.find(t => t[0] === k)?.[2] || k, defaultEnabled: true,

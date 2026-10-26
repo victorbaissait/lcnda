@@ -61,9 +61,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         });
         await t('Thème et couleurs : les champs du look (dont prénom et nom du logo), Mes thèmes, et pas les menus ni les fiches', async () => {
             await go('look_theme'); const s = await seen();
-            for (const f of ['f:preset', 'f:blue', 'f:fontFamily', 'f:fontScale', 'f:cardBackground', 'f:ownerFirst', 'f:ownerLast']) assert.ok(s.includes(f), f);
+            for (const f of ['f:preset', 'f:blue', 'f:fontFamily', 'f:fontScale', 'f:cardBackground', 'f:ownerFirst', 'f:ownerLast', 'f:interfaceLanguage', 'f:defaultCalendar', 'f:avSkipSeconds']) assert.ok(s.includes(f), f);
             assert.ok(has(s, /Mes thèmes/));
-            for (const f of ['f:navPosition', 'f:avatarShape', 'f:eventDisplayMode', 'f:interfaceLanguage']) assert.ok(!s.includes(f), f);
+            for (const f of ['f:navPosition', 'f:avatarShape', 'f:eventDisplayMode']) assert.ok(!s.includes(f), f);
             assert.ok(!has(s, /Ordre et noms du menu principal|Formes des avatars|Messages après une action/));
         });
         await t('Portraits et avatars : une seule forme (avec « Gérer les formes »), puis le portrait ; plus la colonne de gauche', async () => {
@@ -97,8 +97,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             const s = await seen(); assert.ok(has(s, /Messages après une action/)); assert.ok(has(s, /Forme des boutons/)); assert.ok(!has(s, /Mes thèmes/));
         });
         await t('Langue, dates et lecteur : un réglage changé ici est enregistré', async () => {
-            await go('look_lang'); const s = await seen();
-            assert.deepEqual(s.filter(x => x.startsWith('f:')).sort(), ['f:avSkipSeconds', 'f:defaultCalendar', 'f:interfaceLanguage']);
+            await go('look_theme'); const s = await seen(); // la langue, le calendrier et le lecteur : dans Thème et couleurs, après « Nom affiché »
+            const fs = s.filter(x => x.startsWith('f:')); assert.deepEqual(fs.slice(fs.indexOf('f:ownerLast'), fs.indexOf('f:ownerLast') + 4), ['f:ownerLast', 'f:interfaceLanguage', 'f:defaultCalendar', 'f:avSkipSeconds']);
             const v = await page.evaluate(() => { const sel = document.querySelector('select[name="defaultCalendar"]'); return [...sel.options].map(o => o.value).find(x => x !== sel.value); });
             await page.selectOption('select[name="defaultCalendar"]', v); await page.waitForTimeout(900);
             assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-design') || '{}').defaultCalendar), v);
@@ -152,7 +152,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         });
         await t('aucun cadre de l’ancienne page « Apparence » ne se perd', async () => {
             const all = new Set();
-            for (const k of ['look_theme', 'look_portraits', 'look_msgs', 'look_lang', 'look_layouts', 'nav_menus', 'design_sheets', 'design_maps']) {
+            for (const k of ['look_theme', 'look_portraits', 'look_msgs', 'look_layouts', 'nav_menus', 'design_sheets', 'design_maps']) {
                 await go(k); const n = await page.locator('[data-reg-a-tab]').count();
                 for (let i = 0; i < Math.max(1, n); i++) { if (n) { await page.click(`[data-reg-a-tab="${i}"]`); await page.waitForTimeout(150); } (await seen()).forEach(x => all.add(x)); }
             }
