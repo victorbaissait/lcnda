@@ -176,3 +176,7 @@
 .bk-book h3{border-bottom:1px solid #1a1a1a;margin:18px 0 6px;font-size:18px}.bk-book blockquote{font-style:italic;margin:4px 0 4px 12px;color:#333}.bk-book-day h4{margin:10px 0 2px}
 .bk-sbody select{max-width:100%}.bk-sbody .bk-field{display:grid;gap:4px;min-width:0}
 .bk-sbody{overflow-x:hidden}.bk-sbody .bk-field select{width:100%}
+/* la fiche d'un habitant : rien ne dépasse, des barres plus petites, deux par ligne */
+.bk-person{grid-template-columns:minmax(0,1fr);min-width:0}.bk-person>*{min-width:0}
+.bk-needs{grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);gap:2px 6px;font-size:11px}
+.bk-needs .bk-bar{height:6px;min-width:0;width:100%;box-sizing:border-box}

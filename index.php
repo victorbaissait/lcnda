@@ -56,7 +56,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/puzzle.css?v=3">
     <link rel="stylesheet" href="assets/css/labyrinthe.css?v=1">
     <link rel="stylesheet" href="assets/css/jeux-famille.css?v=3">
-    <link rel="stylesheet" href="assets/css/bunker.css?v=13">
+    <link rel="stylesheet" href="assets/css/bunker.css?v=15">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=5">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
