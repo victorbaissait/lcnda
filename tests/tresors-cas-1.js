@@ -23,11 +23,28 @@ module.exports = async (t, {page, open, body}, assert) => {
     await t('🃏 7 familles : MARTIN et FAURE, 6 cartes chacune, les planches et la règle s’impriment', async () => {
         await open('sept-familles'); assert.match(await body(), /MARTIN/); assert.match(await body(), /FAURE/);
         const pop = page.waitForEvent('popup'); await page.click('[data-7-print]'); const w = await pop; await w.waitForSelector('.card');
-        const n = await w.$$eval('.card', l => l.length); assert.ok(n >= 12 && n % 6 === 0, `${n} cartes`); assert.match(await w.content(), /Le jeu des/); await w.close();
+        const n = await w.$$eval('.card:not(.back)', l => l.length); assert.ok(n >= 12 && n % 6 === 0, `${n} cartes`); assert.equal(await w.$$eval('.card.back', l => l.length), n, 'un dos par carte'); assert.match(await w.content(), /Le jeu des/); await w.close();
+    });
+    await t('🃏 7 familles : 6 styles, photos sépia / N&B, ce qui s’écrit, la couleur d’une famille, la fenêtre de la photo (sans photo)', async () => {
+        for (const s of ['ancien', 'moderne', 'enfant', 'artdeco', 'bois', 'classique']) { await page.selectOption('[data-7-opts] [name=style]', s); assert.ok(await page.$(`.h-tr-7 .card.s-${s}`), s); }
+        await page.selectOption('[data-7-opts] [name=fx]', 'nb'); assert.ok(await page.$('.h-tr-7 .card.fx-nb'));
+        await page.uncheck('[data-7-opts] [name=sh-others]'); assert.equal(await page.$('.h-tr-7 .card .others'), null, 'sans la liste'); await page.check('[data-7-opts] [name=sh-others]');
+        await page.$eval('[data-7-col]', i => { i.value = '#123456'; i.dispatchEvent(new Event('input', {bubbles: true})); }); assert.match(await page.$eval('.h-tr-7 .card', c => c.style.getPropertyValue('--c')), /#123456/);
+        await page.click('.h-tr-7 [data-7-ph]'); await page.waitForSelector('dialog[open] [data-crop]'); await page.click('dialog[open] [data-k="-1"]'); await page.click('dialog[open] button[type=submit]');
+        const prefs = await page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-7familles'))); assert.ok(Object.values(prefs.photos).some(x => x.none), 'sans photo retenu');
+        await page.evaluate(() => localStorage.removeItem('lcnda-7familles'));
     });
     await t('🖍️ arbre à colorier : les ancêtres de Léa en traits noirs, avec son nom au pied', async () => {
         await open('coloriage'); const svg = await page.$eval('[data-co-out] svg', s => s.outerHTML);
         assert.match(svg, /L’arbre de Léa MARTIN/); assert.match(svg, /Claude/); assert.match(svg, /Henri/); assert.ok(!/fill="#(?!fff|000)[0-9a-f]{3,6}"/i.test(svg), 'que du blanc et du noir');
+    });
+    await t('🖍️ arbre à colorier : 8 dessins (arbre, fleurs, maisons, blasons, montgolfières, ruche, éventail, rosace), noms, trait, cadre, titre', async () => {
+        const ds = await page.evaluate(() => Object.keys(window.LCNDA_EXT.tresorColoring.CO_DESIGNS)); assert.ok(ds.length >= 8, ds.join());
+        for (const d of ds) { await page.check(`[data-co] [name=design][value=${d}]`); const svg = await page.$eval('[data-co-out] svg', s => s.outerHTML);
+            assert.match(svg, /Claude/, d); assert.ok(!/fill="#(?!fff|000)[0-9a-f]{3,6}"/i.test(svg), `${d} : que du blanc et du noir`); }
+        await page.selectOption('[data-co] [name=label]', 'prenom'); await page.selectOption('[data-co] [name=stroke]', '5'); await page.selectOption('[data-co] [name=frame]', 'etoiles'); await page.fill('[data-co] [name=title]', 'Les racines de Léa'); await page.click('[data-co] button[type=submit]');
+        const svg = await page.$eval('[data-co-out] svg', s => s.outerHTML); assert.match(svg, /stroke-width="5"/); assert.match(svg, /Les racines de Léa/); assert.ok(!/MARTIN · 1935/.test(svg), 'le prénom seul');
+        await page.selectOption('[data-co] [name=frame]', 'aucun'); await page.fill('[data-co] [name=title]', ''); await page.check('[data-co] [name=design][value=arbre]'); await page.selectOption('[data-co] [name=label]', 'complet'); await page.selectOption('[data-co] [name=stroke]', '3');
     });
     await t('📷 dater une photo : carte de visite à coins carrés + crinoline → 1859-1869 ; une femme de 20 ans → Marie DURAND ? non : Jeanne BORIE ? (nées vers 1850)', async () => {
         await open('dater-photo');

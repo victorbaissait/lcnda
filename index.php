@@ -40,7 +40,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/heritage-diagram-options.css?v=7">
     <link rel="stylesheet" href="assets/css/layout.css?v=17">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
-    <link rel="stylesheet" href="assets/css/tresors.css?v=11">
+    <link rel="stylesheet" href="assets/css/tresors.css?v=13">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
     <link rel="stylesheet" href="assets/css/ui.css?v=16">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
@@ -1245,7 +1245,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-bunker.js?v=3" defer></script>
 <script src="assets/js/heritage-tresors-memoire.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-decouvrir.js?v=2" defer></script>
-<script src="assets/js/heritage-tresors-jeux.js?v=2" defer></script>
+<script src="assets/js/heritage-tresors-jeux.js?v=4" defer></script>
 <script src="assets/js/heritage-tresors-creer.js?v=2" defer></script>
 <script src="assets/js/heritage-tresors-lieux.js?v=4" defer></script>
 <script src="assets/js/heritage-tresors-outils.js?v=2" defer></script>

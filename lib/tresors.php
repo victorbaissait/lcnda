@@ -11,6 +11,7 @@ declare(strict_types=1);
  *   GET  api.php?action=tresor_media&ids=1,2 → {media: [{id, title, media_type, filename, thumbnail}]}
  *   POST api.php?action=tresor_write {op: link_media, media_id, person_id} → le média (un entretien enregistré) rangé sur la fiche
  *   GET  api.php?action=tresor_signatures → {signatures: [{media_id, filename, person_id, x, y, w, h, year}]} (les zones « signature » des médias)
+ *   GET  api.php?action=tresor_photos&person_id=N → {photos: [{id, filename, thumbnail, title, face: {x, y, w, h} | null}]} (7 familles : choisir la photo)
  *   GET  api.php?action=tresor_faces → {faces: [{media_id, filename, person_id, x, y, w, h}]} (les visages identifiés sur les photos)
  *   GET  api.php?action=tresor_tree   → {people: [{id, name, first, last, gender, living, by, bd (AAAA-MM-JJ), bplace, dy, dd,
  *        dplace, occ, portrait, father, mother, start, touched (dernière modification de la fiche), priv (fiche confidentielle)}]
@@ -278,6 +279,20 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
                 $out[] = ['media_id' => (int) $r['media_id'], 'person_id' => (int) $r['person_id'], 'x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h'], 'filename' => (string) $r['filename']];
             }
             json_response(['faces' => $out]);
+        }
+        if (!$isWrite && $action === 'tresor_photos') { // 🃏 7 familles : les photos d'une personne (jointes à sa fiche, ou avec son visage encadré)
+            $pid = safe_int($_GET['person_id'] ?? 0); if ($pid <= 0) { json_response(['photos' => []]); }
+            if (function_exists('kiosk_state') && !empty(kiosk_state()['on'])) { $hasPriv = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='is_private'")->fetchColumn();
+                $c = $pdo->prepare("SELECT 1 FROM persons WHERE id=? AND COALESCE(living_status,'')<>'living'" . ($hasPriv ? ' AND COALESCE(is_private,0)=0' : '')); $c->execute([$pid]); if (!$c->fetchColumn()) { json_response(['photos' => []]); } }
+            $out = [];
+            $st = $pdo->prepare("SELECT m.id, m.filename, m.thumbnail, m.title FROM media_links l JOIN media m ON m.id=l.media_id WHERE l.entity_type='person' AND l.entity_id=? AND m.media_type='image' ORDER BY l.position, m.id LIMIT 60"); $st->execute([$pid]);
+            foreach ($st as $r) { $out[(int) $r['id']] = ['id' => (int) $r['id'], 'filename' => (string) $r['filename'], 'thumbnail' => (string) ($r['thumbnail'] ?: $r['filename']), 'title' => (string) $r['title'], 'face' => null]; }
+            if ($pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='media_tags'")->fetchColumn()) {
+                $st = $pdo->prepare("SELECT t.media_id, t.x, t.y, t.w, t.h, m.filename, m.thumbnail, m.title FROM media_tags t JOIN media m ON m.id=t.media_id WHERE t.person_id=? AND m.media_type='image' AND t.w>0 AND t.h>0 ORDER BY t.id LIMIT 60"); $st->execute([$pid]);
+                foreach ($st as $r) { $id = (int) $r['media_id']; $out[$id] ??= ['id' => $id, 'filename' => (string) $r['filename'], 'thumbnail' => (string) ($r['thumbnail'] ?: $r['filename']), 'title' => (string) $r['title'], 'face' => null];
+                    $out[$id]['face'] ??= ['x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h']]; }
+            }
+            json_response(['photos' => array_values($out)]);
         }
         if (!$isWrite && $action === 'tresor_memories') {
             $kind = (string) ($_GET['kind'] ?? ''); if ($kind !== '' && !in_array($kind, TRESOR_MEM_KINDS, true)) { $kind = 'recipe'; }

@@ -143,3 +143,23 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-tr-quiz .h-tr-qz-score button:not(:disabled):hover, .h-tr-quiz .h-tr-vl-bar button:hover { background: var(--blue, #0066cc); color: #fff; }
 .h-tr-quiz .h-tr-qz-score button small { color: var(--blue, #0066cc); }
 .h-tr-quiz .h-tr-vl-ini { background: var(--white, #fff); border: var(--line, 2px solid #080808); box-shadow: var(--shadow, 6px 6px 0 rgba(5, 93, 255, .25)); border-radius: 0; }
+/* 🖍️ Arbre à colorier : le choix du dessin */
+.h-tr-co-designs { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.h-tr-co-d { position: relative; }
+.h-tr-co-d input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.h-tr-co-d span { display: inline-block; padding: 6px 12px; border: 2px solid var(--line, #222); border-radius: 999px; background: var(--paper, #fff); font-size: 14px; }
+.h-tr-co-d input:checked + span { background: var(--blue, #2f6bff); color: #fff; border-color: var(--blue, #2f6bff); }
+.h-tr-co-d input:focus-visible + span { outline: 3px solid var(--focus, #2f6bff); outline-offset: 2px; }
+/* 🃏 7 familles : les couleurs des familles, la fenêtre de la photo */
+.h-tr-7-cols { gap: 6px 14px; }
+.h-tr-7-col { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.h-tr-7-col input[type=color] { width: 30px; height: 26px; padding: 0; border: 2px solid var(--line, #222); border-radius: 6px; }
+.h-tr-7-fam { margin: 18px 0 8px; font-size: 15px; }
+.h-tr-7ph { display: grid; gap: 12px; }
+.h-tr-7ph-list { display: flex; flex-wrap: wrap; gap: 8px; max-height: 180px; overflow: auto; }
+.h-tr-7ph-t { width: 64px; height: 64px; padding: 0; border: 2px solid var(--line, #222); border-radius: 8px; overflow: hidden; background: var(--paper, #fff); cursor: pointer; font-size: 24px; }
+.h-tr-7ph-t img { width: 100%; height: 100%; object-fit: cover; }
+.h-tr-7ph-t.is-on { outline: 3px solid var(--blue, #2f6bff); outline-offset: 2px; }
+.h-tr-7ph-crop { width: min(100%, 378px); aspect-ratio: 58 / 30; margin: 0 auto; border: 2px solid var(--line, #222); border-radius: 8px; overflow: hidden; display: grid; place-items: center; background: #f3f1ec; cursor: grab; touch-action: none; }
+.h-tr-7ph-crop img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; }
+.h-tr-7ph-crop:active { cursor: grabbing; }
