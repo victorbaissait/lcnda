@@ -97,6 +97,8 @@ select,input[type=text]{font:inherit;font-size:13.5px;border:2px solid var(--ink
 .pv.compacte .pv-it{padding:5px 10px;font-size:12px}.pv.compacte .pv-list{gap:5px}
 .pv-lf{display:flex;justify-content:center;padding:6px;border-top:1px solid var(--line);font:700 11px system-ui}.pv-lf span{border:1.5px solid var(--ink);padding:2px 8px}.pv-lf span.on{background:var(--ink);color:#fff}
 @media(max-width:980px){.colgrid{grid-template-columns:1fr}.prev{position:static}.vis4{grid-template-columns:repeat(2,1fr)}}
+.start{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;background:#fafbfc;border:1px dashed #bbb;margin-bottom:6px;font-size:13px}.start>span{font-weight:700}.start small{color:var(--muted);flex-basis:100%}
+.mini-preset{display:inline-block;padding:6px 14px;font-size:12.5px}.mini-preset.mod::after{content:' · retouché';color:var(--muted);font-weight:400}
 footer{margin-top:30px;font-size:14px}
 footer b{font-size:16px}
 @media(max-width:820px){.ba,.cards2{grid-template-columns:1fr}.app{grid-template-columns:1fr}.side{border-right:0;border-bottom:2px solid var(--ink)}.where{grid-template-columns:1fr 1fr}.row>label:first-child,.row>span:first-child{min-width:0}}
@@ -114,6 +116,7 @@ footer b{font-size:16px}
     <li><b>Ordre des listes</b> : dans « Menus, onglets et listes » <i>et</i> par <span class="dup">« Réordonner »</span> en bas de la colonne (une autre fenêtre).</li></ul></div>
   <div class="card"><span class="tag">Après</span><h3>Un seul endroit, à sa place</h3><ul>
     <li><span class="ok">✓</span> <b>Portraits et avatars</b> : une seule « Forme », qui vaut partout (fiche, listes, arbre, petits carrés numérotés).</li>
+    <li><span class="ok">✓</span> <b>Une seule section</b> pour le dessin de la colonne : « Comme avant » et « Nouveau » deviennent deux boutons « Partir de », plus de grandes cartes en double.</li>
     <li><span class="ok">✓</span> <b>Menus, colonne et listes</b> : un nouvel onglet « Colonne » avec tout, y compris gauche / droite. Par défaut, les entrées gardent les <b>boutons encadrés</b> de l’app.</li>
     <li><span class="ok">✓</span> <b>Réordonner</b> (en bas de la colonne) ouvre l’onglet « Listes » : le même réglage, pas une copie.</li></ul></div>
 </div>
@@ -180,14 +183,8 @@ footer b{font-size:16px}
       <div class="colgrid"><div>
       <div class="sec"><h4>Où ? <span class="move">venu de « Menu principal »</span></h4>
         <div class="vis2"><button type="button" class="vc on" data-c="side" data-v="g"><span class="vside"><i class="c"></i><i></i></span>À gauche</button><button type="button" class="vc" data-c="side" data-v="d"><span class="vside r"><i></i><i class="c"></i></span>À droite</button></div></div>
-      <div class="sec"><h4>1 · Ton choix <span class="move">venu de « Portraits et colonne de gauche »</span></h4><p>Comme aujourd’hui : une grande carte, puis tu affines dessous. Tant que tu ne touches à rien, tout reste comme avant.</p>
-        <div class="cards2">
-          <button type="button" class="choice vc" data-c="mode" data-v="avant"><b>○ Comme avant <span class="pill">Par défaut</span></b><div class="mini"><span>A Personnes</span><span class="sel">H Carte</span><span>F Graphiques</span></div>
-            <ul class="why"><li>👍 Rien ne bouge : tes repères restent.</li><li>👎 Numéros dans le désordre, onglets dessinés de 3 façons.</li></ul></button>
-          <button type="button" class="choice vc on" data-c="mode" data-v="nouveau"><b>● Nouveau <span class="pill new">Nouveau</span></b><div class="mini btns"><span>01 Personnes</span><span class="sel">02 Carte</span><span>03 Graphiques</span></div>
-            <ul class="why"><li>👍 Les boutons encadrés de l’app, avec des numéros qui se suivent (01, 02, 03…).</li><li>👍 Les mêmes onglets dans tous les outils.</li></ul></button>
-        </div></div>
-      <div class="sec"><h4>2 · Réglages en plus</h4><p>Chaque choix se voit : clique, l’aperçu à droite suit.</p>
+      <div class="sec"><h4>Le dessin de la colonne <span class="move">venu de « Portraits et colonne de gauche »</span></h4><p>Chaque choix se voit : clique, l’aperçu à droite suit.</p>
+        <div class="start"><span>Partir de :</span><button type="button" class="vc mini-preset" data-preset="avant" title="Lettres d’origine (A, H, S1…), onglets de chaque outil, « Liste | Fiches » en bas">Comme avant</button><button type="button" class="vc mini-preset on" data-preset="nouveau" title="Numéros qui se suivent, mêmes onglets partout, « Liste | Fiches » au-dessus">Nouveau</button><small>règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche).</small></div>
         <div class="lab2">Style des entrées</div>
         <div class="vis3">
           <button type="button" class="vc on" data-c="style" data-v="boutons"><span class="ms btn"><i></i><i class="s"></i><i></i></span>Boutons encadrés<small>par défaut</small></button>
@@ -248,10 +245,11 @@ function paintPrev(){const T=TOOLS[C.tool],box=document.querySelector('[data-pre
  const style=C.style;
  const lf=`<div class="pv-lf"><span class="on">Liste</span><span>Fiches</span></div>`;
  box.innerHTML=`<div class="pv ${C.size}" style="width:${Math.round(C.w*0.78)}px;max-width:100%;margin-left:${C.side==='d'?'auto':'0'}"><div class="pv-head">${T.t}</div><div class="pv-tabs ${C.tabs}">${tabs}</div>${C.lf==='barre'?lf:''}<div class="pv-list ${style}">${T.it.map((l,k)=>`<div class="pv-it${k===1?' sel':''}">${num(k)}${l}</div>`).join('')}</div>${C.lf==='bas'?lf:''}</div>`;}
-document.querySelectorAll('.vc[data-c]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.c;C[k]=b.dataset.v;
- if(k==='mode'&&b.dataset.v==='avant')Object.assign(C,{style:'boutons',tabs:'avant',nums:'origine',lf:'bas'});
- if(k==='mode'&&b.dataset.v==='nouveau')Object.assign(C,{style:'boutons',tabs:'ligne',nums:'suite',lf:'barre'});
- document.querySelectorAll('.vc[data-c]').forEach(x=>x.classList.toggle('on',C[x.dataset.c]===x.dataset.v));paintPrev();}));
+const PRESETS={avant:{style:'boutons',tabs:'avant',nums:'origine',lf:'bas'},nouveau:{style:'boutons',tabs:'ligne',nums:'suite',lf:'barre'}};
+function paintChoices(){document.querySelectorAll('.vc[data-c]').forEach(x=>x.classList.toggle('on',C[x.dataset.c]===x.dataset.v));
+ document.querySelectorAll('[data-preset]').forEach(b=>{const P=PRESETS[b.dataset.preset],on=b.dataset.preset===C.mode;b.classList.toggle('on',on);b.classList.toggle('mod',on&&Object.keys(P).some(k=>P[k]!==C[k]));});paintPrev();}
+document.querySelectorAll('.vc[data-c]').forEach(b=>b.addEventListener('click',()=>{C[b.dataset.c]=b.dataset.v;paintChoices();}));
+document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{C.mode=b.dataset.preset;Object.assign(C,PRESETS[C.mode]);paintChoices();}));
 document.querySelectorAll('[data-tool] [data-tv]').forEach(b=>b.addEventListener('click',()=>{C.tool=b.dataset.tv;document.querySelectorAll('[data-tool] [data-tv]').forEach(x=>x.classList.toggle('on',x===b));paintPrev();}));
 const W=document.querySelector('[data-w]');if(W){W.addEventListener('input',()=>{C.w=+W.value;document.querySelector('[data-wv]').textContent=W.value+' px';paintPrev();});W.addEventListener('dblclick',()=>{W.value=320;W.dispatchEvent(new Event('input'));});}
 paintPrev();
