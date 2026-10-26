@@ -1382,7 +1382,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
 <script src="assets/js/app-apparence.js?v=18" defer></script>
-<script src="assets/js/app-designs.js?v=12" defer></script>
+<script src="assets/js/app-designs.js?v=13" defer></script>
 <script src="assets/js/app-sections.js?v=3" defer></script>
 <script>
 (function () {

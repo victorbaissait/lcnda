@@ -1135,7 +1135,7 @@
     // A8 Listes : dans « Menus, colonne et listes » (onglet Listes), dans les deux présentations des Réglages
     ext.afterDesign.push(() => {
         const st = A().state; if (!['design', 'nav_menus'].includes(st?.maintenanceTab) || document.getElementById('lc-a8-host')) return;
-        const at = document.querySelector('#workspace .design-order-grid') || document.querySelector('#workspace > .page > :last-child'); if (!at) return;
+        const at = document.querySelector('#workspace #lc-topbar-buttons') || document.querySelector('#workspace .design-order-grid') || document.querySelector('#workspace > .page > :last-child'); if (!at) return; // après « Boutons en haut à droite » (qui suit l'ordre du menu)
         at.insertAdjacentHTML('afterend', '<section class="person-block-config lc-a8-host" id="lc-a8-host"><header><span class="eyebrow">LISTES</span><h3>Forme des listes</h3><p>Comment se séparent les lignes des listes, de la colonne des personnes et des tableaux.</p></header><div data-a8-host></div></section>'
             + '<section class="person-block-config lc-a3-host" id="lc-a3-host"><header><span class="eyebrow">ICÔNES</span><h3>Icônes</h3><p>Émojis, traits, pictogrammes… les petits dessins des boutons, des barres d’outils et des rubriques.</p></header><div data-a3-host></div></section>'
             + '<section class="person-block-config lc-a2-host" id="lc-a2-host"><header><span class="eyebrow">DENSITÉ</span><h3>Densité</h3><p>Combien d’espace autour des choses : dans et entre les blocs, entre les lignes, autour des boutons.</p></header><div data-a2-host></div></section>');

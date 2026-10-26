@@ -211,7 +211,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             if (process.env.REGLAGES_SHOTS) { await openFrame(pa, LAY); await openFrame(pa, ALL); await pa.locator('#h-layouts').screenshot({path: path.join(process.env.REGLAGES_SHOTS, 'apparence-1440.png')}); await pa.locator('#h-allsets').screenshot({path: path.join(process.env.REGLAGES_SHOTS, 'toute-app-1440.png')}); }
             await pa.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); });
             await pa.waitForSelector('#lcd-a1 > summary'); assert.match(await pa.locator('#lcd-a1 > summary').innerText(), /Doux/);
-            assert.match(await pa.locator('#lcd-a8 > summary').innerText(), /Une ligne sur deux/i);
+            // la forme des listes (A8) vit dans Menus, colonne et listes → Listes
+            await pa.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'nav_menus'; A.state.regATab = {...(A.state.regATab || {}), nav_menus: 'Listes'}; await A.setModule('maintenance'); });
+            await pa.waitForSelector('#lcd-a8-emb [data-lcd-sum]'); await pa.waitForFunction(() => /Une ligne sur deux/i.test(document.querySelector('#lcd-a8-emb [data-lcd-sum]')?.textContent || ''));
         });
         await t('2. appliquer « toute l’app » : tout revient (et le code de sortie d’ici reste celui d’ici)', async () => {
             await resetAll(pa);
