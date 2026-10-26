@@ -8,6 +8,15 @@ module.exports = async (t, {page, open, body}, assert) => {
         assert.match(sm, /\.xxx\.\.xxxx\./, 'le haut du A et du B'); await page.selectOption('[data-xs] [name="mode"]', 'grille'); assert.ok(await page.$$eval('[data-xs-out] text', l => l.length) > 100);
         const dl = page.waitForEvent('download'); await page.click('[data-xs-svg]'); assert.match((await dl).suggestedFilename(), /broderie-famille-martin\.svg/);
     });
+    await t('🧵 broderie : 8 motifs, 5 bordures, couleurs à soi, grandes lettres, toile et taille', async () => {
+        await page.selectOption('[data-xs] [name="mode"]', 'apercu');
+        for (const m of ['maison', 'coeur', 'couronne', 'tulipes', 'eglise', 'colombes', 'aucun', 'arbre']) for (const bd of ['coeurs', 'grecque', 'double', 'aucune', 'points']) {
+            const r = await page.evaluate(([m, bd]) => { const S = window.LCNDA_EXT.tresorStitch, sm = S.sampler({title: 'FAMILLE MARTIN', couple: 'JEAN & LOUISE', date: '1903', motif: m, border: bd}); return {w: sm.W, h: sm.H, n: sm.grid.flat().filter(Boolean).length}; }, [m, bd]);
+            assert.ok(r.w >= 41 && r.n > 100, `${m}/${bd}`); }
+        await page.selectOption('[data-xs] [name="motif"]', 'couronne'); await page.selectOption('[data-xs] [name="m2"]', 'violet'); await page.selectOption('[data-xs] [name="border"]', 'coeurs'); await page.check('[data-xs] [name="big"]'); await page.selectOption('[data-xs] [name="count"]', '18'); await page.selectOption('[data-xs] [name="cloth"]', 'noir');
+        const b = await body(); assert.match(b, /Violet DMC 550/); assert.match(b, /sur Aïda 18/); assert.match(await page.$eval('[data-xs-out] svg', s => s.outerHTML), /#1c1c1c/);
+        const big = await page.evaluate(() => window.LCNDA_EXT.tresorStitch.sampler({title: 'AB', couple: '', date: '', big: true}).H); const small = await page.evaluate(() => window.LCNDA_EXT.tresorStitch.sampler({title: 'AB', couple: '', date: ''}).H); assert.ok(big > small, 'les grandes lettres prennent plus de place');
+    });
     await t('🔥 gravure laser : un SVG en millimètres, noir = gravure, rouge = découpe, avec les noms des ancêtres', async () => {
         await open('laser'); const svg = await page.$eval('[data-lz-out] svg', s => s.outerHTML); assert.match(svg, /width="300mm"/); assert.match(svg, /stroke="#ff0000"/); assert.match(svg, />Claude</); assert.match(svg, />Antoine</);
         const dl = page.waitForEvent('download'); await page.click('[data-lz-svg]'); assert.match((await dl).suggestedFilename(), /eventail-lea-martin\.svg/);

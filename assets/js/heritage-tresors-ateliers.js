@@ -27,38 +27,64 @@
     const TREE = ['....111....', '..1111111..', '.111111111.', '11111111111', '.111111111.', '..1111111..', '....222....', '....222....', '....222....', '..2222222..'];
     // les fils (numéros DMC courants) : [nom, couleur, numéro, symbole]
     const THREADS = {rouge: ['Rouge', '#b8202e', '321', '×'], vert: ['Vert', '#2f7d3a', '701', '●'], brun: ['Brun', '#6e4524', '801', '▲'], bleu: ['Bleu', '#1f4e8c', '798', '■'], or: ['Or', '#c79a2c', '729', '◆'], rose: ['Rose', '#d46a8a', '3350', '♦']};
-    const textW = s => [...s].length * 6 - 1;
-    function sampler({title, couple, date, color = 'rouge'}) {
-        const lines = [fold(title).toUpperCase(), fold(couple).toUpperCase(), fold(date).toUpperCase()].map(l => l.replace(/[^A-Z0-9 &.,'\-♥]/g, '')).filter(Boolean);
-        const W = Math.max(41, ...lines.map(l => textW(l) + 10)), H = 10 + lines.length * 10 + 14, grid = [...Array(H)].map(() => Array(W).fill(null));
+    // les motifs (11 points de large) : 1 = fil principal, 2 = fil secondaire
+    const MOTIFS = {
+        arbre: ['🌳 L’arbre', TREE, 'vert', 'brun'],
+        maison: ['🏡 La maison', ['.....1.....', '....111....', '...11111...', '..1111111..', '.111111111.', '11111111111', '.222222222.', '.2..2.2..2.', '.2..2.2..2.', '.222222222.', '.222...222.', '.222...222.'], 'rouge', 'brun'],
+        coeur: ['❤️ Le cœur', ['.111...111.', '11111.11111', '11111111111', '11111111111', '.111111111.', '..1111111..', '...11111...', '....111....', '.....1.....'], 'rouge', 'rose'],
+        couronne: ['👑 Le cœur couronné', ['.2...2...2.', '.22.222.22.', '.222222222.', '...........', '..11...11..', '.1111.1111.', '.111111111.', '..1111111..', '...11111...', '....111....', '.....1.....'], 'rouge', 'or'],
+        tulipes: ['🌷 Les tulipes', ['.1...1...1.', '.11.111.11.', '.111111111.', '..1111111..', '...11111...', '.....2.....', '..2..2..2..', '...2.2.2...', '....222....', '.....2.....'], 'rose', 'vert'],
+        eglise: ['⛪ L’église', ['.....1.....', '....111....', '.....1.....', '....222....', '...22222...', '...2.2.2...', '...22222...', '..2222222..', '.222222222.', '.22.222.22.', '.22.2.2.22.', '.222...222.'], 'or', 'brun'],
+        colombes: ['🕊️ Les colombes', ['11.......11', '.111...111.', '..1111111..', '...11111...', '....121....', '.....2.....', '....222....'], 'bleu', 'vert'],
+        aucun: ['— Aucun motif', [], 'vert', 'brun']};
+    const BORDERS = {points: '· Les points (à l’ancienne)', coeurs: '♥ La frise de cœurs', grecque: '⌇ La frise en zigzag', double: '▭ Le double trait', aucune: '— Sans bordure'};
+    Object.assign(THREADS, {noir: ['Noir', '#1b1b1b', '310', '◼'], gris: ['Gris', '#7a7a7a', '414', '○'], violet: ['Violet', '#6a3d8f', '550', '✚'], orange: ['Orange', '#d9692a', '947', '★'], ciel: ['Bleu ciel', '#6fa8d6', '813', '◇'], blanc: ['Blanc', '#f7f7f2', 'B5200', '□']});
+    const CLOTHS = {ecru: ['Écru', '#f4efe2'], blanc: ['Blanc', '#ffffff'], lin: ['Lin', '#d9cbb0'], noir: ['Noir', '#1c1c1c'], bleu: ['Bleu nuit', '#1f2a44']};
+    const COUNTS = {11: 'Aïda 11', 14: 'Aïda 14', 16: 'Aïda 16', 18: 'Aïda 18', 28: 'Lin 28 fils (un point sur 2 fils)'};
+    const textW = (s, k = 1) => [...s].length * 6 * k - k;
+    function sampler({title, couple, date, place = '', color = 'rouge', coupleColor = 'bleu', motif = 'arbre', m1 = '', m2 = '', border = 'points', b1 = 'vert', b2 = 'or', big = false, hearts = true}) {
+        const lines = [fold(title).toUpperCase(), fold(couple).toUpperCase(), fold(date).toUpperCase(), fold(place).toUpperCase()].map(l => l.replace(/[^A-Z0-9 &.,'\-♥]/g, '')).map((l, i) => ({l, k: big && i === 0 ? 2 : 1, c: i === 1 ? coupleColor : color})).filter(x => x.l);
+        const M = MOTIFS[motif] || MOTIFS.arbre, art = M[1], pad = border === 'coeurs' || border === 'grecque' ? 6 : border === 'aucune' ? 3 : 4;
+        const W = Math.max(41, ...lines.map(x => textW(x.l, x.k) + 2 * pad + 2)), H = pad + lines.reduce((n, x) => n + 10 * x.k, 0) + (art.length ? art.length + 4 : 0) + pad - 1, grid = [...Array(H)].map(() => Array(W).fill(null));
         const put = (x, y, c) => { if (x >= 0 && y >= 0 && x < W && y < H) grid[y][x] = c; };
-        for (let x = 0; x < W; x++) { if (x % 4 !== 3) { put(x, 0, 'vert'); put(x, H - 1, 'vert'); } if (x % 4 === 1) { put(x, 1, 'or'); put(x, H - 2, 'or'); } }
-        for (let y = 0; y < H; y++) { if (y % 4 !== 3) { put(0, y, 'vert'); put(W - 1, y, 'vert'); } }
-        let y = 4; lines.forEach((l, k) => { let x = Math.floor((W - textW(l)) / 2); [...l].forEach(ch => { (FONT[ch] || FONT[' ']).forEach((row, ry) => { for (let b = 0; b < 5; b++) if (row & (16 >> b)) put(x + b, y + ry, k === 1 ? 'bleu' : color); }); x += 6; }); y += 10; });
-        const tx = Math.floor((W - 11) / 2); TREE.forEach((r, ry) => [...r].forEach((c, rx) => { if (c !== '.') put(tx + rx, y + ry, c === '1' ? 'vert' : 'brun'); }));
-        [[4, y + 4], [W - 9, y + 4]].forEach(([hx, hy]) => FONT['♥'].forEach((row, ry) => { for (let b = 0; b < 5; b++) if (row & (16 >> b)) put(hx + b, hy + ry - 2, 'rose'); }));
+        const edge = (f) => { for (let x = 0; x < W; x++) { f(x, 0, 'h', 0); f(x, H - 1, 'h', 1); } for (let y = 0; y < H; y++) { f(0, y, 'v', 0); f(W - 1, y, 'v', 1); } };
+        if (border === 'points') { for (let x = 0; x < W; x++) { if (x % 4 !== 3) { put(x, 0, b1); put(x, H - 1, b1); } if (x % 4 === 1) { put(x, 1, b2); put(x, H - 2, b2); } } for (let y = 0; y < H; y++) if (y % 4 !== 3) { put(0, y, b1); put(W - 1, y, b1); } }
+        if (border === 'double') edge((x, y, d) => { put(x, y, b1); if (d === 'h') put(x, y === 0 ? 2 : H - 3, b2); else put(x === 0 ? 2 : W - 3, y, b2); });
+        if (border === 'grecque') { const z = [0, 1, 2, 1]; for (let x = 0; x < W; x++) { put(x, z[x % 4], b1); put(x, H - 1 - z[x % 4], b1); } for (let y = 0; y < H; y++) { put(z[y % 4], y, b2); put(W - 1 - z[y % 4], y, b2); } }
+        if (border === 'coeurs') { const hz = [[1, 0, 1], [1, 1, 1], [0, 1, 0]], heart = (x0, y0, c) => hz.forEach((r, ry) => r.forEach((v, rx) => v && put(x0 + rx, y0 + ry, c)));
+            for (let x = 1; x + 3 < W; x += 6) { heart(x, 1, b1); heart(x, H - 4, b1); } for (let y = 7; y + 3 < H - 4; y += 6) { heart(1, y, b2); heart(W - 4, y, b2); } }
+        let y = pad; lines.forEach(({l, k, c}) => { let x = Math.floor((W - textW(l, k)) / 2); [...l].forEach(ch => { (FONT[ch] || FONT[' ']).forEach((row, ry) => { for (let b = 0; b < 5; b++) if (row & (16 >> b)) for (let i = 0; i < k; i++) for (let j = 0; j < k; j++) put(x + b * k + i, y + ry * k + j, c); }); x += 6 * k; }); y += 10 * k; });
+        if (art.length) { const tx = Math.floor((W - 11) / 2); art.forEach((r, ry) => [...r].forEach((c, rx) => { if (c !== '.') put(tx + rx, y + ry, c === '1' ? (m1 || M[2]) : (m2 || M[3])); }));
+            if (hearts && W > 30) [[pad, y + 4], [W - pad - 5, y + 4]].forEach(([hx, hy]) => FONT['♥'].forEach((row, ry) => { for (let b = 0; b < 5; b++) if (row & (16 >> b)) put(hx + b, hy + ry - 2, 'rose'); })); }
         return {grid, W, H};
     }
-    function samplerSvg(sm, mode = 'grille') {
+    function samplerSvg(sm, mode = 'grille', cloth = 'ecru') {
         const c = 12, used = {}; let cells = '';
         sm.grid.forEach((row, y) => row.forEach((t, x) => { if (!t) return; used[t] = (used[t] || 0) + 1; const th = THREADS[t], X = x * c, Y = y * c;
             cells += mode === 'apercu' ? `<path d="M${X + 2} ${Y + 2}L${X + c - 2} ${Y + c - 2}M${X + c - 2} ${Y + 2}L${X + 2} ${Y + c - 2}" stroke="${th[1]}" stroke-width="3" stroke-linecap="round"/>` : `<rect x="${X}" y="${Y}" width="${c}" height="${c}" fill="${th[1]}" opacity=".55"/><text x="${X + c / 2}" y="${Y + c - 3}" font-size="9" text-anchor="middle" fill="#111">${th[3]}</text>`; }));
         const lines = mode === 'apercu' ? '' : [...Array(sm.W + 1)].map((_, x) => `<line x1="${x * c}" y1="0" x2="${x * c}" y2="${sm.H * c}" stroke="${x % 10 ? '#ccc' : '#555'}" stroke-width="${x % 10 ? 0.5 : 1.2}"/>`).join('') + [...Array(sm.H + 1)].map((_, y) => `<line x1="0" y1="${y * c}" x2="${sm.W * c}" y2="${y * c}" stroke="${y % 10 ? '#ccc' : '#555'}" stroke-width="${y % 10 ? 0.5 : 1.2}"/>`).join('');
-        return {svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 ${sm.W * c + 2} ${sm.H * c + 2}" width="${sm.W * c + 2}" height="${sm.H * c + 2}"><rect x="-1" y="-1" width="${sm.W * c + 2}" height="${sm.H * c + 2}" fill="${mode === 'apercu' ? '#f4efe2' : '#fff'}"/>${cells}${lines}</svg>`, used};
+        const weave = mode === 'apercu' ? `<defs><pattern id="aida" width="${c}" height="${c}" patternUnits="userSpaceOnUse"><circle cx="0" cy="0" r="1.3" fill="#0002"/></pattern></defs><rect x="-1" y="-1" width="${sm.W * c + 2}" height="${sm.H * c + 2}" fill="url(#aida)"/>` : '';
+        return {svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 ${sm.W * c + 2} ${sm.H * c + 2}" width="${sm.W * c + 2}" height="${sm.H * c + 2}"><rect x="-1" y="-1" width="${sm.W * c + 2}" height="${sm.H * c + 2}" fill="${mode === 'apercu' ? (CLOTHS[cloth] || CLOTHS.ecru)[1] : '#fff'}"/>${weave}${cells}${lines}</svg>`, used};
     }
     async function renderStitch(host, T) {
         const tr = await T.tree(), st = T.start(tr), f = tr.families.find(x => x.my && x.a && x.b && T.ancestors(tr, st?.id || 0, 30).some(a => a.id === x.a)) || tr.families.find(x => x.a && x.b);
         const a = f && tr.byId.get(f.a), b = f && tr.byId.get(f.b);
+        const thr = (name, cur) => `<select name="${name}">${name === 'm1' || name === 'm2' ? '<option value="">celle du motif</option>' : ''}${Object.entries(THREADS).map(([k, t]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${T.esc(t[0])} (DMC ${t[2]})</option>`).join('')}</select>`;
         host.innerHTML = `<div class="h-tr-split"><form class="h-tr-panel" data-xs><label>Le titre<input name="title" maxlength="30" value="FAMILLE ${T.esc((st?.last || '').toUpperCase())}"></label><label>Le couple<input name="couple" maxlength="30" value="${T.esc([a?.first, b?.first].filter(Boolean).join(' & '))}"></label>
-            <label>La date<input name="date" maxlength="30" value="${T.esc(f?.my ? String(f.my) : '')}"></label><label>La couleur du titre<select name="color">${Object.entries(THREADS).map(([k, t]) => `<option value="${k}">${T.esc(t[0])} (DMC ${t[2]})</option>`).join('')}</select></label>
-            <label>Voir<select name="mode"><option value="apercu">l’aperçu brodé</option><option value="grille">la grille à symboles</option></select></label><p class="h-tr-row"><button type="button" class="button" data-xs-print>🖨 Imprimer la grille</button><button type="button" class="button secondary" data-xs-svg>⬇ SVG</button></p><div data-xs-info class="h-tr-muted"></div></form><div class="h-tr-xs-out" data-xs-out></div></div>`;
-        const form = host.querySelector('[data-xs]'), out = host.querySelector('[data-xs-out]'), info = host.querySelector('[data-xs-info]');
-        const cur = () => sampler({title: form.elements.title.value, couple: form.elements.couple.value, date: form.elements.date.value, color: form.elements.color.value});
+            <label>La date<input name="date" maxlength="30" value="${T.esc(f?.my ? String(f.my) : '')}"></label><label>Le lieu (facultatif)<input name="place" maxlength="30"></label><label>La couleur du titre${thr('color', 'rouge')}</label><label>La couleur du couple${thr('coupleColor', 'bleu')}</label>
+            <label class="checkbox-line"><input type="checkbox" name="big"> Le titre en grandes lettres (double)</label>
+            <label>Le motif<select name="motif">${Object.entries(MOTIFS).map(([k, [l]]) => `<option value="${k}">${T.esc(l)}</option>`).join('')}</select></label><label>Ses couleurs ${thr('m1', '')} ${thr('m2', '')}</label><label class="checkbox-line"><input type="checkbox" name="hearts" checked> Deux petits cœurs de chaque côté</label>
+            <label>La bordure<select name="border">${Object.entries(BORDERS).map(([k, l]) => `<option value="${k}">${T.esc(l)}</option>`).join('')}</select></label><label>Ses couleurs ${thr('b1', 'vert')} ${thr('b2', 'or')}</label>
+            <label>La toile<select name="count">${Object.entries(COUNTS).map(([k, l]) => `<option value="${k}"${k === '14' ? ' selected' : ''}>${T.esc(l)}</option>`).join('')}</select></label><label>Sa couleur (aperçu)<select name="cloth">${Object.entries(CLOTHS).map(([k, [l]]) => `<option value="${k}">${T.esc(l)}</option>`).join('')}</select></label>
+            <label>Voir<select name="mode"><option value="apercu">l’aperçu brodé</option><option value="grille">la grille à symboles</option></select></label><p class="h-tr-row"><button type="button" class="button" data-xs-print>🖨 Imprimer la grille</button><button type="button" class="button secondary" data-xs-svg>⬇ SVG</button><button type="button" class="button secondary" data-xs-layout title="L’aperçu brodé dans l’atelier de mise en page">📐 Mise en page</button></p><div data-xs-info class="h-tr-muted"></div></form><div class="h-tr-xs-out" data-xs-out></div></div>`;
+        const form = host.querySelector('[data-xs]'), out = host.querySelector('[data-xs-out]'), info = host.querySelector('[data-xs-info]'), e = n => form.elements[n];
+        const cur = () => sampler({title: e('title').value, couple: e('couple').value, date: e('date').value, place: e('place').value, color: e('color').value, coupleColor: e('coupleColor').value, big: e('big').checked, motif: e('motif').value, m1: e('m1').value, m2: e('m2').value, hearts: e('hearts').checked, border: e('border').value, b1: e('b1').value, b2: e('b2').value});
         const legend = used => Object.entries(used).map(([k, n]) => `<span class="h-tr-pill">${THREADS[k][3]} ${THREADS[k][0]} DMC ${THREADS[k][2]} — ${n} points</span>`).join(' ');
-        const draw = () => { const sm = cur(), r = samplerSvg(sm, form.elements.mode.value); out.innerHTML = r.svg; const cm = n => (n / 14 * 2.54).toFixed(1).replace('.', ',');
-            info.innerHTML = `${sm.W} × ${sm.H} points · sur Aïda 14 : ${cm(sm.W)} × ${cm(sm.H)} cm<br>${legend(r.used)}`; };
-        form.addEventListener('input', draw);
-        host.querySelector('[data-xs-svg]').addEventListener('click', () => T.download(`broderie-${slug(form.elements.title.value)}.svg`, new Blob([samplerSvg(cur(), 'grille').svg], {type: 'image/svg+xml'})));
+        const draw = () => { const sm = cur(), r = samplerSvg(sm, e('mode').value, e('cloth').value); out.innerHTML = r.svg; const n = Number(e('count').value), per = n === 28 ? 14 : n, cm = v => (v / per * 2.54).toFixed(1).replace('.', ',');
+            info.innerHTML = `${sm.W} × ${sm.H} points · sur ${T.esc(COUNTS[n])} : ${cm(sm.W)} × ${cm(sm.H)} cm (prévoir 5 cm de marge tout autour)<br>${legend(r.used)}`; };
+        form.addEventListener('input', draw); form.addEventListener('change', draw);
+        host.querySelector('[data-xs-svg]').addEventListener('click', () => T.download(`broderie-${slug(e('title').value)}.svg`, new Blob([samplerSvg(cur(), 'grille').svg], {type: 'image/svg+xml'})));
+        host.querySelector('[data-xs-layout]').addEventListener('click', () => { const sm = cur(), r = samplerSvg(sm, 'apercu', e('cloth').value); T.toLayout(`Broderie — ${e('title').value}`, 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(r.svg), {w: 210, h: Math.max(120, Math.round(210 * sm.H / sm.W) + 20)}); });
         host.querySelector('[data-xs-print]').addEventListener('click', () => { const r = samplerSvg(cur(), 'grille'); ext.tresorPrint('Grille de broderie', 'section{background:#fff;max-width:190mm;margin:8mm auto;padding:8mm;font-family:system-ui}section svg{width:100%;height:auto}.lg span{display:inline-block;margin:2mm;padding:1mm 3mm;border:1px solid #ccc;border-radius:3mm}', `<section><h1>${T.esc(form.elements.title.value)}</h1>${r.svg}<p class="lg">${legend(r.used)}</p><p>Un carré = un point de croix ; les traits épais tous les 10 points.</p></section>`); });
         draw();
     }
