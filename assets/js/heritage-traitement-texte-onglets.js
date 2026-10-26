@@ -19,6 +19,8 @@
         P.partsInit = function () {
             const d = this.doc, ok = Array.isArray(d.parts) && d.parts.length && d.parts.every(x => x && Array.isArray(x.sections));
             if (!ok) d.parts = [{name: 'Document', sections: d.sections || [{html: ''}]}];
+            // un outil qui fabrique un document (publipostage, modèle…) change « sections » : c'est le texte de l'onglet ouvert, il passe avant la copie gardée dans l'onglet
+            else if (Array.isArray(d.sections) && d.sections.length) { const i = Math.max(0, Math.min(d.parts.length - 1, Number(d.part) || 0)); if (JSON.stringify(d.parts[i].sections) !== JSON.stringify(d.sections)) d.parts[i].sections = d.sections; }
             d.parts = d.parts.slice(0, 60).map((x, i) => ({name: String(x.name || `Onglet ${i + 1}`).slice(0, 60), sections: x.sections.length ? x.sections : [{html: ''}]}));
             d.part = Math.max(0, Math.min(d.parts.length - 1, Number(d.part) || 0)); d.sections = d.parts[d.part].sections;
         };

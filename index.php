@@ -74,8 +74,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=5">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=7" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=7" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=8" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=8" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=6">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
@@ -1344,7 +1344,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-traitement-texte-fichiers.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-fusion.js?v=1" defer></script>
 <script src="assets/js/heritage-traitement-texte-relecture.js?v=1" defer></script>
-<script src="assets/js/heritage-traitement-texte-onglets.js?v=3" defer></script>
+<script src="assets/js/heritage-traitement-texte-onglets.js?v=4" defer></script>
 <script src="assets/js/heritage-site-web-code.js?v=4" defer></script>
 <script src="assets/js/heritage-site-web-compat.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-html-ref.js?v=1" defer></script>

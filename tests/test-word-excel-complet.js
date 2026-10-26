@@ -108,6 +108,14 @@ json.dump(d, open(out, 'w'))
     });
     // chaque fonction de la liste est essayée au moins une fois
     const used = new Set(C.flatMap(([f]) => (f.match(/[A-Z][A-Z.]*(?=\()/g) || []).map(x => S.fnKey(x))));
+    // LET, LAMBDA et ses compagnons, MINIGRAPHIQUE : notre moteur seulement (LibreOffice ne les calcule pas pareil), sur un petit classeur à part
+    const LX = [['=LET(x;2;x*3)', 6], ['=LET(f;LAMBDA(n;n*2);f(4))', 8], ['=SOMME(MAP(G2:G4;LAMBDA(x;x*x)))', 14], ['=SOMME(PAR.LIGNE(G2:H4;LAMBDA(l;SOMME(l))))', 66], ['=SOMME(PAR.COL(G2:H4;LAMBDA(c;MAX(c))))', 33],
+        ['=REDUCE(0;G2:G4;LAMBDA(t;x;t+x))', 6], ['=SOMME(SCAN(0;G2:G4;LAMBDA(t;x;t+x)))', 10]];
+    { const wb2 = S.newWorkbook(), s2 = wb2.sheets[0]; Object.entries({G2: 1, G3: 2, G4: 3, H2: 10, H3: 20, H4: 30}).forEach(([k, v]) => { s2.cells[k] = {v}; });
+        [...LX.map(x => x[0]), '=MINIGRAPHIQUE(G2:G4)'].forEach((f, i) => { s2.cells['L' + (10 + i)] = {v: f}; }); const c2 = new S.Calc(wb2);
+        LX.forEach(([f, exp], i) => ok(close(show(c2.val(0, 9 + i, 11)), exp), `${f} → ${JSON.stringify(show(c2.val(0, 9 + i, 11)))} (attendu ${exp})`));
+        const mg = c2.val(0, 9 + LX.length, 11); ok(Array.isArray(mg?.vals) && mg.vals.join() === '1,2,3', 'MINIGRAPHIQUE garde les valeurs de la ligne de tendance');
+        [...LX.map(x => x[0]), '=MINIGRAPHIQUE(G2:G4)'].forEach(f => (f.match(/[A-Z][A-Z.]*(?=\()/g) || []).forEach(x => used.add(S.fnKey(x)))); }
     eq(Object.keys(S.FN).filter(k => !used.has(k) && !['UNIQUE', 'TRIER', 'FILTRE', 'DATE.ACTE'].includes(k)), [], 'toutes les fonctions de la liste sont essayées');
     { const w2 = S.normalize({ sheets: [{ cells: { A1: 'b', A2: 'a', A3: 'b', A4: 3, A5: 1, B1: '=UNIQUE(A1:A3)', C1: '=TRIER(A4:A5)', D1: '=FILTRE(A4:A5;A4:A5>2)', E1: '=DATE.ACTE("7 mai 1925")' } }] }); const c2 = new S.Calc(w2); eq([c2.val(0, 0, 1), c2.val(0, 1, 1), c2.val(0, 0, 2), c2.val(0, 1, 2), c2.val(0, 0, 3)], ['b', 'a', 1, 3, 3], 'UNIQUE, TRIER, FILTRE débordent'); ok(/1925/.test(c2.val(0, 0, 4)), 'DATE.ACTE'); }
     // formules exportées : DATEDIF « A » → « Y », VRAI() relu, noms gardés, noms LibreOffice COM.MICROSOFT

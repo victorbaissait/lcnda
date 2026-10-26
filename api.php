@@ -762,6 +762,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-menu-hidden',
         'genealogie-list-order',
         'genealogie-list-hidden',
+        'lcnda-tresors-order',
         'genealogie-map-order',
         'genealogie-map-hidden',
         'genealogie-maintenance-order',
