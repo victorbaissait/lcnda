@@ -172,6 +172,78 @@
     }
     const sampleRings = () => ({o: {title: 'Où j’en suis'}, rows: [['Grands-parents trouvés', 4, 4], ['Arrière-grands-parents', 7, 8], ['Trisaïeuls', 11, 16], ['Actes de naissance sourcés', 38, 60], ['Photos identifiées', 52, 120]].map(([label, value, goal]) => ({label, value, goal}))});
 
+    /* ═════════ « Depuis l'app » : les chiffres de mon arbre (l'arbre lu par ✨ Trésors, tresor_tree) ═════════ */
+    const APP = () => window.LCNDA_APP;
+    function tree6() {
+        if (ext.tresors?.T?.tree) return ext.tresors.T.tree();
+        return APP().api('tresor_tree').then(d => { const byId = new Map(d.people.map(p => [p.id, p])), kids = new Map();
+            d.families.forEach(f => [f.a, f.b].filter(Boolean).forEach(x => { if (!kids.has(x)) kids.set(x, []); kids.get(x).push(...f.children); })); return {...d, byId, kids}; });
+    }
+    const nm = p => (p ? p.name || [p.first, p.last].filter(Boolean).join(' ') || 'Sans nom' : '?');
+    const life = p => (p.by || p.dy ? `${p.by || '?'}–${p.dy || (p.living ? '' : '?')}` : '');
+    const v6 = (pane, k) => pane.querySelector(`[data-n6="${k}"]`)?.value || '';
+    const root6 = (pane, tr) => tr.byId.get(Number(pane.querySelector('[name="n6_root"]')?.value)) || tr.byId.get(Number(APP().state?.bootstrap?.startPersonId)) || tr.people.find(p => p.start) || tr.people[0];
+    const sel6 = (k, label, opts, def) => `<label>${esc(label)}<select data-n6="${k}">${opts.map(([v, l]) => `<option value="${esc(v)}" ${String(v) === String(def) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
+    /** les ancêtres d'une personne : [{p, gen}] (gen 1 = parents), chacun une seule fois */
+    function anc6(tr, p, max) { const out = [], seen = new Set([p.id]); let cur = [p.id];
+        for (let g = 1; g <= max && cur.length; g++) { const nx = []; cur.forEach(id => { const q = tr.byId.get(id); [q?.father, q?.mother].filter(Boolean).forEach(a => { if (seen.has(a) || !tr.byId.get(a)) return; seen.add(a); out.push({p: tr.byId.get(a), gen: g}); nx.push(a); }); }); cur = nx; }
+        return out; }
+    function desc6(tr, p, max) { const out = [], seen = new Set([p.id]); let cur = [p.id];
+        for (let g = 1; g <= max && cur.length; g++) { const nx = []; cur.forEach(id => (tr.kids.get(id) || []).forEach(k => { if (seen.has(k) || !tr.byId.get(k)) return; seen.add(k); out.push({p: tr.byId.get(k), gen: g}); nx.push(k); })); cur = nx; }
+        return out; }
+    const GEN_UP = ['Parents', 'Grands-parents', 'Arrière-grands-parents', 'Trisaïeuls', 'Quadrisaïeuls', 'Génération 6', 'Génération 7'];
+    const GEN_DOWN = ['Enfants', 'Petits-enfants', 'Arrière-petits-enfants', 'Génération +4'];
+    const count6 = (list, key) => { const m = new Map(); list.forEach(x => { const k = key(x); if (k) m.set(k, (m.get(k) || 0) + 1); }); return [...m].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0]), 'fr')); };
+    const roman6 = n => { let s = '', x = n; for (const [a, b] of [[20, 'XX'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]) while (x >= a) { s += b; x -= a; } return s; };
+    const BYS = [['first', 'Les prénoms les plus donnés', p => String(p.first || '').split(/[\s-]+/)[0]], ['last', 'Les noms de famille', p => p.last || ''], ['occ', 'Les métiers', p => p.occ || ''],
+        ['place', 'Les communes de naissance', (p, tr) => (p.bplace && tr.places[p.bplace] ? tr.places[p.bplace].name.split(',')[0] : '')], ['century', 'Les siècles de naissance', p => (p.by ? `${roman6(Math.ceil(p.by / 100))}e siècle` : '')]];
+    /** un panneau : titre, phrase, la personne (ou non), des choix, « Prendre dans mon arbre » ; run(pane, tr) → {rows, o} */
+    function app6(title, intro, fields, run, {person = true} = {}) {
+        return {html: () => `<div class="h-dg-app n6-app"><h4>${esc(title)}</h4><p class="muted">${esc(intro)}</p>${person && APP()?.pickerField ? `<span class="pk-lab">La personne</span>${APP().pickerField({name: 'n6_root', kind: 'person', animals: false, value: Number(APP().state?.bootstrap?.startPersonId) || null})}` : ''}${fields}
+                <button type="button" class="button small" data-n6-go>Prendre dans mon arbre</button><p class="muted" data-n6-msg aria-live="polite"></p></div>`,
+            bind: (pane, io) => { const btn = pane.querySelector('[data-n6-go]'), msg = pane.querySelector('[data-n6-msg]'); if (!btn) return;
+                btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.textContent = 'Lecture de ta généalogie…';
+                    try { const tr = await tree6(), r = run(pane, tr); if (!r.rows.length) throw new Error('Rien trouvé dans l’arbre pour ce choix.');
+                        const s = io.spec(); s.rows = r.rows.slice(0, 400); s.o = {...s.o, ...r.o}; io.apply(s); if (msg) msg.textContent = ''; APP().toast?.(`${r.rows.length > 400 ? 400 : r.rows.length} lignes prises dans l’arbre.`); }
+                    catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } }); }};
+    }
+    const N_OPTS = [[8, '8'], [10, '10'], [15, '15'], [20, '20']];
+    const ranked = (pane, tr) => { const by = BYS.find(b => b[0] === v6(pane, 'by')) || BYS[0], n = Number(v6(pane, 'n')) || 10; return {by, list: count6(tr.people, p => by[2](p, tr)).slice(0, n)}; };
+    const FROM6 = {
+        hourglass: app6('⏳ Le sablier de quelqu’un de mon arbre', 'Ses ancêtres au-dessus, ses descendants au-dessous, avec leurs dates.',
+            sel6('up', 'Générations au-dessus', [[1, '1 (parents)'], [2, '2'], [3, '3'], [4, '4'], [5, '5']], 2) + sel6('down', 'Générations au-dessous', [[1, '1 (enfants)'], [2, '2'], [3, '3'], [4, '4']], 2),
+            (pane, tr) => { const p = root6(pane, tr); if (!p) return {rows: []};
+                const rows = [...anc6(tr, p, Number(v6(pane, 'up')) || 2).map(x => ({name: nm(x.p), gen: -x.gen, dates: life(x.p)})), {name: nm(p), gen: 0, dates: life(p)}, ...desc6(tr, p, Number(v6(pane, 'down')) || 2).map(x => ({name: nm(x.p), gen: x.gen, dates: life(x.p)}))];
+                return {rows, o: {title: `Le sablier de ${nm(p)}`}}; }),
+        gantt: app6('📅 Les vies côte à côte', 'Une barre par personne, de sa naissance à son décès (ou à aujourd’hui).',
+            sel6('who', 'Qui', [['anc', 'Ses ancêtres directs'], ['fam', 'Sa famille proche (parents, frères et sœurs, enfants)'], ['desc', 'Ses descendants']], 'anc') + sel6('gens', 'Générations', [[2, '2'], [3, '3'], [4, '4'], [5, '5']], 3),
+            (pane, tr) => { const p = root6(pane, tr); if (!p) return {rows: []}; const who = v6(pane, 'who'), g = Number(v6(pane, 'gens')) || 3, now = new Date().getFullYear();
+                let list = who === 'desc' ? desc6(tr, p, g).map(x => ({p: x.p, group: GEN_DOWN[x.gen - 1] || `Génération +${x.gen}`})) : who === 'fam' ? [] : anc6(tr, p, g).map(x => ({p: x.p, group: GEN_UP[x.gen - 1] || `Génération ${x.gen}`}));
+                if (who === 'fam') { const add = (q, group) => { if (q && !list.some(x => x.p.id === q.id)) list.push({p: q, group}); };
+                    [p.father, p.mother].forEach(id => add(tr.byId.get(id), 'Parents'));
+                    (tr.families || []).filter(f => f.children?.includes(p.id)).forEach(f => f.children.forEach(id => id !== p.id && add(tr.byId.get(id), 'Frères et sœurs')));
+                    (tr.kids.get(p.id) || []).forEach(id => add(tr.byId.get(id), 'Enfants')); }
+                list = [{p, group: 'La personne'}, ...list];
+                const rows = list.filter(x => x.p.by).map(x => ({task: `${nm(x.p)}${x.p.occ ? ` (${x.p.occ})` : ''}`, group: x.group, start: String(x.p.by), end: String(x.p.dy || (x.p.living ? now : x.p.by + 1)), done: x.p.dy || x.p.living ? 100 : 0}));
+                return {rows, o: {title: `Les vies autour de ${nm(p)}`}}; }),
+        mindmap: app6('🧠 Une personne et ses branches', 'Au centre la personne ; autour, ses enfants (et leurs enfants), ou les métiers et les communes de ses ancêtres.',
+            sel6('by', 'Les branches', [['kids', 'Ses enfants, et leurs enfants'], ['occ', 'Les métiers de ses ancêtres'], ['place', 'Les communes de naissance de ses ancêtres']], 'kids'),
+            (pane, tr) => { const p = root6(pane, tr); if (!p) return {rows: []}; const by = v6(pane, 'by'); let rows = [];
+                if (by === 'kids') (tr.kids.get(p.id) || []).forEach(k => { const c = tr.byId.get(k); if (!c) return; const gk = (tr.kids.get(k) || []).map(x => tr.byId.get(x)).filter(Boolean); rows.push(...(gk.length ? gk.map(g => ({branch: nm(c), leaf: nm(g)})) : [{branch: nm(c), leaf: life(c) || '—'}])); });
+                else { const key = by === 'occ' ? q => q.occ : q => (q.bplace && tr.places[q.bplace] ? tr.places[q.bplace].name.split(',')[0] : ''); anc6(tr, p, 6).forEach(x => { const k = key(x.p); if (k) rows.push({branch: k, leaf: nm(x.p)}); }); }
+                return {rows, o: {title: by === 'kids' ? `La descendance de ${nm(p)}` : by === 'occ' ? `Les métiers des ancêtres de ${nm(p)}` : `D’où viennent les ancêtres de ${nm(p)}`, center: nm(p)}}; }),
+        radialbar: app6('🎯 Un classement de mon arbre', 'Les plus fréquents dans toute la base, en barres autour d’un cercle.', sel6('by', 'Classer', BYS.map(b => [b[0], b[1]]), 'first') + sel6('n', 'Combien', N_OPTS, 10),
+            (pane, tr) => { const {by, list} = ranked(pane, tr); return {rows: list.map(([label, value]) => ({label, value})), o: {title: by[1], unit: 'fiches'}}; }, {person: false}),
+        circlepack: app6('🫧 Les bulles de mon arbre', 'Une bulle par nom, métier ou commune : plus il y a de fiches, plus elle est grosse.', sel6('by', 'Les bulles', BYS.filter(b => b[0] !== 'century').map(b => [b[0], b[1]]), 'last') + sel6('n', 'Combien', N_OPTS, 15),
+            (pane, tr) => { const {by, list} = ranked(pane, tr); return {rows: list.map(([label, value]) => ({label, value, group: ''})), o: {title: by[1]}}; }, {person: false}),
+        rings: app6('⭕ Où j’en suis dans mon arbre', 'Un anneau par objectif : plein, c’est fini.', sel6('by', 'Les objectifs', [['gens', 'Les ancêtres trouvés, génération par génération'], ['facts', 'Les fiches complètes (dates, lieux, métier)']], 'gens'),
+            (pane, tr) => { const by = v6(pane, 'by');
+                if (by === 'facts') { const all = tr.people, dead = all.filter(p => !p.living), n = all.length;
+                    return {rows: [['Date de naissance', all.filter(p => p.by).length, n], ['Lieu de naissance', all.filter(p => p.bplace).length, n], ['Date de décès (personnes décédées)', dead.filter(p => p.dy).length, dead.length], ['Métier', all.filter(p => p.occ).length, n]].filter(r => r[2]).map(([label, value, goal]) => ({label, value, goal})), o: {title: 'Mes fiches complètes'}}; }
+                const p = root6(pane, tr); if (!p) return {rows: []}; const a = anc6(tr, p, 5);
+                return {rows: GEN_UP.slice(0, 5).map((label, i) => ({label, value: a.filter(x => x.gen === i + 1).length, goal: 2 ** (i + 1)})), o: {title: `Les ancêtres de ${nm(p)} : où j’en suis`}}; }),
+    };
+
     /* ═════════ Les sortes : tableaux, réglages ═════════ */
     const PALETTE = C('palette', 'Couleurs', 'select', {choices: Object.keys(R.PALETTES || {vive: 1}).map(k => [k, k.charAt(0).toUpperCase() + k.slice(1)])});
     const KINDS = {
@@ -212,6 +284,6 @@
                 C('thick', 'Épaisseur', 'range', {unit: '%', min: 6, max: 100, def: 60}), PALETTE],
             sample: sampleRings},
     };
-    for (const [k, kind] of Object.entries(KINDS)) { if (!R.KINDS[k]) R.KINDS[k] = kind; }
+    for (const [k, kind] of Object.entries(KINDS)) { if (FROM6[k]) kind.fromApp = FROM6[k]; if (!R.KINDS[k]) R.KINDS[k] = kind; }
     ext.diagramNouveaux = {KINDS: Object.keys(KINDS)};
 })();

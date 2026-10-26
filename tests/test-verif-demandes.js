@@ -99,11 +99,11 @@ const STATS_KINDS = ['columns', 'bars', 'stacked', 'stacked100', 'line', 'area',
 
             /* 1 */
             await t(`[${tag}] 1. « Chercher un réglage… » mène à Apparence → « 🔎 Types de recherche »`, async () => {
-                await maint('design'); await p.waitForSelector('#research-kinds-config [data-rk-list] li', { timeout: 20000 });
+                await maint('nav_menus'); await p.waitForSelector('[data-reg-a-tab]'); await p.click('[data-reg-a-tab]:has-text("Types de recherche")'); await p.waitForSelector('#research-kinds-config [data-rk-list] li', { timeout: 20000 }); /* présentation A : « Menus, onglets et listes » → « Types de recherche » */
                 for (const q of ['types de recherche', 'préférences']) {
                     await p.evaluate(q => { const i = document.querySelector('[data-mt-search]'); i.value = q; i.dispatchEvent(new Event('input', { bubbles: true })); }, q);
                     const shown = await p.$$eval('[data-side-value]', b => b.filter(x => !x.hidden && !x.closest('[hidden]')).map(x => x.dataset.sideValue));
-                    assert.ok(shown.includes('design'), `${q} → ${shown}`);
+                    assert.ok(shown.includes('nav_menus') || shown.includes('design'), `${q} → ${shown}`);
                 }
                 await p.evaluate(() => { const i = document.querySelector('[data-mt-search]'); i.value = ''; i.dispatchEvent(new Event('input', { bubbles: true })); });
             });

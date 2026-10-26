@@ -48,6 +48,12 @@
     const idsFamily = async () => { const [a, k] = await Promise.all([idsAnc(2)(), idsSib('children')().catch(() => [])]); return [...new Set([...a, ...k])].slice(0, 20); };
 
     const PANELS = {
+        hourglass: [['Ses parents et ses enfants', {'[data-n6="up"]': '1', '[data-n6="down"]': '1'}], ['Grands-parents et petits-enfants', {'[data-n6="up"]': '2', '[data-n6="down"]': '2'}], ['Le plus loin possible', {'[data-n6="up"]': '5', '[data-n6="down"]': '4'}]],
+        gantt: [['Les vies de ses ancêtres (3 générations)', {'[data-n6="who"]': 'anc', '[data-n6="gens"]': '3'}], ['Sa famille proche', {'[data-n6="who"]': 'fam'}], ['Les vies de ses descendants', {'[data-n6="who"]': 'desc', '[data-n6="gens"]': '3'}]],
+        mindmap: [['Ses enfants et petits-enfants', {'[data-n6="by"]': 'kids'}], ['Les métiers de ses ancêtres', {'[data-n6="by"]': 'occ'}], ['Les communes de ses ancêtres', {'[data-n6="by"]': 'place'}]],
+        radialbar: [['Les prénoms les plus donnés', {'[data-n6="by"]': 'first', '[data-n6="n"]': '10'}], ['Les noms de famille', {'[data-n6="by"]': 'last', '[data-n6="n"]': '10'}], ['Les métiers', {'[data-n6="by"]': 'occ', '[data-n6="n"]': '10'}], ['Les siècles de naissance', {'[data-n6="by"]': 'century', '[data-n6="n"]': '10'}]],
+        circlepack: [['Les noms de famille', {'[data-n6="by"]': 'last', '[data-n6="n"]': '15'}], ['Les communes de naissance', {'[data-n6="by"]': 'place', '[data-n6="n"]': '15'}], ['Les métiers', {'[data-n6="by"]': 'occ', '[data-n6="n"]': '15'}]],
+        rings: [['Les ancêtres trouvés par génération', {'[data-n6="by"]': 'gens'}], ['Les fiches complètes', {'[data-n6="by"]': 'facts'}]],
         fan: [['Taux de recherche de mes ancêtres (5 générations)', {'[data-gn="gens"]': '5', '[data-gn="by"]': 'score'}], ['Régions de naissance (6 générations)', {'[data-gn="gens"]': '6', '[data-gn="by"]': 'state'}],
             ['Départements de naissance (6 générations)', {'[data-gn="gens"]': '6', '[data-gn="by"]': 'county'}], ['Pays de naissance (8 générations)', {'[data-gn="gens"]': '8', '[data-gn="by"]': 'country'}],
             ['Communes de naissance (5 générations)', {'[data-gn="gens"]': '5', '[data-gn="by"]': 'birth_place'}], ['Métiers de mes ancêtres (5 générations)', {'[data-gn="gens"]': '5', '[data-gn="by"]': 'occupation'}],
@@ -116,7 +122,7 @@
         cmruler: [['Toutes les correspondances (150 au plus)', {'[data-dac="min"]': '0', '[data-dac="max"]': '150'}], ['Au moins 20 cM (150 au plus)', {'[data-dac="min"]': '20', '[data-dac="max"]': '150'}],
             ['Cousins proches (90 cM et plus)', {'[data-dac="min"]': '90', '[data-dac="max"]': '3000'}], ['Au moins 50 cM, toutes', {'[data-dac="min"]': '50', '[data-dac="max"]': '3000'}]],
     };
-    const GO = '[data-gn-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go]';
+    const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go]';
 
     /** les valeurs à poser : une fonction est appelée (personnes calculées) */
     const fire = el => { el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true})); };

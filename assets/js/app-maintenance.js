@@ -22,7 +22,7 @@
         ['g_screens', '🖼', 'Écrans', ['design_board', 'design_sheets', 'design_maps', 'viewer_prefs', 'diagram_kinds', 'dna_prefs']], ...MG_DEFAULT.filter(g => g[0] !== 'g_look')];
     Object.assign(MAINT_KEYWORDS, {look_theme: 'preset couleur principale police taille typographique fond des blocs thèmes réglages enregistrés remettre', look_portraits: 'avatars forme portraits colonne de gauche personnalisé',
         look_msgs: 'messages toast coin durée couleurs notifications après une action', look_lang: 'langue calendrier dates lecteur audio vidéo avancer reculer', look_layouts: 'réglages enregistrés mises en page sauvegarder tout',
-        nav_menus: 'ordre noms menu principal onglets listes pages des réglages boutons en haut à droite logo prénom nom colonne latérale types de recherche lignes cachées graphiques diagrammes statistiques',
+        nav_menus: 'préférences de recherche ordre noms menu principal onglets listes pages des réglages boutons en haut à droite logo prénom nom colonne latérale types de recherche lignes cachées graphiques diagrammes statistiques',
         design_sheets: 'préférences blocs de la fiche en-tête boutons profils événements recensements variantes enquêtes mort pour la france badges sosa aboville verrouillage internet exceptions'});
     const sgCfg = (name, key, defaults) => ({name, panelTitle: 'Ordre des pages des Réglages', key, defaults, allKeys: mKeys, label: k => defaultMaintenanceTabs.find(t => t[0] === k)?.[2] || k, defaultEnabled: true,
         flatOrder: () => { let o = []; try { o = JSON.parse(localStorage.getItem(MO_KEY) || '[]'); } catch (_) {} const d = mKeys(); o = Array.isArray(o) ? o.filter(k => d.includes(k)) : []; return [...o, ...d.filter(k => !o.includes(k))]; },

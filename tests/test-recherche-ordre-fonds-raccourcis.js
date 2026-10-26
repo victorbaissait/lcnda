@@ -138,8 +138,10 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     await p.evaluate(() => localStorage.removeItem('genealogie-research-kind-hidden'));
                 });
                 await t(`[${tag}] Réglages → Apparence « 🔎 Types de recherche » : K2 (↶ Annuler, ↺ Remettre comme au départ)`, async () => {
-                    await p.evaluate(async () => { const s = window.LCNDA_APP.state; s.maintenanceTab = 'design'; await window.LCNDA_APP.setModule('maintenance'); });
-                    await p.waitForSelector('.design-order-grid-four #research-kinds-config [data-rk-list] li', { timeout: 20000 });
+                    /* présentation A : « Menus, onglets et listes » → onglet « Types de recherche » */
+                    await p.evaluate(async () => { const s = window.LCNDA_APP.state; s.maintenanceTab = 'nav_menus'; await window.LCNDA_APP.setModule('maintenance'); });
+                    await p.waitForSelector('[data-reg-a-tab]'); await p.click('[data-reg-a-tab]:has-text("Types de recherche")');
+                    await p.waitForSelector('#research-kinds-config [data-rk-list] li', { timeout: 20000 });
                     await p.click('#research-kinds-config [data-rk="web"] [data-eye]');
                     assert.deepEqual(JSON.parse(await lsGet(RK[1])), ['web']);
                     await p.waitForFunction(() => [...document.querySelectorAll('.toast')].some(x => /Réglage changé/.test(x.textContent) && /Annuler/.test(x.textContent)), null, { timeout: 5000 });
