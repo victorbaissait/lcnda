@@ -20,6 +20,6 @@ module.exports = async (t, {page}, assert) => {
     await t('🔊 ambiance sonore : les crédits disent que tout est synthétisé, libre de droits, couche par couche', async () => {
         await page.evaluate(() => window.LCNDA_EXT.tresors.open('ambiance')); await page.waitForSelector('[data-tr-page="ambiance"] .h-tr-credits');
         const txt = await page.$eval('.h-tr-credits', d => d.textContent); assert.match(txt, /Libres de droits/); assert.match(txt, /aucun enregistrement|Aucun enregistrement/i);
-        assert.equal(await page.$$eval('.h-tr-credits li', l => l.length), 10);
+        assert.equal(await page.$$eval('.h-tr-credits li', l => l.length), await page.evaluate(() => Object.keys(window.LCNDA_EXT.tresorAmbiance.LAYERS).length), 'une ligne de crédit par couche');
     });
 };

@@ -1250,7 +1250,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-lieux.js?v=4" defer></script>
 <script src="assets/js/heritage-tresors-outils.js?v=2" defer></script>
 <script src="assets/js/heritage-tresors-ciel.js?v=3" defer></script>
-<script src="assets/js/heritage-tresors-merveilles.js?v=3" defer></script>
+<script src="assets/js/heritage-tresors-merveilles.js?v=4" defer></script>
 <script src="assets/js/heritage-tresors-histoires.js?v=2" defer></script>
 <script src="assets/js/heritage-tresors-ateliers.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-papiers.js?v=7" defer></script>

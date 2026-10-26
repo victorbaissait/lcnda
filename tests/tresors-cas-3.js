@@ -27,6 +27,16 @@ module.exports = async (t, {page, open, body}, assert) => {
         await page.click('[data-am-play]'); await page.waitForTimeout(700); assert.equal(await page.$eval('[data-tr-body]', h => h.dataset.playing), '1');
         await page.click('[data-am-stop]'); assert.equal(await page.$eval('[data-tr-body]', h => h.dataset.playing ?? ''), '');
     });
+    await t('🔊 ambiance : plus de 30 couches (toutes jouent ensemble sans erreur), ⭐ mes ambiances gardées puis supprimées, la recherche filtre', async () => {
+        const n = await page.$$eval('[data-am-l]', l => l.length); assert.ok(n >= 30, `${n} couches`);
+        assert.equal(await page.evaluate(() => window.LCNDA_EXT.tresorAmbiance.sceneFor('couturière')), 'couture'); assert.equal(await page.evaluate(() => window.LCNDA_EXT.tresorAmbiance.sceneFor('instituteur')), 'ecole');
+        await page.evaluate(() => document.querySelectorAll('[data-am-l]').forEach(i => { i.value = '40'; })); await page.click('[data-am-play]'); await page.waitForTimeout(2500); await page.click('[data-am-stop]');
+        await page.fill('[data-am-find]', 'cloche'); const vis = await page.$$eval('[data-am-l]', l => l.filter(i => !i.closest('label').hidden).length); assert.ok(vis >= 2 && vis < 6, `${vis} couches trouvées`); await page.fill('[data-am-find]', '');
+        await page.selectOption('[data-am-s]', 'bal'); await page.click('[data-am-save]'); await page.waitForSelector('dialog[open] input'); await page.fill('dialog[open] input', 'Le bal de mamie'); await page.keyboard.press('Enter');
+        await page.waitForFunction(() => JSON.parse(localStorage.getItem('lcnda-ambiances') || '[]').length === 1); assert.match(await page.textContent('[data-am-mine]'), /Le bal de mamie/);
+        await page.selectOption('[data-am-s]', 'veillee'); await page.selectOption('[data-am-mine]', '0'); assert.equal(await page.inputValue('[data-am-l="musette"]'), '70');
+        await page.click('[data-am-del]'); assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-ambiances')).length), 0);
+    });
     await t('🌳 arbre qui pousse : depuis Antoine MARTIN ; en 1880 Jean est là, Henri pas encore ; Antoine roussit après 1920', async () => {
         await open('arbre-pousse'); assert.match(await page.$eval('[data-gr-box] svg', s => s.textContent), /Pierre/); // l'ancêtre le plus ancien aux descendants les plus nombreux
         await page.evaluate(() => { const {T} = window.LCNDA_EXT.tresors; return T.tree().then(tr => { const el = document.querySelector('[data-tr-body] [name="root"]'); el.value = String(tr.people.find(p => T.name(p) === 'Antoine MARTIN').id); el.dispatchEvent(new Event('change', {bubbles: true})); }); });
