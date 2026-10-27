@@ -67,6 +67,7 @@ input[type=range]{width:100%;accent-color:var(--blue)}
 /* avant / après */
 .ba{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .ba ul{margin:0;padding-left:18px;font-size:14px;line-height:1.6}
+body.seul{padding:0;background:transparent}body.seul .wrap>:not(.card.cadre){display:none!important}body.seul .card.cadre{box-shadow:none}
 @media (max-width:860px){.grid2,.ba{grid-template-columns:1fr}.mini{grid-template-columns:90px 1fr}}
 @media (max-width:480px){.where{grid-template-columns:1fr}.mini .ws .content{grid-template-columns:1fr}.mini .c:nth-child(n+4){display:none}}
 </style></head>
@@ -85,7 +86,7 @@ input[type=range]{width:100%;accent-color:var(--blue)}
 </div>
 
 <h2>Le cadre dans Thème et couleurs</h2>
-<div class="card">
+<div class="card cadre">
   <span class="tag">Thème et couleurs</span>
   <h3>🧩 Fond des pages</h3>
   <p class="lead">Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset.</p>
@@ -108,9 +109,10 @@ input[type=range]{width:100%;accent-color:var(--blue)}
           <button class="sw" data-c="60,60,60" title="Gris neutre" style="background:#3c3c3c"></button>
           <button class="sw" data-c="5,93,255" data-main title="Couleur principale (suit l’Apparence)" style="background:#055dff;background-image:linear-gradient(135deg,transparent 60%,#fff 60%)"></button>
           <button class="sw" data-c="139,90,43" title="Sépia" style="background:#8b5a2b"></button>
+          <button class="sw" data-c="170,40,120" title="Les traits de mon thème (✎ Mes thèmes)" style="background:#aa2878;background-image:repeating-linear-gradient(45deg,transparent 0 4px,rgba(255,255,255,.55) 4px 6px)"></button>
           <label class="photo-row" style="gap:6px"><input type="color" id="own" value="#1f8a5b" aria-label="Une couleur à moi"> à moi</label>
         </div>
-        <p class="why">Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · une couleur à toi.</p></div>
+        <p class="why">Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi.</p></div>
       <div class="set" id="set-photo" hidden><div class="k">Ta photo</div>
         <div class="photo-row"><label class="btn">Choisir une photo…<input type="file" id="pfile" accept="image/*" hidden></label><span id="pname" class="why" style="margin:0">Exemple : la maison de famille</span></div>
         <div class="k" style="margin-top:10px">Flou <output id="blur-out">fort</output></div><input type="range" id="blur" min="0" max="20" value="10" aria-label="Flou">
@@ -151,6 +153,7 @@ input[type=range]{width:100%;accent-color:var(--blue)}
   <li>« Petits carreaux », bleu pâle, taille moyenne, intensité normale, sur toutes les pages : c’est exactement le fond d’aujourd’hui.</li>
   <li>Un ancien réglage « Uni » reste uni.</li>
   <li>Le fond suit le Preset (couleur du papier) et le mode sombre ; il passe dans les « 💾 Réglages enregistrés » comme le reste de Thème et couleurs.</li>
+  <li><b>✎ Mes thèmes</b> : pas de conflit. Un thème à toi donne les <i>couleurs</i> (fond de la page, panneaux, cartes, texte, traits) ; « Fond des pages » ne dessine que le <i>motif</i>, par-dessus la couleur de fond du thème. Changer de thème garde le motif ; la couleur du motif peut suivre les traits de ton thème.</li>
   <li>« Réduire les animations », l’impression et les captures : fond uni automatiquement, pour un rendu net.</li>
 </ul></div>
 </div>
@@ -229,5 +232,7 @@ $('#own').addEventListener('input', e => { const h = e.target.value; S.c = [1, 3
 $('#where').addEventListener('change', e => { const w = e.target.dataset.w; if (e.target.checked) S.where.add(w); else S.where.delete(w); draw(); });
 $('#pfile').addEventListener('change', e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { S.photo = r.result; $('#pname').textContent = f.name; drawChoices(); draw(); }; r.readAsDataURL(f); });
 drawChoices(); draw();
+// ?seul : seulement le cadre (pour le montrer à sa place dans la page Thème et couleurs)
+if (/[?&]seul\b/.test(location.search)) { document.body.classList.add('seul'); }
 </script>
 </body></html>
