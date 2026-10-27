@@ -1155,8 +1155,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu-morpion.js?v=2" defer></script>
 <script src="assets/js/app-jeu-naval.js?v=2" defer></script>
 <script src="assets/js/app-jeu-cables.js?v=2" defer></script>
-<script src="assets/js/app-jeu-patience-regles.js?v=3" defer></script>
-<script src="assets/js/app-jeu-patience.js?v=3" defer></script>
+<script src="assets/js/app-jeu-patience-regles.js?v=4" defer></script>
+<script src="assets/js/app-jeu-patience.js?v=4" defer></script>
 <script src="assets/js/app-jeu.js?v=13" defer></script>
 <script src="assets/js/app-chronologie.js?v=11" defer></script>
 <script src="assets/js/app-comparaison.js?v=8" defer></script>
