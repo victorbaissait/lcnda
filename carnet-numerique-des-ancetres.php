@@ -198,7 +198,7 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.9.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 547 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.9.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 548 Mo</small></span><span aria-hidden="true">↓</span></a>
                         <a class="button secondary" href="download/LCNDA-0.9.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 554 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
@@ -224,7 +224,7 @@
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.9.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.9.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 545 Mo</small></span><span aria-hidden="true">↓</span></a>
                             <a class="button secondary" href="download/LCNDA-0.9.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 512 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
