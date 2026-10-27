@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fond des pages</title>
+<style>
+:root{--ink:#111;--blue:#055dff;--soft:#eaf1ff;--muted:#666;--line:#e3e5ea}
+*{box-sizing:border-box}
+body{background:#f4f5f7;margin:0;padding:24px 16px 60px;font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--ink)}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:24px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 22px;font-size:14px;max-width:860px;line-height:1.5}
+h2{font-size:18px;margin:30px 0 10px}
+.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
+.card{background:#fff;border:2px solid var(--ink);box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px}
+.card>h3{margin:4px 0 4px;font-size:20px}.card>p.lead{margin:0 0 16px;color:var(--muted);font-size:13.5px}
+.lab{font:800 13px system-ui;margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+.lab .n{display:inline-grid;place-items:center;width:22px;height:22px;background:var(--blue);color:#fff;font-size:12px}
+/* les fonds, en grandes cartes */
+.choices{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.ch{border:2px solid var(--ink);background:#fff;cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit;box-shadow:3px 3px 0 rgba(5,93,255,.2);display:flex;flex-direction:column}
+.ch:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--blue)}
+.ch.on{outline:3px solid var(--blue);outline-offset:2px;box-shadow:4px 4px 0 var(--ink)}
+.ch .th{height:86px;border-bottom:2px solid var(--ink);position:relative;overflow:hidden}
+.ch .th i{position:absolute;left:14px;top:16px;width:58px;height:40px;background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 rgba(5,93,255,.28)}
+.ch .th i+i{left:84px;top:28px;width:46px;height:30px}
+.ch b{display:flex;gap:6px;align-items:center;font-size:13.5px;padding:8px 10px 0}
+.ch small{display:block;color:var(--muted);font-size:11.5px;padding:2px 10px 9px;line-height:1.35}
+.pill{font:800 9px system-ui;letter-spacing:.06em;padding:2px 5px;border:1.5px solid currentColor}
+.pill.def{background:#fff1a8;color:#111}.pill.new{color:var(--blue)}
+/* les réglages */
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;align-items:start}
+.set{border-top:1px solid var(--line);padding:12px 0}
+.set:first-child{border-top:0}
+.set .k{font-weight:800;font-size:14px;margin-bottom:6px;display:flex;justify-content:space-between;gap:10px}
+.set .k output{font-weight:700;color:var(--blue)}
+.set .why{color:var(--muted);font-size:12.5px;margin:6px 0 0;line-height:1.45}
+.set.off{opacity:.38;pointer-events:none}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap}
+.seg button{border:0;border-right:2px solid var(--ink);background:#fff;padding:7px 12px;font:700 12.5px system-ui;cursor:pointer}
+.seg button:last-child{border-right:0}.seg button.on{background:var(--blue);color:#fff}
+input[type=range]{width:100%;accent-color:var(--blue)}
+.colors{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sw{width:30px;height:30px;border:2px solid var(--ink);cursor:pointer;padding:0}
+.sw.on{outline:3px solid var(--blue);outline-offset:2px}
+.where{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px;font-size:13.5px}
+.where label{display:flex;gap:7px;align-items:center}
+.photo-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px}
+.btn{border:2px solid var(--ink);background:#fff;padding:7px 12px;font:700 12.5px system-ui;cursor:pointer;box-shadow:3px 3px 0 rgba(5,93,255,.25)}
+.btn.main{background:var(--blue);color:#fff}
+/* l'aperçu vivant : un bout d'app */
+.pvh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+.pvh b{font-size:15px}
+.mini{border:2px solid var(--ink);display:grid;grid-template-columns:150px 1fr;grid-template-rows:38px 300px;background:#fff;--paper:#fbfbf9;--cardbg:#fff;--txt:#111;--ln:#111}
+.mini.dark{--paper:#1b1d22;--cardbg:#262a31;--txt:#eee;--ln:#555;background:#262a31;color:#eee}
+.mini .top{grid-column:1/-1;border-bottom:2px solid var(--ln);display:flex;align-items:center;gap:14px;padding:0 12px;font:800 11px system-ui;background:var(--cardbg);color:var(--txt)}
+.mini .top span.on{background:var(--blue);color:#fff;padding:3px 6px}
+.mini .sd{border-right:2px solid var(--ln);padding:10px 8px;display:flex;flex-direction:column;gap:6px;background:var(--cardbg);position:relative;overflow:hidden}
+.mini .sd i{display:block;height:22px;border:2px solid var(--ln);background:var(--cardbg)}
+.mini .sd i.on{background:var(--blue);border-color:var(--blue)}
+.mini .ws{position:relative;overflow:hidden;background:var(--paper)}
+.bglayer{position:absolute;inset:0;pointer-events:none}
+.mini .ws .content{position:relative;padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start;height:100%}
+.mini .ws h5{grid-column:1/-1;margin:0;font-size:20px;color:var(--txt)}
+.mini .c{background:var(--cardbg);border:2px solid var(--ln);box-shadow:4px 4px 0 rgba(5,93,255,.28);padding:10px;font-size:11px;color:var(--txt);min-height:86px}
+.mini .c u{display:block;height:6px;background:currentColor;opacity:.18;margin:7px 0;text-decoration:none}
+.mini .c u:nth-child(3){width:70%}
+.pvnote{font-size:12px;color:var(--muted);margin:8px 0 0}
+.pvtabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;font-size:12px}
+/* avant / après */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ba ul{margin:0;padding-left:18px;font-size:14px;line-height:1.6}
+@media (max-width:860px){.grid2,.ba{grid-template-columns:1fr}.mini{grid-template-columns:90px 1fr}}
+@media (max-width:480px){.where{grid-template-columns:1fr}.mini .ws .content{grid-template-columns:1fr}.mini .c:nth-child(n+4){display:none}}
+</style></head>
+<body><div class="wrap">
+<span class="tag">Maquette · Réglages → Thème et couleurs</span>
+<h1>Fond des pages</h1>
+<p class="sub">Aujourd’hui, deux choix seulement : « Petits carreaux » ou « Uni ». La proposition : de vrais fonds au choix, chacun montré en image, puis quelques réglages. Clique sur un fond et touche aux réglages, l’aperçu suit tout de suite. Rien n’est enregistré : c’est une maquette.</p>
+
+<div class="ba">
+  <div class="card"><span class="tag">Aujourd’hui</span><h3 style="margin:6px 0 10px">Un menu à deux choix</h3>
+    <ul><li>Petits carreaux (défaut)</li><li>Uni, sans carreaux</li></ul></div>
+  <div class="card"><span class="tag">Proposé</span><h3 style="margin:6px 0 10px">9 fonds + 4 réglages</h3>
+    <ul><li><b>Fonds</b> : carreaux, uni, pointillés, cahier ligné, papier millimétré, grain de papier, toile, dégradé, ta photo</li>
+      <li><b>Réglages</b> : taille, intensité, couleur du motif, sur quelles pages</li>
+      <li>Tant que tu ne touches à rien : <b>tout reste comme avant</b></li></ul></div>
+</div>
+
+<h2>Le cadre dans Thème et couleurs</h2>
+<div class="card">
+  <span class="tag">Thème et couleurs</span>
+  <h3>🧩 Fond des pages</h3>
+  <p class="lead">Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset.</p>
+
+  <div class="lab"><span class="n">1</span> Le fond</div>
+  <div class="choices" id="choices"></div>
+
+  <div class="grid2" style="margin-top:6px">
+    <div>
+      <div class="lab"><span class="n">2</span> Réglages en plus</div>
+      <div class="set" id="set-size"><div class="k">Taille du motif</div>
+        <div class="seg" data-seg="size"><button data-v="s">Petit</button><button data-v="m" class="on">Moyen</button><button data-v="l">Grand</button></div>
+        <p class="why">Les carreaux, points ou lignes plus serrés ou plus espacés.</p></div>
+      <div class="set" id="set-int"><div class="k">Intensité <output id="int-out">normale</output></div>
+        <input type="range" id="int" min="1" max="10" value="4" aria-label="Intensité">
+        <p class="why">De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui.</p></div>
+      <div class="set" id="set-col"><div class="k">Couleur du motif</div>
+        <div class="colors" id="colors">
+          <button class="sw on" data-c="0,102,204" title="Bleu pâle (comme avant)" style="background:#0066cc"></button>
+          <button class="sw" data-c="60,60,60" title="Gris neutre" style="background:#3c3c3c"></button>
+          <button class="sw" data-c="5,93,255" data-main title="Couleur principale (suit l’Apparence)" style="background:#055dff;background-image:linear-gradient(135deg,transparent 60%,#fff 60%)"></button>
+          <button class="sw" data-c="139,90,43" title="Sépia" style="background:#8b5a2b"></button>
+          <label class="photo-row" style="gap:6px"><input type="color" id="own" value="#1f8a5b" aria-label="Une couleur à moi"> à moi</label>
+        </div>
+        <p class="why">Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · une couleur à toi.</p></div>
+      <div class="set" id="set-photo" hidden><div class="k">Ta photo</div>
+        <div class="photo-row"><label class="btn">Choisir une photo…<input type="file" id="pfile" accept="image/*" hidden></label><span id="pname" class="why" style="margin:0">Exemple : la maison de famille</span></div>
+        <div class="k" style="margin-top:10px">Flou <output id="blur-out">fort</output></div><input type="range" id="blur" min="0" max="20" value="10" aria-label="Flou">
+        <p class="why">La photo est pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (comme les autres réglages de l’Apparence).</p></div>
+      <div class="set"><div class="k">Sur quelles pages</div>
+        <div class="where" id="where">
+          <label><input type="checkbox" checked data-w="dash"> Tableau de bord</label>
+          <label><input type="checkbox" checked data-w="fiche"> Personnes et fiches</label>
+          <label><input type="checkbox" checked data-w="graph"> Graphiques et arbres</label>
+          <label><input type="checkbox" checked data-w="listes"> Listes et recherche</label>
+          <label><input type="checkbox" checked data-w="enq"> Enquêtes et tableaux</label>
+          <label><input type="checkbox" checked data-w="reg"> Réglages</label>
+        </div>
+        <p class="why">Décoché : fond uni sur ces pages. Par exemple un fond calme derrière les fiches et les carreaux ailleurs. La carte et les éditeurs plein écran gardent toujours le leur.</p></div>
+      <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap"><button class="btn" id="reset">↺ Remettre comme au départ</button></div>
+    </div>
+
+    <div>
+      <div class="lab"><span class="n">3</span> Aperçu vivant</div>
+      <div class="pvh"><b>👁 Une page de l’app</b>
+        <div class="seg" data-seg="pvmode"><button data-v="clair" class="on">☀︎ Clair</button><button data-v="sombre">☾ Sombre</button></div></div>
+      <div class="mini" id="mini">
+        <div class="top"><span>Tableau de bord</span><span class="on" id="pv-tab">Personnes</span><span>Graphiques</span><span>Listes</span></div>
+        <div class="sd"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <div class="ws"><div class="bglayer" id="bg"></div><div class="bglayer" id="bgtint"></div>
+          <div class="content"><h5 id="pv-title">Louise BORIE</h5>
+            <div class="c">Identité<u></u><u></u><u></u></div><div class="c">Événements<u></u><u></u><u></u></div>
+            <div class="c">Famille<u></u><u></u></div><div class="c">Documents<u></u><u></u></div></div></div>
+      </div>
+      <div class="pvtabs"><span>Voir sur :</span><div class="seg" data-seg="pvpage"><button data-v="fiche" class="on">une fiche</button><button data-v="dash">le tableau de bord</button><button data-v="reg">les Réglages</button></div></div>
+      <p class="pvnote" id="pvnote"></p>
+    </div>
+  </div>
+</div>
+
+<h2>Ce qui ne change pas</h2>
+<div class="card"><ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.6">
+  <li>« Petits carreaux », bleu pâle, taille moyenne, intensité normale, sur toutes les pages : c’est exactement le fond d’aujourd’hui.</li>
+  <li>Un ancien réglage « Uni » reste uni.</li>
+  <li>Le fond suit le Preset (couleur du papier) et le mode sombre ; il passe dans les « 💾 Réglages enregistrés » comme le reste de Thème et couleurs.</li>
+  <li>« Réduire les animations », l’impression et les captures : fond uni automatiquement, pour un rendu net.</li>
+</ul></div>
+</div>
+
+<script>
+const FONDS = [
+  {k: 'carreaux', t: 'Petits carreaux', s: 'comme aujourd’hui', def: true},
+  {k: 'uni', t: 'Uni', s: 'rien derrière, le plus calme', old: true},
+  {k: 'points', t: 'Pointillés', s: 'une grille de petits points'},
+  {k: 'ligne', t: 'Cahier ligné', s: 'lignes et marge rouge'},
+  {k: 'milli', t: 'Papier millimétré', s: 'fin, trait plus fort tous les 5'},
+  {k: 'grain', t: 'Grain de papier', s: 'va bien avec « Archive papier »'},
+  {k: 'toile', t: 'Toile', s: 'tissage léger, album de famille'},
+  {k: 'degrade', t: 'Dégradé', s: 'du papier vers la couleur'},
+  {k: 'photo', t: 'Ma photo', s: 'pâle et floutée derrière'},
+];
+const S = {k: 'carreaux', size: 'm', int: 4, c: '0,102,204', dark: false, page: 'fiche', where: new Set(['dash', 'fiche', 'graph', 'listes', 'enq', 'reg']), photo: null, blur: 10};
+const SIZES = {s: 18, m: 28, l: 44};
+// une « photo » d'exemple : une maison dessinée (SVG), en attendant la tienne
+const DEMO = 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260"><rect width="400" height="260" fill="#cfe1f0"/><rect y="170" width="400" height="90" fill="#8fb36b"/><polygon points="120,110 210,50 300,110" fill="#9c4a2f"/><rect x="135" y="110" width="150" height="90" fill="#e9d8b8"/><rect x="160" y="130" width="28" height="28" fill="#5a7d9a"/><rect x="232" y="130" width="28" height="28" fill="#5a7d9a"/><rect x="198" y="155" width="26" height="45" fill="#6b4226"/><circle cx="330" cy="60" r="26" fill="#f5d36b"/><circle cx="60" cy="150" r="38" fill="#4f7d3a"/><rect x="55" y="170" width="10" height="35" fill="#5b3a1e"/></svg>`);
+const rgba = (a, k = 1) => `rgba(${S.c},${Math.min(1, a * k).toFixed(3)})`;
+function bgOf(k, small = false) {
+  const z = small ? Math.round(SIZES[S.size] * .7) : SIZES[S.size], a = .035 * S.int / 4; // 4 = comme avant (.035)
+  switch (k) {
+    case 'carreaux': return {img: `linear-gradient(${rgba(a)} 1px, transparent 1px), linear-gradient(90deg, ${rgba(a)} 1px, transparent 1px)`, size: `${z}px ${z}px`};
+    case 'points': return {img: `radial-gradient(${rgba(a, 4)} 1.1px, transparent 1.6px)`, size: `${Math.round(z * .6)}px ${Math.round(z * .6)}px`};
+    case 'ligne': return {img: `linear-gradient(90deg, transparent ${small ? 18 : 46}px, rgba(220,70,70,${(a * 5).toFixed(3)}) ${small ? 18 : 46}px, rgba(220,70,70,${(a * 5).toFixed(3)}) ${small ? 19 : 48}px, transparent ${small ? 19 : 48}px), linear-gradient(transparent ${z - 1}px, ${rgba(a, 2.5)} ${z - 1}px)`, size: `100% 100%, 100% ${z}px`};
+    case 'milli': { const f = Math.max(4, Math.round(z / 5)); return {img: `linear-gradient(${rgba(a, 2.2)} 1px, transparent 1px), linear-gradient(90deg, ${rgba(a, 2.2)} 1px, transparent 1px), linear-gradient(${rgba(a, .8)} 1px, transparent 1px), linear-gradient(90deg, ${rgba(a, .8)} 1px, transparent 1px)`, size: `${f * 5}px ${f * 5}px, ${f * 5}px ${f * 5}px, ${f}px ${f}px, ${f}px ${f}px`}; }
+    case 'grain': return {img: `radial-gradient(${rgba(a, 2.2)} 1px, transparent 1.2px), url("data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 ${(a * 6).toFixed(2)} 0'/></filter><rect width='160' height='160' filter='url(#n)'/></svg>`)}")`, size: `${Math.round(z * .22)}px ${Math.round(z * .22)}px, 160px 160px`};
+    case 'toile': return {img: `repeating-linear-gradient(45deg, ${rgba(a, 1.6)} 0 1px, transparent 1px ${Math.round(z / 5)}px), repeating-linear-gradient(-45deg, ${rgba(a, 1.6)} 0 1px, transparent 1px ${Math.round(z / 5)}px)`, size: 'auto'};
+    case 'degrade': return {img: `linear-gradient(180deg, transparent 0%, ${rgba(a, 4)} 100%)`, size: '100% 100%'};
+    case 'photo': return {img: `url("${S.photo || DEMO}")`, size: 'cover', photo: true};
+    default: return {img: 'none', size: 'auto'};
+  }
+}
+function paint(el, k, small = false) {
+  const b = bgOf(k, small);
+  el.style.backgroundImage = b.img; el.style.backgroundSize = b.size; el.style.backgroundPosition = b.photo ? 'center' : '0 0';
+  el.style.filter = b.photo ? `blur(${small ? Math.round(S.blur / 3) : S.blur}px)` : '';
+  el.style.inset = b.photo ? `-${S.blur * 2}px` : '0';
+}
+const $ = s => document.querySelector(s);
+function drawChoices() {
+  $('#choices').innerHTML = FONDS.map(f => `<button type="button" class="ch${S.k === f.k ? ' on' : ''}" data-k="${f.k}" aria-pressed="${S.k === f.k}"><span class="th" style="background:#fbfbf9"><span class="bglayer" data-th="${f.k}"></span>${f.k === 'photo' ? '<span class="bglayer" style="background:rgba(251,251,249,.55)"></span>' : ''}<i></i><i></i></span><b>${f.t}${f.def ? ' <span class="pill def">PAR DÉFAUT</span>' : f.old ? '' : ' <span class="pill new">NOUVEAU</span>'}</b><small>${f.s}</small></button>`).join('');
+  document.querySelectorAll('[data-th]').forEach(el => paint(el, el.dataset.th, true));
+}
+function draw() {
+  const mini = $('#mini'), on = S.where.has(S.page);
+  mini.classList.toggle('dark', S.dark);
+  paint($('#bg'), on ? S.k : 'uni');
+  // une photo : un voile de la couleur du papier par-dessus, plus ou moins épais selon l'intensité
+  $('#bgtint').style.background = on && S.k === 'photo' ? `color-mix(in srgb, var(--paper) ${Math.round(96 - S.int * 6)}%, transparent)` : 'none';
+  if (S.dark && S.k !== 'photo' && on) { const save = S.c; S.c = '255,255,255'; paint($('#bg'), S.k); S.c = save; } // en sombre, le motif devient clair
+  const P = {fiche: ['Personnes', 'Louise BORIE'], dash: ['Tableau de bord', 'Vue d’ensemble'], reg: ['Réglages', 'Thème et couleurs']}[S.page];
+  [...mini.querySelectorAll('.top span')].forEach(s => s.classList.toggle('on', s.textContent === P[0])); $('#pv-title').textContent = P[1];
+  $('#int-out').textContent = S.int <= 2 ? 'à peine visible' : S.int <= 5 ? (S.int === 4 ? 'normale (comme avant)' : 'normale') : S.int <= 8 ? 'marquée' : 'bien marquée';
+  $('#blur-out').textContent = S.blur < 4 ? 'léger' : S.blur < 12 ? 'fort' : 'très fort';
+  $('#set-photo').hidden = S.k !== 'photo';
+  $('#set-size').classList.toggle('off', ['uni', 'photo', 'degrade'].includes(S.k));
+  $('#set-col').classList.toggle('off', ['uni', 'photo'].includes(S.k));
+  $('#set-int').classList.toggle('off', S.k === 'uni');
+  $('#pvnote').textContent = !on ? 'Cette page est décochée dans « Sur quelles pages » : fond uni ici.' : S.k === 'uni' ? 'Fond uni : rien derrière les blocs.' : `${FONDS.find(f => f.k === S.k).t} — ${S.dark ? 'en mode sombre, le motif s’éclaircit tout seul' : 'la couleur du papier vient du Preset'}.`;
+}
+document.addEventListener('click', e => {
+  const c = e.target.closest('[data-k]'); if (c) { S.k = c.dataset.k; drawChoices(); draw(); return; }
+  const sb = e.target.closest('[data-seg] button'); if (sb) { const g = sb.parentElement.dataset.seg; sb.parentElement.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === sb));
+    if (g === 'size') S.size = sb.dataset.v; if (g === 'pvmode') S.dark = sb.dataset.v === 'sombre'; if (g === 'pvpage') S.page = sb.dataset.v; drawChoices(); draw(); return; }
+  const sw = e.target.closest('.sw'); if (sw) { S.c = sw.dataset.c; document.querySelectorAll('.sw').forEach(x => x.classList.toggle('on', x === sw)); drawChoices(); draw(); return; }
+  if (e.target.closest('#reset')) { Object.assign(S, {k: 'carreaux', size: 'm', int: 4, c: '0,102,204', photo: null, blur: 10}); S.where = new Set(['dash', 'fiche', 'graph', 'listes', 'enq', 'reg']);
+    $('#int').value = 4; $('#blur').value = 10; document.querySelectorAll('#where input').forEach(i => { i.checked = true; }); document.querySelectorAll('[data-seg="size"] button').forEach(b => b.classList.toggle('on', b.dataset.v === 'm'));
+    document.querySelectorAll('.sw').forEach((x, i) => x.classList.toggle('on', i === 0)); $('#pname').textContent = 'Exemple : la maison de famille'; drawChoices(); draw(); }
+});
+$('#int').addEventListener('input', e => { S.int = Number(e.target.value); drawChoices(); draw(); });
+$('#blur').addEventListener('input', e => { S.blur = Number(e.target.value); drawChoices(); draw(); });
+$('#own').addEventListener('input', e => { const h = e.target.value; S.c = [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)).join(','); document.querySelectorAll('.sw').forEach(x => x.classList.remove('on')); drawChoices(); draw(); });
+$('#where').addEventListener('change', e => { const w = e.target.dataset.w; if (e.target.checked) S.where.add(w); else S.where.delete(w); draw(); });
+$('#pfile').addEventListener('change', e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { S.photo = r.result; $('#pname').textContent = f.name; drawChoices(); draw(); }; r.readAsDataURL(f); });
+drawChoices(); draw();
+</script>
+</body></html>
