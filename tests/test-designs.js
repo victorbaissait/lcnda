@@ -179,7 +179,8 @@ function sandbox(store = {}) {
         const gen = selectors(read('assets/css/designs-gen.css')).filter(s => !s.startsWith(':root[data-lc-') && !scoped(s));
         assert.deepEqual(gen.slice(0, 3), [], 'feuille fabriquée');
         const tr = selectors(read('assets/css/apparence-traits.css')).filter(s => !(/^(:root|html)/.test(s) && /\.lc-frame|\[data-lc-lines\]/.test(s)));
-        assert.ok(!/(:root|html)(\[[^\]]*\])*(\[data-lc-(r|sh|lines|style)|:is\(\.lc-frame,\[data-lc-lines\]\))/.test(read('assets/css/designs-gen.css') + read('assets/css/designs.css') + read('assets/css/apparence-traits.css')), 'plus aucun style A1 posé sur toute l’app');
+        // (sur <html> lui-même, seulement des variables : pour les aperçus, dont <html> porte le réglage ; la page n'y pose jamais A1)
+        assert.ok(!/(:root|html)(\[[^\]]*\]|:not\([^)]*\))*(\[data-lc-(r|sh|lines|style)[^\s,{]*\s+[^\s,{]|:is\(\.lc-frame,\[data-lc-lines\]\))/.test(read('assets/css/designs-gen.css') + read('assets/css/designs.css') + read('assets/css/apparence-traits.css')), 'plus aucun style A1 posé sur toute l’app');
         assert.deepEqual(tr.slice(0, 3), [], 'feuille des traits');
     });
     await t('FAQ, CLAUDE.md, docs/UI.md', () => {
