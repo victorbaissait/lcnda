@@ -1,0 +1,1192 @@
+<!doctype html>
+<html lang="fr">
+<head><base href="../../">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Le Carnet numérique des ancêtres : une application locale pour organiser, documenter et transmettre une généalogie.">
+    <meta name="color-scheme" content="light">
+    <title>LCNDA — Le Carnet numérique des ancêtres</title>
+    <style>
+        :root { --presentation-ink:#080808; --presentation-blue:#0066cc; --presentation-paper:#fbfbfb; --presentation-muted:#515151; }
+        * { box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--presentation-ink); }
+        a { color:inherit; text-decoration:none; }
+        .eyebrow { display:inline-block; color:var(--presentation-blue); font-size:12px; font-weight:900; letter-spacing:.14em; }
+        .button { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:42px; padding:11px 15px; border:2px solid var(--presentation-ink); background:var(--presentation-blue); color:#fff; box-shadow:4px 4px 0 rgba(5,93,255,.25); font-weight:700; line-height:1.2; text-align:center; transition:.15s ease; }
+        .button:hover { transform:translate(3px,3px); box-shadow:1px 1px 0 var(--presentation-ink); }
+        .button.secondary { background:#fff; color:var(--presentation-ink); }
+        .button > span[aria-hidden] { font-size:16px; }
+        .presentation-body { min-width:320px; overflow-x:hidden; background-color:var(--presentation-paper); background-image:linear-gradient(rgba(0,102,204,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,204,.035) 1px,transparent 1px); background-size:28px 28px; }
+
+        /* ─── En-tête : texte à gauche, tableau des notes à droite (centré verticalement) ─── */
+        .presentation-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,540px); gap:clamp(32px,6vw,96px); max-width:1450px; min-height:640px; margin:0 auto; padding:clamp(40px,6vw,80px) clamp(24px,7vw,108px); align-items:center; }
+        .presentation-hero-copy { position:relative; min-width:0; }
+        .presentation-acronym { margin:17px 0 -14px; color:var(--presentation-blue); font-weight:900; font-size:clamp(64px,11vw,160px); line-height:.8; letter-spacing:-.09em; opacity:.14; user-select:none; }
+        .presentation-hero h1 { position:relative; max-width:750px; margin:0; font-size:clamp(45px,6.5vw,92px); line-height:.9; letter-spacing:-.075em; }
+        .presentation-lead { position:relative; max-width:600px; margin:30px 0 0; font-size:clamp(17px,1.7vw,24px); line-height:1.35; font-weight:600; }
+        .presentation-actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
+        .presentation-hero-board { position:relative; width:100%; min-height:410px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); overflow:hidden; }
+        .presentation-hero-board::before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(90deg,transparent 0 50px,rgba(0,102,204,.07) 50px 51px),repeating-linear-gradient(0deg,transparent 0 50px,rgba(0,102,204,.07) 50px 51px); }
+        .presentation-note { position:absolute; z-index:2; display:grid; gap:8px; width:58%; padding:18px 19px; border:2px solid var(--presentation-ink); box-shadow:6px 6px 0 rgba(8,8,8,.14); transform:rotate(-3deg); }
+        .presentation-note span { color:var(--presentation-blue); font-size:11px; font-weight:900; letter-spacing:.1em; }
+        .presentation-note strong { font-size:19px; }
+        .presentation-note small { font-size:12px; line-height:1.3; font-weight:700; }
+        .note-blue { top:37px; left:25px; background:#dbeaff; }
+        .note-white { top:152px; right:20px; background:#fff; transform:rotate(4deg); }
+        .note-black { bottom:34px; left:64px; background:#111; color:#fff; transform:rotate(-1.5deg); }
+        .note-black span { color:#fff; }
+        .presentation-thread { position:absolute; z-index:1; height:2px; background:var(--presentation-blue); transform-origin:left center; }
+        .thread-one { width:67%; top:118px; left:44%; transform:rotate(37deg); }
+        .thread-two { width:57%; top:294px; left:5%; transform:rotate(-18deg); }
+
+        /* ─── Sections ─── */
+        .presentation-section { position:relative; max-width:1450px; margin:0 auto; padding:clamp(70px,9vw,120px) clamp(24px,7vw,108px); }
+        .presentation-section::before { content:""; position:absolute; top:0; left:50%; width:100vw; border-top:2px solid var(--presentation-ink); transform:translateX(-50%); }
+        .presentation-section-head { max-width:760px; }
+        .presentation-section h2 { margin:13px 0 0; font-size:clamp(34px,4.7vw,64px); line-height:.96; letter-spacing:-.065em; }
+        .presentation-section-head > p { margin:22px 0 0; color:var(--presentation-muted); font-size:18px; line-height:1.5; font-weight:600; }
+
+        /* ─── Téléchargements ─── */
+        .presentation-downloads { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:44px; align-items:start; }
+        .presentation-os { display:grid; gap:14px; padding:24px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
+        .presentation-os h3 { margin:0; font-size:28px; letter-spacing:-.04em; }
+        .presentation-os-req { margin:-6px 0 0; color:var(--presentation-muted); font-size:14px; font-weight:700; line-height:1.4; }
+        .presentation-os-group { display:grid; gap:10px; padding-top:14px; border-top:1px solid #d7d7d7; }
+        .presentation-os-group > strong { font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+        .presentation-os .button { width:100%; justify-content:space-between; text-align:left; }
+        .presentation-os .button small { display:block; font-size:12px; font-weight:600; opacity:.85; }
+        .presentation-os-help { margin:0; color:var(--presentation-muted); font-size:13px; line-height:1.45; font-weight:600; }
+        .presentation-os-help code, .presentation-callout code { padding:1px 4px; border:1px solid #b8d5f5; background:#eaf2ff; color:#111; font-size:.92em; word-break:break-all; }
+        .presentation-os-source { grid-template-columns:minmax(0,1fr) minmax(260px,420px); align-items:center; gap:24px; margin-top:18px; }
+        .presentation-os-source .presentation-os-group { padding-top:0; border-top:0; }
+        .presentation-os-source .presentation-os-help { margin-top:10px; }
+        @media (max-width:760px) { .presentation-os-source { grid-template-columns:1fr; } }
+        /* ─── Nouveautés de la version (bloc qui s'ouvre et se ferme) ─── */
+        .presentation-changes { margin-top:18px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
+        .presentation-changes summary { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 24px; cursor:pointer; list-style:none; font-size:20px; font-weight:800; letter-spacing:-.02em; }
+        .presentation-changes summary::-webkit-details-marker { display:none; }
+        .presentation-changes summary::after { content:"+"; flex:none; display:grid; place-items:center; width:32px; height:32px; border:2px solid var(--presentation-ink); font-size:20px; line-height:1; }
+        .presentation-changes[open] summary::after { content:"−"; }
+        .presentation-changes summary small { display:block; margin-top:3px; color:var(--presentation-muted); font-size:13px; font-weight:700; letter-spacing:0; }
+        .presentation-changes-body { padding:4px 24px 22px; border-top:1px solid #d7d7d7; font-size:15px; line-height:1.55; }
+        .presentation-changes-body h4 { margin:18px 0 6px; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--presentation-blue); }
+        .presentation-changes-body ul { margin:0; padding-left:20px; }
+        .presentation-changes-body li { margin:4px 0; }
+        .presentation-changes-body p { margin:0; }
+        .presentation-changes-old { margin-top:12px; }
+        .presentation-version { margin-top:14px; border:1px solid #d7d7d7; }
+        .presentation-version summary { padding:12px 16px; font-size:16px; cursor:pointer; list-style:none; font-weight:800; }
+        .presentation-version summary::-webkit-details-marker { display:none; }
+        .presentation-version summary::after { content:"+"; float:right; font-weight:800; }
+        .presentation-version[open] summary::after { content:"−"; }
+        .presentation-version summary small { display:block; color:var(--presentation-muted); font-size:13px; font-weight:700; }
+        .presentation-version-body { padding:0 16px 14px; }
+        .presentation-callout { display:grid; grid-template-columns:200px 1fr; gap:18px; margin-top:22px; padding:19px 22px; border:2px solid var(--presentation-ink); background:#fff5d6; box-shadow:5px 5px 0 rgba(8,8,8,.14); font-size:14px; line-height:1.5; }
+        .presentation-callout p { margin:0; }
+        .presentation-callout p + p { margin-top:8px; }
+        .presentation-callout a { color:var(--presentation-blue); font-weight:800; text-decoration:underline; text-underline-offset:3px; }
+
+        /* ─── Découvrir (texte de présentation) ─── */
+        .presentation-intro { max-width:980px; margin:30px 0 0; font-size:clamp(19px,2vw,26px); line-height:1.38; font-weight:600; }
+        .presentation-intro strong { color:var(--presentation-blue); }
+        .presentation-about-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:48px; }
+        .presentation-about { padding:24px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
+        .presentation-about.about-intro { grid-column:1 / -1; }
+        .presentation-about h3 { margin:0 0 12px; font-size:24px; line-height:1.05; letter-spacing:-.04em; }
+        .presentation-about p { margin:0; color:#3f3f3f; font-weight:600; line-height:1.5; }
+        .presentation-about p + p, .presentation-about p + ul, .presentation-about ul + p { margin-top:10px; }
+        .presentation-about ul { margin:0; padding:0; list-style:none; font-weight:600; line-height:1.45; color:#3f3f3f; }
+        .presentation-about li { padding:7px 0; border-top:1px solid #d7d7d7; }
+        .presentation-about li::before { content:"→"; color:var(--presentation-blue); margin-right:7px; font-weight:900; }
+        .presentation-strengths { display:flex; flex-wrap:wrap; gap:0; margin-top:28px; border:2px solid var(--presentation-ink); background:#111; color:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); }
+        .presentation-strengths div { flex:1 1 220px; padding:20px 22px; border-right:1px solid #333; border-bottom:1px solid #333; }
+        .presentation-strengths strong { display:block; color:#7fb6ff; font-size:15px; letter-spacing:-.01em; }
+        .presentation-strengths span { display:block; margin-top:6px; color:#d9d9d9; font-size:14px; font-weight:600; line-height:1.4; }
+        .presentation-beta-note { margin:22px 0 0; color:var(--presentation-muted); font-size:14px; font-weight:700; line-height:1.5; }
+        @media (max-width:760px) { .presentation-about-grid { grid-template-columns:1fr; } }
+
+        /* ─── Fonctionnalités ─── */
+        .presentation-feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:48px; }
+        .presentation-feature { min-height:265px; padding:24px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
+        .presentation-feature.feature-blue { background:#dbeaff; }
+        .presentation-feature.feature-dark { background:#111; color:#fff; }
+        .presentation-feature h3 { margin:28px 0 10px; font-size:25px; line-height:1; letter-spacing:-.04em; }
+        .presentation-feature p { margin:0; color:#4f4f4f; font-weight:600; line-height:1.45; }
+        .presentation-feature.feature-dark p { color:#d9d9d9; }
+        .feature-index { display:block; color:var(--presentation-blue); font-weight:900; font-size:13px; letter-spacing:.12em; }
+        .presentation-feature.feature-dark .feature-index { color:#7fb6ff; }
+        .presentation-feature ul { margin:22px 0 0; padding:0; list-style:none; font-size:13px; font-weight:800; }
+        .presentation-feature li { padding:8px 0; border-top:1px solid #d7d7d7; }
+        .presentation-feature li::before { content:"→"; color:var(--presentation-blue); margin-right:7px; }
+
+        /* ─── Aperçu (carrousel sans défilement automatique) ─── */
+        .presentation-carousel { position:relative; margin-top:44px; }
+        .presentation-carousel-track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; border:2px solid var(--presentation-ink); background:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); }
+        .presentation-carousel-track::-webkit-scrollbar { display:none; }
+        .presentation-carousel-track:focus-visible { outline:3px solid var(--presentation-blue); outline-offset:4px; }
+        .presentation-slide { flex:0 0 100%; margin:0; scroll-snap-align:start; }
+        .presentation-slide img { display:block; width:100%; height:auto; aspect-ratio:3456 / 2234; object-fit:cover; background:#f1f1f1; }
+        .presentation-slide figcaption { display:flex; gap:12px; align-items:baseline; padding:14px 18px; border-top:2px solid var(--presentation-ink); font-weight:800; }
+        .presentation-slide figcaption span { color:var(--presentation-blue); font-size:12px; font-weight:900; letter-spacing:.12em; }
+        .presentation-carousel-controls { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; }
+        .presentation-carousel-controls .button { min-width:52px; font-size:20px; }
+        .presentation-carousel-controls .button:disabled { opacity:.35; cursor:default; transform:none; box-shadow:4px 4px 0 rgba(5,93,255,.25); }
+        .presentation-carousel-dots { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+        .presentation-carousel-dots button { width:13px; height:13px; padding:0; border:2px solid var(--presentation-ink); background:#fff; cursor:pointer; }
+        .presentation-carousel-dots button[aria-current="true"] { background:var(--presentation-blue); }
+
+        /* ─── FAQ ─── */
+        /* Cadre de la FAQ, dans la page */
+        .presentation-faq-box { margin-top:44px; padding:clamp(22px,3.5vw,44px); border:2px solid var(--presentation-ink); background:#fff; box-shadow:10px 10px 0 rgba(5,93,255,.21); }
+        .presentation-faq-box > h3 { margin:0 0 18px; font-size:clamp(22px,2.6vw,30px); letter-spacing:-.03em; }
+        .presentation-faq-hint { margin:12px 0 0; color:var(--presentation-muted); font-size:16px; font-weight:600; }
+        .presentation-faq-search { display:block; width:100%; max-width:760px; margin-top:0; padding:14px 16px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:4px 4px 0 rgba(5,93,255,.25); font:600 16px Arial,Helvetica,sans-serif; color:var(--presentation-ink); }
+        .presentation-faq-search:focus-visible { outline:3px solid var(--presentation-blue); outline-offset:3px; }
+        .presentation-faq-cat { margin-top:28px; }
+        .presentation-faq-cat h3 { margin:0 0 8px; padding-bottom:8px; border-bottom:1px solid #d7d7d7; font-size:20px; letter-spacing:-.02em; }
+        .presentation-faq-cat h3 small { margin-left:8px; color:var(--presentation-blue); font-size:12px; font-weight:900; letter-spacing:.1em; }
+        .presentation-faq-item { border-bottom:1px solid #e3e3e3; background:#fff; }
+        .presentation-faq-item summary { display:flex; align-items:baseline; gap:10px; padding:12px 0; cursor:pointer; list-style:none; font-size:17px; font-weight:800; line-height:1.3; }
+        .presentation-faq-item summary:hover { color:var(--presentation-blue); }
+        .presentation-faq-item summary::-webkit-details-marker { display:none; }
+        .presentation-faq-item summary::before { content:"▶"; display:inline-block; flex:none; font-size:12px; transition:transform .15s ease; }
+        .presentation-faq-item[open] summary::before { transform:rotate(90deg); }
+        .presentation-faq-item p { max-width:900px; margin:0; padding:0 0 16px 22px; color:#3f3f3f; font-weight:600; line-height:1.55; }
+        .presentation-faq-empty { margin-top:30px; color:var(--presentation-muted); font-weight:700; }
+
+        .presentation-footer { display:flex; justify-content:space-between; gap:20px; padding:21px clamp(24px,4vw,64px); border-top:2px solid var(--presentation-ink); background:#fff; font-size:11px; letter-spacing:.08em; font-weight:900; }
+        .presentation-footer a { color:var(--presentation-blue); }
+
+        @media (max-width:1100px) { .presentation-downloads { grid-template-columns:1fr 1fr; } .presentation-os-linux { grid-column:1 / -1; } .presentation-os-linux .presentation-os-groups { display:grid; grid-template-columns:1fr 1fr; gap:14px; } }
+        @media (max-width:900px) { .presentation-hero { grid-template-columns:1fr; min-height:0; } .presentation-hero-board { max-width:590px; } .presentation-feature-grid { grid-template-columns:repeat(2,1fr); } }
+        @media (max-width:640px) { .presentation-downloads, .presentation-os-linux .presentation-os-groups { grid-template-columns:1fr; } .presentation-os-linux { grid-column:auto; } .presentation-callout { grid-template-columns:1fr; gap:7px; } }
+        @media (max-width:580px) { .presentation-lead { font-size:17px; } .presentation-hero-board { min-height:340px; } .presentation-note { width:68%; padding:13px; } .presentation-note strong { font-size:15px; } .note-white { top:132px; } .note-black { left:35px; } .presentation-feature-grid { grid-template-columns:1fr; } .presentation-feature { min-height:0; } .presentation-footer { flex-direction:column; } }
+    </style>
+<style>
+.maq-new{background:linear-gradient(transparent 55%,#fff1a8 55%);color:inherit;padding:0 1px}
+html.maq-plain .maq-new{background:none;text-decoration:none}
+:is(.feature-dark,.presentation-strengths,.note-black) .maq-new{background:none;text-decoration:underline 3px #f2c230;text-underline-offset:4px}
+.maq-bar{position:fixed;right:16px;bottom:16px;z-index:99;display:flex;gap:10px;align-items:center;background:#111;color:#fff;padding:10px 14px;font:700 13px system-ui,sans-serif;box-shadow:6px 6px 0 rgba(5,93,255,.35)}
+.maq-bar button{font:inherit;background:#fff;color:#111;border:0;padding:6px 10px;cursor:pointer}
+@media(max-width:580px){.maq-bar{left:16px;right:16px;bottom:10px;flex-wrap:wrap}}
+</style></head>
+<body class="presentation-body">
+    <main id="haut">
+        <section class="presentation-hero">
+            <div class="presentation-hero-copy">
+                <span class="eyebrow">VERSION BÊTA · 0.9.0</span>
+                <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
+                <h1>Le Carnet numérique<br>des ancêtres</h1>
+                <p class="presentation-lead"><mark class="maq-new">Un logiciel de généalogie gratuit, libre et sans internet, qui s’adapte à votre famille : chercher ses ancêtres, documenter leur vie, raconter et transmettre leur histoire.</mark> Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
+                <div class="presentation-actions">
+                    <a class="button" href="#telecharger">Télécharger LCNDA<span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="#fonctionnalites">Fonctionnalités</a>
+                    <a class="button secondary" href="#faq">FAQ</a>
+                </div>
+            </div>
+            <div class="presentation-hero-board" aria-label="Aperçu des éléments réunis dans l'application">
+                <article class="presentation-note note-blue"><span>01</span><strong>PERSONNES</strong><small>Fiches, liens familiaux et repères de vie</small></article>
+                <article class="presentation-note note-white"><span>02</span><strong>ARCHIVES</strong><small><mark class="maq-new">Actes, médias, recueils et transcriptions</mark></small></article>
+                <article class="presentation-note note-black"><span>03</span><strong>ENQUÊTES</strong><small><mark class="maq-new">Pistes, hypothèses, battues et preuves</mark></small></article>
+                <div class="presentation-thread thread-one" aria-hidden="true"></div>
+                <div class="presentation-thread thread-two" aria-hidden="true"></div>
+            </div>
+        </section>
+
+        <section class="presentation-section" id="telecharger">
+            <header class="presentation-section-head">
+                <span class="eyebrow">01 — TÉLÉCHARGER</span>
+                <h2>Installez LCNDA sur votre ordinateur.</h2>
+                <p>Gratuit, sans compte et sans internet : vos données restent chez vous. Choisissez votre système.</p>
+            </header>
+            <div class="presentation-downloads">
+                <article class="presentation-os">
+                    <h3>macOS</h3>
+                    <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
+                    <div class="presentation-os-group">
+                        <a class="button" href="download/LCNDA-0.9.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 547 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.9.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 554 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    </div>
+                    <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
+                </article>
+
+                <article class="presentation-os">
+                    <h3>Windows</h3>
+                    <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
+                    <div class="presentation-os-group">
+                        <a class="button" href="download/LCNDA-0.9.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 563 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    </div>
+                    <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
+                </article>
+
+                <article class="presentation-os presentation-os-linux">
+                    <h3>Linux</h3>
+                    <p class="presentation-os-req">Distribution récente, 64 bits (Ubuntu 22.04, Debian 12, Fedora 38 ou plus récent)</p>
+                    <div class="presentation-os-groups">
+                        <div class="presentation-os-group">
+                            <strong>PC Intel ou AMD</strong>
+                            <a class="button" href="download/LCNDA-0.9.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 543 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.9.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 516 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        </div>
+                        <div class="presentation-os-group">
+                            <strong>Processeur ARM (Raspberry Pi…)</strong>
+                            <a class="button" href="download/LCNDA-0.9.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.9.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 512 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        </div>
+                    </div>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.9.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                </article>
+            </div>
+
+            <article class="presentation-os presentation-os-source">
+                <div>
+                    <h3>Code source</h3>
+                    <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.9.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                </div>
+                <div class="presentation-os-group">
+                    <a class="button" href="download/lcnda-0.9.0.zip"><span>Archive .zip<small>Windows, macOS · 269 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.9.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 269 Mo</small></span><span aria-hidden="true">↓</span></a>
+                </div>
+            </article>
+
+            <details class="presentation-changes">
+                <summary><span>Nouveautés de la version 0.9.0<small>Trésors de famille, 108 patiences et deux nouveaux jeux, fond des pages, réglages réorganisés, gazette, broderie, ciel de naissance, ambiance sonore, nombreuses corrections</small></span></summary>
+                <div class="presentation-changes-body">
+                    <h4>✨ Trésors de famille</h4>
+                    <p>Un nouvel onglet (caché au départ) : 💌 lettres aux descendants scellées jusqu'à une date, 🎂 « À ton âge… », 📷 dater une photo, 🃏 jeu des 7 familles (photos et 6 styles), 🖍 arbre à colorier, souvenirs des sens, recettes et chansons (rangés dans la Mémoire familiale), 🌌 ciel de naissance calculé pour le lieu et la date, 🕯 bougie, 🎧 ambiance sonore d'époque (36 couches, 25 ambiances, minuterie), 🗺 chasse au trésor, ancêtre mystère du jour, livre dont tu es le héros, coïncidences, « Et si… », 🧵 broderie au point de croix, gravure laser, mosaïque de portraits, 📰 gazette de l'année (8 styles), fond d'écran, 🛂 passeports intérieurs, grand-parent raconte, partage temporaire sécurisé. 13 widgets et des listes pour les retrouver.</p>
+                    <h4>🎲 Jeux</h4>
+                    <p>🂠 <b>Patiences</b> : 108 jeux de cartes qui se jouent seul (Klondike, FreeCell, Araignée, Yukon, Canfield, Pyramide, Golf, La Belle Lucie, Les quarante voleurs, Napoléon à Sainte-Hélène, Trigon, Somerset…), à la souris ou au clavier, avec ↶ annuler, 💡 un coup possible, chrono et record. ⚓ <b>Bataille navale</b> (contre l'ordinateur ou à deux, navires aux noms d'ancêtres) et 🔌 <b>Les câbles</b> façon Netwalk.</p>
+                    <h4>🧩 Fond des pages</h4>
+                    <p>15 fonds au choix derrière les blocs (petits carreaux, uni, pointillés, cahier ligné, papier millimétré, grain de papier, toile, dégradé, registre, papier vergé, arbre en filigrane, cartes anciennes, tomettes, halo, ta photo floutée), avec la taille, l'intensité et la couleur du motif, les pages concernées et un aperçu vivant. Jamais imprimé.</p>
+                    <h4>🎨 Réglages réorganisés</h4>
+                    <p>« Designs au choix » disparaît : le style des fiches va avec la forme de l'en-tête, la colonne de gauche a ses traits, coins et ombres, les mouvements passent dans Accessibilité (onglet 🎞 Mouvement), la taille du texte est rassemblée dans Thème et couleurs (jusqu'à 32 px). Menus, colonne et listes gagne les onglets Colonne, Listes, Icônes et Densité. Boutons en 8 tailles. On revient exactement où on était dans les Réglages. 💾 « Toute l'app » garde aussi Réordonner, les Trésors et les éditeurs, et remet vraiment tout comme au départ.</p>
+                    <h4>📊 Diagrammes et tableau de bord</h4>
+                    <p>Sablier, Gantt, carte mentale, barres en cercle, bulles et anneaux remplis avec les chiffres de l'arbre. La 🧩 bibliothèque des widgets s'ouvre depuis le tableau de bord ; les graphiques se réordonnent dans Graphiques.</p>
+                    <h4>🥚 Un secret</h4>
+                    <p>Quelque chose se cache dans la pièce d'archives…</p>
+                    <h4>🐞 Bugs corrigés</h4>
+                    <p>Des réglages qui se gênaient entre eux (mode simple et mode consultation, messages qui couvraient la barre du bas, nom affiché enregistré deux fois), le grain du style « Papier ancien », les aperçus vivants des traits et des ombres, cadres et boutons collés, double cadre dans une recherche, 3 As perdus au départ de six patiences.</p>
+                    <p>Une petite table s'ajoute toute seule à la base pour les Trésors, à leur première utilisation : rien à faire.</p>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.8.2 <small>Tableur (solveur, scénarios, actions enregistrées), montage (roues de couleur, fond vert, suivi, plusieurs caméras, volume standard), PDF/A et livret à plier, retouche (Fluidité, gomme magique, PSD), dessin (cote, perspective)</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🧾 Tableur</h4>
+                            <p>✨ Remplissage instantané (un exemple suffit), Σ sous-totaux avec ⊟ plan qui replie le détail, 📈 mini-graphiques dans les cases, 🎯 valeur cible, 🧮 solveur (plusieurs cases, conditions, nombres entiers), 📋 tableau de scénarios (« et si… »), ⏺ actions enregistrées à refaire en un clic, et les formules LET et LAMBDA.</p>
+                            <h4>🎞️ Présentation</h4>
+                            <p>↔ Liaisons accrochées à deux objets, ⊕ fusion de formes (union, soustraction, intersection), 🗂 masque des diapositives avec le numéro de page, 〰 trajectoires d'animation.</p>
+                            <h4>📝 Traitement de texte</h4>
+                            <p>🔁 Synonymes sans internet, 🔎 relecture (espaces avant « ; : ! ? », guillemets « », points de suspension, apostrophe, mots répétés, majuscules) et ♿ vérification de l'accessibilité (images sans description, titres, tableaux, liens).</p>
+                            <h4>🎬 Montage</h4>
+                            <p>🎨 Roues de couleur, 🎯 vectorscope et histogramme, 📢 volume standard à l'export (LUFS), 🟩 fond vert, 🎯 un titre ou une incrustation qui suit ce qui bouge, 🎥 plusieurs caméras calées par le son et montées en passant de l'une à l'autre.</p>
+                            <h4>📐 Mise en page</h4>
+                            <p>🗄️ Export PDF/A pour l'archivage et 📖 livret à plier (pages remises dans l'ordre d'impression, à agrafer au milieu).</p>
+                            <h4>🎚️ Retouche</h4>
+                            <p>💧 Fluidité (pousser, gonfler, dégonfler, tourbillon), 🪄 gomme magique (le fond d'un document scanné rendu transparent), ✨ affiner le bord d'un masque (cheveux, contours), 🗂 PSD avec ses calques à importer et exporter.</p>
+                            <h4>✏️ Dessin vectoriel</h4>
+                            <p>📏 Outil Cote (la longueur écrite en cm, mm ou pouces), 📐 grille de perspective à 1 ou 2 points de fuite, 〰 largeur variable du trait (effilé, plume, pinceau) et ⧉ mélange de deux formes.</p>
+                            <p>La structure de la base ne change pas : aucune mise à jour de la base à la première ouverture.</p>
+                
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.8.1 <small>Maison comme un plan d'architecte (DXF, répéter, étiquettes à flèche, cartouche), 145 meubles et appareils de plus, site web avec un vrai éditeur de code, tableau croisé et publipostage, réglages plus clairs, raccourcis en haut à droite</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🏠 Maison, comme un plan d'architecte</h4>
+                            <p>⤒ importe un plan <b>DXF</b> (AutoCAD, LibreCAD, plan d'architecte ou de notaire) et ⤓ exporte le tien en DXF, rangé par calques (murs, pièces, ouvertures, mobilier, textes, cotes). <b>🔁 Répéter</b> pose plusieurs copies d'un coup : 6 chaises autour d'une table (tournées vers elle), une rangée, une grille, ou une rangée de fenêtres le long d'un mur. <b>🏷 Étiquettes à flèche</b> : une note reliée à un point du plan, comme « Ici était le puits » ou « Double vitrage posé en 1978 ». Dans « Affichage » de l'étage : cotes d'ensemble, tableau des pièces et de leurs surfaces posé sur le plan, cartouche (nom, lieu, époque, étage, date) et affichage sombre façon dessin technique.</p>
+                            <h4>🛋️ Mobilier</h4>
+                            <p>145 objets de plus en Électroménager, Bureau, Garage et Luminaires (lave-linge, plaques, hottes, télé au mur, poste TSF, fauteuil de bureau, globe, coffre-fort, machine à écrire, voitures d'hier et d'aujourd'hui, vélos, panneau à outils, lustres, plafonniers, lampes à pétrole…). 71 objets de prière et de mémoire de toutes les traditions (juive, musulmane, bouddhiste, hindoue, sikhe, shinto, culte des ancêtres, orthodoxe, protestante…).</p>
+                            <h4>🌐 Mon site web</h4>
+                            <p>Un éditeur de code complet (chercher et remplacer, aller à la ligne, commenter, mise en forme, vérification, raccourcis). Des fichiers CSS, JS et PHP en plus, rangés en dossiers ; deux fichiers côte à côte ; les vraies pages PHP dans l'aperçu ; ouvrir un dossier entier ; un aide-mémoire HTML, CSS et JS. « 🧭 Navigateurs » vérifie le site et imite Safari, Firefox ou Edge, avec une base de compatibilité qui marche sans internet. Les écrans @media se règlent.</p>
+                            <h4>🧾 Tableur et 📝 traitement de texte</h4>
+                            <p>Tableau croisé dynamique (↻ actualiser) et graphique vivant qui suit la sélection. Champs de fusion, « remplir avec une fiche », publipostage et modèles déjà remplis (demande d'acte, fiche d'identité d'un ancêtre, avis de recherche aux cousins). Le tableur a maintenant son propre symbole, 🧾 ; la calculette garde 🧮.</p>
+                            <h4>📊 Diagrammes</h4>
+                            <p>Sablier, Gantt, carte mentale, barres en cercle, bulles groupées et anneaux d'avancement.</p>
+                            <h4>🎨 Réglages plus clairs</h4>
+                            <p>L'apparence se range en trois groupes (Look, Navigation, Écrans), avec un bouton pour revenir à la page d'avant. Plus de codes A1, A2… : chaque réglage a son icône et son nom. Le prénom et le nom du logo passent dans « Thème et couleurs ». La forme des boutons rejoint « Notifications et boutons ». Les boutons de l'en-tête des fiches tiennent sur deux lignes et se rangent un par un. Ceux du traitement de texte et du tableur se rangent dans « Boutons et options ».</p>
+                            <h4>↗ Boutons en haut à droite</h4>
+                            <p>Un raccourci (caché au départ) vers chaque outil de modification et chaque partie d'Enquêtes, avec le choix d'ouvrir la liste des projets ou un nouveau projet. Il y a aussi « 👤 Nouvelle personne ». Les 🧩 Tableaux rejoignent les Outils de modification.</p>
+                            <h4>🧓 Mode simple et 🐾 suivi</h4>
+                            <p>11 nouvelles sortes de gros boutons (famille, anniversaires, un lieu, quiz, horloge, appel, vidéo, son…), et le cadre à compléter se voit dans l'aperçu. Dans le suivi, un 2e trajet s'ajoute au premier, avec un message clair. Le fond de carte se choisit sur chaque carte.</p>
+                            <h4>🐞 Bugs corrigés</h4>
+                            <p>Une forme d'avatar à toi reste choisie en revenant sur la page. Le PHP embarqué de Windows se télécharge même quand windows.php.net l'a rangé dans « archives/ », et son empreinte est toujours vérifiée.</p>
+                            <p>La structure de la base ne change pas : aucune mise à jour de la base à la première ouverture.</p>
+                    
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.8.0 <small>Suivi des animaux, fiches rangées en sections, météo d'autrefois, traitement de texte et tableur, studio son, maison plus poussée, contrôle de la base, journal des recherches, cadastre, site web, jeux, mode simple et designs au choix</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🐾 Suivi des animaux</h4>
+                            <p>Un nouvel onglet (caché au départ, à montrer dans Réglages → Apparence → onglets) pour suivre des animaux sur le terrain ou à la maison. Il se compose de blocs, comme le tableau de bord, avec des pages par espèce ou par site, et ses blocs vont aussi dans le tableau de bord. Bagues et marques selon l'espèce (oiseau, chat ou chien, cheval, ferme, poisson, mammifère marin, animal sauvage, primate), avec les couleurs de base et la fenêtre de couleur. Une lecture douteuse (« 7? », « 7[K|X] ») est gardée telle quelle, avec les animaux possibles. Observations avec plusieurs photos, sons ou vidéos ; trajets GPS (GPX, Movebank, collier) ; santé et poids avec la courbe ; groupes, rôles et histoire sociale ; recensement ; partage et fusion avec un autre suivi.</p>
+                            <h4>🗂️ Fiches rangées en sections</h4>
+                            <p>Les blocs d'une fiche se rangent en sections (Identité, Famille, Vie, Documents ; pour un animal : Fiche, Bagues et marques, Observations, Santé, Groupe, Carte). Six présentations au choix, dont des onglets en haut. Un éditeur sans bouton « Enregistrer » permet de ranger les sections et les blocs, pour toutes les fiches ou pour une seule. L'adresse retient la section ouverte, et l'aperçu des réglages montre la vraie fiche. <b>Une seule fiche pour un animal</b> : la fiche complète, avec « 👁＋ Nouvelle observation » et « 👁 Vu la dernière fois » dans l'en-tête. Supprimer un animal emporte tout son suivi ; tout se restaure depuis le journal.</p>
+                            <h4>🌦️ Météo d'autrefois</h4>
+                            <p>Le temps qu'il faisait le jour (et à l'heure) d'un événement, sans internet. Chaque fois, l'app dit d'où vient l'information : mesuré, station à N km, estimé ou reconstitution. L'altitude des lieux est prise en compte, sur 14 pays. Un pack Europe est en option. Vous pouvez masquer la météo partout, par sorte d'événement, par personne ou par événement.</p>
+                            <h4>📝 Traitement de texte</h4>
+                            <p>Un vrai traitement de texte dans l'app, avec de vraies pages, des styles, des notes, un sommaire, un index et une bibliographie. Les personnes et les lieux s'insèrent avec le menu de choix et restent à jour. Il a aussi les tableaux, le suivi des modifications, les commentaires, les versions et la lecture à voix haute. Il ouvre et enregistre les fichiers Word (.docx), LibreOffice (.odt), .rtf, Markdown et texte. Pour aller plus vite : « 📝 Écrire sur cette personne » depuis une fiche, et un compte rendu depuis le Journal des recherches.</p>
+                            <h4>🧾 Tableur</h4>
+                            <p>Formules en français, fichiers Excel, LibreOffice et CSV, fonctions de généalogie (âge, année d'un acte, génération Sosa). « 🧾 Modifier les données » des diagrammes, présentations et tableaux. Il remplit un tableau depuis l'app et peut renvoyer les changements vers la base, avec « ↶ Annuler ».</p>
+                            <h4>🎧 Son</h4>
+                            <p>Un 🎚️ Studio son complet, avec effets qui ne touchent jamais l'original, spectre et pinceau de réparation, marqueurs reliés aux personnes, transcription, multipiste et la musique qui baisse sous la voix. Un ⚡ Son rapide à gros interrupteurs (« ✨ Tout nettoyer », Avant / Après). L'éditeur d'avant reste le choix de départ.</p>
+                            <h4>🏠 Maison</h4>
+                            <p>Vides, mezzanines, garde-corps et trémies d'escalier ; lucarnes, chiens-assis, fenêtres de toit et combles avec la loi Carrez ; murs courbes. Vous avez aussi la coupe, les surfaces, la vérification du plan, les personnes de chaque pièce, la visite guidée lue à voix haute et sa vidéo, le hameau, et une autre époque en fantôme pour comparer.</p>
+                            <h4>✅ Contrôle de la base</h4>
+                            <p>Une seule page réunit les dates impossibles, les âges curieux, les parents, les doublons et les lieux mal placés, avec les mêmes chiffres partout (page, widget, bandeau de la fiche). Ses seuils sont réglables. « Ce n'est pas une erreur » écarte un cas, et il revient tout seul si une date change.</p>
+                            <h4>🔎 Recherche et travail</h4>
+                            <p>📔 Journal des recherches (visites aux archives, résultats par cote, « 🔍 Déjà cherché » sur la fiche) et 💬 questions aux proches, avec un questionnaire à envoyer. Vous pouvez aussi comparer des hypothèses, citer vos sources, consulter la liste des services d'archives, écrire une biographie, voir le monde autour d'une vie, chercher les métiers anciens, ranger les cartes postales et les tables décennales, fêter les dates, partager avec la famille et comparer deux photos.</p>
+                            <h4>🗺️ Cadastre et images</h4>
+                            <p>Parcelles et plans napoléoniens reliés aux maisons, aux lieux et aux personnes. Les traitements par lot renomment, redimensionnent, convertissent, ajoutent un filigrane ou fabriquent un PDF. L'app trouve les images semblables et les doublons. La retouche sait tourner l'image entière, redresser l'horizon ou relever une photo couchée.</p>
+                            <h4>🌐 Mon site web</h4>
+                            <p>Un éditeur visuel où tout se glisse à la souris, avec de vrais diagrammes et une carte. La publication se fait sur Netlify, GitHub Pages ou un FTP sécurisé, ou dans un .zip pour MAMP ou WAMP. Les personnes vivantes ne sont jamais publiées.</p>
+                            <h4>📊 Diagrammes et 🎲 jeux</h4>
+                            <p>38 nouveaux diagrammes et un menu « Graphique » avec des critères combinables. Une calculette simple et scientifique, aussi en widget. Pour jouer : Qui est-ce ? des ancêtres, Memory des portraits, La bonne date, Morpion jusqu'à 30 × 30 et 🌀 Labyrinthe.</p>
+                            <h4>🧓 Mode simple et 🎨 designs au choix</h4>
+                            <p>Un mode à gros boutons pour montrer l'arbre et les photos à la famille, en lecture seule, avec les liens dits en clair (« ta grand-mère »). Les designs au choix changent la forme de l'app (traits, coins, densité, icônes, boutons, listes, mouvements) et laissent toujours vos couleurs et votre police.</p>
+                            <h4>🧭 Une app encore plus cohérente</h4>
+                            <p>Les mêmes mots et les mêmes symboles pour les mêmes boutons. Partout les mêmes erreurs de formulaire, les mêmes fenêtres (Imprimer, Importer), les mêmes bulles et raccourcis écrits pour votre ordinateur, et le même menu « ⋯ » et clic droit. Les réglages s'enregistrent tout seuls, avec « ↶ Annuler ». « Maintenance » s'appelle maintenant <b>« Réglages »</b>. Les boutons en haut à droite s'affichent, se cachent et se rangent dans l'Apparence. Changer de page dans le tableau de bord et le suivi va bien plus vite.</p>
+                            <h4>🐞 Bugs corrigés</h4>
+                            <p>« ＋ Nouvel animal » depuis Personnes ouvre bien la fiche d'un animal. Une trentaine de bugs sont corrigés dans les fichiers Word et Excel, des dizaines dans la retouche, le montage, la mise en page et le dessin, et 9 dans le site web. Côté sécurité, les packs météo et les suivis reçus d'ailleurs sont vérifiés, et les photos confidentielles sont exclues du partage. Le mode simple et le mode consultation n'écrivent jamais dans la base.</p>
+                
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.7.1 <small>Retouche comme Photoshop (dégradés, Teinte/Saturation, paragraphes, glyphes, motifs, formes de pinceau), une seule fenêtre de couleur, montage, réglages enregistrés repensés, diagrammes, recherche par date précise, messages réglables</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🎚️ Retouche des photos, comme Photoshop</h4>
+                            <p>Un vrai outil <b>▦ Dégradé</b> (linéaire, radial, angle, réfléchi, losange ; arrêts de couleur et de transparence, 16 préréglages, poignées sur l'image, dans un masque pour fondre une photo) ; l'onglet <b>ⓘ Propriétés</b> avec <b>Teinte/Saturation</b> (gammes de couleurs, Coloriser, pipettes, réglage ciblé), la densité et le contour progressif des masques ; <b>🔤 Caractère, ¶ Paragraphe et Ω Glyphes</b> (police et sa graisse, blocs de texte justifiés avec césure, retraits, signes de la typographie française et de la généalogie) ; <b>▩ Motifs</b> à poser sur un calque ou à créer soi-même (raccord sans couture) ; <b>🖌 Formes de pinceau</b> (étoiles, feuilles, herbe, craie, plume calligraphique… et sa propre forme d'après une sélection) ; images placées en <b>objet dynamique 🧩</b> (agrandir, tourner sans perte) ; <b>Fond</b> et effets de calque <b>fx</b> (ombre, lueur, contour) ; restaurer sans rien détruire (tout va sur des calques) ; remplacer le ciel, détourer une personne, agrandir ×2 / ×4, panorama ; canevas vide ; les deux carrés de couleur avec X et D.</p>
+                            <h4>🎨 Une seule fenêtre de couleur partout</h4>
+                            <p>Couleurs de l'app, récentes, puis nuances, TLS, RVB ou CMJN, pipette et code ; elle remplace la fenêtre du système dans toute l'app.</p>
+                            <h4>🎞️ Montage</h4>
+                            <p>Transitions, vieux film, stabilisation, pistes verrouillables, aimantation, temps de la musique repérés ; pistes superposées dans l'ordre de la frise, vidéo en plein écran, textes avec 17 entrées, 16 sorties et leurs durées, export du son seul (MP3, WAV).</p>
+                            <h4>📐 Mise en page et ✏️ dessin</h4>
+                            <p>Gabarits de livre de famille, QR codes vers les fiches, publipostage ; les onglets des panneaux (retouche, mise en page, dessin, maison 3D) se rangent et se cachent dans « ⚙️ Personnaliser » ; dans le dessin, les carrés Remplissage / Contour ouvrent la fenêtre de couleur.</p>
+                            <h4>💾 Réglages enregistrés, nouveau cadre</h4>
+                            <p>Repliable, une ligne par réglage avec « Appliquer » et un menu ⋯ (remplacer, renommer, dupliquer, exporter, supprimer avec « Annuler ») ; le nom ne se tape qu'au moment de créer un réglage.</p>
+                            <h4>📊 Diagrammes et cartes</h4>
+                            <p>12 nouveaux diagrammes (frises, liens de famille, accord, violon, carte à ronds) ; cartes colorées avec un champ « Zone » qui propose zones et villes, et de nouvelles sources « Les lieux de ton arbre ».</p>
+                            <h4>🔎 Recherche et questions</h4>
+                            <p>La date précise marche enfin dans Proximité et Dates (dates d'actes lues au jour près, autres calendriers convertis), « Entre deux dates précises » ; « Poser une question » comprend le lieu (« à Pernay ») et demande laquelle quand plusieurs villes portent le même nom.</p>
+                            <h4>📏 Calendrier / Mesures</h4>
+                            <p>Huit cadres de plus (mesures par région, âge ↔ naissance, écart entre deux dates, jour de la semaine, saint du jour et fêtes mobiles, heures canoniques, monnaies étrangères, générations).</p>
+                            <h4>⚙️ Réglages</h4>
+                            <p>Une page « Cartes et fonds de carte » à part ; les messages après une action se règlent (coin de l'écran, durée, couleurs de chaque sorte de message) ; recherche des questions fréquentes avec un seul cadre.</p>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.7.0 <small>Créations, artistes et carrières, maison de famille en 3D, dessin et blasons, transcription d'actes et alphabets anciens, présentations et récit d'une vie, graphiques et cartes, cartes de photos, ADN et visages, plusieurs généalogies, une app plus cohérente et plus accessible</small></summary>
+                        <div class="presentation-version-body">
+                            <h4>🎨 Créations, artistes et carrières</h4>
+                            <ul>
+                                <li><b>« Cette personne était… »</b> : des profils à cocher sur une fiche (artiste, artisan d'art, acteur, sportif, politique, scientifique, inventeur, explorateur, militaire, agriculteur… et les vôtres). Chaque profil ajoute ses parties ; une personne peut en avoir plusieurs, réunis sur une page avec une <b>frise colorée par profil</b>.</li>
+                                <li><b>131 types d'œuvres</b> en 12 familles : peinture, sculpture et ses fontes, affiche, disque, morceau → enregistrements → parutions, livre, pièce → mises en scène → représentations → tournées, film, série → saisons → épisodes, métiers d'art, jeux, saveurs… et <b>son propre type</b>, créé en 5 étapes.</li>
+                                <li><b>Catalogue raisonné</b> et <b>discographie</b> (album par album, titre par titre, crédits, pressages), inventaire des œuvres (où, à qui, état, valeur), provenance et expositions ; disques et livres en plusieurs exemplaires ; fiches reprises des grandes bases en ligne de disques, de livres et de films.</li>
+                                <li><b>Concerts et spectacles</b> avec la liste des morceaux joués (rappels, reprises, invités), tournées, carte et statistiques ; <b>inventions</b> (brevets par pays, prototypes), <b>découvertes</b> et <b>expéditions</b> ; mandats et élections ; <b>137 sports</b> avec leurs chiffres par saison ; la <b>liste officielle des métiers d'art</b>.</li>
+                                <li>Pour toute personne : <b>« 📰 Dans les médias »</b> (et la Revue de presse), <b>« 🏆 Concours et récompenses »</b> (et le Palmarès), <b>« 🎓 Diplômes et formation »</b> ; tout se retrouve dans le groupe de listes <b>« 🎨 Créations et carrières »</b>.</li>
+                            </ul>
+                            <h4>🏠 La maison de famille, en plan et en 3D</h4>
+                            <ul>
+                                <li>Dessiner la maison <b>pièce par pièce, au centimètre près</b> : longueurs tapées au clavier, aimants, cotes, portes et fenêtres, étages (et l'étage d'en dessous en transparence pour caler), <b>toit à son goût</b>, plan ancien ou cadastre à calquer.</li>
+                                <li><b>Près de 700 meubles et objets</b> d'autrefois, de métiers et d'ateliers, objets à soi ou importés ; <b>photos et tableaux de la base dans les cadres</b>, les toiles et les miroirs.</li>
+                                <li><b>Visite en 3D</b> à la première personne, lumière du jour, <b>« 🕰 Époques »</b> qui font évoluer la maison au fil des années ; habitants, souvenirs et recensements reliés à chaque maison, bloc 🏠 Maisons sur la fiche.</li>
+                            </ul>
+                            <h4>✏️ Dessin, blasons, plans et faire-part</h4>
+                            <ul>
+                                <li>Un <b>outil de dessin</b> complet : plume, formes, calques et groupes, masques, texte sur une courbe, dégradés et motifs, aligner et répartir, vectoriser une image ; export SVG, PNG, JPG, PDF.</li>
+                                <li><b>Blasons</b> (écus, partitions, émaux, hachures, 44 ornements anciens), <b>plans de ville ou de village</b> (routes, rivières, bâtiments, rose des vents, styles d'époque) et <b>cartes à l'échelle</b>.</li>
+                                <li><b>Faire-part et affiches</b> remplis depuis l'arbre (naissance, mariage, décès, cousinade…), dans bien plus de formats, recto-verso ou pliés avec leur enveloppe ; <b>signatures</b> détourées d'un acte, cachets de cire, monogrammes, ex-libris.</li>
+                                <li><b>Arbre décoratif à imprimer en grand</b> : éventail, roue, arbre dessiné, arbre en cases, jusqu'à 12 générations, 13 styles et les vôtres, formats A4 à A0.</li>
+                            </ul>
+                            <h4>📜 Lire les actes anciens</h4>
+                            <ul>
+                                <li>Un <b>atelier de transcription</b> : l'image et le texte côte à côte, des zones reliées à chaque passage, la lecture automatique, le repérage des noms, des rôles, des dates (en toutes lettres et républicaines), des lieux et des métiers, des modèles d'actes ; « 🎚️ Mieux voir » (netteté, contraste, fond effacé, loupe) ; une liste des transcriptions.</li>
+                                <li>Dans Calendrier / Mesures, le cadre <b>« Alphabets et langues des actes »</b> : choisir une langue parmi <b>une quarantaine</b> (latin, occitan, breton, polonais, russe, grec…), voir tout son alphabet, ses lettres à accents et des indices pour la reconnaître ; <b>taper des caractères pour savoir de quelle langue ils viennent</b> ; un <b>clavier cyrillique et grec</b>, avec la transcription en lettres latines.</li>
+                                <li>L'assistant <b>« Que manque-t-il ? »</b> liste les actes encore à chercher et les archives à consulter ; la lecture des textes imprimés est fournie avec l'application.</li>
+                            </ul>
+                            <h4>🎞️ Présentations, diaporamas et montage</h4>
+                            <ul>
+                                <li>De <b>vraies présentations</b> : thèmes, textes, images, tableaux, graphiques, objets de généalogie, transitions et animations, fenêtre du présentateur ; import et export de présentations, PDF et vidéo.</li>
+                                <li><b>« ✨ Récit d'une vie »</b> fabrique tout seul, depuis la fiche, le diaporama d'une personne : carte de naissance, événements, photos, époque, lieux de vie, descendance.</li>
+                                <li>Montage : <b>voix off</b> au micro, <b>sous-titres</b>, mouvement lent sur les photos, modèles « La vie de… » et « Une famille », musique qui baisse sous la voix, formats pour téléphone ou carré, chapitres, <b>vitesse de 0,1 × à 10 ×</b>, rushes rangés en dossiers.</li>
+                            </ul>
+                            <h4>🎚️ Retouche et mise en page</h4>
+                            <ul>
+                                <li><b>Restauration guidée d'une vieille photo</b> : redresser, enlever le jaunissement, les taches, les rayures et les plis, coloriser avec des couleurs d'époque, comparer avant / après.</li>
+                                <li><b>41 filtres</b> qui ne touchent jamais la photo d'origine, enlever les <b>reflets d'une vitre</b>, sélectionner le sujet d'un clic, placer une image sur un calque, gomme à part, modes de fusion, actions pour plusieurs photos à la fois.</li>
+                                <li>Livres : <b>texte qui continue d'un bloc à l'autre</b>, sommaire et index des noms remplis tout seuls, <b>notes de bas de page</b> et sources citées, index des lieux et des métiers, arbre qui se met à jour, contrôle avant impression, <b>vérification du texte avec les fiches</b>, mode relecture avec commentaires, ePub.</li>
+                            </ul>
+                            <h4>📊 Graphiques, diagrammes et cartes</h4>
+                            <ul>
+                                <li><b>Des graphiques à poser partout</b> et tenus à jour, avec ses propres chiffres (tableau, collage, fichier, page Wikipédia, et même une image de graphique), rangés dans une liste et <b>dans des dossiers</b>.</li>
+                                <li><b>22 nouvelles formes</b> : éventail d'ascendance, soleil des lignées, réseau de relations, spirale du temps, classement qui évolue… ; hémicycles et frises des membres.</li>
+                                <li><b>Cartes colorées par zones</b> (départements, régions, pays d'Europe, continents) avec un <b>encart zoomé sur l'Île-de-France</b> et un niveau de détail <b>« Communes »</b> pour la France, la Belgique, la Suisse et le Luxembourg ; carte des migrations.</li>
+                            </ul>
+                            <h4>📸 Cartes de photos et vidéos</h4>
+                            <ul>
+                                <li>L'<b>endroit et l'heure</b> d'une photo ou d'une vidéo sont lus tout seuls, à corriger en glissant ; les photos sans position attendent dans « À placer » ; <b>une frise pour remonter le temps</b>, jusqu'à la seconde ; toutes les cartes en pastilles en haut de l'outil.</li>
+                            </ul>
+                            <h4>🔬 Chercher autrement</h4>
+                            <ul>
+                                <li>Onglet <b>ADN</b> (caché au départ, avec une mise en garde sur la loi française) : correspondances, groupes automatiques, chromosomes, lignées, <b>placement probable d'un cousin</b> dans l'arbre.</li>
+                                <li><b>« 👤 Visages »</b> reconnaît les personnes sur les photos, sur l'ordinateur seulement ; <b>« Poser une question »</b> en français comprend les liens de parenté, les records, les âges, les dates républicaines ; les <b>dates impossibles</b> sont signalées pendant la saisie.</li>
+                                <li><b>Revues, livres, documentaires et podcasts</b> (numéros à acheter, articles, moments minutés, captures annotées) ; <b>petites annonces</b> et courriers aux journaux avec le calcul du prix.</li>
+                            </ul>
+                            <h4>🌳 Plusieurs généalogies, et un puzzle</h4>
+                            <ul>
+                                <li><b>Plusieurs généalogies complètement séparées</b>, chacune avec sa base, ses médias, ses sauvegardes et ses réglages.</li>
+                                <li><b>🧩 Puzzle</b> de 12 à 1000 pièces avec une image de la base, chrono et records ; pièce d'archives et musée à aménager.</li>
+                            </ul>
+                            <h4>🧭 Une app plus simple et plus cohérente</h4>
+                            <ul>
+                                <li>Partout <b>le même menu pour choisir une personne, un lieu ou autre chose</b> (communes de France et villes du monde, sans être bloqué par les homonymes) et <b>une seule fenêtre</b> pour choisir une image, un son ou une vidéo.</li>
+                                <li><b>La même barre au-dessus de toutes les listes</b> (Chercher · Filtrer · Liste | Fiches · Trier) ; plus de « Es-tu sûr ? » pour ce qui se défait : on supprime, et un message propose <b>« ↶ Annuler »</b>.</li>
+                                <li>Mêmes champs de date, de couleur et de curseur, même fenêtre d'export, mêmes « 💾 Réglages enregistrés » partout ; mode sombre partout ; petits écrans mieux pris en charge.</li>
+                            </ul>
+                            <h4>♿ Accessibilité et apparence</h4>
+                            <ul>
+                                <li>Réglages pour le <b>daltonisme</b> (avec « Voir comme… »), taille et espacement du texte, <b>polices pour mieux lire et pour la dyslexie</b> (intégrées), contraste élevé, grandes cibles, moins d'animations, <b>lecture à voix haute</b>, dictée.</li>
+                                <li>Renommer les onglets du menu et choisir leur émoji ; formes d'avatar et thèmes à soi ; en-tête de fiche réglable ; Listes et Réglages rangés en groupes repliables.</li>
+                                <li>Le widget <b>« Mes raccourcis »</b> mène à n'importe quoi (une fiche, une liste filtrée, un outil, un site), et <b>son crayon permet d'ajouter et de ranger ses raccourcis directement</b>.</li>
+                            </ul>
+                            <h4>🐞 Bugs corrigés</h4>
+                            <ul>
+                                <li><b>Saisie</b> : un double-clic créait parfois deux fiches ; Entrée pouvait effacer ce qu'on venait de taper ; deux onglets ouverts sur la même fiche s'écrasaient sans prévenir ; Échap fermait parfois une fenêtre de trop.</li>
+                                <li><b>Famille</b> : retirer un parent ne le retirait pas toujours ; des demi-frères pouvaient se retrouver avec trois parents ; des fusions impossibles (entre conjoints, entre un ancêtre et son descendant) étaient acceptées.</li>
+                                <li><b>GEDCOM</b> : dates républicaines et juliennes, étiquettes, animaux et titres de notes perdus ; la recherche tenait compte des accents et des tirets ; « né un 29 février » n'était compris qu'à moitié.</li>
+                                <li><b>Cartes et affichage</b> : la Russie n'apparaissait qu'en morceaux sur la carte du monde ; des textes débordaient et des éléments se collaient dans toute l'app ; des cadres côte à côte n'avaient pas la même hauteur.</li>
+                                <li><b>Réglages</b> : 17 réglages du « Défaut du site » n'étaient pas gardés ; un graphique en ¾ revenait à ½ ; une forme d'avatar à soi s'affichait sous le mauvais nom.</li>
+                                <li><b>Sécurité</b> : sauvegardes et bases reçues d'ailleurs vérifiées avant l'ouverture, liens vérifiés, exports CSV protégés, et de nombreuses autres protections.</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.6.0 <small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux libres, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></summary>
+                        <div class="presentation-version-body">
+                    <h4>📐 Atelier de mise en page</h4>
+                    <ul>
+                        <li>Faire <b>le livre de sa généalogie</b> comme dans un logiciel de mise en page : pages simples ou <b>en vis-à-vis</b>, <b>gabarits</b> (numéro de page, titre courant), <b>calques</b> (cacher, verrouiller, ranger).</li>
+                        <li>Au départ : <b>une page blanche</b>, <b>les données de la famille</b> (couverture, préface, chiffres, arbre, une page par personne avec sa photo, chronologie, lieux, index — un texte trop long continue tout seul sur la page suivante) ou <b>un design</b>. Format, <b>marges</b>, <b>colonnes et gouttière</b>, <b>fond perdu</b> et <b>ligne-bloc</b> choisis à la création, avec des <b>réglages par défaut</b> modifiables.</li>
+                        <li>Six designs fournis (Classique, Moderne, Élégant, Sépia, Album photo, Sobre) et <b>vos propres designs</b>, tous modifiables ; la liste montre <b>la couverture</b> de chaque livre et de chaque design.</li>
+                        <li><b>Texte</b> : toutes les polices de l'ordinateur, corps, interlignage, approche, crénage, ligne de base, capitales, exposant ; alignements, retraits, espacements, <b>lettrine</b>, césure, listes, colonnes ; <b>styles de paragraphe et de caractère</b> (on change un style, tout le livre suit) ; numéro de page et titre automatiques.</li>
+                        <li><b>Formes</b> (rectangle, ellipse, polygone, étoile, ligne, <b>plume</b>), <b>cadres d'images</b> (photos de la base ou de l'ordinateur, remplir, ajuster, recadrer), <b>nuancier</b> et <b>dégradés</b>, <b>contours</b> (épaisseur, tirets, pointillés, angles), <b>effets</b> (opacité, modes de fusion, ombre portée, contour progressif, angles arrondis).</li>
+                        <li><b>Habillage du texte</b> autour d'une photo ou d'une forme, <b>Pathfinder</b> (ajouter, soustraire, intersection, exclure), aligner et répartir, repères aimantés, <b>liens</b> (images placées, adresses web cliquables).</li>
+                        <li><b>Ajouter ou insérer des pages</b> (autant qu'on veut, à l'endroit voulu), dupliquer, déplacer, <b>aller à une page</b> ; <b>mettre, enlever ou remplacer un gabarit</b> sur une page ou sur plusieurs ; annuler / rétablir avec l'historique ; raccourcis clavier des logiciels de mise en page.</li>
+                        <li>Enregistrer, reprendre plus tard, exporter en <b>PDF</b> (aussi <b>avec fond perdu et traits de coupe</b> pour un imprimeur), en page HTML ou en fichier à partager.</li>
+                    </ul>
+                    <h4>🎬 Petit montage vidéo</h4>
+                    <ul>
+                        <li>Un montage complet : <b>autant de pistes vidéo, texte et son qu'on veut</b> (cacher, ranger, renommer), titres animés, fondus et transitions, son détaché, couleurs, plein écran.</li>
+                        <li><b>Des photos dans les pistes vidéo</b>, à la suite ou incrustées ; <b>glisser un élément d'une piste à une autre</b> du même genre ; ⌫ pour enlever, B pour couper.</li>
+                        <li>Un inspecteur pour chaque élément : <b>Transformer</b> (position, rotation, échelle, ancrage), <b>Recadrer</b>, <b>Distorsion</b>, <b>Adaptation spatiale</b>, opacité et modes de fusion, avec des <b>images clés</b> pour tout animer.</li>
+                        <li>Disposition, couleurs des blocs, boutons et enregistrement réglables (MP4 ou WebM, taille, qualité), avec des <b>ensembles de réglages</b> nommés, exportés et importés.</li>
+                        <li><b>Projets de montage</b> enregistrés à part de la vidéo exportée, onglet <b>Rush</b> (vidéos, photos et sons du projet, renommables), vidéo importée avec son son, <b>son séparé de l'image</b>, <b>vitesse</b> de chaque morceau, durée d'une photo au choix, réglages du son morceau par morceau ou pour tout le film, menu en haut, lecture et pause immédiates.</li>
+                    </ul>
+                    <h4>🎚️ Retouche des photos, avec calques</h4>
+                    <ul>
+                        <li>Partir d'une photo de la base, d'une image de l'ordinateur ou d'<b>un canevas vide</b> ; menus Fichier, Édition, Image, Calque, Sélection, Filtre, Affichage.</li>
+                        <li><b>Calques</b>, <b>groupes de calques</b> (et groupes de groupes) rangés par glisser-déposer, <b>calques de réglage</b> (réglages et filtres, sur tout ce qui est dessous ou seulement sur l'élément dessous), <b>masques</b>, la photo elle-même étant un calque comme les autres.</li>
+                        <li>Sélections (rectangle, ellipse, lasso, plume, baguette magique), correcteur de taches, tampon, pinceaux, formes, texte, courbes, historique ; <b>projets de retouche</b> enregistrés pour reprendre le travail plus tard.</li>
+                    </ul>
+                    <h4>🎧 Son</h4>
+                    <ul>
+                        <li><b>Projets son</b> : garder un son en cours de travail (sans perte) et y revenir ; « Nouveau projet son » dans la liste des audios ; enregistrement en MP3, FLAC, AIFF, WAV ou Ogg.</li>
+                    </ul>
+                    <h4>🛠️ Outils de modification</h4>
+                    <ul>
+                        <li>Une liste <b>Outils de modification</b> : tous les projets de montage, de son, de retouche et de mise en page, à chercher, trier, ouvrir, renommer ou commencer.</li>
+                        <li><b>Boutons et options</b> de chaque outil montrés, cachés et rangés, et <b>des raccourcis clavier à soi</b> dans chaque outil, refusés s'ils sont déjà pris par macOS, Windows, Linux ou l'application.</li>
+                    </ul>
+                    <h4>🧩 Tableaux libres</h4>
+                    <ul>
+                        <li>Dans Enquêtes : des tableaux libres avec <b>près de 800 formes</b>, notes, textes, flèches accrochées, dessin à main levée, plume, photos et documents, fiches, écrans de l'app, widgets.</li>
+                        <li>Arbre automatique, frise et carte vivantes, calques, groupes, instantanés, présentation, commentaires, mémo vocal ; tableaux rattachés à une enquête, une battue, une famille, un événement ou un animal.</li>
+                    </ul>
+                    <h4>🐾 Animaux</h4>
+                    <ul>
+                        <li>Un onglet Animaux : fiche discrète ou <b>fiche complète comme une personne</b> (arbre, pedigree, consanguinité, photos, notes, sources), base d'élevage, espèces, catégories et champs à soi.</li>
+                    </ul>
+                    <h4>📒 Fiches sur un sujet</h4>
+                    <ul>
+                        <li>Un onglet « Fiches » (caché au départ) : une page sur un sujet — un pays, un métier, une coutume — faite de blocs (texte, images, personnes, frise de dates, citation, liens, écrans de l'app, widgets), modifiés sur place comme les widgets.</li>
+                        <li>Reprendre <b>le même ordre de blocs</b> pour une nouvelle fiche, ou en faire <b>un modèle</b> proposé à la création des fiches suivantes.</li>
+                    </ul>
+                    <h4>📖 Livre de famille, livrets et employeurs</h4>
+                    <ul>
+                        <li>Livre de famille par branche : parties à cocher et ranger, textes, styles, polices, format ; PDF, HTML, Word, OpenDocument, ePub, Markdown, texte, CSV.</li>
+                        <li>Livrets de famille transcrits en entier, personnes reliées aux fiches ; fiches d'employeurs façon fiche d'entreprise.</li>
+                    </ul>
+                    <h4>📊 Graphiques, widgets et onglets à soi</h4>
+                    <ul>
+                        <li>Éditeur de graphiques et de widgets, onglets à soi avec n'importe quel écran de l'app ; tableau de bord en pages et en ensembles repliables.</li>
+                        <li>Distributions : <b>« + Critère »</b> autant qu'on veut, filtres par défaut, et <b>un clic sur une barre</b> (pyramides des âges comprises) montre les personnes comptées.</li>
+                        <li>Fiche d'un village et monographie de commune en widget, saint du jour détaillé, suggestions de recherche.</li>
+                    </ul>
+                    <h4>⚙️ Réglages et confort</h4>
+                    <ul>
+                        <li><b>Mes ensembles de réglages</b> : tous les réglages de l'app enregistrés sous un nom, appliqués, exportés, importés.</li>
+                        <li>Menu en bas et colonne latérale à droite au choix ; glisser-déposer partout ; <b>listes à cacher</b> d'un clic ; <b>lignes vides du bloc Identité masquées</b> sur une fiche ou sur toutes.</li>
+                        <li>FAQ cherchable en français (sans accents, synonymes) et une relecture de sécurité.</li>
+                    </ul>
+                    <h4>🐞 Bugs corrigés</h4>
+                    <ul>
+                        <li><b>Mariages</b> rattachés à deux personnes et <b>lieux de mariage</b> qui ne s'affichaient pas dans les distributions ; durée des vidéos enregistrées ; crayon d'un widget du tableau de bord trop lent.</li>
+                        <li><b>Montage</b> : « Annuler » au moment d'importer fermait le projet ; une vidéo déposée sur la piste 1 était refusée ; lecture et pause lentes à réagir ; ⌘Z ne pouvait pas annuler une coupe faite avec B.</li>
+                        <li><b>Application Mac</b> : ⌘Z et ⇧⌘Z n'arrivaient pas au montage, à la retouche ni à la mise en page ; Échap demandait deux fois de confirmer ; « Annuler » dans le choix d'un fichier fermait la fenêtre ouverte.</li>
+                        <li><b>Retouche</b> : le panneau des calques débordait ; la photo de départ ne se glissait ni ne se supprimait comme un calque ; des boutons censés être cachés restaient visibles ; « Versions de la photo » apparaissait sur un canevas vide.</li>
+                        <li><b>Mise en page</b> : des boutons des gabarits ne faisaient rien ; la couleur du texte perdait la sélection ; « Dupliquer » pouvait planter ; renommer un calque d'un double-clic ne tenait pas.</li>
+                        <li><b>Glisser-déposer</b> : une ligne pouvait passer dans une autre liste, et le repère de dépôt était caché derrière les fenêtres ; dans les Réglages, les boutons rangés ou cachés n'étaient jamais enregistrés.</li>
+                    </ul>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.5.0 <small>Recueils, dépouillements page par page, plan des adresses d'un recensement, fiche d'un village à organiser, atelier de recherche, sons et vidéos, calendriers</small></summary>
+                        <div class="presentation-version-body">
+                    <h4>📚 Recueils</h4>
+                    <ul>
+                        <li>Les pages d'un registre ou d'un carnet <b>photographiées dans l'ordre</b>, avec transcription et versions qui coexistent.</li>
+                        <li>Image de couverture, dossiers « À ranger », flèches entre les images d'une page.</li>
+                        <li><b>Un tableau dans chaque page</b> : coller depuis un tableur, ordre verrouillé ou libre, fusionner des cases, export CSV, ligne rattachée à une fiche.</li>
+                        <li>Rattacher une page ou une seule image à une personne, une enquête, une battue, un atelier ou un village.</li>
+                    </ul>
+                    <h4>📜 Dépouillements</h4>
+                    <ul>
+                        <li>Dans les Listes, les <b>dépouillements d'archive page par page</b> : vues du scan, pages du document, photos et transcription.</li>
+                        <li>Les personnes rangées <b>par foyer</b>, numérotés au choix, avec l'adresse du foyer (numéro et rue), un 🔒 cadenas pour ne rien changer par erreur.</li>
+                        <li>Mêmes données que Recherche › Dépouillement d'archive, avec un lien dans les deux sens.</li>
+                    </ul>
+                    <h4>🗺️ Plan des adresses</h4>
+                    <ul>
+                        <li>Les adresses d'un recensement <b>sur une carte</b>, l'année au choix.</li>
+                        <li>La Base Adresse Nationale du département lue sur l'ordinateur : <b>placement automatique sans internet</b>, ou à la main.</li>
+                        <li>Anciens noms de rues, <b>rues disparues dessinées</b>, cartes anciennes en transparence, fonds de carte favoris dans Apparence.</li>
+                    </ul>
+                    <h4>🏘️ Fiche d'un village</h4>
+                    <ul>
+                        <li>Plan du recensement affiché d'office ; <b>⚙️ Organiser la fiche</b> (ordre, masquer, largeur de chaque partie) ; bloc-notes.</li>
+                        <li>Tous les foyers d'un recensement par commune et par année, avec export CSV.</li>
+                    </ul>
+                    <h4>🔬 Atelier de recherche</h4>
+                    <ul>
+                        <li>Un 3e onglet dans Enquêtes : projets de <b>thèse, de livre ou d'exposition</b> avec dossiers imbriqués.</li>
+                        <li>Import Zotero, CSL JSON, EndNote ; exports Word (.docx), impression / PDF, CSL JSON ; widgets et « Venant du logiciel ».</li>
+                    </ul>
+                    <h4>🎧 Sons, vidéos et calendriers</h4>
+                    <ul>
+                        <li>Listes <b>Audios</b> et <b>Vidéos</b> avec lecteur (vitesse de 0,10× à 6×) ; <b>✂️ atelier son et vidéo</b> (couper, améliorer, assembler) qui garde toujours l'original.</li>
+                        <li><b>📅 Mon agenda</b> et <b>Calendrier de la famille</b>, avec un widget « à venir ».</li>
+                        <li>Circuits sur le terrain : logistique et technique de chaque étape.</li>
+                    </ul>
+                    <h4>Photos, listes et corrections</h4>
+                    <ul>
+                        <li>🧩 Assembler des photos ; correcteur de taches dans la retouche.</li>
+                        <li>⚙️ Colonnes de toutes les listes ; éditeur de listes avec son propre formulaire ; 8 dessins de graphique pour les widgets.</li>
+                        <li>Copie chez un cousin mieux chiffrée, décès INSEE en .zip, fenêtres de saisie qui s'ouvrent dans l'application de bureau, et beaucoup d'autres corrections.</li>
+                    </ul>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.4.2 <small>Musée de famille en 3D, retouche des photos, widgets à soi, cartes d'électeur, décès INSEE automatiques, 26 calendriers, nombreuses corrections</small></summary>
+                        <div class="presentation-version-body">
+                    <h4>Musée de famille en 3D</h4>
+                    <ul>
+                        <li>Des salles où l'on expose photos, documents et objets, avec un <b>plan de la salle</b> pour placer chaque élément et une <b>taille de pièce sur mesure</b>.</li>
+                        <li><b>Visite guidée</b> avec audioguide (vos enregistrements ou une voix de synthèse dont on règle la vitesse), livre d'or et catalogue.</li>
+                        <li>Partage en site web ou en fichier.</li>
+                    </ul>
+                    <h4>Photos et apparence</h4>
+                    <ul>
+                        <li><b>Retouche</b> (luminosité, contraste, courbe) : l'original est toujours gardé, chaque retouche devient une version.</li>
+                        <li><b>Mises en page enregistrées</b> : tous les réglages de l'Apparence sous un nom, à partager.</li>
+                        <li>Tous les émojis d'Unicode, personnes (avec les couleurs de peau), objets et symboles.</li>
+                    </ul>
+                    <h4>Tableau de bord, listes et recherche</h4>
+                    <ul>
+                        <li><b>Éditeur de widgets</b> : créez les vôtres (chiffres, liste, graphique, texte, raccourcis), avec plusieurs parties dans un même widget, ou partez d'un widget de l'app.</li>
+                        <li>Mes listes dans l'onglet Listes, partagées en fichier, avec filtres et tri par colonne.</li>
+                        <li><b>Poser une question en français</b> : « Jean Dupont a-t-il eu des enfants ? » → « Oui, 2 enfants. », homonymes listés, recherches enregistrées.</li>
+                    </ul>
+                    <h4>Nouveaux blocs et outils</h4>
+                    <ul>
+                        <li>Bloc <b>Cartes d'électeur</b>, et une carte du monde du droit de vote des hommes et des femmes.</li>
+                        <li><b>Décès INSEE</b> : les nouveaux fichiers de data.gouv.fr sont signalés et importés par l'app.</li>
+                        <li>Fiche d'un village : tri par colonne et population tirée de Wikipédia.</li>
+                        <li>Voyages en bateau : des trajets qui ne passent que par la mer.</li>
+                        <li>Fiches en ligne : champs libres, capture d'écran de l'arbre, recherche sur Geneanet, Filae… avec les infos de la fiche.</li>
+                        <li>Événements : case « Date incertaine ».</li>
+                    </ul>
+                    <h4>Calendriers</h4>
+                    <ul>
+                        <li><b>Convertir une date</b> dans 26 calendriers : juif, éthiopien, indien, japonais, coréen, chinois, persan, bengali, thaï, copte, byzantin…</li>
+                        <li>Pour les actes anciens : <b>calendrier romain</b> (calendes, nones, ides), ancien style anglais (avant 1752), style de Pâques (France avant 1567).</li>
+                        <li>Mois républicains avec leurs dates grégoriennes ; tous les calendriers au choix comme calendrier par défaut.</li>
+                    </ul>
+                    <h4>Corrections</h4>
+                    <ul>
+                        <li>Fusion de deux fiches qui garde tout (variantes, témoins, photos, blocs…).</li>
+                        <li>GEDCOM : anciens encodages (ANSEL, MS-DOS, Mac, UTF-16) et dates « vers », « depuis », « jusqu'à », « av. J.-C. » ; exports qui respectent les fiches privées et les vivants.</li>
+                        <li>Reconnaissance d'écriture (HTR) : corrigée quand le dossier des données contient un espace (Mac).</li>
+                        <li>Lieux d'outre-mer (Guadeloupe, Réunion…) bien comptés en France ; et beaucoup d'autres petites corrections.</li>
+                    </ul>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.4.1 <small>Mes listes, fiche d'un village enrichie, reconnaissance d'écriture à installer en un clic, corrections</small></summary>
+                        <div class="presentation-version-body">
+                    <h4>Mes listes (Réglages)</h4>
+                    <ul>
+                        <li><b>Créez vos propres listes</b> en combinant des critères : par exemple les divorces entre 1850 et 1920, les mariages sans source, les ancêtres nés dans un département…</li>
+                        <li>Ajoutez vos colonnes : texte libre, menu déroulant, case à cocher, date, nombre, lien internet ou personne de la base.</li>
+                        <li><b>Listes écrites à la main</b>, sans rien tirer de la base : idéal pour <b>préparer un salon</b> (stands à visiter, ce que je cherche, priorité, fait).</li>
+                        <li>Étiquettes sur les listes, export CSV et impression.</li>
+                    </ul>
+                    <h4>Fiche d'un village</h4>
+                    <ul>
+                        <li>Actes par décennie au choix : tous, naissances, mariages, décès ou chaque autre sorte d'événement.</li>
+                        <li>« et N autres » se déroule pour voir toute la famille.</li>
+                        <li>Choix du fond de carte (Cassini, État-major, IGN…) et <b>graphique de la population</b> sous la carte.</li>
+                    </ul>
+                    <h4>Reconnaissance d'écriture (HTR)</h4>
+                    <ul>
+                        <li>Un guide et un bouton <b>« Installer »</b> : Kraken et ses modèles s'installent tout seuls dans le dossier des données (Python 3.10 ou 3.11 requis), ou un modèle s'ajoute à la main.</li>
+                    </ul>
+                    <h4>Confort et corrections</h4>
+                    <ul>
+                        <li>Éditeur de blocs : n'importe quel émoji, une section avec <b>tous les drapeaux du monde</b>, et le choix d'afficher le bloc dans « Blocs à afficher sur la fiche ».</li>
+                        <li>Monographie de commune : les deux époux d'un mariage, chacun avec son bouton « Ouvrir ».</li>
+                        <li>Lieux mal placés s'ouvre de nouveau, et beaucoup plus vite.</li>
+                        <li>Travail à deux : fini le message « database is locked » sur les grandes bases.</li>
+                        <li>Actes à demander : la liste prend toute la largeur et « Préparer la lettre » reste dans le cadre.</li>
+                        <li>Une mini FAQ à la fin de « Glossaire / tuto / FAQ ».</li>
+                    </ul>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.4.0 <small>Nouveaux blocs, éditeur de blocs, fiche d'un village, base propre, travail à deux, copie chez un cousin</small></summary>
+                        <div class="presentation-version-body">
+                    <h4>De nouveaux blocs sur les fiches</h4>
+                    <ul>
+                        <li><b>Départs et émigration</b> : port, navire, escales, liste de passagers, personnes parties ensemble, naturalisation de chacun, papiers d'émigration, et le trajet du navire sur la carte.</li>
+                        <li><b>Enfant placé</b> (nourrice, hospice, Assistance publique, avec la durée), <b>Blason et noblesse</b>, <b>Poilu 14-18</b> (régiments, blessures, liens vers les journaux de marche), <b>Résistant</b> (réseau, nom de guerre, arrestation, caches, parcours jour par jour sur la carte, compagnons) et <b>Langues</b> parlées, transmises à la descendance.</li>
+                        <li>Ces blocs se cochent dans la fiche (« Blocs à afficher sur la fiche ») ou s'affichent sur toutes les fiches (Apparence), dans l'ordre que vous choisissez.</li>
+                        <li><b>Éditeur de blocs</b> (Réglages) : créez vos propres blocs sans programmer (texte, date, liste de choix, personne liée, lieu, photos, vidéos et sons, info reprise d'une fiche, carte), partagez-les avec un proche et importez les siens.</li>
+                        <li><b>Étiquettes</b> sur tous ces blocs, dès leur création.</li>
+                    </ul>
+                    <h4>De nouvelles listes</h4>
+                    <ul>
+                        <li><b>Fiche d'un village</b> : pour chaque commune de la famille, les familles qui y ont vécu, les métiers dominants, l'église et la paroisse, la population au fil des recensements, les actes par décennie et la carte de Cassini.</li>
+                        <li><b>Épidémies, guerres, hivers terribles</b> à côté des décès de la famille, pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…).</li>
+                        <li><b>Actes à demander</b> (Registre de courriers) : les actes trop récents pour être en ligne, la lettre à la mairie prête à envoyer et un rappel le jour où l'acte devient public.</li>
+                        <li>Circuits sur le terrain, papiers de famille, inventaires après décès, cartes anciennes calées sur la carte, paroisses d'Ancien Régime, noms cités dans les actes (le « cercle » des ancêtres), demandes d'entraide, résistants.</li>
+                    </ul>
+                    <h4>Chercher et comprendre</h4>
+                    <ul>
+                        <li><b>Poser une question en français</b> : « Quels ancêtres étaient boulangers à Lille avant 1850 ? ». Les recherches peuvent être enregistrées.</li>
+                        <li>Liens <b>« @Jean Dupont »</b> dans les notes, et la rubrique « Cité dans » sur la fiche citée ; citations de sources détaillées, référence rédigée toute seule.</li>
+                        <li>Fêtes religieuses en date exacte, prénoms comparés au fichier de l'INSEE, taille des ancêtres comparée à la moyenne française, âge au mariage et écart entre les naissances.</li>
+                        <li><b>Le film de la famille</b> : la carte animée de la famille au fil des siècles, enregistrée en vidéo.</li>
+                        <li><b>⌘F</b> surligne les mots cherchés et donne leur nombre.</li>
+                        <li>Les suggestions de lieux trouvent les villes du monde entier (Boston, Abidjan…), la plus peuplée d'abord.</li>
+                    </ul>
+                    <h4>Une base propre</h4>
+                    <ul>
+                        <li>Alertes sur les âges : mère de 55 ans, enfant né après la mort du père, naissances trop rapprochées.</li>
+                        <li><b>Harmoniser les variantes</b> (« Laboureur », « labour. », « Labourreur »), après confirmation et annulable.</li>
+                        <li>Lieux mal placés (coordonnées inversées, mauvais département pour un homonyme), voyages impossibles, comparaison des deux fiches côte à côte avant de fusionner un doublon.</li>
+                        <li><b>Dossier « Scans » surveillé</b> : chaque photo ou PDF qui y arrive entre dans l'application.</li>
+                    </ul>
+                    <h4>Partager et protéger</h4>
+                    <ul>
+                        <li><b>Travailler à deux</b> sur la même généalogie : paquets de modifications à échanger, à accepter ou refuser un par un.</li>
+                        <li><b>Copie chez un cousin</b> : une copie chiffrée qu'il garde sans pouvoir la lire, et qu'il vous rend le jour où votre ordinateur vous lâche.</li>
+                        <li>Copie hors de l'ordinateur (dossier iCloud, Dropbox, clé USB), export d'une seule branche, et <b>mode consultation</b> protégé par un mot de passe pour montrer l'arbre sans risque.</li>
+                    </ul>
+                    <h4>Corrections</h4>
+                    <ul>
+                        <li>« Mort pour la France » est désormais enregistré sur la fiche.</li>
+                        <li>Nombreuses corrections après une relecture complète du code.</li>
+                    </ul>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.3.1 <small>Ascendants et descendants, fusion de l'arbre d'un cousin, raccourcis clavier</small></summary>
+                        <div class="presentation-version-body">
+                    <h4>Famille</h4>
+                    <ul>
+                        <li>Blocs <b>« Ascendants »</b> et <b>« Descendants »</b> sur chaque fiche, en liste : vous choisissez le nombre de générations (pour toutes les fiches ou pour une seule), et un trait « ┄ suite » signale qu'il y en a d'autres au-delà. Aussi en widget du tableau de bord et dans Graphiques.</li>
+                        <li><b>Branches fermées</b> : déclarez qu'une descendance est éteinte, avec un degré de certitude (sûr, très probable, probable, peut-être, gros doute) et la raison ; la mention « lignée éteinte » apparaît dans les arbres, et la liste des branches fermées est dans Listes.</li>
+                        <li><b>Fusionner l'arbre d'un cousin</b> (Réglages) : son fichier GEDCOM est comparé à votre base avant tout import, puis vous décidez fiche par fiche : « c'est la même personne, compléter la mienne », « nouvelle personne, l'ajouter » ou « ignorer ». Rien de votre fiche n'est effacé ni remplacé, et une copie de sécurité est faite juste avant.</li>
+                        <li><b>Signets</b> : un ruban en haut de chaque fiche pour la garder sous la main ; les signets ont leur onglet dans la liste des personnes.</li>
+                    </ul>
+                    <h4>Raccourcis clavier</h4>
+                    <ul>
+                        <li>Plus de 50 raccourcis, visibles dans les menus de l'application et avec la touche <b>F1</b> : se promener dans la famille (⌥↑ le père, ⌥↓ un enfant, frères et sœurs, conjoint…), écran précédent et suivant, rubriques ⌘1 à ⌘9, enregistrer avec ⌘Entrée, visionneuse, transcription, battues…</li>
+                        <li>⌘-clic sur une personne, une battue ou une enquête : l'ouvrir dans l'autre moitié de l'écran.</li>
+                        <li><b>⌘Z</b> en dehors d'une case de texte : annuler la dernière modification d'une fiche, toujours après confirmation.</li>
+                        <li>Dans un champ de date, taper « v », « av », « ap » ou « en » propose « vers », « avant », « après », « entre … et ».</li>
+                        <li>Réglages → <b>Raccourcis clavier</b> : changez n'importe quel raccourci ; le logiciel vous prévient s'il est déjà pris par macOS, Windows ou Linux, et vous pouvez enregistrer vos réglages sous un nom.</li>
+                        <li>(Sur Windows et Linux, ⌘ se remplace par Ctrl, et ⌥ par Alt.)</li>
+                    </ul>
+                    <h4>Confort et corrections</h4>
+                    <ul>
+                        <li>Bouton <b>« Réordonner les widgets »</b> en bas du tableau de bord.</li>
+                        <li>Avec deux fenêtres ou l'écran divisé, un réglage changé dans l'une est repris aussitôt dans l'autre.</li>
+                        <li>Apparence : chaque rubrique indique sur quelles fiches une exception a été mise.</li>
+                        <li>Les petits widgets n'écrasent plus leur titre ni leur numéro, et leurs réglages (crayon) ne débordent plus du cadre.</li>
+                        <li>L'export JSON fonctionne de nouveau sur les grandes bases.</li>
+                    </ul>
+                        </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.3.0 <small>Aide à la recherche, battues dans le monde entier, objets et mémoire de famille</small></summary>
+                        <div class="presentation-version-body">
+                    <h4>Battues dans le monde entier</h4>
+                    <ul>
+                        <li>Les communes de <b>226 pays et territoires</b> sont livrées avec le logiciel (Europe, Amériques, Afrique, Asie, Océanie, Caraïbes), toutes utilisables hors ligne ; les communes voisines de part et d'autre d'une frontière sont reliées.</li>
+                        <li>Bouton <b>« Registres en ligne »</b> sur chaque commune d'une battue : les archives départementales, Matricula, Antenati, les Archives de l'État en Belgique, FamilySearch…</li>
+                        <li>Le pays s'affiche au survol de la carte.</li>
+                    </ul>
+                    <h4>Aide à la recherche</h4>
+                    <ul>
+                        <li><b>Dates estimées</b> : une naissance ou un décès manquant reçoit une fourchette (« né entre 1753 et 1772 »), d'après l'âge au décès, le mariage, les enfants, les frères et sœurs, les parents.</li>
+                        <li><b>Implexe</b> : les ancêtres présents plusieurs fois dans l'arbre et le taux par génération ; la fiche affiche tous les numéros Sosa d'un ancêtre (« Sosa 42, 68 &amp; 92 »).</li>
+                        <li><b>Chercher sur internet</b> depuis une fiche, un widget ou l'onglet Recherche : Geneanet, FamilySearch, Filae, presse ancienne, moteurs de recherche… avec les années de vie, le lieu et le conjoint pour écarter les homonymes, et plusieurs sites ouverts d'un coup.</li>
+                        <li><b>La une du jour</b> : Le Petit Journal, Le Petit Parisien, Le Figaro ou Le Temps du jour d'une naissance, d'un mariage ou d'un décès (1854-1944, Gallica).</li>
+                        <li><b>Le prénom et le saint du jour</b> : sur la fiche (« Né le 24 juin, prénommé Jean : saint Jean-Baptiste »), dans un widget et en statistique par famille et par époque.</li>
+                        <li>Aide à la lecture des actes anciens : abréviations, latin des registres paroissiaux, écriture ancienne lettre par lettre.</li>
+                        <li>Pouvoir d'achat d'une somme ancienne (« 300 livres en 1780 ≈ 340 journées de travail d'un journalier »).</li>
+                        <li>Les liens des 100 archives départementales vérifiés un par un.</li>
+                    </ul>
+                    <h4>L'histoire autour des personnes</h4>
+                    <ul>
+                        <li><b>Lieux précis</b> : une adresse, une ferme, une maison en un coup d'œil, avec ses habitants successifs et tous les événements qui s'y sont passés.</li>
+                        <li><b>Objets de famille</b> : photo, transmission de qui à qui, et qui les a aujourd'hui.</li>
+                        <li><b>Mémoire familiale</b> : recettes, expressions, chansons, surnoms, traditions, rattachés aux personnes qui les ont transmis.</li>
+                        <li>Étiquettes sur les objets et les souvenirs ; une étiquette se crée directement en la tapant.</li>
+                        <li><b>Salons et événements</b> de généalogie : date, lieu, comment y aller, que prévoir, stands à voir, liens, avec un rappel quelques jours avant.</li>
+                    </ul>
+                    <h4>Confort</h4>
+                    <ul>
+                        <li><b>Recherche rapide</b> avec ⌘K (Mac) ou Ctrl+K (Windows, Linux) : une personne, une battue, une enquête, un lieu ou un écran.</li>
+                        <li><b>Écran divisé</b> (côte à côte ou haut et bas) et ouverture d'un écran dans une nouvelle fenêtre.</li>
+                        <li><b>Rappels en notification</b> du système, avec le nombre de rappels sur l'icône (Mac, Linux).</li>
+                        <li><b>Carte sans Internet</b> : un fond simple (communes et frontières) remplace la carte quand la connexion manque.</li>
+                        <li>Widget <b>Bilan de recherche</b> : ce que vous avez fait ce mois-ci et cette année.</li>
+                    </ul>
+                    <h4>Protection et partage</h4>
+                    <ul>
+                        <li><b>Sauvegarde complète protégée par un mot de passe</b> (chiffrement AES-256), pour la ranger sur iCloud, Dropbox ou une clé USB sans risque.</li>
+                        <li>Export GEDCOM <b>« pour partager »</b> : les personnes vivantes et les fiches confidentielles y deviennent anonymes.</li>
+                        <li>Une personne supprimée par erreur se <b>restaure</b> avec tout ce qui lui était attaché.</li>
+                        <li>Réglages → Entretien : vérification des liens web enregistrés, avec la nouvelle adresse ou une copie archivée quand une page a disparu.</li>
+                    </ul>
+                </div>
+                    </details>
+                    <details class="presentation-version">
+                        <summary>Version 0.2.1 <small>Battues au-delà des frontières et corrections</small></summary>
+                        <div class="presentation-version-body">
+                    <h4>Battues au-delà des frontières</h4>
+                    <ul>
+                        <li>Les battues ne s'arrêtent plus à la frontière : vous pouvez ajouter les communes de <b>Belgique, Suisse, Luxembourg, Liechtenstein, Allemagne, Italie, Autriche et Espagne</b>, ainsi que celles de l'<b>outre-mer français</b> (Guadeloupe, Martinique, Guyane, La Réunion, Mayotte).</li>
+                        <li>Les communes voisines de part et d'autre d'une frontière sont reliées : une battue partie de Strasbourg passe à Kehl, une battue partie d'Hendaye passe à Irun.</li>
+                        <li>Comme pour la France, les anciennes communes et les lieux-dits sont rattachés à leur commune actuelle.</li>
+                        <li>Chaque base choisit ses pays (rubrique « Pays des battues », avec « Tout cocher » / « Tout décocher ») ; un pays utilisé par une battue ne peut pas être retiré par erreur.</li>
+                    </ul>
+                    <h4>Corrections</h4>
+                    <ul>
+                        <li>Les boutons qui demandaient de saisir un texte (supprimer une fiche, nouveau dossier d'enquête, recensement spécial, renommer…) fonctionnent de nouveau.</li>
+                        <li>Les impressions (graphiques, feuille de mission aux archives, bordereau de copies) s'ouvrent correctement.</li>
+                        <li>Recherche de la commune de départ d'une battue et recherche de lieux beaucoup plus rapides sur une base neuve (de plusieurs secondes à quelques centièmes).</li>
+                        <li>Le crayon des blocs du tableau de bord fonctionne sur une base jamais personnalisée ; le nombre de personnes se met à jour tout de suite.</li>
+                        <li>Enquêtes : la personne principale est affichée et modifiable.</li>
+                        <li>Barre de menus du haut : défilement à la molette et barre visible, pour atteindre les menus de droite sur un petit écran.</li>
+                        <li>Le bloc « Accès local », inutile dans le logiciel, a été retiré.</li>
+                    </ul>
+                        </div>
+                    </details>
+                </div>
+            </details>
+
+            <div class="presentation-callout">
+                <strong>Premier lancement</strong>
+                <div>
+                    <p>Cette version bêta n'est pas encore signée. <b>Sur Mac</b>, si l'ouverture est bloquée : Réglages Système → Confidentialité et sécurité → « Ouvrir quand même ». <b>Sur Windows</b>, à l'écran « Windows a protégé votre ordinateur » : « Informations complémentaires » → « Exécuter quand même ».</p>
+                    <p>Pour vérifier qu'un fichier n'a pas été modifié, comparez son empreinte avec la liste <a href="download/SHA256SUMS.txt">SHA256SUMS.txt</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="presentation-section" id="fonctionnalites">
+            <header class="presentation-section-head">
+                <span class="eyebrow">02 — DANS LE CARNET</span>
+                <h2>Tout ce qui aide à comprendre une famille.</h2>
+            </header>
+            <div class="presentation-feature-grid">
+                <article class="presentation-feature feature-large">
+                    <span class="feature-index">A</span>
+                    <h3>Construire et relier</h3>
+                    <p>Fiches individuelles, parents, fratries, couples, enfants, variantes de nom, événements et arbres de parenté.</p>
+                    <ul><li><mark class="maq-new">Arbres, éventails et sabliers</mark></li><li><mark class="maq-new">Recensements, lieux et cartes</mark></li><li><mark class="maq-new">Sosa, d’Aboville et ADN</mark></li></ul>
+                </article>
+                <article class="presentation-feature">
+                    <span class="feature-index">B</span>
+                    <h3>Composer votre espace</h3>
+                    <p><mark class="maq-new">Menus, blocs des fiches, tableau de bord et widgets, thèmes, fond des pages, tailles du texte et des boutons : tout se règle, s’enregistre sous un nom et se partage. Un mode simple en gros boutons pour les aînés.</mark></p>
+                </article>
+                <article class="presentation-feature feature-blue">
+                    <span class="feature-index">C</span>
+                    <h3>Documenter</h3>
+                    <p><mark class="maq-new">Photos, actes, PDF, sons et vidéos, sources et niveau de confiance ; transcription des actes, reconnaissance d’écriture, recueils dépouillés page par page.</mark></p>
+                </article>
+                <article class="presentation-feature feature-blue">
+                    <span class="feature-index">D</span>
+                    <h3>Enquêter</h3>
+                    <p><mark class="maq-new">Enquêtes avec hypothèses et preuves, battues sur une carte, atelier de recherche, visites aux archives, rappels, budget et courriers.</mark></p>
+                </article>
+                <article class="presentation-feature">
+                    <span class="feature-index">E</span>
+                    <h3><mark class="maq-new">Créer et transmettre</mark></h3>
+                    <p><mark class="maq-new">Le livre de famille, le traitement de texte, le tableur, les présentations, le montage vidéo, le son et un site web ; et les Trésors de famille : lettres aux descendants, gazette, ciel de naissance, jeux.</mark></p>
+                </article>
+                <article class="presentation-feature feature-dark">
+                    <span class="feature-index">F</span>
+                    <h3>Base locale</h3>
+                    <p>Les personnes, événements et recherches sont stockés dans une base SQLite locale sur votre ordinateur : pas besoin d’internet. <mark class="maq-new">Sauvegardes automatiques en un seul fichier.</mark></p>
+                </article>
+            </div>
+        </section>
+
+        <section class="presentation-section" id="apercu">
+            <header class="presentation-section-head">
+                <span class="eyebrow">03 — APERÇU</span>
+                <h2>Le carnet en images.</h2>
+                <p>Quelques écrans du logiciel. Utilisez les flèches, les touches ← → du clavier, ou faites glisser l’image.</p>
+            </header>
+            <div class="presentation-carousel" aria-roledescription="carrousel" aria-label="Captures d’écran du logiciel">
+                <div class="presentation-carousel-track" tabindex="0">
+                <figure class="presentation-slide" id="apercu-1" aria-roledescription="diapositive" aria-label="1 sur 25">
+                    <img src="captures/lcnda-01.jpg" alt="Fiche individuelle d’une personne : identité, parents, conjoints, enfants et événements" width="1600" height="1034" loading="eager">
+                    <figcaption><span>01</span>La fiche d’une personne : identité, famille et événements</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-2" aria-roledescription="diapositive" aria-label="2 sur 25">
+                    <img src="captures/lcnda-02.jpg" alt="Bas d’une fiche : médias, recensements, notes, sources et références externes" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>02</span>Médias, recensements, sources et références d’une fiche</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-3" aria-roledescription="diapositive" aria-label="3 sur 25">
+                    <img src="captures/lcnda-03.jpg" alt="Graphique d’arbre des descendants" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>03</span>Arbres et diagrammes : ici, les descendants</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-4" aria-roledescription="diapositive" aria-label="4 sur 25">
+                    <img src="captures/lcnda-04.jpg" alt="Statistiques : prénoms les plus fréquents de la base" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>04</span>Statistiques : distribution des prénoms</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-5" aria-roledescription="diapositive" aria-label="5 sur 25">
+                    <img src="captures/lcnda-05.jpg" alt="Carte des lieux des événements" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>05</span>Carte de tous les événements</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-6" aria-roledescription="diapositive" aria-label="6 sur 25">
+                    <img src="captures/lcnda-06.jpg" alt="Liste dynamique des personnes avec naissance, décès et statut" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>06</span>Listes dynamiques : personnes à vérifier</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-7" aria-roledescription="diapositive" aria-label="7 sur 25">
+                    <img src="captures/lcnda-07.jpg" alt="Liste des rappels avec échéances" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>07</span>Rappels de recherche</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-8" aria-roledescription="diapositive" aria-label="8 sur 25">
+                    <img src="captures/lcnda-08.jpg" alt="Liste des signatures relevées" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>08</span>Signatures relevées dans les actes</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-9" aria-roledescription="diapositive" aria-label="9 sur 25">
+                    <img src="captures/lcnda-09.jpg" alt="Recherche des personnes présentes autour d’une commune entre deux dates" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>09</span>Recherche par proximité géographique et dans le temps</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-10" aria-roledescription="diapositive" aria-label="10 sur 25">
+                    <img src="captures/lcnda-10.jpg" alt="Carte d’une battue avec les communes voisines colorées par niveau" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>10</span>Battue : les communes voisines, niveau par niveau</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-11" aria-roledescription="diapositive" aria-label="11 sur 25">
+                    <img src="captures/lcnda-11.jpg" alt="Réglages de personnalisation de l’apparence" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>11</span>Apparence : couleurs, polices, ordre des menus</figcaption>
+                </figure>
+                <figure class="presentation-slide" id="apercu-12" aria-roledescription="diapositive" aria-label="12 sur 25">
+                    <img src="captures/lcnda-12.jpg" alt="Création de bloc" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>12</span>Fiche d'un village</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-13" aria-roledescription="diapositive" aria-label="13 sur 25">
+                    <img src="captures/lcnda-13.jpg" alt="Fiche d'un village" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>13</span>Création de bloc</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-14" aria-roledescription="diapositive" aria-label="14 sur 25">
+                    <img src="captures/lcnda-14.jpg" alt="Création de bloc" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>14</span>Création de bloc</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-15" aria-roledescription="diapositive" aria-label="15 sur 25">
+                    <img src="captures/lcnda-15.jpg" alt="retouche d'une photo" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>15</span>Retouche d'une photo</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-16" aria-roledescription="diapositive" aria-label="16 sur 25">
+                    <img src="captures/lcnda-16.jpg" alt="Modifier un son" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>16</span>Modifier un son</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-17" aria-roledescription="diapositive" aria-label="17 sur 25">
+                    <img src="captures/lcnda-17.jpg" alt="Easter Egg : La vue Musée" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>17</span>La vue Musée</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-18" aria-roledescription="diapositive" aria-label="18 sur 25">
+                    <img src="captures/lcnda-18.jpg" alt="Easter Egg : Jeu de l'oie" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>18</span>Easter Egg : Jeu de l'oie</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-19" aria-roledescription="diapositive" aria-label="19 sur 25">
+                    <img src="captures/lcnda-19.jpg" alt="Atelier de recherche" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>19</span>Atelier de recherche</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-20" aria-roledescription="diapositive" aria-label="20 sur 25">
+                    <img src="captures/lcnda-20.jpg" alt="recueils" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>20</span>recueils</figcaption>
+                </figure>
+
+                <figure class="presentation-slide" id="apercu-21" aria-roledescription="diapositive" aria-label="21 sur 25">
+                    <img src="captures/lcnda-21.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>21</span>Monographie de commune</figcaption>
+                </figure>
+                
+                <figure class="presentation-slide" id="apercu-22" aria-roledescription="diapositive" aria-label="22 sur 25">
+                    <img src="captures/lcnda-22.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>22</span>Une fiche "animaux"</figcaption>
+                </figure>
+                
+                <figure class="presentation-slide" id="apercu-23" aria-roledescription="diapositive" aria-label="23 sur 25">
+                    <img src="captures/lcnda-23.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>23</span>Une fiche documentaire</figcaption>
+                </figure>
+               
+                <figure class="presentation-slide" id="apercu-24" aria-roledescription="diapositive" aria-label="24 sur 25">
+                    <img src="captures/lcnda-24.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>24</span>Montage Vidéo</figcaption>
+                </figure>
+                
+                <figure class="presentation-slide" id="apercu-25" aria-roledescription="diapositive" aria-label="25 sur 25">
+                    <img src="captures/lcnda-25.jpg" alt="Monographie de commune" width="1600" height="1034" loading="lazy">
+                    <figcaption><span>25</span>l'outil tableau</figcaption>
+                </figure>
+
+
+                </div>
+                <div class="presentation-carousel-controls">
+                    <button class="button secondary" type="button" data-carousel-prev aria-label="Image précédente">←</button>
+                    <div class="presentation-carousel-dots" role="group" aria-label="Choisir une image"></div>
+                    <button class="button secondary" type="button" data-carousel-next aria-label="Image suivante">→</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="presentation-section" id="en-detail">
+            <header class="presentation-section-head">
+                <span class="eyebrow">04 — EN DÉTAIL</span>
+                <h2>Chaque généalogie est unique, votre logiciel aussi.</h2>
+            </header>
+            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, graphiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
+
+            <div class="presentation-about-grid">
+                <article class="presentation-about about-intro">
+                    <h3>Un logiciel qui s’adapte à votre famille</h3>
+                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements et d’œuvres, profils, blocs, widgets, graphiques et onglets, et vous réglez couleurs, polices et affichage<mark class="maq-new">, jusqu’au style des fiches, à la colonne de gauche et au fond des pages</mark>. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Un carnet de recherche, pas seulement un arbre</h3>
+                    <p>La plupart des logiciels de généalogie servent à enregistrer une famille. LCNDA sert aussi à la chercher :</p>
+                    <ul><li>des enquêtes avec leurs pistes, hypothèses et preuves ;</li><li>des battues pour fouiller les communes voisines, niveau par niveau, sur une carte ;</li><li>la planification de vos visites aux archives ;</li><li>des rappels, un budget de recherche et le suivi de vos courriers.</li></ul>
+                </article>
+                <article class="presentation-about">
+                    <h3>Tout ce qu’il faut pour construire une famille</h3>
+                    <ul><li>Fiches complètes : identité, variantes de nom, parents, conjoints, enfants, adoptions, témoins, parrains et marraines.</li><li>Plus de 60 types d’événements, et les vôtres si besoin.</li><li>Arbres d’ascendants et de descendants, éventails, numérotation Sosa et d’Aboville.</li><li>Recensements, signatures relevées dans les actes, niveau de confiance pour chaque fait.</li></ul>
+                </article>
+                <article class="presentation-about">
+                    <h3>Vos documents au cœur des fiches</h3>
+                    <p>Photos, actes, PDF, sons et vidéos se rattachent aux personnes, aux événements, aux enquêtes ou aux battues. Les sources et les citations accompagnent chaque information, pour savoir toujours d’où elle vient.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Les lieux du monde entier, même hors ligne</h3>
+                    <p>Toutes les communes de France et de plus de 220 autres pays et territoires, avec leurs contours, leurs voisines (même de l’autre côté d’une frontière) et les anciennes communes fusionnées, et plus de 5 millions de localités dans le monde. En tapant un nom de lieu, vous obtenez des suggestions et les coordonnées GPS, sans connexion. Un lieu introuvable peut toujours être saisi librement.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Voir sa famille autrement</h3>
+                    <p>Cartes des naissances, des mariages et des migrations, chronologies, statistiques sur les prénoms, les métiers, les âges au décès… pour repérer d’un coup d’œil ce que les listes ne montrent pas.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Raconter et transmettre</h3>
+                    <p>Une fois l’histoire trouvée, il reste à la partager. Un atelier de mise en page fait <b>le livre de votre famille</b> à partir de vos fiches : gabarits, styles, photos habillées par le texte, couverture, export PDF prêt pour l’imprimeur. Un petit <b>montage vidéo</b> assemble films de famille, photos animées, titres et musique ; des <b>tableaux</b> libres posent l’enquête à plat ; des <b>fiches</b> racontent un pays, un métier, une coutume. Et les animaux de la famille ont aussi leur place.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Toute une vie, pas seulement des dates</h3>
+                    <p>Un ancêtre peintre, musicien, inventeur, sportif ou maire ? Cochez ce qu’il était, et sa fiche s’enrichit de ce qui compte pour lui : œuvres et <b>catalogue raisonné</b>, disques et concerts, brevets, mandats, palmarès, diplômes, articles de presse. Sa <b>maison</b> se redessine pièce par pièce, en plan et en 3D, avec ses meubles et ses habitants au fil des époques.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Lire les actes, d’hier et d’ailleurs</h3>
+                    <p>Un atelier de <b>transcription</b> place l’image de l’acte et votre texte côte à côte, repère les noms, les dates et les lieux, et rend lisible une page pâlie. Un acte en latin, en polonais ou en russe ? Les <b>alphabets d’une quarantaine de langues</b>, avec leurs lettres à accents, aident à reconnaître la langue et à transcrire le cyrillique ou le grec en lettres latines.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3><mark class="maq-new">✨ Les Trésors de famille</mark></h3>
+                    <p><mark class="maq-new">Ce qui ne rentre pas dans un arbre : des <b>lettres aux descendants</b> scellées jusqu’à une date, « À ton âge… », dater une photo, les recettes, chansons et souvenirs des sens, le <b>ciel de naissance</b> d’un ancêtre, une bougie, l’ambiance sonore d’une époque, la <b>gazette</b> de l’année, une broderie au point de croix, un passeport des lieux… à garder, imprimer ou offrir.</mark></p>
+                </article>
+                <article class="presentation-about">
+                    <h3><mark class="maq-new">Un atelier de création complet</mark></h3>
+                    <p><mark class="maq-new">Pas besoin d’autres logiciels : <b>traitement de texte</b> et <b>tableur</b> (publipostage, tableau croisé, solveur), <b>présentations</b>, <b>retouche</b> des photos avec calques, <b>dessin vectoriel</b>, <b>montage vidéo</b>, <b>studio son</b> et <b>votre site web</b>, tous reliés à vos fiches et sans internet.</mark></p>
+                </article>
+                <article class="presentation-about">
+                    <h3><mark class="maq-new">Jouer avec ses ancêtres</mark></h3>
+                    <p><mark class="maq-new">Le jeu de l’oie et ses questions sur la famille, le puzzle d’une photo, le labyrinthe, « Qui est-ce ? » des ancêtres, le memory des portraits, la bonne date, la bataille navale aux navires baptisés du nom des aïeux, le jeu des 7 familles… et <b>108 patiences</b> pour jouer seul.</mark></p>
+                </article>
+                <article class="presentation-about">
+                    <h3><mark class="maq-new">Pour toute la famille</mark></h3>
+                    <p><mark class="maq-new">Un <b>mode simple</b> en gros boutons pour les aînés, protégé par un code, et une <b>accessibilité</b> poussée : contraste élevé, police pour la dyslexie, texte jusqu’à 32 px, lecture à voix haute, animations réduites, « une chose à la fois ».</mark></p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Une base propre et vérifiée</h3>
+                    <p>Un assistant repère les incohérences : enfant né après la mort d’un parent, mariage après un décès, longévité improbable. Il signale aussi les doublons possibles et les familles incomplètes. Un journal garde la trace de chaque modification, et une suppression peut être annulée.</p>
+                </article>
+                <article class="presentation-about">
+                    <h3>Arrivez avec vos données, repartez quand vous voulez</h3>
+                    <ul><li>Import direct des fichiers Hérédis et MacFamilyTree, sans passer par un export : photos, sources et tâches comprises.</li><li>Import et export GEDCOM (5.5.1 et 7), le format d’échange commun à tous les logiciels de généalogie.</li><li>Sauvegarde complète en un seul fichier, avec la base et tous les médias, à garder en lieu sûr ou à ouvrir sur un autre ordinateur.</li></ul>
+                </article>
+            </div>
+
+            <div class="presentation-strengths" aria-label="Les atouts de LCNDA">
+                <div><strong>Modulable et personnalisable</strong><span>L’interface s’organise selon votre généalogie, pas l’inverse.</span></div>
+                <div><strong>Gratuit et libre</strong><span>Licence AGPL-3.0 : pas d’abonnement, pas de version payante, code source ouvert.</span></div>
+                <div><strong>Vos données restent chez vous</strong><span>Aucun compte, aucun envoi sur internet, un fichier SQLite lisible par d’autres outils.</span></div>
+                <div><strong>Fonctionne hors ligne</strong><span>Communes de 226 pays, lieux du monde et fond de carte compris.</span></div>
+                <div><strong>Mac, Windows et Linux</strong><span>La même application partout.</span></div>
+                <div><strong>Pensé pour la recherche</strong><span>Pas seulement pour la saisie<mark class="maq-new"> ; et pour toute la famille, des aînés aux enfants</mark>.</span></div>
+                <div><strong><mark class="maq-new">De l’arbre au livre, au film et au site</mark></strong><span><mark class="maq-new">Mise en page, montage, son et site web pour transmettre ce que vous avez trouvé.</mark></span></div>
+                <div><strong>Arrivée facile</strong><span>Depuis Hérédis, MacFamilyTree ou n’importe quel logiciel compatible GEDCOM.</span></div>
+            </div>
+            <p class="presentation-beta-note">LCNDA est en version bêta : faites des sauvegardes régulières, ce que l’application facilite. Il n’est pas encore signé par Apple ni Microsoft, d’où un avertissement au premier lancement.</p>
+        </section>
+
+        <section class="presentation-section" id="faq">
+            <header class="presentation-section-head">
+                <span class="eyebrow">05 — FAQ</span>
+                <h2>Questions fréquentes.</h2>
+                <p>Comment faire ceci ou cela dans LCNDA.</p>
+            </header>
+            <div class="presentation-faq-box">
+                <h3>Questions fréquentes</h3>
+                <input class="presentation-faq-search" id="faq-search" type="search" placeholder="🔎 Pose ta question : comment faire un livre de famille en PDF ?" aria-label="Rechercher dans la FAQ" autocomplete="off">
+                <p class="presentation-faq-hint" id="faq-count">Comment faire ceci ou cela dans LCNDA.</p>
+                <p class="presentation-faq-empty" id="faq-empty" hidden>Aucune question ne correspond à cette recherche.</p>
+                <div id="faq-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="presentation-footer">
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.8.2 · LICENCE AGPL-3.0</span>
+        <a href="#haut">Retour en haut ↑</a>
+    </footer>
+    <script src="faq-data.js"></script>
+    <script>
+    // FAQ : questions rangées par thème dans un cadre de la section 5, dépliables, avec recherche.
+    (() => {
+        const list = document.getElementById('faq-list');
+        const input = document.getElementById('faq-search');
+        const empty = document.getElementById('faq-empty');
+        const count = document.getElementById('faq-count');
+        if (!list) return;
+        if (typeof FAQ === 'undefined' || !Array.isArray(FAQ)) {
+            empty.textContent = 'La FAQ n’a pas pu être chargée : le fichier faq-data.js doit être placé à côté de index.html.';
+            empty.hidden = false;
+            input.disabled = true;
+            return;
+        }
+        const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+        let nb = 0;
+        const cats = FAQ.map(([title, items]) => {
+            const box = el('div', 'presentation-faq-cat');
+            const h = el('h3', '', title);
+            h.appendChild(el('small', '', String(items.length)));
+            box.appendChild(h);
+            const rows = items.map(([q, a]) => {
+                const d = el('details', 'presentation-faq-item');
+                d.appendChild(el('summary', '', q));
+                d.appendChild(el('p', '', a));
+                box.appendChild(d);
+                nb++;
+                return { d, text: norm(q + ' ' + a) };
+            });
+            list.appendChild(box);
+            return { box, rows };
+        });
+        count.textContent = 'Comment faire ceci ou cela dans LCNDA : ' + nb + ' question' + (nb > 1 ? 's' : '') + '.';
+
+        input.addEventListener('input', () => {
+            const words = norm(input.value).split(/\s+/).filter(Boolean);
+            let total = 0;
+            cats.forEach(({ box, rows }) => {
+                let shown = 0;
+                rows.forEach(({ d, text }) => {
+                    const ok = words.every(w => text.includes(w));
+                    d.hidden = !ok;
+                    d.open = ok && words.length > 0;
+                    if (ok) shown++;
+                });
+                box.hidden = shown === 0;
+                total += shown;
+            });
+            empty.hidden = total > 0;
+        });
+    })();
+    </script>
+    <script>
+    // Carrousel de l'aperçu : il ne défile jamais tout seul (flèches, points, clavier, glissement au doigt).
+    (() => {
+        const track = document.querySelector('.presentation-carousel-track');
+        if (!track) return;
+        const slides = [...track.querySelectorAll('.presentation-slide')];
+        const prev = document.querySelector('[data-carousel-prev]');
+        const next = document.querySelector('[data-carousel-next]');
+        const dotsBox = document.querySelector('.presentation-carousel-dots');
+        const dots = slides.map((_, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', 'Image ' + (i + 1));
+            dot.addEventListener('click', () => go(i));
+            dotsBox.appendChild(dot);
+            return dot;
+        });
+        const current = () => Math.round(track.scrollLeft / track.clientWidth);
+        const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * track.clientWidth });
+        const refresh = () => {
+            const i = current();
+            dots.forEach((dot, k) => dot.setAttribute('aria-current', k === i ? 'true' : 'false'));
+            prev.disabled = i <= 0;
+            next.disabled = i >= slides.length - 1;
+        };
+        prev.addEventListener('click', () => go(current() - 1));
+        next.addEventListener('click', () => go(current() + 1));
+        track.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+            if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+        });
+        track.addEventListener('scroll', () => window.requestAnimationFrame(refresh), { passive: true });
+        window.addEventListener('resize', refresh);
+        refresh();
+    })();
+    </script>
+<div class="maq-bar" role="region" aria-label="Maquette"><span>Maquette 0.9.0 · textes proposés <mark class="maq-new" style="color:#111;background:#fff1a8">surlignés</mark></span><button type="button" onclick="document.documentElement.classList.toggle('maq-plain');this.textContent=document.documentElement.classList.contains('maq-plain')?'Montrer le surlignage':'Voir sans surlignage'">Voir sans surlignage</button></div></body>
+</html>
