@@ -132,7 +132,7 @@
                     why: [['👍', '<b>Le plus épuré</b> : « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol.'], ['👎', 'Peut se confondre avec un lien ; demande un peu d’habitude.']]},
             ],
             settings: [
-                {k: 'size', type: 'select', label: 'Taille', options: [['petite', 'Petite (34 px)'], ['normale', 'Normale, 42 px (comme avant)'], ['grande', 'Grande (50 px)']], why: 'La hauteur et la marge des boutons : les grands sont plus faciles à viser, surtout sur une tablette ; les petits laissent plus de place au contenu. La taille des lettres reste celle de l’Apparence.'},
+                {k: 'size', type: 'select', label: 'Taille', options: [['mini', 'Très petite (30 px)'], ['petite', 'Petite (34 px)'], ['moins', 'Un peu petite (38 px)'], ['normale', 'Normale, 42 px (comme avant)'], ['plus', 'Un peu grande (46 px)'], ['grande', 'Grande (50 px)'], ['tresgrande', 'Très grande (56 px)'], ['enorme', 'Énorme (62 px)']], why: 'La hauteur et la marge des boutons : les grands sont plus faciles à viser, surtout sur une tablette ; les petits laissent plus de place au contenu. La taille des lettres reste celle de l’Apparence.'},
                 {k: 'shadow', type: 'toggle', label: 'Ombre', text: 'Une ombre sous les boutons', why: 'L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune).'},
                 {k: 'shape', type: 'select', label: 'Coins', options: [['blocs', 'Comme les blocs (réglage A1)'], ['pilule', 'Bien ronds (pilule)']], why: 'Des boutons bien ronds se distinguent des cadres et des champs ; comme les blocs, tout reste cohérent.'},
             ]},

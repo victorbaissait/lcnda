@@ -199,6 +199,21 @@
 :root[data-lc-bsize="grande"] .button:not(.small) { min-height: 50px; padding: 14px 20px; }
 :root[data-lc-bsize="grande"] .button.small { min-height: 38px; padding: 8px 13px; }
 :root[data-lc-bsize="grande"] .icon-button { width: 44px; height: 44px; }
+:root[data-lc-bsize="mini"] .button:not(.small) { min-height: 30px; padding: 5px 10px; }
+:root[data-lc-bsize="mini"] .button.small { min-height: 24px; padding: 3px 7px; }
+:root[data-lc-bsize="mini"] .icon-button { width: 28px; height: 28px; }
+:root[data-lc-bsize="moins"] .button:not(.small) { min-height: 38px; padding: 9px 14px; }
+:root[data-lc-bsize="moins"] .button.small { min-height: 30px; padding: 5px 9px; }
+:root[data-lc-bsize="moins"] .icon-button { width: 36px; height: 36px; }
+:root[data-lc-bsize="plus"] .button:not(.small) { min-height: 46px; padding: 12px 18px; }
+:root[data-lc-bsize="plus"] .button.small { min-height: 34px; padding: 7px 11px; }
+:root[data-lc-bsize="plus"] .icon-button { width: 40px; height: 40px; }
+:root[data-lc-bsize="tresgrande"] .button:not(.small) { min-height: 56px; padding: 16px 23px; }
+:root[data-lc-bsize="tresgrande"] .button.small { min-height: 42px; padding: 10px 15px; }
+:root[data-lc-bsize="tresgrande"] .icon-button { width: 50px; height: 50px; }
+:root[data-lc-bsize="enorme"] .button:not(.small) { min-height: 62px; padding: 19px 26px; }
+:root[data-lc-bsize="enorme"] .button.small { min-height: 46px; padding: 12px 17px; }
+:root[data-lc-bsize="enorme"] .icon-button { width: 56px; height: 56px; }
 :root[data-lc-bshadow="off"] :is(.button, .icon-button, .button:hover, .icon-button:hover, .button.small) { box-shadow: none !important; }
 :root[data-lc-bshape="pilule"] :is(.button, .icon-button, .ui-toast-btn) { border-radius: 999px; }
 

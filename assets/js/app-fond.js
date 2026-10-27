@@ -1,7 +1,7 @@
 /* LCNDA — 🧩 Fond des pages (Réglages → Thème et couleurs ; maquette validée docs/design/fond-des-pages.html).
  *
- * Ce qu'on voit derrière les blocs : 9 fonds (petits carreaux = le départ, uni, pointillés, cahier ligné, papier millimétré,
- * grain de papier, toile, dégradé, ma photo), la taille du motif, son intensité, sa couleur, et les pages concernées.
+ * Ce qu'on voit derrière les blocs : 15 fonds (petits carreaux = le départ, uni, pointillés, cahier ligné, papier millimétré,
+ * grain de papier, toile, dégradé, registre, papier vergé, arbre en filigrane, cartes anciennes, tomettes, halo, ma photo), la taille du motif, son intensité, sa couleur, et les pages concernées.
  * Gardé dans 'genealogie-design' avec le reste de Thème et couleurs (champs cachés du formulaire #design-form :
  * bgKind, bgSize, bgInt, bgColor, bgWhere, bgBlur ; « grid » = 'off' pour Uni, comme avant) : il voyage avec les
  * réglages enregistrés et le défaut du site. La photo n'y est pas (trop lourde) : 'genealogie-bg-photo', sur cet
@@ -19,7 +19,10 @@
     const KINDS = [
         ['carreaux', 'Petits carreaux', 'comme aujourd’hui'], ['uni', 'Uni', 'rien derrière, le plus calme'], ['points', 'Pointillés', 'une grille de petits points'],
         ['ligne', 'Cahier ligné', 'lignes et marge rouge'], ['milli', 'Papier millimétré', 'fin, trait plus fort tous les 5'], ['grain', 'Grain de papier', 'va bien avec « Archive papier »'],
-        ['toile', 'Toile', 'tissage léger, album de famille'], ['degrade', 'Dégradé', 'du papier vers la couleur'], ['photo', 'Ma photo', 'pâle et floutée derrière']];
+        ['toile', 'Toile', 'tissage léger, album de famille'], ['degrade', 'Dégradé', 'du papier vers la couleur'],
+        ['registre', 'Registre', 'lignes et double marge, comme l’état civil'], ['verge', 'Papier vergé', 'fines rayures des vieux papiers'], ['arbre', 'Arbre en filigrane', 'de petites branches, très pâles'],
+        ['cartes', 'Cartes anciennes', 'courbes de niveau, esprit voyages'], ['tomettes', 'Tomettes', 'hexagones de la maison de famille'], ['halo', 'Halo', 'bords à peine teintés, vieille photo'],
+        ['photo', 'Ma photo', 'pâle et floutée derrière']];
     const SIZES = {s: 18, m: 28, l: 44};
     const COLORS = [['avant', '#0066cc', 'Bleu pâle (comme avant)'], ['gris', '#3c3c3c', 'Gris neutre'], ['principale', '', 'Couleur principale (suit l’Apparence)'], ['sepia', '#8b5a2b', 'Sépia'], ['theme', '', 'Les traits de mon thème (✎ Mes thèmes)']];
     const AREAS = [['dash', 'Tableau de bord', ['dashboard']], ['fiche', 'Personnes et fiches', ['personnes']], ['graph', 'Graphiques et arbres', ['graphiques']],
@@ -60,11 +63,22 @@
                 return {img: `radial-gradient(${rgba(2.2)} 1px, transparent 1.2px), url("data:image/svg+xml;utf8,${encodeURIComponent(noise)}")`, size: `${Math.max(4, Math.round(z * .22))}px ${Math.max(4, Math.round(z * .22))}px, 160px 160px`}; }
             case 'toile': { const s = Math.max(4, Math.round(z / 5)); return {img: `repeating-linear-gradient(45deg, ${rgba(1.6)} 0 1px, transparent 1px ${s}px), repeating-linear-gradient(-45deg, ${rgba(1.6)} 0 1px, transparent 1px ${s}px)`, size: 'auto'}; }
             case 'degrade': return {img: `linear-gradient(180deg, transparent 0%, ${rgba(4)} 100%)`, size: '100% 100%'};
+            case 'registre': { const m = small ? 14 : 38, ink = rgba(4); return {img: `linear-gradient(90deg, transparent ${m}px, ${ink} ${m}px, ${ink} ${m + 1}px, transparent ${m + 1}px, transparent ${m + 4}px, ${ink} ${m + 4}px, ${ink} ${m + 5}px, transparent ${m + 5}px), linear-gradient(transparent ${z - 1}px, ${rgba(2.5)} ${z - 1}px)`, size: `100% 100%, 100% ${z}px`}; }
+            case 'verge': { const v = Math.max(3, Math.round(z / 9)); return {img: `linear-gradient(90deg, transparent ${z * 3 - 1}px, ${rgba(2.6)} ${z * 3 - 1}px), repeating-linear-gradient(0deg, ${rgba(1.1)} 0 1px, transparent 1px ${v}px)`, size: `${z * 3}px 100%, auto`}; }
+            case 'arbre': { const t = z * 4, st = rgba(4.5);
+                return {img: svgUrl(t, t, `<g fill='none' stroke='${st}' stroke-width='1.2' stroke-linecap='round'><path d='M${t * .25} ${t * .62}V${t * .4}M${t * .25} ${t * .5}L${t * .15} ${t * .42}M${t * .25} ${t * .46}L${t * .34} ${t * .36}M${t * .15} ${t * .42}L${t * .1} ${t * .37}M${t * .34} ${t * .36}L${t * .38} ${t * .3}'/><path d='M${t * .75} ${t * .12}V${t * -.1}M${t * .75} ${t * .02}L${t * .66} ${t * -.05}M${t * .75} ${t * -.02}L${t * .84} ${t * -.1}' transform='translate(0 ${t * .5})'/></g><g fill='${st}'><circle cx='${t * .1}' cy='${t * .36}' r='1.6'/><circle cx='${t * .38}' cy='${t * .29}' r='1.6'/><circle cx='${t * .25}' cy='${t * .39}' r='1.6'/><circle cx='${t * .66}' cy='${t * .44}' r='1.6'/><circle cx='${t * .84}' cy='${t * .4}' r='1.6'/></g>`), size: `${t}px ${t}px`}; }
+            case 'cartes': { const t = z * 6, st = rgba(3.5), d = k => `M0 ${t * k} C${t * .25} ${t * (k - .08)} ${t * .5} ${t * (k + .1)} ${t * .75} ${t * (k - .03)} S${t} ${t * k} ${t} ${t * k}`;
+                return {img: svgUrl(t, t, `<g fill='none' stroke='${st}' stroke-width='1'>${[.12, .3, .48, .66, .84].map(k => `<path d='${d(k)}'/>`).join('')}<ellipse cx='${t * .7}' cy='${t * .38}' rx='${t * .09}' ry='${t * .05}'/><ellipse cx='${t * .7}' cy='${t * .38}' rx='${t * .04}' ry='${t * .022}'/></g>`), size: `${t}px ${t}px`}; }
+            case 'tomettes': { const r = z * .6, w = r * Math.sqrt(3), h = r * 3, st = rgba(3), hx = (cx, cy) => `M${[0, 1, 2, 3, 4, 5].map(i => { const an = Math.PI / 3 * i + Math.PI / 6; return `${(cx + r * Math.cos(an)).toFixed(1)} ${(cy + r * Math.sin(an)).toFixed(1)}`; }).join('L')}Z`;
+                return {img: svgUrl(w, h, `<g fill='none' stroke='${st}' stroke-width='1'><path d='${hx(w / 2, r)}'/><path d='${hx(0, r * 2.5)}'/><path d='${hx(w, r * 2.5)}'/></g>`), size: `${w.toFixed(1)}px ${h}px`}; }
+            case 'halo': return {img: `radial-gradient(ellipse at center, transparent 45%, ${rgba(5)} 100%)`, size: '100% 100%'};
             case 'photo': { const url = small ? (photo() || DEMO) : (blurred.url || ''); if (!url) return {img: 'none', size: 'auto'};
                 const veil = `color-mix(in srgb, var(--paper, #fff) ${Math.round(96 - F.int * 6)}%, transparent)`; return {img: `linear-gradient(${veil}, ${veil}), url("${url}")`, size: 'cover', photo: true}; }
             default: return {img: 'none', size: 'auto'};
         }
     }
+    /** un petit dessin SVG répété (arbre, cartes, tomettes) */
+    const svgUrl = (w, h, inner) => `url("data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='${w.toFixed ? +w.toFixed(1) : w}' height='${+Number(h).toFixed(1)}' viewBox='0 0 ${+Number(w).toFixed(1)} ${+Number(h).toFixed(1)}'>${inner}</svg>`)}")`;
     // une maison dessinée : la vignette « Ma photo » tant qu'il n'y a pas de photo
     const DEMO = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260"><rect width="400" height="260" fill="#cfe1f0"/><rect y="170" width="400" height="90" fill="#8fb36b"/><polygon points="120,110 210,50 300,110" fill="#9c4a2f"/><rect x="135" y="110" width="150" height="90" fill="#e9d8b8"/><rect x="160" y="130" width="28" height="28" fill="#5a7d9a"/><rect x="232" y="130" width="28" height="28" fill="#5a7d9a"/><rect x="198" y="155" width="26" height="45" fill="#6b4226"/><circle cx="330" cy="60" r="26" fill="#f5d36b"/><circle cx="60" cy="150" r="38" fill="#4f7d3a"/></svg>');
 
@@ -157,7 +171,7 @@
             $('[data-lcf-set="photo"]').hidden = F.kind !== 'photo';
             $('[data-lcf-pname]').textContent = photo() ? '✓ une photo est choisie' : 'Pas encore de photo : fond uni en attendant.';
             $('[data-lcf-nophoto]').hidden = !photo();
-            $('[data-lcf-set="size"]').classList.toggle('is-off', ['uni', 'photo', 'degrade'].includes(F.kind));
+            $('[data-lcf-set="size"]').classList.toggle('is-off', ['uni', 'photo', 'degrade', 'halo'].includes(F.kind));
             $('[data-lcf-set="color"]').classList.toggle('is-off', ['uni', 'photo'].includes(F.kind));
             $('[data-lcf-set="int"]').classList.toggle('is-off', F.kind === 'uni');
             // l'aperçu
