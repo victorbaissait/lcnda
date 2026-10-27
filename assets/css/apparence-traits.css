@@ -1,6 +1,6 @@
 /* LCNDA — traits qui entourent d’un thème à soi (« ✎ Mes thèmes », et A1 de 🎨 Designs au choix).
  * FICHIER FABRIQUÉ par scripts/build-frame-css.py : ne pas modifier à la main. */
-:root.lc-frame, :root [data-lc-lines] {--line:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame, :root[data-lc-lines], :root [data-lc-lines] {--line:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 /* app.css */
 :root.lc-frame .topbar, :root .topbar:is([data-lc-lines], [data-lc-lines] *) {border-bottom:var(--line)}
 :root.lc-frame .brand, :root .brand:is([data-lc-lines], [data-lc-lines] *) {border-right:var(--line)}

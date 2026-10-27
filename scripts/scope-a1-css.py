@@ -81,8 +81,8 @@ def scope_one(sel):
         head, S = m.group(1) + others + extra, ''.join(sp)
         if not S:
             out.append(head + rest)
-        elif not rest.strip():
-            out.append(head + ' ' + S)
+        elif not rest.strip():  # des variables : sur l'élément qui porte l'attribut ; aussi sur <html> lui-même (les aperçus)
+            out.append(head + S); out.append(head + ' ' + S)
         else:
             i = last_compound_start(rest)
             comp = rest[i:]
