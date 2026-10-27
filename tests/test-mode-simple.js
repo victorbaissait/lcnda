@@ -254,10 +254,10 @@ const ok = (msg) => console.log('  ✓ ' + msg);
         assert.match(await page.evaluate(() => document.querySelector('[data-ms-pv-host] .ms').style.getPropertyValue('--font')), /Atkinson/);
         await page.evaluate(() => { const r = document.querySelector('[data-ms-range="fs"]'); if (r.value !== '30') { r.value = '30'; r.dispatchEvent(new Event('change', {bubbles: true})); } }); await page.waitForTimeout(300);
         assert.equal(await page.evaluate(() => document.querySelector('[data-ms-pv-host] .ms').style.getPropertyValue('--fs')), '30px');
-        // « Pareil que l'app » : la taille du texte de toute l'app (120 %) s'applique aussi ; « Propre au mode simple » : non
-        await page.evaluate(() => window.LCNDA_EXT.access.set('size', 120)); const e1 = await page.evaluate(() => window.LCNDA_EXT.modeSimple.eff(window.LCNDA_EXT.modeSimple.settings()).fs);
+        // « Pareil que l'app » : la taille du texte de toute l'app (Thème et couleurs, 119 %) s'applique aussi ; « Propre au mode simple » : non
+        await page.evaluate(() => { const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); d.fontScale = '1.19'; localStorage.setItem('genealogie-design', JSON.stringify(d)); }); const e1 = await page.evaluate(() => window.LCNDA_EXT.modeSimple.eff(window.LCNDA_EXT.modeSimple.settings()).fs);
         await page.click('[data-ms-link="size"] + i'); await page.waitForTimeout(300); const e2 = await page.evaluate(() => window.LCNDA_EXT.modeSimple.eff(window.LCNDA_EXT.modeSimple.settings()).fs);
-        await page.evaluate(() => window.LCNDA_EXT.access.set('size', 100));
+        await page.evaluate(() => { const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); delete d.fontScale; localStorage.setItem('genealogie-design', JSON.stringify(d)); });
         assert.deepEqual([e1, e2], [36, 30]);
         // vivants cachés, puis le code de sortie (haché)
         await page.click('[data-ms-set="living"][data-v="hide"]'); await page.waitForTimeout(200);

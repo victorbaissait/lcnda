@@ -23,4 +23,13 @@ t('un seul fichier pose chaque classe du mode sombre, de l’Accessibilité et d
     const all = fs.readdirSync(path.join(__dirname, '..', 'assets/js')).filter(f => f.endsWith('.js')).map(f => read('assets/js/' + f)).join('\n');
     assert.doesNotMatch(all, /documentElement\.className\s*=|documentElement\.style\.cssText\s*=|document\.body\.className\s*=/);
 });
+t('taille du texte : un seul réglage (Thème et couleurs) ; l’ancien curseur d’Accessibilité est repris une fois au cran le plus proche', () => {
+    const acc = read('assets/js/app-access.js');
+    assert.doesNotMatch(acc, /\$\{range\('size', 'Taille du texte'/, 'plus de curseur dans Accessibilité');
+    assert.match(acc, /data-a11y-go-theme/); assert.match(acc, /function moveSize\(\)/); assert.match(acc, /function apply\(\) \{\n\s*moveSize\(\);/);
+    assert.match(read('assets/js/app.js'), /value="2" \$\{design\.fontScale==='2'\?'selected':''\}>Très gros caractères \(32px\)/);
+});
+t('colonne « Compacte » et Densité : chacun sa zone, pas d’addition dans la colonne', () => {
+    assert.match(read('assets/css/app.css'), /:root\[data-lc-col-size\] #sidebar \{ --lc-sp: 1; --lc-rowh: 38px; \}/);
+});
 console.log(`✓ réglages croisés : ${n} vérifications`);

@@ -270,7 +270,7 @@
         tabs: ['Onglets du haut', 'lck-vis4', [['avant', 'Comme avant', 'chaque outil le sien', '<span class="lck-mt"><em>Carte</em><em>🔎</em><em>▦ Vues</em></span>'], ['ligne', 'Icône + nom', 'sur une ligne', '<span class="lck-mt"><em>🗺 Carte</em><em>📌 Lieux</em></span>'],
             ['dessus', 'Icône au-dessus', 'du nom', '<span class="lck-mt col"><em>🗺<br>Carte</em><em>📌<br>Lieux</em></span>'], ['texte', 'Nom seul', 'sans icône', '<span class="lck-mt"><em>Carte</em><em>Lieux</em></span>']]],
         nums: ['Numéros', 'lck-vis3', [['suite', 'Qui se suivent', '', '<span class="lck-mn">01 · 02 · 03</span>'], ['origine', 'Lettres d’origine', '', '<span class="lck-mn">01 · A · S1</span>'], ['aucun', 'Pas de numéros', '', '<span class="lck-mn">—</span>']]],
-        size: ['Taille des entrées', 'lck-vis2', [['normale', 'Normale', '', '<span class="lck-mz"><i></i><i></i><i></i></span>'], ['compacte', 'Compacte', '', '<span class="lck-mz c"><i></i><i></i><i></i><i></i><i></i></span>']]],
+        size: ['Taille des entrées', 'lck-vis2', [['normale', 'Normale', '', '<span class="lck-mz"><i></i><i></i><i></i></span>'], ['compacte', 'Compacte', 'la Densité ne s’y ajoute pas', '<span class="lck-mz c"><i></i><i></i><i></i><i></i><i></i></span>']]],
         lf: ['« Liste | Fiches »', 'lck-vis2', [['barre', 'Dans la barre au-dessus', 'juste au-dessus de la liste', '<span class="lck-ml"><b>Liste | Fiches</b><i></i><i></i></span>'], ['bas', 'En bas de la colonne', 'là où il était', '<span class="lck-ml"><i></i><i></i><b>Liste | Fiches</b></span>']]],
     };
     const numsOf = S => (S.nums ? S.numstyle : 'aucun');

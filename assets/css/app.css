@@ -4257,6 +4257,8 @@ dialog .modal-actions > :is(.danger:not([type=submit]), [data-h-delete]) { margi
 :root[data-lc-col-style="aeree"] #sidebar-content .section-label:has(+ .side-menu) { border: 0; padding: 16px 12px 6px; background: transparent; }
 :root[data-lc-col-style="aeree"] #sidebar-content .segmented:has(+ :is(.side-menu, .section-label, .person-list, .saved-list)) { margin-bottom: 8px; }
 /* taille compacte */
+/* la colonne a son propre réglage de taille : la Densité (Menus, colonne et listes) ne s’y ajoute plus — chacun règle sa zone */
+:root[data-lc-col-size] #sidebar { --lc-sp: 1; --lc-rowh: 38px; }
 :root[data-lc-col-size="compacte"] #sidebar-content :is(.side-menu-item, .saved-item, .dashboard-widget-catalog-item) { padding-top: 5px; padding-bottom: 5px; min-height: 26px; font-size: 12.5px; }
 :root[data-lc-col-size="compacte"] #sidebar-content .person-list-item { padding-top: 7px; padding-bottom: 7px; }
 :root[data-lc-col-size="compacte"]:not([data-lc-col-style]) #sidebar-content :is(.side-menu, .person-list, .saved-list) { gap: 5px; }

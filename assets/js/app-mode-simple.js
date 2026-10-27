@@ -132,7 +132,7 @@
     const setDev = patch => { const d = {...dev(), ...patch}; Object.keys(d).forEach(k => d[k] === undefined && delete d[k]); lsSet(DEV, d); };
 
     /* l'accessibilité de toute l'app (♿ Toute l'app) : ce qui « vaut aussi ici » */
-    const appA11y = () => { const a = ext.access?.get?.() || {}; return {cb: a.cb || 'none', contrast: !!a.contrast, size: Number(a.size) || 100, calm: !!a.calm, rate: Math.round((Number(a.rate) || 1) * 100), voice: a.voice || ''}; };
+    const appA11y = () => { const a = ext.access?.get?.() || {}; return {cb: a.cb || 'none', contrast: !!a.contrast, size: (() => { try { return Math.round((Number(JSON.parse(localStorage.getItem('genealogie-design') || '{}').fontScale) || 1) * 100); } catch (_) { return 100; } })() /* la taille du texte de l'app : Thème et couleurs */, calm: !!a.calm, rate: Math.round((Number(a.rate) || 1) * 100), voice: a.voice || ''}; };
     const reduceOs = () => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) { return false; } };
     /* ═════ Couleurs : thèmes, contraste mesuré (WCAG), « Corriger » ═════ */
     const PAL = {
@@ -1156,7 +1156,7 @@
             <p class="ms-goapp"><button type="button" class="link-button" data-ms-tab="app">♿ Voir les réglages de toute l’app</button></p>
             ${linkRow('cb', '🎨', 'Daltonisme', apCb[ap.cb] || 'Normal', `<select data-ms-sel="cb" aria-label="Daltonisme propre au mode simple">${['none', 'protan', 'deutan', 'tritan', 'achroma'].map(k => `<option value="${k}" ${s.cb === k ? 'selected' : ''}>${apCb[k]}</option>`).join('')}</select>`)}
             ${linkRow('contrast', '🌓', 'Contraste', ap.contrast ? 'élevé' : 'normal', tg('data-ms-bool="contrast"', s.contrast, 'Contraste fort dans le mode simple'))}
-            ${linkRow('size', '🔤', 'Taille du texte', ap.size + ' %', '<span class="muted">La taille de la section « Tailles » s’applique telle quelle.</span>')}
+            ${linkRow('size', '🔤', 'Taille du texte (Thème et couleurs)', ap.size + ' %', '<span class="muted">La taille de la section « Tailles » s’applique telle quelle.</span>')}
             ${linkRow('motion', '🎞', 'Réduire les mouvements', ap.calm ? 'oui' : 'non', tg('data-ms-bool="calm"', s.calm, 'Moins d’animations dans le mode simple'))}
             ${linkRow('voice', '🔊', 'Lecture à voix haute', 'vitesse ' + ap.rate + ' %', '<span class="muted">La voix et la vitesse de la section « Voix » s’appliquent.</span>')}
         </section>

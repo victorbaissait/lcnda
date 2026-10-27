@@ -88,7 +88,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         G.a1.r = 12; G.a7.size = 115; D.write(G);
         window.LCNDA_PORTRAITS.write({...window.LCNDA_PORTRAITS.read(), mode: 'rond', m: '#112233'});
         window.LCNDA_COLUMN.write({...window.LCNDA_COLUMN.read(), mode: 'nouveau', width: 360});
-        window.LCNDA_EXT.access.set({size: 120, contrast: true, font: 'legible'});
+        window.LCNDA_EXT.access.set({contrast: true, font: 'legible'}); // (la taille du texte est dans Thème et couleurs)
         const MS = window.LCNDA_EXT.modeSimple;
         MS.write({...MS.settings(), ready: true, viewer: 2, theme: 'sepia', fs: 30, useCode: true, codeHash: MS.makeCodeHash('1234'), hiddenPhotos: [5, 6]});
         localStorage.setItem('lcnda-sort:listes:media', 'az');
@@ -162,7 +162,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         assert.equal(s.attrs['data-lc-portraits'], 'rond'); assert.equal(s.portraits.mode, 'rond'); assert.equal(s.portraits.m, '#112233');
         assert.equal(s.column.mode, 'nouveau'); assert.equal(s.column.width, 360); assert.equal(s.sidebar, '360px');
         assert.equal(s.design.preset, 'dark'); assert.equal(s.design.blue, '#aa0000');
-        if (access) { assert.equal(s.access.size, 120); assert.equal(s.access.contrast, true); assert.ok(s.cls.includes('a11y-contrast') && s.cls.includes('a11y-zoom'), 'classes a11y'); }
+        if (access) { assert.equal(s.access.contrast, true); assert.ok(s.cls.includes('a11y-contrast') && s.cls.includes('a11y-font'), 'classes a11y'); }
         if (ms) { assert.equal(s.ms.theme, 'sepia'); assert.equal(s.ms.fs, 30); }
         if (lists) { assert.equal(s.sort, 'az'); assert.equal(s.view, 'cards'); assert.equal(s.bar?.sort, 'az'); assert.equal(s.bar?.view, 'cards'); }
     };

@@ -68,7 +68,7 @@
                     why: [['👍', '<b>Plus d’informations à l’écran</b> : parfait pour les longues listes et les petits écrans.'], ['👎', 'Les cibles sont plus petites : demande plus de précision à la souris.']]},
             ],
             settings: [
-                {k: 'sp', type: 'range', label: 'Espace dans les blocs', min: 60, max: 140, step: 5, unit: '%', why: 'Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence et la colonne de gauche compacte restent à part et s’ajoutent.'},
+                {k: 'sp', type: 'range', label: 'Espace dans les blocs', min: 60, max: 140, step: 5, unit: '%', why: 'Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence reste à part et s’ajoute ; une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : la Densité ne la touche pas.'},
                 {k: 'rowh', type: 'range', label: 'Hauteur des lignes', min: 24, max: 56, step: 1, unit: 'px', why: 'Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles.'},
                 {k: 'auto', type: 'toggle', label: 'Petit écran', text: 'Passer en compact tout seul sur un petit écran', why: 'Sur un téléphone ou une tablette, l’app se resserre d’elle-même, puis reprend ton réglage sur le grand écran.'},
             ]},
@@ -1141,7 +1141,7 @@
         embedFrame(host.querySelector('[data-lcd-a1-part]'), 'a1', 'Style des fiches', 'Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne)');
     };
     /** le cadre « Boutons » (A6) à la fin de Réglages → Notifications et boutons */
-    ext.designsA2Frame = host => embedFrame(host, 'a2', 'Densité', 'L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Les traits et les ombres suivent');
+    ext.designsA2Frame = host => embedFrame(host, 'a2', 'Densité', 'L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas');
     ext.designsA3Frame = host => embedFrame(host, 'a3', 'Icônes', 'Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent');
     ext.designsA8Frame = host => embedFrame(host, 'a8', 'Forme des listes', 'Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent');
     ext.designsA7Frame = host => embedFrame(host, 'a7', 'Mouvements', 'Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle');

@@ -130,7 +130,21 @@
     const comicInstalled = () => (comicInstalled.v ??= ['Comic Sans MS', 'Comic Sans'].some(fontExists));
 
     const CLASSES = ['a11y-filter', 'a11y-safe', 'a11y-shapes', 'a11y-zoom', 'a11y-lh', 'a11y-spacing', 'a11y-font', 'a11y-underline', 'a11y-contrast', 'a11y-focus', 'a11y-big', 'a11y-cursor', 'a11y-calm', 'a11y-sim', 'a11y-subs', 'a11y-alt', 'a11y-simple', 'a11y-dictate'];
+    /* La taille du texte se règle dans Réglages → Thème et couleurs (« Taille typographique ») : l'ancien curseur d'ici
+       (90–160 %) est repris une fois, au cran le plus proche (même taille à l'écran), puis remis à 100 %. */
+    const SCALES = [0.82, 0.88, 0.94, 1, 1.06, 1.13, 1.19, 1.25, 1.38, 1.5, 1.63, 1.75, 2];
+    function moveSize() {
+        if (P.size === 100) return;
+        try {
+            const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}') || {}, want = (Number(d.fontScale) || 1) * P.size / 100;
+            const best = SCALES.reduce((a, b) => (Math.abs(b - want) < Math.abs(a - want) ? b : a), 1);
+            d.fontScale = String(best); localStorage.setItem('genealogie-design', JSON.stringify(d));
+            const f = document.querySelector('#design-form [name="fontScale"]'); if (f) f.value = String(best);
+        } catch (_) {}
+        P.size = 100; save(); A().applyDesign?.();
+    }
     function apply() {
+        moveSize();
         const on = {
             'a11y-safe': P.safe, 'a11y-shapes': P.shapes, 'a11y-zoom': P.size !== 100, 'a11y-lh': P.lh != null,
             'a11y-spacing': P.ls > 0 || P.ws > 0, 'a11y-font': P.font !== 'app', 'a11y-underline': P.underline, 'a11y-contrast': P.contrast,
@@ -746,9 +760,9 @@
                 <div class="a11y-simbtns">${Object.keys(CB).filter(k => CB[k].m).map(k => `<button type="button" class="button small ${sim === k ? '' : 'secondary'}" data-a11y-sim="${k}">${esc(CB[k].label)}</button>`).join('')}${sim ? '<button type="button" class="button small secondary" data-a11y-sim="">Arrêter</button>' : ''}</div></div>
         </section>
 
-        <section class="maintenance-panel a11y-sec" id="a11y-text"><h3>🔤 Texte ${help('La taille agrandit l’écran principal, la colonne de gauche et les fenêtres. Les outils en plein écran (dessin, mise en page, montage) gardent leur taille.')}</h3>
-            <p class="muted">Plus gros, plus aéré, une police plus facile à lire. Recommandé pour la dyslexie : interligne 1,5, lettres + 12 %, mots + 16 %.</p>
-            ${range('size', 'Taille du texte', {min: 90, max: 160, step: 5, unit: '%', def: 100})}
+        <section class="maintenance-panel a11y-sec" id="a11y-text"><h3>🔤 Texte ${help('L’interligne, les espaces et la police. La taille du texte de toute l’app se règle dans Thème et couleurs (Taille typographique).')}</h3>
+            <p class="muted">Plus aéré, une police plus facile à lire. Recommandé pour la dyslexie : interligne 1,5, lettres + 12 %, mots + 16 %.</p>
+            <p class="a11y-row a11y-size-moved">🔤 <span>La <b>taille du texte</b> se règle dans <button type="button" class="link-button" data-a11y-go-theme>Thème et couleurs → Taille typographique</button> (jusqu’à 32 px).</span></p>
             ${range('lh', 'Interligne <small>(auto = comme l’app)</small>', {min: 1, max: 2, step: 0.1, dec: 1, def: 1.5, autoText: 'auto'})}
             ${range('ls', 'Espace entre les lettres', {min: 0, max: 0.2, step: 0.01, unit: '%', factor: 100, def: 0})}
             ${range('ws', 'Espace entre les mots', {min: 0, max: 0.5, step: 0.02, unit: '%', factor: 100, def: 0})}
@@ -916,6 +930,8 @@
             const b = e.target.closest('button, a'); if (!b) return;
             if (b.dataset.a11ySim != null) { simulate(b.dataset.a11ySim); return; }
             if (b.dataset.a11yToastx) { P.toastX = Number(b.dataset.a11yToastx); save(); apply(); page.querySelectorAll('[data-a11y-toastx]').forEach(x => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', String(on)); }); return; }
+            if (b.hasAttribute('data-a11y-go-theme')) { const st = A().state; if (st) st.maintenanceTab = 'look_theme'; await A().setModule?.('maintenance');
+                const f = document.querySelector('#design-form [name="fontScale"]'); if (f) { f.scrollIntoView({block: 'center'}); f.focus({preventScroll: true}); } return; }
             if (b.hasAttribute('data-a11y-trytoast')) { toast(`Voici un message : il reste ${P.toastX === 1 ? '6' : P.toastX === 2 ? '12' : '18'} secondes environ.`); return; }
             if (b.hasAttribute('data-a11y-try')) { speak('Bonjour ! Voici la voix qui lira tes textes. Jean-Baptiste Martin, né le 7 mai 1784 à Figeac, dans le Lot.'); return; }
             if (b.hasAttribute('data-a11y-stop')) { stop(); return; }
