@@ -164,9 +164,9 @@
         @media (max-width:580px) { .presentation-lead { font-size:17px; } .presentation-hero-board { min-height:340px; } .presentation-note { width:68%; padding:13px; } .presentation-note strong { font-size:15px; } .note-white { top:132px; } .note-black { left:35px; } .presentation-feature-grid { grid-template-columns:1fr; } .presentation-feature { min-height:0; } .presentation-footer { flex-direction:column; } }
     </style>
 <style>
-.maq-new{background:linear-gradient(transparent 55%,#fff1a8 55%);color:inherit;padding:0 1px}
+.maq-new{background:none;color:inherit;padding:0}
 html.maq-plain .maq-new{background:none;text-decoration:none}
-:is(.feature-dark,.presentation-strengths,.note-black) .maq-new{background:none;text-decoration:underline 3px #f2c230;text-underline-offset:4px}
+
 .maq-bar{position:fixed;right:16px;bottom:16px;z-index:99;display:flex;gap:10px;align-items:center;background:#111;color:#fff;padding:10px 14px;font:700 13px system-ui,sans-serif;box-shadow:6px 6px 0 rgba(5,93,255,.35)}
 .maq-bar button{font:inherit;background:#fff;color:#111;border:0;padding:6px 10px;cursor:pointer}
 @media(max-width:580px){.maq-bar{left:16px;right:16px;bottom:10px;flex-wrap:wrap}}
@@ -1188,5 +1188,5 @@ html.maq-plain .maq-new{background:none;text-decoration:none}
         refresh();
     })();
     </script>
-<div class="maq-bar" role="region" aria-label="Maquette"><span>Maquette 0.9.0 · textes proposés <mark class="maq-new" style="color:#111;background:#fff1a8">surlignés</mark></span><button type="button" onclick="document.documentElement.classList.toggle('maq-plain');this.textContent=document.documentElement.classList.contains('maq-plain')?'Montrer le surlignage':'Voir sans surlignage'">Voir sans surlignage</button></div></body>
+<div class="maq-bar" role="region" aria-label="Maquette"><span>Maquette 0.9.0 · textes revus</span></div></body>
 </html>
