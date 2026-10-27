@@ -180,3 +180,26 @@
 .bk-person{grid-template-columns:minmax(0,1fr);min-width:0}.bk-person>*{min-width:0}
 .bk-needs{grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);gap:2px 6px;font-size:11px}
 .bk-needs .bk-bar{height:6px;min-width:0;width:100%;box-sizing:border-box}
+/* ⛶ plein écran : la fenêtre prend tout l'écran (et le vrai plein écran du navigateur quand il le permet) */
+.bk-dlg.is-max{width:100vw;height:100vh;max-width:100vw;max-height:100vh;margin:0;inset:0;border:0;box-shadow:none}
+.bk-dlg:fullscreen{width:100vw;height:100vh}
+.bk-top [data-bk-full][aria-pressed="true"]{background:var(--ink);color:var(--white)}
+/* ↔ réarranger : l'installation choisie clignote, les autres places attendent le clic (ou le dépôt) */
+.bk-slot[draggable="true"]{cursor:grab}
+.bk-slot.is-movesrc{outline:3px dashed var(--blue);outline-offset:-5px;opacity:.75}
+.bk-floors.is-moving .bk-slot:not(.is-movesrc){box-shadow:inset 0 0 0 2px #7fb2ff;cursor:copy}
+.bk-floors.is-moving .bk-slot.is-empty{color:var(--blue);border-color:var(--blue)}
+.bk-movehint{margin:0 0 6px;padding:6px 10px;border:2px solid var(--blue);background:#e4efff;color:#0b2a66;font-weight:700;font-size:13px}
+.bk-movehint .link-button{font-weight:700}
+/* ⤢ la carte de la ville en grand : elle couvre la partie, le parcours reste à droite */
+.bk-maptools{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:0 0 6px}
+.bk-ville.is-full{position:fixed;inset:0;z-index:40;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:0;background:var(--paper)}
+.bk-ville.is-full .bk-mapcol{display:flex;flex-direction:column;min-height:0;padding:12px;border-right:var(--line)}
+.bk-ville.is-full .bk-maptools{justify-content:flex-start}
+.bk-ville.is-full .bk-mapwrap{flex:1;min-height:0;overflow:auto;height:auto;border:var(--line)}
+.bk-ville.is-full .bk-mapwrap:not(.is-big){display:grid;place-items:center}
+.bk-ville.is-full .bk-mapwrap:not(.is-big) .bk-map{height:100%;width:auto;max-width:100%}
+.bk-ville.is-full .bk-mapwrap.is-big .bk-map{width:calc(var(--n) * 38px)}
+.bk-ville.is-full .bk-mapwrap.is-big .bk-cell{font-size:18px}
+.bk-ville.is-full .bk-villeinfo{overflow:auto;padding:12px;min-height:0}
+@media (max-width:900px){.bk-ville.is-full{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) minmax(0,40%)}.bk-ville.is-full .bk-mapcol{border-right:0;border-bottom:var(--line)}}

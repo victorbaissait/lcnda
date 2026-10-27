@@ -24,13 +24,19 @@
     const meOf = g => g.people.find(p => p.me) || g.people[0];
 
     /* ═════════ La fenêtre ═════════ */
+    let moveFrom = null, dragging = false;
     let dlg = null, G = null, gid = '', tab = 'gens', placeSel = null, timer = 0, acc = 0, lastTick = 0, lastSaveHour = -1;
     function open() {
         if (!B()) { toast('Le bunker n’a pas pu se charger.', 'error'); return; }
         dlg?.remove();
-        dlg = document.createElement('dialog'); dlg.className = 'bk-dlg'; dlg.setAttribute('aria-label', 'Le bunker');
+        dlg = document.createElement('dialog'); dlg.className = 'bk-dlg'; dlg.setAttribute('aria-label', 'Le bunker'); dlg.dataset.ownClose = '1'; // la partie s'enregistre en fermant : pas de « Fermer sans enregistrer ? »
         document.body.append(dlg);
-        dlg.addEventListener('close', () => { stop(); SND.stop(); if (G && gid) saveGame(gid, G, true); G = null; dlg?.remove(); dlg = null; });
+        dlg.addEventListener('cancel', e => { if (moveFrom || mapFull) { e.preventDefault(); e.stopPropagation(); if (moveFrom) { moveFrom = null; drawWorld(); } else { mapFull = false; drawSide(); } } }); // Échap : d'abord sortir du déplacement ou de la grande carte
+        dlg.addEventListener('dragstart', e => { const sl = e.target.closest?.('[data-bk="slot"][draggable]'); if (!sl || !G) return; moveFrom = [Number(sl.dataset.f), Number(sl.dataset.s)]; dragging = true; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'bk'); sl.classList.add('is-movesrc'); });
+        dlg.addEventListener('dragover', e => { if (dragging && e.target.closest?.('[data-bk="slot"]')) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; } });
+        dlg.addEventListener('drop', e => { const sl = e.target.closest?.('[data-bk="slot"]'); if (!dragging || !sl) return; e.preventDefault(); dragging = false; moveTo(Number(sl.dataset.f), Number(sl.dataset.s)); });
+        dlg.addEventListener('dragend', () => { if (!dragging) return; dragging = false; moveFrom = null; drawWorld(); });
+        dlg.addEventListener('close', () => { if (document.fullscreenElement) document.exitFullscreen?.()?.catch?.(() => {}); moveFrom = null; dragging = false; mapFull = false; stop(); SND.stop(); if (G && gid) saveGame(gid, G, true); G = null; dlg?.remove(); dlg = null; });
         dlg.addEventListener('click', onClick); dlg.addEventListener('change', onChange); dlg.addEventListener('pointerdown', () => { if (!G || !SND.pref.on) return; const first = !SND.ready(); SND.unlock(); if (first) SND.reset(G); SND.update(G); });
         dlg.addEventListener('mousemove', chartHover); dlg.addEventListener('mouseout', e => { if (!e.relatedTarget || !e.relatedTarget.closest?.('svg[data-bk-chart]')) chartLeave(e); });
         dlg.addEventListener('keydown', e => { if (e.key === ' ' && G && !e.target.closest('input, textarea, select, button, .pk')) { e.preventDefault(); setSpeed(G.speed ? 0 : 1); } });
@@ -183,11 +189,12 @@
 
     /* ═════════ La partie ═════════ */
     function play() {
+        moveFrom = null; dragging = false; mapFull = false;
         lastSaveHour = Math.floor(G.t / 360);
         dlg.innerHTML = `<div class="bk-game">
             <header class="bk-top"><b class="bk-title">☢ Le bunker de ${esc(meOf(G).name)}</b><span class="bk-clock" data-bk-clock></span><span class="bk-state" data-bk-state></span><span class="spacer"></span>
                 <div class="segmented bk-speed" role="group" aria-label="Vitesse">${[[0, '⏸', 'Pause (Espace)'], [1, '×1', '1 heure de jeu en 6 secondes'], [2, '×2', 'Deux fois plus vite'], [4, '×4', 'Quatre fois plus vite']].map(([v, l, t]) => `<button type="button" data-bk="speed" data-v="${v}" title="${t}">${l}</button>`).join('')}</div>
-                <button type="button" class="icon-button small" data-bk="mute" data-bk-mute title="Couper ou remettre le son" aria-label="Son">🔊</button><button type="button" class="button small secondary" data-bk="gazette" title="Le journal de la partie">📰 Gazette</button><button type="button" class="button small secondary" data-bk="book" title="Le récit de la partie, jour après jour">📖 Livre</button><button type="button" class="button small" data-bk="save" data-shortcut="⌘S">💾 Enregistrer</button><button type="button" class="button small secondary" data-bk="export" title="Garder la partie dans un fichier">⤓ Exporter</button><button type="button" class="button small secondary" data-bk="menu">↩ Parties</button><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
+                <button type="button" class="icon-button small" data-bk="full" data-bk-full title="Plein écran" aria-label="Plein écran" aria-pressed="false">⛶</button><button type="button" class="icon-button small" data-bk="mute" data-bk-mute title="Couper ou remettre le son" aria-label="Son">🔊</button><button type="button" class="button small secondary" data-bk="gazette" title="Le journal de la partie">📰 Gazette</button><button type="button" class="button small secondary" data-bk="book" title="Le récit de la partie, jour après jour">📖 Livre</button><button type="button" class="button small" data-bk="save" data-shortcut="⌘S">💾 Enregistrer</button><button type="button" class="button small secondary" data-bk="export" title="Garder la partie dans un fichier">⤓ Exporter</button><button type="button" class="button small secondary" data-bk="menu">↩ Parties</button><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
             <p class="bk-news" data-bk-news aria-live="polite"></p><div class="bk-tuto" data-bk-tuto hidden></div><div class="bk-visit" data-bk-visit hidden></div>
             <div class="bk-main"><section class="bk-world" data-bk-world></section><aside class="bk-side"><div class="segmented bk-tabs" role="tablist">${[['gens', '👥 Habitants'], ['res', '📦 Réserves'], ['atelier', '🛠️ Atelier'], ['bric', '♻️ Bric-à-brac'], ['ville', '🗺️ Ville'], ['famille', '🌳 Famille'], ['radio', '📻 Radio'], ['stats', '📊 Stats'], ['regl', '⚙️ Réglages']].map(([k, l]) => `<button type="button" role="tab" data-bk="tab" data-v="${k}">${l}</button>`).join('')}</div><div class="bk-sbody" data-bk-side></div></aside></div><div class="bk-gz" data-bk-gz hidden></div></div>`;
         drawAll(); go();
@@ -255,7 +262,7 @@
         return `<span class="bk-pawn g-${p.gender === 'female' ? 'f' : p.gender === 'male' ? 'm' : 'u'}${p.hp < 35 ? ' is-weak' : ''}${p.baby ? ' is-baby' : ''}" title="${esc(p.name)} : ${act}${p.ill ? (p.ill.k === 'fievre' ? ' · a de la fièvre' : ' · blessé·e') : ''}">${esc(ini)}${mark ? `<i>${mark}</i>` : ''}</span>`;
     }
     function drawWorld() {
-        const w = dlg.querySelector('[data-bk-world]'); if (!w) return;
+        const w = dlg.querySelector('[data-bk-world]'); if (!w || dragging) return; // pendant un glisser-déposer, on ne redessine pas sous la souris
         const [s1, s2] = sky(G.t), h = (G.t / 60) % 24, sunX = ((h - 6) / 14) * 100, night = B().isNight(G.t);
         const base = B().alive(G).filter(p => p.where === 'base'), out = B().alive(G).filter(p => p.where === 'dehors');
         const at = new Map(); base.forEach(p => { const k = p.act?.at ? p.act.at.join() : p.doing === 'construire' ? atelierAt() : p.doing === 'creuser' ? 'dig' : 'hall'; if (!at.has(k)) at.set(k, []); at.get(k).push(p); });
@@ -264,14 +271,15 @@
                 ${h >= 6 && h < 20 ? `<span class="bk-sun" style="left:${Math.max(4, Math.min(92, sunX))}%"></span>` : `<span class="bk-moon"></span>`}
                 <span class="bk-skyline" aria-hidden="true"></span><span class="bk-out">${out.map(p => pawn(p)).join('')}${out.length ? `<small>${plural(out.length, 'parti', 'partis')} en ville</small>` : ''}</span>
                 <span class="bk-ground"><span class="bk-trap${G.visit ? ' is-knock' : ''}" title="${G.visit ? 'Quelqu’un frappe à la trappe !' : 'La trappe'}">${G.visit ? '🔔' : '▦'}</span></span></div>
-            <div class="bk-floors">${G.floors.map((f, fi) => `<div class="bk-floor${G.fire?.fi === fi ? ' is-fire' : ''}"><span class="bk-flabel">−${fi + 1}${G.fire?.fi === fi ? '<i title="Le feu !">🔥</i>' : ''}${(G.deco?.[fi] || []).length ? `<span class="bk-deco" title="${esc(G.deco[fi].map(d => B().DECOS[d.k][1] + (d.name ? ` de ${d.name}` : '')).join(', '))}">${G.deco[fi].map(d => B().DECOS[d.k][0]).join('')}</span>` : ''}</span><div class="bk-slots">${f.slots.map((k, si) => {
+            <div class="bk-floors${moveFrom ? ' is-moving' : ''}">${moveFrom ? '<p class="bk-movehint">↔ Clique sur la place où le mettre (une place prise : les deux s’échangent) · <button type="button" class="link-button" data-bk="movecancel">Annuler</button></p>' : ''}${G.floors.map((f, fi) => `<div class="bk-floor${G.fire?.fi === fi ? ' is-fire' : ''}"><span class="bk-flabel">−${fi + 1}${G.fire?.fi === fi ? '<i title="Le feu !">🔥</i>' : ''}${(G.deco?.[fi] || []).length ? `<span class="bk-deco" title="${esc(G.deco[fi].map(d => B().DECOS[d.k][1] + (d.name ? ` de ${d.name}` : '')).join(', '))}">${G.deco[fi].map(d => B().DECOS[d.k][0]).join('')}</span>` : ''}</span><div class="bk-slots">${f.slots.map((k, si) => {
                 const it = k && B().ITEMS[k], bd = building.get(`${fi},${si}`), who = at.get(`${fi},${si}`) || [];
                 const key = `${fi},${si}`, brk = !!G.broken?.[key], L = G.lvl?.[key] || 1, wk = bd && (bd.b.rep || bd.b.up);
-                if (it) return `<button type="button" class="bk-slot is-item${!G.power && (['radio', 'atelier', 'douche', 'potager'].includes(k) || it.power) ? ' is-dark' : ''}${brk ? ' is-broken' : ''}" data-bk="slot" data-f="${fi}" data-s="${si}" title="${esc(it.name)}${L > 1 ? ` (niveau ${L})` : ''}${brk ? ' — EN PANNE : clique pour réparer' : ''} — ${esc(it.desc)}"><span class="bk-ico">${it.ico}</span><span class="bk-name">${esc(it.name)}</span>${L > 1 ? `<span class="bk-lvl">${'★'.repeat(L)}</span>` : ''}${brk ? '<span class="bk-brk" aria-label="En panne">🔧</span>' : ''}${wk ? `<span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || 1)))}%"></i></span>` : ''}<span class="bk-who">${who.map(pawn).join('')}</span></button>`;
-                if (bd) return `<button type="button" class="bk-slot is-building" data-bk="slot" data-f="${fi}" data-s="${si}" title="En construction : ${esc(B().ITEMS[bd.b.k].name)}"><span class="bk-ico">${B().ITEMS[bd.b.k].ico}</span><span class="bk-name">${esc(B().ITEMS[bd.b.k].name)}</span><span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || B().ITEMS[bd.b.k].h)))}%"></i></span></button>`;
-                return `<button type="button" class="bk-slot is-empty" data-bk="slot" data-f="${fi}" data-s="${si}" title="Place libre : construire ici">＋</button>`;
+                const mv = moveFrom && moveFrom[0] === fi && moveFrom[1] === si ? ' is-movesrc' : '';
+                if (it) return `<button type="button" draggable="true" class="bk-slot is-item${mv}${!G.power && (['radio', 'atelier', 'douche', 'potager'].includes(k) || it.power) ? ' is-dark' : ''}${brk ? ' is-broken' : ''}" data-bk="slot" data-f="${fi}" data-s="${si}" title="${esc(it.name)}${L > 1 ? ` (niveau ${L})` : ''}${brk ? ' — EN PANNE : clique pour réparer' : ''} — ${esc(it.desc)}"><span class="bk-ico">${it.ico}</span><span class="bk-name">${esc(it.name)}</span>${L > 1 ? `<span class="bk-lvl">${'★'.repeat(L)}</span>` : ''}${brk ? '<span class="bk-brk" aria-label="En panne">🔧</span>' : ''}${wk ? `<span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || 1)))}%"></i></span>` : ''}<span class="bk-who">${who.map(pawn).join('')}</span></button>`;
+                if (bd) return `<button type="button" draggable="true" class="bk-slot is-building${mv}" data-bk="slot" data-f="${fi}" data-s="${si}" title="En construction : ${esc(B().ITEMS[bd.b.k].name)}"><span class="bk-ico">${B().ITEMS[bd.b.k].ico}</span><span class="bk-name">${esc(B().ITEMS[bd.b.k].name)}</span><span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || B().ITEMS[bd.b.k].h)))}%"></i></span></button>`;
+                return `<button type="button" class="bk-slot is-empty" data-bk="slot" data-f="${fi}" data-s="${si}" title="${moveFrom ? 'Poser ici (sans frais)' : 'Place libre : construire ici'}">＋</button>`;
             }).join('')}</div>${fi === 0 ? `<div class="bk-hall" title="Ceux qui attendent">${(at.get('hall') || []).map(pawn).join('')}${(G.pets || []).map(a => `<span class="bk-pet" title="${esc(a.name)}">${B().PETS[a.k][0]}</span>`).join('')}</div>` : ''}</div>`).join('')}
-            ${G.floors.length < B().MAX_FLOORS ? `<button type="button" class="bk-dig" data-bk="digpanel" title="Mettre des habitants à creuser (onglet Habitants)"><span>⛏️ ${G.dig.done > 0 ? 'Étage en cours de creusement' : 'Creuser un étage'}</span><span class="bk-bar"><i style="width:${Math.round(100 * G.dig.done / B().DIG_HOURS)}%"></i></span><span class="bk-who">${(at.get('dig') || []).map(pawn).join('')}</span></button>` : '<p class="muted bk-deep">Le bunker ne peut pas descendre plus bas.</p>'}</div>
+            ${G.floors.length < B().MAX_FLOORS ? `<button type="button" class="bk-dig" data-bk="digpanel" title="Choisir qui creuse"><span>⛏️ ${G.dig.done > 0 ? 'Étage en cours de creusement' : 'Creuser un étage'}</span><span class="bk-bar"><i style="width:${Math.round(100 * G.dig.done / B().DIG_HOURS)}%"></i></span><span class="bk-who">${(at.get('dig') || []).map(pawn).join('')}</span></button>` : '<p class="muted bk-deep">Le bunker ne peut pas descendre plus bas.</p>'}</div>
             ${G.over ? `<div class="bk-over"><b>☠️ Plus personne en vie</b><p>Le bunker a tenu ${plural(B().dayOf(G.t) - 1, 'jour')}.</p><button type="button" class="button" data-bk="gazette">📰 Lire la gazette</button><button type="button" class="button secondary" data-bk="menu">↩ Revenir aux parties</button></div>` : ''}`;
     }
     const atelierAt = () => { const x = B().items(G).find(i => i.k === 'atelier'); return x ? `${x.fi},${x.si}` : 'hall'; };
@@ -362,7 +370,7 @@
                 : A().emptyState({icon: '♻️', text: 'Rien à démonter.', hint: 'En ville, coche « ♻️ Bric-à-brac » dans ce qu’on rapporte : la décharge, les maisons, le magasin d’électroménager en regorgent.'})}
             <details class="bk-junkall"><summary>Tous les objets qu’on peut trouver, et ce qu’ils donnent</summary><div class="bk-plans">${B().JUNK_KEYS.map(k => `<div class="bk-plan is-off"><span class="bk-ico">${J[k][0]}</span><div><b>${esc(J[k][1])}</b><span class="bk-cost">${gives(k)}</span><small>${esc(Object.values(B().PLACE_KINDS).filter(v => (v[5] || []).includes(k)).map(v => v[1]).join(', '))}</small></div></div>`).join('')}</div></details>`;
     }
-    let locating = null, route = [], mapScroll = null;
+    let locating = null, route = [], mapScroll = null, mapFull = false;
     /** 🚶 le parcours : les étapes dans l'ordre, et à chacune ce qu'on rapporte (vide = tout) */
     const roomHelp = k => { const R = B().ROOMS[k], K = R[3]; return `on y trouve : ${R[2].map(r => resName(r)?.[2]?.toLowerCase()).filter(Boolean).join(', ')}${K.plans ? ' · plus de plans' : ''}${K.tools ? ' · plus d’outils' : ''}${K.letters ? ' · plus de lettres' : ''}${K.docs ? ' · plus de documents' : ''}${K.risk ? ' · plus risqué' : ''}`; };
     function routeHtml(free) {
@@ -392,8 +400,10 @@
             return `<button type="button" class="bk-cell is-place${placeSel === pl.id ? ' is-sel' : ''}${there ? ' is-busy' : ''}${ri >= 0 ? ' is-route' : ''}" data-bk="place" data-id="${pl.id}" title="${esc(pl.name)}${ri >= 0 ? ` (étape ${ri + 1})` : ''}">${k[0]}${ri >= 0 ? `<i class="bk-step">${ri + 1}</i>` : ''}</button>`; };
         const pl = c.places.find(x => x.id === placeSel);
         const stockTxt = p => { const tot = Object.values(p.stock).reduce((a, b) => a + b, 0), max = Object.values(p.max).reduce((a, b) => a + b, 0) || 1; return !p.visits ? 'pas encore fouillé' : tot / max > .6 ? 'beaucoup de choses' : tot / max > .25 ? 'un peu' : tot ? 'presque vide' : 'vide (ça revient chaque jour)'; };
+        // ⤢ la carte s'ouvre en grand (utile quand elle dépasse) : elle couvre le bunker, le parcours et le lieu choisi à côté
         return `<p class="muted">${esc(c.name)} · ville ${B().SIZES[c.size][2].toLowerCase()} · 30 min par case (×1,5 la nuit sans lampe torche).</p>
-            <div class="bk-mapwrap${n > 17 ? ' is-big' : ''}" style="--n:${n}"><div class="bk-map${c.lat != null ? ' has-bg' : ''}" style="--n:${n}">${mapBgHtml(c)}${Array.from({length: n * n}, (_, i) => cell(i % n, Math.floor(i / n))).join('')}</div></div>
+            <div class="bk-ville${mapFull ? ' is-full' : ''}"><div class="bk-mapcol"><div class="bk-maptools">${mapFull ? `<b>🗺️ ${esc(c.name)}</b><span class="spacer"></span>` : ''}<button type="button" class="button small secondary" data-bk="mapfull" title="${mapFull ? 'Revenir à la petite carte (Échap)' : 'Voir la carte dans un grand cadre'}">${mapFull ? '✕ Réduire la carte' : '⤢ Ouvrir la carte en grand'}</button></div>
+            <div class="bk-mapwrap${n > 17 ? ' is-big' : ''}" style="--n:${n}"><div class="bk-map${c.lat != null ? ' has-bg' : ''}" style="--n:${n}">${mapBgHtml(c)}${Array.from({length: n * n}, (_, i) => cell(i % n, Math.floor(i / n))).join('')}</div></div></div><div class="bk-villeinfo">
             ${routeHtml(free)}${c.geo === 'none' ? '<p class="lck-legend muted">Pas de plan en fond : cette ville n’a pas de coordonnées (ni dans ton arbre, ni dans les communes).</p>' : ''}
             ${pl ? `<div class="bk-placecard"><b>${B().PLACE_KINDS[pl.kind][0]} ${esc(pl.name)}</b><small>${Math.round(B().travel(G, pl) / 6) / 10} h de marche (aller) · ${stockTxt(pl)}${pl.visits ? ` · fouillé ${plural(pl.visits, 'fois', 'fois')}` : ''}</small>
                 ${(B().KIND_ROOMS[pl.kind] || []).length ? `<p class="muted">🏚️ Pièces : ${B().KIND_ROOMS[pl.kind].map(k => `${B().ROOMS[k][0]} ${B().ROOMS[k][1].replace(/^(La |Le |L’)/, '').toLowerCase()}${(pl.roomsDone || []).includes(k) ? ' ✓' : ''}`).join(', ')} — à choisir dans le parcours.</p>` : ''}
@@ -401,7 +411,7 @@
                 ${G.opt?.missions && G.missions?.some(m => !m.done && B().DOCS[m.doc][2].includes(pl.kind)) ? `<p>📜 Peut-être ici : ${G.missions.filter(m => !m.done && B().DOCS[m.doc][2].includes(pl.kind)).map(m => esc(B().missionTxt(m).replace(/^Retrouver /, ''))).join(' ; ')}.</p>` : ''}
                 ${pl.known ? `<p class="bk-known">👁️ Vu le jour ${pl.known.d} : ${Object.keys(pl.known.stock).length ? Object.entries(pl.known.stock).map(([r, n]) => `${n} ${resName(r)[1]} ${esc(resName(r)[2].toLowerCase())}`).join(', ') : 'plus aucune réserve'}${pl.known.junk.length ? `, ${pl.known.junk.length} bric-à-brac` : ''}. <small class="muted">Ça change chaque matin, au hasard : des choses reviennent, d’autres survivants passent.</small></p>` : ''}
                 <p class="muted">On peut y trouver (pas tout à la fois, au hasard) : ${Object.keys(pl.max).map(r => resName(r)[1] + ' ' + resName(r)[2].toLowerCase()).join(', ')}${B().PLACE_KINDS[pl.kind][4] ? ', et souvent des plans' : ''}.${(B().PLACE_KINDS[pl.kind][5] || []).length ? ` ♻️ Du bric-à-brac${pl.seen && (pl.junk || []).length ? ` : ${[...new Set(pl.junk)].map(k => B().JUNK[k][0] + ' ' + B().JUNK[k][1].toLowerCase()).join(', ')}` : pl.seen ? ' (plus rien pour l’instant)' : ''}.` : ''}</p>
-                <div class="bk-send">${route.some(st => st.id === pl.id) ? `<button type="button" class="button small secondary" data-bk="routedel" data-id="${pl.id}">− Retirer du parcours</button>` : `<button type="button" class="button small" data-bk="routeadd" data-id="${pl.id}" ${route.length >= 6 ? 'disabled' : ''}>＋ Ajouter au parcours</button>`}</div></div>` : '<p class="muted">Clique sur les lieux de la carte pour composer le parcours (jusqu’à 6 étapes).</p>'}`;
+                <div class="bk-send">${route.some(st => st.id === pl.id) ? `<button type="button" class="button small secondary" data-bk="routedel" data-id="${pl.id}">− Retirer du parcours</button>` : `<button type="button" class="button small" data-bk="routeadd" data-id="${pl.id}" ${route.length >= 6 ? 'disabled' : ''}>＋ Ajouter au parcours</button>`}</div></div>` : '<p class="muted">Clique sur les lieux de la carte pour composer le parcours (jusqu’à 6 étapes).</p>'}</div></div>`;
     }
     /** 🌳 la famille au bunker : le coffre, les liens, les naissances (l'arbre du bunker, à part de ta vraie base) */
     function sideFamille() {
@@ -618,7 +628,10 @@
         if (k === 'menu') { saveGame(gid, G, true); startScreen(); return; }
         if (k === 'tab') { tab = b.dataset.v; drawTop(); drawSide(); const sb = dlg.querySelector('[data-bk-side]'); if (sb) sb.scrollTop = 0; return; }
         if (k === 'power') { G.powerOn = !G.powerOn; if (!G.powerOn) G.power = false; drawAll(); return; }
-        if (k === 'digpanel') { tab = 'gens'; drawTop(); drawSide(); toast('Choisis « ⛏️ Creuser » comme travail pour un ou plusieurs habitants.'); return; }
+        if (k === 'digpanel') { whoMenu('creuser', b); return; }
+        if (k === 'full') { toggleFull(); return; }
+        if (k === 'mapfull') { mapFull = !mapFull; mapScroll = null; drawSide(); return; }
+        if (k === 'movecancel') { moveFrom = null; drawWorld(); return; }
         if (k === 'sendfrom') { tab = 'ville'; drawTop(); drawSide(); const sel = () => dlg.querySelector('[data-bk-sendwho]'); if (sel()) sel().value = b.dataset.id; else toast('Choisis un lieu sur la carte.'); sendFor = b.dataset.id; return; }
         if (k === 'place') { placeSel = b.dataset.id; if (!route.length) route = [{id: placeSel, take: null}]; drawSide(); const sel = dlg.querySelector('[data-bk-sendwho]'); if (sel && sendFor && [...sel.options].some(o => o.value === sendFor)) sel.value = sendFor; return; }
         if (k === 'send') { const who = dlg.querySelector('[data-bk-sendwho]')?.value; const r = B().send(G, who, route.length ? route : [placeSel]); if (!r.ok) { toast(r.err, 'error'); return; } sendFor = ''; route = []; drawAll(); return; }
@@ -666,8 +679,32 @@
         const f = e.target.closest('[data-bk-import]'); if (f) importFile(f);
     }
     const firstFree = () => { for (let fi = 0; fi < G.floors.length; fi++) for (let si = 0; si < B().SLOTS; si++) if (!G.floors[fi].slots[si] && !G.builds.some(b => b.fi === fi && b.si === si)) return [fi, si]; return null; };
-    function order(k, fi, si) { const r = B().orderBuild(G, k, fi, si); if (!r.ok) { toast(r.err, 'error'); return; } drawAll(); }
+    function order(k, fi, si, at) { const r = B().orderBuild(G, k, fi, si); if (!r.ok) { toast(r.err, 'error'); return; } drawAll(); if (at) whoMenu('construire', at); }
+    const pointOf = el => { const r = el?.getBoundingClientRect?.(); return r && r.width ? {x: r.left + Math.min(24, r.width / 2), y: r.bottom} : null; };
+    /** 👷 qui creuse, qui construit : un clic met la personne à ce travail (ou l'en retire) */
+    const JOB_L = {libre: 'rien de spécial', creuser: 'creuse', construire: 'construit', recycler: 'démonte le bric-à-brac', garde: 'monte la garde', pedaler: 'pédale'};
+    function whoMenu(job, where) {
+        const ppl = B().alive(G).filter(p => p.where === 'base' && !p.baby), menu = UI().menuAt;
+        if (!ppl.length || !menu) { tab = 'gens'; drawTop(); drawSide(); toast(ppl.length ? `Choisis « ${job === 'creuser' ? '⛏️ Creuser' : '🔨 Construire'} » comme travail.` : 'Personne au bunker pour ce travail.', ppl.length ? '' : 'error'); return; }
+        const at = where instanceof Element ? pointOf(where) : where;
+        menu(at || where, [...ppl.map(p => ({icon: p.job === job ? '✅' : '⬜', label: p.name, help: p.job === job ? 'clic : le retirer de ce travail' : `fait : ${JOB_L[p.job] || p.job}${p.sulk ? ' · n’a plus le moral' : ''}`,
+            run: () => { B().setJob(G, p.id, p.job === job ? 'libre' : job); drawAll(); whoMenu(job, at || where); }})), '-',
+            {icon: '👥', label: 'Voir tous les habitants', run: () => { tab = 'gens'; drawTop(); drawSide(); }}], {title: job === 'creuser' ? '⛏️ Qui creuse ?' : '🔨 Qui construit ?'});
+    }
+    /** ⛶ plein écran : le vrai plein écran du navigateur si possible, sinon la fenêtre prend tout l'écran */
+    function toggleFull(force) {
+        if (!dlg) return; const on = force ?? !dlg.classList.contains('is-max');
+        dlg.classList.toggle('is-max', on);
+        if (on && !document.fullscreenElement) dlg.requestFullscreen?.()?.catch?.(() => {});
+        if (!on && document.fullscreenElement) document.exitFullscreen?.()?.catch?.(() => {});
+        const fb = dlg.querySelector('[data-bk-full]'); if (fb) { fb.setAttribute('aria-pressed', String(on)); fb.title = on ? 'Quitter le plein écran' : 'Plein écran'; }
+    }
+    document.addEventListener('fullscreenchange', () => { if (dlg && !document.fullscreenElement && dlg.classList.contains('is-max')) toggleFull(false); });
+    /** ↔ réarranger sans frais : choisir une installation, puis la place où la mettre (ou la glisser) */
+    function moveTo(fi, si) { const [a, b] = moveFrom; moveFrom = null; if (a === fi && b === si) { drawWorld(); return; } const r = B().moveItem(G, a, b, fi, si); if (!r.ok) toast(r.err, 'error'); drawAll(); }
     function slotMenu(btn, fi, si) {
+        if (moveFrom) { moveTo(fi, si); return; }
+        const pt = pointOf(btn); // le bunker se redessine pendant que le menu est ouvert : on garde l'endroit du clic
         const IT = B().ITEMS, k = G.floors[fi]?.slots[si], bi = G.builds.findIndex(b => b.fi === fi && b.si === si), menu = UI().menuAt;
         let items;
         if (k) {
@@ -681,11 +718,13 @@
                 ...(brk ? [{icon: '🔧', label: busyB ? 'Réparation commandée' : 'Réparer', help: txt(B().repairCost(k)), disabled: busyB, run: run(B().orderRepair)}] : []),
                 ...(B().upgradable(k) && L < 3 && !brk ? [{icon: '⬆️', label: busyB ? 'Amélioration commandée' : `Améliorer (niveau ${L + 1})`, help: `effets ×${L === 1 ? '1,5' : '2'} · ${txt(B().upgradeCost(k, L + 1))}`, disabled: busyB, run: run(B().orderUpgrade)}] : []),
                 ...(busyB ? [{icon: '×', label: 'Annuler la commande', help: 'les matériaux reviennent', run: () => { B().cancelBuild(G, bi); drawAll(); }}] : []),
+                ...(busyB ? [{icon: '👷', label: 'Qui construit ?', run: () => whoMenu('construire', pt || btn)}] : []),
+                {icon: '↔', label: 'Déplacer', help: 'sans frais : clique ensuite sur une autre place (ou glisse-le)', run: () => { moveFrom = [fi, si]; drawWorld(); }},
                 {icon: '🪓', label: 'Démonter', help: brk ? 'en panne : on récupère un tiers des matériaux' : 'on récupère la moitié des matériaux', run: () => { B().dismantle(G, fi, si); drawAll(); }}];
-        } else if (bi >= 0) items = [{icon: '×', label: `Annuler « ${IT[G.builds[bi].k].name} »`, help: 'les matériaux reviennent', run: () => { B().cancelBuild(G, bi); drawAll(); }}];
+        } else if (bi >= 0) items = [{icon: '👷', label: 'Qui construit ?', run: () => whoMenu('construire', pt || btn)}, {icon: '↔', label: 'Déplacer le chantier', help: 'sans frais : clique ensuite sur une autre place', run: () => { moveFrom = [fi, si]; drawWorld(); }}, {icon: '×', label: `Annuler « ${IT[G.builds[bi].k].name} »`, help: 'les matériaux reviennent', run: () => { B().cancelBuild(G, bi); drawAll(); }}];
         else items = G.plans.filter(p => G.opt?.chaines || !IT[p].chain).map(p => { const it = IT[p], miss = Object.entries(it.cost || {}).some(([r, n]) => (G.res[r] || 0) < n) || (it.tool && !G.tools.includes(it.tool));
-            const n = needOf(p); return {icon: it.ico, label: it.name, help: miss ? `il manque : ${[...n.miss.map(([r, q, h]) => `${q - h} ${resName(r)[2].toLowerCase()}`), ...(n.tool ? [B().TOOLS[n.tool][1]] : [])].join(', ')}` : Object.entries(it.cost || {}).map(([r, q]) => `${q} ${resName(r)[2].toLowerCase()}`).join(', ') + (it.tool ? ` · ${B().TOOLS[it.tool][1]}` : ''), disabled: miss, run: () => order(p, fi, si)}; }).sort((x, y) => x.disabled - y.disabled);
-        if (menu) menu(btn, items, {title: k ? '' : 'Construire ici'}); else if (!k && bi < 0) order(G.plans[0], fi, si);
+            const n = needOf(p); return {icon: it.ico, label: it.name, help: miss ? `il manque : ${[...n.miss.map(([r, q, h]) => `${q - h} ${resName(r)[2].toLowerCase()}`), ...(n.tool ? [B().TOOLS[n.tool][1]] : [])].join(', ')}` : Object.entries(it.cost || {}).map(([r, q]) => `${q} ${resName(r)[2].toLowerCase()}`).join(', ') + (it.tool ? ` · ${B().TOOLS[it.tool][1]}` : ''), disabled: miss, run: () => order(p, fi, si, pt)}; }).sort((x, y) => x.disabled - y.disabled);
+        if (menu) menu(btn, items, {title: k ? '' : 'Construire ici'}); else if (!k && bi < 0) order(G.plans[0], fi, si, pt);
     }
     function importFile(input) {
         const file = input.files?.[0]; input.value = ''; if (!file) return;

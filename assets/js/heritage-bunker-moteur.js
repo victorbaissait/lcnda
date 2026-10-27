@@ -485,6 +485,23 @@
         g.people.forEach(p => { if (p.act?.at && p.act.at[0] === fi && p.act.at[1] === si) p.act = null; });
         log(g, `${ITEMS[k].name} démonté.`); return true;
     }
+    /** ↔ réarranger : déplacer une installation (ou ce qui s'y construit) vers une autre place, sans frais ;
+     *  sur une place prise, les deux s'échangent (niveau, panne et chantier suivent) → {ok, err} */
+    function moveItem(g, fi, si, fj, sj) {
+        const okSlot = (f, x) => !!g.floors[f] && Number.isInteger(x) && x >= 0 && x < SLOTS;
+        if (!okSlot(fi, si) || !okSlot(fj, sj)) return {ok: false, err: 'Cette place n’existe pas.'};
+        if (fi === fj && si === sj) return {ok: false, err: 'C’est la même place.'};
+        const a = slotKey(fi, si), b = slotKey(fj, sj), here = (f, x) => g.floors[f].slots[x] || g.builds.some(c => c.fi === f && c.si === x);
+        if (!here(fi, si)) return {ok: false, err: 'Rien à déplacer ici.'};
+        const ka = g.floors[fi].slots[si], kb = g.floors[fj].slots[sj];
+        g.floors[fi].slots[si] = kb || null; g.floors[fj].slots[sj] = ka || null;
+        [g.lvl ||= {}, g.broken ||= {}].forEach(m => { const va = m[a], vb = m[b]; delete m[a]; delete m[b]; if (va != null) m[b] = va; if (vb != null) m[a] = vb; });
+        g.builds.forEach(c => { if (c.fi === fi && c.si === si) { c.fi = fj; c.si = sj; } else if (c.fi === fj && c.si === sj) { c.fi = fi; c.si = si; } });
+        g.people.forEach(p => { const at = p.act?.at; if (!at) return; if (at[0] === fi && at[1] === si) p.act.at = [fj, sj]; else if (at[0] === fj && at[1] === sj) p.act.at = [fi, si]; });
+        const nm = k => k ? ITEMS[k].name : '';
+        log(g, kb ? `↔ ${nm(ka) || 'Le chantier'} et ${nm(kb)} échangent leur place.` : `↔ ${nm(ka) || 'Le chantier'} change de place (étage −${fj + 1}).`);
+        return {ok: true};
+    }
     const JOBS = ['libre', 'creuser', 'construire', 'recycler', 'pedaler', 'garde'];
     /** ⚙️ les réglages de la partie : options (météo, chaînes, tutoriel) et difficulté */
     function setOpt(g, k, on) {
@@ -1215,5 +1232,5 @@
         PETS, RECIPES, DECOS, DECO_MAX, ROOMS, KIND_ROOMS, NIGHT_DANGER, NIGHT_BONUS, DOCS, OPT_KEYS, adopt, addDeco, removeDeco, decoMood, pickRecipe, recipeOk, recipeName, canCook, missionTxt, newMissions, snapshot, fire, pests, feedPets, aging,
         TRAITS, TRAIT_KEYS, DIFFS, SCENARIOS, EVENTS, TUTO, VALUE, CHAIN_RES, setOpt, setDiff, trade, marketDay, startEvent, breakItem, orderRepair, orderUpgrade, repairCost, upgradeCost, upgradable, breakable, gainXp, relOf, lvK, relations,
         JUNK, JUNK_KEYS, AUTO, stockFor, regen, stepOf, carryBonus, recycle, setAuto, orderNeed, routeTime, carryOf, junkCap, junkCount, mult, sumOf, working,
-        newGame, step, run, orderBuild, cancelBuild, dismantle, setJob, send, recall, travel, check, cap, has, count, items, alive, hourOf, dayOf, isNight, clock};
+        newGame, step, run, orderBuild, cancelBuild, dismantle, moveItem, setJob, send, recall, travel, check, cap, has, count, items, alive, hourOf, dayOf, isNight, clock};
 })();

@@ -331,4 +331,13 @@ t('🛡️ un fichier de partie piégé (« __proto__ », « toString »…, nom
         const c = B.check(g); B.run(c, 1440); assert.ok(c.pets.length === 1 && c.market.offers[0].give.n <= 99 && c.market.deals.length === 0 || c.res.medic <= B.cap(c, 'medic'));
     }
 });
+t('↔ réarranger : déplacer une installation vers une place libre, ou échanger deux places, sans frais (niveau, panne, chantier et occupant suivent)', () => {
+    const g = game(); fill(g); g.floors.push({slots: Array(B.SLOTS).fill(null)}); g.floors[0].slots[3] = 'lit'; g.lvl['0,3'] = 2; g.floors[0].slots[4] = 'douche'; g.broken['0,4'] = true;
+    const res = JSON.stringify(g.res); g.people[0].act = {k: 'dormir', until: g.t + 60, at: [0, 3]};
+    assert.ok(B.moveItem(g, 0, 3, 2, 5).ok); assert.equal(g.floors[0].slots[3], null); assert.equal(g.floors[2].slots[5], 'lit');
+    assert.equal(g.lvl['2,5'], 2); assert.ok(!('0,3' in g.lvl)); assert.deepEqual(g.people[0].act.at, [2, 5]); assert.equal(JSON.stringify(g.res), res, 'sans frais');
+    assert.ok(B.moveItem(g, 0, 4, 0, 0).ok); assert.equal(g.floors[0].slots[0], 'douche'); assert.equal(g.floors[0].slots[4], 'radio'); assert.ok(g.broken['0,0'] && !g.broken['0,4'], 'la panne suit');
+    assert.ok(B.orderBuild(g, 'lit', 2, 4).ok); assert.ok(B.moveItem(g, 2, 4, 2, 3).ok); assert.ok(g.builds.some(b => b.k === 'lit' && b.fi === 2 && b.si === 3), 'le chantier suit');
+    assert.match(B.moveItem(g, 2, 2, 2, 1).err, /Rien/); assert.match(B.moveItem(g, 0, 0, 0, 0).err, /même/); assert.match(B.moveItem(g, 0, 0, 9, 0).err, /existe/);
+});
 console.log(`✓ bunker : ${n} vérifications`);
