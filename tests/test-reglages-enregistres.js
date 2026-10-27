@@ -211,7 +211,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             checkAll(await screen(pa), {ms: false, lists: false, access: false});
             await pa.reload({waitUntil: 'load'}); await pa.waitForTimeout(1200);
             const s = await screen(pa); checkAll(s, {ms: false, lists: false, access: false});
-            assert.equal(s.access.size, 100, 'l’Accessibilité n’est pas dans l’Apparence');
+            assert.equal(!!s.access.contrast, false, 'l’Accessibilité n’est pas dans l’Apparence');
             // la page Apparence et la page Designs disent la même chose
             await toApparence(pa); await pa.waitForSelector('[data-lck-pmode="rond"].is-active', {state: 'attached'});
             assert.equal(await pa.locator('#design-form [name="preset"]').inputValue(), 'dark');
@@ -312,10 +312,10 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             let s = await screen(pa);
             assert.deepEqual(Object.keys(s.attrs).filter(k => !k.startsWith('data-lc-col')), [], 'designs et portraits comme avant');
             assert.equal(s.portraits.mode, 'avant'); assert.equal(s.column.mode, 'avant'); assert.equal(s.design.preset, 'soft');
-            assert.equal(s.access.size, 120, 'l’Accessibilité ne bouge pas (pas dans l’Apparence)'); assert.equal(s.ms.theme, 'sepia');
+            assert.equal(s.access.contrast, true, 'l’Accessibilité ne bouge pas (pas dans l’Apparence)'); assert.equal(s.ms.theme, 'sepia');
             await applyRow(pa, ALL, 'Ancien tout');
             s = await screen(pa);
-            assert.equal(s.access.size, 100, 'Accessibilité comme avant'); assert.equal(s.sort, null);
+            assert.equal(!!s.access.contrast, false, 'Accessibilité comme avant'); assert.equal(s.sort, null);
             assert.equal(s.ms.theme, 'light', 'mode simple comme avant'); assert.equal(s.ms.codeHash, hashHere, 'son code de sortie reste'); assert.equal(s.ms.viewer, 1);
         });
         await t('6. un fichier piégé : clés inconnues, valeurs énormes, HTML, types faux, code de sortie forcé → nettoyé', async () => {
