@@ -245,12 +245,12 @@
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.9.0<small>Trésors de famille, 69 patiences et deux nouveaux jeux, fond des pages, réglages réorganisés, gazette, broderie, ciel de naissance, ambiance sonore, nombreuses corrections</small></span></summary>
+                <summary><span>Nouveautés de la version 0.9.0<small>Trésors de famille, 93 patiences et deux nouveaux jeux, fond des pages, réglages réorganisés, gazette, broderie, ciel de naissance, ambiance sonore, nombreuses corrections</small></span></summary>
                 <div class="presentation-changes-body">
                     <h4>✨ Trésors de famille</h4>
                     <p>Un nouvel onglet (caché au départ) : 💌 lettres aux descendants scellées jusqu'à une date, 🎂 « À ton âge… », 📷 dater une photo, 🃏 jeu des 7 familles (photos et 6 styles), 🖍 arbre à colorier, souvenirs des sens, recettes et chansons (rangés dans la Mémoire familiale), 🌌 ciel de naissance calculé pour le lieu et la date, 🕯 bougie, 🎧 ambiance sonore d'époque (36 couches, 25 ambiances, minuterie), 🗺 chasse au trésor, ancêtre mystère du jour, livre dont tu es le héros, coïncidences, « Et si… », 🧵 broderie au point de croix, gravure laser, mosaïque de portraits, 📰 gazette de l'année (8 styles), fond d'écran, 🛂 passeports intérieurs, grand-parent raconte, partage temporaire sécurisé. 13 widgets et des listes pour les retrouver.</p>
                     <h4>🎲 Jeux</h4>
-                    <p>🂠 <b>Patiences</b> : 69 jeux de cartes qui se jouent seul (Klondike, FreeCell, Araignée, Yukon, Canfield, Pyramide, Golf, La Belle Lucie, Les quarante voleurs…), à la souris ou au clavier, avec ↶ annuler, 💡 un coup possible, chrono et record. ⚓ <b>Bataille navale</b> (contre l'ordinateur ou à deux, navires aux noms d'ancêtres) et 🔌 <b>Les câbles</b> façon Netwalk.</p>
+                    <p>🂠 <b>Patiences</b> : 93 jeux de cartes qui se jouent seul (Klondike, FreeCell, Araignée, Yukon, Canfield, Pyramide, Golf, La Belle Lucie, Les quarante voleurs, Napoléon à Sainte-Hélène, Trigon, Somerset…), à la souris ou au clavier, avec ↶ annuler, 💡 un coup possible, chrono et record. ⚓ <b>Bataille navale</b> (contre l'ordinateur ou à deux, navires aux noms d'ancêtres) et 🔌 <b>Les câbles</b> façon Netwalk.</p>
                     <h4>🧩 Fond des pages</h4>
                     <p>15 fonds au choix derrière les blocs (petits carreaux, uni, pointillés, cahier ligné, papier millimétré, grain de papier, toile, dégradé, registre, papier vergé, arbre en filigrane, cartes anciennes, tomettes, halo, ta photo floutée), avec la taille, l'intensité et la couleur du motif, les pages concernées et un aperçu vivant. Jamais imprimé.</p>
                     <h4>🎨 Réglages réorganisés</h4>

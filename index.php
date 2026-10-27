@@ -56,7 +56,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/puzzle.css?v=3">
     <link rel="stylesheet" href="assets/css/labyrinthe.css?v=1">
     <link rel="stylesheet" href="assets/css/jeux-famille.css?v=3">
-    <link rel="stylesheet" href="assets/css/jeux-patience.css?v=1">
+    <link rel="stylesheet" href="assets/css/jeux-patience.css?v=2">
     <link rel="stylesheet" href="assets/css/bunker.css?v=16">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=5">
@@ -1155,8 +1155,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu-morpion.js?v=2" defer></script>
 <script src="assets/js/app-jeu-naval.js?v=2" defer></script>
 <script src="assets/js/app-jeu-cables.js?v=2" defer></script>
-<script src="assets/js/app-jeu-patience-regles.js?v=2" defer></script>
-<script src="assets/js/app-jeu-patience.js?v=1" defer></script>
+<script src="assets/js/app-jeu-patience-regles.js?v=3" defer></script>
+<script src="assets/js/app-jeu-patience.js?v=3" defer></script>
 <script src="assets/js/app-jeu.js?v=13" defer></script>
 <script src="assets/js/app-chronologie.js?v=11" defer></script>
 <script src="assets/js/app-comparaison.js?v=8" defer></script>

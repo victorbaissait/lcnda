@@ -1,4 +1,4 @@
-/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 69 patiences.
+/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 93 patiences.
  * Les règles sont dans app-jeu-patience-regles.js (LCNDA_PATIENCES, sans écran) ; ici : la table, les cartes, la souris et le clavier.
  * Jouer : glisser une carte (ou une suite) sur une autre pile, ou cliquer la carte puis la pile où la poser ; double-clic : sur une
  * fondation ; clic sur la pioche : piocher. Jeux à paires (Pyramide, Onze, Monte-Carlo…) : cliquer les cartes qui vont ensemble.

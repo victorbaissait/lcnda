@@ -127,6 +127,31 @@
         {k: 'dix', fam: 'pairs', name: 'Dix', diff: 2, mode: 'sum', sum: 10, grid: [3, 4], faces: 'four', desc: 'Une grille de 12 cartes : enlève deux cartes qui font 10, ou quatre figures de même valeur (4 Valets, 4 Dames, 4 Rois ou quatre 10).'},
         {k: 'accordion', fam: 'pairs', name: 'L’accordéon', diff: 5, mode: 'accordion', desc: 'Toutes les cartes en ligne : pose un tas sur son voisin de gauche, ou sur le 3ᵉ à gauche, s’ils ont la même valeur ou la même couleur de carte. Gagné s’il ne reste qu’un tas.'},
         {k: 'calculation', fam: 'pairs', name: 'Le calcul', diff: 4, mode: 'calc', desc: 'Quatre fondations montent de 1 en 1, de 2 en 2, de 3 en 3 et de 4 en 4. Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente.'},
+        // ── ajoutées en 0.9.0 (mêmes règles de base, d'autres réglages)
+        {k: 'klondike2c', fam: 'klondike', name: 'Klondike (2 cartes)', diff: 2, desc: 'Klondike, la pioche se retourne deux cartes à la fois : seule la dernière se joue.', tab: {n: 7}, stock: {draw: 2}},
+        {k: 'klondikefree', fam: 'klondike', name: 'Klondike libre', diff: 1, desc: 'Klondike, mais une colonne vide accepte n’importe quelle carte (pas seulement un Roi).', tab: {n: 7, empty: 'any'}, stock: {draw: 1}},
+        {k: 'trigon', fam: 'klondike', name: 'Trigon', diff: 3, desc: 'Klondike où l’on descend dans la même couleur de carte (♥ sur ♥, ♠ sur ♠) ; on déplace les suites d’une même couleur.', tab: {n: 7, build: 'suit', move: 'suitseq'}, stock: {draw: 1}},
+        {k: 'freecell3', fam: 'freecell', name: 'FreeCell à 3 cases', diff: 3, desc: 'FreeCell avec trois cases libres au lieu de quatre.', cells: 3, tab: {n: 8, deal: 'rest', down: 'none', move: 'one', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'freecell1', fam: 'freecell', name: 'FreeCell à 1 case', diff: 5, desc: 'FreeCell avec une seule case libre : pour les experts.', cells: 1, tab: {n: 8, deal: 'rest', down: 'none', move: 'one', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'freecellrelax', fam: 'freecell', name: 'FreeCell détendu', diff: 1, desc: 'FreeCell, mais une suite bien rangée se déplace d’un coup, quelle que soit sa longueur.', cells: 4, tab: {n: 8, deal: 'rest', down: 'none', move: 'seq', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'scorpionopen', fam: 'spider', name: 'Scorpion à découvert', diff: 3, desc: 'Scorpion, mais toutes les cartes sont visibles dès le départ.', tab: {n: 7, deal: even(7, 7), down: 'none', build: 'suit', move: 'any', empty: 'king'}, found: {spider: true}, stock: {to: 'tab3'}},
+        {k: 'yukoncells', fam: 'yukon', name: 'Yukon aux cases libres', diff: 2, desc: 'Yukon avec quatre cases libres pour garer une carte.', cells: 4, tab: {n: 7, deal: [1, 6, 7, 8, 9, 10, 11], down: klDown(7), move: 'any'}, stock: {to: 'none'}},
+        {k: 'fortyeight', fam: 'forty', name: 'Quarante-huit', diff: 3, desc: 'Deux jeux, 8 colonnes de 5 cartes ; on descend dans la même couleur de carte et la pioche repasse une fois.', decks: 2, tab: {n: 8, deal: even(8, 5), down: 'none', build: 'suit', move: 'one', empty: 'any'}, stock: {draw: 1, redeals: 1}},
+        {k: 'diplomat', fam: 'forty', name: 'Le diplomate', diff: 2, desc: 'Deux jeux, 8 colonnes de 4 cartes ; on descend sans regarder la couleur, une carte à la fois. La pioche ne passe qu’une fois.', decks: 2, tab: {n: 8, deal: even(8, 4), down: 'none', build: 'any', move: 'one', empty: 'any'}, stock: {draw: 1, redeals: 0}},
+        {k: 'thieves1', fam: 'forty', name: 'Les petits voleurs', diff: 3, desc: 'Les quarante voleurs avec un seul jeu : 7 colonnes de 3 cartes, la pioche ne passe qu’une fois.', tab: {n: 7, deal: even(7, 3), down: 'none', build: 'suit', move: 'one', empty: 'any'}, stock: {draw: 1, redeals: 0}},
+        {k: 'trefoil', fam: 'builder', name: 'Le trèfle', diff: 2, desc: 'La Belle Lucie, mais les As sont déjà posés : 16 éventails de 3 cartes, deux redistributions.', found: {out: [1]}, tab: {n: 16, deal: even(16, 3), down: 'none', build: 'suit', move: 'one', empty: 'none', grid: 6}, stock: {to: 'shuffle', redeals: 2}},
+        {k: 'somerset', fam: 'builder', name: 'Somerset', diff: 3, desc: 'Tout est sur la table en 10 colonnes (de 1 à 8 cartes, puis 8 et 8) ; on descend en alternant rouge et noir, une carte à la fois.', tab: {n: 10, deal: [1, 2, 3, 4, 5, 6, 7, 8, 8, 8], down: 'none', build: 'alt', move: 'one', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'bakersrelax', fam: 'builder', name: 'La douzaine du boulanger libre', diff: 1, desc: 'La douzaine du boulanger, mais une colonne vide accepte n’importe quelle carte.', kingsBottom: true, tab: {n: 13, deal: even(13, 4), down: 'none', build: 'any', move: 'one', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'pyramidrelax', fam: 'pairs', name: 'La pyramide sans fin', diff: 2, mode: 'pyramid', redeals: 99, desc: 'La pyramide, et la pioche repasse autant qu’on veut.'},
+        {k: 'quinze', fam: 'pairs', name: 'Quinze', diff: 2, mode: 'sum', sum: 15, grid: [4, 4], desc: 'Une grille de 16 cartes : enlève deux cartes qui font 15 (Valet 11, Dame 12, Roi 13).'},
+        {k: 'treize', fam: 'pairs', name: 'Treize', diff: 2, mode: 'sum', sum: 13, single: 13, grid: [3, 4], desc: 'Une grille de 12 cartes : enlève deux cartes qui font 13 (Valet 11, Dame 12) ; un Roi s’en va seul.'},
+        {k: 'klondike1pass', fam: 'klondike', name: 'Klondike en une passe', diff: 4, desc: 'Klondike, une carte à la fois, mais la pioche ne passe qu’une seule fois.', tab: {n: 7}, stock: {draw: 1, redeals: 0}},
+        {k: 'klondike2d3', fam: 'klondike', name: 'Klondike double (3 cartes)', diff: 4, desc: 'Deux jeux, 9 colonnes, et la pioche se retourne trois cartes à la fois.', decks: 2, tab: {n: 9}, stock: {draw: 3}},
+        {k: 'freecell5', fam: 'freecell', name: 'FreeCell à 5 cases', diff: 1, desc: 'FreeCell avec une case libre de plus : plus facile.', cells: 5, tab: {n: 8, deal: 'rest', down: 'none', move: 'one', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'scorpion2', fam: 'spider', name: 'Scorpion II', diff: 3, desc: 'Scorpion avec seulement 3 colonnes à moitié cachées au départ.', tab: {n: 7, deal: even(7, 7), down: [3, 3, 3, 0, 0, 0, 0], build: 'suit', move: 'any', empty: 'king'}, found: {spider: true}, stock: {to: 'tab3'}},
+        {k: 'yukonfree', fam: 'yukon', name: 'Yukon libre', diff: 2, desc: 'Yukon, mais une colonne vide accepte n’importe quelle carte.', tab: {n: 7, deal: [1, 6, 7, 8, 9, 10, 11], down: klDown(7), move: 'any', empty: 'any'}, stock: {to: 'none'}},
+        {k: 'napoleon', fam: 'forty', name: 'Napoléon à Sainte-Hélène', diff: 3, desc: 'Le nom français des quarante voleurs, avec une deuxième passe de la pioche.', decks: 2, tab: {n: 10, deal: even(10, 4), down: 'none', build: 'suit', move: 'one', empty: 'any'}, stock: {draw: 1, redeals: 1}},
+        {k: 'bellelucie3', fam: 'builder', name: 'La Belle Lucie généreuse', diff: 2, desc: 'La Belle Lucie avec trois redistributions au lieu de deux.', tab: {n: 18, deal: [...even(17, 3), 1], down: 'none', build: 'suit', move: 'one', empty: 'none', grid: 6}, stock: {to: 'shuffle', redeals: 3}},
     ];
     const BY = new Map(GAMES.map(g => [g.k, g]));
     /** les réglages complets d'un jeu (valeurs par défaut) */
@@ -474,6 +499,7 @@
             const face = c => c.r >= 11;
             if (def.faces === true && cs.length === 3) return new Set(cs.map(c => c.r)).size === 3 && cs.every(face);
             if (def.faces === 'four' && cs.length === 4) return cs.every(c => c.r >= 10) && cs.every(c => c.r === cs[0].r);
+            if (def.single && cs.length === 1) return cs[0].r === def.single; // Treize : le Roi s'en va seul
             if (cs.length !== 2) return false;
             if (def.faces && cs.some(face)) return false;
             return cs[0].r + cs[1].r === def.sum;
@@ -490,6 +516,7 @@
         moves(st, def) {
             const fr = st.piles.filter(p => p.type === 'slot' && p.cards.length), out = [];
             fr.forEach((a, i) => fr.slice(i + 1).forEach(b => { if (this.ok(def, [top(a), top(b)])) out.push({set: [a.id, b.id], score: 10}); }));
+            if (def.single) fr.forEach(a => { if (top(a).r === def.single) out.push({set: [a.id], score: 10}); });
             if (def.faces === true) { for (const a of fr) for (const b of fr) for (const c of fr) { if (a.id < b.id && b.id < c.id && this.ok(def, [top(a), top(b), top(c)])) out.push({set: [a.id, b.id, c.id], score: 10}); } }
             if (def.faces === 'four') { const by = {}; fr.forEach(p => { if (top(p).r >= 10) (by[top(p).r] = by[top(p).r] || []).push(p.id); }); Object.values(by).forEach(l => { if (l.length >= 4) out.push({set: l.slice(0, 4), score: 10}); }); }
             return out;
