@@ -42,7 +42,8 @@
 
     let kiosk = {on: false};
     function applyKiosk() {
-        document.body.classList.toggle('is-kiosk', !!kiosk.on);
+        // le mode simple ouvert (html.ms-open) a aussi besoin de « is-kiosk » : on ne la lui retire pas (app-mode-simple.js)
+        document.body.classList.toggle('is-kiosk', !!kiosk.on || document.documentElement.classList.contains('ms-open'));
         let banner = document.getElementById('kiosk-banner');
         if (kiosk.on && !banner) {
             banner = document.createElement('div');

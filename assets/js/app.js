@@ -366,7 +366,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     // Affichage des variantes de nom dans la section Identité
     const IDENTITY_NAME_VARIANTS_DISPLAY_KEY = 'genealogie-identity-name-variants-display';
-    function getIdentityNameVariantsDisplay(){try{return localStorage.getItem(IDENTITY_NAME_VARIANTS_DISPLAY_KEY)||'if_filled';}catch(_){return 'if_filled';}}
+    function getIdentityNameVariantsDisplay(){try{const ok=v=>['always','never','if_filled'].includes(v),d=readDesignSettings().identity_name_variants_display;if(ok(d))return d;/* la valeur de Thème et couleurs passe devant : c'est elle que rapportent les réglages enregistrés et le défaut du site */const v=localStorage.getItem(IDENTITY_NAME_VARIANTS_DISPLAY_KEY);return ok(v)?v:'if_filled';}catch(_){return 'if_filled';}}
     function saveIdentityNameVariantsDisplay(value){localStorage.setItem(IDENTITY_NAME_VARIANTS_DISPLAY_KEY,value);}
 
     function applyGenderColorsToDocument(){

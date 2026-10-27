@@ -515,6 +515,11 @@ html[data-toast-pos="br"] .toast-region,html[data-toast-pos="br"] .toast-region[
 html[data-toast-pos="tl"] .toast-region,html[data-toast-pos="tl"] .toast-region[popover]{inset:24px auto auto 24px}
 html[data-toast-pos="tr"] .toast-region,html[data-toast-pos="tr"] .toast-region[popover]{inset:24px 24px auto auto}
 html[data-toast-pos="tl"] .toast.ui-toast,html[data-toast-pos="tr"] .toast.ui-toast{animation-name:toast-in-top}
+/* les messages ne recouvrent pas la barre des onglets (Apparence → menu en haut ou en bas, écrans larges) */
+@media (min-width:851px){
+html.nav-bottom:not(.is-screen-embed):not([data-toast-pos="tl"]):not([data-toast-pos="tr"]) .toast-region,html.nav-bottom:not(.is-screen-embed):not([data-toast-pos="tl"]):not([data-toast-pos="tr"]) .toast-region[popover]{bottom:calc(var(--header, 76px) + 16px)}
+html:not(.nav-bottom)[data-toast-pos="tl"] .toast-region,html:not(.nav-bottom)[data-toast-pos="tl"] .toast-region[popover],html:not(.nav-bottom)[data-toast-pos="tr"] .toast-region,html:not(.nav-bottom)[data-toast-pos="tr"] .toast-region[popover]{top:calc(var(--header, 76px) + 16px)}
+}
 @keyframes toast-in-top{from{opacity:0;transform:translateY(-10px)}}
 .toast-prefs-grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:16px;align-items:start}
 @media(max-width:760px){.toast-prefs-grid{grid-template-columns:1fr}}

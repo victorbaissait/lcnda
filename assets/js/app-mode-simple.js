@@ -1024,7 +1024,7 @@
         FULL.destroy(); document.getElementById('ms-root')?.remove(); FULL = null;
         keptInert.forEach(el => el.removeAttribute('inert')); keptInert = [];
         document.documentElement.classList.remove('ms-open', 'ms-own-cb');
-        if (addedKiosk) document.body.classList.remove('is-kiosk'); addedKiosk = false;
+        if (addedKiosk && !document.getElementById('kiosk-banner')) document.body.classList.remove('is-kiosk'); addedKiosk = false; // le mode consultation 🔒 allumé entre-temps garde la sienne
         guard.on = false; const later = guard.deferred.splice(0); later.forEach(fn => { try { fn(); } catch (_) {} });
         if (fromMode) toast('Mode simple quitté. Tu retrouves l’app normale.');
         if (location.hash === '#mode-simple') { try { history.replaceState(null, '', location.pathname + location.search); } catch (_) {} }
