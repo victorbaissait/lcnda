@@ -15,6 +15,8 @@
     const ls = (key, fallback = null) => { try { return localStorage.getItem(key) ?? fallback; } catch (_) { return fallback; } };
     const lsSet = (key, value) => { try { localStorage.setItem(key, value); } catch (_) {} };
     const lsDel = key => { try { localStorage.removeItem(key); } catch (_) {} };
+    /** toutes les clés, copiées d'abord : effacer pendant qu'on parcourt localStorage par index en saute (l'ordre change) */
+    const lsKeys = () => { try { return Array.from({length: localStorage.length}, (_, i) => localStorage.key(i)); } catch (_) { return []; } };
     const slug = text => String(text || 'sans-nom').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase() || 'sans-nom';
     /** Fait télécharger un fichier texte (JSON) au navigateur ou à Electron. */
     function downloadText(name, text, type = 'application/json') {
@@ -87,8 +89,7 @@
     async function applyLayout(settings) {
         const release = holdAutoSave();
         const removed = []; // (un fichier reçu a déjà été vérifié à l'import)
-        for (let i = localStorage.length - 1; i >= 0; i--) {
-            const key = localStorage.key(i);
+        for (const key of lsKeys()) { // (une copie : effacer pendant qu'on parcourt localStorage par index saute des clés)
             if (key && isLayoutKey(key) && !(key in settings)) { removed.push(key); lsDel(key); }
         }
         const set = {};
@@ -240,7 +241,7 @@
         const msNow = ls(MS_KEY);
         if (msNow && ext.modeSimple?.keepPrivate && (!layoutOnly) && !keep.includes(MS_KEY)) { try { settings = {...settings, [MS_KEY]: JSON.stringify(ext.modeSimple.keepPrivate(typeof settings[MS_KEY] === 'string' ? JSON.parse(settings[MS_KEY]) : {}, JSON.parse(msNow)))}; } catch (_) {} }
         // la barre d'une liste garde la recherche tapée et les filtres : seuls le tri et l'affichage sont remis (une liste absente ne bouge pas)
-        for (let i = localStorage.length - 1; i >= 0; i--) { const key = localStorage.key(i); if (key && key !== GRAPHS_KEY && isAllKey(key) && !isBarKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
+        for (const key of lsKeys()) { if (key && key !== GRAPHS_KEY && isAllKey(key) && !isBarKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
         const set = {};
         Object.entries(settings).forEach(([key, value]) => {
             if (!isAllKey(key) || typeof value !== 'string') return;

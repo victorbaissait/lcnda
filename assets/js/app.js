@@ -71,7 +71,7 @@
         };
         // Changer de généalogie : les derniers réglages partent dans la base ouverte, puis la copie locale est vidée
         // (sans le dire à la base) ; la généalogie suivante démarre avec SES réglages, rien n'est mélangé.
-        window.LCNDA_SETTINGS_DETACH=async()=>{await flush(false);detached=true;for(let i=store.length-1;i>=0;i--){const key=store.key(i);if(synced(key)){try{originalRemove.call(store,key);}catch(_){}}}};
+        window.LCNDA_SETTINGS_DETACH=async()=>{await flush(false);detached=true;for(const key of Array.from({length:store.length},(_,i)=>store.key(i))){if(synced(key)){try{originalRemove.call(store,key);}catch(_){}}}};
         const schedule=()=>{if(!timer)timer=setTimeout(()=>flush(false),1000);};
         const base=Array.isArray(fromBase)?{}:fromBase;
         // Deuxième écran ou écran posé dans un onglet (?view=…) : la fenêtre principale tient déjà les réglages à jour.
@@ -3023,7 +3023,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             else{
                 ['human','animal'].forEach(kind=>{const key=blockBaseKey(kind);let v={};try{v=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(_){}v.hideEmptyIdentity=hide;localStorage.setItem(key,JSON.stringify(v));});
                 // « toutes » : les choix faits fiche par fiche s'effacent
-                for(let i=localStorage.length-1;i>=0;i--){const key=localStorage.key(i)||'';if(key.startsWith('genealogie-identity-empty-'))localStorage.removeItem(key);else if(key.startsWith('genealogie-person-blocks-')){try{const v=JSON.parse(localStorage.getItem(key)||'{}');if(v&&typeof v==='object'&&'hideEmptyIdentity' in v){delete v.hideEmptyIdentity;localStorage.setItem(key,JSON.stringify(v));}}catch(_){}}}
+                for(const key of Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)||'')){if(key.startsWith('genealogie-identity-empty-'))localStorage.removeItem(key);else if(key.startsWith('genealogie-person-blocks-')){try{const v=JSON.parse(localStorage.getItem(key)||'{}');if(v&&typeof v==='object'&&'hideEmptyIdentity' in v){delete v.hideEmptyIdentity;localStorage.setItem(key,JSON.stringify(v));}}catch(_){}}}
             }
         }catch(_){toast('Réglage non enregistré (stockage indisponible).','error');return;}
         toast(hide?(scope==='this'?'Lignes vides masquées sur cette fiche.':'Lignes vides masquées sur toutes les fiches.'):(scope==='this'?'Lignes vides affichées sur cette fiche.':'Lignes vides affichées sur toutes les fiches.'));
