@@ -7,7 +7,7 @@
  * réglages enregistrés et le défaut du site. La photo n'y est pas (trop lourde) : 'genealogie-bg-photo', sur cet
  * ordinateur ; sans elle (autre ordinateur, défaut du site), le fond est uni.
  * Pose sur <html> : data-lc-bg + --lc-bg-img / --lc-bg-size (designs.css), data-lc-bgoff (pages décochées) ;
- * app.js pose data-lcnda-page (la page ouverte).
+ * app.js pose data-page-ouverte (la page ouverte).
  * Priorités (validées) : Accessibilité → Contraste élevé et « Une chose à la fois » mettent un fond uni ; sur une fiche,
  * le grain du style « Papier ancien » passe devant. Le cadre le dit.
  */
@@ -99,7 +99,7 @@
         return F;
     }
     /** la page ouverte (pour « Sur quelles pages ») */
-    function setModule(mod) { document.documentElement.setAttribute('data-lcnda-page', mod || ''); }
+    function setModule(mod) { document.documentElement.setAttribute('data-page-ouverte', mod || ''); }
 
     /* ═════════ Le cadre « 🧩 Fond des pages » (dans le formulaire #design-form) ═════════ */
     const FIELDS = ['bgKind', 'bgSize', 'bgInt', 'bgColor', 'bgWhere', 'bgBlur', 'grid'];

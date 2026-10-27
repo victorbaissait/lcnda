@@ -187,6 +187,11 @@
     //  le nom de la personne qui relit, ni ce que l'app note toute seule : sections ouvertes, boutons et commandes des éditeurs)
     ALL_SKIP.push('genealogie-auto-backup-settings', 'genealogie-sosa-multi', 'genealogie-media-alt', 'genealogie-layout-reviewer', 'genealogie-reglages-ouverts', 'genealogie-toolbar-defs', 'genealogie-editor-cmds');
     ALL_SKIP.push('genealogie-designs-presets'); // les « Ensembles prêts » des designs au choix et leurs réglages enregistrés : retirés (un vieux fichier qui les a s’applique sans eux)
+    ALL_SKIP.push('genealogie-bg-photo'); // la photo du fond des pages (app-fond.js) : lourde, elle reste sur cet ordinateur (et un ensemble ne l’efface pas)
+    // des réglages gardés hors « genealogie-… » (sur cet ordinateur seulement) : Réordonner, Trésors, arbre décoré, citations,
+    // partage avec la famille, gabarits des décennales, voix du musée, éditeurs (dessin, montage, images en double, choix d’un média)
+    const ALL_LOCAL = ['lcnda-side-order', 'lcnda-tresors-order', 'lcnda-decor-tree', 'lcnda-cite-style', 'lcnda-layout-cite-style', 'lcnda-family-share', 'lcnda-decennale-gabarits',
+        'lcnda-museum-voice-rate', 'lcnda-vx-smart', 'lcnda-vx-alignto', 'lcnda-mt-rush-sort', 'lcnda-imgdup-mode', 'lcnda-imgdup-sens', 'lcnda-media-picker-size'];
     // 🔍 le tri et l'affichage (Liste | Fiches) de chaque liste (barre H10, UI.sortOf / UI.viewOf) : sans la recherche tapée ni les filtres
     const isListKey = key => /^lcnda-(sort|view|listbar):[A-Za-z0-9_:.-]{1,120}$/.test(key);
     const isBarKey = key => key.startsWith('lcnda-listbar:');
@@ -197,7 +202,7 @@
         if (o?.view === 'cards' || o?.view === 'list') out.view = o.view;
         return Object.keys(out).length ? JSON.stringify(out) : null;
     }
-    const isAllKey = key => (/^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !/-\d+$/.test(key)) || isListKey(key);
+    const isAllKey = key => (/^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !/-\d+$/.test(key)) || isListKey(key) || ALL_LOCAL.includes(key);
     const MS_KEY = 'genealogie-mode-simple';
     /** un ensemble qui part dans un fichier (même enregistré avant ces précautions) : sans ce qui ne doit pas quitter cet ordinateur */
     const portableAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k]) => isAllKey(k)).map(([k, v]) => [k, k === MS_KEY || isListKey(k) ? tidy(k, v) : v]).filter(([, v]) => typeof v === 'string'));

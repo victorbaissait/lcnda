@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=258">
+    <link rel="stylesheet" href="assets/css/app.css?v=261">
     <link rel="stylesheet" href="assets/css/picker.css?v=6">
     <link rel="stylesheet" href="assets/css/heritage.css?v=250">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -1137,8 +1137,8 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app-fond.js?v=6" defer></script>
-<script src="assets/js/app.js?v=499" defer></script>
+<script src="assets/js/app-fond.js?v=7" defer></script>
+<script src="assets/js/app.js?v=500" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=22" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1235,7 +1235,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=46" defer></script>
 <script src="assets/js/heritage-dnd.js?v=12" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=1" defer></script>
-<script src="assets/js/heritage-studio.js?v=103" defer></script>
+<script src="assets/js/heritage-studio.js?v=104" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-fluidite.js?v=2" defer></script>
 <script src="assets/js/heritage-retouch-gomme.js?v=2" defer></script>

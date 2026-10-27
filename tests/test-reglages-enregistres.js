@@ -80,7 +80,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         return page;
     };
     const PICK = {a1: 'doux', a2: 'compacte', a3: 'trait', a4: 'acte', a5: 'genre', a6: 'contour', a7: 'petit', a8: 'zebre'};
-    const KEYS = ['genealogie-design', 'genealogie-designs', 'genealogie-portraits', 'genealogie-left-column', 'genealogie-accessibilite', 'genealogie-mode-simple', 'lcnda-sort:listes:media', 'lcnda-view:listes:media', 'lcnda-listbar:listes:media', 'genealogie-auto-backup-settings', 'genealogie-sosa-multi'];
+    const KEYS = ['lcnda-side-order', 'lcnda-tresors-order', 'lcnda-cite-style', 'genealogie-design', 'genealogie-designs', 'genealogie-portraits', 'genealogie-left-column', 'genealogie-accessibilite', 'genealogie-mode-simple', 'lcnda-sort:listes:media', 'lcnda-view:listes:media', 'lcnda-listbar:listes:media', 'genealogie-auto-backup-settings', 'genealogie-sosa-multi'];
     /** beaucoup de réglages changés d'un coup */
     const setMany = page => page.evaluate(() => {
         const D = window.LCNDA_DESIGNS, G = D.read();
@@ -92,6 +92,11 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         const MS = window.LCNDA_EXT.modeSimple;
         MS.write({...MS.settings(), ready: true, viewer: 2, theme: 'sepia', fs: 30, useCode: true, codeHash: MS.makeCodeHash('1234'), hiddenPhotos: [5, 6]});
         localStorage.setItem('lcnda-sort:listes:media', 'az');
+        // des réglages gardés hors « genealogie-… » : Réordonner, l’ordre des Trésors, le style des citations ; la photo du fond reste ici
+        localStorage.setItem('lcnda-side-order', JSON.stringify({listes: {order: ['b', 'a'], hidden: ['c']}}));
+        localStorage.setItem('lcnda-tresors-order', JSON.stringify(['bougie', 'lettres']));
+        localStorage.setItem('lcnda-cite-style', 'chicago');
+        localStorage.setItem('genealogie-bg-photo', 'data:image/jpeg;base64,AAAA');
         localStorage.setItem('lcnda-view:listes:media', 'cards');
         localStorage.setItem('lcnda-listbar:listes:media', JSON.stringify({q: 'ma recherche', f: {lieu: 42}, sort: 'az', view: 'cards'}));
         localStorage.setItem('genealogie-auto-backup-settings', JSON.stringify({enabled: true, dir: '/home/victor/sauvegardes', intervalMinutes: 30}));
@@ -184,6 +189,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             const p = (await lsJson(pa, 'genealogie-settings-profiles')).find(x => x.name === 'Tout');
             for (const k of ['genealogie-design', 'genealogie-designs', 'genealogie-portraits', 'genealogie-left-column', 'genealogie-accessibilite', 'genealogie-mode-simple', 'lcnda-sort:listes:media', 'lcnda-view:listes:media', 'lcnda-listbar:listes:media']) assert.ok(k in p.settings, k);
             assert.deepEqual(JSON.parse(p.settings['lcnda-listbar:listes:media']), {sort: 'az', view: 'cards'}, 'ni la recherche tapée ni les filtres');
+            for (const k of ['lcnda-side-order', 'lcnda-tresors-order', 'lcnda-cite-style']) assert.ok(k in p.settings, `toute l’app : ${k}`);
+            assert.ok(!('genealogie-bg-photo' in p.settings), 'la photo du fond reste sur cet ordinateur');
         });
         await t('5. jamais dans un réglage : code de sortie (même haché), qui regarde, photos cachées, chemin de dossier, Sosa multiple', async () => {
             const all = (await lsJson(pa, 'genealogie-settings-profiles')).find(x => x.name === 'Tout'), lay = (await lsJson(pa, 'genealogie-layout-profiles')).find(x => x.name === 'Mon apparence');
@@ -227,6 +234,10 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             const s = await screen(pa); checkAll(s);
             assert.equal(s.ms.codeHash, hashHere); assert.equal(s.ms.useCode, true); assert.equal(s.ms.viewer, 1); assert.equal(s.ms.ready, true);
             assert.ok(!s.bar.q && !s.bar.f, 'la recherche tapée et les filtres ne sont pas dans le réglage');
+            const more = await pa.evaluate(() => ['lcnda-side-order', 'lcnda-tresors-order', 'lcnda-cite-style', 'genealogie-bg-photo'].map(k => localStorage.getItem(k)));
+            assert.deepEqual(JSON.parse(more[0]), {listes: {order: ['b', 'a'], hidden: ['c']}}, 'Réordonner');
+            assert.deepEqual(JSON.parse(more[1]), ['bougie', 'lettres'], 'ordre des Trésors'); assert.equal(more[2], 'chicago', 'style des citations');
+            assert.equal(more[3], 'data:image/jpeg;base64,AAAA', 'la photo du fond n’est pas effacée');
         });
         await t('3. exporter les deux réglages (fichiers sans secret)', async () => {
             files.lay = path.join(tmpAll, 'apparence.json'); files.all = path.join(tmpAll, 'tout.json');

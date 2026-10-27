@@ -4310,6 +4310,7 @@ dialog .modal-actions > :is(.danger:not([type=submit]), [data-h-delete]) { margi
 
 /* ═════ Réglages → Apparence : « 👤 Portraits » et « ▤ Colonne de gauche » (maquette validée) ═════ */
 .lck-panel { background: var(--white); border: var(--line); box-shadow: var(--shadow); padding: 20px 22px 24px; min-width: 0; }
+.lck-panel + .lck-panel { margin-top: 1.25rem; }
 .lck-panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
 .lck-panel-head h3, .lck-h { font-size: 20px; margin: 0 0 4px; letter-spacing: -.01em; }
 .lck-h { font-size: 18px; }
@@ -4979,9 +4980,9 @@ html:not(.show-event-ics) .event-ics-btn { display: none; }
 /* 🧩 Fond des pages (app-fond.js ; Réglages → Thème et couleurs) : le fond choisi, les pages décochées, l'impression */
 :root[data-lc-bg] .workspace { background-image: var(--lc-bg-img); background-size: var(--lc-bg-size); background-position: 0 0; }
 :root[data-lc-bg="photo"] .workspace { background-position: center; background-repeat: no-repeat; }
-:root[data-lc-bgoff~="dash"][data-lcnda-page="dashboard"] .workspace, :root[data-lc-bgoff~="fiche"][data-lcnda-page="personnes"] .workspace, :root[data-lc-bgoff~="graph"][data-lcnda-page="graphiques"] .workspace, :root[data-lc-bgoff~="listes"][data-lcnda-page="listes"] .workspace, :root[data-lc-bgoff~="listes"][data-lcnda-page="recherche"] .workspace, :root[data-lc-bgoff~="enq"][data-lcnda-page="enquetes"] .workspace, :root[data-lc-bgoff~="reg"][data-lcnda-page="maintenance"] .workspace { background-image: none !important; }
+:root[data-lc-bgoff~="dash"][data-page-ouverte="dashboard"] .workspace, :root[data-lc-bgoff~="fiche"][data-page-ouverte="personnes"] .workspace, :root[data-lc-bgoff~="graph"][data-page-ouverte="graphiques"] .workspace, :root[data-lc-bgoff~="listes"][data-page-ouverte="listes"] .workspace, :root[data-lc-bgoff~="listes"][data-page-ouverte="recherche"] .workspace, :root[data-lc-bgoff~="enq"][data-page-ouverte="enquetes"] .workspace, :root[data-lc-bgoff~="reg"][data-page-ouverte="maintenance"] .workspace { background-image: none !important; }
 @media print { .workspace { background-image: none !important; } }
-.maintenance-panel.lcf { max-width: none; }
+.maintenance-panel.lcf { max-width: none; margin-top: 1.5rem; } /* un cadre à part, sous le formulaire : le même écart qu’entre les autres cadres */
 .lcf h3 { margin: 0 0 4px; }
 .lcf-lab { font: 800 13px system-ui, sans-serif; margin: 16px 0 8px; display: flex; align-items: center; gap: 8px; }
 .lcf-lab span { display: inline-grid; place-items: center; width: 22px; height: 22px; background: var(--blue); color: #fff; font-size: 12px; }

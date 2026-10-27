@@ -34,8 +34,8 @@ t('priorités : Contraste élevé et « Une chose à la fois » mettent un fond 
     assert.match(read('assets/css/access.css'), /html\.a11y-contrast \.workspace \{ background-image: none !important/);
     assert.match(read('assets/css/access.css'), /html\.a11y-simple \.workspace \{ background-image: none !important/);
     const css = read('assets/css/app.css');
-    assert.match(css, /:root\[data-lc-bgoff~="dash"\]\[data-lcnda-page="dashboard"\] \.workspace/);
+    assert.match(css, /:root\[data-lc-bgoff~="dash"\]\[data-page-ouverte="dashboard"\] \.workspace/);
     assert.match(css, /@media print \{ \.workspace \{ background-image: none !important; \} \}/);
-    assert.match(read('assets/js/app.js'), /setAttribute\('data-lcnda-page',module\)/);
+    assert.match(read('assets/js/app.js'), /setAttribute\('data-page-ouverte',module\)/);
 });
 console.log(`✓ fond des pages : ${n} vérifications`);

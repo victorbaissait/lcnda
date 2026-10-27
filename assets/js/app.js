@@ -2260,7 +2260,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(module!=='dashboard'||(state.dashboardBoard&&!currentCustomTab()))state.dashboardBoard='';
         if(module!=='listes')listController?.abort();
         state.module = module;
-        document.documentElement.setAttribute('data-lcnda-page',module); // 🧩 Fond des pages : « Sur quelles pages » (app-fond.js)
+        document.documentElement.setAttribute('data-page-ouverte',module); // 🧩 Fond des pages : « Sur quelles pages » (app-fond.js)
         const renderToken=++state.workspaceToken;
         persistUiState();
         const hash=moduleHash(module);
