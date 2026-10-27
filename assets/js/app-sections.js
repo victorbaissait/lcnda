@@ -534,13 +534,13 @@
     }
     function designsNoteHtml() {
         const D = window.LCNDA_DESIGNS; let txt = '';
-        try { const G = D?.read?.(); const nm = id => { const v = D.DEFS[id].variants.find(x => x.k === G[id].v); return v ? v.t : ''; }; if (G) txt = `traits, coins et ombres (A1 — <b>${esc(nm('a1'))}</b>), espace (A2 — ${esc(nm('a2'))}), onglets (A6 — <b>${esc(nm('a6'))}</b>)`; } catch (_) {}
-        return `<div class="ui-notice ui-notice-info fsec-designs-link" id="fsec-designs-link"><span class="ui-notice-ic" aria-hidden="true">🎨</span><span>La forme vient de Designs au choix : ${txt || 'traits, coins, ombres, espace, onglets'}. Rien à régler ici pour ça. <button type="button" class="link-button" data-fsec-go-designs>Designs au choix →</button></span></div>`;
+        try { const G = D?.read?.(); const nm = id => { const v = D.DEFS[id].variants.find(x => x.k === G[id].v); return v ? v.t : ''; }; if (G) txt = `traits, coins et ombres (<b>${esc(nm('a1'))}</b>)`; } catch (_) {}
+        return `<div class="ui-notice ui-notice-info fsec-designs-link" id="fsec-designs-link"><span class="ui-notice-ic" aria-hidden="true">🎨</span><span>Le style des fiches : ${txt || 'traits, coins, ombres'}. Il se règle avec la forme de l’en-tête, plus bas sur cette page. <button type="button" class="link-button" data-fsec-go-designs>Style des fiches ↓</button></span></div>`;
     }
     function sectionsPanelHtml() {
         const o = opts(), kind = editKind();
         const opt = (k, label, sub) => (UI().toggleHtml ? UI().toggleHtml(label, {checked: !!o[k], attrs: `data-fsec-opt-check="${k}"`, sub}) : '');
-        return `<section class="person-block-config" id="fsec-cfg"><header><span class="eyebrow">FICHES PERSONNES ET ANIMAUX</span><h3 data-help="Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) suit Designs au choix." data-help-faq="sections des fiches">Sections des fiches</h3><p>Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite.</p></header>
+        return `<section class="person-block-config" id="fsec-cfg"><header><span class="eyebrow">FICHES PERSONNES ET ANIMAUX</span><h3 data-help="Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »)." data-help-faq="sections des fiches">Sections des fiches</h3><p>Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite.</p></header>
             ${designsNoteHtml()}
             <div class="maintenance-panel fsec-panel">
                 <div class="fsec-row"><span class="fsec-lab">Pour quelles fiches</span>${seg('kind', [['human', '👤 Personnes'], ['animal', '🐾 Animaux']], kind)}${UI().toggleHtml ? UI().toggleHtml('Sections propres aux animaux', {checked: o.animalOwn, attrs: 'data-fsec-opt-check="animalOwn"', sub: 'Éteint : les animaux prennent les sections des personnes.'}) : ''}</div>
@@ -655,7 +655,7 @@
                 if (k === 'editor') { redrawPres(); redrawBlocks(); return; }
                 redrawCfg(); return;
             }
-            if (t.closest('[data-fsec-go-designs]')) { const st = A().state; if (st) st.maintenanceTab = 'designs'; A().setModule?.('maintenance'); return; }
+            if (t.closest('[data-fsec-go-designs]')) { const f = document.getElementById('lc-person-header'); f?.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
             const rx = t.closest('[data-fsec-reset-ex]');
             if (rx) { const k = exceptionKey(rx.dataset.fsecResetEx); try { localStorage.removeItem(k); } catch (_) {} redrawBlocks(); }
         });

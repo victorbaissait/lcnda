@@ -3,7 +3,8 @@
  * 1. Colonne de gauche (toutes les colonnes : Personnes, Graphiques, Carte, Listes, Recherche, Enquêtes, Comparaison,
  *    Chronologie, Fiches, ADN, Réglages, Tableau de bord…)
  *    localStorage['genealogie-left-column'] = {mode: 'avant'|'nouveau', style: 'boutons'|'continue'|'aeree'|'plat'|'barre'|'pastilles'|'classeur'|'icones'|'doux', nums,
- *      numstyle: 'origine'|'suite', tabs: 'avant'|'ligne'|'dessus'|'texte', size: 'normale'|'compacte', width (240–420), lf: 'bas'|'barre'}
+ *      numstyle: 'origine'|'suite', tabs: 'avant'|'ligne'|'dessus'|'texte', size: 'normale'|'compacte', width (240–420), lf: 'bas'|'barre',
+ *      r (0–50 px), bw (0,5–6 px), sh: 'franches'|'douces'|'aucune'} — traits, coins et ombres posés sur #sidebar seul (data-lc-lines/sh/r)
  *    « Comme avant » (par défaut) : rien ne change. Sinon des attributs sur :root (data-lc-col-*) pour les styles (app.css),
  *    et un petit passage sur #sidebar-content après chaque dessin de la colonne : numéros qui se suivent, onglets
  *    « icône + nom », « Liste | Fiches » posé dans la barre au-dessus de la liste (le bouton d'origine reste caché dans
@@ -25,8 +26,8 @@
     /* ═════════════════════════ 1. La colonne de gauche ═════════════════════════ */
     const KEY = 'genealogie-left-column';
     const PRESETS = {
-        avant: {style: 'boutons', nums: true, numstyle: 'origine', tabs: 'avant', size: 'normale', width: 320, lf: 'bas'},
-        nouveau: {style: 'boutons', nums: true, numstyle: 'suite', tabs: 'ligne', size: 'normale', width: 320, lf: 'barre'},
+        avant: {style: 'boutons', nums: true, numstyle: 'origine', tabs: 'avant', size: 'normale', width: 320, lf: 'bas', r: 0, bw: 2, sh: 'franches'},
+        nouveau: {style: 'boutons', nums: true, numstyle: 'suite', tabs: 'ligne', size: 'normale', width: 320, lf: 'barre', r: 0, bw: 2, sh: 'franches'},
     };
     const CKEYS = Object.keys(PRESETS.avant);
     const STYLES = ['boutons', 'continue', 'aeree', 'plat', 'barre', 'pastilles', 'classeur', 'icones', 'doux'];
@@ -42,7 +43,11 @@
             tabs: ['avant', 'ligne', 'dessus', 'texte'].includes(r.tabs) ? r.tabs : b.tabs,
             size: r.size === 'compacte' ? 'compacte' : 'normale',
             width: Number.isFinite(w) ? Math.round(Math.max(240, Math.min(420, w)) / 10) * 10 : b.width,
-            lf: ['bas', 'barre'].includes(r.lf) ? r.lf : b.lf};
+            lf: ['bas', 'barre'].includes(r.lf) ? r.lf : b.lf,
+            // traits, coins et ombres de la colonne seulement (les mêmes réglages que le style des fiches)
+            r: Number.isFinite(Number(r.r)) && r.r !== null && r.r !== '' ? Math.round(Math.max(0, Math.min(50, Number(r.r)))) : b.r,
+            bw: Number.isFinite(Number(r.bw)) && r.bw !== null && r.bw !== '' ? Math.round(Math.max(.5, Math.min(6, Number(r.bw))) * 2) / 2 : b.bw,
+            sh: ['franches', 'douces', 'aucune'].includes(r.sh) ? r.sh : b.sh};
     }
     function read() { try { return clean(JSON.parse(localStorage.getItem(KEY) || 'null')); } catch (_) { return clean(null); } }
     function write(s) { try { localStorage.setItem(KEY, JSON.stringify(clean(s))); } catch (_) { toast('Enregistrement impossible : la place du navigateur est pleine ?', 'error'); } apply(); }
@@ -62,9 +67,24 @@
         set('data-lc-col-tabs', on && S.tabs !== 'avant' ? S.tabs : '');
         set('data-lc-col-size', on && S.size === 'compacte' ? 'compacte' : '');
         if (on && S.width !== 320) root.style.setProperty('--sidebar', `${S.width}px`); else root.style.removeProperty('--sidebar');
+        scopeSide(S);
         decorate();
         return S;
     }
+
+    /** traits, coins, ombres : posés sur la colonne seule (les feuilles des designs ne valent qu'à l'intérieur, scripts/scope-a1-css.py) */
+    function scopeSide(S = read()) {
+        const el = document.getElementById('sidebar'); if (!el) return;
+        const attrs = {}, vars = {};
+        if (S.bw !== 2) { attrs['data-lc-lines'] = '1'; vars['--lc-k'] = String(S.bw / 2); }
+        if (S.sh !== 'franches') attrs['data-lc-sh'] = S.sh;
+        if (S.r) { attrs['data-lc-r'] = '1'; vars['--lc-r'] = `${S.r}px`; }
+        ['data-lc-style', 'data-lc-lines', 'data-lc-sh', 'data-lc-r'].forEach(n => { if (n in attrs) el.setAttribute(n, attrs[n]); else el.removeAttribute(n); });
+        ['--lc-k', '--lc-r'].forEach(n => { if (n in vars) el.style.setProperty(n, vars[n]); else el.style.removeProperty(n); });
+        if (attrs['data-lc-lines']) { const f = document.getElementById('lc-frame-css'); if (f && f.media !== 'all') f.media = 'all'; }
+        if (Object.keys(attrs).length) { const g = document.getElementById('lc-designs-gen'); if (g && g.media !== 'all') g.media = 'all'; }
+    }
+    if (typeof document !== 'undefined' && document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => scopeSide(), {once: true});
 
     /** Après chaque dessin de la colonne : numéros, onglets, « Liste | Fiches ». Ne réécrit que ce qui change (pas de boucle). */
     function decorate() {
@@ -261,6 +281,9 @@
                 <div class="lck-start" id="lck-c-start"></div>
                 ${Object.entries(C_GROUPS).map(([g, [label, cls]]) => `<div class="lck-lab2">${label}</div><div class="lck-vis ${cls}" data-lck-g="${g}"></div>`).join('')}
                 <div class="lck-lab2"><label for="lck-c-width">Largeur de la colonne</label></div><div class="lck-row lck-row-w">${range('lck-c-width', 240, 420, 10, 'px', 320)}<span class="lck-legend">Double-clic : 320 px, la valeur de départ.</span></div>
+                <div class="lck-lab2"><label for="lck-c-r">Arrondi des coins</label></div><div class="lck-row lck-row-w">${range('lck-c-r', 0, 50, 1, 'px', 0)}<span class="lck-legend">Des boutons, cadres et champs de la colonne.</span></div>
+                <div class="lck-lab2"><label for="lck-c-bw">Épaisseur des traits</label></div><div class="lck-row lck-row-w">${range('lck-c-bw', .5, 6, .5, 'px', 2)}<span class="lck-legend">2 px : comme avant.</span></div>
+                <div class="lck-lab2"><label for="lck-c-sh">Ombres</label></div><div class="lck-row"><select id="lck-c-sh"><option value="franches">Franches, décalées en bleu (comme avant)</option><option value="douces">Douces et floues</option><option value="aucune">Aucune ombre</option></select></div>
             </div>
             <aside class="lck-preview"><div class="lck-preview-head"><b>👁 Aperçu</b><div class="ui-tabs lck-mini-tabs" id="lck-c-tool" role="tablist"><button type="button" data-tool="carte" class="is-active">Carte</button><button type="button" data-tool="graph">Graphiques</button><button type="button" data-tool="enq">Enquêtes</button></div></div><div class="lck-preview-body"><div id="lck-c-prev"></div><p class="lck-legend" id="lck-c-prev-note"></p></div>
                 <div class="lck-foot"><button type="button" class="button secondary" id="lck-c-reset">↺ Remettre comme au départ</button></div></aside>
@@ -360,7 +383,8 @@
             $('#lck-c-start').innerHTML = `<span>Partir de :</span>${C_CARDS.map(c => { const on = S.mode === c.k, mod = on && CKEYS.some(k => S[k] !== PRESETS[c.k][k]); return `<button type="button" class="lck-vc lck-mini-preset${on ? ' is-active' : ''}${mod ? ' is-mod' : ''}" data-lck-cmode="${c.k}" aria-pressed="${on}" title="${esc(c.why)}">${esc(c.t)}</button>`; }).join('')}<small>règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche).</small>`;
             const val = {style: S.style, tabs: S.tabs, nums: numsOf(S), size: S.size, lf: S.lf};
             Object.entries(C_GROUPS).forEach(([g, [, , items]]) => { $(`[data-lck-g="${g}"]`).innerHTML = items.map(([v, n, sub, pic]) => vcHtml(g, v, n, sub, pic, val[g] === v)).join(''); });
-            syncRangeIn(box, 'lck-c-width', S.width);
+            syncRangeIn(box, 'lck-c-width', S.width); syncRangeIn(box, 'lck-c-r', S.r); syncRangeIn(box, 'lck-c-bw', S.bw);
+            if ($('#lck-c-sh').value !== S.sh) $('#lck-c-sh').value = S.sh;
             $('#lck-c-prev').innerHTML = prevHtml(S);
             $('#lck-c-prev-note').textContent = TOOLS[tool].list ? (S.lf === 'barre' ? '« Liste | Fiches » est dans la barre au-dessus des enquêtes.' : '« Liste | Fiches » est en bas de la colonne.') : 'Ici pas de liste : « Liste | Fiches » ne concerne que Recherche, Enquêtes et les autres listes.';
             box.querySelectorAll('#lck-c-tool [data-tool]').forEach(b => b.classList.toggle('is-active', b.dataset.tool === tool));
@@ -382,6 +406,9 @@
             if (e.target.closest('#lck-c-reset')) { undoC('Colonne de gauche remise comme au départ', () => write({mode: 'avant', ...PRESETS.avant})); }
         });
         $('#lck-c-width').addEventListener('change', e => setC({width: Number(e.target.value)}));
+        $('#lck-c-r').addEventListener('change', e => setC({r: Number(e.target.value)}));
+        $('#lck-c-bw').addEventListener('change', e => setC({bw: Number(e.target.value)}));
+        $('#lck-c-sh').addEventListener('change', e => setC({sh: e.target.value}));
         $('#lck-c-width').addEventListener('input', e => { $('#lck-c-prev').innerHTML = prevHtml({...read(), width: Number(e.target.value)}); });
         box.lckRender = renderC;
         renderC();

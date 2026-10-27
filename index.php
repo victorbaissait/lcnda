@@ -74,9 +74,9 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=5">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=9" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=9" id="lc-designs-gen" media="not all">
-    <link rel="stylesheet" href="assets/css/designs.css?v=7">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=11" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=11" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs.css?v=9">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
     for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
@@ -1137,7 +1137,7 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
-<script src="assets/js/app.js?v=489" defer></script>
+<script src="assets/js/app.js?v=491" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=22" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1170,18 +1170,18 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-forms.js?v=3" defer></script>
 <script src="assets/js/app-mots.js?v=1" defer></script>
 <script src="assets/js/app-portraits.js?v=3" defer></script>
-<script src="assets/js/app-colonne.js?v=3" defer></script>
+<script src="assets/js/app-colonne.js?v=4" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
 <script src="assets/js/app-actions.js?v=4" defer></script>
 <script src="assets/js/app-editeurs.js?v=3" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=8" defer></script>
+<script src="assets/js/app-pages.js?v=9" defer></script>
 <script src="assets/js/app-access.js?v=14" defer></script>
 <script src="assets/js/app-mode-simple.js?v=10" defer></script>
 <script src="assets/js/app-sidegroups.js?v=12" defer></script>
 <script src="assets/js/app-reordonner.js?v=2" defer></script>
 <script src="assets/js/app-listes.js?v=40" defer></script>
-<script src="assets/js/app-maintenance.js?v=37" defer></script>
+<script src="assets/js/app-maintenance.js?v=38" defer></script>
 <script src="assets/js/app-recherche.js?v=24" defer></script>
 <script src="assets/js/app-graphiques.js?v=19" defer></script>
 <script src="assets/js/app-side-folders.js?v=2" defer></script>
@@ -1192,7 +1192,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=4" defer></script>
 <script src="assets/js/heritage-links.js?v=19" defer></script>
-<script src="assets/js/heritage-more.js?v=235" defer></script>
+<script src="assets/js/heritage-more.js?v=236" defer></script>
 <script src="assets/js/heritage-controle.js?v=4" defer></script>
 <script src="assets/js/heritage-records.js?v=11" defer></script>
 <script src="assets/js/heritage-research.js?v=36" defer></script>
@@ -1382,8 +1382,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
 <script src="assets/js/app-apparence.js?v=18" defer></script>
-<script src="assets/js/app-designs.js?v=16" defer></script>
-<script src="assets/js/app-sections.js?v=3" defer></script>
+<script src="assets/js/app-designs.js?v=17" defer></script>
+<script src="assets/js/app-sections.js?v=4" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

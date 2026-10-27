@@ -59,7 +59,7 @@ function sandbox(store = {}) {
         const {D} = sandbox();
         assert.equal(D.IDS.join(), 'a1,a2,a3,a4,a5,a6,a7,a8');
         assert.equal(D.IDS.map(id => D.DEFS[id].n).join(), 'A1,A2,A3,A4,A5,A6,A7,A8');
-        assert.equal(D.IDS.map(id => D.DEFS[id].title).join(' | '), 'Style général | Densité | Icônes | Fiche d’une personne | Cases des arbres | Boutons | Mouvements | Listes');
+        assert.equal(D.IDS.map(id => D.DEFS[id].title).join(' | '), 'Style des fiches | Densité | Icônes | Fiche d’une personne | Cases des arbres | Boutons | Mouvements | Listes');
         assert.equal(D.PRESETS, undefined, 'plus d’ensembles prêts'); assert.equal(D.presetState, undefined);
         assert.ok(!D.DEFS.a1.settings.some(s => s.k === 'acc'), 'plus de couleur d’accent');
         assert.ok(!D.IDS.some(id => /police|tableau de bord/i.test(D.DEFS[id].title)));
@@ -76,7 +76,7 @@ function sandbox(store = {}) {
             else { assert.equal(attrs[`data-lc-${MAIN[id]}`], v.k, `${id} ${v.k}`); assert.ok(Object.keys(attrs).every(a => D.ATTRS.includes(a)), 'attributs connus'); }
         }));
         const {attrs, vars} = D.attrsOf(D.clean({a1: {v: 'doux'}}));
-        assert.equal(attrs['data-lc-lines'], '1'); assert.equal(attrs['data-lc-sh'], 'douces'); assert.equal(attrs['data-lc-r'], '1'); assert.equal(attrs['data-lc-grid'], 'off');
+        assert.equal(attrs['data-lc-lines'], '1'); assert.equal(attrs['data-lc-sh'], 'douces'); assert.equal(attrs['data-lc-r'], '1'); assert.ok(!('data-lc-grid' in attrs), 'le fond quadrillé : Thème et couleurs (Fond des pages)');
         assert.ok(!('data-lc-acc' in attrs) && !('data-lc-cards' in attrs), 'ni couleur, ni palette');
         assert.equal(vars['--lc-r'], '10px'); assert.equal(vars['--lc-k'], '0.5'); assert.ok(!Object.keys(vars).some(k => /acc/.test(k)));
     });
@@ -86,7 +86,8 @@ function sandbox(store = {}) {
         assert.equal(G.a1.r, 50, 'arrondi borné'); assert.equal(G.a1.bw, 2, 'épaisseur illisible → départ'); assert.ok(!('acc' in G.a1), 'plus de couleur d’accent');
         assert.equal(G.a2.v, 'avant'); assert.equal(G.a2.sp, 60, 'espace borné'); assert.equal(G.a3.ic, 16); assert.equal(G.a7.dur, 400, 'vitesse bornée');
         assert.ok(D.isModified(G, 'a1') && D.isOn(G, 'a1'), 'A1 « Comme avant » retouché');
-        assert.equal(attrs['data-lc-style'], 'avant'); assert.equal(attrs['data-lc-r'], '1'); assert.ok(!('data-lc-lines' in attrs), 'traits de départ : pas de feuille des traits');
+        assert.ok(!('data-lc-style' in attrs) && !('data-lc-r' in attrs), 'le style des fiches n’est pas posé sur <html>');
+        const a1 = D.attrsOf(G).attrs; assert.equal(a1['data-lc-style'], 'avant'); assert.equal(a1['data-lc-r'], '1'); assert.ok(!('data-lc-lines' in a1), 'traits de départ : pas de feuille des traits');
         assert.ok(!D.isModified(D.clean({ver: 2, a4: {v: 'bandeau'}}), 'a4'), 'une carte sans retouche n’est pas « retouché »');
     });
     await t('ancien réglage (A1–A10, sans ver) : A7 police et A10 ignorés, A8 → A7, A9 → A8, nettoyé au chargement', () => {
@@ -107,9 +108,9 @@ function sandbox(store = {}) {
     await t('enregistré, appliqué, copie pour index.php ; « Comme avant » efface la clé', () => {
         const {D, store, attrs, sheets} = sandbox();
         D.write(D.clean({ver: 2, a1: {v: 'papier'}, a8: {v: 'zebre'}}));
-        assert.equal(JSON.parse(store['genealogie-designs']).a1.v, 'papier'); assert.equal(JSON.parse(store['genealogie-designs']).ver, 2); assert.equal(attrs['data-lc-style'], 'papier'); assert.equal(attrs['data-lc-list'], 'zebre');
-        assert.equal(sheets['lc-designs-gen'].media, 'all'); assert.equal(sheets['lc-frame-css'].media, 'all');
-        assert.equal(JSON.parse(store['lcnda-designs-ui-v2']).a['data-lc-style'], 'papier');
+        assert.equal(JSON.parse(store['genealogie-designs']).a1.v, 'papier'); assert.equal(JSON.parse(store['genealogie-designs']).ver, 2); assert.ok(!('data-lc-style' in attrs), 'le style des fiches va sur la fiche, pas sur <html>'); assert.equal(attrs['data-lc-list'], 'zebre');
+        assert.equal(sheets['lc-designs-gen'].media, 'all');
+        assert.ok(!('data-lc-style' in JSON.parse(store['lcnda-designs-ui-v2']).a), 'ni dans la copie pour index.php'); assert.equal(JSON.parse(store['lcnda-designs-ui-v2']).a['data-lc-list'], 'zebre');
         D.write(D.defaults());
         assert.ok(!('genealogie-designs' in store) && !('lcnda-designs-ui-v2' in store), 'rien de gardé');
         assert.ok(!Object.keys(attrs).some(k => k.startsWith('data-lc-')), 'plus aucun attribut');
@@ -151,10 +152,11 @@ function sandbox(store = {}) {
         assert.ok(read('assets/js/heritage-studio.js').match(/const LAYOUT_KEYS = \[([\s\S]*?)\];/)[1].includes("'genealogie-designs'"));
         assert.match(read('assets/js/app.js'), /const \{k7_portraits,k15_colonne,a_designs,\.\.\.rest\}/);
     });
-    await t('« 🎨 Designs au choix » juste après « Apparence » (colonne, groupe, réglages gardés tout seuls)', () => {
-        assert.match(read('assets/js/app.js'), /\['design','01','Apparence'\],\['designs','01a','Designs au choix'\]/);
-        assert.match(read('assets/js/app-maintenance.js'), /\['design', 'designs', 'design_sheets'/); // le Tableau de bord se règle dans le Tableau de bord
-        assert.match(read('assets/js/app-pages.js'), /SETTINGS_TABS = \['design', 'designs',/);
+    await t('plus de page « 🎨 Designs au choix » dans les Réglages : le style va avec les fiches (l’ancienne adresse y mène)', () => {
+        assert.doesNotMatch(read('assets/js/app.js'), /\['designs','01a','Designs au choix'\]/);
+        assert.match(read('assets/js/app-maintenance.js'), /\['design', 'design_sheets'/); assert.match(read('assets/js/app-maintenance.js'), /\['look_theme', 'look_portraits'/);
+        assert.match(read('assets/js/app-pages.js'), /SETTINGS_TABS = \['design', 'design_sheets',/);
+        assert.match(read('assets/js/app-designs.js'), /ext\.maintenance\.designs = async token => \{[^\n]*maintenanceTab = 'design_sheets'/);
     });
     await t('index.php : feuilles, pose au plus tôt, script après app-apparence.js', () => {
         const idx = read('index.php');
@@ -170,11 +172,14 @@ function sandbox(store = {}) {
         const selectors = css => { css = strip(css); const out = []; let i = 0; const walk = () => { while (i < css.length) { const j = css.indexOf('{', i), e = css.indexOf('}', i); if (e >= 0 && (j < 0 || e < j)) { i = e + 1; return; } if (j < 0) { i = css.length; return; } const pre = css.slice(i, j).trim(); i = j + 1; if (pre.startsWith('@')) { if (/^@(media|supports)/.test(pre)) walk(); else { let d = 1; while (i < css.length && d) { if (css[i] === '{') d++; else if (css[i] === '}') d--; i++; } } continue; } if (!/^(from|to|\d+%)/.test(pre)) out.push(...splitTop(pre)); const k = css.indexOf('}', i); i = k + 1; } }; walk(); return out; };
         // à part : la page des Réglages (.lcd-*), et les éléments que seul app-designs.js pose (.lc-ic, .lc-dz…)
         const OWN = /^(:root\[data-lc-|:root:not\(\[data-lc-motion\]\) \.lcd-|:root\[data-theme="dark"\] \.(lcd-|lc-|person-hero\.lc-hero)|html\.a11y-calm \.lcd-|\.lcd-|\.lc-(ic|hero|acte|carte|row-av|tree-sosa|journal|toast-s|dz-hide)|\.person-hero\.lc-hero|:root \.person-hero\.lc-hero)/;
-        const bad = selectors(read('assets/css/designs.css')).filter(s => !OWN.test(s));
+        // le style des fiches (A1) : « :root X:is([data-lc-r], [data-lc-r] *) », limité à ce qui porte l'attribut (fiche, colonne ; scripts/scope-a1-css.py)
+        const scoped = s => /^:root/.test(s) && /\[data-lc-/.test(s);
+        const bad = selectors(read('assets/css/designs.css')).filter(s => !OWN.test(s) && !scoped(s));
         assert.deepEqual(bad, [], 'règles sans attribut : ' + bad.slice(0, 5).join(' | '));
-        const gen = selectors(read('assets/css/designs-gen.css')).filter(s => !s.startsWith(':root[data-lc-'));
+        const gen = selectors(read('assets/css/designs-gen.css')).filter(s => !s.startsWith(':root[data-lc-') && !scoped(s));
         assert.deepEqual(gen.slice(0, 3), [], 'feuille fabriquée');
-        const tr = selectors(read('assets/css/apparence-traits.css')).filter(s => !/^(:root|html):is\(\.lc-frame,\[data-lc-lines\]\)/.test(s));
+        const tr = selectors(read('assets/css/apparence-traits.css')).filter(s => !(/^(:root|html)/.test(s) && /\.lc-frame|\[data-lc-lines\]/.test(s)));
+        assert.ok(!/(:root|html)(\[[^\]]*\])*(\[data-lc-(r|sh|lines|style)|:is\(\.lc-frame,\[data-lc-lines\]\))/.test(read('assets/css/designs-gen.css') + read('assets/css/designs.css') + read('assets/css/apparence-traits.css')), 'plus aucun style A1 posé sur toute l’app');
         assert.deepEqual(tr.slice(0, 3), [], 'feuille des traits');
     });
     await t('FAQ, CLAUDE.md, docs/UI.md', () => {
@@ -218,7 +223,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         return page;
     };
     const lcAttrs = page => page.evaluate(() => [...document.documentElement.attributes].map(a => a.name).filter(n => n.startsWith('data-lc-')));
-    const toDesigns = page => page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); });
+    const toDesigns = page => page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); }); // l'ancienne adresse
+    const toFiches = page => page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'design_sheets'; await A.setModule('maintenance'); });
+    const store = (page, id) => page.evaluate(id => (JSON.parse(localStorage.getItem('genealogie-designs') || '{}')[id] || null), id);
     const setDesigns = (page, v) => page.evaluate(v => { if (v == null) localStorage.removeItem('genealogie-designs'); else localStorage.setItem('genealogie-designs', JSON.stringify(v)); window.LCNDA_DESIGNS.apply(); }, v);
     try {
         const page = await open();
@@ -226,19 +233,16 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.deepEqual(await lcAttrs(page), []);
             assert.equal(await page.evaluate(() => document.getElementById('lc-designs-gen').media), 'not all');
         });
-        await t('la page : sommaire, sections repliables fermées par défaut, ouvertes retenues', async () => {
-            await page.evaluate(() => localStorage.removeItem('lcnda-designs-open-v2'));
-            await toDesigns(page); await page.waitForSelector('.lcd-page .lcd-toc');
-            assert.equal(await page.locator('.lcd-toc-i').count(), 1, 'A1 seul (A7 : Accessibilité → Mouvement ; A2, A3 et A8 : Menus, colonne et listes)');
-            assert.equal(await page.locator('#lcd-ens, [data-lcd-preset], #lcd-a9, #lcd-a10, #lcd-a5, #lcd-a4, #lcd-a6, #lcd-a8, #lcd-a2, #lcd-a3, #lcd-a7').count(), 0, 'ni ensembles, ni A9, ni A10, ni A5 (cases des arbres : fenêtre des couleurs), ni A4 (Fiches personnes et animaux), ni A6 (Notifications et boutons)');
-            assert.equal(await page.locator('[data-lcd-notifs], [data-lcd-fiches], [data-lcd-trees], .lcd-intro').count(), 0, 'plus de cadres bleus d’explication en haut');
-            assert.equal(await page.locator('details.lcd-sec[open]').count(), 0, 'tout fermé');
-            assert.match(await page.locator('#lcd-a1 > summary').innerText(), /^🎨\s*Style général\s*—\s*Comme avant/);
-            await page.click('[data-lcd-go="a1"]');
-            await page.waitForSelector('#lcd-a1[open] [data-lcd-v="doux"]');
-            assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-designs-open-v2'))), ['a1']);
-            await toDesigns(page); await page.waitForSelector('#lcd-a1[open]');
-            assert.equal(await page.locator('#lcd-a1 .lcd-stage .lcd-frame').count() >= 4, true, 'quatre aperçus');
+        await t('le style des fiches : dans « Fiches personnes et animaux », dans le même cadre que la forme de l’en-tête ; l’ancienne adresse y mène', async () => {
+            await toDesigns(page); await page.waitForFunction(() => window.LCNDA_APP.state.maintenanceTab === 'design_sheets');
+            await page.waitForSelector('#lc-person-header .lcd-merged #lcd-a1-emb [data-lcd-v="doux"]', {timeout: 15000});
+            assert.equal(await page.locator('#lc-person-header .lcd-merged #lcd-a4-emb').count(), 1, 'avec la forme de l’en-tête');
+            assert.equal(await page.locator('.lcd-page, .lcd-toc').count(), 0, 'plus de page Designs au choix');
+            assert.match(await page.locator('#lcd-a1-emb .lcd-embed-head h4').innerText(), /Style des fiches/);
+            assert.match(await page.locator('#lcd-a1-emb [data-lcd-sum]').innerText(), /Comme avant/);
+            assert.equal(await page.locator('#lcd-a1-emb [data-lcd-k="grid"]').count(), 0, 'le fond quadrillé est dans Thème et couleurs');
+            await page.waitForFunction(() => document.querySelectorAll('#lcd-a1-emb .lcd-stage .lcd-frame').length >= 4, null, {timeout: 15000});
+            assert.equal(await page.locator('[data-lcd-go-designs2]').count(), 0, 'plus de lien vers une page disparue');
         });
         await t('A6 Boutons : à la fin de « Notifications et boutons », après les messages ; choisir « Contour » est gardé', async () => {
             await page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'look_msgs'; await A.setModule('maintenance'); });
@@ -247,28 +251,52 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await page.click('#lcd-a6-emb [data-lcd-v="contour"]');
             await page.waitForFunction(() => JSON.parse(localStorage.getItem('genealogie-designs') || '{}').a6?.v === 'contour');
             await page.evaluate(() => { localStorage.removeItem('genealogie-designs'); window.LCNDA_DESIGNS?.apply?.(); });
-            await toDesigns(page); await page.waitForSelector('.lcd-page .lcd-toc');
+            await toFiches(page); await page.waitForSelector('#lcd-a1-emb [data-lcd-v="doux"]', {timeout: 15000});
         });
-        await t('choisir « Doux » : gardé tout de suite, titre « — Doux », ↶ Annuler', async () => {
-            await page.click('#lcd-a1 [data-lcd-v="doux"]');
-            await page.waitForFunction(() => document.documentElement.getAttribute('data-lc-style') === 'doux');
-            assert.equal(JSON.parse(await page.evaluate(() => localStorage.getItem('genealogie-designs'))).a1.v, 'doux');
-            assert.match(await page.locator('#lcd-a1 > summary').innerText(), /Style général\s*—\s*Doux/);
-            assert.match(await page.locator('#lcd-a1 [data-lcd-saved]').innerText(), /✓ Enregistré/);
-            const t1 = page.locator('.toast', {hasText: 'Style général : Doux'}).last(); await t1.waitFor();
+        await t('choisir « Doux » : gardé tout de suite, titre « — Doux », ↶ Annuler ; rien sur <html>', async () => {
+            await page.click('#lcd-a1-emb [data-lcd-v="doux"]');
+            await page.waitForFunction(() => JSON.parse(localStorage.getItem('genealogie-designs') || '{}').a1?.v === 'doux');
+            assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-style')), null, 'le style des fiches n’est pas posé sur toute l’app');
+            await page.waitForFunction(() => /Doux/.test(document.querySelector('#lcd-a1-emb [data-lcd-sum]')?.textContent || ''));
+            assert.match(await page.locator('#lcd-a1-emb [data-lcd-saved]').innerText(), /✓ Enregistré/);
+            const t1 = page.locator('.toast', {hasText: 'Style des fiches : Doux'}).last(); await t1.waitFor();
             await t1.locator('button', {hasText: 'Annuler'}).click();
-            await page.waitForFunction(() => !document.documentElement.hasAttribute('data-lc-style'));
-            assert.equal(await page.evaluate(() => localStorage.getItem('genealogie-designs')), null);
+            await page.waitForFunction(() => localStorage.getItem('genealogie-designs') === null);
         });
         await t('« Réglages en plus » : retouché, Pourquoi ?, ↺ Remettre comme au départ', async () => {
-            assert.ok(await page.locator('#lcd-a1 .lcd-why').count() >= 4);
-            assert.equal(await page.locator('#lcd-a1 [data-lcd-k="acc"]').count(), 0, 'plus de couleur d’accent');
-            await page.selectOption('#lcd-a1 select[data-lcd-k="sh"]', 'aucune');
-            await page.waitForFunction(() => document.documentElement.getAttribute('data-lc-sh') === 'aucune');
-            await page.waitForSelector('#lcd-a1 .lcd-choice.is-active .lcd-tag.is-mod');
-            assert.match(await page.locator('#lcd-a1 > summary').innerText(), /retouché/i);
-            await page.click('#lcd-a1 .lcd-foot [data-lcd-reset="a1"]');
-            await page.waitForFunction(() => !document.documentElement.hasAttribute('data-lc-style'));
+            assert.ok(await page.locator('#lcd-a1-emb .lcd-why').count() >= 3);
+            assert.equal(await page.locator('#lcd-a1-emb [data-lcd-k="acc"]').count(), 0, 'plus de couleur d’accent');
+            await page.selectOption('#lcd-a1-emb select[data-lcd-k="sh"]', 'aucune');
+            await page.waitForFunction(() => JSON.parse(localStorage.getItem('genealogie-designs') || '{}').a1?.sh === 'aucune');
+            await page.waitForSelector('#lcd-a1-emb .lcd-choice.is-active .lcd-tag.is-mod');
+            await page.locator('#lcd-a1-emb [data-lcd-reset="a1"]').first().click();
+            await page.waitForFunction(() => localStorage.getItem('genealogie-designs') === null);
+        });
+        await t('seulement les fiches : la fiche porte le style, pas le tableau de bord ; la colonne a ses traits, coins et ombres ; fond quadrillé dans Thème et couleurs', async () => {
+            await setDesigns(page, {ver: 2, a1: {v: 'doux'}});
+            await page.evaluate(async () => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; await A.setModule('personnes'); });
+            await page.waitForFunction(() => document.querySelector('#workspace .person-page')?.getAttribute('data-lc-style') === 'doux');
+            const fiche = await page.evaluate(() => { const c = document.querySelector('#workspace .person-page .person-hero'); return [getComputedStyle(c).borderRadius, getComputedStyle(c).boxShadow]; });
+            assert.equal(fiche[0], '10px', 'coins de la fiche'); assert.doesNotMatch(fiche[1], /4px 4px 0px/, 'ombre douce sur la fiche');
+            assert.deepEqual(await lcAttrs(page), [], 'rien sur <html>');
+            await page.evaluate(async () => { await window.LCNDA_APP.setModule('dashboard'); }); await page.waitForSelector('.dashboard-page .card');
+            const dash = await page.evaluate(() => { const c = document.querySelector('.dashboard-page .card'); return [getComputedStyle(c).borderRadius, getComputedStyle(c).boxShadow]; });
+            assert.equal(dash[0], '0px', 'le tableau de bord reste comme avant'); assert.match(dash[1], /4px 4px 0px/);
+            // la colonne de gauche : ses propres réglages, rien d'autre ne bouge
+            await page.evaluate(() => { localStorage.setItem('genealogie-left-column', JSON.stringify({mode: 'avant', r: 12, sh: 'aucune', bw: 1})); window.LCNDA_COLUMN.apply(); });
+            await page.evaluate(async () => { await window.LCNDA_APP.setModule('dashboard'); });
+            await page.waitForFunction(() => document.getElementById('sidebar')?.getAttribute('data-lc-r') === '1');
+            const side = await page.evaluate(() => { const s = document.getElementById('sidebar'); return [s.getAttribute('data-lc-sh'), s.style.getPropertyValue('--lc-r'), s.style.getPropertyValue('--lc-k')]; });
+            assert.deepEqual(side, ['aucune', '12px', '0.5']);
+            assert.equal((await page.evaluate(() => { const c = document.querySelector('.dashboard-page .card'); return getComputedStyle(c).borderRadius; })), '0px', 'la colonne ne touche pas la page');
+            await page.evaluate(() => { localStorage.removeItem('genealogie-left-column'); });
+            // le fond quadrillé : Thème et couleurs (Fond des pages)
+            await page.evaluate(() => { const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); d.grid = 'off'; localStorage.setItem('genealogie-design', JSON.stringify(d)); window.LCNDA_APP.applyDesign(); });
+            assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-grid')), 'off');
+            assert.equal(await page.evaluate(() => getComputedStyle(document.getElementById('workspace')).backgroundImage), 'none');
+            await page.evaluate(() => { const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); delete d.grid; localStorage.setItem('genealogie-design', JSON.stringify(d)); window.LCNDA_APP.applyDesign(); });
+            assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-grid')), null);
+            await setDesigns(page, null);
         });
         await t('recoupements : A7 et « Réduire les animations », A5 et les portraits', async () => {
             await setDesigns(page, {ver: 2, a7: {v: 'petit'}});
@@ -311,9 +339,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             for (const [w, dark] of [[390, false], [1440, true]]) {
                 const p = await open(w);
                 if (dark) await p.evaluate(() => { localStorage.setItem('genealogie-design', JSON.stringify({preset: 'dark'})); window.LCNDA_APP.applyDesign(); });
-                await p.evaluate(() => localStorage.setItem('lcnda-designs-open-v2', '["a1"]'));
-                await toDesigns(p); await p.waitForSelector('#lcd-a1[open] .lcd-frame:not(.is-loading)', {timeout: 15000});
-                const over = await p.evaluate(() => { const pg = document.querySelector('.lcd-page'), W = document.documentElement.clientWidth; return Math.max(document.getElementById('workspace').scrollWidth - document.getElementById('workspace').clientWidth, ...[...pg.querySelectorAll('*')].filter(e => !e.closest('.lcd-stage')).map(e => Math.round(e.getBoundingClientRect().right - W))); }); // (la barre des onglets du haut défile toute seule)
+                await toFiches(p); await p.waitForSelector('#lcd-a1-emb .lcd-frame:not(.is-loading)', {timeout: 15000});
+                const over = await p.evaluate(() => { const pg = document.querySelector('#lc-person-header'), W = document.documentElement.clientWidth; return Math.max(document.getElementById('workspace').scrollWidth - document.getElementById('workspace').clientWidth, ...[...pg.querySelectorAll('*')].filter(e => !e.closest('.lcd-stage')).map(e => Math.round(e.getBoundingClientRect().right - W))); }); // (la barre des onglets du haut défile toute seule)
                 const who = over > 1 ? await p.evaluate(() => { const W = document.documentElement.clientWidth; return [...document.querySelectorAll('body *')].filter(e => { const r = e.getBoundingClientRect(); return r.right > W + 1 && r.width > 0 && !e.closest('.lcd-stage') && e.closest('.lcd-page') && ![...e.children].some(c => c.getBoundingClientRect().right > W + 1); }).slice(0, 6).map(e => `${e.tagName}.${[...e.classList].join('.')} ${Math.round(e.getBoundingClientRect().right)}`).join(' | '); }) : '';
                 assert.ok(over <= 1, `${w}px : débordement de ${over}px (${who})`);
                 if (dark) { await p.evaluate(() => { localStorage.removeItem('genealogie-design'); window.LCNDA_APP.applyDesign(); }); }
@@ -322,8 +349,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         });
         await t('🎞 Mouvements : plus dans Designs au choix, mais dans Accessibilité, onglet « Mouvement » à côté de « Toute l’app »', async () => {
             const p = await open(1440);
-            await toDesigns(p); await p.waitForSelector('.lcd-page');
-            assert.equal(await p.$('#lcd-a7'), null, 'plus de Mouvements dans Designs au choix');
+            await toFiches(p); await p.waitForSelector('#lcd-a1-emb');
+            assert.equal(await p.$('#lcd-a7, #lcd-a7-emb'), null, 'les Mouvements ne sont pas avec le style des fiches');
             await p.evaluate(async () => { sessionStorage.setItem('lcnda-a11y-tab', 'motion'); const A = window.LCNDA_APP; A.state.maintenanceTab = 'accessibilite'; await A.setModule('maintenance'); });
             await p.waitForSelector('[data-a7-host] .lcd-embed .lcd-choice', {timeout: 15000});
             assert.deepEqual(await p.$$eval('.ms-pagetabs [data-ms-tab]', l => l.map(b => b.dataset.msTab)), ['app', 'motion', 'simple']);

@@ -363,11 +363,13 @@ echo 'ok';`);
                 await page.waitForFunction(() => localStorage.getItem('genealogie-person-blocks-1') === null);
             });
             await t('A4 a déménagé : plus dans Designs au choix, cadre « Forme de l’en-tête » dans Fiches, toujours appliqué', async () => {
+                // plus de page Designs au choix : l'ancienne adresse mène ici ; le style des fiches (A1) est dans le même cadre
                 await page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); });
-                await page.waitForSelector('.lcd-page .lcd-toc');
-                assert.equal(await page.locator('#lcd-a4').count(), 0); assert.equal(await page.locator('[data-lcd-go="a4"]').count(), 0);
+                await page.waitForFunction(() => window.LCNDA_APP.state.maintenanceTab === 'design_sheets');
+                assert.equal(await page.locator('.lcd-page, #lcd-a4').count(), 0); assert.equal(await page.locator('[data-lcd-go="a4"]').count(), 0);
                 await page.evaluate(() => window.LCNDA_SECTIONS?.openSheetsPage ? window.LCNDA_SECTIONS.openSheetsPage('lc-person-header') : null);
                 await page.waitForSelector('#lc-person-header #lcd-a4-emb [data-lcd-v="acte"]', {timeout: 15000});
+                assert.equal(await page.locator('#lc-person-header .lcd-merged #lcd-a1-emb').count(), 1, 'le style des fiches, dans le même cadre');
                 assert.equal(await page.locator('#lcd-a4-emb [data-lcd-v]').count(), 4);
                 const pos = await page.evaluate(() => { const a = document.getElementById('lcd-a4-emb'), o = [...document.querySelectorAll('#lc-person-header h3')].find(h => /Ordre et visibilité des boutons/.test(h.textContent)); return !!(a.compareDocumentPosition(o) & Node.DOCUMENT_POSITION_PRECEDING); });
                 assert.ok(pos, 'juste après « Ordre et visibilité des boutons » (on les trouve d’abord)');
@@ -380,7 +382,7 @@ echo 'ok';`);
                 await toSheets(page); await page.waitForSelector('.fsec-toc [data-fsec-toc]');
                 const ids2 = await page.$$eval('#workspace > .page > .fsec-part:not([hidden])', e => e.map(x => x.id));
                 ['fsec-pres', 'lc-person-header', 'lc-head-elems', 'lc-obs-place', 'fsec-cfg', 'fsec-blocks', 'h-flag-config', 'lineage-config', 'web-search-config'].reduce((prev, id) => { const i = ids2.indexOf(id); assert.ok(i > prev, `${id} à sa place (${ids2.join(', ')})`); return i; }, -1);
-                assert.ok(await page.locator('#fsec-cfg [data-fsec-go-designs]').count(), 'lien vers Designs au choix (D3)');
+                assert.ok(await page.locator('#fsec-cfg [data-fsec-go-designs]').count(), 'lien vers le style des fiches, plus bas (D3)');
                 assert.equal(await page.locator('#fsec-cfg input[type=range], #fsec-cfg [data-fsec-gap]').count(), 0, 'pas de curseur « Espace entre sections »');
                 await page.click('#fsec-cfg [data-fsec-opt="style"][data-v="band"]');
                 await page.waitForFunction(() => JSON.parse(localStorage.getItem('genealogie-sheet-sections') || '{}').style === 'band');

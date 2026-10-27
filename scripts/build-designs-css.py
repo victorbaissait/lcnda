@@ -212,3 +212,6 @@ def build():
 
 if __name__ == '__main__':
     build()
+    # le style (A1 : traits, ombres, coins) ne vaut que dans les fiches et la colonne de gauche
+    import subprocess, sys
+    subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'scope-a1-css.py'), 'designs-gen.css'], check=True)

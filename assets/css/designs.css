@@ -10,39 +10,39 @@
 /* ═════════════════════════ A1 · Style général ═════════════════════════ */
 /* traits : l'épaisseur choisie ; la couleur vient des couleurs de l'Apparence (texte mêlé au fond des cartes),
    donc elle suit le Preset choisi. Un thème à soi qui a ses propres traits (classe lc-frame, « ✎ Mes thèmes ») garde les siens. */
-:root[data-lc-lines]:not(.lc-frame) { --lc-frame-color: var(--ink) !important; --lc-frame-k: var(--lc-k, 1) !important; --line: calc(2px * var(--lc-k, 1)) solid var(--lc-frame-color) !important; }
-:root[data-lc-lines][data-lc-style="doux"]:not(.lc-frame) { --lc-frame-color: color-mix(in srgb, var(--ink) 24%, var(--card-bg, #fff)) !important; }
-:root[data-lc-lines][data-lc-style="sobre"]:not(.lc-frame) { --lc-frame-color: color-mix(in srgb, var(--ink) 20%, var(--card-bg, #fff)) !important; }
-:root[data-lc-lines][data-lc-style="papier"]:not(.lc-frame) { --lc-frame-color: color-mix(in srgb, var(--ink) 55%, var(--card-bg, #fff)) !important; }
-:root[data-lc-lines][data-lc-style="avant"][data-theme="dark"]:not(.lc-frame) { --lc-frame-color: #555 !important; }
+:root:not(.lc-frame) [data-lc-lines] { --lc-frame-color: var(--ink) !important; --lc-frame-k: var(--lc-k, 1) !important; --line: calc(2px * var(--lc-k, 1)) solid var(--lc-frame-color) !important; }
+:root:not(.lc-frame) [data-lc-lines][data-lc-style="doux"] { --lc-frame-color: color-mix(in srgb, var(--ink) 24%, var(--card-bg, #fff)) !important; }
+:root:not(.lc-frame) [data-lc-lines][data-lc-style="sobre"] { --lc-frame-color: color-mix(in srgb, var(--ink) 20%, var(--card-bg, #fff)) !important; }
+:root:not(.lc-frame) [data-lc-lines][data-lc-style="papier"] { --lc-frame-color: color-mix(in srgb, var(--ink) 55%, var(--card-bg, #fff)) !important; }
+:root[data-theme="dark"]:not(.lc-frame) [data-lc-lines][data-lc-style="avant"] { --lc-frame-color: #555 !important; }
 /* ombres */
-:root[data-lc-sh="douces"] { --lc-sh-l: 0 6px 18px rgba(25,35,60,.10), 0 1px 3px rgba(25,35,60,.08); --lc-sh-m: 0 2px 8px rgba(25,35,60,.09); --lc-sh-s: 0 1px 3px rgba(25,35,60,.12);
+:root [data-lc-sh="douces"] { --lc-sh-l: 0 6px 18px rgba(25,35,60,.10), 0 1px 3px rgba(25,35,60,.08); --lc-sh-m: 0 2px 8px rgba(25,35,60,.09); --lc-sh-s: 0 1px 3px rgba(25,35,60,.12);
     --shadow: var(--lc-sh-l) !important; --shadow-small: var(--lc-sh-m) !important; }
-:root[data-lc-sh="douces"][data-theme="dark"] { --lc-sh-l: 0 6px 18px rgba(0,0,0,.45); --lc-sh-m: 0 2px 8px rgba(0,0,0,.4); --lc-sh-s: 0 1px 3px rgba(0,0,0,.45); }
-:root[data-lc-sh="aucune"] { --shadow: none !important; --shadow-small: none !important; }
+:root[data-theme="dark"] [data-lc-sh="douces"] { --lc-sh-l: 0 6px 18px rgba(0,0,0,.45); --lc-sh-m: 0 2px 8px rgba(0,0,0,.4); --lc-sh-s: 0 1px 3px rgba(0,0,0,.45); }
+:root [data-lc-sh="aucune"] { --shadow: none !important; --shadow-small: none !important; }
 /* fond quadrillé */
 :root[data-lc-grid="off"] .workspace { background-image: none; }
 /* coins arrondis : ce que la feuille fabriquée ne peut pas deviner (cadres déjà « carrés » exprès) */
-:root[data-lc-r] :is(.form-grid input, .form-grid select, .form-grid textarea, .modal > form > label input, input[type="text"], input[type="search"], input[type="number"], input[type="email"], input[type="url"], select, textarea, .mt-search) { border-radius: min(var(--lc-r), 8px); }
-:root[data-lc-r] :is(.card, .person-hero, .data-table-wrap, .modal, .toast, .ui-toast, .tree-card, .relation-chip, .maintenance-panel, .person-block-config, .page-header .ui-ph-more) { border-radius: var(--lc-r); }
-:root[data-lc-r] .card > .card-head { border-radius: calc(var(--lc-r) - 1px) calc(var(--lc-r) - 1px) 0 0; }
-:root[data-lc-r] :is(.card, .data-table-wrap, .person-hero) { overflow: clip; }
-:root[data-lc-r] :is(.nav-item, .segmented button:first-child, .icon-action, .side-menu-item) { border-radius: min(var(--lc-r), 8px); }
-:root[data-lc-r] .segmented button { border-radius: 0; }
-:root[data-lc-r] .segmented button:first-child { border-radius: min(var(--lc-r), 8px) 0 0 min(var(--lc-r), 8px); }
-:root[data-lc-r] .segmented button:last-child { border-radius: 0 min(var(--lc-r), 8px) min(var(--lc-r), 8px) 0; }
-:root[data-lc-r] .segmented button:only-child { border-radius: min(var(--lc-r), 8px); }
+:root :is(.form-grid input, .form-grid select, .form-grid textarea, .modal > form > label input, input[type="text"], input[type="search"], input[type="number"], input[type="email"], input[type="url"], select, textarea, .mt-search):is([data-lc-r], [data-lc-r] *) { border-radius: min(var(--lc-r), 8px); }
+:root :is(.card, .person-hero, .data-table-wrap, .modal, .toast, .ui-toast, .tree-card, .relation-chip, .maintenance-panel, .person-block-config, .page-header .ui-ph-more):is([data-lc-r], [data-lc-r] *) { border-radius: var(--lc-r); }
+:root .card > .card-head:is([data-lc-r], [data-lc-r] *) { border-radius: calc(var(--lc-r) - 1px) calc(var(--lc-r) - 1px) 0 0; }
+:root :is(.card, .data-table-wrap, .person-hero):is([data-lc-r], [data-lc-r] *) { overflow: clip; }
+:root :is(.nav-item, .segmented button:first-child, .icon-action, .side-menu-item):is([data-lc-r], [data-lc-r] *) { border-radius: min(var(--lc-r), 8px); }
+:root .segmented button:is([data-lc-r], [data-lc-r] *) { border-radius: 0; }
+:root .segmented button:first-child:is([data-lc-r], [data-lc-r] *) { border-radius: min(var(--lc-r), 8px) 0 0 min(var(--lc-r), 8px); }
+:root .segmented button:last-child:is([data-lc-r], [data-lc-r] *) { border-radius: 0 min(var(--lc-r), 8px) min(var(--lc-r), 8px) 0; }
+:root .segmented button:only-child:is([data-lc-r], [data-lc-r] *) { border-radius: min(var(--lc-r), 8px); }
 /* papier ancien : le grain du papier (les couleurs crème : Apparence → Preset « Archive papier ») */
-:root[data-lc-style="papier"] .workspace { background-image: radial-gradient(color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1.2px); background-size: 6px 6px; }
-:root[data-lc-style="papier"][data-lc-grid="off"] .workspace { background-image: none; }
-:root[data-lc-style="papier"][data-theme="dark"] .workspace { background-image: none; }
+:root .workspace:is([data-lc-style="papier"], [data-lc-style="papier"] *) { background-image: radial-gradient(color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1.2px); background-size: 6px 6px; }
+:root[data-lc-grid="off"] .workspace:is([data-lc-style="papier"], [data-lc-style="papier"] *) { background-image: none; }
+:root[data-theme="dark"] .workspace:is([data-lc-style="papier"], [data-lc-style="papier"] *) { background-image: none; }
 /* doux et sobre : les en-têtes de tableau restent lisibles avec les traits fins */
-:root[data-lc-style="doux"] .data-table th, :root[data-lc-style="sobre"] .data-table th { border-bottom-width: 1px; }
+:root .data-table th:is([data-lc-style="doux"], [data-lc-style="doux"] *), :root .data-table th:is([data-lc-style="sobre"], [data-lc-style="sobre"] *) { border-bottom-width: 1px; }
 /* les traits de l'arbre (dessinés avec ::before / ::after) suivent aussi la couleur et l'épaisseur des traits */
-:root[data-lc-lines] .tree :is(li, ul)::before, :root[data-lc-lines] .tree li::after { border-color: var(--lc-frame-color); border-top-width: calc(2px * var(--lc-frame-k, 1)); }
-:root[data-lc-lines] .tree li::after, :root[data-lc-lines] .tree ul ul::before { border-left-width: calc(2px * var(--lc-frame-k, 1)); }
-:root[data-lc-lines] .tree li:last-child::before { border-right-width: calc(2px * var(--lc-frame-k, 1)); }
-:root[data-lc-lines] .tree ul ul::before { border-top-width: 0; }
+:root .tree :is(li, ul):is([data-lc-lines], [data-lc-lines] *)::before, :root .tree li:is([data-lc-lines], [data-lc-lines] *)::after { border-color: var(--lc-frame-color); border-top-width: calc(2px * var(--lc-frame-k, 1)); }
+:root .tree li:is([data-lc-lines], [data-lc-lines] *)::after, :root .tree ul ul:is([data-lc-lines], [data-lc-lines] *)::before { border-left-width: calc(2px * var(--lc-frame-k, 1)); }
+:root .tree li:last-child:is([data-lc-lines], [data-lc-lines] *)::before { border-right-width: calc(2px * var(--lc-frame-k, 1)); }
+:root .tree ul ul:is([data-lc-lines], [data-lc-lines] *)::before { border-top-width: 0; }
 
 /* ═════════════════════════ A2 · Densité ═════════════════════════ */
 :root[data-lc-density] .data-table td { padding-top: max(3px, calc((var(--lc-rowh) - 16px) / 2)); padding-bottom: max(3px, calc((var(--lc-rowh) - 16px) / 2)); }
@@ -243,8 +243,8 @@
 :root[data-lc-list="cartes"] .data-table td:first-child { border-left: var(--line); }
 :root[data-lc-list="cartes"] .data-table td:last-child { border-right: var(--line); }
 :root[data-lc-list="cartes"] .data-table th { border: var(--line); border-width: 0; }
-:root[data-lc-list="cartes"][data-lc-r] .data-table td:first-child { border-radius: var(--lc-r) 0 0 var(--lc-r); }
-:root[data-lc-list="cartes"][data-lc-r] .data-table td:last-child { border-radius: 0 var(--lc-r) var(--lc-r) 0; }
+:root[data-lc-list="cartes"] .data-table td:first-child:is([data-lc-r], [data-lc-r] *) { border-radius: var(--lc-r) 0 0 var(--lc-r); }
+:root[data-lc-list="cartes"] .data-table td:last-child:is([data-lc-r], [data-lc-r] *) { border-radius: 0 var(--lc-r) var(--lc-r) 0; }
 /* sous la souris : trait bleu à gauche */
 :root[data-lc-lhover="trait"] .data-table tr:hover td { background: inherit; }
 :root[data-lc-lhover="trait"][data-lc-list="zebre"] .data-table tbody tr:nth-child(even):hover td { background: var(--lc-zebra-c); }

@@ -4,7 +4,7 @@
  * Un design change seulement la FORME : traits, ombres, coins, densité, icônes, en-tête de fiche, cases d'arbre, boutons,
  *   mouvements, listes. Jamais la police, la taille du texte ni les couleurs : le premier cadre de Réglages → Apparence
  *   (Preset, Couleur principale, Police de caractères, Taille typographique, Menu des onglets…) passe toujours devant.
- * Réglage : localStorage['genealogie-designs'] = {ver: 2, a1: {v: 'avant'|'doux'|'papier'|'sobre', r, bw, sh, grid}, a2: {…}, … a8: {…}}
+ * Réglage : localStorage['genealogie-designs'] = {ver: 2, a1: {v: 'avant'|'doux'|'papier'|'sobre', r, bw, sh} (les fiches seulement), a2: {…}, … a8: {…}}
  *   (v = la grande carte choisie, le reste = les « Réglages en plus » ; une valeur différente de celle de la carte = « retouché »).
  *   Un ancien réglage (sans ver : A1 à A10, A7 police, A10 tableau de bord) est relu tel quel sans erreur : A7 et A10 sont
  *   ignorés, A8 Mouvements devient A7, A9 Listes devient A8, la couleur d'accent d'A1 est oubliée (migrate). Au chargement,
@@ -42,22 +42,21 @@
 
     /* ═════════════════════════ Les 8 réglages (textes de la maquette validée) : la forme, jamais la police ni les couleurs ═════════════════════════ */
     const DEFS = {
-        a1: {n: 'A1', icon: '🎨', title: 'Style général', q: 'Quel style général veux-tu ?', help: 'Les traits, les ombres et les coins de toute l’app : blocs, boutons, fenêtres, listes. Les couleurs et la police restent celles de l’Apparence.', cols: 'four', screens: ['fiche', 'liste', 'dash'],
+        a1: {n: 'A1', icon: '🎨', title: 'Style des fiches', q: 'Quel style pour les fiches ?', help: 'Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence.', cols: 'four', screens: ['fiche'],
             variants: [
-                {k: 'avant', t: 'Comme avant', sub: 'traits épais, ombres franches', d: {r: 0, bw: 2, sh: 'franches', grid: true},
+                {k: 'avant', t: 'Comme avant', sub: 'traits épais, ombres franches', d: {r: 0, bw: 2, sh: 'franches'},
                     why: [['👍', '<b>Rien ne bouge</b> : le style « néo-brutal » que tu connais, net et très lisible.'], ['👎', 'Beaucoup de traits épais et d’ombres décalées : ça peut paraître chargé sur un grand écran plein de blocs.']]},
-                {k: 'doux', t: 'Doux', sub: 'coins arrondis, ombres légères', d: {r: 10, bw: 1, sh: 'douces', grid: false},
+                {k: 'doux', t: 'Doux', sub: 'coins arrondis, ombres légères', d: {r: 10, bw: 1, sh: 'douces'},
                     why: [['👍', '<b>Plus calme pour les yeux</b> : traits fins et pâles, coins ronds, ombres floues comme sur un téléphone.'], ['👎', 'Les blocs se détachent un peu moins du fond.']]},
-                {k: 'papier', t: 'Papier ancien', sub: 'traits fins, grain du papier', d: {r: 3, bw: 1.5, sh: 'douces', grid: false},
+                {k: 'papier', t: 'Papier ancien', sub: 'traits fins, grain du papier', d: {r: 3, bw: 1.5, sh: 'douces'},
                     why: [['👍', '<b>L’ambiance des archives</b> : coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence.'], ['👎', 'Plus discret que « Comme avant » : les blocs se détachent un peu moins.']]},
-                {k: 'sobre', t: 'Sobre', sub: 'sans ombres, traits clairs', d: {r: 4, bw: 1, sh: 'aucune', grid: false},
+                {k: 'sobre', t: 'Sobre', sub: 'sans ombres, traits clairs', d: {r: 4, bw: 1, sh: 'aucune'},
                     why: [['👍', '<b>Le plus discret</b> : rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures.'], ['👎', 'Un peu « bureau » : moins de caractère que les autres.']]},
             ],
             settings: [
-                {k: 'r', type: 'range', label: 'Arrondi des coins', min: 0, max: 50, step: 1, unit: 'px', why: 'Des coins droits font « dossier d’archives » ; arrondis, l’app paraît plus douce et plus moderne. Le même arrondi va partout (blocs, boutons, champs, fenêtres).'},
+                {k: 'r', type: 'range', label: 'Arrondi des coins', min: 0, max: 50, step: 1, unit: 'px', why: 'Des coins droits font « dossier d’archives » ; arrondis, l’app paraît plus douce et plus moderne. Le même arrondi va sur toute la fiche (blocs, boutons, champs).'},
                 {k: 'bw', type: 'range', label: 'Épaisseur des traits', min: .5, max: 6, step: .5, unit: 'px', why: 'Des traits épais séparent nettement les blocs (utile si tu vois mal) ; des traits fins allègent les pages pleines de cadres. Leur couleur suit les couleurs de l’Apparence ; un thème à toi qui a ses propres traits (Apparence → ✎ Mes thèmes) garde les siens.'},
                 {k: 'sh', type: 'select', label: 'Ombres', options: [['franches', 'Franches, décalées en bleu (comme avant)'], ['douces', 'Douces et floues'], ['aucune', 'Aucune ombre']], why: 'L’ombre dit « ceci est un bloc qu’on peut toucher ». Franches, elles donnent du relief ; douces, elles sont presque invisibles ; sans ombre, c’est le plus sobre (et le plus net à l’impression).'},
-                {k: 'grid', type: 'toggle', label: 'Fond quadrillé', text: 'Petits carreaux derrière les pages', why: 'Le quadrillage rappelle le papier millimétré et aide à aligner à l’œil ; sans lui, le fond est plus calme.'},
             ]},
         a2: {n: 'A2', icon: '↕', title: 'Densité', q: 'Combien d’espace autour des choses ?', help: 'L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons.', cols: 'three', screens: ['liste', 'fiche', 'dash'],
             variants: [
@@ -242,7 +241,7 @@
     const mix = (a, b, t) => { const x = hx(a), y = hx(b); return toHex(x.map((v, i) => v * (1 - t) + y[i] * t)); };
 
     /* ═════════════════════════ Attributs et variables posés sur <html> ═════════════════════════ */
-    const ATTRS = ['style', 'lines', 'sh', 'r', 'grid', 'density', 'dauto', 'icons', 'icred', 'iclbl', 'fiche', 'fphoto', 'funder', 'fbadges', 'tree', 'tw', 'tlinks', 'tdates', 'tsosa',
+    const ATTRS = ['style', 'lines', 'sh', 'r', 'density', 'dauto', 'icons', 'icred', 'iclbl', 'fiche', 'fphoto', 'funder', 'fbadges', 'tree', 'tw', 'tlinks', 'tdates', 'tsosa',
         'btn', 'bsize', 'bshadow', 'bshape', 'motion', 'mhover', 'mbar', 'mreduce', 'list', 'lhover', 'lsel', 'lav', 'lsticky'].map(a => 'data-lc-' + a);
     const VARS = ['--lc-k', '--lc-r', '--lc-sp', '--lc-rowh', '--lc-ic', '--lc-icw', '--lc-bh', '--lc-tw', '--lc-tm', '--lc-tf',
         '--lc-tm-bg', '--lc-tf-bg', '--lc-tm-tx', '--lc-tf-tx', '--lc-tm-bgd', '--lc-tf-bgd', '--lc-tm-txd', '--lc-tf-txd', '--lc-dur'];
@@ -258,7 +257,6 @@
             if (d.v !== 'avant' || d.bw !== b.bw) { a['data-lc-lines'] = '1'; v['--lc-k'] = String(d.bw / 2); }
             if (d.sh !== b.sh) a['data-lc-sh'] = d.sh;
             if (d.r !== b.r) { a['data-lc-r'] = '1'; v['--lc-r'] = `${d.r}px`; }
-            if (!d.grid) a['data-lc-grid'] = 'off';
         }
         if (isOn(G, 'a2')) {
             const d = G.a2; a['data-lc-density'] = d.v; v['--lc-sp'] = String(d.sp / 100); v['--lc-rowh'] = `${d.rowh}px`;
@@ -305,9 +303,27 @@
         }
         return {attrs: a, vars: v};
     }
-    /** pose un réglage sur un élément <html> (la page, ou un aperçu) */
-    function applyTo(el, G) {
-        const {attrs, vars} = attrsOf(G);
+    /* A1 (traits, ombres, coins) ne vaut que dans les fiches : ses attributs vont sur la fiche ouverte, pas sur <html>
+       (les feuilles disent « :is([data-lc-r], [data-lc-r] *) », scripts/scope-a1-css.py). La colonne de gauche a les siens (app-colonne.js). */
+    const A1_ATTRS = ['data-lc-style', 'data-lc-lines', 'data-lc-sh', 'data-lc-r'], A1_VARS = ['--lc-k', '--lc-r'];
+    const pick = (o, keep) => Object.fromEntries(Object.entries(o).filter(([k]) => keep(k)));
+    /** les attributs du style A1 d'un réglage : {attrs, vars} */
+    const a1Of = G => { const {attrs, vars} = attrsOf(G); return {attrs: pick(attrs, k => A1_ATTRS.includes(k)), vars: pick(vars, k => A1_VARS.includes(k))}; };
+    /** pose (ou retire) des attributs A1 sur un élément : la fiche, la colonne de gauche ; et allume les feuilles qui en ont besoin */
+    function setScope(el, part) {
+        if (!el) return;
+        A1_ATTRS.forEach(n => { if (n in part.attrs) { if (el.getAttribute(n) !== part.attrs[n]) el.setAttribute(n, part.attrs[n]); } else if (el.hasAttribute(n)) el.removeAttribute(n); });
+        A1_VARS.forEach(n => { if (n in part.vars) el.style.setProperty(n, part.vars[n]); else el.style.removeProperty(n); });
+        const doc = el.ownerDocument || document;
+        if (part.attrs['data-lc-lines']) { const s = doc.getElementById('lc-frame-css'); if (s && s.media !== 'all') s.media = 'all'; }
+        if (Object.keys(part.attrs).length) { const g = doc.getElementById('lc-designs-gen'); if (g && g.media !== 'all') g.media = 'all'; }
+    }
+    /** la fiche ouverte (personne ou animal) prend le style A1 choisi */
+    function ficheScope(G = cur()) { if (typeof document === 'undefined') return; const part = a1Of(G); document.querySelectorAll('#workspace .person-page').forEach(el => setScope(el, part)); }
+    /** pose un réglage sur un élément <html> (un aperçu : tout ; la page : sans A1, qui va sur la fiche) */
+    function applyTo(el, G, {noA1 = false} = {}) {
+        let {attrs, vars} = attrsOf(G);
+        if (noA1) { attrs = pick(attrs, k => !A1_ATTRS.includes(k)); vars = pick(vars, k => !A1_VARS.includes(k)); }
         [...ATTRS, ...OLD_ATTRS].forEach(n => { if (!(n in attrs) && el.hasAttribute(n)) el.removeAttribute(n); });
         [...VARS, ...OLD_VARS].forEach(n => { if (!(n in vars)) el.style.removeProperty(n); });
         Object.entries(attrs).forEach(([n, x]) => { if (el.getAttribute(n) !== x) el.setAttribute(n, x); });
@@ -318,10 +334,22 @@
         return {attrs, vars};
     }
     let current = null;
+    /** « Fond quadrillé » a quitté le style (A1) pour Apparence → Thème et couleurs ('genealogie-design'.grid = 'off') :
+     *  un ancien choix sans quadrillage (case décochée, ou Doux / Papier ancien / Sobre qui l'enlevaient) y est recopié une fois */
+    function migrateGrid() {
+        try {
+            const raw = migrate(readRaw()), x = raw.a1; if (!isObj(x)) return;
+            const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}') || {}; if ('grid' in d) return;
+            const off = typeof x.grid === 'boolean' ? !x.grid : ['doux', 'papier', 'sobre'].includes(x.v);
+            if (off) { d.grid = 'off'; localStorage.setItem('genealogie-design', JSON.stringify(d)); A().applyDesign?.(); }
+        } catch (_) {}
+    }
+    migrateGrid();
     function apply() {
         const G = read(), root = document.documentElement;
         current = G;
-        const out = applyTo(root, G);
+        const out = applyTo(root, G, {noA1: true});
+        ficheScope(G);
         try { if (Object.keys(out.attrs).length) localStorage.setItem(CACHE_KEY, JSON.stringify({a: out.attrs, v: out.vars})); else localStorage.removeItem(CACHE_KEY); } catch (_) {}
         scheduleDecorate();
         return G;
@@ -534,7 +562,7 @@
     /** la fiche ouverte : redessinée si le réglage change */
     let lastDetail = null;
     ext.afterPerson = ext.afterPerson || [];
-    ext.afterPerson.push(detail => { lastDetail = detail; const run = () => decorateHero(document.querySelector('#workspace .person-hero'), detail, cur()); run(); setTimeout(run, 0); });
+    ext.afterPerson.push(detail => { lastDetail = detail; ficheScope(); const run = () => decorateHero(document.querySelector('#workspace .person-hero'), detail, cur()); run(); setTimeout(run, 0); });
 
     /* ═════════════════════════ Les petits passages sur l'écran (A3, A5, A7, A8) ═════════════════════════ */
     /** A8 : un petit portrait au début des lignes des tableaux de personnes */
@@ -598,6 +626,7 @@
         if (queued || typeof requestAnimationFrame !== 'function') return; queued = true;
         requestAnimationFrame(() => {
             queued = false; const G = cur();
+            ficheScope(G); // une fiche qui vient de s'afficher prend son style
             if (!document.body || !needsWork(G)) return;
             busy = true;
             try { decorate(document.body, G); const hero = document.querySelector('#workspace .person-hero'); if (hero && lastDetail && Number(lastDetail.person?.id) === Number(A().state?.currentPersonId) && !hero.classList.contains('lc-hero') && isOn(G, 'a4')) decorateHero(hero, lastDetail, G); } catch (e) { console.warn(e); }
@@ -803,8 +832,8 @@
     }
 
     /* ═════════════════════════ Réglages → 🎨 Designs au choix ═════════════════════════ */
-    const PCARD = {a1: ['nav', 'ficheHead', 'liste'], a2: ['liste', 'ficheHead'], a3: ['ficheHead', 'boutons'], a4: ['ficheHead'], a5: ['arbre'], a6: ['fenetre', 'boutons'], a7: ['motion'], a8: ['liste', 'side']};
-    const PPREV = {a1: ['nav', 'fiche', 'liste', 'fenetre', 'dash'], a2: ['liste', 'fiche', 'side', 'menu'], a3: ['fiche', 'dash', 'boutons'], a4: ['fiche'], a5: ['arbre'], a6: ['fenetre', 'boutons', 'ficheHead'], a7: ['motion', 'boutons'], a8: ['liste', 'side', 'menu']};
+    const PCARD = {a1: ['ficheHead'], a2: ['liste', 'ficheHead'], a3: ['ficheHead', 'boutons'], a4: ['ficheHead'], a5: ['arbre'], a6: ['fenetre', 'boutons'], a7: ['motion'], a8: ['liste', 'side']};
+    const PPREV = {a1: ['fiche'], a2: ['liste', 'fiche', 'side', 'menu'], a3: ['fiche', 'dash', 'boutons'], a4: ['fiche'], a5: ['arbre'], a6: ['fenetre', 'boutons', 'ficheHead'], a7: ['motion', 'boutons'], a8: ['liste', 'side', 'menu']};
     const lsGet = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const openSet = () => { const o = lsGet(OPEN_KEY, []); return new Set(Array.isArray(o) ? o.filter(x => IDS.includes(x)) : []); };
@@ -1089,11 +1118,13 @@
     };
 
     ext.maintenance = ext.maintenance || {};
-    ext.maintenance.designs = token => renderPage(token);
+    // la page « Designs au choix » a quitté les Réglages : le style va avec les fiches, les mouvements dans Accessibilité ;
+    // une ancienne adresse ouvre « Fiches personnes et animaux » (le style des fiches)
+    ext.maintenance.designs = async token => { const st = A().state; if (st && token !== st.workspaceToken) return; if (st) st.maintenanceTab = 'design_sheets'; await A().setModule?.('maintenance'); };
     /** le cadre « Forme de l'en-tête » (A4) dans Réglages → Apparence → Fiches personnes et animaux : 4 cartes 👍 / 👎, Réglages en plus, aperçu réel */
     async function embedFrame(host, id, title, note) {
         if (!host) return;
-        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="${id}" id="lcd-${id}-emb"><div class="lcd-embed-head"><h4><span aria-hidden="true">${DEFS[id].icon}</span> ${title} <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">${note}${id === 'a7' ? '.' : ' <button type="button" class="link-button" data-lcd-go-designs2>Designs au choix →</button>'}</p><div class="lcd-body" data-lcd-body></div></div>`;
+        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="${id}" id="lcd-${id}-emb"><div class="lcd-embed-head"><h4><span aria-hidden="true">${DEFS[id].icon}</span> ${title} <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">${note}.</p><div class="lcd-body" data-lcd-body></div></div>`;
         const box = host.querySelector('.lcd-embed');
         const st = A().state;
         EMBS[id] = {box, data: {stats: st?.bootstrap?.stats || {}, people: st?.people || []}};
@@ -1102,7 +1133,13 @@
         fillEmbedded(id);
         const data = await loadData(); if (EMBS[id]?.box === box) { EMBS[id].data = data; fillEmbedded(id); }
     }
-    ext.designsA4Frame = host => embedFrame(host, 'a4', 'Forme de l’en-tête', 'La forme générale (traits, coins, boutons) suit');
+    /** « Fiches personnes et animaux » : la forme de l'en-tête (A4) et, dans le même cadre, le style des fiches (A1 : traits, ombres, coins) */
+    ext.designsA4Frame = host => {
+        if (!host) return;
+        host.innerHTML = '<div class="lcd-merged"><div data-lcd-a4-part></div><div data-lcd-a1-part></div></div>';
+        embedFrame(host.querySelector('[data-lcd-a4-part]'), 'a4', 'Forme de l’en-tête', 'Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous');
+        embedFrame(host.querySelector('[data-lcd-a1-part]'), 'a1', 'Style des fiches', 'Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne)');
+    };
     /** le cadre « Boutons » (A6) à la fin de Réglages → Notifications et boutons */
     ext.designsA2Frame = host => embedFrame(host, 'a2', 'Densité', 'L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Les traits et les ombres suivent');
     ext.designsA3Frame = host => embedFrame(host, 'a3', 'Icônes', 'Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent');
@@ -1113,11 +1150,10 @@
     /* ═════════════════════════ Apparence ↔ Designs au choix ═════════════════════════
      * Apparence garde la priorité : un design ne touche ni au Preset, ni à la couleur principale, ni à la police, ni à la taille.
      * Le petit cadre en haut d'Apparence le dit, avec le lien et les designs changés. */
-    const goDesigns = () => { const st = A().state; if (st) st.maintenanceTab = 'designs'; A().setModule?.('maintenance'); };
+    const goDesigns = () => { const st = A().state; if (st) st.maintenanceTab = 'design_sheets'; A().setModule?.('maintenance'); };
     function apparenceNoteHtml(G) {
-        const on = PAGE_IDS.filter(id => isOn(G, id));
-        const list = on.length ? `<small class="lcd-link-on">${esc(`${A().plural ? A().plural(on.length, 'design changé', 'designs changés') : on.length} : ${on.map(id => `${DEFS[id].title} : ${V(id, G[id].v).t}${isModified(G, id) ? ' (retouché)' : ''}`).join(', ')}.`)}</small>` : '<small class="muted lcd-link-on">Tout est encore « comme avant ».</small>';
-        return `<div class="ui-notice ui-notice-info lcd-link" id="lcd-apparence-link"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span><button type="button" class="link-button" data-lcd-go-designs>🎨 Designs au choix</button> : la forme des éléments (traits, densité, icônes, en-tête des fiches, cases des arbres, boutons, listes, mouvements). La police, la taille et les couleurs se règlent ici, dans Apparence. ${list}</span></div>`;
+        const on = isOn(G, 'a1') ? `<small class="lcd-link-on">${esc(`Style des fiches : ${V('a1', G.a1.v).t}${isModified(G, 'a1') ? ' (retouché)' : ''}.`)}</small>` : '';
+        return `<div class="ui-notice ui-notice-info lcd-link" id="lcd-apparence-link"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>La forme des éléments est rangée là où on s’en sert : <button type="button" class="link-button" data-lcd-go-designs>🎨 le style des fiches</button> (traits, coins, ombres) dans Fiches personnes et animaux ; la colonne, la densité, les icônes et les listes dans Menus, colonne et listes ; les boutons dans Notifications et boutons ; les mouvements dans Accessibilité. La police, la taille et les couleurs se règlent ici. ${on}</span></div>`;
     }
     ext.afterDesign = ext.afterDesign || [];
     ext.afterDesign.push(() => {
@@ -1173,7 +1209,7 @@
     }
     // si le réglage change dans un autre onglet du navigateur
     if (typeof window !== 'undefined') window.addEventListener?.('storage', e => { if (e.key === KEY || e.key === (P()?.KEY || 'genealogie-portraits')) { apply(); refreshAll(); } });
-    window.LCNDA_DESIGNS = {KEY, VER, CACHE_KEY, OPEN_KEY, OLD_KEYS, DEFS, IDS, ATTRS, VARS, OLD_ATTRS, SV, GLYPHS, read, write, clean, migrate, portable, defaults, tidyStorage, apply, applyTo, attrsOf, decorate, decorateHero, wrapIcons, unwrapIcons, isOn, isModified, defOf, acteText, apparenceNoteHtml,
+    window.LCNDA_DESIGNS = {A1_ATTRS, A1_VARS, setScope, ficheScope, KEY, VER, CACHE_KEY, OPEN_KEY, OLD_KEYS, DEFS, IDS, ATTRS, VARS, OLD_ATTRS, SV, GLYPHS, read, write, clean, migrate, portable, defaults, tidyStorage, apply, applyTo, attrsOf, decorate, decorateHero, wrapIcons, unwrapIcons, isOn, isModified, defOf, acteText, apparenceNoteHtml,
         treePhoto: () => { const G = PREVIEW_G || cur(); return isOn(G, 'a5') && G.a5.v === 'photo'; },
         listAv: () => { const G = PREVIEW_G || cur(); return isOn(G, 'a8') && G.a8.av; },
         snapshots: SNAP, render: renderPage,

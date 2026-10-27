@@ -44,7 +44,7 @@ const OLD_ARCHIVES = {a1: {v: 'papier', acc: '#8a4b1f'}, a3: {v: 'trait'}, a4: {
     await t('app-designs.js : plus d’ensembles, d’A7 « Police », d’A10, de couleur d’accent ; le cadre ℹ️ juste', () => {
         const src = read('assets/js/app-designs.js');
         assert.doesNotMatch(src, /Police de l’interface|title: 'Tableau de bord'|Ensembles prêts|Couleur d’accent'|data-lcd-preset/);
-        assert.match(src, /La police, la taille et les couleurs se règlent ici, dans Apparence\./);
+        assert.match(src, /La police, la taille et les couleurs se règlent ici\./);
         assert.doesNotMatch(src, /Changer le style de l’app → Designs au choix/, 'ancien texte trompeur');
         assert.doesNotMatch(src, /police, mouvements, listes, tableau de bord : tout est encore/);
     });
@@ -124,8 +124,10 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         });
         await t('le design reste bien posé pendant ce temps (traits, coins, listes…)', async () => {
             await setDesigns(page, {ver: 2, a1: {v: 'doux'}, a8: {v: 'zebre'}});
-            const a = await page.evaluate(() => ({style: document.documentElement.getAttribute('data-lc-style'), list: document.documentElement.getAttribute('data-lc-list'), line: getComputedStyle(document.documentElement).getPropertyValue('--lc-frame-color').trim()}));
-            assert.equal(a.style, 'doux'); assert.equal(a.list, 'zebre'); assert.match(a.line, /color-mix|rgb|#/, 'couleur des traits tirée de l’Apparence');
+            // le style (A1) va sur la fiche ouverte, plus sur <html> : une fiche de test dans la page le reçoit
+            const a = await page.evaluate(() => { const ws = document.getElementById('workspace'), f = document.createElement('article'); f.className = 'page person-page'; ws.appendChild(f); window.LCNDA_DESIGNS.ficheScope();
+                const o = {root: document.documentElement.getAttribute('data-lc-style'), style: f.getAttribute('data-lc-style'), list: document.documentElement.getAttribute('data-lc-list'), line: getComputedStyle(f).getPropertyValue('--lc-frame-color').trim()}; f.remove(); return o; });
+            assert.equal(a.root, null, 'pas sur <html>'); assert.equal(a.style, 'doux'); assert.equal(a.list, 'zebre'); assert.match(a.line, /color-mix|rgb|#/, 'couleur des traits tirée de l’Apparence');
             // un thème à soi avec ses propres traits les garde
             const own = await page.evaluate(() => { const de = document.documentElement; de.classList.add('lc-frame'); de.style.setProperty('--lc-frame-color', '#ff00aa'); const c = getComputedStyle(de).getPropertyValue('--lc-frame-color').trim(); de.classList.remove('lc-frame'); de.style.removeProperty('--lc-frame-color'); return c; });
             assert.equal(own, '#ff00aa', '« ✎ Mes thèmes » garde ses traits');
@@ -141,8 +143,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(await p.evaluate(() => document.documentElement.hasAttribute('data-lc-font') || document.documentElement.hasAttribute('data-lc-dash') || document.documentElement.hasAttribute('data-lc-acc')), false);
             await toApparence(p); await p.waitForSelector('#design-form');
             const note = await p.locator('#lcd-apparence-link').innerText();
-            assert.match(note, /Designs au choix : la forme des éléments \(traits, densité, icônes, en-tête des fiches, cases des arbres, boutons, listes, mouvements\)\. La police, la taille et les couleurs se règlent ici, dans Apparence\./);
-            assert.match(note, /Style général : Papier ancien/); assert.doesNotMatch(note, /police, mouvements, listes, tableau de bord|A9|A10/);
+            assert.match(note, /La forme des éléments est rangée là où on s’en sert : .*le style des fiches.* La police, la taille et les couleurs se règlent ici\./s);
+            assert.match(note, /Style des fiches : Papier ancien/); assert.doesNotMatch(note, /police, mouvements, listes, tableau de bord|A9|A10/);
             assert.equal(await p.locator('#design-form .lcd-hint').count(), 0, 'plus de « Designs au choix → A7 choisit la police »');
             const set = async (name, value) => { await p.evaluate(([n, v]) => { const f = document.querySelector(`#design-form [name="${n}"]`); f.value = v; f.dispatchEvent(new Event('input', {bubbles: true})); f.dispatchEvent(new Event('change', {bubbles: true})); }, [name, value]); await p.waitForTimeout(700); };
             const before = await look(p);
@@ -157,7 +159,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await p.reload({waitUntil: 'load'}); await p.waitForTimeout(1200);
             const after = await look(p);
             assert.match(after.font, /verdana/i); assert.equal(after.paper, '#f0fff5'); assert.equal(after.blue, '#c0392b'); assert.equal(after.size, '18.08px'); assert.equal(after.navBottom, true);
-            assert.equal(await p.evaluate(() => document.documentElement.getAttribute('data-lc-style')), 'papier', 'le design reste');
+            assert.equal(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-designs')).a1.v), 'papier', 'le design reste');
             await p.evaluate(() => { localStorage.removeItem('genealogie-design'); localStorage.removeItem('genealogie-designs'); });
             await p.waitForTimeout(1300);
             await p.close();
@@ -168,13 +170,11 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(g.ver, 2); assert.equal(g.a7.v, 'petit'); assert.equal(g.a8.v, 'zebre'); assert.ok(!('a10' in g));
             await setDesigns(page, null);
         });
-        await t('la page Designs au choix : 2 sections (A5 dans la fenêtre des couleurs, A4 dans Fiches personnes et animaux, A6 dans Notifications et boutons, A8 dans Menus, colonne et listes), pas d’ensembles', async () => {
+        await t('plus de page Designs au choix : l’ancienne adresse ouvre Fiches personnes et animaux (le style des fiches)', async () => {
             await page.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); });
-            await page.waitForSelector('.lcd-page .lcd-toc');
-            assert.equal(await page.locator('details.lcd-sec').count(), 2);
-            assert.equal(await page.locator('#lcd-ens').count(), 0);
-            assert.equal(await page.locator('.lcd-intro').count(), 0, 'plus de cadre bleu d’explication');
-            assert.match(await page.locator('.lcd-page .page-header p').first().innerText(), /Deux réglages/);
+            await page.waitForFunction(() => window.LCNDA_APP.state.maintenanceTab === 'design_sheets');
+            await page.waitForSelector('#lcd-a1-emb', {timeout: 15000});
+            assert.equal(await page.locator('.lcd-page, #lcd-ens, .lcd-intro').count(), 0);
         });
         await t('aucune erreur JavaScript', async () => { assert.deepEqual(errs, []); });
     } finally {

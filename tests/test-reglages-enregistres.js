@@ -109,7 +109,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
     };
     const screen = page => page.evaluate(() => {
         const r = document.documentElement, g = k => localStorage.getItem(k);
-        return {attrs: Object.fromEntries([...r.attributes].filter(a => a.name.startsWith('data-lc')).map(a => [a.name, a.value])), cls: [...r.classList].filter(c => c.startsWith('a11y-')), sidebar: r.style.getPropertyValue('--sidebar'),
+        return {a1: (() => { try { return (JSON.parse(localStorage.getItem('genealogie-designs') || '{}').a1 || {}).v; } catch (_) { return null; } })(), attrs: Object.fromEntries([...r.attributes].filter(a => a.name.startsWith('data-lc')).map(a => [a.name, a.value])), cls: [...r.classList].filter(c => c.startsWith('a11y-')), sidebar: r.style.getPropertyValue('--sidebar'),
             designs: JSON.parse(g('genealogie-designs') || 'null'), portraits: window.LCNDA_PORTRAITS.read(), column: window.LCNDA_COLUMN.read(), access: window.LCNDA_EXT.access.get(), ms: window.LCNDA_EXT.modeSimple.settings(), msRaw: g('genealogie-mode-simple'),
             design: JSON.parse(g('genealogie-design') || '{}'), sort: g('lcnda-sort:listes:media'), view: g('lcnda-view:listes:media'), bar: JSON.parse(g('lcnda-listbar:listes:media') || 'null')};
     });
@@ -158,7 +158,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
     const lsJson = (page, k) => page.evaluate(k => JSON.parse(localStorage.getItem(k) || 'null'), k);
     const checkAll = (s, {ms = true, lists = true, access = true} = {}) => {
         for (const [k, v] of Object.entries(PICK)) assert.equal(s.designs?.[k]?.v, v, `design ${k}`);
-        assert.equal(s.attrs['data-lc-style'], 'doux'); assert.equal(s.attrs['data-lc-fiche'], 'acte'); assert.equal(s.attrs['data-lc-motion'], 'petit'); assert.equal(s.attrs['data-lc-list'], 'zebre');
+        assert.equal(s.a1, 'doux', 'le style des fiches (posé sur la fiche, plus sur <html>)'); assert.equal(s.attrs['data-lc-fiche'], 'acte'); assert.equal(s.attrs['data-lc-motion'], 'petit'); assert.equal(s.attrs['data-lc-list'], 'zebre');
         assert.equal(s.attrs['data-lc-portraits'], 'rond'); assert.equal(s.portraits.mode, 'rond'); assert.equal(s.portraits.m, '#112233');
         assert.equal(s.column.mode, 'nouveau'); assert.equal(s.column.width, 360); assert.equal(s.sidebar, '360px');
         assert.equal(s.design.preset, 'dark'); assert.equal(s.design.blue, '#aa0000');
@@ -209,8 +209,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await toApparence(pa); await pa.waitForSelector('[data-lck-pmode="rond"].is-active', {state: 'attached'});
             assert.equal(await pa.locator('#design-form [name="preset"]').inputValue(), 'dark');
             if (process.env.REGLAGES_SHOTS) { await openFrame(pa, LAY); await openFrame(pa, ALL); await pa.locator('#h-layouts').screenshot({path: path.join(process.env.REGLAGES_SHOTS, 'apparence-1440.png')}); await pa.locator('#h-allsets').screenshot({path: path.join(process.env.REGLAGES_SHOTS, 'toute-app-1440.png')}); }
-            await pa.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'designs'; await A.setModule('maintenance'); });
-            await pa.waitForSelector('#lcd-a1 > summary'); assert.match(await pa.locator('#lcd-a1 > summary').innerText(), /Doux/);
+            // le style des fiches (A1) vit dans Fiches personnes et animaux, avec la forme de l'en-tête
+            await pa.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'design_sheets'; await A.setModule('maintenance'); });
+            await pa.waitForSelector('#lcd-a1-emb [data-lcd-sum]'); await pa.waitForFunction(() => /Doux/.test(document.querySelector('#lcd-a1-emb [data-lcd-sum]')?.textContent || ''));
             // la forme des listes (A8) vit dans Menus, colonne et listes → Listes
             await pa.evaluate(async () => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'nav_menus'; A.state.regATab = {...(A.state.regATab || {}), nav_menus: 'Listes'}; await A.setModule('maintenance'); });
             await pa.waitForSelector('#lcd-a8-emb [data-lcd-sum]'); await pa.waitForFunction(() => /Une ligne sur deux/i.test(document.querySelector('#lcd-a8-emb [data-lcd-sum]')?.textContent || ''));
@@ -261,7 +262,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             const f = await openFrame(pb, DES); await rowOf(f, 'Mon design').locator('[data-ps-apply]').click(); await pb.waitForTimeout(800);
             const d = await screen(pb);
             for (const [k, v] of Object.entries(PICK)) assert.equal(d.designs?.[k]?.v, v, `design ${k}`);
-            assert.equal(d.attrs['data-lc-style'], 'doux'); assert.equal(d.portraits.mode, 'rond'); assert.equal(d.column.mode, 'nouveau');
+            assert.equal(d.a1, 'doux'); assert.equal(d.portraits.mode, 'rond'); assert.equal(d.column.mode, 'nouveau');
             await pb.close();
         });
         await t('4. renommer, dupliquer, remplacer, supprimer avec « ↶ Annuler »', async () => {
