@@ -5564,3 +5564,6 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 :root[data-theme="dark"] .h-am-msr button.is-on{color:#f0f0f0}
 @media (max-width:1100px){:root[data-theme="dark"] .h-at-detail{border-top:1px solid #4c4c4c}}
 /* ═════ fin du mode sombre automatique ═════ */
+/* la recherche standard de l'app (app-ui.js, avec son cadre, sa loupe et « / ») remplace ce champ : un seul cadre */
+.h-world-q:has(.ui-search) { border: 0 !important; background: transparent; padding: 0 !important; box-shadow: none; }
+.h-world-q:has(.ui-search) > span[aria-hidden="true"] { display: none; }

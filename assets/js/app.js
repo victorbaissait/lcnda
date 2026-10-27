@@ -2396,13 +2396,23 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     function saveScrollPosition() {
         if (!state.module||!state.hasRendered) return;
+        if (scrollRestoring&&scrollRestoring.mod===state.module&&Date.now()<scrollRestoring.until) return; // la page se redessine pendant qu'on la remet en place : on garde la place voulue
         state.scrollPositions[state.module] = {workspace:$('#workspace')?.scrollTop || 0,sidebar:$('#sidebar-content')?.scrollTop || 0};
         persistUiState();
     }
 
+    let scrollRestoring=null;
     function restoreScrollPosition() {
         const position=state.scrollPositions[state.module];if(!position)return;
-        setTimeout(()=>{if($('#workspace'))$('#workspace').scrollTop=position.workspace||0;if($('#sidebar-content'))$('#sidebar-content').scrollTop=position.sidebar||0;},80);
+        // une page qui se dessine en plusieurs fois (Réglages, aperçus) : on réessaie jusqu'à 6 s, tant qu'on n'a pas fait défiler soi-même
+        const mod=state.module;let touched=false;const stop=()=>{touched=true;scrollRestoring=null;};
+        scrollRestoring={mod,until:Date.now()+6000};
+        ['wheel','touchstart','keydown','pointerdown'].forEach(ev=>window.addEventListener(ev,stop,{once:true,passive:true,capture:true}));
+        const put=()=>{if(touched||state.module!==mod)return;const ws=$('#workspace'),sb=$('#sidebar-content');
+            if(ws&&Math.abs(ws.scrollTop-(position.workspace||0))>2)ws.scrollTop=position.workspace||0;if(sb&&Math.abs(sb.scrollTop-(position.sidebar||0))>2)sb.scrollTop=position.sidebar||0;};
+        // les aperçus (petites pages) peuvent mettre quelques secondes à arriver : la page n'a sa vraie hauteur qu'après
+        [80,250,500,900,1400,2000,2800,3800,5000,6000].forEach(t=>setTimeout(put,t));
+        setTimeout(()=>{['wheel','touchstart','keydown','pointerdown'].forEach(ev=>window.removeEventListener(ev,stop,{capture:true}));if(scrollRestoring&&scrollRestoring.mod===mod)scrollRestoring=null;},6100);
     }
 
     const SIDEBAR_MODULES = ['dashboard', 'suivi', 'personnes', 'graphiques', 'jeu', 'carte', 'listes', 'chronologie', 'recherche', 'enquetes', 'fiches', 'adn', 'comparaison', 'maintenance'];
@@ -6151,13 +6161,13 @@ ${backupSectionHtml()}
         const head=REGLAGES_A_HEAD[tab],h=page.querySelector('.page-header');
         if(head&&h){const t=h.querySelector('h2');if(t)t.textContent=head[0];const pp=h.querySelector('p');if(pp)pp.textContent=head[1];}
         if(tabs.length>1&&tabs[0][0]){
-            state.regATab=state.regATab||{};const want=state.regATab[tab],cur=typeof want==='string'?Math.max(0,tabs.findIndex(([l])=>l===want)):Math.min(want||0,tabs.length-1); // un onglet demandé par son nom (« Réordonner » des Listes → 'Listes')
+            state.regATab=state.regATab||{};const want=state.regATab[tab],found=typeof want==='string'?tabs.findIndex(([l])=>l===want):-1,cur=typeof want==='string'?Math.max(0,found):Math.min(want||0,tabs.length-1); // gardé par son nom : la page dessinée une première fois avec moins d'onglets ne l'oublie pas // un onglet demandé par son nom (« Réordonner » des Listes → 'Listes')
             page.querySelector(':scope > .reg-a-tabs')?.remove();const bar=document.createElement('div');bar.className='segmented ms-pagetabs reg-a-tabs';bar.setAttribute('role','tablist');
             bar.innerHTML=tabs.map(([label,,full],i)=>`<button type="button" role="tab" data-reg-a-tab="${i}" class="${i===cur?'is-active':''}" aria-selected="${i===cur}"${full?` title="${escapeHtml(full)}"`:''}>${escapeHtml(label)}</button>`).join('');
             h?.after(bar);
-            const go=i=>{state.regATab[tab]=i;bar.querySelectorAll('[data-reg-a-tab]').forEach(b=>{const on=Number(b.dataset.regATab)===i;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',String(on));});show(new Set(tabs[i][1]));};
+            const go=(i,keep=true)=>{if(keep)state.regATab[tab]=tabs[i][0];bar.querySelectorAll('[data-reg-a-tab]').forEach(b=>{const on=Number(b.dataset.regATab)===i;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',String(on));});show(new Set(tabs[i][1]));};
             bar.addEventListener('click',e=>{const b=e.target.closest('[data-reg-a-tab]');if(b)go(Number(b.dataset.regATab));});
-            go(cur);
+            go(cur,typeof want!=='string'||found>=0); // l'onglet voulu pas encore là : on montre le premier sans oublier le voulu
         }else show(new Set(tabs.flatMap(([,els])=>els)));
     }
     async function renderDesignTools(token=++state.workspaceToken){
