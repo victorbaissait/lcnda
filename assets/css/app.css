@@ -4438,6 +4438,12 @@ dialog .modal-actions > :is(.danger:not([type=submit]), [data-h-delete]) { margi
 .st-aeree .lck-c-sec { border: 0; padding: 16px 12px 6px; background: transparent; }
 .st-continue .lck-c-more, .st-aeree .lck-c-more { padding: 5px; }
 .st-continue.compact .lck-c-item, .st-aeree.compact .lck-c-item { min-height: 25px; }
+/* Colonne de gauche → arrondi, épaisseur des traits, ombres : l'aperçu les montre comme la vraie colonne */
+.lck-c-side.has-r :is(.lck-c-item, .lck-c-tabs, .lck-c-lf) { border-radius: min(var(--pc-r), 17px); }
+.lck-c-side.has-bw:not(.st-continue):not(.st-aeree) .lck-c-item, .lck-c-side.has-bw .lck-c-tabs { border-width: max(1px, calc(2px * var(--pc-k))); }
+.lck-colprev .lck-c-side.has-bw { border-right-width: max(1px, calc(2px * var(--pc-k))); }
+.lck-c-side.sh-douces:not(.st-continue):not(.st-aeree) .lck-c-item { box-shadow: 0 2px 8px rgba(25,35,60,.12); }
+.lck-c-side.sh-aucune .lck-c-item { box-shadow: none; }
 .st-aeree.compact .lck-c-item { min-height: 30px; }
 .lck-c-lf { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid #080808; margin-top: auto; }
 .lck-c-lf span { padding: 4px; text-align: center; font: 700 11px system-ui, sans-serif; }

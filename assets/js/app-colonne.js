@@ -248,7 +248,9 @@
         });
         if (T.more) body += `<div class="lck-c-more">${S.numstyle === 'suite' ? T.moreNew : T.more}</div>`;
         const lf = T.list && S.lf === 'bas' ? '<div class="lck-c-lf"><span>Liste</span><span class="is-active">Fiches</span></div>' : '';
-        return `<div class="lck-c-side st-${st}${S.size === 'compacte' ? ' compact' : ''}" style="width:${Math.round(S.width * scale)}px"><div class="lck-hd"><div><div class="lck-eb">${T.eb}</div><h4>${T.h}</h4></div><span class="lck-back">←</span></div>${tabs}${t === 'enq' ? '<div class="lck-h10" style="border:0;padding:0"><span class="lck-s">🔍 Chercher une enquête…</span></div>' : ''}<div class="lck-c-list">${body}</div>${lf}</div>`;
+        // traits, coins et ombres de la colonne : l'aperçu suit aussi (app.css, .lck-c-side.has-r / has-bw / sh-*)
+        const look = `${S.r ? ' has-r' : ''}${S.bw !== 2 ? ' has-bw' : ''}${S.sh !== 'franches' ? ` sh-${S.sh}` : ''}`;
+        return `<div class="lck-c-side st-${st}${S.size === 'compacte' ? ' compact' : ''}${look}" style="width:${Math.round(S.width * scale)}px;--pc-r:${S.r}px;--pc-k:${S.bw / 2}"><div class="lck-hd"><div><div class="lck-eb">${T.eb}</div><h4>${T.h}</h4></div><span class="lck-back">←</span></div>${tabs}${t === 'enq' ? '<div class="lck-h10" style="border:0;padding:0"><span class="lck-s">🔍 Chercher une enquête…</span></div>' : ''}<div class="lck-c-list">${body}</div>${lf}</div>`;
     }
     function mainHtml(S, t) {
         const T = TOOLS[t];
@@ -408,6 +410,7 @@
         $('#lck-c-width').addEventListener('change', e => setC({width: Number(e.target.value)}));
         $('#lck-c-r').addEventListener('change', e => setC({r: Number(e.target.value)}));
         $('#lck-c-bw').addEventListener('change', e => setC({bw: Number(e.target.value)}));
+        ['r', 'bw'].forEach(k => $(`#lck-c-${k}`).addEventListener('input', e => { $('#lck-c-prev').innerHTML = prevHtml({...read(), [k]: Number(e.target.value)}); }));
         $('#lck-c-sh').addEventListener('change', e => setC({sh: e.target.value}));
         $('#lck-c-width').addEventListener('input', e => { $('#lck-c-prev').innerHTML = prevHtml({...read(), width: Number(e.target.value)}); });
         box.lckRender = renderC;

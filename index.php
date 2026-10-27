@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=251">
+    <link rel="stylesheet" href="assets/css/app.css?v=252">
     <link rel="stylesheet" href="assets/css/picker.css?v=6">
     <link rel="stylesheet" href="assets/css/heritage.css?v=250">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -1170,7 +1170,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-forms.js?v=3" defer></script>
 <script src="assets/js/app-mots.js?v=1" defer></script>
 <script src="assets/js/app-portraits.js?v=3" defer></script>
-<script src="assets/js/app-colonne.js?v=4" defer></script>
+<script src="assets/js/app-colonne.js?v=5" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
 <script src="assets/js/app-actions.js?v=4" defer></script>
 <script src="assets/js/app-editeurs.js?v=3" defer></script>
