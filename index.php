@@ -1176,12 +1176,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-editeurs.js?v=3" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=8" defer></script>
-<script src="assets/js/app-access.js?v=11" defer></script>
-<script src="assets/js/app-mode-simple.js?v=9" defer></script>
+<script src="assets/js/app-access.js?v=14" defer></script>
+<script src="assets/js/app-mode-simple.js?v=10" defer></script>
 <script src="assets/js/app-sidegroups.js?v=12" defer></script>
 <script src="assets/js/app-reordonner.js?v=2" defer></script>
 <script src="assets/js/app-listes.js?v=40" defer></script>
-<script src="assets/js/app-maintenance.js?v=36" defer></script>
+<script src="assets/js/app-maintenance.js?v=37" defer></script>
 <script src="assets/js/app-recherche.js?v=24" defer></script>
 <script src="assets/js/app-graphiques.js?v=19" defer></script>
 <script src="assets/js/app-side-folders.js?v=2" defer></script>
@@ -1192,7 +1192,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=4" defer></script>
 <script src="assets/js/heritage-links.js?v=19" defer></script>
-<script src="assets/js/heritage-more.js?v=234" defer></script>
+<script src="assets/js/heritage-more.js?v=235" defer></script>
 <script src="assets/js/heritage-controle.js?v=4" defer></script>
 <script src="assets/js/heritage-records.js?v=11" defer></script>
 <script src="assets/js/heritage-research.js?v=36" defer></script>
@@ -1382,7 +1382,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
 <script src="assets/js/app-apparence.js?v=18" defer></script>
-<script src="assets/js/app-designs.js?v=14" defer></script>
+<script src="assets/js/app-designs.js?v=16" defer></script>
 <script src="assets/js/app-sections.js?v=3" defer></script>
 <script>
 (function () {

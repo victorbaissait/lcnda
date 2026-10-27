@@ -1405,8 +1405,8 @@
         });
     }
     /** appelé par app-access.js : les onglets de page « ♿ Toute l'app » / « 🧓 Mode simple » */
-    const tabNow = () => { try { return sessionStorage.getItem(TAB_KEY) === 'simple' ? 'simple' : 'app'; } catch (_) { return 'app'; } };
-    function tabsHtml() { const t = tabNow(); return `<div class="segmented ms-pagetabs" role="tablist" aria-label="Accessibilité">${[['app', '♿', 'Toute l’app'], ['simple', '🧓', 'Mode simple']].map(([k, i, n]) => `<button type="button" role="tab" class="${t === k ? 'is-active' : ''}" aria-selected="${t === k}" data-ms-tab="${k}"><span aria-hidden="true">${i}</span> ${n}${k === 'simple' ? ' <span class="ms-new">Nouveau</span>' : ''}</button>`).join('')}</div>`; }
+    const tabNow = () => { try { const t = sessionStorage.getItem(TAB_KEY); return t === 'simple' || t === 'motion' ? t : 'app'; } catch (_) { return 'app'; } };
+    function tabsHtml() { const t = tabNow(); return `<div class="segmented ms-pagetabs" role="tablist" aria-label="Accessibilité">${[['app', '♿', 'Toute l’app'], ['motion', '🎞', 'Mouvement'], ['simple', '🧓', 'Mode simple']].map(([k, i, n]) => `<button type="button" role="tab" class="${t === k ? 'is-active' : ''}" aria-selected="${t === k}" data-ms-tab="${k}"><span aria-hidden="true">${i}</span> ${n}${k === 'simple' ? ' <span class="ms-new">Nouveau</span>' : ''}</button>`).join('')}</div>`; }
     function mountTab(page) {
         bindSettings(page);
         if (!page.__msTabs) { page.__msTabs = true; page.addEventListener('click', e => { const b = e.target.closest('[data-ms-tab]'); if (!b) return; try { sessionStorage.setItem(TAB_KEY, b.dataset.msTab); } catch (_) {} ext.maintenance?.accessibilite?.(A().state?.workspaceToken ?? 0, false); }); }

@@ -895,6 +895,10 @@
         if (MS?.tabsHtml) {
             page.querySelector('.page-header')?.insertAdjacentHTML('afterend', MS.tabsHtml());
             if (MS.tabNow() === 'simple') { page.querySelectorAll(':scope > .a11y-sec').forEach(x => x.remove()); page.insertAdjacentHTML('beforeend', '<div class="ms-box" data-ms-box></div>'); }
+            // « 🎞 Mouvement » : le cadre des mouvements (A7, venu de Designs au choix : même moteur, même stockage)
+            //   avec le cadre « 🎞 Mouvement » d'Accessibilité (réduire les animations, durée des messages), qui quitte « Toute l'app »
+            if (MS.tabNow() === 'motion') { page.querySelectorAll(':scope > .a11y-sec:not(#a11y-motion)').forEach(x => x.remove()); page.insertAdjacentHTML('beforeend', '<div class="a11y-motion-a7" data-a7-host></div>'); ext.designsA7Frame?.(page.querySelector('[data-a7-host]')); }
+            else if (MS.tabNow() === 'app') page.querySelector('#a11y-motion')?.remove();
         }
         bindRanges(page); mountHelp(page); afterChange('cb'); afterChange('tts'); afterChange('dictate');
         remapCharts(page);

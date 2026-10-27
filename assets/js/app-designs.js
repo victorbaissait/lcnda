@@ -815,7 +815,7 @@
     const whyList = why => `<ul class="lcd-why-list">${why.map(([i, t]) => `<li><span aria-hidden="true">${i}</span><span>${t}</span></li>`).join('')}</ul>`;
     let PAGE = null; // {box, data, G}
     /** la page n'a plus A5 : les cases des arbres se règlent dans Graphiques → 🎨 Couleurs (fenêtre « Statistiques et arbres », ext.treeCards plus bas) */
-    const PAGE_IDS = IDS.filter(id => !['a2', 'a3', 'a4', 'a5', 'a6', 'a8'].includes(id)); // A6 Boutons : dans Réglages → Notifications et boutons ; A2 Densité, A3 Icônes, A8 Listes : dans Menus, colonne et listes (même moteur, même stockage)
+    const PAGE_IDS = IDS.filter(id => !['a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8'].includes(id)); // A7 Mouvements : dans Réglages → Accessibilité, onglet « 🎞 Mouvement » ; A6 Boutons : dans Réglages → Notifications et boutons ; A2 Densité, A3 Icônes, A8 Listes : dans Menus, colonne et listes (même moteur, même stockage)
     /** A4 « Fiche d'une personne » est dans Réglages → Apparence → Fiches personnes et animaux (cadre « Forme de l'en-tête ») : même moteur, même stockage */
     const EMBS = {}; // {a4: {box, data}, a6: …} : les cadres posés ailleurs (A4 dans la page des fiches, A6 dans Notifications et boutons)
     const embOf = id => (EMBS[id]?.box.isConnected ? EMBS[id] : null);
@@ -963,7 +963,7 @@
         const st = A().state; if (st && token !== st.workspaceToken) return;
         const ws = document.getElementById('workspace'); if (!ws) return;
         const G = cur(), opened = openSet();
-        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Deux réglages pour changer la forme des éléments de l’app : le style général (traits, coins, ombres) et les mouvements (la forme de l’en-tête des fiches se règle dans Fiches personnes et animaux, les boutons dans Notifications et boutons ; les listes, les icônes et la densité dans Menus, colonne et listes). Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
+        ws.innerHTML = `<section class="page lcd-page"><header class="page-header"><div><span class="eyebrow">RÉGLAGES</span><h2>🎨 Designs au choix</h2><p>Le style général des éléments de l’app (traits, coins, ombres) ; les mouvements se règlent dans Accessibilité → « 🎞 Mouvement » (la forme de l’en-tête des fiches se règle dans Fiches personnes et animaux, les boutons dans Notifications et boutons ; les listes, les icônes et la densité dans Menus, colonne et listes). Pour chacun, tu cliques sur la grande carte que tu préfères, puis tu peux affiner en dessous ; l’aperçu montre de vrais écrans de l’app avec tes données. Tant que tu ne touches à rien, tout reste comme avant.</p></div><div class="page-actions"><button type="button" class="button secondary" data-lcd-reset="all">↺ Remettre comme au départ</button><button type="button" class="button secondary" data-lcd-apparence>🎨 Apparence →</button></div></header>
             ${tocHtml(G)}
             <div class="lcd-secs">${PAGE_IDS.map(id => sectionShell(id, opened.has(id))).join('')}</div></section>`;
         const box = ws.querySelector('.lcd-page');
@@ -1093,7 +1093,7 @@
     /** le cadre « Forme de l'en-tête » (A4) dans Réglages → Apparence → Fiches personnes et animaux : 4 cartes 👍 / 👎, Réglages en plus, aperçu réel */
     async function embedFrame(host, id, title, note) {
         if (!host) return;
-        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="${id}" id="lcd-${id}-emb"><div class="lcd-embed-head"><h4><span aria-hidden="true">${DEFS[id].icon}</span> ${title} <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">${note} <button type="button" class="link-button" data-lcd-go-designs2>Designs au choix →</button></p><div class="lcd-body" data-lcd-body></div></div>`;
+        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="${id}" id="lcd-${id}-emb"><div class="lcd-embed-head"><h4><span aria-hidden="true">${DEFS[id].icon}</span> ${title} <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">${note}${id === 'a7' ? '.' : ' <button type="button" class="link-button" data-lcd-go-designs2>Designs au choix →</button>'}</p><div class="lcd-body" data-lcd-body></div></div>`;
         const box = host.querySelector('.lcd-embed');
         const st = A().state;
         EMBS[id] = {box, data: {stats: st?.bootstrap?.stats || {}, people: st?.people || []}};
@@ -1107,6 +1107,7 @@
     ext.designsA2Frame = host => embedFrame(host, 'a2', 'Densité', 'L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Les traits et les ombres suivent');
     ext.designsA3Frame = host => embedFrame(host, 'a3', 'Icônes', 'Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent');
     ext.designsA8Frame = host => embedFrame(host, 'a8', 'Forme des listes', 'Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent');
+    ext.designsA7Frame = host => embedFrame(host, 'a7', 'Mouvements', 'Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle');
     ext.designsA6Frame = host => embedFrame(host, 'a6', 'Boutons', 'Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent');
 
     /* ═════════════════════════ Apparence ↔ Designs au choix ═════════════════════════

@@ -14,7 +14,7 @@
     const MAINT_KEYWORDS = {design: 'préférences réglages boutons en haut à droite barre du haut calculette mode consultation nouvelle fenêtre écran en deux mes généalogies types de recherche type de recherche ordre du menu onglets ordre des listes couleurs des badges messages après une action police couleur principale réglages enregistrés',
         design_maps: 'préférences fonds de carte fonds de cartes ordre des fonds boutons plan des adresses village carte par défaut ordre des cartes',
         design_board: 'préférences widgets bibliothèque', design_sheets: 'préférences blocs de la fiche en-tête boutons profils', raccourcis: 'touches clavier préférences',
-        diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations', board_prefs: 'réglages des tableaux formes pointes couleurs', pet_prefs: 'réglages des animaux espèces formulaire', meteo: 'météo temps pluie température neige climat ciel normale stations pack'};
+        diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations mouvement mouvements', board_prefs: 'réglages des tableaux formes pointes couleurs', pet_prefs: 'réglages des animaux espèces formulaire', meteo: 'météo temps pluie température neige climat ciel normale stations pack'};
     const MO_KEY = 'genealogie-maintenance-order', A_ONLY = ['look_theme', 'look_portraits', 'look_msgs', 'look_layouts', 'nav_menus'];
     const mKeys = () => defaultMaintenanceTabs.map(t => t[0]).filter(k => (window.LCNDA_APP.reglagesA?.() ? k !== 'design' : !A_ONLY.includes(k)));
     /* présentation A : « Apparence et affichage » en trois groupes ; l'autre façon garde son propre rangement */
