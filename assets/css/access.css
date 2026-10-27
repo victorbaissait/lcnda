@@ -338,7 +338,7 @@ html.a11y-simple .main-nav .nav-item:is([data-module="animaux"], [data-module="a
 html.a11y-simple .brand::after,
 html.a11y-simple :is(.sidebar-top, .page-header) .eyebrow,
 html.a11y-simple :is(.card-index, .side-number) { display: none !important; }
-html.a11y-simple .workspace { background-image: none; }
+html.a11y-simple .workspace { background-image: none !important; } /* passe devant 🧩 Fond des pages */
 /* un seul panneau : pas d'écran divisé */
 html.a11y-simple #side-panel-open, html.a11y-simple .side-panel { display: none !important; }
 html.a11y-simple body.has-side-panel #app { width: 100vw !important; height: 100vh !important; }
