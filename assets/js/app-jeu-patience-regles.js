@@ -175,7 +175,7 @@
         for (let f = 0; f < nf; f++) addPile(st, 'f' + f, 'found', width - (nf - f) * U + (U - 1), 0);
         // posés d'avance (As, ou 2 pour l'entrepôt)
         let fi = 0;
-        (D.found.out || []).forEach(r => { const out = deck.filter(c => c.r === r); deck = deck.filter(c => c.r !== r); out.forEach(c => { c.up = true; st.piles.find(p => p.id === 'f' + (fi++))?.cards.push(c); }); });
+        (D.found.out || []).forEach(r => { const out = deck.filter(c => c.r === r); deck = deck.filter(c => c.r !== r); out.forEach(c => { c.up = true; const id = 'f' + (fi++); st.piles.find(p => p.id === id)?.cards.push(c); }); }); // (le numéro avancé une fois par carte, pas à chaque pile essayée)
         if (D.found.out?.length) st.base = D.found.out[0];
         else if (typeof D.found.base === 'number') st.base = D.found.base;
         // la réserve

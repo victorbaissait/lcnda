@@ -1,0 +1,42 @@
+/* LCNDA — 🂠 Patiences (assets/js/app-jeu-patience.js) : la table et les cartes. */
+.jfp-pick select { width: 100%; }
+.jfp-desc { margin: 8px 0 4px; font-size: 13.5px; line-height: 1.45; }
+.jfp-stars { color: #d6a100; letter-spacing: 1px; }
+.jfp-backs { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; font-weight: 700; font-size: 13px; }
+.jfp .goose-board-wrap { overflow-x: auto; }
+.pc-board { position: relative; margin: 6px 0 12px; user-select: none; -webkit-user-select: none; touch-action: none; }
+.pc-slot { position: absolute; width: var(--cw); height: var(--ch); border: 2px dashed color-mix(in srgb, var(--ink) 28%, transparent); border-radius: calc(var(--cw) * .09); display: grid; place-items: center; color: color-mix(in srgb, var(--ink) 35%, transparent); font: 800 calc(var(--cw) * .32) system-ui, sans-serif; }
+.pc-slot.pc-stock { cursor: pointer; }
+.pc-slot.pc-found { border-style: solid; border-color: color-mix(in srgb, var(--blue) 35%, transparent); color: color-mix(in srgb, var(--blue) 45%, transparent); }
+.pc-slot.is-hint-to, .pc-card.is-hint { outline: 3px solid #f2c230; outline-offset: 2px; }
+.pc-count { position: absolute; right: -6px; bottom: -8px; z-index: 950; font: 700 11px system-ui, sans-serif; font-style: normal; background: var(--ink); color: var(--paper, #fff); padding: 1px 5px; border-radius: 8px; }
+.pc-card { position: absolute; width: var(--cw); height: var(--ch); background: #fff; color: #111; border: 1.5px solid #222; border-radius: calc(var(--cw) * .09); box-shadow: 0 1px 2px rgba(0,0,0,.25); cursor: pointer; overflow: hidden; transition: left .12s ease, top .12s ease; }
+.pc-card.is-drag { transition: none; box-shadow: 0 10px 22px rgba(0,0,0,.35); cursor: grabbing; }
+.pc-card.is-red { color: #c8102e; }
+.pc-card.is-sel { outline: 3px solid var(--blue); outline-offset: 1px; transform: translateY(-3px); }
+.pc-card.is-no, .pc-slot.is-no { animation: pc-no .3s ease; }
+@keyframes pc-no { 25% { translate: -4px 0; } 75% { translate: 4px 0; } }
+.pc-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.pc-c { position: absolute; left: 4%; top: 2%; display: flex; flex-direction: column; align-items: center; line-height: .95; font: 800 max(8px, calc(var(--cw) * .25)) system-ui, sans-serif; letter-spacing: -.04em; }
+.pc-c i { font-style: normal; font-size: .85em; }
+.pc-c2 { left: auto; top: auto; right: 4%; bottom: 2%; transform: rotate(180deg); }
+.pc-mid { position: absolute; inset: 0; display: grid; place-items: center; font-size: calc(var(--cw) * .5); line-height: 1; }
+.pc-mid b { font: 900 calc(var(--cw) * .42) Georgia, serif; }
+.pc-card.is-back { cursor: default; background-color: #1f4fa0; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.18) 0 3px, transparent 3px 7px), repeating-linear-gradient(-45deg, rgba(255,255,255,.18) 0 3px, transparent 3px 7px); box-shadow: inset 0 0 0 3px #fff, 0 1px 2px rgba(0,0,0,.25); }
+.jfp[data-back="rouge"] .pc-card.is-back { background-color: #a3192b; }
+.jfp[data-back="vert"] .pc-card.is-back { background-color: #1d6b43; }
+.jfp[data-back="sepia"] .pc-card.is-back { background-color: #7a5230; }
+.pc-hand { outline: 3px solid #f2c230; }
+.pc-board.is-won .pc-card { animation: pc-win .6s ease both; }
+@keyframes pc-win { 50% { transform: translateY(-6px) rotate(-2deg); } }
+.jfp-tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.jfp-rules summary { cursor: pointer; font-weight: 700; }
+.jfp-stuck { margin: 8px 0; }
+@media (prefers-reduced-motion: reduce) { .pc-card { transition: none; } .pc-board.is-won .pc-card, .pc-card.is-no { animation: none; } }
+/* une patience se joue seul : pas de cadre « Les joueurs » */
+.jf-patience .jf-fs:has([data-jf-players]) { display: none; }
+.jfp-backs .jf-seg { flex-wrap: nowrap; }
+/* le panneau sous la table (beaucoup de colonnes ou petit écran) : la table prend toute la largeur */
+.jfp.is-stacked { grid-template-columns: minmax(0, 1fr); }
+.jfp.is-stacked .goose-panel { position: static; }
+@media (max-width: 600px) { .jfp .goose-board-wrap { padding: 8px; border-width: 3px; } }
