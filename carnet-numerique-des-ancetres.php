@@ -239,7 +239,7 @@
                     <p class="presentation-os-help">Le code complet de la version 0.9.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.9.0.zip"><span>Archive .zip<small>Windows, macOS · 269 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.9.0.zip"><span>Archive .zip<small>Windows, macOS · 270 Mo</small></span><span aria-hidden="true">↓</span></a>
                     <a class="button secondary" href="download/lcnda-0.9.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 269 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
@@ -1072,7 +1072,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.8.2 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.9.0 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script src="faq-data.js"></script>
