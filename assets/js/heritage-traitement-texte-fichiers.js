@@ -65,7 +65,17 @@
             },
             async close() {
                 if (this.typeT) this.commit();
-                if (this.dirty && !await A().confirmBox('Les changements faits depuis le dernier enregistrement seront perdus.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return;
+                // un enregistrement en cours (⌘S, 💾, automatique) : on attend sa fin avant de demander ; réussi → on ferme sans question
+                if (this._saving) { try { await this._saving; } catch (_) {} }
+                if (this.dirty) {
+                    const ask = A().confirmBox('Les changements faits depuis le dernier enregistrement seront perdus.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true});
+                    // un enregistrement qui se termine bien pendant la question : elle disparaît et la fenêtre se ferme
+                    const box = [...document.querySelectorAll('dialog.confirm-box-dialog[open]')].pop();
+                    const watch = setInterval(() => { if (!this.dirty && box?.open) { clearInterval(watch); this._closeAfterSave = true; box.close(); } }, 250);
+                    const ok = await ask; clearInterval(watch);
+                    const saved = this._closeAfterSave; this._closeAfterSave = false;
+                    if (!ok && !saved) return;
+                }
                 this.dlg.close();
             },
             /** le document neutre (pour les fichiers et la mise en page) */

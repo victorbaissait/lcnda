@@ -4823,6 +4823,15 @@ th .ui-l6-count { color: inherit; opacity: .85; }
 @media (max-width: 600px) { .ui-l6 { padding: 6px; } .ui-l6 > .ui-search { flex-basis: 100%; } }
 :root[data-theme="dark"] .ui-ig-tile mark, :root[data-theme="dark"] .ui-l6 mark, :root[data-theme="dark"] mark.ui-l6-mark { background: #6b5400; color: #fff; }
 :root[data-theme="dark"] .ui-l6-hit { box-shadow: inset 3px 0 0 #c99400; }
+/* ‹ › Menu du haut qui déborde : dégradé + flèche aux bords (posés par navOverflowHint, rien quand tout tient) */
+.nav-ov-hint { position: fixed; z-index: 21; width: 40px; display: flex; align-items: center; pointer-events: none; }
+.nav-ov-hint[hidden] { display: none; }
+.nav-ov-hint.is-left { justify-content: flex-start; background: linear-gradient(to right, var(--white) 35%, transparent); }
+.nav-ov-hint.is-right { justify-content: flex-end; background: linear-gradient(to left, var(--white) 35%, transparent); }
+.nav-ov-btn { pointer-events: auto; width: 26px; height: 26px; margin: 0 3px; display: grid; place-items: center; border: 2px solid var(--blue); background: var(--white); color: var(--blue); font: 900 18px/1 system-ui, sans-serif; cursor: pointer; padding: 0 0 2px; border-radius: 50%; }
+.nav-ov-btn:hover { background: var(--blue); color: #fff; }
+/* ⏳ Pendant un enregistrement : Annuler et × d'une fenêtre ne ferment pas (aspect désactivé C8) */
+dialog .is-save-locked, dialog .is-save-locked:hover { opacity: .45; cursor: not-allowed; transform: none; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

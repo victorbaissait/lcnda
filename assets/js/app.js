@@ -17,6 +17,17 @@
             return origFetch.call(this,input,init);
         };
         wrappedFetch.__lcndaGen=true;window.fetch=wrappedFetch;
+        // 🖼 Une image ou un son de « media/… » qui ne se charge pas (une <img> n'envoie pas X-Genealogy) : la première fois
+        // (puis au plus toutes les 30 s), un petit appel à api.php vérifie la généalogie ; s'il répond 409, api() affiche
+        // le message unique « … recharge la page » avec « ↻ Recharger ». Une seule fenêtre : l'appel répond normalement, rien ne change.
+        let mediaCheckAt=0;
+        document.addEventListener('error',e=>{
+            const el=e.target;if(!(el instanceof HTMLImageElement||el instanceof HTMLMediaElement||el instanceof HTMLSourceElement))return;
+            if(api.genealogyWarned||Date.now()-mediaCheckAt<30000)return;
+            try{const u=new URL(el.currentSrc||el.src||el.getAttribute('src')||'',location.href);if(u.origin!==location.origin||!/\/media\/|(?:^|\/)api\.php$/.test(u.pathname))return;}catch(_){return;}
+            mediaCheckAt=Date.now();
+            setTimeout(()=>{api('kiosk_state').catch(()=>{});},0);
+        },true);
         document.addEventListener('click',e=>{const a=e.target.closest?.('a[href*="api.php"]');if(!a)return;try{const u=new URL(a.getAttribute('href'),location.href);if(u.origin===location.origin&&/(?:^|\/)api\.php$/.test(u.pathname)&&!u.searchParams.has('g')){u.searchParams.set('g',window.LCNDA_GENEALOGY);a.setAttribute('href',u.pathname.replace(/^.*\//,'')+u.search+u.hash);}}catch(_){}},true);
     }
 
@@ -38,6 +49,15 @@
         };
         proto.removeEventListener=function(type,fn,opts){return origRemove.call(this,type,(type==='submit'&&typeof fn==='function'&&wrapped.get(fn))||fn,opts);};
         const busyLabel=b=>/enregistr|ajout|créer|conserv|rattach|valid|import|lier|envoy/i.test(b.textContent||'')?'Enregistrement…':'Un instant…';
+        /* ⏳ Pendant un enregistrement : « Annuler », × et Échap ne ferment pas la fenêtre (sinon elle disparaît alors que
+         * l'enregistrement se fait quand même) ; aspect désactivé C8 ; ils reviennent dès que c'est fini, réussi ou non.
+         * Un bouton qui arrête vraiment l'envoi garde la main : data-allow-cancel. */
+        const CLOSE_SEL='[data-h-close],[data-close],[data-cb-cancel],button[value="cancel"],.modal-close,button.icon-button[aria-label="Fermer"]';
+        const closeButtons=dlg=>[...dlg.querySelectorAll('button')].filter(b=>b.closest('dialog')===dlg&&b.type!=='submit'&&!b.hasAttribute('data-allow-cancel')&&(b.matches(CLOSE_SEL)||/^\s*(Annuler|Fermer|×)\s*$/.test(b.textContent||'')));
+        const lockClose=(dlg,on)=>{if(on){dlg.dataset.lcSaving='1';closeButtons(dlg).forEach(b=>{if(b.getAttribute('aria-disabled')==='true')return;b.dataset.lcSaveLock='1';b.setAttribute('aria-disabled','true');b.classList.add('is-save-locked');if(!b.title)b.dataset.lcSaveTitle='1',b.title='Enregistrement en cours : un instant…';});}
+            else{delete dlg.dataset.lcSaving;dlg.querySelectorAll('[data-lc-save-lock]').forEach(b=>{delete b.dataset.lcSaveLock;b.removeAttribute('aria-disabled');b.classList.remove('is-save-locked');if(b.dataset.lcSaveTitle){delete b.dataset.lcSaveTitle;b.removeAttribute('title');}});}};
+        origAdd.call(document,'cancel',ev=>{const d=ev.target;if(d instanceof HTMLDialogElement&&d.dataset.lcSaving==='1'){ev.preventDefault();ev.stopImmediatePropagation();}},true);
+        origAdd.call(document,'click',ev=>{const b=ev.target.closest?.('button');const d=b?.closest('dialog');if(d&&d.dataset.lcSaving==='1'&&b.dataset.lcSaveLock==='1'){ev.preventDefault();ev.stopImmediatePropagation();}},true);
         origAdd.call(document,'submit',ev=>{
             const form=ev.target;if(!(form instanceof HTMLFormElement))return;
             const dlg=form.closest('dialog');if(!dlg)return;
@@ -45,7 +65,7 @@
             form._lcBusy=true;form._lcPending=[];out.last={form,dialog:dlg};
             const wasDirty=dlg.dataset.dirty==='1',seq=out.failSeq,okSeq=out.okSeq,btn=ev.submitter||form.querySelector('button[type="submit"],button:not([type])');
             let touched=false,weDisabled=false,done=false;
-            const release=()=>{if(done)return;done=true;form._lcBusy=false;form._lcPending=null;dlg.removeEventListener('close',release);
+            const release=()=>{if(done)return;done=true;form._lcBusy=false;form._lcPending=null;dlg.removeEventListener('close',release);lockClose(dlg,false);
                 if(touched&&btn){btn.innerHTML=btn._lcHtml;if(weDisabled)btn.disabled=false;btn.classList.remove('is-busy');btn.removeAttribute('aria-busy');btn.removeAttribute('aria-disabled');}};
             dlg.addEventListener('close',release);
             // l'aspect tout de suite (avant le travail de la fenêtre) ; « disabled » seulement après (certaines fenêtres
@@ -55,6 +75,7 @@
                 if(done)return;const ps=form._lcPending||[];
                 if(!ps.length){release();return;}
                 if(touched&&btn.isConnected&&!btn.disabled){btn.disabled=true;weDisabled=true;}
+                lockClose(dlg,true);
                 Promise.allSettled(ps).then(()=>{if(wasDirty&&dlg.open&&(out.failSeq!==seq||out.okSeq===okSeq))dlg.dataset.dirty='1';release();}); // échec (ou rien d'enregistré) : la saisie reste « modifiée »
             },0);
         },true);
@@ -1276,6 +1297,23 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         });
         const idx=$('#sidebar-index');if(idx&&state.module&&modules[state.module]&&idx.textContent!=='MON ONGLET')idx.textContent=moduleIndexLabel(state.module);
     }
+    /** ‹ › Menu du haut trop long (onglets cachés remis, petit écran) : un dégradé et une flèche cliquable au bord qui déborde ;
+     *  rien quand tout tient. Posés par-dessus le menu (pas dedans : applyMenuOrder range ses boutons). */
+    function navOverflowHint(nav){
+        if(!nav||nav.dataset.ovHint)return;nav.dataset.ovHint='1';
+        const mk=side=>{const el=document.createElement('div');el.className=`nav-ov-hint is-${side}`;el.hidden=true;el.innerHTML=`<button type="button" class="nav-ov-btn" tabindex="-1" aria-label="${side==='left'?'Voir les onglets à gauche':'Voir les onglets à droite'}">${side==='left'?'‹':'›'}</button>`;
+            el.querySelector('button').addEventListener('click',()=>nav.scrollBy({left:(side==='left'?-1:1)*Math.max(160,nav.clientWidth*.7),behavior:'smooth'}));document.body.appendChild(el);return el;};
+        const L=mk('left'),R=mk('right');let raf=0;
+        const update=()=>{raf=0;const r=nav.getBoundingClientRect(),max=nav.scrollWidth-nav.clientWidth,shown=r.width>0&&r.height>0&&getComputedStyle(nav).display!=='none';
+            const bar=Math.max(0,nav.offsetHeight-nav.clientHeight),h=Math.max(0,r.height-bar);
+            for(const [el,on,x] of [[L,shown&&max>2&&nav.scrollLeft>2,r.left],[R,shown&&max>2&&nav.scrollLeft<max-2,r.right-40]]){el.hidden=!on;if(on){el.style.left=`${x}px`;el.style.top=`${r.top}px`;el.style.height=`${h}px`;}}};
+        const later=()=>{if(!raf)raf=requestAnimationFrame(update);};
+        nav.addEventListener('scroll',later,{passive:true});window.addEventListener('resize',later);window.addEventListener('scroll',later,{passive:true,capture:true});
+        try{new ResizeObserver(later).observe(nav);}catch(_){}
+        new MutationObserver(later).observe(nav,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class','hidden']});
+        new MutationObserver(later).observe(document.documentElement,{attributes:true,attributeFilter:['class','style']});
+        later();
+    }
     /** Onglet raccourci : ouvre un écran de l'app (mêmes cibles que les raccourcis des widgets : module:, list:, maint:, graph:, stat:) */
     async function openCustomScreen(target){
         const [type,...rest]=String(target||'').split(':'),value=rest.join(':');
@@ -1523,8 +1561,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const msg=String(message??'');
         const ic=icon??(/supprim|retir|effac|vid|détach/i.test(msg)&&!/^\s*[^\p{L}\p{N}\s«"'(]/u.test(msg)?'🗑':'');
         const doUndo=async()=>{
-            try{await undo?.();}
+            let r;try{r=await undo?.();}
             catch(error){toast(`Impossible d’annuler : ${error.message||error}`,'error',{retry:doUndo});return;}
+            if(r&&r.already){toast('Déjà remis : rien à annuler de plus.','',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});return;} // deuxième « ↶ Annuler » de la même chose
             const what=undoneText||msg.replace(/[.!]+$/,'');toast(/«/.test(what)?`↶ Annulé : ${what}`:`↶ Annulé : « ${what} »`,'',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});
         };
         const doRedo=async()=>{
@@ -1546,7 +1585,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
      *  undoDelete({type:'note', id, message, redo, after}) → « ↶ Annuler » remet l'élément en base (restore_last_delete), puis after(). */
     function undoDelete({type, id, message='Supprimé.', redo=null, after=null}={}){
         return undoToast(message,{
-            undo:async()=>{await api('restore_last_delete',{}, {method:'POST',body:{entity_type:type,entity_id:Number(id)}});await after?.('undo');},
+            undo:async()=>{const r=await api('restore_last_delete',{}, {method:'POST',body:{entity_type:type,entity_id:Number(id)}});await after?.('undo');return (r?.result||r)?.already?{already:true}:undefined;},
             redo:redo?async()=>{await redo();await after?.('redo');}:null,
         });
     }
@@ -2237,6 +2276,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if (button.dataset.module === 'personnes' || button.dataset.module === 'animaux') state.scopeSwitch = true; // l'onglet cliqué : sa dernière fiche
             setModule(button.dataset.module);
         });
+        navOverflowHint($('.main-nav'));
         $('#sidebar-toggle').addEventListener('click', () => { $('#app').classList.add('sidebar-collapsed'); persistUiState(); });
         $('#sidebar-reopen').addEventListener('click', () => { $('#app').classList.remove('sidebar-collapsed'); persistUiState(); });
         // l'adresse change (lien, ← → du navigateur) : popstate et hashchange arrivent souvent tous les deux, une seule fois suffit

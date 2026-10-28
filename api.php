@@ -6286,7 +6286,7 @@ function restore_last_delete(PDO $pdo,array $data): array
         $row=$change?(json_decode((string)($change['before_json']??''),true)?:[]):[];
         if(!$row||safe_int($row['id']??0)!==$id)throw new RuntimeException('Cette suppression n’a pas été trouvée dans le journal.');
         $exists=$pdo->prepare("SELECT 1 FROM {$table} WHERE id=?");$exists->execute([$id]);
-        if($exists->fetchColumn())throw new RuntimeException('Cet élément existe déjà.');
+        if($exists->fetchColumn())return ['entity_type'=>$type,'entity_id'=>$id,'already'=>true]; // un deuxième « ↶ Annuler » : déjà remis, pas une erreur
         $children=is_array($row['_children']??null)?$row['_children']:[];
         unset($row['_children']);
         insert_snapshot_row($pdo,$table,$row);
@@ -6303,6 +6303,11 @@ function restore_last_delete(PDO $pdo,array $data): array
     $stmt->execute([$type,$id]);
     $changeId=(int)$stmt->fetchColumn();
     if(!$changeId)throw new RuntimeException('Cette suppression n’a pas été trouvée dans le journal.');
+    // un deuxième « ↶ Annuler » de la même suppression : l'élément est déjà revenu → « Déjà remis » (pas une erreur)
+    $tables=['event'=>'events','note'=>'notes','source'=>'sources','media'=>'media','battue'=>'battues','battue_item'=>'battue_search_items','battue_alias'=>'battue_commune_aliases',
+        'investigation'=>'investigations','investigation_item'=>'investigation_items','investigation_media'=>'investigation_media','pet'=>'pets'];
+    $restored=$pdo->prepare("SELECT 1 FROM change_log WHERE action='restore' AND entity_type=? AND entity_id=? AND id>? LIMIT 1");$restored->execute([$type,$id,$changeId]);
+    if($restored->fetchColumn()||record_exists($pdo,$tables[$type],$id))return ['entity_type'=>$type,'entity_id'=>$id,'already'=>true];
     return restore_change($pdo,['id'=>$changeId]);
 }
 
@@ -7113,7 +7118,7 @@ function verify_gedcom(PDO $pdo): never
     foreach($lines as $l){if(preg_match('/^2 VERS (.+)/',$l,$m)){$version=trim($m[1]);break;}}
     $isGedcom7=version_compare(preg_replace('/[^0-9.]/','',$version),'7.0','>=');
 
-    $errors=[];$warnings=[];
+    $errors=[];$warnings=$encoding===GEDCOM_ANSEL_LATIN1?[GEDCOM_ANSEL_LATIN1_WARNING]:[];$dupDefs=[];
     $tagCounts=['INDI'=>0,'FAM'=>0,'NOTE'=>0,'SOUR'=>0,'REPO'=>0,'OBJE'=>0];
     $definedXrefs=[];$usedXrefs=[];
     $lineNum=0;
@@ -7126,7 +7131,7 @@ function verify_gedcom(PDO $pdo): never
             continue;
         }
         $level=(int)$m[1];$xref=trim($m[2]);$tag=$m[3];$rest=ltrim($m[4]);
-        if($xref)$definedXrefs[trim($xref,'@ ')]=$lineNum;
+        if($xref){$xk=trim($xref,'@ ');if($level===0&&isset($definedXrefs[$xk]))$dupDefs[$xk][]=$lineNum;else $definedXrefs[$xk]=$lineNum;}
         // Collect pointer usages
         if(preg_match('/@([^@]+)@/',$rest,$rx))$usedXrefs[trim($rx[1])]=$lineNum;
         if($level===0&&isset($tagCounts[$tag]))$tagCounts[$tag]++;
@@ -7138,6 +7143,8 @@ function verify_gedcom(PDO $pdo): never
             $warnings[]="Référence non définie : @$xref@ (utilisée ligne $ln)";
         }
     }
+    // deux fiches avec le même identifiant : l'import les garde toutes (lib/gedcom.php), les familles vont à la première
+    foreach(array_slice($dupDefs,0,20,true) as $xk=>$lns){$n=count($lns)+1;$warnings[]="$n fiches ont le même identifiant @$xk@ (lignes {$definedXrefs[$xk]}, ".implode(', ',array_slice($lns,0,3)).") : toutes seront gardées, chacune avec ses événements ; les familles qui citent @$xk@ seront reliées à la première.";}
     // HEAD obligatoire
     if(!preg_match('/^0 HEAD/m',$text))$errors[]='En-tête HEAD manquant.';
     if(!preg_match('/^0 TRLR/m',$text))$errors[]='Marqueur de fin TRLR manquant.';
@@ -8651,6 +8658,20 @@ function comparison_person(PDO $pdo,int $id): ?array
 function duplicate_candidates(PDO $pdo): never
 {
     $q=safe_text($_GET['q']??'');$params=[];
+    // 👥 Même liste que le « ✅ Contrôle de la base » (lib/controle.php, même règle, mêmes exceptions, jamais personne ↔ animal) :
+    // les deux écrans donnent le même nombre. Les animaux (que le Contrôle ne regarde pas) gardent leur recherche à part, plus bas.
+    if(function_exists('controle_state')){
+        $st=controle_state($pdo);$fold=static fn($v)=>mb_strtolower(ascii_fold((string)$v));$needle=$q!==''?$fold($q):'';$out=[];
+        foreach($st['alerts'] as $a){
+            if(($a['check']??'')!=='duplicate'||count($a['people']??[])<2)continue;
+            [$x,$y]=$a['people'];$px=$st['people'][$x]??null;$py=$st['people'][$y]??null;if(!$px||!$py)continue;
+            if($needle!==''&&!str_contains($fold($px['first_name'].' '.$px['last_name'].' '.$py['first_name'].' '.$py['last_name']),$needle))continue;
+            $out[]=['id1'=>$x,'id2'=>$y,'first1'=>$px['first_name'],'last1'=>$px['last_name'],'first2'=>$py['first_name'],'last2'=>$py['last_name'],'birth1'=>$px['birth_year'],'birth2'=>$py['birth_year'],'death1'=>$px['death_year'],'death2'=>$py['death_year'],'score'=>(int)($a['score']??0),'score_max'=>100];
+        }
+        usort($out,static fn($m,$n)=>[$n['score'],mb_strtolower((string)$m['last1']),mb_strtolower((string)$m['first1'])]<=>[$m['score'],mb_strtolower((string)$n['last1']),mb_strtolower((string)$n['first1'])]);
+        $hasKind=(bool)$pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='kind'")->fetchColumn();
+        $animalsOnly=$hasKind?" AND p1.kind='animal'":' AND 0';
+    }else{$out=null;$animalsOnly='';}
     $where=$q!==''?" AND (p1.first_name LIKE ? COLLATE NOCASE OR p1.last_name LIKE ? COLLATE NOCASE OR p2.first_name LIKE ? COLLATE NOCASE OR p2.last_name LIKE ? COLLATE NOCASE)":'';
     if($q!=='')$params=array_fill(0,4,'%'.$q.'%');
     // MATERIALIZED : les années sont calculées une fois par personne (sinon SQLite les recalculait pour chaque
@@ -8671,9 +8692,11 @@ function duplicate_candidates(PDO $pdo): never
     FROM person_years p1 JOIN person_years p2 ON p2.last_key=p1.last_key AND p2.first_key=p1.first_key AND p1.id<p2.id AND p2.kind=p1.kind
     WHERE (p1.birth_year IS NULL OR p2.birth_year IS NULL OR abs(p1.birth_year-p2.birth_year)<=5)
     AND NOT EXISTS (SELECT 1 FROM dismissed_issues d WHERE d.issue_key='dup:'||p1.id||':'||p2.id) -- ✅ « Ce sont deux personnes différentes »
-    {$where}
+    {$where}{$animalsOnly}
     ORDER BY score DESC,lower(p1.last_name),lower(p1.first_name) LIMIT 120";
-    $stmt=$pdo->prepare($sql);$stmt->execute($params);json_response(['candidates'=>$stmt->fetchAll()]);
+    $stmt=$pdo->prepare($sql);$stmt->execute($params);$rows=$stmt->fetchAll();
+    if($out!==null)$rows=array_merge($out,array_map(static fn($r)=>$r+['animal'=>1],$rows));
+    json_response(['candidates'=>array_slice($rows,0,max(120,count($out??[])))]);
 }
 
 /**

@@ -767,7 +767,7 @@ function gedcom_detect_encoding(string $text): string
     if (str_starts_with($text, "\xFF\xFE") || str_starts_with($text, "\xFE\xFF") || (strlen($text) > 3 && ($text[0] === "\0" || $text[1] === "\0"))) { return 'UTF-16'; }
     if (str_starts_with($text, "\xEF\xBB\xBF") || mb_check_encoding($text, 'UTF-8')) { return 'UTF-8'; }
     $char = preg_match('/^1 CHAR (.+)/m', $text, $m) ? strtoupper(trim($m[1])) : '';
-    if ($char === 'ANSEL') { return 'ANSEL'; }
+    if ($char === 'ANSEL') { return gedcom_ansel_mismatch($text) ? GEDCOM_ANSEL_LATIN1 : 'ANSEL'; }
     if (in_array($char, ['IBMPC', 'MSDOS', 'IBM PC', 'CP850', 'DOS'], true)) { return 'MS-DOS (CP850)'; }
     if (in_array($char, ['MACINTOSH', 'MAC', 'MACROMAN'], true)) { return 'Mac Roman'; }
     return 'Windows-1252';
@@ -782,10 +782,34 @@ function gedcom_text_to_utf8(string $text): string
     $text = preg_replace('/^\xEF\xBB\xBF/', '', $text) ?? $text;
     if (mb_check_encoding($text, 'UTF-8')) { return $text; }
     $char = preg_match('/^1 CHAR (.+)/m', $text, $m) ? strtoupper(trim($m[1])) : '';
-    if ($char === 'ANSEL') { return gedcom_ansel_to_utf8($text); }
+    if ($char === 'ANSEL' && !gedcom_ansel_mismatch($text)) { return gedcom_ansel_to_utf8($text); }
     if (in_array($char, ['IBMPC', 'MSDOS', 'IBM PC', 'CP850', 'DOS'], true)) { $out = @mb_convert_encoding($text, 'UTF-8', 'CP850'); if (is_string($out)) { return $out; } }
     if (in_array($char, ['MACINTOSH', 'MAC', 'MACROMAN'], true) && function_exists('iconv')) { $out = @iconv('MACINTOSH', 'UTF-8//TRANSLIT', $text); if (is_string($out) && $out !== '') { return $out; } }
     return (string) @mb_convert_encoding($text, 'UTF-8', 'Windows-1252');
+}
+
+const GEDCOM_ANSEL_LATIN1 = 'Windows-1252 (le fichier annonce ANSEL, mais ses accents sont en Latin-1)';
+/** Le message de l'analyse quand « 1 CHAR ANSEL » est faux (fichier en Latin-1 / Windows-1252) */
+const GEDCOM_ANSEL_LATIN1_WARNING = 'Le fichier annonce « CHAR ANSEL », mais ses accents sont écrits en Latin-1 (Windows) : il est lu en Windows-1252, pour garder « René », « Léa », « François »… tels quels.';
+
+/**
+ * « 1 CHAR ANSEL » mais ce n'est pas de l'ANSEL valable (souvent du Latin-1 ou du Windows-1252) : en ANSEL, un octet
+ * 0xE0–0xFE est un accent posé AVANT une lettre ; un accent suivi d'une espace, d'un chiffre, d'une ponctuation ou de
+ * la fin de ligne (« René », « née »), ou un octet qui n'existe pas en ANSEL (0x80–0x9F, 0xC9–0xCC, 0xD0–0xDF, 0xFC, 0xFD, 0xFF),
+ * montre que le fichier est en Latin-1. Quelques erreurs dans un vrai ANSEL ne le font pas changer.
+ */
+function gedcom_ansel_mismatch(string $text): bool
+{
+    $bad = 0; $good = 0; $n = min(strlen($text), 4_000_000);
+    for ($i = 0; $i < $n; $i++) {
+        $b = ord($text[$i]); if ($b < 0x80) { continue; }
+        if (($b >= 0x80 && $b <= 0x9F && !in_array($b, [0x88, 0x89, 0x8D, 0x8E], true)) || ($b >= 0xC9 && $b <= 0xCC) || ($b >= 0xD0 && $b <= 0xDF) || in_array($b, [0xAF, 0xBB, 0xFC, 0xFD, 0xFF], true)) { $bad++; continue; }
+        if ($b >= 0xE0) {
+            $next = $i + 1 < $n ? ord($text[$i + 1]) : 0x0A;
+            if (($next >= 0x41 && $next <= 0x5A) || ($next >= 0x61 && $next <= 0x7A) || $next >= 0xE0) { $good++; } else { $bad++; }
+        }
+    }
+    return $bad > 0 && $bad >= max(1, $good * 0.1);
 }
 
 /** ANSEL (Z39.47, avec les ajouts GEDCOM) : les accents sont écrits AVANT la lettre qu'ils portent. */
@@ -824,6 +848,7 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
 {
     $content = file_get_contents($path);
     if ($content === false) { throw new RuntimeException('Lecture du fichier GEDCOM impossible'); }
+    $anselLatin1 = !mb_check_encoding($content, 'UTF-8') && gedcom_detect_encoding($content) === GEDCOM_ANSEL_LATIN1;
     $content = gedcom_text_to_utf8($content);
     if (!preg_match('/^\s*0\s+HEAD\b/m', $content) && !preg_match('/^\s*0\s+@[^@]+@\s+INDI\b/m', $content)) {
         throw new RuntimeException('Ce fichier n’est pas un GEDCOM : aucune personne ni en-tête « HEAD » trouvé.');
@@ -846,10 +871,10 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
     };
 
     $typeCache = []; $placeCache = []; $groupCache = [];
-    $personMap = []; $familyMap = []; $sourceMap = []; $mediaMap = [];
+    $personMap = []; $familyMap = []; $sourceMap = []; $mediaMap = []; $dupXref = []; $firstName = [];
     $stats = ['persons' => 0, 'families' => 0, 'children_links' => 0, 'events' => 0, 'marriages' => 0, 'notes' => 0,
         'sources' => 0, 'citations' => 0, 'name_variants' => 0, 'media' => 0, 'media_missing' => 0, 'labels' => 0, 'animals' => 0,
-        'loops_skipped' => 0, 'warnings' => []];
+        'loops_skipped' => 0, 'warnings' => $anselLatin1 ? [GEDCOM_ANSEL_LATIN1_WARNING] : []];
     // Titre d'une note (balise _TITL écrite par LCNDA) et son texte sans ce titre répété en 1re ligne
     $noteParts = static function (stdClass $n) use ($byXref, $noteText, $textOf): array {
         $body = $noteText($n);
@@ -1006,7 +1031,11 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $insertPerson->execute([$rec->xref, $rec->xref, $main['first'], $main['middle'], $main['last'], $main['prefix'], $main['suffix'], $gender, 'unknown',
             gedimport_group_id($pdo, $groupCache, $main['last']), $nati, $dscr]);
         $pid = (int) $pdo->lastInsertId();
-        $personMap[$rec->xref] = $pid;
+        // deux fiches avec le même identifiant (@I1@ deux fois) : les deux sont gardées, chacune avec ses événements ;
+        // les familles qui citent cet identifiant sont reliées à la première (avertissement à la fin)
+        $rec->lcPid = $pid;
+        if ($rec->xref && isset($personMap[$rec->xref])) { $dupXref[$rec->xref][] = trim($main['first'] . ' ' . mb_strtoupper($main['last'])) ?: 'sans nom'; }
+        else { $personMap[$rec->xref] = $pid; $firstName[$rec->xref] = trim($main['first'] . ' ' . mb_strtoupper($main['last'])) ?: 'sans nom'; }
         $stats['persons']++;
         if (($k = gedimport_child($rec, '_KIND')) && strtolower(trim($k->value)) === 'animal') {
             $pdo->prepare("UPDATE persons SET kind='animal' WHERE id=?")->execute([$pid]);
@@ -1077,8 +1106,8 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         if ($c->tag === 'MARR') { $stats['marriages']++; }
     };
     foreach ($records as $rec) {
-        if ($rec->tag !== 'INDI' || !isset($personMap[$rec->xref])) { continue; }
-        $pid = $personMap[$rec->xref];
+        if ($rec->tag !== 'INDI' || !(isset($rec->lcPid) || isset($personMap[$rec->xref]))) { continue; }
+        $pid = $rec->lcPid ?? $personMap[$rec->xref];
         $nati = ''; $dscr = '';
         foreach ($rec->children as $c) {
             if ($c->tag === 'NOTE') {
@@ -1191,6 +1220,12 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $applyLabels($rec, 'family', $fid);
     }
 
+    foreach ($dupXref as $x => $others) {
+        if (count($stats['warnings']) >= 60) { break; }
+        $n = count($others) + 1;
+        $stats['warnings'][] = $n . ' fiches ont le même identifiant @' . $x . '@ (' . $firstName[$x] . ', ' . implode(', ', array_slice($others, 0, 3)) . ') : toutes sont gardées, chacune avec ses événements ; les familles qui citent @' . $x . '@ sont reliées à la première (' . $firstName[$x] . '). Vérifie les autres.';
+    }
+    if ($dupXref) { $stats['duplicate_xrefs'] = count($dupXref); }
     if ($stats['famc_only_links'] > 0) {
         $n = $stats['famc_only_links'];
         $stats['warnings'][] = $n < 2
