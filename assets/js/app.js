@@ -403,7 +403,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const modules = {
         jeu: ['JEU', 'Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe'],
         dashboard: ['01 — PILOTER', 'Tableau de bord'],
-        personnes: ['02 — EXPLORER', 'Personnes'], animaux: ['02 — EXPLORER', 'Animaux'], suivi: ['02 — SUIVRE', 'Suivi des animaux'], graphiques: ['03 — VISUALISER', 'Graphiques'],
+        personnes: ['02 — EXPLORER', 'Personnes'], animaux: ['02 — EXPLORER', 'Animaux'], suivi: ['02 — SUIVRE', 'Suivi des animaux'], documents: ['02 — EXPLORER', 'Documents'], catalogue: ['02 — EXPLORER', 'Catalogue raisonné'], graphiques: ['03 — VISUALISER', 'Graphiques'],
         carte: ['04 — LOCALISER', 'Carte'], listes: ['05 — INVENTORIER', 'Listes'],
         chronologie: ['06 — RACONTER', 'Chronologie'], recherche: ['07 — RECHERCHER', 'Recherche'],
         enquetes: ['08 — ENQUÊTER', 'Enquêtes'], fiches: ['08 — DOCUMENTER', 'Fiches'], adn: ['08 — ADN', 'ADN'], comparaison: ['09 — COMPARER', 'Comparaison'], tresors: ['09 — S’ÉMERVEILLER', 'Trésors de famille'], maintenance: ['10 — VÉRIFIER', 'Réglages'],
@@ -1143,7 +1143,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     // l'onglet « Animaux » est caché tant qu'on ne l'a pas montré (Apparence → Ordre du menu principal)
     // « Animaux » et « Fiches » sont cachés tant que l'ordre du menu n'a pas été réglé une fois
-    function menuHiddenKeys(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');if(!localStorage.getItem('genealogie-menu-fiches')&&!l.includes('fiches'))l.push('fiches');if(!localStorage.getItem('genealogie-menu-adn')&&!l.includes('adn'))l.push('adn');if(!localStorage.getItem('genealogie-menu-suivi')&&!l.includes('suivi'))l.push('suivi');/* 🐾 Suivi des animaux : caché au départ */if(!localStorage.getItem('genealogie-menu-tresors')&&!l.includes('tresors'))l.push('tresors');/* ✨ Trésors : caché au départ */}catch(_){l=['animaux','fiches','adn','suivi','tresors'];}return l;}
+    function menuHiddenKeys(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');if(!localStorage.getItem('genealogie-menu-fiches')&&!l.includes('fiches'))l.push('fiches');if(!localStorage.getItem('genealogie-menu-adn')&&!l.includes('adn'))l.push('adn');if(!localStorage.getItem('genealogie-menu-suivi')&&!l.includes('suivi'))l.push('suivi');/* 🐾 Suivi des animaux : caché au départ */if(!localStorage.getItem('genealogie-menu-tresors')&&!l.includes('tresors'))l.push('tresors');/* ✨ Trésors : caché au départ */['documents','catalogue'].forEach(k=>{if(!localStorage.getItem(`genealogie-menu-${k}`)&&!l.includes(k))l.push(k);});/* 📄 Documents, 🎨 Catalogue raisonné : cachés au départ */}catch(_){l=['animaux','fiches','adn','suivi','tresors','documents','catalogue'];}return l;}
     // onglet « Animaux » montré : « Personnes » ne liste que les personnes, « Animaux » que les animaux (la même fiche, à part)
     const animalsTabOn=()=>!menuHiddenKeys().includes('animaux');
     function mapHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-map-hidden')||'[]');}catch(_){return[];}}
@@ -2290,6 +2290,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if (module === 'suivi') await renderDashboard(renderToken); // 🐾 Suivi des animaux : le moteur des widgets du tableau de bord, ses pages à lui (heritage-suivi.js)
             if (module === 'comparaison') await renderComparison(renderToken);
             if (module === 'maintenance') await renderMaintenance(renderToken);
+            if (module === 'documents' || module === 'catalogue') await window.LCNDA_EXT?.onglets?.[module]?.render?.(renderToken); // 📄 Documents, 🎨 Catalogue raisonné (heritage-onglets-*.js)
             if(renderToken!==state.workspaceToken)return;
             state.hasRendered=true;
             restoreScrollPosition();
@@ -2338,6 +2339,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(module==='personnes'&&Number(state.currentPersonId)){const id=Number(state.currentPersonId),sh=state.sheetHash;return `#personnes/${id}${sh&&Number(sh.id)===id&&sh.slug?`/${encodeURIComponent(sh.slug)}`:''}`;}
         return `#${module}`;
     }
+        if(module==='documents'||module==='catalogue'){const h=window.LCNDA_EXT?.onglets?.[module]?.hash?.();if(h)return h;} // 📄 « #documents/12 », 🎨 « #catalogue/45/301 »
 
     function updateBrowserRoute(hash,push=true,module=state.module){
         const url=new URL(location.href);
@@ -2416,7 +2418,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         setTimeout(()=>{['wheel','touchstart','keydown','pointerdown'].forEach(ev=>window.removeEventListener(ev,stop,{capture:true}));if(scrollRestoring&&scrollRestoring.mod===mod)scrollRestoring=null;},6100);
     }
 
-    const SIDEBAR_MODULES = ['dashboard', 'suivi', 'personnes', 'graphiques', 'jeu', 'carte', 'listes', 'chronologie', 'recherche', 'enquetes', 'fiches', 'adn', 'comparaison', 'maintenance'];
+    const SIDEBAR_MODULES = ['dashboard', 'suivi', 'documents', 'catalogue', 'personnes', 'graphiques', 'jeu', 'carte', 'listes', 'chronologie', 'recherche', 'enquetes', 'fiches', 'adn', 'comparaison', 'maintenance'];
     function renderSidebar() {
         sidebarController?.abort();sidebarController=new AbortController();
         const content = $('#sidebar-content');
@@ -2440,6 +2442,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if (state.module === 'comparaison') renderComparisonSidebar(content, footer);
         if (state.module === 'maintenance') renderMaintenanceSidebar(content, footer);
     }
+        if (state.module === 'documents' || state.module === 'catalogue') window.LCNDA_EXT?.onglets?.[state.module]?.sidebar?.(content, footer);
 
     /* 🏠 Tableau de bord : dans app-tableau-de-bord.js (chargé juste après app.js) ; ici, des relais. */
     async function renderDashboard(...a){const f=await appPartReady('renderDashboard');if(f)return f(...a);$('#workspace').innerHTML=emptyState({text: 'Le tableau de bord n’a pas pu se charger (fichier app-tableau-de-bord.js manquant ?).', icon:'⚠️',hint:'Recharge la page ; si le problème continue, le fichier manque peut-être.'});}
@@ -6443,7 +6446,7 @@ ${backupSectionHtml()}
             }
             const list=$(`#${button.dataset.orderSave}`);if(!list)return;
             const rows=$$('.order-row',list),keys=rows.map(row=>row.dataset.orderKey);
-            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));const names={};rows.forEach(row=>{const v=($('[data-menu-name]',row)?.value||'').trim().slice(0,40);if(v)names[row.dataset.orderKey]=v;});localStorage.setItem('genealogie-menu-names',JSON.stringify(names));const icons={};rows.forEach(row=>{const inp=$('[data-menu-icon]',row);if(!inp)return;const v=cleanMenuIcon(inp.value),def=splitMenuIcon(($('[data-menu-name]',row)?.value||'').trim().slice(0,40)).icon||splitMenuIcon($('b',row)?.textContent||'').icon;if(v!==def)icons[row.dataset.orderKey]=v;});/* seuls les émojis changés sont gardés : celui d'origine (ou d'un onglet à soi) suit ses changements */localStorage.setItem('genealogie-menu-icons',JSON.stringify(icons));localStorage.setItem('genealogie-menu-animaux','1');localStorage.setItem('genealogie-menu-fiches','1');localStorage.setItem('genealogie-menu-adn','1');localStorage.setItem('genealogie-menu-suivi','1');localStorage.setItem('genealogie-menu-tresors','1');
+            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));const names={};rows.forEach(row=>{const v=($('[data-menu-name]',row)?.value||'').trim().slice(0,40);if(v)names[row.dataset.orderKey]=v;});localStorage.setItem('genealogie-menu-names',JSON.stringify(names));const icons={};rows.forEach(row=>{const inp=$('[data-menu-icon]',row);if(!inp)return;const v=cleanMenuIcon(inp.value),def=splitMenuIcon(($('[data-menu-name]',row)?.value||'').trim().slice(0,40)).icon||splitMenuIcon($('b',row)?.textContent||'').icon;if(v!==def)icons[row.dataset.orderKey]=v;});/* seuls les émojis changés sont gardés : celui d'origine (ou d'un onglet à soi) suit ses changements */localStorage.setItem('genealogie-menu-icons',JSON.stringify(icons));localStorage.setItem('genealogie-menu-animaux','1');localStorage.setItem('genealogie-menu-fiches','1');localStorage.setItem('genealogie-menu-adn','1');localStorage.setItem('genealogie-menu-suivi','1');localStorage.setItem('genealogie-menu-tresors','1');localStorage.setItem('genealogie-menu-documents','1');localStorage.setItem('genealogie-menu-catalogue','1');
                 const own=customTabs();if(own.some(t=>!!t.hidden!==hidden.includes(t.id))){own.forEach(t=>{t.hidden=hidden.includes(t.id);});try{localStorage.setItem('genealogie-custom-tabs',JSON.stringify(own));}catch(_){}}applyMenuOrder();renderDesignTools();orderToast('Ordre du menu enregistré.');return;}
             if(button.dataset.orderSave==='list-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-list-order',JSON.stringify(keys));localStorage.setItem('genealogie-list-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();orderToast('Ordre des listes enregistré.');return;}
             if(button.dataset.orderSave==='dashboard-widget-catalog-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-dashboard-widget-catalog-order',JSON.stringify(keys));localStorage.setItem('genealogie-dashboard-widget-catalog-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();orderToast('Bibliothèque de widgets enregistrée.');return;}

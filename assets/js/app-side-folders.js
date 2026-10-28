@@ -1,4 +1,5 @@
-/* LCNDA — 📁 Dossiers (et sous-dossiers) dans la colonne de gauche de Graphiques : « Mes diagrammes » et « Mes graphiques ».
+/* LCNDA — 📁 Dossiers (et sous-dossiers) dans la colonne de gauche de Graphiques : « Mes diagrammes » et « Mes graphiques » ;
+ * aussi l'onglet « 📄 Documents » (kind 'document', les médias rangés en dossiers).
  * Rangement gardé dans la clé « genealogie-side-folders » (suit la base comme les autres réglages « genealogie-* ») :
  *   {diagram:{folders:[{id,name,parent}], of:{<id élément>:<id dossier>}, closed:[ids]}, graph:{…}}
  * Tout est nettoyé à la lecture (noms bornés, ids f_…, parents qui existent, pas de boucle, 3 niveaux, 200 dossiers).
@@ -8,11 +9,12 @@
 (() => {
     'use strict';
     const KEY = 'genealogie-side-folders';
-    const KINDS = ['diagram', 'graph'];
+    const KINDS = ['diagram', 'graph', 'document']; // 📄 document : l'onglet « Documents » (heritage-onglets-documents.js)
     const MAX_FOLDERS = 200, MAX_DEPTH = 3, MAX_NAME = 60, MAX_ENTRIES = 5000;
     const FID = /^f_[a-z0-9]{1,16}$/;
-    const ITEM_ID = {diagram: /^\d{1,12}$/, graph: /^[A-Za-z0-9_-]{1,64}$/};
-    const WORD = {diagram: ['diagramme', 'diagrammes'], graph: ['graphique', 'graphiques']};
+    const ITEM_ID = {diagram: /^\d{1,12}$/, graph: /^[A-Za-z0-9_-]{1,64}$/, document: /^\d{1,12}$/};
+    const WORD = {diagram: ['diagramme', 'diagrammes'], graph: ['graphique', 'graphiques'], document: ['document', 'documents']};
+    const DRAG = new Set(['diagram', 'document']); // on range en glissant (Mes graphiques : par « 📁 Ranger » seulement)
     const A = () => window.LCNDA_APP;
     const esc = s => (A()?.escapeHtml || (x => String(x).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]))))(String(s ?? ''));
     const kiosk = () => document.body.classList.contains('is-kiosk');
@@ -134,12 +136,12 @@
                     <small class="sf-count" title="${esc(A()?.plural ? A().plural(n, word[0], word[1]) : n)}">${n}</small>
                     <span class="sf-tools"><button type="button" class="sf-tool" data-sf-rename="${esc(f.id)}" title="Renommer le dossier" aria-label="Renommer le dossier">✎</button><button type="button" class="sf-tool" data-sf-del="${esc(f.id)}" title="Supprimer le dossier (son contenu remonte d’un niveau)" aria-label="Supprimer le dossier">🗑</button></span>
                 </div>
-                <div class="sf-body"${open ? '' : ' hidden'}>${inner || `<p class="sf-empty">Dossier vide${kind === 'diagram' ? ' : glisse un diagramme ici' : ' : range un graphique ici avec « 📁 Ranger »'}.</p>`}</div>
+                <div class="sf-body"${open ? '' : ' hidden'}>${inner || `<p class="sf-empty">Dossier vide${kind === 'diagram' ? ' : glisse un diagramme ici' : kind === 'document' ? ' : glisse un document ici' : ' : range un graphique ici avec « 📁 Ranger »'}.</p>`}</div>
             </div>`;
         };
         const loose = rows.filter(r => !data.of[r.key]).map(item).join('');
         return `<div class="sf-label"><div class="section-label">${esc(label)}</div><button type="button" class="sf-add" data-sf-add="${kind}" title="Nouveau dossier pour ranger tes ${word[1]}">＋ 📁 Dossier</button></div>
-            <div class="side-menu sf-root${kind === 'diagram' ? ' sf-can-drag' : ''}" data-sf-kind="${kind}">${childrenOf(data, null).map(f => folder(f, 1)).join('')}<div class="sf-loose" data-sf-loose>${loose}</div>${footer}</div>`;
+            <div class="side-menu sf-root${DRAG.has(kind) ? ' sf-can-drag' : ''}" data-sf-kind="${kind}">${childrenOf(data, null).map(f => folder(f, 1)).join('')}<div class="sf-loose" data-sf-loose>${loose}</div>${footer}</div>`;
     }
 
     async function createFolder(kind, parent = null) {
@@ -335,7 +337,7 @@
     }
     function applyDrop(kind, dragged, d) {
         const data = read(kind);
-        const items = kind === 'diagram' ? (window.LCNDA_EXT?.diagramItems?.() || []) : (window.LCNDA_EXT?.customStatItems?.() || []);
+        const items = kind === 'diagram' ? (window.LCNDA_EXT?.diagramItems?.() || []) : kind === 'document' ? (window.LCNDA_EXT?.documentItems?.() || []) : (window.LCNDA_EXT?.customStatItems?.() || []);
         const labelOf = id => String(items.find(([k]) => String(k) === String(id))?.[1] || '').replace(/^\S+\s/, '') || WORD[kind][0];
         if (dragged.type === 'item') {
             const cur = data.of[dragged.id] || '';

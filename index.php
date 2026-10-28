@@ -46,6 +46,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
+    <link rel="stylesheet" href="assets/css/onglets.css?v=1">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
     <link rel="stylesheet" href="assets/css/oeuvres.css?v=2">
     <link rel="stylesheet" href="assets/css/profils.css?v=5">
@@ -95,6 +96,8 @@ header('X-Content-Type-Options: nosniff');
             <button class="nav-item" data-module="personnes"><span>02</span>Personnes</button>
             <button class="nav-item" data-module="animaux"><span>02</span>🐾 Animaux</button>
             <button class="nav-item" data-module="suivi"><span>02</span>🐾 Suivi des animaux</button>
+            <button class="nav-item" data-module="documents"><span>02</span>📄 Documents</button>
+            <button class="nav-item" data-module="catalogue"><span>02</span>🎨 Catalogue raisonné</button>
             <button class="nav-item" data-module="graphiques"><span>03</span>Graphiques</button>
             <button class="nav-item" data-module="carte"><span>04</span>Carte</button>
             <button class="nav-item" data-module="listes"><span>05</span>Listes</button>
@@ -1139,7 +1142,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
-<script src="assets/js/app.js?v=505" defer></script>
+<script src="assets/js/app.js?v=506" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=22" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1188,7 +1191,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-maintenance.js?v=39" defer></script>
 <script src="assets/js/app-recherche.js?v=24" defer></script>
 <script src="assets/js/app-graphiques.js?v=19" defer></script>
-<script src="assets/js/app-side-folders.js?v=2" defer></script>
+<script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=31" defer></script>
 <script src="assets/js/heritage-tools.js?v=17" defer></script>
@@ -1196,7 +1199,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=4" defer></script>
 <script src="assets/js/heritage-links.js?v=19" defer></script>
-<script src="assets/js/heritage-more.js?v=241" defer></script>
+<script src="assets/js/heritage-more.js?v=242" defer></script>
 <script src="assets/js/heritage-controle.js?v=4" defer></script>
 <script src="assets/js/heritage-records.js?v=11" defer></script>
 <script src="assets/js/heritage-research.js?v=37" defer></script>
@@ -1331,6 +1334,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-blocs-awards.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=2" defer></script>
 <script src="assets/js/heritage-creations.js?v=4" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=1" defer></script>
+<script src="assets/js/heritage-onglets-catalogue.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=7" defer></script>
 <script src="assets/js/heritage-transcribe.js?v=19" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
