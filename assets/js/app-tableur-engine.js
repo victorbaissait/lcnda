@@ -1417,7 +1417,7 @@
         const xf0 = '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>'; xfs.push(xf0);
         const xfFor = (st, forceDate = false) => {
             const key = JSON.stringify(st) + (forceDate ? 'D' : ''); if (used.has(key)) return used.get(key);
-            const font = `<font>${st.b ? '<b/>' : ''}${st.i ? '<i/>' : ''}${st.u ? '<u/>' : ''}${st.s ? '<strike/>' : ''}<sz val="${st.fs ? Math.round(st.fs * 0.75) : 11}"/>${argb(st.color) ? `<color rgb="${argb(st.color)}"/>` : ''}<name val="${xmlEsc(st.font || 'Calibri')}"/></font>`;
+            const font = `<font>${st.b ? '<b/>' : ''}${st.i ? '<i/>' : ''}${st.u ? '<u/>' : ''}${st.s ? '<strike/>' : ''}<sz val="${st.fs ? Math.round(st.fs * 0.75 * 4) / 4 : 11}"/>${argb(st.color) ? `<color rgb="${argb(st.color)}"/>` : ''}<name val="${xmlEsc(st.font || 'Calibri')}"/></font>`;
             let fi = fontIx.get(font); if (fi === undefined) { fi = fonts.length; fonts.push(font); fontIx.set(font, fi); }
             let fl = 0; if (argb(st.fill)) { const f = `<fill><patternFill patternType="solid"><fgColor rgb="${argb(st.fill)}"/><bgColor indexed="64"/></patternFill></fill>`; fl = fillIx.get(f); if (fl === undefined) { fl = fills.length; fills.push(f); fillIx.set(f, fl); } }
             let bi = 0; if (st.bd) { const sty = st.bs === 'thick' ? 'medium' : st.bs === 'double' ? 'double' : 'thin', col = argb(st.bc) ? `<color rgb="${argb(st.bc)}"/>` : '<color auto="1"/>'; const side = (k, t) => (st.bd.includes(k) ? `<${t} style="${sty}">${col}</${t}>` : `<${t}/>`); const b = `<border>${side('l', 'left')}${side('r', 'right')}${side('t', 'top')}${side('b', 'bottom')}<diagonal/></border>`; bi = bordIx.get(b); if (bi === undefined) { bi = borders.length; borders.push(b); bordIx.set(b, bi); } }
@@ -1483,11 +1483,11 @@
             const t = await z.text('xl/styles.xml');
             if (t) {
                 const S = parseXml(t), nf = {...BUILTIN_FMT}; findAll(S, 'numFmt').forEach(n => { nf[n.a.numFmtId] = n.a.formatCode; });
-                const fonts = kids(kid(findAll(S, 'styleSheet')[0], 'fonts'), 'font').map(f => ({b: !!kid(f, 'b') && kid(f, 'b').a.val !== '0', i: !!kid(f, 'i') && kid(f, 'i').a.val !== '0', u: !!kid(f, 'u'), s: !!kid(f, 'strike'), color: fromArgb(kid(f, 'color')?.a.rgb), fs: Number(kid(f, 'sz')?.a.val) || 0}));
+                const fonts = kids(kid(findAll(S, 'styleSheet')[0], 'fonts'), 'font').map(f => ({b: !!kid(f, 'b') && kid(f, 'b').a.val !== '0', i: !!kid(f, 'i') && kid(f, 'i').a.val !== '0', u: !!kid(f, 'u'), s: !!kid(f, 'strike'), color: fromArgb(kid(f, 'color')?.a.rgb), fs: Number(kid(f, 'sz')?.a.val) || 0, font: String(kid(f, 'name')?.a.val || '')}));
                 const fills = kids(kid(findAll(S, 'styleSheet')[0], 'fills'), 'fill').map(f => { const p = kid(f, 'patternFill'); return p && p.a.patternType === 'solid' ? fromArgb(kid(p, 'fgColor')?.a.rgb) : ''; });
                 const borders = kids(kid(findAll(S, 'styleSheet')[0], 'borders'), 'border').map(b => { let s = '', thick = ''; [['left', 'l'], ['right', 'r'], ['top', 't'], ['bottom', 'b']].forEach(([n, k]) => { const e = kid(b, n); if (e?.a.style) { s += k; if (/medium|thick/.test(e.a.style)) thick = 'thick'; if (e.a.style === 'double') thick = 'double'; } }); return {bd: s, bs: thick}; });
                 kids(kid(findAll(S, 'styleSheet')[0], 'cellXfs'), 'xf').slice(0, LIMITS.styles).forEach(x => {
-                    const f = fonts[x.a.fontId] || {}, st = {}; if (f.b) st.b = 1; if (f.i) st.i = 1; if (f.u) st.u = 1; if (f.s) st.s = 1; if (f.color && f.color !== '#000000') st.color = f.color; if (f.fs && Math.round(f.fs) !== 11) st.fs = Math.round(f.fs / 0.75);
+                    const f = fonts[x.a.fontId] || {}, st = {}; if (f.b) st.b = 1; if (f.i) st.i = 1; if (f.u) st.u = 1; if (f.s) st.s = 1; if (f.color && f.color !== '#000000') st.color = f.color; if (f.fs && Math.round(f.fs) !== 11) st.fs = Math.round(f.fs / 0.75); if (f.font && f.font !== 'Calibri' && /^[\w\s,'\-À-ÿ.]{1,60}$/.test(f.font)) st.font = f.font; // E5 : la police revient aussi
                     const fl = fills[x.a.fillId]; if (fl && fl !== '#ffffff') st.fill = fl;
                     const bd = borders[x.a.borderId]; if (bd?.bd) { st.bd = bd.bd; if (bd.bs) st.bs = bd.bs; }
                     Object.assign(st, fmtFromCode(nf[x.a.numFmtId]));

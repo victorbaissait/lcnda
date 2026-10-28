@@ -760,6 +760,8 @@ S.matrix(wb, calc, feuille, plage) ; S.rowsToCells(lignes) ; S.compact(wb) (pour
 **Vague 2 — l'éditeur commun des données** (`heritage-tableur-cibles.js`, maquette écrans G et I) :
 
 ```js
+**Règles communes des éditeurs** (test : `tests/test-tableur-harmo.js`) : K18 `UI.editorStatus` en bas (à gauche `[data-xl-status]` = « Feuille ! case » + somme, moyenne… choisies par un clic ou dans les réglages ; au milieu l’aide de la grille ou de la frappe ; à droite le zoom commun) — le zoom est un `zoom` CSS sur `.xl-vpwrap` (`ed.setZoom(k)`, `ed.zoomFit()` = les colonnes remplies dans la largeur, retenu dans `prefs.zoom`) ; tout calcul souris → grille divise par `ed.zq()` (pixels de l’écran par pixel de la grille). L’aide pendant la frappe (`.xl-help`) se pose sur le haut de la grille sans la faire bouger, cachée quand il n’y a rien à dire. K19 : colonne `.xl-rail` (`UI.editorRail`, commandes `data-xl-cmd`, l’actif en bleu : ⚲ Filtrer, = Formules, ◫ Panneau) ; « 💾 Enregistrer ▾ » (`UI.saveMenu` : copie, modèle, export). E5 : « Police » → `UI.openFontPicker` (`style.font`, `style.fs` 6–72 px, gardés en XLSX). K2 : « ⚙️ Réglages du tableur » par `UI.autoSaveDialog` (interrupteurs K16, « Fermer » seul, ↺).
+
 ext.sheetTargets.diagram = {icon, label, hint, createLabel, columns(opts) → [{k, label, type: 'text'|'number'|'color'|'select', many, max, optional, choices, alias}],
     build(objets, opts, tableau, statut) → données, fromData(données) → {sheets: [{name, header, rows, widths, hidden, refs, merges, fills, typed}]},
     back(éditeur, données) → données, fromRange(éditeur, plage), preview(données) → HTML, create(données, {name, editor})};   // diagram, graph, board, recueil, keynote
