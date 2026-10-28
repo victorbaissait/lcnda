@@ -1246,7 +1246,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-psd.js?v=1" defer></script>
 <script src="assets/js/heritage-tresors.js?v=9" defer></script>
 <script src="assets/js/heritage-bunker-moteur.js?v=13" defer></script>
-<script src="assets/js/heritage-bunker.js?v=18" defer></script>
+<script src="assets/js/heritage-bunker.js?v=19" defer></script>
 <script src="assets/js/heritage-tresors-memoire.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-decouvrir.js?v=2" defer></script>
 <script src="assets/js/heritage-tresors-jeux.js?v=5" defer></script>
@@ -1256,7 +1256,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-ciel.js?v=4" defer></script>
 <script src="assets/js/heritage-tresors-merveilles.js?v=4" defer></script>
 <script src="assets/js/heritage-tresors-histoires.js?v=2" defer></script>
-<script src="assets/js/heritage-tresors-ateliers.js?v=9" defer></script>
+<script src="assets/js/heritage-tresors-ateliers.js?v=10" defer></script>
 <script src="assets/js/heritage-tresors-papiers.js?v=8" defer></script>
 <script src="assets/js/heritage-tresors-voyages.js?v=1" defer></script>
 <script src="assets/js/heritage-tresors-widgets.js?v=2" defer></script>

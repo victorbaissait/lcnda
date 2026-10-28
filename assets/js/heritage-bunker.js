@@ -182,9 +182,9 @@
         const fx = (c.lng + 180) / 360 * N, la = c.lat * Math.PI / 180, fy = (1 - Math.log(Math.tan(la) + 1 / Math.cos(la)) / Math.PI) / 2 * N;
         const x0 = fx - W / 2, y0 = fy - W / 2, out = [];
         for (let ty = Math.floor(y0); ty < y0 + W; ty++) for (let tx = Math.floor(x0); tx < x0 + W; tx++) {
-            out.push(`<img src="${esc(A().mapTileUrl('color', z, ((tx % N) + N) % N, ty))}" alt="" loading="lazy" draggable="false" style="left:${(tx - x0) / W * 100}%;top:${(ty - y0) / W * 100}%;width:${100 / W}%;height:${100 / W}%">`);
+            out.push(`<img src="${esc(A().mapTileUrl('color', z, ((tx % N) + N) % N, ty))}" alt="" draggable="false" style="left:${(tx - x0) / W * 100}%;top:${(ty - y0) / W * 100}%;width:${100 / W}%;height:${100 / W}%">`);
         }
-        return `<div class="bk-map-bg" aria-hidden="true">${out.join('')}</div><span class="bk-map-credit">© OpenStreetMap</span>`;
+        return `<div class="bk-map-bg" aria-hidden="true" data-key="${z}:${x0.toFixed(4)}:${y0.toFixed(4)}">${out.join('')}</div><span class="bk-map-credit">© OpenStreetMap</span>`;
     }
 
     /* ═════════ La partie ═════════ */
@@ -289,10 +289,16 @@
     const bar = (v, cls = '') => `<span class="bk-bar ${cls}${v < 25 ? ' is-low' : ''}"><i style="width:${Math.round(v)}%"></i></span>`;
     const resName = r => B().RES.find(x => x[0] === r);
     const costTxt = cost => Object.entries(cost || {}).map(([r, n]) => `<span class="${(G.res[r] || 0) < n ? 'is-miss' : ''}">${resName(r)[1]} ${n}</span>`).join(' ');
+    let lastSide = '';
     function drawSide() {
         const s = dlg.querySelector('[data-bk-side]'); if (!s) return;
         const keep = s.scrollTop, mw = s.querySelector('.bk-mapwrap.is-big'), mk = mw ? [mw.scrollLeft, mw.scrollTop] : mapScroll;
-        s.innerHTML = tab === 'gens' ? sideGens() : tab === 'res' ? sideRes() : tab === 'atelier' ? sideAtelier() : tab === 'bric' ? sideBric() : tab === 'ville' ? sideVille() : tab === 'famille' ? sideFamille() : tab === 'regl' ? sideRegl() : tab === 'stats' ? sideStats() : sideRadio();
+        const oldBg = s.querySelector('.bk-map-bg');
+        const html = tab === 'gens' ? sideGens() : tab === 'res' ? sideRes() : tab === 'atelier' ? sideAtelier() : tab === 'bric' ? sideBric() : tab === 'ville' ? sideVille() : tab === 'famille' ? sideFamille() : tab === 'regl' ? sideRegl() : tab === 'stats' ? sideStats() : sideRadio();
+        if (html === lastSide && s.childElementCount) return; // rien n'a changé : on ne redessine pas (la carte ne clignote plus)
+        lastSide = html; s.innerHTML = html;
+        // le plan de la ville déjà chargé est gardé tel quel (sinon ses tuiles se rechargent à chaque instant du jeu et la carte saute)
+        const newBg = s.querySelector('.bk-map-bg'); if (oldBg && newBg && oldBg.dataset.key === newBg.dataset.key) newBg.replaceWith(oldBg);
         s.scrollTop = keep;
         // une grande carte garde où on en était ; la première fois, elle se centre sur le bunker
         const w2 = s.querySelector('.bk-mapwrap.is-big');
