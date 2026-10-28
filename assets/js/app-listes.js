@@ -20,7 +20,7 @@
     const LG = window.LCNDA_SIDEGROUPS({name: 'listes', panelTitle: 'Ordre des listes', key: 'genealogie-list-groups', defaults: LG_DEFAULT, allKeys: listKeysAll, label: k => orderedListTypes(true).find(r => r[0] === k)?.[2] || k, defaultEnabled: true,
         flatOrder: listKeysAll, flatDefaults: () => (window.LCNDA_APP.defaultListTypes || orderedListTypes(true)).map(r => r[0]),
         setFlatOrder: keys => { try { localStorage.setItem('genealogie-list-order', JSON.stringify(keys)); } catch (_) {} },
-        canHide: true, hidden: () => { try { return JSON.parse(localStorage.getItem('genealogie-list-hidden') || '[]'); } catch (_) { return []; } }, setHidden: keys => { try { localStorage.setItem('genealogie-list-hidden', JSON.stringify(keys)); } catch (_) {} },
+        canHide: true, hidden: () => { try { const v = JSON.parse(localStorage.getItem('genealogie-list-hidden') || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } }, setHidden: keys => { try { localStorage.setItem('genealogie-list-hidden', JSON.stringify(keys)); } catch (_) {} },
         mine: () => window.LCNDA_EXT?.extraListTypes?.() || [], mineKey: 'genealogie-mylists-order',
         current: () => state.listType, eyebrow: 'LISTES', what: 'listes', searchPh: 'Chercher une liste…'});
     function renderListSidebar(content,footer){

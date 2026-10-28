@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=275">
+    <link rel="stylesheet" href="assets/css/app.css?v=276">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=254">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -41,7 +41,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/layout.css?v=17">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/tresors.css?v=14">
-    <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
+    <link rel="stylesheet" href="assets/css/diagrams.css?v=30">
     <link rel="stylesheet" href="assets/css/ui.css?v=19">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
@@ -85,7 +85,7 @@ header('X-Content-Type-Options: nosniff');
     for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
     for(k in c.v||{})if(/^--lc-[a-z0-9-]+$/.test(k)&&/^[#a-z0-9.%() ,-]{1,40}$/i.test(String(c.v[k])))r.style.setProperty(k,c.v[k]);
     var g=document.getElementById('lc-designs-gen');if(g)g.media='all';if(c.a['data-lc-lines']){var s=document.getElementById('lc-frame-css');if(s)s.media='all';}}catch(e){}})();</script>
-</head></html>
+</head>
 <body>
 <div class="app-shell<?= $ready ? '' : ' is-not-ready' ?>" id="app">
     <header class="topbar">
@@ -1143,7 +1143,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
-<script src="assets/js/app.js?v=514" defer></script>
+<script src="assets/js/app.js?v=517" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=22" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1157,8 +1157,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu-memory.js?v=1" defer></script>
 <script src="assets/js/app-jeu-timeline.js?v=1" defer></script>
 <script src="assets/js/app-jeu-morpion.js?v=2" defer></script>
-<script src="assets/js/app-jeu-naval.js?v=3" defer></script>
-<script src="assets/js/app-jeu-cables.js?v=3" defer></script>
+<script src="assets/js/app-jeu-naval.js?v=4" defer></script>
+<script src="assets/js/app-jeu-cables.js?v=4" defer></script>
 <script src="assets/js/app-jeu-patience-regles.js?v=5" defer></script>
 <script src="assets/js/app-jeu-patience.js?v=5" defer></script>
 <script src="assets/js/app-jeu.js?v=13" defer></script>
@@ -1182,7 +1182,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-portraits.js?v=4" defer></script>
 <script src="assets/js/app-colonne.js?v=7" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
-<script src="assets/js/app-actions.js?v=8" defer></script>
+<script src="assets/js/app-actions.js?v=9" defer></script>
 <script src="assets/js/app-editeurs.js?v=3" defer></script>
 <script src="assets/js/app-versions.js?v=4" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
@@ -1191,8 +1191,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-mode-simple.js?v=15" defer></script>
 <script src="assets/js/app-sidegroups.js?v=12" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
-<script src="assets/js/app-listes.js?v=42" defer></script>
-<script src="assets/js/app-maintenance.js?v=43" defer></script>
+<script src="assets/js/app-listes.js?v=43" defer></script>
+<script src="assets/js/app-maintenance.js?v=44" defer></script>
 <script src="assets/js/app-recherche.js?v=26" defer></script>
 <script src="assets/js/app-graphiques.js?v=19" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
@@ -1203,7 +1203,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=20" defer></script>
-<script src="assets/js/heritage-more.js?v=258" defer></script>
+<script src="assets/js/heritage-more.js?v=259" defer></script>
 <script src="assets/js/heritage-controle.js?v=5" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=38" defer></script>
@@ -1245,7 +1245,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=51" defer></script>
 <script src="assets/js/heritage-dnd.js?v=12" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=1" defer></script>
-<script src="assets/js/heritage-studio.js?v=111" defer></script>
+<script src="assets/js/heritage-studio.js?v=112" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-retouch-fluidite.js?v=2" defer></script>
 <script src="assets/js/heritage-retouch-gomme.js?v=2" defer></script>

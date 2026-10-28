@@ -341,7 +341,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 :root[data-avatar-shape="hexagon"][data-lc-portraits] .lc-av { border-radius: 0; clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
 :root[data-avatar-shape="diamond"][data-lc-portraits] .lc-av { border-radius: 0; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
 .card-head h3 { margin: 0; font-size: 17px; }
-.card-head h3 small { color: #aaa; font-weight: 400; }
+.card-head h3 small { color: var(--muted); font-weight: 400; }
 .card-head-actions { min-width: 0; display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .media-filter-label { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 10px; font-weight: 700; }
 .media-filter-label select { max-width: 180px; min-height: 31px; padding: 4px 7px; border: 1.5px solid var(--ink); background: white; }
@@ -989,7 +989,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .map-stage.map-bg-dark { background: #111; }
 .map-bg-bw .map-tiles { filter: grayscale(1) contrast(1.12) brightness(1.04); }
 .map-bg-grid .map-tiles { display: none; }
-.map-stage.has-tile-error::after { content: "Fond OpenStreetMap indisponible — affichage de secours"; position: absolute; right: 18px; top: 18px; z-index: 4; padding: 8px 10px; border: 2px solid var(--ink); background: white; box-shadow: var(--shadow-small); font-size: 11px; font-weight: 800; }
+.map-stage.has-tile-error::after { content: "Fond OpenStreetMap indisponible — affichage de secours"; position: absolute; right: 18px; top: 18px; z-index: 4; padding: 8px 10px; border: 2px solid var(--ink); background: var(--card-bg, white); color: var(--ink); box-shadow: var(--shadow-small); font-size: 11px; font-weight: 800; }
 .map-tile { position: absolute; width: 256px; height: 256px; user-select: none; }
 .map-marker-layer, .heat-layer { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .map-marker { position: absolute; width: 18px; height: 18px; transform: translate(-50%,-50%) rotate(45deg); background: var(--blue); border: 2px solid var(--ink); box-shadow: 2px 2px 0 rgba(0,0,0,.25); pointer-events: auto; cursor: pointer; }
@@ -1013,7 +1013,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .map-route-people { display: flex; align-items: center; gap: 7px; min-width: 300px; }
 .map-route-people > span { color: var(--muted); font-size: 11px; font-weight: 900; }
 .map-route-person-chips { display: flex; align-items: center; gap: 5px; max-width: 390px; overflow-x: auto; }
-.map-route-chip { display: inline-flex; align-items: center; gap: 5px; min-height: 34px; padding: 5px 7px; border: 2px solid var(--ink); background: white; font-size: 11px; font-weight: 900; }
+.map-route-chip { display: inline-flex; align-items: center; gap: 5px; min-height: 34px; padding: 5px 7px; border: 2px solid var(--ink); background: var(--card-bg, white); color: var(--ink); font-size: 11px; font-weight: 900; }
 .map-route-chip i { width: 11px; height: 11px; border: 2px solid var(--ink); background: var(--route-color,var(--blue)); transform: rotate(45deg); flex: 0 0 auto; }
 .map-route-chip button { border: 0; background: transparent; font: inherit; cursor: pointer; padding: 0 0 0 3px; }
 .correspondent-picker { display: grid; gap: 6px; margin-top: 4px; }
@@ -1862,6 +1862,9 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 :root[data-theme="dark"] .person-list-item.is-active,
 :root[data-theme="dark"] .side-menu-item.is-active,
 :root[data-theme="dark"] .saved-item.is-active { background: var(--blue); color: #fff; }
+:root[data-theme="dark"] .person-list-item.is-active small,
+:root[data-theme="dark"] .side-menu-item.is-active small,
+:root[data-theme="dark"] .saved-item.is-active small { color: rgba(255,255,255,.8); }
 
 :root[data-theme="dark"] .dashboard-widget,
 :root[data-theme="dark"] .dashboard-widget .card-head,
@@ -3508,6 +3511,7 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 .goose-game-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}.goose-board-wrap{border:4px solid #000;background:#fff;padding:14px;box-shadow:10px 10px 0 #d7d7d7;overflow:auto}.goose-board{position:relative;display:grid;grid-template-columns:repeat(var(--goose-grid),minmax(37px,1fr));grid-template-rows:repeat(var(--goose-grid),minmax(37px,1fr));gap:2px;min-width:620px;aspect-ratio:1;background:#fff}.goose-cell{position:relative;border:2px solid #000;background:#fff;min-width:0;min-height:0;padding:3px;display:flex;justify-content:space-between;align-items:flex-start;font-family:Arial,sans-serif}.goose-cell b{font-size:10px}.goose-cell>span{font-size:18px;line-height:.9;font-weight:950}.goose-cell em{position:absolute;bottom:2px;left:2px;right:2px;display:flex;gap:1px;flex-wrap:wrap;font-style:normal}.goose-pawn{display:grid;place-items:center;width:15px;height:15px;border-radius:50%;background:var(--pawn);color:#fff;font:900 9px Arial;border:1px solid #fff}.goose-cell.is-goose{background:repeating-linear-gradient(135deg,#fff 0 4px,#ededed 4px 7px)}.goose-cell.is-start{background:#111;color:#fff}.goose-cell.is-start .goose-pawn{border-color:#aaa}.goose-cell.is-skip{background:#efefef}.goose-board-title{position:absolute;z-index:2;left:31%;right:31%;top:31%;bottom:31%;border:4px solid #000;background:#fff;display:grid;place-content:center;text-align:center;transform:rotate(-7deg);box-shadow:6px 6px 0 #ddd}.goose-board-title strong{font-size:clamp(20px,4vw,46px);line-height:.86;letter-spacing:-.08em}.goose-board-title span{font-size:11px;font-weight:900;letter-spacing:.12em;margin-top:8px}.goose-panel{border:4px solid #000;background:#fff;box-shadow:8px 8px 0 #d7d7d7;padding:14px;display:grid;gap:14px}.goose-players{display:grid;gap:7px}.goose-player{border:2px solid #000;padding:7px;display:grid;grid-template-columns:24px 1fr;gap:1px 7px;align-items:center}.goose-player>i{grid-row:span 2;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--pawn);color:#fff;font-style:normal;font:900 11px Arial}.goose-player strong,.goose-player span{display:block}.goose-player span{font-size:11px;font-weight:800}.goose-player.is-current{background:#000;color:#fff}.goose-player.is-finished{opacity:.6;text-decoration:line-through}.goose-dice{display:flex;align-items:center;gap:8px;border-top:3px solid #000;border-bottom:3px solid #000;padding:9px 0}.goose-dice b{position:relative;display:grid;place-items:center;width:36px;height:36px;border:2px solid #000;font-size:23px;line-height:1}.goose-dice b span{position:absolute;font:900 10px Arial}.goose-dice>strong{font-size:22px;margin-left:auto}.goose-status{min-height:38px;margin:0;font-weight:900}.goose-roll{width:100%;min-height:52px;font-size:16px}.goose-question{display:grid;gap:10px}.goose-question p{margin:0;font-weight:800}.goose-question>div{display:grid;gap:6px}.goose-question button{border:2px solid #000;background:#fff;padding:8px;text-align:left;font:inherit;font-weight:900;cursor:pointer}.goose-question button:hover{background:#000;color:#fff}.goose-result{border:3px solid #000;background:#eee;padding:12px;font-weight:950}.goose-rules{border-top:2px solid #000;padding-top:8px;font-size:12px;font-weight:700}.goose-rules summary{cursor:pointer;font-weight:950}.goose-side-menu small{display:block;font-size:10px;font-weight:700;opacity:.75;margin-top:3px}
 @media(max-width:900px){.goose-game-layout{grid-template-columns:1fr}.goose-panel{position:static}.goose-setup-grid,.goose-player-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.goose-game-head{display:grid}.goose-page{padding:15px}}
 .goose-side-menu strong+small{color:var(--blue);font-size:14px;letter-spacing:.03em;text-transform:uppercase;opacity:1;line-height:1.1}.goose-side-menu strong+small+small{margin-top:3px;font-size:12px}
+:root[data-theme="dark"] .goose-side-menu .side-button strong+small{color:color-mix(in srgb,var(--blue) 40%,#fff)} /* audit des écrans : le nom du jeu reste lisible sur le gris des parties */
 @media(max-width:520px){.goose-setup-grid,.goose-player-fields{grid-template-columns:1fr}.goose-setup footer{align-items:stretch;flex-direction:column}.goose-board{min-width:520px}.goose-page{padding:10px}}
 
 /* Lecture du plateau : numéros, sens et pions doivent rester lisibles de loin. */

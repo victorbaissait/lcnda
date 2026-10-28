@@ -84,7 +84,7 @@
             if (c.players.every(p => p.ai)) return {error: 'Il faut au moins une personne pour jouer.'};
             const R = L().rng(c.seed + (prev ? prev.round : '')), sizes = FLEETS[c.fleet];
             let names = [];
-            if (c.names) { try { const d = await J().loadData(); names = L().shuffle(d.persons.filter(x => !x.living && !x.priv && x.first && x.last).map(x => `${x.first} ${String(x.last).toUpperCase()}`), c.seed); } catch (_) {} }
+            if (c.names) { try { const d = await J().loadData(); names = L().shuffle(d.persons.filter(x => !x.living && !x.priv && x.first && x.last).map(x => `${x.first} ${String(x.last).toUpperCase()}`), L().rng(c.seed + ":noms")); } catch (_) {} }
             let boards;
             try { boards = [0, 1].map(i => ({ships: placeFleet(c.size, c.size, sizes, R).map((s, k) => ({...s, name: names[i * sizes.length + k] ? `le ${names[i * sizes.length + k]}` : `${KIND[s.size] || 'Navire'} ${k + 1}`, kind: KIND[s.size] || 'Navire'})), shots: grid(c.size, c.size)})); }
             catch (e) { return {error: e.message}; }

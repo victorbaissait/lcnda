@@ -222,7 +222,8 @@
         </div></section>`;
     }
     async function renderMaintenance(token=++state.workspaceToken){
-        if(window.LCNDA_EXT?.maintenance?.[state.maintenanceTab])return window.LCNDA_EXT.maintenance[state.maintenanceTab](token);
+        {const em=window.LCNDA_EXT?.maintenance,tab=state.maintenanceTab; // « #maintenance/__proto__ », « constructor »… ne sont pas des pages
+            if(em&&typeof tab==='string'&&Object.hasOwn(em,tab)&&typeof em[tab]==='function')return em[tab](token);}
         if(state.maintenanceTab==='entretien')return renderUpkeep(token);
         if(state.maintenanceTab==='fusion')return renderMergeTool(token);
         if(state.maintenanceTab==='raccourcis')return renderShortcutSettings(token);

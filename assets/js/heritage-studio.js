@@ -137,7 +137,7 @@
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
     /** 💾 le cadre commun pour une liste {name, saved, settings, from…} (mises en page, ensembles de tous les réglages) */
     const profilesFrame = o => {
-        const UI = window.LCNDA_UI, day = p => p.saved || '';
+        const UI = window.LCNDA_UI, day = p => (p.saved && (UI.whenText?.(p.saved) || '')) || ''; // K4 : « aujourd’hui à 22 h 16 », jamais « 2026-10-28T22:16:42.578Z »
         const frame = UI.presetsFrame({id: o.id, what: o.what, quietApply: true,
             list: () => o.list().map(p => ({name: p.name, date: [o.summary(p.settings), day(p), p.from ? `${o.from} ${p.from}` : ''].filter(Boolean).join(' · ')})),
             apply: i => { const p = o.list()[i]; return p ? o.apply(p) : false; },
