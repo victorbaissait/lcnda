@@ -231,9 +231,9 @@ t('✋ on choisit combien on prend (4 bois sur 5) ; la place pour rapporter est 
     assert.ok(B.send(g, p.id, [{id: a.id, take: ['bois'], qty: {bois: 4}}]).ok); let guard = 0; while (p.where !== 'base' && guard++ < 400) B.run(g, 30);
     assert.equal(a.stock.bois, 1, 'il en laisse 1'); assert.ok(g.res.bois >= b0 + 4 - 1 && g.res.bois <= b0 + 4, `${b0} → ${g.res.bois}`); assert.equal(a.known.stock.bois, 1, 'on sait ce qui reste');
     const h = game(), q = h.people[1], base = B.carryOf(h, q); h.floors[0].slots[3] = 'brouette'; assert.equal(B.carryOf(h, q), base + 8);
-    h.floors[0].slots[4] = 'remorque'; assert.equal(B.carryOf(h, q), base + 8, 'la remorque sans vélo ne sert à rien'); h.floors[0].slots[5] = 'velo'; assert.equal(B.carryOf(h, q), base + 23);
+    h.floors[0].slots[4] = 'remorque'; assert.equal(B.carryOf(h, q), base + 8, 'la remorque sans vélo ne sert à rien'); h.floors[0].slots[5] = 'velo'; assert.equal(B.carryOf(h, q), base + 15, 'un seul véhicule par sortie : le meilleur (la remorque)');
     const k = game(); const pk = k.city.places[0]; Object.keys(pk.stock).forEach(r => { pk.stock[r] = 0; }); pk.stock.bois = 50; pk.max.bois = 50; pk.junk = []; const kp = k.people[1], cap = B.carryOf(k, kp);
-    B.send(k, kp.id, pk.id); guard = 0; while (kp.where !== 'base' && guard++ < 400) B.run(k, 30); assert.equal(pk.stock.bois, 50 - cap, `pas plus de ${cap}`);
+    B.send(k, kp.id, pk.id); guard = 0; while (kp.where !== 'base' && guard++ < 400) B.run(k, 30); assert.equal(pk.stock.bois, 50 - Math.floor(cap / B.wOf('bois') + 1e-9), `pas plus de ${cap} (en poids : le bois pèse ${B.wOf('bois')})`);
     const c = B.check(JSON.parse(JSON.stringify(g))); assert.equal(c.city.places.find(x => x.id === a.id).known.stock.bois, 1);
 });
 t('🔧 pannes : une installation en panne ne sert plus ; on la répare (des pièces, un peu de travail) ; le groupe en panne = plus de courant', () => {
@@ -243,7 +243,7 @@ t('🔧 pannes : une installation en panne ne sert plus ; on la répare (des pi�
     g.people.forEach(p => { p.job = 'construire'; }); B.run(g, 6 * 60); assert.ok(B.has(g, 'toilettes'), 'réparé'); assert.equal(g.stats.repairs, 1);
     const h = game(); B.breakItem(h, 0, 1); B.run(h, 20); assert.equal(h.power, false, 'groupe en panne');
     assert.equal(B.breakItem(h, 0, 0), false, 'la radio ne tombe pas en panne');
-    const w = game({diff: 'extreme'}); w.floors[0].slots[3] = 'potager'; w.floors[0].slots[4] = 'douche'; let broke = false; for (let i = 0; i < 40 && !broke; i++) { B.run(w, 24 * 60); broke = Object.keys(w.broken).length > 0; } assert.ok(broke, 'l’usure finit par casser quelque chose');
+    const w = game({diff: 'extreme'}); fill(w, 80); w.floors[0].slots[3] = 'potager'; w.floors[0].slots[4] = 'douche'; let broke = false; for (let i = 0; i < 40 && !broke; i++) { B.run(w, 24 * 60); w.people.forEach(p => { p.hp = 100; }); B.RES_KEYS.forEach(r => { w.res[r] = Math.max(w.res[r], 40); }); broke = Object.keys(w.broken).length > 0; } assert.ok(broke, 'l’usure finit par casser quelque chose');
 });
 t('⬆️ améliorer une installation : niveau 2 puis 3, ses effets comptent ×1,5 puis ×2', () => {
     const g = game(); fill(g, 60); g.floors[0].slots[3] = 'brouette'; const base = B.carryOf(g, g.people[1]);
@@ -288,7 +288,7 @@ t('🎚️ difficulté et 🎬 scénarios ; 🧳 objets de famille retrouvés da
     const t0 = game({opt: {tuto: true}}); assert.equal(t0.tuto, 0); fill(t0); assert.ok(B.orderBuild(t0, 'toilettes', 0, 3).ok); B.run(t0, 10); assert.ok(t0.tuto >= 1); assert.ok(t0.log.some(l => /Étape 2/.test(l.txt)));
     B.setOpt(t0, 'tuto', false); assert.equal(t0.tuto, -1); assert.equal(game().tuto, -1);
     const c = B.check(JSON.parse(JSON.stringify(game({diff: 'difficile', scen: 'hiver', opt: {meteo: true, chaines: true}}))));
-    assert.equal(c.diff, 'difficile'); assert.equal(c.scen, 'hiver'); assert.deepEqual(c.opt, {meteo: true, chaines: true, tuto: false, age: false, feu: false, nuit: false, missions: false});
+    assert.equal(c.diff, 'difficile'); assert.equal(c.scen, 'hiver'); assert.deepEqual(c.opt, {meteo: true, chaines: true, tuto: false, age: false, feu: false, nuit: false, missions: false, souvenirs: false});
 });
 t('🐕 animaux (adopter, nourrir, ils partent s’ils ont faim) ; 🐀 nuisibles (pièges, chat, bocaux)', () => {
     const g = game(); fill(g, 30); assert.ok(B.adopt(g, 'chien')); assert.ok(B.adopt(g, 'poules')); const d0 = B.defense(g); g.pets = g.pets.filter(a => a.k !== 'chien'); assert.equal(Math.round((d0 - B.defense(g)) * 10) / 10, 2);
@@ -419,5 +419,155 @@ t('🔨 plus d’objets à fabriquer : plans à trouver en ville (là où ils vi
     const pg = game(); pg.floors[0].slots[3] = 'pigeonnier'; pg.powerOn = false; pg.power = false; const q = pg.people[1]; B.send(pg, q.id, pg.city.places[0].id); B.run(pg, 300); assert.ok(pg.log.some(l => l.kind === 'radio'), 'le pigeonnier'); assert.ok(B.recall(pg, q.id) || q.where === 'base');
     const fs2 = game(); fs2.floors[0].slots[3] = 'foursolaire'; assert.ok(B.canCook(fs2));
     assert.ok(B.foundPlans(game()).length >= 60, 'beaucoup de plans à trouver');
+});
+
+/* ═════════ 🗺️ Région, convois, groupes, bâtiments, apprentissage, couples, souvenirs, transports ═════════ */
+const fresh = (o = {}) => { const g = game(o); fill(g, 120); g.visit = null; g.people.forEach(p => { p.hp = 100; }); return g; };
+const keep = g => { g.people.forEach(p => { if (p.hp > 0) { p.hp = Math.max(p.hp, 60); Object.keys(p.needs).forEach(k => { p.needs[k] = Math.max(p.needs[k], 50); }); } }); g.visit = null; };
+const runKeep = (g, min) => { for (let m = 0; m < min; m += 60) { B.run(g, 60); keep(g); } };
+t('🗺️ la région : 8 lieux autour du bunker, tous reliés par des routes (longueur, danger, terrain) ; les plus proches connus, le chemin le plus court ou le plus sûr', () => {
+    const g = game(); const R = g.region; assert.equal(R.nodes.length, 8);
+    assert.ok(R.roads.every(r => r.len >= 6 && r.danger >= 0 && r.danger <= 3 && ['route', 'chemin', 'rive'].includes(r.terr)));
+    R.nodes.forEach(n => { const p = B.regionPath(g, n.id); assert.ok(p && p[0] === 'home' && p[p.length - 1] === n.id, n.id); });
+    assert.ok(R.nodes.some(n => n.seen) && R.nodes.some(n => !n.seen), 'on ne connaît pas encore tout');
+    const far = R.nodes.slice().sort((a, b) => B.regionPath(g, b.id).length - B.regionPath(g, a.id).length)[0];
+    const P1 = B.convoyPlan(g, far.id, 2, [], false), P2 = B.convoyPlan(g, far.id, 2, [], true); assert.ok(P2.hours >= P1.hours && P2.danger <= P1.danger + 0);
+    assert.ok(P1.days >= 1 && P1.need.eau > 0 && P1.need.nourriture > 0);
+    assert.deepEqual([...new Set(g.groups.map(x => x.k))].sort(), ['amis', 'bande', 'marchands']); assert.ok(g.groups.every(x => R.nodes.some(n => n.id === x.at)));
+    assert.ok(g.groups.filter(x => x.k === 'bande').every(x => x.rep < -15) && g.groups.filter(x => x.k === 'amis').every(x => x.rep > 15));
+    assert.equal(game({scen: 'h1709'}).region.nodes.find(n => n.kind === 'depot')?.name.startsWith('Château') ?? true, true);
+});
+t('🧭 un convoi part (provisions prises, les absents ne travaillent pas au bunker), avance de lieu en lieu (radio), rapporte, et revient ; « Rentrez ! »', () => {
+    const g = fresh(), dest = g.region.nodes.find(n => n.seen && !g.groups.some(x => x.at === n.id && x.k === 'bande')) || g.region.nodes.find(n => n.seen);
+    g.groups.forEach(x => { x.at = x.at === dest.id ? 'zz' : x.at; }); const [a, b, c] = g.people;
+    assert.match(B.formConvoy(g, {dest: dest.id, who: []}).err, /au moins/); assert.match(B.formConvoy(g, {dest: 'r99', who: [b.id]}).err, /lieu/);
+    assert.match(B.formConvoy(g, {dest: dest.id, who: [b.id], pack: {eau: 100}}).err, /Trop lourd/);
+    const plan = B.convoyPlan(g, dest.id, 2), eau0 = g.res.eau; const r = B.formConvoy(g, {dest: dest.id, who: [b.id, c.id], pack: {eau: plan.need.eau, nourriture: plan.need.nourriture}});
+    assert.ok(r.ok, r.err); assert.equal(g.res.eau, eau0 - plan.need.eau); assert.equal(b.where, 'convoi'); assert.ok(!B.alive(g).filter(p => p.where === 'base').includes(b));
+    assert.match(B.formConvoy(g, {dest: dest.id, who: [a.id]}).err, /déjà/);
+    B.setJob(g, b.id, 'creuser'); const dug = g.dig.done; B.run(g, 120); assert.equal(g.dig.done, dug, 'un absent ne creuse pas');
+    let guard = 0; while (g.convoys.length && guard++ < 24 * 12) { B.run(g, 60); keep(g); }
+    assert.equal(g.convoys.length, 0, 'le convoi est rentré'); assert.equal(b.where, 'base'); assert.ok(g.stats.expeditions === 1);
+    assert.ok(g.log.some(l => /Le convoi .* : « On est à/.test(l.txt)) && g.log.some(l => /Le convoi est rentré/.test(l.txt)));
+    assert.ok(dest.visits === 1);
+    // « Rentrez ! » : demi-tour
+    const h = fresh(), d2 = h.region.nodes.filter(n => n.seen).sort((x, y) => B.convoyPlan(h, y.id, 1).hours - B.convoyPlan(h, x.id, 1).hours)[0];
+    assert.ok(B.formConvoy(h, {dest: d2.id, who: [h.people[1].id], pack: {eau: 4, nourriture: 3}}).ok); B.run(h, 120);
+    assert.ok(B.recallConvoy(h, h.convoys[0].id)); assert.equal(h.convoys[0].dir, -1); guard = 0; while (h.convoys.length && guard++ < 48) { B.run(h, 60); keep(h); } assert.equal(h.convoys.length, 0, 'revenu vite');
+});
+t('🕯️ un convoi qui ne revient pas : véhicules, bêtes et outils perdus avec lui', () => {
+    const g = fresh(); g.floors[1].slots[0] = 'charrette'; B.adopt(g, 'ane'); const ane = g.pets.find(a => a.k === 'ane'); g.tools.push('pelle');
+    const d = g.region.nodes.find(n => n.seen), p = g.people[1]; assert.ok(B.formConvoy(g, {dest: d.id, who: [p.id], veh: ['1,0'], beasts: [ane.id], tools: ['pelle'], pack: {eau: 6}}).ok);
+    assert.ok(!g.tools.includes('pelle'), 'l’outil part avec eux'); assert.equal(B.dismantle(g, 1, 0), false, 'on ne démonte pas une charrette partie');
+    B.run(g, 30); p.hp = 1; p.needs.soif = 0; p.needs.faim = 0; g.convoys[0].pack = {}; B.run(g, 600);
+    assert.equal(g.convoys.length, 0); assert.ok(g.log.some(l => /n’est jamais revenu/.test(l.txt))); assert.equal(g.floors[1].slots[0], null); assert.ok(!g.pets.includes(ane)); assert.ok(!g.tools.includes('pelle')); assert.equal(g.stats.expLost, 1);
+});
+t('🤝 la réputation : un marché honnête la monte, voler la fait chuter (et tout le monde le sait) ; payer une bande la calme ; les bandes fâchées viennent plus souvent', () => {
+    const g = fresh(), tr = g.groups.find(x => x.k === 'marchands'), am = g.groups.find(x => x.k === 'amis');
+    g.visit = {k: 'marchand', until: g.t + 120, give: {r: 'bois', n: 4}, want: {r: 'tissu', n: 2}, g: tr.id}; const r0 = tr.rep; B.answerVisit(g, 'oui'); assert.equal(tr.rep, r0 + 3);
+    g.visit = {k: 'marchand', until: g.t + 120, give: {r: 'bois', n: 4}, want: {r: 'tissu', n: 2}, g: tr.id}; const a0 = am.rep; B.answerVisit(g, 'voler'); assert.equal(tr.rep, r0 + 3 - 35); assert.equal(am.rep, a0 - 8); assert.ok(g.stats.thefts === 1);
+    const band = g.groups.find(x => x.k === 'bande'); g.visit = {k: 'pillards', until: g.t + 120, demand: {nourriture: 2}, strength: 5, g: band.id}; const b0 = band.rep; B.answerVisit(g, 'donner'); assert.equal(band.rep, b0 + 6); assert.ok(band.calm > g.t);
+    // les bandes qui vous détestent viennent bien plus souvent que celles avec qui on s'entend
+    const count = rep => { const h = game({seed: 11}); h.t += 1440 * 4; h.groups.filter(x => x.k === 'bande').forEach(x => { x.rep = rep; x.calm = 0; }); let n = 0; for (let i = 0; i < 2500; i++) { h.visit = null; B.run(h, 60); if (h.visit?.k === 'pillards') n++; h.people.forEach(p => { p.hp = 100; Object.keys(p.needs).forEach(k => { p.needs[k] = 90; }); }); } return n; };
+    const hate = count(-95), calm = count(10); assert.ok(hate > calm * 1.4, `${hate} contre ${calm}`);
+    // un marchand ami fait un meilleur prix
+    assert.ok(B.repInfo(70)[1] === 'Alliés' && B.repInfo(-70)[1] === 'Ennemis' && B.repInfo(0)[1] === 'Neutres');
+});
+t('🤲 les groupes demandent de l’aide (partager ou refuser), les alliés envoient de quoi tenir quand ça va mal, on peut leur offrir quelque chose', () => {
+    const g = fresh(), am = g.groups.find(x => x.k === 'amis');
+    g.asks = [{id: 'k1', g: am.id, r: 'bois', n: 5, until: g.t + 600}]; const r0 = am.rep, b0 = g.res.bois; assert.ok(B.answerAsk(g, 'k1', 'partager').ok); assert.equal(g.res.bois, b0 - 5); assert.ok(am.rep > r0);
+    g.asks = [{id: 'k2', g: am.id, r: 'bois', n: 5, until: g.t + 600}]; const r1 = am.rep; B.answerAsk(g, 'k2', 'refuser'); assert.equal(am.rep, r1 - 5);
+    g.asks = [{id: 'k3', g: am.id, r: 'bois', n: 5, until: g.t + 60}]; const r2 = am.rep; B.run(g, 120); assert.equal(am.rep, r2 - 4, 'une demande oubliée');
+    const h = fresh(); const ally = h.groups.find(x => x.k === 'amis'); ally.rep = 60; h.res.nourriture = 0; h.t = Math.floor(h.t / 1440) * 1440 + 3 * 1440 + 8 * 60 + 50; B.run(h, 20);
+    assert.ok(h.market.deals.some(d => d.who === ally.name && d.r === 'nourriture'), 'ils envoient à manger'); assert.ok(h.log.some(l => /ça va mal chez vous/.test(l.txt)));
+    const r3 = ally.rep; assert.ok(B.giftGroup(h, ally.id, 'bois', 6).ok); assert.ok(ally.rep > r3); assert.match(B.giftGroup(h, ally.id, 'bois', 9999).err, /manque/);
+});
+t('🏚️ un bâtiment de la ville : matériaux, heures de travail sur place, puis il produit chaque jour ; on va récolter ; s’il n’est pas visité, il est pillé ou s’abîme', () => {
+    const g = fresh(), s = g.sites.find(x => x.k === 'puits'), p = g.people[1]; assert.equal(s.state, 'ruine'); assert.ok(g.sites.length >= 3);
+    assert.match(B.sendSite(g, p.id, s.id, 'travail').err, /chantier/); const c0 = g.res.corde; assert.ok(B.startSite(g, s.id).ok); assert.equal(g.res.corde, c0 - 3); assert.equal(s.state, 'chantier');
+    let guard = 0; while (s.state !== 'marche' && guard++ < 20) { if (p.where === 'base') assert.ok(B.sendSite(g, p.id, s.id, 'travail', 12).ok); while (p.where !== 'base') { B.run(g, 60); keep(g); } }
+    assert.equal(s.state, 'marche'); assert.ok(g.stats.sitesFixed === 1); assert.ok(g.ach.chantier || B.checkAch(g).includes('chantier') || g.ach.chantier);
+    const t6 = () => { B.run(g, 1440); keep(g); }; t6(); assert.ok((s.stock.eau || 0) >= 6, JSON.stringify(s.stock)); for (let i = 0; i < 5; i++) { s.last = g.t; t6(); } assert.ok(s.stock.eau <= 18, 'trois jours au plus en attente');
+    const e0 = g.res.eau; assert.ok(B.sendSite(g, p.id, s.id, 'recolte').ok); while (p.where !== 'base') { B.run(g, 60); keep(g); } assert.ok(g.res.eau > e0 || g.res.eau >= B.cap(g, 'eau') - 1, 'récolté');
+    const h = fresh(), q = h.sites[0]; q.state = 'marche'; q.last = 0; let hit = false; for (let i = 0; i < 60 && !hit; i++) { B.run(h, 1440); keep(h); hit = q.raids > 0 || q.state === 'abime'; } assert.ok(hit, 'pas visité : pillé ou abîmé');
+    const f = fresh(), z = f.sites[0]; z.state = 'abime'; assert.ok(B.startSite(f, z.id).ok); assert.ok(z.need < B.SITES[z.k][2], 'réparer coûte moins que tout refaire'); assert.ok(B.fenceSite(f, z.id).ok); assert.equal(B.fenceSite(f, z.id).ok, false);
+});
+t('🎓 apprendre un métier : un maître (expert ou âgé) forme un apprenti, qui progresse de semaine en semaine sans dépasser son maître ; à sa mort, le savoir reste', () => {
+    const g = fresh(), [m, a, x] = g.people; m.sk.construire = 1.6; m.age = 50; a.sk.construire = 1; a.age = 20; x.age = 30;
+    assert.match(B.setApprentice(g, x.id, a.id, 'construire').err, /assez/); assert.ok(B.canTeach(g, m).includes('construire'));
+    const old = {...x, sk: {...x.sk, soigner: 1.3}, age: 70}; assert.ok(B.canTeach(g, old).includes('soigner'), 'un aîné enseigne un savoir solide');
+    assert.ok(B.setApprentice(g, m.id, a.id, 'construire').ok); assert.match(B.setApprentice(g, m.id, x.id, 'construire').err, /déjà/);
+    runKeep(g, 1440 * 8); assert.ok(a.sk.construire > 1.15 && a.sk.construire < m.sk.construire, String(a.sk.construire)); assert.ok(g.log.some(l => /1 semaine d’apprentissage/.test(l.txt)));
+    runKeep(g, 1440 * 7); m.hp = 0.5; m.needs.soif = 0; B.run(g, 60 * 3);
+    if (m.hp <= 0) { assert.ok(g.log.some(l => /son savoir reste chez/.test(l.txt))); assert.ok(a.sk.construire >= 1.45 - 0.001, String(a.sk.construire)); assert.ok(g.stats.transmis === 1); assert.equal(g.appr.length, 0); }
+    const h = fresh(), [M, A] = h.people; M.sk.soigner = 1.5; A.sk.soigner = 1; B.setApprentice(h, M.id, A.id, 'soigner'); runKeep(h, 1440 * 30); assert.ok(h.stats.compagnons >= 1, 'l’apprenti finit par en savoir autant'); assert.ok(A.sk.soigner <= M.sk.soigner);
+});
+t('💞 des couples se forment entre adultes qui s’entendent (jamais entre proches parents, ni un enfant) ; ils changent le moral et le travail d’équipe ; une naissance seulement dans un couple', () => {
+    const g = fresh(), [a, b, c] = g.people; [a, b, c].forEach(p => { p.age = 30; p.spouses = []; p.kin = []; }); a.gender = 'female'; b.gender = 'male'; c.gender = 'male';
+    a.kin.push(c.id); c.kin.push(a.id); g.rel = {[[a.id, b.id].sort().join('|')]: 45, [[a.id, c.id].sort().join('|')]: 45};
+    for (let i = 0; i < 40 && !g.couples.length; i++) B.couples(g, B.alive(g));
+    assert.equal(g.couples.length, 1); assert.ok(a.spouses.includes(b.id) && !a.spouses.includes(c.id), 'pas avec un proche parent');
+    const kid = {...c, id: 'hx', age: 12, child: true, kin: [], spouses: []}; assert.equal(B.canPair(g, kid, a), false);
+    // le travail d'équipe : deux amis au même travail vont plus vite, deux ennemis moins vite
+    B.setJob(g, a.id, 'creuser'); B.setJob(g, b.id, 'creuser'); assert.ok(B.teamK(g, a) > 1); g.rel[[a.id, b.id].sort().join('|')] = -40; a.spouses = []; b.spouses = []; assert.ok(B.teamK(g, a) < 1);
+    // une naissance : seulement un couple
+    const h = fresh(); h.floors[1].slots[0] = 'berceau'; h.t += 1440 * 5; h.people.forEach(p => { p.mood = 95; p.spouses = []; }); h.people[1].gender = 'female'; h.people[2].gender = 'male';
+    for (let i = 0; i < 60; i++) { B.run(h, 1440); keep(h); h.people.forEach(p => { p.mood = 95; }); if (h.preg) break; } assert.ok(!h.preg || h.people.find(p => p.id === h.preg.m).spouses.includes(h.preg.f));
+});
+t('🧓 souvenirs des ancêtres (option) : seulement si l’option est allumée, jamais pour un vivant, une fiche confidentielle ou un habitant inventé', () => {
+    const mem = {1: {occ: 'menuisier', by: 1850, bplace: 'Lyon', my: 1875, mplace: 'Lyon', spouse: 'Marie ROUX', kids: [1876, 1880]}, 2: {occ: 'cultivateur', by: 1900, bplace: 'Lyon', living: true}, 3: {occ: 'boulanger', bplace: 'Lyon', priv: true}};
+    const g = game({mem, opt: {souvenirs: true}, regionNames: ['Lyon']}); assert.ok(g.people[0].mem && !g.people[1].mem && !g.people[2].mem, 'ni le vivant ni la fiche confidentielle');
+    const lyon = g.region.nodes.find(n => n.name === 'Lyon'); assert.ok(lyon);
+    let said = false; for (let i = 0; i < 20 && !said; i++) { g.people[0].memSaid = []; said = B.souvenirAt(g, g.people[0], {kind: 'node', node: lyon}); }
+    assert.ok(said); const l = g.log.find(x => /🧓 Souvenir de Jean Moi/.test(x.txt)); assert.ok(l && /Lyon/.test(l.txt) && l.kind === 'histoire', l?.txt); assert.ok(g.bubbles.length >= 1);
+    assert.ok(!B.souvenirAt(g, g.people[1], {kind: 'node', node: lyon}));
+    const off = game({mem, regionNames: ['Lyon']}); for (let i = 0; i < 20; i++) B.souvenirAt(off, off.people[0], {kind: 'node', node: off.region.nodes.find(n => n.name === 'Lyon')}); assert.ok(!off.log.some(x => /Souvenir/.test(x.txt)), 'option éteinte : rien');
+    const inv = game({mem: {0: mem[1]}, opt: {souvenirs: true}}); assert.ok(inv.people.every(p => !p.mem || p.pid), 'pas pour un inventé');
+    // dans un scénario historique, rien de ce qui arrive après la date
+    const h = B.newGame({seed: 3, scen: 'h1870', me: {pid: 1, name: 'Jules', by: 1850, occ: 'menuisier'}, want: 1, city: {name: 'Paris'}, mem, opt: {souvenirs: true}});
+    for (let i = 0; i < 30; i++) { const txt = B.memTale(h, h.people[0], 'Ça me rappelle mon métier.'); assert.ok(!/1875|1876|1880/.test(txt), txt); }
+    const c = B.check(JSON.parse(JSON.stringify(g))); assert.ok(c.people[0].mem && !c.people[1].mem);
+    const raw = JSON.parse(JSON.stringify(g)); raw.people[1].mem = {occ: 'x', living: true}; assert.ok(!B.check(raw).people[1].mem, 'un fichier avec un vivant : retiré');
+});
+t('⚖️ 🚚 transporter : le poids (l’eau lourde, le tissu léger), le terrain (brouette dans la boue, traîneau sur la neige, barque sur l’eau), l’usure (réparer à l’établi), les bêtes de bât', () => {
+    assert.ok(B.wOf('eau') > B.wOf('tissu') && B.wOf('metal') > B.wOf('nourriture'));
+    const take = r => { const g = game(); const pl = g.city.places[0]; Object.keys(pl.stock).forEach(x => { pl.stock[x] = 0; }); pl.stock[r] = 60; pl.max[r] = 60; pl.junk = []; pl.tools = []; pl.plans = 0; const p = g.people[1]; B.send(g, p.id, pl.id); let n = 0; while (p.where !== 'base' && n++ < 400) B.run(g, 30); return 60 - pl.stock[r]; };
+    assert.ok(take('tissu') > take('eau') * 2, 'plus de tissu que d’eau');
+    const g = game(); g.floors[0].slots[3] = 'brouette'; const q = g.people[1], base = B.carryOf(g, q, {only: true});
+    assert.equal(B.carryOf(g, q, {terr: 'route'}), base + 8); assert.equal(B.carryOf(g, q, {terr: 'boue'}), base + 4, 'la brouette dans la boue');
+    g.floors[0].slots[3] = 'traineau'; assert.equal(B.carryOf(g, q, {terr: 'route'}), base, 'pas de traîneau sans neige'); assert.ok(B.carryOf(g, q, {terr: 'neige'}) > base + 7);
+    g.floors[0].slots[3] = 'barque'; assert.equal(B.carryOf(g, q, {terr: 'route'}), base); assert.equal(B.carryOf(g, q, {terr: 'eau'}), base + 20);
+    const cr = game({scen: 'h1910'}); assert.equal(B.cityTerrain(cr), 'eau', '1910 : les rues inondées'); assert.ok(cr.plans.includes('barque'));
+    assert.ok(!B.itemOk(game({scen: 'h1709'}), 'caddie') && !B.itemOk(game({scen: 'h1940'}), 'poussette') && !B.itemOk(game({scen: 'h1709'}), 'velocargo') && B.itemOk(game({scen: 'h1709'}), 'carriole'));
+    // la carriole : seulement avec un cheval, et la plus grosse charge
+    const k = game(); k.floors[0].slots[3] = 'carriole'; const b0 = B.carryOf(k, k.people[1], {only: true}); assert.equal(B.carryOf(k, k.people[1], {terr: 'route'}), b0); B.adopt(k, 'cheval'); assert.equal(B.carryOf(k, k.people[1], {terr: 'route'}), b0 + 25);
+    // l'usure : à force de sorties, le transport est à réparer ; il faut l'établi
+    const w = fresh(); w.floors[1].slots[0] = 'caddie'; let n = 0; while (!w.broken['1,0'] && n++ < 40) B.wearVeh(w, '1,0', 'route', 1); assert.ok(w.broken['1,0'] && n < 25, `${n} sorties`);
+    assert.match(B.orderRepair(w, 1, 0).err, /établi/); w.floors[1].slots[1] = 'etabli'; assert.ok(B.orderRepair(w, 1, 0).ok);
+    // les bêtes de bât : +12 (et +5 avec des bâts), elles mangent dans les provisions du convoi, blessées elles ne portent plus
+    const a = fresh(); B.adopt(a, 'ane'); const ane = a.pets.find(x => x.k === 'ane'), p = a.people[1], b1 = B.carryOf(a, p, {only: true});
+    assert.equal(B.carryOf(a, p, {terr: 'route'}), b1 + 12); a.floors[1].slots[0] = 'bats'; assert.equal(B.carryOf(a, p, {terr: 'route'}), b1 + 12 + 5, 'les bâts sur l’âne');
+    a.floors[1].slots[0] = null; ane.hurt = 2; assert.equal(B.carryOf(a, p, {terr: 'route'}), b1); ane.hurt = 0;
+    const d = a.region.nodes.find(n2 => n2.seen); assert.ok(B.convoyPlan(a, d.id, 1, [ane]).need.plantes > 0 && B.convoyPlan(a, d.id, 1, [ane]).need.eau > B.convoyPlan(a, d.id, 1, []).need.eau, 'la bête compte dans les provisions');
+    // 🐪 caravane : 3 moyens de transport ; 🫏 bête de somme : 5 expéditions
+    a.floors[1].slots[2] = 'charrette'; a.floors[1].slots[3] = 'brouette'; const plan = B.convoyPlan(a, d.id, 2, [ane]);
+    const r = B.formConvoy(a, {dest: d.id, who: [a.people[1].id, a.people[2].id], veh: ['1,2', '1,3'], beasts: [ane.id], pack: plan.need}); assert.ok(r.ok, r.err); B.checkAch(a); assert.ok(a.ach.caravane);
+    ane.trips = 5; B.checkAch(a); assert.ok(a.ach.betesomme);
+    assert.ok(B.formConvoy(fresh(), {dest: d.id, who: ['h2'], pack: {eau: 200}}).err);
+});
+t('⛓️ le chariot de mine : les rails vers un lieu proche, deux fois plus vite, une grosse charge seulement là', () => {
+    const g = fresh(); g.floors[1].slots[0] = 'chariot'; const c = g.city.base, near = g.city.places.filter(p => Math.abs(p.x - c[0]) + Math.abs(p.y - c[1]) <= 4).sort((a, b) => Math.abs(a.x - c[0]) + Math.abs(a.y - c[1]) - Math.abs(b.x - c[0]) - Math.abs(b.y - c[1]))[0];
+    if (!near) return; const t0 = B.travel(g, near); assert.ok(B.layRails(g, near.id).ok); assert.ok(B.travel(g, near) < t0); const q = g.people[1];
+    assert.equal(B.carryOf(g, q, {terr: 'route', place: near.id}), B.carryOf(g, q, {only: true}) + 30); assert.equal(B.carryOf(g, q, {terr: 'route'}), B.carryOf(g, q, {only: true}), 'ailleurs, le chariot ne sert pas');
+});
+t('💾 sauvegardes : une partie d’avant (sans région) reçoit une carte, des groupes, des bâtiments ; un convoi en route est gardé tel quel ; un fichier piégé ne casse rien', () => {
+    const g = fresh(); const raw = JSON.parse(JSON.stringify(g)); ['region', 'groups', 'convoys', 'sites', 'asks', 'appr', 'couples', 'bubbles', 'wear', 'rails'].forEach(k => delete raw[k]);
+    const c = B.check(raw); assert.equal(c.region.nodes.length, 8); assert.ok(c.groups.length >= 3 && c.sites.length >= 3); B.run(c, 1440 * 2);
+    const d = g.region.nodes.find(n => n.seen); assert.ok(B.formConvoy(g, {dest: d.id, who: [g.people[1].id], pack: {eau: 4, nourriture: 4}}).ok); B.run(g, 90);
+    const back = B.check(JSON.parse(JSON.stringify(g))); assert.equal(back.convoys.length, 1); assert.equal(back.people[1].where, 'convoi'); assert.deepEqual(back.convoys[0].route, g.convoys[0].route);
+    let guard = 0; while (back.convoys.length && guard++ < 24 * 10) { B.run(back, 60); keep(back); } assert.equal(back.convoys.length, 0);
+    const bad = JSON.parse(JSON.stringify(g)); bad.region.nodes.push({id: '__proto__', kind: 'toString'}); bad.convoys.push({dest: 'r1', route: ['x']}); bad.groups.push({k: 'constructor'}); bad.sites = [{k: '__proto__'}, {k: 'puits', x: 9999, y: 1}]; bad.wear = {'9,9': 50, '0,1': 1e9}; bad.pets.push({k: 'ane', hurt: 1e9, trips: -4});
+    const cb = B.check(bad); assert.equal(cb.region.nodes.length, 8); assert.equal(cb.convoys.length, 1); assert.equal(cb.sites.length, 0); assert.deepEqual(cb.wear, {}); assert.ok(cb.pets.every(a => (a.hurt || 0) <= 9 && !(a.trips < 0)));
+    const m = fresh(); B.run(m, 1440); assert.ok(m.mornings.every(x => x.snap.length < 400000)); const rw = B.rewind(m, 2); assert.ok(rw.ok && rw.g.region.nodes.length === 8, 'les matins gardent la région');
 });
 console.log(`✓ bunker : ${n} vérifications`);

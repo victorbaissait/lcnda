@@ -118,6 +118,48 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             const txt = await G(() => document.querySelector('.ui-actmenu')?.textContent || ''); assert.match(txt, /Reprendre au matin/); assert.match(txt, /Succès et records/); assert.match(txt, /Exporter/);
             await page.keyboard.press('Escape');
         });
+        await t('🗺️ l’onglet Région : la carte dessinée par le jeu, un convoi qui part (provisions, poids) et revient ; les groupes et leur réputation', async () => {
+            await advance(10, 'g.over = false; g.people.forEach(p => { p.hp = 100; Object.keys(p.needs).forEach(k => { p.needs[k] = 90; }); }); window.LCNDA_BUNKER.RES_KEYS.forEach(r => { g.res[r] = Math.min(60, window.LCNDA_BUNKER.cap(g, r)); });');
+            await page.click('[data-bk="tab"][data-v="region"]'); await page.waitForSelector('svg.bk-region');
+            assert.equal(await page.$$eval('svg.bk-region image, .bk-regionwrap img', l => l.length), 0, 'aucun fond de carte en ligne');
+            const n = await page.$$eval('.bk-rnode[data-id]:not(.is-fog)', l => l.length); assert.ok(n >= 2, `${n} lieux connus`);
+            assert.ok(await page.$$eval('.bk-group', l => l.length) >= 3); assert.match(await page.$eval('.bk-groups', e => e.textContent), /Bande rivale/);
+            await page.click('.bk-rnode[data-id]:not(.is-fog)'); await page.click('[data-bk="cform"]'); await page.waitForSelector('[data-bk-cw]');
+            await page.click('[data-bk-cw]'); await page.click('[data-bk="cneed"]'); await page.waitForTimeout(100);
+            assert.match(await page.$eval('.bk-load', e => e.textContent), /Chargement/);
+            await shot(page, 'bunker-region-1440');
+            await page.click('[data-bk="cgo"]'); await page.waitForTimeout(150);
+            assert.equal(await G(() => window.LCNDA_EXT.bunkerDebug.game().convoys.length), 1, 'le convoi est parti');
+            assert.ok(await page.$('.bk-rconv'), 'le convoi sur la carte');
+            for (let i = 0; i < 10 && await G(() => window.LCNDA_EXT.bunkerDebug.game().convoys.length); i++) await advance(600, 'g.visit = null; g.people.forEach(p => { if (p.hp > 0) { p.hp = Math.max(p.hp, 80); Object.keys(p.needs).forEach(k => { p.needs[k] = Math.max(p.needs[k], 60); }); } });');
+            assert.equal(await G(() => window.LCNDA_EXT.bunkerDebug.game().convoys.length), 0, 'le convoi est rentré');
+            assert.ok(await G(() => window.LCNDA_EXT.bunkerDebug.game().log.some(l => /Le convoi est rentré/.test(l.txt))));
+        });
+        await t('🏚️ un bâtiment de la ville : sur le plan, sa fiche, on lance le chantier', async () => {
+            await page.click('[data-bk="tab"][data-v="ville"]'); await page.waitForSelector('.bk-cell.is-site');
+            await page.click('.bk-cell.is-site'); await page.waitForSelector('.bk-site');
+            assert.match(await page.$eval('.bk-site', e => e.textContent), /RUINE/);
+            await G(() => { const g = window.LCNDA_EXT.bunkerDebug.game(); window.LCNDA_BUNKER.RES_KEYS.forEach(r => { g.res[r] = Math.min(60, window.LCNDA_BUNKER.cap(g, r)); }); });
+            await page.click('[data-bk="sstart"]'); await page.waitForTimeout(100);
+            assert.match(await page.$eval('.bk-site', e => e.textContent), /CHANTIER/); await shot(page, 'bunker-batiment-1440');
+        });
+        await t('🧓 souvenirs des ancêtres : interrupteur dans les réglages, une anecdote vraie en bulle et dans le journal (jamais le vivant ni la fiche confidentielle)', async () => {
+            const info = await G(() => { const g = window.LCNDA_EXT.bunkerDebug.game(); return {on: !!g.opt.souvenirs, mem: g.people.filter(p => p.mem).length, bank: JSON.stringify(g.memBank)}; });
+            assert.ok(info.on, 'allumée au départ'); assert.ok(info.mem >= 1); assert.ok(!/TOUJOURS|SECRÈTE/.test(info.bank));
+            await advance(10, "const B = window.LCNDA_BUNKER, p = g.people.find(x => x.mem && x.hp > 0); p.memSaid = []; for (let i = 0; i < 30 && !g.bubbles.length; i++) { p.memSaid = []; B.souvenirAt(g, p, {kind: 'city', place: {id: 'zz', kind: 'mairie', name: 'x'}}); }");
+            await page.waitForSelector('.bk-bubble'); await page.waitForTimeout(500); assert.match(await page.$eval('.bk-bubble', e => e.textContent), /Paris|menuisier|né·e/);
+            await shot(page, 'bunker-souvenir-1440');
+            await page.click('[data-bk="tab"][data-v="regl"]'); await page.waitForSelector('[data-bk-opt="souvenirs"]');
+            assert.ok(await page.$eval('[data-bk-opt="souvenirs"]', e => e.checked && !!e.closest('.ui-toggle')), 'un interrupteur (K16)');
+        });
+        await t('🎓 💞 un habitant : former un apprenti, ses liens', async () => {
+            await G(() => { const g = window.LCNDA_EXT.bunkerDebug.game(); g.people.forEach(p => { p.sk.construire = 1; }); g.people[0].sk.construire = 2; window.LCNDA_EXT.bunkerDebug.redraw(); });
+            await page.click('[data-bk="tab"][data-v="gens"]'); await page.waitForSelector('[data-bk="appr"]'); await page.click('[data-bk="appr"]'); await page.waitForSelector('.ui-actmenu');
+            await page.click('.ui-actmenu button.ui-actmenu-i:not([disabled]) >> nth=0'); await page.waitForTimeout(150);
+            assert.equal(await G(() => window.LCNDA_EXT.bunkerDebug.game().appr.length), 1); assert.ok(await page.$('.bk-chip.is-appr'));
+            await page.click('[data-bk="diary"][data-id]'); await page.waitForSelector('.bk-links'); await shot(page, 'bunker-liens-1440');
+            await page.click('[data-bk="diary"][data-id=""]');
+        });
         await t('390 px et sombre : accueil, partie, succès sans débordement', async () => {
             await page.setViewportSize({width: 390, height: 844});
             await G(() => { const A = window.LCNDA_APP; localStorage.setItem('genealogie-design', JSON.stringify({...A.readDesignSettings(), preset: 'dark'})); A.applyDesign(); });
@@ -127,6 +169,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             assert.ok(await over() <= 1, `accueil : ${await over()}px de trop`); await shot(page, 'bunker-accueil-390-sombre');
             await page.click('[data-bk-new] [type=submit]'); await page.waitForSelector('.bk-game');
             assert.ok(await over() <= 1, `partie : ${await over()}px de trop`); await shot(page, 'bunker-partie-390-sombre');
+            await page.click('[data-bk="tab"][data-v="region"]'); await page.waitForSelector('svg.bk-region'); assert.ok(await over() <= 1, `région : ${await over()}px de trop`); await shot(page, 'bunker-region-390-sombre');
             await page.click('[data-bk="more"]'); await page.waitForSelector('.ui-actmenu'); await page.click('.ui-actmenu >> text=Succès et records'); await page.waitForSelector('.bk-badges');
             const bg = await page.$eval('.bk-panel', e => getComputedStyle(e).backgroundColor); assert.notEqual(bg, 'rgb(255, 255, 255)', 'le panneau suit le mode sombre');
             await shot(page, 'bunker-succes-390-sombre');
