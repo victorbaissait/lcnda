@@ -39,22 +39,22 @@
     }
     async function renderAge(host, T) {
         const tr = await T.tree(), st = T.start(tr);
-        if (!st) { host.innerHTML = '<p class="h-tr-muted">L’arbre est vide.</p>'; return; }
+        if (!st) { host.innerHTML = T.empty('L’arbre est vide'); return; }
         const myAge = p => (p?.by ? T.ageAt(p, new Date().toISOString().slice(0, 10)) : null);
         host.innerHTML = `<form class="h-tr-panel h-tr-row h-tr-noprint" data-age-form><div style="min-width:260px"><span class="pk-lab">À partir de</span>${T.personField('ref', st.id)}</div>
-            <label>L’âge<input type="number" name="age" min="0" max="110" value="${myAge(st) ?? 30}" style="width:6em"></label><button class="button" type="submit">Voir</button><button type="button" class="button secondary" data-age-mine>Mon âge</button></form><div data-age-out></div>`;
+            <label>L’âge<input type="number" name="age" min="0" max="110" value="${myAge(st) ?? 30}" style="width:6em"></label><button class="button secondary" type="submit">Voir</button><button type="button" class="button secondary" data-age-mine>Mon âge</button></form><div data-age-out></div>`;
         const out = host.querySelector('[data-age-out]'), form = host.querySelector('[data-age-form]');
         const draw = () => {
             const ref = tr.byId.get(Number(form.elements.ref.value)) || st, age = Math.max(0, Math.min(110, Number(form.elements.age.value) || 0));
             const anc = T.ancestors(tr, ref.id, 16), you = ref.id === st.id;
-            if (!anc.length) { out.innerHTML = '<p class="h-tr-muted">Pas d’ancêtres connus pour cette personne.</p>'; return; }
+            if (!anc.length) { out.innerHTML = T.empty('Pas d’ancêtres connus pour cette personne'); return; }
             const rows = anc.map(({id, gen}) => { const p = tr.byId.get(id); return p?.by ? {p, gen, facts: factsAt(T, tr, p, age)} : null; }).filter(Boolean);
             const known = rows.filter(r => r.facts.length);
             out.innerHTML = `<h3 class="h-tr-big">À ${age} ans…</h3><p class="h-tr-muted">${known.length} ancêtre${known.length > 1 ? 's' : ''} de ${T.esc(T.name(ref))} dont on connaît la naissance${anc.length > rows.length ? ` (${anc.length - rows.length} sans date de naissance ne sont pas comptés)` : ''}.</p>
-                <ul class="h-tr-list">${known.map(r => `<li class="h-tr-item h-tr-print"><span class="h-tr-ic">${r.p.gender === 'female' ? '👩' : '👨'}</span><div class="h-tr-grow"><b>${T.esc(T.name(r.p))}</b> <small>(${T.esc(you ? kinWord(r.gen, r.p.gender) : kinWord(r.gen, r.p.gender, false).replace(/^(son|sa) /, ''))}, ${T.esc(T.life(r.p))})</small><br>À ${age} ans, ${r.p.gender === 'female' ? 'elle' : 'il'} ${T.esc(r.facts.join(' ; '))}.</div><button type="button" class="h-tr-link h-tr-noprint" data-age-open="${r.p.id}">Fiche</button></li>`).join('')}</ul>
-                <p class="h-tr-noprint"><button type="button" class="button small secondary" onclick="print()">🖨 Imprimer</button></p>`;
+                <ul class="h-tr-list">${known.map(r => `<li class="h-tr-item h-tr-print"><span class="h-tr-ic">${r.p.gender === 'female' ? '👩' : '👨'}</span><div class="h-tr-grow"><b>${T.esc(T.name(r.p))}</b> <small>(${T.esc(you ? kinWord(r.gen, r.p.gender) : kinWord(r.gen, r.p.gender, false).replace(/^(son|sa) /, ''))}, ${T.esc(T.life(r.p))})</small><br>À ${age} ans, ${r.p.gender === 'female' ? 'elle' : 'il'} ${T.esc(r.facts.join(' ; '))}.</div><button type="button" class="h-tr-link h-tr-noprint" data-age-open="${r.p.id}">Fiche</button></li>`).join('')}</ul>`;
         };
         form.addEventListener('submit', e => { e.preventDefault(); draw(); });
+        T.actions(host, {print: {attrs: 'data-age-print', run: () => T.printNode('À ton âge…', out)}});
         host.addEventListener('click', e => { if (e.target.closest('[data-age-mine]')) { const a = myAge(tr.byId.get(Number(form.elements.ref.value)) || st); if (a != null) form.elements.age.value = a; draw(); } const o = e.target.closest('[data-age-open]'); if (o) T.openPerson(Number(o.dataset.ageOpen)); });
         draw();
     }
@@ -84,7 +84,7 @@
         const top = [...counts].filter(([, n]) => n > 1).sort((a, b) => b[1] - a[1]).slice(0, 15), label = k => tr.people.find(p => firstOf(p) === k)?.first.split(/[\s,]+/)[0] || k;
         host.innerHTML = `<div class="h-tr-panel"><p class="h-tr-muted">Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>.</p>
             <div class="h-tr-big">${list.length} prénom${list.length > 1 ? 's' : ''} transmis par-dessus une génération</div></div>
-            ${byName.size ? `<ul class="h-tr-list">${[...byName.values()].sort((a, b) => b.length - a.length).map(l => `<li class="h-tr-item h-tr-print"><span class="h-tr-ic">👶</span><div class="h-tr-grow"><b>${T.esc(l[0].name)}</b> <small>(${l.length} fois)</small><br>${l.map(x => `<button type="button" class="h-tr-link" data-nm-open="${x.p.id}">${T.esc(T.name(x.p))}</button>${x.p.by ? ` (${x.p.by})` : ''}, comme ${T.esc(kin(x.gen, x.from.gender))} <button type="button" class="h-tr-link" data-nm-open="${x.from.id}">${T.esc(T.name(x.from))}</button>${x.from.by ? ` (${x.from.by})` : ''}`).join('<br>')}</div></li>`).join('')}</ul>` : '<p class="h-tr-muted">Aucun prénom ne saute de génération dans l’arbre pour l’instant.</p>'}
+            ${byName.size ? `<ul class="h-tr-list">${[...byName.values()].sort((a, b) => b.length - a.length).map(l => `<li class="h-tr-item h-tr-print"><span class="h-tr-ic">👶</span><div class="h-tr-grow"><b>${T.esc(l[0].name)}</b> <small>(${l.length} fois)</small><br>${l.map(x => `<button type="button" class="h-tr-link" data-nm-open="${x.p.id}">${T.esc(T.name(x.p))}</button>${x.p.by ? ` (${x.p.by})` : ''}, comme ${T.esc(kin(x.gen, x.from.gender))} <button type="button" class="h-tr-link" data-nm-open="${x.from.id}">${T.esc(T.name(x.from))}</button>${x.from.by ? ` (${x.from.by})` : ''}`).join('<br>')}</div></li>`).join('')}</ul>` : T.empty('Aucun prénom ne saute de génération dans l’arbre pour l’instant')}
             ${top.length ? `<h3>Les prénoms qui reviennent</h3><p>${top.map(([k, n]) => `<span class="h-tr-pill" style="margin:2px">${T.esc(label(k))} × ${n}</span>`).join(' ')}</p>` : ''}`;
         host.addEventListener('click', e => { const o = e.target.closest('[data-nm-open]'); if (o) T.openPerson(Number(o.dataset.nmOpen)); });
     }

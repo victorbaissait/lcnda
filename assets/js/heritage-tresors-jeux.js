@@ -82,7 +82,7 @@
         if (sel && !cur.file) fromFace(sel);
         ext.openDialog({eyebrow: '🃏 7 FAMILLES', title: `La photo de ${T.esc(T.name(p))}`, submitLabel: 'Garder', body: `<div class="h-tr-7ph">
             <div class="h-tr-7ph-list" role="listbox" aria-label="Les photos">${list.map((m, k) => `<button type="button" class="h-tr-7ph-t${sel === m ? ' is-on' : ''}" data-k="${k}" title="${T.esc(m.title || '')}${m.face ? ' (visage repéré)' : ''}"><img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt=""></button>`).join('')}<button type="button" class="h-tr-7ph-t${sel ? '' : ' is-on'}" data-k="-1" title="Sans photo">🚫</button></div>
-            ${list.length ? '' : '<p class="h-tr-muted">Aucune photo jointe à cette fiche, ni de visage encadré sur une photo : ajoute-en depuis sa fiche (Médias), puis reviens ici.</p>'}
+            ${list.length ? '' : T.empty('Aucune photo jointe à cette fiche, ni de visage encadré sur une photo', {hint: 'Ajoute-en depuis sa fiche (Médias), puis reviens ici.'})}
             <div class="h-tr-7ph-crop" data-crop tabindex="0" aria-label="Le cadrage : glisse pour déplacer, molette ou + et − pour zoomer"></div>
             <label>🔍 Zoom<input type="range" min="1" max="4" step="0.05" data-zoom></label><p class="h-tr-muted">Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome. ${list.some(m => m.face) ? 'Les photos marquées d’un visage se recadrent toutes seules sur lui.' : ''}</p></div>`,
             onOpen: d => { const box = d.querySelector('[data-crop]'), zoom = d.querySelector('[data-zoom]');
@@ -100,18 +100,18 @@
     async function renderSeven(host, T) {
         const tr = await T.tree(), prefs = sevenPrefs();
         const opt = (o, cur) => Object.entries(o).map(([k, l]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${T.esc(l)}</option>`).join('');
-        host.innerHTML = `<div class="h-tr-panel h-tr-noprint" data-7-opts><div class="h-tr-row"><label>Les familles<select name="mode"><option value="surname">par nom de famille</option><option value="branch">par branche (arrière-grands-parents)</option></select></label>
+        host.innerHTML = `<div class="h-tr-split"><div class="h-tr-panel h-tr-noprint" data-7-opts><div class="h-tr-row"><label>Les familles<select name="mode"><option value="surname">par nom de famille</option><option value="branch">par branche (arrière-grands-parents)</option></select></label>
                 <label>Le style<select name="style">${opt(SEVEN_STYLES, prefs.style)}</select></label><label>Les photos<select name="fx">${opt({sepia: 'Sépia', nb: 'Noir et blanc', couleur: 'Couleurs d’origine'}, prefs.fx)}</select></label>
                 <label>Le dos<select name="back">${opt({motif: 'Un dos à motif (à imprimer au verso)', aucun: 'Sans dos'}, prefs.back)}</select></label></div>
             <div class="h-tr-row">${[['dates', 'Les dates'], ['occ', 'Le métier'], ['place', 'Le lieu de naissance'], ['others', 'La liste de la famille']].map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="sh-${k}"${prefs.show[k] ? ' checked' : ''}> ${l}</label>`).join('')}</div>
             <div class="h-tr-row h-tr-7-cols" data-7-cols></div>
-            <div class="h-tr-row"><button class="button" data-7-print>🖨 Planches à imprimer</button><button type="button" class="button secondary" data-7-reset title="Les photos choisies, les couleurs et le style de départ">↺ Remettre comme au départ</button><span class="h-tr-muted">📷 sur une carte : choisir et recadrer sa photo.</span></div></div><div data-7-out></div>`;
+            <div class="h-tr-row"><button type="button" class="button secondary" data-7-reset title="Les photos choisies, les couleurs et le style de départ">↺ Remettre comme au départ</button><span class="h-tr-muted">📷 sur une carte : choisir et recadrer sa photo.</span></div></div><div class="h-tr-view" data-7-out></div></div>`;
         const out = host.querySelector('[data-7-out]'), o = host.querySelector('[data-7-opts]'), mode = o.querySelector('[name=mode]');
         const colorOf = (f, fi) => prefs.colors[f.name] || COLORS[fi % COLORS.length];
         let fams = [];
         const draw = () => { fams = buildFamilies(T, tr, mode.value);
             o.querySelector('[data-7-cols]').innerHTML = fams.map((f, fi) => `<label class="h-tr-7-col"><input type="color" value="${colorOf(f, fi)}" data-7-col="${T.esc(f.name)}"> ${T.esc(f.name)}</label>`).join('');
-            out.innerHTML = fams.length < 2 ? '<p class="h-tr-muted">Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ».</p>'
+            out.innerHTML = fams.length < 2 ? T.empty('Pas encore assez de familles', {icon: '🃏', hint: 'Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ».'})
                 : `<p class="h-tr-muted">${fams.length} famille${fams.length > 1 ? 's' : ''} de 6 cartes (${fams.length * 6} cartes).</p><style>${scopeCss(CARD_CSS, '.h-tr-7')}</style>${fams.map((f, fi) => `<h3 class="h-tr-7-fam">${T.esc(f.name)}</h3><div class="h-tr-7" style="display:flex;flex-wrap:wrap;gap:10px">${f.people.map((_, i) => cardHtml(T, tr, f, i, colorOf(f, fi), prefs, true)).join('')}${prefs.back === 'motif' ? backHtml(T.esc(f.name), colorOf(f, fi), prefs) : ''}</div>`).join('')}`;
             return fams; };
         o.addEventListener('change', e => { const t = e.target;
@@ -123,10 +123,10 @@
         o.querySelector('[data-7-reset]').addEventListener('click', () => { const before = JSON.stringify(prefs); Object.assign(prefs, {style: 'classique', fx: 'sepia', show: {dates: true, occ: true, place: true, others: true}, colors: {}, photos: {}, back: 'motif'}); sevenSave(prefs); renderSeven(host, T);
             A().undoToast?.('Jeu remis comme au départ.', {undo: () => { try { localStorage.setItem(SEVEN_KEY, before); } catch (_) {} renderSeven(host, T); }}); });
         draw();
-        o.querySelector('[data-7-print]').addEventListener('click', () => { draw(); if (fams.length < 2) return;
+        T.actions(host, {print: {attrs: 'data-7-print', title: 'Les planches de cartes (et leurs dos), avec la règle du jeu', run: () => { draw(); if (fams.length < 2) return;
             const cards = fams.flatMap((f, fi) => f.people.map((_, i) => [cardHtml(T, tr, f, i, colorOf(f, fi), prefs), backHtml(T.esc(f.name), colorOf(f, fi), prefs)])), sheets = [];
             for (let i = 0; i < cards.length; i += 9) { const page = cards.slice(i, i + 9); sheets.push(`<div class="sheet">${page.map(c => c[0]).join('')}</div>`); if (prefs.back === 'motif') sheets.push(`<div class="sheet backs">${page.map(c => c[1]).join('')}</div>`); }
-            printWindow('Jeu des 7 familles', CARD_CSS, `<div class="rules"><h2>🃏 Le jeu des ${fams.length} familles</h2><p>Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille ${T.esc(fams[0].name)}, je voudrais ${T.esc(ROLE(2, fams[0].people[2]).toLowerCase())} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné.</p><p>Les familles : ${fams.map(f => `<b>${T.esc(f.name)}</b> (${f.people.map(p => T.esc(p.first || T.name(p))).join(', ')})`).join(' ; ')}.</p>${prefs.back === 'motif' ? '<p><i>Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière.</i></p>' : ''}</div>${sheets.join('')}`); });
+            printWindow('Jeu des 7 familles', CARD_CSS, `<div class="rules"><h2>🃏 Le jeu des ${fams.length} familles</h2><p>Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille ${T.esc(fams[0].name)}, je voudrais ${T.esc(ROLE(2, fams[0].people[2]).toLowerCase())} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné.</p><p>Les familles : ${fams.map(f => `<b>${T.esc(f.name)}</b> (${f.people.map(p => T.esc(p.first || T.name(p))).join(', ')})`).join(' ; ')}.</p>${prefs.back === 'motif' ? '<p><i>Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière.</i></p>' : ''}</div>${sheets.join('')}`); }}});
     }
     F.push({key: 'sept-familles', group: 'jouer', icon: '🃏', title: 'Jeu des 7 familles', desc: 'Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper.', render: renderSeven});
     ext.tresorSeven = {buildFamilies, cardHtml, sevenPrefs, SEVEN_STYLES};
@@ -202,10 +202,10 @@
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="#fff"/><g fill="#fff" stroke="#000" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round">${s.join('')}</g></svg>`;
     }
     async function renderColoring(host, T) {
-        const tr = await T.tree(), st = T.start(tr); if (!st) { host.innerHTML = '<p class="h-tr-muted">L’arbre est vide.</p>'; return; }
+        const tr = await T.tree(), st = T.start(tr); if (!st) { host.innerHTML = T.empty('L’arbre est vide', {icon: '🌳', hint: 'Ajoute des personnes pour dessiner leur arbre.'}); return; }
         const KEY = 'lcnda-coloriage', saved = (() => { try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (_) { return {}; } })();
         const sel = (name, opts, cur) => `<select name="${name}">${Object.entries(opts).map(([k, l]) => `<option value="${k}"${String(cur) === k ? ' selected' : ''}>${T.esc(l)}</option>`).join('')}</select>`;
-        host.innerHTML = `<form class="h-tr-panel h-tr-noprint" data-co><div class="h-tr-row"><div style="min-width:260px"><span class="pk-lab">L’enfant (ou la personne) au pied de l’arbre</span>${T.personField('who', st.id)}</div>
+        host.innerHTML = `<div class="h-tr-split"><form class="h-tr-panel h-tr-noprint" data-co><div class="h-tr-row"><div style="min-width:260px"><span class="pk-lab">L’enfant (ou la personne) au pied de l’arbre</span>${T.personField('who', st.id)}</div>
                 <label>Générations${sel('g', {3: '3', 4: '4', 5: '5 (petites cases)'}, saved.g || 4)}</label></div>
             <div class="h-tr-co-designs" role="radiogroup" aria-label="Le dessin">${Object.entries(CO_DESIGNS).map(([k, l]) => `<label class="h-tr-co-d"><input type="radio" name="design" value="${k}"${(saved.design || 'arbre') === k ? ' checked' : ''}><span>${T.esc(l)}</span></label>`).join('')}</div>
             <div class="h-tr-row"><label>Les noms${sel('label', {prenom: 'Le prénom seul (petits)', nom: 'Prénom et nom', complet: 'Prénom, nom et année'}, saved.label || 'complet')}</label>
@@ -213,14 +213,14 @@
                 <label>Le trait${sel('stroke', {2: 'Fin (grands)', 3: 'Moyen', 5: 'Épais (petits, gros feutres)'}, saved.stroke || 3)}</label>
                 <label>Le cadre${sel('frame', {aucun: 'Sans', simple: 'Double trait', feuilles: 'Guirlande de feuilles', etoiles: 'Étoiles'}, saved.frame || 'aucun')}</label>
                 <label>Le titre<input name="title" value="${T.esc(saved.title || '')}" placeholder="L’arbre de …" maxlength="60"></label></div>
-            <div class="h-tr-row"><button class="button" type="submit">Dessiner</button><button type="button" class="button secondary" data-co-print>🖨 Imprimer</button><button type="button" class="button secondary" data-co-svg>⤓ SVG</button><button type="button" class="button secondary" data-co-png>⤓ PNG</button></div></form><div data-co-out style="max-width:720px"></div>`;
+            <div class="h-tr-row"><button class="button secondary" type="submit">Dessiner</button></div></form><div class="h-tr-view" data-co-out style="max-width:min(720px, 100%)"></div></div>`;
         const form = host.querySelector('[data-co]'), out = host.querySelector('[data-co-out]'); let svg = '';
         const opts = () => { const e = form.elements; return {design: e.design.value, label: e.label.value, font: e.font.value, stroke: e.stroke.value, frame: e.frame.value, title: e.title.value.trim(), g: e.g.value}; };
         const draw = () => { const o = opts(); try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (_) {} svg = coloringSvg(T, tr, Number(form.elements.who.value) || st.id, Number(o.g), o); out.innerHTML = svg.replace('<svg ', '<svg class="h-tr-canvas" style="width:100%;height:auto" '); };
         form.addEventListener('submit', e => { e.preventDefault(); draw(); }); form.addEventListener('change', draw);
-        host.querySelector('[data-co-print]').addEventListener('click', () => { draw(); printWindow('Arbre à colorier', '@page{size:A4;margin:8mm}.pg{background:#fff;width:190mm;margin:12px auto}.pg svg{width:100%;height:auto}', `<div class="pg">${svg}</div>`); });
-        host.querySelector('[data-co-svg]').addEventListener('click', () => { draw(); T.download(`arbre-a-colorier-${form.elements.design.value}.svg`, new Blob([svg], {type: 'image/svg+xml'})); });
-        host.querySelector('[data-co-png]').addEventListener('click', () => { draw(); const img = new Image(); img.onload = () => { const c = document.createElement('canvas'); c.width = 2200; c.height = 2800; c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); c.toBlob(b => b && T.download(`arbre-a-colorier-${form.elements.design.value}.png`, b), 'image/png'); }; img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
+        const fn = ext => `arbre-a-colorier-${form.elements.design.value}.${ext}`;
+        T.actions(host, {print: {attrs: 'data-co-print', run: () => { draw(); printWindow('Arbre à colorier', '@page{size:A4;margin:8mm}.pg{background:#fff;width:190mm;margin:12px auto}.pg svg{width:100%;height:auto}', `<div class="pg">${svg}</div>`); }},
+            exports: [{icon: '🖼', label: 'Image PNG', name: () => fn('png'), make: () => { draw(); return T.svgPng(svg, 2200); }}, {icon: '✒️', label: 'Dessin SVG', name: () => fn('svg'), make: () => { draw(); return svg; }}], media: true});
         draw();
     }
     F.push({key: 'coloriage', group: 'jouer', icon: '🖍️', title: 'Arbre à colorier', desc: 'Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace.', render: renderColoring});
@@ -255,15 +255,16 @@
         const tr = await T.tree(), st = T.start(tr);
         host.innerHTML = `<form class="h-tr-panel" data-qz-form><div class="h-tr-row"><label style="flex:1;min-width:280px">Les équipes (séparées par des virgules)<input name="teams" value="Les ${T.esc(st?.last || 'Martin')}, Les cousins"></label>
             <label>Questions<input type="number" name="n" min="3" max="60" value="12" style="width:5em"></label><label>Secondes pour répondre<input type="number" name="sec" min="0" max="120" value="20" style="width:5em"></label>
-            <button class="button" type="submit">📺 Lancer le quiz</button></div>
+</div>
             <p class="h-tr-muted">Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran.</p></form>
             <div data-qz-prev></div>`;
         const form = host.querySelector('[data-qz-form]');
+        T.actions(host, {primary: {label: '📺 Lancer le quiz', attrs: 'data-qz-go', run: () => form.requestSubmit()}});
         host.querySelector('[data-qz-prev]').innerHTML = `<h3>Un avant-goût</h3><ol>${quizQuestions(T, tr, 3, 7).map(q => `<li>${T.esc(q.q)}</li>`).join('')}</ol>`;
         form.addEventListener('submit', e => {
             e.preventDefault();
             const teams = form.elements.teams.value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 9), qs = quizQuestions(T, tr, Number(form.elements.n.value) || 12), sec = Math.max(0, Number(form.elements.sec.value) || 0);
-            if (!teams.length) return T.toast('Donne au moins une équipe.', 'error'); if (!qs.length) return T.toast('L’arbre est trop petit pour faire des questions.', 'error');
+            if (!teams.length) return T.fail(form.elements.teams, 'Donne au moins une équipe.'); if (!qs.length) return T.toast('L’arbre est trop petit pour faire des questions.', 'error');
             const score = teams.map(() => 0), ov = document.createElement('div'); ov.className = 'h-tr-veillee h-tr-quiz'; document.body.appendChild(ov);
             let i = 0, shown = false, left = sec, timer = null, alive = true, given = false;
             const L = 'ABCDEFGH', close = () => { alive = false; clearInterval(timer); document.removeEventListener('keydown', key, true); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); ov.remove(); };

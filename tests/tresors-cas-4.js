@@ -6,7 +6,7 @@ module.exports = async (t, {page, open, body}, assert) => {
     const T = fn => page.evaluate(`(() => { const {T} = window.LCNDA_EXT.tresors; return T.tree().then(tr => (${fn})(T, tr)); })()`);
     await t('🗝️ chasse au trésor : 3 cachettes, 3 énigmes ; la bonne réponse mène à la cachette suivante, les autres à des fausses pistes', async () => {
         await open('chasse'); await page.fill('[data-hu-form] [name="spots"]', 'sous le paillasson\nderrière l’horloge\ndans le grenier'); await page.fill('[data-hu-form] [name="treasure"]', 'le gâteau');
-        await page.click('[data-hu-form] button[type="submit"]'); const w = await printFrame(page); await w.waitForSelector('.cd');
+        await page.click('[data-tr-page] .page-header [data-hu-go]'); const w = await printFrame(page); await w.waitForSelector('.cd');
         assert.equal(await w.$$eval('.cd', l => l.length), 3); const html = await w.content();
         assert.match(html, /Carte 2 <small>\(à cacher : sous le paillasson\)/); assert.match(html, /cherchez <u>derrière l’horloge<\/u>/); assert.match(html, /le gâteau/);
         const cards = await w.$$eval('.cd', l => l.map(c => c.textContent)); assert.ok(cards.every(c => (c.match(/cherchez/g) || []).length >= 3), 'chaque énigme a au moins trois pistes'); await w.close();

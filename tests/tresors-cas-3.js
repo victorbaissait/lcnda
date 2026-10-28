@@ -1,6 +1,6 @@
 'use strict';
 /** Les essais du lot 3 des Trésors (ciel de naissance, bougie, ambiance sonore, arbre qui pousse, musique de l'arbre) — appelés par tests/test-tresors.js */
-module.exports = async (t, {page, open, body}, assert) => {
+module.exports = async (t, {page, open, body, pick: exportPick}, assert) => {
     const T = fn => page.evaluate(`(() => { const {T} = window.LCNDA_EXT.tresors; return T.tree().then(tr => (${fn})(T, tr)); })()`);
     await t('🌌 ciel : les calculs (éclipse du 8 avril 2024 = nouvelle lune, pleine lune du 25 janvier 2024, l’étoile polaire à la hauteur de la latitude)', async () => {
         const r = await page.evaluate(() => { const S = window.LCNDA_EXT.tresorSky; const a = S.sky({date: '2024-04-08', hour: 12, lat: 48.857, lng: 2.352}), b = S.sky({date: '2024-01-25', hour: 22, lat: 48.857, lng: 2.352});
@@ -12,7 +12,7 @@ module.exports = async (t, {page, open, body}, assert) => {
         await page.waitForTimeout(200); const b = await body(); assert.match(b, /lune|croissant|quartier/); assert.match(b, /coucher du soleil vers 1[78] h/); assert.match(b, /étoiles brillantes au-dessus de l’horizon/);
         const px = await page.$eval('[data-sk-c]', c => { const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let bright = 0; for (let i = 0; i < d.length; i += 4) if (d[i] > 200 && d[i + 1] > 200 && d[i + 2] > 200) bright++; return bright; });
         assert.ok(px > 300, `${px} points clairs (étoiles, texte)`);
-        const dl = page.waitForEvent('download'); await page.click('[data-sk-png]'); assert.match((await dl).suggestedFilename(), /ciel-de-naissance-jean\.png/);
+        const dl = page.waitForEvent('download'); await exportPick('Image PNG'); assert.match((await dl).suggestedFilename(), /ciel-de-naissance-jean\.png/);
     });
     await t('🕯️ bougie : allumée pour Marie DURAND, elle brûle ; le registre et le bloc de la fiche la montrent', async () => {
         await open('bougie'); await page.click('[data-cd-new]'); await page.waitForSelector('dialog[open] [name="msg"]');
@@ -28,7 +28,7 @@ module.exports = async (t, {page, open, body}, assert) => {
         await page.selectOption('[data-sk] [name=shape]', 'arche'); await page.selectOption('[data-sk] [name=th]', 'encre'); await page.check('[data-sk] [name=milky]'); await page.check('[data-sk] [name=grid]'); await page.check('[data-sk] [name=frame]');
         await page.click('[data-sk] details summary'); await page.fill('[data-sk] [name=tt]', 'Notre Léa');
         const corner = await page.$eval('[data-sk-c]', c => Array.from(c.getContext('2d').getImageData(5, 5, 1, 1).data).join()); assert.equal(corner, '255,255,255,255', 'le papier blanc du style encre');
-        await page.click('[data-sk-layout]'); await page.waitForSelector('.ly-item.ly-frame', {timeout: 10000});
+        await exportPick('mise en page'); await page.waitForSelector('.ly-item.ly-frame', {timeout: 10000});
         await page.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); await page.keyboard.press('Escape');
         await page.selectOption('[data-sk] [name=fmt]', 'affiche');
     });
@@ -58,7 +58,7 @@ module.exports = async (t, {page, open, body}, assert) => {
     await t('🎼 musique de l’arbre : une note par naissance, des accords de mariage, et le fichier WAV', async () => {
         await open('musique'); const s = await T('(T, tr) => { const S = window.LCNDA_EXT.tresorMusic.score(T, tr, tr.people.map(p => p.id)); return {births: S.notes.filter(n => !n.death && !n.wed).length, weds: S.notes.filter(n => n.wed).length, len: S.length}; }');
         assert.equal(s.births, 18); assert.equal(s.weds, 15); assert.ok(s.len > 10);
-        const dl = page.waitForEvent('download', {timeout: 60000}); await page.click('[data-mu-wav]'); const d = await dl; assert.equal(d.suggestedFilename(), 'la-musique-de-l-arbre.wav');
+        const dl = page.waitForEvent('download', {timeout: 60000}); await exportPick('Fichier son (WAV)'); const d = await dl; assert.equal(d.suggestedFilename(), 'la-musique-de-l-arbre.wav');
         assert.ok(await page.evaluate(() => window.LCNDA_EXT.tresorMusic.last) > 100000);
     });
     await t('🌌 le bloc « ciel de sa naissance » sur la fiche', async () => {

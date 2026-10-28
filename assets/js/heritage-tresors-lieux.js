@@ -81,10 +81,10 @@
     const T_name = p => [p.first, p.last].filter(Boolean).join(' ');
     async function renderFilm(host, T) {
         const tr = await T.tree(), sc = filmScene(T, tr);
-        if (!sc) { host.innerHTML = '<p class="h-tr-muted">Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film.</p>'; return; }
+        if (!sc) { host.innerHTML = T.empty('Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film'); return; }
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>Durée du film<select data-fm-d><option value="20">20 s</option><option value="40" selected>40 s</option><option value="60">1 min</option><option value="120">2 min</option></select></label>
             <label>Fond<select data-fm-bg>${bgOptions('light')}<option value="grid">Sans carte</option></select></label>
-            <button type="button" class="button" data-fm-play>▶ Jouer</button><button type="button" class="button secondary" data-fm-rec>⏺ Enregistrer la vidéo</button><span class="h-tr-muted" data-fm-st>${sc.ts.length} parcours, de ${sc.y0 + 1} à ${sc.y1}</span></div>
+            <button type="button" class="button secondary" data-fm-play>▶ Jouer</button><span class="h-tr-muted" data-fm-st>${sc.ts.length} parcours, de ${sc.y0 + 1} à ${sc.y1}</span></div>
             <canvas class="h-tr-canvas" width="${sc.W}" height="${sc.H}" data-fm-c></canvas><input type="range" data-fm-y min="${sc.y0}" max="${sc.y1}" step="0.1" value="${sc.y0}" style="width:100%">`;
         const cv = host.querySelector('[data-fm-c]'), ctx = cv.getContext('2d'), range = host.querySelector('[data-fm-y]'), stEl = host.querySelector('[data-fm-st]'), title = `famille ${T.start(tr)?.last || ''}`.trim();
         let bgc = null, bgKey = '', raf = 0;
@@ -96,12 +96,12 @@
         range.addEventListener('input', () => { cancelAnimationFrame(raf); frame(Number(range.value)); });
         host.querySelector('[data-fm-bg]').addEventListener('change', async () => { await bg(); frame(Number(range.value)); });
         host.querySelector('[data-fm-play]').addEventListener('click', async () => { await bg(); play(Number(host.querySelector('[data-fm-d]').value)); });
-        host.querySelector('[data-fm-rec]').addEventListener('click', async () => {
-            if (!window.MediaRecorder || !cv.captureStream) return T.toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error');
-            await bg(); const blob = await record(Number(host.querySelector('[data-fm-d]').value)); if (!blob) return;
-            T.download('film-des-migrations.webm', blob);
-            if (await A().confirmBox('La vidéo est téléchargée. La garder aussi dans les médias de l’application ?', {title: 'Garder la vidéo ?', okLabel: 'Garder'})) { try { await T.upload(blob, 'video', `Le film des migrations — ${title}`, 'film-des-migrations.webm'); T.toast('Vidéo gardée dans les médias.', 'success'); } catch (err) { T.toast(err.message, 'error'); } }
-        });
+        /** le film en vidéo (WebM) : il se joue une fois pendant l'enregistrement */
+        const video = async () => { if (!window.MediaRecorder || !cv.captureStream) { T.toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error'); return null; }
+            await bg(); return record(Number(host.querySelector('[data-fm-d]').value)); };
+        T.actions(host, {exports: [{icon: '🎬', label: 'La vidéo (WebM)', help: 'Le film se joue une fois pendant l’enregistrement', name: 'film-des-migrations.webm', make: video},
+            {icon: '🖼', label: 'Cette image (PNG)', name: 'film-des-migrations.png', make: () => T.canvasPng(cv), media: false}],
+            media: {title: `Le film des migrations — ${title}`, kind: 'video', help: 'La vidéo, enregistrée pendant que le film se joue', make: async () => { const b = await video(); return b ? {blob: b, name: 'film-des-migrations.webm'} : null; }}});
         /** enregistre le film (secondes) → une vidéo WebM */
         const record = secs => new Promise(res => {
             const mime = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(m => MediaRecorder.isTypeSupported(m)) || '', chunks = [];
@@ -120,7 +120,7 @@
         const tr = await T.tree(), uses = new Map();
         tr.events.forEach(e => { if (geo(tr, e.place)) uses.set(e.place, (uses.get(e.place) || 0) + 1); });
         const pls = [...uses].sort((a, b) => b[1] - a[1]).map(([id, n]) => ({...geo(tr, id), n}));
-        if (!pls.length) { host.innerHTML = '<p class="h-tr-muted">Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude).</p>'; return; }
+        if (!pls.length) { host.innerHTML = T.empty('Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude)'); return; }
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>Le lieu<select data-cu-p>${pls.map(p => `<option value="${p.id}">${T.esc(p.name)} (${p.n})</option>`).join('')}</select></label>
             <label>Hier<select data-cu-old>${OLD.map(([k, l]) => `<option value="${k}">${T.esc(l)}</option>`).join('')}</select></label><label>Aujourd’hui<select data-cu-now>${bgOptions('color')}</select></label><label>Zoom<input type="range" data-cu-z min="10" max="16" value="14"></label>
             <span class="h-tr-muted">Fais glisser le rideau (ou les flèches du clavier).</span></div>
@@ -164,16 +164,17 @@
         const tr = await T.tree(), st = T.start(tr);
         host.innerHTML = `<form class="h-tr-panel h-tr-row h-tr-noprint" data-wk><div style="min-width:260px"><span class="pk-lab">La promenade de</span>${T.personField('who', tr.people.find(p => p.bplace && p.dplace && !p.living)?.id || st?.id)}</div>
             <label>Le parcours<select name="mode"><option value="life">les lieux de sa vie</option><option value="anc">les villages de ses ancêtres</option></select></label>
-            <button type="button" class="button" data-wk-all>🔊 Tout le guide</button><button type="button" class="button secondary" data-wk-gps>📍 Me guider en marchant</button><button type="button" class="button secondary" data-wk-stop>⏹ Silence</button><button type="button" class="button secondary" onclick="print()">🖨 Imprimer</button></form>
+            <button type="button" class="button" data-wk-all>🔊 Tout le guide</button><button type="button" class="button secondary" data-wk-gps>📍 Me guider en marchant</button><button type="button" class="button secondary" data-wk-stop>⏹ Silence</button></form>
             <p class="h-tr-muted h-tr-noprint" data-wk-gps-st></p><ol class="h-tr-walk" data-wk-list></ol>`;
         const form = host.querySelector('[data-wk]'), list = host.querySelector('[data-wk-list]'), gpsSt = host.querySelector('[data-wk-gps-st]');
         let stops = [], watch = null, done = new Set();
         const draw = () => { stops = walkStops(T, tr, Number(form.elements.who.value), form.elements.mode.value); done = new Set();
             const total = stops.reduce((n, s) => n + s.km, 0);
             list.innerHTML = stops.length ? stops.map((s, k) => `<li class="h-tr-panel h-tr-print" data-wk-i="${k}"><div class="h-tr-row" style="justify-content:space-between"><b>📍 ${T.esc(s.name)}</b><small class="h-tr-muted">${k ? `${s.km < 10 ? s.km.toFixed(1) : Math.round(s.km)} km depuis l’étape d’avant` : 'Départ'}</small></div><p>${T.esc(s.text)}</p>
-                <p class="h-tr-noprint"><button type="button" class="h-tr-link" data-wk-say="${k}">🔊 Écouter</button> · <a href="https://www.openstreetmap.org/directions?route=%3B${s.lat}%2C${s.lng}" target="_blank" rel="noopener">🧭 Itinéraire</a> · <a href="https://www.openstreetmap.org/?mlat=${s.lat}&mlon=${s.lng}#map=15/${s.lat}/${s.lng}" target="_blank" rel="noopener">Carte</a></p></li>`).join('') + `<p class="h-tr-muted">${stops.length} étape${stops.length > 1 ? 's' : ''} · ${Math.round(total)} km en tout (à vol d’oiseau)</p>` : '<p class="h-tr-muted">Aucun lieu placé sur la carte pour cette personne.</p>'; };
+                <p class="h-tr-noprint"><button type="button" class="h-tr-link" data-wk-say="${k}">🔊 Écouter</button> · <a href="https://www.openstreetmap.org/directions?route=%3B${s.lat}%2C${s.lng}" target="_blank" rel="noopener">🧭 Itinéraire</a> · <a href="https://www.openstreetmap.org/?mlat=${s.lat}&mlon=${s.lng}#map=15/${s.lat}/${s.lng}" target="_blank" rel="noopener">Carte</a></p></li>`).join('') + `<p class="h-tr-muted">${stops.length} étape${stops.length > 1 ? 's' : ''} · ${Math.round(total)} km en tout (à vol d’oiseau)</p>` : T.empty('Aucun lieu placé sur la carte pour cette personne'); };
         const sayStop = async k => { const s = stops[k]; if (!s) return; list.querySelectorAll('.is-playing').forEach(x => x.classList.remove('is-playing')); list.querySelector(`[data-wk-i="${k}"]`)?.classList.add('is-playing'); await T.say(`${s.name}. ${s.text}`); list.querySelector(`[data-wk-i="${k}"]`)?.classList.remove('is-playing'); };
         form.addEventListener('change', draw);
+        T.actions(host, {print: {attrs: 'data-wk-print', title: 'Le guide de la promenade, étape par étape', run: () => T.printNode('La promenade guidée', list, '.h-tr-walk li{margin:0 0 5mm}')}});
         host.addEventListener('click', async e => {
             const s = e.target.closest('[data-wk-say]'); if (s) { T.hush(); sayStop(Number(s.dataset.wkSay)); return; }
             if (e.target.closest('[data-wk-stop]')) { T.hush(); if (watch != null) { navigator.geolocation.clearWatch(watch); watch = null; gpsSt.textContent = ''; } return; }

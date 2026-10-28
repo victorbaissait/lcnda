@@ -1500,6 +1500,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
     .sidebar-toggle { display: none; }
     .sidebar-collapsed .sidebar { display: none; }
     .app-shell.no-side .sidebar { display: none; }
+    .app-shell.no-side { grid-template-columns: 1fr; } /* sans colonne de gauche (✨ Trésors…) : la page prend toute la largeur */
     .sidebar-collapsed .sidebar-reopen { display: block; top: 128px; }
     .person-hero { grid-template-columns: auto 1fr; }
     .status-badge { grid-column: 1 / -1; justify-self: start; }

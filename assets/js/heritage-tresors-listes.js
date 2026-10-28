@@ -30,6 +30,8 @@
     const personLink = (tr, id, fallback = '') => { const p = id && tr.byId.get(Number(id)); return p ? `<button type="button" class="table-link" data-h-person="${p.id}">${esc(T().name(p))}</button>` : esc(fallback); };
     const who = (tr, v) => (/^\d+$/.test(String(v || '')) ? T().name(tr.byId.get(Number(v))) : String(v || '').replace(/^txt:/, '')) || '';
     const dateFr = iso => (iso && /^\d{4}-\d{2}-\d{2}/.test(iso) ? T().dateFr(iso.slice(0, 10)) : '');
+    /** K4 : une date de création (« hier à 10 h 22 », « 17 oct. 2026 », la date complète au survol) */
+    const when = d => (window.LCNDA_UI?.when ? window.LCNDA_UI.when(d) : esc(dateFr(d)));
     const openBtn = key => `<button type="button" class="button small secondary" data-trl-open="${esc(key)}">Ouvrir</button>`;
     const filters = {letters: 'tous', candles: 'allumees', shares: 'encours', stamps: 'tous'};
     /** une page de liste : dessin, filtres, « Ouvrir » vers les Trésors */
@@ -59,7 +61,7 @@
         const draw = () => {
             const f = filters.candles, rows = list.filter(c => f === 'toutes' || lit(c));
             mount(r.ws, `<section class="page collection-page h-trl">${r.head}${filterBar('candles', f, [['allumees', '🕯️ Allumées', list.filter(lit).length], ['toutes', 'Tout le registre', list.length]])}
-                ${rows.length ? table(['Pour', 'Allumée le', 'De la part de', 'Le mot', 'État'], rows.map(c => `<tr><td>${personLink(tr, c.person_id, c.title)}</td><td data-sort-value="${esc(c.created_at)}">${esc(dateFr(c.created_at))}</td><td>${esc(c.data?.from || '')}</td><td>${esc(c.body || '')}</td><td>${lit(c) ? '🕯️ allumée' : 'éteinte'}</td><td>${openBtn('bougie')}</td></tr>`), 'bougie')
+                ${rows.length ? table(['Pour', 'Allumée le', 'De la part de', 'Le mot', 'État'], rows.map(c => `<tr><td>${personLink(tr, c.person_id, c.title)}</td><td data-sort-value="${esc(c.created_at)}">${when(c.created_at)}</td><td>${esc(c.data?.from || '')}</td><td>${esc(c.body || '')}</td><td>${lit(c) ? '🕯️ allumée' : 'éteinte'}</td><td>${openBtn('bougie')}</td></tr>`), 'bougie')
                     : A().emptyState({icon: '🕯️', text: f === 'toutes' ? 'Aucune bougie au registre' : 'Aucune bougie allumée en ce moment', hint: 'Allume-en une dans ✨ Trésors → Allumer une bougie.'})}</section>`);
         };
         r.ws.onclick = e => clicks(e, r.ws, '.h-trl', draw); draw();
@@ -73,7 +75,7 @@
         const draw = () => {
             const f = filters.shares, rows = list.filter(s => f === 'tous' || (f === 'encours' ? live(s) : !live(s)));
             mount(r.ws, `<section class="page collection-page h-trl">${r.head}${filterBar('shares', f, [['encours', 'En cours', list.filter(live).length], ['expires', 'Expirés', list.filter(s => !live(s)).length], ['tous', 'Tous', list.length]])}
-                ${rows.length ? table(['Branche', 'Partagée le', 'Jusqu’au', 'Personnes', 'Mot de passe', 'État'], rows.map(s => `<tr><td>${s.person_id ? personLink(tr, s.person_id, s.title) : esc(s.title)}</td><td data-sort-value="${esc(s.created_at)}">${esc(dateFr(s.created_at))}</td><td data-sort-value="${esc(s.open_at)}">${esc(dateFr(s.open_at))}</td><td data-sort-value="${Number(s.data?.people) || 0}">${Number(s.data?.people) || ''}</td><td>${s.data?.locked ? '🔒 oui' : '— non'}</td><td>${live(s) ? '✅ en cours' : '⌛ expiré'}</td><td>${openBtn('partage')}</td></tr>`), 'partage')
+                ${rows.length ? table(['Branche', 'Partagée le', 'Jusqu’au', 'Personnes', 'Mot de passe', 'État'], rows.map(s => `<tr><td>${s.person_id ? personLink(tr, s.person_id, s.title) : esc(s.title)}</td><td data-sort-value="${esc(s.created_at)}">${when(s.created_at)}</td><td data-sort-value="${esc(s.open_at)}">${esc(dateFr(s.open_at))}</td><td data-sort-value="${Number(s.data?.people) || 0}">${Number(s.data?.people) || ''}</td><td>${s.data?.locked ? '🔒 oui' : '— non'}</td><td>${live(s) ? '✅ en cours' : '⌛ expiré'}</td><td>${openBtn('partage')}</td></tr>`), 'partage')
                     : A().emptyState({icon: '🔗', text: 'Aucun partage ici', hint: 'Partage une branche dans ✨ Trésors → Partager une branche (pour un temps).'})}</section>`);
         };
         r.ws.onclick = e => clicks(e, r.ws, '.h-trl', draw); draw();

@@ -46,10 +46,10 @@
             onSubmit: async form => {
                 const v = k => form.elements[k]?.value || '', when = v('when');
                 let open = v('open_at');
-                if (when === 'age') { const p = tr.byId.get(Number(v('for_person'))); if (!p?.by) { T.toast('Choisis une personne dont on connaît la naissance.', 'error'); return false; } open = ageDate(p, Number(v('age')) || 18); }
-                if (!open) { T.toast('Choisis le jour où la lettre s’ouvrira.', 'error'); return false; }
-                if (!it && open <= today()) { T.toast('La date doit être dans le futur (sinon ce n’est plus une surprise).', 'error'); return false; }
-                if (!it && !v('body').trim() && !v('media_ids')) { T.toast('Écris quelque chose ou joins un son, une vidéo ou une photo.', 'error'); return false; }
+                if (when === 'age') { const p = tr.byId.get(Number(v('for_person'))); if (!p?.by) return T.fail(form.elements.for_person, 'Choisis une personne dont on connaît la naissance.'); open = ageDate(p, Number(v('age')) || 18); }
+                if (!open) return T.fail(form.elements.open_at, 'Choisis le jour où la lettre s’ouvrira.');
+                if (!it && open <= today()) return T.fail(when === 'age' ? form.elements.age : form.elements.open_at, 'La date doit être dans le futur (sinon ce n’est plus une surprise).');
+                if (!it && !v('body').trim() && !v('media_ids')) return T.fail(form.elements.body, 'Écris quelque chose ou joins un son, une vidéo ou une photo.');
                 const from = v('from'), media = v('media_ids') ? v('media_ids').split(',').map(Number).filter(Boolean) : [];
                 const pid = /^\d+$/.test(from) ? Number(from) : (when === 'age' ? Number(v('for_person')) : 0);
                 await T.save({id: it?.id, kind: 'letter', person_id: pid || null, title: v('title') || (when === 'age' ? `Pour ses ${v('age')} ans` : 'Lettre'), body: v('body'), open_at: open,
@@ -62,15 +62,15 @@
         const draw = async () => {
             const list = await T.items('letter'), who = v => (/^\d+$/.test(String(v || '')) ? T.name(tr.byId.get(Number(v))) : String(v || '').replace(/^txt:/, '')) || 'Quelqu’un';
             const open = list.filter(x => !x.sealed), sealed = list.filter(x => x.sealed).sort((a, b) => a.open_at.localeCompare(b.open_at));
-            host.innerHTML = `<div class="h-tr-row h-tr-noprint"><button type="button" class="button" data-l-new>✉️ Écrire une lettre</button><span class="h-tr-muted">${sealed.length} scellée${sealed.length > 1 ? 's' : ''} · ${open.length} ouverte${open.length > 1 ? 's' : ''}</span></div>
+            host.innerHTML = `<div class="h-tr-row h-tr-noprint"><span class="h-tr-muted">${sealed.length} scellée${sealed.length > 1 ? 's' : ''} · ${open.length} ouverte${open.length > 1 ? 's' : ''}</span></div>
                 ${sealed.length ? `<h3>🔒 En attente</h3><div class="h-tr-cards">${sealed.map(x => `<div class="h-tr-sealed"><span style="font-size:34px">✉️</span><b>${T.esc(x.title)}</b><small>De ${T.esc(who(x.data?.from))}${x.data?.to ? ` pour ${T.esc(x.data.to)}` : ''}</small><span class="h-tr-pill">s’ouvre le ${T.esc(T.dateFr(x.open_at))} · ${humanWait(daysTo(x.open_at))}</span><span><button type="button" class="h-tr-link" data-l-edit="${x.id}">Modifier</button> · <button type="button" class="h-tr-link" data-l-del="${x.id}">Supprimer</button></span></div>`).join('')}</div>` : ''}
-                <h3>📬 Ouvertes</h3>${open.length ? (await Promise.all(open.map(async x => `<article class="h-tr-panel h-tr-print"><div class="h-tr-row" style="justify-content:space-between"><div><b>${T.esc(x.title)}</b><br><small class="h-tr-muted">De ${T.esc(who(x.data?.from))}${x.data?.to ? ` · pour ${T.esc(x.data.to)}` : ''} · écrite le ${T.esc(T.dateFr(String(x.created_at).slice(0, 10)))}${x.open_at ? ` · ouverte le ${T.esc(T.dateFr(x.open_at))}` : ''}</small></div><span class="h-tr-noprint"><button type="button" class="h-tr-link" data-l-edit="${x.id}">Modifier</button> · <button type="button" class="h-tr-link" data-l-del="${x.id}">Supprimer</button></span></div>${x.body ? `<div class="h-tr-letter">${T.esc(x.body)}</div>` : ''}${await mediaHtml(T, x.data?.media)}</article>`))).join('') : '<p class="h-tr-muted">Aucune lettre ouverte pour l’instant.</p>'}`;
+                <h3>📬 Ouvertes</h3>${open.length ? (await Promise.all(open.map(async x => `<article class="h-tr-panel h-tr-print"><div class="h-tr-row" style="justify-content:space-between"><div><b>${T.esc(x.title)}</b><br><small class="h-tr-muted">De ${T.esc(who(x.data?.from))}${x.data?.to ? ` · pour ${T.esc(x.data.to)}` : ''} · ${T.when(x.created_at, {label: 'écrite'})}${x.open_at ? ` · ouverte le ${T.esc(T.dateFr(x.open_at))}` : ''}</small></div><span class="h-tr-noprint"><button type="button" class="h-tr-link" data-l-edit="${x.id}">Modifier</button> · <button type="button" class="h-tr-link" data-l-del="${x.id}">Supprimer</button></span></div>${x.body ? `<div class="h-tr-letter">${T.esc(x.body)}</div>` : ''}${await mediaHtml(T, x.data?.media)}</article>`))).join('') : T.empty('Aucune lettre ouverte pour l’instant', {icon: '📬', hint: 'Une lettre scellée s’ouvre toute seule le jour venu.'})}`;
         };
         host.addEventListener('click', async e => {
-            if (e.target.closest('[data-l-new]')) return editLetter(T, null, draw);
             const ed = e.target.closest('[data-l-edit]'); if (ed) { const it = (await T.items('letter')).find(x => x.id === Number(ed.dataset.lEdit)); return editLetter(T, it, draw); }
             const del = e.target.closest('[data-l-del]'); if (del && await window.LCNDA_APP.confirmBox('La lettre sera effacée pour de bon.', {title: 'Supprimer la lettre ?', okLabel: 'Supprimer', danger: true})) { await T.remove(Number(del.dataset.lDel)); draw(); }
         });
+        T.actions(host, {primary: {label: '✉️ Écrire une lettre', attrs: 'data-l-new', run: () => editLetter(T, null, draw)}});
         await draw();
     }
     F.push({key: 'lettres', group: 'memoire', icon: '✉️', title: 'Lettres aux descendants', desc: 'Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ».', render: renderLetters});
@@ -95,7 +95,7 @@
             body: `<div class="form-grid">${cfg.fields.map(f => fieldHtml(T, f, it)).join('')}</div>`,
             onSubmit: async form => {
                 const v = k => form.elements[k]?.value ?? '', data = {...(it?.data || {})};
-                if (!v('title').trim()) { T.toast(cfg.needTitle || 'Donne-lui un titre.', 'error'); return false; }
+                if (!v('title').trim()) return T.fail(form.elements.title, cfg.needTitle || 'Donne-lui un titre.');
                 cfg.fields.forEach(f => { if (f.k !== 'title' && f.k !== 'body') data[f.k] = f.type === 'media' ? (v(f.k) ? v(f.k).split(',').map(Number).filter(Boolean) : []) : v(f.k); });
                 const pv = String(data[cfg.personKey || 'from'] || '');
                 await store(T, cfg).save({id: it?.id, kind: cfg.kind, person_id: /^\d+$/.test(pv) ? Number(pv) : null, title: v('title').trim(), body: v('body'), data});
@@ -104,27 +104,26 @@
     }
     async function renderCollection(host, T, cfg) {
         const tr = await T.tree(); let q = '', filt = '', all = [];
-        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><button type="button" class="button" data-c-new>${cfg.icon} ${T.esc(cfg.newLabel)}</button>
-            <label>Chercher<input type="search" data-c-q placeholder="un mot, un nom…"></label>
+        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>Chercher<input type="search" data-c-q placeholder="un mot, un nom…"></label>
             ${cfg.filter ? `<label>${T.esc(cfg.filter.label)}<select data-c-f><option value="">Tous</option>${cfg.filter.options.map(([v, l]) => `<option value="${v}">${T.esc(l)}</option>`).join('')}</select></label>` : ''}
-            ${cfg.book ? `<button type="button" class="button secondary" data-c-book>📖 ${T.esc(cfg.book.label)}</button>` : ''}${cfg.mem ? '<button type="button" class="button secondary" data-c-memlist title="Rangé avec les expressions, surnoms, traditions et témoignages">📋 Voir dans Listes › Mémoire familiale</button>' : ''}<span class="h-tr-muted" data-c-n></span></div>
+            <span class="h-tr-muted" data-c-n></span></div>
             ${cfg.intro ? `<p class="h-tr-muted h-tr-noprint">${cfg.intro}</p>` : ''}<div class="h-tr-body" data-c-list></div>`;
         const list = host.querySelector('[data-c-list]');
         const paint = async () => {
             const vis = all.filter(x => (!filt || x.data?.[cfg.filter.key] === filt) && (!q || `${x.title} ${x.body} ${Object.values(x.data || {}).join(' ')} ${who(T, tr, x.data?.[cfg.personKey || 'from'])}`.toLowerCase().includes(q)));
             host.querySelector('[data-c-n]').textContent = `${vis.length} sur ${all.length}`;
-            list.innerHTML = vis.length ? (await Promise.all(vis.map(async x => `<article class="h-tr-panel h-tr-print" data-c-id="${x.id}">${cfg.card(T, tr, x)}${await mediaHtml(T, x.data?.media)}<p class="h-tr-noprint" style="margin:8px 0 0"><button type="button" class="h-tr-link" data-c-edit="${x.id}">Modifier</button> · <button type="button" class="h-tr-link" data-c-del="${x.id}">Supprimer</button></p></article>`))).join('') : `<p class="h-tr-muted">${cfg.empty}</p>`;
+            list.innerHTML = vis.length ? (await Promise.all(vis.map(async x => `<article class="h-tr-panel h-tr-print" data-c-id="${x.id}">${cfg.card(T, tr, x)}${await mediaHtml(T, x.data?.media)}<p class="h-tr-noprint" style="margin:8px 0 0"><button type="button" class="h-tr-link" data-c-edit="${x.id}">Modifier</button> · <button type="button" class="h-tr-link" data-c-del="${x.id}">Supprimer</button></p></article>`))).join('') : T.empty(all.length ? 'Rien ne correspond à ta recherche' : cfg.empty, {icon: cfg.icon});
         };
         const load = async () => { all = await store(T, cfg).items(); await paint(); };
         host.querySelector('[data-c-q]').addEventListener('input', e => { q = e.target.value.trim().toLowerCase(); paint(); });
         host.querySelector('[data-c-f]')?.addEventListener('change', e => { filt = e.target.value; paint(); });
         host.addEventListener('click', async e => {
-            if (e.target.closest('[data-c-new]')) return editItem(T, cfg, null, load);
-            if (e.target.closest('[data-c-memlist]')) { A().state.listType = 'family_memories'; return A().setModule('listes'); }
-            if (e.target.closest('[data-c-book]')) { if (!all.length) return T.toast('Rien à mettre dans le livre pour l’instant.'); try { await cfg.book.print(T, tr, all); } catch (err) { T.toast(err.message, 'error'); } return; }
             const ed = e.target.closest('[data-c-edit]'); if (ed) return editItem(T, cfg, all.find(x => String(x.id) === ed.dataset.cEdit), load);
             const del = e.target.closest('[data-c-del]'); if (del && await A().confirmBox('Cet élément sera effacé pour de bon.', {title: 'Supprimer ?', okLabel: 'Supprimer', danger: true})) { await store(T, cfg).remove(cfg.mem ? del.dataset.cDel : Number(del.dataset.cDel)); load(); }
         });
+        T.actions(host, {primary: {label: `＋ ${cfg.newLabel}`, attrs: 'data-c-new', run: () => editItem(T, cfg, null, load)},
+            print: cfg.book ? {label: cfg.book.label, attrs: 'data-c-book', title: `${cfg.book.label} : couverture, sommaire, une page chacun`, run: async () => { if (!all.length) return T.toast('Rien à mettre dans le livre pour l’instant.'); await cfg.book.print(T, tr, all); }} : null,
+            more: cfg.mem ? [{label: '📋 Voir dans Listes › Mémoire familiale', attrs: 'data-c-memlist', title: 'Rangé avec les expressions, surnoms, traditions et témoignages', run: () => { A().state.listType = 'family_memories'; A().setModule('listes'); }}] : []});
         await load();
     }
     /** un livre à imprimer (recettes, chansons) : couverture, sommaire par rubrique, une page par élément */
@@ -197,27 +196,28 @@
             <div class="h-tr-row"><div style="min-width:260px"><span class="pk-lab">La personne interrogée</span>${T.personField('who', null)}</div>
             <label class="checkbox-line"><input type="checkbox" name="speak" checked> Lire les questions à voix haute</label><label class="checkbox-line"><input type="checkbox" name="rec" checked> Enregistrer au micro</label></div>
             <fieldset style="margin-top:8px"><legend><b>Les thèmes</b></legend><div class="h-tr-row">${Object.keys(THEMES).map((k, i) => `<label class="checkbox-line"><input type="checkbox" name="th" value="${k}" ${i < 3 ? 'checked' : ''}> ${THEME_LABEL[k]} <small class="h-tr-muted">(${THEMES[k].length})</small></label>`).join('')}</div></fieldset>
-            <p class="h-tr-row"><button class="button" type="submit">🎙️ Commencer l’entretien</button><button class="button secondary" type="button" data-iv-paper>🖨 Les questions sur papier</button></p></form>
+</form>
             <div data-iv-live></div><h3>Les entretiens enregistrés</h3><div data-iv-list></div>`;
         const form = host.querySelector('[data-iv-form]'), live = host.querySelector('[data-iv-live]'), listEl = host.querySelector('[data-iv-list]');
         const questions = () => { const p = tr.byId.get(Number(form.elements.who.value)), fem = p?.gender === 'female'; return [...form.querySelectorAll('[name=th]:checked')].flatMap(i => THEMES[i.value].map(q => ({th: i.value, q: q.replace(/·e/g, fem ? 'e' : '').replace(/ ou la plus fière/, '')}))); };
         const drawList = async () => {
             const its = await T.items('interview');
             listEl.innerHTML = its.length ? (await Promise.all(its.map(async x => { const m = x.data?.media_id ? ((await T.api('tresor_media', {ids: x.data.media_id}).catch(() => ({}))).media || [])[0] : null;
-                return `<article class="h-tr-panel" data-iv-item="${x.id}"><div class="h-tr-row" style="justify-content:space-between"><b>🎙️ ${T.esc(x.title)}</b><small class="h-tr-muted">${T.esc(T.dateFr(String(x.created_at).slice(0, 10)))}${x.data?.duration ? ` · ${mmss(x.data.duration)}` : ''}</small></div>
-                    ${m ? `<audio controls preload="metadata" src="media/${encodeURIComponent(m.filename)}" style="width:100%;margin:8px 0"></audio>` : '<p class="h-tr-muted">Sans enregistrement.</p>'}
+                return `<article class="h-tr-panel" data-iv-item="${x.id}"><div class="h-tr-row" style="justify-content:space-between"><b>🎙️ ${T.esc(x.title)}</b><small class="h-tr-muted">${T.when(x.created_at)}${x.data?.duration ? ` · ${mmss(x.data.duration)}` : ''}</small></div>
+                    ${m ? `<audio controls preload="metadata" src="media/${encodeURIComponent(m.filename)}" style="width:100%;margin:8px 0"></audio>` : T.empty('Sans enregistrement', {icon: '🔇'})}
                     <ol class="h-tr-chap">${(x.data?.chapters || []).map(c => `<li><button type="button" class="h-tr-link" data-iv-seek="${Number(c.t) || 0}">${mmss(Number(c.t) || 0)}</button> ${T.esc(c.q)}${c.note ? `<br><small class="h-tr-muted">${T.esc(c.note)}</small>` : ''}</li>`).join('')}</ol>
-                    <button type="button" class="h-tr-link" data-iv-del="${x.id}">Supprimer la fiche de l’entretien</button> <small class="h-tr-muted">(le son reste dans les médias)</small></article>`; }))).join('') : '<p class="h-tr-muted">Aucun entretien pour l’instant.</p>';
+                    <button type="button" class="h-tr-link" data-iv-del="${x.id}">Supprimer la fiche de l’entretien</button> <small class="h-tr-muted">(le son reste dans les médias)</small></article>`; }))).join('') : T.empty('Aucun entretien pour l’instant', {icon: '🎙️', hint: 'Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ».'});
         };
         host.addEventListener('click', async e => {
             const sk = e.target.closest('[data-iv-seek]'); if (sk) { const au = sk.closest('[data-iv-item]').querySelector('audio'); if (au) { au.currentTime = Number(sk.dataset.ivSeek); au.play().catch(() => {}); } return; }
             const del = e.target.closest('[data-iv-del]'); if (del && await A().confirmBox('La fiche de l’entretien (les questions et les repères) sera effacée ; le son reste dans les médias.', {title: 'Supprimer ?', okLabel: 'Supprimer', danger: true})) { await T.remove(Number(del.dataset.ivDel)); drawList(); return; }
-            if (e.target.closest('[data-iv-paper]')) { const qs = questions(), p = tr.byId.get(Number(form.elements.who.value));
-                ext.tresorPrint('Entretien', 'section{max-width:180mm;margin:10mm auto;background:#fff;padding:14mm;font-family:Georgia,serif}li{margin:0 0 22mm}h2{font-size:13pt;color:#8a6b3a;text-transform:uppercase}', `<section><h1>Entretien${p ? ` avec ${T.esc(T.name(p))}` : ''}</h1><p>Le ${new Date().toLocaleDateString('fr-FR')}</p>${Object.keys(THEMES).filter(k => qs.some(q => q.th === k)).map(k => `<h2>${THEME_LABEL[k]}</h2><ol>${qs.filter(q => q.th === k).map(q => `<li>${T.esc(q.q)}</li>`).join('')}</ol>`).join('')}</section>`); }
         });
+        const paper = () => { const qs = questions(), p = tr.byId.get(Number(form.elements.who.value));
+                ext.tresorPrint('Entretien', 'section{max-width:180mm;margin:10mm auto;background:#fff;padding:14mm;font-family:Georgia,serif}li{margin:0 0 22mm}h2{font-size:13pt;color:#8a6b3a;text-transform:uppercase}', `<section><h1>Entretien${p ? ` avec ${T.esc(T.name(p))}` : ''}</h1><p>Le ${new Date().toLocaleDateString('fr-FR')}</p>${Object.keys(THEMES).filter(k => qs.some(q => q.th === k)).map(k => `<h2>${THEME_LABEL[k]}</h2><ol>${qs.filter(q => q.th === k).map(q => `<li>${T.esc(q.q)}</li>`).join('')}</ol>`).join('')}</section>`); };
+        T.actions(host, {primary: {label: '🎙️ Commencer l’entretien', attrs: 'data-iv-go', run: () => { if (!form.hidden) form.requestSubmit(); }}, print: {attrs: 'data-iv-paper', title: 'Les questions sur papier, avec la place pour noter les réponses', run: paper}});
         form.addEventListener('submit', async e => {
             e.preventDefault(); const qs = questions(), pid = Number(form.elements.who.value) || 0, p = tr.byId.get(pid);
-            if (!qs.length) return T.toast('Choisis au moins un thème.', 'error');
+            if (!qs.length) return T.fail(form.querySelector('[name=th]'), 'Choisis au moins un thème.');
             let rec = null, chunks = [], stream = null, t0 = Date.now(), paused = 0, pauseAt = 0, i = 0;
             const notes = qs.map(() => ''), marks = qs.map(() => null), now = () => (Date.now() - t0 - paused - (pauseAt ? Date.now() - pauseAt : 0)) / 1000;
             if (form.elements.rec.checked) {
@@ -287,11 +287,12 @@
             <label>Qui<select name="scope"><option value="asc">ses ancêtres</option><option value="desc">ses descendants</option><option value="both">les deux</option></select></label>
             <label>Générations<input type="number" name="gens" min="1" max="12" value="4" style="width:5em"></label><label>Secondes par vie<input type="number" name="sec" min="4" max="60" value="12" style="width:5em"></label>
             <label class="checkbox-line"><input type="checkbox" name="voice" checked> Raconter à voix haute</label><label class="checkbox-line"><input type="checkbox" name="music" checked> Musique douce</label>
-            <button class="button" type="submit">🕯️ Lancer la veillée</button></form><p class="h-tr-muted">En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin.</p><div data-vl-prev></div>`;
+</form><p class="h-tr-muted">En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin.</p><div data-vl-prev></div>`;
         const form = host.querySelector('[data-vl-form]'), prev = host.querySelector('[data-vl-prev]');
         const slides = () => veilleeSlides(T, tr, Number(form.elements.root.value) || st?.id, form.elements.scope.value, Number(form.elements.gens.value) || 4);
         const preview = () => { const s = slides(); prev.innerHTML = `<p><b>${s.length - 2}</b> vie${s.length > 3 ? 's' : ''} à raconter : ${T.esc(s.filter(x => x.p).map(x => x.p.first || x.title).join(', '))}</p>`; };
         form.addEventListener('change', preview); preview();
+        T.actions(host, {primary: {label: '🕯️ Lancer la veillée', attrs: 'data-vl-go', run: () => form.requestSubmit()}});
         form.addEventListener('submit', e => {
             e.preventDefault(); const s = slides(); if (s.length < 3) return T.toast('Personne à raconter de ce côté-là.', 'error');
             const sec = Math.max(4, Number(form.elements.sec.value) || 12), voice = form.elements.voice.checked, stopMusic = form.elements.music.checked ? softMusic() : () => {};
