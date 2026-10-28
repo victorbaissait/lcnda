@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 67;
+const SCHEMA_VERSION = 68;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -88,6 +88,7 @@ function migration_steps(): array
         65 => 'schema_v65',
         66 => 'schema_v66',
         67 => 'schema_v67',
+        68 => 'schema_v68',
     ];
 }
 
@@ -2335,5 +2336,28 @@ function schema_v67(PDO $pdo): void
     $n = pets_give_full_fiche($pdo);
     if ($n > 0) {
         try { $pdo->prepare('INSERT OR REPLACE INTO app_settings(key, value, updated_at) VALUES(?, ?, CURRENT_TIMESTAMP)')->execute(['genealogie-pets-merged', json_encode(['n' => $n], JSON_UNESCAPED_UNICODE)]); } catch (Throwable) { /* pas de table des réglages : pas de message */ }
+    }
+}
+
+/** ✨ Trésors de famille (lib/tresors.php) : leur table et la colonne data_json de la Mémoire familiale, créées ici et non plus
+ *  à la première lecture (une lecture ne doit jamais écrire, surtout en mode consultation). */
+function schema_v68(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS tresor_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        kind TEXT NOT NULL,
+        person_id INTEGER,
+        place_id INTEGER,
+        title TEXT NOT NULL DEFAULT '',
+        body TEXT NOT NULL DEFAULT '',
+        data_json TEXT NOT NULL DEFAULT '{}',
+        open_at TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_tresor_kind ON tresor_items(kind, person_id)');
+    $hasMem = (bool) $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='family_memories'")->fetchColumn();
+    if ($hasMem && !$pdo->query("SELECT 1 FROM pragma_table_info('family_memories') WHERE name='data_json'")->fetchColumn()) {
+        $pdo->exec("ALTER TABLE family_memories ADD COLUMN data_json TEXT NOT NULL DEFAULT '{}'");
     }
 }

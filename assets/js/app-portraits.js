@@ -75,7 +75,7 @@
     try {
         if (!localStorage.getItem('lcnda-shape-one')) {
             const raw = JSON.parse(localStorage.getItem(KEY) || 'null');
-            if (raw && raw.mode && raw.mode !== 'avant') { const S = clean(raw); if (TO_AV[S.shape]) { let d = {}; try { d = JSON.parse(localStorage.getItem('genealogie-design') || '{}') || {}; } catch (_) {} d.avatarShape = TO_AV[S.shape]; localStorage.setItem('genealogie-design', JSON.stringify(d)); } }
+            if (raw && raw.mode && raw.mode !== 'avant') { const S = clean(raw); if (TO_AV[S.shape]) { let d = {}; try { d = JSON.parse(localStorage.getItem('genealogie-design') || '{}') || {}; } catch (_) {} if (!d.avatarShape || d.avatarShape === 'tilted') { d.avatarShape = TO_AV[S.shape]; localStorage.setItem('genealogie-design', JSON.stringify(d)); } /* une forme déjà choisie (hexagone, forme à soi…) reste */ } }
             localStorage.setItem('lcnda-shape-one', '1');
         }
     } catch (_) {}

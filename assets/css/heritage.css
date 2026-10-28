@@ -5103,6 +5103,11 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 .isim-pairthumbs { display:flex; align-items:center; gap:3px; width:auto; min-width:76px; }
 @media (max-width:900px) { .isim-main, .isim-top { grid-template-columns:minmax(0, 1fr); } .isim-prev { position:static; order:-1; } }
 @media (max-width:600px) { .isim-dlg .isim-body { padding:0 12px 12px; } .isim-qthumb { flex-basis:64px; height:64px; } .isim-gact .button { flex:1 1 auto; } }
+
+/* la recherche standard de l'app (app-ui.js, avec son cadre, sa loupe et « / ») remplace ce champ : un seul cadre */
+.h-world-q:has(.ui-search) { border: 0 !important; background: transparent; padding: 0 !important; box-shadow: none; }
+.h-world-q:has(.ui-search) > span[aria-hidden="true"] { display: none; }
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .h-poilu-event.is-blesse>strong,:root[data-theme="dark"] .h-poilu-event.is-tue>strong,:root[data-theme="dark"] .h-poilu-event.is-gaze>strong{color:#f49aa3}
 :root[data-theme="dark"] .h-calib-image{background:#292929}
@@ -5564,6 +5569,3 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 :root[data-theme="dark"] .h-am-msr button.is-on{color:#f0f0f0}
 @media (max-width:1100px){:root[data-theme="dark"] .h-at-detail{border-top:1px solid #4c4c4c}}
 /* ═════ fin du mode sombre automatique ═════ */
-/* la recherche standard de l'app (app-ui.js, avec son cadre, sa loupe et « / ») remplace ce champ : un seul cadre */
-.h-world-q:has(.ui-search) { border: 0 !important; background: transparent; padding: 0 !important; box-shadow: none; }
-.h-world-q:has(.ui-search) > span[aria-hidden="true"] { display: none; }

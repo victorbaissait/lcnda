@@ -398,9 +398,10 @@
         const m = legalMoves(st).filter(x => x.score > -20);
         if (m.length) return m[0];
         const def = get(st.k), s = pileOf(st, 'stock');
+        if (def.mode) return MODES[def.mode].canStock?.(st, def) ? {stock: true} : null; // les jeux à part ont leur propre règle de pioche
+        if (def.stock?.needFull && st.piles.some(p => p.type === 'tab' && !p.cards.length)) return null; // Araignée : pas de distribution avec une colonne vide
         if (s && (s.cards.length || (st.redeals > 0 && pileOf(st, 'waste')?.cards.length))) return {stock: true};
         if (def.stock?.to === 'shuffle' && st.redeals > 0) return {stock: true};
-        if (def.mode && MODES[def.mode].canStock?.(st, def)) return {stock: true};
         return null;
     }
     const counts = st => st.piles.reduce((a, p) => a + p.cards.length, 0) + (st.hand ? 1 : 0) + (st.gone || 0);
@@ -500,7 +501,7 @@
         },
         canStock: st => !!pileOf(st, 'stock').cards.length || (st.redeals > 0 && !!pileOf(st, 'waste').cards.length),
     };
-    // ➕ Onze, Quatorze, Dix : une grille, des paires qui font un total (ou des figures), la pioche remplit les trous
+    // ＋ Onze, Quatorze, Dix : une grille, des paires qui font un total (ou des figures), la pioche remplit les trous
     MODES.sum = {
         multi: true,
         deal(def, seed) {

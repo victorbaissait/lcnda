@@ -40,7 +40,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         try {
             fs.mkdirSync(path.join(tmp, 'scripts')); fs.mkdirSync(path.join(tmp, 'assets', 'css'), { recursive: true });
             fs.copyFileSync(path.join(root, 'index.php'), path.join(tmp, 'index.php'));
-            for (const f of ['build-designs-css.py', 'build-frame-css.py']) fs.copyFileSync(path.join(root, 'scripts', f), path.join(tmp, 'scripts', f));
+            for (const f of ['build-designs-css.py', 'build-frame-css.py', 'scope-a1-css.py']) fs.copyFileSync(path.join(root, 'scripts', f), path.join(tmp, 'scripts', f));
             for (const f of fs.readdirSync(path.join(root, 'assets', 'css'))) fs.copyFileSync(path.join(root, 'assets', 'css', f), path.join(tmp, 'assets', 'css', f));
             for (const [script, out] of [['build-designs-css.py', 'designs-gen.css'], ['build-frame-css.py', 'apparence-traits.css']]) {
                 const r = spawnSync('python3', ['-I', path.join(tmp, 'scripts', script)], { cwd: tmp, encoding: 'utf8' });

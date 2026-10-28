@@ -207,7 +207,8 @@
         const now = performance.now(), dt = Math.min(1, (now - lastTick) / 1000); lastTick = now;
         if (G.over || !G.speed) return;
         acc += dt * 10 * G.speed; let n = 0;
-        while (acc >= 10 && n < 40) { B().step(G); acc -= 10; n++; }
+        try { while (acc >= 10 && n < 40) { B().step(G); acc -= 10; n++; } }
+        catch (err) { stop(); console.error(err); toast('La partie s’est arrêtée sur une erreur (fichier abîmé ?).', 'error'); return; }
         if (!n) return;
         if (Math.floor(G.t / 360) !== lastSaveHour) { lastSaveHour = Math.floor(G.t / 360); saveGame(gid, G, true); } // toutes les 6 h de jeu
         drawAll(true); SND.update(G); SND.events(G);
@@ -731,7 +732,7 @@
         if (file.size > 2e6) { toast('Ce fichier est trop gros pour être une partie du bunker.', 'error'); return; }
         file.text().then(txt => {
             let raw; try { raw = JSON.parse(txt); } catch (_) { throw new Error('Ce fichier n’est pas une partie du bunker.'); }
-            G = B().check(raw?.lcnda === 'bunker' ? raw.g : raw); gid = 'b' + Date.now().toString(36); saveGame(gid, G, true); tab = 'gens'; play(); toast('✓ Partie ouverte.');
+            G = B().check(raw?.lcnda === 'bunker' ? raw.g : raw); gid = 'b' + Date.now().toString(36); tab = 'gens'; play(); saveGame(gid, G, true); toast('✓ Partie ouverte.'); // rangée seulement si elle s'ouvre bien
         }).catch(err => toast(err.message || 'Fichier illisible.', 'error'));
     }
     document.addEventListener('keydown', e => { if (dlg?.open && G && (e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); saveGame(gid, G); } });

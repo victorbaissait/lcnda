@@ -214,7 +214,7 @@
         if (t.closest('[data-ui-reset], [data-bp-reset], [data-dna-preset], [data-a11y-reset], [data-shortcut-reset-all]') || isReset(t.closest('button') || t)) return 'Réglages remis comme au départ';
         const lab = t.closest('label'), b = t.closest('button');
         const labText = lab ? (lab.querySelector(':scope > b, :scope > strong, :scope > span > b')?.textContent || [...lab.childNodes].filter(n => n.nodeType === 3 || (n.nodeType === 1 && !n.matches('input, select, textarea, .ui-color, .ui-range, button, small, .muted, i'))).map(n => (n.innerText ?? n.textContent).split('\n')[0]).join(' ')) : '';
-        let s = labText.trim() || t.getAttribute?.('aria-label') || t.title || (b ? (b.getAttribute('aria-label') || b.title || b.textContent) : '');
+        let s = labText.trim() || t.getAttribute?.('aria-label') || t.title || (b ? (b.getAttribute('aria-label') || b.title || b.textContent) : ''); // un bouton à vignette (fonds, cartes) : son aria-label, pas tout son texte collé
         s = String(s || '').replace(/\s+/g, ' ').trim();
         if (!s || s.length < 2 || /^[↑↓←→✕×⋯]+$/.test(s)) return '';
         return s.length > 48 ? s.slice(0, 46) + '…' : s;

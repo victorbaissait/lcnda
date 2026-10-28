@@ -103,6 +103,81 @@ function website_php_sweep(string $root, int $age): void
     }
 }
 
+/** Familles de fonctions qui ouvrent le réseau (ou une base distante) : toutes bloquées, quelle que soit l'extension présente */
+const SITE_PHP_NET_FUNCS = '/^(socket_|stream_socket_|curl_|mysqli_|mysql_|mysqlnd_|pg_|ftp_|imap_|ldap_|snmp|oci|odbc_|sqlsrv_|ibase_|fbird_|dba_|memcache_|msgpack_|amqp_|dns_|gethostby|getmxrr|checkdnsrr|getprotobyn|getservby|net_get_interfaces|fsockopen|pfsockopen|mail$|mb_send_mail|error_log$|ssh2_|swoole_|uv_|event_|ev_|posix_|pcntl_|proc_|shmop_|msg_|sem_|shm_|ffi_)/i';
+/** Classes qui ouvrent le réseau : disable_classes ne suffit pas toujours (retiré des derniers PHP) */
+const SITE_PHP_NET_CLASSES = '/^(mysqli|mysqli_\w+|PDO|Redis\w*|Memcache\w*|SoapClient|SoapServer|AMQP\w+|MongoDB\\\\.*|SNMP|SolrClient|Swoole\\\\.*|FFI|Ev\w*|Event\w*|SSH2\w*|Gearman\w+|ZMQ\w*|Socket)$/i';
+
+/**
+ * Ce que contient vraiment ce PHP (extensions intégrées comprises) : ['funcs' => fonctions réseau à bloquer,
+ * 'classes' => classes réseau présentes, 'pdo' => pilotes PDO autres que SQLite]. Gardé en cache tant que le binaire ne change pas.
+ */
+function website_php_probe(string $php, array $rt): array
+{
+    static $memo = [];
+    $key = md5($php . '|' . @filemtime($php) . '|' . @filesize($php) . '|' . implode(' ', $rt));
+    if (isset($memo[$key])) { return $memo[$key]; }
+    $file = website_php_cache('site-php-probe') . DIRECTORY_SEPARATOR . $key . '.json';
+    $info = @json_decode((string) @file_get_contents($file), true);
+    if (!is_array($info) || !isset($info['f'], $info['c'], $info['p'])) {
+        $code = 'echo json_encode(["f"=>get_defined_functions()["internal"],"c"=>get_declared_classes(),"p"=>class_exists("PDO")?PDO::getAvailableDrivers():[]]);';
+        $proc = @proc_open([$php, '-n', ...$rt, '-r', $code], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, null, null, ['bypass_shell' => true, 'suppress_errors' => true]);
+        $out = '';
+        if (is_resource($proc)) { fclose($pipes[0]); $out = (string) stream_get_contents($pipes[1], 4000000); fclose($pipes[1]); fclose($pipes[2]); proc_close($proc); }
+        $info = @json_decode($out, true);
+        if (!is_array($info) || !isset($info['f'], $info['c'], $info['p'])) { $info = ['f' => [], 'c' => ['mysqli', 'PDO', 'Redis'], 'p' => ['mysql']]; } // inconnu : on suppose le pire
+        else { @file_put_contents($file, json_encode($info)); }
+    }
+    $funcs = array_values(array_filter(array_map('strval', (array) $info['f']), static fn($f) => preg_match(SITE_PHP_NET_FUNCS, $f)));
+    $classes = array_values(array_filter(array_map('strval', (array) $info['c']), static fn($c) => preg_match(SITE_PHP_NET_CLASSES, $c) && !($c === 'PDO' && !array_diff((array) $info['p'], ['sqlite']))));
+    return $memo[$key] = ['funcs' => $funcs, 'classes' => $classes, 'pdo' => array_values(array_diff((array) $info['p'], ['sqlite']))];
+}
+
+/** Un lanceur qui coupe le réseau du PHP des pages, s'il en existe un qui marche ici ([] sinon) */
+function website_php_netless_prefix(): array
+{
+    static $pre = null;
+    if ($pre !== null) { return $pre; }
+    $ok = static function (array $cmd): bool {
+        $p = @proc_open($cmd, [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, null, null, ['bypass_shell' => true, 'suppress_errors' => true]);
+        if (!is_resource($p)) { return false; }
+        foreach ($pipes as $h) { fclose($h); }
+        return proc_close($p) === 0;
+    };
+    if (PHP_OS_FAMILY === 'Linux') {
+        foreach (['/usr/bin/unshare', '/bin/unshare'] as $u) { if (is_executable($u) && $ok([$u, '-r', '-n', '/bin/true'])) { return $pre = [$u, '-r', '-n']; } }
+    } elseif (PHP_OS_FAMILY === 'Darwin') {
+        $sb = '/usr/bin/sandbox-exec'; $prof = '(version 1)(allow default)(deny network*)';
+        if (is_executable($sb) && $ok([$sb, '-p', $prof, '/usr/bin/true'])) { return $pre = [$sb, '-p', $prof]; }
+    }
+    return $pre = [];
+}
+
+/** Le texte PHP des pages nomme-t-il une classe réseau présente, ou crée-t-il un objet d'un nom calculé ? (null = rien) */
+function website_php_risky_source(array $files, array $classes): ?string
+{
+    if (!$classes) { return null; }
+    $names = array_map('strtolower', $classes);
+    foreach ($files as $p => $c) {
+        if (!str_contains((string) $c, '<?')) { continue; } // tout fichier peut être inclus par une page : on lit tout ce qui contient du PHP
+        $toks = @token_get_all((string) $c);
+        $prev = null;
+        foreach ($toks as $t) {
+            if (is_array($t) && in_array($t[0], [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT], true)) { continue; }
+            $txt = is_array($t) ? $t[1] : $t;
+            $low = strtolower(ltrim($txt, '\\'));
+            if (is_array($t) && in_array($t[0], [T_STRING, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED], true) && (in_array($low, $names, true) || preg_match('/^(reflection\w*|class_alias)$/', $low))) {
+                return 'La page « ' . $p . ' » utilise « ' . $txt . ' », qui pourrait se connecter à internet : l’aperçu ne la lance pas.';
+            }
+            if ($prev === 'new' && !(is_array($t) && in_array($t[0], [T_STRING, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED, T_CLASS, T_STATIC], true))) {
+                return 'La page « ' . $p . ' » crée un objet dont le nom est calculé : l’aperçu ne la lance pas.';
+            }
+            $prev = is_array($t) && $t[0] === T_NEW ? 'new' : null;
+        }
+    }
+    return null;
+}
+
 /**
  * Le cœur : écrit $files (chemin relatif → texte) dans un dossier jetable, y exécute $entry avec $_GET = $query, rend
  * ['html' => sortie, 'errors' => [messages], 'ms' => durée]. Les chemins sont revérifiés (pas de « .. », pas de / au début).
@@ -135,8 +210,12 @@ function website_php_exec(array $files, string $entry, array $query = []): array
         file_put_contents($site . DIRECTORY_SEPARATOR . 'LCNDA-AMORCE.php', "<?php\n\$_GET = " . var_export($query, true) . ";\n\$_REQUEST = \$_GET; \$_POST = []; \$_COOKIE = []; \$_FILES = []; \$_ENV = [];\n"
             . "\$_SERVER = " . var_export($server, true) . " + ['DOCUMENT_ROOT' => __DIR__, 'SCRIPT_FILENAME' => __DIR__ . " . var_export('/' . $entry, true) . ", 'REQUEST_TIME' => time(), 'REQUEST_TIME_FLOAT' => microtime(true)];\n"
             . "unset(\$argv, \$argc);\nchdir(__DIR__);\ninclude __DIR__ . " . var_export('/' . $entry, true) . ";\n");
-        $args = [$php, '-n', ...website_php_runtime_args($php),
-            '-d', 'open_basedir=' . $site, '-d', 'disable_functions=' . implode(',', SITE_PHP_DISABLED), '-d', 'disable_classes=FFI,SoapClient,SoapServer',
+        $rt = website_php_runtime_args($php);
+        $probe = website_php_probe($php, $rt);
+        $netless = website_php_netless_prefix();
+        if (!$netless && ($why = website_php_risky_source($files, $probe['classes'])) !== null) { throw new LcndaBadInput($why); }
+        $args = [...$netless, $php, '-n', ...$rt,
+            '-d', 'open_basedir=' . $site, '-d', 'disable_functions=' . implode(',', array_unique([...SITE_PHP_DISABLED, ...$probe['funcs']])), '-d', 'disable_classes=' . implode(',', array_unique(['FFI', 'SoapClient', 'SoapServer', ...$probe['classes']])),
             '-d', 'allow_url_fopen=0', '-d', 'allow_url_include=0', '-d', 'max_execution_time=' . SITE_PHP_TIMEOUT, '-d', 'max_input_time=' . SITE_PHP_TIMEOUT, '-d', 'memory_limit=64M',
             '-d', 'display_errors=1', '-d', 'display_startup_errors=0', '-d', 'html_errors=0', '-d', 'log_errors=1', '-d', 'error_reporting=' . E_ALL, '-d', 'short_open_tag=0',
             '-d', 'include_path=.', '-d', 'sys_temp_dir=' . $site, '-d', 'upload_tmp_dir=' . $site, '-d', 'session.save_path=' . $site, '-d', 'ffi.enable=0', '-d', 'opcache.enable_cli=0',

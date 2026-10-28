@@ -59,7 +59,7 @@
             let tiles = scramble(sol, R); for (let k = 0; k < 5 && solved(tiles, server, c.wrap); k++) tiles = scramble(sol, R);
             const leaves = []; sol.forEach((row, r) => row.forEach((m, cc) => { if (bits(m) === 1 && !(r === server[0] && cc === server[1])) leaves.push([r, cc]); }));
             let names = {};
-            if (c.names) { try { const d = await J().loadData(), ppl = L().shuffle(d.persons.filter(x => x.first), c.seed); leaves.forEach(([r, cc], i) => { const p = ppl[i % Math.max(1, ppl.length)]; if (p) names[`${r},${cc}`] = {name: `${p.first} ${p.last || ''}`.trim(), ini: `${(p.first || '?')[0]}${(p.last || '')[0] || ''}`}; }); } catch (_) {} }
+            if (c.names) { try { const d = await J().loadData(), ppl = L().shuffle(d.persons.filter(x => x.first && !x.living && !x.priv), c.seed); leaves.forEach(([r, cc], i) => { const p = ppl[i % Math.max(1, ppl.length)]; if (p) names[`${r},${cc}`] = {name: `${p.first} ${p.last || ''}`.trim(), ini: `${(p.first || '?')[0]}${(p.last || '')[0] || ''}`}; }); } catch (_) {} }
             return {tiles, server, locks: [], names, moves: 0, ms: 0, startAt: Date.now(), won: false, round: (prev?.round || 0) + 1, best: prev?.best || null, status: 'Réseau à relier'};
         },
         mount(host, g, api) {

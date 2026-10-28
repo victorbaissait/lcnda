@@ -102,6 +102,7 @@ function heritage_image_pick(PDO $pdo, string $q, string $filter = ''): array
     // aussi par personne rattachée (nom, prénom), titre du document, date ; filtre : sans / avec transcription, avec signature repérée
     $cond = match ($filter) { 'notr' => " AND trim(COALESCE(m.transcription,''))=''", 'tr' => " AND trim(COALESCE(m.transcription,''))<>''",
         'sig' => " AND EXISTS(SELECT 1 FROM media_tags t WHERE t.media_id=m.id AND COALESCE(t.tag_type,'person')='signature')", default => '' };
+    if (function_exists('sealed_media_sql')) { $cond .= sealed_media_sql($pdo); }
     $like = "%{$q}%";
     $stmt = $pdo->prepare("SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, COALESCE(m.document_reference,'') AS document_reference, CASE WHEN trim(COALESCE(m.transcription,''))<>'' THEN 1 ELSE 0 END AS has_tr, substr(COALESCE(m.transcription,''), 1, 20000) AS transcription,
             (SELECT group_concat(trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')), ', ') FROM (SELECT DISTINCT entity_id FROM media_links WHERE media_id=m.id AND entity_type='person' LIMIT 3) l JOIN persons p ON p.id=l.entity_id) AS people

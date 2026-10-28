@@ -10,11 +10,13 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const F = ext.tresorFeatures = ext.tresorFeatures || [];
     const COLORS = ['#c0392b', '#2471a3', '#1e8449', '#b9770e', '#7d3c98', '#117a65', '#a04000', '#2e4053', '#b03a2e', '#1f618d'];
-    /** une fenêtre d'impression (le même genre que la mise en page) */
+    /** K13 : la fenêtre « Imprimer » de l'app (aperçu, A4 / A5, sens, ⤓ PDF) pour toutes les créations des Trésors */
     function printWindow(title, css, body) {
-        const w = window.open('', '_blank'); if (!w) throw new Error('fenêtre bloquée : autorise les fenêtres pour cette page.');
-        w.document.open(); w.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${title}</title><base href="${location.href.replace(/[^/]*$/, '')}"><style>body{margin:0;font-family:system-ui,sans-serif;background:#888}.bar{position:sticky;top:0;display:flex;gap:10px;align-items:center;padding:10px 16px;background:#111;color:#fff;font:14px system-ui;z-index:9}.bar button{font:inherit;padding:6px 14px;border:0;border-radius:6px;background:#2f6bff;color:#fff;cursor:pointer}@media print{.bar{display:none}body{background:none}}${css}</style></head><body><div class="bar"><b>${title}</b><span style="flex:1"></span><button onclick="print()">🖨 Imprimer</button></div>${body}</body></html>`); w.document.close();
-        return w;
+        const plain = String(title).replace(/<[^>]*>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&amp;/g, '&');
+        const doc = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${title}</title><base href="${location.href.replace(/[^/]*$/, '')}"><style>body{margin:0;font-family:system-ui,sans-serif}${css}</style></head><body>${body}</body></html>`;
+        const UI = window.LCNDA_UI;
+        if (UI?.openPrintDialog) { UI.openPrintDialog({title: plain, html: doc, photos: false}); return null; }
+        throw new Error('la fenêtre d’impression n’est pas prête.');
     }
     ext.tresorPrint = printWindow;
 

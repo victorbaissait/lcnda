@@ -160,6 +160,7 @@ function website_svg_clean(string $svg, int &$removed = 0): string
     $svg = trim($svg);
     if (!preg_match('#^<svg\b[^>]*>.*</svg>$#is', $svg)) { return ''; }
     $svg = website_defuse($svg, $removed);
+    $svg = str_replace('<?', '&lt;?', $svg); // jamais de code PHP dans un dessin
     $svg = (string) preg_replace('#\s(href)\s*=\s*("(?!\#)[^"]*"|\'(?!\#)[^\']*\')#i', '', $svg); // dans un SVG : seulement des liens internes (#…)
     return preg_match('#^<svg\b#i', ltrim($svg)) ? $svg : '';
 }
@@ -865,6 +866,7 @@ function website_fill_blocks(string $html, callable $fill): string
         }
         $out .= substr($html, $pos, $afterOpen - $pos);
         $inner = in_array($attrs['kind'], SITE_BLOCK_KINDS, true) ? $fill($attrs) : '';
+        $inner = str_replace('<?', '&lt;?', $inner); // ce que l'app écrit ne devient jamais du code dans une page .php (s'affiche pareil en HTML)
         if ($close < 0) { $out .= $inner . '</' . $tag . '>'; $pos = strlen($html); break; }
         $out .= $inner . '</' . $tag . '>';
         $pos = $closeEnd;

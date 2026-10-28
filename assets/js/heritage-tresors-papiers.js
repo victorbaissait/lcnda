@@ -81,6 +81,7 @@
     function parseRecords(text, name = '') {
         const rows = [];
         if (/^\s*</.test(text)) {
+            if (/<!DOCTYPE|<!ENTITY/i.test(text)) throw new Error('ce XML contient des déclarations (DOCTYPE ou ENTITY) : il est refusé par prudence');
             const doc = new DOMParser().parseFromString(text, 'application/xml'); if (doc.querySelector('parsererror')) throw new Error('le fichier XML est abîmé');
             const xRows = [...doc.getElementsByTagNameNS('*', 'Row')];
             if (xRows.length > 1) { const cells = r => [...r.getElementsByTagNameNS('*', 'Cell')].map(c => c.textContent.trim()), head = cells(xRows[0]); xRows.slice(1).forEach(r => { const c = cells(r); rows.push(Object.fromEntries(head.map((h, i) => [h, c[i] || '']))); }); }
@@ -115,7 +116,7 @@
         host.addEventListener('click', async e => {
             if (e.target.closest('[data-pp-new]')) return editPassport(T, null, null, draw);
             if (e.target.closest('[data-pp-close]')) { imported = null; return draw(); }
-            if (e.target.closest('[data-pp-imp]')) { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.xml,.csv,.tsv,.txt'; inp.onchange = async () => { const f = inp.files[0]; if (!f) return; try { imported = parseRecords(await f.text(), f.name); ext.tresorPassports.last = imported; T.toast(`${imported.records.length} passeports lus.`, 'success'); } catch (err) { T.toast('Import impossible : ' + err.message, 'error'); } draw(); }; inp.click(); return; }
+            if (e.target.closest('[data-pp-imp]')) { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.xml,.csv,.tsv,.txt'; inp.onchange = async () => { const f = inp.files[0]; if (!f) return; if (f.size > 20e6) return T.toast('Ce relevé est trop gros (20 Mo au plus).', 'error'); try { imported = parseRecords(await f.text(), f.name); ext.tresorPassports.last = imported; T.toast(`${imported.records.length} passeports lus.`, 'success'); } catch (err) { T.toast('Import impossible : ' + err.message, 'error'); } draw(); }; inp.click(); return; }
             const ed = e.target.closest('[data-pp-edit]'); if (ed) { const it = (await T.items('passport')).find(x => x.id === Number(ed.dataset.ppEdit)); return editPassport(T, it, null, draw); }
             const del = e.target.closest('[data-pp-del]'); if (del && await A().confirmBox('Le passeport sera effacé.', {title: 'Supprimer ?', okLabel: 'Supprimer', danger: true})) { await T.remove(Number(del.dataset.ppDel)); return draw(); }
             const at = e.target.closest('[data-pp-attach]'); if (at) { const [ri, pid] = at.dataset.ppAttach.split(':').map(Number), r = imported.records[ri], p = tr.byId.get(pid), {nom, prenom, autres, ...rest} = r;
@@ -337,9 +338,11 @@ if(Date.now()>EXP)z.innerHTML='<p>⏳ Ce partage a expiré.</p>';else if(!LOCKED
         form.addEventListener('submit', async e => { e.preventDefault(); const d = count(); if (!d.people.length) return T.toast('Personne à partager dans cette branche.', 'error');
             if (!form.elements.nopw.checked && !pwI.value) { pwI.focus(); return T.toast('Choisis un mot de passe (ou « 🎲 En proposer un »), ou coche « Sans mot de passe ».', 'error'); }
             if (!form.elements.nopw.checked && strength(pwI.value)[0] === 'faible' && !await A().confirmBox('Ce mot de passe est court : quelqu’un d’obstiné pourrait le trouver en essayant beaucoup de mots de passe. Fabriquer le fichier quand même ?', {title: 'Mot de passe faible', okLabel: 'Oui, quand même'})) return;
-            const exp = new Date(form.elements.exp.value + 'T23:59:59').getTime(), root = tr.byId.get(Number(form.elements.root.value)), title = `La branche ${root?.last || T.name(root)} — partagée par la famille`, pw = form.elements.nopw.checked ? '' : pwI.value;
+            if (!form.elements.exp.value) return window.LCNDA_UI?.fail ? window.LCNDA_UI.fail(form.elements.exp, 'Choisis jusqu’à quand le partage est valable.') : T.toast('Choisis jusqu’à quand le partage est valable.', 'error');
+            const root = tr.byId.get(Number(form.elements.root.value)), hiddenRoot = !root || root.living || root.priv || root.sh; // une racine vivante ou confidentielle : son nom ne sort pas
+            const exp = new Date(form.elements.exp.value + 'T23:59:59').getTime(), title = hiddenRoot ? 'Une branche de la famille — partagée par la famille' : `La branche ${root.last || T.name(root)} — partagée par la famille`, pw = form.elements.nopw.checked ? '' : pwI.value;
             const body = {exp, title, people: d.people}, html = shareHtml(title, exp, pw ? await encrypt(JSON.stringify(body), pw) : body, !!pw);
-            T.download(`partage-${(root?.last || 'branche').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')}-jusqu-au-${form.elements.exp.value}.html`, new Blob([html], {type: 'text/html'})); ext.tresorShare.last = html;
+            T.download(`partage-${pw || hiddenRoot ? 'branche' : (root.last || 'branche').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')}-jusqu-au-${form.elements.exp.value}.html`, new Blob([html], {type: 'text/html'})); ext.tresorShare.last = html;
             await T.save({kind: 'share', person_id: root?.id || null, title, open_at: form.elements.exp.value, data: {people: d.people.length, locked: !!pw}}); T.toast('Fichier prêt : envoie-le, et donne le mot de passe à part.', 'success'); });
     }
     F.push({key: 'partage', group: 'outils', icon: '🔗', title: 'Partager une branche (pour un temps)', desc: 'Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie.', render: renderShare});

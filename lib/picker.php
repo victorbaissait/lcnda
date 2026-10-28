@@ -796,6 +796,7 @@ function picker_media_filters(PDO $pdo, array $opts, array &$params, bool $withS
         foreach (array_values(array_unique($list)) as $i => $t) { $in[] = ":mts{$i}"; $params[":mts{$i}"] = $t; }
         $where .= ' AND lower(m.media_type) IN (' . implode(',', $in) . ") AND trim(COALESCE(m.filename,''))<>''";
     }
+    if (function_exists('sealed_media_sql')) { $where .= sealed_media_sql($pdo); } // consultation : pas les pièces jointes des lettres scellées
     $flag = $opts['media_flag'] ?? '';
     if ($flag === 'notr') { $where .= " AND trim(COALESCE(m.transcription,''))=''"; }
     elseif ($flag === 'tr') { $where .= " AND trim(COALESCE(m.transcription,''))<>''"; }

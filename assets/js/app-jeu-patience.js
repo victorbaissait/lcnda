@@ -171,8 +171,10 @@
                 fail(el);
             }
 
+            let drawCtl = null; // les écouteurs du plateau d'avant sont retirés à chaque nouveau dessin (sinon ils s'empilent pendant toute la partie)
             function bind() {
-                const board = host.querySelector('.pc-board'), sig = {signal: api.signal};
+                drawCtl?.abort(); drawCtl = new AbortController();
+                const board = host.querySelector('.pc-board'), sig = {signal: api.signal && AbortSignal.any ? AbortSignal.any([api.signal, drawCtl.signal]) : (api.signal || drawCtl.signal)};
                 const target = e => { const card = e.target.closest('[data-p]'), slot = e.target.closest('[data-slot]'); return card ? {pid: card.dataset.p, idx: Number(card.dataset.i), el: card} : slot ? {pid: slot.dataset.slot, idx: null, el: slot} : null; };
                 board.addEventListener('pointerdown', e => {
                     if (e.button !== 0 || st().won || multi) return;

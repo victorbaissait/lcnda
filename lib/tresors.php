@@ -21,11 +21,16 @@ declare(strict_types=1);
  * Une seule table, créée à la demande (rien à mettre à jour dans la base) ; tout ce qui arrive est relu et borné ; requêtes préparées.
  */
 
+/** mode consultation (la famille regarde) : rien ne s'écrit, et ni les vivants ni les fiches confidentielles ne sortent */
+function tresor_kiosk(): bool { return function_exists('kiosk_state') && !empty(kiosk_state()['on']); }
+
 const TRESOR_KINDS = ['letter', 'candle', 'passport', 'stamp', 'sense', 'hunt', 'gazette', 'share', 'story', 'reminder', 'recipe', 'song', 'interview'];
 
 function tresors_ensure(PDO $pdo): void
 {
     static $done = false; if ($done) { return; }
+    // la table vient de la migration 68 ; filet pour une base pas encore à jour, jamais en consultation (aucune écriture)
+    if (tresor_kiosk()) { if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='tresor_items'")->fetchColumn()) { throw new LcndaBadInput('Les Trésors ne sont pas encore prêts sur cette base.'); } $done = true; return; }
     $pdo->exec("CREATE TABLE IF NOT EXISTS tresor_items (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         kind TEXT NOT NULL,
@@ -148,7 +153,28 @@ function tresor_tree(PDO $pdo): array
         try { foreach (gedcom_share_hidden($pdo, $pdo->query(person_select())->fetchAll(), $pdo->query('SELECT * FROM families')->fetchAll()) as $hid => $_) { if (isset($people[(int) $hid])) { $people[(int) $hid]['sh'] = true; } } }
         catch (Throwable $e) { foreach ($people as $id => $_) { $people[$id]['sh'] = true; } } // dans le doute, rien ne part
     }
+    if ($kiosk) { // consultation : aussi les vivants probables (même règle que le partage), et leurs événements
+        $hid = tresor_hidden_people($pdo);
+        $people = array_diff_key($people, $hid);
+        $events = array_values(array_filter($events, static fn($e) => !isset($hid[(int) ($e['p'] ?? 0)])));
+    }
     return ['people' => array_values($people), 'families' => array_values($families), 'places' => (object) $places, 'events' => $events];
+}
+
+/** En consultation : les personnes à ne jamais montrer (vivants déclarés ou probables, fiches confidentielles) [id => true] ; [] sinon */
+function tresor_hidden_people(PDO $pdo): array
+{
+    static $memo = null;
+    if (!tresor_kiosk()) { return []; }
+    if ($memo !== null) { return $memo; }
+    $memo = [];
+    $hasPriv = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='is_private'")->fetchColumn();
+    foreach ($pdo->query("SELECT id FROM persons WHERE COALESCE(living_status,'')='living'" . ($hasPriv ? ' OR COALESCE(is_private,0)=1' : '')) as $r) { $memo[(int) $r['id']] = true; }
+    try {
+        if (!function_exists('gedcom_share_hidden')) { require_once __DIR__ . '/gedcom.php'; }
+        foreach (gedcom_share_hidden($pdo, $pdo->query(person_select())->fetchAll(), $pdo->query('SELECT * FROM families')->fetchAll()) as $h => $_) { $memo[(int) $h] = true; }
+    } catch (Throwable $e) { foreach ($pdo->query('SELECT id FROM persons') as $r) { $memo[(int) $r['id']] = true; } } // dans le doute, personne
+    return $memo;
 }
 
 /* ─── 🥘 🎶 👃 Recettes, chansons et souvenirs des sens : rangés dans la Mémoire familiale (une seule liste, pas de doublon) ───
@@ -161,7 +187,7 @@ function tresor_mem_ensure(PDO $pdo): void
 {
     static $done = false; if ($done) { return; }
     $has = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('family_memories') WHERE name='data_json'")->fetchColumn();
-    if (!$has) { $pdo->exec("ALTER TABLE family_memories ADD COLUMN data_json TEXT NOT NULL DEFAULT '{}'"); }
+    if (!$has && !tresor_kiosk()) { $pdo->exec("ALTER TABLE family_memories ADD COLUMN data_json TEXT NOT NULL DEFAULT '{}'"); }
     $done = true;
 }
 
@@ -242,7 +268,8 @@ function tresor_mem_migrate(PDO $pdo): int
 
 function tresor_mem_list(PDO $pdo, string $kind, int $personId = 0): array
 {
-    tresor_mem_migrate($pdo);
+    if (!tresor_kiosk()) { tresor_mem_migrate($pdo); } // en consultation, une lecture n'écrit rien
+    else { tresor_mem_ensure($pdo); }
     $sql = 'SELECT * FROM family_memories WHERE kind' . ($kind !== '' ? '=?' : " IN ('recipe','song','sense')"); $args = $kind !== '' ? [$kind] : [];
     if ($personId > 0) { $sql .= ' AND id IN (SELECT memory_id FROM family_memory_people WHERE person_id=?)'; $args[] = $personId; }
     $st = $pdo->prepare($sql . ' ORDER BY updated_at DESC, id DESC LIMIT 2000'); $st->execute($args);
@@ -254,12 +281,13 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
     try {
         if (!$isWrite && $action === 'tresors') {
             $kind = (string) ($_GET['kind'] ?? ''); if ($kind !== '' && !in_array($kind, TRESOR_KINDS, true)) { $kind = '-'; }
-            json_response(['items' => tresors_list($pdo, $kind, safe_int($_GET['person_id'] ?? 0))]);
+            $hid = tresor_hidden_people($pdo);
+            json_response(['items' => array_values(array_filter(tresors_list($pdo, $kind, safe_int($_GET['person_id'] ?? 0)), static fn($it) => !isset($hid[(int) ($it['person_id'] ?? 0)])))]);
         }
         if (!$isWrite && $action === 'tresor_tree') { json_response(tresor_tree($pdo)); }
         if (!$isWrite && $action === 'tresor_media') { // les médias joints (lettres, souvenirs) : nom de fichier et sorte, pour les lire sur place
             $ids = array_slice(array_values(array_filter(array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))), 0, 200); if (!$ids) { json_response(['media' => []]); }
-            $st = $pdo->prepare('SELECT id, title, media_type, filename, thumbnail FROM media WHERE id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')'); $st->execute($ids);
+            $st = $pdo->prepare('SELECT m.id, m.title, m.media_type, m.filename, m.thumbnail FROM media m WHERE m.id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')' . sealed_media_sql($pdo)); $st->execute($ids);
             json_response(['media' => $st->fetchAll(PDO::FETCH_ASSOC)]);
         }
         if (!$isWrite && $action === 'tresor_signatures') { // le mur des signatures : chaque zone marquée « signature » sur un document
@@ -267,6 +295,7 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
             if (!$hasType) { json_response(['signatures' => []]); }
             $out = [];
             foreach ($pdo->query("SELECT t.media_id, t.person_id, t.x, t.y, t.w, t.h, m.filename, m.date_text, m.title FROM media_tags t JOIN media m ON m.id=t.media_id WHERE t.tag_type='signature' AND m.media_type='image' ORDER BY t.id LIMIT 3000") as $r) {
+                if (isset($hid[(int) $r['person_id']])) { continue; }
                 $out[] = ['media_id' => (int) $r['media_id'], 'person_id' => (int) $r['person_id'], 'x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h'],
                     'filename' => (string) $r['filename'], 'title' => (string) $r['title'], 'year' => preg_match('/\b(1[0-9]{3}|20[0-9]{2})\b/', (string) $r['date_text'] . ' ' . $r['title'], $m) ? (int) $m[1] : null];
             }
@@ -274,8 +303,9 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
         }
         if (!$isWrite && $action === 'tresor_faces') { // le visage de la lignée, la mosaïque : les visages encadrés dans la visionneuse
             $hasType = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('media_tags') WHERE name='tag_type'")->fetchColumn();
-            $out = [];
+            $out = []; $hid = tresor_hidden_people($pdo);
             foreach ($pdo->query('SELECT t.media_id, t.person_id, t.x, t.y, t.w, t.h, m.filename FROM media_tags t JOIN media m ON m.id=t.media_id WHERE m.media_type=\'image\' AND t.w>0 AND t.h>0' . ($hasType ? " AND COALESCE(t.tag_type,'person')<>'signature'" : '') . ' ORDER BY t.id LIMIT 5000') as $r) {
+                if (isset($hid[(int) $r['person_id']])) { continue; }
                 $out[] = ['media_id' => (int) $r['media_id'], 'person_id' => (int) $r['person_id'], 'x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h'], 'filename' => (string) $r['filename']];
             }
             json_response(['faces' => $out]);

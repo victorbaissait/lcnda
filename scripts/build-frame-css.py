@@ -129,3 +129,6 @@ def build():
 
 if __name__ == '__main__':
     build()
+    # comme build-designs-css.py : les traits d'A1 ne valent que dans les fiches et la colonne de gauche
+    import subprocess, sys
+    subprocess.run([sys.executable, os.path.join(ROOT, 'scripts', 'scope-a1-css.py'), 'apparence-traits.css'], check=True)

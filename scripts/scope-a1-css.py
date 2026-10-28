@@ -110,7 +110,13 @@ def scope_css(css):
             res.append(pre + '{')
         else:
             sels = [x.strip() for x in split_top(sel) if x.strip()]
-            new = [t for x in sels for t in scope_one(x)]
+            outs = {x: scope_one(x) for x in sels}
+            done = {t for x in sels for t in outs[x] if t != x}  # une forme déjà limitée (lancement d'avant) ne se relimite pas
+            new = []
+            for x in sels:
+                for t in ([x] if x in done else outs[x]):
+                    if t not in new:
+                        new.append(t)
             res.append(pre + '{' if new == sels else com + lead + ', '.join(new) + ' {')
         i = m.end()
     return ''.join(res)

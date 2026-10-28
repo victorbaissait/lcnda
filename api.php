@@ -3857,6 +3857,7 @@ function media_filtered_rows(PDO $pdo, string $like, string $scope, int $personI
 function media_list_rows(PDO $pdo, string $like, int $limit=500, int $offset=0, string $scope='', int $personId=0, string $city='', string $dateFrom='', string $dateTo=''): array
 {
     $rows = media_filtered_rows($pdo, $like, $scope, $personId, $city, $dateFrom, $dateTo);
+    if (sealed_media_sql($pdo) !== '') { $sealed = sealed_letter_media_ids($pdo); $rows = array_values(array_filter($rows, static fn($r) => !isset($sealed[(int) ($r['id'] ?? 0)]))); } // consultation : lettres scellées
     usort($rows, static function (array $a, array $b): int {
         $cmp = media_chronology_sort_key($a) <=> media_chronology_sort_key($b);
         if ($cmp !== 0) return $cmp;

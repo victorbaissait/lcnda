@@ -10,16 +10,16 @@
 /* ═════════════════════════ A1 · Style général ═════════════════════════ */
 /* traits : l'épaisseur choisie ; la couleur vient des couleurs de l'Apparence (texte mêlé au fond des cartes),
    donc elle suit le Preset choisi. Un thème à soi qui a ses propres traits (classe lc-frame, « ✎ Mes thèmes ») garde les siens. */
-:root:not(.lc-frame)[data-lc-lines], :root:not(.lc-frame) [data-lc-lines], :root:not(.lc-frame) [data-lc-lines] { --lc-frame-color: var(--ink) !important; --lc-frame-k: var(--lc-k, 1) !important; --line: calc(2px * var(--lc-k, 1)) solid var(--lc-frame-color) !important; }
-:root:not(.lc-frame)[data-lc-lines][data-lc-style="doux"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="doux"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="doux"] { --lc-frame-color: color-mix(in srgb, var(--ink) 24%, var(--card-bg, #fff)) !important; }
-:root:not(.lc-frame)[data-lc-lines][data-lc-style="sobre"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="sobre"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="sobre"] { --lc-frame-color: color-mix(in srgb, var(--ink) 20%, var(--card-bg, #fff)) !important; }
-:root:not(.lc-frame)[data-lc-lines][data-lc-style="papier"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="papier"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="papier"] { --lc-frame-color: color-mix(in srgb, var(--ink) 55%, var(--card-bg, #fff)) !important; }
-:root[data-theme="dark"]:not(.lc-frame)[data-lc-lines][data-lc-style="avant"], :root[data-theme="dark"]:not(.lc-frame) [data-lc-lines][data-lc-style="avant"], :root[data-theme="dark"]:not(.lc-frame) [data-lc-lines][data-lc-style="avant"] { --lc-frame-color: #555 !important; }
+:root:not(.lc-frame)[data-lc-lines], :root:not(.lc-frame) [data-lc-lines] { --lc-frame-color: var(--ink) !important; --lc-frame-k: var(--lc-k, 1) !important; --line: calc(2px * var(--lc-k, 1)) solid var(--lc-frame-color) !important; }
+:root:not(.lc-frame)[data-lc-lines][data-lc-style="doux"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="doux"] { --lc-frame-color: color-mix(in srgb, var(--ink) 24%, var(--card-bg, #fff)) !important; }
+:root:not(.lc-frame)[data-lc-lines][data-lc-style="sobre"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="sobre"] { --lc-frame-color: color-mix(in srgb, var(--ink) 20%, var(--card-bg, #fff)) !important; }
+:root:not(.lc-frame)[data-lc-lines][data-lc-style="papier"], :root:not(.lc-frame) [data-lc-lines][data-lc-style="papier"] { --lc-frame-color: color-mix(in srgb, var(--ink) 55%, var(--card-bg, #fff)) !important; }
+:root[data-theme="dark"]:not(.lc-frame)[data-lc-lines][data-lc-style="avant"], :root[data-theme="dark"]:not(.lc-frame) [data-lc-lines][data-lc-style="avant"] { --lc-frame-color: #555 !important; }
 /* ombres */
-:root[data-lc-sh="douces"], :root [data-lc-sh="douces"], :root [data-lc-sh="douces"] { --lc-sh-l: 0 6px 18px rgba(25,35,60,.10), 0 1px 3px rgba(25,35,60,.08); --lc-sh-m: 0 2px 8px rgba(25,35,60,.09); --lc-sh-s: 0 1px 3px rgba(25,35,60,.12);
+:root[data-lc-sh="douces"], :root [data-lc-sh="douces"] { --lc-sh-l: 0 6px 18px rgba(25,35,60,.10), 0 1px 3px rgba(25,35,60,.08); --lc-sh-m: 0 2px 8px rgba(25,35,60,.09); --lc-sh-s: 0 1px 3px rgba(25,35,60,.12);
     --shadow: var(--lc-sh-l) !important; --shadow-small: var(--lc-sh-m) !important; }
-:root[data-theme="dark"][data-lc-sh="douces"], :root[data-theme="dark"] [data-lc-sh="douces"], :root[data-theme="dark"] [data-lc-sh="douces"] { --lc-sh-l: 0 6px 18px rgba(0,0,0,.45); --lc-sh-m: 0 2px 8px rgba(0,0,0,.4); --lc-sh-s: 0 1px 3px rgba(0,0,0,.45); }
-:root[data-lc-sh="aucune"], :root [data-lc-sh="aucune"], :root [data-lc-sh="aucune"] { --shadow: none !important; --shadow-small: none !important; }
+:root[data-theme="dark"][data-lc-sh="douces"], :root[data-theme="dark"] [data-lc-sh="douces"] { --lc-sh-l: 0 6px 18px rgba(0,0,0,.45); --lc-sh-m: 0 2px 8px rgba(0,0,0,.4); --lc-sh-s: 0 1px 3px rgba(0,0,0,.45); }
+:root[data-lc-sh="aucune"], :root [data-lc-sh="aucune"] { --shadow: none !important; --shadow-small: none !important; }
 /* fond quadrillé */
 :root[data-lc-grid="off"] .workspace { background-image: none; }
 /* coins arrondis : ce que la feuille fabriquée ne peut pas deviner (cadres déjà « carrés » exprès) */
