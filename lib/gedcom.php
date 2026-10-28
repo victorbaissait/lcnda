@@ -35,7 +35,7 @@ const GEDCOM_FAMILY_EVENT_TAGS = ['ANUL', 'CENS', 'DIV', 'DIVF', 'ENGA', 'MARB',
 const GEDCOM_STRUCTURAL_TAGS = ['NAME', 'SEX', 'FAMC', 'FAMS', 'NOTE', 'SOUR', 'OBJE', 'CHAN', 'CREA', 'RIN', 'REFN',
     'RFN', 'AFN', 'UID', 'ASSO', 'ALIA', 'ANCI', 'DESI', 'SUBM', 'HUSB', 'WIFE', 'CHIL', 'NCHI', 'RESN', 'SLGS', 'SLGC',
     'BAPL', 'CONL', 'ENDL', 'INIL', '_CREA', '_UID', '_GUID', '_FIL', '_UST', '_UPD', '_PRIM', '_FREL', '_MREL',
-    '_FSFTID', '_TIME', '_STAT', '_KIND', '_LABEL', '_TITL', '_CAL', '_COLR'];
+    '_FSFTID', '_TIME', '_STAT', '_KIND', '_PET', '_LABEL', '_TITL', '_CAL', '_COLR'];
 
 function gedcom_value(mixed $value): string
 {
@@ -619,7 +619,12 @@ function export_gedcom(PDO $pdo): never
             if (trim((string) ($v['source_note'] ?? '')) !== '') { $line(2, 'NOTE', (string) $v['source_note']); }
         }
         $line(1, 'SEX', match ($p['gender'] ?? 'unknown') { 'male' => 'M', 'female' => 'F', default => 'U' });
-        if (($p['kind'] ?? 'human') === 'animal') { $line(1, '_KIND', 'animal'); } // fiche d'animal (balise LCNDA, relue à l'import)
+        if (($p['kind'] ?? 'human') === 'animal') { // fiche d'animal (balises LCNDA, relues à l'import) : l'espèce, la race, la puce… dans _PET
+            $line(1, '_KIND', 'animal');
+            try { $petStmt ??= $pdo->prepare('SELECT data_json FROM pets WHERE person_id=? ORDER BY id LIMIT 1'); $petStmt->execute([$pid]); $pj = (string) $petStmt->fetchColumn(); $petStmt->closeCursor(); }
+            catch (Throwable) { $pj = ''; }
+            if ($pj !== '' && $pj !== '{}' && is_array(json_decode($pj, true))) { $text(2, '_PET', $pj); }
+        }
         $hasOccu = false;
         foreach ($eventsByPerson[$pid] ?? [] as $e) { if (($e['gedcom_tag'] ?? '') === 'OCCU') { $hasOccu = true; } }
         if (!$hasOccu && trim((string) ($p['occupation'] ?? '')) !== '') { $line(1, 'OCCU', (string) $p['occupation']); }
@@ -756,6 +761,18 @@ function gedcom_event_type_id(PDO $pdo, array &$cache, string $scope, string $ta
  * IBMPC / MSDOS (CP850), MACINTOSH (MacRoman), UTF-16 (CHAR UNICODE) ; sinon, si ce n'est pas de l'UTF-8 valide,
  * Windows-1252. La marque BOM est retirée.
  */
+/** L'encodage d'origine d'un GEDCOM (affiché dans l'analyse) */
+function gedcom_detect_encoding(string $text): string
+{
+    if (str_starts_with($text, "\xFF\xFE") || str_starts_with($text, "\xFE\xFF") || (strlen($text) > 3 && ($text[0] === "\0" || $text[1] === "\0"))) { return 'UTF-16'; }
+    if (str_starts_with($text, "\xEF\xBB\xBF") || mb_check_encoding($text, 'UTF-8')) { return 'UTF-8'; }
+    $char = preg_match('/^1 CHAR (.+)/m', $text, $m) ? strtoupper(trim($m[1])) : '';
+    if ($char === 'ANSEL') { return 'ANSEL'; }
+    if (in_array($char, ['IBMPC', 'MSDOS', 'IBM PC', 'CP850', 'DOS'], true)) { return 'MS-DOS (CP850)'; }
+    if (in_array($char, ['MACINTOSH', 'MAC', 'MACROMAN'], true)) { return 'Mac Roman'; }
+    return 'Windows-1252';
+}
+
 function gedcom_text_to_utf8(string $text): string
 {
     if (str_starts_with($text, "\xFF\xFE") || str_starts_with($text, "\xFE\xFF") || (strlen($text) > 3 && ($text[0] === "\0" || $text[1] === "\0"))) {
@@ -803,11 +820,14 @@ function gedimport_real_media_type(string $path): bool
     return (bool) preg_match('#^(image/|audio/|video/|application/pdf$)#', $mime);
 }
 
-function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = null): array
+function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = null, bool $fromDisk = false): array
 {
     $content = file_get_contents($path);
     if ($content === false) { throw new RuntimeException('Lecture du fichier GEDCOM impossible'); }
     $content = gedcom_text_to_utf8($content);
+    if (!preg_match('/^\s*0\s+HEAD\b/m', $content) && !preg_match('/^\s*0\s+@[^@]+@\s+INDI\b/m', $content)) {
+        throw new RuntimeException('Ce fichier n’est pas un GEDCOM : aucune personne ni en-tête « HEAD » trouvé.');
+    }
     $records = gedimport_parse($content);
     $byXref = [];
     foreach ($records as $rec) { if ($rec->xref) { $byXref[$rec->xref] = $rec; } }
@@ -906,7 +926,8 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
     $mediaIndex = $mediaBaseDir !== null ? gedimport_index_media_dir($mediaBaseDir) : [];
     $insertMedia = $pdo->prepare('INSERT INTO media(title,description,media_type,filename,thumbnail,date_text) VALUES(?,?,?,?,?,?)');
     $insertMediaLink = $pdo->prepare('INSERT INTO media_links(media_id,entity_type,entity_id,position) VALUES(?,?,?,?)');
-    $fromDisk = $mediaBaseDir !== null; // fichier .ged ouvert depuis l'ordinateur (app de bureau), pas envoyé par une page web
+    // $fromDisk : seulement un .ged ouvert depuis l'ordinateur (app de bureau) ; jamais une archive reçue (GedZip…), qui pourrait
+    // désigner n'importe quel fichier du disque (« 2 FILE /Users/…/impots.pdf ») et l'aspirer dans les médias
     $resolveMedia = static function (stdClass $obje) use ($pdo, $byXref, $mediaIndex, $insertMedia, &$mediaMap, &$stats, $textOf, $noteText, $fromDisk): ?int {
         $v = trim($obje->value);
         $key = null;
@@ -989,7 +1010,11 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $stats['persons']++;
         if (($k = gedimport_child($rec, '_KIND')) && strtolower(trim($k->value)) === 'animal') {
             $pdo->prepare("UPDATE persons SET kind='animal' WHERE id=?")->execute([$pid]);
-            if (function_exists('pet_of_person')) { pet_of_person($pdo, $pid, true); }
+            if (function_exists('pet_of_person')) {
+                $petId = pet_of_person($pdo, $pid, true);
+                $pn = gedimport_child($k, '_PET'); $pd = $pn ? json_decode(gedimport_text($pn), true) : null;
+                if ($petId && is_array($pd) && function_exists('pet_clean')) { $pdo->prepare('UPDATE pets SET data_json=? WHERE id=?')->execute([json_encode(pet_clean($pd), JSON_UNESCAPED_UNICODE), $petId]); }
+            }
             $stats['animals']++;
         }
         $position = 0;

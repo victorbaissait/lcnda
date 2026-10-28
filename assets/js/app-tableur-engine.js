@@ -1129,7 +1129,7 @@
     /** texte XML → {n, a, c} ; refuse DOCTYPE et ENTITY (bombes d'entités, fichiers externes) */
     function parseXml(text, {maxNodes = LIMITS.xmlNodes} = {}) {
         const s = String(text);
-        if (/<!DOCTYPE|<!ENTITY/i.test(s.slice(0, 4096)) || /<!ENTITY/i.test(s)) throw new Error('fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un tableur n’utilise pas');
+        if (/<!DOCTYPE|<!ENTITY/i.test(s.slice(0, 4096)) || /<!ENTITY/i.test(s)) throw new Error('fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas');
         const root = {n: '#root', a: {}, c: []}, stack = [root]; let i = 0, nodes = 0; const n = s.length;
         while (i < n) {
             const lt = s.indexOf('<', i);

@@ -376,7 +376,7 @@ function vault_export(PDO $pdo, array $data): never
         $pdo->prepare('INSERT INTO cousin_vault_sent(cousin, size) VALUES(?,?)')->execute([$cousin, (int) filesize($out)]);
     } catch (Throwable $e) {
         @unlink($tmp); @unlink($out);
-        json_response(['error' => $e->getMessage()], 500);
+        json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 400 : 500); // un mauvais mot de passe n'est pas une panne
     }
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="copie-chiffree-' . date('Ymd') . '.lcnda-coffre"'); // pas de nom de famille dans le nom du fichier envoyé

@@ -794,6 +794,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-board-prefs-sets',
         'genealogie-portraits', // K7 : un seul portrait (app-portraits.js)
         'genealogie-left-column', // K15 : la colonne de gauche (app-colonne.js)
+        'genealogie-accord', // ✍️ Accord des mots pour les fiches ni homme ni femme (app-accord.js)
         'genealogie-designs', // 🎨 Designs au choix A1–A8 (app-designs.js)
         'genealogie-mode-simple', // 🧓 Mode simple : ses réglages (app-mode-simple.js)
         'genealogie-mode-simple-presets', // 🧓 Mode simple : réglages enregistrés
@@ -2446,7 +2447,7 @@ function census_for_person(PDO $pdo, int $personId): array
     if($rows){
         $ids=array_values(array_unique(array_map(fn($row)=>(int)$row['id'],$rows)));
         $marks=implode(',',array_fill(0,count($ids),'?'));
-        $members=$pdo->prepare("SELECT cm.*,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name,p.birth_year,p.death_year
+        $members=$pdo->prepare("SELECT cm.*,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name,p.birth_year,p.death_year,p.gender AS person_gender
             FROM census_members cm
             LEFT JOIN (".person_select().") p ON p.id=cm.person_id
             WHERE cm.census_id IN ($marks)
@@ -6525,7 +6526,7 @@ function csv_row($out, array $fields): void
 {
     // Un texte qui commence par = + - @ serait lu comme une formule par Excel / Numbers / LibreOffice : on le protège par une apostrophe.
     $fields = array_map(static fn($v) => is_string($v) && $v !== '' && strpbrk($v[0], "=+-@\t\r") !== false && !is_numeric($v) ? "'" . $v : $v, $fields);
-    fputcsv($out, $fields, ',', '"', '\\');
+    fputcsv($out, $fields, ',', '"', ''); // pas de caractère d'échappement : « \" » dans un champ reste lisible par les tableurs
 }
 
 function export_csv(PDO $pdo): never
@@ -7075,6 +7076,7 @@ function verify_gedcom(PDO $pdo): never
     $text=file_get_contents($file['tmp_name']);
     if($text===false){json_response(['error'=>'Lecture impossible'],500);}
     // Détection encodage
+    $encoding=gedcom_detect_encoding($text);
     $text=gedcom_text_to_utf8($text); // BOM, ANSEL, MS-DOS, Mac, UTF-16
     $lines=preg_split('/\r\n|\r|\n/',$text);
     // Version GEDCOM
@@ -7311,7 +7313,7 @@ function import_package(PDO $pdo, ?array $file): never
     try {
         if (in_array($ext, ['ged', 'gedcom'], true)) {
             // Fichier lu sur place : les médias cités par un chemin relatif sont cherchés à côté du .ged.
-            $stats = import_gedcom_into_db($pdo, $file['tmp_name'], !empty($file['local']) ? dirname($file['tmp_name']) : null);
+            $stats = import_gedcom_into_db($pdo, $file['tmp_name'], !empty($file['local']) ? dirname($file['tmp_name']) : null, !empty($file['local']));
         } elseif (in_array($ext, ['hmw', 'heredis'], true)) {
             $stats = heredis_import_into_db($pdo, $file['tmp_name']);
         } elseif ($ext === 'mftpkg') {
@@ -7344,8 +7346,8 @@ function gedimport_parse(string $text): array
     $root = [];
     $stack = [];
     foreach ($lines as $raw) {
-        $raw = rtrim($raw);
-        if ($raw === '') { continue; }
+        $raw = rtrim($raw, "\r\n"); // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
+        if (trim($raw) === '') { continue; }
         if (!preg_match('/^(\d+)\s(@[^@]+@\s)?([A-Za-z0-9_]+)\s?(.*)$/', $raw, $m)) { continue; }
         $level = (int) $m[1];
         $node = new stdClass();
@@ -7591,6 +7593,7 @@ function import_zip_package_into_db(PDO $pdo, string $zipPath): array
         try {
             $za = new ZipArchive();
             $za->open($zipPath);
+            import_zip_guard($za, $tmpDir);
             $za->extractTo($tmpDir);
             $za->close();
             $found = null;
@@ -7605,6 +7608,21 @@ function import_zip_package_into_db(PDO $pdo, string $zipPath): array
     if ($hasGed) { return import_gedzip_into_db($pdo, $zipPath); }
     if ($hasDatabase) { return import_mftpkg_into_db($pdo, $zipPath); }
     throw new RuntimeException("Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database'), ni fichier Hérédis (.heredis) dans le paquet.");
+}
+
+/** Avant d'ouvrir une archive reçue (GedZip, Hérédis, MacFamilyTree zippés) : pas de bombe zip ni d'archive démesurée */
+function import_zip_guard(ZipArchive $za, string $dest): void
+{
+    if ($za->numFiles > 20000) { throw new RuntimeException('Cette archive contient trop de fichiers : elle n’est pas ouverte.'); }
+    $total = 0;
+    for ($i = 0; $i < $za->numFiles; $i++) {
+        $st = $za->statIndex($i); if (!$st) { continue; }
+        $size = (int) ($st['size'] ?? 0); $packed = max(1, (int) ($st['comp_size'] ?? 0));
+        if ($size > 50 * 1048576 && $size / $packed > 100) { throw new RuntimeException('Cette archive contient un fichier anormal (« ' . basename((string) $st['name']) . ' ») : elle n’est pas ouverte.'); }
+        $total += $size;
+    }
+    $free = @disk_free_space(is_dir($dest) ? $dest : sys_get_temp_dir());
+    if ($total > 8 * 1073741824 || ($free !== false && $total > $free - 1073741824)) { throw new RuntimeException('Cette archive est trop grosse une fois ouverte pour la place libre de l’ordinateur.'); }
 }
 
 /**
@@ -7624,7 +7642,8 @@ function import_gedzip_into_db(PDO $pdo, string $zipPath): array
         if ($za->open($zipPath) !== true) {
             throw new RuntimeException("Impossible d'ouvrir l'archive GedZip (format inattendu)");
         }
-        $za->extractTo($tmpDir);
+        import_zip_guard($za, $tmpDir);
+            $za->extractTo($tmpDir);
         $za->close();
 
         $gedPath = null;
@@ -7664,6 +7683,7 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
             if ($za->open($zipPath) !== true) {
                 throw new RuntimeException("Impossible d'ouvrir le paquet .mftpkg (format inattendu)");
             }
+            import_zip_guard($za, $tmpDir);
             $za->extractTo($tmpDir);
             $za->close();
         }

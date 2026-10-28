@@ -580,26 +580,26 @@
             const missing=data.missing_expected_tables?.length?`<p class="muted" style="color:var(--red)">Tables manquantes : ${data.missing_expected_tables.join(', ')}</p>`:'';
             const compat=data.compatible?'✅ Structure compatible':'⚠️ Structure incomplète ou différente';
             const rows=Object.entries(data.counts).map(([t,n])=>`<tr><td>${escapeHtml(t)}</td><td>${Number(n).toLocaleString('fr-FR')}</td></tr>`).join('');
-            return `<div class="data-table-wrap" style="margin-top:.75rem"><p><strong>Base SQLite</strong> — ${compat}</p>${missing}<table class="data-table"><thead><tr><th>Table</th><th>Lignes</th></tr></thead><tbody>${rows}</tbody></table>${fusionWarning}<p class="muted" style="font-size:.85em">Import réel à câbler côté serveur.</p></div>`;
+            return `<div class="data-table-wrap" style="margin-top:.75rem"><p><strong>Base SQLite</strong> — ${compat}</p>${missing}<table class="data-table"><thead><tr><th>Table</th><th>Lignes</th></tr></thead><tbody>${rows}</tbody></table>${fusionWarning}<p class="muted" style="font-size:.85em">ℹ️ Cette analyse ne change rien dans ta base. Pour faire entrer un arbre : « Fusionner un arbre » (ci-dessus) ; pour ouvrir une autre base : Réglages → Mes généalogies.</p></div>`;
         }
         if(data.format==='json'){
             const rows=Object.entries(data.summary||{}).map(([k,n])=>`<tr><td>${escapeHtml(k)}</td><td>${Number(n).toLocaleString('fr-FR')}</td></tr>`).join('');
-            return `<div class="data-table-wrap" style="margin-top:.75rem"><p><strong>JSON</strong> — Clés : ${(data.keys||[]).map(k=>escapeHtml(String(k))).join(', ')}</p><table class="data-table"><thead><tr><th>Section</th><th>Entrées</th></tr></thead><tbody>${rows}</tbody></table>${fusionWarning}<p class="muted" style="font-size:.85em">Import réel à câbler côté serveur.</p></div>`;
+            return `<div class="data-table-wrap" style="margin-top:.75rem"><p><strong>JSON</strong> — Clés : ${(data.keys||[]).map(k=>escapeHtml(String(k))).join(', ')}</p><table class="data-table"><thead><tr><th>Section</th><th>Entrées</th></tr></thead><tbody>${rows}</tbody></table>${fusionWarning}<p class="muted" style="font-size:.85em">ℹ️ Cette analyse ne change rien dans ta base. Pour faire entrer un arbre : « Fusionner un arbre » (ci-dessus) ; pour ouvrir une autre base : Réglages → Mes généalogies.</p></div>`;
         }
         if(data.format==='csv'){
-            return `<div class="data-table-wrap" style="margin-top:.75rem"><p><strong>CSV</strong> — ${plural(data.row_count||0,'ligne')}</p><p class="muted">Colonnes : ${(data.headers||[]).map(k=>escapeHtml(String(k))).join(', ')}</p>${fusionWarning}<p class="muted" style="font-size:.85em">Import réel à câbler côté serveur.</p></div>`;
+            return `<div class="data-table-wrap" style="margin-top:.75rem"><p><strong>CSV</strong> — ${plural(data.row_count||0,'ligne')}</p><p class="muted">Colonnes : ${(data.headers||[]).map(k=>escapeHtml(String(k))).join(', ')}</p>${fusionWarning}<p class="muted" style="font-size:.85em">ℹ️ Cette analyse ne change rien dans ta base. Pour faire entrer un arbre : « Fusionner un arbre » (ci-dessus) ; pour ouvrir une autre base : Réglages → Mes généalogies.</p></div>`;
         }
         if(data.format==='mftpkg'){
             const sqliteNote=data.has_sqlite?'✅ Base SQLite détectée dans le paquet':'⚠️ Aucune base SQLite repérée dans le paquet';
             const entries=(data.entries||[]).slice(0,20).map(name=>`<tr><td>${escapeHtml(name)}</td></tr>`).join('');
             const more=data.entry_count>20?`<p class="muted" style="font-size:.85em">… et ${plural(data.entry_count-20,'autre élément','autres éléments')}.</p>`:'';
-            return `<div class="data-table-wrap" style="margin-top:.75rem"><p><strong>Mac Family Tree (.mftpkg)</strong> — ${plural(data.entry_count||0,'élément')} dans le paquet · ${sqliteNote}</p><table class="data-table"><thead><tr><th>Contenu du paquet</th></tr></thead><tbody>${entries}</tbody></table>${more}${fusionWarning}<p class="muted" style="font-size:.85em">Import réel à câbler côté serveur.</p></div>`;
+            return `<div class="data-table-wrap" style="margin-top:.75rem"><p><strong>Mac Family Tree (.mftpkg)</strong> — ${plural(data.entry_count||0,'élément')} dans le paquet · ${sqliteNote}</p><table class="data-table"><thead><tr><th>Contenu du paquet</th></tr></thead><tbody>${entries}</tbody></table>${more}${fusionWarning}<p class="muted" style="font-size:.85em">ℹ️ Cette analyse ne change rien dans ta base. Pour faire entrer un arbre : « Fusionner un arbre » (ci-dessus) ; pour ouvrir une autre base : Réglages → Mes généalogies.</p></div>`;
         }
         return `<p class="muted">Format non reconnu.</p>`;
     }
     function renderGedcomVerifyResult(data){
         const statusIcon=data.valid?'✅':'❌';
-        const versionWarn=!data.version?.startsWith('7')?`<p class="muted" style="font-size:.85em;color:var(--orange)">⚠️ GEDCOM ${escapeHtml(data.version||'?')} — version ancienne. GEDCOM 7.0 est recommandé.</p>`:'';
+        const versionWarn=''; // 5.5.1 reste la version la plus lue par les autres logiciels (l'app l'exporte par défaut)
         const errHtml=(data.errors||[]).length?`<h4 style="color:var(--red);margin:.5rem 0 .25rem">Erreurs (${data.errors.length})</h4><ul>${data.errors.map(e=>`<li>${escapeHtml(e)}</li>`).join('')}</ul>`:'';
         const warnHtml=(data.warnings||[]).length?`<h4 style="color:var(--orange);margin:.5rem 0 .25rem">Avertissements (${data.warnings.length})</h4><ul>${data.warnings.map(w=>`<li>${escapeHtml(w)}</li>`).join('')}</ul>`:'';
         const preview=data.import_preview||{};
@@ -663,7 +663,7 @@
 
 <section class="maintenance-panel">
   <h3>JSON</h3>
-  <p>Import d'un fichier JSON exporté depuis cette application. La structure est vérifiée avant intégration.</p>
+  <p>Analyse d'un fichier JSON (par exemple l'export JSON de l'app) : ses rubriques et leur nombre d'entrées. Le JSON sert d'archive lisible ; il ne se réimporte pas.</p>
   <form id="import-json-form" class="import-form"><label>Fichier JSON<input type="file" name="file" accept=".json,application/json"></label><button class="button secondary" type="submit">Analyser le JSON</button></form>
   <div id="import-json-result"></div>
 </section>
@@ -673,12 +673,6 @@
   <p>Import CSV pour corrections ou ajouts tabulaires. Colonnes détectées avant tout import.</p>
   <form id="import-csv-form" class="import-form"><label>Fichier CSV<input type="file" name="file" accept=".csv,text/csv"></label><button class="button secondary" type="submit">Analyser le CSV</button></form>
   <div id="import-csv-result"></div>
-</section>
-
-<section class="maintenance-panel">
-  <h3>GEDZIP (.gdz)</h3>
-  <p>Archive GEDCOM compressée. Contenu extrait et analysé avant tout import.</p>
-  <form id="import-gedzip-form" class="import-form"><label>Fichier GEDZIP<input type="file" name="file" accept=".gdz,.zip"></label><button class="button secondary" type="submit">Analyser le GEDZIP</button></form>
 </section>
 
 <section class="maintenance-panel">
@@ -716,7 +710,6 @@
     $('#import-csv-form').addEventListener('submit',async event=>{event.preventDefault();const file=event.currentTarget.elements.file.files[0];if(!file){toast('Sélectionne un fichier CSV','error');return;}const result=$('#import-csv-result');result.innerHTML='<p class="muted">Analyse en cours…</p>';try{const d=await importUpload('import_analyse',file);result.innerHTML=renderAnalyseResult(d);}catch(err){result.innerHTML='';toast('Analyse impossible : '+err.message,'error');}});
 
     // ── GEDZIP stub ──
-    $('#import-gedzip-form').addEventListener('submit',event=>{event.preventDefault();toast('Analyse GEDZIP à câbler côté serveur.','error');});
 
     // ── Analyse Mac Family Tree .mftpkg (serveur) ──
     $('#import-mftpkg-form').addEventListener('submit',async event=>{event.preventDefault();const file=event.currentTarget.elements.file.files[0];if(!file){toast('Sélectionne un fichier .mftpkg','error');return;}const result=$('#import-mftpkg-result');result.innerHTML='<p class="muted">Analyse en cours…</p>';try{const d=await importUpload('import_analyse',file);result.innerHTML=renderAnalyseResult(d);}catch(err){result.innerHTML='';toast('Analyse impossible : '+err.message,'error');}});

@@ -1165,10 +1165,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=19" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=22" defer></script>
-<script src="assets/js/app-tableur-engine.js?v=7" defer></script>
+<script src="assets/js/app-tableur-engine.js?v=8" defer></script>
 <script src="assets/js/app-calculette-engine.js?v=1" defer></script>
 <script src="assets/js/app-texte-engine.js?v=1" defer></script>
-<script src="assets/js/app-texte-formats.js?v=2" defer></script>
+<script src="assets/js/app-texte-formats.js?v=3" defer></script>
 <script src="assets/js/app-lot-engine.js?v=2" defer></script>
 <script src="assets/js/app-saisies.js?v=1" defer></script>
 <script src="assets/js/app-forms.js?v=3" defer></script>
@@ -1185,7 +1185,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sidegroups.js?v=12" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=41" defer></script>
-<script src="assets/js/app-maintenance.js?v=38" defer></script>
+<script src="assets/js/app-maintenance.js?v=39" defer></script>
 <script src="assets/js/app-recherche.js?v=24" defer></script>
 <script src="assets/js/app-graphiques.js?v=19" defer></script>
 <script src="assets/js/app-side-folders.js?v=2" defer></script>
