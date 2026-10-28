@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=263">
     <link rel="stylesheet" href="assets/css/picker.css?v=6">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=252">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=253">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -1196,7 +1196,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=4" defer></script>
 <script src="assets/js/heritage-links.js?v=19" defer></script>
-<script src="assets/js/heritage-more.js?v=239" defer></script>
+<script src="assets/js/heritage-more.js?v=241" defer></script>
 <script src="assets/js/heritage-controle.js?v=4" defer></script>
 <script src="assets/js/heritage-records.js?v=11" defer></script>
 <script src="assets/js/heritage-research.js?v=36" defer></script>
@@ -1207,7 +1207,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-decennales.js?v=3" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=12" defer></script>
 <script src="assets/js/heritage-audio-engine.js?v=2" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=71" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=72" defer></script>
 <script src="assets/js/heritage-montage-plus.js?v=5" defer></script>
 <script src="assets/js/heritage-audio-quick.js?v=3" defer></script>
 <script src="assets/js/heritage-audio-studio.js?v=3" defer></script>
@@ -1229,7 +1229,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-layout-pdfa.js?v=1" defer></script>
 <script src="assets/js/heritage-layout-livret.js?v=1" defer></script>
 <script src="assets/js/heritage-edittools.js?v=24" defer></script>
-<script src="assets/js/heritage-editorkeys.js?v=20" defer></script>
+<script src="assets/js/heritage-editorkeys.js?v=21" defer></script>
 <script src="assets/js/heritage-livrets.js?v=15" defer></script>
 <script src="assets/js/heritage-pets.js?v=32" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>

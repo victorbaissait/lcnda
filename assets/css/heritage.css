@@ -5108,6 +5108,14 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 .h-world-q:has(.ui-search) { border: 0 !important; background: transparent; padding: 0 !important; box-shadow: none; }
 .h-world-q:has(.ui-search) > span[aria-hidden="true"] { display: none; }
 
+/* 🎬 Montage : taille des boutons des pistes (👁 🔓 ↑ ↓ 🗑) réglable — Réglages → Montage… ou Affichage → Boutons des pistes ;
+   sans réglage (« comme avant ») rien ne change. La colonne des noms s'élargit avec eux (--mt-off, calculé par le montage). */
+.h-avx-montage.mt-tbtn .h-mt-lname { width: calc(var(--mt-off, 150px) - 4px); }
+.h-avx-montage.mt-tbtn .h-mt-lname .h-mt-tbtns { gap: 4px; flex-wrap: nowrap; }
+.h-avx-montage.mt-tbtn .h-mt-lname .h-mt-tbtns button { width: var(--mt-tbtn); height: var(--mt-tbtn); min-width: var(--mt-tbtn); min-height: var(--mt-tbtn); padding: 0; margin: 0; font-size: calc(var(--mt-tbtn) * .55); line-height: 1; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+.h-mt-lname .h-mt-tbtns button.ord-arrow, .h-mt-lname .h-mt-tbtns button.icon-action.ia-auto { background: var(--white) !important; } /* ↑ ↓ 🗑 : le même fond que 👁 🔓 (en mode sombre aussi) */
+.h-mt-keysdlg .h-mt-keysbody { padding: 0 20px 12px; overflow: auto; }
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .h-poilu-event.is-blesse>strong,:root[data-theme="dark"] .h-poilu-event.is-tue>strong,:root[data-theme="dark"] .h-poilu-event.is-gaze>strong{color:#f49aa3}
 :root[data-theme="dark"] .h-calib-image{background:#292929}

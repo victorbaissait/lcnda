@@ -528,6 +528,8 @@
     }
     const dimsOf = el => ({vw: el?.videoWidth || el?.naturalWidth || 0, vh: el?.videoHeight || el?.naturalHeight || 0});
     const FONTS_V = [['Georgia, serif', 'Georgia'], ['Helvetica, Arial, sans-serif', 'Helvetica'], ['"Times New Roman", serif', 'Times'], ['"Courier New", monospace', 'Courier'], ['"Brush Script MT", cursive', 'Manuscrite'], ['Impact, sans-serif', 'Impact']];
+    /** une police de titre gardée dans un projet : « "Nom", sans-serif » (polices de l'ordinateur, E5) — ni ; { } ( ) < > \\ ni retour à la ligne */
+    const FONT_OK = f => typeof f === 'string' && /^[^;{}()<>\\\u0000-\u001f]{1,120}$/.test(f);
     let uid = 0; const nid = p => p + (++uid) + Date.now().toString(36).slice(-3);
     /* Réglages du montage (Réglages → Montage, retouche, mise en page et son) : disposition et enregistrement par défaut */
     const MT_KEY = 'genealogie-montage-prefs';
@@ -539,20 +541,22 @@
     /** « 0,5 ; 1 ; 2× » → [0.5, 1, 2] : de 0,1 à 10, sans doublons, 12 au plus, dans l'ordre */
     const parseSpeeds = v => { const list = (Array.isArray(v) ? v : String(v ?? '').split(/[;\s/|]+/)).map(x => Number(String(x).replace(/,$/, '').replace(',', '.').replace(/[×x]/gi, ''))).filter(x => Number.isFinite(x) && x >= 0.1 && x <= 10).map(x => Math.round(x * 100) / 100); const u = [...new Set(list)]; return u.length ? u.sort((a, b) => a - b).slice(0, 12) : null; };
     const speedsText = l => l.map(x => String(x).replace('.', ',')).join(' ; ');
-    const MT_DEF = {side: 'right', sideW: 440, stage: 50, lane: 40, help: true, snap: true, fmt: 'mp4', height: 0, quality: 5, fps: 30, abr: 128, lufs: 0, speeds: MT_SPEEDS, ...Object.fromEntries(MT_COLORS.map(c => [c[0], c[2]]))};
+    const MT_DEF = {side: 'right', sideW: 440, stage: 50, lane: 40, tbtn: 0, help: true, snap: true, fmt: 'mp4', height: 0, quality: 5, fps: 30, abr: 128, lufs: 0, speeds: MT_SPEEDS, ...Object.fromEntries(MT_COLORS.map(c => [c[0], c[2]]))};
     // texte lisible (noir ou blanc) sur la couleur choisie
     const inkOn = hex => { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return '#111'; const n = parseInt(m[1], 16), l = 0.299 * (n >> 16) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255); return l > 150 ? '#111' : '#fff'; };
+    // taille des boutons des pistes (👁 🔓 ↑ ↓ 🗑) : 0 = comme avant (≈ 22 px), sinon de 16 à 44 px
+    const TBTN0 = 22, tbtnOf = x => { const n = Math.round(Number(x)); return Number.isFinite(n) && n >= 16 && n !== TBTN0 ? Math.min(44, n) : 0; };
     function montagePrefs() {
         let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {}
         return montagePrefsFrom(v);
     }
     function montagePrefsFrom(v) {
         const pick = (x, list, d) => list.includes(x) ? x : d, num = (x, a, b, d) => Number.isFinite(Number(x)) ? Math.min(b, Math.max(a, Number(x))) : d;
-        return {side: pick(v.side, ['right', 'left'], 'right'), sideW: num(v.sideW, 300, 820, 440), stage: num(v.stage, 25, 80, 50), lane: num(v.lane, 28, 70, 40), help: v.help !== false, snap: v.snap !== false, fmt: pick(v.fmt, ['mp4', 'webm'], 'mp4'),
+        return {side: pick(v.side, ['right', 'left'], 'right'), sideW: num(v.sideW, 300, 820, 440), stage: num(v.stage, 25, 80, 50), lane: num(v.lane, 28, 70, 40), tbtn: tbtnOf(v.tbtn), help: v.help !== false, snap: v.snap !== false, fmt: pick(v.fmt, ['mp4', 'webm'], 'mp4'),
             height: pick(Number(v.height), MT_SIZES.map(x => x[0]), 0), quality: pick(Number(v.quality), MT_QUALITY.map(x => x[0]), 5), fps: pick(Number(v.fps), MT_FPS, 30), abr: pick(Number(v.abr), [96, 128, 192, 256], 128), lufs: pick(Number(v.lufs), [0, -14, -16, -23], 0), speeds: parseSpeeds(v.speeds) || MT_SPEEDS,
             ...Object.fromEntries(MT_COLORS.map(([k, , d]) => [k, /^#[0-9a-f]{6}$/i.test(v[k] || '') ? v[k] : d]))};
     }
-    ext.montagePrefs = montagePrefs; ext.montagePrefsDefaults = {MT_KEY, MT_SIZES, MT_QUALITY, MT_FPS, MT_DEF};
+    ext.montagePrefs = montagePrefs; ext.montagePrefsDefaults = {MT_KEY, MT_SIZES, MT_QUALITY, MT_FPS, MT_DEF, TBTN0};
 
     // les pistes, de haut en bas : vidéos incrustées (au-dessus = devant), la vidéo principale, les textes, les sons
     const TRACK_KINDS = {v: ['🎬', 'Vidéo'], main: ['🎬', 'Vidéo 1'], t: ['🔤', 'Textes'], a: ['🎵', 'Son']};
@@ -571,6 +575,7 @@
         P.sources.forEach(x => { if (x.folder && !fIds.has(x.folder)) delete x.folder; });
         const okS = c => c && Number.isInteger(c.s) && c.s >= 0 && c.s < P.sources.length;
         P.v1 = arr(d?.v1).filter(okS); P.v2 = arr(d?.v2).filter(okS); P.audio = arr(d?.audio).filter(okS); P.texts = arr(d?.texts).filter(x => x && typeof x.text === 'string');
+        P.texts.forEach(x => { if ('font' in x && !FONT_OK(x.font)) x.font = FONTS_V[0][0]; }); // d) une police de l'ordinateur reste un nom, jamais du CSS en plus
         // look, tf, kf, fx, afx d'un morceau : toujours des objets (un ancien enregistrement les rendait en [] : couleurs perdues)
         const objOf = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : {});
         [...P.v1, ...P.v2, ...P.audio, ...P.texts].forEach(c => ['look', 'tf', 'kf', 'fx', 'afx'].forEach(k => { if (k in c) c[k] = objOf(c[k]); }));
@@ -1041,7 +1046,7 @@
         let projId = proj?.id || 0, projName = proj?.name || '';
         if (!proj && sources.length) P.v1.push({id: nid('v'), s: 0, from: 0, to: sources[0].dur, tr: {type: 'none', d: 1}, look: {}, vol: 1});
         let sel = P.v1[0] ? {track: 'v1', id: P.v1[0].id} : null, dirty = false, pxs = 40; // pixels par seconde sur la frise
-        const OFF = 150; // largeur des noms de pistes, à gauche de la frise
+        let OFF = 150; // largeur des noms de pistes, à gauche de la frise (plus large si les boutons des pistes sont grands : applyTbtn)
         // une piste libre de ce genre à ce moment-là, sinon une nouvelle
         // toujours les listes du moment (↶ ↷ et la suppression d'un rush remplacent P.v2, P.texts, P.audio)
         const LISTS = {get v() { return P.v2; }, get t() { return P.texts; }, get a() { return P.audio; }}, LISTNAME = {v: 'v2', t: 'texts', a: 'audio'};
@@ -1103,7 +1108,12 @@
                 ${ver.html}
                 <div class="modal-actions ed-old-hidden" aria-hidden="true"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo">💾 Garder dans les médias…</button></div></div>`});
         dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
-        dl.style.setProperty('--mt-stage', MP.stage + 'vh'); dl.style.setProperty('--mt-lane', MP.lane + 'px'); dl.style.setProperty('--mt-side', MP.sideW + 'px');
+        dl.style.setProperty('--mt-stage', MP.stage + 'vh'); dl.style.setProperty('--mt-side', MP.sideW + 'px');
+        // a) taille des boutons des pistes (👁 🔓 ↑ ↓ 🗑) : 0 = comme avant ; plus grands → colonne des noms plus large, pistes assez hautes
+        const applyTbtn = n => { const lane = n ? Math.max(MP.lane, n + 20) : MP.lane; OFF = n ? Math.max(150, 5 * n + 4 * 4 + 16) : 150;
+            dl.classList.toggle('mt-tbtn', !!n); dl.style.setProperty('--mt-lane', lane + 'px'); dl.style.setProperty('--mt-off', OFF + 'px');
+            if (n) dl.style.setProperty('--mt-tbtn', n + 'px'); else dl.style.removeProperty('--mt-tbtn'); };
+        applyTbtn(MP.tbtn);
         [['colV1', 'v1'], ['colV2', 'v2'], ['colT', 't'], ['colA', 'a']].forEach(([k, v]) => { dl.style.setProperty(`--mt-c-${v}`, MP[k]); dl.style.setProperty(`--mt-i-${v}`, inkOn(MP[k])); });
         const $ = s => dl.querySelector(s), cv = $('[data-mt-canvas]');
         dl.__montage = {P, get eng() { return eng; }, get sel() { return sel; }, select: (track, id) => { sel = {track, id}; drawTl(true); }}; // pour les tests (tests/test-montage-more.js)
@@ -1287,9 +1297,10 @@
         dl.querySelector('.h-mt-side').addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-fontpick]'); if (!b || !UIx().openFontPicker) return;
             const inp = b.parentElement.querySelector('[data-mt-k="font"]'), c = selected(), cur = String(inp.value || '').split(',')[0].replace(/"/g, '').trim();
-            const f = await UIx().openFontPicker({value: cur, sample: String(c?.text || 'Mon film').slice(0, 40)}); if (!f) return;
+            const used = [...new Set(P.texts.map(x => String(x.font || '').split(',')[0].replace(/"/g, '').trim()).filter(Boolean))].slice(0, 6); // les polices déjà prises dans ce film, en tête
+            const f = await UIx().openFontPicker({value: cur, sample: String(c?.text || 'Mon film').slice(0, 40), top: used}); if (!f) return;
             const known = FONTS_V.find(x => x[1] === f || x[0].split(',')[0].replace(/"/g, '') === f);
-            inp.value = known ? known[0] : `"${String(f).replace(/["\\]/g, '')}", sans-serif`; b.style.fontFamily = inp.value; b.textContent = `${known ? known[1] : f} ▾`;
+            inp.value = known ? known[0] : `"${String(f).replace(/["\\();{}<>]/g, '').slice(0, 100)}", sans-serif`; b.style.fontFamily = inp.value; b.textContent = `${known ? known[1] : f} ▾`;
             inp.dispatchEvent(new Event('input', {bubbles: true}));
         });
         ext.montageWheels?.bind(dl); // 🎨 les roues de couleur de l'onglet Couleurs (heritage-montage-plus.js)
@@ -1544,7 +1555,10 @@
         });
         $('[data-mt-zoom]').addEventListener('input', e => { pxs = Number(e.target.value); drawTl(); mtBar?.sync(); });
         // K18 : la barre du bas commune — le projet à gauche, l'aide au milieu, 🧲 et le zoom de la frise à droite (100 % = 40 points par seconde)
-        const mtBar = window.LCNDA_UI?.editorStatus?.({help: 'Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · Espace : lire · B : couper ici · ⌫ : enlever',
+        // l'aide du bas dit les vraies touches (celles à soi si on en a donné : b)
+        const keyName = (id, d) => { const c = ext.editorKeyOwn?.('montage', `data-mt-cmd=${id}`), K = A().shortcutKit; return c && K?.comboLabel ? K.comboLabel(c) : d; };
+        const helpText = () => `Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · ${keyName('play', 'Espace')} : lire · ${keyName('op:split', 'B')} : couper ici · ${keyName('op:del', '⌫')} : enlever`;
+        const mtBar = window.LCNDA_UI?.editorStatus?.({help: helpText(),
             magnetTitle: 'Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant)',
             magnet: {get: () => snapOn, set: () => $('[data-mt-snap]').click()},
             zoom: {get: () => pxs / 40, set: k => { const z = $('[data-mt-zoom]'); z.value = String(Math.round(Math.max(4, Math.min(200, k * 40)))); z.dispatchEvent(new Event('input', {bubbles: true})); },
@@ -1556,7 +1570,7 @@
         }
         if (mtBar) { $('.h-mt').appendChild(mtBar); const pn = $('[data-mt-projname]'); if (pn) mtBar.setWhere(pn); }
         // K19 : les actions de fin seulement en haut, dans « 💾 Enregistrer ▾ » (les boutons d'en bas restent cachés, pour leurs écouteurs)
-        window.LCNDA_UI?.saveMenu?.($('[data-mt-saveproj]'), () => [{icon: '💾', label: 'Enregistrer le projet (pour continuer plus tard)', shortcut: '⌘S', run: () => $('[data-mt-saveproj]')?.click()}, {icon: '🎞️', label: 'Garder dans les médias (fabriquer la vidéo)…', run: () => $('[data-avx-save]')?.click()}, '-', {icon: '📂', label: 'Projets…', run: () => $('[data-mt-projects]')?.click()}]);
+        window.LCNDA_UI?.saveMenu?.($('[data-mt-saveproj]'), () => [{icon: '💾', label: 'Enregistrer le projet (pour continuer plus tard)', shortcut: '⌘S', run: () => $('[data-mt-saveproj]')?.click()}, {icon: '⧉', label: 'Enregistrer le projet sous un autre nom…', shortcut: '⇧⌘S', run: () => dl.querySelector('[data-mt-cmd="projas"]')?.click()}, {icon: '🎞️', label: 'Garder dans les médias (fabriquer la vidéo)…', run: () => $('[data-avx-save]')?.click()}, '-', {icon: '📂', label: 'Projets…', run: () => $('[data-mt-projects]')?.click()}]);
         // pistes : ajouter, cacher, monter, descendre, supprimer, renommer
         tl.addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-addtrack],[data-mt-tvis],[data-mt-tlock],[data-mt-tup],[data-mt-tdown],[data-mt-tdel]'); if (!b) return;
@@ -1595,10 +1609,12 @@
             if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === 'z') { e.preventDefault(); e.stopPropagation(); undoTo(e.shiftKey ? hpos + 1 : hpos - 1); return; }
             if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === 'y') { e.preventDefault(); undoTo(hpos + 1); return; }
             if (e.metaKey || e.ctrlKey || e.altKey) return;
-            if (e.key === ' ') { e.preventDefault(); play(); return; }
+            // b) une touche de départ se libère quand on a donné une autre touche à sa commande (Réglages → Raccourcis, ou Édition → ⌨️)
+            const moved = id => !!ext.editorKeyOwn?.('montage', `data-mt-cmd=${id}`);
+            if (e.key === ' ') { if (moved('play')) return; e.preventDefault(); play(); return; }
             // ⌫ (Retour arrière) ou Suppr : enlever l'élément choisi ; B : couper à la tête de lecture
-            if ((e.key === 'Backspace' || e.key === 'Delete') && selected()) { e.preventDefault(); dl.querySelector('[data-mt-op="del"]')?.click(); return; }
-            if (e.key === 'b' || e.key === 'B') { e.preventDefault(); dl.querySelector('[data-mt-op="split"]')?.click(); }
+            if ((e.key === 'Backspace' || e.key === 'Delete') && selected()) { if (moved('op:del')) return; e.preventDefault(); dl.querySelector('[data-mt-op="del"]')?.click(); return; }
+            if ((e.key === 'b' || e.key === 'B') && !moved('op:split')) { e.preventDefault(); dl.querySelector('[data-mt-op="split"]')?.click(); }
         }, {signal: keyAc.signal});
         // outils
         // un rush (vidéo, photo, son) entre dans le projet : il apparaît dans l'onglet 🎞️ Rush ; le fichier d'un rush importé
@@ -1925,14 +1941,25 @@
         });
         $('[data-mt-projects]').addEventListener('click', () => projectsDialog({current: projId, onOpen: async pr => { if (dirty && !await A().confirmBox('Les modifications du montage seront perdues.', {title: 'Ouvrir un autre projet sans enregistrer celui-ci ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; dirty = false; dl.close(); await openProject(pr.id, onDone); }}));
         document.addEventListener('keydown', e => { if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } }, {signal: keyAc.signal});
+        // b) ⌨️ Raccourcis du montage : la liste commune (heritage-editorkeys.js), ouverte sur l'onglet du montage ; au retour, menus, bulles et aide relus
+        const keysDialog = () => {
+            if (!ext.editorKeysPanel) return toast('Raccourcis indisponibles.', 'error');
+            try { localStorage.setItem('genealogie-editor-shortcuts-tab', 'montage'); } catch (_) {}
+            const d = document.createElement('dialog'); d.className = 'modal modal-l h-mt-keysdlg';
+            d.innerHTML = `<div class="modal-head"><div><span class="eyebrow">🎬 MONTAGE VIDÉO</span><h2>⌨️ Raccourcis du montage</h2><p>Donne la touche que tu veux à une commande (par exemple « ✂️ Couper ici »). C’est gardé tout de suite, aussi dans Réglages → Raccourcis clavier.</p></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div><div class="h-mt-keysbody" data-mt-keys></div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-x>Fermer</button></div>`;
+            document.body.appendChild(d); ext.editorKeysPanel(d.querySelector('[data-mt-keys]'));
+            d.addEventListener('click', e => { if (e.target.closest('[data-x]')) d.close(); });
+            d.addEventListener('close', () => { d.remove(); ext.editorKeysDecorate?.(dl, 'montage'); mtBar?.setHelp(helpText()); });
+            d.showModal();
+        };
         // ── Un menu en haut, à côté du titre (comme la Retouche) : tout ce que fait le montage ──
         const MT_MENUS = [
             ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '⤓ Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['close', 'Fermer']]],
-            ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫']]],
+            ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫'], ['-'], ['keys', '⌨️ Raccourcis du montage…']]],
             ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['multicam', '🎥 Plusieurs caméras (calées par le son)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '＋ Vidéo / photo à la suite'], ['op:addv2', '＋ Incrustation'], ['op:addtext', '＋ Titre / texte'], ['op:adda', '＋ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '⤒ Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
             ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante'], ['-'], ['snap', '🧲 Aimanter (marche / arrêt)']]],
-            ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['scope', '🎯 Vectorscope et histogramme'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['full', '⛶ Plein écran']]],
+            ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['scope', '🎯 Vectorscope et histogramme'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['tbtn:up', 'Boutons des pistes : plus grands'], ['tbtn:down', 'Boutons des pistes : plus petits'], ['tbtn:0', 'Boutons des pistes : taille de départ'], ['-'], ['full', '⛶ Plein écran']]],
         ];
         const head = dl.querySelector('.modal-head');
         head?.querySelector(':scope > div')?.insertAdjacentHTML('afterend', `<nav class="h-rt-menubar h-mt-menubar">${MT_MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : `<button type="button" data-mt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav>`);
@@ -1954,6 +1981,14 @@
             if (a === 'tab') return q(`[data-mt-tab="${v}"]`);
             if (a === 'zoom') return ext.editorZoom?.(v === 'in' ? 1 : v === 'out' ? -1 : 0);
             if (k === 'full') return q('[data-full-toggle]');
+            if (a === 'tbtn') { // a) boutons des pistes : réglage gardé tout de suite (K2), « ↶ Annuler » dans le message
+                const cur = montagePrefs().tbtn || TBTN0, nx = v === '0' ? 0 : Math.max(16, Math.min(44, cur + (v === 'up' ? 4 : -4)));
+                if ((nx || TBTN0) === cur) return toast(v === '0' ? 'Les boutons des pistes ont déjà leur taille de départ.' : `Les boutons des pistes sont déjà ${v === 'up' ? 'au plus grand' : 'au plus petit'}.`);
+                const redo = () => { applyTbtn(montagePrefs().tbtn); drawTl(); mtBar?.sync(); };
+                A().undoLocalChange(`Boutons des pistes : ${nx || TBTN0} px${nx ? '' : ' (taille de départ)'}`, [MT_KEY], () => { let cfg = {}; try { cfg = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} cfg.tbtn = nx; try { localStorage.setItem(MT_KEY, JSON.stringify(cfg)); } catch (_) {} }, redo);
+                return redo();
+            }
+            if (k === 'keys') return keysDialog();
             if (k === 'scope') return ext.montageScope?.(dl, cv);
             if (k === 'subexport') return exportSubs();
             if (k === 'chapcopy') { if (!(P.chapters || []).length) return toast('Aucun chapitre : « 🔖 Chapitre ici ».', 'error'); const txt = chaptersText(); navigator.clipboard?.writeText(txt).then(() => toast('Chapitres copiés.'), () => prompt('Copie ce texte :', txt)); return; }
@@ -2026,7 +2061,7 @@
     const FULL_EDITORS = [...EDITORS.filter(e => !['house', 'decortree'].includes(e[0])), ['museum', '🏛️ Musée de famille (Aménager)']], FULL_DEFAULT = {layout: true, museum: true, keynote: true}; // l'atelier de mise en page s'ouvre en plein écran si on n'a rien choisi
     /* Ensembles nommés (💾, comme les Réglages des animaux) : une disposition du montage, ou les boutons d'un éditeur */
     const LAYOUT_SETS = 'genealogie-montage-layout-sets', TB_SETS = 'genealogie-toolbar-sets';
-    const LAYOUT_FIELDS = ['side', 'stage', 'lane', 'help', ...MT_COLORS.map(c => c[0])];
+    const LAYOUT_FIELDS = ['side', 'stage', 'lane', 'tbtn', 'help', ...MT_COLORS.map(c => c[0])];
     const cleanLayout = v => { const all = montagePrefsFrom(v || {}); return Object.fromEntries(LAYOUT_FIELDS.map(k => [k, all[k]])); };
     const KEY_RX = /^[^<>"`\\\u0000-\u001f]{1,100}$/; // une clé de bouton (ex. « rt-mode=heal », « menu-Édition ») : tout sauf le balisage
     const cleanToolbar = v => { const out = {order: {}, hidden: {}}; ['order', 'hidden'].forEach(f => Object.entries(v?.[f] || {}).slice(0, 40).forEach(([g, list]) => { if (KEY_RX.test(g) && Array.isArray(list)) out[f][g] = list.filter(k => typeof k === 'string' && KEY_RX.test(k)).slice(0, 120); })); return out; };
@@ -2068,6 +2103,7 @@
                     <label>Aide sous la frise<select data-mtp="help">${opt([['1', 'Montrée'], ['0', 'Cachée']], p.help ? '1' : '0')}</select></label>
                     <label>Hauteur de l’image<span class="h-mtp-range"><input type="range" min="25" max="80" value="${p.stage}" data-mtp="stage"><output>${p.stage} %</output></span></label>
                     <label>Hauteur des pistes<span class="h-mtp-range"><input type="range" min="28" max="70" value="${p.lane}" data-mtp="lane"><output>${p.lane} px</output></span></label>
+                    <label title="Les petits boutons au début de chaque piste (👁 cacher, 🔓 verrouiller, ↑ ↓ ranger, 🗑 supprimer) — aussi dans le montage : Affichage → Boutons des pistes">Taille des boutons des pistes<span class="h-mtp-range"><input type="range" min="16" max="44" value="${p.tbtn || TBTN0}" data-mtp="tbtn"><output>${p.tbtn || TBTN0} px</output></span></label>
                     </div>
                     <h4>🎨 Couleur des blocs sur la frise</h4><div class="h-mtp-colors">${MT_COLORS.map(([k, l]) => `<label class="h-mtp-color"><input type="color" data-mtp="${k}" value="${esc(p[k])}"> <span class="h-mtp-swatch" data-mtp-sw="${k}" style="background:${esc(p[k])};color:${inkOn(p[k])}">${esc(l)}</span></label>`).join('')}</div>
                     <button type="button" class="button small secondary" data-mtp-colreset>Couleurs de départ</button>
