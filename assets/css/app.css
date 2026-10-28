@@ -4808,7 +4808,7 @@ html:not(.show-event-ics) .event-ics-btn { display: none; }
 .ui-ig .ui-filters > button { white-space: nowrap; }
 @media (max-width: 600px) { .ui-ig-tiles { grid-template-columns: repeat(auto-fill, minmax(66px, 1fr)); } .ui-ig-keys { display: none; } }
 /* ═════ L6 Chercher dans une page des Réglages (app-reglages-recherche.js) ═════ */
-.ui-l6 { position: sticky; top: 0; z-index: 30; display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; margin: 0 0 12px; padding: 8px; border: 2px solid var(--ui-ink); background: var(--ui-bg); color: var(--ui-ink); box-shadow: 0 4px 0 rgba(5, 93, 255, .15); }
+.ui-l6 { position: sticky; top: 0; z-index: 30; display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; margin: 0 0 12px; padding: 8px 0; border: 0; background: var(--ui-bg); color: var(--ui-ink); box-shadow: none; } /* un seul cadre : celui de la case C1 */
 .ui-l6 > .ui-search { flex: 1 1 260px; min-width: 0; }
 .ui-l6-info { font-size: 12px; color: var(--ui-muted); }
 .ui-l6-info b { color: var(--ui-ink); }
@@ -4820,7 +4820,7 @@ th .ui-l6-count { color: inherit; opacity: .85; }
 .ui-l6-rest { display: flex; gap: 8px; justify-content: space-between; flex-wrap: wrap; margin: 10px 0; padding: 8px 10px; border: 2px solid var(--ui-ink); font: 700 13px system-ui, sans-serif; opacity: .45; cursor: pointer; background: var(--ui-bg); color: var(--ui-ink); width: 100%; text-align: left; min-height: 0; box-shadow: none; border-radius: 0; }
 .ui-l6-rest:hover { opacity: .7; }
 .ui-l6-none { margin: 10px 0; }
-@media (max-width: 600px) { .ui-l6 { padding: 6px; } .ui-l6 > .ui-search { flex-basis: 100%; } }
+@media (max-width: 600px) { .ui-l6 { padding: 6px 0; } .ui-l6 > .ui-search { flex-basis: 100%; } }
 :root[data-theme="dark"] .ui-ig-tile mark, :root[data-theme="dark"] .ui-l6 mark, :root[data-theme="dark"] mark.ui-l6-mark { background: #6b5400; color: #fff; }
 :root[data-theme="dark"] .ui-l6-hit { box-shadow: inset 3px 0 0 #c99400; }
 /* ‹ › Menu du haut qui déborde : dégradé + flèche aux bords (posés par navOverflowHint, rien quand tout tient) */
