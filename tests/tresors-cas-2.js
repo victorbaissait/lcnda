@@ -1,6 +1,8 @@
 'use strict';
 /** Les essais du lot 2 des Trésors (souvenirs, recettes, chansons, entretien, veillée, prénoms, pouvoir d'achat, vieux mots, quiz,
  *  faire-part, signatures, film, rideau, promenade, rappels, actes manquants, thème d'époque, bloc de la fiche) — appelés par tests/test-tresors.js */
+/** l'impression passe par la fenêtre « Imprimer » de l'app (K13) : on lit son aperçu */
+const printFrame = async page => { const fr = await (await page.waitForSelector('dialog.k-print[open] iframe', {timeout: 15000})).contentFrame(); return {waitForSelector: (...a) => fr.waitForSelector(...a), $$eval: (...a) => fr.$$eval(...a), content: () => fr.content(), close: () => page.click('dialog.k-print[open] [data-k-x]')}; };
 module.exports = async (t, {page, open, body}, assert) => {
     const pick = async (name, label) => page.evaluate(([n, l]) => { const T = window.LCNDA_EXT.tresors.T; return T.tree().then(tr => { const p = tr.people.find(x => T.name(x) === l); const el = document.querySelector(`dialog[open] [name="${n}"]`); el.value = String(p.id); el.dispatchEvent(new Event('change', {bubbles: true})); }); }, [name, label]);
     await t('👃 souvenir des sens : noté, filtré par sens, retrouvé par un mot', async () => {
@@ -15,13 +17,13 @@ module.exports = async (t, {page, open, body}, assert) => {
     await t('🥘 livre de recettes : une recette, puis le livre imprimé (couverture, sommaire, page)', async () => {
         await page.evaluate(() => window.LCNDA_EXT.tresors.T.save({kind: 'recipe', title: 'Le clafoutis de Rose', body: 'Beurrer le plat, y mettre les cerises.', data: {from: 'txt:Rose', dish: 'dessert', serves: 'pour 6', ingredients: '500 g de cerises\n3 œufs', story: 'Le dimanche de juin.'}}));
         await open('recettes'); assert.match(await body(), /Le clafoutis de Rose[\s\S]*La recette de Rose[\s\S]*500 g de cerises/);
-        const pop = page.waitForEvent('popup'); await page.click('[data-c-book]'); const w = await pop; await w.waitForSelector('.pg');
+        await page.click('[data-c-book]'); const w = await printFrame(page); await w.waitForSelector('.pg');
         const html = await w.content(); assert.match(html, /Le livre de recettes/); assert.match(html, /Sommaire/); assert.match(html, /Desserts et gâteaux/); assert.match(html, /3 œufs/); await w.close();
     });
     await t('🎶 chansons : paroles, air, chantée par ; le carnet s’imprime', async () => {
         await page.evaluate(() => window.LCNDA_EXT.tresors.T.save({kind: 'song', title: 'Dodo, l’enfant do', body: 'Dodo, l’enfant do,\nL’enfant dormira bien vite', data: {from: 'txt:Mémé Berthe', occasion: 'berceuse', tune: 'traditionnel'}}));
         await open('chansons'); assert.match(await body(), /Chantée par Mémé Berthe, sur l’air de « traditionnel »/);
-        const pop = page.waitForEvent('popup'); await page.click('[data-c-book]'); const w = await pop; await w.waitForSelector('.pg'); assert.match(await w.content(), /Le carnet de chansons[\s\S]*Berceuses/); await w.close();
+        await page.click('[data-c-book]'); const w = await printFrame(page); await w.waitForSelector('.pg'); assert.match(await w.content(), /Le carnet de chansons[\s\S]*Berceuses/); await w.close();
     });
     await t('🎙️ entretien guidé : les questions défilent (sans micro), les repères et les notes sont gardés', async () => {
         await open('entretien'); await page.uncheck('[data-iv-form] [name="rec"]'); await page.uncheck('[data-iv-form] [name="speak"]');

@@ -1,5 +1,7 @@
 'use strict';
 /** Les essais du lot 1 des Trésors (lettres, À ton âge, 7 familles, coloriage, dater une photo) — appelés par tests/test-tresors.js */
+/** l'impression passe par la fenêtre « Imprimer » de l'app (K13) : on lit son aperçu */
+const printFrame = async page => { const fr = await (await page.waitForSelector('dialog.k-print[open] iframe', {timeout: 15000})).contentFrame(); return {waitForSelector: (...a) => fr.waitForSelector(...a), $$eval: (...a) => fr.$$eval(...a), content: () => fr.content(), close: () => page.click('dialog.k-print[open] [data-k-x]')}; };
 module.exports = async (t, {page, open, body}, assert) => {
     await t('✉️ lettre aux descendants : scellée (ni texte ni secret envoyé), puis ouverte quand la date est passée', async () => {
         await open('lettres'); await page.click('[data-l-new]'); await page.waitForSelector('dialog[open] [name="to"]');
@@ -22,7 +24,7 @@ module.exports = async (t, {page, open, body}, assert) => {
     });
     await t('🃏 7 familles : MARTIN et FAURE, 6 cartes chacune, les planches et la règle s’impriment', async () => {
         await open('sept-familles'); assert.match(await body(), /MARTIN/); assert.match(await body(), /FAURE/);
-        const pop = page.waitForEvent('popup'); await page.click('[data-7-print]'); const w = await pop; await w.waitForSelector('.card');
+        await page.click('[data-7-print]'); const w = await printFrame(page); await w.waitForSelector('.card');
         const n = await w.$$eval('.card:not(.back)', l => l.length); assert.ok(n >= 12 && n % 6 === 0, `${n} cartes`); assert.equal(await w.$$eval('.card.back', l => l.length), n, 'un dos par carte'); assert.match(await w.content(), /Le jeu des/); await w.close();
     });
     await t('🃏 7 familles : 6 styles, photos sépia / N&B, ce qui s’écrit, la couleur d’une famille, la fenêtre de la photo (sans photo)', async () => {
