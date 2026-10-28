@@ -116,6 +116,7 @@
     /** readDuration('2 h 15' | '1 min 30' | '90 s' | '1:30' | '1:05:00' | '3\'20' | '45', {unit, colon, min, max, step})
      *  → null | {ok:true, seconds, value (dans l'unité de la case), label} | {ok:false, text}
      *  Un nombre seul est dans l'unité de la case ; « 1:30 » = 1 min 30 s (ou 1 h 30 pour une case en minutes ou en heures). */
+    const MAX_DURATION_S = 10000 * 3600; // 10 000 h : bien plus que toute durée utile (un son, un trajet, un chantier)
     UI.readDuration = (raw, {unit = 's', colon = '', min = null, max = null, step = null} = {}) => {
         let s = fold(raw).trim().replace(/\s+/g, ' ').replace(/,/g, '.').replace(/[’`´]/g, "'").replace(/′/g, "'").replace(/″/g, '"').replace(/\bet\b/g, ' ').replace(/\s+/g, ' ').trim();
         if (!s) return null;
@@ -139,6 +140,7 @@
             sec = total;
         }
         if (!Number.isFinite(sec)) return {ok: false, text: `je ne comprends pas cette durée (${ex})`};
+        if (Math.abs(sec) > MAX_DURATION_S) return {ok: false, text: `durée trop longue : ${MAX_DURATION_S / 3600} h au plus (${ex})`}; // jamais 10²² s
         let value = sec / (FACT[unit] || 1), note = '';
         const st = Number(step) > 0 ? Number(step) : 0;
         if (st) { const r = Math.round(Math.round(value / st) * st * 1e6) / 1e6; if (Math.abs(r - value) > 1e-9) { note = ` (arrondi à ${UI.formatDuration(st, {unit})} près)`; value = r; } }

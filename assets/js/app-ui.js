@@ -476,6 +476,8 @@
     UI.readDate = raw => {
         const s = fold(raw).trim().replace(/\s+/g, ' ').replace(/,/g, '');
         if (!s) return null;
+        // « 12345678901234567890 » : un nombre de plus de 8 chiffres (ou un texte de plus de 80 lettres) n'est pas une date
+        if (s.length > 80 || /\d{9,}/.test(s)) return {ok: false, text: 'ce n’est pas une date : un nombre trop long (exemples : 7 mai 1925, 08/12/1960, vers 1784, entre 1880 et 1885, an II)'};
         let low = 0; // une année avant l'an 1000 : comprise, mais la base ne la range pas encore
         const bad = t => ({ok: false, text: t}), good = (label, extra = '') => ({ok: true, label, extra, ...(low ? {warn: `année ${low} : l’app ne range pas encore les dates d’avant l’an ${MIN_YEAR} (le texte est gardé tel quel, mais il ne sert ni au tri, ni aux âges, ni aux frises)`} : {})});
         const check = d => { if (!d) return null; if (d.error) return d; if (d.y === 0 || d.y !== undefined && d.y !== null && Number(d.y) === 0) return {error: 'date impossible : l’an 0 n’existe pas (on passe de l’an 1 avant J.-C. à l’an 1)'}; if (d.y > NOW_Y) return {error: `date dans le futur : ${d.label}`}; if (d.y && d.y < MIN_YEAR) low = d.y; return d; };

@@ -11,11 +11,11 @@
     const F = ext.tresorFeatures = ext.tresorFeatures || [];
     const COLORS = ['#c0392b', '#2471a3', '#1e8449', '#b9770e', '#7d3c98', '#117a65', '#a04000', '#2e4053', '#b03a2e', '#1f618d'];
     /** K13 : la fenêtre « Imprimer » de l'app (aperçu, A4 / A5, sens, ⤓ PDF) pour toutes les créations des Trésors */
-    function printWindow(title, css, body) {
+    function printWindow(title, css, body, opts = {}) {
         const plain = String(title).replace(/<[^>]*>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&amp;/g, '&');
         const doc = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${title}</title><base href="${location.href.replace(/[^/]*$/, '')}"><style>body{margin:0;font-family:system-ui,sans-serif}${css}</style></head><body>${body}</body></html>`;
         const UI = window.LCNDA_UI;
-        if (UI?.openPrintDialog) { UI.openPrintDialog({title: plain, html: doc, photos: false}); return null; }
+        if (UI?.openPrintDialog) { UI.openPrintDialog({title: plain, html: doc, photos: false, ...opts}); return null; }
         throw new Error('la fenêtre d’impression n’est pas prête.');
     }
     ext.tresorPrint = printWindow;
@@ -53,7 +53,7 @@
             ${sh.others ? `<ol class="others">${fam.people.map((q, k) => `<li class="${k === i ? 'me' : ''}">${T.esc(q.first || T.name(q))}</li>`).join('')}</ol>` : ''}</div>`;
     }
     const backHtml = (title, color, prefs) => `<div class="card back s-${prefs.style}" style="--c:${color}"><div class="back-in"><b>${title}</b><small>Jeu des familles</small></div></div>`;
-    const CARD_CSS = `.sheet{display:grid;grid-template-columns:repeat(3,63mm);gap:4mm;justify-content:center;padding:8mm;background:#fff;width:210mm;box-sizing:border-box;margin:12px auto;break-after:page}
+    const CARD_CSS = `.sheet{display:grid;grid-template-columns:repeat(3,63mm);gap:2mm;justify-content:center;padding:0;background:#fff;width:100%;max-width:200mm;box-sizing:border-box;margin:0 auto;break-after:page}
         .sheet.backs{direction:rtl}
         .card{box-sizing:border-box;width:63mm;height:88mm;border:1.2mm solid var(--c);border-radius:4mm;padding:2.5mm;display:flex;flex-direction:column;gap:1.2mm;font-size:8.5pt;color:#111;background:#fff;break-inside:avoid;position:relative;overflow:hidden;direction:ltr}
         .head{display:flex;justify-content:space-between;align-items:center;background:var(--c);color:#fff;margin:-2.5mm -2.5mm 0;padding:1.5mm 2.5mm;font-weight:800;letter-spacing:.04em}.head b{background:#fff;color:var(--c);border-radius:50%;width:6mm;height:6mm;display:grid;place-items:center}
@@ -69,7 +69,7 @@
         .s-bois{background:repeating-linear-gradient(95deg,#d8b98a 0 3mm,#cfae7d 3mm 5mm,#dcc093 5mm 9mm);border-color:#5b3a1a;color:#2b1a08;font-family:Georgia,serif}.s-bois .head{background:#5b3a1a;color:#f6e7c8}.s-bois .head b{color:#5b3a1a}.s-bois .ph{border:.6mm solid #5b3a1a;background:#e9d4ad}.s-bois .role{color:#5b3a1a}.s-bois .info,.s-bois .others{color:#3d2810}
         .back{padding:0;display:grid;place-items:center;background:var(--c) repeating-linear-gradient(45deg,#fff2 0 2mm,#0000 2mm 5mm)}.back-in{border:.8mm solid #fff;border-radius:3mm;width:80%;height:84%;display:grid;place-content:center;text-align:center;color:#fff;gap:2mm;background:radial-gradient(circle,#fff3 0 30%,#0000 31%)}.back-in b{font-size:16pt;font-family:Georgia,serif}.back-in small{letter-spacing:.2em;text-transform:uppercase;font-size:7pt}
         .back.s-ancien{background:#6b5532 repeating-linear-gradient(0deg,#fff1 0 1mm,#0000 1mm 3mm)}.back.s-artdeco{background:repeating-linear-gradient(60deg,#c9a24a44 0 .4mm,#0000 .4mm 4mm) #14171c}.back.s-artdeco .back-in{border-color:#c9a24a;color:#c9a24a}
-        .rules{width:210mm;margin:12px auto;background:#fff;padding:10mm;box-sizing:border-box;font:11pt Georgia,serif}`;
+        .rules{max-width:200mm;margin:0 auto;background:#fff;padding:4mm;box-sizing:border-box;font:11pt Georgia,serif;break-after:page}`;
     /** le CSS des cartes, limité à l'aperçu (chaque sélecteur préfixé) */
     const scopeCss = (css, scope) => css.split('}').map(r => { const i = r.indexOf('{'); return i < 0 ? r : r.slice(0, i).split(',').map(sel => `${scope} ${sel.trim()}`).join(',') + r.slice(i); }).join('}');
     /** 📷 choisir la photo d'une carte, puis la recadrer (glisser pour déplacer, molette ou curseur pour zoomer) */
@@ -125,8 +125,8 @@
         draw();
         T.actions(host, {print: {attrs: 'data-7-print', title: 'Les planches de cartes (et leurs dos), avec la règle du jeu', run: () => { draw(); if (fams.length < 2) return;
             const cards = fams.flatMap((f, fi) => f.people.map((_, i) => [cardHtml(T, tr, f, i, colorOf(f, fi), prefs), backHtml(T.esc(f.name), colorOf(f, fi), prefs)])), sheets = [];
-            for (let i = 0; i < cards.length; i += 9) { const page = cards.slice(i, i + 9); sheets.push(`<div class="sheet">${page.map(c => c[0]).join('')}</div>`); if (prefs.back === 'motif') sheets.push(`<div class="sheet backs">${page.map(c => c[1]).join('')}</div>`); }
-            printWindow('Jeu des 7 familles', CARD_CSS, `<div class="rules"><h2>🃏 Le jeu des ${fams.length} familles</h2><p>Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille ${T.esc(fams[0].name)}, je voudrais ${T.esc(ROLE(2, fams[0].people[2]).toLowerCase())} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné.</p><p>Les familles : ${fams.map(f => `<b>${T.esc(f.name)}</b> (${f.people.map(p => T.esc(p.first || T.name(p))).join(', ')})`).join(' ; ')}.</p>${prefs.back === 'motif' ? '<p><i>Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière.</i></p>' : ''}</div>${sheets.join('')}`); }}});
+            for (let i = 0; i < cards.length; i += 9) { const page = cards.slice(i, i + 9); sheets.push(`<div class="sheet" data-k-page>${page.map(c => c[0]).join('')}</div>`); if (prefs.back === 'motif') sheets.push(`<div class="sheet backs" data-k-page>${page.map(c => c[1]).join('')}</div>`); }
+            printWindow('Jeu des 7 familles', CARD_CSS + '@media screen{.rules,.sheet{min-height:287mm}}', `<div class="rules" data-k-page><h2>🃏 Le jeu des ${fams.length} familles</h2><p>Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille ${T.esc(fams[0].name)}, je voudrais ${T.esc(ROLE(2, fams[0].people[2]).toLowerCase())} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné.</p><p>Les familles : ${fams.map(f => `<b>${T.esc(f.name)}</b> (${f.people.map(p => T.esc(p.first || T.name(p))).join(', ')})`).join(' ; ')}.</p>${prefs.back === 'motif' ? '<p><i>Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière.</i></p>' : ''}</div>${sheets.join('')}`, {margin: 5}); }}}); // 3 cartes de 63 mm (193 mm) : marges de 5 mm pour tenir sur la feuille A4
     }
     F.push({key: 'sept-familles', group: 'jouer', icon: '🃏', title: 'Jeu des 7 familles', desc: 'Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper.', render: renderSeven});
     ext.tresorSeven = {buildFamilies, cardHtml, sevenPrefs, SEVEN_STYLES};

@@ -1575,7 +1575,14 @@
         afterRestore() { this.dirty = true; UI()?.savedStatus?.(this.dlg, 'dirty'); this.paintPages(); this.paintLeft(); this.paintPanel(); this.code.value = this.codeValue(); this.reload(); this.whereText(); }
 
         /* ── enregistrer, versions, exporter ── */
-        async save({asNew = false, name = this.name, quiet = false, force = false} = {}) {
+        /** deux ⌘S rapides : le second attend le premier et réutilise l'id créé (jamais deux sites) */
+        save(o = {}) {
+            if (o.asNew) return this._saveNow(o);
+            if (this._saving) return this._saving;
+            const p = this._saveNow(o), done = () => { if (this._saving === p) this._saving = null; };
+            this._saving = p; p.then(done, done); return p;
+        }
+        async _saveNow({asNew = false, name = this.name, quiet = false, force = false} = {}) {
             clearTimeout(this.histT); this.pruneFrozen();
             UI()?.savedStatus?.(this.dlg, 'saving');
             try {
@@ -1590,7 +1597,7 @@
                 return id;
             } catch (e) {
                 UI()?.savedStatus?.(this.dlg, 'error');
-                if (/modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox('Une autre fenêtre a enregistré ce site entre-temps. Garder ta version effacera la sienne.', {title: 'Site modifié ailleurs', okLabel: 'Garder ma version', danger: true})) return this.save({asNew, name, quiet, force: true}); return 0; }
+                if (/modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox('Une autre fenêtre a enregistré ce site entre-temps. Garder ta version effacera la sienne.', {title: 'Site modifié ailleurs', okLabel: 'Garder ma version', danger: true})) return this._saveNow({asNew, name, quiet, force: true}); return 0; }
                 toast(`Impossible d’enregistrer : ${e.message}`, 'error', {retry: () => this.save({asNew, name})}); return 0;
             }
         }

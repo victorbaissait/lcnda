@@ -17,6 +17,7 @@
             return origFetch.call(this,input,init);
         };
         wrappedFetch.__lcndaGen=true;window.fetch=wrappedFetch;
+        document.addEventListener('click',e=>{const a=e.target.closest?.('a[href*="api.php"]');if(!a)return;try{const u=new URL(a.getAttribute('href'),location.href);if(u.origin===location.origin&&/(?:^|\/)api\.php$/.test(u.pathname)&&!u.searchParams.has('g')){u.searchParams.set('g',window.LCNDA_GENEALOGY);a.setAttribute('href',u.pathname.replace(/^.*\//,'')+u.search+u.hash);}}catch(_){}},true);
     }
 
     /* 🛡 Un seul enregistrement à la fois dans une fenêtre (double-clic, clics répétés, Entrée répétée, réseau lent) :
@@ -2273,7 +2274,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const code=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
         let index=0;
         document.addEventListener('keydown',event=>{
-            if(event.target.matches?.('input,textarea,select')||$('#lightbox')?.open)return;
+            if(event.target.matches?.('input,textarea,select')||$('#lightbox')?.open||document.documentElement.classList.contains('ms-open'))return;
             const key=event.key.length===1?event.key.toLowerCase():event.key;
             index=key===code[index]?index+1:(key===code[0]?1:0);
             if(index===code.length){index=0;openArchiveRoom();}
@@ -2862,7 +2863,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const isLocked=Number(person.is_locked)===1;
         const editOnly=html=>isLocked?'':html;
         const orderedMedia = [...media].sort((a,b) => mediaChronologyKey(a) - mediaChronologyKey(b) || Number(a.link_position||0) - Number(b.link_position||0) || Number(a.id) - Number(b.id));
-        const portraitOld = person.portrait ? `<img class="portrait" src="media/${encodeURIComponent(person.portrait)}" alt="Portrait de ${escapeHtml(personName(person))}">` : `<div class="portrait portrait-placeholder">${escapeHtml((person.first_name?.[0] || '') + (person.last_name?.[0] || ''))}</div>`;
+        const portraitOld = person.portrait ? `<img class="portrait" src="media/${encodeURIComponent(person.portrait)}" alt="Portrait de ${escapeHtml(personName(person))}">` : `<div class="portrait portrait-placeholder">${escapeHtml(([...(person.first_name || '')][0] || '') + ([...(person.last_name || '')][0] || ''))}</div>`;
         // K7 : le portrait commun (88 px) si Apparence → Portraits n'est pas « Comme avant »
         const portrait = window.LCNDA_UI?.avatarOn?.() ? `<span class="portrait-lc" role="img" aria-label="Portrait de ${escapeHtml(personName(person))}">${window.LCNDA_UI.avatar({...person, name: personName(person), photo: person.portrait ? `media/${encodeURIComponent(person.portrait)}` : ''}, 88)}</span>` : portraitOld;
         const parishes=detail.heritage?.parishes||{};
@@ -4484,6 +4485,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     let shortcutCaptureHandler=null; // onglet Raccourcis : la prochaine touche est enregistrée au lieu d'agir
     document.addEventListener('keydown',event=>{
+        if(document.documentElement.classList.contains('ms-open'))return; // 🧓 mode simple : ses propres touches seulement (pas de fenêtre de l'app cachée derrière)
         if(shortcutCaptureHandler){event.preventDefault();event.stopPropagation();shortcutCaptureHandler(event);return;}
         if(event.isComposing||event.repeat&&!/Arrow/.test(event.key))return;
         const combo=eventCombo(event);if(!combo)return;
@@ -4730,6 +4732,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
 
     async function backupNow(){
+        if(document.body.classList.contains('is-kiosk'))return toast('Mode consultation : rien ne peut être modifié.'); // 🔒 (le serveur refuse aussi)
         const settings=autoBackupSettings();toast('Sauvegarde en cours…');
         const result=await api('backup_sqlite',{}, {method:'POST',body:{dir:settings.dir,max_files:settings.maxFiles,mode:'manual'}});
         toast(`Sauvegarde faite : ${result.file||'fichier créé'}.`);
@@ -5848,7 +5851,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
   </form>
 </section>`;
     }
-    function renderExportTools(token=++state.workspaceToken){if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='export')return;const privacy=exportPrivacySettings();const exportUrl=(action,params={})=>{const url=new URL('api.php',location.href);url.searchParams.set('action',action);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));if(privacy.enabled&&action!=='export_sqlite'&&action!=='export_full_backup'){url.searchParams.set('privacy','1');if(privacy.deathCutoffYear)url.searchParams.set('death_cutoff_year',privacy.deathCutoffYear);}return url.toString();};$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">EXPORT</span><h2>Export des données</h2><p>Télécharge les données dans les formats disponibles.</p></div></header>
+    function renderExportTools(token=++state.workspaceToken){if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='export')return;const privacy=exportPrivacySettings();const exportUrl=(action,params={})=>{const url=new URL('api.php',location.href);url.searchParams.set('action',action);if(typeof window.LCNDA_GENEALOGY==='string')url.searchParams.set('g',window.LCNDA_GENEALOGY);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));if(privacy.enabled&&action!=='export_sqlite'&&action!=='export_full_backup'){url.searchParams.set('privacy','1');if(privacy.deathCutoffYear)url.searchParams.set('death_cutoff_year',privacy.deathCutoffYear);}return url.toString();};$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">EXPORT</span><h2>Export des données</h2><p>Télécharge les données dans les formats disponibles.</p></div></header>
 
 ${exportPrivacySectionHtml(privacy)}
 
@@ -6845,7 +6848,7 @@ ${backupSectionHtml()}
         genderSel._militaryHandler=updateMilitaryToggle;
         genderSel.addEventListener('change',updateMilitaryToggle);
         $('#person-dialog').showModal();}
-    function openNewPersonDialog(){if((baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals')&&window.LCNDA_EXT?.newAnimalFiche){window.LCNDA_EXT.newAnimalFiche();return;}const form=$('#person-form');form.reset();form._lcBase=null;form.querySelector('.lc-conflict')?.remove();form.elements.id.value='';{const ew=$('#person-identity-empty-wrap');if(ew)ew.innerHTML='';}$('#person-dialog-title').textContent='Nouvelle fiche';const kc=form.querySelector('[data-kind-choice]');if(kc){kc.hidden=false;const k=baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals'?'animal':'human';form.querySelectorAll('[name=kind]').forEach(r=>{r.checked=r.value===k;});personKindLabels(form);}const groups=state.currentPerson?.surnameGroups||[];form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+groups.map(group=>`<option value="${group.id}">${escapeHtml(group.name)}</option>`).join('');$('#person-dialog').showModal();}
+    function openNewPersonDialog(){if(document.body.classList.contains('is-kiosk'))return toast('Mode consultation : rien ne peut être modifié.');if((baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals')&&window.LCNDA_EXT?.newAnimalFiche){window.LCNDA_EXT.newAnimalFiche();return;}const form=$('#person-form');form.reset();form._lcBase=null;form.querySelector('.lc-conflict')?.remove();form.elements.id.value='';{const ew=$('#person-identity-empty-wrap');if(ew)ew.innerHTML='';}$('#person-dialog-title').textContent='Nouvelle fiche';const kc=form.querySelector('[data-kind-choice]');if(kc){kc.hidden=false;const k=baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals'?'animal':'human';form.querySelectorAll('[name=kind]').forEach(r=>{r.checked=r.value===k;});personKindLabels(form);}const groups=state.currentPerson?.surnameGroups||[];form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+groups.map(group=>`<option value="${group.id}">${escapeHtml(group.name)}</option>`).join('');$('#person-dialog').showModal();}
 
     function openMilitaryDialog(detail){
         const form=$('#military-form');

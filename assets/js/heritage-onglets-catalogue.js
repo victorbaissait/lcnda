@@ -184,7 +184,7 @@
         head.innerHTML = `<span class="pk-lab">Artiste</span>${P().pickerField ? P().pickerField({name: '', hiddenName: false, kind: 'person', allowCreate: false, animals: false, value: pid ? {id: pid, title} : null}) : esc(title)}`;
         if (!pid || !store) {
             cl.innerHTML = ''; letters.hidden = true;
-            box.innerHTML = A().empty ? A().empty(failed || (artists && !artists.length ? 'Personne n’a encore de catalogue : coche « Artiste » sur une fiche, puis ajoute ses œuvres.' : 'Choisis un artiste.'), {icon: failed ? '⛔' : '🎨'}) : '';
+            box.innerHTML = A().empty ? A().empty(/introuvable/i.test(failed) ? 'Artiste introuvable : choisis-en un autre ci-dessus.' : failed || (artists && !artists.length ? 'Personne n’a encore de catalogue : coche « Artiste » sur une fiche, puis ajoute ses œuvres.' : 'Choisis un artiste.'), {icon: failed ? '⛔' : '🎨'}) : '';
             if (count) count.textContent = artists ? plural(artists.length, 'artiste') : '';
             return;
         }
@@ -273,8 +273,10 @@
         await loadStore(pid);
         if ((token != null && token !== A().state?.workspaceToken) || A().state?.module !== 'catalogue') return;
         if (!store) {
+            const lost = /introuvable/i.test(failed); // « #catalogue/99999 » : une fiche qui n'existe pas (ou plus) — K10, et la prochaine fois le premier artiste
+            if (lost) writePref(p => { delete p.pid; });
             ws.innerHTML = `<section class="page ong-page" data-ong-page="catalogue">${UI().pageHeader({title: 'Catalogue raisonné', icon: '🎨', help: 'Les œuvres d’un artiste, classées à ta façon : par albums ou par chansons pour un musicien, par période ou par technique pour un peintre…'})}
-                ${A().emptyState({icon: failed ? '⛔' : '🎨', text: failed || 'Aucun catalogue pour l’instant', hint: failed ? '' : 'Coche « Artiste » sur la fiche d’une personne (✎ Modifier la fiche), puis ajoute ses œuvres, ses disques, ses livres : ils arrivent ici.'})}</section>`;
+                ${lost ? A().emptyState({icon: '🔍', text: 'Artiste introuvable', hint: `Cette fiche n’existe pas, ou plus (supprimée ?).${(artists || []).length ? ' Choisis un artiste dans la colonne de gauche.' : ''}`}) : A().emptyState({icon: failed ? '⛔' : '🎨', text: failed || 'Aucun catalogue pour l’instant', hint: failed ? '' : 'Coche « Artiste » sur la fiche d’une personne (✎ Modifier la fiche), puis ajoute ses œuvres, ses disques, ses livres : ils arrivent ici.'})}</section>`;
             return;
         }
         const it = cur.id ? (store.get(cur.id) || await store.ensure(cur.id).catch(() => null)) : null;

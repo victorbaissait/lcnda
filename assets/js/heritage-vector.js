@@ -1721,10 +1721,15 @@
         }
         /* enregistrer */
         async function thumb() { try { const p = doc.pages?.[0], c = await svgCanvas(await inlineMedia(docSvg(doc, {page: p || null})), Math.min(1, 240 / Math.max(p ? p.w : doc.w, p ? p.h : doc.h)), '#ffffff'); return c.toDataURL('image/jpeg', .8); } catch (_) { return ''; } }
-        async function saveDoc() {
-            name = $('[data-vx-name]').value.trim() || 'Mon dessin'; saved('saving');
-            try { const first = !docId, r = await post('save_vector_doc', {id: docId, name, doc, thumb: await thumb()}); docId = Number(r.result?.id || docId); dirty = false; saved('saved'); if (first) note('Rangé dans Listes → Outils de modification'); ctx.onSaved?.(docId); }
-            catch (e) { saved('error'); toast(e.message, 'error'); }
+        let saving = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé (jamais deux dessins)
+        function saveDoc() {
+            if (saving) return saving;
+            saving = (async () => {
+                name = $('[data-vx-name]').value.trim() || 'Mon dessin'; saved('saving');
+                try { const first = !docId, r = await post('save_vector_doc', {id: docId, name, doc, thumb: await thumb()}); docId = Number(r.result?.id || docId); dirty = false; saved('saved'); if (first) note('Rangé dans Listes → Outils de modification'); ctx.onSaved?.(docId); }
+                catch (e) { saved('error'); toast(e.message, 'error'); }
+            })().finally(() => { saving = null; });
+            return saving;
         }
         /** la sélection (ou tout) → une forme des tableaux (« Mes formes »), dans une boîte 100 × 100 */
         function shapeFromSel() {

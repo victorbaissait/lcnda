@@ -1686,6 +1686,7 @@
     // Au démarrage : prévenir si la dernière copie hors de l'ordinateur est trop ancienne (une fois par jour)
     setTimeout(async () => {
         if (!S()?.csrf) return;
+        if (document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly')) return; // consultation 🔒 : pas de rappel de copie
         let s;
         try { s = await api('offsite_status'); } catch (_) { return; }
         const key = 'lcnda-offsite-warned', day = today();
@@ -1727,6 +1728,7 @@
                 branch_spouses: form.elements.branch_spouses.checked ? '1' : '0', gedcom_version: form.elements.gedcom_version.value, share: form.elements.share.checked ? '1' : '0',
                 include_media: form.elements.include_media.checked ? '1' : '0', include_notes: form.elements.include_notes.checked ? '1' : '0', include_sources: form.elements.include_sources.checked ? '1' : '0', include_living: '1'};
             Object.entries(p).forEach(([k, v]) => v !== '' && url.searchParams.set(k, v));
+            if (typeof window.LCNDA_GENEALOGY === 'string') url.searchParams.set('g', window.LCNDA_GENEALOGY); // la généalogie de cette fenêtre (api.php refuse sinon)
             location.assign(url.toString());
         });
     });

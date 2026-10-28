@@ -1831,7 +1831,9 @@
         }, {signal: keyAc.signal});
 
         /* — enregistrer, exporter, fermer — */
-        async function save({copy: asCopy = false, design: asDesign = false, force = false} = {}) {
+        let savingP = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé (les copies et designs passent toujours)
+        function save(o = {}) { if (o.copy || o.design || o.force) return saveNow(o); if (savingP) return savingP; savingP = saveNow(o).finally(() => { savingP = null; }); return savingP; }
+        async function saveNow({copy: asCopy = false, design: asDesign = false, force = false} = {}) {
             if (editingId) stopEditing();
             let name = String(docName || '').trim() || 'Sans titre';
             if (asCopy || asDesign) { const n = await ask(asDesign ? 'Nom du design (il sera proposé pour les prochains livres) :' : 'Nom de la copie :', asDesign ? `${name} (design)` : `${name} (copie)`); if (!n) return; name = n.trim().slice(0, 160); }
@@ -1846,7 +1848,7 @@
                 if (!asCopy && !asDesign) status('error');
                 if (!err.conflict || asCopy || asDesign) { toast(err.message, 'error'); return; }
                 const choice = await (A().conflictBox?.({what: 'Ce document'}) ?? Promise.resolve(null));
-                if (choice === 'overwrite') return save({force: true});
+                if (choice === 'overwrite') return saveNow({force: true});
                 if (choice === 'reload') { const keepId = docId; setDirty(false); keyAc.abort(); dl.close(); ext.openLayoutDoc?.(keepId, onSaved); }
             }
         }

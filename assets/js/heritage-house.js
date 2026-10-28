@@ -1238,7 +1238,9 @@
         const download = (blob, fname) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fname; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
         const fname = ext2 => `${A().safeExportFilename ? A().safeExportFilename(name, 'maison') : 'maison'}.${ext2}`;
         async function thumb(fl = null) { const s = planSvg(fl || H.floors.find(f => f.level === 0) || F()); if (!s) return ''; try { const b = await svgToPng(s.replace(/width="(\d+)" height="(\d+)"/, (m0, w, h) => { const k = 240 / Math.max(+w, +h); return `width="${Math.round(w * k)}" height="${Math.round(h * k)}"`; })); return await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); }); } catch (_) { return ''; } }
-        async function save() {
+        let savingP = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé (jamais deux maisons)
+        function save() { if (savingP) return savingP; savingP = saveNow().finally(() => { savingP = null; }); return savingP; }
+        async function saveNow() {
             name = $('[data-hs-name]').value.trim() || 'Maison de famille'; saving = true; savedSt('saving');
             try { const r = await post('save_house', {id, name, place_id: placeId, place_text: placeText, period, house: H, thumb: await thumb()}); id = r.result.id; dirty = false; saving = false; savedSt('saved'); status(''); ctx.onSaved?.(id); } catch (e) { saving = false; savedSt('error'); toast(e.message, 'error'); }
         }

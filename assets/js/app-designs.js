@@ -495,7 +495,7 @@
         return s.charAt(0).toLocaleUpperCase('fr-FR') + s.slice(1);
     }
     const cls = (...c) => c.filter(Boolean).join(' '); // (les noms de classes sont assemblés ici : pas de dessin de portrait écrit à la main)
-    function initialsHtml(p, extra) { return `<div class="${cls('portrait', 'portrait-placeholder', 'lc-dz', extra)}">${esc(((p.first_name || '')[0] || '') + ((p.last_name || '')[0] || ''))}</div>`; }
+    function initialsHtml(p, extra) { return `<div class="${cls('portrait', 'portrait-placeholder', 'lc-dz', extra)}">${esc(([...(p.first_name || '')][0] || '') + ([...(p.last_name || '')][0] || ''))}</div>`; }
     const HERO_CLS = ['lc-hero', 'lc-hero-avant', 'lc-hero-bandeau', 'lc-hero-acte', 'lc-hero-carte', 'lc-nophoto'];
     const PART_CLS = ['lc-h-pt', 'lc-h-nm', 'lc-h-tl'];
     function undecorateHero(hero) {

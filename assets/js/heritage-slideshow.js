@@ -684,7 +684,9 @@
                     {id: 'file', hint: 'pour le rouvrir ailleurs', ext: 'json', run: async o => download(new Blob([JSON.stringify({type: 'lcnda-diaporama', version: 1, name: n, show}, null, 1)], {type: 'application/json'}), o.filename)},
                 ]});
         }
-        async function save() {
+        let savingP = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé
+        function save() { if (savingP) return savingP; savingP = saveNow().finally(() => { savingP = null; }); return savingP; }
+        async function saveNow() {
             name = curName() || 'Mon diaporama'; state('saving');
             try { const r = await post('save_slideshow', {id, name, show}); id = r.result.id; dirty = false; state('saved'); ctx.onSaved?.(id); } catch (e) { state('error'); toast(e.message, 'error'); }
         }

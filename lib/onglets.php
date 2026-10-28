@@ -120,11 +120,11 @@ function onglets_documents(PDO $pdo): array
 /** la fiche complète d'un document (à droite) */
 function onglets_document(PDO $pdo, int $id): array
 {
-    if ($id <= 0) { throw new RuntimeException('Document introuvable.'); }
+    if ($id <= 0) { throw new LcndaBadInput('Document introuvable.'); } // 422 avec une phrase, pas une erreur 500
     $sealed = function_exists('sealed_media_sql') ? sealed_media_sql($pdo) : '';
     $s = $pdo->prepare("SELECT * FROM media m WHERE m.id=?{$sealed}"); $s->execute([$id]);
     $m = $s->fetch(PDO::FETCH_ASSOC);
-    if (!$m) { throw new RuntimeException('Ce document n’existe plus.'); }
+    if (!$m) { throw new LcndaBadInput('Document introuvable : il n’existe pas, ou plus.'); }
     $str = static fn($k, $n = 400) => mb_substr((string) ($m[$k] ?? ''), 0, $n);
     $url = (string) ($m['document_url'] ?? '');
     if (!preg_match('~^https?://~i', $url)) { $url = ''; }

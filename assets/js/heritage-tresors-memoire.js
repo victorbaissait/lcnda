@@ -114,7 +114,9 @@
             host.querySelector('[data-c-n]').textContent = `${vis.length} sur ${all.length}`;
             list.innerHTML = vis.length ? (await Promise.all(vis.map(async x => `<article class="h-tr-panel h-tr-print" data-c-id="${x.id}">${cfg.card(T, tr, x)}${await mediaHtml(T, x.data?.media)}<p class="h-tr-noprint" style="margin:8px 0 0"><button type="button" class="h-tr-link" data-c-edit="${x.id}">Modifier</button> · <button type="button" class="h-tr-link" data-c-del="${x.id}">Supprimer</button></p></article>`))).join('') : T.empty(all.length ? 'Rien ne correspond à ta recherche' : cfg.empty, {icon: cfg.icon});
         };
-        const load = async () => { all = await store(T, cfg).items(); await paint(); };
+        /** « 🖨 Imprimer » le livre : grisé (C8) tant qu'il n'y a rien à mettre dedans */
+        const bookState = () => { const bk = host.closest('.h-tr-page')?.querySelector('[data-c-book]'); if (!bk) return; bk.disabled = !all.length; bk.setAttribute('aria-disabled', String(!all.length)); bk.title = all.length ? `${cfg.book.label} : couverture, sommaire, une page chacun` : `Rien à mettre dans le livre pour l’instant : commence par « ＋ ${cfg.newLabel} ».`; };
+        const load = async () => { all = await store(T, cfg).items(); await paint(); if (cfg.book) bookState(); };
         host.querySelector('[data-c-q]').addEventListener('input', e => { q = e.target.value.trim().toLowerCase(); paint(); });
         host.querySelector('[data-c-f]')?.addEventListener('change', e => { filt = e.target.value; paint(); });
         host.addEventListener('click', async e => {

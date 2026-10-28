@@ -1156,7 +1156,9 @@
         /* ─── lire, enregistrer, fermer ─── */
         function play(start, presenter = false) { if (editing) stopEdit(); openPlayer(show, {start, presenter, name: $('[data-kn-name]').value, onExit: i => { if (!closed && Number.isInteger(i)) goSlide(i); }}); }
         const forSave = () => JSON.parse(JSON.stringify(show, (k, v) => k === '_editing' ? undefined : v));
-        async function save() {
+        let savingP = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé
+        function save() { if (savingP) return savingP; savingP = saveNow().finally(() => { savingP = null; }); return savingP; }
+        async function saveNow() {
             if (editing) stopEdit();
             name = $('[data-kn-name]').value.trim() || 'Ma présentation'; status('Enregistrement…');
             try { const r = await post('save_slideshow', {id, name, show: forSave()}); id = r.result.id; dirty = false; status('✓ Enregistré'); ctx.onSaved?.(id); }

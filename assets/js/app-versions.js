@@ -229,7 +229,10 @@
         const select = id => { cur = id; keepScroll(paintList); paintPane(); dlg.querySelector(`[data-vers-row="${CSS.escape(id)}"]`)?.focus({preventScroll: false}); };
         const changed = () => { cache.clear(); o.onChange?.(); return load(); };
 
+        let restoring = false; // un double-clic sur « ↺ Revenir » ne fait le travail qu'une fois
         async function doRestore(v) {
+            if (restoring) return; restoring = true;
+            dlg.querySelectorAll('[data-vers-act="restore"]').forEach(b => { b.disabled = true; });
             try {
                 if (o.keepNow) await o.keepNow(`Avant le retour à « ${v.label} »`);
                 const r = await o.restore(v);
@@ -237,7 +240,7 @@
                 const msg = `↺ Revenu à « ${v.label} » — la version d’avant est gardée`;
                 if (A().undoToast && r?.undo) A().undoToast(msg, {undo: async () => { await r.undo(); if (!closed) await changed(); }, redo: r.redo ? async () => { await r.redo(); if (!closed) await changed(); } : null, undoneText: `retour à « ${v.label} »`});
                 else toast(msg);
-            } catch (e) { toast(e.message || String(e), 'error'); }
+            } catch (e) { toast(e.message || String(e), 'error'); } finally { restoring = false; dlg.querySelectorAll('[data-vers-act="restore"]').forEach(b => { b.disabled = false; }); }
         }
         async function doRename(v) {
             const name = await A().askText?.({title: '✎ Renommer la version', message: 'Le nouveau nom :', value: v.label, okLabel: 'Renommer'});

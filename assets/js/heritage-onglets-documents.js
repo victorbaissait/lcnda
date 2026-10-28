@@ -166,14 +166,15 @@
         const ws = document.getElementById('workspace'); if (!ws) return;
         await load();
         if (token != null && token !== A().state?.workspaceToken) return;
-        if (cur && !byId(cur)) cur = 0;
+        let lost = 0; // « #documents/99999 » : un document qui n'existe pas (ou plus) — la petite ligne K10 au-dessus de la liste
+        if (cur && !byId(cur)) { lost = !failed && /^#documents\/\d/.test(location.hash) ? cur : 0; cur = 0; if (lost) history.replaceState(null, '', hashFor(0)); }
         if (cur) return showDoc(cur, token);
         const ro = kiosk();
         ws.innerHTML = `<section class="page ong-page" data-ong-page="documents">${UI().pageHeader ? UI().pageHeader({title: 'Documents', icon: '📄',
             help: 'Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite.',
             primary: ro ? '' : '<button type="button" class="button" data-ong-import>⤒ Importer des documents</button>',
             actions: ['<button type="button" class="button secondary" data-ong-medias>↗ Listes → Médias</button>']}) : '<h1>Documents</h1>'}
-            ${failed ? `<div class="ui-msg is-error">⛔ ${esc(failed)}</div>` : ''}<div class="ong-cards" data-ong-cards></div></section>`;
+            ${failed ? `<div class="ui-msg is-error">⛔ ${esc(failed)}</div>` : ''}${lost ? `<div class="ong-lost" data-ong-lost>${A().empty(`Document introuvable (n° ${lost}) : il n’existe pas, ou plus (supprimé ?). Choisis-en un ci-dessous.`, {icon: '🔍'})}</div>` : ''}<div class="ong-cards" data-ong-cards></div></section>`;
         paintWorkspaceList();
     }
     function hashFor(id) { return id ? `#documents/${id}` : '#documents'; }
@@ -205,7 +206,11 @@
         if (!cache.has(id)) ws.innerHTML = `<section class="page ong-page">${UI().spinner ? UI().spinner('Chargement du document…') : '<div class="loading-block">Chargement…</div>'}</section>`;
         let d;
         try { d = cache.get(id) || (await A().api('onglets', {op: 'document', id})).document; cache.set(id, d); }
-        catch (e) { ws.innerHTML = `<section class="page ong-page">${A().emptyState({icon: '⛔', text: 'Ce document ne s’ouvre pas', hint: e.message || ''})}</section>`; return; }
+        catch (e) {
+            if (cur !== id || A().state?.module !== 'documents') return;
+            const lost = /introuvable|n’existe/i.test(e.message || ''); // « #documents/99999 » : la petite ligne K10, pas une erreur
+            ws.innerHTML = `<section class="page ong-page">${lost ? A().empty('Document introuvable : il n’existe pas, ou plus (supprimé ?). Choisis-en un dans la colonne de gauche.', {icon: '🔍'}) : A().emptyState({icon: '⛔', text: 'Ce document ne s’ouvre pas', hint: e.message || ''})}</section>`; return;
+        }
         if ((token != null && token !== A().state?.workspaceToken) || t0 !== A().state?.workspaceToken || cur !== id || A().state?.module !== 'documents') return;
         const lite = byId(id) || {}, sort = lite.sort || sortOf(d), [, icon] = sortMeta(sort), ro = kiosk();
         const isImg = fold(d.media_type) === 'image' && d.filename, src = d.filename ? `media/${encodeURIComponent(d.filename)}` : '';

@@ -58,7 +58,7 @@ try {
     $isWrite = $_SERVER['REQUEST_METHOD'] !== 'GET';
     $payload = $isWrite ? request_json() : [];
     // Plusieurs généalogies : une fenêtre restée sur une autre généalogie (changée dans une autre fenêtre) ne lit pas celle-ci
-    $pageGenealogy = $_SERVER['HTTP_X_GENEALOGY'] ?? null;
+    $pageGenealogy = $_SERVER['HTTP_X_GENEALOGY'] ?? (isset($_GET['g']) && is_string($_GET['g']) ? $_GET['g'] : null); // ?g= : liens de téléchargement (exports)
     if (is_string($pageGenealogy) && $pageGenealogy !== (GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID)) {
         json_response(['error' => 'Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page.', 'genealogy_changed' => true], 409);
     }
@@ -8660,7 +8660,7 @@ function duplicate_candidates(PDO $pdo): never
         SELECT p.id,p.first_name,p.last_name,p.middle_name,
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) birth_year,
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) death_year,
-        lc_fold(p.last_name) AS last_key, substr(lc_fold(p.first_name),1,3) AS first_key, lc_fold(p.first_name) AS first_full
+        lc_fold(p.last_name) AS last_key, substr(lc_fold(p.first_name),1,3) AS first_key, lc_fold(p.first_name) AS first_full, COALESCE(p.kind,'human') AS kind
         FROM persons p WHERE trim(COALESCE(p.last_name,''))<>'' AND trim(COALESCE(p.first_name,''))<>''
     )
     SELECT p1.id id1,p2.id id2,p1.first_name first1,p1.last_name last1,p2.first_name first2,p2.last_name last2,p1.birth_year birth1,p2.birth_year birth2,p1.death_year death1,p2.death_year death2,
@@ -8668,7 +8668,7 @@ function duplicate_candidates(PDO $pdo): never
          CASE WHEN p1.last_key=p2.last_key THEN 35 ELSE 0 END+
          CASE WHEN p1.birth_year IS NOT NULL AND p2.birth_year IS NOT NULL AND abs(p1.birth_year-p2.birth_year)<=2 THEN 20 ELSE 0 END+
          CASE WHEN p1.death_year IS NOT NULL AND p2.death_year IS NOT NULL AND abs(p1.death_year-p2.death_year)<=2 THEN 15 ELSE 0 END) score
-    FROM person_years p1 JOIN person_years p2 ON p2.last_key=p1.last_key AND p2.first_key=p1.first_key AND p1.id<p2.id
+    FROM person_years p1 JOIN person_years p2 ON p2.last_key=p1.last_key AND p2.first_key=p1.first_key AND p1.id<p2.id AND p2.kind=p1.kind
     WHERE (p1.birth_year IS NULL OR p2.birth_year IS NULL OR abs(p1.birth_year-p2.birth_year)<=5)
     AND NOT EXISTS (SELECT 1 FROM dismissed_issues d WHERE d.issue_key='dup:'||p1.id||':'||p2.id) -- ✅ « Ce sont deux personnes différentes »
     {$where}
@@ -10411,6 +10411,7 @@ function add_relation(PDO $pdo,array $data): array
     if($personId===$relatedId)throw new RuntimeException('Une personne ne peut pas être liée à elle-même');
     if(!person_exists($pdo,$personId)||!person_exists($pdo,$relatedId))throw new RuntimeException('Personne introuvable');
     assert_person_unlocked($pdo,$personId);assert_person_unlocked($pdo,$relatedId);
+    if(person_kind_of($pdo,$personId)!==person_kind_of($pdo,$relatedId))throw new RuntimeException('Impossible : une personne et un animal ne peuvent pas être parents ou conjoints l’un de l’autre.');
     // Pas de boucle dans l'arbre : un parent ne peut pas être aussi un descendant de son enfant.
     [$parentId,$childId]=$type==='parent'?[$relatedId,$personId]:($type==='child'?[$personId,$relatedId]:[0,0]);
     if($parentId&&person_is_ancestor_of($pdo,$childId,$parentId))throw new RuntimeException('Impossible : cette personne serait à la fois l’ancêtre et le descendant de l’autre. Vérifie le sens du lien (parent ou enfant).');
@@ -11007,11 +11008,18 @@ function merge_duplicate_places(PDO $pdo,array $data): array
     return ['merged_groups'=>count($merges),'details'=>$merges];
 }
 
+/** « human » ou « animal » : une personne et un animal ne sont jamais doublons, ni parents ou conjoints l'un de l'autre */
+function person_kind_of(PDO $pdo,int $id): string
+{
+    $s=$pdo->prepare("SELECT COALESCE(kind,'human') FROM persons WHERE id=?");$s->execute([$id]);return (string)($s->fetchColumn()?:'human');
+}
+
 function merge_people(PDO $pdo,array $data): array
 {
     $target=safe_int($data['target_id']??0);$source=safe_int($data['source_id']??0);if(!$target||!$source||$target===$source)throw new RuntimeException('Fusion impossible');
     $a=summary_person($pdo,$target);$b=summary_person($pdo,$source);if(!$a||!$b)throw new RuntimeException('Fiche introuvable');
     assert_person_unlocked($pdo,$target);assert_person_unlocked($pdo,$source);
+    if(person_kind_of($pdo,$target)!==person_kind_of($pdo,$source))throw new RuntimeException('Fusion impossible : on ne fusionne pas une personne avec un animal.');
     // Deux fiches d'un même couple, ou un ancêtre et son descendant, ne sont pas des doublons : la fusion casserait l'arbre.
     $na=trim(full_name($a))?:'la fiche #'.$target;$nb=trim(full_name($b))?:'la fiche #'.$source;
     if(couple_family_id($pdo,$target,$source))throw new RuntimeException('Fusion impossible : '.$na.' et '.$nb.' forment un couple. Deux conjoints ne sont pas la même personne.');
@@ -12244,6 +12252,13 @@ function save_person(PDO $pdo,array $data): array
             if($norm($before[$field])!==$norm($was)&&$norm($data[$field])!==$norm($before[$field]))$changed[]=$field;
         }
         if($changed)throw new LcndaConflict('Cette fiche a été modifiée dans une autre fenêtre depuis que tu l’as ouverte : recharge-la pour voir les changements (tes modifications ne sont pas perdues : elles restent dans cette fenêtre ; copie-les avant de recharger, ou choisis « Enregistrer quand même » pour remplacer l’autre version).');
+    }
+    // « Enregistrer quand même » ne réécrit que ce que CETTE fenêtre a changé : une case laissée comme à l'ouverture garde
+    // la valeur actuelle de la base (le métier changé dans l'autre fenêtre n'est pas effacé)
+    if(!empty($data['_base'])){
+        $base=is_array($data['_base'])?$data['_base']:(json_decode((string)$data['_base'],true)?:[]);
+        $norm=static fn($v)=>trim((string)safe_text(is_scalar($v)?(string)$v:''));
+        foreach($base as $field=>$was){if(is_string($field)&&array_key_exists($field,$data)&&is_scalar($data[$field]??'')&&$norm($data[$field])===$norm($was))unset($data[$field]);}
     }
     // comme à la création : une fiche garde au moins un prénom ou un nom
     $firstAfter=array_key_exists('first_name',$data)?safe_text($data['first_name']):safe_text($before['first_name']??'');

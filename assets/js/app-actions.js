@@ -254,7 +254,8 @@
             if ('photos' in so && o.photos !== false) st.photos = !!so.photos;
         }
         if (st.paper === 'custom' && !F() && !st.size) st.paper = 'A4';
-        const pg = {mode: 'all', pick: '', copies: 1, at: 0, list: [], marked: 0};
+        const pg = {mode: 'all', pick: '', copies: 1, at: 0, list: [], marked: 0, flow: 0};
+        const MAXCOPIES = 50, nPages = () => (pg.marked >= 2 ? pg.marked : pg.flow); // pages marquées [data-k-page], sinon pages mesurées dans l'aperçu
         const remember = () => { if (!o.key) return; prefsSet(o.key, {paper: st.paper, orientation: st.orientation, ...(st.size ? {size: st.size} : {}), opts: Object.fromEntries([...opts.map(x => [x.key, st[x.key]]), ...(o.photos !== false ? [['photos', st.photos]] : [])])}); };
         const optHtml = x => {
             const k = esc(x.key);
@@ -299,23 +300,79 @@
         /** les pages marquées du document (sans celles rangées dans une autre) */
         const topPages = d => [...d.querySelectorAll('[data-k-page]')].filter(el => !el.parentElement?.closest('[data-k-page]'));
         const currentPage = n => { const c = typeof o.current === 'function' ? o.current(choix()) : o.current; return Math.min(n, Math.max(1, Number(c) || pg.at + 1 || 1)); };
-        const wanted = n => (pg.mode === 'current' ? [currentPage(n)] : pg.mode === 'pick' ? UI.parsePages(pg.pick, n) || [] : Array.from({length: n}, (_, i) => i + 1));
+        const wanted = n => (pg.mode === 'current' ? [Math.min(n, pg.cur || currentPage(n))] : pg.mode === 'pick' ? UI.parsePages(pg.pick, n) || [] : Array.from({length: n}, (_, i) => i + 1));
         /** le document à imprimer : les pages choisies, autant de fois que d'exemplaires */
         const pick = doc => {
-            if (pg.marked < 2 || (pg.mode === 'all' && pg.copies < 2)) return doc;
-            const d = new DOMParser().parseFromString(doc, 'text/html'), els = topPages(d); if (els.length < 2) return doc;
+            if (nPages() < 2 || (pg.mode === 'all' && pg.copies < 2)) return doc;
+            const d = new DOMParser().parseFromString(doc, 'text/html'), els = topPages(d);
+            if (els.length < 2) return pg.marked < 2 ? sliceFlow(d, doc) : doc;
             const keep = wanted(els.length); if (!keep.length) return doc;
             const mark = d.createComment('k-pages'); els[0].before(mark);
-            const seq = []; for (let c = 0; c < Math.max(1, Math.min(50, pg.copies)); c++) keep.forEach(i => seq.push(els[i - 1].cloneNode(true)));
+            const seq = []; for (let c = 0; c < Math.max(1, Math.min(MAXCOPIES, pg.copies)); c++) keep.forEach(i => seq.push(els[i - 1].cloneNode(true)));
             els.forEach(el => el.remove()); mark.replaceWith(...seq);
             return '<!doctype html>' + d.documentElement.outerHTML;
         };
+        /* Un document sans pages marquées (texte qui coule) : ses pages mesurées dans un cadre caché, coupées entre deux blocs
+           (ou là où le document demande un saut de page) ; pour choisir des pages ou plusieurs exemplaires, chaque page devient
+           un morceau du texte de la hauteur de la feuille (marqué [data-k-page] : l'aperçu et l'impression le suivent). */
+        const flow = {doc: null, key: '', breaks: null};
+        const flowKey = () => { const [wm, hm] = sheetMm(); return `${wm}x${hm}x${o.margin ?? 12}`; };
+        function flowBreaks(d, step, mg) {
+            const win = d.defaultView, H = Math.max(1, Math.max(d.documentElement.scrollHeight, d.body.scrollHeight) - 2 * mg), tops = new Set(), forced = new Set();
+            [...d.body.querySelectorAll('*')].slice(0, 6000).forEach(el => {
+                const cs = win.getComputedStyle(el); if (cs.display === 'none' || (/^inline/.test(cs.display) && cs.display !== 'inline-block') || /absolute|fixed/.test(cs.position)) return;
+                const b = el.getBoundingClientRect(), top = Math.round(b.top + win.scrollY - mg), bot = Math.round(b.bottom + win.scrollY - mg);
+                if (top > 0) tops.add(top);
+                if (/page|always/.test(cs.breakBefore + ' ' + cs.pageBreakBefore) && top > 2) forced.add(top);
+                if (/page|always/.test(cs.breakAfter + ' ' + cs.pageBreakAfter) && bot < H - 2) forced.add(bot);
+            });
+            const T = [...tops].sort((a, b) => a - b), Fo = [...forced].sort((a, b) => a - b), br = [0];
+            let y = 0;
+            while (H - y > 2 && br.length < 500) {
+                const lim = y + step, f = Fo.find(v => v > y + 2 && v <= lim);
+                let nx = f ?? T.filter(v => v > y + step * 0.5 && v <= lim).pop() ?? lim;
+                if (nx >= H - 2) break; br.push(y = nx);
+            }
+            br.push(H); return br;
+        }
+        const measureFlow = doc => {
+            const key = flowKey(); if (flow.doc === doc && flow.key === key) return Promise.resolve(flow.breaks);
+            const [wm, hm] = sheetMm(), pw = wm * MM, ph = hm * MM, mg = (o.margin ?? 12) * MM;
+            return new Promise(res => {
+                const fr = document.createElement('iframe'); fr.setAttribute('sandbox', 'allow-same-origin'); fr.setAttribute('aria-hidden', 'true'); fr.tabIndex = -1;
+                fr.style.cssText = `position:fixed;left:-20000px;top:0;width:${pw}px;height:${ph}px;border:0;visibility:hidden;pointer-events:none`;
+                const done = br => { fr.remove(); flow.doc = doc; flow.key = key; flow.breaks = br; res(br); };
+                fr.onload = async () => { try { const d = fr.contentDocument; d.body.style.margin = '0'; d.body.style.padding = `${mg}px`; d.body.style.boxSizing = 'border-box'; await imagesReady(d); done(flowBreaks(d, Math.max(40, ph - 2 * mg), mg)); } catch (_) { done([0, ph]); } };
+                fr.srcdoc = doc; document.body.appendChild(fr);
+            });
+        };
+        function sliceFlow(d, doc) {
+            const br = flow.doc === doc && flow.key === flowKey() ? flow.breaks : null; if (!br || br.length < 3) return doc;
+            const n = br.length - 1, keep = wanted(n); if (!keep.length) return doc;
+            const [wm, hm] = sheetMm(), mgMm = o.margin ?? 12, mg = mgMm * MM, cw = Math.floor(wm * MM - 2 * mg), step = Math.floor(hm * MM - 2 * mg);
+            const inner = d.body.innerHTML, seq = [];
+            for (let c = 0; c < Math.max(1, Math.min(MAXCOPIES, pg.copies)); c++) keep.forEach(i => seq.push(`<div class="k-slice" data-k-page><div class="k-slice-clip" style="height:${Math.max(1, Math.min(step - 1, Math.floor(br[i] - br[i - 1])))}px"><div class="k-slice-in" style="top:${-Math.round(br[i - 1])}px">${inner}</div></div></div>`));
+            d.body.innerHTML = seq.join('');
+            const css = d.createElement('style'); css.textContent = `@page{margin:${mgMm}mm}.k-slice{break-after:page;page-break-after:always}.k-slice:last-child{break-after:auto;page-break-after:auto}.k-slice-clip{position:relative;overflow:hidden;width:${cw}px}.k-slice-in{position:relative;width:${cw}px}@media screen{body{margin:0!important;padding:0!important}.k-slice{box-sizing:content-box;width:${cw}px;height:${step}px;padding:${mg}px;background:#fff}}`;
+            d.head.appendChild(css);
+            return '<!doctype html>' + d.documentElement.outerHTML;
+        }
+        /** « 1-3, 7 » sur 2 pages : la phrase qui dit ce qui ne va pas (ou '') */
+        const pickProblem = () => {
+            const n = nPages(); if (pg.mode !== 'pick' || n < 2) return '';
+            const nums = String(pg.pick || '').match(/\d+/g)?.map(Number) || [], over = [...new Set(nums.filter(v => v > n))];
+            if (!UI.parsePages(pg.pick, n)) return over.length && UI.parsePages(pg.pick) ? `Le document n’a que ${plural(n, 'page')} : ${over.length > 1 ? `les pages ${over.join(', ')} n’existent pas` : `la page ${over[0]} n’existe pas`}.` : `Écris les pages à imprimer, par exemple « 1-3, 7 » (de 1 à ${n}).`;
+            return over.length ? `Le document n’a que ${plural(n, 'page')} : ${over.length > 1 ? `les pages ${over.join(', ')} n’existent pas` : `la page ${over[0]} n’existe pas`}.` : '';
+        };
+        const checkPick = () => { const inp = $('[data-k-pick]'), m = pickProblem(); if (m && pg.pick.trim()) UI.fieldError?.(inp, m); else UI.clearFieldError?.(inp); return m; };
+        const copiesProblem = v => (v > MAXCOPIES ? `${MAXCOPIES} exemplaires au plus.` : v < 1 ? 'Un exemplaire au moins.' : '');
         const build = async () => { const doc = withPageCss(await docFor(), {...st, margin: o.margin, locked: !!o.sizeLocked}); try { pg.marked = topPages(new DOMParser().parseFromString(doc, 'text/html')).length; } catch (_) { pg.marked = 0; } return doc; };
         const paintPages = () => {
-            const multi = pg.marked >= 2; $('[data-k-pages]').hidden = !multi; $('[data-k-copiesrow]').hidden = !multi;
-            const all = dlg.querySelector('[data-k-pg="all"]'); if (all) all.textContent = multi ? `Toutes (${pg.marked})` : 'Toutes';
+            const n = nPages(), multi = n >= 2; $('[data-k-pages]').hidden = !multi; $('[data-k-copiesrow]').hidden = !multi;
+            const all = dlg.querySelector('[data-k-pg="all"]'); if (all) all.textContent = multi ? `Toutes (${n})` : 'Toutes';
+            if (pg.mode === 'pick') checkPick();
         };
-        const sumText = n => { const [w, h] = sheetMm(), fmt = st.paper === 'custom' ? `${String(Math.round(w * 10) / 10).replace('.', ',')} × ${String(Math.round(h * 10) / 10).replace('.', ',')} mm` : `${st.paper} ${st.orientation === 'landscape' ? 'paysage' : 'portrait'}`; return `${plural(n, 'page')} · ${fmt}${pg.copies > 1 && pg.marked >= 2 ? ` · ${plural(pg.copies, 'exemplaire')}` : ''}`; };
+        const sumText = n => { const [w, h] = sheetMm(), fmt = st.paper === 'custom' ? `${String(Math.round(w * 10) / 10).replace('.', ',')} × ${String(Math.round(h * 10) / 10).replace('.', ',')} mm` : `${st.paper} ${st.orientation === 'landscape' ? 'paysage' : 'portrait'}`; return `${plural(n, 'page')} · ${fmt}${pg.copies > 1 && nPages() >= 2 ? ` · ${plural(pg.copies, 'exemplaire')}` : ''}`; };
         function show(i) {
             if (!frame || !rects.length) return;
             pg.at = Math.max(0, Math.min(rects.length - 1, i)); const r = rects[pg.at];
@@ -331,6 +388,7 @@
             const my = ++gen, [wm, hm] = sheetMm(), pw = wm * MM, ph = hm * MM;
             let doc; try { doc = await build(); } catch (e) { if (my === gen) prev.textContent = 'Pas d’aperçu'; return; }
             if (my !== gen) return;
+            if (pg.marked < 2) { const br = await measureFlow(doc); if (my !== gen) return; pg.flow = Math.max(1, br.length - 1); } else pg.flow = 0;
             paintPages();
             const fr = document.createElement('iframe'); fr.setAttribute('sandbox', 'allow-same-origin'); fr.setAttribute('title', 'Aperçu de l’impression'); fr.tabIndex = -1;
             fr.style.cssText = `position:absolute;left:0;top:0;width:${pw}px;height:${ph}px;transform-origin:0 0;border:0;background:#fff;pointer-events:none`;
@@ -346,6 +404,7 @@
                         const H = Math.max(ph, d.documentElement.scrollHeight, d.body.scrollHeight), Wd = Math.max(pw, d.documentElement.scrollWidth);
                         fr.style.width = `${Wd}px`; fr.style.height = `${H}px`;
                         if (marks.length) rects = marks.flatMap(el => { const b = el.getBoundingClientRect(), x = b.left + d.defaultView.scrollX, y = b.top + d.defaultView.scrollY, hh = b.width * ph / pw; if (b.height <= hh * 1.04) return [{x, y, w: b.width, h: b.height}]; const out = []; for (let yy = 0; yy < b.height - 2; yy += hh) out.push({x, y: y + yy, w: b.width, h: hh}); return out; }); // une page trop longue : sur plusieurs feuilles
+                        else if (flow.doc === doc && flow.breaks?.length > 1) rects = flow.breaks.slice(0, -1).map(y => ({x: 0, y, w: pw, h: ph})); // les mêmes pages que « Pages » et « Exemplaires »
                         else { const step = Math.max(40, ph - 2 * mg); rects = []; for (let y = 0; y < H - 2 * mg - 2 || !rects.length; y += step) rects.push({x: 0, y, w: pw, h: ph}); }
                         show(Math.min(pg.at, rects.length - 1));
                     };
@@ -359,32 +418,39 @@
             if (b.matches('[data-k-x]')) { dlg.close(); return; }
             if (b.dataset.kPaper) { st.paper = b.dataset.kPaper; paint(); remember(); later(); }
             if (b.dataset.kOr) { st.orientation = b.dataset.kOr; paint(); remember(); later(); }
-            if (b.dataset.kPg) { pg.mode = b.dataset.kPg; if (pg.mode === 'current') pg.cur = currentPage(pg.marked); paint(); if (pg.mode === 'pick') $('[data-k-pick]').focus(); later(); }
+            if (b.dataset.kPg) { pg.mode = b.dataset.kPg; if (pg.mode === 'current') pg.cur = currentPage(nPages()); paint(); if (pg.mode === 'pick') $('[data-k-pick]').focus(); later(); }
             if (b.dataset.kStep) show(pg.at + Number(b.dataset.kStep));
             if (b.matches('[data-k-pdf]')) { st.pdf = true; $('[data-k-pdfhint]').hidden = false; go(); }
         });
         const onOpt = e => {
             const c = e.target.closest('[data-k-opt]'); if (c) { const x = opts.find(y => y.key === c.dataset.kOpt); if (!x) return; st[x.key] = x.type === 'check' ? c.checked : x.type === 'number' ? Number(c.value) : x.choices.find(z => String(z.value) === c.value)?.value ?? c.value; paint(); remember(); later(); return; }
             if (e.target.matches('[data-k-photos]')) { st.photos = e.target.checked; remember(); later(); return; }
-            if (e.target.matches('[data-k-copies]')) { pg.copies = Math.max(1, Math.min(50, Math.round(Number(e.target.value) || 1))); later(); return; }
-            if (e.target.matches('[data-k-pick]')) { pg.pick = e.target.value; UI.clearFieldError?.(e.target); later(); }
+            if (e.target.matches('[data-k-copies]')) {
+                const v = Math.round(Number(e.target.value)), m = e.target.value === '' ? '' : copiesProblem(v);
+                pg.copies = Math.max(1, Math.min(MAXCOPIES, v || 1));
+                if (m) { UI.fieldError?.(e.target, m); if (e.type === 'change') { e.target.value = String(pg.copies); setTimeout(() => UI.fieldError?.(e.target, `${m} La case est remise à ${pg.copies}.`), 0); } } else UI.clearFieldError?.(e.target);
+                later(); return;
+            }
+            if (e.target.matches('[data-k-pick]')) { pg.pick = e.target.value; checkPick(); later(); }
         };
         dlg.addEventListener('change', onOpt); dlg.addEventListener('input', e => { if (e.target.matches('[data-k-pick], [data-k-copies], input[type=number][data-k-opt]')) onOpt(e); });
         dlg.addEventListener('keydown', e => { if (e.target.closest('input, textarea, select')) return; if (e.key === 'PageDown' || (e.key === 'ArrowRight' && e.target.closest('[data-k-nav]'))) { e.preventDefault(); show(pg.at + 1); } if (e.key === 'PageUp' || (e.key === 'ArrowLeft' && e.target.closest('[data-k-nav]'))) { e.preventDefault(); show(pg.at - 1); } });
         let result = null;
         async function go() {
             const btn = $('[data-k-go]');
-            if (pg.marked >= 2 && pg.mode === 'pick' && !UI.parsePages(pg.pick, pg.marked)) {
-                const inp = $('[data-k-pick]'), m = `Écris les pages à imprimer, par exemple « 1-3, 7 » (de 1 à ${pg.marked}).`;
-                if (UI.fieldError) UI.fieldError(inp, `⛔ ${m}`); else toast(m, 'error'); inp.focus(); st.pdf = false; return;
+            const pm = pickProblem();
+            if (pm) {
+                const inp = $('[data-k-pick]');
+                if (UI.fieldError) UI.fieldError(inp, `⛔ ${pm}`); else toast(pm, 'error'); inp.focus(); st.pdf = false; return;
             }
             btn.disabled = true;
             try {
                 if (st.pdf) toast('Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ».');
-                result = {...choix(), pages: pg.marked >= 2 ? wanted(pg.marked) : null, copies: pg.copies};
+                result = {...choix(), pages: nPages() >= 2 ? wanted(nPages()) : null, copies: pg.copies};
                 if (st.paper === 'custom' && cbox) F().use('impression', cbox.get());
                 remember();
-                const doc = pick(await build()); dlg.close(); await printDoc(doc); // dans un cadre caché : ni onglet, ni fenêtre bloquée
+                const built = await build(); if (pg.marked < 2 && (pg.mode !== 'all' || pg.copies > 1)) { const br = await measureFlow(built); pg.flow = Math.max(1, br.length - 1); }
+                const doc = pick(built); dlg.close(); await printDoc(doc); // dans un cadre caché : ni onglet, ni fenêtre bloquée
                 o.onPrint?.(result);
             } catch (e) { btn.disabled = false; toast(`Impression impossible : ${e?.message || e}`, 'error'); }
         }
@@ -422,7 +488,7 @@
         return true;
     };
     // ⌘P (Mod+P) dans une fenêtre d'éditeur qui sait imprimer (les raccourcis de l'app dorment pendant une fenêtre)
-    window.addEventListener('keydown', e => { if (e.key?.toLowerCase() !== 'p' || !(e.metaKey || e.ctrlKey) || e.altKey || e.shiftKey || e.repeat) return; if (UI.printFromKey()) { e.preventDefault(); e.stopPropagation(); } }, true);
+    window.addEventListener('keydown', e => { if (e.key?.toLowerCase() !== 'p' || !(e.metaKey || e.ctrlKey) || e.altKey || e.shiftKey || e.repeat || document.documentElement.classList.contains('ms-open')) return; if (UI.printFromKey()) { e.preventDefault(); e.stopPropagation(); } }, true);
 
     /** K13 — UI.openImportDialog({title, accept, multiple, text, hint, files, analyze, run, noun, many, feminine, goLabel})
      *  1. déposer le fichier (zone E4) · 2. « Voilà ce qui va entrer » (analyze(files) → {count, summary, notices:[{kind,text}], preview, data, ok})

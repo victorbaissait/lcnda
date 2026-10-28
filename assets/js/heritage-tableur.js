@@ -893,8 +893,15 @@
         },
         /** la taille du texte des cellules choisies (6 à 72 px ; 13 = la taille de départ) */
         setFontSize(v) {
-            const n = Math.round(Number(String(v ?? '').replace(',', '.')));
-            if (!Number.isFinite(n) || n < 6 || n > 72) { this.syncTools(); return toast('Une taille entre 6 et 72.', 'error'); }
+            const n = Math.round(Number(String(v ?? '').replace(',', '.'))), fsIn = this.$('[data-xl-fs]'), shown = fsIn && fsIn.offsetParent;
+            if (!Number.isFinite(n) || n < 6 || n > 72) { // K1 : la phrase sous la case, la taille d'avant gardée (jamais un message par essai)
+                const st = this.curStyle();
+                if (fsIn) fsIn.value = st.fs ? String(st.fs) : '';
+                if (shown && UI()?.fieldError) UI().fieldError(fsIn, `Une taille entre 6 et 72 px (« ${String(v ?? '').trim().slice(0, 12)} » ne va pas).`, {toastIfMissing: false});
+                else toast('Une taille entre 6 et 72 px.', 'error');
+                return false;
+            }
+            if (fsIn) UI()?.clearFieldError?.(fsIn);
             this.styleSel(s => { if (n === 13) delete s.fs; else s.fs = n; }, 'Taille du texte');
         },
         colorBox(kind, btn) {
@@ -1470,7 +1477,14 @@
         },
 
         /* ═════════ Enregistrer, fermer ═════════ */
-        async save({asNew = false, kind = this.kind, name = this.name, force = false} = {}) {
+        /** deux ⌘S rapides (ou double-clic sur 💾) : le second attend le premier et réutilise l'id créé (jamais deux classeurs) */
+        save(o = {}) {
+            if (o.asNew) return this._saveNow(o);
+            if (this._saving) return this._saving;
+            const p = this._saveNow(o), done = () => { if (this._saving === p) this._saving = null; };
+            this._saving = p; p.then(done, done); return p;
+        },
+        async _saveNow({asNew = false, kind = this.kind, name = this.name, force = false} = {}) {
             const S = X(); this.wb.active = this.si;
             // « ✓ Enregistrer et revenir » : les données repartent dans l'outil qui les a confiées (rien n'est rangé dans le Tableur, sauf « Enregistrer une copie… »)
             if (this.ctx.back && !asNew) {
@@ -1491,7 +1505,7 @@
                 UI()?.savedStatus?.(this.dlg, 'error');
                 if (e.conflict && !asNew) { // un autre onglet a enregistré ce classeur entre-temps
                     const choice = await (A().conflictBox?.({what: 'Ce classeur'}) ?? Promise.resolve(null));
-                    if (choice === 'overwrite') return this.save({asNew, kind, name, force: true});
+                    if (choice === 'overwrite') return this._saveNow({asNew, kind, name, force: true});
                     if (choice === 'reload') { const keep = this.id; this.dirty = false; this.dlg.close(); setTimeout(() => openWorkbook({...this.ctx, id: keep, data: undefined}), 50); }
                     return 0;
                 }

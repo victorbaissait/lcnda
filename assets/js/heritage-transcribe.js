@@ -510,7 +510,13 @@
             touch(); await loadImage();
         }
         /* ─── enregistrer, exporter ─── */
+        let saving = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé (jamais deux transcriptions)
         async function save(toMedia = false) {
+            if (saving) { const p = saving; await p.catch(() => {}); if (!toMedia) return; }
+            saving = saveNow(toMedia).finally(() => { saving = null; });
+            return saving;
+        }
+        async function saveNow(toMedia = false) {
             ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value; t.data.status = $('[data-tx-state]').value;
             if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${KINDS.find(k => k[0] === t.kind)?.[1] || 'Acte'}${subj ? ` de ${subj.name}` : ''}${t.date_text ? `, ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
             status('Enregistrement…');

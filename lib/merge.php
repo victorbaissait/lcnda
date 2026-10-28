@@ -168,11 +168,12 @@ function merge_gedcom_apply(PDO $main, array $data): never
                 $mineRow = $main->query('SELECT * FROM persons WHERE id=' . $target)->fetch();
                 foreach (['occupation', 'middle_name', 'nationality'] as $c) {
                     if (in_array($c, $copyCols, true) && trim((string) ($mineRow[$c] ?? '')) === '' && trim((string) ($p[$c] ?? '')) !== '') {
-                        $main->prepare("UPDATE persons SET {$c}=? WHERE id=?")->execute([$p[$c], $target]); $touched[$target] = true;
+                        $main->prepare("UPDATE persons SET {$c}=? WHERE id=?")->execute([mb_substr((string) $p[$c], 0, 200), $target]); $touched[$target] = true;
                     }
                 }
             } elseif ($action === 'new') {
-                $vals = array_map(static fn($c) => $p[$c] ?? null, $copyCols);
+                // un arbre reçu ne fait pas entrer de nom de 20 000 lettres : 200 au plus, comme la saisie (assert_person_name_lengths)
+                $vals = array_map(static fn($c) => in_array($c, ['first_name', 'middle_name', 'last_name', 'prefix', 'suffix', 'occupation', 'nationality'], true) && is_string($p[$c] ?? null) ? mb_substr($p[$c], 0, 200) : ($p[$c] ?? null), $copyCols);
                 $main->prepare('INSERT INTO persons(' . implode(',', $copyCols) . ') VALUES(' . implode(',', array_fill(0, count($copyCols), '?')) . ')')->execute($vals);
                 $map[$id] = (int) $main->lastInsertId(); $stats['added']++; $newIds[] = $map[$id];
             } else { $stats['ignored']++; }
