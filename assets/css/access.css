@@ -57,9 +57,9 @@ html.a11y-safe .investigation-media.interesting { box-shadow: 5px 5px 0 #8fd6c0 
 html.a11y-safe .investigation-media.rejected { box-shadow: 5px 5px 0 #f0b98f !important; }
 
 /* ═════ Formes en plus des couleurs ═════ */
-html.a11y-shapes .toast.error:not(.ui-toast)::before, html.a11y-shapes .ui-status-txt.is-error::before, html.a11y-shapes .a11y-demo-msg.is-bad::before { content: "⛔ "; }
-html.a11y-shapes .toast.success:not(.ui-toast)::before, html.a11y-shapes .a11y-demo-msg.is-good::before { content: "✓ "; font-weight: 900; }
-html.a11y-shapes .a11y-demo-msg.is-warn::before, html.a11y-shapes .issue.warning > :first-child::before { content: "⚠ "; }
+html.a11y-shapes .toast.error:not(.ui-toast)::before, html.a11y-shapes .ui-status-txt.is-error::before { content: "⛔ "; }
+html.a11y-shapes .toast.success:not(.ui-toast)::before { content: "✓ "; font-weight: 900; }
+html.a11y-shapes .issue.warning > :first-child::before { content: "⚠ "; }
 html.a11y-shapes .issue.error > :first-child::before { content: "⛔ "; }
 /* hommes en carré arrondi, femmes en rond */
 html.a11y-shapes .pk-av.m { border-radius: 22% !important; }
@@ -242,10 +242,7 @@ html.side-right .a11y-dock, .app-shell.sidebar-collapsed ~ .a11y-dock { left: 16
 .a11y-demo { display: grid; gap: 10px; border: 2px dashed var(--line-color, #ccc); padding: 12px; margin: 12px 0; }
 .a11y-demo-title { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
 .a11y-demo-msgs { display: flex; flex-wrap: wrap; gap: 8px; }
-.a11y-demo-msg { padding: 6px 10px; font-size: 13px; font-weight: 700; border: 2px solid; }
-.a11y-demo-msg.is-bad { border-color: var(--a11y-bad); background: color-mix(in srgb, var(--a11y-bad) 14%, var(--card-bg, #fff)); }
-.a11y-demo-msg.is-good { border-color: var(--a11y-good); background: color-mix(in srgb, var(--a11y-good) 14%, var(--card-bg, #fff)); }
-.a11y-demo-msg.is-warn { border-color: var(--a11y-warn); background: color-mix(in srgb, var(--a11y-warn) 14%, var(--card-bg, #fff)); }
+.a11y-demo-msgs .ui-notice { margin: 0; }
 .a11y-demo-people { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-weight: 700; font-size: 13px; }
 .a11y-demo-people .pk-av { width: 30px; height: 30px; display: inline-grid; place-items: center; border-radius: 50%; color: #fff; font: 700 12px/1 system-ui, sans-serif; }
 .a11y-demo-chart { max-width: 520px; }

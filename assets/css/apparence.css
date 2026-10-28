@@ -27,6 +27,11 @@
 .lc-hh-av { flex: none; width: 38px; height: 38px; display: grid; place-items: center; border: 2px solid var(--ink); background: #f2f2f2; font-weight: 800; font-size: 12px; }
 .lc-hh-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
 .lc-hh-badges .ui-badge { font-size: 8px; padding: 2px 5px; white-space: nowrap; } /* K8 : les mêmes pastilles que la fiche (indicateurs.css), en petit */
+.lc-hh-badges .lc-pf-link { font-size: 8px; padding: 2px 5px; pointer-events: none; } /* le même lien que sur la fiche, en petit */
+/* les couleurs réglées dans « Couleurs des badges » (indicateurs.css, .person-hero-status) : l'aperçu les suit aussi */
+:root:not([data-theme="dark"]) .lc-hh-badges .ui-badge.is-sosa { background: var(--person-badge-sosa-bg, #055dff); color: var(--person-badge-sosa-text, #fff); border-color: var(--person-badge-sosa-bg, #055dff); }
+:root:not([data-theme="dark"]) .lc-hh-badges .ui-badge.is-yellow { background: var(--person-badge-unknown-bg, #fff8e1); color: var(--person-badge-unknown-text, #6b4e00); }
+:root:not([data-theme="dark"]) .lc-hh-badges .ui-badge.is-grey { background: var(--person-badge-outside-bg, #f0f1f3); color: var(--person-badge-outside-text, #444); }
 .lc-hh-btns { display: flex; flex-direction: column; gap: 6px; border-left: 2px solid var(--ink); padding-left: 10px; }
 .lc-hh-btns.lc-cols-2 { display: grid; grid-template-columns: repeat(2, 22px); }
 .lc-hh-btns.lc-rows-2 { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, 22px); }

@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=273">
+    <link rel="stylesheet" href="assets/css/app.css?v=275">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=254">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -60,7 +60,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/jeux-patience.css?v=2">
     <link rel="stylesheet" href="assets/css/bunker.css?v=18">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
-    <link rel="stylesheet" href="assets/css/apparence.css?v=6">
+    <link rel="stylesheet" href="assets/css/apparence.css?v=7">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=5">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
@@ -1180,14 +1180,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-forms.js?v=3" defer></script>
 <script src="assets/js/app-mots.js?v=1" defer></script>
 <script src="assets/js/app-portraits.js?v=4" defer></script>
-<script src="assets/js/app-colonne.js?v=6" defer></script>
+<script src="assets/js/app-colonne.js?v=7" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
 <script src="assets/js/app-actions.js?v=8" defer></script>
 <script src="assets/js/app-editeurs.js?v=3" defer></script>
 <script src="assets/js/app-versions.js?v=4" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=10" defer></script>
-<script src="assets/js/app-access.js?v=16" defer></script>
+<script src="assets/js/app-access.js?v=17" defer></script>
 <script src="assets/js/app-mode-simple.js?v=15" defer></script>
 <script src="assets/js/app-sidegroups.js?v=12" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
@@ -1394,8 +1394,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-fiche.js?v=6" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=19" defer></script>
-<script src="assets/js/app-designs.js?v=21" defer></script>
+<script src="assets/js/app-apparence.js?v=20" defer></script>
+<script src="assets/js/app-designs.js?v=22" defer></script>
 <script src="assets/js/app-sections.js?v=4" defer></script>
 <script>
 (function () {
