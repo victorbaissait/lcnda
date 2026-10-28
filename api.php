@@ -57,6 +57,11 @@ try {
     $action = $_GET['action'] ?? 'bootstrap';
     $isWrite = $_SERVER['REQUEST_METHOD'] !== 'GET';
     $payload = $isWrite ? request_json() : [];
+    // Plusieurs généalogies : une fenêtre restée sur une autre généalogie (changée dans une autre fenêtre) ne lit pas celle-ci
+    $pageGenealogy = $_SERVER['HTTP_X_GENEALOGY'] ?? null;
+    if (is_string($pageGenealogy) && $pageGenealogy !== (GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID)) {
+        json_response(['error' => 'Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page.', 'genealogy_changed' => true], 409);
+    }
     if ($isWrite) {
         verify_csrf($payload);
     }

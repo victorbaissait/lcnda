@@ -1268,7 +1268,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const url = new URL('api.php', location.href);
         url.searchParams.set('action', action);
         Object.entries(params).forEach(([key, value]) => value !== undefined && url.searchParams.set(key, value));
-        const init = {headers: {'Accept':'application/json'}, ...options};
+        const init = {headers: {'Accept':'application/json', ...(typeof window.LCNDA_GENEALOGY === 'string' ? {'X-Genealogy': window.LCNDA_GENEALOGY} : {})}, ...options};
         if (options.method && options.method !== 'GET') {
             state.writeCount = (state.writeCount || 0) + 1; // une écriture : les données gardées en mémoire (pages du tableau de bord) sont à relire
             init.headers = {...init.headers, 'Content-Type':'application/json', 'X-CSRF-Token':state.csrf};
@@ -1284,6 +1284,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         // Après une modification, le nombre de personnes affiché est recompté (création, suppression, fusion,
         // ajout d'un parent… : il n'était calculé qu'à l'ouverture de l'application).
         if (writing) SUBMIT_GUARD.okSeq++;
+        // une autre généalogie a été ouverte dans une autre fenêtre : on le dit une fois, avec « ↻ Recharger »
+        if (response.status === 409 && data.genealogy_changed && !api.genealogyWarned) { api.genealogyWarned = true; toast(data.error, 'error', {duration: 60000, action: {label: '↻ Recharger', run: () => location.reload()}}); }
         if (options.method && options.method !== 'GET' && action !== 'save_settings') { schedulePersonCountRefresh(); window.dispatchEvent(new CustomEvent('lcnda:data-changed', {detail: {action}})); }
         return data;
     }
