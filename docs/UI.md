@@ -470,6 +470,24 @@ UI.printDocument(html);   // « 🖨 Imprimer » d’une fenêtre d’export E3 
 ```
 Fenêtre : aperçu de la page (nombre de pages), A4 / A5, Portrait / Paysage, « Ce qu’on imprime » (Photos d’office), Annuler · ⤓ PDF · 🖨 Imprimer. L’impression se fait dans un cadre caché (sans scripts) ; les dessins `<canvas>` deviennent des images.
 
+### L1 — la même fenêtre pour tous les outils (zone « Ce qu’on imprime », pages, exemplaires)
+
+```js
+UI.openPrintDialog({title: 'Ma présentation', key: 'presentation', zone: 'Présentation', margin: 0, photos: false,
+    options: [{key: 'what', type: 'radio', value: 'slides', choices: [['slides', 'Les diapositives'], ['notes', 'Les notes seules']]},
+              {key: 'per', type: 'radio', label: 'Diapositives par page', tiles: true, choices: [{value: '1', label: '1', cells: 1}, {value: '4', label: '4', cells: 4}], show: c => c.what !== 'notes'},
+              {key: 'nums', label: 'Numéros des diapositives', checked: true},
+              {key: 'bleedMm', type: 'number', label: 'Fond perdu', value: 3, unit: 'mm', min: 0, max: 20}],
+    current: c => 3,                       // « Celle affichée » (numéro de page, à partir de 1)
+    html: c => UI.printSheets({title, choix: c, pages: [{html: '…'}, {fit: {w: 1920, h: 1080, html: diapo}}]})});
+```
+- `html(choix)` est rappelée à chaque changement : `choix` = les options + `paper`, `orientation`, `pageMm` ([largeur, hauteur] de la feuille, dans le sens choisi).
+- **Pages** : les pages du document marquées `data-k-page` (UI.printSheets les marque ; la mise en page aussi) donnent « Toutes (N) / Celle affichée / Choisir » (`UI.parsePages('1-3, 7', n)`) et « Exemplaires » ; l’aperçu montre la vraie page (‹ ›, PageUp / PageDown). Un document sans marques : l’aperçu le découpe à la hauteur de la feuille.
+- `UI.printSheets({pages: [{html, w, h, fit, pad, cls}], choix, css})` : une feuille par page (w, h en mm : taille exacte, pages nommées `@page`) ; `fit: {w, h, html}` réduit un contenu de taille connue (px) pour tenir dans la feuille.
+- `key` : format, sens et choix retenus par outil (`genealogie-print-prefs`) ; `keepFormat` : seuls les choix (le format vient du document) ; `sizeLocked` : chaque page a sa taille exacte (mise en page, livret) — format montré, pas de `@page` ajouté ; `margin` (mm) : la marge de la feuille.
+- `UI.printPaper(l, h)` → `{paper, orientation, size}` ; `UI.printDocument(html)` (« 🖨 Imprimer » d’E3) ouvre cette fenêtre réglée sur le `@page` du document (`{direct: true}` : sans fenêtre) ; `UI.onPrintKey(fenêtre, fn)` : ⌘P dans cet éditeur appelle `fn` (`UI.printFromKey`, branché dans `printScreen`).
+- Outils branchés : présentations, catalogue raisonné et listes d’œuvres, diagrammes, fiches, livret plié, diaporama, transcription (outil et visionneuse), dessin, mise en page (pages simples / planches / livret, fond perdu, traits de coupe, notes), livre de famille, carte de photos, tableaux et retouche (E3). Jamais `window.open` ni `window.print()` (test `tests/test-harmo-l1-imprimer.js`).
+
 ```js
 UI.openImportDialog({title: 'Importer un tableau CSV', accept: '.csv,text/csv', noun: 'personne', feminine: true,
     analyze: async files => ({count: 12, summaryHtml: '<b>12 personnes</b>, 34 événements', notices: [{kind: 'warn', text: '3 doublons possibles seront mis de côté.'}], preview: '<table>…</table>', data}),

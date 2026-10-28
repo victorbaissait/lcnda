@@ -1765,6 +1765,7 @@
             catch (error) { toast('Copie dans les médias impossible : ' + error.message, 'error'); }
         }
         function printImage(url, img) {
+            if (window.LCNDA_UI?.openPrintDialog) { window.LCNDA_UI.openPrintDialog({title: fileBase(), key: 'tableau', photos: false, margin: 10, orientation: img.width > img.height ? 'landscape' : 'portrait', html: `<!doctype html><title>${esc(fileBase())}</title><style>html,body{margin:0}img{max-width:100%;max-height:96vh;display:block;margin:auto}</style><img src="${url}" alt="">`}); return; } // L1 : la fenêtre « Imprimer » commune ; sinon, le secours ci-dessous
             const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);
             fr.contentDocument.write(`<!doctype html><title>${esc(fileBase())}</title><style>@page{size:${img.width > img.height ? 'landscape' : 'portrait'};margin:10mm}html,body{margin:0}img{max-width:100%;max-height:100vh;display:block;margin:auto}</style><img src="${url}">`); fr.contentDocument.close();
             setTimeout(() => { fr.contentWindow.focus(); fr.contentWindow.print(); setTimeout(() => fr.remove(), 60000); }, 300);

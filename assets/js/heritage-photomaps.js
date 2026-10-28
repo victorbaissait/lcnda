@@ -628,7 +628,7 @@
             UI().openExportDialog({title: `Carte de photos « ${mp.name} »`, defaultName: mp.name || 'carte-de-photos', quality: false, saveCopy: !kiosk() && !!P().importMediaFile,
                 info: 'La carte telle qu’elle est à l’écran : fond, trajet et vignettes. Si le fond vient d’Internet et refuse d’être copié, l’image est faite sans lui.',
                 preview: async () => { try { return URL.createObjectURL(await renderPng(map, 'image/jpeg', mp.name, sub())); } catch (_) { return null; } },
-                formats: [{id: 'png', run}, {id: 'jpg', run}, {id: 'print', run: async () => { const blob = await renderPng(map, 'image/png', mp.name, ''); const u = URL.createObjectURL(blob); const w = window.open('', '_blank'); if (w) { w.document.write(`<title>${esc(mp.name)}</title><img src="${u}" style="max-width:100%" onload="print()">`); w.document.close(); } }}]});
+                formats: [{id: 'png', run}, {id: 'jpg', run}, {id: 'print', run: async () => { const blob = await renderPng(map, 'image/png', mp.name, ''); const u = URL.createObjectURL(blob); setTimeout(() => URL.revokeObjectURL(u), 600000); window.LCNDA_UI?.openPrintDialog?.({title: mp.name || 'Carte de photos', key: 'carte-photos', photos: false, orientation: 'landscape', html: `<!doctype html><title>${esc(mp.name)}</title><style>body{margin:0}img{display:block;max-width:100%;max-height:100%;margin:auto}</style><img src="${u}" alt="">`}); }}]}); // L1 : la fenêtre « Imprimer » commune
         }
         // vue gardée, sinon tout voir
         const sv = embed ? null : store.get(viewKey, null);

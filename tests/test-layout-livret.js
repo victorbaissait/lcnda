@@ -44,10 +44,14 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         await page.evaluate(id => window.LCNDA_EXT.openLayoutDoc(id, () => {}), id); await page.waitForSelector('dialog.ly-editor'); await page.waitForTimeout(500);
         await t('⤓ Exporter → 📖 Livret à plier : 2 feuilles, chaque face dans l’ordre, au double de la largeur (A5 → A4 paysage)', async () => {
             await page.evaluate(() => document.querySelector('dialog.ly-editor [data-ly-cmd="export"]').click()); await page.waitForSelector('dialog.ui-export[open] [data-fmt="booklet"]');
-            await page.click('dialog.ui-export[open] [data-fmt="booklet"]'); const pop = page.waitForEvent('popup'); await page.click('dialog.ui-export[open] [data-ui-go]'); const w = await pop;
+            await page.click('dialog.ui-export[open] [data-fmt="booklet"]'); await page.click('dialog.ui-export[open] [data-ui-go]');
+            // L1 : la fenêtre « Imprimer » commune (plus de nouvel onglet), réglée sur « Livret plié »
+            const w = await (await page.waitForSelector('dialog.k-print[open] .k-print-prev iframe', { timeout: 15000 })).contentFrame();
             await w.waitForSelector('.lb-side'); const sides = await w.$$eval('.lb-side', l => l.map(s => [...s.querySelectorAll('.lb-half')].map(h => (h.textContent.match(/PAGE(\d)/) || [, '-'])[1]).join('|')));
             assert.deepEqual(sides, ['6|1', '2|-', '-|3', '4|5']);
-            assert.match(await w.content(), /@page\{size:296mm 210mm/);
+            assert.match(await w.content(), /@page k-sz0\{size:296mm 210mm/);
+            assert.equal(await page.isChecked('dialog.k-print[open] input[data-k-opt="mode"][value="booklet"]'), true);
+            await page.click('dialog.k-print[open] [data-k-x]');
         });
         await t('aucune erreur dans la page', () => assert.deepEqual(errors, []));
     } finally { await browser.close(); srv.kill(); }

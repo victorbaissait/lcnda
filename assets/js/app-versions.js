@@ -264,13 +264,14 @@
             } catch (e) { toast(e.message || String(e), 'error'); }
         }
         const run = async (fn, ...a) => { try { const r = await fn(...a); return r; } catch (e) { toast(e.message || String(e), 'error'); return null; } };
-        function more(btn, v) {
-            UI.menuAt?.(btn, [
+        function more(btn, v, e = null) { // ⋯ et clic droit (K14) : le même menu de l'app
+            const items = [
                 o.rename && !v.locked && {icon: '✎', label: 'Renommer', run: () => doRename(v)},
                 o.copy && {icon: '⧉', label: 'En faire une copie', help: 'Une copie à part, l’original ne change pas.', run: async () => { if (await run(o.copy, v) !== null) { await changed(); } }},
                 o.exportOne && {icon: '⤓', label: 'Exporter', help: 'Un fichier sur ton ordinateur.', run: () => run(o.exportOne, v)},
                 o.remove && !v.locked && {icon: '🗑', label: 'Supprimer', danger: true, help: 'On peut encore l’annuler juste après.', run: () => doRemove(v)},
-            ].filter(Boolean), {title: v.label});
+            ].filter(Boolean);
+            return e ? UI.contextMenu?.(e, items, {title: v.label}) : UI.menuAt?.(btn, items, {title: v.label});
         }
 
         dlg.addEventListener('click', async e => {
@@ -297,7 +298,7 @@
             if (checked.length > 2) checked = checked.slice(-2); // la plus ancienne coche part
             keepScroll(paintList); paintCompare();
         });
-        dlg.addEventListener('contextmenu', e => { const row = e.target.closest('[data-vers-row]'); const v = row && byId(row.dataset.versRow); if (!v || e.shiftKey) return; e.preventDefault(); cur = String(v.id); keepScroll(paintList); paintPane(); more({x: e.clientX, y: e.clientY}, v); });
+        dlg.addEventListener('contextmenu', e => { const row = e.target.closest('[data-vers-row]'); const v = row && byId(row.dataset.versRow); if (!v || e.shiftKey) return; e.preventDefault(); cur = String(v.id); keepScroll(paintList); paintPane(); more(null, v, e); }); // more(…, e) ouvre UI.contextMenu
         dlg.addEventListener('keydown', e => {
             const row = e.target.closest?.('[data-vers-row]'); if (!row) return;
             const rows = [...dlg.querySelectorAll('[data-vers-row]')], i = rows.indexOf(row);

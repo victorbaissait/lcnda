@@ -517,15 +517,22 @@
             try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data, to_media: toMedia ? 1 : 0}); t.id = r.result.id; dirty = false; status('✓ Enregistré'); if (toMedia) toast('Enregistré, et le texte est dans la transcription du média.'); ctx.onSaved?.(t.id); }
             catch (e) { status(''); toast(e.message, 'error'); }
         }
+        /** L1 : la fenêtre « Imprimer » commune — image et texte côte à côte, l'un puis l'autre, ou le texte seul ; image améliorée ; personnes et rôles */
         async function printIt() {
-            const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée par le navigateur.', 'error');
-            let imgUrl = t.filename ? `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${encodeURIComponent(t.filename)}` : '';
-            if (t.filename && useEnh() && viewChanged()) { try { w.document.write('<p style="font:14px sans-serif">Préparation de l’image améliorée…</p>'); const c = await filteredCanvas({gray: false}); imgUrl = URL.createObjectURL(await new Promise(r2 => c.toBlob(r2, 'image/png'))); setTimeout(() => URL.revokeObjectURL(imgUrl), 120000); w.document.open(); } catch (_) {} }
-            w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(t.title || 'Transcription')}</title><style>body{font:14px/1.5 Georgia,serif;margin:16mm}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}img{max-width:100%;border:1px solid #ccc}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}@media print{.g{grid-template-columns:1fr}img{max-height:120mm;object-fit:contain}}</style>
-                <h1>${esc($('[data-tx="title"]').value || 'Transcription')}</h1><p class="m">${esc([KINDS.find(k => k[0] === $('[data-tx="kind"]').value)?.[1], $('[data-tx="date_text"]').value, $('[data-tx="place"]').value, $('[data-tx="source"]').value].filter(Boolean).join(' · '))}</p>
-                <div class="g">${imgUrl ? `<img src="${esc(imgUrl)}">` : ''}<div><pre>${esc(area.value)}</pre>${t.data.people.length ? `<h3>Personnes</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div><script>onload=()=>setTimeout(()=>print(),300)<\/script>`);
-            w.document.close();
+            const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast('La fenêtre « Imprimer » n’est pas chargée.', 'error');
+            const plainUrl = t.filename ? `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${encodeURIComponent(t.filename)}` : '';
+            let enhUrl = '';
+            const canEnh = !!t.filename && viewChanged();
+            const imgFor = async c => { if (!c.enh || !canEnh) return plainUrl; if (!enhUrl) { try { const cv = await filteredCanvas({gray: false}); enhUrl = URL.createObjectURL(await new Promise(r2 => cv.toBlob(r2, 'image/png'))); setTimeout(() => URL.revokeObjectURL(enhUrl), 300000); } catch (_) { return plainUrl; } } return enhUrl; };
+            const title = $('[data-tx="title"]').value || 'Transcription', meta = [KINDS.find(k => k[0] === $('[data-tx="kind"]').value)?.[1], $('[data-tx="date_text"]').value, $('[data-tx="place"]').value, $('[data-tx="source"]').value].filter(Boolean).join(' · ');
+            UI2.openPrintDialog({title, key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
+                options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', 'Image + texte côte à côte'], ['stack', 'Image puis texte'], ['text', 'Texte seul']]},
+                    ...(canEnh ? [{key: 'enh', label: 'Image améliorée', checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: 'Personnes et rôles', checked: true}],
+                html: async c => { const img = c.lay === 'text' ? '' : await imgFor(c);
+                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}</style></head><body>
+                        <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p><div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>${c.people && t.data.people.length ? `<h3>Personnes</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
         }
+        window.LCNDA_UI?.onPrintKey?.(dlg, () => printIt()); // L1 : ⌘P
         dlg.addEventListener('click', async e => {
             const tl = e.target.closest('[data-tx-tool]'); if (tl) return setTool(tl.dataset.txTool);
             const chan = e.target.closest('[data-tx-chan]'); if (chan) { setView('channel', chan.dataset.txChan); syncControls(); return; }
@@ -678,8 +685,14 @@
             ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.people?.length ? `<p><b>Personnes :</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">Ouvrir dans Transcription d’actes</button></section>`).join('')}</div></div>`;
         ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `📖 ${it.title || 'Document'}`, wide: true, submitLabel: '🖨 Imprimer', body,
             onOpen: dg => { dg.classList.add('lb-read-dlg'); dg.addEventListener('click', e => { const b = e.target.closest('[data-lbact-open]'); if (b) { dg.close(); lbOpenTool(Number(b.dataset.lbactOpen)); } }); },
-            onSubmit: f => { const w = window.open('', '_blank'); if (!w) { toast('Fenêtre bloquée.', 'error'); return false; } const src = f.querySelector('.lb-read-txt').cloneNode(true); src.querySelectorAll('button').forEach(b => b.remove());
-                w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(it.title || 'Transcription')}</title><style>body{font:14px/1.5 Georgia,serif;margin:18mm}pre{white-space:pre-wrap;font:inherit}h3{margin:18px 0 4px}small,.muted{color:#666}</style><h2>${esc(it.title || 'Transcription')}</h2>${src.innerHTML}<script>onload=()=>setTimeout(()=>print(),250)<\/script>`); w.document.close(); return false; }});
+            onSubmit: f => { const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) { toast('La fenêtre « Imprimer » n’est pas chargée.', 'error'); return false; } // L1 : la fenêtre « Imprimer » commune
+                const src = f.querySelector('.lb-read-txt').cloneNode(true); src.querySelectorAll('button').forEach(b => b.remove());
+                const noPeople = src.cloneNode(true); noPeople.querySelectorAll('.lb-read-act p').forEach(p => { if (/Personnes/.test(p.textContent)) p.remove(); });
+                const imgUrl = `media/${encodeURIComponent(it.filename)}`;
+                UI2.openPrintDialog({title: it.title || 'Transcription', key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
+                    options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', 'Image + texte côte à côte'], ['stack', 'Image puis texte'], ['text', 'Texte seul']]}, {key: 'people', label: 'Personnes et rôles', checked: true}],
+                    html: c => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(it.title || 'Transcription')}</title><style>body{font:14px/1.5 Georgia,serif;margin:0}pre{white-space:pre-wrap;font:inherit}h3{margin:18px 0 4px}small,.muted{color:#666}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;display:block;border:1px solid #ccc}.g.stack img{max-height:150mm;margin:0 auto;object-fit:contain}</style></head><body><h2>${esc(it.title || 'Transcription')}</h2><div class="g ${c.lay}">${c.lay === 'text' ? '' : `<img src="${esc(imgUrl)}" alt="">`}<div>${(c.people ? src : noPeople).innerHTML}</div></div></body></html>`});
+                return false; }});
     }
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-lbact-read],[data-lbact-new],[data-lbact-open],#act-transcriber-open'); if (!b || !b.closest('#lightbox')) return;

@@ -350,10 +350,13 @@
 
     /* ─── Imprimer : une page propre (texte, images, personnes, dates, citations, liens ; les écrans et widgets en titre) ─── */
     function printSheet() {
-        const c = cur, w = window.open('', '_blank'); if (!w) return toast('Autorise les fenêtres pour imprimer.', 'error');
+        const c = cur, UI = window.LCNDA_UI; if (!UI?.openPrintDialog) return toast('La fenêtre « Imprimer » n’est pas chargée.', 'error');
         const abs = u => new URL(u, location.href).href;
-        const body = c.blocks.map(b => {
+        // L1 : ce qu'on imprime — textes et images, personnes et dates, écrans et widgets (en titre), citations et liens
+        const group = t => (['text', 'images', 'diagram', 'photomap'].includes(t) ? 'texts' : ['people', 'dates'].includes(t) ? 'people' : ['screen', 'widget'].includes(t) ? 'screens' : ['quote', 'links'].includes(t) ? 'quotes' : 'texts');
+        const body = o => c.blocks.map(b => {
             if (b.type === 'divider') return `<h2>${esc(b.title)}</h2>`;
+            if (!o[group(b.type)]) return '';
             let inner = '';
             if (b.type === 'images') inner = mediaOf(b).filter(m => m.media_type === 'image' || /\.(jpe?g|png|gif|webp)$/i.test(m.filename || '')).map(m => `<img src="${esc(abs('media/' + encodeURIComponent(m.filename)))}" alt="">`).join('') + (b.caption ? `<p><i>${esc(b.caption)}</i></p>` : '');
             else if (b.type === 'diagram') inner = document.querySelector(`[data-dg-embed="${Number(b.diagram)}"] .h-dg-svg`)?.innerHTML || '';
@@ -361,8 +364,9 @@
             else inner = blockBody(b).replace(/<button[^>]*data-h-person[^>]*>/g, '<div class="p">').replace(/<\/button>/g, '</div>');
             return `<section style="width:${Math.round(Number(b.width || 12) / 12 * 100) - 2}%"><h3>${esc(titleOf(b))}</h3>${inner}</section>`;
         }).join('');
-        w.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(c.title)}</title><style>body{font-family:Georgia,serif;margin:28px;color:#111}h1{margin:0}main{display:flex;flex-wrap:wrap;gap:2%}section{break-inside:avoid;margin-bottom:14px}h2{width:100%;border-bottom:2px solid #111;margin:18px 0 8px}h3{font-size:15px;margin:6px 0}img{max-width:100%;max-height:340px;margin:4px 4px 0 0}blockquote{margin:0;padding-left:12px;border-left:3px solid #999;font-style:italic}ol,ul{padding-left:18px}.p{margin:2px 0}.p small{color:#666;margin-left:6px}</style></head><body><h1>${esc(c.icon || '')} ${esc(c.title)}</h1>${c.subtitle ? `<p>${esc(c.subtitle)}</p>` : ''}<main>${body}</main><script>window.onload=()=>setTimeout(()=>print(),300)<\/script></body></html>`);
-        w.document.close();
+        UI.openPrintDialog({title: c.title || 'La fiche', key: 'fiche', zone: 'Fiche', margin: 12,
+            options: [{key: 'texts', label: 'Textes et images', checked: true}, {key: 'people', label: 'Personnes et dates', checked: true}, {key: 'screens', label: 'Écrans et widgets (en titre)', checked: false}, {key: 'quotes', label: 'Citations et liens', checked: true}],
+            html: o => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(c.title)}</title><style>body{font-family:Georgia,serif;margin:0;color:#111}h1{margin:0}main{display:flex;flex-wrap:wrap;gap:2%}section{break-inside:avoid;margin-bottom:14px}h2{width:100%;border-bottom:2px solid #111;margin:18px 0 8px}h3{font-size:15px;margin:6px 0}img{max-width:100%;max-height:340px;margin:4px 4px 0 0}blockquote{margin:0;padding-left:12px;border-left:3px solid #999;font-style:italic}ol,ul{padding-left:18px}.p{margin:2px 0}.p small{color:#666;margin-left:6px}</style></head><body><h1>${esc(c.icon || '')} ${esc(c.title)}</h1>${c.subtitle ? `<p>${esc(c.subtitle)}</p>` : ''}<main>${body(o)}</main></body></html>`});
     }
     /* ─── Listes → 📒 Fiches ─── */
     ext.lists = ext.lists || {};

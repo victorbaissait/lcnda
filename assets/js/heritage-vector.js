@@ -1650,12 +1650,22 @@
                     <label class="checkbox-line"><input type="checkbox" name="marks" checked> Traits de coupe et de pli</label>`,
                 onSubmit: f => { done = true; res({flip: f.querySelector('[name=flip]:checked')?.value || 'side', marks: f.querySelector('[name=marks]').checked}); }}).addEventListener('close', () => { if (!done) res(null); }); });
         }
-        function printSheets(sheets, title) { // sheets : [{svg, w, h}] en px → une page imprimée par feuille, à la taille exacte
-            const w = window.open('', '_blank'); if (!w) throw new Error('Fenêtre bloquée par le navigateur : autorise les fenêtres pour cette page.');
-            const mm = v => `${n2(v / MM)}mm`;
-            w.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>html,body{margin:0;padding:0;background:#888}${sheets.map((s2, i) => `@page p${i}{size:${mm(s2.w)} ${mm(s2.h)};margin:0}.pg${i}{page:p${i};width:${mm(s2.w)};height:${mm(s2.h)}}`).join('')}.pg{display:block;margin:0 auto 12px;background:#fff;overflow:hidden;break-after:page}.pg:last-child{break-after:auto}.pg>svg{width:100%;height:100%;display:block}@media print{html,body{background:none}.pg{margin:0}}</style></head><body>${sheets.map((s2, i) => `<div class="pg pg${i}">${s2.svg}</div>`).join('')}<script>onload=()=>setTimeout(()=>print(),350)<\/script></body></html>`);
-            w.document.close();
+        /** L1 : la fenêtre « Imprimer » commune — feuilles toutes faites (recto-verso sur A4) ou chaque page : à la taille exacte, ou ajustée à la feuille choisie */
+        function printSheets(sheets, title, {fixed = false, bleed = false} = {}) { // sheets : [{svg, w, h, env}] en px, ou (choix) => Promise<sheets>
+            const U2 = UI(); if (!U2?.openPrintDialog) throw new Error('la fenêtre « Imprimer » n’est pas chargée');
+            const hasEnv = !fixed && typeof sheets === 'function' && pagesOf().some(p => p.role === 'env');
+            const mmOf = v => v / MM;
+            U2.openPrintDialog({title: title || 'Dessin', key: 'dessin', zone: 'Dessin', photos: false, margin: 0, keepFormat: true, ...(typeof sheets !== 'function' && sheets[0] ? U2.printPaper(mmOf(sheets[0].w), mmOf(sheets[0].h)) : pagesOf()[0] ? U2.printPaper(mmOf(pagesOf()[0].w), mmOf(pagesOf()[0].h)) : {}),
+                options: fixed ? [] : [{key: 'fit', type: 'radio', value: 'exact', choices: [['exact', 'À la taille exacte de la feuille'], ['page', 'Ajuster à la feuille choisie', '(A4, A5…)']]},
+                    {key: 'marks', label: 'Traits de coupe et de pli', checked: !!bleed}, ...(hasEnv ? [{key: 'all', label: 'Toutes les feuilles (avec l’enveloppe)', checked: true}] : [])],
+                html: async c => {
+                    const list = typeof sheets === 'function' ? await sheets(c) : sheets;
+                    const pages = list.map(s2 => (fixed || c.fit !== 'page' ? {w: mmOf(s2.w), h: mmOf(s2.h), html: `<div class="vx-ps">${s2.svg}</div>`} : {pad: 8, fit: {w: s2.w, h: s2.h, html: `<div class="vx-ps" style="width:${s2.w}px;height:${s2.h}px">${s2.svg}</div>`}}));
+                    return U2.printSheets({title: title || 'Dessin', choix: c, pages, css: '.vx-ps{width:100%;height:100%}.vx-ps>svg{width:100%;height:100%;display:block}'});
+                }});
         }
+        const printAll = (bleed = false) => printSheets(async c => { const sheets = []; for (const p of pagesOf()) { const env = p.role === 'env'; if (env && c.all === false) continue; const svg = await pageSheet(p, {bleed: bleed && !env, marks: !!c.marks && !env}), m = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/); sheets.push({svg, w: Number(m[1]), h: Number(m[2])}); } return sheets; }, name, {bleed});
+        UI()?.onPrintKey?.(dlg, () => printAll(false)); // L1 : ⌘P
         async function exportDialog(fmt = 'pdf') {
             if (!UI()?.openExportDialog) return toast('La fenêtre d’export n’est pas chargée.', 'error');
             if (laterT) { clearTimeout(laterT); laterT = 0; commit(); }
@@ -1671,12 +1681,12 @@
                 else if (ext2) { for (const [i, p] of pgs.entries()) { const svg = await pageSheet(p, {bleed: o.bleed, marks: o.bleed}), m = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/), W = Number(m[1]), Hh = Number(m[2]);
                         const c = await svgCanvas(svg, scaleFor(W, Hh, ppp), ext2 === 'jpg' || (doc.bg !== 'transparent') ? '#ffffff' : ''), blob = await new Promise(ok => c.toBlob(ok, {png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp'}[ext2], .92));
                         downloadBlob(blob, fnamePage(o, i, np, p, ext2)); if (multi) await new Promise(r => setTimeout(r, 350)); } }
-                else if (o.format === 'print') { const sheets = []; for (const p of pgs) { const env = p.role === 'env', svg = await pageSheet(p, {bleed: o.bleed && !env, marks: o.bleed && !env}), m = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/); sheets.push({svg, w: Number(m[1]), h: Number(m[2])}); } printSheets(sheets, name); }
+                else if (o.format === 'print') printAll(o.bleed);
                 else if (o.format === 'impose') { const ch = await askFlip(); if (!ch) return; const sheets = [];
                     for (const p of pgs) { const env = p.role === 'env'; if (env) { const svg = await pageSheet(p); sheets.push({svg, w: p.w, h: p.h}); continue; }
                         const b = o.bleed ? BLEED_MM() * MM : 0, need = [p.w + 2 * (b + (ch.marks ? 9 * MM : 0)), p.h + 2 * (b + (ch.marks ? 9 * MM : 0))], sh = sheetFor(need[0], need[1]);
                         sheets.push({svg: await pageSheet(p, {bleed: !!o.bleed, marks: ch.marks, sheet: sh, rot: !!p.back && ch.flip === 'top'}), w: sh[0], h: sh[1]}); }
-                    printSheets(sheets, name); }
+                    printSheets(sheets, name, {fixed: true}); }
                 else if (o.format === 'file') downloadBlob(new Blob([JSON.stringify({lcnda: 'dessin', version: 1, name, doc}, null, 1)], {type: 'application/json'}), o.filename);
                 if (o.saveCopy && ['pdf', 'png', 'jpg', 'webp', 'svg', 'print', 'impose'].includes(o.format)) await saveCopyToMedia();
             };

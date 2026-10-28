@@ -1586,6 +1586,7 @@
     const saveBlobAs = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
     /** 🖨 Imprimer une image (une page, centrée) sans quitter l'outil */
     const printBlob = (blob, title = 'Image') => new Promise(res => {
+        if (window.LCNDA_UI?.openPrintDialog) { const u = URL.createObjectURL(blob); setTimeout(() => URL.revokeObjectURL(u), 600000); window.LCNDA_UI.openPrintDialog({title, key: 'image', photos: false, margin: 10, html: `<!doctype html><title>${esc(title)}</title><style>html,body{margin:0}img{display:block;max-width:100%;max-height:96vh;margin:auto}</style><img alt="" src="${u}">`}); res(); return; } // L1 : la fenêtre « Imprimer » commune ; sinon, le secours ci-dessous
         const url = URL.createObjectURL(blob), f = document.createElement('iframe'); f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(f);
         const doc = f.contentDocument; doc.open(); doc.write(`<!doctype html><title>${esc(title)}</title><style>@page{margin:10mm}html,body{margin:0}img{display:block;max-width:100%;max-height:96vh;margin:auto}</style><img alt="" src="${url}">`); doc.close();
         const im = doc.querySelector('img'), go = () => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (_) {} setTimeout(() => { f.remove(); URL.revokeObjectURL(url); res(); }, 1500); };
