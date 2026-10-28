@@ -1,0 +1,624 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Harmonisation L</title>
+<link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+*{box-sizing:border-box}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px;max-width:1180px;line-height:1.5}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;min-width:0}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.note{font-size:12.5px;color:#555;margin-top:14px;line-height:1.5}
+.note ul{margin:6px 0 0;padding-left:18px}.note li{margin:3px 0}
+.muted{color:#666}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.two.w{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:start}
+.two>*,.three>*,.four>*{min-width:0}
+/* AVANT / PROPOSÉ */
+.stage{display:flex;align-items:center;gap:10px;margin:18px 0 10px;font:800 12px system-ui;letter-spacing:.1em;text-transform:uppercase}
+.stage:after{content:"";flex:1;border-top:2px solid #111}
+.stage .st{padding:4px 8px;border:2px solid #111}
+.stage.av .st{background:#fdecec;color:#8a1111;border-color:#d62828}
+.stage.pr .st{background:#055dff;color:#fff;border-color:#055dff}
+.stage small{font:600 12px system-ui;letter-spacing:0;text-transform:none;color:#666}
+.ex{border:1.5px dashed #c9ccd3;padding:10px;background:#fafbfc;min-width:0}
+.ex>.cap{display:block;font:700 11px system-ui;color:#777;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.ex>.why{display:block;font-size:12px;color:#8a1111;margin-top:8px;line-height:1.4}
+/* petits morceaux communs */
+.b{display:inline-flex;align-items:center;gap:4px;font:800 11px/1 system-ui;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid;padding:4px 7px;white-space:nowrap;vertical-align:middle;color:#444;background:#f0f1f3;border-color:#8a8f99}
+.b.g{color:#14532d;background:#ecfaf0;border-color:#1aa34a}.b.y{color:#6b4e00;background:#fff8e1;border-color:#e1a500}
+.b.r{color:#8a1111;background:#fdecec;border-color:#d62828}.b.bl{color:#0a3fae;background:#eaf1ff;border-color:#055dff}
+.b.dt{text-transform:none;letter-spacing:0;font-weight:700}
+.lnk{color:#055dff;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+.btn{display:inline-block;border:2px solid #111;padding:8px 13px;font:700 13px system-ui;background:#fff;box-shadow:3px 3px 0 rgba(5,93,255,.3);white-space:nowrap;cursor:pointer;color:#111}
+.btn.p{background:#055dff;color:#fff}
+.btn.s{padding:4px 9px;font-size:12px;box-shadow:none;border-width:1.5px}
+.ib{width:30px;height:30px;border:2px solid #111;background:#fff;display:inline-grid;place-items:center;font-size:14px;flex:none}
+.ib.on{background:#055dff;color:#fff;border-color:#055dff}
+.seg{display:inline-flex;border:2px solid #111;flex-wrap:wrap;max-width:100%}.seg span{padding:6px 11px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff;white-space:nowrap}.seg span:last-child{border-right:0}.seg span.is-active{background:#055dff;color:#fff}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid #c9ccd3;padding:4px 9px;font:700 12px system-ui;background:#fff;white-space:nowrap}
+.chip.is-active{background:#111;color:#fff;border-color:#111}
+.chip.f{background:#eaf1ff;border-color:#055dff;color:#0a3fae}
+kbd{border:1px solid #c9ccd3;border-bottom-width:2px;background:#f4f5f7;padding:0 5px;font:700 11px system-ui;color:#555;white-space:nowrap}
+mark{background:#fff1a8;color:inherit;padding:0}
+.srch{display:flex;align-items:center;gap:8px;border:2px solid #111;padding:7px 9px;font-size:13px;color:#888;background:#fff;min-width:0}
+.srch.on{border-color:#055dff;box-shadow:0 0 0 3px rgba(5,93,255,.18);color:#111}
+.srch .q{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srch .x{color:#777;font-size:15px}
+.pill{display:inline-flex;align-items:center;gap:7px;border:2px solid #111;background:#fff;padding:3px 6px 3px 3px;font-size:13px;font-weight:700;max-width:100%;box-shadow:3px 3px 0 rgba(5,93,255,.25);vertical-align:middle}
+.pill .ic{width:26px;height:26px;display:grid;place-items:center;flex:none;background:#f0f1f3;border:1.5px solid #c9ccd3;font-size:15px}
+.pill small{color:#777;font-weight:500}
+.pill .o{border:1.5px solid #111;font-size:11.5px;padding:1px 5px}
+.pill .x{color:#555;font-weight:400;padding:0 4px;font-size:16px}
+.pill .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ini{width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font:800 10px system-ui;background:#3c78d8;flex:none}
+.ini.f{background:#d9488f}.ini.u{background:#9aa0aa}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #111;flex:none;vertical-align:-2px}
+.toast2{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:11px 14px;font-size:13.5px;box-shadow:5px 5px 0 rgba(5,93,255,.45);max-width:470px;position:relative;margin:12px 0 0;flex-wrap:wrap}
+.toast2 .u{border:1.5px solid #fff;padding:4px 9px;font:700 12.5px system-ui;margin-left:auto;white-space:nowrap}
+.toast2 .bar{position:absolute;left:0;bottom:0;height:3px;background:#5b9bff}
+.empty-line{display:flex;gap:8px;align-items:center;padding:8px 10px;background:#f6f7f9;border:1.5px dashed #c9ccd3;font-size:12.5px;color:#555;line-height:1.4;flex-wrap:wrap}
+.empty-line .btn{margin-left:auto}
+.ui-toggle2{display:inline-flex;align-items:center;gap:8px;font-size:13px}.ui-toggle2 i{width:32px;height:18px;border-radius:10px;background:#055dff;position:relative;flex:none}.ui-toggle2 i:after{content:'';position:absolute;right:3px;top:3px;width:12px;height:12px;background:#fff;border-radius:50%}
+.ui-toggle2.off i{background:#c9ccd3}.ui-toggle2.off i:after{right:auto;left:3px}
+.ck{display:flex;gap:8px;align-items:center;font-size:13px;margin:5px 0}
+.ck:before{content:"";width:14px;height:14px;border:2px solid #111;flex:none}
+.ck.on:before{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.rd{display:flex;gap:8px;align-items:center;font-size:13px;margin:5px 0}
+.rd:before{content:"";width:14px;height:14px;border:2px solid #111;border-radius:50%;flex:none}
+.rd.on:before{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.inp{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:2px solid #111;padding:6px 9px;font:600 13px system-ui;background:#fff;min-width:0;width:100%}
+.inp.ph{color:#999;font-weight:500}
+.inp.u{display:inline-flex;padding:0;width:auto}.inp.u b{padding:6px 9px;min-width:40px}.inp.u i{font-style:normal;padding:6px 8px;background:#f0f1f3;border-left:1.5px solid #c9ccd3;color:#555;font-weight:700}
+.sl{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:10px;align-items:center;margin:6px 0;font-size:13px}
+.sl .tr{height:4px;background:#c9ccd3;position:relative}.sl .tr i{position:absolute;left:0;top:0;bottom:0;background:#055dff}.sl .tr b{position:absolute;top:-6px;width:16px;height:16px;border-radius:50%;background:#055dff;margin-left:-8px}
+.lab{display:block;font:700 12.5px system-ui;margin:10px 0 5px}
+.sect{font:800 10.5px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#777;margin:12px 0 6px}
+/* fenêtre (K6) */
+.win{border:2px solid #111;background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.25);min-width:0}
+.win-h{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:2px solid #111;background:#fafafa}
+.win-h .t{flex:1;min-width:0}.win-h .t small{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin-bottom:2px}
+.win-h .t b{font-size:17px}
+.win-h .x{font-size:20px;line-height:1;color:#555}
+.win-b{padding:14px 16px}
+.win-f{display:flex;gap:10px;align-items:center;justify-content:flex-end;flex-wrap:wrap;padding:10px 16px;border-top:2px solid #111;background:#fff}
+.win-f .sp{flex:1}
+.win-f small{color:#666;font-size:12px}
+/* en-tête K5 */
+.ph{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;border-bottom:2px solid #111;padding-bottom:12px;margin-bottom:14px}
+.ph .t{flex:1;min-width:200px}
+.ph small{display:block;font:700 11px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase}
+.ph h2{margin:3px 0 4px;font-size:24px}
+.ph p{margin:0;color:#666;font-size:13px}
+.ph .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.saved{color:#1aa34a;font:700 12.5px system-ui;white-space:nowrap}
+/* « avant » : petits navigateurs */
+.brw{border:1.5px solid #999;background:#fff;min-width:0}
+.brw .bar{display:flex;align-items:center;gap:6px;padding:5px 8px;background:#e9ebef;border-bottom:1.5px solid #999;font:600 11px system-ui;color:#555}
+.brw .bar i{width:8px;height:8px;border-radius:50%;background:#c9ccd3;flex:none}
+.brw .bar span{flex:1;min-width:0;background:#fff;border:1px solid #c9ccd3;padding:2px 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.brw .in{padding:10px;font-size:12px;min-width:0}
+.sysprint{border:1.5px solid #999;background:#f4f4f4;padding:8px;font:12px system-ui;margin-top:8px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.sysprint b{display:block;margin-bottom:4px}
+.sysprint .r{display:flex;justify-content:space-between;gap:6px;border-bottom:1px solid #ddd;padding:3px 0}
+.oldtoast{background:#7f1020;color:#fff;font-size:12px;padding:7px 10px;margin-top:8px}
+.oldbar{background:#111;color:#fff;font:12px system-ui;padding:7px 9px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.oldbar span{background:#2f6bff;border-radius:6px;padding:3px 9px}
+.paper{background:#fff;border:1px solid #ccc;box-shadow:0 2px 6px rgba(0,0,0,.12);aspect-ratio:210/297;display:flex;flex-direction:column;gap:4px;padding:8px;min-width:0}
+.paper.l{aspect-ratio:297/210}
+.paper .ln{height:4px;background:#d9dce2}.paper .ln.s{width:60%}.paper .ln.t{height:7px;background:#111;width:70%}
+.paper .im{flex:1;background:linear-gradient(160deg,#f3eadb,#d8c6a3);min-height:20px}
+.paper .sld{background:linear-gradient(135deg,#0b3d91,#3c78d8);aspect-ratio:16/9;width:100%}
+/* L1 fenêtre imprimer */
+.pw{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}
+.pw-prev{background:#e9ebef;border:1.5px solid #c9ccd3;padding:14px;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
+.pw-prev .pages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%}
+.pw-prev .nav{display:flex;gap:8px;align-items:center;font:700 12px system-ui;color:#333}
+.zone{border:2px solid #055dff;background:#f5f8ff;padding:10px 12px;margin-top:12px}
+.zone>b{display:block;font:800 10.5px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#0a3fae;margin-bottom:4px}
+.zone .sub2{font-size:11.5px;color:#666;margin:0 0 6px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tools .ex{background:#fff;border-style:solid;border-color:#c9ccd3}
+.tools .ex>.cap{color:#111;font-size:12px;letter-spacing:0;text-transform:none}
+.tools .ex>.cap em{font-style:normal;color:#888;font-weight:500;font-size:11px;display:block}
+.mini-z{border-left:3px solid #055dff;padding-left:9px}
+.mini-z .ck,.mini-z .rd{font-size:12.5px;margin:3px 0}
+.lay{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:4px}
+.lay span{border:1.5px solid #c9ccd3;padding:6px 2px;text-align:center;font:700 11px system-ui;background:#fff}
+.lay span.is-active{border:2px solid #055dff;background:#eaf1ff;color:#0a3fae}
+.lay span i{display:grid;gap:2px;margin:0 auto 4px;width:30px;height:22px}
+.lay span i em{background:#9aa0aa;display:block}
+/* L2 jeux */
+.gm{display:grid;grid-template-columns:220px minmax(0,1fr);border:2px solid #111;background:#fff;min-width:0}
+.gm-side{border-right:2px solid #111;background:#fafafa;padding:10px;min-width:0}
+.gm-side .it{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;padding:7px 8px;border:2px solid #111;background:#fff;margin-bottom:6px;font-size:12.5px}
+.gm-side .it small{display:block;color:#777;font-size:11px}
+.gm-side .it.is-active{background:#055dff;color:#fff}.gm-side .it.is-active small{color:#dce6ff}
+.gm-side .lb{font:800 10.5px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#777;margin:10px 0 6px}
+.gm-main{padding:14px 16px;min-width:0}
+.gpick{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.gpick span{border:1.5px solid #c9ccd3;padding:7px 4px;text-align:center;font:700 11.5px system-ui;background:#fff;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gpick span i{display:block;font-style:normal;font-size:20px;margin-bottom:2px}
+.gpick span.is-active{border:2px solid #055dff;background:#eaf1ff;color:#0a3fae}
+.plr{display:grid;grid-template-columns:16px auto minmax(0,1fr) minmax(0,1.2fr) auto;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid #eee;font-size:13px}
+.plr .grip{color:#9aa0aa;font-size:16px}
+.plr .sw{width:26px;height:26px;border:2px solid #111;display:block}
+.gbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:2px solid #111;background:#fff;padding:8px 10px;box-shadow:4px 4px 0 rgba(5,93,255,.25)}
+.gbar .turn{display:flex;align-items:center;gap:7px;font:800 13.5px system-ui;padding-right:10px;border-right:2px solid #111}
+.gbar .sc{display:flex;gap:10px;font-size:13px;flex-wrap:wrap}
+.gbar .sc span{display:inline-flex;gap:5px;align-items:center}
+.gbar .clk{font:800 15px ui-monospace,Menlo,monospace;padding:2px 8px;border:1.5px solid #111}
+.gbar .sp{flex:1}
+.board{margin-top:10px;border:2px solid #111;background:#f6f1e6;padding:12px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.board span{aspect-ratio:3/4;border:2px solid #111;background:#055dff;display:grid;place-items:center;color:#fff;font:800 18px system-ui}
+.board span.up{background:#fff;color:#111;font-size:11px;padding:3px;text-align:center}
+.board span.ok{background:#ecfaf0;color:#14532d;border-color:#1aa34a;font-size:11px;padding:3px;text-align:center}
+.end{border:2px solid #111;background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.25);text-align:center;padding:18px 16px}
+.end .big{font-size:40px;line-height:1}
+.end h4{margin:6px 0 2px;font-size:20px}
+.end .scr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 10px;max-width:300px;margin:12px auto;text-align:left;font-size:13px;align-items:center}
+.end .rec{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;background:#fff8e1;border:1.5px solid #e1a500;padding:5px 9px;margin:4px 0 12px}
+.gtbl{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr) 60px;font-size:12.5px;border-top:2px solid #111}
+.gtbl>div{padding:6px 7px;border-bottom:1px solid #eef0f3;min-width:0}
+.gtbl .h{font:700 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:#777;border-bottom:2px solid #111}
+/* L3 versions */
+.vw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px}
+.vl{border:2px solid #111;min-width:0}
+.vl .grp{font:800 10.5px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#777;padding:8px 10px 4px;background:#fafafa;border-bottom:1px solid #e3e5ea}
+.vr{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;border-bottom:1px solid #eef0f3;font-size:13px}
+.vr .nm{display:block;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vr small{display:block;color:#777;font-size:11.5px}
+.vr.is-active{background:#eaf1ff;box-shadow:inset 4px 0 0 #055dff}
+.vr .cb{width:14px;height:14px;border:2px solid #111}
+.vr .cb.on{background:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.vp{border:2px solid #111;min-width:0;display:flex;flex-direction:column}
+.vp .hd{padding:10px 12px;border-bottom:2px solid #111;background:#fafafa}
+.vp .hd b{font-size:15px}
+.vp .bd{padding:12px;font:13px/1.6 Georgia,serif;flex:1}
+.vp .ac{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;border-top:2px solid #111}
+del{background:#fdecec;color:#8a1111;text-decoration:line-through}
+ins{background:#ecfaf0;color:#14532d;text-decoration:none;border-bottom:2px solid #1aa34a}
+.cmp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border:2px solid #111;margin-top:10px}
+.cmp>div{padding:10px 12px;min-width:0;font:12.5px/1.6 Georgia,serif}
+.cmp>div+div{border-left:2px solid #111}
+.cmp .h{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777;display:block;margin-bottom:4px}
+.wave{height:46px;background:repeating-linear-gradient(90deg,#055dff 0 2px,transparent 2px 4px);-webkit-mask:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent);mask:linear-gradient(180deg,transparent 0,#000 30%,#000 70%,transparent);opacity:.8}
+.wave.w2{background:repeating-linear-gradient(90deg,#1aa34a 0 2px,transparent 2px 5px)}
+.oldt{width:100%;border-collapse:collapse;font-size:11.5px;background:#fff}
+.oldt th{text-align:left;font:700 10px system-ui;text-transform:uppercase;color:#777;border-bottom:2px solid #111;padding:4px}
+.oldt td{padding:5px 4px;border-bottom:1px solid #eee;vertical-align:middle}
+.oldt .btn.s{padding:2px 5px;font-size:10.5px;box-shadow:none}
+/* L4 grille d'icônes */
+.ig{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);min-width:0}
+.ig .top{padding:10px;border-bottom:1px solid #e3e5ea;display:flex;flex-direction:column;gap:8px}
+.ig .lb{font:800 10.5px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#777;padding:8px 10px 2px}
+.ig .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px;padding:6px 10px 10px}
+.ig .tiles span{border:1.5px solid #e3e5ea;padding:6px 3px 5px;text-align:center;font:600 10.5px/1.25 system-ui;color:#333;min-width:0;overflow:hidden}
+.ig .tiles span i{display:block;font-style:normal;font-size:22px;line-height:28px}
+.ig .tiles span.is-active{border:2px solid #055dff;background:#eaf1ff;color:#0a3fae;box-shadow:inset 0 0 0 1px #055dff}
+.ig .tiles span.cur{outline:3px solid rgba(5,93,255,.35);outline-offset:1px}
+.ig .tiles.map{grid-template-columns:repeat(auto-fill,minmax(104px,1fr))}
+.ig .tiles.map span{padding:0 0 5px}
+.ig .tiles.map span i{height:54px;line-height:normal;margin-bottom:4px;border-bottom:1.5px solid #e3e5ea}
+.ig .ft{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;padding:8px 10px;border-top:1px solid #e3e5ea;font-size:11.5px;color:#777;background:#fafbfc}
+.oldsel{border:2px solid #111;background:#fff;font-size:12.5px;max-height:236px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.oldsel div{padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.oldsel div.on{background:#2f6bff;color:#fff}
+.oldsel .gr{font-weight:700;color:#777;font-size:11px}
+.selclosed{border:2px solid #111;padding:6px 9px;font:600 13px system-ui;background:#fff;display:flex;justify-content:space-between;margin-bottom:4px}
+/* L5 aides */
+.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.spec>div{border:1.5px solid #e3e5ea;padding:8px;min-width:0;background:#fff}
+.spec code{display:block;font:700 10.5px ui-monospace,Menlo,monospace;color:#8a1111;margin-bottom:6px}
+.fl{margin:0 0 12px;min-width:0}
+.fl .lbx{display:flex;align-items:center;gap:6px;font:700 12.5px system-ui;margin-bottom:5px}
+.qm{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;border:1.5px solid #055dff;color:#055dff;font:800 10.5px system-ui;flex:none}
+.hint{display:block;font-size:12.5px;line-height:1.45;color:#666;margin-top:4px;max-width:60ch}
+.hint a{color:#055dff;font-weight:700;text-decoration:none;white-space:nowrap}
+.hint.err{color:#b3121f;font-weight:600}
+.hint.ok{color:#055dff;font-weight:600}
+.inp.bad{border-color:#d62828;box-shadow:0 0 0 3px rgba(214,40,40,.15)}
+.ruler{position:relative;border-left:2px dashed #e1a500;padding-left:10px}
+.anno{font:700 10.5px system-ui;color:#b07a00;letter-spacing:.04em}
+.bub{border:2px solid #111;background:#111;color:#fff;padding:7px 10px;font-size:12px;max-width:290px;margin:6px 0 8px;line-height:1.4}
+.bub a{color:#9cc2ff;font-weight:700}
+.prio{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.prio>div{border:1.5px solid #e3e5ea;padding:10px;min-width:0}
+.prio>div>b{display:block;font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#777;margin-bottom:8px}
+/* L6 */
+.stbl{border:2px solid #111;min-width:0}
+.stbl .gh{background:#055dff;color:#fff;font:800 11.5px system-ui;letter-spacing:.08em;text-transform:uppercase;padding:8px 10px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.stbl .gh small{font-weight:600;letter-spacing:0;text-transform:none;opacity:.85}
+.stbl .r{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 10px;border-bottom:1px solid #eef0f3;font-size:12.5px}
+.stbl .r .k{display:flex;gap:3px}
+.sticky{position:relative;border:2px solid #111;background:#fff;padding:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;box-shadow:0 4px 0 rgba(5,93,255,.15)}
+.sticky .srch{flex:1;min-width:220px}
+.sticky small{font-size:12px;color:#555}
+.frame{border:2px solid #111;margin-top:10px;min-width:0}
+.frame .fh{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;background:#fafafa;border-bottom:1.5px solid #e3e5ea;font:800 13px system-ui;flex-wrap:wrap}
+.frame .fb{padding:8px 10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px}
+.frame.dim{opacity:.4}
+.frame.dim .fh{border-bottom:0}
+.hlrow{box-shadow:inset 3px 0 0 #e1a500;background:#fffdf3}
+/* sombre */
+.dkw{background:#121418;color:#e8e8e8;padding:14px;border:2px solid #444;min-width:0}
+.dkw .win,.dkw .ig,.dkw .end,.dkw .gbar{background:#1b1e24;border-color:#555;color:#e8e8e8;box-shadow:none}
+.dkw .win-h{background:#20242b;border-color:#555}.dkw .win-h .t small,.dkw .win-h .x{color:#a5abb6}
+.dkw .win-f{background:#1b1e24;border-color:#555}
+.dkw .seg{border-color:#666}.dkw .seg span{background:#1b1e24;border-color:#666;color:#ddd}.dkw .seg span.is-active{background:#2f7bff;color:#fff}
+.dkw .zone{background:#16233a;border-color:#5599ff}.dkw .zone>b{color:#9cc2ff}.dkw .zone .sub2{color:#a5abb6}
+.dkw .ck:before,.dkw .rd:before{border-color:#bbb}.dkw .ck.on:before,.dkw .rd.on:before{background:#5599ff;box-shadow:inset 0 0 0 2px #16233a}
+.dkw .pw-prev{background:#0d0f12;border-color:#333}.dkw .pw-prev .nav{color:#ddd}
+.dkw .btn{background:#1b1e24;color:#e8e8e8;border-color:#888;box-shadow:none}.dkw .btn.p{background:#2f7bff;border-color:#2f7bff;color:#fff}
+.dkw .srch{background:#121418;border-color:#666;color:#a5abb6}.dkw .srch.on{border-color:#5599ff;color:#e8e8e8}
+.dkw .chip{background:#1b1e24;border-color:#555;color:#ddd}.dkw .chip.is-active{background:#e8e8e8;color:#111;border-color:#e8e8e8}
+.dkw .ig .top,.dkw .ig .ft{border-color:#333}.dkw .ig .ft{background:#16181d;color:#a5abb6}.dkw .ig .lb{color:#a5abb6}
+.dkw .ig .tiles span{border-color:#333;color:#ddd}.dkw .ig .tiles span.is-active{background:#16233a;border-color:#5599ff;color:#9cc2ff;box-shadow:inset 0 0 0 1px #5599ff}
+.dkw .pill{background:#1b1e24;border-color:#888;color:#e8e8e8;box-shadow:none}.dkw .pill .ic{background:#262a31;border-color:#444}.dkw .pill .o{border-color:#888}.dkw .pill .x{color:#a5abb6}
+.dkw kbd{background:#262a31;border-color:#555;color:#ccc}
+.dkw mark{background:#6b5a00;color:#fff}
+.dkw .hint{color:#a5abb6}.dkw .hint a{color:#7fb0ff}.dkw .hint.err{color:#ff8a8a}.dkw .hint.ok{color:#7fb0ff}
+.dkw .inp{background:#121418;border-color:#666;color:#e8e8e8}.dkw .inp.bad{border-color:#ff6b6b}
+.dkw .lab,.dkw .sect{color:#a5abb6}
+.dkw .gbar .turn,.dkw .gbar .clk{border-color:#666}
+.dkw .ib{background:#1b1e24;border-color:#777;color:#e8e8e8}.dkw .ib.on{background:#2f7bff;border-color:#2f7bff}
+.dkw .end .rec{background:#33290b;border-color:#e1a500;color:#ffd666}
+.dkw .muted,.dkw .end small{color:#a5abb6}
+.dkw .b.bl{background:#1a2a3d;color:#9cc2ff;border-color:#5599ff}
+.phone{max-width:390px;width:100%;margin:0 auto;border:2px solid #444;border-radius:22px;padding:14px 10px;background:#121418}
+.phone .win{width:100%}
+.p6{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:1100px){.p6{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){
+ body{padding:16px}
+ .two,.two.w,.three,.vw,.pw{grid-template-columns:minmax(0,1fr)}
+ .four,.prio,.spec{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .case{padding:14px 14px 18px}
+ .gm{grid-template-columns:minmax(0,1fr)}.gm-side{border-right:0;border-bottom:2px solid #111}
+ .gpick{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media (max-width:520px){
+ .four,.prio,.spec{grid-template-columns:minmax(0,1fr)}.four>*{grid-column:auto!important}
+ .gpick{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .board{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .plr{grid-template-columns:16px auto minmax(0,1fr) auto}.plr .pk2{grid-column:2/-1}
+ .gbar .turn{border-right:0;padding-right:0;width:100%}
+ .cmp{grid-template-columns:minmax(0,1fr)}.cmp>div+div{border-left:0;border-top:2px solid #111}
+ .frame .fb{grid-template-columns:minmax(0,1fr)}
+ .stbl .r{grid-template-columns:minmax(0,1fr) auto}.stbl .r .btn{grid-column:1/-1;justify-self:start}
+ .gtbl{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr)}.gtbl>div:nth-child(3n){display:none}
+ .sl{grid-template-columns:minmax(0,1fr) auto}.sl .tr{grid-column:1/-1;grid-row:2}
+ .lay{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ph h2{font-size:21px}
+ .sticky .srch{min-width:100%}
+}
+</style></head><body>
+<h1>Harmonisation L</h1>
+<p class="sub">Six points où l’app fait encore la même chose de plusieurs façons. Pour chacun : <b>Avant</b> (ce qu’on voit aujourd’hui, avec de vrais exemples), puis <b>Proposé</b> (un seul dessin pour tout le monde), et les règles en quelques lignes. Tout reprend ce que tu as déjà validé (K5, K6, K13, C1, C5, H7, K1, K4, K10…).</p>
+<div class="grid">
+
+<!-- ════════ L1 ════════ -->
+<div class="case"><span class="tag"><span class="num">L1</span>🖨 Imprimer</span><h3>Une seule fenêtre « Imprimer » pour les 11 outils qui ouvrent encore leur propre page</h3>
+<div class="stage av"><span class="st">Avant</span><small>11 endroits ouvrent un nouvel onglet, chacun avec son dessin, puis la fenêtre du navigateur</small></div>
+<div class="three">
+ <div class="ex"><span class="cap">Présentations · « Imprimer avec les notes »</span>
+  <div class="brw"><div class="bar"><i></i><i></i><span>about:blank — Ma présentation</span></div><div class="in"><div class="paper" style="max-width:120px"><div class="sld"></div><div class="ln"></div><div class="ln s"></div><div class="ln"></div></div></div></div>
+  <div class="sysprint"><b>Imprimer</b><div class="r"><span>Destination</span><span>▾</span></div><div class="r"><span>Pages</span><span>Toutes ▾</span></div><div class="r"><span>Mise en page</span><span>Portrait ▾</span></div></div>
+  <span class="why">Un nouvel onglet blanc, puis la fenêtre du navigateur : aucun aperçu dans l’app, rien sur « 1, 2, 4 diapositives par page ».</span></div>
+ <div class="ex"><span class="cap">Livret plié · mise en page</span>
+  <div class="brw"><div class="bar"><i></i><i></i><span>about:blank — Livret de Marie</span></div><div class="in" style="padding:0"><div class="oldbar"><b>📖 Livret de Marie</b> · 3 feuilles pliées (12 pages) <span>Imprimer</span></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px"><div class="paper l"><div class="ln t"></div><div class="im"></div></div><div class="paper l"><div class="ln"></div><div class="ln s"></div><div class="im"></div></div></div></div></div>
+  <span class="why">Une barre noire et un bouton bleu arrondi qui n’existent nulle part ailleurs.</span></div>
+ <div class="ex"><span class="cap">Transcription · « 📖 Document »</span>
+  <div class="win" style="box-shadow:none"><div class="win-h"><div class="t"><small>Transcription</small><b>📖 Acte de naissance</b></div><span class="x">×</span></div><div class="win-b" style="font-size:12px"><div class="row" style="flex-wrap:nowrap;align-items:stretch"><div class="paper" style="width:70px;flex:none"><div class="im"></div></div><div style="min-width:0">L’an mil huit cent soixante-douze, le sept mai…</div></div></div><div class="win-f"><span class="btn s">Annuler</span><span class="btn s p">🖨 Imprimer</span></div></div>
+  <div class="oldtoast">⛔ Fenêtre bloquée par le navigateur.</div>
+  <span class="why">Le bouton « Imprimer » ouvre une 2ᵉ page ; si le navigateur bloque les fenêtres, ça ne marche pas.</span></div>
+</div>
+
+<div class="stage pr"><span class="st">Proposé</span><small>la fenêtre K13 qui existe déjà, avec une zone « Ce qu’on imprime » que chaque outil remplit</small></div>
+<div class="win"><div class="win-h"><div class="t"><small>Imprimer</small><b>🖨 Les Peyre de Tulle — présentation</b></div><span class="x">×</span></div>
+ <div class="win-b"><div class="pw"><div>
+  <div class="row"><div class="seg"><span class="is-active">A4</span><span>A5</span><span>✎ Autre</span></div><div class="seg"><span>Portrait</span><span class="is-active">Paysage</span></div></div>
+  <div class="zone"><b>Ce qu’on imprime · Présentation</b><p class="sub2">Cette zone appartient à l’outil : ce sont ses choix à lui.</p>
+   <div class="rd on">Les diapositives</div><div class="rd">Les diapositives avec les notes du présentateur</div><div class="rd">Les notes seules (texte)</div>
+   <span class="lab" style="margin-top:8px">Diapositives par page</span>
+   <div class="lay"><span><i style="grid-template-columns:1fr"><em></em></i>1</span><span class="is-active"><i style="grid-template-columns:1fr"><em></em><em></em></i>2</span><span><i style="grid-template-columns:1fr 1fr"><em></em><em></em><em></em><em></em></i>4</span><span><i style="grid-template-columns:1fr 1fr"><em></em><em></em><em></em><em></em><em></em><em></em></i>6</span></div>
+   <div class="ck on" style="margin-top:8px">Numéros des diapositives</div><div class="ck">Les diapositives masquées aussi</div>
+  </div>
+  <span class="lab">Pages</span>
+  <div class="row"><div class="seg"><span class="is-active">Toutes (24)</span><span>Celle affichée</span><span>Choisir</span></div><span class="inp ph" style="width:150px">ex. 1-3, 7, 10-12</span></div>
+  <div class="row" style="margin-top:10px"><span class="lab" style="margin:0">Exemplaires</span><span class="inp u"><b>1</b></span><span class="ck on" style="margin:0">Photos</span></div>
+ </div>
+ <div class="pw-prev"><div class="pages"><div class="paper l" style="gap:6px"><div class="sld"></div><div class="sld"></div></div><div class="paper l" style="gap:6px"><div class="sld"></div><div class="sld"></div></div></div><div class="nav"><span class="ib" style="width:26px;height:26px">‹</span>Pages 1–2 sur 12<span class="ib" style="width:26px;height:26px">›</span></div><small class="muted">2 diapositives par feuille · 12 feuilles A4</small></div>
+ </div></div>
+ <div class="win-f"><span class="sp"></span><span class="btn">Annuler</span><span class="btn">⤓ PDF</span><span class="btn p">🖨 Imprimer</span></div></div>
+
+<p class="note" style="margin-top:16px"><b>Ce que chaque outil met dans « Ce qu’on imprime »</b> (le reste de la fenêtre ne change jamais) :</p>
+<div class="four tools">
+ <div class="ex"><span class="cap">🎞 Présentations<em>heritage-keynote.js</em></span><div class="mini-z"><div class="rd on">Diapositives</div><div class="rd">+ notes du présentateur</div><div class="rd">Notes seules</div><div class="ck on">1 · 2 · 4 · 6 par page</div></div></div>
+ <div class="ex"><span class="cap">📖 Catalogue raisonné<em>heritage-artist-catalogue.js · -list.js</em></span><div class="mini-z"><div class="rd on">Notices complètes</div><div class="rd">Liste en tableau</div><div class="ck on">Une œuvre par page</div><div class="ck on">Page de titre</div><div class="ck">Index des œuvres</div></div></div>
+ <div class="ex"><span class="cap">📊 Diagrammes<em>heritage-diagrams.js</em></span><div class="mini-z"><div class="ck on">Titre et légende</div><div class="ck">Tableau des données dessous</div><div class="rd on">Ajuster à la page</div><div class="rd">Taille réelle</div></div></div>
+ <div class="ex"><span class="cap">📒 Fiches<em>heritage-fiches.js</em></span><div class="mini-z"><div class="ck on">Textes et images</div><div class="ck on">Personnes et dates</div><div class="ck">Écrans et widgets (en titre)</div><div class="ck on">Citations et liens</div></div></div>
+ <div class="ex"><span class="cap">📖 Livret plié<em>heritage-layout-livret.js</em></span><div class="mini-z"><div class="ck on">Pages remises dans l’ordre du pliage</div><div class="rd on">Retourner sur le côté</div><div class="rd">Retourner par le haut</div><div class="ck on">Traits de pli</div></div></div>
+ <div class="ex"><span class="cap">🖼 Diaporama<em>heritage-slideshow.js</em></span><div class="mini-z"><div class="rd on">Une photo par page</div><div class="rd">Planche (6 par page)</div><div class="ck on">Légendes</div><div class="ck">Personnes sous chaque photo</div></div></div>
+ <div class="ex"><span class="cap">📜 Transcription<em>heritage-transcribe.js (2 endroits)</em></span><div class="mini-z"><div class="rd on">Image + texte côte à côte</div><div class="rd">Image puis texte</div><div class="rd">Texte seul</div><div class="ck on">Image améliorée</div><div class="ck on">Personnes et rôles</div></div></div>
+ <div class="ex"><span class="cap">✏️ Dessin<em>heritage-vector.js</em></span><div class="mini-z"><div class="rd on">À la taille exacte de la feuille</div><div class="rd">Ajuster à A4</div><div class="ck on">Traits de coupe et de pli</div><div class="ck">Toutes les feuilles</div></div></div>
+ <div class="ex" style="grid-column:span 2"><span class="cap">📐 Mise en page (livres)<em>heritage-layout.js</em></span><div class="mini-z"><div class="rd on">Pages simples</div><div class="rd">Planches (pages en vis-à-vis)</div><div class="rd">Livret plié (même choix que ci-dessus)</div><div class="ck on">Fond perdu <span class="inp u" style="margin-left:4px"><b>3</b><i>mm</i></span></div><div class="ck on">Traits de coupe</div><div class="ck">Notes et commentaires</div></div></div>
+ <div class="ex" style="grid-column:span 2"><span class="cap">Et dans les éditeurs (E3)<em>« ⤓ Exporter ▾ → 🖨 Imprimer »</em></span><p style="font-size:12.5px;margin:0;line-height:1.5">Le choix « 🖨 Imprimer » de la fenêtre d’export E3 ouvre <b>cette même fenêtre</b>, déjà réglée (format du document, fond perdu…). ⌘P l’ouvre directement.</p></div>
+</div>
+<div class="note"><b>Règles L1</b><ul>
+<li>Jamais de nouvel onglet, jamais <code>window.print()</code> : tout passe par <code>UI.openPrintDialog({title, options, html})</code>, qui imprime sans fenêtre surgissante (plus de « fenêtre bloquée »).</li>
+<li>Le haut ne change pas (A4 / A5 / ✎ Autre, Portrait / Paysage), puis <b>« Ce qu’on imprime »</b> (zone bleue) remplie par l’outil : cases et choix ronds, jamais de menu caché. Puis <b>Pages</b> (Toutes / Celle affichée / Choisir « 1-3, 7 ») et Exemplaires quand il y a plusieurs pages.</li>
+<li>Aperçu à droite, vrai, avec ‹ › pour parcourir les pages ; il se met à jour à chaque choix. Le format et le sens retenus par outil.</li>
+<li>Bas : Annuler · ⤓ PDF · 🖨 Imprimer (bleu). La mise en page ajoute « Fond perdu » et « Traits de coupe » dans sa zone.</li></ul></div>
+</div>
+
+<!-- ════════ L2 ════════ -->
+<div class="case"><span class="tag"><span class="num">L2</span>🎲 Les jeux</span><h3>Un même cadre pour tous les jeux</h3>
+<div class="stage av"><span class="st">Avant</span><small>chaque jeu a son titre, sa façon de choisir les joueurs et sa propre fin</small></div>
+<div class="three">
+ <div class="ex"><span class="cap">Jeu de l’oie</span>
+  <div style="border:2px solid #111;background:#fff;padding:8px"><small style="font:700 9.5px system-ui;color:#055dff;letter-spacing:.1em">TABLE DE JEU · NOIR &amp; BLANC</small><div style="font:800 15px/1.15 system-ui;margin:3px 0">Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe</div></div>
+  <div style="border:2px solid #111;background:#fff;padding:8px;margin-top:6px;font-size:11.5px"><b>JOUEURS</b><div class="two" style="gap:6px;margin-top:4px"><div><b>Joueur 1</b><span class="inp" style="font-size:11px;padding:3px 6px">Joueur 1</span>Couleur <span class="inp" style="font-size:11px;padding:3px 6px">Rouge ▾</span></div><div><b>Joueur 2</b><span class="inp" style="font-size:11px;padding:3px 6px">Joueur 2</span>Couleur <span class="inp" style="font-size:11px;padding:3px 6px">Jaune ▾</span></div></div></div>
+  <span class="why">Titre fait de 5 noms ; joueurs en cases de texte et couleur dans un menu « Rouge ▾ ».</span></div>
+ <div class="ex"><span class="cap">Memory des portraits</span>
+  <div style="border:2px solid #111;background:#fff;padding:8px"><small style="font:700 9.5px system-ui;color:#055dff;letter-spacing:.1em">TABLE DE JEU · MEMORY</small><div style="font:800 17px system-ui;margin:3px 0">🃏 Memory des portraits</div></div>
+  <div style="border:2px solid #111;background:#fff;padding:8px;margin-top:6px;font-size:11.5px"><b>LES PERSONNES DU JEU</b><div class="seg" style="margin-top:4px"><span class="is-active" style="font-size:10.5px;padding:4px 6px">Mes ancêtres (Sosa)</span><span style="font-size:10.5px;padding:4px 6px">Une génération</span></div><div style="margin-top:6px"><b>✨ Ensembles prêts</b> · <b>💾 Réglages enregistrés</b> (0)</div></div>
+  <span class="why">Ici un bon titre, des « Ensembles prêts », des réglages enregistrés… que l’oie n’a pas.</span></div>
+ <div class="ex"><span class="cap">En jeu et fin de partie</span>
+  <div style="font-size:11.5px;display:grid;gap:6px">
+   <div style="border:1.5px solid #999;background:#fff;padding:6px">Oie : « Au tour de Joueur 1 » + 🎲 Lancer les dés</div>
+   <div style="border:1.5px solid #999;background:#fff;padding:6px">Memory : « Coups : 14 · Paires : 5 / 8 »</div>
+   <div style="border:1.5px solid #999;background:#fff;padding:6px">Labyrinthe : chrono en haut à droite, indices dans le panneau</div>
+   <div style="border:1.5px solid #999;background:#fff;padding:6px">Bunker : son propre écran plein</div></div>
+  <span class="why">Chaque jeu range son tour, son score, son chrono et son « Rejouer » à sa façon.</span></div>
+</div>
+
+<div class="stage pr"><span class="st">Proposé</span><small>① Nouvelle partie · ② En jeu · ③ Fin de partie — les mêmes pour les 11 jeux</small></div>
+<div class="gm">
+ <div class="gm-side"><div class="lb">Parties en cours</div>
+  <div class="it is-active"><span>🃏</span><div>Memory du dimanche<small>Marie, Paul · lundi à 18 h 40</small></div></div>
+  <div class="it"><span>🌀</span><div>Le labyrinthe de Mamie<small>hier à 15 h 02</small></div></div>
+  <div class="it"><span>🪿</span><div>L’oie de Noël<small>17 oct. 2026</small></div></div>
+  <div class="lb">Les jeux</div><div style="font-size:12px;color:#555;line-height:1.7">🪿 Oie · 🧩 Puzzle · 🌀 Labyrinthe · 🕵️ Qui est-ce ? · 🃏 Memory · 📅 La bonne date · ❌ Morpion · 🂠 Patiences · ⚓ Bataille navale · 🔌 Câbles · 🏚 Bunker</div></div>
+ <div class="gm-main">
+  <div class="ph"><div class="t"><small>Jeu · Memory</small><h2>🃏 Memory des portraits</h2><p>Retourne deux cartes à la fois et retrouve les paires.</p></div><div class="acts"><span class="btn p">▶ Commencer la partie</span><span class="ib">⋯</span><span class="ib">⭐</span></div></div>
+  <div class="sect">① Le jeu</div>
+  <div class="gpick"><span><i>🪿</i>Oie</span><span><i>🧩</i>Puzzle</span><span><i>🌀</i>Labyrinthe</span><span><i>🕵️</i>Qui est-ce ?</span><span class="is-active"><i>🃏</i>Memory</span><span><i>📅</i>La bonne date</span><span><i>❌</i>Morpion</span><span><i>🂠</i>Patiences</span><span><i>⚓</i>Bataille</span><span><i>🔌</i>Câbles</span><span><i>🏚</i>Bunker</span><span style="border-style:dashed;color:#777"><i>💾</i>Réglages…</span></div>
+  <div class="two w" style="margin-top:4px"><div>
+   <div class="sect">② Les joueurs <span style="text-transform:none;letter-spacing:0;font-weight:600">(1 à 4)</span></div>
+   <div class="plr"><span class="grip">⠿</span><span class="sw" style="background:#d93636"></span><span class="inp">Marie</span><span class="pill pk2" style="box-shadow:none"><span class="ini f">MP</span><span class="lbl">Marie PEYRE</span><span class="x">×</span></span><span class="x" style="color:#555">×</span></div>
+   <div class="plr"><span class="grip">⠿</span><span class="sw" style="background:#2878c8"></span><span class="inp">Paul</span><span class="srch pk2" style="padding:4px 7px;font-size:12px"><span>🔍</span><span class="q">Relier à une fiche… (facultatif)</span></span><span class="x" style="color:#555">×</span></div>
+   <div style="margin-top:8px"><span class="btn s">＋ Ajouter un joueur</span> <span class="btn s">🤖 Contre l’ordinateur</span></div>
+   <div class="sect">③ Les personnes du jeu</div>
+   <div class="seg"><span class="is-active">Mes ancêtres (Sosa)</span><span>Une branche</span><span>Choisir</span><span>Toute la généalogie</span></div>
+   <p class="muted" style="font-size:12px;margin:6px 0 0">27 personnes possibles · sans les vivants ni les fiches confidentielles.</p>
+  </div><div>
+   <div class="sect">④ Les réglages du Memory</div>
+   <div class="sl"><b>Paires</b><span class="tr"><i style="width:40%"></i><b style="left:40%"></b></span><span class="inp u"><b>8</b><i>paires</i></span></div>
+   <span class="lab">Les paires</span><div class="chips"><span class="chip is-active">🖼 Portrait ↔ nom</span><span class="chip">📍 ↔ village</span><span class="chip">🛠 ↔ métier</span></div>
+   <div style="margin-top:10px;display:grid;gap:6px"><span class="ui-toggle2"><i></i>⏱ Chrono</span><span class="ui-toggle2"><i></i>💡 Indices (3)</span><span class="ui-toggle2 off"><i></i>🔊 Sons</span></div>
+   <div class="sect">Ensembles prêts</div><div class="chips"><span class="chip">Petit memory</span><span class="chip">Les villages</span><span class="chip">Grand memory</span></div>
+   <div style="margin-top:10px;border:1.5px solid #e3e5ea;background:#fafbfc;padding:7px 9px;font:700 13px system-ui;display:flex;justify-content:space-between">💾 Réglages enregistrés (2)<span class="lnk">▸ ouvrir</span></div>
+  </div></div>
+ </div></div>
+
+<div class="two" style="margin-top:18px"><div>
+ <span class="lab">② En jeu — la même barre en haut du plateau</span>
+ <div class="gbar"><span class="turn"><span class="dot" style="background:#d93636"></span>Au tour de Marie</span><span class="sc"><span><span class="dot" style="background:#d93636;width:10px;height:10px"></span>Marie <b>4</b></span><span><span class="dot" style="background:#2878c8;width:10px;height:10px"></span>Paul <b>3</b></span></span><span class="sp"></span><span class="clk">2:14</span><span class="ib" title="Annuler le dernier coup">↶</span><span class="ib" title="Indice">💡</span><span class="ib" title="Pause">⏸</span><span class="ib">⋯</span></div>
+ <div class="board"><span>?</span><span class="ok">Marie PEYRE</span><span class="up">👩<br>portrait</span><span>?</span><span class="ok">Marie PEYRE</span><span>?</span><span>?</span><span>?</span><span class="up">Jean BORIE</span><span>?</span><span>?</span><span>?</span></div>
+ <p class="note">Même ordre partout : <b>qui joue</b> (pastille de couleur) · <b>score</b> de chacun · espace · <b>chrono</b> (si allumé) · ↶ · 💡 (avec le nombre qui reste) · ⏸ · ⋯ (Recommencer, Règles, Abandonner). Un jeu sans tour (puzzle, câbles) n’affiche que « Coups : 14 ». Échap = ⏸.</p>
+</div><div>
+ <span class="lab">③ Fin de partie</span>
+ <div class="end"><div class="big">🏆</div><h4>Marie gagne !</h4><small class="muted">8 paires en 3 min 05 · 22 coups</small>
+  <div class="scr"><span class="dot" style="background:#d93636"></span><b>Marie</b><b>5 paires</b><span class="dot" style="background:#2878c8"></span><span>Paul</span><span>3 paires</span></div>
+  <div class="rec">⭐ Nouveau record : 3 min 05 <span class="muted">(avant : 3 min 40, 12 oct.)</span></div>
+  <div class="row" style="justify-content:center"><span class="btn p">↻ Rejouer</span><span class="btn">Nouvelle partie</span><span class="btn">🖨 Imprimer</span></div>
+  <p class="muted" style="font-size:12px;margin:10px 0 0">« ↻ Rejouer » = mêmes joueurs, mêmes réglages. 🖨 seulement quand c’est utile (labyrinthe, puzzle, bataille navale, mots…).</p></div>
+</div></div>
+
+<p class="note" style="margin-top:16px"><b>Ce que chaque jeu met dans ④ « Les réglages »</b> (le reste est commun) :</p>
+<div class="gtbl"><div class="h">Jeu</div><div class="h">④ Ses réglages à lui</div><div class="h">🖨</div>
+<div>🪿 Oie, serpents, chevaux</div><div>Variante · cases · dés · questions · cases spéciales</div><div>—</div>
+<div>🧩 Puzzle</div><div>Image (fenêtre unique) · pièces · forme · rotation</div><div>✓</div>
+<div>🌀 Labyrinthe</div><div>Forme · taille · graine · étapes · brouillard</div><div>✓</div>
+<div>🕵️ Qui est-ce ?</div><div>Nombre de cartes · questions permises</div><div>—</div>
+<div>🃏 Memory</div><div>Paires · sorte de paires</div><div>—</div>
+<div>📅 La bonne date</div><div>Événements · tolérance (± ans)</div><div>—</div>
+<div>❌ Morpion</div><div>Taille · alignement · règles libres</div><div>—</div>
+<div>🂠 Patiences</div><div>Patience · dos des cartes (portraits)</div><div>—</div>
+<div>⚓ Bataille navale</div><div>Grille · flotte</div><div>✓</div>
+<div>🔌 Câbles</div><div>Taille · bords qui bouclent</div><div>✓</div>
+<div>🏚 Bunker</div><div>Garde son écran d’aventure ; prend ①②③, la barre (sans score) et la fin</div><div>—</div></div>
+<div class="note"><b>Règles L2</b><ul>
+<li>En-tête K5 : « Jeu · Memory » puis <b>le nom du seul jeu choisi</b> avec son icône (plus de titre à 5 noms) ; à droite « ▶ Commencer la partie » (bleu), ⋯, ⭐.</li>
+<li>« Nouvelle partie » toujours dans le même ordre : ① le jeu (vignettes) · ② les joueurs (pastille de couleur C2, nom, fiche reliée par le menu de choix, ⠿ pour l’ordre, × pour retirer) · ③ les personnes du jeu (Sosa / branche / choisir avec le menu de choix / tout ; jamais les vivants ni les fiches confidentielles) · ④ les réglages du jeu, Ensembles prêts et 💾 Réglages enregistrés.</li>
+<li>Même barre en jeu, même fin (score, record avec la date K4, ↻ Rejouer, Nouvelle partie, 🖨 par L1 si utile). Parties en cours dans la colonne de gauche (K15), avec la date K4.</li></ul></div>
+</div>
+
+<!-- ════════ L3 ════════ -->
+<div class="case"><span class="tag"><span class="num">L3</span>🕘 Versions</span><h3>Une seule fenêtre « Versions » (site web, traitement de texte, retouche, son, montage, mise en page…)</h3>
+<div class="stage av"><span class="st">Avant</span><small>trois façons différentes</small></div>
+<div class="three">
+ <div class="ex"><span class="cap">Mon site web · « 🕘 Versions du site »</span>
+  <table class="oldt"><tr><th>Version</th><th>Enregistrée</th><th></th></tr><tr><td>Version du 12/10/2026</td><td>12 oct.</td><td><span class="btn s">↺ Reprendre</span> 🗑</td></tr><tr><td>Avant les photos</td><td>3 oct.</td><td><span class="btn s">↺ Reprendre</span> 🗑</td></tr></table>
+  <span class="why">Pas d’aperçu, pas de comparaison, « Reprendre » sans savoir ce qu’on reprend.</span></div>
+ <div class="ex"><span class="cap">Traitement de texte · « 🕘 Versions du document »</span>
+  <table class="oldt"><tr><th>Version</th><th>Mots</th><th>Enregistrée</th><th></th></tr><tr><td>Brouillon 2</td><td>1 240</td><td>hier</td><td><span class="btn s">↗ Voir</span> <span class="btn s">⇄ Avec maint.</span> …</td></tr></table>
+  <div style="margin-top:6px"><span class="btn s">⇄ Comparer deux versions…</span> (une autre fenêtre)</div>
+  <span class="why">Une colonne « Mots », « Voir » et « Comparer » dans d’autres fenêtres encore.</span></div>
+ <div class="ex"><span class="cap">Retouche, son rapide, montage</span>
+  <div style="border:1.5px solid #999;background:#fff;padding:6px;font-size:11.5px">Versions : <span class="chip" style="font-size:10.5px">Original</span> <span class="chip" style="font-size:10.5px">v2</span> <span class="chip f" style="font-size:10.5px">v3 ✓</span></div>
+  <div style="font-size:11.5px;margin-top:6px">… et en bas « Garder dans les médias… », « Copie séparée »</div>
+  <span class="why">Les versions d’un média en petites pastilles dans l’éditeur, sans date ni auteur.</span></div>
+</div>
+
+<div class="stage pr"><span class="st">Proposé</span><small>grande fenêtre (K6, 1040) : la liste à gauche, l’aperçu à droite</small></div>
+<div class="win"><div class="win-h"><div class="t"><small>Versions · Traitement de texte</small><b>🕘 Biographie de Marie Peyre</b></div><span class="x">×</span></div>
+ <div class="win-b">
+  <div class="row" style="justify-content:space-between;margin-bottom:10px"><div class="chips"><span class="chip is-active">Tout (9)</span><span class="chip">✎ Nommées (3)</span><span class="chip">🕘 Automatiques (6)</span></div><span class="btn s">＋ Enregistrer la version actuelle</span></div>
+  <div class="vw"><div class="vl">
+   <div class="vr"><span></span><div><span class="nm">Maintenant</span><small>pas encore enregistrée comme version</small></div><span class="b bl">En cours</span></div>
+   <div class="grp">Aujourd’hui</div>
+   <div class="vr is-active"><span class="cb on"></span><div><span class="nm">Avant les corrections de Paul</span><small>aujourd’hui à 10 h 22 · Victor · 1 240 mots</small></div><span class="b dt">✎ nommée</span></div>
+   <div class="vr"><span class="cb"></span><div><span class="nm">Enregistrement automatique</span><small>aujourd’hui à 9 h 05 · Paul · 1 198 mots</small></div><span></span></div>
+   <div class="grp">Cette semaine</div>
+   <div class="vr"><span class="cb"></span><div><span class="nm">Brouillon 2</span><small>mardi à 18 h 40 · Victor · 1 102 mots</small></div><span class="b dt">✎ nommée</span></div>
+   <div class="vr"><span class="cb"></span><div><span class="nm">Enregistrement automatique</span><small>lundi à 11 h 15 · Victor</small></div><span></span></div>
+   <div class="grp">Plus ancien</div>
+   <div class="vr"><span class="cb"></span><div><span class="nm">Premier jet</span><small>17 oct. 2026 · Victor · 640 mots</small></div><span class="b dt">✎ nommée</span></div>
+   <div style="padding:8px 10px;font-size:12px;color:#666">Coche deux versions pour les comparer.</div>
+  </div>
+  <div class="vp"><div class="hd"><b>Avant les corrections de Paul</b> <span class="muted" style="font-size:12px">· aujourd’hui à 10 h 22 · Victor</span></div>
+   <div class="bd">Marie Peyre naît à Tulle le <b>7 mai 1872</b>, fille de Jean, cordonnier, et d’Anne Borie. Elle grandit rue de la Barrière, où son père tient boutique…<div class="muted" style="font:12px system-ui;margin-top:8px">Aperçu : la 1ʳᵉ page. Pour une image : la vignette ; pour un son : la forme du son avec ▶.</div></div>
+   <div class="ac"><span class="btn p">↺ Revenir à cette version</span><span class="btn">⇄ Comparer avec maintenant</span><span class="btn">✎ Renommer</span><span class="ib">⋯</span></div></div>
+  </div>
+  <div class="cmp"><div><span class="h">Brouillon 2 · mardi à 18 h 40</span>Marie Peyre naît à Tulle <del>en 1872</del>, fille de Jean, <del>sabotier</del>, et d’Anne Borie.</div><div><span class="h">Avant les corrections de Paul · aujourd’hui à 10 h 22</span>Marie Peyre naît à Tulle <ins>le 7 mai 1872</ins>, fille de Jean, <ins>cordonnier</ins>, et d’Anne Borie.</div></div>
+  <div class="two" style="margin-top:10px"><div><span class="lab" style="margin-top:0">Comparer deux sons (son, montage)</span><div style="border:2px solid #111;padding:6px"><small class="muted">Original</small><div class="wave"></div><small class="muted">v3 · bruit enlevé</small><div class="wave w2"></div><div class="row" style="margin-top:4px"><span class="btn s">👂 A</span><span class="btn s p">✨ B</span><small class="muted">A / B : écouter l’un puis l’autre au même endroit</small></div></div></div>
+  <div><span class="lab" style="margin-top:0">Comparer deux images (retouche)</span><div style="border:2px solid #111;height:116px;display:grid;grid-template-columns:1fr 1fr;position:relative"><div style="background:linear-gradient(160deg,#cbb48c,#8f7a55)"></div><div style="background:linear-gradient(160deg,#f3eadb,#d8c6a3)"></div><span style="position:absolute;left:50%;top:0;bottom:0;border-left:3px solid #055dff"></span><span style="position:absolute;left:calc(50% - 13px);top:44px" class="ib on">⇆</span></div><small class="muted">Glisse le trait pour voir avant / après.</small></div></div>
+ </div>
+ <div class="win-f"><span class="sp"></span><span class="btn p">Fermer</span></div></div>
+<div class="toast2">↺ Revenu à « Avant les corrections de Paul » — la version d’avant est gardée<span class="u">↶ Annuler</span><span class="bar" style="width:58%"></span></div>
+<div class="note"><b>Règles L3</b><ul>
+<li>Une seule fenêtre « 🕘 Versions » (Fichier → 🕘 Versions… dans tous les éditeurs E1) : filtres C5 « Tout / ✎ Nommées / 🕘 Automatiques », liste rangée par Aujourd’hui · Cette semaine · Plus ancien, dates K4 (« aujourd’hui à 10 h 22 », « 17 oct. 2026 »), qui l’a faite, une ligne utile selon l’outil (mots, durée, taille en pixels).</li>
+<li>« Maintenant » toujours en haut (K8 « EN COURS »). Clic sur une version = aperçu à droite ; deux cases cochées = comparaison (texte barré rouge / ajouté vert, deux formes de son avec A / B, image avec un trait à glisser).</li>
+<li>« ↺ Revenir à cette version » sans question : la version actuelle est d’abord gardée, puis message H7 « ↶ Annuler ». ⋯ : ✎ Renommer, ⧉ En faire une copie, ⤓ Exporter, 🗑 Supprimer (H7 « ↶ Annuler »). Une fenêtre qui montre : « Fermer » seul en bas.</li></ul></div>
+</div>
+
+<!-- ════════ L4 ════════ -->
+<div class="case"><span class="tag"><span class="num">L4</span>🔣 Choisir une icône</span><h3>Une grille d’icônes avec recherche au lieu des longs menus</h3>
+<div class="stage av"><span class="st">Avant</span><small>des menus déroulants de 50 à 75 lignes</small></div>
+<div class="three">
+ <div class="ex"><span class="cap">Types d’événements · icône (75 choix)</span><div class="selclosed"><span>🎂 Naissance</span><span>▾</span></div><div class="oldsel"><div>👶 Bébé</div><div class="on">🎂 Naissance</div><div>💧 Baptême</div><div>⛪ Église</div><div>💍 Mariage</div><div>💔 Divorce</div><div>⚰️ Décès</div><div>🪦 Sépulture</div><div>🎓 Diplôme</div><div>💼 Métier</div><div>🏠 Maison</div><div style="color:#999">… 64 de plus</div></div><span class="why">On fait défiler 75 lignes ; pas de recherche, pas de rangement.</span></div>
+ <div class="ex"><span class="cap">Fond de carte (51 choix)</span><div class="selclosed"><span>OpenStreetMap</span><span>▾</span></div><div class="oldsel"><div class="gr">Cartes historiques</div><div>Cassini (XVIIIᵉ)</div><div>État-major 1820–1866</div><div class="gr">Plans</div><div class="on">OpenStreetMap</div><div>IGN Plan</div><div>CartoDB clair</div><div class="gr">Satellite</div><div>IGN Photos</div><div style="color:#999">… 43 de plus</div></div><span class="why">Que des noms : on ne voit pas à quoi ressemble la carte avant de la choisir.</span></div>
+ <div class="ex"><span class="cap">Icône d’une section, d’un onglet, d’un widget</span><div class="row"><span class="inp" style="width:56px;text-align:center">📒</span><span class="muted" style="font-size:12px">case de texte : « colle un emoji »</span></div><div style="margin-top:8px;border:1.5px solid #999;background:#fff;padding:6px;font-size:18px;letter-spacing:4px;line-height:1.4">😀😃😄😁😆😅🤣😂🙂🙃😉😊😇🥰😍🤩😘😗☺️😚😙🥲😋😛😜🤪😝🤑🤗🤭…</div><span class="why">Selon l’endroit : case libre, ou la grande liste d’emojis sans mots.</span></div>
+</div>
+
+<div class="stage pr"><span class="st">Proposé</span><small>le même menu de choix (C1, C5), mais en grille</small></div>
+<div class="two">
+ <div><span class="lab" style="margin-top:0">Icône d’un type d’événement</span>
+ <div class="ig"><div class="top"><div class="srch on"><span>🔍</span><span class="q" style="color:#111">église</span><span class="x">×</span></div><div class="chips"><span class="chip is-active">Tout (75)</span><span class="chip">🕘 Récentes</span><span class="chip">👶 Naissance (8)</span><span class="chip">💍 Union (9)</span><span class="chip">⚰️ Décès (7)</span><span class="chip">⛪ Religion (6)</span><span class="chip">💼 Travail (12)</span><span class="chip">🏠 Lieux (10)</span><span class="chip">⭐ Autres (23)</span></div></div>
+  <div class="lb">4 icônes pour « église »</div>
+  <div class="tiles"><span class="is-active cur"><i>⛪</i><mark>Église</mark></span><span><i>💧</i>Baptême <small style="display:block;color:#888">à l’<mark>église</mark></small></span><span><i>🕊</i>Communion</span><span><i>🔔</i>Cloche</span></div>
+  <div class="lb">🕘 Récentes</div>
+  <div class="tiles"><span><i>🎂</i>Naissance</span><span><i>💍</i>Mariage</span><span><i>⚰️</i>Décès</span><span><i>🪖</i>Armée</span><span><i>🚢</i>Départ</span><span><i>📜</i>Acte</span></div>
+  <div class="ft"><span><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> choisir · <kbd>Entrée</kbd> valider · <kbd>Échap</kbd> fermer</span><span class="lnk">Aucune icône</span></div></div>
+ <span class="lab">Choisie : la même pastille que le menu de choix</span>
+ <span class="pill"><span class="ic">⛪</span><span class="lbl">Église</span><small>Religion</small><span class="o">✎ Changer</span><span class="x">×</span></span></div>
+ <div><span class="lab" style="margin-top:0">Fond de carte : des vignettes au lieu des noms</span>
+ <div class="ig"><div class="top"><div class="srch"><span>🔍</span><span class="q">Chercher un fond… (ex. Cassini, relief, 1850)</span><kbd>/</kbd></div><div class="chips"><span class="chip">Tout (51)</span><span class="chip is-active">📜 Historiques (12)</span><span class="chip">🗺 Plans (14)</span><span class="chip">🛰 Satellite (8)</span><span class="chip">⛰ Relief (9)</span><span class="chip">🌍 Monde (8)</span></div></div>
+  <div class="tiles map"><span class="is-active"><i style="background:repeating-linear-gradient(35deg,#eadfc6 0 6px,#e1d2b0 6px 8px)"></i>Cassini<small style="display:block;color:#888">XVIIIᵉ siècle</small></span><span><i style="background:radial-gradient(circle at 30% 40%,#c9b98f 0 18%,#efe6cf 19%),#efe6cf"></i>État-major<small style="display:block;color:#888">1820–1866</small></span><span><i style="background:linear-gradient(120deg,#f2ecdc 40%,#c8d9b4 41% 60%,#f2ecdc 61%)"></i>Napoléonien<small style="display:block;color:#888">cadastre</small></span><span><i style="background:repeating-linear-gradient(0deg,#e8e2d0 0 9px,#cfc5a8 9px 10px)"></i>Belgique Ferraris<small style="display:block;color:#888">1777</small></span><span><i style="background:linear-gradient(160deg,#ead9b8,#c7ad7d)"></i>Carte de 1950<small style="display:block;color:#888">IGN</small></span><span><i style="background:repeating-linear-gradient(90deg,#efe8d6 0 10px,#d9ceb0 10px 11px)"></i>Plans de ville<small style="display:block;color:#888">XIXᵉ</small></span></div>
+  <div class="ft"><span>✓ Cassini est le fond de toutes les cartes</span><span class="lnk">↗ Voir sur la carte</span></div></div>
+ <p class="note">Même grille pour les icônes des sections de fiche, des onglets, des widgets, des cadres du mode simple, des Fiches : leurs catégories propres en pastilles, plus « 😀 Tous les emojis » en dernier (recherche en français : « coeur », « bateau », « chien »).</p></div>
+</div>
+<div class="note"><b>Règles L4</b><ul>
+<li>Dès qu’un choix dépasse <b>12 icônes</b> (ou 12 fonds), c’est cette grille ; en dessous, les petits menus simples restent (règle déjà validée).</li>
+<li>En haut : case C1 (🔍, « Chercher… » + exemples, ×, Échap, « / ») qui cherche dans le nom et des mots en plus ; dessous les pastilles C5 avec le nombre (« Tout (75) », « 🕘 Récentes »…), Tab passe de l’une à l’autre. Les récentes en premier quand la case est vide.</li>
+<li>Vignettes de 74 px (icône + nom) ou 104 px pour les fonds (image du fond) ; flèches ↑ ↓ ← →, Entrée, Échap ; « Aucune » quand ça a un sens. Choisi → la pastille du menu de choix (« ✎ Changer », « × »).</li></ul></div>
+</div>
+
+<!-- ════════ L5 ════════ -->
+<div class="case"><span class="tag"><span class="num">L5</span>Petite aide sous les champs</span><h3>Une seule petite aide grise sous les champs</h3>
+<div class="stage av"><span class="st">Avant</span><small>au moins 6 dessins pour la même chose (le même champ, recopié avec chaque style)</small></div>
+<div class="spec">
+ <div><code>.sw-hint · site web (38×)</code><span class="inp ph">Titre du site</span><span style="display:block;color:#7a7f88;font-size:12px;line-height:1.4;margin:6px 0">Il s’affiche en haut de chaque page.</span></div>
+ <div><code>.ly-help · mise en page (30×)</code><span class="inp ph">Titre du site</span><span style="display:block;color:#8a8f99;font-size:12px;margin:2px 0">Il s’affiche en haut de chaque page.</span></div>
+ <div><code>.ar-phelp · artistes (14×)</code><span style="display:block;color:#666;font-size:12px;margin:4px 0 8px">Il s’affiche en haut de chaque page.</span><span class="inp ph">Titre du site</span></div>
+ <div><code>.ms-help · mode simple (11×)</code><span class="inp ph">Titre du site</span><span style="display:block;color:#666;font-size:13px;margin:0">Il s’affiche en haut de chaque page.</span></div>
+ <div><code>.form-help · formulaires (10×)</code><span style="font:700 12.5px system-ui">Titre du site <span style="display:block;margin-top:5px;font-weight:400">Il s’affiche en haut de chaque page.</span></span><span class="inp ph" style="margin-top:4px">Titre du site</span></div>
+ <div><code>.pm-step-help · étapes (2×) + 20 autres</code><span class="inp ph">Titre du site</span><span style="display:block;color:#666;font-size:11px;min-height:14px">Il s’affiche en haut de chaque page.</span></div>
+</div>
+<p class="note" style="margin-top:8px">Tailles 11, 12, 12,5 ou 13 px ; tantôt au-dessus du champ, tantôt dessous, tantôt dans le libellé ; espace de 0 à 8 px ; plus une vingtaine d’autres (<code>pk-hint</code>, <code>h-lot-hint</code>, <code>ms-hint</code>, <code>cm-ghelp</code>, <code>kn-phelp</code>…).</p>
+
+<div class="stage pr"><span class="st">Proposé</span><small>une seule aide (<code>.ui-hint</code>), toujours dessous, et une seule ligne à la fois</small></div>
+<div class="two"><div>
+ <div class="ruler"><span class="anno">LIBELLÉ · 12,5 px gras</span>
+ <div class="fl"><div class="lbx">Titre du site <span class="qm">?</span></div><span class="inp">Les Peyre de Tulle</span><span class="anno" style="display:block;margin-top:2px">↕ 4 px</span><span class="hint">Il s’affiche en haut de chaque page et dans l’onglet du navigateur.</span><span class="anno" style="display:block;margin-top:2px">AIDE · 12,5 px · gris #666 · interligne 1,45 · 60 lettres de large au plus</span></div></div>
+ <div class="fl" style="margin-top:14px"><div class="lbx">Adresse du site</div><span class="inp">peyre-tulle</span><span class="hint">Lettres, chiffres et tirets seulement. Deux lignes au plus : au-delà, le reste va dans la FAQ. <a>En savoir plus (FAQ) →</a></span></div>
+ <span class="lab">La bulle « ? » (C8) dit <b>pourquoi</b>, l’aide dit <b>quoi taper</b> — jamais la même phrase :</span>
+ <div class="bub">Le titre aide aussi les moteurs de recherche à trouver ton site. <a>En savoir plus (FAQ) →</a></div>
+</div><div>
+ <span class="lab" style="margin-top:0">Une seule ligne sous le champ, à la même place — la plus importante passe devant</span>
+ <div class="prio" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+  <div><b>1 · Vide : l’aide</b><div class="fl" style="margin:0"><div class="lbx">Date du mariage</div><span class="inp ph">ex. 7 mai 1925, vers 1784</span><span class="hint">Écris-la comme dans l’acte.</span></div></div>
+  <div><b>2 · Tapé : « Compris » (C4, K17)</b><div class="fl" style="margin:0"><div class="lbx">Date du mariage</div><span class="inp">7/5/25</span><span class="hint ok">✓ Compris : 7 mai 1925</span></div></div>
+  <div><b>3 · Erreur K1 : en rouge</b><div class="fl" style="margin:0"><div class="lbx">Date du mariage</div><span class="inp bad">31 février 1925</span><span class="hint err">⛔ Cette date n’existe pas : février n’a que 28 ou 29 jours.</span></div></div>
+  <div><b>4 · Corrigé : l’erreur s’efface</b><div class="fl" style="margin:0"><div class="lbx">Date du mariage</div><span class="inp">21 février 1925</span><span class="hint ok">✓ Compris : 21 février 1925</span></div></div>
+ </div>
+ <p class="note">Ordre : ⛔ erreur (K1) &gt; ⚠️ attention / ✓ Compris (C4, K17) &gt; l’aide grise. L’aide revient quand le champ est vidé. Rien ne saute : la ligne garde sa place (pas de champ qui bouge quand l’erreur apparaît).</p>
+ <span class="lab">Champ avec unité (K17) et interrupteur (K16)</span>
+ <div class="fl"><div class="lbx">Marge</div><span class="inp u"><b>12</b><i>mm</i></span><span class="hint">Autour du texte, sur chaque page.</span></div>
+ <div class="fl"><span class="ui-toggle2"><i></i>Montrer les vivants</span><span class="hint" style="margin-left:40px">Sinon on voit seulement « Personne vivante ».</span></div>
+</div></div>
+<div class="note"><b>Règles L5</b><ul>
+<li>Un seul style : <code>.ui-hint</code> (12,5 px, gris #666 — #a5abb6 en sombre, contraste ≥ 4,5:1, interligne 1,45, 4 px sous le champ, 60 lettres de large au plus), écrit <b>sous</b> le champ, jamais dans le libellé ni au-dessus. Pour un interrupteur ou une case : sous le texte, aligné sur lui.</li>
+<li>Une ou deux phrases. Au-delà : « En savoir plus (FAQ) → » au bout. Le « ? » (C8) reste à côté du libellé pour le pourquoi.</li>
+<li>À la même place, une seule ligne à la fois : ⛔ erreur K1 &gt; ⚠️ / ✓ Compris &gt; aide. Les ~26 classes d’aujourd’hui deviennent <code>.ui-hint</code> (et ses états <code>.is-ok</code>, <code>.is-error</code>).</li></ul></div>
+</div>
+
+<!-- ════════ L6 ════════ -->
+<div class="case"><span class="tag"><span class="num">L6</span>🔍 Chercher dans une page</span><h3>Une case de recherche en haut des longues pages des Réglages</h3>
+<div class="stage av"><span class="st">Avant</span><small>la case de la colonne trouve la page, pas la ligne dans la page</small></div>
+<div class="three">
+ <div class="ex"><span class="cap">Raccourcis clavier · ≈ 120 lignes</span>
+  <div class="stbl" style="font-size:11px"><div class="gh">Fenêtres et écran divisé</div><div class="r"><span>Ouvrir l’écran actuel dans une nouvelle fenêtre</span><span class="k"><kbd>Ctrl</kbd><kbd>N</kbd></span><span class="btn s">Changer</span></div><div class="r"><span>Diviser l’écran en deux</span><span class="k"><kbd>Ctrl</kbd><kbd>Maj</kbd><kbd>D</kbd></span><span class="btn s">Changer</span></div><div class="gh">Se déplacer</div><div class="r"><span>Aller à la rubrique n° 1</span><span class="k"><kbd>Ctrl</kbd><kbd>1</kbd></span><span class="btn s">Changer</span></div><div class="r" style="color:#999"><span>… 115 lignes de plus, 14 rubriques</span><span></span><span></span></div></div>
+  <span class="why">Pour trouver « Imprimer », il faut tout faire défiler (ou ⌘F du navigateur).</span></div>
+ <div class="ex"><span class="cap">Colonne des Réglages</span>
+  <div class="srch"><span>🔍</span><span class="q">imprimer</span><span class="x">×</span></div>
+  <div style="border:2px solid #111;background:#fff;margin-top:6px;font-size:12px"><div style="padding:6px 8px;border-bottom:1px solid #eee"><b>07 Raccourcis clavier</b></div><div style="padding:6px 8px">11 Montage, retouche, mise en page…</div></div>
+  <span class="why">Elle mène à la bonne page… puis on cherche encore la ligne à l’œil.</span></div>
+ <div class="ex"><span class="cap">Apparence · Types d’événements · Menus</span>
+  <div style="font-size:12px;display:grid;gap:5px"><div style="border:2px solid #111;background:#fff;padding:6px 8px"><b>▸ Fiches personnes et animaux</b></div><div style="border:2px solid #111;background:#fff;padding:6px 8px"><b>▸ Portraits</b></div><div style="border:2px solid #111;background:#fff;padding:6px 8px"><b>▸ Boutons en haut à droite</b></div><div style="color:#999">… 18 cadres, 75 types, 40 entrées de menu</div></div>
+  <span class="why">Les réglages sont dans des cadres repliés : impossible de les trouver sans tout ouvrir.</span></div>
+</div>
+
+<div class="stage pr"><span class="st">Proposé</span><small>la case C1 sous l’en-tête, qui filtre la page elle-même</small></div>
+<div class="two w"><div>
+ <div class="ph" style="margin-bottom:10px"><div class="t"><small>Réglages · Navigation</small><h2>🧭 Raccourcis clavier</h2><p>Clique sur « Changer » puis appuie sur la nouvelle combinaison.</p></div><div class="acts"><span class="saved">✓ Enregistré</span><span class="btn">↺ Remettre comme au départ</span></div></div>
+ <div class="sticky"><div class="srch on"><span>🔍</span><span class="q" style="color:#111">impr</span><span class="x">×</span></div><small><b>3 lignes</b> dans 2 rubriques · 117 cachées · <span class="lnk">Tout montrer</span></small></div>
+ <div class="stbl" style="margin-top:10px"><div class="gh">Fichier <small>1 sur 9</small></div><div class="r hlrow"><span><mark>Impr</mark>imer l’écran affiché</span><span class="k"><kbd>⌘</kbd><kbd>P</kbd></span><span class="btn s">Changer</span></div>
+ <div class="gh">Éditeurs <small>2 sur 22</small></div><div class="r"><span><mark>Impr</mark>imer le document</span><span class="k"><kbd>⌘</kbd><kbd>P</kbd></span><span class="btn s">Changer</span></div><div class="r"><span>Exporter (PDF, <mark>impr</mark>ession…)</span><span class="k"><kbd>⌥</kbd><kbd>⌘</kbd><kbd>E</kbd></span><span class="btn s">Changer</span></div></div>
+ <p class="note">On peut aussi taper une touche : « ⌘P » ou « ctrl p » trouve les raccourcis qui l’utilisent (pratique pour voir si une touche est déjà prise).</p>
+</div><div>
+ <span class="lab" style="margin-top:0">Dans Apparence : les cadres se filtrent et s’ouvrent tout seuls</span>
+ <div class="sticky"><div class="srch on"><span>🔍</span><span class="q" style="color:#111">sosa</span><span class="x">×</span></div><small><b>3 réglages</b> dans 2 cadres</small></div>
+ <div class="frame"><div class="fh"><span>👤 Portraits</span><small class="muted">2 réglages</small></div><div class="fb"><span class="ui-toggle2"><i></i><span>Badge <mark>Sosa</mark> sur le portrait</span></span><span class="ui-toggle2 off"><i></i><span>Numéro <mark>Sosa</mark> dans les listes</span></span></div></div>
+ <div class="frame"><div class="fh"><span>🗂 Fiches personnes et animaux</span><small class="muted">1 réglage</small></div><div class="fb"><span class="ui-toggle2"><i></i><span>Pastille <mark>Sosa</mark> dans l’en-tête</span></span></div></div>
+ <div class="frame dim"><div class="fh"><span>▸ Boutons en haut à droite · Colonne de gauche · 14 autres cadres</span><small>rien ici</small></div></div>
+ <span class="lab">Rien trouvé (K10, petite ligne)</span>
+ <div class="sticky"><div class="srch on"><span>🔍</span><span class="q" style="color:#111">xylophone</span><span class="x">×</span></div></div>
+ <div class="empty-line" style="margin-top:8px"><span>🔍</span><span>Rien pour « xylophone » dans cette page.</span><span class="btn s">🔍 Chercher dans tous les Réglages</span></div>
+</div></div>
+<div class="note"><b>Règles L6</b><ul>
+<li>Toute page des Réglages de plus de ~20 lignes ou 4 cadres (Raccourcis clavier, Types d’événements, Menus, colonne et listes, Apparence, Étiquettes, Glossaire, Designs au choix…) a la case C1 sous l’en-tête K5, qui reste en haut quand on fait défiler. « / » y va, Échap vide, × vide.</li>
+<li>Elle filtre <b>dans la page</b> : lignes, réglages, titres de cadres, textes d’aide et touches. Les rubriques gardent leur titre avec « 2 sur 22 » ; les cadres qui contiennent un résultat s’ouvrent tout seuls, les autres se replient en une ligne grisée. Lettres trouvées surlignées. « N lignes · N cachées · Tout montrer ».</li>
+<li>Rien trouvé : la petite ligne K10 avec « 🔍 Chercher dans tous les Réglages » (qui reprend le mot dans la case de la colonne). La recherche est vidée en quittant la page.</li></ul></div>
+</div>
+
+<!-- ════════ Sombre + téléphone ════════ -->
+<div class="case"><span class="tag"><span class="num">L+</span>Mode sombre · téléphone 390 px</span><h3>Trois de ces dessins en sombre, sur un téléphone</h3>
+<div class="p6">
+ <div class="phone"><div class="dkw" style="padding:8px;border:0"><div class="win"><div class="win-h"><div class="t"><small>Imprimer</small><b>🖨 Acte de naissance</b></div><span class="x">×</span></div><div class="win-b">
+  <div class="row"><div class="seg"><span class="is-active">A4</span><span>A5</span></div><div class="seg"><span class="is-active">Portrait</span><span>Paysage</span></div></div>
+  <div class="zone"><b>Ce qu’on imprime · Transcription</b><div class="rd on">Image + texte côte à côte</div><div class="rd">Texte seul</div><div class="ck on">Personnes et rôles</div></div>
+  <div class="pw-prev" style="margin-top:12px"><div class="paper l" style="width:70%;flex-direction:row"><div class="im"></div><div style="flex:1;display:flex;flex-direction:column;gap:4px"><div class="ln t"></div><div class="ln"></div><div class="ln"></div><div class="ln s"></div></div></div><div class="nav">1 page</div></div>
+ </div><div class="win-f"><span class="btn">Annuler</span><span class="btn">⤓ PDF</span><span class="btn p">🖨 Imprimer</span></div></div></div></div>
+ <div class="phone"><div class="dkw" style="padding:8px;border:0">
+  <div class="gbar"><span class="turn"><span class="dot" style="background:#d93636;border-color:#ddd"></span>Au tour de Marie</span><span class="sc"><span>Marie <b>4</b></span><span>Paul <b>3</b></span></span><span class="sp"></span><span class="clk">2:14</span><span class="ib">↶</span><span class="ib">💡</span><span class="ib">⏸</span></div>
+  <div class="end" style="margin-top:12px"><div class="big">🏆</div><h4>Marie gagne !</h4><small>8 paires en 3 min 05</small><br><div class="rec">⭐ Nouveau record : 3 min 05</div><div class="row" style="justify-content:center"><span class="btn p">↻ Rejouer</span><span class="btn">Nouvelle partie</span></div></div></div></div>
+ <div class="phone"><div class="dkw" style="padding:8px;border:0">
+  <div class="ig"><div class="top"><div class="srch on"><span>🔍</span><span class="q">bateau</span><span class="x">×</span></div><div class="chips"><span class="chip is-active">Tout (75)</span><span class="chip">🕘 Récentes</span><span class="chip">🏠 Lieux (10)</span></div></div>
+  <div class="tiles"><span class="is-active"><i>🚢</i>Départ en <mark>bateau</mark></span><span><i>⚓</i>Marin</span><span><i>🛶</i>Passeur</span></div>
+  <div class="ft"><span>Entrée valider · Échap fermer</span></div></div>
+  <div style="margin-top:12px"><div class="fl"><div class="lbx">Date du départ</div><span class="inp bad">31 février 1925</span><span class="hint err">⛔ Cette date n’existe pas.</span></div><div class="fl"><div class="lbx">Port</div><span class="inp">Bordeaux</span><span class="hint">La ville d’où part le bateau. <a>En savoir plus →</a></span></div></div>
+ </div></div>
+</div>
+<p class="note">Sur un téléphone : la fenêtre « Imprimer » passe sur une colonne (l’aperçu sous les choix) ; la barre de jeu met « Au tour de… » sur sa propre ligne ; la grille d’icônes garde des vignettes de 74 px (cibles d’au moins 44 px). En sombre : zone « Ce qu’on imprime » en bleu foncé, aide grise #a5abb6, erreur rouge clair, surlignage jaune foncé.</p>
+</div>
+
+</div>
+</body></html>
