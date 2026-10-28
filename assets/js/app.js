@@ -1,6 +1,24 @@
 (() => {
     'use strict';
 
+    /* 🗂 Plusieurs généalogies : TOUT envoi vers api.php / upload.php dit quelle généalogie la page a ouverte (X-Genealogy),
+     * aussi les fetch directs (imports, médias, réglages) ; le serveur refuse si une autre a été ouverte ailleurs. */
+    if(typeof window.LCNDA_GENEALOGY==='string'&&!window.fetch.__lcndaGen){
+        const origFetch=window.fetch;
+        const wrappedFetch=function(input,init){
+            try{
+                const raw=typeof input==='string'||input instanceof URL?String(input):input?.url||'';
+                const u=new URL(raw,location.href);
+                if(u.origin===location.origin&&/(?:^|\/)(?:api|upload)\.php$/.test(u.pathname)){
+                    if(input instanceof Request&&!init){const h=new Headers(input.headers);if(!h.has('X-Genealogy'))h.set('X-Genealogy',window.LCNDA_GENEALOGY);input=new Request(input,{headers:h});}
+                    else{const h=new Headers(init?.headers||(input instanceof Request?input.headers:undefined));if(!h.has('X-Genealogy'))h.set('X-Genealogy',window.LCNDA_GENEALOGY);init={...(init||{}),headers:h};}
+                }
+            }catch(_){}
+            return origFetch.call(this,input,init);
+        };
+        wrappedFetch.__lcndaGen=true;window.fetch=wrappedFetch;
+    }
+
     /* 🛡 Un seul enregistrement à la fois dans une fenêtre (double-clic, clics répétés, Entrée répétée, réseau lent) :
      * le formulaire d'une <dialog> déjà en train d'enregistrer ignore les nouveaux envois ; son bouton principal est
      * désactivé (aspect C8) avec « Enregistrement… », et libéré dès que l'enregistrement est fini, réussi ou non

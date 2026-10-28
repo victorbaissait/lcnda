@@ -65,7 +65,7 @@ $out['link'] = [count($for), $for[0]['note'] ?? null];
 $lid = save_my_list($pdo, ['name' => 'Tombes', 'source' => 'free', 'definition' => ['custom' => [['key' => 'c1', 'label' => 'Nom', 'type' => 'text']]]])['id'];
 $k = save_my_list_row($pdo, ['list_id' => $lid, 'row_key' => 'f:new', 'field' => 'c1', 'value' => 'Martin'])['row_key'];
 $r = save_my_list_row($pdo, ['list_id' => $lid, 'row_key' => $k, 'included' => -1]);
-$q = $pdo->prepare('SELECT count(*) FROM custom_list_rows WHERE list_id=?'); $q->execute([$lid]); $out['row_gone'] = (int) $q->fetchColumn();
+$q = $pdo->prepare('SELECT count(*) FROM custom_list_rows WHERE list_id=? AND included>=0'); $q->execute([$lid]); $out['row_gone'] = (int) $q->fetchColumn();
 save_my_list_row($pdo, ['list_id' => $lid, 'row_key' => $k, 'included' => $r['was'], 'values' => $r['values']]);
 $q = $pdo->prepare('SELECT included, data_json FROM custom_list_rows WHERE list_id=? AND row_key=?'); $q->execute([$lid, $k]); $row = $q->fetch(PDO::FETCH_ASSOC);
 $out['row'] = [(int) $row['included'], json_decode($row['data_json'], true)];

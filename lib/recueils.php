@@ -397,13 +397,15 @@ function remove_recueil_image(PDO $pdo, array $data): array
     if (!$img) { throw new RuntimeException('Photo introuvable.'); }
     $b = $pdo->prepare('SELECT id FROM recueil_pages WHERE best_image_id=?'); $b->execute([$id]);
     $best = array_map('intval', $b->fetchAll(PDO::FETCH_COLUMN));
+    $fp = $pdo->prepare("SELECT position FROM family_collection_media WHERE collection_type='recueil' AND collection_id=? AND media_id=?"); $fp->execute([(int) $img['recueil_id'], (int) $img['media_id']]);
+    $fcmPos = $fp->fetchColumn();
     $pdo->prepare('UPDATE recueil_pages SET best_image_id=NULL WHERE best_image_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM recueil_images WHERE id=?')->execute([$id]);
     recueil_unlink_media($pdo, (int) $img['recueil_id'], [(int) $img['media_id']]);
     recueil_touch($pdo, (int) $img['recueil_id']);
     // ↶ Annuler (H7) : de quoi la remettre à sa place (restore_recueil_image)
     $keep = array_intersect_key($img, array_flip(['id', 'recueil_id', 'version_id', 'page_id', 'media_id', 'role', 'position', 'note', 'tray', 'created_at']));
-    return ['deleted' => true, 'restore' => $keep + ['best_of' => $best]];
+    return ['deleted' => true, 'restore' => $keep + ['best_of' => $best, 'media_position' => $fcmPos === false ? 0 : (int) $fcmPos]];
 }
 
 /** ↶ Annuler après « Retirer la photo du recueil » : la remet (même page, même place, même photo choisie) ; tout est revérifié. */
@@ -421,7 +423,7 @@ function restore_recueil_image(PDO $pdo, array $data): array
     $row = [$rid, $vid, $pid ?: null, $mid, mb_substr(safe_text($data['role'] ?? 'page'), 0, 30) ?: 'page', (float) ($data['position'] ?? 0), mb_substr(safe_text($data['note'] ?? ''), 0, 4000), mb_substr(safe_text($data['tray'] ?? ''), 0, 60)];
     if ($id) { $pdo->prepare('INSERT INTO recueil_images(id, recueil_id, version_id, page_id, media_id, role, position, note, tray) VALUES(?,?,?,?,?,?,?,?,?)')->execute(array_merge([$id], $row)); }
     else { $pdo->prepare('INSERT INTO recueil_images(recueil_id, version_id, page_id, media_id, role, position, note, tray) VALUES(?,?,?,?,?,?,?,?)')->execute($row); $id = (int) $pdo->lastInsertId(); }
-    $pdo->prepare("INSERT INTO family_collection_media(collection_type, collection_id, media_id, position, role) SELECT 'recueil', ?, ?, 0, '' WHERE NOT EXISTS (SELECT 1 FROM family_collection_media WHERE collection_type='recueil' AND collection_id=? AND media_id=?)")->execute([$rid, $mid, $rid, $mid]);
+    $pdo->prepare("INSERT INTO family_collection_media(collection_type, collection_id, media_id, position, role) SELECT 'recueil', ?, ?, ?, '' WHERE NOT EXISTS (SELECT 1 FROM family_collection_media WHERE collection_type='recueil' AND collection_id=? AND media_id=?)")->execute([$rid, $mid, max(0, safe_int($data['media_position'] ?? 0)), $rid, $mid]);
     $best = $pdo->prepare('UPDATE recueil_pages SET best_image_id=? WHERE id=? AND recueil_id=? AND best_image_id IS NULL');
     foreach ((array) ($data['best_of'] ?? []) as $bp) { $best->execute([$id, safe_int($bp), $rid]); }
     recueil_touch($pdo, $rid);

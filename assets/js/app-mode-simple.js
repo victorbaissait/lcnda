@@ -51,6 +51,7 @@
     const KIND_GROUPS = [['Famille', ['person', 'family', 'bdays', 'quiz', 'call']], ['Photos, films, sons', ['album', 'photo1', 'pick', 'random', 'video', 'audio']], ['Lieux et souvenirs', ['house', 'place', 'note', 'clock']]];
     const TILE_ICONS = ['🌳', '📷', '👥', '🎂', '⭐', '📸', '💌', '❤️', '🏠', '👵', '👴', '👶', '🐶', '🌻', '🎵', '📖', '✉️', '🎉', '⛪', '🌍', '⚓', '🚜', '🍰', '☀️',
         '🖼', '🗂', '🎲', '🎬', '📺', '📻', '🎶', '🏡', '🎈', '📍', '🗺', '❓', '🕰', '⏰', '📞', '☎️', '👨‍👩‍👧', '💍', '🎄', '🌷', '🐱', '🐦', '⛵', '🚂', '✈️', '🏖', '⛰', '🍎', '🧶', '⚽', '🎨', '🙏', '🕊', '💐'];
+    UI().registerIconSet?.('ms-tiles', {items: TILE_ICONS.map(g => ({v: g, g})), emoji: false, title: 'Icône du gros bouton'}); // L4
     const isCustom = k => typeof k === 'string' && /^c\d{1,9}$/.test(k);
     const MAX_CUSTOM = 24;
     const DEF = () => ({
@@ -1110,7 +1111,7 @@
                 ${cu ? kindFields(k, x) : ''}
                 ${cu && ['person', 'album', 'house'].includes(x.kind) ? `<div class="ms-tf"><span>${pickLbl}</span><div data-ms-tile-pick="${k}">${A().pickerField ? A().pickerField({name: '', hiddenName: false, kind: x.kind === 'house' ? 'house' : 'person', value: (x.kind === 'house' ? x.hid : x.pid) || null, allowCreate: x.kind === 'house' ? false : undefined}) : ''}</div></div>` : ''}
                 ${cu && (x.kind === 'note' || x.kind === 'call') ? `<label class="ms-tf"><span>${x.kind === 'call' ? 'Un mot en plus' : 'Le mot'}</span><textarea rows="4" maxlength="800" data-ms-ttext="${k}" placeholder="Un petit mot de la famille, lu à voix haute avec 🔊">${esc(x.text || '')}</textarea></label>` : ''}
-                <div class="ms-tf"><span>Icône</span><div class="ms-icons" role="radiogroup" aria-label="Icône du cadre">${TILE_ICONS.map(ic => `<button type="button" class="ms-ic ${ic === icon ? 'is-active' : ''}" data-ms-ticon="${k}" data-v="${ic}" aria-pressed="${ic === icon}" aria-label="Icône ${ic}">${ic}</button>`).join('')}</div></div>
+                <div class="ms-tf"><span>Icône</span>${UI().iconFieldHtml ? UI().iconFieldHtml({set: 'ms-tiles', value: icon, allowNone: false, attrs: `data-ms-ticon-in="${esc(k)}" aria-label="Icône du cadre"`}) : `<div class="ms-icons" role="radiogroup" aria-label="Icône du cadre">${TILE_ICONS.map(ic => `<button type="button" class="ms-ic ${ic === icon ? 'is-active' : ''}" data-ms-ticon="${k}" data-v="${ic}" aria-pressed="${ic === icon}" aria-label="Icône ${ic}">${ic}</button>`).join('')}</div>`}</div>
                 <div class="ms-tf"><span>Couleur</span>${cu ? `<span data-ms-tcolor-slot="${k}" data-v="${esc(x.color || pal[K[3]])}"></span><small class="ms-cv">${x.color ? 'Ta couleur · ' + esc(x.color.toUpperCase()) : 'Celle du thème'}</small>` : `<span data-ms-color-slot="${k}" data-v="${esc(s.colors[k] || pal[k])}"></span><small class="ms-cv">${s.colors[k] ? 'Ta couleur · ' + esc(s.colors[k].toUpperCase()) : 'Celle du thème'}</small>`}</div>
                 <p><button type="button" class="button small secondary" data-ms-treset="${k}">↺ Remettre ce cadre comme au départ</button></p></div>` : '';
             return `<div class="ms-tile-row${open ? ' is-open' : ''}${on ? '' : ' is-off'}" data-k="${k}"><span class="ms-tr-ico" aria-hidden="true">${esc(icon)}</span><span class="ms-tr-t"><b>${esc(name)}</b>${cu ? `<small>${esc(K[1])}</small>` : ''}${warn}</span><span class="ms-sp"></span>
@@ -1377,6 +1378,7 @@
             if (t.dataset.msBool) { const k = t.dataset.msBool; if (k === 'useCode' && t.checked && !read().codeHash) { t.checked = false; const first = $('[data-ms-codein] input', box); first?.focus(); toast('Tape d’abord les 4 chiffres du code, juste en dessous.'); return; } change(st => { st[k] = t.checked; if (k === 'baseAll' && !t.checked) lsSet(LOCAL, {...st, baseAll: false}); }, true); return; }
             if (t.dataset.msLink) { change(st => { st.link[t.dataset.msLink] = t.checked; }, true); return; }
             if (t.dataset.msSel) { change(st => { st[t.dataset.msSel] = t.value; }, true); return; }
+            if (t.dataset.msTiconIn) { const k = t.dataset.msTiconIn, v = t.value; if (TILE_ICONS.includes(v)) change(st => { st.tx[k] = {...(st.tx[k] || {}), icon: v}; }, true); return; } // L4 : la grille d'icônes
             if (t.dataset.msTile) { const k = t.dataset.msTile; if (!t.checked && read().tiles.filter(x => x[1]).length <= 1) { t.checked = true; toast('Il faut garder au moins un gros bouton.'); return; } change(st => { st.tiles = st.tiles.map(x => (x[0] === k ? [k, t.checked] : x)); }, true); return; }
             if (t.dataset.msTplace) { const k = t.dataset.msTplace; change(st => { st.tx[k] = {...(st.tx[k] || {}), place: t.value}; }, true); return; }
             if (t.dataset.msTtel) { const k = t.dataset.msTtel; change(st => { st.tx[k] = {...(st.tx[k] || {}), tel: t.value}; }, true); return; }

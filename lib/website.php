@@ -462,9 +462,10 @@ function save_website_version(PDO $pdo, array $data): array
     $json = json_encode($clean, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if ($json === false || strlen($json) > SITE_MAX) { throw new LcndaBadInput('Version trop lourde.'); }
     $label = mb_substr(safe_text($data['label'] ?? ''), 0, 120) ?: (empty($data['auto']) ? 'Version du ' . date('d/m/Y à H:i') : 'Enregistrement automatique');
-    $pdo->prepare('INSERT INTO website_versions(site_id, label, data_json, auto) VALUES(?,?,?,?)')->execute([$siteId, $label, $json, empty($data['auto']) ? 0 : 1]);
+    [$keepId, $keepAt] = versions_keep_identity($pdo, 'website_versions', $data);
+    $pdo->prepare('INSERT INTO website_versions(id, site_id, label, data_json, auto, created_at) VALUES(?,?,?,?,?,COALESCE(?,CURRENT_TIMESTAMP))')->execute([$keepId, $siteId, $label, $json, empty($data['auto']) ? 0 : 1, $keepAt]);
     $vid = (int) $pdo->lastInsertId();
-    $pdo->prepare('DELETE FROM website_versions WHERE site_id=? AND id NOT IN (SELECT id FROM website_versions WHERE site_id=? ORDER BY id DESC LIMIT ' . SITE_VERSIONS_MAX . ')')->execute([$siteId, $siteId]);
+    $pdo->prepare('DELETE FROM website_versions WHERE site_id=? AND auto=1 AND id NOT IN (SELECT id FROM website_versions WHERE site_id=? ORDER BY id DESC LIMIT ' . SITE_VERSIONS_MAX . ')')->execute([$siteId, $siteId]);
     return ['id' => $vid, 'label' => $label];
 }
 
@@ -480,7 +481,7 @@ function restore_website_version(PDO $pdo, array $data): array
 {
     website_ready($pdo);
     $v = is_array($data['version'] ?? null) ? $data['version'] : [];
-    return save_website_version($pdo, ['site_id' => $v['site_id'] ?? 0, 'label' => $v['label'] ?? '', 'data' => $v['data'] ?? null, 'auto' => !empty($v['auto'])]);
+    return save_website_version($pdo, ['site_id' => $v['site_id'] ?? 0, 'label' => $v['label'] ?? '', 'data' => $v['data'] ?? null, 'auto' => !empty($v['auto']), 'restore_id' => $v['id'] ?? 0, 'created_at' => $v['created_at'] ?? null]);
 }
 
 /** L3 ✎ Renommer une version du site (elle devient « nommée ») */

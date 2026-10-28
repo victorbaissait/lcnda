@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 69;
+const SCHEMA_VERSION = 70;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -90,6 +90,7 @@ function migration_steps(): array
         67 => 'schema_v67',
         68 => 'schema_v68',
         69 => 'schema_v69',
+        70 => 'schema_v70',
     ];
 }
 
@@ -2369,4 +2370,13 @@ function schema_v69(PDO $pdo): void
     if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='event_witnesses'")->fetchColumn()) { return; }
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_event_witnesses_event ON event_witnesses(event_id)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_event_witnesses_person ON event_witnesses(person_id)');
+}
+
+/** 70 : versions « automatiques » ou nommées (L3) — la colonne auto, ajoutée ici et non pendant une lecture (consultation). */
+function schema_v70(PDO $pdo): void
+{
+    foreach (['text_document_versions', 'website_versions'] as $t) {
+        if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$t'")->fetchColumn()) { continue; }
+        if (!$pdo->query("SELECT 1 FROM pragma_table_info('$t') WHERE name='auto'")->fetchColumn()) { $pdo->exec("ALTER TABLE $t ADD COLUMN auto INTEGER NOT NULL DEFAULT 0"); }
+    }
 }

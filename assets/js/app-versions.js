@@ -71,7 +71,7 @@
 
     const when = d => (UI.when ? UI.when(d) : esc(d || ''));
     const badge = (t, k, o) => (UI.badge ? UI.badge(t, k, o) : `<span class="ui-badge">${esc(t)}</span>`);
-    const spin = t => (UI.spinner ? UI.spinner(t) : `<div class="ui-spinner" role="status">${esc(t)}</div>`);
+    const spin = t => (UI.spinner ? UI.spinner(t) : esc(t)); // C7 : le rond commun (app-ui.js est chargé avant)
     const clock = s => (UI.clock ? UI.clock(s) : `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`);
 
     /* ═════ La fenêtre ═════ */
@@ -255,7 +255,7 @@
                 let undone = false;
                 const t = A().undoToast ? A().undoToast(`Version « ${v.label} » supprimée`, {undo: r.undo || r.commit ? async () => { undone = true; await r.undo?.(); if (!closed) await changed(); } : null}) : toast(`Version « ${v.label} » supprimée.`);
                 if (r.commit) { // la suppression pour de bon, quand le message est parti sans « Annuler »
-                    let done = false; const go = () => { if (done || undone) return; done = true; Promise.resolve(r.commit()).then(() => { if (!closed) changed(); }).catch(e => toast(e.message || String(e), 'error')); };
+                    let done = false; const go = () => { removeEventListener('pagehide', go); if (done || undone) return; done = true; Promise.resolve(r.commit()).then(() => { if (!closed) changed(); }).catch(e => toast(e.message || String(e), 'error')); };
                     // le message part (« is-leaving ») : après « ↶ Annuler », undone est déjà vrai
                     if (t?.classList) { const mo = new MutationObserver(() => { if (t.classList.contains('is-leaving')) { mo.disconnect(); setTimeout(go, 0); } }); mo.observe(t, {attributes: true, attributeFilter: ['class']}); }
                     else setTimeout(go, 6500);

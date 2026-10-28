@@ -133,11 +133,12 @@
 
     /* ═════════ « ＋ Créer une sorte de fiche » : un type à soi (ses champs, ou ceux d'un autre type) ═════════ */
     const ICONS = ['🎠', '🎭', '🗿', '🏺', '📷', '🎪', '🪆', '🧵', '🪵', '⚒️', '🎻', '🎺', '🏆', '💡', '🔭', '📰', '🗳', '⚽', '🧭', '🎨', '✦'];
+    window.LCNDA_UI?.registerIconSet?.('ar-types', {items: ICONS.map(g => ({v: g, g, grp: 'ar'})), groups: [{id: 'ar', label: 'Proposées', icon: '⭐'}], emoji: true, title: 'Icône de la sorte'}); // L4
     ART.newTypeDialog = (C, {key = ''} = {}) => {
         const types = Object.values(ART.defs).filter(d => d.key !== 'profile'), cur = key ? ART.defs[key] : null;
         ext.openDialog({eyebrow: 'CATALOGUE', title: cur ? `✎ La sorte « ${cur.label} »` : '＋ Créer une sorte de fiche', submitLabel: cur ? 'Enregistrer' : 'Créer la sorte',
             body: `<div class="form-grid"><label>Nom<input name="label" required maxlength="80" value="${esc(cur?.label || '')}" placeholder="Char de carnaval, Sculpture, Affiche…"></label><label>Au pluriel<input name="many" maxlength="80" value="${esc(cur?.many || '')}"></label>
-                <div class="span-2"><span class="pk-lab">Icône</span><div class="ar-icons">${ICONS.map(i => `<label><input type="radio" name="icon" value="${i}" ${(cur?.icon || '✦') === i ? 'checked' : ''}><span>${i}</span></label>`).join('')}</div></div>
+                <div class="span-2"><span class="pk-lab">Icône</span>${window.LCNDA_UI?.iconFieldHtml ? window.LCNDA_UI.iconFieldHtml({name: 'icon', set: 'ar-types', value: cur?.icon || '✦', allowNone: false}) : `<div class="ar-icons">${ICONS.map(i => `<label><input type="radio" name="icon" value="${i}" ${(cur?.icon || '✦') === i ? 'checked' : ''}><span>${i}</span></label>`).join('')}</div>`}</div>
                 <label>Famille<select name="domain">${ART.DOMAINS.map(([k, l]) => `<option value="${k}" ${(cur?.domain || 'autre') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 ${cur ? '' : `<label>Partir de…<select name="from"><option value="">Rien (titre, date, photos, notes)</option>${types.map(d => `<option value="${esc(d.key)}">${esc(d.icon)} ${esc(d.label)} (ses champs)</option>`).join('')}</select></label>`}</div>
                 <p class="muted">Ensuite, « ⚙️ Champs affichés » : ajoute tes champs (texte, date, période, personne + rôle, lieu, fiche liée, image, tableau…), range-les, cache-les.</p>`,

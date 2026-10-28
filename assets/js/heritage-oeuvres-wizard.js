@@ -18,6 +18,7 @@
     const short = t => tile(t).replace(/\s*\(.*\)$/, '');
     OE.WIZ_SORTS = SORTS;
     const ICONS = ['🎠', '🎭', '🎉', '🚜', '🎪', '🏵', '🪅', '🎈', '🌸', '🐉', '🛞', '🎊', '👑', '⭐', '🗿', '🏺', '📷', '🧵', '🪵', '⚒️', '🎻', '🏆', '💡', '🔭', '📰', '🧭', '🍷', '🧸', '🪆', '🏠', '⛵', '✦'];
+    window.LCNDA_UI?.registerIconSet?.('oe-types', {items: ICONS.map(g => ({v: g, g, grp: 'oe'})), groups: [{id: 'oe', label: 'Proposées', icon: '⭐'}], emoji: true, title: 'Icône du type'}); // L4
     const CALC = [['count', 'Nombre de lignes d’un tableau'], ['sum', 'Somme d’une colonne d’un tableau'], ['dur', 'Durée totale d’une colonne (2:58…)'], ['children', 'Nombre de fiches « parties »'], ['years', 'Années depuis une date']];
     const fkey = (label, taken) => { let b = U.slug(label); if (!/^[a-z_]/.test(b)) b = `f_${b}`; b = b.slice(0, 34); let k = b, i = 2; while (taken.has(k) || ['title', 'date', 'photos', 'notes', '_linked'].includes(k) && taken.has(k)) k = `${b}_${i++}`; return k; };
 
@@ -98,7 +99,7 @@
         /* — étape 1 — */
         const step1 = () => `<div class="oe-w1"><label class="oe-fld">Nom du type<input data-w="label" maxlength="80" value="${esc(W.label)}" placeholder="Char de carnaval, Sabot sculpté…" required></label>
             <label class="oe-fld">Au pluriel<input data-w="many" maxlength="80" value="${esc(W.many)}" placeholder="${esc(W.label ? `${W.label}s` : 'Chars de carnaval')}"></label>
-            <div class="oe-fld"><span>Icône</span><div class="oe-icg">${ICONS.map(i => `<button type="button" class="${W.icon === i ? 'on' : ''}" data-w-icon="${i}">${i}</button>`).join('')}<input data-w="icon" maxlength="4" value="${ICONS.includes(W.icon) ? '' : esc(W.icon)}" placeholder="＋" title="Une autre icône (colle un emoji)" aria-label="Une autre icône"></div></div>
+            <div class="oe-fld"><span>Icône</span>${window.LCNDA_UI?.iconFieldHtml ? window.LCNDA_UI.iconFieldHtml({set: 'oe-types', value: W.icon || '✦', allowNone: false, attrs: 'data-w="icon" aria-label="Icône du type"'}) : `<div class="oe-icg">${ICONS.map(i => `<button type="button" class="${W.icon === i ? 'on' : ''}" data-w-icon="${i}">${i}</button>`).join('')}<input data-w="icon" maxlength="4" value="${ICONS.includes(W.icon) ? '' : esc(W.icon)}" placeholder="＋" title="Une autre icône (colle un emoji)" aria-label="Une autre icône"></div>`}</div>
             <label class="oe-fld">Famille<select data-w="family">${OE.FAMILIES.map(f => `<option value="${f.key}" ${W.family === f.key ? 'selected' : ''}>${esc(f.icon)} ${esc(f.label)}</option>`).join('')}</select></label>
             ${cur ? '' : `<div class="oe-fld"><span>Partir de…</span><label class="checkbox-line"><input type="radio" name="oe-from" value="" ${W.from ? '' : 'checked'}> Rien (titre, date, photos)</label><label class="checkbox-line"><input type="radio" name="oe-from" value="x" ${W.from ? 'checked' : ''}> Un type existant :
                 <select data-w="from">${['', ...Object.keys(ART.defs)].filter(k => !k || (!ART.defs[k].hidden && k !== 'profile' && !k.startsWith('profile') && k !== '_oe_preview')).map(k => `<option value="${esc(k)}" ${W.from === k ? 'selected' : ''}>${k ? `${esc(ART.defs[k].icon)} ${esc(ART.defs[k].label)}` : '— choisir —'}</option>`).join('')}</select></label></div>`}

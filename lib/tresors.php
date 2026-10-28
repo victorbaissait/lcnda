@@ -157,6 +157,15 @@ function tresor_tree(PDO $pdo): array
         $hid = tresor_hidden_people($pdo);
         $people = array_diff_key($people, $hid);
         $events = array_values(array_filter($events, static fn($e) => !isset($hid[(int) ($e['p'] ?? 0)])));
+        // plus aucun numéro de personne cachée : parents, couples, enfants, et les événements d'un couple dont l'un est caché
+        foreach ($people as $id => $pp) { foreach (['father', 'mother'] as $k) { if ($pp[$k] !== null && !isset($people[$pp[$k]])) { $people[$id][$k] = null; } } }
+        $hiddenFam = [];
+        foreach ($families as $fid => $f) {
+            foreach (['a', 'b'] as $k) { if ($f[$k] !== null && !isset($people[$f[$k]])) { $families[$fid][$k] = null; $hiddenFam[$fid] = true; } }
+            if (!empty($f['children'])) { $families[$fid]['children'] = array_values(array_filter($f['children'], static fn($c) => isset($people[$c]))); }
+            if (isset($hiddenFam[$fid])) { $families[$fid]['my'] = null; $families[$fid]['md'] = null; $families[$fid]['mplace'] = null; }
+        }
+        $events = array_values(array_filter($events, static fn($e) => !isset($hiddenFam[(int) ($e['f'] ?? 0)])));
     }
     return ['people' => array_values($people), 'families' => array_values($families), 'places' => (object) $places, 'events' => $events];
 }
@@ -293,8 +302,8 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
         if (!$isWrite && $action === 'tresor_signatures') { // le mur des signatures : chaque zone marquée « signature » sur un document
             $hasType = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('media_tags') WHERE name='tag_type'")->fetchColumn();
             if (!$hasType) { json_response(['signatures' => []]); }
-            $out = [];
-            foreach ($pdo->query("SELECT t.media_id, t.person_id, t.x, t.y, t.w, t.h, m.filename, m.date_text, m.title FROM media_tags t JOIN media m ON m.id=t.media_id WHERE t.tag_type='signature' AND m.media_type='image' ORDER BY t.id LIMIT 3000") as $r) {
+            $out = []; $hid = tresor_hidden_people($pdo); // consultation : ni vivants ni fiches confidentielles, ni lettres encore scellées
+            foreach ($pdo->query("SELECT t.media_id, t.person_id, t.x, t.y, t.w, t.h, m.filename, m.date_text, m.title FROM media_tags t JOIN media m ON m.id=t.media_id WHERE t.tag_type='signature' AND m.media_type='image'" . sealed_media_sql($pdo) . " ORDER BY t.id LIMIT 3000") as $r) {
                 if (isset($hid[(int) $r['person_id']])) { continue; }
                 $out[] = ['media_id' => (int) $r['media_id'], 'person_id' => (int) $r['person_id'], 'x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h'],
                     'filename' => (string) $r['filename'], 'title' => (string) $r['title'], 'year' => preg_match('/\b(1[0-9]{3}|20[0-9]{2})\b/', (string) $r['date_text'] . ' ' . $r['title'], $m) ? (int) $m[1] : null];
@@ -304,7 +313,7 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
         if (!$isWrite && $action === 'tresor_faces') { // le visage de la lignée, la mosaïque : les visages encadrés dans la visionneuse
             $hasType = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('media_tags') WHERE name='tag_type'")->fetchColumn();
             $out = []; $hid = tresor_hidden_people($pdo);
-            foreach ($pdo->query('SELECT t.media_id, t.person_id, t.x, t.y, t.w, t.h, m.filename FROM media_tags t JOIN media m ON m.id=t.media_id WHERE m.media_type=\'image\' AND t.w>0 AND t.h>0' . ($hasType ? " AND COALESCE(t.tag_type,'person')<>'signature'" : '') . ' ORDER BY t.id LIMIT 5000') as $r) {
+            foreach ($pdo->query('SELECT t.media_id, t.person_id, t.x, t.y, t.w, t.h, m.filename FROM media_tags t JOIN media m ON m.id=t.media_id WHERE m.media_type=\'image\' AND t.w>0 AND t.h>0' . ($hasType ? " AND COALESCE(t.tag_type,'person')<>'signature'" : '') . sealed_media_sql($pdo) . ' ORDER BY t.id LIMIT 5000') as $r) {
                 if (isset($hid[(int) $r['person_id']])) { continue; }
                 $out[] = ['media_id' => (int) $r['media_id'], 'person_id' => (int) $r['person_id'], 'x' => (float) $r['x'], 'y' => (float) $r['y'], 'w' => (float) $r['w'], 'h' => (float) $r['h'], 'filename' => (string) $r['filename']];
             }

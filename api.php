@@ -6940,7 +6940,8 @@ function backup_sqlite(PDO $pdo, array $data): never
     $kiosk = !empty($data['_kiosk']); // mode consultation (api.php)
     if ($kiosk) {
         foreach (backup_files($dir) as $file) {
-            if (str_ends_with($file['name'], '-auto.db') && is_file($file['path']) && time() - filemtime($file['path']) < 1800) {
+            // une copie toutes les 30 min au plus, et aucune si la base n'a pas changé depuis la dernière copie automatique
+            if (str_ends_with($file['name'], '-auto.db') && is_file($file['path']) && (time() - filemtime($file['path']) < 1800 || filemtime($file['path']) >= (int) @filemtime(DB_PATH))) {
                 json_response(['ok' => true, 'skipped' => true, 'file' => $file['name'], 'dir' => $dir, 'deleted' => [], 'created_at' => date('c', filemtime($file['path']))]);
             }
         }
@@ -6954,7 +6955,9 @@ function backup_sqlite(PDO $pdo, array $data): never
     $deleted = [];
     // Les copies faites avant une mise à jour de structure (« -migration- ») ou un nettoyage ne sont jamais supprimées ici.
     $rotating = array_values(array_filter($files, static fn($file) => !str_contains($file['name'], '-migration-') && !str_contains($file['name'], '-avant-nettoyage') && !str_contains($file['name'], '-avant-fusion')));
-    foreach ($kiosk ? [] : array_slice($rotating, $maxFiles) as $file) { // en consultation, rien n'est effacé
+    // en consultation : seules les copies automatiques tournent (10 gardées, réglé ici et non par le visiteur) ; les copies faites à la main restent
+    $toDelete = $kiosk ? array_slice(array_values(array_filter($rotating, static fn($f) => str_ends_with($f['name'], '-auto.db'))), 10) : array_slice($rotating, $maxFiles);
+    foreach ($toDelete as $file) {
         if (is_file($file['path']) && @unlink($file['path'])) {
             $deleted[] = $file['name'];
         }
