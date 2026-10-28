@@ -876,8 +876,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 /* Distributions : critères en plus, réglages par défaut, barres cliquables */
 .stats-rules { display: flex; flex-direction: column; gap: 6px; margin: 10px 0 4px; max-width: 980px; }
 .stats-rules .h-lr-row { flex-wrap: wrap; }
-.stats-addrule { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-.stats-addrule select { max-width: 360px; }
+.stats-addrule { display: flex; align-items: center; gap: 8px; font-weight: 600; flex-wrap: wrap; min-width: 0; }
+.stats-addrule select { max-width: min(360px, 100%); min-width: 0; }
 .stats-defaults { margin: 10px 0 0; max-width: 980px; }
 .stats-defaults summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--muted, #666); }
 .stats-defaults p { margin: 6px 0; }
@@ -4700,6 +4700,9 @@ html:not(.show-event-ics) .event-ics-btn { display: none; }
 @media (max-width: 900px) { .lcf-grid { grid-template-columns: 1fr; } .lcf-grid > div:first-child { padding-right: 0; } .lcf-grid > div + div { border-left: 0; border-top: var(--line); padding-left: 0; margin-top: 14px; } .lcf-mini { grid-template-columns: 80px 1fr; } }
 @media (max-width: 480px) { .lcf-where { grid-template-columns: 1fr; } .lcf-content { grid-template-columns: 1fr; } .lcf-c:nth-child(n+4) { display: none; } }
 
+/* 🎲 Jeu de l'oie en sombre : « goose-page » ressemble à une page de papier pour build-dark-css.py, le texte restait noir */
+:root[data-theme="dark"] .goose-page{color:#ececec}
+:root[data-theme="dark"] .goose-cell.is-start{background:#000;color:#fff}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}
@@ -5035,4 +5038,9 @@ html:not(.show-event-ics) .event-ics-btn { display: none; }
 :root[data-theme="dark"] .lck-ms.soft i{border-bottom:1px solid #4c4c4c}
 :root[data-theme="dark"] .lck-ms.soft .s{background:#18253c}
 :root[data-theme="dark"] .lck-ml i{background:#282a2f}
+:root[data-theme="dark"] .lcf-th{background:#272720}
+:root[data-theme="dark"] .lcf-veil{background:rgba(39,39,32,0.55)}
+:root[data-theme="dark"] .lcf-th i{background:#212121}
+:root[data-theme="dark"] .lcf-pill.is-def{background:#524818;color:#f0f0f0}
+:root[data-theme="dark"] .lcf-mini{background:#212121;color:#f0f0f0}
 /* ═════ fin du mode sombre automatique ═════ */

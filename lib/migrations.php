@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 68;
+const SCHEMA_VERSION = 69;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -89,6 +89,7 @@ function migration_steps(): array
         66 => 'schema_v66',
         67 => 'schema_v67',
         68 => 'schema_v68',
+        69 => 'schema_v69',
     ];
 }
 
@@ -2360,4 +2361,12 @@ function schema_v68(PDO $pdo): void
     if ($hasMem && !$pdo->query("SELECT 1 FROM pragma_table_info('family_memories') WHERE name='data_json'")->fetchColumn()) {
         $pdo->exec("ALTER TABLE family_memories ADD COLUMN data_json TEXT NOT NULL DEFAULT '{}'");
     }
+}
+
+/** 69 : index des témoins (le tableau de bord et le Suivi passaient de 7 s à 0,02 s sur 5 000 personnes). */
+function schema_v69(PDO $pdo): void
+{
+    if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='event_witnesses'")->fetchColumn()) { return; }
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_event_witnesses_event ON event_witnesses(event_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_event_witnesses_person ON event_witnesses(person_id)');
 }

@@ -152,7 +152,8 @@ try {
         if (kiosk_state()['on'] && (($payload['mode'] ?? '') !== 'auto' || normalize_backup_dir(safe_text($payload['dir'] ?? '')) !== normalize_backup_dir(''))) {
             json_response(['error' => 'Mode consultation : pas de copie de la base vers un autre dossier.', 'kiosk' => true], 423);
         }
-        backup_sqlite($pdo, $payload);
+        // un visiteur ne choisit ni le nombre de copies gardées ni le rythme : aucune copie effacée, une copie toutes les 30 min au plus
+        backup_sqlite($pdo, kiosk_state()['on'] ? ['mode' => 'auto', 'dir' => '', '_kiosk' => true] : $payload);
     }
     if ($isWrite && $action === 'clone_database') {
         clone_database($pdo, $payload);
@@ -1050,7 +1051,7 @@ function dashboard_baptisms_without_sponsors(PDO $pdo): array
         JOIN event_types t ON t.id=e.event_type_id
         LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN places pl ON pl.id=e.place_id
-        WHERE t.gedcom_tag IN ('CHR','BAPM') AND NOT EXISTS(SELECT 1 FROM event_witnesses ew JOIN persons wp ON wp.id=ew.person_id WHERE ew.event_id=e.id)
+        WHERE t.gedcom_tag IN ('CHR','BAPM') AND NOT EXISTS(SELECT 1 FROM event_witnesses ew WHERE ew.event_id=e.id AND ew.person_id IN (SELECT id FROM persons))
         ORDER BY COALESCE(e.updated_at,e.created_at) DESC,e.id DESC
         LIMIT 80")->fetchAll();
 }
@@ -6920,6 +6921,14 @@ function backup_sqlite(PDO $pdo, array $data): never
         throw new RuntimeException('Fichier de base introuvable');
     }
 
+    $kiosk = !empty($data['_kiosk']); // mode consultation (api.php)
+    if ($kiosk) {
+        foreach (backup_files($dir) as $file) {
+            if (str_ends_with($file['name'], '-auto.db') && is_file($file['path']) && time() - filemtime($file['path']) < 1800) {
+                json_response(['ok' => true, 'skipped' => true, 'file' => $file['name'], 'dir' => $dir, 'deleted' => [], 'created_at' => date('c', filemtime($file['path']))]);
+            }
+        }
+    }
     $pdo->exec('PRAGMA wal_checkpoint(FULL)');
     $filename = 'genealogie-backup-' . date('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '-' . $mode . '.db';
     $target = $dir . '/' . $filename;
@@ -6929,7 +6938,7 @@ function backup_sqlite(PDO $pdo, array $data): never
     $deleted = [];
     // Les copies faites avant une mise à jour de structure (« -migration- ») ou un nettoyage ne sont jamais supprimées ici.
     $rotating = array_values(array_filter($files, static fn($file) => !str_contains($file['name'], '-migration-') && !str_contains($file['name'], '-avant-nettoyage') && !str_contains($file['name'], '-avant-fusion')));
-    foreach (array_slice($rotating, $maxFiles) as $file) {
+    foreach ($kiosk ? [] : array_slice($rotating, $maxFiles) as $file) { // en consultation, rien n'est effacé
         if (is_file($file['path']) && @unlink($file['path'])) {
             $deleted[] = $file['name'];
         }
