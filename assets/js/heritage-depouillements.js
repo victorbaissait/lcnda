@@ -258,7 +258,8 @@
         body.querySelector('[data-dp-moveimg]')?.addEventListener('change', async e => {
             try { const n = await pageFromSelect(e.target.value); if (n === null || n === p.number) { e.target.value = p.number; return; } await post('link_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id, page_number: n}); toast(n ? `Photo déplacée en page ${n}.` : 'Photo mise « à ranger ».'); s.image = 0; await reload(); } catch (err) { toast(err.message, 'error'); }
         });
-        body.querySelector('[data-dp-unlink]')?.addEventListener('click', async () => { if (!await A().confirmBox('Retirer cette photo du dépouillement ? Elle reste dans Médias.', {title: 'Retirer la photo', okLabel: 'Retirer la photo'})) return; await post('unlink_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id}); s.image = 0; toast('Photo retirée du dépouillement.'); reload(); });
+        body.querySelector('[data-dp-unlink]')?.addEventListener('click', async () => { try { await post('unlink_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id}); } catch (e) { return toast(e.message, 'error'); } // H7 : pas de question, « ↶ Annuler »
+            const was = s.image; s.image = 0; reload(); A().undoToast('Photo retirée du dépouillement (elle reste dans Médias).', {undo: async () => { await post('link_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id, page_number: cur.page_number || ''}); s.image = was; reload(); }}); });
         // fiche de la page, enregistrée au fil de la saisie
         const saved = body.querySelector('[data-dp-saved]'); let timer = 0;
         const savePage = async () => {

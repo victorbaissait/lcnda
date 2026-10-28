@@ -387,7 +387,8 @@
         }}));
         body.querySelector('[data-rc-role]')?.addEventListener('click', () => run('update_recueil_image', {id: cur.id, role: cur.role === 'detail' ? 'page' : 'detail'}));
         body.querySelector('[data-rc-moveimg]')?.addEventListener('change', async e => { const t = await pageTarget(e.target.value); if (!t || t.page_id === p.id) { e.target.value = String(p.id); return; } const r = await run('update_recueil_image', {id: cur.id, ...t}, t.page_id === 0 ? 'Photo mise « à ranger ».' : 'Photo déplacée.'); if (r) { s.image = 0; paint(); } });
-        body.querySelector('[data-rc-remove]')?.addEventListener('click', async () => { if (await A().confirmBox('Retirer cette photo du recueil ? Elle reste dans Médias.', {title: 'Retirer la photo', okLabel: 'Retirer la photo'})) { s.image = 0; run('remove_recueil_image', {id: cur.id}, 'Photo retirée du recueil.'); } });
+        body.querySelector('[data-rc-remove]')?.addEventListener('click', async () => { const was = s.image; s.image = 0; const r = await run('remove_recueil_image', {id: cur.id}); // H7 : pas de question, « ↶ Annuler »
+            if (r?.restore) A().undoToast('Photo retirée du recueil (elle reste dans Médias).', {undo: async () => { await post('restore_recueil_image', r.restore); s.image = was; await reload(); }}); });
         body.querySelectorAll('[data-rc-addhere]').forEach(b => b.addEventListener('click', () => addPhotosDialog({pageId: p.id})));
         body.querySelectorAll('[data-rc-pagemove]').forEach(b => b.addEventListener('click', () => run('save_recueil_page', {id: p.id, move: Number(b.dataset.rcPagemove)})));
         const stepImg = d => { if (imgs.length < 2 || !cur) return; const i = imgs.indexOf(cur); s.image = imgs[(i + d + imgs.length) % imgs.length].id; s.compare = 0; paint(); };
@@ -665,11 +666,12 @@
     function paintLinks(body) {
         body.innerHTML = `<p class="muted">Rattache tout le recueil, ou seulement quelques pages, à une fiche, un village, une enquête, un projet de l’Atelier ou une battue. Le recueil y apparaît, avec les pages concernées.</p>
             ${D.links.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Rattaché à</th><th>Sorte</th><th>Pages</th><th>Note</th><th></th></tr></thead><tbody>${D.links.map(l => `<tr><td>${linkLabel(l)}</td><td>${esc(l.type_label)}</td><td>${esc(linkPages(l))}</td><td>${esc(l.note)}</td>
-                <td class="h-rc-actions"><button type="button" class="button small secondary" data-rc-ledit="${l.id}">Modifier</button><button type="button" class="icon-button danger" data-rc-ldel="${l.id}" title="Détacher">🗑</button></td></tr>`).join('')}</tbody></table></div>` : A().empty('Rattaché à rien pour l’instant.')}
+                <td class="h-rc-actions"><button type="button" class="button small secondary" data-rc-ledit="${l.id}">Modifier</button><button type="button" class="icon-button danger" data-rc-ldel="${l.id}" title="Retirer">🗑</button></td></tr>`).join('')}</tbody></table></div>` : A().empty('Rattaché à rien pour l’instant.')}
             <button type="button" class="button" data-rc-lnew>🔗 Relier</button>`;
         body.querySelector('[data-rc-lnew]').addEventListener('click', () => linkDialog(null));
         body.querySelectorAll('[data-rc-ledit]').forEach(b => b.addEventListener('click', () => linkDialog(D.links.find(l => l.id === Number(b.dataset.rcLedit)))));
-        body.querySelectorAll('[data-rc-ldel]').forEach(b => b.addEventListener('click', async () => { if (await A().confirmBox('Détacher ce lien du recueil ?', {title: 'Détacher', okLabel: 'Détacher'})) run('delete_recueil_link', {id: Number(b.dataset.rcLdel)}, 'Détaché.'); }));
+        body.querySelectorAll('[data-rc-ldel]').forEach(b => b.addEventListener('click', async () => { const r = await run('delete_recueil_link', {id: Number(b.dataset.rcLdel)}); // H7 : « ↶ Annuler »
+            if (r?.restore) A().undoToast('Lien retiré du recueil.', {undo: async () => { await post('save_recueil_link', r.restore); await reload(); }}); }));
         bindEntityOpen(body);
         A().bindTableLinks?.();
     }
@@ -802,7 +804,7 @@
         return `<div class="h-rc-for">${rows.map(r => `<div class="h-rc-for-item"><div class="h-rc-for-head"><button type="button" class="table-link" data-open-recueil="${r.recueil_id}"><strong>${esc(r.icon || '📚')} ${esc(r.title)}</strong></button>
                 <small class="muted">${r.from_num ? (r.to_num && r.to_num !== r.from_num ? `pages ${r.from_num} à ${r.to_num}` : `page ${r.from_num}`) : `tout le recueil (${r.total_pages} p.)`} · ${r.transcribed}/${r.pages} ${r.transcribed > 1 ? 'transcrites' : 'transcrite'}${r.reference ? ' · ' + esc(r.reference) : ''}</small>
                 ${place ? `<label class="h-rc-for-move" title="Le laisser visible dans tous les dossiers, ou le ranger dans un seul">Déplacer vers<select data-rc-linkmove="${r.link_id}">${folderOptions(place.folders, r.folder_id)}</select></label>` : ''}
-                <button type="button" class="icon-button" data-rc-unlink="${r.link_id}" title="Détacher">✕</button></div>
+                <button type="button" class="icon-button" data-rc-unlink="${r.link_id}" title="Retirer">✕</button></div>
                 ${r.note ? `<p class="muted">${esc(r.note)}</p>` : ''}
                 <div class="h-rc-for-strip">${r.thumbs.map(t => `<button type="button" class="h-rc-thumb" data-open-recueil="${r.recueil_id}" data-recueil-page="${t.page_id}" title="${esc(t.label || 'Page ' + t.num)}">${t.thumbnail ? `<img src="media/${encodeURIComponent(t.thumbnail)}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">—</span>'}<small>${t.num}</small></button>`).join('')}${r.pages > r.thumbs.length ? `<button type="button" class="h-rc-thumb h-rc-more" data-open-recueil="${r.recueil_id}">+${r.pages - r.thumbs.length}</button>` : ''}</div></div>`).join('')}
             <button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">🔗 Relier un recueil</button></div>`;
@@ -854,7 +856,8 @@
     ext.refreshRecueilHosts = () => document.querySelectorAll('[data-rc-host][data-rc-filled]').forEach(box => ext.recueilsSection(box, box.dataset.rcType, box.dataset.rcKey, {title: box.dataset.rcTitle || '📚 Recueils', hideEmpty: box.dataset.rcHideEmpty !== undefined}));
     function bindFor(root, after, place = null) {
         root.querySelectorAll('[data-rc-attach]').forEach(b => b.addEventListener('click', () => { const [type, ...k] = b.dataset.rcAttach.split(':'); ext.recueilAttachDialog(type, k.join(':'), after, place ? {folderId: place.folder, folders: place.folders} : {}); }));
-        root.querySelectorAll('[data-rc-unlink]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Détacher ce recueil ?', {title: 'Détacher le recueil', okLabel: 'Détacher'})) return; await post('delete_recueil_link', {id: Number(b.dataset.rcUnlink)}); toast('Détaché.'); after?.(); }));
+        root.querySelectorAll('[data-rc-unlink]').forEach(b => b.addEventListener('click', async () => { let r; try { r = await post('delete_recueil_link', {id: Number(b.dataset.rcUnlink)}); } catch (e) { return toast(e.message, 'error'); } // H7 : « ↶ Annuler »
+            const back = (r?.result || r)?.restore; after?.(); A().undoToast('Recueil retiré.', back ? {undo: async () => { await post('save_recueil_link', back); after?.(); }} : {}); }));
     }
     /** Toute case <div data-rc-host data-rc-type="village" data-rc-key="…"> posée par un écran se remplit seule. */
     const fillHosts = () => document.querySelectorAll('[data-rc-host]:not([data-rc-filled])').forEach(box => {

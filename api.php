@@ -9787,6 +9787,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_recueil_page' => delete_recueil_page($pdo,$data),
             'update_recueil_image' => update_recueil_image($pdo,$data),
             'remove_recueil_image' => remove_recueil_image($pdo,$data),
+            'restore_recueil_image' => restore_recueil_image($pdo,$data),
             'save_recueil_link' => save_recueil_link($pdo,$data),
             'delete_recueil_link' => delete_recueil_link($pdo,$data),
             'move_recueil_link' => move_recueil_link($pdo,$data),

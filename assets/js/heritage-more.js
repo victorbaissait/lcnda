@@ -2396,10 +2396,14 @@
             if (t.closest('[data-lv-media]')) { const r = rowOf(t.closest('[data-lv-key]')?.dataset.lvKey); if (r?.media) A().openLightbox([r.media], 0, true); return; }
             const b = t.closest('[data-lv-remove]'); if (!b) return;
             const el = b.closest('[data-lv-key]');
-            if (isFree && !await A().confirmBox('Supprimer cette ligne ?', {title: 'Supprimer la ligne', okLabel: 'Supprimer la ligne'})) return;
-            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: el.dataset.lvKey, included: -1}}); }
+            const key = el.dataset.lvKey, row = rowOf(key), at = data.rows.indexOf(row), atShown = shown.indexOf(row);
+            let res;
+            try { res = await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: key, included: -1}}); }
             catch (error) { return toast(error.message, 'error'); }
-            data.rows = data.rows.filter(r => r.key !== el.dataset.lvKey); shown = shown.filter(r => r.key !== el.dataset.lvKey); el.remove(); toast(isFree ? 'Ligne supprimée.' : 'Retirée de la liste.');
+            data.rows = data.rows.filter(r => r.key !== key); shown = shown.filter(r => r.key !== key); el.remove();
+            // H7 : plus de question avant, « ↶ Annuler » remet la ligne comme elle était (et ses cases si elle était écrite à la main)
+            const back = {list_id: id, row_key: key, included: Number(res?.was ?? 1) || 0, ...(isFree ? {values: res?.values || {}} : {})};
+            A().undoToast(isFree ? 'Ligne supprimée.' : 'Retirée de la liste.', {undo: async () => { await api('save_my_list_row', {}, {method: 'POST', body: back}); if (row && !data.rows.includes(row)) { data.rows.splice(Math.max(0, at), 0, row); if (atShown >= 0) shown.splice(atShown, 0, row); } paint(disp); }});
         });
         // Glisser une fiche d'une colonne à l'autre (mode « Colonnes à glisser »)
         let dragKey = '';

@@ -142,7 +142,8 @@
                 onOpen: d => d.querySelectorAll('[data-atw-new]').forEach(b => b.addEventListener('click', () => { const nw = {id: uid(), type: b.dataset.atwNew, cfg: {}}; list.push(nw); save(); d.close(); draw(); if (['dash', 'agenda'].includes(nw.type)) settingsDialog(nw, () => { save(); draw(); }, ctx); })), onSubmit: () => true});
             if (!w) { const it = e.target.closest('[data-atw-item]'); return; }
             const mv = e.target.closest('[data-atw-move]'); if (mv) { const i = list.indexOf(w), j = i + Number(mv.dataset.atwMove); if (j >= 0 && j < list.length) { [list[i], list[j]] = [list[j], list[i]]; save(); draw(); } return; }
-            if (e.target.closest('[data-atw-del]')) { if (await A().confirmBox('Retirer ce widget ?', {title: 'Retirer le widget', okLabel: 'Retirer'})) { list = list.filter(x => x !== w); setTimer(w.id, null); save(); draw(); } return; }
+            if (e.target.closest('[data-atw-del]')) { const at = list.indexOf(w); list = list.filter(x => x !== w); setTimer(w.id, null); save(); draw(); // H7 : « ↶ Annuler »
+                A().undoToast('Widget retiré.', {undo: () => { if (!list.includes(w)) list.splice(Math.min(at, list.length), 0, w); save(); draw(); }}); return; }
             if (e.target.closest('[data-atw-cfg]')) return settingsDialog(w, () => { save(); draw(); }, ctx);
             const item = e.target.closest('[data-atw-item]'); if (item) return ctx.openItem?.(Number(item.dataset.atwItem));
             const ag = e.target.closest('[data-atw-agenda]'); if (ag) { const [src, id] = ag.dataset.atwAgenda.split(':'); const it = agendaCache.data?.items.find(x => x.src === src && String(x.id) === id); if (it) ext.lists?.my_calendar_open?.(it); return; }
