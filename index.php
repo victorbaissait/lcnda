@@ -1175,8 +1175,6 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-texte-formats.js?v=3" defer></script>
 <script src="assets/js/app-lot-engine.js?v=2" defer></script>
 <script src="assets/js/app-saisies.js?v=1" defer></script>
-<script src="assets/js/app-icones.js?v=1" defer></script>
-<script src="assets/js/app-reglages-recherche.js?v=1" defer></script>
 <script src="assets/js/app-forms.js?v=3" defer></script>
 <script src="assets/js/app-mots.js?v=1" defer></script>
 <script src="assets/js/app-portraits.js?v=4" defer></script>
