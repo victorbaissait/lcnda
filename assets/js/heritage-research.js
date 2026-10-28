@@ -1162,7 +1162,7 @@
         const again = () => ext.maintenance.atelier(S().workspaceToken);
         const putProfile = (name, settings, at = -1) => { const l = profiles(), i = l.findIndex(x => x.name === name), it = {name, saved: new Date().toISOString(), settings}; if (i >= 0) l[i] = it; else if (at >= 0) l.splice(at, 0, it); else l.push(it); saveProfiles(l); };
         const frame = window.LCNDA_UI.presetsFrame({id: 'atelier', what: 'tous ces réglages (menu, sortes d’éléments, dossiers, plans)', quietApply: true,
-            list: () => profiles().map(x => ({name: String(x?.name || 'Sans nom'), date: [x?.saved ? new Date(x.saved).toLocaleDateString('fr-FR') : '', x?.from ? `reçus de ${x.from}` : ''].filter(Boolean).join(' · ')})),
+            list: () => profiles().map(x => ({name: String(x?.name || 'Sans nom'), date: [x?.saved ? new Date(x.saved).toISOString() : '', x?.from ? `reçus de ${x.from}` : ''].filter(Boolean).join(' · ')})),
             apply: async i => { const x = profiles()[i]; if (!await A().confirmBox(`Appliquer les réglages « ${x.name} » ?\n\nLes réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.`, {title: 'Appliquer des réglages', okLabel: 'Appliquer les réglages'})) return false; applyCfg(x.settings); toast(`Réglages « ${x.name} » appliqués.`); again(); return false; },
             save: name => putProfile(name, cleanCfg(readCfg())),
             replace: i => { const l = profiles(); l[i] = {...l[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(l); },

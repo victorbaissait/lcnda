@@ -459,7 +459,7 @@
         if (UI()?.rangeField && slot) { const r = UI().rangeField({label: 'Taille des tuiles', min: 64, max: 240, step: 4, value: Number(d.lSize) || 112, unit: 'px', default: 112}); slot.appendChild(r); const inp = r.input || r.querySelector('input[type=range]'); inp?.addEventListener('input', () => { d.lSize = Number(inp.value) || 112; show(); }); }
         else if (slot) { slot.innerHTML = `<label>Taille des tuiles <input type="range" min="64" max="240" step="4" value="${Number(d.lSize) || 112}" data-sc-opt="lSize"></label>`; }
         // 💾 Réglages enregistrés
-        const pput = (name, data, at = -1) => { const l = presets(), i = l.findIndex(p => p.name === name), row = {name, date: new Date().toLocaleDateString('fr-FR'), data}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); savePresets(l); };
+        const pput = (name, data, at = -1) => { const l = presets(), i = l.findIndex(p => p.name === name), row = {name, date: new Date().toISOString(), data}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); savePresets(l); };
         const frame = window.LCNDA_UI?.presetsFrame?.({id: SETTING_TOOL, what: 'ces raccourcis (leur ordre, leurs icônes et couleurs) et leur disposition',
             list: () => presets().map(p => ({name: p.name, date: [p.date, plural((p.data.links || []).length, 'raccourci')].filter(Boolean).join(' · ')})),
             apply: i => { applyPreset(d, presets()[i].data); redraw(); },
@@ -469,7 +469,7 @@
             duplicate: i => { const l = presets(), p = l[i], nm = UI().freeName(p.name, l.map(x => x.name)); pput(nm, JSON.parse(JSON.stringify(p.data)), i + 1); toast(`Copie « ${nm} » créée.`); },
             exportOne: i => { const p = presets()[i]; A().exportSettingFile?.(SETTING_TOOL, p.name, p.data); return false; },
             remove: i => { const l = presets(), p = l[i]; A().undoLocalChange(`Réglage « ${p.name} » supprimé`, [PRESETS_KEY], () => { l.splice(i, 1); savePresets(l); }, () => { if (frame.isConnected) frame.refresh(); }); },
-            importOne: async () => { const r = await A().importSettingFile?.(SETTING_TOOL, {names: presets().map(p => p.name), check: x => x && Array.isArray(x.links)}); if (!r) return false; const l = presets(); l.push({name: r.nom, date: new Date().toLocaleDateString('fr-FR'), data: presetData({...r.donnees, links: cleanLinks(r.donnees.links)})}); savePresets(l); toast(`Réglage « ${r.nom} » importé : « Appliquer » pour t’en servir.`); }});
+            importOne: async () => { const r = await A().importSettingFile?.(SETTING_TOOL, {names: presets().map(p => p.name), check: x => x && Array.isArray(x.links)}); if (!r) return false; const l = presets(); l.push({name: r.nom, date: new Date().toISOString(), data: presetData({...r.donnees, links: cleanLinks(r.donnees.links)})}); savePresets(l); toast(`Réglage « ${r.nom} » importé : « Appliquer » pour t’en servir.`); }});
         if (frame) ed.querySelector('[data-presets-slot]')?.replaceWith(frame);
         // C2 : couleur de chaque raccourci
         ed.querySelectorAll('[data-sc-color]').forEach(s => {

@@ -55,7 +55,7 @@
         }
         const plist = () => C.store.presets || [];
         const pwrite = async l => { C.store.presets = l; await ART.write('save_settings', {key: 'presets', data: {list: l}}); };
-        const pput = (name, data, at = -1) => { const l = [...plist()], i = l.findIndex(p => p.name === name), row = {name, date: new Date().toLocaleDateString('fr-FR'), data}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return pwrite(l); };
+        const pput = (name, data, at = -1) => { const l = [...plist()], i = l.findIndex(p => p.name === name), row = {name, date: new Date().toISOString(), data}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return pwrite(l); };
         const frame = window.LCNDA_UI.presetsFrame({id: 'artistes', what: 'les champs affichés, l’ordre, les colonnes, tes champs et la page de l’artiste', list: plist,
             apply: async i => { applyData(C.store, plist()[i].data); await changed(); paint(); return false; },
             save: name => pput(name, JSON.parse(JSON.stringify(target(C.store)))),
@@ -65,7 +65,7 @@
             exportOne: i => { const p = plist()[i]; A().exportSettingFile?.('artistes', p.name, {artistes: p.data}); return false; },
             remove: async i => { const before = plist(), p = before[i], after = before.filter((_, j) => j !== i), back = async l => { await pwrite(l); if (frame.isConnected) frame.refresh(); };
                 await pwrite(after); A().undoToast(`Réglage « ${p.name} » supprimé`, {undo: () => back(before), redo: () => back(after)}); },
-            importOne: async () => { const got = await A().importSettingFile?.('artistes', {names: plist().map(p => p.name), check: x => x && typeof x.artistes === 'object'}); if (!got) return false; await pwrite([...plist(), {name: got.nom, date: new Date().toLocaleDateString('fr-FR'), data: got.donnees.artistes}]); A().toast(`Réglage « ${got.nom} » importé : « Appliquer » pour t’en servir.`); }});
+            importOne: async () => { const got = await A().importSettingFile?.('artistes', {names: plist().map(p => p.name), check: x => x && typeof x.artistes === 'object'}); if (!got) return false; await pwrite([...plist(), {name: got.nom, date: new Date().toISOString(), data: got.donnees.artistes}]); A().toast(`Réglage « ${got.nom} » importé : « Appliquer » pour t’en servir.`); }});
         const changed = async () => { try { await persist(C.store); } catch (e) { A().toast(e.message, 'error'); } C.paint(false); };
         const orderNow = (gkey) => { if (st.tab === 'fiche') return [...aside.querySelectorAll(`.ar-fr[data-g="${CSS.escape(gkey)}"]`)].map(r => r.dataset.fkey); return [...aside.querySelectorAll('.ar-fr')].map(r => r.dataset.fkey); };
         const saveOrder = gkey => { const T = tcfg(C.store, st.kind, st.tab); if (st.tab === 'fiche') { T.forder = T.forder || {}; T.forder[gkey] = orderNow(gkey); } else T.order = orderNow(); };

@@ -2187,7 +2187,7 @@
                 if (!data.donnees || typeof data.donnees !== 'object') return toast('Ce réglage est vide ou abîmé.', 'error');
                 const list = op.list(); let name = cleanName(data.nom) || 'Réglage importé';
                 while (list.some(y => y.name === name)) { const n = await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${name} ». Quel nom pour celui-ci ?`, value: window.LCNDA_UI.freeName(name, list.map(y => y.name)), okLabel: 'Importer'}); if (n === null) return; name = cleanName(n); if (!name) return; }
-                list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.clean(data.donnees)});
+                list.push({name, date: new Date().toISOString(), v: op.clean(data.donnees)});
                 if (op.save(list.slice(-60))) { draw(); toast(`Réglage « ${name} » importé : « Appliquer » pour l’utiliser.`); }
                 return;
             }
@@ -2195,7 +2195,7 @@
             if (op === setOps.toolbar && data.editor && data.editor !== which) { which = st.montagePrefsEditor = EDITORS.some(x => x[0] === data.editor) ? data.editor : which; }
             const list = op.list(), add = cleanSets(data.sets, op.clean); let n = 0;
             add.forEach(x => { let name = x.name; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({...x, name}); n++; });
-            if (data.current && typeof data.current === 'object') { let name = cleanName(data.name) || 'Importé'; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.clean(data.current)}); n++; }
+            if (data.current && typeof data.current === 'object') { let name = cleanName(data.name) || 'Importé'; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({name, date: new Date().toISOString(), v: op.clean(data.current)}); n++; }
             if (op.save(list.slice(-60))) { draw(); toast(`${A().plural(n, 'ensemble importé', 'ensembles importés')} : choisis-en un puis « Appliquer ».`); }
         };
         // 💾 Réglages enregistrés (le cadre commun) : la disposition du montage, les boutons de l'éditeur choisi

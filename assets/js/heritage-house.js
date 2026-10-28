@@ -1104,7 +1104,7 @@
             view3d?.setSun?.(); return true;
         }
         let setsBox = null;
-        const setsPut = (name, v, at = -1) => { const l = setsList(), i = l.findIndex(x => x.name === name), row = {name, date: new Date().toLocaleDateString('fr-FR'), v}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return setsSave(l); };
+        const setsPut = (name, v, at = -1) => { const l = setsList(), i = l.findIndex(x => x.name === name), row = {name, date: new Date().toISOString(), v}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return setsSave(l); };
         const setsFrame = () => { const box = window.LCNDA_UI.presetsFrame({id: SETS_TOOL, what: 'les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière', list: setsList, quietApply: true,
             apply: i => { const cur = setsList()[i]; applySet(cur.v); paintSnap(); commit(`Réglage « ${cur.name} » appliqué`); return false; },
             save: name => setsPut(name, setsData()),
@@ -1121,7 +1121,7 @@
             if (d.outil !== SETS_TOOL) { toast(`Ce réglage est celui d’un autre outil (« ${String(d.outil || '?').slice(0, 40)} ») : importe-le dans cet outil-là, pas dans la Maison.`, 'error'); return false; }
             const l = setsList(); let n = String(d.nom || 'Réglage importé').trim().slice(0, 60) || 'Réglage importé';
             while (l.some(x => x.name === n)) { const n2 = String(await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${n} ». Nom du réglage importé :`, value: window.LCNDA_UI.freeName(n, l.map(x => x.name)), okLabel: 'Importer'}) || '').trim().slice(0, 60); if (!n2) return false; n = n2; }
-            l.push({name: n, date: new Date().toLocaleDateString('fr-FR'), v: d.donnees}); if (!setsSave(l)) return false; setsBox?.refresh(); toast(`Réglage « ${n} » importé : « Appliquer » pour t’en servir.`);
+            l.push({name: n, date: new Date().toISOString(), v: d.donnees}); if (!setsSave(l)) return false; setsBox?.refresh(); toast(`Réglage « ${n} » importé : « Appliquer » pour t’en servir.`);
         }
 
         /* ─── ⤓ E3 : la fenêtre d'export unique ; 🏠 le fichier de la maison ─── */
