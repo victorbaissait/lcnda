@@ -594,7 +594,7 @@
             <div class="bk-regionwrap">${regionSvg()}</div>
             <p class="bk-legend"><span><i class="bk-lg is-d0"></i>sûre</span><span><i class="bk-lg is-d1"></i>peu sûre</span><span><i class="bk-lg is-d2"></i>dangereuse</span><span><i class="bk-lg is-d3"></i>très dangereuse</span><span><i class="bk-lg is-rive"></i>bord de l’eau</span></p>
             ${card}
-            <h4>🧭 Les convois</h4>${convs || '<p class="muted">Aucun convoi en route.</p>'}
+            <h4>🧭 Les convois</h4>${convs || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧭</span><span class="empty-line-text">Aucun convoi en route.</span></p>'}
             ${asks ? `<h4>🤲 On vous demande de l’aide</h4><div class="bk-plans">${asks}</div>` : ''}
             <h4>🤝 Les autres survivants</h4><div class="bk-groups">${groups.map(gcard).join('')}</div>`;
     }

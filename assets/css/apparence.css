@@ -26,11 +26,7 @@
 .lc-hh-id b { display: block; font-size: 18px; line-height: 1.1; overflow-wrap: anywhere; }
 .lc-hh-av { flex: none; width: 38px; height: 38px; display: grid; place-items: center; border: 2px solid var(--ink); background: #f2f2f2; font-weight: 800; font-size: 12px; }
 .lc-hh-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
-.lc-hh-b { border: 1.5px solid var(--ink); padding: 2px 6px; font-size: 8px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; background: var(--white, #fff); }
-.lc-hh-b.sosa { background: #fff6c8; }
-.lc-hh-b.out { background: #ffeac0; color: #7a3800; }
-.lc-hh-b.art { background: #e8d5f5; color: #5c1a99; }
-.lc-hh-b.pf { background: var(--blue-soft, #eaf2ff); }
+.lc-hh-badges .ui-badge { font-size: 8px; padding: 2px 5px; white-space: nowrap; } /* K8 : les mêmes pastilles que la fiche (indicateurs.css), en petit */
 .lc-hh-btns { display: flex; flex-direction: column; gap: 6px; border-left: 2px solid var(--ink); padding-left: 10px; }
 .lc-hh-btns.lc-cols-2 { display: grid; grid-template-columns: repeat(2, 22px); }
 .lc-hh-btns.lc-rows-2 { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, 22px); }
@@ -94,10 +90,7 @@
 }
 
 /* ── Mode sombre ── */
-:root[data-theme="dark"] .lc-pf-link, :root[data-theme="dark"] .lc-hh-prev, :root[data-theme="dark"] .lc-hh-b, :root[data-theme="dark"] .lc-hh-btn, :root[data-theme="dark"] .lc-shp-tile { background: #242424; color: var(--ink); }
-:root[data-theme="dark"] .lc-hh-b.sosa { background: #4a4214; }
-:root[data-theme="dark"] .lc-hh-b.out { background: #4a3214; color: #ffd8a0; }
-:root[data-theme="dark"] .lc-hh-b.art { background: #3a2450; color: #e2c8ff; }
+:root[data-theme="dark"] .lc-pf-link, :root[data-theme="dark"] .lc-hh-prev, :root[data-theme="dark"] .lc-hh-btn, :root[data-theme="dark"] .lc-shp-tile { background: #242424; color: var(--ink); }
 :root[data-theme="dark"] .lc-hh-av { background: #333; }
 :root[data-theme="dark"] .lc-hh-radio small, :root[data-theme="dark"] .lc-hh-prev.is-off { color: #b8b8b8; }
 :root[data-theme="dark"] .lc-shp-tile { border-color: #4c4c4c; }

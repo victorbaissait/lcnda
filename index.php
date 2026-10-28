@@ -60,7 +60,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/jeux-patience.css?v=2">
     <link rel="stylesheet" href="assets/css/bunker.css?v=18">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
-    <link rel="stylesheet" href="assets/css/apparence.css?v=5">
+    <link rel="stylesheet" href="assets/css/apparence.css?v=6">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=5">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
@@ -1253,7 +1253,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-psd.js?v=1" defer></script>
 <script src="assets/js/heritage-tresors.js?v=10" defer></script>
 <script src="assets/js/heritage-bunker-moteur.js?v=16" defer></script>
-<script src="assets/js/heritage-bunker.js?v=23" defer></script>
+<script src="assets/js/heritage-bunker.js?v=24" defer></script>
 <script src="assets/js/heritage-tresors-memoire.js?v=7" defer></script>
 <script src="assets/js/heritage-tresors-decouvrir.js?v=3" defer></script>
 <script src="assets/js/heritage-tresors-jeux.js?v=7" defer></script>
@@ -1394,7 +1394,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi-fiche.js?v=6" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=1" defer></script>
 <script src="assets/js/heritage-partage.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=18" defer></script>
+<script src="assets/js/app-apparence.js?v=19" defer></script>
 <script src="assets/js/app-designs.js?v=21" defer></script>
 <script src="assets/js/app-sections.js?v=4" defer></script>
 <script>
