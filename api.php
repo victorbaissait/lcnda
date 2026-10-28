@@ -9722,6 +9722,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'duplicate_textdoc' => duplicate_textdoc($pdo,$data),
             'save_textdoc_version' => save_textdoc_version($pdo,$data),
             'delete_textdoc_version' => delete_textdoc_version($pdo,$data),
+            'rename_textdoc_version' => rename_textdoc_version($pdo,$data), // L3 🕘 Versions
             'restore_textdoc_version' => restore_textdoc_version($pdo,$data),
             'textdoc_to_media' => textdoc_to_media($pdo,$data),
             'save_website' => save_website($pdo,$data), // 🌐 Mon site web
@@ -9731,6 +9732,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'duplicate_website' => duplicate_website($pdo,$data),
             'save_website_version' => save_website_version($pdo,$data),
             'delete_website_version' => delete_website_version($pdo,$data),
+            'rename_website_version' => rename_website_version($pdo,$data), // L3 🕘 Versions
             'restore_website_version' => restore_website_version($pdo,$data),
             'save_cadastre_parcel' => save_cadastre_parcel($pdo,$data), // 🗺 Cadastre (lib/cadastre.php)
             'delete_cadastre_parcel' => delete_cadastre_parcel($pdo,$data),
@@ -9787,6 +9789,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_board_snapshot' => save_board_snapshot($pdo,$data),
             'restore_board_snapshot' => restore_board_snapshot($pdo,$data),
             'delete_board_snapshot' => delete_board_snapshot($pdo,$data),
+            'rename_board_snapshot' => rename_board_snapshot($pdo,$data), // L3 🕘 Versions
             'copy_board' => copy_board($pdo,$data),
             'delete_board' => delete_board($pdo,$data),
             'delete_booklet' => delete_booklet($pdo,$data),
@@ -9830,6 +9833,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'set_my_list_record_step' => set_my_list_record_step($pdo,$data),
             'move_my_list_record' => move_my_list_record($pdo,$data),
             'retouch_show_version' => retouch_show_version($pdo,$data),
+            'retouch_rename_version' => retouch_rename_version($pdo,$data), // L3 🕘 Versions
             'save_museum' => museum_save($pdo,$data),
             'save_museum_room' => museum_save_room($pdo,$data),
             'delete_museum_room' => museum_delete_room($pdo,$data),

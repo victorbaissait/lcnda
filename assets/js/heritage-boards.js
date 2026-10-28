@@ -1672,28 +1672,25 @@
                 }});
         }
         // ── instantanés : figer l'état, y revenir, en faire un nouveau tableau ──
+        /** L3 — les instantanés dans la fenêtre commune « 🕘 Versions » (app-versions.js) : aperçu en image, trait à glisser pour comparer */
         async function snapsDialog() {
-            if (dirty) await save();
-            let list = []; try { list = (await api('board_snapshots', {board_id: b.id})).snapshots || []; } catch (error) { toast(error.message, 'error'); return; }
-            ext.openDialog({eyebrow: 'TABLEAU', title: '📸 Instantanés', wide: true, submitLabel: 'Fermer',
-                body: `<div class="h-bd-snaps"><div class="h-bd-snapnew"><input data-bd-snaplabel placeholder="Nom de l’instantané (ex. « avant la visite aux archives »)" maxlength="160"><button type="button" class="button small" data-bd-snaptake>📸 Prendre un instantané</button></div>
-                    <p class="muted">Un instantané fige le tableau tel qu’il est. Tu peux y revenir plus tard (l’état actuel est gardé en instantané avant), ou en faire un nouveau tableau à part.</p>
-                    <div class="h-bd-snaplist" data-bd-snaplist>${snapList(list)}</div></div>`, onSubmit: () => true,
-                onOpen: d => {
-                    d.querySelector('[data-bd-snaptake]').addEventListener('click', async () => {
-                        save.lastThumb = 0; await save();
-                        try { await api('save_board_snapshot', {}, {method: 'POST', body: {board_id: b.id, label: d.querySelector('[data-bd-snaplabel]').value.trim()}}); d.querySelector('[data-bd-snaplabel]').value = ''; list = (await api('board_snapshots', {board_id: b.id})).snapshots || []; d.querySelector('[data-bd-snaplist]').innerHTML = snapList(list); toast('Instantané pris.'); } catch (error) { toast(error.message, 'error'); }
-                    });
-                    d.querySelector('[data-bd-snaplist]').addEventListener('click', async e => {
-                        const bt = e.target.closest('[data-bd-snap]'); if (!bt) return;
-                        const sid = Number(bt.dataset.id), s0 = list.find(x => x.id === sid);
-                        try {
-                            if (bt.dataset.bdSnap === 'restore') { if (ro()) return; if (!await A().confirmBox(`Revenir à « ${s0?.label} » ? L’état actuel est gardé en instantané.`, {title: 'Revenir à cet instantané', okLabel: 'Revenir à l’instantané'})) return; clearTimeout(saveT); await api('restore_board_snapshot', {}, {method: 'POST', body: {id: sid}}); d.close(); dirty = false; toast('Tableau revenu à l’instantané.'); go(b.id); }
-                            if (bt.dataset.bdSnap === 'copy') { d.close(); copyDialog(sid, s0?.label); }
-                            if (bt.dataset.bdSnap === 'delete') { if (!await A().confirmBox(`Supprimer l’instantané « ${s0?.label} » ?`, {title: 'Supprimer l’instantané', okLabel: 'Supprimer l’instantané'})) return; await api('delete_board_snapshot', {}, {method: 'POST', body: {id: sid}}); list = list.filter(x => x.id !== sid); d.querySelector('[data-bd-snaplist]').innerHTML = snapList(list); }
-                        } catch (error) { toast(error.message, 'error'); }
-                    });
-                }});
+            save.lastThumb = 0; try { await save(); } catch (_) {}
+            const U = window.LCNDA_UI; if (!U?.openVersions) return toast('La fenêtre des versions n’est pas chargée.', 'error');
+            const isAuto = l => /^(⏱|Avant le retour à)/.test(String(l || ''));
+            const reopen = () => { dirty = false; go(b.id); };
+            U.openVersions({title: root.querySelector('[data-bd-title]')?.value.trim() || b.title || 'Tableau', tool: 'Tableaux', kind: 'board',
+                list: async () => ((await api('board_snapshots', {board_id: b.id})).snapshots || []).map(x => ({id: x.id, label: String(x.label || '').replace(/^⏱\uFE0F?\s*/u, '') || 'Instantané', created_at: x.created_at, auto: isAuto(x.label), info: `${fmt(x.item_count)} élément${x.item_count > 1 ? 's' : ''}`, thumb: x.thumb})),
+                now: {hint: 'le tableau à l’écran'},
+                preview: async v => { const t = v ? v.thumb : (await api('board', {id: b.id}).catch(() => ({}))).thumb; return t ? {src: t, kind: 'image'} : {text: ''}; },
+                restore: async v => { if (ro()) throw new Error('Tableau verrouillé : 🔒 en haut pour le déverrouiller.'); clearTimeout(saveT); await api('restore_board_snapshot', {}, {method: 'POST', body: {id: v.id}});
+                    const back = ((await api('board_snapshots', {board_id: b.id})).snapshots || []).find(x => x.label === `Avant le retour à « ${v.label} »` || x.label === `Avant le retour à « ⏱ ${v.label} »`);
+                    reopen(); return back ? {undo: async () => { await api('restore_board_snapshot', {}, {method: 'POST', body: {id: back.id}}); reopen(); }} : {}; },
+                rename: (v, label) => api('rename_board_snapshot', {}, {method: 'POST', body: {id: v.id, label}}),
+                copy: async v => { copyDialog(v.id, v.label); },
+                exportOne: async v => { if (!v.thumb) return toast('Pas d’image pour cet instantané.'); download(v.thumb, `${fileBase()} — ${v.label.replace(/[\\/:*?"<>|]+/g, '-')}.png`); },
+                remove: async v => ({undo: async () => {}, commit: () => api('delete_board_snapshot', {}, {method: 'POST', body: {id: v.id}})}),
+                saveNow: async () => { const label = await A().askText({title: '📸 Prendre un instantané', message: 'Un nom (facultatif) :', placeholder: 'avant la visite aux archives', okLabel: 'Enregistrer'}); if (label === null) return;
+                    save.lastThumb = 0; await save(); await api('save_board_snapshot', {}, {method: 'POST', body: {board_id: b.id, label: String(label).trim()}}); toast('Instantané pris.', 'success'); }});
         }
         const snapRows = list => list.length ? list.map(s0 => `<article class="h-bd-snap">${s0.thumb ? `<img src="${esc(s0.thumb)}" alt="">` : '<span class="h-bd-snapblank">🧩</span>'}<div><strong>${esc(s0.label)}</strong><small class="muted">${window.LCNDA_UI?.when?.(s0.created_at) || ''} · ${fmt(s0.item_count)} élément${s0.item_count > 1 ? 's' : ''}</small>
             <span class="h-bd-snapacts"><button type="button" class="button small secondary" data-bd-snap="restore" data-id="${s0.id}">↺ Revenir à cet état</button><button type="button" class="button small secondary" data-bd-snap="copy" data-id="${s0.id}">⧉ En faire un tableau</button><button type="button" class="button small secondary danger" data-bd-snap="delete" data-id="${s0.id}" aria-label="Supprimer">🗑</button></span></div></article>`).join('') : A().emptyState({icon: '📸', text: 'Aucun instantané pour l’instant'});

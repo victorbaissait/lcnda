@@ -1,0 +1,82 @@
+/* LCNDA — L3 Une seule fenêtre « 🕘 Versions » (Harmonisation L, validé). Code : assets/js/app-versions.js (UI.openVersions).
+ * Grande fenêtre K6 (1040) : filtres C5 en haut, la liste à gauche (Maintenant, Aujourd’hui · Cette semaine · Plus ancien), l’aperçu à droite,
+ * la comparaison dessous (texte barré / ajouté, deux sons A / B, image avec un trait à glisser). */
+dialog.ui-vers { width: var(--modal-l); max-width: none; }
+.ui-vers-body { padding: 14px 20px 4px; display: grid; gap: 12px; min-width: 0; max-height: calc(92vh - 170px); overflow: auto; }
+.ui-vers-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.ui-vers-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 16px; min-width: 0; }
+.ui-vers-list { border: 2px solid var(--ink); background: var(--white); min-width: 0; max-height: min(58vh, 560px); overflow: auto; }
+.ui-vers-grp { font: 800 10.5px/1.2 system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 9px 10px 5px; background: var(--card-head-bg); border-bottom: 1px solid var(--line-color); position: sticky; top: 0; z-index: 1; }
+.ui-vers-row { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 8px 10px; border-bottom: 1px solid var(--line-color); font-size: 13px; cursor: pointer; }
+.ui-vers-row:hover { background: var(--blue-soft); }
+.ui-vers-row.is-active { background: var(--blue-soft); box-shadow: inset 4px 0 0 var(--blue-bright); }
+.ui-vers-row:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+.ui-vers-row.is-now .ui-vers-nm { font-style: italic; }
+.ui-vers-cb { display: grid; place-items: center; cursor: pointer; }
+.ui-vers-cb input { width: 15px; height: 15px; margin: 0; accent-color: var(--blue-bright); cursor: pointer; }
+.ui-vers-txt { min-width: 0; }
+.ui-vers-nm { display: block; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-vers-txt small { display: block; color: var(--muted); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-vers-bdg { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.ui-vers-named { font-size: 11px; padding: 3px 6px; }
+.ui-vers-hint { margin: 0; padding: 8px 10px; font-size: 12px; color: var(--muted); }
+.ui-vers-pane { border: 2px solid var(--ink); background: var(--white); min-width: 0; display: flex; flex-direction: column; min-height: 260px; }
+.ui-vers-ph { padding: 10px 12px; border-bottom: 2px solid var(--ink); background: var(--card-head-bg); font-size: 12.5px; overflow-wrap: anywhere; }
+.ui-vers-ph b { font-size: 15px; }
+.ui-vers-pd { padding: 12px; flex: 1; min-width: 0; overflow: auto; max-height: min(46vh, 440px); display: grid; gap: 8px; align-content: start; }
+.ui-vers-pa { display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border-top: 2px solid var(--ink); }
+.ui-vers-text { font: 13px/1.6 Georgia, "Times New Roman", serif; overflow-wrap: anywhere; }
+.ui-vers-note { display: block; font-size: 12px; }
+.ui-vers-err { margin: 0; color: #8a1111; }
+.ui-vers-img { max-width: 100%; max-height: 360px; object-fit: contain; justify-self: center; background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 0 / 16px 16px; }
+.ui-vers-video { width: 100%; max-height: 340px; background: #000; }
+.ui-vers-frame { width: 100%; height: 360px; border: 1px solid var(--line-color); background: #fff; }
+.ui-vers-audio { display: grid; gap: 8px; }
+.ui-vers-audio audio { width: 100%; }
+.ui-vers-wave { width: 100%; height: 56px; display: block; color: var(--blue-bright); background: var(--card-head-bg); }
+.ui-vers-wave.is-b { color: #1aa34a; }
+.ui-vers-cmp { border: 2px solid var(--ink); background: var(--white); padding: 10px 12px; display: grid; gap: 8px; min-width: 0; }
+.ui-vers-ct { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.ui-vers-ct .link-button { margin-left: auto; }
+.ui-vers-sum { margin: 0; font-size: 12.5px; }
+.ui-vers-two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border: 2px solid var(--ink); max-height: 360px; overflow: auto; }
+.ui-vers-two > div { padding: 10px 12px; min-width: 0; }
+.ui-vers-two > div + div { border-left: 2px solid var(--ink); }
+.ui-vers-ch { font: 800 10.5px/1.3 system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 4px; }
+.ui-vers del { background: #fdecec; color: #8a1111; text-decoration: line-through; }
+.ui-vers ins { background: #ecfaf0; color: #14532d; text-decoration: none; border-bottom: 2px solid #1aa34a; }
+.ui-vers-slide { position: relative; border: 2px solid var(--ink); overflow: hidden; touch-action: none; cursor: ew-resize; user-select: none; background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 0 / 16px 16px; max-height: 340px; }
+.ui-vers-slide img { display: block; width: 100%; max-height: 336px; object-fit: contain; pointer-events: none; }
+.ui-vers-slide img.is-a { position: absolute; inset: 0; height: 100%; clip-path: inset(0 calc(100% - var(--cut, 50%)) 0 0); }
+.ui-vers-cut { position: absolute; top: 0; bottom: 0; left: var(--cut, 50%); width: 0; border-left: 3px solid var(--blue-bright); }
+.ui-vers-cut i { position: absolute; top: calc(50% - 14px); left: -15px; width: 26px; height: 26px; display: grid; place-items: center; font-style: normal; font-size: 13px; background: var(--blue-bright); color: #fff; border: 2px solid #fff; }
+.ui-vers-cut:focus-visible { outline: none; }
+.ui-vers-cut:focus-visible i { outline: 3px solid var(--blue); outline-offset: 2px; }
+.ui-vers-lab { position: absolute; top: 6px; font: 700 11px/1.2 system-ui, sans-serif; background: rgba(0, 0, 0, .66); color: #fff; padding: 3px 6px; max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-vers-lab.is-a { left: 6px; }
+.ui-vers-lab.is-b { right: 6px; }
+.ui-vers-ab { display: grid; gap: 6px; }
+.ui-vers-abbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ui-vers-abbar .is-on { background: var(--blue-bright); color: #fff; border-color: var(--blue-bright); }
+/* la ligne des versions dans un éditeur (retouche, son, montage) : « 🕘 Versions (3)… » */
+.ui-vers-line { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 12.5px; }
+.ui-vers-line small { color: var(--muted); }
+@media (max-width: 760px) {
+    .ui-vers-grid { grid-template-columns: minmax(0, 1fr); }
+    .ui-vers-list { max-height: 40vh; }
+    .ui-vers-two { grid-template-columns: minmax(0, 1fr); }
+    .ui-vers-two > div + div { border-left: 0; border-top: 2px solid var(--ink); }
+    .ui-vers-pa .button { flex: 1 1 auto; }
+}
+:root[data-theme="dark"] :is(.ui-vers-ph, .ui-vers-grp, .ui-vers-wave) { background: #2b2b2b; color: #e8e8e8; }
+:root[data-theme="dark"] .ui-vers-grp { color: #aaa; }
+:root[data-theme="dark"] .ui-vers-wave { color: #5599ff; }
+:root[data-theme="dark"] .ui-vers-wave.is-b { color: #4fd17e; }
+:root[data-theme="dark"] .ui-vers del { background: #3a1616; color: #ffb3b3; }
+:root[data-theme="dark"] .ui-vers ins { background: #11301c; color: #a7f0bf; border-bottom-color: #2fbf63; }
+:root[data-theme="dark"] .ui-vers-err { color: #ff9a9a; }
+:root[data-theme="dark"] .ui-vers-frame { border-color: #555; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .ui-vers-img{background:repeating-conic-gradient(#292929 0 25%, #212121 0 50%) 0 0 / 16px 16px}
+:root[data-theme="dark"] .ui-vers-cut i{border:2px solid #4c4c4c}
+/* ═════ fin du mode sombre automatique ═════ */

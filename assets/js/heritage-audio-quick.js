@@ -259,18 +259,15 @@
         const pf = presetsFrame({id: 'son-rapide', now: () => ({kind: 'quick', quick: cleanQuick(q)}), apply: async p => { const d = presetData(p); change(() => { if (d.quick) { q.on = {...cleanQuick(d.quick).on}; q.force = cleanQuick(d.quick).force; if (q.on.trim) trim = {...analysis.edges}; } else { const r = E.rackToQuick(d.rack); q.on = r.q.on; q.force = r.q.force; extras = [...extras.filter(x => x.type === 'repair'), ...r.extras]; } }); }});
         $('[data-aq-presets]').appendChild(pf);
         // ── versions ──
-        function paintVersions() {
-            const box = $('[data-aq-versions]');
-            box.innerHTML = versions.length ? `${versions.map(v => `<div class="h-aq-ver${v.shown ? ' is-shown' : ''}"><button type="button" class="h-aq-verplay" data-aq-vplay="${esc(v.filename)}" title="Écouter cette version">▶</button><span><b>${esc(v.is_original ? 'Original' : v.label)}</b><small>${v.shown ? 'affichée' : ''}</small></span>${v.shown ? '' : `<button type="button" class="link-button" data-aq-vshow="${v.id}">Afficher</button>`}${v.is_original || !v.id ? '' : `<button type="button" class="icon-button small danger" data-aq-vdel="${v.id}" title="Supprimer cette version" aria-label="Supprimer cette version">🗑</button>`}</div>`).join('')}<audio data-aq-vaudio hidden></audio>` : '';
+        function paintVersions() { // L3 : une ligne ; le reste dans la fenêtre commune « 🕘 Versions »
+            const box = $('[data-aq-versions]'), sh = versions.find(v => v.shown) || versions[0];
+            box.innerHTML = versions.length > 1 && media.id ? `<p class="ui-vers-line"><button type="button" class="button small secondary" data-aq-vwin title="Écouter, comparer A / B, montrer partout, renommer, supprimer">🕘 Versions (${versions.length})…</button><small>l’original est toujours gardé · montrée : ${esc(sh?.label || 'Original')}</small></p>` : '';
         }
         paintVersions();
-        $('[data-aq-versions]').addEventListener('click', async e => {
-            const b = e.target.closest('button'); if (!b) return;
-            if (b.dataset.aqVplay) { stopPlay(); const au = $('[data-aq-vaudio]'); au.hidden = false; au.controls = true; au.src = url(b.dataset.aqVplay); au.play().catch(() => {}); return; }
-            try {
-                if (b.dataset.aqVshow) { const r = await A().api('retouch_show_version', {}, {method: 'POST', body: {media_id: media.id, version_id: Number(b.dataset.aqVshow)}}); versions = r.result?.versions || await versionsOf(media); paintVersions(); toast('Version affichée partout.'); onDone?.(); }
-                if (b.dataset.aqVdel) { if (!await A().confirmBox('L’original et les autres versions restent.', {title: 'Supprimer cette version ?', okLabel: 'Supprimer la version'})) return; const r = await A().api('retouch_delete_version', {}, {method: 'POST', body: {media_id: media.id, version_id: Number(b.dataset.aqVdel)}}); if (r.error) throw new Error(r.error); versions = await versionsOf(media); paintVersions(); toast('Version supprimée.'); onDone?.(); }
-            } catch (err) { toast(err.message, 'error'); }
+        $('[data-aq-versions]').addEventListener('click', e => {
+            if (!e.target.closest('[data-aq-vwin]') || !window.LCNDA_UI?.openMediaVersions) return;
+            stopPlay();
+            window.LCNDA_UI.openMediaVersions(media, {kind: 'audio', tool: 'Son rapide', onShown: (file, vs) => { versions = vs; paintVersions(); onDone?.(); }});
         });
         // ── le son fini ──
         const finalBuf = async () => { const eff = effects(); let out = await E.renderRack(base, eff, {cache, source: base}); out = removeSegments(out, cuts()); const late = extras.filter(x => E.FX[x.type]?.lengthChange); return late.length ? E.renderRack(out, late) : out; };

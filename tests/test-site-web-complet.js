@@ -332,10 +332,13 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         group = 'Fichier, versions, export';
         await cmd('Fichier → Enregistrer', async () => { await menu('Fichier', 'Enregistrer'); await until(() => page.textContent('.sw-dlg [data-ui-status]'), t => /Enregistré/.test(t)); must(/Enregistré/.test(await page.textContent('.sw-dlg [data-ui-status]'))); });
         await cmd('Fichier → Enregistrer comme nouvelle version', async () => { await menu('Fichier', 'nouvelle version'); await ask('V2'); must((await api('website_versions', { site_id: (await C()).id }, true)).r.items.some(v => v.label === 'V2')); });
-        await cmd('Fichier → Versions… (↺ Reprendre, 🗑 + ↶)', async () => {
-            await menu('Fichier', 'Versions'); await page.waitForSelector('dialog[open] [data-v-back]');
-            const n0 = await page.locator('dialog[open] [data-v-del]').count(); await page.locator('dialog[open] [data-v-del]').first().click(); await wait(400); must(await page.locator('dialog[open] [data-v-del]').count() === n0 - 1, 'pas supprimée'); await undoToast(); must(await page.locator('dialog[open] [data-v-del]').count() === n0, '↶');
-            await page.locator('dialog[open] [data-v-back]').last().click(); await wait(600); must((await C()).pages.length === 1, 'pas reprise (V1 : une page)'); await page.click('.ui-topbar [data-ui-cmd="undo"]'); await wait(500); must((await C()).pages.length > 1, '↶ après reprise');
+        await cmd('Fichier → 🕘 Versions… (L3 : ↺ Revenir, 🗑 + ↶)', async () => {
+            const R = 'dialog.ui-vers [data-vers-row]:not([data-vers-row="now"])';
+            await menu('Fichier', 'Versions'); await page.waitForSelector(R); await wait(300);
+            const n0 = await page.locator(R).count(); await page.locator(R).first().click(); await page.click('dialog.ui-vers [data-vers-act="more"]'); await page.locator('.ui-actmenu .ui-actmenu-i', { hasText: 'Supprimer' }).click(); await wait(500);
+            must(await page.locator(R).count() === n0 - 1, 'pas supprimée'); await undoToast(); await wait(400); must(await page.locator(R).count() === n0, '↶');
+            await page.locator(R).last().click(); await wait(300); await page.click('dialog.ui-vers [data-vers-act="restore"]'); await wait(800); must((await C()).pages.length === 1, 'pas reprise (V1 : une page)');
+            await page.click('dialog.ui-vers [data-vers-close]'); await wait(200); await page.click('.ui-topbar [data-ui-cmd="undo"]'); await wait(500); must((await C()).pages.length > 1, '↶ après reprise');
         });
         await cmd('Fichier → Nouveau site… (modèles)', async () => { await menu('Fichier', 'Nouveau site'); await page.waitForSelector('dialog[open] .sw-tpl'); await page.evaluate(() => [...document.querySelectorAll('dialog[open]')].pop().close()); await wait(200); });
         let zipPath = '';

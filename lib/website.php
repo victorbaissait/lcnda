@@ -69,6 +69,9 @@ function website_schema(PDO $pdo): void
         label TEXT NOT NULL DEFAULT '', data_json TEXT NOT NULL DEFAULT '{}', created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (site_id) REFERENCES websites(id) ON DELETE CASCADE)");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_website_versions_site ON website_versions(site_id, id)');
+    // L3 🕘 Versions : « automatique » (gardée toute seule, par ex. avant un retour en arrière) ou nommée
+    $cols = array_column($pdo->query('PRAGMA table_info(website_versions)')->fetchAll(), 'name');
+    if (!in_array('auto', $cols, true)) { $pdo->exec('ALTER TABLE website_versions ADD COLUMN auto INTEGER NOT NULL DEFAULT 0'); }
 }
 
 /* ═════════ Nettoyage ═════════ */
@@ -437,8 +440,8 @@ function duplicate_website(PDO $pdo, array $data): array
 function website_versions(PDO $pdo, int $siteId): array
 {
     website_ready($pdo);
-    $s = $pdo->prepare('SELECT id, label, created_at FROM website_versions WHERE site_id=? ORDER BY id DESC'); $s->execute([$siteId]);
-    return array_map(static fn($r) => ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'created_at' => $r['created_at']], $s->fetchAll());
+    $s = $pdo->prepare('SELECT id, label, auto, created_at FROM website_versions WHERE site_id=? ORDER BY id DESC'); $s->execute([$siteId]);
+    return array_map(static fn($r) => ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'auto' => (int) $r['auto'], 'created_at' => $r['created_at']], $s->fetchAll());
 }
 
 function website_version(PDO $pdo, int $id): array
@@ -446,7 +449,7 @@ function website_version(PDO $pdo, int $id): array
     website_ready($pdo);
     $s = $pdo->prepare('SELECT * FROM website_versions WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
     if (!$r) { throw new RuntimeException('Version introuvable.'); }
-    return ['id' => (int) $r['id'], 'site_id' => (int) $r['site_id'], 'label' => (string) $r['label'], 'created_at' => $r['created_at'], 'data' => json_decode((string) $r['data_json'], true) ?: new stdClass()];
+    return ['id' => (int) $r['id'], 'site_id' => (int) $r['site_id'], 'label' => (string) $r['label'], 'auto' => (int) ($r['auto'] ?? 0), 'created_at' => $r['created_at'], 'data' => json_decode((string) $r['data_json'], true) ?: new stdClass()];
 }
 
 function save_website_version(PDO $pdo, array $data): array
@@ -458,8 +461,8 @@ function save_website_version(PDO $pdo, array $data): array
     [$clean] = website_check($data['data'] ?? null);
     $json = json_encode($clean, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if ($json === false || strlen($json) > SITE_MAX) { throw new LcndaBadInput('Version trop lourde.'); }
-    $label = mb_substr(safe_text($data['label'] ?? ''), 0, 120) ?: ('Version du ' . date('d/m/Y à H:i'));
-    $pdo->prepare('INSERT INTO website_versions(site_id, label, data_json) VALUES(?,?,?)')->execute([$siteId, $label, $json]);
+    $label = mb_substr(safe_text($data['label'] ?? ''), 0, 120) ?: (empty($data['auto']) ? 'Version du ' . date('d/m/Y à H:i') : 'Enregistrement automatique');
+    $pdo->prepare('INSERT INTO website_versions(site_id, label, data_json, auto) VALUES(?,?,?,?)')->execute([$siteId, $label, $json, empty($data['auto']) ? 0 : 1]);
     $vid = (int) $pdo->lastInsertId();
     $pdo->prepare('DELETE FROM website_versions WHERE site_id=? AND id NOT IN (SELECT id FROM website_versions WHERE site_id=? ORDER BY id DESC LIMIT ' . SITE_VERSIONS_MAX . ')')->execute([$siteId, $siteId]);
     return ['id' => $vid, 'label' => $label];
@@ -477,7 +480,18 @@ function restore_website_version(PDO $pdo, array $data): array
 {
     website_ready($pdo);
     $v = is_array($data['version'] ?? null) ? $data['version'] : [];
-    return save_website_version($pdo, ['site_id' => $v['site_id'] ?? 0, 'label' => $v['label'] ?? '', 'data' => $v['data'] ?? null]);
+    return save_website_version($pdo, ['site_id' => $v['site_id'] ?? 0, 'label' => $v['label'] ?? '', 'data' => $v['data'] ?? null, 'auto' => !empty($v['auto'])]);
+}
+
+/** L3 ✎ Renommer une version du site (elle devient « nommée ») */
+function rename_website_version(PDO $pdo, array $data): array
+{
+    website_ready($pdo);
+    $old = website_version($pdo, safe_int($data['id'] ?? 0));
+    $label = mb_substr(trim(safe_text($data['label'] ?? '')), 0, 120);
+    if ($label === '') { throw new LcndaBadInput('Donne un nom à la version.'); }
+    $pdo->prepare('UPDATE website_versions SET label=?, auto=0 WHERE id=?')->execute([$label, $old['id']]);
+    return ['id' => $old['id'], 'label' => $label, 'before' => $old['label']];
 }
 
 /* ═════════ Qui peut paraître : la règle du partage F11 ═════════ */

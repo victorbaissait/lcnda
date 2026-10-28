@@ -319,6 +319,17 @@ function restore_board_snapshot(PDO $pdo, array $data): array
     $pdo->prepare('UPDATE boards SET data_json=?, thumb=?, item_count=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([(string) $r['data_json'], (string) $r['thumb'], (int) $r['item_count'], $snap['board_id']]);
     return ['id' => $snap['board_id']];
 }
+/** L3 ✎ Renommer un instantané (« ⏱ » reste réservé aux versions automatiques) */
+function rename_board_snapshot(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT id FROM board_snapshots WHERE id=?'); $s->execute([$id]);
+    if (!$s->fetchColumn()) { throw new RuntimeException('Instantané introuvable.'); }
+    $label = mb_substr(trim((string) preg_replace('/^[\x{23F1}\x{FE0F}\s]+/u', '', safe_text($data['label'] ?? ''))), 0, 160);
+    if ($label === '') { throw new LcndaBadInput('Donne un nom à l’instantané.'); }
+    $pdo->prepare('UPDATE board_snapshots SET label=? WHERE id=?')->execute([$label, $id]);
+    return ['id' => $id, 'label' => $label];
+}
 function delete_board_snapshot(PDO $pdo, array $data): array
 {
     $pdo->prepare('DELETE FROM board_snapshots WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);

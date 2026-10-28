@@ -124,23 +124,15 @@
         let v = [];
         if (media.id) try { v = (await A().api('media_versions', {id: media.id})).versions || []; } catch (_) {}
         if (v.length < 2) return {html: '', versions: v};
-        return {versions: v, html: `<details class="h-avx-versions"><summary>🗂️ Versions (${v.length}) — l’original est toujours gardé</summary><ul>${v.map(x => `<li class="${x.shown ? 'is-shown' : ''}"><button type="button" class="button small secondary" data-avx-vplay="${esc(x.filename)}">▶</button>
-            <span>${x.is_original ? '🕰️ ' : ''}${esc(x.label)}${x.shown ? ' <b>· montrée</b>' : ''}</span>
-            ${x.shown ? '' : `<button type="button" class="button small secondary" data-avx-vshow="${x.id}">Montrer celle-ci</button>`}${x.is_original ? '' : `<button type="button" class="icon-button danger" data-avx-vdel="${x.id}" title="Supprimer cette version">🗑</button>`}</li>`).join('')}</ul><audio data-avx-vaudio controls hidden></audio></details>`};
+        // L3 : une ligne ; tout le reste (écouter, comparer A / B, montrer, renommer, supprimer) dans la fenêtre commune « 🕘 Versions »
+        return {versions: v, html: `<p class="h-avx-versions ui-vers-line"><button type="button" class="button small secondary" data-avx-vwin title="Écouter, comparer, montrer partout, renommer, supprimer">🕘 Versions (${v.length})…</button><small>l’original est toujours gardé · montrée : ${esc((v.find(x => x.shown) || v[0]).label || 'Original')}</small></p>`};
     }
     function bindVersions(root, media, kind, after) {
-        const player = root.querySelector('[data-avx-vaudio]');
-        root.querySelectorAll('[data-avx-vplay]').forEach(b => b.addEventListener('click', () => {
-            if (kind === 'video') { const w = window.open(url(b.dataset.avxVplay), '_blank'); if (!w) toast('Ouvre la vidéo depuis la liste Vidéos.', 'error'); return; }
-            player.hidden = false; player.src = url(b.dataset.avxVplay); player.play().catch(() => {});
-        }));
-        root.querySelectorAll('[data-avx-vshow]').forEach(b => b.addEventListener('click', async () => {
-            try { await A().api('retouch_show_version', {}, {method: 'POST', body: {media_id: media.id, version_id: Number(b.dataset.avxVshow)}}); toast('Version montrée partout.'); after?.(); } catch (e) { toast(e.message, 'error'); }
-        }));
-        root.querySelectorAll('[data-avx-vdel]').forEach(b => b.addEventListener('click', async () => {
-            if (!await A().confirmBox('L’original et les autres versions restent.', {title: 'Supprimer cette version ?', okLabel: 'Supprimer la version'})) return;
-            try { const r = await A().api('retouch_delete_version', {}, {method: 'POST', body: {media_id: media.id, version_id: Number(b.dataset.avxVdel)}}); if (r.error) throw new Error(r.error); toast('Version supprimée.'); after?.(); } catch (e) { toast(e.message, 'error'); }
-        }));
+        root.querySelector('[data-avx-vwin]')?.addEventListener('click', () => {
+            if (!window.LCNDA_UI?.openMediaVersions) return toast('La fenêtre des versions n’est pas chargée.', 'error');
+            let changed = false;
+            window.LCNDA_UI.openMediaVersions(media, {kind, tool: kind === 'video' ? 'Montage' : 'Son', onShown: () => { changed = true; }, onClose: () => { if (changed) after?.(); }});
+        });
     }
 
     /* ═════════════════════════ SON ═════════════════════════ */
@@ -1954,7 +1946,7 @@
         };
         // ── Un menu en haut, à côté du titre (comme la Retouche) : tout ce que fait le montage ──
         const MT_MENUS = [
-            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '⤓ Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['close', 'Fermer']]],
+            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '⤓ Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['versions', '🕘 Versions…'], ['-'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫'], ['-'], ['keys', '⌨️ Raccourcis du montage…']]],
             ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['multicam', '🎥 Plusieurs caméras (calées par le son)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '＋ Vidéo / photo à la suite'], ['op:addv2', '＋ Incrustation'], ['op:addtext', '＋ Titre / texte'], ['op:adda', '＋ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '⤒ Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
@@ -1972,6 +1964,7 @@
             const b = e.target.closest('[data-mt-cmd]'); if (!b) { if (!e.target.closest('.h-mt-menubar')) closeMenus(); return; }
             closeMenus(); const k = b.dataset.mtCmd, [a, v] = k.split(':'), q = sel0 => dl.querySelector(sel0)?.click();
             if (k === 'proj') return saveProject(); if (k === 'projas') return saveProject(true);
+            if (k === 'versions') { const vb = dl.querySelector('[data-avx-vwin]'); return vb ? vb.click() : toast('Pas encore d’autre version : le montage gardé dans les médias en aura (l’original est toujours gardé).'); }
             if (k === 'projects') return q('[data-mt-projects]'); if (k === 'export') return q('[data-mt-export]'); if (k === 'close') return q('[data-avx-close]');
             if (k === 'undo') return undoTo(hpos - 1); if (k === 'redo') return undoTo(hpos + 1);
             if (a === 'op') return q(`[data-mt-op="${v}"]`);

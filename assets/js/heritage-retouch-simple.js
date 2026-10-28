@@ -380,17 +380,13 @@
         const applyShown = file => { if (file && file !== item.filename) { item.filename = item.thumbnail = file; item._cacheBust = Date.now(); A().renderLightboxItem?.(); refreshAfter(); } };
         const drawVersions = () => {
             const box = dlg.querySelector('[data-rs-versions]');
-            box.innerHTML = `<h3>Versions de la photo</h3><div class="h-rs-vlist">${versions.map(v => `<figure class="${v.shown ? 'is-shown' : ''} ${v.filename === from ? 'is-source' : ''}"><img src="media/${encodeURIComponent(v.filename)}" alt="" loading="lazy"><figcaption><strong>${esc(v.label)}</strong>${v.shown ? '<span class="h-rs-badge">affichée</span>' : (v.id ? `<button type="button" class="link-button" data-rs-vshow="${v.id}">Afficher par défaut</button>` : '')}
-                ${v.filename !== from ? `<button type="button" class="link-button" data-rs-vfrom="${esc(v.filename)}">Retoucher celle-ci</button>` : '<small>en cours de retouche</small>'}${!v.is_original && v.id ? `<button type="button" class="link-button danger" data-rs-vdel="${v.id}">Supprimer</button>` : ''}</figcaption></figure>`).join('')}</div>`;
-            box.querySelectorAll('[data-rs-vshow]').forEach(b => b.addEventListener('click', async () => {
-                try { const r = await api('retouch_show_version', {}, {method: 'POST', body: {media_id: item.id, version_id: b.dataset.rsVshow}}); versions = r.result.versions; applyShown(r.result.filename); drawVersions(); toast('Version affichée par défaut changée.'); }
-                catch (error) { toast(error.message, 'error'); }
-            }));
-            box.querySelectorAll('[data-rs-vdel]').forEach(b => b.addEventListener('click', async () => {
-                if (!await A().confirmBox('L’original et les autres versions restent.', {title: 'Supprimer cette version retouchée ?', okLabel: 'Supprimer la version'})) return;
-                try { const r = await api('retouch_delete_version', {}, {method: 'POST', body: {media_id: item.id, version_id: b.dataset.rsVdel}}); versions = r.result.versions; applyShown(r.result.filename); drawVersions(); toast('Version supprimée.'); }
-                catch (error) { toast(error.message, 'error'); }
-            }));
+            box.innerHTML = `<h3>Versions de la photo</h3><div class="h-rs-vlist">${versions.map(v => `<figure class="${v.shown ? 'is-shown' : ''} ${v.filename === from ? 'is-source' : ''}"><img src="media/${encodeURIComponent(v.filename)}" alt="" loading="lazy"><figcaption><strong>${esc(v.label)}</strong>${v.shown ? '<span class="h-rs-badge">affichée</span>' : ''}
+                ${v.filename !== from ? `<button type="button" class="link-button" data-rs-vfrom="${esc(v.filename)}">Retoucher celle-ci</button>` : '<small>en cours de retouche</small>'}</figcaption></figure>`).join('')}</div>${item.id ? '<p class="ui-vers-line"><button type="button" class="button small secondary" data-rs-vwin title="Voir, comparer, revenir, renommer, supprimer">🕘 Versions…</button><small>l’original est toujours gardé</small></p>' : ''}`;
+            box.querySelector('[data-rs-vwin]')?.addEventListener('click', () => {
+                if (!window.LCNDA_UI?.openMediaVersions) return;
+                window.LCNDA_UI.openMediaVersions(item, {kind: 'image', tool: 'Retouche rapide', onShown: (file, vs) => { versions = vs; applyShown(file); drawVersions(); },
+                    actions: [{icon: '🖌', label: 'Retoucher celle-ci', when: v => v.filename !== from, run: async (v, w) => { if (!saved && hpos > 0 && !await A().confirmBox('Les retouches en cours seront perdues.', {title: 'Quitter cette retouche sans l’enregistrer ?', okLabel: 'Quitter sans enregistrer', danger: true})) return false; saved = true; w.close(); dlg.close(); openRetouchSimple(v.filename); return 'close'; }}]});
+            });
             box.querySelectorAll('[data-rs-vfrom]').forEach(b => b.addEventListener('click', async () => { if (!saved && hpos > 0 && !await A().confirmBox('Les retouches en cours seront perdues.', {title: 'Quitter cette retouche sans l’enregistrer ?', okLabel: 'Quitter sans enregistrer', danger: true})) return; saved = true; dlg.close(); openRetouchSimple(b.dataset.rsVfrom); })); // comme la retouche complète : on demande avant de perdre le travail
         };
         drawVersions();

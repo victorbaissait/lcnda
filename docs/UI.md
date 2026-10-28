@@ -1148,3 +1148,27 @@ Maquette : `docs/design/onglets-documents-catalogue.html`. Deux modules (`docume
 - Homme / mâle → masculin, femme / femelle → féminin ; les autres suivent **Réglages → Thème et couleurs → « ✍️ Accord des mots »** (K2) : `localStorage['genealogie-accord'] = {other, unknown}` avec `avant` (départ : rien ne change), `f`, `m`, `point` (« né·e »), `paren` (« né(e) »), `neutre` (`x`, sinon « né(e) »). Clé dans `SITE_DEFAULT_KEYS`, `site_defaults_allowed_keys`, `LAYOUT_KEYS` (💾 Réglages enregistrés).
 - `lifeText(status, gender)` passe par `LCNDA_ACCORD.life` (« Vivant », « Décédée », « En vie », « Décès »…).
 - **Jamais** « né(e) », « décédé(e) »… écrits en dur quand la fiche est connue, ni `${p.gender === 'female' ? 'e' : ''}` fait à la main ; quand le texte parle de personnes en général (FAQ, aides, en-têtes de colonnes, critères), une tournure sans accord (« Lieu de naissance », « Naissance entre », « personne décédée »). Test : `tests/test-accord-genre.js`.
+
+## L3 — 🕘 Une seule fenêtre « Versions » (app-versions.js, versions.css)
+
+Partout où il existe des versions, la même grande fenêtre (K6, 1040) : `UI.openVersions(o)`. Accès : **Fichier → 🕘 Versions…** dans chaque éditeur E1 (traitement de texte, Mon site web, retouche, Studio son, montage) ; « 🕘 Versions… » sous la photo / le son dans la retouche rapide, le son rapide et l’ancien éditeur du son ; « 📸 Instantanés » dans un tableau.
+
+```js
+UI.openVersions({title, tool, kind,                        // kind : 'text' | 'site' | 'image' | 'audio' | 'video' | 'board'…
+    list: async () => [{id, label, created_at, auto, info, infoAsync, by, locked, shown, badge}],
+    now: {info, hint} | () => ({…}) | false,               // la ligne « Maintenant » (K8 « EN COURS »), toujours en haut
+    preview: async v => ({text} | {html} | {src, kind}),   // v = null : maintenant ; html = page isolée (iframe sandbox="")
+    keepNow: async label => …,                             // garde l’actuelle (auto) avant « ↺ Revenir »
+    restore: async v => ({undo, redo}), rename: async (v, nom) => …, copy, exportOne,
+    remove: async v => ({undo}) | ({undo, commit}),        // commit = suppression pour de bon quand le message H7 part sans « Annuler »
+    saveNow, actions: [{icon, label, when(v), run(v, fenêtre)}]});
+UI.openMediaVersions(media, {kind, tool, onShown(fichier, versions), actions})   // table media_versions (retouche, son, montage)
+UI.versionsDiff(a, b)   // {left, right, added, removed, same} : mot à mot, <del> à gauche, <ins> à droite (aussi dans Node)
+```
+
+- Filtres C5 « Tout / ✎ Nommées / 🕘 Automatiques » avec le nombre ; liste rangée Aujourd’hui · Cette semaine · Plus ancien ; dates K4 ; une ligne utile (mots, pages, taille en pixels, durée, éléments).
+- Clic = aperçu à droite ; deux cases cochées = comparaison dessous (texte barré rouge / ajouté vert ; deux formes de son + 👂 A / ✨ B au même endroit ; image avec un trait à glisser, ← → au clavier).
+- « ↺ Revenir à cette version » sans question : `keepNow` garde d’abord l’actuelle (version automatique « Avant le retour à « … » »), puis H7 « ↶ Annuler ». ⋯ et clic droit : ✎ Renommer, ⧉ En faire une copie, ⤓ Exporter, 🗑 Supprimer (H7). « Fermer » seul en bas. ↑ ↓ Entrée Espace dans la liste.
+- Serveur : colonne `auto` ajoutée d’elle-même à `text_document_versions` et `website_versions` (`textdocs_schema`, `website_schema`) ; POST `rename_textdoc_version`, `rename_website_version`, `rename_board_snapshot`, `retouch_rename_version` (nom non vide, borné ; l’original d’un média garde son nom). Une version de média supprimée ne part qu’à la fin du message (« ↶ Annuler » la garde).
+- Nommée / automatique : texte et site = colonne `auto` ; média = libellé d’origine (« Original », « Retouche 3 — 12/10/2026 ») = automatique, renommé ou avec une note = nommée ; tableau = « ⏱ … » ou « Avant le retour à … ».
+- Test : `tests/test-harmo-l3-versions.js`.

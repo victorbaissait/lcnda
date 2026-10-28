@@ -157,6 +157,21 @@ function retouch_show_version(PDO $pdo, array $data): array
     return ['filename' => $file, 'versions' => retouch_versions($pdo, $id)];
 }
 
+/** L3 ✎ Renommer une version d'un média (jamais l'original). */
+function retouch_rename_version(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['media_id'] ?? 0);
+    $s = $pdo->prepare('SELECT id, is_original FROM media_versions WHERE id=? AND media_id=?'); $s->execute([safe_int($data['version_id'] ?? 0), $id]);
+    $v = $s->fetch();
+    if (!$v) { throw new RuntimeException('Version introuvable.'); }
+    if ((int) $v['is_original']) { throw new LcndaBadInput('L’original garde son nom.'); }
+    $label = mb_substr(trim(safe_text($data['label'] ?? '')), 0, 160);
+    if ($label === '') { throw new LcndaBadInput('Donne un nom à la version.'); }
+    $pdo->prepare('UPDATE media_versions SET label=? WHERE id=?')->execute([$label, (int) $v['id']]);
+    log_change($pdo, 'media', $id, 'update', 'Version renommée « ' . $label . ' »');
+    return ['versions' => retouch_versions($pdo, $id)];
+}
+
 /** Supprimer une retouche (jamais l'original). Si elle était affichée, c'est l'original qui reprend sa place. */
 function retouch_delete_version(PDO $pdo, array $data): never
 {
