@@ -1,6 +1,8 @@
 /* LCNDA — ☢ Le bunker : l'écran (le moteur est dans heritage-bunker-moteur.js).
  * Bien caché : Pièce d'archives (Konami code) → porte « Labo photo » → trois clics sur la lampe rouge → la trappe au sol.
  * Parties gardées sur cet ordinateur (localStorage « lcnda-bunker »), et dans un fichier (⤓ Exporter / ⤒ Ouvrir).
+ * 🏆 Succès et records gardés sur cet ordinateur aussi (« lcnda-bunker-records », pas « genealogie-… » qui part dans la base) ; jamais rien en base.
+ * ⏪ Les 7 derniers matins de chaque partie sont gardés dans la partie (moteur : morningSave / rewind).
  */
 (() => {
     'use strict';
@@ -18,14 +20,35 @@
     const store = () => { try { const o = JSON.parse(localStorage.getItem(KEY) || '{}'); return {games: o.games && typeof o.games === 'object' ? o.games : {}, last: o.last || ''}; } catch (_) { return {games: {}, last: ''}; } };
     function saveGame(id, g, quiet = false) {
         const s = store(); s.games[id] = {name: meOf(g)?.name || 'Sans nom', city: g.city.name, saved: Date.now(), g}; s.last = id;
-        try { localStorage.setItem(KEY, JSON.stringify(s)); if (!quiet) toast('✓ Partie enregistrée.'); return true; }
-        catch (_) { toast('La partie n’a pas pu être enregistrée (plus de place sur cet ordinateur) : exporte-la dans un fichier.', 'error'); return false; }
+        noteBest(id, g);
+        // plus de place sur cet ordinateur : on retire d'abord les matins gardés des autres parties, puis on n'en garde que 3 pour celle-ci
+        const tries = [() => {}, () => Object.entries(s.games).forEach(([k, x]) => { if (k !== id && x?.g?.mornings?.length) x.g = {...x.g, mornings: []}; }), () => { s.games[id] = {...s.games[id], g: {...g, mornings: (g.mornings || []).slice(-3)}}; }];
+        for (const shrink of tries) { shrink(); try { localStorage.setItem(KEY, JSON.stringify(s)); if (!quiet) toast('✓ Partie enregistrée.'); return true; } catch (_) { /* on essaie plus petit */ } }
+        toast('La partie n’a pas pu être enregistrée (plus de place sur cet ordinateur) : exporte-la dans un fichier.', 'error'); return false;
+    }
+    /* ═════════ 🏆 Succès et records (sur cet ordinateur) ═════════ */
+    const RKEY = 'lcnda-bunker-records'; // « lcnda- » comme les parties : les clés « genealogie-… » sont recopiées dans la base (save_settings), celle-ci jamais
+    const recs = () => { try { const o = JSON.parse(localStorage.getItem(RKEY) || '{}'); return {ach: o.ach && typeof o.ach === 'object' ? o.ach : {}, best: o.best && typeof o.best === 'object' ? o.best : {}}; } catch (_) { return {ach: {}, best: {}}; } };
+    const recSave = r => { try { localStorage.setItem(RKEY, JSON.stringify(r)); } catch (_) { /* tant pis : la partie continue */ } };
+    /** les succès que la partie vient de gagner : gardés (date du jour) et annoncés une seule fois (message en bas à gauche) */
+    function noteAch(g) {
+        const keys = Array.isArray(g?.achNew) ? g.achNew.splice(0) : []; if (!keys.length) return;
+        const r = recs(); let changed = false;
+        keys.forEach(k => { const a = B().ACH.find(x => x[0] === k); if (!a || r.ach[k]) return; r.ach[k] = {at: new Date().toISOString(), who: meOf(g).name, scen: g.scen, day: B().dayOf(g.t)}; changed = true; toast(`🏆 Succès : ${a[1]} ${a[2]}`); });
+        if (changed) recSave(r);
+    }
+    /** la meilleure partie : une ligne par partie (jours tenus, habitants, scénario, difficulté, date), les 30 meilleures */
+    function noteBest(id, g) {
+        if (!id || !g) return; const r = recs(), al = g.people.filter(p => p.hp > 0).length, days = B().dayOf(g.t) - 1;
+        r.best[id] = {days, pop: al, tot: g.people.length, scen: g.scen, diff: g.diff, at: new Date().toISOString(), name: meOf(g).name, city: g.city.name, over: !!g.over, won: !!g.won};
+        r.best = Object.fromEntries(Object.entries(r.best).filter(([, x]) => x && typeof x === 'object').sort((a, b) => (b[1].days - a[1].days) || (b[1].pop - a[1].pop)).slice(0, 30));
+        recSave(r);
     }
     const meOf = g => g.people.find(p => p.me) || g.people[0];
 
     /* ═════════ La fenêtre ═════════ */
     let moveFrom = null, dragging = false;
-    let dlg = null, G = null, gid = '', tab = 'gens', placeSel = null, timer = 0, acc = 0, lastTick = 0, lastSaveHour = -1;
+    let overSaved = false, dlg = null, G = null, gid = '', tab = 'gens', placeSel = null, timer = 0, acc = 0, lastTick = 0, lastSaveHour = -1;
     function open() {
         if (!B()) { toast('Le bunker n’a pas pu se charger.', 'error'); return; }
         dlg?.remove();
@@ -43,24 +66,28 @@
         dlg.showModal(); startScreen();
     }
     ext.openBunker = open;
+    /** pour les tests : la partie en cours, et redessiner (jamais utilisé par l'app) */
+    ext.bunkerDebug = {game: () => G, redraw: () => { if (G && dlg) { noteAch(G); drawAll(); } }};
 
     /* ═════════ L'accueil : continuer ou commencer ═════════ */
     async function startScreen() {
         stop(); G = null; gid = '';
         const s = store(), saved = Object.entries(s.games).sort((a, b) => b[1].saved - a[1].saved);
         dlg.innerHTML = `<div class="bk-start">
-            <header class="bk-start-head"><span class="bk-hatch-ico" aria-hidden="true"></span><div><span class="eyebrow">☢ TU AS TROUVÉ LA TRAPPE</span><h2>Le bunker</h2><p class="muted">Personne ne sait qu’il existe. Tu y descends avec des ancêtres de ton arbre : il faut boire, manger, dormir, se laver… et tenir le plus longtemps possible.</p></div><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
+            <header class="bk-start-head"><span class="bk-hatch-ico" aria-hidden="true"></span><div><span class="eyebrow">☢ TU AS TROUVÉ LA TRAPPE</span><h2>Le bunker</h2><p class="muted">Personne ne sait qu’il existe. Tu y descends avec des ancêtres de ton arbre : il faut boire, manger, dormir, se laver… et tenir le plus longtemps possible.</p><p><button type="button" class="button small secondary" data-bk="records">🏆 Succès et records</button></p></div><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
             ${saved.length ? `<section class="bk-card"><h3>Parties enregistrées</h3><div class="bk-saves">${saved.map(([id, x]) => { const g = x.g; const al = g.people.filter(p => p.hp > 0).length;
                 return `<div class="bk-save"><div><b>Le bunker de ${esc(x.name)}</b><small>${esc(x.city)} · jour ${B().dayOf(g.t)} · ${g.over ? '☠️ terminé' : `${al} sur ${g.people.length} en vie`}</small></div><button type="button" class="button small" data-bk="resume" data-id="${esc(id)}">${g.over ? 'Revoir' : 'Continuer'}</button><button type="button" class="icon-button small" data-bk="delsave" data-id="${esc(id)}" title="Supprimer cette partie" aria-label="Supprimer">🗑</button></div>`; }).join('')}</div></section>` : ''}
             <form class="bk-card bk-new" data-bk-new><h3>Nouvelle partie</h3>
-                <div class="bk-field"><span class="pk-lab">Qui incarnes-tu ?</span>${P() ? P().pickerField({name: 'bk_me', kind: 'person', animals: false}) : '<input name="bk_me_txt" placeholder="Ton nom">'}</div>
+                <div class="bk-field"><span class="pk-lab">Scénario</span><select name="bk_scen">${scenOptions()}</select><p class="ui-hint" data-bk-scendesc></p></div>
+                <div class="bk-field bk-hist" data-bk-hist hidden><div class="bk-histline" data-bk-histline>${window.LCNDA_UI.spinner('On cherche les ancêtres qui vivaient à cette date…')}</div>
+                    <label>Combien descendent dans l’abri (avec toi) ? <select name="bk_hn">${[1, 2, 3, 4, 5, 6, 7].map(n => `<option value="${n}" ${n === 4 ? 'selected' : ''}>${n}</option>`).join('')}</select></label></div>
+                <div data-bk-modern><div class="bk-field"><span class="pk-lab">Qui incarnes-tu ?</span>${P() ? P().pickerField({name: 'bk_me', kind: 'person', animals: false}) : '<input name="bk_me_txt" placeholder="Ton nom">'}</div>
                 <div class="bk-field"><span class="pk-lab">Qui descend avec toi ?</span><div class="bk-team-tools"><label>Combien <select name="bk_n">${[0, 1, 2, 3, 4, 5, 6].map(n => `<option value="${n}" ${n === 3 ? 'selected' : ''}>${n}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-bk="propose" title="Ses proches d’abord : parents, conjoint, enfants, frères et sœurs">🎲 Proposer des proches</button></div>${P() ? P().pickerField({name: 'bk_team', kind: 'person', multiple: true, animals: false}) : ''}</div>
-                <div class="bk-field"><span class="pk-lab">Dans quelle ville ?</span><div class="bk-city"><select name="bk_city"><option value="">…</option></select><input name="bk_city_txt" placeholder="ou tape un nom de ville" maxlength="80"></div></div>
+                <div class="bk-field"><span class="pk-lab">Dans quelle ville ?</span><div class="bk-city"><select name="bk_city"><option value="">…</option></select><input name="bk_city_txt" placeholder="ou tape un nom de ville" maxlength="80"></div></div></div>
                 <div class="bk-field"><span class="pk-lab">🧳 Le coffre de famille <small class="muted">(3 objets de ta base au plus : chacun donne un petit avantage)</small></span><div class="bk-coffre" data-bk-coffre>${window.LCNDA_UI.spinner('Lecture des objets de famille…')}</div></div>
                 <div class="bk-field"><span class="pk-lab">Taille de la ville</span><div class="segmented bk-size" role="radiogroup">${Object.entries(B().SIZES).map(([k, [n, nb, l]]) => `<label><input type="radio" name="bk_size" value="${k}" ${k === 'moyenne' ? 'checked' : ''}><span>${l} <small>${nb} lieux</small></span></label>`).join('')}</div></div>
                 <details class="bk-field bk-setup" open><summary class="pk-lab">⚙️ Réglages de la partie</summary>
                     <div class="bk-field"><span class="pk-lab">Difficulté</span><div class="segmented bk-size" role="radiogroup">${Object.entries(B().DIFFS).map(([k, d]) => `<label><input type="radio" name="bk_diff" value="${k}" ${k === 'normal' ? 'checked' : ''}><span>${esc(d.l)}</span></label>`).join('')}</div></div>
-                    <div class="bk-field"><span class="pk-lab">Scénario</span><select name="bk_scen">${Object.entries(B().SCENARIOS).map(([k, [ico, l, d]]) => `<option value="${k}" title="${esc(d)}">${ico} ${esc(l)} — ${esc(d)}</option>`).join('')}</select></div>
                     <label class="checkbox-line"><input type="checkbox" name="bk_meteo" checked> 🌪️ Météo et catastrophes <small class="muted">(canicule, tempête, inondation, séisme, orage, vague de froid : des installations à réparer)</small></label>
                     <label class="checkbox-line"><input type="checkbox" name="bk_chaines"> 🧵 Chaînes de fabrication <small class="muted">(plantes → fil → tissu → vêtements chauds ; blé → farine → pain)</small></label>
                     <label class="checkbox-line"><input type="checkbox" name="bk_age"> 🧓 Vieillir <small class="muted">(un jour = un an : les bébés grandissent, les aînés ralentissent)</small></label>
@@ -71,8 +98,11 @@
                     <small class="muted">Tout se change aussi pendant la partie : onglet ⚙️ Réglages (sauf le scénario).</small></details>
                 <div class="bk-actions"><label class="button secondary bk-import">⤒ Ouvrir une partie (fichier)<input type="file" accept=".json,application/json" data-bk-import hidden></label><span class="spacer"></span><button type="submit" class="button">☢ Descendre dans le bunker</button></div>
             </form></div>`;
-        dlg.querySelector('[data-bk-new]').addEventListener('submit', e => { e.preventDefault(); begin(e.target); });
+        const form = dlg.querySelector('[data-bk-new]');
+        form.addEventListener('submit', e => { e.preventDefault(); begin(e.target); });
+        form.elements.bk_scen.addEventListener('change', () => histUi(form)); histUi(form);
         fillCoffre();
+        tree().then(() => { if (dlg?.contains(form)) { const v = form.elements.bk_scen.value; form.elements.bk_scen.innerHTML = scenOptions(); form.elements.bk_scen.value = v; histUi(form); } }).catch(() => {});
         // les villes de l'arbre, les plus fréquentes d'abord
         try {
             const tr = await tree(); const n = new Map();
@@ -82,6 +112,25 @@
             sel.innerHTML = `<option value="">Choisir une ville de ton arbre…</option>${list.map(v => `<option>${esc(v)}</option>`).join('')}`;
             if (list[0]) sel.value = list[0];
         } catch (_) { /* sans arbre : on tape le nom */ }
+    }
+    /** les scénarios : ceux d'aujourd'hui, puis les historiques avec combien d'ancêtres de ta famille vivaient à cette date */
+    function scenOptions() {
+        const S = B().SCENARIOS, H = B().HIST, opt = ([k, [ico, l]]) => { const n = H[k] && treeDone ? histOf(k).all.length : null; return `<option value="${k}">${ico} ${esc(l)}${n == null ? '' : ` · ${n ? plural(n, 'ancêtre') : 'aucun ancêtre'} de ta famille`}</option>`; };
+        return `<optgroup label="Aujourd’hui">${Object.entries(S).filter(([k]) => !H[k]).map(opt).join('')}</optgroup><optgroup label="📜 Dans l’histoire, avec tes ancêtres">${Object.entries(S).filter(([k]) => H[k]).map(opt).join('')}</optgroup>`;
+    }
+    let treeDone = null;
+    const histCache = new Map();
+    /** les ancêtres de l'arbre qui vivaient à la date d'un scénario (jamais un vivant ni une fiche confidentielle : moteur, histPool) */
+    function histOf(k) { if (!treeDone) return {all: [], local: 0}; if (!histCache.has(k)) histCache.set(k, B().histPool(k, treeDone.people, treeDone.places)); return histCache.get(k); }
+    /** un scénario historique : on cache « qui incarnes-tu », l'équipe et la ville ; on dit combien d'ancêtres y vivaient */
+    function histUi(form) {
+        const k = form.elements.bk_scen.value, H = B().HIST[k], S = B().SCENARIOS[k];
+        form.querySelector('[data-bk-scendesc]').textContent = S ? `${S[2]} Pour gagner : tenir ${B().SCEN_GOAL[k]} jours.` : '';
+        form.querySelector('[data-bk-hist]').hidden = !H; form.querySelector('[data-bk-modern]').hidden = !!H;
+        if (!H || !treeDone) return;
+        const P0 = histOf(k), Y = H.date[0], n = P0.all.length, line = form.querySelector('[data-bk-histline]');
+        line.innerHTML = n ? `👥 <b>${plural(n, 'ancêtre')} de ta famille</b> vivai${n > 1 ? 'en' : ''}t en ${Y}${P0.local ? `, dont ${P0.local} ${esc(H.region)}` : ''} : ${n > 1 ? 'ils descendent' : 'il ou elle descend'} dans l’abri, ceux de la région d’abord. S’il en manque, des habitants inventés de l’époque complètent le groupe.`
+            : `👥 Aucun ancêtre de ta famille ne vivait en ${Y} (d’après les dates de naissance et de décès de ta base) : le groupe sera fait d’habitants inventés de l’époque.`;
     }
     /** le coffre : les objets de famille de la base, à cocher (3 au plus) */
     let objs = [];
@@ -95,7 +144,9 @@
         box.addEventListener('change', e => { if (!e.target.matches('[name="bk_obj"]')) return; const on = box.querySelectorAll('[name="bk_obj"]:checked'); if (on.length > 3) { e.target.checked = false; toast('Le coffre ne contient que 3 objets.'); } });
     }
     let treeP = null;
-    function tree() { treeP = treeP || (ext.tresors?.T?.tree ? ext.tresors.T.tree() : A().api('tresor_tree').then(d => ({...d, byId: new Map(d.people.map(p => [p.id, p]))}))); return treeP.catch(e => { treeP = null; throw e; }); }
+    function tree() { treeP = treeP || (ext.tresors?.T?.tree ? ext.tresors.T.tree() : A().api('tresor_tree').then(d => ({...d, byId: new Map(d.people.map(p => [p.id, p]))}))); return treeP.then(t => { treeDone = t; return t; }).catch(e => { treeP = null; throw e; }); }
+    /** jamais un vivant, une fiche confidentielle ni une fiche cachée au partage (vivant probable) parmi ceux que le jeu choisit seul */
+    const shareable = p => p && !p.living && !p.priv && !p.sh;
     const nameOf = p => (p ? p.name || [p.first, p.last].filter(Boolean).join(' ') || 'Sans nom' : 'Sans nom');
     /** les proches d'abord (parents, conjoints, enfants, frères et sœurs), puis d'autres ancêtres au hasard */
     async function propose(form) {
@@ -108,12 +159,14 @@
             (tr.families || []).filter(f => f.a === me || f.b === me).forEach(f => { push(f.a === me ? f.b : f.a); (f.children || []).forEach(push); });
             (tr.families || []).filter(f => f.children?.includes(me)).forEach(f => f.children.forEach(push));
         }
-        const rest = tr.people.filter(x => !x.living && x.id !== me && !out.includes(x.id)).map(x => x.id);
+        const rest = tr.people.filter(x => shareable(x) && x.id !== me && !out.includes(x.id)).map(x => x.id);
         while (out.length < n && rest.length) push(rest.splice(Math.floor(Math.random() * rest.length), 1)[0]);
         const field = form.querySelector('[data-picker][data-pk-opts*="bk_team"]');
         if (field) P().pickerSet(field, out.slice(0, n));
     }
     async function begin(form) {
+        const scen = form.elements.bk_scen?.value || 'classique';
+        if (B().HIST[scen]) return beginHist(form, scen);
         const meField = form.querySelector('[data-picker][data-pk-opts*="bk_me"]'), teamField = form.querySelector('[data-picker][data-pk-opts*="bk_team"]');
         const meId = Number(meField ? P().pickerValue(meField) : 0) || 0;
         if (meField && !meId) { UI().fail?.(meField, 'Choisis l’ancêtre que tu incarnes.'); return; }
@@ -128,12 +181,28 @@
         // les objets de famille qui ne sont pas dans le coffre : on peut les retrouver dans les ruines
         const chosen = new Set([...form.querySelectorAll('[name="bk_obj"]:checked')].map(i => Number(i.value)));
         const ruins = objs.filter((o, i) => !chosen.has(i)).sort(() => Math.random() - 0.5).slice(0, 12).map(o => ({title: o.title, kind: o.kind, description: o.description}));
-        const setup = {diff: form.elements.bk_diff?.value || 'normal', scen: form.elements.bk_scen?.value || 'classique', opt: Object.fromEntries(B().OPT_KEYS.map(k => [k, !!form.elements['bk_' + k]?.checked]))};
+        const setup = {diff: form.elements.bk_diff?.value || 'normal', scen, opt: Object.fromEntries(B().OPT_KEYS.map(k => [k, !!form.elements['bk_' + k]?.checked]))};
         G = B().newGame({me: meId ? who(meId) : {name: form.elements.bk_me_txt?.value || 'Moi'}, team: teamIds.map(who), city: {name: city, size: form.elements.bk_size.value}, coffre, season0, ruins, ...setup, ...more});
         await locateCity(G.city);
         gid = 'b' + Date.now().toString(36); saveGame(gid, G, true); tab = 'gens'; placeSel = null; route = []; mapScroll = null; play();
     }
 
+    /** 📜 un scénario historique : les ancêtres qui vivaient à cette date (ceux de la région d'abord), complétés par des habitants inventés */
+    async function beginHist(form, scen) {
+        const H = B().HIST[scen], n = Math.max(1, Math.min(7, Number(form.elements.bk_hn?.value) || 4));
+        let tr = null; try { tr = await tree(); } catch (_) { /* sans arbre : des habitants inventés */ }
+        const pool = histOf(scen).all.slice(), mix = l => l.map(x => [Math.random(), x]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+        const all = [...mix(pool.filter(p => p.local)), ...mix(pool.filter(p => !p.local))].sort((a, b) => (b.local - a.local) || ((b.age >= 16) - (a.age >= 16))), team = all.slice(0, n), ids = team.map(p => p.pid).filter(Boolean);
+        const coffre = [...form.querySelectorAll('[name="bk_obj"]:checked')].slice(0, 3).map(i => objs[Number(i.value)]).filter(Boolean).map(o => ({title: o.title, kind: o.kind, description: o.description}));
+        const chosen = new Set([...form.querySelectorAll('[name="bk_obj"]:checked')].map(i => Number(i.value)));
+        const ruins = objs.filter((o, i) => !chosen.has(i)).sort(() => Math.random() - 0.5).slice(0, 12).map(o => ({title: o.title, kind: o.kind, description: o.description}));
+        const more = await fromTree(tr, ids, H.city);
+        more.extras = all.slice(n, n + 12).map(p => ({pid: p.pid, name: p.name, gender: p.gender, occ: p.occ, by: p.by})); // les voyageurs à la trappe : eux aussi de l'époque
+        const setup = {diff: form.elements.bk_diff?.value || 'normal', scen, opt: Object.fromEntries(B().OPT_KEYS.map(k => [k, !!form.elements['bk_' + k]?.checked]))};
+        G = B().newGame({me: team[0], team: team.slice(1), want: n, city: {name: H.city, size: form.elements.bk_size.value}, coffre, ruins, ...setup, ...more});
+        await locateCity(G.city);
+        gid = 'b' + Date.now().toString(36); saveGame(gid, G, true); tab = 'gens'; placeSel = null; route = []; mapScroll = null; play();
+    }
     /** ce que l'arbre et la base apportent à la partie : liens de famille, voyageurs, maisons natales, histoires, lettres, prénoms */
     async function fromTree(tr, ids, city) {
         const out = {kin: [], extras: [], homes: [], lore: [], letters: [], names: {f: [], m: []}};
@@ -145,7 +214,7 @@
                 const A1 = anc(a), B1 = anc(b);
                 if (A1.has(b) || B1.has(a) || [...A1].some(x => B1.has(x))) out.kin.push([a, b, 'sang']);
             }));
-            const shuffled = tr.people.filter(p => !p.living && !ids.includes(p.id)).sort(() => Math.random() - 0.5);
+            const shuffled = tr.people.filter(p => shareable(p) && !ids.includes(p.id)).sort(() => Math.random() - 0.5);
             out.extras = shuffled.slice(0, 12).map(p => ({pid: p.id, name: nameOf(p), gender: p.gender || '', occ: p.occ || '', by: p.by || 0}));
             const here = p => p.bplace && tr.places[p.bplace] && fold(String(tr.places[p.bplace].name).split(',')[0]) === fold(city);
             out.homes = [...tr.people.filter(p => ids.includes(p.id) && here(p)), ...tr.people.filter(p => !ids.includes(p.id) && here(p))].slice(0, 2).map(p => ({name: nameOf(p), by: p.by || 0}));
@@ -153,7 +222,7 @@
             out.names = {f: firsts('female'), m: firsts('male')};
             // 📜 les ancêtres des missions : de vraies fiches (nom, naissance, lieu, métier) ; rien n'est jamais écrit dans l'arbre
             const married = id => (tr.families || []).some(f => f.a === id || f.b === id);
-            out.ancestors = tr.people.filter(p => !p.living).sort(() => Math.random() - 0.5).slice(0, 30).map(p => ({pid: p.id, name: nameOf(p), by: p.by || 0, bplace: p.bplace && tr.places[p.bplace] ? String(tr.places[p.bplace].name).split(',')[0] : '', occ: p.occ || '', married: married(p.id), dy: p.dy || 0}));
+            out.ancestors = tr.people.filter(shareable).sort(() => Math.random() - 0.5).slice(0, 30).map(p => ({pid: p.id, name: nameOf(p), by: p.by || 0, bplace: p.bplace && tr.places[p.bplace] ? String(tr.places[p.bplace].name).split(',')[0] : '', occ: p.occ || '', married: married(p.id), dy: p.dy || 0}));
         }
         try { out.lore = ((await A().api('family_memories'))?.memories || []).filter(m => m.title).sort(() => Math.random() - 0.5).slice(0, 30).map(m => ({kind: m.kind || '', title: m.title, text: String(m.content || '').replace(/\s+/g, ' ').slice(0, 200)})); } catch (_) {}
         // les lettres aux descendants : seulement le titre, de qui, pour qui (jamais le contenu)
@@ -189,14 +258,14 @@
 
     /* ═════════ La partie ═════════ */
     function play() {
-        moveFrom = null; dragging = false; mapFull = false;
+        moveFrom = null; dragging = false; mapFull = false; overSaved = !!G.over; noteAch(G);
         lastSaveHour = Math.floor(G.t / 360);
         dlg.innerHTML = `<div class="bk-game">
             <header class="bk-top"><b class="bk-title">☢ Le bunker de ${esc(meOf(G).name)}</b><span class="bk-clock" data-bk-clock></span><span class="bk-state" data-bk-state></span><span class="spacer"></span>
                 <div class="segmented bk-speed" role="group" aria-label="Vitesse">${[[0, '⏸', 'Pause (Espace)'], [1, '×1', '1 heure de jeu en 6 secondes'], [2, '×2', 'Deux fois plus vite'], [4, '×4', 'Quatre fois plus vite']].map(([v, l, t]) => `<button type="button" data-bk="speed" data-v="${v}" title="${t}">${l}</button>`).join('')}</div>
-                <button type="button" class="icon-button small" data-bk="full" data-bk-full title="Plein écran" aria-label="Plein écran" aria-pressed="false">⛶</button><button type="button" class="icon-button small" data-bk="mute" data-bk-mute title="Couper ou remettre le son" aria-label="Son">🔊</button><button type="button" class="button small secondary" data-bk="gazette" title="Le journal de la partie">📰 Gazette</button><button type="button" class="button small secondary" data-bk="book" title="Le récit de la partie, jour après jour">📖 Livre</button><button type="button" class="button small" data-bk="save" data-shortcut="⌘S">💾 Enregistrer</button><button type="button" class="button small secondary" data-bk="export" title="Garder la partie dans un fichier">⤓ Exporter</button><button type="button" class="button small secondary" data-bk="menu">↩ Parties</button><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
+                <button type="button" class="icon-button small" data-bk="full" data-bk-full title="Plein écran" aria-label="Plein écran" aria-pressed="false">⛶</button><button type="button" class="icon-button small" data-bk="mute" data-bk-mute title="Couper ou remettre le son" aria-label="Son">🔊</button><button type="button" class="button small secondary" data-bk="gazette" title="Le journal de la partie">📰 Gazette</button><button type="button" class="button small" data-bk="save" data-shortcut="⌘S">💾 Enregistrer</button><button type="button" class="button small secondary" data-bk="menu">↩ Parties</button><button type="button" class="icon-button small" data-bk="more" title="Plus d’actions" aria-label="Plus d’actions">⋯</button><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
             <p class="bk-news" data-bk-news aria-live="polite"></p><div class="bk-tuto" data-bk-tuto hidden></div><div class="bk-visit" data-bk-visit hidden></div>
-            <div class="bk-main"><section class="bk-world" data-bk-world></section><aside class="bk-side"><div class="segmented bk-tabs" role="tablist">${[['gens', '👥 Habitants'], ['res', '📦 Réserves'], ['atelier', '🛠️ Atelier'], ['bric', '♻️ Bric-à-brac'], ['ville', '🗺️ Ville'], ['famille', '🌳 Famille'], ['radio', '📻 Radio'], ['stats', '📊 Stats'], ['regl', '⚙️ Réglages']].map(([k, l]) => `<button type="button" role="tab" data-bk="tab" data-v="${k}">${l}</button>`).join('')}</div><div class="bk-sbody" data-bk-side></div></aside></div><div class="bk-gz" data-bk-gz hidden></div></div>`;
+            <div class="bk-main"><section class="bk-world" data-bk-world></section><aside class="bk-side"><div class="segmented bk-tabs" role="tablist">${[['gens', '👥 Habitants'], ['res', '📦 Réserves'], ['atelier', '🛠️ Atelier'], ['bric', '♻️ Bric-à-brac'], ['ville', '🗺️ Ville'], ['famille', '🌳 Famille'], ['radio', B().crier(G) ? '📯 Crieur' : '📻 Radio'], ['stats', '📊 Stats'], ['regl', '⚙️ Réglages']].map(([k, l]) => `<button type="button" role="tab" data-bk="tab" data-v="${k}">${l}</button>`).join('')}</div><div class="bk-sbody" data-bk-side></div></aside></div><div class="bk-gz" data-bk-gz hidden></div></div>`;
         drawAll(); go();
     }
     function go() { stop(); lastTick = performance.now(); acc = 0; timer = setInterval(tick, 200); }
@@ -210,20 +279,22 @@
         try { while (acc >= 10 && n < 40) { B().step(G); acc -= 10; n++; } }
         catch (err) { stop(); console.error(err); toast('La partie s’est arrêtée sur une erreur (fichier abîmé ?).', 'error'); return; }
         if (!n) return;
+        noteAch(G);
+        if (G.over && !overSaved) { overSaved = true; saveGame(gid, G, true); }
         if (Math.floor(G.t / 360) !== lastSaveHour) { lastSaveHour = Math.floor(G.t / 360); saveGame(gid, G, true); } // toutes les 6 h de jeu
         drawAll(true); SND.update(G); SND.events(G);
     }
     function setSpeed(v) { if (!G) return; G.speed = v; drawTop(); }
     let hoverChart = false; // la souris sur une courbe : on ne redessine pas le panneau sous elle
-    const busy = () => { const a = document.activeElement; return hoverChart || !!(a && dlg?.contains(a) && a.closest('[data-bk-side]') && a.matches('select, input, textarea')) || !!document.querySelector('.ui-menu, .lc-menu-pop'); };
+    const busy = () => { const a = document.activeElement; return hoverChart || !!(a && dlg?.contains(a) && a.closest('[data-bk-side]') && a.matches('select, input, textarea')) || !!document.querySelector('.ui-menu, .lc-menu-pop, .ui-actmenu'); };
     function drawAll(fromTick = false) { drawTop(); drawWorld(); if (!fromTick || !busy()) drawSide(); const mu = dlg?.querySelector('[data-bk-mute]'); if (mu) { mu.textContent = SND.pref.on ? '🔊' : '🔇'; mu.setAttribute('aria-pressed', String(!SND.pref.on)); } }
 
     function drawTop() {
         const c = dlg.querySelector('[data-bk-clock]'); if (!c) return;
         const night = B().isNight(G.t);
-        c.textContent = `Jour ${B().dayOf(G.t)} · ${B().clock(G.t)}`;
-        const S = B().SEASONS.find(x => x[0] === B().seasonOf(G)), src = {essence: 'groupe électrogène', soleil: 'panneau solaire', vent: 'éolienne', pedales: 'dynamo à pédales'}[G.powerSrc];
-        dlg.querySelector('[data-bk-state]').innerHTML = `<span title="${S[2]}${G.cold ? ' : il fait froid dans le bunker' : ''}">${S[1]}${G.cold ? '🥶' : ''}</span> <span title="${night ? 'Nuit' : 'Jour'}">${G.weather.rain ? '🌧️' : night ? '🌙' : '☀️'}</span>${G.event ? ` <span class="bk-event" title="${esc(B().EVENTS[G.event.k][1])} : ${esc(B().EVENTS[G.event.k][2])}">${B().EVENTS[G.event.k][0]}</span>` : ''}${Object.keys(G.broken || {}).length ? ` <span title="${Object.keys(G.broken).length} installation(s) en panne">🔧${Object.keys(G.broken).length}</span>` : ''} <span class="${G.power ? 'is-on' : 'is-off'}" title="${G.power ? `Électricité (${src})` : 'Pas d’électricité'}">${G.power ? ({soleil: '☀️⚡', vent: '🌬️⚡', pedales: '🚲⚡'}[G.powerSrc] || '⚡') : '🔌'}</span>${G.air < 30 ? ' <span title="L’air est lourd">🌀</span>' : ''}`;
+        const dt = B().dateOf(G); c.textContent = `Jour ${B().dayOf(G.t)}${dt ? ` · ${dt}` : ''} · ${B().clock(G.t)}`;
+        const S = B().SEASONS.find(x => x[0] === B().seasonOf(G)), src = {essence: 'groupe électrogène', soleil: 'panneau solaire', vent: 'éolienne', pedales: 'dynamo à pédales', eau: 'turbine hydraulique', batteries: 'banc de batteries'}[G.powerSrc];
+        dlg.querySelector('[data-bk-state]').innerHTML = `<span title="${S[2]}${G.cold ? ' : il fait froid dans le bunker' : ''}">${S[1]}${G.cold ? '🥶' : ''}</span> <span title="${night ? 'Nuit' : 'Jour'}">${G.weather.rain ? '🌧️' : night ? '🌙' : '☀️'}</span>${G.event ? ` <span class="bk-event" title="${esc(B().EVENTS[G.event.k][1])} : ${esc(B().EVENTS[G.event.k][2])}">${B().EVENTS[G.event.k][0]}</span>` : ''}${Object.keys(G.broken || {}).length ? ` <span title="${Object.keys(G.broken).length} installation(s) en panne">🔧${Object.keys(G.broken).length}</span>` : ''} ${!B().eraOf(G).elec ? '<span title="Pas d’électricité à cette époque : on s’éclaire à la chandelle">🕯️</span>' : `<span class="${G.power ? 'is-on' : 'is-off'}" title="${G.power ? `Électricité (${src})` : 'Pas d’électricité'}">${G.power ? ({soleil: '☀️⚡', vent: '🌬️⚡', pedales: '🚲⚡', eau: '💧⚡'}[G.powerSrc] || '⚡') : '🔌'}</span>`}${G.air < 30 ? ' <span title="L’air est lourd">🌀</span>' : ''}`;
         drawVisit();
         dlg.querySelectorAll('[data-bk="speed"]').forEach(b => { const on = Number(b.dataset.v) === G.speed; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on); });
         dlg.querySelectorAll('[data-bk="tab"]').forEach(b => { const on = b.dataset.v === tab; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', on); });
@@ -273,21 +344,21 @@
                 <span class="bk-skyline" aria-hidden="true"></span><span class="bk-out">${out.map(p => pawn(p)).join('')}${out.length ? `<small>${plural(out.length, 'parti', 'partis')} en ville</small>` : ''}</span>
                 <span class="bk-ground"><span class="bk-trap${G.visit ? ' is-knock' : ''}" title="${G.visit ? 'Quelqu’un frappe à la trappe !' : 'La trappe'}">${G.visit ? '🔔' : '▦'}</span></span></div>
             <div class="bk-floors${moveFrom ? ' is-moving' : ''}">${moveFrom ? '<p class="bk-movehint">↔ Clique sur la place où le mettre (une place prise : les deux s’échangent) · <button type="button" class="link-button" data-bk="movecancel">Annuler</button></p>' : ''}${G.floors.map((f, fi) => `<div class="bk-floor${G.fire?.fi === fi ? ' is-fire' : ''}"><span class="bk-flabel">−${fi + 1}${G.fire?.fi === fi ? '<i title="Le feu !">🔥</i>' : ''}${(G.deco?.[fi] || []).length ? `<span class="bk-deco" title="${esc(G.deco[fi].map(d => B().DECOS[d.k][1] + (d.name ? ` de ${d.name}` : '')).join(', '))}">${G.deco[fi].map(d => B().DECOS[d.k][0]).join('')}</span>` : ''}</span><div class="bk-slots">${f.slots.map((k, si) => {
-                const it = k && B().ITEMS[k], bd = building.get(`${fi},${si}`), who = at.get(`${fi},${si}`) || [];
+                const it = k && {...B().ITEMS[k], ...(B().fixedName(G, k)[1] ? {ico: B().fixedName(G, k)[0], name: B().fixedName(G, k)[1]} : {})}, bd = building.get(`${fi},${si}`), who = at.get(`${fi},${si}`) || [];
                 const key = `${fi},${si}`, brk = !!G.broken?.[key], L = G.lvl?.[key] || 1, wk = bd && (bd.b.rep || bd.b.up);
                 const mv = moveFrom && moveFrom[0] === fi && moveFrom[1] === si ? ' is-movesrc' : '';
-                if (it) return `<button type="button" draggable="true" class="bk-slot is-item${mv}${!G.power && (['radio', 'atelier', 'douche', 'potager'].includes(k) || it.power) ? ' is-dark' : ''}${brk ? ' is-broken' : ''}" data-bk="slot" data-f="${fi}" data-s="${si}" title="${esc(it.name)}${L > 1 ? ` (niveau ${L})` : ''}${brk ? ' — EN PANNE : clique pour réparer' : ''} — ${esc(it.desc)}"><span class="bk-ico">${it.ico}</span><span class="bk-name">${esc(it.name)}</span>${L > 1 ? `<span class="bk-lvl">${'★'.repeat(L)}</span>` : ''}${brk ? '<span class="bk-brk" aria-label="En panne">🔧</span>' : ''}${wk ? `<span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || 1)))}%"></i></span>` : ''}<span class="bk-who">${who.map(pawn).join('')}</span></button>`;
+                if (it) return `<button type="button" draggable="true" class="bk-slot is-item${mv}${!B().lit(G) && (['radio', 'atelier', 'douche', 'potager'].includes(k) || it.power) ? ' is-dark' : ''}${brk ? ' is-broken' : ''}" data-bk="slot" data-f="${fi}" data-s="${si}" title="${esc(it.name)}${L > 1 ? ` (niveau ${L})` : ''}${brk ? ' — EN PANNE : clique pour réparer' : ''} — ${esc(it.desc)}"><span class="bk-ico">${it.ico}</span><span class="bk-name">${esc(it.name)}</span>${L > 1 ? `<span class="bk-lvl">${'★'.repeat(L)}</span>` : ''}${brk ? '<span class="bk-brk" aria-label="En panne">🔧</span>' : ''}${wk ? `<span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || 1)))}%"></i></span>` : ''}<span class="bk-who">${who.map(pawn).join('')}</span></button>`;
                 if (bd) return `<button type="button" draggable="true" class="bk-slot is-building${mv}" data-bk="slot" data-f="${fi}" data-s="${si}" title="En construction : ${esc(B().ITEMS[bd.b.k].name)}"><span class="bk-ico">${B().ITEMS[bd.b.k].ico}</span><span class="bk-name">${esc(B().ITEMS[bd.b.k].name)}</span><span class="bk-bar"><i style="width:${Math.round(100 * (1 - bd.b.left / (bd.b.tot || B().ITEMS[bd.b.k].h)))}%"></i></span></button>`;
                 return `<button type="button" class="bk-slot is-empty" data-bk="slot" data-f="${fi}" data-s="${si}" title="${moveFrom ? 'Poser ici (sans frais)' : 'Place libre : construire ici'}">＋</button>`;
             }).join('')}</div>${fi === 0 ? `<div class="bk-hall" title="Ceux qui attendent">${(at.get('hall') || []).map(pawn).join('')}${(G.pets || []).map(a => `<span class="bk-pet" title="${esc(a.name)}">${B().PETS[a.k][0]}</span>`).join('')}</div>` : ''}</div>`).join('')}
             ${G.floors.length < B().MAX_FLOORS ? `<button type="button" class="bk-dig" data-bk="digpanel" title="Choisir qui creuse"><span>⛏️ ${G.dig.done > 0 ? 'Étage en cours de creusement' : 'Creuser un étage'}</span><span class="bk-bar"><i style="width:${Math.round(100 * G.dig.done / B().DIG_HOURS)}%"></i></span><span class="bk-who">${(at.get('dig') || []).map(pawn).join('')}</span></button>` : '<p class="muted bk-deep">Le bunker ne peut pas descendre plus bas.</p>'}</div>
-            ${G.over ? `<div class="bk-over"><b>☠️ Plus personne en vie</b><p>Le bunker a tenu ${plural(B().dayOf(G.t) - 1, 'jour')}.</p><button type="button" class="button" data-bk="gazette">📰 Lire la gazette</button><button type="button" class="button secondary" data-bk="menu">↩ Revenir aux parties</button></div>` : ''}`;
+            ${G.over ? `<div class="bk-over"><b>☠️ Plus personne en vie</b><p>Le bunker a tenu ${plural(B().dayOf(G.t) - 1, 'jour')}.</p>${G.mornings?.length ? `<button type="button" class="button" data-bk="rewind">⏪ Reprendre au matin du jour ${G.mornings[G.mornings.length - 1].d}…</button>` : ''}<button type="button" class="button ${G.mornings?.length ? 'secondary' : ''}" data-bk="gazette">📰 Lire la gazette</button><button type="button" class="button secondary" data-bk="records">🏆 Succès et records</button><button type="button" class="button secondary" data-bk="menu">↩ Revenir aux parties</button></div>` : ''}`;
     }
     const atelierAt = () => { const x = B().items(G).find(i => i.k === 'atelier'); return x ? `${x.fi},${x.si}` : 'hall'; };
 
     /* ── le panneau de droite ── */
     const bar = (v, cls = '') => `<span class="bk-bar ${cls}${v < 25 ? ' is-low' : ''}"><i style="width:${Math.round(v)}%"></i></span>`;
-    const resName = r => B().RES.find(x => x[0] === r);
+    const resName = r => B().resInfo(G, r);
     const costTxt = cost => Object.entries(cost || {}).map(([r, n]) => `<span class="${(G.res[r] || 0) < n ? 'is-miss' : ''}">${resName(r)[1]} ${n}</span>`).join(' ');
     let lastSide = '';
     function drawSide() {
@@ -328,23 +399,24 @@
         }).join('');
     }
     function sideRes() {
+        const grp = (a, b) => B().RES.slice(a, b).filter(x => B().resOk(G, x[0])).map(x => B().resInfo(G, x[0]));
         const row = ([r, ico, l, u]) => { const c = B().cap(G, r); return `<span>${ico} ${l}</span><b>${Math.floor(G.res[r])}${u ? ' ' + u : ''} <small>/ ${c}</small></b>${bar(100 * G.res[r] / c)}`; };
-        return `<h4>Réserves</h4><div class="bk-res">${B().RES.slice(0, 10).map(row).join('')}</div>
-            <h4>Composants</h4><div class="bk-res">${B().RES.slice(10, 20).map(row).join('')}</div>${G.opt?.chaines ? `<h4>Fabrication</h4><div class="bk-res">${B().RES.slice(20).map(row).join('')}</div><p class="muted">Plantes → 🧶 rouet → fil → 🪢 métier à tisser → tissu → 🧥 tailleur → vêtements chauds (l’hiver, le froid fait bien moins de mal). Blé → ⚙️ moulin → farine → 🍞 four à pain.</p>` : ''}<p class="muted">Les composants viennent surtout du ♻️ bric-à-brac qu’on démonte (et de certains lieux : droguerie, électroménager, usine…).</p>
+        return `<h4>Réserves</h4><div class="bk-res">${grp(0, 10).map(row).join('')}</div>
+            <h4>Composants</h4><div class="bk-res">${grp(10, 20).map(row).join('')}</div>${G.opt?.chaines ? `<h4>Fabrication</h4><div class="bk-res">${grp(20).map(row).join('')}</div><p class="muted">Plantes → 🧶 rouet → fil → 🪢 métier à tisser → tissu → 🧥 tailleur → vêtements chauds (l’hiver, le froid fait bien moins de mal). Blé → ⚙️ moulin → farine → 🍞 four à pain.</p>` : ''}<p class="muted">Les composants viennent surtout du ♻️ bric-à-brac qu’on démonte (et de certains lieux : droguerie, électroménager, usine…).</p>
             <p class="muted">Plus de place : étagères, stockage, garde-manger, citerne, cuves. L’eau de pluie passe au ⚗️ filtre avant d’être bue (sinon : risque de fièvre).</p>
             ${B().has(G, 'filtre') ? `<p>${G.filterClog ? '⚗️ <b>Filtre encrassé</b> : il faut 1 tissu.' : `⚗️ Filtre : ${Math.round(G.filterUse)} / 30 L avant de le nettoyer (1 tissu).`}</p>` : ''}
             <h4>🍲 La cuisine</h4>${kitchenHtml()}
             <h4>🐀 Nuisibles</h4><div class="bk-res"><span>${G.pests >= 50 ? '🪳 Invasion' : G.pests >= 10 ? '🐀 Des rats' : '✓ Presque rien'}</span><b>${Math.round(G.pests || 0)} %</b>${bar(G.pests || 0, 'is-bad')}</div><p class="muted">Ils viennent quand il y a de quoi manger. ${B().has(G, 'piegerats') ? '🪤 Pièges posés. ' : 'Des 🪤 pièges, '}${G.pets?.some(a => a.k === 'chat') ? '🐈 le chat chasse. ' : 'un 🐈 chat, '}${B().has(G, 'hermetique') ? '🫙 réserves fermées.' : 'des 🫙 bocaux hermétiques les arrêtent.'}</p>
             <h4>Air</h4><div class="bk-res"><span>🌀 Conduit d’aération</span><b>${Math.round(G.air)} %</b>${bar(G.air)}</div><p class="muted">Il s’encrasse, plus vite quand on est nombreux ; quelqu’un de libre le nettoie. Air lourd : on dort mal, le moral baisse.</p>
             <h4>Saison</h4><p>${(S => `${S[1]} ${S[2]}`)(B().SEASONS.find(x => x[0] === B().seasonOf(G)))} · une saison dure ${B().SEASON_DAYS} jours. ${B().seasonOf(G) === 'hiver' ? (G.cold ? '🥶 Il fait froid : il faut un poêle à bois (et du bois).' : '🔥 Le poêle chauffe le bunker.') : B().seasonOf(G) === 'ete' ? 'Il pleut moins, on a plus soif.' : B().seasonOf(G) === 'printemps' ? 'Il pleut plus souvent.' : ''}</p>
-            <h4>Électricité</h4><p>${G.power ? ({soleil: '☀️ Le panneau solaire', vent: '🌬️ L’éolienne', pedales: '🚲 La dynamo à pédales', batteries: '🔋 Le banc de batteries'}[G.powerSrc] || '⚡ Le groupe électrogène') + ' donne le courant' : G.powerOn ? '🔌 Plus d’essence : pas d’électricité' : '🔌 Groupe électrogène éteint'} — le groupe brûle ${B().has(G, 'econome') ? '⅛' : '¼'} L d’essence par heure, seulement quand rien d’autre ne donne de courant.${B().sumOf(G, 'store') ? ` 🔋 Batteries : ${Math.floor(G.batt || 0)} h / ${B().sumOf(G, 'store')} h en réserve.` : ''}</p>
-            <button type="button" class="button small secondary" data-bk="power">${G.powerOn ? 'Éteindre pour économiser l’essence' : 'Rallumer le groupe électrogène'}</button>
-            <h4>Outils</h4><div class="bk-chips">${Object.entries(B().TOOLS).map(([k, [ico, l, d]]) => `<span class="bk-chip${G.tools.includes(k) ? '' : ' is-off'}" title="${esc(d)}">${ico} ${esc(l)}${G.tools.includes(k) ? '' : ' (à trouver)'}</span>`).join('')}</div>`;
+            ${!B().eraOf(G).elec ? `<h4>Lumière</h4><p>🕯️ Pas d’électricité à cette époque : on s’éclaire à la chandelle, l’atelier marche à la main, les nouvelles arrivent par le 📯 crieur et la gazette.</p>` : `<h4>Électricité</h4><p>${G.power ? ({soleil: '☀️ Le panneau solaire', vent: '🌬️ L’éolienne', pedales: '🚲 La dynamo à pédales', batteries: '🔋 Le banc de batteries'}[G.powerSrc] || '⚡ Le groupe électrogène') + ' donne le courant' : G.powerOn ? '🔌 Plus d’essence : pas d’électricité' : '🔌 Groupe électrogène éteint'} — le groupe brûle ${B().has(G, 'econome') ? '⅛' : '¼'} L d’essence par heure, seulement quand rien d’autre ne donne de courant.${B().sumOf(G, 'store') ? ` 🔋 Batteries : ${Math.floor(G.batt || 0)} h / ${B().sumOf(G, 'store')} h en réserve.` : ''}</p>
+            <button type="button" class="button small secondary" data-bk="power">${G.powerOn ? 'Éteindre pour économiser l’essence' : 'Rallumer le groupe électrogène'}</button>`}
+            <h4>Outils</h4><div class="bk-chips">${Object.keys(B().TOOLS).map(k => [k, B().toolInfo(G, k)]).map(([k, [ico, l, d]]) => `<span class="bk-chip${G.tools.includes(k) ? '' : ' is-off'}" title="${esc(d)}">${ico} ${esc(l)}${G.tools.includes(k) ? '' : ' (à trouver)'}</span>`).join('')}</div>`;
     }
     function sideAtelier() {
         const IT = B().ITEMS;
         return `<h4>En construction</h4>${G.builds.length ? `<ol class="bk-builds">${G.builds.map((b, i) => `<li>${b.rep ? '🔧 Réparer : ' : b.up ? `⬆️ Niveau ${b.up} : ` : ''}${IT[b.k].ico} ${esc(IT[b.k].name)} <small>étage −${b.fi + 1} · encore ${Math.max(0, Math.ceil(b.left * 10) / 10)} h</small><button type="button" class="icon-button small" data-bk="unbuild" data-i="${i}" title="Annuler (les matériaux reviennent)" aria-label="Annuler">×</button></li>`).join('')}</ol>
-            ${!G.power ? '<p class="ui-notice is-error">Pas d’électricité : l’atelier est à l’arrêt.</p>' : ''}${!G.people.some(p => p.hp > 0 && p.where === 'base' && p.job === 'construire') ? '<p class="ui-notice">Personne n’est à l’atelier : mets quelqu’un sur « 🔨 Construire » (onglet Habitants).</p>' : ''}` : A().emptyState({icon: '🛠️', text: 'Rien en construction.', hint: 'Clique sur une place libre du bunker (＋), ou sur « Construire » ci-dessous.'})}
+            ${!B().lit(G) ? '<p class="ui-notice is-error">Pas d’électricité : l’atelier est à l’arrêt.</p>' : ''}${!G.people.some(p => p.hp > 0 && p.where === 'base' && p.job === 'construire') ? '<p class="ui-notice">Personne n’est à l’atelier : mets quelqu’un sur « 🔨 Construire » (onglet Habitants).</p>' : ''}` : A().emptyState({icon: '🛠️', text: 'Rien en construction.', hint: 'Clique sur une place libre du bunker (＋), ou sur « Construire » ci-dessous.'})}
             <h4>🎨 Décorer</h4>${decoHtml()}
             <h4>Plans</h4><div class="segmented bk-planf" role="group" aria-label="Montrer">${[['ok', '✅ Je peux construire'], ['near', '🟡 Il manque peu'], ['known', '📐 Mes plans'], ['all', 'Tous'], ['find', '❔ À trouver']].map(([v, l]) => `<button type="button" data-bk="planf" data-v="${v}" class="${planF === v ? 'is-active' : ''}">${l}</button>`).join('')}</div>
             <div class="bk-plans">${plansHtml()}</div>`;
@@ -352,18 +424,19 @@
     /** ce qui manque pour un plan : [[ressource, il en faut, on en a]], l'outil, le plan lui-même */
     function needOf(k) { const it = B().ITEMS[k]; return {miss: Object.entries(it.cost || {}).filter(([r, n]) => (G.res[r] || 0) < n).map(([r, n]) => [r, n, Math.floor(G.res[r] || 0)]), tool: it.tool && !G.tools.includes(it.tool) ? it.tool : '', plan: !G.plans.includes(k)}; }
     /** d'où vient une ressource : le bric-à-brac qui en donne, et les lieux où on la trouve */
-    function whereRes(r) { const J = B().JUNK, js = B().JUNK_KEYS.filter(k => J[k][2][r]).sort((a, b) => J[b][2][r] - J[a][2][r]).slice(0, 3).map(k => `${J[k][0]} ${J[k][1].toLowerCase()}`), ps = Object.entries(B().PLACE_KINDS).filter(([, v]) => v[2][r]).slice(0, 3).map(([, v]) => `${v[0]} ${v[1].toLowerCase()}`); return [...js.length ? [`à démonter : ${js.join(', ')}`] : [], ...ps.length ? [`en ville : ${ps.join(', ')}`] : []].join(' · '); }
+    function whereRes(r) { const J = B().JUNK, js = B().JUNK_KEYS.filter(k => J[k][2][r]).sort((a, b) => J[b][2][r] - J[a][2][r]).slice(0, 3).map(k => `${J[k][0]} ${J[k][1].toLowerCase()}`), ps = Object.entries(B().PLACE_KINDS).filter(([k, v]) => v[2][r] && !B().eraOf(G).placeBan.includes(k)).slice(0, 3).map(([k]) => B().placeInfo(G, k)).map(v => `${v[0]} ${v[1].toLowerCase()}`); return [...js.length ? [`à démonter : ${js.join(', ')}`] : [], ...ps.length ? [`en ville : ${ps.join(', ')}`] : []].join(' · '); }
     let planF = 'known';
     function plansHtml() {
-        const IT = B().ITEMS, keys = Object.keys(IT).filter(k => !IT[k].fixed && (G.opt?.chaines || !IT[k].chain)), planPlaces = Object.values(B().PLACE_KINDS).filter(v => v[4]).map(v => `${v[0]} ${v[1].toLowerCase()}`).join(', ');
+        const IT = B().ITEMS, keys = Object.keys(IT).filter(k => !IT[k].fixed && (G.opt?.chaines || !IT[k].chain) && B().itemOk(G, k)), pk = k => B().placeInfo(G, k), planPlaces = Object.keys(B().PLACE_KINDS).filter(k => B().PLACE_KINDS[k][4] && !B().eraOf(G).placeBan.includes(k)).map(k => `${pk(k)[0]} ${pk(k)[1].toLowerCase()}`).join(', ');
+        const planWhere = it => it.where ? `❔ Plan à trouver en ville, surtout : ${it.where.filter(k => !B().eraOf(G).placeBan.includes(k)).map(k => `${pk(k)[0]} ${pk(k)[1].toLowerCase()}`).join(', ')}${it.rare ? ' (rare)' : ''}.` : `❔ Les plans se trouvent en fouillant : ${planPlaces}.`;
         const list = keys.map(k => ({k, n: needOf(k)})).filter(({n}) => planF === 'all' ? true : planF === 'find' ? n.plan : planF === 'ok' ? !n.plan && !n.miss.length && !n.tool : planF === 'near' ? !n.plan && (n.miss.length || n.tool) && n.miss.reduce((a, [, x, h]) => a + x - h, 0) <= 4 : !n.plan)
             .sort((a, b) => (a.n.plan - b.n.plan) || (a.n.miss.length - b.n.miss.length));
         if (!list.length) return `<p class="muted">${planF === 'ok' ? 'Rien de constructible tout de suite : regarde « 🟡 Il manque peu ».' : planF === 'find' ? 'Tous les plans sont trouvés !' : 'Rien ici.'}</p>`;
         return list.map(({k, n}) => { const it = IT[k], can = !n.plan && !n.miss.length && !n.tool;
             const cost = Object.entries(it.cost || {}).map(([r, q]) => { const h = Math.floor(G.res[r] || 0); return `<span class="${h < q ? 'is-miss' : 'is-ok'}" title="${esc(resName(r)[2])} : il en faut ${q}, tu en as ${h}">${resName(r)[1]} ${Math.min(h, q)}/${q}</span>`; }).join(' ');
             const missTxt = n.miss.length ? `<small class="bk-miss">Il manque : ${n.miss.map(([r, q, h]) => `${q - h} ${esc(resName(r)[2].toLowerCase())}`).join(', ')}.</small><small class="bk-where">${n.miss.map(([r]) => `${resName(r)[1]} ${esc(whereRes(r))}`).filter(x => x.length > 3).join('<br>')}</small>` : '';
-            const toolTxt = it.tool ? `<small class="${n.tool ? 'bk-miss' : ''}">${n.tool ? 'Il faut l’outil' : 'Outil'} ${B().TOOLS[it.tool][0]} ${esc(B().TOOLS[it.tool][1])}${n.tool ? ' (à trouver en ville)' : ' ✓'}</small>` : '';
-            return `<div class="bk-plan${n.plan ? ' is-off' : can ? ' is-can' : ''}"><span class="bk-ico">${it.ico}</span><div><b>${esc(it.name)}${n.plan ? ' <small class="bk-tag">plan à trouver</small>' : ''}</b><small>${esc(it.desc)} · ${it.h} h de travail${it.power ? ' · ⚡ électricité' : ''}</small><span class="bk-cost">${cost}</span>${missTxt}${toolTxt}${n.plan ? `<small class="bk-where">❔ Les plans se trouvent en fouillant : ${esc(planPlaces)}.</small>` : ''}</div>${n.plan ? '' : `<button type="button" class="button small ${can ? '' : 'secondary'}" data-bk="build" data-k="${k}" ${can ? '' : 'aria-disabled="true"'}>Construire</button>`}</div>`; }).join('');
+            const toolTxt = it.tool ? `<small class="${n.tool ? 'bk-miss' : ''}">${n.tool ? 'Il faut l’outil' : 'Outil'} ${B().toolInfo(G, it.tool)[0]} ${esc(B().toolInfo(G, it.tool)[1])}${n.tool ? ' (à trouver en ville)' : ' ✓'}</small>` : '';
+            return `<div class="bk-plan${n.plan ? ' is-off' : can ? ' is-can' : ''}"><span class="bk-ico">${it.ico}</span><div><b>${esc(it.name)}${n.plan ? ` <small class="bk-tag">${it.rare ? 'plan rare' : 'plan à trouver'}</small>` : ''}</b><small>${esc(it.desc)} · ${it.h} h de travail${it.power ? ' · ⚡ électricité' : ''}</small><span class="bk-cost">${cost}</span>${missTxt}${toolTxt}${n.plan ? `<small class="bk-where">${esc(planWhere(it))}</small>` : ''}</div>${n.plan ? '' : `<button type="button" class="button small ${can ? '' : 'secondary'}" data-bk="build" data-k="${k}" ${can ? '' : 'aria-disabled="true"'}>Construire</button>`}</div>`; }).join('');
     }
     /** ♻️ le bric-à-brac : ce qu'on a rapporté, ce que chaque objet donne une fois démonté, la file de l'établi */
     function sideBric() {
@@ -393,7 +466,7 @@
         const who = free.find(p => p.id === sendFor) || free[0], cap = who ? B().carryOf(G, who) : 0;
         // ce qui est prévu : si tout a un nombre, on peut compter ; sinon « tout ce qu'il y a »
         const planned = route.reduce((n, st) => { const pl = c.places.find(x => x.id === st.id), opts = st.take || [...Object.keys(pl.max).filter(r => pl.max[r] > 0), 'junk']; return opts.every(r => st.qty?.[r] || (r === 'junk' && !(B().PLACE_KINDS[pl.kind][5] || []).length)) ? n + opts.reduce((m, r) => m + (st.qty?.[r] || 0) * (r === 'junk' ? 2 : 1), 0) : Infinity; }, 0);
-        return `<div class="bk-route"><h4>🚶 Le parcours</h4><ol>${route.map((st, i) => { const pl = pls[i]; return `<li><div class="bk-route-head"><b>${B().PLACE_KINDS[pl.kind][0]} ${esc(pl.name)}</b><span><button type="button" class="icon-button small" data-bk="routeup" data-i="${i}" ${i ? '' : 'disabled'} aria-label="Plus tôt">↑</button><button type="button" class="icon-button small" data-bk="routedel" data-id="${pl.id}" aria-label="Retirer">×</button></span></div>${rooms(st, pl)}<small>Rapporter :</small>${chips(st, pl)}</li>`; }).join('')}</ol>
+        return `<div class="bk-route"><h4>🚶 Le parcours</h4><ol>${route.map((st, i) => { const pl = pls[i]; return `<li><div class="bk-route-head"><b>${B().placeInfo(G, pl.kind)[0]} ${esc(pl.name)}</b><span><button type="button" class="icon-button small" data-bk="routeup" data-i="${i}" ${i ? '' : 'disabled'} aria-label="Plus tôt">↑</button><button type="button" class="icon-button small" data-bk="routedel" data-id="${pl.id}" aria-label="Retirer">×</button></span></div>${rooms(st, pl)}<small>Rapporter :</small>${chips(st, pl)}</li>`; }).join('')}</ol>
             <p class="muted">${Math.round(total / 6) / 10} h de marche en tout (aller, de lieu en lieu, retour), plus 2 h de fouille par lieu. <b>Place pour rapporter : ${free.length ? cap : '—'}</b> (un bric-à-brac = 2)${Number.isFinite(planned) && free.length ? ` · prévu : ${planned}${planned > cap ? ` <span class="bk-miss">— trop : il rapportera ${cap} au plus</span>` : ''}` : ''}. Sac plein : il rentre plus tôt. Plus de place : 🎒 sacs à dos, 🧺 hotte, 🛞 brouette, 🛒 charrette, 🚛 remorque de vélo, ou le grand sac trouvé en ville.</p>
             ${free.length ? `<div class="bk-send"><select data-bk-sendwho>${free.filter(p => !p.baby).map(p => `<option value="${esc(p.id)}" ${p.id === sendFor ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select><button type="button" class="button small" data-bk="send">🚶 Partir</button><button type="button" class="button small secondary" data-bk="routeclear">Effacer</button></div>` : '<p class="muted">Personne de libre au bunker.</p>'}</div>`;
     }
@@ -402,17 +475,17 @@
         if (G.city.lat == null && G.city.geo !== 'none' && !locating) { const g = G; locating = locateCity(g.city).then(() => { locating = null; if (G === g && tab === 'ville') drawSide(); }); }
         const c = G.city, n = c.n, free = B().alive(G).filter(p => p.where === 'base');
         const cell = (x, y) => { const pl = c.places.find(q => q.x === x && q.y === y); if (x === c.base[0] && y === c.base[1]) return `<span class="bk-cell is-base" title="Le bunker">☢</span>`;
-            if (!pl) return '<span class="bk-cell"></span>'; const k = B().PLACE_KINDS[pl.kind], there = G.people.some(p => p.hp > 0 && p.exp?.place === pl.id);
+            if (!pl) return '<span class="bk-cell"></span>'; const k = B().placeInfo(G, pl.kind), there = G.people.some(p => p.hp > 0 && p.exp?.place === pl.id);
             const ri = route.findIndex(st => st.id === pl.id);
             return `<button type="button" class="bk-cell is-place${placeSel === pl.id ? ' is-sel' : ''}${there ? ' is-busy' : ''}${ri >= 0 ? ' is-route' : ''}" data-bk="place" data-id="${pl.id}" title="${esc(pl.name)}${ri >= 0 ? ` (étape ${ri + 1})` : ''}">${k[0]}${ri >= 0 ? `<i class="bk-step">${ri + 1}</i>` : ''}</button>`; };
         const pl = c.places.find(x => x.id === placeSel);
         const stockTxt = p => { const tot = Object.values(p.stock).reduce((a, b) => a + b, 0), max = Object.values(p.max).reduce((a, b) => a + b, 0) || 1; return !p.visits ? 'pas encore fouillé' : tot / max > .6 ? 'beaucoup de choses' : tot / max > .25 ? 'un peu' : tot ? 'presque vide' : 'vide (ça revient chaque jour)'; };
         // ⤢ la carte s'ouvre en grand (utile quand elle dépasse) : elle couvre le bunker, le parcours et le lieu choisi à côté
-        return `<p class="muted">${esc(c.name)} · ville ${B().SIZES[c.size][2].toLowerCase()} · 30 min par case (×1,5 la nuit sans lampe torche).</p>
+        return `<p class="muted">${esc(c.name)} · ville ${B().SIZES[c.size][2].toLowerCase()} · 30 min par case (×1,5 la nuit sans ${esc(B().toolInfo(G, 'lampe')[1].toLowerCase())}).</p>
             <div class="bk-ville${mapFull ? ' is-full' : ''}"><div class="bk-mapcol"><div class="bk-maptools">${mapFull ? `<b>🗺️ ${esc(c.name)}</b><span class="spacer"></span>` : ''}<button type="button" class="button small secondary" data-bk="mapfull" title="${mapFull ? 'Revenir à la petite carte (Échap)' : 'Voir la carte dans un grand cadre'}">${mapFull ? '✕ Réduire la carte' : '⤢ Ouvrir la carte en grand'}</button></div>
             <div class="bk-mapwrap${n > 17 ? ' is-big' : ''}" style="--n:${n}"><div class="bk-map${c.lat != null ? ' has-bg' : ''}" style="--n:${n}">${mapBgHtml(c)}${Array.from({length: n * n}, (_, i) => cell(i % n, Math.floor(i / n))).join('')}</div></div></div><div class="bk-villeinfo">
             ${routeHtml(free)}${c.geo === 'none' ? '<p class="lck-legend muted">Pas de plan en fond : cette ville n’a pas de coordonnées (ni dans ton arbre, ni dans les communes).</p>' : ''}
-            ${pl ? `<div class="bk-placecard"><b>${B().PLACE_KINDS[pl.kind][0]} ${esc(pl.name)}</b><small>${Math.round(B().travel(G, pl) / 6) / 10} h de marche (aller) · ${stockTxt(pl)}${pl.visits ? ` · fouillé ${plural(pl.visits, 'fois', 'fois')}` : ''}</small>
+            ${pl ? `<div class="bk-placecard"><b>${B().placeInfo(G, pl.kind)[0]} ${esc(pl.name)}</b><small>${Math.round(B().travel(G, pl) / 6) / 10} h de marche (aller) · ${stockTxt(pl)}${pl.visits ? ` · fouillé ${plural(pl.visits, 'fois', 'fois')}` : ''}</small>
                 ${(B().KIND_ROOMS[pl.kind] || []).length ? `<p class="muted">🏚️ Pièces : ${B().KIND_ROOMS[pl.kind].map(k => `${B().ROOMS[k][0]} ${B().ROOMS[k][1].replace(/^(La |Le |L’)/, '').toLowerCase()}${(pl.roomsDone || []).includes(k) ? ' ✓' : ''}`).join(', ')} — à choisir dans le parcours.</p>` : ''}
                 ${G.opt?.nuit && B().NIGHT_DANGER.includes(pl.kind) ? '<p class="bk-miss">🌙 Dangereux la nuit.</p>' : G.opt?.nuit && B().NIGHT_BONUS.includes(pl.kind) ? '<p>🌙 La nuit, on y trouve plus (les autres dorment).</p>' : ''}
                 ${G.opt?.missions && G.missions?.some(m => !m.done && B().DOCS[m.doc][2].includes(pl.kind)) ? `<p>📜 Peut-être ici : ${G.missions.filter(m => !m.done && B().DOCS[m.doc][2].includes(pl.kind)).map(m => esc(B().missionTxt(m).replace(/^Retrouver /, ''))).join(' ; ')}.</p>` : ''}
@@ -443,7 +516,7 @@
         const head = G.over ? `Le bunker de ${me.name} s’est tu après ${plural(day - 1, 'jour')}` : alive.length === G.people.length ? `${plural(day - 1 || 1, 'jour')} sous terre : tout le monde tient bon` : `Jour ${day} : ${plural(alive.length, 'survivant')} à ${G.city.name}`;
         const stories = G.log.filter(l => l.kind === 'histoire').slice(0, 3);
         return `<div class="bk-gz-paper"><button type="button" class="icon-button bk-gz-close" data-bk="gzclose" aria-label="Fermer">×</button>
-            <header class="bk-gz-mast"><small>${esc(G.city.name)} · jour ${day} · ${B().clock(G.t)}</small><h2>La Gazette du Bunker</h2><small>Édition spéciale · ne paraît que sous terre</small></header>
+            <header class="bk-gz-mast"><small>${esc(G.city.name)} · jour ${day}${B().dateOf(G) ? ` · ${esc(B().dateOf(G))}` : ''} · ${B().clock(G.t)}</small><h2>${B().HIST[G.scen] ? 'La Gazette de l’abri' : 'La Gazette du Bunker'}</h2><small>${B().HIST[G.scen] ? `${esc(B().SCENARIOS[G.scen][1])} · lue à la chandelle` : 'Édition spéciale · ne paraît que sous terre'}</small></header>
             <h3 class="bk-gz-head">${esc(head)}</h3>
             <div class="bk-gz-cols">
                 <section><h4>Les habitants</h4><ul>${G.people.map(p => { const d = st.deaths.find(x => x.name === p.name); return `<li>${p.hp > 0 ? '✓' : '✝'} <b>${esc(p.name)}</b>${p.baby ? ' (né·e au bunker)' : ''}${p.from ? ` <small>· ${esc(p.from)}</small>` : ''}${d ? ` <small>· mort·e le jour ${d.day}</small>` : ''}</li>`; }).join('')}</ul>
@@ -452,7 +525,9 @@
                     <h4>Les veillées</h4><p>${plural(st.stories, 'histoire')} racontée${st.stories > 1 ? 's' : ''} le soir.</p>${stories.map(l => `<blockquote>${esc(l.txt.replace(/^📖 /, ''))}</blockquote>`).join('')}</section>
                 <section><h4>Trouvailles</h4>${st.found.length ? `<ul>${st.found.slice(-12).map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : '<p>Rien de notable pour l’instant.</p>'}
                     ${G.coffre.length ? `<h4>Le coffre de famille</h4><ul>${G.coffre.map(c => `<li>${esc(c.title)}</li>`).join('')}</ul>` : ''}
-                    <h4>Le bunker</h4><p>${G.floors.length} étage${G.floors.length > 1 ? 's' : ''}, ${B().items(G).length} installations, ${G.tools.length} outil${G.tools.length > 1 ? 's' : ''}.</p></section>
+                    <h4>Le bunker</h4><p>${G.floors.length} étage${G.floors.length > 1 ? 's' : ''}, ${B().items(G).length} installations (${plural(st.built || 0, 'fabriquée', 'fabriquées')} à l’atelier), ${G.tools.length} outil${G.tools.length > 1 ? 's' : ''}, ${plural(G.plans.length, 'plan')}.</p>
+                    <h4>🏆 Succès</h4>${(ach => ach.length ? `<ul>${ach.map(([k, d]) => { const a = B().ACH.find(x => x[0] === k); return a ? `<li>${a[1]} ${esc(a[2])} <small>· jour ${d}</small></li>` : ''; }).join('')}</ul>` : '<p>Pas encore de succès dans cette partie.</p>')(Object.entries(G.ach || {}).sort((a, b) => a[1] - b[1]))}
+                    ${G.won ? `<p><b>${esc(B().SCENARIOS[G.scen][1])} : gagné le jour ${G.won} !</b></p>` : ''}${G.rewound ? `<p><small>⏪ Revenu en arrière ${plural(G.rewound, 'fois', 'fois')}.</small></p>` : ''}</section>
             </div>
             <footer class="bk-gz-foot"><button type="button" class="button small secondary" data-bk="gzprint">🖨 Imprimer</button></footer></div>`;
     }
@@ -587,23 +662,26 @@
             ${opt('nuit', '🌗 La nuit en ville', `— dangereux la nuit : ${B().NIGHT_DANGER.map(k => B().PLACE_KINDS[k][0]).join(' ')} ; plus de choses la nuit : ${B().NIGHT_BONUS.map(k => B().PLACE_KINDS[k][0]).join(' ')}`)}${opt('missions', '📜 Missions généalogiques', '— retrouver l’acte, la photo ou la lettre d’un vrai ancêtre (onglet 🌳 Famille)')}
             <h4>🔊 Sons</h4>${soundHtml()}
             <h4>Scénario</h4><p>${S[0]} <b>${esc(S[1])}</b> — ${esc(S[2])}</p>
+            <p>${G.won ? `🏆 Gagné le jour ${G.won} : tu peux continuer aussi longtemps que tu veux.` : `🏆 Pour gagner : tenir ${B().goalOf(G)} jours (encore ${plural(Math.max(0, B().goalOf(G) - (B().dayOf(G.t) - 1)), 'jour')}).`}</p>
+            ${B().HIST[G.scen] ? `<p class="muted">📜 ${esc(B().dateOf(G))} · ${plural(G.people.filter(p => !p.inv && !p.baby).length, 'ancêtre')} de ta famille${G.people.some(p => p.inv) ? `, ${plural(G.people.filter(p => p.inv).length, 'habitant inventé', 'habitants inventés')} de l’époque` : ''}.</p>` : ''}
             ${G.event ? `<h4>En ce moment</h4><p>${B().EVENTS[G.event.k][0]} <b>${esc(B().EVENTS[G.event.k][1])}</b> : ${esc(B().EVENTS[G.event.k][2])} (encore ${Math.max(1, Math.round((G.event.until - G.t) / 60))} h).</p>` : ''}
             <h4>Pannes</h4><p class="muted">Les installations s’usent et tombent parfois en panne (🔧 sur le dessin). Clique dessus : « Réparer » (un quart de ce qu’elles ont coûté, puis du travail à l’atelier). Le même menu propose « Améliorer » (niveau 2 puis 3 : leurs effets comptent ×1,5 puis ×2).</p>
             <p>${Object.keys(G.broken || {}).length ? `🔧 En panne : ${Object.keys(G.broken).map(k => { const [f, s2] = k.split(',').map(Number); return esc(B().ITEMS[G.floors[f].slots[s2]].name); }).join(', ')}.` : '✓ Rien en panne.'}</p>`;
     }
     function sideRadio() {
         const out = G.people.filter(p => p.hp > 0 && p.where === 'dehors');
-        return `${G.power ? '' : '<p class="ui-notice is-error">📻 Pas d’électricité : la radio est muette. Les messages arriveront quand le courant reviendra.</p>'}
-            <h4>Dehors</h4>${out.length ? out.map(p => { const pl = G.city.places.find(x => x.id === p.exp.place); return `<div class="bk-radio-row">${pawn(p)}<div><b>${esc(p.name)}</b><small>${p.exp.phase === 'aller' ? 'en route vers' : p.exp.phase === 'fouille' ? 'fouille' : 'rentre de'} ${esc(pl?.name || '')}${p.exp.route?.length > 1 ? ` (étape ${p.exp.i + 1} / ${p.exp.route.length})` : ''} · ${p.exp.phase === 'retour' ? 'arrive' : 'jusqu’à'} ${B().clock(p.exp.until)}</small></div>${p.exp.phase !== 'retour' ? `<button type="button" class="button small secondary" data-bk="recall" data-id="${esc(p.id)}" ${G.power ? '' : 'disabled'}>📻 Rentre !</button>` : ''}</div>`; }).join('') : '<p class="muted">Tout le monde est au bunker.</p>'}
+        const msgOk = G.power || B().crier(G) || B().has(G, 'talkie') || B().has(G, 'pigeonnier');
+        return `${msgOk ? '' : '<p class="ui-notice is-error">📻 Pas d’électricité : la radio est muette. Les messages arriveront quand le courant reviendra.</p>'}${B().crier(G) ? '<p class="muted">📯 Pas de radio à cette époque : un gamin du quartier court porter les nouvelles, et le crieur annonce le marché chaque matin.</p>' : ''}
+            <h4>Dehors</h4>${out.length ? out.map(p => { const pl = G.city.places.find(x => x.id === p.exp.place); return `<div class="bk-radio-row">${pawn(p)}<div><b>${esc(p.name)}</b><small>${p.exp.phase === 'aller' ? 'en route vers' : p.exp.phase === 'fouille' ? 'fouille' : 'rentre de'} ${esc(pl?.name || '')}${p.exp.route?.length > 1 ? ` (étape ${p.exp.i + 1} / ${p.exp.route.length})` : ''} · ${p.exp.phase === 'retour' ? 'arrive' : 'jusqu’à'} ${B().clock(p.exp.until)}</small></div>${p.exp.phase !== 'retour' ? `<button type="button" class="button small secondary" data-bk="recall" data-id="${esc(p.id)}" ${msgOk ? '' : 'disabled'}>${B().crier(G) ? '📯' : '📻'} Rentre !</button>` : ''}</div>`; }).join('') : '<p class="muted">Tout le monde est au bunker.</p>'}
             <h4>📻 Le marché de la radio</h4>${marketHtml()}
             <h4>Journal</h4><ol class="bk-log">${G.log.slice(0, 120).map(l => `<li class="is-${l.kind}"><span class="bk-t">J${B().dayOf(l.t)} ${B().clock(l.t)}</span> ${esc(l.txt)}</li>`).join('')}</ol>`;
     }
 
     function marketHtml() {
         const m = G.market || {offers: [], deals: []}, r = k => resName(k);
-        if (!B().has(G, 'radio')) return '<p class="muted">Sans radio, pas de marché.</p>';
+        if (!B().hasRadio(G)) return '<p class="muted">Sans radio, pas de marché.</p>';
         return `<p class="muted">D’autres survivants proposent des échanges : on envoie tout de suite, un messager apporte la marchandise quelques heures plus tard (le plus souvent…). Les prix changent chaque matin.</p>
-            ${m.offers.length ? `<div class="bk-plans">${m.offers.map(o => { const ok = (G.res[o.want.r] || 0) >= o.want.n; return `<div class="bk-plan${ok ? ' is-can' : ''}"><span class="bk-ico">${r(o.give.r)[1]}</span><div><b>${o.give.n} ${esc(r(o.give.r)[2].toLowerCase())}</b><small>contre ${r(o.want.r)[1]} ${o.want.n} ${esc(r(o.want.r)[2].toLowerCase())} · ${esc(o.who)}</small>${ok ? '' : `<small class="bk-miss">Il manque ${Math.ceil(o.want.n - (G.res[o.want.r] || 0))} ${esc(r(o.want.r)[2].toLowerCase())}.</small>`}</div><span class="bk-btns"><button type="button" class="button small" data-bk="trade" data-id="${esc(o.id)}" ${ok && G.power ? '' : 'disabled'}>🤝 Accepter</button></span></div>`; }).join('')}</div>` : '<p class="muted">Plus d’offre aujourd’hui : de nouvelles demain matin (7 h).</p>'}
+            ${m.offers.length ? `<div class="bk-plans">${m.offers.map(o => { const ok = (G.res[o.want.r] || 0) >= o.want.n; return `<div class="bk-plan${ok ? ' is-can' : ''}"><span class="bk-ico">${r(o.give.r)[1]}</span><div><b>${o.give.n} ${esc(r(o.give.r)[2].toLowerCase())}</b><small>contre ${r(o.want.r)[1]} ${o.want.n} ${esc(r(o.want.r)[2].toLowerCase())} · ${esc(o.who)}</small>${ok ? '' : `<small class="bk-miss">Il manque ${Math.ceil(o.want.n - (G.res[o.want.r] || 0))} ${esc(r(o.want.r)[2].toLowerCase())}.</small>`}</div><span class="bk-btns"><button type="button" class="button small" data-bk="trade" data-id="${esc(o.id)}" ${ok && (G.power || B().crier(G)) ? '' : 'disabled'}>🤝 Accepter</button></span></div>`; }).join('')}</div>` : '<p class="muted">Plus d’offre aujourd’hui : de nouvelles demain matin (7 h).</p>'}
             ${m.deals.length ? `<p>🚚 En route : ${m.deals.map(d => `${r(d.r)[1]} ${d.n} de ${esc(d.who)} (vers ${B().clock(d.t)})`).join(', ')}.</p>` : ''}`;
     }
     /** 📔 le journal d'un habitant (à la place de la liste, dans l'onglet Habitants) */
@@ -628,7 +706,12 @@
         if (k === 'delsave') { const id = b.dataset.id, name = store().games[id]?.name || ''; const del = () => { const s = store(); delete s.games[id]; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
             if (A()?.undoLocalChange) A().undoLocalChange(`Partie « Le bunker de ${name} » supprimée`, [KEY], del, () => { if (dlg && !G) startScreen(); }); else del(); startScreen(); return; }
         if (k === 'propose') { propose(b.closest('form')); return; }
+        if (k === 'records') { if (G) overlay(recordsHtml()); else recordsScreen(); return; }
+        if (k === 'recback') { startScreen(); return; }
         if (!G) return;
+        if (k === 'more') { moreMenu(b); return; }
+        if (k === 'rewind') { overlay(morningsHtml()); return; }
+        if (k === 'rewindgo') { rewindTo(Number(b.dataset.d)); return; }
         if (k === 'speed') { setSpeed(Number(b.dataset.v) || 0); return; }
         if (k === 'save') { saveGame(gid, G); return; }
         if (k === 'export') { const blob = new Blob([JSON.stringify({lcnda: 'bunker', v: 1, g: G})], {type: 'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `bunker-${(meOf(G).name || 'partie').replace(/[^\w\-]+/g, '-').slice(0, 40)}-jour-${B().dayOf(G.t)}.json`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 30000); return; }
@@ -673,6 +756,54 @@
         if (k === 'slot') { slotMenu(b, Number(b.dataset.f), Number(b.dataset.s)); }
     }
     let sendFor = '', gzPaused = 0;
+    /** un panneau par-dessus la partie (comme la gazette) : la partie se met en pause, × le referme */
+    function overlay(html) { const gz = dlg.querySelector('[data-bk-gz]'); if (!gz) return; gz.innerHTML = html; gz.hidden = false; if (G?.speed) { gzPaused = G.speed; setSpeed(0); } gz.querySelector('[data-bk="gzclose"]')?.focus(); }
+    /** ⋯ : les autres actions de la partie */
+    function moreMenu(btn) {
+        const last = G.mornings?.[G.mornings.length - 2] || G.mornings?.[0], items = [
+            {icon: '⏪', label: last ? `Reprendre au matin du jour ${last.d}…` : 'Reprendre au matin…', help: last ? `${plural(G.mornings.length, 'matin gardé', 'matins gardés')}` : 'pas encore de matin gardé', disabled: !G.mornings?.length, run: () => overlay(morningsHtml())},
+            {icon: '🏆', label: 'Succès et records', run: () => overlay(recordsHtml())},
+            {icon: '📖', label: 'Le livre de la partie', help: 'le récit, jour après jour', run: () => doClick('book')},
+            {icon: '⤓', label: 'Exporter la partie', help: 'la garder dans un fichier', run: () => doClick('export')}];
+        if (UI().menuAt) UI().menuAt(btn, items); else overlay(morningsHtml());
+    }
+    /** une action du menu ⋯ : comme un clic sur le bouton qu'elle remplace */
+    function doClick(k) { if (!dlg) return; const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.bk = k; dlg.append(b); try { onClick({target: b}); } finally { b.remove(); } }
+    const resLine = m => B().resList(G).filter(x => m.res?.[x[0]] != null).map(x => `${x[1]} ${m.res[x[0]]}`).join(' ');
+    /** ⏪ les matins gardés (les 7 derniers) : jour, habitants, réserves ; reprendre ne demande rien, « ↶ Annuler » ramène où on était */
+    function morningsHtml() {
+        const L = (G.mornings || []).slice().reverse(), now = B().dayOf(G.t);
+        return `<div class="bk-gz-paper bk-panel"><button type="button" class="icon-button bk-gz-close" data-bk="gzclose" aria-label="Fermer">×</button>
+            <h2>⏪ Revenir au matin d’avant</h2><p class="muted">Chaque matin à 6 h, la partie est gardée (les ${B().MORNINGS} derniers). Reprendre ramène ce matin-là ; si tu changes d’avis, « ↶ Annuler » ramène où tu en étais.</p>
+            ${L.length ? `<ol class="bk-morns">${L.map(m => `<li><div><b>Jour ${m.d}${m.d === now ? ' (ce matin)' : ''}</b><small>${B().HIST[G.scen] ? `${esc(B().dateOf(G, m.t))} · ` : ''}6 h · ${plural(m.pop, 'habitant')} en vie${m.tot > m.pop ? ` sur ${m.tot}` : ''}</small><small class="bk-mres">${resLine(m)}</small></div><button type="button" class="button small" data-bk="rewindgo" data-d="${m.d}">⏪ Reprendre ce matin-là</button></li>`).join('')}</ol>`
+                : A().emptyState({size: 'small', icon: '⏪', text: 'Pas encore de matin gardé : le premier le sera demain à 6 h.'})}
+            <footer class="bk-gz-foot"><button type="button" class="button secondary" data-bk="gzclose">Fermer</button></footer></div>`;
+    }
+    function rewindTo(d) {
+        const before = G, id = gid, r = B().rewind(G, d); if (!r.ok) { toast(r.err, 'error'); return; }
+        const show = g => { if (!dlg || gid !== id) return; G = g; G.speed = 0; gzPaused = 0; saveGame(gid, G, true); play(); };
+        show(r.g);
+        const msg = `⏪ Repris au matin du jour ${d} (en pause)`;
+        if (A()?.undoToast) A().undoToast(msg, {undo: () => show(before), redo: () => show(r.g), undoneText: `retour au matin du jour ${d}`}); else toast(msg);
+    }
+    /** 🏆 succès gagnés (avec la date), ceux qui restent (grisés, ou « ? » s'ils sont cachés), et les meilleures parties */
+    function recordsBody() {
+        const r = recs(), when = d => (UI().when ? UI().when(d) : esc(new Date(d).toLocaleDateString('fr-FR'))), list = B().ACH, got = list.filter(a => r.ach[a[0]]);
+        const S = B().SCENARIOS, D = B().DIFFS, best = Object.values(r.best).sort((a, b) => (b.days - a.days) || (b.pop - a.pop)).slice(0, 10);
+        const badge = a => { const x = r.ach[a[0]], hid = a[4] && !x;
+            return `<div class="bk-badge${x ? ' is-got' : ' is-off'}${hid ? ' is-hidden' : ''}" title="${esc(hid ? 'Succès caché : il se dévoile quand on le gagne.' : a[3])}"><span class="bk-badge-ico">${hid ? '?' : a[1]}</span><div><b>${hid ? 'Succès caché' : esc(a[2])}</b><small>${hid ? 'Il se dévoile quand on le gagne.' : esc(a[3])}</small>${x ? `<small class="bk-badge-when">✓ ${when(x.at)}${x.who ? ` · ${esc(x.who)}` : ''}</small>` : ''}</div></div>`; };
+        return `<p class="muted">${got.length} sur ${list.length} succès gagnés. Gardé sur cet ordinateur seulement.</p>
+            <h3>Gagnés</h3>${got.length ? `<div class="bk-badges">${got.sort((a, b) => String(r.ach[b[0]].at).localeCompare(String(r.ach[a[0]].at))).map(badge).join('')}</div>` : A().emptyState({size: 'small', icon: '🏆', text: 'Pas encore de succès : tiens une semaine, construis, repousse les pillards…'})}
+            <h3>À gagner</h3><div class="bk-badges">${list.filter(a => !r.ach[a[0]]).map(badge).join('')}</div>
+            <h3>Les meilleures parties</h3>${best.length ? `<div class="bk-rec-wrap"><table class="data-table bk-rec-table"><thead><tr><th>Jours tenus</th><th>Habitants</th><th>Scénario</th><th>Difficulté</th><th>Partie</th><th>Date</th></tr></thead><tbody>${best.map(x => `<tr><td><b>${x.days}</b>${x.won ? ' 🏆' : ''}</td><td>${x.pop} / ${x.tot}</td><td>${S[x.scen] ? `${S[x.scen][0]} ${esc(S[x.scen][1])}` : '—'}</td><td>${esc(D[x.diff]?.l || '—')}</td><td>${esc(x.name || '')}<small class="muted"> · ${esc(x.city || '')}${x.over ? ' · ☠️' : ''}</small></td><td>${when(x.at)}</td></tr>`).join('')}</tbody></table></div>`
+                : A().emptyState({size: 'small', icon: '📊', text: 'Pas encore de partie : descends dans le bunker !'})}`;
+    }
+    function recordsHtml() { return `<div class="bk-gz-paper bk-panel"><button type="button" class="icon-button bk-gz-close" data-bk="gzclose" aria-label="Fermer">×</button><h2>🏆 Succès et records</h2>${recordsBody()}<footer class="bk-gz-foot"><button type="button" class="button secondary" data-bk="gzclose">Fermer</button></footer></div>`; }
+    function recordsScreen() {
+        stop(); G = null; gid = '';
+        dlg.innerHTML = `<div class="bk-start"><header class="bk-start-head"><span class="bk-hatch-ico" aria-hidden="true"></span><div><span class="eyebrow">☢ LE BUNKER</span><h2>🏆 Succès et records</h2></div><button type="button" class="icon-button" data-bk="close" aria-label="Fermer">×</button></header>
+            <section class="bk-card bk-panel">${recordsBody()}</section><div class="bk-actions"><button type="button" class="button secondary" data-bk="recback">← Retour</button></div></div>`;
+    }
     function onChange(e) {
         const j = e.target.closest('[data-bk-job]'); if (j && G) { B().setJob(G, j.dataset.bkJob, j.value); drawAll(); return; }
         const sd = e.target.closest('[data-bk-snd]'); if (sd) { SND.unlock(); SND.set(sd.dataset.bkSnd, sd.type === 'range' ? Number(sd.value) : sd.checked); if (G) { SND.update(G); drawTop(); } return; }
@@ -716,7 +847,8 @@
         let items;
         if (k) {
             const it = IT[k];
-            if (k === 'radio') { tab = 'radio'; drawTop(); drawSide(); return; }
+            if (k === 'radio' || k === 'crieur') { tab = 'radio'; drawTop(); drawSide(); return; }
+            if (k === 'cheminee') { tab = 'res'; drawTop(); drawSide(); return; }
             if (k === 'atelier') { tab = 'atelier'; drawTop(); drawSide(); return; }
             if (k === 'generateur' && !G.broken?.[`${fi},${si}`]) { tab = 'res'; drawTop(); drawSide(); return; }
             const key = `${fi},${si}`, L = G.lvl?.[key] || 1, brk = !!G.broken?.[key], busyB = bi >= 0, txt = c => Object.entries(c).map(([r, q]) => `${q} ${resName(r)[2].toLowerCase()}`).join(', ');
@@ -735,7 +867,7 @@
     }
     function importFile(input) {
         const file = input.files?.[0]; input.value = ''; if (!file) return;
-        if (file.size > 2e6) { toast('Ce fichier est trop gros pour être une partie du bunker.', 'error'); return; }
+        if (file.size > 6e6) { toast('Ce fichier est trop gros pour être une partie du bunker.', 'error'); return; } // avec ses 7 matins gardés (1,5 Mo au plus)
         file.text().then(txt => {
             let raw; try { raw = JSON.parse(txt); } catch (_) { throw new Error('Ce fichier n’est pas une partie du bunker.'); }
             G = B().check(raw?.lcnda === 'bunker' ? raw.g : raw); gid = 'b' + Date.now().toString(36); tab = 'gens'; play(); saveGame(gid, G, true); toast('✓ Partie ouverte.'); // rangée seulement si elle s'ouvre bien

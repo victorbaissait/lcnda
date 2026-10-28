@@ -58,7 +58,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/labyrinthe.css?v=1">
     <link rel="stylesheet" href="assets/css/jeux-famille.css?v=3">
     <link rel="stylesheet" href="assets/css/jeux-patience.css?v=2">
-    <link rel="stylesheet" href="assets/css/bunker.css?v=16">
+    <link rel="stylesheet" href="assets/css/bunker.css?v=17">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=5">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
@@ -1203,7 +1203,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=20" defer></script>
-<script src="assets/js/heritage-more.js?v=254" defer></script>
+<script src="assets/js/heritage-more.js?v=255" defer></script>
 <script src="assets/js/heritage-controle.js?v=4" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=38" defer></script>
@@ -1252,8 +1252,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-retouch-bord.js?v=1" defer></script>
 <script src="assets/js/heritage-psd.js?v=1" defer></script>
 <script src="assets/js/heritage-tresors.js?v=10" defer></script>
-<script src="assets/js/heritage-bunker-moteur.js?v=13" defer></script>
-<script src="assets/js/heritage-bunker.js?v=20" defer></script>
+<script src="assets/js/heritage-bunker-moteur.js?v=14" defer></script>
+<script src="assets/js/heritage-bunker.js?v=21" defer></script>
 <script src="assets/js/heritage-tresors-memoire.js?v=7" defer></script>
 <script src="assets/js/heritage-tresors-decouvrir.js?v=3" defer></script>
 <script src="assets/js/heritage-tresors-jeux.js?v=7" defer></script>

@@ -11,7 +11,10 @@
  *  - visiteurs à la trappe (marchand, voyageur = un ancêtre de l'arbre, pillards) ; porte renforcée, pièges, tour de garde ;
  *  - le coffre de famille (3 objets de famille de la base), la maison natale d'un ancêtre en ville, des lettres retrouvées ;
  *  - les saisons (hiver froid : poêle à bois ; été sec), l'électricité sans essence (dynamo à pédales, panneau solaire, éolienne) ;
- *  - une naissance au bunker (l'arbre du bunker, à part de la vraie base), et des chiffres pour la gazette de fin de partie.
+ *  - une naissance au bunker (l'arbre du bunker, à part de la vraie base), et des chiffres pour la gazette de fin de partie ;
+ *  - 🏆 des succès (ACH, checkAch) et une victoire par scénario (SCEN_GOAL) ; ⏪ une copie de la partie chaque matin (morningSave, rewind) ;
+ *  - 📜 des scénarios historiques (HIST, ERAS) avec les ancêtres qui vivaient à cette date (histPool), sans électronique avant l'heure ;
+ *  - 🔨 une vingtaine de plans en plus à trouver en ville, là où ils viennent (where), certains rares (pickPlan).
  */
 (() => {
     'use strict';
@@ -44,7 +47,11 @@
         sacsable: ['👜', 'Vieux cartable', {tissu: 2, plastique: 1}, 0.5], pots: ['🪴', 'Pots de colle à moitié secs', {colle: 2}, 0.25], vis: ['🔩', 'Boîte de vis mélangées', {clous: 5}, 0.25],
         barbecue: ['🔥', 'Barbecue rouillé', {metal: 3, charbon: 2}, 1], frigo: ['🧊', 'Réfrigérateur mort', {metal: 4, cuivre: 2, plastique: 2, electro: 1}, 3], sechecheveux: ['💨', 'Sèche-cheveux grillé', {cuivre: 2, plastique: 1, electro: 1}, 0.5],
         guitarecassee: ['🎸', 'Guitare sans manche', {bois: 2, corde: 1, metal: 1}, 0.5], panneau: ['🚧', 'Panneau de signalisation', {metal: 3}, 0.5], fenetre: ['🪟', 'Fenêtre arrachée', {verre: 3, bois: 2}, 1],
+        // le bric-à-brac d'autrefois (les scénarios historiques en trouvent surtout)
+        tonneau: ['🛢️', 'Tonneau défoncé', {bois: 3, metal: 1}, 1], rouetcasse: ['🧶', 'Rouet cassé', {bois: 2, corde: 1}, 0.5], chaudron: ['🫕', 'Chaudron percé', {metal: 3}, 0.5],
+        lanterneb: ['🏮', 'Lanterne brisée', {verre: 1, metal: 1}, 0.5], sabots: ['👞', 'Vieux sabots', {bois: 1}, 0.25], roue: ['🛞', 'Roue de charrette', {bois: 3, metal: 1, clous: 1}, 1], harnais: ['🐴', 'Harnais usé', {caoutchouc: 2, corde: 1, metal: 1}, 0.5],
     };
+    const OLD_JUNK = ['tonneau', 'rouetcasse', 'chaudron', 'lanterneb', 'sabots', 'roue', 'harnais'];
     const JUNK_KEYS = Object.keys(JUNK), JUNK_CAP = 20;
     const RES_KEYS = RES.map(r => r[0]);
     const BASE_CAP = 40;
@@ -53,6 +60,9 @@
         radio: {ico: '📻', name: 'Radio', fixed: true, desc: 'Parler avec ceux qui sont partis en ville (il faut de l’électricité).'},
         generateur: {ico: '⚡', name: 'Groupe électrogène', fixed: true, desc: 'Fait l’électricité avec l’essence (¼ L par heure).'},
         atelier: {ico: '🛠️', name: 'Atelier', fixed: true, desc: 'On y construit les objets dont on a le plan (il faut de l’électricité).'},
+        // les scénarios historiques : sans radio, le crieur et la gazette ; sans électricité, la cheminée (chauffe l'hiver avec du bois, et on y cuit)
+        crieur: {ico: '📯', name: 'Le crieur et la gazette', fixed: true, desc: 'Un gamin du quartier porte les nouvelles de ceux qui sont dehors ; le crieur annonce le marché.'},
+        cheminee: {ico: '🔥', name: 'La cheminée', fixed: true, desc: 'Elle chauffe l’abri l’hiver (du bois) et on y cuit les plats. On s’éclaire à la chandelle.'},
         toilettes: {ico: '🚽', name: 'Toilettes', cost: {bois: 4, metal: 2}, h: 3, base: true, desc: 'Sans toilettes, on se soulage dans un coin : l’hygiène en prend un coup.'},
         douche: {ico: '🚿', name: 'Douche', cost: {metal: 4, pieces: 1}, h: 4, base: true, desc: 'Une douche : 3 L d’eau et de l’électricité pour la pompe.'},
         gardemanger: {ico: '🥫', name: 'Garde-manger', cost: {bois: 6}, h: 3, base: true, cap: {nourriture: 30}, desc: '+30 rations de place.'},
@@ -127,6 +137,31 @@
         moulin: {ico: '⚙️', name: 'Moulin à bras', cost: {metal: 3, pieces: 2, bois: 2}, h: 3, chain: true, prod: {every: 6, in: {ble: 2}, out: {farine: 2}}, desc: 'Le blé devient farine : 2 toutes les 6 h.'},
         four: {ico: '🍞', name: 'Four à pain', cost: {metal: 3, verre: 1, bois: 4}, h: 4, chain: true, prod: {every: 12, in: {farine: 2, bois: 0.5}, out: {nourriture: 4}, skill: 'cuisiner'}, desc: 'Du pain : 4 rations toutes les 12 h (2 farines et un peu de bois).'},
         armoirepharma: {ico: '🗃️', name: 'Armoire à pharmacie', cost: {bois: 3, verre: 1, clous: 2}, h: 2, cap: {medic: 15, plantes: 15}, desc: '+15 médicaments et +15 plantes de place.'},
+        /* ── les plans à trouver en ville (where : les lieux où ce plan se trouve le plus souvent ; rare : bien plus dur à trouver ;
+         *    elec : il faut l'électricité de l'époque ; modern : n'existe pas dans les scénarios historiques) ── */
+        puits: {ico: '🪣', name: 'Puits creusé', cost: {bois: 4, metal: 2, corde: 2}, h: 6, tool: 'pelle', where: ['quincaillerie', 'ferme'], prod: {every: 2, in: {}, out: {eausale: 1}}, desc: 'L’eau de la nappe : 1 L toutes les 2 h, même sans pluie (à filtrer avant de la boire).'},
+        fumoir: {ico: '🥓', name: 'Fumoir', cost: {bois: 5, metal: 1, clous: 2}, h: 3, where: ['ferme', 'maison', 'port'], prod: {every: 12, in: {plantes: 1, bois: 0.5}, out: {nourriture: 1.5}, skill: 'cuisiner'}, desc: 'On fume et on sèche ce qu’on a : 1,5 ration toutes les 12 h (1 plante, un peu de bois).'},
+        ruche: {ico: '🐝', name: 'Ruche', cost: {bois: 3, tissu: 1, clous: 1}, h: 2, rare: true, where: ['ferme', 'eglise', 'maisonfam'], prod: {every: 24, in: {plantes: 0.5}, out: {nourriture: 1, medic: 0.5}, day: true}, aura: {mood: 0.04}, desc: 'Du miel : 1 ration par jour, et de quoi soigner (le miel sur les plaies). Le bourdonnement fait du bien.'},
+        pressoir: {ico: '🍎', name: 'Pressoir à fruits', cost: {bois: 5, metal: 2, pieces: 1}, h: 3, where: ['ferme', 'maisonfam'], prod: {every: 12, in: {plantes: 2}, out: {nourriture: 1, eau: 1}}, desc: 'Du jus et de la compote : 1 ration et 1 L à boire toutes les 12 h (2 plantes).'},
+        edredons: {ico: '🛌', name: 'Édredons de plume', cost: {tissu: 4, corde: 1}, h: 2, where: ['maison', 'maisonfam', 'hopital'], warm: true, desc: 'L’hiver, on a moins froid (comme avec des vêtements chauds), et on dort mieux.'},
+        lanternes: {ico: '🏮', name: 'Lanternes à huile', cost: {metal: 1, verre: 2, corde: 1}, h: 1, where: ['droguerie', 'eglise', 'station'], aura: {mood: 0.12}, desc: 'On y voit clair même sans électricité : le moral tient mieux.'},
+        horloge: {ico: '🕰️', name: 'Horloge comtoise', cost: {bois: 4, pieces: 2, verre: 1}, h: 3, rare: true, where: ['maisonfam', 'mairie', 'eglise'], aura: {sommeil: 0.3, mood: 0.05}, desc: 'Le tic-tac rassure : on dort mieux, on garde le fil des jours.'},
+        accordeon: {ico: '🪗', name: 'Accordéon', cost: {bois: 2, tissu: 2, pieces: 2, colle: 1}, h: 3, rare: true, where: ['ecole', 'eglise', 'maisonfam'], fun: 2.2, desc: 'On danse dans la cave : le moral remonte plus vite qu’avec la musique du tourne-disque, sans électricité.'},
+        echecs: {ico: '♟️', name: 'Jeu d’échecs', cost: {bois: 2, colle: 1}, h: 1, where: ['bibliotheque', 'ecole', 'mairie'], fun: 1.3, desc: 'De longues parties le soir : le moral remonte, sans électricité.'},
+        simples: {ico: '🌿', name: 'Jardin de simples', cost: {bois: 3, verre: 1}, h: 3, where: ['pharmacie', 'eglise', 'bibliotheque'], prod: {every: 12, in: {eausale: 0.5}, out: {plantes: 1}, skill: 'soigner'}, desc: 'Sauge, thym, camomille : 1 plante toutes les 12 h (un peu d’eau de pluie), pour les remèdes.'},
+        remedes: {ico: '🫙', name: 'Pharmacie de grand-mère', cost: {bois: 2, verre: 2, plantes: 2}, h: 2, where: ['pharmacie', 'maisonfam'], healK: 1.3, desc: 'Des bocaux d’onguents et de tisanes : les malades guérissent plus vite.'},
+        gouttieres: {ico: '🌧️', name: 'Gouttières', cost: {metal: 3, clous: 2}, h: 2, where: ['quincaillerie', 'usine', 'droguerie'], rain: 1.5, desc: 'Le toit renvoie l’eau vers les bidons : +1,5 L par heure quand il pleut.'},
+        fosse: {ico: '🕳️', name: 'Fosse piégée', cost: {bois: 4, clous: 4}, h: 3, tool: 'pelle', where: ['ferme', 'decharge'], defense: 3, desc: 'Un trou couvert de branches devant la trappe : les pillards y tombent.'},
+        meurtrieres: {ico: '🏹', name: 'Meurtrières et arbalète', cost: {bois: 4, metal: 3, corde: 2}, h: 4, rare: true, where: ['usine', 'mairie', 'gare'], defense: 4, desc: 'On tire sans ouvrir : les pillards reculent.'},
+        brancard: {ico: '🩼', name: 'Brancard et attelles', cost: {bois: 3, tissu: 2, corde: 1}, h: 2, where: ['hopital', 'pharmacie'], healK: 1.2, desc: 'Les blessés sont bien installés : ils guérissent plus vite.'},
+        boussole: {ico: '🧭', name: 'Boussole et carnet de route', cost: {metal: 1, verre: 1, pieces: 1}, h: 1, where: ['bibliotheque', 'ecole', 'port'], travelK: 0.85, desc: 'Les raccourcis notés au fil des sorties : on va et on revient plus vite.'},
+        traineau: {ico: '🛷', name: 'Traîneau', cost: {bois: 4, corde: 2, clous: 2}, h: 2, where: ['menuiserie', 'ferme'], carry: 7, desc: 'On tire la charge derrière soi : on rapporte 7 de plus à chaque sortie.'},
+        nasse: {ico: '🎣', name: 'Nasses et filets', cost: {corde: 4, bois: 1}, h: 2, where: ['port', 'ferme'], prod: {every: 24, in: {}, out: {nourriture: 2}}, desc: 'Posées dans le canal : 2 rations de poisson par jour.'},
+        lessiveuse: {ico: '🫧', name: 'Lessiveuse', cost: {metal: 3, bois: 1}, h: 2, where: ['droguerie', 'maison'], aura: {hygiene: 0.5}, desc: 'Le linge propre : l’hygiène baisse moins vite.'},
+        pigeonnier: {ico: '🕊️', name: 'Pigeonnier', cost: {bois: 4, clous: 2, plantes: 1}, h: 3, rare: true, where: ['gare', 'maisonfam', 'ferme'], talkie: true, desc: 'Des pigeons voyageurs : on a des nouvelles de ceux qui sont dehors, même sans électricité.'},
+        caveavin: {ico: '🍷', name: 'Cave à vin', cost: {bois: 3, verre: 2}, h: 2, rare: true, where: ['maisonfam', 'ferme'], aura: {mood: 0.15}, desc: 'Un petit verre les soirs de fête : le moral tient bien mieux.'},
+        foursolaire: {ico: '🔆', name: 'Four solaire', cost: {verre: 3, metal: 2, colle: 1}, h: 2, modern: true, where: ['quincaillerie', 'electromenager'], cook: true, desc: 'Sous le puits de lumière : on cuit les plats sans bois (pour les recettes).'},
+        turbine: {ico: '💧', name: 'Petite turbine hydraulique', cost: {metal: 4, cuivre: 3, pieces: 2}, h: 4, tool: 'cle', elec: true, rare: true, where: ['usine', 'port'], desc: 'Quand il pleut, l’eau qui ruisselle dans le conduit fait de l’électricité.'},
     };
     const BASE_PLANS = Object.keys(ITEMS).filter(k => ITEMS[k].base);
     const FOUND_PLANS = Object.keys(ITEMS).filter(k => !ITEMS[k].base && !ITEMS[k].fixed);
@@ -205,7 +240,79 @@
         epidemie: ['🦠', 'Épidémie', 'La fièvre court la ville : on peut l’attraper dehors, et même au bunker. Des médicaments au départ.'],
         inondation: ['🌊', 'Inondation', 'Il pleut sans arrêt : beaucoup d’eau à filtrer, mais les étages du bas prennent l’eau.'],
         penurie: ['🥫', 'Pénurie', 'La ville a déjà été pillée : peu de choses dans les lieux, et elles reviennent lentement.'],
-        invasion: ['⚔️', 'Pillards', 'Des bandes rôdent dès le premier jour : portes, pièges et tours de garde.']};
+        invasion: ['⚔️', 'Pillards', 'Des bandes rôdent dès le premier jour : portes, pièges et tours de garde.'],
+        // 📜 les scénarios historiques, avec les ancêtres qui vivaient à cette date (HIST : la date, l'époque, le lieu, les règles)
+        h1709: ['🧊', 'Le grand hiver de 1709', 'Janvier 1709 : le froid fend les arbres et gèle la Seine. Du bois, beaucoup de bois, et le blé gelé manque partout. Ni électricité ni radio : le crieur et la gazette.'],
+        h1720: ['⚕️', 'La peste de Marseille, 1720', 'Été 1720 : la peste arrive par le port. On l’attrape en ville et même à l’abri : du vinaigre, des plantes, et le moins de sorties possible.'],
+        h1870: ['🥖', 'Le siège de Paris, 1870-1871', 'Septembre 1870 : Paris est encerclé. Plus rien n’entre : on rationne, on mange ce qu’on trouve (même les rats), les obus tombent. Le gaz, pas l’électricité.'],
+        h1910: ['🌊', 'La grande crue de Paris, 1910', 'Janvier 1910 : la Seine monte de huit mètres. Les caves prennent l’eau, il pleut sans fin. L’électricité, oui ; la radio, pas encore.'],
+        h1940: ['🚗', 'L’exode de 1940', 'Juin 1940 : des millions de gens sur les routes. L’abri est une cave de ferme près d’Orléans : des réfugiés à la trappe, l’essence rare, les routes mitraillées.']};
+    /** 🏆 combien de jours tenir pour gagner un scénario (on peut continuer après) */
+    const SCEN_GOAL = {classique: 30, hiver: 21, epidemie: 21, inondation: 21, penurie: 21, invasion: 21, h1709: 21, h1720: 28, h1870: 30, h1910: 14, h1940: 14};
+    /** 🕰️ les époques : électricité, radio (sinon le crieur et la gazette), objets, ressources et lieux qui n'existent pas encore, noms d'époque */
+    const ELEC_BAN = ['radio', 'generateur', 'solaire', 'eolienne', 'batteries', 'ampoules', 'dynamo', 'econome', 'talkie', 'alarme', 'douche', 'refrigerateur', 'extincteur', 'potager', 'phono', 'television', 'aquarium', 'ventilateur', 'purificateur', 'labo'];
+    const MODERN_JUNK = ['grillepain', 'radiocassee', 'tele', 'ordinateur', 'telephone', 'aspirateur', 'lampe', 'cables', 'batterieauto', 'pneu', 'jouets', 'seau', 'tuyau', 'barbecue', 'frigo', 'sechecheveux', 'panneau', 'velorouille', 'machinecoudre', 'reveil', 'pots', 'conserves'];
+    const OLD_RES = {plastique: ['🧺', 'Osier'], caoutchouc: ['🥾', 'Cuir'], cuivre: ['🧶', 'Fil de laiton']};
+    const OLD_PLACES = {supermarche: ['🧺', 'Halles du marché'], station: ['🐴', 'Relais de poste'], quincaillerie: ['⚒️', 'Taillanderie'], pharmacie: ['⚗️', 'Apothicaire'], garage: ['🐴', 'Écurie'], usine: ['🏭', 'Manufacture'], hopital: ['🏥', 'Hôtel-Dieu'], mairie: ['🏛️', 'Hôtel de ville'], ecole: ['🏫', 'Petite école'], bibliotheque: ['📚', 'Couvent'], decharge: ['🗑️', 'Tas de gravats'], droguerie: ['🧴', 'Droguiste']};
+    const ERAS = {
+        moderne: {elec: true, crier: false, ban: [], noRes: [], junkBan: [], placeBan: [], docBan: []},
+        e1940: {elec: true, crier: false, label: '1940', ban: ['television', 'talkie', 'solaire', 'aquarium'], noRes: [], junkBan: ['ordinateur', 'telephone', 'tele'], placeBan: [], docBan: [], old: true,
+            res: {electro: ['🔌', 'Lampes et pièces de TSF']}, place: {supermarche: ['🛒', 'Épicerie'], electromenager: ['📻', 'Magasin de TSF'], station: ['⛽', 'Pompe à essence']}, radio: ['📻', 'Poste de TSF']},
+        e1910: {elec: true, crier: true, label: '1910', ban: ['radio', 'television', 'talkie', 'solaire', 'aquarium', 'batteries', 'alarme', 'purificateur', 'refrigerateur'], noRes: [], junkBan: MODERN_JUNK.filter(k => !['machinecoudre', 'reveil', 'conserves', 'velorouille', 'lampe', 'seau'].includes(k)), placeBan: [], docBan: [], old: true,
+            res: {plastique: ['🧺', 'Osier'], electro: ['🔌', 'Fils et ampoules']}, place: {supermarche: ['🧺', 'Halles du marché'], station: ['⛽', 'Garage à automobiles'], electromenager: ['💡', 'Magasin d’électricité']}},
+        e1870: {elec: false, crier: true, label: '1870', ban: [...ELEC_BAN, 'remorque', 'bidons'], noRes: ['essence', 'electro', 'piles'], junkBan: MODERN_JUNK.filter(k => !['machinecoudre', 'reveil', 'conserves', 'velorouille'].includes(k)), placeBan: ['electromenager'], docBan: [], old: true,
+            res: OLD_RES, place: {...OLD_PLACES, garage: ['🐴', 'Remise des fiacres'], ecole: ['🏫', 'École communale'], bibliotheque: ['📚', 'Bibliothèque']}, tools: {lampe: ['🏮', 'Lanterne']}},
+        ancien: {elec: false, crier: true, label: 'ancien', ban: [...ELEC_BAN, 'velo', 'remorque', 'bidons'], noRes: ['essence', 'electro', 'piles'], junkBan: MODERN_JUNK, placeBan: ['electromenager', 'gare'], docBan: ['photo', 'livret', 'recensement'], old: true,
+            res: OLD_RES, place: OLD_PLACES, tools: {lampe: ['🏮', 'Lanterne'], cle: ['🔧', 'Clé de serrurier']}}};
+    /** 📜 les scénarios historiques : [année, mois, jour] du premier matin, l'époque, la ville, ce qui dit « dans la région » (noms, n° de département), saison de départ, la fin */
+    const HIST = {
+        h1709: {date: [1709, 1, 6], era: 'ancien', city: 'Paris', region: 'en France', keys: [], season0: 3, end: '🌸 Le dégel arrive enfin : vous avez passé le grand hiver de 1709 !'},
+        h1720: {date: [1720, 7, 31], era: 'ancien', city: 'Marseille', region: 'en Provence', keys: ['marseille', 'provence', 'bouches du rhone', 'aix', 'aubagne', 'toulon', 'var', 'vaucluse', 'avignon', 'arles', 'la ciotat', 'martigues', 'apt', '13', '83', '84', '04'], season0: 1, end: '🕊️ La peste recule : on sort de l’abri, vivants. Vous avez tenu !'},
+        h1870: {date: [1870, 9, 19], era: 'e1870', city: 'Paris', region: 'en Île-de-France', keys: ['paris', 'seine et oise', 'seine et marne', 'versailles', 'saint denis', 'sceaux', 'ile de france', '75', '77', '78', '91', '92', '93', '94', '95'], season0: 2, end: '🕊️ L’armistice est signé : le siège est fini, les ravitaillements arrivent. Vous avez tenu !'},
+        h1910: {date: [1910, 1, 21], era: 'e1910', city: 'Paris', region: 'en Île-de-France', keys: ['paris', 'seine et oise', 'seine et marne', 'versailles', 'saint denis', 'ile de france', '75', '77', '78', '91', '92', '93', '94', '95'], season0: 3, end: '🌤️ La Seine redescend : la crue est passée. Vous avez tenu !'},
+        h1940: {date: [1940, 6, 10], era: 'e1940', city: 'Orléans', region: 'sur la route de l’exode', keys: ['orleans', 'loiret', 'loir et cher', 'blois', 'tours', 'indre', 'cher', 'bourges', 'chartres', 'eure et loir', 'paris', '45', '41', '37', '18', '36', '28', '75'], season0: 1, end: '🕊️ L’armistice est signé : les routes se calment, on peut rentrer. Vous avez tenu !'}};
+    const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    /** les habitants inventés de l'époque (quand il n'y a pas assez d'ancêtres qui vivaient à cette date) */
+    const ERA_NAMES = {
+        ancien: {m: ['Jean', 'Pierre', 'François', 'Jacques', 'Antoine', 'Louis', 'Joseph', 'Étienne', 'Nicolas', 'Guillaume'], f: ['Marie', 'Anne', 'Jeanne', 'Catherine', 'Marguerite', 'Françoise', 'Madeleine', 'Louise', 'Élisabeth', 'Geneviève'],
+            occ: ['laboureur', 'tisserand', 'journalier', 'charron', 'boulanger', 'meunier', 'lavandière', 'fileuse', 'maçon', 'cordonnier', 'sage-femme', 'marchand']},
+        e1870: {m: ['Jules', 'Eugène', 'Auguste', 'Émile', 'Louis', 'Henri', 'Alphonse', 'Charles'], f: ['Marie', 'Louise', 'Eugénie', 'Joséphine', 'Augustine', 'Victorine', 'Clémence', 'Berthe'],
+            occ: ['ouvrier', 'cocher', 'blanchisseuse', 'typographe', 'boulanger', 'garde national', 'couturière', 'marchand de vin', 'infirmière', 'menuisier']},
+        e1910: {m: ['Henri', 'Marcel', 'Louis', 'Georges', 'Paul', 'Lucien', 'Émile', 'René'], f: ['Marie', 'Jeanne', 'Marguerite', 'Germaine', 'Louise', 'Berthe', 'Lucienne', 'Marthe'],
+            occ: ['employé', 'cocher', 'blanchisseuse', 'électricien', 'boulanger', 'couturière', 'facteur', 'institutrice', 'maçon', 'chauffeur']},
+        e1940: {m: ['André', 'René', 'Marcel', 'Roger', 'Robert', 'Jean', 'Pierre', 'Henri'], f: ['Jeanne', 'Marguerite', 'Simone', 'Yvonne', 'Germaine', 'Suzanne', 'Madeleine', 'Paulette'],
+            occ: ['cheminot', 'institutrice', 'mécanicien', 'agriculteur', 'infirmière', 'boulanger', 'facteur', 'couturière', 'gendarme', 'épicier']}};
+    const ERA_LAST = {h1720: ['ROUX', 'BLANC', 'GARNIER', 'FABRE', 'MICHEL', 'AUDIBERT', 'BONNET', 'GIRAUD', 'ARNAUD', 'FOUQUE'], h1940: ['MARTIN', 'PETIT', 'BRETON', 'LEFÈVRE', 'GIRARD', 'MERCIER', 'BOURGEOIS', 'CHEVALIER', 'RENAUD', 'MOULIN'],
+        x: ['MARTIN', 'BERNARD', 'DUBOIS', 'THOMAS', 'ROBERT', 'RICHARD', 'PETIT', 'DURAND', 'LEROY', 'MOREAU', 'LAURENT', 'LEFEBVRE']};
+    /** 🏆 les succès : [clé, icône, nom, ce qu'il faut faire, caché jusqu'à ce qu'on le gagne, le test] (vérifiés une fois par heure de jeu) */
+    const lived = g => dayOf(g.t) - 1;
+    const ACH = [
+        ['j7', '📅', 'Une semaine sous terre', 'Tenir 7 jours.', false, g => lived(g) >= 7],
+        ['j30', '🗓️', 'Un mois sous terre', 'Tenir 30 jours.', false, g => lived(g) >= 30],
+        ['j100', '🏛️', 'Cent jours', 'Tenir 100 jours.', true, g => lived(g) >= 100],
+        ['pop10', '👨‍👩‍👧‍👦', 'Dix habitants', 'Être 10 en vie dans le bunker.', false, g => alive(g).length >= 10],
+        ['nodeath', '🕊️', 'Aucun mort', 'Tenir 15 jours sans perdre personne.', false, g => lived(g) >= 15 && !g.stats.deaths.length],
+        ['tout', '🏗️', 'Tout construire', 'Poser au moins une fois chaque installation dont on a le plan au départ.', false, g => basePlans(g).every(k => (g.stats.builtKinds || []).includes(k) || has(g, k))],
+        ['hiver', '🥶', 'Un hiver sans poêle', 'Passer 7 jours d’hiver sans poêle, ni cheminée, ni chaudière.', false, g => (g.stats.wDays || 0) >= SEASON_DAYS],
+        ['bebe', '👶', 'Une naissance au bunker', 'Accueillir un bébé (il faut un berceau).', false, g => g.births.length > 0],
+        ['pill3', '🛡️', 'Repousser 3 pillages', 'Que les pillards repartent bredouilles trois fois.', false, g => g.stats.raidsWon >= 3],
+        ['etages', '⛏️', 'Six étages', 'Creuser jusqu’au sixième étage.', false, g => g.floors.length >= MAX_FLOORS],
+        ['ville', '🗺️', 'Toute la ville', 'Fouiller chaque lieu de la ville au moins une fois.', false, g => g.city.places.length > 0 && g.city.places.every(pl => pl.visits > 0)],
+        ['recy', '♻️', 'Rien ne se perd', 'Démonter 50 objets du bric-à-brac.', false, g => (g.stats.recycled || 0) >= 50],
+        ['veillees', '📖', 'Trente veillées', 'Raconter 30 histoires du soir.', false, g => g.stats.stories >= 30],
+        ['commerce', '🤝', 'Dix échanges', 'Conclure 10 marchés (à la trappe ou par la radio).', false, g => g.stats.trades >= 10],
+        ['menagerie', '🐾', 'La ménagerie', 'Avoir 4 animaux en même temps.', false, g => g.pets.length >= 4],
+        ['archives', '📜', 'Aux archives', 'Retrouver 5 documents d’ancêtres (missions généalogiques).', false, g => g.docs.length >= 5],
+        ['niveau3', '⬆️', 'Du travail soigné', 'Améliorer une installation jusqu’au niveau 3.', false, g => Object.values(g.lvl || {}).some(v => v >= 3)],
+        ['plans', '📐', 'Tous les plans trouvés', 'Rapporter de la ville tous les plans de l’époque.', false, g => foundPlans(g).every(k => g.plans.includes(k))],
+        ['fab10', '🔨', 'Dix objets fabriqués', 'Terminer 10 constructions à l’atelier.', false, g => (g.stats.built || 0) >= 10],
+        ['fab40', '🏭', 'La petite usine', 'Terminer 40 constructions à l’atelier.', true, g => (g.stats.built || 0) >= 40],
+        ['droit', '⏩', 'Sans jamais revenir en arrière', 'Tenir 30 jours sans « ⏪ Reprendre au matin ».', false, g => lived(g) >= 30 && !g.rewound],
+        ['joie', '😄', 'La joie sous terre', 'Au moins 3 habitants, et tous au moral au-dessus de 90.', true, g => alive(g).length >= 3 && alive(g).every(p => (p.mood ?? 70) >= 90)],
+        ['solo', '🧍', 'Seul·e au monde', 'Tenir 10 jours tout·e seul·e.', true, g => g.people.length === 1 && lived(g) >= 10],
+        ['extreme', '💀', 'Dur à cuire', 'Tenir 15 jours en difficulté Extrême.', true, g => g.diff === 'extreme' && lived(g) >= 15],
+        ['coffre', '🧳', 'Le coffre plein', 'Avoir 6 objets de famille dans le coffre.', true, g => g.coffre.length >= 6],
+        ...Object.keys(SCENARIOS).map(k => ['scen_' + k, SCENARIOS[k][0], `Gagné : ${SCENARIOS[k][1]}`, `Tenir ${SCEN_GOAL[k]} jours dans le scénario « ${SCENARIOS[k][1]} ».`, false, g => g.scen === k && !!g.won])];
     /** 🌪️ les catastrophes (option des réglages « météo ») : [icône, nom, ce qui se passe] */
     const EVENTS = {canicule: ['🥵', 'Canicule', 'on a soif bien plus vite'], tempete: ['🌪️', 'Tempête de poussière', 'l’air s’encrasse, dehors on se blesse, les panneaux solaires ne donnent rien'],
         inondation: ['🌊', 'Inondation', 'l’eau entre par le bas : une installation de l’étage le plus profond est abîmée'], seisme: ['🫨', 'Tremblement de terre', 'des installations sont abîmées, on peut se blesser'],
@@ -298,7 +405,7 @@
     // les tables du jeu sans prototype : un fichier de partie piégé (« __proto__ », « toString »…) ne trouve rien dedans
     [DECAY, JUNK, ITEMS, TOOLS, PLACE_KINDS, TRAITS, TRAIT_OPP, DIFFS, SCENARIOS, EVENTS, VALUE, PETS, RECIPES, DECOS, ROOMS, KIND_ROOMS, DOCS, SIZES, AUTO].forEach(o => Object.setPrototypeOf(o, null));
     const rainPerHour = g => (1 + items(g).reduce((n, {k}) => n + (ITEMS[k]?.rain || 0), 0)) * (has(g, 'recuperateur') ? 3 : 1);
-    const seasonOf = g => g.scen === 'hiver' ? 'hiver' : SEASONS[((Number(g.season0) || 0) + Math.floor((dayOf(g.t) - 1) / SEASON_DAYS)) % 4][0];
+    const seasonOf = g => g.scen === 'hiver' || (g.scen === 'h1709' && dayOf(g.t) <= SCEN_GOAL.h1709) ? 'hiver' : SEASONS[((Number(g.season0) || 0) + Math.floor((dayOf(g.t) - 1) / SEASON_DAYS)) % 4][0];
     const heir = (g, k) => (g.coffre || []).some(x => x.bonus === k);
     const atBase = g => alive(g).filter(p => p.where === 'base');
     /** la meilleure compétence parmi ceux qui sont au bunker (les bébés ne comptent pas) */
@@ -308,12 +415,66 @@
     function takeWater(g, n) { if (g.res.eausale >= n) { g.res.eausale -= n; return true; } if (g.res.eausale + g.res.eau >= n) { const a = g.res.eausale; g.res.eausale = 0; g.res.eau -= n - a; return true; } return false; }
     function log(g, txt, kind = 'info') { g.log.unshift({t: g.t, txt, kind}); if (g.log.length > 250) g.log.length = 250; }
     /** un message de la radio : entendu tout de suite s'il y a de l'électricité, sinon gardé jusqu'au retour du courant */
-    function radio(g, txt) { if (g.power || has(g, 'talkie')) log(g, txt, 'radio'); else g.radioQueue.push(txt); }
+    function radio(g, txt) { if (crier(g)) log(g, txt.replace(/📻/g, '📯'), 'radio'); else if (g.power || has(g, 'talkie') || has(g, 'pigeonnier')) log(g, txt, 'radio'); else g.radioQueue.push(txt); }
     function add(g, r, n) { const before = g.res[r]; g.res[r] = clamp(before + n, 0, cap(g, r)); return g.res[r] - before; }
+    /* ═════════ 🕰️ L'époque (scénarios historiques) ═════════ */
+    const histOf = g => HIST[g?.scen] || null;
+    const eraOf = g => ERAS[histOf(g)?.era] || ERAS.moderne;
+    /** un objet qui existe à cette époque (pas d'électronique en 1709…) */
+    const itemOk = (g, k) => { const it = ITEMS[k], E = eraOf(g); return !!it && !E.ban.includes(k) && !((it.power || it.elec) && !E.elec) && !(it.modern && E.old); };
+    const resOk = (g, r) => !eraOf(g).noRes.includes(r);
+    /** le nom d'une ressource, d'un lieu, d'un outil à l'époque de la partie : [clé, icône, nom, unité] / [icône, nom] / [icône, nom, à quoi ça sert] */
+    function resInfo(g, r) { const x = RES.find(y => y[0] === r) || [r, '•', r, '']; const o = eraOf(g).res?.[r]; return o ? [x[0], o[0], o[1], x[3]] : x; }
+    function placeInfo(g, kind) { const K = PLACE_KINDS[kind] || ['📍', 'Lieu']; return eraOf(g).place?.[kind] || [K[0], K[1]]; }
+    function toolInfo(g, k) { const T = TOOLS[k] || ['🔧', k, '']; const o = eraOf(g).tools?.[k]; return o ? [o[0], o[1], T[2]] : T; }
+    const fixedName = (g, k) => (k === 'radio' && eraOf(g).radio ? eraOf(g).radio : [ITEMS[k]?.ico, ITEMS[k]?.name]);
+    const resList = g => RES.filter(x => resOk(g, x[0])).map(x => resInfo(g, x[0]));
+    /** la radio, ou le crieur et la gazette ; une époque sans électricité : l'atelier et les messagers marchent quand même */
+    const hasRadio = g => has(g, 'radio') || has(g, 'crieur');
+    const crier = g => eraOf(g).crier;
+    const lit = g => g.power || !eraOf(g).elec;
+    const epi = g => g.scen === 'epidemie' || g.scen === 'h1720';
+    const flood = g => g.scen === 'inondation' || g.scen === 'h1910';
+    const goalOf = g => SCEN_GOAL[g.scen] || 30;
+    /** les plans de départ de la partie (selon l'époque et les chaînes de fabrication) */
+    const basePlans = g => BASE_PLANS.filter(k => itemOk(g, k) && (opt(g, 'chaines') || !ITEMS[k].chain));
+    const foundPlans = g => FOUND_PLANS.filter(k => itemOk(g, k) && (opt(g, 'chaines') || !ITEMS[k].chain));
+    const fixedSlots = g => { const E = eraOf(g); return [E.crier ? 'crieur' : 'radio', E.elec ? 'generateur' : 'cheminee', 'atelier', null, null, null]; };
+    /** la date du jour dans un scénario historique (« 8 janvier 1709 »), sinon '' */
+    function dateOf(g, t = g.t) {
+        const H = histOf(g); if (!H) return '';
+        const d = new Date(Date.UTC(2000, H.date[1] - 1, H.date[2] + dayOf(t) - 1)); d.setUTCFullYear(H.date[0] + (d.getUTCFullYear() - 2000));
+        return `${d.getUTCDate() === 1 ? '1er' : d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+    }
+    /** 📜 les ancêtres qui vivaient à la date d'un scénario : nés avant, morts après (ou sans date de décès, si l'âge reste crédible) ;
+     *  jamais un vivant, une fiche confidentielle ou cachée au partage ; ceux de la commune ou de la région d'abord.
+     *  people : [{id, name, gender, occ, by, bd, dy, dd, bplace, dplace, living, priv, sh}], places : {id: {name}} → {all: [...], local: n} */
+    const foldTxt = t => ` ${String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim()} `;
+    function histPool(k, people, places = {}) {
+        const H = HIST[k]; if (!H) return {all: [], local: 0};
+        const [Y, M, D] = H.date, iso = `${Y}-${String(M).padStart(2, '0')}-${String(D).padStart(2, '0')}`, ymd = v => /^\d{4}-\d\d-\d\d$/.test(String(v || ''));
+        const keys = [H.city, ...H.keys].map(x => foldTxt(x));
+        const here = id => { const n = foldTxt(places?.[id]?.name); return !!id && n.trim() && keys.some(x => n.includes(x)); };
+        const ok = p => { if (!p || p.living || p.priv || p.sh) return false; const by = Number(p.by) || 0, dy = Number(p.dy) || 0; if (!by) return false;
+            if (ymd(p.bd) ? p.bd >= iso : by >= Y) return false; const age = Y - by; if (age < 8 || age > 95) return false;
+            return dy ? (ymd(p.dd) ? p.dd > iso : dy > Y) : age <= 85; };
+        const all = (Array.isArray(people) ? people : []).filter(ok).map(p => ({pid: Number(p.id) || 0, name: str(p.name || [p.first, p.last].filter(Boolean).join(' '), 80) || 'Sans nom', gender: str(p.gender, 10), occ: str(p.occ, 60), by: Number(p.by), age: Y - Number(p.by), local: here(p.bplace) || here(p.dplace)}));
+        all.sort((a, b) => (b.local - a.local) || ((b.age >= 16) - (a.age >= 16)));
+        return {all, local: all.filter(p => p.local).length};
+    }
+    /** un habitant inventé de l'époque (prénom, nom, métier d'alors) */
+    function invent(g) {
+        const H = histOf(g), Y = H ? H.date[0] : 2000, N = ERA_NAMES[H?.era] || ERA_NAMES.e1940, f = rnd(g) < 0.5, age = rint(g, 17, 62);
+        const used = new Set(g.people.map(p => p.name));
+        let name = ''; for (let i = 0; i < 20 && (!name || used.has(name)); i++) name = `${pickOne(g, f ? N.f : N.m)} ${pickOne(g, ERA_LAST[g.scen] || ERA_LAST.x)}`;
+        return {pid: 0, name, gender: f ? 'female' : 'male', occ: pickOne(g, N.occ), by: Y - age, age, inv: true};
+    }
 
     /* ═════════ Une nouvelle partie ═════════ */
     /**
      * opts : {seed, me: {pid, name, gender}, team: [{pid, name, gender}], city: {name, size: 'petite'|'moyenne'|'grande'}}
+     * Scénario historique (scen 'h1709'…) : me et team sont des ancêtres qui vivaient à cette date (histPool) ; want = combien en tout
+     * (1 à 7) : s'il n'y en a pas assez, des habitants inventés de l'époque complètent le groupe (et on le dit).
      */
     function newGame(opts = {}) {
         const seed = (Number(opts.seed) || Math.floor(Math.random() * 2 ** 31)) | 0;
@@ -326,9 +487,14 @@
             opt: cleanOpt(opts.opt), diff: DIFFS[opts.diff] ? opts.diff : 'normal', scen: SCENARIOS[opts.scen] ? opts.scen : 'classique',
             broken: {}, lvl: {}, rel: {}, event: null, market: {d: 0, offers: [], deals: []},
             pets: [], pests: 0, menu: 'auto', deco: {}, fire: null, ancestors: cleanAnc(opts.ancestors), missions: [], docs: [], hist: [],
-            stats: {deaths: [], visits: {marchand: 0, voyageur: 0, pillards: 0}, raidsWon: 0, raidsLost: 0, stories: 0, found: [], trades: 0, repairs: 0, events: 0}};
+            stats: {deaths: [], visits: {marchand: 0, voyageur: 0, pillards: 0}, raidsWon: 0, raidsLost: 0, stories: 0, found: [], trades: 0, repairs: 0, events: 0, builtKinds: [], built: 0, wDays: 0},
+            ach: {}, achNew: [], won: 0, rewound: 0, mornings: []};
         g.tuto = g.opt.tuto ? 0 : -1;
-        if (!g.opt.chaines) g.plans = g.plans.filter(k => !ITEMS[k].chain);
+        const H = histOf(g), E = eraOf(g);
+        g.plans = basePlans(g); g.floors[0].slots = fixedSlots(g);
+        if (H) { g.season0 = H.season0; if (E.junkBan.includes('radiocassee')) g.junk = {tonneau: 1, chaise: 1, palette: 1}; }
+        if (!E.elec) { g.power = false; g.powerSrc = ''; }
+        E.noRes.forEach(r => { g.res[r] = 0; });
         // les réserves de départ selon la difficulté et le scénario
         const sk = DF(g).start * (g.scen === 'penurie' ? 0.8 : 1);
         RES.slice(0, 10).forEach(([r]) => { g.res[r] = Math.round(g.res[r] * sk * 10) / 10; });
@@ -336,8 +502,20 @@
         if (g.scen === 'epidemie') g.res.medic += 3;
         if (g.scen === 'inondation') g.res.eausale += 15;
         if (g.scen === 'invasion') { g.res.metal += 4; g.res.clous += 4; }
-        g.people.push(mkPerson(g, opts.me || {name: 'Moi'}, true));
-        (opts.team || []).slice(0, 6).forEach(p => g.people.push(mkPerson(g, p, false)));
+        if (g.scen === 'h1709') { g.res.bois += 24; g.res.nourriture = Math.round(g.res.nourriture * 0.8); }
+        if (g.scen === 'h1720') { g.res.medic += 2; g.res.plantes += 4; }
+        if (g.scen === 'h1870') { g.res.nourriture = Math.round(g.res.nourriture * 0.7); g.res.charbon += 3; }
+        if (g.scen === 'h1910') g.res.eausale += 20;
+        if (g.scen === 'h1940') { g.res.essence = Math.round(g.res.essence * 0.3); g.res.nourriture += 4; }
+        const real = H ? [opts.me, ...(opts.team || [])].filter(p => p && p.name).slice(0, 7) : [];
+        if (H) {
+            const want = clamp(Math.round(Number(opts.want) || real.length || 4), 1, 7);
+            g.people.push(mkPerson(g, real[0] || invent(g), true)); real.slice(1, want).forEach(p => g.people.push(mkPerson(g, p, false)));
+            while (g.people.length < want) g.people.push(mkPerson(g, invent(g), false));
+        } else {
+            g.people.push(mkPerson(g, opts.me || {name: 'Moi'}, true));
+            (opts.team || []).slice(0, 6).forEach(p => g.people.push(mkPerson(g, p, false)));
+        }
         // les liens de famille (parents, conjoints, frères et sœurs) entre ceux qui descendent : par numéro de fiche
         const byPid = new Map(g.people.filter(p => p.pid).map(p => [p.pid, p]));
         (opts.kin || []).forEach(([a, b, type]) => { const x = byPid.get(Number(a)), y = byPid.get(Number(b)); if (!x || !y || x === y) return; const k = type === 'conjoint' ? 'spouses' : 'kin';
@@ -354,9 +532,12 @@
         if (g.coffre.length) log(g, `🧳 Dans le coffre de famille : ${g.coffre.map(c => `« ${c.title} » (${HEIRLOOMS.find(h => h[0] === c.bonus)[2]})`).join(', ')}.`);
         if (g.feud) { const [a, b] = g.feud.map(id => g.people.find(p => p.id === id)); log(g, `⚡ ${a.name} et ${b.name} ne se parlent plus depuis longtemps… Il faudra faire avec.`); }
         if (g.scen !== 'classique') log(g, `${SCENARIOS[g.scen][0]} ${SCENARIOS[g.scen][1]} : ${SCENARIOS[g.scen][2]}`, 'alerte');
-        marketDay(g); if (g.opt.missions) newMissions(g); snapshot(g);
+        if (H) { const nReal = g.people.filter(p => !p.inv).length, nInv = g.people.length - nReal, nLoc = real.slice(0, g.people.length).filter(p => p.local).length;
+            log(g, `📜 ${dateOf(g)}, à ${g.city.name} : ${nReal ? `${nReal === 1 ? '1 ancêtre de ta famille' : `${nReal} ancêtres de ta famille`} qui vivai${nReal > 1 ? 'en' : ''}t à cette date${nLoc ? ` (dont ${nLoc} ${H.region})` : ''}` : 'aucun ancêtre de ta famille ne vivait à cette date'}${nInv ? `${nReal ? ', et ' : ' : '}${nInv === 1 ? '1 habitant inventé' : `${nInv} habitants inventés`} de l’époque pour compléter le groupe` : ''}.`, 'alerte'); }
+        log(g, `🏆 Pour gagner : tenir ${goalOf(g)} jours. (On peut continuer ensuite.)`, 'info');
+        marketDay(g); if (g.opt.missions) newMissions(g); snapshot(g); morningSave(g);
         if (g.tuto === 0) log(g, `📘 Tutoriel — ${TUTO[0][0]}`, 'alerte');
-        log(g, 'Pour commencer : construire des toilettes et un lit à l’atelier, creuser un étage, et envoyer quelqu’un chercher de quoi tenir. Le bric-à-brac (une vieille radio, une chaise…) se démonte pour en tirer des composants : onglet ♻️ Bric-à-brac.', 'info');
+        log(g, `Pour commencer : construire des toilettes et un lit à l’atelier, creuser un étage, et envoyer quelqu’un chercher de quoi tenir. Le bric-à-brac (${E.old && E.junkBan.includes('radiocassee') ? 'un vieux tonneau' : 'une vieille radio'}, une chaise…) se démonte pour en tirer des composants : onglet ♻️ Bric-à-brac.`, 'info');
         return g;
     }
     /** un habitant : ses besoins, son moral, ses compétences (métier et époque), son caractère */
@@ -365,7 +546,8 @@
         return {id: 'h' + g.nextId++, pid: Number(p.pid) || 0, name: String(p.name || 'Sans nom').slice(0, 80), gender: p.gender || '', me: !!me, hp: 100,
             needs: {soif: 85, faim: 80, sommeil: 90, hygiene: 85, vessie: 90}, where: 'base', act: null, job: 'libre', exp: null,
             mood: 70, sk, era, from, occ: String(p.occ || '').slice(0, 60), by: Number(p.by) || 0, ill: null, kin: [], spouses: [], baby: false, parents: [],
-            traits: [t1, t2].filter(Boolean), xp: {}, diary: [], age: more.baby ? 0 : rint(g, 18, 72), ...more};
+            traits: [t1, t2].filter(Boolean), xp: {}, diary: [], age: more.baby ? 0 : Number(p.age) > 0 ? clamp(Math.round(Number(p.age)), 8, 100) : rint(g, 18, 72),
+            ...(Number(p.age) > 0 && Number(p.age) < 14 && !more.baby ? {child: true} : {}), ...(p.inv ? {inv: true} : {}), ...more};
     }
     const str = (v, n) => String(v ?? '').replace(/\s+/g, ' ').trim().slice(0, n);
     const cleanExtras = l => (Array.isArray(l) ? l : []).slice(0, 20).map(p => ({pid: Number(p?.pid) || 0, name: str(p?.name, 80) || 'Un voyageur', gender: str(p?.gender, 10), occ: str(p?.occ, 60), by: Number(p?.by) || 0}));
@@ -380,16 +562,16 @@
     const cleanNames = o => ({f: (Array.isArray(o?.f) ? o.f : []).slice(0, 60).map(x => str(x, 30)).filter(Boolean), m: (Array.isArray(o?.m) ? o.m : []).slice(0, 60).map(x => str(x, 30)).filter(Boolean)});
     function makeCity(g, name, size, homes = []) {
         const [n, nb] = SIZES[size], c = Math.floor(n / 2), places = [], used = new Set([`${c},${c}`]);
-        const kinds = Object.keys(PLACE_KINDS), streets = [...STREETS];
+        const kinds = Object.keys(PLACE_KINDS).filter(k => !eraOf(g).placeBan.includes(k)), streets = [...STREETS];
         // au moins un de chaque sorte utile, puis au hasard
-        const order = ['supermarche', 'station', 'quincaillerie', 'menuiserie', 'pharmacie', 'maison', 'garage', 'bibliotheque', ...(nb >= 10 ? ['mairie'] : []), ...(nb >= 16 ? ['decharge', 'electromenager', 'droguerie'] : []), ...(nb >= 26 ? ['usine', 'ferme', 'ecole', 'gare', 'port', 'hopital', 'eglise'] : [])];
+        const order = ['supermarche', 'station', 'quincaillerie', 'menuiserie', 'pharmacie', 'maison', 'garage', 'bibliotheque', ...(nb >= 10 ? ['mairie'] : []), ...(nb >= 16 ? ['decharge', 'electromenager', 'droguerie'] : []), ...(nb >= 26 ? ['usine', 'ferme', 'ecole', 'gare', 'port', 'hopital', 'eglise'] : [])].filter(k => kinds.includes(k));
         for (let i = 0; i < nb; i++) {
             const kind = i < order.length ? order[i] : pickOne(g, kinds);
             let x, y, tries = 0; do { x = rint(g, 0, n - 1); y = rint(g, 0, n - 1); tries++; } while ((used.has(`${x},${y}`) || Math.abs(x - c) + Math.abs(y - c) < 2) && tries < 200);
             used.add(`${x},${y}`);
-            const [, label, res, tools, plans] = PLACE_KINDS[kind], {stock, max} = stockFor(g, res);
+            const [, , res, tools, plans] = PLACE_KINDS[kind], label = placeInfo(g, kind)[1], {stock, max} = stockFor(g, res);
             const street = streets.length ? streets.splice(Math.floor(rnd(g) * streets.length), 1)[0] : `rue n° ${i + 1}`;
-            places.push({id: 'l' + (i + 1), kind, name: `${label}, ${street}`, x, y, stock, max, tools: tools.filter(() => rnd(g) < 0.7), plans: plans ? 2 : (rnd(g) < 0.3 ? 1 : 0), visits: 0, seen: false, junk: junkFor(g, kind, rint(g, 1, 4))});
+            places.push({id: 'l' + (i + 1), kind, name: `${label}, ${street}`, x, y, stock, max, tools: tools.filter(() => rnd(g) < 0.7), plans: plans ? 3 : (rnd(g) < 0.5 ? 1 : 0), visits: 0, seen: false, junk: junkFor(g, kind, rint(g, 1, 4))});
         }
         // la maison natale d'un ancêtre né dans cette ville (2 au plus)
         (Array.isArray(homes) ? homes : []).slice(0, 2).forEach((h, j) => {
@@ -403,8 +585,8 @@
     /** ce qu'il y a dans un lieu : une partie seulement de ce qu'on peut y trouver (tiré au hasard, au moins une chose), en quantité au hasard */
     function stockFor(g, res) {
         const stock = {}, max = {};
-        const keys = Object.keys(res).filter(r => opt(g, 'chaines') || !CHAIN_RES.includes(r)), poor = g.scen === 'penurie' ? 0.5 : 1;
-        keys.forEach(r => { const [a, b] = res[r]; max[r] = b; stock[r] = b > 0 && rnd(g) < 0.6 ? Math.max(1, Math.round(rint(g, Math.max(1, a), b) * poor)) : 0; });
+        const keys = Object.keys(res).filter(r => (opt(g, 'chaines') || !CHAIN_RES.includes(r)) && resOk(g, r)), poor = r => (g.scen === 'penurie' ? 0.5 : 1) * (g.scen === 'h1870' && FOOD.includes(r) ? 0.4 : 1) * (g.scen === 'h1940' && r === 'essence' ? 0.3 : 1);
+        keys.forEach(r => { const [a, b] = res[r]; max[r] = b; stock[r] = b > 0 && rnd(g) < 0.6 ? Math.max(1, Math.round(rint(g, Math.max(1, a), b) * poor(r))) : 0; });
         if (keys.length && !keys.some(r => stock[r] > 0)) { const r = pickOne(g, keys.filter(x => max[x] > 0).length ? keys.filter(x => max[x] > 0) : keys); stock[r] = rint(g, Math.max(1, res[r][0]), Math.max(1, res[r][1])); }
         return {stock, max};
     }
@@ -412,12 +594,15 @@
     function regen(g, pl) {
         const back = 0.4 * DF(g).regen * (g.scen === 'penurie' ? 0.5 : 1);
         Object.keys(pl.max).forEach(r => { const m = pl.max[r]; if (!m) return; const x = rnd(g);
-            if (x < back) pl.stock[r] = Math.min(m, (pl.stock[r] || 0) + rint(g, 1, Math.max(1, Math.ceil(m / 2))));
+            // 🥖 le siège de 1870 : plus rien à manger n'entre dans Paris ; ⛽ l'exode de 1940 : plus d'essence
+            if (x < back && !(g.scen === 'h1870' && FOOD.includes(r)) && !(g.scen === 'h1940' && r === 'essence')) pl.stock[r] = Math.min(m, (pl.stock[r] || 0) + rint(g, 1, Math.max(1, Math.ceil(m / 2))));
             else if (x > 0.93 && pl.stock[r] > 0) pl.stock[r] = Math.floor(pl.stock[r] / 2); });
         if ((pl.junk || []).length < 4 && rnd(g) < 0.35) pl.junk = [...(pl.junk || []), ...junkFor(g, pl.kind, rint(g, 1, 2))];
+        if (!(pl.plans > 0) && rnd(g) < 0.06) pl.plans = 1; // un carnet de plans laissé là par d'autres survivants
     }
+    const FOOD = ['nourriture', 'farine', 'ble'];
     /** du bric-à-brac tiré au hasard parmi ce qu'on trouve dans ce genre de lieu */
-    function junkFor(g, kind, n) { const l = PLACE_KINDS[kind]?.[5] || []; return l.length ? Array.from({length: n}, () => pickOne(g, l)) : []; }
+    function junkFor(g, kind, n) { const E = eraOf(g), l = [...(PLACE_KINDS[kind]?.[5] || []).filter(k => !E.junkBan.includes(k)), ...(E.old ? OLD_JUNK : [])]; return l.length ? Array.from({length: n}, () => pickOne(g, l)) : []; }
     /** minutes de marche d'un trajet (aller), 30 min par case ; la nuit ×1,5 sans lampe torche */
     function travel(g, place, t = g.t, from = null) { const [bx, by] = from ? [from.x, from.y] : g.city.base, d = Math.abs(place.x - bx) + Math.abs(place.y - by); return Math.max(10, Math.round(d * 30 * (isNight(t) && !g.tools.includes('lampe') ? 1.5 : 1) * (g.event?.k === 'tempete' ? 1.4 : 1) * mult(g, 'travelK'))); }
 
@@ -426,11 +611,12 @@
     function orderBuild(g, k, fi, si) {
         const it = ITEMS[k]; if (!it || it.fixed) return {ok: false, err: 'Objet inconnu.'};
         if (!g.plans.includes(k)) return {ok: false, err: `Il faut d’abord trouver le plan « ${it.name} ».`};
-        if (it.tool && !g.tools.includes(it.tool)) return {ok: false, err: `Il faut l’outil « ${TOOLS[it.tool][1]} ».`};
+        if (it.tool && !g.tools.includes(it.tool)) return {ok: false, err: `Il faut l’outil « ${toolInfo(g, it.tool)[1]} ».`};
         if (it.chain && !opt(g, 'chaines')) return {ok: false, err: 'Les chaînes de fabrication sont désactivées (réglages).'};
+        if (!itemOk(g, k)) return {ok: false, err: `« ${it.name} » n’existe pas encore à cette époque.`};
         const f = g.floors[fi]; if (!f || si < 0 || si >= SLOTS || f.slots[si] || g.builds.some(b => b.fi === fi && b.si === si)) return {ok: false, err: 'Cette place est prise.'};
         const miss = Object.entries(it.cost || {}).filter(([r, n]) => (g.res[r] || 0) < n);
-        if (miss.length) return {ok: false, err: `Il manque : ${miss.map(([r, n]) => `${n - (g.res[r] || 0)} ${RES.find(x => x[0] === r)[2].toLowerCase()}`).join(', ')}.`};
+        if (miss.length) return {ok: false, err: `Il manque : ${miss.map(([r, n]) => `${n - (g.res[r] || 0)} ${resLabel(r, g)}`).join(', ')}.`};
         Object.entries(it.cost || {}).forEach(([r, n]) => { g.res[r] -= n; });
         g.builds.push({k, fi, si, left: it.h, tot: it.h});
         needBuilder(g);
@@ -451,13 +637,13 @@
     const upgradeCost = (k, L) => Object.fromEntries(Object.entries(ITEMS[k].cost || {}).map(([r, n]) => [r, Math.max(1, Math.ceil(n * (L === 2 ? 0.75 : 1.25)))]));
     function payOrErr(g, cost) {
         const miss = Object.entries(cost).filter(([r, n]) => (g.res[r] || 0) < n);
-        if (miss.length) return `Il manque : ${miss.map(([r, n]) => `${Math.ceil(n - (g.res[r] || 0))} ${resLabel(r)}`).join(', ')}.`;
+        if (miss.length) return `Il manque : ${miss.map(([r, n]) => `${Math.ceil(n - (g.res[r] || 0))} ${resLabel(r, g)}`).join(', ')}.`;
         Object.entries(cost).forEach(([r, n]) => { g.res[r] -= n; }); return '';
     }
     function breakItem(g, fi, si, why) {
         const k = g.floors[fi]?.slots[si]; if (!k || !breakable(k) || g.broken[slotKey(fi, si)]) return false;
         g.broken[slotKey(fi, si)] = true; g.people.forEach(p => { if (p.act?.at && p.act.at[0] === fi && p.act.at[1] === si) p.act = null; });
-        log(g, `🔧 ${ITEMS[k].ico} ${ITEMS[k].name} ${why || 'tombe en panne'} : il faut le réparer (clique dessus) — ${Object.entries(repairCost(k)).map(([r, n]) => `${n} ${resLabel(r)}`).join(', ')}.`, 'alerte');
+        log(g, `🔧 ${ITEMS[k].ico} ${ITEMS[k].name} ${why || 'tombe en panne'} : il faut le réparer (clique dessus) — ${Object.entries(repairCost(k)).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')}.`, 'alerte');
         return true;
     }
     /** réparer une installation en panne : les pièces tout de suite, puis un habitant « Construire » y passe la moitié du temps de construction → {ok, err} */
@@ -525,9 +711,9 @@
         // un établi et des mains habiles : une pièce de plus, parfois
         if (keys.length && (has(g, 'etabli') ? 0.35 : 0) + ((p.sk?.reparer || 1) > 1 ? 0.25 : 0) > rnd(g)) { const x = pickOne(g, keys); got[x]++; }
         const lost = [];
-        Object.entries(got).forEach(([res, n]) => { const put = add(g, res, n); if (put < n) lost.push(`${n - put} ${resLabel(res)}`); });
+        Object.entries(got).forEach(([res, n]) => { const put = add(g, res, n); if (put < n) lost.push(`${n - put} ${resLabel(res, g)}`); });
         g.stats.recycled = (g.stats.recycled || 0) + 1;
-        log(g, `♻️ ${p.name} a démonté ${JUNK[r.k][0]} ${JUNK[r.k][1].toLowerCase()} : ${Object.entries(got).map(([res, n]) => `${n} ${resLabel(res)}`).join(', ')}.${lost.length ? ` Plus de place pour ${lost.join(', ')}.` : ''}`);
+        log(g, `♻️ ${p.name} a démonté ${JUNK[r.k][0]} ${JUNK[r.k][1].toLowerCase()} : ${Object.entries(got).map(([res, n]) => `${n} ${resLabel(res, g)}`).join(', ')}.${lost.length ? ` Plus de place pour ${lost.join(', ')}.` : ''}`);
     }
     /** l'autonomie de tout le monde (prudent, normal, manuel) ou d'un habitant ; et un ordre tout de suite (boire, manger…) */
     function setAuto(g, mode, id = null) { if (!AUTO[mode] && mode !== '') return; if (id) { const p = g.people.find(x => x.id === id); if (p) { if (mode) p.auto = mode; else delete p.auto; } } else if (mode) g.auto = mode; }
@@ -571,27 +757,27 @@
     /** rappeler par la radio (il faut de l'électricité) */
     function recall(g, id) {
         const p = g.people.find(x => x.id === id); if (!p || p.where !== 'dehors' || !p.exp || p.exp.phase === 'retour') return false;
-        if (!g.power) return false;
+        if (!g.power && !crier(g) && !has(g, 'talkie') && !has(g, 'pigeonnier')) return false;
         const pl = g.city.places.find(x => x.id === p.exp.place), prev = p.exp.i > 0 ? g.city.places.find(x => x.id === p.exp.route[p.exp.i - 1]?.id) : null;
         const back = p.exp.phase === 'aller' ? (prev ? travel(g, prev) : g.t - p.exp.from) : travel(g, pl);
         p.exp.phase = 'retour'; p.exp.until = g.t + Math.max(10, back);
-        log(g, `📻 « ${p.name}, rentre ! » — « Bien reçu, je rentre. »`, 'radio'); return true;
+        log(g, crier(g) ? `📯 Un gamin du quartier court porter le message : « ${p.name}, rentre ! »` : `📻 « ${p.name}, rentre ! » — « Bien reçu, je rentre. »`, 'radio'); return true;
     }
 
     /* ═════════ Les visiteurs à la trappe ═════════ */
-    const resLabel = r => RES.find(x => x[0] === r)[2].toLowerCase();
+    const resLabel = (r, g = null) => (g ? resInfo(g, r) : RES.find(x => x[0] === r))[2].toLowerCase();
     function newVisit(g) {
         const night = isNight(g.t), day = dayOf(g.t), opts = [['marchand', 0.4]];
-        if (g.extras.length && g.people.length < 10) opts.push(['voyageur', 0.3]);
-        if (day >= 3 || g.scen === 'invasion') opts.push(['pillards', (night ? 0.6 : 0.3) * (g.scen === 'invasion' ? 2.5 : 1)]);
+        if ((g.extras.length || g.scen === 'h1940') && g.people.length < 10) opts.push(['voyageur', g.scen === 'h1940' ? 0.9 : 0.3]); // 🚗 1940 : des réfugiés sur la route
+        if (day >= 3 || g.scen === 'invasion') opts.push(['pillards', (night ? 0.6 : 0.3) * (g.scen === 'invasion' ? 2.5 : g.scen === 'h1940' ? 0.5 : 1)]);
         let r = rnd(g) * opts.reduce((a, o) => a + o[1], 0), k = opts[0][0]; for (const [kk, w] of opts) { if ((r -= w) <= 0) { k = kk; break; } }
         const v = {k, until: g.t + 120};
-        if (k === 'marchand') { const goods = ['nourriture', 'eau', 'essence', 'medic', 'metal', 'pieces', 'bois', 'tissu', 'plantes']; const give = pickOne(g, goods); const want = pickOne(g, goods.filter(x => x !== give));
-            v.give = {r: give, n: rint(g, 4, 10)}; v.want = {r: want, n: rint(g, 3, 8)}; log(g, `🔔 On frappe à la trappe : un marchand propose ${v.give.n} ${resLabel(give)} contre ${v.want.n} ${resLabel(want)}.`, 'visite'); }
-        if (k === 'voyageur') { v.person = g.extras.shift(); log(g, `🔔 On frappe à la trappe : ${v.person.name}${v.person.occ ? `, ${v.person.occ.toLowerCase()}` : ''}, demande à entrer.`, 'visite'); }
+        if (k === 'marchand') { const goods = ['nourriture', 'eau', 'essence', 'medic', 'metal', 'pieces', 'bois', 'tissu', 'plantes'].filter(r => resOk(g, r)); const give = pickOne(g, goods); const want = pickOne(g, goods.filter(x => x !== give));
+            v.give = {r: give, n: rint(g, 4, 10)}; v.want = {r: want, n: rint(g, 3, 8)}; log(g, `🔔 On frappe à la trappe : un marchand propose ${v.give.n} ${resLabel(give, g)} contre ${v.want.n} ${resLabel(want, g)}.`, 'visite'); }
+        if (k === 'voyageur') { v.person = g.extras.shift() || {...invent(g), occ: 'réfugié·e'}; log(g, `🔔 On frappe à la trappe : ${v.person.name}${v.person.occ ? `, ${v.person.occ.toLowerCase()}` : ''}, demande à entrer.`, 'visite'); }
         if (k === 'pillards') { v.demand = {}; ['nourriture', 'eau', 'essence'].forEach(r => { const n = Math.ceil((g.res[r] || 0) * 0.3); if (n) v.demand[r] = n; }); v.strength = Math.round((rint(g, 4, 9) + Math.floor(day / 5)) * DF(g).raid);
             atBase(g).filter(p => trait(p, 'peureux')).forEach(p => { p.mood = clamp((p.mood ?? 70) - 8, 0, 100); });
-            log(g, `🔔 Des pillards tapent sur la trappe : ils veulent ${Object.entries(v.demand).map(([r, n]) => `${n} ${resLabel(r)}`).join(', ') || 'tout ce que vous avez'}.`, 'alerte'); }
+            log(g, `🔔 Des pillards tapent sur la trappe : ils veulent ${Object.entries(v.demand).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ') || 'tout ce que vous avez'}.`, 'alerte'); }
         g.stats.visits[k]++; g.visit = v;
     }
     /** la force de défense du bunker : porte, pièges, et ceux qui sont là (le tour de garde compte double) */
@@ -603,7 +789,7 @@
         if (win) { g.stats.raidsWon++; const drop = rint(g, 1, 3); add(g, 'metal', drop); log(g, `🛡️ Les pillards repartent bredouilles ! Ils ont laissé ${drop} métal en fuyant.`, 'alerte'); }
         else {
             g.stats.raidsLost++; const took = [];
-            ['nourriture', 'eau', 'essence', 'medic'].forEach(r => { const n = Math.floor((g.res[r] || 0) * 0.4); if (n) { g.res[r] -= n; took.push(`${n} ${resLabel(r)}`); } });
+            ['nourriture', 'eau', 'essence', 'medic'].forEach(r => { const n = Math.floor((g.res[r] || 0) * 0.4); if (n) { g.res[r] -= n; took.push(`${n} ${resLabel(r, g)}`); } });
             const vic = pickOne(g, atBase(g).filter(p => !p.baby)); if (vic) { hurt(g, vic, 15); if (vic.hp > 0) sicken(g, vic, 'blessure'); }
             atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) - 10, 0, 100); });
             log(g, `💥 Les pillards forcent la trappe${took.length ? ` et emportent ${took.join(', ')}` : ''}${vic ? ` ; ${vic.name} est blessé·e` : ''}. Une porte renforcée et des pièges aideraient.`, 'alerte');
@@ -614,7 +800,7 @@
     function answerVisit(g, choice) {
         const v = g.visit; if (!v) return {ok: false, err: 'Personne à la trappe.'};
         if (v.k === 'marchand') {
-            if (choice === 'oui') { if ((g.res[v.want.r] || 0) < v.want.n) return {ok: false, err: `Il manque ${v.want.n - Math.floor(g.res[v.want.r] || 0)} ${resLabel(v.want.r)}.`}; g.res[v.want.r] -= v.want.n; const put = add(g, v.give.r, v.give.n); g.stats.trades++; log(g, `🤝 Marché conclu : ${put} ${resLabel(v.give.r)} contre ${v.want.n} ${resLabel(v.want.r)}.`); }
+            if (choice === 'oui') { if ((g.res[v.want.r] || 0) < v.want.n) return {ok: false, err: `Il manque ${v.want.n - Math.floor(g.res[v.want.r] || 0)} ${resLabel(v.want.r, g)}.`}; g.res[v.want.r] -= v.want.n; const put = add(g, v.give.r, v.give.n); g.stats.trades++; log(g, `🤝 Marché conclu : ${put} ${resLabel(v.give.r, g)} contre ${v.want.n} ${resLabel(v.want.r, g)}.`); }
             else log(g, '🚪 Le marchand repart.');
         } else if (v.k === 'voyageur') {
             if (choice === 'oui' && g.people.length < 10) { const p = mkPerson(g, v.person, false, {needs: {soif: 50, faim: 40, sommeil: 50, hygiene: 30, vessie: 80}, mood: 60}); g.people.push(p); log(g, `🤗 ${p.name} entre dans le bunker${p.from ? ` (${p.from})` : ''}. Une bouche de plus, mais aussi des bras.`, 'alerte'); }
@@ -638,10 +824,11 @@
         // ⚡ l'électricité : d'abord ce qui ne coûte rien (soleil, vent, pédales), puis l'essence (un bon réparateur la fait durer)
         const wasPower = g.power;
         const sun = g.scen === 'hiver' ? hr >= 11 && hr < 14 : hr >= 7 && hr < 19;
-        const free = has(g, 'solaire') && sun && !g.weather.rain && g.event?.k !== 'tempete' ? 'soleil' : has(g, 'eolienne') && g.wind ? 'vent' : has(g, 'dynamo') && atBase(g).some(p => p.doing === 'pedaler') ? 'pedales' : '';
+        const free = !eraOf(g).elec ? '' : has(g, 'turbine') && g.weather.rain ? 'eau' : has(g, 'solaire') && sun && !g.weather.rain && g.event?.k !== 'tempete' ? 'soleil' : has(g, 'eolienne') && g.wind ? 'vent' : has(g, 'dynamo') && atBase(g).some(p => p.doing === 'pedaler') ? 'pedales' : '';
         const burn = (has(g, 'econome') ? 0.125 : 0.25) * mult(g, 'burnK') * h / best(g, 'reparer'), store = sumOf(g, 'store');
         g.batt = clamp(Number(g.batt) || 0, 0, store);
-        if (free) { g.power = true; g.powerSrc = free; g.batt = Math.min(store, g.batt + h); }
+        if (!eraOf(g).elec) { g.power = false; g.powerSrc = ''; } // 🕯️ pas d'électricité à cette époque : on s'éclaire à la chandelle
+        else if (free) { g.power = true; g.powerSrc = free; g.batt = Math.min(store, g.batt + h); }
         else if (g.powerOn && has(g, 'generateur') && g.res.essence >= burn) { g.res.essence = Math.max(0, g.res.essence - burn); g.power = true; g.powerSrc = 'essence'; g.batt = Math.min(store, g.batt + h * 0.5); }
         else if (g.powerOn && g.batt >= h) { g.batt -= h; g.power = true; g.powerSrc = 'batteries'; }
         else { g.power = false; g.powerSrc = ''; }
@@ -663,10 +850,11 @@
             if (!g.builds.length) g.people.forEach(p => { if (p.job === 'construire') p.job = 'libre'; });
         } else if (b && b.left <= 0) {
             g.builds.shift(); g.floors[b.fi].slots[b.si] = b.k; log(g, `✅ ${ITEMS[b.k].name} est prêt.`, 'alerte');
+            g.stats.built = (g.stats.built || 0) + 1; if (!(g.stats.builtKinds ||= []).includes(b.k)) g.stats.builtKinds.push(b.k);
             if (ITEMS[b.k].map) { g.city.places.forEach(pl => { pl.seen = true; }); log(g, '🗺️ Tous les lieux de la ville sont marqués sur la carte.'); }
             if (!g.builds.length) g.people.forEach(p => { if (p.job === 'construire') p.job = 'libre'; });
         }
-        if (!alive(g).length) { g.over = true; log(g, `☠️ Plus personne en vie. Le bunker a tenu ${dayOf(g.t) - 1 ? `${dayOf(g.t) - 1} jours` : 'moins d’un jour'}.`, 'alerte'); }
+        if (!alive(g).length && !g.over) { checkAch(g); g.over = true; log(g, `☠️ Plus personne en vie. Le bunker a tenu ${dayOf(g.t) - 1 ? `${dayOf(g.t) - 1} jours` : 'moins d’un jour'}.`, 'alerte'); }
         return g;
     }
     /** ce qui se passe une fois par heure : météo, eau, air, potager, froid, histoires, visiteurs, naissances, la ville */
@@ -675,7 +863,7 @@
         // 🌧️ la pluie (plus au printemps, moins l'été) remplit l'eau à filtrer
         const rainK = season === 'printemps' ? 1.5 : season === 'ete' ? 0.5 : 1;
         if (g.weather.rain && g.t >= g.weather.until) { g.weather.rain = false; log(g, '🌤️ La pluie s’arrête.'); }
-        else if (!g.weather.rain && rnd(g) < 0.06 * rainK * (g.scen === 'inondation' ? 3 : 1)) { g.weather = {rain: true, until: g.t + rint(g, 2, g.scen === 'inondation' ? 14 : 8) * 60}; log(g, `🌧️ Il pleut : ${has(g, 'cuve') ? 'les bidons du toit et les cuves' : 'les bidons du toit'} se remplissent (eau à filtrer).`); }
+        else if (!g.weather.rain && rnd(g) < 0.06 * rainK * (flood(g) ? 3 : 1)) { g.weather = {rain: true, until: g.t + rint(g, 2, flood(g) ? 14 : 8) * 60}; log(g, `🌧️ Il pleut : ${has(g, 'cuve') ? 'les bidons du toit et les cuves' : 'les bidons du toit'} se remplissent (eau à filtrer).`); }
         if (g.weather.rain) add(g, 'eausale', rainPerHour(g));
         // ⚗️ le filtre : 3 L par heure et par filtre ; 1 tissu tous les 30 L pour le nettoyer
         const nf = items(g).filter(x => x.k === 'filtre').reduce((n, x) => n + lvK(x.lvl), 0);
@@ -697,12 +885,15 @@
         // 🏭 ce que fabriquent les objets (serre, clapier, alambic, laboratoire…) : leurs besoins d'abord, leur production ensuite
         produce(g, hr);
         // ❄️ l'hiver : le poêle brûle du bois (ou la chaudière du charbon), sinon on a froid
-        g.cold = false; g.warm = opt(g, 'chaines') && g.res.vetements >= atBase(g).filter(p => !p.baby).length && atBase(g).length > 0;
+        g.cold = false; g.warm = (opt(g, 'chaines') && g.res.vetements >= atBase(g).filter(p => !p.baby).length && atBase(g).length > 0) || has(g, 'edredons');
+        const heater = has(g, 'poele') || has(g, 'cheminee') || has(g, 'chaudiere'), wood = g.scen === 'h1709' ? 0.35 : 0.25; // 🧊 1709 : le feu brûle bien plus de bois
+        if (hr === 6 && season === 'hiver') g.stats.wDays = heater ? 0 : (g.stats.wDays || 0) + 1;
         if (season === 'hiver' || g.event?.k === 'froid') {
             if (hr === 6 && opt(g, 'chaines') && g.res.vetements > 0) g.res.vetements = Math.max(0, g.res.vetements - 0.1 * atBase(g).length); // les vêtements s'usent
-            if (has(g, 'poele') && g.res.bois >= 0.25) g.res.bois -= 0.25;
+            if ((has(g, 'poele') || has(g, 'cheminee')) && g.res.bois >= wood) g.res.bois -= wood;
             else if (has(g, 'chaudiere') && g.res.charbon >= 0.25) g.res.charbon -= 0.25;
             else { g.cold = true; if (!g.said.cold) { g.said.cold = true; log(g, `❄️ Il fait froid dans le bunker${has(g, 'poele') ? ' : plus de bois pour le poêle' : ' : il faudrait un poêle à bois'}. On dort mal, le moral baisse.`, 'alerte'); } }
+            if (g.cold && g.scen === 'h1709') atBase(g).forEach(p => { if (!g.warm) hurt(g, p, 0.25); }); // le froid extrême fait mal
         } else g.said.cold = false;
         if (hr === 6 && dayOf(g.t) > 1 && (dayOf(g.t) - 1) % SEASON_DAYS === 0) { const S = SEASONS.find(x => x[0] === season); log(g, `${S[1]} C’est ${season === 'ete' ? 'l’été' : season === 'hiver' ? 'l’hiver' : season === 'automne' ? 'l’automne' : 'le printemps'}.${season === 'hiver' ? ' Pensez au bois pour le poêle.' : season === 'ete' ? ' Il pleuvra moins : gardez de l’eau.' : ''}`, 'alerte'); }
         // 📖 les histoires du soir
@@ -722,10 +913,18 @@
         if (hr === 21) { relations(g); diaryDay(g); }
         if (hr === 8) feedPets(g);
         if (hr === 23) pests(g);
+        // 🥖 le siège de Paris : les obus (après dix jours), et les rats qu'on finit par manger
+        if (g.scen === 'h1870') {
+            if (hr === 14 && dayOf(g.t) > 10 && rnd(g) < 0.2) { const l = items(g).filter(x => breakable(x.k) && x.fi === 0); if (l.length) { const x = pickOne(g, l); breakItem(g, x.fi, x.si, 'est touché par un éclat d’obus'); } alive(g).filter(p => p.where === 'dehors').forEach(p => hurt(g, p, 6)); }
+            if (hr === 19 && g.res.nourriture < 3 && g.pests >= 10) { g.pests -= 10; add(g, 'nourriture', 2); log(g, '🐀 Faute de mieux, on fait cuire des rats, comme tout Paris cet hiver-là (+2 rations).', 'histoire'); }
+        }
         if (opt(g, 'feu')) fire(g); else if (g.fire) g.fire = null;
         if (hr === 6 && opt(g, 'age')) aging(g);
         if (hr === 0) snapshot(g);
-        if (g.scen === 'epidemie' && hr === 9 && rnd(g) < 0.12) { const v = pickOne(g, atBase(g).filter(p => !p.ill && !p.baby)); if (v) { sicken(g, v, 'fievre'); log(g, `🦠 ${v.name} a attrapé la fièvre qui court.`, 'alerte'); diary(g, v, 'J’ai de la fièvre. Pourvu que ce ne soit rien.'); } }
+        if (hr === 6 && !g.won && dayOf(g.t) - 1 >= goalOf(g)) { g.won = dayOf(g.t); log(g, histOf(g)?.end || `🏆 ${SCENARIOS[g.scen][1]} : vous avez tenu ${goalOf(g)} jours ! On peut continuer aussi longtemps qu’on veut.`, 'alerte'); }
+        checkAch(g);
+        if (hr === 6) morningSave(g);
+        if (epi(g) && hr === 9 && rnd(g) < (g.scen === 'h1720' ? 0.16 : 0.12)) { const v = pickOne(g, atBase(g).filter(p => !p.ill && !p.baby)); if (v) { sicken(g, v, 'fievre'); log(g, g.scen === 'h1720' ? `⚕️ ${v.name} a de la fièvre et des bubons : la peste est entrée dans l’abri.` : `🦠 ${v.name} a attrapé la fièvre qui court.`, 'alerte'); diary(g, v, 'J’ai de la fièvre. Pourvu que ce ne soit rien.'); } }
     }
     /* ═════════ 🐕 Les animaux, 🐀 les nuisibles ═════════ */
     function feedPets(g) {
@@ -739,7 +938,7 @@
     const petCount = (g, k) => g.pets.filter(a => a.k === k).length;
     function adopt(g, k, by) {
         if (!PETS[k] || g.pets.length >= 4) return false; const used = new Set(g.pets.map(a => a.name)), name = pickOne(g, PET_NAMES.filter(n => !used.has(n))) || 'Sans-nom';
-        g.pets.push({id: 'a' + (g.nextId++), k, name, hungry: 0}); log(g, `${PETS[k][0]} ${by ? `${by.name} ramène` : 'Voici'} ${k === 'poules' ? 'des poules' : `un·e ${PETS[k][1].toLowerCase()}`} : ${name} ! (${PETS[k][3]} ; mange ${Object.entries(PETS[k][2]).map(([r, n]) => `${n} ${resLabel(r)}`).join(', ')} par jour)`, 'histoire');
+        g.pets.push({id: 'a' + (g.nextId++), k, name, hungry: 0}); log(g, `${PETS[k][0]} ${by ? `${by.name} ramène` : 'Voici'} ${k === 'poules' ? 'des poules' : `un·e ${PETS[k][1].toLowerCase()}`} : ${name} ! (${PETS[k][3]} ; mange ${Object.entries(PETS[k][2]).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')} par jour)`, 'histoire');
         atBase(g).forEach(p => { p.mood = clamp((p.mood ?? 70) + 5, 0, 100); }); if (by) diary(g, by, `J’ai ramené ${name}, ${k === 'poules' ? 'nos poules' : `un·e ${PETS[k][1].toLowerCase()}`}. Tout le monde l’adore déjà.`); return true;
     }
     /** les rats et les cafards : ils viennent quand il y a de quoi manger ; pièges, chat et bocaux les tiennent à distance */
@@ -782,10 +981,10 @@
     /* ═════════ 📜 Les missions généalogiques (option) ═════════ */
     function newMissions(g) {
         const busy = new Set(g.missions.filter(m => !m.done).map(m => m.pid + m.doc));
-        while (g.missions.filter(m => !m.done).length < 3 && g.ancestors.length) {
-            const a = pickOne(g, g.ancestors), docs = Object.keys(DOCS).filter(d => !busy.has(a.pid + d) && (d !== 'mariage' || a.married) && (d !== 'deces' || a.dy) && !g.docs.some(x => x.pid === a.pid && x.doc === d));
+        let tries = 0; while (g.missions.filter(m => !m.done).length < 3 && g.ancestors.length && tries++ < 200) { // borné : un ancêtre peut ne plus rien avoir à chercher
+            const a = pickOne(g, g.ancestors), docs = Object.keys(DOCS).filter(d => !eraOf(g).docBan.includes(d) && !busy.has(a.pid + d) && (d !== 'mariage' || a.married) && (d !== 'deces' || a.dy) && !g.docs.some(x => x.pid === a.pid && x.doc === d));
             if (!docs.length) { if (g.ancestors.every(x => Object.keys(DOCS).every(d => g.docs.some(y => y.pid === x.pid && y.doc === d)))) break; continue; }
-            const d = pickOne(g, docs), goods = ['nourriture', 'medic', 'essence', 'pieces', 'electro'], r = pickOne(g, goods);
+            const d = pickOne(g, docs), goods = ['nourriture', 'medic', 'essence', 'pieces', 'electro'].filter(x => resOk(g, x)), r = pickOne(g, goods);
             g.missions.push({id: 'q' + (g.nextId++), pid: a.pid, name: a.name, by: a.by, bplace: a.bplace, occ: a.occ, doc: d, reward: {r, n: r === 'medic' || r === 'electro' || r === 'pieces' ? 3 : 8}, done: false}); busy.add(a.pid + d);
             if (g.missions.length > 30) g.missions = g.missions.filter(m => !m.done).concat(g.missions.filter(m => m.done).slice(-20));
         }
@@ -793,7 +992,7 @@
     const missionTxt = m => `Retrouver ${DOCS[m.doc][1]} de ${m.name}${m.by ? ` (né·e en ${m.by}${m.bplace ? ` à ${m.bplace}` : ''})` : ''}`;
     /* ═════════ 🎨 La décoration ═════════ */
     function addDeco(g, fi, k, pid = 0, name = '') {
-        if (!DECOS[k] || !g.floors[fi]) return {ok: false, err: 'Impossible ici.'}; const l = g.deco[fi] = g.deco[fi] || [];
+        if (!DECOS[k] || !g.floors[fi]) return {ok: false, err: 'Impossible ici.'}; if (!Object.keys(DECOS[k][2]).every(r => resOk(g, r))) return {ok: false, err: 'Pas à cette époque.'}; const l = g.deco[fi] = g.deco[fi] || [];
         if (l.length >= DECO_MAX) return {ok: false, err: `${DECO_MAX} décorations au plus par étage.`};
         const err = payOrErr(g, DECOS[k][2]); if (err) return {ok: false, err};
         l.push({k, ...(k === 'portrait' && name ? {pid: Number(pid) || 0, name: str(name, 80)} : {})}); log(g, `🎨 ${DECOS[k][0]} ${DECOS[k][1]}${k === 'portrait' && name ? ` de ${name}` : ''} à l’étage −${fi + 1}.`); return {ok: true};
@@ -811,7 +1010,7 @@
         if (g.event && g.t >= g.event.until) { log(g, `${EVENTS[g.event.k][0]} ${EVENTS[g.event.k][1]} : c’est fini.`); g.event = null; }
         if (g.event) { if (g.event.k === 'tempete') { g.air = clamp(g.air - 3, 0, 100); alive(g).filter(p => p.where === 'dehors').forEach(p => hurt(g, p, 1.5)); } return; }
         if (dayOf(g.t) < 2 || rnd(g) >= 0.01) return;
-        const w = [['canicule', season === 'ete' ? 4 : 0.3], ['tempete', 1], ['inondation', (season === 'printemps' ? 1.5 : 0.6) * (g.scen === 'inondation' ? 4 : 1)], ['seisme', 0.5], ['orage', g.weather.rain ? 2 : 0.6], ['froid', season === 'hiver' ? 0 : season === 'automne' ? 1.5 : 0.5]];
+        const w = [['canicule', season === 'ete' ? 4 : 0.3], ['tempete', 1], ['inondation', (season === 'printemps' ? 1.5 : 0.6) * (flood(g) ? 4 : 1)], ['seisme', 0.5], ['orage', g.weather.rain ? 2 : 0.6], ['froid', season === 'hiver' ? 0 : season === 'automne' ? 1.5 : 0.5]];
         let r = rnd(g) * w.reduce((a, x) => a + x[1], 0), k = w[0][0]; for (const [kk, n] of w) { if ((r -= n) <= 0) { k = kk; break; } }
         startEvent(g, k);
     }
@@ -829,27 +1028,27 @@
     /** 🔧 l'usure : chaque installation peut tomber en panne (plus souvent les machines, et selon la difficulté) */
     function wear(g) {
         if (dayOf(g.t) < 2) return; const K = 0.0012 * DF(g).wear, low = g.floors.length - 1;
-        items(g).forEach(x => { if (!breakable(x.k)) return; const e = ITEMS[x.k]; if (rnd(g) < K * (e.power || e.prod || x.k === 'generateur' ? 1.6 : 1) * (g.scen === 'inondation' && low > 0 && x.fi === low ? 2 : 1)) breakItem(g, x.fi, x.si); });
+        items(g).forEach(x => { if (!breakable(x.k)) return; const e = ITEMS[x.k]; if (rnd(g) < K * (e.power || e.prod || x.k === 'generateur' ? 1.6 : 1) * (flood(g) && low > 0 && x.fi === low ? 2 : 1)) breakItem(g, x.fi, x.si); });
     }
     /* ═════════ 📻 Le commerce par radio ═════════ */
     function marketDay(g) {
-        const m = g.market, goods = Object.keys(VALUE); m.d = dayOf(g.t); m.price = Object.fromEntries(goods.map(r => [r, Math.round((0.7 + rnd(g) * 0.7) * 100) / 100]));
+        const m = g.market, goods = Object.keys(VALUE).filter(r => resOk(g, r)); m.d = dayOf(g.t); m.price = Object.fromEntries(goods.map(r => [r, Math.round((0.7 + rnd(g) * 0.7) * 100) / 100]));
         m.offers = Array.from({length: rint(g, 3, 5)}, (_, i) => { const give = pickOne(g, goods), want = pickOne(g, goods.filter(x => x !== give)), n = rint(g, 3, 10);
             return {id: `o${m.d}_${i}`, who: pickOne(g, TRADERS), give: {r: give, n}, want: {r: want, n: Math.max(1, Math.round(n * VALUE[give] * m.price[give] / (VALUE[want] * m.price[want]) * 1.15))}}; });
     }
     function trading(g, hr) {
         const m = g.market;
-        if (has(g, 'radio') && hr === 7 && m.d !== dayOf(g.t)) { marketDay(g); if (g.power) log(g, `📻 Le marché de la radio : ${m.offers.length} offres aujourd’hui (onglet Radio).`); }
-        m.deals.filter(d => g.t >= d.t).forEach(d => { if (d.ok) { const put = add(g, d.r, d.n); log(g, `🚚 Un messager de ${d.who} apporte ${put} ${resLabel(d.r)}.`, 'alerte'); } else log(g, `😠 Le messager de ${d.who} n’est jamais venu… On s’est fait avoir.`, 'alerte'); });
+        if (hasRadio(g) && hr === 7 && m.d !== dayOf(g.t)) { marketDay(g); if (crier(g)) log(g, `📯 Le crieur annonce le marché : ${m.offers.length} offres aujourd’hui (onglet Crieur).`); else if (g.power) log(g, `📻 Le marché de la radio : ${m.offers.length} offres aujourd’hui (onglet Radio).`); }
+        m.deals.filter(d => g.t >= d.t).forEach(d => { if (d.ok) { const put = add(g, d.r, d.n); log(g, `🚚 Un messager de ${d.who} apporte ${put} ${resLabel(d.r, g)}.`, 'alerte'); } else log(g, `😠 Le messager de ${d.who} n’est jamais venu… On s’est fait avoir.`, 'alerte'); });
         m.deals = m.deals.filter(d => g.t < d.t);
     }
     /** accepter une offre du marché : on paie tout de suite, un messager apporte la marchandise quelques heures plus tard → {ok, err} */
     function trade(g, id) {
-        if (!has(g, 'radio') || !g.power) return {ok: false, err: 'Il faut la radio et de l’électricité.'};
+        if (!hasRadio(g) || (!g.power && !crier(g))) return {ok: false, err: 'Il faut la radio et de l’électricité.'};
         const m = g.market, i = m.offers.findIndex(o => o.id === id); if (i < 0) return {ok: false, err: 'Cette offre n’existe plus.'};
-        const o = m.offers[i]; if ((g.res[o.want.r] || 0) < o.want.n) return {ok: false, err: `Il manque ${Math.ceil(o.want.n - (g.res[o.want.r] || 0))} ${resLabel(o.want.r)}.`};
+        const o = m.offers[i]; if ((g.res[o.want.r] || 0) < o.want.n) return {ok: false, err: `Il manque ${Math.ceil(o.want.n - (g.res[o.want.r] || 0))} ${resLabel(o.want.r, g)}.`};
         g.res[o.want.r] -= o.want.n; m.offers.splice(i, 1); m.deals.push({t: g.t + rint(g, 3, 8) * 60, r: o.give.r, n: o.give.n, who: o.who, ok: rnd(g) > 0.05}); g.stats.trades++;
-        log(g, `📻 Marché conclu avec ${o.who} : ${o.want.n} ${resLabel(o.want.r)} envoyés ; ${o.give.n} ${resLabel(o.give.r)} arriveront par messager.`); return {ok: true};
+        log(g, `${crier(g) ? '📯' : '📻'} Marché conclu avec ${o.who} : ${o.want.n} ${resLabel(o.want.r, g)} envoyés ; ${o.give.n} ${resLabel(o.give.r, g)} arriveront par messager.`); return {ok: true};
     }
     /* ═════════ 🎭 L'entente, 📈 les progrès, 📔 le journal ═════════ */
     const relKey = (a, b) => [a.id, b.id].sort().join('|');
@@ -890,7 +1089,7 @@
             if (ITEMS[k].chain && !opt(g, 'chaines')) return;
             const all = items(g).filter(x => x.k === k), ins = Object.entries(P.in || {}), k2 = P.skill && best(g, P.skill) >= 1.5 ? 2 : 1;
             for (const x of all) {
-                if (!ins.every(([r, q]) => (g.res[r] || 0) >= q)) { if (!g.said['prod_' + k]) { g.said['prod_' + k] = true; log(g, `${ITEMS[k].ico} ${ITEMS[k].name} : il manque ${ins.filter(([r, q]) => (g.res[r] || 0) < q).map(([r]) => resLabel(r)).join(', ')} pour fonctionner.`); } return; }
+                if (!ins.every(([r, q]) => (g.res[r] || 0) >= q)) { if (!g.said['prod_' + k]) { g.said['prod_' + k] = true; log(g, `${ITEMS[k].ico} ${ITEMS[k].name} : il manque ${ins.filter(([r, q]) => (g.res[r] || 0) < q).map(([r]) => resLabel(r, g)).join(', ')} pour fonctionner.`); } return; }
                 ins.forEach(([r, q]) => { g.res[r] -= q; }); Object.entries(P.out).forEach(([r, q]) => add(g, r, q * k2 * lvK(x.lvl))); g.said['prod_' + k] = false;
                 if (P.skill) { const w = atBase(g).filter(o => !o.baby).sort((a, b) => (b.sk?.[P.skill] || 1) - (a.sk?.[P.skill] || 1))[0]; if (w) gainXp(g, w, P.skill, Math.min(P.every, 4)); }
             }
@@ -1020,7 +1219,7 @@
         if (p.mood >= 30) p.sulk = false;
         const mm = moodMult(p) * ageK(g, p);
         if (p.job === 'creuser' && g.floors.length < MAX_FLOORS) { g.dig.on = true; g.dig.done += h * (g.tools.includes('pelle') ? 2 : 1) * (p.sk?.construire || 1) * mm; gainXp(g, p, 'construire', h * 0.5); p.act = null; p.doing = 'creuser'; return; }
-        if (p.job === 'construire' && g.builds.length && g.power && has(g, 'atelier')) { const b0 = g.builds[0], sk0 = b0.rep ? 'reparer' : 'construire';
+        if (p.job === 'construire' && g.builds.length && lit(g) && has(g, 'atelier')) { const b0 = g.builds[0], sk0 = b0.rep ? 'reparer' : 'construire';
             b0.left -= h * (g.tools.includes('scie') ? 1.5 : 1) * Math.max(p.sk?.construire || 1, b0.rep ? p.sk?.reparer || 1 : 0) * (heir(g, 'outil') ? 1.2 : 1) * (trait(p, 'bricoleur') ? 1.2 : 1) * mm; gainXp(g, p, sk0, h); p.doing = 'construire'; return; }
         if (p.job === 'recycler') {
             if (!g.recy.length && g.autoRecy) { const k = JUNK_KEYS.find(x => (g.junk[x] || 0) > 0); if (k) recycle(g, k); }
@@ -1042,7 +1241,7 @@
         if (k === 'sommeil') { const l = freeItem(g, 'lit', p); p.act = {k: 'dormir', until: g.t + 360, at: atOf(l)}; return true; }
         return false;
     }
-    const canCook = g => ['fourneau', 'poele', 'four', 'chaudiere'].some(k => has(g, k));
+    const canCook = g => ['fourneau', 'poele', 'four', 'chaudiere', 'cheminee', 'foursolaire'].some(k => has(g, k));
     const recipeOk = (g, k) => { const R = RECIPES[k]; return !!R && (!R.cook || canCook(g)) && (!R.chain || opt(g, 'chaines')) && (!R.lore || g.lore.some(x => x.kind === 'recipe')) && Object.entries(R.in).every(([r, n]) => (g.res[r] || 0) >= n); };
     /** le plat du jour : celui choisi s'il est possible, sinon (ou en « auto ») le meilleur possible sans vider les plantes des remèdes */
     function pickRecipe(g) {
@@ -1099,23 +1298,23 @@
             pl.known = {d: dayOf(g.t), stock: Object.fromEntries(Object.entries(pl.stock).filter(([, n]) => n > 0)), junk: [...(pl.junk || [])]};
             const tool = pl.tools.find(x => !g.tools.includes(x));
             if (tool && rnd(g) < (RM ? (K.tools ? 0.8 : 0.15) : 0.5)) { e.found.push('t:' + tool); pl.tools = pl.tools.filter(x => x !== tool); }
-            const missing = FOUND_PLANS.filter(k => (opt(g, 'chaines') || !ITEMS[k].chain) && !g.plans.includes(k) && !g.people.some(o => o.exp?.found.includes('p:' + k)));
-            if (pl.plans > 0 && missing.length && rnd(g) < Math.min(0.95, 0.7 * (RM ? (K.plans || 0.4) : 1))) { e.found.push('p:' + pickOne(g, missing)); pl.plans--; }
+            const missing = foundPlans(g).filter(k => !g.plans.includes(k) && !g.people.some(o => o.exp?.found.includes('p:' + k)));
+            if (pl.plans > 0 && missing.length && rnd(g) < Math.min(0.95, 0.7 * (RM ? (K.plans || 0.4) : 1))) { e.found.push('p:' + pickPlan(g, missing, pl.kind)); pl.plans--; }
             // ✉️ une lettre de la famille, retrouvée dans une maison ou une bibliothèque
             if (['maison', 'maisonfam', 'bibliotheque'].includes(pl.kind) && g.letters.length && rnd(g) < (pl.home ? 0.6 : 0.12) * (K.letters || 1)) e.letters = [...(e.letters || []), g.letters.shift()];
             // 🩹 une mauvaise chute, un chien errant… (moins souvent pour qui sait se défendre)
-            if (rnd(g) < 0.08 / (p.sk?.defendre || 1) * (trait(p, 'courageux') ? 0.6 : trait(p, 'solitaire') ? 0.8 : 1) * (g.event?.k === 'tempete' ? 2 : 1) * (K.risk || 1) * danger) e.hurt = true;
+            if (rnd(g) < 0.08 / (p.sk?.defendre || 1) * (trait(p, 'courageux') ? 0.6 : trait(p, 'solitaire') ? 0.8 : 1) * (g.event?.k === 'tempete' ? 2 : 1) * (K.risk || 1) * danger * (g.scen === 'h1940' ? 1.5 : 1)) e.hurt = true;
             // 🐕 un animal errant qui le suit
             if (['ferme', 'maison', 'port', 'maisonfam', 'decharge'].includes(pl.kind) && g.pets.length + (e.pets || []).length < 4 && rnd(g) < 0.08) e.pets = [...(e.pets || []), pickOne(g, pl.kind === 'ferme' ? ['poules', 'chevre', 'chien'] : pl.kind === 'port' ? ['chat'] : ['chat', 'chien'])];
             // 📜 un document d'ancêtre (option « missions »)
             if (opt(g, 'missions')) g.missions.filter(m => !m.done && !(e.docs || []).includes(m.id) && DOCS[m.doc][2].includes(pl.kind)).forEach(m => { if (rnd(g) < 0.3 * (K.docs || 1)) e.docs = [...(e.docs || []), m.id]; });
             // 🦠 l'épidémie : on peut l'attraper dehors
-            if (g.scen === 'epidemie' && rnd(g) < 0.12) e.sick = true;
+            if (epi(g) && rnd(g) < (g.scen === 'h1720' ? 0.2 : 0.12)) e.sick = true;
             // 🧳 un objet de famille retrouvé dans les ruines
             if (g.ruins.length && ['maison', 'maisonfam', 'eglise', 'bibliotheque', 'ecole', 'decharge', 'hopital'].includes(pl.kind) && rnd(g) < (pl.home ? 0.5 : 0.12)) e.heir = g.ruins.shift();
             gainXp(g, p, 'fouiller', 2);
-            const got = [...Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r)}`), ...(e.junk.length ? [`${e.junk.length} objet${e.junk.length > 1 ? 's' : ''} à démonter (${[...new Set(e.junk)].map(k => JUNK[k][1].toLowerCase()).join(', ')})`] : [])];
-            const extra = [...e.found.map(f => f[0] === 't' ? `l’outil « ${TOOLS[f.slice(2)][1]} »` : `le plan « ${ITEMS[f.slice(2)].name} »`), ...(e.letters || []).map(() => 'une lettre de la famille'), ...(e.heir ? [`« ${e.heir.title} », un objet de la famille`] : []), ...(e.pets || []).map(k => `${PETS[k][0]} ${k === 'poules' ? 'des poules qui me suivent' : `un·e ${PETS[k][1].toLowerCase()} qui me suit`}`), ...(e.docs || []).map(id => { const m = g.missions.find(x => x.id === id); return m ? `${DOCS[m.doc][0]} ${DOCS[m.doc][1]} de ${m.name}` : ''; }).filter(Boolean)];
+            const got = [...Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r, g)}`), ...(e.junk.length ? [`${e.junk.length} objet${e.junk.length > 1 ? 's' : ''} à démonter (${[...new Set(e.junk)].map(k => JUNK[k][1].toLowerCase()).join(', ')})`] : [])];
+            const extra = [...e.found.map(f => f[0] === 't' ? `l’outil « ${toolInfo(g, f.slice(2))[1]} »` : `le plan « ${ITEMS[f.slice(2)].name} »`), ...(e.letters || []).map(() => 'une lettre de la famille'), ...(e.heir ? [`« ${e.heir.title} », un objet de la famille`] : []), ...(e.pets || []).map(k => `${PETS[k][0]} ${k === 'poules' ? 'des poules qui me suivent' : `un·e ${PETS[k][1].toLowerCase()} qui me suit`}`), ...(e.docs || []).map(id => { const m = g.missions.find(x => x.id === id); return m ? `${DOCS[m.doc][0]} ${DOCS[m.doc][1]} de ${m.name}` : ''; }).filter(Boolean)];
             // l'étape suivante du parcours, s'il reste de la place (sinon on rentre)
             const next = e.route && e.i + 1 < e.route.length && carryOf(g, p) - loadOf(e) > 0 ? g.city.places.find(x => x.id === e.route[e.i + 1].id) : null;
             radio(g, `📻 ${p.name} : « ${got.length || extra.length ? `J’ai trouvé ${[...got, ...extra].join(', ')}` : 'Rien du tout, l’endroit est vide'}.${e.hurt ? ' Je me suis fait mal en route…' : ''} ${next ? `Je continue vers ${next.name}.` : e.route && e.i + 1 < e.route.length ? 'Mon sac est plein : je rentre.' : 'Je rentre.'} »`);
@@ -1124,10 +1323,10 @@
         }
         // de retour
         const lost = [];
-        Object.entries(e.loot).forEach(([r, n]) => { if (n <= 0) return; const put = add(g, r, n); if (put < n) lost.push(`${n - put} ${resLabel(r)}`); });
+        Object.entries(e.loot).forEach(([r, n]) => { if (n <= 0) return; const put = add(g, r, n); if (put < n) lost.push(`${n - put} ${resLabel(r, g)}`); });
         (e.junk || []).forEach(k => { if (junkCount(g) < junkCap(g)) g.junk[k] = (g.junk[k] || 0) + 1; else lost.push(JUNK[k][1].toLowerCase()); });
-        e.found.forEach(f => { if (f[0] === 't' && !g.tools.includes(f.slice(2))) g.tools.push(f.slice(2)); if (f[0] === 'p' && !g.plans.includes(f.slice(2))) g.plans.push(f.slice(2)); g.stats.found.push(f[0] === 't' ? TOOLS[f.slice(2)][1] : `plan « ${ITEMS[f.slice(2)].name} »`); });
-        log(g, `🏠 ${p.name} est rentré·e.${(e.junk || []).length ? ` ♻️ ${e.junk.length} objet${e.junk.length > 1 ? 's' : ''} à démonter.` : ''}${e.found.length ? ` Nouveau : ${e.found.map(f => f[0] === 't' ? TOOLS[f.slice(2)][1] : 'plan « ' + ITEMS[f.slice(2)].name + ' »').join(', ')}.` : ''}${lost.length ? ` Plus de place pour ${lost.join(', ')} : laissé dehors (construis des étagères ou du stockage).` : ''}`, 'alerte');
+        e.found.forEach(f => { if (f[0] === 't' && !g.tools.includes(f.slice(2))) g.tools.push(f.slice(2)); if (f[0] === 'p' && !g.plans.includes(f.slice(2))) g.plans.push(f.slice(2)); g.stats.found.push(f[0] === 't' ? toolInfo(g, f.slice(2))[1] : `plan « ${ITEMS[f.slice(2)].name} »`); });
+        log(g, `🏠 ${p.name} est rentré·e.${(e.junk || []).length ? ` ♻️ ${e.junk.length} objet${e.junk.length > 1 ? 's' : ''} à démonter.` : ''}${e.found.length ? ` Nouveau : ${e.found.map(f => f[0] === 't' ? toolInfo(g, f.slice(2))[1] : 'plan « ' + ITEMS[f.slice(2)].name + ' »').join(', ')}.` : ''}${lost.length ? ` Plus de place pour ${lost.join(', ')} : laissé dehors (construis des étagères ou du stockage).` : ''}`, 'alerte');
         (e.letters || []).forEach(L => { atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 8, 0, 100); }); g.stats.found.push(`lettre « ${L.title} »`); log(g, `✉️ ${p.name} rapporte une lettre retrouvée : « ${L.title} »${L.from ? `, de ${L.from}` : ''}${L.to ? ` à ${L.to}` : ''}. Tout le monde veut la voir.`, 'histoire'); });
         if (e.hurt) { sicken(g, p, 'blessure'); log(g, `🩹 ${p.name} est blessé·e : il faut la soigner (médicaments, ou plantes pour un remède).`, 'alerte'); }
         if (e.sick && !p.ill) { sicken(g, p, 'fievre'); log(g, `🦠 ${p.name} rentre avec la fièvre qui court en ville.`, 'alerte'); }
@@ -1138,11 +1337,43 @@
         (e.docs || []).forEach(id => { const m = g.missions.find(x => x.id === id); if (!m || m.done) return; m.done = true; const D = DOCS[m.doc];
             const txt = `${D[0]} ${D[1][0].toUpperCase()}${D[1].slice(1)} de ${m.name}${m.by ? `, né·e en ${m.by}` : ''}${m.bplace ? ` à ${m.bplace}` : ''}${m.occ ? ` (${m.occ.toLowerCase()})` : ''}.`;
             g.docs.push({pid: m.pid, name: m.name, doc: m.doc, day: dayOf(g.t), txt}); add(g, m.reward.r, m.reward.n); atBase(g).forEach(o => { o.mood = clamp((o.mood ?? 70) + 12, 0, 100); }); gainXp(g, p, 'raconter', 3);
-            log(g, `📜 Mission accomplie : ${p.name} rapporte ${D[1]} de ${m.name} ! ${txt} (+${m.reward.n} ${resLabel(m.reward.r)})`, 'histoire'); diary(g, p, `J’ai retrouvé ${D[1]} de ${m.name}. Toute la famille l’a lu et relu.`); });
+            log(g, `📜 Mission accomplie : ${p.name} rapporte ${D[1]} de ${m.name} ! ${txt} (+${m.reward.n} ${resLabel(m.reward.r, g)})`, 'histoire'); diary(g, p, `J’ai retrouvé ${D[1]} de ${m.name}. Toute la famille l’a lu et relu.`); });
         if ((e.docs || []).length && opt(g, 'missions')) newMissions(g);
         const names = (e.route || []).map(st => g.city.places.find(x => x.id === st.id)?.name).filter(Boolean);
-        diary(g, p, `Je suis allé·e ${names.length ? `à ${names.join(', puis à ')}` : 'en ville'}. ${Object.keys(e.loot).some(r => e.loot[r] > 0) ? `J’ai rapporté ${Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r)}`).join(', ')}.` : 'Rien de bien utile.'}${e.heir ? ` Et surtout : « ${e.heir.title} » !` : ''}${e.hurt ? ' Je me suis blessé·e.' : ''}`);
+        diary(g, p, `Je suis allé·e ${names.length ? `à ${names.join(', puis à ')}` : 'en ville'}. ${Object.keys(e.loot).some(r => e.loot[r] > 0) ? `J’ai rapporté ${Object.entries(e.loot).filter(([, n]) => n > 0).map(([r, n]) => `${n} ${resLabel(r, g)}`).join(', ')}.` : 'Rien de bien utile.'}${e.heir ? ` Et surtout : « ${e.heir.title} » !` : ''}${e.hurt ? ' Je me suis blessé·e.' : ''}`);
         p.where = 'base'; p.exp = null; p.act = null;
+    }
+    /** le plan trouvé dans un lieu : ceux qui « viennent » de ce genre de lieu d'abord ; les plans rares, bien moins souvent */
+    function pickPlan(g, list, kind) {
+        const w = k => { const it = ITEMS[k]; return (it.where ? (it.where.includes(kind) ? 3 : 0.4) : 1) * (it.rare ? 0.25 : 1); };
+        let r = rnd(g) * list.reduce((a, k) => a + w(k), 0); for (const k of list) { if ((r -= w(k)) <= 0) return k; } return list[list.length - 1];
+    }
+    /* ═════════ 🏆 Les succès ═════════ */
+    /** vérifie les succès (une fois par heure de jeu) : chaque nouveau est noté dans la partie (g.ach : clé → jour) et dans g.achNew
+     *  (l'écran le montre et le garde dans les records de cet ordinateur) → la liste des nouveaux */
+    function checkAch(g) {
+        g.ach = g.ach && typeof g.ach === 'object' ? g.ach : {}; g.achNew = Array.isArray(g.achNew) ? g.achNew : []; if (!alive(g).length) return [];
+        const out = ACH.filter(([k, , , , , test]) => !g.ach[k] && test(g)).map(([k, ico, name]) => { g.ach[k] = dayOf(g.t); log(g, `🏆 Succès : ${ico} ${name} !`, 'alerte'); return k; });
+        g.achNew.push(...out); if (g.achNew.length > 40) g.achNew = g.achNew.slice(-40); return out;
+    }
+    /* ═════════ ⏪ Revenir au matin d'avant ═════════ */
+    const MORNINGS = 7, MORNING_MAX = 400000, MORNING_TOTAL = 1500000, MRES = ['eau', 'nourriture', 'essence', 'bois', 'medic'];
+    /** chaque matin à 6 h : une copie de la partie (les 7 derniers matins ; chaque copie et le tout bornés en taille) */
+    function morningSave(g) {
+        const d = dayOf(g.t); g.mornings = (Array.isArray(g.mornings) ? g.mornings : []).filter(m => m.d < d);
+        const snap = JSON.stringify({...g, mornings: [], achNew: [], log: g.log.slice(0, 60)});
+        if (snap.length > MORNING_MAX) return false;
+        g.mornings.push({d, t: g.t, pop: alive(g).length, tot: g.people.length, res: Object.fromEntries(MRES.map(r => [r, Math.floor(g.res[r] || 0)])), snap});
+        while (g.mornings.length > MORNINGS || (g.mornings.length > 1 && g.mornings.reduce((a, m) => a + m.snap.length, 0) > MORNING_TOTAL)) g.mornings.shift();
+        return true;
+    }
+    /** ⏪ reprendre au matin du jour d : une nouvelle partie (celle d'avant n'est pas touchée : l'écran la garde pour « ↶ Annuler ») → {ok, g, err} */
+    function rewind(g, d) {
+        const m = (g.mornings || []).find(x => x.d === Number(d)); if (!m) return {ok: false, err: 'Ce matin-là n’est plus gardé.'};
+        let n; try { n = check(JSON.parse(m.snap)); } catch (e) { return {ok: false, err: 'Ce matin-là n’a pas pu être relu.'}; }
+        n.mornings = g.mornings.filter(x => x.d <= m.d).map(x => ({...x})); n.rewound = (Number(g.rewound) || 0) + 1; n.ach = {...n.ach, ...(g.ach || {})}; n.achNew = []; n.over = false;
+        log(n, `⏪ Retour au matin du jour ${m.d}${dateOf(n) ? ` (${dateOf(n)})` : ''} : on reprend d’ici.`, 'alerte');
+        return {ok: true, g: n};
     }
     /** avancer de n minutes (par pas de 10) */
     function run(g, minutes) { for (let m = 0; m < minutes && !g.over; m += STEP) step(g); return g; }
@@ -1168,7 +1399,7 @@
                 job: JOBS.includes(p.job) ? p.job : 'libre', ...(AUTO[p.auto] ? {auto: p.auto} : {}), exp: p.where === 'dehors' && p.exp ? {route: (Array.isArray(p.exp.route) ? p.exp.route : [{id: p.exp.place}]).slice(0, 6).map(stepOf), i: clamp(Math.round(num(p.exp.i)), 0, 5), junk: (Array.isArray(p.exp.junk) ? p.exp.junk : []).filter(k => JUNK[k]).slice(0, 40), place: String(p.exp.place), phase: ['aller', 'fouille', 'retour'].includes(p.exp.phase) ? p.exp.phase : 'retour', from: Number(p.exp.from) || 0, until: Number(p.exp.until) || 0, loot: Object.fromEntries(Object.entries(p.exp.loot || {}).filter(([r]) => RES_KEYS.includes(r)).map(([r, n]) => [r, Math.max(0, Number(n) || 0)])), found: (p.exp.found || []).map(String).filter(f => (f[0] === 't' && TOOLS[f.slice(2)]) || (f[0] === 'p' && ITEMS[f.slice(2)])), letters: cleanLetters(p.exp.letters), ...(p.exp.hurt ? {hurt: true} : {})} : null,
                 mood: clamp(num(p.mood, 70), 0, 100), sk, era: ['ancien', 'moderne'].includes(p.era) ? p.era : '', from: str(p.from, 80), occ: str(p.occ, 60), by: Number(p.by) || 0,
                 ill: p.ill && ['fievre', 'blessure'].includes(p.ill.k) ? {k: p.ill.k, left: clamp(num(p.ill.left, 12), 0, 72), treated: !!p.ill.treated} : null,
-                kin: ids(p.kin), spouses: ids(p.spouses), baby: !!p.baby, parents: ids(p.parents).slice(0, 2), sulk: !!p.sulk,
+                kin: ids(p.kin), spouses: ids(p.spouses), baby: !!p.baby, ...(p.inv ? {inv: true} : {}), parents: ids(p.parents).slice(0, 2), sulk: !!p.sulk,
                 age: clamp(Math.round(num(p.age, 30)), 0, 120), ...(p.child ? {child: true} : {}),
                 traits: (Array.isArray(p.traits) ? p.traits : []).filter(k => TRAITS[k]).slice(0, 2), xp: Object.fromEntries(SKILL_KEYS.filter(k => num(p.xp?.[k]) > 0).map(k => [k, clamp(num(p.xp[k]), 0, 500)])),
                 diary: (Array.isArray(p.diary) ? p.diary : []).slice(0, 40).map(x => ({d: Math.max(1, Math.round(num(x?.d, 1))), t: num(x?.t), txt: str(x?.txt, 300)})).filter(x => x.txt), doing: ['creuser', 'construire', 'recycler', 'pedaler', 'garde'].includes(p.doing) ? p.doing : ''};
@@ -1213,6 +1444,12 @@
         g.coffre = (Array.isArray(g.coffre) ? g.coffre : []).slice(0, 10).map(x => ({title: str(x?.title, 80), bonus: HEIRLOOMS.some(h => h[0] === x?.bonus) ? x.bonus : 'souvenir'}));
         // les réglages et ce qui est venu avec : pannes, niveaux, entente, catastrophe en cours, marché, tutoriel, objets à retrouver
         g.opt = cleanOpt(g.opt); g.diff = DIFFS[g.diff] ? g.diff : 'normal'; g.scen = SCENARIOS[g.scen] ? g.scen : 'classique'; g.ruins = cleanRuins(g.ruins);
+        g.plans = g.plans.filter(k => itemOk(g, k));
+        // 🏆 succès et victoire, ⏪ les matins gardés (chaque copie relue seulement quand on y revient)
+        g.ach = Object.fromEntries(Object.entries(g.ach && typeof g.ach === 'object' ? g.ach : {}).filter(([k]) => ACH.some(a => a[0] === k)).map(([k, v]) => [k, Math.max(1, Math.round(num(v, 1)))]));
+        g.achNew = []; g.won = Math.max(0, Math.round(num(g.won))); g.rewound = clamp(Math.round(num(g.rewound)), 0, 1e6);
+        g.mornings = (Array.isArray(g.mornings) ? g.mornings : []).filter(m => m && typeof m.snap === 'string' && m.snap.length <= MORNING_MAX).slice(-MORNINGS)
+            .map(m => ({d: clamp(Math.round(num(m.d, 1)), 1, 1e5), t: Math.max(0, num(m.t)), pop: clamp(Math.round(num(m.pop)), 0, 10), tot: clamp(Math.round(num(m.tot)), 0, 10), res: Object.fromEntries(MRES.map(r => [r, Math.max(0, Math.round(num(m.res?.[r])))])), snap: m.snap}));
         const slotOk = key => { const m = /^(\d),(\d)$/.exec(key); return !!m && !!g.floors[+m[1]]?.slots[+m[2]]; };
         g.broken = Object.fromEntries(Object.keys(g.broken && typeof g.broken === 'object' ? g.broken : {}).filter(k => slotOk(k) && breakable(g.floors[+k[0]].slots[+k[2]])).map(k => [k, true]));
         g.lvl = Object.fromEntries(Object.entries(g.lvl && typeof g.lvl === 'object' ? g.lvl : {}).filter(([k]) => slotOk(k)).map(([k, v]) => [k, clamp(Math.round(num(v, 1)), 1, 3)]).filter(([, v]) => v > 1));
@@ -1226,11 +1463,12 @@
         g.extras = cleanExtras(g.extras); g.lore = cleanLore(g.lore); g.letters = cleanLetters(g.letters); g.names = cleanNames(g.names);
         const S = g.stats || {};
         g.stats = {deaths: (Array.isArray(S.deaths) ? S.deaths : []).slice(0, 20).map(d => ({name: str(d?.name, 80), day: Number(d?.day) || 1})), visits: Object.fromEntries(['marchand', 'voyageur', 'pillards'].map(k => [k, Math.max(0, num(S.visits?.[k]))])),
-            recycled: Math.max(0, num(S.recycled)), repairs: Math.max(0, num(S.repairs)), events: Math.max(0, num(S.events)), fires: Math.max(0, num(S.fires)), meals: Math.max(0, num(S.meals)), raidsWon: Math.max(0, num(S.raidsWon)), raidsLost: Math.max(0, num(S.raidsLost)), stories: Math.max(0, num(S.stories)), trades: Math.max(0, num(S.trades)), found: (Array.isArray(S.found) ? S.found : []).slice(-40).map(x => str(x, 100))};
+            recycled: Math.max(0, num(S.recycled)), repairs: Math.max(0, num(S.repairs)), events: Math.max(0, num(S.events)), fires: Math.max(0, num(S.fires)), meals: Math.max(0, num(S.meals)), raidsWon: Math.max(0, num(S.raidsWon)), raidsLost: Math.max(0, num(S.raidsLost)), stories: Math.max(0, num(S.stories)), trades: Math.max(0, num(S.trades)), built: Math.max(0, num(S.built)), wDays: Math.max(0, num(S.wDays)), builtKinds: (Array.isArray(S.builtKinds) ? S.builtKinds : []).filter(k => ITEMS[k]).slice(0, 200), found: (Array.isArray(S.found) ? S.found : []).slice(-40).map(x => str(x, 100))};
         return g;
     }
 
-    root.LCNDA_BUNKER = {rainPerHour, SKILLS, SKILL_KEYS, skillsOf, SEASONS, SEASON_DAYS, seasonOf, HEIRLOOMS, JOBS, answerVisit, defense, NEEDS, DECAY, RES, RES_KEYS, ITEMS, TOOLS, PLACE_KINDS, SIZES, SLOTS, MAX_FLOORS, DIG_HOURS, BASE_PLANS, FOUND_PLANS,
+    root.LCNDA_BUNKER = {ACH, HIST, ERAS, SCEN_GOAL, OLD_JUNK, MORNINGS, histOf, eraOf, itemOk, resOk, resInfo, placeInfo, toolInfo, fixedName, resList, hasRadio, crier, lit, dateOf, histPool, invent, basePlans, foundPlans, goalOf, checkAch, morningSave, rewind, pickPlan, seasonOfG: seasonOf,
+        rainPerHour, SKILLS, SKILL_KEYS, skillsOf, SEASONS, SEASON_DAYS, seasonOf, HEIRLOOMS, JOBS, answerVisit, defense, NEEDS, DECAY, RES, RES_KEYS, ITEMS, TOOLS, PLACE_KINDS, SIZES, SLOTS, MAX_FLOORS, DIG_HOURS, BASE_PLANS, FOUND_PLANS,
         PETS, RECIPES, DECOS, DECO_MAX, ROOMS, KIND_ROOMS, NIGHT_DANGER, NIGHT_BONUS, DOCS, OPT_KEYS, adopt, addDeco, removeDeco, decoMood, pickRecipe, recipeOk, recipeName, canCook, missionTxt, newMissions, snapshot, fire, pests, feedPets, aging,
         TRAITS, TRAIT_KEYS, DIFFS, SCENARIOS, EVENTS, TUTO, VALUE, CHAIN_RES, setOpt, setDiff, trade, marketDay, startEvent, breakItem, orderRepair, orderUpgrade, repairCost, upgradeCost, upgradable, breakable, gainXp, relOf, lvK, relations,
         JUNK, JUNK_KEYS, AUTO, stockFor, regen, stepOf, carryBonus, recycle, setAuto, orderNeed, routeTime, carryOf, junkCap, junkCount, mult, sumOf, working,

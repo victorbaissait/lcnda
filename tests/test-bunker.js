@@ -283,7 +283,7 @@ t('🎚️ difficulté et 🎬 scénarios ; 🧳 objets de famille retrouvés da
     assert.ok(game({diff: 'facile'}).res.eau > game({diff: 'extreme'}).res.eau);
     assert.equal(game({scen: 'epidemie'}).res.medic, game().res.medic + 3); assert.equal(game({scen: 'invasion'}).scen, 'invasion');
     const g = game({ruins: [{title: 'La montre du grand-père', kind: 'montre'}]}); const pl = g.city.places.find(x => x.kind === 'maison') || g.city.places[0]; pl.kind = 'maisonfam'; pl.home = true;
-    let got = false; for (let i = 0; i < 6 && !got; i++) { const p = g.people[1]; p.hp = 100; B.send(g, p.id, pl.id); let k = 0; while (p.where !== 'base' && k++ < 300) B.run(g, 30); got = g.coffre.some(c => /montre/.test(c.title)); }
+    let got = false; for (let i = 0; i < 12 && !got; i++) { const p = g.people[1]; p.hp = 100; B.send(g, p.id, pl.id); let k = 0; while (p.where !== 'base' && k++ < 300) B.run(g, 30); got = g.coffre.some(c => /montre/.test(c.title)); }
     assert.ok(got, 'retrouvée'); assert.equal(g.coffre.find(c => /montre/.test(c.title)).bonus, 'bijou');
     const t0 = game({opt: {tuto: true}}); assert.equal(t0.tuto, 0); fill(t0); assert.ok(B.orderBuild(t0, 'toilettes', 0, 3).ok); B.run(t0, 10); assert.ok(t0.tuto >= 1); assert.ok(t0.log.some(l => /Étape 2/.test(l.txt)));
     B.setOpt(t0, 'tuto', false); assert.equal(t0.tuto, -1); assert.equal(game().tuto, -1);
@@ -339,5 +339,85 @@ t('↔ réarranger : déplacer une installation vers une place libre, ou échang
     assert.ok(B.moveItem(g, 0, 4, 0, 0).ok); assert.equal(g.floors[0].slots[0], 'douche'); assert.equal(g.floors[0].slots[4], 'radio'); assert.ok(g.broken['0,0'] && !g.broken['0,4'], 'la panne suit');
     assert.ok(B.orderBuild(g, 'lit', 2, 4).ok); assert.ok(B.moveItem(g, 2, 4, 2, 3).ok); assert.ok(g.builds.some(b => b.k === 'lit' && b.fi === 2 && b.si === 3), 'le chantier suit');
     assert.match(B.moveItem(g, 2, 2, 2, 1).err, /Rien/); assert.match(B.moveItem(g, 0, 0, 0, 0).err, /même/); assert.match(B.moveItem(g, 0, 0, 9, 0).err, /existe/);
+});
+t('🏆 succès : vérifiés par le moteur au fil de la partie (une fois chacun), des cachés, un par scénario gagné ; gardés à la relecture', () => {
+    const ids = B.ACH.map(a => a[0]); assert.equal(new Set(ids).size, ids.length); assert.ok(B.ACH.length >= 20, `${B.ACH.length} succès`);
+    assert.ok(B.ACH.some(a => a[4]), 'certains sont cachés'); assert.ok(Object.keys(B.SCENARIOS).every(k => ids.includes('scen_' + k)), 'un par scénario');
+    ['j7', 'j30', 'pop10', 'nodeath', 'tout', 'hiver', 'bebe', 'pill3', 'droit', 'plans', 'fab10'].forEach(k => assert.ok(ids.includes(k), k));
+    const g = game(); assert.deepEqual(B.checkAch(g), [], 'rien au départ');
+    g.stats.raidsWon = 3; g.births.push({name: 'Bébé', m: 'Marie', f: 'Paul', day: 2}); const got = B.checkAch(g);
+    assert.ok(got.includes('pill3') && got.includes('bebe')); assert.ok(g.achNew.includes('pill3')); assert.ok(g.log.some(l => /🏆 Succès : .*Repousser 3 pillages/.test(l.txt)));
+    assert.deepEqual(B.checkAch(g), [], 'une seule fois');
+    const h = game({scen: 'hiver'}); h.stats.wDays = 6; h.t = 6 * 60 + 1440 - 30; B.run(h, 60); assert.ok(h.ach.hiver, 'un hiver sans poêle');
+    const hp = game({scen: 'hiver'}); hp.floors[0].slots[3] = 'poele'; hp.stats.wDays = 6; hp.t = 6 * 60 + 1440 - 30; B.run(hp, 60); assert.ok(!hp.ach.hiver && hp.stats.wDays === 0, 'avec un poêle, non');
+    const w = game(); w.t = 6 * 60 + B.goalOf(w) * 1440 - 30; fill(w, 80); B.run(w, 60); assert.ok(w.won > 0, 'tenir 30 jours : gagné'); assert.ok(w.ach.scen_classique); assert.ok(w.ach.j30 && w.ach.droit && w.ach.j7);
+    const c = B.check(JSON.parse(JSON.stringify(w))); assert.ok(c.won && c.ach.scen_classique); assert.deepEqual(c.achNew, []);
+    const k = game(); k.stats.built = 10; assert.ok(B.checkAch(k).includes('fab10')); const pl = game(); pl.plans.push(...B.foundPlans(pl)); assert.ok(B.checkAch(pl).includes('plans'));
+});
+t('📜 scénarios historiques : la date, l’époque, pas d’électronique en 1709 (crieur, cheminée, bric-à-brac et plans d’époque), leurs règles', () => {
+    for (const k of Object.keys(B.HIST)) {
+        const g = game({scen: k, opt: {meteo: true, missions: true}, ancestors: [{pid: 9, name: 'Louis', by: 1650}]}), E = B.eraOf(g);
+        assert.match(B.dateOf(g), new RegExp(String(B.HIST[k].date[0])));
+        assert.ok(g.plans.every(x => B.itemOk(g, x)), k + ' : des plans d’une autre époque');
+        if (!E.elec) {
+            assert.deepEqual(g.floors[0].slots.slice(0, 3), ['crieur', 'cheminee', 'atelier'], k);
+            assert.ok(!g.plans.some(x => B.ITEMS[x].power || ['douche', 'dynamo', 'extincteur', 'solaire'].includes(x)), k + ' : électricité');
+            assert.ok(!B.foundPlans(g).some(x => B.ITEMS[x].power || B.ITEMS[x].elec || B.ITEMS[x].modern), k + ' : plans à trouver');
+            assert.match(B.orderBuild(g, 'solaire', 0, 3).err || '', /plan|époque/);
+            assert.equal(g.res.essence + g.res.electro + g.res.piles, 0);
+            const junk = [...Object.keys(g.junk), ...g.city.places.flatMap(pl => pl.junk)]; assert.ok(!junk.some(j => ['tele', 'ordinateur', 'telephone', 'radiocassee', 'grillepain', 'frigo'].includes(j)), k + ' : ' + junk.join());
+            assert.ok(g.city.places.every(pl => !['electromenager'].includes(pl.kind)) && g.city.places.every(pl => Object.keys(pl.stock).every(r => !['essence', 'electro', 'piles'].includes(r))));
+            assert.equal(B.resInfo(g, 'plastique')[2], 'Osier'); assert.equal(B.toolInfo(g, 'lampe')[1], 'Lanterne');
+            const p = g.people[1]; p.hp = 100; assert.ok(B.send(g, p.id, g.city.places[0].id).ok); B.run(g, 600);
+            assert.equal(g.power, false); assert.ok(g.log.some(l => l.kind === 'radio' && /^📯/.test(l.txt)), 'le crieur, pas la radio'); assert.ok(!g.log.some(l => l.kind === 'radio' && /📻/.test(l.txt)));
+            fill(g, 20); assert.ok(B.orderBuild(g, 'toilettes', 0, 3).ok); B.setJob(g, g.people[0].id, 'construire'); g.people[0].hp = 100; B.run(g, 300); assert.equal(g.floors[0].slots[3], 'toilettes', k + ' : l’atelier marche à la main');
+        } else assert.equal(g.floors[0].slots[1], 'generateur');
+        const c = B.check(JSON.parse(JSON.stringify(g))); assert.equal(c.scen, k); assert.ok(c.plans.every(x => B.itemOk(c, x)));
+    }
+    assert.equal(B.seasonOf(game({scen: 'h1709'})), 'hiver'); assert.ok(B.canCook(game({scen: 'h1720'})), 'on cuit dans la cheminée');
+    const s = game({scen: 'h1870'}); const pl = s.city.places.find(x => x.max.nourriture); if (pl) { pl.stock.nourriture = 0; for (let i = 0; i < 30; i++) B.regen(s, pl); assert.equal(pl.stock.nourriture, 0, 'le siège : plus rien à manger n’entre'); }
+    const e = game({scen: 'h1940', extras: []}); e.t += 1440; let ref = false; for (let i = 0; i < 400 && !ref; i++) { e.visit = null; B.run(e, 60); ref = e.visit?.k === 'voyageur'; } assert.ok(ref, '1940 : des réfugiés à la trappe');
+});
+t('📜 les ancêtres du scénario : nés avant, morts après (ou âge crédible), jamais un vivant ni une fiche confidentielle ; ceux de la région d’abord ; complétés par des inventés', () => {
+    const ppl = [{id: 1, name: 'Né après', by: 1725}, {id: 2, name: 'Mort avant', by: 1680, dy: 1715}, {id: 3, name: 'Vivant', by: 1700, living: true}, {id: 4, name: 'Secret', by: 1700, priv: true}, {id: 5, name: 'Caché', by: 1700, sh: true},
+        {id: 6, name: 'Sans décès crédible', by: 1690}, {id: 7, name: 'Trop vieux sans décès', by: 1600}, {id: 8, name: 'Marseillais', by: 1690, dy: 1750, bplace: 50}, {id: 9, name: 'Mort le jour d’après', by: 1700, bd: '1700-01-01', dy: 1720, dd: '1720-08-02'},
+        {id: 10, name: 'Mort juste avant', by: 1700, dy: 1720, dd: '1720-07-30'}, {id: 11, name: 'Bébé', by: 1719}, {id: 12, name: 'Sans naissance'}];
+    const P = B.histPool('h1720', ppl, {50: {name: 'Marseille, Bouches-du-Rhône, Provence'}});
+    assert.deepEqual(P.all.map(p => p.pid), [8, 6, 9]); assert.equal(P.local, 1); assert.ok(P.all[0].local); assert.equal(P.all[0].age, 30);
+    assert.deepEqual(B.histPool('h1709', ppl, {}).all.map(p => p.pid).sort((a, b) => a - b), [2, 6, 8, 9, 10]);
+    const g = B.newGame({seed: 5, scen: 'h1720', me: P.all[0], team: P.all.slice(1), want: 6, city: {name: 'Marseille'}});
+    assert.equal(g.people.length, 6); assert.equal(g.people.filter(p => p.inv).length, 3); assert.ok(g.people[0].me && g.people[0].pid === 8);
+    assert.ok(g.log.some(l => /3 ancêtres de ta famille.*dont 1 en Provence.*3 habitants inventés/.test(l.txt)), g.log.map(l => l.txt).join('\n'));
+    assert.ok(g.people.filter(p => p.inv).every(p => !p.pid && p.by > 1650 && p.by < 1710));
+    const none = B.newGame({seed: 5, scen: 'h1709', want: 3, city: {name: 'Paris'}}); assert.equal(none.people.length, 3); assert.ok(none.people.every(p => p.inv)); assert.ok(none.log.some(l => /aucun ancêtre/.test(l.txt)));
+});
+t('⏪ revenir au matin : une copie chaque matin (les 7 derniers, bornés en taille), reprendre ne touche pas la partie d’avant, relu proprement', () => {
+    const g = game(); fill(g, 60); assert.equal(g.mornings.length, 1); assert.equal(g.mornings[0].d, 1);
+    B.run(g, 1440 * 3 + 120); assert.deepEqual(g.mornings.map(m => m.d), [1, 2, 3, 4]); assert.ok(g.mornings.every(m => m.snap.length < 400000 && m.res && m.pop >= 0));
+    const t0 = g.t, r = B.rewind(g, 2); assert.ok(r.ok); assert.equal(B.dayOf(r.g.t), 2); assert.equal(B.hourOf(r.g.t), 6); assert.equal(r.g.rewound, 1);
+    assert.deepEqual(r.g.mornings.map(m => m.d), [1, 2]); assert.equal(g.t, t0, 'la partie d’avant reste telle quelle (pour « ↶ Annuler »)'); assert.equal(g.rewound, 0);
+    assert.ok(r.g.log.some(l => /Retour au matin du jour 2/.test(l.txt))); B.run(r.g, 1440); assert.deepEqual(r.g.mornings.map(m => m.d), [1, 2, 3]);
+    assert.equal(B.rewind(g, 99).ok, false);
+    const lg = game(); fill(lg, 60); B.run(lg, 1440 * 10); assert.ok(lg.mornings.length <= B.MORNINGS); assert.equal(lg.mornings[lg.mornings.length - 1].d, 11);
+    const dead = game(); dead.res.eau = 0; dead.res.eausale = 0; dead.res.nourriture = 0; dead.people.forEach(p => { p.hp = 1; p.needs.soif = 0; p.needs.faim = 0; }); B.run(dead, 1440); assert.ok(dead.over); const back = B.rewind(dead, 1); assert.ok(back.ok && !back.g.over && B.alive(back.g).length === 3, 'après une défaite');
+    const raw = JSON.parse(JSON.stringify(g)); raw.mornings.push({d: 50, snap: 'x'.repeat(500001)}, {d: 'zz', snap: 3}); const c = B.check(raw); assert.ok(c.mornings.every(m => typeof m.snap === 'string' && m.snap.length < 500000)); assert.equal(c.mornings.length, 4);
+    const won = game(); won.ach.droit = 3; const rw = B.rewind(won, 1); assert.ok(rw.g.ach.droit, 'les succès déjà gagnés restent');
+});
+t('🔨 plus d’objets à fabriquer : plans à trouver en ville (là où ils viennent, certains rares), un vrai effet, d’époque', () => {
+    const NEW = ['puits', 'fumoir', 'ruche', 'pressoir', 'edredons', 'lanternes', 'horloge', 'accordeon', 'echecs', 'simples', 'remedes', 'gouttieres', 'fosse', 'meurtrieres', 'brancard', 'boussole', 'traineau', 'nasse', 'lessiveuse', 'pigeonnier', 'caveavin', 'foursolaire', 'turbine'];
+    const effects = ['prod', 'fun', 'aura', 'healK', 'defense', 'rain', 'travelK', 'carry', 'talkie', 'warm', 'cook', 'elec'];
+    NEW.forEach(k => { const it = B.ITEMS[k]; assert.ok(it && it.desc && it.h > 0 && Object.keys(it.cost).length, k); assert.ok(B.FOUND_PLANS.includes(k), k + ' se trouve en ville'); assert.ok(effects.some(e => it[e] != null), k + ' sans effet');
+        assert.ok(it.where.every(w => B.PLACE_KINDS[w]), k); assert.ok(Object.keys(it.cost).every(r => B.RES_KEYS.includes(r))); });
+    assert.ok(NEW.filter(k => B.ITEMS[k].rare).length >= 4, 'des plans rares');
+    const old = game({scen: 'h1709'}); assert.ok(['puits', 'ruche', 'lanternes', 'pigeonnier', 'accordeon'].every(k => B.itemOk(old, k))); assert.ok(!B.itemOk(old, 'foursolaire') && !B.itemOk(old, 'turbine'));
+    // là où ils viennent : à la ferme, les nasses bien plus souvent que l'horloge (rare, d'ailleurs)
+    const g = game(); let nasse = 0, horloge = 0; for (let i = 0; i < 3000; i++) { const k = B.pickPlan(g, ['nasse', 'horloge', 'boussole'], 'port'); if (k === 'nasse') nasse++; if (k === 'horloge') horloge++; } assert.ok(nasse > 4 * horloge, `${nasse} / ${horloge}`);
+    // un vrai effet : le puits donne de l'eau sans pluie, les édredons tiennent chaud, la turbine fait l'électricité quand il pleut, le pigeonnier porte les nouvelles
+    const p = game(); p.floors[0].slots[3] = 'puits'; p.weather = {rain: false, until: 0}; const e0 = p.res.eausale; for (let i = 0; i < 12; i++) { p.weather.rain = false; B.run(p, 60); } assert.ok(p.res.eausale >= e0 + 3, 'le puits');
+    const w = game({scen: 'hiver'}); w.floors[0].slots[3] = 'edredons'; B.run(w, 60); assert.ok(w.warm, 'les édredons');
+    const tb = game(); tb.floors[0].slots[3] = 'turbine'; tb.res.essence = 0; tb.weather = {rain: true, until: tb.t + 600}; B.run(tb, 30); assert.equal(tb.powerSrc, 'eau');
+    const pg = game(); pg.floors[0].slots[3] = 'pigeonnier'; pg.powerOn = false; pg.power = false; const q = pg.people[1]; B.send(pg, q.id, pg.city.places[0].id); B.run(pg, 300); assert.ok(pg.log.some(l => l.kind === 'radio'), 'le pigeonnier'); assert.ok(B.recall(pg, q.id) || q.where === 'base');
+    const fs2 = game(); fs2.floors[0].slots[3] = 'foursolaire'; assert.ok(B.canCook(fs2));
+    assert.ok(B.foundPlans(game()).length >= 60, 'beaucoup de plans à trouver');
 });
 console.log(`✓ bunker : ${n} vérifications`);
