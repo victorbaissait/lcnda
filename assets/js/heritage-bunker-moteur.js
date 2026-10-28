@@ -2048,7 +2048,7 @@
             g.people.forEach(p => { if (p.exp && !p.exp.site && (!Array.isArray(p.exp.route) || !p.exp.route.length || p.exp.route.some(r => !known.has(r?.id)) || (p.exp.place != null && !known.has(p.exp.place)))) { p.where = 'base'; p.exp = null; } }); }
         g.dig = {on: !!g.dig?.on, done: Math.max(0, Number(g.dig?.done) || 0)}; g.weather = {rain: !!g.weather?.rain, until: Number(g.weather?.until) || 0};
         g.power = !!g.power; g.powerOn = g.powerOn !== false; g.powerSrc = ['essence', 'soleil', 'vent', 'pedales', 'batteries'].includes(g.powerSrc) ? g.powerSrc : (g.power ? 'essence' : ''); g.wind = !!g.wind;
-        g.over = !!g.over; g.speed = [0, 1, 2, 4].includes(g.speed) ? g.speed : 1; g.nextId = Math.max(Number(g.nextId) || 0, g.people.length + 1); g.seed = Number(g.seed) | 0;
+        g.over = !!g.over; g.speed = [0, 1, 2, 4, 8, 16].includes(g.speed) ? g.speed : 1; g.nextId = Math.max(Number(g.nextId) || 0, g.people.length + 1); g.seed = Number(g.seed) | 0;
         // ce qui est venu après la première version (une vieille partie reçoit les valeurs de départ)
         g.junk = Object.fromEntries(Object.entries(g.junk && typeof g.junk === 'object' ? g.junk : {}).filter(([k]) => JUNK[k]).map(([k, n]) => [k, clamp(Math.round(num(n)), 0, 99)]).filter(([, n]) => n > 0));
         g.recy = (Array.isArray(g.recy) ? g.recy : []).filter(r => JUNK[r?.k]).slice(0, 60).map(r => ({k: r.k, left: clamp(num(r.left), 0, 10)}));
