@@ -58,7 +58,7 @@
     async function runQuestion(q, after, personId = 0, place = '') {
         const out = document.getElementById('h-question-out');
         if (!out || !q.trim()) return;
-        out.innerHTML = '<p class="muted">Recherche…</p>';
+        out.innerHTML = window.LCNDA_UI.spinner('Recherche…');
         try {
             const seq = ++questionSeq;
             const r = await api('ask_question', {q, ...(personId ? {person_id: personId} : {}), ...(place ? {place} : {})});
@@ -97,7 +97,7 @@
         box.querySelectorAll('[data-hq-run]').forEach(b => b.addEventListener('click', async () => {
             const s = list.find(x => Number(x.id) === Number(b.dataset.hqRun)), out = document.getElementById('h-question-out');
             if (!s || !out) return;
-            out.innerHTML = '<p class="muted">Recherche…</p>';
+            out.innerHTML = window.LCNDA_UI.spinner('Recherche…');
             try {
                 const r = await api('saved_search_results', {criteria: JSON.stringify(s.criteria), id: s.id});
                 out.innerHTML = `<h4>${esc(s.name)} — ${plural(r.count, 'fiche trouvée', 'fiches trouvées')}</h4><p class="muted">${esc(r.description)}</p>${r.people.length ? resultsTable(r.people) : empty('Aucune fiche ne répond à cette recherche.')}`;

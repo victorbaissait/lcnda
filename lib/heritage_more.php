@@ -1149,7 +1149,8 @@ function compare_people(PDO $pdo, int $a, int $b): array
         $names = static fn(array $ids) => array_values(array_map(static fn($x) => trim($x['first_name'] . ' ' . $x['last_name']) . ($x['birth_year'] ? ' (' . $x['birth_year'] . ')' : ''), collection_people($pdo, $ids)));
         $sp = $pdo->prepare('SELECT CASE WHEN partner1_id=? THEN partner2_id ELSE partner1_id END FROM families WHERE partner1_id=? OR partner2_id=?'); $sp->execute([$id, $id, $id]);
         $count = static fn(string $sql) => (int) $pdo->query($sql)->fetchColumn();
-        return ['person' => $p, 'events' => $ev->fetchAll(), 'parents' => $names(h_parents($pdo, $id)), 'spouses' => $names(array_filter(array_map('intval', $sp->fetchAll(PDO::FETCH_COLUMN)))), 'children' => $names(h_children($pdo, [$id])),
+        $pf = $pdo->prepare('SELECT DISTINCT family_id FROM family_children WHERE child_id=?'); $pf->execute([$id]); // familles de parents (avertissement avant fusion)
+        return ['person' => $p, 'events' => $ev->fetchAll(), 'parents' => $names(h_parents($pdo, $id)), 'parent_families' => array_map('intval', $pf->fetchAll(PDO::FETCH_COLUMN)), 'spouses' => $names(array_filter(array_map('intval', $sp->fetchAll(PDO::FETCH_COLUMN)))), 'children' => $names(h_children($pdo, [$id])),
             'sources' => $count("SELECT count(*) FROM source_links WHERE (entity_type='person' AND entity_id={$id}) OR (entity_type='event' AND entity_id IN (SELECT id FROM events WHERE person_id={$id} OR family_id IN (SELECT id FROM families WHERE partner1_id={$id} OR partner2_id={$id})))"),
             'media' => $count("SELECT count(*) FROM media_links WHERE entity_type='person' AND entity_id={$id}"), 'notes' => $count("SELECT count(*) FROM notes WHERE entity_type='person' AND entity_id={$id}")];
     };

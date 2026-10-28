@@ -186,7 +186,7 @@ body.is-kiosk .nav-item[data-module="maintenance"],
 body.is-kiosk .icon-edit,body.is-kiosk .icon-add,body.is-kiosk .icon-delete,body.is-kiosk .icon-unlock,body.is-kiosk .icon-lock,
 body.is-kiosk .button.danger,body.is-kiosk [data-delete-person],body.is-kiosk [data-edit-person-inline],
 body.is-kiosk .labels-add-btn,body.is-kiosk .label-chip-remove,body.is-kiosk #new-person,body.is-kiosk .sidebar-footer .button,
-body.is-kiosk [data-h-voyage-edit],body.is-kiosk [data-h-placement-edit],body.is-kiosk [data-h-coat-edit],body.is-kiosk [data-h-coat-link],body.is-kiosk [data-h-poilu-edit]{display:none !important}
+body.is-kiosk [data-h-voyage-edit],body.is-kiosk [data-h-placement-edit],body.is-kiosk [data-h-coat-edit],body.is-kiosk [data-h-coat-link],body.is-kiosk [data-h-poilu-edit],body.is-kiosk [data-rj-new-digest],body.is-kiosk [data-pet-newfor]{display:none !important}
 
 /* Fêtes religieuses */
 .h-feast-hint{margin-top:.3rem;font-size:.85em;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
@@ -5115,7 +5115,6 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 .h-avx-montage.mt-tbtn .h-mt-lname .h-mt-tbtns button { width: var(--mt-tbtn); height: var(--mt-tbtn); min-width: var(--mt-tbtn); min-height: var(--mt-tbtn); padding: 0; margin: 0; font-size: calc(var(--mt-tbtn) * .55); line-height: 1; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
 .h-mt-lname .h-mt-tbtns button.ord-arrow, .h-mt-lname .h-mt-tbtns button.icon-action.ia-auto { background: var(--white) !important; } /* ↑ ↓ 🗑 : le même fond que 👁 🔓 (en mode sombre aussi) */
 .h-mt-keysdlg .h-mt-keysbody { padding: 0 20px 12px; overflow: auto; }
-
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .h-poilu-event.is-blesse>strong,:root[data-theme="dark"] .h-poilu-event.is-tue>strong,:root[data-theme="dark"] .h-poilu-event.is-gaze>strong{color:#f49aa3}
 :root[data-theme="dark"] .h-calib-image{background:#292929}

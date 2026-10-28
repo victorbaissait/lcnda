@@ -47,7 +47,7 @@
     }, true);
 
     ext.addrMap = async (box, {insee = '', digestId = 0, year = 0} = {}) => {
-        box.innerHTML = '<p class="muted">Chargement du plan…</p>';
+        box.innerHTML = window.LCNDA_UI.spinner('Chargement du plan…');
         let D;
         try { D = await get('addr_map', {insee, digest_id: digestId || ''}); } catch (e) { box.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
         if (!D.insee) { box.innerHTML = `<div class="maintenance-panel"><p>${esc(D.error || 'Commune inconnue.')}</p></div>`; return; }

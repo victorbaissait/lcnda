@@ -106,7 +106,7 @@
         if (w.type === 'reminders' || w.type === 'agenda') body += `<label>Sur combien de jours ?<input type="number" name="days" min="1" max="3650" value="${c.days}"></label><label>Combien au plus ?<input type="number" name="n" min="1" max="50" value="${c.n || 10}"></label>`;
         if (w.type === 'agenda') body += `<fieldset class="h-rc-modes"><legend>Quelles sortes ?</legend>${Object.entries(SRC).map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="srcs" value="${k}" ${c.srcs.includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</fieldset>
             <label>Seulement ceux qui contiennent le mot <small class="muted">(facultatif)</small><input name="word" value="${esc(c.word)}" placeholder="optique, Bourges…"></label>
-            <fieldset class="h-rc-modes"><legend>📌 Épinglés à ce projet (toujours montrés)</legend><div data-atw-pins class="h-rc-results"><p class="muted">Chargement…</p></div></fieldset>`;
+            <fieldset class="h-rc-modes"><legend>📌 Épinglés à ce projet (toujours montrés)</legend><div data-atw-pins class="h-rc-results">${window.LCNDA_UI.spinner('Chargement…')}</div></fieldset>`;
         if (w.type === 'dash') body += `<label>Widget<select name="dtype">${dashChoices().map(([k, l]) => `<option value="${k}" ${c.type === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Nombre d’éléments<input type="number" name="limit" min="1" max="50" value="${c.limit || 8}"></label>`;
         ext.openDialog({eyebrow: 'WIDGET', title: TYPES[w.type][0] + ' ' + TYPES[w.type][1], submitLabel: 'Enregistrer', body,
             onOpen: async d => { const box = d.querySelector('[data-atw-pins]'); if (!box) return; const a = await agenda();

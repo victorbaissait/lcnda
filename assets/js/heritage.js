@@ -870,7 +870,7 @@
     function probateFormHtml(inv) {
         const f = k => esc(inv[k] || '');
         return `<form class="maintenance-panel collection-form" id="h-probate-form"><h3>${inv.id ? 'Modifier l’inventaire' : 'Nouvel inventaire après décès'}</h3>
-            <div class="form-grid"><div><span class="pk-lab">Défunt(e)</span>${personPick('person_id', inv.person)}</div><label>Date<input name="date_text" data-ui-date value="${f('date_text')}" placeholder="12 mars 1782"></label>
+            <div class="form-grid"><div><span class="pk-lab">La personne décédée</span>${personPick('person_id', inv.person)}</div><label>Date<input name="date_text" data-ui-date value="${f('date_text')}" placeholder="12 mars 1782"></label>
             <label>Notaire<input name="notary" value="${f('notary')}" placeholder="Me Dubois, notaire à Tulle"></label><label>Lieu<input name="place_text" value="${f('place_text')}"></label>
             <label>Monnaie<select name="currency"><option value="livre" ${inv.currency === 'livre' ? 'selected' : ''}>Livres tournois (l, s, d)</option><option value="franc" ${inv.currency === 'franc' ? 'selected' : ''}>Francs</option><option value="nf" ${inv.currency === 'nf' ? 'selected' : ''}>Nouveaux francs (1960-2001)</option></select></label><label>Cote<input name="reference" value="${f('reference')}" placeholder="AD19, 3 E 1234"></label></div>
             <h4>Objets, pièce par pièce</h4><p class="muted">Valeur : « 12 l 5 s 3 d » (livres, sols, deniers), « 12 livres 5 sols », ou un nombre (« 152,50 »). La catégorie « Dettes » est déduite du total.</p>
@@ -1483,7 +1483,7 @@
         const form = ws.querySelector('#h-search-form');
         const run = async (criteria, id = 0) => {
             const box = ws.querySelector('#h-search-results');
-            box.innerHTML = '<p class="muted">Recherche…</p>';
+            box.innerHTML = window.LCNDA_UI.spinner('Recherche…');
             try {
                 const r = await api('saved_search_results', {criteria: JSON.stringify(criteria), id});
                 const newOnes = r.people.filter(p => p.is_new).length;
@@ -1662,7 +1662,7 @@
     });
     ext.exportPanels.push(() => `<section class="maintenance-panel" id="h-offsite-panel"><h3>🛟 Copie hors de cet ordinateur</h3>
         <p>La sauvegarde automatique reste sur le même disque : si l’ordinateur est volé ou tombe en panne, tout part avec lui. Choisis un ou plusieurs dossiers <b>ailleurs</b> : disque externe, clé USB, dossier iCloud Drive, Dropbox, OneDrive… L’app y copie la base et te prévient quand la dernière copie devient trop ancienne.</p>
-        <div data-h-offsite-body><p class="muted">Chargement…</p></div></section>`);
+        <div data-h-offsite-body>${window.LCNDA_UI.spinner('Chargement…')}</div></section>`);
     ext.afterExport.push(async () => {
         const box = document.querySelector('[data-h-offsite-body]');
         if (!box) return;

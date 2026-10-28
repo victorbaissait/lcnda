@@ -362,8 +362,9 @@
         return A().card(index, '🌦 Météo de sa vie', '', `<div class="wx-life" data-wx-life="${Number(p.id)}">${UI().skeleton ? UI().skeleton(3) : ''}</div>`, 'span-6', actions);
     };
     const curiousText = (c, g) => {
-        const e = g === 'female' ? 'e' : '';
-        const verb = {BIRT: `Né${e}`, BAPM: `Baptisé${e}`, CHR: `Baptisé${e}`, MARR: `Marié${e}`, DEAT: `Décédé${e}`, BURI: `Inhumé${e}`}[c.tag] || 'Ce jour-là';
+        // ✍️ accordé avec la fiche (app-accord.js) ; sans réglage, une fiche ni homme ni femme reste au masculin, comme avant
+        const ac = w => window.LCNDA_ACCORD?.accord ? window.LCNDA_ACCORD.accord(g, w + '(e)', {before: w}) : w + (g === 'female' ? 'e' : '');
+        const verb = {BIRT: ac('Né'), BAPM: ac('Baptisé'), CHR: ac('Baptisé'), MARR: ac('Marié'), DEAT: ac('Décédé'), BURI: ac('Inhumé')}[c.tag] || 'Ce jour-là';
         if (c.kind === 'coldest_day') return `🥶 ${verb} le jour le plus froid de l’hiver ${c.season} à ${c.town}.`;
         if (c.kind === 'coldest_week') return `🥶 ${verb} pendant la semaine la plus froide de l’hiver ${c.season} à ${c.town}.`;
         if (c.kind === 'hottest_day') return `🥵 ${verb} le jour le plus chaud de l’été ${c.season} à ${c.town}.`;

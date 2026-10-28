@@ -770,7 +770,7 @@
     UI.listBarState = key => store.get(LB_PREFIX + key, null);
 
     /* ═════ C7 Chargement et messages (HTML à insérer) ═════ */
-    UI.spinner = (text = 'Chargement…') => `<div class="ui-spinner" role="status"><span class="ui-spin" aria-hidden="true"></span><span>${esc(text)}</span></div>`;
+    UI.spinner = (text = 'Chargement…', {inline = false} = {}) => inline ? `<span class="ui-spinner is-inline" role="status"><span class="ui-spin" aria-hidden="true"></span><span>${esc(text)}</span></span>` : `<div class="ui-spinner" role="status"><span class="ui-spin" aria-hidden="true"></span><span>${esc(text)}</span></div>`;   // C7 ; {inline: true} dans une ligne de texte (à côté d’un bouton)
     UI.skeleton = (lines = 3) => `<div class="ui-skeleton" aria-hidden="true">${Array.from({length: Math.max(1, lines)}, (_, i) => `<div class="ui-skel" style="width:${[82, 65, 74, 58, 90, 70][i % 6]}%"></div>`).join('')}</div>`;
     const NOTICE = {info: 'ℹ️', warn: '⚠️', error: '⛔', ok: '✓'};
     UI.notice = (kind = 'info', text = '') => { const k = NOTICE[kind] ? kind : 'info'; return `<div class="ui-notice ui-notice-${k}" role="${k === 'error' ? 'alert' : 'status'}"><span class="ui-notice-ico" aria-hidden="true">${NOTICE[k]}</span><span>${esc(text)}</span></div>`; };

@@ -199,8 +199,8 @@
                 return as.valid(b.target) ? `<iframe class="h-ct-frame" src="${esc(as.url(b))}" title="${esc(b.title || as.label(b.target))}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(b.height) || 560))}px"></iframe>` : '<p class="muted">Cet écran n’existe plus : ✎ pour en choisir un autre.</p>';
             }
             case 'diagram': return Number(b.diagram) && ext.diagramEmbedHtml ? ext.diagramEmbedHtml(b.diagram) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun diagramme choisi : ✎ pour en choisir un.</span></p>';
-            case 'photomap': return `<div class="pm-widget" data-fi-photomap="${esc(JSON.stringify(b.config || {}))}"><p class="muted">Chargement…</p></div>`;
-            case 'widget': return b.widget ? `<div class="h-fi-widget" data-fi-widget="${esc(b.widget)}"><p class="muted">Calcul…</p></div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun widget choisi : ✎ pour en choisir un.</span></p>';
+            case 'photomap': return `<div class="pm-widget" data-fi-photomap="${esc(JSON.stringify(b.config || {}))}">${window.LCNDA_UI.spinner('Chargement de la carte…')}</div>`;
+            case 'widget': return b.widget ? `<div class="h-fi-widget" data-fi-widget="${esc(b.widget)}">${window.LCNDA_UI.spinner('Calcul…')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun widget choisi : ✎ pour en choisir un.</span></p>';
             default: return '';
         }
     }

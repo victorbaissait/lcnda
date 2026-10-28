@@ -467,7 +467,7 @@
             msg.textContent = !data.kits.length ? 'ℹ️ Aucun test ADN dans ta base : ajoute-le dans l’onglet ADN (🧬 Mes tests), ou remplis le tableau à la main.' : pid && !mine.length ? 'ℹ️ Cette personne n’a pas de test : voici tous les tests de ta base.' : ''; };
         dnaData().then(d => { data = d; const pid = personOf(); if (!pid && d.kits[0]?.person_id) { /* la personne du premier test */ } fillKits(); }).catch(e => { msg.textContent = '⚠️ ' + (e.message || e); });
         pane.addEventListener('picker-change', e => { if (e.detail?.name === 'dac_person') fillKits(); });
-        btn?.addEventListener('click', async () => { btn.disabled = true; msg.innerHTML = '<span class="ui-spinner" aria-hidden="true"></span> Lecture de tes données ADN…';
+        btn?.addEventListener('click', async () => { btn.disabled = true; msg.innerHTML = window.LCNDA_UI.spinner('Lecture de tes données ADN…', {inline: true});
             try { data = await dnaData(true); const kit = Number(kitSel.value) || data.kits[0]?.id || 0; if (!kit) throw new Error('Aucun test ADN dans ta base.');
                 const s = io.spec(), t = run(s, data, kit, pane); io.apply(s); A()?.toast?.(t); }
             catch (e) { msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; if (msg.isConnected && msg.querySelector('.ui-spinner')) msg.textContent = ''; } });
@@ -598,7 +598,7 @@
     async function openPeople(ids, title) {
         const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal dac-people';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📊 DIAGRAMME</span><h2>${esc(title || 'Les personnes')}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="dac-people-list" data-list><p class="muted"><span class="ui-spinner" aria-hidden="true"></span> Chargement…</p></div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;
+            <div class="dac-people-list" data-list>${window.LCNDA_UI.spinner('Chargement des personnes…')}</div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => dlg.remove());
         dlg.addEventListener('click', e => { if (e.target.closest('[data-x]')) return dlg.close(); const b = e.target.closest('[data-open]'); if (b) { dlg.close(); document.querySelectorAll('dialog[open]').forEach(d => { try { d.close(); } catch (_) {} }); A()?.openPersonById?.(Number(b.dataset.open)); } });

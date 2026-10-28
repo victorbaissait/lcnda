@@ -195,8 +195,6 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .install-card .import-form { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
 .install-card .import-form label { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: #555; }
 @media (max-width: 760px) { .install-options { grid-template-columns: 1fr; } }
-.loading-mark { width: 76px; height: 76px; display: grid; place-items: center; margin: auto; background: var(--blue); color: white; font-weight: 800; font-size: 24px; border: 3px solid var(--ink); box-shadow: var(--shadow); transform: rotate(-3deg); }
-.loading-screen p { font-weight: 700; }
 .loading-block { min-height: 180px; display: grid; place-items: center; color: var(--muted); font-size: 13px; }
 
 .search-box { position: sticky; top: -18px; background: var(--white); padding: 0 0 14px; z-index: 2; }
@@ -3192,6 +3190,8 @@ select[size] option{padding:7px 5px}
 .sosa-list-filters{align-items:center;flex-wrap:wrap;gap:14px}
 .sosa-list-filters .checkbox-row{display:flex;grid-template-columns:auto 1fr;align-items:center;gap:7px;margin:0}
 .sosa-list-root-filter{justify-content:space-between}
+.sosa-list-root-filter>div>strong,.sosa-list-root-filter>div>span{display:block} /* « Racine (n°1)… » puis la personne, sur deux lignes (pas collés) */
+.sosa-list-root-filter>div>span{margin-top:4px;color:var(--muted);font-size:12px;font-weight:800}
 tr.row-sosa-missing,.list-card.row-sosa-missing{color:var(--muted);background:#f4f4f2}
 tr.row-sosa-missing td{color:var(--muted)}
 tr.row-sosa-duplicate,.list-card.row-sosa-duplicate{color:#4f4f4f;background:#dfdfdc}
@@ -4700,6 +4700,28 @@ html:not(.show-event-ics) .event-ics-btn { display: none; }
 .lcf-c u { display: block; height: 6px; background: currentColor; opacity: .18; margin: 7px 0; text-decoration: none; }
 @media (max-width: 900px) { .lcf-grid { grid-template-columns: 1fr; } .lcf-grid > div:first-child { padding-right: 0; } .lcf-grid > div + div { border-left: 0; border-top: var(--line); padding-left: 0; margin-top: 14px; } .lcf-mini { grid-template-columns: 80px 1fr; } }
 @media (max-width: 480px) { .lcf-where { grid-template-columns: 1fr; } .lcf-content { grid-template-columns: 1fr; } .lcf-c:nth-child(n+4) { display: none; } }
+
+/* ✍️ Accord des mots (app-accord.js, Réglages → Thème et couleurs) */
+.lca-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,.9fr); gap: 18px; align-items: start; margin-top: 10px; }
+.lca-group { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 6px; }
+.lca-group legend { font-weight: 800; font-size: 14px; margin-bottom: 6px; padding: 0; }
+.lca-choice { display: grid; grid-template-columns: 18px minmax(0,1fr); gap: 8px; align-items: start; border: 1.5px solid var(--line-color); background: var(--white); padding: 8px 10px; cursor: pointer; }
+.lca-choice:hover { border-color: var(--blue-bright, #055dff); }
+.lca-choice.is-active { border-color: var(--blue-bright, #055dff); background: var(--blue-soft); box-shadow: inset 3px 0 0 var(--blue-bright, #055dff); }
+.lca-choice input { margin: 3px 0 0; }
+.lca-choice > span { display: grid; gap: 2px; min-width: 0; }
+.lca-choice small { color: var(--muted); font-size: 12px; }
+.lca-choice em { font-style: normal; font-size: 13px; overflow-wrap: anywhere; }
+.lca-preview { border: 1.5px solid var(--line-color); background: var(--paper, var(--white)); padding: 10px 12px; min-width: 0; }
+.lca-preview-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.lca-preview ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.lca-preview li { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 8px; align-items: start; }
+.lca-preview li > span:last-child { display: grid; gap: 2px; min-width: 0; }
+.lca-preview small { font-size: 12.5px; overflow-wrap: anywhere; }
+.lca-av { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: #fff; background: #8a8a8a; }
+.lca-av.is-m { background: #2f6fd6; } .lca-av.is-f { background: #d6457a; } .lca-av.is-x { background: #7a5bc4; }
+@media (max-width: 1100px) { .lca-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } .lca-preview { grid-column: 1 / -1; } }
+@media (max-width: 640px) { .lca-grid { grid-template-columns: 1fr; } }
 
 /* 🎲 Jeu de l'oie en sombre : « goose-page » ressemble à une page de papier pour build-dark-css.py, le texte restait noir */
 :root[data-theme="dark"] .goose-page{color:#ececec}

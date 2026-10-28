@@ -288,7 +288,7 @@
         const b = tag('BIRT'), d = tag('DEAT'), m = tag('MARR'), bap = tag('BAPM') || tag('CHR'), bur = tag('BURI');
         const out = {};
         if (kind === 'naissance') Object.assign(out, {name: first || full, date: at(b), family: parents.length ? `${parents.join(' et ')}` : ''});
-        if (kind === 'bapteme') Object.assign(out, {name: first || full, intro: `sera baptisé${p.gender === 'female' ? 'e' : ''}`, date: at(bap) || at(b), family: parents.length ? `Ses parents, ${parents.join(' et ')}` : ''});
+        if (kind === 'bapteme') Object.assign(out, {name: first || full, intro: `sera ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'baptisé(e)', {before: 'baptisé'})}`, date: at(bap) || at(b), family: parents.length ? `Ses parents, ${parents.join(' et ')}` : ''});
         if (kind === 'mariage') Object.assign(out, {name: partners[0] ? `${first} & ${String(partners[0]).split(' ')[0]}` : full, date: at(m), family: parents.length ? `${parents.join(' et ')}` : ''});
         if (kind === 'deces') { const age = p.birth_year && p.death_year ? p.death_year - p.birth_year : 0; Object.assign(out, {name: `${first} ${last.toLocaleUpperCase('fr-FR')}`.trim(), date: [at(d) ? `survenu ${at(d)}` : '', age ? `à l’âge de ${age} ans` : ''].filter(Boolean).join(', '), detail: bur ? `Les obsèques ont eu lieu ${at(bur)}.` : '', family: partners.length ? `${partners.join(', ')}, ses enfants et toute la famille` : 'Ses enfants et toute la famille'}); }
         if (kind === 'cousinade') Object.assign(out, {name: `famille ${last || full}`, detail: partners[0] ? `Tous les descendants de ${full} et ${partners[0]}` : `Tous les descendants de ${full}`});

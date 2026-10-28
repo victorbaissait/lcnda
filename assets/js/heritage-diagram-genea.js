@@ -437,7 +437,7 @@
     const vennApp = {
         html: () => `<div class="h-dg-app gn-app"><h4>⭕ Des ensembles de l’app</h4><p class="muted">Choisis 2 à 4 ensembles : chaque zone reçoit le nombre de personnes qui sont dans ces ensembles-là, et pas dans les autres.</p>
             <span class="pk-lab">Étiquettes</span>${A().pickerField ? A().pickerField({name: 'gn_labels', kind: 'label', multiple: true, placeholder: 'Une étiquette…'}) : ''}
-            <span class="pk-lab">Autres ensembles</span><div class="gn-sets" data-gn-sets><p class="muted">Chargement…</p></div>
+            <span class="pk-lab">Autres ensembles</span><div class="gn-sets" data-gn-sets>${window.LCNDA_UI.spinner('Chargement…')}</div>
             <span class="pk-lab">Personne de départ (pour « Mes ancêtres »)</span>${PICK_ROOT()}
             <button type="button" class="button small" data-gn-go>Compter</button><p class="muted" data-gn-msg aria-live="polite"></p></div>`,
         bind: (pane, io) => {
@@ -672,7 +672,7 @@
     const rootOf = pane => Number(pane.querySelector('[name="gn_root"]')?.value) || Number(A().state?.bootstrap?.startPersonId) || 0;
     function bindApp(pane, run) {
         const btn = pane.querySelector('[data-gn-go]'), msg = pane.querySelector('[data-gn-msg]'); if (!btn) return;
-        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = '<span class="ui-spinner" aria-hidden="true"></span> Lecture de ta généalogie…';
+        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); A().toast?.(t || 'Données prises dans l’app.'); } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; if (msg?.isConnected && msg.querySelector('.ui-spinner')) msg.textContent = ''; } });
     }
 

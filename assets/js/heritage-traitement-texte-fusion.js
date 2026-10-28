@@ -23,9 +23,10 @@
     function valueOf(p, k) {
         if (k === 'today') return todayFr();
         if (!p) return '';
-        const f = p.gender === 'female';
-        if (k === 'ne') return f ? 'née' : 'né';
-        if (k === 'il') return f ? 'elle' : 'il';
+        // ✍️ accordé avec la fiche (app-accord.js) ; une fiche ni homme ni femme suit le réglage « Accord des mots » (au départ : « né », « il », comme avant)
+        const acc = root.LCNDA_ACCORD?.accord, f = p.gender === 'female';
+        if (k === 'ne') return acc ? acc(p, 'né(e)', {before: 'né'}) : (f ? 'née' : 'né');
+        if (k === 'il') return acc ? acc(p, {m: 'il', f: 'elle'}, {before: 'il'}) : (f ? 'elle' : 'il');
         if (k === 'name') return p.name || [p.first, String(p.last || '').toUpperCase()].filter(Boolean).join(' ');
         if (k === 'years') return p.by || p.dy ? `${p.by || '?'} – ${p.dy || ''}`.replace(/ – $/, '') : '';
         if (k === 'age') return Number.isFinite(Number(p.age)) && p.age !== null && p.age !== '' ? `${p.age} ans` : '';
@@ -103,11 +104,11 @@
 
     /* ── des modèles qui demandent la personne et se remplissent tout seuls ── */
     const F = fieldHtml, P_ = (t, st = 'normal', css = '') => `<p data-st="${st}"${css ? ` style="${css}"` : ''}>${t || '<br>'}</p>`;
-    const idCardHtml = () => [P_(`${F('name')}`, 'h2'), P_(`${F('ne')} le ${F('birth')} à ${F('birth_place')}`), P_(`Fils ou fille de ${F('father')} et de ${F('mother')}`), P_(`Métier : ${F('occupation')}`), P_(`Marié(e) le ${F('marriage')} à ${F('marriage_place')} avec ${F('spouse')}`), P_(`Décès : le ${F('death')} à ${F('death_place')} (${F('age')})`)].join('');
+    const idCardHtml = () => [P_(`${F('name')}`, 'h2'), P_(`${F('ne')} le ${F('birth')} à ${F('birth_place')}`), P_(`Enfant de ${F('father')} et de ${F('mother')}`), P_(`Métier : ${F('occupation')}`), P_(`Mariage le ${F('marriage')} à ${F('marriage_place')} avec ${F('spouse')}`), P_(`Décès : le ${F('death')} à ${F('death_place')} (${F('age')})`)].join('');
     const MODELS = [
         {key: 'f_acte', icon: '📜', name: 'Demande d’acte (remplie avec une fiche)', hint: 'naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits', person: true, ask: 'La demande d’acte pour qui ?',
             body: () => [P_('<span class="wp-ph">Ton prénom et ton nom</span><br><span class="wp-ph">Ton adresse</span>'), P_(`À <span class="wp-ph">Ville</span>, le ${F('today')}`, 'normal', 'text-align:right'), P_(`Mairie de ${F('birth_place')}<br>Service de l’état civil`), P_('<b>Objet : demande de copie intégrale d’acte</b>'),
-                P_('Madame, Monsieur,'), P_(`Dans le cadre de recherches généalogiques, je vous serais reconnaissant(e) de bien vouloir m’adresser une copie intégrale de l’acte de naissance de ${F('name')}, ${F('ne')} le ${F('birth')} à ${F('birth_place')}, enfant de ${F('father')} et de ${F('mother')}.`),
+                P_('Madame, Monsieur,'), P_(`Dans le cadre de recherches généalogiques, je vous remercie par avance de bien vouloir m’adresser une copie intégrale de l’acte de naissance de ${F('name')}, ${F('ne')} le ${F('birth')} à ${F('birth_place')}, enfant de ${F('father')} et de ${F('mother')}.`),
                 P_('Je joins une enveloppe timbrée à mon adresse pour la réponse.'), P_('Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.'), P_('<span class="wp-ph">Signature</span>', 'normal', 'text-align:right')].join('')},
         {key: 'f_id', icon: '🪪', name: 'Fiche d’identité d’un ancêtre (remplie)', hint: 'nom, naissance, parents, métier, mariage, décès', person: true, ask: 'La fiche de qui ?', body: () => P_('Fiche d’identité', 'title') + idCardHtml() + P_('Ce que je sais d’autre', 'h2') + P_('')},
         {key: 'f_avis', icon: '📣', name: 'Avis de recherche (lettre aux cousins, remplie)', hint: 'je cherche des renseignements sur cette personne', person: true, ask: 'Tu cherches des renseignements sur qui ?',

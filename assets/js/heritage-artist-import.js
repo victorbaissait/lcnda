@@ -96,9 +96,9 @@
                         else if (src.value !== 'csv' && cur.matches('.ar-csv')) { const i = Object.assign(document.createElement('input'), {placeholder: 'Nom, adresse, ISBN…'}); i.dataset.iq = ''; cur.replaceWith(i); }
                         dg.querySelector('[data-go]').textContent = src.value === 'csv' ? 'Lire le tableau' : src.value === 'file' ? '📁 Choisir le fichier…' : 'Chercher'; const iqq = dg.querySelector('[data-iq]'); if (iqq) iqq.hidden = src.value === 'file'; };
                     src.addEventListener('change', () => { res.innerHTML = ''; res._cands = []; setHelp(); }); setHelp();
-                    dg.querySelector('[data-go]').addEventListener('click', async () => { const val = (dg.querySelector('[data-iq]') || dg.querySelector('.ar-csv')).value.trim(); res.innerHTML = '<p class="muted">Recherche…</p>';
+                    dg.querySelector('[data-go]').addEventListener('click', async () => { const val = (dg.querySelector('[data-iq]') || dg.querySelector('.ar-csv')).value.trim(); res.innerHTML = window.LCNDA_UI.spinner('Recherche…');
                         try { await SEARCH[src.value](val, res); } catch (er) { res.innerHTML = `<p class="error-text">${esc(er.message)}</p>`; } });
-                    res.addEventListener('click', async ev => { const b = ev.target.closest('[data-pick]'); if (!b) return; res.innerHTML = '<p class="muted">Chargement…</p>'; try { await res._pick(Number(b.dataset.pick), res); } catch (er) { res.innerHTML = `<p class="error-text">${esc(er.message)}</p>`; } });
+                    res.addEventListener('click', async ev => { const b = ev.target.closest('[data-pick]'); if (!b) return; res.innerHTML = window.LCNDA_UI.spinner('Chargement…'); try { await res._pick(Number(b.dataset.pick), res); } catch (er) { res.innerHTML = `<p class="error-text">${esc(er.message)}</p>`; } });
                     res.addEventListener('change', ev => { if (ev.target.matches('[data-all]')) res.querySelectorAll('[data-cand]').forEach(c => { c.checked = ev.target.checked; }); });
                 },
                 onSubmit: async f => {

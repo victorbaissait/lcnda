@@ -176,6 +176,7 @@ Ces trois-là rendent du **HTML** (texte échappé) :
 
 ```js
 box.innerHTML = UI.spinner('Chargement des médias…');     // un seul rond qui tourne + texte
+msg.innerHTML = UI.spinner('Lecture de ta généalogie…', {inline: true});   // dans une ligne de texte (à côté d’un bouton)
 box.innerHTML = UI.skeleton(4);                          // lignes grises pour une liste
 box.insertAdjacentHTML('afterbegin', UI.notice('warn', 'Cette photo est petite : floue à l’impression.'));
 // sortes : 'info' (bleu ℹ️), 'warn' (jaune ⚠️), 'error' (rouge ⛔), 'ok' (vert ✓)
@@ -183,6 +184,8 @@ box.insertAdjacentHTML('afterbegin', UI.notice('warn', 'Cette photo est petite :
 
 Déjà au même aspect : `.loading-block` (le rond qui tourne s’ajoute), `.archive-visit-notice` (info), `.goose-notice`, `.import-fusion-warning`, `.ly-master-banner`, `.issue.warning` (attention), `.h-am-banner` (info).
 Pour un succès après un clic, garder `toast()` ; les messages ci-dessus sont ceux qui restent dans la page.
+
+Jamais de « Chargement… » écrit seul (`<p class="muted">Chargement…</p>`) ni de rond fait main (`<span class="ui-spinner"></span>`, `.loading-mark`) : `UI.spinner(phrase)` partout (dans `app.js`, chargé avant `app-ui.js` : `waitHtml(phrase)`). Seuls restent à part le rond du menu de choix (`.pk-spin`), le grand rond du mode simple (`.ms-spin`), les boutons occupés (`.is-busy`) et les `<option>` d’un menu (pas de dessin possible). Test : `tests/test-harmo-chargement.js`.
 
 ### H7 — Messages après une action : `toast()` et « ↶ Annuler » au lieu de « Es-tu sûr ? »
 
@@ -757,11 +760,11 @@ S.matrix(wb, calc, feuille, plage) ; S.rowsToCells(lignes) ; S.compact(wb) (pour
 
 **L'éditeur** : `ext.openWorkbook({id})` ou `ext.openWorkbook({data, name, onSaved, onClose})` (aussi `ext.openSheetEditor`). E1 (menus `data-xl-cmd`, réglables dans les raccourcis : `heritage-editorkeys.js`, outil `sheet`), barre d'outils et panneau rangés par ⚙️ Personnaliser (`data-tbg="xl-tools"`, `"xl-panel"`) avec « 💾 Réglages enregistrés », grille virtuelle (calques collants pour les volets figés), H10 pour filtrer, K13 import / impression, E3 export, H7 pour défaire. Modèles : `ext.sheetTemplates`. Réglages : `localStorage['genealogie-tableur']`. Test : `tests/test-tableur-moteur.js`, `tests/test-tableur.js`.
 
+**Règles communes des éditeurs** (test : `tests/test-tableur-harmo.js`) : K18 `UI.editorStatus` en bas (à gauche `[data-xl-status]` = « Feuille ! case » + somme, moyenne… choisies par un clic ou dans les réglages ; au milieu l’aide de la grille ou de la frappe ; à droite le zoom commun) — le zoom est un `zoom` CSS sur `.xl-vpwrap` (`ed.setZoom(k)`, `ed.zoomFit()` = les colonnes remplies dans la largeur, retenu dans `prefs.zoom`) ; tout calcul souris → grille divise par `ed.zq()` (pixels de l’écran par pixel de la grille). L’aide pendant la frappe (`.xl-help`) se pose sur le haut de la grille sans la faire bouger, cachée quand il n’y a rien à dire. K19 : colonne `.xl-rail` (`UI.editorRail`, commandes `data-xl-cmd`, l’actif en bleu : ⚲ Filtrer, = Formules, ◫ Panneau) ; « 💾 Enregistrer ▾ » (`UI.saveMenu` : copie, modèle, export). E5 : « Police » → `UI.openFontPicker` (`style.font`, `style.fs` 6–72 px, gardés en XLSX). K2 : « ⚙️ Réglages du tableur » par `UI.autoSaveDialog` (interrupteurs K16, « Fermer » seul, ↺).
+
 **Vague 2 — l'éditeur commun des données** (`heritage-tableur-cibles.js`, maquette écrans G et I) :
 
 ```js
-**Règles communes des éditeurs** (test : `tests/test-tableur-harmo.js`) : K18 `UI.editorStatus` en bas (à gauche `[data-xl-status]` = « Feuille ! case » + somme, moyenne… choisies par un clic ou dans les réglages ; au milieu l’aide de la grille ou de la frappe ; à droite le zoom commun) — le zoom est un `zoom` CSS sur `.xl-vpwrap` (`ed.setZoom(k)`, `ed.zoomFit()` = les colonnes remplies dans la largeur, retenu dans `prefs.zoom`) ; tout calcul souris → grille divise par `ed.zq()` (pixels de l’écran par pixel de la grille). L’aide pendant la frappe (`.xl-help`) se pose sur le haut de la grille sans la faire bouger, cachée quand il n’y a rien à dire. K19 : colonne `.xl-rail` (`UI.editorRail`, commandes `data-xl-cmd`, l’actif en bleu : ⚲ Filtrer, = Formules, ◫ Panneau) ; « 💾 Enregistrer ▾ » (`UI.saveMenu` : copie, modèle, export). E5 : « Police » → `UI.openFontPicker` (`style.font`, `style.fs` 6–72 px, gardés en XLSX). K2 : « ⚙️ Réglages du tableur » par `UI.autoSaveDialog` (interrupteurs K16, « Fermer » seul, ↺).
-
 ext.sheetTargets.diagram = {icon, label, hint, createLabel, columns(opts) → [{k, label, type: 'text'|'number'|'color'|'select', many, max, optional, choices, alias}],
     build(objets, opts, tableau, statut) → données, fromData(données) → {sheets: [{name, header, rows, widths, hidden, refs, merges, fills, typed}]},
     back(éditeur, données) → données, fromRange(éditeur, plage), preview(données) → HTML, create(données, {name, editor})};   // diagram, graph, board, recueil, keynote
@@ -1138,3 +1141,10 @@ Maquette : `docs/design/onglets-documents-catalogue.html`. Deux modules (`docume
 - **🎨 Catalogue raisonné** = les fiches du moteur des Artistes (`ART.Store`, `ART.readHtml`) ; artiste par le menu de choix ; « Classer : » albums (pistes, faces), chansons (`songsOf` : morceau ← enregistrement ← piste, sinon même titre), label, genre, période (périodes de l’artiste, sinon décennies), technique, lieu de conservation, n°, année, A → Z, sorte. Réglages par artiste : `genealogie-catalogue-tab` ({pid, by, open, periods}). « ✎ Modifier » ouvre le catalogue complet (`ART.open`). Adresse `#catalogue/45/301`.
 - Test : `tests/test-onglets-documents-catalogue.js` (`ONGLETS_SHOTS=dossier` pour les captures).
 - Pas fait : champs d’archives en plus sur un média (support, dimensions, état, fonds › série › article), message « Tu as beaucoup de documents ? » dans Listes → Médias, usage « Archives ou musée » au premier lancement (pas d’écran de premier lancement), classement « 📁 Mes dossiers » dans le catalogue.
+
+## ✍️ Accord des mots avec la personne (`app-accord.js`)
+
+- **Une seule aide** : `LCNDA_APP.accord(qui, mot, {before, x})` (= `LCNDA_ACCORD.accord`, aussi pour Node). `qui` = une fiche (personne : `.gender` ; animal : `.sex` `'M'`/`'F'`) ou directement le sexe. `mot` = le texte d’avant avec « (e) » (« Né(e) le », « non crédité(e) », « Mort(e) pour la France ») ou `{m: 'il', f: 'elle'}`. `before` = ce qu’on écrivait avant pour les fiches ni homme ni femme si ce n’était pas « (e) » ; `x` = la tournure sans accord (« Naissance le », « Décès »).
+- Homme / mâle → masculin, femme / femelle → féminin ; les autres suivent **Réglages → Thème et couleurs → « ✍️ Accord des mots »** (K2) : `localStorage['genealogie-accord'] = {other, unknown}` avec `avant` (départ : rien ne change), `f`, `m`, `point` (« né·e »), `paren` (« né(e) »), `neutre` (`x`, sinon « né(e) »). Clé dans `SITE_DEFAULT_KEYS`, `site_defaults_allowed_keys`, `LAYOUT_KEYS` (💾 Réglages enregistrés).
+- `lifeText(status, gender)` passe par `LCNDA_ACCORD.life` (« Vivant », « Décédée », « En vie », « Décès »…).
+- **Jamais** « né(e) », « décédé(e) »… écrits en dur quand la fiche est connue, ni `${p.gender === 'female' ? 'e' : ''}` fait à la main ; quand le texte parle de personnes en général (FAQ, aides, en-têtes de colonnes, critères), une tournure sans accord (« Lieu de naissance », « Naissance entre », « personne décédée »). Test : `tests/test-accord-genre.js`.

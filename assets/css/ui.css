@@ -195,6 +195,8 @@ button.ui-row-thumb { cursor: pointer; }
 @keyframes ui-spin { to { transform: rotate(360deg); } }
 .ui-spin { width: 16px; height: 16px; box-sizing: border-box; border: 3px solid #cdd6e6; border-top-color: var(--ui-blue); border-radius: 50%; display: inline-block; vertical-align: -3px; margin-right: 8px; animation: ui-spin .8s linear infinite; flex: none; }
 .ui-spinner { display: flex; align-items: center; justify-content: center; gap: 0; padding: 14px; font-size: 13.5px; color: var(--ui-muted); }
+.ui-spinner.is-inline { display: inline-flex; justify-content: flex-start; padding: 0; font-size: inherit; vertical-align: middle; }
+.loading-screen > .ui-spinner { font-size: 15px; font-weight: 700; }
 .ui-skeleton { padding: 4px 0; }
 .ui-skel { height: 12px; margin: 8px 0; background: linear-gradient(90deg, #eceff3, #f7f8fa, #eceff3); background-size: 200% 100%; animation: ui-skel 1.4s ease-in-out infinite; }
 @keyframes ui-skel { from { background-position: 100% 0; } to { background-position: -100% 0; } }

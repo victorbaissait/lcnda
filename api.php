@@ -144,6 +144,17 @@ try {
         restore_package_upload($importFile);
     }
 
+    // Généalogie neuve encore vide (écran d'installation) : les lectures de fond répondent « rien » au lieu d'une erreur 500
+    if (!$isWrite && !is_file(DB_PATH)) {
+        $emptyRead = match ($action) {
+            'my_lists' => ['lists' => [], 'event_types' => [], 'labels' => [], 'columns' => function_exists('my_list_columns') ? my_list_columns() : [], 'sources' => function_exists('my_list_source_labels') ? my_list_source_labels() : []],
+            'diagrams' => ['diagrams' => []],
+            'scan_inbox_status' => ['dir' => '', 'enabled' => false, 'move_imported' => true, 'reachable' => false, 'pending' => 0, 'recent' => [], 'can_convert' => false, 'total' => 0],
+            'parish_map' => ['by_place' => [], 'by_insee' => []],
+            default => null,
+        };
+        if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
+    }
     $pdo = db();
 
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
@@ -9512,7 +9523,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
     try {
         assert_write_target_unlocked($pdo,$action,$data); // fiche verrouillée : rien de ce qui la touche ne change
         assert_person_name_lengths(array_intersect_key($data,['first_name'=>1,'middle_name'=>1,'last_name'=>1])); // tous les noms et prénoms (fiche, variante, recensement, relevé…) : 200 caractères au plus
-        assert_text_sizes($action,$data); // événements et notes : des tailles raisonnables (un collage de plusieurs Mo est refusé)
+        assert_text_sizes($action,$data); // événements, notes, étiquettes, lieux, sources, médias : des tailles raisonnables (un collage de plusieurs Mo est refusé)
         $result = match ($action) {
             'save_person' => save_person($pdo,$data),
             'set_person_lock' => set_person_lock($pdo,$data),
@@ -12175,17 +12186,23 @@ function assert_text_sizes(string $action, array $data): void
 {
     $fmt = static fn(int $n) => number_format($n, 0, ',', ' ');
     $limits = match ($action) {
-        'add_event', 'save_event' => ['short' => 500, 'long' => 20000, 'shortKeys' => ['title', 'name', 'label', 'date_text', 'date_alternative'], 'what' => 'de l’événement'],
+        'add_event', 'save_event' => ['short' => 500, 'long' => 20000, 'shortKeys' => ['title', 'name', 'label', 'date_text', 'date_alternative', 'place_name'], 'what' => 'de l’événement'],
         'add_note', 'save_note', 'save_research_note' => ['short' => 500, 'long' => 200000, 'shortKeys' => ['title'], 'what' => 'de la note'],
+        // seulement les cases nommées (« keys » : case => taille au plus) ; les autres ne sont pas touchées
+        'save_label' => ['keys' => ['name' => 100, 'description' => 2000], 'what' => 'de l’étiquette'],
+        'picker_place_adopt' => ['keys' => ['name' => 200, 'country' => 100], 'what' => 'du lieu'],
+        'save_source', 'add_web_source' => ['keys' => ['title' => 500, 'author' => 500, 'agency' => 500, 'website' => 500, 'publication' => 500, 'accessed_at' => 200, 'url' => 2000, 'text' => 200000, 'note' => 20000, 'quality_note' => 20000], 'what' => 'de la source'],
+        'save_media' => ['keys' => ['title' => 500, 'description' => 20000, 'date_text' => 500, 'document_reference' => 500, 'document_title' => 500, 'document_url' => 2000, 'document_pages' => 200, 'transcription' => 200000], 'what' => 'du média'],
         default => null,
     };
     if (!$limits) return;
-    $names = ['title' => 'Le titre', 'body' => 'Le texte', 'description' => 'La description', 'notes' => 'La note', 'date_text' => 'La date', 'name' => 'Le nom', 'label' => 'Le nom'];
+    $names = ['title' => 'Le titre', 'body' => 'Le texte', 'description' => 'La description', 'notes' => 'La note', 'note' => 'La note', 'date_text' => 'La date', 'name' => 'Le nom', 'label' => 'Le nom', 'place_name' => 'Le lieu', 'country' => 'Le pays', 'author' => 'L’auteur', 'url' => 'L’adresse', 'text' => 'Le texte', 'transcription' => 'La transcription', 'document_reference' => 'La cote', 'document_title' => 'Le titre du document'];
     foreach ($data as $key => $value) {
         if (!is_string($key) || !is_string($value) || $key === 'csrf') continue;
-        $max = in_array($key, $limits['shortKeys'], true) ? $limits['short'] : $limits['long'];
+        if (isset($limits['keys'])) { if (!isset($limits['keys'][$key])) continue; $max = $limits['keys'][$key]; }
+        else $max = in_array($key, $limits['shortKeys'], true) ? $limits['short'] : $limits['long'];
         $len = mb_strlen($value);
-        if ($len > $max) throw new RuntimeException(($names[$key] ?? 'Un des textes') . ' ' . $limits['what'] . ' contient trop de texte (' . $fmt($len) . ' caractères) : ' . $fmt($max) . ' au plus. Coupe-le, ou range le document complet en média.');
+        if ($len > $max) throw new RuntimeException(($names[$key] ?? 'Un des textes') . ' ' . $limits['what'] . ' contient trop de texte (' . $fmt($len) . ' caractères) : ' . $fmt($max) . ' au plus. ' . ($max >= 20000 ? 'Coupe-le, ou range le document complet en média.' : 'Raccourcis-le.'));
     }
 }
 

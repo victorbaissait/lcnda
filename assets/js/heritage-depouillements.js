@@ -27,7 +27,7 @@
     const full = m => m ? `media/${encodeURIComponent(m.filename)}` : '';
     const PAGE_STATUS = {checked: ['Dépouillée', '#2f7d4f'], found: ['Infos trouvées · pas fini', '#b7791f'], todo: ['À faire', '#8a8a8a'], review: ['À revoir', '#c05621'], incomplete: ['Incomplète', '#c53030'], empty: ['Sans information', '#718096']};
     const CONTENT = {acts: 'Actes / informations', empty: 'Page sans information', cover: 'Couverture / index', review: 'À revoir', other: 'Autre'};
-    const COLS = [['household_key', 'Foyer', 5], ['address', 'Adresse', 12], ['last_name', 'Nom', 11], ['first_name', 'Prénom', 11], ['age_text', 'Âge', 5], ['household_position', 'Place dans le foyer', 10], ['occupation', 'Profession', 11], ['birth_place', 'Né(e) à', 10], ['nationality', 'Nationalité', 8], ['notes', 'Notes', 12]];
+    const COLS = [['household_key', 'Foyer', 5], ['address', 'Adresse', 12], ['last_name', 'Nom', 11], ['first_name', 'Prénom', 11], ['age_text', 'Âge', 5], ['household_position', 'Place dans le foyer', 10], ['occupation', 'Profession', 11], ['birth_place', 'Lieu de naissance', 10], ['nationality', 'Nationalité', 8], ['notes', 'Notes', 12]];
 
     /* ─────────── Ouvrir un dépouillement depuis n'importe où (Recherche, battue…) ─────────── */
     ext.openDepouillement = (id, page = '') => {
@@ -340,7 +340,7 @@
         // 📑 table décennale : une ligne par acte (nom, prénoms, date, sorte d'acte), sans foyers ni adresses
         const isTable = r.template_key === 'table' || r.record_type === 'table_decennale';
         const COLS2 = isTable ? [['last_name', 'Nom', 20], ['first_name', 'Prénoms', 22], ['extra_info', 'Date', 16], ['personal_status', 'Acte', 11], ['notes', 'Notes', 19]]
-            : [['last_name', 'Nom', 13], ['first_name', 'Prénom', 13], ['age_text', 'Âge', 5], ['household_position', 'Place dans le foyer', 12], ['occupation', 'Profession', 13], ['birth_place', 'Né(e) à', 12], ['nationality', 'Nationalité', 9], ['notes', 'Notes', 14]];
+            : [['last_name', 'Nom', 13], ['first_name', 'Prénom', 13], ['age_text', 'Âge', 5], ['household_position', 'Place dans le foyer', 12], ['occupation', 'Profession', 13], ['birth_place', 'Lieu de naissance', 12], ['nationality', 'Nationalité', 9], ['notes', 'Notes', 14]];
         const streets = () => [...new Set((r.people || []).map(x => parseAddr(x.address).street).filter(Boolean))];
         const render = focus => {
             // garder la case où l'on écrit (le tableau se redessine quand un foyer ou une adresse change)

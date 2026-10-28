@@ -202,7 +202,7 @@
         return {html: () => `<div class="h-dg-app n6-app"><h4>${esc(title)}</h4><p class="muted">${esc(intro)}</p>${person && APP()?.pickerField ? `<span class="pk-lab">La personne</span>${APP().pickerField({name: 'n6_root', kind: 'person', animals: false, value: Number(APP().state?.bootstrap?.startPersonId) || null})}` : ''}${fields}
                 <button type="button" class="button small" data-n6-go>Prendre dans mon arbre</button><p class="muted" data-n6-msg aria-live="polite"></p></div>`,
             bind: (pane, io) => { const btn = pane.querySelector('[data-n6-go]'), msg = pane.querySelector('[data-n6-msg]'); if (!btn) return;
-                btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.textContent = 'Lecture de ta généalogie…';
+                btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
                     try { const tr = await tree6(), r = run(pane, tr); if (!r.rows.length) throw new Error('Rien trouvé dans l’arbre pour ce choix.');
                         const s = io.spec(); s.rows = r.rows.slice(0, 400); s.o = {...s.o, ...r.o}; io.apply(s); if (msg) msg.textContent = ''; APP().toast?.(`${r.rows.length > 400 ? 400 : r.rows.length} lignes prises dans l’arbre.`); }
                     catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } }); }};

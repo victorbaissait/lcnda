@@ -274,7 +274,7 @@
         if(!open||panel.dataset.loaded)return;
         const commune=battueCommuneByInsee(code);
         const names=[commune?.name,...(commune?.aliases||[]).map(alias=>alias.name)].filter(Boolean).filter((name,index,list)=>list.indexOf(name)===index);
-        panel.innerHTML='<small class="cell-muted">Recherche des services d\'archives…</small>';
+        panel.innerHTML=window.LCNDA_UI.spinner('Recherche des services d\'archives…');
         try{
             const result=await api('online_registers',{code,name:commune?.name||''});
             panel.dataset.loaded='1';

@@ -575,7 +575,7 @@
     const SCOPE = (def = '') => `<label>Personnes comptées${sel('scope', [['', 'Toute ma base'], ['anc', 'Les ancêtres de la personne de départ'], ['desc', 'Les descendants de la personne de départ']], def)}</label>`;
     function bindApp(pane, run) {
         const btn = pane.querySelector('[data-dfa-go]'), msg = pane.querySelector('[data-dfa-msg]'); if (!btn) return;
-        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = '<span class="ui-spinner" aria-hidden="true"></span> Lecture de ta généalogie…';
+        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); A().toast?.(t || 'Données prises dans ta base.'); if (msg?.isConnected) msg.textContent = ''; } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
     }
     const titleIf = (s, sample, t) => { s.o = s.o || {}; if (!s.o.title || s.o.title === sample.o?.title) s.o.title = t; };
@@ -731,7 +731,7 @@
     /* ═════════ Un clic : la fiche, ou la liste des personnes concernées ═════════ */
     async function peopleDialog(ids, title, inEditor) {
         const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal choose-list-dialog dfa-people';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">DIAGRAMME</span><h2>${esc(title || 'Personnes')}</h2><p>${esc(plural(ids.length, 'personne'))}${inEditor ? ' — ferme l’éditeur pour ouvrir une fiche' : ' — un clic ouvre la fiche'}</p></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div><div class="choose-list" data-dfa-list><p class="muted"><span class="ui-spinner" aria-hidden="true"></span> Chargement…</p></div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">DIAGRAMME</span><h2>${esc(title || 'Personnes')}</h2><p>${esc(plural(ids.length, 'personne'))}${inEditor ? ' — ferme l’éditeur pour ouvrir une fiche' : ' — un clic ouvre la fiche'}</p></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div><div class="choose-list" data-dfa-list>${window.LCNDA_UI.spinner('Chargement des personnes…')}</div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => dlg.remove());
         dlg.addEventListener('click', e => {

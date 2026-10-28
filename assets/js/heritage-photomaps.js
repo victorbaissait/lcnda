@@ -545,7 +545,7 @@
             files.forEach(f => { if (cur.length && (cur.length >= 8 || size + f.size > 60 * 1024 * 1024)) { batches.push(cur); cur = []; size = 0; } cur.push(f); size += f.size; });
             if (cur.length) batches.push(cur);
             for (const batch of batches) {
-                prog.innerHTML = `<div class="ui-spinner" role="status"><span class="ui-spin" aria-hidden="true"></span><span>Import : ${done} / ${files.length}… (le GPS et la date de prise de vue sont lus)</span></div>`;
+                prog.innerHTML = UI().spinner(`Import : ${done} / ${files.length}… (le GPS et la date de prise de vue sont lus)`);
                 const fd = new FormData(); batch.forEach(f => fd.append('files[]', f, f.name)); fd.append('map_id', String(mp.id)); fd.append('csrf', S().csrf || '');
                 if (drop) { fd.append('drop_lat', String(drop.lat)); fd.append('drop_lon', String(drop.lon)); }
                 try {
@@ -757,7 +757,7 @@
     }
     async function renderCarteSidebar(content) {
         const box = document.createElement('div'); box.className = 'pm-sidebar';
-        box.innerHTML = '<div class="section-label">📸 Cartes de photos</div><div class="side-menu" data-pms-list><p class="muted">Chargement…</p></div>' + (kiosk() ? '' : '<div class="page-actions compact"><button type="button" class="button small" data-pms-new>＋ Nouvelle carte</button></div>');
+        box.innerHTML = '<div class="section-label">📸 Cartes de photos</div><div class="side-menu" data-pms-list>' + window.LCNDA_UI.spinner('Chargement des cartes…') + '</div>' + (kiosk() ? '' : '<div class="page-actions compact"><button type="button" class="button small" data-pms-new>＋ Nouvelle carte</button></div>');
         content.appendChild(box);
         let maps = [];
         try { maps = (await api('photomaps')).maps || []; } catch (_) {}

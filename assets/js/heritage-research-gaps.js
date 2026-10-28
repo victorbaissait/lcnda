@@ -43,7 +43,7 @@
 
     async function render(token) {
         const v = st(), ws = document.getElementById('workspace');
-        ws.innerHTML = '<section class="page h-gaps"><p class="muted">Je regarde ce qui manque à la lignée…</p></section>';
+        ws.innerHTML = '<section class="page h-gaps">'+window.LCNDA_UI.spinner('Je regarde ce qui manque à la lignée…')+'</section>';
         let d;
         try { d = await api('research_gaps', {gen: v.gen}); } catch (e) { ws.innerHTML = `<section class="page"><p class="error">${esc(e.message)}</p></section>`; return; }
         if (token !== S().workspaceToken || S().module !== 'recherche') return;

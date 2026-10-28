@@ -712,7 +712,6 @@
     }
     function listeHtml(people, n = 7) {
         const rows = (people || []).slice(0, n);
-        const st = s => ({deceased: 'Décédé(e)', living: 'Vivant(e)'})[s] || 'À vérifier';
         return `<section class="page lcd-pv-list"><div class="lcd-pv-count">${esc(A().plural ? A().plural((people || []).length, 'personne') : (people || []).length + ' personnes')}</div><div class="data-table-wrap"><table class="data-table"><thead><tr><th><button>Nom</button></th><th><button>Naissance</button></th><th><button>Décès</button></th><th><button>Groupe</button></th></tr></thead><tbody>${rows.map((p, i) => `<tr${i === 3 ? ' class="is-selected"' : ''}><td><button class="table-link" data-open-person="${esc(p.id)}">${pName(p)}</button></td><td>${esc(p.birth_date || '—')}</td><td>${esc(p.death_date || '—')}</td><td>${esc(p.surname_group || p.last_name || '—')}</td></tr>`).join('')}</tbody></table></div></section>`;
     }
     function sideHtml(people, curId) {

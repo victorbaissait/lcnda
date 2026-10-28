@@ -81,7 +81,7 @@
     ext.diagramFollowId = d => followId(d?.spec || d);
 
     /* ─── Les cases qui se remplissent seules : <div data-dg-embed="12"> ─── */
-    ext.diagramEmbedHtml = (id, {tools = true} = {}) => `<div class="h-dg-embed" data-dg-embed="${Number(id) || 0}"${tools ? '' : ' data-dg-notools'}><p class="muted">Diagramme…</p></div>`;
+    ext.diagramEmbedHtml = (id, {tools = true} = {}) => `<div class="h-dg-embed" data-dg-embed="${Number(id) || 0}"${tools ? '' : ' data-dg-notools'}>${window.LCNDA_UI.spinner('Chargement du diagramme…')}</div>`;
     async function fillEmbed(box) {
         box.dataset.dgDone = '1';
         const d = await get(box.dataset.dgEmbed).catch(() => null);
@@ -457,7 +457,7 @@
                 } else {
                     spec.rows = [...(spec.rows || []), ...(p.birth ? [{date: y(p.birth), label: `Naissance de ${p.name}`}] : []), ...(p.death ? [{date: y(p.death), label: `Décès de ${p.name}`}] : [])];
                 }
-                later(); toast(`${p.name} ajouté${p.gender === 'female' ? 'e' : ''}.`); });
+                later(); toast(`${p.name} ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'ajouté(e)', {before: 'ajouté'})}.`); });
         }
         /* rattacher à des personnes, enquêtes, parties d'enquête, projets de l'Atelier */
         const lchip = l => `<span class="h-pr-lchip" data-type="${esc(l.type)}" data-id="${Number(l.id)}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)} <button type="button" data-dg-unlink aria-label="Retirer">×</button></span>`;

@@ -292,7 +292,7 @@
             if (isType(e, ['BURI', 'CREM', 'FUNE'], ['inhumation', 'incineration', 'obseques', 'sepulture'])) {
                 if (!when && !where) return;
                 const kind = isType(e, ['CREM'], ['incineration']) ? 'Crémation' : isType(e, ['FUNE'], ['obseques']) ? 'Obsèques' : 'Sépulture';
-                const txt = kind === 'Sépulture' ? clean(`${where ? `${first} repose ${where}` : `${first} est inhumé${p.gender === 'female' ? 'e' : ''}`}${when ? ` (inhumation ${when})` : ''}.`) : clean(`${kind} ${when} ${where}.`), m = ph();
+                const txt = kind === 'Sépulture' ? clean(`${where ? `${first} repose ${where}` : `${first} est ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'inhumé(e)', {before: 'inhumé'})}`}${when ? ` (inhumation ${when})` : ''}.`) : clean(`${kind} ${when} ${where}.`), m = ph();
                 add(key || 9999, 91, m ? photoSlide(m, txt, notes) : titleSlide(kind, txt, notes)); return;
             }
             if (isType(e, ['OCCU'], ['profession', 'metier'])) {

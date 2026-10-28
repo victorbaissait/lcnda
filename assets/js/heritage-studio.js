@@ -50,6 +50,7 @@
         'genealogie-village-maps', 'genealogie-transcription-layout',
         'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', 'genealogie-topbar-buttons', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
         'genealogie-portraits', 'genealogie-left-column', // K7 portraits, K15 colonne de gauche (app-portraits.js, app-colonne.js)
+        'genealogie-accord', // ✍️ Accord des mots (app-accord.js)
         'genealogie-designs' // 🎨 Designs au choix A1–A8 (app-designs.js)
     ];
     const LAYOUT_PREFIXES = ['genealogie-tile-items-'];
@@ -77,6 +78,7 @@
         if (Object.keys(settings).some(k => /colors/.test(k))) parts.push('couleurs');
         if (settings['genealogie-portraits']) parts.push('portraits');
         if (settings['genealogie-left-column']) parts.push('colonne de gauche');
+        if (settings['genealogie-accord']) parts.push('accord des mots');
         if (settings['genealogie-designs']) parts.push('designs au choix');
         return parts.join(' · ') || 'réglages de départ';
     };
@@ -125,6 +127,7 @@
         'genealogie-designs': v => { const D = window.LCNDA_DESIGNS; if (D?.portable) return D.portable(v) || null; if (!D?.clean) return v; const g = D.clean(JSON.parse(v)); delete g.a5?.m; delete g.a5?.f; return JSON.stringify(g); }, // un ancien réglage (A7, A10…) revient à neuf
         'genealogie-portraits': v => window.LCNDA_PORTRAITS?.clean ? reparse(window.LCNDA_PORTRAITS.clean, v) : v,
         'genealogie-left-column': v => window.LCNDA_COLUMN?.clean ? reparse(window.LCNDA_COLUMN.clean, v) : v,
+        'genealogie-accord': v => window.LCNDA_ACCORD?.clean ? reparse(window.LCNDA_ACCORD.clean, v) : v,
         'genealogie-accessibilite': v => ext.access?.clean ? reparse(ext.access.clean, v) : v,
         'genealogie-mode-simple': v => ext.modeSimple?.portable ? reparse(ext.modeSimple.portable, v) : null,
     };
@@ -3529,13 +3532,13 @@
             if (!P()) return toast('La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques).', 'error');
             if (lockedDeep(P())) return toast('La photo est verrouillée (🔒 dans Calques).', 'error');
             const pn = panel('h-rt-crease', `<header><b>🔍 Plis et rayures</b><small>Les lignes fines, claires ou sombres, sont repérées en rouge${selId ? ' (dans la sélection)' : ''}. Vérifie, puis « Réparer ces lignes ».</small></header>
-                <p data-cr-count class="muted">Recherche…</p>
+                <p data-cr-count class="muted">${window.LCNDA_UI.spinner('Recherche des plis…', {inline: true})}</p>
                 <label data-help="Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge.">Sensibilité <input type="range" min="1" max="100" value="${Number(ls('genealogie-retouch-crease', 50))}" data-cr-sens data-unit="%"></label>
                 <label class="ui-toggle"><input type="checkbox" data-cr-grain checked><i></i><span>garder le grain autour</span></label>
                 <div class="h-rt-panelbtns"><button type="button" class="link-button" data-cr-hand>🪡 Plutôt à la main</button><span class="spacer"></span><button type="button" class="button small secondary" data-cr-cancel>Annuler</button><button type="button" class="button small" data-cr-ok disabled>✓ Réparer ces lignes</button></div>`);
             const count = pn.querySelector('[data-cr-count]'), ok = pn.querySelector('[data-cr-ok]');
             const run = async () => {
-                count.textContent = 'Recherche des plis…'; ok.disabled = true; await tick();
+                count.innerHTML = window.LCNDA_UI.spinner('Recherche des plis…', {inline: true}); ok.disabled = true; await tick();
                 const sens = Number(pn.querySelector('[data-cr-sens]').value), inside = selId ? rtMaskAlpha(masks.get(selId), pw, ph) : null, r = rtCreases(srcData, sens, inside);
                 if (!pn.isConnected) return;
                 creaseProp = {...r, canvas: r.lines ? rtMaskCanvas(r.mask, pw, ph, '#ff2020') : null}; draw();
