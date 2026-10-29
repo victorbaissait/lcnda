@@ -9,7 +9,7 @@ module.exports = async (t, {page}, assert) => {
             await T.save({kind: 'candle', person_id: paul.id, title: 'Pour Paul', body: 'On pense à toi', data: {from: 'Léa'}});
             await T.save({kind: 'share', person_id: paul.id, title: 'La branche Martin', open_at: '2099-01-01', data: {people: 12, locked: true}}); });
         let r = await list('tr_letters'); assert.ok(r.rows.some(x => /Pour tes 18 ans/.test(x) && /scellée/.test(x)), r.rows.join(' | ')); assert.doesNotMatch(r.text, /TEXTE SECRET/, 'jamais le contenu d’une lettre scellée');
-        await page.click('[data-trl-f="letters:ouvertes"]'); const open = await page.evaluate(() => [...document.querySelectorAll('.h-trl tbody tr')].map(x => x.innerText)); assert.ok(!open.some(x => /Pour tes 18 ans/.test(x)));
+        await page.click('.h-trl .ui-listbar-fbtn'); await page.check('[data-lb-f="state"][value="ouvertes"]'); await page.click('[data-lb-done]'); await page.waitForTimeout(150); const open = await page.evaluate(() => [...document.querySelectorAll('.h-trl tbody tr')].map(x => x.innerText)); assert.ok(!open.some(x => /Pour tes 18 ans/.test(x)));
         r = await list('tr_candles'); assert.ok(r.rows.some(x => /Paul MARTIN/.test(x) && /On pense à toi/.test(x) && /allumée/.test(x)), r.rows.join(' | '));
         r = await list('tr_shares'); assert.ok(r.rows.some(x => /12/.test(x) && /oui/.test(x) && /en cours/.test(x)), r.rows.join(' | '));
         r = await list('tr_stamps'); assert.ok(r.rows.length > 0, 'les lieux de l’arbre');
