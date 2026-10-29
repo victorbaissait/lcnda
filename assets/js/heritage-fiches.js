@@ -178,8 +178,8 @@
                 S().ficheId = Number(r.result?.id || r.id); A().setModule('fiches');
             }});
     }
-    const save = async (quiet = true) => {
-        try { await post('save_topic_sheet', {id: cur.id, title: cur.title, subtitle: cur.subtitle, icon: cur.icon, color: cur.color, blocks: cur.blocks}); if (!quiet) toast('Fiche enregistrée.'); }
+    const save = async (quiet = true, extra = {}) => {
+        try { await post('save_topic_sheet', {id: cur.id, title: cur.title, subtitle: cur.subtitle, icon: cur.icon, color: cur.color, blocks: cur.blocks, ...extra}); if (!quiet) toast('Fiche enregistrée.'); }
         catch (e) { toast(e.message, 'error'); }
     };
 
@@ -343,9 +343,12 @@
             body: `<div class="form-grid"><label class="span-2">Titre<input name="title" value="${esc(cur.title)}" required maxlength="200"></label><label>Icône<input name="icon" value="${esc(cur.icon || '📒')}" class="h-fi-iconin" readonly title="Choisir une icône"></label>
                 <label>Couleur<span class="h-fi-colrow"><input type="color" name="color" value="${esc(cur.color || '#0066cc')}"><label class="checkbox-line"><input type="checkbox" name="hascolor" ${cur.color ? 'checked' : ''}> utiliser</label></span></label>
                 <label class="span-2">Sous-titre<input name="subtitle" value="${esc(cur.subtitle || '')}" maxlength="600"></label></div>
+                ${ext.labelsPicker ? ext.labelsPicker('topic_sheet', cur.labels || []) : ''}
                 ${ext.mediaEditorHtml ? `<div class="h-fi-coverpick">${ext.mediaEditorHtml('topic_sheet', cur.id, (cur.media || []).filter(m => m.role === 'cover'), [['cover', '🖼️ Image de couverture (la vignette de la fiche dans la liste ; sinon la première image de la fiche)', 'image/*']])}</div>` : ''}`,
             onOpen: d => { d.querySelector('.h-fi-iconin').addEventListener('click', e => ext.pickEmoji?.(e.target)); }, // la zone des images est déjà branchée par openDialog
-            onSubmit: async form => { const f = Object.fromEntries(new FormData(form)); Object.assign(cur, {title: f.title.trim(), icon: f.icon || '📒', subtitle: f.subtitle || '', color: form.elements.hascolor.checked ? f.color : ''}); await save(); if (ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'topic_sheet', cur.id); refresh(); }});
+            onSubmit: async form => { const f = Object.fromEntries(new FormData(form)); Object.assign(cur, {title: f.title.trim(), icon: f.icon || '📒', subtitle: f.subtitle || '', color: form.elements.hascolor.checked ? f.color : ''});
+                const lb = form.querySelector('[data-pending-labels="topic_sheet"]'), ids = lb ? (lb.dataset.ids || '').split(',').map(Number).filter(Boolean) : null; // 🏷️ les étiquettes de la fiche (Listes › Fiches thématiques : Filtrer › Étiquette)
+                await save(true, ids ? {pending_labels: ids} : {}); if (ids) cur.labels = ids.map(id => ({id})); if (ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'topic_sheet', cur.id); refresh(); }});
     }
 
     /* ─── Imprimer : une page propre (texte, images, personnes, dates, citations, liens ; les écrans et widgets en titre) ─── */
@@ -383,10 +386,11 @@
         let sort = UI?.sortOf ? UI.sortOf(KEY) : 'recent', view = UI?.viewOf ? UI.viewOf(KEY) : 'list';
         const draw = () => {
             const box = ws.querySelector('[data-fi-items]'); if (!box) return;
-            const words = fold(q).split(/\s+/).filter(Boolean), list0 = sheets.filter(x => words.every(w => fold(`${x.title} ${x.subtitle || ''}`).includes(w)));
+            const lab = bar?.state.filters.label, labId = lab && typeof lab === 'object' ? Number(lab.id) : 0; // Filtrer › Étiquette 🏷
+            const words = fold(q).split(/\s+/).filter(Boolean), list0 = sheets.filter(x => words.every(w => fold(`${x.title} ${x.subtitle || ''}`).includes(w)) && (!labId || (x.labels || []).some(l => Number(l.id) === labId)));
             const list = UI?.sortItems ? UI.sortItems(list0, sort, {name: x => x.title, date: x => x.updated_at}) : list0;
             bar?.setCount(`${A().plural(list.length, 'fiche')}${list.length !== sheets.length ? ` sur ${sheets.length}` : ''}`);
-            if (!list.length) { box.innerHTML = A().emptyState({icon: '🔎', text: `Aucune fiche pour « ${q.trim()} »`, hint: 'Vérifie l’orthographe, ou cherche un autre mot (titre, sous-titre).'}); return; }
+            if (!list.length) { box.innerHTML = A().emptyState({icon: '🔎', text: q.trim() ? `Aucune fiche pour « ${q.trim()} »` : 'Aucune fiche ne correspond', hint: q.trim() ? 'Vérifie l’orthographe, ou cherche un autre mot (titre, sous-titre).' : 'Retire un filtre.'}); return; }
             box.innerHTML = view === 'cards' && UI?.cardsHtml
                 ? UI.cardsHtml(list.map(x => ({thumb: `<span class="ui-card-ico">${esc(x.icon || '📒')}</span>`, name: x.title || 'Fiche sans titre', open: `data-fi-listopen="${x.id}"`, lines: [x.subtitle, `${x.blocks} bloc${x.blocks > 1 ? 's' : ''}`], when: x.updated_at, whenLabel: 'Modifiée'})))
                 : `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Fiche</th><th>Sous-titre</th><th>Blocs</th><th>Modifiée</th></tr></thead><tbody>${list.map(s => `<tr><td><button type="button" class="table-link" data-fi-listopen="${s.id}">${esc((s.icon || '📒') + ' ' + s.title)}</button></td><td>${esc(s.subtitle || '')}</td><td>${s.blocks}</td><td>${fmtDate(s.updated_at)}</td></tr>`).join('')}</tbody></table></div>`;
@@ -397,6 +401,7 @@
         let q = '';
         const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const bar = slot && UI?.listBar ? UI.listBar({key: KEY, search: {placeholder: 'Chercher une fiche… (titre, sous-titre)'}, view: {what: 'fiches', onChange: v => { view = v; draw(); }},
+            filters: [{id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: 'Étiquette :'}],
             sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
             onChange: (b, {what}) => { q = b.q; sort = b.sort; UI.setSort(KEY, sort); if (what !== 'view') draw(); }}) : null;
         if (bar) { ({q, sort, view} = bar.state); slot.replaceWith(bar); }

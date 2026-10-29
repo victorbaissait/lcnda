@@ -923,6 +923,11 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .stats-indicator-card span { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
 .stats-indicator-card strong { font-size: clamp(30px,5vw,54px); line-height: .95; }
 .stats-indicator-card small { color: var(--muted); font-weight: 800; }
+/* chiffres écrits dans une couleur de la palette des stats (style="--stat-c:…") ; en sombre, le texte seul est éclairci pour rester lisible (≥ 4,5:1), les barres gardent la couleur choisie */
+.stats-ink { color: var(--stat-c, inherit); }
+@supports (color: oklch(from red l c h)) { :root[data-theme="dark"] .stats-ink { color: oklch(from var(--stat-c) max(l, .75) c h); } }
+:root[data-theme="dark"] .stats-word-chip { background: color-mix(in srgb,var(--chip-color) 22%,var(--white)); }
+:root[data-theme="dark"] .stats-word-chip small { color: #c7c7c7; }
 
 .maternity-note { max-width: 850px; margin-bottom: 30px; color: var(--muted); font-size: 11px; line-height: 1.45; }
 .maternity-axis { height: 72px; position: relative; margin: 0 16px; border-bottom: 3px solid var(--ink); background: #eef7ff; }
@@ -4827,6 +4832,12 @@ th .ui-l6-count { color: inherit; opacity: .85; }
 .nav-ov-btn:hover { background: var(--blue); color: #fff; }
 /* ⏳ Pendant un enregistrement : Annuler et × d'une fenêtre ne ferment pas (aspect désactivé C8) */
 dialog .is-save-locked, dialog .is-save-locked:hover { opacity: .45; cursor: not-allowed; transform: none; }
+/* L5 petite aide sous un champ (.ui-hint) et sa ligne ⚠️ (.is-warn) : ex. « Couleur principale » qui se lit mal sur le fond du thème */
+.ui-hint { display: block; margin-top: 4px; max-width: 60ch; font-size: 12.5px; font-weight: 400; line-height: 1.45; color: #666; }
+.ui-hint.is-warn { color: #7a5200; font-weight: 600; }
+.ui-hint .button { display: block; width: fit-content; margin-top: 6px; }
+:root[data-theme="dark"] .ui-hint { color: #a5abb6; }
+:root[data-theme="dark"] .ui-hint.is-warn { color: #f0c060; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

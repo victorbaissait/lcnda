@@ -45,7 +45,7 @@ function genea_calendar_events(PDO $pdo, array $q = []): array
         $where .= ' AND (e.person_id=? OR e.family_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?))';
         array_push($args, $person, $person, $person);
     }
-    $s = $pdo->prepare("SELECT e.id, e.person_id, e.family_id, e.date_text, e.date_calendar, e.date_converted, e.year, e.title,
+    $s = $pdo->prepare("SELECT e.id, e.person_id, e.family_id, e.place_id, e.date_text, e.date_calendar, e.date_converted, e.year, e.title,
             t.label AS type_label, t.gedcom_tag AS tag, t.color AS type_color, pl.name AS place, pl.county AS county, pl.state AS region, pl.country AS country,
             f.partner1_id, f.partner2_id
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN families f ON f.id=e.family_id
@@ -72,7 +72,7 @@ function genea_calendar_events(PDO $pdo, array $q = []): array
         $tag = strtoupper((string) $r['tag']);
         $out[] = ['id' => (int) $r['id'], 'y' => $d[0], 'm' => $d[1], 'd' => $d[2], 'approx' => $d[3], 'text' => (string) $r['date_text'], 'calendar' => (string) $r['date_calendar'],
             'type' => (string) $r['type_label'], 'tag' => $tag, 'color' => (string) $r['type_color'], 'group' => cal_event_group($tag, (string) $r['type_label']),
-            'title' => (string) $r['title'], 'place' => (string) ($r['place'] ?? ''), 'county' => (string) ($r['county'] ?? ''), 'region' => (string) ($r['region'] ?? ''), 'country' => (string) ($r['country'] ?? ''), 'who' => $who];
+            'title' => (string) $r['title'], 'place_id' => (int) ($r['place_id'] ?? 0), 'place' => (string) ($r['place'] ?? ''), 'county' => (string) ($r['county'] ?? ''), 'region' => (string) ($r['region'] ?? ''), 'country' => (string) ($r['country'] ?? ''), 'who' => $who];
     }
     return ['events' => $out, 'undated' => $undated];
 }

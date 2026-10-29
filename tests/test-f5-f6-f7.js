@@ -221,10 +221,10 @@ await ctx.addInitScript(() => { try { localStorage.setItem('lcnda-sheet-sections
                 });
                 await check('Listes → 🛠️ Métiers anciens, 🌍 Le monde autour ; Chronologie', async () => {
                     await page.evaluate(() => { window.LCNDA_APP.state.listType = 'old_trades'; window.LCNDA_APP.setModule('listes'); });
-                    await page.waitForSelector('.h-tr-row'); await page.fill('[data-tr-q]', 'sabot'); await page.waitForFunction(() => document.querySelectorAll('.h-tr-row').length >= 1 && document.querySelectorAll('.h-tr-row').length < 10);
+                    await page.waitForSelector('.h-tr-row'); await page.fill('.h-tr-page .ui-listbar-q input', 'sabot'); await page.waitForFunction(() => document.querySelectorAll('.h-tr-row').length >= 1 && document.querySelectorAll('.h-tr-row').length < 10);
                     if (shots) await page.screenshot({ path: path.join(shots, 'liste-metiers.png') });
                     await page.evaluate(() => { window.LCNDA_APP.state.listType = 'world_events'; window.LCNDA_APP.setModule('listes'); });
-                    await page.waitForSelector('.h-world-page .h-world-row'); await page.fill('[data-world-q]', 'choléra');
+                    await page.waitForSelector('.h-world-page .h-world-row'); await page.fill('.h-world-page .ui-listbar-q input', 'choléra');
                     await page.waitForFunction(() => [...document.querySelectorAll('.h-world-row')].every(r => /chol/i.test(r.textContent)));
                     if (shots) await page.screenshot({ path: path.join(shots, 'liste-monde.png') });
                     await page.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.state.timeline.history = true; A.setModule('chronologie'); });

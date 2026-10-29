@@ -924,7 +924,8 @@
     }
 
     /* ═════════ S10 : 🐾 Recensement (Listes) : Observations · Animaux · Sites · Groupes ═════════ */
-    const OBS_SORTS = [['recent', 'Plus récentes'], ['old', 'Plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']];
+    const OBS_SORTS = [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']]; // C6 (observations : au féminin)
+    const SITE_SORTS = [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']];
     /** S6 : le tableau des observations (aussi dans l'onglet 👁 Observations de la fiche) */
     function obsTableHtml(D, obs, {showAnimal = true} = {}) {
         return `<div class="data-table-wrap"><table class="data-table sv-obs-table"><thead><tr><th>Quand</th><th>Où</th>${showAnimal ? '<th>Animal</th>' : ''}<th>Ce qu’il faisait</th><th>Avec qui</th><th>Vu par</th><th>Photos, sons</th><th>Bague</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>${obs.map(o => { const a = animalById(D, o.pet_id), withA = (o.with || []).map(id => animalById(D, id)).filter(Boolean);
@@ -949,7 +950,8 @@
         const list = ws.querySelector('[data-sv-list]'), saved = UI().listBarState?.(KEY) || {};
         const spOpts = [...new Set((D.animals || []).filter(a => a.tracked).map(a => a.taxon || ext.speciesLabel?.(a.species) || a.species))].filter(Boolean).map(t => [t, t]);
         const years = [...new Set((D.observations || []).map(o => (o.iso || '').slice(0, 4)).filter(Boolean))].sort().reverse();
-        const filters = tab === 'sites' || tab === 'groups' ? [] : [
+        const grpSp = [...new Set((D.groups || []).map(g => String(g.species || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr')).map(t => [t, t, t, (D.groups || []).filter(g => String(g.species || '').trim() === t).length]);
+        const filters = tab === 'sites' ? [] : tab === 'groups' ? (grpSp.length ? [{id: 'sp', label: 'Espèce', type: 'radio', options: [['', 'Toutes'], ...grpSp], dflt: ''}] : []) : [
             {id: 'sp', label: 'Espèce', type: 'radio', options: [['', 'Toutes'], ...spOpts], dflt: ''},
             {id: 'site', label: 'Site', kind: 'tsite', chipPrefix: '🏞'},
             ...(tab === 'obs' ? [{id: 'year', label: 'Année', type: 'radio', options: [['', 'Toutes'], ...years.map(y => [y, y])], dflt: ''}, {id: 'rel', label: 'Bague lue', type: 'check', options: [['full', 'En entier'], ['partial', 'Partielle'], ['colors', 'Couleurs seules'], ['doubt', 'Doute']]}] : []),
@@ -984,7 +986,7 @@
                 const item = x => { const n = (D.observations || []).filter(o => o.site_id === x.id).length, c = (D.counts || []).filter(k => k.site_id === x.id).length; return {thumb: '<span class="ui-card-ico">🏞</span>', name: x.name, open: `data-sv-site="${x.id}"`, lines: [[x.kind, x.place?.name, x.area_ha ? `${x.area_ha.toLocaleString('fr-FR')} ha` : '', x.since ? `depuis ${x.since}` : ''].filter(Boolean).join(' · '), `${plural(n, 'observation')} · ${plural(c, 'comptage')}`], when: x.updated_at, whenLabel: 'Modifié'}; };
                 list.innerHTML = rows.length ? (view === 'cards' ? UI().cardsHtml(rows.map(item)) : UI().rowsHtml(rows.map(item))) : A().emptyState({icon: '🏞', text: 'Aucun site de suivi pour l’instant', hint: 'Un parc, un dortoir, une colonie, une zone en mer : ses comptages datés et les animaux vus.', action: RO() ? null : {label: '＋ Nouveau site', attrs: 'data-sv-site-new'}});
             } else {
-                let rows = (D.groups || []).filter(g => !q || [g.name, g.kind, g.species, g.territory].join(' ').toLowerCase().includes(q));
+                let rows = (D.groups || []).filter(g => (!sp || String(g.species || '').trim() === sp) && (!q || [g.name, g.kind, g.species, g.territory].join(' ').toLowerCase().includes(q)));
                 rows = UI().sortItems ? UI().sortItems(rows, sort, {name: g => g.name, date: g => g.updated_at}) : rows;
                 bar.setCount?.(plural(rows.length, 'groupe'));
                 const item = g => { const cur = (D.members || []).filter(m => m.group_id === g.id && !m.end_date); return {thumb: '<span class="ui-card-ico">👥</span>', name: g.name, open: `data-sv-group="${g.id}"`, lines: [[g.kind, g.species, g.territory].filter(Boolean).join(' · '), plural(cur.length, 'membre actuel', 'membres actuels')], when: g.updated_at, whenLabel: 'Modifié'}; };
@@ -993,7 +995,7 @@
         };
         const bar = UI().listBar({key: KEY, search: {placeholder: tab === 'obs' ? 'Chercher… (nom, code « 7K », bague EA…, lieu, observateur)' : tab === 'animals' ? 'Chercher… (nom, code « 7K », puce…)' : 'Chercher…'}, filters,
             view: {dflt: tab === 'obs' ? 'list' : 'cards', what: tab === 'obs' ? 'observations' : tab === 'animals' ? 'animaux' : tab === 'sites' ? 'sites' : 'groupes'},
-            sort: {options: tab === 'animals' ? [['recent', 'Vus récemment'], ['old', 'Vus il y a longtemps'], ['az', 'A → Z'], ['za', 'Z → A']] : OBS_SORTS, value: saved.sort || 'recent'},
+            sort: {options: tab === 'animals' ? [['recent', 'Vus récemment'], ['old', 'Vus il y a longtemps'], ['az', 'A → Z'], ['za', 'Z → A']] : tab === 'obs' ? OBS_SORTS : SITE_SORTS, value: saved.sort || 'recent'},
             onChange: s => draw(s)});
         ws.querySelector('[data-sv-bar]').replaceWith(bar);
         draw(bar.state);

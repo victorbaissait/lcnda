@@ -2112,6 +2112,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function presetStore(){try{const v=JSON.parse(localStorage.getItem(CUSTOM_PRESETS_KEY)||'{}');return {custom:v&&typeof v.custom==='object'&&v.custom&&!Array.isArray(v.custom)?v.custom:{},order:Array.isArray(v?.order)?v.order:[],hidden:Array.isArray(v?.hidden)?v.hidden:[]};}catch(_){return {custom:{},order:[],hidden:[]};}}
     function savePresetStore(st){try{localStorage.setItem(CUSTOM_PRESETS_KEY,JSON.stringify(st));}catch(_){toast('Enregistrement impossible (place du navigateur ?).','error');}}
     const isHex=c=>typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c);
+    /* lisibilité d'une couleur sur une autre (règle WCAG) : une seule fonction, pour « ✎ Mes thèmes » et l'avertissement sous « Couleur principale » */
+    const CONTRAST_MIN=4.5;
+    const contrastLum=c=>{const n=parseInt(String(c).slice(1),16),f=v=>{v/=255;return v<=.03928?v/12.92:((v+.055)/1.055)**2.4;};return .2126*f(n>>16)+.7152*f((n>>8)&255)+.0722*f(n&255);};
+    const contrastRatio=(a,b)=>{const x=contrastLum(a),y=contrastLum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
     function cleanPresetColors(p,base=BUILTIN_DESIGN_PRESETS.portfolio){const out={};PRESET_COLOR_KEYS.forEach(([k])=>{out[k]=isHex(p?.[k])?p[k].toLowerCase():(base[k]||presetInkDefault(!!p?.dark));});out.lineW=presetLineW(p?.lineW);out.dark=!!p?.dark;return out;}
     function allDesignPresets(){const st=presetStore();const out={...BUILTIN_DESIGN_PRESETS};Object.entries(st.custom).forEach(([id,p])=>{if(/^my_[a-z0-9]+$/.test(id))out[id]=cleanPresetColors(p);});return out;}
     window.LCNDA_ALL_DESIGN_PRESETS=()=>allDesignPresets(); // lu par app-apparence.js (couleur principale reprise du thème choisi)
@@ -2157,11 +2161,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">${own?'Enregistrer':'Créer le thème'}</button></div></form>`;
         document.body.appendChild(dlg);
         const q=sel=>dlg.querySelector(sel),read=()=>{const o={};PRESET_COLOR_KEYS.forEach(([k])=>{o[k]=q(`[data-c="${k}"]`).value;});o.lineW=presetLineW(q('[data-f="lineW"]').value);o.dark=q('[data-f="dark"]').checked;return o;};
-        // lisibilité : écart de luminosité entre le texte et les fonds (règle WCAG, 4,5 au moins)
-        const lum=c=>{const n=parseInt(String(c).slice(1),16),f=v=>{v/=255;return v<=.03928?v/12.92:((v+.055)/1.055)**2.4;};return .2126*f(n>>16)+.7152*f((n>>8)&255)+.0722*f(n&255);},ratio=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+        // lisibilité : écart de luminosité entre le texte et les fonds (contrastRatio, règle WCAG, CONTRAST_MIN = 4,5 au moins)
+        const lum=contrastLum,ratio=contrastRatio;
         const paint=()=>{const o=read(),ink=o.ink,ln=`${o.lineW}px solid ${o.line}`;q('[data-prev]').style.cssText=`background:${o.bg};color:${ink};border:${ln};box-sizing:border-box;max-width:100%`;
             q('[data-prev]').innerHTML=`<div style="background:${o.paper};padding:8px;border:${ln}">Fond des panneaux · <a style="color:${o.blue}">un lien</a></div><div class="pv-card" style="background:${o.card};border:${ln}"><div class="pv-head" style="background:${o.cardHead};border-bottom:${ln}">En-tête d’une carte</div><div class="pv-body">Jean MARTIN, ° 1890<br><span class="pv-btn" style="background:${o.blue};border:${ln}">Bouton</span></div></div>`;
-            const bad=[['bg','le fond de la page'],['paper','le fond des panneaux'],['card','le fond des cartes']].filter(([k])=>ratio(ink,o[k])<4.5).map(([,t])=>t);
+            const bad=[['bg','le fond de la page'],['paper','le fond des panneaux'],['card','le fond des cartes']].filter(([k])=>ratio(ink,o[k])<CONTRAST_MIN).map(([,t])=>t);
             q('[data-contrast]').innerHTML=bad.length?(window.LCNDA_UI?.notice?window.LCNDA_UI.notice('warn',`Le texte se lit mal sur ${bad.join(', ')} : choisis un texte plus ${lum(ink)>.4?'foncé':'clair'}${!o.dark&&lum(o.bg)<.2?', ou coche « Thème sombre »':''}.`):''):'';};
         dlg.addEventListener('input',paint);dlg.addEventListener('change',e=>{if(e.target.matches('[data-f="dark"]')){const on=e.target.checked,was=presetInkDefault(!on);['ink','line'].forEach(k=>{const inp=q(`[data-c="${k}"]`);if(inp.value.toLowerCase()===was)inp.value=presetInkDefault(on);});}
             if(e.target.matches('[data-f="from"]')){const p=cleanPresetColors(allDesignPresets()[e.target.value]);PRESET_COLOR_KEYS.forEach(([k])=>{q(`[data-c="${k}"]`).value=p[k];});q('[data-f="lineW"]').value=String(p.lineW);q('[data-f="dark"]').checked=p.dark;const nm=q('[data-f="name"]');if(!nm.dataset.typed)nm.value=`${presetLabel(e.target.value)} (ma version)`;}paint();});
@@ -2217,12 +2221,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if(e.target.closest('[data-toast-reset]')){undoLocalChange('Messages remis comme au départ',[TOAST_PREFS],()=>{localStorage.removeItem(TOAST_PREFS);applyToastPrefs();},()=>{applyToastPrefs();if(state.module==='maintenance')renderDesignTools();});renderDesignTools();}});
         box.addEventListener('input',e=>{const el=e.target.closest('[data-toast-c]');if(!el)return;const [k,x]=el.dataset.toastC.split('.'),p=toastPrefs();p.colors[k][x]=el.value;save(p);const d=box.querySelector(`[data-toast-kind="${k}"] .toast-color-demo`);if(d){d.style.background=p.colors[k].bg;d.style.color=p.colors[k].fg;}});
         box.addEventListener('change',e=>{if(e.target.matches('[data-toast-ms]')){const p=toastPrefs();p.ms=Number(e.target.value);save(p);toast(`Les messages restent ${TOAST_DURATIONS.find(d=>d[0]===p.ms)[1].replace(/ \(.*\)/,'')}.`);return;}const el=e.target.closest('[data-toast-c]');if(el)tryKind(el.dataset.toastC.split('.')[0]);});}
-    function applyDesign(){
-        applyToastPrefs();
-        const design=readDesignSettings();
-        const presets=allDesignPresets();
-        const preset=(Object.hasOwn(presets,design.preset)&&presets[design.preset])||presets.portfolio; // « constructor », « toString »… ne sont pas des thèmes
-        document.documentElement.dataset.theme=preset.dark?'dark':'';
+    /** le fond des cartes : celui du thème, ou le « Fond des cartes » choisi ; en mode sombre, les fonds clairs (bleu, archive, vert…) donneraient du texte clair sur fond clair : on garde ceux du thème sombre */
+    function designCardBg(preset,cardBackground){
         const cardBackgrounds={
             white:{card:preset.card,cardHead:preset.cardHead},
             portfolio:{card:preset.card,cardHead:preset.cardHead},
@@ -2231,8 +2231,39 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             archive:{card:'#fff7e5',cardHead:'#efe3c6'},
             green:{card:'#f0fbf4',cardHead:'#dff3e7'},
         };
-        // en mode sombre, les fonds de cartes clairs (bleu, archive, vert…) donneraient du texte clair sur fond clair : on garde ceux du design sombre
-        const cardBg=preset.dark?cardBackgrounds.white:(cardBackgrounds[design.cardBackground]||cardBackgrounds.white);
+        return preset.dark?cardBackgrounds.white:(Object.hasOwn(cardBackgrounds,cardBackground)&&cardBackgrounds[cardBackground]||cardBackgrounds.white);
+    }
+    /* ⚠️ sous « Couleur principale » : la couleur choisie se lit mal sur les fonds du thème (même règle que « ✎ Mes thèmes ») ; « Prendre la couleur du thème » remet celle du Preset (K2, ↶ Annuler) */
+    function mainColorContrast(form){
+        const val=n=>form?.querySelector(`[name="${n}"]`)?.value||'';
+        const presets=allDesignPresets(),pid=val('preset'),preset=(Object.hasOwn(presets,pid)&&presets[pid])||presets.portfolio,blue=String(val('blue')||preset.blue).toLowerCase();
+        if(!isHex(blue))return null;
+        const card=designCardBg(preset,val('cardBackground')).card,ratio=Math.min(...[preset.bg,preset.paper,card].filter(isHex).map(c=>contrastRatio(blue,c)));
+        return {ratio,ok:ratio>=CONTRAST_MIN,blue,themeBlue:isHex(preset.blue)?preset.blue.toLowerCase():''};
+    }
+    function refreshMainColorHint(form=$('#design-form')){
+        const input=form?.querySelector('[name="blue"]'),label=input?.closest('label');if(!label)return;
+        const c=mainColorContrast(form);let hint=label.querySelector('[data-blue-contrast]');
+        if(!c||c.ok){hint?.remove();return;}
+        const num=x=>(x<CONTRAST_MIN?Math.min(Math.round(x*10),Math.ceil(CONTRAST_MIN*10)-1)/10:x).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1}); // jamais « 4,5 » pour une couleur qui n'y est pas
+        if(!hint){label.insertAdjacentHTML('beforeend','<small class="ui-hint is-warn" data-blue-contrast role="status"></small>');hint=label.querySelector('[data-blue-contrast]');
+            hint.addEventListener('click',e=>{e.preventDefault(); // un clic sur la phrase n'ouvre pas le choix de couleur (elle est dans le libellé)
+                if(!e.target.closest('[data-blue-theme]'))return;const c2=mainColorContrast(form);if(!c2?.themeBlue)return;
+                input.value=c2.themeBlue;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));});}
+        hint.innerHTML=`⚠️ Sur ce fond, cette couleur se lit mal (contraste ${num(c.ratio)} : il faut ${num(CONTRAST_MIN)}).${c.themeBlue&&c.themeBlue!==c.blue?' <button type="button" class="button small secondary" data-blue-theme>Prendre la couleur du thème</button>':''}`;
+    }
+    function bindMainColorHint(form=$('#design-form')){
+        if(!form)return;refreshMainColorHint(form);
+        const later=e=>{if(e.target?.matches?.('[name="blue"], [name="preset"], [name="cardBackground"]'))setTimeout(()=>refreshMainColorHint(form),0);};
+        form.addEventListener('input',later);form.addEventListener('change',later);
+    }
+    function applyDesign(){
+        applyToastPrefs();
+        const design=readDesignSettings();
+        const presets=allDesignPresets();
+        const preset=(Object.hasOwn(presets,design.preset)&&presets[design.preset])||presets.portfolio; // « constructor », « toString »… ne sont pas des thèmes
+        document.documentElement.dataset.theme=preset.dark?'dark':'';
+        const cardBg=designCardBg(preset,design.cardBackground);
         document.documentElement.style.setProperty('--blue',design.blue||preset.blue);
         document.documentElement.style.setProperty('--bg',preset.bg);
         document.documentElement.style.setProperty('--paper',preset.paper);
@@ -3929,7 +3960,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         return `<div class="stats-custom-grid">${groups.map((group,gIndex)=>{const groupRows=rows.filter(row=>(row.generation||'—')===group);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3><div class="stats-chart compact">${groupRows.map((row,index)=>chartRow(row,max,index+gIndex,'',palette,who,rows.indexOf(row))).join('')}</div></section>`;}).join('')}</div>`;
         }
         if(data.kind==='metric_grid'){
-            return `<div class="stats-custom-grid">${groups.map(group=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,14);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3>${groupRows.map((row,index)=>{const unit=row.unit||'ans';const countUnit=unit==='évènements'?'evt.':'pers.';return `<div class="stats-metric-row"><span>${escapeHtml(row.label)}</span><strong style="color:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')} ${escapeHtml(unit)}</strong><small>${Number(row.count||0).toLocaleString('fr-FR')} ${countUnit}</small></div>`;}).join('')}</section>`;}).join('')}</div>`;
+            return `<div class="stats-custom-grid">${groups.map(group=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,14);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3>${groupRows.map((row,index)=>{const unit=row.unit||'ans';const countUnit=unit==='évènements'?'evt.':'pers.';return `<div class="stats-metric-row"><span>${escapeHtml(row.label)}</span><strong class="stats-ink" style="--stat-c:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')} ${escapeHtml(unit)}</strong><small>${Number(row.count||0).toLocaleString('fr-FR')} ${countUnit}</small></div>`;}).join('')}</section>`;}).join('')}</div>`;
         }
         if(data.kind==='timeline_bands'){
             return `<div class="stats-timeline-bands">${groups.map((group,gIndex)=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,10);return `<section><h3>${escapeHtml(group)}</h3><div>${groupRows.map((row,index)=>`<span class="stats-word-chip" style="--chip-color:${palette[(index+gIndex)%palette.length]};font-size:${Math.min(1.35,.82+Number(row.value||1)/max*.75).toFixed(2)}rem">${escapeHtml(row.label)} <small>${Number(row.value||0)}</small></span>`).join('')}</div></section>`;}).join('')}</div>`;
@@ -3938,7 +3969,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             return `<div class="stats-word-cloud">${groups.map((group,gIndex)=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,18);return `<section><h3>${escapeHtml(group)}</h3><div>${groupRows.map((row,index)=>`<span class="stats-word-chip" style="--chip-color:${palette[(index+gIndex)%palette.length]};font-size:${Math.min(1.7,.8+Number(row.value||1)/max*1.25).toFixed(2)}rem">${escapeHtml(row.label)} <small>${Number(row.value||0)}</small></span>`).join('')}</div></section>`;}).join('')}</div>`;
         }
         if(data.kind==='indicator_grid'){
-            return `<div class="stats-indicator-grid">${rows.map((row,index)=>`<article class="stats-indicator-card"><span>${escapeHtml(row.label)}</span><strong style="color:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')}${row.unit==='%'?' %':''}</strong>${row.unit&&row.unit!=='%'?`<small>${escapeHtml(row.unit)}</small>`:''}</article>`).join('')}</div>`;
+            return `<div class="stats-indicator-grid">${rows.map((row,index)=>`<article class="stats-indicator-card"><span>${escapeHtml(row.label)}</span><strong class="stats-ink" style="--stat-c:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')}${row.unit==='%'?' %':''}</strong>${row.unit&&row.unit!=='%'?`<small>${escapeHtml(row.unit)}</small>`:''}</article>`).join('')}</div>`;
         }
         return `<div class="stats-chart">${rows.map((row,index)=>chartRow(row,max,index,data.type,palette)).join('')}</div>`;
     }
@@ -5103,17 +5134,41 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             ${compact?'':`<div class="page-actions"><button type="button" class="button small secondary" data-edit-memory="${m.id}">Modifier</button></div>`}</div></article>`;
     }
     /** Listes → Objets de famille */
+    /* H10 : la barre commune des listes en cartes (Objets, Mémoire) — 🔍 · Filtrer ▾ · Liste | Fiches (Fiches au départ) · Trier ; vide = la grande boîte K10 seule */
+    function collectionListBar(slot,box,total,opts,paint,emptyHtml){
+        if(!total||!window.LCNDA_UI?.listBar){slot?.remove();box.innerHTML=emptyHtml;return null;}
+        const bar=window.LCNDA_UI.listBar({...opts,onChange:()=>paint(bar)});slot.replaceWith(bar);paint(bar);return bar;
+    }
+    const COLL_B4=[['recent','Les plus récents'],['old','Les plus anciens'],['az','A → Z'],['za','Z → A']];
+    const collWhen=r=>r.updated_at||r.created_at||'';
+    const collNoMatch=text=>emptyState({icon:'🔍',text,hint:'Change les mots cherchés ou retire un filtre (« Tout effacer »).'});
+    /** Listes → Objets de famille */
     async function renderFamilyObjectsList(token,editId=null){
-        const q=state.familyObjectsQuery||'';
-        const data=await api('family_objects',{q});if(token!==state.workspaceToken||state.module!=='listes')return;
+        const data=await api('family_objects');if(token!==state.workspaceToken||state.module!=='listes')return;
         const objects=data.objects||[];const editing=editId===0?{id:0,title:'',transfers:[],media:[]}:objects.find(o=>Number(o.id)===Number(editId));
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Objets de famille</h2><p>La bague, l’horloge, le livre de messe… avec leur photo, de qui à qui ils sont passés, et qui les a aujourd’hui.</p></div></header>
-            <div class="collection-toolbar"><input type="search" id="objects-q" value="${escapeHtml(q)}" placeholder="Chercher un objet ou une étiquette…"><button type="button" class="button" id="object-add">＋ Objet</button></div>
-            ${editing?familyObjectFormHtml(editing):''}
-            <div class="collection-grid">${objects.map(o=>familyObjectCardHtml(o)).join('')||emptyState({text: 'Aucun objet pour l’instant', icon:'🏺',hint:'Horloge, bijou, outil… et à qui il a été transmis.',action:{label:'＋ Objet',attrs:'data-empty-click="#object-add"'}})}</div></section>`;
-        $('#objects-q').addEventListener('change',event=>{state.familyObjectsQuery=event.target.value.trim();renderFamilyObjectsList(++state.workspaceToken);});
+        const UI=window.LCNDA_UI;
+        $('#workspace').innerHTML=`<section class="page collection-page">${UI.pageHeader({title:'Objets de famille',help:'La bague, l’horloge, le livre de messe… avec leur photo, de qui à qui ils sont passés, et qui les a aujourd’hui.',primary:'<button type="button" class="button" id="object-add">＋ Objet</button>'})}
+            ${editing?familyObjectFormHtml(editing):''}<div data-objects-bar></div><div data-objects-list></div></section>`;
+        const box=$('[data-objects-list]'),LM=UI.listMatch,photo=o=>o.media?.find(m=>m.media_type==='image'),who=(p,t)=>p?personName(p):(t||'');
+        const passIds=o=>(o.transfers||[]).flatMap(t=>[t.from_person_id,t.to_person_id]).map(Number).filter(Boolean),passNames=o=>(o.transfers||[]).flatMap(t=>[t.from_text,t.to_text]).filter(Boolean);
+        const item=(o,view)=>({thumb:photo(o)?mediaThumbHtml(photo(o)):'<span class="ui-card-ico" aria-hidden="true">🏺</span>',name:o.title,open:`data-edit-object="${o.id}"`,
+            lines:[[o.kind,who(o.holder_person,o.holder_text)?`Aujourd’hui : ${who(o.holder_person,o.holder_text)}${o.location_text?` · ${o.location_text}`:''}`:''].filter(Boolean).join(' · '),(o.transfers||[]).map(t=>`${who(t.from_person,t.from_text)||'?'} → ${who(t.to_person,t.to_text)||'?'}${t.date_text?` (${t.date_text})`:''}`).join(' · ')||String(o.description||'').slice(0,140)],
+            badges:[collectionLabelChips(o.labels)].filter(Boolean),when:collWhen(o),whenLabel:'Modifié',
+            menu:[`<button type="button" data-edit-object="${o.id}">✎ Modifier</button>`],actions:view==='list'?`<button type="button" class="button small secondary" data-edit-object="${o.id}">Modifier</button>`:''});
+        const n=fn=>objects.filter(fn).length;
+        collectionListBar($('[data-objects-bar]'),box,objects.length,{key:'listes:family_objects',search:{placeholder:'Chercher… (objet, étiquette, personne)',value:state.familyObjectsQuery||''},
+            filters:[{id:'holder',label:'Qui l’a aujourd’hui',type:'person',chipPrefix:'👤 Chez'},{id:'passed',label:'Passé par',type:'person',chipPrefix:'👤 Passé par'},
+                {id:'photo',label:'Photo',type:'radio',dflt:'',options:[['','Tous'],['yes',`Avec une photo (${n(o=>photo(o))})`,'📷 Avec photo'],['no',`Sans photo (${n(o=>!photo(o))})`,'Sans photo']]},
+                {id:'label',label:'Étiquette',kind:'label',allowFree:false,chipPrefix:'🏷'}],
+            view:{dflt:'cards',what:'objets'},sort:{options:COLL_B4,value:'recent'}},bar=>{
+            const {q,filters:f,sort,view}=bar.state;
+            const rows=UI.sortItems(objects.filter(o=>LM.text(q,o.title,o.kind,o.description,o.holder_text,o.location_text,(o.labels||[]).map(l=>l.name),who(o.holder_person,''),(o.transfers||[]).map(t=>[who(t.from_person,t.from_text),who(t.to_person,t.to_text)]))
+                &&LM.pick(f.holder,[o.holder_person_id],[who(o.holder_person,o.holder_text)])&&LM.pick(f.passed,passIds(o),passNames(o))&&(!f.photo||(f.photo==='yes')===!!photo(o))&&LM.pick(f.label,(o.labels||[]).map(l=>l.id),(o.labels||[]).map(l=>l.name))),sort,{name:o=>o.title,date:collWhen});
+            bar.setCount(rows.length===objects.length?plural(objects.length,'objet'):`${plural(rows.length,'objet')} sur ${objects.length.toLocaleString('fr-FR')}`);
+            box.innerHTML=rows.length?UI.itemsHtml(view,rows.map(o=>item(o,view))):collNoMatch('Aucun objet ne correspond');
+        },editing?'':emptyState({text: 'Aucun objet pour l’instant', icon:'🏺',hint:'Horloge, bijou, outil… et à qui il a été transmis.',action:{label:'＋ Objet',attrs:'data-empty-click="#object-add"'}}));
         $('#object-add').addEventListener('click',()=>renderFamilyObjectsList(++state.workspaceToken,0));
-        $$('[data-edit-object]').forEach(b=>b.addEventListener('click',()=>renderFamilyObjectsList(++state.workspaceToken,Number(b.dataset.editObject))));
+        box.addEventListener('click',e=>{const b=e.target.closest('[data-edit-object]');if(b){e.preventDefault();renderFamilyObjectsList(++state.workspaceToken,Number(b.dataset.editObject));}});
         if(editing)bindFamilyObjectForm(editing);
         bindTableLinks();
     }
@@ -5149,17 +5204,28 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     /** Listes → Mémoire familiale */
     async function renderFamilyMemoriesList(token,editId=null){
-        const q=state.familyMemoriesQuery||'',kind=state.familyMemoriesKind||'';
-        const data=await api('family_memories',{q,kind});if(token!==state.workspaceToken||state.module!=='listes')return;
+        const data=await api('family_memories');if(token!==state.workspaceToken||state.module!=='listes')return;
         const rows=data.memories||[],kinds=data.kinds||{};const editing=editId===0?{id:0,kind:'recipe',title:'',people:[],media:[]}:rows.find(m=>Number(m.id)===Number(editId));
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Mémoire familiale</h2><p>Les recettes de grand-mère, les expressions, les chansons, les surnoms, les traditions, rattachés aux personnes qui les ont transmis.</p></div></header>
-            <div class="collection-toolbar"><input type="search" id="memories-q" value="${escapeHtml(q)}" placeholder="Chercher (texte ou étiquette)…"><select id="memories-kind"><option value="">Tout</option>${Object.entries(kinds).map(([k,l])=>`<option value="${k}" ${kind===k?'selected':''}>${escapeHtml(l)}</option>`).join('')}</select><button type="button" class="button" id="memory-add">＋ Souvenir</button></div>
-            ${editing?familyMemoryFormHtml(editing,kinds):''}
-            <div class="collection-grid">${rows.map(m=>familyMemoryCardHtml(m)).join('')||emptyState({text: 'Aucun souvenir pour l’instant', icon:'💬',hint:'Une recette, une expression, une chanson…',action:{label:'＋ Souvenir',attrs:'data-empty-click="#memory-add"'}})}</div></section>`;
-        $('#memories-q').addEventListener('change',event=>{state.familyMemoriesQuery=event.target.value.trim();renderFamilyMemoriesList(++state.workspaceToken);});
-        $('#memories-kind').addEventListener('change',event=>{state.familyMemoriesKind=event.target.value;renderFamilyMemoriesList(++state.workspaceToken);});
+        const UI=window.LCNDA_UI;
+        $('#workspace').innerHTML=`<section class="page collection-page">${UI.pageHeader({title:'Mémoire familiale',help:'Les recettes de grand-mère, les expressions, les chansons, les surnoms, les traditions, rattachés aux personnes qui les ont transmis.',primary:'<button type="button" class="button" id="memory-add">＋ Souvenir</button>'})}
+            ${editing?familyMemoryFormHtml(editing,kinds):''}<div data-memories-bar></div><div data-memories-list></div></section>`;
+        const box=$('[data-memories-list]'),LM=UI.listMatch,photo=m=>m.media?.find(x=>x.media_type==='image'),ROLE={transmitted:'l’a transmis',received:'l’a reçu',about:'concerné'};
+        const item=(m,view)=>({thumb:photo(m)?mediaThumbHtml(photo(m)):`<span class="ui-card-ico" aria-hidden="true">${{recipe:'🍲',expression:'💬',song:'🎵',nickname:'🏷',tradition:'🕯️',story:'📖',testimony:'🎙',sense:'👃'}[m.kind]||'💬'}</span>`,name:m.title,open:`data-edit-memory="${m.id}"`,
+            lines:[String(m.content||'').replace(/\s+/g,' ').slice(0,140),(m.people||[]).map(l=>`${personName(l.person)} (${ROLE[l.role]||''})`).join(' · ')||m.origin_text||''],
+            badges:[m.kind_label?{text:m.kind_label,kind:'grey'}:null,collectionLabelChips(m.labels)].filter(Boolean),when:collWhen(m),whenLabel:'Modifié',
+            menu:[`<button type="button" data-edit-memory="${m.id}">✎ Modifier</button>`],actions:view==='list'?`<button type="button" class="button small secondary" data-edit-memory="${m.id}">Modifier</button>`:''});
+        collectionListBar($('[data-memories-bar]'),box,rows.length,{key:'listes:family_memories',search:{placeholder:'Chercher… (texte, étiquette, personne)',value:state.familyMemoriesQuery||''},
+            filters:[{id:'kind',label:'Sorte',type:'check',value:state.familyMemoriesKind?[state.familyMemoriesKind]:[],options:Object.entries(kinds).map(([k,l])=>[k,`${l} (${rows.filter(m=>m.kind===k).length})`,l])},
+                {id:'by',label:'Transmis par',type:'person',chipPrefix:'👤 Transmis par'},{id:'label',label:'Étiquette',kind:'label',allowFree:false,chipPrefix:'🏷'}],
+            view:{dflt:'cards',what:'souvenirs'},sort:{options:COLL_B4,value:'recent'}},bar=>{
+            const {q,filters:f,sort,view}=bar.state,by=m=>(m.people||[]).filter(l=>l.role!=='received'&&l.role!=='about');
+            const list=UI.sortItems(rows.filter(m=>LM.text(q,m.title,m.content,m.origin_text,m.kind_label,(m.labels||[]).map(l=>l.name),(m.people||[]).map(l=>personName(l.person)))
+                &&(!(f.kind||[]).length||f.kind.includes(m.kind))&&LM.pick(f.by,by(m).map(l=>l.person?.id),by(m).map(l=>personName(l.person)))&&LM.pick(f.label,(m.labels||[]).map(l=>l.id),(m.labels||[]).map(l=>l.name))),sort,{name:m=>m.title,date:collWhen});
+            bar.setCount(list.length===rows.length?plural(rows.length,'souvenir'):`${plural(list.length,'souvenir')} sur ${rows.length.toLocaleString('fr-FR')}`);
+            box.innerHTML=list.length?UI.itemsHtml(view,list.map(m=>item(m,view))):collNoMatch('Aucun souvenir ne correspond');
+        },editing?'':emptyState({text: 'Aucun souvenir pour l’instant', icon:'💬',hint:'Une recette, une expression, une chanson…',action:{label:'＋ Souvenir',attrs:'data-empty-click="#memory-add"'}}));
         $('#memory-add').addEventListener('click',()=>renderFamilyMemoriesList(++state.workspaceToken,0));
-        $$('[data-edit-memory]').forEach(b=>b.addEventListener('click',()=>renderFamilyMemoriesList(++state.workspaceToken,Number(b.dataset.editMemory))));
+        box.addEventListener('click',e=>{const b=e.target.closest('[data-edit-memory]');if(b){e.preventDefault();renderFamilyMemoriesList(++state.workspaceToken,Number(b.dataset.editMemory));}});
         if(editing)bindFamilyMemoryForm(editing);
         bindTableLinks();
     }
@@ -5193,15 +5259,41 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     /** Listes → Lieux précis (adresse, ferme, maison) et leur fiche « en un coup d'œil » */
     async function renderPrecisePlacesList(token){
         if(state.precisePlaceKey)return renderPrecisePlace(token,state.precisePlaceKey);
-        const q=state.precisePlacesQuery||'',radius=Number(state.precisePlacesRadius)||30;
-        const data=await api('precise_places',{q,radius});if(token!==state.workspaceToken||state.module!=='listes')return;
-        const rows=data.places||[];
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Lieux précis</h2><p>Une adresse, une ferme, une maison : tout ce que tu as sur ce lieu. Regroupe la même adresse dans la même commune (en ignorant les différences d’écriture) et les points GPS proches.</p></div></header>
-            <div class="collection-toolbar"><input type="search" id="pp-q" value="${escapeHtml(q)}" placeholder="Adresse ou commune…"><label>Points GPS regroupés à moins de <select id="pp-radius">${[10,30,100,300].map(r=>`<option value="${r}" ${radius===r?'selected':''}>${r} m</option>`).join('')}</select></label></div>
-            ${rows.length?`<table class="data-table precise-table"><thead><tr><th>Commune</th><th>Lieu précis</th><th>Événements</th><th>Recensements</th><th>Années</th></tr></thead><tbody>${rows.map(r=>`<tr data-pp-key="${escapeHtml(r.key)}" tabindex="0"><td>${escapeHtml(r.place||'—')}</td><td><strong>${escapeHtml(r.label)}</strong>${r.gps_only?' <small class="muted">(position GPS sans adresse)</small>':''}</td><td>${r.events}</td><td>${r.census}</td><td>${r.from?`${r.from}${r.to&&r.to!==r.from?`–${r.to}`:''}`:'—'}</td></tr>`).join('')}</tbody></table>`:empty('Aucun lieu précis : remplis la case « Adresse » des événements ou des recensements, ou place un point GPS précis.',{icon:'📍'})}</section>`;
-        $('#pp-q').addEventListener('change',event=>{state.precisePlacesQuery=event.target.value.trim();renderPrecisePlacesList(++state.workspaceToken);});
-        $('#pp-radius').addEventListener('change',event=>{state.precisePlacesRadius=Number(event.target.value);renderPrecisePlacesList(++state.workspaceToken);});
-        $$('[data-pp-key]').forEach(tr=>{const open=()=>{state.precisePlaceKey=tr.dataset.ppKey;renderPrecisePlacesList(++state.workspaceToken);};tr.addEventListener('click',open);tr.addEventListener('keydown',e=>{if(e.key==='Enter')open();});});
+        // H10 : la barre commune ; l’ancienne case et le menu « Points GPS regroupés » (state.precisePlacesQuery / Radius) sont repris une fois
+        const UI=window.LCNDA_UI,KEY='listes:precise_places',saved=UI.listBarState?.(KEY);
+        const radius=[10,30,100,300].includes(Number(saved?.f?.radius))?Number(saved.f.radius):(Number(state.precisePlacesRadius)||30);
+        state.precisePlacesRadius=radius;
+        const data=await api('precise_places',{radius});if(token!==state.workspaceToken||state.module!=='listes')return;
+        const all=data.places||[];
+        $('#workspace').innerHTML=`<section class="page collection-page">${UI.pageHeader({title:'Lieux précis',help:'Une adresse, une ferme, une maison : tout ce que tu as sur ce lieu. Regroupe la même adresse dans la même commune (en ignorant les différences d’écriture) et les points GPS proches.'})}
+            ${all.length?'<div data-pp-bar></div>':''}<div data-pp-list></div></section>`;
+        const box=$('[data-pp-list]');
+        if(!all.length){box.innerHTML=emptyState({icon:'📍',text:'Aucun lieu précis pour l’instant',hint:'Remplis la case « Adresse » des événements ou des recensements, ou place un point GPS précis.'});return;}
+        const fold=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+        const n=fn=>all.filter(fn).length;
+        const bar=UI.listBar({key:KEY,search:{placeholder:'Chercher… (adresse, commune)',value:saved?'':(state.precisePlacesQuery||'')},
+            filters:[{id:'commune',label:'Commune',type:'place',chipPrefix:'Commune :'},
+                {id:'kind',label:'Sorte',type:'radio',dflt:'',options:[['','Toutes'],['address','Avec une adresse','Avec une adresse',n(r=>!r.gps_only)],['gps','Point GPS seul','Point GPS seul',n(r=>r.gps_only)]]},
+                {id:'radius',label:'Regroupement des points GPS',type:'radio',dflt:'30',value:String(radius),options:[10,30,100,300].map(r=>[String(r),`à moins de ${r} m`,`Points GPS à moins de ${r} m`])}],
+            sort:{options:[['az','Commune : A → Z'],['za','Commune : Z → A'],['events','Le plus d’événements'],['old','Années : les plus anciens'],['recent','Années : les plus récents']],value:'az'},
+            onChange:(st,{what})=>{if(Number(st.filters.radius||30)!==radius){state.precisePlacesRadius=Number(st.filters.radius||30);return renderPrecisePlacesList(++state.workspaceToken);}paint();}});
+        $('[data-pp-bar]').replaceWith(bar);
+        const cmp=(a,b)=>String(a.place||'').localeCompare(String(b.place||''),'fr',{sensitivity:'base'})||String(a.label).localeCompare(String(b.label),'fr',{sensitivity:'base',numeric:true});
+        const SORTS={az:cmp,za:(a,b)=>cmp(b,a),events:(a,b)=>(b.events+b.census)-(a.events+a.census)||cmp(a,b),old:(a,b)=>(a.from||99999)-(b.from||99999)||cmp(a,b),recent:(a,b)=>(b.to||0)-(a.to||0)||cmp(a,b)};
+        function paint(){
+            const st=bar.state,f=st.filters,words=fold(st.q).split(/\s+/).filter(Boolean),c=f.commune;
+            const cId=c&&typeof c==='object'?Number(c.id):0,cTxt=fold(c&&typeof c==='object'?c.title:String(c||'').replace(/^txt:/,'')).split(/[,(]/)[0].trim();
+            const rows=all.filter(r=>(!words.length||words.every(w=>fold(`${r.address} ${r.place}`).includes(w)))
+                &&(!c||(cId&&(r.place_ids||[]).includes(cId))||fold(r.place)===cTxt)
+                &&(!f.kind||(f.kind==='gps'?r.gps_only:!r.gps_only))).sort(SORTS[st.sort]||cmp);
+            bar.setCount(rows.length===all.length?plural(all.length,'lieu précis','lieux précis'):`${plural(rows.length,'lieu précis','lieux précis')} sur ${all.length}`);
+            box.innerHTML=rows.length?`<div class="data-table-wrap"><table class="data-table precise-table"><thead><tr><th>Commune</th><th>Lieu précis</th><th>Événements</th><th>Recensements</th><th>Années</th></tr></thead><tbody>${rows.map(r=>`<tr data-pp-key="${escapeHtml(r.key)}" tabindex="0"><td>${escapeHtml(r.place||'—')}</td><td><strong>${escapeHtml(r.label)}</strong>${r.gps_only?' <small class="muted">(position GPS sans adresse)</small>':''}</td><td>${r.events}</td><td>${r.census}</td><td>${r.from?`${r.from}${r.to&&r.to!==r.from?`–${r.to}`:''}`:'—'}</td></tr>`).join('')}</tbody></table></div>`
+                :emptyState({icon:'🔍',text:'Aucun lieu précis ne correspond',hint:'Vérifie l’orthographe, ou retire un filtre.'});
+        }
+        paint();
+        const open=tr=>{state.precisePlaceKey=tr.dataset.ppKey;renderPrecisePlacesList(++state.workspaceToken);};
+        box.addEventListener('click',e=>{const tr=e.target.closest('[data-pp-key]');if(tr)open(tr);});
+        box.addEventListener('keydown',e=>{const tr=e.target.closest('[data-pp-key]');if(tr&&e.key==='Enter')open(tr);});
     }
     async function renderPrecisePlace(token,key){
         let data;try{data=await api('precise_place',{key,radius:Number(state.precisePlacesRadius)||30});}catch(error){state.precisePlaceKey='';toast(error.message,'error');return renderPrecisePlacesList(++state.workspaceToken);}
@@ -5324,18 +5416,40 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     async function renderFairsList(token,editId=null){
         const data=await api('genealogy_fairs');if(token!==state.workspaceToken||state.module!=='listes')return;
         const rows=data.fairs||[];const editing=editId===0?{id:0,kind:'Salon'}:rows.find(f=>Number(f.id)===Number(editId));
-        const today=new Date().toISOString().slice(0,10);const upcoming=rows.filter(f=>!f.date_start||(f.date_end||f.date_start)>=today),past=rows.filter(f=>f.date_start&&(f.date_end||f.date_start)<today);
-        // Les salons passés restent consultables, mais ne gênent pas : masqués tant qu'on ne les demande pas
-        const fairsFilter=['upcoming','past','all'].includes(state.fairsFilter)?state.fairsFilter:'upcoming';
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Salons et événements</h2><p>Salons, forums, congrès, journées portes ouvertes des archives… avec la date, le lieu, comment y aller, que prévoir, les stands à voir et les liens utiles.</p></div></header>
-            <div class="collection-toolbar"><button type="button" class="button" id="fair-add">＋ Salon ou événement</button><div class="segmented-filter" role="group" aria-label="Afficher">${[['upcoming',`À venir (${upcoming.length})`],['past',`Passés (${past.length})`],['all',`Tous (${rows.length})`]].map(([value,label])=>`<button type="button" class="button small ${fairsFilter===value?'':'secondary'}" data-fairs-filter="${value}" aria-pressed="${fairsFilter===value}">${escapeHtml(label)}</button>`).join('')}</div></div>
+        const UIx=window.LCNDA_UI,today=new Date().toISOString().slice(0,10);
+        const isPast=f=>!!(f.date_start&&(f.date_end||f.date_start)<today);
+        $('#workspace').innerHTML=`<section class="page collection-page">${UIx.pageHeader({title:'Salons et événements',help:'Salons, forums, congrès, journées portes ouvertes des archives… avec la date, le lieu, comment y aller, que prévoir, les stands à voir et les liens utiles.',actions:['<button type="button" class="button" id="fair-add">＋ Salon ou événement</button>']})}
             ${editing?fairFormHtml(editing):''}
-            ${fairsFilter!=='past'?`<h3>À venir</h3><div class="fair-list">${upcoming.map(fairCardHtml).join('')||emptyState({text: 'Aucun salon à venir', icon:'🎪',action:{label:'＋ Salon ou événement',attrs:'data-empty-click="#fair-add"'}})}</div>`:''}
-            ${fairsFilter==='upcoming'&&past.length?`<p class="muted"><button type="button" class="link-button" data-fairs-filter="past">${past.length>1?`Voir les ${past.length} salons passés`:'Voir le salon passé'}</button></p>`:''}
-            ${fairsFilter!=='upcoming'?`<h3>Passés</h3><div class="fair-list">${past.map(fairCardHtml).join('')||empty('Aucun salon passé.',{icon:'🎪'})}</div>`:''}</section>`;
-        $$('[data-fairs-filter]').forEach(b=>b.addEventListener('click',()=>{state.fairsFilter=b.dataset.fairsFilter;renderFairsList(++state.workspaceToken);}));
+            ${rows.length?'<div data-h10-bar></div><div data-h10-rows></div>':editing?'':emptyState({text:'Aucun salon pour l’instant',icon:'🎪',hint:'Un salon, un forum, une journée portes ouvertes des archives : la date, le lieu, que prévoir.',action:{label:'＋ Salon ou événement',attrs:'data-empty-click="#fair-add"'}})}</section>`;
         $('#fair-add').addEventListener('click',()=>renderFairsList(++state.workspaceToken,0));
-        $$('[data-edit-fair]').forEach(b=>b.addEventListener('click',()=>renderFairsList(++state.workspaceToken,Number(b.dataset.editFair))));
+        if(rows.length){
+            // H10 : « À venir / Passés / Tous » devient la rubrique « Quand » (« À venir » au départ, visible en pastille)
+            const fold=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+            const kinds={};rows.forEach(f=>{const k=String(f.kind||'Salon').trim()||'Salon';kinds[k]=(kinds[k]||0)+1;});
+            const nPast=rows.filter(isPast).length;
+            const bar=UIx.listBar({key:'listes:fairs',search:{placeholder:'Chercher… (nom, ville, stands)'},
+                filters:[{id:'when',label:'Quand',type:'check',value:state.fairsFilter==='past'?['past']:state.fairsFilter==='all'?[]:['upcoming'],options:[['upcoming','À venir','À venir',rows.length-nPast],['past','Passés','Passés',nPast]]},
+                    {id:'kind',label:'Sorte',type:'check',options:Object.keys(kinds).sort((x,y)=>x.localeCompare(y,'fr')).map(k=>[k,k,k,kinds[k]])},
+                    {id:'place',label:'Lieu',type:'place',chipPrefix:'À :'}],
+                view:{dflt:'cards',what:'salons'},
+                sort:{options:[['near','Le plus proche'],['recent','Les plus récents'],['old','Les plus anciens'],['az','A → Z'],['za','Z → A']],value:'near'},
+                onChange:()=>paint()});
+            $('[data-h10-bar]').replaceWith(bar);
+            const paint=()=>{
+                const st=bar.state,f=st.filters,words=fold(st.q).split(/\s+/).filter(Boolean),place=f.place?fold(typeof f.place==='object'?f.place.title:String(f.place).replace(/^txt:/,'')).split(/[,(]/)[0].trim():'';
+                let list=rows.filter(x=>(!f.when?.length||f.when.includes(isPast(x)?'past':'upcoming'))&&(!f.kind?.length||f.kind.includes(String(x.kind||'Salon').trim()||'Salon'))&&(!place||fold(`${x.place_text} ${x.address}`).includes(place))
+                    &&(!words.length||words.every(w=>fold([x.title,x.kind,x.place_text,x.address,x.stands_text].join(' ')).includes(w))));
+                // « Le plus proche » : les prochains d’abord (le plus tôt en premier), puis les passés (le plus récent en premier), sans date à la fin
+                const near=(x,y)=>{const rank=v=>!v.date_start?2:isPast(v)?1:0,r=rank(x)-rank(y);if(r)return r;return rank(x)===1?String(y.date_start).localeCompare(String(x.date_start)):String(x.date_start||'').localeCompare(String(y.date_start||''));};
+                list=st.sort==='near'?[...list].sort(near):UIx.sortItems(list,st.sort,{name:x=>x.title,date:x=>x.updated_at||x.created_at||''});
+                bar.setCount(`${plural(list.length,'salon')}${list.length!==rows.length?` sur ${rows.length}`:''}`);
+                $('[data-h10-rows]').innerHTML=!list.length?emptyState({icon:'🔍',text:'Aucun salon ne correspond',hint:'Change les mots cherchés ou retire un filtre (« Tout effacer » montre aussi les salons passés).'})
+                    :st.view==='cards'?`<div class="fair-list">${list.map(fairCardHtml).join('')}</div>`
+                    :UIx.rowsHtml(list.map(x=>({thumb:'<span class="ui-card-ico">🎪</span>',name:x.title,open:`data-edit-fair="${x.id}"`,lines:[fairDateText(x),[x.kind,x.place_text].filter(Boolean).join(' · ')],cls:isPast(x)?'is-past':''})));
+                $$('[data-h10-rows] [data-edit-fair]').forEach(b=>b.addEventListener('click',()=>renderFairsList(++state.workspaceToken,Number(b.dataset.editFair))));
+            };
+            paint();
+        }
         if(editing){const form=$('#fair-form');form.scrollIntoView({block:'start'});
             $('#fair-cancel').addEventListener('click',()=>renderFairsList(++state.workspaceToken));
             $('#fair-delete')?.addEventListener('click',async()=>{if(!await confirmBox('',{title:`Supprimer « ${editing.title} » ?`,okLabel:'Supprimer le salon'}))return;await api('delete_genealogy_fair',{}, {method:'POST',body:{id:editing.id}});toast('Supprimé.');renderFairsList(++state.workspaceToken);});
@@ -5447,10 +5561,30 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     /** Listes → Branches fermées */
     async function renderClosedBranchesList(token){
         const data=await api('closed_branches');if(token!==state.workspaceToken||state.module!=='listes')return;
-        const rows=(data.branches||[]).filter(r=>r.direction==='descendance');
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Branches fermées</h2><p>Les lignées déclarées éteintes (plus de descendants à chercher), avec leur degré de certitude. Pour en ajouter une : sur la fiche, bloc « Descendants ».</p></div></header>
-            ${rows.length?`<table class="data-table"><thead><tr><th>Depuis</th><th>Certitude</th><th>Raison</th><th>Note</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${personChip(r.person)}${r.partner?` et ${personChip(r.partner)}`:''}</td><td><span class="branch-closed-badge certainty-${escapeHtml(r.certainty)}">${escapeHtml(r.certainty_label)}</span></td><td>${escapeHtml(r.reason_label||'—')}</td><td><small>${escapeHtml(r.note||'')}</small></td></tr>`).join('')}</tbody></table>`:emptyState({text: 'Aucune branche fermée pour l’instant.', icon:'🌿',hint:'Une branche fermée est une lignée qu’on ne peut plus remonter (archives détruites, enfant trouvé…).'})}</section>`;
-        bindTableLinks();
+        const all=(data.branches||[]).filter(r=>r.direction==='descendance'),UI=window.LCNDA_UI;
+        $('#workspace').innerHTML=`<section class="page collection-page">${UI.pageHeader({title:'Branches fermées',help:'Les lignées déclarées éteintes (plus de descendants à chercher), avec leur degré de certitude. Pour en ajouter une : sur la fiche, bloc « Descendants ».'})}
+            ${all.length?'<div data-cb-bar></div>':''}<div data-cb-list></div></section>`;
+        const box=$('[data-cb-list]');
+        if(!all.length){box.innerHTML=emptyState({text:'Aucune branche fermée pour l’instant',icon:'🌿',hint:'Une branche fermée est une lignée qu’on ne peut plus remonter (archives détruites, enfant trouvé…). Pour en ajouter une : sur la fiche, bloc « Descendants ».'});return;}
+        // H10 : 🔍 nom, raison, note · Filtrer ▾ Certitude, Raison · Trier (les 4 de base)
+        const fold=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+        const who=r=>[r.person?personName(r.person):'',r.partner?personName(r.partner):''].join(' ');
+        const n=(k,v)=>all.filter(r=>r[k]===v).length;
+        const opts=(obj,k)=>Object.entries(obj||{}).filter(([v])=>n(k,v)).map(([v,l])=>[v,l,l,n(k,v)]);
+        const bar=UI.listBar({key:'listes:closed_branches',search:{placeholder:'Chercher… (nom, raison, note)'},
+            filters:[{id:'certainty',label:'Certitude',type:'check',options:opts(data.certainties,'certainty')},{id:'reason',label:'Raison',type:'check',options:opts(data.reasons,'reason')}].filter(f=>f.options.length),
+            sort:{options:[['recent','Les plus récentes'],['old','Les plus anciennes'],['az','A → Z'],['za','Z → A']],value:'recent'},onChange:()=>paint()});
+        $('[data-cb-bar]').replaceWith(bar);
+        function paint(){
+            const st=bar.state,f=st.filters,words=fold(st.q).split(/\s+/).filter(Boolean);
+            const rows=UI.sortItems(all.filter(r=>(!words.length||words.every(w=>fold(`${who(r)} ${r.reason_label} ${r.note}`).includes(w)))&&(!(f.certainty||[]).length||f.certainty.includes(r.certainty))&&(!(f.reason||[]).length||f.reason.includes(r.reason))),
+                st.sort,{name:r=>r.person?`${r.person.last_name||''} ${r.person.first_name||''}`:'',date:r=>r.updated_at||r.created_at||''});
+            bar.setCount(rows.length===all.length?plural(all.length,'branche fermée','branches fermées'):`${plural(rows.length,'branche fermée','branches fermées')} sur ${all.length}`);
+            box.innerHTML=rows.length?`<table class="data-table"><thead><tr><th>Depuis</th><th>Certitude</th><th>Raison</th><th>Note</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${personChip(r.person)}${r.partner?` et ${personChip(r.partner)}`:''}</td><td><span class="branch-closed-badge certainty-${escapeHtml(r.certainty)}">${escapeHtml(r.certainty_label)}</span></td><td>${escapeHtml(r.reason_label||'—')}</td><td><small>${escapeHtml(r.note||'')}</small></td></tr>`).join('')}</tbody></table>`
+                :emptyState({icon:'🔍',text:'Aucune branche fermée ne correspond',hint:'Vérifie l’orthographe, ou retire un filtre.'});
+            bindTableLinks();
+        }
+        paint();
     }
     /** Widget « Ascendants / descendants » : personne choisie ou dernière fiche, sens et générations réglés au crayon. */
     function dashboardLineageCard(index,widget,spanClass,personId){
@@ -6310,6 +6444,7 @@ ${backupSectionHtml()}
         splitDesignPage();
         enhanceDesignFormOptions(design);
         reorderDesignPrimaryFields();
+        bindMainColorHint();
         bindToastPrefs($('#workspace'));
         // 🗺️ les réglages de carte vont dans leur page (Cartes et fonds de carte) ; ils restent enregistrés avec le reste de l'apparence
         {const box=$('[data-design-mapfields]');['mapBackground','defaultMapLocationMode'].forEach(n=>{const f=$(`#design-form [name="${n}"]`);if(!box||!f)return;f.setAttribute('form','design-form');box.appendChild(f.closest('label'));});}

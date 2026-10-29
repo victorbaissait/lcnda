@@ -193,10 +193,35 @@
             <section class="maintenance-panel"><h3>Décès de la famille par année</h3>${deathsChart(data.by_year || {}, crises) || empty('Aucun décès daté.')}
                 <p class="h-legend">${Object.entries(CRISIS_ICONS).map(([k, i]) => `<span><i style="background:${CRISIS_COLORS[k]}"></i>${i} ${esc(k)}</span>`).join('')}</p></section>
             ${(data.spikes || []).length ? `<section class="maintenance-panel"><h3>Années noires de la famille</h3><table class="data-table"><thead><tr><th>Année</th><th>Décès</th><th>D’habitude</th><th>Explication possible</th></tr></thead><tbody>${data.spikes.map(s => `<tr><td><strong>${s.year}</strong></td><td>${s.deaths}</td><td>${fmt(s.usual, 1)} / an</td><td>${s.explained.length ? esc(s.explained.join(' ; ')) : '<span class="muted">aucune crise connue : épidémie locale ? (regarde l’âge des morts : enfants → variole, rougeole, dysenterie)</span>'}</td></tr>`).join('')}</tbody></table></section>` : ''}
-            <h3>${plural(hit.length, 'crise a touché', 'crises ont touché')} la famille</h3>
-            <div class="h-records">${crises.map(c => `<article class="h-record h-crisis ${c.victims.length ? '' : 'is-quiet'}" style="--crisis:${CRISIS_COLORS[c.category] || '#999'}"><header><div><strong>${CRISIS_ICONS[c.category] || '•'} ${esc(c.title)}</strong> <small>${c.from}${c.to !== c.from ? '–' + c.to : ''} · ${esc(c.scope === 'France' ? 'toute la France' : 'régions : ' + c.scope)}</small></div>${c.excess ? `<span class="h-badge ${c.excess >= 2 ? 'is-warn' : ''}">${c.excess >= 2 ? '×' + fmt(c.excess, 1) + ' la mortalité habituelle' : 'mortalité ordinaire'}</span>` : ''}</header>
-                <p>${esc(c.description)}</p>${c.victims.length ? `<details ${c.victims.length <= 6 ? 'open' : ''}><summary>${plural(c.victims.length, 'décès dans la famille', 'décès dans la famille')} pendant cette période</summary><ul>${c.victims.map(v => `<li>${pLink(v.person)} — ${esc(v.date)}${v.place ? ' à ' + esc(v.place) : ''}${v.age !== null ? ` <small>(${v.age} ans)</small>` : ''}</li>`).join('')}</ul></details>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👪</span><span class="empty-line-text">Aucun décès de la famille enregistré pendant cette crise.</span></p>'}</article>`).join('') || empty('Aucune crise dans la période couverte par ta base.')}</div></section>`;
-        A().bindTableLinks();
+            <h3>Les crises</h3><div data-crisis-bar></div><div class="h-records" data-crisis-rows></div></section>`;
+        // H10 : la barre sur les crises seulement ; le graphique et « Années noires » restent au-dessus, sans barre
+        const UIx = window.LCNDA_UI, ws = A().$('#workspace');
+        const crisisHtml = c => `<article class="h-record h-crisis ${c.victims.length ? '' : 'is-quiet'}" style="--crisis:${CRISIS_COLORS[c.category] || '#999'}"><header><div><strong>${CRISIS_ICONS[c.category] || '•'} ${esc(c.title)}</strong> <small>${c.from}${c.to !== c.from ? '–' + c.to : ''} · ${esc(c.scope === 'France' ? 'toute la France' : 'régions : ' + c.scope)}</small></div>${c.excess ? `<span class="h-badge ${c.excess >= 2 ? 'is-warn' : ''}">${c.excess >= 2 ? '×' + fmt(c.excess, 1) + ' la mortalité habituelle' : 'mortalité ordinaire'}</span>` : ''}</header>
+                <p>${esc(c.description)}</p>${c.victims.length ? `<details ${c.victims.length <= 6 ? 'open' : ''}><summary>${plural(c.victims.length, 'décès dans la famille', 'décès dans la famille')} pendant cette période</summary><ul>${c.victims.map(v => `<li>${pLink(v.person)} — ${esc(v.date)}${v.place ? ' à ' + esc(v.place) : ''}${v.age !== null ? ` <small>(${v.age} ans)</small>` : ''}</li>`).join('')}</ul></details>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👪</span><span class="empty-line-text">Aucun décès de la famille enregistré pendant cette crise.</span></p>'}</article>`;
+        if (!crises.length) { ws.querySelector('[data-crisis-bar]').remove(); ws.querySelector('[data-crisis-rows]').innerHTML = empty('Aucune crise dans la période couverte par ta base.'); A().bindTableLinks(); return; }
+        const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const yearOf = v => { const m = String(v || '').match(/\b(\d{3,4})\b/); return m ? Number(m[1]) : 0; };
+        const cnt = {}; crises.forEach(c => { cnt[c.category] = (cnt[c.category] || 0) + 1; });
+        const SORTS = {'épidémie': 'Épidémies', famine: 'Famines', hiver: 'Hivers terribles', guerre: 'Guerres', crise: 'Autres crises'};
+        const bar = UIx.listBar({key: 'listes:historical_context', search: {placeholder: 'Chercher une crise… (choléra, Bretagne, 1709)'},
+            filters: [{id: 'cat', label: 'Sorte', type: 'check', options: Object.keys(cnt).map(k => [k, `${CRISIS_ICONS[k] || '•'} ${SORTS[k] || k}`, `${CRISIS_ICONS[k] || '•'} ${SORTS[k] || k}`, cnt[k]])},
+                {id: 'hit', label: 'La famille', type: 'check', text: `Qui ont touché la famille (${hit.length})`, chipLabel: 'Ont touché la famille'},
+                {id: 'from', group: 'Période', label: 'À partir de', type: 'date', placeholder: '1700', chipPrefix: 'Depuis'},
+                {id: 'to', group: 'Période', label: 'Jusqu’à', type: 'date', placeholder: '1900', chipPrefix: 'Jusqu’à'}],
+            sort: {options: [['time', 'Ordre du temps'], ['deaths', 'Le plus de décès dans la famille'], ['excess', 'Mortalité la plus forte']], value: 'time'},
+            onChange: () => paint()});
+        ws.querySelector('[data-crisis-bar]').replaceWith(bar);
+        function paint() {
+            const st = bar.state, f = st.filters, words = fold(st.q).split(/\s+/).filter(Boolean), from = yearOf(f.from), to = yearOf(f.to);
+            let rows = crises.filter(c => (!f.cat?.length || f.cat.includes(c.category)) && (!f.hit || c.victims.length) && (!from || c.to >= from) && (!to || c.from <= to)
+                && (!words.length || words.every(w => fold(`${c.title} ${c.scope} ${c.description} ${c.from} ${c.to}`).includes(w))));
+            const by = {deaths: (a, b) => b.victims.length - a.victims.length || a.from - b.from, excess: (a, b) => (Number(b.excess) || 0) - (Number(a.excess) || 0) || a.from - b.from}[st.sort];
+            if (by) rows = [...rows].sort(by);
+            bar.setCount(`${plural(rows.length, 'crise', 'crises')}${rows.length !== crises.length ? ` sur ${crises.length}` : ''} · ${plural(hit.length, 'a touché', 'ont touché')} la famille`);
+            ws.querySelector('[data-crisis-rows]').innerHTML = rows.length ? rows.map(crisisHtml).join('') : A().emptyState({icon: '🔍', text: 'Aucune crise ne correspond', hint: 'Change les mots cherchés ou retire un filtre.'});
+            A().bindTableLinks();
+        }
+        paint();
     };
 
     /* ═══════════════════════ ✊ RÉSISTANTS ═══════════════════════ */
@@ -296,13 +321,43 @@
     ext.lists.resistance_list = async token => {
         const data = await api('resistance_overview');
         if (!isCurrent(token, 'listes')) return;
-        const people = data.people || [];
-        const pts = [], paths = [];
-        people.forEach(r => { const c = (r.steps || []).filter(s => s.lat !== null && s.lat !== '').map(s => [Number(s.lat), Number(s.lon)]); c.forEach((x, i) => pts.push({lat: x[0], lon: x[1], label: pname(r.person) + ' — ' + (r.steps.filter(s => s.lat !== null && s.lat !== '')[i]?.place_text || '')})); if (c.length > 1) paths.push({coords: c, color: '#b5523b', dashed: true}); });
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Résistants', 'Les résistants de la famille : réseaux, arrestations, caches, déportations, et leurs parcours sur la carte. Pour en ajouter un : fiche → Identité → « Blocs à afficher sur la fiche » → ✊ Résistant.')}
-            ${people.length ? `${pts.length && ext.miniMap ? `<section class="maintenance-panel">${ext.miniMap(pts, paths, {height: 380})}</section>` : ''}
-            <table class="data-table"><thead><tr><th>Personne</th><th>Nom de guerre</th><th>Réseau, mouvement</th><th>Période</th><th>Devenir</th><th>Étapes</th></tr></thead><tbody>${people.map(r => { const pr = r.profile || {}; return `<tr><td>${pLink(r.person)}${ext.labelChips(r.labels)}</td><td>${esc(pr.nom_de_guerre || '')}</td><td>${esc([pr.network, pr.movement].filter(Boolean).join(' · '))}</td><td>${esc([pr.joined, pr.left_date].filter(Boolean).join(' → '))}</td><td>${[Number(pr.arrested) && '⛓️ arrêté', Number(pr.deported) && '🚂 déporté', Number(pr.killed) && '⚰️ mort'].filter(Boolean).join(', ')}${pr.fate ? `<br><small>${esc(pr.fate)}</small>` : ''}</td><td>${(r.steps || []).length}</td></tr>`; }).join('')}</tbody></table>` : A().emptyState({text: 'Aucun résistant pour l’instant', icon: '🎖️', hint: 'Sur une fiche : Identité → « Blocs à afficher sur la fiche » → ✊ Résistant.'})}</section>`;
-        A().bindTableLinks();
+        const people = data.people || [], UIx = window.LCNDA_UI, ws = A().$('#workspace');
+        ws.innerHTML = `<section class="page collection-page">${header('LISTES', 'Résistants', 'Les résistants de la famille : réseaux, arrestations, caches, déportations, et leurs parcours sur la carte. Pour en ajouter un : fiche → Identité → « Blocs à afficher sur la fiche » → ✊ Résistant.')}
+            ${people.length ? '<div data-res-bar></div><div data-res-map></div><div data-res-rows></div>' : A().emptyState({text: 'Aucun résistant pour l’instant', icon: '🎖️', hint: 'Sur une fiche : Identité → « Blocs à afficher sur la fiche » → ✊ Résistant.'})}</section>`;
+        if (!people.length) return;
+        // H10 : la barre au-dessus de la liste ; la carte des parcours suit les filtres
+        const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const yearOf = v => { const m = String(v || '').match(/\b(\d{4})\b/); return m ? Number(m[1]) : 0; };
+        const groups = {}; people.forEach(r => { const pr = r.profile || {}; [pr.network, pr.movement].filter(Boolean).forEach(g => { groups[g] = (groups[g] || 0) + 1; }); });
+        const fateN = k => people.filter(r => Number(r.profile?.[k])).length;
+        const bar = UIx.listBar({key: 'listes:resistance_list', search: {placeholder: 'Chercher… (nom, nom de guerre, réseau, mouvement)'},
+            filters: [{id: 'group', label: 'Réseau, mouvement', type: 'check', options: Object.keys(groups).sort((x, y) => x.localeCompare(y, 'fr')).map(g => [g, g, g, groups[g]])},
+                {id: 'fate', label: 'Devenir', type: 'check', options: [['arrested', '⛓️ Arrêté', '⛓️ Arrêté', fateN('arrested')], ['deported', '🚂 Déporté', '🚂 Déporté', fateN('deported')], ['killed', '⚰️ Mort', '⚰️ Mort', fateN('killed')]]},
+                {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: 'Étiquette :'}],
+            sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A'], ['joined', 'Date d’entrée en résistance']], value: 'az'},
+            onChange: () => paint()});
+        ws.querySelector('[data-res-bar]').replaceWith(bar);
+        function paint() {
+            const st = bar.state, f = st.filters, words = fold(st.q).split(/\s+/).filter(Boolean), lab = f.label && typeof f.label === 'object' ? Number(f.label.id) : 0, labTxt = typeof f.label === 'string' ? fold(f.label.replace(/^txt:/, '')) : '';
+            let rows = people.filter(r => { const pr = r.profile || {};
+                return (!f.group?.length || f.group.some(g => g === pr.network || g === pr.movement)) && (!f.fate?.length || f.fate.some(k => Number(pr[k])))
+                    && (!lab || (r.labels || []).some(l => Number(l.id) === lab)) && (!labTxt || (r.labels || []).some(l => fold(l.name) === labTxt))
+                    && (!words.length || words.every(w => fold(`${pname(r.person)} ${pr.nom_de_guerre || ''} ${pr.network || ''} ${pr.movement || ''}`).includes(w))); });
+            const nm = r => `${r.person?.last_name || ''} ${r.person?.first_name || ''}`, upd = r => r.profile?.updated_at || r.person?.updated_at || '';
+            const by = {recent: (x, y) => String(upd(y)).localeCompare(String(upd(x))), old: (x, y) => String(upd(x)).localeCompare(String(upd(y))),
+                az: (x, y) => nm(x).localeCompare(nm(y), 'fr', {sensitivity: 'base'}), za: (x, y) => nm(y).localeCompare(nm(x), 'fr', {sensitivity: 'base'}),
+                joined: (x, y) => (yearOf(x.profile?.joined) || 9999) - (yearOf(y.profile?.joined) || 9999)}[st.sort];
+            if (by) rows = [...rows].sort(by);
+            bar.setCount(`${plural(rows.length, 'résistant', 'résistants')}${rows.length !== people.length ? ` sur ${people.length}` : ''}`);
+            const pts = [], paths = [];
+            rows.forEach(r => { const located = (r.steps || []).filter(s => s.lat !== null && s.lat !== ''), c = located.map(s => [Number(s.lat), Number(s.lon)]); c.forEach((x, i) => pts.push({lat: x[0], lon: x[1], label: pname(r.person) + ' — ' + (located[i]?.place_text || '')})); if (c.length > 1) paths.push({coords: c, color: '#b5523b', dashed: true}); });
+            ws.querySelector('[data-res-map]').innerHTML = pts.length && ext.miniMap ? `<section class="maintenance-panel">${ext.miniMap(pts, paths, {height: 380})}</section>` : '';
+            ws.querySelector('[data-res-rows]').innerHTML = rows.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th><button data-sort-column="0" data-sort-key="person">Personne</button></th><th><button data-sort-column="1">Nom de guerre</button></th><th><button data-sort-column="2">Réseau, mouvement</button></th><th><button data-sort-column="3" data-sort-key="joined">Période</button></th><th><button data-sort-column="4">Devenir</button></th><th><button data-sort-column="5">Étapes</button></th></tr></thead><tbody>${rows.map(r => { const pr = r.profile || {}; return `<tr><td>${pLink(r.person)}${ext.labelChips(r.labels)}</td><td>${esc(pr.nom_de_guerre || '')}</td><td>${esc([pr.network, pr.movement].filter(Boolean).join(' · '))}</td><td>${esc([pr.joined, pr.left_date].filter(Boolean).join(' → '))}</td><td>${[Number(pr.arrested) && '⛓️ arrêté', Number(pr.deported) && '🚂 déporté', Number(pr.killed) && '⚰️ mort'].filter(Boolean).join(', ')}${pr.fate ? `<br><small>${esc(pr.fate)}</small>` : ''}</td><td>${(r.steps || []).length}</td></tr>`; }).join('')}</tbody></table></div>`
+                : A().emptyState({icon: '🔍', text: 'Aucun résistant ne correspond', hint: 'Change les mots cherchés ou retire un filtre.'});
+            bar.sortColumns?.(ws.querySelector('[data-res-rows] table'), {person: ['az', 'za'], joined: ['joined']}); // cliquer un titre de colonne met « Trier » à jour
+            A().bindTableLinks();
+        }
+        paint();
     };
 
     /* ═══════════════════════ 🧩 BLOCS PERSONNALISÉS (sur les fiches) ═══════════════════════ */
@@ -975,54 +1030,111 @@
     const censusStatus = {todo: 'À chercher', found: 'Trouvé', not_found: 'Non trouvé', not_born: 'Pas encore né', not_in_france: 'Pas encore en France', not_france: 'Pas en France', left_france: 'Plus en France', dead: 'Déjà décédé'};
     ext.lists.census_households = async token => {
         const st = S();
-        const f = {village: st.hCensusVillage || '', year: st.hCensusYear || '', q: st.hCensusQ || ''};
         let data;
-        try { data = await api('census_households', f); } catch (error) { toast(error.message, 'error'); return; }
+        try { data = await api('census_households', {}); } catch (error) { toast(error.message, 'error'); return; }
         if (token !== st.workspaceToken || st.module !== 'listes' || st.listType !== 'census_households') return;
-        const recs = data.records || [];
-        const byYear = new Map(); recs.forEach(r => { const y = r.year || '?'; if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(r); });
-        const people = recs.reduce((n, r) => n + r.members.length, 0);
+        const all = data.records || [];
         const memberName = m => m.person_id ? personLink(m.person_id, [m.first_name, m.last_name].filter(Boolean).join(' ') || m.display_name) : esc(m.display_name || '—');
-        const household = r => `<article class="h-census-house"><header><div><strong>${esc(r.place || 'Lieu inconnu')}</strong>${r.address ? ` · ${esc(r.address)}` : ''}${r.date_text ? ` <small class="muted">${esc(r.date_text)}</small>` : ''}</div>
+        const household = (r, withYear) => `<article class="h-census-house"><header><div>${withYear && r.year ? `<strong>${esc(r.year)}</strong> · ` : ''}<strong>${esc(r.place || 'Lieu inconnu')}</strong>${r.address ? ` · ${esc(r.address)}` : ''}${r.date_text ? ` <small class="muted">${esc(r.date_text)}</small>` : ''}</div>
                 <span>${Number(r.is_special) ? '<span class="collection-kind">recensement particulier</span> ' : ''}<span class="collection-kind">${esc(censusStatus[r.status] || r.status || '')}</span>${Number(r.media) ? ` <span class="collection-kind">📎 ${fmt(r.media)}</span>` : ''}</span></header>
-            ${r.members.length ? `<table class="data-table"><thead><tr><th>Nom</th><th>Place dans le foyer</th><th>Âge</th><th>Métier</th><th>Lieu de naissance</th></tr></thead><tbody>${r.members.map(m => `<tr><td>${memberName(m)}</td><td>${esc(m.household_position || m.personal_status || '')}</td><td>${esc(m.age_text || '')}</td><td>${esc(m.occupation || '')}</td><td>${esc(m.birth_place || '')}</td></tr>`).join('')}</tbody></table>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucun membre relevé.</span></p>'}
+            ${r.members.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Nom</th><th>Place dans le foyer</th><th>Âge</th><th>Métier</th><th>Lieu de naissance</th></tr></thead><tbody>${r.members.map(m => `<tr><td>${memberName(m)}</td><td>${esc(m.household_position || m.personal_status || '')}</td><td>${esc(m.age_text || '')}</td><td>${esc(m.occupation || '')}</td><td>${esc(m.birth_place || '')}</td></tr>`).join('')}</tbody></table></div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucun membre relevé.</span></p>'}
             ${r.notes ? `<p class="muted">${nl(r.notes)}</p>` : ''}</article>`;
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-census-page">${header('LISTES', 'Recensements : tous les foyers', 'Chaque foyer recensé avec ses membres, regroupés par année. Filtre par commune, année ou nom ; clique sur un nom pour ouvrir sa fiche (le recensement se modifie depuis la fiche, bloc Recensements).')}
-            <div class="form-grid h-census-filters"><label>Commune<select data-hc="village"><option value="">Toutes (${fmt(data.villages.reduce((n, v) => n + v.census, 0))})</option>${data.villages.map(v => `<option value="${esc(v.key)}" ${v.key === f.village ? 'selected' : ''}>${esc(v.name)}${v.county ? ` (${esc(v.county)})` : ''} — ${fmt(v.census)}</option>`).join('')}</select></label>
-                <label>Année<select data-hc="year"><option value="">Toutes</option>${data.years.map(y => `<option value="${y.year}" ${String(y.year) === String(f.year) ? 'selected' : ''}>${y.year} (${fmt(y.n)})</option>`).join('')}</select></label>
-                <label class="span-2">Chercher un nom, un métier, une adresse<input type="search" data-hc="q" value="${esc(f.q)}" placeholder="Dupont, cultivateur, rue du Moulin…"></label></div>
-            <p class="muted">${plural(recs.length, 'foyer', 'foyers')} · ${plural(people, 'personne relevée', 'personnes relevées')}${data.truncated ? ' (les 2 000 premiers)' : ''} ${recs.length ? '<button type="button" class="link-button" data-hc-csv>Exporter en CSV</button>' : ''}</p>
-            ${recs.length ? [...byYear.entries()].map(([y, list]) => `<details class="h-census-year" open><summary><strong>${esc(y)}</strong> — ${plural(list.length, 'foyer', 'foyers')}, ${plural(list.reduce((n, r) => n + r.members.length, 0), 'personne', 'personnes')}</summary>${list.map(household).join('')}</details>`).join('') : A().emptyState({text: 'Aucun recensement ne correspond', icon: '🏠', hint: 'Les recensements s’ajoutent depuis la fiche d’une personne (bloc Recensements).'})}</section>`;
-        const ws = A().$('#workspace');
-        const rerun = () => ext.lists.census_households(++S().workspaceToken);
-        ws.querySelectorAll('select[data-hc]').forEach(el => el.addEventListener('change', () => { const k = el.dataset.hc; st[k === 'village' ? 'hCensusVillage' : 'hCensusYear'] = el.value; rerun(); }));
-        let t = 0; ws.querySelector('input[data-hc="q"]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.hCensusQ = e.target.value.trim(); rerun().then(() => { const i = A().$('#workspace input[data-hc="q"]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }); }, 350); });
-        ws.querySelector('[data-hc-csv]')?.addEventListener('click', () => {
-            const q = v => `"${String(A().csvSafe ? A().csvSafe(v) : (v ?? '')).replace(/"/g, '""')}"`; // formules (= + - @) neutralisées
-            const lines = [['Année', 'Date', 'Commune', 'Adresse', 'Nom', 'Place dans le foyer', 'Âge', 'Métier', 'Lieu de naissance'].map(q).join(';')];
-            recs.forEach(r => (r.members.length ? r.members : [{}]).forEach(m => lines.push([r.year, r.date_text, r.place, r.address, m.person_id ? [m.first_name, m.last_name].filter(Boolean).join(' ') || m.display_name : m.display_name, m.household_position || m.personal_status, m.age_text, m.occupation, m.birth_place].map(q).join(';'))));
-            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\n')], {type: 'text/csv'})); a.download = 'recensements.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-        });
-        A().bindTableLinks?.();
+        const U = window.LCNDA_UI, LM = U.listMatch;
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-census-page">${U.pageHeader({title: 'Recensements : tous les foyers', help: 'Chaque foyer recensé avec ses membres, regroupés par année. Clique sur un nom pour ouvrir sa fiche (le recensement se modifie depuis la fiche, bloc Recensements).',
+                actions: all.length ? ['<button type="button" class="button secondary" data-hc-export aria-haspopup="menu">⤓ Exporter ▾</button>'] : []})}
+            ${data.truncated ? U.notice('info', 'Seuls les 2 000 premiers foyers sont montrés.') : ''}${all.length ? '<div data-hc-bar></div><div data-hc-list></div>' : A().emptyState({text: 'Aucun recensement pour l’instant', icon: '🏠', hint: 'Les recensements s’ajoutent depuis la fiche d’une personne (bloc Recensements).'})}</section>`;
+        const ws = A().$('#workspace'), box = ws.querySelector('[data-hc-list]'), slot = ws.querySelector('[data-hc-bar]');
+        let shown = all;
+        const csvRows = () => [['Année', 'Date', 'Commune', 'Adresse', 'Nom', 'Place dans le foyer', 'Âge', 'Métier', 'Lieu de naissance'],
+            ...shown.flatMap(r => (r.members.length ? r.members : [{}]).map(m => [r.year, r.date_text, r.place, r.address, m.person_id ? [m.first_name, m.last_name].filter(Boolean).join(' ') || m.display_name : m.display_name, m.household_position || m.personal_status, m.age_text, m.occupation, m.birth_place].map(v => String(v ?? ''))))];
+        ws.querySelector('[data-hc-export]')?.addEventListener('click', e => U.menuAt(e.currentTarget, [
+            {icon: '📄', label: 'En CSV (Excel, LibreOffice…)', run: () => {
+                const q = v => `"${String(A().csvSafe ? A().csvSafe(v) : (v ?? '')).replace(/"/g, '""')}"`; // formules (= + - @) neutralisées
+                const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csvRows().map(r => r.map(q).join(';')).join('\n')], {type: 'text/csv'})); a.download = 'recensements.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }},
+            ...(ext.openRowsInSheet ? [{icon: '🧮', label: 'Ouvrir dans le tableur', help: 'les foyers affichés', run: () => ext.openRowsInSheet({name: 'Recensements : tous les foyers', rows: csvRows()})}] : [])],
+            {title: `${plural(shown.length, 'foyer affiché', 'foyers affichés')}`}));
+        if (!slot) { A().bindTableLinks?.(); return; }
+        const statuses = [...new Set(all.map(r => r.status).filter(Boolean))];
+        const bar = U.listBar({key: 'listes:census_households', search: {placeholder: 'Chercher… (nom, métier, adresse)', value: st.hCensusQ || ''},
+            filters: [{id: 'commune', label: 'Commune', type: 'place', chipPrefix: '📍'},
+                {id: 'year', label: 'Année', type: 'check', options: (data.years || []).map(y => [String(y.year), `${y.year} (${fmt(y.n)})`, String(y.year)])},
+                {id: 'status', label: 'Où j’en suis', type: 'check', options: statuses.map(k => [k, `${censusStatus[k] || k} (${all.filter(r => r.status === k).length})`, censusStatus[k] || k])},
+                {id: 'special', label: 'Recensement particulier', type: 'check', text: `Seulement les recensements particuliers (${all.filter(r => Number(r.is_special)).length})`, chipLabel: 'Recensement particulier'}],
+            sort: {options: [['year', 'Par année'], ['place', 'Commune A → Z'], ['members', 'Le plus de membres']], value: 'year'},
+            onChange: () => paint()});
+        // ouvert depuis la fiche d'un village (« Voir les foyers ») : la commune et l'année demandées deviennent les filtres
+        if (st.hCensusVillage || st.hCensusYear) {
+            const v = (data.villages || []).find(x => x.key === st.hCensusVillage);
+            bar.clear(); if (v) bar.setFilter('commune', `txt:${v.name}`, true); if (st.hCensusYear) bar.setFilter('year', [String(st.hCensusYear)], true);
+            st.hCensusVillage = ''; st.hCensusYear = '';
+        }
+        st.hCensusQ = '';
+        slot.replaceWith(bar);
+        function paint() {
+            const {q, filters: f, sort} = bar.state;
+            let rows = all.filter(r => LM.text(q, r.place, r.address, r.members.map(m => [m.display_name, m.first_name, m.last_name, m.occupation]))
+                && LM.pick(f.commune, [r.place_id], [r.place]) && (!(f.year || []).length || f.year.includes(String(r.year))) && (!(f.status || []).length || f.status.includes(r.status)) && (!f.special || Number(r.is_special)));
+            if (sort === 'place') rows = [...rows].sort((a, b) => String(a.place || '').localeCompare(String(b.place || ''), 'fr', {sensitivity: 'base'}) || (a.year || 0) - (b.year || 0));
+            if (sort === 'members') rows = [...rows].sort((a, b) => b.members.length - a.members.length || (a.year || 0) - (b.year || 0));
+            shown = rows;
+            const people = rows.reduce((n, r) => n + r.members.length, 0);
+            bar.setCount(`${plural(rows.length, 'foyer', 'foyers')}${rows.length !== all.length ? ` sur ${fmt(all.length)}` : ''} · ${plural(people, 'personne relevée', 'personnes relevées')}`);
+            if (!rows.length) { box.innerHTML = A().emptyState({icon: '🔍', text: 'Aucun foyer ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer »).'}); return; }
+            if (sort === 'year') {
+                const byYear = new Map(); rows.forEach(r => { const y = r.year || '?'; if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(r); });
+                box.innerHTML = [...byYear.entries()].map(([y, list]) => `<details class="h-census-year" open><summary><strong>${esc(y)}</strong> — ${plural(list.length, 'foyer', 'foyers')}, ${plural(list.reduce((n, r) => n + r.members.length, 0), 'personne', 'personnes')}</summary>${list.map(r => household(r, false)).join('')}</details>`).join('');
+            } else box.innerHTML = rows.map(r => household(r, true)).join('');
+            A().bindTableLinks?.();
+        }
+        paint();
     };
     ext.openCensusHouseholds = (village = '', year = '') => { const st = S(); st.hCensusVillage = village; st.hCensusYear = year ? String(year) : ''; st.hCensusQ = ''; st.listType = 'census_households'; A().setModule('listes'); };
 
     ext.lists.villages = async token => {
         const st = S();
         if (st.hVillage) return renderVillage(token, st.hVillage);
-        const data = await api('villages', {q: st.hVillageQ || ''});
+        const data = await api('villages', {});
         if (!isCurrent(token, 'listes')) return;
-        const rows = data.villages || [];
+        const all = data.villages || [], UI = window.LCNDA_UI, KEY = 'listes:villages';
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Fiche d’un village', 'Pour chaque commune où la famille a vécu : les familles, les métiers, l’église et la paroisse, la population au fil des recensements, et la carte de Cassini.')}
-            <div class="collection-toolbar"><input type="search" id="h-village-q" value="${esc(st.hVillageQ || '')}" placeholder="Chercher une commune…"></div>
-            ${rows.length ? `<div class="data-table-wrap"><table class="data-table sortable-table"><thead><tr>${['Commune', 'Département', 'Personnes de la famille', 'Événements', 'Période'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}</tr></thead><tbody>${rows.map(v => `<tr><td data-sort-value="${esc(v.name.toLowerCase())}"><button type="button" class="table-link" data-h-village="${esc(v.key)}"><strong>${esc(v.name)}</strong></button>${v.places > 1 ? ` <small class="muted">(${v.places} lieux)</small>` : ''}</td><td data-sort-value="${esc([v.county, v.country !== 'France' ? v.country : ''].filter(Boolean).join(', ').toLowerCase())}">${esc([v.county, v.country !== 'France' ? v.country : ''].filter(Boolean).join(', '))}</td><td data-sort-value="${v.persons}">${v.persons}</td><td data-sort-value="${v.events}">${v.events}</td><td data-sort-value="${v.from || 9999}">${v.from ? esc(v.from + (v.to && v.to !== v.from ? '–' + v.to : '')) : '—'}</td></tr>`).join('')}</tbody></table></div>` : empty('Aucune commune : les lieux des événements et des recensements apparaissent ici.')}</section>`;
-        const ws = A().$('#workspace');
-        ws.querySelector('#h-village-q').addEventListener('input', debounceVillage(e => { st.hVillageQ = e.target.value.trim(); ext.lists.villages(++st.workspaceToken).then(() => { const i = A().$('#h-village-q'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }); }));
-        ws.querySelectorAll('[data-h-village]').forEach(b => b.addEventListener('click', () => { st.hVillage = b.dataset.hVillage; ext.lists.villages(++st.workspaceToken); }));
+            ${all.length ? '<div data-hv-bar></div>' : ''}<div data-hv-list></div></section>`;
+        const ws = A().$('#workspace'), box = ws.querySelector('[data-hv-list]');
+        if (!all.length) { box.innerHTML = A().emptyState({icon: '🏘️', text: 'Aucune commune pour l’instant', hint: 'Les lieux des événements et des recensements apparaissent ici.'}); return; }
+        // H10 : 🔍 commune · Filtrer ▾ Département, Pays, Période · Liste | Fiches · Trier (le plus de personnes au départ) ; l’ancienne case (st.hVillageQ) est reprise une fois
+        const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+        const country = v => (v.country && fold(v.country) !== 'france' ? v.country : 'France');
+        const dep = v => [v.county, country(v) !== 'France' ? country(v) : ''].filter(Boolean).join(', ');
+        const count = (fn, list) => [...list.reduce((m, v) => { const k = fn(v); if (k) m.set(k, (m.get(k) || 0) + 1); return m; }, new Map())].sort((x, y) => x[0].localeCompare(y[0], 'fr')).map(([k, nb]) => [k, k, k, nb]);
+        const yearOf = v => Number(String(v || '').match(/\d{3,4}/)?.[0]) || 0;
+        const filters = [{id: 'county', label: 'Département', type: 'check', options: count(v => v.county, all)},
+            {id: 'country', label: 'Pays', type: 'check', options: count(country, all)},
+            {id: 'from', group: 'Période', label: 'De', type: 'date', placeholder: '« 1800 »', chipPrefix: 'Depuis'}, {id: 'to', group: 'Période', label: 'À', type: 'date', placeholder: '« 1900 »', chipPrefix: 'Jusqu’à'}].filter(f => f.type !== 'check' || f.options.length > 1);
+        const SORT_OPTS = [['persons', 'Le plus de personnes'], ['events', 'Le plus d’événements'], ['old', 'Période : les plus anciens'], ['recent', 'Période : les plus récents'], ['az', 'A → Z'], ['za', 'Z → A'], ['dep', 'Département : A → Z']];
+        const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher une commune… (ex. Tulle, Corrèze)', value: UI.listBarState?.(KEY) ? '' : (st.hVillageQ || '')}, filters,
+            view: {dflt: 'list', what: 'communes'}, sort: {options: SORT_OPTS, value: 'persons'}, onChange: () => paint()});
+        ws.querySelector('[data-hv-bar]').replaceWith(bar);
+        const az = (x, y) => x.name.localeCompare(y.name, 'fr', {sensitivity: 'base'});
+        const SORTS = {persons: (x, y) => y.persons - x.persons || y.events - x.events || az(x, y), events: (x, y) => y.events - x.events || az(x, y), old: (x, y) => (x.from || 9999) - (y.from || 9999) || az(x, y), recent: (x, y) => (y.to || 0) - (x.to || 0) || az(x, y), az, za: (x, y) => az(y, x), dep: (x, y) => dep(x).localeCompare(dep(y), 'fr', {sensitivity: 'base'}) || az(x, y)};
+        const COLS = [['Commune', 'az', 'za'], ['Département', 'dep', 'dep'], ['Personnes de la famille', 'persons', 'persons'], ['Événements', 'events', 'events'], ['Période', 'old', 'recent']];
+        const period = v => (v.from ? v.from + (v.to && v.to !== v.from ? '–' + v.to : '') : '');
+        function paint() {
+            const s = bar.state, f = s.filters, words = fold(s.q).split(/\s+/).filter(Boolean), y1 = yearOf(f.from), y2 = yearOf(f.to);
+            const rows = all.filter(v => (!words.length || words.every(w => fold(`${v.name} ${v.county}`).includes(w))) && (!(f.county || []).length || f.county.includes(v.county)) && (!(f.country || []).length || f.country.includes(country(v)))
+                && (!y1 || (v.to || v.from || 0) >= y1) && (!y2 || (v.from && v.from <= y2))).sort(SORTS[s.sort] || SORTS.persons);
+            bar.setCount(rows.length === all.length ? plural(all.length, 'commune', 'communes') : `${plural(rows.length, 'commune', 'communes')} sur ${all.length}`);
+            if (!rows.length) { box.innerHTML = A().emptyState({icon: '🔍', text: 'Aucune commune ne correspond', hint: 'Vérifie l’orthographe, ou retire un filtre.'}); return; }
+            if (s.view === 'cards') { box.innerHTML = UI.cardsHtml(rows.map(v => ({thumb: '<span class="ui-card-ico">📍</span>', name: v.name, open: `data-h-village="${esc(v.key)}"`, lines: [[dep(v), period(v)].filter(Boolean).join(' · '), `${plural(v.persons, 'personne', 'personnes')} · ${plural(v.events, 'événement', 'événements')}`], badges: v.places > 1 ? [{text: `${v.places} lieux`, kind: 'grey'}] : []}))); return; }
+            // un clic sur le titre d’une colonne trie (et met « Trier » à jour)
+            box.innerHTML = `<div class="data-table-wrap"><table class="data-table"><thead><tr>${COLS.map(([h, s1, s2]) => `<th><button type="button" data-hv-sort="${s1}" data-hv-sort2="${s2}">${h}${s.sort === s1 || s.sort === s2 ? (s1 === s2 ? ' ↓' : s.sort === s1 ? ' ↑' : ' ↓') : ''}</button></th>`).join('')}</tr></thead><tbody>${rows.map(v => `<tr><td><button type="button" class="table-link" data-h-village="${esc(v.key)}"><strong>${esc(v.name)}</strong></button>${v.places > 1 ? ` <small class="muted">(${v.places} lieux)</small>` : ''}</td><td>${esc(dep(v))}</td><td>${v.persons}</td><td>${v.events}</td><td>${v.from ? esc(period(v)) : '—'}</td></tr>`).join('')}</tbody></table></div>`;
+        }
+        paint();
+        box.addEventListener('click', e => {
+            const srt = e.target.closest('[data-hv-sort]');
+            if (srt && bar.select) { const cur = bar.state.sort, nv = cur === srt.dataset.hvSort && srt.dataset.hvSort2 !== cur ? srt.dataset.hvSort2 : srt.dataset.hvSort; bar.select.value = nv; bar.select.dispatchEvent(new Event('change')); return; }
+            const b = e.target.closest('[data-h-village]'); if (b) { st.hVillage = b.dataset.hVillage; ext.lists.villages(++st.workspaceToken); }
+        });
         A().bindTableLinks();
     };
-    let villageTimer = 0;
-    const debounceVillage = fn => e => { clearTimeout(villageTimer); villageTimer = setTimeout(() => fn(e), 300); };
     /** Barres par décennie (toutes les décennies de la commune, même vides), pour tous les actes ou une seule sorte. */
     function decadesHtml(v, type) {
         const all = Object.keys(v.decades).map(Number);
@@ -1476,7 +1588,8 @@
             ['Comment choisir une police ?', 'Le bouton « Aa Toutes les polices… » ouvre une seule liste : recherche, polices récentes en haut, polices de l’app et de l’ordinateur, chacune écrite dans sa police.'],
             ['Comment trier une liste ?', 'En haut de la liste : « N éléments · Trier : » et le menu (plus récents, plus anciens, A → Z…). En bas, « Voir les N suivants ↓ » charge la suite.'],
             ['Comment créer mon propre thème (design de couleurs) ?', 'Réglages → Apparence → « ✎ Mes thèmes » → « ＋ Nouveau thème… » (ou « Dupliquer » sur un thème existant). Choisis en voyant l’aperçu : la couleur principale (boutons, liens), le fond de la page, des panneaux et des cartes, le texte, la couleur des traits qui entourent les cadres et leur épaisseur (de 0 à 8 px ; 0 = sans traits). Coche « Thème sombre » pour un fond foncé : l’app passe en mode sombre. Si le texte se lit mal sur un fond, un message jaune le dit. Enregistre : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes » ; choisis-le puis « Appliquer ». « ⚙️ Gérer les presets » range, montre ou cache les thèmes, et pour les tiens : modifier, renommer, dupliquer, exporter, supprimer (avec « ↶ Annuler »).'],
-            ['Comment changer l’épaisseur ou la couleur des traits autour des cadres ?', 'Avec un thème à toi : Réglages → Apparence → « ✎ Mes thèmes » → « ＋ Nouveau thème… » (ou « Modifier »). « Traits qui entourent (bordures) » donne leur couleur, séparée de celle du texte, et le curseur « Épaisseur des traits qui entourent » leur épaisseur, de 0 à 12 px (2 px au départ, double-clic pour y revenir). Les thèmes de l’app gardent leurs traits noirs de 2 px.'],
+            ['Pourquoi « ⚠️ Sur ce fond, cette couleur se lit mal » sous « Couleur principale » ?', 'La couleur principale sert aussi à écrire des liens, des petites pastilles et des textes. Avec certains fonds (surtout un thème sombre et une couleur foncée, comme le bleu #0066cc sur « Sombre »), elle se lit mal : l’app mesure l’écart de luminosité (le contraste, comme dans « ✎ Mes thèmes ») et prévient quand il est sous 4,5. Ce n’est qu’un avertissement : ta couleur reste choisie. « Prendre la couleur du thème » remet celle proposée par le Preset (gardée tout de suite, « ↶ Annuler » pour revenir). L’avertissement s’en va tout seul dès que la couleur ou le Preset se lit bien. Dans Graphiques → Statistiques, en mode sombre, les chiffres écrits dans la couleur d’une statistique sont éclaircis pour rester lisibles ; les barres gardent tes couleurs.'],
+            ['Comment changer l’épaisseur ou la couleur des traits autour des cadres ?','Avec un thème à toi : Réglages → Apparence → « ✎ Mes thèmes » → « ＋ Nouveau thème… » (ou « Modifier »). « Traits qui entourent (bordures) » donne leur couleur, séparée de celle du texte, et le curseur « Épaisseur des traits qui entourent » leur épaisseur, de 0 à 12 px (2 px au départ, double-clic pour y revenir). Les thèmes de l’app gardent leurs traits noirs de 2 px.'],
             ['Comment ajouter ma propre forme d’avatar ?', 'Réglages → « Portraits et avatars » → « 1 · La forme » → « ＋ Créer une forme ». Trois façons : « 📚 Bibliothèque » (les formes des tableaux : cœurs, blasons, étoiles, arbres… avec la recherche et les familles), « ✏️ Dessiner un polygone » (clique pour poser les points, glisse-les, double-clic pour en enlever ; modèles triangle, étoile, écusson…), ou « ⤒ Importer un SVG » (glisse ou colle le fichier : seuls ses chemins pleins sont gardés, jamais de script). Donne-lui un nom et « ＋ Créer la forme » : elle est choisie tout de suite, et reste dans la rangée des formes (avec ✎).'],
             ['Comment avoir le même portrait (rond ou carré d’initiales) partout ?', 'Réglages → « Portraits et avatars ». « 1 · La forme » : une seule forme pour tout (rond, carré arrondi, carré, carré penché, losange… et les tiennes), qui vaut pour les portraits et pour les petits carrés numérotés des blocs ; elle s’enregistre dès le clic. « 2 · Le portrait » : « Partir de » Comme avant (au départ, chaque écran garde son dessin), Rond unique (le même rond partout, à la couleur du genre) ou Carré de la fiche (bord noir, photo en noir et blanc). Dessous : arrondi, taille des initiales, bord, couleurs homme / femme / inconnu / animal, photo de la fiche, noir et blanc, une ou deux lettres, badge Sosa ; l’aperçu montre la fiche, une liste, le menu de choix, l’arbre et les pastilles. « ↺ Remettre comme au départ » revient à « Comme avant ».'],
             ['Comment changer la colonne de gauche (style des entrées, numéros, onglets, largeur, à droite) ?', 'Réglages → « Menus, colonne et listes » → onglet « Colonne ». « Où ? » : à gauche ou à droite. « Le dessin de la colonne » : « Partir de » Comme avant (au départ) ou Nouveau (numéros qui se suivent, mêmes onglets partout, « Liste | Fiches » au-dessus de la liste), puis chaque choix en image : style des entrées (boutons encadrés par défaut, liste continue, liste aérée, boutons sans ombre, barre de côté, pastilles arrondies, onglets de classeur, cartes avec repère, fond doux), onglets du haut, numéros (qui se suivent, lettres d’origine ou aucun), taille, « Liste | Fiches » et largeur (240 à 420 px). L’aperçu suit chaque clic. Ça vaut pour toutes les colonnes (Personnes, Graphiques, Carte, Enquêtes, Recherche, Comparaison…).'],
@@ -1534,7 +1647,7 @@
             ['Comment rouvrir un diaporama exporté ?', 'Un fichier exporté par « ⤓ Exporter → 💾 Fichier » se rouvre avec « ⤒ Importer un diaporama » dans la liste des diaporamas.'],
             ['Comment zoomer sur téléphone ?', 'Dans la maison, le dessin et la présentation, deux doigts zooment le plan ou la diapositive, pas la page.'],
             ['Puis-je rattraper un widget retiré du tableau de bord ?', 'Oui : « ↶ Annuler » dans le message en bas à gauche. Un tableau de bord vide propose « ＋ Ajouter un widget ».'],
-            ['À quoi sert la barre au-dessus des listes ?', 'Chercher, Filtrer, Liste | Fiches et Trier sont toujours au même endroit. Les filtres choisis s’affichent en pastilles bleues (« Femmes × ») : un clic sur une pastille la retire, « Tout effacer » les retire toutes. Chaque liste retient tes réglages, même après avoir fermé l’app. Dans Personnes, tu peux filtrer par genre, lieu de naissance et étiquette.'],
+            ['À quoi sert la barre au-dessus des listes ?', 'Toutes les listes ont maintenant la même barre, toujours dans cet ordre : 🔍 Chercher (touche « / » pour y aller, Échap ou × pour vider), « Filtrer ▾ », « Liste | Fiches » et « Trier ». Dans « Filtrer ▾ », chaque rubrique montre ses choix avec leur nombre (Sorte, État, Lieu 📍, Personne 👤, Étiquette 🏷, Période…) ; les filtres choisis s’affichent sous la barre en pastilles bleues (« Femmes × ») : un clic sur une pastille la retire, « Tout effacer » les retire toutes. « Trier » commence toujours par « Les plus récents, Les plus anciens, A → Z, Z → A », puis les tris de la liste ; cliquer le titre d’une colonne trie aussi. Chaque liste retient tes réglages, même après avoir fermé l’app. Une liste encore vide ne montre pas de barre, seulement le bouton pour commencer. Les Trésors (Lettres, Bougies, Partages, Passeport des lieux, Actes manquants, Gazettes) ont aussi la barre : « Allumées » ou « En cours » est le choix de départ, en pastille (× pour tout voir) ; une lettre scellée n’est jamais cherchée dans son texte. Les deux calendriers (Mon agenda, Calendrier de la famille) n’ont que 🔍 et « Filtrer ▾ » (Sorte, Personne, Lieu) : la recherche marche dans toutes les vues. Dans « Mes listes » : « Liste | Fiches » et « Plus ▾ » pour les autres présentations (par groupe, colonnes à glisser, frise, galerie), « Filtrer ▾ » a une rubrique par colonne (le ▾ d’un titre de colonne l’ouvre) et ces filtres restent rangés dans la liste ; « ⤓ Exporter ▾ » et « 🖨 Imprimer » sont en haut, Modifier, Dupliquer et Supprimer dans « ⋯ ».'],
             ['Pourquoi l’app ne me demande plus « Es-tu sûr ? » avant de supprimer ?', 'Pour une note, un événement, une ligne, un élément dans un outil…, la suppression se fait tout de suite et un message en bas à gauche propose « ↶ Annuler » pendant 6 secondes (la souris dessus arrête le temps). Après Annuler, « ↷ Rétablir » refait la suppression. La question reste seulement pour ce qui ne se rattrape pas : une fiche entière, une base, vider la corbeille.'],
             ['Les fichiers CSV que je télécharge sont-ils sûrs ?', 'Oui : un texte qui commence par =, +, - ou @ est précédé d’une apostrophe, pour qu’Excel, Numbers ou LibreOffice ne le prennent pas pour une formule cachée.'],
             ['Comment visiter ma maison comme si j’y étais ?', 'Maison → Vue 3D → « 🚶 Visiter ». Marche avec Z Q S D (ou W A S D) ou les flèches, Maj pour courir. Clique sur la vue pour regarder avec la souris, Échap pour la libérer, Échap encore pour sortir. On passe par les portes, pas à travers les murs. Sur un escalier : E pour monter, C pour descendre (ou les boutons ⬆ ⬇). La petite carte montre où tu es ; un clic dessus t’y emmène. La hauteur des yeux se règle (1,60 m, ou 1 m pour voir comme un enfant). Sur tablette, marche avec le rond en bas à gauche.'],
@@ -2233,15 +2346,21 @@
             if (f.from || f.to) { const y = yearOf(v); if (y === null || (f.from && y < f.from) || (f.to && y > f.to)) return false; }
             return true;
         });
-        const sort = S().hListSort?.id === id ? S().hListSort : null;
-        let shown = data.rows.filter(passes);
-        if (sort) {
-            const num = v => { const y = yearOf(v); return y ?? (v !== '' && !isNaN(Number(v)) ? Number(v) : null); };
-            shown = [...shown].sort((a, b) => { const x = text(a, sort.col), y = text(b, sort.col), nx = num(x), ny = num(y); const r = nx !== null && ny !== null ? nx - ny : x.localeCompare(y, 'fr', {numeric: true, sensitivity: 'base'}); return sort.dir === 'desc' ? -r : r; });
-        }
+        // H10 : 🔍, « Trier » et la présentation retenus sur cet appareil (barre commune) ; les filtres restent rangés dans la liste (export, widget, autres appareils)
+        const UI = window.LCNDA_UI, LBK = `listes:mylist:${id}`, lbs = UI?.listBarState?.(LBK) || {};
+        const parseSort = v => { const m = /^(.*):(asc|desc)$/.exec(v || ''); return m ? {col: m[1], dir: m[2]} : null; };
+        let sortV = String(lbs.sort ?? (S().hListSort?.id === id ? `${S().hListSort.col}:${S().hListSort.dir}` : '')), sort = parseSort(sortV), q = String(lbs.q || '');
         const allCols = [...cols.map(c => [c, data.columns[c] || c]), ...custom.map(c => [c.key, c.label])];
-        const th = (c, label, own) => `<th class="${own ? 'h-lv-own' : ''}"><span class="h-lv-th"><button type="button" class="h-lv-sort" data-lv-sort="${esc(c)}" title="Trier">${esc(label)}${sort?.col === c ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ''}</button><button type="button" class="h-lv-filter ${filters[c] ? 'is-on' : ''}" data-lv-filter="${esc(c)}" title="Ne garder que certaines valeurs">▾</button></span></th>`;
-        const filterChips = Object.keys(filters).length ? `<div class="h-lv-filters">Filtres : ${Object.entries(filters).map(([c, f]) => `<span class="h-lv-chip">${esc(allCols.find(x => x[0] === c)?.[1] || c)} : ${esc([f.values ? (f.values.length === 1 ? (f.values[0] || '(vide)') : f.values.length + ' valeurs') : '', f.contains ? '« ' + f.contains + ' »' : '', f.from || f.to ? (f.from || '…') + '–' + (f.to || '…') : ''].filter(Boolean).join(', '))} <button type="button" data-lv-unfilter="${esc(c)}" title="Enlever ce filtre">×</button></span>`).join('')} <button type="button" class="link-button" data-lv-unfilter="*">Tout enlever</button></div>` : '';
+        const fold = t => String(t ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const num = v => { const y = yearOf(v); return y ?? (v !== '' && !isNaN(Number(v)) ? Number(v) : null); };
+        let shown = [];
+        const compute = () => {
+            const words = fold(q).split(/\s+/).filter(Boolean);
+            shown = data.rows.filter(passes).filter(r => !words.length || words.every(w => fold(allCols.map(([c]) => text(r, c)).join(' ')).includes(w)));
+            if (sort) shown = [...shown].sort((a, b) => { const x = text(a, sort.col), y = text(b, sort.col), nx = num(x), ny = num(y); const r = nx !== null && ny !== null ? nx - ny : x.localeCompare(y, 'fr', {numeric: true, sensitivity: 'base'}); return sort.dir === 'desc' ? -r : r; });
+        };
+        compute();
+        const th = (c, label, own) => `<th class="${own ? 'h-lv-own' : ''}"><span class="h-lv-th"><button type="button" class="h-lv-sort" data-lv-sort="${esc(c)}" title="Trier">${esc(label)}${sort?.col === c ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ''}</button><button type="button" class="h-lv-filter ${filters[c] ? 'is-on' : ''}" data-lv-filter="${esc(c)}" title="Filtrer cette colonne">▾</button></span></th>`;
         const unit = isEv ? ['événement', 'événements'] : isFree || isTable ? ['ligne', 'lignes'] : ['personne', 'personnes'];
         const customCell = (r, c) => { const v = r.values?.[c.key] ?? '';
             if (c.type === 'checkbox') return `<input type="checkbox" data-lv="${esc(c.key)}" ${v === '1' ? 'checked' : ''}>`;
@@ -2315,70 +2434,115 @@
             const checks = custom.filter(c => c.type === 'checkbox').map(c => [c.label, rows.filter(r => r.values?.[c.key] === '1').length]);
             return `<div class="h-lv-totals"><span><b>${fmt(rows.length)}</b> ${rows.length > 1 ? unit[1] : unit[0]}</span>${sums.map(([l, t]) => `<span>Total ${esc(l)} : <b>${fmt(Math.round(t * 100) / 100)}</b></span>`).join('')}${checks.map(([l, n]) => `<span>${esc(l)} : <b>${fmt(n)}</b> / ${fmt(rows.length)}</span>`).join('')}</div>`; };
         const bodyHtml = D => {
-            if (!data.rows.length && !isFree) return empty('Aucune ligne ne répond à ces critères.');
+            // H10 : une liste tout à fait vide = la grande boîte K10 seule (sans barre) ; rien ne correspond = la boîte 🔍 avec « Tout effacer »
+            if (!data.rows.length) return A().emptyState(isFree ? {icon: L.icon || '📋', text: 'Aucune ligne pour l’instant', hint: 'Écris la première ligne : chaque colonne se remplit à la main.', action: {label: '＋ Ajouter une ligne', attrs: 'data-lv-newrow'}}
+                : {icon: L.icon || '📋', text: 'Aucune ligne ne répond aux critères de la liste', hint: isPersons ? 'Change les critères, ou ajoute une personne à la main ci-dessus.' : 'Change les critères de la liste.', action: {label: '✎ Modifier la liste', attrs: 'data-lv-edit'}});
             const view = {cards: cardsHtml, grouped: groupedHtml, kanban: kanbanHtml, timeline: timelineHtml, gallery: galleryHtml}[D.mode] || tableHtml;
-            return `${totalsHtml(shown, D)}${chartHtml(shown, D)}${!shown.length && D.mode !== 'table' ? empty('Aucune ligne ne répond à ces critères.') : view(shown, D)}`;
+            return `${totalsHtml(shown, D)}${chartHtml(shown, D)}${!shown.length ? A().emptyState({icon: '🔍', text: 'Aucune ligne ne correspond', hint: 'Change les mots cherchés ou retire un filtre.', action: {label: 'Tout effacer', attrs: 'data-lv-clearall'}}) : view(shown, D)}`;
         };
         const bodyAttrs = D => `class="h-lv-body h-lv-size-${esc(D.size || 'm')}" data-lv-body style="--lv-accent:${esc(D.accent || '#0066cc')}"`;
-        const modesBar = D => `<div class="h-lv-modes"><span class="h-lv-modes-tabs">${DMODES.map(([m, l]) => `<button type="button" class="${D.mode === m ? 'is-on' : ''}" data-lv-mode="${m}">${l}</button>`).join('')}</span>
-            ${D.mode !== 'table' && allCols.length ? `<label class="h-lv-mini">Trier <select data-lv-sortsel><option value="">—</option>${allCols.map(([c, l]) => `<option value="${esc(c)}" ${sort?.col === c ? 'selected' : ''}>${esc(l)}${sort?.col === c ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ''}</option>`).join('')}</select></label><label class="h-lv-mini">Filtrer <select data-lv-filtersel><option value="">choisir…</option>${allCols.map(([c, l]) => `<option value="${esc(c)}">${esc(l)}</option>`).join('')}</select></label>` : ''}
-            <button type="button" class="button small secondary" data-lv-look>🎨 Apparence</button></div>`;
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header(inLists ? 'LISTES' : 'ÉDITEUR DE LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(shown.length, unit[0], unit[1])}</strong>${shown.length !== data.rows.length ? ` ${shown.length > 1 ? 'affichées' : 'affichée'} sur ${fmt(data.rows.length)}` : ''}${data.truncated ? ' (liste coupée : les premières seulement)' : ''}` + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
-                `${inLists ? '' : '<button type="button" class="button secondary" data-lv-back>← Éditeur de listes</button>'}<button type="button" class="button secondary" data-lv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-lv-print>Imprimer</button>${tools('data-lv-edit', 'data-lv-del', 'cette liste')}`)}
-            ${isFree ? '<div class="collection-toolbar"><button type="button" class="button" data-lv-newrow>＋ Ajouter une ligne</button></div>' : ''}
+        const EXTRA = DMODES.filter(([m]) => !['table', 'cards'].includes(m));
+        // K5 : l'en-tête ; le nombre va dans la barre H10. ⤓ Exporter ▾ et 🖨 Imprimer (L1) en haut ; ✎ Modifier, ⧉ Dupliquer, 🗑 Supprimer dans « ⋯ »
+        const head = window.LCNDA_UI.pageHeader({title: (L.icon || '📋') + ' ' + L.name, where: inLists ? undefined : 'Réglages · Éditeur de listes', detail: !inLists,
+            back: inLists ? '' : '<button type="button" class="link-button" data-lv-back>← Éditeur de listes</button>',
+            help: esc(L.description || '') + (data.truncated ? `${L.description ? '<br>' : ''}<small class="muted">Liste coupée : les premières lignes seulement.</small>` : '') + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
+            actions: ['<button type="button" class="button secondary" data-lv-export aria-haspopup="true">⤓ Exporter ▾</button>', '<button type="button" class="button secondary" data-lv-print data-shortcut="⌘P">🖨 Imprimer</button>'],
+            more: ['<button type="button" data-lv-edit>✎ Modifier la liste</button>', '<button type="button" data-lv-dup>⧉ Dupliquer</button>', '<button type="button" class="danger" data-lv-del>🗑 Supprimer</button>']});
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${head}
+            ${isFree && data.rows.length ? '<div class="collection-toolbar"><button type="button" class="button" data-lv-newrow>＋ Ajouter une ligne</button></div>' : ''}
             ${isPersons ? `<div class="collection-toolbar"><div class="h-lv-add"><span class="pk-lab">Ajouter une personne à la main</span>${window.LCNDA_PICKER.pickerField({name: 'lv_add', kind: 'person'})}</div><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
-            ${filterChips}${!isFree && data.rows.length && disp.mode === 'table' ? '<p class="muted h-lv-help">Clic sur le nom d’une colonne : trier · <b>▾</b> : ne garder que certaines valeurs (des personnes, des villes, une période…)</p>' : ''}
-            ${modesBar(disp)}<div ${bodyAttrs(disp)}>${bodyHtml(disp)}</div></section>`;
+            ${data.rows.length && UI?.listBar ? '<div data-lv-bar></div>' : ''}<div ${bodyAttrs(disp)}>${bodyHtml(disp)}</div></section>`;
         A().bindTableLinks?.();
         const ws = A().$('#workspace');
         const reload = () => renderListView(++S().workspaceToken, id, inLists);
         const saveFilters = async next => { try { await api('save_my_list_filters', {}, {method: 'POST', body: {id, filters: next}}); reload(); } catch (error) { toast(error.message, 'error'); } };
-        const toggleSort = c => { S().hListSort = sort?.col === c ? (sort.dir === 'asc' ? {id, col: c, dir: 'desc'} : null) : {id, col: c, dir: 'asc'}; reload(); };
-        ws.querySelectorAll('[data-lv-unfilter]').forEach(b => b.addEventListener('click', () => { const c = b.dataset.lvUnfilter; const next = c === '*' ? {} : {...filters}; delete next[c]; saveFilters(next); }));
-        const openFilter = c => {
-            const label = allCols.find(x => x[0] === c)?.[1] || c, f = filters[c] || {};
-            // Toutes les valeurs de la colonne, avec leur nombre
-            const counts = new Map(); data.rows.forEach(r => { const v = text(r, c).trim(); counts.set(v, (counts.get(v) || 0) + 1); });
-            const values = [...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr', {numeric: true, sensitivity: 'base'}));
-            const hasYears = values.some(([v]) => yearOf(v) !== null);
-            dialog({eyebrow: 'FILTRER LA COLONNE', title: label, submitLabel: 'Appliquer',
-                body: `<label>Ne garder que ce qui contient<input name="contains" value="${esc(f.contains || '')}" placeholder="un mot, un nom…"></label>
-                    ${hasYears ? `<div class="h-lv-years"><label>Années de<input type="number" name="from" value="${esc(f.from || '')}" placeholder="1850"></label><label>à<input type="number" name="to" value="${esc(f.to || '')}" placeholder="1920"></label></div>` : ''}
-                    <h4>Valeurs à garder <small class="muted">(${fmt(values.length)})</small></h4><div class="h-lv-vtools"><input type="search" data-lv-vq placeholder="Chercher une valeur…"><button type="button" class="link-button" data-lv-vall>Tout cocher</button><button type="button" class="link-button" data-lv-vnone>Tout décocher</button></div>
-                    <div class="h-lv-values">${values.slice(0, 1500).map(([v, n], i) => `<label class="checkbox-line" data-lv-vrow="${esc(v.toLowerCase())}"><input type="checkbox" data-lv-v="${i}" ${!f.values || f.values.includes(v) ? 'checked' : ''}> ${v === '' ? '<em>(vide)</em>' : esc(v)} <small class="muted">${fmt(n)}</small></label>`).join('')}</div>`,
-                onOpen: dl => {
-                    dl.querySelector('[data-lv-vq]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); dl.querySelectorAll('[data-lv-vrow]').forEach(r => { r.hidden = q && !r.dataset.lvVrow.includes(q); }); });
-                    const setAll = on => dl.querySelectorAll('[data-lv-vrow]:not([hidden]) input').forEach(i => { i.checked = on; });
-                    dl.querySelector('[data-lv-vall]').addEventListener('click', () => setAll(true));
-                    dl.querySelector('[data-lv-vnone]').addEventListener('click', () => setAll(false));
-                },
-                onSubmit: async form => {
-                    const checked = [...form.querySelectorAll('[data-lv-v]')].filter(i => i.checked).map(i => values[Number(i.dataset.lvV)][0]);
-                    const nf = {};
-                    // au-delà des 1 500 valeurs affichées : on garde ce qui était déjà retenu (elles n'ont pas pu être décochées)
-                    const hidden = values.slice(1500).map(([v]) => v).filter(v => !f.values || f.values.includes(v));
-                    if (checked.length < Math.min(values.length, 1500)) nf.values = checked.concat(hidden);
-                    if (form.contains.value.trim()) nf.contains = form.contains.value.trim();
-                    if (form.from?.value) nf.from = Number(form.from.value);
-                    if (form.to?.value) nf.to = Number(form.to.value);
-                    const next = {...filters}; if (Object.keys(nf).length) next[c] = nf; else delete next[c];
-                    await saveFilters(next);
-                },
-            });
-        };
+        /* ── H10 : la barre commune — 🔍 Chercher · Filtrer ▾ (une rubrique par colonne) · Liste | Fiches + Plus ▾ · Trier ▾ ── */
+        let bar = null, viewCtl = null;
+        const countText = () => `${plural(shown.length, unit[0], unit[1])}${shown.length !== data.rows.length ? ` sur ${fmt(data.rows.length)}` : ''}`;
+        const colKind = c => { const vals = data.rows.map(r => text(r, c).trim()).filter(Boolean); if (!vals.length) return 'txt'; if (vals.every(v => yearOf(v) !== null) && !custom.find(x => x.key === c && x.type === 'number')) return 'year'; return vals.every(v => num(v) !== null) ? 'num' : 'txt'; };
+        const sortWords = {txt: ['A → Z', 'Z → A'], year: ['les plus anciens d’abord', 'les plus récents d’abord'], num: ['du plus petit au plus grand', 'du plus grand au plus petit']};
+        const kinds = Object.fromEntries(allCols.map(([c]) => [c, colKind(c)]));
+        const sortLabel = (c, dir) => `${colLabel(c)} : ${sortWords[kinds[c] || 'txt'][dir === 'desc' ? 1 : 0]}`;
+        const sortOptions = [['', 'Dans l’ordre de la liste'], ...allCols.flatMap(([c]) => [[`${c}:asc`, sortLabel(c, 'asc')], [`${c}:desc`, sortLabel(c, 'desc')]])];
+        /* Filtrer : pour chaque colonne, les valeurs cochées avec leur nombre, « contient… », une période (années) — comme la fenêtre d'avant, rangés dans la liste */
+        const lbFilters = allCols.flatMap(([c, label]) => {
+            const f = filters[c] || {}, counts = new Map(); data.rows.forEach(r => { const v = text(r, c).trim(); counts.set(v, (counts.get(v) || 0) + 1); });
+            let vals = [...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr', {numeric: true, sensitivity: 'base'}));
+            if (vals.length > 40) { const keep = new Set([...vals].sort((a, b) => b[1] - a[1]).slice(0, 40).map(x => x[0]).concat(f.values || [])); vals = vals.filter(x => keep.has(x[0])); } // beaucoup de valeurs : les plus fréquentes (et celles déjà gardées) ; « contient… » pour le reste
+            const out = [];
+            if (vals.length > 1 || f.values) out.push({id: `v:${c}`, group: label, label: 'Valeurs', type: 'check', value: f.values || [], options: vals.map(([v, n]) => [v, v === '' ? '(vide)' : v, `${label} : ${v === '' ? '(vide)' : v}`, n])});
+            out.push({id: `t:${c}`, group: label, label: 'contient…', type: 'text', placeholder: 'un mot, un nom…', value: f.contains || '', chipPrefix: `${label} contient`});
+            if (kinds[c] === 'year' || f.from || f.to) out.push({id: `f:${c}`, group: label, label: 'de… (année)', type: 'text', placeholder: '1880', value: f.from ? String(f.from) : '', chipPrefix: `${label} : depuis`},
+                {id: `u:${c}`, group: label, label: 'à… (année)', type: 'text', placeholder: '1920', value: f.to ? String(f.to) : '', chipPrefix: `${label} : jusqu’en`});
+            return out;
+        });
+        const toServer = fs => { const next = {}; allCols.forEach(([c]) => { const nf = {}, v = fs[`v:${c}`], t = String(fs[`t:${c}`] || '').trim(), a = parseInt(fs[`f:${c}`], 10), b = parseInt(fs[`u:${c}`], 10);
+            if (Array.isArray(v) && v.length) nf.values = v; if (t) nf.contains = t; if (a) nf.from = a; if (b) nf.to = b; if (Object.keys(nf).length) next[c] = nf; }); return next; };
+        const setMode = async m => { if (m === disp.mode) return; const changed = (disp.mode === 'table') !== (m === 'table'); disp = {...disp, mode: m};
+            try { await saveDisplay(disp); } catch (error) { toast(error.message, 'error'); } if (changed) reload(); else paint(disp); };
+        if (ws.querySelector('[data-lv-bar]')) {
+            // « Liste | Fiches » + « Plus ▾ » (📚 Par groupe, 🧩 Colonnes à glisser, 🕰 Frise, 🖼 Galerie) : celle qu'on choisit s'affiche dans le bouton
+            const vt = UI.viewToggle({value: disp.mode === 'cards' ? 'cards' : 'list', what: 'lignes', onChange: v => setMode(v === 'cards' ? 'cards' : 'table')});
+            const plusBtn = document.createElement('button'); plusBtn.type = 'button'; plusBtn.className = 'ui-listbar-btn h-lv-plus'; plusBtn.setAttribute('aria-haspopup', 'true'); plusBtn.title = 'Les autres présentations';
+            viewCtl = document.createElement('span'); viewCtl.className = 'h-lv-viewctl'; viewCtl.append(vt, plusBtn); Object.defineProperty(viewCtl, 'value', {get: () => vt.value});
+            viewCtl.paint = () => { const ex = EXTRA.find(([m]) => m === disp.mode); plusBtn.textContent = ex ? `${ex[1]} ▾` : 'Plus ▾'; plusBtn.classList.toggle('is-active', !!ex);
+                vt.querySelectorAll('button[data-view]').forEach(b => { const on = !ex && b.dataset.view === (disp.mode === 'cards' ? 'cards' : 'list'); b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); }); };
+            vt.addEventListener('click', e => { const b = e.target.closest('button[data-view]'); if (b && EXTRA.some(([m]) => m === disp.mode) && b.dataset.view === vt.value) setMode(b.dataset.view === 'cards' ? 'cards' : 'table'); });
+            plusBtn.addEventListener('click', () => UI.menuAt(plusBtn, [...EXTRA.map(([m, l]) => ({icon: l.split(' ')[0], label: l.split(' ').slice(1).join(' '), run: () => setMode(m)})), '-', {icon: '🎨', label: 'Apparence de la liste…', run: () => openLook()}], {title: 'Autres présentations'}));
+            viewCtl.paint();
+            bar = UI.listBar({key: LBK, remember: 'given', search: {placeholder: `Chercher dans la liste… (${allCols.slice(0, 3).map(x => x[1].toLowerCase()).join(', ')})`, value: q}, filters: lbFilters, view: viewCtl, sort: {options: sortOptions, value: sortV},
+                onChange: (st, {what}) => {
+                    if (what === 'view') return;
+                    q = st.q; sortV = st.sort; sort = parseSort(sortV); S().hListSort = null;
+                    if (what === 'filter' || what === 'clear') { const next = toServer(st.filters); if (JSON.stringify(next) !== JSON.stringify(filters)) return saveFilters(next); }
+                    compute(); paint(disp); bar.setCount(countText());
+                }});
+            bar.setCount(countText());
+            ws.querySelector('[data-lv-bar]').replaceWith(bar);
+        }
+        const toggleSort = c => { const next = sort?.col === c ? (sort.dir === 'asc' ? `${c}:desc` : '') : `${c}:asc`; if (bar) bar.setSort(next); };
+        /* ⤓ Exporter ▾ : ce qu'on voit (recherche et filtres compris) — 📄 CSV, 🧮 Ouvrir dans le tableur, 📊 Fichier Excel */
+        const matrix = (rows = shown) => [allCols.map(([, l]) => l), ...rows.map(r => allCols.map(([c]) => text(r, c)))];
+        const fileName = ext2 => `${(L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-')}.${ext2}`;
+        const download = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); };
+        ws.querySelector('[data-lv-export]').addEventListener('click', e => { const btn = e.currentTarget, SH = window.LCNDA_SHEET;
+            UI.menuAt(btn, [
+                {icon: '📄', label: 'CSV (tableur, Excel)', run: () => { const q2 = v => '"' + String(A().csvSafe ? A().csvSafe(v) : (v ?? '')).replace(/"/g, '""') + '"'; // formules (= + - @) neutralisées
+                    download(new Blob(['\ufeff' + matrix().map(r => r.map(q2).join(';')).join('\n')], {type: 'text/csv'}), fileName('csv')); }},
+                ...(ext.openRowsInSheet ? [{icon: '🧮', label: 'Ouvrir dans le tableur', help: 'mêmes colonnes, mêmes filtres', run: () => ext.openRowsInSheet({name: L.name || 'Liste', rows: matrix()})}] : []),
+                ...(SH?.toXlsx ? [{icon: '📊', label: 'Fichier Excel (.xlsx)', run: async () => { try { const wb = SH.newWorkbook(); wb.sheets[0].name = SH.cleanSheetName ? SH.cleanSheetName(L.name || 'Liste', []) : 'Liste'; wb.sheets[0].cells = SH.rowsToCells(matrix()); download(await SH.toXlsx(wb), fileName('xlsx')); } catch (error) { toast(error.message, 'error'); } }}] : []),
+            ], {title: `${plural(shown.length, unit[0], unit[1])} affichée${shown.length > 1 ? 's' : ''}`.replace(/(personnes?|événements?) affichée(s?)/, '$1 affiché$2')}); });
+        /* 🖨 Imprimer (L1) : « La vue affichée » ou « Toute la liste », et les colonnes à garder */
+        ws.querySelector('[data-lv-print]').addEventListener('click', () => {
+            if (!UI?.openPrintDialog) return;
+            const pe = v => String(v ?? '').replace(/[&<>"]/g, ch => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[ch]));
+            UI.openPrintDialog({title: L.name || 'Liste', key: 'mylist', photos: false,
+                options: [{key: 'what', type: 'radio', label: 'Les lignes', value: 'view', choices: [['view', `La vue affichée (${fmt(shown.length)})`], ['all', `Toute la liste (${fmt(data.rows.length)})`]]},
+                    ...allCols.map(([, l], i) => ({key: `col${i}`, label: l, checked: true}))],
+                html: ch => { const keep = allCols.map((x, i) => i).filter(i => ch[`col${i}`] !== false), rows = ch.what === 'all' ? data.rows : shown;
+                    return `<!doctype html><html><head><meta charset="utf-8"><title>${pe(L.name)}</title><style>body{font:10pt/1.35 system-ui,sans-serif;color:#111;margin:0}h1{font-size:15pt;margin:0 0 2mm}p{margin:0 0 4mm;color:#555}table{border-collapse:collapse;width:100%}th,td{border:1px solid #999;padding:1.2mm 2mm;text-align:left;vertical-align:top}th{background:#eee}tr{break-inside:avoid}</style></head><body><h1>${pe((L.icon || '📋') + ' ' + L.name)}</h1><p>${pe(plural(rows.length, unit[0], unit[1]))}${L.description ? ' · ' + pe(L.description) : ''}</p>
+                        <table><thead><tr>${keep.map(i => `<th>${pe(allCols[i][1])}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${keep.map(i => `<td>${pe(text(r, allCols[i][0]))}</td>`).join('')}</tr>`).join('')}</tbody></table></body></html>`; }});
+        });
+        /* ⧉ Dupliquer : la même liste (critères, colonnes à remplir, présentation) et ses lignes écrites ou ajoutées à la main */
+        ws.querySelector('[data-lv-dup]').addEventListener('click', async () => {
+            try {
+                const r = await api('save_my_list', {}, {method: 'POST', body: {id: 0, name: `${L.name} (copie)`.slice(0, 80), icon: L.icon, description: L.description, source: L.source, definition: d, pending_labels: []}}), nid = r.result?.id || r.id;
+                for (const row of data.rows) {
+                    if (isFree) { const k = await api('save_my_list_row', {}, {method: 'POST', body: {list_id: nid, row_key: 'f:new'}}); await api('save_my_list_row', {}, {method: 'POST', body: {list_id: nid, row_key: k.result?.row_key || k.row_key, values: row.values || {}}}); }
+                    else if (row.manual || Object.keys(row.values || {}).length) await api('save_my_list_row', {}, {method: 'POST', body: {list_id: nid, row_key: row.key, ...(row.manual ? {included: 1} : {}), values: row.values || {}}});
+                }
+                await refreshPinnedLists();
+                toast(`Liste dupliquée : « ${`${L.name} (copie)`.slice(0, 80)} ».`, '', {action: {label: 'Ouvrir', run: () => { S().hListOpen = nid; S().maintenanceTab = 'my_lists'; A().setModule('maintenance'); }}});
+            } catch (error) { toast(error.message, 'error'); }
+        });
+        ws.querySelector('.h-mylist').addEventListener('click', e => { if (e.target.closest('[data-lv-clearall]')) bar?.clear(true); });
+        const openFilter = c => bar?.openFilter(lbFilters.some(f => f.id === `v:${c}`) ? `v:${c}` : `t:${c}`); // le ▾ d'un titre de colonne : Filtrer, sur la rubrique de la colonne
         ws.querySelector('[data-lv-back]')?.addEventListener('click', () => { S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
-        ws.querySelector('[data-lv-edit]').addEventListener('click', goEdit);
+        ws.querySelector('.h-mylist').addEventListener('click', e => { if (e.target.closest('[data-lv-edit]')) goEdit(); }); // ⋯ › Modifier, ou le bouton de la liste vide
         ws.querySelector('[data-lv-del]').addEventListener('click', async () => {
             if (!await A().confirmBox('Supprimer cette liste ? (les fiches ne sont pas touchées)', {title: 'Supprimer la liste', okLabel: 'Supprimer la liste'})) return;
             await api('delete_my_list', {}, {method: 'POST', body: {id}}); S().hListOpen = 0; await refreshPinnedLists();
             if (inLists) { S().listType = 'persons'; A().renderSidebar?.(); A().renderList?.(); } else ext.maintenance.my_lists(++S().workspaceToken);
-        });
-        ws.querySelector('[data-lv-print]').addEventListener('click', () => (window.LCNDA_UI?.printPage ? window.LCNDA_UI.printPage('') : window.print())); // K13
-        ws.querySelector('[data-lv-csv]').addEventListener('click', () => {
-            const q = v => '"' + String(A().csvSafe ? A().csvSafe(v) : (v ?? '')).replace(/"/g, '""') + '"'; // formules (= + - @) neutralisées
-            const lines = [[...cols.map(c => data.columns[c] || c), ...custom.map(c => c.label)].map(q).join(';'),
-                ...shown.map(r => allCols.map(([c]) => text(r, c)).map(q).join(';'))];
-            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], {type: 'text/csv'})); a.download = (L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-') + '.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
         });
         ws.querySelector('[data-lv-newrow]')?.addEventListener('click', async () => {
             try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: 'f:new'}}); await reload(); const last = [...ws.querySelectorAll('[data-lv-body] [data-lv-key]')].pop(); last?.querySelector('input,select')?.focus(); }
@@ -2398,15 +2562,8 @@
         const body = ws.querySelector('[data-lv-body]');
         const rowOf = key => data.rows.find(r => r.key === key);
         const paint = D => { body.className = `h-lv-body h-lv-size-${D.size || 'm'}`; body.style.setProperty('--lv-accent', D.accent || '#0066cc'); body.innerHTML = bodyHtml(D);
-            ws.querySelectorAll('[data-lv-mode]').forEach(b => b.classList.toggle('is-on', b.dataset.lvMode === D.mode)); A().bindTableLinks?.(); };
+            viewCtl?.paint(); A().bindTableLinks?.(); };
         const saveDisplay = async D => { const r = await api('save_my_list_display', {}, {method: 'POST', body: {id, display: D}}); disp = fresh(r.result?.display || r.display || D); d.display = disp; return disp; };
-        ws.querySelectorAll('[data-lv-mode]').forEach(b => b.addEventListener('click', async () => {
-            const changed = (disp.mode === 'table') !== (b.dataset.lvMode === 'table'); disp = {...disp, mode: b.dataset.lvMode};
-            try { await saveDisplay(disp); } catch (error) { toast(error.message, 'error'); }
-            if (changed) reload(); else paint(disp);
-        }));
-        ws.querySelector('[data-lv-sortsel]')?.addEventListener('change', e => { const c = e.target.value; S().hListSort = c ? {id, col: c, dir: sort?.col === c && sort.dir === 'asc' ? 'desc' : 'asc'} : null; reload(); });
-        ws.querySelector('[data-lv-filtersel]')?.addEventListener('change', e => { if (e.target.value) openFilter(e.target.value); e.target.value = ''; });
         ws.querySelector('.h-mylist').addEventListener('click', e => { if (e.target.closest('[data-lv-look]')) openLook(); });
         body.addEventListener('change', async e => {
             const el = e.target.closest('[data-lv-key]'), f = e.target.dataset.lv; if (!el || !f) return;

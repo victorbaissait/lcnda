@@ -364,26 +364,47 @@
         const st = S();
         const pending = st.hEdit?.list === 'help_requests' ? st.hEdit : null;
         if (pending) { st.hEdit = null; edit = {id: pending.id, personId: pending.personId}; }
-        const filter = ['open', 'closed', 'all'].includes(st.hHelpFilter) ? st.hHelpFilter : 'open';
-        const data = await api('help_requests', {status: filter});
+        const data = await api('help_requests', {status: 'all'});
         if (!isCurrent(token)) return;
-        const rows = data.requests || [];
+        const rows = data.requests || [], UIx = window.LCNDA_UI;
         let e = null;
         if (edit) {
-            e = edit.id ? rows.find(r => Number(r.id) === Number(edit.id)) || (await api('help_requests', {status: 'all'})).requests.find(r => Number(r.id) === Number(edit.id)) : {id: 0, target: 'parents', status: 'draft', person_id: edit.personId || 0};
+            e = edit.id ? rows.find(r => Number(r.id) === Number(edit.id)) : {id: 0, target: 'parents', status: 'draft', person_id: edit.personId || 0};
             if (e?.person_id) { try { e.person = (await api('person', {id: e.person_id})).person; } catch (_) {} }
         }
-        const counts = data.counts || {open: 0, closed: 0};
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Demandes d’entraide', 'Pour un ancêtre où tu es bloqué, l’app rédige un message prêt à copier sur un forum, sur l’entraide de Geneanet ou sur un groupe Facebook : ce que l’on sait (avec les sources), ce que l’on cherche, ce qui a déjà été essayé (tiré des enquêtes). Les demandes bien présentées obtiennent beaucoup plus de réponses.')}
-            <div class="collection-toolbar"><button type="button" class="button" data-h-help-new>＋ Demande</button><div class="segmented-filter">${[['open', `En cours (${counts.open})`], ['closed', `Terminées (${counts.closed})`], ['all', 'Toutes']].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-help-filter="${k}">${esc(l)}</button>`).join('')}</div></div>
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Demandes d’entraide', 'Pour un ancêtre où tu es bloqué, l’app rédige un message prêt à copier sur un forum, sur l’entraide de Geneanet ou sur un groupe Facebook : ce que l’on sait (avec les sources), ce que l’on cherche, ce qui a déjà été essayé (tiré des enquêtes). Les demandes bien présentées obtiennent beaucoup plus de réponses.', '<button type="button" class="button" data-h-help-new>＋ Demande</button>')}
             ${e ? helpFormHtml(e) : ''}
-            ${rows.length ? `<div class="h-records">${rows.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong>${LC(r.labels)} — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">${window.LCNDA_UI?.when?.(r.updated_at, {label: 'Mise à jour'}) || esc(r.updated_at)}</small></article>`).join('')}</div>` : (e ? '' : (filter === 'closed' ? empty('Aucune demande terminée.', {icon: '✅'}) : A().emptyState({icon: '🤝', text: 'Aucune demande en cours', hint: 'Pour un ancêtre où tu es bloqué : l’app rédige un message prêt à copier sur un forum ou un groupe d’entraide.', action: {label: '＋ Demande', attrs: 'data-h-help-new'}})))}</section>`;
+            ${rows.length ? '<div data-h10-bar></div><div data-h10-rows></div>' : (e ? '' : A().emptyState({icon: '🤝', text: 'Aucune demande pour l’instant', hint: 'Pour un ancêtre où tu es bloqué : l’app rédige un message prêt à copier sur un forum ou un groupe d’entraide.', action: {label: '＋ Demande', attrs: 'data-empty-click="[data-h-help-new]"'}}))}</section>`;
         const ws = A().$('#workspace');
-        A().bindTableLinks();
         ws.querySelectorAll('[data-h-help-new]').forEach(b => b.addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: 0})));
-        ws.querySelectorAll('[data-h-help-filter]').forEach(b => b.addEventListener('click', () => { st.hHelpFilter = b.dataset.hHelpFilter; A().renderList(); }));
-        ws.querySelectorAll('[data-h-help-edit]').forEach(b => b.addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: Number(b.dataset.hHelpEdit)})));
-        ws.querySelectorAll('[data-h-help-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette demande ?', {title: 'Supprimer la demande', okLabel: 'Supprimer la demande'})) return; await api('delete_help_request', {}, {method: 'POST', body: {id: b.dataset.hHelpDelete}}); A().renderList(); }));
+        if (rows.length) {
+            // H10 : « En cours / Terminées / Toutes » devient la rubrique État (« en cours » au départ, visible en pastilles)
+            const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            const whereOf = r => { const t = fold(`${r.posted_where} ${r.posted_url}`); return !t.trim() ? 'none' : /geneanet/.test(t) ? 'geneanet' : /facebook|fb\.com/.test(t) ? 'facebook' : /forum/.test(t) ? 'forum' : 'other'; };
+            const cnt = (k, fn) => rows.filter(r => fn(r) === k).length;
+            const WHERE = [['geneanet', 'Geneanet'], ['forum', 'Un forum'], ['facebook', 'Facebook'], ['other', 'Ailleurs'], ['none', 'Pas encore publiée']];
+            const bar = UIx.listBar({key: 'listes:help_requests', search: {placeholder: 'Chercher… (personne, question, réponse, où c’est publié)'},
+                filters: [{id: 'status', label: 'État', type: 'check', value: ['draft', 'posted', 'answered'], options: Object.entries(helpStatuses).map(([k, l]) => [k, l, l, cnt(k, r => r.status)])},
+                    {id: 'target', label: 'Ce qu’on cherche', type: 'check', options: Object.entries(helpTargets).filter(([k]) => cnt(k, r => r.target)).map(([k, l]) => [k, l, `Cherche ${l}`, cnt(k, r => r.target)])},
+                    {id: 'person', label: 'Personne', type: 'person', allowFree: false, chipPrefix: 'Pour :'},
+                    {id: 'where', label: 'Publiée sur', type: 'check', options: WHERE.filter(([k]) => cnt(k, whereOf)).map(([k, l]) => [k, l, k === 'none' ? l : `Sur ${l}`, cnt(k, whereOf)])}],
+                sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'recent'},
+                onChange: () => paint()});
+            ws.querySelector('[data-h10-bar]').replaceWith(bar);
+            const paint = () => {
+                const b = bar.state, f = b.filters, words = fold(b.q).split(/\s+/).filter(Boolean), pid = f.person && typeof f.person === 'object' ? Number(f.person.id) : 0;
+                let list = rows.filter(r => (!f.status?.length || f.status.includes(r.status)) && (!f.target?.length || f.target.includes(r.target)) && (!pid || Number(r.person_id) === pid) && (!f.where?.length || f.where.includes(whereOf(r)))
+                    && (!words.length || words.every(w => fold([r.person_name, r.question, r.answer, r.posted_where, r.posted_url, helpTargets[r.target]].join(' ')).includes(w))));
+                list = UIx.sortItems(list, b.sort, {name: r => r.person_name || '', date: r => r.updated_at || r.created_at || ''});
+                bar.setCount(`${plural(list.length, 'demande', 'demandes')}${list.length !== rows.length ? ` sur ${fmt(rows.length)}` : ''}`);
+                ws.querySelector('[data-h10-rows]').innerHTML = list.length ? `<div class="h-records">${list.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong>${LC(r.labels)} — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">${window.LCNDA_UI?.when?.(r.updated_at, {label: 'Mise à jour'}) || esc(r.updated_at)}</small></article>`).join('')}</div>`
+                    : A().emptyState({icon: '🔍', text: 'Aucune demande ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer » montre aussi les demandes terminées).'});
+                A().bindTableLinks();
+                ws.querySelectorAll('[data-h10-rows] [data-h-help-edit]').forEach(x => x.addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: Number(x.dataset.hHelpEdit)})));
+                ws.querySelectorAll('[data-h10-rows] [data-h-help-delete]').forEach(x => x.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette demande ?', {title: 'Supprimer la demande', okLabel: 'Supprimer la demande'})) return; await api('delete_help_request', {}, {method: 'POST', body: {id: x.dataset.hHelpDelete}}); A().renderList(); }));
+            };
+            paint();
+        }
         if (e) bindHelpForm(e);
     };
     function helpFormHtml(e) {

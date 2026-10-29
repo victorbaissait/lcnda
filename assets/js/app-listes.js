@@ -245,20 +245,43 @@
     }
     async function renderArchiveVisitPlanner(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='listes'||state.listType!=='archive_visits')return;
-        $('#workspace').innerHTML=`<section class="page archive-visit-page"><header class="page-header"><div><span class="eyebrow">AVANT LA VISITE</span><h2>Planificateur de visite d’archives</h2><p>Prépare une feuille de mission par centre d’archives à partir des cotes déjà suivies, ou ajoute une cote libre.</p></div><div class="page-actions"><button class="button" type="button" id="add-archive-visit">＋ Feuille de mission</button></div></header><p class="archive-visit-notice">Les horaires et périodes de fermeture sont à vérifier auprès du centre avant le départ, notamment pour les fermetures estivales d’août.</p><div id="archive-visit-plans"><div class="loading-block">Préparation des visites…</div></div></section>`;
+        $('#workspace').innerHTML=`<section class="page archive-visit-page">${window.LCNDA_UI.pageHeader({title:'Planificateur de visite d’archives',help:'Prépare une feuille de mission par centre d’archives à partir des cotes déjà suivies, ou ajoute une cote libre.',primary:'<button class="button" type="button" id="add-archive-visit">＋ Feuille de mission</button>'})}<p class="archive-visit-notice">Les horaires et périodes de fermeture sont à vérifier auprès du centre avant le départ, notamment pour les fermetures estivales d’août.</p><div id="archive-visit-plans">${window.LCNDA_UI.spinner('Préparation des visites…')}</div></section>`;
         let data;try{data=await api('archive_visit_plans');}catch(error){$('#archive-visit-plans').innerHTML=empty(error.message||'Chargement impossible.');return;}
         if(token!==state.workspaceToken||state.listType!=='archive_visits')return;
         const plans=data.plans||[];
-        // À venir (date à venir ou à préciser) / Passés / Tous
-        const today=new Date().toISOString().slice(0,10),isPast=plan=>/^\d{4}-\d{2}-\d{2}/.test(String(plan.visit_date||''))&&String(plan.visit_date).slice(0,10)<today;
-        const filter=['upcoming','done','past','all'].includes(state.archiveVisitFilter)?state.archiveVisitFilter:'upcoming';
+        // H10 : 🔍 · Filtrer ▾ (État = les anciens onglets « À venir / ✓ Visites faites / Passés / Tous », Centre d’archives, Période) · Liste | Fiches (les feuilles de mission) · Trier
+        const UI=window.LCNDA_UI,LM=UI.listMatch,today=new Date().toISOString().slice(0,10),day=plan=>/^\d{4}-\d{2}-\d{2}/.test(String(plan.visit_date||''))?String(plan.visit_date).slice(0,10):'',isPast=plan=>!!day(plan)&&day(plan)<today;
         const isDone=plan=>Boolean(plan.done_at); // 🗓 « ✓ Fait le … » : le passé reste lisible dans « Visites faites »
-        const counts={upcoming:plans.filter(plan=>!isPast(plan)&&!isDone(plan)).length,done:plans.filter(isDone).length,past:plans.filter(isPast).length,all:plans.length};
-        const shown=plans.filter(plan=>filter==='all'||(filter==='done'?isDone(plan):filter==='past'?isPast(plan):!isPast(plan)&&!isDone(plan))).sort((a,b)=>{if(filter==='done')return String(b.done_at||'').localeCompare(String(a.done_at||''));const da=String(a.visit_date||'9999'),db=String(b.visit_date||'9999');return filter==='past'?db.localeCompare(da):da.localeCompare(db);});
-        const tabs=`<div class="archive-visit-tabs" role="tablist">${[['upcoming','À venir'],['done','✓ Visites faites'],['past','Passés'],['all','Tous']].map(([k,l])=>`<button type="button" class="button small ${filter===k?'':'secondary'}" role="tab" aria-selected="${filter===k}" data-archive-visit-filter="${k}">${l} <small>(${counts[k]})</small></button>`).join('')}</div>`;
-        $('#archive-visit-plans').innerHTML=tabs+(shown.length?`<div class="archive-visit-plans">${shown.map(archiveVisitPlanCard).join('')}</div>`:empty(plans.length?(filter==='past'?'Aucune visite passée.':filter==='done'?'Aucune visite faite pour l’instant : sur une feuille de mission, « ✓ Fait le… » la range ici.':'Aucune visite à venir.'):'Aucune feuille de mission. Crée une visite pour réunir les cotes à consulter.'));
-        $$('[data-archive-visit-filter]').forEach(button=>button.addEventListener('click',()=>{state.archiveVisitFilter=button.dataset.archiveVisitFilter;renderArchiveVisitPlanner();}));
+        const stateOf=plan=>isDone(plan)?'done':isPast(plan)?'past':'upcoming',host=$('#archive-visit-plans');
+        if(!plans.length){host.innerHTML=emptyState({icon:'🗄️',text:'Aucune feuille de mission pour l’instant',hint:'Crée une visite pour réunir les cotes à consulter.',action:{label:'＋ Feuille de mission',attrs:'data-empty-click="#add-archive-visit"'}});$('#add-archive-visit')?.addEventListener('click',()=>openArchiveVisitPlanDialog());return;}
+        host.innerHTML='<div data-av-bar></div><div data-av-list></div>';
+        const box=$('[data-av-list]',host),cnt=k=>plans.filter(plan=>stateOf(plan)===k).length;
+        const near=(a,b)=>{const da=day(a),db=day(b);if(!da||!db)return da?-1:db?1:0;const fa=da>=today,fb=db>=today;if(fa!==fb)return fa?-1:1;return fa?da.localeCompare(db):db.localeCompare(da);};
+        const item=plan=>({thumb:'<span class="ui-card-ico" aria-hidden="true">🗄️</span>',name:plan.title||plan.archive_center||'Feuille de mission',open:`data-edit-archive-visit="${plan.id}"`,
+            lines:[[plan.archive_center,plan.visit_date?archiveVisitDay(plan.visit_date):'date à préciser'].filter(Boolean).join(' · '),`${Number(plan.checked_count)||0} / ${plural(Number(plan.item_count)||0,'cote')} cochée${Number(plan.checked_count)>1?'s':''}`],
+            badges:[isDone(plan)?{text:`✓ Faite le ${archiveVisitDay(plan.done_at)}`,kind:'green'}:isPast(plan)?{text:'Passée',kind:'grey'}:{text:'À venir',kind:'blue'}],
+            actions:`<button class="button small secondary" type="button" data-print-archive-visit="${plan.id}">🖨 Imprimer</button>`});
+        let bar=null;
+        const paint=()=>{
+            const {q,filters:f,sort}=bar.state,view=bar.view?.value||bar.state.view;
+            let shown=plans.filter(plan=>LM.text(q,plan.title,plan.archive_center,plan.address,(plan.items||[]).map(it=>[it.archive_reference,it.title,it.archive_service,it.digest_city,it.digest_place_name,it.place_label]))
+                &&(!(f.state||[]).length||f.state.includes(stateOf(plan)))&&LM.pick(f.center,[],[plan.archive_center])&&LM.period(f.from,f.to,plan.visit_date||plan.done_at||''));
+            shown=sort==='near'?[...shown].sort(near):UI.sortItems(shown,sort,{name:plan=>plan.title||plan.archive_center||'',date:plan=>plan.updated_at||plan.created_at||''});
+            bar.setCount(shown.length===plans.length?plural(plans.length,'visite'):`${plural(shown.length,'visite')} sur ${plans.length.toLocaleString('fr-FR')}`);
+            box.innerHTML=!shown.length?emptyState({icon:'🔍',text:'Aucune visite ne correspond',hint:(f.state||[]).includes('done')&&!cnt('done')?'Aucune visite faite pour l’instant : sur une feuille de mission, « ✓ Fait le… » la range ici.':'Change les mots cherchés ou retire un filtre (« Tout effacer »).'})
+                :view==='cards'?`<div class="archive-visit-plans">${shown.map(archiveVisitPlanCard).join('')}</div>`:UI.rowsHtml(shown.map(item));
+            bindPlans();
+        };
+        bar=UI.listBar({key:'listes:archive_visits',search:{placeholder:'Chercher… (centre, cote, commune)'},
+            filters:[{id:'state',label:'État',type:'check',value:['upcoming'],options:[['upcoming',`À venir (${cnt('upcoming')})`,'À venir'],['done',`✓ Visites faites (${cnt('done')})`,'✓ Faites'],['past',`Passées (${cnt('past')})`,'Passées']]},
+                {id:'center',label:'Centre d’archives',kind:'archive_service',chipPrefix:'🏛'},
+                {id:'from',group:'Période',label:'À partir de',type:'date',placeholder:'« 2025 »',chipPrefix:'Depuis'},{id:'to',group:'Période',label:'Jusqu’à',type:'date',placeholder:'« 2026 »',chipPrefix:'Jusqu’à'}],
+            view:{dflt:'cards',what:'feuilles de mission'},sort:{options:[['near','La visite la plus proche'],['recent','Les plus récentes'],['old','Les plus anciennes'],['az','A → Z'],['za','Z → A']],value:'near'},onChange:()=>paint()});
+        // l’ancien onglet choisi (ou « Visites faites » après « ✓ Fait le… ») devient le filtre « État »
+        if(state.archiveVisitFilter){const k=state.archiveVisitFilter;state.archiveVisitFilter='';bar.setFilter('state',k==='all'?[]:[k],true);}
+        $('[data-av-bar]',host).replaceWith(bar);
         $('#add-archive-visit')?.addEventListener('click',()=>openArchiveVisitPlanDialog());
+        function bindPlans(){
         $$('[data-edit-archive-visit]').forEach(button=>button.addEventListener('click',()=>openArchiveVisitPlanDialog(plans.find(plan=>Number(plan.id)===Number(button.dataset.editArchiveVisit)))));
         $$('[data-edit-archive-visit-links]').forEach(button=>button.addEventListener('click',()=>{const plan=plans.find(row=>Number(row.id)===Number(button.dataset.editArchiveVisitLinks));if(plan)openArchiveVisitLinksDialog(plan);}));
         $$('[data-delete-archive-visit]').forEach(button=>button.addEventListener('click',async()=>{if(!await confirmBox('La feuille de mission et toutes ses cotes seront supprimées.',{title:'Supprimer cette feuille de mission ?',okLabel:'Supprimer la feuille'}))return;try{await api('delete_archive_visit_plan',{}, {method:'POST',body:{id:Number(button.dataset.deleteArchiveVisit)}});toast('Feuille de mission supprimée.');renderArchiveVisitPlanner();}catch(error){toast(error.message,'error');}}));
@@ -271,6 +294,10 @@
         $$('[data-archive-visit-done]').forEach(button=>button.addEventListener('click',()=>{const plan=plans.find(row=>Number(row.id)===Number(button.dataset.archiveVisitDone));if(plan)openArchiveVisitDoneDialog(plan);}));
         $$('[data-archive-visit-result]').forEach(select=>select.addEventListener('change',async()=>{const item=plans.flatMap(plan=>plan.items||[]).find(row=>Number(row.id)===Number(select.dataset.archiveVisitResult));if(!item)return;const before=item.result||'',now=select.value;try{await api('save_archive_visit_item',{}, {method:'POST',body:{...item,result:now,checked:now&&now!=='not_consulted'?1:item.checked}});window.LCNDA_APP.undoToast?window.LCNDA_APP.undoToast(`Résultat noté pour la cote ${item.archive_reference||''}`,{undo:async()=>{await api('save_archive_visit_item',{}, {method:'POST',body:{...item,result:before,checked:item.checked}});renderArchiveVisitPlanner();},redo:async()=>{await api('save_archive_visit_item',{}, {method:'POST',body:{...item,result:now,checked:now&&now!=='not_consulted'?1:item.checked}});renderArchiveVisitPlanner();}}):toast('Enregistré','success');renderArchiveVisitPlanner();}catch(error){toast(error.message,'error');}}));
         $$('[data-archive-visit-make-digest]').forEach(button=>button.addEventListener('click',async()=>{button.disabled=true;try{const r=await api('archive_visit_item_make_digest',{}, {method:'POST',body:{id:Number(button.dataset.archiveVisitMakeDigest)}});toast('Dépouillement créé et relié à la cote.','',{action:{label:'↗ Ouvrir',run:()=>window.LCNDA_EXT?.openDepouillement?.(r.id)}});renderArchiveVisitPlanner();}catch(error){button.disabled=false;toast(error.message,'error');}}));
+        }
+        // ouvert sur une feuille précise (« ↗ » depuis une enquête, un service…) : elle doit être visible, en Fiches
+        if(state.archiveVisitFocus){const p=plans.find(plan=>Number(plan.id)===Number(state.archiveVisitFocus));const sf=bar.state.filters.state||[];if(p&&sf.length&&!sf.includes(stateOf(p)))bar.setFilter('state',[],true);if(bar.view&&bar.view.value!=='cards')bar.view.set('cards',true);}
+        paint();
         if(state.archiveVisitFocus){const el=$(`[data-archive-visit-plan="${Number(state.archiveVisitFocus)}"]`);state.archiveVisitFocus=0;if(el){el.scrollIntoView({block:'start',behavior:'smooth'});el.classList.add('is-focus');setTimeout(()=>el.classList.remove('is-focus'),2400);}}
     }
     function openArchiveVisitDoneDialog(plan){

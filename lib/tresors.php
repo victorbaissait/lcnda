@@ -124,7 +124,7 @@ function tresor_tree(PDO $pdo): array
             'by' => null, 'bd' => null, 'bplace' => null, 'dy' => null, 'dd' => null, 'dplace' => null, 'father' => null, 'mother' => null];
     }
     $places = [];
-    foreach ($pdo->query('SELECT id, name, latitude, longitude FROM places') as $r) { $places[(int) $r['id']] = ['name' => (string) $r['name'], 'lat' => $r['latitude'] !== null ? (float) $r['latitude'] : null, 'lng' => $r['longitude'] !== null ? (float) $r['longitude'] : null]; }
+    foreach ($pdo->query('SELECT id, name, county, latitude, longitude FROM places') as $r) { $places[(int) $r['id']] = ['name' => (string) $r['name'], 'county' => (string) ($r['county'] ?? ''), 'lat' => $r['latitude'] !== null ? (float) $r['latitude'] : null, 'lng' => $r['longitude'] !== null ? (float) $r['longitude'] : null]; } // county : la rubrique « Département » de Listes › Passeport des lieux (H10)
     $families = [];
     foreach ($pdo->query('SELECT id, partner1_id, partner2_id FROM families') as $r) { $families[(int) $r['id']] = ['id' => (int) $r['id'], 'a' => $r['partner1_id'] !== null ? (int) $r['partner1_id'] : null, 'b' => $r['partner2_id'] !== null ? (int) $r['partner2_id'] : null, 'my' => null, 'md' => null, 'mplace' => null, 'children' => []]; }
     foreach ($pdo->query('SELECT family_id, child_id FROM family_children ORDER BY position, id') as $r) {

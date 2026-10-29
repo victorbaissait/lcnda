@@ -75,7 +75,11 @@
         }};
     }
 
-    function calendarScreen({key, eyebrow, title, intro, load, toItems, extraToolbar = () => '', bindExtra = () => {}, onNew = null, onOpen, initialCursor = null}) {
+    const fold = t => String(t ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const lbEmpty = v => v == null || v === '' || v === false || (Array.isArray(v) && !v.length);
+    /** listbar = {key, placeholder, count: [un, plusieurs], text(item), filters(données, éléments, réglages) → [filtre de UI.listBar + test(item, valeur)], onChange(état, quoi, {draw, reload})}
+     *  H10, choix B des calendriers : 🔍 Chercher et Filtrer ▾ (pastilles bleues) dans leur barre, sans Trier ni « Liste | Fiches » (les vues et le temps font l'ordre). */
+    function calendarScreen({key, eyebrow, title, intro, load, toItems, extraToolbar = () => '', bindExtra = () => {}, onNew = null, onOpen, initialCursor = null, listbar = null}) {
         return async token => {
             const st = S(), p = prefs(key);
             st.hCal ||= {};
@@ -89,7 +93,14 @@
             let drawing = false;
             const draw = () => { if (drawing) return; drawing = true; try { paint(); } finally { drawing = false; } }; // un champ qui perd le focus pendant le dessin ne relance pas un dessin
             const paint = () => {
-                const items = toItems(data, p, c).filter(it => (p.showDone !== false || !it.done) && !(p.hidden || []).includes(it.group) && (p.approx !== false || !it.approx));
+                const UI = window.LCNDA_UI, all = toItems(data, p, c).filter(it => (p.showDone !== false || !it.done) && !(p.hidden || []).includes(it.group) && (p.approx !== false || !it.approx));
+                const LBK = listbar && UI?.listBar && all.length ? `listes:${listbar.key}` : ''; // rien du tout : pas de barre (H10, point 2)
+                // H10 : la recherche et les filtres retenus (barre commune) gardent les éléments qui correspondent, dans toutes les vues
+                const lbDefs = LBK ? listbar.filters(data, all, p) : [], lbs = LBK ? (UI.listBarState?.(LBK) || null) : null;
+                const fval = f => (lbs?.f && Object.prototype.hasOwnProperty.call(lbs.f, f.id) ? lbs.f[f.id] : f.value);
+                const words = fold(lbs?.q || '').split(/\s+/).filter(Boolean);
+                const items = !LBK ? all : all.filter(it => (!words.length || words.every(w => fold(listbar.text(it)).includes(w))) && lbDefs.every(f => { const v = fval(f); return lbEmpty(v) || f.test(it, v); }));
+                const kindOn = LBK ? (fval(lbDefs.find(f => f.id === 'kind') || {}) || []) : [];
                 const [cy, cm, cd] = c.cursor, ix = makeIndex(items, p, cy);
                 const chip = (it, full = false) => `<button type="button" class="h-cal-ev ${it.done ? 'is-done' : ''} ${it.approx ? 'is-approx' : ''} ${it.cont ? 'is-cont' : ''}" data-cal-uid="${esc(it.uid)}" style="--c:${colorOf(key, p, it.group)}" title="${esc(it.title + (it.sub ? ' — ' + it.sub : '') + (it.approx ? ' (date approximative)' : ''))}"><i></i><span>${esc(p.anniv && it.y ? `${it.title} (${cy - it.y} ans)` : it.title)}</span>${full && it.sub ? `<small>${esc(it.sub)}</small>` : ''}</button>`;
                 const head = (y, m, d) => `${p.alt.map(t => { const s = altShort(y, m, d, t); return s ? `<small class="h-cal-alt" title="${esc(calName(t))} : ${esc(altText(y, m, d, t))}">${esc(s)}</small>` : ''; }).join('')}`;
@@ -145,16 +156,23 @@
                             <td>${chip(it, true)}</td><td class="h-cal-lalt">${it.d ? p.alt.map(t => { const s = altText(y, it.m, it.d, t); return s ? `<small title="${esc(calName(t))}">${esc(s)}</small>` : ''; }).join('<br>') : ''}</td></tr>`; }).join('')}</tbody></table>` : A().empty('Rien sur cette période.')}`;
                 }
                 const viewBtns = VIEWS.map(([v, l]) => `<button type="button" class="${c.view === v ? 'is-active' : ''}" data-cal-view="${v}">${l}</button>`).join('');
-                const legend = groupsOf(key).map(([g, l]) => `<button type="button" class="h-cal-leg ${(p.hidden || []).includes(g) ? 'is-off' : ''}" data-cal-leg="${g}" style="--c:${colorOf(key, p, g)}" title="Montrer / cacher"><i></i>${esc(l)}</button>`).join('');
+                const legend = groupsOf(key).map(([g, l]) => `<button type="button" class="h-cal-leg ${(p.hidden || []).includes(g) || (kindOn.length && !kindOn.includes(g)) ? 'is-off' : ''}" data-cal-leg="${g}" style="--c:${colorOf(key, p, g)}" title="Montrer / cacher"><i></i>${esc(l)}</button>`).join('');
                 ws.innerHTML = `<section class="page collection-page h-cal h-cal-style-${p.style} h-cal-size-${p.size}">
                     <header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${title}</h2><p>${intro}</p></div><div class="page-actions">${onNew ? '<button type="button" class="button" data-cal-new="">＋ Nouveau</button>' : ''}<button type="button" class="button secondary" data-cal-settings>⚙️ Réglages</button></div></header>
                     <div class="h-cal-bar"><span class="h-cal-nav"><button type="button" class="button small secondary" data-cal-step="-1" title="Précédent">‹</button><button type="button" class="button small secondary" data-cal-today>Aujourd’hui</button><button type="button" class="button small secondary" data-cal-step="1" title="Suivant">›</button></span>
                         <h3 class="h-cal-label">${esc(label)}</h3>
                         <span class="h-cal-jump"><select data-cal-month aria-label="Mois">${MONTHS.map((mn, i) => `<option value="${i + 1}" ${i + 1 === cm ? 'selected' : ''}>${mn}</option>`).join('')}</select><input type="number" data-cal-year value="${cy}" min="1" max="9999" aria-label="Année"></span>
                         <span class="segmented h-cal-views">${viewBtns}</span></div>
-                    <div class="h-cal-bar2">${extraToolbar(data, p, c)}<span class="h-cal-legend">${legend}</span></div>
+                    ${LBK ? '<div data-cal-lb></div>' : ''}<div class="h-cal-bar2">${extraToolbar(data, p, c)}<span class="h-cal-legend">${legend}</span></div>
                     <div class="h-cal-body">${body}</div></section>`;
                 const sec = ws.querySelector('.h-cal');
+                let bar = null;
+                if (LBK) {
+                    bar = UI.listBar({key: LBK, search: {placeholder: listbar.placeholder}, filters: lbDefs.map(({test, ...f}) => f), onChange: (stt, {what}) => (listbar.onChange ? listbar.onChange(stt, what, {draw, reload}) : draw())});
+                    bar.classList.add('h-cal-lb'); bar.setCount(items.length === all.length ? A().plural(all.length, ...listbar.count) : `${A().plural(items.length, ...listbar.count)} sur ${all.length.toLocaleString('fr-FR')}`);
+                    sec.querySelector('[data-cal-lb]').replaceWith(bar);
+                    if ((p.hidden || []).length) { p.hidden = []; savePrefs(key, p); } // l'ancien « montrer / cacher » de la légende est repris une fois dans Filtrer › Sorte
+                }
                 const go = (view, y, m, d) => { c.view = view; c.cursor = [Number(y), Number(m) || 1, Number(d) || 1]; p.view = view; savePrefs(key, p); draw(); };
                 sec.querySelectorAll('[data-cal-view]').forEach(b => b.addEventListener('click', () => go(b.dataset.calView, ...c.cursor)));
                 sec.querySelector('[data-cal-today]').addEventListener('click', () => go(c.view, ...todayArr()));
@@ -167,7 +185,9 @@
                 sec.querySelector('[data-cal-month]').addEventListener('change', e => go(c.view === 'year' || c.view === 'decade' || c.view === 'century' ? 'month' : c.view, c.cursor[0], e.target.value, 1));
                 sec.querySelector('[data-cal-year]').addEventListener('change', e => { const y = Number(e.target.value); if (y >= 1 && y <= 9999) go(c.view, y, c.cursor[1], Math.min(c.cursor[2], dim(y, c.cursor[1]))); });
                 sec.querySelectorAll('[data-cal-scope]').forEach(b => b.addEventListener('click', () => { p.listScope = b.dataset.calScope; savePrefs(key, p); draw(); }));
-                sec.querySelectorAll('[data-cal-leg]').forEach(b => b.addEventListener('click', () => { const g = b.dataset.calLeg; p.hidden = (p.hidden || []).includes(g) ? p.hidden.filter(x => x !== g) : [...(p.hidden || []), g]; savePrefs(key, p); draw(); }));
+                sec.querySelectorAll('[data-cal-leg]').forEach(b => b.addEventListener('click', () => { const g = b.dataset.calLeg;
+                    if (bar) { const allG = groupsOf(key).map(x => x[0]), cur = bar.state.filters.kind || []; let next = cur.length ? [...cur] : [...allG]; next = next.includes(g) ? next.filter(x => x !== g) : [...next, g]; bar.setFilter('kind', next.length === allG.length ? [] : next); return; } // la légende = un raccourci vers Filtrer › Sorte
+                    p.hidden = (p.hidden || []).includes(g) ? p.hidden.filter(x => x !== g) : [...(p.hidden || []), g]; savePrefs(key, p); draw(); }));
                 sec.querySelector('.h-cal-body').addEventListener('click', e => {
                     const nw = e.target.closest('[data-cal-new]'); if (nw) { e.stopPropagation(); return onNew?.(nw.dataset.calNew, () => reload()); }
                     const ev = e.target.closest('[data-cal-uid]'); if (ev) { e.stopPropagation(); const it = items.find(x => x.uid === ev.dataset.calUid); if (it) onOpen(it, {p, reload}); return; }
@@ -221,17 +241,9 @@
     }
 
     /* ─────────── 📜 Calendrier de la famille ─────────── */
-    const genea = () => S().hCalGenea ||= {person: 0, personName: '', place: ''};
-    /** Choisir un lieu : une commune, un département, une région ou un pays (ou leurs équivalents ailleurs). */
-    const PLACE_KINDS = {place: 'commune', county: 'département', region: 'région', country: 'pays'};
-    const placeLabel = (k, v, n) => `${v} — ${PLACE_KINDS[k]}${n ? ` (${n})` : ''}`;
-    function placeSelect(data) {
-        const cur = genea().place || '';
-        if (cur) { const [k, v] = cur.split(/:(.*)/s); return `<span class="h-cal-place">📍 <b>${esc(v)}</b> <small class="muted">${esc(PLACE_KINDS[k] || '')}</small> <button type="button" class="icon-button" data-cal-place-clear title="Tous les lieux">✕</button></span>`; }
-        const m = new Map(); data.events.forEach(e => Object.keys(PLACE_KINDS).forEach(k => { if (e[k]) { const key = k + ':' + e[k]; m.set(key, (m.get(key) || 0) + 1); } }));
-        const opts = [...m.entries()].sort((a, b) => b[1] - a[1]).map(([key, n]) => { const [k, v] = key.split(/:(.*)/s); return `<option value="${esc(placeLabel(k, v, n))}" data-key="${esc(key)}">`; }).join('');
-        return `<span class="h-cal-place"><input type="search" data-cal-place placeholder="📍 Un lieu : commune, département, région, pays…" list="h-cal-places"><datalist id="h-cal-places">${opts}</datalist></span>`;
-    }
+    const genea = () => S().hCalGenea ||= {person: 0};
+    /** la personne choisie dans Filtrer › Personne (une fiche) : le serveur lit ses événements et ceux de ses couples. Un nom tapé filtre ici. */
+    const geneaPerson = () => { const v = window.LCNDA_UI?.listBarState?.('listes:genea_calendar')?.f?.person; return v && typeof v === 'object' && Number(v.id) ? Number(v.id) : 0; };
     /* ─── ⤓ Exporter les anniversaires dans un fichier .ics (calendrier du téléphone, de l'ordinateur) ─── */
     function icsExportDialog() {
         const PK = window.LCNDA_PICKER;
@@ -277,25 +289,27 @@
     ext.lists.genea_calendar = calendarScreen({
         key: 'genea', eyebrow: 'LISTES · CALENDRIERS', title: '📜 Calendrier de la famille',
         intro: 'Naissances, mariages, décès et tous les événements des fiches, au jour près quand la date le dit. Sous chaque jour, sa date dans les autres calendriers (julien, républicain…) : à choisir dans ⚙️ Réglages.',
-        load: () => A().api('genea_calendar', genea().person ? {person_id: genea().person} : {}),
+        load: () => { const pid = geneaPerson(); genea().person = pid; return A().api('genea_calendar', pid ? {person_id: pid} : {}); },
         // À l'ouverture : l'année du milieu des événements datés au jour (sinon de tous) ; en mode anniversaires, aujourd'hui
         initialCursor: (data, p) => { if (p.anniv || !data.events.length) return null; const pool = data.events.filter(e => e.d).length ? data.events.filter(e => e.d) : data.events; const ys = pool.map(e => e.y).sort((a, b) => a - b); const e = pool.find(x => x.y === ys[Math.floor(ys.length / 2)]); return [e.y, e.m || 1, e.d || 1]; },
         toItems: (data, p) => {
             const types = new Map(); data.events.filter(e => e.group === 'other').forEach(e => { const k = 'type:' + e.type; if (!types.has(k)) types.set(k, [k, '📌 ' + e.type, e.color || '#1c7ed6']); });
             DYN.genea = p.groupOthers ? [] : [...types.values()].sort((a, b) => a[1].localeCompare(b[1], 'fr'));
-            const [pk, pv] = (genea().place || '').split(/:(.*)/s);
-            return data.events.filter(e => !pk || String(e[pk] || '') === pv).map(e => ({uid: 'g' + e.id, y: e.y, m: e.m, d: e.d, approx: e.approx, group: e.group === 'other' && !p.groupOthers ? 'type:' + e.type : e.group,
+            return data.events.map(e => ({uid: 'g' + e.id, y: e.y, m: e.m, d: e.d, approx: e.approx, group: e.group === 'other' && !p.groupOthers ? 'type:' + e.type : e.group,
             title: `${e.type}${e.who.length ? ' — ' + e.who.map(w => w.name).join(' et ') : ''}`, sub: [e.text && e.text !== String(e.y) ? e.text : '', e.place].filter(Boolean).join(' · '), raw: e}));
         },
-        extraToolbar: (data) => '<button type="button" class="button small secondary" data-cal-ics title="Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…)">⤓ Exporter les anniversaires (.ics)</button>' + placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : window.LCNDA_PICKER.pickerField({name: 'cal_person', kind: 'person', placeholder: 'Une seule personne…'})}</span>${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
-        bindExtra: (sec, data, p, c, {reload, draw}) => {
+        extraToolbar: (data) => '<button type="button" class="button small secondary" data-cal-ics title="Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…)">⤓ Exporter les anniversaires (.ics)</button>' + `${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
+        bindExtra: (sec) => {
             sec.querySelector('[data-cal-ics]')?.addEventListener('click', () => icsExportDialog());
-            sec.querySelector('[data-cal-place-clear]')?.addEventListener('click', () => { genea().place = ''; draw(); });
-            sec.querySelector('[data-cal-place]')?.addEventListener('input', e => { const o = [...sec.querySelectorAll('#h-cal-places option')].find(x => x.value === e.target.value); if (o) { genea().place = o.dataset.key; draw(); } });
-            sec.querySelector('[data-cal-person-clear]')?.addEventListener('click', () => { Object.assign(genea(), {person: 0, personName: ''}); reload(); });
-            // une seule personne : le menu de choix unique
-            sec.querySelector('.h-cal-person')?.addEventListener('picker-change', e => { const it = e.detail.item; if (e.detail.name !== 'cal_person' || !it?.id) return; Object.assign(genea(), {person: Number(it.id), personName: it.title}); reload(); });
         },
+        // H10 (choix B) : 🔍 et Filtrer ▾ — Sorte, Personne 👤 (une fiche : ses événements et ceux de ses couples, comme avant), Lieu 📍 (à la place de l'ancien champ de lieu)
+        listbar: {key: 'genea_calendar', placeholder: 'Chercher… (Borie, mariage, Tulle)', count: ['événement'], text: it => `${it.title} ${it.sub} ${it.raw?.type || ''}`,
+            filters: (data, all, p) => [{id: 'kind', label: 'Sorte', type: 'check', options: groupsOf('genea').map(([g, l]) => [g, l, l, all.filter(it => it.group === g).length]), ...(p.hidden?.length ? {value: groupsOf('genea').map(x => x[0]).filter(g => !p.hidden.includes(g))} : {}), test: (it, v) => v.includes(it.group)},
+                {id: 'person', label: 'Personne', type: 'person', chipPrefix: '👤', test: (it, v) => typeof v === 'object' || (it.raw?.who || []).some(w => fold(w.name).includes(fold(String(v).replace(/^txt:/, ''))))},
+                {id: 'place', label: 'Lieu', type: 'place', chipPrefix: '📍', test: (it, v) => { const e = it.raw || {}; if (v && typeof v === 'object') return (Number(v.id) && Number(e.place_id) === Number(v.id)) || fold(e.place) === fold(v.title);
+                    const t = fold(String(v).replace(/^txt:/, '')); return [e.place, e.county, e.region, e.country].some(x => fold(x).includes(t)); }}],
+            // une autre personne : on relit ses événements (avec ceux de ses couples) ; sinon on redessine
+            onChange: (st, what, {draw, reload}) => (geneaPerson() !== genea().person ? reload() : draw())},
         onOpen: (it, {p}) => {
             const e = it.raw, alts = e.d ? A().converterCalendarOptions.filter(([t]) => t !== 'gregorian').map(([t, n]) => [n, altText(e.y, e.m, e.d, t)]).filter(x => x[1]) : [];
             ext.openDialog({eyebrow: e.type.toUpperCase(), title: it.title, wide: true, submitLabel: 'Fermer',
@@ -362,6 +376,9 @@
         toItems: data => data.items.map(it => { const [y, m, d] = it.start.split('-').map(Number); return {uid: it.src + it.id, y, m, d, end: it.end || '', group: it.src, title: it.title, sub: it.sub, done: it.done, raw: it}; }),
         onNew: (date, after) => A().api('my_agenda').then(d => newDialog(date, d.atelier_projects || [], after)),
         onOpen: it => ext.lists.my_calendar_open(it.raw),
+        // H10 (choix B) : 🔍 (titre, lieu) et Filtrer ▾ › Sorte (salons, visites, rappels, courriers…) ; la légende en est le raccourci
+        listbar: {key: 'my_calendar', placeholder: 'Chercher… (titre, lieu)', count: ['élément'], text: it => `${it.title} ${it.sub || ''}`,
+            filters: (data, all, p) => [{id: 'kind', label: 'Sorte', type: 'check', options: groupsOf('agenda').map(([g, l]) => [g, l, l, all.filter(it => it.group === g).length]), ...(p.hidden?.length ? {value: groupsOf('agenda').map(x => x[0]).filter(g => !p.hidden.includes(g))} : {}), test: (it, v) => v.includes(it.group)}]},
     });
     ext.lists.my_calendar_open = r => {
             const st = S();

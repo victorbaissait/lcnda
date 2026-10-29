@@ -151,24 +151,49 @@
         const T = ext.tresors.T; let tr, list;
         try { [tr, list] = await Promise.all([T.tree(), T.items('passport')]); } catch (err) { if (ok()) ws.innerHTML = `<section class="page">${A().empty(err.message || 'Les passeports n’ont pas pu être lus.')}</section>`; return; }
         if (!ok()) return;
-        const draw = () => {
-            const n = k => list.filter(x => k === 'tous' || sorteOf(x.data) === k).length, rows = list.filter(x => ppFilter === 'tous' || sorteOf(x.data) === ppFilter);
-            ws.innerHTML = `<section class="page collection-page h-pp-list">${window.LCNDA_UI.pageHeader({icon: '🛂', title: 'Passeports', help: 'Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors.'})}
-                <div class="segmented h-pp-filter" role="group" aria-label="Sorte de passeport">${[['tous', 'Tous'], ['interieur', 'Passeports intérieurs'], ['etranger', 'Passeports pour l’étranger']].map(([k, l]) => `<button type="button" data-pp-f="${k}" class="${ppFilter === k ? 'is-active' : ''}" aria-pressed="${ppFilter === k}">${T.esc(l)} <small>${n(k)}</small></button>`).join('')}</div>
-                ${rows.length ? `<div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="passeport"><thead><tr>${['Voyageur', 'Sorte', 'Délivré', 'Destination', 'Motif', 'Profession', 'Taille', 'Source'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}<th><span class="visually-hidden">Modifier</span></th></tr></thead><tbody>
-                    ${rows.map(x => { const d = x.data || {}, p = tr.byId.get(x.person_id), cm = heightCm(d.taille); return `<tr><td data-sort-value="${T.esc((p ? T.name(p) : x.title).toLowerCase())}">${p ? `<button type="button" class="table-link" data-h-person="${p.id}">${T.esc(T.name(p))}</button>` : T.esc(x.title)}</td><td>${T.esc(sorteLabel(d))}</td><td>${T.esc([d.commune, d.date].filter(Boolean).join(', '))}</td><td>${T.esc(d.destination || '')}</td><td>${T.esc(d.motif || '')}</td><td>${T.esc(d.profession || '')}</td><td data-sort-value="${cm || 0}">${cm ? `${cm} cm` : T.esc(d.taille || '')}</td><td><small>${T.esc(d.cote || '')}</small></td><td><button type="button" class="button small secondary" data-pp-edit="${x.id}" title="Modifier ce passeport">✎</button></td></tr>`; }).join('')}</tbody></table></div>`
-                    : A().emptyState({icon: '🛂', text: ppFilter === 'tous' ? 'Aucun passeport pour l’instant' : `Aucun ${sorteLabel({sorte: ppFilter}).toLowerCase()} pour l’instant`, hint: 'Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé.'})}
-                <p class="page-actions"><button type="button" class="button" data-pp-new>＋ Nouveau ${ppFilter === 'tous' ? 'passeport' : sorteLabel({sorte: ppFilter}).toLowerCase()}</button><button type="button" class="button secondary" data-pp-go>🛂 Ouvrir les passeports dans ✨ Trésors</button></p></section>`;
+        // H10 : 🔍 · Filtrer ▾ (Sorte, Voyageur, Délivré à, Période) · Trier ; les anciens boutons « Tous / Intérieurs / Étranger » deviennent la rubrique « Sorte »
+        const U = window.LCNDA_UI, LM = U.listMatch, KEY = 'listes:passports';
+        let bar = null;
+        const chosenSorte = () => { const v = bar?.state.filters.sorte || []; return v.length === 1 ? v[0] : ''; };
+        const paint = () => {
+            const box = ws.querySelector('[data-pp-list]'); if (!box || !bar) return;
+            const {q, filters: f, sort} = bar.state, who = x => { const p = tr.byId.get(x.person_id); return p ? T.name(p) : x.title; };
+            let rows = list.filter(x => { const d = x.data || {}; return LM.text(q, who(x), d.destination, d.motif, d.profession, d.commune) && (!(f.sorte || []).length || f.sorte.includes(sorteOf(d)))
+                && LM.pick(f.person, [x.person_id], []) && LM.pick(f.place, [x.place_id], [d.commune]) && LM.period(f.from, f.to, d.date || ''); });
+            rows = sort === 'issued' ? [...rows].sort((a, b) => (LM.year(a.data?.date) || 9999) - (LM.year(b.data?.date) || 9999)) : U.sortItems(rows, sort, {name: who, date: x => x.updated_at || x.created_at || ''});
+            bar.setCount(rows.length === list.length ? A().plural(list.length, 'passeport') : `${A().plural(rows.length, 'passeport')} sur ${list.length}`);
+            const nb = ws.querySelector('[data-pp-new]'); if (nb) nb.textContent = `＋ Nouveau ${chosenSorte() ? sorteLabel({sorte: chosenSorte()}).toLowerCase() : 'passeport'}`;
+            box.innerHTML = rows.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${['Voyageur', 'Sorte', 'Délivré', 'Destination', 'Motif', 'Profession', 'Taille', 'Source'].map((h, i) => `<th><button data-sort-column="${i}" data-sort-key="${['who', '', 'issued'][i] || ''}">${h}</button></th>`).join('')}<th><span class="visually-hidden">Modifier</span></th></tr></thead><tbody>
+                    ${rows.map(x => { const d = x.data || {}, p = tr.byId.get(x.person_id), cm = heightCm(d.taille); return `<tr><td data-sort-value="${T.esc((p ? T.name(p) : x.title).toLowerCase())}">${p ? `<button type="button" class="table-link" data-h-person="${p.id}">${T.esc(T.name(p))}</button>` : T.esc(x.title)}</td><td>${T.esc(sorteLabel(d))}</td><td data-sort-value="${LM.year(d.date) || 9999}">${T.esc([d.commune, d.date].filter(Boolean).join(', '))}</td><td>${T.esc(d.destination || '')}</td><td>${T.esc(d.motif || '')}</td><td>${T.esc(d.profession || '')}</td><td data-sort-value="${cm || 0}">${cm ? `${cm} cm` : T.esc(d.taille || '')}</td><td><small>${T.esc(d.cote || '')}</small></td><td><button type="button" class="button small secondary" data-pp-edit="${x.id}" title="Modifier ce passeport">✎</button></td></tr>`; }).join('')}</tbody></table></div>`
+                : A().emptyState({icon: '🔍', text: 'Aucun passeport ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer »).'});
+            bar.sortColumns(box.querySelector('table'), {who: ['az', 'za'], issued: ['issued']});
             A().bindTableLinks?.();
+        };
+        const draw = () => {
+            ws.innerHTML = `<section class="page collection-page h-pp-list">${U.pageHeader({icon: '🛂', title: 'Passeports', help: 'Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors.',
+                    primary: '<button type="button" class="button" data-pp-new>＋ Nouveau passeport</button>', more: ['<button type="button" class="button secondary" data-pp-go>🛂 Ouvrir dans ✨ Trésors</button>']})}
+                ${list.length ? '<div data-pp-bar></div><div data-pp-list></div>' : A().emptyState({icon: '🛂', text: 'Aucun passeport pour l’instant', hint: 'Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé.', action: {label: '＋ Nouveau passeport', attrs: 'data-empty-click="[data-pp-new]"'}})}</section>`;
+            bar = null;
+            const slot = ws.querySelector('[data-pp-bar]');
+            if (slot) {
+                const n = k => list.filter(x => sorteOf(x.data) === k).length;
+                bar = U.listBar({key: KEY, search: {placeholder: 'Chercher… (voyageur, destination, motif, profession)'},
+                    filters: [{id: 'sorte', label: 'Sorte', type: 'check', value: ppFilter !== 'tous' ? [ppFilter] : [], options: SORTES.map(([k]) => [k, `${k === 'etranger' ? 'Passeport pour l’étranger' : 'Passeport intérieur'} (${n(k)})`, k === 'etranger' ? 'Pour l’étranger' : 'Intérieur'])},
+                        {id: 'person', label: 'Voyageur', type: 'person', chipPrefix: '👤', allowFree: false},
+                        {id: 'place', label: 'Délivré à', type: 'place', chipPrefix: '📍 Délivré à'},
+                        {id: 'from', group: 'Période', label: 'À partir de', type: 'date', placeholder: '« 1820 »', chipPrefix: 'Depuis'}, {id: 'to', group: 'Période', label: 'Jusqu’à', type: 'date', placeholder: '« 1860 »', chipPrefix: 'Jusqu’à'}],
+                    sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A'], ['issued', 'Date de délivrance']], value: 'recent'},
+                    onChange: () => paint()});
+                slot.replaceWith(bar); ppFilter = 'tous'; paint();
+            }
         };
         draw();
         ws.onclick = e => {
             if (!ws.querySelector('.h-pp-list')) { ws.onclick = null; return; } // on a quitté la liste
-            const f = e.target.closest('[data-pp-f]'); if (f && ws.querySelector('.h-pp-list')) { ppFilter = f.dataset.ppF; draw(); return; }
             if (e.target.closest('[data-pp-go]')) ext.tresors.open('passeports');
-            // ＋ un passeport saisi d'ici (la sorte du filtre est déjà choisie) ; ✎ modifier une ligne
+            // ＋ un passeport saisi d'ici (la sorte cochée dans Filtrer est déjà choisie) ; ✎ modifier une ligne
             const reload = async () => { list = await T.items('passport'); if (ok()) draw(); };
-            if (e.target.closest('[data-pp-new]')) { editPassport(T, null, 0, reload, ppFilter === 'tous' ? null : {sorte: ppFilter}); return; }
+            if (e.target.closest('[data-pp-new]')) { const so = chosenSorte(); editPassport(T, null, 0, reload, so ? {sorte: so} : null); return; }
             const ed = e.target.closest('[data-pp-edit]'); if (ed) { const it = list.find(x => String(x.id) === ed.dataset.ppEdit); if (it) editPassport(T, it, it.person_id, reload); }
         };
     };

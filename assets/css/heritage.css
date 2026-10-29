@@ -5115,6 +5115,15 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 .h-avx-montage.mt-tbtn .h-mt-lname .h-mt-tbtns button { width: var(--mt-tbtn); height: var(--mt-tbtn); min-width: var(--mt-tbtn); min-height: var(--mt-tbtn); padding: 0; margin: 0; font-size: calc(var(--mt-tbtn) * .55); line-height: 1; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
 .h-mt-lname .h-mt-tbtns button.ord-arrow, .h-mt-lname .h-mt-tbtns button.icon-action.ia-auto { background: var(--white) !important; } /* ↑ ↓ 🗑 : le même fond que 👁 🔓 (en mode sombre aussi) */
 .h-mt-keysdlg .h-mt-keysbody { padding: 0 20px 12px; overflow: auto; }
+/* H10 lot A : les deux onglets de page du « Cercle autour des ancêtres » (C5), au-dessus de la barre de chaque onglet */
+.segmented.h-cite-tabs { max-width: 560px; margin: 0 0 12px; }
+/* Métiers anciens : la ligne garde sa grille (tresors.css a une autre .h-tr-row pour les Trésors) */
+.h-tr-page .h-tr-list .h-tr-row { display: grid; align-items: center; gap: 10px; flex-wrap: nowrap; }
+/* H10 lot D — Mes listes : « Liste | Fiches » puis « Plus ▾ » (les 4 autres présentations ; celle qu'on a choisie s'écrit dans le bouton, en bleu) */
+.h-lv-viewctl { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.ui-listbar-btn.h-lv-plus.is-active { background: var(--blue) !important; border-color: var(--blue) !important; color: #fff !important; }
+/* H10 lot D — calendriers : la barre commune entre les vues et la légende */
+.h-cal .ui-listbar.h-cal-lb { margin: 10px 0 8px; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .h-poilu-event.is-blesse>strong,:root[data-theme="dark"] .h-poilu-event.is-tue>strong,:root[data-theme="dark"] .h-poilu-event.is-gaze>strong{color:#f49aa3}
 :root[data-theme="dark"] .h-calib-image{background:#292929}

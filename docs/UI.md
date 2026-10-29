@@ -169,6 +169,9 @@ bar.adoptSort(table._sortBar);           // reprend « Trier » (et « Liste | F
 - Types de filtre : `check` (une case ; avec `options` : plusieurs cases → tableau), `radio` / `select` (une valeur, `dflt` = « pas de filtre »), `place` / `person` / tout `kind` du menu de choix (valeur `{id, title}` ou `'txt:…'` pour un nom tapé), `date`, `text`. `group` range plusieurs filtres dans une même rubrique ; `chip(v)` donne le texte de la pastille ; `disabled(filters)` grise un filtre.
 - Une liste qui se redessine en entier peut recréer la barre : le curseur reste dans « Chercher » et le menu Filtrer reste ouvert.
 - `remember: 'given'` : les valeurs données gagnent (la liste range déjà ses réglages ailleurs), la barre les écrit quand même.
+- `bar.sortColumns(table, {person: ['az', 'za'], date: ['date'], net: [null, 'rich']})` : cliquer le titre d’une colonne (`<button data-sort-column="N" data-sort-key="person">`) choisit ce tri dans « Trier » (↑ ↓ sur le titre) ; une colonne absente de la carte se range seulement à l’écran. À rappeler après chaque dessin du tableau.
+- `UI.listMatch` pour garder les lignes d’après `bar.state` : `text(q, …textes)` (chaque mot, sans accents), `pick(v, ids, noms)` (un choix du menu de choix : par numéro, sinon par nom), `period(de, à, …années)`, `year(texte)`. Un filtre vide garde tout.
+- Liste tout à fait vide : pas de barre, la grande boîte K10 seule (avec son bouton) ; recherche ou filtres sans résultat : la barre reste, avec « 🔍 Aucun … ne correspond ».
 
 ## C7 — Chargement et messages
 

@@ -17,14 +17,15 @@
         audio: {list: 'audios', icon: '🎧', title: 'Audios', one: 'son', many: 'sons', intro: 'Tous les enregistrements sonores de la base, avec ce à quoi chacun est rattaché. Clique sur ▶ pour écouter : le lecteur reste en bas de la liste.'},
         video: {list: 'videos', icon: '🎬', title: 'Vidéos', one: 'vidéo', many: 'vidéos', intro: 'Toutes les vidéos de la base, avec ce à quoi chacune est rattachée. Clique sur ▶ pour regarder : le lecteur reste en bas de la liste.'},
     };
-    const SORTS = [
-        ['added_desc', 'Ajout : récent → ancien'], ['added_asc', 'Ajout : ancien → récent'],
-        ['name_asc', 'Nom : A → Z'], ['name_desc', 'Nom : Z → A'],
-        ['dur_desc', 'Durée : long → court'], ['dur_asc', 'Durée : court → long'],
-        ['date_asc', 'Date du document : ancien → récent'], ['date_desc', 'Date du document : récent → ancien'],
-        ['owner_asc', 'Rattaché à : A → Z'], ['owner_desc', 'Rattaché à : Z → A'],
-        ['size_desc', 'Taille : gros → petit'],
-    ];
+    /* C6 : les 4 tris de base d'abord (« Les plus récents »… ; au féminin pour les vidéos), puis ceux de la liste */
+    const sortsOf = kind => { const f = kind === 'video';
+        return [['added_desc', f ? 'Les plus récentes' : 'Les plus récents'], ['added_asc', f ? 'Les plus anciennes' : 'Les plus anciens'], ['name_asc', 'A → Z'], ['name_desc', 'Z → A'],
+            ['dur_desc', 'Durée : de la plus longue à la plus courte'], ['dur_asc', 'Durée : de la plus courte à la plus longue'],
+            ['date_asc', 'Date du document : les plus anciennes'], ['date_desc', 'Date du document : les plus récentes'],
+            ['owner_asc', 'Rattaché à : A → Z'], ['owner_desc', 'Rattaché à : Z → A'],
+            ['size_desc', 'Taille : du plus gros au plus petit'], ['size_asc', 'Taille : du plus petit au plus gros']]; };
+    /* un clic sur un titre de colonne trie (et met « Trier » à jour) : [clé du tri, sens du premier clic] */
+    const COL_SORT = {name: 'asc', dur: 'desc', owner: 'asc', date: 'asc', added: 'desc', size: 'desc'};
     const OWNER_GROUPS = [
         ['person', 'Fiches (personnes, couples, événements)', ['person', 'family', 'event']],
         ['battue', 'Battues', ['battue']], ['investigation', 'Enquêtes', ['investigation']],
@@ -234,10 +235,12 @@
 
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page av-page" data-av-kind="${kind}">
-            <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${K.icon} ${esc(K.title)}</h2><p>${esc(K.intro)}</p></div><div class="page-actions"><button type="button" class="button" data-av-montage="${kind}" title="${kind === 'video' ? 'Monter des vidéos : morceaux, titres, fondus, incrustations, musiques' : 'Assembler et retoucher des sons'}">🎬 Montage</button>${kind === 'audio' ? '<button type="button" class="button secondary" data-av-projnew title="Un son de la base ou de l’ordinateur, à travailler et à garder comme projet">＋ Nouveau projet son</button><button type="button" class="button secondary" data-av-projects title="Revenir sur un son en cours de travail">📂 Projets son</button>' : ''}</div></header>
+            ${window.LCNDA_UI.pageHeader({icon: K.icon, title: K.title, help: esc(K.intro), // K5 : l'en-tête commun (bouton principal bleu, 2 boutons au plus)
+                primary: `<button type="button" class="button" data-av-montage="${kind}" title="${kind === 'video' ? 'Monter des vidéos : morceaux, titres, fondus, incrustations, musiques' : 'Assembler et retoucher des sons'}">🎬 Montage</button>`,
+                actions: kind === 'audio' ? ['<button type="button" class="button secondary" data-av-projnew title="Un son de la base ou de l’ordinateur, à travailler et à garder comme projet">＋ Nouveau projet son</button><button type="button" class="button secondary" data-av-projects title="Revenir sur un son en cours de travail">📂 Projets son</button>'] : []})}
             ${items.length ? `<div id="av-bar"></div>
-            <div id="av-cards" hidden></div><div class="data-table-wrap" id="av-tablewrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th><th>Titre</th><th>Durée</th><th>Rattaché à</th><th>Date</th><th>Ajouté le</th><th>Taille</th><th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
-            <div id="av-player-host"></div>` : A().empty(`Aucun${kind === 'video' ? 'e vidéo' : ' son'} : ajoute un fichier ${kind === 'video' ? 'MP4, MOV ou WEBM' : 'MP3, M4A, WAV, AIFF ou OGG'} sur une fiche, une battue, une enquête… et ${kind === 'video' ? 'elle' : 'il'} apparaîtra ici.`)}
+            <div id="av-cards" hidden></div><div class="data-table-wrap" id="av-tablewrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th>${[['name', 'Titre'], ['dur', 'Durée'], ['owner', 'Rattaché à'], ['date', 'Date'], ['added', 'Ajouté le'], ['size', 'Taille']].map(([k, l]) => `<th><button type="button" data-av-sort="${k}" title="Trier par cette colonne">${l}</button></th>`).join('')}<th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
+            <div id="av-player-host"></div>` : A().emptyState({icon: K.icon, text: `Aucun${kind === 'video' ? 'e vidéo' : ' son'} pour l’instant`, hint: `Ajoute un fichier ${kind === 'video' ? 'MP4, MOV ou WEBM' : 'MP3, M4A, WAV, AIFF ou OGG'} sur une fiche, une battue, une enquête… (ou glisse-le ici) et ${kind === 'video' ? 'elle' : 'il'} apparaîtra ici.`})}
         </section>`;
         const reloadAv = () => { if (st.module === 'listes') ext.lists?.[kind === 'video' ? 'videos' : 'audios']?.(++st.workspaceToken); };
         // E4 : un son (ou une vidéo) glissé ou collé sur la liste entre dans les Médias, sans fiche
@@ -285,7 +288,7 @@
         const bar = UI.listBar({key: VKEY, search: {placeholder: 'Chercher un titre, une fiche, une battue…', value: p.q},
             filters: [{id: 'owner', label: 'Rattaché à', type: 'radio', options: [['', 'Tout'], ...presentGroups.map(g => [g[0], g[1], `Rattaché à : ${g[1]}`]), ...(unlinked ? [['none', 'Rattaché à rien', 'Rattaché à rien']] : [])], value: p.owner || ''}],
             view: {what: kind === 'video' ? 'vidéos' : 'sons', onChange: v => { disp = v; draw(); }},
-            sort: {options: SORTS, value: p.sort},
+            sort: {options: sortsOf(kind), value: p.sort},
             onChange: (b, {what}) => { p.q = b.q; (st.hAvQ ||= {})[kind] = p.q; p.sort = b.sort; p.owner = b.filters.owner || ''; savePrefs(kind, {sort: p.sort, owner: p.owner}); if (what !== 'view') draw(); }});
         ({q: p.q, sort: p.sort} = bar.state); p.owner = bar.state.filters.owner || ''; disp = bar.state.view;
         $('#av-bar').replaceWith(bar);
@@ -305,6 +308,8 @@
             $('#av-cards').hidden = !cards; $('#av-tablewrap').hidden = !!cards;
             if (cards) { $('#av-body').innerHTML = ''; $('#av-cards').innerHTML = view.length ? UI.cardsHtml(view.map(cardItem)) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien ne correspond.</span></p>'; }
             else { $('#av-cards').innerHTML = ''; $('#av-body').innerHTML = view.length ? view.map(rowHtml).join('') : `<tr><td colspan="9" class="muted">Rien ne correspond.</td></tr>`; }
+            const [sk, sw] = String(p.sort).split('_');
+            section.querySelectorAll('[data-av-sort]').forEach(b => { b.querySelector('.sort-mark')?.remove(); if (b.dataset.avSort === sk) b.insertAdjacentHTML('beforeend', `<span class="sort-mark">${sw === 'asc' ? ' ↑' : ' ↓'}</span>`); });
             const dur = view.reduce((s, it) => s + (it.duration || 0), 0);
             bar.setCount(`${view.length} ${view.length > 1 ? K.many : K.one}${view.length !== items.length ? ` sur ${items.length}` : ''}${dur ? ` · ${fmtDur(dur)} en tout` : ''}`);
             player.updatePos();
@@ -320,6 +325,8 @@
 
         draw();
         const onListClick = e => {
+            const sb = e.target.closest('[data-av-sort]');
+            if (sb) { const k = sb.dataset.avSort, [ck, cw] = String(p.sort).split('_'); bar.setSort(`${k}_${ck === k ? (cw === 'asc' ? 'desc' : 'asc') : COL_SORT[k]}`); return; }
             const pb = e.target.closest('[data-av-play]');
             if (pb) return play(Number(pb.dataset.avPlay));
             const ed = e.target.closest('[data-av-edit]');
@@ -332,6 +339,7 @@
             if (tr && !e.target.closest('button, a, summary, details')) { const id = Number(tr.dataset.avRow); if (id !== player.current) play(id); }
         };
         $('#av-body').addEventListener('click', onListClick);
+        section.querySelector('.av-table thead')?.addEventListener('click', onListClick); // les titres de colonnes trient
         $('#av-cards').addEventListener('click', onListClick);
 
         const n = await measureDurations(kind, items, alive, setDur);

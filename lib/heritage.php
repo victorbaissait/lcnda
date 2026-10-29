@@ -635,12 +635,17 @@ function field_trips_data(PDO $pdo, string $status = 'todo'): array
     $where = match ($status) { 'done' => "WHERE t.status='done'", 'all' => '', default => "WHERE t.status<>'done'" };
     $rows = $pdo->query("SELECT t.*, (SELECT count(*) FROM field_trip_stops s WHERE s.trip_id=t.id) AS stop_count,
         (SELECT count(*) FROM field_trip_stops s WHERE s.trip_id=t.id AND s.done=1) AS done_count,
-        (SELECT max(day) FROM field_trip_stops s WHERE s.trip_id=t.id) AS day_count
+        (SELECT max(day) FROM field_trip_stops s WHERE s.trip_id=t.id) AS day_count,
+        (SELECT group_concat(s.title || ' ' || s.place_text || ' ' || s.people_text, ' ') FROM field_trip_stops s WHERE s.trip_id=t.id) AS stops_text
         FROM field_trips t {$where}
         ORDER BY CASE WHEN t.status='done' THEN 1 ELSE 0 END, CASE WHEN t.status='done' THEN COALESCE(NULLIF(t.done_at,''), t.date_start) END DESC,
         CASE WHEN t.date_start='' THEN 1 ELSE 0 END, t.date_start, t.id DESC")->fetchAll();
     $counts = $pdo->query("SELECT sum(CASE WHEN status='done' THEN 1 ELSE 0 END) AS done, sum(CASE WHEN status<>'done' THEN 1 ELSE 0 END) AS todo FROM field_trips")->fetch();
     foreach ($rows as &$r) { $r['people'] = h_json_list($r['people_json']); unset($r['people_json']); }
+    unset($r);
+    // noms des personnes du circuit, pour la recherche de la liste (H10)
+    $people = collection_people($pdo, array_merge([], ...array_map(static fn($r) => array_map(static fn($p) => (int) (is_array($p) ? ($p['id'] ?? 0) : $p), $r['people']), $rows ?: [['people' => []]])));
+    foreach ($rows as &$r) { $r['people_names'] = implode(', ', array_filter(array_map(static function ($p) use ($people) { $q = $people[(int) (is_array($p) ? ($p['id'] ?? 0) : $p)] ?? null; return $q ? trim($q['first_name'] . ' ' . $q['last_name']) : ''; }, $r['people']))); $r['stops_text'] = (string) ($r['stops_text'] ?? ''); }
     unset($r);
     return ['trips' => with_labels($pdo, 'field_trip', $rows), 'counts' => ['todo' => (int) ($counts['todo'] ?? 0), 'done' => (int) ($counts['done'] ?? 0)], 'kinds' => FIELD_TRIP_KINDS];
 }

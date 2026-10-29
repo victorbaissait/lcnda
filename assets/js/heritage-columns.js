@@ -101,7 +101,7 @@
         if (S().module !== 'listes') return;
         const ws = A().$('#workspace'); if (!ws) return;
         ws.querySelectorAll('table.data-table').forEach((table, n) => {
-            if (table.closest('dialog') || !table.tHead) return;
+            if (table.closest('dialog') || !table.tHead || table.closest('.h-mylist')) return; // Mes listes : leurs colonnes se rangent dans l'éditeur de listes, et « ⤓ Exporter ▾ » est dans l'en-tête (H10)
             const appList = table.dataset.colList, list = appList || `x:${S().listType}${n ? ':' + n : ''}`;
             if (!appList) {
                 const head = table.tHead.rows[0];

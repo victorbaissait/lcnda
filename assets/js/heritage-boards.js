@@ -2447,7 +2447,10 @@
         const groups = [...new Set(all.map(groupOf))];
         const old = st.bdListSort[kind];
         const ws = A().$('#workspace');
-        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${esc(title)}</h2><p data-bd-count></p></div></header>
+        // K5 : l'en-tête commun (icône du menu, une phrase d'aide) ; le nombre va dans la barre H10
+        const HEAD = {boards_list: ['🧩', 'Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres.'], atelier_list: ['📚', 'Les projets de l’Atelier de recherche, avec leur état et leur échéance.'], investigations_list: ['🔍', 'Toutes les enquêtes, avec leurs pistes et leurs tableaux.'], battues_list: ['🧭', 'Toutes les battues, commune par commune.']}[kind] || ['📋', ''];
+        const NOUN = {boards_list: ['tableau', 'tableaux'], atelier_list: ['projet', 'projets'], investigations_list: ['enquête', 'enquêtes'], battues_list: ['battue', 'battues']}[kind] || ['ligne', 'lignes'];
+        ws.innerHTML = `<section class="page">${UI.pageHeader({icon: HEAD[0], title, help: `${HEAD[1]} Un clic sur un titre l’ouvre ; un clic sur une colonne trie.`.trim()})}
             ${all.length ? '<div data-bd-bar></div>' : ''}<div data-bd-body></div></section>`;
         const body = ws.querySelector('[data-bd-body]');
         const bar = all.length ? UI.listBar({key: KEY, search: {placeholder: kind === 'boards_list' ? 'Chercher un tableau… (titre, enquête, battue)' : kind === 'battues_list' ? 'Chercher une battue… (titre, commune, personne)' : kind === 'atelier_list' ? 'Chercher un projet… (titre, sorte)' : 'Chercher une enquête… (titre, personne)'},
@@ -2462,8 +2465,7 @@
             st.bdListSort[kind] = {i: si, dir: sd || 1};
             let list = all.filter(r => (!q || fold(cols.map(c => strip(c[1](r))).join(' ')).includes(q)) && (!want.length || want.includes(groupOf(r))));
             if (si >= 0 && cols[si]) { const f = cols[si][2]; list = [...list].sort((a, c) => { const x = f(a), y = f(c); return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x ?? '').localeCompare(String(y ?? ''), 'fr')) * (sd || 1); }); }
-            ws.querySelector('[data-bd-count]').textContent = `${fmt(list.length)} ligne${list.length > 1 ? 's' : ''}${list.length !== all.length ? ` sur ${fmt(all.length)}` : ''}. Un clic sur un titre l’ouvre ; un clic sur une colonne trie.`;
-            bar?.setCount(list.length, 'ligne');
+            bar?.setCount(`${A().plural(list.length, NOUN[0], NOUN[1])}${list.length !== all.length ? ` sur ${fmt(all.length)}` : ''}`);
             body.innerHTML = list.length && b.view === 'cards' && UI?.cardsHtml ? UI.cardsHtml(list.map(item)) : list.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${cols.map(([h], i) => `<th><button type="button" data-bd-sort="${i}">${esc(h)}${si === i ? (sd > 0 ? ' ▲' : ' ▼') : ''}</button></th>`).join('')}</tr></thead><tbody>${list.map(r => `<tr>${cols.map(c => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
                 : all.length ? A().emptyState({icon: '🔍', text: 'Rien ne correspond à ta recherche', hint: 'Change les mots cherchés ou retire un filtre.'}) : A().emptyState({icon: '🧩', text: kind === 'boards_list' ? 'Aucun tableau pour l’instant' : 'Rien pour l’instant', hint: 'Les tableaux se créent dans Enquêtes → Tableaux.'});
             A().bindTableLinks?.();

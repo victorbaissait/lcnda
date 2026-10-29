@@ -614,7 +614,8 @@
     const LB_PREFIX = 'lcnda-listbar:';
     let lbFocus = null;
     const lbEmpty = v => v == null || v === '' || v === false || (Array.isArray(v) && !v.length);
-    const optList = f => (f.options || []).map(o => (Array.isArray(o) ? {value: String(o[0]), label: o[1], chip: o[2]} : {value: String(o.value), label: o.label, chip: o.chip}));
+    const optList = f => (f.options || []).map(o => (Array.isArray(o) ? {value: String(o[0]), label: o[1], chip: o[2], n: o[3]} : {value: String(o.value), label: o.label, chip: o.chip, n: o.n})); // n : le nombre trouvé, écrit à droite du choix
+    const optN = o => (o.n != null && o.n !== '' ? ` <small class="ui-listbar-on">${esc(typeof o.n === 'number' ? o.n.toLocaleString('fr-FR') : o.n)}</small>` : '');
     const placeTitle = v => (v && typeof v === 'object' ? (v.title || v.name || '') : String(v || '').replace(/^txt:/, ''));
     /** listBar({key, search, filters, view, sort, count, onChange}) → l'élément (.state, .setCount(n), .adoptSort(barreC6), .setFilter(id, v), .clear(), .input) */
     UI.listBar = ({key = '', search = {}, filters = [], view = null, sort = null, count = null, onChange = null, remember = true} = {}) => {
@@ -662,9 +663,9 @@
         const changed = (f, what = 'filter') => { paintActive(); emit(what); };
         function menuRow(f) {
             const v = st.filters[f.id], nm = `lb-${key || 'x'}-${f.id}`.replace(/[^\w-]/g, '_');
-            if (f.type === 'check' && f.options) return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${(v || []).map(String).includes(o.value) ? ' checked' : ''}> ${esc(o.label)}</label>`).join('');
+            if (f.type === 'check' && f.options) return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${(v || []).map(String).includes(o.value) ? ' checked' : ''}> ${esc(o.label)}${optN(o)}</label>`).join('');
             if (f.type === 'check') return `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}"${v ? ' checked' : ''}${f.disabled?.(st.filters) ? ' disabled' : ''}> ${esc(f.text || f.label)}</label>`;
-            if (f.type === 'radio') return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="radio" name="${nm}" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${String(v) === o.value ? ' checked' : ''}> ${esc(o.label)}</label>`).join('');
+            if (f.type === 'radio') return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="radio" name="${nm}" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${String(v) === o.value ? ' checked' : ''}> ${esc(o.label)}${optN(o)}</label>`).join('');
             if (f.type === 'select') return `<select class="ui-listbar-sel" data-lb-f="${esc(f.id)}" aria-label="${esc(f.label)}">${optList(f).map(o => `<option value="${esc(o.value)}"${String(v) === o.value ? ' selected' : ''}>${esc(o.label)}</option>`).join('')}</select>`;
             if (f.type === 'place' || f.type === 'person' || f.kind) {
                 const P = window.LCNDA_PICKER, kind = f.kind || f.type;
@@ -675,7 +676,7 @@
             if (f.type === 'date') return `<input class="ui-listbar-in" data-lb-f="${esc(f.id)}" type="${f.native ? 'date' : 'text'}" value="${esc(v || '')}" placeholder="${esc(f.placeholder || '')}"${f.native ? '' : ' data-ui-date="nocal"'}>`;
             return `<input class="ui-listbar-in" data-lb-f="${esc(f.id)}" value="${esc(v || '')}" placeholder="${esc(f.placeholder || '')}">`;
         }
-        function openMenu() {
+        function openMenu(focusId = '') {
             const box = h('div', 'ui-listbar-menu');
             box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Filtrer');
             const groups = []; filters.forEach(f => { const g = f.group || f.label; let gr = groups.find(x => x.g === g); if (!gr) groups.push(gr = {g, fs: []}); gr.fs.push(f); });
@@ -700,8 +701,10 @@
             });
             const pop = popup(fbtn, box, {onClose: paintBtn});
             pop.anchor = fbtn; pop.lbKey = key || null; paintBtn();
-            setTimeout(() => box.querySelector('input, select, button')?.focus());
+            setTimeout(() => { const row = focusId ? box.querySelector(`[data-lb-row="${CSS.escape(focusId)}"]`) : null; row?.closest('.ui-listbar-group')?.scrollIntoView?.({block: 'nearest'}); ((row && row.querySelector('input, select')) || box.querySelector('input, select, button'))?.focus(); });
         }
+        /** openFilter(id) : ouvre « Filtrer » sur cette rubrique (ex. le ▾ d'un titre de colonne) */
+        w.openFilter = (id = '') => { if (!fbtn) return; if (openPop?.anchor === fbtn) closePop(); openMenu(id); };
         /* Liste | Fiches */
         if (view) {
             const vo = view.nodeType ? null : (view === true ? {} : view);
@@ -716,6 +719,8 @@
             w.select = sortSlot.querySelector('select');
             w.select.addEventListener('change', () => { st.sort = w.select.value; sort.onChange?.(st.sort); emit('sort'); });
         }
+        /** setSort(valeur, libellé) : choisit ce tri (un clic sur un titre de colonne) ; un tri qui n'est pas dans le menu y est ajouté avec son libellé */
+        w.setSort = (v, label = '') => { const sel = w.select; if (!sel) return; v = String(v ?? ''); if (![...sel.options].some(o => o.value === v)) sel.add(new Option(label || v, v)); if (sel.value === v && st.sort === v) return; sel.value = v; sel.dispatchEvent(new Event('change')); };
         /** adoptSort(barreC6) : reprend « Trier » (et « Liste | Fiches ») d'une barre C6 déjà faite (ex. table._sortBar) ; elle se cache */
         w.adoptSort = bar => {
             if (!bar) { if (w._adopted) { sortSlot.replaceChildren(); sortSlot.remove(); w._adopted = false; w.select = null; } return w; }
@@ -759,6 +764,25 @@
             if (withSearch && w.input && st.q) { st.q = ''; w.input.value = ''; }
             paintActive(); emit('clear');
         };
+        /** sortColumns(table, {colonne: ['tri A → Z', 'tri Z → A'], …}) : cliquer le titre d'une colonne choisit ce tri dans « Trier » (↑ ↓ sur le titre) ;
+         *  (un seul sens : ['tri'] ou [null, 'tri décroissant']) ; une colonne sans tri dans la carte se range seulement à l'écran, comme avant. Les titres sont des <button data-sort-column="N"> ; data-sort-key="…" (la clé de la carte) reste juste si les colonnes sont rangées autrement (⚙️ Colonnes). */
+        w.sortColumns = (table, map = {}) => {
+            if (!table) return w;
+            const heads = [...table.querySelectorAll('[data-sort-column]')];
+            const mark = (b, d) => { b.querySelector('.sort-mark')?.remove(); if (d) b.insertAdjacentHTML('beforeend', `<span class="sort-mark">${d === 'asc' ? ' ↑' : ' ↓'}</span>`); b.dataset.direction = d || ''; };
+            const keyOf = b => b.dataset.sortKey ?? b.dataset.sortColumn;
+            heads.forEach(b => { const m = map[keyOf(b)]; mark(b, m ? (st.sort === String(m[0]) ? 'asc' : st.sort === String(m[1]) ? 'desc' : '') : ''); });
+            heads.forEach(b => b.addEventListener('click', e => {
+                e.preventDefault();
+                const i = b.closest('th, td')?.cellIndex ?? Number(b.dataset.sortColumn), m = map[keyOf(b)], dir = b.dataset.direction === 'asc' ? 'desc' : 'asc';
+                if (m && w.select) { const v = String((dir === 'asc' ? m[0] : m[1]) || m[0] || m[1]), d = v === String(m[0]) ? 'asc' : 'desc'; if ([...w.select.options].some(o => o.value === v)) { w.select.value = v; w.select.dispatchEvent(new Event('change')); heads.forEach(x => mark(x, x === b ? d : '')); return; } }
+                const body = table.tBodies[0]; if (!body) return;
+                const val = tr => tr.children[i]?.dataset.sortValue ?? tr.children[i]?.textContent.trim() ?? '';
+                [...body.rows].sort((x, y) => { const a = val(x), c = val(y), num = a !== '' && c !== '' && !Number.isNaN(Number(a)) && !Number.isNaN(Number(c)); const r = num ? Number(a) - Number(c) : a.localeCompare(c, 'fr', {numeric: true, sensitivity: 'base'}); return dir === 'asc' ? r : -r; }).forEach(tr => body.append(tr));
+                heads.forEach(x => mark(x, x === b ? dir : ''));
+            }));
+            return w;
+        };
         if (sort && sort.nodeType) w.adoptSort(sort);
         if (!sortSlot.childNodes.length) sortSlot.remove();
         if (count && typeof count === 'object') w.setCount(count.n ?? count.count ?? 0, count.label, count.many);
@@ -770,6 +794,28 @@
     };
     /** listBarState(key) → ce que la barre de cette liste retient ({q, f, sort, view}) ou null */
     UI.listBarState = key => store.get(LB_PREFIX + key, null);
+    /** listMatch : petits tests pour garder les lignes d'après l'état de la barre (sans accents, sans majuscules)
+     *  text(q, …textes) chaque mot tapé est dans les textes · pick(v, ids, noms) un choix du menu de choix ({id, title} ou 'txt:…') ;
+     *  year(texte) la première année · period(de, à, …années) une des années entre les deux (textes C4 ou années) ; un filtre vide garde tout */
+    const lmFold = t => String(t ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const lmYear = t => { if (typeof t === 'number') return t || null; const m = String(t ?? '').match(/(?<!\d)(\d{3,4})(?!\d)/); return m ? Number(m[1]) : null; };
+    UI.listMatch = {
+        fold: lmFold, year: lmYear,
+        text: (q, ...hay) => { const words = lmFold(q).split(/\s+/).filter(Boolean); if (!words.length) return true; const s = lmFold(hay.flat(Infinity).join(' ')); return words.every(x => s.includes(x)); },
+        pick: (v, ids = [], names = []) => {
+            if (v == null || v === '') return true;
+            const idList = [].concat(ids).map(Number).filter(Boolean);
+            if (typeof v === 'object' && Number(v.id) && idList.includes(Number(v.id))) return true;
+            const t = lmFold(typeof v === 'object' ? (v.title || v.name || '') : String(v).replace(/^txt:/, '')).split(',')[0].trim();
+            if (!t) return typeof v !== 'object' || !Number(v.id);
+            return [].concat(names).flat(Infinity).some(n => lmFold(n).includes(t));
+        },
+        period: (from, to, ...years) => {
+            const a = lmYear(from), b = lmYear(to); if (!a && !b) return true;
+            const ys = years.flat(Infinity).map(lmYear).filter(Boolean);
+            return ys.some(y => (!a || y >= a) && (!b || y <= b));
+        },
+    };
 
     /* ═════ C7 Chargement et messages (HTML à insérer) ═════ */
     UI.spinner = (text = 'Chargement…', {inline = false} = {}) => inline ? `<span class="ui-spinner is-inline" role="status"><span class="ui-spin" aria-hidden="true"></span><span>${esc(text)}</span></span>` : `<div class="ui-spinner" role="status"><span class="ui-spin" aria-hidden="true"></span><span>${esc(text)}</span></div>`;   // C7 ; {inline: true} dans une ligne de texte (à côté d’un bouton)

@@ -9996,7 +9996,7 @@ function readable_error_message(Throwable $e): string
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet','periodical_periodical','periodical_issue','periodical_article','press_ad','diagram'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet','periodical_periodical','periodical_issue','periodical_article','press_ad','diagram','topic_sheet'];
 }
 
 function normalize_label_color(string $color): string

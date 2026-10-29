@@ -75,24 +75,28 @@
         // H10 : « N recueils · [Liste | Fiches] · Trier : … », retenus pour cette liste
         const UI = window.LCNDA_UI, KEY = 'listes:recueils';
         const sort = lbSaved?.sort || (UI?.sortOf ? UI.sortOf(KEY, 'az') : 'az'), view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
-        const rows = UI?.sortItems ? UI.sortItems(data.recueils || [], sort, {name: r => r.title, date: r => r.updated_at}) : (data.recueils || []);
+        // Filtrer ▾ › Lieu 📍 (H10) : le lieu de conservation du recueil
+        const fold = t => String(t ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''), fPlace = lbSaved?.f?.place, placeTxt = fold(fPlace && typeof fPlace === 'object' ? fPlace.title : String(fPlace || '').replace(/^txt:/, ''));
+        const all = data.recueils || [], kept = placeTxt ? all.filter(r => fold(r.place_text).includes(placeTxt)) : all;
+        const rows = UI?.sortItems ? UI.sortItems(kept, sort, {name: r => r.title, date: r => r.updated_at}) : kept;
         const pctOf = r => r.pages ? Math.round(r.transcribed / r.pages * 100) : 0;
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page h-rc">
             <header class="page-header"><div><span class="eyebrow">LISTES · MÉDIAS</span><h2>📚 Recueils</h2>
                 <p>Un recueil rassemble des pages photographiées dans l’ordre : un registre, une liste de prisonniers, un cahier, un album. Tu peux y transcrire chaque page, garder plusieurs campagnes de photos (celles d’il y a dix ans et les nouvelles) et choisir, page par page, la meilleure image.</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>＋ Nouveau recueil</button></div></header>
-            ${rows.length || s.q ? '<div data-rc-bar></div>' : ''}${rows.length && view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: r.title, open: `data-open-recueil="${r.id}"`, lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '), `${plural(r.pages, 'page', 'pages')} · ${pctOf(r)} % transcrit`], when: r.updated_at, whenLabel: 'Modifié'}))) : rows.length ? UI.cardsHtml(rows.map(r => { const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0; // K9 : la vignette unique
+            ${all.length || s.q ? '<div data-rc-bar></div>' : ''}${rows.length && view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: r.title, open: `data-open-recueil="${r.id}"`, lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '), `${plural(r.pages, 'page', 'pages')} · ${pctOf(r)} % transcrit`], when: r.updated_at, whenLabel: 'Modifié'}))) : rows.length ? UI.cardsHtml(rows.map(r => { const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0; // K9 : la vignette unique
                 return {thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: `${r.icon || '📚'} ${r.title}`, open: `data-open-recueil="${r.id}"`,
                     lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ') || 'Sans cote', `${plural(r.pages, 'page', 'pages')} · ${plural(r.versions, 'version', 'versions')}${r.links ? ` · 🔗 ${r.links}` : ''}`],
                     badges: [{text: `${pct} % transcrit`, kind: pct >= 100 ? 'green' : pct ? 'blue' : 'grey'}, r.loose ? {text: plural(r.loose, 'photo à ranger', 'photos à ranger'), kind: 'yellow'} : null].filter(Boolean), when: r.updated_at, whenLabel: 'Modifié'}; }))
-            : (s.q ? A().emptyState({icon: '🔍', text: 'Aucun recueil ne correspond.'}) : A().emptyState({icon: '📚', text: 'Aucun recueil pour l’instant', hint: 'Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page.', action: {label: '＋ Nouveau recueil', attrs: 'data-rc-new'}}))}
+            : (s.q || all.length ? A().emptyState({icon: '🔍', text: 'Aucun recueil ne correspond.', hint: 'Change les mots cherchés ou retire un filtre.'}) : A().emptyState({icon: '📚', text: 'Aucun recueil pour l’instant', hint: 'Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page.', action: {label: '＋ Nouveau recueil', attrs: 'data-rc-new'}}))}
         </section>`;
         const sec = ws.querySelector('.h-rc');
         const slot = sec.querySelector('[data-rc-bar]');
         if (slot && UI?.listBar) { const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher un recueil… (titre, cote, lieu)', value: s.q || ''}, view: {dflt: 'cards', what: 'recueils'},
+            filters: [{id: 'place', label: 'Lieu', type: 'place', chipPrefix: 'Lieu :'}],
             sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
-            onChange: b => { s.q = b.q.trim(); UI.setSort(KEY, b.sort); ext.lists.recueils(++S().workspaceToken); }}); bar.setCount(rows.length, 'recueil'); slot.replaceWith(bar); }
+            onChange: b => { s.q = b.q.trim(); UI.setSort(KEY, b.sort); ext.lists.recueils(++S().workspaceToken); }}); bar.setCount(rows.length === all.length ? A().plural(rows.length, 'recueil') : `${A().plural(rows.length, 'recueil')} sur ${all.length}`); slot.replaceWith(bar); }
         sec.querySelectorAll('[data-rc-new]').forEach(b => b.addEventListener('click', () => recueilDialog(null)));
     };
 
