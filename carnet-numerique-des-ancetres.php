@@ -171,7 +171,7 @@
                 <span class="eyebrow">VERSION BÊTA · 0.9.1</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
-                <p class="presentation-lead">Un logiciel de généalogie local, open source, gratuit et modulable pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
+                <p class="presentation-lead">Un logiciel de généalogie local, open source, gratuit et modulable pour travailler avec son histoire familiale, mais aussi pour vos inventaires et le suivi de vos animaux. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
                 <div class="presentation-actions">
                     <a class="button" href="#telecharger">Télécharger LCNDA<span aria-hidden="true">↓</span></a>
                     <a class="button secondary" href="#fonctionnalites">Fonctionnalités</a>
@@ -180,8 +180,8 @@
             </div>
             <div class="presentation-hero-board" aria-label="Aperçu des éléments réunis dans l'application">
                 <article class="presentation-note note-blue"><span>01</span><strong>PERSONNES</strong><small>Fiches, liens familiaux et repères de vie</small></article>
-                <article class="presentation-note note-white"><span>02</span><strong>ARCHIVES</strong><small>Cotes, visites, dépouillements et médias</small></article>
-                <article class="presentation-note note-black"><span>03</span><strong>ENQUÊTES</strong><small>Pistes, hypothèses et preuves à vérifier</small></article>
+                <article class="presentation-note note-white"><span>02</span><strong>ARCHIVES</strong><small>Actes, médias, recueils et transcriptions</small></article>
+                <article class="presentation-note note-black"><span>03</span><strong>ENQUÊTES</strong><small>Pistes, hypothèses, battues et preuves</small></article>
                 <div class="presentation-thread thread-one" aria-hidden="true"></div>
                 <div class="presentation-thread thread-two" aria-hidden="true"></div>
             </div>
